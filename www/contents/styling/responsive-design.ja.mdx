@@ -7,4 +7,77 @@ description: Yamada UIは、画面サイズに応じてスタイルを変更す�
 デフォルトでは、`@media(max-width)`のメディアクエリを用いたレスポンシブデザインを採用しています。もし、`@media(min-width)`のメディアクエリを採用する場合は、[こちら](/docs/theming/breakpoints#メディアクエリ)をご覧ください。
 :::
 
+## ブレイクポイントについて
+
+レスポンシブデザインは、テーマで定義されたブレイクポイントを参照します。Yamada UIには、デフォルトのテーマがあり、[ブレイクポイント](/docs/theming/tokens/breakpoints)が定義されています。
+
+:::note
+ブレイクポイントを変更したい場合は、テーマの[ブレイクポイント](/docs/theming/breakpoints)をご覧ください。
+:::
+
 ## 使い方
+
+レスポンシブデザインを[Style Props](/docs/styling/style-props)に適用するには、ブレイクポイントをキーとしたオブジェクトを設定します。
+
+- オブジェクトのキーは、テーマの[ブレイクポイント](/docs/theming/tokens/breakpoints)で定義されているキーを定義します。
+- オブジェクトの値は、キーで設定するスタイルの値を定義します。
+
+```tsx preview
+<Box p="md" color="fg.contrast" bg={{ base: "bg.contrast", md: "success" }}>
+  Box
+</Box>
+```
+
+上記のコードは、次のようなCSSが生成されます。
+
+```css
+.Box {
+  background: var(--ui-colors-bg-contrast);
+
+  @media screen and (max-width: 768px) {
+    background: var(--ui-colors-success);
+  }
+}
+```
+
+## ユーティリティ
+
+Yamada UIには、レスポンシブなレイアウトを構築するために便利なカスタムフックを提供しています。
+
+::::card-group
+:::card{href="/docs/hooks/use-breakpoint"}
+
+### useBreakpoint
+
+現在のブレイクポイントを返すカスタムフックです。このフックは、ウィンドウのサイズの変更を監視し、適切な値を返します。
+
+:::
+:::card{href="/docs/hooks/use-breakpoint-effect"}
+
+### useBreakpointEffect
+
+ブレイクポイントが変更されたときにエフェクトを実行するカスタムフックです。
+
+:::
+:::card{href="/docs/hooks/use-update-breakpoint-effect"}
+
+### useUpdateBreakpointEffect
+
+初回のレンダリング時にはエフェクトをスキップし、ブレイクポイントが変更されたときにエフェクトを実行するカスタムフックです。
+
+:::
+:::card{href="/docs/hooks/use-breakpoint-state"}
+
+### useBreakpointState
+
+提供されたオブジェクトから現在のブレイクポイントを初期値として返すカスタムフックです。
+
+:::
+:::card{href="/docs/hooks/use-breakpoint-value"}
+
+### useBreakpointValue
+
+提供されたオブジェクトから現在のブレイクポイントの値を返すカスタムフックです。このフックは、ウィンドウのサイズの変更を監視し、適切な値を返します。
+
+:::
+::::

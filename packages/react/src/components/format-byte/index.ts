@@ -5,3 +5,4 @@ export {
   useFormatBytePropsContext,
 } from "./format-byte"
 export type { FormatByteProps } from "./format-byte"
+export * from "./use-format-byte"

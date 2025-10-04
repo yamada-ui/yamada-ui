@@ -1,0 +1,326 @@
+---
+title: React Router
+description: React RouterのプロジェクトにYamada UIをインストールして使用するためのガイド。
+---
+
+## インストール
+
+::::steps
+
+### アプリケーションを作成する
+
+React Routerのアプリケーションを作成します。
+
+:::code-group
+
+```bash [pnpm]
+pnpm create react-router my-app
+```
+
+```bash [npm]
+npx create-react-router my-app
+```
+
+```bash [yarn]
+yarn create react-router my-app
+```
+
+```bash [bun]
+bun create react-router my-app
+```
+
+:::
+
+### セットアップする
+
+コマンドを実行すると、プロジェクトに必要なファイルやフォルダが作成されます。
+
+:::code-group
+
+```bash [pnpm]
+pnpm dlx @yamada-ui/cli init
+```
+
+```bash [npm]
+npx @yamada-ui/cli init
+```
+
+```bash [yarn]
+yarn dlx @yamada-ui/cli init
+```
+
+```bash [bun]
+bunx @yamada-ui/cli init
+```
+
+:::
+
+### パッケージをインストールする
+
+アプリケーションに`@workspaces/ui`をインストールします。
+
+:::code-group
+
+```bash [pnpm]
+pnpm add "@workspaces/ui@workspace:*"
+```
+
+```bash [npm]
+npm install "@workspaces/ui@workspace:*"
+```
+
+```bash [yarn]
+yarn add "@workspaces/ui@workspace:*"
+```
+
+```bash [bun]
+bun add "@workspaces/ui@workspace:*"
+```
+
+:::
+
+### プロバイダーを追加する
+
+インストール後、アプリケーションのルートに`UIProvider`を追加します。
+ハイドレーションエラーを抑制するために、`html`と`body`に`suppressHydrationWarning`を`true`に設定します。
+
+```tsx title="root.tsx" {2,6,12,13}
+import { Meta, Outlet, Scripts, ScrollRestoration } from "react-router"
+import { UIProvider } from "@workspaces/ui"
+
+export function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+      </head>
+      <body suppressHydrationWarning>
+        <UIProvider>{children}</UIProvider>
+        <ScrollRestoration />
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+
+export default function App() {
+  return <Outlet />
+}
+```
+
+### コンポーネントを使用する
+
+`UIProvider`を追加したら、アプリケーション内でコンポーネントを使用します。
+
+```tsx title="home.tsx" {1,4}
+import { Button } from "@workspaces/ui"
+
+export default function Home() {
+  return <Button>Click me!</Button>
+}
+```
+
+これで、Yamada UIのセットアップは完了です！
+
+::::
+
+## スクリプト
+
+### ColorModeScript
+
+[カラーモード](/docs/theming/color-mode)を使用する場合は、正常に動作させるために`body`に`ColorModeScript`を追加する必要があります。
+
+理由は、カラーモードが`localStorage`や`cookies`を用いて実装されており、ページの読み込み時に同期を正しく機能させるためです。
+
+```tsx title="root.tsx" {2,7,9,10,12-15,18,28,30}
+import {
+  data,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useRouteLoaderData,
+} from "react-router"
+import { ColorModeScript, UIProvider } from "@workspaces/ui"
+import type { Route } from "./+types/root"
+
+export async function loader({ request }: Route.LoaderArgs) {
+  const cookie = request.headers.get("cookie") ?? ""
+  return data({ cookie })
+}
+
+export function Layout({ children }: { children: React.ReactNode }) {
+  const { cookie } = useRouteLoaderData("root")
+
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+      </head>
+      <body suppressHydrationWarning>
+        <ColorModeScript type="cookie" />
+
+        <UIProvider cookie={cookie}>{children}</UIProvider>
+        <ScrollRestoration />
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+
+export default function App() {
+  return <Outlet />
+}
+```
+
+もし、[コンフィグ](/docs/theming/configuration/overview)の`defaultColorMode`を変更した場合は、`ColorModeScript`に`defaultValue`を設定します。
+
+```tsx title="root.tsx" {29}
+import {
+  data,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useRouteLoaderData,
+} from "react-router"
+import { ColorModeScript, UIProvider } from "@workspaces/ui"
+import type { Route } from "./+types/root"
+import { config } from "@/theme"
+
+export async function loader({ request }: Route.LoaderArgs) {
+  const cookie = request.headers.get("cookie") ?? ""
+  return data({ cookie })
+}
+
+export function Layout({ children }: { children: React.ReactNode }) {
+  const { cookie } = useRouteLoaderData("root")
+
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+      </head>
+      <body suppressHydrationWarning>
+        <ColorModeScript type="cookie" defaultValue={config.defaultColorMode} />
+
+        <UIProvider config={config} cookie={cookie}>
+          {children}
+        </UIProvider>
+        <ScrollRestoration />
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+
+export default function App() {
+  return <Outlet />
+}
+```
+
+### ThemeSchemeScript
+
+テーマスキームによる画面のフラッシュを抑制したい場合は、`body`内に`ThemeSchemeScript`を追加します。
+
+テーマスキームは`localStorage`や`cookies`を用いて実装されており、`ThemeSchemeScript`を追加することでページの読み込み時に同期を正しく機能させることができます。
+
+```tsx title="root.tsx" {2,7,9,10,12-15,18,28,30}
+import {
+  data,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useRouteLoaderData,
+} from "react-router"
+import { ThemeSchemeScript, UIProvider } from "@workspaces/ui"
+import type { Route } from "./+types/root"
+
+export async function loader({ request }: Route.LoaderArgs) {
+  const cookie = request.headers.get("cookie") ?? ""
+  return data({ cookie })
+}
+
+export function Layout({ children }: { children: React.ReactNode }) {
+  const { cookie } = useRouteLoaderData("root")
+
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+      </head>
+      <body suppressHydrationWarning>
+        <ThemeSchemeScript type="cookie" />
+
+        <UIProvider cookie={cookie}>{children}</UIProvider>
+        <ScrollRestoration />
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+
+export default function App() {
+  return <Outlet />
+}
+```
+
+もし、[コンフィグ](/docs/theming/configuration/overview)の`defaultThemeScheme`を変更した場合は、`ThemeSchemeScript`に`defaultValue`を設定します。
+
+```tsx title="root.tsx" {31}
+import {
+  data,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useRouteLoaderData,
+} from "react-router"
+import { ThemeSchemeScript, UIProvider } from "@workspaces/ui"
+import type { Route } from "./+types/root"
+import { config } from "@/theme"
+
+export async function loader({ request }: Route.LoaderArgs) {
+  const cookie = request.headers.get("cookie") ?? ""
+  return data({ cookie })
+}
+
+export function Layout({ children }: { children: React.ReactNode }) {
+  const { cookie } = useRouteLoaderData("root")
+
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+      </head>
+      <body suppressHydrationWarning>
+        <ThemeSchemeScript
+          type="cookie"
+          defaultValue={config.defaultThemeScheme}
+        />
+
+        <UIProvider config={config} cookie={cookie}>
+          {children}
+        </UIProvider>
+        <ScrollRestoration />
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+
+export default function App() {
+  return <Outlet />
+}
+```

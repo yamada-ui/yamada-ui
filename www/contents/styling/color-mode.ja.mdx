@@ -3,4 +3,45 @@ title: カラーモード
 description: Yamada UIは、カラーモードに応じてスタイルを変更する機能を提供しています。
 ---
 
+## 概要
+
+Yamada UIには、アプリケーションのカラーモードを管理するためのサポートが組み込まれており、簡単にライトモードとダークモードを切り替えることができます。また、提供しているすべてのコンポーネントは、ダークモードをサポートしています。
+
+:::info
+デフォルトのカラーモードを変更したい場合は、[こちら](/docs/theming/color-mode)をご覧ください。
+:::
+
 ## 使い方
+
+カラーモードを[Style Props](/docs/styling/style-props)に適用するには、配列を設定します。
+
+- 最初の要素にライトモードの値を設定します。
+- 最後の要素にダークモードの値を設定します。
+
+```tsx preview
+<Box p="md" bg={["success", "warning"]} color="white">
+  Box
+</Box>
+```
+
+## ユーティリティ
+
+Yamada UIには、カラーモードの便利なカスタムフックを提供しています。
+
+::::card-group
+
+:::card{href="/docs/hooks/use-color-mode"}
+
+### useColorMode
+
+現在のカラーモードを返すカスタムフックです。
+
+:::
+:::card{href="/docs/hooks/use-color-mode-value"}
+
+### useColorModeValue
+
+提供された値から現在のカラーモードの値を返すカスタムフックです。
+
+:::
+::::

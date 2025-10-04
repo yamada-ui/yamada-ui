@@ -18,7 +18,7 @@
     },
     {
       "name": "index.ts",
-      "content": "export * from \"./format-byte.style\"\nexport {\n  FormatByte,\n  FormatBytePropsContext,\n  useFormatBytePropsContext,\n} from \"./format-byte\"\nexport type { FormatByteProps } from \"./format-byte\"\n"
+      "content": "export * from \"./format-byte.style\"\nexport {\n  FormatByte,\n  FormatBytePropsContext,\n  useFormatBytePropsContext,\n} from \"./format-byte\"\nexport type { FormatByteProps } from \"./format-byte\"\nexport * from \"./use-format-byte\"\n"
     },
     {
       "name": "use-format-byte.tsx",

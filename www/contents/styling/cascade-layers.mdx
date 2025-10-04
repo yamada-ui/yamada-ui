@@ -3,8 +3,128 @@ title: Cascade Layers
 description: CSS Cascade Layers is a feature that manages the order in which CSS rules are applied to elements.
 ---
 
+## Overview
+
+Yamada UI uses CSS [Cascade Layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) to set the priority between [themes](/docs/theming) and [Style Props](/docs/styling/style-props). This priority plays an important role in component styling.
+
 ## Layer Types
+
+The layer types are as follows.
+
+- `tokens`: [themes](/docs/theming) tokens.
+- `reset`: [reset styles](/docs/styling/reset-styles).
+- `global`: [global styles](/docs/styling/global-styles).
+- `base`: [base styles](/docs/components/create-component#base-styles) of components.
+- `size`: [size styles](/docs/components/create-component#size-styles) of components.
+- `variant`: [variant styles](/docs/components/create-component#variant-styles) of components.
+- `props`: [props styles](/docs/components/create-component#props-styles) of components.
+- `compounds`: [compounds styles](/docs/components/create-component#compounds-styles) of components.
 
 ## Layer Order
 
+The order of the generated layers is as follows. The same property is overridden in order of priority.
+
+```css
+@layer tokens, reset, global, base, size, variant, props, compounds;
+```
+
+:::note
+[Style Props](/docs/styling/style-props) is always prioritized unless [!important](https://developer.mozilla.org/en-US/docs/Web/CSS/important) is applied because it is not set in the layer.
+:::
+
 ## Customize
+
+::::steps
+
+### Generate a Theme
+
+Use the [CLI](/docs/theming/cli) to generate a theme.
+
+:::warning
+Before running the following commands, you need to install `@yamada-ui/cli` and execute the `init` command. For more details, please see [here](/docs/get-started/cli).
+:::
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli theme
+```
+
+```bash [npm]
+npm yamada-cli theme
+```
+
+```bash [yarn]
+yarn yamada-cli theme
+```
+
+```bash [bun]
+bun yamada-cli theme
+```
+
+:::
+
+### Change the Config
+
+Change the `config.ts` in the generated theme.
+
+```tsx title="theme/config.ts" {1,4-13,16}
+import type { LayersConfig } from "@yamada-ui/react"
+import { defineConfig } from "@yamada-ui/react"
+
+export const layers: LayersConfig = {
+  tokens: { name: "tokens", order: 0 },
+  reset: { name: "reset", order: 1 },
+  global: { name: "global", order: 2 },
+  base: { name: "base", order: 3 },
+  size: { name: "size", order: 4 },
+  variant: { name: "variant", order: 5 },
+  props: { name: "props", order: 6 },
+  compounds: { name: "compounds", order: 7 },
+}
+
+export const config = defineConfig({
+  css: { layers, varPrefix: "ui" },
+  breakpoint: { direction: "down", identifier: "@media screen" },
+  defaultColorMode: "dark",
+  defaultThemeScheme: "base",
+  notice: { duration: 5000 },
+  theme: { responsive: true },
+})
+```
+
+### Update the Provider
+
+Set the generated theme to `UIProvider`.
+
+```tsx {2,6}
+import { UIProvider } from "@workspaces/ui"
+import { theme, config } from "@/theme"
+
+const App = () => {
+  return (
+    <UIProvider theme={theme} config={config}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+::::
+
+## Disable
+
+To disable the cascade layers, set `css.layers` to `false`.
+
+```tsx title="theme/config.ts"
+import { defineConfig } from "@yamada-ui/react"
+
+export const config = defineConfig({
+  css: { layers: false, varPrefix: "ui" }, // [!code highlight]
+  breakpoint: { direction: "down", identifier: "@media screen" },
+  defaultColorMode: "dark",
+  defaultThemeScheme: "base",
+  notice: { duration: 5000 },
+  theme: { responsive: true },
+})
+```

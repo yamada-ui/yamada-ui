@@ -1,5 +1,7 @@
 import type { ComponentType, FC } from "react"
 import type { As, DOMElement, StyledComponent } from "../components"
+import type { CSSModifierObject, CSSPropObject } from "../css"
+import type { ComponentStyle, ThemeProps } from "./index.types"
 import type { StyledOptions } from "./styled"
 import { createStyled } from "./styled"
 
@@ -8,10 +10,16 @@ type Components = {
 }
 
 interface Factory extends Components {
-  <Y extends As, M extends object = {}>(
+  <
+    Y extends As,
+    M extends object = {},
+    D extends CSSPropObject = CSSPropObject,
+    H extends CSSModifierObject = CSSModifierObject,
+    R extends CSSModifierObject = CSSModifierObject,
+  >(
     el: FC<M> | Y,
-    options?: StyledOptions,
-  ): StyledComponent<Y, M>
+    options?: StyledOptions<D, H, R, keyof M>,
+  ): StyledComponent<Y, M & ThemeProps<ComponentStyle<D, H, R>>>
 }
 
 function factory() {

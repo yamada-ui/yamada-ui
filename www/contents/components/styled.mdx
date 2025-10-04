@@ -3,4 +3,278 @@ title: styled
 description: The `styled` function generates a JSX element that allows styling using props.
 ---
 
+## Overview
+
+`styled` is an object of JSX elements enabled with Yamada UI's style system, and can also be used as a function for custom components to receive Yamada UI's style system.
+
 ## Usage
+
+Use the `styled.<element>` notation to generate an HTML element with [Style Props](/docs/styling/style-props).
+
+For example, to generate an `button` element with [Style Props](/docs/styling/style-props), write `<ui.button />`.
+
+```tsx
+<styled.button />
+```
+
+### Create a component
+
+`styled` can be used in two ways: as an object of JSX elements (`<styled.div />`) and as a function that returns a JSX element (`styled('div')`).
+
+The function is suitable for generating simple components.
+
+```tsx
+import { styled } from "@workspaces/ui"
+
+const Button = styled("button")
+
+const App = () => {
+  return <Button>Click me!</Button>
+}
+```
+
+You can also pass a custom component to the argument and generate a custom component with [Style Props](/docs/styling/style-props).
+
+```tsx
+import { styled } from "@workspaces/ui"
+import { YourComponent } from "./your-component"
+
+const NewComponent = styled(YourComponent)
+
+const App = () => {
+  return <NewComponent fontSize="lg" />
+}
+```
+
+### Styling
+
+You can set default styles for a component or set styles based on conditions such as `variant` and `size`.
+
+#### Base Style
+
+Base style sets the default styles for a component.
+
+```tsx
+const Button = styled("button", {
+  base: {
+    alignItems: "center",
+    appearance: "none",
+    cursor: "pointer",
+    display: "inline-flex",
+    fontWeight: "medium",
+    justifyContent: "center",
+    overflow: "hidden",
+    position: "relative",
+    rounded: "l2",
+    transitionDuration: "moderate",
+    transitionProperty: "common",
+    userSelect: "none",
+    verticalAlign: "middle",
+    whiteSpace: "nowrap",
+    _readOnly: { layerStyle: "readOnly" },
+    _disabled: { layerStyle: "disabled" },
+  },
+})
+```
+
+#### Variant Style
+
+Variant style sets styles based on the `variant` of the component.
+
+```tsx
+const Button = styled("button", {
+  variants: {
+    outline: {
+      layerStyle: "outline",
+      _hover: { layerStyle: "outline.hover" },
+    },
+    solid: {
+      layerStyle: "solid",
+      _hover: { layerStyle: "solid.hover" },
+    },
+    subtle: {
+      layerStyle: "subtle",
+      _hover: { layerStyle: "subtle.hover" },
+    },
+  },
+})
+```
+
+To apply the variant style, set the `variant` value.
+
+```tsx
+<Button variant="solid" />
+```
+
+Or, set the `variant` value in `defaultProps`.
+
+```tsx
+const Button = styled("button", {
+  defaultProps: {
+    variant: "solid",
+  },
+})
+```
+
+#### Size Style
+
+Size style sets styles based on the `size` of the component.
+
+```tsx
+const Button = styled("button", {
+  sm: {
+    fontSize: "sm",
+    gap: "2",
+    h: "9",
+    lineHeight: "{sizes.9}",
+    minW: "9",
+    px: "3",
+    _icon: { fontSize: "md" },
+  },
+  md: {
+    fontSize: "md",
+    gap: "2",
+    h: "10",
+    lineHeight: "{sizes.10}",
+    minW: "10",
+    px: "3",
+    _icon: { fontSize: "lg" },
+  },
+  lg: {
+    fontSize: "lg",
+    gap: "2.5",
+    h: "11",
+    lineHeight: "{sizes.11}",
+    minW: "11",
+    px: "4",
+    _icon: { fontSize: "2xl" },
+  },
+})
+```
+
+To apply the size style, set the `size` value.
+
+```tsx
+<Button size="sm" />
+```
+
+Or, set the `size` value in `defaultProps`.
+
+```tsx
+const Button = styled("button", {
+  defaultProps: {
+    size: "sm",
+  },
+})
+```
+
+#### Props Style
+
+Props style sets styles based on the props of the component.
+
+```tsx
+const Button = styled("button", {
+  props: {
+    fullRounded: {
+      true: { rounded: "full" },
+    },
+  },
+})
+```
+
+To apply the props style, set the value to the props you set.
+
+```tsx
+<Button fullRounded />
+```
+
+Or, set the value to the props you set in `defaultProps`.
+
+```tsx
+const Button = styled("button", {
+  defaultProps: {
+    fullRounded: true,
+  },
+})
+```
+
+#### Compounds Style
+
+Compounds style sets styles based on multiple conditions such as [variant style](/docs/components/styled#variant-style) and [size style](/docs/components/styled#size-style).
+
+This is an example of setting additional styles when `variant` is `"solid"` and `fullRounded` is `true`.
+
+```tsx
+const Button = styled("button", {
+  compounds: [
+    {
+      variant: "solid",
+      fullRounded: true,
+      css: {
+        /* Additional styles */
+      },
+    },
+  ],
+})
+```
+
+By setting an array, you can match multiple conditions.
+This is an example of setting additional styles when `variant` is `"solid"` or `"subtle"` and `fullRounded` is `true`.
+
+```tsx
+const Button = styled("button", {
+  compounds: [
+    {
+      variant: ["solid", "subtle"],
+      fullRounded: true,
+      css: {
+        /* Additional styles */
+      },
+    },
+  ],
+})
+```
+
+You can also use regular expressions.
+
+```tsx
+const Button = styled("button", {
+  compounds: [
+    {
+      variant: /^solid|subtle$/,
+      fullRounded: true,
+      css: {
+        /* Additional styles */
+      },
+    },
+  ],
+})
+```
+
+### Set className
+
+```tsx
+const Button = styled("button", {
+  className: "button",
+})
+```
+
+### Set displayName
+
+```tsx
+const Button = styled("button", {
+  displayName: "Button",
+})
+```
+
+### Forward props
+
+`styled` filters [Style Props](/docs/styling/style-props) and forwards props to the provided component or HTML element. To set which props to forward, set `forwardProps` or `shouldForwardProp`.
+
+For example, to forward `transition` to `YourComponent`, set `["transition"]` in `forwardProps`. This is an effective way when the props of [Style Props](/docs/styling/style-props) and `YourComponent` conflict.
+
+```tsx
+const Button = styled(YourComponent, {
+  forwardProps: ["transition"],
+})
+```

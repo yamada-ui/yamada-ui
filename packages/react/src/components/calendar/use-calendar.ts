@@ -25,6 +25,7 @@ import {
   useUpdateEffect,
   visuallyHiddenAttributes,
 } from "../../utils"
+import "dayjs/locale/ja"
 
 export const DEFAULT_HOLIDAYS: Date[] = []
 export const DEFAULT_WEEKEND_DAYS: number[] = [0, 6]

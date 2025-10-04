@@ -261,7 +261,7 @@ const items = useMemo<Autocomplete.Item[]>(
 )
 return (
   <VStack>
-    <For each={["sm", "md", "lg"]}>
+    <For each={["xs", "sm", "md", "lg", "xl"]}>
       {(size) => (
         <Autocomplete.Root
           key={size}
@@ -596,7 +596,7 @@ return (
 
 ### 変更時にドロップダウンを開くイベントをハンドルする
 
-変更時にドロップダウンを開く場合は、`openOnChange`に関数を設定します。
+変更時にドロップダウンを開くイベントをハンドルする場合は、`openOnChange`に関数を設定します。
 
 ```tsx preview functional client
 const items = useMemo<Autocomplete.Item[]>(

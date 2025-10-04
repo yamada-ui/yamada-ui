@@ -76,14 +76,6 @@ import { DatePicker } from "@workspaces/ui"
 </VStack>
 ```
 
-### ロケールを変更する
-
-ロケールを変更する場合は、[locale](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales)に値を設定します。
-
-```tsx preview
-<DatePicker locale="ja" />
-```
-
 ### フォーマットを変更する
 
 フォーマットを変更する場合は、`format`オブジェクトを設定します。
@@ -306,10 +298,7 @@ return <DatePicker holidays={holidays} />
 オフセットを変更する場合は、`gutter`または`offset`に値を設定します。
 
 ```tsx preview
-<VStack>
-  <DatePicker gutter={32} />
-  <DatePicker offset={[16, 16]} />
-</VStack>
+<DatePicker gutter={16} />
 ```
 
 ### アニメーションを変更する
@@ -326,7 +315,11 @@ return <DatePicker holidays={holidays} />
 表示位置を変更するには、`placement`に`end`や`start-center`などを設定します。デフォルトでは、`end-start`が設定されています。
 
 ```tsx preview
-<DatePicker placement="center-end" />
+<DatePicker
+  animationScheme="inline-start"
+  placement="center-end"
+  rootProps={{ w: "xs" }}
+/>
 ```
 
 ### スクロールをブロックする
@@ -345,9 +338,17 @@ return <DatePicker holidays={holidays} />
 <DatePicker openOnFocus />
 ```
 
+### スクロール時にドロップダウンを閉じる
+
+スクロール時にドロップダウンを閉じる場合は、`closeOnScroll`を`true`に設定します。
+
+```tsx preview
+<DatePicker closeOnScroll />
+```
+
 ### 変更時にドロップダウンを開くイベントをハンドルする
 
-変更時にドロップダウンを開く場合は、`openOnChange`に関数を設定します。
+変更時にドロップダウンを開くイベントをハンドルする場合は、`openOnChange`に関数を設定します。
 
 ```tsx preview
 <DatePicker openOnChange={(ev) => ev.target.value.length > 1} />
@@ -359,14 +360,6 @@ return <DatePicker holidays={holidays} />
 
 ```tsx preview
 <DatePicker closeOnChange={(ev) => !ev.target.value.length} />
-```
-
-### スクロール時にドロップダウンを閉じる
-
-スクロール時にドロップダウンを閉じる場合は、`closeOnScroll`を`true`に設定します。
-
-```tsx preview
-<DatePicker closeOnScroll />
 ```
 
 ### クリック時にドロップダウンを開かない
@@ -387,15 +380,15 @@ return <DatePicker holidays={holidays} />
 
 ### 選択時にカレンダーを閉じない
 
-デフォルトでは、選択時に自動的にカレンダーを閉じます。選択時にカレンダーを閉じないようにする場合は、`closeOnSelect`を`false`に設定します。
+選択時にドロップダウンを閉じない場合は、`closeOnSelect`を`false`に設定します。
 
 ```tsx preview
 <DatePicker closeOnSelect={false} />
 ```
 
-### ブラー時にカレンダーを閉じない
+### フォーカスが外れた場合に閉じない
 
-デフォルトでは、ブラー時に自動的にカレンダーを閉じます。ブラー時にカレンダーを閉じないようにする場合は、`closeOnBlur`を`false`に設定します。
+フォーカスが外れた場合にドロップダウンを閉じない場合は、`closeOnBlur`を`false`に設定します。
 
 ```tsx preview
 <DatePicker closeOnBlur={false} />
@@ -497,44 +490,6 @@ ESCキーが入力された時にドロップダウンを閉じない場合は�
         invalid
         placeholder={toTitleCase(variant)}
       />
-    )}
-  </For>
-</VStack>
-```
-
-### アドオンを追加する
-
-アドオンを追加する場合は、`DatePicker`を`InputGroup`でラッピングし、`InputGroup.Addon`を使用します。
-
-```tsx preview
-<VStack>
-  <For each={["outline", "filled", "flushed"]}>
-    {(variant, index) => (
-      <InputGroup.Root key={index} variant={variant}>
-        <InputGroup.Addon>
-          <PackageIcon />
-        </InputGroup.Addon>
-        <DatePicker placeholder={toTitleCase(variant)} />
-      </InputGroup.Root>
-    )}
-  </For>
-</VStack>
-```
-
-### 要素を追加する
-
-要素を追加する場合は、`DatePicker`を`InputGroup`でラッピングし、`InputGroup.Element`を使用します。
-
-```tsx preview
-<VStack>
-  <For each={["outline", "filled", "flushed"]}>
-    {(variant, index) => (
-      <InputGroup.Root key={index} variant={variant}>
-        <InputGroup.Element>
-          <PackageIcon />
-        </InputGroup.Element>
-        <DatePicker placeholder={toTitleCase(variant)} />
-      </InputGroup.Root>
     )}
   </For>
 </VStack>

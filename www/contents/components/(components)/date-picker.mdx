@@ -76,14 +76,6 @@ import { DatePicker } from "@workspaces/ui"
 </VStack>
 ```
 
-### Change the Locale
-
-To change the locale, set a value for [locale](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales).
-
-```tsx preview
-<DatePicker locale="ja" />
-```
-
 ### Change Format
 
 To change the format, set the `format` object.
@@ -306,10 +298,7 @@ To hide dates outside the current month, set styles using `dayProps`.
 To change the offset, specify a value for `gutter` or `offset`.
 
 ```tsx preview
-<VStack>
-  <DatePicker gutter={32} />
-  <DatePicker offset={[16, 16]} />
-</VStack>
+<DatePicker gutter={16} />
 ```
 
 ### Change Animation
@@ -326,7 +315,11 @@ By default, `"scale"` is set.
 To change the placement, specify `"end"` or `"start-center"` for `placement`. By default, `"end-start"` is set.
 
 ```tsx preview
-<DatePicker placement="center-end" />
+<DatePicker
+  animationScheme="inline-start"
+  placement="center-end"
+  rootProps={{ w: "xs" }}
+/>
 ```
 
 ### Blocking Scroll
@@ -345,9 +338,17 @@ To open the dropdown on focus, set `openOnFocus` to `true`.
 <DatePicker openOnFocus />
 ```
 
+### Close Dropdown On Scroll
+
+To close the dropdown on scroll, set `closeOnScroll` to `true`.
+
+```tsx preview
+<DatePicker closeOnScroll />
+```
+
 ### Handle opening the dropdown on change
 
-To open the dropdown on change, set a function to `openOnChange`.
+To handle the event of opening the dropdown on change, set a function to `openOnChange`.
 
 ```tsx preview
 <DatePicker openOnChange={(ev) => ev.target.value.length > 1} />
@@ -359,14 +360,6 @@ To handle the event of closing the dropdown on change, set a function to `closeO
 
 ```tsx preview
 <DatePicker closeOnChange={(ev) => !ev.target.value.length} />
-```
-
-### Close Dropdown On Scroll
-
-To close the dropdown on scroll, set `closeOnScroll` to `true`.
-
-```tsx preview
-<DatePicker closeOnScroll />
 ```
 
 ### Disable Open Dropdown On Click
@@ -497,44 +490,6 @@ To make invalid, set `invalid` to `true`.
         invalid
         placeholder={toTitleCase(variant)}
       />
-    )}
-  </For>
-</VStack>
-```
-
-### Add Addon
-
-To add addons, wrap the `DatePicker` in `InputGroup` and use `InputGroup.Addon`.
-
-```tsx preview
-<VStack>
-  <For each={["outline", "filled", "flushed"]}>
-    {(variant, index) => (
-      <InputGroup.Root key={index} variant={variant}>
-        <InputGroup.Addon>
-          <PackageIcon />
-        </InputGroup.Addon>
-        <DatePicker placeholder={toTitleCase(variant)} />
-      </InputGroup.Root>
-    )}
-  </For>
-</VStack>
-```
-
-### Add Elements
-
-To add elements, wrap the `Input` in `InputGroup` and use `InputGroup.Element`.
-
-```tsx preview
-<VStack>
-  <For each={["outline", "filled", "flushed"]}>
-    {(variant, index) => (
-      <InputGroup.Root key={index} variant={variant}>
-        <InputGroup.Element>
-          <PackageIcon />
-        </InputGroup.Element>
-        <DatePicker placeholder={toTitleCase(variant)} />
-      </InputGroup.Root>
     )}
   </For>
 </VStack>

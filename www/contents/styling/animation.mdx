@@ -24,7 +24,7 @@ description: Yamada UI provides features to easily achieve the animation you wan
 </Box>
 ```
 
-You can also use [theme](/docs/theming) [keyframes](/docs/theming/tokens/keyframes) to apply common animations throughout your application.
+You can also use [theme](/docs/theming) [keyframes](/docs/theming/tokens/keyframes) to apply common keyframes throughout your application. Using `animationName` or `_keyframes` is recommended.
 
 ```tsx preview
 <Box
@@ -32,15 +32,35 @@ You can also use [theme](/docs/theming) [keyframes](/docs/theming/tokens/keyfram
   bg="bg.contrast"
   color="fg.contrast"
   p="md"
+  animationName="fade-in"
   animationDirection="alternate"
   animationDuration="1s"
   animationIterationCount="infinite"
   animationTimingFunction="linear"
-  _keyframes="fade-in"
 >
   Box
 </Box>
 ```
+
+### Use Theme Tokens
+
+To use [theme](/docs/theming) [animations](/docs/theming/tokens/animations), set the `animation` property.
+
+```tsx preview
+<Box
+  w="fit-content"
+  bg="bg.contrast"
+  color="fg.contrast"
+  p="md"
+  animation="fade-in"
+>
+  Box
+</Box>
+```
+
+:::warning
+By default, no animation tokens are defined.
+:::
 
 ## Components
 

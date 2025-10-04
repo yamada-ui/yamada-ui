@@ -3,6 +3,64 @@ title: コンポーネント
 description: Yamada UIには、プロジェクトをより迅速に構築できるように事前に構築されたコンポーネントが用意されています。
 ---
 
+## 使い方
+
+Yamada UIは、2つの方法でコンポーネントを提供しています。1つは、[CLI](/docs/components/cli)からコンポーネントをローカルにダウンロードする新しい方法。もう1つは、モジュールからコンポーネントをインポートする従来通りの方法です。
+
+### ダウンロード
+
+[CLI](/docs/components/cli)からコンポーネントをローカルにダウンロードするケースは、以下のものが考えられます。
+
+- コンポーネントの[バリアントスタイル](/docs/components/create-component#バリアントスタイル)または[サイズスタイル](/docs/components/create-component#サイズスタイル)をカスタマイズする。
+- コンポーネントの初期値またはロジックをカスタマイズする。
+- コンポーネントのスタイルやロジックに不具合があり、直接修正する。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli add button
+```
+
+```bash [npm]
+npm yamada-cli add button
+```
+
+```bash [yarn]
+yarn yamada-cli add button
+```
+
+```bash [bun]
+bun yamada-cli add button
+```
+
+:::
+
+:::note
+Yamada UIがコンポーネントを更新した場合は、[CLI](/docs/components/cli)の[差分を確認する](/docs/components/cli#差分を確認する)や[コンポーネントを更新する](/docs/components/cli#コンポーネントを更新する)を行うことで、コンポーネントを簡単に更新することができます。もし、あなたの修正と競合しても[Git](https://git-scm.com)の[競合の提示方法](https://git-scm.com/docs/git-merge#_how_conflicts_are_presented)と同じように表示され、簡単に解決することができます。
+:::
+
+### インポート
+
+コンポーネントに何も変更することなく使用する場合は、モジュールからコンポーネントをインポートするだけです。
+
+:::code-group
+
+```tsx [package]
+import { Button } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Button } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Button } from "@workspaces/ui"
+```
+
+:::
+
+## コンポーネント
+
 ライブラリで利用可能なすべてのコンポーネントのリストはこちらです。
 
 <ComponentList />

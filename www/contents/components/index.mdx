@@ -3,6 +3,64 @@ title: Components
 description: Yamada UI provides prebuilt components to help you build projects faster.
 ---
 
+## Usage
+
+Yamada UI provides components in two ways. One is a new method of downloading components locally from [CLI](/docs/components/cli). The other is the traditional method of importing components from modules.
+
+### Download
+
+The cases for downloading components locally from [CLI](/docs/components/cli) are as follows.
+
+- Customize the [variant](/docs/components/create-component#variant) or [size](/docs/components/create-component#size) styles of the component.
+- Customize the initial value or logic of the component.
+- Fix a bug in the component's style or logic by directly modifying it.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli add button
+```
+
+```bash [npm]
+npm yamada-cli add button
+```
+
+```bash [yarn]
+yarn yamada-cli add button
+```
+
+```bash [bun]
+bun yamada-cli add button
+```
+
+:::
+
+:::note
+Yamada UI updates the components, you can easily update the components by checking the [Check Differences](/docs/components/cli#check-differences) or [Update Components](/docs/components/cli#update-components) in [CLI](/docs/components/cli). If your changes conflict with the updates, they will be displayed in the same way as the [HOW CONFLICTS ARE PRESENTED](https://git-scm.com/docs/git-merge#_how_conflicts_are_presented) of [Git](https://git-scm.com), and you can easily resolve them.
+:::
+
+### Import
+
+If you want to use the component without making any changes, you can simply import the component from the module.
+
+:::code-group
+
+```tsx [package]
+import { Button } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Button } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Button } from "@workspaces/ui"
+```
+
+:::
+
+## Components
+
 Here's a list of all the components available in the library.
 
 <ComponentList />

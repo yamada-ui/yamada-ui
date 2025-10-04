@@ -24,7 +24,7 @@ description: Yamada UIは、あなたが表現したいアニメーションを�
 </Box>
 ```
 
-また、[テーマ](/docs/theming)の[キーフレーム](/docs/theming/tokens/keyframes)を使用することで、アプリケーション全体で共通のアニメーションを適用することができます。
+また、[テーマ](/docs/theming)の[キーフレーム](/docs/theming/tokens/keyframes)を使用することで、アプリケーション全体で共通のキーフレームを適用することができます。使用する場合は、`animationName`または`_keyframes`に値を設定します。
 
 ```tsx preview
 <Box
@@ -32,15 +32,35 @@ description: Yamada UIは、あなたが表現したいアニメーションを�
   bg="bg.contrast"
   color="fg.contrast"
   p="md"
+  animationName="fade-in"
   animationDirection="alternate"
   animationDuration="1s"
   animationIterationCount="infinite"
   animationTimingFunction="linear"
-  _keyframes="fade-in"
 >
   Box
 </Box>
 ```
+
+### テーマのトークンを使う
+
+[テーマ](/docs/theming)の[アニメーション](/docs/theming/tokens/animations)を使用する場合は、`animation`に値を設定します。
+
+```tsx preview
+<Box
+  w="fit-content"
+  bg="bg.contrast"
+  color="fg.contrast"
+  p="md"
+  animation="fade-in"
+>
+  Box
+</Box>
+```
+
+:::warning
+デフォルトでは、アニメーションのトークンは定義されていません。
+:::
 
 ## コンポーネント
 

@@ -57,6 +57,20 @@ import { useAnimation } from "@workspaces/ui"
 const animation = useAnimation()
 ```
 
+### テーマのトークンを使う
+
+[テーマ](/docs/theming)の[アニメーション](/docs/theming/tokens/animations)を使用する場合は、引数に値を設定します。
+
+```tsx preview functional client
+const animation = useAnimation("gradient")
+
+return <Box w="full" h="xs" animation={animation} />
+```
+
+:::warning
+デフォルトでは、アニメーションのトークンは定義されていません。
+:::
+
 ### 複数のアニメーションを使う
 
 複数のアニメーションを使う場合は、引数を配列に設定します。

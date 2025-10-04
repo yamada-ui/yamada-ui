@@ -1,9 +1,12 @@
 import { VStack } from "@yamada-ui/react"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 import { Hero } from "@/components"
+import { ExampleNav } from "./example-nav"
+import { Examples } from "./examples/[example]/examples"
 
-export default function Page() {
-  const t = useTranslations("home")
+export default async function Page({ params }: PageProps<"/[locale]">) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: "home" })
 
   return (
     <VStack gap="0">
@@ -19,6 +22,9 @@ export default function Page() {
           children: t("secondaryAction"),
         }}
       />
+
+      <ExampleNav example="examples" />
+      <Examples />
     </VStack>
   )
 }

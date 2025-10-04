@@ -5,6 +5,63 @@ description: >-
   projects more quickly.
 ---
 
+## Usage
+
+Yamada UI provides hooks in two ways. One is a new method of downloading hooks locally from [CLI](/docs/components/cli). The other is the traditional method of importing hooks from modules.
+
+### Download
+
+The cases for downloading hooks locally from [CLI](/docs/components/cli) are as follows.
+
+- Customize the initial value or logic of the hook.
+- Fix a bug in the hook's logic by directly modifying it.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli add use-disclosure
+```
+
+```bash [npm]
+npm yamada-cli add use-disclosure
+```
+
+```bash [yarn]
+yarn yamada-cli add use-disclosure
+```
+
+```bash [bun]
+bun yamada-cli add use-disclosure
+```
+
+:::
+
+:::note
+Yamada UI updates the hooks, you can easily update them in the same way as [Update Components](/docs/components/cli#update-components). If your changes conflict with the updates, they will be displayed in the same way as the [HOW CONFLICTS ARE PRESENTED](https://git-scm.com/docs/git-merge#_how_conflicts_are_presented) of [Git](https://git-scm.com), and you can easily resolve them.
+:::
+
+### Import
+
+If you want to use the hook without making any changes, you can simply import the hook from the module.
+
+:::code-group
+
+```tsx [package]
+import { useDisclosure } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useDisclosure } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useDisclosure } from "@workspaces/ui"
+```
+
+:::
+
+## Hooks
+
 Here's a list of all the hooks available in the library.
 
 <HookList />

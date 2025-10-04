@@ -1,6 +1,405 @@
 ---
 title: createComponent
-description: "`createComponent`関数は、バリアントなど条件付きスタイルをサポートするコンポーネントを生成します。また、`createSlotComponent`関数を使用すれば、簡単にスロット付きコンポーネントを作成できます。"
+description: "`createComponent`は、バリアントなど条件付きスタイルをサポートするコンポーネントを作成します。また、`createSlotComponent`を使用すれば、簡単にスロット付きコンポーネントを作成できます。"
 ---
 
+## 概要
+
+`createComponent`は、バリアントなど条件付きスタイルをサポートするコンポーネントを作成します。作成したコンポーネントは、継承することが可能で、拡張性が高く、`className`や`displayName`も生成するので、プロジェクトで一貫した命名規則を持つコンポーネントを作成することもできます。
+
 ## 使い方
+
+単一のコンポーネントを作成する場合は、[createComponent](#createcomponent)を使用し、スロット付きコンポーネントを作成する場合は、[createSlotComponent](#createslotcomponent)を使用します。
+
+### createComponent
+
+単一のコンポーネントを作成する場合は、`createComponent`を使用します。
+
+:::code-group
+
+```tsx [package]
+import type { HTMLStyledProps, ThemeProps } from "@yamada-ui/react"
+import { createComponent, defineComponentStyle } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import type { HTMLStyledProps, ThemeProps } from "@/components/ui"
+import { createComponent, defineComponentStyle } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import type { HTMLStyledProps, ThemeProps } from "@workspaces/ui"
+import { createComponent, defineComponentStyle } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const componentStyle = defineComponentStyle({
+  base: {
+    /* base style */
+  },
+  variants: {
+    /* variant style */
+  },
+  sizes: {
+    /* size style */
+  },
+  props: {
+    /* props style */
+  },
+  compounds: {
+    /* compound style */
+  },
+  defaultProps: {
+    /* default props */
+  },
+})
+
+type ComponentStyle = typeof componentStyle
+
+export interface ComponentProps
+  extends HTMLStyledProps<"div">,
+    ThemeProps<ComponentStyle> {}
+
+const {
+  component,
+  ComponentContext,
+  PropsContext: ComponentPropsContext,
+  useComponentContext,
+  usePropsContext: useComponentPropsContext,
+  withContext,
+  useComponentProps,
+} = createComponent<ComponentProps, ComponentStyle>("component", componentStyle)
+
+export { ComponentPropsContext, useComponentPropsContext }
+```
+
+:::note
+`defineComponentStyle`は、コンポーネントのスタイルを定義する関数です。この関数は、型補完をする重要な役割があります。
+:::
+
+- 第一引数は、`className`や`displayName`に使用されるコンポーネント名を設定します。
+- 第二引数は、コンポーネントのスタイルを設定します。
+
+#### コンポーネントを作成する
+
+コンポーネントを作成するには、`withContext`を使用します。引数にHTML要素名または関数を設定します。`withContext`は、提供されたスタイルと`PropsContext`から提供されるpropsを使用します。
+
+```tsx
+export const Component = withContext("div")()
+```
+
+```tsx
+export const Component = withContext((props) => {
+  return <styled.div {...props} />
+})()
+```
+
+もし、提供されたスタイルと`PropsContext`から提供されるpropsを使用しない、またはそのロジックをハンドリングしたい場合は、`component`を使用します。
+
+```tsx
+export const Component = component((props) => {
+  const computedProps = useComponentProps(props)
+
+  return <styled.div {...computedProps} />
+})()
+```
+
+#### propsを計算する
+
+`withContext`や`component`は、提供されたpropsに対して多段階計算を行うことができます。
+
+```tsx
+export const Component = withContext("button")(
+  { "aria-label": "Default Label" },
+  ({ "aria-label": ariaLabel, ...rest }) => ({
+    ariaLabel: ariaLabel === "Default Label" ? "Changed Label" : ariaLabel,
+    ...rest,
+  }),
+)
+```
+
+:::warning
+オブジェクトの場合は、ディープマージされます。関数の場合は、提供されたpropsを返す必要があります。提供されたpropsを返さない場合は、提供されたpropsは消失します。
+:::
+
+#### propsを転送する
+
+スタイルのpropsは、スタイリングを計算した後フィルタリングされます。もし、コンポーネントのロジックでも使用する場合は、`transferProps`を使用します。
+
+```tsx
+export const Component = withContext(
+  ({ size, ...rest }) => {
+    return <styled.button data-size={size} {...rest} />
+  },
+  {
+    transferProps: ["size"],
+  },
+)()
+```
+
+#### コンポーネントを継承する
+
+`createComponent`で作成したコンポーネントは、継承することができます。
+
+```tsx
+import { Component } from "./component"
+```
+
+```tsx
+const additionalComponentStyle = defineComponentStyle({
+  base: {
+    /* base style */
+  },
+  variants: {
+    /* variant style */
+  },
+  sizes: {
+    /* size style */
+  },
+  props: {
+    /* props style */
+  },
+  compounds: {
+    /* compound style */
+  },
+  defaultProps: {
+    /* default props */
+  },
+})
+
+type AdditionalComponentStyle = typeof additionalComponentStyle
+
+export interface AdditionalComponentProps
+  extends HTMLStyledProps<"div">,
+    ThemeProps<AdditionalComponentStyle> {}
+
+const {
+  ComponentContext,
+  PropsContext: AdditionalComponentPropsContext,
+  useComponentContext,
+  usePropsContext: useAdditionalComponentPropsContext,
+  useComponentProps,
+  withContext,
+  component,
+} = createComponent<AdditionalComponentProps, AdditionalComponentStyle>(
+  "additional-component",
+  additionalComponentStyle,
+)
+
+export { AdditionalComponentPropsContext, useAdditionalComponentPropsContext }
+```
+
+```tsx
+export const AdditionalComponent = withContext(Component)()
+```
+
+これで、`Component`を継承した`AdditionalComponent`が作成されます。
+
+従来のコンポーネントの継承との違いは、[ref](https://ja.react.dev/learn/referencing-values-with-refs)・クラス名・スタイル・[イベントハンドラ](https://ja.react.dev/learn/responding-to-events)をマージできている点です。
+
+```tsx
+export const AdditionalComponent: FC<AdditionalComponentProps> = ({
+  className,
+  ...rest
+}) => {
+  const ref = useRef<HTMLDivElement>(null)
+
+  const onClick = useCallback(() => {}, [])
+
+  return (
+    <Component
+      ref={ref}
+      onClick={onClick}
+      className={[className, "additional-component"].join(" ")}
+      {...rest}
+    />
+  )
+}
+```
+
+この場合は、提供されたpropsに`ref`と`onClick`が存在する場合、上書きされてしまいます。ロジックによっては、上手く機能しない場合もあります。これらを解決するために、コンポーネントごとに各値やロジックをマージする必要があります。
+
+```tsx
+export const AdditionalComponent: FC<AdditionalComponentProps> = ({
+  ref: forwardedRef,
+  className,
+  onClick: onClickProp,
+  ...rest
+}) => {
+  const ref = useRef<HTMLDivElement>(null)
+
+  const onClick = useCallback(() => {}, [])
+
+  return (
+    <Component
+      ref={mergeRefs(forwardedRef, ref)}
+      onClick={handlerAll(onClickProp, onClick)}
+      className={[className, "additional-component"].join(" ")}
+      {...rest}
+    />
+  )
+}
+```
+
+`createComponent`を使用してコンポーネントを継承することで、`ref`や`onClick`などのイベントハンドラを自動的にマージすることができます。
+
+:::note
+スタイルの競合した場合、つまり各コンポーネントに`variants`が存在する場合は、継承したコンポーネントの`variants`が優先されます。
+:::
+
+### createSlotComponent
+
+スロット付きコンポーネントを作成する場合は、`createSlotComponent`を使用します。機能は、[createComponent](#createcomponent)と同様です。
+
+:::code-group
+
+```tsx [package]
+import type { HTMLStyledProps, ThemeProps } from "@yamada-ui/react"
+import { createSlotComponent, defineComponentSlotStyle } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import type { HTMLStyledProps, ThemeProps } from "@/components/ui"
+import { createSlotComponent, defineComponentSlotStyle } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import type { HTMLStyledProps, ThemeProps } from "@workspaces/ui"
+import { createSlotComponent, defineComponentSlotStyle } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const componentStyle = defineComponentSlotStyle({
+  base: {
+    root: {
+      /* base root style */
+    },
+    item: {
+      /* base item style */
+    },
+  },
+  variants: {
+    /* variant style */
+  },
+  sizes: {
+    /* size style */
+  },
+  props: {
+    /* props style */
+  },
+  compounds: {
+    /* compound style */
+  },
+  defaultProps: {
+    /* default props */
+  },
+})
+
+type ComponentStyle = typeof componentStyle
+
+export interface ComponentRootProps
+  extends HTMLStyledProps<"div">,
+    ThemeProps<ComponentStyle> {}
+
+const {
+  ComponentContext,
+  PropsContext: ComponentPropsContext,
+  StyleContext,
+  useComponentContext,
+  usePropsContext: useComponentPropsContext,
+  useStyleContext,
+  useClassNames,
+  useRootComponentProps,
+  useSlotComponentProps,
+  withProvider,
+  withContext,
+  component,
+} = createSlotComponent<ComponentRootProps, ComponentStyle>(
+  "component",
+  componentStyle,
+)
+
+export { ComponentPropsContext, useComponentPropsContext }
+```
+
+:::note
+`defineComponentSlotStyle`は、コンポーネントのスタイルを定義する関数です。この関数は、型補完をする重要な役割があります。
+:::
+
+- 第一引数は、`className`や`displayName`に使用されるコンポーネント名のプレフィックスを設定します。
+- 第二引数は、コンポーネントのスタイルを設定します。
+
+#### コンポーネントを作成する
+
+コンポーネントを作成するには、`withProvider`と`withContext`を使用します。それぞれ、第一引数にHTML要素名または関数を設定し、第二引数にスロット名を設定します。`withProvider`は、提供されたスタイルと`PropsContext`から提供されるpropsを使用して、コンテキストを生成します。`withContext`は、`withProvider`で生成されたコンテキストを使用して、スロット名に基づいたスタイルを使用します。
+
+```tsx
+export const RootComponent = withProvider("div", "root")()
+
+export const ItemComponent = withContext("div", "item")()
+```
+
+```tsx
+export const RootComponent = withProvider((props) => {
+  return <styled.div {...props} />
+}, "root")()
+
+export const ItemComponent = withContext((props) => {
+  return <styled.div {...props} />
+}, "item")()
+```
+
+もし、提供されたスタイルと`PropsContext`から提供されるpropsを使用しない、またはそのロジックをハンドリングしたい場合は、`component`を使用します。
+
+```tsx
+export const RootComponent = component((props) => {
+  const [context, computedProps] = useRootComponentProps(props, "root")
+
+  return (
+    <StyleContext value={context}>
+      <styled.div {...computedProps} />
+    </StyleContext>
+  )
+}, "root")()
+
+export const ItemComponent = component((props) => {
+  const computedProps = useSlotComponentProps(props, "item")
+
+  return <styled.div {...computedProps} />
+}, "item")()
+```
+
+#### 修飾子を使用する
+
+修飾子を使用する場合は、スロット名を配列にします。
+
+```tsx
+const componentStyle = defineComponentSlotStyle({
+  base: {
+    root: {
+      /* base root style */
+    },
+    item: {
+      /* base item style */
+    },
+    start: {
+      /* base start style */
+    },
+    end: {
+      /* base end style */
+    },
+  },
+})
+```
+
+```tsx
+export const StartItemComponent = withContext("div", ["item", "start"])()
+
+export const EndItemComponent = withContext("div", ["item", "end"])()
+```
+
+この場合は、`item`と`start`または`end`のスタイルが設定され、クラス名は`"{prefix}-{name}__item--start"`または`"{prefix}-{name}__item--end"`になります。

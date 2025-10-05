@@ -1,10 +1,11 @@
 "use client"
 
 import { Grid, GridItem } from "@yamada-ui/react"
-import { PlaygroundHeader, PlaygroundTabs } from "./components"
+import { memo } from "react"
+import { PlaygroundEditor, PlaygroundHeader } from "./components"
 import { PlaygroundProvider } from "./playground-provider"
 
-export function Playground() {
+export const Playground = memo(function Playground() {
   return (
     <PlaygroundProvider>
       <Grid flex={1} gap="lg" maxW="8xl" py="sm" templateRows="auto 1fr">
@@ -12,9 +13,9 @@ export function Playground() {
           <PlaygroundHeader />
         </GridItem>
         <GridItem>
-          <PlaygroundTabs />
+          <PlaygroundEditor />
         </GridItem>
       </Grid>
     </PlaygroundProvider>
   )
-}
+})

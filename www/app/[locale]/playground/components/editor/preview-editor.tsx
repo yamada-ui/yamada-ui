@@ -1,58 +1,54 @@
 "use client"
 
+import type { Ref } from "react"
 import type { EditorStateController } from "./editor-state"
-import {
-  forwardRef,
-  memo,
-  useCallback,
-  useEffect,
-  useImperativeHandle,
-  useState,
-} from "react"
+import { assignRef } from "@yamada-ui/react"
+import { memo, useCallback, useEffect, useState } from "react"
 import { ClientOnly } from "@/components/mdx/client-only"
 
 interface PreviewEditorProps {
   editorState: EditorStateController
+  ref?: Ref<{ refresh: () => void; updateCode: (code: string) => void }>
   initialValue?: string
+  onChange?: (value: string) => void
 }
 
-const PreviewEditorComponent = forwardRef<
-  { refresh: () => void },
-  PreviewEditorProps
->(function PreviewEditor({ editorState, initialValue = "" }, ref) {
-  const [value, setValue] = useState(initialValue)
+export const PreviewEditor = memo(
+  ({ ref, editorState, initialValue = "", onChange }: PreviewEditorProps) => {
+    const [value, setValue] = useState(() => {
+      const currentValue = editorState.getValue.current?.()
+      return currentValue || initialValue
+    })
 
-  const handleValueChange = useCallback((newValue: string) => {
-    setValue(newValue)
-  }, [])
-
-  useEffect(() => {
-    // Subscribe to changes from the editor state
-    const unsubscribe = editorState.subscribe.current?.(handleValueChange)
-
-    // Also get the current value immediately
-    const currentValue = editorState.getValue.current?.()
-    if (currentValue) {
+    const refresh = useCallback(() => {
+      const currentValue = editorState.getValue.current?.() || ""
       setValue(currentValue)
-    }
+      onChange?.(currentValue)
+    }, [editorState, onChange])
 
-    return unsubscribe
-  }, [editorState, handleValueChange])
-
-  useImperativeHandle(
-    ref,
-    () => ({
-      refresh: () => {
-        // Force re-render of ClientOnly component
-        setValue((prev) => prev + " ")
-        setTimeout(() => setValue((prev) => prev.slice(0, -1)), 0)
+    const updateCode = useCallback(
+      (code: string) => {
+        setValue(code)
+        onChange?.(code)
       },
-    }),
-    [],
-  )
+      [onChange],
+    )
 
-  return <ClientOnly lang="tsx" code={value} functional />
-})
+    useEffect(() => {
+      const unsubscribe = editorState.subscribe.current?.((newValue) => {
+        setValue(newValue)
+        onChange?.(newValue)
+      })
 
-// Memoize the component to prevent unnecessary re-renders
-export const PreviewEditor = memo(PreviewEditorComponent)
+      return () => {
+        unsubscribe?.()
+      }
+    }, [editorState, onChange])
+
+    assignRef(ref, { refresh, updateCode })
+
+    return <ClientOnly lang="tsx" code={value} functional />
+  },
+)
+
+PreviewEditor.displayName = "PreviewEditor"

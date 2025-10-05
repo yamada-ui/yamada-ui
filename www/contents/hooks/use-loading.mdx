@@ -69,6 +69,13 @@ import { useLoading } from "@workspaces/ui"
 const { screen, page, background } = useLoading()
 ```
 
+`useLoading` returns instances of `screen`, `page`, and `background`. Each instance provides several methods:
+
+- `start`: Starts the loading animation.
+- `update`: Updates the loading animation.
+- `finish`: Finishes the loading animation.
+- `force`: Forces the loading animation to update.
+
 ### Change Loading Scheme
 
 ```tsx preview functional client

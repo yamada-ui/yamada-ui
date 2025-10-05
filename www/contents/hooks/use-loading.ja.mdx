@@ -69,6 +69,13 @@ import { useLoading } from "@workspaces/ui"
 const { screen, page, background } = useLoading()
 ```
 
+`useLoading`は、`screen`・`page`・`background`のインスタンスを返します。インスタンスには、いくつかのメソッドが含まれています。
+
+- `start`: ローディングアニメーションを開始します。
+- `update`: ローディングアニメーションを更新します。
+- `finish`: ローディングアニメーションを終了します。
+- `force`: ローディングアニメーションを強制的に更新します。
+
 ### ローディングスキームを変更する
 
 ```tsx preview functional client

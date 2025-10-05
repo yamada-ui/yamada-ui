@@ -58,7 +58,7 @@ export function CodeBlock({
                 </Box>
               </Iframe>
             ) : (
-              <Box borderWidth="1px" p="{space}" rounded="l2">
+              <Box borderWidth="1px" overflow="hidden" p="{space}" rounded="l2">
                 <ClientOnly
                   lang={lang}
                   code={children}

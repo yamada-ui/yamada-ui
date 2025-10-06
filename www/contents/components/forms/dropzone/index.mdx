@@ -48,7 +48,7 @@ import {
 <VStack>
   <For each={["dashed", "solid", "unstyled"]}>
     {(variant, index) => (
-      <Dropzone key={index} variant="dashed">
+      <Dropzone key={index} variant={variant}>
         <Text>Drag file here or click to select file</Text>
       </Dropzone>
     )}

@@ -34,7 +34,7 @@ export { FileButtonPropsContext, useFileButtonPropsContext }
  *
  * @see https://yamada-ui.com/docs/components/file-button
  */
-export const FileButton = withContext<"button", FileButtonProps>(
+export const FileButton = withContext<"input", FileButtonProps>(
   ({ as: As = Button, children, errorBorderColor, ...rest }) => {
     const { getButtonProps, getInputProps } = useFileButton(rest)
     const varProps = useInputBorder({ errorBorderColor })

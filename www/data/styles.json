@@ -272,6 +272,22 @@
       "type": "StyleValueWithCondition<CSS.Property.ColorScheme>",
       "docs": {}
     },
+    "display": {
+      "type": "StyleValueWithCondition<CSS.Property.Display | 'center' | 'inline-center' | 'hidden'>",
+      "docs": {
+        "display": {
+          "baseline": {
+            "status": "Widely available",
+            "widely_available_date": "2018-01-29",
+            "newly_available_date": "2015-07-29"
+          },
+          "deprecated": false,
+          "description": "The <code>display</code> CSS property sets the display behavior of an element's box within its layout and sets the layout behavior for its child elements.",
+          "experimental": false,
+          "see": "https://developer.mozilla.org/docs/Web/CSS/display"
+        }
+      }
+    },
     "insetX": {
       "properties": ["left", "right"],
       "token": "spaces",
@@ -844,7 +860,8 @@
       "docs": {
         "container": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2025-08-14",
             "newly_available_date": "2023-02-14"
           },
           "deprecated": false,
@@ -1164,23 +1181,6 @@
           "description": "The <code>unicode-bidi</code> and <code>direction</code> CSS properties override the Unicode layout algorithm. They are intended for Document Type Definition (DTD) designers. For HTML documents, you should use the <code>dir</code> global HTML attribute and <code>&#x3C;bdo></code> HTML element instead.",
           "experimental": false,
           "see": "https://developer.mozilla.org/docs/Web/CSS/direction"
-        }
-      }
-    },
-    "display": {
-      "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Display>",
-      "docs": {
-        "display": {
-          "baseline": {
-            "status": "Widely available",
-            "widely_available_date": "2018-01-29",
-            "newly_available_date": "2015-07-29"
-          },
-          "deprecated": false,
-          "description": "The <code>display</code> CSS property sets the display behavior of an element's box within its layout and sets the layout behavior for its child elements.",
-          "experimental": false,
-          "see": "https://developer.mozilla.org/docs/Web/CSS/display"
         }
       }
     },
@@ -4014,6 +4014,18 @@
         }
       }
     },
+    "caretAnimation": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "caret-animation": {
+          "deprecated": false,
+          "description": "The CSS `caret-animation` property.",
+          "experimental": true,
+          "see": "https://developer.mozilla.org/docs/Web/CSS/caret-animation"
+        }
+      }
+    },
     "caretColor": {
       "properties": ["caretColor"],
       "token": "colors",
@@ -4340,7 +4352,8 @@
       "docs": {
         "container": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2025-08-14",
             "newly_available_date": "2023-02-14"
           },
           "deprecated": false,
@@ -4356,7 +4369,8 @@
       "docs": {
         "container-name": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2025-08-14",
             "newly_available_date": "2023-02-14"
           },
           "deprecated": false,
@@ -4372,7 +4386,8 @@
       "docs": {
         "container-type": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2025-08-14",
             "newly_available_date": "2023-02-14"
           },
           "deprecated": false,
@@ -5795,8 +5810,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "interactivity": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `interactivity` property.",
+          "description": "The <code>interactivity: inert</code> CSS declaration makes an element and its descendants inert, like when using the <code>inert</code> HTML attribute. Inert elements can't be focused or clicked, their text can't be selected or found using the browser's find-in-page feature.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-ui-4/#propdef-interactivity"
         }
@@ -7652,7 +7668,7 @@
         "reading-flow": {
           "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The <code>reading-flow</code> CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation.",
+          "description": "The <code>reading-flow</code> CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation. The <code>reading-order</code> property overrides this order.",
           "experimental": true,
           "see": "https://developer.mozilla.org/docs/Web/CSS/reading-flow"
         }
@@ -7663,8 +7679,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "reading-order": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `reading-order` property.",
+          "description": "The <code>reading-flow</code> CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation. The <code>reading-order</code> property overrides this order.",
           "experimental": true,
           "see": "https://developer.mozilla.org/docs/Web/CSS/reading-order"
         }
@@ -8311,6 +8328,18 @@
         }
       }
     },
+    "scrollTargetGroup": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "scroll-target-group": {
+          "deprecated": false,
+          "description": "The CSS `scroll-target-group` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-overflow-5/#scroll-target-group"
+        }
+      }
+    },
     "scrollTimeline": {
       "as": true,
       "type": "StyleValueWithCondition<CSS.Property.ScrollTimeline>",
@@ -8566,8 +8595,8 @@
           "baseline": { "status": "Limited available" },
           "deprecated": false,
           "description": "The <code>text-autospace</code> CSS property sets whether and how to insert spaces in inter-script text (such as when mixing Latin and Chinese characters) and around punctuation.",
-          "experimental": true,
-          "see": "https://drafts.csswg.org/css-text-4/#propdef-text-autospace"
+          "experimental": false,
+          "see": "https://developer.mozilla.org/docs/Web/CSS/text-autospace"
         }
       }
     },
@@ -9243,6 +9272,18 @@
         }
       }
     },
+    "viewTransitionGroup": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "view-transition-group": {
+          "deprecated": false,
+          "description": "The CSS `view-transition-group` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-view-transitions-2/#view-transition-group-prop"
+        }
+      }
+    },
     "viewTransitionName": {
       "as": true,
       "type": "StyleValueWithCondition<CSS.Property.ViewTransitionName>",
@@ -9410,19 +9451,23 @@
   },
   "styled": {
     "apply": {
+      "important": true,
       "type": "StyleValueWithCondition<AnyString, \"apply\">",
       "docs": "Apply other styles defined in `theme.styles`."
     },
     "layerStyle": {
+      "important": true,
       "type": "StyleValueWithCondition<AnyString, \"layerStyles\">",
       "docs": "Apply layer styles defined in `theme.layerStyles`."
     },
     "textStyle": {
+      "important": true,
       "type": "StyleValueWithCondition<AnyString, \"textStyles\">",
       "docs": "Apply text styles defined in `theme.textStyles`."
     },
     "colorScheme": {
-      "type": "StyleValueWithCondition<ColorScheme>",
+      "important": true,
+      "type": "StyleValueWithCondition<AnyString | ColorScheme>",
       "docs": "Set color scheme variables."
     },
     "lineClamp": {

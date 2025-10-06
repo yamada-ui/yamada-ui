@@ -101,6 +101,7 @@ export function createVars(
 
     function tokenToVar(token: string): Variable {
       token = token.replace(/\./g, "-")
+      token = token.replace(/\//g, "\\/")
 
       const variable = `--${[prefix, escape(token, "-")].filter(Boolean).join("-")}`
       const reference = `var(${variable})`

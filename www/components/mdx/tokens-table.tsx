@@ -2,7 +2,7 @@ import type { ThemeToken } from "@yamada-ui/react"
 import {
   Box,
   Code,
-  defaultTheme,
+  theme as defaultTheme,
   isArray,
   isObject,
   isString,

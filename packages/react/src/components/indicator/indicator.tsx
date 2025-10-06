@@ -90,7 +90,7 @@ export { IndicatorPropsContext, useIndicatorPropsContext }
 /**
  * `Indicator` is a component that displays at the corner of elements such as avatars.
  *
- * @see https://yamada-ui.com/components/indicator
+ * @see https://yamada-ui.com/docs/components/indicator
  */
 export const Indicator = withProvider(
   ({

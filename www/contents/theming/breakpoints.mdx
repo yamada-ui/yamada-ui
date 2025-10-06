@@ -3,6 +3,10 @@ title: Breakpoints
 description: Learn how to customize breakpoints.
 ---
 
+:::tip
+Responsive design overview is [here](/docs/styling/responsive-design).
+:::
+
 ## Overview
 
 Breakpoints are tokens used for responsive design, such as [Responsive Design](/docs/styling/responsive-design).
@@ -91,9 +95,7 @@ const App = () => {
 By default, the responsive design uses the `@media(max-width)` media query.
 
 ```tsx preview functional
-const config = merge<ThemeConfig>(defaultConfig, {
-  breakpoint: { direction: "up" },
-})
+const config = defineConfig({ breakpoint: { direction: "up" } })
 
 const Component: FC<{ query: string }> = ({ query }) => {
   const breakpoint = useBreakpoint()
@@ -136,6 +138,7 @@ export const config = defineConfig({
   breakpoint: { direction: "up", identifier: "@media screen" }, // [!code highlight]
   defaultColorMode: "light",
   defaultThemeScheme: "base",
+  notice: { duration: 5000 },
   theme: { responsive: true },
 })
 ```
@@ -165,11 +168,8 @@ The responsive design uses the media query. If you want to use the container que
 
 ```tsx preview functional
 const containerRef = useRef<HTMLDivElement>(null)
-const config = merge<ThemeConfig>(defaultConfig, {
-  breakpoint: {
-    containerRef,
-    identifier: "@container",
-  },
+const config = defineConfig({
+  breakpoint: { containerRef, identifier: "@container" },
 })
 
 const Component: FC<{ query: string }> = ({ query }) => {

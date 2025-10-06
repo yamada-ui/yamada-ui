@@ -5,4 +5,96 @@ storybook: hooks-useclipboard--basic
 source: hooks/use-clipboard
 ---
 
-### Usage
+```tsx preview functional client
+const { onCopy, value, setValue, copied } = useClipboard()
+
+return (
+  <HStack>
+    <Input
+      placeholder="Text to be copied..."
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    />
+    <Button disabled={!value} onClick={onCopy}>
+      {copied ? "Copied" : "Copy"}
+    </Button>
+  </HStack>
+)
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { useClipboard } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useClipboard } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useClipboard } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const { onCopy, value, setValue, copied } = useClipboard("initial value")
+```
+
+### Using Initial Values
+
+```tsx preview functional client
+const { onCopy, value, setValue, copied } = useClipboard("initial value")
+
+return (
+  <HStack>
+    <Input
+      placeholder="text to be copied..."
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    />
+    <Button disabled={!value} onClick={onCopy}>
+      {copied ? "Copied" : "Copy"}
+    </Button>
+  </HStack>
+)
+```
+
+### Change Timeout
+
+To change the timeout, set a number(milliseconds) to the second argument. The default is `1500`.
+
+```tsx preview functional client
+const { onCopy, value, setValue, copied } = useClipboard("", 5000)
+
+return (
+  <HStack>
+    <Input
+      placeholder="text to be copied..."
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    />
+    <Button disabled={!value} onClick={onCopy}>
+      {copied ? "Copied" : "Copy"}
+    </Button>
+  </HStack>
+)
+```
+
+### Copy the Specified Value
+
+```tsx preview functional client
+const { onCopy, copied } = useClipboard()
+
+const value = "Read-Only Value"
+
+return (
+  <HStack>
+    <Input readOnly value={value} />
+    <Button onClick={() => onCopy(value)}>{copied ? "Copied" : "Copy"}</Button>
+  </HStack>
+)
+```

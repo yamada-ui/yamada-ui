@@ -5,4 +5,72 @@ storybook: hooks-useasynccallback--basic
 source: hooks/use-async-callback
 ---
 
-### 使い方
+```tsx preview functional client
+const [loading, onClick] = useAsyncCallback(async () => {
+  await wait(3000)
+}, [])
+
+return (
+  <Button loading={loading} onClick={onClick}>
+    Click me
+  </Button>
+)
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { useAsyncCallback } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useAsyncCallback } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useAsyncCallback } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const [loading, onClick] = useAsyncCallback(async () => {}, [])
+```
+
+### ローディングを使う
+
+ローディングを使う場合は、`loading`に`screen`や`page`などを設定します。
+
+```tsx preview functional client
+const [loading, onClick] = useAsyncCallback(
+  async () => {
+    await wait(3000)
+  },
+  [],
+  { loading: "page" },
+)
+
+return (
+  <Button loading={loading} onClick={onClick}>
+    Click me
+  </Button>
+)
+```
+
+### プロセシングを無効にする
+
+プロセシングを無効にする場合は、`processing`を`false`に設定します。
+
+```tsx preview functional client
+const [, onClick] = useAsyncCallback(
+  async () => {
+    await wait(3000)
+  },
+  [],
+  { loading: "page", processing: false },
+)
+
+return <Button onClick={onClick}>Click me</Button>
+```

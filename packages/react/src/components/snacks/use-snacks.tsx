@@ -6,7 +6,6 @@ import type { Alert } from "../alert"
 import type { SnackCloseButtonProps, SnackContentProps } from "./snacks"
 import { useCallback, useMemo, useState } from "react"
 import { useSystem } from "../../core"
-import { merge } from "../../utils"
 
 export interface Snack
   extends Omit<UseSnacksOptions, "direction" | "limit" | "startIndex"> {
@@ -66,22 +65,21 @@ export interface UseSnacksOptions
 /**
  * `useSnacks` is a custom hook for controlling notifications used in forms and the like.
  *
- * @see https://yamada-ui.com/hooks/use-snacks
+ * @see https://yamada-ui.com/docs/hooks/use-snacks
  */
 export const useSnacks = (options: UseSnacksOptions = {}) => {
   const [items, setItems] = useState<Snack[]>([])
   const { config } = useSystem()
 
   const systemOptions = useMemo(() => config.snacks ?? {}, [config])
-
   const defaultOptions = useMemo(
-    () => merge<UseSnacksOptions>(systemOptions, options),
+    () => ({ ...systemOptions, ...options }),
     [options, systemOptions],
   )
   const { direction, limit = 3, startIndex } = defaultOptions
 
   const getOptions = useCallback(
-    (options: SnackMethodsOptions) => merge(defaultOptions, options),
+    (options: SnackMethodsOptions) => ({ ...defaultOptions, ...options }),
     [defaultOptions],
   )
 

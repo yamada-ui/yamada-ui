@@ -80,7 +80,7 @@ import { Field } from "@workspaces/ui"
 ### ヘルプメッセージとエラーメッセージの置き換える
 
 エラーメッセージは、`invalid`が`true`の場合のみ表示されます。エラーメッセージが表示されたときに、ヘルプメッセージをエラーメッセージで置き換える場合は、`replace`を`true`に設定します。
-デフォルトでは、`true`に設定されています。
+デフォルトでは、`true`が設定されています。
 
 ```tsx preview
 <VStack>
@@ -150,7 +150,7 @@ import { Field } from "@workspaces/ui"
 
 ### 方向を変更する
 
-方向を変更する場合は、`orientation`に`horizontal`または`vertical`を設定します。デフォルトでは、`vertical`が設定されています。
+方向を変更する場合は、`orientation`に`"horizontal"`または`"vertical"`を設定します。デフォルトでは、`"vertical"`が設定されています。
 
 ```tsx preview
 <VStack>
@@ -221,23 +221,13 @@ import { Field } from "@workspaces/ui"
 <VStack>
   <Field.Root
     label="Email address"
-    optionalIndicator={
-      <Tag colorScheme="primary" size="sm">
-        optional
-      </Tag>
-    }
+    optionalIndicator={<Tag size="sm">optional</Tag>}
   >
     <Input type="email" placeholder="your email address" />
   </Field.Root>
 
   <Field.Root>
-    <Field.Label
-      optionalIndicator={
-        <Tag colorScheme="primary" size="sm">
-          optional
-        </Tag>
-      }
-    >
+    <Field.Label optionalIndicator={<Tag size="sm">optional</Tag>}>
       Email address
     </Field.Label>
     <Input type="email" placeholder="your email address" />

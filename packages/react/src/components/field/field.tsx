@@ -104,7 +104,7 @@ export { FieldPropsContext, useFieldPropsContext }
 /**
  * `Field` is a component used to group form elements with label, helper message, error message, etc.
  *
- * @see https://yamada-ui.com/components/field
+ * @see https://yamada-ui.com/docs/components/field
  */
 export const FieldRoot = withProvider<"div", FieldRootProps>(
   ({
@@ -193,6 +193,8 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
               </FieldLabel>
             ) : null)}
 
+          {omittedChildren}
+
           {customHelperMessage ||
             (helperMessage ? (
               <FieldHelperMessage {...helperMessageProps}>
@@ -206,8 +208,6 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
                 {errorMessage}
               </FieldErrorMessage>
             ) : null)}
-
-          {omittedChildren}
         </styled.div>
       </FieldContext>
     )
@@ -245,7 +245,7 @@ export const FieldLabel = withContext<"label", FieldLabelProps>(
     const fieldsetContext = useFieldsetContext()
     const fieldContext = useFieldContext()
 
-    id ??= fieldContext?.id
+    id ??= fieldContext?.labelId
     htmlFor ??= fieldContext?.id
     required ??= fieldContext?.required ?? fieldsetContext?.required
 

@@ -7,4 +7,77 @@ description: Yamada UI provides features to change styles according to the scree
 By default, responsive design using `@media(max-width)` media queries is adopted. If you want to use `@media(min-width)` media queries, please refer to [here](/docs/theming/breakpoints#media-queries).
 :::
 
+## Overview
+
+Responsive design refers to the breakpoints defined in the theme. Yamada UI has a Default Theme where [breakpoints](/docs/theming/tokens/breakpoints) are defined.
+
+:::note
+If you want to change the breakpoints, please check theme's [Breakpoints](/docs/theming/breakpoints).
+:::
+
 ## Usage
+
+To set responsive design to [Style Props](/docs/styling/style-props), set an object with the breakpoints as the key.
+
+- The keys of the object define the keys set in the theme's [Breakpoints](/docs/theming/tokens/breakpoints).
+- The values of the object define the values of the styles set by the key.
+
+```tsx preview
+<Box p="md" color="fg.contrast" bg={{ base: "bg.contrast", md: "success" }}>
+  Box
+</Box>
+```
+
+The above code generates the following CSS:
+
+```css
+.Box {
+  background: var(--ui-colors-bg-contrast);
+
+  @media screen and (max-width: 768px) {
+    background: var(--ui-colors-success);
+  }
+}
+```
+
+## Utilities
+
+Yamada UI provides useful custom hooks for building responsive layouts.
+
+::::card-group
+:::card{href="/docs/hooks/use-breakpoint"}
+
+### useBreakpoint
+
+A custom hook that returns the current breakpoint. This hook monitors the window size and returns the appropriate value.
+
+:::
+:::card{href="/docs/hooks/use-breakpoint-effect"}
+
+### useBreakpointEffect
+
+A custom hook that executes a specific callback function when the breakpoint changes.
+
+:::
+:::card{href="/docs/hooks/use-update-breakpoint-effect"}
+
+### useUpdateBreakpointEffect
+
+A custom hook that skips the side effect on the initial render and executes a specific callback function when the breakpoint changes.
+
+:::
+:::card{href="/docs/hooks/use-breakpoint-state"}
+
+### useBreakpointState
+
+A custom hook that returns the current breakpoint from the provided object as the initial value.
+
+:::
+:::card{href="/docs/hooks/use-breakpoint-value"}
+
+### useBreakpointValue
+
+A custom hook that returns the value of the current breakpoint from the provided object. This hook monitors changes in the window size and returns the appropriate value.
+
+:::
+::::

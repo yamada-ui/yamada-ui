@@ -1,12 +1,422 @@
 ---
 title: NativeSelect
-description: "`NativeSelect` is a component used for allowing users to select one option from a list. It displays a native dropdown list provided by the browser (user agent)."
+description: "`NativeSelect` is a component used for allowing users to select one value from a list of options. It displays a native dropdown list provided by the browser (user agent)."
 storybook: components-nativeselect--basic
 source: components/native-select
 style: components/native-select/native-select.style.ts
 ---
 
+```tsx preview
+<NativeSelect.Root placeholder="Select a character">
+  <NativeSelect.Option value="日比野カフカ">日比野カフカ</NativeSelect.Option>
+  <NativeSelect.Option value="市川レノ">市川レノ</NativeSelect.Option>
+  <NativeSelect.Option value="亜白ミナ">亜白ミナ</NativeSelect.Option>
+  <NativeSelect.Option value="四ノ宮キコル">四ノ宮キコル</NativeSelect.Option>
+</NativeSelect.Root>
+```
+
 ## Usage
+
+:::note
+`NativeSelect` is a native UI component provided by the browser (user agent). It utilizes the browser's default functionality to display a dropdown list. If you want to extend the functionality and use a more styled component, please check [Select](/components/forms/select).
+:::
+
+:::code-group
+
+```tsx [package]
+import { NativeSelect } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { NativeSelect } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { NativeSelect } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<NativeSelect.Root>
+  <NativeSelect.Group>
+    <NativeSelect.Option />
+  </NativeSelect.Group>
+  <NativeSelect.Option />
+</NativeSelect.Root>
+```
+
+### Use items
+
+```tsx preview functional
+const items = useMemo<NativeSelect.Item[]>(
+  () => [
+    { label: "日比野カフカ", value: "日比野カフカ" },
+    { label: "市川レノ", value: "市川レノ" },
+    { label: "亜白ミナ", value: "亜白ミナ" },
+    { label: "四ノ宮キコル", value: "四ノ宮キコル" },
+  ],
+  [],
+)
+
+return <NativeSelect.Root items={items} placeholder="Select a character" />
+```
+
+### Change variant
+
+```tsx preview functional
+const items = useMemo<NativeSelect.Item[]>(
+  () => [
+    { label: "日比野カフカ", value: "日比野カフカ" },
+    { label: "市川レノ", value: "市川レノ" },
+    { label: "亜白ミナ", value: "亜白ミナ" },
+    { label: "四ノ宮キコル", value: "四ノ宮キコル" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant) => (
+        <NativeSelect.Root
+          key={variant}
+          variant={variant}
+          placeholder={toTitleCase(variant)}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change size
+
+```tsx preview functional
+const items = useMemo<NativeSelect.Item[]>(
+  () => [
+    { label: "日比野カフカ", value: "日比野カフカ" },
+    { label: "市川レノ", value: "市川レノ" },
+    { label: "亜白ミナ", value: "亜白ミナ" },
+    { label: "四ノ宮キコル", value: "四ノ宮キコル" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["sm", "md", "lg"]}>
+      {(size) => (
+        <NativeSelect.Root
+          key={size}
+          size={size}
+          placeholder={`Size (${size})`}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Set default value
+
+To set a default value, set a value to `defaultValue`.
+
+```tsx preview functional
+const items = useMemo<NativeSelect.Item[]>(
+  () => [
+    { label: "日比野カフカ", value: "日比野カフカ" },
+    { label: "市川レノ", value: "市川レノ" },
+    { label: "亜白ミナ", value: "亜白ミナ" },
+    { label: "四ノ宮キコル", value: "四ノ宮キコル" },
+  ],
+  [],
+)
+
+return (
+  <NativeSelect.Root
+    defaultValue="日比野カフカ"
+    items={items}
+    placeholder="Select a character"
+  />
+)
+```
+
+### Grouping
+
+To group options, use `NativeSelect.Group`.
+
+```tsx preview
+<NativeSelect.Root placeholder="Select a character">
+  <NativeSelect.Group label="第1部隊">
+    <NativeSelect.Option value="鳴海弦">鳴海弦</NativeSelect.Option>
+    <NativeSelect.Option value="長谷川エイジ">長谷川エイジ</NativeSelect.Option>
+  </NativeSelect.Group>
+
+  <NativeSelect.Group label="第3部隊">
+    <NativeSelect.Option value="日比野カフカ">日比野カフカ</NativeSelect.Option>
+    <NativeSelect.Option value="市川レノ">市川レノ</NativeSelect.Option>
+    <NativeSelect.Option value="亜白ミナ">亜白ミナ</NativeSelect.Option>
+    <NativeSelect.Option value="四ノ宮キコル">四ノ宮キコル</NativeSelect.Option>
+  </NativeSelect.Group>
+</NativeSelect.Root>
+```
+
+```tsx preview functional
+const items = useMemo<NativeSelect.Item[]>(
+  () => [
+    { label: "怪獣8号", value: "怪獣8号" },
+    {
+      label: "第1部隊",
+      items: [
+        { label: "鳴海弦", value: "鳴海弦" },
+        { label: "長谷川エイジ", value: "長谷川エイジ" },
+      ],
+    },
+    {
+      label: "第3部隊",
+      items: [
+        { label: "日比野カフカ", value: "日比野カフカ" },
+        { label: "市川レノ", value: "市川レノ" },
+        { label: "亜白ミナ", value: "亜白ミナ" },
+        { label: "四ノ宮キコル", value: "四ノ宮キコル" },
+      ],
+    },
+  ],
+  [],
+)
+
+return <NativeSelect.Root items={items} placeholder="Select a character" />
+```
+
+### Exclude placeholder from options
+
+By default, a placeholder is included in the options. To exclude the placeholder from options, set `includePlaceholder` to `false`.
+
+```tsx preview functional
+const items = useMemo<NativeSelect.Item[]>(
+  () => [
+    { label: "日比野カフカ", value: "日比野カフカ" },
+    { label: "市川レノ", value: "市川レノ" },
+    { label: "亜白ミナ", value: "亜白ミナ" },
+    { label: "四ノ宮キコル", value: "四ノ宮キコル" },
+  ],
+  [],
+)
+
+return (
+  <NativeSelect.Root
+    includePlaceholder={false}
+    items={items}
+    placeholder="Select a character"
+  />
+)
+```
+
+### Disable option
+
+To disable an option, set `disabled` to `true` in `NativeSelect.Option`.
+
+```tsx preview
+<NativeSelect.Root placeholder="Select a character">
+  <NativeSelect.Option value="日比野カフカ">日比野カフカ</NativeSelect.Option>
+  <NativeSelect.Option disabled value="市川レノ">
+    市川レノ
+  </NativeSelect.Option>
+  <NativeSelect.Option value="亜白ミナ">亜白ミナ</NativeSelect.Option>
+  <NativeSelect.Option value="四ノ宮キコル">四ノ宮キコル</NativeSelect.Option>
+</NativeSelect.Root>
+```
+
+```tsx preview functional
+const items = useMemo<NativeSelect.Item[]>(
+  () => [
+    { label: "日比野カフカ", value: "日比野カフカ" },
+    { disabled: true, label: "市川レノ", value: "市川レノ" },
+    { label: "亜白ミナ", value: "亜白ミナ" },
+    { label: "四ノ宮キコル", value: "四ノ宮キコル" },
+  ],
+  [],
+)
+
+return <NativeSelect.Root items={items} placeholder="Select a character" />
+```
+
+### Disable
+
+To disable, set `disabled` to `true`.
+
+```tsx preview functional
+const items = useMemo<NativeSelect.Item[]>(
+  () => [
+    { label: "日比野カフカ", value: "日比野カフカ" },
+    { label: "市川レノ", value: "市川レノ" },
+    { label: "亜白ミナ", value: "亜白ミナ" },
+    { label: "四ノ宮キコル", value: "四ノ宮キコル" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant) => (
+        <NativeSelect.Root
+          key={variant}
+          disabled
+          variant={variant}
+          items={items}
+          placeholder={toTitleCase(variant)}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Read-Only
+
+To make read-only, set `readOnly` to `true`.
+
+```tsx preview functional
+const items = useMemo<NativeSelect.Item[]>(
+  () => [
+    { label: "日比野カフカ", value: "日比野カフカ" },
+    { label: "市川レノ", value: "市川レノ" },
+    { label: "亜白ミナ", value: "亜白ミナ" },
+    { label: "四ノ宮キコル", value: "四ノ宮キコル" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant) => (
+        <NativeSelect.Root
+          key={variant}
+          readOnly
+          variant={variant}
+          items={items}
+          placeholder={toTitleCase(variant)}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Invalid
+
+To make invalid, set `invalid` to `true`.
+
+```tsx preview functional
+const items = useMemo<NativeSelect.Item[]>(
+  () => [
+    { label: "日比野カフカ", value: "日比野カフカ" },
+    { label: "市川レノ", value: "市川レノ" },
+    { label: "亜白ミナ", value: "亜白ミナ" },
+    { label: "四ノ宮キコル", value: "四ノ宮キコル" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant) => (
+        <NativeSelect.Root
+          key={variant}
+          invalid
+          variant={variant}
+          items={items}
+          placeholder={toTitleCase(variant)}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change border color
+
+To change the border color, set a color to `focusBorderColor` or `errorBorderColor`.
+
+```tsx preview functional
+const items = useMemo<NativeSelect.Item[]>(
+  () => [
+    { label: "日比野カフカ", value: "日比野カフカ" },
+    { label: "市川レノ", value: "市川レノ" },
+    { label: "亜白ミナ", value: "亜白ミナ" },
+    { label: "四ノ宮キコル", value: "四ノ宮キコル" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <NativeSelect.Root
+      focusBorderColor="green.500"
+      placeholder="Custom focus border color"
+      items={items}
+    />
+    <NativeSelect.Root
+      errorBorderColor="orange.500"
+      invalid
+      placeholder="Custom invalid border color"
+      items={items}
+    />
+  </VStack>
+)
+```
+
+### Customize icon
+
+```tsx preview functional
+const items = useMemo<NativeSelect.Item[]>(
+  () => [
+    { label: "日比野カフカ", value: "日比野カフカ" },
+    { label: "市川レノ", value: "市川レノ" },
+    { label: "亜白ミナ", value: "亜白ミナ" },
+    { label: "四ノ宮キコル", value: "四ノ宮キコル" },
+  ],
+  [],
+)
+
+return (
+  <NativeSelect.Root
+    items={items}
+    placeholder="Select a character"
+    icon={<ChevronsDownIcon />}
+  />
+)
+```
+
+### Control
+
+```tsx preview functional client
+const [value, setValue] = useState<string>("日比野カフカ")
+const items = useMemo<NativeSelect.Item[]>(
+  () => [
+    { label: "日比野カフカ", value: "日比野カフカ" },
+    { label: "市川レノ", value: "市川レノ" },
+    { label: "亜白ミナ", value: "亜白ミナ" },
+    { label: "四ノ宮キコル", value: "四ノ宮キコル" },
+  ],
+  [],
+)
+
+return (
+  <NativeSelect.Root
+    items={items}
+    placeholder="Select a character"
+    value={value}
+    onChange={(e) => setValue(e.target.value)}
+  />
+)
+```
 
 ## Props
 

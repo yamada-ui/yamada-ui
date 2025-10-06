@@ -35,7 +35,7 @@ import { FormatByte } from "@workspaces/ui"
 バイト値を人間が読みやすい形式にフォーマットします。デフォルトでは、フォーマットされたバイト値を含む`span`要素をレンダリングします。
 
 :::note
-`FormatByte`は、内部的に[Intl.NumberFormat](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat)を使用しています。`FormatByte`は、[navigator.language](https://developer.mozilla.org/ja/docs/Web/API/Navigator/language)に基づいて`locale`を自動的に設定します。
+`FormatByte`は、内部で[Intl.NumberFormat](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat)を使用しています。`FormatByte`は、[navigator.language](https://developer.mozilla.org/ja/docs/Web/API/Navigator/language)に基づいて`locale`を自動的に設定します。
 :::
 
 ### 自動単位選択
@@ -75,7 +75,7 @@ import { FormatByte } from "@workspaces/ui"
 </Grid>
 ```
 
-#### アプリケーション全体のロケールを設定する
+### アプリケーション全体のロケールを設定する
 
 アプリケーション全体のロケールの設定をする場合は、`UIProvider`の`locale`に値を設定します。
 
@@ -93,7 +93,7 @@ const App = () => {
 
 ### 単位を変換する
 
-単位を変換する場合は、`unit`に`"byte"`または`"bit"`を設定します。デフォルトは`"byte"`です。
+単位を変換する場合は、`unit`に`"byte"`または`"bit"`を設定します。デフォルトでは、`"byte"`が設定されています。
 
 ```tsx preview
 <Grid templateColumns="auto 1fr" gap="sm">

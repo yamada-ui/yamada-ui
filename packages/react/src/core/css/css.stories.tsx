@@ -10,7 +10,6 @@ export const Interpolation = () => {
     <>
       <Center
         boxShadow="0 0 0 1px {colors.primary}"
-        color="white"
         p="md"
         rounded="l2"
         w="full"
@@ -20,7 +19,6 @@ export const Interpolation = () => {
 
       <Center
         border="{sizes.1} solid {colors.secondary}"
-        color="white"
         p="md"
         rounded="l2"
         w="full"

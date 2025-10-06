@@ -6,7 +6,11 @@
     "hooks": [],
     "providers": []
   },
-  "dependents": { "components": ["alert"], "hooks": [], "providers": [] },
+  "dependents": {
+    "components": ["alert", "notice"],
+    "hooks": [],
+    "providers": []
+  },
   "section": "components",
   "sources": [
     {
@@ -19,7 +23,7 @@
     },
     {
       "name": "status.tsx",
-      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { StatusStyle } from \"./status.style\"\nimport { createSlotComponent, styled } from \"@yamada-ui/react\"\nimport { statusStyle } from \"./status.style\"\n\nexport type StatusScheme = \"error\" | \"info\" | \"success\" | \"warning\"\n\nexport interface StatusProps extends HTMLStyledProps, ThemeProps<StatusStyle> {\n  /**\n   * The type of the status\n   *\n   * @default 'info'\n   * */\n  value?: StatusScheme\n  /**\n   * The props for the status indicator component\n   */\n  indicatorProps?: HTMLStyledProps\n  /**\n   * The props for the status label component\n   */\n  labelProps?: HTMLStyledProps\n}\n\nconst {\n  PropsContext: StatusPropsContext,\n  usePropsContext: useStatusPropsContext,\n  withContext,\n  withProvider,\n} = createSlotComponent<StatusProps, StatusStyle>(\"status\", statusStyle)\n\nexport { StatusPropsContext, useStatusPropsContext }\n\n/**\n * `Status` is component that indicate the status of a process or state.\n *\n * @see https://yamada-ui.com/components/status\n */\nexport const Status = withProvider<\"div\", StatusProps>(\n  ({ children, indicatorProps, labelProps, ...rest }) => {\n    return (\n      <styled.div {...rest}>\n        <StatusIndicator {...indicatorProps} />\n\n        <StatusLabel {...labelProps}>{children}</StatusLabel>\n      </styled.div>\n    )\n  },\n  \"root\",\n)({ colorScheme: \"info\", value: \"info\" })\n\ninterface StatusIndicatorProps extends HTMLStyledProps {}\n\nconst StatusIndicator = withContext<\"div\", StatusIndicatorProps>(\n  \"div\",\n  \"indicator\",\n)()\n\ninterface StatusLabelProps extends HTMLStyledProps<\"p\"> {}\n\nconst StatusLabel = withContext<\"p\", StatusLabelProps>(\"p\", \"label\")()\n"
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { StatusStyle } from \"./status.style\"\nimport { createSlotComponent, styled } from \"@yamada-ui/react\"\nimport { statusStyle } from \"./status.style\"\n\nexport type StatusScheme = \"error\" | \"info\" | \"success\" | \"warning\"\n\nexport interface StatusProps extends HTMLStyledProps, ThemeProps<StatusStyle> {\n  /**\n   * The type of the status\n   *\n   * @default 'info'\n   * */\n  value?: StatusScheme\n  /**\n   * The props for the status indicator component\n   */\n  indicatorProps?: HTMLStyledProps\n  /**\n   * The props for the status label component\n   */\n  labelProps?: HTMLStyledProps\n}\n\nconst {\n  PropsContext: StatusPropsContext,\n  usePropsContext: useStatusPropsContext,\n  withContext,\n  withProvider,\n} = createSlotComponent<StatusProps, StatusStyle>(\"status\", statusStyle)\n\nexport { StatusPropsContext, useStatusPropsContext }\n\n/**\n * `Status` is component that indicate the status of a process or state.\n *\n * @see https://yamada-ui.com/docs/components/status\n */\nexport const Status = withProvider<\"div\", StatusProps>(\n  ({ children, indicatorProps, labelProps, ...rest }) => {\n    return (\n      <styled.div {...rest}>\n        <StatusIndicator {...indicatorProps} />\n\n        <StatusLabel {...labelProps}>{children}</StatusLabel>\n      </styled.div>\n    )\n  },\n  \"root\",\n)(undefined, ({ colorScheme, value = \"info\", ...rest }) => ({\n  colorScheme: colorScheme ?? value,\n  ...rest,\n}))\n\ninterface StatusIndicatorProps extends HTMLStyledProps {}\n\nconst StatusIndicator = withContext<\"div\", StatusIndicatorProps>(\n  \"div\",\n  \"indicator\",\n)()\n\ninterface StatusLabelProps extends HTMLStyledProps<\"p\"> {}\n\nconst StatusLabel = withContext<\"p\", StatusLabelProps>(\"p\", \"label\")()\n"
     }
   ]
 }

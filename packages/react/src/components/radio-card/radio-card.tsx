@@ -82,7 +82,7 @@ export {
 /**
  * `RadioCard` is a component used for allowing users to select one option from multiple choices.
  *
- * @see https://yamada-ui.com/components/radio-card
+ * @see https://yamada-ui.com/docs/components/radio-card
  */
 export const RadioCardRoot = withProvider<"label", RadioCardRootProps>(
   ({

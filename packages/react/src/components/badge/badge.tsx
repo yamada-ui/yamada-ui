@@ -20,6 +20,6 @@ export { BadgePropsContext, useBadgePropsContext }
 /**
  * `Badge` is a component that emphasizes the status of an item to make it immediately recognizable.
  *
- * @see https://yamada-ui.com/components/badge
+ * @see https://yamada-ui.com/docs/components/badge
  */
 export const Badge = withContext("span")()

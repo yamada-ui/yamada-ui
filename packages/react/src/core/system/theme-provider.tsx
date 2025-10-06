@@ -19,10 +19,10 @@ import {
 } from "@emotion/react"
 import { use, useCallback, useEffect, useMemo, useState } from "react"
 import { isEmptyObject, isObject, isUndefined, merge } from "../../utils"
+import { THEME_SCHEME_STORAGE_KEY } from "../constant"
 import { css } from "../css"
 import { useEnvironment } from "./environment-provider"
 import { createStorageManager } from "./storage-manager"
-import { THEME_SCHEME_STORAGE_KEY } from "./storage-script"
 import { useSystem } from "./system-provider"
 
 export const getPreventTransition = (environment: Environment) => {
@@ -89,7 +89,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
   children,
   config,
   cookie,
-  storage = "localStorage" as Storage,
+  storage = !!cookie ? "cookie" : "localStorage",
   storageKey = THEME_SCHEME_STORAGE_KEY,
   theme = {},
 }) => {
@@ -179,7 +179,7 @@ export const GlobalStyles: FC = () => {
 /**
  * `useTheme` is a custom hook that returns a function for retrieving and switching themes.
  *
- * @see https://yamada-ui.com/hooks/use-theme
+ * @see https://yamada-ui.com/docs/hooks/use-theme
  */
 export const useTheme = <Y extends UsageTheme = Theme>() => {
   const internalTheme = use(ThemeContext) as StyledTheme<Y>

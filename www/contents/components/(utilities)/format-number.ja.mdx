@@ -35,7 +35,7 @@ import { FormatNumber } from "@workspaces/ui"
 指定されたロケールとオプションに従って数値をフォーマットします。デフォルトでは、フォーマットされた数値を含む`span`要素をレンダリングします。
 
 :::note
-`FormatNumber`は、内部的に[Intl.NumberFormat](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat)を使用しています。`FormatNumber`は、[navigator.language](https://developer.mozilla.org/ja/docs/Web/API/Navigator/language)に基づいて`locale`を自動的に設定します。
+`FormatNumber`は、内部で[Intl.NumberFormat](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat)を使用しています。`FormatNumber`は、[navigator.language](https://developer.mozilla.org/ja/docs/Web/API/Navigator/language)に基づいて`locale`を自動的に設定します。
 :::
 
 ### ロケールを変更する
@@ -61,7 +61,7 @@ import { FormatNumber } from "@workspaces/ui"
 </Grid>
 ```
 
-#### プロジェクト全体のロケールを設定する
+### プロジェクト全体のロケールを設定する
 
 アプリケーション全体のロケールの設定をする場合は、`UIProvider`の`locale`に値を設定します。
 
@@ -176,7 +176,7 @@ const App = () => {
 
 ### グループ化を無効にする
 
-グループ化を無効にする場合は、[useGrouping](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#usegrouping)に`false`を設定します。
+グループ化を無効にする場合は、[useGrouping](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#usegrouping)を`false`に設定します。
 
 ```tsx preview
 <FormatNumber value={1234567.89} useGrouping={false} />

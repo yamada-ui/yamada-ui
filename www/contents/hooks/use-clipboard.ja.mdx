@@ -5,4 +5,96 @@ storybook: hooks-useclipboard--basic
 source: hooks/use-clipboard
 ---
 
-### 使い方
+```tsx preview functional client
+const { onCopy, value, setValue, copied } = useClipboard()
+
+return (
+  <HStack>
+    <Input
+      placeholder="Text to be copied..."
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    />
+    <Button disabled={!value} onClick={onCopy}>
+      {copied ? "Copied" : "Copy"}
+    </Button>
+  </HStack>
+)
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { useClipboard } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useClipboard } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useClipboard } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const { onCopy, value, setValue, copied } = useClipboard("initial value")
+```
+
+### 初期値を使う
+
+```tsx preview functional client
+const { onCopy, value, setValue, copied } = useClipboard("initial value")
+
+return (
+  <HStack>
+    <Input
+      placeholder="text to be copied..."
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    />
+    <Button disabled={!value} onClick={onCopy}>
+      {copied ? "Copied" : "Copy"}
+    </Button>
+  </HStack>
+)
+```
+
+### 所要時間を変更する
+
+所要時間を変更する場合は、第2引数に数値(ミリ秒)を設定します。デフォルトでは、`1500`が設定されています。
+
+```tsx preview functional client
+const { onCopy, value, setValue, copied } = useClipboard("", 5000)
+
+return (
+  <HStack>
+    <Input
+      placeholder="text to be copied..."
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    />
+    <Button disabled={!value} onClick={onCopy}>
+      {copied ? "Copied" : "Copy"}
+    </Button>
+  </HStack>
+)
+```
+
+### 指定した値をコピーする
+
+```tsx preview functional client
+const { onCopy, copied } = useClipboard()
+
+const value = "Read-Only Value"
+
+return (
+  <HStack>
+    <Input readOnly value={value} />
+    <Button onClick={() => onCopy(value)}>{copied ? "Copied" : "Copy"}</Button>
+  </HStack>
+)
+```

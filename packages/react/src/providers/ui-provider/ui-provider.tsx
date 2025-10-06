@@ -5,17 +5,17 @@ import type {
   ThemeProviderProps,
   UsageTheme,
 } from "../../core"
-import type { DefaultTheme } from "../../theme"
 import type { DeepMerge } from "../../utils"
 import type { I18nProviderProps } from "../i18n-provider"
 import { LoadingProvider } from "../../components/loading"
+import { NoticeProvider } from "../../components/notice"
 import {
   ColorModeProvider,
   EnvironmentProvider,
   SystemProvider,
   ThemeProvider,
 } from "../../core"
-import { defaultConfig, defaultTheme } from "../../theme"
+import { config as defaultConfig, theme as defaultTheme } from "../../theme"
 import { merge } from "../../utils"
 import { I18nProvider } from "../i18n-provider"
 
@@ -69,7 +69,9 @@ export const UIProvider: FC<UIProviderProps> = ({
               storage={storage}
               storageKey={colorModeStorageKey}
             >
-              <LoadingProvider {...config.loading}>{children}</LoadingProvider>
+              <LoadingProvider {...config.loading}>
+                <NoticeProvider {...config.notice}>{children}</NoticeProvider>
+              </LoadingProvider>
             </ColorModeProvider>
           </ThemeProvider>
         </SystemProvider>
@@ -77,6 +79,8 @@ export const UIProvider: FC<UIProviderProps> = ({
     </EnvironmentProvider>
   )
 }
+
+type DefaultTheme = typeof defaultTheme
 
 export const extendTheme = <Y extends UsageTheme>(theme: Y) => {
   return merge<DeepMerge<DefaultTheme, Y>>(defaultTheme, theme)

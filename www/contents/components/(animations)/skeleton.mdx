@@ -9,9 +9,7 @@ style: components/skeleton/skeleton.style.ts
 ```tsx preview
 <VStack>
   <Skeleton />
-
   <SkeletonCircle />
-
   <SkeletonText />
 </VStack>
 ```
@@ -36,9 +34,7 @@ import { Skeleton, SkeletonCircle, SkeletonText } from "@workspaces/ui"
 
 ```tsx
 <Skeleton />
-
 <SkeletonCircle />
-
 <SkeletonText />
 ```
 
@@ -62,16 +58,12 @@ import { Skeleton, SkeletonCircle, SkeletonText } from "@workspaces/ui"
 
 ### Change Size
 
-To change the size, specify `Style Props`.
-
 ```tsx preview
 <VStack>
   <HStack>
     <SkeletonCircle boxSize="14" />
-
     <SkeletonText h="6" lineClamp={2} />
   </HStack>
-
   <Skeleton h="20" />
 </VStack>
 ```
@@ -79,7 +71,7 @@ To change the size, specify `Style Props`.
 Additionally, by passing child elements, you can match the width and height.
 
 ```tsx preview
-<VStack gap="md">
+<VStack lineHeight="1">
   <HStack>
     <Skeleton>
       <Badge>Badge</Badge>
@@ -115,9 +107,7 @@ To change the blink color, use the `startColor` and `endColor` properties.
 ```tsx preview
 <VStack>
   <Skeleton variant="shine" startColor="pink.500" endColor="orange.500" />
-
   <SkeletonCircle variant="shine" startColor="pink.500" endColor="orange.500" />
-
   <SkeletonText variant="shine" startColor="pink.500" endColor="orange.500" />
 </VStack>
 ```
@@ -145,9 +135,7 @@ To change the blink duration, set a numeric value (seconds) to `duration`.
 ```tsx preview
 <VStack>
   <Skeleton duration={2} />
-
   <SkeletonCircle duration={2} />
-
   <SkeletonText duration={2} />
 </VStack>
 ```
@@ -157,14 +145,7 @@ To change the blink duration, set a numeric value (seconds) to `duration`.
 To display child elements, pass `false` to `loading`.
 
 ```tsx preview functional
-const { loading } = useAsync(async () => {
-  await wait(3000)
-})
-
-const wait = async (ms) =>
-  new Promise((resolve) => {
-    setTimeout(resolve, ms)
-  })
+const { loading } = useAsync(() => wait(3000))
 
 return (
   <VStack>
@@ -187,10 +168,6 @@ return (
         </Text>
       </SkeletonText>
     </HStack>
-
-    <Skeleton loading={loading}>
-      <Heading lineClamp={1}>ポケットモンスター</Heading>
-    </Skeleton>
   </VStack>
 )
 ```
@@ -200,14 +177,7 @@ return (
 To change the fade in duration, set a numeric value (seconds) to `fadeDuration`.
 
 ```tsx preview functional
-const { loading } = useAsync(async () => {
-  await wait(3000)
-})
-
-const wait = async (ms) =>
-  new Promise((resolve) => {
-    setTimeout(resolve, ms)
-  })
+const { loading } = useAsync(() => wait(3000))
 
 return (
   <VStack>
@@ -235,10 +205,6 @@ return (
         </Text>
       </SkeletonText>
     </HStack>
-
-    <Skeleton fadeDuration={2} loading={loading}>
-      <Heading lineClamp={1}>Jigglypuff's Sweet Melody</Heading>
-    </Skeleton>
   </VStack>
 )
 ```

@@ -5,4 +5,111 @@ storybook: hooks-usedisclosure--basic
 source: hooks/use-disclosure
 ---
 
-### 使い方
+```tsx preview functional client
+const { open, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Modal</Button>
+
+    <Modal.Root
+      body="だ…大地よ海よ　そして生きているすべての　みんな…
+      このオラにほんのちょっとずつだけ元気をわけてくれ…！！！"
+      cancel="わけない"
+      open={open}
+      success="わける"
+      title="孫悟空"
+      onCancel={onClose}
+      onClose={onClose}
+      onSuccess={onClose}
+    />
+  </>
+)
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { useDisclosure } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useDisclosure } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useDisclosure } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const { open, onOpen, onClose, onToggle } = useDisclosure()
+```
+
+### コールバック関数を使う
+
+コールバック関数を使う場合は、`onOpen`または`onClose`に関数を設定します。これは、[Modal](/docs/components/modal)などのコンポーネントを開く前に、APIなどを実行するのに役立ちます。
+
+```tsx preview functional client
+const { open, onClose, onOpen } = useDisclosure<string, string>({
+  onClose: (value) => {
+    console.log("onClose:", value)
+  },
+  onOpen: (value) => {
+    console.log("onOpen:", value)
+  },
+})
+
+return (
+  <>
+    <Button onClick={() => onOpen("This is arg.")}>Open Modal</Button>
+
+    <Modal.Root
+      body="だ…大地よ海よ　そして生きているすべての　みんな…
+      このオラにほんのちょっとずつだけ元気をわけてくれ…！！！"
+      cancel="わけない"
+      open={open}
+      success="わける"
+      title="孫悟空"
+      onCancel={() => onClose("This is arg.")}
+      onClose={() => onClose("This is arg.")}
+      onSuccess={() => onClose("This is arg.")}
+    />
+  </>
+)
+```
+
+デフォルトでは、コールバック関数の実行タイミングは`onOpen`または`onClose`の実行前です。実行タイミングを`onOpen`または`onClose`の実行後にする場合は、`timing`を`"after"`に設定します。
+
+```tsx preview functional client
+const { open, onClose, onOpen } = useDisclosure<string, string>({
+  onClose: (value) => {
+    console.log("onClose:", value)
+  },
+  onOpen: (value) => {
+    console.log("onOpen:", value)
+  },
+  timing: "after",
+})
+
+return (
+  <>
+    <Button onClick={() => onOpen("This is arg.")}>Open Modal</Button>
+
+    <Modal.Root
+      body="だ…大地よ海よ　そして生きているすべての　みんな…
+      このオラにほんのちょっとずつだけ元気をわけてくれ…！！！"
+      cancel="わけない"
+      open={open}
+      success="わける"
+      title="孫悟空"
+      onCancel={() => onClose("This is arg.")}
+      onClose={() => onClose("This is arg.")}
+      onSuccess={() => onClose("This is arg.")}
+    />
+  </>
+)
+```

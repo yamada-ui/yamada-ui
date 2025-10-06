@@ -132,13 +132,12 @@ export function createStyled<
     variants,
     defaultProps,
     transferProps,
-    ...styledOptions
+    ...options
   }: StyledOptions<D, H, R, keyof M> = {},
 ) {
-  const displayName =
-    styledOptions.displayName ?? getDisplayName(styledOptions.name, "")
-  const shouldForwardProp = !styledOptions.shouldForwardProp
-    ? createShouldForwardProp(styledOptions.forwardProps)
+  const displayName = options.displayName ?? getDisplayName(options.name, "")
+  const shouldForwardProp = !options.shouldForwardProp
+    ? createShouldForwardProp(options.forwardProps)
     : undefined
   const style = filterUndefined({
     base,
@@ -160,8 +159,7 @@ export function createStyled<
     const { theme } = useTheme<UsageTheme>()
     const componentStyleOptions = {
       className: system.utils.getClassName(
-        runIfFn(styledOptions.className, system) ??
-          toKebabCase(styledOptions.name ?? ""),
+        runIfFn(options.className, system) ?? toKebabCase(options.name ?? ""),
       ),
       style,
       transferProps,
@@ -169,8 +167,7 @@ export function createStyled<
     const registered = useRef<string[]>([])
     const htmlTag = isString(Component)
     const forwardAsChild =
-      styledOptions.forwardAsChild ||
-      styledOptions.forwardProps?.includes("asChild")
+      options.forwardAsChild || options.forwardProps?.includes("asChild")
     const [omittedProps, styleProps] = useSplitProps(props, shouldForwardProp)
     const [, rest] = useComponentStyle<any, {}>(
       omittedProps,
@@ -208,7 +205,7 @@ export function createStyled<
       className,
       !!serialized.styles ? `${cache.key}-${serialized.name}` : undefined,
     )
-    className = cx(className, styledOptions.target)
+    className = cx(className, options.target)
 
     if (!className) className = undefined
 

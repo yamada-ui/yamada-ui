@@ -117,7 +117,7 @@ export { MenuPropsContext, useMenuPropsContext }
 /**
  * `Menu` is a component that displays a common dropdown menu.
  *
- * @see https://yamada-ui.com/components/menu
+ * @see https://yamada-ui.com/docs/components/menu
  */
 export const MenuRoot: FC<MenuRootProps> = (props) => {
   const [styleContext, mergedProps] = useRootComponentProps(props)
@@ -269,14 +269,14 @@ export const MenuContextTrigger = withContext<"div", MenuContextTriggerProps>(
     return (
       <>
         <MenuAnchor>
-          <styled.div style={{ position: "absolute", ...rect }} />
+          <styled.div style={{ position: "fixed", ...rect }} />
         </MenuAnchor>
 
         <styled.div
           asChild
           {...getContextTriggerProps({
             onContextMenu: handlerAll(onContextMenu, (ev) => {
-              setRect({ left: ev.pageX, top: ev.pageY })
+              setRect({ left: ev.clientX, top: ev.clientY })
             }),
             ...rest,
           })}

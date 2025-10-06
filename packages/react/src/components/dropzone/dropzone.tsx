@@ -59,7 +59,7 @@ export { DropzonePropsContext, useDropzonePropsContext }
 /**
  * `Dropzone` is a component used for uploading files via drag and drop.
  *
- * @see https://yamada-ui.com/components/dropzone
+ * @see https://yamada-ui.com/docs/components/dropzone
  */
 export const DropzoneRoot = withProvider(
   ({

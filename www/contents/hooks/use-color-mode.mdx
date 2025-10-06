@@ -11,7 +11,7 @@ const { colorMode } = useColorMode()
 return <Text>The current colorMode is "{colorMode}"</Text>
 ```
 
-### Usage
+## Usage
 
 :::code-group
 
@@ -30,5 +30,38 @@ import { useColorMode } from "@workspaces/ui"
 :::
 
 ```tsx
-const { colorMode } = useColorMode()
+const { changeColorMode, colorMode, internalColorMode, toggleColorMode } =
+  useColorMode()
+```
+
+:::tip
+Color Mode overview is [here](/docs/styling/color-mode).
+:::
+
+### Switching Color Mode
+
+- `colorMode`: Provides the current color mode.
+- `internalColorMode`: Provides the current color mode including `system`.
+
+```tsx preview functional client
+const { colorMode, internalColorMode, changeColorMode, toggleColorMode } =
+  useColorMode()
+
+return (
+  <VStack>
+    <Text>
+      The current colorMode is "{colorMode}", internal colorMode is "
+      {internalColorMode}"
+    </Text>
+
+    <Wrap gap="md">
+      <Button onClick={() => changeColorMode("light")}>Light Mode</Button>
+      <Button onClick={() => changeColorMode("dark")}>Dark Mode</Button>
+      <Button onClick={() => changeColorMode("system")}>System</Button>
+      <Button onClick={toggleColorMode}>
+        Switch to {colorMode === "light" ? "Dark" : "Light"} Mode
+      </Button>
+    </Wrap>
+  </VStack>
+)
 ```

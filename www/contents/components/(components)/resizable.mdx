@@ -6,7 +6,517 @@ source: components/resizable
 style: components/resizable/resizable.style.ts
 ---
 
+```tsx preview
+<Resizable.Root h="md" borderWidth="1px">
+  <Resizable.Item as={Center}>One</Resizable.Item>
+
+  <Resizable.Trigger />
+
+  <Resizable.Item as={Center}>Two</Resizable.Item>
+</Resizable.Root>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Resizable } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Resizable } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Resizable } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Resizable.Root>
+  <Resizable.Item />
+  <Resizable.Trigger />
+</Resizable.Root>
+```
+
+### Change Variants
+
+```tsx preview
+<VStack>
+  <For each={["border", "spacer"]}>
+    {(variant) => (
+      <Resizable.Root
+        key={variant}
+        variant={variant}
+        h="md"
+        borderWidth={variant === "border" ? "1px" : undefined}
+      >
+        <Resizable.Item
+          as={Center}
+          borderWidth={variant === "spacer" ? "1px" : undefined}
+        >
+          {toTitleCase(variant)}
+        </Resizable.Item>
+
+        <Resizable.Trigger />
+
+        <Resizable.Item
+          as={Center}
+          borderWidth={variant === "spacer" ? "1px" : undefined}
+        >
+          Two
+        </Resizable.Item>
+      </Resizable.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<VStack>
+  <For each={["success", "warning"]}>
+    {(colorScheme) => (
+      <Resizable.Root
+        key={colorScheme}
+        variant="spacer"
+        colorScheme={colorScheme}
+        h="md"
+      >
+        <Resizable.Item as={Center} borderWidth="1px">
+          One
+        </Resizable.Item>
+
+        <Resizable.Trigger />
+
+        <Resizable.Item as={Center} borderWidth="1px">
+          Two
+        </Resizable.Item>
+      </Resizable.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### Change Orientation
+
+To change the orientation, set `orientation` to either `"horizontal"` or `"vertical"`. By default, `"horizontal"` is set.
+
+```tsx preview
+<VStack>
+  <For each={["horizontal", "vertical"]}>
+    {(orientation) => (
+      <Resizable.Root
+        key={orientation}
+        orientation={orientation}
+        h="md"
+        borderWidth="1px"
+      >
+        <Resizable.Item as={Center}>One</Resizable.Item>
+
+        <Resizable.Trigger />
+
+        <Resizable.Item as={Center}>Two</Resizable.Item>
+      </Resizable.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### Use Default Size
+
+To set the default size, set a numeric value (percentage) for `defaultSize` in `Resizable.Item`.
+
+```tsx preview
+<Resizable.Root h="md" borderWidth="1px">
+  <Resizable.Item as={Center} defaultSize={30}>
+    One
+  </Resizable.Item>
+
+  <Resizable.Trigger />
+
+  <Resizable.Item as={Center}>Two</Resizable.Item>
+</Resizable.Root>
+```
+
+### Use Min and Max Size
+
+To set the minimum and maximum sizes, set numeric values (percentage) for `minSize` and `maxSize` in `Resizable.Item`.
+
+```tsx preview
+<Resizable.Root h="md" borderWidth="1px">
+  <Resizable.Item as={Center} minSize={30} maxSize={70}>
+    One
+  </Resizable.Item>
+
+  <Resizable.Trigger />
+
+  <Resizable.Item as={Center}>Two</Resizable.Item>
+</Resizable.Root>
+```
+
+### Use Keyboard Step
+
+To set the keyboard step, set a numeric value (percentage) for `keyboardStep`.
+
+```tsx preview
+<Resizable.Root h="md" borderWidth="1px" keyboardStep={25}>
+  <Resizable.Item as={Center}>One</Resizable.Item>
+
+  <Resizable.Trigger />
+
+  <Resizable.Item as={Center}>Two</Resizable.Item>
+</Resizable.Root>
+```
+
+### Collapsible
+
+To make an item collapsible, set `collapsible` to `true`.
+
+Specify the minimum value before collapsing with `minSize`, and the value when collapsed with `collapsedSize`.
+
+```tsx preview
+<VStack>
+  <Resizable.Root h="md" borderWidth="1px">
+    <Resizable.Item
+      as={Center}
+      collapsedSize={15}
+      collapsible
+      defaultSize={30}
+      minSize={30}
+      maxSize={50}
+      onCollapse={() => {
+        console.log("collapsed item")
+      }}
+      onExpand={() => {
+        console.log("expand item")
+      }}
+    >
+      One
+    </Resizable.Item>
+
+    <Resizable.Trigger />
+
+    <Resizable.Item as={Center}>Two</Resizable.Item>
+  </Resizable.Root>
+
+  <Resizable.Root orientation="vertical" h="md" borderWidth="1px">
+    <Resizable.Item
+      as={Center}
+      collapsedSize={10}
+      collapsible
+      defaultSize={25}
+      minSize={25}
+      maxSize={30}
+      onCollapse={() => {
+        console.log("collapsed item")
+      }}
+      onExpand={() => {
+        console.log("expand item")
+      }}
+    >
+      One
+    </Resizable.Item>
+
+    <Resizable.Trigger />
+
+    <Resizable.Item as={Center}>Two</Resizable.Item>
+  </Resizable.Root>
+</VStack>
+```
+
+### Add Icons
+
+To add icons, set a `ReactNode` to the `icon` of `Resizable.Trigger`.
+
+```tsx preview
+<VStack>
+  <Resizable.Root h="md" borderWidth="1px">
+    <Resizable.Item as={Center}>One</Resizable.Item>
+
+    <Resizable.Trigger icon={<GripVerticalIcon />} />
+
+    <Resizable.Item as={Center}>Two</Resizable.Item>
+  </Resizable.Root>
+
+  <Resizable.Root variant="spacer" h="md" orientation="vertical">
+    <Resizable.Item as={Center} borderWidth="1px">
+      One
+    </Resizable.Item>
+
+    <Resizable.Trigger icon={<GripVerticalIcon />} />
+
+    <Resizable.Item as={Center} borderWidth="1px">
+      Two
+    </Resizable.Item>
+  </Resizable.Root>
+</VStack>
+```
+
+### Nested Structure
+
+```tsx preview
+<VStack>
+  <Resizable.Root h="md" borderWidth="1px">
+    <Resizable.Item as={Center}>Left</Resizable.Item>
+
+    <Resizable.Trigger />
+
+    <Resizable.Item>
+      <Resizable.Root orientation="vertical">
+        <Resizable.Item as={Center}>Top</Resizable.Item>
+
+        <Resizable.Trigger />
+
+        <Resizable.Item as={Center}>Bottom</Resizable.Item>
+      </Resizable.Root>
+    </Resizable.Item>
+  </Resizable.Root>
+
+  <Resizable.Root orientation="vertical" h="md" borderWidth="1px">
+    <Resizable.Item as={Center}>Top</Resizable.Item>
+
+    <Resizable.Trigger />
+
+    <Resizable.Item>
+      <Resizable.Root>
+        <Resizable.Item as={Center}>Left</Resizable.Item>
+
+        <Resizable.Trigger />
+
+        <Resizable.Item as={Center}>Right</Resizable.Item>
+      </Resizable.Root>
+    </Resizable.Item>
+  </Resizable.Root>
+</VStack>
+```
+
+### Disable
+
+To disable, set `disabled` to `true`.
+
+```tsx preview
+<Resizable.Root disabled h="md" borderWidth="1px">
+  <Resizable.Item as={Center}>One</Resizable.Item>
+
+  <Resizable.Trigger />
+
+  <Resizable.Item as={Center}>Two</Resizable.Item>
+
+  <Resizable.Trigger />
+
+  <Resizable.Item as={Center}>Three</Resizable.Item>
+</Resizable.Root>
+```
+
+```tsx preview
+<Resizable.Root h="md" borderWidth="1px">
+  <Resizable.Item as={Center}>One</Resizable.Item>
+
+  <Resizable.Trigger disabled />
+
+  <Resizable.Item as={Center}>Two</Resizable.Item>
+
+  <Resizable.Trigger />
+
+  <Resizable.Item as={Center}>Three</Resizable.Item>
+</Resizable.Root>
+```
+
+### Handle Resize Events
+
+If you want to handle resize events, use `onResize`. `onResize` provides the changed size and the previous size.
+
+```tsx preview
+<Resizable.Root h="md" borderWidth="1px">
+  <Resizable.Item
+    as={Center}
+    onResize={(size, prevSize) => {
+      console.log("resized", size, prevSize)
+    }}
+  >
+    One
+  </Resizable.Item>
+
+  <Resizable.Trigger />
+
+  <Resizable.Item as={Center}>Two</Resizable.Item>
+</Resizable.Root>
+```
+
+### Save Values to Local Storage
+
+To save values to local storage, set a key for saving to local storage in `storageKey`.
+
+:::warning
+When saving values to local storage or similar, you must set an `id` on `Resizable.Item` to associate each saved value with the `Resizable.Item`.
+:::
+
+:::warning
+If you dynamically mount `Resizable.Item`, you need to set a numerical value to `order` to determine the order of the items.
+:::
+
+```tsx preview functional client
+const [showLeft, showLeftControls] = useBoolean(true)
+const [showRight, showRightControls] = useBoolean(true)
+
+return (
+  <VStack>
+    <Resizable.Root h="md" borderWidth="1px" storageKey="persistence">
+      <Resizable.Item as={Center} id="one">
+        One
+      </Resizable.Item>
+
+      <Resizable.Trigger />
+
+      <Resizable.Item as={Center} id="two">
+        Two
+      </Resizable.Item>
+    </Resizable.Root>
+
+    <Wrap gap="md">
+      <Button onClick={showLeftControls.toggle}>
+        {showLeft ? "Hidden" : "Show"} Left
+      </Button>
+      <Button onClick={showRightControls.toggle}>
+        {showRight ? "Hidden" : "Show"} Right
+      </Button>
+    </Wrap>
+
+    <Resizable.Root h="md" borderWidth="1px" storageKey="conditional">
+      {showLeft ? (
+        <>
+          <Resizable.Item as={Center} id="left" minSize={10} order={1}>
+            Left
+          </Resizable.Item>
+
+          <Resizable.Trigger />
+        </>
+      ) : null}
+
+      <Resizable.Item as={Center} id="middle" minSize={10} order={2}>
+        Middle
+      </Resizable.Item>
+
+      {showRight ? (
+        <>
+          <Resizable.Trigger />
+
+          <Resizable.Item as={Center} id="right" minSize={10} order={3}>
+            Right
+          </Resizable.Item>
+        </>
+      ) : null}
+    </Resizable.Root>
+  </VStack>
+)
+```
+
+### Save Values to Cookies
+
+To save values to `cookies`, set `getItem` and `setItem` in `storage`.
+
+:::note
+This is an effective approach for sites rendered on the server side, such as with Next.js.
+:::
+
+```tsx preview functional client
+const storage = useMemo<Resizable.Storage>(
+  () => ({
+    getItem: (key) => {
+      const match = document.cookie.match(new RegExp(`(^| )${key}=([^;]+)`))
+
+      return match ? match[2] : null
+    },
+    setItem: (key, value) => {
+      document.cookie = `${key}=${value}; max-age=31536000; path=/`
+    },
+  }),
+  [],
+)
+
+return (
+  <Resizable.Root
+    h="md"
+    borderWidth="1px"
+    storageKey="persistence"
+    storage={storage}
+  >
+    <Resizable.Item as={Center} id="one">
+      One
+    </Resizable.Item>
+
+    <Resizable.Trigger />
+
+    <Resizable.Item as={Center} id="two">
+      Two
+    </Resizable.Item>
+  </Resizable.Root>
+)
+```
+
+### Control
+
+```tsx preview functional client
+const controlRef = useRef<Resizable.ItemControl>(null)
+
+return (
+  <VStack>
+    <Wrap gap="md">
+      <Button
+        onClick={() => {
+          if (controlRef.current) controlRef.current.collapse()
+        }}
+      >
+        Collapse "One"
+      </Button>
+
+      <Button
+        onClick={() => {
+          if (controlRef.current) controlRef.current.expand()
+        }}
+      >
+        Expand "One"
+      </Button>
+      <Button
+        onClick={() => {
+          if (controlRef.current) controlRef.current.resize(30)
+        }}
+      >
+        Resize "One" To 30
+      </Button>
+
+      <Button
+        onClick={() => {
+          if (controlRef.current) controlRef.current.resize(50)
+        }}
+      >
+        Resize "One" To 50
+      </Button>
+    </Wrap>
+
+    <Resizable.Root h="md" borderWidth="1px">
+      <Resizable.Item
+        as={Center}
+        controlRef={controlRef}
+        collapsible
+        collapsedSize={15}
+        minSize={30}
+        maxSize={50}
+      >
+        One
+      </Resizable.Item>
+
+      <Resizable.Trigger />
+
+      <Resizable.Item as={Center}>Two</Resizable.Item>
+    </Resizable.Root>
+  </VStack>
+)
+```
 
 ## Props
 

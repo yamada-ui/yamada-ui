@@ -150,7 +150,7 @@ To make it read-only, set `readOnly` to `true`.
 
 ### Change Direction
 
-To change the direction, set `orientation` to `horizontal` or `vertical`. By default, `vertical` is set.
+To change the direction, set `orientation` to `"horizontal"` or `"vertical"`. By default, `"vertical"` is set.
 
 ```tsx preview
 <VStack>
@@ -221,23 +221,13 @@ To use an optional indicator, set a `ReactNode` to `optionalIndicator`.
 <VStack>
   <Field.Root
     label="Email address"
-    optionalIndicator={
-      <Tag colorScheme="primary" size="sm">
-        optional
-      </Tag>
-    }
+    optionalIndicator={<Tag size="sm">optional</Tag>}
   >
     <Input type="email" placeholder="your email address" />
   </Field.Root>
 
   <Field.Root>
-    <Field.Label
-      optionalIndicator={
-        <Tag colorScheme="primary" size="sm">
-          optional
-        </Tag>
-      }
-    >
+    <Field.Label optionalIndicator={<Tag size="sm">optional</Tag>}>
       Email address
     </Field.Label>
     <Input type="email" placeholder="your email address" />

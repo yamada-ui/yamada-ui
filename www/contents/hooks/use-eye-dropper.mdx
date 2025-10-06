@@ -4,4 +4,56 @@ description: "`useEyeDropper` is a custom hook that opens the eye dropper tool a
 source: hooks/use-eye-dropper
 ---
 
-### Usage
+```tsx preview functional client
+const { supported, onOpen } = useEyeDropper()
+const [color, setColor] = useState("#FF0000")
+
+const onClick = async () => {
+  const result = await onOpen()
+
+  if (result) setColor(result.sRGBHex)
+}
+
+return (
+  <VStack alignItems="flex-start">
+    <HStack gap="sm">
+      <ColorSwatch color={color} />
+      <Text>{color}</Text>
+    </HStack>
+
+    <VStack alignItems="flex-start" gap="sm">
+      <Button onClick={onClick} disabled={!supported}>
+        Pick Color
+      </Button>
+
+      <Show when={!supported}>
+        <Text fontSize="sm" color="fg.muted">
+          EyeDropper API is not supported in this browser.
+        </Text>
+      </Show>
+    </VStack>
+  </VStack>
+)
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { useEyeDropper } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useEyeDropper } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useEyeDropper } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const { supported, onOpen } = useEyeDropper()
+```

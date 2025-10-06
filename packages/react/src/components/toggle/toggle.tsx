@@ -44,7 +44,7 @@ export {
 /**
  * `Toggle` is a two-state button that can be either on or off.
  *
- * @see https://yamada-ui.com/components/toggle
+ * @see https://yamada-ui.com/docs/components/toggle
  */
 export const Toggle = withProvider<"button", ToggleProps>(
   ({ errorBorderColor, icon, ...rest }: ToggleProps) => {

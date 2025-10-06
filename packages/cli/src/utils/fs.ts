@@ -47,17 +47,15 @@ export async function writeFile(
 }
 
 export async function writeFileSafe(
-  path: string,
+  targetPath: string,
   content: string,
   options?: WriteFileOptions,
 ) {
-  if (path.includes("/")) {
-    const dirPath = path.split("/").slice(0, -1).join("/")
+  const dirPath = path.dirname(targetPath)
 
-    if (!existsSync(dirPath)) await mkdir(dirPath, { recursive: true })
-  }
+  if (!existsSync(dirPath)) await mkdir(dirPath, { recursive: true })
 
-  await writeFile(path, content, options)
+  await writeFile(targetPath, content, options)
 }
 
 export async function validateDir(path: string) {

@@ -3,11 +3,13 @@ import type { Transform } from "sucrase"
 import { burger } from "@lucide/lab"
 import * as Components from "@yamada-ui/react"
 import { isFunction, Text } from "@yamada-ui/react"
+import { AnimatePresence } from "motion/react"
 import React, { isValidElement } from "react"
 import { transform as originalTransform } from "sucrase"
 import { wait } from "@/utils/async"
 
 const components = {
+  AnimatePresence,
   burger,
   React,
   wait,

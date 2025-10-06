@@ -133,7 +133,7 @@ return (
 
 ### 位置を変更する
 
-表示位置を変更する場合は、`placement`に`start-center`や`center-start`などを設定します。デフォルトでは、`center-center`が設定されています。
+表示位置を変更する場合は、`placement`に`"start-center"`や`"center-start"`などを設定します。デフォルトでは、`"center-center"`が設定されています。
 
 ```tsx preview functional
 const [placement, setPlacement] =
@@ -199,7 +199,7 @@ return (
 
 ### アニメーションを変更する
 
-表示または非表示のアニメーションを変更する場合は、`animation`に`block-start`や`inline-end`などを設定します。デフォルトでは、`scale`が設定されています。
+表示または非表示のアニメーションを変更する場合は、`animation`に`"block-start"`や`"inline-end"`などを設定します。デフォルトでは、`"scale"`が設定されています。
 
 ```tsx preview functional
 const [animationScheme, setAnimationScheme] =
@@ -293,7 +293,7 @@ return (
 
 ### オーバーフローの動作を変更する
 
-デフォルトでは、`inside`が設定されており、スクロールは`Modal.Body`内でのみ発生します。`outside`を設定すると、`Modal.Content`内でスクロールが発生します。
+デフォルトでは、`"inside"`が設定されており、スクロールは`Modal.Body`内でのみ発生します。`"outside"`を設定すると、`Modal.Content`内でスクロールが発生します。
 
 ```tsx preview functional
 const [scrollBehavior, setScrollBehavior] =
@@ -518,7 +518,7 @@ return (
 </Modal.Root>
 ```
 
-### ネストされたモーダル
+### ネストしたモーダル
 
 ```tsx preview
 <Modal.Root>

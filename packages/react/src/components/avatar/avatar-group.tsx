@@ -21,7 +21,7 @@ export interface AvatarGroupRootProps
 /**
  * `Avatar` is a component that displays a profile picture or an icon with initials representing a user.
  *
- * @see https://yamada-ui.com/components/avatar
+ * @see https://yamada-ui.com/docs/components/avatar
  */
 export const AvatarGroupRoot = component<"div", AvatarGroupRootProps>(
   (props) => {

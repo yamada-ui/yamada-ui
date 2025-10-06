@@ -32,15 +32,15 @@ const registryStore = new Map<string, Registry>()
 
 function getRegistryUrl(name: string) {
   if (name === "index") {
-    return path.join(REGISTRY_URL, "index.json")
+    return path.posix.join(REGISTRY_URL, "index.json")
   } else if (name === "theme") {
-    return path.join(REGISTRY_URL, "theme.json")
+    return path.posix.join(REGISTRY_URL, "theme.json")
   } else if (name.startsWith("use-")) {
-    return path.join(REGISTRY_URL, "hooks", `${name}.json`)
+    return path.posix.join(REGISTRY_URL, "hooks", `${name}.json`)
   } else if (name.endsWith("-provider")) {
-    return path.join(REGISTRY_URL, "providers", `${name}.json`)
+    return path.posix.join(REGISTRY_URL, "providers", `${name}.json`)
   } else {
-    return path.join(REGISTRY_URL, "components", `${name}.json`)
+    return path.posix.join(REGISTRY_URL, "components", `${name}.json`)
   }
 }
 

@@ -18,20 +18,16 @@ import {
   useRef,
 } from "react"
 import { createComponent, getClassName, mergeCSS, styled } from "../../core"
-import { bem, createContext, dataAttr, mergeRefs } from "../../utils"
+import { bem, dataAttr, mergeRefs } from "../../utils"
 import { getLoadingComponent, isLoadingScheme } from "../loading"
 import { Ripple, useRipple } from "../ripple"
 import { buttonStyle } from "./button.style"
 
-interface ButtonContext
+interface ComponentContext
   extends Pick<
     ButtonProps,
     "endIcon" | "iconProps" | "loadingIcon" | "loadingMessage" | "startIcon"
   > {}
-
-const [ButtonContext, useButtonContext] = createContext<ButtonContext>({
-  name: "ButtonContext",
-})
 
 const useButtonType = (value?: ElementType) => {
   const buttonRef = useRef(!value)
@@ -114,7 +110,9 @@ export interface ButtonProps
 
 const {
   component,
+  ComponentContext,
   PropsContext: ButtonPropsContext,
+  useComponentContext,
   usePropsContext: useButtonPropsContext,
   withContext,
 } = createComponent<ButtonProps, ButtonStyle>("button", buttonStyle)
@@ -124,7 +122,7 @@ export { ButtonPropsContext, useButtonPropsContext }
 /**
  * `Button` is an interactive component that allows users to perform actions such as submitting forms and toggling modals.
  *
- * @see https://yamada-ui.com/components/button
+ * @see https://yamada-ui.com/docs/components/button
  */
 export const Button = withContext<"button", ButtonProps>(
   ({
@@ -159,7 +157,7 @@ export const Button = withContext<"button", ButtonProps>(
     )
 
     return (
-      <ButtonContext value={context}>
+      <ComponentContext value={context}>
         <styled.button
           ref={mergeRefs(ref, buttonRef)}
           as={as}
@@ -186,14 +184,14 @@ export const Button = withContext<"button", ButtonProps>(
 
           <Ripple {...rippleProps} />
         </styled.button>
-      </ButtonContext>
+      </ComponentContext>
     )
   },
 )()
 
 const ButtonContent = component<"fragment", PropsWithChildren>(
   ({ children }) => {
-    const { endIcon, startIcon, iconProps } = useButtonContext()
+    const { endIcon, startIcon, iconProps } = useComponentContext()
 
     return (
       <>
@@ -214,7 +212,7 @@ interface ButtonLoadingProps extends HTMLStyledProps<"svg"> {}
 
 const ButtonLoading = component<"svg", ButtonLoadingProps>(
   (props) => {
-    const { loadingIcon, loadingMessage } = useButtonContext()
+    const { loadingIcon, loadingMessage } = useComponentContext()
 
     const css = useMemo<CSSObject>(
       () => ({

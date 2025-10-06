@@ -8,6 +8,7 @@ export const selectStyle = defineComponentSlotStyle({
     content: { ...menuStyle.base?.content, maxH: "xs" },
     field: {
       ...nativeSelectStyle.base?.field,
+      "--gap": "spaces.1",
       alignItems: "center",
       display: "flex",
     },
@@ -16,7 +17,28 @@ export const selectStyle = defineComponentSlotStyle({
     label: menuStyle.base?.label,
     option: menuStyle.base?.item,
     separator: menuStyle.base?.separator,
-    valueText: { truncated: true, userSelect: "none" },
+    valueText: { userSelect: "none" },
+  },
+
+  props: {
+    /**
+     * If `true`, wrap the value text.
+     *
+     * @default false
+     */
+    wrap: {
+      false: {
+        valueText: { truncated: true },
+      },
+      true: {
+        field: { py: "{gap}" },
+        valueText: {
+          display: "inline-flex",
+          flexWrap: "wrap",
+          gapY: "{gap}",
+        },
+      },
+    },
   },
 
   variants: {
@@ -91,6 +113,7 @@ export const selectStyle = defineComponentSlotStyle({
   defaultProps: {
     size: "md",
     variant: "outline",
+    wrap: false,
   },
 })
 

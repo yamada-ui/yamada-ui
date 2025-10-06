@@ -3,8 +3,10 @@
 import type { FocusEvent, KeyboardEvent } from "react"
 import type { HTMLProps, PropGetter, RequiredPropGetter } from "../../core"
 import type { Descendant } from "../../hooks/use-descendants"
+import type { Dict } from "../../utils"
 import dayjs from "dayjs"
 import { useCallback, useMemo, useRef } from "react"
+import { useSplitProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
 import { useI18n } from "../../providers/i18n-provider"
@@ -15,18 +17,31 @@ import {
   dataAttr,
   handlerAll,
   isArray,
+  isDate,
   isNumber,
+  isObject,
   mergeRefs,
   runKeyAction,
   useUpdateEffect,
   visuallyHiddenAttributes,
 } from "../../utils"
+import "dayjs/locale/ja"
 
-const DEFAULT_HOLIDAYS: Date[] = []
-const DEFAULT_WEEKEND_DAYS: number[] = [0, 6]
-const DEFAULT_FIRST_DAY_OF_WEEK: StartDayOfWeek = "sunday"
+export const DEFAULT_HOLIDAYS: Date[] = []
+export const DEFAULT_WEEKEND_DAYS: number[] = [0, 6]
+export const DEFAULT_FIRST_DAY_OF_WEEK: StartDayOfWeek = "sunday"
+export const DEFAULT_MAX_DATE: Date = new Date("2099-12-31")
+export const DEFAULT_MIN_DATE: Date = new Date("1900-01-01")
 
-export type MaybeDateValue = [Date?, Date?] | Date | Date[] | undefined
+export type MaybeDate = Date | Date[] | undefined | { end?: Date; start?: Date }
+export type MaybeDateValue<
+  Multiple extends boolean = false,
+  Range extends boolean = false,
+> = Range extends true
+  ? { end?: Date; start?: Date }
+  : Multiple extends true
+    ? Date[]
+    : Date | undefined
 export type StartDayOfWeek = "monday" | "sunday"
 export interface CalendarFormat {
   month?: string
@@ -191,20 +206,54 @@ export const sortDates = (dates: Date[], type: "asc" | "desc" = "asc") => {
   }
 }
 
-export const getAdjustedMonth = (
-  value: MaybeDateValue,
-  month: Date,
-  range: boolean,
-) => {
-  if (range) return month
+export const updateMaybeDateValue =
+  (value: Date, max?: number) =>
+  (prev: MaybeDate): MaybeDate => {
+    if (isArray(prev)) {
+      if (isIncludeDates(value, prev)) {
+        return prev.filter((prevValue) => !isSameDate(prevValue, value))
+      } else if (!isNumber(max) || prev.length < max) {
+        return [...prev, value]
+      } else {
+        return prev
+      }
+    } else if (isObject(prev) && !isDate(prev)) {
+      const { end, start } = prev
 
-  if (isArray(value)) {
+      if ((start && end) || !start) {
+        return { end: undefined, start: value }
+      } else {
+        if (isSameDate(start, value)) {
+          return { end: undefined, start: undefined }
+        } else if (isBeforeDate(value, start)) {
+          return { end: start, start: value }
+        } else {
+          return { end: value, start }
+        }
+      }
+    } else {
+      if (isSameDate(prev, value)) {
+        return undefined
+      } else {
+        return value
+      }
+    }
+  }
+
+export const getAdjustedMonth = (value: MaybeDate, month: Date) => {
+  if (isDate(value)) {
+    if (!isSameMonth(value, month)) month = dayjs(value).set("date", 1).toDate()
+  } else if (isArray(value)) {
     const lastValue = value.at(-1)
 
     if (lastValue && !isSameMonth(lastValue, month))
       month = dayjs(lastValue).set("date", 1).toDate()
-  } else {
-    if (!isSameMonth(value, month)) month = dayjs(value).set("date", 1).toDate()
+  } else if (isObject(value)) {
+    if (value.end) {
+      month = dayjs(value.end).set("date", 1).toDate()
+    } else if (value.start) {
+      month = dayjs(value.start).set("date", 1).toDate()
+    }
   }
 
   return month
@@ -247,8 +296,10 @@ const [CalendarContext, useCalendarContext] = createContext<CalendarContext>({
 
 export { CalendarContext, useCalendarContext }
 
-export interface UseCalendarProps<Y extends MaybeDateValue = Date>
-  extends Omit<HTMLProps, "defaultValue" | "onChange"> {
+export interface UseCalendarProps<
+  Multiple extends boolean = false,
+  Range extends boolean = false,
+> extends Omit<HTMLProps, "defaultValue" | "onChange"> {
   /**
    * The initial month of the calendar.
    *
@@ -258,7 +309,7 @@ export interface UseCalendarProps<Y extends MaybeDateValue = Date>
   /**
    * The initial value of the calendar.
    */
-  defaultValue?: Y
+  defaultValue?: MaybeDateValue<Multiple, Range>
   /**
    * If `true`, disables the calendar.
    *
@@ -309,11 +360,17 @@ export interface UseCalendarProps<Y extends MaybeDateValue = Date>
    */
   month?: Date
   /**
+   * If `true`, the calendar will be multiple.
+   *
+   * @default false
+   */
+  multiple?: Multiple
+  /**
    * If `true`, enables date range selection.
    *
    * @default false
    */
-  range?: boolean
+  range?: Range
   /**
    * Define the start day of the week.
    *
@@ -329,7 +386,7 @@ export interface UseCalendarProps<Y extends MaybeDateValue = Date>
   /**
    * The value of the calendar.
    */
-  value?: Y
+  value?: MaybeDateValue<Multiple, Range>
   /**
    * Define weekend days.
    *
@@ -339,25 +396,33 @@ export interface UseCalendarProps<Y extends MaybeDateValue = Date>
   /**
    * The callback invoked when value state changes.
    */
-  onChange?: (value: Y) => void
+  onChange?: (value: MaybeDateValue<Multiple, Range>) => void
   /**
    * The callback invoked when month state changes.
    */
   onChangeMonth?: (value: Date) => void
 }
 
-export const useCalendar = <Y extends MaybeDateValue = Date>({
+export const useCalendar = <
+  Multiple extends boolean = false,
+  Range extends boolean = false,
+>({
   defaultMonth = new Date(),
-  range = false,
-  defaultValue = range ? ([] as unknown as Y) : undefined,
+  multiple = false as Multiple,
+  range = false as Range,
+  defaultValue = (range
+    ? { end: undefined, start: undefined }
+    : multiple
+      ? []
+      : undefined) as MaybeDateValue<Multiple, Range>,
   disabled = false,
   excludeDate,
   format: formatProp,
   holidays = DEFAULT_HOLIDAYS,
   locale: localeProp,
   max,
-  maxDate = new Date("2099-12-31"),
-  minDate = new Date("1900-01-01"),
+  maxDate = DEFAULT_MAX_DATE,
+  minDate = DEFAULT_MIN_DATE,
   month: monthProp,
   startDayOfWeek = DEFAULT_FIRST_DAY_OF_WEEK,
   today = true,
@@ -366,7 +431,7 @@ export const useCalendar = <Y extends MaybeDateValue = Date>({
   onChange: onChangeProp,
   onChangeMonth: onChangeMonthProp,
   ...rest
-}: UseCalendarProps<Y> = {}) => {
+}: UseCalendarProps<Multiple, Range> = {}) => {
   if (dayjs(minDate).isAfter(dayjs(maxDate))) maxDate = minDate
 
   const { locale: defaultLocale, t } = useI18n("calendar")
@@ -393,9 +458,9 @@ export const useCalendar = <Y extends MaybeDateValue = Date>({
         defaultMonth = dayjs(minDate).set("date", 1).toDate()
 
       if (valueProp) {
-        defaultMonth = getAdjustedMonth(valueProp, defaultMonth, range)
+        defaultMonth = getAdjustedMonth(valueProp, defaultMonth)
       } else if (defaultValue) {
-        defaultMonth = getAdjustedMonth(defaultValue, defaultMonth, range)
+        defaultMonth = getAdjustedMonth(defaultValue, defaultMonth)
       }
 
       return defaultMonth
@@ -452,42 +517,21 @@ export const useCalendar = <Y extends MaybeDateValue = Date>({
 
     return monthItems
   }, [month, maxDate, minDate, locale, format])
-  const multiple = isArray(value) && !range
 
   const onChange = useCallback(
     (value: Date) => {
       if (isBeforeDate(value, minDate)) return
       if (isAfterDate(value, maxDate)) return
 
-      setValue((prev) => {
-        if (isArray(prev)) {
-          if (range) {
-            if (prev.length === 1) {
-              const start = prev[0]!
-
-              if (isSameDate(start, value)) return [] as unknown as Y
-
-              return sortDates([start, value]) as unknown as Y
-            } else {
-              return [value] as unknown as Y
-            }
-          } else {
-            if (isIncludeDates(value, prev as Date[])) {
-              return prev.filter(
-                (prevValue) => !isSameDate(prevValue, value),
-              ) as Y
-            } else if (!isNumber(max) || prev.length < max) {
-              return [...prev, value] as unknown as Y
-            } else {
-              return prev
-            }
-          }
-        } else {
-          return value as Y
-        }
-      })
+      setValue(
+        (prev) =>
+          updateMaybeDateValue(value, max)(prev) as MaybeDateValue<
+            Multiple,
+            Range
+          >,
+      )
     },
-    [max, maxDate, minDate, range, setValue],
+    [max, maxDate, minDate, setValue],
   )
 
   const onMonthChange = useCallback(
@@ -528,13 +572,19 @@ export const useCalendar = <Y extends MaybeDateValue = Date>({
     let descendant: Descendant<HTMLTableCellElement> | undefined
 
     if (value) {
-      if (isArray(value)) {
+      if (isDate(value)) {
+        if (isSameMonth(month, new Date())) index = new Date().getDate() - 1
+      } else if (isArray(value)) {
         const firstValue = value[0]
 
         if (firstValue && isSameMonth(month, firstValue))
           index = firstValue.getDate() - 1
-      } else if (isSameMonth(month, value)) {
-        index = value.getDate() - 1
+      } else if (isObject(value)) {
+        if (value.start && isSameMonth(month, value.start)) {
+          index = value.start.getDate() - 1
+        } else if (value.end && isSameMonth(month, value.end)) {
+          index = value.end.getDate() - 1
+        }
       }
     } else if (isSameMonth(month, new Date())) {
       index = new Date().getDate() - 1
@@ -559,8 +609,8 @@ export const useCalendar = <Y extends MaybeDateValue = Date>({
   }, [])
 
   useUpdateEffect(() => {
-    setMonth((prev) => getAdjustedMonth(value, prev, range))
-  }, [value, range])
+    setMonth((prev) => getAdjustedMonth(value, prev))
+  }, [value])
 
   const getRootProps: PropGetter = useCallback(
     (props = {}) => ({
@@ -733,7 +783,6 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
     maxDate,
     minDate,
     month,
-    range,
     startDayOfWeek,
     today: highlightToday,
     value: selectedValue,
@@ -758,12 +807,17 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
     [highlightToday, value],
   )
   const selected = useMemo(() => {
-    if (isArray(selectedValue)) {
+    if (isDate(selectedValue)) {
+      return isSameDate(selectedValue, value)
+    } else if (isArray(selectedValue)) {
       return selectedValue.some((selectedValue) =>
         isSameDate(selectedValue, value),
       )
-    } else {
-      return isSameDate(selectedValue, value)
+    } else if (isObject(selectedValue)) {
+      return (
+        isSameDate(selectedValue.start, value) ||
+        isSameDate(selectedValue.end, value)
+      )
     }
   }, [selectedValue, value])
   const disabled = useMemo(() => {
@@ -773,7 +827,6 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
     if (excludeDate?.(value)) return true
     if (
       isArray(selectedValue) &&
-      !range &&
       isNumber(max) &&
       selectedValue.length >= max &&
       !isIncludeDates(value, selectedValue as Date[])
@@ -781,37 +834,26 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
       return true
 
     return false
-  }, [
-    excludeDate,
-    max,
-    maxDate,
-    minDate,
-    range,
-    rootDisabled,
-    selectedValue,
-    value,
-  ])
+  }, [excludeDate, max, maxDate, minDate, rootDisabled, selectedValue, value])
   const between = useMemo(() => {
-    if (!range || !isArray(selectedValue)) return false
+    if (isDate(selectedValue) || isArray(selectedValue)) return false
 
-    const [start, end] = selectedValue
-
-    return isInRange(value, start, end)
-  }, [range, selectedValue, value])
+    return isInRange(value, selectedValue?.start, selectedValue?.end)
+  }, [selectedValue, value])
   const startValue = useMemo(() => {
-    if (!range || !isArray(selectedValue)) return false
+    if (isDate(selectedValue) || isArray(selectedValue)) return false
 
-    const [start, end] = selectedValue
+    const { end, start } = selectedValue ?? {}
 
     return start && end && isSameDate(value, start)
-  }, [range, selectedValue, value])
+  }, [selectedValue, value])
   const endValue = useMemo(() => {
-    if (!range || !isArray(selectedValue)) return false
+    if (isDate(selectedValue) || isArray(selectedValue)) return false
 
-    const [start, end] = selectedValue
+    const { end, start } = selectedValue ?? {}
 
     return start && end && isSameDate(value, end)
-  }, [range, selectedValue, value])
+  }, [selectedValue, value])
   const { descendants, register } = useCalendarDescendant({
     disabled: disabled,
   })
@@ -999,3 +1041,49 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
 }
 
 export type UseCalendarDayReturn = ReturnType<typeof useCalendarDay>
+
+const calendarProps: (keyof UseCalendarProps)[] = [
+  "defaultMonth",
+  "defaultValue",
+  "disabled",
+  "excludeDate",
+  "format",
+  "holidays",
+  "locale",
+  "max",
+  "maxDate",
+  "minDate",
+  "month",
+  "range",
+  "startDayOfWeek",
+  "today",
+  "value",
+  "weekendDays",
+  "onChange",
+  "onChangeMonth",
+]
+
+export const useCalendarProps = <
+  Y extends boolean = false,
+  M extends boolean = false,
+  D extends Dict = Dict,
+  H extends keyof UseCalendarProps<Y, M> = keyof UseCalendarProps<Y, M>,
+>(
+  props: D,
+  omitKeys?: H[],
+) => {
+  return useSplitProps(
+    props,
+    calendarProps.filter((key) => !omitKeys?.includes(key as H)),
+  ) as unknown as [
+    keyof UseCalendarProps<Y, M> extends H
+      ? UseCalendarProps<Y, M>
+      : Omit<UseCalendarProps<Y, M>, H>,
+    Omit<
+      M,
+      keyof UseCalendarProps<Y, M> extends H
+        ? keyof UseCalendarProps<Y, M>
+        : Exclude<keyof UseCalendarProps<Y, M>, H>
+    >,
+  ]
+}

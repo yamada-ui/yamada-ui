@@ -11,17 +11,6 @@ import type { LoadingStyle } from "./loading.style"
 import { createComponent } from "../../core"
 import { loadingStyle } from "./loading.style"
 
-export type LoadingMethod = "background" | "page" | "screen"
-
-export type LoadingScheme =
-  | "audio"
-  | "circles"
-  | "dots"
-  | "grid"
-  | "oval"
-  | "puff"
-  | "rings"
-
 export const initialProps: InitialProps<LoadingProps> = {
   "data-loading": "",
 }

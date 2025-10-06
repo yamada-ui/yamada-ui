@@ -16,34 +16,15 @@ import { getColorSchemeVar, getVar, transformInterpolation } from "../system"
 import { colorMix } from "./color-mix"
 import { conditions, getCondition } from "./conditions"
 import { styles, variableLengthProperties } from "./styles"
-import { isCSSToken } from "./utils"
+import {
+  insertImportant,
+  isCSSToken,
+  isImportant,
+  omitImportant,
+} from "./utils"
 
 function isVariableLength(key: string): boolean {
   return variableLengthProperties.includes(key as VariableLengthProperty)
-}
-
-function isImportant(value: any): boolean {
-  return (
-    isString(value) && (/\s*!important$/.test(value) || /\s*!$/.test(value))
-  )
-}
-
-function omitImportant(value: any): string {
-  return isString(value) ? value.replace(/(!important|!)$/, "").trim() : value
-}
-
-function insertImportant(value: any, style?: StyleConfig): any {
-  if (isString(value)) {
-    return value + " !important"
-  } else if (isObject(value)) {
-    if (!style?.properties) return value
-
-    for (const property of style.properties) {
-      value[property] += " !important"
-    }
-  }
-
-  return value
 }
 
 function isConditionalObject(breakpoints: Breakpoints) {

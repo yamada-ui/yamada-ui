@@ -10,6 +10,7 @@ import {
 import { Suspense, useMemo } from "react"
 import * as runtime from "react/jsx-runtime"
 import { langConditions } from "@/utils/i18n"
+import { NextLink } from "../next-link"
 import { AtRulePropsTable } from "./at-rule-props-table"
 import { Callout } from "./callout"
 import { Card, CardGroup } from "./card"
@@ -21,6 +22,7 @@ import { Contributors } from "./contributors"
 import { H1, H2, H3, H4, H5, H6 } from "./heading"
 import { HookList } from "./hook-list"
 import { Link } from "./link"
+import { LinkList } from "./link-list"
 import { PropsTable } from "./props-table"
 import { SemanticTokensTable } from "./semantic-tokens-table"
 import { Sponsors } from "./sponsors"
@@ -35,6 +37,7 @@ const mdxComponents: MDXComponents = {
   blockquote: (props) => (
     <Blockquote.Root css={{ "& p": { m: "0" } }} my="md" {...props} />
   ),
+  Box,
   callout: Callout,
   card: Card,
   "card-group": CardGroup,
@@ -70,6 +73,8 @@ const mdxComponents: MDXComponents = {
       {...props}
     />
   ),
+  LinkList,
+  NextLink,
   ol: (props) => <List.Root my="md" styleType="decimal" {...props} />,
   p: (props) => <Text color="fg.emphasized" fontSize="sm" my="md" {...props} />,
   pre: CodeBlock,

@@ -1,3 +1,4 @@
+export * from "./autocomplete.style"
 export {
   AutocompleteGroup,
   AutocompleteLabel,

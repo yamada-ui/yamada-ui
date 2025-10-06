@@ -11,7 +11,7 @@ const { theme } = useTheme()
 return <Text lineClamp={3}>{JSON.stringify(theme)}</Text>
 ```
 
-### 使い方
+## 使い方
 
 :::code-group
 
@@ -34,34 +34,41 @@ const { themeScheme, changeThemeScheme } = useTheme()
 ```
 
 :::note
-テーマをもっと学びたい場合は、[こちら](/docs/theming)をご覧ください。
+テーマについて詳しくは、[こちら](/docs/theming)をご覧ください。
 :::
 
-#### テーマを切り替える
+### テーマを切り替える
 
 ```tsx preview functional client
 const { themeScheme, changeThemeScheme } = useTheme()
 
 return (
-  <>
+  <VStack>
     <Text>The current scheme is "{themeScheme}"</Text>
 
-    <Wrap mt="md" gap="md">
+    <Wrap gap="md" alignItems="center">
+      <Badge colorScheme="primary">Primary</Badge>
+      <Badge colorScheme="secondary">Secondary</Badge>
+      <Tag colorScheme="primary">Primary</Tag>
+      <Tag colorScheme="secondary">Secondary</Tag>
+    </Wrap>
+
+    <Wrap gap="md">
       <Button onClick={() => changeThemeScheme("base")}>Base Theme</Button>
 
-      <Button colorScheme="pink" onClick={() => changeThemeScheme("pink")}>
-        Pink Theme
+      <Button colorScheme="red" onClick={() => changeThemeScheme("red")}>
+        Red Theme
       </Button>
 
-      <Button colorScheme="purple" onClick={() => changeThemeScheme("purple")}>
-        Purple Theme
+      <Button colorScheme="green" onClick={() => changeThemeScheme("green")}>
+        Green Theme
       </Button>
 
       <Button colorScheme="blue" onClick={() => changeThemeScheme("blue")}>
         Blue Theme
       </Button>
     </Wrap>
-  </>
+  </VStack>
 )
 ```
 

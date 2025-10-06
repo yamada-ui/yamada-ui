@@ -67,7 +67,7 @@ export { HueSliderPropsContext, useHueSliderPropsContext }
 /**
  * `HueSlider` is a component used to allow the user to select a color hue.
  *
- * @see https://yamada-ui.com/components/hue-slider
+ * @see https://yamada-ui.com/docs/components/hue-slider
  */
 export const HueSliderRoot = withProvider<"div", HueSliderRootProps>(
   ({

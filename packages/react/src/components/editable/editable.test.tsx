@@ -89,7 +89,7 @@ describe("<Editable />", () => {
       </Editable.Root>,
     )
     fireEvent.keyDown(getByTestId("EditableInput"), { key: "Escape" })
-    expect(onCancel).toHaveBeenCalledWith("Some text")
+    expect(onCancel).toHaveBeenCalledExactlyOnceWith("Some text")
   })
 
   test("calls onSubmit when Enter is pressed", () => {
@@ -102,7 +102,7 @@ describe("<Editable />", () => {
     )
     fireEvent.focus(getByTestId("EditablePreview"))
     fireEvent.keyDown(getByTestId("EditableInput"), { key: "Enter" })
-    expect(onSubmit).toHaveBeenCalledWith("Some text")
+    expect(onSubmit).toHaveBeenCalledExactlyOnceWith("Some text")
   })
 
   test("does not call onSubmit when Enter is pressed with Shift or Meta", () => {
@@ -135,7 +135,7 @@ describe("<Editable />", () => {
     fireEvent.change(getByTestId("EditableInput"), {
       target: { value: "New text" },
     })
-    expect(onChange).toHaveBeenCalledWith("New text")
+    expect(onChange).toHaveBeenCalledExactlyOnceWith("New text")
   })
 
   test("focuses out of the input when editing ends", () => {
@@ -160,7 +160,7 @@ describe("<Editable />", () => {
       </Editable.Root>,
     )
     fireEvent.focus(getByTestId("EditablePreview"))
-    expect(onEdit).toHaveBeenCalledWith()
+    expect(onEdit).toHaveBeenCalledExactlyOnceWith()
   })
 
   test("focus and calls onCancel when Escape is pressed", () => {
@@ -173,7 +173,7 @@ describe("<Editable />", () => {
     )
     fireEvent.focus(getByTestId("EditablePreview"))
     fireEvent.keyDown(getByTestId("EditableInput"), { key: "Escape" })
-    expect(onCancel).toHaveBeenCalledWith("Some text")
+    expect(onCancel).toHaveBeenCalledExactlyOnceWith("Some text")
   })
 
   test("focus and calls onSubmit when Enter is pressed", () => {
@@ -192,7 +192,7 @@ describe("<Editable />", () => {
     )
     fireEvent.focus(getByTestId("EditablePreview"))
     fireEvent.keyDown(getByTestId("EditableInput"), { key: "Enter" })
-    expect(onSubmit).toHaveBeenCalledWith("Some text")
+    expect(onSubmit).toHaveBeenCalledExactlyOnceWith("Some text")
     expect(onCancel).not.toHaveBeenCalled()
   })
 
@@ -212,7 +212,7 @@ describe("<Editable />", () => {
     )
     act(() => fireEvent.focus(getByTestId("EditablePreview")))
     act(() => fireEvent.blur(getByTestId("EditableInput")))
-    expect(onSubmit).toHaveBeenCalledWith("Some text")
+    expect(onSubmit).toHaveBeenCalledExactlyOnceWith("Some text")
     expect(onCancel).not.toHaveBeenCalled()
   })
 
@@ -233,7 +233,7 @@ describe("<Editable />", () => {
     act(() => fireEvent.focus(getByTestId("EditablePreview")))
     act(() => fireEvent.blur(getByTestId("EditableInput")))
     expect(onSubmit).not.toHaveBeenCalled()
-    expect(onCancel).toHaveBeenCalledWith("Some text")
+    expect(onCancel).toHaveBeenCalledExactlyOnceWith("Some text")
   })
 
   test("initially in correct edit mode", () => {

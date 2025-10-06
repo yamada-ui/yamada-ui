@@ -15,7 +15,7 @@ describe("useAsyncCallback", () => {
     expect(result.current[0]).toBeFalsy()
     const value = await result.current[1](5)
     expect(value).toBe(10)
-    expect(mockCallback).toHaveBeenCalledWith(5)
+    expect(mockCallback).toHaveBeenLastCalledWith(5)
   })
 
   test("should handle callback with processing", async () => {
@@ -45,7 +45,7 @@ describe("useAsyncCallback", () => {
     rerender(<Component />)
     expect(result.current[0]).toBeFalsy()
     expect(el).not.toBeDisabled()
-    expect(mockCallback).toHaveBeenCalledWith()
+    expect(mockCallback).toHaveBeenLastCalledWith()
   })
 
   test("should handle callback without processing", async () => {
@@ -77,7 +77,7 @@ describe("useAsyncCallback", () => {
     rerender(<Component />)
     expect(result.current[0]).toBeFalsy()
     expect(el).not.toBeDisabled()
-    expect(mockCallback).toHaveBeenCalledWith()
+    expect(mockCallback).toHaveBeenLastCalledWith()
   })
 
   test("should handle callback with loading", async () => {
@@ -114,6 +114,6 @@ describe("useAsyncCallback", () => {
       expect(document.querySelector("[data-loading]")).not.toBeInTheDocument()
     })
     expect(el).not.toBeDisabled()
-    expect(mockCallback).toHaveBeenCalledWith()
+    expect(mockCallback).toHaveBeenLastCalledWith()
   })
 })

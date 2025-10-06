@@ -72,7 +72,7 @@ describe("assignRef", () => {
   test("should call a ref callback with a value", () => {
     const refCallback = vi.fn()
     assignRef(refCallback, 123)
-    expect(refCallback).toHaveBeenCalledWith(123)
+    expect(refCallback).toHaveBeenCalledExactlyOnceWith(123)
   })
 })
 

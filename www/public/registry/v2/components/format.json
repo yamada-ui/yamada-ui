@@ -6,6 +6,11 @@
     "hooks": [],
     "providers": ["i18n-provider"]
   },
+  "dependents": {
+    "components": ["calendar", "date-picker"],
+    "hooks": [],
+    "providers": []
+  },
   "section": "components",
   "sources": [
     {

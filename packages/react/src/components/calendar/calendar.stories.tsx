@@ -70,11 +70,11 @@ export const Locale: Story = () => {
 }
 
 export const Format: Story = () => {
-  const format = useMemo(
+  const format = useMemo<Calendar.Format>(
     () => ({
-      month: "MMMM",
-      weekday: "ddd",
-      year: "YY",
+      month: "long",
+      weekday: "narrow",
+      year: "2-digit",
     }),
     [],
   )

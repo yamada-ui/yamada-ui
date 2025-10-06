@@ -72,7 +72,7 @@ export interface NoticeComponentProps {
  * @see https://yamada-ui.com/docs/hooks/use-notice
  */
 export const useNotice = (options: UseNoticeOptions = {}) => {
-  const { getLimit, updateLimit } = useNoticeContext()
+  const { getId, getLimit, updateLimit } = useNoticeContext()
   const { config } = useSystem()
 
   const systemOptions = useMemo(
@@ -115,7 +115,7 @@ export const useNotice = (options: UseNoticeOptions = {}) => {
       const resolvedOptions = {
         dismissible: closeStrategies.includes("drag") && closable,
         duration: duration ?? Number.POSITIVE_INFINITY,
-        toasterId: placement,
+        toasterId: getId(placement),
       }
 
       return toast.custom(
@@ -142,7 +142,7 @@ export const useNotice = (options: UseNoticeOptions = {}) => {
     }
 
     return notice
-  }, [getLimit, getOptions, updateLimit])
+  }, [getLimit, getOptions, getId, updateLimit])
 }
 
 export type UseNoticeReturn = ReturnType<typeof useNotice>

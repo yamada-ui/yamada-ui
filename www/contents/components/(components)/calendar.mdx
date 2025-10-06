@@ -84,11 +84,11 @@ import { Calendar } from "@workspaces/ui"
 To change the format, set the `format` object.
 
 ```tsx preview functional
-const format = useMemo(
+const format = useMemo<Calendar.Format>(
   () => ({
-    year: "YY",
-    month: "MMMM",
-    weekday: "ddd",
+    month: "long",
+    weekday: "narrow",
+    year: "2-digit",
   }),
   [],
 )

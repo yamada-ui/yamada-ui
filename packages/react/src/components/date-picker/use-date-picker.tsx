@@ -10,7 +10,12 @@ import type {
 import type { HTMLProps, HTMLRefAttributes, PropGetter } from "../../core"
 import type { UseComboboxProps } from "../../hooks/use-combobox"
 import type { Dict } from "../../utils"
-import type { Calendar, MaybeDateValue, UseCalendarProps } from "../calendar"
+import type {
+  Calendar,
+  CalendarFormat,
+  MaybeDateValue,
+  UseCalendarProps,
+} from "../calendar"
 import type { FieldProps } from "../field"
 import dayjs from "dayjs"
 import {
@@ -49,12 +54,10 @@ import {
   useCalendarProps,
 } from "../calendar"
 import { useFieldProps } from "../field"
+import { useDateTimeFormat } from "../format"
 
-export interface DatePickerFormat {
-  input?: string
-  month?: string
-  weekday?: string
-  year?: string
+export interface DatePickerFormat extends CalendarFormat {
+  input?: Intl.DateTimeFormatOptions | null
 }
 
 type InputAlign = "end" | "start"
@@ -222,7 +225,7 @@ export const useDatePicker = <
       openOnFocus = false,
       parseDate,
       pattern,
-      placeholder,
+      placeholder: placeholderProp,
       readOnly,
       render = defaultRender,
       separator = range ? "-" : ",",
@@ -236,12 +239,21 @@ export const useDatePicker = <
     dataProps,
     eventProps,
   } = useFieldProps(props)
+  const dateTimeFormat = useDateTimeFormat({ locale })
   const { calendarFormat, inputFormat } = useMemo(() => {
-    const { input: inputFormat = t("MMMM DD, YYYY"), ...calendarFormat } =
-      format ?? {}
+    const { input: inputFormat, ...calendarFormat } = format ?? {}
+    const defaultInputFormat: Intl.DateTimeFormatOptions = {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }
 
-    return { calendarFormat, inputFormat }
-  }, [format, t])
+    return {
+      calendarFormat,
+      inputFormat:
+        inputFormat !== null ? (inputFormat ?? defaultInputFormat) : undefined,
+    }
+  }, [format])
   const [calendarProps, rest] = useCalendarProps<Multiple, Range>(computedProps)
   const { excludeDate } = calendarProps
   const rootRef = useRef<HTMLDivElement>(null)
@@ -277,8 +289,7 @@ export const useDatePicker = <
     (value: string, start: Date = minDate, end: Date = maxDate) => {
       let date = parseDate?.(value)
 
-      if (!date && dayjs(value).isValid())
-        date = dayjs(value, inputFormat, locale).toDate()
+      if (!date && dayjs(value).isValid()) date = dayjs(value, locale).toDate()
 
       if (date == null) return undefined
       if (excludeDate?.(date)) return undefined
@@ -290,44 +301,39 @@ export const useDatePicker = <
 
       return date
     },
-    [
-      allowInputBeyond,
-      excludeDate,
-      inputFormat,
-      locale,
-      maxDate,
-      minDate,
-      parseDate,
-    ],
+    [allowInputBeyond, excludeDate, locale, maxDate, minDate, parseDate],
   )
   const dateToString = useCallback(
     (date?: Date) => {
       if (date == null) return ""
 
-      return dayjs(date).locale(locale).format(inputFormat)
+      return dateTimeFormat(date, inputFormat)
     },
-    [inputFormat, locale],
+    [dateTimeFormat, inputFormat],
   )
   const [inputValue, setInputValue] = useControllableState({
     defaultValue: () => {
       if (defaultInputValue) {
         if (isObject(defaultInputValue)) {
           if (dayjs(defaultInputValue.start).isValid())
-            defaultInputValue.start = dayjs(defaultInputValue.start)
-              .locale(locale)
-              .format(inputFormat)
+            defaultInputValue.start = dateTimeFormat(
+              dayjs(defaultInputValue.start).toDate(),
+              inputFormat,
+            )
 
           if (dayjs(defaultInputValue.end).isValid())
-            defaultInputValue.end = dayjs(defaultInputValue.end)
-              .locale(locale)
-              .format(inputFormat)
+            defaultInputValue.end = dateTimeFormat(
+              dayjs(defaultInputValue.end).toDate(),
+              inputFormat,
+            )
 
           return defaultInputValue
         } else {
           if (dayjs(defaultInputValue).isValid()) {
-            return dayjs(defaultInputValue)
-              .locale(locale)
-              .format(inputFormat) as MaybeInputValue<Range>
+            return dateTimeFormat(
+              dayjs(defaultInputValue).toDate(),
+              inputFormat,
+            ) as MaybeInputValue<Range>
           } else {
             return defaultInputValue as MaybeInputValue<Range>
           }
@@ -402,6 +408,22 @@ export const useDatePicker = <
       }
     })
   }, [dateToString, focused, max, render, separator, setValue, value])
+  const { endPlaceholder, startPlaceholder } = useMemo(() => {
+    if (range) {
+      const startPlaceholder =
+        placeholderProp ?? dateTimeFormat(new Date(), inputFormat)
+      const endPlaceholder =
+        placeholderProp ??
+        dateTimeFormat(dayjs().add(1, "day").toDate(), inputFormat)
+
+      return { endPlaceholder, startPlaceholder }
+    } else {
+      const placeholder =
+        placeholderProp ?? dateTimeFormat(new Date(), inputFormat)
+
+      return { endPlaceholder: placeholder, startPlaceholder: placeholder }
+    }
+  }, [dateTimeFormat, inputFormat, placeholderProp, range])
 
   const onChange = useCallback(
     (value: MaybeDateValue<Multiple, Range>) => {
@@ -769,14 +791,14 @@ export const useDatePicker = <
         }
 
         if (isObject(inputValue)) {
-          inputProps.placeholder = placeholder ?? inputFormat
-
           if (align === "start") {
             inputProps.ref = mergeRefs(props.ref, ref, startInputRef)
             inputProps.value = inputValue.start
+            inputProps.placeholder = startPlaceholder
           } else {
             inputProps.ref = mergeRefs(props.ref, ref, endInputRef)
             inputProps.value = inputValue.end
+            inputProps.placeholder = endPlaceholder
           }
         } else {
           inputProps.ref = mergeRefs(props.ref, ref, startInputRef)
@@ -790,13 +812,13 @@ export const useDatePicker = <
               ...inputProps.style,
             }
             inputProps.placeholder = !value.length
-              ? (placeholder ?? inputFormat)
+              ? startPlaceholder
               : undefined
             inputProps["data-max"] = dataAttr(
               isNumber(max) && value.length >= max,
             )
           } else {
-            inputProps.placeholder = placeholder ?? inputFormat
+            inputProps.placeholder = startPlaceholder
           }
         }
 
@@ -805,8 +827,8 @@ export const useDatePicker = <
       [
         allowInput,
         dataProps,
+        endPlaceholder,
         focused,
-        inputFormat,
         inputValue,
         interactive,
         max,
@@ -814,8 +836,8 @@ export const useDatePicker = <
         onInputChange,
         onKeyDown,
         onMouseDown,
-        placeholder,
         ref,
+        startPlaceholder,
         value,
       ],
     )

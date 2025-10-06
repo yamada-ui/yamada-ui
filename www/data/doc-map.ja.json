@@ -81,6 +81,11 @@
           "pathname": "/docs/components/create-component"
         },
         {
+          "title": "国際化",
+          "segment": "internationalization",
+          "pathname": "/docs/components/internationalization"
+        },
+        {
           "title": "コンポーネント",
           "segment": "(components)",
           "items": [
@@ -730,14 +735,9 @@
               "pathname": "/docs/components/for"
             },
             {
-              "title": "FormatByte",
-              "segment": "format-byte",
-              "pathname": "/docs/components/format-byte"
-            },
-            {
-              "title": "FormatNumber",
-              "segment": "format-number",
-              "pathname": "/docs/components/format-number"
+              "title": "Format",
+              "segment": "format",
+              "pathname": "/docs/components/format"
             },
             {
               "title": "Portal",
@@ -857,6 +857,11 @@
           "title": "useFormatByte",
           "segment": "use-format-byte",
           "pathname": "/docs/hooks/use-format-byte"
+        },
+        {
+          "title": "useFormatDateTime",
+          "segment": "use-format-date-time",
+          "pathname": "/docs/hooks/use-format-date-time"
         },
         {
           "title": "useFormatNumber",

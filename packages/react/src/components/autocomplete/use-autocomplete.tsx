@@ -34,6 +34,7 @@ import {
   dataAttr,
   handlerAll,
   isArray,
+  isComposing,
   isNumber,
   isString,
   isUndefined,
@@ -448,7 +449,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLInputElement>) => {
-      if (disabled || ev.nativeEvent.isComposing) return
+      if (disabled || isComposing(ev)) return
 
       const inputValue = cast<HTMLInputElement>(ev.target).value
 

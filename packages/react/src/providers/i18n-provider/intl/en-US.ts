@@ -56,7 +56,7 @@ export default {
     "Go to first page": "Go to first page",
     "Go to last page": "Go to last page",
     "Go to next page": "Go to next page",
-    "Go to page": "Go to page {value}",
+    "Go to page {value}": "Go to page {value}",
     "Go to previous page": "Go to previous page",
     Pagination: "Pagination",
     "{value} / {total}": "{value} / {total}",

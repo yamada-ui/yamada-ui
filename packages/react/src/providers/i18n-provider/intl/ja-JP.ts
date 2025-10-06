@@ -56,7 +56,7 @@ export default {
     "Go to first page": "最初のページに移動する",
     "Go to last page": "最後のページに移動する",
     "Go to next page": "次のページに移動する",
-    "Go to page": "{value}ページに移動する",
+    "Go to page {value}": "{value}ページに移動する",
     "Go to previous page": "前のページに移動する",
     Pagination: "ページネーション",
     "{value} / {total}": "{value} / {total}",

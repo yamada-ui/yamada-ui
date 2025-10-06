@@ -3,8 +3,9 @@
 import type { Formats, Options } from "intl-messageformat"
 import type { FC, ReactNode } from "react"
 import type { TextDirection } from "../../core"
-import type { Dict, Path, Value } from "../../utils"
+import type { AnyString, Dict, Path, Value } from "../../utils"
 import type { IcuArgs } from "./icu.types"
+import type { DefaultIntlData } from "./intl"
 import IntlMessageFormat from "intl-messageformat"
 import {
   createContext,
@@ -26,7 +27,7 @@ import {
   useSsr,
   useUpdateEffect,
 } from "../../utils"
-import DEFAULT_INTL from "./intl"
+import INTL from "./intl"
 
 export interface Language {
   dir: TextDirection
@@ -37,6 +38,8 @@ const DEFAULT_LANGUAGE: Language = {
   dir: DEFAULT_DIRECTION,
   locale: DEFAULT_LOCALE,
 }
+
+export const LOCALES = Object.keys(INTL) as readonly Locale[]
 
 export function getLanguage(locale?: string, dir?: TextDirection): Language {
   locale ??= createdDom() ? navigator.language : DEFAULT_LOCALE
@@ -52,10 +55,11 @@ export function getLanguage(locale?: string, dir?: TextDirection): Language {
   return { dir, locale }
 }
 
-type DefaultLocale = "en-US"
-type IntlData = (typeof DEFAULT_INTL)[DefaultLocale]
+type IntlData = DefaultIntlData
 type IntlKey = keyof IntlData
 type IntlPath = Path<IntlData>
+
+export type Locale = keyof typeof INTL
 
 type Translation<Y extends object = IntlData, M extends string = IntlPath> = <
   D extends M,
@@ -107,14 +111,14 @@ export interface I18nProviderProps {
    *
    * If not provided, the locale will be determined by the browser.
    */
-  locale?: string
+  locale?: AnyString | Locale
 }
 
 export const I18nProvider: FC<I18nProviderProps> = ({
   children,
   dir: forcedDir,
   formats,
-  intl = DEFAULT_INTL as Dict,
+  intl = INTL as Dict,
   intlMessageFormatOptions,
   locale: forcedLocale,
 }) => {

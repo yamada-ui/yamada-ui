@@ -81,12 +81,12 @@ import { DatePicker } from "@workspaces/ui"
 To change the format, set the `format` object.
 
 ```tsx preview functional
-const format = useMemo(
+const format = useMemo<DatePickerFormat>(
   () => ({
-    input: "YYYY/MM/DD",
-    month: "MMMM",
-    weekday: "ddd",
-    year: "YY",
+    input: null,
+    month: "long",
+    weekday: "narrow",
+    year: "2-digit",
   }),
   [],
 )

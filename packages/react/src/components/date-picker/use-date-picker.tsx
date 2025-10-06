@@ -677,29 +677,31 @@ export const useDatePicker = <
 
   const onBlur = useCallback(
     (ev: FocusEvent<HTMLInputElement>) => {
-      ev.preventDefault()
-
-      if (contains(contentRef.current, ev.relatedTarget)) return
-
       setFocused(false)
-      onClose()
 
-      if (isArray(value)) {
-        setInputValue("" as MaybeInputValue<Range>)
-      } else if (isObject(value) && !isDate(value)) {
-        setInputValue((prev) =>
-          isObject(prev)
-            ? ({
-                end: dateToString(value.end),
-                start: dateToString(value.start),
-              } as MaybeInputValue<Range>)
-            : prev,
-        )
+      if (
+        contains(rootRef.current, ev.relatedTarget) ||
+        contains(contentRef.current, ev.relatedTarget)
+      ) {
+        ev.preventDefault()
       } else {
-        setInputValue(dateToString(value) as MaybeInputValue<Range>)
+        if (isArray(value)) {
+          setInputValue("" as MaybeInputValue<Range>)
+        } else if (isObject(value) && !isDate(value)) {
+          setInputValue((prev) =>
+            isObject(prev)
+              ? ({
+                  end: dateToString(value.end),
+                  start: dateToString(value.start),
+                } as MaybeInputValue<Range>)
+              : prev,
+          )
+        } else {
+          setInputValue(dateToString(value) as MaybeInputValue<Range>)
+        }
       }
     },
-    [dateToString, onClose, setInputValue, value],
+    [dateToString, setInputValue, value],
   )
 
   const onClear = useCallback(() => {

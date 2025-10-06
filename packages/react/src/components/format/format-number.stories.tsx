@@ -1,4 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
+import { LOCALES } from "../../providers/i18n-provider"
+import { For } from "../for"
+import { Grid } from "../grid"
+import { Text } from "../text"
 import { Format } from "./"
 
 type Story = StoryFn<typeof Format.Number>
@@ -31,10 +35,16 @@ export const Currency: Story = () => {
 
 export const Locale: Story = () => {
   return (
-    <>
-      <Format.Number locale="de-DE" value={1450.45} />
-      <Format.Number locale="en-US" value={1450.45} />
-    </>
+    <Grid gapX="sm" templateColumns="auto 1fr">
+      <For each={LOCALES}>
+        {(locale) => (
+          <>
+            <Text color="fg.muted">{locale}</Text>
+            <Format.Number key={locale} locale={locale} value={1450.45} />
+          </>
+        )}
+      </For>
+    </Grid>
   )
 }
 

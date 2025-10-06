@@ -1,4 +1,9 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
+import { LOCALES } from "../../providers/i18n-provider"
+import { For } from "../for"
+import { Grid } from "../grid"
+import { VStack } from "../stack"
+import { Text } from "../text"
 import { Format } from "./"
 
 type Story = StoryFn<typeof Format.Byte>
@@ -12,12 +17,12 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <>
+    <VStack gap="0">
       <Format.Byte value={50} />
       <Format.Byte value={5000} />
       <Format.Byte value={5000000} />
       <Format.Byte value={5000000000} />
-    </>
+    </VStack>
   )
 }
 
@@ -27,19 +32,25 @@ export const Bits: Story = () => {
 
 export const Locale: Story = () => {
   return (
-    <>
-      <Format.Byte locale="de-DE" value={1450} />
-      <Format.Byte locale="zh-CN" value={1450} />
-    </>
+    <Grid gapX="sm" templateColumns="auto 1fr">
+      <For each={LOCALES}>
+        {(locale) => (
+          <>
+            <Text color="fg.muted">{locale}</Text>
+            <Format.Byte key={locale} locale={locale} value={1450} />
+          </>
+        )}
+      </For>
+    </Grid>
   )
 }
 
 export const UnitDisplay: Story = () => {
   return (
-    <>
+    <VStack gap="0">
       <Format.Byte unitDisplay="short" value={50300} />
       <Format.Byte unitDisplay="long" value={50300} />
       <Format.Byte unitDisplay="narrow" value={50300} />
-    </>
+    </VStack>
   )
 }

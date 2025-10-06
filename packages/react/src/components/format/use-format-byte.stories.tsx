@@ -1,4 +1,5 @@
 import type { Meta } from "@storybook/react-vite"
+import { VStack } from "../stack"
 import { Text } from "../text"
 import { useFormatByte } from "./use-format-byte"
 
@@ -15,12 +16,12 @@ export const Basic = () => {
   const formatted5GB = useFormatByte(5000000000)
 
   return (
-    <>
+    <VStack gap="0">
       <Text>{formatted50Bytes}</Text>
       <Text>{formatted5KB}</Text>
       <Text>{formatted5MB}</Text>
       <Text>{formatted5GB}</Text>
-    </>
+    </VStack>
   )
 }
 
@@ -35,10 +36,10 @@ export const Locale = () => {
   const formattedBytesCN = useFormatByte(1450, { locale: "zh-CN" })
 
   return (
-    <>
+    <VStack gap="0">
       <Text>{formattedBytesDE}</Text>
       <Text>{formattedBytesCN}</Text>
-    </>
+    </VStack>
   )
 }
 
@@ -54,10 +55,10 @@ export const UnitDisplay = () => {
   })
 
   return (
-    <>
+    <VStack gap="0">
       <Text>{formattedBytesShort}</Text>
       <Text>{formattedBytesLong}</Text>
       <Text>{formattedBytesNarrow}</Text>
-    </>
+    </VStack>
   )
 }

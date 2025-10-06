@@ -35,6 +35,67 @@ import { Format } from "@workspaces/ui"
 <Format.Number />
 ```
 
+### 日付
+
+:::note
+`Format.DateTime`は、内部で[Intl.DateTimeFormat](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat)を使用しています。
+:::
+
+#### ロケールを変更する
+
+ロケールを変更する場合は、[locale](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#locales)に値を設定します。
+
+```tsx preview
+<Grid templateColumns="auto 1fr" gap="sm">
+  <Text fontWeight="semibold">英語</Text>
+  <Format.DateTime value={new Date()} locale="en-US" />
+
+  <Text fontWeight="semibold">日本語</Text>
+  <Format.DateTime value={new Date()} locale="ja-JP" />
+
+  <Text fontWeight="semibold">ドイツ語</Text>
+  <Format.DateTime value={new Date()} locale="de-DE" />
+
+  <Text fontWeight="semibold">フランス語</Text>
+  <Format.DateTime value={new Date()} locale="fr-FR" />
+
+  <Text fontWeight="semibold">中国語</Text>
+  <Format.DateTime value={new Date()} locale="zh-CN" />
+</Grid>
+```
+
+#### 年に変換する
+
+年に変換する場合は、[year](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#year)に値を設定します。
+
+```tsx preview
+<Format.DateTime value={new Date()} year="numeric" />
+```
+
+#### 月に変換する
+
+月に変換する場合は、[month](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#month)に値を設定します。
+
+```tsx preview
+<Format.DateTime value={new Date()} month="long" />
+```
+
+#### 日に変換する
+
+日に変換する場合は、[day](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#day)に値を設定します。
+
+```tsx preview
+<Format.DateTime value={new Date()} day="2-digit" />
+```
+
+#### 曜日に変換する
+
+曜日に変換する場合は、[weekday](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#weekday)に値を設定します。
+
+```tsx preview
+<Format.DateTime value={new Date()} weekday="long" />
+```
+
 ### 数値
 
 :::note

@@ -2,23 +2,19 @@
 
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { FormatNumberStyle } from "./format-number.style"
+import type { FormatNumberOptions } from "./use-format-number"
 import { createComponent, styled } from "../../core"
 import { formatNumberStyle } from "./format-number.style"
 import { useFormatNumber } from "./use-format-number"
 
 export interface FormatNumberProps
-  extends Omit<HTMLStyledProps, "style">,
+  extends Omit<HTMLStyledProps<"span">, "style">,
     ThemeProps<FormatNumberStyle>,
-    Intl.NumberFormatOptions {
+    FormatNumberOptions {
   /**
    * The numeric value to be formatted.
    */
   value: number
-  /**
-   * The locale string to use for formatting.
-   * @default 'en-US'
-   */
-  locale?: string
 }
 
 const {

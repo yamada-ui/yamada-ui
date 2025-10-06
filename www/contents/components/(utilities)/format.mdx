@@ -35,7 +35,68 @@ import { Format } from "@workspaces/ui"
 <Format.Number />
 ```
 
-### Number
+### Dates
+
+:::note
+`Format.DateTime` internally uses [Intl.DateTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat).
+:::
+
+#### Changing the Locale
+
+To change the locale, set a value for [locale](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#locales).
+
+```tsx preview
+<Grid templateColumns="auto 1fr" gap="sm">
+  <Text fontWeight="semibold">en-US</Text>
+  <Format.DateTime value={new Date()} locale="en-US" />
+
+  <Text fontWeight="semibold">ja-JP</Text>
+  <Format.DateTime value={new Date()} locale="ja-JP" />
+
+  <Text fontWeight="semibold">de-DE</Text>
+  <Format.DateTime value={new Date()} locale="de-DE" />
+
+  <Text fontWeight="semibold">fr-FR</Text>
+  <Format.DateTime value={new Date()} locale="fr-FR" />
+
+  <Text fontWeight="semibold">zh-CN</Text>
+  <Format.DateTime value={new Date()} locale="zh-CN" />
+</Grid>
+```
+
+#### Converting to Year
+
+To convert to year, set a value for [year](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#year).
+
+```tsx preview
+<Format.DateTime value={new Date()} year="numeric" />
+```
+
+#### Converting to Month
+
+To convert to month, set a value for [month](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#month).
+
+```tsx preview
+<Format.DateTime value={new Date()} month="long" />
+```
+
+#### Converting to Day
+
+To convert to day, set a value for [day](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#day).
+
+```tsx preview
+<Format.DateTime value={new Date()} day="2-digit" />
+```
+
+#### Converting to Weekday
+
+To convert to weekday, set a value for [weekday](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#weekday).
+
+```tsx preview
+<Format.DateTime value={new Date()} weekday="long" />
+```
+
+### Numbers
 
 :::note
 `Format.Number` internally uses [Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat).
@@ -180,7 +241,7 @@ To change the sign display, set a value for [signDisplay](https://developer.mozi
 </VStack>
 ```
 
-### Byte
+### Bytes
 
 :::note
 `Format.Byte` internally uses [Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat).

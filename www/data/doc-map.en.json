@@ -859,6 +859,11 @@
           "pathname": "/docs/hooks/use-format-byte"
         },
         {
+          "title": "useFormatDateTime",
+          "segment": "use-format-date-time",
+          "pathname": "/docs/hooks/use-format-date-time"
+        },
+        {
           "title": "useFormatNumber",
           "segment": "use-format-number",
           "pathname": "/docs/hooks/use-format-number"

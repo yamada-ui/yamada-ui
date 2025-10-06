@@ -1,4 +1,5 @@
 import type { Meta } from "@storybook/react-vite"
+import { VStack } from "../stack"
 import { Text } from "../text"
 import { useFormatNumber } from "./use-format-number"
 
@@ -30,10 +31,10 @@ export const Locale = () => {
   })
 
   return (
-    <>
+    <VStack gap="0">
       <Text>{formattedNumberEn}</Text>
       <Text>{formattedNumberDE}</Text>
-    </>
+    </VStack>
   )
 }
 

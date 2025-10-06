@@ -27,7 +27,7 @@
         "required": true
       },
       "locale": {
-        "type": "string",
+        "type": "AnyString | Locale",
         "defaultValue": "\"en-US\"",
         "description": "The locale string to use for formatting.",
         "required": false
@@ -40,6 +40,39 @@
       "unitDisplay": {
         "type": "\"long\" | \"narrow\" | \"short\"",
         "description": "The unit display",
+        "required": false
+      }
+    },
+    "DateTime": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "value": {
+        "type": "Date",
+        "description": "The date time to format",
+        "required": true
+      },
+      "locale": {
+        "type": "AnyString | Locale",
+        "defaultValue": "\"en-US\"",
+        "description": "The locale string to use for formatting.",
         "required": false
       }
     },
@@ -70,7 +103,7 @@
         "required": true
       },
       "locale": {
-        "type": "string",
+        "type": "AnyString | Locale",
         "defaultValue": "\"en-US\"",
         "description": "The locale string to use for formatting.",
         "required": false
@@ -104,7 +137,7 @@
       "required": true
     },
     "locale": {
-      "type": "string",
+      "type": "AnyString | Locale",
       "defaultValue": "\"en-US\"",
       "description": "The locale string to use for formatting.",
       "required": false
@@ -117,6 +150,39 @@
     "unitDisplay": {
       "type": "\"long\" | \"narrow\" | \"short\"",
       "description": "The unit display",
+      "required": false
+    }
+  },
+  "FormatDateTime": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "value": {
+      "type": "Date",
+      "description": "The date time to format",
+      "required": true
+    },
+    "locale": {
+      "type": "AnyString | Locale",
+      "defaultValue": "\"en-US\"",
+      "description": "The locale string to use for formatting.",
       "required": false
     }
   },
@@ -147,7 +213,7 @@
       "required": true
     },
     "locale": {
-      "type": "string",
+      "type": "AnyString | Locale",
       "defaultValue": "\"en-US\"",
       "description": "The locale string to use for formatting.",
       "required": false

@@ -1,0 +1,276 @@
+---
+title: Format
+description: "`Format` is used to format dates, numbers, and bytes according to a specific locale."
+storybook: components-format
+source: components/format
+---
+
+```tsx preview
+<VStack gap="0">
+  <Format.Byte value={1234567} />
+  <Format.Number value={1234567.89} />
+</VStack>
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { Format } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Format } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Format } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Format.Byte />
+<Format.Number />
+```
+
+### Number
+
+:::note
+`Format.Number` internally uses [Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat).
+:::
+
+#### Changing the Locale
+
+To change the locale, set a value for [locale](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales).
+
+```tsx preview
+<Grid templateColumns="auto 1fr" gap="sm">
+  <Text fontWeight="semibold">en-US</Text>
+  <Format.Number value={1234567.89} locale="en-US" />
+
+  <Text fontWeight="semibold">ja-JP</Text>
+  <Format.Number value={1234567.89} locale="ja-JP" />
+
+  <Text fontWeight="semibold">de-DE</Text>
+  <Format.Number value={1234567.89} locale="de-DE" />
+
+  <Text fontWeight="semibold">fr-FR</Text>
+  <Format.Number value={1234567.89} locale="fr-FR" />
+
+  <Text fontWeight="semibold">zh-CN</Text>
+  <Format.Number value={1234567.89} locale="zh-CN" />
+</Grid>
+```
+
+#### Converting to Currency
+
+To convert to currency, set `"currency"` for [style](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#style).
+
+```tsx preview
+<Grid templateColumns="auto 1fr" gap="sm">
+  <Text fontWeight="semibold">USD</Text>
+  <Format.Number
+    value={1234567.89}
+    style="currency"
+    currency="USD"
+    locale="en-US"
+  />
+
+  <Text fontWeight="semibold">EUR</Text>
+  <Format.Number
+    value={1234567.89}
+    style="currency"
+    currency="EUR"
+    locale="de-DE"
+  />
+
+  <Text fontWeight="semibold">JPY</Text>
+  <Format.Number
+    value={1234567.89}
+    style="currency"
+    currency="JPY"
+    locale="ja-JP"
+  />
+</Grid>
+```
+
+#### Converting to Units
+
+To convert to units, set `"unit"` for [style](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#style).
+
+```tsx preview
+<VStack gap="sm">
+  <Format.Number value={100} style="unit" unit="kilogram" />
+  <Format.Number value={100} style="unit" unit="celsius" unitDisplay="long" />
+  <Format.Number
+    value={100}
+    style="unit"
+    unit="kilometer-per-hour"
+    unitDisplay="narrow"
+  />
+</VStack>
+```
+
+#### Converting to Percent
+
+To convert to percent, set `"percent"` for [style](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#style).
+
+```tsx preview
+<VStack gap="sm">
+  <Format.Number value={0.45} style="percent" />
+  <Format.Number value={0.45} style="percent" minimumFractionDigits={2} />
+</VStack>
+```
+
+#### Converting Notation
+
+To convert notation, set a value for [notation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#notation).
+
+```tsx preview
+<VStack gap="sm">
+  <Format.Number value={1234567.89} notation="standard" />
+  <Format.Number value={1234567.89} notation="scientific" />
+  <Format.Number value={1234567.89} notation="engineering" />
+  <Format.Number value={1234567.89} notation="compact" />
+</VStack>
+```
+
+#### Controlling Decimal Places
+
+To control the number of decimal places, use [minimumFractionDigits](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#minimumfractiondigits) and [maximumFractionDigits](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#maximumfractiondigits).
+
+```tsx preview
+<VStack gap="sm">
+  <Format.Number
+    minimumFractionDigits={2}
+    maximumFractionDigits={2}
+    value={1234.5}
+  />
+  <Format.Number
+    minimumFractionDigits={0}
+    maximumFractionDigits={3}
+    value={1234.567}
+  />
+  <Format.Number
+    minimumFractionDigits={4}
+    maximumFractionDigits={4}
+    value={1234}
+  />
+</VStack>
+```
+
+#### Disabling Grouping
+
+To disable grouping, set `false` for [useGrouping](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#usegrouping).
+
+```tsx preview
+<Format.Number value={1234567.89} useGrouping={false} />
+```
+
+#### Changing the Sign Display
+
+To change the sign display, set a value for [signDisplay](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#signdisplay).
+
+```tsx preview
+<VStack gap="sm">
+  <Format.Number value={1234.5} signDisplay="always" />
+  <Format.Number value={-1234.5} signDisplay="exceptZero" />
+</VStack>
+```
+
+### Byte
+
+:::note
+`Format.Byte` internally uses [Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat).
+:::
+
+#### Automatic Unit Selection
+
+`Format.Byte` automatically selects the most appropriate unit (`byte`, `kB`, `MB`, `GB`, `TB`) based on the byte value size.
+
+```tsx preview
+<VStack gap="sm">
+  <Format.Byte value={512} />
+  <Format.Byte value={1024} />
+  <Format.Byte value={1024 * 1024} />
+  <Format.Byte value={1024 * 1024 * 1024} />
+  <Format.Byte value={1024 * 1024 * 1024 * 1024} />
+</VStack>
+```
+
+#### Changing the Locale
+
+To change the locale, set a value for [locale](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales).
+
+```tsx preview
+<Grid templateColumns="auto 1fr" gap="sm">
+  <Text fontWeight="semibold">en-US</Text>
+  <Format.Byte value={1024} locale="en-US" unitDisplay="long" />
+
+  <Text fontWeight="semibold">ja-JP</Text>
+  <Format.Byte value={1024} locale="ja-JP" unitDisplay="long" />
+
+  <Text fontWeight="semibold">de-DE</Text>
+  <Format.Byte value={1024} locale="de-DE" unitDisplay="long" />
+
+  <Text fontWeight="semibold">fr-FR</Text>
+  <Format.Byte value={1024} locale="fr-FR" unitDisplay="long" />
+
+  <Text fontWeight="semibold">zh-CN</Text>
+  <Format.Byte value={1024} locale="zh-CN" unitDisplay="long" />
+</Grid>
+```
+
+#### Unit Format
+
+To convert units, set `unit` to either `"byte"` or `"bit"`. The default is `"byte"`.
+
+```tsx preview
+<Grid templateColumns="auto 1fr" gap="sm">
+  <Text fontWeight="semibold">Bytes</Text>
+  <Format.Byte value={1024} unit="byte" />
+
+  <Text fontWeight="semibold">Bits</Text>
+  <Format.Byte value={1024} unit="bit" />
+</Grid>
+```
+
+#### Changing the Unit Display
+
+To change the unit display, set a value for [unitDisplay](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#unitdisplay).
+
+```tsx preview
+<Grid templateColumns="auto 1fr" gap="sm">
+  <Text fontWeight="semibold">Short</Text>
+  <Format.Byte value={1024} unitDisplay="short" />
+
+  <Text fontWeight="semibold">Narrow</Text>
+  <Format.Byte value={1024} unitDisplay="narrow" />
+
+  <Text fontWeight="semibold">Long</Text>
+  <Format.Byte value={1024} unitDisplay="long" />
+</Grid>
+```
+
+### Set the Locale for the Entire Application
+
+If you want to set the locale for the entire application, set the `locale` for the `UIProvider`.
+
+```tsx
+import { UIProvider } from "@yamada-ui/react"
+
+const App = () => {
+  return (
+    <UIProvider locale="en-US">
+      <Format.Byte value={1024} />
+      <Format.Number value={1234567.89} />
+    </UIProvider>
+  )
+}
+```
+
+## Props
+
+<PropsTable name="format" />

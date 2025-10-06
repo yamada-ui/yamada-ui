@@ -41,9 +41,9 @@ const {
 export { FormatBytePropsContext, useFormatBytePropsContext }
 
 /**
- * `FormatByte` is used to format bytes to a human-readable format.
+ * `Format` is used to format dates, numbers, and bytes according to a specific locale.
  *
- * @see https://yamada-ui.com/docs/components/format-byte
+ * @see https://yamada-ui.com/docs/components/format
  */
 export const FormatByte = withContext(
   ({ locale, unit, unitDisplay, value, ...rest }) => {

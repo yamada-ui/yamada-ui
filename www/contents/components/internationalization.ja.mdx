@@ -1,0 +1,196 @@
+---
+title: 国際化
+description: 世界中のユーザーの言語と文化を尊重してコンポーネントを適応させることは、アプリケーションをより多くの人々に利用してもらうための重要な方法です。Yamada UIは、30以上の言語をサポートしています。
+---
+
+## 概要
+
+国際化とは、コードとユーザーインターフェイスをローカリゼーションに対応させるように構造化するプロセスです。Yamada UIは、組み込まれている文字列の翻訳から日付・数値のフォーマットまで、多くのコンポーネントで様々なローカリゼーションをサポートしています。Yamada UIのコンポーネントを使用することで、これらの国際化が自動的に処理されます。
+
+## ローカリゼーション
+
+ローカリゼーションとは、アプリケーションを特定の言語または地域に適応させるプロセスです。文字の翻訳に加えて、日付・数値のフォーマットからテキスト検索などの調整も含まれます。Yamada UIは、30以上のロケールでローカリゼーションをサポートしています。
+
+:::note
+Yamada UIは、内部で[Intl MessageFormat](https://formatjs.github.io/docs/intl-messageformat)を使用しています。
+:::
+
+## ロケールを変更する
+
+ロケールを変更する場合は、`UIProvider`の`locale`に値を設定します。
+
+```tsx {5}
+import { UIProvider } from "@yamada-ui/react"
+
+const App = () => {
+  return (
+    <UIProvider locale="ja-JP">
+      <App />
+    </UIProvider>
+  )
+}
+```
+
+:::note
+Yamada UIは、ロケールを[navigator.language](https://developer.mozilla.org/ja/docs/Web/API/Navigator/language)と[Intl.DateTimeFormat.supportedLocalesOf](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/supportedLocalesOf)を使用して自動的に検出します。検出後も、[languagechange](https://developer.mozilla.org/ja/docs/Web/API/Window/languagechange_event)を使用して自動的に更新します。そのため、アプリケーションでユーザーに合わせたロケールに設定する場合は、`locale`を設定する必要はありません。
+:::
+
+## ラベルを変更する
+
+ラベルを変更する場合は、[CLI](/docs/get-started/cli)を使用して`i18n-provider`をダウンロードする必要があります。
+
+:::warning
+下記のコマンドを実行する前に、`@yamada-ui/cli`をインストールして`init`コマンドを実行する必要があります。詳しくは、[こちら](/docs/get-started/cli)をご覧ください。
+:::
+
+::::steps
+
+### プロバイダーを追加する
+
+`add`コマンドを使用して、`i18n-provider`を追加します。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli add i18n-provider
+```
+
+```bash [npm]
+npm yamada-cli add i18n-provider
+```
+
+```bash [yarn]
+yarn yamada-cli add i18n-provider
+```
+
+```bash [bun]
+bun yamada-cli add i18n-provider
+```
+
+:::
+
+### 言語データを変更する
+
+`i18n-provider`の`intl`フォルダに各言語のデータがあります。変更する言語のデータを変更します。
+
+```ts title="intl/ja-JP.ts" {4}
+export default {
+  /* ... */
+  avatar: {
+    "Avatar Icon": "ユーザーアイコン",
+  },
+  /* ... */
+} as const
+```
+
+:::warning
+言語のデータは、英語が基準になっており、英語のキーが各言語のデータと紐づきます。`en-US.ts`を変更した場合は、すべて言語データを修正する必要があります。変更しない場合、言語データの紐付けは失われてしまいます。
+:::
+
+::::
+
+## 言語を追加する
+
+言語を追加する場合は、[CLI](/docs/get-started/cli)を使用して`i18n-provider`をダウンロードする必要があります。
+
+:::warning
+下記のコマンドを実行する前に、`@yamada-ui/cli`をインストールして`init`コマンドを実行する必要があります。詳しくは、[こちら](/docs/get-started/cli)をご覧ください。
+:::
+
+::::steps
+
+### プロバイダーを追加する
+
+`add`コマンドを使用して、`i18n-provider`を追加します。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli add i18n-provider
+```
+
+```bash [npm]
+npm yamada-cli add i18n-provider
+```
+
+```bash [yarn]
+yarn yamada-cli add i18n-provider
+```
+
+```bash [bun]
+bun yamada-cli add i18n-provider
+```
+
+:::
+
+### 言語データを追加する
+
+`i18n-provider`の`intl`フォルダに各言語のデータがあります。新しい言語のデータを追加します。データは、`intl/en-US.ts`をコピー・ペーストして各値を変更します。
+
+```ts title="intl/vi-VN.ts"
+export default {
+  autocomplete: {
+    "Clear value": "Giá trị xóa",
+    "No results found": "Không tìm thấy kết quả",
+  },
+  /* ... */
+} as const
+```
+
+### インデックスを更新する
+
+`intl/index.ts`に追加した言語データを追加します。
+
+```ts title="intl/index.ts" {3,5}
+import enUS from "./en-US"
+import jaJP from "./ja-JP"
+import viVN from "./vi-VN"
+
+const intl = { "en-US": enUS, "ja-JP": jaJP, "vi-VN": viVN }
+
+export default intl
+```
+
+::::
+
+## サポートされているロケール
+
+- 日本語（日本）
+- 英語（イギリス）
+- 英語（米国）
+- アラビア語（アラブ首長国連邦）
+- ブルガリア語（ブルガリア）
+- クロアチア語（クロアチア）
+- チェコ語（チェコ共和国）
+- デンマーク語（デンマーク）
+- オランダ語（オランダ）
+- エストニア語（エストニア）
+- フィンランド語（フィンランド）
+- フランス語（カナダ）
+- フランス語（フランス）
+- ドイツ語（ドイツ）
+- ギリシャ語（ギリシャ）
+- ヘブライ語（イスラエル）
+- ハンガリー語（ハンガリー）
+- イタリア語（イタリア）
+- ラトビア語（ラトビア）
+- リトアニア語（リトアニア）
+- ノルウェー語（ノルウェー）
+- ポーランド語（ポーランド）
+- ポルトガル語（ブラジル）
+- ルーマニア語（ルーマニア）
+- ロシア語（ロシア）
+- セルビア語（セルビア）
+- スロバキア語（スロバキア）
+- スロベニア語（スロベニア）
+- スペイン語（スペイン）
+- スウェーデン語（スウェーデン）
+- トルコ語（トルコ）
+- ウクライナ語（ウクライナ）
+- 中国語（簡体字）
+- 中国語（繁体字）
+- 韓国語（韓国）
+
+## バンドルサイズの最適化
+
+Yamada UIは、デフォルトで上記のすべての言語のデータを含んでいます。これは、多くのユーザーにとってそのまま使えるものですが、バンドルサイズが大きくなります。アプリケーションがこれらのすべてのロケールをサポートしない場合は、`intl/index.ts`から不要なデータを削除することで、バンドルサイズを最適化することができます。

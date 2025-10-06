@@ -1,0 +1,44 @@
+{
+  "$schema": "https://v2.yamada-ui.com/registry/v2/schema.json",
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": ["i18n-provider"]
+  },
+  "section": "components",
+  "sources": [
+    {
+      "name": "format-byte.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const formatByteStyle = defineComponentStyle({})\n\nexport type FormatByteStyle = typeof formatByteStyle\n"
+    },
+    {
+      "name": "format-byte.tsx",
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { FormatByteStyle } from \"./format-byte.style\"\nimport { createComponent, styled } from \"@yamada-ui/react\"\nimport { formatByteStyle } from \"./format-byte.style\"\nimport { useFormatByte } from \"./use-format-byte\"\n\nexport interface FormatByteProps\n  extends HTMLStyledProps,\n    ThemeProps<FormatByteStyle> {\n  /**\n   * The byte size to format\n   */\n  value: number\n  /**\n   * The locale string to use for formatting.\n   *\n   * @default 'en-US'\n   */\n  locale?: string\n  /**\n   * The unit granularity to display\n   */\n  unit?: \"bit\" | \"byte\"\n  /**\n   * The unit display\n   */\n  unitDisplay?: \"long\" | \"narrow\" | \"short\"\n}\n\nconst {\n  PropsContext: FormatBytePropsContext,\n  usePropsContext: useFormatBytePropsContext,\n  withContext,\n} = createComponent<FormatByteProps, FormatByteStyle>(\n  \"format-byte\",\n  formatByteStyle,\n)\n\nexport { FormatBytePropsContext, useFormatBytePropsContext }\n\n/**\n * `Format` is used to format dates, numbers, and bytes according to a specific locale.\n *\n * @see https://yamada-ui.com/docs/components/format\n */\nexport const FormatByte = withContext(\n  ({ locale, unit, unitDisplay, value, ...rest }) => {\n    const text = useFormatByte(value, { locale, unit, unitDisplay })\n\n    return <styled.span {...rest}>{text}</styled.span>\n  },\n)()\n"
+    },
+    {
+      "name": "format-number.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const formatNumberStyle = defineComponentStyle({})\n\nexport type FormatNumberStyle = typeof formatNumberStyle\n"
+    },
+    {
+      "name": "format-number.tsx",
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { FormatNumberStyle } from \"./format-number.style\"\nimport { createComponent, styled } from \"@yamada-ui/react\"\nimport { formatNumberStyle } from \"./format-number.style\"\nimport { useFormatNumber } from \"./use-format-number\"\n\nexport interface FormatNumberProps\n  extends Omit<HTMLStyledProps, \"style\">,\n    ThemeProps<FormatNumberStyle>,\n    Intl.NumberFormatOptions {\n  /**\n   * The numeric value to be formatted.\n   */\n  value: number\n  /**\n   * The locale string to use for formatting.\n   * @default 'en-US'\n   */\n  locale?: string\n}\n\nconst {\n  PropsContext: FormatNumberPropsContext,\n  usePropsContext: useFormatNumberPropsContext,\n  withContext,\n} = createComponent<FormatNumberProps, FormatNumberStyle>(\n  \"format-number\",\n  formatNumberStyle,\n)\n\nexport { FormatNumberPropsContext, useFormatNumberPropsContext }\n\n/**\n * `Format` is used to format dates, numbers, and bytes according to a specific locale.\n *\n * @see https://yamada-ui.com/docs/components/format\n */\nexport const FormatNumber = withContext<\"span\", FormatNumberProps>(\n  ({\n    style,\n    compactDisplay,\n    currency,\n    currencyDisplay,\n    currencySign,\n    locale,\n    localeMatcher,\n    maximumFractionDigits,\n    maximumSignificantDigits,\n    minimumFractionDigits,\n    minimumIntegerDigits,\n    minimumSignificantDigits,\n    notation,\n    numberingSystem,\n    roundingIncrement,\n    roundingMode,\n    roundingPriority,\n    signDisplay,\n    trailingZeroDisplay,\n    unit,\n    unitDisplay,\n    useGrouping,\n    value,\n    ...rest\n  }) => {\n    const text = useFormatNumber(value, {\n      style,\n      compactDisplay,\n      currency,\n      currencyDisplay,\n      currencySign,\n      locale,\n      localeMatcher,\n      maximumFractionDigits,\n      maximumSignificantDigits,\n      minimumFractionDigits,\n      minimumIntegerDigits,\n      minimumSignificantDigits,\n      notation,\n      numberingSystem,\n      roundingIncrement,\n      roundingMode,\n      roundingPriority,\n      signDisplay,\n      trailingZeroDisplay,\n      unit,\n      unitDisplay,\n      useGrouping,\n    })\n\n    return <styled.span {...rest}>{text}</styled.span>\n  },\n)()\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export * from \"../format/format-number.style\"\nexport * from \"./format-byte.style\"\nexport {\n  FormatByte,\n  FormatBytePropsContext,\n  useFormatBytePropsContext,\n} from \"./format-byte\"\nexport type { FormatByteProps } from \"./format-byte\"\nexport {\n  FormatNumber,\n  FormatNumberPropsContext,\n  useFormatNumberPropsContext,\n} from \"./format-number\"\nexport type { FormatNumberProps } from \"./format-number\"\nexport * as Format from \"./namespace\"\nexport * from \"./use-format-byte\"\nexport * from \"./use-format-number\"\n"
+    },
+    {
+      "name": "namespace.ts",
+      "content": "export {\n  FormatByte as Byte,\n  FormatBytePropsContext as BytePropsContext,\n  useFormatBytePropsContext as useBytePropsContext,\n} from \"./format-byte\"\nexport type { FormatByteProps as ByteProps } from \"./format-byte\"\nexport {\n  FormatNumber as Number,\n  FormatNumberPropsContext as NumberPropsContext,\n  useFormatNumberPropsContext as useNumberPropsContext,\n} from \"./format-number\"\nexport type { FormatNumberProps as NumberProps } from \"./format-number\"\nexport { useFormatByte as useByte } from \"./use-format-byte\"\nexport type { FormatBytesOptions as BytesOptions } from \"./use-format-byte\"\nexport { useFormatNumber as useNumber } from \"./use-format-number\"\nexport type { FormatNumberOptions as NumberOptions } from \"./use-format-number\"\n"
+    },
+    {
+      "name": "use-format-byte.tsx",
+      "content": "\"use client\"\n\nimport { useI18n } from \"../../providers/i18n-provider\"\nimport { useFormatNumber } from \"./use-format-number\"\n\nconst bitPrefixes = [\"\", \"kilo\", \"mega\", \"giga\", \"tera\"]\nconst bytePrefixes = [\"\", \"kilo\", \"mega\", \"giga\", \"tera\", \"peta\"]\n\nexport interface FormatBytesOptions {\n  locale?: string\n  unit?: \"bit\" | \"byte\"\n  unitDisplay?: \"long\" | \"narrow\" | \"short\"\n}\n\n/**\n * `useFormatByte` is a custom hook that returns the formatted byte.\n *\n * @see https://yamada-ui.com/docs/hooks/use-format-byte\n */\nexport const useFormatByte = (\n  bytes: number,\n  { locale, unit = \"byte\", unitDisplay = \"short\" }: FormatBytesOptions = {},\n) => {\n  const { locale: defaultLocale } = useI18n()\n\n  locale ??= defaultLocale\n\n  const sanitizedBytes = Number.isNaN(bytes) ? 0 : bytes\n  const prefix = unit === \"bit\" ? bitPrefixes : bytePrefixes\n  const index = Math.max(\n    0,\n    Math.min(Math.floor(Math.log10(sanitizedBytes) / 3), prefix.length - 1),\n  )\n  const value =\n    sanitizedBytes === 0\n      ? 0\n      : Number.parseFloat((sanitizedBytes / 10 ** (3 * index)).toPrecision(3))\n\n  return useFormatNumber(value, {\n    style: \"unit\",\n    locale,\n    unit: prefix[index] + unit,\n    unitDisplay,\n  })\n}\n\nexport type UseFormatByteReturn = ReturnType<typeof useFormatByte>\n"
+    },
+    {
+      "name": "use-format-number.tsx",
+      "content": "\"use client\"\n\nimport { i18nCache, useI18n } from \"../../providers/i18n-provider\"\n\nconst getNumberFormatter = i18nCache(Intl.NumberFormat)\n\nexport interface FormatNumberOptions extends Intl.NumberFormatOptions {\n  locale?: string\n}\n\n/**\n * `useFormatNumber` is a custom hook that returns the formatted number.\n *\n * @see https://yamada-ui.com/docs/hooks/use-format-number\n */\nexport const useFormatNumber = (\n  value: number,\n  { locale, ...options }: FormatNumberOptions = {},\n) => {\n  const { locale: defaultLocale } = useI18n()\n\n  locale ??= defaultLocale\n\n  const formatter = getNumberFormatter(locale, options)\n\n  return formatter.format(value)\n}\n\nexport type UseFormatNumberReturn = ReturnType<typeof useFormatNumber>\n"
+    }
+  ]
+}

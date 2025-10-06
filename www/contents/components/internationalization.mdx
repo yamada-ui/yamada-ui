@@ -1,0 +1,196 @@
+---
+title: Internationalization
+description: Adapting components to respect the languages and cultures of users around the world is an important way to make your application accessible to more people. Yamada UI supports over 30 languages.
+---
+
+## Overview
+
+Internationalization is the process of structuring code and user interfaces to be localized. Yamada UI supports various localizations in many components, from built-in string translations to date and number formats. By using Yamada UI's components, these internationalizations are automatically handled.
+
+## Localization
+
+Localization is the process of adapting an application to a specific language or region. It includes adjustments such as text translations, date and number formats, and text search. Yamada UI supports localization in over 30 locales.
+
+:::note
+Yamada UI uses [Intl MessageFormat](https://formatjs.github.io/docs/intl-messageformat) internally.
+:::
+
+## Change the Locale
+
+To change the locale, set a value for [locale](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales).
+
+```tsx {5}
+import { UIProvider } from "@yamada-ui/react"
+
+const App = () => {
+  return (
+    <UIProvider locale="ja-JP">
+      <App />
+    </UIProvider>
+  )
+}
+```
+
+:::note
+Yamada UI automatically detects the locale using [navigator.language](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/language) and [Intl.DateTimeFormat.supportedLocalesOf](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/supportedLocalesOf). After detection, it automatically updates using [languagechange](https://developer.mozilla.org/en-US/docs/Web/API/Window/languagechange_event). Therefore, when setting the locale to match the user's application, you do not need to set the `locale`.
+:::
+
+## Change the Label
+
+To change the label, you need to download the `i18n-provider` using the [CLI](/docs/get-started/cli).
+
+:::warning
+Before running the following commands, you need to install `@yamada-ui/cli` and run the `init` command. Please refer to [this](/docs/get-started/cli) for more details.
+:::
+
+::::steps
+
+### Add the Provider
+
+Use the `add` command to add the `i18n-provider`.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli add i18n-provider
+```
+
+```bash [npm]
+npm yamada-cli add i18n-provider
+```
+
+```bash [yarn]
+yarn yamada-cli add i18n-provider
+```
+
+```bash [bun]
+bun yamada-cli add i18n-provider
+```
+
+:::
+
+### Change the Language Data
+
+The `i18n-provider`'s `intl` folder contains the data for each language. Change the data for the language you want to change.
+
+```ts title="intl/ja-JP.ts" {4}
+export default {
+  /* ... */
+  avatar: {
+    "Avatar Icon": "ユーザーアイコン",
+  },
+  /* ... */
+} as const
+```
+
+:::warning
+The language data is based on English, and the English key is associated with the data for each language. If you change `en-US.ts`, you need to correct all language data. If you do not change it, the association of language data will be lost.
+:::
+
+::::
+
+## Add a Language
+
+To add a language, you need to download the `i18n-provider` using the [CLI](/docs/get-started/cli).
+
+:::warning
+Before running the following commands, you need to install `@yamada-ui/cli` and run the `init` command. Please refer to [this](/docs/get-started/cli) for more details.
+:::
+
+::::steps
+
+### Add the Provider
+
+Use the `add` command to add the `i18n-provider`.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli add i18n-provider
+```
+
+```bash [npm]
+npm yamada-cli add i18n-provider
+```
+
+```bash [yarn]
+yarn yamada-cli add i18n-provider
+```
+
+```bash [bun]
+bun yamada-cli add i18n-provider
+```
+
+:::
+
+### Add the Language Data
+
+The `i18n-provider`'s `intl` folder contains the data for each language. Add the data for the new language. The data is copied and pasted from `intl/en-US.ts` and changed for each value.
+
+```ts title="intl/vi-VN.ts"
+export default {
+  autocomplete: {
+    "Clear value": "Giá trị xóa",
+    "No results found": "Không tìm thấy kết quả",
+  },
+  /* ... */
+} as const
+```
+
+### Update the Index
+
+Add the language data you added to `intl/index.ts`.
+
+```ts title="intl/index.ts" {3,5}
+import enUS from "./en-US"
+import jaJP from "./ja-JP"
+import viVN from "./vi-VN"
+
+const intl = { "en-US": enUS, "ja-JP": jaJP, "vi-VN": viVN }
+
+export default intl
+```
+
+::::
+
+## Supported Locales
+
+- Japanese (Japan)
+- English (Great Britain)
+- English (United States)
+- Arabic (United Arab Emirates)
+- Bulgarian (Bulgaria)
+- Croatian (Croatia)
+- Czech (Czech Republic)
+- Danish (Denmark)
+- Dutch (Netherlands)
+- Estonian (Estonia)
+- Finnish (Finland)
+- French (Canada)
+- French (France)
+- German (Germany)
+- Greek (Greece)
+- Hebrew (Israel)
+- Hungarian (Hungary)
+- Italian (Italy)
+- Latvian (Latvia)
+- Lithuanian (Lithuania)
+- Norwegian (Norway)
+- Polish (Poland)
+- Portuguese (Brazil)
+- Romanian (Romania)
+- Russian (Russia)
+- Serbian (Serbia)
+- Slovakian (Slovakia)
+- Slovenian (Slovenia)
+- Spanish (Spain)
+- Swedish (Sweden)
+- Turkish (Turkey)
+- Ukrainian (Ukraine)
+- Chinese (Simplified)
+- Chinese (Traditional)
+- Korean (Korea)
+
+## Optimize the Bundle Size
+
+Yamada UI includes the data for all of the languages above by default. This is convenient for many users, but it increases the bundle size. If your application does not support all of these locales, you can optimize the bundle size by removing unnecessary data from `intl/index.ts`.

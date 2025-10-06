@@ -81,6 +81,11 @@
           "pathname": "/docs/components/create-component"
         },
         {
+          "title": "Internationalization",
+          "segment": "internationalization",
+          "pathname": "/docs/components/internationalization"
+        },
+        {
           "title": "Components",
           "segment": "(components)",
           "items": [
@@ -730,14 +735,9 @@
               "pathname": "/docs/components/for"
             },
             {
-              "title": "FormatByte",
-              "segment": "format-byte",
-              "pathname": "/docs/components/format-byte"
-            },
-            {
-              "title": "FormatNumber",
-              "segment": "format-number",
-              "pathname": "/docs/components/format-number"
+              "title": "Format",
+              "segment": "format",
+              "pathname": "/docs/components/format"
             },
             {
               "title": "Portal",

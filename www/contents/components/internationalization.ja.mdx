@@ -73,14 +73,18 @@ bun yamada-cli add i18n-provider
 
 `i18n-provider`の`intl`フォルダに各言語のデータがあります。変更する言語のデータを変更します。
 
-```ts title="intl/ja-JP.ts" {4}
-export default {
+```ts title="intl/ja-JP.ts" {6}
+import type { IntlData } from "."
+
+const data: IntlData = {
   /* ... */
   avatar: {
     "Avatar Icon": "ユーザーアイコン",
   },
   /* ... */
-} as const
+}
+
+export default data
 ```
 
 :::warning
@@ -128,27 +132,35 @@ bun yamada-cli add i18n-provider
 `i18n-provider`の`intl`フォルダに各言語のデータがあります。新しい言語のデータを追加します。データは、`intl/en-US.ts`をコピー・ペーストして各値を変更します。
 
 ```ts title="intl/vi-VN.ts"
-export default {
+import type { IntlData } from "."
+
+const data: IntlData = {
   autocomplete: {
     "Clear value": "Giá trị xóa",
     "No results found": "Không tìm thấy kết quả",
   },
   /* ... */
-} as const
+}
+
+export default data
 ```
 
 ### インデックスを更新する
 
 `intl/index.ts`に追加した言語データを追加します。
 
-```ts title="intl/index.ts" {3,5}
-import enUS from "./en-US"
-import jaJP from "./ja-JP"
+```ts title="intl/index.ts" {3,10}
+import arAE from "./ar-AE"
+/* ... */
 import viVN from "./vi-VN"
 
-const intl = { "en-US": enUS, "ja-JP": jaJP, "vi-VN": viVN }
+/* ... */
 
-export default intl
+export default {
+  "ar-AE": arAE,
+  /* ... */
+  "vi-VN": viVN,
+}
 ```
 
 ::::

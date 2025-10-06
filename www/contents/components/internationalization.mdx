@@ -73,14 +73,18 @@ bun yamada-cli add i18n-provider
 
 The `i18n-provider`'s `intl` folder contains the data for each language. Change the data for the language you want to change.
 
-```ts title="intl/ja-JP.ts" {4}
-export default {
+```ts title="intl/ja-JP.ts" {6}
+import type { IntlData } from "."
+
+const data: IntlData = {
   /* ... */
   avatar: {
     "Avatar Icon": "ユーザーアイコン",
   },
   /* ... */
-} as const
+}
+
+export default data
 ```
 
 :::warning
@@ -128,27 +132,35 @@ bun yamada-cli add i18n-provider
 The `i18n-provider`'s `intl` folder contains the data for each language. Add the data for the new language. The data is copied and pasted from `intl/en-US.ts` and changed for each value.
 
 ```ts title="intl/vi-VN.ts"
-export default {
+import type { IntlData } from "."
+
+const data: IntlData = {
   autocomplete: {
     "Clear value": "Giá trị xóa",
     "No results found": "Không tìm thấy kết quả",
   },
   /* ... */
-} as const
+}
+
+export default data
 ```
 
 ### Update the Index
 
 Add the language data you added to `intl/index.ts`.
 
-```ts title="intl/index.ts" {3,5}
-import enUS from "./en-US"
-import jaJP from "./ja-JP"
+```ts title="intl/index.ts" {3,10}
+import arAE from "./ar-AE"
+/* ... */
 import viVN from "./vi-VN"
 
-const intl = { "en-US": enUS, "ja-JP": jaJP, "vi-VN": viVN }
+/* ... */
 
-export default intl
+export default {
+  "ar-AE": arAE,
+  /* ... */
+  "vi-VN": viVN,
+}
 ```
 
 ::::

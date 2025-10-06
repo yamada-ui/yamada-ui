@@ -6,7 +6,6 @@ import { Indicator } from "../indicator"
 import { Text } from "../text"
 import { Wrap } from "../wrap"
 import { Calendar } from "./"
-import "dayjs/locale/ja"
 
 type Story = StoryFn<typeof Calendar.Root>
 

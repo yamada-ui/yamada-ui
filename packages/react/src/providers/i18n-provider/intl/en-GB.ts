@@ -1,4 +1,6 @@
-const data = {
+import type { IntlData } from "."
+
+const data: IntlData = {
   autocomplete: {
     "Clear value": "Clear value",
     "No results found": "No results found",

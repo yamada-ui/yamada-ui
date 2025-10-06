@@ -1,8 +1,7 @@
 "use client"
 
 import type { RefObject } from "react"
-import type { EditorStateController } from "./editor"
-import { assignRef, Resizable, useUpdateEffect } from "@yamada-ui/react"
+import { assignRef, Resizable } from "@yamada-ui/react"
 import { useSearchParams } from "next/navigation"
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { usePlayground } from "../playground-provider"
@@ -28,11 +27,12 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(
   function PlaygroundEditor({ ref }) {
     const { playground } = usePlayground()
     const searchParams = useSearchParams()
-    const editorState = useRef<EditorStateController | null>(null)
-
-    if (!editorState.current) {
-      editorState.current = createEditorStateController()
-    }
+    const editorState = useRef(createEditorStateController())
+    const codeMirrorRef = useRef<{ updateCode: (code: string) => void }>(null)
+    const previewRef = useRef<{
+      refresh: () => void
+      updateCode: (code: string) => void
+    }>(null)
 
     const initialValue = useMemo(() => {
       const codeParam = searchParams.get("code")
@@ -43,29 +43,15 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(
       return DEFAULT_CODE
     }, [searchParams])
 
+    const lastInitialValue = useRef(initialValue)
+    if (lastInitialValue.current !== initialValue) {
+      lastInitialValue.current = initialValue
+      codeMirrorRef.current?.updateCode(initialValue)
+      previewRef.current?.updateCode(initialValue)
+    }
+
     const [editorVisibility, setEditorVisibility] =
       useState<EditorVisibility>("both")
-
-    const codeMirrorRef = useRef<{ updateCode: (code: string) => void }>(null)
-    const previewRef = useRef<{
-      refresh: () => void
-      updateCode: (code: string) => void
-    }>(null)
-
-    const handleReset = useCallback(() => {
-      if (codeMirrorRef.current) {
-        codeMirrorRef.current.updateCode(DEFAULT_CODE)
-      }
-      if (previewRef.current) {
-        previewRef.current.updateCode(DEFAULT_CODE)
-      }
-    }, [])
-
-    useEffect(() => {
-      const unsubscribe = playground.onReset(handleReset)
-
-      return unsubscribe
-    }, [playground, handleReset])
 
     const toggleVisibility = useCallback(() => {
       setEditorVisibility((prev) => {
@@ -83,17 +69,30 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(
     }, [])
 
     const getCurrentCode = useCallback(() => {
-      return (
-        editorState.current!.getValue.current?.() || playground.getCurrentCode()
-      )
-    }, [playground])
+      return editorState.current.getValue.current?.() ?? initialValue
+    }, [initialValue])
 
-    useUpdateEffect(() => {
-      const currentCode = playground.getCurrentCode()
-      if (editorState.current?.setValue.current) {
-        editorState.current.setValue.current(currentCode)
+    useEffect(() => {
+      const syncCode = () => {
+        const nextCode = playground.getCurrentCode()
+        const currentCode = editorState.current.getValue.current?.()
+
+        if (currentCode === nextCode) return
+
+        codeMirrorRef.current?.updateCode(nextCode)
+        previewRef.current?.updateCode(nextCode)
       }
-    }, [searchParams, playground])
+
+      syncCode()
+
+      const unsubscribeChange = playground.subscribe(syncCode)
+      const unsubscribeReset = playground.onReset(syncCode)
+
+      return () => {
+        unsubscribeChange()
+        unsubscribeReset()
+      }
+    }, [editorState, playground])
 
     if (ref?.current) {
       assignRef(ref.current.getCurrentCode, getCurrentCode)
@@ -106,7 +105,13 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(
       editorVisibility === "both" || editorVisibility === "preview"
 
     return (
-      <Resizable.Root display="flex" flex={1} h="full" orientation="horizontal">
+      <Resizable.Root
+        display="flex"
+        flex={1}
+        h="full"
+        orientation="horizontal"
+        storageKey="playground-panels"
+      >
         {showEditor ? (
           <Resizable.Item
             css={{
@@ -116,6 +121,9 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(
               },
             }}
             borderWidth="1px"
+            collapsedSize={5}
+            collapsible
+            defaultSize={50}
             minSize={5}
             roundedLeft="l2"
             roundedRight={!showPreview ? "l2" : undefined}
@@ -135,6 +143,7 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(
           <Resizable.Item
             bg="bg.panel"
             borderWidth="1px"
+            defaultSize={50}
             minSize={5}
             p="lg"
             roundedLeft={!showEditor ? "l2" : undefined}

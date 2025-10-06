@@ -10,7 +10,6 @@ import {
   useCallback,
   useMemo,
   useRef,
-  useState,
 } from "react"
 import { decodeCode, DEFAULT_CODE, encodeCode } from "./utils"
 
@@ -32,17 +31,13 @@ interface PlaygroundMethods {
    */
   reset: () => void
   /**
-   * Update current code without triggering state update
+   * Subscribe to playground state changes.
    */
-  updateCurrentCode: (code: string) => void
+  subscribe: (listener: () => void) => () => void
   /**
    * Register a callback that will be invoked when reset is called
    */
   onReset: (callback: () => void) => () => void
-}
-
-interface PlaygroundState {
-  code: string
 }
 
 interface PlaygroundContext {
@@ -59,7 +54,7 @@ const createController = () => ({
   getCurrentCode: createRef<PlaygroundMethods["getCurrentCode"]>(),
   getShareUrl: createRef<PlaygroundMethods["getShareUrl"]>(),
   reset: createRef<PlaygroundMethods["reset"]>(),
-  updateCurrentCode: createRef<PlaygroundMethods["updateCurrentCode"]>(),
+  subscribe: createRef<PlaygroundMethods["subscribe"]>(),
   onReset: createRef<PlaygroundMethods["onReset"]>(),
 })
 
@@ -70,7 +65,7 @@ const createMethods = (refs: RefObject<Controller>): PlaygroundMethods => ({
   getCurrentCode: () => refs.current.getCurrentCode.current?.() ?? "",
   getShareUrl: () => refs.current.getShareUrl.current?.() ?? "",
   reset: () => refs.current.reset.current?.(),
-  updateCurrentCode: (code) => refs.current.updateCurrentCode.current?.(code),
+  subscribe: (listener) => refs.current.subscribe.current?.(listener) ?? noop,
   onReset: (callback) => {
     if (refs.current.onReset.current) {
       return refs.current.onReset.current(callback)
@@ -110,7 +105,7 @@ const Controller: FC<ControllerProps> = ({ ref }) => {
   const searchParams = useSearchParams()
   const pathname = usePathname()
 
-  const getInitialCode = useCallback(() => {
+  const initialCode = useMemo(() => {
     const codeParam = searchParams.get("code")
     if (codeParam) {
       const decoded = decodeCode(codeParam)
@@ -119,29 +114,49 @@ const Controller: FC<ControllerProps> = ({ ref }) => {
     return DEFAULT_CODE
   }, [searchParams])
 
-  const [{ code }, setState] = useState<PlaygroundState>({
-    code: getInitialCode(),
-  })
+  const codeRef = useRef<string>(initialCode)
+  const lastSyncedCodeRef = useRef(initialCode)
+  const listenersRef = useRef(new Set<() => void>())
 
-  const resetCallbacksRef = useRef<Set<() => void>>(new Set())
+  const notify = useCallback(() => {
+    listenersRef.current.forEach((listener) => {
+      listener()
+    })
+  }, [])
+
+  if (lastSyncedCodeRef.current !== initialCode) {
+    codeRef.current = initialCode
+    lastSyncedCodeRef.current = initialCode
+    notify()
+  }
+  const resetCallbacksRef = useRef(new Set<() => void>())
 
   const methods = useMemo<PlaygroundMethods>(
     () => ({
       changeCode: (newCode) => {
-        setState((prev) => ({ ...prev, code: newCode }))
+        codeRef.current = newCode
+        notify()
       },
 
       getCurrentCode: () => {
-        return code
+        return codeRef.current
       },
 
       getShareUrl: () => {
         const params = new URLSearchParams(Array.from(searchParams.entries()))
-        params.set("code", encodeCode(code))
+        params.set("code", encodeCode(codeRef.current))
         const relative = `${pathname}?${params.toString()}`
         const origin =
           typeof window !== "undefined" ? window.location.origin : ""
         return origin ? new URL(relative, origin).toString() : relative
+      },
+
+      subscribe: (listener) => {
+        listenersRef.current.add(listener)
+
+        return () => {
+          listenersRef.current.delete(listener)
+        }
       },
 
       onReset: (callback) => {
@@ -153,25 +168,23 @@ const Controller: FC<ControllerProps> = ({ ref }) => {
       },
 
       reset: () => {
-        setState((prev) => ({ ...prev, code: DEFAULT_CODE }))
+        codeRef.current = DEFAULT_CODE
+        lastSyncedCodeRef.current = DEFAULT_CODE
+        notify()
         resetCallbacksRef.current.forEach((callback) => {
           callback()
         })
       },
-
-      updateCurrentCode: (newCode) => {
-        setState((prev) => ({ ...prev, code: newCode }))
-      },
     }),
-    [code, pathname, searchParams],
+    [notify, pathname, searchParams],
   )
 
   assignRef(ref.current.changeCode, methods.changeCode)
   assignRef(ref.current.getCurrentCode, methods.getCurrentCode)
   assignRef(ref.current.getShareUrl, methods.getShareUrl)
   assignRef(ref.current.reset, methods.reset)
-  assignRef(ref.current.updateCurrentCode, methods.updateCurrentCode)
   assignRef(ref.current.onReset, methods.onReset)
+  assignRef(ref.current.subscribe, methods.subscribe)
 
   return null
 }

@@ -26,7 +26,6 @@ export const CodeMirrorEditor = memo(
   }: CodeMirrorEditorProps) => {
     const theme = useColorModeValue(vscodeLight, vscodeDark)
 
-    // Initialize with current value from editorState if available, otherwise use initialValue
     const [value, setValue] = useState(() => {
       const currentValue = editorState.getValue.current?.()
       return currentValue || initialValue
@@ -39,10 +38,8 @@ export const CodeMirrorEditor = memo(
         setValue(newValue)
         editorState.setValue.current?.(newValue)
 
-        // Notify all subscribers (like preview editor) immediately via ref callback
         editorState.notifyChange.current?.(newValue)
 
-        // Call the external onChange handler
         onChange?.(newValue)
       },
       [editorState, onChange],

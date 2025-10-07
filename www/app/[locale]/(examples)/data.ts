@@ -1,5 +1,5 @@
 export const SLUGS = [
-  "example",
+  "examples",
   "mail",
   "dashboard",
   "tasks",

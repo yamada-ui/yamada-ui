@@ -2,7 +2,7 @@ import { notFound } from "next/navigation"
 import { isSlug } from "../../utils"
 import { Authentication } from "./authentication"
 import { Dashboard } from "./dashboard"
-import { Example } from "./example"
+import { Examples } from "./examples"
 import { Forms } from "./forms"
 import { Mail } from "./mail"
 import { Music } from "./music"
@@ -16,8 +16,8 @@ export default async function Page({
 
   if (!isSlug(example)) notFound()
   switch (example) {
-    case "example":
-      return <Example />
+    case "examples":
+      return <Examples />
     case "mail":
       return <Mail />
     case "dashboard":

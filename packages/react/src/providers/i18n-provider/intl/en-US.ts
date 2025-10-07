@@ -1,4 +1,4 @@
-export default {
+const data = {
   autocomplete: {
     "Clear value": "Clear value",
     "No results found": "No results found",
@@ -13,14 +13,9 @@ export default {
   calendar: {
     "Choose the month": "Choose the month",
     "Choose the year": "Choose the year",
-    dd: "dd",
-    "dddd, MMMM DD, YYYY": "dddd, MMMM DD, YYYY",
     "Go to the next month": "Go to the next month",
     "Go to the previous month": "Go to the previous month",
-    MMM: "MMM",
-    "MMMM YYYY": "MMMM YYYY",
     Today: "Today",
-    YYYY: "YYYY",
   },
   carousel: {
     "Go to next slide": "Go to next slide",
@@ -34,7 +29,6 @@ export default {
   },
   datePicker: {
     "Clear value": "Clear value",
-    "MMMM DD, YYYY": "MMMM DD, YYYY",
   },
   hueSlider: {
     Blue: "Blue",
@@ -56,7 +50,7 @@ export default {
     "Go to first page": "Go to first page",
     "Go to last page": "Go to last page",
     "Go to next page": "Go to next page",
-    "Go to page": "Go to page {value}",
+    "Go to page {value}": "Go to page {value}",
     "Go to previous page": "Go to previous page",
     Pagination: "Pagination",
     "{value} / {total}": "{value} / {total}",
@@ -87,3 +81,5 @@ export default {
     "Toggle button": "Toggle button",
   },
 } as const
+
+export default data

@@ -1,8 +1,497 @@
 ---
 title: Motion
-description: "`Motion`は、`motion`にYamada UIのスタイルシステムを拡張した便利なコンポーネントです。"
+description: "`Motion`は、`Motion`にYamada UIのStyle Propsを拡張した便利なコンポーネントです。"
 storybook: components-motion-animation--basic
 source: components/motion
 ---
 
+```tsx preview
+<Center h="sm">
+  <Motion
+    boxSize="4xs"
+    bg="bg.contrast"
+    color="fg.contrast"
+    animate={{
+      scale: [1, 2, 2, 1, 1],
+      rotate: [0, 0, 180, 180, 0],
+      borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+    }}
+    transition={{
+      duration: 2,
+      ease: "easeInOut",
+      times: [0, 0.2, 0.5, 0.8, 1],
+      repeat: Infinity,
+      repeatDelay: 1,
+    }}
+  />
+</Center>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Motion } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Motion } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Motion } from "@workspaces/ui"
+```
+
+:::
+
+:::note
+`Motion`は、内部で[Motion](https://motion.dev)を使用しています。さらに詳しくコンポーネントの機能を知りたい場合は、[こちら](https://motion.dev/docs/react-motion-component)をご覧ください。
+:::
+
+- `initial`: コンポーネントの初期状態。
+- `animate`: コンポーネントがマウントされた時や更新された時に実行されるアニメーション。
+- `exit`: コンポーネントがアンマウントされた時に実行されるアニメーション。
+- `transition`: 所用時間や遅延時間を設定するオブジェクト。
+
+:::note
+`initial`・`animate`・`exit`で使われるスタイルオブジェクトは、Yamada UIの[Style Props](/docs/styling/style-props)ではありません。スタイルオブジェクトの各プロパティは、[Motion](https://motion.dev)のドキュメントをご覧ください。
+:::
+
+:::warning
+`exit`のアニメーションを有効にする場合は、コンポーネントが[AnimatePresence](https://motion.dev/docs/react-animate-presence)の子要素である必要があります。
+:::
+
+### バリアント
+
+バリアントを設定すると、動的なアニメーションの実装に便利です。他にもアニメーションをオーケストレーションすることも可能です。
+
+```tsx preview functional client
+const [visible, { toggle }] = useBoolean()
+
+return (
+  <VStack>
+    <Button alignSelf="flex-start" onClick={toggle}>
+      Click me!
+    </Button>
+
+    <Motion
+      w="fit-content"
+      p="md"
+      bg="bg.contrast"
+      color="fg.contrast"
+      initial={false}
+      animate={visible ? "visible" : "hidden"}
+      transition={{ duration: 1 }}
+      variants={{
+        visible: { opacity: 1 },
+        hidden: { opacity: 0 },
+      }}
+    >
+      Look at me!
+    </Motion>
+  </VStack>
+)
+```
+
+:::note
+バリアントのアニメーションをもっと知りたい場合は、[こちら](https://motion.dev/docs/react-animation#variants)をご覧ください。
+:::
+
+### AnimatePresenceを使う
+
+Reactでは、コンポーネントがアンマウントされた時、アニメーションは維持されません。[AnimatePresence](https://motion.dev/docs/react-animate-presence)を使用することで、アニメーションが終了するまでコンポーネントはアンマウントされません。
+
+```tsx preview functional client
+const [visible, { toggle }] = useBoolean()
+
+return (
+  <VStack h="sm">
+    <Button alignSelf="flex-start" onClick={toggle}>
+      Click me!
+    </Button>
+
+    <Center flex="1" gap="md">
+      <AnimatePresence>
+        {visible ? (
+          <Motion
+            w="fit-content"
+            p="md"
+            bg="bg.contrast"
+            color="fg.contrast"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+          >
+            Enabled "AnimatePresence"
+          </Motion>
+        ) : null}
+      </AnimatePresence>
+
+      {visible ? (
+        <Motion
+          w="fit-content"
+          p="md"
+          bg="bg.contrast"
+          color="fg.contrast"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+        >
+          Disabled "AnimatePresence"
+        </Motion>
+      ) : null}
+    </Center>
+  </VStack>
+)
+```
+
+### キーフレーム
+
+値を配列にすることで、キーフレームを設定できます。各フレームは、均等な間隔で処理されます。`transition`の`times`に間隔を設定した配列を設定するとオーバーライドできます。
+
+```tsx preview
+<Center h="sm">
+  <Motion
+    boxSize="4xs"
+    bg="bg.contrast"
+    color="fg.contrast"
+    animate={{
+      scale: [1, 2, 2, 1, 1],
+      rotate: [0, 0, 180, 180, 0],
+      borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+    }}
+    transition={{
+      duration: 2,
+      ease: "easeInOut",
+      times: [0, 0.2, 0.5, 0.8, 1],
+      repeat: Infinity,
+      repeatDelay: 1,
+    }}
+  />
+</Center>
+```
+
+### ジェスチャー
+
+[ホバー](#ホバー)・[クリック・タップ](#クリック・タップ)・[フォーカス](#フォーカス)を検出し、アニメーションを実行することができます。
+
+#### ホバー
+
+- `whileHover`: ポインターがコンポーネント上を移動したときに実行されるアニメーション。
+- `onHoverStart`: ポインターがコンポーネント上を移動したときに実行されるコールバック関数。
+- `onHoverEnd`: ポインターがコンポーネントから離れたときに実行されるコールバック関数。
+
+```tsx preview client
+<Motion
+  cursor="pointer"
+  w="fit-content"
+  p="md"
+  bg="bg.contrast"
+  color="fg.contrast"
+  whileHover={{ scale: 1.1 }}
+  onHoverStart={(ev) => console.log("Hover starts")}
+  onHoverEnd={(ev) => console.log("Hover ends")}
+>
+  Hover me!
+</Motion>
+```
+
+:::note
+ホバーのアニメーションをもっと知りたい場合は、[こちら](https://motion.dev/docs/react-hover-animation)をご覧ください。
+:::
+
+#### クリック・タップ
+
+- `whileTap`: ポインターがコンポーネントをクリックまたはタップしたときに実行されるアニメーション。
+- `onTapStart`: ポインターがコンポーネントを押し始めたときに実行されるコールバック関数。
+- `onTap`: ポインターがコンポーネントの押し下げをキャンセルし、コンポーネント内でポインターが解放されたときに実行されるコールバック関数。
+- `onTapCancel`: ポインターがコンポーネントの押し下げをキャンセルし、コンポーネント外でポインターが解放されたときに実行されるコールバック関数。
+
+```tsx preview client
+<Motion
+  cursor="pointer"
+  w="fit-content"
+  p="md"
+  bg="bg.contrast"
+  color="fg.contrast"
+  whileTap={{ scale: 0.9 }}
+  onTapStart={(ev) => console.log("Tap starts")}
+  onTap={(ev) => console.log("Tap")}
+  onTapCancel={(ev) => console.log("Tap cancels")}
+>
+  Click and Tap me!
+</Motion>
+```
+
+:::note
+クリック・タップのアニメーションをもっと知りたい場合は、[こちら](https://motion.dev/docs/react-gestures#tap)をご覧ください。
+:::
+
+#### フォーカス
+
+- `whileFocus`: コンポーネントがフォーカスされたときに実行されるアニメーション。
+
+```tsx preview client
+<Motion
+  cursor="pointer"
+  w="fit-content"
+  p="md"
+  bg="bg.contrast"
+  color="fg.contrast"
+  tabIndex={0}
+  whileFocus={{ scale: 1.1 }}
+>
+  Focus me!
+</Motion>
+```
+
+:::note
+フォーカスのアニメーションをもっと知りたい場合は、[こちら](https://motion.dev/docs/react-gestures#focus)をご覧ください。
+:::
+
+### ドラッグ
+
+コンポーネントのドラッグを有効にする場合は、`drag`を`true`に設定します。または`"x"`または`"y"`を設定することで、x軸またはy軸のみを追従します。
+
+- `whileDrag`: コンポーネントがドラッグされたときに実行されるアニメーション。
+- `onDrag`: コンポーネントがドラッグ中に実行されるコールバック関数。
+- `onDragStart`: コンポーネントがドラッグを開始したときに実行されるコールバック関数。
+- `onDragEnd`: コンポーネントがドラッグを終了したときに実行されるコールバック関数。
+
+```tsx preview client
+<Center h="sm" gap="md">
+  <For each={[true, "x", "y"]}>
+    {(drag) => (
+      <Motion
+        cursor={{ base: "grab", _active: "grabbing" }}
+        w="fit-content"
+        p="md"
+        bg="bg.contrast"
+        color="fg.contrast"
+        drag={drag}
+        onDrag={(ev, { point }) =>
+          console.log("Drag", "x:", point.x, "y:", point.y)
+        }
+        onDragStart={(ev, { point }) =>
+          console.log("Drag starts", "x:", point.x, "y:", point.y)
+        }
+        onDragEnd={(ev, { point }) =>
+          console.log("Drag ends", "x:", point.x, "y:", point.y)
+        }
+      >
+        {drag === true ? "Drag me!" : drag === "x" ? "Only X" : "Only Y"}
+      </Motion>
+    )}
+  </For>
+</Center>
+```
+
+:::note
+ドラッグのアニメーションをもっと知りたい場合は、[こちら](https://motion.dev/docs/react-drag)をご覧ください。
+:::
+
+#### 可能領域を制限する
+
+可能領域を制限する場合は、`dragConstraints`の`top`・`bottom`・`left`・`right`に値(ピクセル)を設定します。
+
+```tsx preview
+<Center h="sm" gap="md">
+  <Motion
+    cursor={{ base: "grab", _active: "grabbing" }}
+    w="fit-content"
+    p="md"
+    bg="bg.contrast"
+    color="fg.contrast"
+    drag
+    dragConstraints={{ top: 0, right: 100, bottom: 100, left: 0 }}
+  >
+    Only Right & Bottom
+  </Motion>
+</Center>
+```
+
+または、`ref`を設定することで可能領域を制限することも可能です。
+
+```tsx preview functional client
+const ref = useRef<HTMLDivElement>(null)
+
+return (
+  <Center ref={ref} h="sm" gap="md">
+    <Motion
+      cursor={{ base: "grab", _active: "grabbing" }}
+      w="fit-content"
+      p="md"
+      bg="bg.contrast"
+      color="fg.contrast"
+      drag
+      dragConstraints={ref}
+    >
+      Drag me!
+    </Motion>
+  </Center>
+)
+```
+
+#### 弾力を設定する
+
+弾力を設定する場合は、`dragElastic`に真偽値・数値または`top`・`bottom`・`left`・`right`ごとに値(ピクセル)を設定したオブジェクトを設定します。
+
+```tsx preview functional client
+const ref = useRef<HTMLDivElement>(null)
+
+return (
+  <Center ref={ref} h="sm" gap="md">
+    <Motion
+      cursor={{ base: "grab", _active: "grabbing" }}
+      w="fit-content"
+      p="md"
+      bg="bg.contrast"
+      color="fg.contrast"
+      drag
+      dragElastic={0}
+      dragConstraints={ref}
+    >
+      Drag me!
+    </Motion>
+  </Center>
+)
+```
+
+#### 勢いを設定する
+
+勢いを設定する場合は、`dragMomentum`に真偽値を設定します。
+
+```tsx preview functional client
+const ref = useRef<HTMLDivElement>(null)
+
+return (
+  <Center ref={ref} h="sm" gap="md">
+    <Motion
+      cursor={{ base: "grab", _active: "grabbing" }}
+      w="fit-content"
+      p="md"
+      bg="bg.contrast"
+      color="fg.contrast"
+      drag
+      dragMomentum={false}
+      dragConstraints={ref}
+    >
+      Drag me!
+    </Motion>
+  </Center>
+)
+```
+
+#### 方向を制限する
+
+方向を制限する場合は、`dragDirectionLock`を`true`に設定します。
+
+```tsx preview functional client
+const [direction, setDirection] = useState<"x" | "y" | null>(null)
+
+return (
+  <Center position="relative" h="sm" gap="md">
+    <Box
+      h="full"
+      border={`1px dashed {colors.${direction === "y" ? "bg.contrast" : "border"}}`}
+      position="absolute"
+      top="50%"
+      left="50%"
+      transform="translate(-50%, -50%)"
+      zIndex="-1"
+    />
+    <Box
+      w="full"
+      border={`1px dashed {colors.${direction === "x" ? "bg.contrast" : "border"}}`}
+      position="absolute"
+      top="50%"
+      left="50%"
+      transform="translate(-50%, -50%)"
+      zIndex="-1"
+    />
+
+    <Motion
+      cursor={{ base: "grab", _active: "grabbing" }}
+      w="fit-content"
+      p="md"
+      border="1px solid {colors.bg.contrast}"
+      drag
+      dragDirectionLock
+      dragConstraints={{ top: 0, right: 0, bottom: 0, left: 0 }}
+      dragTransition={{ bounceStiffness: 500, bounceDamping: 15 }}
+      dragElastic={0.2}
+      onDirectionLock={(direction) => setDirection(direction)}
+      onDragEnd={() => setDirection(null)}
+    >
+      Drag me!
+    </Motion>
+  </Center>
+)
+```
+
+### スクロール
+
+- `whileInView`: コンポーネントがビューポートに入ったときに実行されるアニメーション。
+- `viewport`: ビューポートの検出方法を設定するオブジェクト。
+  - `once`: `true`の場合は、コンポーネントがビューポートに入った1回目にアニメーションを実行します。
+  - `root`: スクロール可能な要素(`ref`)を設定することで、`window`の代わりにその要素をビューポートとして使用します。
+  - `margin`: ビューポートに追加するマージン。
+  - `amount`: `"some"`・`"all"`・数値を設定することで、ビューポートと交差する必要がある要素の高さを設定します。
+- `onViewportEnter`: コンポーネントがビューポートに入ったときに実行されるコールバック関数。
+- `onViewportLeave`: コンポーネントがビューポートから出たときに実行されるコールバック関数。
+
+```tsx preview functional client
+const ref = useRef<HTMLDivElement>(null)
+
+return (
+  <VStack ref={ref} maxH="sm" overflowY="auto">
+    <Text>Scroll me!</Text>
+
+    <Spacer />
+
+    <Center gap="md" mt="{sizes.xl}">
+      <For each={[false, true]}>
+        {(once) => (
+          <Motion
+            cursor="pointer"
+            w="fit-content"
+            p="md"
+            bg="bg.contrast"
+            color="fg.contrast"
+            initial={{ x: once ? 100 : -100 }}
+            whileInView={{ x: 0 }}
+            viewport={{ root: ref, once }}
+            transition={{ duration: 1 }}
+            onViewportEnter={(entry) => console.log("Scroll entires", entry)}
+            onViewportLeave={(entry) => console.log("Scroll leaves", entry)}
+          >
+            {once ? "Once me!" : "You found me!"}
+          </Motion>
+        )}
+      </For>
+    </Center>
+  </VStack>
+)
+```
+
+## 設定
+
+プロジェクト全体で`Motion`の共通の設定をする場合は、[MotionConfig](https://motion.dev/docs/react-motion-config)を使用します。
+
+```tsx {1,6,10}
+import { MotionConfig } from "motion/react"
+import { UIProvider } from "@yamada-ui/react"
+
+const App = () => {
+  return (
+    <MotionConfig transition={{ duration: 1 }}>
+      <UIProvider>
+        <YourApplication />
+      </UIProvider>
+    </MotionConfig>
+  )
+}
+```

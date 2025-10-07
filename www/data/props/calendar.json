@@ -544,11 +544,10 @@
         "required": false
       },
       "locale": {
-        "type": "string",
+        "type": "AnyString | Locale",
         "defaultValue": "\"en-US\"",
-        "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass.",
-        "required": false,
-        "see": "https://day.js.org/docs/en/i18n/instance-locale"
+        "description": "The locale of the calendar.",
+        "required": false
       },
       "max": {
         "type": "number",
@@ -1561,11 +1560,10 @@
       "required": false
     },
     "locale": {
-      "type": "string",
+      "type": "AnyString | Locale",
       "defaultValue": "\"en-US\"",
-      "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass.",
-      "required": false,
-      "see": "https://day.js.org/docs/en/i18n/instance-locale"
+      "description": "The locale of the calendar.",
+      "required": false
     },
     "max": {
       "type": "number",

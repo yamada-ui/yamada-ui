@@ -270,7 +270,35 @@
     "colorMode": {
       "properties": ["colorScheme"],
       "type": "StyleValueWithCondition<CSS.Property.ColorScheme>",
-      "docs": {}
+      "docs": {
+        "color-scheme": {
+          "baseline": {
+            "status": "Widely available",
+            "widely_available_date": "2024-08-03",
+            "newly_available_date": "2022-02-03"
+          },
+          "deprecated": false,
+          "description": "The <code>color-scheme</code> CSS property sets which color schemes (light or dark) an element uses and may prevent automatic dark mode adjustments by the browser.",
+          "experimental": false,
+          "see": "https://developer.mozilla.org/docs/Web/CSS/color-scheme"
+        }
+      }
+    },
+    "display": {
+      "type": "StyleValueWithCondition<CSS.Property.Display | 'center' | 'inline-center' | 'hidden'>",
+      "docs": {
+        "display": {
+          "baseline": {
+            "status": "Widely available",
+            "widely_available_date": "2018-01-29",
+            "newly_available_date": "2015-07-29"
+          },
+          "deprecated": false,
+          "description": "The <code>display</code> CSS property sets the display behavior of an element's box within its layout and sets the layout behavior for its child elements.",
+          "experimental": false,
+          "see": "https://developer.mozilla.org/docs/Web/CSS/display"
+        }
+      }
     },
     "insetX": {
       "properties": ["left", "right"],
@@ -844,7 +872,8 @@
       "docs": {
         "container": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2025-08-14",
             "newly_available_date": "2023-02-14"
           },
           "deprecated": false,
@@ -1164,23 +1193,6 @@
           "description": "The <code>unicode-bidi</code> and <code>direction</code> CSS properties override the Unicode layout algorithm. They are intended for Document Type Definition (DTD) designers. For HTML documents, you should use the <code>dir</code> global HTML attribute and <code>&#x3C;bdo></code> HTML element instead.",
           "experimental": false,
           "see": "https://developer.mozilla.org/docs/Web/CSS/direction"
-        }
-      }
-    },
-    "display": {
-      "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Display>",
-      "docs": {
-        "display": {
-          "baseline": {
-            "status": "Widely available",
-            "widely_available_date": "2018-01-29",
-            "newly_available_date": "2015-07-29"
-          },
-          "deprecated": false,
-          "description": "The <code>display</code> CSS property sets the display behavior of an element's box within its layout and sets the layout behavior for its child elements.",
-          "experimental": false,
-          "see": "https://developer.mozilla.org/docs/Web/CSS/display"
         }
       }
     },
@@ -4014,6 +4026,18 @@
         }
       }
     },
+    "caretAnimation": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "caret-animation": {
+          "deprecated": false,
+          "description": "The CSS `caret-animation` property.",
+          "experimental": true,
+          "see": "https://developer.mozilla.org/docs/Web/CSS/caret-animation"
+        }
+      }
+    },
     "caretColor": {
       "properties": ["caretColor"],
       "token": "colors",
@@ -4032,6 +4056,18 @@
         }
       },
       "shorthands": ["caret"]
+    },
+    "caretShape": {
+      "as": true,
+      "type": "StyleValueWithCondition<CSS.Property.CaretShape>",
+      "docs": {
+        "caret-shape": {
+          "deprecated": false,
+          "description": "The CSS `caret-shape` property.",
+          "experimental": true,
+          "see": "https://developer.mozilla.org/docs/Web/CSS/caret-shape"
+        }
+      }
     },
     "clear": {
       "as": true,
@@ -4340,7 +4376,8 @@
       "docs": {
         "container": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2025-08-14",
             "newly_available_date": "2023-02-14"
           },
           "deprecated": false,
@@ -4356,7 +4393,8 @@
       "docs": {
         "container-name": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2025-08-14",
             "newly_available_date": "2023-02-14"
           },
           "deprecated": false,
@@ -4372,7 +4410,8 @@
       "docs": {
         "container-type": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2025-08-14",
             "newly_available_date": "2023-02-14"
           },
           "deprecated": false,
@@ -4404,7 +4443,10 @@
       "type": "StyleValueWithCondition<CSS.Property.ContentVisibility>",
       "docs": {
         "content-visibility": {
-          "baseline": { "status": "Limited available" },
+          "baseline": {
+            "status": "Newly available",
+            "newly_available_date": "2025-09-15"
+          },
           "deprecated": false,
           "description": "The <code>content-visibility</code> CSS property delays rendering an element, including layout and painting, until it is needed.",
           "experimental": false,
@@ -4417,10 +4459,11 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "corner-block-end-shape": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `corner-block-end-shape` property.",
+          "description": "The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-borders/#propdef-corner-block-end-shape"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/corner-block-end-shape"
         }
       }
     },
@@ -4429,10 +4472,11 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "corner-block-start-shape": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `corner-block-start-shape` property.",
+          "description": "The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-borders/#propdef-corner-block-start-shape"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/corner-block-start-shape"
         }
       }
     },
@@ -4441,10 +4485,11 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "corner-bottom-left-shape": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `corner-bottom-left-shape` property.",
+          "description": "The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-borders/#propdef-corner-bottom-left-shape"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/corner-bottom-left-shape"
         }
       }
     },
@@ -4453,10 +4498,11 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "corner-bottom-right-shape": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `corner-bottom-right-shape` property.",
+          "description": "The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-borders/#propdef-corner-bottom-right-shape"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/corner-bottom-right-shape"
         }
       }
     },
@@ -4465,10 +4511,11 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "corner-bottom-shape": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `corner-bottom-shape` property.",
+          "description": "The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-borders/#propdef-corner-bottom-shape"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/corner-bottom-shape"
         }
       }
     },
@@ -4477,10 +4524,11 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "corner-end-end-shape": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `corner-end-end-shape` property.",
+          "description": "The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-borders/#propdef-corner-end-end-shape"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/corner-end-end-shape"
         }
       }
     },
@@ -4489,10 +4537,11 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "corner-end-start-shape": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `corner-end-start-shape` property.",
+          "description": "The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-borders/#propdef-corner-end-start-shape"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/corner-end-start-shape"
         }
       }
     },
@@ -4501,10 +4550,11 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "corner-inline-end-shape": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `corner-inline-end-shape` property.",
+          "description": "The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-borders/#propdef-corner-inline-end-shape"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/corner-inline-end-shape"
         }
       }
     },
@@ -4513,10 +4563,11 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "corner-inline-start-shape": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `corner-inline-start-shape` property.",
+          "description": "The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-borders/#propdef-corner-inline-start-shape"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/corner-inline-start-shape"
         }
       }
     },
@@ -4525,10 +4576,11 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "corner-left-shape": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `corner-left-shape` property.",
+          "description": "The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-borders/#propdef-corner-left-shape"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/corner-left-shape"
         }
       }
     },
@@ -4537,10 +4589,11 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "corner-right-shape": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `corner-right-shape` property.",
+          "description": "The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-borders/#propdef-corner-right-shape"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/corner-right-shape"
         }
       }
     },
@@ -4549,10 +4602,11 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "corner-shape": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `corner-shape` property.",
+          "description": "The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-borders/#propdef-corner-shape"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/corner-shape"
         }
       }
     },
@@ -4561,10 +4615,11 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "corner-start-end-shape": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `corner-start-end-shape` property.",
+          "description": "The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-borders/#propdef-corner-start-end-shape"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/corner-start-end-shape"
         }
       }
     },
@@ -4573,10 +4628,11 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "corner-start-start-shape": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `corner-start-start-shape` property.",
+          "description": "The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-borders/#propdef-corner-start-start-shape"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/corner-start-start-shape"
         }
       }
     },
@@ -4585,10 +4641,11 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "corner-top-left-shape": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `corner-top-left-shape` property.",
+          "description": "The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-borders/#propdef-corner-top-left-shape"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/corner-top-left-shape"
         }
       }
     },
@@ -4597,10 +4654,11 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "corner-top-right-shape": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `corner-top-right-shape` property.",
+          "description": "The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-borders/#propdef-corner-top-right-shape"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/corner-top-right-shape"
         }
       }
     },
@@ -4609,10 +4667,11 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "corner-top-shape": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `corner-top-shape` property.",
+          "description": "The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-borders/#propdef-corner-top-shape"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/corner-top-shape"
         }
       }
     },
@@ -5061,7 +5120,8 @@
       "docs": {
         "font-synthesis-small-caps": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2025-09-27",
             "newly_available_date": "2023-03-27"
           },
           "deprecated": false,
@@ -5077,7 +5137,8 @@
       "docs": {
         "font-synthesis-style": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2025-09-27",
             "newly_available_date": "2023-03-27"
           },
           "deprecated": false,
@@ -5093,7 +5154,8 @@
       "docs": {
         "font-synthesis-weight": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2025-09-27",
             "newly_available_date": "2023-03-27"
           },
           "deprecated": false,
@@ -5109,7 +5171,8 @@
       "docs": {
         "font-variant-alternates": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2025-09-13",
             "newly_available_date": "2023-03-13"
           },
           "deprecated": false,
@@ -5795,10 +5858,47 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "interactivity": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `interactivity` property.",
+          "description": "The <code>interactivity: inert</code> CSS declaration makes an element and its descendants inert, like when using the <code>inert</code> HTML attribute. Inert elements can't be focused or clicked, their text can't be selected or found using the browser's find-in-page feature.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-ui-4/#propdef-interactivity"
+        }
+      }
+    },
+    "interestDelay": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "interest-delay": {
+          "deprecated": false,
+          "description": "The CSS `interest-delay` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-ui-4/#propdef-interest-delay"
+        }
+      }
+    },
+    "interestDelayEnd": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "interest-delay-end": {
+          "deprecated": false,
+          "description": "The CSS `interest-delay-end` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-ui-4/#propdef-interest-delay-end"
+        }
+      }
+    },
+    "interestDelayStart": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "interest-delay-start": {
+          "deprecated": false,
+          "description": "The CSS `interest-delay-start` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-ui-4/#propdef-interest-delay-start"
         }
       }
     },
@@ -6869,7 +6969,8 @@
       "docs": {
         "outline": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2025-09-27",
             "newly_available_date": "2023-03-27"
           },
           "deprecated": false,
@@ -7652,7 +7753,7 @@
         "reading-flow": {
           "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The <code>reading-flow</code> CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation.",
+          "description": "The <code>reading-flow</code> CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation. The <code>reading-order</code> property overrides this order.",
           "experimental": true,
           "see": "https://developer.mozilla.org/docs/Web/CSS/reading-flow"
         }
@@ -7663,8 +7764,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "reading-order": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `reading-order` property.",
+          "description": "The <code>reading-flow</code> CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation. The <code>reading-order</code> property overrides this order.",
           "experimental": true,
           "see": "https://developer.mozilla.org/docs/Web/CSS/reading-order"
         }
@@ -8311,6 +8413,18 @@
         }
       }
     },
+    "scrollTargetGroup": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "scroll-target-group": {
+          "deprecated": false,
+          "description": "The CSS `scroll-target-group` property.",
+          "experimental": true,
+          "see": "https://developer.mozilla.org/docs/Web/CSS/scroll-target-group"
+        }
+      }
+    },
     "scrollTimeline": {
       "as": true,
       "type": "StyleValueWithCondition<CSS.Property.ScrollTimeline>",
@@ -8566,8 +8680,8 @@
           "baseline": { "status": "Limited available" },
           "deprecated": false,
           "description": "The <code>text-autospace</code> CSS property sets whether and how to insert spaces in inter-script text (such as when mixing Latin and Chinese characters) and around punctuation.",
-          "experimental": true,
-          "see": "https://drafts.csswg.org/css-text-4/#propdef-text-autospace"
+          "experimental": false,
+          "see": "https://developer.mozilla.org/docs/Web/CSS/text-autospace"
         }
       }
     },
@@ -9243,6 +9357,18 @@
         }
       }
     },
+    "viewTransitionGroup": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "view-transition-group": {
+          "deprecated": false,
+          "description": "The CSS `view-transition-group` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-view-transitions-2/#view-transition-group-prop"
+        }
+      }
+    },
     "viewTransitionName": {
       "as": true,
       "type": "StyleValueWithCondition<CSS.Property.ViewTransitionName>",
@@ -9410,19 +9536,23 @@
   },
   "styled": {
     "apply": {
+      "important": true,
       "type": "StyleValueWithCondition<AnyString, \"apply\">",
       "docs": "Apply other styles defined in `theme.styles`."
     },
     "layerStyle": {
+      "important": true,
       "type": "StyleValueWithCondition<AnyString, \"layerStyles\">",
       "docs": "Apply layer styles defined in `theme.layerStyles`."
     },
     "textStyle": {
+      "important": true,
       "type": "StyleValueWithCondition<AnyString, \"textStyles\">",
       "docs": "Apply text styles defined in `theme.textStyles`."
     },
     "colorScheme": {
-      "type": "StyleValueWithCondition<ColorScheme>",
+      "important": true,
+      "type": "StyleValueWithCondition<AnyString | ColorScheme>",
       "docs": "Set color scheme variables."
     },
     "lineClamp": {

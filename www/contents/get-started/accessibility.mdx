@@ -4,3 +4,25 @@ description: Yamada UI follow the WAI-ARIA authoring practices guidelines and ar
 ---
 
 We take care of many of the difficult implementation details related to accessibility, including `aria` and `role` attributes, focus management, and keyboard navigation. That means that users should be able to use our components as-is in most contexts and rely on functionality to follow the expected accessibility design patterns.
+
+## WAI-ARIA
+
+[WAI-ARIA](https://www.w3.org/TR/wai-aria-1.2) is developed by [W3C](https://www.w3.org) and defines the semantics of many common UI patterns seen in Yamada UI. This is designed to give meaning to controls built without using the browser-provided elements. For example, if you were to create a button using `div` instead of `button`, there are attributes that you would need to add to `div` to inform screen readers and speech recognition tools that it is a button.
+
+In addition to semantics, there are also expected behaviors for different types of components. `button` is an example of a component that needs to be reimplemented using JavaScript because it has interactions that do not exist on `div`. [WAI-ARIA authoring practices](https://www.w3.org/WAI/ARIA/apg) provides additional guidance for implementing the behaviors of many of the controls that come with Yamada UI.
+
+## Accessible Label
+
+Many components are designed to provide semantic meaning and context to the corresponding input or select elements. For components that Yamada UI does not provide, [WAI-ARIA provides a specification](https://www.w3.org/TR/wai-aria-1.2/#namecalculation) that provides a specification for providing accessible names and descriptions for those components.
+
+Yamada UI is as abstracted as possible and simplifies the labeling of components. [Field.Label](/docs/components/field) is designed to work with many of our components. Ultimately, it is your responsibility to provide labels so that users have the appropriate context when navigating your application.
+
+## Keyboard Navigation
+
+[Tabs](/docs/components/tabs) and [Modal](/docs/components/modal) are examples of complex components that require users to interact with content using keyboard and other non-mouse input modalities. Yamada UI provides basic keyboard support following the [WAI-ARIA authoring practices](https://www.w3.org/WAI/ARIA/apg).
+
+## Focus Management
+
+Proper keyboard navigation and proper labeling are closely related to focus management. It is often helpful to move focus in response to an action when a user interacts with an element, and the result of that interaction changes something in the application, and the next focus should logically function according to the new context of the application. For users who use screen readers, moving focus is often accompanied by an announcement that conveys the new context, which is essential for proper labeling.
+
+Many of Yamada UI's components move focus based on the actions that users typically perform on the components.

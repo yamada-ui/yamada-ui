@@ -395,3 +395,93 @@ return (
   </Wrap>
 )
 ```
+
+## コンフィグ
+
+### 通知を常に展開する
+
+通知を常に展開する場合は、`expand`に`true`を設定します。
+
+```tsx
+import { UIProvider, extendConfig } from "@yamada-ui/react"
+
+const config = extendConfig({
+  notice: {
+    expand: true,
+  },
+})
+
+const App = () => {
+  return (
+    <UIProvider config={config}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+### 表示位置を変更する
+
+表示位置を変更する場合は、`placement`に`"start"`や`"end"`などを設定します。
+
+```tsx
+import { UIProvider, extendConfig } from "@yamada-ui/react"
+
+const config = extendConfig({
+  notice: {
+    placement: "end-end",,
+  },
+})
+
+const App = () => {
+  return (
+    <UIProvider config={config}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+### 表示件数を変更する
+
+表示件数を変更する場合は、`limit`に数値を設定します。
+
+```tsx
+import { UIProvider, extendConfig } from "@yamada-ui/react"
+
+const config = extendConfig({
+  notice: {
+    limit: 5,
+  },
+})
+
+const App = () => {
+  return (
+    <UIProvider config={config}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+### 通知を閉じる方法を変更する
+
+通知を閉じる方法を変更する場合は、`closeStrategy`に`"click"`や`"drag"`などを設定します。
+
+```tsx
+import { UIProvider, extendConfig } from "@yamada-ui/react"
+
+const config = extendConfig({
+  notice: {
+    closeStrategy: "click",
+  },
+})
+
+const App = () => {
+  return (
+    <UIProvider config={config}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```

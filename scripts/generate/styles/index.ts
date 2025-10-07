@@ -2,6 +2,7 @@ import type { CSSObject } from "@emotion/react"
 import type { CompatData, CompatStatement } from "@mdn/browser-compat-data"
 import type { AnyString, ThemeToken, Transforms } from "@yamada-ui/react"
 import type * as CSS from "csstype"
+import type { FeatureData } from "node_modules/web-features/types"
 import type { StyleConfig } from "./styled-props"
 import type { TransformOptions } from "./transform-props"
 import bcd from "@mdn/browser-compat-data"
@@ -57,8 +58,7 @@ export type StyledProperties =
   | keyof typeof atRuleProps
   | keyof typeof styledProps
 
-export type FeatureData = (typeof features)[number]
-export type BrowserIdentifier = keyof FeatureData["status"]["support"]
+export type BrowserIdentifier = FeatureData["status"]["support"]
 
 export interface CSSCompatStatement extends CompatStatement {
   name: string
@@ -87,8 +87,10 @@ function transformCompatData(
 
         if (omitProps.includes(prop)) return
 
-        const feature = Object.values(features).find(({ compat_features }) =>
-          compat_features?.includes(`${path}.${name}`),
+        const feature = Object.values(features).find(
+          (feature) =>
+            "compat_features" in feature &&
+            feature.compat_features?.includes(`${path}.${name}`),
         )
 
         return [prop, { ...value.__compat, name, feature }]

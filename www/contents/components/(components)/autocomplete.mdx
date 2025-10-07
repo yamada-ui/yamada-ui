@@ -261,7 +261,7 @@ const items = useMemo<Autocomplete.Item[]>(
 )
 return (
   <VStack>
-    <For each={["sm", "md", "lg"]}>
+    <For each={["xs", "sm", "md", "lg", "xl"]}>
       {(size) => (
         <Autocomplete.Root
           key={size}
@@ -603,7 +603,7 @@ return (
 
 ### Handle opening the dropdown on change
 
-To open the dropdown on change, set a function to `openOnChange`.
+To handle the event of opening the dropdown on change, set a function to `openOnChange`.
 
 ```tsx preview functional
 const items = useMemo<Autocomplete.Item[]>(
@@ -882,7 +882,7 @@ return (
 )
 ```
 
-### Make Read-Only
+### Read-Only
 
 To make read-only, set `readOnly` to `true`.
 
@@ -917,7 +917,7 @@ return (
 )
 ```
 
-### Make Invalid
+### Invalid
 
 To make invalid, set `invalid` to `true`.
 

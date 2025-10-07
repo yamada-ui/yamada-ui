@@ -8,3 +8,208 @@ Function arguments can reference tokens from the [theme](/docs/theming).
 :::
 
 ## Calculation & Comparison
+
+Yamada UI provides functions that make CSS calculation and comparison functions more convenient.
+
+### calc
+
+You can use CSS's [calc](https://developer.mozilla.org/en-US/docs/Web/CSS/calc) to reference and calculate tokens from the [theme](/docs/theming).
+
+```tsx preview
+<Center w="calc(lg / 2)" bg="bg.contrast" color="fg.contrast" p="md">
+  Calc
+</Center>
+```
+
+```tsx preview
+<Center w="calc(xs + {spaces.2})" bg="bg.contrast" color="fg.contrast" p="md">
+  Use interpolated token
+</Center>
+```
+
+:::warning
+If the token name is a number, such as the [spaces](/docs/theming/tokens/spaces) tokens in the [theme](/docs/theming), reference it using `{}` (see [interpolation](/docs/styling/interpolation)).
+:::
+
+### min
+
+Use CSS's [min](https://developer.mozilla.org/en-US/docs/Web/CSS/min) to set the smallest value from the given arguments.
+
+If there is only one argument, a second value of `"100%"` is set.
+
+```tsx preview
+<VStack>
+  <Center w="min(100%, lg)" bg="bg.contrast" color="fg.contrast" p="md">
+    Min
+  </Center>
+
+  <Center w="min(md)" bg="bg.contrast" color="fg.contrast" p="md">
+    Omitted Min
+  </Center>
+</VStack>
+```
+
+### max
+
+Use CSS's [max](https://developer.mozilla.org/en-US/docs/Web/CSS/max) to set the largest value from the given arguments.
+
+If there is only one argument, a second value of `"100%"` is set.
+
+```tsx preview
+<VStack>
+  <Center w="max(100%, 2xs)" bg="bg.contrast" color="fg.contrast" p="md">
+    Max
+  </Center>
+
+  <Center w="max(xs)" bg="bg.contrast" color="fg.contrast" p="md">
+    Omitted Max
+  </Center>
+</VStack>
+```
+
+### clamp
+
+Use CSS's [clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/clamp) to constrain a value between an upper and lower bound.
+
+If there are two arguments, a recommended value of `"100%"` is set.
+
+```tsx preview
+<VStack>
+  <Center w="clamp(sm, 100%, xl)" bg="bg.contrast" color="fg.contrast" p="md">
+    Clamp
+  </Center>
+
+  <Center w="clamp(sm, lg)" bg="bg.contrast" color="fg.contrast" p="md">
+    Omitted Clamp
+  </Center>
+</VStack>
+```
+
+## Color
+
+Yamada UI provides functions that easily mix colors together, lighten, and darken colors.
+
+### mix
+
+Use CSS's [color-mix](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix) to mix colors together.
+
+You can specify two or three arguments. The [method](https://developer.mozilla.org/en-US/docs/Web/CSS/color-interpolation-method) can be omitted, and the default is `in srgb`.
+
+```tsx preview
+<Center bg="mix(red.500, blue.500)" p="md" color="white">
+  "in srgb" + "red.500" + "blue.500"
+</Center>
+```
+
+You can change the ratio by specifying a percentage.
+
+```tsx preview
+<Center bg="mix(in lab, orange.500 80%, purple.500 20%)" p="md" color="white">
+  "in lab" + "orange.500 80%" + "purple.500 20%"
+</Center>
+```
+
+:::warning
+Make sure the percentages add up to `100%`.
+:::
+
+### tint
+
+Use [mix](#mix) to lighten a color by mixing it with `#FFFFFF`.
+
+```tsx preview
+<Center preview bg="tint(purple.500, 50%)" p="md" color="white">
+  Tint color
+</Center>
+```
+
+### shade
+
+Use [mix](#mix) to darken a color by mixing it with `#000000`.
+
+```tsx preview
+<Center bg="shade(yellow.500, 50%)" p="md" color="white">
+  Shade color
+</Center>
+```
+
+### transparentize
+
+Use [mix](#mix) to make a color transparent by mixing it with `transparent`. A shorthand notation like `bg="red.500 / 50"` is also available.
+
+```tsx preview
+<Center bg="transparentize(red.500, 50%)" p="md" color="white">
+  Transparentize color
+</Center>
+```
+
+### tone
+
+Use [mix](#mix) to create a color based on a specified color and tone.
+
+```tsx preview
+<VStack>
+  {TONES.map((tone) => (
+    <Center key={tone} bg={`tone(purple.500, ${tone})`} p="md" color="white">
+      <Text
+        color={`tone(purple.500, ${tone})`}
+        as="span"
+        filter="invert(100%) grayscale(100%) contrast(100)"
+      >
+        Tone {tone}
+      </Text>
+    </Center>
+  ))}
+</VStack>
+```
+
+## Gradient
+
+Yamada UI provides functions that easily create gradients. To add a gradient, set functions and values to `bgGradient`.
+
+- `linear(<direction>, <from>, <to>)`
+- `radial(<from>, <to>)`
+
+You can also use other CSS gradient functions like `repeating-linear` or `conic`.
+
+Shortcuts are available for `<direction>`.
+
+```ts
+{
+  'to-t': 'to top',
+  'to-tr': 'to top right',
+  'to-r': 'to right',
+  'to-br': 'to bottom right',
+  'to-b': 'to bottom',
+  'to-bl': 'to bottom left',
+  'to-l': 'to left',
+  'to-tl': 'to top left',
+}
+```
+
+```tsx preview
+<Box h="2xs" bgGradient="linear(to-r, green.200, pink.500)" h="2xs" />
+```
+
+### Customize Colors
+
+You can use both theme [tokens](/docs/theming/tokens/colors) and [CSS color values](https://developer.mozilla.org/en-US/docs/Web/CSS/color).
+
+```tsx preview
+<Box h="2xs" bgGradient="linear(to-r, #59a9e1, #f37bdf)" h="2xs" />
+```
+
+### Text Gradient
+
+To add a gradient to text, set `bgGradient` and `bgClip` to `text`.
+
+```tsx preview
+<Heading
+  size="xl"
+  bgGradient="linear(to-r, orange.400, red.500)"
+  bgClip="text"
+  truncated
+>
+  クリリンのことか……クリリンのことかーーーっ！！！！！
+</Heading>
+```

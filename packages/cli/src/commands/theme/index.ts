@@ -1,5 +1,6 @@
 import type { UserConfig } from "../../index.type"
 import { merge } from "@yamada-ui/utils"
+import boxen from "boxen"
 import { Command } from "commander"
 import { existsSync } from "fs"
 import { readFile } from "fs/promises"
@@ -11,14 +12,24 @@ import prompts from "prompts"
 import { rimraf } from "rimraf"
 import {
   CONFIG_FILE_NAME,
+  DEFAULT_PACKAGE_JSON,
+  DEFAULT_PACKAGE_JSON_EXPORTS,
+  DEFAULT_PACKAGE_NAME,
+  DEFAULT_PATH,
   REGISTRY_FILE_NAME,
-  THEME_PATH,
+  REQUIRED_DEPENDENCIES,
+  REQUIRED_DEV_DEPENDENCIES,
+  TSCONFIG_JSON,
 } from "../../constant"
 import {
   cwd,
   fetchRegistry,
   getConfig,
+  getPackageManager,
+  installDependencies,
   isTsx,
+  packageAddArgs,
+  splitVersion,
   timer,
   transformExtension,
   transformTsToJs,
@@ -63,13 +74,63 @@ export const theme = new Command("theme")
       spinner.start("Fetching config")
 
       const config = await getConfig(cwd, configPath, { format, jsx: js, lint })
-      const resolvedPath = themePath
-        ? path.resolve(cwd, themePath)
-        : (config.theme?.path ?? path.resolve(cwd, THEME_PATH))
 
       spinner.succeed("Fetched config")
 
-      if (!overwrite && existsSync(resolvedPath)) {
+      themePath ??= config.theme?.path
+
+      const defaultThemePath = config.monorepo
+        ? DEFAULT_PATH.theme.monorepo
+        : DEFAULT_PATH.theme.polyrepo
+
+      if (!themePath) {
+        let { outdir = "" } = await prompts({
+          type: "text",
+          name: "outdir",
+          initial: defaultThemePath,
+          message: "What is the path to the theme directory?",
+        })
+
+        // eslint-disable-next-line no-control-regex
+        outdir = outdir.replace(/\x17/g, "").trim()
+        outdir ||= defaultThemePath
+
+        themePath = outdir as string
+      }
+
+      const monorepoConfig = { src: false, packageName: "" }
+
+      if (config.monorepo) {
+        let { src = true, packageName = "" } = await prompts([
+          {
+            type: "text",
+            name: "packageName",
+            initial: DEFAULT_PACKAGE_NAME.theme,
+            message: c.reset("What is the package name?"),
+          },
+          {
+            type: "toggle",
+            name: "src",
+            active: "Yes",
+            inactive: "No",
+            initial: true,
+            message: c.reset(
+              "Would you like your code inside a `src/` directory?",
+            ),
+          },
+        ])
+
+        // eslint-disable-next-line no-control-regex
+        packageName = packageName.replace(/\x17/g, "").trim()
+        packageName ||= DEFAULT_PACKAGE_NAME.theme
+
+        monorepoConfig.src = src
+        monorepoConfig.packageName = packageName
+      }
+
+      const outdirPath = path.resolve(cwd, themePath)
+
+      if (!overwrite && existsSync(outdirPath)) {
         const { overwrite } = await prompts({
           type: "confirm",
           name: "overwrite",
@@ -83,7 +144,7 @@ export const theme = new Command("theme")
 
         spinner.start("Clearing directory")
 
-        await rimraf(resolvedPath)
+        await rimraf(outdirPath)
 
         spinner.succeed("Cleared directory")
       }
@@ -98,23 +159,30 @@ export const theme = new Command("theme")
         [
           {
             task: async (_, task) => {
+              const targetPath = path.resolve(
+                outdirPath,
+                monorepoConfig.src ? "src" : "",
+              )
+
               await Promise.all([
                 ...registry.sources.map(async ({ name, content }) => {
                   if (!content) return
 
                   name = transformExtension(name, config.jsx)
 
-                  const targetPath = path.resolve(resolvedPath, name)
-
                   if (config.jsx)
                     content = isTsx(name)
                       ? transformTsxToJsx(content)
                       : transformTsToJs(content)
 
-                  await writeFileSafe(targetPath, content, config)
+                  await writeFileSafe(
+                    path.resolve(targetPath, name),
+                    content,
+                    config,
+                  )
                 }),
                 writeFileSafe(
-                  path.resolve(resolvedPath, REGISTRY_FILE_NAME),
+                  path.resolve(targetPath, REGISTRY_FILE_NAME),
                   JSON.stringify(registry),
                   merge(config, { format: { parser: "json" } }),
                 ),
@@ -131,7 +199,7 @@ export const theme = new Command("theme")
               const userConfig = JSON.parse(data) as UserConfig
 
               userConfig.theme ??= {}
-              userConfig.theme.path ??= themePath ?? THEME_PATH
+              userConfig.theme.path ??= themePath
 
               await writeFileSafe(
                 targetPath,
@@ -147,7 +215,122 @@ export const theme = new Command("theme")
         { concurrent: true },
       )
 
+      if (config.monorepo) {
+        tasks.add({
+          task: async (_, task) => {
+            const targetPath = path.resolve(outdirPath, "package.json")
+            const defaultExports =
+              DEFAULT_PACKAGE_JSON_EXPORTS.theme[config.jsx ? "jsx" : "tsx"]
+            const exports = monorepoConfig.src
+              ? defaultExports
+              : Object.fromEntries(
+                  Object.entries(defaultExports).map(([key, value]) => [
+                    key,
+                    value.replace(/src\//, ""),
+                  ]),
+                )
+
+            const content = JSON.stringify({
+              name: monorepoConfig.packageName,
+              ...DEFAULT_PACKAGE_JSON,
+              dependencies: Object.fromEntries(
+                REQUIRED_DEPENDENCIES.theme.map((dependency) =>
+                  splitVersion(dependency),
+                ),
+              ),
+              devDependencies: Object.fromEntries(
+                REQUIRED_DEV_DEPENDENCIES.theme.map((dependency) =>
+                  splitVersion(dependency),
+                ),
+              ),
+              exports,
+            })
+
+            await writeFileSafe(
+              targetPath,
+              content,
+              merge(config, { format: { parser: "json" } }),
+            )
+
+            task.title = `Generated ${c.cyan("package.json")}`
+          },
+          title: `Generating ${c.cyan("package.json")}`,
+        })
+      }
+
+      if (!config.jsx) {
+        tasks.add({
+          task: async (_, task) => {
+            const targetPath = path.resolve(outdirPath, "tsconfig.json")
+            const tsconfig = { ...TSCONFIG_JSON }
+
+            if (!monorepoConfig.src) {
+              tsconfig.include = tsconfig.include.map((value) =>
+                value.replace(/src\//, ""),
+              )
+            }
+
+            const content = JSON.stringify(tsconfig)
+
+            await writeFileSafe(
+              targetPath,
+              content,
+              merge(config, { format: { parser: "json" } }),
+            )
+
+            task.title = `Generated ${c.cyan("tsconfig.json")}`
+          },
+          title: `Generating ${c.cyan("tsconfig.json")}`,
+        })
+      }
+
       await tasks.run()
+
+      if (config.monorepo) {
+        const { install } = await prompts({
+          type: "confirm",
+          name: "install",
+          initial: true,
+          message: c.reset(
+            `The theme is generated. Do you want to install dependencies?`,
+          ),
+        })
+
+        if (install) {
+          spinner.start("Installing dependencies")
+
+          await installDependencies([], { cwd })
+
+          // TODO: Once `@yamada-ui/react` releases v2, I'll remove it.
+          await installDependencies(["@yamada-ui/react@dev"], {
+            cwd: outdirPath,
+          })
+
+          spinner.succeed("Installed dependencies")
+        }
+
+        const packageManager = getPackageManager()
+        const args = packageAddArgs(packageManager)
+
+        console.log("")
+        console.log(
+          boxen(
+            [
+              "Run",
+              c.cyan(
+                `${packageManager} ${args.join(" ")} "${monorepoConfig.packageName}@workspace:*"`,
+              ),
+              "in your application.",
+            ].join(" "),
+            {
+              borderColor: "yellow",
+              borderStyle: "round",
+              padding: 1,
+              textAlignment: "center",
+            },
+          ),
+        )
+      }
 
       end()
     } catch (e) {

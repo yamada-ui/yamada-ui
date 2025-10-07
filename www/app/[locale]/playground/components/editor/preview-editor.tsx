@@ -8,13 +8,18 @@ import { ClientOnly } from "@/components/mdx/client-only"
 
 interface PreviewEditorProps {
   editorState: EditorStateController
-  ref?: Ref<{ refresh: () => void; updateCode: (code: string) => void }>
   initialValue?: string
+  previewRef?: Ref<{ refresh: () => void; updateCode: (code: string) => void }>
   onChange?: (value: string) => void
 }
 
 export const PreviewEditor = memo(
-  ({ ref, editorState, initialValue = "", onChange }: PreviewEditorProps) => {
+  ({
+    editorState,
+    initialValue = "",
+    previewRef,
+    onChange,
+  }: PreviewEditorProps) => {
     const [value, setValue] = useState(() => {
       const currentValue = editorState.getValue.current?.()
       return currentValue || initialValue
@@ -45,7 +50,7 @@ export const PreviewEditor = memo(
       }
     }, [editorState, onChange])
 
-    assignRef(ref, { refresh, updateCode })
+    assignRef(previewRef, { refresh, updateCode })
 
     return <ClientOnly lang="tsx" code={value} functional />
   },

@@ -4,10 +4,10 @@ import {
   ButtonGroup,
   CheckIcon,
   ClipboardCopyIcon,
+  Heading,
   HStack,
   IconButton,
   RotateCcwIcon,
-  Text,
   Tooltip,
   useClipboard,
   useWindowEvent,
@@ -16,7 +16,7 @@ import { useRouter } from "next/navigation"
 import { memo, useCallback } from "react"
 import { usePlayground } from "../playground-provider"
 
-export const PlaygroundHeader = memo(function PlaygroundHeader() {
+export const PlaygroundHeader = memo(() => {
   const { playground } = usePlayground()
   const router = useRouter()
 
@@ -39,9 +39,9 @@ export const PlaygroundHeader = memo(function PlaygroundHeader() {
 
   return (
     <HStack alignItems="center" justifyContent="space-between">
-      <Text fontSize="lg" fontWeight="semibold">
+      <Heading as="h2" fontSize="lg" fontWeight="semibold">
         Playground
-      </Text>
+      </Heading>
       <HStack gap="sm">
         <ButtonGroup.Root size="sm" gap="sm">
           <Tooltip content="Reset" placement="end-center">
@@ -72,3 +72,5 @@ export const PlaygroundHeader = memo(function PlaygroundHeader() {
     </HStack>
   )
 })
+
+PlaygroundHeader.displayName = "PlaygroundHeader"

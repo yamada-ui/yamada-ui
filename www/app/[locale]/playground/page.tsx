@@ -1,7 +1,9 @@
 import type { Metadata } from "next"
+import { Grid, GridItem } from "@yamada-ui/react"
 import { getTranslations } from "next-intl/server"
 import { Suspense } from "react"
-import { Playground } from "./playground"
+import { PlaygroundEditor, PlaygroundHeader } from "./components"
+import { PlaygroundProvider } from "./playground-provider"
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("component.playground")
@@ -11,7 +13,16 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Page() {
   return (
     <Suspense>
-      <Playground />
+      <PlaygroundProvider>
+        <Grid flex={1} gap="lg" maxW="8xl" py="sm" templateRows="auto 1fr">
+          <GridItem>
+            <PlaygroundHeader />
+          </GridItem>
+          <GridItem>
+            <PlaygroundEditor />
+          </GridItem>
+        </Grid>
+      </PlaygroundProvider>
     </Suspense>
   )
 }

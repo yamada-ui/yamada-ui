@@ -20,11 +20,11 @@ interface PlaygroundEditorController {
 }
 
 interface PlaygroundEditorProps {
-  ref?: RefObject<PlaygroundEditorController>
+  editorRef?: RefObject<PlaygroundEditorController>
 }
 
 export const PlaygroundEditor = memo<PlaygroundEditorProps>(
-  function PlaygroundEditor({ ref }) {
+  function PlaygroundEditor({ editorRef }) {
     const { playground } = usePlayground()
     const searchParams = useSearchParams()
     const editorState = useRef(createEditorStateController())
@@ -44,8 +44,11 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(
     }, [searchParams])
 
     const lastInitialValue = useRef(initialValue)
+    const lastSyncedCode = useRef<null | string>(null)
+
     if (lastInitialValue.current !== initialValue) {
       lastInitialValue.current = initialValue
+      lastSyncedCode.current = initialValue
       codeMirrorRef.current?.updateCode(initialValue)
       previewRef.current?.updateCode(initialValue)
     }
@@ -77,10 +80,19 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(
         const nextCode = playground.getCurrentCode()
         const currentCode = editorState.current.getValue.current?.()
 
+        // Prevent infinite loops by checking if we've already synced this code
+        if (lastSyncedCode.current === nextCode) return
         if (currentCode === nextCode) return
 
-        codeMirrorRef.current?.updateCode(nextCode)
-        previewRef.current?.updateCode(nextCode)
+        lastSyncedCode.current = nextCode
+
+        // Only update if the code is actually different to prevent infinite loops
+        if (codeMirrorRef.current) {
+          codeMirrorRef.current.updateCode(nextCode)
+        }
+        if (previewRef.current) {
+          previewRef.current.updateCode(nextCode)
+        }
       }
 
       syncCode()
@@ -94,9 +106,9 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(
       }
     }, [editorState, playground])
 
-    if (ref?.current) {
-      assignRef(ref.current.getCurrentCode, getCurrentCode)
-      assignRef(ref.current.toggleVisibility, toggleVisibility)
+    if (editorRef?.current) {
+      assignRef(editorRef.current.getCurrentCode, getCurrentCode)
+      assignRef(editorRef.current.toggleVisibility, toggleVisibility)
     }
 
     const showEditor =
@@ -121,15 +133,13 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(
               },
             }}
             borderWidth="1px"
-            collapsedSize={5}
-            collapsible
             defaultSize={50}
             minSize={5}
             roundedLeft="l2"
             roundedRight={!showPreview ? "l2" : undefined}
           >
             <CodeMirrorEditor
-              ref={codeMirrorRef}
+              codeMirrorRef={codeMirrorRef}
               editorState={editorState.current!}
               initialValue={initialValue}
               onChange={playground.changeCode}
@@ -150,9 +160,9 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(
             roundedRight="l2"
           >
             <PreviewEditor
-              ref={previewRef}
               editorState={editorState.current!}
               initialValue={initialValue}
+              previewRef={previewRef}
             />
           </Resizable.Item>
         ) : null}

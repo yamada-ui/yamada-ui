@@ -92,16 +92,16 @@ export const PlaygroundProvider: FC<PlaygroundProviderProps> = ({
     <PlaygroundContext value={value}>
       {children}
 
-      <Controller ref={controller} />
+      <Controller controllerRef={controller} />
     </PlaygroundContext>
   )
 }
 
 interface ControllerProps {
-  ref: RefObject<Controller>
+  controllerRef: RefObject<Controller>
 }
 
-const Controller: FC<ControllerProps> = ({ ref }) => {
+const Controller: FC<ControllerProps> = ({ controllerRef }) => {
   const searchParams = useSearchParams()
   const pathname = usePathname()
 
@@ -143,7 +143,14 @@ const Controller: FC<ControllerProps> = ({ ref }) => {
       },
 
       getShareUrl: () => {
-        const params = new URLSearchParams(Array.from(searchParams.entries()))
+        const params = new URLSearchParams()
+        searchParams.forEach((value: string | string[], key: string) => {
+          if (Array.isArray(value)) {
+            value.forEach((v) => params.append(key, v))
+          } else {
+            params.set(key, value)
+          }
+        })
         params.set("code", encodeCode(codeRef.current))
         const relative = `${pathname}?${params.toString()}`
         const origin =
@@ -179,12 +186,12 @@ const Controller: FC<ControllerProps> = ({ ref }) => {
     [notify, pathname, searchParams],
   )
 
-  assignRef(ref.current.changeCode, methods.changeCode)
-  assignRef(ref.current.getCurrentCode, methods.getCurrentCode)
-  assignRef(ref.current.getShareUrl, methods.getShareUrl)
-  assignRef(ref.current.reset, methods.reset)
-  assignRef(ref.current.onReset, methods.onReset)
-  assignRef(ref.current.subscribe, methods.subscribe)
+  assignRef(controllerRef.current.changeCode, methods.changeCode)
+  assignRef(controllerRef.current.getCurrentCode, methods.getCurrentCode)
+  assignRef(controllerRef.current.getShareUrl, methods.getShareUrl)
+  assignRef(controllerRef.current.reset, methods.reset)
+  assignRef(controllerRef.current.onReset, methods.onReset)
+  assignRef(controllerRef.current.subscribe, methods.subscribe)
 
   return null
 }

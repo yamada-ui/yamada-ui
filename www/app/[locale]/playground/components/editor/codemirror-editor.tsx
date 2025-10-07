@@ -12,14 +12,14 @@ const extensions = [javascript({ jsx: true, typescript: true })]
 
 interface CodeMirrorEditorProps {
   editorState: EditorStateController
-  ref?: Ref<{ updateCode: (code: string) => void }>
+  codeMirrorRef?: Ref<{ updateCode: (code: string) => void }>
   initialValue?: string
   onChange?: (value: string) => void
 }
 
 export const CodeMirrorEditor = memo(
   ({
-    ref,
+    codeMirrorRef,
     editorState,
     initialValue = "",
     onChange,
@@ -37,9 +37,7 @@ export const CodeMirrorEditor = memo(
       (newValue: string) => {
         setValue(newValue)
         editorState.setValue.current?.(newValue)
-
         editorState.notifyChange.current?.(newValue)
-
         onChange?.(newValue)
       },
       [editorState, onChange],
@@ -68,18 +66,18 @@ export const CodeMirrorEditor = memo(
     const updateCode = useCallback(
       (code: string) => {
         setValue(code)
-        editorState.setValue.current?.(code)
-        editorState.notifyChange.current?.(code)
+        // Don't call editorState methods here to avoid circular dependency
+        // The onChange callback will handle the state synchronization
         onChange?.(code)
       },
-      [editorState, onChange],
+      [onChange],
     )
 
     assignRef(editorState.getValue, getValue)
     assignRef(editorState.notifyChange, notifyChange)
     assignRef(editorState.setValue, setEditorValue)
     assignRef(editorState.subscribe, subscribe)
-    assignRef(ref, { updateCode })
+    assignRef(codeMirrorRef, { updateCode })
 
     return (
       <CodeMirror

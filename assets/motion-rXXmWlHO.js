@@ -1,1 +1,0 @@
-import{aA as r,r as m,bd as i,j as c,s as x,f as d}from"./iframe-BToZTpox.js";const p=["transition"],u=x("div",{forwardProps:p}),f=(({ref:t,as:s="div",className:o,...a})=>{const e=r(),n=m.useMemo(()=>i.create(s),[s]);return c.jsx(u,{ref:t,as:n,className:d(e.utils.getClassName("motion"),o),...a})});export{f as M};

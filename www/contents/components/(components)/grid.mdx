@@ -6,7 +6,114 @@ source: components/grid
 style: components/grid/grid.style.ts
 ---
 
+```tsx preview
+<Grid gap="md" templateColumns="repeat(4, 1fr)">
+  <For each={Array.from({ length: 4 })}>
+    {(_, index) => (
+      <GridItem
+        key={index}
+        bg="bg.contrast"
+        color="fg.contrast"
+        minH="16"
+        h="full"
+      />
+    )}
+  </For>
+</Grid>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Grid, GridItem } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Grid, GridItem } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Grid, GridItem } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Grid>
+  <GridItem />
+</Grid>
+```
+
+### Use Template Areas
+
+```tsx preview
+<Grid
+  templateAreas={`
+    "one one two three"
+    "four five two six"
+    "four seven seven eight"
+  `}
+  gap="md"
+>
+  <For each={["one", "two", "three", "four", "five", "six", "seven", "eight"]}>
+    {(area, index) => (
+      <GridItem
+        key={index}
+        bg="bg.contrast"
+        color="fg.contrast"
+        minH="16"
+        h="full"
+        area={area}
+      />
+    )}
+  </For>
+</Grid>
+```
+
+### Spanning Multiple Columns and Rows
+
+```tsx preview
+<Grid gap="md" templateColumns="repeat(4, 1fr)" templateRows="repeat(3, 1fr)">
+  <GridItem
+    bg="bg.contrast"
+    color="fg.contrast"
+    minH="16"
+    h="full"
+    colSpan={2}
+  />
+
+  <GridItem
+    bg="bg.contrast"
+    color="fg.contrast"
+    minH="16"
+    h="full"
+    colSpan={2}
+    rowSpan={3}
+  />
+
+  <GridItem
+    bg="bg.contrast"
+    color="fg.contrast"
+    minH="16"
+    h="full"
+    rowStart={2}
+    rowEnd={4}
+  />
+
+  <GridItem
+    bg="bg.contrast"
+    color="fg.contrast"
+    minH="16"
+    h="full"
+    colStart={2}
+    colEnd={3}
+    rowStart={2}
+    rowEnd={4}
+  />
+</Grid>
+```
 
 ## Props
 

@@ -58,7 +58,7 @@ describe("<Reorder />", () => {
       </Reorder.Root>,
     )
 
-    expect(warnSpy).toHaveBeenCalledWith(
+    expect(warnSpy).toHaveBeenCalledExactlyOnceWith(
       "Reorder: 'value' of 'ReorderItem' must not be duplicated. duplicate 'value' is 'Item 1' ",
     )
     expect(warnSpy).toHaveBeenCalledTimes(1)
@@ -151,8 +151,11 @@ describe("<Reorder />", () => {
     // Simulate drag operation with button click
     await user.click(screen.getByRole("button", { name: "Test Reorder" }))
 
-    expect(onChange).toHaveBeenCalledWith(["Item 2", "Item 1"])
-    expect(onCompleteChange).toHaveBeenCalledWith(["Item 2", "Item 1"])
+    expect(onChange).toHaveBeenCalledExactlyOnceWith(["Item 2", "Item 1"])
+    expect(onCompleteChange).toHaveBeenCalledExactlyOnceWith([
+      "Item 2",
+      "Item 1",
+    ])
 
     expect(onChange).toHaveBeenCalledTimes(1)
     expect(onCompleteChange).toHaveBeenCalledTimes(1)

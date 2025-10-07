@@ -57,6 +57,20 @@ import { useAnimation } from "@workspaces/ui"
 const animation = useAnimation()
 ```
 
+### Use Theme Tokens
+
+To use [theme](/docs/theming) [animations](/docs/theming/tokens/animations), set the argument.
+
+```tsx preview functional client
+const animation = useAnimation("gradient")
+
+return <Box w="full" h="xs" animation={animation} />
+```
+
+:::warning
+By default, no animation tokens are defined.
+:::
+
 ### Use Multiple Animations
 
 To use multiple animations, set the arguments as an array.

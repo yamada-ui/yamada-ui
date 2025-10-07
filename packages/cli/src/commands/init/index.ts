@@ -31,6 +31,7 @@ import {
   getPackageNameWithVersion,
   installDependencies,
   packageAddArgs,
+  splitVersion,
   timer,
   transformExtension,
   transformTsToJs,
@@ -95,7 +96,7 @@ export const init = new Command("init")
           type: "text",
           name: "outdir",
           initial: (_, { monorepo }) =>
-            monorepo ? DEFAULT_PATH.monorepo : DEFAULT_PATH.polyrepo,
+            monorepo ? DEFAULT_PATH.ui.monorepo : DEFAULT_PATH.ui.polyrepo,
           message: (_, { monorepo }) =>
             monorepo
               ? c.reset(`What is the path to the monorepo?`)
@@ -104,7 +105,7 @@ export const init = new Command("init")
         {
           type: (_, { monorepo }) => (monorepo ? "text" : null),
           name: "packageName",
-          initial: DEFAULT_PACKAGE_NAME,
+          initial: DEFAULT_PACKAGE_NAME.ui,
           message: c.reset("What is the package name?"),
         },
         {
@@ -137,7 +138,7 @@ export const init = new Command("init")
 
       // eslint-disable-next-line no-control-regex
       outdir = outdir.replace(/\x17/g, "").trim()
-      outdir ||= monorepo ? DEFAULT_PATH.monorepo : DEFAULT_PATH.polyrepo
+      outdir ||= monorepo ? DEFAULT_PATH.ui.monorepo : DEFAULT_PATH.ui.polyrepo
       // eslint-disable-next-line no-control-regex
       packageName = packageName.replace(/\x17/g, "").trim()
       packageName ||= DEFAULT_PACKAGE_NAME
@@ -220,10 +221,31 @@ export const init = new Command("init")
             {
               task: async (_, task) => {
                 const targetPath = path.resolve(outdirPath, "package.json")
+                const defaultExports =
+                  DEFAULT_PACKAGE_JSON_EXPORTS.ui[jsx ? "jsx" : "tsx"]
+                const exports = src
+                  ? defaultExports
+                  : Object.fromEntries(
+                      Object.entries(defaultExports).map(([key, value]) => [
+                        key,
+                        value.replace(/src\//, ""),
+                      ]),
+                    )
+
                 const content = JSON.stringify({
                   name: packageName,
                   ...DEFAULT_PACKAGE_JSON,
-                  exports: DEFAULT_PACKAGE_JSON_EXPORTS[jsx ? "JSX" : "TSX"],
+                  dependencies: Object.fromEntries(
+                    REQUIRED_DEPENDENCIES.ui.map((dependency) =>
+                      splitVersion(dependency),
+                    ),
+                  ),
+                  devDependencies: Object.fromEntries(
+                    REQUIRED_DEV_DEPENDENCIES.ui.map((dependency) =>
+                      splitVersion(dependency),
+                    ),
+                  ),
+                  exports,
                 })
 
                 await writeFileSafe(
@@ -284,7 +306,15 @@ export const init = new Command("init")
           tasks.add({
             task: async (_, task) => {
               const targetPath = path.resolve(outdirPath, "tsconfig.json")
-              const content = JSON.stringify({ ...TSCONFIG_JSON })
+              const tsconfig = { ...TSCONFIG_JSON }
+
+              if (!src) {
+                tsconfig.include = tsconfig.include.map((value) =>
+                  value.replace(/src\//, ""),
+                )
+              }
+
+              const content = JSON.stringify(tsconfig)
 
               await writeFileSafe(
                 targetPath,
@@ -324,16 +354,16 @@ export const init = new Command("init")
                   ...getNotInstalledDependencies(
                     packageJson,
                     // TODO: Once `@yamada-ui/react` releases v2, I'll add it.
-                    // REQUIRED_DEPENDENCIES,
+                    // REQUIRED_DEPENDENCIES.ui,
                     // TODO: Once `@yamada-ui/react` releases v2, I'll remove it.
-                    [...REQUIRED_DEPENDENCIES, "@yamada-ui/react@dev"],
+                    [...REQUIRED_DEPENDENCIES.ui, "@yamada-ui/react@dev"],
                   ),
                 )
 
                 notInstalledDevDependencies.push(
                   ...getNotInstalledDependencies(
                     packageJson,
-                    REQUIRED_DEV_DEPENDENCIES,
+                    REQUIRED_DEV_DEPENDENCIES.ui,
                   ),
                 )
 

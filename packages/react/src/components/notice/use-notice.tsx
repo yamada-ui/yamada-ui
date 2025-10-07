@@ -8,12 +8,12 @@ import type { StatusScheme } from "../status"
 import { useCallback, useMemo } from "react"
 import { toast } from "sonner"
 import { useSystem } from "../../core"
-import { isArray } from "../../utils"
+import { isArray, omitObject } from "../../utils"
 import { NoticeItem } from "./notice"
 import { useNoticeContext } from "./notice-provider"
 
 export interface UseNoticeOptions
-  extends NoticeConfig,
+  extends Omit<NoticeConfig, "expand">,
     Omit<Alert.RootProps, "direction" | "id" | "status" | "title">,
     Pick<Alert.LoadingProps, "loadingScheme"> {
   /**
@@ -72,10 +72,13 @@ export interface NoticeComponentProps {
  * @see https://yamada-ui.com/docs/hooks/use-notice
  */
 export const useNotice = (options: UseNoticeOptions = {}) => {
-  const { getLimit, updateLimit } = useNoticeContext()
+  const { getId, getLimit, updateLimit } = useNoticeContext()
   const { config } = useSystem()
 
-  const systemOptions = useMemo(() => config.notice ?? {}, [config])
+  const systemOptions = useMemo(
+    () => omitObject(config.notice ?? {}, ["expand"]),
+    [config],
+  )
   const defaultOptions = useMemo(
     () => ({ ...systemOptions, ...options }),
     [options, systemOptions],
@@ -112,7 +115,7 @@ export const useNotice = (options: UseNoticeOptions = {}) => {
       const resolvedOptions = {
         dismissible: closeStrategies.includes("drag") && closable,
         duration: duration ?? Number.POSITIVE_INFINITY,
-        toasterId: placement,
+        toasterId: getId(placement),
       }
 
       return toast.custom(
@@ -139,7 +142,7 @@ export const useNotice = (options: UseNoticeOptions = {}) => {
     }
 
     return notice
-  }, [getLimit, getOptions, updateLimit])
+  }, [getLimit, getOptions, getId, updateLimit])
 }
 
 export type UseNoticeReturn = ReturnType<typeof useNotice>

@@ -52,6 +52,18 @@ export function runKeyAction<Y>(
   action(ev)
 }
 
+export function isComposing(
+  ev: React.ChangeEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
+): boolean {
+  if ("keyCode" in ev) {
+    return ev.nativeEvent.isComposing || ev.keyCode === 229
+  } else if (ev.nativeEvent instanceof InputEvent) {
+    return ev.nativeEvent.isComposing
+  } else {
+    return false
+  }
+}
+
 export function useAttributeObserver(
   ref: React.RefObject<HTMLElement | null>,
   attributeFilter: string[],

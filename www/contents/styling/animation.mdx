@@ -4,3 +4,166 @@ description: Yamada UI provides features to easily achieve the animation you wan
 ---
 
 ## Usage
+
+```tsx preview
+<Box
+  w="fit-content"
+  bg="bg.contrast"
+  color="fg.contrast"
+  p="md"
+  animationDirection="alternate"
+  animationDuration="1s"
+  animationIterationCount="infinite"
+  animationTimingFunction="linear"
+  _keyframes={{
+    from: { translate: "0 0" },
+    to: { translate: "100% 0" },
+  }}
+>
+  Box
+</Box>
+```
+
+You can also use [theme](/docs/theming) [keyframes](/docs/theming/tokens/keyframes) to apply common keyframes throughout your application. Using `animationName` or `_keyframes` is recommended.
+
+```tsx preview
+<Box
+  w="fit-content"
+  bg="bg.contrast"
+  color="fg.contrast"
+  p="md"
+  animationName="fade-in"
+  animationDirection="alternate"
+  animationDuration="1s"
+  animationIterationCount="infinite"
+  animationTimingFunction="linear"
+>
+  Box
+</Box>
+```
+
+### Use Theme Tokens
+
+To use [theme](/docs/theming) [animations](/docs/theming/tokens/animations), set the `animation` property.
+
+```tsx preview
+<Box
+  w="fit-content"
+  bg="bg.contrast"
+  color="fg.contrast"
+  p="md"
+  animation="fade-in"
+>
+  Box
+</Box>
+```
+
+:::warning
+By default, no animation tokens are defined.
+:::
+
+## Components
+
+Yamada UI provides components that make animations easier to implement.
+
+::::card-group
+
+:::card{href="/docs/components/motion"}
+
+### Motion
+
+A convenient component that extends the Yamada UI [Style Props](/docs/styling/style-props) to [Motion](https://motion.dev/).
+
+:::
+:::card{href="/docs/components/airy"}
+
+### Airy
+
+A component that provides an animation that smoothly switches between two elements.
+
+:::
+:::card{href="/docs/components/collapse"}
+
+### Collapse
+
+A component that expands or collapses an element to display it.
+
+:::
+:::card{href="/docs/components/fade-scale"}
+
+### FadeScale
+
+A component that gradually expands or shrinks an element to display or hide it.
+
+:::
+:::card{href="/docs/components/fade"}
+
+### Fade
+
+A component that gradually displays or hides an element.
+
+:::
+:::card{href="/docs/components/flip"}
+
+### Flip
+
+A component that provides an animation that flips between two elements.
+
+:::
+:::card{href="/docs/components/ripple"}
+
+### Ripple
+
+A component that provides a ripple effect to an element to recognize if the user has clicked it.
+
+:::
+:::card{href="/docs/components/rotate"}
+
+### Rotate
+
+A component that provides an animation that rotates between two elements.
+
+:::
+:::card{href="/docs/components/skeleton"}
+
+### Skeleton
+
+A component that functions as a placeholder until the content is loaded.
+
+:::
+:::card{href="/docs/components/slide-fade"}
+
+### SlideFade
+
+A component that gradually displays or hides an element from a specified position.
+
+:::
+:::card{href="/docs/components/slide"}
+
+### Slide
+
+A component that displays or hides an element from the corner of the page.
+
+:::
+::::
+
+## Hooks
+
+Yamada UI provides convenient custom hooks for animations.
+
+::::card-group
+:::card{href="/docs/hooks/use-animation"}
+
+### useAnimation
+
+A custom hook that implements animations similar to CSS `keyframes`.
+
+:::
+:::card{href="/docs/hooks/use-dynamic-animation"}
+
+### useDynamicAnimation
+
+A custom hook that is used to switch animations.
+
+:::
+::::

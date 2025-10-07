@@ -133,7 +133,9 @@ describe("<Flip />", () => {
       />,
     )
 
-    expect(consoleWarnSpy).toHaveBeenCalledOnce()
+    expect(consoleWarnSpy).toHaveBeenCalledExactlyOnceWith(
+      'Flip: "from" element (width: 16px, height: 16px) does not match "to" element (width: 32px, height: 32px). Please ensure both elements have the same dimensions.',
+    )
 
     consoleWarnSpy.mockRestore()
   })

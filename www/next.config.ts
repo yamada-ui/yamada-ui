@@ -10,7 +10,10 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["@yamada-ui/react"],
   },
   images: {
-    remotePatterns: [{ hostname: "avatars.githubusercontent.com" }],
+    remotePatterns: [
+      { hostname: "avatars.githubusercontent.com" },
+      { hostname: "images.pexels.com" },
+    ],
   },
   productionBrowserSourceMaps: false,
   reactStrictMode: false,

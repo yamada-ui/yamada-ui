@@ -56,6 +56,13 @@ export const theme = extendTheme({
         scrollBehavior: "smooth",
       },
     },
+    layerStyles: {
+      card: {
+        borderWidth: "1px",
+        overflow: "hidden",
+        rounded: "l5",
+      },
+    },
   },
   themeSchemes: Object.fromEntries(
     DEFAULT_COLOR_SCHEMES.filter((colorScheme) => colorScheme !== "gray").map(

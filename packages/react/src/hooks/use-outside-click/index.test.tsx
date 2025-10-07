@@ -19,7 +19,7 @@ describe("useOutsideClick", () => {
 
     await user.click(document.body)
 
-    expect(handler).toHaveBeenCalledWith(expect.any(Object))
+    expect(handler).toHaveBeenCalledExactlyOnceWith(expect.any(Object))
   })
 
   test("should not call handler on inside click", async () => {
@@ -54,7 +54,7 @@ describe("useOutsideClick", () => {
     const touchEndEvent = new Event("touchend")
     document.dispatchEvent(touchEndEvent)
 
-    expect(handler).toHaveBeenCalledWith(expect.any(Object))
+    expect(handler).toHaveBeenCalledExactlyOnceWith(expect.any(Object))
   })
 
   test("does not call handler on touchend inside element", async () => {

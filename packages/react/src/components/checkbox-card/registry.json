@@ -10,7 +10,7 @@
   "sources": [
     {
       "name": "checkbox-card-group.namespace.ts",
-      "content": "export * as Item from \"./checkbox-card.namespace\"\nexport { CheckboxCardGroupRoot as Root } from \"./checkbox-card-group\"\nexport type { CheckboxCardGroupRootProps as RootProps } from \"./checkbox-card-group\"\n"
+      "content": "export { CheckboxCardGroupRoot as Root } from \"./checkbox-card-group\"\nexport type { CheckboxCardGroupRootProps as RootProps } from \"./checkbox-card-group\"\nexport * as Item from \"./checkbox-card.namespace\"\n"
     },
     {
       "name": "checkbox-card-group.tsx",

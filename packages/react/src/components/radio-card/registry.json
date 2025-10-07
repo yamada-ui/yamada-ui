@@ -14,7 +14,7 @@
     },
     {
       "name": "radio-card-group.namespace.ts",
-      "content": "export * as Item from \"./radio-card.namespace\"\nexport { RadioCardGroupRoot as Root } from \"./radio-card-group\"\nexport type { RadioCardGroupRootProps as RootProps } from \"./radio-card-group\"\n"
+      "content": "export { RadioCardGroupRoot as Root } from \"./radio-card-group\"\nexport type { RadioCardGroupRootProps as RootProps } from \"./radio-card-group\"\nexport * as Item from \"./radio-card.namespace\"\n"
     },
     {
       "name": "radio-card-group.tsx",

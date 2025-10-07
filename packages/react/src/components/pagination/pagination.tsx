@@ -4,7 +4,6 @@ import type { FC, ReactNode } from "react"
 import type {
   HTMLProps,
   HTMLStyledProps,
-  StyleValue,
   ThemeProps,
   WithoutThemeProps,
 } from "../../core"
@@ -13,7 +12,6 @@ import type { PaginationStyle } from "./pagination.style"
 import type { Page, UsePaginationProps } from "./use-pagination"
 import { cloneElement, isValidElement, useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
-import { useValue } from "../../hooks/use-value"
 import { useI18n } from "../../providers/i18n-provider"
 import { isNumber, runIfFn } from "../../utils"
 import { ButtonGroup } from "../button"
@@ -43,24 +41,24 @@ export interface PaginationRootProps
    *
    * @default 1
    */
-  boundaries?: StyleValue<number>
+  boundaries?: number
   /** Number of siblings displayed on the left/right side of selected page.
    *
    * @default 1
    */
-  siblings?: StyleValue<number>
+  siblings?: number
   /**
    * If `true`, display the control buttons.
    *
    * @default true
    */
-  withControls?: StyleValue<boolean>
+  withControls?: boolean
   /**
    * If `true`, display the edge buttons.
    *
    * @default false
    */
-  withEdges?: StyleValue<boolean>
+  withEdges?: boolean
   /**
    * Props for next of the control button element.
    */
@@ -120,11 +118,9 @@ export const PaginationRoot = withProvider<
   ({
     size,
     variant,
-    boundaries: boundariesProp,
     children,
-    siblings: siblingsProp,
-    withControls: withControlsProp = true,
-    withEdges: withEdgesProp = false,
+    withControls = true,
+    withEdges = false,
     controlNextProps,
     controlPrevProps,
     controlProps,
@@ -135,10 +131,6 @@ export const PaginationRoot = withProvider<
     itemProps,
     ...rest
   }) => {
-    const boundaries = useValue(boundariesProp)
-    const siblings = useValue(siblingsProp)
-    const withControls = useValue(withControlsProp)
-    const withEdges = useValue(withEdgesProp)
     const {
       currentPage,
       disabled,
@@ -155,7 +147,7 @@ export const PaginationRoot = withProvider<
       onChangeNext,
       onChangePrev,
       onChangeStart,
-    } = usePagination({ ...rest, boundaries, siblings })
+    } = usePagination(rest)
     const context = useMemo(
       () => ({
         currentPage,

@@ -48,10 +48,13 @@ export { ReorderPropsContext, useReorderPropsContext }
  */
 export const ReorderRoot = withProvider<"ul", ReorderRootProps>(
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint
-  <Y extends any = string>(props: ReorderRootProps<Y>) => {
-    const orientation = useValue(props.orientation)
+  <Y extends any = string>({
+    orientation: orientationProp,
+    ...rest
+  }: ReorderRootProps<Y>) => {
+    const orientation = useValue(orientationProp)
     const { children, getRootProps } = useReorder({
-      ...props,
+      ...rest,
       item: <ReorderItem />,
       orientation,
     })

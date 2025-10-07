@@ -3,19 +3,18 @@
   "segment": "docs",
   "items": [
     {
+      "title": "変更履歴",
+      "segment": "changelog",
+      "pathname": "/docs/changelog"
+    },
+    {
       "title": "はじめる",
       "segment": "get-started",
-      "pathname": "/docs/get-started",
       "items": [
         {
-          "title": "マイグレーション",
-          "segment": "migration",
-          "pathname": "/docs/get-started/migration"
-        },
-        {
-          "title": "基本を学ぶ",
-          "segment": "basics",
-          "pathname": "/docs/get-started/basics"
+          "title": "アクセシビリティ",
+          "segment": "accessibility",
+          "pathname": "/docs/get-started/accessibility"
         },
         {
           "title": "応用を学ぶ",
@@ -23,14 +22,19 @@
           "pathname": "/docs/get-started/advanced"
         },
         {
+          "title": "基本を学ぶ",
+          "segment": "basics",
+          "pathname": "/docs/get-started/basics"
+        },
+        {
           "title": "CLI",
           "segment": "cli",
           "pathname": "/docs/get-started/cli"
         },
         {
-          "title": "アクセシビリティ",
-          "segment": "accessibility",
-          "pathname": "/docs/get-started/accessibility"
+          "title": "マイグレーション",
+          "segment": "migration",
+          "pathname": "/docs/get-started/migration"
         },
         {
           "title": "フレームワーク",
@@ -47,33 +51,226 @@
               "pathname": "/docs/get-started/frameworks/next-pages"
             },
             {
-              "title": "Vite",
-              "segment": "vite",
-              "pathname": "/docs/get-started/frameworks/vite"
-            },
-            {
               "title": "React Router",
               "segment": "react-router",
               "pathname": "/docs/get-started/frameworks/react-router"
+            },
+            {
+              "title": "Vite",
+              "segment": "vite",
+              "pathname": "/docs/get-started/frameworks/vite"
             }
           ]
         }
-      ]
+      ],
+      "pathname": "/docs/get-started"
+    },
+    {
+      "title": "コミュニティ",
+      "segment": "community",
+      "items": [
+        {
+          "title": "貢献する",
+          "segment": "contributing",
+          "pathname": "/docs/community/contributing"
+        }
+      ],
+      "pathname": "/docs/community"
+    },
+    {
+      "title": "テーマ",
+      "segment": "theming",
+      "items": [
+        {
+          "title": "ブレイクポイント",
+          "segment": "breakpoints",
+          "pathname": "/docs/theming/breakpoints"
+        },
+        {
+          "title": "カスケードレイヤー",
+          "segment": "cascade-layers",
+          "pathname": "/docs/theming/cascade-layers"
+        },
+        { "title": "CLI", "segment": "cli", "pathname": "/docs/theming/cli" },
+        {
+          "title": "カラーモード",
+          "segment": "color-mode",
+          "pathname": "/docs/theming/color-mode"
+        },
+        {
+          "title": "カスタマイズ",
+          "segment": "customization",
+          "pathname": "/docs/theming/customization"
+        },
+        {
+          "title": "テーマの切り替え",
+          "segment": "switching-themes",
+          "pathname": "/docs/theming/switching-themes"
+        },
+        {
+          "title": "コンフィグ",
+          "segment": "configuration",
+          "items": [
+            {
+              "title": "カスタマイズ",
+              "segment": "customization",
+              "pathname": "/docs/theming/configuration/customization"
+            },
+            {
+              "title": "概要",
+              "segment": "overview",
+              "pathname": "/docs/theming/configuration/overview"
+            }
+          ]
+        },
+        {
+          "title": "スタイル",
+          "segment": "styles",
+          "items": [
+            {
+              "title": "グローバルスタイル",
+              "segment": "global-styles",
+              "pathname": "/docs/theming/styles/global-styles"
+            },
+            {
+              "title": "レイヤースタイル",
+              "segment": "layer-styles",
+              "pathname": "/docs/theming/styles/layer-styles"
+            },
+            {
+              "title": "リセットスタイル",
+              "segment": "reset-styles",
+              "pathname": "/docs/theming/styles/reset-styles"
+            },
+            {
+              "title": "テキストスタイル",
+              "segment": "text-styles",
+              "pathname": "/docs/theming/styles/text-styles"
+            }
+          ]
+        },
+        {
+          "title": "デザイントークン",
+          "segment": "tokens",
+          "items": [
+            {
+              "title": "アニメーション",
+              "segment": "animations",
+              "pathname": "/docs/theming/tokens/animations"
+            },
+            {
+              "title": "アスペクト比",
+              "segment": "aspect-ratios",
+              "pathname": "/docs/theming/tokens/aspect-ratios"
+            },
+            {
+              "title": "ぼかし",
+              "segment": "blurs",
+              "pathname": "/docs/theming/tokens/blurs"
+            },
+            {
+              "title": "ボーダー",
+              "segment": "borders",
+              "pathname": "/docs/theming/tokens/borders"
+            },
+            {
+              "title": "ブレイクポイント",
+              "segment": "breakpoints",
+              "pathname": "/docs/theming/tokens/breakpoints"
+            },
+            {
+              "title": "カラースキーム",
+              "segment": "color-schemes",
+              "pathname": "/docs/theming/tokens/color-schemes"
+            },
+            {
+              "title": "カラー",
+              "segment": "colors",
+              "pathname": "/docs/theming/tokens/colors"
+            },
+            {
+              "title": "所要時間",
+              "segment": "durations",
+              "pathname": "/docs/theming/tokens/durations"
+            },
+            {
+              "title": "イージング",
+              "segment": "easings",
+              "pathname": "/docs/theming/tokens/easings"
+            },
+            {
+              "title": "文字の大きさ",
+              "segment": "font-sizes",
+              "pathname": "/docs/theming/tokens/font-sizes"
+            },
+            {
+              "title": "文字の太さ",
+              "segment": "font-weights",
+              "pathname": "/docs/theming/tokens/font-weights"
+            },
+            {
+              "title": "文字体",
+              "segment": "fonts",
+              "pathname": "/docs/theming/tokens/fonts"
+            },
+            {
+              "title": "グラデーション",
+              "segment": "gradients",
+              "pathname": "/docs/theming/tokens/gradients"
+            },
+            {
+              "title": "キーフレーム",
+              "segment": "keyframes",
+              "pathname": "/docs/theming/tokens/keyframes"
+            },
+            {
+              "title": "文字間隔",
+              "segment": "letter-spacings",
+              "pathname": "/docs/theming/tokens/letter-spacings"
+            },
+            {
+              "title": "行間",
+              "segment": "line-heights",
+              "pathname": "/docs/theming/tokens/line-heights"
+            },
+            {
+              "title": "角丸",
+              "segment": "radii",
+              "pathname": "/docs/theming/tokens/radii"
+            },
+            {
+              "title": "シャドウ",
+              "segment": "shadows",
+              "pathname": "/docs/theming/tokens/shadows"
+            },
+            {
+              "title": "サイズ",
+              "segment": "sizes",
+              "pathname": "/docs/theming/tokens/sizes"
+            },
+            {
+              "title": "スペース",
+              "segment": "spaces",
+              "pathname": "/docs/theming/tokens/spaces"
+            },
+            {
+              "title": "位置",
+              "segment": "z-indices",
+              "pathname": "/docs/theming/tokens/z-indices"
+            }
+          ]
+        }
+      ],
+      "pathname": "/docs/theming"
     },
     {
       "title": "コンポーネント",
       "segment": "components",
-      "pathname": "/docs/components",
       "items": [
         {
           "title": "CLI",
           "segment": "cli",
           "pathname": "/docs/components/cli"
-        },
-        {
-          "title": "styled",
-          "segment": "styled",
-          "pathname": "/docs/components/styled"
         },
         {
           "title": "createComponent",
@@ -84,6 +281,118 @@
           "title": "国際化",
           "segment": "internationalization",
           "pathname": "/docs/components/internationalization"
+        },
+        {
+          "title": "styled",
+          "segment": "styled",
+          "pathname": "/docs/components/styled"
+        },
+        {
+          "title": "アニメーション",
+          "segment": "(animations)",
+          "items": [
+            {
+              "title": "Airy",
+              "segment": "airy",
+              "pathname": "/docs/components/airy"
+            },
+            {
+              "title": "Collapse",
+              "segment": "collapse",
+              "pathname": "/docs/components/collapse"
+            },
+            {
+              "title": "FadeScale",
+              "segment": "fade-scale",
+              "pathname": "/docs/components/fade-scale"
+            },
+            {
+              "title": "Fade",
+              "segment": "fade",
+              "pathname": "/docs/components/fade"
+            },
+            {
+              "title": "Flip",
+              "segment": "flip",
+              "pathname": "/docs/components/flip"
+            },
+            {
+              "title": "Loading",
+              "segment": "loading",
+              "pathname": "/docs/components/loading"
+            },
+            {
+              "title": "Motion",
+              "segment": "motion",
+              "pathname": "/docs/components/motion"
+            },
+            {
+              "title": "Ripple",
+              "segment": "ripple",
+              "pathname": "/docs/components/ripple"
+            },
+            {
+              "title": "Rotate",
+              "segment": "rotate",
+              "pathname": "/docs/components/rotate"
+            },
+            {
+              "title": "Skeleton",
+              "segment": "skeleton",
+              "pathname": "/docs/components/skeleton"
+            },
+            {
+              "title": "SlideFade",
+              "segment": "slide-fade",
+              "pathname": "/docs/components/slide-fade"
+            },
+            {
+              "title": "Slide",
+              "segment": "slide",
+              "pathname": "/docs/components/slide"
+            }
+          ]
+        },
+        {
+          "title": "チャート",
+          "segment": "(charts)",
+          "items": [
+            {
+              "title": "AreaChart",
+              "segment": "area-chart",
+              "pathname": "/docs/components/area-chart"
+            },
+            {
+              "title": "BarChart",
+              "segment": "bar-chart",
+              "pathname": "/docs/components/bar-chart"
+            },
+            {
+              "title": "DonutChart",
+              "segment": "donut-chart",
+              "pathname": "/docs/components/donut-chart"
+            },
+            {
+              "title": "LineChart",
+              "segment": "line-chart",
+              "pathname": "/docs/components/line-chart"
+            },
+            {
+              "title": "PieChart",
+              "segment": "pie-chart",
+              "pathname": "/docs/components/pie-chart"
+            },
+            {
+              "title": "RadarChart",
+              "segment": "radar-chart",
+              "pathname": "/docs/components/radar-chart"
+            },
+            {
+              "title": "RadialChart",
+              "segment": "radial-chart",
+              "pathname": "/docs/components/radial-chart"
+            }
+          ]
         },
         {
           "title": "コンポーネント",
@@ -176,14 +485,14 @@
               "pathname": "/docs/components/center"
             },
             {
-              "title": "Checkbox",
-              "segment": "checkbox",
-              "pathname": "/docs/components/checkbox"
-            },
-            {
               "title": "CheckboxCard",
               "segment": "checkbox-card",
               "pathname": "/docs/components/checkbox-card"
+            },
+            {
+              "title": "Checkbox",
+              "segment": "checkbox",
+              "pathname": "/docs/components/checkbox"
             },
             {
               "title": "CircleProgress",
@@ -297,6 +606,11 @@
               "pathname": "/docs/components/group"
             },
             {
+              "title": "HStack",
+              "segment": "h-stack",
+              "pathname": "/docs/components/h-stack"
+            },
+            {
               "title": "Heading",
               "segment": "heading",
               "pathname": "/docs/components/heading"
@@ -307,24 +621,19 @@
               "pathname": "/docs/components/highlight"
             },
             {
-              "title": "HStack",
-              "segment": "h-stack",
-              "pathname": "/docs/components/h-stack"
-            },
-            {
               "title": "HueSlider",
               "segment": "hue-slider",
               "pathname": "/docs/components/hue-slider"
             },
             {
-              "title": "Icon",
-              "segment": "icon",
-              "pathname": "/docs/components/icon"
-            },
-            {
               "title": "IconButton",
               "segment": "icon-button",
               "pathname": "/docs/components/icon-button"
+            },
+            {
+              "title": "Icon",
+              "segment": "icon",
+              "pathname": "/docs/components/icon"
             },
             {
               "title": "Image",
@@ -352,14 +661,14 @@
               "pathname": "/docs/components/kbd"
             },
             {
-              "title": "Link",
-              "segment": "link",
-              "pathname": "/docs/components/link"
-            },
-            {
               "title": "LinkBox",
               "segment": "link-box",
               "pathname": "/docs/components/link-box"
+            },
+            {
+              "title": "Link",
+              "segment": "link",
+              "pathname": "/docs/components/link"
             },
             {
               "title": "List",
@@ -433,14 +742,14 @@
               "pathname": "/docs/components/progress"
             },
             {
-              "title": "Radio",
-              "segment": "radio",
-              "pathname": "/docs/components/radio"
-            },
-            {
               "title": "RadioCard",
               "segment": "radio-card",
               "pathname": "/docs/components/radio-card"
+            },
+            {
+              "title": "Radio",
+              "segment": "radio",
+              "pathname": "/docs/components/radio"
             },
             {
               "title": "Rating",
@@ -559,15 +868,15 @@
               "pathname": "/docs/components/textarea"
             },
             {
-              "title": "Timeline",
-              "segment": "timeline",
-              "pathname": "/docs/components/timeline"
-            },
-            {
               "title": "TimePicker",
               "segment": "time-picker",
               "pathname": "/docs/components/time-picker",
               "status": "planned"
+            },
+            {
+              "title": "Timeline",
+              "segment": "timeline",
+              "pathname": "/docs/components/timeline"
             },
             {
               "title": "Toggle",
@@ -605,113 +914,6 @@
               "title": "ZStack",
               "segment": "z-stack",
               "pathname": "/docs/components/z-stack"
-            }
-          ]
-        },
-        {
-          "title": "チャート",
-          "segment": "(charts)",
-          "items": [
-            {
-              "title": "AreaChart",
-              "segment": "area-chart",
-              "pathname": "/docs/components/area-chart"
-            },
-            {
-              "title": "BarChart",
-              "segment": "bar-chart",
-              "pathname": "/docs/components/bar-chart"
-            },
-            {
-              "title": "DonutChart",
-              "segment": "donut-chart",
-              "pathname": "/docs/components/donut-chart"
-            },
-            {
-              "title": "LineChart",
-              "segment": "line-chart",
-              "pathname": "/docs/components/line-chart"
-            },
-            {
-              "title": "PieChart",
-              "segment": "pie-chart",
-              "pathname": "/docs/components/pie-chart"
-            },
-            {
-              "title": "RadarChart",
-              "segment": "radar-chart",
-              "pathname": "/docs/components/radar-chart"
-            },
-            {
-              "title": "RadialChart",
-              "segment": "radial-chart",
-              "pathname": "/docs/components/radial-chart"
-            }
-          ]
-        },
-        {
-          "title": "アニメーション",
-          "segment": "(animations)",
-          "items": [
-            {
-              "title": "Airy",
-              "segment": "airy",
-              "pathname": "/docs/components/airy"
-            },
-            {
-              "title": "Collapse",
-              "segment": "collapse",
-              "pathname": "/docs/components/collapse"
-            },
-            {
-              "title": "FadeScale",
-              "segment": "fade-scale",
-              "pathname": "/docs/components/fade-scale"
-            },
-            {
-              "title": "Fade",
-              "segment": "fade",
-              "pathname": "/docs/components/fade"
-            },
-            {
-              "title": "Flip",
-              "segment": "flip",
-              "pathname": "/docs/components/flip"
-            },
-            {
-              "title": "Loading",
-              "segment": "loading",
-              "pathname": "/docs/components/loading"
-            },
-            {
-              "title": "Motion",
-              "segment": "motion",
-              "pathname": "/docs/components/motion"
-            },
-            {
-              "title": "Ripple",
-              "segment": "ripple",
-              "pathname": "/docs/components/ripple"
-            },
-            {
-              "title": "Rotate",
-              "segment": "rotate",
-              "pathname": "/docs/components/rotate"
-            },
-            {
-              "title": "Skeleton",
-              "segment": "skeleton",
-              "pathname": "/docs/components/skeleton"
-            },
-            {
-              "title": "SlideFade",
-              "segment": "slide-fade",
-              "pathname": "/docs/components/slide-fade"
-            },
-            {
-              "title": "Slide",
-              "segment": "slide",
-              "pathname": "/docs/components/slide"
             }
           ]
         },
@@ -761,7 +963,95 @@
             }
           ]
         }
-      ]
+      ],
+      "pathname": "/docs/components"
+    },
+    {
+      "title": "スタイル",
+      "segment": "styling",
+      "items": [
+        {
+          "title": "アニメーション",
+          "segment": "animation",
+          "pathname": "/docs/styling/animation"
+        },
+        {
+          "title": "アットルール",
+          "segment": "at-rules",
+          "pathname": "/docs/styling/at-rules"
+        },
+        {
+          "title": "カスケードレイヤー",
+          "segment": "cascade-layers",
+          "pathname": "/docs/styling/cascade-layers"
+        },
+        {
+          "title": "カラーモード",
+          "segment": "color-mode",
+          "pathname": "/docs/styling/color-mode"
+        },
+        {
+          "title": "カラースキーム",
+          "segment": "color-scheme",
+          "pathname": "/docs/styling/color-scheme"
+        },
+        {
+          "title": "条件付きスタイル",
+          "segment": "conditional-styles",
+          "pathname": "/docs/styling/conditional-styles"
+        },
+        {
+          "title": "CSSカスタムプロパティ",
+          "segment": "css-custom-properties",
+          "pathname": "/docs/styling/css-custom-properties"
+        },
+        {
+          "title": "CSS値関数",
+          "segment": "css-value-functions",
+          "pathname": "/docs/styling/css-value-functions"
+        },
+        {
+          "title": "フォーカスリング",
+          "segment": "focus-ring",
+          "pathname": "/docs/styling/focus-ring"
+        },
+        {
+          "title": "グローバルスタイル",
+          "segment": "global-styles",
+          "pathname": "/docs/styling/global-styles"
+        },
+        {
+          "title": "インターポレーション",
+          "segment": "interpolation",
+          "pathname": "/docs/styling/interpolation"
+        },
+        {
+          "title": "レイヤースタイル",
+          "segment": "layer-styles",
+          "pathname": "/docs/styling/layer-styles"
+        },
+        {
+          "title": "リセットスタイル",
+          "segment": "reset-styles",
+          "pathname": "/docs/styling/reset-styles"
+        },
+        {
+          "title": "レスポンシブデザイン",
+          "segment": "responsive-design",
+          "pathname": "/docs/styling/responsive-design"
+        },
+        {
+          "title": "Style Props",
+          "segment": "style-props",
+          "pathname": "/docs/styling/style-props"
+        },
+        {
+          "title": "テキストスタイル",
+          "segment": "text-styles",
+          "pathname": "/docs/styling/text-styles"
+        }
+      ],
+      "pathname": "/docs/styling"
     },
     {
       "title": "フック",
@@ -774,24 +1064,19 @@
           "pathname": "/docs/hooks/use-animation"
         },
         {
-          "title": "useAsync",
-          "segment": "use-async",
-          "pathname": "/docs/hooks/use-async"
-        },
-        {
           "title": "useAsyncCallback",
           "segment": "use-async-callback",
           "pathname": "/docs/hooks/use-async-callback"
         },
         {
+          "title": "useAsync",
+          "segment": "use-async",
+          "pathname": "/docs/hooks/use-async"
+        },
+        {
           "title": "useBoolean",
           "segment": "use-boolean",
           "pathname": "/docs/hooks/use-boolean"
-        },
-        {
-          "title": "useBreakpoint",
-          "segment": "use-breakpoint",
-          "pathname": "/docs/hooks/use-breakpoint"
         },
         {
           "title": "useBreakpointEffect",
@@ -809,19 +1094,24 @@
           "pathname": "/docs/hooks/use-breakpoint-value"
         },
         {
+          "title": "useBreakpoint",
+          "segment": "use-breakpoint",
+          "pathname": "/docs/hooks/use-breakpoint"
+        },
+        {
           "title": "useClipboard",
           "segment": "use-clipboard",
           "pathname": "/docs/hooks/use-clipboard"
         },
         {
-          "title": "useColorMode",
-          "segment": "use-color-mode",
-          "pathname": "/docs/hooks/use-color-mode"
-        },
-        {
           "title": "useColorModeValue",
           "segment": "use-color-mode-value",
           "pathname": "/docs/hooks/use-color-mode-value"
+        },
+        {
+          "title": "useColorMode",
+          "segment": "use-color-mode",
+          "pathname": "/docs/hooks/use-color-mode"
         },
         {
           "title": "useCounter",
@@ -949,14 +1239,14 @@
           "pathname": "/docs/hooks/use-timeout"
         },
         {
-          "title": "useUpdateEffect",
-          "segment": "use-update-effect",
-          "pathname": "/docs/hooks/use-update-effect"
-        },
-        {
           "title": "useUpdateBreakpointEffect",
           "segment": "use-update-breakpoint-effect",
           "pathname": "/docs/hooks/use-update-breakpoint-effect"
+        },
+        {
+          "title": "useUpdateEffect",
+          "segment": "use-update-effect",
+          "pathname": "/docs/hooks/use-update-effect"
         },
         {
           "title": "useValue",
@@ -969,296 +1259,6 @@
           "pathname": "/docs/hooks/use-window-event"
         }
       ]
-    },
-    {
-      "title": "スタイル",
-      "segment": "styling",
-      "pathname": "/docs/styling",
-      "items": [
-        {
-          "title": "Style Props",
-          "segment": "style-props",
-          "pathname": "/docs/styling/style-props"
-        },
-        {
-          "title": "条件付きスタイル",
-          "segment": "conditional-styles",
-          "pathname": "/docs/styling/conditional-styles"
-        },
-        {
-          "title": "レスポンシブデザイン",
-          "segment": "responsive-design",
-          "pathname": "/docs/styling/responsive-design"
-        },
-        {
-          "title": "カラーモード",
-          "segment": "color-mode",
-          "pathname": "/docs/styling/color-mode"
-        },
-        {
-          "title": "カラースキーム",
-          "segment": "color-scheme",
-          "pathname": "/docs/styling/color-scheme"
-        },
-        {
-          "title": "CSSカスタムプロパティ",
-          "segment": "css-custom-properties",
-          "pathname": "/docs/styling/css-custom-properties"
-        },
-        {
-          "title": "CSS値関数",
-          "segment": "css-value-functions",
-          "pathname": "/docs/styling/css-value-functions"
-        },
-        {
-          "title": "インターポレーション",
-          "segment": "interpolation",
-          "pathname": "/docs/styling/interpolation"
-        },
-        {
-          "title": "アニメーション",
-          "segment": "animation",
-          "pathname": "/docs/styling/animation"
-        },
-        {
-          "title": "フォーカスリング",
-          "segment": "focus-ring",
-          "pathname": "/docs/styling/focus-ring"
-        },
-        {
-          "title": "グローバルスタイル",
-          "segment": "global-styles",
-          "pathname": "/docs/styling/global-styles"
-        },
-        {
-          "title": "リセットスタイル",
-          "segment": "reset-styles",
-          "pathname": "/docs/styling/reset-styles"
-        },
-        {
-          "title": "レイヤースタイル",
-          "segment": "layer-styles",
-          "pathname": "/docs/styling/layer-styles"
-        },
-        {
-          "title": "テキストスタイル",
-          "segment": "text-styles",
-          "pathname": "/docs/styling/text-styles"
-        },
-        {
-          "title": "アットルール",
-          "segment": "at-rules",
-          "pathname": "/docs/styling/at-rules"
-        },
-        {
-          "title": "カスケードレイヤー",
-          "segment": "cascade-layers",
-          "pathname": "/docs/styling/cascade-layers"
-        }
-      ]
-    },
-    {
-      "title": "テーマ",
-      "segment": "theming",
-      "pathname": "/docs/theming",
-      "items": [
-        { "title": "CLI", "segment": "cli", "pathname": "/docs/theming/cli" },
-        {
-          "title": "カスタマイズ",
-          "segment": "customization",
-          "pathname": "/docs/theming/customization"
-        },
-        {
-          "title": "ブレイクポイント",
-          "segment": "breakpoints",
-          "pathname": "/docs/theming/breakpoints"
-        },
-        {
-          "title": "カラーモード",
-          "segment": "color-mode",
-          "pathname": "/docs/theming/color-mode"
-        },
-        {
-          "title": "テーマの切り替え",
-          "segment": "switching-themes",
-          "pathname": "/docs/theming/switching-themes"
-        },
-        {
-          "title": "カスケードレイヤー",
-          "segment": "cascade-layers",
-          "pathname": "/docs/theming/cascade-layers"
-        },
-        {
-          "title": "コンフィグ",
-          "segment": "configuration",
-          "items": [
-            {
-              "title": "概要",
-              "segment": "overview",
-              "pathname": "/docs/theming/configuration/overview"
-            },
-            {
-              "title": "カスタマイズ",
-              "segment": "customization",
-              "pathname": "/docs/theming/configuration/customization"
-            }
-          ]
-        },
-        {
-          "title": "スタイル",
-          "segment": "styles",
-          "items": [
-            {
-              "title": "グローバルスタイル",
-              "segment": "global-styles",
-              "pathname": "/docs/theming/styles/global-styles"
-            },
-            {
-              "title": "リセットスタイル",
-              "segment": "reset-styles",
-              "pathname": "/docs/theming/styles/reset-styles"
-            },
-            {
-              "title": "レイヤースタイル",
-              "segment": "layer-styles",
-              "pathname": "/docs/theming/styles/layer-styles"
-            },
-            {
-              "title": "テキストスタイル",
-              "segment": "text-styles",
-              "pathname": "/docs/theming/styles/text-styles"
-            }
-          ]
-        },
-        {
-          "title": "デザイントークン",
-          "segment": "tokens",
-          "items": [
-            {
-              "title": "アニメーション",
-              "segment": "animations",
-              "pathname": "/docs/theming/tokens/animations"
-            },
-            {
-              "title": "アスペクト比",
-              "segment": "aspect-ratios",
-              "pathname": "/docs/theming/tokens/aspect-ratios"
-            },
-            {
-              "title": "ぼかし",
-              "segment": "blurs",
-              "pathname": "/docs/theming/tokens/blurs"
-            },
-            {
-              "title": "ボーダー",
-              "segment": "borders",
-              "pathname": "/docs/theming/tokens/borders"
-            },
-            {
-              "title": "ブレイクポイント",
-              "segment": "breakpoints",
-              "pathname": "/docs/theming/tokens/breakpoints"
-            },
-            {
-              "title": "カラー",
-              "segment": "colors",
-              "pathname": "/docs/theming/tokens/colors"
-            },
-            {
-              "title": "カラースキーム",
-              "segment": "color-schemes",
-              "pathname": "/docs/theming/tokens/color-schemes"
-            },
-            {
-              "title": "所要時間",
-              "segment": "durations",
-              "pathname": "/docs/theming/tokens/durations"
-            },
-            {
-              "title": "イージング",
-              "segment": "easings",
-              "pathname": "/docs/theming/tokens/easings"
-            },
-            {
-              "title": "文字の大きさ",
-              "segment": "font-sizes",
-              "pathname": "/docs/theming/tokens/font-sizes"
-            },
-            {
-              "title": "文字の太さ",
-              "segment": "font-weights",
-              "pathname": "/docs/theming/tokens/font-weights"
-            },
-            {
-              "title": "文字体",
-              "segment": "fonts",
-              "pathname": "/docs/theming/tokens/fonts"
-            },
-            {
-              "title": "グラデーション",
-              "segment": "gradients",
-              "pathname": "/docs/theming/tokens/gradients"
-            },
-            {
-              "title": "キーフレーム",
-              "segment": "keyframes",
-              "pathname": "/docs/theming/tokens/keyframes"
-            },
-            {
-              "title": "文字間隔",
-              "segment": "letter-spacings",
-              "pathname": "/docs/theming/tokens/letter-spacings"
-            },
-            {
-              "title": "行間",
-              "segment": "line-heights",
-              "pathname": "/docs/theming/tokens/line-heights"
-            },
-            {
-              "title": "角丸",
-              "segment": "radii",
-              "pathname": "/docs/theming/tokens/radii"
-            },
-            {
-              "title": "シャドウ",
-              "segment": "shadows",
-              "pathname": "/docs/theming/tokens/shadows"
-            },
-            {
-              "title": "サイズ",
-              "segment": "sizes",
-              "pathname": "/docs/theming/tokens/sizes"
-            },
-            {
-              "title": "スペース",
-              "segment": "spaces",
-              "pathname": "/docs/theming/tokens/spaces"
-            },
-            {
-              "title": "位置",
-              "segment": "z-indices",
-              "pathname": "/docs/theming/tokens/z-indices"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "コミュニティ",
-      "segment": "community",
-      "pathname": "/docs/community",
-      "items": [
-        {
-          "title": "貢献する",
-          "segment": "contributing",
-          "pathname": "/docs/community/contributing"
-        }
-      ]
-    },
-    {
-      "title": "変更履歴",
-      "segment": "changelog",
-      "pathname": "/docs/changelog"
     }
   ]
 }

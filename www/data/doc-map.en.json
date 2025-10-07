@@ -3,19 +3,18 @@
   "segment": "docs",
   "items": [
     {
+      "title": "Changelog",
+      "segment": "changelog",
+      "pathname": "/docs/changelog"
+    },
+    {
       "title": "Get Started",
       "segment": "get-started",
-      "pathname": "/docs/get-started",
       "items": [
         {
-          "title": "Migration",
-          "segment": "migration",
-          "pathname": "/docs/get-started/migration"
-        },
-        {
-          "title": "Learn the Basics",
-          "segment": "basics",
-          "pathname": "/docs/get-started/basics"
+          "title": "Accessibility",
+          "segment": "accessibility",
+          "pathname": "/docs/get-started/accessibility"
         },
         {
           "title": "Learn the Advanced",
@@ -23,14 +22,19 @@
           "pathname": "/docs/get-started/advanced"
         },
         {
+          "title": "Learn the Basics",
+          "segment": "basics",
+          "pathname": "/docs/get-started/basics"
+        },
+        {
           "title": "CLI",
           "segment": "cli",
           "pathname": "/docs/get-started/cli"
         },
         {
-          "title": "Accessibility",
-          "segment": "accessibility",
-          "pathname": "/docs/get-started/accessibility"
+          "title": "Migration",
+          "segment": "migration",
+          "pathname": "/docs/get-started/migration"
         },
         {
           "title": "Frameworks",
@@ -47,33 +51,226 @@
               "pathname": "/docs/get-started/frameworks/next-pages"
             },
             {
-              "title": "Vite",
-              "segment": "vite",
-              "pathname": "/docs/get-started/frameworks/vite"
-            },
-            {
               "title": "React Router",
               "segment": "react-router",
               "pathname": "/docs/get-started/frameworks/react-router"
+            },
+            {
+              "title": "Vite",
+              "segment": "vite",
+              "pathname": "/docs/get-started/frameworks/vite"
             }
           ]
         }
-      ]
+      ],
+      "pathname": "/docs/get-started"
+    },
+    {
+      "title": "Community",
+      "segment": "community",
+      "items": [
+        {
+          "title": "Contributing",
+          "segment": "contributing",
+          "pathname": "/docs/community/contributing"
+        }
+      ],
+      "pathname": "/docs/community"
+    },
+    {
+      "title": "Theming",
+      "segment": "theming",
+      "items": [
+        {
+          "title": "Breakpoints",
+          "segment": "breakpoints",
+          "pathname": "/docs/theming/breakpoints"
+        },
+        {
+          "title": "Cascade Layers",
+          "segment": "cascade-layers",
+          "pathname": "/docs/theming/cascade-layers"
+        },
+        { "title": "CLI", "segment": "cli", "pathname": "/docs/theming/cli" },
+        {
+          "title": "Color Mode",
+          "segment": "color-mode",
+          "pathname": "/docs/theming/color-mode"
+        },
+        {
+          "title": "Customization",
+          "segment": "customization",
+          "pathname": "/docs/theming/customization"
+        },
+        {
+          "title": "Switching Themes",
+          "segment": "switching-themes",
+          "pathname": "/docs/theming/switching-themes"
+        },
+        {
+          "title": "Configuration",
+          "segment": "configuration",
+          "items": [
+            {
+              "title": "Customization",
+              "segment": "customization",
+              "pathname": "/docs/theming/configuration/customization"
+            },
+            {
+              "title": "Overview",
+              "segment": "overview",
+              "pathname": "/docs/theming/configuration/overview"
+            }
+          ]
+        },
+        {
+          "title": "Styles",
+          "segment": "styles",
+          "items": [
+            {
+              "title": "Global Styles",
+              "segment": "global-styles",
+              "pathname": "/docs/theming/styles/global-styles"
+            },
+            {
+              "title": "Layer Styles",
+              "segment": "layer-styles",
+              "pathname": "/docs/theming/styles/layer-styles"
+            },
+            {
+              "title": "Reset Styles",
+              "segment": "reset-styles",
+              "pathname": "/docs/theming/styles/reset-styles"
+            },
+            {
+              "title": "Text Styles",
+              "segment": "text-styles",
+              "pathname": "/docs/theming/styles/text-styles"
+            }
+          ]
+        },
+        {
+          "title": "Design Tokens",
+          "segment": "tokens",
+          "items": [
+            {
+              "title": "Animations",
+              "segment": "animations",
+              "pathname": "/docs/theming/tokens/animations"
+            },
+            {
+              "title": "Aspect Ratios",
+              "segment": "aspect-ratios",
+              "pathname": "/docs/theming/tokens/aspect-ratios"
+            },
+            {
+              "title": "Blurs",
+              "segment": "blurs",
+              "pathname": "/docs/theming/tokens/blurs"
+            },
+            {
+              "title": "Borders",
+              "segment": "borders",
+              "pathname": "/docs/theming/tokens/borders"
+            },
+            {
+              "title": "Breakpoints",
+              "segment": "breakpoints",
+              "pathname": "/docs/theming/tokens/breakpoints"
+            },
+            {
+              "title": "Color Schemes",
+              "segment": "color-schemes",
+              "pathname": "/docs/theming/tokens/color-schemes"
+            },
+            {
+              "title": "Colors",
+              "segment": "colors",
+              "pathname": "/docs/theming/tokens/colors"
+            },
+            {
+              "title": "Durations",
+              "segment": "durations",
+              "pathname": "/docs/theming/tokens/durations"
+            },
+            {
+              "title": "Easings",
+              "segment": "easings",
+              "pathname": "/docs/theming/tokens/easings"
+            },
+            {
+              "title": "Font Sizes",
+              "segment": "font-sizes",
+              "pathname": "/docs/theming/tokens/font-sizes"
+            },
+            {
+              "title": "Font Weights",
+              "segment": "font-weights",
+              "pathname": "/docs/theming/tokens/font-weights"
+            },
+            {
+              "title": "Fonts",
+              "segment": "fonts",
+              "pathname": "/docs/theming/tokens/fonts"
+            },
+            {
+              "title": "Gradients",
+              "segment": "gradients",
+              "pathname": "/docs/theming/tokens/gradients"
+            },
+            {
+              "title": "Keyframes",
+              "segment": "keyframes",
+              "pathname": "/docs/theming/tokens/keyframes"
+            },
+            {
+              "title": "Letter Spacings",
+              "segment": "letter-spacings",
+              "pathname": "/docs/theming/tokens/letter-spacings"
+            },
+            {
+              "title": "Line Heights",
+              "segment": "line-heights",
+              "pathname": "/docs/theming/tokens/line-heights"
+            },
+            {
+              "title": "Radii",
+              "segment": "radii",
+              "pathname": "/docs/theming/tokens/radii"
+            },
+            {
+              "title": "Shadows",
+              "segment": "shadows",
+              "pathname": "/docs/theming/tokens/shadows"
+            },
+            {
+              "title": "Sizes",
+              "segment": "sizes",
+              "pathname": "/docs/theming/tokens/sizes"
+            },
+            {
+              "title": "Spaces",
+              "segment": "spaces",
+              "pathname": "/docs/theming/tokens/spaces"
+            },
+            {
+              "title": "Z Indices",
+              "segment": "z-indices",
+              "pathname": "/docs/theming/tokens/z-indices"
+            }
+          ]
+        }
+      ],
+      "pathname": "/docs/theming"
     },
     {
       "title": "Components",
       "segment": "components",
-      "pathname": "/docs/components",
       "items": [
         {
           "title": "CLI",
           "segment": "cli",
           "pathname": "/docs/components/cli"
-        },
-        {
-          "title": "styled",
-          "segment": "styled",
-          "pathname": "/docs/components/styled"
         },
         {
           "title": "createComponent",
@@ -84,6 +281,118 @@
           "title": "Internationalization",
           "segment": "internationalization",
           "pathname": "/docs/components/internationalization"
+        },
+        {
+          "title": "styled",
+          "segment": "styled",
+          "pathname": "/docs/components/styled"
+        },
+        {
+          "title": "Animations",
+          "segment": "(animations)",
+          "items": [
+            {
+              "title": "Airy",
+              "segment": "airy",
+              "pathname": "/docs/components/airy"
+            },
+            {
+              "title": "Collapse",
+              "segment": "collapse",
+              "pathname": "/docs/components/collapse"
+            },
+            {
+              "title": "FadeScale",
+              "segment": "fade-scale",
+              "pathname": "/docs/components/fade-scale"
+            },
+            {
+              "title": "Fade",
+              "segment": "fade",
+              "pathname": "/docs/components/fade"
+            },
+            {
+              "title": "Flip",
+              "segment": "flip",
+              "pathname": "/docs/components/flip"
+            },
+            {
+              "title": "Loading",
+              "segment": "loading",
+              "pathname": "/docs/components/loading"
+            },
+            {
+              "title": "Motion",
+              "segment": "motion",
+              "pathname": "/docs/components/motion"
+            },
+            {
+              "title": "Ripple",
+              "segment": "ripple",
+              "pathname": "/docs/components/ripple"
+            },
+            {
+              "title": "Rotate",
+              "segment": "rotate",
+              "pathname": "/docs/components/rotate"
+            },
+            {
+              "title": "Skeleton",
+              "segment": "skeleton",
+              "pathname": "/docs/components/skeleton"
+            },
+            {
+              "title": "SlideFade",
+              "segment": "slide-fade",
+              "pathname": "/docs/components/slide-fade"
+            },
+            {
+              "title": "Slide",
+              "segment": "slide",
+              "pathname": "/docs/components/slide"
+            }
+          ]
+        },
+        {
+          "title": "Charts",
+          "segment": "(charts)",
+          "items": [
+            {
+              "title": "AreaChart",
+              "segment": "area-chart",
+              "pathname": "/docs/components/area-chart"
+            },
+            {
+              "title": "BarChart",
+              "segment": "bar-chart",
+              "pathname": "/docs/components/bar-chart"
+            },
+            {
+              "title": "DonutChart",
+              "segment": "donut-chart",
+              "pathname": "/docs/components/donut-chart"
+            },
+            {
+              "title": "LineChart",
+              "segment": "line-chart",
+              "pathname": "/docs/components/line-chart"
+            },
+            {
+              "title": "PieChart",
+              "segment": "pie-chart",
+              "pathname": "/docs/components/pie-chart"
+            },
+            {
+              "title": "RadarChart",
+              "segment": "radar-chart",
+              "pathname": "/docs/components/radar-chart"
+            },
+            {
+              "title": "RadialChart",
+              "segment": "radial-chart",
+              "pathname": "/docs/components/radial-chart"
+            }
+          ]
         },
         {
           "title": "Components",
@@ -176,14 +485,14 @@
               "pathname": "/docs/components/center"
             },
             {
-              "title": "Checkbox",
-              "segment": "checkbox",
-              "pathname": "/docs/components/checkbox"
-            },
-            {
               "title": "CheckboxCard",
               "segment": "checkbox-card",
               "pathname": "/docs/components/checkbox-card"
+            },
+            {
+              "title": "Checkbox",
+              "segment": "checkbox",
+              "pathname": "/docs/components/checkbox"
             },
             {
               "title": "CircleProgress",
@@ -297,6 +606,11 @@
               "pathname": "/docs/components/group"
             },
             {
+              "title": "HStack",
+              "segment": "h-stack",
+              "pathname": "/docs/components/h-stack"
+            },
+            {
               "title": "Heading",
               "segment": "heading",
               "pathname": "/docs/components/heading"
@@ -307,24 +621,19 @@
               "pathname": "/docs/components/highlight"
             },
             {
-              "title": "HStack",
-              "segment": "h-stack",
-              "pathname": "/docs/components/h-stack"
-            },
-            {
               "title": "HueSlider",
               "segment": "hue-slider",
               "pathname": "/docs/components/hue-slider"
             },
             {
-              "title": "Icon",
-              "segment": "icon",
-              "pathname": "/docs/components/icon"
-            },
-            {
               "title": "IconButton",
               "segment": "icon-button",
               "pathname": "/docs/components/icon-button"
+            },
+            {
+              "title": "Icon",
+              "segment": "icon",
+              "pathname": "/docs/components/icon"
             },
             {
               "title": "Image",
@@ -352,14 +661,14 @@
               "pathname": "/docs/components/kbd"
             },
             {
-              "title": "Link",
-              "segment": "link",
-              "pathname": "/docs/components/link"
-            },
-            {
               "title": "LinkBox",
               "segment": "link-box",
               "pathname": "/docs/components/link-box"
+            },
+            {
+              "title": "Link",
+              "segment": "link",
+              "pathname": "/docs/components/link"
             },
             {
               "title": "List",
@@ -433,14 +742,14 @@
               "pathname": "/docs/components/progress"
             },
             {
-              "title": "Radio",
-              "segment": "radio",
-              "pathname": "/docs/components/radio"
-            },
-            {
               "title": "RadioCard",
               "segment": "radio-card",
               "pathname": "/docs/components/radio-card"
+            },
+            {
+              "title": "Radio",
+              "segment": "radio",
+              "pathname": "/docs/components/radio"
             },
             {
               "title": "Rating",
@@ -559,15 +868,15 @@
               "pathname": "/docs/components/textarea"
             },
             {
-              "title": "Timeline",
-              "segment": "timeline",
-              "pathname": "/docs/components/timeline"
-            },
-            {
               "title": "TimePicker",
               "segment": "time-picker",
               "pathname": "/docs/components/time-picker",
               "status": "planned"
+            },
+            {
+              "title": "Timeline",
+              "segment": "timeline",
+              "pathname": "/docs/components/timeline"
             },
             {
               "title": "Toggle",
@@ -605,113 +914,6 @@
               "title": "ZStack",
               "segment": "z-stack",
               "pathname": "/docs/components/z-stack"
-            }
-          ]
-        },
-        {
-          "title": "Charts",
-          "segment": "(charts)",
-          "items": [
-            {
-              "title": "AreaChart",
-              "segment": "area-chart",
-              "pathname": "/docs/components/area-chart"
-            },
-            {
-              "title": "BarChart",
-              "segment": "bar-chart",
-              "pathname": "/docs/components/bar-chart"
-            },
-            {
-              "title": "DonutChart",
-              "segment": "donut-chart",
-              "pathname": "/docs/components/donut-chart"
-            },
-            {
-              "title": "LineChart",
-              "segment": "line-chart",
-              "pathname": "/docs/components/line-chart"
-            },
-            {
-              "title": "PieChart",
-              "segment": "pie-chart",
-              "pathname": "/docs/components/pie-chart"
-            },
-            {
-              "title": "RadarChart",
-              "segment": "radar-chart",
-              "pathname": "/docs/components/radar-chart"
-            },
-            {
-              "title": "RadialChart",
-              "segment": "radial-chart",
-              "pathname": "/docs/components/radial-chart"
-            }
-          ]
-        },
-        {
-          "title": "Animations",
-          "segment": "(animations)",
-          "items": [
-            {
-              "title": "Airy",
-              "segment": "airy",
-              "pathname": "/docs/components/airy"
-            },
-            {
-              "title": "Collapse",
-              "segment": "collapse",
-              "pathname": "/docs/components/collapse"
-            },
-            {
-              "title": "FadeScale",
-              "segment": "fade-scale",
-              "pathname": "/docs/components/fade-scale"
-            },
-            {
-              "title": "Fade",
-              "segment": "fade",
-              "pathname": "/docs/components/fade"
-            },
-            {
-              "title": "Flip",
-              "segment": "flip",
-              "pathname": "/docs/components/flip"
-            },
-            {
-              "title": "Loading",
-              "segment": "loading",
-              "pathname": "/docs/components/loading"
-            },
-            {
-              "title": "Motion",
-              "segment": "motion",
-              "pathname": "/docs/components/motion"
-            },
-            {
-              "title": "Ripple",
-              "segment": "ripple",
-              "pathname": "/docs/components/ripple"
-            },
-            {
-              "title": "Rotate",
-              "segment": "rotate",
-              "pathname": "/docs/components/rotate"
-            },
-            {
-              "title": "Skeleton",
-              "segment": "skeleton",
-              "pathname": "/docs/components/skeleton"
-            },
-            {
-              "title": "SlideFade",
-              "segment": "slide-fade",
-              "pathname": "/docs/components/slide-fade"
-            },
-            {
-              "title": "Slide",
-              "segment": "slide",
-              "pathname": "/docs/components/slide"
             }
           ]
         },
@@ -761,7 +963,95 @@
             }
           ]
         }
-      ]
+      ],
+      "pathname": "/docs/components"
+    },
+    {
+      "title": "Styling",
+      "segment": "styling",
+      "items": [
+        {
+          "title": "Animation",
+          "segment": "animation",
+          "pathname": "/docs/styling/animation"
+        },
+        {
+          "title": "At-Rules",
+          "segment": "at-rules",
+          "pathname": "/docs/styling/at-rules"
+        },
+        {
+          "title": "Cascade Layers",
+          "segment": "cascade-layers",
+          "pathname": "/docs/styling/cascade-layers"
+        },
+        {
+          "title": "Color Mode",
+          "segment": "color-mode",
+          "pathname": "/docs/styling/color-mode"
+        },
+        {
+          "title": "Color Scheme",
+          "segment": "color-scheme",
+          "pathname": "/docs/styling/color-scheme"
+        },
+        {
+          "title": "Conditional Styles",
+          "segment": "conditional-styles",
+          "pathname": "/docs/styling/conditional-styles"
+        },
+        {
+          "title": "CSS Custom Properties",
+          "segment": "css-custom-properties",
+          "pathname": "/docs/styling/css-custom-properties"
+        },
+        {
+          "title": "CSS Value Functions",
+          "segment": "css-value-functions",
+          "pathname": "/docs/styling/css-value-functions"
+        },
+        {
+          "title": "Focus Ring",
+          "segment": "focus-ring",
+          "pathname": "/docs/styling/focus-ring"
+        },
+        {
+          "title": "Global Styles",
+          "segment": "global-styles",
+          "pathname": "/docs/styling/global-styles"
+        },
+        {
+          "title": "Interpolation",
+          "segment": "interpolation",
+          "pathname": "/docs/styling/interpolation"
+        },
+        {
+          "title": "Layer Styles",
+          "segment": "layer-styles",
+          "pathname": "/docs/styling/layer-styles"
+        },
+        {
+          "title": "Reset Styles",
+          "segment": "reset-styles",
+          "pathname": "/docs/styling/reset-styles"
+        },
+        {
+          "title": "Responsive Design",
+          "segment": "responsive-design",
+          "pathname": "/docs/styling/responsive-design"
+        },
+        {
+          "title": "Style Props",
+          "segment": "style-props",
+          "pathname": "/docs/styling/style-props"
+        },
+        {
+          "title": "Text Styles",
+          "segment": "text-styles",
+          "pathname": "/docs/styling/text-styles"
+        }
+      ],
+      "pathname": "/docs/styling"
     },
     {
       "title": "Hooks",
@@ -774,24 +1064,19 @@
           "pathname": "/docs/hooks/use-animation"
         },
         {
-          "title": "useAsync",
-          "segment": "use-async",
-          "pathname": "/docs/hooks/use-async"
-        },
-        {
           "title": "useAsyncCallback",
           "segment": "use-async-callback",
           "pathname": "/docs/hooks/use-async-callback"
         },
         {
+          "title": "useAsync",
+          "segment": "use-async",
+          "pathname": "/docs/hooks/use-async"
+        },
+        {
           "title": "useBoolean",
           "segment": "use-boolean",
           "pathname": "/docs/hooks/use-boolean"
-        },
-        {
-          "title": "useBreakpoint",
-          "segment": "use-breakpoint",
-          "pathname": "/docs/hooks/use-breakpoint"
         },
         {
           "title": "useBreakpointEffect",
@@ -809,19 +1094,24 @@
           "pathname": "/docs/hooks/use-breakpoint-value"
         },
         {
+          "title": "useBreakpoint",
+          "segment": "use-breakpoint",
+          "pathname": "/docs/hooks/use-breakpoint"
+        },
+        {
           "title": "useClipboard",
           "segment": "use-clipboard",
           "pathname": "/docs/hooks/use-clipboard"
         },
         {
-          "title": "useColorMode",
-          "segment": "use-color-mode",
-          "pathname": "/docs/hooks/use-color-mode"
-        },
-        {
           "title": "useColorModeValue",
           "segment": "use-color-mode-value",
           "pathname": "/docs/hooks/use-color-mode-value"
+        },
+        {
+          "title": "useColorMode",
+          "segment": "use-color-mode",
+          "pathname": "/docs/hooks/use-color-mode"
         },
         {
           "title": "useCounter",
@@ -949,14 +1239,14 @@
           "pathname": "/docs/hooks/use-timeout"
         },
         {
-          "title": "useUpdateEffect",
-          "segment": "use-update-effect",
-          "pathname": "/docs/hooks/use-update-effect"
-        },
-        {
           "title": "useUpdateBreakpointEffect",
           "segment": "use-update-breakpoint-effect",
           "pathname": "/docs/hooks/use-update-breakpoint-effect"
+        },
+        {
+          "title": "useUpdateEffect",
+          "segment": "use-update-effect",
+          "pathname": "/docs/hooks/use-update-effect"
         },
         {
           "title": "useValue",
@@ -969,296 +1259,6 @@
           "pathname": "/docs/hooks/use-window-event"
         }
       ]
-    },
-    {
-      "title": "Styling",
-      "segment": "styling",
-      "pathname": "/docs/styling",
-      "items": [
-        {
-          "title": "Style Props",
-          "segment": "style-props",
-          "pathname": "/docs/styling/style-props"
-        },
-        {
-          "title": "Conditional Styles",
-          "segment": "conditional-styles",
-          "pathname": "/docs/styling/conditional-styles"
-        },
-        {
-          "title": "Responsive Design",
-          "segment": "responsive-design",
-          "pathname": "/docs/styling/responsive-design"
-        },
-        {
-          "title": "Color Mode",
-          "segment": "color-mode",
-          "pathname": "/docs/styling/color-mode"
-        },
-        {
-          "title": "Color Scheme",
-          "segment": "color-scheme",
-          "pathname": "/docs/styling/color-scheme"
-        },
-        {
-          "title": "CSS Custom Properties",
-          "segment": "css-custom-properties",
-          "pathname": "/docs/styling/css-custom-properties"
-        },
-        {
-          "title": "CSS Value Functions",
-          "segment": "css-value-functions",
-          "pathname": "/docs/styling/css-value-functions"
-        },
-        {
-          "title": "Interpolation",
-          "segment": "interpolation",
-          "pathname": "/docs/styling/interpolation"
-        },
-        {
-          "title": "Animation",
-          "segment": "animation",
-          "pathname": "/docs/styling/animation"
-        },
-        {
-          "title": "Focus Ring",
-          "segment": "focus-ring",
-          "pathname": "/docs/styling/focus-ring"
-        },
-        {
-          "title": "Global Styles",
-          "segment": "global-styles",
-          "pathname": "/docs/styling/global-styles"
-        },
-        {
-          "title": "Reset Styles",
-          "segment": "reset-styles",
-          "pathname": "/docs/styling/reset-styles"
-        },
-        {
-          "title": "Layer Styles",
-          "segment": "layer-styles",
-          "pathname": "/docs/styling/layer-styles"
-        },
-        {
-          "title": "Text Styles",
-          "segment": "text-styles",
-          "pathname": "/docs/styling/text-styles"
-        },
-        {
-          "title": "At-Rules",
-          "segment": "at-rules",
-          "pathname": "/docs/styling/at-rules"
-        },
-        {
-          "title": "Cascade Layers",
-          "segment": "cascade-layers",
-          "pathname": "/docs/styling/cascade-layers"
-        }
-      ]
-    },
-    {
-      "title": "Theming",
-      "segment": "theming",
-      "pathname": "/docs/theming",
-      "items": [
-        { "title": "CLI", "segment": "cli", "pathname": "/docs/theming/cli" },
-        {
-          "title": "Customization",
-          "segment": "customization",
-          "pathname": "/docs/theming/customization"
-        },
-        {
-          "title": "Breakpoints",
-          "segment": "breakpoints",
-          "pathname": "/docs/theming/breakpoints"
-        },
-        {
-          "title": "Color Mode",
-          "segment": "color-mode",
-          "pathname": "/docs/theming/color-mode"
-        },
-        {
-          "title": "Switching Themes",
-          "segment": "switching-themes",
-          "pathname": "/docs/theming/switching-themes"
-        },
-        {
-          "title": "Cascade Layers",
-          "segment": "cascade-layers",
-          "pathname": "/docs/theming/cascade-layers"
-        },
-        {
-          "title": "Configuration",
-          "segment": "configuration",
-          "items": [
-            {
-              "title": "Overview",
-              "segment": "overview",
-              "pathname": "/docs/theming/configuration/overview"
-            },
-            {
-              "title": "Customization",
-              "segment": "customization",
-              "pathname": "/docs/theming/configuration/customization"
-            }
-          ]
-        },
-        {
-          "title": "Styles",
-          "segment": "styles",
-          "items": [
-            {
-              "title": "Global Styles",
-              "segment": "global-styles",
-              "pathname": "/docs/theming/styles/global-styles"
-            },
-            {
-              "title": "Reset Styles",
-              "segment": "reset-styles",
-              "pathname": "/docs/theming/styles/reset-styles"
-            },
-            {
-              "title": "Layer Styles",
-              "segment": "layer-styles",
-              "pathname": "/docs/theming/styles/layer-styles"
-            },
-            {
-              "title": "Text Styles",
-              "segment": "text-styles",
-              "pathname": "/docs/theming/styles/text-styles"
-            }
-          ]
-        },
-        {
-          "title": "Design Tokens",
-          "segment": "tokens",
-          "items": [
-            {
-              "title": "Animations",
-              "segment": "animations",
-              "pathname": "/docs/theming/tokens/animations"
-            },
-            {
-              "title": "Aspect Ratios",
-              "segment": "aspect-ratios",
-              "pathname": "/docs/theming/tokens/aspect-ratios"
-            },
-            {
-              "title": "Blurs",
-              "segment": "blurs",
-              "pathname": "/docs/theming/tokens/blurs"
-            },
-            {
-              "title": "Borders",
-              "segment": "borders",
-              "pathname": "/docs/theming/tokens/borders"
-            },
-            {
-              "title": "Breakpoints",
-              "segment": "breakpoints",
-              "pathname": "/docs/theming/tokens/breakpoints"
-            },
-            {
-              "title": "Colors",
-              "segment": "colors",
-              "pathname": "/docs/theming/tokens/colors"
-            },
-            {
-              "title": "Color Schemes",
-              "segment": "color-schemes",
-              "pathname": "/docs/theming/tokens/color-schemes"
-            },
-            {
-              "title": "Durations",
-              "segment": "durations",
-              "pathname": "/docs/theming/tokens/durations"
-            },
-            {
-              "title": "Easings",
-              "segment": "easings",
-              "pathname": "/docs/theming/tokens/easings"
-            },
-            {
-              "title": "Font Sizes",
-              "segment": "font-sizes",
-              "pathname": "/docs/theming/tokens/font-sizes"
-            },
-            {
-              "title": "Font Weights",
-              "segment": "font-weights",
-              "pathname": "/docs/theming/tokens/font-weights"
-            },
-            {
-              "title": "Fonts",
-              "segment": "fonts",
-              "pathname": "/docs/theming/tokens/fonts"
-            },
-            {
-              "title": "Gradients",
-              "segment": "gradients",
-              "pathname": "/docs/theming/tokens/gradients"
-            },
-            {
-              "title": "Keyframes",
-              "segment": "keyframes",
-              "pathname": "/docs/theming/tokens/keyframes"
-            },
-            {
-              "title": "Letter Spacings",
-              "segment": "letter-spacings",
-              "pathname": "/docs/theming/tokens/letter-spacings"
-            },
-            {
-              "title": "Line Heights",
-              "segment": "line-heights",
-              "pathname": "/docs/theming/tokens/line-heights"
-            },
-            {
-              "title": "Radii",
-              "segment": "radii",
-              "pathname": "/docs/theming/tokens/radii"
-            },
-            {
-              "title": "Shadows",
-              "segment": "shadows",
-              "pathname": "/docs/theming/tokens/shadows"
-            },
-            {
-              "title": "Sizes",
-              "segment": "sizes",
-              "pathname": "/docs/theming/tokens/sizes"
-            },
-            {
-              "title": "Spaces",
-              "segment": "spaces",
-              "pathname": "/docs/theming/tokens/spaces"
-            },
-            {
-              "title": "Z Indices",
-              "segment": "z-indices",
-              "pathname": "/docs/theming/tokens/z-indices"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Community",
-      "segment": "community",
-      "pathname": "/docs/community",
-      "items": [
-        {
-          "title": "Contributing",
-          "segment": "contributing",
-          "pathname": "/docs/community/contributing"
-        }
-      ]
-    },
-    {
-      "title": "Changelog",
-      "segment": "changelog",
-      "pathname": "/docs/changelog"
     }
   ]
 }

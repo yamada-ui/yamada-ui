@@ -1,4 +1,5 @@
 "use client"
+
 import { Card, Resizable, useBoolean, VStack } from "@yamada-ui/react"
 import { memo } from "react"
 import { Content } from "./content"

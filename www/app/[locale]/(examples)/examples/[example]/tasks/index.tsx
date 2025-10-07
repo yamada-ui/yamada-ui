@@ -1,4 +1,5 @@
 "use client"
+
 import type { Priority, Status, View } from "./data"
 import { Card, noop, VStack } from "@yamada-ui/react"
 import { memo, useRef } from "react"

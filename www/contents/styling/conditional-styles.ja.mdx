@@ -3,4 +3,150 @@ title: 条件付きスタイル
 description: Yamada UIは、条件に応じたスタイルを適用する機能を提供しています。
 ---
 
-ライブラリで利用可能なすべての条件付きスタイルのリストはこちらです。
+## 概要
+
+条件付きスタイルを使用することで、[擬似要素](/docs/styling/style-props#擬似要素)、[擬似クラス](/docs/styling/style-props#擬似クラス)、[セレクター](/docs/styling/style-props#セレクター)のスタイルを適用できます。
+
+## 擬似要素
+
+`::before`の擬似要素にスタイルを適用するには、`_before`を使用します。
+
+```tsx preview
+<Box
+  bg="bg.contrast"
+  color="fg.contrast"
+  m="md"
+  p="md"
+  position="relative"
+  _before={{
+    bg: "success",
+    color: "white",
+    content: "'before'",
+    left: "-md",
+    p: "md",
+    position: "absolute",
+    top: "-md",
+  }}
+>
+  Box
+</Box>
+```
+
+:::note
+利用可能な擬似要素は[こちら](/docs/styling/style-props#擬似要素)をご覧ください。
+:::
+
+## 擬似クラス
+
+`:hover`の擬似クラスにスタイルを適用するには、`_hover`を使用します。
+
+```tsx preview
+<Box p="md" color="fg.contrast" bg={{ base: "bg.contrast", _hover: "success" }}>
+  Hover me
+</Box>
+```
+
+複数の値をまとめて適用することもできます。
+
+```tsx preview
+<Box
+  p="md"
+  color="fg.contrast"
+  bg="bg.contrast"
+  _hover={{ bg: "success", color: "white" }}
+>
+  Hover me
+</Box>
+```
+
+複数の条件を組み合わせることもできます。
+
+```tsx preview
+<Box
+  p="md"
+  tabIndex={0}
+  color="fg.contrast"
+  bg="bg.contrast"
+  _hover={{ _focus: { bg: "success" } }}
+>
+  Hover and focus me
+</Box>
+```
+
+:::note
+利用可能な擬似クラスは[こちら](/docs/styling/style-props#擬似クラス)をご覧ください。
+:::
+
+## セレクター
+
+`data-orientation`の属性に基づいてスタイルを適用するには、`_horizontal`もしくは`_vertical`を使用します。
+
+```tsx preview
+<Box
+  p="md"
+  color="white"
+  data-orientation="horizontal"
+  _horizontal={{ bg: "success" }}
+  _vertical={{ bg: "warning" }}
+>
+  horizontal
+</Box>
+```
+
+:::note
+利用可能なセレクターは[こちら](/docs/styling/style-props#セレクター)をご覧ください。
+:::
+
+### グループセレクター
+
+親要素の状態または属性に基づいて要素にスタイルを適用するには、親要素にroleの`"group"`または`"data-group"`を追加して、子要素に`_group*`の条件付きスタイルを使用します。
+
+```tsx preview
+<Box role="group" p="md" bg="bg.subtle">
+  <Text _groupHover={{ color: "success" }}>Hover me</Text>
+</Box>
+```
+
+:::note
+利用可能なグループセレクターは[こちら](/docs/styling/style-props#セレクター)をご覧ください。
+:::
+
+### 兄弟セレクター
+
+兄弟要素の状態または属性に基づいて要素にスタイルを適用するには、兄弟要素に`data-peer`を追加して、`_peer*`の条件付きスタイルを使用します。
+
+```tsx preview
+<HStack>
+  <Center
+    bg="bg.contrast"
+    color="fg.contrast"
+    p="md"
+    _peerFocus={{ bg: "success" }}
+  >
+    Focus the peer
+  </Center>
+
+  <Center data-peer bg="bg.subtle" p="md" tabIndex={0}>
+    Focus me!
+  </Center>
+</HStack>
+```
+
+:::note
+利用可能な兄弟セレクターは[こちら](/docs/styling/style-props#セレクター)をご覧ください。
+:::
+
+### 任意のセレクター
+
+任意のセレクターを使用する場合は、`css`を使用してスタイルを適用します。
+
+```tsx preview
+<Box
+  p="md"
+  color="white"
+  css={{ "&[data-state=closed]": { bg: "success" } }}
+  data-state="closed"
+>
+  Closed
+</Box>
+```

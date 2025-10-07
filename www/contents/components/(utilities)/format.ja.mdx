@@ -1,0 +1,337 @@
+---
+title: Format
+description: "`Format`は、日付・数値・バイトなどを特定のロケールに合わせてフォーマットするために使用されます。"
+storybook: components-format
+source: components/format
+---
+
+```tsx preview
+<VStack gap="0">
+  <Format.Byte value={1234567} />
+  <Format.Number value={1234567.89} />
+</VStack>
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Format } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Format } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Format } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Format.Byte />
+<Format.Number />
+```
+
+### 日付
+
+:::note
+`Format.DateTime`は、内部で[Intl.DateTimeFormat](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat)を使用しています。
+:::
+
+#### ロケールを変更する
+
+ロケールを変更する場合は、[locale](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#locales)に値を設定します。
+
+```tsx preview
+<Grid templateColumns="auto 1fr" gap="sm">
+  <Text fontWeight="semibold">英語</Text>
+  <Format.DateTime value={new Date()} locale="en-US" />
+
+  <Text fontWeight="semibold">日本語</Text>
+  <Format.DateTime value={new Date()} locale="ja-JP" />
+
+  <Text fontWeight="semibold">ドイツ語</Text>
+  <Format.DateTime value={new Date()} locale="de-DE" />
+
+  <Text fontWeight="semibold">フランス語</Text>
+  <Format.DateTime value={new Date()} locale="fr-FR" />
+
+  <Text fontWeight="semibold">中国語</Text>
+  <Format.DateTime value={new Date()} locale="zh-CN" />
+</Grid>
+```
+
+#### 年に変換する
+
+年に変換する場合は、[year](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#year)に値を設定します。
+
+```tsx preview
+<Format.DateTime value={new Date()} year="numeric" />
+```
+
+#### 月に変換する
+
+月に変換する場合は、[month](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#month)に値を設定します。
+
+```tsx preview
+<Format.DateTime value={new Date()} month="long" />
+```
+
+#### 日に変換する
+
+日に変換する場合は、[day](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#day)に値を設定します。
+
+```tsx preview
+<Format.DateTime value={new Date()} day="2-digit" />
+```
+
+#### 曜日に変換する
+
+曜日に変換する場合は、[weekday](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#weekday)に値を設定します。
+
+```tsx preview
+<Format.DateTime value={new Date()} weekday="long" />
+```
+
+### 数値
+
+:::note
+`Format.Number`は、内部で[Intl.NumberFormat](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat)を使用しています。
+:::
+
+#### ロケールを変更する
+
+ロケールを変更する場合は、[locale](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales)に値を設定します。
+
+```tsx preview
+<Grid templateColumns="auto 1fr" gap="sm">
+  <Text fontWeight="semibold">英語</Text>
+  <Format.Number value={1234567.89} locale="en-US" />
+
+  <Text fontWeight="semibold">日本語</Text>
+  <Format.Number value={1234567.89} locale="ja-JP" />
+
+  <Text fontWeight="semibold">ドイツ語</Text>
+  <Format.Number value={1234567.89} locale="de-DE" />
+
+  <Text fontWeight="semibold">フランス語</Text>
+  <Format.Number value={1234567.89} locale="fr-FR" />
+
+  <Text fontWeight="semibold">中国語</Text>
+  <Format.Number value={1234567.89} locale="zh-CN" />
+</Grid>
+```
+
+#### 通貨に変換する
+
+通貨に変換する場合は、[style](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#style)に`"currency"`を設定します。
+
+```tsx preview
+<Grid templateColumns="auto 1fr" gap="sm">
+  <Text fontWeight="semibold">米ドル</Text>
+  <Format.Number
+    value={1234567.89}
+    style="currency"
+    currency="USD"
+    locale="en-US"
+  />
+
+  <Text fontWeight="semibold">ユーロ</Text>
+  <Format.Number
+    value={1234567.89}
+    style="currency"
+    currency="EUR"
+    locale="de-DE"
+  />
+
+  <Text fontWeight="semibold">円</Text>
+  <Format.Number
+    value={1234567.89}
+    style="currency"
+    currency="JPY"
+    locale="ja-JP"
+  />
+</Grid>
+```
+
+#### 単位に変換する
+
+単位に変換する場合は、[style](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#style)に`"unit"`を設定します。
+
+```tsx preview
+<VStack gap="sm">
+  <Format.Number value={100} style="unit" unit="kilogram" />
+  <Format.Number value={100} style="unit" unit="celsius" unitDisplay="long" />
+  <Format.Number
+    value={100}
+    style="unit"
+    unit="kilometer-per-hour"
+    unitDisplay="narrow"
+  />
+</VStack>
+```
+
+#### パーセントに変換する
+
+パーセントに変換する場合は、[style](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#style)に`"percent"`を設定します。
+
+```tsx preview
+<VStack gap="sm">
+  <Format.Number value={0.45} style="percent" />
+  <Format.Number value={0.45} style="percent" minimumFractionDigits={2} />
+</VStack>
+```
+
+#### 表記に変換する
+
+表記に変換する場合は、[notation](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#notation)に値を設定します。
+
+```tsx preview
+<VStack gap="sm">
+  <Format.Number value={1234567.89} notation="standard" />
+  <Format.Number value={1234567.89} notation="scientific" />
+  <Format.Number value={1234567.89} notation="engineering" />
+  <Format.Number value={1234567.89} notation="compact" />
+</VStack>
+```
+
+#### 小数点以下の桁数を制御する
+
+小数点以下の桁数を制御する場合は、[minimumFractionDigits](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#minimumfractiondigits)と[maximumFractionDigits](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#maximumfractiondigits)を使用します。
+
+```tsx preview
+<VStack gap="sm">
+  <Format.Number
+    minimumFractionDigits={2}
+    maximumFractionDigits={2}
+    value={1234.5}
+  />
+  <Format.Number
+    minimumFractionDigits={0}
+    maximumFractionDigits={3}
+    value={1234.567}
+  />
+  <Format.Number
+    minimumFractionDigits={4}
+    maximumFractionDigits={4}
+    value={1234}
+  />
+</VStack>
+```
+
+#### グループ化を無効にする
+
+グループ化を無効にする場合は、[useGrouping](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#usegrouping)を`false`に設定します。
+
+```tsx preview
+<Format.Number value={1234567.89} useGrouping={false} />
+```
+
+#### 符号の表示を変更する
+
+符号の表示を変更する場合は、[signDisplay](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#signdisplay)に値を設定します。
+
+```tsx preview
+<VStack gap="sm">
+  <Format.Number value={1234.5} signDisplay="always" />
+  <Format.Number value={-1234.5} signDisplay="exceptZero" />
+</VStack>
+```
+
+### バイト
+
+:::note
+`Format.Byte`は、内部で[Intl.NumberFormat](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat)を使用しています。
+:::
+
+#### 自動単位選択
+
+`Format.Byte`は、バイト値の大きさに基づいて最適な単位（`byte`、`kB`、`MB`、`GB`、`TB`）を自動的に選択します。
+
+```tsx preview
+<VStack gap="sm">
+  <Format.Byte value={512} />
+  <Format.Byte value={1024} />
+  <Format.Byte value={1024 * 1024} />
+  <Format.Byte value={1024 * 1024 * 1024} />
+  <Format.Byte value={1024 * 1024 * 1024 * 1024} />
+</VStack>
+```
+
+#### ロケールを変更する
+
+ロケールを変更する場合は、[locale](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales)に値を設定します。
+
+```tsx preview
+<Grid templateColumns="auto 1fr" gap="sm">
+  <Text fontWeight="semibold">en-US</Text>
+  <Format.Byte value={1024} locale="en-US" unitDisplay="long" />
+
+  <Text fontWeight="semibold">ja-JP</Text>
+  <Format.Byte value={1024} locale="ja-JP" unitDisplay="long" />
+
+  <Text fontWeight="semibold">de-DE</Text>
+  <Format.Byte value={1024} locale="de-DE" unitDisplay="long" />
+
+  <Text fontWeight="semibold">fr-FR</Text>
+  <Format.Byte value={1024} locale="fr-FR" unitDisplay="long" />
+
+  <Text fontWeight="semibold">zh-CN</Text>
+  <Format.Byte value={1024} locale="zh-CN" unitDisplay="long" />
+</Grid>
+```
+
+#### 単位を変換する
+
+単位を変換する場合は、`unit`に`"byte"`または`"bit"`を設定します。デフォルトでは、`"byte"`が設定されています。
+
+```tsx preview
+<Grid templateColumns="auto 1fr" gap="sm">
+  <Text fontWeight="semibold">バイト</Text>
+  <Format.Byte value={1024} unit="byte" />
+
+  <Text fontWeight="semibold">ビット</Text>
+  <Format.Byte value={1024} unit="bit" />
+</Grid>
+```
+
+#### 単位の表示を変更する
+
+単位の表示を変更する場合は、[unitDisplay](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#unitdisplay)に値を設定します。
+
+```tsx preview
+<Grid templateColumns="auto 1fr" gap="sm">
+  <Text fontWeight="semibold">Short</Text>
+  <Format.Byte value={1024} unitDisplay="short" />
+
+  <Text fontWeight="semibold">Narrow</Text>
+  <Format.Byte value={1024} unitDisplay="narrow" />
+
+  <Text fontWeight="semibold">Long</Text>
+  <Format.Byte value={1024} unitDisplay="long" />
+</Grid>
+```
+
+### アプリケーション全体のロケールを設定する
+
+アプリケーション全体のロケールの設定をする場合は、`UIProvider`の`locale`に値を設定します。
+
+```tsx
+import { UIProvider } from "@yamada-ui/react"
+
+const App = () => {
+  return (
+    <UIProvider locale="ja-JP">
+      <Format.Byte value={1024} />
+      <Format.Number value={1234567.89} />
+    </UIProvider>
+  )
+}
+```
+
+## Props
+
+<PropsTable name="format" />

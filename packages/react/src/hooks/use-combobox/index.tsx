@@ -21,6 +21,7 @@ import {
   findChild,
   getValidChildren,
   handlerAll,
+  isComposing,
   isSomeElement,
   isUndefined,
   mergeRefs,
@@ -374,7 +375,7 @@ export const useCombobox = ({
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLDivElement>) => {
-      if (disabled || ev.nativeEvent.isComposing) return
+      if (disabled || isComposing(ev)) return
 
       runKeyAction(
         ev,

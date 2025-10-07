@@ -1,6 +1,405 @@
 ---
 title: createComponent
-description: The `createComponent` function generates a component that supports conditional styles such as variants. You can also easily create slot components by using the `createSlotComponent` function.
+description: The `createComponent` function create a component that supports conditional styles such as variants. You can also easily create slot components by using the `createSlotComponent` function.
 ---
 
+## Overview
+
+`createComponent` creates a component that supports conditional styles such as variants. The created component can be inherited, has high extensibility, and generates `className` and `displayName`, so you can also create components with consistent naming conventions in your project.
+
 ## Usage
+
+To create a single component, use [createComponent](#createcomponent), and to create a slot component, use [createSlotComponent](#createslotcomponent).
+
+### createComponent
+
+To create a single component, use `createComponent`.
+
+:::code-group
+
+```tsx [package]
+import type { HTMLStyledProps, ThemeProps } from "@yamada-ui/react"
+import { createComponent, defineComponentStyle } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import type { HTMLStyledProps, ThemeProps } from "@/components/ui"
+import { createComponent, defineComponentStyle } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import type { HTMLStyledProps, ThemeProps } from "@workspaces/ui"
+import { createComponent, defineComponentStyle } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const componentStyle = defineComponentStyle({
+  base: {
+    /* base style */
+  },
+  variants: {
+    /* variant style */
+  },
+  sizes: {
+    /* size style */
+  },
+  props: {
+    /* props style */
+  },
+  compounds: {
+    /* compound style */
+  },
+  defaultProps: {
+    /* default props */
+  },
+})
+
+type ComponentStyle = typeof componentStyle
+
+export interface ComponentProps
+  extends HTMLStyledProps<"div">,
+    ThemeProps<ComponentStyle> {}
+
+const {
+  component,
+  ComponentContext,
+  PropsContext: ComponentPropsContext,
+  useComponentContext,
+  usePropsContext: useComponentPropsContext,
+  withContext,
+  useComponentProps,
+} = createComponent<ComponentProps, ComponentStyle>("component", componentStyle)
+
+export { ComponentPropsContext, useComponentPropsContext }
+```
+
+:::note
+`defineComponentStyle` is a function that defines the component style. This function has an important role in type completion.
+:::
+
+- The first argument is the component name used for `className` and `displayName`.
+- The second argument is the component style.
+
+#### Create a component
+
+To create a component, use `withContext`. Set the argument to the HTML element name or function. `withContext` uses the provided style and `PropsContext` props.
+
+```tsx
+export const Component = withContext("div")()
+```
+
+```tsx
+export const Component = withContext((props) => {
+  return <styled.div {...props} />
+})()
+```
+
+If you don't want to use the provided style and `PropsContext` props, or want to handle the logic, use `component`.
+
+```tsx
+export const Component = component((props) => {
+  const computedProps = useComponentProps(props)
+
+  return <styled.div {...computedProps} />
+})()
+```
+
+#### Calculate props
+
+`withContext` and `component` can perform multi-stage calculations on the provided props.
+
+```tsx
+export const Component = withContext("button")(
+  { "aria-label": "Default Label" },
+  ({ "aria-label": ariaLabel, ...rest }) => ({
+    ariaLabel: ariaLabel === "Default Label" ? "Changed Label" : ariaLabel,
+    ...rest,
+  }),
+)
+```
+
+:::warning
+For objects, they are deeply merged. For functions, you need to return the provided props. If you don't return the provided props, the provided props will be lost.
+:::
+
+#### Transfer props
+
+Style props are filtered after calculating the styling. If you also want to use it in the component logic, use `transferProps`.
+
+```tsx
+export const Component = withContext(
+  ({ size, ...rest }) => {
+    return <styled.button data-size={size} {...rest} />
+  },
+  {
+    transferProps: ["size"],
+  },
+)()
+```
+
+#### Inherit a component
+
+`createComponent` created components can be inherited.
+
+```tsx
+import { Component } from "./component"
+```
+
+```tsx
+const additionalComponentStyle = defineComponentStyle({
+  base: {
+    /* base style */
+  },
+  variants: {
+    /* variant style */
+  },
+  sizes: {
+    /* size style */
+  },
+  props: {
+    /* props style */
+  },
+  compounds: {
+    /* compound style */
+  },
+  defaultProps: {
+    /* default props */
+  },
+})
+
+type AdditionalComponentStyle = typeof additionalComponentStyle
+
+export interface AdditionalComponentProps
+  extends HTMLStyledProps<"div">,
+    ThemeProps<AdditionalComponentStyle> {}
+
+const {
+  ComponentContext,
+  PropsContext: AdditionalComponentPropsContext,
+  useComponentContext,
+  usePropsContext: useAdditionalComponentPropsContext,
+  useComponentProps,
+  withContext,
+  component,
+} = createComponent<AdditionalComponentProps, AdditionalComponentStyle>(
+  "additional-component",
+  additionalComponentStyle,
+)
+
+export { AdditionalComponentPropsContext, useAdditionalComponentPropsContext }
+```
+
+```tsx
+export const AdditionalComponent = withContext(Component)()
+```
+
+This creates an `AdditionalComponent` that inherits `Component`.
+
+The difference from the traditional component inheritance is that it can merge [ref](https://ja.react.dev/learn/referencing-values-with-refs), class names, styles, and [event handlers](https://ja.react.dev/learn/responding-to-events).
+
+```tsx
+export const AdditionalComponent: FC<AdditionalComponentProps> = ({
+  className,
+  ...rest
+}) => {
+  const ref = useRef<HTMLDivElement>(null)
+
+  const onClick = useCallback(() => {}, [])
+
+  return (
+    <Component
+      ref={ref}
+      onClick={onClick}
+      className={[className, "additional-component"].join(" ")}
+      {...rest}
+    />
+  )
+}
+```
+
+In this case, if `ref` and `onClick` exist in the provided props, they will be overwritten. Depending on the logic, it may not work well. To solve this, you need to merge each value and logic for each component.
+
+```tsx
+export const AdditionalComponent: FC<AdditionalComponentProps> = ({
+  ref: forwardedRef,
+  className,
+  onClick: onClickProp,
+  ...rest
+}) => {
+  const ref = useRef<HTMLDivElement>(null)
+
+  const onClick = useCallback(() => {}, [])
+
+  return (
+    <Component
+      ref={mergeRefs(forwardedRef, ref)}
+      onClick={handlerAll(onClickProp, onClick)}
+      className={[className, "additional-component"].join(" ")}
+      {...rest}
+    />
+  )
+}
+```
+
+By using `createComponent` to inherit a component, you can automatically merge event handlers such as `ref` and `onClick`.
+
+:::note
+If there is a style conflict, that is, each component has `variants`, the `variants` of the inherited component will take precedence.
+:::
+
+### createSlotComponent
+
+To create a slot component, use `createSlotComponent`. The functionality is the same as [createComponent](#createcomponent).
+
+:::code-group
+
+```tsx [package]
+import type { HTMLStyledProps, ThemeProps } from "@yamada-ui/react"
+import { createSlotComponent, defineComponentSlotStyle } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import type { HTMLStyledProps, ThemeProps } from "@/components/ui"
+import { createSlotComponent, defineComponentSlotStyle } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import type { HTMLStyledProps, ThemeProps } from "@workspaces/ui"
+import { createSlotComponent, defineComponentSlotStyle } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const componentStyle = defineComponentSlotStyle({
+  base: {
+    root: {
+      /* base root style */
+    },
+    item: {
+      /* base item style */
+    },
+  },
+  variants: {
+    /* variant style */
+  },
+  sizes: {
+    /* size style */
+  },
+  props: {
+    /* props style */
+  },
+  compounds: {
+    /* compound style */
+  },
+  defaultProps: {
+    /* default props */
+  },
+})
+
+type ComponentStyle = typeof componentStyle
+
+export interface ComponentRootProps
+  extends HTMLStyledProps<"div">,
+    ThemeProps<ComponentStyle> {}
+
+const {
+  ComponentContext,
+  PropsContext: ComponentPropsContext,
+  StyleContext,
+  useComponentContext,
+  usePropsContext: useComponentPropsContext,
+  useStyleContext,
+  useClassNames,
+  useRootComponentProps,
+  useSlotComponentProps,
+  withProvider,
+  withContext,
+  component,
+} = createSlotComponent<ComponentRootProps, ComponentStyle>(
+  "component",
+  componentStyle,
+)
+
+export { ComponentPropsContext, useComponentPropsContext }
+```
+
+:::note
+`defineComponentSlotStyle` is a function that defines the component style. This function has an important role in type completion.
+:::
+
+- The first argument is the component name prefix used for `className` and `displayName`.
+- The second argument is the component style.
+
+#### Create a component
+
+To create a component, use `withProvider` and `withContext`. Each sets the argument to the HTML element name or function for the first argument, and the slot name for the second argument. `withProvider` uses the provided style and `PropsContext` props to generate a context. `withContext` uses the context generated by `withProvider` to use the style based on the slot name.
+
+```tsx
+export const RootComponent = withProvider("div", "root")()
+
+export const ItemComponent = withContext("div", "item")()
+```
+
+```tsx
+export const RootComponent = withProvider((props) => {
+  return <styled.div {...props} />
+}, "root")()
+
+export const ItemComponent = withContext((props) => {
+  return <styled.div {...props} />
+}, "item")()
+```
+
+If you don't want to use the provided style and `PropsContext` props, or want to handle the logic, use `component`.
+
+```tsx
+export const RootComponent = component((props) => {
+  const [context, computedProps] = useRootComponentProps(props, "root")
+
+  return (
+    <StyleContext value={context}>
+      <styled.div {...computedProps} />
+    </StyleContext>
+  )
+}, "root")()
+
+export const ItemComponent = component((props) => {
+  const computedProps = useSlotComponentProps(props, "item")
+
+  return <styled.div {...computedProps} />
+}, "item")()
+```
+
+#### Use modifiers
+
+To use modifiers, set the slot name to an array.
+
+```tsx
+const componentStyle = defineComponentSlotStyle({
+  base: {
+    root: {
+      /* base root style */
+    },
+    item: {
+      /* base item style */
+    },
+    start: {
+      /* base start style */
+    },
+    end: {
+      /* base end style */
+    },
+  },
+})
+```
+
+```tsx
+export const StartItemComponent = withContext("div", ["item", "start"])()
+
+export const EndItemComponent = withContext("div", ["item", "end"])()
+```
+
+In this case, the style of `item` and `start` or `end` is set, and the class name is `"{prefix}-{name}__item--start"` or `"{prefix}-{name}__item--end"`.

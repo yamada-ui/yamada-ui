@@ -10,6 +10,7 @@ import { useEventListener } from "../../hooks/use-event-listener"
 import {
   ariaAttr,
   handlerAll,
+  isComposing,
   mergeRefs,
   runKeyAction,
   useSafeLayoutEffect,
@@ -194,7 +195,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
 
   const onChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {
-      if ((ev.nativeEvent as InputEvent).isComposing) return
+      if (isComposing(ev)) return
 
       const { selectionEnd, selectionStart, value } = ev.currentTarget
 
@@ -245,7 +246,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLInputElement>) => {
-      if (ev.nativeEvent.isComposing) return
+      if (isComposing(ev)) return
 
       if (!isValidNumericKeyboardEvent(ev, isValidCharacter))
         ev.preventDefault()

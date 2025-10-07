@@ -5,4 +5,579 @@ storybook: components-datepicker--basic
 source: components/date-picker
 ---
 
+```tsx preview
+<DatePicker />
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { DatePicker } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { DatePicker } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { DatePicker } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<DatePicker />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed", "plain"]}>
+    {(variant, index) => (
+      <DatePicker
+        key={index}
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### サイズを変更する
+
+```tsx preview
+<VStack>
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => (
+      <DatePicker key={index} size={size} placeholder={`Size (${size})`} />
+    )}
+  </For>
+</VStack>
+```
+
+### カラースキームを変更する
+
+```tsx preview
+<VStack>
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <DatePicker
+        key={index}
+        colorScheme={colorScheme}
+        today
+        defaultValue={new Date(new Date().setDate(1))}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### フォーマットを変更する
+
+フォーマットを変更する場合は、`format`オブジェクトを設定します。
+
+```tsx preview functional
+const format = useMemo<DatePickerFormat>(
+  () => ({
+    input: null,
+    month: "long",
+    weekday: "narrow",
+    year: "2-digit",
+  }),
+  [],
+)
+
+return <DatePicker format={format} />
+```
+
+### デフォルトの日付を設定する
+
+デフォルトの日付を設定する場合は、`defaultValue`に`Date`を設定します。
+
+```tsx preview
+<DatePicker defaultValue={new Date(1993, 7, 18)} />
+```
+
+### デフォルトの入力値を設定する
+
+デフォルトの入力値を設定する場合は、`defaultInputValue`に文字列を設定します。
+
+```tsx preview
+<DatePicker defaultInputValue="1993/08/18" />
+```
+
+### デフォルトの月を設定する
+
+デフォルトの月を設定する場合は、`defaultMonth`に`Date`を設定します。
+
+```tsx preview
+<DatePicker defaultMonth={new Date("2025-10-01")} />
+```
+
+### 最小日付を設定する
+
+最小日付を設定する場合は、`minDate`に`Date`を設定します。
+
+```tsx preview
+<DatePicker minDate={new Date(new Date().setDate(1))} />
+```
+
+### 最大日付を設定する
+
+最大日付を設定する場合は、`maxDate`に`Date`を設定します。
+
+```tsx preview
+<DatePicker maxDate={new Date(new Date().setDate(18))} />
+```
+
+### 最小と最大の範囲外を許可する
+
+デフォルトでは、最小と最大の日付の範囲外が入力された場合、自動的に最小または最大の日付に置換されます。この制御を無効にし、最小と最大の範囲外を許可する場合は、`allowInputBeyond`を`true`に設定します。
+
+```tsx preview
+<DatePicker
+  minDate={new Date(new Date().setDate(1))}
+  maxDate={new Date(new Date().setDate(18))}
+  allowInputBeyond
+/>
+```
+
+### 今日の強調を無効にする
+
+今日の強調を無効にする場合は、`today`を`false`に設定します。
+
+```tsx preview
+<DatePicker today={false} />
+```
+
+### 特定の曜日を無効にする
+
+特定の曜日を無効にする場合は、`excludeDate`を使用します。
+
+```tsx preview
+<DatePicker excludeDate={(date) => [0, 1, 6].includes(date.getDay())} />
+```
+
+### 複数選択を有効する
+
+複数選択を有効にする場合は、`multiple`を`true`に設定します。
+
+```tsx preview
+<DatePicker multiple />
+```
+
+### 複数選択の最大数を設定する
+
+複数選択の最大選択数を設定する場合は、`max`に数値を設定します。
+
+```tsx preview
+<DatePicker max={3} multiple />
+```
+
+### 複数選択の区切り文字を変更する
+
+複数選択の区切り文字を変更する場合は、`separator`に文字列を設定します。デフォルトでは、`,`が設定されています。
+
+```tsx preview
+<DatePicker multiple separator=";" />
+```
+
+### 期間選択を有効にする
+
+期間選択を有効にする場合は、`range`を`true`に設定します。
+
+```tsx preview
+<DatePicker range />
+```
+
+### 週の開始曜日を変更する
+
+週の開始曜日を変更する場合は、`startDayOfWeek`に`"sunday"`または`"monday"`を設定します。
+
+```tsx preview
+<VStack>
+  <DatePicker placeholder="sunday" startDayOfWeek="sunday" />
+  <DatePicker placeholder="monday" startDayOfWeek="monday" />
+</VStack>
+```
+
+### 週末の曜日を変更する
+
+週末の曜日を変更する場合は、`weekendDays`に曜日(数値)の配列を設定します。
+
+```tsx preview
+<DatePicker weekendDays={[0, 1]} />
+```
+
+### パターンを設定する
+
+パターンを設定する場合は、`pattern`に正規表現を設定します。
+
+```tsx preview
+<DatePicker pattern={/[^\w, ]/g} defaultValue={new Date()} />
+```
+
+### 入力された値の解析をハンドルする
+
+入力された値の解析をハンドルする場合は、`parseDate`を使用します。
+
+```tsx preview
+<DatePicker parseDate={(value) => new Date(value)} />
+```
+
+### 祝日を設定する
+
+祝日を設定する場合は、`holidays`に`Date`の配列を設定します。
+
+```tsx preview functional
+const holidays = useMemo(
+  () => [
+    new Date("2025-01-01"),
+    new Date("2025-01-13"),
+    new Date("2025-02-11"),
+    new Date("2025-02-23"),
+    new Date("2025-02-24"),
+    new Date("2025-03-20"),
+    new Date("2025-04-29"),
+    new Date("2025-05-03"),
+    new Date("2025-05-04"),
+    new Date("2025-05-05"),
+    new Date("2025-05-06"),
+    new Date("2025-07-21"),
+    new Date("2025-08-11"),
+    new Date("2025-09-15"),
+    new Date("2025-09-23"),
+    new Date("2025-10-13"),
+    new Date("2025-11-03"),
+    new Date("2025-11-23"),
+    new Date("2025-11-24"),
+    new Date("2026-01-01"),
+    new Date("2026-01-12"),
+    new Date("2026-02-11"),
+    new Date("2026-02-23"),
+    new Date("2026-03-20"),
+    new Date("2026-04-29"),
+    new Date("2026-05-03"),
+    new Date("2026-05-04"),
+    new Date("2026-05-05"),
+    new Date("2026-05-06"),
+    new Date("2026-07-20"),
+    new Date("2026-08-11"),
+    new Date("2026-09-21"),
+    new Date("2026-09-22"),
+    new Date("2026-10-12"),
+    new Date("2026-11-03"),
+    new Date("2026-11-23"),
+  ],
+  [],
+)
+
+return <DatePicker holidays={holidays} />
+```
+
+### 当月外の日付を非表示にする
+
+当月外の日付を非表示にする場合は、`dayProps`でスタイルを設定します。
+
+```tsx preview
+<DatePicker
+  calendarProps={{
+    dayProps: {
+      css: { "&[data-outside]": { opacity: 0, pointerEvents: "none" } },
+    },
+  }}
+/>
+```
+
+### オフセットを変更する
+
+オフセットを変更する場合は、`gutter`または`offset`に値を設定します。
+
+```tsx preview
+<DatePicker gutter={16} />
+```
+
+### アニメーションを変更する
+
+アニメーションを変更する場合は、`animationScheme`に`"block-start"`や`"inline-end"`などを設定します。
+デフォルトでは、`"scale"`が設定されています。
+
+```tsx preview
+<DatePicker animationScheme="inline-start" />
+```
+
+### 表示位置を変更する
+
+表示位置を変更するには、`placement`に`end`や`start-center`などを設定します。デフォルトでは、`end-start`が設定されています。
+
+```tsx preview
+<DatePicker
+  animationScheme="inline-start"
+  placement="center-end"
+  rootProps={{ w: "xs" }}
+/>
+```
+
+### スクロールをブロックする
+
+スクロールをブロックするには、`blockScrollOnMount`を`true`に設定します。
+
+```tsx preview
+<DatePicker blockScrollOnMount />
+```
+
+### フォーカス時にドロップダウンを開く
+
+フォーカス時にドロップダウンを開く場合は、`openOnFocus`を`true`に設定します。
+
+```tsx preview
+<DatePicker openOnFocus />
+```
+
+### スクロール時にドロップダウンを閉じる
+
+スクロール時にドロップダウンを閉じる場合は、`closeOnScroll`を`true`に設定します。
+
+```tsx preview
+<DatePicker closeOnScroll />
+```
+
+### 変更時にドロップダウンを開くイベントをハンドルする
+
+変更時にドロップダウンを開くイベントをハンドルする場合は、`openOnChange`に関数を設定します。
+
+```tsx preview
+<DatePicker openOnChange={(ev) => ev.target.value.length > 1} />
+```
+
+### 変更時にドロップダウンを閉じるイベントをハンドルする
+
+変更時にドロップダウンを閉じるイベントをハンドルする場合は、`closeOnChange`に関数を設定します。
+
+```tsx preview
+<DatePicker closeOnChange={(ev) => !ev.target.value.length} />
+```
+
+### クリック時にドロップダウンを開かない
+
+クリック時にドロップダウンを開かない場合は、`openOnClick`を`false`に設定します。
+
+```tsx preview
+<DatePicker openOnClick={false} />
+```
+
+### クリア時にフォーカスしない
+
+クリア時にフォーカスしない場合は、`focusOnClear`を`false`に設定します。
+
+```tsx preview
+<DatePicker focusOnClear={false} />
+```
+
+### 選択時にカレンダーを閉じない
+
+選択時にドロップダウンを閉じない場合は、`closeOnSelect`を`false`に設定します。
+
+```tsx preview
+<DatePicker closeOnSelect={false} />
+```
+
+### フォーカスが外れた場合に閉じない
+
+フォーカスが外れた場合にドロップダウンを閉じない場合は、`closeOnBlur`を`false`に設定します。
+
+```tsx preview
+<DatePicker closeOnBlur={false} />
+```
+
+### ESCキーが入力された時にドロップダウンを閉じない
+
+ESCキーが入力された時にドロップダウンを閉じない場合は、`closeOnEsc`を`false`に設定します。
+
+```tsx preview
+<DatePicker closeOnEsc={false} />
+```
+
+### クリアを無効化する
+
+クリアを無効化する場合は、`clearable`を`false`に設定します。
+
+```tsx preview
+<DatePicker clearable={false} />
+```
+
+### 入力を許可しない
+
+入力を許可しない場合は、`allowInput`を`false`に設定します。
+
+```tsx preview
+<DatePicker allowInput={false} />
+```
+
+### 形を変える
+
+```tsx preview
+<VStack>
+  <For each={["rounded", "circle", "square"]}>
+    {(shape, index) => (
+      <DatePicker
+        key={index}
+        defaultValue={{
+          end: new Date(new Date().setDate(new Date().getDate() + 4)),
+          start: new Date(),
+        }}
+        range
+        calendarProps={{ shape }}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`に設定します。
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant, index) => (
+      <DatePicker
+        key={index}
+        variant={variant}
+        disabled
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant, index) => (
+      <DatePicker
+        key={index}
+        variant={variant}
+        readOnly
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### 無効な入力にする
+
+無効な入力にする場合は、`invalid`を`true`に設定します。
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant, index) => (
+      <DatePicker
+        key={index}
+        variant={variant}
+        invalid
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### ボーダーの色を変更する
+
+ボーダーの色を変更する場合は、`focusBorderColor`または`errorBorderColor`に値を設定します。
+
+```tsx preview
+<VStack>
+  <DatePicker focusBorderColor="green.500" placeholder="custom border color" />
+  <DatePicker
+    invalid
+    errorBorderColor="orange.500"
+    placeholder="custom border color"
+  />
+</VStack>
+```
+
+### アイコンをカスタマイズする
+
+```tsx preview
+<VStack>
+  <DatePicker iconProps={{ color: "orange" }} />
+  <DatePicker icon={<CalendarDaysIcon />} />
+</VStack>
+```
+
+### 複数選択時の表示をカスタマイズする
+
+```tsx preview
+<DatePicker
+  multiple
+  render={({ value, onClear }) => (
+    <Tag size="sm" me="{gap}" onClose={onClear}>
+      {value}
+    </Tag>
+  )}
+/>
+```
+
+### カレンダーをカスタマイズする
+
+カレンダーをカスタマイズして、表示を変更できます。
+
+```tsx preview
+<VStack>
+  <DatePicker>
+    <Calendar.Navigation>
+      <Calendar.Control justifyContent="flex-start" px="3">
+        {({ month }) =>
+          `${month.getFullYear()}/${(month.getMonth() + 1).toString().padStart(2, "0")}`
+        }
+      </Calendar.Control>
+      <Calendar.PrevButton gridColumn="6 / 7" />
+      <Calendar.NextButton gridColumn="7 / 8" />
+    </Calendar.Navigation>
+
+    <Calendar.Month />
+  </DatePicker>
+
+  <DatePicker
+    calendarProps={{
+      day: ({ value }) => (
+        <Indicator
+          colorScheme="blue"
+          size="sm"
+          disabled={value.getDate() % 4 !== 0}
+          offset="-3px"
+          labelProps={{ minBoxSize: "2" }}
+        >
+          <Text as="span">{value.getDate()}</Text>
+        </Indicator>
+      ),
+    }}
+  />
+</VStack>
+```
+
+### 制御する
+
+```tsx preview functional
+const [value, onChange] = useState<Date | null>(new Date())
+
+return <DatePicker value={value} onChange={onChange} />
+```
+
+## Props
+
+<PropsTable name="date-picker" />

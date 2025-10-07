@@ -7,7 +7,7 @@ import { isValidElement } from "../../utils"
 import { Center } from "../center"
 import { motion } from "../motion"
 import { Text } from "../text"
-import { Loading } from "./"
+import { useLoadingComponent } from "./use-loading-component"
 
 const variants: Variants = {
   animate: {
@@ -32,7 +32,9 @@ const variants: Variants = {
 export interface ScreenProps extends LoadingSharedProps {}
 
 export const Screen: FC<ScreenProps> = memo(
-  ({ duration, initial, message, onFinish }) => {
+  ({ duration, initial, loadingScheme, message, onFinish }) => {
+    const Component = useLoadingComponent(loadingScheme)
+
     useTimeout(onFinish, duration)
 
     return (
@@ -54,7 +56,7 @@ export const Screen: FC<ScreenProps> = memo(
         zIndex="beerus"
       >
         <Center flexDirection="column" gap="sm" maxW="24rem">
-          <Loading.Oval fontSize="6xl" />
+          <Component fontSize="6xl" />
 
           {message ? (
             isValidElement(message) ? (

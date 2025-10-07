@@ -3,8 +3,194 @@ title: アットルール
 description: Yamada UIは、CSSのアットルールをサポートしています。
 ---
 
-CSSの[アットルール](https://developer.mozilla.org/ja/docs/Web/CSS/At-rule)は、CSSの動作を既定するものです。
+## 概要
 
-Yamada UIでは、特によく使われる`@media`, `@container`と`@keyframes`の3つをサポートしています。
+[Style Props](/docs/styling/style-props)を使用することで、CSSの[アットルール](https://developer.mozilla.org/ja/docs/Web/CSS/At-rule)を設定できます。
 
-## 使い方
+## @media
+
+[@media](https://developer.mozilla.org/ja/docs/Web/CSS/@media)を使い、特定の条件にスタイルを適用するには、`_media`を使用します。
+
+```tsx preview
+<Center
+  borderWidth="1px"
+  boxSize="4xs"
+  p="md"
+  _media={[{ type: "print", css: { color: "success" } }]}
+>
+  <Text>Print me</Text>
+</Center>
+```
+
+`print`など一部のメディア種別は、便利なショートハンドを用意しています。
+
+```tsx preview
+<Center borderWidth="1px" boxSize="4xs" p="md" _print={{ color: "success" }}>
+  <Text>Print me</Text>
+</Center>
+```
+
+:::note
+利用可能な@mediaは[こちら](/docs/styling/style-props#アットルール)をご覧ください。
+:::
+
+### 複数のクエリを使う
+
+複数のクエリを使う場合は、配列内に複数の値を設定します。
+
+```tsx preview
+<Box
+  w="full"
+  p="md"
+  color="fg.contrast"
+  bg="bg.contrast"
+  _media={[
+    { maxW: "1440px", css: { bg: "success" } },
+    { minW: "481px", maxW: "1280px", css: { bg: "warning" } },
+    { maxW: "480px", css: { bg: "danger" } },
+  ]}
+>
+  Box
+</Box>
+```
+
+### 任意のクエリを使う
+
+任意のクエリを使う場合は、`query`を使用します。
+
+```tsx preview
+<Box
+  w="full"
+  p="md"
+  color="fg.contrast"
+  bg="bg.contrast"
+  _media={[
+    {
+      query: "(min-width: 977px) and (max-width: 1440px)",
+      css: { bg: "success" },
+    },
+  ]}
+>
+  Box
+</Box>
+```
+
+## @container
+
+[@container](https://developer.mozilla.org/ja/docs/Web/CSS/@container)を使い、特定のコンテナのサイズや条件に基づいてスタイルを適用するには、`_container`を使用します。
+
+```tsx preview
+<Center
+  containerType="inline-size"
+  p="md"
+  borderWidth="1px"
+  resize="horizontal"
+  overflow="auto"
+  boxSize="4xs"
+>
+  <Text
+    _container={[{ minW: "320px", maxW: "560px", css: { color: "success" } }]}
+  >
+    Resize me
+  </Text>
+</Center>
+```
+
+### コンテナ名を指定する
+
+```tsx preview
+<Center
+  containerName="parent"
+  containerType="size"
+  p="md"
+  borderWidth="1px"
+  resize="both"
+  overflow="auto"
+  boxSize="2xs"
+>
+  <Center
+    containerName="child"
+    containerType="size"
+    p="md"
+    borderWidth="1px"
+    resize="both"
+    overflow="auto"
+    boxSize="4xs"
+  >
+    <Text
+      _container={[
+        {
+          name: "parent",
+          orientation: "portrait",
+          css: { color: "success" },
+        },
+        { name: "child", orientation: "landscape", css: { color: "danger" } },
+      ]}
+    >
+      Resize me
+    </Text>
+  </Center>
+</Center>
+```
+
+## @supports
+
+[@supports](https://developer.mozilla.org/ja/docs/Web/CSS/@supports)を使い、条件に基づいてスタイルを適用するには、`_supports`を使用します。
+
+```tsx preview
+<Box
+  _supports={[
+    {
+      css: {
+        color: "success",
+      },
+      query: "(display: flex)",
+    },
+  ]}
+>
+  <Text>Supported flex</Text>
+</Box>
+```
+
+## @keyframes
+
+[@keyframes](https://developer.mozilla.org/ja/docs/Web/CSS/@keyframes)を使い、アニメーションの中間状態を適用するには、`_keyframes`を使用します。
+
+```tsx preview
+<Box
+  w="fit-content"
+  bg="bg.contrast"
+  color="fg.contrast"
+  p="md"
+  animationDirection="alternate"
+  animationDuration="1s"
+  animationIterationCount="infinite"
+  animationTimingFunction="linear"
+  _keyframes={{
+    from: { translate: "0 0" },
+    to: { translate: "100% 0" },
+  }}
+>
+  Box
+</Box>
+```
+
+:::note
+アニメーションは、別にドキュメントがあります。詳しくは、[アニメーション](/docs/styling/animation)をご覧ください。
+:::
+
+## 任意のアットルール
+
+任意のアットルールを使用する場合は、cssを使用してスタイルを適用します。
+
+```tsx
+<Box
+  css={{
+    "@<identifier> (RULE)": {
+      // Define the style you want to customize.
+    },
+  }}
+>
+  Box
+</Center>
+```

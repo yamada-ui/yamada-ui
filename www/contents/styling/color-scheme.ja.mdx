@@ -3,4 +3,65 @@ title: カラースキーム
 description: Yamada UIは、カラースキームに応じてカラーコンテキストを作成・使用する機能を提供しています。
 ---
 
+## 概要
+
+カラースキームは、値を基にしてコンポーネントにカラーコンテキストを生成します。これは、色の一貫性を向上させます。
+
+カラースキームに値を設定すると、下記のプロパティが生成されます。これらの値は、[テーマ](/docs/theming)の[セマンティックトークン](/docs/theming/tokens/colors#セマンティックトークン)で設定されています。
+
+- `colorScheme.solid`: 背景などで使用する塗りつぶし色。
+- `colorScheme.bg`: 背景などで使用するかすかな色。
+- `colorScheme.ghost`: 背景などで使用するわずかな色。
+- `colorScheme.fg`: 文字などで使用する色。
+- `colorScheme.outline`: 境界線などで使用する色。
+- `colorScheme.contrast`: `colorScheme.solid`で使用するテキスト色。
+- `colorScheme.subtle`: `colorScheme.bg`よりもコントラストが高い色。
+- `colorScheme.muted`: `colorScheme.subtle`よりもコントラストが高い色。
+- `colorScheme.emphasized`: `colorScheme.muted`よりもコントラストが高い色。
+
+また、`colorScheme.50`から`colorScheme.950`までの[トーン色](/docs/theming/tokens/colors#トークン)も生成されます。
+
+:::note
+Yamada UIでは、[グローバルスタイル](/docs/styling/global-styles)の`body`に`colorScheme`が`"mono"`で設定されています。もし、アプリケーション全体で`colorScheme`を変更する場合は、[カスタマイズ](/docs/theming/styles/global-styles#カスタマイズ)をご覧ください。
+:::
+
 ## 使い方
+
+```tsx preview
+<VStack gap="md">
+  <Box
+    p="md"
+    colorScheme="blue"
+    bg="colorScheme.solid"
+    color="colorScheme.contrast"
+  >
+    Solid
+  </Box>
+  <Box
+    p="md"
+    colorScheme="green"
+    bg="colorScheme.subtle"
+    color="colorScheme.fg"
+  >
+    Subtle
+  </Box>
+</VStack>
+```
+
+カラースキームは、親要素のカラースキームを継承します。
+
+```tsx preview
+<VStack gap="md" colorScheme="blue">
+  <Box p="md" bg="colorScheme.solid" color="colorScheme.contrast">
+    Provided by Parent
+  </Box>
+  <Box
+    p="md"
+    colorScheme="green"
+    bg="colorScheme.subtle"
+    color="colorScheme.fg"
+  >
+    Child
+  </Box>
+</VStack>
+```

@@ -21,6 +21,6 @@ describe("useBreakpointEffect", () => {
     matchMediaMock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
     const callback = vi.fn()
     renderHook(() => useBreakpointEffect(callback, []))
-    expect(callback).toHaveBeenCalledWith("md")
+    expect(callback).toHaveBeenCalledExactlyOnceWith("md")
   })
 })

@@ -2,6 +2,7 @@
 
 import type { ColorModeWithSystem, ThemeScheme } from "./index.types"
 import type { Storage } from "./storage-manager"
+import { COLOR_MODE_STORAGE_KEY, THEME_SCHEME_STORAGE_KEY } from "../constant"
 
 export interface StorageScriptProps<Y extends string> {
   key?: string
@@ -9,9 +10,6 @@ export interface StorageScriptProps<Y extends string> {
   defaultValue?: Y
   nonce?: string
 }
-
-export const COLOR_MODE_STORAGE_KEY = "color-mode"
-export const THEME_SCHEME_STORAGE_KEY = "theme-scheme"
 
 export function getStorageScript<Y extends string>(
   type: "colorMode" | "themeScheme",

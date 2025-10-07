@@ -94,7 +94,7 @@ export const add = new Command("add")
 
         if (!proceed) process.exit(0)
 
-        if (!overwrite && existsSync(config.srcPath)) {
+        if (!overwrite && existsSync(config.paths.ui.src)) {
           const { overwrite } = await prompts({
             type: "confirm",
             name: "overwrite",
@@ -315,14 +315,14 @@ export const add = new Command("add")
 
       const indexFileName = transformExtension("index.ts", config.jsx)
 
-      if (existsSync(config.indexPath)) {
+      if (existsSync(config.paths.ui.index)) {
         tasks.add({
           task: async (_, task) => {
-            let content = await readFile(config.indexPath, "utf-8")
+            let content = await readFile(config.paths.ui.index, "utf-8")
 
             content = transformIndex(targetNames, content, config)
 
-            await writeFileSafe(config.indexPath, content, config)
+            await writeFileSafe(config.paths.ui.index, content, config)
 
             task.title = `Updated ${c.cyan(indexFileName)}`
           },
@@ -338,7 +338,7 @@ export const add = new Command("add")
 
             if (config.jsx) content = transformTsToJs(content)
 
-            await writeFileSafe(config.indexPath, content, config)
+            await writeFileSafe(config.paths.ui.index, content, config)
 
             task.title = `Generated ${c.cyan(indexFileName)}`
           },
@@ -347,7 +347,7 @@ export const add = new Command("add")
       }
 
       if (dependencies.length) {
-        const targetPath = config.monorepo ? config.rootPath : cwd
+        const targetPath = config.monorepo ? config.paths.ui.root : cwd
 
         spinner.start(`Checking ${c.cyan("package.json")} dependencies`)
 

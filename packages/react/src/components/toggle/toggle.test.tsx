@@ -52,11 +52,11 @@ describe("<Toggle />", () => {
 
     fireEvent.click(screen.getByRole("button"))
     expect(onChange).toHaveBeenCalledTimes(1)
-    expect(onChange).toHaveBeenCalledWith(true)
+    expect(onChange).toHaveBeenLastCalledWith(true)
 
     fireEvent.click(screen.getByRole("button"))
     expect(onChange).toHaveBeenCalledTimes(2)
-    expect(onChange).toHaveBeenCalledWith(false)
+    expect(onChange).toHaveBeenLastCalledWith(false)
   })
 
   test("should warn when value is not provided in controlled mode", () => {
@@ -72,7 +72,7 @@ describe("<Toggle />", () => {
     fireEvent.click(screen.getByRole("button", { name: /toggle1/i }))
     fireEvent.click(screen.getByRole("button", { name: /toggle1/i }))
 
-    expect(console.warn).toHaveBeenCalledWith(
+    expect(console.warn).toHaveBeenLastCalledWith(
       "Toggle: value is required. Please set the value.",
     )
     vi.restoreAllMocks()

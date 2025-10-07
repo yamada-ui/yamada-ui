@@ -2,7 +2,8 @@ import { VStack } from "@yamada-ui/react"
 import { getTranslations } from "next-intl/server"
 import { Hero } from "@/components"
 import { ExampleNav } from "./example-nav"
-import { Examples } from "./examples/[example]/examples"
+import { Example } from "./examples/[example]/example"
+import { ExampleThemeProvider } from "./examples/context"
 
 export default async function Page({ params }: PageProps<"/[locale]">) {
   const { locale } = await params
@@ -23,8 +24,10 @@ export default async function Page({ params }: PageProps<"/[locale]">) {
         }}
       />
 
-      <ExampleNav example="examples" />
-      <Examples />
+      <ExampleThemeProvider>
+        <ExampleNav example="example" />
+        <Example />
+      </ExampleThemeProvider>
     </VStack>
   )
 }

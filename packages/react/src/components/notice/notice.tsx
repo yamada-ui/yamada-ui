@@ -18,6 +18,7 @@ import { createSlotComponent, styled } from "../../core"
 import { assignRef, dataAttr, handlerAll, noop } from "../../utils"
 import { Alert } from "../alert"
 import { CloseButton } from "../close-button"
+import { useNoticeContext } from "./notice-provider"
 import { noticeStyle } from "./notice.style"
 
 type ToasterPosition = Required<ToasterProps>["position"]
@@ -51,6 +52,7 @@ export { NoticePropsContext, useNoticePropsContext }
 
 export const NoticeRoot = withProvider<"fragment", NoticeRootProps>(
   ({ ref, expand, limit, placement, ...rest }) => {
+    const { getId } = useNoticeContext()
     const position = useMemo(() => PLACEMENT_MAP[placement], [placement])
     const [updatedLimit, setUpdatedLimit] = useState(limit)
 
@@ -78,7 +80,7 @@ export const NoticeRoot = withProvider<"fragment", NoticeRootProps>(
     return (
       <styled.div {...rest}>
         <Toaster
-          id={placement}
+          id={getId(placement)}
           expand={expand}
           gap={16}
           mobileOffset="var(--mobile-offset)"

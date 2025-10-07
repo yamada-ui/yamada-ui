@@ -95,7 +95,7 @@ export async function updateFiles(
 
             try {
               if (componentName === "index") {
-                const name = config.indexPath.split("/").at(-1)!
+                const name = config.paths.ui.index.split("/").at(-1)!
                 const data = changes[name]!
 
                 if (!("locale" in data && "remote" in data)) return
@@ -111,19 +111,19 @@ export async function updateFiles(
                 const { conflict, content: mergedContent } = await mergeContent(
                   remotePath,
                   localePath,
-                  config.indexPath,
+                  config.paths.ui.index,
                   data.remote,
                 )
 
                 await writeFileSafe(
-                  config.indexPath,
+                  config.paths.ui.index,
                   mergedContent,
                   conflict ? merge(config, disabledFormatAndLint) : config,
                 )
 
                 if (conflict) {
                   conflictMap[componentName] ??= {}
-                  conflictMap[componentName][name] = config.indexPath
+                  conflictMap[componentName][name] = config.paths.ui.index
                 }
               } else {
                 await Promise.all(
@@ -215,7 +215,7 @@ export async function updateFiles(
     if (!install) return conflictMap
   }
 
-  const cwd = config.monorepo ? config.rootPath : config.cwd
+  const cwd = config.monorepo ? config.paths.ui.root : config.cwd
 
   remove.push(...update.map(({ name }) => name))
   add.push(...update.map(getPackageNameWithVersion))

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 import { Hero } from "@/components"
 import { ExampleNav } from "../../example-nav"
 import { isSlug } from "../../utils"
+import { ExampleThemeProvider } from "../context"
 
 export default async function Layout({
   children,
@@ -28,8 +29,10 @@ export default async function Layout({
         }}
       />
 
-      <ExampleNav example={example} />
-      {children}
+      <ExampleThemeProvider>
+        <ExampleNav example={example} />
+        {children}
+      </ExampleThemeProvider>
     </VStack>
   )
 }

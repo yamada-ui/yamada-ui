@@ -55,10 +55,10 @@ export async function getRegistriesAndFiles(
           const indexFileName = transformExtension("index.ts", config.jsx)
 
           fileMap.index = {
-            [indexFileName]: await readFile(config.indexPath, "utf-8"),
+            [indexFileName]: await readFile(config.paths.ui.index, "utf-8"),
           }
           registryMap.locale.index = await fetchLocaleRegistry(
-            config.registryPath,
+            config.paths.ui.registry,
           )
 
           task.title = `Got ${c.cyan("index")} file`
@@ -82,7 +82,7 @@ export async function getRegistriesAndFiles(
         task: async (_, task) => {
           if (!config.theme?.path) return
 
-          const { dirPath, files } = await getFiles(config.theme.path)
+          const { dirPath, files } = await getFiles(config.paths.theme.src)
 
           fileMap.theme = files
           registryMap.locale.theme = await fetchLocaleRegistry(
@@ -111,7 +111,7 @@ export async function getRegistriesAndFiles(
             {
               task: async (_, task) => {
                 const { dirPath, files } = await getFiles(
-                  path.posix.join(config.srcPath, "**", componentName),
+                  path.posix.join(config.paths.ui.src, "**", componentName),
                 )
                 fileMap[componentName] = files
                 registryMap.locale[componentName] = await fetchLocaleRegistry(

@@ -1,8 +1,497 @@
 ---
 title: Motion
-description: "`Motion` is a convenient component that extends the Yamada UI style system to `motion`."
+description: "`Motion` is a convenient component that extends the Yamada UI Style Props to `Motion`."
 storybook: components-motion-animation--basic
 source: components/motion
 ---
 
+```tsx preview
+<Center h="sm">
+  <Motion
+    boxSize="4xs"
+    bg="bg.contrast"
+    color="fg.contrast"
+    animate={{
+      scale: [1, 2, 2, 1, 1],
+      rotate: [0, 0, 180, 180, 0],
+      borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+    }}
+    transition={{
+      duration: 2,
+      ease: "easeInOut",
+      times: [0, 0.2, 0.5, 0.8, 1],
+      repeat: Infinity,
+      repeatDelay: 1,
+    }}
+  />
+</Center>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Motion } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Motion } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Motion } from "@workspaces/ui"
+```
+
+:::
+
+:::note
+`Motion` uses [Motion](https://motion.dev) internally. If you want to know more about the component's features, please refer to [this](https://motion.dev/docs/react-motion-component).
+:::
+
+- `initial`: The initial state of the component.
+- `animate`: The animation executed when the component is mounted or updated.
+- `exit`: The animation executed when the component is unmounted.
+- `transition`: The object that sets the duration and delay.
+
+:::note
+The style object used in `initial`・`animate`・`exit` is not a [Style Props](/docs/styling/style-props) of Yamada UI. Please refer to the [Motion](https://motion.dev) documentation for the properties of the style object.
+:::
+
+:::warning
+To enable the animation of `exit`, the component must be a child element of [AnimatePresence](https://motion.dev/docs/react-animate-presence).
+:::
+
+### Variants
+
+Variants are useful for implementing dynamic animations. You can also orchestrate animations.
+
+```tsx preview functional client
+const [visible, { toggle }] = useBoolean()
+
+return (
+  <VStack>
+    <Button alignSelf="flex-start" onClick={toggle}>
+      Click me!
+    </Button>
+
+    <Motion
+      w="fit-content"
+      p="md"
+      bg="bg.contrast"
+      color="fg.contrast"
+      initial={false}
+      animate={visible ? "visible" : "hidden"}
+      transition={{ duration: 1 }}
+      variants={{
+        visible: { opacity: 1 },
+        hidden: { opacity: 0 },
+      }}
+    >
+      Look at me!
+    </Motion>
+  </VStack>
+)
+```
+
+:::note
+Variants' animation to know more about the animation of variants, please refer to [this](https://motion.dev/docs/react-animation#variants).
+:::
+
+### Use AnimatePresence
+
+In React, when a component is unmounted, the animation is not maintained. By using [AnimatePresence](https://motion.dev/docs/react-animate-presence), the component is not unmounted until the animation ends.
+
+```tsx preview functional client
+const [visible, { toggle }] = useBoolean()
+
+return (
+  <VStack h="sm">
+    <Button alignSelf="flex-start" onClick={toggle}>
+      Click me!
+    </Button>
+
+    <Center flex="1" gap="md">
+      <AnimatePresence>
+        {visible ? (
+          <Motion
+            w="fit-content"
+            p="md"
+            bg="bg.contrast"
+            color="fg.contrast"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+          >
+            Enabled "AnimatePresence"
+          </Motion>
+        ) : null}
+      </AnimatePresence>
+
+      {visible ? (
+        <Motion
+          w="fit-content"
+          p="md"
+          bg="bg.contrast"
+          color="fg.contrast"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+        >
+          Disabled "AnimatePresence"
+        </Motion>
+      ) : null}
+    </Center>
+  </VStack>
+)
+```
+
+### Keyframes
+
+By setting the value to an array, you can set the keyframes. Each frame is processed at equal intervals. You can override this by setting an array of intervals to `transition`'s `times`.
+
+```tsx preview
+<Center h="sm">
+  <Motion
+    boxSize="4xs"
+    bg="bg.contrast"
+    color="fg.contrast"
+    animate={{
+      scale: [1, 2, 2, 1, 1],
+      rotate: [0, 0, 180, 180, 0],
+      borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+    }}
+    transition={{
+      duration: 2,
+      ease: "easeInOut",
+      times: [0, 0.2, 0.5, 0.8, 1],
+      repeat: Infinity,
+      repeatDelay: 1,
+    }}
+  />
+</Center>
+```
+
+### Gestures
+
+[Hover](#hover)・[Click/Tap](#clicktap)・[Focus](#focus) to detect and execute animations.
+
+#### Hover
+
+- `whileHover`: The animation executed when the pointer is moved over the component.
+- `onHoverStart`: The callback function executed when the pointer is moved over the component.
+- `onHoverEnd`: The callback function executed when the pointer is moved away from the component.
+
+```tsx preview client
+<Motion
+  cursor="pointer"
+  w="fit-content"
+  p="md"
+  bg="bg.contrast"
+  color="fg.contrast"
+  whileHover={{ scale: 1.1 }}
+  onHoverStart={(ev) => console.log("Hover starts")}
+  onHoverEnd={(ev) => console.log("Hover ends")}
+>
+  Hover me!
+</Motion>
+```
+
+:::note
+Hover's animation to know more about the animation of hover, please refer to [this](https://motion.dev/docs/react-hover-animation).
+:::
+
+#### Click/Tap
+
+- `whileTap`: The animation executed when the pointer is clicked or tapped on the component.
+- `onTapStart`: The callback function executed when the pointer starts pressing the component.
+- `onTap`: The callback function executed when the pointer is released inside the component.
+- `onTapCancel`: The callback function executed when the pointer is released outside the component.
+
+```tsx preview client
+<Motion
+  cursor="pointer"
+  w="fit-content"
+  p="md"
+  bg="bg.contrast"
+  color="fg.contrast"
+  whileTap={{ scale: 0.9 }}
+  onTapStart={(ev) => console.log("Tap starts")}
+  onTap={(ev) => console.log("Tap")}
+  onTapCancel={(ev) => console.log("Tap cancels")}
+>
+  Click and Tap me!
+</Motion>
+```
+
+:::note
+Click/Tap's animation to know more about the animation of click/tap, please refer to [this](https://motion.dev/docs/react-gestures#tap).
+:::
+
+#### Focus
+
+- `whileFocus`: The animation executed when the component is focused.
+
+```tsx preview client
+<Motion
+  cursor="pointer"
+  w="fit-content"
+  p="md"
+  bg="bg.contrast"
+  color="fg.contrast"
+  tabIndex={0}
+  whileFocus={{ scale: 1.1 }}
+>
+  Focus me!
+</Motion>
+```
+
+:::note
+Focus's animation to know more about the animation of focus, please refer to [this](https://motion.dev/docs/react-gestures#focus).
+:::
+
+### Drag
+
+To enable the dragging of the component, set `drag` to `true`. Or set `"x"` or `"y"` to follow only the x-axis or y-axis.
+
+- `whileDrag`: The animation executed when the component is dragged.
+- `onDrag`: The callback function executed when the component is dragged.
+- `onDragStart`: The callback function executed when the component starts dragging.
+- `onDragEnd`: The callback function executed when the component ends dragging.
+
+```tsx preview client
+<Center h="sm" gap="md">
+  <For each={[true, "x", "y"]}>
+    {(drag) => (
+      <Motion
+        cursor={{ base: "grab", _active: "grabbing" }}
+        w="fit-content"
+        p="md"
+        bg="bg.contrast"
+        color="fg.contrast"
+        drag={drag}
+        onDrag={(ev, { point }) =>
+          console.log("Drag", "x:", point.x, "y:", point.y)
+        }
+        onDragStart={(ev, { point }) =>
+          console.log("Drag starts", "x:", point.x, "y:", point.y)
+        }
+        onDragEnd={(ev, { point }) =>
+          console.log("Drag ends", "x:", point.x, "y:", point.y)
+        }
+      >
+        {drag === true ? "Drag me!" : drag === "x" ? "Only X" : "Only Y"}
+      </Motion>
+    )}
+  </For>
+</Center>
+```
+
+:::note
+Drag's animation to know more about the animation of drag, please refer to [this](https://motion.dev/docs/react-drag).
+:::
+
+#### Limit the possible area
+
+To limit the possible area, set the value (pixels) to `top`・`bottom`・`left`・`right` of `dragConstraints`.
+
+```tsx preview
+<Center h="sm" gap="md">
+  <Motion
+    cursor={{ base: "grab", _active: "grabbing" }}
+    w="fit-content"
+    p="md"
+    bg="bg.contrast"
+    color="fg.contrast"
+    drag
+    dragConstraints={{ top: 0, right: 100, bottom: 100, left: 0 }}
+  >
+    Only Right & Bottom
+  </Motion>
+</Center>
+```
+
+Or, you can limit the possible area by setting `ref`.
+
+```tsx preview functional client
+const ref = useRef<HTMLDivElement>(null)
+
+return (
+  <Center ref={ref} h="sm" gap="md">
+    <Motion
+      cursor={{ base: "grab", _active: "grabbing" }}
+      w="fit-content"
+      p="md"
+      bg="bg.contrast"
+      color="fg.contrast"
+      drag
+      dragConstraints={ref}
+    >
+      Drag me!
+    </Motion>
+  </Center>
+)
+```
+
+#### Set elasticity
+
+To set elasticity, set the object with the value (pixels) set to `top`・`bottom`・`left`・`right` of `dragElastic` to `true` or a number.
+
+```tsx preview functional client
+const ref = useRef<HTMLDivElement>(null)
+
+return (
+  <Center ref={ref} h="sm" gap="md">
+    <Motion
+      cursor={{ base: "grab", _active: "grabbing" }}
+      w="fit-content"
+      p="md"
+      bg="bg.contrast"
+      color="fg.contrast"
+      drag
+      dragElastic={0}
+      dragConstraints={ref}
+    >
+      Drag me!
+    </Motion>
+  </Center>
+)
+```
+
+#### Set momentum
+
+To set momentum, set the boolean value to `dragMomentum`.
+
+```tsx preview functional client
+const ref = useRef<HTMLDivElement>(null)
+
+return (
+  <Center ref={ref} h="sm" gap="md">
+    <Motion
+      cursor={{ base: "grab", _active: "grabbing" }}
+      w="fit-content"
+      p="md"
+      bg="bg.contrast"
+      color="fg.contrast"
+      drag
+      dragMomentum={false}
+      dragConstraints={ref}
+    >
+      Drag me!
+    </Motion>
+  </Center>
+)
+```
+
+#### Limit the direction
+
+To limit the direction, set `dragDirectionLock` to `true`.
+
+```tsx preview functional client
+const [direction, setDirection] = useState<"x" | "y" | null>(null)
+
+return (
+  <Center position="relative" h="sm" gap="md">
+    <Box
+      h="full"
+      border={`1px dashed {colors.${direction === "y" ? "bg.contrast" : "border"}}`}
+      position="absolute"
+      top="50%"
+      left="50%"
+      transform="translate(-50%, -50%)"
+      zIndex="-1"
+    />
+    <Box
+      w="full"
+      border={`1px dashed {colors.${direction === "x" ? "bg.contrast" : "border"}}`}
+      position="absolute"
+      top="50%"
+      left="50%"
+      transform="translate(-50%, -50%)"
+      zIndex="-1"
+    />
+
+    <Motion
+      cursor={{ base: "grab", _active: "grabbing" }}
+      w="fit-content"
+      p="md"
+      border="1px solid {colors.bg.contrast}"
+      drag
+      dragDirectionLock
+      dragConstraints={{ top: 0, right: 0, bottom: 0, left: 0 }}
+      dragTransition={{ bounceStiffness: 500, bounceDamping: 15 }}
+      dragElastic={0.2}
+      onDirectionLock={(direction) => setDirection(direction)}
+      onDragEnd={() => setDirection(null)}
+    >
+      Drag me!
+    </Motion>
+  </Center>
+)
+```
+
+### Scroll
+
+- `whileInView`: The animation executed when the component is in the viewport.
+- `viewport`: The object that sets the detection method of the viewport.
+  - `once`: If `true`, the animation is executed when the component enters the viewport for the first time.
+  - `root`: If you set the scrollable element (`ref`), the element is used as the viewport instead of `window`.
+  - `margin`: The margin to add to the viewport.
+  - `amount`: `"some"`・`"all"`・number to set the height of the element that needs to intersect with the viewport.
+- `onViewportEnter`: The callback function executed when the component enters the viewport.
+- `onViewportLeave`: The callback function executed when the component leaves the viewport.
+
+```tsx preview functional client
+const ref = useRef<HTMLDivElement>(null)
+
+return (
+  <VStack ref={ref} maxH="sm" overflowY="auto">
+    <Text>Scroll me!</Text>
+
+    <Spacer />
+
+    <Center gap="md" mt="{sizes.xl}">
+      <For each={[false, true]}>
+        {(once) => (
+          <Motion
+            cursor="pointer"
+            w="fit-content"
+            p="md"
+            bg="bg.contrast"
+            color="fg.contrast"
+            initial={{ x: once ? 100 : -100 }}
+            whileInView={{ x: 0 }}
+            viewport={{ root: ref, once }}
+            transition={{ duration: 1 }}
+            onViewportEnter={(entry) => console.log("Scroll entires", entry)}
+            onViewportLeave={(entry) => console.log("Scroll leaves", entry)}
+          >
+            {once ? "Once me!" : "You found me!"}
+          </Motion>
+        )}
+      </For>
+    </Center>
+  </VStack>
+)
+```
+
+## Configuration
+
+To set the common settings for `Motion` throughout the project, use [MotionConfig](https://motion.dev/docs/react-motion-config).
+
+```tsx {1,6,10}
+import { MotionConfig } from "motion/react"
+import { UIProvider } from "@yamada-ui/react"
+
+const App = () => {
+  return (
+    <MotionConfig transition={{ duration: 1 }}>
+      <UIProvider>
+        <YourApplication />
+      </UIProvider>
+    </MotionConfig>
+  )
+}
+```

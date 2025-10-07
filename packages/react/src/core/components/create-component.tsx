@@ -149,9 +149,13 @@ function getSlotName<Y extends string>(slot?: ComponentSlot<Y>) {
 export function createComponent<
   Y extends object = {},
   M extends ComponentStyle = Dict,
+  D extends Dict = Dict,
 >(name: string, style?: M) {
   const defaultClassName = style?.className
   const defaultDisplayName = getDisplayName(name)
+  const [ComponentContext, useComponentContext] = createContext<D>({
+    name: `${defaultDisplayName}Context`,
+  })
   const [PropsContext, usePropsContext] = createContext<Partial<Y>>({
     name: `${defaultDisplayName}PropsContext`,
     strict: false,
@@ -255,7 +259,9 @@ export function createComponent<
 
   return {
     component,
+    ComponentContext,
     PropsContext,
+    useComponentContext,
     usePropsContext,
     withContext,
     useComponentProps,

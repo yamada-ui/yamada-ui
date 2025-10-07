@@ -9,6 +9,20 @@ import { DEFAULT_PATH, REGISTRY_FILE_NAME, SECTION_NAMES } from "../constant"
 import { getPackageManager, packageExecuteCommands } from "./package"
 import { transformExtension } from "./typescript"
 
+function getPaths(rootPath: string, jsx?: boolean) {
+  const existsSrc = existsSync(path.resolve(rootPath, "src"))
+  const srcPath = existsSrc ? path.resolve(rootPath, "src") : rootPath
+  const indexPath = path.resolve(srcPath, transformExtension("index.ts", jsx))
+  const registryPath = path.resolve(srcPath, REGISTRY_FILE_NAME)
+
+  return {
+    src: srcPath,
+    index: indexPath,
+    registry: registryPath,
+    root: rootPath,
+  }
+}
+
 export interface GetConfigOptions {
   format?: boolean
   jsx?: boolean
@@ -28,13 +42,29 @@ export async function getConfig(
     if (!isUndefined(lint)) userConfig.lint = { enabled: lint }
     if (!isUndefined(jsx)) userConfig.jsx = jsx
 
-    const rootPath = path.resolve(
-      cwd,
-      userConfig.path ??
-        (userConfig.monorepo ? DEFAULT_PATH.monorepo : DEFAULT_PATH.polyrepo),
-    )
-    const src = existsSync(path.resolve(rootPath, "src"))
-    const srcPath = src ? path.resolve(rootPath, "src") : rootPath
+    const paths = {
+      theme: getPaths(
+        path.resolve(
+          cwd,
+          userConfig.theme?.path ??
+            (userConfig.monorepo
+              ? DEFAULT_PATH.theme.monorepo
+              : DEFAULT_PATH.theme.polyrepo),
+        ),
+        userConfig.jsx,
+      ),
+      ui: getPaths(
+        path.resolve(
+          cwd,
+          userConfig.path ??
+            (userConfig.monorepo
+              ? DEFAULT_PATH.ui.monorepo
+              : DEFAULT_PATH.ui.polyrepo),
+        ),
+        userConfig.jsx,
+      ),
+    }
+
     const sectionMap = Object.fromEntries(
       SECTION_NAMES.map((section) => {
         const path = userConfig[section]?.path ?? DEFAULT_PATH[section]
@@ -46,12 +76,6 @@ export async function getConfig(
       }),
     )
 
-    const indexPath = path.resolve(
-      srcPath,
-      transformExtension("index.ts", userConfig.jsx),
-    )
-    const registryPath = path.resolve(srcPath, REGISTRY_FILE_NAME)
-
     if (userConfig.theme?.path)
       userConfig.theme.path = path.resolve(cwd, userConfig.theme.path)
 
@@ -61,7 +85,7 @@ export async function getConfig(
 
     function getSectionResolvedPath(section: Section) {
       return path.resolve(
-        srcPath,
+        paths.ui.src,
         userConfig[section]?.path ?? DEFAULT_PATH[section],
       )
     }
@@ -109,16 +133,12 @@ export async function getConfig(
 
     return {
       ...userConfig,
-      src,
       cwd,
       getSection,
       getSectionPath,
       getSectionResolvedPath,
-      indexPath,
       isSection,
-      registryPath,
-      rootPath,
-      srcPath,
+      paths,
     }
   } catch {
     const packageManager = getPackageManager()

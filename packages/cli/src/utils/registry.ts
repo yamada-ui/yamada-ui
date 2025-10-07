@@ -361,18 +361,16 @@ export async function transformIndexWithFormatAndLint(
   config: Config,
   generatedNames: string[],
 ) {
-  const { cwd, format, indexPath, jsx, lint } = config
-
   content = transformIndex(generatedNames, content, config)
 
-  if (jsx) content = transformTsToJs(content)
+  if (config.jsx) content = transformTsToJs(content)
 
   content = await lintText(content, {
-    ...lint,
-    cwd,
-    filePath: indexPath,
+    ...config.lint,
+    cwd: config.cwd,
+    filePath: config.paths.ui.index,
   })
-  content = await formatText(content, format)
+  content = await formatText(content, config.format)
 
   return content
 }

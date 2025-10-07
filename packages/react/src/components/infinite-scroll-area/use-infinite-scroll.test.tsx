@@ -44,7 +44,7 @@ describe("useInfiniteScroll", () => {
       }),
     )
 
-    expect(mockOnLoad).toHaveBeenCalledWith({
+    expect(mockOnLoad).toHaveBeenCalledExactlyOnceWith({
       finish: expect.any(Function),
       index: 0,
     })

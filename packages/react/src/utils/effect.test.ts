@@ -16,7 +16,7 @@ describe("useUnmountEffect", () => {
     const mockCallback = vi.fn()
     const { unmount } = renderHook(() => useUnmountEffect(mockCallback))
     unmount()
-    expect(mockCallback).toHaveBeenCalledWith()
+    expect(mockCallback).toHaveBeenCalledExactlyOnceWith()
   })
 })
 

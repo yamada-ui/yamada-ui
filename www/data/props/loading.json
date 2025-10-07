@@ -223,6 +223,38 @@
         "description": "The CSS `color` property.",
         "required": false
       }
+    },
+    "Suspense": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "loadingProps": {
+        "type": "LoadingProps",
+        "description": "The loading props.",
+        "required": false
+      },
+      "loadingScheme": {
+        "type": "LoadingScheme",
+        "description": "The loading scheme.",
+        "required": false
+      }
     }
   }
 }

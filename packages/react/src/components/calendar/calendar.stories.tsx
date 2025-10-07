@@ -6,7 +6,6 @@ import { Indicator } from "../indicator"
 import { Text } from "../text"
 import { Wrap } from "../wrap"
 import { Calendar } from "./"
-import "dayjs/locale/ja"
 
 type Story = StoryFn<typeof Calendar.Root>
 
@@ -70,11 +69,11 @@ export const Locale: Story = () => {
 }
 
 export const Format: Story = () => {
-  const format = useMemo(
+  const format = useMemo<Calendar.Format>(
     () => ({
-      month: "MMMM",
-      weekday: "ddd",
-      year: "YY",
+      month: "long",
+      weekday: "narrow",
+      year: "2-digit",
     }),
     [],
   )

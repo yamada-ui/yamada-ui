@@ -133,7 +133,7 @@ describe("<Stack />", () => {
     fireEvent.click(onClick)
 
     await waitFor(() => {
-      expect(unMountMock).toHaveBeenCalledWith("孫悟空")
+      expect(unMountMock).toHaveBeenCalledExactlyOnceWith("孫悟空")
     })
 
     expect(unMountMock).toHaveBeenCalledTimes(1)

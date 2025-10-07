@@ -97,11 +97,11 @@ describe("<ToggleGroup />", () => {
 
     fireEvent.click(screen.getByText("Option 1"))
     expect(onChange).toHaveBeenCalledTimes(1)
-    expect(onChange).toHaveBeenCalledWith("opt1")
+    expect(onChange).toHaveBeenLastCalledWith("opt1")
 
     fireEvent.click(screen.getByText("Option 2"))
     expect(onChange).toHaveBeenCalledTimes(2)
-    expect(onChange).toHaveBeenCalledWith("opt2")
+    expect(onChange).toHaveBeenLastCalledWith("opt2")
 
     fireEvent.click(screen.getByText("Option 3"))
     expect(onChange).toHaveBeenCalledTimes(2)
@@ -119,11 +119,11 @@ describe("<ToggleGroup />", () => {
 
     fireEvent.click(screen.getByText("Option 1"))
     expect(onChange).toHaveBeenCalledTimes(1)
-    expect(onChange).toHaveBeenCalledWith(undefined)
+    expect(onChange).toHaveBeenLastCalledWith(undefined)
 
     fireEvent.click(screen.getByText("Option 2"))
     expect(onChange).toHaveBeenCalledTimes(2)
-    expect(onChange).toHaveBeenCalledWith("opt2")
+    expect(onChange).toHaveBeenLastCalledWith("opt2")
   })
 
   test("should call onChange callback with updated array when toggles are clicked", () => {
@@ -138,11 +138,11 @@ describe("<ToggleGroup />", () => {
 
     fireEvent.click(screen.getByText("Option 1"))
     expect(onChange).toHaveBeenCalledTimes(1)
-    expect(onChange).toHaveBeenCalledWith([])
+    expect(onChange).toHaveBeenLastCalledWith([])
 
     fireEvent.click(screen.getByText("Option 2"))
     expect(onChange).toHaveBeenCalledTimes(2)
-    expect(onChange).toHaveBeenCalledWith(["opt1", "opt2"])
+    expect(onChange).toHaveBeenLastCalledWith(["opt1", "opt2"])
   })
 
   test("should set all toggles to readonly when readOnly prop is true", () => {

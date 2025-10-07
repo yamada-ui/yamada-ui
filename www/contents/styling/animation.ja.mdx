@@ -4,3 +4,166 @@ description: Yamada UIは、あなたが表現したいアニメーションを�
 ---
 
 ## 使い方
+
+```tsx preview
+<Box
+  w="fit-content"
+  bg="bg.contrast"
+  color="fg.contrast"
+  p="md"
+  animationDirection="alternate"
+  animationDuration="1s"
+  animationIterationCount="infinite"
+  animationTimingFunction="linear"
+  _keyframes={{
+    from: { translate: "0 0" },
+    to: { translate: "100% 0" },
+  }}
+>
+  Box
+</Box>
+```
+
+また、[テーマ](/docs/theming)の[キーフレーム](/docs/theming/tokens/keyframes)を使用することで、アプリケーション全体で共通のキーフレームを適用することができます。使用する場合は、`animationName`または`_keyframes`に値を設定します。
+
+```tsx preview
+<Box
+  w="fit-content"
+  bg="bg.contrast"
+  color="fg.contrast"
+  p="md"
+  animationName="fade-in"
+  animationDirection="alternate"
+  animationDuration="1s"
+  animationIterationCount="infinite"
+  animationTimingFunction="linear"
+>
+  Box
+</Box>
+```
+
+### テーマのトークンを使う
+
+[テーマ](/docs/theming)の[アニメーション](/docs/theming/tokens/animations)を使用する場合は、`animation`に値を設定します。
+
+```tsx preview
+<Box
+  w="fit-content"
+  bg="bg.contrast"
+  color="fg.contrast"
+  p="md"
+  animation="fade-in"
+>
+  Box
+</Box>
+```
+
+:::warning
+デフォルトでは、アニメーションのトークンは定義されていません。
+:::
+
+## コンポーネント
+
+Yamada UIには、アニメーションをより簡単にしたコンポーネントを提供しています。
+
+::::card-group
+
+:::card{href="/docs/components/motion"}
+
+### Motion
+
+[Motion](https://motion.dev/)にYamada UIの[Style Props](/docs/styling/style-props)を拡張した便利なコンポーネントです。
+
+:::
+:::card{href="/docs/components/airy"}
+
+### Airy
+
+２つの要素をふわっと切り替えるアニメーションを提供するコンポーネントです。
+
+:::
+:::card{href="/docs/components/collapse"}
+
+### Collapse
+
+要素を展開または折りたたんで表示するコンポーネントです。
+
+:::
+:::card{href="/docs/components/fade-scale"}
+
+### FadeScale
+
+要素を次第に拡大して表示または縮小して非表示にするコンポーネントです。
+
+:::
+:::card{href="/docs/components/fade"}
+
+### Fade
+
+要素を次第に表示または非表示にするコンポーネントです。
+
+:::
+:::card{href="/docs/components/flip"}
+
+### Flip
+
+２つの要素をフリップさせながら切り替えるアニメーションを提供するコンポーネントです。
+
+:::
+:::card{href="/docs/components/ripple"}
+
+### Ripple
+
+要素に波及効果を付与し、ユーザーがクリックしたかどうかを認識させるコンポーネントです。
+
+:::
+:::card{href="/docs/components/rotate"}
+
+### Rotate
+
+２つの要素を回転させながら切り替えるアニメーションを提供するコンポーネントです。
+
+:::
+:::card{href="/docs/components/skeleton"}
+
+### Skeleton
+
+コンテンツが読み込まれるまでのプレースホルダーとして機能するコンポーネントです。
+
+:::
+:::card{href="/docs/components/slide-fade"}
+
+### SlideFade
+
+要素を指定位置から移動しながら次第に表示または非表示にするコンポーネントです。
+
+:::
+:::card{href="/docs/components/slide"}
+
+### Slide
+
+要素をページの隅から表示または非表示にするコンポーネントです。
+
+:::
+::::
+
+## フック
+
+Yamada UIには、アニメーションの便利なカスタムフックを提供しています。
+
+::::card-group
+:::card{href="/docs/hooks/use-animation"}
+
+### useAnimation
+
+CSSの`keyframes`のように記述してアニメーションを実装するカスタムフックです。
+
+:::
+:::card{href="/docs/hooks/use-dynamic-animation"}
+
+### useDynamicAnimation
+
+アニメーションを切り替えるために使用するカスタムフックです。
+
+:::
+::::

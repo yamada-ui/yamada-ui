@@ -94,7 +94,7 @@ describe("<Rating />", () => {
     const items = container.querySelectorAll(".ui-rating__item")
     await user.click(items[3]!)
 
-    expect(onChange).toHaveBeenCalledWith(3)
+    expect(onChange).toHaveBeenCalledExactlyOnceWith(3)
   })
 
   test("value should be updated correctly on the touchStart event", () => {
@@ -105,7 +105,7 @@ describe("<Rating />", () => {
     const items = container.querySelectorAll(".ui-rating__item")
     fireEvent.touchStart(items[3]!)
 
-    expect(onChange).toHaveBeenCalledWith(3)
+    expect(onChange).toHaveBeenCalledExactlyOnceWith(3)
   })
 
   test("highlightSelectedOnly should work correctly", () => {

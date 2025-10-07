@@ -69,15 +69,15 @@ describe("<PinInput />", () => {
     await user.type(inputs[0]!, "1")
 
     await waitFor(() => {
-      expect(handleChange).toHaveBeenCalledWith("1")
+      expect(handleChange).toHaveBeenLastCalledWith("1")
     })
 
     await user.type(inputs[1]!, "2")
 
     await waitFor(() => {
-      expect(handleChange).toHaveBeenCalledWith("12")
+      expect(handleChange).toHaveBeenLastCalledWith("12")
     })
-    expect(handleComplete).toHaveBeenCalledWith("12")
+    expect(handleComplete).toHaveBeenLastCalledWith("12")
   })
 
   test('input type should be "password" when mask is true', () => {

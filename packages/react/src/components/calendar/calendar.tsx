@@ -546,13 +546,13 @@ export const CalendarMonth = withContext<"table", CalendarMonthProps>(
         <CalendarWeeks {...weeksProps}>
           {monthDays.map((week, index) => (
             <CalendarWeek key={index} {...weekProps}>
-              {week.map((value) => (
+              {week.map(({ label, value }) => (
                 <CalendarDay
                   key={value.toDateString()}
                   {...{ ...dayProps, value }}
                 >
                   {runIfFn(dayProp, { value }) ?? (
-                    <styled.span>{value.getDate()}</styled.span>
+                    <styled.span>{label}</styled.span>
                   )}
                 </CalendarDay>
               ))}

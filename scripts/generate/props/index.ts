@@ -126,7 +126,7 @@ async function extractTypeExports(path: string, prev?: Partial<ExportedType>) {
     match = regexp.exec(code)
   }
 
-  regexp = /export \* as (\w+) from "\.\/(\w+(?:-namespace)?)"/g
+  regexp = /export \* as (\w+) from "\.\/(.*)"/g
   match = regexp.exec(code)
 
   while (match != null) {

@@ -50,9 +50,7 @@ export function getDirPath(
 ) {
   return config.isSection(section)
     ? path.join(config.getSectionResolvedPath(section), name)
-    : section === "theme"
-      ? config.theme!.path!
-      : config.srcPath
+    : config.paths[section === "theme" ? "theme" : "ui"].src
 }
 
 export async function getDiff(

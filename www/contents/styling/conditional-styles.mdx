@@ -3,4 +3,150 @@ title: Conditional Styles
 description: Yamada UI provides features to apply styles according to conditions.
 ---
 
-Here's a list of all the conditional styles available in the library.
+## Overview
+
+By using conditional styles, you can apply styles for [pseudo-elements](/docs/styling/style-props#pseudo-elements), [pseudo-classes](/docs/styling/style-props#pseudo-classes), and [selectors](/docs/styling/style-props#selectors).
+
+## Pseudo Elements
+
+To apply styles to the `::before` pseudo-element, use `_before`.
+
+```tsx preview
+<Box
+  bg="bg.contrast"
+  color="fg.contrast"
+  m="md"
+  p="md"
+  position="relative"
+  _before={{
+    bg: "success",
+    color: "white",
+    content: "'before'",
+    left: "-md",
+    p: "md",
+    position: "absolute",
+    top: "-md",
+  }}
+>
+  Box
+</Box>
+```
+
+:::note
+Available pseudo-elements are [here](/docs/styling/style-props#pseudo-elements).
+:::
+
+## Pseudo Classes
+
+To apply styles to the `:hover` pseudo-class, use `_hover`.
+
+```tsx preview
+<Box p="md" color="fg.contrast" bg={{ base: "bg.contrast", _hover: "success" }}>
+  Hover me
+</Box>
+```
+
+You can also apply multiple values together.
+
+```tsx preview
+<Box
+  p="md"
+  color="fg.contrast"
+  bg="bg.contrast"
+  _hover={{ bg: "success", color: "white" }}
+>
+  Hover me
+</Box>
+```
+
+You can also combine multiple conditions.
+
+```tsx preview
+<Box
+  p="md"
+  tabIndex={0}
+  color="fg.contrast"
+  bg="bg.contrast"
+  _hover={{ _focus: { bg: "success" } }}
+>
+  Hover and focus me
+</Box>
+```
+
+:::note
+Available pseudo-classes are [here](/docs/styling/style-props#pseudo-classes).
+:::
+
+## Selectors
+
+To apply styles based on the `data-orientation` attribute, use `_horizontal` or `_vertical`.
+
+```tsx preview
+<Box
+  p="md"
+  color="white"
+  data-orientation="horizontal"
+  _horizontal={{ bg: "success" }}
+  _vertical={{ bg: "warning" }}
+>
+  horizontal
+</Box>
+```
+
+:::note
+Available selectors are [here](/docs/styling/style-props#selectors).
+:::
+
+### Group Selectors
+
+To apply styles to an element based on the state or attribute of the parent element, add the `"group"` or `"data-group"` role to the parent element and use the `_group*` conditional styles for the child elements.
+
+```tsx preview
+<Box role="group" p="md" bg="bg.subtle">
+  <Text _groupHover={{ color: "success" }}>Hover me</Text>
+</Box>
+```
+
+:::note
+Available group selectors are [here](/docs/styling/style-props#selectors).
+:::
+
+### Peer Selectors
+
+To apply styles to an element based on the state or attribute of the peer element, add the `data-peer` to the peer element and use the `_peer*` conditional styles.
+
+```tsx preview
+<HStack>
+  <Center
+    bg="bg.contrast"
+    color="fg.contrast"
+    p="md"
+    _peerFocus={{ bg: "success" }}
+  >
+    Focus the peer
+  </Center>
+
+  <Center data-peer bg="bg.subtle" p="md" tabIndex={0}>
+    Focus me!
+  </Center>
+</HStack>
+```
+
+:::note
+Available peer selectors are [here](/docs/styling/style-props#selectors).
+:::
+
+### Any Selectors
+
+To use any selectors, use `css` to apply styles.
+
+```tsx preview
+<Box
+  p="md"
+  color="white"
+  css={{ "&[data-state=closed]": { bg: "success" } }}
+  data-state="closed"
+>
+  Closed
+</Box>
+```

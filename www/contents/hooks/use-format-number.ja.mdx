@@ -36,7 +36,7 @@ const formattedValue = useFormatNumber(1234567.89)
 指定されたロケールとオプションに従って数値をフォーマットします。フックはフォーマットされた値を直接返します。
 
 :::note
-`useFormatNumber`は、内部的に[Intl.NumberFormat](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat)を使用しています。`useFormatNumber`は、[navigator.language](https://developer.mozilla.org/ja/docs/Web/API/Navigator/language)に基づいて`locale`を自動的に設定します。
+`useFormatNumber`は、内部で[Intl.NumberFormat](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat)を使用しています。
 :::
 
 ### ロケールを変更する
@@ -85,10 +85,6 @@ const App = () => {
   )
 }
 ```
-
-:::note
-コンフィグをもっと学びたい場合は、[コンフィグをカスタマイズする](/ja/docs/theming/configuration/customization)をご覧ください。
-:::
 
 ### 通貨に変換する
 

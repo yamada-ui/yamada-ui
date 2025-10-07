@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server"
 import { Hero } from "@/components"
 import { ExampleNav } from "./example-nav"
 import { Example } from "./examples/[example]/example"
+import { ExampleThemeProvider } from "./examples/context"
 
 export default async function Page({ params }: PageProps<"/[locale]">) {
   const { locale } = await params
@@ -23,8 +24,10 @@ export default async function Page({ params }: PageProps<"/[locale]">) {
         }}
       />
 
-      <ExampleNav example="example" />
-      <Example />
+      <ExampleThemeProvider>
+        <ExampleNav example="example" />
+        <Example />
+      </ExampleThemeProvider>
     </VStack>
   )
 }

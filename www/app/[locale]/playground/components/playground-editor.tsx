@@ -22,109 +22,107 @@ interface PlaygroundEditorProps {
 }
 
 export const PlaygroundEditor = memo<PlaygroundEditorProps>(({ editorRef }) => {
-    const { playground } = usePlayground()
-    const editorState = useRef(createEditorStateController())
-    const codeMirrorRef = useRef<CodeUpdater>(null)
-    const previewRef = useRef<PreviewController>(null)
-    const storage = useCookieStorage()
-    const initialValue = useCodeInitialization()
+  const { playground } = usePlayground()
+  const editorState = useRef(createEditorStateController())
+  const codeMirrorRef = useRef<CodeUpdater>(null)
+  const previewRef = useRef<PreviewController>(null)
+  const storage = useCookieStorage()
+  const initialValue = useCodeInitialization()
 
-    const lastInitialValue = useRef(initialValue)
-    const { syncRefs } = useSyncRefs(
-      {
-        codeMirror: codeMirrorRef,
-        preview: previewRef,
-      },
-      (ref, value) => {
-        ref.updateCode(value)
-      },
-    )
+  const lastInitialValue = useRef(initialValue)
+  const { syncRefs } = useSyncRefs(
+    {
+      codeMirror: codeMirrorRef,
+      preview: previewRef,
+    },
+    (ref, value) => {
+      ref?.updateCode(value)
+    },
+  )
 
-    if (lastInitialValue.current !== initialValue) {
-      lastInitialValue.current = initialValue
-      syncRefs(initialValue)
+  if (lastInitialValue.current !== initialValue) {
+    lastInitialValue.current = initialValue
+    syncRefs(initialValue)
+  }
+
+  const getCurrentCode = useCallback(() => {
+    return editorState.current.getValue.current()
+  }, [])
+
+  const syncCode = useCallback(() => {
+    const nextCode = playground.getCurrentCode()
+    const currentCode = editorState.current.getValue.current()
+
+    if (currentCode !== nextCode) {
+      syncRefs(nextCode)
     }
+  }, [playground, editorState, syncRefs])
 
-    const getCurrentCode = useCallback(() => {
-      return editorState.current.getValue.current?.() ?? initialValue
-    }, [initialValue])
+  useEffect(() => {
+    syncCode()
 
-    useEffect(() => {
-      const syncCode = () => {
-        const nextCode = playground.getCurrentCode()
-        const currentCode = editorState.current.getValue.current?.()
+    const unsubscribeChange = playground.subscribe(syncCode)
+    const unsubscribeReset = playground.onReset(syncCode)
 
-        // Only update if the code is actually different to prevent infinite loops
-        if (currentCode !== nextCode) {
-          syncRefs(nextCode)
-        }
-      }
-
-      syncCode()
-
-      const unsubscribeChange = playground.subscribe(syncCode)
-      const unsubscribeReset = playground.onReset(syncCode)
-
-      return () => {
-        unsubscribeChange()
-        unsubscribeReset()
-      }
-    }, [editorState, playground, syncRefs])
-
-    if (editorRef?.current) {
-      assignRef(editorRef.current.getCurrentCode, getCurrentCode)
+    return () => {
+      unsubscribeChange()
+      unsubscribeReset()
     }
+  }, [syncCode, playground])
 
-    return (
-      <Resizable.Root
-        display="flex"
-        flex={1}
-        h="full"
-        orientation="horizontal"
-        storage={storage}
-        storageKey={RESIZABLE_CONFIG.storageKey}
+  if (editorRef?.current) {
+    assignRef(editorRef.current.getCurrentCode, getCurrentCode)
+  }
+
+  return (
+    <Resizable.Root
+      display="flex"
+      flex={1}
+      h="full"
+      orientation="horizontal"
+      storage={storage}
+      storageKey={RESIZABLE_CONFIG.storageKey}
+    >
+      <Resizable.Item
+        id="editor"
+        css={{
+          "& > div": {
+            "& > div": { height: "full", overflow: "hidden" },
+            height: "full",
+          },
+        }}
+        borderWidth="1px"
+        defaultSize={RESIZABLE_CONFIG.defaultSize}
+        minSize={RESIZABLE_CONFIG.minSize}
+        roundedLeft="l2"
       >
-        <Resizable.Item
-          id="editor"
-          css={{
-            "& > div": {
-              "& > div": { height: "100%", overflow: "hidden" },
-              height: "100%",
-            },
-          }}
-          borderWidth="1px"
-          defaultSize={RESIZABLE_CONFIG.defaultSize}
-          minSize={RESIZABLE_CONFIG.minSize}
-          roundedLeft="l2"
-        >
-          <CodeMirrorEditor
-            codeUpdaterRef={codeMirrorRef}
-            editorState={editorState.current!}
-            initialValue={initialValue}
-            onChange={playground.changeCode}
-          />
-        </Resizable.Item>
+        <CodeMirrorEditor
+          codeUpdaterRef={codeMirrorRef}
+          editorState={editorState.current!}
+          initialValue={initialValue}
+          onChange={playground.changeCode}
+        />
+      </Resizable.Item>
 
-        <Resizable.Trigger />
+      <Resizable.Trigger />
 
-        <Resizable.Item
-          id="preview"
-          bg="bg.panel"
-          borderWidth="1px"
-          defaultSize={RESIZABLE_CONFIG.defaultSize}
-          minSize={RESIZABLE_CONFIG.minSize}
-          p="lg"
-          roundedRight="l2"
-        >
-          <PreviewEditor
-            editorState={editorState.current!}
-            initialValue={initialValue}
-            previewRef={previewRef}
-          />
-        </Resizable.Item>
-      </Resizable.Root>
-    )
-  },
-)
+      <Resizable.Item
+        id="preview"
+        bg="bg.panel"
+        borderWidth="1px"
+        defaultSize={RESIZABLE_CONFIG.defaultSize}
+        minSize={RESIZABLE_CONFIG.minSize}
+        p="lg"
+        roundedRight="l2"
+      >
+        <PreviewEditor
+          editorState={editorState.current!}
+          initialValue={initialValue}
+          previewRef={previewRef}
+        />
+      </Resizable.Item>
+    </Resizable.Root>
+  )
+})
 
 PlaygroundEditor.displayName = "PlaygroundEditor"

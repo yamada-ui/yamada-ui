@@ -1,6 +1,7 @@
 "use client"
 
 import type { RefObject } from "react"
+import { noop } from "@yamada-ui/react"
 import { assignControllerMethods, createControllerMethods, createControllerRefs } from "../../utils/controller"
 
 export interface EditorStateMethods {
@@ -26,15 +27,9 @@ export type EditorStateController = ReturnType<typeof createController>
 
 const createController = () => createControllerRefs<EditorStateMethods>({
   getValue: () => "",
-  notifyChange: (_value: string) => {
-    // No-op implementation for controller creation
-  },
-  setValue: (_value: string) => {
-    // No-op implementation for controller creation
-  },
-  subscribe: (_callback: (value: string) => void) => () => {
-    // No-op implementation for controller creation
-  },
+  notifyChange: noop,
+  setValue: noop,
+  subscribe: () => noop,
 })
 
 const createMethods = (

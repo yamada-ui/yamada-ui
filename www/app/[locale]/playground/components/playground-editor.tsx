@@ -1,11 +1,12 @@
 "use client"
 
 import type { RefObject } from "react"
+import type { CodeUpdater, PreviewController } from "../types"
 import { assignRef, Resizable } from "@yamada-ui/react"
-import { useSearchParams } from "next/navigation"
-import { memo, useCallback, useEffect, useMemo, useRef } from "react"
+import { memo, useCallback, useEffect, useRef } from "react"
+import { RESIZABLE_CONFIG } from "../constants"
+import { useCodeInitialization, useCookieStorage, useSyncRefs } from "../hooks"
 import { usePlayground } from "../playground-provider"
-import { decodeCode, DEFAULT_CODE } from "../utils"
 import {
   CodeMirrorEditor,
   createEditorStateController,
@@ -22,45 +23,26 @@ interface PlaygroundEditorProps {
 
 export const PlaygroundEditor = memo<PlaygroundEditorProps>(({ editorRef }) => {
     const { playground } = usePlayground()
-    const searchParams = useSearchParams()
     const editorState = useRef(createEditorStateController())
-    const codeMirrorRef = useRef<{ updateCode: (code: string) => void }>(null)
-    const previewRef = useRef<{
-      refresh: () => void
-      updateCode: (code: string) => void
-    }>(null)
-
-    const storage = useMemo<Resizable.Storage>(
-      () => ({
-        getItem: (key) => {
-          const match = document.cookie.match(new RegExp(`(^| )${key}=([^;]+)`))
-
-          return match ? match[2] : null
-        },
-        setItem: (key, value) => {
-          document.cookie = `${key}=${value}; max-age=31536000; path=/`
-        },
-      }),
-      [],
-    )
-
-    const initialValue = useMemo(() => {
-      const codeParam = searchParams.get("code")
-      if (codeParam) {
-        const decoded = decodeCode(codeParam)
-        return decoded ?? DEFAULT_CODE
-      }
-      return DEFAULT_CODE
-    }, [searchParams])
+    const codeMirrorRef = useRef<CodeUpdater>(null)
+    const previewRef = useRef<PreviewController>(null)
+    const storage = useCookieStorage()
+    const initialValue = useCodeInitialization()
 
     const lastInitialValue = useRef(initialValue)
-    const lastSyncedCode = useRef<null | string>(null)
+    const { syncRefs } = useSyncRefs(
+      {
+        codeMirror: codeMirrorRef,
+        preview: previewRef,
+      },
+      (ref, value) => {
+        ref.updateCode(value)
+      },
+    )
 
     if (lastInitialValue.current !== initialValue) {
       lastInitialValue.current = initialValue
-      lastSyncedCode.current = initialValue
-      codeMirrorRef.current?.updateCode(initialValue)
-      previewRef.current?.updateCode(initialValue)
+      syncRefs(initialValue)
     }
 
     const getCurrentCode = useCallback(() => {
@@ -72,18 +54,9 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(({ editorRef }) => {
         const nextCode = playground.getCurrentCode()
         const currentCode = editorState.current.getValue.current?.()
 
-        // Prevent infinite loops by checking if we've already synced this code
-        if (lastSyncedCode.current === nextCode) return
-        if (currentCode === nextCode) return
-
-        lastSyncedCode.current = nextCode
-
         // Only update if the code is actually different to prevent infinite loops
-        if (codeMirrorRef.current) {
-          codeMirrorRef.current.updateCode(nextCode)
-        }
-        if (previewRef.current) {
-          previewRef.current.updateCode(nextCode)
+        if (currentCode !== nextCode) {
+          syncRefs(nextCode)
         }
       }
 
@@ -96,7 +69,7 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(({ editorRef }) => {
         unsubscribeChange()
         unsubscribeReset()
       }
-    }, [editorState, playground])
+    }, [editorState, playground, syncRefs])
 
     if (editorRef?.current) {
       assignRef(editorRef.current.getCurrentCode, getCurrentCode)
@@ -109,7 +82,7 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(({ editorRef }) => {
         h="full"
         orientation="horizontal"
         storage={storage}
-        storageKey="persistence"
+        storageKey={RESIZABLE_CONFIG.storageKey}
       >
         <Resizable.Item
           id="editor"
@@ -120,12 +93,12 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(({ editorRef }) => {
             },
           }}
           borderWidth="1px"
-          defaultSize={50}
-          minSize={5}
+          defaultSize={RESIZABLE_CONFIG.defaultSize}
+          minSize={RESIZABLE_CONFIG.minSize}
           roundedLeft="l2"
         >
           <CodeMirrorEditor
-            codeMirrorRef={codeMirrorRef}
+            codeUpdaterRef={codeMirrorRef}
             editorState={editorState.current!}
             initialValue={initialValue}
             onChange={playground.changeCode}
@@ -138,8 +111,8 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(({ editorRef }) => {
           id="preview"
           bg="bg.panel"
           borderWidth="1px"
-          defaultSize={50}
-          minSize={5}
+          defaultSize={RESIZABLE_CONFIG.defaultSize}
+          minSize={RESIZABLE_CONFIG.minSize}
           p="lg"
           roundedRight="l2"
         >

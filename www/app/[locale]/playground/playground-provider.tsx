@@ -11,7 +11,8 @@ import {
   useMemo,
   useRef,
 } from "react"
-import { decodeCode, DEFAULT_CODE, encodeCode } from "./utils"
+import { useCodeInitialization } from "./hooks"
+import { DEFAULT_CODE, encodeCode } from "./utils"
 
 interface PlaygroundMethods {
   /**
@@ -102,17 +103,9 @@ interface ControllerProps {
 }
 
 const Controller: FC<ControllerProps> = ({ controllerRef }) => {
-  const searchParams = useSearchParams()
   const pathname = usePathname()
-
-  const initialCode = useMemo(() => {
-    const codeParam = searchParams.get("code")
-    if (codeParam) {
-      const decoded = decodeCode(codeParam)
-      return decoded ?? DEFAULT_CODE
-    }
-    return DEFAULT_CODE
-  }, [searchParams])
+  const searchParams = useSearchParams()
+  const initialCode = useCodeInitialization()
 
   const codeRef = useRef<string>(initialCode)
   const lastSyncedCodeRef = useRef(initialCode)

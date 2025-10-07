@@ -1,7 +1,7 @@
 "use client"
 
 import type { RefObject } from "react"
-import { createRef } from "react"
+import { assignControllerMethods, createControllerMethods, createControllerRefs } from "../../utils/controller"
 
 export interface EditorStateMethods {
   /**
@@ -24,27 +24,25 @@ export interface EditorStateMethods {
 
 export type EditorStateController = ReturnType<typeof createController>
 
-const createController = () => ({
-  getValue: createRef<EditorStateMethods["getValue"]>(),
-  notifyChange: createRef<EditorStateMethods["notifyChange"]>(),
-  setValue: createRef<EditorStateMethods["setValue"]>(),
-  subscribe: createRef<EditorStateMethods["subscribe"]>(),
+const createController = () => createControllerRefs<EditorStateMethods>({
+  getValue: () => "",
+  notifyChange: (_value: string) => {
+    // No-op implementation for controller creation
+  },
+  setValue: (_value: string) => {
+    // No-op implementation for controller creation
+  },
+  subscribe: (_callback: (value: string) => void) => () => {
+    // No-op implementation for controller creation
+  },
 })
 
 const createMethods = (
   refs: RefObject<EditorStateController>,
-): EditorStateMethods => ({
-  getValue: () => refs.current.getValue.current?.() ?? "",
-  notifyChange: (value) => refs.current.notifyChange.current?.(value),
-  setValue: (value) => refs.current.setValue.current?.(value),
-  subscribe: (callback) =>
-    refs.current.subscribe.current?.(callback) ?? (() => undefined),
-})
+): EditorStateMethods => createControllerMethods(refs)
 
 export const createEditorStateController = (): EditorStateController => {
-  const controller = createController()
-
-  return controller
+  return createController()
 }
 
-export { createMethods }
+export { assignControllerMethods, createMethods }

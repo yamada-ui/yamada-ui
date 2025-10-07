@@ -1,25 +1,23 @@
 "use client"
 
-import type { Ref } from "react"
+import type { BaseEditorProps, WithCodeUpdaterRef } from "../../types"
 import type { EditorStateController } from "./editor-state"
 import { javascript } from "@codemirror/lang-javascript"
 import { vscodeDark, vscodeLight } from "@uiw/codemirror-theme-vscode"
 import CodeMirror from "@uiw/react-codemirror"
 import { assignRef, useColorModeValue } from "@yamada-ui/react"
 import { memo, useCallback, useRef, useState } from "react"
+import { CODEMIRROR_BASIC_SETUP, CODEMIRROR_EXTENSIONS } from "../../constants"
 
-const extensions = [javascript({ jsx: true, typescript: true })]
+const extensions = [javascript(CODEMIRROR_EXTENSIONS[0])]
 
-interface CodeMirrorEditorProps {
+interface CodeMirrorEditorProps extends BaseEditorProps, WithCodeUpdaterRef {
   editorState: EditorStateController
-  codeMirrorRef?: Ref<{ updateCode: (code: string) => void }>
-  initialValue?: string
-  onChange?: (value: string) => void
 }
 
 export const CodeMirrorEditor = memo(
   ({
-    codeMirrorRef,
+    codeUpdaterRef,
     editorState,
     initialValue = "",
     onChange,
@@ -28,7 +26,7 @@ export const CodeMirrorEditor = memo(
 
     const [value, setValue] = useState(() => {
       const currentValue = editorState.getValue.current?.()
-      return currentValue || initialValue
+      return currentValue ?? initialValue
     })
 
     const subscribersRef = useRef<Set<(value: string) => void>>(new Set())
@@ -75,15 +73,11 @@ export const CodeMirrorEditor = memo(
     assignRef(editorState.notifyChange, notifyChange)
     assignRef(editorState.setValue, setEditorValue)
     assignRef(editorState.subscribe, subscribe)
-    assignRef(codeMirrorRef, { updateCode })
+    assignRef(codeUpdaterRef, { updateCode })
 
     return (
       <CodeMirror
-        basicSetup={{
-          autocompletion: true,
-          highlightActiveLine: true,
-          lineNumbers: true,
-        }}
+        basicSetup={CODEMIRROR_BASIC_SETUP}
         extensions={extensions}
         theme={theme}
         value={value}

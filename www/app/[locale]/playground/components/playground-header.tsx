@@ -20,8 +20,12 @@ export const PlaygroundHeader = memo(() => {
   const { playground } = usePlayground()
   const router = useRouter()
 
-  const shareUrl = playground.getShareUrl()
-  const { copied, onCopy } = useClipboard(shareUrl)
+  const { copied, onCopy } = useClipboard()
+
+  const handleCopy = useCallback(() => {
+    const currentShareUrl = playground.getShareUrl()
+    onCopy(currentShareUrl)
+  }, [playground, onCopy])
 
   const handleKeyboardShortcut = useCallback(
     (ev: KeyboardEvent) => {
@@ -62,7 +66,7 @@ export const PlaygroundHeader = memo(() => {
               colorScheme="primary"
               variant="surface"
               aria-label="Copy share URL"
-              onClick={onCopy}
+              onClick={handleCopy}
             >
               {copied ? <CheckIcon /> : <ClipboardCopyIcon />}
             </IconButton>

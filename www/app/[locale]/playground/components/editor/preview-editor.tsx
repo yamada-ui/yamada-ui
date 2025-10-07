@@ -1,17 +1,14 @@
 "use client"
 
-import type { Ref } from "react"
+import type { BaseEditorProps, WithPreviewControllerRef } from "../../types"
 import type { EditorStateController } from "./editor-state"
 import { assignRef } from "@yamada-ui/react"
 import { memo, useCallback, useEffect, useState } from "react"
-import { ErrorBoundary } from "@/components/error-boundary"
 import { ClientOnly } from "@/components/mdx/client-only"
+import { PlaygroundErrorBoundary } from "../playground-error-boundary"
 
-interface PreviewEditorProps {
+interface PreviewEditorProps extends BaseEditorProps, WithPreviewControllerRef {
   editorState: EditorStateController
-  initialValue?: string
-  previewRef?: Ref<{ refresh: () => void; updateCode: (code: string) => void }>
-  onChange?: (value: string) => void
 }
 
 export const PreviewEditor = memo(
@@ -23,11 +20,11 @@ export const PreviewEditor = memo(
   }: PreviewEditorProps) => {
     const [value, setValue] = useState(() => {
       const currentValue = editorState.getValue.current?.()
-      return currentValue || initialValue
+      return currentValue ?? initialValue
     })
 
     const refresh = useCallback(() => {
-      const currentValue = editorState.getValue.current?.() || ""
+      const currentValue = editorState.getValue.current?.() ?? ""
       setValue(currentValue)
       onChange?.(currentValue)
     }, [editorState, onChange])
@@ -54,9 +51,9 @@ export const PreviewEditor = memo(
     assignRef(previewRef, { refresh, updateCode })
 
     return (
-      <ErrorBoundary resetKey={value}>
+      <PlaygroundErrorBoundary resetKey={value}>
         <ClientOnly lang="tsx" code={value} functional />
-      </ErrorBoundary>
+      </PlaygroundErrorBoundary>
     )
   },
 )

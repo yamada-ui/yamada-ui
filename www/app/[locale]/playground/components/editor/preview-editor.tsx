@@ -4,6 +4,7 @@ import type { Ref } from "react"
 import type { EditorStateController } from "./editor-state"
 import { assignRef } from "@yamada-ui/react"
 import { memo, useCallback, useEffect, useState } from "react"
+import { ErrorBoundary } from "@/components/error-boundary"
 import { ClientOnly } from "@/components/mdx/client-only"
 
 interface PreviewEditorProps {
@@ -52,7 +53,11 @@ export const PreviewEditor = memo(
 
     assignRef(previewRef, { refresh, updateCode })
 
-    return <ClientOnly lang="tsx" code={value} functional />
+    return (
+      <ErrorBoundary resetKey={value}>
+        <ClientOnly lang="tsx" code={value} functional />
+      </ErrorBoundary>
+    )
   },
 )
 

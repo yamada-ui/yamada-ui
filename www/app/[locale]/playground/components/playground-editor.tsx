@@ -3,7 +3,7 @@
 import type { RefObject } from "react"
 import { assignRef, Resizable } from "@yamada-ui/react"
 import { useSearchParams } from "next/navigation"
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { memo, useCallback, useEffect, useMemo, useRef } from "react"
 import { usePlayground } from "../playground-provider"
 import { decodeCode, DEFAULT_CODE } from "../utils"
 import {
@@ -12,19 +12,15 @@ import {
   PreviewEditor,
 } from "./editor"
 
-type EditorVisibility = "both" | "editor" | "preview"
-
 interface PlaygroundEditorController {
   getCurrentCode: { current: (() => string) | null }
-  toggleVisibility: { current: (() => void) | null }
 }
 
 interface PlaygroundEditorProps {
   editorRef?: RefObject<PlaygroundEditorController>
 }
 
-export const PlaygroundEditor = memo<PlaygroundEditorProps>(
-  function PlaygroundEditor({ editorRef }) {
+export const PlaygroundEditor = memo<PlaygroundEditorProps>(({ editorRef }) => {
     const { playground } = usePlayground()
     const searchParams = useSearchParams()
     const editorState = useRef(createEditorStateController())
@@ -33,6 +29,20 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(
       refresh: () => void
       updateCode: (code: string) => void
     }>(null)
+
+    const storage = useMemo<Resizable.Storage>(
+      () => ({
+        getItem: (key) => {
+          const match = document.cookie.match(new RegExp(`(^| )${key}=([^;]+)`))
+
+          return match ? match[2] : null
+        },
+        setItem: (key, value) => {
+          document.cookie = `${key}=${value}; max-age=31536000; path=/`
+        },
+      }),
+      [],
+    )
 
     const initialValue = useMemo(() => {
       const codeParam = searchParams.get("code")
@@ -52,24 +62,6 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(
       codeMirrorRef.current?.updateCode(initialValue)
       previewRef.current?.updateCode(initialValue)
     }
-
-    const [editorVisibility, setEditorVisibility] =
-      useState<EditorVisibility>("both")
-
-    const toggleVisibility = useCallback(() => {
-      setEditorVisibility((prev) => {
-        switch (prev) {
-          case "both":
-            return "editor"
-          case "editor":
-            return "preview"
-          case "preview":
-            return "both"
-          default:
-            return "both"
-        }
-      })
-    }, [])
 
     const getCurrentCode = useCallback(() => {
       return editorState.current.getValue.current?.() ?? initialValue
@@ -108,13 +100,7 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(
 
     if (editorRef?.current) {
       assignRef(editorRef.current.getCurrentCode, getCurrentCode)
-      assignRef(editorRef.current.toggleVisibility, toggleVisibility)
     }
-
-    const showEditor =
-      editorVisibility === "both" || editorVisibility === "editor"
-    const showPreview =
-      editorVisibility === "both" || editorVisibility === "preview"
 
     return (
       <Resizable.Root
@@ -122,51 +108,50 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(
         flex={1}
         h="full"
         orientation="horizontal"
-        storageKey="playground-panels"
+        storage={storage}
+        storageKey="persistence"
       >
-        {showEditor ? (
-          <Resizable.Item
-            css={{
-              "& > div": {
-                "& > div": { height: "100%", overflow: "hidden" },
-                height: "100%",
-              },
-            }}
-            borderWidth="1px"
-            defaultSize={50}
-            minSize={5}
-            roundedLeft="l2"
-            roundedRight={!showPreview ? "l2" : undefined}
-          >
-            <CodeMirrorEditor
-              codeMirrorRef={codeMirrorRef}
-              editorState={editorState.current!}
-              initialValue={initialValue}
-              onChange={playground.changeCode}
-            />
-          </Resizable.Item>
-        ) : null}
+        <Resizable.Item
+          id="editor"
+          css={{
+            "& > div": {
+              "& > div": { height: "100%", overflow: "hidden" },
+              height: "100%",
+            },
+          }}
+          borderWidth="1px"
+          defaultSize={50}
+          minSize={5}
+          roundedLeft="l2"
+        >
+          <CodeMirrorEditor
+            codeMirrorRef={codeMirrorRef}
+            editorState={editorState.current!}
+            initialValue={initialValue}
+            onChange={playground.changeCode}
+          />
+        </Resizable.Item>
 
-        {showEditor && showPreview ? <Resizable.Trigger /> : null}
+        <Resizable.Trigger />
 
-        {showPreview ? (
-          <Resizable.Item
-            bg="bg.panel"
-            borderWidth="1px"
-            defaultSize={50}
-            minSize={5}
-            p="lg"
-            roundedLeft={!showEditor ? "l2" : undefined}
-            roundedRight="l2"
-          >
-            <PreviewEditor
-              editorState={editorState.current!}
-              initialValue={initialValue}
-              previewRef={previewRef}
-            />
-          </Resizable.Item>
-        ) : null}
+        <Resizable.Item
+          id="preview"
+          bg="bg.panel"
+          borderWidth="1px"
+          defaultSize={50}
+          minSize={5}
+          p="lg"
+          roundedRight="l2"
+        >
+          <PreviewEditor
+            editorState={editorState.current!}
+            initialValue={initialValue}
+            previewRef={previewRef}
+          />
+        </Resizable.Item>
       </Resizable.Root>
     )
   },
 )
+
+PlaygroundEditor.displayName = "PlaygroundEditor"

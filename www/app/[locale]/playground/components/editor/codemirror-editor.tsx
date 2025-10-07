@@ -66,8 +66,6 @@ export const CodeMirrorEditor = memo(
     const updateCode = useCallback(
       (code: string) => {
         setValue(code)
-        // Don't call editorState methods here to avoid circular dependency
-        // The onChange callback will handle the state synchronization
         onChange?.(code)
       },
       [onChange],

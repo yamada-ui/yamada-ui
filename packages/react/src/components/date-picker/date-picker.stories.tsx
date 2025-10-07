@@ -1,5 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { SubmitHandler } from "react-hook-form"
+import type { DatePickerFormat } from "./"
 import { PropsTable } from "#storybook"
 import { useMemo, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
@@ -16,7 +17,6 @@ import { VStack } from "../stack"
 import { Tag } from "../tag"
 import { Text } from "../text"
 import { DatePicker } from "./"
-import "dayjs/locale/ja"
 
 type Story = StoryFn<typeof DatePicker>
 
@@ -78,12 +78,12 @@ export const Locale: Story = () => {
 }
 
 export const Format: Story = () => {
-  const format = useMemo(
+  const format = useMemo<DatePickerFormat>(
     () => ({
-      input: "YYYY/MM/DD",
-      month: "MMMM",
-      weekday: "ddd",
-      year: "YY",
+      input: null,
+      month: "long",
+      weekday: "narrow",
+      year: "2-digit",
     }),
     [],
   )

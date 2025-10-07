@@ -242,7 +242,7 @@ export const usePopover = ({
         if (anchorRef.current == null) refs.setReference(node)
       }),
       onBlur: handlerAll(props.onBlur, (ev) =>
-        !contains(contentRef.current, getEventRelatedTarget(ev))
+        !contains(contentRef.current, getEventRelatedTarget(ev)) && closeOnBlur
           ? onClose()
           : void 0,
       ),
@@ -252,7 +252,17 @@ export const usePopover = ({
       ),
       onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
     }),
-    [contentId, disabled, onClose, onKeyDown, onOpen, open, openOnClick, refs],
+    [
+      closeOnBlur,
+      contentId,
+      disabled,
+      onClose,
+      onKeyDown,
+      onOpen,
+      open,
+      openOnClick,
+      refs,
+    ],
   )
 
   const getAnchorProps: PropGetter = useCallback(

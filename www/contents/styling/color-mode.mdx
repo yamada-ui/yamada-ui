@@ -3,4 +3,45 @@ title: Color Mode
 description: Yamada UI provides features to change styles according to the color mode.
 ---
 
+## Overview
+
+Yamada UI has built-in support for managing the application's color mode, allowing you to easily switch between light and dark modes. All provided components also support dark mode.
+
+:::info
+If you want to change the default color mode, please see [here](/docs/theming/color-mode).
+:::
+
 ## Usage
+
+To apply color mode to [Style Props](/docs/styling/style-props), set an array.
+
+- Set the value for light mode as the first element.
+- Set the value for dark mode as the last element.
+
+```tsx preview
+<Box w="full" p="md" bg={["success", "warning"]} color="white">
+  This is Box
+</Box>
+```
+
+## Utilities
+
+Yamada UI provides useful custom hooks for color mode.
+
+::::card-group
+
+:::card{href="/docs/hooks/use-color-mode"}
+
+### useColorMode
+
+A custom hook that returns the current color mode.
+
+:::
+:::card{href="/docs/hooks/use-color-mode-value"}
+
+### useColorModeValue
+
+A custom hook that returns the value of the current color mode from the provided values.
+
+:::
+::::

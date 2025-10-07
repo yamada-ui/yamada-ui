@@ -34,6 +34,7 @@ import {
   dataAttr,
   handlerAll,
   isArray,
+  isComposing,
   isNumber,
   isString,
   isUndefined,
@@ -448,7 +449,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLInputElement>) => {
-      if (disabled || ev.nativeEvent.isComposing) return
+      if (disabled || isComposing(ev)) return
 
       const inputValue = cast<HTMLInputElement>(ev.target).value
 
@@ -530,38 +531,28 @@ export const useAutocomplete = <Multiple extends boolean = false>(
 
   const onBlur = useCallback(
     (ev: FocusEvent<HTMLInputElement>) => {
-      ev.preventDefault()
+      setFocused(false)
 
       if (
         contains(rootRef.current, ev.relatedTarget) ||
         contains(contentRef.current, ev.relatedTarget)
-      )
-        return
-
-      setFocused(false)
-      onClose()
-
-      if (isArray(value)) {
-        setInputValue("")
+      ) {
+        ev.preventDefault()
       } else {
-        if (allowCustomValue) {
-          if (inputValue) setValue(inputValue as MaybeValue)
+        if (isArray(value)) {
+          setInputValue("")
         } else {
-          const item = valueMap[value as string]
+          if (allowCustomValue) {
+            if (inputValue) setValue(inputValue as MaybeValue)
+          } else {
+            const item = valueMap[value as string]
 
-          setInputValue(getInputValue(item))
+            setInputValue(getInputValue(item))
+          }
         }
       }
     },
-    [
-      allowCustomValue,
-      inputValue,
-      onClose,
-      setInputValue,
-      setValue,
-      value,
-      valueMap,
-    ],
+    [allowCustomValue, inputValue, setInputValue, setValue, value, valueMap],
   )
 
   const onClear = useCallback(() => {

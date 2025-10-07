@@ -1,6 +1,357 @@
 ---
 title: Learn the Advanced
-description: Learn the applications of styling, responsiveness, dark mode, and animations of Yamada UI.
+description: Learn the theme, loading, notice, and animation of Yamada UI.
 ---
 
-In this guide, we will explain the applications of the concepts and features described in [Learn the Basics](/getting-started/basics).
+This guide will help you understand the concepts of Yamada UI. We recommend reading this guide before you start developing with Yamada UI.
+
+:::tip
+This guide is basic and is intended to give you a sense of the **fun** of developing with Yamada UI. Therefore, it does not explain each concept and feature in depth. If you want to know more, please check the links within the page.
+:::
+
+## Theme
+
+Yamada UI has the same concept as other UI libraries, which is theme.
+
+Theme is an object that can be changed and has [colors](/docs/theming/tokens/colors), [spaces](/docs/theming/tokens/spaces), [font sizes](/docs/theming/tokens/font-sizes), and many other tokens defined.
+
+[Breakpoints](/docs/theming/breakpoints) and [color modes](/docs/theming/color-mode) used in applications can also be easily changed.
+
+Also, [theme switching](/docs/theming/switching-themes) that is not implemented in other UI libraries is supported.
+
+```tsx preview functional client
+const { themeScheme, changeThemeScheme } = useTheme()
+
+return (
+  <VStack>
+    <Text>The current scheme is "{themeScheme}"</Text>
+
+    <Wrap gap="md" alignItems="center">
+      <Badge colorScheme="primary">Primary</Badge>
+      <Badge colorScheme="secondary">Secondary</Badge>
+      <Tag colorScheme="primary">Primary</Tag>
+      <Tag colorScheme="secondary">Secondary</Tag>
+    </Wrap>
+
+    <Wrap gap="md">
+      <Button onClick={() => changeThemeScheme("base")}>Base Theme</Button>
+
+      <Button colorScheme="red" onClick={() => changeThemeScheme("red")}>
+        Red Theme
+      </Button>
+
+      <Button colorScheme="green" onClick={() => changeThemeScheme("green")}>
+        Green Theme
+      </Button>
+
+      <Button colorScheme="blue" onClick={() => changeThemeScheme("blue")}>
+        Blue Theme
+      </Button>
+    </Wrap>
+  </VStack>
+)
+```
+
+:::note
+If you want to know more about the theme, please check [this](/docs/theming).
+:::
+
+### Layer Styles
+
+Layer styles are tokens used to reuse visual styles across the project.
+
+```tsx preview
+<Wrap gap="md" colorScheme="blue">
+  <For each={["solid", "subtle", "surface", "ghost", "outline"]}>
+    {(token, index) => (
+      <Box
+        as="button"
+        type="button"
+        key={index}
+        layerStyle={token}
+        px="md"
+        py="sm"
+        rounded="l2"
+        _hover={{ layerStyle: `${token}.hover` }}
+      >
+        {toTitleCase(token)}
+      </Box>
+    )}
+  </For>
+</Wrap>
+```
+
+:::note
+If you want to know more about the layer styles, please check [this](/docs/styling/layer-styles).
+:::
+
+### Text Styles
+
+Text styles are tokens used to reuse text styles across the project.
+
+```tsx preview
+<Text textStyle="mono">Mono</Text>
+```
+
+:::note
+If you want to know more about the text styles, please check [this](/docs/styling/text-styles).
+:::
+
+## Loading
+
+Yamada UI supports loading animations needed for applications.
+
+To execute the loading animation, use [useLoading](/docs/hooks/use-loading). [useLoading](/docs/hooks/use-loading) returns instances of `screen`, `page`, and `background`. The instances include several methods.
+
+- `start`: Start the loading animation.
+- `update`: Update the loading animation.
+- `finish`: Finish the loading animation.
+- `force`: Force update the loading animation.
+
+```tsx preview functional client
+const { screen, page, background } = useLoading()
+
+const onLoadingScreen = async () => {
+  try {
+    screen.start()
+
+    await wait(3000)
+  } finally {
+    screen.finish()
+  }
+}
+
+const onLoadingPage = async () => {
+  try {
+    page.start()
+
+    await wait(3000)
+  } finally {
+    page.finish()
+  }
+}
+
+const onLoadingBackground = async () => {
+  try {
+    background.start()
+
+    await wait(3000)
+  } finally {
+    background.finish()
+  }
+}
+
+return (
+  <Wrap gap="md">
+    <Button onClick={onLoadingScreen}>Start Screen Loading</Button>
+    <Button onClick={onLoadingPage}>Start Page Loading</Button>
+    <Button onClick={onLoadingBackground}>Start Background Loading</Button>
+  </Wrap>
+)
+```
+
+### Use useAsyncCallback
+
+When executing asynchronous callbacks in applications, [useAsyncCallback](/docs/hooks/use-async-callback) is useful to indicate whether a button or other elements are loading.
+
+```tsx preview functional client
+const [loading, onClick] = useAsyncCallback(async () => {
+  await wait(3000)
+}, [])
+
+return (
+  <Button loading={loading} onClick={onClick}>
+    Click me
+  </Button>
+)
+```
+
+`screen` and `page` can also be executed together.
+
+```tsx preview functional client
+const [loading, onClick] = useAsyncCallback(
+  async () => {
+    await wait(3000)
+  },
+  [],
+  { loading: "page" },
+)
+
+return (
+  <Button loading={loading} onClick={onClick}>
+    Click me
+  </Button>
+)
+```
+
+:::note
+If you want to know more about the loading animation, please check [this](/docs/hooks/use-loading).
+:::
+
+## Notice
+
+Yamada UI supports notices needed for applications.
+
+To display the notice, use [useNotice](/docs/hooks/use-notice). [useNotice](/docs/hooks/use-notice) returns an instance that displays and controls the notice.
+
+```tsx preview functional client
+const notice = useNotice()
+
+return (
+  <Button
+    onClick={() =>
+      notice({
+        title: "シェリル・ノーム",
+        description: "私の歌を聴けー！",
+      })
+    }
+  >
+    Show Notice
+  </Button>
+)
+```
+
+:::note
+If you want to know more about the notice, please check [this](/docs/hooks/use-notice).
+:::
+
+## Animation
+
+Yamada UI provides components specialized in CSS animations and animations.
+
+### CSS Animation
+
+[@keyframes](https://developer.mozilla.org/ja/docs/Web/CSS/@keyframes) to apply intermediate states of animations, use `_keyframes`.
+
+```tsx preview
+<Box
+  w="fit-content"
+  bg="bg.contrast"
+  color="fg.contrast"
+  p="md"
+  animationDirection="alternate"
+  animationDuration="1s"
+  animationIterationCount="infinite"
+  animationTimingFunction="linear"
+  _keyframes={{
+    from: { translate: "0 0" },
+    to: { translate: "100% 0" },
+  }}
+>
+  Box
+</Box>
+```
+
+Also, you can apply common keyframes throughout your application by using [theme](/docs/theming) [keyframes](/docs/theming/tokens/keyframes). Set the value to `animationName` or `_keyframes`.
+
+```tsx preview
+<Box
+  w="fit-content"
+  bg="bg.contrast"
+  color="fg.contrast"
+  p="md"
+  animationName="fade-in"
+  animationDirection="alternate"
+  animationDuration="1s"
+  animationIterationCount="infinite"
+  animationTimingFunction="linear"
+>
+  Box
+</Box>
+```
+
+:::note
+If you want to know more about the animation, please check [this](/docs/styling/animation).
+:::
+
+### Motion
+
+Yamada UI provides a convenient component that extends the Yamada UI [Style Props](/docs/styling/style-props) to [Motion](https://motion.dev).
+
+```tsx preview
+<Center h="sm">
+  <Motion
+    boxSize="4xs"
+    bg="bg.contrast"
+    color="fg.contrast"
+    animate={{
+      scale: [1, 2, 2, 1, 1],
+      rotate: [0, 0, 180, 180, 0],
+      borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+    }}
+    transition={{
+      duration: 2,
+      ease: "easeInOut",
+      times: [0, 0.2, 0.5, 0.8, 1],
+      repeat: Infinity,
+      repeatDelay: 1,
+    }}
+  />
+</Center>
+```
+
+[Motion](/docs/components/motion) supports gesture animations.
+
+- `whileHover`: The animation executed when the pointer is moved over the component.
+- `whileTap`: The animation executed when the pointer is clicked or tapped on the component.
+- `whileFocus`: The animation executed when the component is focused.
+
+```tsx preview
+<Motion
+  cursor="pointer"
+  w="fit-content"
+  p="md"
+  bg="bg.contrast"
+  color="fg.contrast"
+  whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.9 }}
+  whileFocus={{ scale: 1.1 }}
+>
+  Click me!
+</Motion>
+```
+
+:::note
+If you want to know more about the `Motion` component, please check [this](/docs/components/motion).
+:::
+
+## Congratulations!
+
+Congratulations!🎉
+
+This means you've become a **Wonderful Yamada**🥳
+
+## Learn more
+
+Want to learn more about Yamada UI?😎
+
+::::card-group
+:::card{href="/docs/theming"}
+
+### Learn the Theme
+
+Yamada UI's theme is customizable and ensures consistency in the application's design.
+
+:::
+:::card{href="/docs/components"}
+
+### Explore the Components
+
+Yamada UI provides over 130 flexible components. All components support animations and dark mode.
+
+:::
+:::card{href="/docs/styling"}
+
+### Learn the Styling
+
+All components are designed to be styled using props.
+
+:::
+:::card{href="https://github.com/yamada-ui/yamada-ui"}
+
+### Explore the Source Code
+
+Yamada UI's package and documentation site are open source. If you like Yamada UI, please star it.
+
+:::
+::::

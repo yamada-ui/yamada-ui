@@ -37,7 +37,11 @@ const restrictedImportsConfigArray: TSESLint.FlatConfig.ConfigArray = [
 
 const cspellConfig: TSESLint.FlatConfig.Config = {
   ...sharedCspellConfig,
-  ignores: [...sharedCspellConfig.ignores, "src/components/icon/icons/**"],
+  ignores: [
+    ...sharedCspellConfig.ignores,
+    "src/components/icon/icons/**",
+    "src/providers/i18n-provider/intl/*",
+  ],
 }
 
 const noConsoleConfig: TSESLint.FlatConfig.Config = {

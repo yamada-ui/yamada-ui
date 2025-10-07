@@ -3,6 +3,63 @@ title: フック
 description: Yamada UIには、プロジェクトをより迅速に構築できるように便利なカスタムフックが用意されています。
 ---
 
+## 使い方
+
+Yamada UIは、2つの方法でフックを提供しています。1つは、[CLI](/docs/components/cli)からフックをローカルにダウンロードする新しい方法。もう1つは、モジュールからフックをインポートする従来通りの方法です。
+
+### ダウンロード
+
+[CLI](/docs/components/cli)からフックをローカルにダウンロードするケースは、以下のものが考えられます。
+
+- フックの初期値またはロジックをカスタマイズする。
+- フックのロジックに不具合があり、直接修正する。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli add use-disclosure
+```
+
+```bash [npm]
+npm yamada-cli add use-disclosure
+```
+
+```bash [yarn]
+yarn yamada-cli add use-disclosure
+```
+
+```bash [bun]
+bun yamada-cli add use-disclosure
+```
+
+:::
+
+:::note
+Yamada UIがフックを更新した場合は、[コンポーネントを更新する](/docs/components/cli#コンポーネントを更新する)と同様に簡単に更新することができます。もし、あなたの修正と競合しても[Git](https://git-scm.com)の[競合の提示方法](https://git-scm.com/docs/git-merge#_how_conflicts_are_presented)と同じように表示され、簡単に解決することができます。
+:::
+
+### インポート
+
+フックに何も変更することなく使用する場合は、モジュールからフックをインポートするだけです。
+
+:::code-group
+
+```tsx [package]
+import { useDisclosure } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useDisclosure } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useDisclosure } from "@workspaces/ui"
+```
+
+:::
+
+## フック
+
 ライブラリで利用可能なすべてのフックのリストはこちらです。
 
 <HookList />

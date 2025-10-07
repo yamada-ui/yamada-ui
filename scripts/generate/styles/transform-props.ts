@@ -31,6 +31,8 @@ export const transformProps: TransformProps = {
 
   content: ["&::before", "&::after"],
 
+  display: ["display"],
+
   style: [
     { args: [], properties: "apply" },
     { args: ["layerStyles"], properties: "layerStyle" },

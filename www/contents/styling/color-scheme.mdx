@@ -3,4 +3,65 @@ title: Color Scheme
 description: Yamada UI provides features to create and use color contexts according to the color scheme.
 ---
 
-## Usage
+## Overview
+
+Color scheme generates color contexts for components based on values. This improves color consistency.
+
+When a value is set to the color scheme, the following properties are generated. These values are set in the [semantic tokens](/docs/theming/tokens/colors#semantic-tokens) of the [theme](/docs/theming).
+
+- `colorScheme.solid`: The solid color used for background etc.
+- `colorScheme.bg`: The faint color used for background etc.
+- `colorScheme.ghost`: The faint color used for background etc.
+- `colorScheme.fg`: The color used for text etc.
+- `colorScheme.outline`: The color used for border etc.
+- `colorScheme.contrast`: The text color used for `colorScheme.solid`.
+- `colorScheme.subtle`: The color with higher contrast than `colorScheme.bg`.
+- `colorScheme.muted`: The color with higher contrast than `colorScheme.subtle`.
+- `colorScheme.emphasized`: The color with higher contrast than `colorScheme.muted`.
+
+Also, [tone colors](/docs/theming/tokens/colors#tokens) from `colorScheme.50` to `colorScheme.950` are generated.
+
+:::note
+In Yamada UI, the `colorScheme` is set to `"mono"` for the `body` in the [global styles](/docs/styling/global-styles). If you want to change the `colorScheme` for the entire application, please refer to [customization](/docs/theming/styles/global-styles#customize).
+:::
+
+## 使い方
+
+```tsx preview
+<VStack gap="md">
+  <Box
+    p="md"
+    colorScheme="blue"
+    bg="colorScheme.solid"
+    color="colorScheme.contrast"
+  >
+    Solid
+  </Box>
+  <Box
+    p="md"
+    colorScheme="green"
+    bg="colorScheme.subtle"
+    color="colorScheme.fg"
+  >
+    Subtle
+  </Box>
+</VStack>
+```
+
+Color scheme inherits the color scheme of the parent element.
+
+```tsx preview
+<VStack gap="md" colorScheme="blue">
+  <Box p="md" bg="colorScheme.solid" color="colorScheme.contrast">
+    Provided by Parent
+  </Box>
+  <Box
+    p="md"
+    colorScheme="green"
+    bg="colorScheme.subtle"
+    color="colorScheme.fg"
+  >
+    Child
+  </Box>
+</VStack>
+```

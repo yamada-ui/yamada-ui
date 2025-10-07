@@ -14,20 +14,20 @@
     "yamada-cli": "pnpm -C ../../packages/cli dev"
   },
   "dependencies": {
-    "@remix-run/node": "^2.17.0",
-    "@remix-run/react": "^2.17.0",
-    "@remix-run/serve": "^2.17.0",
+    "@remix-run/node": "^2.17.1",
+    "@remix-run/react": "^2.17.1",
+    "@remix-run/serve": "^2.17.1",
     "@yamada-ui/react": "workspace:*",
-    "isbot": "^5.1.30",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "isbot": "^5.1.31",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "@remix-run/dev": "^2.17.0",
-    "@types/node": "^24.3.1",
-    "@types/react": "^19.1.12",
-    "@types/react-dom": "^19.1.9",
-    "vite": "^7.1.5",
+    "@remix-run/dev": "^2.17.1",
+    "@types/node": "^24.7.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "vite": "^7.1.9",
     "vite-tsconfig-paths": "^5.1.4"
   }
 }

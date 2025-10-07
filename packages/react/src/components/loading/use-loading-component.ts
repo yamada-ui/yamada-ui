@@ -21,7 +21,10 @@ export const useLoadingComponent = (
 export const getLoadingComponent = (
   scheme: Loading.Scheme,
 ): Component<"svg", Loading.Props> => {
-  return Loading[toPascalCase(scheme) as keyof typeof Loading]
+  return Loading[toPascalCase(scheme) as keyof typeof Loading] as Component<
+    "svg",
+    Loading.Props
+  >
 }
 
 export const isLoadingScheme = (scheme: any): scheme is Loading.Scheme => {

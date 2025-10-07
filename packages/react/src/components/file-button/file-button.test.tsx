@@ -121,7 +121,7 @@ describe("<FileButton />", () => {
       expect(fileCount).toHaveTextContent("files: 1")
     })
     waitFor(() => {
-      expect(handleFileChangeMock).toHaveBeenCalledWith([file1])
+      expect(handleFileChangeMock).toHaveBeenLastCalledWith([file1])
     })
 
     const file2 = new File(["test2"], "test2.txt", { type: "text/plain" })
@@ -130,14 +130,14 @@ describe("<FileButton />", () => {
     await waitFor(() => {
       expect(fileCount).toHaveTextContent("files: 2")
     })
-    expect(handleFileChangeMock).toHaveBeenCalledWith([file1, file2])
+    expect(handleFileChangeMock).toHaveBeenLastCalledWith([file1, file2])
 
     await user.upload(fileInput, [])
 
     await waitFor(() => {
       expect(fileCount).toHaveTextContent("files: 0")
     })
-    expect(handleFileChangeMock).toHaveBeenCalledWith(undefined)
+    expect(handleFileChangeMock).toHaveBeenLastCalledWith(undefined)
 
     expect(handleFileChangeMock).toHaveBeenCalledTimes(3)
   })

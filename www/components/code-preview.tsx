@@ -1,7 +1,7 @@
 "use client"
 
 import type { GridProps } from "@yamada-ui/react"
-import { Box, Grid, useInjectVarsIntoProps } from "@yamada-ui/react"
+import { Box, useInjectVarsIntoProps } from "@yamada-ui/react"
 import { useLayoutEffect, useState } from "react"
 import { codeToHtml } from "@/libs/shiki"
 import { CopyButton } from "./copy-button"
@@ -45,91 +45,90 @@ export function CodePreview({
   if (!html || !children) return null
 
   return (
-    <Grid
-      maxH={{ base: "lg", md: "md" }}
-      minH={{ base: "16", md: "12" }}
-      overflowY="auto"
-      position="relative"
-      rounded="l2"
-      {...rest}
-      bg="{bg}"
-    >
+    <Box {...rest} bg="{bg}" position="relative" rounded="l2">
       <Box
-        as="pre"
-        css={{
-          "& code": {
-            bg: "transparent",
-            border: "none",
-            color: "inherit",
-            display: "inline",
-            fontSize: "inherit",
-            lineHeight: "inherit",
-            minH: "inherit",
-            p: "0",
-            rounded: "inherit",
-          },
-          "& code .diff, & code .highlighted": {
-            "--space": { base: "{spaces.lg}", md: "{spaces.md}" },
-            display: "inline-block",
-            mx: "calc({space} * -1)",
-            position: "relative",
-            px: "{space}",
-            w: "calc(full + ({space} * 4))",
-          },
-          "& code .diff.add": {
-            bg: ["green.400/15", "green.500/15"],
-            _before: {
-              color: "green",
-              content: "'+'",
-              left: { base: "sm", md: "xs" },
-              position: "absolute",
+        maxH={{ base: "lg", md: "md" }}
+        minH={{ base: "16", md: "12" }}
+        overflowY="auto"
+      >
+        <Box
+          as="pre"
+          css={{
+            "& code": {
+              bg: "transparent",
+              border: "none",
+              color: "inherit",
+              display: "inline",
+              fontSize: "inherit",
+              lineHeight: "inherit",
+              minH: "inherit",
+              p: "0",
+              rounded: "inherit",
             },
-          },
-          "& code .diff.remove": {
-            bg: ["red.400/15", "red.500/15"],
-            _before: {
-              color: "red",
-              content: "'-'",
-              left: { base: "sm", md: "xs" },
-              position: "absolute",
+            "& code .diff, & code .highlighted": {
+              "--space": { base: "{spaces.lg}", md: "{spaces.md}" },
+              display: "inline-block",
+              mx: "calc({space} * -1)",
+              position: "relative",
+              px: "{space}",
+              w: "calc(full + ({space} * 4))",
             },
-          },
-          "& code .highlighted": {
-            bg: ["black.400/15", "white.500/15"],
-          },
-          "& code .highlighted-word": {
-            bg: ["black.muted", "white.subtle"],
-            borderColor: ["black.emphasized", "white.muted"],
-            borderWidth: "1px",
-            m: "-1px -2px",
-            p: "1px 2px",
-            rounded: "l1",
-          },
-          "& span": {
-            _dark: {
-              color: "{shiki-dark}!",
+            "& code .diff.add": {
+              bg: ["green.400/15", "green.500/15"],
+              _before: {
+                color: "green",
+                content: "'+'",
+                left: { base: "sm", md: "xs" },
+                position: "absolute",
+              },
             },
-          },
-        }}
-        data-lang={lang}
-        bg="transparent!"
-        dangerouslySetInnerHTML={{ __html: html }}
-        fontFamily="mono"
-        fontSize="sm"
-        lineHeight="1.1"
-        overflowX="auto"
-        pe={{ base: "13", md: "11" }}
-        ps="{space}"
-        py="{space}"
-        rounded="l2"
-        tabIndex={0}
-      />
+            "& code .diff.remove": {
+              bg: ["red.400/15", "red.500/15"],
+              _before: {
+                color: "red",
+                content: "'-'",
+                left: { base: "sm", md: "xs" },
+                position: "absolute",
+              },
+            },
+            "& code .highlighted": {
+              bg: ["black.400/15", "white.500/15"],
+            },
+            "& code .highlighted-word": {
+              bg: ["black.muted", "white.subtle"],
+              borderColor: ["black.emphasized", "white.muted"],
+              borderWidth: "1px",
+              m: "-1px -2px",
+              p: "1px 2px",
+              rounded: "l1",
+            },
+            "& span": {
+              _dark: {
+                color: "{shiki-dark}!",
+              },
+            },
+          }}
+          data-lang={lang}
+          bg="transparent!"
+          dangerouslySetInnerHTML={{ __html: html }}
+          fontFamily="mono"
+          fontSize="sm"
+          lineHeight="1.1"
+          overflowX="auto"
+          pe={{ base: "16", sm: "12", md: "14" }}
+          ps="{space}"
+          py="{space}"
+          rounded="l2"
+          tabIndex={0}
+        />
+      </Box>
+
       <CopyButton
         position="absolute"
-        right={{ base: "2", md: "1.5" }}
-        top={{ base: "3.5", sm: "2", md: "1.5" }}
+        right={{ base: "3.5", sm: "2", md: "3" }}
+        top={{ base: "3.5", md: "2" }}
         value={children}
       />
-    </Grid>
+    </Box>
   )
 }

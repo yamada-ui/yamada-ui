@@ -1,6 +1,6 @@
 ---
 title: 基本を学ぶ
-description: 3分間のチュートリアルを読んで、Yamada UIのスタイリング・レスポンシブ・ダークモード・アニメーションの基本を学ぶ。
+description: 3分間のチュートリアルを読んで、Yamada UIのコンポーネント・スタイリング・レスポンシブデザイン・カラーモードを学ぶ。
 ---
 
 このガイドは、Yamada UIの概念を理解するのに役立ちます。開発を開始する前に、このガイドを読んでYamada UIを理解することをオススメします。
@@ -8,3 +8,221 @@ description: 3分間のチュートリアルを読んで、Yamada UIのスタイ
 :::tip
 このガイドは基本であり、Yamada UIで開発する**面白さ**を感じてもらうことが目的です。なので、各概念や機能を深く説明していません。もっと知りたくなった場合は、ページ内の各リンクをご覧ください。
 :::
+
+## コンポーネント
+
+Yamada UIは、2つの方法でコンポーネントを提供しています。1つは、[CLI](/docs/components/cli)からコンポーネントをローカルにダウンロードする新しい方法。もう1つは、モジュールからコンポーネントをインポートする従来通りの方法です。
+
+### ダウンロード
+
+[CLI](/docs/components/cli)からコンポーネントをローカルにダウンロードするケースは、以下のものが考えられます。
+
+- コンポーネントの[バリアントスタイル](/docs/components/styled#バリアントスタイル)または[サイズスタイル](/docs/components/styled#サイズスタイル)をカスタマイズする。
+- コンポーネントの初期値またはロジックをカスタマイズする。
+- コンポーネントのスタイルやロジックに不具合があり、直接修正する。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli add button
+```
+
+```bash [npm]
+npm yamada-cli add button
+```
+
+```bash [yarn]
+yarn yamada-cli add button
+```
+
+```bash [bun]
+bun yamada-cli add button
+```
+
+:::
+
+:::note
+Yamada UIがコンポーネントを更新した場合は、[CLI](/docs/components/cli)の[差分を確認する](/docs/components/cli#差分を確認する)や[コンポーネントを更新する](/docs/components/cli#コンポーネントを更新する)を行うことで、コンポーネントを簡単に更新することができます。もし、あなたの修正と競合しても[Git](https://git-scm.com)の[競合の提示方法](https://git-scm.com/docs/git-merge#_how_conflicts_are_presented)と同じように表示され、簡単に解決することができます。
+:::
+
+### インポート
+
+コンポーネントに何も変更することなく使用する場合は、モジュールからコンポーネントをインポートするだけです。
+
+:::code-group
+
+```tsx [package]
+import { Button } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Button } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Button } from "@workspaces/ui"
+```
+
+:::
+
+:::note
+コンポーネントをもっと知りたい場合は、[こちら](/docs/components)をご覧ください。
+:::
+
+## スタイリング
+
+[Style Props](/docs/styling/style-props)は、propsを使用して要素にスタイルを適用します。Style Propsは、[CSSプロパティ](https://developer.mozilla.org/ja/docs/Web/CSS/Properties)に準拠しており、すべてのプロパティをキャメルケースで提供しています。
+
+```tsx preview
+<Box p="md" bg="bg.contrast" color="fg.contrast">
+  Box
+</Box>
+```
+
+:::note
+[Style Props](/docs/styling/style-props)は、[@mdn/browser-compat-data](https://github.com/mdn/browser-compat-data)を使用しています。ライブラリが更新されると、Style Propsも定期的に更新が行われます。
+:::
+
+### 条件付きスタイル
+
+条件付きスタイルを使用することで、[擬似要素](/docs/styling/style-props#擬似要素)、[擬似クラス](/docs/styling/style-props#擬似クラス)、[セレクター](/docs/styling/style-props#セレクター)のスタイルを適用できます。
+
+```tsx preview
+<Box p="md" color="fg.contrast" bg={{ base: "bg.contrast", _hover: "success" }}>
+  Hover me
+</Box>
+```
+
+:::note
+スタイリングをもっと知りたい場合は、[こちら](/docs/styling)をご覧ください。
+:::
+
+### カラースキーム
+
+カラースキームは、値を基にしてコンポーネントにカラーコンテキストを生成します。これは、色の一貫性を向上させます。
+
+```tsx preview
+<VStack gap="md">
+  <Box
+    p="md"
+    colorScheme="blue"
+    bg="colorScheme.solid"
+    color="colorScheme.contrast"
+  >
+    Solid
+  </Box>
+  <Box
+    p="md"
+    colorScheme="green"
+    bg="colorScheme.subtle"
+    color="colorScheme.fg"
+  >
+    Subtle
+  </Box>
+</VStack>
+```
+
+カラースキームは、親要素のカラースキームを継承します。
+
+```tsx preview
+<VStack gap="md" colorScheme="blue">
+  <Box p="md" bg="colorScheme.solid" color="colorScheme.contrast">
+    Provided by Parent
+  </Box>
+  <Box
+    p="md"
+    colorScheme="green"
+    bg="colorScheme.subtle"
+    color="colorScheme.fg"
+  >
+    Child
+  </Box>
+</VStack>
+```
+
+:::note
+カラースキームをもっと知りたい場合は、[こちら](/docs/styling/color-scheme)をご覧ください。
+:::
+
+## レスポンシブデザイン
+
+レスポンシブデザインは、テーマで定義されたブレイクポイントを参照します。Yamada UIには、デフォルトのテーマがあり、[ブレイクポイント](/docs/theming/tokens/breakpoints)が定義されています。
+
+レスポンシブデザインを[Style Props](/docs/styling/style-props)に適用するには、ブレイクポイントをキーとしたオブジェクトを設定します。
+
+- オブジェクトのキーは、テーマの[ブレイクポイント](/docs/theming/tokens/breakpoints)で定義されているキーを定義します。
+- オブジェクトの値は、キーで設定するスタイルの値を定義します。
+
+```tsx preview
+<Box p="md" color="fg.contrast" bg={{ base: "bg.contrast", md: "success" }}>
+  Box
+</Box>
+```
+
+:::note
+レスポンシブデザインをもっと知りたい場合は、[こちら](/docs/styling/responsive-design)をご覧ください。
+:::
+
+## カラーモード
+
+Yamada UIには、アプリケーションのカラーモードを管理するためのサポートが組み込まれており、簡単にライトモードとダークモードを切り替えることができます。また、提供しているすべてのコンポーネントは、ダークモードをサポートしています。
+
+カラーモードを[Style Props](/docs/styling/style-props)に適用するには、配列を設定します。
+
+- 最初の要素にライトモードの値を設定します。
+- 最後の要素にダークモードの値を設定します。
+
+```tsx preview
+<Box p="md" bg={["success", "warning"]} color="white">
+  Box
+</Box>
+```
+
+:::note
+カラーモードをもっと知りたい場合は、[こちら](/docs/styling/color-mode)をご覧ください。
+:::
+
+## Congratulations!
+
+おめでとうございます🎉
+
+これで、あなたは**普通の山田**になることができました🥳
+
+**普通の山田**になったアナタへ、山田からこの言葉を贈ります。
+
+「次は、[応用を学ぶ](/docs/get-started/advanced)で待ってるねっ///」😘
+
+## もっと学習する
+
+Yamada UIをもっと知るために、応用やテーマを学んでみませんか？😎
+
+::::card-group
+:::card{href="/docs/get-started/advanced"}
+
+### 応用を学ぶ
+
+Yamada UIのテーマ・ローディング・通知・アニメーションを学ぶ。
+
+:::
+:::card{href="/docs/components"}
+
+### コンポーネントを探索する
+
+Yamada UIは、130以上の柔軟性が高いコンポーネントを提供しています。すべてのコンポーネントは、アニメーション・ダークモードをサポートしています。
+
+:::
+:::card{href="/docs/styling"}
+
+### スタイリングを学ぶ
+
+すべてのコンポーネントは、propsを使用してスタイリングができるように設計されています。
+
+:::
+:::card{href="https://github.com/yamada-ui/yamada-ui"}
+
+### ソースコードを探索する
+
+Yamada UIのパッケージ・ドキュメントサイトはオープンソースです。Yamada UIを気に入ったら、スターを付けてください。
+
+:::
+::::

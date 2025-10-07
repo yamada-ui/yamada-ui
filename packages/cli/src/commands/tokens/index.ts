@@ -310,8 +310,7 @@ export const tokens = new Command("tokens")
 
         config = await getConfig(cwd, configPath, { format, lint })
 
-        if (config.theme?.path)
-          inputPath ??= path.resolve(cwd, config.theme.path, "index.ts")
+        if (config.theme?.path) inputPath ??= config.paths.theme.index
 
         spinner.succeed("Fetched config")
       }

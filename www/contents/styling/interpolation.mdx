@@ -3,6 +3,40 @@ title: Interpolation
 description: Yamada UI provides a feature for easily accessing CSS custom properties (variables) or tokens from the theme.
 ---
 
+## Overview
+
 Interpolation is a feature for referencing [CSS custom properties (variables)](/docs/styling/css-custom-properties) or tokens from the [theme](/docs/theming).
 
 ## Usage
+
+You can reference the property name set with [CSS custom properties (variables)](/docs/styling/css-custom-properties) using `{custom-property-name}`.
+
+```tsx preview
+<Box p="md" {...{ "--custom-bg-color": "#1ba14c" }} bg="{custom-bg-color}">
+  Box
+</Box>
+```
+
+### Reference Theme Tokens
+
+Yamada UI [Style Props](/docs/styling/style-props) only reference the corresponding tokens from the [theme](/docs/theming). For example, `borderRadius` references tokens from `radii`, but not from `spaces`. By using `{}`, you can reference tokens outside of the corresponding ones.
+
+```tsx preview
+<VStack>
+  <Box p="md" rounded="l2" borderWidth="1px">
+    Box
+  </Box>
+
+  <Box p="md" rounded="{spaces.md}" borderWidth="1px">
+    Box
+  </Box>
+</VStack>
+```
+
+Additionally, by using `{}` within strings, you can reference tokens from the [theme](/docs/theming). This is useful for [shorthand properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties) such as [border](https://developer.mozilla.org/en-US/docs/Web/CSS/border).
+
+```tsx preview
+<Box p="md" border="{sizes.1} solid {colors.success}">
+  Box
+</Box>
+```

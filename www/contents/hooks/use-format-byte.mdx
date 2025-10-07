@@ -5,4 +5,129 @@ storybook: hooks-useformatbyte--basic
 source: hooks/use-format-byte
 ---
 
+```tsx preview functional client
+const kilobyte = useFormatByte(1024)
+const megabyte = useFormatByte(1024 * 1024)
+const gigabyte = useFormatByte(1024 * 1024 * 1024)
+const terabyte = useFormatByte(1024 * 1024 * 1024 * 1024)
+
+return (
+  <>
+    <Text>{kilobyte}</Text>
+    <Text>{megabyte}</Text>
+    <Text>{gigabyte}</Text>
+    <Text>{terabyte}</Text>
+  </>
+)
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { useFormatByte } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useFormatByte } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useFormatByte } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const kilobyte = useFormatByte(1024)
+```
+
+:::note
+`FormatByte` automatically selects the most appropriate unit (`byte`, `kB`, `MB`, `GB`, `TB`) based on the byte value size.
+:::
+
+:::note
+`useFormatByte` internally uses [Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat).
+:::
+
+### Changing the Locale
+
+To change the locale, set a value for [locale](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales).
+
+```tsx preview functional client
+const enByte = useFormatByte(1024, { locale: "en-US" })
+const jaByte = useFormatByte(1024, { locale: "ja-JP" })
+const deByte = useFormatByte(1024, { locale: "de-DE" })
+
+return (
+  <Grid templateColumns="auto 1fr" gap="sm">
+    <Text fontWeight="semibold">en-US</Text>
+    <Text>{enByte}</Text>
+
+    <Text fontWeight="semibold">ja-JP</Text>
+    <Text>{jaByte}</Text>
+
+    <Text fontWeight="semibold">de-DE</Text>
+    <Text>{deByte}</Text>
+  </Grid>
+)
+```
+
+### Set the Locale for the Entire Application
+
+If you want to set the locale for the entire application, set the `locale` for the `UIProvider`.
+
+```tsx
+import { UIProvider } from "@yamada-ui/react"
+
+const App = () => {
+  return (
+    <UIProvider locale="en-US">
+      <FormatByte value={1024} />
+    </UIProvider>
+  )
+}
+```
+
+### Unit Format
+
+To convert units, set `unit` to either `"byte"` or `"bit"`. The default is `"byte"`.
+
+```tsx preview functional client
+const bytes = useFormatByte(1024, { unit: "byte" })
+const bits = useFormatByte(1024, { unit: "bit" })
+
+return (
+  <Grid templateColumns="auto 1fr" gap="sm">
+    <Text fontWeight="semibold">Bytes</Text>
+    <Text>{bytes}</Text>
+
+    <Text fontWeight="semibold">Bits</Text>
+    <Text>{bits}</Text>
+  </Grid>
+)
+```
+
+### Unit Display
+
+To change the unit display, set a value for [unitDisplay](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#unitdisplay).
+
+```tsx preview functional client
+const short = useFormatByte(1024, { unitDisplay: "short" })
+const narrow = useFormatByte(1024, { unitDisplay: "narrow" })
+const long = useFormatByte(1024, { unitDisplay: "long" })
+
+return (
+  <Grid templateColumns="auto 1fr" gap="sm">
+    <Text fontWeight="semibold">Short</Text>
+    <Text>{short}</Text>
+
+    <Text fontWeight="semibold">Narrow</Text>
+    <Text>{narrow}</Text>
+
+    <Text fontWeight="semibold">Long</Text>
+    <Text>{long}</Text>
+  </Grid>
+)
+```

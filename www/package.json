@@ -31,6 +31,7 @@
     "@yamada-ui/react": "workspace:*",
     "match-sorter": "^8.1.0",
     "motion": "12.18.1",
+    "prism-react-renderer": "^2.4.1",
     "next": "^15.5.4",
     "next-intl": "^4.3.9",
     "react": "^19.2.0",

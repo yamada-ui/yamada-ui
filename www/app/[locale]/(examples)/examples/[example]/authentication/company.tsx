@@ -1,6 +1,13 @@
 import type { StackProps } from "@yamada-ui/react"
 import type { FC } from "react"
-import { Heading, HStack, MountainIcon, Spacer, Text , VStack } from "@yamada-ui/react"
+import {
+  Heading,
+  HStack,
+  MountainIcon,
+  Spacer,
+  Text,
+  VStack,
+} from "@yamada-ui/react"
 import { memo } from "react"
 
 export interface CompanyProps extends StackProps {}

@@ -9,7 +9,8 @@ import {
   Input,
   Link,
   Text,
- VStack } from "@yamada-ui/react"
+  VStack,
+} from "@yamada-ui/react"
 import { memo } from "react"
 
 export interface FormProps extends BoxProps {}

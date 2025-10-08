@@ -1,9 +1,11 @@
 import { VStack } from "@yamada-ui/react"
-import { useTranslations } from "next-intl"
-import { Hero } from "@/components"
+import { getTranslations } from "next-intl/server"
+import { Examples, Hero } from "@/components"
+import { ExampleMenu } from "./example-menu"
 
-export default function Page() {
-  const t = useTranslations("home")
+export default async function Page({ params }: PageProps<"/[locale]">) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: "home" })
 
   return (
     <VStack gap="0">
@@ -19,6 +21,12 @@ export default function Page() {
           children: t("secondaryAction"),
         }}
       />
+
+      <VStack>
+        <ExampleMenu alignSelf="center" />
+
+        <Examples />
+      </VStack>
     </VStack>
   )
 }

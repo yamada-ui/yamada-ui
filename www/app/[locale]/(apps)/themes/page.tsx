@@ -2,13 +2,12 @@ import type { Metadata } from "next"
 import { VStack } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import { getTranslations } from "next-intl/server"
-import { Hero } from "@/components"
+import { Examples, Hero } from "@/components"
+import { ThemeMenu } from "./theme-menu"
 
 export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ locale: string; slug: string[] }>
-}): Promise<Metadata> {
+}: PageProps<"/[locale]/themes">): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "themes" })
 
@@ -32,6 +31,12 @@ export default function Page() {
           children: t("secondaryAction"),
         }}
       />
+
+      <VStack>
+        <ThemeMenu alignSelf="center" />
+
+        <Examples />
+      </VStack>
     </VStack>
   )
 }

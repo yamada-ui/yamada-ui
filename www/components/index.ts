@@ -1,5 +1,6 @@
 export * from "./code-preview"
 export * from "./discord-icon"
+export * from "./examples"
 export * from "./hero"
 export * from "./logo-icon"
 export * from "./mdx"

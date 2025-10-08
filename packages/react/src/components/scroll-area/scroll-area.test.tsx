@@ -106,7 +106,10 @@ describe("<ScrollArea />", () => {
       })
     })
 
-    expect(mockScrollPositionChange).toHaveBeenCalledWith({ x: 0, y: 100 })
+    expect(mockScrollPositionChange).toHaveBeenCalledExactlyOnceWith({
+      x: 0,
+      y: 100,
+    })
   })
 
   test("shows scroll indicators on hover and hides them on leave", async () => {

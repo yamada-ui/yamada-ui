@@ -24,20 +24,16 @@ export function generateStaticParams({
 
 export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ locale: string; slug: string[] }>
-}): Promise<Metadata> {
+}: PageProps<"/[locale]/docs/[...slug]">): Promise<Metadata> {
   const { locale, slug } = await params
   const { description, title } = getDoc(locale, slug) ?? {}
 
   return { description: mdToText(description), title }
 }
 
-interface PageProps {
-  params: Promise<{ locale: string; slug: string[] }>
-}
-
-export default async function Page({ params }: PageProps) {
+export default async function Page({
+  params,
+}: PageProps<"/[locale]/docs/[...slug]">) {
   const { locale, slug } = await params
   const doc = getDoc(locale, slug)
 

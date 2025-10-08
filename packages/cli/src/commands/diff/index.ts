@@ -73,7 +73,8 @@ export const diff = new Command("diff")
       const componentNames: string[] = []
       const generatedNameMap = await getGeneratedNameMap(config)
       const generatedNames = Object.values(generatedNameMap).flat()
-      const existsTheme = !!config.theme?.path && existsSync(config.theme.path)
+      const existsTheme =
+        !!config.theme?.path && existsSync(config.paths.theme.src)
 
       let index = targetName === "index"
       let theme = targetName === "theme"

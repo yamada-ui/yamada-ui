@@ -557,6 +557,7 @@ export const standardStyles = {
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
+  caretShape: true,
   clear: true,
   clip: true,
   clipPath: true,
@@ -949,6 +950,9 @@ export const standardStyles = {
     ),
   },
   interactivity: true,
+  interestDelay: true,
+  interestDelayEnd: true,
+  interestDelayStart: true,
   interpolateSize: true,
   invert: {
     properties: ["--invert"],
@@ -4616,6 +4620,16 @@ export interface StyleProps {
    */
   caretColor?: StyleValueWithCondition<CSS.Property.CaretColor, "colors">
   /**
+   * ### caret-shape
+   *
+   * The CSS `caret-shape` property.
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/caret-shape
+   *
+   * @experimental
+   */
+  caretShape?: StyleValueWithCondition<CSS.Property.CaretShape>
+  /**
    * ### clear
    *
    * The <code>float</code> CSS property aligns an element to either side of its container, allowing text and inline elements to flow around it. The <code>clear</code> CSS property sets whether an element is moved below floating elements that proceed it.
@@ -4970,7 +4984,8 @@ export interface StyleProps {
    *
    * The <code>content-visibility</code> CSS property delays rendering an element, including layout and painting, until it is needed.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2025-09-15
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/content-visibility
    */
@@ -4982,9 +4997,11 @@ export interface StyleProps {
   /**
    * ### corner-block-end-shape
    *
-   * The CSS `corner-block-end-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-block-end-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-block-end-shape
    *
    * @experimental
    */
@@ -4992,9 +5009,11 @@ export interface StyleProps {
   /**
    * ### corner-block-start-shape
    *
-   * The CSS `corner-block-start-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-block-start-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-block-start-shape
    *
    * @experimental
    */
@@ -5002,9 +5021,11 @@ export interface StyleProps {
   /**
    * ### corner-bottom-left-shape
    *
-   * The CSS `corner-bottom-left-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-bottom-left-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-bottom-left-shape
    *
    * @experimental
    */
@@ -5012,9 +5033,11 @@ export interface StyleProps {
   /**
    * ### corner-bottom-right-shape
    *
-   * The CSS `corner-bottom-right-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-bottom-right-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-bottom-right-shape
    *
    * @experimental
    */
@@ -5022,9 +5045,11 @@ export interface StyleProps {
   /**
    * ### corner-bottom-shape
    *
-   * The CSS `corner-bottom-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-bottom-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-bottom-shape
    *
    * @experimental
    */
@@ -5032,9 +5057,11 @@ export interface StyleProps {
   /**
    * ### corner-end-end-shape
    *
-   * The CSS `corner-end-end-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-end-end-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-end-end-shape
    *
    * @experimental
    */
@@ -5042,9 +5069,11 @@ export interface StyleProps {
   /**
    * ### corner-end-start-shape
    *
-   * The CSS `corner-end-start-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-end-start-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-end-start-shape
    *
    * @experimental
    */
@@ -5052,9 +5081,11 @@ export interface StyleProps {
   /**
    * ### corner-inline-end-shape
    *
-   * The CSS `corner-inline-end-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-inline-end-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-inline-end-shape
    *
    * @experimental
    */
@@ -5062,9 +5093,11 @@ export interface StyleProps {
   /**
    * ### corner-inline-start-shape
    *
-   * The CSS `corner-inline-start-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-inline-start-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-inline-start-shape
    *
    * @experimental
    */
@@ -5072,9 +5105,11 @@ export interface StyleProps {
   /**
    * ### corner-left-shape
    *
-   * The CSS `corner-left-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-left-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-left-shape
    *
    * @experimental
    */
@@ -5082,9 +5117,11 @@ export interface StyleProps {
   /**
    * ### corner-right-shape
    *
-   * The CSS `corner-right-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-right-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-right-shape
    *
    * @experimental
    */
@@ -5092,9 +5129,11 @@ export interface StyleProps {
   /**
    * ### corner-shape
    *
-   * The CSS `corner-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-shape
    *
    * @experimental
    */
@@ -5102,9 +5141,11 @@ export interface StyleProps {
   /**
    * ### corner-start-end-shape
    *
-   * The CSS `corner-start-end-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-start-end-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-start-end-shape
    *
    * @experimental
    */
@@ -5112,9 +5153,11 @@ export interface StyleProps {
   /**
    * ### corner-start-start-shape
    *
-   * The CSS `corner-start-start-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-start-start-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-start-start-shape
    *
    * @experimental
    */
@@ -5122,9 +5165,11 @@ export interface StyleProps {
   /**
    * ### corner-top-left-shape
    *
-   * The CSS `corner-top-left-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-top-left-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-top-left-shape
    *
    * @experimental
    */
@@ -5132,9 +5177,11 @@ export interface StyleProps {
   /**
    * ### corner-top-right-shape
    *
-   * The CSS `corner-top-right-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-top-right-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-top-right-shape
    *
    * @experimental
    */
@@ -5142,9 +5189,11 @@ export interface StyleProps {
   /**
    * ### corner-top-shape
    *
-   * The CSS `corner-top-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-top-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-top-shape
    *
    * @experimental
    */
@@ -5679,7 +5728,8 @@ export interface StyleProps {
    *
    * The <code>font-synthesis-small-caps</code> CSS property sets whether or not the browser should synthesize small caps typefaces when they're missing from the font.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-09-27
    * @newly_available_date 2023-03-27
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-small-caps
@@ -5690,7 +5740,8 @@ export interface StyleProps {
    *
    * The <code>font-synthesis-style</code> CSS property sets whether or not the browser should synthesize italic and oblique typefaces when they're missing from the font.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-09-27
    * @newly_available_date 2023-03-27
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-style
@@ -5701,7 +5752,8 @@ export interface StyleProps {
    *
    * The <code>font-synthesis-weight</code> CSS property sets whether or not the browser should synthesize bold typefaces when they're missing from the font.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-09-27
    * @newly_available_date 2023-03-27
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-weight
@@ -5724,7 +5776,8 @@ export interface StyleProps {
    *
    * The <code>font-variant-alternates</code> CSS property, along with the <code>@font-feature-values</code> at-rule, chooses when to use a font's alternate glyphs.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-09-13
    * @newly_available_date 2023-03-13
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-alternates
@@ -6461,6 +6514,36 @@ export interface StyleProps {
    * @experimental
    */
   interactivity?: StyleValueWithCondition<AnyString>
+  /**
+   * ### interest-delay
+   *
+   * The CSS `interest-delay` property.
+   *
+   * @see https://drafts.csswg.org/css-ui-4/#propdef-interest-delay
+   *
+   * @experimental
+   */
+  interestDelay?: StyleValueWithCondition<AnyString>
+  /**
+   * ### interest-delay-end
+   *
+   * The CSS `interest-delay-end` property.
+   *
+   * @see https://drafts.csswg.org/css-ui-4/#propdef-interest-delay-end
+   *
+   * @experimental
+   */
+  interestDelayEnd?: StyleValueWithCondition<AnyString>
+  /**
+   * ### interest-delay-start
+   *
+   * The CSS `interest-delay-start` property.
+   *
+   * @see https://drafts.csswg.org/css-ui-4/#propdef-interest-delay-start
+   *
+   * @experimental
+   */
+  interestDelayStart?: StyleValueWithCondition<AnyString>
   /**
    * ### interpolate-size
    *
@@ -7706,7 +7789,8 @@ export interface StyleProps {
    *
    * The <code>outline</code> CSS shorthand sets the color, style, and width of a line around an element, outside of the border.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-09-27
    * @newly_available_date 2023-03-27
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline
@@ -9576,7 +9660,7 @@ export interface StyleProps {
    *
    * The CSS `scroll-target-group` property.
    *
-   * @see https://drafts.csswg.org/css-overflow-5/#scroll-target-group
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-target-group
    *
    * @experimental
    */

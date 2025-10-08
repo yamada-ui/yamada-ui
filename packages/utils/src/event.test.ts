@@ -132,7 +132,7 @@ describe("Event", () => {
     const removeEventListener = addDomEvent(window, "click", mockCallback)
 
     window.dispatchEvent(new MouseEvent("click"))
-    expect(mockCallback).toHaveBeenCalledWith(expect.any(MouseEvent))
+    expect(mockCallback).toHaveBeenCalledExactlyOnceWith(expect.any(MouseEvent))
 
     removeEventListener()
     mockCallback.mockClear()

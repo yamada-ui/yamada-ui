@@ -1,5 +1,4 @@
 export * from "./checkbox-card.style"
-export * as CheckboxCard from "./card-namespace"
 export {
   CheckboxCardAddon,
   CheckboxCardDescription,
@@ -16,4 +15,5 @@ export type {
 } from "./checkbox-card"
 export { CheckboxCardGroupRoot } from "./checkbox-card-group"
 export type { CheckboxCardGroupRootProps } from "./checkbox-card-group"
-export * as CheckboxCardGroup from "./group-namespace"
+export * as CheckboxCardGroup from "./checkbox-card-group.namespace"
+export * as CheckboxCard from "./checkbox-card.namespace"

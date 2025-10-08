@@ -214,7 +214,7 @@ describe("<Breadcrumb />", () => {
       />,
     )
 
-    expect(ellipsis).toHaveBeenCalledWith({
+    expect(ellipsis).toHaveBeenCalledExactlyOnceWith({
       items: [
         { href: "/", label: "ナメック星編" },
         { href: "/", label: "人造人間編" },

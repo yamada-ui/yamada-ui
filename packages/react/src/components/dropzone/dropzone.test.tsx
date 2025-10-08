@@ -132,7 +132,11 @@ describe("<Dropzone />", () => {
       }),
     )
 
-    expect(onDrop).toHaveBeenCalledWith([file], [], expect.anything())
+    expect(onDrop).toHaveBeenCalledExactlyOnceWith(
+      [file],
+      [],
+      expect.anything(),
+    )
   })
 
   test("DropzoneAccept renders correctly when dragging accepted files", async () => {

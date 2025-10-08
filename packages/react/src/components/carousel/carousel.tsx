@@ -6,7 +6,6 @@ import type {
   HTMLProps,
   HTMLStyledProps,
   Orientation,
-  StyleValue,
   ThemeProps,
 } from "../../core"
 import type { IconButtonProps } from "../button"
@@ -19,7 +18,6 @@ import type {
 } from "./use-carousel"
 import { cloneElement, isValidElement, useMemo } from "react"
 import { createSlotComponent, styled, varAttr } from "../../core"
-import { useValue } from "../../hooks/use-value"
 import { dataAttr } from "../../utils"
 import { IconButton } from "../button"
 import { ChevronLeftIcon, ChevronRightIcon } from "../icon"
@@ -57,38 +55,38 @@ export interface CarouselRootProps
    *
    * @default 'center'
    */
-  align?: StyleValue<CarouselAlign>
+  align?: CarouselAlign
   /**
    * If `true`, the carousel will be autoplay.
    *
    * @default false
    */
-  autoplay?: StyleValue<boolean>
+  autoplay?: boolean
   /**
    * Clear leading and trailing empty space that causes excessive scrolling.
    * Use trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them.
    *
    * @default false
    */
-  containScroll?: StyleValue<CarouselContainScroll>
+  containScroll?: CarouselContainScroll
   /**
    * The number for the autoplay interval of the carousel.
    *
    * @default 4000
    */
-  delay?: StyleValue<number>
+  delay?: number
   /**
    * If `true`, momentum scrolling will be enabled.
    *
    * @default false
    */
-  dragFree?: StyleValue<boolean>
+  dragFree?: boolean
   /**
    * If `true`, carousel can be scrolled with mouse and touch interactions.
    *
    * @default true
    */
-  draggable?: StyleValue<boolean>
+  draggable?: boolean
   /**
    * Set scroll duration when triggered by any of the API methods.
    * Higher numbers enables slower scrolling.
@@ -96,7 +94,7 @@ export interface CarouselRootProps
    *
    * @default 25
    */
-  duration?: StyleValue<number>
+  duration?: number
   /**
    * If `true`, gap will be treated as part of the carousel slide size.
    *
@@ -108,27 +106,27 @@ export interface CarouselRootProps
    *
    * @default 0
    */
-  inViewThreshold?: StyleValue<CarouselInViewThreshold>
+  inViewThreshold?: CarouselInViewThreshold
   /**
    * If `true`, infinite looping.
    * Automatically falls back to false if slide content isn't enough to loop.
    *
    * @default true
    */
-  loop?: StyleValue<boolean>
+  loop?: boolean
   /**
    * The orientation of the carousel.
    *
    * @default 'horizontal'
    */
-  orientation?: StyleValue<Orientation>
+  orientation?: Orientation
   /**
    * If `true`, allow the carousel to skip scroll snaps if it's dragged vigorously.
    * Note that this option will be ignored if the dragFree option is set to true.
    *
    * @default false
    */
-  skipSnaps?: StyleValue<boolean>
+  skipSnaps?: boolean
   /**
    * The size of the carousel item.
    */
@@ -138,13 +136,13 @@ export interface CarouselRootProps
    *
    * @default 1
    */
-  slidesToScroll?: StyleValue<number>
+  slidesToScroll?: number
   /**
    * If `true`, autoplay will pause when the mouse entries over.
    *
    * @default true
    */
-  stopMouseEnterAutoplay?: StyleValue<boolean>
+  stopMouseEnterAutoplay?: boolean
 }
 
 const {
@@ -168,19 +166,6 @@ export { CarouselPropsContext, useCarouselPropsContext }
  */
 export const CarouselRoot = withProvider<"section", CarouselRootProps>(
   ({ includeGapInSize = true, ...rest }) => {
-    const align = useValue(rest.align)
-    const autoplay = useValue(rest.autoplay)
-    const containScroll = useValue(rest.containScroll)
-    const delay = useValue(rest.delay)
-    const dragFree = useValue(rest.dragFree)
-    const draggable = useValue(rest.draggable)
-    const duration = useValue(rest.duration)
-    const inViewThreshold = useValue(rest.inViewThreshold)
-    const loop = useValue(rest.loop)
-    const orientation = useValue(rest.orientation)
-    const skipSnaps = useValue(rest.skipSnaps)
-    const slidesToScroll = useValue(rest.slidesToScroll)
-    const stopMouseEnterAutoplay = useValue(rest.stopMouseEnterAutoplay)
     const {
       carousel,
       index,
@@ -194,22 +179,7 @@ export const CarouselRoot = withProvider<"section", CarouselRootProps>(
       getNextTriggerProps,
       getPrevTriggerProps,
       getRootProps,
-    } = useCarousel({
-      ...rest,
-      align,
-      autoplay,
-      containScroll,
-      delay,
-      dragFree,
-      draggable,
-      duration,
-      inViewThreshold,
-      loop,
-      orientation,
-      skipSnaps,
-      slidesToScroll,
-      stopMouseEnterAutoplay,
-    })
+    } = useCarousel(rest)
     const componentContext = useMemo(
       () => ({ includeGapInSize }),
       [includeGapInSize],

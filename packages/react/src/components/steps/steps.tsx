@@ -132,8 +132,8 @@ export const StepsRoot = withProvider<"div", StepsRootProps, "orientation">(
       onPrev,
     } = useSteps({
       count: items.length || Children.count(stepsList?.props.children),
-      ...rest,
       orientation: computedOrientation,
+      ...rest,
     })
     const componentContext = useMemo(
       () => ({ items, lazy, lazyBehavior }),

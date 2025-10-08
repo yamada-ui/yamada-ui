@@ -26,16 +26,19 @@ export function Notifications() {
         defaultValue="everything"
         items={[
           {
+            bg: "bg",
             description: "Receive notifications for everything.",
             label: "Everything",
             value: "everything",
           },
           {
+            bg: "bg",
             description: "Only mentions and comments",
             label: "Available",
             value: "available",
           },
           {
+            bg: "bg",
             description: "Turn off notifications",
             label: "Ignoring",
             value: "ignoring",

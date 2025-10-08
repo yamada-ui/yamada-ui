@@ -33,7 +33,7 @@ export function PaymentMethod() {
 
       <VStack gap="md">
         <Field.Root label="Name on Card">
-          <Input placeholder="Hirotomo Yamada" />
+          <Input bg="bg" placeholder="Hirotomo Yamada" />
         </Field.Root>
 
         <Grid alignItems="flex-start" gap="md" templateColumns="3fr 1fr">
@@ -41,11 +41,11 @@ export function PaymentMethod() {
             helperMessage="Enter your 16-digit number."
             label="Card number"
           >
-            <Input placeholder="4242 4242 4242 4242" />
+            <Input bg="bg" placeholder="4242 4242 4242 4242" />
           </Field.Root>
 
           <Field.Root label="CVV">
-            <Input placeholder="818" />
+            <Input bg="bg" placeholder="818" />
           </Field.Root>
         </Grid>
 
@@ -67,6 +67,7 @@ export function PaymentMethod() {
                 { label: "12", value: "12" },
               ]}
               placeholder="MM"
+              rootProps={{ bg: "bg" }}
             />
           </Field.Root>
 
@@ -81,6 +82,7 @@ export function PaymentMethod() {
                 { label: "2030", value: "2030" },
               ]}
               placeholder="YYYY"
+              rootProps={{ bg: "bg" }}
             />
           </Field.Root>
         </Grid>
@@ -99,13 +101,24 @@ export function PaymentMethod() {
           </Text>
         </VStack>
 
-        <Checkbox>Same as shipping address</Checkbox>
+        <Checkbox
+          colorScheme="primary"
+          indicatorProps={{
+            bg: { base: "bg", _checked: "colorScheme.solid" },
+          }}
+        >
+          Same as shipping address
+        </Checkbox>
       </VStack>
 
       <Separator />
 
       <Field.Root label="Comments">
-        <Textarea placeholder="Add any additional comments" resize="vertical" />
+        <Textarea
+          bg="bg"
+          placeholder="Add any additional comments"
+          resize="vertical"
+        />
       </Field.Root>
 
       <ButtonGroup.Root alignSelf="flex-end">

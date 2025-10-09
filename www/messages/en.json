@@ -82,7 +82,8 @@
     },
     "playground": {
       "title": "Playground",
-      "copyUrl": "Copy share URL",
+      "shareUrlCopy": "Copy share URL",
+      "shareUrlCopied": "Share URL copied to clipboard",
       "reset": "Reset"
     },
     "propsTable": {

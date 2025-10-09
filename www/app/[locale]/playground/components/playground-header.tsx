@@ -12,12 +12,14 @@ import {
   useClipboard,
   useWindowEvent,
 } from "@yamada-ui/react"
+import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import { memo, useCallback } from "react"
 import { usePlayground } from "../playground-provider"
 
 export const PlaygroundHeader = memo(() => {
   const { playground } = usePlayground()
+  const t = useTranslations()
   const router = useRouter()
 
   const { copied, onCopy } = useClipboard()
@@ -44,28 +46,35 @@ export const PlaygroundHeader = memo(() => {
   return (
     <HStack alignItems="center" justifyContent="space-between">
       <Heading as="h2" fontSize="lg" fontWeight="semibold">
-        Playground
+        {t("component.playground.title")}
       </Heading>
       <HStack gap="sm">
         <ButtonGroup.Root size="sm" gap="sm">
-          <Tooltip content="Reset" placement="end-center">
+          <Tooltip
+            content={t("component.playground.reset")}
+            placement="end-center"
+          >
             <IconButton
               colorScheme="danger"
               variant="surface"
-              aria-label="Reset"
+              aria-label={t("component.playground.reset")}
               onClick={playground.reset}
             >
               <RotateCcwIcon />
             </IconButton>
           </Tooltip>
           <Tooltip
-            content={copied ? "Copied" : "Copy share URL"}
+            content={
+              copied
+                ? t("component.playground.shareUrlCopied")
+                : t("component.playground.shareUrlCopy")
+            }
             placement="end-center"
           >
             <IconButton
               colorScheme="primary"
               variant="surface"
-              aria-label="Copy share URL"
+              aria-label={t("component.playground.shareUrlCopy")}
               onClick={handleCopy}
             >
               {copied ? <CheckIcon /> : <ClipboardCopyIcon />}

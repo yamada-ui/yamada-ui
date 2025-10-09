@@ -2,7 +2,7 @@
 
 import type { RefObject } from "react"
 import type { CodeUpdater, PreviewController } from "../types"
-import { assignRef, Resizable } from "@yamada-ui/react"
+import { assignRef, Resizable, useValue } from "@yamada-ui/react"
 import { memo, useCallback, useEffect, useRef } from "react"
 import { RESIZABLE_CONFIG } from "../constants"
 import { useCodeInitialization, useCookieStorage, useSyncRefs } from "../hooks"
@@ -28,6 +28,7 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(({ editorRef }) => {
   const previewRef = useRef<PreviewController>(null)
   const storage = useCookieStorage()
   const initialValue = useCodeInitialization()
+  const orientation = useValue({ base: "horizontal", lg: "vertical" })
 
   const lastInitialValue = useRef(initialValue)
   const { syncRefs } = useSyncRefs(
@@ -79,7 +80,7 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(({ editorRef }) => {
       display="flex"
       flex={1}
       h="full"
-      orientation="horizontal"
+      orientation={orientation}
       storage={storage}
       storageKey={RESIZABLE_CONFIG.storageKey}
     >
@@ -116,7 +117,7 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(({ editorRef }) => {
         roundedRight="l2"
       >
         <PreviewEditor
-          editorState={editorState.current!}
+          editorState={editorState.current}
           initialValue={initialValue}
           previewRef={previewRef}
         />

@@ -82,7 +82,8 @@
     },
     "playground": {
       "title": "プレイグラウンド",
-      "copyUrl": "共有URLをコピー",
+      "shareUrlCopy": "共有URLをコピー",
+      "shareUrlCopied": "URLをコピーしました",
       "reset": "リセット"
     },
     "propsTable": {

@@ -46,17 +46,17 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(({ editorRef }) => {
   }
 
   const getCurrentCode = useCallback(() => {
-    return editorState.current.getValue.current()
+    return editorState.current.getValue?.current?.()
   }, [])
 
   const syncCode = useCallback(() => {
     const nextCode = playground.getCurrentCode()
-    const currentCode = editorState.current.getValue.current()
+    const currentCode = editorState.current.getValue?.current?.()
 
     if (currentCode !== nextCode) {
       syncRefs(nextCode)
     }
-  }, [playground, editorState, syncRefs])
+  }, [playground, syncRefs])
 
   useEffect(() => {
     syncCode()
@@ -98,7 +98,7 @@ export const PlaygroundEditor = memo<PlaygroundEditorProps>(({ editorRef }) => {
       >
         <CodeMirrorEditor
           codeUpdaterRef={codeMirrorRef}
-          editorState={editorState.current!}
+          editorState={editorState.current}
           initialValue={initialValue}
           onChange={playground.changeCode}
         />

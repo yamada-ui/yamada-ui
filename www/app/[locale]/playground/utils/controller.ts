@@ -4,14 +4,15 @@ import { createRef } from "react"
 
 /**
  * Creates a controller with refs for each method
+ * The RefObject's current property can be T[K] or null.
  */
 export const createControllerRefs = <T extends { [key: string]: any }>(
   methods: T,
-): { [K in keyof T]: RefObject<T[K]> } => {
-  const refs = {} as { [K in keyof T]: RefObject<T[K]> }
+): { [K_key in keyof T]: RefObject<null | T[K_key]> } => {
+  const refs = {} as { [K_key in keyof T]: RefObject<null | T[K_key]> }
 
   for (const key in methods) {
-    refs[key] = createRef<T[K]>()
+    refs[key] = createRef<T[typeof key]>()
   }
 
   return refs
@@ -20,16 +21,18 @@ export const createControllerRefs = <T extends { [key: string]: any }>(
 /**
  * Creates methods that call the corresponding refs
  */
-export const createControllerMethods = <T extends { [key: string]: any }>(
-  refs: RefObject<{ [K in keyof T]: RefObject<T[K]> }>,
-): T => {
+export const createControllerMethods = <
+  T extends { [key: string]: Function },
+>(refs: { [K in keyof T]: RefObject<null | T[K]> }): T => {
   const methods = {} as T
 
-  for (const key in refs.current) {
-    const ref = refs.current[key]
-    methods[key] = ((...args: any[]) => {
-      return ref.current?.(...args)
-    }) as T[Extract<keyof T, string>]
+  for (const key in refs) {
+    if (Object.hasOwn(refs, key)) {
+      const ref = refs[key]
+      methods[key] = ((...args: any[]) => {
+        return ref.current?.(...args)
+      }) as unknown as T[typeof key]
+    }
   }
 
   return methods
@@ -39,11 +42,13 @@ export const createControllerMethods = <T extends { [key: string]: any }>(
  * Assigns methods to their corresponding refs
  */
 export const assignControllerMethods = <T extends { [key: string]: any }>(
-  refs: RefObject<{ [K in keyof T]: RefObject<T[K]> }>,
+  refs: { [K in keyof T]: RefObject<null | T[K]> },
   methods: T,
 ): void => {
   for (const key in methods) {
-    assignRef(refs.current[key], methods[key])
+    if (Object.hasOwn(refs, key)) {
+      assignRef(refs[key], methods[key])
+    }
   }
 }
 

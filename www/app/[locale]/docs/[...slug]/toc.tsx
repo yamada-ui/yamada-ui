@@ -15,6 +15,7 @@ import { useTranslations } from "next-intl"
 import { createRef, useMemo, useRef, useState } from "react"
 import scrollIntoView from "scroll-into-view-if-needed"
 import { EditPageButton } from "./edit-page-button"
+import { LlmsLink } from "./llms-link"
 import { ScrollToTopButton } from "./scroll-to-top-button"
 
 interface FlattenTocEntry extends Omit<Doc["toc"][number], "items"> {
@@ -30,7 +31,13 @@ function flattenToc(toc: Doc["toc"], depth = 0): FlattenTocEntry[] {
 
 export interface TocProps extends Doc {}
 
-export function Toc({ path, toc }: TocProps) {
+export function Toc({ locale, path, pathname, slug, toc }: TocProps) {
+  const localeMap: { [key: string]: string } = {
+    "en-US": "en",
+    "ja-JP": "ja",
+  }
+  const shortLocale = localeMap[locale] || locale
+
   const t = useTranslations("component.toc")
   const [currentId, setCurrentId] = useState<string>("")
   const containerRef = useRef<HTMLDivElement>(null)
@@ -90,6 +97,26 @@ export function Toc({ path, toc }: TocProps) {
       scrollMode: "if-needed",
     })
   }, [currentId])
+
+  const readUrl = encodeURIComponent(
+    `Use web browsing to access links and information: https://v2.yamada-ui.com/${slug[0]}.mdx.\n\nI want to ask some questions
+    `,
+  )
+
+  const items = [
+    {
+      href: `/${shortLocale}${pathname}.mdx`,
+      label: t("markdown"),
+    },
+    {
+      href: `https://chatgpt.com/?hints=search&q=${readUrl}`,
+      label: t("chatgpt"),
+    },
+    {
+      href: `https://claude.ai/new?q=${readUrl}`,
+      label: t("claude"),
+    },
+  ]
 
   return (
     <VStack
@@ -152,7 +179,9 @@ export function Toc({ path, toc }: TocProps) {
 
       <VStack alignItems="flex-start" gap="sm">
         <EditPageButton path={path} />
-
+        {items.map(({ href, label }) => (
+          <LlmsLink key={label} href={href} label={label} />
+        ))}
         <ScrollToTopButton />
       </VStack>
     </VStack>

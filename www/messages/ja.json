@@ -26,6 +26,22 @@
     "primaryAction": "はじめる",
     "secondaryAction": "コンポーネントを見る"
   },
+  "examples": {
+    "title": "アプリケーションを構築する",
+    "description": "美しくデザインされ、30以上の言語をサポートしたアプリケーションを構築できます。ユーザーごとのテーマの切り替えも可能で、ユーザビリティを向上させます。",
+    "primaryAction": "はじめる",
+    "secondaryAction": "ドキュメント",
+    "menu": {
+      "examples": "サンプル",
+      "mail": "メール",
+      "dashboard": "ダッシュボード",
+      "tasks": "タスク",
+      "playground": "プレイグラウンド",
+      "forms": "フォーム",
+      "music": "ミュージック",
+      "authentication": "ログイン"
+    }
+  },
   "icons": {
     "title": "美しく一貫性のあるアイコン",
     "description": "Lucideを使用して作成された、すぐに使用できるアイコンのコレクション。アプリケーションにコピー&ペーストできます。",
@@ -40,7 +56,17 @@
     "title": "あなただけのテーマ",
     "description": "美しく一貫性のあるテーマをお試しください。プロジェクトにコピー&ペーストできます。新しいテーマエディターを近日公開予定です。",
     "primaryAction": "テーマを見る",
-    "secondaryAction": "ドキュメント"
+    "secondaryAction": "ドキュメント",
+    "menu": {
+      "base": "デフォルト",
+      "blue": "ブルー",
+      "red": "レッド",
+      "orange": "オレンジ",
+      "yellow": "イエロー",
+      "green": "グリーン",
+      "violet": "バイオレット",
+      "pink": "ピンク"
+    }
   },
   "common": {
     "github": "{name}のGitHubプロフィール",

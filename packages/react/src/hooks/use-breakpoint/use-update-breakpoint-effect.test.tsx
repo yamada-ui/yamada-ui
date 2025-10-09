@@ -33,6 +33,6 @@ describe("useUpdateBreakpointEffect", () => {
       rerender()
     })
 
-    expect(callback).toHaveBeenCalledWith("lg")
+    expect(callback).toHaveBeenCalledExactlyOnceWith("lg")
   })
 })

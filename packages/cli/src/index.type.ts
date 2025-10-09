@@ -39,17 +39,20 @@ export interface SectionConfigWithPaths extends SectionConfig {
   section: Section
 }
 
+export interface Paths {
+  src: string
+  index: string
+  registry: string
+  root: string
+}
+
 export interface Config extends UserConfig {
-  src: boolean
   cwd: string
   getSection: (value?: string) => SectionConfigWithPaths | undefined
   getSectionPath: (section: Section) => string
   getSectionResolvedPath: (section: Section) => string
-  indexPath: string
   isSection: (section: string) => section is Section
-  registryPath: string
-  rootPath: string
-  srcPath: string
+  paths: { theme: Paths; ui: Paths }
 }
 
 export type RegistrySection =

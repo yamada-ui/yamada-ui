@@ -1,7 +1,7 @@
 "use client"
 
 import type { Variants } from "motion/react"
-import type { StyleValue, ThemeProps } from "../../core"
+import type { ThemeProps } from "../../core"
 import type {
   HTMLMotionProps,
   MotionTransitionVariants,
@@ -11,7 +11,6 @@ import type { SlideFadeStyle } from "./slide-fade.style"
 import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { createComponent } from "../../core"
-import { useValue } from "../../hooks/use-value"
 import { createTransition, motion } from "../motion"
 import { slideFadeStyle } from "./slide-fade.style"
 
@@ -67,13 +66,13 @@ export interface SlideFadeProps
    *
    * @default 0
    */
-  offsetX?: StyleValue<number | string>
+  offsetX?: number | string
   /**
    * The offset on the vertical or `y` axis.
    *
    * @default 8
    */
-  offsetY?: StyleValue<number | string>
+  offsetY?: number | string
   /**
    * If `true`, the element will be transitioned back to the offset when it leaves. Otherwise, it'll only fade out.
    *
@@ -102,8 +101,8 @@ export const SlideFade = withContext<"div", SlideFadeProps>(
   ({
     delay,
     duration,
-    offsetX: offsetXProp = 0,
-    offsetY: offsetYProp = 8,
+    offsetX = 0,
+    offsetY = 8,
     open: openProp,
     reverse = true,
     transition,
@@ -113,8 +112,6 @@ export const SlideFade = withContext<"div", SlideFadeProps>(
   }) => {
     const animate = openProp || unmountOnExit ? "enter" : "exit"
     const open = unmountOnExit ? openProp && unmountOnExit : true
-    const offsetX = useValue(offsetXProp)
-    const offsetY = useValue(offsetYProp)
 
     const custom = useMemo(
       () => ({

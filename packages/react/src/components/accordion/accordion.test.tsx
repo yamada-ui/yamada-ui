@@ -339,7 +339,9 @@ describe("<Accordion />", () => {
       </Accordion.Root>,
     )
 
-    expect(consoleWarnSpy).toHaveBeenCalledOnce()
+    expect(consoleWarnSpy).toHaveBeenLastCalledWith(
+      "Accordion: If 'multiple' is passed, 'toggle' will be ignored. Either remove 'toggle' or 'multiple' depending on whether you want multiple accordions visible or not",
+    )
 
     consoleWarnSpy.mockRestore()
   })
@@ -355,7 +357,9 @@ describe("<Accordion />", () => {
       </Accordion.Root>,
     )
 
-    expect(consoleWarnSpy).toHaveBeenCalledOnce()
+    expect(consoleWarnSpy).toHaveBeenLastCalledWith(
+      "Accordion: If 'multiple' is passed, then 'index' or 'defaultIndex' must be an array.",
+    )
 
     consoleWarnSpy.mockRestore()
   })

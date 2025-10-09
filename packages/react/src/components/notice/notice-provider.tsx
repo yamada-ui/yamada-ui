@@ -8,7 +8,7 @@ import type {
   ThemeProps,
 } from "../../core"
 import type { NoticeStyle } from "./notice.style"
-import { createContext, createRef, use, useMemo, useRef } from "react"
+import { createContext, createRef, use, useId, useMemo, useRef } from "react"
 import { Portal } from "../portal"
 import { NoticeRoot, PLACEMENT_MAP } from "./notice"
 
@@ -28,14 +28,12 @@ interface NoticeState {
 }
 
 export interface NoticeMethods {
+  getId: (placement: NoticePlacement) => string
   getLimit: (placement: NoticePlacement) => number
   updateLimit: (state: NoticeState) => void
 }
 
-interface NoticeContext {
-  getLimit: (placement: NoticePlacement) => number
-  updateLimit: (state: NoticeState) => void
-}
+interface NoticeContext extends NoticeMethods {}
 
 const NoticeContext = createContext({} as NoticeContext)
 
@@ -47,11 +45,15 @@ const createController = () => ({
 })
 
 const createMethods = (
+  id: string,
   refs: {
     [K in NoticePlacement]?: RefObject<Controller>
   },
   defaultLimit: number,
 ): NoticeMethods => ({
+  getId: (placement) => {
+    return `${id}-${placement}`
+  },
   getLimit: (placement) => {
     const method = refs[placement]?.current.getLimit.current
 
@@ -74,10 +76,11 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
   const placementMap = useRef<{
     [K in NoticePlacement]?: RefObject<Controller>
   }>({})
+  const id = useId()
 
   const value = useMemo(
-    () => ({ ...createMethods(placementMap.current, limit) }),
-    [limit],
+    () => ({ ...createMethods(id, placementMap.current, limit) }),
+    [id, limit],
   )
 
   const components = useMemo(() => {

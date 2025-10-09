@@ -34,6 +34,11 @@
           "pathname": "/docs/components/create-component"
         },
         {
+          "title": "国際化",
+          "segment": "internationalization",
+          "pathname": "/docs/components/internationalization"
+        },
+        {
           "title": "styled",
           "segment": "styled",
           "pathname": "/docs/components/styled"
@@ -165,14 +170,9 @@
               "pathname": "/docs/components/for"
             },
             {
-              "title": "FormatByte",
-              "segment": "format-byte",
-              "pathname": "/docs/components/format-byte"
-            },
-            {
-              "title": "FormatNumber",
-              "segment": "format-number",
-              "pathname": "/docs/components/format-number"
+              "title": "Format",
+              "segment": "format",
+              "pathname": "/docs/components/format"
             },
             {
               "title": "Portal",
@@ -723,208 +723,6 @@
       "pathname": "/docs/components"
     },
     {
-      "title": "フック",
-      "segment": "hooks",
-      "pathname": "/docs/hooks",
-      "items": [
-        {
-          "title": "useAnimation",
-          "segment": "use-animation",
-          "pathname": "/docs/hooks/use-animation"
-        },
-        {
-          "title": "useAsyncCallback",
-          "segment": "use-async-callback",
-          "pathname": "/docs/hooks/use-async-callback"
-        },
-        {
-          "title": "useAsync",
-          "segment": "use-async",
-          "pathname": "/docs/hooks/use-async"
-        },
-        {
-          "title": "useBoolean",
-          "segment": "use-boolean",
-          "pathname": "/docs/hooks/use-boolean"
-        },
-        {
-          "title": "useBreakpointEffect",
-          "segment": "use-breakpoint-effect",
-          "pathname": "/docs/hooks/use-breakpoint-effect"
-        },
-        {
-          "title": "useBreakpointState",
-          "segment": "use-breakpoint-state",
-          "pathname": "/docs/hooks/use-breakpoint-state"
-        },
-        {
-          "title": "useBreakpointValue",
-          "segment": "use-breakpoint-value",
-          "pathname": "/docs/hooks/use-breakpoint-value"
-        },
-        {
-          "title": "useBreakpoint",
-          "segment": "use-breakpoint",
-          "pathname": "/docs/hooks/use-breakpoint"
-        },
-        {
-          "title": "useClipboard",
-          "segment": "use-clipboard",
-          "pathname": "/docs/hooks/use-clipboard"
-        },
-        {
-          "title": "useColorModeValue",
-          "segment": "use-color-mode-value",
-          "pathname": "/docs/hooks/use-color-mode-value"
-        },
-        {
-          "title": "useColorMode",
-          "segment": "use-color-mode",
-          "pathname": "/docs/hooks/use-color-mode"
-        },
-        {
-          "title": "useCounter",
-          "segment": "use-counter",
-          "pathname": "/docs/hooks/use-counter"
-        },
-        {
-          "title": "useDescendants",
-          "segment": "use-descendants",
-          "pathname": "/docs/hooks/use-descendants"
-        },
-        {
-          "title": "useDisclosure",
-          "segment": "use-disclosure",
-          "pathname": "/docs/hooks/use-disclosure"
-        },
-        {
-          "title": "useDynamicAnimation",
-          "segment": "use-dynamic-animation",
-          "pathname": "/docs/hooks/use-dynamic-animation"
-        },
-        {
-          "title": "useEyeDropper",
-          "segment": "use-eye-dropper",
-          "pathname": "/docs/hooks/use-eye-dropper"
-        },
-        {
-          "title": "useFocusOnShow",
-          "segment": "use-focus-on-show",
-          "pathname": "/docs/hooks/use-focus-on-show"
-        },
-        {
-          "title": "useFormatByte",
-          "segment": "use-format-byte",
-          "pathname": "/docs/hooks/use-format-byte"
-        },
-        {
-          "title": "useFormatNumber",
-          "segment": "use-format-number",
-          "pathname": "/docs/hooks/use-format-number"
-        },
-        {
-          "title": "useHover",
-          "segment": "use-hover",
-          "pathname": "/docs/hooks/use-hover"
-        },
-        {
-          "title": "useIdle",
-          "segment": "use-idle",
-          "pathname": "/docs/hooks/use-idle"
-        },
-        {
-          "title": "useInfiniteScroll",
-          "segment": "use-infinite-scroll",
-          "pathname": "/docs/hooks/use-infinite-scroll"
-        },
-        {
-          "title": "useInterval",
-          "segment": "use-interval",
-          "pathname": "/docs/hooks/use-interval"
-        },
-        {
-          "title": "useLoading",
-          "segment": "use-loading",
-          "pathname": "/docs/hooks/use-loading"
-        },
-        {
-          "title": "useLocalStorage",
-          "segment": "use-local-storage",
-          "pathname": "/docs/hooks/use-local-storage"
-        },
-        {
-          "title": "useMediaQuery",
-          "segment": "use-media-query",
-          "pathname": "/docs/hooks/use-media-query"
-        },
-        {
-          "title": "useNotice",
-          "segment": "use-notice",
-          "pathname": "/docs/hooks/use-notice"
-        },
-        {
-          "title": "useOS",
-          "segment": "use-os",
-          "pathname": "/docs/hooks/use-os"
-        },
-        {
-          "title": "useOutsideClick",
-          "segment": "use-outside-click",
-          "pathname": "/docs/hooks/use-outside-click"
-        },
-        {
-          "title": "usePrevious",
-          "segment": "use-previous",
-          "pathname": "/docs/hooks/use-previous"
-        },
-        {
-          "title": "useProcessing",
-          "segment": "use-processing",
-          "pathname": "/docs/hooks/use-processing"
-        },
-        {
-          "title": "usePromiseDisclosure",
-          "segment": "use-promise-disclosure",
-          "pathname": "/docs/hooks/use-promise-disclosure"
-        },
-        {
-          "title": "useResizeObserver",
-          "segment": "use-resize-observer",
-          "pathname": "/docs/hooks/use-resize-observer"
-        },
-        {
-          "title": "useTheme",
-          "segment": "use-theme",
-          "pathname": "/docs/hooks/use-theme"
-        },
-        {
-          "title": "useTimeout",
-          "segment": "use-timeout",
-          "pathname": "/docs/hooks/use-timeout"
-        },
-        {
-          "title": "useUpdateBreakpointEffect",
-          "segment": "use-update-breakpoint-effect",
-          "pathname": "/docs/hooks/use-update-breakpoint-effect"
-        },
-        {
-          "title": "useUpdateEffect",
-          "segment": "use-update-effect",
-          "pathname": "/docs/hooks/use-update-effect"
-        },
-        {
-          "title": "useValue",
-          "segment": "use-value",
-          "pathname": "/docs/hooks/use-value"
-        },
-        {
-          "title": "useWindowEvent",
-          "segment": "use-window-event",
-          "pathname": "/docs/hooks/use-window-event"
-        }
-      ]
-    },
-    {
       "title": "はじめる",
       "segment": "get-started",
       "items": [
@@ -981,93 +779,6 @@
         }
       ],
       "pathname": "/docs/get-started"
-    },
-    {
-      "title": "スタイル",
-      "segment": "styling",
-      "items": [
-        {
-          "title": "アニメーション",
-          "segment": "animation",
-          "pathname": "/docs/styling/animation"
-        },
-        {
-          "title": "アットルール",
-          "segment": "at-rules",
-          "pathname": "/docs/styling/at-rules"
-        },
-        {
-          "title": "カスケードレイヤー",
-          "segment": "cascade-layers",
-          "pathname": "/docs/styling/cascade-layers"
-        },
-        {
-          "title": "カラーモード",
-          "segment": "color-mode",
-          "pathname": "/docs/styling/color-mode"
-        },
-        {
-          "title": "カラースキーム",
-          "segment": "color-scheme",
-          "pathname": "/docs/styling/color-scheme"
-        },
-        {
-          "title": "条件付きスタイル",
-          "segment": "conditional-styles",
-          "pathname": "/docs/styling/conditional-styles"
-        },
-        {
-          "title": "CSSカスタムプロパティ",
-          "segment": "css-custom-properties",
-          "pathname": "/docs/styling/css-custom-properties"
-        },
-        {
-          "title": "CSS値関数",
-          "segment": "css-value-functions",
-          "pathname": "/docs/styling/css-value-functions"
-        },
-        {
-          "title": "フォーカスリング",
-          "segment": "focus-ring",
-          "pathname": "/docs/styling/focus-ring"
-        },
-        {
-          "title": "グローバルスタイル",
-          "segment": "global-styles",
-          "pathname": "/docs/styling/global-styles"
-        },
-        {
-          "title": "インターポレーション",
-          "segment": "interpolation",
-          "pathname": "/docs/styling/interpolation"
-        },
-        {
-          "title": "レイヤースタイル",
-          "segment": "layer-styles",
-          "pathname": "/docs/styling/layer-styles"
-        },
-        {
-          "title": "リセットスタイル",
-          "segment": "reset-styles",
-          "pathname": "/docs/styling/reset-styles"
-        },
-        {
-          "title": "レスポンシブデザイン",
-          "segment": "responsive-design",
-          "pathname": "/docs/styling/responsive-design"
-        },
-        {
-          "title": "Style Props",
-          "segment": "style-props",
-          "pathname": "/docs/styling/style-props"
-        },
-        {
-          "title": "テキストスタイル",
-          "segment": "text-styles",
-          "pathname": "/docs/styling/text-styles"
-        }
-      ],
-      "pathname": "/docs/styling"
     },
     {
       "title": "テーマ",
@@ -1254,6 +965,300 @@
         }
       ],
       "pathname": "/docs/theming"
+    },
+    {
+      "title": "スタイル",
+      "segment": "styling",
+      "items": [
+        {
+          "title": "アニメーション",
+          "segment": "animation",
+          "pathname": "/docs/styling/animation"
+        },
+        {
+          "title": "アットルール",
+          "segment": "at-rules",
+          "pathname": "/docs/styling/at-rules"
+        },
+        {
+          "title": "カスケードレイヤー",
+          "segment": "cascade-layers",
+          "pathname": "/docs/styling/cascade-layers"
+        },
+        {
+          "title": "カラーモード",
+          "segment": "color-mode",
+          "pathname": "/docs/styling/color-mode"
+        },
+        {
+          "title": "カラースキーム",
+          "segment": "color-scheme",
+          "pathname": "/docs/styling/color-scheme"
+        },
+        {
+          "title": "条件付きスタイル",
+          "segment": "conditional-styles",
+          "pathname": "/docs/styling/conditional-styles"
+        },
+        {
+          "title": "CSSカスタムプロパティ",
+          "segment": "css-custom-properties",
+          "pathname": "/docs/styling/css-custom-properties"
+        },
+        {
+          "title": "CSS値関数",
+          "segment": "css-value-functions",
+          "pathname": "/docs/styling/css-value-functions"
+        },
+        {
+          "title": "フォーカスリング",
+          "segment": "focus-ring",
+          "pathname": "/docs/styling/focus-ring"
+        },
+        {
+          "title": "グローバルスタイル",
+          "segment": "global-styles",
+          "pathname": "/docs/styling/global-styles"
+        },
+        {
+          "title": "インターポレーション",
+          "segment": "interpolation",
+          "pathname": "/docs/styling/interpolation"
+        },
+        {
+          "title": "レイヤースタイル",
+          "segment": "layer-styles",
+          "pathname": "/docs/styling/layer-styles"
+        },
+        {
+          "title": "リセットスタイル",
+          "segment": "reset-styles",
+          "pathname": "/docs/styling/reset-styles"
+        },
+        {
+          "title": "レスポンシブデザイン",
+          "segment": "responsive-design",
+          "pathname": "/docs/styling/responsive-design"
+        },
+        {
+          "title": "Style Props",
+          "segment": "style-props",
+          "pathname": "/docs/styling/style-props"
+        },
+        {
+          "title": "テキストスタイル",
+          "segment": "text-styles",
+          "pathname": "/docs/styling/text-styles"
+        }
+      ],
+      "pathname": "/docs/styling"
+    },
+    {
+      "title": "フック",
+      "segment": "hooks",
+      "pathname": "/docs/hooks",
+      "items": [
+        {
+          "title": "useAnimation",
+          "segment": "use-animation",
+          "pathname": "/docs/hooks/use-animation"
+        },
+        {
+          "title": "useAsyncCallback",
+          "segment": "use-async-callback",
+          "pathname": "/docs/hooks/use-async-callback"
+        },
+        {
+          "title": "useAsync",
+          "segment": "use-async",
+          "pathname": "/docs/hooks/use-async"
+        },
+        {
+          "title": "useBoolean",
+          "segment": "use-boolean",
+          "pathname": "/docs/hooks/use-boolean"
+        },
+        {
+          "title": "useBreakpointEffect",
+          "segment": "use-breakpoint-effect",
+          "pathname": "/docs/hooks/use-breakpoint-effect"
+        },
+        {
+          "title": "useBreakpointState",
+          "segment": "use-breakpoint-state",
+          "pathname": "/docs/hooks/use-breakpoint-state"
+        },
+        {
+          "title": "useBreakpointValue",
+          "segment": "use-breakpoint-value",
+          "pathname": "/docs/hooks/use-breakpoint-value"
+        },
+        {
+          "title": "useBreakpoint",
+          "segment": "use-breakpoint",
+          "pathname": "/docs/hooks/use-breakpoint"
+        },
+        {
+          "title": "useClipboard",
+          "segment": "use-clipboard",
+          "pathname": "/docs/hooks/use-clipboard"
+        },
+        {
+          "title": "useColorModeValue",
+          "segment": "use-color-mode-value",
+          "pathname": "/docs/hooks/use-color-mode-value"
+        },
+        {
+          "title": "useColorMode",
+          "segment": "use-color-mode",
+          "pathname": "/docs/hooks/use-color-mode"
+        },
+        {
+          "title": "useCounter",
+          "segment": "use-counter",
+          "pathname": "/docs/hooks/use-counter"
+        },
+        {
+          "title": "useDescendants",
+          "segment": "use-descendants",
+          "pathname": "/docs/hooks/use-descendants"
+        },
+        {
+          "title": "useDisclosure",
+          "segment": "use-disclosure",
+          "pathname": "/docs/hooks/use-disclosure"
+        },
+        {
+          "title": "useDynamicAnimation",
+          "segment": "use-dynamic-animation",
+          "pathname": "/docs/hooks/use-dynamic-animation"
+        },
+        {
+          "title": "useEyeDropper",
+          "segment": "use-eye-dropper",
+          "pathname": "/docs/hooks/use-eye-dropper"
+        },
+        {
+          "title": "useFocusOnShow",
+          "segment": "use-focus-on-show",
+          "pathname": "/docs/hooks/use-focus-on-show"
+        },
+        {
+          "title": "useFormatByte",
+          "segment": "use-format-byte",
+          "pathname": "/docs/hooks/use-format-byte"
+        },
+        {
+          "title": "useFormatDateTime",
+          "segment": "use-format-date-time",
+          "pathname": "/docs/hooks/use-format-date-time"
+        },
+        {
+          "title": "useFormatNumber",
+          "segment": "use-format-number",
+          "pathname": "/docs/hooks/use-format-number"
+        },
+        {
+          "title": "useHover",
+          "segment": "use-hover",
+          "pathname": "/docs/hooks/use-hover"
+        },
+        {
+          "title": "useIdle",
+          "segment": "use-idle",
+          "pathname": "/docs/hooks/use-idle"
+        },
+        {
+          "title": "useInfiniteScroll",
+          "segment": "use-infinite-scroll",
+          "pathname": "/docs/hooks/use-infinite-scroll"
+        },
+        {
+          "title": "useInterval",
+          "segment": "use-interval",
+          "pathname": "/docs/hooks/use-interval"
+        },
+        {
+          "title": "useLoading",
+          "segment": "use-loading",
+          "pathname": "/docs/hooks/use-loading"
+        },
+        {
+          "title": "useLocalStorage",
+          "segment": "use-local-storage",
+          "pathname": "/docs/hooks/use-local-storage"
+        },
+        {
+          "title": "useMediaQuery",
+          "segment": "use-media-query",
+          "pathname": "/docs/hooks/use-media-query"
+        },
+        {
+          "title": "useNotice",
+          "segment": "use-notice",
+          "pathname": "/docs/hooks/use-notice"
+        },
+        {
+          "title": "useOS",
+          "segment": "use-os",
+          "pathname": "/docs/hooks/use-os"
+        },
+        {
+          "title": "useOutsideClick",
+          "segment": "use-outside-click",
+          "pathname": "/docs/hooks/use-outside-click"
+        },
+        {
+          "title": "usePrevious",
+          "segment": "use-previous",
+          "pathname": "/docs/hooks/use-previous"
+        },
+        {
+          "title": "useProcessing",
+          "segment": "use-processing",
+          "pathname": "/docs/hooks/use-processing"
+        },
+        {
+          "title": "usePromiseDisclosure",
+          "segment": "use-promise-disclosure",
+          "pathname": "/docs/hooks/use-promise-disclosure"
+        },
+        {
+          "title": "useResizeObserver",
+          "segment": "use-resize-observer",
+          "pathname": "/docs/hooks/use-resize-observer"
+        },
+        {
+          "title": "useTheme",
+          "segment": "use-theme",
+          "pathname": "/docs/hooks/use-theme"
+        },
+        {
+          "title": "useTimeout",
+          "segment": "use-timeout",
+          "pathname": "/docs/hooks/use-timeout"
+        },
+        {
+          "title": "useUpdateBreakpointEffect",
+          "segment": "use-update-breakpoint-effect",
+          "pathname": "/docs/hooks/use-update-breakpoint-effect"
+        },
+        {
+          "title": "useUpdateEffect",
+          "segment": "use-update-effect",
+          "pathname": "/docs/hooks/use-update-effect"
+        },
+        {
+          "title": "useValue",
+          "segment": "use-value",
+          "pathname": "/docs/hooks/use-value"
+        },
+        {
+          "title": "useWindowEvent",
+          "segment": "use-window-event",
+          "pathname": "/docs/hooks/use-window-event"
+        }
+      ]
     }
   ]
 }

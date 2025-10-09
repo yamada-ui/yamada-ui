@@ -3,7 +3,8 @@
 import type { FocusEvent, KeyboardEvent } from "react"
 import type { HTMLProps, PropGetter, RequiredPropGetter } from "../../core"
 import type { Descendant } from "../../hooks/use-descendants"
-import type { Dict } from "../../utils"
+import type { Locale } from "../../providers/i18n-provider"
+import type { AnyString, Dict } from "../../utils"
 import dayjs from "dayjs"
 import { useCallback, useMemo, useRef } from "react"
 import { useSplitProps } from "../../core"
@@ -25,7 +26,7 @@ import {
   useUpdateEffect,
   visuallyHiddenAttributes,
 } from "../../utils"
-import "dayjs/locale/ja"
+import { useDateTimeFormat } from "../format"
 
 export const DEFAULT_HOLIDAYS: Date[] = []
 export const DEFAULT_WEEKEND_DAYS: number[] = [0, 6]
@@ -44,9 +45,10 @@ export type MaybeDateValue<
     : Date | undefined
 export type StartDayOfWeek = "monday" | "sunday"
 export interface CalendarFormat {
-  month?: string
-  weekday?: string
-  year?: string
+  day?: Intl.DateTimeFormatOptions["day"] | null
+  month?: Intl.DateTimeFormatOptions["month"] | null
+  weekday?: Intl.DateTimeFormatOptions["weekday"] | null
+  year?: Intl.DateTimeFormatOptions["year"] | null
 }
 
 export const getStartOfWeek = (
@@ -70,16 +72,15 @@ export const getEndOfWeek = (
     .toDate()
 
 export const getWeekdays = (
-  locale: string,
   startDayOfWeek: StartDayOfWeek,
-  format = "dd",
+  format: (value: Date) => string,
 ): { label: string; value: number }[] => {
   let weekdays: { label: string; value: number }[] = []
 
   const date = getStartOfWeek(new Date(), startDayOfWeek)
 
   for (let i = 0; i < 7; i += 1) {
-    const label = dayjs(date).locale(locale).format(format)
+    const label = format(date)
     const value = date.getDay()
 
     weekdays = [...weekdays, { label, value }]
@@ -93,20 +94,24 @@ export const getWeekdays = (
 export const getMonthDays = (
   date: Date,
   startDayOfWeek: StartDayOfWeek,
-): Date[][] => {
+  format: (value: Date) => string,
+): { label: string; value: Date }[][] => {
   const currentMonth = date.getMonth()
   const startOfMonth = new Date(date.getFullYear(), currentMonth, 1)
   const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0)
   const startDate = getStartOfWeek(startOfMonth, startDayOfWeek)
   const endDate = getEndOfWeek(endOfMonth, startDayOfWeek)
 
-  const weeks: Date[][] = []
+  const weeks: { label: string; value: Date }[][] = []
 
   while (startDate <= endDate) {
-    const days: Date[] = []
+    const days: { label: string; value: Date }[] = []
 
     for (let i = 0; i < 7; i += 1) {
-      days.push(new Date(startDate))
+      const value = new Date(startDate)
+      const label = format(value)
+
+      days.push({ label, value })
 
       startDate.setDate(startDate.getDate() + 1)
     }
@@ -333,12 +338,10 @@ export interface UseCalendarProps<
   holidays?: Date[]
   /**
    * The locale of the calendar.
-   * Check the docs to see the locale of possible modifiers you can pass.
    *
-   * @see https://day.js.org/docs/en/i18n/instance-locale
    * @default 'en-US'
    */
-  locale?: string
+  locale?: AnyString | Locale
   /**
    * The maximum selectable value.
    */
@@ -417,7 +420,7 @@ export const useCalendar = <
       : undefined) as MaybeDateValue<Multiple, Range>,
   disabled = false,
   excludeDate,
-  format: formatProp,
+  format: format = {},
   holidays = DEFAULT_HOLIDAYS,
   locale: localeProp,
   max,
@@ -435,16 +438,52 @@ export const useCalendar = <
   if (dayjs(minDate).isAfter(dayjs(maxDate))) maxDate = minDate
 
   const { locale: defaultLocale, t } = useI18n("calendar")
-  const format = useMemo(
-    () => ({
-      month: t("MMM"),
-      weekday: t("dd"),
-      year: t("YYYY"),
-      ...formatProp,
-    }),
-    [formatProp, t],
-  )
   const locale = localeProp ?? defaultLocale
+  const dateTimeFormat = useDateTimeFormat({ locale })
+  const yearFormat = useCallback(
+    (value: Date) => {
+      if (format.year === null) {
+        return value.getFullYear().toString()
+      } else {
+        const year = format.year ?? "numeric"
+
+        return dateTimeFormat(value, { year })
+      }
+    },
+    [dateTimeFormat, format.year],
+  )
+  const monthFormat = useCallback(
+    (value: Date) => {
+      if (format.month === null) {
+        return (value.getMonth() + 1).toString()
+      } else {
+        const month = format.month ?? "short"
+
+        return dateTimeFormat(value, { month })
+      }
+    },
+    [dateTimeFormat, format.month],
+  )
+  const weekdayFormat = useCallback(
+    (value: Date) => {
+      return dateTimeFormat(value, {
+        weekday: format.weekday ?? "short",
+      })
+    },
+    [dateTimeFormat, format.weekday],
+  )
+  const dayFormat = useCallback(
+    (value: Date) => {
+      if (format.day) {
+        return dateTimeFormat(value, {
+          day: format.day,
+        })
+      } else {
+        return value.getDate().toString()
+      }
+    },
+    [dateTimeFormat, format.day],
+  )
   const descendants = useCalendarDescendants()
   const monthRef = useRef<HTMLTableElement>(null)
   const [value, setValue] = useControllableState({
@@ -475,12 +514,12 @@ export const useCalendar = <
     return { endOfMonth, startOfMonth }
   }, [month])
   const weekdays = useMemo(
-    () => getWeekdays(locale, startDayOfWeek, format.weekday),
-    [startDayOfWeek, locale, format],
+    () => getWeekdays(startDayOfWeek, weekdayFormat),
+    [startDayOfWeek, weekdayFormat],
   )
   const monthDays = useMemo(
-    () => getMonthDays(month, startDayOfWeek),
-    [startDayOfWeek, month],
+    () => getMonthDays(month, startDayOfWeek, dayFormat),
+    [month, startDayOfWeek, dayFormat],
   )
   const yearItems = useMemo(() => {
     const minYear = dayjs(minDate).year()
@@ -488,14 +527,14 @@ export const useCalendar = <
     const yearItems: { label: string; value: string }[] = []
 
     for (let year = minYear; year <= maxYear; year++) {
-      const label = dayjs().locale(locale).set("year", year).format(format.year)
+      const label = yearFormat(dayjs().set("year", year).toDate())
       const value = year.toString()
 
       yearItems.push({ label, value })
     }
 
     return yearItems
-  }, [format, locale, maxDate, minDate])
+  }, [maxDate, minDate, yearFormat])
   const monthItems = useMemo(() => {
     const monthItems: { label: string; value: string }[] = []
     const date = dayjs(month).toDate()
@@ -506,17 +545,14 @@ export const useCalendar = <
       if (isAfterMonth(date, maxDate)) continue
       if (isBeforeMonth(date, minDate)) continue
 
-      const label = dayjs()
-        .locale(locale)
-        .set("month", month)
-        .format(format.month)
+      const label = monthFormat(dayjs().set("month", month).toDate())
       const value = month.toString()
 
       monthItems.push({ label, value })
     }
 
     return monthItems
-  }, [month, maxDate, minDate, locale, format])
+  }, [month, maxDate, minDate, monthFormat])
 
   const onChange = useCallback(
     (value: Date) => {
@@ -664,17 +700,23 @@ export const useCalendar = <
     (props = {}) => ({
       style: visuallyHiddenAttributes.style,
       "aria-live": "polite",
-      children: dayjs(month).locale(locale).format(t("MMMM YYYY")),
+      children: dateTimeFormat(dayjs(month).toDate(), {
+        month: "long",
+        year: "numeric",
+      }),
       role: "status",
       ...props,
     }),
-    [locale, month, t],
+    [dateTimeFormat, month],
   )
 
   const getMonthProps: PropGetter<"table"> = useCallback(
     ({ ref, ...props } = {}) => ({
       ref: mergeRefs(ref, monthRef),
-      "aria-label": dayjs(month).locale(locale).format(t("MMMM YYYY")),
+      "aria-label": dateTimeFormat(dayjs(month).toDate(), {
+        month: "long",
+        year: "numeric",
+      }),
       "aria-multiselectable": ariaAttr(multiple || range),
       "data-disabled": dataAttr(disabled),
       role: "grid",
@@ -683,7 +725,7 @@ export const useCalendar = <
       onBlur: handlerAll(props.onBlur, onBlur),
       onFocus: handlerAll(props.onFocus, onFocus),
     }),
-    [disabled, locale, month, multiple, onBlur, onFocus, range, t],
+    [dateTimeFormat, disabled, month, multiple, onBlur, onFocus, range],
   )
 
   const getWeekdayProps: RequiredPropGetter<"th", { value: number }> =
@@ -691,10 +733,12 @@ export const useCalendar = <
       ({ value, ...props }) => ({
         "data-disabled": dataAttr(disabled),
         "data-value": value.toString(),
-        abbr: dayjs().locale(locale).set("day", value).format("dddd"),
+        abbr: dateTimeFormat(dayjs().set("day", value).toDate(), {
+          weekday: "long",
+        }),
         ...props,
       }),
-      [disabled, locale],
+      [dateTimeFormat, disabled],
     )
 
   const getButtonProps: PropGetter<"button"> = useCallback(
@@ -792,6 +836,7 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
     onNextMonth,
     onPrevMonth,
   } = useCalendarContext()
+  const dateTimeFormat = useDateTimeFormat({ locale })
   const cellRef = useRef<HTMLTableCellElement>(null)
   const outside = useMemo(() => !isSameMonth(month, value), [month, value])
   const holiday = useMemo(
@@ -987,7 +1032,12 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
   const getDayProps: PropGetter<"td"> = useCallback(
     ({ ref, "aria-label": ariaLabel, ...props } = {}) => {
       if (!ariaLabel) {
-        ariaLabel = dayjs(value).locale(locale).format(t("dddd, MMMM DD, YYYY"))
+        ariaLabel = dateTimeFormat(dayjs(value).toDate(), {
+          day: "numeric",
+          month: "long",
+          weekday: "long",
+          year: "numeric",
+        })
 
         if (today) ariaLabel = `${t("Today")}, ${ariaLabel}`
       }
@@ -1018,10 +1068,10 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
     },
     [
       between,
+      dateTimeFormat,
       disabled,
       endValue,
       holiday,
-      locale,
       onBlur,
       onClick,
       onKeyDown,

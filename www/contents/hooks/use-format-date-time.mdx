@@ -1,0 +1,127 @@
+---
+title: useFormatDateTime
+description: "`useFormatDateTime` is a custom hook for formatting date time."
+storybook: hooks-useformatdatetime--basic
+source: hooks/use-format-date-time
+---
+
+```tsx preview functional client
+const formattedValue = useFormatDateTime(new Date())
+
+return <Text>{formattedValue}</Text>
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { useFormatDateTime } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useFormatDateTime } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useFormatDateTime } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const formattedValue = useFormatDateTime(new Date())
+```
+
+It formats date time according to the specified locale and options. The hook returns the formatted value directly.
+
+:::note
+`useFormatDateTime` internally uses [Intl.DateTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat).
+:::
+
+### Changing the Locale
+
+To change the locale, set a value for [locale](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#locales).
+
+```tsx preview functional client
+const enValue = useFormatDateTime(new Date(), { locale: "en-US" })
+const jaValue = useFormatDateTime(new Date(), { locale: "ja-JP" })
+const deValue = useFormatDateTime(new Date(), { locale: "de-DE" })
+const frValue = useFormatDateTime(new Date(), { locale: "fr-FR" })
+const zhValue = useFormatDateTime(new Date(), { locale: "zh-CN" })
+
+return (
+  <Grid templateColumns="auto 1fr" gap="sm">
+    <Text fontWeight="semibold">en-US</Text>
+    <Text>{enValue}</Text>
+
+    <Text fontWeight="semibold">ja-JP</Text>
+    <Text>{jaValue}</Text>
+
+    <Text fontWeight="semibold">de-DE</Text>
+    <Text>{deValue}</Text>
+
+    <Text fontWeight="semibold">fr-FR</Text>
+    <Text>{frValue}</Text>
+
+    <Text fontWeight="semibold">zh-CN</Text>
+    <Text>{zhValue}</Text>
+  </Grid>
+)
+```
+
+### Set the Locale for the Entire Application
+
+If you want to set the locale for the entire application, set the `locale` for the `UIProvider`.
+
+```tsx
+import { UIProvider } from "@yamada-ui/react"
+
+const App = () => {
+  return (
+    <UIProvider locale="en-US">
+      <YourComponent />
+    </UIProvider>
+  )
+}
+```
+
+### Converting to Year
+
+To convert to year, set a value for [year](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#year).
+
+```tsx preview functional client
+const formattedValue = useFormatDateTime(new Date(), { year: "numeric" })
+
+return <Text>{formattedValue}</Text>
+```
+
+### Converting to Month
+
+To convert to month, set a value for [month](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#month).
+
+```tsx preview functional client
+const formattedValue = useFormatDateTime(new Date(), { month: "long" })
+
+return <Text>{formattedValue}</Text>
+```
+
+### Converting to Day
+
+To convert to day, set a value for [day](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#day).
+
+```tsx preview functional client
+const formattedValue = useFormatDateTime(new Date(), { day: "2-digit" })
+
+return <Text>{formattedValue}</Text>
+```
+
+### Converting to Weekday
+
+To convert to weekday, set a value for [weekday](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#weekday).
+
+```tsx preview functional client
+const formattedValue = useFormatDateTime(new Date(), { weekday: "long" })
+
+return <Text>{formattedValue}</Text>
+```

@@ -286,7 +286,7 @@
         "required": false
       },
       "align": {
-        "type": "\"center\" | \"end\" | \"start\" | (viewSize: number, snapSize: number, index: number) => number ...",
+        "type": "CarouselAlign",
         "defaultValue": "\"center\"",
         "description": "The alignment of the carousel.",
         "required": false
@@ -298,7 +298,7 @@
         "required": false
       },
       "containScroll": {
-        "type": "\"keepSnaps\" | \"trimSnaps\" | false",
+        "type": "CarouselContainScroll",
         "defaultValue": "false",
         "description": "Clear leading and trailing empty space that causes excessive scrolling.\nUse trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them.",
         "required": false
@@ -350,7 +350,7 @@
         "required": false
       },
       "inViewThreshold": {
-        "type": "number | number[]",
+        "type": "CarouselInViewThreshold",
         "defaultValue": "0",
         "description": "Choose a fraction representing the percentage portion of a slide that needs to be visible in order to be considered in view.",
         "required": false
@@ -372,7 +372,7 @@
         "required": false
       },
       "orientation": {
-        "type": "\"horizontal\" | \"vertical\"",
+        "type": "Orientation",
         "defaultValue": "\"horizontal\"",
         "description": "The orientation of the carousel.",
         "required": false
@@ -711,7 +711,7 @@
       "required": false
     },
     "align": {
-      "type": "\"center\" | \"end\" | \"start\" | (viewSize: number, snapSize: number, index: number) => number ...",
+      "type": "CarouselAlign",
       "defaultValue": "\"center\"",
       "description": "The alignment of the carousel.",
       "required": false
@@ -723,7 +723,7 @@
       "required": false
     },
     "containScroll": {
-      "type": "\"keepSnaps\" | \"trimSnaps\" | false",
+      "type": "CarouselContainScroll",
       "defaultValue": "false",
       "description": "Clear leading and trailing empty space that causes excessive scrolling.\nUse trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them.",
       "required": false
@@ -775,7 +775,7 @@
       "required": false
     },
     "inViewThreshold": {
-      "type": "number | number[]",
+      "type": "CarouselInViewThreshold",
       "defaultValue": "0",
       "description": "Choose a fraction representing the percentage portion of a slide that needs to be visible in order to be considered in view.",
       "required": false
@@ -797,7 +797,7 @@
       "required": false
     },
     "orientation": {
-      "type": "\"horizontal\" | \"vertical\"",
+      "type": "Orientation",
       "defaultValue": "\"horizontal\"",
       "description": "The orientation of the carousel.",
       "required": false

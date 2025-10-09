@@ -27,8 +27,8 @@ describe("Function", () => {
 
       handlerAll(mockFn1, mockFn2)(ev)
 
-      expect(mockFn1).toHaveBeenCalledWith(ev)
-      expect(mockFn2).toHaveBeenCalledWith(ev)
+      expect(mockFn1).toHaveBeenCalledExactlyOnceWith(ev)
+      expect(mockFn2).toHaveBeenCalledExactlyOnceWith(ev)
     })
 
     test("should call all passed functions with the event and args", () => {
@@ -39,8 +39,8 @@ describe("Function", () => {
 
       handlerAll(mockFn1, mockFn2)(ev, ...args)
 
-      expect(mockFn1).toHaveBeenCalledWith(ev, ...args)
-      expect(mockFn2).toHaveBeenCalledWith(ev, ...args)
+      expect(mockFn1).toHaveBeenCalledExactlyOnceWith(ev, ...args)
+      expect(mockFn2).toHaveBeenCalledExactlyOnceWith(ev, ...args)
     })
 
     test("should stop calling functions if defaultPrevented is true", () => {
@@ -52,7 +52,7 @@ describe("Function", () => {
 
       handlerAll(mockFn1, mockFn2)(ev)
 
-      expect(mockFn1).toHaveBeenCalledWith(ev)
+      expect(mockFn1).toHaveBeenCalledExactlyOnceWith(ev)
       expect(mockFn2).not.toHaveBeenCalled()
     })
   })
@@ -65,8 +65,8 @@ describe("Function", () => {
 
       fnAll(mockFn1, mockFn2)(arg)
 
-      expect(mockFn1).toHaveBeenCalledWith(arg)
-      expect(mockFn2).toHaveBeenCalledWith(arg)
+      expect(mockFn1).toHaveBeenCalledExactlyOnceWith(arg)
+      expect(mockFn2).toHaveBeenCalledExactlyOnceWith(arg)
     })
 
     test("should call all passed functions with the arguments", () => {
@@ -76,8 +76,8 @@ describe("Function", () => {
 
       fnAll(mockFn1, mockFn2)(...args)
 
-      expect(mockFn1).toHaveBeenCalledWith(...args)
-      expect(mockFn2).toHaveBeenCalledWith(...args)
+      expect(mockFn1).toHaveBeenCalledExactlyOnceWith(...args)
+      expect(mockFn2).toHaveBeenCalledExactlyOnceWith(...args)
     })
   })
 })

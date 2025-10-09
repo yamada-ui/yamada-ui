@@ -108,7 +108,10 @@
     "toc": {
       "title": "このページでは",
       "scrollToTop": "上にスクロールする",
-      "edit": "GitHubでこのページを編集する"
+      "edit": "GitHubでこのページを編集する",
+      "markdown": "Markdownとして表示",
+      "chatgpt": "ChatGPTで開く",
+      "claude": "Claudeで開く"
     },
     "copyButton": {
       "copied": "コピーしました",

@@ -11,7 +11,9 @@ export const useSyncRefs = <T extends { [key: string]: any }>(
   refs: { [K in keyof T]: RefObject<T[K]> },
   syncCallback: (ref: T[keyof T], value: any) => void,
 ) => {
-  const lastSyncedValue = useRef<{ [K in keyof T]: any }>({} as { [K in keyof T]: any })
+  const lastSyncedValue = useRef<{ [K in keyof T]: any }>(
+    {} as { [K in keyof T]: any },
+  )
 
   const resetSync = useCallback(() => {
     lastSyncedValue.current = {} as { [K in keyof T]: any }

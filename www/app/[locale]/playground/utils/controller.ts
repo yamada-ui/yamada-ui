@@ -9,11 +9,11 @@ export const createControllerRefs = <T extends { [key: string]: any }>(
   methods: T,
 ): { [K in keyof T]: RefObject<T[K]> } => {
   const refs = {} as { [K in keyof T]: RefObject<T[K]> }
-  
+
   for (const key in methods) {
     refs[key] = createRef<T[K]>()
   }
-  
+
   return refs
 }
 
@@ -24,14 +24,14 @@ export const createControllerMethods = <T extends { [key: string]: any }>(
   refs: RefObject<{ [K in keyof T]: RefObject<T[K]> }>,
 ): T => {
   const methods = {} as T
-  
+
   for (const key in refs.current) {
     const ref = refs.current[key]
     methods[key] = ((...args: any[]) => {
       return ref.current?.(...args)
     }) as T[Extract<keyof T, string>]
   }
-  
+
   return methods
 }
 

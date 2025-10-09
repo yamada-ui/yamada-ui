@@ -25,7 +25,7 @@ export const CodeMirrorEditor = memo(
     const theme = useColorModeValue(vscodeLight, vscodeDark)
 
     const [value, setValue] = useState(() => {
-      const currentValue = editorState.getValue.current?.()
+      const currentValue = editorState.getValue?.current?.()
       return currentValue ?? initialValue
     })
 
@@ -34,8 +34,8 @@ export const CodeMirrorEditor = memo(
     const handleChange = useCallback(
       (newValue: string) => {
         setValue(newValue)
-        editorState.setValue.current?.(newValue)
-        editorState.notifyChange.current?.(newValue)
+        editorState.setValue?.current?.(newValue)
+        editorState.notifyChange?.current?.(newValue)
         onChange?.(newValue)
       },
       [editorState, onChange],

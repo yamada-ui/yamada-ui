@@ -19,12 +19,12 @@ export const PreviewEditor = memo(
     onChange,
   }: PreviewEditorProps) => {
     const [value, setValue] = useState(() => {
-      const currentValue = editorState.getValue.current?.()
+      const currentValue = editorState.getValue?.current?.()
       return currentValue ?? initialValue
     })
 
     const refresh = useCallback(() => {
-      const currentValue = editorState.getValue.current?.() ?? ""
+      const currentValue = editorState.getValue?.current?.() ?? ""
       setValue(currentValue)
       onChange?.(currentValue)
     }, [editorState, onChange])
@@ -38,7 +38,7 @@ export const PreviewEditor = memo(
     )
 
     useEffect(() => {
-      const unsubscribe = editorState.subscribe.current?.((newValue) => {
+      const unsubscribe = editorState.subscribe?.current?.((newValue) => {
         setValue(newValue)
         onChange?.(newValue)
       })

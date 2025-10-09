@@ -15,9 +15,5 @@ export const PlaygroundErrorBoundary: FC<PlaygroundErrorBoundaryProps> = ({
   children,
   resetKey,
 }) => {
-  return (
-    <ErrorBoundary resetKey={resetKey}>
-      {children}
-    </ErrorBoundary>
-  )
+  return <ErrorBoundary resetKey={resetKey}>{children}</ErrorBoundary>
 }

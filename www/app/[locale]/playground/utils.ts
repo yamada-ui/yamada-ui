@@ -4,9 +4,11 @@ import {
 } from "lz-string"
 
 export const DEFAULT_CODE = `function Demo() {
+  const notice = useNotice()
+
   return (
     <VStack gap="md">
-      <Button colorScheme="primary">Click me</Button>
+      <Button onClick={() => notice({ title: "Hello World!" })}>Click me</Button>
       <Text>Hello Yamada UI</Text>
     </VStack>
   )

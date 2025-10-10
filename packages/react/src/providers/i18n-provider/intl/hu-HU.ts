@@ -76,6 +76,14 @@ const data: IntlData = {
     "Decreased by": "Csökkentve",
     "Increased by": "Növelve",
   },
+  table: {
+    "Clear sorting": "Rendezés törlése",
+    "Page size": "Oldalméret",
+    "Select all rows": "Összes sor kiválasztása",
+    "Select row": "Sor kiválasztása",
+    "Sort ascending": "Növekvő rendezés",
+    "Sort descending": "Csökkenő rendezés",
+  },
   tag: {
     "Close tag": "Címke bezárása",
   },

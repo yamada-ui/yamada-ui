@@ -1,0 +1,282 @@
+{
+  "Table": {
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\"",
+      "defaultValue": "hoge",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"line\" | \"outline\"",
+      "defaultValue": "hoge",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "cellProps": {
+      "type": "TransformProps<NativeTable.TdProps, Cell<Y, unknown>>",
+      "description": "The props for the table cell.",
+      "required": false
+    },
+    "checkboxProps": {
+      "type": "CheckboxProps",
+      "description": "The props for the checkbox.",
+      "required": false
+    },
+    "columnFilters": {
+      "type": "ColumnFiltersState",
+      "description": "The column filters state of the table.",
+      "required": false
+    },
+    "defaultColumnFilters": {
+      "type": "ColumnFiltersState",
+      "description": "The default column filters state of the table.",
+      "required": false
+    },
+    "defaultPagination": {
+      "type": "PaginationState",
+      "description": "The default pagination state of the table.",
+      "required": false
+    },
+    "defaultRowSelection": {
+      "type": "RowSelectionState",
+      "description": "The default row selection state of the table.",
+      "required": false
+    },
+    "defaultSorting": {
+      "type": "SortingState<Y>",
+      "description": "The default sorting state of the table.",
+      "required": false
+    },
+    "enableAutoResizeTableWidth": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the table width will be automatically resized to the content.",
+      "required": false
+    },
+    "enableKeyboardNavigation": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the keyboard navigation will be enabled.",
+      "required": false
+    },
+    "enablePagination": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the pagination will be enabled.",
+      "required": false
+    },
+    "footer": {
+      "type": "ReactNodeOrFunction<ReactTable<Y>>",
+      "description": "The footer of the table.",
+      "required": false
+    },
+    "footerGroupProps": {
+      "type": "TransformProps<NativeTable.TrProps, HeaderGroup<Y>>",
+      "description": "The props for the table footer group.",
+      "required": false
+    },
+    "footerProps": {
+      "type": "TransformProps<NativeTable.ThProps, Header<Y, unknown>>",
+      "description": "The props for the table footer.",
+      "required": false
+    },
+    "header": {
+      "type": "ReactNodeOrFunction<ReactTable<Y>>",
+      "description": "The header of the table.",
+      "required": false
+    },
+    "headerCheckboxProps": {
+      "type": "TransformProps<CheckboxProps, Header<Y, unknown>>",
+      "description": "The props for the table header checkbox.",
+      "required": false
+    },
+    "headerGroupProps": {
+      "type": "TransformProps<NativeTable.TrProps, HeaderGroup<Y>>",
+      "description": "The props for the table header group.",
+      "required": false
+    },
+    "headerProps": {
+      "type": "TransformProps<NativeTable.ThProps, Header<Y, unknown>>",
+      "description": "The props for the table header.",
+      "required": false
+    },
+    "highlightOnHover": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, highlight the row when the table row is hovered.",
+      "required": false
+    },
+    "highlightOnSelected": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, highlight the row when the table row is selected.",
+      "required": false
+    },
+    "initialFocusableCell": {
+      "type": "{ colIndex: number; rowIndex: number }",
+      "defaultValue": "{rowIndex: 0, colIndex: 0}",
+      "description": "The initial focusable cell of the table.",
+      "required": false
+    },
+    "layout": {
+      "type": "\"-moz-initial\" | \"auto\" | \"fixed\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" ...",
+      "description": "The CSS `table-layout` property.",
+      "required": false
+    },
+    "onColumnFiltersChange": {
+      "type": "(columnFilters: ColumnFiltersState) => void",
+      "description": "The callback invoked when the column filters state changes.",
+      "required": false
+    },
+    "onPaginationChange": {
+      "type": "(pagination: PaginationState) => void",
+      "description": "The callback invoked when the pagination state changes.",
+      "required": false
+    },
+    "onRowClick": {
+      "type": "(row: Row<Y>) => void",
+      "description": "The callback invoked when the row is clicked.",
+      "required": false
+    },
+    "onRowDoubleClick": {
+      "type": "(row: Row<Y>) => void",
+      "description": "The callback invoked when the row is double clicked.",
+      "required": false
+    },
+    "onSortingChange": {
+      "type": "(sorting: SortingState<Y>) => void",
+      "description": "The callback invoked when the sorting state changes.",
+      "required": false
+    },
+    "pagination": {
+      "type": "PaginationState",
+      "description": "The pagination state of the table.",
+      "required": false
+    },
+    "resizableTriggerProps": {
+      "type": "TransformProps<Omit<ResizableTriggerProps, \"resizing\">, Header<Y, unknown>>",
+      "description": "The props for the resizable trigger.",
+      "required": false
+    },
+    "rowCheckboxProps": {
+      "type": "TransformProps<CheckboxProps, Row<Y>>",
+      "description": "The props for the table row checkbox.",
+      "required": false
+    },
+    "rowProps": {
+      "type": "TransformProps<NativeTable.TrProps, Row<Y>>",
+      "description": "The props for the table row.",
+      "required": false
+    },
+    "rowSelection": {
+      "type": "RowSelectionState",
+      "description": "The row selection state of the table.",
+      "required": false
+    },
+    "scrollAreaProps": {
+      "type": "NativeTableAreaProps",
+      "description": "The props for the scroll area.",
+      "required": false
+    },
+    "selectOnClickRow": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the row will be selected when the row is clicked.",
+      "required": false
+    },
+    "sorting": {
+      "type": "SortingState<Y>",
+      "description": "The sorting state of the table.",
+      "required": false
+    },
+    "sortingIcon": {
+      "type": "ReactNodeOrFunction<false | SortDirection>",
+      "description": "The sorting icon of the table.",
+      "required": false
+    },
+    "sortingIconProps": {
+      "type": "TransformProps<Omit<SortingIconProps, \"sorted\">, Header<Y, unknown>>",
+      "description": "The props for the sorting icon.",
+      "required": false
+    },
+    "stickyFooter": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, display the sticky footer.",
+      "required": false
+    },
+    "stickyHeader": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, display the sticky header.",
+      "required": false
+    },
+    "striped": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, display striped rows.",
+      "required": false
+    },
+    "tableProps": {
+      "type": "NativeTable.RootProps",
+      "description": "The props for the table.",
+      "required": false
+    },
+    "tbodyProps": {
+      "type": "NativeTable.TbodyProps",
+      "description": "The props for the table tbody.",
+      "required": false
+    },
+    "tfootProps": {
+      "type": "NativeTable.TfootProps",
+      "description": "The props for the table tfoot.",
+      "required": false
+    },
+    "theadProps": {
+      "type": "NativeTable.TheadProps",
+      "description": "The props for the table thead.",
+      "required": false
+    },
+    "withBorder": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, display the outer border of the table.",
+      "required": false
+    },
+    "withCheckbox": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the table will have a checkbox column.",
+      "required": false
+    },
+    "withColumnBorders": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, display line on the columns of the table.",
+      "required": false
+    },
+    "withFooterCheckbox": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the table will have a checkbox in the footer.",
+      "required": false
+    },
+    "withFooterGroups": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the table will have footer groups.",
+      "required": false
+    },
+    "withScrollArea": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "Whether to enable the scroll area.",
+      "required": false
+    }
+  }
+}

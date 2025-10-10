@@ -76,6 +76,14 @@ const data: IntlData = {
     "Decreased by": "Samazināts par",
     "Increased by": "Palielināts par",
   },
+  table: {
+    "Clear sorting": "Notīrīt kārtošanu",
+    "Page size": "Lapas izmērs",
+    "Select all rows": "Izvēlēties visas rindas",
+    "Select row": "Izvēlēties rindu",
+    "Sort ascending": "Kārtot augošā secībā",
+    "Sort descending": "Kārtot dilstošā secībā",
+  },
   tag: {
     "Close tag": "Aizvērt tagu",
   },

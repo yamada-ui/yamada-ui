@@ -30,3 +30,9 @@ import { useTimeout } from "@workspaces/ui"
 ```
 
 :::
+
+```tsx
+const [state, setState] = useState<number>(1)
+
+useTimeout(() => setState((prev) => prev + 1), 3000)
+```

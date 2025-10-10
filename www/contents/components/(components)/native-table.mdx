@@ -56,7 +56,7 @@ style: components/native-table/native-table.style.ts
 </NativeTable.Root>
 ```
 
-## Change Variants
+### Change Variants
 
 ```tsx preview
 <VStack>
@@ -104,7 +104,7 @@ style: components/native-table/native-table.style.ts
 </VStack>
 ```
 
-## Change Size
+### Change Size
 
 ```tsx preview
 <VStack>
@@ -152,13 +152,13 @@ style: components/native-table/native-table.style.ts
 </VStack>
 ```
 
-## Change Color Scheme
+### Change Color Scheme
 
 ```tsx preview
 <VStack>
   <For each={["green", "orange"]}>
-    {(color, index) => (
-      <NativeTable.Root key={index} colorScheme={color} variant="outline">
+    {(colorScheme, index) => (
+      <NativeTable.Root key={index} colorScheme={colorScheme} variant="outline">
         <NativeTable.Thead>
           <NativeTable.Tr>
             <NativeTable.Th>タイトル</NativeTable.Th>
@@ -200,7 +200,7 @@ style: components/native-table/native-table.style.ts
 </VStack>
 ```
 
-## Add Outer Border
+### Add Outer Border
 
 To add an outer border, set `withBorder` to `true`.
 
@@ -244,7 +244,7 @@ To add an outer border, set `withBorder` to `true`.
 </NativeTable.Root>
 ```
 
-## Add Column Separators
+### Add Column Separators
 
 To add column separators, set `withColumnBorders` to `true`.
 
@@ -288,7 +288,7 @@ To add column separators, set `withColumnBorders` to `true`.
 </NativeTable.Root>
 ```
 
-## Highlight on Row Hover
+### Highlight on Row Hover
 
 To highlight rows when hovered, set `highlightOnHover` to `true`.
 
@@ -332,7 +332,7 @@ To highlight rows when hovered, set `highlightOnHover` to `true`.
 </NativeTable.Root>
 ```
 
-## Striped
+### Striped
 
 To enable striped rows, set `striped` to `true`.
 
@@ -382,7 +382,7 @@ To enable striped rows, set `striped` to `true`.
 </VStack>
 ```
 
-## Scroll Area
+### Scroll Area
 
 To enable scroll area, set `withScrollArea` to `true`.
 
@@ -438,7 +438,7 @@ To enable scroll area, set `withScrollArea` to `true`.
 </NativeTable.Root>
 ```
 
-## Sticky Header
+### Sticky Header
 
 To make the header sticky, set `stickyHeader` to `true`.
 
@@ -507,7 +507,7 @@ To make the header sticky, set `stickyHeader` to `true`.
 </NativeTable.Root>
 ```
 
-## Add a Caption
+### Add a Caption
 
 ```tsx preview
 <NativeTable.Root>

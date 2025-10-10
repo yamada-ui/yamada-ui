@@ -5,4 +5,973 @@ storybook: components-table--basic
 source: components/table
 ---
 
+```tsx preview functional
+interface Data {
+  id: string
+  age: number
+  email: string
+  firstName: string
+  lastName: string
+}
+
+const columnHelper = createColumnHelper<Data>()
+
+const columns = useMemo(
+  () => [
+    columnHelper.accessor("id", { cellProps: { numeric: true } }),
+    columnHelper.accessor("firstName", { lineClamp: 1 }),
+    columnHelper.accessor("lastName", { lineClamp: 1 }),
+    columnHelper.accessor("age", { cellProps: { numeric: true } }),
+    columnHelper.accessor("email", { lineClamp: 1 }),
+  ],
+  [],
+)
+
+const data = useMemo<Data[]>(
+  () =>
+    Array.from({ length: 10 }, (_, index) => ({
+      id: index.toString(),
+      age: faker.number.int({ max: 65, min: 18 }),
+      email: faker.internet.email(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+    })),
+  [],
+)
+
+return <Table columns={columns} data={data} withScrollArea />
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Table } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Table } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Table } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Table />
+```
+
+:::note
+`Table`は、内部で[tanstack-table](https://tanstack.com/table)と[NativeTable](/docs/components/native-table)を使用しています。
+:::
+
+### バリアントを変更する
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <VStack>
+    <For each={["line", "outline"]}>
+      {(variant, index) => (
+        <Table
+          key={index}
+          variant={variant}
+          columns={columns}
+          data={data}
+          withScrollArea
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### サイズを変更する
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <VStack>
+    <For each={["sm", "md", "lg"]}>
+      {(size, index) => (
+        <Table
+          key={index}
+          size={size}
+          columns={columns}
+          data={data}
+          withScrollArea
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### カラースキーマを変更する
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <VStack>
+    <For each={["green", "orange"]}>
+      {(colorScheme, index) => (
+        <Table
+          key={index}
+          colorScheme={colorScheme}
+          variant="outline"
+          columns={columns}
+          data={data}
+          withScrollArea
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### 外枠の区切り線を追加する
+
+外枠の区切り線を追加する場合は、`withBorder`を`true`にします。
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return <Table columns={columns} data={data} withBorder withScrollArea />
+```
+
+### 列の区切り線を追加する
+
+列の区切り線を追加する場合は、`withColumnBorders`を`true`にします。
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return <Table columns={columns} data={data} withColumnBorders withScrollArea />
+```
+
+### 行がホバーされたときにハイライトする
+
+行がホバーされたときにハイライトする場合は、`highlightOnHover`を`true`にします。
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return <Table columns={columns} data={data} highlightOnHover withScrollArea />
+```
+
+### ストライプを使う
+
+ストライプを使う場合は、`striped`を`true`にします。
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return <Table columns={columns} data={data} striped withScrollArea />
+```
+
+### スクロールエリアを使う
+
+スクロールエリアを使う場合は、`withScrollArea`を`true`にします。
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return <Table columns={columnsFull} data={data} withScrollArea />
+```
+
+### ヘッダーグループ
+
+```tsx preview functional
+const columns = useMemo(
+  () => [
+    columnHelper.accessor("id", {
+      footer: (info) => info.column.id,
+      cellProps: { numeric: true },
+    }),
+    columnHelper.group({
+      id: "user",
+      columns: [
+        columnHelper.group({
+          id: "name",
+          columns: [
+            columnHelper.accessor("firstName", {
+              footer: (info) => info.column.id,
+              lineClamp: 1,
+            }),
+            columnHelper.accessor("lastName", {
+              footer: (info) => info.column.id,
+              lineClamp: 1,
+            }),
+          ],
+          footer: (info) => info.column.id,
+          header: (info) => info.column.id,
+        }),
+        columnHelper.accessor("age", {
+          footer: (info) => info.column.id,
+          cellProps: { numeric: true },
+        }),
+        columnHelper.accessor("email", {
+          footer: (info) => info.column.id,
+          lineClamp: 1,
+        }),
+      ],
+      footer: (info) => info.column.id,
+      header: (info) => info.column.id,
+    }),
+  ],
+  [],
+)
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    withBorder
+    withColumnBorders
+    withScrollArea
+  />
+)
+```
+
+### フッターグループ
+
+```tsx preview functional
+const columns = useMemo(
+  () => [
+    columnHelper.accessor("id", {
+      footer: (info) => info.column.id,
+      cellProps: { numeric: true },
+    }),
+    columnHelper.group({
+      id: "user",
+      columns: [
+        columnHelper.group({
+          id: "name",
+          columns: [
+            columnHelper.accessor("firstName", {
+              footer: (info) => info.column.id,
+              lineClamp: 1,
+            }),
+            columnHelper.accessor("lastName", {
+              footer: (info) => info.column.id,
+              lineClamp: 1,
+            }),
+          ],
+          footer: (info) => info.column.id,
+          header: (info) => info.column.id,
+        }),
+        columnHelper.accessor("age", {
+          footer: (info) => info.column.id,
+          cellProps: { numeric: true },
+        }),
+        columnHelper.accessor("email", {
+          footer: (info) => info.column.id,
+          lineClamp: 1,
+        }),
+      ],
+      footer: (info) => info.column.id,
+      header: (info) => info.column.id,
+    }),
+  ],
+  [],
+)
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    withBorder
+    withColumnBorders
+    withFooterGroups
+    withScrollArea
+  />
+)
+```
+
+### キーボードナビゲーションを無効にする
+
+キーボードナビゲーションを無効にする場合は、`enableKeyboardNavigation`を`false`に設定します。デフォルトは、`true`です。
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    enableKeyboardNavigation={false}
+    withScrollArea
+  />
+)
+```
+
+### 初回のフォーカス可能なセルを設定する
+
+初回のフォーカス可能なセルを設定する場合は、`initialFocusableCell`にセルの列と行を指定したオブジェクト(`{ colIndex: number, rowIndex: number }`)を設定します。デフォルトは、`{ colIndex: 0, rowIndex: 0 }`です。
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    initialFocusableCell={{ colIndex: 1, rowIndex: 0 }}
+    withScrollArea
+  />
+)
+```
+
+### 行のクリックイベントをハンドルする
+
+行のクリックイベントをハンドルする場合は、`onRowClick`を使用します。
+
+```tsx preview functional client
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    onRowClick={(row) => console.log(row)}
+    withScrollArea
+  />
+)
+```
+
+### 行のダブルクリックイベントをハンドルする
+
+行のダブルクリックイベントをハンドルする場合は、`onRowDoubleClick`を使用します。
+
+```tsx preview functional client
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    onRowDoubleClick={(row) => console.log(row)}
+    withScrollArea
+  />
+)
+```
+
+### デフォルトのソートを設定する
+
+デフォルトのソートを設定する場合は、`defaultSorting`に配列を設定します。配列のオブジェクトには、ソートをする列の`id`と方向を設定します。
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    defaultSorting={[{ id: "age", desc: true }]}
+    withScrollArea
+  />
+)
+```
+
+### ソートを無効にする
+
+ソートを無効にする場合は、`enableSorting`を`false`に設定します。デフォルトは、`true`です。
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <Table columns={columns} data={data} enableSorting={false} withScrollArea />
+)
+```
+
+### 複数列のソートを無効にする
+
+複数列のソートを無効にする場合は、`enableMultiSort`を`false`に設定します。デフォルトは、`true`です。
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <Table columns={columns} data={data} enableMultiSort={false} withScrollArea />
+)
+```
+
+### 最大のソート可能な列数を設定する
+
+最大のソート可能な列数を設定する場合は、`maxMultiSortColCount`に数値を設定します。
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    maxMultiSortColCount={2}
+    withScrollArea
+  />
+)
+```
+
+### 手動のソートを使う
+
+手動のソートを使う場合は、`manualSorting`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional client
+const defaultData = useMemo<Data[]>(() => createData(), [])
+const [data, setData] = useState<Data[]>(defaultData)
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    withScrollArea
+    enableMultiSort={false}
+    manualSorting
+    onSortingChange={(sorting) => {
+      if (sorting.length) {
+        const { id, desc } = sorting[0]!
+
+        setData((prev) =>
+          prev.toSorted((a, b) => {
+            if (isNumber(a[id]) && isNumber(b[id])) {
+              return desc ? a[id] - b[id] : b[id] - a[id]
+            } else if (isString(a[id]) && isString(b[id])) {
+              return desc
+                ? a[id].localeCompare(b[id])
+                : b[id].localeCompare(a[id])
+            }
+
+            return 0
+          }),
+        )
+      } else {
+        setData(defaultData)
+      }
+      console.log(sorting)
+    }}
+  />
+)
+```
+
+### ソートの切り替えを変更する
+
+デフォルトでは、ソートが有効になったとき、昇順から始まります。もし、降順から始めたい場合は、`sortDescFirst`を`true`に設定するか、特定の列だけ設定したい場合は、`columns`の列ごとに`sortDescFirst`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return <Table columns={columns} data={data} sortDescFirst withScrollArea />
+```
+
+### ソートを制御する
+
+```tsx preview functional client
+const [sorting, setSorting] = useState<SortingState<Data>>([
+  { id: "age", desc: true },
+])
+const data = useMemo<Data[]>(() => createData(), [])
+
+return <Table columns={columns} data={data} withScrollArea />
+```
+
+### ページネーションを有効にする
+
+ページネーションを有効にする場合は、`enablePagination`を`true`に設定し、ページネーションをコントロールするコンポーネントを`header`または`footer`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional client
+const { t } = useI18n("table")
+const data = useMemo<Data[]>(() => createData(40), [])
+
+return (
+  <VStack>
+    <Table
+      columns={columns}
+      data={data}
+      enablePagination
+      footer={(table) => {
+        const page = table.getState().pagination.pageIndex + 1
+        const pageSize = table.getState().pagination.pageSize
+        const total = table.getPageCount()
+
+        return (
+          <Grid templateColumns="1fr 1fr 1fr" w="full">
+            <Pagination.Root
+              size={{ base: "sm", sm: "xs" }}
+              gridColumn="2 / 3"
+              page={page}
+              total={total}
+              onChange={(page) => table.setPageIndex(page - 1)}
+            />
+
+            <Select.Root
+              size={{ base: "sm", sm: "xs" }}
+              aria-label={t("Page size")}
+              items={[
+                { label: "10", value: "10" },
+                { label: "20", value: "20" },
+                { label: "30", value: "30" },
+                { label: "40", value: "40" },
+                { label: "50", value: "50" },
+              ]}
+              value={pageSize.toString()}
+              rootProps={{ justifySelf: "end", w: "5xs" }}
+              onChange={(value) => table.setPageSize(Number(value))}
+            />
+          </Grid>
+        )
+      }}
+      withScrollArea
+    />
+  </VStack>
+)
+```
+
+### デフォルトのページインデックスとページサイズを設定する
+
+デフォルトのページインデックスとページサイズを設定する場合は、`defaultPagination`にオブジェクトを設定します。オブジェクトには、`pageIndex`と`pageSize`を設定します。
+
+```tsx preview functional client
+const { t } = useI18n("table")
+const data = useMemo<Data[]>(() => createData(20), [])
+
+return (
+  <VStack>
+    <Table
+      columns={columns}
+      data={data}
+      enablePagination
+      defaultPagination={{ pageIndex: 1, pageSize: 10 }}
+      footer={(table) => {
+        const page = table.getState().pagination.pageIndex + 1
+        const pageSize = table.getState().pagination.pageSize
+        const total = table.getPageCount()
+
+        return (
+          <Grid templateColumns="1fr 1fr 1fr" w="full">
+            <Pagination.Root
+              size={{ base: "sm", sm: "xs" }}
+              gridColumn="2 / 3"
+              page={page}
+              total={total}
+              onChange={(page) => table.setPageIndex(page - 1)}
+            />
+
+            <Select.Root
+              size={{ base: "sm", sm: "xs" }}
+              aria-label={t("Page size")}
+              items={[
+                { label: "10", value: "10" },
+                { label: "20", value: "20" },
+                { label: "30", value: "30" },
+                { label: "40", value: "40" },
+                { label: "50", value: "50" },
+              ]}
+              value={pageSize.toString()}
+              rootProps={{ justifySelf: "end", w: "5xs" }}
+              onChange={(value) => table.setPageSize(Number(value))}
+            />
+          </Grid>
+        )
+      }}
+      withScrollArea
+    />
+  </VStack>
+)
+```
+
+### 手動のページネーションを使う
+
+手動のページネーションを使う場合は、`manualPagination`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional client
+const { t } = useI18n("table")
+const [pagination, setPagination] = useState<PaginationState>({
+  pageIndex: 0,
+  pageSize: 20,
+})
+const rowCount = 40
+const defaultData = useMemo<Data[]>(() => createData(rowCount), [])
+const data = useMemo<Data[]>(
+  () =>
+    defaultData.slice(
+      pagination.pageIndex * pagination.pageSize,
+      (pagination.pageIndex + 1) * pagination.pageSize,
+    ),
+  [defaultData, pagination],
+)
+
+return (
+  <VStack>
+    <Table
+      columns={columns}
+      data={data}
+      enablePagination
+      manualPagination
+      pagination={pagination}
+      rowCount={rowCount}
+      onPaginationChange={setPagination}
+      footer={(table) => {
+        const page = table.getState().pagination.pageIndex + 1
+        const pageSize = table.getState().pagination.pageSize
+        const total = table.getPageCount()
+
+        return (
+          <Grid templateColumns="1fr 1fr 1fr" w="full">
+            <Pagination.Root
+              size={{ base: "sm", sm: "xs" }}
+              gridColumn="2 / 3"
+              page={page}
+              total={total}
+              onChange={(page) => table.setPageIndex(page - 1)}
+            />
+
+            <Select.Root
+              size={{ base: "sm", sm: "xs" }}
+              aria-label={t("Page size")}
+              items={[
+                { label: "10", value: "10" },
+                { label: "20", value: "20" },
+                { label: "30", value: "30" },
+                { label: "40", value: "40" },
+                { label: "50", value: "50" },
+              ]}
+              value={pageSize.toString()}
+              rootProps={{ justifySelf: "end", w: "5xs" }}
+              onChange={(value) => table.setPageSize(Number(value))}
+            />
+          </Grid>
+        )
+      }}
+      withScrollArea
+    />
+  </VStack>
+)
+```
+
+### ページネーションを制御する
+
+```tsx preview functional client
+const [pagination, setPagination] = useState<PaginationState>({
+  pageIndex: 0,
+  pageSize: 20,
+})
+const { t } = useI18n("table")
+const data = useMemo<Data[]>(() => createData(40), [])
+
+return (
+  <VStack>
+    <Table
+      columns={columns}
+      data={data}
+      enablePagination
+      pagination={pagination}
+      onPaginationChange={setPagination}
+      footer={(table) => {
+        const page = table.getState().pagination.pageIndex + 1
+        const pageSize = table.getState().pagination.pageSize
+        const total = table.getPageCount()
+
+        return (
+          <Grid templateColumns="1fr 1fr 1fr" w="full">
+            <Pagination.Root
+              size={{ base: "sm", sm: "xs" }}
+              gridColumn="2 / 3"
+              page={page}
+              total={total}
+              onChange={(page) => table.setPageIndex(page - 1)}
+            />
+
+            <Select.Root
+              size={{ base: "sm", sm: "xs" }}
+              aria-label={t("Page size")}
+              items={[
+                { label: "10", value: "10" },
+                { label: "20", value: "20" },
+                { label: "30", value: "30" },
+                { label: "40", value: "40" },
+                { label: "50", value: "50" },
+              ]}
+              value={pageSize.toString()}
+              rootProps={{ justifySelf: "end", w: "5xs" }}
+              onChange={(value) => table.setPageSize(Number(value))}
+            />
+          </Grid>
+        )
+      }}
+      withScrollArea
+    />
+  </VStack>
+)
+```
+
+### 行の選択を有効にする
+
+行の選択を有効にする場合は、`enableRowSelection`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return <Table columns={columns} data={data} enableRowSelection withScrollArea />
+```
+
+### デフォルトの選択された行を設定する
+
+デフォルトの選択された行を設定する場合は、`defaultRowSelection`に`data`のインデックスをキーとしたオブジェクトを設定します。
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    enableRowSelection
+    defaultRowSelection={{ 0: true }}
+    withScrollArea
+  />
+)
+```
+
+### 行のクリックで選択を有効にする
+
+行のクリックで選択を有効にする場合は、`selectOnClickRow`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    enableRowSelection
+    selectOnClickRow
+    withScrollArea
+  />
+)
+```
+
+### チェックボックスを非表示にする
+
+チェックボックスを非表示にする場合は、`withCheckbox`を`false`に設定します。デフォルトは、`true`です。
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    enableRowSelection
+    selectOnClickRow
+    withCheckbox={false}
+    withScrollArea
+  />
+)
+```
+
+### 行を無効にする
+
+行を無効にする場合は、`enableRowSelection`に条件の関数を設定します。
+
+```tsx preview functional client
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    enableRowSelection={(row) => row.id !== "1"}
+    withScrollArea
+  />
+)
+```
+
+### 行の選択を制御する
+
+```tsx preview functional client
+const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    enableRowSelection
+    rowSelection={rowSelection}
+    onRowSelectionChange={setRowSelection}
+    withScrollArea
+  />
+)
+```
+
+### フィルターを使う
+
+フィルターを使う場合は、フィルターをコントロールするコンポーネントを`header`または`footer`に設定します。
+
+```tsx preview functional client
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <VStack>
+    <Table
+      columns={columns}
+      data={data}
+      header={(table) => {
+        const value =
+          (table.getColumn("email")?.getFilterValue() as string | undefined) ??
+          ""
+
+        return (
+          <InputGroup.Root>
+            <InputGroup.Element>
+              <SearchIcon />
+            </InputGroup.Element>
+
+            <Input
+              placeholder="Filter emails"
+              value={value}
+              onChange={(ev) =>
+                table.getColumn("email")?.setFilterValue(ev.target.value)
+              }
+            />
+          </InputGroup.Root>
+        )
+      }}
+      withScrollArea
+    />
+  </VStack>
+)
+```
+
+### デフォルトのフィルターを設定する
+
+デフォルトのフィルターを設定する場合は、`defaultColumnFilters`に配列を設定します。配列のオブジェクトには、フィルターする列の`id`と値を設定します。
+
+```tsx preview functional client
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <VStack>
+    <Table
+      columns={columns}
+      data={data}
+      defaultColumnFilters={[{ id: "email", value: "gmail" }]}
+      header={(table) => {
+        const value =
+          (table.getColumn("email")?.getFilterValue() as string | undefined) ??
+          ""
+
+        return (
+          <InputGroup.Root>
+            <InputGroup.Element>
+              <SearchIcon />
+            </InputGroup.Element>
+
+            <Input
+              placeholder="Filter emails"
+              value={value}
+              onChange={(ev) =>
+                table.getColumn("email")?.setFilterValue(ev.target.value)
+              }
+            />
+          </InputGroup.Root>
+        )
+      }}
+      withScrollArea
+    />
+  </VStack>
+)
+```
+
+### フィルターを制御する
+
+```tsx preview functional client
+const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([
+  { id: "email", value: "" },
+])
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <VStack>
+    <Table
+      columns={columns}
+      data={data}
+      columnFilters={columnFilters}
+      onColumnFiltersChange={setColumnFilters}
+      header={(table) => {
+        const value =
+          (table.getColumn("email")?.getFilterValue() as string | undefined) ??
+          ""
+
+        return (
+          <InputGroup.Root>
+            <InputGroup.Element>
+              <SearchIcon />
+            </InputGroup.Element>
+
+            <Input
+              placeholder="Filter emails"
+              value={value}
+              onChange={(ev) =>
+                table.getColumn("email")?.setFilterValue(ev.target.value)
+              }
+            />
+          </InputGroup.Root>
+        )
+      }}
+      withScrollArea
+    />
+  </VStack>
+)
+```
+
+### 列のサイズ変更を有効にする
+
+列のサイズ変更を有効にする場合は、`enableColumnResizing`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    enableColumnResizing
+    withBorder
+    withColumnBorders
+  />
+)
+```
+
+### 列のサイズ変更の方法を変更する
+
+デフォルトでは、列のサイズ変更のタイミングは、ドラッグしている間に変更されます。ドラッグが終わったときに変更する場合は、`columnResizeMode`に`"onEnd"`を設定します。
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    enableColumnResizing
+    columnResizeMode="onEnd"
+    withBorder
+    withColumnBorders
+  />
+)
+```
+
+## Props
+
+<PropsTable name="table" />

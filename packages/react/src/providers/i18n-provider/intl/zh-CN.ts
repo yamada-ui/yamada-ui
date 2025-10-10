@@ -76,6 +76,14 @@ const data: IntlData = {
     "Decreased by": "减少",
     "Increased by": "增加",
   },
+  table: {
+    "Clear sorting": "清除排序",
+    "Page size": "页面大小",
+    "Select all rows": "选择所有行",
+    "Select row": "选择行",
+    "Sort ascending": "升序排序",
+    "Sort descending": "降序排序",
+  },
   tag: {
     "Close tag": "关闭标签",
   },

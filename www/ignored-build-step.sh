@@ -1,8 +1,12 @@
 #!/bin/bash
 
-echo "VERCEL_GIT_COMMIT_REF: $VERCEL_GIT_COMMIT_REF"
-
+IGNORE_URL="yamada-ui.com"
 TARGET_BRANCH="main"
+
+if [ "$VERCEL_PROJECT_PRODUCTION_URL" == "$IGNORE_URL" ]; then
+  echo "Run was canceled because '$VERCEL_PROJECT_PRODUCTION_URL' is the ignore URL."
+  exit 0
+fi
 
 if [ "$VERCEL_GIT_COMMIT_REF" == "$TARGET_BRANCH" ]; then
   git_diff_result=$(git diff --name-only HEAD^ HEAD)

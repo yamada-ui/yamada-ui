@@ -76,6 +76,14 @@ const data: IntlData = {
     "Decreased by": "הוקטן ב",
     "Increased by": "הוגדל ב",
   },
+  table: {
+    "Clear sorting": "נקה מיון",
+    "Page size": "גודל עמוד",
+    "Select all rows": "בחר את כל השורות",
+    "Select row": "בחר שורה",
+    "Sort ascending": "מיין בסדר עולה",
+    "Sort descending": "מיין בסדר יורד",
+  },
   tag: {
     "Close tag": "סגור תג",
   },

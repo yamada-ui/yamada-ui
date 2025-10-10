@@ -76,6 +76,14 @@ const data: IntlData = {
     "Decreased by": "감소",
     "Increased by": "증가",
   },
+  table: {
+    "Clear sorting": "정렬 해제",
+    "Page size": "페이지 크기",
+    "Select all rows": "모든 행 선택",
+    "Select row": "행 선택",
+    "Sort ascending": "오름차순 정렬",
+    "Sort descending": "내림차순 정렬",
+  },
   tag: {
     "Close tag": "태그 닫기",
   },

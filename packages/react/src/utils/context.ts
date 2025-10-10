@@ -3,10 +3,6 @@
 import { use } from "react"
 import * as React from "react"
 
-export type ReactNodeOrFunction<Y = unknown> =
-  | ((props: Y) => React.ReactNode)
-  | React.ReactNode
-
 function getErrorMessage(hookName: string, ContextName: string) {
   return `${hookName} returned \`undefined\`. Seems you forgot to wrap component within ${ContextName}`
 }

@@ -10,7 +10,6 @@ echo "VERCEL_PROJECT_PRODUCTION_URL: $VERCEL_PROJECT_PRODUCTION_URL"
 
 TARGET_BRANCH="main"
 
-
 if [ "$VERCEL_GIT_COMMIT_REF" == "$TARGET_BRANCH" ]; then
   git_diff_result=$(git diff --name-only HEAD^ HEAD)
 else

@@ -26,7 +26,7 @@ export default function Page() {
           children: t("primaryAction"),
         }}
         secondaryButtonProps={{
-          href: "/docs/components/icon",
+          href: "/docs/get-started",
           children: t("secondaryAction"),
         }}
       />

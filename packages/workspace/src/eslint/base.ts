@@ -76,6 +76,7 @@ export const baseConfigArray = [
       "**/coverage/**",
       "**/storybook-static/**",
       "pnpm-lock.yaml",
+      "next-env.d.ts",
     ],
   } satisfies TSESLint.FlatConfig.Config,
 ]

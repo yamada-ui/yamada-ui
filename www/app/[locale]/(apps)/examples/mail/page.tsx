@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { getTranslations } from "next-intl/server"
+import { SourceCodeLink } from "../source-code-link"
 import { Mail } from "./mail"
 
 export async function generateMetadata({
@@ -12,5 +13,11 @@ export async function generateMetadata({
 }
 
 export default function Page() {
-  return <Mail />
+  return (
+    <>
+      <Mail />
+
+      <SourceCodeLink page="mail" />
+    </>
+  )
 }

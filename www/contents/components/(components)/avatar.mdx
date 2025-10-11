@@ -41,6 +41,18 @@ import { Avatar, AvatarGroup } from "@workspaces/ui"
 </AvatarGroup.Root>
 ```
 
+### Change Variant
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["solid", "subtle", "surface", "outline"]}>
+    {(variant, key) => (
+      <Avatar variant={variant} name="Hirotomo Yamada" key={key} />
+    )}
+  </For>
+</Wrap>
+```
+
 ### Change Size
 
 ```tsx preview

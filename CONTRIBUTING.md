@@ -58,6 +58,10 @@ To improve our development process, we have set up tools and systems. Yamada UI 
   "prettier.requireConfig": true,
   "eslint.workingDirectories": [
     "www",
+    "packages/cli",
+    "packages/react",
+    "packages/utils",
+    "packages/workspace",
     "playgrounds/next/app",
     "playgrounds/next/pages",
     "playgrounds/remix",

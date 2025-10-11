@@ -23,11 +23,11 @@ export default function Page() {
         description={t("description")}
         title={t("title")}
         primaryButtonProps={{
-          href: "/themes#themes",
+          href: "/docs/theming",
           children: t("primaryAction"),
         }}
         secondaryButtonProps={{
-          href: "/docs/theming",
+          href: "/docs/get-started",
           children: t("secondaryAction"),
         }}
       />

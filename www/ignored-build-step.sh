@@ -1,10 +1,10 @@
 #!/bin/bash
 
-IGNORE_URL="v2.yamada-ui.com"
+TARGET_URL="yamada-ui.com"
 TARGET_BRANCH="v1"
 
-if [ "$VERCEL_PROJECT_PRODUCTION_URL" == "$IGNORE_URL" ]; then
-  echo "Run was canceled because '$VERCEL_PROJECT_PRODUCTION_URL' is the ignore URL."
+if [ "$VERCEL_PROJECT_PRODUCTION_URL" != "$TARGET_URL" ]; then
+  echo "Run was canceled because '$VERCEL_PROJECT_PRODUCTION_URL' is not the target URL."
   exit 0
 fi
 

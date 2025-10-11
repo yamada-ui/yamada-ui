@@ -3,11 +3,12 @@
 import type { LineProps } from "recharts"
 import type { HTMLStyledProps } from "../../core"
 import type { Dict } from "../../utils"
+import type { GridProps } from "./grid"
 import type { LineChartStyle } from "./line-chart.style"
 import { Line, LineChart, ResponsiveContainer } from "recharts"
 import { createSlotComponent, styled } from "../../core"
 import { useSplitChildren } from "../../utils"
-import { Grid } from "./grid"
+import { Grid, GridComponentContext } from "./grid"
 import { Legend } from "./legend"
 import { lineChartStyle } from "./line-chart.style"
 import { Tooltip } from "./tooltip"
@@ -49,9 +50,11 @@ export interface LineChartRootProps extends HTMLStyledProps {
    * @default true
    */
   withYAxis?: boolean
+  /**
+   * Props passed down to recharts 'CartesianGrid' component.
+   */
+  gridProps?: GridProps
 }
-
-// TODO: それぞれを単体のコンポーネントとして用意して、ProviderをLineChart.Rootで囲むようにする。
 
 const {
   PropsContext: LineChartPropsContext,
@@ -74,6 +77,7 @@ export const LineChartRoot = withProvider<"div", LineChartRootProps>(
     withTooltip = true,
     withXAxis = true,
     withYAxis = true,
+    gridProps = {},
     ...props
   }) => {
     const [
@@ -86,19 +90,21 @@ export const LineChartRoot = withProvider<"div", LineChartRootProps>(
     ] = useSplitChildren(children, Grid, XAxis, YAxis, Tooltip, Legend)
 
     return (
-      <styled.div {...props}>
-        <ResponsiveContainer>
-          <LineChart data={data}>
-            {customGrid ?? (withGrid ? <Grid strokeDasharray="3 3" /> : null)}
-            {customXAxis ?? (withXAxis ? <XAxis dataKey="name" /> : null)}
-            {customYAxis ?? (withYAxis ? <YAxis /> : null)}
-            {customTooltip ?? (withTooltip ? <Tooltip /> : null)}
-            {customLegend ?? (withLegend ? <Legend /> : null)}
+      <GridComponentContext value={gridProps}>
+        <styled.div {...props}>
+          <ResponsiveContainer>
+            <LineChart data={data}>
+              {customGrid ?? (withGrid ? <Grid /> : null)}
+              {customXAxis ?? (withXAxis ? <XAxis dataKey="name" /> : null)}
+              {customYAxis ?? (withYAxis ? <YAxis /> : null)}
+              {customTooltip ?? (withTooltip ? <Tooltip /> : null)}
+              {customLegend ?? (withLegend ? <Legend /> : null)}
 
-            {omittedChildren}
-          </LineChart>
-        </ResponsiveContainer>
-      </styled.div>
+              {omittedChildren}
+            </LineChart>
+          </ResponsiveContainer>
+        </styled.div>
+      </GridComponentContext>
     )
   },
   "root",

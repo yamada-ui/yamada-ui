@@ -7,18 +7,26 @@ import { createComponent } from "../../core"
 import { gridStyle } from "../grid"
 import { useGrid } from "./use-grid"
 
-interface GridProps extends UseGridProps {}
+export interface GridProps extends UseGridProps {}
 
 const {
+  ComponentContext: GridComponentContext,
   PropsContext: GridPropsContext,
+  useComponentContext: useGridComponentContext,
   usePropsContext: useGridPropsContext,
   withContext,
-} = createComponent<GridProps, GridStyle>("chart-grid", gridStyle)
+} = createComponent<GridProps, GridStyle, GridProps>("chart-grid", gridStyle)
 
-export { GridPropsContext, useGridPropsContext }
+export {
+  GridComponentContext,
+  GridPropsContext,
+  useGridComponentContext,
+  useGridPropsContext,
+}
 
 export const Grid = withContext<"div", GridProps>(CartesianGrid)((props) => {
-  const { getGridProps } = useGrid(props)
+  const customProps = useGridComponentContext()
+  const { getGridProps } = useGrid({ ...customProps, ...props })
 
   return getGridProps()
 })

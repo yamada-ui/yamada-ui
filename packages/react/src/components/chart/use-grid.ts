@@ -12,7 +12,7 @@ export interface UseGridProps
   /**
    * Specifies which lines should be displayed in the grid.
    *
-   * @default 'x'
+   * @default 'xy'
    */
   gridAxis?: "none" | "x" | "xy" | "y"
   /**
@@ -24,7 +24,7 @@ export interface UseGridProps
 }
 
 export const useGrid = (props: UseGridProps) => {
-  const { css, gridAxis = "x", strokeDasharray = "5 5" } = props
+  const { css, gridAxis = "xy", strokeDasharray = "5 5" } = props
 
   const { theme } = useTheme()
   const system = useSystem()

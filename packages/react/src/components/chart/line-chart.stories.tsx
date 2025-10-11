@@ -36,7 +36,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const CustomComponent: Story = () => {
+export const CustomComponents: Story = () => {
   const data = useMemo(
     () =>
       Array(7)
@@ -106,6 +106,16 @@ export const CustomGrid: Story = () => {
         <LineChart.Line type="monotone" dataKey="pv" stroke="#8884d8" />
 
         <LineChart.Grid gridAxis="none" />
+      </LineChart.Root>
+
+      <LineChart.Root
+        data={data}
+        h="sm"
+        w="3xl"
+        gridProps={{ gridAxis: "y", stroke: "orange.500" }}
+      >
+        <LineChart.Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+        <LineChart.Line type="monotone" dataKey="pv" stroke="#8884d8" />
       </LineChart.Root>
     </VStack>
   )

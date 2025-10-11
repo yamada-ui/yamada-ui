@@ -6,17 +6,17 @@ const data: IntlData = {
     "No results found": "결과를 찾을 수 없습니다",
   },
   avatar: {
-    "Avatar Icon": "아바타 아이콘",
+    "Avatar Icon": "유저 아이콘",
   },
   breadcrumb: {
-    Breadcrumb: "빵 부스러기",
+    Breadcrumb: "브레드크럼",
     Ellipsis: "생략 부호",
   },
   calendar: {
     "Choose the month": "월 선택",
     "Choose the year": "연도 선택",
-    "Go to the next month": "다음 달로 이동",
-    "Go to the previous month": "이전 달로 이동",
+    "Go to the next month": "다음 월로 이동",
+    "Go to the previous month": "이전 월로 이동",
     Today: "오늘",
   },
   carousel: {
@@ -34,7 +34,7 @@ const data: IntlData = {
   },
   hueSlider: {
     Blue: "파랑",
-    Cyan: "청록",
+    Cyan: "시안",
     Green: "초록",
     Magenta: "마젠타",
     Red: "빨강",
@@ -54,13 +54,13 @@ const data: IntlData = {
     "Go to next page": "다음 페이지로 이동",
     "Go to page {value}": "페이지 {value}로 이동",
     "Go to previous page": "이전 페이지로 이동",
-    Pagination: "페이지 매김",
+    Pagination: "페이지네이션",
     "{value} / {total}": "{value} / {total}",
-    "{value} of {total}": "{value} / {total}",
+    "{value} of {total}": "{value} / {total} 페이지",
   },
   passwordInput: {
-    "Password strength meter": "비밀번호 강도 측정기",
-    "Toggle password visibility": "비밀번호 가시성 전환",
+    "Password strength meter": "비밀번호 보안 강도",
+    "Toggle password visibility": "비밀번호 표시",
   },
   progress: {
     "Loading...": "로딩 중...",
@@ -70,11 +70,19 @@ const data: IntlData = {
     "Clear value": "값 지우기",
   },
   slider: {
-    "Slider thumb": "슬라이더 엄지",
+    "Slider thumb": "슬라이더 핸들",
   },
   stat: {
     "Decreased by": "감소",
     "Increased by": "증가",
+  },
+  table: {
+    "Clear sorting": "정렬 해제",
+    "Page size": "페이지 크기",
+    "Select all rows": "모든 행 선택",
+    "Select row": "행 선택",
+    "Sort ascending": "오름차순 정렬",
+    "Sort descending": "내림차순 정렬",
   },
   tag: {
     "Close tag": "태그 닫기",

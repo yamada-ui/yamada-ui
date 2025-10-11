@@ -1,16 +1,98 @@
 import type { ComponentType } from "react"
 import type { Transform } from "sucrase"
+import { faker } from "@faker-js/faker"
 import { burger } from "@lucide/lab"
 import * as Components from "@yamada-ui/react"
-import { isFunction, Text } from "@yamada-ui/react"
+import { createColumnHelper, isFunction, Text } from "@yamada-ui/react"
 import { AnimatePresence } from "motion/react"
 import React, { isValidElement } from "react"
 import { transform as originalTransform } from "sucrase"
 import { wait } from "@/utils/async"
 
+interface Data {
+  id: string
+  age: number
+  createdAt: Date
+  email: string
+  firstName: string
+  lastName: string
+  phone: string
+  role: string
+  status: string
+  updatedAt: Date
+}
+
+const columnHelper = createColumnHelper<Data>()
+
+function createData(length = 10): Data[] {
+  return Array.from({ length }, function (_, index) {
+    return {
+      id: index.toString(),
+      age: faker.number.int({ max: 65, min: 18 }),
+      createdAt: faker.date.past(),
+      email: faker.internet.email(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      phone: faker.phone.number(),
+      role: faker.helpers.arrayElement(["admin", "user"]),
+      status: faker.helpers.arrayElement(["active", "inactive"]),
+      updatedAt: faker.date.past(),
+    }
+  })
+}
+
+const columns = [
+  columnHelper.accessor("id", {
+    footer: (info) => info.column.id,
+    cellProps: { numeric: true },
+  }),
+  columnHelper.accessor("firstName", {
+    footer: (info) => info.column.id,
+    lineClamp: 1,
+  }),
+  columnHelper.accessor("lastName", {
+    footer: (info) => info.column.id,
+    lineClamp: 1,
+  }),
+  columnHelper.accessor("age", {
+    footer: (info) => info.column.id,
+    cellProps: { numeric: true },
+  }),
+  columnHelper.accessor("email", {
+    footer: (info) => info.column.id,
+    lineClamp: 1,
+  }),
+]
+
+const columnsFull = [
+  ...columns,
+  columnHelper.accessor("phone", {
+    footer: (info) => info.column.id,
+  }),
+  columnHelper.accessor("role", {
+    footer: (info) => info.column.id,
+  }),
+  columnHelper.accessor("status", {
+    footer: (info) => info.column.id,
+  }),
+  columnHelper.accessor("createdAt", {
+    cell: (info) => info.getValue().toLocaleDateString(),
+    footer: (info) => info.column.id,
+  }),
+  columnHelper.accessor("updatedAt", {
+    cell: (info) => info.getValue().toLocaleDateString(),
+    footer: (info) => info.column.id,
+  }),
+]
+
 const components = {
   AnimatePresence,
   burger,
+  columnHelper,
+  columns,
+  columnsFull,
+  createData,
+  faker,
   React,
   wait,
   ...React,

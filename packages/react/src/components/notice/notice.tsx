@@ -81,8 +81,10 @@ export const NoticeRoot = withProvider<"fragment", NoticeRootProps>(
       <styled.div {...rest}>
         <Toaster
           id={getId(placement)}
+          containerAriaLabel=""
           expand={expand}
           gap={16}
+          hotkey={[]}
           mobileOffset="var(--mobile-offset)"
           offset="var(--offset)"
           position={position}

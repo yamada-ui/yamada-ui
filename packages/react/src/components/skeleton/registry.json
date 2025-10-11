@@ -3,7 +3,7 @@
   "dependencies": {
     "components": [],
     "externals": [],
-    "hooks": ["use-value"],
+    "hooks": [],
     "providers": []
   },
   "section": "components",
@@ -18,7 +18,7 @@
     },
     {
       "name": "skeleton-text.tsx",
-      "content": "\"use client\"\n\nimport type { Component, HTMLStyledProps, StyleValue } from \"@yamada-ui/react\"\nimport type { SkeletonProps } from \"./skeleton\"\nimport { mergeCSS, styled } from \"@yamada-ui/react\"\nimport { useValue } from \"../../hooks/use-value\"\nimport { Skeleton } from \"./skeleton\"\n\nexport interface SkeletonTextProps extends Omit<SkeletonProps, \"lineClamp\"> {\n  /**\n   * The number of lines to display.\n   */\n  lineClamp?: StyleValue<number>\n  /**\n   * Props for the root element.\n   */\n  rootProps?: HTMLStyledProps\n}\n\nexport const SkeletonText = (({\n  css,\n  children,\n  gap = \"2\",\n  lineClamp: lineClampProp = 3,\n  loading = true,\n  _loading,\n  _notFirst,\n  rootProps,\n  ...rest\n}: SkeletonTextProps) => {\n  const lineClamp = useValue(lineClampProp)\n\n  return (\n    <styled.div w=\"full\" {...rootProps}>\n      {Array.from({ length: lineClamp }).map((_, index) => {\n        if (!loading && index > 0) return null\n\n        return (\n          <Skeleton\n            key={index}\n            css={mergeCSS(css, { \"--height\": \"sizes.4\" })}\n            loading={loading}\n            _loading={{\n              _last: { maxW: lineClamp > 1 ? \"80%\" : \"100%\" },\n              ..._loading,\n            }}\n            _notFirst={{ mt: gap, ..._notFirst }}\n            {...rest}\n          >\n            {!loading && index === 0 ? children : undefined}\n          </Skeleton>\n        )\n      })}\n    </styled.div>\n  )\n}) as Component<\"div\", SkeletonTextProps>\n"
+      "content": "\"use client\"\n\nimport type { Component, HTMLStyledProps } from \"@yamada-ui/react\"\nimport type { SkeletonProps } from \"./skeleton\"\nimport { mergeCSS, styled } from \"@yamada-ui/react\"\nimport { Skeleton } from \"./skeleton\"\n\nexport interface SkeletonTextProps extends Omit<SkeletonProps, \"lineClamp\"> {\n  /**\n   * The number of lines to display.\n   */\n  lineClamp?: number\n  /**\n   * Props for the root element.\n   */\n  rootProps?: HTMLStyledProps\n}\n\nexport const SkeletonText = (({\n  css,\n  children,\n  gap = \"2\",\n  lineClamp = 3,\n  loading = true,\n  _loading,\n  _notFirst,\n  rootProps,\n  ...rest\n}: SkeletonTextProps) => {\n  return (\n    <styled.div w=\"full\" {...rootProps}>\n      {Array.from({ length: lineClamp }).map((_, index) => {\n        if (!loading && index > 0) return null\n\n        return (\n          <Skeleton\n            key={index}\n            css={mergeCSS(css, { \"--height\": \"sizes.4\" })}\n            loading={loading}\n            _loading={{\n              _last: { maxW: lineClamp > 1 ? \"80%\" : \"100%\" },\n              ..._loading,\n            }}\n            _notFirst={{ mt: gap, ..._notFirst }}\n            {...rest}\n          >\n            {!loading && index === 0 ? children : undefined}\n          </Skeleton>\n        )\n      })}\n    </styled.div>\n  )\n}) as Component<\"div\", SkeletonTextProps>\n"
     },
     {
       "name": "skeleton.style.ts",

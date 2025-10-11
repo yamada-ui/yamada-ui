@@ -5,8 +5,8 @@ import remarkGfm from "remark-gfm"
 import { defineCollection, defineConfig, s } from "velite"
 import { generateDocMap } from "@/scripts/generate/docs/map"
 import { getLocale } from "@/utils/i18n"
+import { rehypePre, rehypeSlugSync } from "@/utils/rehype-plugins"
 import { CONSTANTS } from "./constants"
-import { rehypePre } from "./utils/rehype-plugins"
 import {
   remarkCallout,
   remarkCardGroup,
@@ -15,6 +15,7 @@ import {
   remarkSteps,
 } from "./utils/remark-plugins"
 import { getPathname } from "./utils/route"
+import { transformUnifiedToc } from "./utils/transform-unified-toc"
 
 function getPath(value: string) {
   return value.replace(/\\/g, "/").replace(/.*\/contents\//, "")
@@ -57,6 +58,9 @@ const docs = defineCollection({
     })
     .transform((data, { meta }) => {
       const { locale, slug } = getSlug(meta.path as string)
+      const path = getPath(meta.path as string)
+      const toc =
+        locale === "en-US" ? data.toc : transformUnifiedToc(data.toc, path)
 
       return {
         ...data,
@@ -64,7 +68,7 @@ const docs = defineCollection({
           ? `${CONSTANTS.SNS.GITHUB.PACKAGE_EDIT_URL}/${data.style}`
           : undefined,
         locale,
-        path: getPath(meta.path as string),
+        path,
         pathname: getPathname("docs", ...slug),
         slug,
         source: data.source
@@ -73,6 +77,7 @@ const docs = defineCollection({
         storybook: data.storybook
           ? `${CONSTANTS.SNS.STORYBOOK}?path=/story/${data.storybook}`
           : undefined,
+        toc,
       }
     }),
 })
@@ -85,6 +90,7 @@ export default defineConfig({
   mdx: {
     rehypePlugins: [
       rehypeSlug,
+      rehypeSlugSync,
       rehypePre,
       [
         rehypeAutolinkHeadings,

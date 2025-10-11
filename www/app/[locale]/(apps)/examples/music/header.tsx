@@ -1,4 +1,5 @@
 "use client"
+
 import { ButtonGroup, GlobeIcon, Menu, MicIcon } from "@yamada-ui/react"
 
 const MUSIC_ITEMS = [

@@ -1,3 +1,5 @@
+"use client"
+
 import type { CartesianGridProps } from "recharts"
 import type { CSSObject, HTMLProps, PropGetter } from "../../core"
 import type { Merge } from "../../utils"
@@ -52,3 +54,5 @@ export const useGrid = (props: UseGridProps) => {
 
   return { getGridProps }
 }
+
+export type UseGridReturn = ReturnType<typeof useGrid>

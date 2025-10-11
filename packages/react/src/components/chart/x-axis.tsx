@@ -4,7 +4,7 @@ import { XAxis as RechartsXAxis } from "recharts"
 import { createComponent } from "../../core"
 import { xAxisStyle } from "./x-axis.style"
 
-interface XAxisProps extends RechartsXAxisProps {}
+export interface XAxisProps extends RechartsXAxisProps {}
 
 const { withContext } = createComponent<XAxisProps, XAxisStyle>(
   "chart-x-axis",

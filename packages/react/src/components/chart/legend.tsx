@@ -4,7 +4,7 @@ import { Legend as RechartsLegend } from "recharts"
 import { createComponent } from "../../core"
 import { legendStyle } from "./legend.style"
 
-interface LegendProps extends RechartsLegendProps {}
+export interface LegendProps extends RechartsLegendProps {}
 
 const {
   PropsContext: LegendPropsContext,

@@ -60,13 +60,39 @@ export const Basic: Story = () => {
     <LineChart.Root data={data} h="sm" w="3xl">
       <LineChart.Line type="monotone" dataKey="uv" stroke="#82ca9d" />
       <LineChart.Line type="monotone" dataKey="pv" stroke="#8884d8" />
+    </LineChart.Root>
+  )
+}
 
-      {/*　省略可にする  */}
-      <LineChart.Grid strokeDasharray="3 3" />
+export const CustomComponent: Story = () => {
+  return (
+    <LineChart.Root data={data} h="sm" w="3xl">
+      <LineChart.Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+      <LineChart.Line type="monotone" dataKey="pv" stroke="#8884d8" />
+
+      <LineChart.Grid strokeDasharray="15 15" />
       <LineChart.XAxis dataKey="name" />
       <LineChart.YAxis />
       <LineChart.Tooltip />
       <LineChart.Legend />
+    </LineChart.Root>
+  )
+}
+
+export const HideTooltip: Story = () => {
+  return (
+    <LineChart.Root data={data} h="sm" w="3xl" withTooltip={false}>
+      <LineChart.Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+      <LineChart.Line type="monotone" dataKey="pv" stroke="#8884d8" />
+    </LineChart.Root>
+  )
+}
+
+export const Legend: Story = () => {
+  return (
+    <LineChart.Root data={data} h="sm" w="3xl" withLegend>
+      <LineChart.Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+      <LineChart.Line type="monotone" dataKey="pv" stroke="#8884d8" />
     </LineChart.Root>
   )
 }

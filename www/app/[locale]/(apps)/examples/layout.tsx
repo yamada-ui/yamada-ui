@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react"
-import { VStack } from "@yamada-ui/react"
+import { HStack, VStack } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import { Hero } from "@/components"
 import { ExampleMenu } from "../example-menu"
@@ -15,17 +15,24 @@ export default function Layout({ children }: LayoutProps) {
         description={t("description")}
         title={t("title")}
         primaryButtonProps={{
-          href: "/icons#icons",
+          href: "/docs/get-started",
           children: t("primaryAction"),
         }}
         secondaryButtonProps={{
-          href: "/docs/components/icon",
+          href: "/docs/components",
           children: t("secondaryAction"),
         }}
       />
 
       <VStack>
-        <ExampleMenu alignSelf="center" />
+        <HStack
+          alignItems="center"
+          justifyContent={{ base: "center", lg: "start" }}
+          position="relative"
+          w="full"
+        >
+          <ExampleMenu flex={{ base: "initial", lg: "1" }} />
+        </HStack>
 
         {children}
       </VStack>

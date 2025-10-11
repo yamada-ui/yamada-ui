@@ -14,6 +14,7 @@
       "file-input",
       "loading",
       "modal",
+      "notice",
       "popover",
       "toggle",
       "tooltip"
@@ -29,7 +30,7 @@
     },
     {
       "name": "portal.tsx",
-      "content": "\"use client\"\n\nimport type { FC, PropsWithChildren, RefObject } from \"react\"\nimport type { RootNode } from \"@yamada-ui/react\"\nimport { Children, useEffect, useState } from \"react\"\nimport { createPortal } from \"react-dom\"\nimport {\n  useEnvironment,\n  getDocument,\n  isShadowRoot,\n  useSsr,\n} from \"@yamada-ui/react\"\n\nconst getPortalNode = (node?: RootNode) => {\n  const rootNode = node?.getRootNode()\n\n  if (isShadowRoot(rootNode)) return rootNode\n\n  return getDocument(node).body\n}\n\nexport interface PortalProps extends PropsWithChildren {\n  /**\n   * The `ref` to the component where the portal will be attached to.\n   */\n  containerRef?: RefObject<HTMLElement | null>\n  /**\n   * If `true`, the forwarding will be disabled.\n   */\n  disabled?: boolean\n}\n\n/**\n * `Portal` is a component that renders elements outside of the current `DOM` hierarchy.\n *\n * @see https://yamada-ui.com/components/portal\n */\nexport const Portal: FC<PortalProps> = ({\n  children,\n  containerRef: ref,\n  disabled,\n}) => {\n  const [target, setTarget] = useState(ref?.current)\n  const ssr = useSsr()\n  const { getRootNode } = useEnvironment()\n\n  useEffect(() => {\n    setTarget(() => ref?.current)\n  }, [ref])\n\n  if (ssr || disabled) return children\n\n  const container = target ?? getPortalNode(getRootNode())\n\n  return (\n    <>{Children.map(children, (child) => createPortal(child, container))}</>\n  )\n}\n"
+      "content": "\"use client\"\n\nimport type { FC, PropsWithChildren, RefObject } from \"react\"\nimport type { RootNode } from \"@yamada-ui/react\"\nimport { Children, useEffect, useState } from \"react\"\nimport { createPortal } from \"react-dom\"\nimport {\n  useEnvironment,\n  getDocument,\n  isShadowRoot,\n  useSsr,\n} from \"@yamada-ui/react\"\n\nconst getPortalNode = (node?: RootNode) => {\n  const rootNode = node?.getRootNode()\n\n  if (isShadowRoot(rootNode)) return rootNode\n\n  return getDocument(node).body\n}\n\nexport interface PortalProps extends PropsWithChildren {\n  /**\n   * The `ref` to the component where the portal will be attached to.\n   */\n  containerRef?: RefObject<HTMLElement | null>\n  /**\n   * If `true`, the forwarding will be disabled.\n   */\n  disabled?: boolean\n}\n\n/**\n * `Portal` is a component that renders elements outside of the current `DOM` hierarchy.\n *\n * @see https://yamada-ui.com/docs/components/portal\n */\nexport const Portal: FC<PortalProps> = ({\n  children,\n  containerRef: ref,\n  disabled,\n}) => {\n  const [target, setTarget] = useState(ref?.current)\n  const ssr = useSsr()\n  const { getRootNode } = useEnvironment()\n\n  useEffect(() => {\n    setTarget(() => ref?.current)\n  }, [ref])\n\n  if (ssr || disabled) return children\n\n  const container = target ?? getPortalNode(getRootNode())\n\n  return (\n    <>{Children.map(children, (child) => createPortal(child, container))}</>\n  )\n}\n"
     }
   ]
 }

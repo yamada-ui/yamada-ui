@@ -1,4 +1,6 @@
-export default {
+import type { IntlData } from "."
+
+const data: IntlData = {
   autocomplete: {
     "Clear value": "値を消去する",
     "No results found": "結果が見つかりません",
@@ -13,14 +15,9 @@ export default {
   calendar: {
     "Choose the month": "月を選択する",
     "Choose the year": "年を選択する",
-    dd: "dd",
-    "dddd, MMMM DD, YYYY": "YYYY年MM月DD日dddd",
     "Go to the next month": "次の月に移動する",
     "Go to the previous month": "前の月に移動する",
-    MMM: "MM月",
-    "MMMM YYYY": "YYYY年MM月",
     Today: "今日",
-    YYYY: "YYYY年",
   },
   carousel: {
     "Go to next slide": "次のスライドに移動する",
@@ -31,6 +28,9 @@ export default {
   },
   closeButton: {
     Close: "閉じる",
+  },
+  datePicker: {
+    "Clear value": "値を消去する",
   },
   hueSlider: {
     Blue: "青",
@@ -52,7 +52,7 @@ export default {
     "Go to first page": "最初のページに移動する",
     "Go to last page": "最後のページに移動する",
     "Go to next page": "次のページに移動する",
-    "Go to page": "{value}ページに移動する",
+    "Go to page {value}": "{value}ページに移動する",
     "Go to previous page": "前のページに移動する",
     Pagination: "ページネーション",
     "{value} / {total}": "{value} / {total}",
@@ -76,10 +76,20 @@ export default {
     "Decreased by": "減少",
     "Increased by": "増加",
   },
+  table: {
+    "Clear sorting": "ソートを解除する",
+    "Page size": "ページサイズ",
+    "Select all rows": "すべての行を選択する",
+    "Select row": "行を選択する",
+    "Sort ascending": "昇順でソートする",
+    "Sort descending": "降順でソートする",
+  },
   tag: {
     "Close tag": "タグを閉じる",
   },
   toggle: {
     "Toggle button": "トグルボタン",
   },
-} as const
+}
+
+export default data

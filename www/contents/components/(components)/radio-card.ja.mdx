@@ -1,11 +1,602 @@
 ---
 title: RadioCard
-description: "`RadioCard`は、ユーザーが複数の選択肢の中から1つを選択するための使用されるコンポーネントです。"
+description: "`RadioCard`は、ユーザーが複数の選択肢の中から1つを選択するために使用されるコンポーネントです。"
 storybook: components-radiocard--basic
 source: components/radio-card
 ---
 
+```tsx preview
+<RadioCardGroup.Root>
+  <RadioCardGroup.Item.Root value="1">
+    <RadioCardGroup.Item.Label>ビアンカ</RadioCardGroup.Item.Label>
+    <RadioCardGroup.Item.Description>
+      パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。
+    </RadioCardGroup.Item.Description>
+  </RadioCardGroup.Item.Root>
+  <RadioCardGroup.Item.Root value="2">
+    <RadioCardGroup.Item.Label>フローラ</RadioCardGroup.Item.Label>
+    <RadioCardGroup.Item.Description>
+      大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。
+    </RadioCardGroup.Item.Description>
+  </RadioCardGroup.Item.Root>
+  <RadioCardGroup.Item.Root value="3">
+    <RadioCardGroup.Item.Label>ルドマン</RadioCardGroup.Item.Label>
+    <RadioCardGroup.Item.Description>
+      なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。
+    </RadioCardGroup.Item.Description>
+  </RadioCardGroup.Item.Root>
+</RadioCardGroup.Root>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { RadioCard, RadioCardGroup } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { RadioCard, RadioCardGroup } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { RadioCard, RadioCardGroup } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<RadioCardGroup.Root>
+  <RadioCardGroup.Item.Root>
+    <RadioCardGroup.Item.Label />
+    <RadioCardGroup.Item.Description />
+    <RadioCardGroup.Item.Addon />
+  </RadioCardGroup.Item.Root>
+</RadioCardGroup.Root>
+```
+
+### itemsを使う
+
+```tsx preview functional
+const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return <RadioCardGroup.Root items={items} />
+```
+
+### バリアントを変更する
+
+```tsx preview functional
+const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  () => [
+    { label: "Checked", value: "1" },
+    { label: "Unchecked", value: "2" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["subtle", "surface", "outline"]}>
+      {(variant) => (
+        <RadioCardGroup.Root
+          key={variant}
+          variant={variant}
+          defaultValue="1"
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### サイズを変更する
+
+```tsx preview functional
+const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  () => [
+    { label: "Checked", value: "1" },
+    { label: "Unchecked", value: "2" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["sm", "md", "lg"]}>
+      {(size) => (
+        <RadioCardGroup.Root
+          key={size}
+          size={size}
+          defaultValue="1"
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### カラースキームを変更する
+
+```tsx preview functional
+const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  () => [
+    { label: "Checked", value: "1" },
+    { label: "Unchecked", value: "2" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["success", "warning"]}>
+      {(colorScheme) => (
+        <RadioCardGroup.Root
+          key={colorScheme}
+          colorScheme={colorScheme}
+          defaultValue="1"
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### デフォルトの値を設定する
+
+デフォルトの値を設定する場合は、`defaultValue`に値を設定します。
+
+```tsx preview functional
+const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return <RadioCardGroup.Root defaultValue="2" items={items} />
+```
+
+### 方向を変更する
+
+方向を変更する場合は、`orientation`に`"horizontal"`または`"vertical"`を設定します。デフォルトでは、`"horizontal"`が設定されています。
+
+```tsx preview functional
+const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return <RadioCardGroup.Root items={items} orientation="vertical" />
+```
+
+### 形を変更する
+
+```tsx preview functional
+const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["circle", "square", "rounded"]}>
+      {(shape) => (
+        <RadioCardGroup.Root
+          key={shape}
+          shape={shape}
+          defaultValue="2"
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### 配置を変更する
+
+配置を変更する場合は、`justify`に`"start"`または`"end"`などを設定します。デフォルトでは、`"start"`が設定されています。
+
+```tsx preview functional
+const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["start", "end"]}>
+      {(justify) => (
+        <RadioCardGroup.Root
+          key={justify}
+          justify={justify}
+          defaultValue="2"
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### アドオンを追加する
+
+アドオンを追加する場合は、`addon`に`ReactNode`を設定します。
+
+```tsx preview functional
+const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  () => [
+    {
+      addon: "ドラゴンクエストV 天空の花嫁",
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      addon: "ドラゴンクエストV 天空の花嫁",
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      addon: "ドラゴンクエストV 天空の花嫁",
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return <RadioCardGroup.Root items={items} orientation="vertical" />
+```
+
+### インジケーターを非表示にする
+
+インジケーターを非表示にする場合は、`withIndicator`を`false`に設定します。
+
+```tsx preview
+<RadioCardGroup.Root withIndicator={false}>
+  <RadioCardGroup.Item.Root flexDirection="row" gap="sm" value="1" w="auto">
+    <RabbitIcon fontSize="2xl" />
+    <Text as="span">ウサギ</Text>
+  </RadioCardGroup.Item.Root>
+  <RadioCardGroup.Item.Root flexDirection="row" gap="sm" value="2" w="auto">
+    <SnailIcon fontSize="2xl" />
+    <Text as="span">カタツムリ</Text>
+  </RadioCardGroup.Item.Root>
+  <RadioCardGroup.Item.Root flexDirection="row" gap="sm" value="3" w="auto">
+    <SquirrelIcon fontSize="2xl" />
+    <Text as="span">リス</Text>
+  </RadioCardGroup.Item.Root>
+</RadioCardGroup.Root>
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`に設定します。
+
+```tsx preview functional
+const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["subtle", "surface", "outline"]}>
+      {(variant) => (
+        <RadioCardGroup.Root
+          key={variant}
+          variant={variant}
+          defaultValue="2"
+          disabled
+          items={items}
+        />
+      )}
+    </For>
+
+    <Field.Root disabled label="お気に入りのキャラクターは誰ですか？">
+      <RadioCardGroup.Root defaultValue="2" items={items} />
+    </Field.Root>
+  </VStack>
+)
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
+
+```tsx preview functional
+const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["subtle", "surface", "outline"]}>
+      {(variant) => (
+        <RadioCardGroup.Root
+          key={variant}
+          variant={variant}
+          defaultValue="2"
+          readOnly
+          items={items}
+        />
+      )}
+    </For>
+
+    <Field.Root label="お気に入りのキャラクターは誰ですか？" readOnly>
+      <RadioCardGroup.Root defaultValue="2" items={items} />
+    </Field.Root>
+  </VStack>
+)
+```
+
+### 無効な入力にする
+
+無効な入力にする場合は、`invalid`を`true`に設定します。
+
+```tsx preview functional
+const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["subtle", "surface", "outline"]}>
+      {(variant) => (
+        <RadioCardGroup.Root
+          key={variant}
+          variant={variant}
+          defaultValue="2"
+          invalid
+          items={items}
+        />
+      )}
+    </For>
+
+    <Field.Root invalid label="お気に入りのキャラクターは誰ですか？">
+      <RadioCardGroup.Root defaultValue="2" items={items} />
+    </Field.Root>
+  </VStack>
+)
+```
+
+### ボーダーの色を変更する
+
+ボーダーの色を変更する場合は、`focusBorderColor`または`errorBorderColor`に値を設定します。
+
+```tsx preview functional
+const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <RadioCardGroup.Root focusBorderColor="green.500" items={items} />
+    <RadioCardGroup.Root
+      defaultValue="2"
+      errorBorderColor="orange.500"
+      invalid
+      items={items}
+    />
+  </VStack>
+)
+```
+
+### 制御する
+
+```tsx preview functional client
+const [value, setValue] = useState("2")
+const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return <RadioCardGroup.Root items={items} value={value} onChange={setValue} />
+```
 
 ## Props
 

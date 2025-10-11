@@ -204,7 +204,7 @@ export const Disabled: Story = () => {
   )
 }
 
-export const Readonly: Story = () => {
+export const ReadOnly: Story = () => {
   const items = useMemo<RadioGroup.RootProps["items"]>(
     () => [
       { defaultChecked: true, label: "織田信長", value: "1" },
@@ -379,7 +379,7 @@ export const CustomComponent: Story = () => {
       py="3"
       rounded="l2"
     >
-      <Radio h="6" />
+      <Radio as="div" h="6" />
 
       <VStack gap="xs" userSelect="none">
         <Text>Enable notifications</Text>

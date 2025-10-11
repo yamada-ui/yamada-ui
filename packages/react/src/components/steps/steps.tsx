@@ -101,7 +101,7 @@ export { StepsPropsContext, useStepsPropsContext }
 /**
  * `Steps` is a component that displays the progress of a multi-step process.
  *
- * @see https://yamada-ui.com/components/steps
+ * @see https://yamada-ui.com/docs/components/steps
  */
 export const StepsRoot = withProvider<"div", StepsRootProps, "orientation">(
   ({
@@ -132,8 +132,8 @@ export const StepsRoot = withProvider<"div", StepsRootProps, "orientation">(
       onPrev,
     } = useSteps({
       count: items.length || Children.count(stepsList?.props.children),
-      ...rest,
       orientation: computedOrientation,
+      ...rest,
     })
     const componentContext = useMemo(
       () => ({ items, lazy, lazyBehavior }),

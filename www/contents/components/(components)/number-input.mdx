@@ -6,7 +6,271 @@ source: components/number-input
 style: components/number-input/number-input.style.ts
 ---
 
+```tsx preview
+<NumberInput placeholder="placeholder" />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { NumberInput } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { NumberInput } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { NumberInput } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<NumberInput />
+```
+
+### Change Variant
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => (
+      <NumberInput
+        key={variant}
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Size
+
+```tsx preview
+<VStack>
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size) => (
+      <NumberInput key={size} size={size} placeholder={`Size (${size})`} />
+    )}
+  </For>
+</VStack>
+```
+
+### Set Default Value
+
+To set a default value, set a string or number to `defaultValue`.
+
+```tsx preview
+<NumberInput defaultValue={18} placeholder="Order Quantity" />
+```
+
+### Set Minimum and Maximum Values
+
+To set minimum and maximum values, set a number to `min` or `max`.
+
+```tsx preview
+<NumberInput defaultValue={18} min={8} max={31} placeholder="Order Quantity" />
+```
+
+### Set Step Value
+
+To set a step value, set a number to `step`.
+
+```tsx preview
+<NumberInput
+  defaultValue={15}
+  step={5}
+  min={5}
+  max={30}
+  placeholder="Order Quantity"
+/>
+```
+
+### Set Decimal Points
+
+To set decimal points, set a number to `precision`.
+
+```tsx preview
+<NumberInput
+  defaultValue={15}
+  precision={2}
+  step={0.2}
+  placeholder="Order Quantity"
+/>
+```
+
+### Disable Clamping Value on Blur
+
+By default, the component accepts any numeric input from the user, but values exceeding `min` or `max` are automatically adjusted on blur. To disable this automatic adjustment, set `clampValueOnBlur` to `false`.
+
+```tsx preview
+<NumberInput
+  defaultValue={15}
+  max={30}
+  clampValueOnBlur={false}
+  placeholder="Order Quantity"
+/>
+```
+
+### Allow Out-of-Range Values
+
+To allow out-of-range values, set `keepWithinRange` to `false`.
+
+```tsx preview
+<NumberInput
+  defaultValue={15}
+  max={30}
+  keepWithinRange={false}
+  clampValueOnBlur={false}
+  placeholder="Order Quantity"
+/>
+```
+
+### Disable
+
+To disable the component, set `disabled` to `true`.
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => (
+      <NumberInput
+        key={variant}
+        disabled
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Read-Only
+
+To make the component read-only, set `readOnly` to `true`.
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => (
+      <NumberInput
+        key={variant}
+        readOnly
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Invalid
+
+To make invalid, set `invalid` to `true`.
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => (
+      <NumberInput
+        key={variant}
+        invalid
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Border Color
+
+To change the border color, set a color to `focusBorderColor` or `errorBorderColor`.
+
+```tsx preview
+<VStack>
+  <NumberInput
+    focusBorderColor="green.500"
+    placeholder="Custom focus border color"
+  />
+  <NumberInput
+    errorBorderColor="orange.500"
+    invalid
+    placeholder="Custom invalid border color"
+  />
+</VStack>
+```
+
+### Change Placeholder Color
+
+To change the placeholder color, set `_placeholder` to the value.
+
+```tsx preview
+<NumberInput
+  placeholder="Custom placeholder"
+  _placeholder={{ color: "blue.500" }}
+/>
+```
+
+### Customize Stepper
+
+To customize the stepper, set props to `incrementProps` or `decrementProps`.
+
+```tsx preview
+<NumberInput
+  placeholder="Order Quantity"
+  incrementProps={{ children: <PlusIcon /> }}
+  decrementProps={{ children: <MinusIcon /> }}
+/>
+```
+
+### Customize Component
+
+To customize the component, use `useNumberInput`.
+
+```tsx preview functional client
+const { getInputProps, getIncrementProps, getDecrementProps } = useNumberInput({
+  step: 0.01,
+  defaultValue: 3.14,
+  min: 3,
+  max: 4,
+  precision: 2,
+})
+
+return (
+  <HStack maxW="xs" gap="sm">
+    <IconButton
+      icon={<PlusIcon fontSize="2xl" />}
+      {...getIncrementProps()}
+      aria-label="Increment"
+    />
+    <Input {...getInputProps()} aria-label="Number Input" />
+    <IconButton
+      icon={<MinusIcon fontSize="2xl" />}
+      {...getDecrementProps()}
+      aria-label="Decrement"
+    />
+  </HStack>
+)
+```
+
+### Control
+
+```tsx preview functional client
+const [value, setValue] = useState(18)
+
+return (
+  <NumberInput
+    value={value}
+    onChange={(_, valueAsNumber) => setValue(valueAsNumber)}
+    placeholder="Order Quantity"
+  />
+)
+```
 
 ## Props
 

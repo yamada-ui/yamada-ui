@@ -2,6 +2,7 @@ import type { CSSObject } from "@emotion/react"
 import type { CompatData, CompatStatement } from "@mdn/browser-compat-data"
 import type { AnyString, ThemeToken, Transforms } from "@yamada-ui/react"
 import type * as CSS from "csstype"
+import type { FeatureData } from "node_modules/web-features/types"
 import type { StyleConfig } from "./styled-props"
 import type { TransformOptions } from "./transform-props"
 import bcd from "@mdn/browser-compat-data"
@@ -57,8 +58,7 @@ export type StyledProperties =
   | keyof typeof atRuleProps
   | keyof typeof styledProps
 
-export type FeatureData = (typeof features)[number]
-export type BrowserIdentifier = keyof FeatureData["status"]["support"]
+export type BrowserIdentifier = FeatureData["status"]["support"]
 
 export interface CSSCompatStatement extends CompatStatement {
   name: string
@@ -87,8 +87,10 @@ function transformCompatData(
 
         if (omitProps.includes(prop)) return
 
-        const feature = Object.values(features).find(({ compat_features }) =>
-          compat_features?.includes(`${path}.${name}`),
+        const feature = Object.values(features).find(
+          (feature) =>
+            "compat_features" in feature &&
+            feature.compat_features?.includes(`${path}.${name}`),
         )
 
         return [prop, { ...value.__compat, name, feature }]
@@ -283,6 +285,7 @@ export interface Config {
   type?: string
   css?: CSSObject
   docs?: Docs | string
+  important?: boolean
   properties?: (AnyString | CSSProperties | StyledProperties)[]
   shorthands?: string[]
   token?: ThemeToken
@@ -291,6 +294,7 @@ export interface Config {
 
 interface GetConfigOptions {
   css?: CSSObject
+  important?: boolean
   properties?: (AnyString | CSSProperties | StyledProperties)[]
   token?: ThemeToken
   transforms?: TransformOptions[]
@@ -298,6 +302,7 @@ interface GetConfigOptions {
 
 export function generateConfig({
   css,
+  important,
   properties,
   token,
   transforms,
@@ -310,6 +315,7 @@ export function generateConfig({
     if (properties) config.properties = properties
     if (token) config.token = token
     if (css) config.css = css
+    if (important) config.important = important
 
     if (transforms || token) {
       transforms ??= []
@@ -489,7 +495,7 @@ function generateData(
   function generateDate(isAtRule = false) {
     return function ([
       prop,
-      { type, description, properties, static: css, variableLength },
+      { type, description, important, properties, static: css, variableLength },
     ]: [string, StyleConfig]) {
       if (variableLength) variableLengthProps.push(prop)
 
@@ -511,6 +517,7 @@ function generateData(
 
       const config = generateConfig({
         css,
+        important,
         properties,
         token,
         transforms,

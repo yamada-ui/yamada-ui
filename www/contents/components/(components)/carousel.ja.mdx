@@ -74,7 +74,7 @@ import { Carousel } from "@workspaces/ui"
 ```
 
 :::note
-`Carousel`は、内部的に[embla-carousel-react](https://www.embla-carousel.com/)を使用しています。
+`Carousel`は、内部で[embla-carousel-react](https://www.embla-carousel.com/)を使用しています。
 :::
 
 ### サイズを変更する
@@ -167,7 +167,7 @@ return (
 
 ### 方向を変更する
 
-方向を変更する場合は、`orientation`に`horizontal`または`vertical`を設定します。デフォルトでは、`horizontal`が設定されています。
+方向を変更する場合は、`orientation`に`"horizontal"`または`"vertical"`を設定します。デフォルトでは、`"horizontal"`が設定されています。
 
 ```tsx preview functional
 const sources = useMemo(
@@ -379,7 +379,7 @@ return (
 
 ### スライドの位置を変更する
 
-スライドの位置を変更する場合は、`align`に`start`, `center`, `end`または数値を設定します。デフォルトでは、`center`が設定されています。
+スライドの位置を変更する場合は、`align`に`"start"`, `"center"`, `"end"`または数値を設定します。デフォルトでは、`"center"`が設定されています。
 
 ```tsx preview functional
 const sources = useMemo(
@@ -507,7 +507,7 @@ return (
 )
 ```
 
-#### 自動再生の間隔を変更する
+### 自動再生の間隔を変更する
 
 自動再生の間隔を変更する場合は、`delay`に数値(ミリ秒)を設定します。デフォルトでは、`4000`が設定されています。
 
@@ -551,7 +551,7 @@ return (
 )
 ```
 
-#### 自動再生を停止しない
+### 自動再生を停止しない
 
 デフォルトでは、要素上にホバーされたとき自動再生は停止します。停止しない場合は、`stopMouseEnterAutoplay`を`false`に設定します。
 
@@ -597,7 +597,7 @@ return (
 
 ### ドラッグフリーを使う
 
-`dragFree`を`true`に設定することで、スライドを自由にドラッグすることができます。
+ドラッグフリーを使う場合は、`dragFree`を`true`に設定します。
 
 ```tsx preview functional
 const sources = useMemo(
@@ -729,7 +729,7 @@ return (
 
 ### コントロールボタンをカスタマイズする
 
-コントロールボタンをカスタマイズする場合は、`Carousel.PrevTrigger`や`Carousel.NextTrigger`に`props`を設定します。
+コントロールボタンをカスタマイズする場合は、`Carousel.PrevTrigger`や`Carousel.NextTrigger`にpropsを設定します。
 
 ```tsx preview functional
 const sources = useMemo(
@@ -783,7 +783,7 @@ return (
 
 ### インジケーターをカスタマイズする
 
-インジケーターをカスタマイズする場合は、`Carousel.Indicators`に`props`を設定します。
+インジケーターをカスタマイズする場合は、`Carousel.Indicators`にpropsを設定します。
 
 ```tsx preview functional
 const sources = useMemo(
@@ -847,7 +847,7 @@ return (
 
 ### イベントをハンドルする
 
-ユーザーのドラッグなどのイベントをハンドルしたい場合は、`watchDrag`を使用します。
+ユーザーのドラッグなどのイベントをハンドルする場合は、`watchDrag`を使用します。
 
 ```tsx preview functional
 const sources = useMemo(

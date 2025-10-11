@@ -38,7 +38,7 @@ import { Tag } from "@workspaces/ui"
 <Wrap gap="md">
   <For each={["solid", "subtle", "surface", "outline"]}>
     {(variant) => (
-      <Tag key={variant} variant={variant} colorScheme="primary">
+      <Tag key={variant} variant={variant}>
         {variant}
       </Tag>
     )}
@@ -52,7 +52,7 @@ import { Tag } from "@workspaces/ui"
 <Wrap gap="md">
   <For each={["sm", "md", "lg"]}>
     {(size) => (
-      <Tag key={size} size={size} colorScheme="primary">
+      <Tag key={size} size={size}>
         {size}
       </Tag>
     )}
@@ -83,7 +83,7 @@ import { Tag } from "@workspaces/ui"
 </Wrap>
 ```
 
-### クローズボタンを使う
+### 閉じるボタンを使う
 
 ```tsx preview functional client
 const onClose = () => {
@@ -94,7 +94,7 @@ const onClose = () => {
 return <Tag onClose={onClose}>Tag</Tag>
 ```
 
-### クローズボタンを無効にする
+### 閉じるボタンを無効にする
 
 ```tsx preview client
 <Tag disabled onClose={() => {}}>

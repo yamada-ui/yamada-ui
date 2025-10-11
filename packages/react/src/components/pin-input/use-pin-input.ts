@@ -79,7 +79,7 @@ export interface UsePinInputProps
   /**
    * The placeholder for the pin input.
    *
-   * @default '○'
+   * @default '◯'
    */
   placeholder?: string
   /**
@@ -108,7 +108,7 @@ export const usePinInput = (props: UsePinInputProps = {}) => {
       manageFocus = true,
       mask,
       otp = false,
-      placeholder = "○",
+      placeholder = "◯",
       readOnly,
       value,
       onChange: onChangeProp,

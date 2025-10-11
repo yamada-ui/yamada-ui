@@ -4,7 +4,6 @@ import type { FragmentContent, PageContent } from "@/data"
 import type { Descendant, HTMLProps } from "@yamada-ui/react"
 import type { ElementType, KeyboardEvent, ReactNode, RefObject } from "react"
 import {
-  AlignLeftIcon,
   assignRef,
   Box,
   Center,
@@ -22,6 +21,7 @@ import {
   runKeyAction,
   SearchIcon,
   Text,
+  TextAlignStartIcon,
   useDisclosure,
   useUpdateEffect,
   useWindowEvent,
@@ -29,7 +29,6 @@ import {
 } from "@yamada-ui/react"
 import { matchSorter } from "match-sorter"
 import { useTranslations } from "next-intl"
-import NextLink from "next/link"
 import { useRouter } from "next/navigation"
 import {
   useCallback,
@@ -41,7 +40,7 @@ import {
 } from "react"
 import scrollIntoView from "scroll-into-view-if-needed"
 import { getContents, getDefaultContents } from "@/data"
-import { useLocale, usePathname } from "@/i18n"
+import { Link, useLocale, usePathname } from "@/i18n"
 
 const {
   DescendantsContext,
@@ -363,7 +362,7 @@ function SearchContentBody({
             key={`${hit.pathname}-${index}`}
             href={hit.pathname}
             description={getDescription(hit)}
-            icon={hit.type === "fragment" ? HashIcon : AlignLeftIcon}
+            icon={hit.type === "fragment" ? HashIcon : TextAlignStartIcon}
             title={hit.title}
             onActive={onActive}
             onClose={onClose}
@@ -380,7 +379,7 @@ function SearchContentBody({
   )
 }
 
-interface ItemProps extends Omit<HTMLProps<"a">, "href" | "title"> {
+interface ItemProps extends Omit<HTMLProps<"a">, "href" | "popover" | "title"> {
   href: string
   icon: ElementType
   title: ReactNode
@@ -418,7 +417,7 @@ const Item = function Item({
   return (
     <Box
       ref={mergeRefs(ref, itemRef, register)}
-      as={NextLink}
+      as={Link}
       href={href}
       alignItems="center"
       bg={{

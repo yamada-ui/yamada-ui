@@ -1,5 +1,9 @@
 import type { StyledTheme } from "../src"
-import { createSystem, defaultConfig, defaultTheme } from "../src"
+import {
+  createSystem,
+  config as defaultConfig,
+  theme as defaultTheme,
+} from "../src"
 
 export const system = createSystem(defaultTheme, defaultConfig)
 

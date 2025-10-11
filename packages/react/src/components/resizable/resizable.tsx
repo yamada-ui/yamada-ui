@@ -27,7 +27,7 @@ import {
 /**
  * `Resizable` is accessible resizable panel groups and layouts with keyboard support.
  *
- * @see https://yamada-ui.com/components/resizable
+ * @see https://yamada-ui.com/docs/components/resizable
  */
 export interface ResizableRootProps
   extends HTMLStyledProps,
@@ -59,10 +59,7 @@ export const ResizableRoot = withProvider<
   ({ children, orientation: orientationProp, rootRef, ...rest }) => {
     const computedOrientation = useValue(orientationProp)
     const { controlRef, disabled, orientation, getGroupProps, getRootProps } =
-      useResizable({
-        ...rest,
-        orientation: computedOrientation,
-      })
+      useResizable({ orientation: computedOrientation, ...rest })
 
     const context = useMemo(
       () => ({ controlRef, disabled, orientation }),

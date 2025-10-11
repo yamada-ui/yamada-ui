@@ -15,7 +15,7 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <Field.Root label="Email address" replace>
+    <Field.Root label="Email address">
       <Input type="email" placeholder="your email address" />
     </Field.Root>
   )
@@ -111,7 +111,7 @@ export const Disabled: Story = () => {
   )
 }
 
-export const Readonly: Story = () => {
+export const ReadOnly: Story = () => {
   return (
     <Field.Root
       errorMessage="Email is required."

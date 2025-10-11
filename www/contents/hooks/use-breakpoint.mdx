@@ -5,4 +5,34 @@ storybook: hooks-usebreakpoint--basic
 source: hooks/use-breakpoint
 ---
 
-### Usage
+```tsx preview functional client
+const breakpoint = useBreakpoint()
+
+return <Text>The current breakpoint is "{breakpoint}".</Text>
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { useBreakpoint } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useBreakpoint } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useBreakpoint } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const breakpoint = useBreakpoint()
+```
+
+:::note
+The return value refers to the [breakpoint](/docs/theming/breakpoints) of the theme.
+:::

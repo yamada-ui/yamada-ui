@@ -44,7 +44,7 @@ export { NativeTablePropsContext, useNativeTablePropsContext }
 /**
  * `NativeTable` is a component for efficiently organizing and displaying data.
  *
- * @see https://yamada-ui.com/components/native-table
+ * @see https://yamada-ui.com/docs/components/native-table
  */
 export const NativeTableRoot = withProvider(
   ({ withScrollArea, scrollAreaProps, ...rest }) => {
@@ -114,6 +114,10 @@ export interface ColProps extends HTMLStyledProps<"col"> {}
 
 export const Col = withContext<"col", ColProps>("col", "col")()
 
+export interface TrProps extends HTMLStyledProps<"tr"> {}
+
+export const Tr = withContext<"tr", TrProps>("tr", "tr")()
+
 export interface ThProps extends HTMLStyledProps<"th"> {
   /**
    * Aligns the cell content to the right.
@@ -130,10 +134,6 @@ export const Th = withContext<"th", ThProps>("th", "th")(
     ...rest,
   }),
 )
-
-export interface TrProps extends HTMLStyledProps<"tr"> {}
-
-export const Tr = withContext<"tr", TrProps>("tr", "tr")()
 
 export interface TdProps extends HTMLStyledProps<"td"> {
   /**

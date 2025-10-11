@@ -6,6 +6,6 @@ import { component, Icon } from "../icon"
 /**
  * `Gamepad2Icon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/docs/components/icon
  */
 export const Gamepad2Icon = component(Icon)({ as: Gamepad2 })

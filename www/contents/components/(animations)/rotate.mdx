@@ -6,7 +6,109 @@ source: components/rotate
 style: components/rotate/rotate.style.ts
 ---
 
+```tsx preview
+<Rotate
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Rotate } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Rotate } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Rotate } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Rotate />
+```
+
+### Change Rotate
+
+To change the rotate, set `rotate` to a numerical value. By default, `45` is set.
+
+```tsx preview
+<Rotate
+  rotate={-360}
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
+### Change Duration
+
+To change the duration, set a numerical value (seconds) to `duration`.
+
+```tsx preview
+<Rotate
+  duration={1.4}
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
+### Delay
+
+If you want to delay the switch, set a numerical value (seconds) to `delay`.
+
+```tsx preview
+<Rotate
+  delay={1}
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
+### Disable
+
+To disable, set `disabled` to `true`.
+
+```tsx preview
+<Rotate
+  disabled
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
+### Read-Only
+
+To ready-Only, set `readOnly` to `true`.
+
+```tsx preview
+<Rotate
+  readOnly
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
+### Control
+
+```tsx preview functional client
+const [value, onChange] = useState<KeyframeIdent>("from")
+
+return (
+  <Rotate
+    from={<AppleIcon fontSize="2xl" />}
+    to={<CherryIcon fontSize="2xl" />}
+    value={value}
+    onChange={onChange}
+  />
+)
+```
 
 ## Props
 

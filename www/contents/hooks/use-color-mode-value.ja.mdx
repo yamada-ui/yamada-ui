@@ -5,4 +5,35 @@ storybook: hooks-usecolormodevalue--basic
 source: hooks/use-color-mode-value
 ---
 
-### 使い方
+```tsx preview functional client
+const { colorMode } = useColorMode()
+const color = useColorModeValue("green", "red")
+
+return <Text color={color}>The current colorMode is "{colorMode}"</Text>
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { useColorModeValue } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useColorModeValue } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useColorModeValue } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const color = useColorModeValue("green", "red")
+```
+
+:::tip
+カラーモードの概要は[こちら](/docs/styling/color-mode)をご覧ください。
+:::

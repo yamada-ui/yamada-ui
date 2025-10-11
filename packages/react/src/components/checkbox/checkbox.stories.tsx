@@ -266,7 +266,7 @@ export const Disabled: Story = () => {
   )
 }
 
-export const Readonly: Story = () => {
+export const ReadOnly: Story = () => {
   const items = useMemo<CheckboxGroup.RootProps["items"]>(
     () => [
       { defaultChecked: true, label: "ソラ", value: "1" },
@@ -458,7 +458,7 @@ export const CustomComponent: Story = () => {
       py="3"
       rounded="l2"
     >
-      <Checkbox h="6" />
+      <Checkbox as="div" h="6" />
 
       <VStack gap="xs" userSelect="none">
         <Text>Enable notifications</Text>

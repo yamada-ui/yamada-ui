@@ -12,9 +12,9 @@ import {
   useState,
 } from "react"
 import { isEmptyObject, noop } from "../../utils"
+import { COLOR_MODE_STORAGE_KEY } from "../constant"
 import { useEnvironment } from "./environment-provider"
 import { createStorageManager } from "./storage-manager"
-import { COLOR_MODE_STORAGE_KEY } from "./storage-script"
 import { getPreventTransition } from "./theme-provider"
 import { useSystemColorMode } from "./use-system-color-mode"
 
@@ -71,7 +71,7 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
     disableTransitionOnChange = true,
   } = {},
   cookie,
-  storage = "localStorage" as Storage,
+  storage = !!cookie ? "cookie" : "localStorage",
   storageKey = COLOR_MODE_STORAGE_KEY,
 }) => {
   const storageManager = useMemo(
@@ -185,7 +185,7 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
 /**
  * `useColorMode` is a custom hook that returns the current color mode.
  *
- * @see https://yamada-ui.com/hooks/use-color-mode
+ * @see https://yamada-ui.com/docs/hooks/use-color-mode
  */
 export const useColorMode = (): ColorModeContext => {
   const context = use(ColorModeContext)

@@ -114,7 +114,7 @@ export const Disabled: Story = () => {
   )
 }
 
-export const Readonly: Story = () => {
+export const ReadOnly: Story = () => {
   return (
     <>
       <Wrap gap="md">

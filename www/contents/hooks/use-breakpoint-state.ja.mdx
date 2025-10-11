@@ -1,8 +1,37 @@
 ---
 title: useBreakpointState
 description: "`useBreakpointState`は、提供されたオブジェクトから現在のブレイクポイントを初期値として返すカスタムフックです。"
-storybook: hooks-usebreakpointstate--basic
-source: hooks/use-breakpoint-state
+source: hooks/use-breakpoint
 ---
 
-### 使い方
+```tsx preview functional client
+const [value, setValue] = useBreakpointState({ base: 1, md: 2 })
+
+return (
+  <Button onClick={() => setValue((prev) => prev + 1)}>
+    The current value is "{value}"
+  </Button>
+)
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { useBreakpointState } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useBreakpointState } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useBreakpointState } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const [value, setValue] = useBreakpointState({ base: 1, md: 2 })
+```

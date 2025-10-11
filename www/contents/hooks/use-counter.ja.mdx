@@ -4,4 +4,281 @@ description: "`useCounter`は、数値を増加または減少させるための
 source: hooks/use-counter
 ---
 
-### 使い方
+```tsx preview functional client
+const { value, increment, decrement, reset } = useCounter({
+  defaultValue: 10,
+})
+
+return (
+  <VStack>
+    <Text>Count: {value}</Text>
+    <ButtonGroup.Root>
+      <ButtonGroup.Item
+        colorScheme="success"
+        variant="subtle"
+        onClick={() => increment()}
+      >
+        + 1
+      </ButtonGroup.Item>
+      <ButtonGroup.Item
+        colorScheme="danger"
+        variant="subtle"
+        onClick={() => decrement()}
+      >
+        - 1
+      </ButtonGroup.Item>
+      <ButtonGroup.Item onClick={reset}>Reset</ButtonGroup.Item>
+    </ButtonGroup.Root>
+  </VStack>
+)
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { useCounter } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useCounter } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useCounter } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const { value, valueAsNumber, update, increment, decrement, reset, cast, out } =
+  useCounter()
+```
+
+### デフォルトの値を設定する
+
+デフォルトの値を設定する場合は、`defaultValue`に文字列または数値を設定します。
+
+```tsx preview functional client
+const { value, increment, decrement, reset } = useCounter({
+  defaultValue: 10,
+})
+
+return (
+  <VStack>
+    <Text>Count: {value}</Text>
+    <ButtonGroup.Root>
+      <ButtonGroup.Item
+        colorScheme="success"
+        variant="subtle"
+        onClick={() => increment()}
+      >
+        + 1
+      </ButtonGroup.Item>
+      <ButtonGroup.Item
+        colorScheme="danger"
+        variant="subtle"
+        onClick={() => decrement()}
+      >
+        - 1
+      </ButtonGroup.Item>
+      <ButtonGroup.Item onClick={reset}>Reset</ButtonGroup.Item>
+    </ButtonGroup.Root>
+  </VStack>
+)
+```
+
+### 最小・最大値を設定する
+
+最小値と最大値を設定する場合は、`min`または`max`に数値を設定します。
+
+```tsx preview functional client
+const { value, increment, decrement, min, max, reset } = useCounter({
+  defaultValue: 5,
+  min: 0,
+  max: 10,
+})
+
+return (
+  <VStack>
+    <Text>Count: {value}</Text>
+    <ButtonGroup.Root>
+      <ButtonGroup.Item
+        colorScheme="success"
+        variant="subtle"
+        onClick={() => increment()}
+        disabled={max}
+      >
+        + 1
+      </ButtonGroup.Item>
+      <ButtonGroup.Item
+        colorScheme="danger"
+        variant="subtle"
+        onClick={() => decrement()}
+        disabled={min}
+      >
+        - 1
+      </ButtonGroup.Item>
+      <ButtonGroup.Item onClick={reset}>Reset</ButtonGroup.Item>
+    </ButtonGroup.Root>
+  </VStack>
+)
+```
+
+### ステップ値を設定する
+
+ステップ値を設定する場合は、`step`に数値を設定します。
+
+```tsx preview functional client
+const { value, increment, decrement, reset } = useCounter({
+  defaultValue: 0,
+  step: 5,
+})
+
+return (
+  <VStack>
+    <Text>Count: {value}</Text>
+    <ButtonGroup.Root>
+      <ButtonGroup.Item
+        colorScheme="success"
+        variant="subtle"
+        onClick={() => increment()}
+      >
+        + 5
+      </ButtonGroup.Item>
+      <ButtonGroup.Item
+        colorScheme="danger"
+        variant="subtle"
+        onClick={() => decrement()}
+      >
+        - 5
+      </ButtonGroup.Item>
+      <ButtonGroup.Item onClick={reset}>Reset</ButtonGroup.Item>
+    </ButtonGroup.Root>
+  </VStack>
+)
+```
+
+```tsx preview functional client
+const { value, increment, decrement } = useCounter({
+  defaultValue: 0,
+})
+
+return (
+  <VStack>
+    <Text>Count: {value}</Text>
+    <ButtonGroup.Root colorScheme="success" variant="subtle">
+      <For each={[1, 5, 10]}>
+        {(step) => (
+          <ButtonGroup.Item onClick={() => increment(step)}>
+            + {step}
+          </ButtonGroup.Item>
+        )}
+      </For>
+    </ButtonGroup.Root>
+    <ButtonGroup.Root colorScheme="danger" variant="subtle">
+      <For each={[1, 5, 10]}>
+        {(step) => (
+          <ButtonGroup.Item onClick={() => decrement(step)}>
+            - {step}
+          </ButtonGroup.Item>
+        )}
+      </For>
+    </ButtonGroup.Root>
+  </VStack>
+)
+```
+
+### 小数点を設定する
+
+小数点を設定する場合は、`precision`に数値を設定します。
+
+```tsx preview functional client
+const { value, increment, decrement, reset } = useCounter({
+  defaultValue: 5.123,
+  step: 0.1,
+  precision: 2,
+})
+
+return (
+  <VStack>
+    <Text>Count: {value}</Text>
+    <ButtonGroup.Root>
+      <ButtonGroup.Item
+        colorScheme="success"
+        variant="subtle"
+        onClick={() => increment()}
+      >
+        + 0.1
+      </ButtonGroup.Item>
+      <ButtonGroup.Item
+        colorScheme="danger"
+        variant="subtle"
+        onClick={() => decrement()}
+      >
+        - 0.1
+      </ButtonGroup.Item>
+      <ButtonGroup.Item onClick={reset}>Reset</ButtonGroup.Item>
+    </ButtonGroup.Root>
+  </VStack>
+)
+```
+
+### 範囲外の値を許可する
+
+範囲外の値を許可する場合は、`keepWithinRange`を`false`に設定します。
+
+```tsx preview functional client
+const { value, increment, decrement, out, reset } = useCounter({
+  defaultValue: 5,
+  min: 0,
+  max: 10,
+  keepWithinRange: false,
+})
+
+return (
+  <VStack>
+    <Text color={out ? "danger" : "inherit"}>
+      Count: {value} {out ? "(Out Of Range)" : ""}
+    </Text>
+    <ButtonGroup.Root>
+      <ButtonGroup.Item
+        colorScheme="success"
+        variant="subtle"
+        onClick={() => increment()}
+      >
+        + 1
+      </ButtonGroup.Item>
+      <ButtonGroup.Item
+        colorScheme="danger"
+        variant="subtle"
+        onClick={() => decrement()}
+      >
+        - 1
+      </ButtonGroup.Item>
+      <ButtonGroup.Item onClick={reset}>Reset</ButtonGroup.Item>
+    </ButtonGroup.Root>
+  </VStack>
+)
+```
+
+### フォーマットする
+
+フォーマットする場合は、`cast`関数を使用します。
+
+```tsx preview functional client
+const { value, setValue, cast } = useCounter({
+  defaultValue: 0,
+  precision: 2,
+})
+
+return (
+  <Input
+    placeholder="Enter a number"
+    value={value}
+    onChange={(e) => setValue(e.target.value)}
+    onBlur={(e) => cast(e.target.value)}
+  />
+)
+```

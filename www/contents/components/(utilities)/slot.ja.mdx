@@ -1,8 +1,76 @@
 ---
 title: Slot
-description: "`Slot`は、`props`を子要素にマージするコンポーネントです。"
+description: "`Slot`は、propsを子要素にマージするコンポーネントです。"
 storybook: components-slot--basic
 source: components/slot
 ---
 
+```tsx preview functional
+const Button = ({ asChild, ...props }) => {
+  const Component = asChild ? Slot : "button"
+  return <Component {...props} />
+}
+
+return (
+  <Button
+    asChild
+    onClick={(ev) => {
+      if (!ev.defaultPrevented) {
+        console.log("Not logged because default is prevented.")
+      }
+    }}
+  >
+    <a href="/about" onClick={(ev) => ev.preventDefault()}>
+      About
+    </a>
+  </Button>
+)
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Slot, Slottable } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Slot, Slottable } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Slot, Slottable } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Slot>
+  <Slottable />
+</Slot>
+```
+
+### 複数の子要素
+
+`Slot`は単一の子要素のみを受け入れます。複数の子要素を受け入れる場合は、`Slottable`を使用します。
+
+```tsx preview functional
+const Button = ({ asChild, children, endIcon, startIcon, ...props }) => {
+  const Component = asChild ? Slot : "button"
+
+  return (
+    <Component {...props}>
+      {startIcon}
+      <Slottable>{children}</Slottable>
+      {endIcon}
+    </Component>
+  )
+}
+
+return (
+  <Button asChild>
+    <a href="/about">About</a>
+  </Button>
+)
+```

@@ -1,6 +1,6 @@
 ---
 title: Learn the Basics
-description: Read a 3-minute tutorial to learn the basics of Yamada UI's styling, responsiveness, dark mode, and animations.
+description: Read a 3-minute tutorial to learn the basics of Yamada UI's components, styling, responsive design, and color mode.
 ---
 
 This guide will help you understand the concepts of Yamada UI. We recommend reading this guide before you start developing with Yamada UI.
@@ -8,3 +8,221 @@ This guide will help you understand the concepts of Yamada UI. We recommend read
 :::tip
 This guide is basic and is intended to give you a sense of the **fun** of developing with Yamada UI. Therefore, it does not explain each concept and feature in depth. If you want to know more, please check the links within the page.
 :::
+
+## Components
+
+Yamada UI provides components in two ways. One is a new method of downloading components locally from [CLI](/docs/components/cli). The other is the traditional method of importing components from modules.
+
+### Download
+
+The cases for downloading components locally from [CLI](/docs/components/cli) are as follows.
+
+- Customize the [variant](/docs/components/styled#variant-style) or [size](/docs/components/styled#size-style) styles of the component.
+- Customize the initial value or logic of the component.
+- Fix a bug in the component's style or logic by directly modifying it.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli add button
+```
+
+```bash [npm]
+npm yamada-cli add button
+```
+
+```bash [yarn]
+yarn yamada-cli add button
+```
+
+```bash [bun]
+bun yamada-cli add button
+```
+
+:::
+
+:::note
+Yamada UI updates the components, you can easily update the components by checking the [Check Differences](/docs/components/cli#check-differences) or [Update Components](/docs/components/cli#update-components) in [CLI](/docs/components/cli). If your changes conflict with the updates, they will be displayed in the same way as the [HOW CONFLICTS ARE PRESENTED](https://git-scm.com/docs/git-merge#_how_conflicts_are_presented) of [Git](https://git-scm.com), and you can easily resolve them.
+:::
+
+### Import
+
+If you want to use the component without making any changes, you can simply import the component from the module.
+
+:::code-group
+
+```tsx [package]
+import { Button } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Button } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Button } from "@workspaces/ui"
+```
+
+:::
+
+:::note
+If you want to know more about the components, please check [this](/docs/components).
+:::
+
+## Styling
+
+[Style Props](/docs/styling/style-props) is a prop that applies styles to elements using props. Style Props follows the [CSS properties](https://developer.mozilla.org/ja/docs/Web/CSS/Properties) and provides all properties in camelCase.
+
+```tsx preview
+<Box p="md" bg="bg.contrast" color="fg.contrast">
+  Box
+</Box>
+```
+
+:::note
+[Style Props](/docs/styling/style-props) uses [@mdn/browser-compat-data](https://github.com/mdn/browser-compat-data). When the library is updated, Style Props is also updated periodically.
+:::
+
+### Conditional Styles
+
+Conditional styles allow you to apply styles to [pseudo-elements](/docs/styling/style-props#pseudo-elements), [pseudo-classes](/docs/styling/style-props#pseudo-classes), and [selectors](/docs/styling/style-props#selectors).
+
+```tsx preview
+<Box p="md" color="fg.contrast" bg={{ base: "bg.contrast", _hover: "success" }}>
+  Hover me
+</Box>
+```
+
+:::note
+If you want to know more about the styling, please check [this](/docs/styling).
+:::
+
+### Color Schemes
+
+Color schemes generate a color context for the component based on the values. This improves consistency in colors.
+
+```tsx preview
+<VStack gap="md">
+  <Box
+    p="md"
+    colorScheme="blue"
+    bg="colorScheme.solid"
+    color="colorScheme.contrast"
+  >
+    Solid
+  </Box>
+  <Box
+    p="md"
+    colorScheme="green"
+    bg="colorScheme.subtle"
+    color="colorScheme.fg"
+  >
+    Subtle
+  </Box>
+</VStack>
+```
+
+Color schemes inherit the color scheme of the parent element.
+
+```tsx preview
+<VStack gap="md" colorScheme="blue">
+  <Box p="md" bg="colorScheme.solid" color="colorScheme.contrast">
+    Provided by Parent
+  </Box>
+  <Box
+    p="md"
+    colorScheme="green"
+    bg="colorScheme.subtle"
+    color="colorScheme.fg"
+  >
+    Child
+  </Box>
+</VStack>
+```
+
+:::note
+If you want to know more about the color schemes, please check [this](/docs/styling/color-scheme).
+:::
+
+## Responsive Design
+
+Responsive design refers to the breakpoints defined in the theme. Yamada UI has a default theme, and [breakpoints](/docs/theming/tokens/breakpoints) are defined.
+
+To apply responsive design to [Style Props](/docs/styling/style-props), set an object with the breakpoints as the key.
+
+- The keys of the object define the keys set in the theme's [breakpoints](/docs/theming/tokens/breakpoints).
+- The values of the object define the values of the styles set by the key.
+
+```tsx preview
+<Box p="md" color="fg.contrast" bg={{ base: "bg.contrast", md: "success" }}>
+  Box
+</Box>
+```
+
+:::note
+If you want to know more about the responsive design, please check [this](/docs/styling/responsive-design).
+:::
+
+## Color Mode
+
+Yamada UI has built-in support for managing the application's color mode, allowing you to easily switch between light and dark modes. All provided components also support dark mode.
+
+To apply color mode to [Style Props](/docs/styling/style-props), set an array.
+
+- Set the value for light mode as the first element.
+- Set the value for dark mode as the last element.
+
+```tsx preview
+<Box p="md" bg={["success", "warning"]} color="white">
+  Box
+</Box>
+```
+
+:::note
+If you want to know more about the color mode, please check [this](/docs/styling/color-mode).
+:::
+
+## Congratulations!
+
+Congratulations!🎉
+
+This means you've become a **Regular Yamada**🥳
+
+To the **Regular Yamada**, I'd like to give you this word.
+
+"Next, I'm waiting for you in [Learn the Advanced](/docs/get-started/advanced)///"😘
+
+## Learn more
+
+Want to learn more about Yamada UI?😎
+
+::::card-group
+:::card{href="/docs/get-started/advanced"}
+
+### Learn the Advanced
+
+Learn the applications of styling, responsiveness, dark mode, and animations of Yamada UI.
+
+:::
+:::card{href="/docs/components"}
+
+### Explore the Components
+
+Yamada UI provides over 130 flexible components. All components support animations and dark mode.
+
+:::
+:::card{href="/docs/styling"}
+
+### Learn the Styling
+
+All components are designed to be styled using props.
+
+:::
+:::card{href="https://github.com/yamada-ui/yamada-ui"}
+
+### Explore the Source Code
+
+Yamada UI's package and documentation site are open source. If you like Yamada UI, please star it.
+
+:::
+::::

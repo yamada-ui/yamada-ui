@@ -5,7 +5,6 @@ import type { GenericsComponent, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import type { CalendarStyle } from "./calendar.style"
 import type {
-  MaybeDateValue,
   UseCalendarDayProps,
   UseCalendarProps,
   UseCalendarReturn,
@@ -59,10 +58,12 @@ interface ComponentContext
       | "yearSelectProps"
     > {}
 
-export interface CalendarRootProps<Y extends MaybeDateValue = Date>
-  extends Omit<HTMLStyledProps, "defaultValue" | "onChange">,
+export interface CalendarRootProps<
+  Multiple extends boolean = false,
+  Range extends boolean = false,
+> extends Omit<HTMLStyledProps, "defaultValue" | "onChange">,
     ThemeProps<CalendarStyle>,
-    UseCalendarProps<Y>,
+    UseCalendarProps<Multiple, Range>,
     Pick<CalendarMonthProps, "day"> {
   /**
    * Props for the button component.
@@ -139,10 +140,10 @@ export { CalendarPropsContext, useCalendarPropsContext }
 /**
  * `Calendar` is a component for displaying or selecting dates in a calendar.
  *
- * @see https://yamada-ui.com/components/calendar
+ * @see https://yamada-ui.com/docs/components/calendar
  */
 export const CalendarRoot = withProvider(
-  <Y extends MaybeDateValue = Date>({
+  <Multiple extends boolean = false, Range extends boolean = false>({
     children,
     day,
     buttonProps,
@@ -160,7 +161,7 @@ export const CalendarRoot = withProvider(
     weeksProps,
     yearSelectProps,
     ...props
-  }: CalendarRootProps<Y>) => {
+  }: CalendarRootProps<Multiple, Range>) => {
     const {
       descendants,
       disabled,
@@ -196,7 +197,7 @@ export const CalendarRoot = withProvider(
       onMonthChange,
       onNextMonth,
       onPrevMonth,
-    } = useCalendar<Y>(props)
+    } = useCalendar(props)
     const calendarContext = useMemo(
       () => ({
         disabled,
@@ -326,7 +327,9 @@ export const CalendarRoot = withProvider(
   },
   "root",
 )() as GenericsComponent<{
-  <Y extends MaybeDateValue = Date>(props: CalendarRootProps<Y>): ReactElement
+  <Multiple extends boolean = false, Range extends boolean = false>(
+    props: CalendarRootProps<Multiple, Range>,
+  ): ReactElement
 }>
 
 export interface CalendarNavigationProps extends HTMLStyledProps<"nav"> {}
@@ -543,13 +546,13 @@ export const CalendarMonth = withContext<"table", CalendarMonthProps>(
         <CalendarWeeks {...weeksProps}>
           {monthDays.map((week, index) => (
             <CalendarWeek key={index} {...weekProps}>
-              {week.map((value) => (
+              {week.map(({ label, value }) => (
                 <CalendarDay
                   key={value.toDateString()}
                   {...{ ...dayProps, value }}
                 >
                   {runIfFn(dayProp, { value }) ?? (
-                    <styled.span>{value.getDate()}</styled.span>
+                    <styled.span>{label}</styled.span>
                   )}
                 </CalendarDay>
               ))}

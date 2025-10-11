@@ -1,13 +1,7 @@
 "use client"
 
 import type { FC, PropsWithChildren, ReactNode } from "react"
-import type {
-  HTMLProps,
-  HTMLStyledProps,
-  SimplePlacement,
-  StyleValue,
-  ThemeProps,
-} from "../../core"
+import type { HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ButtonProps } from "../button"
 import type { CloseButtonProps } from "../close-button"
 import type { FocusLockProps } from "../focus-lock"
@@ -68,12 +62,6 @@ export interface DrawerRootProps
    */
   duration?: MotionTransitionProps["duration"]
   /**
-   * The placement of the drawer.
-   *
-   * @default 'inline-end'
-   */
-  placement?: StyleValue<SimplePlacement>
-  /**
    * The modal trigger to use.
    */
   trigger?: ReactNode
@@ -122,7 +110,7 @@ export { DrawerPropsContext, useDrawerPropsContext }
 /**
  * `Drawer` is a component for a panel that appears from the edge of the screen.
  *
- * @see https://yamada-ui.com/components/drawer
+ * @see https://yamada-ui.com/docs/components/drawer
  */
 export const DrawerRoot = withProvider<"div", DrawerRootProps, "placement">(
   ({

@@ -5,7 +5,158 @@ storybook: components-hueslider--basic
 source: components/hue-slider
 ---
 
+```tsx preview
+<HueSlider.Root defaultValue={180} />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { HueSlider } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { HueSlider } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { HueSlider } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<HueSlider.Root />
+```
+
+### Change Size
+
+```tsx preview
+<VStack>
+  <For each={["sm", "md", "lg"]}>
+    {(size, index) => (
+      <HueSlider.Root key={index} size={size} defaultValue={180} />
+    )}
+  </For>
+</VStack>
+```
+
+### Set Default Value
+
+To set a default value, set a value to `defaultValue`.
+
+```tsx preview
+<HueSlider.Root defaultValue={270} />
+```
+
+### Set Min and Max Values
+
+To set minimum and maximum values, set numbers to `min` or `max`.
+
+```tsx preview
+<HueSlider.Root defaultValue={300} min={270} max={360} />
+```
+
+### Change Orientation
+
+To change the orientation, set `orientation` to `"vertical"` or `"horizontal"`. By default, `"horizontal"` is set.
+
+```tsx preview
+<HueSlider.Root defaultValue={180} orientation="vertical" h="xs" />
+```
+
+### Change Shape
+
+```tsx preview
+<VStack>
+  <For each={["circle", "rounded", "square"]}>
+    {(shape, index) => (
+      <HueSlider.Root key={index} defaultValue={180} shape={shape} />
+    )}
+  </For>
+</VStack>
+```
+
+### Set Step Value
+
+To set a step value, set a value to `step`.
+
+```tsx preview
+<HueSlider.Root defaultValue={180} step={10} />
+```
+
+### Disable
+
+To disable, set `disabled` to `true`.
+
+```tsx preview
+<HueSlider.Root defaultValue={180} disabled />
+```
+
+### Read-Only
+
+To make read-only, set `readOnly` to `true`.
+
+```tsx preview
+<HueSlider.Root defaultValue={180} readOnly />
+```
+
+### Display Tooltip
+
+```tsx preview functional
+const [value, setValue] = useState(50)
+
+return (
+  <HueSlider.Root value={value} onChange={setValue}>
+    <HueSlider.Track>
+      <Tooltip content={value}>
+        <HueSlider.Thumb />
+      </Tooltip>
+
+      <HueSlider.Overlay />
+    </HueSlider.Track>
+  </HueSlider.Root>
+)
+```
+
+### Handle Start and End Events
+
+To handle start and end events, use `onChangeStart` or `onChangeEnd`.
+
+```tsx preview functional
+const [value, onChange] = useState(180)
+const [startValue, onChangeStart] = useState(180)
+const [endValue, onChangeEnd] = useState(180)
+
+return (
+  <VStack>
+    <Text>
+      Value: {value}, Start Value: {startValue}, End Value: {endValue}
+    </Text>
+
+    <HueSlider.Root
+      value={value}
+      onChange={onChange}
+      onChangeStart={onChangeStart}
+      onChangeEnd={onChangeEnd}
+    />
+  </VStack>
+)
+```
+
+### Control
+
+```tsx preview functional
+const [value, setValue] = useState(180)
+
+return (
+  <VStack>
+    <HueSlider.Root value={value} onChange={setValue} />
+  </VStack>
+)
+```
 
 ## Props
 

@@ -31,7 +31,10 @@ function createRow(prop: string, { docs, token }: Config) {
   return {
     prop,
     token: token ? (
-      <NextLink href={`/docs/theming/tokens/${toKebabCase(token)}`}>
+      <NextLink
+        href={`/docs/theming/tokens/${toKebabCase(token)}`}
+        colorScheme="mono"
+      >
         {token}
       </NextLink>
     ) : undefined,

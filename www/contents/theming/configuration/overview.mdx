@@ -1,6 +1,60 @@
 ---
 title: Overview
-description: Learn about the configuration of Yamada UI.
+description: The configuration of Yamada UI is a global setting used in various parts of the system.
 ---
 
-## Default Values
+The configuration defined in the theme are [here](https://github.com/yamada-ui/yamada-ui/blob/main/packages/react/src/theme/config.ts).
+
+```tsx
+import { defineConfig } from "@yamada-ui/react"
+
+export const config = defineConfig({
+  css: { varPrefix: "ui" },
+  breakpoint: { direction: "down", identifier: "@media screen" },
+  defaultColorMode: "light",
+  defaultThemeScheme: "base",
+  notice: { duration: 5000 },
+  theme: { responsive: true },
+})
+```
+
+## Properties
+
+| Property                                | Default             | Description                                                                                                        |
+| --------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `css.layers`                            | -                   | [Cascade layers](/docs/theming/cascade-layers) settings.                                                           |
+| `css.varPrefix`                         | `"ui"`              | CSS variable prefix.                                                                                               |
+| `breakpoint.base`                       | `"9999px"`          | Breakpoint base value.                                                                                             |
+| `breakpoint.containerRef`               | -                   | [Container query](/docs/theming/breakpoints#container-query) reference when using the container query.             |
+| `breakpoint.direction`                  | `"down"`            | [Responsive design](/docs/styling/responsive-design) adopted [media query](/docs/theming/breakpoints#media-query). |
+| `breakpoint.identifier`                 | `"@media screen"`   | Media query to use for breakpoints.                                                                                |
+| `defaultColorMode`                      | `"light"`           | Default [color mode](/docs/theming/color-mode).                                                                    |
+| `defaultThemeScheme`                    | `"base"`            | Default [theme scheme](/docs/theming/switching-themes).                                                            |
+| `theme.responsive`                      | `false`             | Apply [responsive design](/docs/styling/responsive-design) to theme tokens.                                        |
+| `disableTransitionOnChange`             | `false`             | Disable `transition` when changing the color mode or theme.                                                        |
+| `loading.screen.blockScrollOnMount`     | `true`              | Lock scrolling when [loading](/docs/hooks/use-loading) is displayed.                                               |
+| `loading.screen.allowPinchZoom`         | `false`             | Handle zoom or pinch gestures on iOS devices when scrolling is locked.                                             |
+| `loading.screen.loadingScheme`          | `"oval"`            | Scheme of [loading](/docs/hooks/use-loading).                                                                      |
+| `loading.screen.duration`               | `null`              | Duration of [loading](/docs/hooks/use-loading).                                                                    |
+| `loading.screen.loadingCount`           | `0`                 | Initial count of [loading](/docs/hooks/use-loading).                                                               |
+| `loading.page.blockScrollOnMount`       | `true`              | Lock scrolling when [loading](/docs/hooks/use-loading) is displayed.                                               |
+| `loading.page.allowPinchZoom`           | `false`             | Handle zoom or pinch gestures on iOS devices when scrolling is locked.                                             |
+| `loading.page.loadingScheme`            | `"oval"`            | Scheme of [loading](/docs/hooks/use-loading).                                                                      |
+| `loading.page.duration`                 | `null`              | Duration of [loading](/docs/hooks/use-loading).                                                                    |
+| `loading.page.loadingCount`             | `0`                 | Initial count of [loading](/docs/hooks/use-loading).                                                               |
+| `loading.background.blockScrollOnMount` | `false`             | Lock scrolling when [loading](/docs/hooks/use-loading) is displayed.                                               |
+| `loading.background.allowPinchZoom`     | `false`             | Handle zoom or pinch gestures on iOS devices when scrolling is locked.                                             |
+| `loading.background.loadingScheme`      | `"oval"`            | Scheme of [loading](/docs/hooks/use-loading).                                                                      |
+| `loading.background.duration`           | `null`              | Duration of [loading](/docs/hooks/use-loading).                                                                    |
+| `loading.background.loadingCount`       | `0`                 | Initial count of [loading](/docs/hooks/use-loading).                                                               |
+| `notice.closable`                       | `true`              | Enable to close [notice](/docs/hooks/use-notice).                                                                  |
+| `notice.closeStrategy`                  | `["click", "drag"]` | Close strategy for the [notice](/docs/hooks/use-notice).                                                           |
+| `notice.duration`                       | `5000`              | Duration of [notice](/docs/hooks/use-notice).                                                                      |
+| `notice.expand`                         | `false`             | Expand [notice](/docs/hooks/use-notice).                                                                           |
+| `notice.limit`                          | `3`                 | Maximum number of [notice](/docs/hooks/use-notice).                                                                |
+| `notice.placement`                      | `"start"`           | Placement of [notice](/docs/hooks/use-notice).                                                                     |
+| `snacks.closable`                       | `true`              | Enable close button on [snacks](/docs/hooks/use-snacks).                                                           |
+| `snacks.duration`                       | `5000`              | Duration of [snacks](/docs/hooks/use-snacks).                                                                      |
+| `snacks.limit`                          | -                   | Maximum number of [snacks](/docs/hooks/use-snacks).                                                                |
+| `snacks.placement`                      | `"start"`           | Placement of [snacks](/docs/hooks/use-snacks).                                                                     |
+| `snacks.startIndex`                     | `0`                 | Start `z-index` of [snacks](/docs/hooks/use-snacks).                                                               |

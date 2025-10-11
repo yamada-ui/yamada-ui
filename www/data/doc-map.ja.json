@@ -47,14 +47,14 @@
               "pathname": "/docs/get-started/frameworks/next-pages"
             },
             {
-              "title": "Remix",
-              "segment": "remix",
-              "pathname": "/docs/get-started/frameworks/remix"
-            },
-            {
               "title": "Vite",
               "segment": "vite",
               "pathname": "/docs/get-started/frameworks/vite"
+            },
+            {
+              "title": "React Router",
+              "segment": "react-router",
+              "pathname": "/docs/get-started/frameworks/react-router"
             }
           ]
         }
@@ -79,6 +79,11 @@
           "title": "createComponent",
           "segment": "create-component",
           "pathname": "/docs/components/create-component"
+        },
+        {
+          "title": "国際化",
+          "segment": "internationalization",
+          "pathname": "/docs/components/internationalization"
         },
         {
           "title": "コンポーネント",
@@ -397,11 +402,6 @@
               "pathname": "/docs/components/pagination"
             },
             {
-              "title": "PagingTable",
-              "segment": "paging-table",
-              "pathname": "/docs/components/paging-table"
-            },
-            {
               "title": "PasswordInput",
               "segment": "password-input",
               "pathname": "/docs/components/password-input"
@@ -491,6 +491,11 @@
               "title": "Slider",
               "segment": "slider",
               "pathname": "/docs/components/slider"
+            },
+            {
+              "title": "Snacks",
+              "segment": "snacks",
+              "pathname": "/docs/components/snacks"
             },
             {
               "title": "Spacer",
@@ -730,14 +735,9 @@
               "pathname": "/docs/components/for"
             },
             {
-              "title": "FormatByte",
-              "segment": "format-byte",
-              "pathname": "/docs/components/format-byte"
-            },
-            {
-              "title": "FormatNumber",
-              "segment": "format-number",
-              "pathname": "/docs/components/format-number"
+              "title": "Format",
+              "segment": "format",
+              "pathname": "/docs/components/format"
             },
             {
               "title": "Portal",
@@ -799,11 +799,6 @@
           "pathname": "/docs/hooks/use-breakpoint-effect"
         },
         {
-          "title": "useBreakpointEffect",
-          "segment": "use-update-breakpoint-effect",
-          "pathname": "/docs/hooks/use-update-breakpoint-effect"
-        },
-        {
           "title": "useBreakpointState",
           "segment": "use-breakpoint-state",
           "pathname": "/docs/hooks/use-breakpoint-state"
@@ -854,11 +849,6 @@
           "pathname": "/docs/hooks/use-eye-dropper"
         },
         {
-          "title": "useFocusOnPointerDown",
-          "segment": "use-focus-on-pointer-down",
-          "pathname": "/docs/hooks/use-focus-on-pointer-down"
-        },
-        {
           "title": "useFocusOnShow",
           "segment": "use-focus-on-show",
           "pathname": "/docs/hooks/use-focus-on-show"
@@ -867,6 +857,11 @@
           "title": "useFormatByte",
           "segment": "use-format-byte",
           "pathname": "/docs/hooks/use-format-byte"
+        },
+        {
+          "title": "useFormatDateTime",
+          "segment": "use-format-date-time",
+          "pathname": "/docs/hooks/use-format-date-time"
         },
         {
           "title": "useFormatNumber",
@@ -894,11 +889,6 @@
           "pathname": "/docs/hooks/use-interval"
         },
         {
-          "title": "useLazyMount",
-          "segment": "use-lazy-mount",
-          "pathname": "/docs/hooks/use-lazy-mount"
-        },
-        {
           "title": "useLoading",
           "segment": "use-loading",
           "pathname": "/docs/hooks/use-loading"
@@ -912,11 +902,6 @@
           "title": "useMediaQuery",
           "segment": "use-media-query",
           "pathname": "/docs/hooks/use-media-query"
-        },
-        {
-          "title": "useMounted",
-          "segment": "use-mounted",
-          "pathname": "/docs/hooks/use-mounted"
         },
         {
           "title": "useNotice",
@@ -954,11 +939,6 @@
           "pathname": "/docs/hooks/use-resize-observer"
         },
         {
-          "title": "useSnacks",
-          "segment": "use-snacks",
-          "pathname": "/docs/hooks/use-snacks"
-        },
-        {
           "title": "useTheme",
           "segment": "use-theme",
           "pathname": "/docs/hooks/use-theme"
@@ -969,14 +949,14 @@
           "pathname": "/docs/hooks/use-timeout"
         },
         {
-          "title": "useToken",
-          "segment": "use-token",
-          "pathname": "/docs/hooks/use-token"
-        },
-        {
           "title": "useUpdateEffect",
           "segment": "use-update-effect",
           "pathname": "/docs/hooks/use-update-effect"
+        },
+        {
+          "title": "useUpdateBreakpointEffect",
+          "segment": "use-update-breakpoint-effect",
+          "pathname": "/docs/hooks/use-update-breakpoint-effect"
         },
         {
           "title": "useValue",
@@ -1014,6 +994,11 @@
           "title": "カラーモード",
           "segment": "color-mode",
           "pathname": "/docs/styling/color-mode"
+        },
+        {
+          "title": "カラースキーム",
+          "segment": "color-scheme",
+          "pathname": "/docs/styling/color-scheme"
         },
         {
           "title": "CSSカスタムプロパティ",
@@ -1104,7 +1089,7 @@
           "pathname": "/docs/theming/cascade-layers"
         },
         {
-          "title": "設定",
+          "title": "コンフィグ",
           "segment": "configuration",
           "items": [
             {
@@ -1178,6 +1163,11 @@
               "title": "カラー",
               "segment": "colors",
               "pathname": "/docs/theming/tokens/colors"
+            },
+            {
+              "title": "カラースキーム",
+              "segment": "color-schemes",
+              "pathname": "/docs/theming/tokens/color-schemes"
             },
             {
               "title": "所要時間",

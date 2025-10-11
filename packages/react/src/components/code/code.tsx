@@ -20,6 +20,6 @@ export { CodePropsContext, useCodePropsContext }
 /**
  * `Code` is a component that represents a code block. By default, it renders a `code` element.
  *
- * @see https://yamada-ui.com/components/code
+ * @see https://yamada-ui.com/docs/components/code
  */
 export const Code = withContext("code")()

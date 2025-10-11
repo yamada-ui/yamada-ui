@@ -370,24 +370,24 @@ Options:
 
 `init`コマンドを実行した後、プロジェクトに`ui.json`が生成されます。`ui.json`を変更することで、さまざまなカスタマイズが可能です。
 
-| プロパティ                | 説明                                                                                             | デフォルト     |
-| ------------------------- | ------------------------------------------------------------------------------------------------ | -------------- |
-| `path`                    | 生成されるディレクトリのパス。                                                                   | `./ui`         |
-| `monorepo`                | モノレポで生成します。                                                                           | `false`        |
-| `jsx`                     | JSXファイルで生成します。                                                                        | `false`        |
-| `theme.path`              | テーマが生成されるディレクトリのパス。                                                           | `./theme`      |
-| `components.path`         | コンポーネントが生成されるディレクトリのパス。                                                   | `./components` |
-| `components.overwrite`    | コンポーネントなどが追加されたときにローカルの既存のコンポーネントの参照先を更新します。         | `false`        |
-| `components.dependents`   | コンポーネントを追加するときに依存されているコンポーネントも追加します。                         | `true`         |
-| `components.dependencies` | コンポーネントを追加するときに依存しているコンポーネントも追加します。                           | `false`        |
-| `hooks.path`              | フックが生成されるディレクトリのパス。                                                           | `./hooks`      |
-| `hooks.overwrite`         | コンポーネントなどが追加されたときにローカルの既存のフックの参照先を更新します。                 | `false`        |
-| `hooks.dependents`        | フックを追加するときに依存されているフックも追加します。                                         | `true`         |
-| `hooks.dependencies`      | フックを追加するときに依存しているフックも追加します。                                           | `false`        |
-| `providers.path`          | プロバイダーが生成されるディレクトリのパス。                                                     | `./providers`  |
-| `providers.overwrite`     | コンポーネントなどが追加されたときにローカルの既存のプロバイダーの参照先を更新します。           | `false`        |
-| `providers.dependents`    | プロバイダーを追加するときに依存されているプロバイダーも追加します。                             | `true`         |
-| `providers.dependencies`  | プロバイダーを追加するときに依存しているプロバイダーも追加します。                               | `false`        |
-| `format.configPath`       | [Prettier](https://prettier.io)が参照するコンフィグのパス。                                      | -              |
-| `format.enabled`          | コンポーネントなどを追加・更新するときに[Prettier](https://prettier.io)の`--write`を実行します。 | `false`        |
-| `lint.enabled`            | コンポーネントなどを追加・更新するときに[ESLint](https://eslint.org)の`--fix`を実行します。      | `false`        |
+| プロパティ                | デフォルト     | 説明                                                                                             |
+| ------------------------- | -------------- | ------------------------------------------------------------------------------------------------ |
+| `path`                    | `./ui`         | 生成されるディレクトリのパス。                                                                   |
+| `monorepo`                | `false`        | モノレポで生成します。                                                                           |
+| `jsx`                     | `false`        | JSXファイルで生成します。                                                                        |
+| `theme.path`              | `./theme`      | テーマが生成されるディレクトリのパス。                                                           |
+| `components.path`         | `./components` | コンポーネントが生成されるディレクトリのパス。                                                   |
+| `components.overwrite`    | `false`        | コンポーネントなどが追加されたときにローカルの既存のコンポーネントの参照先を更新します。         |
+| `components.dependents`   | `true`         | コンポーネントを追加するときに依存されているコンポーネントも追加します。                         |
+| `components.dependencies` | `false`        | コンポーネントを追加するときに依存しているコンポーネントも追加します。                           |
+| `hooks.path`              | `./hooks`      | フックが生成されるディレクトリのパス。                                                           |
+| `hooks.overwrite`         | `false`        | コンポーネントなどが追加されたときにローカルの既存のフックの参照先を更新します。                 |
+| `hooks.dependents`        | `true`         | フックを追加するときに依存されているフックも追加します。                                         |
+| `hooks.dependencies`      | `false`        | フックを追加するときに依存しているフックも追加します。                                           |
+| `providers.path`          | `./providers`  | プロバイダーが生成されるディレクトリのパス。                                                     |
+| `providers.overwrite`     | `false`        | コンポーネントなどが追加されたときにローカルの既存のプロバイダーの参照先を更新します。           |
+| `providers.dependents`    | `true`         | プロバイダーを追加するときに依存されているプロバイダーも追加します。                             |
+| `providers.dependencies`  | `false`        | プロバイダーを追加するときに依存しているプロバイダーも追加します。                               |
+| `format.configPath`       | -              | [Prettier](https://prettier.io)が参照するコンフィグのパス。                                      |
+| `format.enabled`          | `false`        | コンポーネントなどを追加・更新するときに[Prettier](https://prettier.io)の`--write`を実行します。 |
+| `lint.enabled`            | `false`        | コンポーネントなどを追加・更新するときに[ESLint](https://eslint.org)の`--fix`を実行します。      |

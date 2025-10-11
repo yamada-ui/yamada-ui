@@ -1,17 +1,11 @@
 "use client"
 
 import type { ReactElement } from "react"
-import type {
-  HTMLStyledProps,
-  PropGetter,
-  StyleValue,
-  ThemeProps,
-} from "../../core"
+import type { HTMLStyledProps, PropGetter, ThemeProps } from "../../core"
 import type { BreadcrumbStyle } from "./breadcrumb.style"
 import type { UseBreadcrumbProps } from "./use-breadcrumb"
 import { Fragment, useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
-import { useValue } from "../../hooks/use-value"
 import { ChevronRightIcon, EllipsisIcon } from "../icon"
 import { breadcrumbStyle } from "./breadcrumb.style"
 import { useBreadcrumb } from "./use-breadcrumb"
@@ -30,7 +24,7 @@ export interface BreadcrumbRootProps
    *
    * @default 0
    */
-  endBoundaries?: StyleValue<number>
+  endBoundaries?: number
   /**
    * The visual separator between each breadcrumb item.
    *
@@ -42,7 +36,7 @@ export interface BreadcrumbRootProps
    *
    * @default 0
    */
-  startBoundaries?: StyleValue<number>
+  startBoundaries?: number
   /**
    * Props for item element.
    */
@@ -74,21 +68,19 @@ export { BreadcrumbPropsContext, useBreadcrumbPropsContext }
 /**
  * `Breadcrumb` is a component that helps users understand the hierarchy of a website.
  *
- * @see https://yamada-ui.com/components/breadcrumb
+ * @see https://yamada-ui.com/docs/components/breadcrumb
  */
 export const BreadcrumbRoot = withProvider<"nav", BreadcrumbRootProps>(
   ({
-    endBoundaries: endBoundariesProp,
+    endBoundaries,
     gap,
     separator,
-    startBoundaries: startBoundariesProp,
+    startBoundaries,
     itemProps,
     listProps,
     separatorProps,
     ...rest
   }) => {
-    const endBoundaries = useValue(endBoundariesProp)
-    const startBoundaries = useValue(startBoundariesProp)
     const {
       children,
       getEllipsisProps,

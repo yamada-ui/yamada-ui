@@ -32,15 +32,15 @@ const registryStore = new Map<string, Registry>()
 
 function getRegistryUrl(name: string) {
   if (name === "index") {
-    return path.join(REGISTRY_URL, "index.json")
+    return path.posix.join(REGISTRY_URL, "index.json")
   } else if (name === "theme") {
-    return path.join(REGISTRY_URL, "theme.json")
+    return path.posix.join(REGISTRY_URL, "theme.json")
   } else if (name.startsWith("use-")) {
-    return path.join(REGISTRY_URL, "hooks", `${name}.json`)
+    return path.posix.join(REGISTRY_URL, "hooks", `${name}.json`)
   } else if (name.endsWith("-provider")) {
-    return path.join(REGISTRY_URL, "providers", `${name}.json`)
+    return path.posix.join(REGISTRY_URL, "providers", `${name}.json`)
   } else {
-    return path.join(REGISTRY_URL, "components", `${name}.json`)
+    return path.posix.join(REGISTRY_URL, "components", `${name}.json`)
   }
 }
 
@@ -361,18 +361,16 @@ export async function transformIndexWithFormatAndLint(
   config: Config,
   generatedNames: string[],
 ) {
-  const { cwd, format, indexPath, jsx, lint } = config
-
   content = transformIndex(generatedNames, content, config)
 
-  if (jsx) content = transformTsToJs(content)
+  if (config.jsx) content = transformTsToJs(content)
 
   content = await lintText(content, {
-    ...lint,
-    cwd,
-    filePath: indexPath,
+    ...config.lint,
+    cwd: config.cwd,
+    filePath: config.paths.ui.index,
   })
-  content = await formatText(content, format)
+  content = await formatText(content, config.format)
 
   return content
 }

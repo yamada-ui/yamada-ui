@@ -1,12 +1,7 @@
 "use client"
 
 import type { ReactNode } from "react"
-import type {
-  HTMLStyledProps,
-  Orientation,
-  StyleValue,
-  ThemeProps,
-} from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { InfiniteScrollAreaStyle } from "./infinite-scroll-area.style"
 import type { UseInfiniteScrollProps } from "./use-infinite-scroll"
 import { useRef } from "react"
@@ -29,12 +24,6 @@ export interface InfiniteScrollAreaProps
    */
   loading?: ReactNode
   /**
-   * The orientation of the infinite scroll.
-   *
-   * @default 'vertical'
-   */
-  orientation?: StyleValue<Orientation>
-  /**
    * Props for infinite scroll area trigger component.
    */
   triggerProps?: HTMLStyledProps
@@ -56,7 +45,7 @@ export { InfiniteScrollAreaPropsContext, useInfiniteScrollAreaPropsContext }
  * `InfiniteScrollArea` is for providing infinite scroll functionality.
  * This feature provides a smooth scrolling experience by automatically loading and displaying the next dataset when the user reaches the end of the page.
  *
- * @see https://yamada-ui.com/components/infinite-scroll-area
+ * @see https://yamada-ui.com/docs/components/infinite-scroll-area
  */
 export const InfiniteScrollArea = withProvider<
   "div",

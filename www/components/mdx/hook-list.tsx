@@ -1,3 +1,5 @@
+"use client"
+
 import type { GridProps } from "@yamada-ui/react"
 import { Grid } from "@yamada-ui/react"
 import { useMemo } from "react"
@@ -19,6 +21,8 @@ export function HookList(props: HookListProps) {
 
   return (
     <Grid
+      colorScheme="mono"
+      fontSize="sm"
       gap={{ base: "lg", sm: "md" }}
       my="lg"
       templateColumns={{

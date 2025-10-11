@@ -69,21 +69,21 @@ describe("<PinInput />", () => {
     await user.type(inputs[0]!, "1")
 
     await waitFor(() => {
-      expect(handleChange).toHaveBeenCalledWith("1")
+      expect(handleChange).toHaveBeenLastCalledWith("1")
     })
 
     await user.type(inputs[1]!, "2")
 
     await waitFor(() => {
-      expect(handleChange).toHaveBeenCalledWith("12")
+      expect(handleChange).toHaveBeenLastCalledWith("12")
     })
-    expect(handleComplete).toHaveBeenCalledWith("12")
+    expect(handleComplete).toHaveBeenLastCalledWith("12")
   })
 
   test('input type should be "password" when mask is true', () => {
     render(<PinInput.Root mask />)
 
-    const inputs = screen.getAllByPlaceholderText("○")
+    const inputs = screen.getAllByPlaceholderText("◯")
 
     inputs.forEach((input) => {
       expect(input).toHaveAttribute("type", "password")
@@ -143,7 +143,7 @@ describe("<PinInput />", () => {
     const secondInput = inputs[1]
 
     await waitFor(() => {
-      expect(firstInput?.placeholder).toBe("○")
+      expect(firstInput?.placeholder).toBe("◯")
     })
 
     await act(async () => {
@@ -160,7 +160,7 @@ describe("<PinInput />", () => {
     })
 
     await waitFor(() => {
-      expect(firstInput?.placeholder).toBe("○")
+      expect(firstInput?.placeholder).toBe("◯")
     })
     expect(document.activeElement).toBe(secondInput)
     expect(secondInput?.placeholder).toBe("")

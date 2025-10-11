@@ -43,7 +43,7 @@ function getColor(system: System) {
 }
 
 function omitPercent(value?: string) {
-  if (value?.endsWith("%")) return value.replace(/\d{1,3}%$/, "")
+  if (value?.endsWith("%")) return value.replace(/\d{1,3}%$/, "").trim()
 
   return value
 }

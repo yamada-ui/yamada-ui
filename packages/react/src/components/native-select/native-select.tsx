@@ -53,7 +53,7 @@ export { NativeSelectPropsContext, useNativeSelectPropsContext }
 /**
  * `NativeSelect` is a component used for allowing users to select one option from a list. It displays a native dropdown list provided by the browser (user agent).
  *
- * @see https://yamada-ui.com/components/native-select
+ * @see https://yamada-ui.com/docs/components/native-select
  */
 export const NativeSelectRoot = withProvider<"select", NativeSelectRootProps>(
   (props) => {

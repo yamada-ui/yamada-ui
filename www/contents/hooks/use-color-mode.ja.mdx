@@ -5,4 +5,63 @@ storybook: hooks-usecolormode--basic
 source: hooks/use-color-mode
 ---
 
-### 使い方
+```tsx preview functional client
+const { colorMode } = useColorMode()
+
+return <Text>The current colorMode is "{colorMode}"</Text>
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { useColorMode } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useColorMode } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useColorMode } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const { changeColorMode, colorMode, internalColorMode, toggleColorMode } =
+  useColorMode()
+```
+
+:::tip
+カラーモードの概要は[こちら](/docs/styling/color-mode)をご覧ください。
+:::
+
+### カラーモードを切り替える
+
+- `colorMode`: 現在のカラーモードを提供します。
+- `internalColorMode`: `system`を含めた現在のカラーモードを提供します。
+
+```tsx preview functional client
+const { colorMode, internalColorMode, changeColorMode, toggleColorMode } =
+  useColorMode()
+
+return (
+  <VStack>
+    <Text>
+      The current colorMode is "{colorMode}", internal colorMode is "
+      {internalColorMode}"
+    </Text>
+
+    <Wrap gap="md">
+      <Button onClick={() => changeColorMode("light")}>ライトモード</Button>
+      <Button onClick={() => changeColorMode("dark")}>ダークモード</Button>
+      <Button onClick={() => changeColorMode("system")}>システム</Button>
+      <Button onClick={toggleColorMode}>
+        {colorMode === "light" ? "ダーク" : "ライト"}モードに切り替える
+      </Button>
+    </Wrap>
+  </VStack>
+)
+```

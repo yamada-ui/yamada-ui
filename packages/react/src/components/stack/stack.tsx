@@ -42,7 +42,7 @@ export { StackPropsContext, useStackPropsContext }
 /**
  * `Stack` is a component that groups elements and provides space between child elements.
  *
- * @see https://yamada-ui.com/components/stack
+ * @see https://yamada-ui.com/docs/components/stack
  */
 export const Stack = withContext<"div", StackProps>(
   ({

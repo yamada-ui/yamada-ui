@@ -20,6 +20,6 @@ export { HeadingPropsContext, useHeadingPropsContext }
 /**
  * `Heading` is a component that represents section headings. By default, it renders an `h1` element.
  *
- * @see https://yamada-ui.com/components/heading
+ * @see https://yamada-ui.com/docs/components/heading
  */
 export const Heading = withContext("h1")()

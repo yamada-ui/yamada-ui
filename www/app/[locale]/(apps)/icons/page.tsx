@@ -6,9 +6,7 @@ import { List } from "./list"
 
 export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ locale: string; slug: string[] }>
-}): Promise<Metadata> {
+}: PageProps<"/[locale]/icons">): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "icons" })
 

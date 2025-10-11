@@ -6,6 +6,6 @@ import { component, Icon } from "../icon"
 /**
  * `ChartPieIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/docs/components/icon
  */
 export const ChartPieIcon = component(Icon)({ as: ChartPie })

@@ -31,7 +31,7 @@ export { TextPropsContext, useTextPropsContext }
 /**
  * `Text` is a component that represents a paragraph of text. By default, it renders a `p` element.
  *
- * @see https://yamada-ui.com/components/text
+ * @see https://yamada-ui.com/docs/components/text
  */
 export const Text = withContext("p")(
   undefined,

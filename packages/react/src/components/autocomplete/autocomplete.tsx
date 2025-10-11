@@ -1,7 +1,8 @@
 "use client"
 
-import type { ReactNode } from "react"
+import type { ReactElement, ReactNode } from "react"
 import type {
+  GenericsComponent,
   HTMLProps,
   HTMLStyledProps,
   ThemeProps,
@@ -11,7 +12,6 @@ import type {
   ComboboxItem,
   UseComboboxGroupProps,
 } from "../../hooks/use-combobox"
-import type { FieldProps } from "../field"
 import type { UseInputBorderProps } from "../input"
 import type { AutocompleteStyle } from "./autocomplete.style"
 import type {
@@ -30,7 +30,7 @@ import {
   useComboboxGroup,
   useComboboxGroupContext,
 } from "../../hooks/use-combobox"
-import { cast } from "../../utils"
+import { cast, isArray } from "../../utils"
 import { useGroupItemProps } from "../group"
 import { CheckIcon, ChevronDownIcon, MinusIcon, XIcon } from "../icon"
 import { InputGroup, useInputBorder, useInputPropsContext } from "../input"
@@ -43,18 +43,18 @@ import {
 } from "./use-autocomplete"
 
 interface ComponentContext
-  extends Pick<UseAutocompleteReturn, "getSeparatorProps">,
+  extends Pick<UseAutocompleteReturn, "getInputProps" | "getSeparatorProps">,
     Pick<
       AutocompleteRootProps,
-      "emptyIcon" | "emptyProps" | "groupProps" | "optionProps"
+      "emptyIcon" | "emptyProps" | "groupProps" | "inputProps" | "optionProps"
     > {}
 
-export interface AutocompleteRootProps
+export interface AutocompleteRootProps<Multiple extends boolean = false>
   extends Omit<
       HTMLStyledProps,
-      "defaultValue" | "filter" | "offset" | "onChange" | "value"
+      "defaultValue" | "filter" | "offset" | "onChange" | "ref" | "value"
     >,
-    UseAutocompleteProps,
+    UseAutocompleteProps<Multiple>,
     Omit<
       WithoutThemeProps<Popover.RootProps, AutocompleteStyle>,
       | "autoFocus"
@@ -66,7 +66,6 @@ export interface AutocompleteRootProps
       | "withCloseButton"
     >,
     ThemeProps<AutocompleteStyle>,
-    FieldProps,
     UseInputBorderProps {
   /**
    * If `true`, display the clear icon.
@@ -107,6 +106,10 @@ export interface AutocompleteRootProps
    */
   iconProps?: AutocompleteIconProps
   /**
+   * The props for the input element.
+   */
+  inputProps?: HTMLStyledProps<"input">
+  /**
    * Props for option element.
    */
   optionProps?: Omit<AutocompleteOptionProps, "children" | "value">
@@ -134,10 +137,12 @@ export { AutocompletePropsContext, useAutocompletePropsContext }
 /**
  * `Autocomplete` is a component used to display suggestions in response to user text input.
  *
- * @see https://yamada-ui.com/components/autocomplete
+ * @see https://yamada-ui.com/docs/components/autocomplete
  */
-export const AutocompleteRoot = withProvider<"div", AutocompleteRootProps>(
-  (props) => {
+export const AutocompleteRoot = withProvider(
+  <Multiple extends boolean = false>(
+    props: AutocompleteRootProps<Multiple>,
+  ) => {
     const [groupItemProps, mergedProps] = useGroupItemProps(props)
     const [
       popoverProps,
@@ -158,6 +163,7 @@ export const AutocompleteRoot = withProvider<"div", AutocompleteRootProps>(
         emptyProps,
         groupProps,
         iconProps,
+        inputProps,
         optionProps,
         rootProps,
         ...rest
@@ -180,15 +186,18 @@ export const AutocompleteRoot = withProvider<"div", AutocompleteRootProps>(
       })
     }, [itemsProp, children])
     const {
+      children: fieldChildren,
       descendants,
       interactive,
       items: computedItems,
+      max,
       open,
       value,
       getClearIconProps,
       getContentProps,
       getFieldProps,
       getIconProps,
+      getInputProps,
       getRootProps,
       getSeparatorProps,
       onActiveDescendant,
@@ -201,7 +210,6 @@ export const AutocompleteRoot = withProvider<"div", AutocompleteRootProps>(
         animationScheme: "block-start",
         autoFocus: false,
         matchWidth: true,
-        openOnClick: false,
         ...popoverProps,
         disabled: !interactive,
         open,
@@ -224,17 +232,28 @@ export const AutocompleteRoot = withProvider<"div", AutocompleteRootProps>(
       () => ({ onActiveDescendant, onClose, onSelect }),
       [onActiveDescendant, onClose, onSelect],
     )
-    const autocompleteContext = useMemo(() => ({ value }), [value])
+    const autocompleteContext = useMemo(() => ({ max, value }), [value, max])
     const componentContext = useMemo(
       () => ({
         emptyIcon,
         emptyProps,
+        getInputProps,
         getSeparatorProps,
         groupProps,
+        inputProps,
         optionProps,
       }),
-      [getSeparatorProps, groupProps, optionProps, emptyProps, emptyIcon],
+      [
+        emptyIcon,
+        emptyProps,
+        getInputProps,
+        getSeparatorProps,
+        groupProps,
+        inputProps,
+        optionProps,
+      ],
     )
+    const hasValue = isArray(value) ? !!value.length : !!value
 
     return (
       <ComboboxDescendantsContext value={descendants}>
@@ -249,13 +268,15 @@ export const AutocompleteRoot = withProvider<"div", AutocompleteRootProps>(
                   {...getRootProps({ ...groupItemProps, ...rootProps })}
                 >
                   <Popover.Trigger>
-                    <AutocompleteField {...getFieldProps(varProps)} />
+                    <AutocompleteField {...getFieldProps(varProps)}>
+                      {fieldChildren}
+                    </AutocompleteField>
                   </Popover.Trigger>
 
                   <InputGroup.Element
-                    {...{ clickable: clearable && !!value, ...elementProps }}
+                    {...{ clickable: clearable && hasValue, ...elementProps }}
                   >
-                    {clearable && !!value ? (
+                    {clearable && hasValue ? (
                       <AutocompleteIcon
                         icon={clearIcon}
                         {...getClearIconProps(iconProps)}
@@ -288,14 +309,37 @@ export const AutocompleteRoot = withProvider<"div", AutocompleteRootProps>(
   const context = useInputPropsContext()
 
   return { ...context, ...props }
+}) as GenericsComponent<{
+  <Multiple extends boolean = false>(
+    props: AutocompleteRootProps<Multiple>,
+  ): ReactElement
+}>
+
+interface AutocompleteFieldProps extends HTMLStyledProps {}
+
+const AutocompleteField = withContext<"div", AutocompleteFieldProps>(
+  "div",
+  "field",
+)({ "data-group-propagate": "" }, ({ children, ...rest }) => {
+  const { getInputProps, inputProps } = useComponentContext()
+
+  return {
+    ...rest,
+    children: (
+      <>
+        {children}
+        <AutocompleteInput {...getInputProps(inputProps)} />
+      </>
+    ),
+  }
 })
 
-interface AutocompleteFieldProps extends HTMLStyledProps<"input"> {}
+interface AutocompleteInputProps extends HTMLStyledProps<"input"> {}
 
-const AutocompleteField = withContext<"input", AutocompleteFieldProps>(
+const AutocompleteInput = withContext<"input", AutocompleteInputProps>(
   "input",
-  "field",
-)({ "data-group-propagate": "" })
+  "input",
+)()
 
 interface AutocompleteIconProps extends HTMLStyledProps {
   icon?: ReactNode

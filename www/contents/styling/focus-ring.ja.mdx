@@ -3,6 +3,98 @@ title: フォーカスリング
 description: Yamada UIは、要素がフォーカスされたときに様々なスタイルを適用する機能を提供しています。
 ---
 
+## 概要
+
+フォーカスリングは、フォーカスされている要素を識別するために使用されます。Yamada UIでは、フォーカスリングのスタイルを簡単に設定するための`focusRing`と`focusVisibleRing`を提供しています。
+
 ## 使い方
 
+### focusRing
+
+`focusRing`は`&:is(:focus, [data-focus])`に適用されます。
+
+```tsx preview
+<Button variant="outline" focusRing="outside" data-focus>
+  Button
+</Button>
+```
+
+### focusVisibleRing
+
+`focusVisibleRing`は`&:is(:focus-visible, [data-focus-visible])`に適用されます。
+
+```tsx preview
+<Button variant="outline" focusVisibleRing="outside" data-focus-visible>
+  Button
+</Button>
+```
+
+:::note
+Yamada UIでは、[グローバルスタイル](/docs/styling/global-styles)で`focusVisibleRing="outline"`がすべての要素にデフォルトで設定されています。そのため、個別に設定を行わなくても、すべての要素で`focusVisibleRing`が設定されます。
+:::
+
 ## カスタマイズ
+
+### バリアントを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["outline", "inline", "mixed", "outside", "inside", "none"]}>
+    {(value, index) => (
+      <Button key={index} variant="outline" focusRing={value} data-focus>
+        {toTitleCase(value)}
+      </Button>
+    )}
+  </For>
+</Wrap>
+```
+
+### 色を変更する
+
+色を変更する場合は、`focusRingColor`に値を設定します。
+
+```tsx preview
+<Button
+  variant="outline"
+  focusRing="outline"
+  focusRingColor="success"
+  data-focus
+>
+  Button
+</Button>
+```
+
+### 太さを変更する
+
+太さを変更する場合は、`focusRingWidth`に値を設定します。
+
+```tsx preview
+<Button variant="outline" focusRing="outline" focusRingWidth="1px" data-focus>
+  Button
+</Button>
+```
+
+### スタイルを変更する
+
+スタイルを変更する場合は、`focusRingStyle`に値を設定します。
+
+```tsx preview
+<Button
+  variant="outline"
+  focusRing="outline"
+  focusRingStyle="dashed"
+  data-focus
+>
+  Button
+</Button>
+```
+
+### オフセットを変更する
+
+オフセットを変更する場合は、`focusRingOffset`に値を設定します。
+
+```tsx preview
+<Button variant="outline" focusRing="outline" focusRingOffset="5px" data-focus>
+  Button
+</Button>
+```

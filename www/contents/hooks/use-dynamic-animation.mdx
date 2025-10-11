@@ -5,4 +5,161 @@ storybook: hooks-usedynamicanimation--basic
 source: hooks/use-dynamic-animation
 ---
 
-### Usage
+```tsx preview functional client
+const [animation, setAnimation] = useDynamicAnimation({
+  moveLeft: {
+    duration: "moderate",
+    fillMode: "forwards",
+    keyframes: {
+      "0%": { transform: "translateX(100%)" },
+      "100%": { transform: "translateX(0%)" },
+    },
+    timingFunction: "ease-in-out",
+  },
+  moveRight: {
+    duration: "moderate",
+    fillMode: "forwards",
+    keyframes: {
+      "0%": { transform: "translateX(0%)" },
+      "100%": { transform: "translateX(100%)" },
+    },
+    timingFunction: "ease-in-out",
+  },
+})
+
+return (
+  <VStack alignItems="flex-start">
+    <Button
+      onClick={() =>
+        setAnimation((key) => (key === "moveRight" ? "moveLeft" : "moveRight"))
+      }
+    >
+      Please Click
+    </Button>
+
+    <Box animation={animation} bg="bg.contrast" color="fg.contrast" p="md">
+      Box
+    </Box>
+  </VStack>
+)
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { useDynamicAnimation } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useDynamicAnimation } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useDynamicAnimation } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const [animation, setAnimation] = useDynamicAnimation()
+```
+
+### Use Theme Tokens
+
+To use [theme](/docs/theming) [animations](/docs/theming/tokens/animations), set the keys as the animation names.
+
+```tsx preview functional client
+const [animation, setAnimation] = useDynamicAnimation({
+  slideToLeft: "slide-to-right-full-reverse",
+  slideToRight: "slide-to-right-full",
+})
+
+return (
+  <VStack alignItems="flex-start">
+    <Button
+      onClick={() =>
+        setAnimation((key) =>
+          key === "slideToRight" ? "slideToLeft" : "slideToRight",
+        )
+      }
+    >
+      Please Click
+    </Button>
+
+    <Box animation={animation} bg="bg.contrast" color="fg.contrast" p="md">
+      Box
+    </Box>
+  </VStack>
+)
+```
+
+:::warning
+By default, no animation tokens are defined.
+:::
+
+### Use Multiple Animations
+
+To use multiple animations, pass an object with the keys as the animation names.
+
+```tsx preview functional client
+const [animation, setAnimation] = useDynamicAnimation({
+  moveLeft: [
+    {
+      duration: "moderate",
+      fillMode: "forwards",
+      keyframes: {
+        "0%": { transform: "translateX(100%)" },
+        "100%": { transform: "translateX(0%)" },
+      },
+      timingFunction: "ease-in-out",
+    },
+    {
+      duration: "moderate",
+      fillMode: "forwards",
+      keyframes: {
+        "0%": { bg: "green" },
+        "100%": { bg: "orange" },
+      },
+      timingFunction: "ease-in-out",
+    },
+  ],
+  moveRight: [
+    {
+      duration: "moderate",
+      fillMode: "forwards",
+      keyframes: {
+        "0%": { transform: "translateX(0%)" },
+        "100%": { transform: "translateX(100%)" },
+      },
+      timingFunction: "ease-in-out",
+    },
+    {
+      duration: "moderate",
+      fillMode: "forwards",
+      keyframes: {
+        "0%": { bg: "orange" },
+        "100%": { bg: "green" },
+      },
+      timingFunction: "ease-in-out",
+    },
+  ],
+})
+
+return (
+  <VStack alignItems="flex-start">
+    <Button
+      onClick={() =>
+        setAnimation((key) => (key === "moveRight" ? "moveLeft" : "moveRight"))
+      }
+    >
+      Please Click
+    </Button>
+
+    <Box animation={animation} bg="orange" color="white" p="md">
+      Box
+    </Box>
+  </VStack>
+)
+```

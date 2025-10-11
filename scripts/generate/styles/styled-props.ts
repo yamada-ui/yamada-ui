@@ -5,6 +5,7 @@ import type { CSSProperties } from "."
 export interface StyleConfig {
   type?: string
   description?: string[]
+  important?: boolean
   properties?: (AnyString | CSSProperties)[]
   static?: CSSObject
   variableLength?: boolean
@@ -35,6 +36,9 @@ export const additionalProps = {
   colorMode: {
     type: "CSS.Property.ColorScheme",
     properties: ["colorScheme"],
+  },
+  display: {
+    type: "CSS.Property.Display | 'center' | 'inline-center' | 'hidden'",
   },
   insetX: { properties: ["left", "right"] },
   insetY: { properties: ["top", "bottom"] },
@@ -209,18 +213,22 @@ export const styledProps = {
   apply: {
     type: `AnyString, "apply"`,
     description: ["Apply other styles defined in `theme.styles`."],
+    important: true,
   },
   layerStyle: {
     type: `AnyString, "layerStyles"`,
     description: ["Apply layer styles defined in `theme.layerStyles`."],
+    important: true,
   },
   textStyle: {
     type: `AnyString, "textStyles"`,
     description: ["Apply text styles defined in `theme.textStyles`."],
+    important: true,
   },
   colorScheme: {
-    type: `ColorScheme`,
+    type: `AnyString | ColorScheme`,
     description: ["Set color scheme variables."],
+    important: true,
   },
   lineClamp: {
     type: "number",

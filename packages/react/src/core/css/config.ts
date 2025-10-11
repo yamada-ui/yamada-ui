@@ -8,6 +8,7 @@ import { generateAtRule } from "./at-rule"
 import { generateCalc } from "./calc"
 import { colorMix } from "./color-mix"
 import { colorScheme } from "./color-scheme"
+import { display } from "./display"
 import { generateFilter } from "./filter"
 import { generateFocusRing } from "./focus-ring"
 import { generateFunction } from "./function"
@@ -20,6 +21,7 @@ import { generateTransition } from "./transition"
 import { analyzeCSSValue, isCSSVar } from "./utils"
 
 export interface StyleConfig {
+  important?: boolean
   properties?: CSSProperties[]
   static?: CSSObject
   token?: ThemeToken
@@ -61,6 +63,7 @@ export const transforms = {
 
     return isUnitless || isNumber(value) ? `${value}deg` : value
   },
+  display,
   filter: generateFilter,
   focusRing: generateFocusRing,
   fraction: (value) => {

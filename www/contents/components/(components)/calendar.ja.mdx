@@ -5,7 +5,284 @@ storybook: components-calendar--basic
 source: components/calendar
 ---
 
+```tsx preview
+<Calendar.Root />
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Calendar } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Calendar } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Calendar } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Calendar.Root />
+```
+
+### サイズを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => (
+      <Calendar.Root key={index} size={size} defaultValue={new Date()} />
+    )}
+  </For>
+</Wrap>
+```
+
+### カラースキームを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <Calendar.Root
+        key={index}
+        colorScheme={colorScheme}
+        defaultValue={new Date(new Date().setDate(1))}
+      />
+    )}
+  </For>
+</Wrap>
+```
+
+### 形を変える
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["rounded", "circle", "square"]}>
+    {(shape, index) => (
+      <Calendar.Root
+        key={index}
+        shape={shape}
+        range
+        defaultValue={{
+          start: new Date(),
+          end: new Date(new Date().setDate(new Date().getDate() + 4)),
+        }}
+      />
+    )}
+  </For>
+</Wrap>
+```
+
+### フォーマットを変更する
+
+フォーマットを変更する場合は、`format`オブジェクトを設定します。
+
+```tsx preview functional
+const format = useMemo<Calendar.Format>(
+  () => ({
+    month: "long",
+    weekday: "narrow",
+    year: "2-digit",
+  }),
+  [],
+)
+
+return <Calendar.Root format={format} />
+```
+
+### デフォルトの日付を設定する
+
+デフォルトの日付を設定する場合は、`defaultValue`に`Date`を設定します。
+
+```tsx preview
+<Calendar.Root defaultValue={new Date()} />
+```
+
+### デフォルトの月を設定する
+
+デフォルトの月を設定する場合は、`defaultMonth`に`Date`を設定します。
+
+```tsx preview
+<Calendar.Root defaultMonth={new Date("2025-10-01")} />
+```
+
+### 最小日付を設定する
+
+最小日付を設定する場合は、`minDate`に`Date`を設定します。
+
+```tsx preview
+<Calendar.Root minDate={new Date(new Date().setDate(1))} />
+```
+
+### 最大日付を設定する
+
+最大日付を設定する場合は、`maxDate`に`Date`を設定します。
+
+```tsx preview
+<Calendar.Root maxDate={new Date(new Date().setDate(18))} />
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`に設定します。
+
+```tsx preview
+<Calendar.Root disabled />
+```
+
+### 今日の強調を無効にする
+
+今日の強調を無効にする場合は、`today`を`false`に設定します。
+
+```tsx preview
+<Calendar.Root today={false} />
+```
+
+### 特定の曜日を無効にする
+
+特定の曜日を無効にする場合は、`excludeDate`に関数を設定します。
+
+```tsx preview
+<Calendar.Root excludeDate={(date) => [0, 1, 6].includes(date.getDay())} />
+```
+
+### 複数選択を有効にする
+
+複数選択を有効にする場合は、`multiple`を`true`に設定します。
+
+```tsx preview
+<Calendar.Root multiple />
+```
+
+### 複数選択の最大数を設定する
+
+複数選択の最大選択数を設定する場合は、`max`に数値を設定します。
+
+```tsx preview
+<Calendar.Root multiple max={3} />
+```
+
+### 期間選択を有効にする
+
+期間選択を有効にする場合は、`range`を`true`に設定します。
+
+```tsx preview
+<Calendar.Root range />
+```
+
+### 週の開始曜日を変更する
+
+週の開始曜日を変更する場合は、`startDayOfWeek`に`"sunday"`または`"monday"`を設定します。
+
+```tsx preview
+<Wrap gap="md">
+  <Calendar.Root startDayOfWeek="sunday" />
+  <Calendar.Root startDayOfWeek="monday" />
+</Wrap>
+```
+
+### 週末の曜日を変更する
+
+週末の曜日を変更する場合は、`weekendDays`に曜日(数値)の配列を設定します。
+
+```tsx preview
+<Calendar.Root weekendDays={[0, 1]} />
+```
+
+### 祝日を設定する
+
+祝日を設定する場合は、`holidays`に`Date`の配列を設定します。
+
+```tsx preview functional
+const holidays = useMemo(
+  () => [
+    new Date("2025-01-01"),
+    new Date("2025-01-13"),
+    new Date("2025-02-11"),
+    new Date("2025-02-23"),
+    new Date("2025-02-24"),
+    new Date("2025-03-20"),
+    new Date("2025-04-29"),
+    new Date("2025-05-03"),
+    new Date("2025-05-04"),
+    new Date("2025-05-05"),
+    new Date("2025-05-06"),
+    new Date("2025-07-21"),
+    new Date("2025-08-11"),
+    new Date("2025-09-15"),
+    new Date("2025-09-23"),
+    new Date("2025-10-13"),
+    new Date("2025-11-03"),
+    new Date("2025-11-23"),
+    new Date("2025-11-24"),
+  ],
+  [],
+)
+
+return <Calendar.Root holidays={holidays} />
+```
+
+### 当月外の日付を非表示にする
+
+当月外の日付を非表示にする場合は、`dayProps`でスタイルを設定します。
+
+```tsx preview
+<Calendar.Root
+  dayProps={{
+    css: { "&[data-outside]": { opacity: 0, pointerEvents: "none" } },
+  }}
+/>
+```
+
+### コンポーネントをカスタマイズする
+
+コンポーネントをカスタマイズして、表示を変更できます。
+
+```tsx preview
+<Wrap gap="md">
+  <Calendar.Root>
+    <Calendar.Navigation>
+      <Calendar.Control justifyContent="flex-start" px="3">
+        {({ month }) =>
+          `${month.getFullYear()}/${(month.getMonth() + 1).toString().padStart(2, "0")}`
+        }
+      </Calendar.Control>
+      <Calendar.PrevButton gridColumn="6 / 7" />
+      <Calendar.NextButton gridColumn="7 / 8" />
+    </Calendar.Navigation>
+
+    <Calendar.Month />
+  </Calendar.Root>
+
+  <Calendar.Root
+    day={({ value }) => (
+      <Indicator
+        colorScheme="blue"
+        size="sm"
+        disabled={value.getDate() % 4 !== 0}
+        offset="-3px"
+        labelProps={{ minBoxSize: "2" }}
+      >
+        <Text as="span">{value.getDate()}</Text>
+      </Indicator>
+    )}
+  />
+</Wrap>
+```
+
+### 制御する
+
+```tsx preview functional client
+const [value, setValue] = useState<Date | undefined>(new Date())
+
+return <Calendar.Root value={value} onChange={setValue} />
+```
 
 ## Props
 

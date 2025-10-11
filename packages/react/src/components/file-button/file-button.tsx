@@ -32,9 +32,9 @@ export { FileButtonPropsContext, useFileButtonPropsContext }
 /**
  * `FileButton` is a button component used for users to select files.
  *
- * @see https://yamada-ui.com/components/file-button
+ * @see https://yamada-ui.com/docs/components/file-button
  */
-export const FileButton = withContext<"button", FileButtonProps>(
+export const FileButton = withContext<"input", FileButtonProps>(
   ({ as: As = Button, children, errorBorderColor, ...rest }) => {
     const { getButtonProps, getInputProps } = useFileButton(rest)
     const varProps = useInputBorder({ errorBorderColor })

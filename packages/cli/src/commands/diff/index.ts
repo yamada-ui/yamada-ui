@@ -17,6 +17,7 @@ import {
 } from "../../utils"
 import { printConflicts } from "../update/print-conflicts"
 import { updateFiles } from "../update/update-files"
+import { validateDiff3 } from "../update/validate-diff-3"
 import { getDiff } from "./get-diff"
 import { getRegistriesAndFiles } from "./get-registries-and-files"
 import {
@@ -72,7 +73,8 @@ export const diff = new Command("diff")
       const componentNames: string[] = []
       const generatedNameMap = await getGeneratedNameMap(config)
       const generatedNames = Object.values(generatedNameMap).flat()
-      const existsTheme = !!config.theme?.path && existsSync(config.theme.path)
+      const existsTheme =
+        !!config.theme?.path && existsSync(config.paths.theme.src)
 
       let index = targetName === "index"
       let theme = targetName === "theme"
@@ -171,6 +173,12 @@ export const diff = new Command("diff")
         })
 
         if (update) {
+          spinner.start("Validating methods")
+
+          await validateDiff3()
+
+          spinner.succeed("Validated methods")
+
           const conflictMap = await updateFiles(
             changeMap,
             dependencyMap,

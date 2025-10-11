@@ -5,7 +5,284 @@ storybook: components-calendar--basic
 source: components/calendar
 ---
 
+```tsx preview
+<Calendar.Root />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Calendar } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Calendar } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Calendar } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Calendar.Root />
+```
+
+### Change Size
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => (
+      <Calendar.Root key={index} size={size} defaultValue={new Date()} />
+    )}
+  </For>
+</Wrap>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <Calendar.Root
+        key={index}
+        colorScheme={colorScheme}
+        defaultValue={new Date(new Date().setDate(1))}
+      />
+    )}
+  </For>
+</Wrap>
+```
+
+### Change Shape
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["rounded", "circle", "square"]}>
+    {(shape, index) => (
+      <Calendar.Root
+        key={index}
+        shape={shape}
+        range
+        defaultValue={{
+          start: new Date(),
+          end: new Date(new Date().setDate(new Date().getDate() + 4)),
+        }}
+      />
+    )}
+  </For>
+</Wrap>
+```
+
+### Change Format
+
+To change the format, set the `format` object.
+
+```tsx preview functional
+const format = useMemo<Calendar.Format>(
+  () => ({
+    month: "long",
+    weekday: "narrow",
+    year: "2-digit",
+  }),
+  [],
+)
+
+return <Calendar.Root format={format} />
+```
+
+### Set Default Date
+
+To set a default date, set `defaultValue` to a `Date`.
+
+```tsx preview
+<Calendar.Root defaultValue={new Date()} />
+```
+
+### Set Default Month
+
+To set a default month, set `defaultMonth` to a `Date`.
+
+```tsx preview
+<Calendar.Root defaultMonth={new Date("2025-10-01")} />
+```
+
+### Set Minimum Date
+
+To set the minimum selectable date, set `minDate` to a `Date`.
+
+```tsx preview
+<Calendar.Root minDate={new Date(new Date().setDate(1))} />
+```
+
+### Set Maximum Date
+
+To set the maximum selectable date, set `maxDate` to a `Date`.
+
+```tsx preview
+<Calendar.Root maxDate={new Date(new Date().setDate(18))} />
+```
+
+### Disable
+
+To disable the calendar, set `disabled` to `true`.
+
+```tsx preview
+<Calendar.Root disabled />
+```
+
+### Disable Today Highlighting
+
+To disable highlighting of today's date, set `today` to `false`.
+
+```tsx preview
+<Calendar.Root today={false} />
+```
+
+### Disable Specific Days of the Week
+
+To disable specific days of the week, set `excludeDate` to a condition function.
+
+```tsx preview
+<Calendar.Root excludeDate={(date) => [0, 1, 6].includes(date.getDay())} />
+```
+
+### Allow Multiple Selection
+
+To allow multiple date selection, set `multiple` to `true`.
+
+```tsx preview
+<Calendar.Root multiple />
+```
+
+### Set Maximum for Multiple Selection
+
+To set the maximum number of selectable dates in multiple selection, set `max` to a number.
+
+```tsx preview
+<Calendar.Root multiple max={3} />
+```
+
+### Enable Range Selection
+
+To enable range selection, set `range` to `true`.
+
+```tsx preview
+<Calendar.Root range />
+```
+
+### Change Start Day of Week
+
+To change the start day of the week, set `startDayOfWeek` to `"sunday"` or `"monday"`.
+
+```tsx preview
+<Wrap gap="md">
+  <Calendar.Root startDayOfWeek="sunday" />
+  <Calendar.Root startDayOfWeek="monday" />
+</Wrap>
+```
+
+### Change Weekend Days
+
+To change which days are treated as weekends, set `weekendDays` to an array of days(numbers).
+
+```tsx preview
+<Calendar.Root weekendDays={[0, 1]} />
+```
+
+### Set Holidays
+
+To set holidays, set `holidays` to an array of `Date`s.
+
+```tsx preview functional
+const holidays = useMemo(
+  () => [
+    new Date("2025-01-01"),
+    new Date("2025-01-13"),
+    new Date("2025-02-11"),
+    new Date("2025-02-23"),
+    new Date("2025-02-24"),
+    new Date("2025-03-20"),
+    new Date("2025-04-29"),
+    new Date("2025-05-03"),
+    new Date("2025-05-04"),
+    new Date("2025-05-05"),
+    new Date("2025-05-06"),
+    new Date("2025-07-21"),
+    new Date("2025-08-11"),
+    new Date("2025-09-15"),
+    new Date("2025-09-23"),
+    new Date("2025-10-13"),
+    new Date("2025-11-03"),
+    new Date("2025-11-23"),
+    new Date("2025-11-24"),
+  ],
+  [],
+)
+
+return <Calendar.Root holidays={holidays} />
+```
+
+### Hide Outside the Current Month
+
+To hide dates outside the current month, set styles using `dayProps`.
+
+```tsx preview
+<Calendar.Root
+  dayProps={{
+    css: { "&[data-outside]": { opacity: 0, pointerEvents: "none" } },
+  }}
+/>
+```
+
+### Customize Components
+
+You can customize components to change the display.
+
+```tsx preview
+<Wrap gap="md">
+  <Calendar.Root>
+    <Calendar.Navigation>
+      <Calendar.Control justifyContent="flex-start" px="3">
+        {({ month }) =>
+          `${month.getFullYear()}/${(month.getMonth() + 1).toString().padStart(2, "0")}`
+        }
+      </Calendar.Control>
+      <Calendar.PrevButton gridColumn="6 / 7" />
+      <Calendar.NextButton gridColumn="7 / 8" />
+    </Calendar.Navigation>
+
+    <Calendar.Month />
+  </Calendar.Root>
+
+  <Calendar.Root
+    day={({ value }) => (
+      <Indicator
+        colorScheme="blue"
+        size="sm"
+        disabled={value.getDate() % 4 !== 0}
+        offset="-3px"
+        labelProps={{ minBoxSize: "2" }}
+      >
+        <Text as="span">{value.getDate()}</Text>
+      </Indicator>
+    )}
+  />
+</Wrap>
+```
+
+### Control
+
+```tsx preview functional client
+const [value, setValue] = useState<Date | undefined>(new Date())
+
+return <Calendar.Root value={value} onChange={setValue} />
+```
 
 ## Props
 

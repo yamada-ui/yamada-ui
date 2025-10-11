@@ -6,7 +6,305 @@ source: components/timeline
 style: components/timeline/timeline.style.ts
 ---
 
+```tsx preview
+<Timeline.Root>
+  <Timeline.Item>
+    <Timeline.Connector>
+      <Timeline.Indicator />
+    </Timeline.Connector>
+    <Timeline.Content>
+      <Timeline.Title>第1部 ファントムブラッド</Timeline.Title>
+      <Timeline.Description>
+        全てはここから始まった！ジョナサンとディオ、運命の出会い‼
+      </Timeline.Description>
+    </Timeline.Content>
+  </Timeline.Item>
+
+  <Timeline.Item>
+    <Timeline.Connector>
+      <Timeline.Indicator />
+    </Timeline.Connector>
+    <Timeline.Content>
+      <Timeline.Title>第2部 戦闘潮流</Timeline.Title>
+      <Timeline.Description>
+        石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼
+      </Timeline.Description>
+    </Timeline.Content>
+  </Timeline.Item>
+
+  <Timeline.Item>
+    <Timeline.Connector>
+      <Timeline.Indicator />
+    </Timeline.Connector>
+    <Timeline.Content>
+      <Timeline.Title>第3部 スターダストクルセイダース</Timeline.Title>
+      <Timeline.Description>
+        DIO復活…！永き因縁に終止符を打つスタンドバトル‼
+      </Timeline.Description>
+    </Timeline.Content>
+  </Timeline.Item>
+</Timeline.Root>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Timeline } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Timeline } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Timeline } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Timeline.Root>
+  <Timeline.Item>
+    <Timeline.Connector>
+      <Timeline.Indicator />
+    </Timeline.Connector>
+    <Timeline.Content>
+      <Timeline.Title />
+      <Timeline.Description />
+    </Timeline.Content>
+  </Timeline.Item>
+</Timeline.Root>
+```
+
+### Use Items
+
+```tsx preview functional
+const items = useMemo<Timeline.RootProps["items"]>(
+  () => [
+    {
+      description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+      title: "第1部 ファントムブラッド",
+    },
+    {
+      description:
+        "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+      title: "第2部 戦闘潮流",
+    },
+    {
+      description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+      title: "第3部 スターダストクルセイダース",
+    },
+  ],
+  [],
+)
+
+return <Timeline.Root items={items} />
+```
+
+### Change Size
+
+```tsx preview functional
+const items = useMemo<Timeline.RootProps["items"]>(
+  () => [
+    {
+      description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+      title: "第1部 ファントムブラッド",
+    },
+    {
+      description:
+        "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+      title: "第2部 戦闘潮流",
+    },
+    {
+      description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+      title: "第3部 スターダストクルセイダース",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["sm", "md", "lg"]}>
+      {(size) => <Timeline.Root key={size} size={size} items={items} />}
+    </For>
+  </VStack>
+)
+```
+
+### Change Color Scheme
+
+```tsx preview functional
+const items = useMemo<Timeline.RootProps["items"]>(
+  () => [
+    {
+      description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+      title: "第1部 ファントムブラッド",
+    },
+    {
+      description:
+        "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+      title: "第2部 戦闘潮流",
+    },
+    {
+      description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+      title: "第3部 スターダストクルセイダース",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["success", "warning"]}>
+      {(colorScheme) => (
+        <Timeline.Root
+          key={colorScheme}
+          colorScheme={colorScheme}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Alignment
+
+To change the alignment of timeline items, set the `align` prop to `"start"` or `"end"` etc.
+
+```tsx preview functional
+const items = useMemo<Timeline.RootProps["items"]>(
+  () => [
+    {
+      description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+      title: "第1部 ファントムブラッド",
+    },
+    {
+      description:
+        "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+      title: "第2部 戦闘潮流",
+    },
+    {
+      description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+      title: "第3部 スターダストクルセイダース",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["start", "center", "end"]}>
+      {(align) => (
+        <Timeline.Root
+          key={align}
+          align={align}
+          items={
+            align !== "start"
+              ? items?.map((item, index) => ({
+                  align: align !== "end" && index % 2 === 0 ? "start" : "end",
+                  ...item,
+                }))
+              : items
+          }
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Shape
+
+To change the shape of timeline indicators, set the `shape` prop to `"circle"`, `"rounded"`, or `"square"`.
+
+```tsx preview functional
+const items = useMemo<Timeline.RootProps["items"]>(
+  () => [
+    {
+      description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+      title: "第1部 ファントムブラッド",
+    },
+    {
+      description:
+        "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+      title: "第2部 戦闘潮流",
+    },
+    {
+      description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+      title: "第3部 スターダストクルセイダース",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["circle", "rounded", "square"]}>
+      {(shape) => <Timeline.Root key={shape} shape={shape} items={items} />}
+    </For>
+  </VStack>
+)
+```
+
+### Customize Indicators
+
+To customize indicators, assign custom content to the `indicator` prop of items.
+
+```tsx preview functional
+const items = useMemo<Timeline.RootProps["items"]>(
+  () => [
+    {
+      description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+      title: "第1部 ファントムブラッド",
+      indicator: <GhostIcon fontSize="xl" />,
+    },
+    {
+      description:
+        "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+      title: "第2部 戦闘潮流",
+      indicator: <AxeIcon fontSize="xl" />,
+    },
+    {
+      description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+      title: "第3部 スターダストクルセイダース",
+      indicator: <SparklesIcon fontSize="xl" />,
+    },
+  ],
+  [],
+)
+
+return <Timeline.Root items={items} />
+```
+
+### Attach Indicators
+
+To attach timeline indicators to the content, set `attached` to `true`.
+
+```tsx preview functional
+const items = useMemo<Timeline.RootProps["items"]>(
+  () => [
+    {
+      description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+      title: "第1部 ファントムブラッド",
+    },
+    {
+      description:
+        "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+      title: "第2部 戦闘潮流",
+    },
+    {
+      description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+      title: "第3部 スターダストクルセイダース",
+    },
+  ],
+  [],
+)
+return <Timeline.Root attached items={items} />
+```
 
 ## Props
 

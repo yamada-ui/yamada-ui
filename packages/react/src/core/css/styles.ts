@@ -551,11 +551,13 @@ export const standardStyles = {
     transform: pipe(transforms.function("brightness"), transforms.filter()),
   },
   captionSide: true,
+  caretAnimation: true,
   caretColor: {
     properties: ["caretColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
+  caretShape: true,
   clear: true,
   clip: true,
   clipPath: true,
@@ -652,7 +654,7 @@ export const standardStyles = {
   cy: true,
   d: true,
   direction: true,
-  display: true,
+  display: { transform: transforms.display },
   dominantBaseline: true,
   dropShadow: {
     properties: ["--drop-shadow"],
@@ -948,6 +950,9 @@ export const standardStyles = {
     ),
   },
   interactivity: true,
+  interestDelay: true,
+  interestDelayEnd: true,
+  interestDelayStart: true,
   interpolateSize: true,
   invert: {
     properties: ["--invert"],
@@ -1631,6 +1636,7 @@ export const standardStyles = {
   scrollSnapAlign: true,
   scrollSnapStop: true,
   scrollSnapType: true,
+  scrollTargetGroup: true,
   scrollTimeline: true,
   scrollTimelineAxis: true,
   scrollTimelineName: true,
@@ -1787,6 +1793,7 @@ export const standardStyles = {
   viewTimelineInset: true,
   viewTimelineName: true,
   viewTransitionClass: true,
+  viewTransitionGroup: true,
   viewTransitionName: true,
   visibility: true,
   whiteSpace: true,
@@ -1928,10 +1935,10 @@ export const pseudoStyles = {
 export type StyledStyleProperty = keyof typeof styledStyles
 
 export const styledStyles = {
-  apply: { transform: transforms.style() },
-  layerStyle: { transform: transforms.style("layerStyles") },
-  textStyle: { transform: transforms.style("textStyles") },
-  colorScheme: { transform: transforms.colorScheme },
+  apply: { important: true, transform: transforms.style() },
+  layerStyle: { important: true, transform: transforms.style("layerStyles") },
+  textStyle: { important: true, transform: transforms.style("textStyles") },
+  colorScheme: { important: true, transform: transforms.colorScheme },
   lineClamp: {
     properties: ["--line-clamp"],
     static: {
@@ -2301,7 +2308,7 @@ export interface StyleProps {
   /**
    * Set color scheme variables.
    */
-  colorScheme?: StyleValueWithCondition<ColorScheme>
+  colorScheme?: StyleValueWithCondition<AnyString | ColorScheme>
   /**
    * ### accent-color
    *
@@ -4591,6 +4598,16 @@ export interface StyleProps {
    */
   caret?: StyleValueWithCondition<CSS.Property.CaretColor, "colors">
   /**
+   * ### caret-animation
+   *
+   * The CSS `caret-animation` property.
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/caret-animation
+   *
+   * @experimental
+   */
+  caretAnimation?: StyleValueWithCondition<AnyString>
+  /**
    * ### caret-color
    *
    * The <code>caret-color</code> CSS property sets the color of the text insertion pointer in a text input.
@@ -4602,6 +4619,16 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/caret-color
    */
   caretColor?: StyleValueWithCondition<CSS.Property.CaretColor, "colors">
+  /**
+   * ### caret-shape
+   *
+   * The CSS `caret-shape` property.
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/caret-shape
+   *
+   * @experimental
+   */
+  caretShape?: StyleValueWithCondition<CSS.Property.CaretShape>
   /**
    * ### clear
    *
@@ -4694,6 +4721,18 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/color-interpolation-filters
    */
   colorInterpolationFilters?: StyleValueWithCondition<AnyString>
+  /**
+   * ### color-scheme
+   *
+   * The <code>color-scheme</code> CSS property sets which color schemes (light or dark) an element uses and may prevent automatic dark mode adjustments by the browser.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-08-03
+   * @newly_available_date 2022-02-03
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/color-scheme
+   */
+  colorMode?: StyleValueWithCondition<CSS.Property.ColorScheme>
   /**
    * ### column-count
    *
@@ -4839,7 +4878,8 @@ export interface StyleProps {
    *
    * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-08-14
    * @newly_available_date 2023-02-14
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/container
@@ -4850,7 +4890,8 @@ export interface StyleProps {
    *
    * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-08-14
    * @newly_available_date 2023-02-14
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/container-name
@@ -4861,7 +4902,8 @@ export interface StyleProps {
    *
    * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-08-14
    * @newly_available_date 2023-02-14
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/container-type
@@ -4942,17 +4984,24 @@ export interface StyleProps {
    *
    * The <code>content-visibility</code> CSS property delays rendering an element, including layout and painting, until it is needed.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2025-09-15
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/content-visibility
    */
   contentVisibility?: StyleValueWithCondition<CSS.Property.ContentVisibility>
   /**
+   * Sets the value of `--contrast`.
+   */
+  contrast?: StyleValueWithCondition<AnyString>
+  /**
    * ### corner-block-end-shape
    *
-   * The CSS `corner-block-end-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-block-end-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-block-end-shape
    *
    * @experimental
    */
@@ -4960,9 +5009,11 @@ export interface StyleProps {
   /**
    * ### corner-block-start-shape
    *
-   * The CSS `corner-block-start-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-block-start-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-block-start-shape
    *
    * @experimental
    */
@@ -4970,9 +5021,11 @@ export interface StyleProps {
   /**
    * ### corner-bottom-left-shape
    *
-   * The CSS `corner-bottom-left-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-bottom-left-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-bottom-left-shape
    *
    * @experimental
    */
@@ -4980,9 +5033,11 @@ export interface StyleProps {
   /**
    * ### corner-bottom-right-shape
    *
-   * The CSS `corner-bottom-right-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-bottom-right-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-bottom-right-shape
    *
    * @experimental
    */
@@ -4990,9 +5045,11 @@ export interface StyleProps {
   /**
    * ### corner-bottom-shape
    *
-   * The CSS `corner-bottom-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-bottom-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-bottom-shape
    *
    * @experimental
    */
@@ -5000,9 +5057,11 @@ export interface StyleProps {
   /**
    * ### corner-end-end-shape
    *
-   * The CSS `corner-end-end-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-end-end-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-end-end-shape
    *
    * @experimental
    */
@@ -5010,9 +5069,11 @@ export interface StyleProps {
   /**
    * ### corner-end-start-shape
    *
-   * The CSS `corner-end-start-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-end-start-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-end-start-shape
    *
    * @experimental
    */
@@ -5020,9 +5081,11 @@ export interface StyleProps {
   /**
    * ### corner-inline-end-shape
    *
-   * The CSS `corner-inline-end-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-inline-end-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-inline-end-shape
    *
    * @experimental
    */
@@ -5030,9 +5093,11 @@ export interface StyleProps {
   /**
    * ### corner-inline-start-shape
    *
-   * The CSS `corner-inline-start-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-inline-start-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-inline-start-shape
    *
    * @experimental
    */
@@ -5040,9 +5105,11 @@ export interface StyleProps {
   /**
    * ### corner-left-shape
    *
-   * The CSS `corner-left-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-left-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-left-shape
    *
    * @experimental
    */
@@ -5050,9 +5117,11 @@ export interface StyleProps {
   /**
    * ### corner-right-shape
    *
-   * The CSS `corner-right-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-right-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-right-shape
    *
    * @experimental
    */
@@ -5060,9 +5129,11 @@ export interface StyleProps {
   /**
    * ### corner-shape
    *
-   * The CSS `corner-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-shape
    *
    * @experimental
    */
@@ -5070,9 +5141,11 @@ export interface StyleProps {
   /**
    * ### corner-start-end-shape
    *
-   * The CSS `corner-start-end-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-start-end-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-start-end-shape
    *
    * @experimental
    */
@@ -5080,9 +5153,11 @@ export interface StyleProps {
   /**
    * ### corner-start-start-shape
    *
-   * The CSS `corner-start-start-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-start-start-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-start-start-shape
    *
    * @experimental
    */
@@ -5090,9 +5165,11 @@ export interface StyleProps {
   /**
    * ### corner-top-left-shape
    *
-   * The CSS `corner-top-left-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-top-left-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-top-left-shape
    *
    * @experimental
    */
@@ -5100,9 +5177,11 @@ export interface StyleProps {
   /**
    * ### corner-top-right-shape
    *
-   * The CSS `corner-top-right-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-top-right-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-top-right-shape
    *
    * @experimental
    */
@@ -5110,9 +5189,11 @@ export interface StyleProps {
   /**
    * ### corner-top-shape
    *
-   * The CSS `corner-top-shape` property.
+   * The <code>corner-shape</code> CSS property sets the shape of an element's corners when using <code>border-radius</code>, allowing for shapes other than rounded corners. For example, <code>corner-shape: squircle</code> is a shape in between a square and rounded corner.
    *
-   * @see https://drafts.csswg.org/css-borders/#propdef-corner-top-shape
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/corner-top-shape
    *
    * @experimental
    */
@@ -5221,7 +5302,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/display
    */
-  display?: StyleValueWithCondition<CSS.Property.Display>
+  display?: StyleValueWithCondition<
+    "center" | "hidden" | "inline-center" | CSS.Property.Display
+  >
   /**
    * ### dominant-baseline
    *
@@ -5234,6 +5317,10 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/dominant-baseline
    */
   dominantBaseline?: StyleValueWithCondition<CSS.Property.DominantBaseline>
+  /**
+   * Sets the value of `--drop-shadow`.
+   */
+  dropShadow?: StyleValueWithCondition<AnyString, "shadows">
   /**
    * ### dynamic-range-limit
    *
@@ -5447,6 +5534,34 @@ export interface StyleProps {
    */
   floodOpacity?: StyleValueWithCondition<CSS.Property.FloodOpacity>
   /**
+   * The focus ring is used to identify the currently focused element.
+   */
+  focusRing?: StyleValueWithCondition<
+    "inline" | "inside" | "mixed" | "none" | "outline" | "outside"
+  >
+  /**
+   * Sets the value of `--focus-ring-color`.
+   */
+  focusRingColor?: StyleValueWithCondition<AnyString, "colors">
+  /**
+   * Sets the value of `--focus-ring-offset`.
+   */
+  focusRingOffset?: StyleValueWithCondition<AnyString | number, "spaces">
+  /**
+   * Sets the value of `--focus-ring-style`.
+   */
+  focusRingStyle?: StyleValueWithCondition<AnyString>
+  /**
+   * Sets the value of `--focus-ring-width`.
+   */
+  focusRingWidth?: StyleValueWithCondition<AnyString>
+  /**
+   * The focus ring is used to identify the currently focused element.
+   */
+  focusVisibleRing?: StyleValueWithCondition<
+    "inline" | "inside" | "mixed" | "none" | "outline" | "outside"
+  >
+  /**
    * ### font
    *
    * The <code>font</code> CSS property shorthand sets multiple font properties, including style, weight, size, and font family.
@@ -5613,7 +5728,8 @@ export interface StyleProps {
    *
    * The <code>font-synthesis-small-caps</code> CSS property sets whether or not the browser should synthesize small caps typefaces when they're missing from the font.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-09-27
    * @newly_available_date 2023-03-27
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-small-caps
@@ -5624,7 +5740,8 @@ export interface StyleProps {
    *
    * The <code>font-synthesis-style</code> CSS property sets whether or not the browser should synthesize italic and oblique typefaces when they're missing from the font.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-09-27
    * @newly_available_date 2023-03-27
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-style
@@ -5635,7 +5752,8 @@ export interface StyleProps {
    *
    * The <code>font-synthesis-weight</code> CSS property sets whether or not the browser should synthesize bold typefaces when they're missing from the font.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-09-27
    * @newly_available_date 2023-03-27
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-weight
@@ -5658,7 +5776,8 @@ export interface StyleProps {
    *
    * The <code>font-variant-alternates</code> CSS property, along with the <code>@font-feature-values</code> at-rule, chooses when to use a font's alternate glyphs.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-09-13
    * @newly_available_date 2023-03-13
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-alternates
@@ -5848,6 +5967,10 @@ export interface StyleProps {
    * @deprecated
    */
   glyphOrientationVertical?: StyleValueWithCondition<CSS.Property.GlyphOrientationVertical>
+  /**
+   * Sets the value of `--grayscale`.
+   */
+  grayscale?: StyleValueWithCondition<AnyString>
   /**
    * ### grid
    *
@@ -6099,6 +6222,10 @@ export interface StyleProps {
    */
   height?: StyleValueWithCondition<CSS.Property.Height | number, "sizes">
   /**
+   * Sets the value of `--hue-rotate`.
+   */
+  hueRotate?: StyleValueWithCondition<AnyString>
+  /**
    * ### hyphenate-character
    *
    * The <code>hyphenate-character</code> CSS property sets the character or string to use at the end of a line before a line break.
@@ -6322,15 +6449,101 @@ export interface StyleProps {
     "spaces"
   >
   /**
+   * ### left
+   *
+   * The physical CSS properties, <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code>, set the inset position of an element relative to the corresponding side of a container determined by the element's <code>position</code> property.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/left
+   *
+   * ------------------------------------
+   *
+   * ### right
+   *
+   * The physical CSS properties, <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code>, set the inset position of an element relative to the corresponding side of a container determined by the element's <code>position</code> property.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/right
+   */
+  insetX?: StyleValueWithCondition<
+    CSS.Property.Left | CSS.Property.Right | number,
+    "spaces"
+  >
+  /**
+   * ### bottom
+   *
+   * The physical CSS properties, <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code>, set the inset position of an element relative to the corresponding side of a container determined by the element's <code>position</code> property.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/bottom
+   *
+   * ------------------------------------
+   *
+   * ### top
+   *
+   * The physical CSS properties, <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code>, set the inset position of an element relative to the corresponding side of a container determined by the element's <code>position</code> property.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/top
+   */
+  insetY?: StyleValueWithCondition<
+    CSS.Property.Bottom | CSS.Property.Top | number,
+    "spaces"
+  >
+  /**
    * ### interactivity
    *
-   * The CSS `interactivity` property.
+   * The <code>interactivity: inert</code> CSS declaration makes an element and its descendants inert, like when using the <code>inert</code> HTML attribute. Inert elements can't be focused or clicked, their text can't be selected or found using the browser's find-in-page feature.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-ui-4/#propdef-interactivity
    *
    * @experimental
    */
   interactivity?: StyleValueWithCondition<AnyString>
+  /**
+   * ### interest-delay
+   *
+   * The CSS `interest-delay` property.
+   *
+   * @see https://drafts.csswg.org/css-ui-4/#propdef-interest-delay
+   *
+   * @experimental
+   */
+  interestDelay?: StyleValueWithCondition<AnyString>
+  /**
+   * ### interest-delay-end
+   *
+   * The CSS `interest-delay-end` property.
+   *
+   * @see https://drafts.csswg.org/css-ui-4/#propdef-interest-delay-end
+   *
+   * @experimental
+   */
+  interestDelayEnd?: StyleValueWithCondition<AnyString>
+  /**
+   * ### interest-delay-start
+   *
+   * The CSS `interest-delay-start` property.
+   *
+   * @see https://drafts.csswg.org/css-ui-4/#propdef-interest-delay-start
+   *
+   * @experimental
+   */
+  interestDelayStart?: StyleValueWithCondition<AnyString>
   /**
    * ### interpolate-size
    *
@@ -6343,6 +6556,10 @@ export interface StyleProps {
    * @experimental
    */
   interpolateSize?: StyleValueWithCondition<AnyString>
+  /**
+   * Sets the value of `--invert`.
+   */
+  invert?: StyleValueWithCondition<AnyString>
   /**
    * ### isolation
    *
@@ -6454,6 +6671,10 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/line-break
    */
   lineBreak?: StyleValueWithCondition<CSS.Property.LineBreak>
+  /**
+   * Used to visually truncate a text after a number of lines.
+   */
+  lineClamp?: StyleValueWithCondition<number>
   /**
    * ### line-height
    *
@@ -6758,6 +6979,60 @@ export interface StyleProps {
    */
   marginTrim?: StyleValueWithCondition<CSS.Property.MarginTrim>
   /**
+   * ### margin-inline-end
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
+   *
+   * ------------------------------------
+   *
+   * ### margin-inline-start
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
+   */
+  marginX?: StyleValueWithCondition<
+    CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
+    "spaces"
+  >
+  /**
+   * ### margin-bottom
+   *
+   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-bottom
+   *
+   * ------------------------------------
+   *
+   * ### margin-top
+   *
+   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
+   */
+  marginY?: StyleValueWithCondition<
+    CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
+    "spaces"
+  >
+  /**
    * ### marker
    *
    * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
@@ -7041,6 +7316,33 @@ export interface StyleProps {
    * @newly_available_date 2015-07-29
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-height
+   *
+   * ------------------------------------
+   *
+   * ### max-width
+   *
+   * The <code>min-width</code>, <code>min-height</code>, <code>max-width</code>, and <code>max-height</code> CSS properties set the minimum and maximum size of an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/max-width
+   */
+  maxBoxSize?: StyleValueWithCondition<
+    CSS.Property.MaxHeight | CSS.Property.MaxWidth | number,
+    "sizes"
+  >
+  /**
+   * ### max-height
+   *
+   * The <code>min-width</code>, <code>min-height</code>, <code>max-width</code>, and <code>max-height</code> CSS properties set the minimum and maximum size of an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/max-height
    */
   maxH?: StyleValueWithCondition<CSS.Property.MaxHeight | number, "sizes">
   /**
@@ -7131,6 +7433,33 @@ export interface StyleProps {
    */
   minBlockSize?: StyleValueWithCondition<
     CSS.Property.MinBlockSize | number,
+    "sizes"
+  >
+  /**
+   * ### min-height
+   *
+   * The <code>min-width</code>, <code>min-height</code>, <code>max-width</code>, and <code>max-height</code> CSS properties set the minimum and maximum size of an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/min-height
+   *
+   * ------------------------------------
+   *
+   * ### min-width
+   *
+   * The <code>min-width</code>, <code>min-height</code>, <code>max-width</code>, and <code>max-height</code> CSS properties set the minimum and maximum size of an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/min-width
+   */
+  minBoxSize?: StyleValueWithCondition<
+    CSS.Property.MinHeight | CSS.Property.MinWidth | number,
     "sizes"
   >
   /**
@@ -7259,6 +7588,60 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
    */
   mt?: StyleValueWithCondition<CSS.Property.MarginTop | number, "spaces">
+  /**
+   * ### margin-inline-end
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
+   *
+   * ------------------------------------
+   *
+   * ### margin-inline-start
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
+   */
+  mx?: StyleValueWithCondition<
+    CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
+    "spaces"
+  >
+  /**
+   * ### margin-bottom
+   *
+   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-bottom
+   *
+   * ------------------------------------
+   *
+   * ### margin-top
+   *
+   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
+   */
+  my?: StyleValueWithCondition<
+    CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
+    "spaces"
+  >
   /**
    * ### object-fit
    *
@@ -7406,7 +7789,8 @@ export interface StyleProps {
    *
    * The <code>outline</code> CSS shorthand sets the color, style, and width of a line around an element, outside of the border.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-09-27
    * @newly_available_date 2023-03-27
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline
@@ -7865,6 +8249,60 @@ export interface StyleProps {
     "spaces"
   >
   /**
+   * ### padding-inline-end
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
+   *
+   * ------------------------------------
+   *
+   * ### padding-inline-start
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
+   */
+  paddingX?: StyleValueWithCondition<
+    CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
+    "spaces"
+  >
+  /**
+   * ### padding-bottom
+   *
+   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-bottom
+   *
+   * ------------------------------------
+   *
+   * ### padding-top
+   *
+   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
+   */
+  paddingY?: StyleValueWithCondition<
+    CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
+    "spaces"
+  >
+  /**
    * ### page
    *
    * The <code>:first</code>, <code>:left</code>, and <code>:right</code> pseudo-classes select pages based on their position in sequence after pagination. They're often used with the <code>page</code> CSS property, to choose a print layout defined by the <code>@page</code> rule.
@@ -8159,6 +8597,60 @@ export interface StyleProps {
    */
   pt?: StyleValueWithCondition<CSS.Property.PaddingTop | number, "spaces">
   /**
+   * ### padding-inline-end
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
+   *
+   * ------------------------------------
+   *
+   * ### padding-inline-start
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
+   */
+  px?: StyleValueWithCondition<
+    CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
+    "spaces"
+  >
+  /**
+   * ### padding-bottom
+   *
+   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-bottom
+   *
+   * ------------------------------------
+   *
+   * ### padding-top
+   *
+   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
+   */
+  py?: StyleValueWithCondition<
+    CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
+    "spaces"
+  >
+  /**
    * ### quotes
    *
    * The <code>quotes</code> CSS property sets the quotation marks inserted via the <code>content</code> CSS property or <code>&#x3C;q></code> element.
@@ -8185,7 +8677,7 @@ export interface StyleProps {
   /**
    * ### reading-flow
    *
-   * The <code>reading-flow</code> CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation.
+   * The <code>reading-flow</code> CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation. The <code>reading-order</code> property overrides this order.
    *
    * @baseline `Limited available`
    *
@@ -8197,7 +8689,9 @@ export interface StyleProps {
   /**
    * ### reading-order
    *
-   * The CSS `reading-order` property.
+   * The <code>reading-flow</code> CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation. The <code>reading-order</code> property overrides this order.
+   *
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/reading-order
    *
@@ -8238,6 +8732,18 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/rotate
    */
   rotate?: StyleValueWithCondition<CSS.Property.Rotate>
+  /**
+   * Sets the value of `--rotate-x`.
+   */
+  rotateX?: StyleValueWithCondition<AnyString>
+  /**
+   * Sets the value of `--rotate-y`.
+   */
+  rotateY?: StyleValueWithCondition<AnyString>
+  /**
+   * Sets the value of `--rotate-z`.
+   */
+  rotateZ?: StyleValueWithCondition<AnyString>
   /**
    * ### border-radius
    *
@@ -8613,6 +9119,10 @@ export interface StyleProps {
    */
   ry?: StyleValueWithCondition<AnyString>
   /**
+   * Sets the value of `--saturate`.
+   */
+  saturate?: StyleValueWithCondition<AnyString>
+  /**
    * ### scale
    *
    * The <code>translate</code>, <code>rotate</code>, and <code>scale</code> CSS properties apply single transformations independently, as opposed to applying multiple transformations with the <code>transform</code> CSS property.
@@ -8624,6 +9134,18 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/scale
    */
   scale?: StyleValueWithCondition<CSS.Property.Scale>
+  /**
+   * Sets the value of `--scale-x`.
+   */
+  scaleX?: StyleValueWithCondition<AnyString>
+  /**
+   * Sets the value of `--scale-y`.
+   */
+  scaleY?: StyleValueWithCondition<AnyString>
+  /**
+   * Sets the value of `--scale-z`.
+   */
+  scaleZ?: StyleValueWithCondition<AnyString>
   /**
    * ### scrollbar-color
    *
@@ -8831,6 +9353,60 @@ export interface StyleProps {
     "spaces"
   >
   /**
+   * ### scroll-margin-left
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-left
+   *
+   * ------------------------------------
+   *
+   * ### scroll-margin-right
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-right
+   */
+  scrollMarginX?: StyleValueWithCondition<
+    CSS.Property.ScrollMarginLeft | CSS.Property.ScrollMarginRight | number,
+    "spaces"
+  >
+  /**
+   * ### scroll-margin-bottom
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-bottom
+   *
+   * ------------------------------------
+   *
+   * ### scroll-margin-top
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-top
+   */
+  scrollMarginY?: StyleValueWithCondition<
+    CSS.Property.ScrollMarginBottom | CSS.Property.ScrollMarginTop | number,
+    "spaces"
+  >
+  /**
    * ### scroll-marker-group
    *
    * A scroll container can be navigated by activating <code>::scroll-marker</code> pseudo-elements which appear in a generated <code>::scroll-marker-group</code> pseudo-element, either before or after the scroll container.
@@ -8990,6 +9566,60 @@ export interface StyleProps {
     "spaces"
   >
   /**
+   * ### scroll-padding-left
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-left
+   *
+   * ------------------------------------
+   *
+   * ### scroll-padding-right
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-right
+   */
+  scrollPaddingX?: StyleValueWithCondition<
+    CSS.Property.ScrollPaddingLeft | CSS.Property.ScrollPaddingRight | number,
+    "spaces"
+  >
+  /**
+   * ### scroll-padding-bottom
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-bottom
+   *
+   * ------------------------------------
+   *
+   * ### scroll-padding-top
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-top
+   */
+  scrollPaddingY?: StyleValueWithCondition<
+    CSS.Property.ScrollPaddingBottom | CSS.Property.ScrollPaddingTop | number,
+    "spaces"
+  >
+  /**
    * ### scroll-snap-align
    *
    * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
@@ -9026,6 +9656,16 @@ export interface StyleProps {
    */
   scrollSnapType?: StyleValueWithCondition<CSS.Property.ScrollSnapType>
   /**
+   * ### scroll-target-group
+   *
+   * The CSS `scroll-target-group` property.
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-target-group
+   *
+   * @experimental
+   */
+  scrollTargetGroup?: StyleValueWithCondition<AnyString>
+  /**
    * ### scroll-timeline
    *
    * The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.
@@ -9055,6 +9695,10 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-timeline-name
    */
   scrollTimelineName?: StyleValueWithCondition<CSS.Property.ScrollTimelineName>
+  /**
+   * Sets the value of `--sepia`.
+   */
+  sepia?: StyleValueWithCondition<AnyString>
   /**
    * ### box-shadow
    *
@@ -9115,6 +9759,14 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/shape-rendering
    */
   shapeRendering?: StyleValueWithCondition<CSS.Property.ShapeRendering>
+  /**
+   * Sets the value of `--skew-x`.
+   */
+  skewX?: StyleValueWithCondition<AnyString>
+  /**
+   * Sets the value of `--skew-y`.
+   */
+  skewY?: StyleValueWithCondition<AnyString>
   /**
    * ### speak
    *
@@ -9352,9 +10004,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-text-4/#propdef-text-autospace
-   *
-   * @experimental
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-autospace
    */
   textAutospace?: StyleValueWithCondition<AnyString>
   /**
@@ -9822,6 +10472,28 @@ export interface StyleProps {
    */
   transformStyle?: StyleValueWithCondition<CSS.Property.TransformStyle>
   /**
+   * ### transition
+   *
+   * The <code>transition</code> shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/transition
+   */
+  transition?: StyleValueWithCondition<
+    | "all"
+    | "backgrounds"
+    | "colors"
+    | "common"
+    | "opacity"
+    | "position"
+    | "shadow"
+    | "size"
+    | CSS.Property.Transition
+  >
+  /**
    * ### transition-behavior
    *
    * The <code>transition-behavior: allow-discrete</code> CSS declaration allows transitions for properties whose animation behavior is discrete. Such properties can't be interpolated and swap from their start value to the end value at 50%.
@@ -9860,6 +10532,28 @@ export interface StyleProps {
     "durations"
   >
   /**
+   * ### transition-property
+   *
+   * The <code>transition</code> shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/transition-property
+   */
+  transitionProperty?: StyleValueWithCondition<
+    | "all"
+    | "backgrounds"
+    | "colors"
+    | "common"
+    | "opacity"
+    | "position"
+    | "shadow"
+    | "size"
+    | CSS.Property.TransitionProperty
+  >
+  /**
    * ### transition-timing-function
    *
    * The <code>transition</code> shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.
@@ -9874,6 +10568,22 @@ export interface StyleProps {
     CSS.Property.TransitionTimingFunction,
     "easings"
   >
+  /**
+   * Sets the value of `--translate-x`.
+   */
+  translateX?: StyleValueWithCondition<AnyString | number, "spaces">
+  /**
+   * Sets the value of `--translate-y`.
+   */
+  translateY?: StyleValueWithCondition<AnyString | number, "spaces">
+  /**
+   * Sets the value of `--translate-z`.
+   */
+  translateZ?: StyleValueWithCondition<AnyString | number>
+  /**
+   * If `true`, it clamps truncate a text after one line.
+   */
+  truncated?: StyleValueWithCondition<boolean>
   /**
    * ### unicode-bidi
    *
@@ -9980,6 +10690,16 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/view-transition-class
    */
   viewTransitionClass?: StyleValueWithCondition<AnyString>
+  /**
+   * ### view-transition-group
+   *
+   * The CSS `view-transition-group` property.
+   *
+   * @see https://drafts.csswg.org/css-view-transitions-2/#view-transition-group-prop
+   *
+   * @experimental
+   */
+  viewTransitionGroup?: StyleValueWithCondition<AnyString>
   /**
    * ### view-transition-name
    *
@@ -10167,599 +10887,12 @@ export interface StyleProps {
    */
   zoom?: StyleValueWithCondition<CSS.Property.Zoom>
   /**
-
-*/
-  colorMode?: StyleValueWithCondition<CSS.Property.ColorScheme>
-  /**
-   * Sets the value of `--contrast`.
-   */
-  contrast?: StyleValueWithCondition<AnyString>
-  /**
-   * Sets the value of `--drop-shadow`.
-   */
-  dropShadow?: StyleValueWithCondition<AnyString, "shadows">
-  /**
-   * The focus ring is used to identify the currently focused element.
-   */
-  focusRing?: StyleValueWithCondition<
-    "inline" | "inside" | "mixed" | "none" | "outline" | "outside"
-  >
-  /**
-   * Sets the value of `--focus-ring-color`.
-   */
-  focusRingColor?: StyleValueWithCondition<AnyString, "colors">
-  /**
-   * Sets the value of `--focus-ring-offset`.
-   */
-  focusRingOffset?: StyleValueWithCondition<AnyString | number, "spaces">
-  /**
-   * Sets the value of `--focus-ring-style`.
-   */
-  focusRingStyle?: StyleValueWithCondition<AnyString>
-  /**
-   * Sets the value of `--focus-ring-width`.
-   */
-  focusRingWidth?: StyleValueWithCondition<AnyString>
-  /**
-   * The focus ring is used to identify the currently focused element.
-   */
-  focusVisibleRing?: StyleValueWithCondition<
-    "inline" | "inside" | "mixed" | "none" | "outline" | "outside"
-  >
-  /**
-   * Sets the value of `--grayscale`.
-   */
-  grayscale?: StyleValueWithCondition<AnyString>
-  /**
-   * Sets the value of `--hue-rotate`.
-   */
-  hueRotate?: StyleValueWithCondition<AnyString>
-  /**
-   * ### left
-   *
-   * The physical CSS properties, <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code>, set the inset position of an element relative to the corresponding side of a container determined by the element's <code>position</code> property.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/left
-   *
-   * ------------------------------------
-   *
-   * ### right
-   *
-   * The physical CSS properties, <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code>, set the inset position of an element relative to the corresponding side of a container determined by the element's <code>position</code> property.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/right
-   */
-  insetX?: StyleValueWithCondition<
-    CSS.Property.Left | CSS.Property.Right | number,
-    "spaces"
-  >
-  /**
-   * ### bottom
-   *
-   * The physical CSS properties, <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code>, set the inset position of an element relative to the corresponding side of a container determined by the element's <code>position</code> property.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/bottom
-   *
-   * ------------------------------------
-   *
-   * ### top
-   *
-   * The physical CSS properties, <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code>, set the inset position of an element relative to the corresponding side of a container determined by the element's <code>position</code> property.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/top
-   */
-  insetY?: StyleValueWithCondition<
-    CSS.Property.Bottom | CSS.Property.Top | number,
-    "spaces"
-  >
-  /**
-   * Sets the value of `--invert`.
-   */
-  invert?: StyleValueWithCondition<AnyString>
-  /**
-   * Used to visually truncate a text after a number of lines.
-   */
-  lineClamp?: StyleValueWithCondition<number>
-  /**
-   * ### margin-inline-end
-   *
-   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2024-03-20
-   * @newly_available_date 2021-09-20
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
-   *
-   * ------------------------------------
-   *
-   * ### margin-inline-start
-   *
-   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2024-03-20
-   * @newly_available_date 2021-09-20
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
-   */
-  marginX?: StyleValueWithCondition<
-    CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
-    "spaces"
-  >
-  /**
-   * ### margin-bottom
-   *
-   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-bottom
-   *
-   * ------------------------------------
-   *
-   * ### margin-top
-   *
-   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
-   */
-  marginY?: StyleValueWithCondition<
-    CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
-    "spaces"
-  >
-  /**
-   * ### max-height
-   *
-   * The <code>min-width</code>, <code>min-height</code>, <code>max-width</code>, and <code>max-height</code> CSS properties set the minimum and maximum size of an element.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/max-height
-   *
-   * ------------------------------------
-   *
-   * ### max-width
-   *
-   * The <code>min-width</code>, <code>min-height</code>, <code>max-width</code>, and <code>max-height</code> CSS properties set the minimum and maximum size of an element.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/max-width
-   */
-  maxBoxSize?: StyleValueWithCondition<
-    CSS.Property.MaxHeight | CSS.Property.MaxWidth | number,
-    "sizes"
-  >
-  /**
-   * ### min-height
-   *
-   * The <code>min-width</code>, <code>min-height</code>, <code>max-width</code>, and <code>max-height</code> CSS properties set the minimum and maximum size of an element.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/min-height
-   *
-   * ------------------------------------
-   *
-   * ### min-width
-   *
-   * The <code>min-width</code>, <code>min-height</code>, <code>max-width</code>, and <code>max-height</code> CSS properties set the minimum and maximum size of an element.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/min-width
-   */
-  minBoxSize?: StyleValueWithCondition<
-    CSS.Property.MinHeight | CSS.Property.MinWidth | number,
-    "sizes"
-  >
-  /**
-   * ### margin-inline-end
-   *
-   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2024-03-20
-   * @newly_available_date 2021-09-20
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
-   *
-   * ------------------------------------
-   *
-   * ### margin-inline-start
-   *
-   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2024-03-20
-   * @newly_available_date 2021-09-20
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
-   */
-  mx?: StyleValueWithCondition<
-    CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
-    "spaces"
-  >
-  /**
-   * ### margin-bottom
-   *
-   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-bottom
-   *
-   * ------------------------------------
-   *
-   * ### margin-top
-   *
-   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
-   */
-  my?: StyleValueWithCondition<
-    CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
-    "spaces"
-  >
-  /**
-   * ### padding-inline-end
-   *
-   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2024-03-20
-   * @newly_available_date 2021-09-20
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
-   *
-   * ------------------------------------
-   *
-   * ### padding-inline-start
-   *
-   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2024-03-20
-   * @newly_available_date 2021-09-20
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
-   */
-  paddingX?: StyleValueWithCondition<
-    CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
-    "spaces"
-  >
-  /**
-   * ### padding-bottom
-   *
-   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-bottom
-   *
-   * ------------------------------------
-   *
-   * ### padding-top
-   *
-   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
-   */
-  paddingY?: StyleValueWithCondition<
-    CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
-    "spaces"
-  >
-  /**
-   * ### padding-inline-end
-   *
-   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2024-03-20
-   * @newly_available_date 2021-09-20
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
-   *
-   * ------------------------------------
-   *
-   * ### padding-inline-start
-   *
-   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2024-03-20
-   * @newly_available_date 2021-09-20
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
-   */
-  px?: StyleValueWithCondition<
-    CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
-    "spaces"
-  >
-  /**
-   * ### padding-bottom
-   *
-   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-bottom
-   *
-   * ------------------------------------
-   *
-   * ### padding-top
-   *
-   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
-   */
-  py?: StyleValueWithCondition<
-    CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
-    "spaces"
-  >
-  /**
-   * Sets the value of `--rotate-x`.
-   */
-  rotateX?: StyleValueWithCondition<AnyString>
-  /**
-   * Sets the value of `--rotate-y`.
-   */
-  rotateY?: StyleValueWithCondition<AnyString>
-  /**
-   * Sets the value of `--rotate-z`.
-   */
-  rotateZ?: StyleValueWithCondition<AnyString>
-  /**
-   * Sets the value of `--saturate`.
-   */
-  saturate?: StyleValueWithCondition<AnyString>
-  /**
-   * Sets the value of `--scale-x`.
-   */
-  scaleX?: StyleValueWithCondition<AnyString>
-  /**
-   * Sets the value of `--scale-y`.
-   */
-  scaleY?: StyleValueWithCondition<AnyString>
-  /**
-   * Sets the value of `--scale-z`.
-   */
-  scaleZ?: StyleValueWithCondition<AnyString>
-  /**
-   * ### scroll-margin-left
-   *
-   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2022-07-15
-   * @newly_available_date 2020-01-15
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-left
-   *
-   * ------------------------------------
-   *
-   * ### scroll-margin-right
-   *
-   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2022-07-15
-   * @newly_available_date 2020-01-15
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-right
-   */
-  scrollMarginX?: StyleValueWithCondition<
-    CSS.Property.ScrollMarginLeft | CSS.Property.ScrollMarginRight | number,
-    "spaces"
-  >
-  /**
-   * ### scroll-margin-bottom
-   *
-   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2022-07-15
-   * @newly_available_date 2020-01-15
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-bottom
-   *
-   * ------------------------------------
-   *
-   * ### scroll-margin-top
-   *
-   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2022-07-15
-   * @newly_available_date 2020-01-15
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-top
-   */
-  scrollMarginY?: StyleValueWithCondition<
-    CSS.Property.ScrollMarginBottom | CSS.Property.ScrollMarginTop | number,
-    "spaces"
-  >
-  /**
-   * ### scroll-padding-left
-   *
-   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2022-07-15
-   * @newly_available_date 2020-01-15
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-left
-   *
-   * ------------------------------------
-   *
-   * ### scroll-padding-right
-   *
-   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2022-07-15
-   * @newly_available_date 2020-01-15
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-right
-   */
-  scrollPaddingX?: StyleValueWithCondition<
-    CSS.Property.ScrollPaddingLeft | CSS.Property.ScrollPaddingRight | number,
-    "spaces"
-  >
-  /**
-   * ### scroll-padding-bottom
-   *
-   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2022-07-15
-   * @newly_available_date 2020-01-15
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-bottom
-   *
-   * ------------------------------------
-   *
-   * ### scroll-padding-top
-   *
-   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2022-07-15
-   * @newly_available_date 2020-01-15
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-top
-   */
-  scrollPaddingY?: StyleValueWithCondition<
-    CSS.Property.ScrollPaddingBottom | CSS.Property.ScrollPaddingTop | number,
-    "spaces"
-  >
-  /**
-   * Sets the value of `--sepia`.
-   */
-  sepia?: StyleValueWithCondition<AnyString>
-  /**
-   * Sets the value of `--skew-x`.
-   */
-  skewX?: StyleValueWithCondition<AnyString>
-  /**
-   * Sets the value of `--skew-y`.
-   */
-  skewY?: StyleValueWithCondition<AnyString>
-  /**
-   * ### transition
-   *
-   * The <code>transition</code> shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-03-30
-   * @newly_available_date 2015-09-30
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/transition
-   */
-  transition?: StyleValueWithCondition<
-    | "all"
-    | "backgrounds"
-    | "colors"
-    | "common"
-    | "opacity"
-    | "position"
-    | "shadow"
-    | "size"
-    | CSS.Property.Transition
-  >
-  /**
-   * ### transition-property
-   *
-   * The <code>transition</code> shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-03-30
-   * @newly_available_date 2015-09-30
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/transition-property
-   */
-  transitionProperty?: StyleValueWithCondition<
-    | "all"
-    | "backgrounds"
-    | "colors"
-    | "common"
-    | "opacity"
-    | "position"
-    | "shadow"
-    | "size"
-    | CSS.Property.TransitionProperty
-  >
-  /**
-   * Sets the value of `--translate-x`.
-   */
-  translateX?: StyleValueWithCondition<AnyString | number, "spaces">
-  /**
-   * Sets the value of `--translate-y`.
-   */
-  translateY?: StyleValueWithCondition<AnyString | number, "spaces">
-  /**
-   * Sets the value of `--translate-z`.
-   */
-  translateZ?: StyleValueWithCondition<AnyString | number>
-  /**
-   * If `true`, it clamps truncate a text after one line.
-   */
-  truncated?: StyleValueWithCondition<boolean>
-  /**
    * ### container
    *
    * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-08-14
    * @newly_available_date 2023-02-14
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@container

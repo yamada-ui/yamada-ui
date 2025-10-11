@@ -14,6 +14,7 @@
       "calendar",
       "carousel",
       "checkbox",
+      "date-picker",
       "editable",
       "file-input",
       "flip",
@@ -29,6 +30,7 @@
       "slider",
       "steps",
       "switch",
+      "table",
       "tabs",
       "toggle"
     ],

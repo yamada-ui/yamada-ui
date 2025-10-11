@@ -6,6 +6,6 @@ import { component, Icon } from "../icon"
 /**
  * `BotOffIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/docs/components/icon
  */
 export const BotOffIcon = component(Icon)({ as: BotOff })

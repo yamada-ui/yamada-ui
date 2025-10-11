@@ -1,8 +1,54 @@
 ---
-title: useBreakpointEffect
-description: "`useBreakpointEffect` is a custom hook that skips the side effect on the initial render and executes a specific callback function when the breakpoint changes."
-storybook: hooks-usebreakpointeffect--basic
-source: hooks/use-update-breakpoint-effect
+title: useUpdateBreakpointEffect
+description: "`useUpdateBreakpointEffect` is a custom hook that skips the side effect on the initial render and executes a specific callback function when the breakpoint changes."
+storybook: hooks-useupdatebreakpointeffect--basic
+source: hooks/use-breakpoint
 ---
 
-### Usage
+```tsx preview functional client
+const [device, setDevice] = useState("unknown");
+
+useUpdateBreakpointEffect(breakpoint => {
+  if (breakpoint === "sm") {
+    setDevice("mobile");
+  } else if (breakpoint === "md") {
+    setDevice("tablet");
+  } else {
+    setDevice("desktop");
+  }
+}, []);
+
+return <Text>The current device is "{device}"</Box>;
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { useUpdateBreakpointEffect } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useUpdateBreakpointEffect } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useUpdateBreakpointEffect } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const [device, setDevice] = useState("unknown")
+
+useUpdateBreakpointEffect((breakpoint) => {
+  if (breakpoint === "sm") {
+    setDevice("mobile")
+  } else if (breakpoint === "md") {
+    setDevice("tablet")
+  } else {
+    setDevice("desktop")
+  }
+}, [])
+```

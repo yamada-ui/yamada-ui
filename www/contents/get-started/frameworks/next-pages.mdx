@@ -148,7 +148,7 @@ If you change the `defaultColorMode` in your [config](/docs/theming/configuratio
 ```tsx title="_document.tsx" {3,10}
 import { Html, Head, Main, NextScript } from "next/document"
 import { ColorModeScript } from "@workspaces/ui"
-import { config } from "@/theme"
+import { config } from "@workspace/theme"
 
 export default function Document() {
   return (
@@ -247,7 +247,7 @@ If you change the `defaultThemeScheme` in your [config](/docs/theming/configurat
 ```tsx title="_document.tsx" {3,12}
 import { Html, Head, Main, NextScript } from "next/document"
 import { ThemeSchemeScript } from "@workspaces/ui"
-import { config } from "@/theme"
+import { config } from "@workspace/theme"
 
 export default function Document() {
   return (

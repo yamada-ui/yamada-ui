@@ -66,6 +66,11 @@ const data: IntlData = {
     "Loading...": "Ladataan...",
     "{value} percent": "{value} prosenttia",
   },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Kylläisyyden ja kirkkauden liukusäädin",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Kylläisyys {saturation}%, Kirkkaus {brightness}%",
+  },
   select: {
     "Clear value": "Tyhjennä arvo",
   },

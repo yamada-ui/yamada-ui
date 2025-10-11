@@ -1,16 +1,15 @@
-import type { Metadata } from "next"
-import { getTranslations } from "next-intl/server"
 import { Examples } from "@/components"
+import { generateSharedMetadata } from "@/utils/next"
+import { SourceCodeLink } from "./source-code-link"
 
-export async function generateMetadata({
-  params,
-}: PageProps<"/[locale]/icons">): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "examples" })
-
-  return { description: t("description"), title: t("title") }
-}
+export const generateMetadata = generateSharedMetadata("examples")
 
 export default function Page() {
-  return <Examples />
+  return (
+    <>
+      <Examples />
+
+      <SourceCodeLink />
+    </>
+  )
 }

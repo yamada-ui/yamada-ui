@@ -77,13 +77,11 @@
       },
       "size": {
         "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
-        "defaultValue": "hoge",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
         "type": "\"filled\" | \"flushed\" | \"outline\" | \"plain\"",
-        "defaultValue": "hoge",
         "description": "The variant of the component.",
         "required": false
       },
@@ -701,13 +699,11 @@
       },
       "size": {
         "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
-        "defaultValue": "hoge",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
         "type": "\"filled\" | \"flushed\" | \"outline\" | \"plain\"",
-        "defaultValue": "hoge",
         "description": "The variant of the component.",
         "required": false
       },
@@ -1093,13 +1089,11 @@
     },
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
-      "defaultValue": "hoge",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "\"filled\" | \"flushed\" | \"outline\" | \"plain\"",
-      "defaultValue": "hoge",
       "description": "The variant of the component.",
       "required": false
     },
@@ -1717,13 +1711,11 @@
     },
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
-      "defaultValue": "hoge",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "\"filled\" | \"flushed\" | \"outline\" | \"plain\"",
-      "defaultValue": "hoge",
       "description": "The variant of the component.",
       "required": false
     },

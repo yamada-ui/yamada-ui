@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Grid } from "@yamada-ui/react"
 import { getTranslations } from "next-intl/server"
+import { SourceCodeLink } from "../source-code-link"
 import { Company } from "./company"
 import { Form } from "./form"
 
@@ -15,14 +16,18 @@ export async function generateMetadata({
 
 export default function Page() {
   return (
-    <Grid
-      as="section"
-      layerStyle="card"
-      minH={{ base: "5xl", sm: "2xl" }}
-      templateColumns={{ base: "repeat(2, 1fr)", lg: "1fr" }}
-    >
-      <Company />
-      <Form />
-    </Grid>
+    <>
+      <Grid
+        as="section"
+        layerStyle="card"
+        minH={{ base: "5xl", sm: "2xl" }}
+        templateColumns={{ base: "repeat(2, 1fr)", lg: "1fr" }}
+      >
+        <Company />
+        <Form />
+      </Grid>
+
+      <SourceCodeLink page="authentication" />
+    </>
   )
 }

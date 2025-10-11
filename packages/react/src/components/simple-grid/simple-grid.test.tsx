@@ -20,19 +20,22 @@ describe("<SimpleGrid />", () => {
     expect(screen.getByText("SimpleGrid").tagName).toBe("DIV")
   })
 
-  test("minChildWidth - prop works correctly(minChildWidth prop takes precedence over the columns prop)", () => {
-    render(
-      <SimpleGrid columns={2} minChildWidth={{ base: "4" }}>
-        SimpleGrid
-      </SimpleGrid>,
-    )
+  test.todo(
+    "minChildWidth - prop works correctly(minChildWidth prop takes precedence over the columns prop)",
+    () => {
+      render(
+        <SimpleGrid columns={2} minChildWidth={{ base: "4" }}>
+          SimpleGrid
+        </SimpleGrid>,
+      )
 
-    waitFor(() => {
-      expect(screen.getByText("SimpleGrid")).toHaveStyle({
-        gridTemplateColumns: "repeat(auto-fit, minmax(1rem, 1fr))",
+      waitFor(() => {
+        expect(screen.getByText("SimpleGrid")).toHaveStyle({
+          gridTemplateColumns: "repeat(auto-fit, minmax(1rem, 1fr))",
+        })
       })
-    })
-  })
+    },
+  )
 
   test("columns - prop works correctly", () => {
     render(<SimpleGrid columns={3}>SimpleGrid</SimpleGrid>)

@@ -19,6 +19,7 @@
     "format": "prettier . --ignore-path ../.prettierignore --check --cache",
     "gen:icons": "tsx scripts/generate/icons",
     "gen:docs": "tsx scripts/generate/docs",
+    "gen:changelog": "tsx scripts/generate/changelog",
     "gen:contributors": "tsx scripts/generate/contributors"
   },
   "dependencies": {

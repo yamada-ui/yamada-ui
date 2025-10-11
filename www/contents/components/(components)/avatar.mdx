@@ -41,6 +41,18 @@ import { Avatar, AvatarGroup } from "@workspaces/ui"
 </AvatarGroup.Root>
 ```
 
+### Change Variant
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["solid", "subtle", "surface", "outline"]}>
+    {(variant, key) => (
+      <Avatar variant={variant} name="Hirotomo Yamada" key={key} />
+    )}
+  </For>
+</Wrap>
+```
+
 ### Change Size
 
 ```tsx preview
@@ -157,3 +169,7 @@ If you want to control the number of avatars displayed, specify a number with `m
 ## Props
 
 <PropsTable name="avatar" all omit={["AvatarGroupRoot"]} />
+
+## Accessibility
+
+Currently, this section is being updated due to the migration of v2.

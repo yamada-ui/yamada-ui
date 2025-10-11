@@ -7,7 +7,7 @@ export const DEFAULT_PACKAGE_NAME = {
   ui: "@workspaces/ui",
   theme: "@workspaces/theme",
 }
-export const REGISTRY_URL = "https://v2.yamada-ui.com/registry/v2"
+export const REGISTRY_URL = "https://yamada-ui.com/registry/v2"
 export const DEFAULT_PATH = {
   components: "./components",
   hooks: "./hooks",
@@ -29,16 +29,8 @@ export const DEFAULT_CONFIG: UserConfig = {
   providers: { overwrite: true },
 }
 export const REQUIRED_DEPENDENCIES = {
-  ui: [
-    "react@^19",
-    "react-dom@^19",
-    // TODO: Once `@yamada-ui/react` releases v2, I'll add it.
-    // "@yamada-ui/react@^2",
-  ],
-  theme: [
-    // TODO: Once `@yamada-ui/react` releases v2, I'll add it.
-    // "@yamada-ui/react@^2",
-  ],
+  ui: ["react@^19", "react-dom@^19", "@yamada-ui/react@^2"],
+  theme: ["@yamada-ui/react@^2"],
 }
 export const REQUIRED_DEV_DEPENDENCIES = {
   ui: ["@types/react@^19", "@types/react-dom@^19"],

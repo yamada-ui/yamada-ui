@@ -1,5 +1,5 @@
 {
-  "$schema": "https://v2.yamada-ui.com/registry/v2/schema.json",
+  "$schema": "https://yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
     "components": ["fieldset"],
     "externals": [],
@@ -23,6 +23,7 @@
       "pin-input",
       "radio",
       "rating",
+      "saturation-slider",
       "segmented-control",
       "select",
       "slider",

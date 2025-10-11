@@ -82,7 +82,6 @@
     },
     "variant": {
       "type": "\"none\" | \"pulse\" | \"shine\"",
-      "defaultValue": "hoge",
       "description": "The variant of the component.",
       "required": false
     },
@@ -142,7 +141,6 @@
     },
     "variant": {
       "type": "\"none\" | \"pulse\" | \"shine\"",
-      "defaultValue": "hoge",
       "description": "The variant of the component.",
       "required": false
     },

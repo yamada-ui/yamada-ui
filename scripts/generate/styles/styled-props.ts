@@ -38,7 +38,7 @@ export const additionalProps = {
     properties: ["colorScheme"],
   },
   display: {
-    type: "CSS.Property.Display | 'center' | 'inline-center' | 'hidden'",
+    type: "CSS.Property.Display | 'center' | 'inline-center' | 'absolute-center' | 'hidden'",
   },
   insetX: { properties: ["left", "right"] },
   insetY: { properties: ["top", "bottom"] },

@@ -1,27 +1,8 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480"/>
-</p>
-
-<p align="center">
-  <a href="https://www.npmjs.com/package/@yamada-ui/react">
-    <img alt="MIT License" src="https://img.shields.io/npm/v/@yamada-ui/react"/>
-  </a>
-  <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/@yamada-ui/react.svg?style=flat"/>
-  <a href="https://codecov.io/gh/yamada-ui/yamada-ui" >
-    <img src="https://codecov.io/gh/yamada-ui/yamada-ui/graph/badge.svg?token=LRQMRQNE7N"/>
-  </a>
-  <a href="https://github.com/yamada-ui/yamada-ui/blob/main/LICENSE">
-    <img alt="MIT License" src="https://img.shields.io/github/license/yamada-ui/yamada-ui"/>
-  </a>
-  <img alt="Github Stars" src="https://img.shields.io/github/stars/yamada-ui/yamada-ui" />
-  <a href="https://discord.gg/H7V5RfEDTR">
-    <img alt="MIT License" src="https://img.shields.io/badge/Chat%20on-Discord-%235865f2"/>
-  </a>
-</p>
-
 <p align='center'>
 <a href='./README.md'>English</a> | 日本語
 </p>
+
+# Yamada UI
 
 Yamada UIは、美しく一貫性のある、アクセスしやすいコンポーネントと高度なスタイリングを実現するデザインシステムを提供し、あなたのアイデアを現実のものにします。
 

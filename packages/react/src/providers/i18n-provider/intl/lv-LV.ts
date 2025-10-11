@@ -66,6 +66,11 @@ const data: IntlData = {
     "Loading...": "Ielādē...",
     "{value} percent": "{value} procenti",
   },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Piesātinājuma un spilgtuma slīdnis",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Piesātinājums {saturation}%, Spilgtums {brightness}%",
+  },
   select: {
     "Clear value": "Notīrīt vērtību",
   },

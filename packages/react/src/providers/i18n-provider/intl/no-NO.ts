@@ -66,6 +66,11 @@ const data: IntlData = {
     "Loading...": "Laster...",
     "{value} percent": "{value} prosent",
   },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Metnings- og lysstyrkeregler",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Metning {saturation}%, Lysstyrke {brightness}%",
+  },
   select: {
     "Clear value": "Tøm verdi",
   },

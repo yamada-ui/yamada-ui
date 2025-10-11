@@ -157,7 +157,7 @@ import type { Plugin } from "vite"
 import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
 import { COLOR_MODE_STORAGE_KEY, getStorageScript } from "@workspaces/ui"
-import { config } from "@/theme"
+import { config } from "@workspace/theme"
 
 function injectColorModeScript(): Plugin {
   return {
@@ -218,7 +218,7 @@ import type { Plugin } from "vite"
 import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
 import { getStorageScript, THEME_SCHEME_STORAGE_KEY } from "@workspaces/ui"
-import { config } from "@/theme"
+import { config } from "@workspace/theme"
 
 function injectThemeSchemeScript(): Plugin {
   return {

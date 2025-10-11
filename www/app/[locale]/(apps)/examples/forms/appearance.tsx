@@ -106,14 +106,14 @@ interface ThemeCardProps {
 
 function ThemeCard({ value, getInputProps, getLabelProps }: ThemeCardProps) {
   const { checked, ...inputProps } = getInputProps({ value })
-  const isLight = value === "light"
-  const bgColor: StyleProps["bg"] = isLight
+  const light = value === "light"
+  const bgColor: StyleProps["bg"] = light
     ? ["blackAlpha.200", "whiteAlpha.800"]
     : ["blackAlpha.900", "whiteAlpha.200"]
-  const containerColor: StyleProps["bg"] = isLight
+  const containerColor: StyleProps["bg"] = light
     ? "whiteAlpha.900"
     : "whiteAlpha.400"
-  const textColor: StyleProps["bg"] = isLight
+  const textColor: StyleProps["bg"] = light
     ? "blackAlpha.500"
     : "whiteAlpha.700"
 

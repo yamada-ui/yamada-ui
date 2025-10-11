@@ -162,9 +162,9 @@ To disable specific days of the week, set `excludeDate` to a condition function.
 <DatePicker excludeDate={(date) => [0, 1, 6].includes(date.getDay())} />
 ```
 
-### Allow Multiple Selection
+### Enable Multiple Selection
 
-To allow multiple date selection, set `multiple` to `true`.
+To enable multiple date selection, set `multiple` to `true`.
 
 ```tsx preview
 <DatePicker multiple />
@@ -581,3 +581,7 @@ return <DatePicker value={value} onChange={onChange} />
 ## Props
 
 <PropsTable name="date-picker" />
+
+## Accessibility
+
+Currently, this section is being updated due to the migration of v2.

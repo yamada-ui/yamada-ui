@@ -66,6 +66,11 @@ const data: IntlData = {
     "Loading...": "Indlæser...",
     "{value} percent": "{value} procent",
   },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Mætning og lysstyrke-skyder",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Mætning {saturation}%, Lysstyrke {brightness}%",
+  },
   select: {
     "Clear value": "Ryd værdi",
   },

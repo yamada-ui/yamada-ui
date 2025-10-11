@@ -301,11 +301,6 @@ export const theme = new Command("theme")
 
           await installDependencies([], { cwd })
 
-          // TODO: Once `@yamada-ui/react` releases v2, I'll remove it.
-          await installDependencies(["@yamada-ui/react@dev"], {
-            cwd: outdirPath,
-          })
-
           spinner.succeed("Installed dependencies")
         }
 

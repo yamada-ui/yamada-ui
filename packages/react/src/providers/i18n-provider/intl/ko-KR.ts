@@ -66,6 +66,11 @@ const data: IntlData = {
     "Loading...": "로딩 중...",
     "{value} percent": "{value} 퍼센트",
   },
+  saturationSlider: {
+    "Saturation and brightness thumb": "포화도 및 밝기 슬라이더",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "포화도 {saturation}%, 밝기 {brightness}%",
+  },
   select: {
     "Clear value": "값 지우기",
   },

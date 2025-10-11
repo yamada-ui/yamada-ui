@@ -24,6 +24,21 @@ const nextConfig: NextConfig = {
         permanent: true,
         source: "/docs",
       },
+      {
+        destination: "/ja/docs/get-started",
+        permanent: true,
+        source: "/ja/docs",
+      },
+      {
+        destination: "https://v1.yamada-ui.com",
+        permanent: true,
+        source: "/docs/get-started/legacy",
+      },
+      {
+        destination: "https://v1.yamada-ui.com/ja",
+        permanent: true,
+        source: "/ja/docs/get-started/legacy",
+      },
     ])
   },
 }

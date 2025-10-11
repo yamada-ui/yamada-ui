@@ -1,3 +1,5 @@
+"use client"
+
 import type { GridProps } from "@yamada-ui/react"
 import { Grid } from "@yamada-ui/react"
 import { useMemo } from "react"

@@ -4,7 +4,7 @@ import { YAxis as RechartsYAxis } from "recharts"
 import { createComponent } from "../../core"
 import { yAxisStyle } from "./y-axis.style"
 
-interface YAxisProps extends RechartsYAxisProps {}
+export interface YAxisProps extends RechartsYAxisProps {}
 
 const { withContext } = createComponent<YAxisProps, YAxisStyle>(
   "chart-y-axis",

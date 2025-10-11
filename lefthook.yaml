@@ -99,11 +99,13 @@ commit-msg:
 post-merge:
   commands:
     pnpm:
+      files: git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD
       glob: "{package.json,pnpm-lock.yaml}"
       run: pnpm install --frozen-lockfile
 
 post-checkout:
   commands:
     pnpm:
+      files: git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD
       glob: "{package.json,pnpm-lock.yaml}"
       run: pnpm install --frozen-lockfile

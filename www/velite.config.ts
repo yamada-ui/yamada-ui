@@ -44,6 +44,9 @@ const docs = defineCollection({
       style: s.string().optional(),
       code: s.mdx(),
       description: s.string(),
+      llm: s.custom().transform((_data, { meta }) => {
+        return meta.content
+      }),
       metadata: s.metadata(),
       release_date: s.string().optional(),
       release_url: s.string().optional(),

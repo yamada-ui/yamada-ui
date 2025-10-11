@@ -9,19 +9,14 @@
   "dependents": {
     "components": [
       "alpha-slider",
-      "breadcrumb",
-      "carousel",
       "drawer",
       "group",
       "hue-slider",
       "infinite-scroll-area",
-      "pagination",
       "reorder",
       "resizable",
       "segmented-control",
-      "skeleton",
       "slide",
-      "slide-fade",
       "slider",
       "steps",
       "tabs"

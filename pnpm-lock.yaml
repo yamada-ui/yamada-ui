@@ -634,6 +634,9 @@ importers:
       '@emotion/weak-memoize':
         specifier: ^0.4.0
         version: 0.4.0
+      '@faker-js/faker':
+        specifier: ^10.0.0
+        version: 10.0.0
       '@lucide/lab':
         specifier: ^0.1.2
         version: 0.1.2
@@ -2809,7 +2812,6 @@ packages:
   /@faker-js/faker@10.0.0:
     resolution: {integrity: sha512-UollFEUkVXutsaP+Vndjxar40Gs5JL2HeLcl8xO1QAjJgOdhc3OmBFWyEylS+RddWaaBiAzH+5/17PLQJwDiLw==, tarball: https://registry.npmjs.org/@faker-js/faker/-/faker-10.0.0.tgz}
     engines: {node: ^20.19.0 || ^22.13.0 || ^23.5.0 || >=24.0.0, npm: '>=10'}
-    dev: true
 
   /@floating-ui/core@1.7.3:
     resolution: {integrity: sha512-sGnvb5dmrJaKEZ+LDIpguvdX3bDlEllmv4/ClQ9awcmCZrlx5jQyyMWFM5kBI+EyNOCDDiKk8il0zeuX3Zlg/w==, tarball: https://registry.npmjs.org/@floating-ui/core/-/core-1.7.3.tgz}

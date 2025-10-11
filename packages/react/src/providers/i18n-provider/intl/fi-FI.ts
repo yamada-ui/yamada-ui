@@ -76,6 +76,14 @@ const data: IntlData = {
     "Decreased by": "Vähennetty",
     "Increased by": "Lisätty",
   },
+  table: {
+    "Clear sorting": "Tyhjennä lajittelu",
+    "Page size": "Sivun koko",
+    "Select all rows": "Valitse kaikki rivit",
+    "Select row": "Valitse rivi",
+    "Sort ascending": "Lajittele nousevasti",
+    "Sort descending": "Lajittele laskevasti",
+  },
   tag: {
     "Close tag": "Sulje tunniste",
   },

@@ -76,6 +76,14 @@ const data: IntlData = {
     "Decreased by": "Znížené o",
     "Increased by": "Zvýšené o",
   },
+  table: {
+    "Clear sorting": "Vymazať triedenie",
+    "Page size": "Veľkosť stránky",
+    "Select all rows": "Vybrať všetky riadky",
+    "Select row": "Vybrať riadok",
+    "Sort ascending": "Triediť vzostupne",
+    "Sort descending": "Triediť zostupne",
+  },
   tag: {
     "Close tag": "Zatvoriť značku",
   },

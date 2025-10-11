@@ -76,6 +76,14 @@ const data: IntlData = {
     "Decreased by": "Μειώθηκε κατά",
     "Increased by": "Αυξήθηκε κατά",
   },
+  table: {
+    "Clear sorting": "Καθαρισμός ταξινόμησης",
+    "Page size": "Μέγεθος σελίδας",
+    "Select all rows": "Επιλογή όλων των σειρών",
+    "Select row": "Επιλογή σειράς",
+    "Sort ascending": "Ταξινόμηση αύξουσα",
+    "Sort descending": "Ταξινόμηση φθίνουσα",
+  },
   tag: {
     "Close tag": "Κλείσιμο ετικέτας",
   },

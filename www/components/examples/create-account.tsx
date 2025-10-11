@@ -32,7 +32,7 @@ export function CreateAccount() {
       </VStack>
 
       <VStack gap="md">
-        <Input placeholder="name@example.com" />
+        <Input bg="bg" placeholder="name@example.com" />
 
         <Button colorScheme="primary">Sign In with Email</Button>
       </VStack>
@@ -60,7 +60,11 @@ export function CreateAccount() {
         />
       </Center>
 
-      <Button variant="outline" startIcon={<GithubIcon />}>
+      <Button
+        variant="outline"
+        bg={{ base: "bg", _hover: "bg.panel" }}
+        startIcon={<GithubIcon />}
+      >
         GitHub
       </Button>
 

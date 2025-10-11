@@ -1,19 +1,13 @@
 "use client"
 
 import type { ReactElement } from "react"
-import type {
-  GenericsComponent,
-  HTMLProps,
-  HTMLStyledProps,
-  ThemeProps,
-} from "../../core"
+import type { GenericsComponent, HTMLStyledProps, ThemeProps } from "../../core"
 import type { Merge } from "../../utils"
 import type { UseInputBorderProps } from "../input"
 import type { RadioStyle } from "./radio.style"
 import type { UseRadioProps } from "./use-radio"
 import { useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
-import { cast } from "../../utils"
 import { useInputBorder } from "../input"
 import { radioStyle } from "./radio.style"
 import { useRadio } from "./use-radio"
@@ -81,24 +75,13 @@ export const Radio = withProvider<"label", RadioProps>(
       return <RadioIndicator {...getIndicatorProps(indicatorProps)} />
     }, [getIndicatorProps, indicatorProps])
 
-    if (children) {
-      return (
-        <styled.label {...getRootProps({ ...varProps, ...rootProps })}>
-          {input}
-          {indicator}
-          <RadioLabel {...labelProps}>{children}</RadioLabel>
-        </styled.label>
-      )
-    } else {
-      return (
-        <styled.div
-          {...cast<HTMLProps>(getRootProps({ ...varProps, ...rootProps }))}
-        >
-          {input}
-          {indicator}
-        </styled.div>
-      )
-    }
+    return (
+      <styled.label {...getRootProps({ ...varProps, ...rootProps })}>
+        {input}
+        {indicator}
+        {children ? <RadioLabel {...labelProps}>{children}</RadioLabel> : null}
+      </styled.label>
+    )
   },
   "root",
 )() as GenericsComponent<{

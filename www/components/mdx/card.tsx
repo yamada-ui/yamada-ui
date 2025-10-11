@@ -5,7 +5,7 @@ import {
   Card as OriginalCard,
   SimpleGrid,
 } from "@yamada-ui/react"
-import NextLink from "next/link"
+import { Link } from "@/i18n"
 
 export interface CardGroupProps {}
 
@@ -22,7 +22,7 @@ export interface CardProps extends OriginalCard.RootProps {
 export function Card({ href, children, depth, title }: CardProps) {
   return (
     <OriginalCard.Root
-      as={NextLink}
+      as={Link}
       href={href}
       variant="outline"
       data-group

@@ -19,15 +19,18 @@ export function QAndA() {
         defaultIndex={0}
         items={[
           {
+            bg: "bg",
             button: "What is Yamada UI?",
             children:
               "Yamada UI is a component library for building web applications.",
           },
           {
+            bg: "bg",
             button: "Is it beautiful?",
             children: "Yes, Yamada UI is beautiful.",
           },
           {
+            bg: "bg",
             button: "Is Yamada cool?",
             children: "Yes, Yamada is cool. And Yamada is wonderful.",
           },

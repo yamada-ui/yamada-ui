@@ -1,16 +1,15 @@
 "use client"
 
-import type { Component, HTMLStyledProps, StyleValue } from "../../core"
+import type { Component, HTMLStyledProps } from "../../core"
 import type { SkeletonProps } from "./skeleton"
 import { mergeCSS, styled } from "../../core"
-import { useValue } from "../../hooks/use-value"
 import { Skeleton } from "./skeleton"
 
 export interface SkeletonTextProps extends Omit<SkeletonProps, "lineClamp"> {
   /**
    * The number of lines to display.
    */
-  lineClamp?: StyleValue<number>
+  lineClamp?: number
   /**
    * Props for the root element.
    */
@@ -21,15 +20,13 @@ export const SkeletonText = (({
   css,
   children,
   gap = "2",
-  lineClamp: lineClampProp = 3,
+  lineClamp = 3,
   loading = true,
   _loading,
   _notFirst,
   rootProps,
   ...rest
 }: SkeletonTextProps) => {
-  const lineClamp = useValue(lineClampProp)
-
   return (
     <styled.div w="full" {...rootProps}>
       {Array.from({ length: lineClamp }).map((_, index) => {

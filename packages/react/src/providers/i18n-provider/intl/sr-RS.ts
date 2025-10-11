@@ -76,6 +76,14 @@ const data: IntlData = {
     "Decreased by": "Smanjeno za",
     "Increased by": "Povećano za",
   },
+  table: {
+    "Clear sorting": "Obriši sortiranje",
+    "Page size": "Veličina stranice",
+    "Select all rows": "Izaberi sve redove",
+    "Select row": "Izaberi red",
+    "Sort ascending": "Sortiraj rastuće",
+    "Sort descending": "Sortiraj opadajuće",
+  },
   tag: {
     "Close tag": "Zatvori oznaku",
   },

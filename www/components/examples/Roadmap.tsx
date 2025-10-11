@@ -15,6 +15,7 @@ export function Roadmap() {
       </Heading>
 
       <Timeline.Root
+        colorScheme="primary"
         items={[
           {
             description: (

@@ -76,6 +76,14 @@ const data: IntlData = {
     "Decreased by": "Formindsket med",
     "Increased by": "Forøget med",
   },
+  table: {
+    "Clear sorting": "Ryd sortering",
+    "Page size": "Sidestørrelse",
+    "Select all rows": "Vælg alle rækker",
+    "Select row": "Vælg række",
+    "Sort ascending": "Sortér stigende",
+    "Sort descending": "Sortér faldende",
+  },
   tag: {
     "Close tag": "Luk tag",
   },

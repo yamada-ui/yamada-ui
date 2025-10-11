@@ -37,11 +37,14 @@ export function Appearance() {
         </Text>
 
         <HStack gap="sm">
-          <AccentButton value="mono" />
+          <AccentButton value="base" />
           <AccentButton value="blue" />
-          <AccentButton value="orange" />
-          <AccentButton value="green" />
           <AccentButton value="red" />
+          <AccentButton value="orange" />
+          <AccentButton value="yellow" />
+          <AccentButton value="green" />
+          <AccentButton value="violet" />
+          <AccentButton value="pink" />
         </HStack>
       </HStack>
 
@@ -73,9 +76,9 @@ function AccentButton({ value, ...rest }: AccentButtonProps) {
     <Center
       as="button"
       type="button"
-      bg={value}
+      bg={value === "base" ? "mono" : value}
       boxSize="6"
-      color={`${value}.contrast`}
+      color={`${value === "base" ? "mono" : value}.contrast`}
       rounded="full"
       onClick={() => changeThemeScheme(value as unknown as ThemeScheme)}
       {...rest}

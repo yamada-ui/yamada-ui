@@ -74,6 +74,14 @@ const data = {
     "Decreased by": "Decreased by",
     "Increased by": "Increased by",
   },
+  table: {
+    "Clear sorting": "Clear sorting",
+    "Page size": "Page size",
+    "Select all rows": "Select all rows",
+    "Select row": "Select row",
+    "Sort ascending": "Sort ascending",
+    "Sort descending": "Sort descending",
+  },
   tag: {
     "Close tag": "Close tag",
   },

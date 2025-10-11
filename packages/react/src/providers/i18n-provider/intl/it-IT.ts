@@ -76,6 +76,14 @@ const data: IntlData = {
     "Decreased by": "Diminuito di",
     "Increased by": "Aumentato di",
   },
+  table: {
+    "Clear sorting": "Cancella ordinamento",
+    "Page size": "Dimensione della pagina",
+    "Select all rows": "Seleziona tutte le righe",
+    "Select row": "Seleziona riga",
+    "Sort ascending": "Ordinamento crescente",
+    "Sort descending": "Ordinamento decrescente",
+  },
   tag: {
     "Close tag": "Chiudi etichetta",
   },

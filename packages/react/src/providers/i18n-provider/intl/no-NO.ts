@@ -76,6 +76,14 @@ const data: IntlData = {
     "Decreased by": "Redusert med",
     "Increased by": "Økt med",
   },
+  table: {
+    "Clear sorting": "Tøm sortering",
+    "Page size": "Sidestørrelse",
+    "Select all rows": "Velg alle rader",
+    "Select row": "Velg rad",
+    "Sort ascending": "Sortér stigende",
+    "Sort descending": "Sortér synkende",
+  },
   tag: {
     "Close tag": "Lukk tag",
   },

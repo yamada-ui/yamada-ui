@@ -31,14 +31,25 @@ export const nativeTableStyle = defineComponentSlotStyle({
     },
     tbody: {},
     td: {
+      px: "{space-x}",
+      py: "{space-y}",
       verticalAlign: "top",
       _numeric: {
         textAlign: "end",
       },
     },
-    tfoot: {},
+    tfoot: {
+      "& td": {
+        fontWeight: "medium",
+        textAlign: "start",
+        verticalAlign: "middle",
+      },
+    },
     th: {
       fontWeight: "medium",
+      px: "{space-x}",
+      py: "{space-y}",
+      textAlign: "start",
       verticalAlign: "middle",
       _numeric: {
         textAlign: "end",
@@ -62,7 +73,6 @@ export const nativeTableStyle = defineComponentSlotStyle({
       true: {
         tbody: {
           "& tr": {
-            cursor: "pointer",
             transitionDuration: "moderate",
             transitionProperty: "common",
             _hover: {
@@ -81,6 +91,8 @@ export const nativeTableStyle = defineComponentSlotStyle({
       true: {
         tbody: {
           "& tr": {
+            transitionDuration: "moderate",
+            transitionProperty: "common",
             _selected: {
               bg: "colorScheme.bg",
             },
@@ -145,9 +157,7 @@ export const nativeTableStyle = defineComponentSlotStyle({
      */
     withColumnBorders: {
       true: {
-        tr: {
-          _notLastChild: { borderRightWidth: "1px" },
-        },
+        tr: { "& th, td": { borderRightWidth: "1px" } },
       },
     },
   },
@@ -155,27 +165,14 @@ export const nativeTableStyle = defineComponentSlotStyle({
   variants: {
     line: {
       tbody: {
-        "& tr": {
-          _last: {
-            "& th, td": {
-              borderBottomWidth: 0,
-            },
-          },
-        },
-      },
-      td: {
-        borderBottomWidth: "1px",
+        "& tr:not(:first-of-type)": { "& th, td": { borderTopWidth: "1px" } },
+        "& tr:only-child": { "& th, td": { borderTopWidth: "1px" } },
       },
       tfoot: {
-        "& tr": {
-          "& th": {
-            borderBottomWidth: 0,
-            borderTopWidth: "1px",
-          },
-        },
+        "& tr": { "& th, td": { borderTopWidth: "1px" } },
       },
-      th: {
-        borderBottomWidth: "1px",
+      thead: {
+        "& tr": { "& th, td": { borderBottomWidth: "1px" } },
       },
     },
     outline: {
@@ -186,31 +183,18 @@ export const nativeTableStyle = defineComponentSlotStyle({
         borderWidth: "1px",
       },
       tbody: {
-        "& tr": {
-          _last: {
-            "& th, td": {
-              borderBottomWidth: 0,
-            },
-          },
-        },
-      },
-      td: {
-        borderBottomWidth: "1px",
+        "& tr:not(:first-of-type)": { "& th, td": { borderTopWidth: "1px" } },
+        "& tr:only-child": { "& th, td": { borderTopWidth: "1px" } },
       },
       tfoot: {
         "& tr": {
-          "& th": {
-            borderBottomWidth: 0,
-            borderTopWidth: "1px",
-          },
+          "&:first-of-type": { "& th, td": { borderTopWidth: "1px" } },
           bg: "colorScheme.bg",
         },
       },
-      th: {
-        borderBottomWidth: "1px",
-      },
       thead: {
         "& tr": {
+          "&:last-of-type": { "& th, td": { borderBottomWidth: "1px" } },
           bg: "colorScheme.bg",
         },
       },
@@ -219,43 +203,19 @@ export const nativeTableStyle = defineComponentSlotStyle({
 
   sizes: {
     sm: {
-      root: {
-        fontSize: "xs",
-      },
-      td: {
-        px: "2",
-        py: "1",
-      },
-      th: {
-        px: "2",
-        py: "1",
-      },
+      root: { fontSize: "xs" },
+      td: { "--space-x": "spaces.2", "--space-y": "spaces.1" },
+      th: { "--space-x": "spaces.2", "--space-y": "spaces.1" },
     },
     md: {
-      root: {
-        fontSize: "sm",
-      },
-      td: {
-        px: "3",
-        py: "2",
-      },
-      th: {
-        px: "3",
-        py: "2",
-      },
+      root: { fontSize: "sm" },
+      td: { "--space-x": "spaces.3", "--space-y": "spaces.2" },
+      th: { "--space-x": "spaces.3", "--space-y": "spaces.2" },
     },
     lg: {
-      root: {
-        fontSize: "md",
-      },
-      td: {
-        px: "4",
-        py: "3",
-      },
-      th: {
-        px: "4",
-        py: "3",
-      },
+      root: { fontSize: "md" },
+      td: { "--space-x": "spaces.4", "--space-y": "spaces.3" },
+      th: { "--space-x": "spaces.4", "--space-y": "spaces.3" },
     },
   },
 

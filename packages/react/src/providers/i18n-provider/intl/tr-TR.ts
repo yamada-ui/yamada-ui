@@ -76,6 +76,14 @@ const data: IntlData = {
     "Decreased by": "Azaltıldı",
     "Increased by": "Artırıldı",
   },
+  table: {
+    "Clear sorting": "Sıralamayı temizle",
+    "Page size": "Sayfa boyutu",
+    "Select all rows": "Tüm satırları seç",
+    "Select row": "Satırı seç",
+    "Sort ascending": "Artan olarak sırala",
+    "Sort descending": "Azalan olarak sırala",
+  },
   tag: {
     "Close tag": "Etiketi kapat",
   },

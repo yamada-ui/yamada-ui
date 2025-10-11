@@ -30,12 +30,12 @@ export const segmentedControlStyle = defineComponentSlotStyle({
     root: {
       alignItems: "center",
       anchorScope: "--checked",
-      bg: ["bg.ghost", "bg.subtle"],
+      bg: "bg.subtle",
       display: "inline-flex",
       p: "1",
       rounded: "lg",
       _before: {
-        bg: "bg.panel",
+        bg: "bg",
         boxShadow: "xs",
         h: "anchor-size(--checked height)",
         left: "anchor(--checked left)",
@@ -45,11 +45,6 @@ export const segmentedControlStyle = defineComponentSlotStyle({
         top: "anchor(--checked top)",
         transitionDuration: "moderate",
         w: "anchor-size(--checked width)",
-      },
-      _dark: {
-        _before: {
-          bg: "bg.muted",
-        },
       },
       _readOnly: { layerStyle: "readOnly" },
       _disabled: { layerStyle: "disabled" },

@@ -43,7 +43,7 @@ export function Role() {
             { label: "Member", value: "member" },
             { label: "Guest", value: "guest" },
           ]}
-          rootProps={{ w: "4xs" }}
+          rootProps={{ bg: "bg", w: "4xs" }}
         />
       </HStack>
 
@@ -70,7 +70,7 @@ export function Role() {
             { label: "Member", value: "member" },
             { label: "Guest", value: "guest" },
           ]}
-          rootProps={{ w: "4xs" }}
+          rootProps={{ bg: "bg", w: "4xs" }}
         />
       </HStack>
     </VStack>

@@ -1,12 +1,7 @@
 "use client"
 
 import type { ReactNode } from "react"
-import type {
-  HTMLStyledProps,
-  Orientation,
-  StyleValue,
-  ThemeProps,
-} from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { InfiniteScrollAreaStyle } from "./infinite-scroll-area.style"
 import type { UseInfiniteScrollProps } from "./use-infinite-scroll"
 import { useRef } from "react"
@@ -28,12 +23,6 @@ export interface InfiniteScrollAreaProps
    * The infinite scroll area loading to use.
    */
   loading?: ReactNode
-  /**
-   * The orientation of the infinite scroll.
-   *
-   * @default 'vertical'
-   */
-  orientation?: StyleValue<Orientation>
   /**
    * Props for infinite scroll area trigger component.
    */

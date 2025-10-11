@@ -379,7 +379,7 @@ export const CustomComponent: Story = () => {
       py="3"
       rounded="l2"
     >
-      <Radio h="6" />
+      <Radio as="div" h="6" />
 
       <VStack gap="xs" userSelect="none">
         <Text>Enable notifications</Text>

@@ -76,6 +76,14 @@ const data: IntlData = {
     "Decreased by": "減少",
     "Increased by": "増加",
   },
+  table: {
+    "Clear sorting": "ソートを解除する",
+    "Page size": "ページサイズ",
+    "Select all rows": "すべての行を選択する",
+    "Select row": "行を選択する",
+    "Sort ascending": "昇順でソートする",
+    "Sort descending": "降順でソートする",
+  },
   tag: {
     "Close tag": "タグを閉じる",
   },

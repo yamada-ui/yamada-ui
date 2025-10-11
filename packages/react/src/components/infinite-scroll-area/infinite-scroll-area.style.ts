@@ -18,7 +18,7 @@ export const infiniteScrollAreaStyle = defineComponentSlotStyle({
 
   props: {
     /**
-     * If `true`, the button is full rounded. Else, it'll be slightly round.
+     * The orientation of the infinite scroll.
      *
      * @default 'vertical'
      */

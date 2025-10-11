@@ -76,6 +76,14 @@ const data: IntlData = {
     "Decreased by": "Scăzut cu",
     "Increased by": "Crescut cu",
   },
+  table: {
+    "Clear sorting": "Șterge sortarea",
+    "Page size": "Dimensiunea paginii",
+    "Select all rows": "Selectează toate rândurile",
+    "Select row": "Selectează rândul",
+    "Sort ascending": "Sortare ascendentă",
+    "Sort descending": "Sortare descendentă",
+  },
   tag: {
     "Close tag": "Închide eticheta",
   },

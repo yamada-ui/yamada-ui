@@ -76,6 +76,14 @@ const data: IntlData = {
     "Decreased by": "Sumažinta",
     "Increased by": "Padidinta",
   },
+  table: {
+    "Clear sorting": "Išvalyti rūšiavimą",
+    "Page size": "Puslapio dydis",
+    "Select all rows": "Pasirinkti visas eilutes",
+    "Select row": "Pasirinkti eilutę",
+    "Sort ascending": "Rūšiuoti didėjančia tvarka",
+    "Sort descending": "Rūšiuoti mažėjančia tvarka",
+  },
   tag: {
     "Close tag": "Uždaryti žymą",
   },

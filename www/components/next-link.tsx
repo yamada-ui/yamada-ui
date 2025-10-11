@@ -1,3 +1,4 @@
+import type { LinkProps as OriginalLinkProps } from "@/i18n"
 import type {
   ButtonProps,
   HTMLRefAttributes,
@@ -5,10 +6,9 @@ import type {
   LinkProps as LinkProps,
   Merge,
 } from "@yamada-ui/react"
-import type { LinkProps as OriginalLinkProps } from "next/link"
 import type { FC } from "react"
 import { Button, IconButton, Link } from "@yamada-ui/react"
-import OriginalLink from "next/link"
+import { Link as OriginalLink } from "@/i18n"
 
 export interface NextLinkProps extends LinkProps {}
 

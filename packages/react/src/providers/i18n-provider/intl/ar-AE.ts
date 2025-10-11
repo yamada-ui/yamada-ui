@@ -76,6 +76,14 @@ const data: IntlData = {
     "Decreased by": "انخفض بمقدار",
     "Increased by": "زاد بمقدار",
   },
+  table: {
+    "Clear sorting": "مسح الفرز",
+    "Page size": "حجم الصفحة",
+    "Select all rows": "حدد كل الصفوف",
+    "Select row": "حدد الصف",
+    "Sort ascending": "ترتيب تصاعدي",
+    "Sort descending": "ترتيب تنازلي",
+  },
   tag: {
     "Close tag": "إغلاق العلامة",
   },

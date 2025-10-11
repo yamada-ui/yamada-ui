@@ -76,6 +76,14 @@ const data: IntlData = {
     "Decreased by": "Vähenenud",
     "Increased by": "Suurenenud",
   },
+  table: {
+    "Clear sorting": "Tühjenda sortimine",
+    "Page size": "Lehekülje suurus",
+    "Select all rows": "Vali kõik read",
+    "Select row": "Vali rida",
+    "Sort ascending": "Sorteeri kasvavalt",
+    "Sort descending": "Sorteeri kahanevalt",
+  },
   tag: {
     "Close tag": "Sulge silt",
   },

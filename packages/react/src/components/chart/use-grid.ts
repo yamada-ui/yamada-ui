@@ -1,5 +1,5 @@
 import type { CartesianGridProps } from "recharts"
-import type { HTMLStyledProps, PropGetter } from "../../core"
+import type { CSSObject, HTMLProps, PropGetter } from "../../core"
 import type { Merge } from "../../utils"
 import { useCallback } from "react"
 import { useSystem, useTheme } from "../../core"
@@ -7,8 +7,8 @@ import { cx } from "../../utils"
 import { gridProperties } from "./recharts-properties"
 import { getComponentProps } from "./utils"
 
-export interface UseGridProps
-  extends Merge<HTMLStyledProps, CartesianGridProps> {
+export interface UseGridProps extends Merge<HTMLProps, CartesianGridProps> {
+  css?: CSSObject | CSSObject[]
   /**
    * Specifies which lines should be displayed in the grid.
    *

@@ -22,13 +22,11 @@
     },
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\"",
-      "defaultValue": "hoge",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "\"solid\" | \"subtle\" | \"surface\"",
-      "defaultValue": "hoge",
       "description": "The variant of the component.",
       "required": false
     },

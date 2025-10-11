@@ -20,3 +20,4 @@ export type {
   SliderThumbsProps,
   SliderTrackProps,
 } from "./slider"
+export * from "./use-slider"

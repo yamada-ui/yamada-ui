@@ -285,7 +285,7 @@
       }
     },
     "display": {
-      "type": "StyleValueWithCondition<CSS.Property.Display | 'center' | 'inline-center' | 'hidden'>",
+      "type": "StyleValueWithCondition<CSS.Property.Display | 'center' | 'inline-center' | 'absolute-center' | 'hidden'>",
       "docs": {
         "display": {
           "baseline": {

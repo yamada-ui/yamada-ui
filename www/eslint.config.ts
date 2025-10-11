@@ -7,6 +7,7 @@ import {
   reactHooksConfig,
   sharedConfigArray,
   cspellConfig as sharedCspellConfig,
+  sharedFiles,
 } from "@yamada-ui/workspace/eslint"
 import tseslint from "typescript-eslint"
 
@@ -34,6 +35,16 @@ const nextConfig: TSESLint.FlatConfig.Config = {
   },
 }
 
+const restrictedImportsConfigArray: TSESLint.FlatConfig.ConfigArray = [
+  {
+    name: "eslint/restricted-imports/utils",
+    files: sharedFiles,
+    rules: {
+      "no-restricted-imports": ["error", { patterns: ["next/link"] }],
+    },
+  },
+]
+
 const languageConfig = createLanguageConfig(true, {
   languageOptions: {
     parserOptions: {
@@ -48,6 +59,7 @@ const languageConfig = createLanguageConfig(true, {
 const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   languageConfig,
   ...sharedConfigArray,
+  ...restrictedImportsConfigArray,
   noConsoleConfig,
   cspellConfig,
   nextConfig,

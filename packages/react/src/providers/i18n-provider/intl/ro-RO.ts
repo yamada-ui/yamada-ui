@@ -66,6 +66,11 @@ const data: IntlData = {
     "Loading...": "Se încarcă...",
     "{value} percent": "{value} la sută",
   },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Glisor de saturație și luminozitate",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Saturație {saturation}%, Luminozitate {brightness}%",
+  },
   select: {
     "Clear value": "Șterge valoarea",
   },

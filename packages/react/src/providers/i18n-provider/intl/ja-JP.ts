@@ -66,6 +66,11 @@ const data: IntlData = {
     "Loading...": "読み込み中...",
     "{value} percent": "{value}パーセント",
   },
+  saturationSlider: {
+    "Saturation and brightness thumb": "彩度と明度のつまみ",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "彩度 {saturation}%, 明度 {brightness}%",
+  },
   select: {
     "Clear value": "値を消去する",
   },

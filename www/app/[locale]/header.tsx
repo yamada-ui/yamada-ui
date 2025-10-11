@@ -20,7 +20,7 @@ export function Header() {
 
   const items = useMemo(() => {
     return [
-      { href: "/docs", label: t("component.header.docs") },
+      { href: "/docs/get-started", label: t("component.header.docs") },
       { href: "/icons", label: t("component.header.icons") },
       { href: "/themes", label: t("component.header.themes") },
       {

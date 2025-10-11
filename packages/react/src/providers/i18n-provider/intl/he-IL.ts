@@ -66,6 +66,11 @@ const data: IntlData = {
     "Loading...": "טוען...",
     "{value} percent": "{value} אחוז",
   },
+  saturationSlider: {
+    "Saturation and brightness thumb": "מחוון רוויה ובהירות",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "רוויה {saturation}%, בהירות {brightness}%",
+  },
   select: {
     "Clear value": "נקה ערך",
   },

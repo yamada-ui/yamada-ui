@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { VStack } from "@yamada-ui/react"
 import { getTranslations } from "next-intl/server"
+import { SourceCodeLink } from "../source-code-link"
 import { Edit } from "./edit"
 import { Footer } from "./footer"
 import { Header } from "./header"
@@ -16,10 +17,14 @@ export async function generateMetadata({
 
 export default function Page() {
   return (
-    <VStack as="section" layerStyle="card" gap="0">
-      <Header />
-      <Edit />
-      <Footer />
-    </VStack>
+    <>
+      <VStack as="section" layerStyle="card" gap="0">
+        <Header />
+        <Edit />
+        <Footer />
+      </VStack>
+
+      <SourceCodeLink page="playground" />
+    </>
   )
 }

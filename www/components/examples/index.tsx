@@ -7,7 +7,7 @@ import { Notifications } from "./notifications"
 import { PaymentMethod } from "./payment-method"
 import { Processing } from "./processing"
 import { QAndA } from "./q-and-a"
-import { Roadmap } from "./Roadmap"
+import { Roadmap } from "./roadmap"
 import { Role } from "./role"
 import { SocialMedia } from "./social-media"
 

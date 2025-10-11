@@ -2,14 +2,17 @@
 
 import type { ReactElement, ReactNode } from "react"
 import type { GenericsComponent, HTMLStyledProps, ThemeProps } from "../../core"
+import type { HTMLMotionProps } from "../motion"
 import type { SegmentedControlStyle } from "./segmented-control.style"
 import type {
   UseSegmentedControlItemProps,
   UseSegmentedControlProps,
 } from "./use-segmented-control"
+import { LayoutGroup } from "motion/react"
 import { useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { useValue } from "../../hooks/use-value"
+import { motion } from "../motion"
 import { segmentedControlStyle } from "./segmented-control.style"
 import {
   SegmentedControlContext,
@@ -84,7 +87,9 @@ export const SegmentedControlRoot = withProvider(
     return (
       <SegmentedControlContext value={context}>
         <SegmentedControlDescendantsContext value={descendants}>
-          <styled.div {...getRootProps()}>{cloneChildren}</styled.div>
+          <LayoutGroup id={id}>
+            <styled.div {...getRootProps()}>{cloneChildren}</styled.div>
+          </LayoutGroup>
         </SegmentedControlDescendantsContext>
       </SegmentedControlContext>
     )
@@ -103,15 +108,34 @@ export const SegmentedControlItem = withContext<
   "label",
   SegmentedControlItemProps
 >(({ children, ...rest }) => {
-  const { getInputProps, getLabelProps } = useSegmentedControlItem(rest)
+  const { checked, getInputProps, getLabelProps } =
+    useSegmentedControlItem(rest)
 
   return (
     <styled.label {...getLabelProps()}>
       <styled.input {...getInputProps()} />
 
       <styled.span>{children}</styled.span>
+
+      {checked ? <SegmentedControlIndicator /> : null}
     </styled.label>
   )
 }, "item")() as GenericsComponent<{
   <Y extends string = string>(props: SegmentedControlItemProps<Y>): ReactElement
 }>
+
+interface SegmentedControlIndicatorProps extends HTMLMotionProps {}
+
+const SegmentedControlIndicator = withContext<
+  "div",
+  SegmentedControlIndicatorProps
+>(({ transition, ...props }) => {
+  return (
+    <motion.div
+      layoutDependency={false}
+      layoutId="indicator"
+      transition={{ duration: 0.2, ...transition }}
+      {...props}
+    />
+  )
+}, "indicator")()

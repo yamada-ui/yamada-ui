@@ -190,7 +190,7 @@ import {
 } from "react-router"
 import { ColorModeScript, UIProvider } from "@workspaces/ui"
 import type { Route } from "./+types/root"
-import { config } from "@/theme"
+import { config } from "@workspace/theme"
 
 export async function loader({ request }: Route.LoaderArgs) {
   const cookie = request.headers.get("cookie") ?? ""
@@ -287,7 +287,7 @@ import {
 } from "react-router"
 import { ThemeSchemeScript, UIProvider } from "@workspaces/ui"
 import type { Route } from "./+types/root"
-import { config } from "@/theme"
+import { config } from "@workspace/theme"
 
 export async function loader({ request }: Route.LoaderArgs) {
   const cookie = request.headers.get("cookie") ?? ""

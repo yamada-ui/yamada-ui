@@ -3,6 +3,11 @@
     "title": "Yamada UI",
     "description": "Provides a design system that delivers beautiful, consistent, accessible components and advanced styling. Bring your ideas to life."
   },
+  "common": {
+    "github": "GitHub profile of {name}",
+    "discord": "Discord server",
+    "x": "X profile of {name}"
+  },
   "docs": {
     "overview": "Overview",
     "latest": "Latest",
@@ -17,7 +22,10 @@
       "components": "Components",
       "charts": "Charts",
       "animations": "Animations",
-      "utilities": "Utilities"
+      "utilities": "Utilities",
+      "react": "@yamada-ui/react",
+      "cli": "@yamada-ui/cli",
+      "utils": "@yamada-ui/utils"
     }
   },
   "home": {
@@ -31,6 +39,7 @@
     "description": "Build beautiful and accessible applications with over 30 languages. Themes can also be switched for each user to enhance usability.",
     "primaryAction": "Get Started",
     "secondaryAction": "Documentation",
+    "source": "See Source Code",
     "menu": {
       "examples": "Examples",
       "mail": "Mail",
@@ -68,10 +77,14 @@
       "pink": "Pink"
     }
   },
-  "common": {
-    "github": "GitHub profile of {name}",
-    "discord": "Discord server",
-    "x": "X profile of {name}"
+  "changelog": {
+    "title": "Changelog",
+    "latest": "Explore the changelog for the latest version of Yamada UI. Learn about the features, bug fixes, and improvements.",
+    "version": "Explore the changelog for {name} version {version}. Learn about the features, bug fixes, and improvements.",
+    "major": "Major changes",
+    "minor": "Minor changes",
+    "patch": "Patch changes",
+    "releaseAt": "This version was released on {date}."
   },
   "component": {
     "header": {

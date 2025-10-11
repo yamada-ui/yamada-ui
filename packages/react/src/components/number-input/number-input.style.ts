@@ -2,7 +2,7 @@ import { defineComponentSlotStyle } from "../../core"
 import { buttonStyle } from "../button"
 import {
   getInputHeightStyle,
-  getInputPaddingResetStyle,
+  getInputPaddingStartResetStyle,
   inputStyle,
 } from "../input"
 
@@ -43,7 +43,7 @@ export const numberInputStyle = defineComponentSlotStyle({
     },
     flushed: {
       field: inputStyle.variants?.flushed,
-      root: getInputPaddingResetStyle("& > input"),
+      root: getInputPaddingStartResetStyle("& > input"),
     },
     outline: {
       field: inputStyle.variants?.outline,

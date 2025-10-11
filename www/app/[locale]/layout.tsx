@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import type { PropsWithChildren } from "react"
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import {
   ColorModeScript,
@@ -18,6 +18,7 @@ import { CONSTANTS } from "@/constants"
 import { routing } from "@/i18n"
 import { theme } from "@/theme"
 import { getLang } from "@/utils/i18n"
+import { generateSharedMetadata } from "@/utils/next"
 
 export function generateStaticParams() {
   return CONSTANTS.I18N.LOCALES.map((locale) => ({ locale }))
@@ -32,20 +33,11 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "meta" })
 
   return {
+    ...(await generateSharedMetadata("home")({ params })),
     description: t("description"),
     icons: "/favicon.svg",
     metadataBase: new URL("https://yamada-ui.com"),
-    openGraph: {
-      type: "website",
-      images: "/og.png",
-    },
     title: { default: t("title"), template: `%s - ${t("title")}` },
-    twitter: {
-      card: "summary_large_image",
-      creator: "@hirotomoyamada",
-      images: "/og.png",
-      site: "@hirotomoyamada",
-    },
   }
 }
 

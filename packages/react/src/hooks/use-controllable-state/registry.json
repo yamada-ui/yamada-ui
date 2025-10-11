@@ -1,5 +1,5 @@
 {
-  "$schema": "https://v2.yamada-ui.com/registry/v2/schema.json",
+  "$schema": "https://yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
     "components": [],
     "externals": [],
@@ -25,6 +25,7 @@
       "radio",
       "rating",
       "rotate",
+      "saturation-slider",
       "segmented-control",
       "select",
       "slider",

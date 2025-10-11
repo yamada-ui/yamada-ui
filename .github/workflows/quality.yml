@@ -76,14 +76,14 @@ jobs:
 
       - name: Run tests
         if: steps.check-modified.outputs.any_changed == 'true'
-        run: pnpm test
+        run: pnpm test:coverage
 
       - name: Upload coverage
         if: steps.check-modified.outputs.any_changed == 'true'
         uses: codecov/codecov-action@v4
         with:
           fail_ci_if_error: false
-          file: ./coverage/coverage-final.json
+          file: ./packages/react/coverage/coverage-final.json,./packages/utils/coverage/coverage-final.json
           flags: unittests
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true

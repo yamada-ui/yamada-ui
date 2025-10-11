@@ -178,6 +178,7 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
       getContentProps,
       getFieldProps,
       getIconProps,
+      getInputProps,
       getRootProps,
       getSeparatorProps,
       onActiveDescendant,
@@ -246,6 +247,8 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
           <SelectContext value={selectContext}>
             <ComponentContext value={componentContext}>
               <Popover.Root {...mergedPopoverProps}>
+                <styled.input {...getInputProps()} />
+
                 <InputGroup.Root
                   className={className}
                   css={css}

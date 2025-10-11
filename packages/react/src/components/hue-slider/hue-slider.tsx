@@ -69,7 +69,7 @@ export { HueSliderPropsContext, useHueSliderPropsContext }
  *
  * @see https://yamada-ui.com/docs/components/hue-slider
  */
-export const HueSliderRoot = withProvider<"div", HueSliderRootProps>(
+export const HueSliderRoot = withProvider<"input", HueSliderRootProps>(
   ({
     children,
     max = 360,

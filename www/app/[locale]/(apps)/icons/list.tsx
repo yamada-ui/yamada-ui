@@ -10,6 +10,7 @@ import {
   Center,
   FishIcon,
   Grid,
+  icons,
   InfiniteScrollArea,
   Input,
   InputGroup,
@@ -25,8 +26,15 @@ import {
 import { matchSorter } from "match-sorter"
 import { useTranslations } from "next-intl"
 import { memo, useCallback, useRef, useState, useTransition } from "react"
-import { iconContents } from "@/data"
+import keywords from "@/data/icons.json"
 import { PreviewDrawer } from "./preview-drawer"
+
+const CONTENTS = Object.entries(icons).map(([title, Icon]) => ({
+  type: "icon" as const,
+  Icon,
+  keywords: keywords[title as keyof typeof keywords],
+  title,
+}))
 
 const PER_PAGE = 200
 
@@ -35,9 +43,9 @@ export interface ListProps extends StackProps {}
 export function List({ ...rest }: ListProps) {
   const t = useTranslations("icons")
   const [value, setValue] = useState("")
-  const total = iconContents.length
-  const hitsRef = useRef(iconContents)
-  const [list, setList] = useState(iconContents.slice(0, PER_PAGE))
+  const total = CONTENTS.length
+  const hitsRef = useRef(CONTENTS)
+  const [list, setList] = useState(CONTENTS.slice(0, PER_PAGE))
   const resetRef = useRef<() => void>(noop)
   const openRef = useRef<(title: string, Icon: ElementType) => void>(noop)
   const totalIndex = Math.ceil(total / PER_PAGE) - 1
@@ -49,10 +57,10 @@ export function List({ ...rest }: ListProps) {
     startTransition(() => {
       resetRef.current()
 
-      let hits = iconContents
+      let hits = CONTENTS
 
       if (value.length)
-        hits = matchSorter(iconContents, value, {
+        hits = matchSorter(CONTENTS, value, {
           keys: ["title", "keywords"],
         })
 
@@ -64,9 +72,9 @@ export function List({ ...rest }: ListProps) {
 
   const onReset = useCallback(() => {
     setValue("")
-    setList(iconContents.slice(0, PER_PAGE))
+    setList(CONTENTS.slice(0, PER_PAGE))
     resetRef.current()
-    hitsRef.current = iconContents
+    hitsRef.current = CONTENTS
   }, [])
 
   const onOpen = useCallback(

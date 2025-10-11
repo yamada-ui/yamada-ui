@@ -5303,7 +5303,11 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/display
    */
   display?: StyleValueWithCondition<
-    "center" | "hidden" | "inline-center" | CSS.Property.Display
+    | "absolute-center"
+    | "center"
+    | "hidden"
+    | "inline-center"
+    | CSS.Property.Display
   >
   /**
    * ### dominant-baseline

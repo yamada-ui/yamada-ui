@@ -22,7 +22,6 @@
     },
     "size": {
       "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
-      "defaultValue": "hoge",
       "description": "The size of the component.",
       "required": false
     },

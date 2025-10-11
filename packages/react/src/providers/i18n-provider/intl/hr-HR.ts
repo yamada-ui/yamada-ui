@@ -66,6 +66,11 @@ const data: IntlData = {
     "Loading...": "Učitavanje...",
     "{value} percent": "{value} posto",
   },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Klizač zasićenja i svjetline",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Zasićenje {saturation}%, Svjetlina {brightness}%",
+  },
   select: {
     "Clear value": "Očisti vrijednost",
   },

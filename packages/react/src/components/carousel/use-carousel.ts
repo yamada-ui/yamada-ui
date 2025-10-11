@@ -217,6 +217,9 @@ export const useCarousel = ({
   const [rootId, listId] = useIds()
   const [hover, { off: onMouseLeave, on: onMouseEnter }] = useBoolean()
   const timeoutId = useRef<NodeJS.Timeout | null>(null)
+  const clickQueueRef = useRef<(() => void)[]>([])
+  const isProcessingRef = useRef(false)
+  const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const indicatorMapRef = useRef<Map<number, HTMLButtonElement | null>>(
     new Map(),
   )
@@ -287,6 +290,34 @@ export const useCarousel = ({
 
     setIndex(index)
   }, [carousel, setIndex])
+
+  const processQueueDebounced = useCallback(() => {
+    if (debounceTimeoutRef.current) {
+      clearTimeout(debounceTimeoutRef.current)
+    }
+
+    debounceTimeoutRef.current = setTimeout(() => {
+      if (isProcessingRef.current || clickQueueRef.current.length === 0) return
+
+      isProcessingRef.current = true
+
+      const processNextInQueue = () => {
+        const nextAction = clickQueueRef.current.shift()
+
+        if (nextAction) {
+          nextAction()
+
+          setTimeout(() => {
+            processNextInQueue()
+          }, 100)
+        } else {
+          isProcessingRef.current = false
+        }
+      }
+
+      processNextInQueue()
+    }, 200)
+  }, [])
 
   const onFocusIndicator = useCallback(
     (index: number) => {
@@ -359,6 +390,14 @@ export const useCarousel = ({
       }
     }
   }, [carousel, onInit, onScroll, onSelect])
+
+  useEffect(() => {
+    return () => {
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current)
+      }
+    }
+  }, [])
 
   useEffect(() => {
     const stop = hover && stopMouseEnterAutoplay
@@ -457,9 +496,13 @@ export const useCarousel = ({
       "data-orientation": orientation,
       disabled: !carousel?.canScrollPrev(),
       ...props,
-      onClick: handlerAll(props.onClick, () => carousel?.scrollPrev()),
+      onClick: handlerAll(props.onClick, () => {
+        if (!carousel?.canScrollPrev()) return
+        clickQueueRef.current.push(() => carousel.scrollPrev())
+        processQueueDebounced()
+      }),
     }),
-    [carousel, listId, orientation, t],
+    [carousel, listId, orientation, t, processQueueDebounced],
   )
 
   const getNextTriggerProps: PropGetter<"button"> = useCallback(
@@ -469,9 +512,13 @@ export const useCarousel = ({
       "data-orientation": orientation,
       disabled: !carousel?.canScrollNext(),
       ...props,
-      onClick: handlerAll(props.onClick, () => carousel?.scrollNext()),
+      onClick: handlerAll(props.onClick, () => {
+        if (!carousel?.canScrollNext()) return
+        clickQueueRef.current.push(() => carousel.scrollNext())
+        processQueueDebounced()
+      }),
     }),
-    [carousel, listId, orientation, t],
+    [carousel, listId, orientation, t, processQueueDebounced],
   )
 
   const getIndicatorsProps: PropGetter = useCallback(
@@ -504,13 +551,22 @@ export const useCarousel = ({
           ref: mergeRefs(ref, (node) => {
             indicatorMapRef.current.set(indexProp, node)
           }),
-          onClick: handlerAll(props.onClick, () =>
-            carousel?.scrollTo(indexProp),
-          ),
+          onClick: handlerAll(props.onClick, () => {
+            clickQueueRef.current.push(() => carousel?.scrollTo(indexProp))
+            processQueueDebounced()
+          }),
           onKeyDown: handlerAll(props.onKeyDown, onKeyDown(indexProp)),
         }
       },
-      [index, listId, t, orientation, onKeyDown, carousel],
+      [
+        index,
+        listId,
+        t,
+        orientation,
+        onKeyDown,
+        carousel,
+        processQueueDebounced,
+      ],
     )
 
   return {

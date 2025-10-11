@@ -111,6 +111,33 @@ export const CustomGrid: Story = () => {
   )
 }
 
+export const DisableAnimation: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
+        })),
+    [],
+  )
+
+  return (
+    <LineChart.Root data={data} h="sm" w="3xl">
+      <LineChart.Line
+        type="monotone"
+        dataKey="uv"
+        isAnimationActive={false}
+        stroke="#82ca9d"
+      />
+      <LineChart.Line type="monotone" dataKey="pv" stroke="#8884d8" />
+    </LineChart.Root>
+  )
+}
+
 export const HideTooltip: Story = () => {
   const data = useMemo(
     () =>

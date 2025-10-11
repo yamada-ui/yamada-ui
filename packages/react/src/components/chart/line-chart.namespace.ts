@@ -1,5 +1,9 @@
 import type { GridProps } from "./grid"
-import type { LineChartRootProps } from "./line-chart"
+import type { LegendProps } from "./legend"
+import type { LineChartLineProps, LineChartRootProps } from "./line-chart"
+import type { TooltipProps } from "./tooltip"
+import type { XAxisProps } from "./x-axis"
+import type { YAxisProps } from "./y-axis"
 import { Grid } from "./grid"
 import { Legend } from "./legend"
 import {
@@ -23,6 +27,14 @@ export {
   XAxis,
   YAxis,
 }
-export type { GridProps, LineChartRootProps as RootProps }
+export type {
+  GridProps,
+  LegendProps,
+  LineChartLineProps as LineProps,
+  LineChartRootProps as RootProps,
+  TooltipProps,
+  XAxisProps,
+  YAxisProps,
+}
 export { useGrid } from "./use-grid"
 export type { UseGridProps } from "./use-grid"

@@ -4,7 +4,7 @@ import { Tooltip as RechartsTooltip } from "recharts"
 import { createComponent } from "../../core"
 import { tooltipStyle } from "./tooltip.style"
 
-interface TooltipProps extends RechartsTooltipProps<any, any> {}
+export interface TooltipProps extends RechartsTooltipProps<any, any> {}
 
 const { withContext } = createComponent<TooltipProps, TooltipStyle>(
   "chart-tooltip",

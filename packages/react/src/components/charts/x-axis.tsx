@@ -29,9 +29,10 @@ export {
   XAxisPropsContext,
 }
 
-export const XAxis = withContext<"div", XAxisProps>(RechartsXAxis)((props) => {
+// MEMO: When processed with the second argument, properties such as `stroke` are absorbed by YamadaUI.
+export const XAxis = withContext<"div", XAxisProps>((props) => {
   const customProps = useXAxisComponentContext()
   const { getXAxisProps } = useXAxis({ ...customProps, ...props })
 
-  return getXAxisProps()
-})
+  return <RechartsXAxis {...getXAxisProps()} />
+})()

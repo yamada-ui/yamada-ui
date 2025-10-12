@@ -36,5 +36,3 @@ export type {
   XAxisProps,
   YAxisProps,
 }
-export { useGrid } from "./use-grid"
-export type { UseGridProps } from "./use-grid"

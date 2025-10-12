@@ -3,14 +3,663 @@ title: Migration
 description: How to migrate from v1.x to v2.x.
 ---
 
-## How to migrate
+## New Features
+
+### Setup
+
+Using [CLI](/docs/get-started/cli), you can easily set up Yamada UI in your project.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli init
+```
+
+```bash [npm]
+npm yamada-cli init
+```
+
+```bash [yarn]
+yarn yamada-cli init
+```
+
+```bash [bun]
+bun yamada-cli init
+```
+
+:::
+
+`init` command will display the following prompts.
+
+```txt
+Would you like to use monorepo? (recommended) … No / Yes
+What is the path to the monorepo? … ./workspaces/ui
+What is the package name? … @workspaces/ui
+Would you like your code inside a `src/` directory? … No / Yes
+Would you like to use Prettier? … No / Yes
+Would you like to use ESLint? … No / Yes
+```
+
+### Download
+
+From v2.x onwards, there are two ways to use components and hooks. One is the new method of downloading components and hooks locally via the [CLI](/docs/components/cli), and the other is the conventional method of importing them from the module.
+
+By downloading the source code, you can customize the initial value or logic of the component or hook, and if there is a bug in the logic, you can fix it directly.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli add button
+```
+
+```bash [npm]
+npm yamada-cli add button
+```
+
+```bash [yarn]
+yarn yamada-cli add button
+```
+
+```bash [bun]
+bun yamada-cli add button
+```
+
+:::
+
+:::note
+By downloading the source code and customizing it, you can easily update the source code by checking the [Check Differences](/docs/components/cli#check-differences) or [Update Components](/docs/components/cli#update-components) in [CLI](/docs/components/cli). If your changes conflict with the updates, they will be displayed in the same way as the [HOW CONFLICTS ARE PRESENTED](https://git-scm.com/docs/git-merge#_how_conflicts_are_presented) of [Git](https://git-scm.com), and you can easily resolve them.
+:::
+
+### Namespace Import
+
+You can now import components using namespaces.
+
+```tsx
+<Accordion.Root>
+  <Accordion.Item>
+    <Accordion.Button />
+    <Accordion.Panel />
+  </Accordion.Item>
+</Accordion.Root>
+```
+
+:::note
+You can still import components individually, but there are components whose names have changed due to the namespace. For example, in the case of `Accordion`, it has been changed to `AccordionRoot`.
+:::
+
+### createComponent
+
+Using [createComponent](/docs/components/create-component), you can create components that support conditional styles such as variants.
+
+```tsx
+const componentStyle = defineComponentStyle({
+  base: {
+    /* base style */
+  },
+  variants: {
+    /* variant style */
+  },
+  sizes: {
+    /* size style */
+  },
+  props: {
+    /* props style */
+  },
+  compounds: {
+    /* compound style */
+  },
+  defaultProps: {
+    /* default props */
+  },
+})
+
+type ComponentStyle = typeof componentStyle
+
+export interface ComponentProps
+  extends HTMLStyledProps<"div">,
+    ThemeProps<ComponentStyle> {}
+
+const {
+  component,
+  ComponentContext,
+  PropsContext: ComponentPropsContext,
+  useComponentContext,
+  usePropsContext: useComponentPropsContext,
+  withContext,
+  useComponentProps,
+} = createComponent<ComponentProps, ComponentStyle>("component", componentStyle)
+
+export { ComponentPropsContext, useComponentPropsContext }
+```
+
+```tsx
+export const Component = withContext("div")()
+```
+
+### mergeProps
+
+Using `mergeProps`, you can easily merge props while preventing props from disappearing. Previously, you had to create components while considering the provided props. Using `mergeProps`, you can focus on creating components without considering the provided props.
+
+**Before**
+
+```tsx
+export const Component: FC<ComponentProps> = ({
+  ref: forwardedRef,
+  className,
+  onClick: onClickProp,
+  ...rest
+}) => {
+  const ref = useRef<HTMLDivElement>(null)
+
+  const onClick = useCallback(() => {}, [])
+
+  return (
+    <Component
+      ref={mergeRefs(forwardedRef, ref)}
+      onClick={handlerAll(onClickProp, onClick)}
+      className={[className, "component"].join(" ")}
+      {...rest}
+    />
+  )
+}
+```
+
+**After**
+
+```tsx
+export const Component: FC<ComponentProps> = (props) => {
+  const ref = useRef<HTMLDivElement>(null)
+
+  const onClick = useCallback(() => {}, [])
+
+  return <Component {...mergeProps(props, { ref, onClick })()} />
+}
+```
+
+### PropsContext
+
+Using the `PropsContext` provided by each component, you can set the props of the components in the child elements in bulk.
+
+```tsx client
+const value = useMemo<BadgeProps>(() => ({ variant: "outline" }), [])
+
+return (
+  <BadgePropsContext value={value}>
+    <Badge />
+    <Badge />
+    <Badge />
+  </BadgePropsContext>
+)
+```
+
+In the above example, the `Badge` in the child elements of `BadgePropsContext` will all have `variant` set to `outline`.
+
+### Polymorphism
+
+In addition to the traditional `as`, `asChild` has been added. `as` is used to change the element of the component itself, while `asChild` is used to incorporate the functionality and style of the component into the child elements.
+
+**as**
+
+```tsx
+<Box as="button" />
+```
+
+**asChild**
+
+```tsx
+<Button asChild>
+  <CustomComponent />
+</Button>
+```
+
+### Cascade Layers
+
+Using the [Cascade Layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) of CSS, [Theme](/docs/theming) and [Style Props](/docs/styling/style-props) now have priority. Please refer to [Cascade Layers](/docs/styling/cascade-layers) for more details.
+
+### Focus Ring
+
+[Style Props](/docs/styling/style-props) has been added [Focus Ring](/docs/styling/focus-ring). Focus Ring is a style used to identify the focused element. Please refer to [Focus Ring](/docs/styling/focus-ring) for more details.
+
+```tsx
+<Box focusRing="outline" />
+```
+
+```tsx
+<Box focusVisibleRing="outline" />
+```
+
+### Interpolation
+
+[Style Props](/docs/styling/style-props) now allows you to easily reference [CSS Custom Properties](/docs/styling/css-custom-properties) using its values. Please refer to [Interpolation](/docs/styling/interpolation) for more details.
+
+```tsx
+<Box {...{ "--custom-bg-color": "#1ba14c" }} bg="{custom-bg-color}" />
+```
+
+### CSS Custom Properties
+
+[Style Props](/docs/styling/style-props) now allows you to easily set [CSS Custom Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/var). Please refer to [CSS Custom Properties](/docs/styling/css-custom-properties) for more details.
+
+```tsx
+<Box css={{ "--bg": "#d4d4d4" }} {...{ "--fg": "black" }} />
+```
+
+You can also reference the tokens of [Theme](/docs/theming).
+
+```tsx
+<Box
+  css={{ "--bg": "colors.bg.contrast" }}
+  {...{ "--fg": "colors.fg.contrast" }}
+/>
+```
+
+### CSS Value Functions
+
+[Style Props](/docs/styling/style-props) now allows you to use [CSS Value Functions](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Values_and_Units/CSS_Value_Functions) and reference the corresponding [Theme](/docs/theming) tokens. Please refer to [CSS Value Functions](/docs/styling/css-value-functions) for more details.
+
+```tsx
+<Box w="calc(lg / 2)" />
+```
+
+```tsx
+<Box bg="color-mix(red.500, blue.500)" />
+```
+
+### At-rules
+
+[Style Props](/docs/styling/style-props) has been added [At-rules](https://developer.mozilla.org/en-US/docs/Web/CSS/At-rule). Please refer to [At-rules](/docs/styling/at-rules) for more details.
+
+```tsx
+<Box _media={[{ type: "print", css: { color: "success" } }]} />
+```
+
+[Container Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries) are also supported.
+
+```tsx
+<Box containerType="inline-size" resize="horizontal">
+  <Box
+    _container={[{ minW: "320px", maxW: "560px", css: { color: "success" } }]}
+  />
+</Box>
+```
+
+### Internationalization
+
+To improve accessibility, we have supported 30 or more languages, including strings embedded in all components, date and number formats. Please refer to [Internationalization](/docs/components/internationalization) for more details.
+
+### Icons
+
+New icons have been added. Please refer to [Icons](/icons) for more details.
+
+### Style Props
+
+New CSS properties have been added. Please refer to [Style Props](/docs/styling/style-props) for more details.
+
+### Theme
+
+- New [keyframes](/docs/theming/tokens/keyframes), [aspectRatios](/docs/theming/tokens/aspect-ratios), [easings](/docs/theming/tokens/easings), and [durations](/docs/theming/tokens/durations) have been added to the theme tokens.
+- `"mono"` has been added to the [Color Schemes](/docs/theming/tokens/color-schemes).
+- New tokens have been added to the [Layer Styles](/docs/theming/styles/layer-styles).
+- New tokens have been added to the [Text Styles](/docs/theming/styles/text-styles).
+- New tokens have been added to the [Colors](/docs/theming/tokens/colors).
+- You can now set `className` in the style object of the components.
 
 ## Improvements
 
-## Added features
+### styled
 
-## Removed features
+[ui](https://v1.yamada-ui.com/styled-system/ui) has been renamed to [styled](/docs/components/styled). Also, since only the base style of the component could be set until now, it is now possible to set styles that vary depending on conditions, such as `variants` and `sizes`.
 
-## Props changes
+**Before**
 
-## Component changes
+```tsx
+const Button = styled("button", {
+  base: {
+    alignItems: "center",
+    appearance: "none",
+    cursor: "pointer",
+    display: "inline-flex",
+    fontWeight: "medium",
+    justifyContent: "center",
+    overflow: "hidden",
+    position: "relative",
+    rounded: "l2",
+    transitionDuration: "moderate",
+    transitionProperty: "common",
+    userSelect: "none",
+    verticalAlign: "middle",
+    whiteSpace: "nowrap",
+    _readOnly: { layerStyle: "readOnly" },
+    _disabled: { layerStyle: "disabled" },
+  },
+})
+```
+
+**After**
+
+```tsx
+const Button = styled("button", {
+  base: {
+    alignItems: "center",
+    appearance: "none",
+    cursor: "pointer",
+    display: "inline-flex",
+    fontWeight: "medium",
+    justifyContent: "center",
+    overflow: "hidden",
+    position: "relative",
+    rounded: "l2",
+    transitionDuration: "moderate",
+    transitionProperty: "common",
+    userSelect: "none",
+    verticalAlign: "middle",
+    whiteSpace: "nowrap",
+    _readOnly: { layerStyle: "readOnly" },
+    _disabled: { layerStyle: "disabled" },
+  },
+  variants: {
+    outline: {
+      layerStyle: "outline",
+      _hover: { layerStyle: "outline.hover" },
+    },
+    solid: {
+      layerStyle: "solid",
+      _hover: { layerStyle: "solid.hover" },
+    },
+    subtle: {
+      layerStyle: "subtle",
+      _hover: { layerStyle: "subtle.hover" },
+    },
+  },
+})
+```
+
+### Conditional Styles
+
+Conditional style setting has been simplified. The traditional setting can still be used.
+
+**Before**
+
+```tsx
+<Box bg="bg.contrast" _hover={{ bg: "success" }} />
+```
+
+**After**
+
+```tsx
+<Box bg={{ base: "bg.contrast", _hover: "success" }} />
+```
+
+### Color Scheme
+
+Previously, the [Color Scheme](/docs/styling/color-scheme) was set as props for each component. By integrating `colorScheme` into [Style Props](/docs/styling/style-props), it is now available for components other than components.
+
+```tsx
+<Box colorScheme="blue" bg="colorScheme.solid" color="colorScheme.contrast" />
+```
+
+Also, since `colorScheme` uses [CSS Custom Properties](/docs/styling/css-custom-properties) to generate a context, it is now also applied to the child elements.
+
+```tsx
+<Box colorScheme="blue">
+  <Box bg="colorScheme.solid" color="colorScheme.contrast" />
+  <Box colorScheme="green" bg="colorScheme.subtle" color="colorScheme.fg" />
+</Box>
+```
+
+### Animation
+
+Previously, the [Animation](/docs/styling/animation) used the [useAnimation](/docs/hooks/use-animation) hook. Now, you can set it directly from [Style Props](/docs/styling/style-props).
+
+**Before**
+
+```tsx
+const animation = useAnimation({
+  _keyframes: {
+    from: { translate: "0 0" },
+    to: { translate: "100% 0" },
+  },
+  duration: "1s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
+})
+
+return <Box animation={animation} />
+```
+
+**After**
+
+```tsx
+<Box
+  animationDirection="alternate"
+  animationDuration="1s"
+  animationIterationCount="infinite"
+  animationTimingFunction="linear"
+  _keyframes={{
+    from: { translate: "0 0" },
+    to: { translate: "100% 0" },
+  }}
+/>
+```
+
+### Components
+
+- The styles of each component have been adjusted.
+- The slot names of each component have been adjusted.
+- The class names of each component have been adjusted.
+- The naming convention of all boolean properties (`isOpen`, `isDisabled`, etc.) in the props of each component has been changed. For example, `isOpen` has been changed to `open`.
+
+:::note
+The improvement points of each component are described in the documentation of each component.
+:::
+
+### Style Props
+
+- `color-mix` has been supported. If the browser does not support `color-mix`, the fallback value will be applied.
+- `blur` and `brightness` can now be applied without setting `filter="auto"`.
+- `backdropBlur` and `backdropBrightness` can now be applied without setting `backdropFilter="auto"`.
+- `translateX` and `skewX` can now be applied without setting `transform="auto"` or `transform="auto-3d"`.
+
+### Theme
+
+- [CSS Value Functions](/docs/styling/css-value-functions) can now be used for tokens.
+- [Interpolation](/docs/styling/interpolation) can now be used for tokens.
+- [Theme](/docs/theming) can now be defined using `defineTheme`.
+- [Tokens](/docs/theming/tokens) can now be defined using `defineTokens`.
+- [Semantic Tokens](/docs/theming/tokens/semantic-tokens) can now be defined using `defineSemanticTokens`.
+- [Styles](/docs/theming/styles) can now be defined using `defineStyles`.
+- [Config](/docs/theming/config) can now be defined using `defineConfig`.
+- The slot names of the components have been adjusted and changed.
+- The global styles have been adjusted.
+- The reset styles have been adjusted.
+- The values of the tokens have been adjusted.
+
+## Removed Features
+
+### Packages
+
+[Tree Shaking](https://developer.mozilla.org/en-US/docs/Glossary/Tree_shaking) considerations have made it unnecessary to divide each package, and since there is a possibility that other choices than [React](https://react.dev) will become available in future Yamada UI projects, these packages have been deprecated.
+
+- [@yamada-ui/input](https://www.npmjs.com/package/@yamada-ui/input) has been deprecated. Use [@yamada-ui/react](https://www.npmjs.com/package/@yamada-ui/react) instead.
+- [@yamada-ui/use-disclosure](https://www.npmjs.com/package/@yamada-ui/use-disclosure) has been deprecated. Use [@yamada-ui/react](https://www.npmjs.com/package/@yamada-ui/react) instead.
+- [@yamada-ui/providers](https://www.npmjs.com/package/@yamada-ui/providers) has been deprecated. Use [@yamada-ui/react](https://www.npmjs.com/package/@yamada-ui/react) instead.
+- [@yamada-ui/theme](https://www.npmjs.com/package/@yamada-ui/theme) has been deprecated. Use [@yamada-ui/react](https://www.npmjs.com/package/@yamada-ui/react) instead.
+- [@yamada-ui/theme-tools](https://www.npmjs.com/package/@yamada-ui/theme-tools) has been deprecated. Use [@yamada-ui/react](https://www.npmjs.com/package/@yamada-ui/react) instead.
+- [@yamada-ui/next](https://www.npmjs.com/package/@yamada-ui/next) has been deprecated.
+
+### Style Props
+
+- `fallback` has been removed.
+- `keyframes` has been removed. Use `_keyframes` instead.
+- `isTruncated` has been removed. Use `truncated` instead.
+
+### Theme
+
+- `transitions` has been removed. Use [easings](/docs/theming/tokens/easings) and [durations](/docs/theming/tokens/durations) instead.
+- `semanticTokens` has been removed. Use `semantics` instead.
+- `components` has been removed. Use [CLI](/docs/components/cli) to style components.
+- `extendBaseTheme` has been removed. Use `extendTheme` instead.
+- `extendStyle` has been removed. Use `extendTheme` instead.
+- `extendToken` has been removed. Use `extendTheme` instead.
+- `extendComponent` has been removed.
+- `extendComponentSize` has been removed.
+- `extendComponentVariant` has been removed.
+- `extendComponentDefaultProps` has been removed.
+- `withDefaultSize` has been removed.
+- `withDefaultVariant` has been removed.
+- `withDefaultColorScheme` has been removed.
+- `withDefaultProps` has been removed.
+- `generate` has been removed.
+
+### Other
+
+- `forwardRef` has been removed. Use [forwardRef](https://react.dev/reference/react/forwardRef) instead.
+- `memo` has been removed. Use [memo](https://react.dev/reference/react/memo) instead.
+- `ui` has been removed. Use [styled](/docs/components/styled) instead.
+- `sx` and `__css` have been removed. Use `css` instead.
+
+## Added Components
+
+### Mark
+
+[Mark](/docs/components/mark) has been added.
+
+### ClientOnly
+
+[ClientOnly](/docs/components/client-only) has been added.
+
+### Format.Datetime
+
+[Format.Datetime](/docs/components/format#日付) has been added.
+
+### Show
+
+[Show](/docs/components/show) has been added.
+
+### Slot
+
+[Slot](/docs/components/slot) has been added.
+
+### Steps
+
+[Steps](/docs/components/steps) has been added.
+
+### Group
+
+[Group](/docs/components/group) has been added.
+
+### Timeline
+
+[Timeline](/docs/components/timeline) has been added.
+
+## Removed Components
+
+### FontAwesomeIcon
+
+[FontAwesomeIcon](https://v1.yamada-ui.com/components/media-and-icons/fontawesome) has been removed.
+
+### NativeImage
+
+[NativeImage](https://v1.yamada-ui.com/components/media-and-icons/native-image) has been removed. Use [Image](/docs/components/image) instead.
+
+### Dialog
+
+[Dialog](https://v1.yamada-ui.com/components/overlay/dialog) has been removed. Use [Modal](/docs/components/modal#use-props) instead.
+
+### ContextMenu
+
+[ContextMenu](https://v1.yamada-ui.com/components/navigation/context-menu) has been removed. Use [Menu.ContextTrigger](/docs/components/menu#use-context-menu) instead.
+
+### FormControl
+
+[FormControl](https://v1.yamada-ui.com/components/forms/form-control) has been removed. Use [Field](/docs/components/field) instead.
+
+### MultiAutocomplete
+
+[MultiAutocomplete](https://v1.yamada-ui.com/components/forms/multi-autocomplete) has been removed. Use `multiple` of [Autocomplete](/docs/components/autocomplete#enable-multiple-selection) instead.
+
+### MultiDatePicker
+
+[MultiDatePicker](https://v1.yamada-ui.com/components/forms/multi-date-picker) has been removed. Use `multiple` of [DatePicker](/docs/components/date-picker#enable-multiple-selection) instead.
+
+### RangeDatePicker
+
+[RangeDatePicker](https://v1.yamada-ui.com/components/forms/range-date-picker) has been removed. Use `range` of [DatePicker](/docs/components/date-picker#enable-range-selection) instead.
+
+### MultiSelect
+
+[MultiSelect](https://v1.yamada-ui.com/components/forms/multi-select) has been removed. Use `multiple` of [Select](/docs/components/select#enable-multiple-selection) instead.
+
+### YearPicker
+
+[YearPicker](https://v1.yamada-ui.com/components/forms/year-picker) has been removed.
+
+### MonthPicker
+
+[MonthPicker](https://v1.yamada-ui.com/components/forms/month-picker) has been removed.
+
+### RangeSlider
+
+[RangeSlider](https://v1.yamada-ui.com/components/forms/range-slider) has been removed. Use `value` or `defaultValue` of [Slider](/docs/components/slider#enable-range-selection) with an array instead.
+
+### Markdown
+
+[Markdown](https://v1.yamada-ui.com/components/data-display/markdown) has been removed.
+
+### Stepper
+
+[Stepper](https://v1.yamada-ui.com/components/navigation/stepper) has been removed. Use [Steps](/docs/components/steps) instead.
+
+### Divider
+
+[Divider](https://v1.yamada-ui.com/components/layouts/divider) has been removed. Use [Separator](/docs/components/separator) instead.
+
+### PagingTable
+
+[PagingTable](https://v1.yamada-ui.com/components/data-display/paging-table) has been removed. Use `enablePagination` of [Table](/docs/components/table#enable-pagination) instead.
+
+## Components that have not been migrated
+
+v2.0 does not have all components migrated. These will be migrated in v2.x.
+
+- [ColorPicker](/docs/components/color-picker)
+- [SaturationSlider](/docs/components/saturation-slider)
+- [AreaChart](/docs/components/area-chart)
+- [BarChart](/docs/components/bar-chart)
+- [DonutChart](/docs/components/donut-chart)
+- [LineChart](/docs/components/line-chart)
+- [PieChart](/docs/components/pie-chart)
+- [RadarChart](/docs/components/radar-chart)
+- [RadialChart](/docs/components/radial-chart)
+
+## Added Hooks
+
+### useCounter
+
+[useCounter](/docs/hooks/use-counter) has been added.
+
+### useDescendants
+
+[useDescendants](/docs/hooks/use-descendants) has been added.
+
+### useEyeDropper
+
+[useEyeDropper](/docs/hooks/use-eye-dropper) has been added.
+
+### useFocusOnShow
+
+[useFocusOnShow](/docs/hooks/use-focus-on-show) has been added.
+
+### useFormatDateTime
+
+[useFormatDateTime](/docs/hooks/use-format-date-time) has been added.
+
+### useOnline
+
+[useOnline](/docs/hooks/use-online) has been added.
+
+## Removed Hooks
+
+### useToken
+
+[useToken](https://v1.yamada-ui.com/hooks/use-token) has been removed.

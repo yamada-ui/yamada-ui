@@ -51,7 +51,7 @@ export interface LineChartRootProps extends HTMLStyledProps {
    */
   withYAxis?: boolean
   /**
-   * Props passed down to recharts 'CartesianGrid' component.
+   * Props passed down to 'Grid' component.
    */
   gridProps?: GridProps
 }

@@ -102,8 +102,8 @@ export const LineChartRoot = withProvider<"div", LineChartRootProps>(
             <ResponsiveContainer>
               <LineChart data={data}>
                 {customGrid ?? (withGrid ? <Grid /> : null)}
-                {customXAxis ?? (withXAxis ? <XAxis dataKey="name" /> : null)}
-                {customYAxis ?? (withYAxis ? <YAxis /> : null)}
+                {customXAxis ?? <XAxis hide={!withXAxis} />}
+                {customYAxis ?? <YAxis hide={!withYAxis} />}
                 {customTooltip ?? (withTooltip ? <Tooltip /> : null)}
                 {customLegend ?? (withLegend ? <Legend /> : null)}
 

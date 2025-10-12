@@ -25,6 +25,6 @@ export const getComponentProps =
     return (
       !isContain ? [pickedProps, className] : { ...pickedProps, className }
     ) as P extends false
-      ? [{ [P in K]: T[P] }, string]
-      : { [P in K]: T[P] } & { className: string }
+      ? [{ [P in K]?: T[P] }, string]
+      : { [P in K]?: T[P] } & { className: string }
   }

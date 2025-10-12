@@ -2,7 +2,7 @@
 
 import type { LabelProps, XAxisProps } from "recharts"
 import type { CSSObject, HTMLProps, PropGetter } from "../../core"
-import type { Merge } from "../../utils"
+import type { Dict, Merge } from "../../utils"
 import { useCallback } from "react"
 import { useSystem, useTheme } from "../../core"
 import { cx } from "../../utils"
@@ -11,12 +11,6 @@ import { getComponentProps } from "./utils"
 
 export interface UseXAxisProps extends Merge<HTMLProps, XAxisProps> {
   css?: CSSObject | CSSObject[]
-  /**
-   * If `true`, X axis is visible.
-   *
-   * @default true
-   */
-  withXAxis?: boolean
   /**
    * A label to display below the X axis.
    */
@@ -31,20 +25,22 @@ export interface UseXAxisProps extends Merge<HTMLProps, XAxisProps> {
   xAxisLabelProps?: LabelProps
 }
 
-export const useXAxis = (props: UseXAxisProps) => {
-  const {
-    css,
-    withXAxis = true,
-    xAxisLabel: _xAxisLabel,
-    xAxisTickFormatter,
-    xAxisLabelProps: _xAxisLabelProps,
-  } = props
-
+export const useXAxis = ({
+  css,
+  dataKey = "name",
+  xAxisLabel: _xAxisLabel,
+  xAxisTickFormatter,
+  xAxisLabelProps: _xAxisLabelProps,
+  ...rest
+}: UseXAxisProps) => {
   const { theme } = useTheme()
   const system = useSystem()
-  const [reChartsProps, propClassName] = getComponentProps(
+  const [reChartsProps, propClassName] = getComponentProps<
+    Dict,
+    keyof XAxisProps
+  >(
     system,
-    [props, xAxisProperties],
+    [rest, xAxisProperties],
     css,
   )(theme)
 
@@ -55,7 +51,7 @@ export const useXAxis = (props: UseXAxisProps) => {
   > = useCallback(
     ({ className, ...props } = {}) => ({
       className: cx(className, propClassName),
-      hide: !withXAxis,
+      dataKey,
       minTickGap: 5,
       stroke: "",
       tick: {
@@ -66,7 +62,7 @@ export const useXAxis = (props: UseXAxisProps) => {
       ...reChartsProps,
       ...props,
     }),
-    [propClassName, reChartsProps, withXAxis, xAxisTickFormatter],
+    [dataKey, propClassName, reChartsProps, xAxisTickFormatter],
   )
 
   return { getXAxisProps }

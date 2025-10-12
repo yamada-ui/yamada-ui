@@ -1,16 +1,24 @@
 import type { Metadata } from "next"
 import { getTranslations } from "next-intl/server"
 
-export function generateOg(title: string, description: string): Metadata {
+export function generateOg(
+  title: string | undefined,
+  description: string | undefined,
+): Metadata {
+  const url = new URLSearchParams()
+
+  if (title) url.set("title", title)
+  if (description) url.set("description", description)
+
   return {
     openGraph: {
       type: "website",
-      images: `/og?title=${title}&description=${description}`,
+      images: `/og?${url.toString()}`,
     },
     twitter: {
       card: "summary_large_image",
       creator: "@hirotomoyamada",
-      images: `/og?title=${title}&description=${description}`,
+      images: `/og?${url.toString()}`,
       site: "@hirotomoyamada",
     },
   }

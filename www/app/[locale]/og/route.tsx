@@ -28,9 +28,9 @@ async function loadGoogleFont(
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
-  const title = searchParams.get("title") ?? message.home.title
+  const title = searchParams.get("title") || message.home.title
   const description =
-    searchParams.get("description") ?? message.home.description
+    searchParams.get("description") || message.home.description
 
   const fonts = await Promise.all([
     loadGoogleFont("Noto+Sans+JP", 400, description + "…"),

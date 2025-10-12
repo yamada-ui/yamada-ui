@@ -3,6 +3,7 @@
 import type { CartesianGridProps } from "recharts"
 import type { CSSObject, HTMLProps, PropGetter } from "../../core"
 import type { Merge } from "../../utils"
+import type { GridAxis } from "./chart.types"
 import { useCallback } from "react"
 import { useSystem, useTheme } from "../../core"
 import { cx } from "../../utils"
@@ -16,7 +17,7 @@ export interface UseGridProps extends Merge<HTMLProps, CartesianGridProps> {
    *
    * @default 'xy'
    */
-  gridAxis?: "none" | "x" | "xy" | "y"
+  gridAxis?: GridAxis
   /**
    * Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval.
    *
@@ -42,12 +43,12 @@ export const useGrid = (props: UseGridProps) => {
     CartesianGridProps
   > = useCallback(
     ({ className, ...props } = {}) => ({
-      ...reChartsProps,
-      ...props,
       className: cx(className, propClassName),
       horizontal: gridAxis === "x" || gridAxis === "xy",
       strokeDasharray: strokeDasharray,
       vertical: gridAxis === "y" || gridAxis === "xy",
+      ...reChartsProps,
+      ...props,
     }),
     [propClassName, strokeDasharray, gridAxis, reChartsProps],
   )

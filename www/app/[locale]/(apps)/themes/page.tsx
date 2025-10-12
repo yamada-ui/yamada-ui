@@ -1,18 +1,10 @@
-import type { Metadata } from "next"
 import { VStack } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
-import { getTranslations } from "next-intl/server"
 import { Examples, Hero } from "@/components"
+import { generateSharedMetadata } from "@/utils/next"
 import { ThemeMenu } from "./theme-menu"
 
-export async function generateMetadata({
-  params,
-}: PageProps<"/[locale]/themes">): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "themes" })
-
-  return { description: t("description"), title: t("title") }
-}
+export const generateMetadata = generateSharedMetadata("themes")
 
 export default function Page() {
   const t = useTranslations("themes")

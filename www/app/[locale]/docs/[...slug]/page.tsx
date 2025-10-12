@@ -4,6 +4,7 @@ import { Box } from "@yamada-ui/react"
 import { notFound } from "next/navigation"
 import { MDXContent } from "@/components"
 import { getDocs } from "@/data"
+import { generateOg } from "@/utils/next"
 import { mdToText } from "@/utils/string"
 import { Header } from "./header"
 import { Toc } from "./toc"
@@ -27,8 +28,13 @@ export async function generateMetadata({
 }: PageProps<"/[locale]/docs/[...slug]">): Promise<Metadata> {
   const { locale, slug } = await params
   const { description, title } = getDoc(locale, slug) ?? {}
+  const transformedDescription = mdToText(description)
 
-  return { description: mdToText(description), title }
+  return {
+    description: transformedDescription,
+    title,
+    ...generateOg(title, transformedDescription),
+  }
 }
 
 export default async function Page({

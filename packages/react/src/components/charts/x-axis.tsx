@@ -1,12 +1,15 @@
 "use client"
 
-import type { XAxisProps as RechartsXAxisProps } from "recharts"
+import type { HTMLStyledProps } from "../../core"
+import type { Merge } from "../../utils"
+import type { UseXAxisProps } from "./use-x-axis"
 import type { XAxisStyle } from "./x-axis.style"
 import { XAxis as RechartsXAxis } from "recharts"
 import { createComponent } from "../../core"
+import { useXAxis } from "./use-x-axis"
 import { xAxisStyle } from "./x-axis.style"
 
-export interface XAxisProps extends RechartsXAxisProps {}
+export interface XAxisProps extends Merge<HTMLStyledProps, UseXAxisProps> {}
 
 const {
   ComponentContext: XAxisComponentContext,
@@ -14,7 +17,10 @@ const {
   useComponentContext: useXAxisComponentContext,
   usePropsContext: useXAxisPropsContext,
   withContext,
-} = createComponent<XAxisProps, XAxisStyle>("chart-x-axis", xAxisStyle)
+} = createComponent<XAxisProps, XAxisStyle, XAxisProps>(
+  "chart-x-axis",
+  xAxisStyle,
+)
 
 export {
   useXAxisComponentContext,
@@ -23,4 +29,9 @@ export {
   XAxisPropsContext,
 }
 
-export const XAxis = withContext<"div", XAxisProps>(RechartsXAxis)()
+export const XAxis = withContext<"div", XAxisProps>(RechartsXAxis)((props) => {
+  const customProps = useXAxisComponentContext()
+  const { getXAxisProps } = useXAxis({ ...customProps, ...props })
+
+  return getXAxisProps()
+})

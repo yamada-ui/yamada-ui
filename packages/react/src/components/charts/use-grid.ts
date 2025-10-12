@@ -2,7 +2,7 @@
 
 import type { CartesianGridProps } from "recharts"
 import type { CSSObject, HTMLProps, PropGetter } from "../../core"
-import type { Merge } from "../../utils"
+import type { Dict, Merge } from "../../utils"
 import type { GridAxis } from "./chart.types"
 import { useCallback } from "react"
 import { useSystem, useTheme } from "../../core"
@@ -26,14 +26,20 @@ export interface UseGridProps extends Merge<HTMLProps, CartesianGridProps> {
   strokeDasharray?: number | string
 }
 
-export const useGrid = (props: UseGridProps) => {
-  const { css, gridAxis = "xy", strokeDasharray = "5 5" } = props
-
+export const useGrid = ({
+  css,
+  gridAxis = "xy",
+  strokeDasharray = "5 5",
+  ...rest
+}: UseGridProps) => {
   const { theme } = useTheme()
   const system = useSystem()
-  const [reChartsProps, propClassName] = getComponentProps(
+  const [reChartsProps, propClassName] = getComponentProps<
+    Dict,
+    keyof CartesianGridProps
+  >(
     system,
-    [props, gridProperties],
+    [rest, gridProperties],
     css,
   )(theme)
 
@@ -45,7 +51,7 @@ export const useGrid = (props: UseGridProps) => {
     ({ className, ...props } = {}) => ({
       className: cx(className, propClassName),
       horizontal: gridAxis === "x" || gridAxis === "xy",
-      strokeDasharray: strokeDasharray,
+      strokeDasharray,
       vertical: gridAxis === "y" || gridAxis === "xy",
       ...reChartsProps,
       ...props,

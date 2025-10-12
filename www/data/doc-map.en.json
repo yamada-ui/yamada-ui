@@ -33,6 +33,11 @@
           "pathname": "/docs/get-started/accessibility"
         },
         {
+          "title": "Legacy Documentation",
+          "segment": "legacy",
+          "pathname": "/docs/get-started/legacy"
+        },
+        {
           "title": "Frameworks",
           "segment": "frameworks",
           "items": [

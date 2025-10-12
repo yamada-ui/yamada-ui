@@ -33,6 +33,11 @@
           "pathname": "/docs/get-started/accessibility"
         },
         {
+          "title": "レガシードキュメント",
+          "segment": "legacy",
+          "pathname": "/docs/get-started/legacy"
+        },
+        {
           "title": "フレームワーク",
           "segment": "frameworks",
           "items": [

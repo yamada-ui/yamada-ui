@@ -1,7 +1,7 @@
 import type { StyledTheme, System } from "../../core"
 import type { Dict } from "../../utils"
 import { getCSS } from "../../core"
-import { cx, isString, splitObject } from "../../utils"
+import { cx, isString, splitObject, toArray } from "../../utils"
 
 export const getClassName =
   (...styles: (Dict | string | undefined)[]) =>
@@ -20,7 +20,10 @@ export const getComponentProps =
   ) =>
   <P extends boolean = false>(theme: StyledTheme, isContain?: P) => {
     const [pickedProps, omittedProps] = splitObject<T, K>(obj, keys)
-    const className = getClassName(...props, omittedProps)(system, theme)
+    const className = getClassName(...toArray(props), omittedProps)(
+      system,
+      theme,
+    )
 
     return (
       !isContain ? [pickedProps, className] : { ...pickedProps, className }

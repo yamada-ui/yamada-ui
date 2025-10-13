@@ -9,29 +9,28 @@ import { cx } from "../../utils"
 import { xAxisProperties } from "./recharts-properties"
 import { getComponentProps } from "./utils"
 
-export interface UseXAxisProps
-  extends Merge<HTMLProps, Omit<XAxisProps, "color" | "stroke">> {
+export interface UseXAxisProps extends Merge<XAxisProps, HTMLProps> {
   css?: CSSObject | CSSObject[]
   /**
    * A label to display below the X axis.
    */
-  xAxisLabel?: string
+  label?: string
   /**
-   * A function to format X axis tick.
+   * A function to format tick value.
    */
-  xAxisTickFormatter?: (value: any) => string
+  tickFormatter?: (value: any) => string
   /**
-   * Props passed down to recharts 'XAxisLabel' component.
+   * Props passed down to recharts 'Label' component.
    */
-  xAxisLabelProps?: LabelProps
+  labelProps?: LabelProps
 }
 
 export const useXAxis = ({
   css,
   dataKey = "name",
-  xAxisLabel: _xAxisLabel,
-  xAxisTickFormatter,
-  xAxisLabelProps: _xAxisLabelProps,
+  label: _label,
+  tickFormatter,
+  labelProps: _labelProps,
   ...rest
 }: UseXAxisProps) => {
   const { theme } = useTheme()
@@ -59,11 +58,11 @@ export const useXAxis = ({
         fill: "currentColor",
         transform: "translate(0, 10)",
       },
-      tickFormatter: xAxisTickFormatter,
+      tickFormatter,
       ...reChartsProps,
       ...props,
     }),
-    [dataKey, propClassName, reChartsProps, xAxisTickFormatter],
+    [dataKey, propClassName, reChartsProps, tickFormatter],
   )
 
   return { getXAxisProps }

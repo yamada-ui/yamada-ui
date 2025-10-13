@@ -1,3 +1,4 @@
+import type { DotProps } from "./chart.types"
 import type { GridProps } from "./grid"
 import type { LegendProps } from "./legend"
 import type { LineProps } from "./line"
@@ -29,6 +30,7 @@ export {
   YAxis,
 }
 export type {
+  DotProps,
   GridProps,
   LegendProps,
   LineProps,

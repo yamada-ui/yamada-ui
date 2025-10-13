@@ -1,6 +1,6 @@
 "use client"
 
-import type { HTMLStyledProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { Merge } from "../../utils"
 import type { GridStyle } from "../grid"
 import type { UseGridProps } from "./use-grid"
@@ -10,7 +10,8 @@ import { gridStyle } from "../grid"
 import { useGrid } from "./use-grid"
 
 export interface GridProps
-  extends Merge<HTMLStyledProps<"svg">, UseGridProps> {}
+  extends Merge<HTMLStyledProps<"svg">, UseGridProps>,
+    ThemeProps<GridStyle> {}
 
 const {
   ComponentContext: GridComponentContext,

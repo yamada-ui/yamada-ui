@@ -1,10 +1,13 @@
 import type { LegendProps as RechartsLegendProps } from "recharts"
+import type { ThemeProps } from "../../core"
 import type { LegendStyle } from "./legend.style"
 import { Legend as RechartsLegend } from "recharts"
 import { createComponent } from "../../core"
 import { legendStyle } from "./legend.style"
 
-export interface LegendProps extends RechartsLegendProps {}
+export interface LegendProps
+  extends RechartsLegendProps,
+    ThemeProps<LegendStyle> {}
 
 const {
   PropsContext: LegendPropsContext,

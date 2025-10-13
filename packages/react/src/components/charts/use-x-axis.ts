@@ -55,6 +55,7 @@ export const useXAxis = ({
   > = useCallback(
     ({ className, ...props } = {}) => ({
       className: cx(className, propClassName),
+      axisLine: false,
       dataKey,
       minTickGap: 5,
       stroke: "",

@@ -61,6 +61,7 @@ export const useYAxis = ({
     ({ className, ...props } = {}) => ({
       className: cx(className, propClassName),
       allowDecimals: true,
+      axisLine: false,
       orientation,
       stroke: "",
       tick: {

@@ -88,21 +88,37 @@ export const CustomGrid: Story = () => {
         <LineChart.Grid gridAxis="xy" stroke="orange.500" />
       </LineChart.Root>
 
-      <LineChart.Root data={data} h="sm" w="3xl">
+      <LineChart.Root
+        data={data}
+        h="sm"
+        w="3xl"
+        xAxisProps={{ tickLine: false }}
+      >
         <LineChart.Line type="monotone" dataKey="uv" stroke="#82ca9d" />
         <LineChart.Line type="monotone" dataKey="pv" stroke="#8884d8" />
 
         <LineChart.Grid gridAxis="x" />
       </LineChart.Root>
 
-      <LineChart.Root data={data} h="sm" w="3xl">
+      <LineChart.Root
+        data={data}
+        h="sm"
+        w="3xl"
+        yAxisProps={{ tickLine: false }}
+      >
         <LineChart.Line type="monotone" dataKey="uv" stroke="#82ca9d" />
         <LineChart.Line type="monotone" dataKey="pv" stroke="#8884d8" />
 
         <LineChart.Grid gridAxis="y" />
       </LineChart.Root>
 
-      <LineChart.Root data={data} h="sm" w="3xl">
+      <LineChart.Root
+        data={data}
+        h="sm"
+        w="3xl"
+        xAxisProps={{ tickLine: false }}
+        yAxisProps={{ tickLine: false }}
+      >
         <LineChart.Line type="monotone" dataKey="uv" stroke="#82ca9d" />
         <LineChart.Line type="monotone" dataKey="pv" stroke="#8884d8" />
 
@@ -114,6 +130,7 @@ export const CustomGrid: Story = () => {
         h="sm"
         w="3xl"
         gridProps={{ gridAxis: "y", stroke: "orange.500" }}
+        yAxisProps={{ tickLine: false }}
       >
         <LineChart.Line type="monotone" dataKey="uv" stroke="#82ca9d" />
         <LineChart.Line type="monotone" dataKey="pv" stroke="#8884d8" />
@@ -142,8 +159,8 @@ export const CustomAxis: Story = () => {
         <LineChart.Line type="monotone" dataKey="uv" stroke="#82ca9d" />
         <LineChart.Line type="monotone" dataKey="pv" stroke="#8884d8" />
 
-        <LineChart.XAxis stroke={["orange.500", "green.500"]} />
-        <LineChart.YAxis stroke={["orange.500", "green.500"]} />
+        <LineChart.XAxis axisLine stroke={["orange.500", "green.500"]} />
+        <LineChart.YAxis axisLine stroke={["orange.500", "green.500"]} />
       </LineChart.Root>
 
       <LineChart.Root
@@ -151,10 +168,12 @@ export const CustomAxis: Story = () => {
         h="sm"
         w="3xl"
         xAxisProps={{
+          axisLine: true,
           color: ["orange.700", "green.300"],
           stroke: ["orange.500", "green.500"],
         }}
         yAxisProps={{
+          axisLine: true,
           color: ["orange.700", "green.300"],
           stroke: ["orange.500", "green.500"],
         }}

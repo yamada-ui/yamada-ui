@@ -9,7 +9,11 @@ import { cx } from "../../utils"
 import { yAxisProperties } from "./recharts-properties"
 import { getComponentProps } from "./utils"
 
-export interface UseYAxisProps extends Merge<YAxisProps, HTMLProps> {
+export interface UseYAxisProps
+  extends Merge<
+    HTMLProps<"svg">,
+    Omit<YAxisProps, "color" | "fill" | "stroke">
+  > {
   css?: CSSObject | CSSObject[]
   /**
    * A label to display below the Y axis.
@@ -62,7 +66,7 @@ export const useYAxis = ({
         transform: "translate(-10, 0)",
       },
       tickFormatter,
-      unit: unit,
+      unit,
       ...reChartsProps,
       ...props,
     }),

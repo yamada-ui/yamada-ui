@@ -9,7 +9,8 @@ import { createComponent } from "../../core"
 import { useXAxis } from "./use-x-axis"
 import { xAxisStyle } from "./x-axis.style"
 
-export interface XAxisProps extends Merge<HTMLStyledProps, UseXAxisProps> {}
+export interface XAxisProps
+  extends Merge<HTMLStyledProps<"svg">, UseXAxisProps> {}
 
 const {
   ComponentContext: XAxisComponentContext,
@@ -30,7 +31,7 @@ export {
 }
 
 // NOTE: When processed with the second argument, properties such as `stroke` are absorbed by YamadaUI.
-export const XAxis = withContext<"div", XAxisProps>((props) => {
+export const XAxis = withContext<"svg", XAxisProps>((props) => {
   const customProps = useXAxisComponentContext()
   const { getXAxisProps } = useXAxis({ ...customProps, ...props })
 

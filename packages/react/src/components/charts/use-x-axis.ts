@@ -9,7 +9,11 @@ import { cx } from "../../utils"
 import { xAxisProperties } from "./recharts-properties"
 import { getComponentProps } from "./utils"
 
-export interface UseXAxisProps extends Merge<XAxisProps, HTMLProps> {
+export interface UseXAxisProps
+  extends Merge<
+    HTMLProps<"svg">,
+    Omit<XAxisProps, "color" | "fill" | "stroke">
+  > {
   css?: CSSObject | CSSObject[]
   /**
    * A label to display below the X axis.

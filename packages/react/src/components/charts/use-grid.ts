@@ -10,7 +10,8 @@ import { cx } from "../../utils"
 import { gridProperties } from "./recharts-properties"
 import { getComponentProps } from "./utils"
 
-export interface UseGridProps extends Merge<HTMLProps, CartesianGridProps> {
+export interface UseGridProps
+  extends Merge<HTMLProps<"svg">, CartesianGridProps> {
   css?: CSSObject | CSSObject[]
   /**
    * Specifies which lines should be displayed in the grid.

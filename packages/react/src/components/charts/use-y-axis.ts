@@ -36,6 +36,7 @@ export interface UseYAxisProps
 export const useYAxis = ({
   css,
   label: _label,
+  orientation,
   tickFormatter,
   unit,
   labelProps: _labelProps,
@@ -60,17 +61,19 @@ export const useYAxis = ({
     ({ className, ...props } = {}) => ({
       className: cx(className, propClassName),
       allowDecimals: true,
+      orientation,
       stroke: "",
       tick: {
         fill: "currentColor",
-        transform: "translate(-10, 0)",
+        transform:
+          orientation === "right" ? "translate(10, 0)" : "translate(-10, 0)",
       },
       tickFormatter,
       unit,
       ...reChartsProps,
       ...props,
     }),
-    [propClassName, reChartsProps, tickFormatter, unit],
+    [orientation, propClassName, reChartsProps, tickFormatter, unit],
   )
 
   return { getYAxisProps }

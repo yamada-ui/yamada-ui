@@ -12,7 +12,8 @@ const meta: Meta<typeof LineChart.Root> = {
 
 export default meta
 
-const randomValue = () => Math.floor(Math.random() * (5000 - 1000 + 1)) + 1000
+const randomValue = (max = 5000) =>
+  Math.floor(Math.random() * (max - 1000 + 1)) + 1000
 
 export const Basic: Story = () => {
   const data = useMemo(
@@ -129,7 +130,7 @@ export const CustomAxis: Story = () => {
         .map((_, index) => ({
           name: `Page ${index}`,
           amt: randomValue(),
-          pv: randomValue(),
+          pv: randomValue(10000),
           uv: randomValue(),
         })),
     [],

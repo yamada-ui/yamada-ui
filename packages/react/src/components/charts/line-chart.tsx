@@ -23,10 +23,9 @@ import { useSplitChildren } from "./utils"
 import { XAxis, XAxisComponentContext } from "./x-axis"
 import { YAxis, YAxisComponentContext } from "./y-axis"
 
-//TODO: reference line
 //TODO: legend
 //TODO: tooltip
-//TODO: dots default style
+//TODO: dots default style and nested element
 //TODO: axis label
 
 export interface LineChartRootProps

@@ -1,9 +1,11 @@
-import type { ReferenceLineProps } from "recharts"
+import type { LabelProps, ReferenceLineProps } from "recharts"
 import type { CSSObject, HTMLProps, PropGetter } from "../../core"
 import type { Dict, Merge } from "../../utils"
-import { useCallback } from "react"
+import type { Label } from "./chart.types"
+import { useCallback, useMemo } from "react"
 import { useSystem, useTheme } from "../../core"
-import { referenceLineProperties } from "./recharts-properties"
+import { isObject } from "../../utils"
+import { labelProperties, referenceLineProperties } from "./recharts-properties"
 import { getComponentProps } from "./utils"
 
 export interface UseReferenceLineProps
@@ -11,13 +13,18 @@ export interface UseReferenceLineProps
     HTMLProps<"svg">,
     Omit<
       ReferenceLineProps,
-      "color" | "fill" | "fillOpacity" | "stroke" | "strokeWidth"
+      "color" | "fill" | "fillOpacity" | "label" | "stroke" | "strokeWidth"
     >
   > {
   css?: CSSObject | CSSObject[]
+  label?: Label
 }
 
-export const useReferenceLine = ({ css, ...rest }: UseReferenceLineProps) => {
+export const useReferenceLine = ({
+  css,
+  label: labelProp = {},
+  ...rest
+}: UseReferenceLineProps) => {
   const { theme } = useTheme()
   const system = useSystem()
   const [reChartsProps, className] = getComponentProps<
@@ -29,6 +36,26 @@ export const useReferenceLine = ({ css, ...rest }: UseReferenceLineProps) => {
     css,
   )(theme)
 
+  const label: Label = useMemo(() => {
+    if (!isObject(labelProp)) {
+      return labelProp
+    }
+
+    const [reChartsProps, className] = getComponentProps<
+      Dict,
+      keyof LabelProps
+    >(system, [labelProp, labelProperties])(theme)
+
+    return {
+      className,
+      color: "",
+      fill: "",
+      stroke: "",
+      strokeWidth: "",
+      ...reChartsProps,
+    }
+  }, [labelProp, system, theme])
+
   const getReferenceLineProps: PropGetter<
     undefined,
     Partial<ReferenceLineProps>,
@@ -39,12 +66,13 @@ export const useReferenceLine = ({ css, ...rest }: UseReferenceLineProps) => {
       color: "",
       fill: "",
       fillOpacity: "",
+      label,
       stroke: "",
       strokeWidth: "",
       ...reChartsProps,
       ...props,
     }),
-    [className, reChartsProps],
+    [className, label, reChartsProps],
   )
 
   return { getReferenceLineProps }

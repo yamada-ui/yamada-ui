@@ -9,11 +9,12 @@ import type { XAxisProps } from "./x-axis"
 import type { YAxisProps } from "./y-axis"
 import { Line, LineChart, ResponsiveContainer } from "recharts"
 import { createSlotComponent, styled } from "../../core"
-import { useSplitChildren } from "../../utils"
+import { isEmpty } from "../../utils"
 import { Grid, GridComponentContext } from "./grid"
 import { Legend } from "./legend"
 import { lineChartStyle } from "./line-chart.style"
 import { Tooltip } from "./tooltip"
+import { useSplitChildren } from "./utils"
 import { XAxis, XAxisComponentContext } from "./x-axis"
 import { YAxis, YAxisComponentContext } from "./y-axis"
 
@@ -108,11 +109,37 @@ export const LineChartRoot = withProvider<"div", LineChartRootProps>(
             <styled.div {...props}>
               <ResponsiveContainer>
                 <LineChart data={data}>
-                  {customGrid ?? (withGrid ? <Grid /> : null)}
-                  {customXAxis ?? <XAxis hide={!withXAxis} />}
-                  {customYAxis ?? <YAxis hide={!withYAxis} />}
-                  {customTooltip ?? (withTooltip ? <Tooltip /> : null)}
-                  {customLegend ?? (withLegend ? <Legend /> : null)}
+                  {isEmpty(customGrid) ? (
+                    withGrid ? (
+                      <Grid />
+                    ) : null
+                  ) : (
+                    customGrid
+                  )}
+                  {isEmpty(customXAxis) ? (
+                    <XAxis hide={!withXAxis} />
+                  ) : (
+                    customXAxis
+                  )}
+                  {isEmpty(customYAxis) ? (
+                    <YAxis hide={!withYAxis} />
+                  ) : (
+                    customYAxis
+                  )}
+                  {isEmpty(customTooltip) ? (
+                    withTooltip ? (
+                      <Tooltip />
+                    ) : null
+                  ) : (
+                    customTooltip
+                  )}
+                  {isEmpty(customLegend) ? (
+                    withLegend ? (
+                      <Legend />
+                    ) : null
+                  ) : (
+                    customLegend
+                  )}
 
                   {omittedChildren}
                 </LineChart>

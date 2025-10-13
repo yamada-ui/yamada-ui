@@ -9,9 +9,10 @@ import { getComponentProps } from "./utils"
 export interface UseLineProps
   extends Merge<
     HTMLProps<"svg">,
-    Omit<LineProps, "color" | "fill" | "stroke">
+    Omit<LineProps, "activeDot" | "color" | "fill" | "stroke" | "strokeWidth">
   > {
   css?: CSSObject | CSSObject[]
+  activeDot?: LineProps["activeDot"]
 }
 
 export const useLine = ({ css, ...rest }: UseLineProps) => {
@@ -37,6 +38,7 @@ export const useLine = ({ css, ...rest }: UseLineProps) => {
         color: "",
         fill: "",
         stroke: "",
+        strokeWidth: "",
         ...reChartsProps,
         ...props,
       }

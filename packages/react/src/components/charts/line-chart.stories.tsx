@@ -80,16 +80,47 @@ export const CustomLine: Story = () => {
   )
 
   return (
-    <LineChart.Root data={data} h="sm" w="3xl">
-      <LineChart.Line
-        type="monotone"
-        color={["orange.500", "green.500"]}
-        dataKey="uv"
-        fill={["orange.200", "green.200"]}
-        stroke={["orange.500", "green.500"]}
-      />
-      <LineChart.Line type="monotone" dataKey="pv" stroke="mono" />
-    </LineChart.Root>
+    <VStack>
+      <LineChart.Root data={data} h="sm" w="3xl">
+        <LineChart.Line
+          type="monotone"
+          dataKey="uv"
+          fill={["orange.200", "green.200"]}
+          stroke={["orange.500", "green.500"]}
+        />
+        <LineChart.Line
+          type="monotone"
+          dataKey="pv"
+          fill={["green.200", "orange.200"]}
+          stroke={["green.500", "orange.500"]}
+        />
+      </LineChart.Root>
+
+      <LineChart.Root data={data} h="sm" w="3xl">
+        <LineChart.Line
+          type="monotone"
+          activeDot={{ r: 8 }}
+          dataKey="uv"
+          dot={{ r: 5 }}
+        />
+        <LineChart.Line
+          type="monotone"
+          activeDot={false}
+          dataKey="pv"
+          dot={false}
+        />
+      </LineChart.Root>
+
+      <LineChart.Root
+        data={data}
+        h="sm"
+        w="3xl"
+        lineProps={{ strokeWidth: "2" }}
+      >
+        <LineChart.Line type="monotone" dataKey="uv" />
+        <LineChart.Line type="monotone" dataKey="pv" />
+      </LineChart.Root>
+    </VStack>
   )
 }
 

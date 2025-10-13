@@ -27,7 +27,7 @@ export {
 
 // NOTE: When processed with the second argument, properties such as `stroke` are absorbed by YamadaUI.
 export const Line = withContext<"svg", LineProps>((props) => {
-  const customProps = useLinePropsContext()
+  const customProps = useLineComponentContext()
   const { getLineProps } = useLine({ ...customProps, ...props })
 
   return <RechartsLine {...getLineProps()} />

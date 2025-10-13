@@ -356,8 +356,6 @@ export const lineProperties: (keyof Omit<Recharts.LineProps, "ref">)[] = [
   "activeDot",
   "label",
   "hide",
-  // "stroke",
-  // "strokeWidth",
   "layout",
   "connectNulls",
   "unit",

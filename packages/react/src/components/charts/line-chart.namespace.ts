@@ -1,13 +1,14 @@
 import type { GridProps } from "./grid"
 import type { LegendProps } from "./legend"
-import type { LineChartLineProps, LineChartRootProps } from "./line-chart"
+import type { LineProps } from "./line"
+import type { LineChartRootProps } from "./line-chart"
 import type { TooltipProps } from "./tooltip"
 import type { XAxisProps } from "./x-axis"
 import type { YAxisProps } from "./y-axis"
 import { Grid } from "./grid"
 import { Legend } from "./legend"
+import { Line } from "./line"
 import {
-  LineChartLine,
   LineChartPropsContext,
   LineChartRoot,
   useLineChartPropsContext,
@@ -19,7 +20,7 @@ import { YAxis } from "./y-axis"
 export {
   Grid,
   Legend,
-  LineChartLine as Line,
+  Line,
   LineChartPropsContext as PropsContext,
   LineChartRoot as Root,
   Tooltip,
@@ -30,7 +31,7 @@ export {
 export type {
   GridProps,
   LegendProps,
-  LineChartLineProps as LineProps,
+  LineProps,
   LineChartRootProps as RootProps,
   TooltipProps,
   XAxisProps,

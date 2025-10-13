@@ -1,17 +1,18 @@
 "use client"
 
-import type { LineProps } from "recharts"
 import type { HTMLStyledProps } from "../../core"
 import type { Dict } from "../../utils"
 import type { GridProps } from "./grid"
+import type { LineProps } from "./line"
 import type { LineChartStyle } from "./line-chart.style"
 import type { XAxisProps } from "./x-axis"
 import type { YAxisProps } from "./y-axis"
-import { Line, LineChart, ResponsiveContainer } from "recharts"
+import { LineChart, ResponsiveContainer } from "recharts"
 import { createSlotComponent, styled } from "../../core"
 import { isEmpty } from "../../utils"
 import { Grid, GridComponentContext } from "./grid"
 import { Legend } from "./legend"
+import { LineComponentContext } from "./line"
 import { lineChartStyle } from "./line-chart.style"
 import { Tooltip } from "./tooltip"
 import { useSplitChildren } from "./utils"
@@ -58,6 +59,10 @@ export interface LineChartRootProps extends HTMLStyledProps {
    */
   gridProps?: GridProps
   /**
+   * Props passed down to 'Line' component.
+   */
+  lineProps?: LineProps
+  /**
    * Props passed down to 'XAxis' component.
    */
   xAxisProps?: XAxisProps
@@ -70,7 +75,6 @@ export interface LineChartRootProps extends HTMLStyledProps {
 const {
   PropsContext: LineChartPropsContext,
   usePropsContext: useLineChartPropsContext,
-  withContext,
   withProvider,
 } = createSlotComponent<LineChartRootProps, LineChartStyle>(
   "line-chart",
@@ -89,6 +93,7 @@ export const LineChartRoot = withProvider<"div", LineChartRootProps>(
     withXAxis = true,
     withYAxis = true,
     gridProps = {},
+    lineProps = {},
     xAxisProps = {},
     yAxisProps = {},
     ...props
@@ -103,59 +108,54 @@ export const LineChartRoot = withProvider<"div", LineChartRootProps>(
     ] = useSplitChildren(children, Grid, XAxis, YAxis, Tooltip, Legend)
 
     return (
-      <YAxisComponentContext value={yAxisProps}>
-        <XAxisComponentContext value={xAxisProps}>
-          <GridComponentContext value={gridProps}>
-            <styled.div {...props}>
-              <ResponsiveContainer>
-                <LineChart data={data}>
-                  {isEmpty(customGrid) ? (
-                    withGrid ? (
-                      <Grid />
-                    ) : null
-                  ) : (
-                    customGrid
-                  )}
-                  {isEmpty(customXAxis) ? (
-                    <XAxis hide={!withXAxis} />
-                  ) : (
-                    customXAxis
-                  )}
-                  {isEmpty(customYAxis) ? (
-                    <YAxis hide={!withYAxis} />
-                  ) : (
-                    customYAxis
-                  )}
-                  {isEmpty(customTooltip) ? (
-                    withTooltip ? (
-                      <Tooltip />
-                    ) : null
-                  ) : (
-                    customTooltip
-                  )}
-                  {isEmpty(customLegend) ? (
-                    withLegend ? (
-                      <Legend />
-                    ) : null
-                  ) : (
-                    customLegend
-                  )}
+      <LineComponentContext value={lineProps}>
+        <YAxisComponentContext value={yAxisProps}>
+          <XAxisComponentContext value={xAxisProps}>
+            <GridComponentContext value={gridProps}>
+              <styled.div {...props}>
+                <ResponsiveContainer>
+                  <LineChart data={data}>
+                    {isEmpty(customGrid) ? (
+                      withGrid ? (
+                        <Grid />
+                      ) : null
+                    ) : (
+                      customGrid
+                    )}
+                    {isEmpty(customXAxis) ? (
+                      <XAxis hide={!withXAxis} />
+                    ) : (
+                      customXAxis
+                    )}
+                    {isEmpty(customYAxis) ? (
+                      <YAxis hide={!withYAxis} />
+                    ) : (
+                      customYAxis
+                    )}
+                    {isEmpty(customTooltip) ? (
+                      withTooltip ? (
+                        <Tooltip />
+                      ) : null
+                    ) : (
+                      customTooltip
+                    )}
+                    {isEmpty(customLegend) ? (
+                      withLegend ? (
+                        <Legend />
+                      ) : null
+                    ) : (
+                      customLegend
+                    )}
 
-                  {omittedChildren}
-                </LineChart>
-              </ResponsiveContainer>
-            </styled.div>
-          </GridComponentContext>
-        </XAxisComponentContext>
-      </YAxisComponentContext>
+                    {omittedChildren}
+                  </LineChart>
+                </ResponsiveContainer>
+              </styled.div>
+            </GridComponentContext>
+          </XAxisComponentContext>
+        </YAxisComponentContext>
+      </LineComponentContext>
     )
   },
   "root",
-)()
-
-export interface LineChartLineProps extends LineProps {}
-
-export const LineChartLine = withContext<"svg", LineChartLineProps>(
-  (props) => <Line {...props} />,
-  "line",
 )()

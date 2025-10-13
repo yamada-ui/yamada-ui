@@ -9,7 +9,8 @@ import { createComponent } from "../../core"
 import { gridStyle } from "../grid"
 import { useGrid } from "./use-grid"
 
-export interface GridProps extends Merge<HTMLStyledProps, UseGridProps> {}
+export interface GridProps
+  extends Merge<HTMLStyledProps<"svg">, UseGridProps> {}
 
 const {
   ComponentContext: GridComponentContext,
@@ -26,7 +27,7 @@ export {
   useGridPropsContext,
 }
 
-export const Grid = withContext<"div", GridProps>(CartesianGrid)((props) => {
+export const Grid = withContext<"svg", GridProps>(CartesianGrid)((props) => {
   const customProps = useGridComponentContext()
   const { getGridProps } = useGrid({ ...customProps, ...props })
 

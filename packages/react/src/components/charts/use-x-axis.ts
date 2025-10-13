@@ -3,7 +3,8 @@
 import type { LabelProps, XAxisProps } from "recharts"
 import type { CSSObject, HTMLProps, PropGetter } from "../../core"
 import type { Dict, Merge } from "../../utils"
-import { useCallback } from "react"
+import type { Layout } from "./chart.types"
+import { useCallback, useMemo } from "react"
 import { useSystem, useTheme } from "../../core"
 import { cx } from "../../utils"
 import { xAxisProperties } from "./recharts-properties"
@@ -20,6 +21,12 @@ export interface UseXAxisProps
    */
   label?: string
   /**
+   * Chart orientation.
+   *
+   * @default 'horizontal'
+   */
+  layout?: Layout
+  /**
    * A function to format tick value.
    */
   tickFormatter?: (value: any) => string
@@ -33,6 +40,7 @@ export const useXAxis = ({
   css,
   dataKey = "name",
   label: _label,
+  layout = "horizontal",
   tickFormatter,
   labelProps: _labelProps,
   ...rest
@@ -48,6 +56,14 @@ export const useXAxis = ({
     css,
   )(theme)
 
+  const axisKey = useMemo(
+    () =>
+      layout === "horizontal"
+        ? { type: "category", dataKey }
+        : { type: "number" },
+    [layout, dataKey],
+  )
+
   const getXAxisProps: PropGetter<
     undefined,
     Partial<XAxisProps>,
@@ -56,7 +72,6 @@ export const useXAxis = ({
     ({ className, ...props } = {}) => ({
       className: cx(className, propClassName),
       axisLine: false,
-      dataKey,
       minTickGap: 5,
       stroke: "",
       tick: {
@@ -64,10 +79,11 @@ export const useXAxis = ({
         transform: "translate(0, 10)",
       },
       tickFormatter,
+      ...axisKey,
       ...reChartsProps,
       ...props,
     }),
-    [dataKey, propClassName, reChartsProps, tickFormatter],
+    [axisKey, propClassName, reChartsProps, tickFormatter],
   )
 
   return { getXAxisProps }

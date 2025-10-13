@@ -3,7 +3,8 @@
 import type { LabelProps, YAxisProps } from "recharts"
 import type { CSSObject, HTMLProps, PropGetter } from "../../core"
 import type { Dict, Merge } from "../../utils"
-import { useCallback } from "react"
+import type { Layout } from "./chart.types"
+import { useCallback, useMemo } from "react"
 import { useSystem, useTheme } from "../../core"
 import { cx } from "../../utils"
 import { yAxisProperties } from "./recharts-properties"
@@ -20,6 +21,12 @@ export interface UseYAxisProps
    */
   label?: string
   /**
+   * Chart orientation.
+   *
+   * @default 'horizontal'
+   */
+  layout?: Layout
+  /**
    * A function to format tick value.
    */
   tickFormatter?: (value: any) => string
@@ -35,7 +42,9 @@ export interface UseYAxisProps
 
 export const useYAxis = ({
   css,
+  dataKey = "name",
   label: _label,
+  layout = "horizontal",
   orientation,
   tickFormatter,
   unit,
@@ -52,6 +61,14 @@ export const useYAxis = ({
     [rest, yAxisProperties],
     css,
   )(theme)
+
+  const axisKey = useMemo(
+    () =>
+      layout === "horizontal"
+        ? { type: "number" }
+        : { type: "category", dataKey },
+    [dataKey, layout],
+  )
 
   const getYAxisProps: PropGetter<
     undefined,
@@ -71,10 +88,11 @@ export const useYAxis = ({
       },
       tickFormatter,
       unit,
+      ...axisKey,
       ...reChartsProps,
       ...props,
     }),
-    [orientation, propClassName, reChartsProps, tickFormatter, unit],
+    [axisKey, orientation, propClassName, reChartsProps, tickFormatter, unit],
   )
 
   return { getYAxisProps }

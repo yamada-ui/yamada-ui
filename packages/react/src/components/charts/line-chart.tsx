@@ -25,7 +25,6 @@ import { YAxis, YAxisComponentContext } from "./y-axis"
 //TODO: legend
 //TODO: tooltip
 //TODO: dots default style
-//TODO: orientation
 //TODO: axis label
 
 export interface LineChartRootProps
@@ -105,6 +104,7 @@ export const LineChartRoot = withContext<"div", LineChartRootProps>(
     ...props
   }) => {
     const {
+      layout,
       getContainerProps,
       getLineChartProps,
       getResponsiveContainerProps,
@@ -121,8 +121,8 @@ export const LineChartRoot = withContext<"div", LineChartRootProps>(
 
     return (
       <LineComponentContext value={lineProps}>
-        <YAxisComponentContext value={yAxisProps}>
-          <XAxisComponentContext value={xAxisProps}>
+        <YAxisComponentContext value={{ layout, ...yAxisProps }}>
+          <XAxisComponentContext value={{ layout, ...xAxisProps }}>
             <GridComponentContext value={gridProps}>
               <styled.div {...getContainerProps()}>
                 <ResponsiveContainer {...getResponsiveContainerProps()}>

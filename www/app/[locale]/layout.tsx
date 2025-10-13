@@ -18,6 +18,7 @@ import { CONSTANTS } from "@/constants"
 import { routing } from "@/i18n"
 import { theme } from "@/theme"
 import { getLang } from "@/utils/i18n"
+import { generateSharedMetadata } from "@/utils/next"
 
 export function generateStaticParams() {
   return CONSTANTS.I18N.LOCALES.map((locale) => ({ locale }))
@@ -32,20 +33,12 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "meta" })
 
   return {
+    ...(await generateSharedMetadata("home")({ params })),
     description: t("description"),
     icons: "/favicon.svg",
-    metadataBase: new URL("https://yamada-ui.com"),
-    openGraph: {
-      type: "website",
-      images: "/og.png",
-    },
+    // TODO: Change to https://yamada-ui.com
+    metadataBase: new URL("https://v2.yamada-ui.com"),
     title: { default: t("title"), template: `%s - ${t("title")}` },
-    twitter: {
-      card: "summary_large_image",
-      creator: "@hirotomoyamada",
-      images: "/og.png",
-      site: "@hirotomoyamada",
-    },
   }
 }
 

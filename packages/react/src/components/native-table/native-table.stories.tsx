@@ -50,14 +50,6 @@ export const Basic: Story = () => {
           <NativeTable.Td numeric>全131話</NativeTable.Td>
         </NativeTable.Tr>
       </NativeTable.Tbody>
-
-      <NativeTable.Tfoot>
-        <NativeTable.Tr>
-          <NativeTable.Th>作品名</NativeTable.Th>
-          <NativeTable.Th>放送期間</NativeTable.Th>
-          <NativeTable.Th numeric>話数</NativeTable.Th>
-        </NativeTable.Tr>
-      </NativeTable.Tfoot>
     </NativeTable.Root>
   )
 }
@@ -102,14 +94,6 @@ export const Variant: Story = () => {
               <NativeTable.Td numeric>全131話</NativeTable.Td>
             </NativeTable.Tr>
           </NativeTable.Tbody>
-
-          <NativeTable.Tfoot>
-            <NativeTable.Tr>
-              <NativeTable.Th>作品名</NativeTable.Th>
-              <NativeTable.Th>放送期間</NativeTable.Th>
-              <NativeTable.Th numeric>話数</NativeTable.Th>
-            </NativeTable.Tr>
-          </NativeTable.Tfoot>
         </NativeTable.Root>
       )}
     </PropsTable>
@@ -156,14 +140,6 @@ export const Size: Story = () => {
               <NativeTable.Td numeric>全131話</NativeTable.Td>
             </NativeTable.Tr>
           </NativeTable.Tbody>
-
-          <NativeTable.Tfoot>
-            <NativeTable.Tr>
-              <NativeTable.Th>作品名</NativeTable.Th>
-              <NativeTable.Th>放送期間</NativeTable.Th>
-              <NativeTable.Th numeric>話数</NativeTable.Th>
-            </NativeTable.Tr>
-          </NativeTable.Tfoot>
         </NativeTable.Root>
       )}
     </PropsTable>
@@ -210,14 +186,6 @@ export const Striped: Story = () => {
               <NativeTable.Td numeric>全131話</NativeTable.Td>
             </NativeTable.Tr>
           </NativeTable.Tbody>
-
-          <NativeTable.Tfoot>
-            <NativeTable.Tr>
-              <NativeTable.Th>作品名</NativeTable.Th>
-              <NativeTable.Th>放送期間</NativeTable.Th>
-              <NativeTable.Th numeric>話数</NativeTable.Th>
-            </NativeTable.Tr>
-          </NativeTable.Tfoot>
         </NativeTable.Root>
       )}
     </PropsTable>
@@ -273,14 +241,6 @@ export const ColorScheme: Story = () => {
               <NativeTable.Td numeric>全131話</NativeTable.Td>
             </NativeTable.Tr>
           </NativeTable.Tbody>
-
-          <NativeTable.Tfoot>
-            <NativeTable.Tr>
-              <NativeTable.Th>作品名</NativeTable.Th>
-              <NativeTable.Th>放送期間</NativeTable.Th>
-              <NativeTable.Th numeric>話数</NativeTable.Th>
-            </NativeTable.Tr>
-          </NativeTable.Tfoot>
         </NativeTable.Root>
       )}
     </PropsTable>
@@ -326,14 +286,6 @@ export const Border: Story = () => {
             <NativeTable.Td numeric>全131話</NativeTable.Td>
           </NativeTable.Tr>
         </NativeTable.Tbody>
-
-        <NativeTable.Tfoot>
-          <NativeTable.Tr>
-            <NativeTable.Th>作品名</NativeTable.Th>
-            <NativeTable.Th>放送期間</NativeTable.Th>
-            <NativeTable.Th numeric>話数</NativeTable.Th>
-          </NativeTable.Tr>
-        </NativeTable.Tfoot>
       </NativeTable.Root>
 
       <NativeTable.Root withBorder withColumnBorders>
@@ -372,14 +324,6 @@ export const Border: Story = () => {
             <NativeTable.Td numeric>全131話</NativeTable.Td>
           </NativeTable.Tr>
         </NativeTable.Tbody>
-
-        <NativeTable.Tfoot>
-          <NativeTable.Tr>
-            <NativeTable.Th>作品名</NativeTable.Th>
-            <NativeTable.Th>放送期間</NativeTable.Th>
-            <NativeTable.Th numeric>話数</NativeTable.Th>
-          </NativeTable.Tr>
-        </NativeTable.Tfoot>
       </NativeTable.Root>
     </>
   )
@@ -423,14 +367,6 @@ export const ColumnBorders: Story = () => {
           <NativeTable.Td numeric>全131話</NativeTable.Td>
         </NativeTable.Tr>
       </NativeTable.Tbody>
-
-      <NativeTable.Tfoot>
-        <NativeTable.Tr>
-          <NativeTable.Th>作品名</NativeTable.Th>
-          <NativeTable.Th>放送期間</NativeTable.Th>
-          <NativeTable.Th numeric>話数</NativeTable.Th>
-        </NativeTable.Tr>
-      </NativeTable.Tfoot>
     </NativeTable.Root>
   )
 }
@@ -485,14 +421,6 @@ export const HighlightOnHover: Story = () => {
               <NativeTable.Td numeric>全131話</NativeTable.Td>
             </NativeTable.Tr>
           </NativeTable.Tbody>
-
-          <NativeTable.Tfoot>
-            <NativeTable.Tr>
-              <NativeTable.Th>作品名</NativeTable.Th>
-              <NativeTable.Th>放送期間</NativeTable.Th>
-              <NativeTable.Th numeric>話数</NativeTable.Th>
-            </NativeTable.Tr>
-          </NativeTable.Tfoot>
         </NativeTable.Root>
       )}
     </PropsTable>
@@ -541,14 +469,6 @@ export const ScrollArea: Story = () => {
           <NativeTable.Td numeric>全131話</NativeTable.Td>
         </NativeTable.Tr>
       </NativeTable.Tbody>
-
-      <NativeTable.Tfoot>
-        <NativeTable.Tr>
-          <NativeTable.Th>作品名</NativeTable.Th>
-          <NativeTable.Th>放送期間</NativeTable.Th>
-          <NativeTable.Th numeric>話数</NativeTable.Th>
-        </NativeTable.Tr>
-      </NativeTable.Tfoot>
     </NativeTable.Root>
   )
 }
@@ -644,9 +564,9 @@ export const Sticky: Story = () => {
 
         <NativeTable.Tfoot>
           <NativeTable.Tr>
-            <NativeTable.Th>作品名</NativeTable.Th>
-            <NativeTable.Th>放送期間</NativeTable.Th>
-            <NativeTable.Th numeric>話数</NativeTable.Th>
+            <NativeTable.Td>作品名</NativeTable.Td>
+            <NativeTable.Td>放送期間</NativeTable.Td>
+            <NativeTable.Td numeric>話数</NativeTable.Td>
           </NativeTable.Tr>
         </NativeTable.Tfoot>
       </NativeTable.Root>
@@ -697,14 +617,6 @@ export const Caption: Story = () => {
             <NativeTable.Td numeric>全131話</NativeTable.Td>
           </NativeTable.Tr>
         </NativeTable.Tbody>
-
-        <NativeTable.Tfoot>
-          <NativeTable.Tr>
-            <NativeTable.Th>作品名</NativeTable.Th>
-            <NativeTable.Th>放送期間</NativeTable.Th>
-            <NativeTable.Th numeric>話数</NativeTable.Th>
-          </NativeTable.Tr>
-        </NativeTable.Tfoot>
       </NativeTable.Root>
 
       <NativeTable.Root>
@@ -747,14 +659,6 @@ export const Caption: Story = () => {
             <NativeTable.Td numeric>全131話</NativeTable.Td>
           </NativeTable.Tr>
         </NativeTable.Tbody>
-
-        <NativeTable.Tfoot>
-          <NativeTable.Tr>
-            <NativeTable.Th>作品名</NativeTable.Th>
-            <NativeTable.Th>放送期間</NativeTable.Th>
-            <NativeTable.Th numeric>話数</NativeTable.Th>
-          </NativeTable.Tr>
-        </NativeTable.Tfoot>
       </NativeTable.Root>
     </>
   )
@@ -804,14 +708,6 @@ export const Colgroup: Story = () => {
           <NativeTable.Td numeric>全131話</NativeTable.Td>
         </NativeTable.Tr>
       </NativeTable.Tbody>
-
-      <NativeTable.Tfoot>
-        <NativeTable.Tr>
-          <NativeTable.Th>作品名</NativeTable.Th>
-          <NativeTable.Th>放送期間</NativeTable.Th>
-          <NativeTable.Th numeric>話数</NativeTable.Th>
-        </NativeTable.Tr>
-      </NativeTable.Tfoot>
     </NativeTable.Root>
   )
 }

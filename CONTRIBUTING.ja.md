@@ -48,6 +48,10 @@ cd yamada-ui
   "prettier.requireConfig": true,
   "eslint.workingDirectories": [
     "www",
+    "packages/cli",
+    "packages/react",
+    "packages/utils",
+    "packages/workspace",
     "playgrounds/next/app",
     "playgrounds/next/pages",
     "playgrounds/remix",

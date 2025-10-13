@@ -1,19 +1,13 @@
 "use client"
 
 import type { ReactElement, ReactNode } from "react"
-import type {
-  GenericsComponent,
-  HTMLProps,
-  HTMLStyledProps,
-  ThemeProps,
-} from "../../core"
+import type { GenericsComponent, HTMLStyledProps, ThemeProps } from "../../core"
 import type { Merge } from "../../utils"
 import type { UseInputBorderProps } from "../input"
 import type { CheckboxStyle } from "./checkbox.style"
 import type { UseCheckboxProps } from "./use-checkbox"
 import { useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
-import { cast } from "../../utils"
 import { CheckIcon, MinusIcon } from "../icon"
 import { useInputBorder } from "../input"
 import { checkboxStyle } from "./checkbox.style"
@@ -111,24 +105,15 @@ export const Checkbox = withProvider<"label", CheckboxProps>(
       )
     }, [getIndicatorProps, indicatorProps, icon])
 
-    if (children) {
-      return (
-        <styled.label {...getRootProps({ ...varProps, ...rootProps })}>
-          {input}
-          {indicator}
+    return (
+      <styled.label {...getRootProps({ ...varProps, ...rootProps })}>
+        {input}
+        {indicator}
+        {children ? (
           <CheckboxLabel {...labelProps}>{children}</CheckboxLabel>
-        </styled.label>
-      )
-    } else {
-      return (
-        <styled.div
-          {...cast<HTMLProps>(getRootProps({ ...varProps, ...rootProps }))}
-        >
-          {input}
-          {indicator}
-        </styled.div>
-      )
-    }
+        ) : null}
+      </styled.label>
+    )
   },
   "root",
 )() as GenericsComponent<{

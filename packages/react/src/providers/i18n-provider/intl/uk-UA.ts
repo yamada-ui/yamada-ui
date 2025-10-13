@@ -76,6 +76,14 @@ const data: IntlData = {
     "Decreased by": "Зменшено на",
     "Increased by": "Збільшено на",
   },
+  table: {
+    "Clear sorting": "Очистити сортування",
+    "Page size": "Розмір сторінки",
+    "Select all rows": "Вибрати всі рядки",
+    "Select row": "Вибрати рядок",
+    "Sort ascending": "Сортувати за зростанням",
+    "Sort descending": "Сортувати за спаданням",
+  },
   tag: {
     "Close tag": "Закрити тег",
   },

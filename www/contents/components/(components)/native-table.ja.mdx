@@ -56,7 +56,7 @@ style: components/native-table/native-table.style.ts
 </NativeTable.Root>
 ```
 
-## バリアントを変更する
+### バリアントを変更する
 
 ```tsx preview
 <VStack>
@@ -104,7 +104,7 @@ style: components/native-table/native-table.style.ts
 </VStack>
 ```
 
-## サイズを変更する
+### サイズを変更する
 
 ```tsx preview
 <VStack>
@@ -152,13 +152,13 @@ style: components/native-table/native-table.style.ts
 </VStack>
 ```
 
-## カラースキーマを変更する
+### カラースキーマを変更する
 
 ```tsx preview
 <VStack>
   <For each={["green", "orange"]}>
-    {(color, index) => (
-      <NativeTable.Root key={index} colorScheme={color} variant="outline">
+    {(colorScheme, index) => (
+      <NativeTable.Root key={index} colorScheme={colorScheme} variant="outline">
         <NativeTable.Thead>
           <NativeTable.Tr>
             <NativeTable.Th>タイトル</NativeTable.Th>
@@ -200,7 +200,7 @@ style: components/native-table/native-table.style.ts
 </VStack>
 ```
 
-## 外枠の区切り線を追加する
+### 外枠の区切り線を追加する
 
 外枠の区切り線を追加する場合は、`withBorder`を`true`にします。
 
@@ -244,7 +244,7 @@ style: components/native-table/native-table.style.ts
 </NativeTable.Root>
 ```
 
-## 列の区切り線を追加する
+### 列の区切り線を追加する
 
 列の区切り線を追加する場合は、`withColumnBorders`を`true`にします。
 
@@ -288,7 +288,7 @@ style: components/native-table/native-table.style.ts
 </NativeTable.Root>
 ```
 
-## 行がホバーされたときにハイライトする
+### 行がホバーされたときにハイライトする
 
 行がホバーされたときにハイライトする場合は、`highlightOnHover`を`true`にします。
 
@@ -332,7 +332,7 @@ style: components/native-table/native-table.style.ts
 </NativeTable.Root>
 ```
 
-## ストライプを使う
+### ストライプを使う
 
 ストライプを使う場合は、`striped`を`true`にします。
 
@@ -382,7 +382,7 @@ style: components/native-table/native-table.style.ts
 </VStack>
 ```
 
-## スクロールエリアを使う
+### スクロールエリアを使う
 
 スクロールエリアを使う場合は、`withScrollArea`を`true`にします。
 
@@ -438,7 +438,7 @@ style: components/native-table/native-table.style.ts
 </NativeTable.Root>
 ```
 
-## ヘッダーを固定する
+### ヘッダーを固定する
 
 ヘッダーを固定する場合は、`stickyHeader`を`true`にします。
 
@@ -507,7 +507,7 @@ style: components/native-table/native-table.style.ts
 </NativeTable.Root>
 ```
 
-## キャプションを追加する
+### キャプションを追加する
 
 ```tsx preview
 <NativeTable.Root>

@@ -31,6 +31,7 @@
     "description": "Build beautiful and accessible applications with over 30 languages. Themes can also be switched for each user to enhance usability.",
     "primaryAction": "Get Started",
     "secondaryAction": "Documentation",
+    "source": "See Source Code",
     "menu": {
       "examples": "Examples",
       "mail": "Mail",

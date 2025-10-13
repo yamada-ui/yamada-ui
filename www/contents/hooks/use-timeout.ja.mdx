@@ -5,8 +5,6 @@ storybook: hooks-usetimeout--basic
 source: hooks/use-timeout
 ---
 
-## 使い方
-
 ```tsx preview functional client
 const [state, setState] = useState<number>(1)
 
@@ -15,7 +13,7 @@ useTimeout(() => setState((prev) => prev + 1), 3000)
 return <Text>Current state: {state}</Text>
 ```
 
-## Usage
+## 使い方
 
 :::code-group
 

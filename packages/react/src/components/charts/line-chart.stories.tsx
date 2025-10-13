@@ -549,6 +549,15 @@ export const ReferenceLine: Story = () => {
       <LineChart.Root data={data}>
         <LineChart.Line dataKey="uv" />
         <LineChart.Line dataKey="pv" />
+
+        <LineChart.ReferenceLine
+          label={{
+            position: "insideBottomLeft",
+            stroke: ["blue.500", "green.500"],
+            value: "reference line",
+          }}
+          y={4000}
+        />
       </LineChart.Root>
     </VStack>
   )

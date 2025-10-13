@@ -8,7 +8,7 @@ import type { LineChartStyle } from "./line-chart.style"
 import type { XAxisProps } from "./x-axis"
 import type { YAxisProps } from "./y-axis"
 import { LineChart, ResponsiveContainer } from "recharts"
-import { createSlotComponent, styled } from "../../core"
+import { createComponent, styled } from "../../core"
 import { isEmpty } from "../../utils"
 import { Grid, GridComponentContext } from "./grid"
 import { Legend } from "./legend"
@@ -75,15 +75,15 @@ export interface LineChartRootProps extends HTMLStyledProps {
 const {
   PropsContext: LineChartPropsContext,
   usePropsContext: useLineChartPropsContext,
-  withProvider,
-} = createSlotComponent<LineChartRootProps, LineChartStyle>(
+  withContext,
+} = createComponent<LineChartRootProps, LineChartStyle>(
   "line-chart",
   lineChartStyle,
 )
 
 export { LineChartPropsContext, useLineChartPropsContext }
 
-export const LineChartRoot = withProvider<"div", LineChartRootProps>(
+export const LineChartRoot = withContext<"div", LineChartRootProps>(
   ({
     children,
     data,
@@ -157,5 +157,4 @@ export const LineChartRoot = withProvider<"div", LineChartRootProps>(
       </LineComponentContext>
     )
   },
-  "root",
 )()

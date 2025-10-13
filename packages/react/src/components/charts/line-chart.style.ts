@@ -1,15 +1,5 @@
-import { defineComponentSlotStyle } from "../../core"
+import { defineComponentStyle } from "../../core"
 
-export const lineChartStyle = defineComponentSlotStyle({
-  base: {
-    grid: {},
-    legend: {},
-    line: {},
-    root: {},
-    tooltip: {},
-    "x-axis": {},
-    "y-axis": {},
-  },
-})
+export const lineChartStyle = defineComponentStyle({})
 
 export type LineChartStyle = typeof lineChartStyle

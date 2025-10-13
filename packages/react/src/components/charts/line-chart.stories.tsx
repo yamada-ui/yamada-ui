@@ -161,6 +161,24 @@ export const CustomAxis: Story = () => {
         <LineChart.Line type="monotone" dataKey="uv" stroke="#82ca9d" />
         <LineChart.Line type="monotone" dataKey="pv" stroke="#8884d8" />
       </LineChart.Root>
+
+      <LineChart.Root data={data} h="sm" w="3xl">
+        <LineChart.Line
+          type="monotone"
+          dataKey="uv"
+          stroke="#82ca9d"
+          yAxisId="left"
+        />
+        <LineChart.Line
+          type="monotone"
+          dataKey="pv"
+          stroke="#8884d8"
+          yAxisId="right"
+        />
+
+        <LineChart.YAxis yAxisId="left" />
+        <LineChart.YAxis orientation="right" yAxisId="right" />
+      </LineChart.Root>
     </VStack>
   )
 }

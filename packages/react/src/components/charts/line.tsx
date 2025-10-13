@@ -1,4 +1,4 @@
-import type { HTMLStyledProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { Merge } from "../../utils"
 import type { LineStyle } from "./line.style"
 import type { UseLineProps } from "./use-line"
@@ -8,7 +8,8 @@ import { lineStyle } from "./line.style"
 import { useLine } from "./use-line"
 
 export interface LineProps
-  extends Merge<HTMLStyledProps<"svg">, UseLineProps> {}
+  extends Merge<HTMLStyledProps<"svg">, UseLineProps>,
+    ThemeProps<LineStyle> {}
 
 const {
   ComponentContext: LineComponentContext,

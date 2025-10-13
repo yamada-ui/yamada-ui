@@ -1,6 +1,6 @@
 "use client"
 
-import type { HTMLStyledProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { Merge } from "../../utils"
 import type { UseXAxisProps } from "./use-x-axis"
 import type { XAxisStyle } from "./x-axis.style"
@@ -10,7 +10,8 @@ import { useXAxis } from "./use-x-axis"
 import { xAxisStyle } from "./x-axis.style"
 
 export interface XAxisProps
-  extends Merge<HTMLStyledProps<"svg">, UseXAxisProps> {}
+  extends Merge<HTMLStyledProps<"svg">, UseXAxisProps>,
+    ThemeProps<XAxisStyle> {}
 
 const {
   ComponentContext: XAxisComponentContext,

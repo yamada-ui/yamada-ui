@@ -56,7 +56,6 @@
       },
       "variant": {
         "type": "Exclude<keyof Required<Y>[\"variants\"], \"base\">",
-        "defaultValue": "hoge",
         "description": "The variant of the component.",
         "required": false
       },
@@ -311,7 +310,6 @@
     },
     "variant": {
       "type": "Exclude<keyof Required<Y>[\"variants\"], \"base\">",
-      "defaultValue": "hoge",
       "description": "The variant of the component.",
       "required": false
     },

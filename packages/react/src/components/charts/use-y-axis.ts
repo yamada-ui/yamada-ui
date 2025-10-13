@@ -60,7 +60,7 @@ export const useYAxis = ({
     ({ className, ...props } = {}) => ({
       className: cx(className, propClassName),
       allowDecimals: true,
-      axisLine: false,
+      stroke: "",
       tick: {
         fill: "currentColor",
         transform: "translate(-10, 0)",

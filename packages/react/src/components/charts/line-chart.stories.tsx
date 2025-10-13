@@ -508,3 +508,48 @@ export const Orientation: Story = () => {
     </VStack>
   )
 }
+
+export const ReferenceLine: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
+        })),
+    [],
+  )
+
+  return (
+    <VStack>
+      <LineChart.Root data={data}>
+        <LineChart.Line dataKey="uv" />
+        <LineChart.Line dataKey="pv" />
+
+        <LineChart.ReferenceLine label="reference line" x="Page 2" />
+        <LineChart.ReferenceLine
+          label="reference line"
+          strokeDasharray="5 5"
+          y={5000}
+        />
+        <LineChart.ReferenceLine
+          label="reference line"
+          segment={[
+            { x: "Page 0", y: 0 },
+            { x: "Page 2", y: 5000 },
+          ]}
+          stroke="green.500"
+          strokeDasharray="5 5"
+        />
+      </LineChart.Root>
+
+      <LineChart.Root data={data}>
+        <LineChart.Line dataKey="uv" />
+        <LineChart.Line dataKey="pv" />
+      </LineChart.Root>
+    </VStack>
+  )
+}

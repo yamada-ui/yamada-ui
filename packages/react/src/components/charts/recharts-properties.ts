@@ -110,6 +110,7 @@ export const referenceLineProperties: (keyof Recharts.ReferenceLineProps)[] = [
   "label",
   "strokeWidth",
   "segment",
+  "strokeDasharray",
 ]
 
 export const containerProperties: (keyof Omit<

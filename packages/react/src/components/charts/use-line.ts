@@ -6,7 +6,11 @@ import { useSystem, useTheme } from "../../core"
 import { lineProperties } from "./recharts-properties"
 import { getComponentProps } from "./utils"
 
-export interface UseLineProps extends Merge<HTMLProps<"svg">, LineProps> {
+export interface UseLineProps
+  extends Merge<
+    HTMLProps<"svg">,
+    Omit<LineProps, "color" | "fill" | "stroke">
+  > {
   css?: CSSObject | CSSObject[]
 }
 

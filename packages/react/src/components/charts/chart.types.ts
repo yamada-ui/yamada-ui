@@ -11,7 +11,7 @@ export type ChartType = "default" | "percent" | "split" | "stacked"
 
 export type DotProps = ActiveDotProps
 
-export type ActiveDotType =
+export type Dot =
   | ((props: DotProps) => ReactElement<SVGElement>)
   | boolean
   | Merge<

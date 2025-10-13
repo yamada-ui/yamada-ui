@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
+import { PropsTable } from "#storybook"
 import { useMemo } from "react"
 import { LineChart } from "."
 import { VStack } from "../stack"
@@ -31,8 +32,8 @@ export const Basic: Story = () => {
 
   return (
     <LineChart.Root data={data} h="sm" w="3xl">
-      <LineChart.Line type="monotone" dataKey="uv" />
-      <LineChart.Line type="monotone" dataKey="pv" />
+      <LineChart.Line dataKey="uv" />
+      <LineChart.Line dataKey="pv" />
     </LineChart.Root>
   )
 }
@@ -53,8 +54,8 @@ export const CustomComponents: Story = () => {
 
   return (
     <LineChart.Root data={data} h="sm" w="3xl">
-      <LineChart.Line type="monotone" dataKey="uv" />
-      <LineChart.Line type="monotone" dataKey="pv" />
+      <LineChart.Line dataKey="uv" />
+      <LineChart.Line dataKey="pv" />
 
       <LineChart.Grid strokeDasharray="15 15" />
       <LineChart.XAxis dataKey="name" />
@@ -113,14 +114,12 @@ export const CustomLine: Story = () => {
     <VStack>
       <LineChart.Root data={data} h="sm" w="3xl">
         <LineChart.Line
-          type="monotone"
           activeDot={{ fill: ["orange.500", "green.500"] }}
           dataKey="uv"
           dot={{ fill: ["green.200", "orange.200"] }}
           stroke={["orange.500", "green.500"]}
         />
         <LineChart.Line
-          type="monotone"
           activeDot={{ fill: ["green.500", "orange.500"] }}
           dataKey="pv"
           dot={{ fill: ["green.200", "orange.200"] }}
@@ -129,18 +128,8 @@ export const CustomLine: Story = () => {
       </LineChart.Root>
 
       <LineChart.Root data={data} h="sm" w="3xl">
-        <LineChart.Line
-          type="monotone"
-          activeDot={{ r: 8 }}
-          dataKey="uv"
-          dot={{ r: 5 }}
-        />
-        <LineChart.Line
-          type="monotone"
-          activeDot={false}
-          dataKey="pv"
-          dot={CustomizedDot}
-        />
+        <LineChart.Line activeDot={{ r: 8 }} dataKey="uv" dot={{ r: 5 }} />
+        <LineChart.Line activeDot={false} dataKey="pv" dot={CustomizedDot} />
       </LineChart.Root>
 
       <LineChart.Root
@@ -149,8 +138,8 @@ export const CustomLine: Story = () => {
         w="3xl"
         lineProps={{ activeDot: false, dot: false, strokeWidth: "2" }}
       >
-        <LineChart.Line type="monotone" dataKey="uv" />
-        <LineChart.Line type="monotone" dataKey="pv" strokeDasharray="5 5" />
+        <LineChart.Line dataKey="uv" />
+        <LineChart.Line dataKey="pv" strokeDasharray="5 5" />
       </LineChart.Root>
     </VStack>
   )
@@ -173,8 +162,8 @@ export const CustomGrid: Story = () => {
   return (
     <VStack>
       <LineChart.Root data={data} h="sm" w="3xl">
-        <LineChart.Line type="monotone" dataKey="uv" />
-        <LineChart.Line type="monotone" dataKey="pv" />
+        <LineChart.Line dataKey="uv" />
+        <LineChart.Line dataKey="pv" />
 
         <LineChart.Grid gridAxis="xy" stroke="orange.500" />
       </LineChart.Root>
@@ -185,8 +174,8 @@ export const CustomGrid: Story = () => {
         w="3xl"
         xAxisProps={{ tickLine: false }}
       >
-        <LineChart.Line type="monotone" dataKey="uv" />
-        <LineChart.Line type="monotone" dataKey="pv" />
+        <LineChart.Line dataKey="uv" />
+        <LineChart.Line dataKey="pv" />
 
         <LineChart.Grid gridAxis="x" />
       </LineChart.Root>
@@ -197,8 +186,8 @@ export const CustomGrid: Story = () => {
         w="3xl"
         yAxisProps={{ tickLine: false }}
       >
-        <LineChart.Line type="monotone" dataKey="uv" />
-        <LineChart.Line type="monotone" dataKey="pv" />
+        <LineChart.Line dataKey="uv" />
+        <LineChart.Line dataKey="pv" />
 
         <LineChart.Grid gridAxis="y" />
       </LineChart.Root>
@@ -210,8 +199,8 @@ export const CustomGrid: Story = () => {
         xAxisProps={{ tickLine: false }}
         yAxisProps={{ tickLine: false }}
       >
-        <LineChart.Line type="monotone" dataKey="uv" />
-        <LineChart.Line type="monotone" dataKey="pv" />
+        <LineChart.Line dataKey="uv" />
+        <LineChart.Line dataKey="pv" />
 
         <LineChart.Grid gridAxis="none" />
       </LineChart.Root>
@@ -223,8 +212,8 @@ export const CustomGrid: Story = () => {
         gridProps={{ gridAxis: "y", stroke: "orange.500" }}
         yAxisProps={{ tickLine: false }}
       >
-        <LineChart.Line type="monotone" dataKey="uv" />
-        <LineChart.Line type="monotone" dataKey="pv" />
+        <LineChart.Line dataKey="uv" />
+        <LineChart.Line dataKey="pv" />
       </LineChart.Root>
     </VStack>
   )
@@ -247,8 +236,8 @@ export const CustomAxis: Story = () => {
   return (
     <VStack>
       <LineChart.Root data={data} h="sm" w="3xl">
-        <LineChart.Line type="monotone" dataKey="uv" />
-        <LineChart.Line type="monotone" dataKey="pv" />
+        <LineChart.Line dataKey="uv" />
+        <LineChart.Line dataKey="pv" />
 
         <LineChart.XAxis axisLine stroke={["orange.500", "green.500"]} />
         <LineChart.YAxis axisLine stroke={["orange.500", "green.500"]} />
@@ -269,16 +258,35 @@ export const CustomAxis: Story = () => {
           stroke: ["orange.500", "green.500"],
         }}
       >
-        <LineChart.Line type="monotone" dataKey="uv" />
-        <LineChart.Line type="monotone" dataKey="pv" />
+        <LineChart.Line dataKey="uv" />
+        <LineChart.Line dataKey="pv" />
       </LineChart.Root>
 
       <LineChart.Root data={data} h="sm" w="3xl">
-        <LineChart.Line type="monotone" dataKey="uv" yAxisId="left" />
-        <LineChart.Line type="monotone" dataKey="pv" yAxisId="right" />
+        <LineChart.Line dataKey="uv" yAxisId="left" />
+        <LineChart.Line dataKey="pv" yAxisId="right" />
 
         <LineChart.YAxis yAxisId="left" />
         <LineChart.YAxis orientation="right" yAxisId="right" />
+      </LineChart.Root>
+
+      <LineChart.Root data={data} h="sm" w="3xl">
+        <LineChart.Line dataKey="uv" />
+        <LineChart.Line dataKey="pv" />
+
+        <LineChart.YAxis unit="p" />
+      </LineChart.Root>
+
+      <LineChart.Root data={data} h="sm" w="3xl">
+        <LineChart.Line dataKey="uv" />
+        <LineChart.Line dataKey="pv" />
+
+        <LineChart.XAxis
+          tickFormatter={(value: string) => value.toUpperCase()}
+        />
+        <LineChart.YAxis
+          tickFormatter={(value: number) => value.toLocaleString()}
+        />
       </LineChart.Root>
     </VStack>
   )
@@ -300,8 +308,8 @@ export const DisableAnimation: Story = () => {
 
   return (
     <LineChart.Root data={data} h="sm" w="3xl">
-      <LineChart.Line type="monotone" dataKey="uv" isAnimationActive={false} />
-      <LineChart.Line type="monotone" dataKey="pv" />
+      <LineChart.Line dataKey="uv" isAnimationActive={false} />
+      <LineChart.Line dataKey="pv" />
     </LineChart.Root>
   )
 }
@@ -322,8 +330,8 @@ export const HideTooltip: Story = () => {
 
   return (
     <LineChart.Root data={data} h="sm" w="3xl" withTooltip={false}>
-      <LineChart.Line type="monotone" dataKey="uv" />
-      <LineChart.Line type="monotone" dataKey="pv" />
+      <LineChart.Line dataKey="uv" />
+      <LineChart.Line dataKey="pv" />
     </LineChart.Root>
   )
 }
@@ -344,8 +352,123 @@ export const Legend: Story = () => {
 
   return (
     <LineChart.Root data={data} h="sm" w="3xl" withLegend>
-      <LineChart.Line type="monotone" dataKey="uv" />
-      <LineChart.Line type="monotone" dataKey="pv" />
+      <LineChart.Line
+        activeDot={{ fill: ["orange.700", "green.300"] }}
+        dataKey="uv"
+        dot={{ fill: ["orange.500", "green.500"] }}
+        stroke={["orange.500", "green.500"]}
+      />
+      <LineChart.Line
+        activeDot={{ fill: ["green.700", "orange.300"] }}
+        dataKey="pv"
+        dot={{ fill: ["green.500", "orange.500"] }}
+        stroke={["green.500", "orange.500"]}
+      />
     </LineChart.Root>
+  )
+}
+
+export const ConnectNull: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          amt: randomValue(),
+          pv: index == 4 ? null : randomValue(),
+          uv: randomValue(),
+        })),
+    [],
+  )
+
+  return (
+    <VStack>
+      <LineChart.Root data={data} h="sm" w="3xl">
+        <LineChart.Line dataKey="pv" />
+      </LineChart.Root>
+
+      <LineChart.Root data={data} h="sm" w="3xl">
+        <LineChart.Line connectNulls dataKey="pv" />
+      </LineChart.Root>
+    </VStack>
+  )
+}
+
+// export const Synced: Story = () => {
+//   const data = useMemo(
+//     () =>
+//       Array(7)
+//         .fill(0)
+//         .map((_, index) => ({
+//           name: `Page ${index}`,
+//           amt: randomValue(),
+//           pv: randomValue(),
+//           uv: randomValue(),
+//         })),
+//     [],
+//   )
+
+//   return (
+//     <VStack>
+//       <LineChart.Root data={data} h="sm" syncId="chart1" w="3xl">
+//         <LineChart.Line dataKey="uv" />
+//         <LineChart.Line dataKey="pv" />
+//       </LineChart.Root>
+
+//       <LineChart.Root data={data} h="sm" syncId="chart1" w="3xl">
+//         <LineChart.Line dataKey="uv" />
+//         <LineChart.Line dataKey="pv" />
+//       </LineChart.Root>
+//     </VStack>
+//   )
+// }
+
+export const CurveType: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
+        })),
+    [],
+  )
+
+  return (
+    <VStack>
+      <PropsTable
+        variant="stack"
+        rows={
+          [
+            "basis",
+            "basisClosed",
+            "basisOpen",
+            "bumpX",
+            "bumpY",
+            "bump",
+            "linear",
+            "linearClosed",
+            "natural",
+            "monotoneX",
+            "monotoneY",
+            "monotone",
+            "step",
+            "stepBefore",
+            "stepAfter",
+          ] as const
+        }
+      >
+        {(_, type, index) => (
+          <LineChart.Root key={index} data={data} h="sm" w="3xl">
+            <LineChart.Line type={type} dataKey="uv" />
+            <LineChart.Line type={type} dataKey="pv" />
+          </LineChart.Root>
+        )}
+      </PropsTable>
+    </VStack>
   )
 }

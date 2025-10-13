@@ -22,6 +22,7 @@ export interface UseLineProps
 }
 
 export const useLine = ({
+  type = "monotone",
   css,
   activeDot: activeDotProp = {},
   dot: dotProp = {},
@@ -85,6 +86,7 @@ export const useLine = ({
   > = useCallback(
     (props) => {
       return {
+        type,
         className: propClassName,
         activeDot,
         color: "",
@@ -96,7 +98,7 @@ export const useLine = ({
         ...props,
       }
     },
-    [activeDot, dot, propClassName, reChartsProps],
+    [activeDot, dot, propClassName, reChartsProps, type],
   )
 
   return { getLineProps }

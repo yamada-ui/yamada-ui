@@ -480,3 +480,31 @@ export const CurveType: Story = () => {
     </VStack>
   )
 }
+
+export const Orientation: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
+        })),
+    [],
+  )
+
+  return (
+    <VStack>
+      <PropsTable variant="stack" rows={["horizontal", "vertical"] as const}>
+        {(_, layout, index) => (
+          <LineChart.Root key={index} data={data} layout={layout}>
+            <LineChart.Line dataKey="uv" />
+            <LineChart.Line dataKey="pv" />
+          </LineChart.Root>
+        )}
+      </PropsTable>
+    </VStack>
+  )
+}

@@ -1,6 +1,7 @@
 import type { LineChart, ResponsiveContainerProps } from "recharts"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { Dict } from "../../utils"
+import type { Layout } from "./chart.types"
 import { useCallback } from "react"
 
 export interface UseLineChartProps extends HTMLProps {
@@ -13,7 +14,7 @@ export interface UseLineChartProps extends HTMLProps {
    *
    * @default 'horizontal'
    */
-  layout?: "horizontal" | "vertical"
+  layout?: Layout
   /**
    * If any two categorical charts have the same syncId,
    * these two charts can sync the position tooltip, and the startIndex, endIndex of Brush.
@@ -68,7 +69,12 @@ export const useLineChart = ({
     [LineChartProps, data, layout, syncId],
   )
 
-  return { getContainerProps, getLineChartProps, getResponsiveContainerProps }
+  return {
+    layout,
+    getContainerProps,
+    getLineChartProps,
+    getResponsiveContainerProps,
+  }
 }
 
 export type UseLineChartReturn = ReturnType<typeof useLineChart>

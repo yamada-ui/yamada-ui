@@ -142,6 +142,7 @@ export const CustomAxis: Story = () => {
         <LineChart.Line type="monotone" dataKey="pv" stroke="#8884d8" />
 
         <LineChart.XAxis stroke={["orange.500", "green.500"]} />
+        <LineChart.YAxis stroke={["orange.500", "green.500"]} />
       </LineChart.Root>
 
       <LineChart.Root
@@ -149,6 +150,10 @@ export const CustomAxis: Story = () => {
         h="sm"
         w="3xl"
         xAxisProps={{
+          color: ["orange.700", "green.300"],
+          stroke: ["orange.500", "green.500"],
+        }}
+        yAxisProps={{
           color: ["orange.700", "green.300"],
           stroke: ["orange.500", "green.500"],
         }}

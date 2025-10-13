@@ -25,9 +25,10 @@ export {
   YAxisPropsContext,
 }
 
-export const YAxis = withContext(RechartsYAxis)((props) => {
+// NOTE: When processed with the second argument, properties such as `stroke` are absorbed by YamadaUI.
+export const YAxis = withContext<"svg", YAxisProps>((props) => {
   const customProps = useYAxisComponentContext()
   const { getYAxisProps } = useYAxis({ ...customProps, ...props })
 
-  return getYAxisProps()
-})
+  return <RechartsYAxis {...getYAxisProps()} />
+})()

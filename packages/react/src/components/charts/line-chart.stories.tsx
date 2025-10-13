@@ -31,10 +31,36 @@ export const Basic: Story = () => {
   )
 
   return (
-    <LineChart.Root data={data} h="sm" w="3xl">
+    <LineChart.Root data={data}>
       <LineChart.Line dataKey="uv" />
       <LineChart.Line dataKey="pv" />
     </LineChart.Root>
+  )
+}
+
+export const Size: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
+        })),
+    [],
+  )
+
+  return (
+    <PropsTable variant="stack" rows={["sm", "md", "lg", "full"] as const}>
+      {(_, size, index) => (
+        <LineChart.Root key={index} size={size} data={data}>
+          <LineChart.Line dataKey="uv" />
+          <LineChart.Line dataKey="pv" />
+        </LineChart.Root>
+      )}
+    </PropsTable>
   )
 }
 
@@ -53,7 +79,7 @@ export const CustomComponents: Story = () => {
   )
 
   return (
-    <LineChart.Root data={data} h="sm" w="3xl">
+    <LineChart.Root data={data}>
       <LineChart.Line dataKey="uv" />
       <LineChart.Line dataKey="pv" />
 
@@ -112,7 +138,7 @@ export const CustomLine: Story = () => {
 
   return (
     <VStack>
-      <LineChart.Root data={data} h="sm" w="3xl">
+      <LineChart.Root data={data}>
         <LineChart.Line
           activeDot={{ fill: ["orange.500", "green.500"] }}
           dataKey="uv"
@@ -127,15 +153,13 @@ export const CustomLine: Story = () => {
         />
       </LineChart.Root>
 
-      <LineChart.Root data={data} h="sm" w="3xl">
+      <LineChart.Root data={data}>
         <LineChart.Line activeDot={{ r: 8 }} dataKey="uv" dot={{ r: 5 }} />
         <LineChart.Line activeDot={false} dataKey="pv" dot={CustomizedDot} />
       </LineChart.Root>
 
       <LineChart.Root
         data={data}
-        h="sm"
-        w="3xl"
         lineProps={{ activeDot: false, dot: false, strokeWidth: "2" }}
       >
         <LineChart.Line dataKey="uv" />
@@ -161,31 +185,21 @@ export const CustomGrid: Story = () => {
 
   return (
     <VStack>
-      <LineChart.Root data={data} h="sm" w="3xl">
+      <LineChart.Root data={data}>
         <LineChart.Line dataKey="uv" />
         <LineChart.Line dataKey="pv" />
 
         <LineChart.Grid gridAxis="xy" stroke="orange.500" />
       </LineChart.Root>
 
-      <LineChart.Root
-        data={data}
-        h="sm"
-        w="3xl"
-        xAxisProps={{ tickLine: false }}
-      >
+      <LineChart.Root data={data} xAxisProps={{ tickLine: false }}>
         <LineChart.Line dataKey="uv" />
         <LineChart.Line dataKey="pv" />
 
         <LineChart.Grid gridAxis="x" />
       </LineChart.Root>
 
-      <LineChart.Root
-        data={data}
-        h="sm"
-        w="3xl"
-        yAxisProps={{ tickLine: false }}
-      >
+      <LineChart.Root data={data} yAxisProps={{ tickLine: false }}>
         <LineChart.Line dataKey="uv" />
         <LineChart.Line dataKey="pv" />
 
@@ -194,8 +208,6 @@ export const CustomGrid: Story = () => {
 
       <LineChart.Root
         data={data}
-        h="sm"
-        w="3xl"
         xAxisProps={{ tickLine: false }}
         yAxisProps={{ tickLine: false }}
       >
@@ -207,8 +219,6 @@ export const CustomGrid: Story = () => {
 
       <LineChart.Root
         data={data}
-        h="sm"
-        w="3xl"
         gridProps={{ gridAxis: "y", stroke: "orange.500" }}
         yAxisProps={{ tickLine: false }}
       >
@@ -235,7 +245,7 @@ export const CustomAxis: Story = () => {
 
   return (
     <VStack>
-      <LineChart.Root data={data} h="sm" w="3xl">
+      <LineChart.Root data={data}>
         <LineChart.Line dataKey="uv" />
         <LineChart.Line dataKey="pv" />
 
@@ -245,8 +255,6 @@ export const CustomAxis: Story = () => {
 
       <LineChart.Root
         data={data}
-        h="sm"
-        w="3xl"
         xAxisProps={{
           axisLine: true,
           color: ["orange.700", "green.300"],
@@ -262,7 +270,7 @@ export const CustomAxis: Story = () => {
         <LineChart.Line dataKey="pv" />
       </LineChart.Root>
 
-      <LineChart.Root data={data} h="sm" w="3xl">
+      <LineChart.Root data={data}>
         <LineChart.Line dataKey="uv" yAxisId="left" />
         <LineChart.Line dataKey="pv" yAxisId="right" />
 
@@ -270,14 +278,14 @@ export const CustomAxis: Story = () => {
         <LineChart.YAxis orientation="right" yAxisId="right" />
       </LineChart.Root>
 
-      <LineChart.Root data={data} h="sm" w="3xl">
+      <LineChart.Root data={data}>
         <LineChart.Line dataKey="uv" />
         <LineChart.Line dataKey="pv" />
 
         <LineChart.YAxis unit="p" />
       </LineChart.Root>
 
-      <LineChart.Root data={data} h="sm" w="3xl">
+      <LineChart.Root data={data}>
         <LineChart.Line dataKey="uv" />
         <LineChart.Line dataKey="pv" />
 
@@ -307,7 +315,7 @@ export const DisableAnimation: Story = () => {
   )
 
   return (
-    <LineChart.Root data={data} h="sm" w="3xl">
+    <LineChart.Root data={data}>
       <LineChart.Line dataKey="uv" isAnimationActive={false} />
       <LineChart.Line dataKey="pv" />
     </LineChart.Root>
@@ -329,7 +337,7 @@ export const HideTooltip: Story = () => {
   )
 
   return (
-    <LineChart.Root data={data} h="sm" w="3xl" withTooltip={false}>
+    <LineChart.Root data={data} withTooltip={false}>
       <LineChart.Line dataKey="uv" />
       <LineChart.Line dataKey="pv" />
     </LineChart.Root>
@@ -351,7 +359,7 @@ export const Legend: Story = () => {
   )
 
   return (
-    <LineChart.Root data={data} h="sm" w="3xl" withLegend>
+    <LineChart.Root data={data} withLegend>
       <LineChart.Line
         activeDot={{ fill: ["orange.700", "green.300"] }}
         dataKey="uv"
@@ -384,45 +392,45 @@ export const ConnectNull: Story = () => {
 
   return (
     <VStack>
-      <LineChart.Root data={data} h="sm" w="3xl">
+      <LineChart.Root data={data}>
         <LineChart.Line dataKey="pv" />
       </LineChart.Root>
 
-      <LineChart.Root data={data} h="sm" w="3xl">
+      <LineChart.Root data={data}>
         <LineChart.Line connectNulls dataKey="pv" />
       </LineChart.Root>
     </VStack>
   )
 }
 
-// export const Synced: Story = () => {
-//   const data = useMemo(
-//     () =>
-//       Array(7)
-//         .fill(0)
-//         .map((_, index) => ({
-//           name: `Page ${index}`,
-//           amt: randomValue(),
-//           pv: randomValue(),
-//           uv: randomValue(),
-//         })),
-//     [],
-//   )
+export const Synced: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          amt: randomValue(),
+          pv: randomValue(),
+          uv: randomValue(),
+        })),
+    [],
+  )
 
-//   return (
-//     <VStack>
-//       <LineChart.Root data={data} h="sm" syncId="chart1" w="3xl">
-//         <LineChart.Line dataKey="uv" />
-//         <LineChart.Line dataKey="pv" />
-//       </LineChart.Root>
+  return (
+    <VStack>
+      <LineChart.Root data={data} syncId="chart1">
+        <LineChart.Line dataKey="uv" />
+        <LineChart.Line dataKey="pv" />
+      </LineChart.Root>
 
-//       <LineChart.Root data={data} h="sm" syncId="chart1" w="3xl">
-//         <LineChart.Line dataKey="uv" />
-//         <LineChart.Line dataKey="pv" />
-//       </LineChart.Root>
-//     </VStack>
-//   )
-// }
+      <LineChart.Root data={data} syncId="chart1">
+        <LineChart.Line dataKey="uv" />
+        <LineChart.Line dataKey="pv" />
+      </LineChart.Root>
+    </VStack>
+  )
+}
 
 export const CurveType: Story = () => {
   const data = useMemo(
@@ -463,7 +471,7 @@ export const CurveType: Story = () => {
         }
       >
         {(_, type, index) => (
-          <LineChart.Root key={index} data={data} h="sm" w="3xl">
+          <LineChart.Root key={index} data={data}>
             <LineChart.Line type={type} dataKey="uv" />
             <LineChart.Line type={type} dataKey="pv" />
           </LineChart.Root>

@@ -116,14 +116,14 @@ export const CustomLine: Story = () => {
           type="monotone"
           activeDot={{ fill: ["orange.500", "green.500"] }}
           dataKey="uv"
-          fill={["orange.200", "green.200"]}
+          dot={{ fill: ["green.200", "orange.200"] }}
           stroke={["orange.500", "green.500"]}
         />
         <LineChart.Line
           type="monotone"
           activeDot={{ fill: ["green.500", "orange.500"] }}
           dataKey="pv"
-          fill={["green.200", "orange.200"]}
+          dot={{ fill: ["green.200", "orange.200"] }}
           stroke={["green.500", "orange.500"]}
         />
       </LineChart.Root>

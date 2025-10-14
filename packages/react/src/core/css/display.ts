@@ -15,6 +15,14 @@ export function display(value: any, { prev }: TransformOptions) {
         placeContent: prev?.placeContent ?? "center",
         placeItems: prev?.placeItems ?? "center",
       }
+    case "absolute-center":
+      return {
+        insetBlockStart: "50%",
+        insetInlineStart: "50%",
+        position: "absolute",
+        translateX: "-50%",
+        translateY: "-50%",
+      }
     case "hidden":
       return visuallyHiddenAttributes.style
     default:

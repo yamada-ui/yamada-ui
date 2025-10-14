@@ -33,6 +33,7 @@
     "clean": "rimraf node_modules dist trace coverage .turbo .eslintcache",
     "build": "tsdown",
     "test": "vitest",
+    "test:coverage": "vitest run --coverage",
     "test:dev": "vitest --watch --ui",
     "typecheck": "tsc --noEmit",
     "typetrace": "tsc --noEmit --generateTrace ./trace --incremental false",

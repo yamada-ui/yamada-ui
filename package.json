@@ -39,6 +39,7 @@
     "typecheck:scripts": "tsc --noEmit",
     "typecheck:playgrounds": "turbo run typecheck --filter=./playgrounds/**",
     "test": "turbo run test --filter=./packages/**",
+    "test:coverage": "turbo run test:coverage --filter=./packages/**",
     "spellcheck": "cspell \"**/*.{js,jsx,mjs,ts,tsx,mts,md,mdx}\" --quiet",
     "quality": "pnpm format && pnpm lint && pnpm typecheck && pnpm test",
     "gen:styles": "tsx scripts/generate/styles",

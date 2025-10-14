@@ -1,0 +1,182 @@
+import{j as e,$ as s,X as V,V as T,S as O}from"./iframe-DlW9lece.js";import{u as y,C}from"./index.esm-w0VKeH5t.js";import{E as r,a,b as t,c as I,d as Y,e as k,f as q,g as M,u as z}from"./editable-CuJZNiQK.js";import{F as n}from"./use-field-props-DPxwIYVf.js";import{P as w}from"./pencil-icon-CdT9eTHs.js";import{C as P}from"./check-icon-BV14iK3c.js";import{B as D}from"./button-group--YIZ_dzQ.js";import"./preload-helper-PPVm8Dsz.js";import"./index-BA6hlmtc.js";import"./index-wv8FIqI4.js";import"./index-CyHdRP35.js";import"./use-input-border-DWoJYHtW.js";import"./group-Ser6DQqV.js";import"./index-TFlPkFy0.js";import"./use-breakpoint-C-kJZ4_t.js";import"./use-breakpoint-value-BspeiRIn.js";import"./use-color-mode-value-Cm3a1PiS.js";import"./flex-CqzE-1_6.js";const oe={component:r,title:"Components / Editable"},d=()=>e.jsxs(r,{defaultValue:"オッス！オラ悟空！",children:[e.jsx(a,{}),e.jsx(t,{})]}),u=()=>e.jsxs(r,{defaultValue:`私の戦闘力は530000です。
+ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……`,children:[e.jsx(a,{}),e.jsx(I,{})]}),c=()=>e.jsxs(r,{defaultValue:"オッス！オラ悟空！",startWithEditView:!0,children:[e.jsx(a,{}),e.jsx(t,{"aria-label":"Input character serif"})]}),m=()=>e.jsxs(r,{defaultValue:"オッス！オラ悟空！",previewFocusable:!1,children:[e.jsx(a,{}),e.jsx(t,{})]}),b=()=>e.jsxs(r,{defaultValue:"オッス！オラ悟空！",submitOnBlur:!1,children:[e.jsx(a,{}),e.jsx(t,{})]}),p=()=>e.jsxs(r,{defaultValue:"オッス！オラ悟空！",selectAllOnFocus:!1,children:[e.jsx(a,{}),e.jsx(t,{})]}),E=()=>e.jsxs(e.Fragment,{children:[e.jsxs(r,{defaultValue:"Your email address",disabled:!0,children:[e.jsx(a,{}),e.jsx(t,{})]}),e.jsx(n,{disabled:!0,helperMessage:"We'll never share your email.",label:"Email address",children:e.jsxs(r,{defaultValue:"Your email address",children:[e.jsx(a,{}),e.jsx(t,{})]})})]}),x=()=>e.jsxs(e.Fragment,{children:[e.jsxs(r,{defaultValue:"Your email address",readOnly:!0,children:[e.jsx(a,{}),e.jsx(t,{})]}),e.jsx(n,{helperMessage:"We'll never share your email.",label:"Email address",readOnly:!0,children:e.jsxs(r,{defaultValue:"Your email address",children:[e.jsx(a,{}),e.jsx(t,{})]})})]}),j=()=>e.jsxs(e.Fragment,{children:[e.jsxs(r,{defaultValue:"Your email address",invalid:!0,children:[e.jsx(a,{}),e.jsx(t,{})]}),e.jsx(n,{errorMessage:"Email is required.",invalid:!0,label:"Email address",children:e.jsxs(r,{defaultValue:"Your email address",children:[e.jsx(a,{}),e.jsx(t,{})]})})]}),g=()=>e.jsxs(e.Fragment,{children:[e.jsxs(r,{defaultValue:"Default border color",children:[e.jsx(a,{}),e.jsx(t,{})]}),e.jsxs(r,{defaultValue:"Custom border color",focusBorderColor:"green.500",children:[e.jsx(a,{}),e.jsx(t,{})]}),e.jsxs(r,{defaultValue:"Custom border color",errorBorderColor:"orange.500",invalid:!0,children:[e.jsx(a,{}),e.jsx(t,{})]})]}),f=()=>e.jsxs(r,{defaultValue:"オッス！オラ悟空！",children:[e.jsx(a,{}),e.jsx(t,{}),e.jsxs(Y,{children:[e.jsx(k,{children:e.jsx(s,{size:"xs",variant:"ghost","aria-label":"Edit",icon:e.jsx(w,{})})}),e.jsx(q,{children:e.jsx(s,{size:"xs",variant:"outline","aria-label":"Submit",icon:e.jsx(P,{})})}),e.jsx(M,{children:e.jsx(s,{size:"xs",variant:"outline","aria-label":"Cancel",icon:e.jsx(V,{})})})]})]}),h=()=>{const R=()=>{const{getCancelProps:i,getEditProps:o,getSubmitProps:S}=z();return e.jsxs(D,{size:"xs",children:[e.jsx(s,{icon:e.jsx(w,{}),...o(),variant:"ghost","aria-label":"Edit"}),e.jsx(s,{icon:e.jsx(P,{}),...S(),variant:"outline","aria-label":"Submit"}),e.jsx(s,{icon:e.jsx(V,{}),...i(),variant:"outline","aria-label":"Cancel"})]})};return e.jsxs(r,{defaultValue:"オッス！オラ悟空！",previewFocusable:!1,children:[e.jsx(a,{}),e.jsx(t,{}),e.jsx(R,{})]})},v=()=>{const R={input:"",textarea:""},{control:i,formState:{errors:o},handleSubmit:S,watch:F}=y({defaultValues:R}),B=l=>console.log("submit:",l);return console.log("watch:",F()),e.jsxs(T,{as:"form",onSubmit:S(B),children:[e.jsx(n,{errorMessage:o.input?.message,invalid:!!o.input,label:"Name",children:e.jsx(C,{name:"input",control:i,render:({field:l})=>e.jsxs(r,{placeholder:"孫悟空",...l,children:[e.jsx(a,{}),e.jsx(t,{})]}),rules:{required:{message:"This is required.",value:!0}}})}),e.jsx(n,{errorMessage:o.textarea?.message,invalid:!!o.textarea,label:"Feedback",children:e.jsx(C,{name:"textarea",control:i,render:({field:l})=>e.jsxs(r,{placeholder:"オッス！オラ悟空！",...l,children:[e.jsx(a,{}),e.jsx(I,{})]}),rules:{required:{message:"This is required.",value:!0}}})}),e.jsx(O,{type:"submit",alignSelf:"flex-end",children:"Submit"})]})};d.parameters={...d.parameters,docs:{...d.parameters?.docs,source:{originalSource:`() => {
+  return <Editable.Root defaultValue="オッス！オラ悟空！">
+      <Editable.Preview />
+      <Editable.Input />
+    </Editable.Root>;
+}`,...d.parameters?.docs?.source}}};u.parameters={...u.parameters,docs:{...u.parameters?.docs,source:{originalSource:`() => {
+  return <Editable.Root defaultValue={\`私の戦闘力は530000です。\\nですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……\`}>
+      <Editable.Preview />
+      <Editable.Textarea />
+    </Editable.Root>;
+}`,...u.parameters?.docs?.source}}};c.parameters={...c.parameters,docs:{...c.parameters?.docs,source:{originalSource:`() => {
+  return <Editable.Root defaultValue="オッス！オラ悟空！" startWithEditView>
+      <Editable.Preview />
+      <Editable.Input aria-label="Input character serif" />
+    </Editable.Root>;
+}`,...c.parameters?.docs?.source}}};m.parameters={...m.parameters,docs:{...m.parameters?.docs,source:{originalSource:`() => {
+  return <Editable.Root defaultValue="オッス！オラ悟空！" previewFocusable={false}>
+      <Editable.Preview />
+      <Editable.Input />
+    </Editable.Root>;
+}`,...m.parameters?.docs?.source}}};b.parameters={...b.parameters,docs:{...b.parameters?.docs,source:{originalSource:`() => {
+  return <Editable.Root defaultValue="オッス！オラ悟空！" submitOnBlur={false}>
+      <Editable.Preview />
+      <Editable.Input />
+    </Editable.Root>;
+}`,...b.parameters?.docs?.source}}};p.parameters={...p.parameters,docs:{...p.parameters?.docs,source:{originalSource:`() => {
+  return <Editable.Root defaultValue="オッス！オラ悟空！" selectAllOnFocus={false}>
+      <Editable.Preview />
+      <Editable.Input />
+    </Editable.Root>;
+}`,...p.parameters?.docs?.source}}};E.parameters={...E.parameters,docs:{...E.parameters?.docs,source:{originalSource:`() => {
+  return <>
+      <Editable.Root defaultValue="Your email address" disabled>
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>
+
+      <Field.Root disabled helperMessage="We'll never share your email." label="Email address">
+        <Editable.Root defaultValue="Your email address">
+          <Editable.Preview />
+          <Editable.Input />
+        </Editable.Root>
+      </Field.Root>
+    </>;
+}`,...E.parameters?.docs?.source}}};x.parameters={...x.parameters,docs:{...x.parameters?.docs,source:{originalSource:`() => {
+  return <>
+      <Editable.Root defaultValue="Your email address" readOnly>
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>
+
+      <Field.Root helperMessage="We'll never share your email." label="Email address" readOnly>
+        <Editable.Root defaultValue="Your email address">
+          <Editable.Preview />
+          <Editable.Input />
+        </Editable.Root>
+      </Field.Root>
+    </>;
+}`,...x.parameters?.docs?.source}}};j.parameters={...j.parameters,docs:{...j.parameters?.docs,source:{originalSource:`() => {
+  return <>
+      <Editable.Root defaultValue="Your email address" invalid>
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>
+
+      <Field.Root errorMessage="Email is required." invalid label="Email address">
+        <Editable.Root defaultValue="Your email address">
+          <Editable.Preview />
+          <Editable.Input />
+        </Editable.Root>
+      </Field.Root>
+    </>;
+}`,...j.parameters?.docs?.source}}};g.parameters={...g.parameters,docs:{...g.parameters?.docs,source:{originalSource:`() => {
+  return <>
+      <Editable.Root defaultValue="Default border color">
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>
+
+      <Editable.Root defaultValue="Custom border color" focusBorderColor="green.500">
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>
+
+      <Editable.Root defaultValue="Custom border color" errorBorderColor="orange.500" invalid>
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>
+    </>;
+}`,...g.parameters?.docs?.source}}};f.parameters={...f.parameters,docs:{...f.parameters?.docs,source:{originalSource:`() => {
+  return <Editable.Root defaultValue="オッス！オラ悟空！">
+      <Editable.Preview />
+      <Editable.Input />
+
+      <Editable.Control>
+        <Editable.EditTrigger>
+          <IconButton size="xs" variant="ghost" aria-label="Edit" icon={<PencilIcon />} />
+        </Editable.EditTrigger>
+        <Editable.SubmitTrigger>
+          <IconButton size="xs" variant="outline" aria-label="Submit" icon={<CheckIcon />} />
+        </Editable.SubmitTrigger>
+        <Editable.CancelTrigger>
+          <IconButton size="xs" variant="outline" aria-label="Cancel" icon={<XIcon />} />
+        </Editable.CancelTrigger>
+      </Editable.Control>
+    </Editable.Root>;
+}`,...f.parameters?.docs?.source}}};h.parameters={...h.parameters,docs:{...h.parameters?.docs,source:{originalSource:`() => {
+  const CustomControls = () => {
+    const {
+      getCancelProps,
+      getEditProps,
+      getSubmitProps
+    } = Editable.useContext();
+    return <ButtonGroup.Root size="xs">
+        <ButtonGroup.IconItem icon={<PencilIcon />} {...getEditProps()} variant="ghost" aria-label="Edit" />
+
+        <ButtonGroup.IconItem icon={<CheckIcon />} {...getSubmitProps()} variant="outline" aria-label="Submit" />
+
+        <ButtonGroup.IconItem icon={<XIcon />} {...getCancelProps()} variant="outline" aria-label="Cancel" />
+      </ButtonGroup.Root>;
+  };
+  return <Editable.Root defaultValue="オッス！オラ悟空！" previewFocusable={false}>
+      <Editable.Preview />
+      <Editable.Input />
+      <CustomControls />
+    </Editable.Root>;
+}`,...h.parameters?.docs?.source}}};v.parameters={...v.parameters,docs:{...v.parameters?.docs,source:{originalSource:`() => {
+  interface Data {
+    input: string;
+    textarea: string;
+  }
+  const defaultValues: Data = {
+    input: "",
+    textarea: ""
+  };
+  const {
+    control,
+    formState: {
+      errors
+    },
+    handleSubmit,
+    watch
+  } = useForm<Data>({
+    defaultValues
+  });
+  const onSubmit: SubmitHandler<Data> = data => console.log("submit:", data);
+  console.log("watch:", watch());
+  return <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
+      <Field.Root errorMessage={errors.input?.message} invalid={!!errors.input} label="Name">
+        <Controller name="input" control={control} render={({
+        field
+      }) => <Editable.Root placeholder="孫悟空" {...field}>
+              <Editable.Preview />
+              <Editable.Input />
+            </Editable.Root>} rules={{
+        required: {
+          message: "This is required.",
+          value: true
+        }
+      }} />
+      </Field.Root>
+
+      <Field.Root errorMessage={errors.textarea?.message} invalid={!!errors.textarea} label="Feedback">
+        <Controller name="textarea" control={control} render={({
+        field
+      }) => <Editable.Root placeholder="オッス！オラ悟空！" {...field}>
+              <Editable.Preview />
+              <Editable.Textarea />
+            </Editable.Root>} rules={{
+        required: {
+          message: "This is required.",
+          value: true
+        }
+      }} />
+      </Field.Root>
+
+      <Button type="submit" alignSelf="flex-end">
+        Submit
+      </Button>
+    </VStack>;
+}`,...v.parameters?.docs?.source}}};const se=["Basic","Textarea","StartWithEditView","PreviewFocusable","SubmitOnBlur","SelectAllOnFocus","Disabled","ReadOnly","Invalid","BorderColor","Control","CustomControl","ReactHookForm"];export{d as Basic,g as BorderColor,f as Control,h as CustomControl,E as Disabled,j as Invalid,m as PreviewFocusable,v as ReactHookForm,x as ReadOnly,p as SelectAllOnFocus,c as StartWithEditView,b as SubmitOnBlur,u as Textarea,se as __namedExportsOrder,oe as default};

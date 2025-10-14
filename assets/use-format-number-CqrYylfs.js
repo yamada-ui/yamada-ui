@@ -1,0 +1,1 @@
+import{J as s,r as o}from"./iframe-DlW9lece.js";import{i as u}from"./i18n-cache-2nrF3WCd.js";const c=u(Intl.NumberFormat),N=(r,t)=>b(t)(r),b=({locale:r,...t}={})=>{const{locale:e}=s(),m=o.useRef(t);return r??=e,o.useCallback((a,n)=>c(r,{...m.current,...n}).format(a),[r])};export{N as a,b as u};

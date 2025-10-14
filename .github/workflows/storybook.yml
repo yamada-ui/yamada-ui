@@ -6,7 +6,7 @@ on:
       - "packages/**/*.(html|ts|tsx)"
       - "packages/**/package.json"
       - "!packages/(cli|workspace)/**"
-      - "!packages/**/(scripts|test)/**"
+      - "!packages/**/test/**"
       - "!packages/**/*.test.(ts|tsx)"
       - "package.json"
     branches:

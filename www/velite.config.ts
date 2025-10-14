@@ -4,7 +4,7 @@ import remarkDirective from "remark-directive"
 import remarkGfm from "remark-gfm"
 import { defineCollection, defineConfig, s } from "velite"
 import { generateDocMap } from "@/scripts/generate/docs/map"
-import { getLocale } from "@/utils/i18n"
+import { getLocale, langs } from "@/utils/i18n"
 import { CONSTANTS } from "./constants"
 import { rehypePre } from "./utils/rehype-plugins"
 import {
@@ -21,11 +21,15 @@ function getPath(value: string) {
 }
 
 function getSlug(value: string) {
-  const [path, lang] = value
+  const transformedValue = value
     .replace(/\\/g, "/")
     .replace(/.*\/contents\//, "")
     .replace(/\.mdx$/, "")
-    .split(".")
+  const match = transformedValue.match(
+    new RegExp(`^(.*?)(?:\.(${langs.join("|")}))?$`),
+  )
+  const [, path, lang] = match ?? []
+
   const slug = (
     path!.endsWith("/index") ? path!.replace(/\/index$/, "") : path
   )!

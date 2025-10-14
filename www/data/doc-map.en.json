@@ -1263,7 +1263,42 @@
     {
       "title": "Changelog",
       "segment": "changelog",
-      "pathname": "/docs/changelog"
+      "pathname": "/docs/changelog",
+      "items": [
+        {
+          "title": "@yamada-ui/react",
+          "segment": "react",
+          "items": [
+            {
+              "title": "v2.0.0",
+              "segment": "2-0-0",
+              "pathname": "/docs/changelog/react/2-0-0"
+            }
+          ]
+        },
+        {
+          "title": "@yamada-ui/cli",
+          "segment": "cli",
+          "items": [
+            {
+              "title": "v2.0.0",
+              "segment": "2-0-0",
+              "pathname": "/docs/changelog/cli/2-0-0"
+            }
+          ]
+        },
+        {
+          "title": "@yamada-ui/utils",
+          "segment": "utils",
+          "items": [
+            {
+              "title": "v2.0.0",
+              "segment": "2-0-0",
+              "pathname": "/docs/changelog/utils/2-0-0"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

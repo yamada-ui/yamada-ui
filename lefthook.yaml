@@ -101,9 +101,3 @@ post-merge:
     pnpm:
       glob: "{package.json,pnpm-lock.yaml}"
       run: pnpm install
-
-post-checkout:
-  commands:
-    pnpm:
-      glob: "{package.json,pnpm-lock.yaml}"
-      run: pnpm install

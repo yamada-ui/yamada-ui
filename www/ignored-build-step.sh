@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TARGET_URL="v2.yamada-ui.com"
+TARGET_URL="yamada-ui.com"
 TARGET_BRANCH="main"
 
 if [ "$VERCEL_PROJECT_PRODUCTION_URL" != "$TARGET_URL" ]; then

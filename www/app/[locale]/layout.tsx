@@ -36,8 +36,7 @@ export async function generateMetadata({
     ...(await generateSharedMetadata("home")({ params })),
     description: t("description"),
     icons: "/favicon.svg",
-    // TODO: Change to https://yamada-ui.com
-    metadataBase: new URL("https://v2.yamada-ui.com"),
+    metadataBase: new URL("https://yamada-ui.com"),
     title: { default: t("title"), template: `%s - ${t("title")}` },
   }
 }

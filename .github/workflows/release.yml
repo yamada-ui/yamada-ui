@@ -5,7 +5,7 @@ on:
     paths:
       - ".changeset/**"
       - "packages/**"
-      - "!packages/**/(scripts|storybook|test)/**"
+      - "!packages/**/(storybook|test)/**"
       - "!packages/**/*.(stories|test).(ts|tsx|mdx)"
     branches:
       - main
@@ -63,22 +63,23 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Update changelog
-        if: steps.changesets.outputs.published == 'true'
-        run: |
-          pnpm changelog:latest
-          git add .
-          git diff --staged --exit-code || (git commit -m 'ci(changelog): added changelog' && git push)
-
-      - name: Notification release
-        if: steps.changesets.outputs.published == 'true'
-        run: |
-          pnpm notification:release
-        env:
-          DISCORD_RELEASE_WEBHOOK_URL: ${{ secrets.DISCORD_RELEASE_WEBHOOK_URL }}
-
       - name: Update www
         if: steps.changesets.outputs.published == 'true'
-        uses: ./.github/composite-actions/update-www
+        run: |
+          pnpm gen:styles -p
+          git add .
+          git diff --staged --exit-code || git commit -m 'ci(changesets): update styles'
+          pnpm gen:props -p
+          git add .
+          git diff --staged --exit-code || git commit -m 'ci(changesets): update props'
+          pnpm gen:registries -p
+          git add .
+          git diff --staged --exit-code || git commit -m 'ci(changesets): update registries'
+          pnpm www gen:icons
+          pnpm www gen:changelog
+          pnpm www gen:contributors
+          git add .
+          git diff --staged --exit-code || git commit -m 'ci(changesets): update www'
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -71,14 +71,16 @@ export async function generateDocMap(docs: Doc[]) {
 
   for (let { locale, status, path, title } of docs) {
     const lang = getLang(locale)
-    const langPath = pathToFileURL(`${MESSAGES_PATH}/${lang}.json`).href
     const messages = (
-      await import(langPath, {
+      await import(pathToFileURL(`${MESSAGES_PATH}/${lang}.json`).href, {
         with: { type: "json" },
       })
     ).default
     const t = createTranslator<Dict>({ locale, messages })
-    const omittedPath = path.replace(/\.mdx$/, "").replace(/\..*$/, "")
+    const omittedPath = path.replace(
+      new RegExp(`(\\.(${langs.join("|")}))?\\.mdx$`),
+      "",
+    )
     const slug = (
       omittedPath.endsWith("/index")
         ? omittedPath.replace(/\/index$/, "")

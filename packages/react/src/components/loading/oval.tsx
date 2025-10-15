@@ -25,9 +25,9 @@ export const Oval = withContext<"svg", OvalProps>(
               {...(secondaryColor
                 ? { stroke: "{secondary-color}" }
                 : { strokeOpacity: ".5" })}
-              cx="18"
-              cy="18"
-              r="18"
+              cx="18px"
+              cy="18px"
+              r="18px"
             />
             <styled.path
               animationDuration={`${dur}s`}

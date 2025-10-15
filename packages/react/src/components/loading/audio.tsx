@@ -28,22 +28,22 @@ export const Audio = withContext<"svg", AudioProps>(
                 20, 45, 57, 80, 64, 32, 66, 45, 64, 23, 66, 13, 64, 56, 34, 34,
                 2, 23, 76, 79, 20,
               ],
-              x: "0",
+              x: "0px",
             },
             {
               factor: 1.4,
               values: [80, 55, 33, 5, 75, 23, 73, 33, 12, 14, 60, 80],
-              x: "15",
+              x: "15px",
             },
             {
               factor: 1,
               values: [50, 34, 78, 23, 56, 23, 34, 76, 80, 54, 21, 50],
-              x: "30",
+              x: "30px",
             },
             {
               factor: 1.4,
               values: [30, 45, 13, 80, 56, 72, 45, 76, 34, 23, 67, 30],
-              x: "45",
+              x: "45px",
             },
           ].map(({ factor, values, ...props }, index) => {
             const length = values.length
@@ -64,7 +64,7 @@ export const Audio = withContext<"svg", AudioProps>(
                 animationIterationCount="infinite"
                 animationTimingFunction="linear"
                 h="80px"
-                rx="3"
+                rx="3px"
                 w="10px"
                 _keyframes={keyframes}
               />

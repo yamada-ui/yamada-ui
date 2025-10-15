@@ -22,14 +22,14 @@ export const Circles = withContext<"svg", CirclesProps>(
         <g fill="none" fillRule="evenodd">
           <g stroke="currentColor" strokeWidth="1.5" transform="translate(2 1)">
             {[
-              { cx: "42.601", cy: "11.462" },
-              { animationDelay: "0.375s", cx: "49.063", cy: "27.063" },
-              { animationDelay: "0.75s", cx: "42.601", cy: "42.663" },
-              { animationDelay: "1.125s", cx: "27", cy: "49.125" },
-              { animationDelay: "1.5s", cx: "11.399", cy: "42.663" },
-              { animationDelay: "1.875s", cx: "4.938", cy: "27.063" },
-              { animationDelay: "2.25s", cx: "11.399", cy: "11.462" },
-              { animationDelay: "2.625s", cx: "27", cy: "5" },
+              { cx: "42.601px", cy: "11.462px" },
+              { animationDelay: "0.375s", cx: "49.063px", cy: "27.063px" },
+              { animationDelay: "0.75s", cx: "42.601px", cy: "42.663px" },
+              { animationDelay: "1.125s", cx: "27px", cy: "49.125px" },
+              { animationDelay: "1.5s", cx: "11.399px", cy: "42.663px" },
+              { animationDelay: "1.875s", cx: "4.938px", cy: "27.063px" },
+              { animationDelay: "2.25s", cx: "11.399px", cy: "11.462px" },
+              { animationDelay: "2.625s", cx: "27px", cy: "5px" },
             ].map((props, index) => (
               <styled.circle
                 key={index}
@@ -39,7 +39,7 @@ export const Circles = withContext<"svg", CirclesProps>(
                 animationTimingFunction="linear"
                 fill="currentColor"
                 fillOpacity={!index ? "1" : "0"}
-                r="5"
+                r="5px"
                 _keyframes={{
                   "0%, 25%, 100%": { fillOpacity: 0 },
                   "12.5%": { fillOpacity: 1 },

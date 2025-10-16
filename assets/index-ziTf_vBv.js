@@ -1,0 +1,1 @@
+import{ay as a,ak as o,r as c}from"./iframe-B0P9Y6nu.js";const E=(e,s,t)=>{const{getWindow:n}=a(),r=o(s);c.useEffect(()=>(n()?.addEventListener(e,r,t),()=>{n()?.removeEventListener(e,r,t)}),[e,r,t,n])};export{E as u};

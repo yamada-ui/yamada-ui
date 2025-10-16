@@ -12,6 +12,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { Geist, Geist_Mono, Inter } from "next/font/google"
 import { notFound } from "next/navigation"
+import { NuqsAdapter } from "nuqs/adapters/next/app"
 import { Footer } from "@/app/[locale]/footer"
 import { Header } from "@/app/[locale]/header"
 import { CONSTANTS } from "@/constants"
@@ -87,29 +88,31 @@ export default async function Layout({ children, params }: LayoutProps) {
         <ThemeSchemeScript />
 
         <NextIntlClientProvider>
-          <UIProvider locale={locale} theme={theme}>
-            <Flex alignItems="center" flexDirection="column" minH="100dvh">
-              <Flex
-                alignItems="center"
-                flex="1"
-                flexDirection="column"
-                maxW="8xl"
-                w="full"
-              >
-                <Header />
+          <NuqsAdapter>
+            <UIProvider locale={locale} theme={theme}>
+              <Flex alignItems="center" flexDirection="column" minH="100dvh">
                 <Flex
-                  as="main"
+                  alignItems="center"
                   flex="1"
                   flexDirection="column"
-                  px="{space}"
+                  maxW="8xl"
                   w="full"
                 >
-                  {children}
+                  <Header />
+                  <Flex
+                    as="main"
+                    flex="1"
+                    flexDirection="column"
+                    px="{space}"
+                    w="full"
+                  >
+                    {children}
+                  </Flex>
+                  <Footer />
                 </Flex>
-                <Footer />
               </Flex>
-            </Flex>
-          </UIProvider>
+            </UIProvider>
+          </NuqsAdapter>
         </NextIntlClientProvider>
 
         <SpeedInsights />

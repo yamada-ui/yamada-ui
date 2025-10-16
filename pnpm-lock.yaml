@@ -417,6 +417,9 @@ importers:
       '@octokit/rest':
         specifier: ^22.0.0
         version: 22.0.0
+      '@octokit/webhooks':
+        specifier: ^14.1.3
+        version: 14.1.3
       '@types/eslint-plugin-jsx-a11y':
         specifier: ^6.10.1
         version: 6.10.1(jiti@2.6.1)
@@ -3500,6 +3503,10 @@ packages:
     resolution: {integrity: sha512-7AtcfKtpo77j7Ts73b4OWhOZHTKo/gGY8bB3bNBQz4H+GRSWqx2yvj8TXRsbdTE0eRmYmXOEY66jM7mJ7LzfsA==, tarball: https://registry.npmjs.org/@octokit/openapi-types/-/openapi-types-26.0.0.tgz}
     dev: false
 
+  /@octokit/openapi-webhooks-types@12.0.3:
+    resolution: {integrity: sha512-90MF5LVHjBedwoHyJsgmaFhEN1uzXyBDRLEBe7jlTYx/fEhPAk3P3DAJsfZwC54m8hAIryosJOL+UuZHB3K3yA==, tarball: https://registry.npmjs.org/@octokit/openapi-webhooks-types/-/openapi-webhooks-types-12.0.3.tgz}
+    dev: false
+
   /@octokit/plugin-paginate-rest@13.2.0(@octokit/core@7.0.5):
     resolution: {integrity: sha512-YuAlyjR8o5QoRSOvMHxSJzPtogkNMgeMv2mpccrvdUGeC3MKyfi/hS+KiFwyH/iRKIKyx+eIMsDjbt3p9r2GYA==, tarball: https://registry.npmjs.org/@octokit/plugin-paginate-rest/-/plugin-paginate-rest-13.2.0.tgz}
     engines: {node: '>= 20'}
@@ -3561,6 +3568,20 @@ packages:
     resolution: {integrity: sha512-8o6yDfmoGJUIeR9OfYU0/TUJTnMPG2r68+1yEdUeG2Fdqpj8Qetg0ziKIgcBm0RW/j29H41WP37CYCEhp6GoHQ==, tarball: https://registry.npmjs.org/@octokit/types/-/types-15.0.0.tgz}
     dependencies:
       '@octokit/openapi-types': 26.0.0
+    dev: false
+
+  /@octokit/webhooks-methods@6.0.0:
+    resolution: {integrity: sha512-MFlzzoDJVw/GcbfzVC1RLR36QqkTLUf79vLVO3D+xn7r0QgxnFoLZgtrzxiQErAjFUOdH6fas2KeQJ1yr/qaXQ==, tarball: https://registry.npmjs.org/@octokit/webhooks-methods/-/webhooks-methods-6.0.0.tgz}
+    engines: {node: '>= 20'}
+    dev: false
+
+  /@octokit/webhooks@14.1.3:
+    resolution: {integrity: sha512-gcK4FNaROM9NjA0mvyfXl0KPusk7a1BeA8ITlYEZVQCXF5gcETTd4yhAU0Kjzd8mXwYHppzJBWgdBVpIR9wUcQ==, tarball: https://registry.npmjs.org/@octokit/webhooks/-/webhooks-14.1.3.tgz}
+    engines: {node: '>= 20'}
+    dependencies:
+      '@octokit/openapi-webhooks-types': 12.0.3
+      '@octokit/request-error': 7.0.1
+      '@octokit/webhooks-methods': 6.0.0
     dev: false
 
   /@oxc-project/types@0.94.0:

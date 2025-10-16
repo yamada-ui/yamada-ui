@@ -67,7 +67,7 @@ export type Theme = typeof theme
 
 ```tsx {2,6}
 import { UIProvider } from "@workspaces/ui"
-import { theme } from "@/theme"
+import { theme } from "@workspace/theme"
 
 const App = () => {
   return (
@@ -146,7 +146,7 @@ export const config = defineConfig({
 
 ```tsx {2,6}
 import { UIProvider } from "@workspaces/ui"
-import { theme, config } from "@/theme"
+import { theme, config } from "@workspace/theme"
 
 const App = () => {
   return (

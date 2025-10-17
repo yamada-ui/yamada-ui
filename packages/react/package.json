@@ -1,7 +1,7 @@
 {
   "name": "@yamada-ui/react",
   "type": "module",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "React UI components of the Yamada, by the Yamada, for the Yamada built with React and Emotion",
   "keywords": [
     "yamada",

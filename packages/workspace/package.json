@@ -18,7 +18,8 @@
     "./prettier/*": "./src/prettier/*.js",
     "./typescript/*": "./src/typescript/*",
     "./vitest/*": "./src/vitest/*.ts",
-    "./octokit": "./src/octokit/index.ts"
+    "./octokit": "./src/octokit/index.ts",
+    "./discord": "./src/discord/index.ts"
   },
   "dependencies": {
     "@cspell/eslint-plugin": "^9.2.1",
@@ -26,6 +27,7 @@
     "@limegrass/eslint-plugin-import-alias": "^1.5.2",
     "@octokit/request-error": "^7.0.1",
     "@octokit/rest": "^22.0.0",
+    "@octokit/webhooks": "^14.1.3",
     "@types/eslint-plugin-jsx-a11y": "^6.10.1",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",

@@ -16,9 +16,10 @@ type Contributor = Awaited<
 async function getCollaborators() {
   return Object.fromEntries(
     await Promise.all(
-      ["maintainers.json", "emeriti.json"].map((path) =>
-        getContent<Dict[]>({ path, repo: "yamada-data" }),
-      ),
+      ["maintainers.json", "emeriti.json"].map(async (path) => [
+        path.split(".")[0]!,
+        await getContent<Dict>({ path, repo: "yamada-data" }),
+      ]),
     ),
   )
 }

@@ -66,6 +66,11 @@ const data: IntlData = {
     "Loading...": "Įkeliama...",
     "{value} percent": "{value} procentų",
   },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Sodrumo ir šviesumo slankiklis",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Sodrumas {saturation}%, Šviesumas {brightness}%",
+  },
   select: {
     "Clear value": "Išvalyti reikšmę",
   },

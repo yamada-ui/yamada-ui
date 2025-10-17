@@ -116,7 +116,7 @@ export { SliderPropsContext, useSliderPropsContext }
  *
  * @see https://yamada-ui.com/docs/components/slider
  */
-export const SliderRoot = withProvider<"div", SliderRootProps, "orientation">(
+export const SliderRoot = withProvider<"input", SliderRootProps, "orientation">(
   <Y extends [number, number] | number = number>({
     children,
     marks,

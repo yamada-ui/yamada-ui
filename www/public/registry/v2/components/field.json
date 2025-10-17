@@ -23,6 +23,7 @@
       "pin-input",
       "radio",
       "rating",
+      "saturation-slider",
       "segmented-control",
       "select",
       "slider",

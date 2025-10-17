@@ -19,15 +19,15 @@ export const Grid = withContext<"svg", GridProps>(({ dur = "1s", ...rest }) => {
   return (
     <Icon fill="currentColor" viewBox="0 0 105 105" {...rest}>
       {[
-        { cx: "12.5", cy: "12.5" },
-        { animationDelay: "0.1s", cx: "12.5", cy: "52.5" },
-        { animationDelay: "0.3s", cx: "52.5", cy: "12.5" },
-        { animationDelay: "0.6s", cx: "52.5", cy: "52.5" },
-        { animationDelay: "0.8s", cx: "92.5", cy: "12.5" },
-        { animationDelay: "0.4s", cx: "92.5", cy: "52.5" },
-        { animationDelay: "0.7s", cx: "12.5", cy: "92.5" },
-        { animationDelay: "0.5s", cx: "52.5", cy: "92.5" },
-        { animationDelay: "0.2s", cx: "92.5", cy: "92.5" },
+        { cx: "12.5px", cy: "12.5px" },
+        { animationDelay: "0.1s", cx: "12.5px", cy: "52.5px" },
+        { animationDelay: "0.3s", cx: "52.5px", cy: "12.5px" },
+        { animationDelay: "0.6s", cx: "52.5px", cy: "52.5px" },
+        { animationDelay: "0.8s", cx: "92.5px", cy: "12.5px" },
+        { animationDelay: "0.4s", cx: "92.5px", cy: "52.5px" },
+        { animationDelay: "0.7s", cx: "12.5px", cy: "92.5px" },
+        { animationDelay: "0.5s", cx: "52.5px", cy: "92.5px" },
+        { animationDelay: "0.2s", cx: "92.5px", cy: "92.5px" },
       ].map((props, index) => (
         <styled.circle
           key={index}
@@ -35,7 +35,7 @@ export const Grid = withContext<"svg", GridProps>(({ dur = "1s", ...rest }) => {
           animationDuration={`${dur}s`}
           animationIterationCount="infinite"
           animationTimingFunction="linear"
-          r="12.5"
+          r="12.5px"
           _keyframes={{
             "0%, 100%": { fillOpacity: "1" },
             "50%": { fillOpacity: "0.2" },

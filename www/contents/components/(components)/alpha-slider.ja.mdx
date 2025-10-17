@@ -120,7 +120,7 @@ import { AlphaSlider } from "@workspaces/ui"
 
 ### ツールチップを表示する
 
-```tsx preview functional
+```tsx preview functional client
 const [value, setValue] = useState(0.5)
 
 return (
@@ -140,7 +140,7 @@ return (
 
 開始と終了のイベントをハンドルする場合は、`onChangeStart`や`onChangeEnd`を使用します。
 
-```tsx preview functional
+```tsx preview functional client
 const [value, onChange] = useState(0.5)
 const [startValue, onChangeStart] = useState(0.5)
 const [endValue, onChangeEnd] = useState(0.5)
@@ -164,16 +164,16 @@ return (
 
 ### 制御する
 
-```tsx preview functional
+```tsx preview functional client
 const [value, setValue] = useState(0.5)
 
-return (
-  <VStack>
-    <AlphaSlider.Root color="#775999" value={value} onChange={setValue} />
-  </VStack>
-)
+return <AlphaSlider.Root color="#775999" value={value} onChange={setValue} />
 ```
 
 ## Props
 
 <PropsTable name="alpha-slider" />
+
+## アクセシビリティ
+
+現在、v2の移行に伴い、このセクションは更新中です。

@@ -181,6 +181,12 @@
               "pathname": "/docs/components/center"
             },
             {
+              "title": "Chat",
+              "segment": "chat",
+              "pathname": "/docs/components/chat",
+              "status": "planned"
+            },
+            {
               "title": "Checkbox",
               "segment": "checkbox",
               "pathname": "/docs/components/checkbox"
@@ -292,6 +298,12 @@
               "pathname": "/docs/components/float"
             },
             {
+              "title": "Form",
+              "segment": "form",
+              "pathname": "/docs/components/form",
+              "status": "planned"
+            },
+            {
               "title": "Grid",
               "segment": "grid",
               "pathname": "/docs/components/grid"
@@ -385,6 +397,12 @@
               "title": "Modal",
               "segment": "modal",
               "pathname": "/docs/components/modal"
+            },
+            {
+              "title": "NativePopover",
+              "segment": "native-popover",
+              "pathname": "/docs/components/native-popover",
+              "status": "planned"
             },
             {
               "title": "NativeSelect",
@@ -572,6 +590,12 @@
               "title": "TimePicker",
               "segment": "time-picker",
               "pathname": "/docs/components/time-picker",
+              "status": "planned"
+            },
+            {
+              "title": "Tip",
+              "segment": "tip",
+              "pathname": "/docs/components/tip",
               "status": "planned"
             },
             {

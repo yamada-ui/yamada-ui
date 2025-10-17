@@ -64,6 +64,11 @@ const data = {
     "Loading...": "Loading...",
     "{value} percent": "{value} percent",
   },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Saturation and brightness thumb",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Saturation {saturation}%, Brightness {brightness}%",
+  },
   select: {
     "Clear value": "Clear value",
   },

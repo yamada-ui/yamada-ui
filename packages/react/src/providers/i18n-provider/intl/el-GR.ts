@@ -66,6 +66,11 @@ const data: IntlData = {
     "Loading...": "Φόρτωση...",
     "{value} percent": "{value} τοις εκατό",
   },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Προσαρμογέας κορεσμού και φωτεινότητας",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Κορεσμός {saturation}%, Φωτεινότητα {brightness}%",
+  },
   select: {
     "Clear value": "Καθαρισμός τιμής",
   },

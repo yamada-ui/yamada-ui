@@ -71,7 +71,7 @@ const IGNORED_FILE_NAME = [
   "^(?!.*\\.(ts|tsx)$).*",
 ]
 const IGNORED_MODULES = ["react", "react-dom"]
-const REGISTRY_SCHEMA_PATH = "https://v2.yamada-ui.com/registry/v2/schema.json"
+const REGISTRY_SCHEMA_PATH = "https://yamada-ui.com/registry/v2/schema.json"
 
 async function getExternals(): Promise<ExternalsMap> {
   const data = await readFile(PACKAGE_JSON_PATH, "utf-8")

@@ -292,6 +292,12 @@
               "pathname": "/docs/components/float"
             },
             {
+              "title": "Form",
+              "segment": "form",
+              "pathname": "/docs/components/form",
+              "status": "planned"
+            },
+            {
               "title": "Grid",
               "segment": "grid",
               "pathname": "/docs/components/grid"
@@ -387,6 +393,12 @@
               "pathname": "/docs/components/modal"
             },
             {
+              "title": "NativePopover",
+              "segment": "native-popover",
+              "pathname": "/docs/components/native-popover",
+              "status": "planned"
+            },
+            {
               "title": "NativeSelect",
               "segment": "native-select",
               "pathname": "/docs/components/native-select"
@@ -436,6 +448,12 @@
               "title": "Progress",
               "segment": "progress",
               "pathname": "/docs/components/progress"
+            },
+            {
+              "title": "QrCode",
+              "segment": "qr-code",
+              "pathname": "/docs/components/qr-code",
+              "status": "planned"
             },
             {
               "title": "Radio",
@@ -572,6 +590,12 @@
               "title": "TimePicker",
               "segment": "time-picker",
               "pathname": "/docs/components/time-picker",
+              "status": "planned"
+            },
+            {
+              "title": "Tip",
+              "segment": "tip",
+              "pathname": "/docs/components/tip",
               "status": "planned"
             },
             {

@@ -76,7 +76,7 @@ export { AlphaSliderPropsContext, useAlphaSliderPropsContext }
  *
  * @see https://yamada-ui.com/docs/components/alpha-slider
  */
-export const AlphaSliderRoot = withProvider<"div", AlphaSliderRootProps>(
+export const AlphaSliderRoot = withProvider<"input", AlphaSliderRootProps>(
   ({
     children,
     color,

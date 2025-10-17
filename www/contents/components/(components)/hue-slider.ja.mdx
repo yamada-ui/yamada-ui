@@ -105,7 +105,7 @@ import { HueSlider } from "@workspaces/ui"
 
 ### ツールチップを表示する
 
-```tsx preview functional
+```tsx preview functional client
 const [value, setValue] = useState(50)
 
 return (
@@ -125,7 +125,7 @@ return (
 
 開始と終了のイベントをハンドルする場合は、`onChangeStart`や`onChangeEnd`を使用します。
 
-```tsx preview functional
+```tsx preview functional client
 const [value, onChange] = useState(180)
 const [startValue, onChangeStart] = useState(180)
 const [endValue, onChangeEnd] = useState(180)
@@ -148,14 +148,10 @@ return (
 
 ### 制御する
 
-```tsx preview functional
+```tsx preview functional client
 const [value, setValue] = useState(180)
 
-return (
-  <VStack>
-    <HueSlider.Root value={value} onChange={setValue} />
-  </VStack>
-)
+return <HueSlider.Root value={value} onChange={setValue} />
 ```
 
 ## Props

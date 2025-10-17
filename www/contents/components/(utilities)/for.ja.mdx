@@ -253,41 +253,6 @@ return (
 )
 ```
 
-### 繰り返し
-
-繰り返しの場合は、`times`に繰り返し回数を設定します。
-
-```tsx preview functional
-const items = useMemo(
-  () => [
-    { name: "竈門炭治郎", breathing: ["水の呼吸", "日の呼吸"] },
-    { name: "我妻善逸", breathing: ["雷の呼吸"] },
-    { name: "嘴平伊之助", breathing: ["獣の呼吸"] },
-  ],
-  [],
-)
-
-return (
-  <VStack>
-    <For each={items} times={3}>
-      {({ name, breathing }, index) => (
-        <Card.Root key={index}>
-          <Card.Header>
-            <Heading size="md">{name}</Heading>
-          </Card.Header>
-
-          <Card.Body pt="xs">
-            <Text fontSize="sm" color="fg.muted">
-              {breathing.join(", ")}
-            </Text>
-          </Card.Body>
-        </Card.Root>
-      )}
-    </For>
-  </VStack>
-)
-```
-
 ## Props
 
 <PropsTable name="for" />

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import { isArray } from "../../utils"
+import { isArray, isNumber } from "../../utils"
 
 export interface ForProps<Y> {
   /**
@@ -28,6 +28,13 @@ export interface ForProps<Y> {
    */
   offset?: number
   /**
+   * The number of times to repeat the component.
+   * Values less than or equal to 1 will have no effect.
+   * The repetition is applied after all other transformations (filter, sort, reverse, limit, offset).
+   * This means the entire processed array will be repeated the specified number of times.
+   */
+  repeat?: number
+  /**
    * The boolean value to determine the order of the items in the array.
    * If `true`, the items will be reversed.
    * If `sortBy` is provided, inversion is applied to the sorted array.
@@ -40,10 +47,6 @@ export interface ForProps<Y> {
    * If `reverse` is `true`, the inversion is applied to the sorted array.
    */
   sort?: (a: Y, b: Y) => number
-  /**
-   * The number of times to repeat the component.
-   */
-  times?: number
 }
 
 /**
@@ -58,9 +61,9 @@ export const For = <Y,>({
   filter,
   limit,
   offset = 0,
+  repeat,
   reverse = false,
   sort,
-  times,
 }: ForProps<Y>): ReactNode => {
   if (!each || !isArray(each) || !each.length) return fallback || null
 
@@ -74,18 +77,20 @@ export const For = <Y,>({
 
   const rendered = sliced.map(children)
 
-  if (typeof times === "number" && times > 1) {
-    const unitLength = rendered.length
-    const totalLength = unitLength * times
-    const repeated = new Array<ReactNode>(totalLength)
-    for (let i = 0; i < times; i += 1) {
-      const baseIndex = i * unitLength
-      for (let j = 0; j < unitLength; j += 1) {
-        repeated[baseIndex + j] = rendered[j]
-      }
-    }
-    return repeated
+  if (!isNumber(repeat) || repeat <= 1) {
+    return rendered
   }
 
-  return rendered
+  const unitLength = rendered.length
+  const totalLength = unitLength * repeat
+  const repeated = new Array<ReactNode>(totalLength)
+
+  for (let i = 0; i < repeat; i += 1) {
+    const baseIndex = i * unitLength
+    for (let j = 0; j < unitLength; j += 1) {
+      repeated[baseIndex + j] = rendered[j]
+    }
+  }
+
+  return repeated
 }

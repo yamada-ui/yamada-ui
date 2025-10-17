@@ -5,4 +5,148 @@ storybook: components-saturationslider--basic
 source: components/saturation-slider
 ---
 
+```tsx preview
+<SaturationSlider.Root maxW="sm" />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { SaturationSlider } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { SaturationSlider } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { SaturationSlider } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<SaturationSlider.Root />
+```
+
+### Change Size
+
+```tsx preview
+<VStack>
+  <For each={["sm", "md", "lg"]}>
+    {(size, index) => (
+      <SaturationSlider.Root key={index} size={size} maxW="sm" />
+    )}
+  </For>
+</VStack>
+```
+
+### Set Default Value
+
+To set a default value, set a value to `defaultValue`.
+
+```tsx preview
+<SaturationSlider.Root defaultValue={[120, 0.33, 0.33]} maxW="sm" />
+```
+
+### Change Shape
+
+```tsx preview
+<VStack>
+  <For each={["circle", "rounded", "square"]}>
+    {(shape, index) => (
+      <SaturationSlider.Root
+        key={index}
+        defaultValue={[120, 0.33, 0.33]}
+        shape={shape}
+        maxW="sm"
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Set Step Value
+
+To set a step value, set a value to `step`.
+
+```tsx preview
+<SaturationSlider.Root step={0.1} maxW="sm" />
+```
+
+### Disable
+
+To disable, set `disabled` to `true`.
+
+```tsx preview
+<SaturationSlider.Root disabled maxW="sm" />
+```
+
+### Read-Only
+
+To make read-only, set `readOnly` to `true`.
+
+```tsx preview
+<SaturationSlider.Root readOnly maxW="sm" />
+```
+
+### Display Tooltip
+
+```tsx preview functional client
+const [value, setValue] = useState([120, 0.33, 0.33])
+
+return (
+  <SaturationSlider.Root value={value} onChange={setValue} maxW="sm">
+    <SaturationSlider.Track>
+      <Tooltip content={value}>
+        <SaturationSlider.Thumb />
+      </Tooltip>
+    </SaturationSlider.Track>
+  </SaturationSlider.Root>
+)
+```
+
+### Handle Start and End Events
+
+To handle start and end events, use `onChangeStart` or `onChangeEnd`.
+
+```tsx preview functional client
+const [value, onChange] = useState([120, 0.33, 0.33])
+const [startValue, onChangeStart] = useState([120, 0.33, 0.33])
+const [endValue, onChangeEnd] = useState([120, 0.33, 0.33])
+
+return (
+  <VStack>
+    <Text>
+      Value: {JSON.stringify(value)}, Start Value: {JSON.stringify(startValue)},
+      End Value: {JSON.stringify(endValue)}
+    </Text>
+
+    <SaturationSlider.Root
+      value={value}
+      onChange={onChange}
+      onChangeStart={onChangeStart}
+      onChangeEnd={onChangeEnd}
+      maxW="sm"
+    />
+  </VStack>
+)
+```
+
+### Control
+
+```tsx preview functional client
+const [value, setValue] = useState([120, 0.33, 0.33])
+
+return <SaturationSlider.Root value={value} onChange={setValue} maxW="sm" />
+```
+
+## Props
+
+<PropsTable name="saturation-slider" />
+
+## Accessibility
+
+Currently, this section is being updated due to the migration of v2.

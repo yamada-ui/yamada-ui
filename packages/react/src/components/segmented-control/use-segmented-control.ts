@@ -230,6 +230,7 @@ export const useSegmentedControlItem = <Y extends string = string>({
   )
 
   return {
+    checked,
     getInputProps,
     getLabelProps,
   }

@@ -1,16 +1,664 @@
 ---
 title: マイグレーション
-description: v1.xからv2.xに移行する方法。
+description: v1.xからv2.xの新しい機能と改善点。
 ---
 
-## やり方
+## 新しい機能
+
+### セットアップ
+
+[CLI](/docs/get-started/cli)を使用すると、プロジェクトでYamada UIのセットアップを簡単に行うことができるようになりました。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli init
+```
+
+```bash [npm]
+npm yamada-cli init
+```
+
+```bash [yarn]
+yarn yamada-cli init
+```
+
+```bash [bun]
+bun yamada-cli init
+```
+
+:::
+
+`init`コマンドを実行すると、次のプロンプトが表示されます。
+
+```txt
+Would you like to use monorepo? (recommended) … No / Yes
+What is the path to the monorepo? … ./workspaces/ui
+What is the package name? … @workspaces/ui
+Would you like your code inside a `src/` directory? … No / Yes
+Would you like to use Prettier? … No / Yes
+Would you like to use ESLint? … No / Yes
+```
+
+### ダウンロード
+
+v2.x以降からは、2つの方法でコンポーネントとフックを提供しています。1つは、[CLI](/docs/components/cli)からコンポーネントとフックをローカルにダウンロードする新しい方法。もう1つは、モジュールからコンポーネントとフックをインポートする従来通りの方法です。
+
+ソースコードをダウンロードすることにより、コンポーネントやフックの初期値やロジックをカスタマイズすることができ、ロジックなどで不具合があった場合は、直接修正することができます。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli add button
+```
+
+```bash [npm]
+npm yamada-cli add button
+```
+
+```bash [yarn]
+yarn yamada-cli add button
+```
+
+```bash [bun]
+bun yamada-cli add button
+```
+
+:::
+
+:::note
+ソースコードをダウンロードしてカスタマイズしても、[CLI](/docs/components/cli)の[差分を確認する](/docs/components/cli#差分を確認する)や[コンポーネントを更新する](/docs/components/cli#コンポーネントを更新する)を行うことで、ソースコードを簡単に更新することができます。もし、あなたの修正と競合しても[Git](https://git-scm.com)の[競合の提示方法](https://git-scm.com/docs/git-merge#_how_conflicts_are_presented)と同じように表示され、簡単に解決することができます。
+:::
+
+### 名前空間インポート
+
+名前空間を使用してコンポーネントをインポートすることができるようになりました。
+
+```tsx
+<Accordion.Root>
+  <Accordion.Item>
+    <Accordion.Button />
+    <Accordion.Panel />
+  </Accordion.Item>
+</Accordion.Root>
+```
+
+:::note
+従来のコンポーネントを個別にインポートすることは、引き続き可能です。但し、名前空間の兼ね合いで名前が変更されたコンポーネントがあります。例えば、`Accordion`の場合は、`AccordionRoot`に変更されています。
+:::
+
+### createComponent
+
+[createComponent](/docs/components/create-component)を使用すると、バリアントなど条件付きスタイルをサポートするコンポーネントを作成することができます。
+
+```tsx
+const componentStyle = defineComponentStyle({
+  base: {
+    /* base style */
+  },
+  variants: {
+    /* variant style */
+  },
+  sizes: {
+    /* size style */
+  },
+  props: {
+    /* props style */
+  },
+  compounds: {
+    /* compound style */
+  },
+  defaultProps: {
+    /* default props */
+  },
+})
+
+type ComponentStyle = typeof componentStyle
+
+export interface ComponentProps
+  extends HTMLStyledProps<"div">,
+    ThemeProps<ComponentStyle> {}
+
+const {
+  component,
+  ComponentContext,
+  PropsContext: ComponentPropsContext,
+  useComponentContext,
+  usePropsContext: useComponentPropsContext,
+  withContext,
+  useComponentProps,
+} = createComponent<ComponentProps, ComponentStyle>("component", componentStyle)
+
+export { ComponentPropsContext, useComponentPropsContext }
+```
+
+```tsx
+export const Component = withContext("div")()
+```
+
+### mergeProps
+
+`mergeProps`を使用すると、propsの消失を防ぎながらマージを簡単に行うことができます。従来は、提供されるpropsを配慮しながらコンポーネントを作成する必要がありました。`mergeProps`を使用すると、提供されるpropsを配慮することなく、コンポーネントの作成に集中することができます。
+
+**以前**
+
+```tsx
+export const Component: FC<ComponentProps> = ({
+  ref: forwardedRef,
+  className,
+  onClick: onClickProp,
+  ...rest
+}) => {
+  const ref = useRef<HTMLDivElement>(null)
+
+  const onClick = useCallback(() => {}, [])
+
+  return (
+    <Component
+      ref={mergeRefs(forwardedRef, ref)}
+      onClick={handlerAll(onClickProp, onClick)}
+      className={[className, "component"].join(" ")}
+      {...rest}
+    />
+  )
+}
+```
+
+**以後**
+
+```tsx
+export const Component: FC<ComponentProps> = (props) => {
+  const ref = useRef<HTMLDivElement>(null)
+
+  const onClick = useCallback(() => {}, [])
+
+  return <Component {...mergeProps(props, { ref, onClick })()} />
+}
+```
+
+### PropsContext
+
+各コンポーネントが提供している`PropsContext`を使用すると、子要素にあるコンポーネントのpropsを一括で設定することができます。
+
+```tsx client
+const value = useMemo<BadgeProps>(() => ({ variant: "outline" }), [])
+
+return (
+  <BadgePropsContext value={value}>
+    <Badge />
+    <Badge />
+    <Badge />
+  </BadgePropsContext>
+)
+```
+
+上記の例では、`BadgePropsContext`の子要素にある`Badge`は、すべて`variant`が`"outline"`になります。
+
+### ポリモーフィズム
+
+従来の`as`に加えて、`asChild`を追加しました。`as`は、コンポーネント自体の要素を変更するに対して、`asChild`は、コンポーネントの機能やスタイルを子要素に組み込むために使用します。
+
+**as**
+
+```tsx
+<Box as="button" />
+```
+
+**asChild**
+
+```tsx
+<Button asChild>
+  <CustomComponent />
+</Button>
+```
+
+### カスケードレイヤー
+
+CSSの[カスケードレイヤー](https://developer.mozilla.org/ja/docs/Web/CSS/@layer)を使用して、[テーマ](/docs/theming)と[Style Props](/docs/styling/style-props)に優先順位が設定されるようになりました。詳しくは、[カスケードレイヤー](/docs/styling/cascade-layers)をご覧ください。
+
+### フォーカスリング
+
+[Style Props](/docs/styling/style-props)に[フォーカスリング](/docs/styling/focus-ring)を追加しました。フォーカスリングは、フォーカスされている要素を識別するために使用されるスタイルです。詳しくは、[フォーカスリング](/docs/styling/focus-ring)をご覧ください。
+
+```tsx
+<Box focusRing="outline" />
+```
+
+```tsx
+<Box focusVisibleRing="outline" />
+```
+
+### インターポレーション
+
+[Style Props](/docs/styling/style-props)の値で簡単に[CSSカスタムプロパティ](/docs/styling/css-custom-properties)を参照することができるようになりました。詳しくは、[インターポレーション](/docs/styling/interpolation)をご覧ください。
+
+```tsx
+<Box {...{ "--custom-bg-color": "#1ba14c" }} bg="{custom-bg-color}" />
+```
+
+### CSSカスタムプロパティ
+
+[Style Props](/docs/styling/style-props)で簡単に[CSSカスタムプロパティ](https://developer.mozilla.org/ja/docs/Web/CSS/var)を設定できるようになりました。詳しくは、[CSSカスタムプロパティ](/docs/styling/css-custom-properties)をご覧ください。
+
+```tsx
+<Box css={{ "--bg": "#d4d4d4" }} {...{ "--fg": "black" }} />
+```
+
+また、[テーマ](/docs/theming)のトークンを参照することができます。
+
+```tsx
+<Box
+  css={{ "--bg": "colors.bg.contrast" }}
+  {...{ "--fg": "colors.fg.contrast" }}
+/>
+```
+
+### CSS値関数
+
+[Style Props](/docs/styling/style-props)の値で[CSS値関数](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_Values_and_Units/CSS_Value_Functions)を使用する場合に、各関数が対応する[テーマ](/docs/theming)のトークンを参照することができるようになりました。詳しくは、[CSS値関数](/docs/styling/css-value-functions)をご覧ください。
+
+```tsx
+<Box w="calc(lg / 2)" />
+```
+
+```tsx
+<Box bg="color-mix(red.500, blue.500)" />
+```
+
+### アットルール
+
+[Style Props](/docs/styling/style-props)に[アットルール](https://developer.mozilla.org/ja/docs/Web/CSS/At-rule)が追加されました。詳しくは、[アットルール](/docs/styling/at-rules)をご覧ください。
+
+```tsx
+<Box _media={[{ type: "print", css: { color: "success" } }]} />
+```
+
+[コンテナクエリ](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_containment/Container_queries)もサポートしています。
+
+```tsx
+<Box containerType="inline-size" resize="horizontal">
+  <Box
+    _container={[{ minW: "320px", maxW: "560px", css: { color: "success" } }]}
+  />
+</Box>
+```
+
+### 国際化
+
+アクセシビリティを向上させるため、すべてのコンポーネントで組み込まれている文字列から日付・数値のフォーマットまで、30以上の言語をサポートしました。詳しくは、[国際化](/docs/components/internationalization)をご覧ください。
+
+### アイコン
+
+新しいアイコンを追加しました。詳しくは、[アイコン](/icons)をご覧ください。
+
+### Style Props
+
+新しいCSSプロパティを追加しました。詳しくは、[Style Props](/docs/styling/style-props)をご覧ください。
+
+### テーマ
+
+- テーマのトークンに新しく[keyframes](/docs/theming/tokens/keyframes)・[aspectRatios](/docs/theming/tokens/aspect-ratios)・[easings](/docs/theming/tokens/easings)・[durations](/docs/theming/tokens/durations)を追加しました。
+- [カラースキーム](/docs/theming/tokens/color-schemes)に`"mono"`を追加しました。
+- [レイヤースタイル](/docs/theming/styles/layer-styles)に新しいトークンを追加しました。
+- [テキストスタイル](/docs/theming/styles/text-styles)に新しいトークンを追加しました。
+- [カラー](/docs/theming/tokens/colors)に新しいトークンを追加しました。
+- コンポーネントのスタイルオブジェクトで`className`を設定できるようになりました。
 
 ## 改善点
 
-## 追加した機能
+### styled
 
-## 削除した機能
+[ui](https://v1.yamada-ui.com/ja/styled-system/ui)から[styled](/docs/components/styled)に名前を変更しました。また、これまではコンポーネントのベーススタイルしか設定することができませんでしたが、これからは`variants`や`sizes`など条件に応じたスタイルも設定することができるようになりました。
 
-## Propsの変更点
+**以前**
 
-## コンポーネントの変更点
+```tsx
+const Button = styled("button", {
+  base: {
+    alignItems: "center",
+    appearance: "none",
+    cursor: "pointer",
+    display: "inline-flex",
+    fontWeight: "medium",
+    justifyContent: "center",
+    overflow: "hidden",
+    position: "relative",
+    rounded: "l2",
+    transitionDuration: "moderate",
+    transitionProperty: "common",
+    userSelect: "none",
+    verticalAlign: "middle",
+    whiteSpace: "nowrap",
+    _readOnly: { layerStyle: "readOnly" },
+    _disabled: { layerStyle: "disabled" },
+  },
+})
+```
+
+**以後**
+
+```tsx
+const Button = styled("button", {
+  base: {
+    alignItems: "center",
+    appearance: "none",
+    cursor: "pointer",
+    display: "inline-flex",
+    fontWeight: "medium",
+    justifyContent: "center",
+    overflow: "hidden",
+    position: "relative",
+    rounded: "l2",
+    transitionDuration: "moderate",
+    transitionProperty: "common",
+    userSelect: "none",
+    verticalAlign: "middle",
+    whiteSpace: "nowrap",
+    _readOnly: { layerStyle: "readOnly" },
+    _disabled: { layerStyle: "disabled" },
+  },
+  variants: {
+    outline: {
+      layerStyle: "outline",
+      _hover: { layerStyle: "outline.hover" },
+    },
+    solid: {
+      layerStyle: "solid",
+      _hover: { layerStyle: "solid.hover" },
+    },
+    subtle: {
+      layerStyle: "subtle",
+      _hover: { layerStyle: "subtle.hover" },
+    },
+  },
+})
+```
+
+### 条件付きスタイル
+
+条件付きスタイルの設定がより簡素化されました。従来の設定は、引き続き使用できます。
+
+**以前**
+
+```tsx
+<Box bg="bg.contrast" _hover={{ bg: "success" }} />
+```
+
+**以後**
+
+```tsx
+<Box bg={{ base: "bg.contrast", _hover: "success" }} />
+```
+
+### カラースキーム
+
+以前の[カラースキーム](/docs/styling/color-scheme)は、各コンポーネントのpropsとして設定されていました。`colorScheme`を[Style Props](/docs/styling/style-props)に統合させたことにより、コンポーネント以外でも使用できるようになりました。
+
+```tsx
+<Box colorScheme="blue" bg="colorScheme.solid" color="colorScheme.contrast" />
+```
+
+また、`colorScheme`は[CSSカスタムプロパティ](/docs/styling/css-custom-properties)を使用してコンテキストを生成するため、配下の要素にも適用されるようになりました。
+
+```tsx
+<Box colorScheme="blue">
+  <Box bg="colorScheme.solid" color="colorScheme.contrast" />
+  <Box colorScheme="green" bg="colorScheme.subtle" color="colorScheme.fg" />
+</Box>
+```
+
+### アニメーション
+
+以前の[アニメーション](/docs/styling/animation)は、[useAnimation](/docs/hooks/use-animation)フックを使用していました。これからは、[Style Props](/docs/styling/style-props)から直接設定することができるようになりました。
+
+**以前**
+
+```tsx
+const animation = useAnimation({
+  _keyframes: {
+    from: { translate: "0 0" },
+    to: { translate: "100% 0" },
+  },
+  duration: "1s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
+})
+
+return <Box animation={animation} />
+```
+
+**以後**
+
+```tsx
+<Box
+  animationDirection="alternate"
+  animationDuration="1s"
+  animationIterationCount="infinite"
+  animationTimingFunction="linear"
+  _keyframes={{
+    from: { translate: "0 0" },
+    to: { translate: "100% 0" },
+  }}
+/>
+```
+
+### コンポーネント
+
+- 各コンポーネントのスタイルを調整しました。
+- 各コンポーネントのスロット名を調整しました。
+- 各コンポーネントのクラス名を調整しました。
+- 各コンポーネントのpropsですべての真偽型(`isOpen`・`isDisabled`など)のプロパティの命名規則を変更しました。例えば、`isOpen`は`open`に変更されています。
+
+:::note
+各コンポーネントの改善点は、各コンポーネントのドキュメントをご覧ください。
+:::
+
+### Style Props
+
+- `color-mix`がサポートされていないブラウザの場合、フォールバック値が適用されるようになりました。
+- `blur`や`brightness`など、`filter="auto"`を設定しなくても適用されるようになりました。
+- `backdropBlur`や`backdropBrightness`など、`backdropFilter="auto"`を設定しなくても適用されるようになりました。
+- `translateX`や`skewX`など、`transform="auto"`または`transform="auto-3d"`を設定しなくても適用されるようになりました。
+
+### テーマ
+
+- トークンに[CSS値関数](/docs/styling/css-value-functions)を使用することができるようになりました。
+- トークンに[インターポレーション](/docs/styling/interpolation)を使用することができるようになりました。
+- テーマを定義する場合は、`defineTheme`を使用してください。
+- 各トークンを定義する場合は、`defineTokens`を使用してください。
+- 各セマンティックトークンを定義する場合は、`defineSemanticTokens`を使用してください。
+- 各スタイルを定義する場合は、`defineStyles`を使用してください。
+- コンフィグを定義する場合は、`defineConfig`を使用してください。
+- コンポーネントのスロット名を調整・変更しました。
+- グローバルスタイルを調整しました。
+- リセットスタイルを調整しました。
+- 各トークンの値を調整しました。
+
+## 削除された機能
+
+### パッケージ
+
+[ツリーシェイキング](https://developer.mozilla.org/ja/docs/Glossary/Tree_shaking)の兼ね合いで各パッケージに分けるアプローチが不要になったこと、今後のYamada UIのプロジェクトで[React](https://ja.react.dev)以外の選択肢が広がる可能性があることから、これらのパッケージは非推奨になりました。
+
+- [@yamada-ui/input](https://www.npmjs.com/package/@yamada-ui/input)など、各コンポーネントのパッケージは非推奨になりました。代わりに、[@yamada-ui/react](https://www.npmjs.com/package/@yamada-ui/react)を使用してください。
+- [@yamada-ui/use-disclosure](https://www.npmjs.com/package/@yamada-ui/use-disclosure)など、各フックのパッケージは非推奨になりました。代わりに、[@yamada-ui/react](https://www.npmjs.com/package/@yamada-ui/react)を使用してください。
+- [@yamada-ui/providers](https://www.npmjs.com/package/@yamada-ui/providers)は非推奨になりました。代わりに、[@yamada-ui/react](https://www.npmjs.com/package/@yamada-ui/react)を使用してください。
+- [@yamada-ui/theme](https://www.npmjs.com/package/@yamada-ui/theme)は非推奨になりました。代わりに、[@yamada-ui/react](https://www.npmjs.com/package/@yamada-ui/react)を使用してください。
+- [@yamada-ui/theme-tools](https://www.npmjs.com/package/@yamada-ui/theme-tools)は非推奨になりました。代わりに、[@yamada-ui/react](https://www.npmjs.com/package/@yamada-ui/react)を使用してください。
+- [@yamada-ui/next](https://www.npmjs.com/package/@yamada-ui/next)は非推奨になりました。
+
+### Style Props
+
+- `fallback`を削除しました。
+- `keyframes`を削除しました。代わりに、`_keyframes`を使用してください。
+- `isTruncated`を削除しました。代わりに`truncated`を使用してください。
+
+### テーマ
+
+- `transitions`を削除しました。代わりに、[easings](/docs/theming/tokens/easings)と[durations](/docs/theming/tokens/durations)を使用してください。
+- `semantics`を削除しました。代わりに`semanticTokens`を使用してください。
+- `components`を削除しました。コンポーネントをスタイリングする場合は、[CLI](/docs/components/cli)を使用してください。
+- `extendBaseTheme`を削除しました。代わりに、`extendTheme`を使用してください。
+- `extendStyle`を削除しました。代わりに、`extendTheme`を使用してください。
+- `extendToken`を削除しました。代わりに、`extendTheme`を使用してください。
+- `extendComponent`を削除しました。
+- `extendComponentSize`を削除しました。
+- `extendComponentVariant`を削除しました。
+- `extendComponentDefaultProps`を削除しました。
+- `withDefaultSize`を削除しました。
+- `withDefaultVariant`を削除しました。
+- `withDefaultColorScheme`を削除しました。
+- `withDefaultProps`を削除しました。
+- `generate`を削除しました。
+
+### その他
+
+- `forwardRef`を削除しました。代わりに、[React](https://ja.react.dev)の[forwardRef](https://ja.react.dev/reference/react/forwardRef)を使用してください。
+- `memo`を削除しました。代わりに、[React](https://ja.react.dev)の[memo](https://ja.react.dev/reference/react/memo)を使用してください。
+- `ui`を削除しました。代わりに、[styled](/docs/components/styled)を使用してください。
+- `sx`と`__css`を削除しました。代わりに、`css`を使用してください。
+
+## 追加されたコンポーネント
+
+### Mark
+
+[Mark](/docs/components/mark)を追加しました。
+
+### ClientOnly
+
+[ClientOnly](/docs/components/client-only)を追加しました。
+
+### Format.Datetime
+
+[Format.Datetime](/docs/components/format#日付)を追加しました。
+
+### Show
+
+[Show](/docs/components/show)を追加しました。
+
+### Slot
+
+[Slot](/docs/components/slot)を追加しました。
+
+### Steps
+
+[Steps](/docs/components/steps)を追加しました。
+
+### Group
+
+[Group](/docs/components/group)を追加しました。
+
+### Timeline
+
+[Timeline](/docs/components/timeline)を追加しました。
+
+## 削除されたコンポーネント
+
+### FontAwesomeIcon
+
+[FontAwesomeIcon](https://v1.yamada-ui.com/ja/components/media-and-icons/fontawesome)を削除しました。
+
+### NativeImage
+
+[NativeImage](https://v1.yamada-ui.com/ja/components/media-and-icons/native-image)を削除しました。代わりに、[Image](/docs/components/image)を使用してください。
+
+### Dialog
+
+[Dialog](https://v1.yamada-ui.com/ja/components/overlay/dialog)を削除しました。代わりに、[Modal](/docs/components/modal#propsを使う)を使用してください。
+
+### ContextMenu
+
+[ContextMenu](https://v1.yamada-ui.com/ja/components/navigation/context-menu)を削除しました。代わりに、[Menu.ContextTrigger](/docs/components/menu#コンテキストメニューを使用する)を使用してください。
+
+### FormControl
+
+[FormControl](https://v1.yamada-ui.com/ja/components/forms/form-control)を削除しました。代わりに、[Field](/docs/components/field)を使用してください。
+
+### MultiAutocomplete
+
+[MultiAutocomplete](https://v1.yamada-ui.com/ja/components/forms/multi-autocomplete)を削除しました。代わりに、[Autocomplete](/docs/components/autocomplete#複数選択を有効する)の`multiple`を使用してください。
+
+### MultiDatePicker
+
+[MultiDatePicker](https://v1.yamada-ui.com/ja/components/forms/multi-date-picker)を削除しました。代わりに、[DatePicker](/docs/components/date-picker#複数選択を有効する)の`multiple`を使用してください。
+
+### RangeDatePicker
+
+[RangeDatePicker](https://v1.yamada-ui.com/ja/components/forms/range-date-picker)を削除しました。代わりに、[DatePicker](/docs/components/date-picker#期間選択を有効にする)の`range`を使用してください。
+
+### MultiSelect
+
+[MultiSelect](https://v1.yamada-ui.com/ja/components/forms/multi-select)を削除しました。代わりに、[Select](/docs/components/select#複数選択を有効する)の`multiple`を使用してください。
+
+### YearPicker
+
+[YearPicker](https://v1.yamada-ui.com/ja/components/forms/year-picker)を削除しました。
+
+### MonthPicker
+
+[MonthPicker](https://v1.yamada-ui.com/ja/components/forms/month-picker)を削除しました。
+
+### RangeSlider
+
+[RangeSlider](https://v1.yamada-ui.com/ja/components/forms/range-slider)を削除しました。代わりに、[Slider](/docs/components/slider#範囲選択を有効にする)の`value`または`defaultValue`に配列を設定してください。
+
+### Markdown
+
+[Markdown](https://v1.yamada-ui.com/ja/components/data-display/markdown)を削除しました。
+
+### Stepper
+
+[Stepper](https://v1.yamada-ui.com/ja/components/navigation/stepper)を削除しました。代わりに、[Steps](/docs/components/steps)を使用してください。
+
+### Divider
+
+[Divider](https://v1.yamada-ui.com/ja/components/layouts/divider)を削除しました。代わりに、[Separator](/docs/components/separator)を使用してください。
+
+### PagingTable
+
+[PagingTable](https://v1.yamada-ui.com/ja/components/data-display/paging-table)を削除しました。代わりに、[Table](/docs/components/table#ページネーションを有効にする)の`enablePagination`を使用してください。
+
+## 移行が完了していないコンポーネント
+
+v2.0では、以下のコンポーネントの移行が完了していません。これらの移行は、v2.0.xで行われる予定です。
+
+- [ColorPicker](/docs/components/color-picker)
+- [AreaChart](/docs/components/area-chart)
+- [BarChart](/docs/components/bar-chart)
+- [DonutChart](/docs/components/donut-chart)
+- [LineChart](/docs/components/line-chart)
+- [PieChart](/docs/components/pie-chart)
+- [RadarChart](/docs/components/radar-chart)
+- [RadialChart](/docs/components/radial-chart)
+
+## 追加されたフック
+
+### useCounter
+
+[useCounter](/docs/hooks/use-counter)を追加しました。
+
+### useDescendants
+
+[useDescendants](/docs/hooks/use-descendants)を追加しました。
+
+### useEyeDropper
+
+[useEyeDropper](/docs/hooks/use-eye-dropper)を追加しました。
+
+### useFocusOnShow
+
+[useFocusOnShow](/docs/hooks/use-focus-on-show)を追加しました。
+
+### useFormatDateTime
+
+[useFormatDateTime](/docs/hooks/use-format-date-time)を追加しました。
+
+### useOnline
+
+[useOnline](/docs/hooks/use-online)を追加しました。
+
+## 削除されたフック
+
+### useToken
+
+[useToken](https://v1.yamada-ui.com/ja/hooks/use-token)を削除しました。

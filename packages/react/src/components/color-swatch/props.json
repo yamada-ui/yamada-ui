@@ -73,13 +73,11 @@
     },
     "size": {
       "type": "\"2xl\" | \"2xs\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
-      "defaultValue": "hoge",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "\"circle\" | \"plain\" | \"square\"",
-      "defaultValue": "hoge",
       "description": "The variant of the component.",
       "required": false
     },

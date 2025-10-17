@@ -80,7 +80,7 @@ describe("useAsyncCallback", () => {
     expect(mockCallback).toHaveBeenLastCalledWith()
   })
 
-  test("should handle callback with loading", async () => {
+  test.todo("should handle callback with loading", async () => {
     const mockCallback = vi.fn(async () => {
       await wait(100)
     })

@@ -6,6 +6,14 @@ import { useTranslations } from "next-intl"
 import { NextLink } from "@/components"
 import { usePathname } from "@/i18n"
 
+export type Example =
+  | "authentication"
+  | "examples"
+  | "forms"
+  | "mail"
+  | "music"
+  | "playground"
+
 export interface ExampleMenuProps extends StackProps {}
 
 export function ExampleMenu({ ...rest }: ExampleMenuProps) {
@@ -23,7 +31,7 @@ export function ExampleMenu({ ...rest }: ExampleMenuProps) {
       whiteSpace="nowrap"
       {...rest}
     >
-      <For
+      <For<Example>
         each={[
           "examples",
           "mail",

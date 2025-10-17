@@ -43,6 +43,7 @@
     "storybook:serve": "npx http-server ./storybook-static",
     "storybook:build": "storybook build -c storybook",
     "test": "vitest",
+    "test:coverage": "vitest run --coverage",
     "test:dev": "vitest --watch --ui",
     "typecheck": "tsc --noEmit",
     "typetrace": "tsc --noEmit --generateTrace ./trace --incremental false",

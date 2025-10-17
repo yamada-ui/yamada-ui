@@ -3,6 +3,11 @@
     "title": "Yamada UI",
     "description": "美しく一貫性のある、アクセスしやすいコンポーネントと高度なスタイリングを実現するデザインシステムを提供し、あなたのアイデアを現実のものにします。"
   },
+  "common": {
+    "github": "{name}のGitHubプロフィール",
+    "discord": "Discordサーバー",
+    "x": "{name}のXプロフィール"
+  },
   "docs": {
     "overview": "概要",
     "latest": "最新",
@@ -17,7 +22,10 @@
       "components": "コンポーネント",
       "charts": "チャート",
       "animations": "アニメーション",
-      "utilities": "ユーティリティ"
+      "utilities": "ユーティリティ",
+      "react": "@yamada-ui/react",
+      "cli": "@yamada-ui/cli",
+      "utils": "@yamada-ui/utils"
     }
   },
   "home": {
@@ -30,7 +38,8 @@
     "title": "アプリケーションを構築する",
     "description": "美しくデザインされ、30以上の言語をサポートしたアプリケーションを構築できます。ユーザーごとのテーマの切り替えも可能で、ユーザビリティを向上させます。",
     "primaryAction": "はじめる",
-    "secondaryAction": "ドキュメント",
+    "secondaryAction": "コンポーネントを見る",
+    "source": "ソースコードを見る",
     "menu": {
       "examples": "サンプル",
       "mail": "メール",
@@ -68,10 +77,14 @@
       "pink": "ピンク"
     }
   },
-  "common": {
-    "github": "{name}のGitHubプロフィール",
-    "discord": "Discordサーバー",
-    "x": "{name}のXプロフィール"
+  "changelog": {
+    "title": "変更履歴",
+    "latest": "Yamada UIの最新バージョンの変更履歴をご覧ください。機能・バグ修正・改善点についてご確認ください。",
+    "version": "{name}のバージョン{version}の変更履歴をご覧ください。機能・バグ修正・改善点についてご確認ください。",
+    "major": "メジャー変更",
+    "minor": "マイナー変更",
+    "patch": "パッチ変更",
+    "releaseAt": "このバージョンは、{date}にリリースされました。"
   },
   "component": {
     "header": {

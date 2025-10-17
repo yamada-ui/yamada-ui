@@ -66,6 +66,11 @@ const data: IntlData = {
     "Loading...": "Betöltés...",
     "{value} percent": "{value} százalék",
   },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Telítettség és fényerő csúszka",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Telítettség {saturation}%, Fényerő {brightness}%",
+  },
   select: {
     "Clear value": "Érték törlése",
   },

@@ -66,6 +66,12 @@ const data: IntlData = {
     "Loading...": "Cargando...",
     "{value} percent": "{value} por ciento",
   },
+  saturationSlider: {
+    "Saturation and brightness thumb":
+      "Control deslizante de saturación y brillo",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Saturación {saturation}%, Brillo {brightness}%",
+  },
   select: {
     "Clear value": "Borrar valor",
   },

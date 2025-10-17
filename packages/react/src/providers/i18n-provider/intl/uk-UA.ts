@@ -66,6 +66,11 @@ const data: IntlData = {
     "Loading...": "Завантаження...",
     "{value} percent": "{value} відсотків",
   },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Регулятор насиченості та яскравості",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Насиченість {saturation}%, Яскравість {brightness}%",
+  },
   select: {
     "Clear value": "Очистити значення",
   },

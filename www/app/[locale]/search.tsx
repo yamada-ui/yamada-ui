@@ -95,8 +95,13 @@ export function Search() {
         </Text>
 
         <HStack gap="xs">
-          <Kbd size="sm" variant="surface" fontSize="sm">
-            {apple ? "⌘" : "Ctrl"}
+          <Kbd
+            size="sm"
+            variant="surface"
+            fontSize={!apple ? "xs" : "sm"}
+            letterSpacing="tight"
+          >
+            {!apple ? "Ctrl" : "⌘"}
           </Kbd>
           <Kbd size="sm" variant="surface">
             K

@@ -255,7 +255,7 @@ return (
 
 ### Repeat
 
-To repeat the component, set `times` to the number of times to repeat.
+To repeat the component, set `repeat` to the number of times to repeat.
 
 ```tsx preview functional
 const items = useMemo(
@@ -269,7 +269,7 @@ const items = useMemo(
 
 return (
   <VStack>
-    <For each={items} times={3}>
+    <For each={items} repeat={3}>
       {({ name, breathing }, index) => (
         <Card.Root key={index}>
           <Card.Header>

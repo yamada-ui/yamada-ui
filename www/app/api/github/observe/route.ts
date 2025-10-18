@@ -1,9 +1,11 @@
-import { verifySignature } from "../utils"
+import { getSignature, verifySignature } from "../utils"
 import { updateIssues } from "./update-issues"
 import { updatePullRequests } from "./update-pull-requests"
 
 export async function POST(req: Request) {
-  const valid = await verifySignature(req)
+  const body = await req.json()
+  const signature = getSignature(req)
+  const valid = verifySignature(signature, body)
 
   if (!valid) return new Response(null, { status: 400 })
 
@@ -12,7 +14,7 @@ export async function POST(req: Request) {
     owner = "yamada-ui",
     pull_request = true,
     repo = "yamada-ui",
-  } = await req.json()
+  } = body
 
   if (!repo) return new Response(null, { status: 400 })
 

@@ -7,9 +7,10 @@ import {
   retryOnRateLimit,
 } from "@yamada-ui/workspace/octokit"
 
-export async function opened(req: Request) {
-  const { pull_request, repository } =
-    (await req.json()) as WebhookEvent<"pull_request.opened">
+export async function opened({
+  pull_request,
+  repository,
+}: WebhookEvent<"pull_request.opened">) {
   const {
     maintainers,
     message,

@@ -54,6 +54,7 @@ export function Iframe({ children, ...rest }: IframeProps) {
     <styled.iframe
       ref={iframeRef}
       boxSize="full"
+      sandbox="allow-scripts"
       title="preview-iframe"
       {...rest}
     >

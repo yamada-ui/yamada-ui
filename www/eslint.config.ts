@@ -57,6 +57,9 @@ const languageConfig = createLanguageConfig(true, {
 })
 
 const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
+  {
+    ignores: ["public/**", ".next/**", ".velite/**", "data/**", "**/*.d.ts"],
+  },
   languageConfig,
   ...sharedConfigArray,
   ...restrictedImportsConfigArray,
@@ -66,6 +69,10 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   jsxA11yConfig,
   reactConfig,
   reactHooksConfig,
+  {
+    extends: [tseslint.configs.disableTypeChecked],
+    files: ["**/*.mts"],
+  },
 )
 
 export default config

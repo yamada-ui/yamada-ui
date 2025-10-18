@@ -43,3 +43,7 @@ next-env.d.ts
 # velite
 .velite
 public/static
+
+# playground
+/public/vendor
+/.temp-wrappers

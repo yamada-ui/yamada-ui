@@ -61,6 +61,47 @@
     "reset": "Clear your search and try again",
     "openPreview": "Open {title} preview"
   },
+  "playground": {
+    "title": "Try Code in Real-time",
+    "description": "An interactive playground where you can try Yamada UI components in real-time. You can also copy the code and paste it into your projects.",
+    "primaryAction": "Open Playground",
+    "secondaryAction": "Documentation",
+    "share": "Share",
+    "copyURL": "Copy URL",
+    "copied": "Copied",
+    "urlTooLong": "URL is too long",
+    "format": "Format",
+    "formatted": "Code formatted successfully",
+    "swap": "Swap editor and preview",
+    "reset": {
+      "tooltip": "Reset",
+      "success": "Code reset successfully",
+      "confirmation": {
+        "title": "Reset Code",
+        "message": "Are you sure you want to reset the code to the default example? This action cannot be undone.",
+        "confirm": "Reset",
+        "cancel": "Cancel"
+      }
+    },
+    "screenshot": {
+      "tooltip": "Take Screenshot",
+      "code": "Code",
+      "preview": "Preview",
+      "both": "Both",
+      "success": "Screenshot copied to clipboard",
+      "error": "Failed to take screenshot"
+    },
+    "layout": {
+      "mobile": "Mobile View",
+      "tablet": "Tablet View",
+      "desktop": "Desktop View",
+      "responsive": "Responsive",
+      "auto": "Auto",
+      "portrait": "Switch to Portrait",
+      "landscape": "Switch to Landscape",
+      "toggleOrientation": "Toggle Orientation"
+    }
+  },
   "themes": {
     "title": "Your Own Themes",
     "description": "Try out beautiful and consistent themes. Copy and paste them into your projects. New theme editor coming soon.",

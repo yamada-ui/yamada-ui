@@ -105,7 +105,7 @@ To make read-only, set `readOnly` to `true`.
 
 ### Display Tooltip
 
-```tsx preview functional
+```tsx preview functional client
 const [value, setValue] = useState(50)
 
 return (
@@ -125,7 +125,7 @@ return (
 
 To handle start and end events, use `onChangeStart` or `onChangeEnd`.
 
-```tsx preview functional
+```tsx preview functional client
 const [value, onChange] = useState(180)
 const [startValue, onChangeStart] = useState(180)
 const [endValue, onChangeEnd] = useState(180)
@@ -148,14 +148,10 @@ return (
 
 ### Control
 
-```tsx preview functional
+```tsx preview functional client
 const [value, setValue] = useState(180)
 
-return (
-  <VStack>
-    <HueSlider.Root value={value} onChange={setValue} />
-  </VStack>
-)
+return <HueSlider.Root value={value} onChange={setValue} />
 ```
 
 ## Props

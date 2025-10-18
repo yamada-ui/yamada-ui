@@ -66,6 +66,11 @@ const data: IntlData = {
     "Loading...": "جار التحميل...",
     "{value} percent": "{value} بالمئة",
   },
+  saturationSlider: {
+    "Saturation and brightness thumb": "مزلاج التشبع والسطوع",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "تشبع {saturation}%, سطوع {brightness}%",
+  },
   select: {
     "Clear value": "مسح القيمة",
   },

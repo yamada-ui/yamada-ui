@@ -66,6 +66,11 @@ const data: IntlData = {
     "Loading...": "Načítání...",
     "{value} percent": "{value} procent",
   },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Posuvník saturace a jasu",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Saturace {saturation}%, Jas {brightness}%",
+  },
   select: {
     "Clear value": "Vymazat hodnotu",
   },

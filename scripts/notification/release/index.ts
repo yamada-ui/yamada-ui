@@ -13,7 +13,7 @@ async function main() {
 
   const content = [
     `A new version of Yamada UI has been released😎`,
-    `Please check the [Changelog](https://v2.yamada-ui.com/docs/changelog)`,
+    `Please check the [Changelog](https://yamada-ui.com/docs/changelog)`,
   ].join("\n\n")
   await sendDiscord(url, content)
 

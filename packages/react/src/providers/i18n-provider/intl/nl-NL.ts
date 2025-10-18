@@ -66,6 +66,12 @@ const data: IntlData = {
     "Loading...": "Laden...",
     "{value} percent": "{value} procent",
   },
+  saturationSlider: {
+    "Saturation and brightness thumb":
+      "Verzadiging en helderheid schuifregelaar",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Verzadiging {saturation}%, Helderheid {brightness}%",
+  },
   select: {
     "Clear value": "Waarde wissen",
   },

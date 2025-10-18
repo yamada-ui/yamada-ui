@@ -292,6 +292,12 @@
               "pathname": "/docs/components/float"
             },
             {
+              "title": "Form",
+              "segment": "form",
+              "pathname": "/docs/components/form",
+              "status": "planned"
+            },
+            {
               "title": "Grid",
               "segment": "grid",
               "pathname": "/docs/components/grid"
@@ -387,6 +393,12 @@
               "pathname": "/docs/components/modal"
             },
             {
+              "title": "NativePopover",
+              "segment": "native-popover",
+              "pathname": "/docs/components/native-popover",
+              "status": "planned"
+            },
+            {
               "title": "NativeSelect",
               "segment": "native-select",
               "pathname": "/docs/components/native-select"
@@ -436,6 +448,12 @@
               "title": "Progress",
               "segment": "progress",
               "pathname": "/docs/components/progress"
+            },
+            {
+              "title": "QrCode",
+              "segment": "qr-code",
+              "pathname": "/docs/components/qr-code",
+              "status": "planned"
             },
             {
               "title": "Radio",
@@ -572,6 +590,12 @@
               "title": "TimePicker",
               "segment": "time-picker",
               "pathname": "/docs/components/time-picker",
+              "status": "planned"
+            },
+            {
+              "title": "Tip",
+              "segment": "tip",
+              "pathname": "/docs/components/tip",
               "status": "planned"
             },
             {
@@ -1270,6 +1294,11 @@
           "segment": "react",
           "items": [
             {
+              "title": "v2.0.1",
+              "segment": "2-0-1",
+              "pathname": "docs/changelog/react/2-0-1"
+            },
+            {
               "title": "v2.0.0",
               "segment": "2-0-0",
               "pathname": "/docs/changelog/react/2-0-0"
@@ -1281,6 +1310,11 @@
           "segment": "cli",
           "items": [
             {
+              "title": "v2.0.1",
+              "segment": "2-0-1",
+              "pathname": "docs/changelog/cli/2-0-1"
+            },
+            {
               "title": "v2.0.0",
               "segment": "2-0-0",
               "pathname": "/docs/changelog/cli/2-0-0"
@@ -1291,6 +1325,11 @@
           "title": "@yamada-ui/utils",
           "segment": "utils",
           "items": [
+            {
+              "title": "v2.0.1",
+              "segment": "2-0-1",
+              "pathname": "docs/changelog/utils/2-0-1"
+            },
             {
               "title": "v2.0.0",
               "segment": "2-0-0",

@@ -227,7 +227,8 @@ function main() {
               // eslint-disable-next-line perfectionist/sort-objects
               segment,
               // eslint-disable-next-line perfectionist/sort-objects
-              pathname: path.join("docs", "changelog", item.segment, segment),
+              pathname:
+                "/" + path.join("docs", "changelog", item.segment, segment),
             })
 
             item.items.sort((a, b) => b.segment.localeCompare(a.segment))

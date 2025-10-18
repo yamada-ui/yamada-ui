@@ -14,6 +14,7 @@ import {
   IconButton,
   Input,
   InputGroup,
+  isApple,
   Kbd,
   mergeRefs,
   Modal,
@@ -53,6 +54,7 @@ export function Search() {
   const { open, onClose, onOpen } = useDisclosure()
   const t = useTranslations("component.search")
   const pathname = usePathname()
+  const apple = isApple()
 
   useUpdateEffect(() => {
     if (open) onClose()
@@ -93,8 +95,13 @@ export function Search() {
         </Text>
 
         <HStack gap="xs">
-          <Kbd size="sm" variant="surface" fontSize="sm">
-            ⌘
+          <Kbd
+            size="sm"
+            variant="surface"
+            fontSize={!apple ? "xs" : "sm"}
+            letterSpacing="tight"
+          >
+            {!apple ? "Ctrl" : "⌘"}
           </Kbd>
           <Kbd size="sm" variant="surface">
             K

@@ -8,9 +8,11 @@ import {
   retryOnRateLimitWithPaging,
 } from "@yamada-ui/workspace/octokit"
 
-export async function reviewRequestRemoved(req: Request) {
-  const { pull_request, repository, requested_reviewer } =
-    (await req.json()) as WebhookEvent<"pull_request.review_request_removed">
+export async function reviewRequestRemoved({
+  pull_request,
+  repository,
+  requested_reviewer,
+}: WebhookEvent<"pull_request.review_request_removed">) {
   const {
     maintainers,
     message,

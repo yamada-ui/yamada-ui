@@ -1,10 +1,10 @@
 import type { WebhookEvent } from "@yamada-ui/workspace/octokit"
 import { octokit, retryOnRateLimit } from "@yamada-ui/workspace/octokit"
 
-export async function dismissed(req: Request) {
-  const { pull_request, repository } =
-    (await req.json()) as WebhookEvent<"pull_request_review.dismissed">
-
+export async function dismissed({
+  pull_request,
+  repository,
+}: WebhookEvent<"pull_request_review.dismissed">) {
   const { data: reviewers } = await retryOnRateLimit(async () =>
     octokit.pulls.listReviews({
       owner: "yamada-ui",

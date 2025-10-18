@@ -11,7 +11,7 @@ export async function submitted({
   repository,
   review,
 }: WebhookEvent<"pull_request_review.submitted">) {
-  if (!review.user || review.state !== "approved") return
+  if (!review.user || review.state !== "APPROVED") return
 
   const { excludeReviewers } = await getContent<Dict>({
     path: "pull-request.json",

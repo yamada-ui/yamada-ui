@@ -6,10 +6,11 @@ import {
   retryOnRateLimit,
 } from "@yamada-ui/workspace/octokit"
 
-export async function submitted(req: Request) {
-  const { pull_request, repository, review } =
-    (await req.json()) as WebhookEvent<"pull_request_review.submitted">
-
+export async function submitted({
+  pull_request,
+  repository,
+  review,
+}: WebhookEvent<"pull_request_review.submitted">) {
   if (!review.user || review.state !== "approved") return
 
   const { excludeReviewers } = await getContent<Dict>({

@@ -6,8 +6,6 @@ import { join } from "path"
 import { visit } from "unist-util-visit"
 import { extractSlugsFromContent } from "../slug-sync"
 
-const EXCLUDED_DIRECTIVES = ["card-group"]
-
 export function rehypeSlugSync(): ReturnType<Plugin<[], Root>> {
   return function (tree, file) {
     const filePath = file.path
@@ -88,13 +86,7 @@ function getEnglishHeadingSlugs(contentPath: string): string[] {
     const fileContent = readFileSync(filePath, "utf-8")
     const { content } = matter(fileContent)
 
-    const pattern = new RegExp(
-      `::::(${EXCLUDED_DIRECTIVES.join("|")})[\\s\\S]*?::::`,
-      "gm",
-    )
-    const cleanContent = content.replace(pattern, "")
-
-    return extractSlugsFromContent(cleanContent)
+    return extractSlugsFromContent(content)
   } catch (error) {
     console.warn(
       `Failed to extract heading slugs from English content for: ${contentPath}`,

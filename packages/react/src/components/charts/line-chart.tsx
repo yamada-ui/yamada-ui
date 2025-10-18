@@ -3,6 +3,7 @@
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { Merge } from "../../utils"
 import type { GridProps } from "./grid"
+import type { LegendProps } from "./legend"
 import type { LineProps } from "./line"
 import type { LineChartStyle } from "./line-chart.style"
 import type { ReferenceLineProps } from "./reference-line"
@@ -14,7 +15,7 @@ import { LineChart, ResponsiveContainer } from "recharts"
 import { createComponent, styled } from "../../core"
 import { isEmpty } from "../../utils"
 import { Grid, GridComponentContext } from "./grid"
-import { Legend } from "./legend"
+import { Legend, LegendComponentContext } from "./legend"
 import { LineComponentContext } from "./line"
 import { lineChartStyle } from "./line-chart.style"
 import { ReferenceLineComponentContext } from "./reference-line"
@@ -24,8 +25,8 @@ import { useSplitChildren } from "./utils"
 import { XAxis, XAxisComponentContext } from "./x-axis"
 import { YAxis, YAxisComponentContext } from "./y-axis"
 
-//TODO: legend
 //TODO: tooltip color swatch
+//TODO: default tooltip and legend
 //TODO: dots default style and nested element
 //TODO: axis label
 
@@ -66,6 +67,10 @@ export interface LineChartRootProps
    * Props passed down to 'Grid' component.
    */
   gridProps?: GridProps
+  /**
+   * Props passed down to 'Legend' component.
+   */
+  legendProps?: LegendProps
   /**
    * Props passed down to 'Line' component.
    */
@@ -108,6 +113,7 @@ export const LineChartRoot = withContext<"div", LineChartRootProps>(
     withXAxis = true,
     withYAxis = true,
     gridProps = {},
+    legendProps = {},
     lineProps = {},
     referenceLineProps = {},
     tooltipProps = {},
@@ -132,57 +138,59 @@ export const LineChartRoot = withContext<"div", LineChartRootProps>(
     ] = useSplitChildren(children, Grid, XAxis, YAxis, Tooltip, Legend)
 
     return (
-      <TooltipComponentContext value={tooltipProps}>
-        <ReferenceLineComponentContext value={referenceLineProps}>
-          <LineComponentContext value={lineProps}>
-            <YAxisComponentContext value={{ layout, ...yAxisProps }}>
-              <XAxisComponentContext value={{ layout, ...xAxisProps }}>
-                <GridComponentContext value={gridProps}>
-                  <styled.div {...getContainerProps()}>
-                    <ResponsiveContainer {...getResponsiveContainerProps()}>
-                      <LineChart {...getLineChartProps()}>
-                        {isEmpty(customGrid) ? (
-                          withGrid ? (
-                            <Grid />
-                          ) : null
-                        ) : (
-                          customGrid
-                        )}
-                        {isEmpty(customXAxis) ? (
-                          <XAxis hide={!withXAxis} />
-                        ) : (
-                          customXAxis
-                        )}
-                        {isEmpty(customYAxis) ? (
-                          <YAxis hide={!withYAxis} />
-                        ) : (
-                          customYAxis
-                        )}
-                        {isEmpty(customTooltip) ? (
-                          withTooltip ? (
-                            <Tooltip />
-                          ) : null
-                        ) : (
-                          customTooltip
-                        )}
-                        {isEmpty(customLegend) ? (
-                          withLegend ? (
-                            <Legend />
-                          ) : null
-                        ) : (
-                          customLegend
-                        )}
+      <LegendComponentContext value={legendProps}>
+        <TooltipComponentContext value={tooltipProps}>
+          <ReferenceLineComponentContext value={referenceLineProps}>
+            <LineComponentContext value={lineProps}>
+              <YAxisComponentContext value={{ layout, ...yAxisProps }}>
+                <XAxisComponentContext value={{ layout, ...xAxisProps }}>
+                  <GridComponentContext value={gridProps}>
+                    <styled.div {...getContainerProps()}>
+                      <ResponsiveContainer {...getResponsiveContainerProps()}>
+                        <LineChart {...getLineChartProps()}>
+                          {isEmpty(customGrid) ? (
+                            withGrid ? (
+                              <Grid />
+                            ) : null
+                          ) : (
+                            customGrid
+                          )}
+                          {isEmpty(customXAxis) ? (
+                            <XAxis hide={!withXAxis} />
+                          ) : (
+                            customXAxis
+                          )}
+                          {isEmpty(customYAxis) ? (
+                            <YAxis hide={!withYAxis} />
+                          ) : (
+                            customYAxis
+                          )}
+                          {isEmpty(customTooltip) ? (
+                            withTooltip ? (
+                              <Tooltip />
+                            ) : null
+                          ) : (
+                            customTooltip
+                          )}
+                          {isEmpty(customLegend) ? (
+                            withLegend ? (
+                              <Legend />
+                            ) : null
+                          ) : (
+                            customLegend
+                          )}
 
-                        {omittedChildren}
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </styled.div>
-                </GridComponentContext>
-              </XAxisComponentContext>
-            </YAxisComponentContext>
-          </LineComponentContext>
-        </ReferenceLineComponentContext>
-      </TooltipComponentContext>
+                          {omittedChildren}
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </styled.div>
+                  </GridComponentContext>
+                </XAxisComponentContext>
+              </YAxisComponentContext>
+            </LineComponentContext>
+          </ReferenceLineComponentContext>
+        </TooltipComponentContext>
+      </LegendComponentContext>
     )
   },
 )()

@@ -14,6 +14,7 @@ import {
   remarkCodeGroup,
   remarkSteps,
 } from "./utils/remark-plugins"
+import { replacePropsTable } from "./utils/replace-props-table"
 import { getPathname } from "./utils/route"
 
 function getPath(value: string) {
@@ -48,6 +49,9 @@ const docs = defineCollection({
       style: s.string().optional(),
       code: s.mdx(),
       description: s.string(),
+      llm: s.custom().transform((_data, { meta }) => {
+        return replacePropsTable(meta.content as string)
+      }),
       metadata: s.metadata(),
       release_date: s.string().optional(),
       release_url: s.string().optional(),

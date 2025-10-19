@@ -1,6 +1,7 @@
 export * from "./native-popover.style"
 export * as NativePopover from "./namespace"
 export {
+  NativePopoverAnchor,
   NativePopoverBody,
   NativePopoverContent,
   NativePopoverFooter,
@@ -11,6 +12,7 @@ export {
   useNativePopoverPropsContext,
 } from "./native-popover"
 export type {
+  NativePopoverAnchorProps,
   NativePopoverBodyProps,
   NativePopoverContentProps,
   NativePopoverFooterProps,

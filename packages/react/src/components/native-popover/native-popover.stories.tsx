@@ -1,8 +1,12 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "#storybook"
 import { NativePopover } from "."
+import { toTitleCase } from "../../utils"
 import { Box } from "../box"
 import { Button } from "../button"
+import { Center } from "../center"
+import { For } from "../for"
+import { HStack } from "../stack"
 import { Text } from "../text"
 
 type Story = StoryFn<typeof NativePopover.Root>
@@ -68,6 +72,67 @@ export const Footer: Story = () => {
         <NativePopover.Footer>第280話</NativePopover.Footer>
       </NativePopover.Content>
     </NativePopover.Root>
+  )
+}
+
+export const Anchor: Story = () => {
+  return (
+    <NativePopover.Root>
+      <HStack>
+        <NativePopover.Anchor>
+          <Center borderWidth="1px" h="10" p="3" rounded="l2">
+            Display Popover Here
+          </Center>
+        </NativePopover.Anchor>
+
+        <NativePopover.Trigger>
+          <Button>Click me</Button>
+        </NativePopover.Trigger>
+      </HStack>
+
+      <NativePopover.Content>
+        <NativePopover.Header>ベジータ!</NativePopover.Header>
+        <NativePopover.Body>
+          がんばれカカロット……お前がナンバー１だ！！
+        </NativePopover.Body>
+      </NativePopover.Content>
+    </NativePopover.Root>
+  )
+}
+
+export const Placement: Story = () => {
+  return (
+    <For
+      each={
+        [
+          "start",
+          "start-start",
+          "start-end",
+          "start-center",
+          "end",
+          "end-start",
+          "end-end",
+          "end-center",
+          "center-start",
+          "center-end",
+        ] as const
+      }
+    >
+      {(placement) => (
+        <NativePopover.Root key={placement} placement={placement}>
+          <NativePopover.Trigger>
+            <Button>Open "{toTitleCase(placement)}" Popover</Button>
+          </NativePopover.Trigger>
+
+          <NativePopover.Content>
+            <NativePopover.Header>ベジータ!</NativePopover.Header>
+            <NativePopover.Body>
+              がんばれカカロット……お前がナンバー１だ！！
+            </NativePopover.Body>
+          </NativePopover.Content>
+        </NativePopover.Root>
+      )}
+    </For>
   )
 }
 

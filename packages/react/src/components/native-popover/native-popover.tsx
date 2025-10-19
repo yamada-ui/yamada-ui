@@ -4,43 +4,42 @@ import type { FC, PropsWithChildren } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import type { NativePopoverStyle } from "./native-popover.style"
-import type { UseNativePopoverReturn } from "./use-native-popover"
+import type {
+  UseNativePopoverProps,
+  UseNativePopoverReturn,
+} from "./use-native-popover"
 import { useMemo } from "react"
-import { createSlotComponent } from "../../core"
-import { runIfFn } from "../../utils"
+import { createSlotComponent, styled } from "../../core"
+import { cast, runIfFn } from "../../utils"
 import { nativePopoverStyle } from "./native-popover.style"
 import { useNativePopover } from "./use-native-popover"
 
 interface ComponentContext
   extends Pick<
     UseNativePopoverReturn,
+    | "getAnchorProps"
     | "getBodyProps"
     | "getContentProps"
     | "getFooterProps"
     | "getHeaderProps"
+    | "getPositionerProps"
     | "getTriggerProps"
+    | "onClose"
+    | "onOpen"
     | "open"
   > {}
 
-export interface NativePopoverRootProps extends ThemeProps<NativePopoverStyle> {
+export interface NativePopoverRootProps
+  extends UseNativePopoverProps,
+    ThemeProps<NativePopoverStyle> {
   /**
    * The children of the popover.
    */
   children?: ReactNodeOrFunction<{
     open: boolean
+    onClose: () => void
+    onOpen: () => void
   }>
-  /**
-   * If `true`, the popover will be disabled.
-   *
-   * @default false
-   */
-  disabled?: boolean
-  /**
-   * The mode of the popover.
-   *
-   * @default 'auto'
-   */
-  popover?: "auto" | "manual"
 }
 
 const {
@@ -68,35 +67,47 @@ export const NativePopoverRoot: FC<NativePopoverRootProps> = (props) => {
   const [styleContext, { children, ...rest }] = useRootComponentProps(props)
   const {
     open,
+    getAnchorProps,
     getBodyProps,
     getContentProps,
     getFooterProps,
     getHeaderProps,
+    getPositionerProps,
     getTriggerProps,
+    onClose,
+    onOpen,
   } = useNativePopover(rest)
   const componentContext = useMemo(
     () => ({
       open,
+      getAnchorProps,
       getBodyProps,
       getContentProps,
       getFooterProps,
       getHeaderProps,
+      getPositionerProps,
       getTriggerProps,
+      onClose,
+      onOpen,
     }),
     [
       open,
+      getAnchorProps,
       getBodyProps,
       getContentProps,
       getFooterProps,
       getHeaderProps,
+      getPositionerProps,
       getTriggerProps,
+      onClose,
+      onOpen,
     ],
   )
 
   return (
     <StyleContext value={styleContext}>
       <ComponentContext value={componentContext}>
-        {runIfFn(children, { open })}
+        {runIfFn(children, { open, onClose, onOpen })}
       </ComponentContext>
     </StyleContext>
   )
@@ -113,6 +124,17 @@ export const NativePopoverTrigger = withContext<
   return getTriggerProps(props)
 })
 
+interface NativePopoverPositionerProps extends HTMLStyledProps {}
+
+const NativePopoverPositioner = withContext<
+  "div",
+  NativePopoverPositionerProps
+>("div", "positioner")(undefined, (props) => {
+  const { getPositionerProps } = useComponentContext()
+
+  return getPositionerProps(props)
+})
+
 export interface NativePopoverContentProps
   extends HTMLStyledProps,
     PropsWithChildren {}
@@ -120,11 +142,17 @@ export interface NativePopoverContentProps
 export const NativePopoverContent = withContext<
   "div",
   NativePopoverContentProps
->("div", "content")(undefined, (props) => {
+>(({ children, ...rest }) => {
   const { getContentProps } = useComponentContext()
 
-  return getContentProps(props)
-})
+  return (
+    <NativePopoverPositioner asChild>
+      <styled.div {...getContentProps(cast<HTMLStyledProps>(rest))}>
+        {children}
+      </styled.div>
+    </NativePopoverPositioner>
+  )
+}, "content")()
 
 export interface NativePopoverHeaderProps extends HTMLStyledProps {}
 
@@ -157,4 +185,15 @@ export const NativePopoverFooter = withContext<"div", NativePopoverFooterProps>(
   const { getFooterProps } = useComponentContext()
 
   return getFooterProps(props)
+})
+
+export interface NativePopoverAnchorProps extends HTMLStyledProps {}
+
+export const NativePopoverAnchor = withContext<"div", NativePopoverAnchorProps>(
+  "div",
+  "anchor",
+)({ asChild: true }, (props) => {
+  const { getAnchorProps } = useComponentContext()
+
+  return getAnchorProps(props)
 })

@@ -80,8 +80,14 @@ export const Anchor: Story = () => {
     <Popover.Root>
       <HStack>
         <Popover.Anchor>
-          <Center borderWidth="1px" h="10" px="3" rounded="l2">
-            Here display Popover
+          <Center
+            borderWidth="1px"
+            h="10"
+            px="3"
+            rounded="l2"
+            textWrap="nowrap"
+          >
+            Display Popover Here
           </Center>
         </Popover.Anchor>
 

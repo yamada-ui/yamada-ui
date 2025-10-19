@@ -204,3 +204,54 @@ export const PopoverMode: Story = () => {
     </Box>
   )
 }
+
+export const Offset: Story = () => {
+  return (
+    <NativePopover.Root offset={[16, 16]}>
+      <NativePopover.Trigger>
+        <Button>Click me</Button>
+      </NativePopover.Trigger>
+
+      <NativePopover.Content>
+        <NativePopover.Header>ベジータ!</NativePopover.Header>
+        <NativePopover.Body>
+          がんばれカカロット……お前がナンバー１だ！！
+        </NativePopover.Body>
+      </NativePopover.Content>
+    </NativePopover.Root>
+  )
+}
+
+export const Gutter: Story = () => {
+  return (
+    <NativePopover.Root gutter={32}>
+      <NativePopover.Trigger>
+        <Button>Click me</Button>
+      </NativePopover.Trigger>
+
+      <NativePopover.Content>
+        <NativePopover.Header>ベジータ!</NativePopover.Header>
+        <NativePopover.Body>
+          がんばれカカロット……お前がナンバー１だ！！
+        </NativePopover.Body>
+      </NativePopover.Content>
+    </NativePopover.Root>
+  )
+}
+
+export const Disabled: Story = () => {
+  return (
+    <NativePopover.Root disabled>
+      <NativePopover.Trigger>
+        <Button>Click me</Button>
+      </NativePopover.Trigger>
+
+      <NativePopover.Content>
+        <NativePopover.Header>ベジータ!</NativePopover.Header>
+        <NativePopover.Body>
+          がんばれカカロット……お前がナンバー１だ！！
+        </NativePopover.Body>
+      </NativePopover.Content>
+    </NativePopover.Root>
+  )
+}

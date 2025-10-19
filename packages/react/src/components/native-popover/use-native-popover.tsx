@@ -1,22 +1,21 @@
 "use client"
 
-import type { RefObject, SyntheticEvent } from "react"
+import type { RefObject } from "react"
 import type { Direction, PropGetter } from "../../core"
-import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import type { UsePopperProps } from "../../hooks/use-popper"
 import { useCallback, useId, useRef } from "react"
-import { useDisclosure } from "../../hooks/use-disclosure"
+import { useEnvironment } from "../../core"
 import { popperProps, usePopper } from "../../hooks/use-popper"
-import { assignRef, handlerAll, mergeRefs } from "../../utils"
+import {
+  ariaAttr,
+  assignRef,
+  cx,
+  dataAttr,
+  handlerAll,
+  mergeRefs,
+} from "../../utils"
 
-interface NativeToggleEvent extends SyntheticEvent {
-  newState: "closed" | "open"
-  oldState: "closed" | "open"
-}
-
-export interface UseNativePopoverProps
-  extends Omit<UseDisclosureProps, "timing">,
-    UsePopperProps<"button"> {
+export interface UseNativePopoverProps extends UsePopperProps<"button"> {
   /**
    * If `true`, the popover will be disabled.
    *
@@ -43,7 +42,6 @@ export interface UseNativePopoverProps
 
 export const useNativePopover = ({
   autoUpdate,
-  defaultOpen,
   disabled = false,
   elements,
   flip,
@@ -51,7 +49,6 @@ export const useNativePopover = ({
   matchWidth,
   middleware,
   offset,
-  open: openProp,
   placement = "end",
   platform,
   popover = "auto",
@@ -60,21 +57,14 @@ export const useNativePopover = ({
   transform,
   updateRef,
   whileElementsMounted,
-  onClose: onCloseProp,
-  onOpen: onOpenProp,
 }: UseNativePopoverProps = {}) => {
+  const { getDocument } = useEnvironment()
   const headerId = useId()
   const bodyId = useId()
   const contentId = useId()
   const anchorRef = useRef<HTMLElement>(null)
   const triggerRef = useRef<HTMLButtonElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
-  const { open, onClose, onOpen } = useDisclosure({
-    defaultOpen,
-    open: openProp,
-    onClose: onCloseProp,
-    onOpen: onOpenProp,
-  })
   const { refs, update, getPopperProps } = usePopper<"button">({
     autoUpdate,
     elements,
@@ -83,7 +73,6 @@ export const useNativePopover = ({
     matchWidth,
     middleware,
     offset,
-    open,
     placement,
     platform,
     preventOverflow,
@@ -95,34 +84,53 @@ export const useNativePopover = ({
   assignRef(updateRef, update)
 
   const getTriggerProps: PropGetter<"button"> = useCallback(
-    ({ ref, ...props } = {}) => ({
-      ...props,
-      ref: mergeRefs(ref, triggerRef, (node) => {
-        if (anchorRef.current == null) refs.setReference(node)
-      }),
-      type: "button",
-      disabled,
-      popovertarget: contentId,
-      popovertargetaction: "toggle",
-    }),
+    ({ ref, onClick, ...props } = {}) => {
+      return {
+        "aria-controls": contentId,
+        "aria-disabled": ariaAttr(disabled),
+        "aria-haspopup": "dialog",
+        role: "button",
+        ...props,
+        ref: mergeRefs(ref, triggerRef, (node) => {
+          if (anchorRef.current == null) refs.setReference(node)
+        }),
+        type: "button",
+        popoverTarget: disabled ? undefined : contentId,
+        popoverTargetAction: disabled ? undefined : "toggle",
+        onClick: handlerAll(onClick, (ev) => {
+          if (disabled) {
+            ev.preventDefault()
+            ev.stopPropagation()
+          }
+        }),
+      }
+    },
     [contentId, disabled, refs],
   )
 
   const getContentProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
-      id: contentId,
-      popover,
-      ...props,
-      ref: mergeRefs(ref, contentRef),
-      onToggle: handlerAll(props.onToggle, (ev: NativeToggleEvent) => {
-        if (ev.newState === "open") {
-          onOpen()
-        } else {
-          onClose()
-        }
-      }),
-    }),
-    [contentId, popover, onOpen, onClose],
+    ({
+      ref,
+      "aria-describedby": ariaDescribedby,
+      "aria-labelledby": ariaLabelledby,
+      ...props
+    } = {}) => {
+      const hasHeader = !!getDocument()?.getElementById(headerId)
+      const hasBody = !!getDocument()?.getElementById(bodyId)
+
+      return {
+        id: contentId,
+        "aria-describedby": cx(ariaDescribedby, hasBody ? bodyId : undefined),
+        "aria-labelledby": cx(ariaLabelledby, hasHeader ? headerId : undefined),
+        "data-popup": dataAttr(true),
+        popover,
+        role: "dialog",
+        tabIndex: -1,
+        ...props,
+        ref: mergeRefs(ref, contentRef),
+      }
+    },
+    [getDocument, headerId, bodyId, contentId, popover],
   )
 
   const getHeaderProps: PropGetter = useCallback(
@@ -159,7 +167,6 @@ export const useNativePopover = ({
   )
 
   return {
-    open,
     getAnchorProps,
     getBodyProps,
     getContentProps,
@@ -167,8 +174,6 @@ export const useNativePopover = ({
     getHeaderProps,
     getPositionerProps,
     getTriggerProps,
-    onClose,
-    onOpen,
   }
 }
 
@@ -179,8 +184,4 @@ export const nativePopoverProps: (keyof UseNativePopoverProps)[] = [
   "disabled",
   "popover",
   "updateRef",
-  "defaultOpen",
-  "open",
-  "onOpen",
-  "onClose",
 ]

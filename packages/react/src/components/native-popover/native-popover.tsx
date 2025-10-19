@@ -24,9 +24,6 @@ interface ComponentContext
     | "getHeaderProps"
     | "getPositionerProps"
     | "getTriggerProps"
-    | "onClose"
-    | "onOpen"
-    | "open"
   > {}
 
 export interface NativePopoverRootProps
@@ -35,11 +32,7 @@ export interface NativePopoverRootProps
   /**
    * The children of the popover.
    */
-  children?: ReactNodeOrFunction<{
-    open: boolean
-    onClose: () => void
-    onOpen: () => void
-  }>
+  children?: ReactNodeOrFunction<{}>
 }
 
 const {
@@ -66,7 +59,6 @@ export { NativePopoverPropsContext, useNativePopoverPropsContext }
 export const NativePopoverRoot: FC<NativePopoverRootProps> = (props) => {
   const [styleContext, { children, ...rest }] = useRootComponentProps(props)
   const {
-    open,
     getAnchorProps,
     getBodyProps,
     getContentProps,
@@ -74,12 +66,9 @@ export const NativePopoverRoot: FC<NativePopoverRootProps> = (props) => {
     getHeaderProps,
     getPositionerProps,
     getTriggerProps,
-    onClose,
-    onOpen,
   } = useNativePopover(rest)
   const componentContext = useMemo(
     () => ({
-      open,
       getAnchorProps,
       getBodyProps,
       getContentProps,
@@ -87,11 +76,8 @@ export const NativePopoverRoot: FC<NativePopoverRootProps> = (props) => {
       getHeaderProps,
       getPositionerProps,
       getTriggerProps,
-      onClose,
-      onOpen,
     }),
     [
-      open,
       getAnchorProps,
       getBodyProps,
       getContentProps,
@@ -99,15 +85,13 @@ export const NativePopoverRoot: FC<NativePopoverRootProps> = (props) => {
       getHeaderProps,
       getPositionerProps,
       getTriggerProps,
-      onClose,
-      onOpen,
     ],
   )
 
   return (
     <StyleContext value={styleContext}>
       <ComponentContext value={componentContext}>
-        {runIfFn(children, { open, onClose, onOpen })}
+        {runIfFn(children, {})}
       </ComponentContext>
     </StyleContext>
   )

@@ -282,6 +282,10 @@ export const DisabledClearable: Story = () => {
   return <DatePicker clearable={false} />
 }
 
+export const DisallowInput: Story = () => {
+  return <DatePicker allowInput={false} />
+}
+
 export const Shape: Story = () => {
   return (
     <PropsTable variant="stack" rows={["rounded", "circle", "square"]}>

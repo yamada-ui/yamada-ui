@@ -113,7 +113,7 @@ interface NativePopoverPositionerProps extends HTMLStyledProps {}
 const NativePopoverPositioner = withContext<
   "div",
   NativePopoverPositionerProps
->("div", "positioner")(undefined, (props) => {
+>("div", "positioner")({ asChild: true }, (props) => {
   const { getPositionerProps } = useComponentContext()
 
   return getPositionerProps(props)
@@ -130,7 +130,7 @@ export const NativePopoverContent = withContext<
   const { getContentProps } = useComponentContext()
 
   return (
-    <NativePopoverPositioner asChild>
+    <NativePopoverPositioner>
       <styled.div {...getContentProps(cast<HTMLStyledProps>(rest))}>
         {children}
       </styled.div>

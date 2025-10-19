@@ -2,7 +2,6 @@ import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "#storybook"
 import { NativePopover } from "."
 import { toTitleCase } from "../../utils"
-import { Box } from "../box"
 import { Button } from "../button"
 import { Center } from "../center"
 import { For } from "../for"
@@ -174,7 +173,7 @@ export const NestedPopover: Story = () => {
 
 export const PopoverMode: Story = () => {
   return (
-    <Box display="flex" gap="4">
+    <>
       <NativePopover.Root popover="auto">
         <NativePopover.Trigger>
           <Button>Auto (default)</Button>
@@ -201,7 +200,7 @@ export const PopoverMode: Story = () => {
           </NativePopover.Body>
         </NativePopover.Content>
       </NativePopover.Root>
-    </Box>
+    </>
   )
 }
 

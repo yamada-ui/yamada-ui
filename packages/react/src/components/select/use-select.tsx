@@ -21,6 +21,7 @@ import { useCombobox, useComboboxItem } from "../../hooks/use-combobox"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"
 import {
+  ariaAttr,
   createContext,
   cx,
   dataAttr,
@@ -304,12 +305,14 @@ export const useSelect = <Multiple extends boolean = false>(
   }, [interactive])
 
   const onClear = useCallback(() => {
+    if (!interactive) return
+
     setValue((prev) => (isArray(prev) ? [] : "") as MaybeValue)
 
     if (!fieldRef.current) return
 
     if (focusOnClear) fieldRef.current.focus()
-  }, [focusOnClear, setValue])
+  }, [focusOnClear, interactive, setValue])
 
   const getRootProps: PropGetter = useCallback(
     (props) => ({ ...dataProps, ...props }),
@@ -357,16 +360,17 @@ export const useSelect = <Multiple extends boolean = false>(
   const getClearIconProps: PropGetter = useCallback(
     (props = {}) =>
       getIconProps({
+        "aria-disabled": ariaAttr(!interactive),
         "aria-label": t("Clear value"),
         role: "button",
-        tabIndex: 0,
+        tabIndex: interactive ? 0 : -1,
         ...props,
         onClick: handlerAll(props.onClick, onClear),
         onKeyDown: handlerAll(props.onKeyDown, (ev) =>
           runKeyAction(ev, { Enter: onClear, Space: onClear }),
         ),
       }),
-    [getIconProps, onClear, t],
+    [getIconProps, interactive, onClear, t],
   )
 
   return {

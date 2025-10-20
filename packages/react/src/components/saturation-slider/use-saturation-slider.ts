@@ -43,7 +43,7 @@ export interface UseSaturationSliderProps
   /**
    * The initial value of the saturation slider.
    *
-   * @default "[0, 0, 1]"
+   * @default [0, 0, 1]
    */
   defaultValue?: [number, number, number]
   /**

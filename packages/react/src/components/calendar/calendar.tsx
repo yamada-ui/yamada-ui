@@ -304,22 +304,19 @@ export const CalendarRoot = withProvider(
         yearSelectProps,
       ],
     )
-    const computedChildren = useMemo(() => {
-      if (children) return children
-
-      return (
-        <>
-          <CalendarNavigation />
-          <CalendarMonth />
-        </>
-      )
-    }, [children])
 
     return (
       <CalendarDescendantsContext value={descendants}>
         <CalendarContext value={calendarContext}>
           <ComponentContext value={componentContext}>
-            <styled.div {...getRootProps()}>{computedChildren}</styled.div>
+            <styled.div {...getRootProps()}>
+              {children ?? (
+                <>
+                  <CalendarNavigation />
+                  <CalendarMonth />
+                </>
+              )}
+            </styled.div>
           </ComponentContext>
         </CalendarContext>
       </CalendarDescendantsContext>
@@ -527,55 +524,43 @@ export const CalendarMonth = withContext<"table", CalendarMonthProps>(
 
   dayProp ??= day
 
-  const computedChildren = useMemo(() => {
-    return (
-      <>
-        <styled.thead aria-hidden>
-          <CalendarWeekDays {...weekdaysProps}>
-            {weekdays.map(({ label, value }, index) => (
-              <CalendarWeekday
-                key={index}
-                {...getWeekdayProps({ ...weekdayProps, value })}
-              >
-                {label}
-              </CalendarWeekday>
-            ))}
-          </CalendarWeekDays>
-        </styled.thead>
-
-        <CalendarWeeks {...weeksProps}>
-          {monthDays.map((week, index) => (
-            <CalendarWeek key={index} {...weekProps}>
-              {week.map(({ label, value }) => (
-                <CalendarDay
-                  key={value.toDateString()}
-                  {...{ ...dayProps, value }}
-                >
-                  {runIfFn(dayProp, { value }) ?? (
-                    <styled.span>{label}</styled.span>
-                  )}
-                </CalendarDay>
-              ))}
-            </CalendarWeek>
+  const children = (
+    <>
+      <styled.thead aria-hidden>
+        <CalendarWeekDays {...weekdaysProps}>
+          {weekdays.map(({ label, value }, index) => (
+            <CalendarWeekday
+              key={index}
+              {...getWeekdayProps({ ...weekdayProps, value })}
+            >
+              {label}
+            </CalendarWeekday>
           ))}
-        </CalendarWeeks>
-      </>
-    )
-  }, [
-    dayProp,
-    dayProps,
-    getWeekdayProps,
-    monthDays,
-    weekProps,
-    weekdayProps,
-    weekdays,
-    weekdaysProps,
-    weeksProps,
-  ])
+        </CalendarWeekDays>
+      </styled.thead>
+
+      <CalendarWeeks {...weeksProps}>
+        {monthDays.map((week, index) => (
+          <CalendarWeek key={index} {...weekProps}>
+            {week.map(({ label, value }) => (
+              <CalendarDay
+                key={value.toDateString()}
+                {...{ ...dayProps, value }}
+              >
+                {runIfFn(dayProp, { value }) ?? (
+                  <styled.span>{label}</styled.span>
+                )}
+              </CalendarDay>
+            ))}
+          </CalendarWeek>
+        ))}
+      </CalendarWeeks>
+    </>
+  )
 
   return {
     ...getMonthProps({ ...monthProps, ...rest }),
-    children: computedChildren,
+    children,
   }
 })
 

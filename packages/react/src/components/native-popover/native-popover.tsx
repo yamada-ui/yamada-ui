@@ -2,7 +2,6 @@
 
 import type { FC, PropsWithChildren } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
-import type { ReactNodeOrFunction } from "../../utils"
 import type { NativePopoverStyle } from "./native-popover.style"
 import type {
   UseNativePopoverProps,
@@ -10,7 +9,7 @@ import type {
 } from "./use-native-popover"
 import { useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
-import { cast, runIfFn } from "../../utils"
+import { cast } from "../../utils"
 import { nativePopoverStyle } from "./native-popover.style"
 import { useNativePopover } from "./use-native-popover"
 
@@ -28,12 +27,8 @@ interface ComponentContext
 
 export interface NativePopoverRootProps
   extends UseNativePopoverProps,
-    ThemeProps<NativePopoverStyle> {
-  /**
-   * The children of the popover.
-   */
-  children?: ReactNodeOrFunction<{}>
-}
+    ThemeProps<NativePopoverStyle>,
+    PropsWithChildren {}
 
 const {
   ComponentContext,
@@ -90,9 +85,7 @@ export const NativePopoverRoot: FC<NativePopoverRootProps> = (props) => {
 
   return (
     <StyleContext value={styleContext}>
-      <ComponentContext value={componentContext}>
-        {runIfFn(children, {})}
-      </ComponentContext>
+      <ComponentContext value={componentContext}>{children}</ComponentContext>
     </StyleContext>
   )
 }

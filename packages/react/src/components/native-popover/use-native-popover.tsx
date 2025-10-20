@@ -33,7 +33,18 @@ export interface UseNativePopoverProps extends UsePopperProps<"button"> {
    *
    * @default 'auto'
    */
-  popover?: "auto" | "manual"
+  popover?: "" | "auto" | "hint" | "manual"
+  /**
+   * The target element ID for the popover trigger.
+   * If not provided, a generated ID will be used.
+   */
+  popoverTarget?: string
+  /**
+   * The action for the popover target.
+   *
+   * @default 'toggle'
+   */
+  popoverTargetAction?: "hide" | "show" | "toggle"
   /**
    * Update the position of the floating element, re-rendering the component if required.
    */
@@ -52,6 +63,8 @@ export const useNativePopover = ({
   placement = "end",
   platform,
   popover = "auto",
+  popoverTarget,
+  popoverTargetAction = "toggle",
   preventOverflow,
   strategy,
   transform,
@@ -61,7 +74,8 @@ export const useNativePopover = ({
   const { getDocument } = useEnvironment()
   const headerId = useId()
   const bodyId = useId()
-  const contentId = useId()
+  const generatedContentId = useId()
+  const contentId = popoverTarget ?? generatedContentId
   const anchorRef = useRef<HTMLElement>(null)
   const triggerRef = useRef<HTMLButtonElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -86,17 +100,17 @@ export const useNativePopover = ({
   const getTriggerProps: PropGetter<"button"> = useCallback(
     ({ ref, onClick, ...props } = {}) => {
       return {
+        type: "button",
         "aria-controls": contentId,
         "aria-disabled": ariaAttr(disabled),
         "aria-haspopup": "dialog",
+        popoverTarget: contentId,
+        popoverTargetAction,
         role: "button",
         ...props,
         ref: mergeRefs(ref, triggerRef, (node) => {
           if (anchorRef.current == null) refs.setReference(node)
         }),
-        type: "button",
-        popoverTarget: disabled ? undefined : contentId,
-        popoverTargetAction: disabled ? undefined : "toggle",
         onClick: handlerAll(onClick, (ev) => {
           if (disabled) {
             ev.preventDefault()
@@ -105,7 +119,7 @@ export const useNativePopover = ({
         }),
       }
     },
-    [contentId, disabled, refs],
+    [contentId, disabled, popoverTargetAction, refs],
   )
 
   const getContentProps: PropGetter = useCallback(
@@ -183,5 +197,7 @@ export const nativePopoverProps: (keyof UseNativePopoverProps)[] = [
   ...popperProps,
   "disabled",
   "popover",
+  "popoverTarget",
+  "popoverTargetAction",
   "updateRef",
 ]

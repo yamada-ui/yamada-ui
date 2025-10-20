@@ -90,7 +90,6 @@
     "@lucide/lab": "^0.1.2",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
-    "@vitest/browser": "^3.2.4",
     "clean-package": "2.2.0",
     "react-hook-form": "^7.64.0",
     "react-icons": "^5.5.0",

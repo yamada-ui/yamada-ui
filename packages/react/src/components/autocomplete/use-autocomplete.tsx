@@ -28,6 +28,7 @@ import { useCombobox, useComboboxItem } from "../../hooks/use-combobox"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"
 import {
+  ariaAttr,
   cast,
   contains,
   createContext,
@@ -556,11 +557,13 @@ export const useAutocomplete = <Multiple extends boolean = false>(
   )
 
   const onClear = useCallback(() => {
+    if (!interactive) return
+
     setValue((prev) => (isArray(prev) ? [] : "") as MaybeValue)
     setInputValue("")
 
     if (focusOnClear) inputRef.current?.focus()
-  }, [focusOnClear, setInputValue, setValue])
+  }, [focusOnClear, interactive, setInputValue, setValue])
 
   useUpdateEffect(() => {
     if (isArray(valueProp)) return
@@ -653,19 +656,17 @@ export const useAutocomplete = <Multiple extends boolean = false>(
   const getClearIconProps: PropGetter = useCallback(
     (props = {}) =>
       getIconProps({
+        "aria-disabled": ariaAttr(!interactive),
         "aria-label": t("Clear value"),
         role: "button",
-        tabIndex: 0,
+        tabIndex: interactive ? 0 : -1,
         ...props,
         onClick: handlerAll(props.onClick, onClear),
         onKeyDown: handlerAll(props.onKeyDown, (ev) =>
-          runKeyAction(ev, {
-            Enter: onClear,
-            Space: onClear,
-          }),
+          runKeyAction(ev, { Enter: onClear, Space: onClear }),
         ),
       }),
-    [getIconProps, onClear, t],
+    [getIconProps, interactive, onClear, t],
   )
 
   return {

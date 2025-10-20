@@ -30,6 +30,7 @@ import { useCombobox } from "../../hooks/use-combobox"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"
 import {
+  ariaAttr,
   cast,
   contains,
   dataAttr,
@@ -705,6 +706,8 @@ export const useDatePicker = <
   )
 
   const onClear = useCallback(() => {
+    if (!interactive) return
+
     setValue((prev) => {
       if (isDate(prev)) {
         return undefined as MaybeDateValue<Multiple, Range>
@@ -731,7 +734,7 @@ export const useDatePicker = <
         fieldRef.current?.focus()
       }
     }
-  }, [allowInput, focusOnClear, range, setInputValue, setValue])
+  }, [allowInput, focusOnClear, interactive, range, setInputValue, setValue])
 
   useUpdateEffect(() => {
     setMonth((prev) => getAdjustedMonth(value, prev))
@@ -903,19 +906,17 @@ export const useDatePicker = <
   const getClearIconProps: PropGetter = useCallback(
     (props = {}) =>
       getIconProps({
+        "aria-disabled": ariaAttr(!interactive),
         "aria-label": t("Clear value"),
         role: "button",
-        tabIndex: 0,
+        tabIndex: interactive ? 0 : -1,
         ...props,
         onClick: handlerAll(props.onClick, onClear),
         onKeyDown: handlerAll(props.onKeyDown, (ev) =>
-          runKeyAction(ev, {
-            Enter: onClear,
-            Space: onClear,
-          }),
+          runKeyAction(ev, { Enter: onClear, Space: onClear }),
         ),
       }),
-    [getIconProps, onClear, t],
+    [getIconProps, interactive, onClear, t],
   )
 
   return {

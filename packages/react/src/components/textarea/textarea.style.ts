@@ -1,5 +1,9 @@
 import { defineComponentStyle } from "../../core"
-import { getInputPaddingResetStyle, inputStyle } from "../input"
+import {
+  getInputPaddingEndResetStyle,
+  getInputPaddingStartResetStyle,
+  inputStyle,
+} from "../input"
 
 export const textareaStyle = defineComponentStyle({
   base: {
@@ -8,13 +12,10 @@ export const textareaStyle = defineComponentStyle({
   },
 
   variants: {
-    filled: { ...inputStyle.variants?.filled },
-    flushed: {
-      ...inputStyle.variants?.flushed,
-      ...getInputPaddingResetStyle(),
-    },
-    outline: { ...inputStyle.variants?.outline },
-    plain: { ...inputStyle.variants?.plain },
+    filled: inputStyle.variants?.filled,
+    flushed: inputStyle.variants?.flushed,
+    outline: inputStyle.variants?.outline,
+    plain: inputStyle.variants?.plain,
   },
 
   sizes: {
@@ -46,8 +47,12 @@ export const textareaStyle = defineComponentStyle({
 
   compounds: [
     {
-      css: getInputPaddingResetStyle(),
+      css: {
+        ...getInputPaddingStartResetStyle(),
+        ...getInputPaddingEndResetStyle(),
+      },
       variant: "flushed",
+      layer: "variant",
     },
   ],
 

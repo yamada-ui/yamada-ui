@@ -206,7 +206,7 @@ export interface UseAutocompleteProps<Multiple extends boolean = false>
   /**
    * If `true`, the autocomplete will be opened when the input is focused.
    *
-   * @default false
+   * @default true
    */
   openOnFocus?: boolean
   /**
@@ -261,7 +261,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
       matcher = defaultMatcher,
       max,
       openOnChange = true,
-      openOnFocus = false,
+      openOnFocus = true,
       placeholder,
       readOnly,
       render = defaultRender,

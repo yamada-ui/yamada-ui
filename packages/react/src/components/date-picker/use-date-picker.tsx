@@ -111,6 +111,14 @@ export interface UseDatePickerProps<
     HTMLRefAttributes<"input">,
     FieldProps {
   /**
+   * The `id` attribute of the input element.
+   */
+  id?: string
+  /**
+   * The `name` attribute of the input element.
+   */
+  name?: string
+  /**
    * If `true`, allows input.
    *
    * @default true
@@ -202,7 +210,9 @@ export const useDatePicker = <
   const { locale: defaultLocale, t } = useI18n("datePicker")
   const {
     props: {
+      id,
       ref,
+      name,
       allowInput = true,
       allowInputBeyond = false,
       closeOnChange = false,
@@ -230,6 +240,7 @@ export const useDatePicker = <
       placeholder: placeholderProp,
       readOnly,
       render = defaultRender,
+      required,
       separator = range ? "-" : ",",
       value: valueProp,
       onChange: onChangeProp,
@@ -785,7 +796,9 @@ export const useDatePicker = <
             ...props.style,
           },
           autoComplete: "off",
-          disabled: !interactive,
+          disabled,
+          readOnly,
+          required,
           tabIndex: allowInput ? 0 : -1,
           ...dataProps,
           ...props,
@@ -806,9 +819,21 @@ export const useDatePicker = <
             inputProps.value = inputValue.end
             inputProps.placeholder = endPlaceholder
           }
+
+          if (!inputValue.start && align === "start") {
+            inputProps.id = id
+            inputProps.name = name
+          }
+
+          if (!!inputValue.start && align === "end") {
+            inputProps.id = id
+            inputProps.name = name
+          }
         } else {
           inputProps.ref = mergeRefs(props.ref, ref, startInputRef)
           inputProps.value = inputValue
+          inputProps.id = id
+          inputProps.name = name
 
           if (isArray(value)) {
             inputProps.style = {
@@ -833,17 +858,21 @@ export const useDatePicker = <
       [
         allowInput,
         dataProps,
+        disabled,
         endPlaceholder,
         focused,
+        id,
         inputValue,
-        interactive,
         max,
+        name,
         onBlur,
         onFocus,
         onInputChange,
         onKeyDown,
         onMouseDown,
+        readOnly,
         ref,
+        required,
         startPlaceholder,
         value,
       ],

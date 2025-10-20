@@ -138,6 +138,14 @@ export interface UseAutocompleteProps<Multiple extends boolean = false>
     HTMLRefAttributes<"input">,
     FieldProps {
   /**
+   * The `id` attribute of the input element.
+   */
+  id?: string
+  /**
+   * The `name` attribute of the input element.
+   */
+  name?: string
+  /**
    * If `true`, the autocomplete will allow custom value.
    *
    * @default false
@@ -245,7 +253,9 @@ export const useAutocomplete = <Multiple extends boolean = false>(
   const { t } = useI18n("autocomplete")
   const {
     props: {
+      id,
       ref,
+      name,
       allowCustomValue = false,
       closeOnChange = false,
       multiple = false,
@@ -265,6 +275,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
       placeholder,
       readOnly,
       render = defaultRender,
+      required,
       separator = ",",
       value: valueProp,
       onChange: onChangeProp,
@@ -592,7 +603,9 @@ export const useAutocomplete = <Multiple extends boolean = false>(
 
   const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}) => ({
+      id,
       ref: mergeRefs(props.ref, ref, inputRef),
+      name,
       style: {
         ...(!focused && isArray(value) && !!value.length
           ? visuallyHiddenAttributes.style
@@ -605,8 +618,10 @@ export const useAutocomplete = <Multiple extends boolean = false>(
       autoCapitalize: "off",
       autoComplete: "off",
       autoCorrect: "off",
-      disabled: !interactive,
+      disabled,
       placeholder: hasValues ? undefined : placeholder,
+      readOnly,
+      required,
       spellCheck: false,
       value: inputValue,
       ...dataProps,
@@ -619,18 +634,22 @@ export const useAutocomplete = <Multiple extends boolean = false>(
     }),
     [
       dataProps,
+      disabled,
       focused,
       hasValues,
+      id,
       inputValue,
-      interactive,
       max,
+      name,
       onBlur,
       onFocus,
       onInputChange,
       onKeyDown,
       onMouseDown,
       placeholder,
+      readOnly,
       ref,
+      required,
       value,
     ],
   )

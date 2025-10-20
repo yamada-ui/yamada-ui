@@ -47,6 +47,7 @@ export const selectStyle = defineComponentSlotStyle({
       field: {
         ...nativeSelectStyle.variants?.filled.field,
         _expanded: focusRingStyle.inside,
+        _focus: focusRingStyle.inside,
       },
     },
     flushed: {
@@ -54,6 +55,7 @@ export const selectStyle = defineComponentSlotStyle({
       field: {
         ...nativeSelectStyle.variants?.flushed.field,
         _expanded: nativeSelectStyle.variants?.flushed.field?._focusVisible,
+        _focus: nativeSelectStyle.variants?.flushed.field?._focusVisible,
       },
     },
     outline: {
@@ -61,6 +63,7 @@ export const selectStyle = defineComponentSlotStyle({
       field: {
         ...nativeSelectStyle.variants?.outline.field,
         _expanded: focusRingStyle.inside,
+        _focus: focusRingStyle.inside,
       },
     },
     plain: {
@@ -68,6 +71,7 @@ export const selectStyle = defineComponentSlotStyle({
       field: {
         ...nativeSelectStyle.variants?.plain.field,
         _expanded: focusRingStyle.inside,
+        _focus: focusRingStyle.inside,
       },
     },
   },

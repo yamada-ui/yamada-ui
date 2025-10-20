@@ -217,6 +217,11 @@
               "pathname": "/docs/components/color-picker"
             },
             {
+              "title": "ColorSelector",
+              "segment": "color-selector",
+              "pathname": "/docs/components/color-selector"
+            },
+            {
               "title": "ColorSwatch",
               "segment": "color-swatch",
               "pathname": "/docs/components/color-swatch"

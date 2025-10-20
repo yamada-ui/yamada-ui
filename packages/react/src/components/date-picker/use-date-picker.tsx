@@ -158,7 +158,7 @@ export interface UseDatePickerProps<
   /**
    * If `true`, the date picker will be opened when the input is focused.
    *
-   * @default false
+   * @default true
    */
   openOnFocus?: boolean
   /**
@@ -224,7 +224,7 @@ export const useDatePicker = <
       max,
       month: monthProp,
       openOnChange = true,
-      openOnFocus = false,
+      openOnFocus = true,
       parseDate,
       pattern,
       placeholder: placeholderProp,
@@ -770,11 +770,10 @@ export const useDatePicker = <
         "aria-haspopup": "dialog",
         tabIndex: !allowInput ? 0 : -1,
         ...props,
-        onBlur: handlerAll(props.onBlur, onBlur),
         onClick: handlerAll(props.onClick, onClick),
       }),
 
-    [allowInput, getTriggerProps, onBlur, onClick],
+    [allowInput, getTriggerProps, onClick],
   )
 
   const getInputProps: PropGetter<"input", { align?: InputAlign }> =
@@ -790,6 +789,7 @@ export const useDatePicker = <
           tabIndex: allowInput ? 0 : -1,
           ...dataProps,
           ...props,
+          onBlur: handlerAll(props.onBlur, onBlur),
           onChange: handlerAll(props.onChange, onInputChange),
           onFocus: handlerAll(props.onFocus, onFocus),
           onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
@@ -838,6 +838,7 @@ export const useDatePicker = <
         inputValue,
         interactive,
         max,
+        onBlur,
         onFocus,
         onInputChange,
         onKeyDown,

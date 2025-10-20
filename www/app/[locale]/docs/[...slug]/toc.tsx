@@ -127,6 +127,7 @@ export function Toc({ path, toc }: TocProps) {
                   ref={ref}
                   href={url}
                   css={{ "--depth": depth }}
+                  colorScheme="mono"
                   aria-current={current ? "page" : undefined}
                   color={{
                     base: "fg.muted",

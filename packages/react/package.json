@@ -92,6 +92,7 @@
     "@types/react-dom": "^19.2.0",
     "@vitest/browser": "^3.2.4",
     "clean-package": "2.2.0",
+    "playwright": "^1.56.1",
     "react-hook-form": "^7.64.0",
     "react-icons": "^5.5.0",
     "use-mask-input": "^3.5.2"

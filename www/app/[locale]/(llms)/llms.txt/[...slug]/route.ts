@@ -44,13 +44,13 @@ ${links ? `links:\n${links}` : ""}
 export async function GET(_request: Request, context: RouteContext) {
   const params = await context.params
 
-  const isLlmRequest = params.slug[0]?.includes(".mdx")
+  const isLlmRequest = params.slug[params.slug.length - 1]?.includes(".mdx")
   if (!isLlmRequest) {
     return redirect(`/${params.locale}/llms.txt`)
   }
 
-  const cleanSlug = params.slug[0]?.replace(".mdx", "")
-  const targetPath = ["components", cleanSlug].join("/")
+  const cleanSlug = params.slug.map((segment) => segment.replace(".mdx", ""))
+  const targetPath = [...cleanSlug].join("/")
 
   const page = docs.find((doc) => {
     const docPath = doc.slug.join("/")

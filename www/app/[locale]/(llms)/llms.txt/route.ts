@@ -9,9 +9,29 @@ export const GET = async (_request: Request, context: RouteContext) => {
 
   const documentSets = [
     {
+      href: `https://v2.yamada-ui.com/${params.locale}/llms-full.txt`,
+      description: "The complete Yamada UI v2 documentation including all components, hooks and styling and theming",
+      title: "Complete documentation",
+    },
+    {
       href: `https://v2.yamada-ui.com/${params.locale}/llms-components.txt`,
       description: "Documentation for all components in Yamada UI v2.",
       title: "Components",
+    },
+    {
+      href: `https://v2.yamada-ui.com/${params.locale}/llms-hooks.txt`,
+      description: "Documentation for all hooks in Yamada UI v2.",
+      title: "Hooks",
+    },
+    {
+      href: `https://v2.yamada-ui.com/${params.locale}/llms-styling.txt`,
+      description: "Documentation for the styling system in Yamada UI v2.",
+      title: "Styling",
+    },
+    {
+      href: `https://v2.yamada-ui.com/${params.locale}/llms-theming.txt`,
+      description: "Documentation for theming Yamada UI v2.",
+      title: "Theming",
     },
   ]
 

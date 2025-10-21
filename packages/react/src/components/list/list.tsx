@@ -18,7 +18,7 @@ export interface ListRootProps
   /**
    * If provided, generate elements based on items.
    */
-  items?: ListItemProps[]
+  items?: ListItem[]
   /**
    * The CSS `list-style-position` property.
    */
@@ -81,6 +81,8 @@ export interface ListItemProps extends HTMLStyledProps<"li"> {
    */
   icon?: ReactElement<any>
 }
+
+export interface ListItem extends ListItemProps {}
 
 export const ListItem = withContext<"li", ListItemProps>(
   ({ children, icon, ...rest }) => (

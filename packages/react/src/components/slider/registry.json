@@ -15,7 +15,7 @@
   "sources": [
     {
       "name": "index.ts",
-      "content": "export * from \"./slider.style\"\nexport * as Slider from \"./namespace\"\nexport {\n  SliderMark,\n  SliderMarks,\n  SliderPropsContext,\n  SliderRange,\n  SliderRoot,\n  SliderThumb,\n  SliderThumbs,\n  SliderTrack,\n  useSliderPropsContext,\n} from \"./slider\"\nexport type {\n  SliderMarkProps,\n  SliderMarksProps,\n  SliderRangeProps,\n  SliderRootProps,\n  SliderThumbProps,\n  SliderThumbsProps,\n  SliderTrackProps,\n} from \"./slider\"\n"
+      "content": "export * from \"./slider.style\"\nexport * as Slider from \"./namespace\"\nexport {\n  SliderMark,\n  SliderMarks,\n  SliderPropsContext,\n  SliderRange,\n  SliderRoot,\n  SliderThumb,\n  SliderThumbs,\n  SliderTrack,\n  useSliderPropsContext,\n} from \"./slider\"\nexport type {\n  SliderMarkProps,\n  SliderMarksProps,\n  SliderRangeProps,\n  SliderRootProps,\n  SliderThumbProps,\n  SliderThumbsProps,\n  SliderTrackProps,\n} from \"./slider\"\nexport * from \"./use-slider\"\n"
     },
     {
       "name": "namespace.ts",

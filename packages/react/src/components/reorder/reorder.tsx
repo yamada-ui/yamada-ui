@@ -29,7 +29,7 @@ export interface ReorderRootProps<Y = string>
    * If provided, generate reorder items based on items.
    *
    */
-  items?: ReorderItemProps<Y>[]
+  items?: ReorderItem<Y>[]
 }
 
 const {
@@ -82,6 +82,8 @@ export interface ReorderItemProps<Y = string>
       "children"
     >,
     PropsWithChildren {}
+
+export interface ReorderItem<Y = string> extends ReorderItemProps<Y> {}
 
 export const ReorderItem = withContext<"li", ReorderItemProps>(
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint

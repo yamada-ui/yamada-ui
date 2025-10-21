@@ -64,7 +64,7 @@ import { Menu } from "@workspaces/ui"
 ### Use Items
 
 ```tsx preview functional
-const items = useMemo<Menu.ContentProps["items"]>(
+const items = useMemo<Menu.Item[]>(
   () => [
     { label: "うずまきナルト", value: "naruto" },
     { label: "うちはサスケ", value: "sasuke" },
@@ -87,7 +87,7 @@ return (
 ### Change Size
 
 ```tsx preview functional
-const items = useMemo<Menu.ContentProps["items"]>(
+const items = useMemo<Menu.Item[]>(
   () => [
     { label: "うずまきナルト", value: "naruto" },
     { label: "うちはサスケ", value: "sasuke" },
@@ -118,7 +118,7 @@ return (
 To handle selection event, use `onSelect`.
 
 ```tsx preview functional
-const items = useMemo<Menu.ContentProps["items"]>(
+const items = useMemo<Menu.Item[]>(
   () => [
     { label: "うずまきナルト", value: "naruto" },
     { label: "うちはサスケ", value: "sasuke" },
@@ -141,7 +141,7 @@ return (
 ### Add Dividers
 
 ```tsx preview functional
-const items = useMemo<Menu.ContentProps["items"]>(
+const items = useMemo<Menu.Item[]>(
   () => [
     { label: "うずまきナルト", value: "naruto" },
     { label: "うちはサスケ", value: "sasuke" },
@@ -188,7 +188,7 @@ return (
 ### Grouping
 
 ```tsx preview functional
-const items = useMemo<Menu.ContentProps["items"]>(
+const items = useMemo<Menu.Item[]>(
   () => [
     {
       items: [
@@ -248,7 +248,7 @@ return (
 ### Display Icons
 
 ```tsx preview functional
-const items = useMemo<Menu.ContentProps["items"]>(
+const items = useMemo<Menu.Item[]>(
   () => [
     {
       label: (
@@ -330,7 +330,7 @@ return (
 ### Display Commands
 
 ```tsx preview functional
-const items = useMemo<Menu.ContentProps["items"]>(
+const items = useMemo<Menu.Item[]>(
   () => [
     {
       label: (
@@ -401,7 +401,7 @@ return (
 
 ```tsx preview functional
 const [value, setValue] = useState("naruto")
-const items = useMemo<Menu.ContentProps["items"]>(
+const items = useMemo<Menu.Item[]>(
   () => [
     {
       type: "checkbox",
@@ -504,7 +504,7 @@ return (
 ### Display Menu on Different Element
 
 ```tsx preview functional
-const items = useMemo<Menu.ContentProps["items"]>(
+const items = useMemo<Menu.Item[]>(
   () => [
     { label: "うずまきナルト", value: "naruto" },
     { label: "うちはサスケ", value: "sasuke" },
@@ -537,7 +537,7 @@ return (
 To disable the close on select, set `closeOnSelect` to `false`.
 
 ```tsx preview functional
-const items = useMemo<Menu.ContentProps["items"]>(
+const items = useMemo<Menu.Item[]>(
   () => [
     { label: "うずまきナルト", value: "naruto" },
     { label: "うちはサスケ", value: "sasuke" },
@@ -585,7 +585,7 @@ return (
 To change the display position, set `placement` to `"start"`, `"end-end"`, etc. By default, `"end-start"` is set.
 
 ```tsx preview functional
-const items = useMemo<Menu.ContentProps["items"]>(
+const items = useMemo<Menu.Item[]>(
   () => [
     { label: "うずまきナルト", value: "naruto" },
     { label: "うちはサスケ", value: "sasuke" },
@@ -625,7 +625,7 @@ return (
 To change the animation, set `animationScheme` to `"inline-start"`, `"block-end"`, etc. By default, `"scale"` is set.
 
 ```tsx preview functional
-const items = useMemo<Menu.ContentProps["items"]>(
+const items = useMemo<Menu.Item[]>(
   () => [
     { label: "うずまきナルト", value: "naruto" },
     { label: "うちはサスケ", value: "sasuke" },
@@ -658,7 +658,7 @@ return (
 To change the offset, set a value to `gutter` or `offset`.
 
 ```tsx preview functional
-const items = useMemo<Menu.ContentProps["items"]>(
+const items = useMemo<Menu.Item[]>(
   () => [
     { label: "うずまきナルト", value: "naruto" },
     { label: "うちはサスケ", value: "sasuke" },
@@ -692,7 +692,7 @@ return (
 To change the duration, set a numerical value (seconds) to `duration`.
 
 ```tsx preview functional
-const items = useMemo<Menu.ContentProps["items"]>(
+const items = useMemo<Menu.Item[]>(
   () => [
     { label: "うずまきナルト", value: "naruto" },
     { label: "うちはサスケ", value: "sasuke" },
@@ -717,7 +717,7 @@ return (
 To access internal state, pass a function to the `children` of `Menu.Root`.
 
 ```tsx preview functional client
-const items = useMemo<Menu.ContentProps["items"]>(
+const items = useMemo<Menu.Item[]>(
   () => [
     { label: "うずまきナルト", value: "naruto" },
     { label: "うちはサスケ", value: "sasuke" },
@@ -746,7 +746,7 @@ return (
 To disable closing when clicking outside, set `closeOnBlur` to `false`.
 
 ```tsx preview functional
-const items = useMemo<Menu.ContentProps["items"]>(
+const items = useMemo<Menu.Item[]>(
   () => [
     { label: "うずまきナルト", value: "naruto" },
     { label: "うちはサスケ", value: "sasuke" },
@@ -770,7 +770,7 @@ return (
 To disable items, set `disabled` to `true`.
 
 ```tsx preview functional
-const items = useMemo<Menu.ContentProps["items"]>(
+const items = useMemo<Menu.Item[]>(
   () => [
     { label: "うずまきナルト", value: "naruto" },
     { label: "うちはサスケ", value: "sasuke", disabled: true },
@@ -795,7 +795,7 @@ return (
 To add header or footer, set `ReactNode` to `header` or `footer` of `Menu.Content`.
 
 ```tsx preview functional
-const items = useMemo<Menu.ContentProps["items"]>(
+const items = useMemo<Menu.Item[]>(
   () => [
     { label: "うずまきナルト", value: "naruto" },
     { label: "うちはサスケ", value: "sasuke" },
@@ -828,7 +828,7 @@ return (
 ```tsx preview functional client
 const { open, onOpen, onClose } = useDisclosure()
 
-const items = useMemo<Menu.ContentProps["items"]>(
+const items = useMemo<Menu.Item[]>(
   () => [
     { label: "うずまきナルト", value: "naruto" },
     { label: "うちはサスケ", value: "sasuke" },

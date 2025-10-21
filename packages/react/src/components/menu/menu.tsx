@@ -47,7 +47,7 @@ interface MenuSharedItem {
 
 interface MenuItemWithValue extends MenuSharedItem, MenuItemProps {}
 
-interface MenuOptionItem extends MenuSharedItem, MenuOptionItemProps {}
+export interface MenuOptionItem extends MenuSharedItem, MenuOptionItemProps {}
 
 interface MenuItemWithSeparator extends MenuSeparatorProps {
   type: "separator"
@@ -74,6 +74,13 @@ interface MenuItemWithItems extends MenuSharedItem, MenuGroupProps {
   items?: MenuItemWithValue[]
   labelProps?: MenuLabelProps
 }
+
+export type MenuItem =
+  | MenuItemWithCheckboxGroup
+  | MenuItemWithItems
+  | MenuItemWithRadioGroup
+  | MenuItemWithSeparator
+  | MenuItemWithValue
 
 interface ComponentContext
   extends Pick<
@@ -308,13 +315,7 @@ export interface MenuContentProps extends Popover.ContentProps {
   /**
    * If provided, generate elements based on items.
    */
-  items?: (
-    | MenuItemWithCheckboxGroup
-    | MenuItemWithItems
-    | MenuItemWithRadioGroup
-    | MenuItemWithSeparator
-    | MenuItemWithValue
-  )[]
+  items?: MenuItem[]
   /**
    * Props for the footer component.
    */

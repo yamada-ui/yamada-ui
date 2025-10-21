@@ -47,7 +47,7 @@ export const Basic: Story = () => {
 }
 
 export const Items: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { label: "うちはサスケ", value: "sasuke" },
@@ -68,7 +68,7 @@ export const Items: Story = () => {
 }
 
 export const Size: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { label: "うちはサスケ", value: "sasuke" },
@@ -93,7 +93,7 @@ export const Size: Story = () => {
 }
 
 export const OnSelect: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { label: "うちはサスケ", value: "sasuke" },
@@ -114,7 +114,7 @@ export const OnSelect: Story = () => {
 }
 
 export const Separator: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { label: "うちはサスケ", value: "sasuke" },
@@ -159,7 +159,7 @@ export const Separator: Story = () => {
 }
 
 export const Group: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       {
         items: [
@@ -218,7 +218,7 @@ export const Group: Story = () => {
 
 export const CheckboxGroup: Story = () => {
   const [value, setValue] = useState<string[]>(["naruto"])
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       {
         type: "checkbox",
@@ -267,7 +267,7 @@ export const CheckboxGroup: Story = () => {
 
 export const RadioGroup: Story = () => {
   const [value, setValue] = useState<string>("naruto")
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       {
         type: "radio",
@@ -315,7 +315,7 @@ export const RadioGroup: Story = () => {
 }
 
 export const Indicator: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       {
         label: (
@@ -395,7 +395,7 @@ export const Indicator: Story = () => {
 }
 
 export const Command: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       {
         label: (
@@ -509,7 +509,7 @@ export const Links: Story = () => {
 }
 
 export const Anchor: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { label: "うちはサスケ", value: "sasuke" },
@@ -538,7 +538,7 @@ export const Anchor: Story = () => {
 }
 
 export const Header: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { label: "うちはサスケ", value: "sasuke" },
@@ -562,7 +562,7 @@ export const Header: Story = () => {
 }
 
 export const Footer: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { label: "うちはサスケ", value: "sasuke" },
@@ -586,7 +586,7 @@ export const Footer: Story = () => {
 }
 
 export const ContextMenu: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { label: "うちはサスケ", value: "sasuke" },
@@ -644,7 +644,7 @@ export const NestedMenu: Story = () => {
 }
 
 export const Duration: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { label: "うちはサスケ", value: "sasuke" },
@@ -665,7 +665,7 @@ export const Duration: Story = () => {
 }
 
 export const Offset: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { label: "うちはサスケ", value: "sasuke" },
@@ -686,7 +686,7 @@ export const Offset: Story = () => {
 }
 
 export const Gutter: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { label: "うちはサスケ", value: "sasuke" },
@@ -707,7 +707,7 @@ export const Gutter: Story = () => {
 }
 
 export const AnimationScheme: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { label: "うちはサスケ", value: "sasuke" },
@@ -728,7 +728,7 @@ export const AnimationScheme: Story = () => {
 }
 
 export const Placement: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { label: "うちはサスケ", value: "sasuke" },
@@ -749,7 +749,7 @@ export const Placement: Story = () => {
 }
 
 export const BlockScrollOnMount: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { label: "うちはサスケ", value: "sasuke" },
@@ -772,7 +772,7 @@ export const BlockScrollOnMount: Story = () => {
 }
 
 export const CloseOnScroll: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { label: "うちはサスケ", value: "sasuke" },
@@ -796,7 +796,7 @@ export const CloseOnScroll: Story = () => {
 
 export const InitialFocusRef: Story = () => {
   const ref = useRef<HTMLDivElement>(null)
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { ref: ref, label: "うちはサスケ", value: "sasuke" },
@@ -817,7 +817,7 @@ export const InitialFocusRef: Story = () => {
 }
 
 export const Disabled: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { label: "うちはサスケ", value: "sasuke" },
@@ -838,7 +838,7 @@ export const Disabled: Story = () => {
 }
 
 export const DisabledItem: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { disabled: true, label: "うちはサスケ", value: "sasuke" },
@@ -859,7 +859,7 @@ export const DisabledItem: Story = () => {
 }
 
 export const DisabledCloseOnSelect: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { closeOnSelect: true, label: "うちはサスケ", value: "sasuke" },
@@ -880,7 +880,7 @@ export const DisabledCloseOnSelect: Story = () => {
 }
 
 export const DisabledCloseOnBlur: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { label: "うちはサスケ", value: "sasuke" },
@@ -901,7 +901,7 @@ export const DisabledCloseOnBlur: Story = () => {
 }
 
 export const DisabledCloseOnEsc: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { label: "うちはサスケ", value: "sasuke" },
@@ -923,7 +923,7 @@ export const DisabledCloseOnEsc: Story = () => {
 
 export const CustomControl: Story = () => {
   const { open, onClose, onOpen } = useDisclosure()
-  const items = useMemo<Menu.ContentProps["items"]>(
+  const items = useMemo<Menu.Item[]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
       { label: "うちはサスケ", value: "sasuke" },

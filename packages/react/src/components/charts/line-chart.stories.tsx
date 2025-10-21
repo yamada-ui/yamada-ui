@@ -31,10 +31,23 @@ export const Basic: Story = () => {
   )
 
   return (
-    <LineChart.Root data={data}>
-      <LineChart.Line dataKey="uv" />
-      <LineChart.Line dataKey="pv" />
-    </LineChart.Root>
+    <VStack>
+      <LineChart.Root data={data}>
+        <LineChart.Line dataKey="uv" />
+        <LineChart.Line dataKey="pv" />
+      </LineChart.Root>
+
+      <LineChart.Root data={data}>
+        <LineChart.Line dataKey="uv" />
+        <LineChart.Line dataKey="pv" />
+
+        <LineChart.Grid strokeDasharray="15 15" />
+        <LineChart.XAxis dataKey="name" />
+        <LineChart.YAxis />
+        <LineChart.Tooltip />
+        <LineChart.Legend />
+      </LineChart.Root>
+    </VStack>
   )
 }
 
@@ -61,34 +74,6 @@ export const Size: Story = () => {
         </LineChart.Root>
       )}
     </PropsTable>
-  )
-}
-
-export const CustomComponents: Story = () => {
-  const data = useMemo(
-    () =>
-      Array(7)
-        .fill(0)
-        .map((_, index) => ({
-          name: `Page ${index}`,
-          amt: randomValue(),
-          pv: randomValue(),
-          uv: randomValue(),
-        })),
-    [],
-  )
-
-  return (
-    <LineChart.Root data={data}>
-      <LineChart.Line dataKey="uv" />
-      <LineChart.Line dataKey="pv" />
-
-      <LineChart.Grid strokeDasharray="15 15" />
-      <LineChart.XAxis dataKey="name" />
-      <LineChart.YAxis />
-      <LineChart.Tooltip />
-      <LineChart.Legend />
-    </LineChart.Root>
   )
 }
 

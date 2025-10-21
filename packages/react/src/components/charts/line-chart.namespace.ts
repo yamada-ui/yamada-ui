@@ -4,7 +4,7 @@ import type { LegendProps } from "./legend"
 import type { LineProps } from "./line"
 import type { LineChartRootProps } from "./line-chart"
 import type { ReferenceLineProps } from "./reference-line"
-import type { TooltipProps } from "./tooltip"
+import type { TooltipRootProps } from "./tooltip"
 import type { XAxisProps } from "./x-axis"
 import type { YAxisProps } from "./y-axis"
 import { Grid } from "./grid"
@@ -39,7 +39,7 @@ export type {
   LineProps,
   ReferenceLineProps,
   LineChartRootProps as RootProps,
-  TooltipProps,
+  TooltipRootProps as TooltipProps,
   XAxisProps,
   YAxisProps,
 }

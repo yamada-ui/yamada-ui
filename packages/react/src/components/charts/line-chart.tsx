@@ -7,7 +7,7 @@ import type { LegendProps } from "./legend"
 import type { LineProps } from "./line"
 import type { LineChartStyle } from "./line-chart.style"
 import type { ReferenceLineProps } from "./reference-line"
-import type { TooltipProps } from "./tooltip"
+import type { TooltipRootProps } from "./tooltip"
 import type { UseLineChartProps } from "./use-line-chart"
 import type { XAxisProps } from "./x-axis"
 import type { YAxisProps } from "./y-axis"
@@ -26,12 +26,11 @@ import { XAxis, XAxisComponentContext } from "./x-axis"
 import { YAxis, YAxisComponentContext } from "./y-axis"
 
 //TODO: tooltip cursor
-//TODO: default tooltip and legend -> slotComponent
+//TODO: default legend -> slotComponent
 //TODO: dots default style and nested element
 //   -> dotはカスタムコンポーネントにして、asChildで当てる。ovalのpathみたいにする。slotComponentにしてスタイルを当てる
 // const styledPath = styled("path",{forwardProps:["cx","cy"]})
 //TODO: axis label
-//MEMO: useSplitChildren
 //
 // <LineChart.Root
 //   TODO: こっちでもLineの表示を制御できるようにする。子要素で渡されたら、そちら優先で当てる
@@ -40,6 +39,9 @@ import { YAxis, YAxisComponentContext } from "./y-axis"
 //   lines={{ pv: { dot: "red", line: "blue" }, uv: "blue" }}
 //   data={data}
 // >
+//
+//? tooltipどこまでexportするか
+//? useSplitChildren
 
 export interface LineChartRootProps
   extends Merge<HTMLStyledProps, UseLineChartProps>,
@@ -93,7 +95,7 @@ export interface LineChartRootProps
   /**
    * Props passed down to 'Tooltip' component.
    */
-  tooltipProps?: TooltipProps
+  tooltipProps?: TooltipRootProps
   /**
    * Props passed down to 'XAxis' component.
    */

@@ -1,14 +1,14 @@
-import type { ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { Dict } from "../../utils"
 import type { TooltipStyle } from "./tooltip.style"
 import type { UseTooltipProps } from "./use-tooltip"
 import { Tooltip as RechartsTooltip } from "recharts"
-import { createComponent, getClassName, styled } from "../../core"
-import { bem, isArray } from "../../utils"
+import { createSlotComponent, styled } from "../../core"
+import { isArray } from "../../utils"
 import { tooltipStyle } from "./tooltip.style"
 import { useTooltip } from "./use-tooltip"
 
-export interface TooltipProps
+export interface TooltipRootProps
   extends UseTooltipProps,
     ThemeProps<TooltipStyle> {
   /**
@@ -26,13 +26,16 @@ export interface TooltipProps
 }
 
 const {
-  component,
   ComponentContext: TooltipComponentContext,
   PropsContext: TooltipPropsContext,
   useComponentContext: useTooltipComponentContext,
   usePropsContext: useTooltipPropsContext,
   withContext,
-} = createComponent<TooltipProps, TooltipStyle>("chart-tooltip", tooltipStyle)
+  withProvider,
+} = createSlotComponent<TooltipRootProps, TooltipStyle>(
+  "chart-tooltip",
+  tooltipStyle,
+)
 
 export {
   TooltipComponentContext,
@@ -41,12 +44,10 @@ export {
   useTooltipPropsContext,
 }
 
-export const Tooltip = withContext<"div", TooltipProps>(RechartsTooltip)(({
-  labelFormatter,
-  unit,
-  valueFormatter,
-  ...props
-}) => {
+export const Tooltip = withProvider<"div", TooltipRootProps>(
+  RechartsTooltip,
+  "root",
+)(({ labelFormatter, unit, valueFormatter, ...props }) => {
   const customProps = useTooltipComponentContext()
   const { getTooltipProps, tooltipStyledProps } = useTooltip({
     ...customProps,
@@ -62,7 +63,7 @@ export const Tooltip = withContext<"div", TooltipProps>(RechartsTooltip)(({
       payload: Dict[] | undefined
       label?: string
     }) => (
-      <DefaultTooltip
+      <TooltipContent
         label={label}
         labelFormatter={labelFormatter}
         payload={payload}
@@ -74,7 +75,7 @@ export const Tooltip = withContext<"div", TooltipProps>(RechartsTooltip)(({
   }
 })
 
-interface DefaultTooltipProps {
+interface TooltipContentProps extends HTMLStyledProps {
   payload: Dict[] | undefined
   dataKey?: string
   label?: string
@@ -84,7 +85,7 @@ interface DefaultTooltipProps {
   valueFormatter?: (value: any) => string
 }
 
-const DefaultTooltip = component<"div", DefaultTooltipProps>(
+const TooltipContent = withContext<"div", TooltipContentProps>(
   ({
     dataKey = "value",
     label,
@@ -120,80 +121,73 @@ const DefaultTooltip = component<"div", DefaultTooltipProps>(
         }
 
         return (
-          <styled.div
-            key={`tooltip-payload-${index}`}
-            className="ui-chart__tooltip-item"
-            alignItems="center"
-            display="flex"
-            fontSize="sm"
-            gap="sm"
-          >
-            <styled.div
-              className="ui-chart__tooltip-swatch"
-              background={color}
-              boxSize="3"
-              rounded="full"
-            />
+          <TooltipContentItem key={index}>
+            {color ? <TooltipContentSwatch bg={color} /> : null}
 
-            <styled.span
-              className="ui-chart__tooltip-label"
-              color={["blackAlpha.800", "whiteAlpha.700"]}
-            >
-              {name}
-            </styled.span>
+            <TooltipContentLabel>{name}</TooltipContentLabel>
 
-            <styled.span
-              className="ui-chart__tooltip-value"
-              flex="1"
-              textAlign="end"
-            >
+            <TooltipContentValue>
               {value}
-              {unit ? unit : ""}
-            </styled.span>
-          </styled.div>
+              {unit ?? ""}
+            </TooltipContentValue>
+          </TooltipContentItem>
         )
       },
     )
 
     return (
-      <styled.div
-        className="ui-chart__tooltip"
-        bg={["white", "black"]}
-        border="1px solid"
-        borderColor={["blackAlpha.200", "whiteAlpha.100"]}
-        boxShadow={["md", "dark-md"]}
-        color="inherit"
-        display="flex"
-        flexDirection="column"
-        fontSize="sm"
-        fontWeight="medium"
-        gap="sm"
-        maxW="xs"
-        minW="48"
-        p="3"
-        rounded="md"
-        zIndex="dodoria"
-        {...rest}
-      >
+      <styled.div {...rest}>
         {label ? (
-          <styled.p className="ui-chart__tooltip-title" fontSize="md">
+          <TooltipContentTitle>
             {labelFormatter?.(label) ?? label}
-          </styled.p>
+          </TooltipContentTitle>
         ) : null}
 
-        <styled.div
-          className="ui-chart__tooltip-list"
-          display="flex"
-          flexDirection="column"
-          gap="xs"
-        >
-          {items}
-        </styled.div>
+        <TooltipContentList>{items}</TooltipContentList>
       </styled.div>
     )
   },
-  {
-    name: "default-tooltip",
-    className: getClassName(bem("chart-tooltip", "default")),
-  },
+  "content",
+)()
+
+interface TooltipContentTitle extends HTMLStyledProps<"p"> {}
+
+const TooltipContentTitle = withContext<"p", TooltipContentTitle>(
+  "p",
+  "title",
+)()
+
+interface TooltipContentList extends HTMLStyledProps {}
+
+const TooltipContentList = withContext<"div", TooltipContentList>(
+  "div",
+  "list",
+)()
+
+interface TooltipContentItem extends HTMLStyledProps {}
+
+const TooltipContentItem = withContext<"div", TooltipContentItem>(
+  "div",
+  "item",
+)()
+
+interface TooltipContentSwatch extends HTMLStyledProps {}
+
+const TooltipContentSwatch = withContext<"div", TooltipContentSwatch>(
+  "div",
+  "swatch",
+)()
+
+interface TooltipContentLabel extends HTMLStyledProps<"span"> {}
+
+const TooltipContentLabel = withContext<"span", TooltipContentLabel>(
+  "span",
+  "label",
+)()
+
+interface TooltipContentValue extends HTMLStyledProps<"span"> {}
+
+const TooltipContentValue = withContext<"span", TooltipContentValue>(
+  "span",
+  "value",
 )()

@@ -1,0 +1,58 @@
+import{p,q as a,r as g,H as c,j as e}from"./iframe-s8tBpZKs.js";import{G}from"./grid-B2Ss8PHo.js";import{G as r}from"./grid-item-V397EoNi.js";import"./preload-helper-PPVm8Dsz.js";const u=p({}),{withContext:x}=a("simple-grid",u),o=x(G)(void 0,({columns:l,minChildWidth:m,...s})=>({templateColumns:g.useMemo(()=>m?c(m,n=>n!=null?`repeat(auto-fit, minmax({sizes.${n}, ${n}}, 1fr))`:void 0):c(l,n=>n!=null?`repeat(${n}, minmax(0, 1fr))`:void 0),[m,l]),...s})),f={component:o,title:"Components / SimpleGrid"},t=()=>e.jsxs(o,{columns:2,gap:"md",w:"full",children:[e.jsx(r,{bg:"info",color:"white",p:"md",rounded:"l2",textAlign:"center",children:"GridItem"}),e.jsx(r,{bg:"success",color:"white",p:"md",rounded:"l2",textAlign:"center",children:"GridItem"}),e.jsx(r,{bg:"warning",color:"white",p:"md",rounded:"l2",textAlign:"center",children:"GridItem"}),e.jsx(r,{bg:"danger",color:"white",p:"md",rounded:"l2",textAlign:"center",children:"GridItem"})]}),d=()=>e.jsxs(o,{columnGap:"lg",columns:2,rowGap:"md",w:"full",children:[e.jsx(r,{bg:"info",color:"white",p:"md",rounded:"l2",textAlign:"center",children:"GridItem"}),e.jsx(r,{bg:"success",color:"white",p:"md",rounded:"l2",textAlign:"center",children:"GridItem"}),e.jsx(r,{bg:"warning",color:"white",p:"md",rounded:"l2",textAlign:"center",children:"GridItem"}),e.jsx(r,{bg:"danger",color:"white",p:"md",rounded:"l2",textAlign:"center",children:"GridItem"})]}),i=()=>e.jsxs(o,{gap:"md",minChildWidth:{base:"3xs",md:"8rem"},w:"full",children:[e.jsx(r,{bg:"info",color:"white",p:"md",rounded:"l2",textAlign:"center",children:"GridItem"}),e.jsx(r,{bg:"success",color:"white",p:"md",rounded:"l2",textAlign:"center",children:"GridItem"}),e.jsx(r,{bg:"warning",color:"white",p:"md",rounded:"l2",textAlign:"center",children:"GridItem"}),e.jsx(r,{bg:"danger",color:"white",p:"md",rounded:"l2",textAlign:"center",children:"GridItem"})]});t.parameters={...t.parameters,docs:{...t.parameters?.docs,source:{originalSource:`() => {
+  return <SimpleGrid columns={2} gap="md" w="full">
+      <GridItem bg="info" color="white" p="md" rounded="l2" textAlign="center">
+        GridItem
+      </GridItem>
+
+      <GridItem bg="success" color="white" p="md" rounded="l2" textAlign="center">
+        GridItem
+      </GridItem>
+
+      <GridItem bg="warning" color="white" p="md" rounded="l2" textAlign="center">
+        GridItem
+      </GridItem>
+
+      <GridItem bg="danger" color="white" p="md" rounded="l2" textAlign="center">
+        GridItem
+      </GridItem>
+    </SimpleGrid>;
+}`,...t.parameters?.docs?.source}}};d.parameters={...d.parameters,docs:{...d.parameters?.docs,source:{originalSource:`() => {
+  return <SimpleGrid columnGap="lg" columns={2} rowGap="md" w="full">
+      <GridItem bg="info" color="white" p="md" rounded="l2" textAlign="center">
+        GridItem
+      </GridItem>
+
+      <GridItem bg="success" color="white" p="md" rounded="l2" textAlign="center">
+        GridItem
+      </GridItem>
+
+      <GridItem bg="warning" color="white" p="md" rounded="l2" textAlign="center">
+        GridItem
+      </GridItem>
+
+      <GridItem bg="danger" color="white" p="md" rounded="l2" textAlign="center">
+        GridItem
+      </GridItem>
+    </SimpleGrid>;
+}`,...d.parameters?.docs?.source}}};i.parameters={...i.parameters,docs:{...i.parameters?.docs,source:{originalSource:`() => {
+  return <SimpleGrid gap="md" minChildWidth={{
+    base: "3xs",
+    md: "8rem"
+  }} w="full">
+      <GridItem bg="info" color="white" p="md" rounded="l2" textAlign="center">
+        GridItem
+      </GridItem>
+
+      <GridItem bg="success" color="white" p="md" rounded="l2" textAlign="center">
+        GridItem
+      </GridItem>
+
+      <GridItem bg="warning" color="white" p="md" rounded="l2" textAlign="center">
+        GridItem
+      </GridItem>
+
+      <GridItem bg="danger" color="white" p="md" rounded="l2" textAlign="center">
+        GridItem
+      </GridItem>
+    </SimpleGrid>;
+}`,...i.parameters?.docs?.source}}};const j=["Basic","Gap","MinChildWidth"];export{t as Basic,d as Gap,i as MinChildWidth,j as __namedExportsOrder,f as default};

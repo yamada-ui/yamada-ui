@@ -21,6 +21,7 @@ export function CodePreview({
   children = code,
   highlight,
   html: htmlProp,
+  tabIndex = 0,
   ...props
 }: CodePreviewProps) {
   const rest = useInjectVarsIntoProps(
@@ -119,7 +120,7 @@ export function CodePreview({
           ps="{space}"
           py="{space}"
           rounded="l2"
-          tabIndex={0}
+          tabIndex={tabIndex}
         />
       </Box>
 

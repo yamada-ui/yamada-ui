@@ -5,7 +5,7 @@ import { Children, isValidElement, useMemo } from "react"
 export interface StepsProps extends Timeline.RootProps {}
 
 export function Steps({ children, ...rest }: StepsProps) {
-  const items = useMemo<Timeline.RootProps["items"]>(
+  const items = useMemo<Timeline.Item[]>(
     () =>
       Children.map(children, (child, index) => ({
         content: isValidElement<PropsWithChildren>(child)
@@ -31,7 +31,7 @@ export function Steps({ children, ...rest }: StepsProps) {
             _lastChild: { mb: "0" },
           },
         },
-      })) as Timeline.RootProps["items"],
+      })) as Timeline.Item[],
     [children],
   )
 

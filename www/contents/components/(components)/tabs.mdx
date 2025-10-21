@@ -440,7 +440,7 @@ return (
 
 ```tsx preview functional client
 const [index, setIndex] = useState(0)
-const [items, setItems] = useState<Required<Tabs.RootProps>["items"]>([
+const [items, setItems] = useState<Tabs.Item[]>([
   { id: uuid(), panel: "Tab Content", tab: "Tab" },
   { id: uuid(), panel: "Tab Content", tab: "Tab" },
   { id: uuid(), panel: "Tab Content", tab: "Tab" },

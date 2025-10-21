@@ -9,7 +9,7 @@ interface TestComponentProps extends Steps.RootProps {
 }
 
 const TestComponent: FC<TestComponentProps> = ({ itemProps, ...rest }) => {
-  const items: Steps.RootProps["items"] = useMemo(
+  const items: Steps.Item[] = useMemo(
     () =>
       [
         {

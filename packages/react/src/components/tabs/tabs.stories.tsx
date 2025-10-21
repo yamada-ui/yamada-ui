@@ -456,7 +456,7 @@ export const LazyBehavior: Story = () => {
 
 export const Dynamic: Story = () => {
   const [index, setIndex] = useState(0)
-  const [items, setItems] = useState<Required<Tabs.RootProps>["items"]>([
+  const [items, setItems] = useState<Tabs.Item[]>([
     { id: uuid(), panel: "Tab Content", tab: "Tab" },
     { id: uuid(), panel: "Tab Content", tab: "Tab" },
     { id: uuid(), panel: "Tab Content", tab: "Tab" },

@@ -30,7 +30,7 @@ import {
 interface ComponentContext
   extends Pick<StepsRootProps, "items" | "lazy" | "lazyBehavior"> {}
 
-interface StepsItem
+export interface StepsItem
   extends Omit<StepsItemProps, "content" | "index" | "title">,
     Pick<StepsIndicatorProps, "complete" | "current" | "incomplete"> {
   /**

@@ -29,7 +29,7 @@
       },
       "defaultValue": {
         "type": "[number, number, number]",
-        "defaultValue": "\"[0, 0, 1]\"",
+        "defaultValue": "[0, 0, 1]",
         "description": "The initial value of the saturation slider.",
         "required": false
       },
@@ -194,7 +194,7 @@
     },
     "defaultValue": {
       "type": "[number, number, number]",
-      "defaultValue": "\"[0, 0, 1]\"",
+      "defaultValue": "[0, 0, 1]",
       "description": "The initial value of the saturation slider.",
       "required": false
     },

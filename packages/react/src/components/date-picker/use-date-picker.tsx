@@ -110,6 +110,14 @@ export interface UseDatePickerProps<
     HTMLRefAttributes<"input">,
     FieldProps {
   /**
+   * The `id` attribute of the input element.
+   */
+  id?: string
+  /**
+   * The `name` attribute of the input element.
+   */
+  name?: string
+  /**
    * If `true`, allows input.
    *
    * @default true
@@ -157,7 +165,7 @@ export interface UseDatePickerProps<
   /**
    * If `true`, the date picker will be opened when the input is focused.
    *
-   * @default false
+   * @default true
    */
   openOnFocus?: boolean
   /**
@@ -201,7 +209,9 @@ export const useDatePicker = <
   const { locale: defaultLocale, t } = useI18n("datePicker")
   const {
     props: {
+      id,
       ref,
+      name,
       allowInput = true,
       allowInputBeyond = false,
       closeOnChange = false,
@@ -223,12 +233,13 @@ export const useDatePicker = <
       max,
       month: monthProp,
       openOnChange = true,
-      openOnFocus = false,
+      openOnFocus = true,
       parseDate,
       pattern,
       placeholder: placeholderProp,
       readOnly,
       render = defaultRender,
+      required,
       separator = range ? "-" : ",",
       value: valueProp,
       onChange: onChangeProp,
@@ -769,11 +780,10 @@ export const useDatePicker = <
         "aria-haspopup": "dialog",
         tabIndex: !allowInput ? 0 : -1,
         ...props,
-        onBlur: handlerAll(props.onBlur, onBlur),
         onClick: handlerAll(props.onClick, onClick),
       }),
 
-    [allowInput, getTriggerProps, onBlur, onClick],
+    [allowInput, getTriggerProps, onClick],
   )
 
   const getInputProps: PropGetter<"input", { align?: InputAlign }> =
@@ -785,10 +795,13 @@ export const useDatePicker = <
             ...props.style,
           },
           autoComplete: "off",
-          disabled: !interactive,
+          disabled,
+          readOnly,
+          required,
           tabIndex: allowInput ? 0 : -1,
           ...dataProps,
           ...props,
+          onBlur: handlerAll(props.onBlur, onBlur),
           onChange: handlerAll(props.onChange, onInputChange),
           onFocus: handlerAll(props.onFocus, onFocus),
           onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
@@ -805,9 +818,21 @@ export const useDatePicker = <
             inputProps.value = inputValue.end
             inputProps.placeholder = endPlaceholder
           }
+
+          if (!inputValue.start && align === "start") {
+            inputProps.id = id
+            inputProps.name = name
+          }
+
+          if (!!inputValue.start && align === "end") {
+            inputProps.id = id
+            inputProps.name = name
+          }
         } else {
           inputProps.ref = mergeRefs(props.ref, ref, startInputRef)
           inputProps.value = inputValue
+          inputProps.id = id
+          inputProps.name = name
 
           if (isArray(value)) {
             inputProps.style = {
@@ -832,16 +857,21 @@ export const useDatePicker = <
       [
         allowInput,
         dataProps,
+        disabled,
         endPlaceholder,
         focused,
+        id,
         inputValue,
-        interactive,
         max,
+        name,
+        onBlur,
         onFocus,
         onInputChange,
         onKeyDown,
         onMouseDown,
+        readOnly,
         ref,
+        required,
         startPlaceholder,
         value,
       ],

@@ -10,7 +10,13 @@ import type {
 } from "../../hooks/use-combobox"
 import type { Dict } from "../../utils"
 import type { FieldProps } from "../field"
-import { cloneElement, isValidElement, useCallback, useMemo } from "react"
+import {
+  cloneElement,
+  isValidElement,
+  useCallback,
+  useMemo,
+  useRef,
+} from "react"
 import { useCombobox, useComboboxItem } from "../../hooks/use-combobox"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"
@@ -24,8 +30,10 @@ import {
   isNumber,
   isString,
   isUndefined,
+  mergeRefs,
   runKeyAction,
   toArray,
+  visuallyHiddenAttributes,
 } from "../../utils"
 import { useFieldProps } from "../field"
 
@@ -76,9 +84,23 @@ export interface UseSelectProps<Multiple extends boolean = false>
     >,
     FieldProps {
   /**
+   * The `id` attribute of the input element.
+   */
+  id?: string
+  /**
+   * The `name` attribute of the input element.
+   */
+  name?: string
+  /**
    * The initial value of the select.
    */
   defaultValue?: Multiple extends true ? string[] : string
+  /**
+   * If `true`, the field will be focused when the clear icon is clicked.
+   *
+   * @default true
+   */
+  focusOnClear?: boolean
   /**
    * If `true`, include placeholder in options.
    *
@@ -134,16 +156,20 @@ export const useSelect = <Multiple extends boolean = false>(
   const {
     context: { labelId } = {},
     props: {
+      id,
+      name,
       multiple = false,
       closeOnSelect = !multiple,
       defaultValue = (multiple ? [] : "") as MaybeValue,
       disabled,
+      focusOnClear = true,
       includePlaceholder = !multiple,
       items: itemProp = [],
       max,
       placeholder,
       readOnly,
       render = defaultRender,
+      required,
       separator = ",",
       value: valueProp,
       onChange: onChangeProp,
@@ -153,6 +179,7 @@ export const useSelect = <Multiple extends boolean = false>(
     dataProps,
     eventProps,
   } = useFieldProps(props)
+  const fieldRef = useRef<HTMLDivElement>(null)
   const [value, setValue] = useControllableState({
     defaultValue,
     value: valueProp,
@@ -271,11 +298,21 @@ export const useSelect = <Multiple extends boolean = false>(
     })
   }, [onChange, render, selectedItems, separator])
 
+  const onFocus = useCallback(() => {
+    if (!interactive || !fieldRef.current) return
+
+    fieldRef.current.focus()
+  }, [interactive])
+
   const onClear = useCallback(() => {
     if (!interactive) return
 
     setValue((prev) => (isArray(prev) ? [] : "") as MaybeValue)
-  }, [interactive, setValue])
+
+    if (!fieldRef.current) return
+
+    if (focusOnClear) fieldRef.current.focus()
+  }, [focusOnClear, interactive, setValue])
 
   const getRootProps: PropGetter = useCallback(
     (props) => ({ ...dataProps, ...props }),
@@ -283,14 +320,31 @@ export const useSelect = <Multiple extends boolean = false>(
   )
 
   const getFieldProps: PropGetter = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) =>
+    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) =>
       getTriggerProps({
+        ref: mergeRefs(ref, fieldRef),
         "aria-label": placeholder,
         "aria-labelledby": cx(ariaLabelledby, labelId),
         ...props,
         children,
       }),
     [children, getTriggerProps, labelId, placeholder],
+  )
+
+  const getInputProps: PropGetter<"input"> = useCallback(
+    (props = {}) => ({
+      ...dataProps,
+      ...visuallyHiddenAttributes,
+      id,
+      name,
+      defaultValue: isString(value) ? value : value.join(", "),
+      disabled,
+      readOnly,
+      required,
+      ...props,
+      onFocus: handlerAll(props.onFocus, onFocus),
+    }),
+    [dataProps, disabled, id, name, onFocus, readOnly, required, value],
   )
 
   const getContentProps: PropGetter = useCallback(
@@ -334,6 +388,7 @@ export const useSelect = <Multiple extends boolean = false>(
     getContentProps,
     getFieldProps,
     getIconProps,
+    getInputProps,
     getRootProps,
     getSeparatorProps,
     onActiveDescendant,

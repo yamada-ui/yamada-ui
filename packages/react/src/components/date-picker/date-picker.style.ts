@@ -8,7 +8,10 @@ export const datePickerStyle = defineComponentSlotStyle({
     adjust: { fieldSizing: "content", flex: "inherit", w: "fit-content" },
     content: { p: "1" },
     field: autocompleteStyle.base?.field,
-    input: autocompleteStyle.base?.input,
+    input: {
+      ...autocompleteStyle.base?.input,
+      '&[tabindex="-1"]': { caret: "transparent" },
+    },
     separator: { color: "fg.subtle", mx: "{gap}" },
   },
 

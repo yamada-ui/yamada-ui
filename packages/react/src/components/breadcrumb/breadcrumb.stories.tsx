@@ -29,7 +29,7 @@ export const Basic: Story = () => {
 }
 
 export const Items: Story = () => {
-  const items = useMemo<Breadcrumb.RootProps["items"]>(
+  const items = useMemo<Breadcrumb.Item[]>(
     () => [
       { href: "/", label: "サイヤ人編" },
       { href: "/", label: "ナメック星編" },
@@ -43,7 +43,7 @@ export const Items: Story = () => {
 }
 
 export const Variant: Story = () => {
-  const items = useMemo<Breadcrumb.RootProps["items"]>(
+  const items = useMemo<Breadcrumb.Item[]>(
     () => [
       { href: "/", label: "サイヤ人編" },
       { href: "/", label: "ナメック星編" },
@@ -63,7 +63,7 @@ export const Variant: Story = () => {
 }
 
 export const Size: Story = () => {
-  const items = useMemo<Breadcrumb.RootProps["items"]>(
+  const items = useMemo<Breadcrumb.Item[]>(
     () => [
       { href: "/", label: "サイヤ人編" },
       { href: "/", label: "ナメック星編" },
@@ -81,7 +81,7 @@ export const Size: Story = () => {
 }
 
 export const Boundaries: Story = () => {
-  const items = useMemo<Breadcrumb.RootProps["items"]>(
+  const items = useMemo<Breadcrumb.Item[]>(
     () => [
       { href: "/", label: "サイヤ人編" },
       { href: "/", label: "ナメック星編" },
@@ -132,7 +132,7 @@ export const Separator: Story = () => {
 }
 
 export const CustomEllipsis: Story = () => {
-  const items = useMemo<Breadcrumb.RootProps["items"]>(
+  const items = useMemo<Breadcrumb.Item[]>(
     () => [
       { href: "/", label: "サイヤ人編" },
       { href: "/", label: "ナメック星編" },

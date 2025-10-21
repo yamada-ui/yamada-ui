@@ -45,7 +45,7 @@ import { Breadcrumb } from "@workspaces/ui"
 ### itemsを使う
 
 ```tsx preview functional
-const items = useMemo<Breadcrumb.RootProps["items"]>(
+const items = useMemo<Breadcrumb.Item[]>(
   () => [
     {
       href: "/",
@@ -136,7 +136,7 @@ return <Breadcrumb.Root items={items} />
 または、`startBoundaries`と`endBoundaries`に数値を設定することで省略できます。
 
 ```tsx preview functional
-const items = useMemo<Breadcrumb.RootProps["items"]>(
+const items = useMemo<Breadcrumb.Item[]>(
   () => [
     {
       href: "/",
@@ -194,7 +194,7 @@ return <Breadcrumb.Root items={items} endBoundaries={1} startBoundaries={1} />
 ### 省略をカスタマイズする
 
 ```tsx preview functional
-const items = useMemo<Breadcrumb.RootProps["items"]>(
+const items = useMemo<Breadcrumb.Item[]>(
   () => [
     {
       href: "/",

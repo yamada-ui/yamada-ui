@@ -8,7 +8,8 @@ import { createSlotComponent, styled, varAttr } from "../../core"
 import { dataAttr, isUndefined } from "../../utils"
 import { timelineStyle } from "./timeline.style"
 
-interface TimelineItem extends Omit<TimelineItemProps, "content" | "title"> {
+export interface TimelineItem
+  extends Omit<TimelineItemProps, "content" | "title"> {
   align?: "end" | "start"
   content?: ReactNode
   description?: ReactNode

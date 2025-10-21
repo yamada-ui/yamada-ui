@@ -61,6 +61,47 @@
     "reset": "検索をクリアしてもう一度試す",
     "openPreview": "{title}のプレビューを開く"
   },
+  "playground": {
+    "title": "リアルタイムでコードを試す",
+    "description": "Yamada UIコンポーネントをリアルタイムで試すことができるインタラクティブなプレイグラウンド。コードをコピーしてプロジェクトに貼り付けることもできます。",
+    "primaryAction": "プレイグラウンドを開く",
+    "secondaryAction": "ドキュメント",
+    "share": "共有",
+    "copyURL": "URLをコピー",
+    "copied": "コピーしました",
+    "urlTooLong": "URLが長すぎます",
+    "format": "フォーマットする",
+    "formatted": "フォーマットされました",
+    "swap": "エディタとプレビューを入れ替え",
+    "reset": {
+      "tooltip": "リセット",
+      "success": "コードをリセットしました",
+      "confirmation": {
+        "title": "コードをリセット",
+        "message": "本当にコードをリセットしますか？この操作は元に戻すことができません。",
+        "confirm": "リセット",
+        "cancel": "キャンセル"
+      }
+    },
+    "screenshot": {
+      "tooltip": "スクリーンショットを撮る",
+      "code": "コード",
+      "preview": "プレビュー",
+      "both": "両方",
+      "success": "クリップボードにコピーしました",
+      "error": "スクリーンショットの取得に失敗しました"
+    },
+    "layout": {
+      "mobile": "スマホ表示",
+      "tablet": "タブレット表示",
+      "desktop": "PC表示",
+      "responsive": "レスポンシブ",
+      "auto": "自動",
+      "portrait": "縦向きに切り替える",
+      "landscape": "横向きに切り替える",
+      "toggleOrientation": "縦横を切り替える"
+    }
+  },
   "themes": {
     "title": "あなただけのテーマ",
     "description": "美しく一貫性のあるテーマをお試しください。プロジェクトにコピー&ペーストできます。新しいテーマエディターを近日公開予定です。",

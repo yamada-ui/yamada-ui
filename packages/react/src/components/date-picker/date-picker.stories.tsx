@@ -238,16 +238,22 @@ export const BlockScrollOnMount: Story = () => {
   )
 }
 
-export const OpenOnFocus: Story = () => {
-  return <DatePicker openOnFocus />
-}
-
 export const OpenOnChange: Story = () => {
-  return <DatePicker openOnChange={(ev) => ev.target.value.length > 1} />
+  return (
+    <DatePicker
+      openOnChange={(ev) => ev.target.value.length > 1}
+      openOnFocus={false}
+    />
+  )
 }
 
 export const CloseOnChange: Story = () => {
-  return <DatePicker closeOnChange={(ev) => !ev.target.value.length} />
+  return (
+    <DatePicker
+      closeOnChange={(ev) => !ev.target.value.length}
+      openOnFocus={false}
+    />
+  )
 }
 
 export const CloseOnScroll: Story = () => {
@@ -256,6 +262,10 @@ export const CloseOnScroll: Story = () => {
       <DatePicker closeOnScroll />
     </Box>
   )
+}
+
+export const DisabledOpenOnFocus: Story = () => {
+  return <DatePicker openOnFocus={false} />
 }
 
 export const DisabledOpenOnClick: Story = () => {

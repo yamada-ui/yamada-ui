@@ -5,7 +5,7 @@ export async function dismissed({
   pull_request,
   repository,
 }: WebhookEvent<"pull_request_review.dismissed">) {
-  const { data: reviewers } = await retryOnRateLimit(async () =>
+  const { data: reviews } = await retryOnRateLimit(async () =>
     octokit.pulls.listReviews({
       owner: "yamada-ui",
       pull_number: pull_request.number,
@@ -13,7 +13,7 @@ export async function dismissed({
     }),
   )
 
-  if (reviewers.some(({ state }) => state === "approved")) return
+  if (reviews.some(({ state }) => state === "APPROVED")) return
 
   await retryOnRateLimit(async () =>
     octokit.issues.removeLabel({

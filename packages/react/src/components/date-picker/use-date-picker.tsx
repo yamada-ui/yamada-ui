@@ -30,6 +30,7 @@ import { useCombobox } from "../../hooks/use-combobox"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"
 import {
+  ariaAttr,
   cast,
   contains,
   dataAttr,
@@ -110,6 +111,14 @@ export interface UseDatePickerProps<
     HTMLRefAttributes<"input">,
     FieldProps {
   /**
+   * The `id` attribute of the input element.
+   */
+  id?: string
+  /**
+   * The `name` attribute of the input element.
+   */
+  name?: string
+  /**
    * If `true`, allows input.
    *
    * @default true
@@ -157,7 +166,7 @@ export interface UseDatePickerProps<
   /**
    * If `true`, the date picker will be opened when the input is focused.
    *
-   * @default false
+   * @default true
    */
   openOnFocus?: boolean
   /**
@@ -201,7 +210,9 @@ export const useDatePicker = <
   const { locale: defaultLocale, t } = useI18n("datePicker")
   const {
     props: {
+      id,
       ref,
+      name,
       allowInput = true,
       allowInputBeyond = false,
       closeOnChange = false,
@@ -223,12 +234,13 @@ export const useDatePicker = <
       max,
       month: monthProp,
       openOnChange = true,
-      openOnFocus = false,
+      openOnFocus = true,
       parseDate,
       pattern,
       placeholder: placeholderProp,
       readOnly,
       render = defaultRender,
+      required,
       separator = range ? "-" : ",",
       value: valueProp,
       onChange: onChangeProp,
@@ -705,6 +717,8 @@ export const useDatePicker = <
   )
 
   const onClear = useCallback(() => {
+    if (!interactive) return
+
     setValue((prev) => {
       if (isDate(prev)) {
         return undefined as MaybeDateValue<Multiple, Range>
@@ -731,7 +745,7 @@ export const useDatePicker = <
         fieldRef.current?.focus()
       }
     }
-  }, [allowInput, focusOnClear, range, setInputValue, setValue])
+  }, [allowInput, focusOnClear, interactive, range, setInputValue, setValue])
 
   useUpdateEffect(() => {
     setMonth((prev) => getAdjustedMonth(value, prev))
@@ -767,11 +781,10 @@ export const useDatePicker = <
         "aria-haspopup": "dialog",
         tabIndex: !allowInput ? 0 : -1,
         ...props,
-        onBlur: handlerAll(props.onBlur, onBlur),
         onClick: handlerAll(props.onClick, onClick),
       }),
 
-    [allowInput, getTriggerProps, onBlur, onClick],
+    [allowInput, getTriggerProps, onClick],
   )
 
   const getInputProps: PropGetter<"input", { align?: InputAlign }> =
@@ -783,10 +796,13 @@ export const useDatePicker = <
             ...props.style,
           },
           autoComplete: "off",
-          disabled: !interactive,
+          disabled,
+          readOnly,
+          required,
           tabIndex: allowInput ? 0 : -1,
           ...dataProps,
           ...props,
+          onBlur: handlerAll(props.onBlur, onBlur),
           onChange: handlerAll(props.onChange, onInputChange),
           onFocus: handlerAll(props.onFocus, onFocus),
           onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
@@ -803,9 +819,21 @@ export const useDatePicker = <
             inputProps.value = inputValue.end
             inputProps.placeholder = endPlaceholder
           }
+
+          if (!inputValue.start && align === "start") {
+            inputProps.id = id
+            inputProps.name = name
+          }
+
+          if (!!inputValue.start && align === "end") {
+            inputProps.id = id
+            inputProps.name = name
+          }
         } else {
           inputProps.ref = mergeRefs(props.ref, ref, startInputRef)
           inputProps.value = inputValue
+          inputProps.id = id
+          inputProps.name = name
 
           if (isArray(value)) {
             inputProps.style = {
@@ -830,16 +858,21 @@ export const useDatePicker = <
       [
         allowInput,
         dataProps,
+        disabled,
         endPlaceholder,
         focused,
+        id,
         inputValue,
-        interactive,
         max,
+        name,
+        onBlur,
         onFocus,
         onInputChange,
         onKeyDown,
         onMouseDown,
+        readOnly,
         ref,
+        required,
         startPlaceholder,
         value,
       ],
@@ -902,19 +935,17 @@ export const useDatePicker = <
   const getClearIconProps: PropGetter = useCallback(
     (props = {}) =>
       getIconProps({
+        "aria-disabled": ariaAttr(!interactive),
         "aria-label": t("Clear value"),
         role: "button",
-        tabIndex: 0,
+        tabIndex: interactive ? 0 : -1,
         ...props,
         onClick: handlerAll(props.onClick, onClear),
         onKeyDown: handlerAll(props.onKeyDown, (ev) =>
-          runKeyAction(ev, {
-            Enter: onClear,
-            Space: onClear,
-          }),
+          runKeyAction(ev, { Enter: onClear, Space: onClear }),
         ),
       }),
-    [getIconProps, onClear, t],
+    [getIconProps, interactive, onClear, t],
   )
 
   return {

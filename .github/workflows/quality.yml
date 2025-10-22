@@ -52,8 +52,8 @@ jobs:
         if: steps.check-modified.outputs.any_changed == 'true'
         run: pnpm build
 
-  test:
-    name: Test
+  test-chromium:
+    name: Tests on jsdom and Chromium
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -64,7 +64,7 @@ jobs:
         uses: tj-actions/changed-files@v46
         with:
           files: |
-            packages/**/(package.json|vitest.config.mts)
+            packages/**/(package.json|vitest.config.ts)
             packages/**/(src|test)/**/*.{ts,tsx}
             !packages/**/src/**/*.stories.{ts,tsx}
             !packages/workspace/src/**
@@ -73,6 +73,11 @@ jobs:
       - name: Install
         if: steps.check-modified.outputs.any_changed == 'true'
         uses: ./.github/composite-actions/install
+
+      - name: Setup Browsers
+        if: steps.check-modified.outputs.any_changed == 'true'
+        working-directory: packages/react
+        run: pnpm playwright install chromium --with-deps
 
       - name: Run tests
         if: steps.check-modified.outputs.any_changed == 'true'
@@ -88,6 +93,70 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true
           codecov_yml_path: ./codecov.yml
+
+  test-webkit:
+    name: Browser Test on Webkit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check modified files
+        id: check-modified
+        uses: tj-actions/changed-files@v46
+        with:
+          files: |
+            packages/**/(package.json|vitest.config.ts)
+            packages/**/(src|test)/**/*.{ts,tsx}
+            !packages/**/src/**/*.stories.{ts,tsx}
+            !packages/workspace/src/**
+            packages/workspace/src/vitest/**
+
+      - name: Install
+        if: steps.check-modified.outputs.any_changed == 'true'
+        uses: ./.github/composite-actions/install
+
+      - name: Setup Browsers
+        if: steps.check-modified.outputs.any_changed == 'true'
+        working-directory: packages/react
+        run: pnpm playwright install webkit --with-deps
+
+      - name: Run tests
+        if: steps.check-modified.outputs.any_changed == 'true'
+        working-directory: packages/react
+        run: pnpm test:webkit
+
+  test-firefox:
+    name: Browser Test on Firefox
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check modified files
+        id: check-modified
+        uses: tj-actions/changed-files@v46
+        with:
+          files: |
+            packages/**/(package.json|vitest.config.ts)
+            packages/**/(src|test)/**/*.{ts,tsx}
+            !packages/**/src/**/*.stories.{ts,tsx}
+            !packages/workspace/src/**
+            packages/workspace/src/vitest/**
+
+      - name: Install
+        if: steps.check-modified.outputs.any_changed == 'true'
+        uses: ./.github/composite-actions/install
+
+      - name: Setup Browsers
+        if: steps.check-modified.outputs.any_changed == 'true'
+        working-directory: packages/react
+        run: pnpm playwright install firefox --with-deps
+
+      - name: Run tests
+        if: steps.check-modified.outputs.any_changed == 'true'
+        working-directory: packages/react
+        run: pnpm test:firefox
 
   eslint:
     name: ESLint

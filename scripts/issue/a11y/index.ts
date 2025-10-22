@@ -42,7 +42,7 @@ interface FailureDetail {
 
 interface AssertionResult {
   ancestorTitles: string[]
-  duration: 701
+  duration: number
   failureDetails: FailureDetail[]
   failureMessages: string[]
   fullName: string
@@ -174,7 +174,7 @@ function createBody(
     `name: ${name}`,
     "",
     "### Description",
-    `${count} accessibility violation was found in the \`${name}\`.`,
+    `${count} accessibility ${count === 1 ? "violation was" : "violations were"} found in the \`${name}\`.`,
     "",
     "### Target stories",
     "",

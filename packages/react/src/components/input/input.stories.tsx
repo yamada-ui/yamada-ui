@@ -238,6 +238,7 @@ export const Element: Story = () => {
           <NativeSelect.Root
             size="xs"
             variant="plain"
+            aria-label="Domain extension"
             defaultValue=".com"
             fontSize="md"
             items={[

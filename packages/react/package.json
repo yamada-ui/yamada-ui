@@ -1,7 +1,7 @@
 {
   "name": "@yamada-ui/react",
   "type": "module",
-  "version": "2.0.1",
+  "version": "2.0.3",
   "description": "React UI components of the Yamada, by the Yamada, for the Yamada built with React and Emotion",
   "keywords": [
     "yamada",
@@ -72,8 +72,8 @@
     "embla-carousel-react": "^8.6.0",
     "file-selector": "^2.1.2",
     "framesync": "6.1.2",
-    "intl-messageformat": "^10.7.17",
-    "lucide-react": "0.544.0",
+    "intl-messageformat": "^10.7.18",
+    "lucide-react": "0.546.0",
     "motion": "12.18.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -86,12 +86,12 @@
     "sonner": "^2.0.7"
   },
   "devDependencies": {
-    "@faker-js/faker": "^10.0.0",
+    "@faker-js/faker": "^10.1.0",
     "@lucide/lab": "^0.1.2",
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
     "clean-package": "2.2.0",
-    "react-hook-form": "^7.64.0",
+    "react-hook-form": "^7.65.0",
     "react-icons": "^5.5.0",
     "use-mask-input": "^3.5.2"
   },

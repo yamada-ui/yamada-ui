@@ -3,8 +3,7 @@ import type { Dict, Merge } from "../../utils"
 import type { LegendStyle } from "./legend.style"
 import type { UseLegendProps } from "./use-legend"
 import { Legend as RechartsLegend } from "recharts"
-import { createComponent, getClassName, styled } from "../../core"
-import { bem } from "../../utils"
+import { createSlotComponent, styled } from "../../core"
 import { legendStyle } from "./legend.style"
 import { useLegend } from "./use-legend"
 
@@ -13,13 +12,13 @@ export interface LegendProps
     ThemeProps<LegendStyle> {}
 
 const {
-  component,
   ComponentContext: LegendComponentContext,
   PropsContext: LegendPropsContext,
   useComponentContext: useLegendComponentContext,
   usePropsContext: useLegendPropsContext,
   withContext,
-} = createComponent<LegendProps, LegendStyle, LegendProps>(
+  withProvider,
+} = createSlotComponent<LegendProps, LegendStyle, LegendProps>(
   "chart-legend",
   legendStyle,
 )
@@ -31,7 +30,10 @@ export {
   useLegendPropsContext,
 }
 
-export const Legend = withContext(RechartsLegend)((props) => {
+export const Legend = withProvider(
+  RechartsLegend,
+  "root",
+)((props) => {
   const customProps = useLegendComponentContext()
   const { getLegendProps, legendStyledProps } = useLegend({
     ...customProps,
@@ -41,65 +43,51 @@ export const Legend = withContext(RechartsLegend)((props) => {
   return {
     ...getLegendProps(),
     content: ({ payload }: { payload: Dict[] | undefined }) => (
-      <DefaultLegend payload={payload} {...legendStyledProps} />
+      <LegendContent payload={payload} {...legendStyledProps} />
     ),
   }
 })
 
-interface DefaultLegendProps extends HTMLStyledProps {
+interface LegendContentProps extends HTMLStyledProps {
   payload?: Dict[]
 }
 
-const DefaultLegend = component<"div", DefaultLegendProps>(
+const LegendContent = withContext<"div", LegendContentProps>(
   ({ payload = [], ...rest }) => {
     const items = payload.map(({ color, dataKey, value: valueProp }, index) => {
       const value = dataKey ?? valueProp
 
       return (
-        <styled.div
-          key={`legend-${index}`}
-          className="ui-chart__legend-item"
-          alignItems="center"
-          color={["blackAlpha.800", "whiteAlpha.700"]}
-          display="flex"
-          fontSize="md"
-          gap="sm"
-          lineHeight="taller"
-          minH="8"
-          minW="8"
-          px="3"
-          rounded="md"
-          transitionDuration="slower"
-          transitionProperty="common"
-          _hover={{
-            bg: ["blackAlpha.50", "whiteAlpha.100"],
-          }}
-        >
-          <styled.div
-            className="ui-chart__legend-swatch"
-            background={color}
-            boxSize="3"
-            rounded="full"
-          />
+        <LegendContentItem key={index}>
+          {color ? <LegendContentSwatch bg={color} /> : null}
 
-          <styled.span className="ui-chart__legend-label">{value}</styled.span>
-        </styled.div>
+          <LegendContentLabel>{value}</LegendContentLabel>
+        </LegendContentItem>
       )
     })
 
-    return (
-      <styled.div
-        display="flex"
-        flexWrap="wrap"
-        justifyContent="flex-end"
-        {...rest}
-      >
-        {items}
-      </styled.div>
-    )
+    return <styled.div {...rest}>{items}</styled.div>
   },
-  {
-    name: "default-legend",
-    className: getClassName(bem("chart-legend", "default")),
-  },
+  "content",
+)()
+
+interface LegendContentItemProps extends HTMLStyledProps {}
+
+const LegendContentItem = withContext<"div", LegendContentItemProps>(
+  "div",
+  "item",
+)()
+
+interface LegendContentSwatchProps extends HTMLStyledProps {}
+
+const LegendContentSwatch = withContext<"div", LegendContentSwatchProps>(
+  "div",
+  "swatch",
+)()
+
+interface LegendContentLabelProps extends HTMLStyledProps<"span"> {}
+
+const LegendContentLabel = withContext<"span", LegendContentLabelProps>(
+  "span",
+  "label",
 )()

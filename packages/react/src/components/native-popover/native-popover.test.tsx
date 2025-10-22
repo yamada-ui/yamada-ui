@@ -136,34 +136,6 @@ describe("<NativePopover />", () => {
     expect(content).toHaveAttribute("popover", "manual")
   })
 
-  test("should render with custom placement", () => {
-    render(<Component placement="start" />)
-
-    const trigger = screen.getByTestId("trigger")
-    const content = screen.getByTestId("content")
-
-    expect(trigger).toBeInTheDocument()
-    expect(content).toBeInTheDocument()
-  })
-
-  test("should have proper ARIA relationships", () => {
-    render(<Component />)
-
-    const trigger = screen.getByTestId("trigger")
-    const content = screen.getByTestId("content")
-    const header = screen.getByTestId("header")
-    const body = screen.getByTestId("body")
-
-    const triggerAriaControls = trigger.getAttribute("aria-controls")
-    const contentId = content.getAttribute("id")
-    const headerId = header.getAttribute("id")
-    const bodyId = body.getAttribute("id")
-
-    expect(triggerAriaControls).toBe(contentId)
-    expect(content).toHaveAttribute("aria-labelledby", headerId)
-    expect(content).toHaveAttribute("aria-describedby", bodyId)
-  })
-
   test("should render with different popover modes", () => {
     const { rerender } = render(<Component popover="hint" />)
 

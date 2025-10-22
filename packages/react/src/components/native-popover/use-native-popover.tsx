@@ -3,7 +3,7 @@
 import type { RefObject } from "react"
 import type { Direction, PropGetter } from "../../core"
 import type { UsePopperProps } from "../../hooks/use-popper"
-import { useCallback, useId, useRef } from "react"
+import { useCallback, useId, useMemo, useRef } from "react"
 import { useEnvironment } from "../../core"
 import { popperProps, usePopper } from "../../hooks/use-popper"
 import {
@@ -97,6 +97,14 @@ export const useNativePopover = ({
 
   assignRef(updateRef, update)
 
+  const hasHeader = useMemo(() => {
+    return !!getDocument()?.getElementById(headerId)
+  }, [getDocument, headerId])
+
+  const hasBody = useMemo(() => {
+    return !!getDocument()?.getElementById(bodyId)
+  }, [getDocument, bodyId])
+
   const getTriggerProps: PropGetter<"button"> = useCallback(
     ({ ref, onClick, ...props } = {}) => {
       return {
@@ -129,9 +137,6 @@ export const useNativePopover = ({
       "aria-labelledby": ariaLabelledby,
       ...props
     } = {}) => {
-      const hasHeader = !!getDocument()?.getElementById(headerId)
-      const hasBody = !!getDocument()?.getElementById(bodyId)
-
       return {
         id: contentId,
         "aria-describedby": cx(ariaDescribedby, hasBody ? bodyId : undefined),
@@ -144,7 +149,7 @@ export const useNativePopover = ({
         ref: mergeRefs(ref, contentRef),
       }
     },
-    [getDocument, headerId, bodyId, contentId, popover],
+    [hasHeader, hasBody, headerId, bodyId, contentId, popover],
   )
 
   const getHeaderProps: PropGetter = useCallback(

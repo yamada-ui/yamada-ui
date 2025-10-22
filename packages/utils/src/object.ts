@@ -88,7 +88,7 @@ export function filterUndefined<Y extends Dict>(obj: Y): Y {
   return filterObject(obj, (_, val) => val !== null && val !== undefined)
 }
 
-export interface mergeOptions {
+export interface MergeOptions {
   debug?: boolean
   mergeArray?: boolean
   shouldProcess?: (value: any) => boolean
@@ -97,7 +97,7 @@ export interface mergeOptions {
 export function merge<Y extends Dict>(
   target: any,
   source: any,
-  options: mergeOptions = { mergeArray: false, shouldProcess: () => true },
+  options: MergeOptions = { mergeArray: false, shouldProcess: () => true },
 ): Y {
   let result = Object.assign({}, target)
 

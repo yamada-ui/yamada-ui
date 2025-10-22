@@ -33,7 +33,7 @@ export function HookList(props: HookListProps) {
       {...props}
     >
       {components.map(({ pathname, segment, title }) => (
-        <NextLink key={segment} href={pathname}>
+        <NextLink key={segment} href={pathname} justifySelf="flex-start">
           {title}
         </NextLink>
       ))}

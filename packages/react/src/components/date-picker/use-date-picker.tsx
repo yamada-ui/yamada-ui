@@ -11,7 +11,6 @@ import type { HTMLProps, HTMLRefAttributes, PropGetter } from "../../core"
 import type { UseComboboxProps } from "../../hooks/use-combobox"
 import type { Dict } from "../../utils"
 import type {
-  Calendar,
   CalendarFormat,
   MaybeDateValue,
   UseCalendarProps,
@@ -888,15 +887,28 @@ export const useDatePicker = <
     [getComboboxContentProps],
   )
 
-  const getCalendarProps: PropGetter<
-    "div",
-    Calendar.RootProps<Multiple, Range>,
-    Calendar.RootProps<Multiple, Range>
-  > = useCallback(
-    (props) =>
-      ({
-        disabled: !interactive,
-        format: calendarFormat,
+  const getCalendarProps: PropGetter<UseCalendarProps<Multiple, Range>> =
+    useCallback(
+      (props) =>
+        ({
+          disabled: !interactive,
+          format: calendarFormat,
+          locale,
+          max,
+          maxDate,
+          minDate,
+          month,
+          multiple,
+          range,
+          value,
+          onChange,
+          onChangeMonth: setMonth,
+          ...calendarProps,
+          ...props,
+        }) as UseCalendarProps<Multiple, Range>,
+      [
+        interactive,
+        calendarFormat,
         locale,
         max,
         maxDate,
@@ -906,26 +918,10 @@ export const useDatePicker = <
         range,
         value,
         onChange,
-        onChangeMonth: setMonth,
-        ...calendarProps,
-        ...props,
-      }) as Calendar.RootProps<Multiple, Range>,
-    [
-      interactive,
-      calendarFormat,
-      locale,
-      max,
-      maxDate,
-      minDate,
-      month,
-      multiple,
-      range,
-      value,
-      onChange,
-      setMonth,
-      calendarProps,
-    ],
-  )
+        setMonth,
+        calendarProps,
+      ],
+    )
 
   const getIconProps: PropGetter = useCallback(
     (props) => ({ ...dataProps, ...props }),

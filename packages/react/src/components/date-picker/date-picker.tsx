@@ -33,7 +33,7 @@ export interface DatePickerProps<
   Range extends boolean = false,
 > extends Omit<
       HTMLStyledProps,
-      "defaultValue" | "filter" | "offset" | "onChange" | "ref" | "value"
+      "defaultValue" | "offset" | "onChange" | "ref" | "value"
     >,
     UseDatePickerProps<Multiple, Range>,
     Omit<

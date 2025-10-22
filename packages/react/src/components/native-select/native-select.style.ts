@@ -7,7 +7,11 @@ import {
 
 export const nativeSelectStyle = defineComponentSlotStyle({
   base: {
-    field: { ...inputStyle.base, _readOnly: { pointerEvents: "none" } },
+    field: {
+      ...inputStyle.base,
+      "& > option, optgroup": { bg: "bg.float" },
+      _readOnly: { pointerEvents: "none" },
+    },
     icon: {
       alignItems: "center",
       color: "colorScheme.outline",

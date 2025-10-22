@@ -41,6 +41,9 @@ export function ThemeMenu({ ...rest }: ThemeMenuProps) {
               value === themeScheme ? "fg" : { base: "fg.muted", _hover: "fg" }
             }
             cursor="pointer"
+            focusVisibleRing="inside"
+            p="1"
+            rounded="l2"
             textDecoration="none"
             transitionDuration="moderate"
             transitionProperty="colors"

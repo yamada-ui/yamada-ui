@@ -49,6 +49,9 @@ export function ExampleMenu({ ...rest }: ExampleMenuProps) {
               slug === currentSlug ? "fg" : { base: "fg.muted", _hover: "fg" }
             }
             cursor="pointer"
+            focusVisibleRing="inside"
+            p="1"
+            rounded="l2"
             textDecoration="none"
             transitionDuration="moderate"
             transitionProperty="colors"

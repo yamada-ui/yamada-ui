@@ -2,10 +2,14 @@ import type { CSSObject } from "../../core"
 import { defineComponentStyle } from "../../core"
 import { wrapWithKey } from "../../utils"
 
-export const getInputPaddingResetStyle = (key?: string) =>
+export const getInputPaddingStartResetStyle = (key?: string) =>
+  ({
+    "&:not([data-input-element] + &)": wrapWithKey({ ps: "0px" }, key),
+  }) satisfies CSSObject
+
+export const getInputPaddingEndResetStyle = (key?: string) =>
   ({
     "&:not(:has(+ [data-input-element]))": wrapWithKey({ pe: "0px" }, key),
-    "&:not([data-input-element] + &)": wrapWithKey({ ps: "0px" }, key),
   }) satisfies CSSObject
 
 export const getInputHeightStyle = (height?: string, key?: string) =>
@@ -129,7 +133,10 @@ export const inputStyle = defineComponentStyle({
 
   compounds: [
     {
-      css: getInputPaddingResetStyle(),
+      css: {
+        ...getInputPaddingStartResetStyle(),
+        ...getInputPaddingEndResetStyle(),
+      },
       variant: "flushed",
       layer: "variant",
     },

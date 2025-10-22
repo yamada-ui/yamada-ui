@@ -330,14 +330,6 @@ To block scrolling, set `blockScrollOnMount` to `true`.
 <DatePicker blockScrollOnMount />
 ```
 
-### Open Dropdown On Focus
-
-To open the dropdown on focus, set `openOnFocus` to `true`.
-
-```tsx preview
-<DatePicker openOnFocus />
-```
-
 ### Close Dropdown On Scroll
 
 To close the dropdown on scroll, set `closeOnScroll` to `true`.
@@ -351,7 +343,10 @@ To close the dropdown on scroll, set `closeOnScroll` to `true`.
 To handle the event of opening the dropdown on change, set a function to `openOnChange`.
 
 ```tsx preview
-<DatePicker openOnChange={(ev) => ev.target.value.length > 1} />
+<DatePicker
+  openOnFocus={false}
+  openOnChange={(ev) => ev.target.value.length > 1}
+/>
 ```
 
 ### Handle closing the dropdown on change
@@ -359,7 +354,18 @@ To handle the event of opening the dropdown on change, set a function to `openOn
 To handle the event of closing the dropdown on change, set a function to `closeOnChange`.
 
 ```tsx preview
-<DatePicker closeOnChange={(ev) => !ev.target.value.length} />
+<DatePicker
+  openOnFocus={false}
+  closeOnChange={(ev) => !ev.target.value.length}
+/>
+```
+
+### Disable Open Dropdown On Focus
+
+To disable opening the dropdown on focus, set `openOnFocus` to `false`.
+
+```tsx preview
+<DatePicker openOnFocus={false} />
 ```
 
 ### Disable Open Dropdown On Click

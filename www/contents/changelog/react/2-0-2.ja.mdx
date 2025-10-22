@@ -1,13 +1,11 @@
 ---
-title: 変更履歴
-description: "Yamada UIの最新バージョンの変更履歴をご覧ください。機能・バグ修正・改善点についてご確認ください。"
+title: v2.0.2
+description: "@yamada-ui/reactのバージョン2.0.2の変更履歴をご覧ください。機能・バグ修正・改善点についてご確認ください。"
 ---
 
 このバージョンは、2025年10月21日にリリースされました。
 
-## @yamada-ui/react@2.0.2
-
-### パッチ変更
+## パッチ変更
 
 - [#5300](https://github.com/yamada-ui/yamada-ui/pull/5300) [89264dd](https://github.com/yamada-ui/yamada-ui/commit/89264dd68508aeb21cbcc39f404444b3ad627761) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where components such as `PasswordInput` and `NativeSelect` that use `InputGroup` internally did not apply spacing correctly when the `variant` was set to `"flushed"`.
 
@@ -26,15 +24,3 @@ description: "Yamada UIの最新バージョンの変更履歴をご覧くださ
 - [#5307](https://github.com/yamada-ui/yamada-ui/pull/5307) [db0f8d2](https://github.com/yamada-ui/yamada-ui/commit/db0f8d2ef97a7a22de4aee3b6933a6a188157daf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `DatePicker`, `Autocomplete`, and `Select` allowed clearing the value even when they were in a `disabled` or `readOnly` state.
 
 - [#5298](https://github.com/yamada-ui/yamada-ui/pull/5298) [11471a3](https://github.com/yamada-ui/yamada-ui/commit/11471a3fabd944223816193a57f54cc14e9c0417) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - The `@default` in the JSDoc for `defaultValue` of `useSaturationProps` was incorrect, so this has been fixed.
-
-## @yamada-ui/cli@2.0.2
-
-### パッチ変更
-
-- [#5287](https://github.com/yamada-ui/yamada-ui/pull/5287) [d5b44c6](https://github.com/yamada-ui/yamada-ui/commit/d5b44c64416bf2628dd6af71c48ab309856fa608) Thanks [@bmthd](https://github.com/bmthd)! - fix: add shebang to CLI binary via tsdown banner configuration
-
-  Add `#!/usr/bin/env node` shebang to the CLI binary by configuring tsdown's banner option.
-  This fixes execution issues on Linux where the CLI failed with "import: not found" errors
-  because the shell tried to execute the JavaScript file as a shell script.
-
-  Fixes #5286

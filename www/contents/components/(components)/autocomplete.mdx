@@ -550,29 +550,6 @@ return (
 )
 ```
 
-### Open Dropdown On Focus
-
-To open the dropdown on focus, set `openOnFocus` to `true`.
-
-```tsx preview functional
-const items = useMemo<Autocomplete.Item[]>(
-  () => [
-    { label: "アグモン", value: "アグモン" },
-    { label: "ガブモン", value: "ガブモン" },
-    { label: "テントモン", value: "テントモン" },
-    { label: "ピヨモン", value: "ピヨモン" },
-    { label: "ゴマモン", value: "ゴマモン" },
-    { label: "パルモン", value: "パルモン" },
-    { label: "パタモン", value: "パタモン" },
-    { label: "テイルモン", value: "テイルモン" },
-  ],
-  [],
-)
-return (
-  <Autocomplete.Root openOnFocus placeholder="Select a digimon" items={items} />
-)
-```
-
 ### Close Dropdown On Scroll
 
 To close the dropdown on scroll, set `closeOnScroll` to `true`.
@@ -621,8 +598,9 @@ const items = useMemo<Autocomplete.Item[]>(
 )
 return (
   <Autocomplete.Root
-    items={items}
+    openOnFocus={false}
     openOnChange={(ev) => ev.target.value.length > 2}
+    items={items}
     placeholder="Select a digimon"
   />
 )
@@ -649,9 +627,37 @@ const items = useMemo<Autocomplete.Item[]>(
 
 return (
   <Autocomplete.Root
+    openOnFocus={false}
     closeOnChange={(ev) => !ev.target.value.length}
     items={items}
     placeholder="Select a digimon"
+  />
+)
+```
+
+### Disable Open Dropdown On Focus
+
+To disable opening the dropdown on focus, set `openOnFocus` to `false`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+return (
+  <Autocomplete.Root
+    openOnFocus={false}
+    placeholder="Select a digimon"
+    items={items}
   />
 )
 ```
@@ -677,8 +683,8 @@ const items = useMemo<Autocomplete.Item[]>(
 
 return (
   <Autocomplete.Root
-    items={items}
     openOnClick={false}
+    items={items}
     placeholder="Select a digimon"
   />
 )

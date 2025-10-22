@@ -191,6 +191,12 @@
         "description": "The border color when the input is focused.",
         "required": false
       },
+      "focusOnClear": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the field will be focused when the clear icon is clicked.",
+        "required": false
+      },
       "groupProps": {
         "type": "Omit<SelectGroupProps, \"children\" | \"label\">",
         "description": "Props for group element.",
@@ -250,6 +256,11 @@
         "type": "Multiple",
         "defaultValue": "false",
         "description": "If `true`, the select will be multiple.",
+        "required": false
+      },
+      "name": {
+        "type": "string",
+        "description": "The `name` attribute of the input element.",
         "required": false
       },
       "offset": {
@@ -813,6 +824,12 @@
         "description": "The border color when the input is focused.",
         "required": false
       },
+      "focusOnClear": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the field will be focused when the clear icon is clicked.",
+        "required": false
+      },
       "groupProps": {
         "type": "Omit<SelectGroupProps, \"children\" | \"label\">",
         "description": "Props for group element.",
@@ -872,6 +889,11 @@
         "type": "Multiple",
         "defaultValue": "false",
         "description": "If `true`, the select will be multiple.",
+        "required": false
+      },
+      "name": {
+        "type": "string",
+        "description": "The `name` attribute of the input element.",
         "required": false
       },
       "offset": {
@@ -1203,6 +1225,12 @@
       "description": "The border color when the input is focused.",
       "required": false
     },
+    "focusOnClear": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the field will be focused when the clear icon is clicked.",
+      "required": false
+    },
     "groupProps": {
       "type": "Omit<SelectGroupProps, \"children\" | \"label\">",
       "description": "Props for group element.",
@@ -1262,6 +1290,11 @@
       "type": "Multiple",
       "defaultValue": "false",
       "description": "If `true`, the select will be multiple.",
+      "required": false
+    },
+    "name": {
+      "type": "string",
+      "description": "The `name` attribute of the input element.",
       "required": false
     },
     "offset": {
@@ -1825,6 +1858,12 @@
       "description": "The border color when the input is focused.",
       "required": false
     },
+    "focusOnClear": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the field will be focused when the clear icon is clicked.",
+      "required": false
+    },
     "groupProps": {
       "type": "Omit<SelectGroupProps, \"children\" | \"label\">",
       "description": "Props for group element.",
@@ -1884,6 +1923,11 @@
       "type": "Multiple",
       "defaultValue": "false",
       "description": "If `true`, the select will be multiple.",
+      "required": false
+    },
+    "name": {
+      "type": "string",
+      "description": "The `name` attribute of the input element.",
       "required": false
     },
     "offset": {

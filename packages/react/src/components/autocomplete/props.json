@@ -355,6 +355,11 @@
         "description": "If `true`, the autocomplete will be multiple.",
         "required": false
       },
+      "name": {
+        "type": "string",
+        "description": "The `name` attribute of the input element.",
+        "required": false
+      },
       "offset": {
         "type": "[number, number]",
         "description": "The main and cross-axis offset to displace popper element from its reference element.",
@@ -405,7 +410,7 @@
       },
       "openOnFocus": {
         "type": "boolean",
-        "defaultValue": "false",
+        "defaultValue": "true",
         "description": "If `true`, the autocomplete will be opened when the input is focused.",
         "required": false
       },
@@ -854,6 +859,11 @@
       "description": "If `true`, the autocomplete will be multiple.",
       "required": false
     },
+    "name": {
+      "type": "string",
+      "description": "The `name` attribute of the input element.",
+      "required": false
+    },
     "offset": {
       "type": "[number, number]",
       "description": "The main and cross-axis offset to displace popper element from its reference element.",
@@ -904,7 +914,7 @@
     },
     "openOnFocus": {
       "type": "boolean",
-      "defaultValue": "false",
+      "defaultValue": "true",
       "description": "If `true`, the autocomplete will be opened when the input is focused.",
       "required": false
     },

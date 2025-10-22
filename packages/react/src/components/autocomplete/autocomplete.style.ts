@@ -26,8 +26,8 @@ export const autocompleteStyle = defineComponentSlotStyle({
       field: {
         ...selectStyle.variants?.filled.field,
         "&:focus:not([data-disabled])":
-          selectStyle.variants?.filled.field._expanded,
-        ":has(input:focus)": selectStyle.variants?.filled.field._expanded,
+          selectStyle.variants?.filled.field._focus,
+        ":has(input:focus)": selectStyle.variants?.filled.field._focus,
       },
     },
     flushed: {
@@ -35,8 +35,8 @@ export const autocompleteStyle = defineComponentSlotStyle({
       field: {
         ...selectStyle.variants?.flushed.field,
         "&:focus:not([data-disabled])":
-          selectStyle.variants?.flushed.field._expanded,
-        ":has(input:focus)": selectStyle.variants?.flushed.field._expanded,
+          selectStyle.variants?.flushed.field._focus,
+        ":has(input:focus)": selectStyle.variants?.flushed.field._focus,
       },
     },
     outline: {
@@ -44,8 +44,8 @@ export const autocompleteStyle = defineComponentSlotStyle({
       field: {
         ...selectStyle.variants?.outline.field,
         "&:focus:not([data-disabled])":
-          selectStyle.variants?.outline.field._expanded,
-        ":has(input:focus)": selectStyle.variants?.outline.field._expanded,
+          selectStyle.variants?.outline.field._focus,
+        ":has(input:focus)": selectStyle.variants?.outline.field._focus,
       },
     },
     plain: {
@@ -53,8 +53,8 @@ export const autocompleteStyle = defineComponentSlotStyle({
       field: {
         ...selectStyle.variants?.plain.field,
         "&:focus:not([data-disabled])":
-          selectStyle.variants?.plain.field._expanded,
-        ":has(input:focus)": selectStyle.variants?.plain.field._expanded,
+          selectStyle.variants?.plain.field._focus,
+        ":has(input:focus)": selectStyle.variants?.plain.field._focus,
       },
     },
   },

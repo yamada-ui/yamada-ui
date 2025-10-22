@@ -330,14 +330,6 @@ return <DatePicker holidays={holidays} />
 <DatePicker blockScrollOnMount />
 ```
 
-### フォーカス時にドロップダウンを開く
-
-フォーカス時にドロップダウンを開く場合は、`openOnFocus`を`true`に設定します。
-
-```tsx preview
-<DatePicker openOnFocus />
-```
-
 ### スクロール時にドロップダウンを閉じる
 
 スクロール時にドロップダウンを閉じる場合は、`closeOnScroll`を`true`に設定します。
@@ -351,7 +343,10 @@ return <DatePicker holidays={holidays} />
 変更時にドロップダウンを開くイベントをハンドルする場合は、`openOnChange`に関数を設定します。
 
 ```tsx preview
-<DatePicker openOnChange={(ev) => ev.target.value.length > 1} />
+<DatePicker
+  openOnFocus={false}
+  openOnChange={(ev) => ev.target.value.length > 1}
+/>
 ```
 
 ### 変更時にドロップダウンを閉じるイベントをハンドルする
@@ -359,7 +354,18 @@ return <DatePicker holidays={holidays} />
 変更時にドロップダウンを閉じるイベントをハンドルする場合は、`closeOnChange`に関数を設定します。
 
 ```tsx preview
-<DatePicker closeOnChange={(ev) => !ev.target.value.length} />
+<DatePicker
+  openOnFocus={false}
+  closeOnChange={(ev) => !ev.target.value.length}
+/>
+```
+
+### フォーカス時にドロップダウンを開かない
+
+フォーカス時にドロップダウンを開かない場合は、`openOnFocus`を`false`に設定します。
+
+```tsx preview
+<DatePicker openOnFocus={false} />
 ```
 
 ### クリック時にドロップダウンを開かない

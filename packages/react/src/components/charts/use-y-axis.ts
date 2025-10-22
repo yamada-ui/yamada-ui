@@ -89,8 +89,8 @@ export const useYAxis = ({
       tickFormatter,
       unit,
       ...axisKey,
-      ...reChartsProps,
       ...props,
+      ...reChartsProps,
     }),
     [axisKey, orientation, propClassName, reChartsProps, tickFormatter, unit],
   )

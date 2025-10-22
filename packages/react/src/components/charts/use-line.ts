@@ -94,8 +94,8 @@ export const useLine = ({
         fill: "",
         stroke: "",
         strokeWidth: "",
-        ...reChartsProps,
         ...props,
+        ...reChartsProps,
       }
     },
     [activeDot, dot, propClassName, reChartsProps, type],

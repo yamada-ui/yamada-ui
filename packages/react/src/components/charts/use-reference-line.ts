@@ -69,8 +69,8 @@ export const useReferenceLine = ({
       label,
       stroke: "",
       strokeWidth: "",
-      ...reChartsProps,
       ...props,
+      ...reChartsProps,
     }),
     [className, label, reChartsProps],
   )

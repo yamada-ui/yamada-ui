@@ -22,8 +22,8 @@ export const useLegend = ({ ...rest }: UseLegendProps) => {
   > = useCallback(
     (props) => ({
       verticalAlign: "top",
-      ...legendProps,
       ...props,
+      ...legendProps,
     }),
     [legendProps],
   )

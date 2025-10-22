@@ -54,8 +54,8 @@ export const useGrid = ({
       horizontal: gridAxis === "x" || gridAxis === "xy",
       strokeDasharray,
       vertical: gridAxis === "y" || gridAxis === "xy",
-      ...reChartsProps,
       ...props,
+      ...reChartsProps,
     }),
     [propClassName, strokeDasharray, gridAxis, reChartsProps],
   )

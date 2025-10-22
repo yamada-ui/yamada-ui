@@ -32,8 +32,8 @@ export const useTooltip = ({
     (props) => ({
       animationDuration,
       isAnimationActive: (animationDuration || 0) > 0,
-      ...tooltipProps,
       ...props,
+      ...tooltipProps,
     }),
     [animationDuration, tooltipProps],
   )

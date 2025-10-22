@@ -40,8 +40,8 @@ export const useLineChart = ({
 }: UseLineChartProps) => {
   const getContainerProps: PropGetter = useCallback(
     (props) => ({
-      ...rest,
       ...props,
+      ...rest,
     }),
     [rest],
   )
@@ -52,8 +52,8 @@ export const useLineChart = ({
     Omit<ResponsiveContainerProps, "children">
   > = useCallback(
     (props) => ({
-      ...responsiveContainerProps,
       ...props,
+      ...responsiveContainerProps,
     }),
     [responsiveContainerProps],
   )
@@ -63,8 +63,8 @@ export const useLineChart = ({
       data,
       layout,
       syncId,
-      ...LineChartProps,
       ...props,
+      ...LineChartProps,
     }),
     [LineChartProps, data, layout, syncId],
   )

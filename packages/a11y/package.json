@@ -1,0 +1,20 @@
+{
+  "name": "@yamada-ui/a11y",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "clean": "rimraf node_modules trace .eslintcache",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings=0 --cache",
+    "format": "prettier . --ignore-path ../../.prettierignore --check --cache"
+  },
+  "exports": {
+    "./jsdom": "./src/jsdom/index.ts",
+    "./browser": "./src/browser/index.ts"
+  },
+  "dependencies": {
+    "axe-core": "^4.11.0",
+    "vitest-axe": "^0.1.0"
+  }
+}

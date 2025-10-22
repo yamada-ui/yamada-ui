@@ -43,19 +43,19 @@ importers:
         specifier: ^11.14.1
         version: 11.14.1(@emotion/react@11.14.0)(@types/react@19.2.2)(react@19.2.0)
       '@mdn/browser-compat-data':
-        specifier: 7.1.10
-        version: 7.1.10
+        specifier: 7.1.14
+        version: 7.1.14
       '@storybook/addon-a11y':
-        specifier: ^9.1.10
+        specifier: ^9.1.13
         version: 9.1.13(storybook@9.1.13)
       '@storybook/addon-docs':
-        specifier: ^9.1.10
+        specifier: ^9.1.13
         version: 9.1.13(@types/react@19.2.2)(storybook@9.1.13)
       '@storybook/cli':
-        specifier: ^9.1.10
+        specifier: ^9.1.13
         version: 9.1.13(@testing-library/dom@10.4.1)(vite@7.1.11)
       '@storybook/react-vite':
-        specifier: ^9.1.10
+        specifier: ^9.1.13
         version: 9.1.13(react-dom@19.2.0)(react@19.2.0)(storybook@9.1.13)(typescript@5.9.3)(vite@7.1.11)
       '@storybook/test-runner':
         specifier: ^0.23.0
@@ -76,13 +76,13 @@ importers:
         specifier: ^27.0.0
         version: 27.0.0
       '@types/node':
-        specifier: ^24.7.0
+        specifier: ^24.9.1
         version: 24.9.1
       '@types/react':
-        specifier: ^19.2.0
+        specifier: ^19.2.2
         version: 19.2.2
       '@types/react-dom':
-        specifier: ^19.2.0
+        specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       '@typescript/analyze-trace':
         specifier: ^0.10.1
@@ -130,11 +130,11 @@ importers:
         specifier: ^2.6.1
         version: 2.6.1
       jsdom:
-        specifier: ^27.0.0
+        specifier: ^27.0.1
         version: 27.0.1(postcss@8.5.6)
       lefthook:
-        specifier: ^1.13.6
-        version: 1.13.6
+        specifier: ^2.0.0
+        version: 2.0.0
       node-fetch:
         specifier: ^3.3.2
         version: 3.3.2
@@ -154,13 +154,13 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
       storybook:
-        specifier: ^9.1.10
+        specifier: ^9.1.13
         version: 9.1.13(@testing-library/dom@10.4.1)(prettier@3.6.2)(vite@7.1.11)
       strip-ansi:
         specifier: ^7.1.2
         version: 7.1.2
       tsdown:
-        specifier: ^0.15.6
+        specifier: ^0.15.9
         version: 0.15.9(typescript@5.9.3)
       tsx:
         specifier: ^4.20.6
@@ -184,8 +184,8 @@ importers:
         specifier: ^9.0.1
         version: 9.0.1
       web-features:
-        specifier: 3.3.0
-        version: 3.3.0
+        specifier: 3.5.0
+        version: 3.5.0
 
   packages/cli:
     dependencies:
@@ -205,10 +205,10 @@ importers:
         specifier: ^8.0.2
         version: 8.0.2
       esbuild:
-        specifier: ^0.25.10
+        specifier: ^0.25.11
         version: 0.25.11
       eslint:
-        specifier: ^9.37.0
+        specifier: ^9.38.0
         version: 9.38.0(jiti@2.6.1)
       execa:
         specifier: 9.3.1
@@ -220,7 +220,7 @@ importers:
         specifier: ^7.0.6
         version: 7.0.6
       listr2:
-        specifier: ^9.0.4
+        specifier: ^9.0.5
         version: 9.0.5
       node-eval:
         specifier: ^2.0.0
@@ -244,7 +244,7 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
       semver:
-        specifier: ^7.7.2
+        specifier: ^7.7.3
         version: 7.7.3
       sucrase:
         specifier: ^3.35.0
@@ -338,11 +338,11 @@ importers:
         specifier: 6.1.2
         version: 6.1.2
       intl-messageformat:
-        specifier: ^10.7.17
+        specifier: ^10.7.18
         version: 10.7.18
       lucide-react:
-        specifier: 0.544.0
-        version: 0.544.0(react@19.2.0)
+        specifier: 0.546.0
+        version: 0.546.0(react@19.2.0)
       motion:
         specifier: 12.18.1
         version: 12.18.1(react-dom@19.2.0)(react@19.2.0)
@@ -375,22 +375,22 @@ importers:
         version: 2.0.7(react-dom@19.2.0)(react@19.2.0)
     devDependencies:
       '@faker-js/faker':
-        specifier: ^10.0.0
+        specifier: ^10.1.0
         version: 10.1.0
       '@lucide/lab':
         specifier: ^0.1.2
         version: 0.1.2
       '@types/react':
-        specifier: ^19.2.0
+        specifier: ^19.2.2
         version: 19.2.2
       '@types/react-dom':
-        specifier: ^19.2.0
+        specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
       react-hook-form:
-        specifier: ^7.64.0
+        specifier: ^7.65.0
         version: 7.65.0(react@19.2.0)
       react-icons:
         specifier: ^5.5.0
@@ -421,7 +421,7 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0(eslint@9.38.0)
       '@limegrass/eslint-plugin-import-alias':
-        specifier: ^1.5.2
+        specifier: ^1.6.0
         version: 1.6.0(eslint@9.38.0)
       '@octokit/request-error':
         specifier: ^7.0.1
@@ -436,22 +436,22 @@ importers:
         specifier: ^6.10.1
         version: 6.10.1(jiti@2.6.1)
       '@types/react':
-        specifier: ^19.2.0
+        specifier: ^19.2.2
         version: 19.2.2
       '@types/react-dom':
-        specifier: ^19.2.0
+        specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       '@typescript-eslint/parser':
-        specifier: ^8.45.0
+        specifier: ^8.46.2
         version: 8.46.2(eslint@9.38.0)(typescript@5.9.3)
       '@vitest/eslint-plugin':
-        specifier: ^1.3.16
+        specifier: ^1.3.23
         version: 1.3.23(eslint@9.38.0)(typescript@5.9.3)(vitest@3.2.4)
       dotenv:
         specifier: ^17.2.3
         version: 17.2.3
       eslint:
-        specifier: ^9.37.0
+        specifier: ^9.38.0
         version: 9.38.0(jiti@2.6.1)
       eslint-config-prettier:
         specifier: ^10.1.8
@@ -478,13 +478,13 @@ importers:
         specifier: ^7.37.5
         version: 7.37.5(eslint@9.38.0)
       eslint-plugin-react-hooks:
-        specifier: ^6.1.1
-        version: 6.1.1(eslint@9.38.0)
+        specifier: ^7.0.0
+        version: 7.0.0(eslint@9.38.0)
       eslint-plugin-testing-library:
-        specifier: ^7.12.0
+        specifier: ^7.13.3
         version: 7.13.3(eslint@9.38.0)(typescript@5.9.3)
       eslint-plugin-unused-imports:
-        specifier: ^4.2.0
+        specifier: ^4.3.0
         version: 4.3.0(eslint@9.38.0)
       globals:
         specifier: ^16.4.0
@@ -499,7 +499,7 @@ importers:
         specifier: ^19.0.0
         version: 19.2.0(react@19.2.0)
       typescript-eslint:
-        specifier: ^8.45.0
+        specifier: ^8.46.2
         version: 8.46.2(eslint@9.38.0)(typescript@5.9.3)
       vitest:
         specifier: ^3.2.4
@@ -514,7 +514,7 @@ importers:
         specifier: workspace:*
         version: link:../../../packages/react
       next:
-        specifier: ^15.5.4
+        specifier: ^15.5.6
         version: 15.5.6(@babel/core@7.28.4)(react-dom@19.2.0)(react@19.2.0)
       react:
         specifier: ^19.0.0
@@ -524,13 +524,13 @@ importers:
         version: 19.2.0(react@19.2.0)
     devDependencies:
       '@types/node':
-        specifier: ^24.7.0
+        specifier: ^24.9.1
         version: 24.9.1
       '@types/react':
-        specifier: ^19.2.0
+        specifier: ^19.2.2
         version: 19.2.2
       '@types/react-dom':
-        specifier: ^19.2.0
+        specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       typescript:
         specifier: ^5.9.3
@@ -542,7 +542,7 @@ importers:
         specifier: workspace:*
         version: link:../../../packages/react
       next:
-        specifier: ^15.5.4
+        specifier: ^15.5.6
         version: 15.5.6(@babel/core@7.28.4)(react-dom@19.2.0)(react@19.2.0)
       react:
         specifier: ^19.0.0
@@ -552,13 +552,13 @@ importers:
         version: 19.2.0(react@19.2.0)
     devDependencies:
       '@types/node':
-        specifier: ^24.7.0
+        specifier: ^24.9.1
         version: 24.9.1
       '@types/react':
-        specifier: ^19.2.0
+        specifier: ^19.2.2
         version: 19.2.2
       '@types/react-dom':
-        specifier: ^19.2.0
+        specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       typescript:
         specifier: ^5.9.3
@@ -592,16 +592,16 @@ importers:
         specifier: ^2.17.1
         version: 2.17.1(@remix-run/react@2.17.1)(@remix-run/serve@2.17.1)(@types/node@24.9.1)(jiti@2.6.1)(tsx@4.20.6)(typescript@5.9.3)(vite@7.1.11)
       '@types/node':
-        specifier: ^24.7.0
+        specifier: ^24.9.1
         version: 24.9.1
       '@types/react':
-        specifier: ^19.2.0
+        specifier: ^19.2.2
         version: 19.2.2
       '@types/react-dom':
-        specifier: ^19.2.0
+        specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       vite:
-        specifier: ^7.1.9
+        specifier: ^7.1.11
         version: 7.1.11(@types/node@24.9.1)(jiti@2.6.1)(tsx@4.20.6)
       vite-tsconfig-paths:
         specifier: ^5.1.4
@@ -620,19 +620,19 @@ importers:
         version: 19.2.0(react@19.2.0)
     devDependencies:
       '@types/node':
-        specifier: ^24.7.0
+        specifier: ^24.9.1
         version: 24.9.1
       '@types/react':
-        specifier: ^19.2.0
+        specifier: ^19.2.2
         version: 19.2.2
       '@types/react-dom':
-        specifier: ^19.2.0
+        specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       '@vitejs/plugin-react-swc':
         specifier: ^4.1.0
         version: 4.1.0(vite@7.1.11)
       vite:
-        specifier: ^7.1.9
+        specifier: ^7.1.11
         version: 7.1.11(@types/node@24.9.1)(jiti@2.6.1)(tsx@4.20.6)
 
   www:
@@ -647,7 +647,7 @@ importers:
         specifier: ^0.4.0
         version: 0.4.0
       '@faker-js/faker':
-        specifier: ^10.0.0
+        specifier: ^10.1.0
         version: 10.1.0
       '@lucide/lab':
         specifier: ^0.1.2
@@ -668,10 +668,10 @@ importers:
         specifier: 12.18.1
         version: 12.18.1(react-dom@19.2.0)(react@19.2.0)
       next:
-        specifier: ^15.5.4
+        specifier: ^15.5.6
         version: 15.5.6(@babel/core@7.28.4)(react-dom@19.2.0)(react@19.2.0)
       next-intl:
-        specifier: ^4.3.9
+        specifier: ^4.3.12
         version: 4.3.12(next@15.5.6)(react@19.2.0)(typescript@5.9.3)
       prism-react-renderer:
         specifier: ^2.4.1
@@ -683,7 +683,7 @@ importers:
         specifier: ^19.0.0
         version: 19.2.0(react@19.2.0)
       react-hook-form:
-        specifier: ^7.64.0
+        specifier: ^7.65.0
         version: 7.65.0(react@19.2.0)
       react-icons:
         specifier: ^5.5.0
@@ -696,7 +696,7 @@ importers:
         version: 3.3.0
     devDependencies:
       '@next/eslint-plugin-next':
-        specifier: ^15.5.4
+        specifier: ^15.5.6
         version: 15.5.6
       '@shikijs/rehype':
         specifier: ^3.13.0
@@ -714,13 +714,13 @@ importers:
         specifier: ^2.0.13
         version: 2.0.13
       '@types/node':
-        specifier: ^24.7.0
+        specifier: ^24.9.1
         version: 24.9.1
       '@types/react':
-        specifier: ^19.2.0
+        specifier: ^19.2.2
         version: 19.2.2
       '@types/react-dom':
-        specifier: ^19.2.0
+        specifier: ^19.2.2
         version: 19.2.2(@types/react@19.2.2)
       '@yamada-ui/cli':
         specifier: workspace:*
@@ -3683,8 +3683,8 @@ packages:
       read-yaml-file: 1.1.0
     dev: false
 
-  /@mdn/browser-compat-data@7.1.10:
-    resolution: {integrity: sha512-tp11o6tT85DSj0eOKOcFwiXu5/me1HiO+0k9cbKTVJtS1+UHVyk8XJHjJo1v0iIFaZJHDY43mLuJSepcWfce8w==, tarball: https://registry.npmjs.org/@mdn/browser-compat-data/-/browser-compat-data-7.1.10.tgz}
+  /@mdn/browser-compat-data@7.1.14:
+    resolution: {integrity: sha512-YunzO7XhjKljvHSUbkLrvVaKwdB7NGVZiOm7x0Wo8YSJp3tDvVsBOcHEayr+1ylrv/qcbh1RD4wbdgkAO41ZxA==, tarball: https://registry.npmjs.org/@mdn/browser-compat-data/-/browser-compat-data-7.1.14.tgz}
     dev: false
 
   /@mdx-js/mdx@2.3.0:
@@ -8455,8 +8455,8 @@ packages:
       - typescript
     dev: false
 
-  /eslint-plugin-react-hooks@6.1.1(eslint@9.38.0):
-    resolution: {integrity: sha512-St9EKZzOAQF704nt2oJvAKZHjhrpg25ClQoaAlHmPZuajFldVLqRDW4VBNAS01NzeiQF0m0qhG1ZA807K6aVaQ==, tarball: https://registry.npmjs.org/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-6.1.1.tgz}
+  /eslint-plugin-react-hooks@7.0.0(eslint@9.38.0):
+    resolution: {integrity: sha512-fNXaOwvKwq2+pXiRpXc825Vd63+KM4DLL40Rtlycb8m7fYpp6efrTp1sa6ZbP/Ap58K2bEKFXRmhURE+CJAQWw==, tarball: https://registry.npmjs.org/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-7.0.0.tgz}
     engines: {node: '>=18'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -8464,6 +8464,7 @@ packages:
       '@babel/core': 7.28.4
       '@babel/parser': 7.28.4
       eslint: 9.38.0(jiti@2.6.1)
+      hermes-parser: 0.25.1
       zod: 4.1.12
       zod-validation-error: 4.0.2(zod@4.1.12)
     transitivePeerDependencies:
@@ -9724,6 +9725,16 @@ packages:
       property-information: 7.1.0
       space-separated-tokens: 2.0.2
     dev: true
+
+  /hermes-estree@0.25.1:
+    resolution: {integrity: sha512-0wUoCcLp+5Ev5pDW2OriHC2MJCbwLwuRx+gAqMTOkGKJJiBCLjtrvy4PWUGn6MIVefecRpzoOZ/UV6iGdOr+Cw==, tarball: https://registry.npmjs.org/hermes-estree/-/hermes-estree-0.25.1.tgz}
+    dev: false
+
+  /hermes-parser@0.25.1:
+    resolution: {integrity: sha512-6pEjquH3rqaI6cYAXYPcz9MS4rY6R4ngRgrgfDshRptUZIc3lw0MCIJIGDj9++mfySOuPTHB4nrSW99BCvOPIA==, tarball: https://registry.npmjs.org/hermes-parser/-/hermes-parser-0.25.1.tgz}
+    dependencies:
+      hermes-estree: 0.25.1
+    dev: false
 
   /hoist-non-react-statics@3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==, tarball: https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz}
@@ -11194,101 +11205,101 @@ packages:
       package-json: 10.0.1
     dev: true
 
-  /lefthook-darwin-arm64@1.13.6:
-    resolution: {integrity: sha512-m6Lb77VGc84/Qo21Lhq576pEvcgFCnvloEiP02HbAHcIXD0RTLy9u2yAInrixqZeaz13HYtdDaI7OBYAAdVt8A==, tarball: https://registry.npmjs.org/lefthook-darwin-arm64/-/lefthook-darwin-arm64-1.13.6.tgz}
+  /lefthook-darwin-arm64@2.0.0:
+    resolution: {integrity: sha512-0p614LKJA1XZjw1m8WA0emK5kDDHwpiVzNWQBwM/kyY9dxDOV1ixRqm36J0fpshaoSFcwucma5xA3HTK1A23Dg==, tarball: https://registry.npmjs.org/lefthook-darwin-arm64/-/lefthook-darwin-arm64-2.0.0.tgz}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: false
     optional: true
 
-  /lefthook-darwin-x64@1.13.6:
-    resolution: {integrity: sha512-CoRpdzanu9RK3oXR1vbEJA5LN7iB+c7hP+sONeQJzoOXuq4PNKVtEaN84Gl1BrVtCNLHWFAvCQaZPPiiXSy8qg==, tarball: https://registry.npmjs.org/lefthook-darwin-x64/-/lefthook-darwin-x64-1.13.6.tgz}
+  /lefthook-darwin-x64@2.0.0:
+    resolution: {integrity: sha512-IcixMsdUijl/NyKHapqA/MtNrrtm/WjhezikWSzCJc1dPy+aE8PYeZoBzNFIJJgB6zavO+sUxam10Zx/70AUHw==, tarball: https://registry.npmjs.org/lefthook-darwin-x64/-/lefthook-darwin-x64-2.0.0.tgz}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: false
     optional: true
 
-  /lefthook-freebsd-arm64@1.13.6:
-    resolution: {integrity: sha512-X4A7yfvAJ68CoHTqP+XvQzdKbyd935sYy0bQT6Ajz7FL1g7hFiro8dqHSdPdkwei9hs8hXeV7feyTXbYmfjKQQ==, tarball: https://registry.npmjs.org/lefthook-freebsd-arm64/-/lefthook-freebsd-arm64-1.13.6.tgz}
+  /lefthook-freebsd-arm64@2.0.0:
+    resolution: {integrity: sha512-APWEKechR2Gp5/rcf7QLkVqswShesnBZrMGmBnFh/nAtvWkkPVdBEc0VDFlU+ViUqHFepuQOSZD/G68F6NVStg==, tarball: https://registry.npmjs.org/lefthook-freebsd-arm64/-/lefthook-freebsd-arm64-2.0.0.tgz}
     cpu: [arm64]
     os: [freebsd]
     requiresBuild: true
     dev: false
     optional: true
 
-  /lefthook-freebsd-x64@1.13.6:
-    resolution: {integrity: sha512-ai2m+Sj2kGdY46USfBrCqLKe9GYhzeq01nuyDYCrdGISePeZ6udOlD1k3lQKJGQCHb0bRz4St0r5nKDSh1x/2A==, tarball: https://registry.npmjs.org/lefthook-freebsd-x64/-/lefthook-freebsd-x64-1.13.6.tgz}
+  /lefthook-freebsd-x64@2.0.0:
+    resolution: {integrity: sha512-J7F/zKBgx5gJm2/EgKxqckzJRPaIHGZnKUY2h9MeKr4LBMk5kt+hwH9OeokGvGvPzLE4rEdUoFhJnmceyY4ZsA==, tarball: https://registry.npmjs.org/lefthook-freebsd-x64/-/lefthook-freebsd-x64-2.0.0.tgz}
     cpu: [x64]
     os: [freebsd]
     requiresBuild: true
     dev: false
     optional: true
 
-  /lefthook-linux-arm64@1.13.6:
-    resolution: {integrity: sha512-cbo4Wtdq81GTABvikLORJsAWPKAJXE8Q5RXsICFUVznh5PHigS9dFW/4NXywo0+jfFPCT6SYds2zz4tCx6DA0Q==, tarball: https://registry.npmjs.org/lefthook-linux-arm64/-/lefthook-linux-arm64-1.13.6.tgz}
+  /lefthook-linux-arm64@2.0.0:
+    resolution: {integrity: sha512-Olilio7szMSFkfYFf7vW+JltTOpq4ZFgvqQ+nKv4NKrKH55Ax+JmK69j/VvJ/8vgks55mMQmfCuukbt2PjeG3Q==, tarball: https://registry.npmjs.org/lefthook-linux-arm64/-/lefthook-linux-arm64-2.0.0.tgz}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: false
     optional: true
 
-  /lefthook-linux-x64@1.13.6:
-    resolution: {integrity: sha512-uJl9vjCIIBTBvMZkemxCE+3zrZHlRO7Oc+nZJ+o9Oea3fu+W82jwX7a7clw8jqNfaeBS+8+ZEQgiMHWCloTsGw==, tarball: https://registry.npmjs.org/lefthook-linux-x64/-/lefthook-linux-x64-1.13.6.tgz}
+  /lefthook-linux-x64@2.0.0:
+    resolution: {integrity: sha512-QOMRJ1paWjjTPPrGy8gf+8hmtXa3m63rOUeJUQo3N1xUL94NkKtqOCKz1qSmMuYW00clTGM27HdujNE+CSy5Iw==, tarball: https://registry.npmjs.org/lefthook-linux-x64/-/lefthook-linux-x64-2.0.0.tgz}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: false
     optional: true
 
-  /lefthook-openbsd-arm64@1.13.6:
-    resolution: {integrity: sha512-7r153dxrNRQ9ytRs2PmGKKkYdvZYFPre7My7XToSTiRu5jNCq++++eAKVkoyWPduk97dGIA+YWiEr5Noe0TK2A==, tarball: https://registry.npmjs.org/lefthook-openbsd-arm64/-/lefthook-openbsd-arm64-1.13.6.tgz}
+  /lefthook-openbsd-arm64@2.0.0:
+    resolution: {integrity: sha512-o99K0OuYgb4SfsqQQUwuxiAfgHhAnA/9eBDFVdUhGO69y7HenyXwaE52iaRiP64KH8TKMGJe+hiztmBrwOM5nA==, tarball: https://registry.npmjs.org/lefthook-openbsd-arm64/-/lefthook-openbsd-arm64-2.0.0.tgz}
     cpu: [arm64]
     os: [openbsd]
     requiresBuild: true
     dev: false
     optional: true
 
-  /lefthook-openbsd-x64@1.13.6:
-    resolution: {integrity: sha512-Z+UhLlcg1xrXOidK3aLLpgH7KrwNyWYE3yb7ITYnzJSEV8qXnePtVu8lvMBHs/myzemjBzeIr/U/+ipjclR06g==, tarball: https://registry.npmjs.org/lefthook-openbsd-x64/-/lefthook-openbsd-x64-1.13.6.tgz}
+  /lefthook-openbsd-x64@2.0.0:
+    resolution: {integrity: sha512-hKFieYnE1V+EWgh5eBo/5Aj+TaYOal3lJ39OO/c61MZVbD6iOaQpZVAaQWmiVUo8p1bOK+0OjeeYfEF1OJ5IAg==, tarball: https://registry.npmjs.org/lefthook-openbsd-x64/-/lefthook-openbsd-x64-2.0.0.tgz}
     cpu: [x64]
     os: [openbsd]
     requiresBuild: true
     dev: false
     optional: true
 
-  /lefthook-windows-arm64@1.13.6:
-    resolution: {integrity: sha512-Uxef6qoDxCmUNQwk8eBvddYJKSBFglfwAY9Y9+NnnmiHpWTjjYiObE9gT2mvGVpEgZRJVAatBXc+Ha5oDD/OgQ==, tarball: https://registry.npmjs.org/lefthook-windows-arm64/-/lefthook-windows-arm64-1.13.6.tgz}
+  /lefthook-windows-arm64@2.0.0:
+    resolution: {integrity: sha512-Xzyr83kFVzjbRNzDMmlU1z5wtPXKWriPrRf3vwoVdsvHi/yvxNy9+ZH1LF0wXnH5agTgMMag/37XA+hZ/5cfmA==, tarball: https://registry.npmjs.org/lefthook-windows-arm64/-/lefthook-windows-arm64-2.0.0.tgz}
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     dev: false
     optional: true
 
-  /lefthook-windows-x64@1.13.6:
-    resolution: {integrity: sha512-mOZoM3FQh3o08M8PQ/b3IYuL5oo36D9ehczIw1dAgp1Ly+Tr4fJ96A+4SEJrQuYeRD4mex9bR7Ps56I73sBSZA==, tarball: https://registry.npmjs.org/lefthook-windows-x64/-/lefthook-windows-x64-1.13.6.tgz}
+  /lefthook-windows-x64@2.0.0:
+    resolution: {integrity: sha512-r8p2nMht/gAgZHqNdysUAyealFOyozbI1W+fU/L4thFdZzWGVesP+Vd0hvvS1MDwTxbGkqP7vCvCurll64vggg==, tarball: https://registry.npmjs.org/lefthook-windows-x64/-/lefthook-windows-x64-2.0.0.tgz}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
     dev: false
     optional: true
 
-  /lefthook@1.13.6:
-    resolution: {integrity: sha512-ojj4/4IJ29Xn4drd5emqVgilegAPN3Kf0FQM2p/9+lwSTpU+SZ1v4Ig++NF+9MOa99UKY8bElmVrLhnUUNFh5g==, tarball: https://registry.npmjs.org/lefthook/-/lefthook-1.13.6.tgz}
+  /lefthook@2.0.0:
+    resolution: {integrity: sha512-iR7cwnlojpRW/ixaE9d8lGSp+Twv2Sbg/1rlWX8WL/J1sn9xWcII8ddeBaY+6n6bWVPYBQfxc5uhd77efGzUfA==, tarball: https://registry.npmjs.org/lefthook/-/lefthook-2.0.0.tgz}
     hasBin: true
     requiresBuild: true
     optionalDependencies:
-      lefthook-darwin-arm64: 1.13.6
-      lefthook-darwin-x64: 1.13.6
-      lefthook-freebsd-arm64: 1.13.6
-      lefthook-freebsd-x64: 1.13.6
-      lefthook-linux-arm64: 1.13.6
-      lefthook-linux-x64: 1.13.6
-      lefthook-openbsd-arm64: 1.13.6
-      lefthook-openbsd-x64: 1.13.6
-      lefthook-windows-arm64: 1.13.6
-      lefthook-windows-x64: 1.13.6
+      lefthook-darwin-arm64: 2.0.0
+      lefthook-darwin-x64: 2.0.0
+      lefthook-freebsd-arm64: 2.0.0
+      lefthook-freebsd-x64: 2.0.0
+      lefthook-linux-arm64: 2.0.0
+      lefthook-linux-x64: 2.0.0
+      lefthook-openbsd-arm64: 2.0.0
+      lefthook-openbsd-x64: 2.0.0
+      lefthook-windows-arm64: 2.0.0
+      lefthook-windows-x64: 2.0.0
     dev: false
 
   /leven@3.1.0:
@@ -11496,8 +11507,8 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /lucide-react@0.544.0(react@19.2.0):
-    resolution: {integrity: sha512-t5tS44bqd825zAW45UQxpG2CvcC4urOwn2TrwSH8u+MjeE+1NnWl6QqeQ/6NdjMqdOygyiT9p3Ev0p1NJykxjw==, tarball: https://registry.npmjs.org/lucide-react/-/lucide-react-0.544.0.tgz}
+  /lucide-react@0.546.0(react@19.2.0):
+    resolution: {integrity: sha512-Z94u6fKT43lKeYHiVyvyR8fT7pwCzDu7RyMPpTvh054+xahSgj4HFQ+NmflvzdXsoAjYGdCguGaFKYuvq0ThCQ==, tarball: https://registry.npmjs.org/lucide-react/-/lucide-react-0.546.0.tgz}
     peerDependencies:
       react: ^19.0.0
     dependencies:
@@ -16799,8 +16810,8 @@ packages:
     optionalDependencies:
       '@zxing/text-encoding': 0.9.0
 
-  /web-features@3.3.0:
-    resolution: {integrity: sha512-hg7CKhLUTKEi4zRrFXs1sEmu0kFK+hGCZHalw+nkyBN5X+lgNzs22q7WlNqZfe2avqB+AVuEhONytMgaq/SgxA==, tarball: https://registry.npmjs.org/web-features/-/web-features-3.3.0.tgz}
+  /web-features@3.5.0:
+    resolution: {integrity: sha512-8e59t2hpjCtVpO+bgdGgyrTBN7CWRYx2dt8TqRJLeMmJ3LpjT4XNSoxYykZi0Fuc5qorbKWXPgseD3PHtyQJ5w==, tarball: https://registry.npmjs.org/web-features/-/web-features-3.5.0.tgz}
     dev: false
 
   /web-streams-polyfill@3.3.3:

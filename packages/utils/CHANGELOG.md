@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 2.0.2
+
+### Patch Changes
+
+- [#5415](https://github.com/yamada-ui/yamada-ui/pull/5415) [`e75d02b`](https://github.com/yamada-ui/yamada-ui/commit/e75d02b33e0be9b5ca47ff34c8f97d86472d5960) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Rename `mergeOptions` to `MergeOptions`.
+
 ## 2.0.1
 
 ### Patch Changes

@@ -5,18 +5,17 @@ export const dynamic = "force-static"
 
 export async function GET(
   _request: Request,
-  context: RouteContext<"/[locale]/llms-components.txt">,
+  context: RouteContext<"/[locale]/llms-hooks.txt">,
 ) {
   const params = await context.params
 
-  const componentDocs = docs.filter(
-    (doc) =>
-      doc.slug[0] === "components" && doc.locale === getLocale(params.locale),
+  const hookDocs = docs.filter(
+    (doc) => doc.slug[0] === "hooks" && doc.locale === getLocale(params.locale),
   )
 
   const content = [
-    "<SYSTEM>Documentation for all components in Yamada UI v2.</SYSTEM>",
-    ...componentDocs.map((doc) => `# ${doc.title}\n\n${doc.llm}`),
+    "<SYSTEM>Documentation for all hooks in Yamada UI v2.</SYSTEM>",
+    ...hookDocs.map((doc) => `# ${doc.title}\n\n${doc.llm}`),
     "",
   ].join("\n\n")
 

@@ -45,7 +45,7 @@ const nextConfig: NextConfig = {
     return Promise.resolve([
       {
         destination: "/:locale/llms.txt/:path*.mdx",
-        source: "/:locale/docs/components/:path*.mdx",
+        source: "/:locale/docs/:path*.mdx",
       },
     ])
   },

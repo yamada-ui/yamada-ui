@@ -14,8 +14,12 @@ import {
   remarkCodeGroup,
   remarkSteps,
 } from "./utils/remark-plugins"
-import { replacePropsTable } from "./utils/replace-props-table"
 import { getPathname } from "./utils/route"
+import {
+  replaceComponentsToLinks,
+  replaceLinkListToMarkdown,
+  replacePropsTable,
+} from "./utils/transforms"
 
 function getPath(value: string) {
   return value.replace(/\\/g, "/").replace(/.*\/contents\//, "")
@@ -50,7 +54,11 @@ const docs = defineCollection({
       code: s.mdx(),
       description: s.string(),
       llm: s.custom().transform((_data, { meta }) => {
-        return replacePropsTable(meta.content as string)
+        let content = meta.content as string
+        content = replacePropsTable(content)
+        content = replaceLinkListToMarkdown(content)
+        content = replaceComponentsToLinks(content)
+        return content
       }),
       metadata: s.metadata(),
       release_date: s.string().optional(),

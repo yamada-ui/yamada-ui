@@ -55,7 +55,9 @@ export const Tooltip = withProvider<"div", TooltipRootProps>(
   })
 
   return {
-    ...getTooltipProps(),
+    ...getTooltipProps({
+      cursor: <TooltipCursor />,
+    }),
     content: ({
       label,
       payload,
@@ -74,6 +76,40 @@ export const Tooltip = withProvider<"div", TooltipRootProps>(
     ),
   }
 })
+
+interface TooltipCursorProps
+  extends Omit<HTMLStyledProps<"path">, "height" | "points" | "width"> {
+  height?: number
+  payload?: Dict[]
+  points?: { x: number; y: number }[]
+  width?: number
+}
+
+const TooltipCursor = withContext<"path", TooltipCursorProps>(
+  ({
+    bottom: _bottom,
+    height,
+    left: _left,
+    payload: _payload,
+    points = [],
+    right: _right,
+    stroke: _stroke,
+    top: _top,
+    width,
+    ...props
+  }) => {
+    return (
+      <styled.path asChild {...props}>
+        <path
+          d={`M${points[0]?.x},${points[0]?.y}L${points[1]?.x},${points[1]?.y}`}
+          height={height}
+          width={width}
+        />
+      </styled.path>
+    )
+  },
+  "cursor",
+)()
 
 interface TooltipContentProps extends HTMLStyledProps {
   payload: Dict[] | undefined

@@ -25,7 +25,6 @@ import { useSplitChildren } from "./utils"
 import { XAxis, XAxisComponentContext } from "./x-axis"
 import { YAxis, YAxisComponentContext } from "./y-axis"
 
-//TODO: tooltip cursor
 //TODO: dots default style and nested element
 //   -> dotはカスタムコンポーネントにして、asChildで当てる。ovalのpathみたいにする。slotComponentにしてスタイルを当てる
 // const styledPath = styled("path",{forwardProps:["cx","cy"]})

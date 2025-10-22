@@ -19,6 +19,11 @@ export const tooltipStyle = defineComponentSlotStyle({
       rounded: "md",
       zIndex: "dodoria",
     },
+    cursor: {
+      fill: ["blackAlpha.50", "whiteAlpha.50"],
+      stroke: ["blackAlpha.400", "whiteAlpha.400"],
+      strokeWidth: 1,
+    },
     item: {
       alignItems: "center",
       display: "flex",

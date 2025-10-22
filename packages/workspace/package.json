@@ -19,6 +19,7 @@
     "./typescript/*": "./src/typescript/*",
     "./vitest/*": "./src/vitest/*.ts",
     "./octokit": "./src/octokit/index.ts",
+    "./codecov": "./src/codecov/index.ts",
     "./discord": "./src/discord/index.ts"
   },
   "dependencies": {

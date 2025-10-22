@@ -91,6 +91,7 @@
     "@lucide/lab": "^0.1.2",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
+    "@vitest/browser": "^3.2.4",
     "@yamada-ui/a11y": "workspace:*",
     "clean-package": "2.2.0",
     "react-hook-form": "^7.65.0",

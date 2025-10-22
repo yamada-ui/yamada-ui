@@ -188,6 +188,20 @@ export const PopoverMode: Story = () => {
         </NativePopover.Content>
       </NativePopover.Root>
 
+      <NativePopover.Root popover="hint">
+        <NativePopover.Trigger>
+          <Button>Hint</Button>
+        </NativePopover.Trigger>
+
+        <NativePopover.Content>
+          <NativePopover.Header>Hint Popover</NativePopover.Header>
+          <NativePopover.Body>
+            Hint popover does not close auto popovers when displayed, but closes
+            other hint popovers.
+          </NativePopover.Body>
+        </NativePopover.Content>
+      </NativePopover.Root>
+
       <NativePopover.Root popover="manual">
         <NativePopover.Trigger>
           <Button>Manual</Button>

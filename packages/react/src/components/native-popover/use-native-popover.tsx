@@ -3,7 +3,7 @@
 import type { RefObject } from "react"
 import type { Direction, PropGetter } from "../../core"
 import type { UsePopperProps } from "../../hooks/use-popper"
-import { useCallback, useId, useMemo, useRef } from "react"
+import { useCallback, useId, useRef } from "react"
 import { useEnvironment } from "../../core"
 import { popperProps, usePopper } from "../../hooks/use-popper"
 import {
@@ -97,13 +97,9 @@ export const useNativePopover = ({
 
   assignRef(updateRef, update)
 
-  const hasHeader = useMemo(() => {
-    return !!getDocument()?.getElementById(headerId)
-  }, [getDocument, headerId])
+  const hasHeader = !!getDocument()?.getElementById(headerId)
 
-  const hasBody = useMemo(() => {
-    return !!getDocument()?.getElementById(bodyId)
-  }, [getDocument, bodyId])
+  const hasBody = !!getDocument()?.getElementById(bodyId)
 
   const getTriggerProps: PropGetter<"button"> = useCallback(
     ({ ref, onClick, ...props } = {}) => {

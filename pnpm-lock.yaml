@@ -401,6 +401,9 @@ importers:
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
+      playwright:
+        specifier: ^1.56.1
+        version: 1.56.1
       react-hook-form:
         specifier: ^7.65.0
         version: 7.65.0(react@19.2.0)

@@ -74,6 +74,11 @@ jobs:
         if: steps.check-modified.outputs.any_changed == 'true'
         uses: ./.github/composite-actions/install
 
+      - name: Setup Browsers
+        if: steps.check-modified.outputs.any_changed == 'true'
+        working-directory: packages/react
+        run: pnpm playwright install --with-deps
+
       - name: Run tests
         if: steps.check-modified.outputs.any_changed == 'true'
         run: pnpm test:coverage

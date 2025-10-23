@@ -63,7 +63,7 @@ export interface ColorSelectorRootProps
    */
   colorSwatchGroupLabel?: ReactNode
   /**
-   * If true, the alpha slider will be displayed.
+   * If `true`, the alpha slider will be displayed.
    *
    * @default false
    */

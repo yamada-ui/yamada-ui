@@ -608,7 +608,7 @@
       "withAlpha": {
         "type": "boolean",
         "defaultValue": "false",
-        "description": "If true, the alpha slider will be displayed.",
+        "description": "If `true`, the alpha slider will be displayed.",
         "required": false
       }
     },
@@ -1340,7 +1340,7 @@
     "withAlpha": {
       "type": "boolean",
       "defaultValue": "false",
-      "description": "If true, the alpha slider will be displayed.",
+      "description": "If `true`, the alpha slider will be displayed.",
       "required": false
     }
   },

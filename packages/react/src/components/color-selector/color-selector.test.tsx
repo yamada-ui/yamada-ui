@@ -1,7 +1,7 @@
 import { render, screen } from "#test"
 import { ColorSelector } from "./"
 
-describe("<Container />", () => {
+describe("<ColorSelector />", () => {
   test("renders component correctly", () => {
     render(
       <ColorSelector.Root

@@ -3,7 +3,7 @@ import { ColorPicker } from "."
 
 describe("<ColorPicker />", () => {
   test("renders component correctly", async () => {
-    await a11y(<ColorPicker placeholder="Choice a color" />)
+    await a11y(<ColorPicker placeholder="Choose a color" />)
   })
 
   test("sets `displayName` correctly", () => {
@@ -14,7 +14,7 @@ describe("<ColorPicker />", () => {
     render(
       <ColorPicker
         defaultOpen
-        placeholder="Choice a color"
+        placeholder="Choose a color"
         rootProps={{ "data-testid": "root" }}
       />,
     )
@@ -29,7 +29,7 @@ describe("<ColorPicker />", () => {
     render(
       <ColorPicker
         defaultOpen
-        placeholder="Choice a color"
+        placeholder="Choose a color"
         rootProps={{ "data-testid": "root" }}
       />,
     )

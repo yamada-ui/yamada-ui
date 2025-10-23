@@ -1,0 +1,10 @@
+import{d as p,g as u,j as t,s as c,a6 as h,L as b}from"./iframe-DJ0yX4dv.js";import{u as f}from"./use-progress-CN3HWOFx.js";const S=p({base:{range:{bgColor:"{filledTrackColor}",h:"full",rounded:"inherit",transitionDuration:"slow",transitionProperty:"size",w:"{width}",_indeterminate:{"--animation-from-x":"-40%","--animation-to-x":"100%",animationDuration:"{duration, 1s}",animationIterationCount:"infinite",animationName:"position",animationTimingFunction:"ease",minW:"50%",position:"absolute",willChange:"left"}},root:{overflow:"hidden",position:"relative",w:"full"}},props:{animated:{true:{range:{"--animation-from":"{stripe-size}",animationDuration:"{duration, 1s}",animationIterationCount:"infinite",animationName:"bg-position",animationTimingFunction:"linear"}}},shape:{circle:{root:{rounded:"full"}},rounded:{root:{rounded:"l1"}},square:{root:{rounded:"0"}}},striped:{true:{range:{"--stripe-angle":"45deg","--stripe-color":["rgba(255, 255, 255, 0.3)","rgba(0, 0, 0, 0.3)"],"--stripe-size":"1rem",bgImage:`linear-gradient(
+            {stripe-angle},
+            {stripe-color} 25%,
+            transparent 25%,
+            transparent 50%,
+            {stripe-color} 50%,
+            {stripe-color} 75%,
+            transparent 75%,
+            transparent
+          )`,bgSize:"{stripe-size} {stripe-size}"}}}},variants:{outline:{range:{bg:"colorScheme.solid"},root:{bg:"bg.subtle"}},subtle:{range:{bg:"colorScheme.solid/80"},root:{bg:["colorScheme.muted","colorScheme.subtle"]}}},sizes:{xs:{root:{h:"1"}},sm:{root:{h:"2"}},md:{root:{h:"3"}},lg:{root:{h:"4"}},xl:{root:{h:"5"}}},defaultProps:{size:"md",variant:"outline",shape:"rounded",striped:!1}}),{withContext:x,withProvider:w}=u("progress",S),z=w(({css:o,max:e,min:r,rangeColor:i,trackColor:n,value:s,rangeProps:a,...l})=>{const{percent:g,getRangeProps:m,getRootProps:d}=f({max:e,min:r,value:s});return t.jsx(c.div,{css:h(o,{"--width":`${g}%`}),bg:n,...d(l),children:t.jsx(C,{bg:i,...m(a)})})},"root")(void 0,({duration:o,...e})=>({"--duration":b(o)?`${o}s`:o,...e})),C=x("div","range")();export{z as P};

@@ -14,15 +14,15 @@ source: components/color-selector
 :::code-group
 
 ```tsx [package]
-import { ColorSelector } from "@yamada-ui/react"
+import { ColorPicker } from "@yamada-ui/react"
 ```
 
 ```tsx [alias]
-import { ColorSelector } from "@/components/ui"
+import { ColorPicker } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { ColorSelector } from "@workspaces/ui"
+import { ColorPicker } from "@workspaces/ui"
 ```
 
 :::
@@ -137,9 +137,7 @@ import { ColorSelector } from "@workspaces/ui"
 ### コンポーネントをカスタマイズする
 
 ```tsx preview functional client
-const fallbackValue = "#FF0000FF"
-const format = "hexa"
-const [value, setValue] = useState(fallbackValue)
+const [value, setValue] = useState("#FF0000FF")
 
 return (
   <Popover.Root placement="end-start">

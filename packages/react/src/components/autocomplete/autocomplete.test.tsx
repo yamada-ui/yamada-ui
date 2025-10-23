@@ -4,7 +4,7 @@ import { Autocomplete } from "."
 describe("<Autocomplete />", () => {
   test("renders component correctly", async () => {
     await a11y(
-      <Autocomplete.Root placeholder="Choice a option">
+      <Autocomplete.Root placeholder="Choose a option">
         <Autocomplete.Option value="one">Option 1</Autocomplete.Option>
         <Autocomplete.Option value="two">Option 2</Autocomplete.Option>
         <Autocomplete.Option value="three">Option 3</Autocomplete.Option>
@@ -24,7 +24,7 @@ describe("<Autocomplete />", () => {
       <Autocomplete.Root
         defaultOpen
         defaultValue="one"
-        placeholder="Choice a option"
+        placeholder="Choose a option"
         iconProps={{ "data-testid": "icon" }}
         rootProps={{ "data-testid": "root" }}
       >
@@ -54,7 +54,7 @@ describe("<Autocomplete />", () => {
       <Autocomplete.Root
         defaultOpen
         defaultValue="one"
-        placeholder="Choice a option"
+        placeholder="Choose a option"
         iconProps={{ "data-testid": "icon" }}
         rootProps={{ "data-testid": "root" }}
       >

@@ -4,7 +4,7 @@ import { Select } from "."
 describe("<Select />", () => {
   test("renders component correctly", async () => {
     await a11y(
-      <Select.Root placeholder="Choice a option">
+      <Select.Root placeholder="Choose a option">
         <Select.Option value="one">Option 1</Select.Option>
         <Select.Option value="two">Option 2</Select.Option>
         <Select.Option value="three">Option 3</Select.Option>
@@ -25,7 +25,7 @@ describe("<Select />", () => {
       <Select.Root
         defaultOpen
         defaultValue="one"
-        placeholder="Choice a option"
+        placeholder="Choose a option"
         iconProps={{ "data-testid": "icon" }}
         rootProps={{ "data-testid": "root" }}
       >
@@ -41,7 +41,7 @@ describe("<Select />", () => {
       </Select.Root>,
     )
 
-    const field = screen.getByRole("combobox", { name: /Choice a option/i })
+    const field = screen.getByRole("combobox", { name: /Choose a option/i })
     const group = screen.getByRole("group", { name: "Group 1" })
     const option = screen.getByRole("option", { name: "Option 1" })
 
@@ -61,7 +61,7 @@ describe("<Select />", () => {
       <Select.Root
         defaultOpen
         defaultValue="one"
-        placeholder="Choice a option"
+        placeholder="Choose a option"
         iconProps={{ "data-testid": "icon" }}
         rootProps={{ "data-testid": "root" }}
       >
@@ -77,7 +77,7 @@ describe("<Select />", () => {
       </Select.Root>,
     )
 
-    const field = screen.getByRole("combobox", { name: /Choice a option/i })
+    const field = screen.getByRole("combobox", { name: /Choose a option/i })
     const group = screen.getByRole("group", { name: "Group 1" })
     const option = screen.getByRole("option", { name: "Option 1" })
 

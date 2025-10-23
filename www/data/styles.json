@@ -4062,8 +4062,9 @@
       "type": "StyleValueWithCondition<CSS.Property.CaretShape>",
       "docs": {
         "caret-shape": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `caret-shape` property.",
+          "description": "The <code>caret-shape</code> CSS property controls the shape of the insertion caret, the symbol that shows where the next character is to be inserted or deleted.",
           "experimental": true,
           "see": "https://developer.mozilla.org/docs/Web/CSS/caret-shape"
         }
@@ -4784,7 +4785,7 @@
           "deprecated": false,
           "description": "The CSS `dynamic-range-limit` property.",
           "experimental": false,
-          "see": "https://drafts.csswg.org/css-color-hdr/#the-dynamic-range-limit-property"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/dynamic-range-limit"
         }
       }
     },
@@ -6827,7 +6828,7 @@
           "deprecated": false,
           "description": "The <code>object-view-box</code> CSS property crops and zooms to an inset area of an image.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-images-5/#propdef-object-view-box"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/object-view-box"
         }
       }
     },

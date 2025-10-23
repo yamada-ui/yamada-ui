@@ -45,7 +45,7 @@ export const Variant: Story = () => {
 
 export const Size: Story = () => {
   return (
-    <PropsTable variant="stack" rows={["sm", "md", "lg"]}>
+    <PropsTable variant="stack" rows={["xs", "sm", "md", "lg", "xl"]}>
       {(_, row, key) => {
         return <Slider.Root key={key} size={row} defaultValue={50} />
       }}

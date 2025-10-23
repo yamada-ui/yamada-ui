@@ -46,27 +46,39 @@ export const TONES = [
   50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950,
 ] as const
 
+export function convertColor(
+  color: string,
+  fallback: string,
+): {
+  (format: ColorFormat): string
+}
+export function convertColor(
+  color: string,
+  fallback?: string,
+): {
+  (format: ColorFormat): string | undefined
+}
 export function convertColor(color: string, fallback?: string) {
-  return function (format: ColorFormat): string | undefined {
+  return function (format: ColorFormat) {
     try {
-      const isAlpha = format.endsWith("a")
+      const alpha = format.endsWith("a")
 
       if (/^[0-9a-fA-F]{6}$/.test(color)) color = "#" + color
 
       if (format.startsWith("hex")) {
         let hexa = c.toHex(color)
 
-        if (isAlpha) {
+        if (alpha) {
           if (hexa.length === 7) hexa += "ff"
         } else {
-          hexa = hexa.replace(/^#(?:[0-9a-fA-F]{6})[0-9a-fA-F]{2}$/, "$1")
+          hexa = hexa.replace(/^#([0-9a-fA-F]{6})[0-9a-fA-F]{2}$/, "#$1")
         }
 
         return hexa
       } else if (format.startsWith("hsl")) {
         let hsla = c.toHsla(color)
 
-        if (!isAlpha) {
+        if (!alpha) {
           hsla = hsla.replace(/hsla/, "hsl")
           hsla = hsla.replace(/,\s*\d+(\.\d+)?\)$/, ")")
         }
@@ -75,7 +87,7 @@ export function convertColor(color: string, fallback?: string) {
       } else {
         let rgba = c.toRgba(color)
 
-        if (!isAlpha) {
+        if (!alpha) {
           rgba = rgba.replace(/rgba/, "rgb")
           rgba = rgba.replace(/,\s*\d+(\.\d+)?\)$/, ")")
         }
@@ -89,10 +101,8 @@ export function convertColor(color: string, fallback?: string) {
 }
 
 export function calcFormat(color: string): ColorFormat {
-  if (color.startsWith("hsl")) {
-    return color.startsWith("hsla") ? "hsla" : "hsl"
-  } else if (color.startsWith("rgb")) {
-    return color.startsWith("rgba") ? "rgba" : "rgb"
+  if (color.startsWith("hsl") || color.startsWith("rgb")) {
+    return color.split("(")[0] as ColorFormat
   } else {
     return color.length === 9 ? "hexa" : "hex"
   }
@@ -111,6 +121,14 @@ export function alphaToHex(a: number) {
     .padStart(2, "0")
 }
 
+export function parseToRgba(
+  color: string,
+  fallback: string,
+): [number, number, number, number]
+export function parseToRgba(
+  color: string,
+  fallback?: string,
+): [number, number, number, number] | undefined
 export function parseToRgba(color: string, fallback?: string) {
   try {
     if (/^[0-9a-fA-F]{6}$/.test(color)) color = "#" + color
@@ -121,6 +139,14 @@ export function parseToRgba(color: string, fallback?: string) {
   }
 }
 
+export function parseToHsla(
+  color: string,
+  fallback: string,
+): [number, number, number, number]
+export function parseToHsla(
+  color: string,
+  fallback?: string,
+): [number, number, number, number] | undefined
 export function parseToHsla(color: string, fallback?: string) {
   try {
     if (/^[0-9a-fA-F]{6}$/.test(color)) color = "#" + color
@@ -133,9 +159,18 @@ export function parseToHsla(color: string, fallback?: string) {
 
 export function parseToHsv(
   color: string,
+  fallback: string,
+): [number, number, number, number]
+export function parseToHsv(
+  color: string,
   fallback?: string,
-): [number, number, number, number] {
-  let [r, g, b, a] = parseToRgba(color, fallback) ?? [255, 255, 255, 1]
+): [number, number, number, number] | undefined
+export function parseToHsv(color: string, fallback?: string) {
+  const rgba = parseToRgba(color, fallback)
+
+  if (!rgba) return undefined
+
+  let [r, g, b, a] = rgba
 
   r = r / 255
   g = g / 255
@@ -167,6 +202,19 @@ export function parseToHsv(
   return [h, s, v, a]
 }
 
+// @ts-ignore
+export function rgbaTo(
+  [r, g, b, a]: [number, number, number, number],
+  fallback: string,
+): {
+  (format: ColorFormat): string
+}
+export function rgbaTo(
+  [r, g, b, a]: [number, number, number, number],
+  fallback?: string,
+): {
+  (format: ColorFormat): string | undefined
+}
 export function rgbaTo(
   [r, g, b, a]: [number, number, number, number],
   fallback?: string,
@@ -176,6 +224,19 @@ export function rgbaTo(
   }
 }
 
+// @ts-ignore
+export function hslaTo(
+  [r, g, b, a]: [number, number, number, number],
+  fallback: string,
+): {
+  (format: ColorFormat): string
+}
+export function hslaTo(
+  [r, g, b, a]: [number, number, number, number],
+  fallback?: string,
+): {
+  (format: ColorFormat): string | undefined
+}
 export function hslaTo(
   [h, s, l, a]: [number, number, number, number],
   fallback?: string,
@@ -185,11 +246,24 @@ export function hslaTo(
   }
 }
 
+// @ts-ignore
+export function hsvTo(
+  [h, s, v, a]: [number, number, number, number?],
+  fallback: string,
+): {
+  (format: ColorFormat): string
+}
+export function hsvTo(
+  [h, s, v, a]: [number, number, number, number?],
+  fallback?: string,
+): {
+  (format: ColorFormat): string | undefined
+}
 export function hsvTo(
   [h, s, v, a]: [number, number, number, number?],
   fallback?: string,
 ) {
-  return function (format: ColorFormat = "hex"): string | undefined {
+  return function (format: ColorFormat = "hex") {
     h = h / 60
 
     let rgb: [number, number, number] = [v, v, v]

@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "Kapat",
   },
+  colorPicker: {
+    "Pick a color": "Bir renk seçin",
+  },
+  colorSelector: {
+    "Pick a color": "Bir renk seçin",
+  },
   datePicker: {
     "Clear value": "Değeri temizle",
   },

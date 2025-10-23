@@ -30,8 +30,6 @@ export const Basic: Story = () => {
     <InfiniteScrollArea
       loading={<Loading.Oval fontSize="2xl" />}
       onLoad={({ finish, index }) => {
-        console.log("load", index)
-
         setCount((prev) => prev + 50)
 
         if (index >= 5) finish()
@@ -77,8 +75,6 @@ export const Root: Story = () => {
           resetRef={resetRef}
           rootRef={rootRef}
           onLoad={({ finish, index }) => {
-            console.log("load", index)
-
             setCount((prev) => prev + 50)
 
             if (index >= 5) finish()
@@ -123,8 +119,6 @@ export const RootMargin: Story = () => {
       loading={<Loading.Oval fontSize="2xl" />}
       rootMargin="300px 0px 0px 0px"
       onLoad={({ finish, index }) => {
-        console.log("load", index)
-
         setCount((prev) => prev + 50)
 
         if (index >= 5) finish()
@@ -158,8 +152,6 @@ export const Threshold: Story = () => {
       loading={<Loading.Oval fontSize="2xl" />}
       threshold={1}
       onLoad={({ finish, index }) => {
-        console.log("load", index)
-
         setCount((prev) => prev + 50)
 
         if (index >= 5) finish()
@@ -193,8 +185,6 @@ export const InitialLoad: Story = () => {
       initialLoad
       loading={<Loading.Oval fontSize="2xl" />}
       onLoad={async ({ finish, index }) => {
-        console.log("load", index)
-
         await wait(1000)
 
         setCount((prev) => prev + 50)
@@ -304,8 +294,6 @@ export const StartIndex: Story = () => {
       loading={<Loading.Oval fontSize="2xl" />}
       startIndex={3}
       onLoad={({ finish, index }) => {
-        console.log("load", index)
-
         setCount((prev) => prev + 50)
 
         if (index >= 5) finish()
@@ -339,8 +327,6 @@ export const Finish: Story = () => {
       finish={<>Finished</>}
       loading={<Loading.Oval fontSize="2xl" />}
       onLoad={({ finish, index }) => {
-        console.log("load", index)
-
         setCount((prev) => prev + 50)
 
         if (index >= 5) finish()
@@ -374,8 +360,6 @@ export const Reverse: Story = () => {
       loading={<Loading.Oval fontSize="2xl" />}
       reverse
       onLoad={({ finish, index }) => {
-        console.log("load", index)
-
         setCount((prev) => prev + 50)
 
         if (index >= 5) finish()
@@ -416,8 +400,6 @@ export const Disabled: Story = () => {
         p="lg"
         rounded="l3"
         onLoad={({ finish, index }) => {
-          console.log("load", index)
-
           setCount((prev) => prev + 50)
 
           if (index >= 5) finish()
@@ -466,8 +448,6 @@ export const Reset: Story = () => {
         resetRef={resetRef}
         rounded="l3"
         onLoad={({ finish, index }) => {
-          console.log("load", index)
-
           setCount((prev) => prev + 50)
 
           if (index >= 5) finish()
@@ -511,8 +491,6 @@ export const CustomTrigger: Story = () => {
       loading={<Loading.Oval fontSize="2xl" />}
       triggerProps={{ bg: "primary.50", p: "md", rounded: "md" }}
       onLoad={async ({ finish, index }) => {
-        console.log("load", index)
-
         await wait(5000)
 
         setCount((prev) => prev + 50)
@@ -547,8 +525,6 @@ export const CustomLoading: Story = () => {
     <InfiniteScrollArea
       loading={<>Loading…</>}
       onLoad={async ({ finish, index }) => {
-        console.log("load", index)
-
         await wait(5000)
 
         setCount((prev) => prev + 50)

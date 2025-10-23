@@ -43,6 +43,9 @@ import scrollIntoView from "scroll-into-view-if-needed"
 import { getContents, getDefaultContents } from "@/data"
 import { Link, useLocale, usePathname } from "@/i18n"
 
+const ACTION_DEFAULT_KEY = "Ctrl"
+const ACTION_APPLE_KEY = "⌘"
+
 const {
   DescendantsContext,
   useDescendant,
@@ -54,7 +57,11 @@ export function Search() {
   const { open, onClose, onOpen } = useDisclosure()
   const t = useTranslations("component.search")
   const pathname = usePathname()
-  const apple = isApple()
+  const [actionKey, setActionKey] = useState(ACTION_APPLE_KEY)
+
+  useEffect(() => {
+    if (!isApple()) setActionKey(ACTION_DEFAULT_KEY)
+  }, [])
 
   useUpdateEffect(() => {
     if (open) onClose()
@@ -95,13 +102,8 @@ export function Search() {
         </Text>
 
         <HStack gap="xs">
-          <Kbd
-            size="sm"
-            variant="surface"
-            fontSize={!apple ? "xs" : "sm"}
-            letterSpacing="tight"
-          >
-            {!apple ? "Ctrl" : "⌘"}
+          <Kbd size="sm" variant="surface" letterSpacing="tight">
+            {actionKey}
           </Kbd>
           <Kbd size="sm" variant="surface">
             K

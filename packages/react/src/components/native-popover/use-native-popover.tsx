@@ -97,10 +97,6 @@ export const useNativePopover = ({
 
   assignRef(updateRef, update)
 
-  const hasHeader = !!getDocument()?.getElementById(headerId)
-
-  const hasBody = !!getDocument()?.getElementById(bodyId)
-
   const getTriggerProps: PropGetter<"button"> = useCallback(
     ({ ref, onClick, ...props } = {}) => {
       return {
@@ -133,6 +129,9 @@ export const useNativePopover = ({
       "aria-labelledby": ariaLabelledby,
       ...props
     } = {}) => {
+      const hasHeader = !!getDocument()?.getElementById(headerId)
+      const hasBody = !!getDocument()?.getElementById(bodyId)
+
       return {
         id: contentId,
         "aria-describedby": cx(ariaDescribedby, hasBody ? bodyId : undefined),
@@ -145,7 +144,7 @@ export const useNativePopover = ({
         ref: mergeRefs(ref, contentRef),
       }
     },
-    [hasHeader, hasBody, headerId, bodyId, contentId, popover],
+    [getDocument, headerId, bodyId, contentId, popover],
   )
 
   const getHeaderProps: PropGetter = useCallback(

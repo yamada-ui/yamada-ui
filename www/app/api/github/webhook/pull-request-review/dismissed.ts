@@ -1,11 +1,11 @@
 import type { WebhookEvent } from "@yamada-ui/workspace/octokit"
 import { octokit, retryOnRateLimit } from "@yamada-ui/workspace/octokit"
 
-export async function dismissed(req: Request) {
-  const { pull_request, repository } =
-    (await req.json()) as WebhookEvent<"pull_request_review.dismissed">
-
-  const { data: reviewers } = await retryOnRateLimit(async () =>
+export async function dismissed({
+  pull_request,
+  repository,
+}: WebhookEvent<"pull_request_review.dismissed">) {
+  const { data: reviews } = await retryOnRateLimit(async () =>
     octokit.pulls.listReviews({
       owner: "yamada-ui",
       pull_number: pull_request.number,
@@ -13,7 +13,7 @@ export async function dismissed(req: Request) {
     }),
   )
 
-  if (reviewers.some(({ state }) => state === "approved")) return
+  if (reviews.some(({ state }) => state === "APPROVED")) return
 
   await retryOnRateLimit(async () =>
     octokit.issues.removeLabel({

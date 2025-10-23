@@ -5,11 +5,13 @@ import {
   getContent,
   octokit,
   retryOnRateLimit,
+  retryOnRateLimitWithPaging,
 } from "@yamada-ui/workspace/octokit"
 
-export async function opened(req: Request) {
-  const { pull_request, repository } =
-    (await req.json()) as WebhookEvent<"pull_request.opened">
+export async function opened({
+  pull_request,
+  repository,
+}: WebhookEvent<"pull_request.opened">) {
   const {
     maintainers,
     message,
@@ -76,14 +78,47 @@ export async function opened(req: Request) {
       if (requestReviewerCount >= assignReviewerCount) return
     }
 
-    const shouldAssignReviewerCount = assignReviewerCount - requestReviewerCount
+    if (assignReviewerCount - requestReviewerCount > 0) {
+      const pullRequests = await retryOnRateLimitWithPaging(async (params) =>
+        octokit.pulls.list({
+          owner: "yamada-ui",
+          repo: repository.name,
+          ...params,
+        }),
+      )
+      const alreadyRequestedReviewers = [
+        ...new Set(
+          pullRequests
+            .flatMap(({ requested_reviewers }) =>
+              requested_reviewers?.map(({ login }) => login),
+            )
+            .filter((login) => !excludeReviewers.includes(login)),
+        ),
+      ]
 
-    if (shouldAssignReviewerCount > 0) {
       selectedReviewers = [
         ...selectedReviewers,
         ...omittedCollaborators
+          .filter(
+            ({ github }) =>
+              !selectedReviewers.includes(github.id) &&
+              !alreadyRequestedReviewers.includes(github.id),
+          )
           .sort(() => 0.5 - Math.random())
-          .slice(0, shouldAssignReviewerCount)
+          .slice(0, assignReviewerCount - requestReviewerCount)
+          .map(({ github }) => github.id),
+      ]
+
+      requestReviewerCount += selectedReviewers.length
+    }
+
+    if (assignReviewerCount - requestReviewerCount > 0) {
+      selectedReviewers = [
+        ...selectedReviewers,
+        ...omittedCollaborators
+          .filter(({ github }) => !selectedReviewers.includes(github.id))
+          .sort(() => 0.5 - Math.random())
+          .slice(0, assignReviewerCount - requestReviewerCount)
           .map(({ github }) => github.id),
       ]
     }

@@ -8,14 +8,18 @@ export function generateSignature(body: any) {
   return digest
 }
 
-export async function verifySignature(req: Request) {
-  const signature =
-    req.headers.get("x-signature-256") || req.headers.get("x-signature")
-
+export function verifySignature(signature: null | string, body: any) {
   if (!signature) return false
 
-  const body = await req.json()
   const digest = generateSignature(body)
 
   return signature === digest
+}
+
+export function getSignature(req: Request) {
+  return (
+    req.headers.get("x-hub-signature-256") ||
+    req.headers.get("x-signature-256") ||
+    req.headers.get("x-signature")
+  )
 }

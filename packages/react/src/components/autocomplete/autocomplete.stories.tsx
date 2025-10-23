@@ -528,30 +528,6 @@ export const BlockScrollOnMount: Story = () => {
   )
 }
 
-export const OpenOnFocus: Story = () => {
-  const items = useMemo<Autocomplete.Item[]>(
-    () => [
-      { label: "アグモン", value: "アグモン" },
-      { label: "ガブモン", value: "ガブモン" },
-      { label: "テントモン", value: "テントモン" },
-      { label: "ピヨモン", value: "ピヨモン" },
-      { label: "ゴマモン", value: "ゴマモン" },
-      { label: "パルモン", value: "パルモン" },
-      { label: "パタモン", value: "パタモン" },
-      { label: "テイルモン", value: "テイルモン" },
-    ],
-    [],
-  )
-
-  return (
-    <Autocomplete.Root
-      items={items}
-      openOnFocus
-      placeholder="Select a digimon"
-    />
-  )
-}
-
 export const AllowCustomValue: Story = () => {
   const items = useMemo<Autocomplete.Item[]>(
     () => [
@@ -596,6 +572,7 @@ export const OpenOnChange: Story = () => {
     <Autocomplete.Root
       items={items}
       openOnChange={(ev) => ev.target.value.length > 1}
+      openOnFocus={false}
       placeholder="Select a digimon"
     />
   )
@@ -620,6 +597,7 @@ export const CloseOnChange: Story = () => {
     <Autocomplete.Root
       closeOnChange={(ev) => !ev.target.value.length}
       items={items}
+      openOnFocus={false}
       placeholder="Select a digimon"
     />
   )
@@ -648,6 +626,30 @@ export const CloseOnScroll: Story = () => {
         placeholder="Select a digimon"
       />
     </Box>
+  )
+}
+
+export const DisabledOpenOnFocus: Story = () => {
+  const items = useMemo<Autocomplete.Item[]>(
+    () => [
+      { label: "アグモン", value: "アグモン" },
+      { label: "ガブモン", value: "ガブモン" },
+      { label: "テントモン", value: "テントモン" },
+      { label: "ピヨモン", value: "ピヨモン" },
+      { label: "ゴマモン", value: "ゴマモン" },
+      { label: "パルモン", value: "パルモン" },
+      { label: "パタモン", value: "パタモン" },
+      { label: "テイルモン", value: "テイルモン" },
+    ],
+    [],
+  )
+
+  return (
+    <Autocomplete.Root
+      items={items}
+      openOnFocus={false}
+      placeholder="Select a digimon"
+    />
   )
 }
 
@@ -1219,7 +1221,6 @@ export const ReactHookForm: Story = () => {
     control,
     formState: { errors },
     handleSubmit,
-    watch,
   } = useForm<Data>()
   const items = useMemo<Autocomplete.Item[]>(
     () => [
@@ -1236,8 +1237,6 @@ export const ReactHookForm: Story = () => {
   )
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
-
-  console.log("watch:", watch())
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
@@ -1282,7 +1281,6 @@ export const ReactHookFormDefaultValue: Story = () => {
     control,
     formState: { errors },
     handleSubmit,
-    watch,
   } = useForm<Data>({ defaultValues })
   const items = useMemo<Autocomplete.Item[]>(
     () => [
@@ -1299,8 +1297,6 @@ export const ReactHookFormDefaultValue: Story = () => {
   )
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
-
-  console.log("watch:", watch())
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>

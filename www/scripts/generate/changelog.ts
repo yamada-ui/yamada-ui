@@ -3,6 +3,7 @@ import { isUndefined } from "@yamada-ui/utils"
 import { octokit } from "@yamada-ui/workspace/octokit"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
 import { Command } from "commander"
+import { readFile } from "fs/promises"
 import { createTranslator } from "next-intl"
 import ora from "ora"
 import path from "path"
@@ -95,6 +96,18 @@ function getPackages({ body }: PullRequest) {
   return packages
 }
 
+async function getI18n(locale: string) {
+  const lang = getLang(locale)
+  const messages = (
+    await import(pathToFileURL(`${MESSAGES_PATH}/${lang}.json`).href, {
+      with: { type: "json" },
+    })
+  ).default
+  const t = createTranslator<Dict>({ locale, messages })
+
+  return { lang, t }
+}
+
 interface Options {
   pullNumber: number
 }
@@ -127,20 +140,10 @@ function main() {
 
       await Promise.all(
         CONSTANTS.I18N.LOCALES.map(async (locale) => {
-          const docMap = getDocMap(locale)
-          const changelog = docMap.items!.find(
-            ({ segment }) => segment === "changelog",
-          )!
           const date = new Intl.DateTimeFormat(locale, {
             dateStyle: "long",
           }).format(new Date(pullRequest.merged_at ?? pullRequest.updated_at))
-          const lang = getLang(locale)
-          const messages = (
-            await import(pathToFileURL(`${MESSAGES_PATH}/${lang}.json`).href, {
-              with: { type: "json" },
-            })
-          ).default
-          const t = createTranslator<Dict>({ locale, messages })
+          const { lang, t } = await getI18n(locale)
 
           await Promise.all(
             packages.map(async ({ name, major, minor, patch, version }) => {
@@ -166,33 +169,6 @@ function main() {
               await writeFileWithFormat(filePath, content, { parser: "mdx" })
             }),
           )
-
-          const title = t("changelog.title")
-          const description = t("changelog.latest")
-          const fileName = `index${locale === CONSTANTS.I18N.DEFAULT_LOCALE ? "" : `.${lang}`}.mdx`
-          const filePath = path.join(CHANGELOG_PATH, fileName)
-          const frontmatter = `---\ntitle: ${title}\ndescription: "${description}"\n---`
-          const lines: string[] = []
-
-          lines.push(t("changelog.releaseAt", { date }))
-
-          changelog.items!.forEach(({ segment }) => {
-            const data = packages.find(({ name }) => name.includes(segment))
-
-            if (!data) return
-
-            const { name, major, minor, patch, version } = data
-
-            lines.push(`## ${name}@${version}`)
-
-            if (major) lines.push(`### ${t("changelog.major")}`, major)
-            if (minor) lines.push(`### ${t("changelog.minor")}`, minor)
-            if (patch) lines.push(`### ${t("changelog.patch")}`, patch)
-          })
-
-          const content = `${frontmatter}\n\n${lines.join("\n\n")}`
-
-          await writeFileWithFormat(filePath, content, { parser: "mdx" })
         }),
       )
 
@@ -203,12 +179,12 @@ function main() {
       await Promise.all(
         CONSTANTS.I18N.LOCALES.map(async (locale) => {
           const docMap = getDocMap(locale)
-          const changelog = docMap.items!.find(
+          const changelogItems = docMap.items!.find(
             ({ segment }) => segment === "changelog",
-          )!
+          )!.items!
           const lang = getLang(locale)
 
-          changelog.items!.forEach((item) => {
+          changelogItems.forEach((item) => {
             const data = packages.find(({ name }) =>
               name.includes(item.segment),
             )
@@ -227,7 +203,8 @@ function main() {
               // eslint-disable-next-line perfectionist/sort-objects
               segment,
               // eslint-disable-next-line perfectionist/sort-objects
-              pathname: path.join("docs", "changelog", item.segment, segment),
+              pathname:
+                "/" + path.join("docs", "changelog", item.segment, segment),
             })
 
             item.items.sort((a, b) => b.segment.localeCompare(a.segment))
@@ -242,6 +219,46 @@ function main() {
       )
 
       spinner.succeed("Updated doc map")
+
+      await Promise.all(
+        CONSTANTS.I18N.LOCALES.map(async (locale) => {
+          const docMap = getDocMap(locale)
+          const changelogItems = docMap.items!.find(
+            ({ segment }) => segment === "changelog",
+          )!.items!
+          const { lang, t } = await getI18n(locale)
+          const title = t("changelog.title")
+          const description = t("changelog.latest")
+          const fileName = `index${locale === CONSTANTS.I18N.DEFAULT_LOCALE ? "" : `.${lang}`}.mdx`
+          const filePath = path.join(CHANGELOG_PATH, fileName)
+          const frontmatter = `---\ntitle: ${title}\ndescription: "${description}"\n---`
+          const lines: string[] = []
+
+          for (const { items, title } of changelogItems) {
+            const latest = items![0]!
+            const version = latest.title.replace(/^v/, "")
+            const filePath =
+              latest.pathname?.replace(/^\/docs\/changelog\//, "") +
+              (locale === CONSTANTS.I18N.DEFAULT_LOCALE
+                ? ".mdx"
+                : `.${lang}.mdx`)
+            const content = await readFile(
+              path.join(CHANGELOG_PATH, filePath),
+              "utf-8",
+            )
+            const transformedContent = content
+              .split("---")[2]!
+              .replaceAll("## ", "### ")
+
+            lines.push(`## ${title}@${version}`)
+            lines.push(transformedContent)
+          }
+
+          const content = `${frontmatter}\n\n${lines.join("\n\n")}`
+
+          await writeFileWithFormat(filePath, content, { parser: "mdx" })
+        }),
+      )
 
       const end = process.hrtime.bigint()
       const duration = (Number(end - start) / 1e9).toFixed(2)

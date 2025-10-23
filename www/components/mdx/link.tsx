@@ -15,6 +15,7 @@ export function Link({ href, ...rest }: LinkProps) {
           textDecoration: "none",
         },
       }}
+      colorScheme="mono"
       variant="underline"
       color="inherit"
       external={external}

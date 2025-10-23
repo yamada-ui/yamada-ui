@@ -238,16 +238,22 @@ export const BlockScrollOnMount: Story = () => {
   )
 }
 
-export const OpenOnFocus: Story = () => {
-  return <DatePicker openOnFocus />
-}
-
 export const OpenOnChange: Story = () => {
-  return <DatePicker openOnChange={(ev) => ev.target.value.length > 1} />
+  return (
+    <DatePicker
+      openOnChange={(ev) => ev.target.value.length > 1}
+      openOnFocus={false}
+    />
+  )
 }
 
 export const CloseOnChange: Story = () => {
-  return <DatePicker closeOnChange={(ev) => !ev.target.value.length} />
+  return (
+    <DatePicker
+      closeOnChange={(ev) => !ev.target.value.length}
+      openOnFocus={false}
+    />
+  )
 }
 
 export const CloseOnScroll: Story = () => {
@@ -256,6 +262,10 @@ export const CloseOnScroll: Story = () => {
       <DatePicker closeOnScroll />
     </Box>
   )
+}
+
+export const DisabledOpenOnFocus: Story = () => {
+  return <DatePicker openOnFocus={false} />
 }
 
 export const DisabledOpenOnClick: Story = () => {
@@ -280,6 +290,10 @@ export const DisabledCloseOnEsc: Story = () => {
 
 export const DisabledClearable: Story = () => {
   return <DatePicker clearable={false} />
+}
+
+export const DisallowInput: Story = () => {
+  return <DatePicker allowInput={false} />
 }
 
 export const Shape: Story = () => {
@@ -536,12 +550,9 @@ export const ReactHookForm: Story = () => {
     control,
     formState: { errors },
     handleSubmit,
-    watch,
   } = useForm<Data>()
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
-
-  console.log("watch:", watch())
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
@@ -580,12 +591,9 @@ export const ReactHookFormDefaultValue: Story = () => {
     control,
     formState: { errors },
     handleSubmit,
-    watch,
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
-
-  console.log("watch:", watch())
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>

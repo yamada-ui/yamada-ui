@@ -8,9 +8,11 @@ import {
   retryOnRateLimitWithPaging,
 } from "@yamada-ui/workspace/octokit"
 
-export async function reviewRequestRemoved(req: Request) {
-  const { pull_request, repository, requested_reviewer } =
-    (await req.json()) as WebhookEvent<"pull_request.review_request_removed">
+export async function reviewRequestRemoved({
+  pull_request,
+  repository,
+  requested_reviewer,
+}: WebhookEvent<"pull_request.review_request_removed">) {
   const {
     maintainers,
     message,
@@ -26,7 +28,17 @@ export async function reviewRequestRemoved(req: Request) {
     ),
   )
 
-  if (!requested_reviewer?.login) return new Response(null, { status: 400 })
+  if (!requested_reviewer?.login) return
+
+  const { data: reviews } = await retryOnRateLimit(async () =>
+    octokit.pulls.listReviews({
+      owner: "yamada-ui",
+      pull_number: pull_request.number,
+      repo: repository.name,
+    }),
+  )
+
+  if (reviews.some(({ state }) => state === "APPROVED")) return
 
   const timeline = await retryOnRateLimitWithPaging(async (params) =>
     octokit.issues.listEventsForTimeline({
@@ -53,12 +65,29 @@ export async function reviewRequestRemoved(req: Request) {
         pull_request.user?.login !== github.id,
     )
     .filter(({ github }) => !previousReviewers.includes(github.id))
-  const targetCollaborator = omittedCollaborators.sort(
-    () => 0.5 - Math.random(),
-  )[0]
+  const pullRequests = await retryOnRateLimitWithPaging(async (params) =>
+    octokit.pulls.list({
+      owner: "yamada-ui",
+      repo: repository.name,
+      ...params,
+    }),
+  )
+  const alreadyRequestedReviewers = [
+    ...new Set(
+      pullRequests
+        .flatMap(({ requested_reviewers }) =>
+          requested_reviewers?.map(({ login }) => login),
+        )
+        .filter((login) => !excludeReviewers.includes(login)),
+    ),
+  ]
 
-  if (!targetCollaborator?.github?.id)
-    return new Response(null, { status: 400 })
+  let targetCollaborator = omittedCollaborators
+    .filter(({ github }) => !alreadyRequestedReviewers.includes(github.id))
+    .sort(() => 0.5 - Math.random())[0]
+
+  if (!targetCollaborator)
+    targetCollaborator = omittedCollaborators.sort(() => 0.5 - Math.random())[0]
 
   await retryOnRateLimit(async () =>
     octokit.pulls.requestReviewers({

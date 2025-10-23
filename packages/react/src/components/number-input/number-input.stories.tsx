@@ -344,12 +344,9 @@ export const ReactHookForm: Story = () => {
     control,
     formState: { errors },
     handleSubmit,
-    watch,
   } = useForm<Data>()
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
-
-  console.log("watch:", watch())
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
@@ -389,12 +386,9 @@ export const ReactHookFormWithDefaultValue: Story = () => {
     control,
     formState: { errors },
     handleSubmit,
-    watch,
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
-
-  console.log("watch:", watch())
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>

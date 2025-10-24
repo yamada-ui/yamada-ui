@@ -11,7 +11,7 @@ export const GET = async (_request: Request, context: RouteContext) => {
     {
       href: `https://v2.yamada-ui.com/${params.locale}/llms-full.txt`,
       description:
-        "The complete Yamada UI v2 documentation including all components, hooks and styling and theming",
+        "The complete Yamada UI v2 documentation including all components, hooks, styling, and theming",
       title: "Complete documentation",
     },
     {

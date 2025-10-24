@@ -32,8 +32,19 @@ export function replacePropsTable(text: string) {
         continue
       }
 
-      const omits = omitStr ? JSON.parse(omitStr) : []
-      const picks = pickStr ? JSON.parse(pickStr) : []
+      let omits: string[] = []
+      let picks: string[] = []
+
+      try {
+        omits = omitStr ? JSON.parse(omitStr) : []
+        picks = pickStr ? JSON.parse(pickStr) : []
+      } catch (error) {
+        console.error(
+          `PropsTable: Invalid JSON in omit or pick attribute for "${name}"`,
+          error,
+        )
+        continue
+      }
 
       const mdTable = propsToMdTable({ name, all, omits, picks })
 
@@ -172,15 +183,23 @@ export function getComponentTypes(componentName: string): {
   const path = join(process.cwd(), "data", "props", `${componentName}.json`)
   if (!existsSync(path)) return {}
 
-  const data: unknown = JSON.parse(readFileSync(path, "utf-8"))
+  try {
+    const data: unknown = JSON.parse(readFileSync(path, "utf-8"))
 
-  // Validate that the parsed JSON is an object (not array, null, etc.)
-  if (!data || typeof data !== "object" || Array.isArray(data)) {
-    console.warn(`Invalid component types data for ${componentName}`)
+    // Validate that the parsed JSON is an object (not array, null, etc.)
+    if (!data || typeof data !== "object" || Array.isArray(data)) {
+      console.warn(`Invalid component types data for ${componentName}`)
+      return {}
+    }
+
+    return data as { [key: string]: unknown }
+  } catch (error) {
+    console.error(
+      `Failed to parse component types JSON for ${componentName}:`,
+      error,
+    )
     return {}
   }
-
-  return data as { [key: string]: unknown }
 }
 
 /**

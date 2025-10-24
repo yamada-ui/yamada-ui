@@ -54,11 +54,23 @@ const docs = defineCollection({
       code: s.mdx(),
       description: s.string(),
       llm: s.custom().transform((_data, { meta }) => {
-        let content = meta.content as string
-        content = replacePropsTable(content)
-        content = replaceLinkListToMarkdown(content)
-        content = replaceComponentsToLinks(content)
-        return content
+        if (typeof meta.content !== "string") {
+          console.warn(
+            `llm transform: meta.content is not a string for ${meta.path}`,
+          )
+          return ""
+        }
+
+        const transforms = [
+          replacePropsTable,
+          replaceLinkListToMarkdown,
+          replaceComponentsToLinks,
+        ]
+
+        return transforms.reduce(
+          (content, transform) => transform(content),
+          meta.content,
+        )
       }),
       metadata: s.metadata(),
       release_date: s.string().optional(),

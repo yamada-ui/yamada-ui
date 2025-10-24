@@ -9,10 +9,16 @@ export async function GET(
 ) {
   const params = await context.params
 
-  const componentDocs = docs.filter(
-    (doc) =>
-      doc.slug[0] === "components" && doc.locale === getLocale(params.locale),
-  )
+  const componentDocs = docs
+    .filter(
+      (doc) =>
+        doc.slug[0] === "components" && doc.locale === getLocale(params.locale),
+    )
+    .sort((a, b) => {
+      const slugA = a.slug.join("/")
+      const slugB = b.slug.join("/")
+      return slugA.localeCompare(slugB)
+    })
 
   const content = [
     "<SYSTEM>Documentation for all components in Yamada UI v2.</SYSTEM>",

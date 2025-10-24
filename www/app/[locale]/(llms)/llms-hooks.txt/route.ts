@@ -10,7 +10,11 @@ export async function GET(
   const params = await context.params
 
   const hookDocs = docs.filter(
-    (doc) => doc.slug[0] === "hooks" && doc.locale === getLocale(params.locale),
+    (doc) =>
+      doc.slug.length > 0 &&
+      doc.slug[0] === "hooks" &&
+      doc.locale === getLocale(params.locale) &&
+      doc.llm,
   )
 
   const content = [

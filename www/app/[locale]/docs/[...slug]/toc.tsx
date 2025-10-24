@@ -14,6 +14,7 @@ import { useMotionValueEvent, useScroll } from "motion/react"
 import { useTranslations } from "next-intl"
 import { createRef, useMemo, useRef, useState } from "react"
 import scrollIntoView from "scroll-into-view-if-needed"
+import { BASE_URL } from "@/app/[locale]/(llms)/_constant"
 import { getLang } from "@/utils/i18n"
 import { EditPageButton } from "./edit-page-button"
 import { LlmsLink } from "./llms-link"
@@ -93,9 +94,9 @@ export function Toc({ locale, path, pathname, slug, toc }: TocProps) {
     })
   }, [currentId])
 
+  const slugPath = slug.length > 0 ? slug.join("/") : "components"
   const readUrl = encodeURIComponent(
-    `Use web browsing to access links and information: https://v2.yamada-ui.com/${slug[0]}.mdx.\n\nI want to ask some questions
-    `,
+    `Use web browsing to access links and information: ${BASE_URL}/${getLang(locale)}/docs/${slugPath}.mdx. I want to ask some questions`,
   )
 
   const items = [
@@ -104,7 +105,7 @@ export function Toc({ locale, path, pathname, slug, toc }: TocProps) {
       label: t("markdown"),
     },
     {
-      href: `https://chatgpt.com/?hints=search&q=${readUrl}`,
+      href: `https://chatgpt.com/?q=${readUrl}`,
       label: t("chatgpt"),
     },
     {

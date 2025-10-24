@@ -3,7 +3,15 @@
  */
 export function replaceLinkListToMarkdown(text: string): string {
   try {
-    const matches = text.matchAll(/<LinkList\s+items=\{(\[[\s\S]*?\])\}\s*\/>/g)
+    const matches = text.matchAll(
+      /<LinkList\s+items=\{\s*(\[[\s\S]*?\])\}\s*\/>/g,
+    )
+
+    const replacements: {
+      index: number
+      length: number
+      replacement: string
+    }[] = []
 
     for (const match of matches) {
       const itemsStr = match[1]
@@ -32,12 +40,24 @@ export function replaceLinkListToMarkdown(text: string): string {
           .map(({ href, label }) => `- [${label}](${href})`)
           .join("\n")
 
-        text = text.replace(match[0], mdList)
+        // Store replacement info for later processing
+        replacements.push({
+          index: match.index!,
+          length: match[0].length,
+          replacement: mdList,
+        })
       } catch (error) {
         console.error("Error parsing LinkList items:", error)
         continue
       }
     }
+
+    // Process replacements in reverse order to avoid index shifting
+    replacements
+      .sort((a, b) => b.index - a.index)
+      .forEach(({ index, length, replacement }) => {
+        text = `${text.slice(0, index)}${replacement}${text.slice(index + length)}`
+      })
 
     return text
   } catch (error) {

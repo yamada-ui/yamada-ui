@@ -10,6 +10,7 @@ export function LlmsLink({ href, label }: LlmsLinkProps) {
     <Text
       as="a"
       href={href}
+      rel="noopener"
       target="_blank"
       color={{ base: "fg.muted", _hover: "fg" }}
       fontSize="sm"

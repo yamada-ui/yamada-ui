@@ -11,7 +11,10 @@ export async function GET(
 
   const themingDocs = docs.filter(
     (doc) =>
-      doc.slug[0] === "theming" && doc.locale === getLocale(params.locale),
+      doc.slug.length > 0 &&
+      doc.slug[0] === "theming" &&
+      doc.locale === getLocale(params.locale) &&
+      doc.llm,
   )
 
   const content = [

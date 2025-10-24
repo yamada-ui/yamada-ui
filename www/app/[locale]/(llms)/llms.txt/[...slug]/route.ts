@@ -2,6 +2,7 @@ import type { Doc } from "@/.velite"
 import { redirect } from "next/navigation"
 import { docs } from "@/.velite"
 import { getLang, getLocale } from "@/utils/i18n"
+import { BASE_URL } from "../../_constant"
 
 interface RouteContext {
   params: Promise<{ locale: string; slug: string[] }>
@@ -9,11 +10,11 @@ interface RouteContext {
 
 function getLlmContent(doc: Doc, locale: string) {
   const lang = getLang(locale)
-  const sourceUrl = `https://v2.yamada-ui.com/${lang}${doc.pathname}.mdx`
+  const sourceUrl = `${BASE_URL}/${lang}${doc.pathname}.mdx`
   const pathname = doc.pathname.startsWith("/")
     ? doc.pathname.substring(1)
     : doc.pathname
-  const category = doc.slug[0]
+  const category = doc.slug[0] ?? ""
 
   const links = [
     doc.source && `- source: ${doc.source}`,
@@ -57,7 +58,7 @@ export async function GET(_request: Request, context: RouteContext) {
     return docPath === targetPath && doc.locale === getLocale(params.locale)
   })
 
-  if (!page?.llm) {
+  if (!page?.llm || page.llm.trim() === "") {
     return redirect(`/${params.locale}/llms.txt`)
   }
 

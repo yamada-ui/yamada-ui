@@ -830,7 +830,7 @@ describe("replacePropsTable", () => {
 
     expect(result).toBe(input)
     expect(consoleErrorSpy).toHaveBeenCalledExactlyOnceWith(
-      "Error in replacePropsTable:",
+      'PropsTable: Invalid JSON in omit or pick attribute for "button"',
       expect.any(Error),
     )
 

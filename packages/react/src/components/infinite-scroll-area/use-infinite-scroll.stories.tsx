@@ -20,8 +20,6 @@ export const Basic = () => {
   const [count, setCount] = useState<number>(50)
   const { ref, finish } = useInfiniteScroll({
     onLoad: ({ finish, index }) => {
-      console.log("onLoad", index)
-
       setCount((prev) => prev + 50)
 
       if (index >= 5) finish()
@@ -64,8 +62,6 @@ export const Root = () => {
     resetRef,
     rootRef,
     onLoad: ({ finish, index }) => {
-      console.log("onLoad", index)
-
       setCount((prev) => prev + 50)
 
       if (index >= 5) finish()
@@ -116,8 +112,6 @@ export const RootMargin = () => {
   const { ref, finish } = useInfiniteScroll({
     rootMargin: "300px 0px 0px 0px",
     onLoad: ({ finish, index }) => {
-      console.log("onLoad", index)
-
       setCount((prev) => prev + 50)
 
       if (index >= 5) finish()
@@ -157,8 +151,6 @@ export const Threshold = () => {
   const { ref, finish } = useInfiniteScroll({
     threshold: 1,
     onLoad: ({ finish, index }) => {
-      console.log("onLoad", index)
-
       setCount((prev) => prev + 50)
 
       if (index >= 5) finish()
@@ -198,8 +190,6 @@ export const InitialLoad = () => {
   const { ref, finish } = useInfiniteScroll({
     initialLoad: true,
     onLoad: ({ finish, index }) => {
-      console.log("onLoad", index)
-
       setCount((prev) => prev + 50)
 
       if (index >= 5) finish()
@@ -239,8 +229,6 @@ export const Reverse = () => {
   const { ref, finish } = useInfiniteScroll({
     reverse: true,
     onLoad: ({ finish, index }) => {
-      console.log("onLoad", index)
-
       setCount((prev) => prev + 50)
 
       if (index >= 5) finish()

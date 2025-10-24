@@ -14,7 +14,7 @@ describe("<DatePicker />", () => {
     render(
       <DatePicker
         defaultOpen
-        placeholder="Choice a option"
+        placeholder="Choose a option"
         iconProps={{ "data-testid": "icon" }}
         rootProps={{ "data-testid": "root" }}
       />,
@@ -31,7 +31,7 @@ describe("<DatePicker />", () => {
     render(
       <DatePicker
         defaultOpen
-        placeholder="Choice a option"
+        placeholder="Choose a option"
         iconProps={{ "data-testid": "icon" }}
         rootProps={{ "data-testid": "root" }}
       />,

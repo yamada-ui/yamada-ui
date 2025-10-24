@@ -110,7 +110,7 @@
         "required": false
       },
       "size": {
-        "type": "\"lg\" | \"md\" | \"sm\"",
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
         "defaultValue": "\"md\"",
         "description": "The size of the component.",
         "required": false
@@ -484,7 +484,7 @@
       "required": false
     },
     "size": {
-      "type": "\"lg\" | \"md\" | \"sm\"",
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
       "defaultValue": "\"md\"",
       "description": "The size of the component.",
       "required": false

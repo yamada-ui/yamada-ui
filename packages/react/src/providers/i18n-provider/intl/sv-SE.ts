@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "Stäng",
   },
+  colorPicker: {
+    "Pick a color": "Välj en färg",
+  },
+  colorSelector: {
+    "Pick a color": "Välj en färg",
+  },
   datePicker: {
     "Clear value": "Rensa värde",
   },

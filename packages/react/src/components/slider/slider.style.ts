@@ -168,6 +168,28 @@ export const sliderStyle = defineComponentSlotStyle({
   },
 
   variants: {
+    base: {
+      root: {
+        _container: [
+          {
+            css: { "--track-fill": "colors.bg" },
+            style: '--form-group-variant: "panel"',
+          },
+          {
+            css: { "--track-fill": "colors.bg" },
+            style: '--fieldset-root-variant: "panel"',
+          },
+          {
+            css: { "--track-fill": "colors.bg" },
+            style: '--form-group-variant: "elevated"',
+          },
+          {
+            css: { "--track-fill": "colors.bg" },
+            style: '--fieldset-root-variant: "elevated"',
+          },
+        ],
+      },
+    },
     outline: {
       root: {
         "--indicator-fill": "colorScheme.solid",
@@ -189,6 +211,12 @@ export const sliderStyle = defineComponentSlotStyle({
   },
 
   sizes: {
+    xs: {
+      root: {
+        "--thumb-size": "sizes.3",
+        "--track-size": "sizes.1",
+      },
+    },
     sm: {
       root: {
         "--thumb-size": "sizes.4",
@@ -205,6 +233,12 @@ export const sliderStyle = defineComponentSlotStyle({
       root: {
         "--thumb-size": "sizes.6",
         "--track-size": "sizes.2.5",
+      },
+    },
+    xl: {
+      root: {
+        "--thumb-size": "sizes.7",
+        "--track-size": "sizes.3",
       },
     },
   },

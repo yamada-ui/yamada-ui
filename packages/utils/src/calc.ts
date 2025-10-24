@@ -1,6 +1,5 @@
 type Operator = "*" | "+" | "-" | "/"
-
-export type Operand = number | string
+type Operand = number | string
 
 function toExpression(operator: Operator, ...args: Operand[]) {
   return args.join(` ${operator} `).replace(/calc/g, "")

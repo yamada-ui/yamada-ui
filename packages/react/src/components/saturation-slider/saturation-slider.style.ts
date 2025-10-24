@@ -66,6 +66,9 @@ export const saturationSliderStyle = defineComponentSlotStyle({
   },
 
   sizes: {
+    xs: {
+      root: { "--thumb-size": hueSliderStyle.sizes?.xs.root["--thumb-size"] },
+    },
     sm: {
       root: { "--thumb-size": hueSliderStyle.sizes?.sm.root["--thumb-size"] },
     },
@@ -74,6 +77,9 @@ export const saturationSliderStyle = defineComponentSlotStyle({
     },
     lg: {
       root: { "--thumb-size": hueSliderStyle.sizes?.lg.root["--thumb-size"] },
+    },
+    xl: {
+      root: { "--thumb-size": hueSliderStyle.sizes?.xl.root["--thumb-size"] },
     },
   },
 

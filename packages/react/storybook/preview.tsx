@@ -108,6 +108,10 @@ const preview: Preview = {
     locale: "en-US",
   },
   parameters: {
+    a11y: {
+      config: { rules: [{ id: "color-contrast", enabled: false }] },
+      test: "error",
+    },
     docs: { codePanel: true },
     layout: "fullscreen",
     options: {

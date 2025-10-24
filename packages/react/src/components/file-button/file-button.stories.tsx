@@ -253,7 +253,6 @@ export const ReactHookForm: Story = () => {
     formState: { errors },
     handleSubmit,
     setValue,
-    watch,
   } = useForm<Data>()
 
   const onReset = () => {
@@ -261,8 +260,6 @@ export const ReactHookForm: Story = () => {
     resetRef.current?.()
   }
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
-
-  console.log("watch:", watch())
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>

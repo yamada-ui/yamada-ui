@@ -133,7 +133,7 @@ export function packageAddArgs(
   }
 
   if (dev) {
-    if (packageManager === "npm") {
+    if (packageManager === "npm" || packageManager === "pnpm") {
       args.push("--save-dev")
     } else {
       args.push("--dev")

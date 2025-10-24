@@ -49,12 +49,12 @@
         "required": false
       },
       "size": {
-        "type": "\"lg\" | \"md\" | \"sm\"",
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
-        "type": "[{ _peerAccept?: [... & { base?: [... & ..., ... & ...] | (... & ...) | undefined; \"2xl\"?: [... & ..., ... & ...] | (... & ...) | undefined; lg?: [...] | ... 1 more ... | undefined; md?: [...] | ... 1 more ... | undefined; sm?: [...] | ... 1 more ... | undefined; xl?: [...] | ... 1 more ... | undefined; }, ... & { ....",
+        "type": "\"outline\" | \"solid\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -307,12 +307,12 @@
       "required": false
     },
     "size": {
-      "type": "\"lg\" | \"md\" | \"sm\"",
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "[{ _peerAccept?: [... & { base?: [... & ..., ... & ...] | (... & ...) | undefined; \"2xl\"?: [... & ..., ... & ...] | (... & ...) | undefined; lg?: [...] | ... 1 more ... | undefined; md?: [...] | ... 1 more ... | undefined; sm?: [...] | ... 1 more ... | undefined; xl?: [...] | ... 1 more ... | undefined; }, ... & { ....",
+      "type": "\"outline\" | \"solid\"",
       "description": "The variant of the component.",
       "required": false
     },

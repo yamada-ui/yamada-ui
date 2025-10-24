@@ -158,7 +158,7 @@ To disable highlighting of today's date, set `today` to `false`.
 
 To disable specific days of the week, set `excludeDate` to a condition function.
 
-```tsx preview
+```tsx preview client
 <DatePicker excludeDate={(date) => [0, 1, 6].includes(date.getDay())} />
 ```
 
@@ -225,7 +225,7 @@ To set a pattern, set a regular expression to `pattern`.
 
 To handle the parsing of entered values, use `parseDate`.
 
-```tsx preview
+```tsx preview client
 <DatePicker parseDate={(value) => new Date(value)} />
 ```
 
@@ -303,8 +303,7 @@ To change the offset, specify a value for `gutter` or `offset`.
 
 ### Change Animation
 
-To change the animation, specify `"block-start"` or `"inline-end"` for `animationScheme`.
-By default, `"scale"` is set.
+To change the animation, specify `"block-start"` or `"inline-end"` for `animationScheme`. By default, `"scale"` is set.
 
 ```tsx preview
 <DatePicker animationScheme="inline-start" />
@@ -342,7 +341,7 @@ To close the dropdown on scroll, set `closeOnScroll` to `true`.
 
 To handle the event of opening the dropdown on change, set a function to `openOnChange`.
 
-```tsx preview
+```tsx preview client
 <DatePicker
   openOnFocus={false}
   openOnChange={(ev) => ev.target.value.length > 1}
@@ -353,7 +352,7 @@ To handle the event of opening the dropdown on change, set a function to `openOn
 
 To handle the event of closing the dropdown on change, set a function to `closeOnChange`.
 
-```tsx preview
+```tsx preview client
 <DatePicker
   openOnFocus={false}
   closeOnChange={(ev) => !ev.target.value.length}
@@ -527,7 +526,7 @@ To customize focus and error border colors, set colors for `focusBorderColor` or
 
 ### Customize Multiple Selection Display
 
-```tsx preview
+```tsx preview client
 <DatePicker
   multiple
   render={({ value, onClear }) => (
@@ -542,7 +541,7 @@ To customize focus and error border colors, set colors for `focusBorderColor` or
 
 You can customize Calendar to change the display.
 
-```tsx preview
+```tsx preview client
 <VStack>
   <DatePicker>
     <Calendar.Navigation>

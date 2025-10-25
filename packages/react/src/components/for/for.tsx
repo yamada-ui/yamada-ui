@@ -28,6 +28,10 @@ export interface ForProps<Y> {
    */
   offset?: number
   /**
+   * The number of times to repeat the component.
+   */
+  repeat?: number
+  /**
    * The boolean value to determine the order of the items in the array.
    * If `true`, the items will be reversed.
    * If `sortBy` is provided, inversion is applied to the sorted array.
@@ -54,6 +58,7 @@ export const For = <Y,>({
   filter,
   limit,
   offset = 0,
+  repeat,
   reverse = false,
   sort,
 }: ForProps<Y>): ReactNode => {
@@ -67,5 +72,20 @@ export const For = <Y,>({
 
   if (!sliced.length) return fallback || null
 
-  return sliced.map(children)
+  const rendered = sliced.map(children)
+
+  if (typeof repeat === "number" && repeat > 1) {
+    const unitLength = rendered.length
+    const totalLength = unitLength * repeat
+    const repeated = new Array<ReactNode>(totalLength)
+    for (let i = 0; i < repeat; i += 1) {
+      const baseIndex = i * unitLength
+      for (let j = 0; j < unitLength; j += 1) {
+        repeated[baseIndex + j] = rendered[j]
+      }
+    }
+    return repeated
+  }
+
+  return rendered
 }

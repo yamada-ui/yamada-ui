@@ -311,7 +311,7 @@ export const DisableAnimation: Story = () => {
   )
 }
 
-export const HideTooltip: Story = () => {
+export const Tooltip: Story = () => {
   const data = useMemo(
     () =>
       Array(7)
@@ -326,10 +326,17 @@ export const HideTooltip: Story = () => {
   )
 
   return (
-    <LineChart.Root data={data} withTooltip={false}>
-      <LineChart.Line dataKey="uv" />
-      <LineChart.Line dataKey="pv" />
-    </LineChart.Root>
+    <VStack>
+      <LineChart.Root data={data} withTooltip={false}>
+        <LineChart.Line dataKey="uv" />
+        <LineChart.Line dataKey="pv" />
+      </LineChart.Root>
+
+      <LineChart.Root data={data} tooltipProps={{ withCursor: false }}>
+        <LineChart.Line dataKey="uv" />
+        <LineChart.Line dataKey="pv" />
+      </LineChart.Root>
+    </VStack>
   )
 }
 

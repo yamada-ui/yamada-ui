@@ -44,7 +44,7 @@ export {
   useTooltipPropsContext,
 }
 
-export const Tooltip = withProvider<"div", TooltipRootProps>(
+export const Tooltip = withProvider(
   RechartsTooltip,
   "root",
 )(({ labelFormatter, unit, valueFormatter, ...props }) => {
@@ -55,9 +55,7 @@ export const Tooltip = withProvider<"div", TooltipRootProps>(
   })
 
   return {
-    ...getTooltipProps({
-      cursor: <TooltipCursor />,
-    }),
+    ...getTooltipProps(),
     content: ({
       label,
       payload,
@@ -77,7 +75,7 @@ export const Tooltip = withProvider<"div", TooltipRootProps>(
   }
 })
 
-interface TooltipCursorProps
+export interface TooltipCursorProps
   extends Omit<HTMLStyledProps<"path">, "height" | "points" | "width"> {
   height?: number
   payload?: Dict[]
@@ -85,7 +83,7 @@ interface TooltipCursorProps
   width?: number
 }
 
-const TooltipCursor = withContext<"path", TooltipCursorProps>(
+export const TooltipCursor = withContext<"path", TooltipCursorProps>(
   ({
     bottom: _bottom,
     height,

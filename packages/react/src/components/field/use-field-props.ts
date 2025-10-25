@@ -5,12 +5,14 @@ import type { Dict } from "../../utils"
 import type { FieldProps } from "./field"
 import { useMemo } from "react"
 import { useEnvironment } from "../../core"
-import { ariaAttr, cx, dataAttr, handlerAll } from "../../utils"
+import { ariaAttr, cx, dataAttr, handlerAll, isObject } from "../../utils"
 import { useFieldsetContext } from "../fieldset"
+import { useFormContext } from "../form"
 import { useFieldContext } from "./field"
 
 export interface UseFieldProps<Y extends HTMLElement> extends FieldProps {
   id?: string
+  name?: string
   notSupportReadOnly?: boolean
   onBlur?: FocusEventHandler<Y>
   onFocus?: FocusEventHandler<Y>
@@ -19,6 +21,7 @@ export interface UseFieldProps<Y extends HTMLElement> extends FieldProps {
 export const useFieldProps = <Y extends HTMLElement, M extends Dict>(
   {
     id,
+    name,
     "aria-describedby": ariaDescribedby,
     disabled,
     invalid,
@@ -31,6 +34,7 @@ export const useFieldProps = <Y extends HTMLElement, M extends Dict>(
   }: M & UseFieldProps<Y> = {} as M & UseFieldProps<Y>,
 ) => {
   const { getDocument } = useEnvironment()
+  const formContext = useFormContext()
   const fieldsetContext = useFieldsetContext()
   const fieldContext = useFieldContext()
 
@@ -40,15 +44,31 @@ export const useFieldProps = <Y extends HTMLElement, M extends Dict>(
   readOnly ??= fieldContext?.readOnly ?? fieldsetContext?.readOnly
   invalid ??= fieldContext?.invalid ?? fieldsetContext?.invalid
 
+  if (name) {
+    disabled ??= isObject(formContext?.disabled)
+      ? formContext.disabled[name]
+      : formContext?.disabled
+    required ??= isObject(formContext?.required)
+      ? formContext.required[name]
+      : formContext?.required
+    readOnly ??= isObject(formContext?.readOnly)
+      ? formContext.readOnly[name]
+      : formContext?.readOnly
+    invalid ??= isObject(formContext?.invalid)
+      ? formContext.invalid[name]
+      : formContext?.invalid
+  }
+
   const props = useMemo(
     () => ({
       id,
+      name,
       disabled,
       readOnly,
       required,
       ...rest,
     }),
-    [id, disabled, readOnly, required, rest],
+    [id, name, disabled, readOnly, required, rest],
   )
   const dataProps = useMemo(
     () => ({

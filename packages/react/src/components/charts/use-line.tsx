@@ -1,13 +1,11 @@
 import type { LineProps } from "recharts"
-import type { CSSObject, HTMLProps, PropGetter } from "../../core"
+import type { HTMLProps, PropGetter } from "../../core"
 import type { Dict, Merge } from "../../utils"
 import type { Dot } from "./chart.types"
 import { useCallback, useMemo } from "react"
-import { useSystem, useTheme } from "../../core"
-import { isFunction } from "../../utils"
+import { isFunction, splitObject } from "../../utils"
 import { LineActiveDot, LineDot } from "./line"
 import { lineProperties } from "./recharts-properties"
-import { getComponentProps } from "./utils"
 
 export interface UseLineProps
   extends Merge<
@@ -17,7 +15,6 @@ export interface UseLineProps
       "activeDot" | "color" | "dot" | "fill" | "stroke" | "strokeWidth"
     >
   > {
-  css?: CSSObject | CSSObject[]
   /**
    * Props passed down to 'ActiveDot' component or function that returns a React element.
    */
@@ -42,23 +39,16 @@ export interface UseLineProps
 
 export const useLine = ({
   type = "monotone",
-  css,
   activeDot: activeDotProp,
   dot: dotProp,
   withActiveDot = true,
   withDot = true,
   ...rest
 }: UseLineProps) => {
-  const { theme } = useTheme()
-  const system = useSystem()
-  const [reChartsProps, propClassName] = getComponentProps<
-    Dict,
-    keyof LineProps
-  >(
-    system,
-    [rest, lineProperties],
-    css,
-  )(theme)
+  const [lineProps, lineStyledProps] = splitObject<Dict, string>(
+    rest,
+    lineProperties,
+  )
 
   const dot = useMemo(() => {
     if (!withDot) {
@@ -92,7 +82,6 @@ export const useLine = ({
     (props) => {
       return {
         type,
-        className: propClassName,
         activeDot,
         color: "",
         dot,
@@ -100,13 +89,13 @@ export const useLine = ({
         stroke: "",
         strokeWidth: "",
         ...props,
-        ...reChartsProps,
+        ...lineProps,
       }
     },
-    [activeDot, dot, propClassName, reChartsProps, type],
+    [activeDot, dot, lineProps, type],
   )
 
-  return { getLineProps }
+  return { getLineProps, lineStyledProps }
 }
 
 export type UseLineReturn = ReturnType<typeof useLine>

@@ -135,6 +135,7 @@ export const CustomLine: Story = () => {
           dataKey="pv"
           dot={{ fill: ["green.200", "orange.200"] }}
           stroke={["green.500", "orange.500"]}
+          strokeWidth="3"
         />
       </LineChart.Root>
 

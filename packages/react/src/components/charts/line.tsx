@@ -3,7 +3,7 @@ import type { Dict, Merge } from "../../utils"
 import type { LineStyle } from "./line.style"
 import type { UseLineProps } from "./use-line"
 import { Line as RechartsLine } from "recharts"
-import { createSlotComponent } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { lineStyle } from "./line.style"
 import { useLine } from "./use-line"
 
@@ -30,12 +30,18 @@ export {
   useLinePropsContext,
 }
 
-// NOTE: When processed with the second argument, properties such as `stroke` are absorbed by YamadaUI.
 export const Line = withProvider<"svg", LineProps>((props) => {
   const customProps = useLineComponentContext()
-  const { getLineProps } = useLine({ ...customProps, ...props })
+  const { getLineProps, lineStyledProps } = useLine({
+    ...customProps,
+    ...props,
+  })
 
-  return <RechartsLine {...getLineProps()} />
+  return (
+    <styled.line asChild {...lineStyledProps}>
+      <RechartsLine {...getLineProps()} />
+    </styled.line>
+  )
 })()
 
 interface LineDotProps extends Omit<HTMLStyledProps<"circle">, "points"> {

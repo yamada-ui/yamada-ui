@@ -10,6 +10,7 @@
     "components": [
       "autocomplete",
       "checkbox",
+      "color-picker",
       "date-picker",
       "dropzone",
       "editable",

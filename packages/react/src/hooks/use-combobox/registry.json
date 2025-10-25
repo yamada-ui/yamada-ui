@@ -7,7 +7,7 @@
     "providers": []
   },
   "dependents": {
-    "components": ["autocomplete", "date-picker", "select"],
+    "components": ["autocomplete", "color-picker", "date-picker", "select"],
     "hooks": [],
     "providers": []
   },

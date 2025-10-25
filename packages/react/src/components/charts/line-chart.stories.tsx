@@ -139,13 +139,17 @@ export const CustomLine: Story = () => {
       </LineChart.Root>
 
       <LineChart.Root data={data}>
-        <LineChart.Line activeDot={{ r: 8 }} dataKey="uv" dot={{ r: 5 }} />
-        <LineChart.Line activeDot={false} dataKey="pv" dot={CustomizedDot} />
+        <LineChart.Line activeDot={{ r: "8" }} dataKey="uv" dot={{ r: "5" }} />
+        <LineChart.Line
+          dataKey="pv"
+          dot={CustomizedDot}
+          withActiveDot={false}
+        />
       </LineChart.Root>
 
       <LineChart.Root
         data={data}
-        lineProps={{ activeDot: false, dot: false, strokeWidth: "2" }}
+        lineProps={{ strokeWidth: "2", withActiveDot: false, withDot: false }}
       >
         <LineChart.Line dataKey="uv" />
         <LineChart.Line dataKey="pv" strokeDasharray="5 5" />

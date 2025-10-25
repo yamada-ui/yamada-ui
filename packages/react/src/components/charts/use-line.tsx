@@ -1,11 +1,12 @@
-import type { DotProps, LineProps } from "recharts"
+import type { LineProps } from "recharts"
 import type { CSSObject, HTMLProps, PropGetter } from "../../core"
 import type { Dict, Merge } from "../../utils"
 import type { Dot } from "./chart.types"
 import { useCallback, useMemo } from "react"
 import { useSystem, useTheme } from "../../core"
-import { isObject } from "../../utils"
-import { dotProperties, lineProperties } from "./recharts-properties"
+import { isFunction } from "../../utils"
+import { LineActiveDot, LineDot } from "./line"
+import { lineProperties } from "./recharts-properties"
 import { getComponentProps } from "./utils"
 
 export interface UseLineProps
@@ -17,15 +18,35 @@ export interface UseLineProps
     >
   > {
   css?: CSSObject | CSSObject[]
+  /**
+   * Props passed down to 'ActiveDot' component or function that returns a React element.
+   */
   activeDot?: Dot
+  /**
+   * Props passed down to 'Dot' component or function that returns a React element.
+   */
   dot?: Dot
+  /**
+   * If `true`, active dot is visible.
+   *
+   * @default true
+   */
+  withActiveDot?: boolean
+  /**
+   * If `true`, dot is visible.
+   *
+   * @default true
+   */
+  withDot?: boolean
 }
 
 export const useLine = ({
   type = "monotone",
   css,
-  activeDot: activeDotProp = {},
-  dot: dotProp = {},
+  activeDot: activeDotProp,
+  dot: dotProp,
+  withActiveDot = true,
+  withDot = true,
   ...rest
 }: UseLineProps) => {
   const { theme } = useTheme()
@@ -39,45 +60,29 @@ export const useLine = ({
     css,
   )(theme)
 
-  const dot: Dot = useMemo(() => {
-    if (!isObject(dotProp)) {
+  const dot = useMemo(() => {
+    if (!withDot) {
+      return false
+    }
+
+    if (isFunction(dotProp)) {
       return dotProp
     }
 
-    const [reChartsProps, propClassName] = getComponentProps<
-      Dict,
-      keyof DotProps
-    >(system, [dotProp, dotProperties])(theme)
+    return <LineDot {...dotProp} />
+  }, [dotProp, withDot])
 
-    return {
-      className: propClassName,
-      color: "",
-      fill: "",
-      stroke: "",
-      strokeWidth: "",
-      ...reChartsProps,
+  const activeDot = useMemo(() => {
+    if (!withActiveDot) {
+      return false
     }
-  }, [dotProp, system, theme])
 
-  const activeDot: Dot = useMemo(() => {
-    if (!isObject(activeDotProp)) {
+    if (isFunction(activeDotProp)) {
       return activeDotProp
     }
 
-    const [reChartsProps, propClassName] = getComponentProps<
-      Dict,
-      keyof DotProps
-    >(system, [activeDotProp, dotProperties])(theme)
-
-    return {
-      className: propClassName,
-      color: "",
-      fill: "",
-      stroke: "",
-      strokeWidth: "",
-      ...reChartsProps,
-    }
-  }, [activeDotProp, system, theme])
+    return <LineActiveDot {...activeDotProp} />
+  }, [activeDotProp, withActiveDot])
 
   const getLineProps: PropGetter<
     undefined,

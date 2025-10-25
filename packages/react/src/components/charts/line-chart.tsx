@@ -40,6 +40,8 @@ import { YAxis, YAxisComponentContext } from "./y-axis"
 //
 //? tooltipとlegendどこまでexportするか
 //? useSplitChildren
+//? tooltipContentPropsとかでまとめるか？
+//? activeDotのstrokeみたいなrechartから入ってくるデフォルト値をどうやって除くか
 
 export interface LineChartRootProps
   extends Merge<HTMLStyledProps, UseLineChartProps>,

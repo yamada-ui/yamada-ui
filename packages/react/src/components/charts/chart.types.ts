@@ -14,12 +14,7 @@ export type DotProps = ActiveDotProps
 
 export type Dot =
   | ((props: DotProps) => ReactElement<SVGElement>)
-  | boolean
-  | Merge<
-      HTMLStyledProps<"svg">,
-      Omit<Partial<DotProps>, "color" | "fill" | "stroke" | "strokeWidth">
-    >
-  | ReactElement<SVGElement>
+  | Omit<HTMLStyledProps<"circle">, "points">
 
 export type Label =
   | ((props: LabelProps) => ReactElement<SVGElement>)

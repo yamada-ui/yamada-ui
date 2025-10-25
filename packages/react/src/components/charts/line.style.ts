@@ -1,9 +1,19 @@
-import { defineComponentStyle } from "../../core"
+import { defineComponentSlotStyle } from "../../core"
 
-export const lineStyle = defineComponentStyle({
+export const lineStyle = defineComponentSlotStyle({
   base: {
-    fill: "mono",
-    stroke: "mono",
+    activeDot: {
+      fill: "mono",
+      stroke: "currentColor",
+      strokeWidth: 2,
+    },
+    dot: {
+      strokeWidth: 2,
+    },
+    root: {
+      fill: "mono",
+      stroke: "mono",
+    },
   },
 })
 

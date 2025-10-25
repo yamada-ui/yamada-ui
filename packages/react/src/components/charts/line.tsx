@@ -47,12 +47,15 @@ export const Line = withProvider<"svg", LineProps>((props) => {
 interface LineDotProps extends Omit<HTMLStyledProps<"circle">, "points"> {
   payload?: Dict[]
   points?: Dict[]
+  value?: number | string
 }
 
 export const LineDot = withContext<"circle", LineDotProps>(
-  "circle",
+  ({ payload: _payload, points: _points, value, ...props }) => {
+    return value ? <styled.circle {...props} /> : null
+  },
   "dot",
-)(({ payload: _payload, points: _points, ...props }) => props)
+)()
 
 interface LineActiveDotProps extends Omit<HTMLStyledProps<"circle">, "points"> {
   payload?: Dict[]

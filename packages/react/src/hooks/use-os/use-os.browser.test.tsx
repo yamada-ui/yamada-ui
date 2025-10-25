@@ -1,4 +1,4 @@
-import { renderHook } from "#test"
+import { browserRenderHook } from "#browser-test"
 import { useOS } from "./"
 
 describe("useOS", () => {
@@ -62,7 +62,7 @@ describe("useOS", () => {
   ])("should return $expected", ({ expected, userAgent }) => {
     vi.stubGlobal("navigator", { userAgent })
 
-    const { result } = renderHook(() => useOS())
+    const { result } = browserRenderHook(() => useOS())
     expect(result.current).toBe(expected)
   })
 })

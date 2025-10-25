@@ -16,7 +16,7 @@ import { createComponent, styled } from "../../core"
 import { isEmpty } from "../../utils"
 import { Grid, GridComponentContext } from "./grid"
 import { Legend, LegendComponentContext } from "./legend"
-import { LineComponentContext } from "./line"
+import { Line, LineComponentContext } from "./line"
 import { lineChartStyle } from "./line-chart.style"
 import { ReferenceLineComponentContext } from "./reference-line"
 import { Tooltip, TooltipComponentContext } from "./tooltip"
@@ -42,6 +42,7 @@ import { YAxis, YAxisComponentContext } from "./y-axis"
 //? useSplitChildren
 //? tooltipContentPropsとかでまとめるか？
 //? activeDotのstrokeみたいなrechartから入ってくるデフォルト値をどうやって除くか
+//? tooltipとlegendになんかvarの色反映されない
 
 export interface LineChartRootProps
   extends Merge<HTMLStyledProps, UseLineChartProps>,
@@ -136,6 +137,7 @@ export const LineChartRoot = withContext<"div", LineChartRootProps>(
   }) => {
     const {
       layout,
+      lines,
       getContainerProps,
       getLineChartProps,
       getResponsiveContainerProps,
@@ -192,6 +194,10 @@ export const LineChartRoot = withContext<"div", LineChartRootProps>(
                           ) : (
                             customLegend
                           )}
+
+                          {lines.map((props, index) => (
+                            <Line key={index} {...props} />
+                          ))}
 
                           {omittedChildren}
                         </LineChart>

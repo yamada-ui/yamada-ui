@@ -32,10 +32,10 @@ export const Basic: Story = () => {
 
   return (
     <VStack>
-      <LineChart.Root data={data}>
-        <LineChart.Line dataKey="uv" />
-        <LineChart.Line dataKey="pv" />
-      </LineChart.Root>
+      <LineChart.Root
+        data={data}
+        lines={[{ dataKey: "uv" }, { dataKey: "pv" }]}
+      />
 
       <LineChart.Root data={data}>
         <LineChart.Line dataKey="uv" />

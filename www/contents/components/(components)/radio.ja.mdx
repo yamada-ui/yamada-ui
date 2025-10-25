@@ -40,7 +40,7 @@ import { Radio, RadioGroup } from "@workspaces/ui"
 ### itemsを使う
 
 ```tsx preview functional
-const items = useMemo<RadioGroup.RootProps["items"]>(
+const items = useMemo<RadioGroup.Item[]>(
   () => [
     { label: "織田信長", value: "1" },
     { label: "豊臣秀吉", value: "2" },
@@ -55,7 +55,7 @@ return <RadioGroup.Root items={items} />
 ### バリアントを変更する
 
 ```tsx preview functional
-const items = useMemo<RadioGroup.RootProps["items"]>(
+const items = useMemo<RadioGroup.Item[]>(
   () => [
     { label: "Checked", value: "1" },
     { label: "No checked", value: "2" },
@@ -82,7 +82,7 @@ return (
 ### サイズを変更する
 
 ```tsx preview functional
-const items = useMemo<RadioGroup.RootProps["items"]>(
+const items = useMemo<RadioGroup.Item[]>(
   () => [
     { label: "Checked", value: "1" },
     { label: "No checked", value: "2" },
@@ -111,7 +111,7 @@ return (
 デフォルト値を設定する場合は、`defaultValue`に値を設定します。
 
 ```tsx preview functional
-const items = useMemo<RadioGroup.RootProps["items"]>(
+const items = useMemo<RadioGroup.Item[]>(
   () => [
     { label: "織田信長", value: "1" },
     { label: "豊臣秀吉", value: "2" },
@@ -128,7 +128,7 @@ return <RadioGroup.Root defaultValue="1" items={items} />
 デフォルトで選択済みにする場合は、`defaultChecked`を`true`に設定します。
 
 ```tsx preview functional
-const items = useMemo<RadioGroup.RootProps["items"]>(
+const items = useMemo<RadioGroup.Item[]>(
   () => [
     { defaultChecked: true, label: "織田信長", value: "1" },
     { label: "豊臣秀吉", value: "2" },
@@ -145,7 +145,7 @@ return <RadioGroup.Root items={items} />
 方向を変更する場合は、`orientation`に`"horizontal"`または`"vertical"`を設定します。デフォルトは`"vertical"`です。
 
 ```tsx preview functional
-const items = useMemo<RadioGroup.RootProps["items"]>(
+const items = useMemo<RadioGroup.Item[]>(
   () => [
     { label: "織田信長", value: "1" },
     { label: "豊臣秀吉", value: "2" },
@@ -162,7 +162,7 @@ return <RadioGroup.Root items={items} orientation="horizontal" />
 形を変更する場合は、`shape`に`"circle"`や`"rounded"`などを設定します。デフォルトは`"circle"`です。
 
 ```tsx preview functional
-const items = useMemo<RadioGroup.RootProps["items"]>(
+const items = useMemo<RadioGroup.Item[]>(
   () => [
     { label: "織田信長", value: "1" },
     { label: "豊臣秀吉", value: "2" },
@@ -296,7 +296,7 @@ return (
 
 ```tsx preview functional client
 const [value, setValue] = useState("1")
-const items = useMemo<RadioGroup.RootProps["items"]>(
+const items = useMemo<RadioGroup.Item[]>(
   () => [
     { label: "織田信長", value: "1" },
     { label: "豊臣秀吉", value: "2" },

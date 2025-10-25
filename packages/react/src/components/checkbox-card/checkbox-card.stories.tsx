@@ -1,5 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { SubmitHandler } from "react-hook-form"
+import type { CheckboxCardGroupItem } from "."
 import { PropsTable } from "#storybook"
 import { useMemo, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
@@ -58,7 +59,7 @@ export const Group: Story = () => {
 }
 
 export const Items: Story = () => {
-  const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxCardGroupItem[]>(
     () => [
       {
         description: "22世紀の未来から来たネコ型ロボット。",
@@ -83,7 +84,7 @@ export const Items: Story = () => {
 }
 
 export const Variant: Story = () => {
-  const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxCardGroupItem[]>(
     () => [
       { label: "Checked", value: "1" },
       { label: "No checked", value: "2" },
@@ -110,7 +111,7 @@ export const Variant: Story = () => {
 }
 
 export const Size: Story = () => {
-  const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxCardGroupItem[]>(
     () => [
       { label: "Checked", value: "1" },
       { label: "No checked", value: "2" },
@@ -137,7 +138,7 @@ export const Size: Story = () => {
 }
 
 export const DefaultValue: Story = () => {
-  const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxCardGroupItem[]>(
     () => [
       {
         description: "22世紀の未来から来たネコ型ロボット。",
@@ -173,7 +174,7 @@ export const DefaultChecked: Story = () => {
 }
 
 export const Max: Story = () => {
-  const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxCardGroupItem[]>(
     () => [
       {
         description: "22世紀の未来から来たネコ型ロボット。",
@@ -198,7 +199,7 @@ export const Max: Story = () => {
 }
 
 export const Orientation: Story = () => {
-  const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxCardGroupItem[]>(
     () => [
       {
         description: "22世紀の未来から来たネコ型ロボット。",
@@ -223,7 +224,7 @@ export const Orientation: Story = () => {
 }
 
 export const Addon: Story = () => {
-  const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxCardGroupItem[]>(
     () => [
       {
         addon: "藤子・F・不二雄",
@@ -251,7 +252,7 @@ export const Addon: Story = () => {
 }
 
 export const Shape: Story = () => {
-  const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxCardGroupItem[]>(
     () => [
       {
         description: "22世紀の未来から来たネコ型ロボット。",
@@ -287,7 +288,7 @@ export const Shape: Story = () => {
 }
 
 export const Justify: Story = () => {
-  const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxCardGroupItem[]>(
     () => [
       {
         description: "22世紀の未来から来たネコ型ロボット。",
@@ -357,7 +358,7 @@ export const HiddenIndicator: Story = () => {
 }
 
 export const Disabled: Story = () => {
-  const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxCardGroupItem[]>(
     () => [
       {
         description: "22世紀の未来から来たネコ型ロボット。",
@@ -400,7 +401,7 @@ export const Disabled: Story = () => {
 }
 
 export const ReadOnly: Story = () => {
-  const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxCardGroupItem[]>(
     () => [
       {
         description: "22世紀の未来から来たネコ型ロボット。",
@@ -443,7 +444,7 @@ export const ReadOnly: Story = () => {
 }
 
 export const Invalid: Story = () => {
-  const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxCardGroupItem[]>(
     () => [
       {
         description: "22世紀の未来から来たネコ型ロボット。",
@@ -486,7 +487,7 @@ export const Invalid: Story = () => {
 }
 
 export const BorderColor: Story = () => {
-  const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxCardGroupItem[]>(
     () => [
       {
         description: "22世紀の未来から来たネコ型ロボット。",
@@ -522,7 +523,7 @@ export const BorderColor: Story = () => {
 
 export const CustomControl: Story = () => {
   const [value, setValue] = useState(["1"])
-  const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxCardGroupItem[]>(
     () => [
       {
         description: "22世紀の未来から来たネコ型ロボット。",
@@ -549,7 +550,7 @@ export const CustomControl: Story = () => {
 }
 
 export const CustomIcon: Story = () => {
-  const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxCardGroupItem[]>(
     () => [
       {
         description: "22世紀の未来から来たネコ型ロボット。",
@@ -583,7 +584,7 @@ export const ReactHookForm: Story = () => {
     formState: { errors },
     handleSubmit,
   } = useForm<Data>()
-  const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxCardGroupItem[]>(
     () => [
       {
         description: "22世紀の未来から来たネコ型ロボット。",
@@ -646,7 +647,7 @@ export const ReactHookFormWithDefaultValue: Story = () => {
     formState: { errors },
     handleSubmit,
   } = useForm<Data>({ defaultValues })
-  const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxCardGroupItem[]>(
     () => [
       {
         description: "22世紀の未来から来たネコ型ロボット。",

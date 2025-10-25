@@ -17,7 +17,7 @@ const meta: Meta<typeof Steps.Root> = {
 export default meta
 
 export const Basic: Story = () => {
-  const items: Steps.RootProps["items"] = useMemo(
+  const items: Steps.Item[] = useMemo(
     () => [
       {
         content:
@@ -62,7 +62,7 @@ export const Basic: Story = () => {
 }
 
 export const Variant: Story = () => {
-  const items: Steps.RootProps["items"] = useMemo(
+  const items: Steps.Item[] = useMemo(
     () => [
       { description: "レッドリボン軍", title: "孫悟空少年編" },
       { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },
@@ -105,7 +105,7 @@ export const Variant: Story = () => {
 }
 
 export const Size: Story = () => {
-  const items: Steps.RootProps["items"] = useMemo(
+  const items: Steps.Item[] = useMemo(
     () => [
       { description: "レッドリボン軍", title: "孫悟空少年編" },
       { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },
@@ -138,7 +138,7 @@ export const Size: Story = () => {
 }
 
 export const Orientation: Story = () => {
-  const items: Steps.RootProps["items"] = useMemo(
+  const items: Steps.Item[] = useMemo(
     () => [
       {
         content:
@@ -205,7 +205,7 @@ export const Orientation: Story = () => {
 }
 
 export const Lazy: Story = () => {
-  const items: Steps.RootProps["items"] = useMemo(
+  const items: Steps.Item[] = useMemo(
     () => [
       {
         content:
@@ -250,7 +250,7 @@ export const Lazy: Story = () => {
 }
 
 export const LazyBehavior: Story = () => {
-  const items: Steps.RootProps["items"] = useMemo(
+  const items: Steps.Item[] = useMemo(
     () => [
       {
         content:
@@ -295,7 +295,7 @@ export const LazyBehavior: Story = () => {
 }
 
 export const CustomIndicator: Story = () => {
-  const items: Steps.RootProps["items"] = useMemo(
+  const items: Steps.Item[] = useMemo(
     () => [
       {
         complete: `😇`,
@@ -398,7 +398,7 @@ export const CustomComponent: Story = () => {
 
 export const CustomControl: Story = () => {
   const [index, setIndex] = useState(0)
-  const items: Steps.RootProps["items"] = useMemo(
+  const items: Steps.Item[] = useMemo(
     () => [
       { description: "レッドリボン軍", title: "孫悟空少年編" },
       { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },

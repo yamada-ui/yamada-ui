@@ -46,7 +46,7 @@ export interface AccordionRootProps
   /**
    * If provided, generate elements based on items.
    */
-  items?: Omit<AccordionItemProps, "index">[]
+  items?: AccordionItem[]
 }
 
 interface AccordionItemComponentContext
@@ -152,6 +152,8 @@ export interface AccordionItemProps
    */
   icon?: ReactNodeOrFunction<AccordionCallBackProps>
 }
+
+export interface AccordionItem extends Omit<AccordionItemProps, "index"> {}
 
 export const AccordionItem = withContext<"div", AccordionItemProps>(
   ({ button, children, icon, ...rest }) => {

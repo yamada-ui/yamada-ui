@@ -1,6 +1,7 @@
 export * from "./tabs.style"
 export * as Tabs from "./namespace"
 export type {
+  TabsItem,
   TabsListProps,
   TabsPanelProps,
   TabsPanelsProps,

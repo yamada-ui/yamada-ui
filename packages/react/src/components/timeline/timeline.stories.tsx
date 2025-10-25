@@ -17,7 +17,7 @@ const meta: Meta<typeof Timeline.Root> = {
 export default meta
 
 export const Basic: Story = () => {
-  const items = useMemo<Timeline.RootProps["items"]>(
+  const items = useMemo<Timeline.Item[]>(
     () => [
       {
         description:
@@ -41,7 +41,7 @@ export const Basic: Story = () => {
 }
 
 export const Size: Story = () => {
-  const items = useMemo<Timeline.RootProps["items"]>(
+  const items = useMemo<Timeline.Item[]>(
     () => [
       {
         description:
@@ -71,7 +71,7 @@ export const Size: Story = () => {
 }
 
 export const ColorScheme: Story = () => {
-  const items = useMemo<Timeline.RootProps["items"]>(
+  const items = useMemo<Timeline.Item[]>(
     () => [
       {
         description:
@@ -101,7 +101,7 @@ export const ColorScheme: Story = () => {
 }
 
 export const Align: Story = () => {
-  const items = useMemo<Timeline.RootProps["items"]>(
+  const items = useMemo<Timeline.Item[]>(
     () => [
       {
         description:
@@ -130,7 +130,7 @@ export const Align: Story = () => {
             align={row}
             items={
               row !== "start"
-                ? items?.map((item, index) => ({
+                ? items.map((item, index) => ({
                     align: row !== "end" && index % 2 === 0 ? "start" : "end",
                     ...item,
                   }))
@@ -144,7 +144,7 @@ export const Align: Story = () => {
 }
 
 export const Shape: Story = () => {
-  const items = useMemo<Timeline.RootProps["items"]>(
+  const items = useMemo<Timeline.Item[]>(
     () => [
       {
         description:
@@ -174,7 +174,7 @@ export const Shape: Story = () => {
 }
 
 export const Alternate: Story = () => {
-  const items = useMemo<Timeline.RootProps["items"]>(
+  const items = useMemo<Timeline.Item[]>(
     () => [
       {
         align: "end",
@@ -201,7 +201,7 @@ export const Alternate: Story = () => {
 }
 
 export const Indicator: Story = () => {
-  const itemsWithIcon = useMemo<Timeline.RootProps["items"]>(
+  const itemsWithIcon = useMemo<Timeline.Item[]>(
     () => [
       {
         description:
@@ -224,7 +224,7 @@ export const Indicator: Story = () => {
     [],
   )
 
-  const itemsWithAvatar = useMemo<Timeline.RootProps["items"]>(
+  const itemsWithAvatar = useMemo<Timeline.Item[]>(
     () => [
       {
         description: "ジョナサン・ジョースター",
@@ -265,7 +265,7 @@ export const Indicator: Story = () => {
 }
 
 export const Number: Story = () => {
-  const items = useMemo<Timeline.RootProps["items"]>(
+  const items = useMemo<Timeline.Item[]>(
     () => [
       {
         description:
@@ -304,7 +304,7 @@ export const Number: Story = () => {
 }
 
 export const Dashed: Story = () => {
-  const items = useMemo<Timeline.RootProps["items"]>(
+  const items = useMemo<Timeline.Item[]>(
     () => [
       {
         description:
@@ -329,7 +329,7 @@ export const Dashed: Story = () => {
 }
 
 export const Attached: Story = () => {
-  const items = useMemo<Timeline.RootProps["items"]>(
+  const items = useMemo<Timeline.Item[]>(
     () => [
       {
         description:

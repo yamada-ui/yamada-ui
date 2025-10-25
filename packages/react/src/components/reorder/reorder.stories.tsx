@@ -41,7 +41,7 @@ export const Basic: Story = () => {
 }
 
 export const Items: Story = () => {
-  const items = useMemo<Reorder.RootProps["items"]>(
+  const items = useMemo<Reorder.Item[]>(
     () => [
       { label: "ギニュー", value: "ギニュー" },
       { label: "リクーム", value: "リクーム" },
@@ -56,7 +56,7 @@ export const Items: Story = () => {
 }
 
 export const Size: Story = () => {
-  const items = useMemo<Reorder.RootProps["items"]>(
+  const items = useMemo<Reorder.Item[]>(
     () => [
       { label: "ギニュー", value: "ギニュー" },
       { label: "リクーム", value: "リクーム" },
@@ -75,7 +75,7 @@ export const Size: Story = () => {
 }
 
 export const Variant: Story = () => {
-  const items = useMemo<Reorder.RootProps["items"]>(
+  const items = useMemo<Reorder.Item[]>(
     () => [
       { label: "ギニュー", value: "ギニュー" },
       { label: "リクーム", value: "リクーム" },
@@ -105,7 +105,7 @@ export const Variant: Story = () => {
 }
 
 export const Orientation: Story = () => {
-  const items = useMemo<Reorder.RootProps["items"]>(
+  const items = useMemo<Reorder.Item[]>(
     () => [
       { label: "ギニュー", value: "ギニュー" },
       { label: "リクーム", value: "リクーム" },

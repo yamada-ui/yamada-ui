@@ -34,7 +34,7 @@ export const Basic: Story = () => {
 }
 
 export const Items: Story = () => {
-  const items = useMemo<RadioGroup.RootProps["items"]>(
+  const items = useMemo<RadioGroup.Item[]>(
     () => [
       { label: "織田信長", value: "1" },
       { label: "豊臣秀吉", value: "2" },
@@ -47,7 +47,7 @@ export const Items: Story = () => {
 }
 
 export const Variant: Story = () => {
-  const items = useMemo<RadioGroup.RootProps["items"]>(
+  const items = useMemo<RadioGroup.Item[]>(
     () => [
       { label: "Checked", value: "1" },
       { label: "No checked", value: "2" },
@@ -76,7 +76,7 @@ export const Variant: Story = () => {
 }
 
 export const Size: Story = () => {
-  const items = useMemo<RadioGroup.RootProps["items"]>(
+  const items = useMemo<RadioGroup.Item[]>(
     () => [
       { label: "Checked", value: "1" },
       { label: "No checked", value: "2" },
@@ -102,7 +102,7 @@ export const Size: Story = () => {
 }
 
 export const DefaultValue: Story = () => {
-  const items = useMemo<RadioGroup.RootProps["items"]>(
+  const items = useMemo<RadioGroup.Item[]>(
     () => [
       { label: "織田信長", value: "1" },
       { label: "豊臣秀吉", value: "2" },
@@ -115,7 +115,7 @@ export const DefaultValue: Story = () => {
 }
 
 export const DefaultChecked: Story = () => {
-  const items = useMemo<RadioGroup.RootProps["items"]>(
+  const items = useMemo<RadioGroup.Item[]>(
     () => [
       { defaultChecked: true, label: "織田信長", value: "1" },
       { label: "豊臣秀吉", value: "2" },
@@ -128,7 +128,7 @@ export const DefaultChecked: Story = () => {
 }
 
 export const Orientation: Story = () => {
-  const items = useMemo<RadioGroup.RootProps["items"]>(
+  const items = useMemo<RadioGroup.Item[]>(
     () => [
       { label: "織田信長", value: "1" },
       { label: "豊臣秀吉", value: "2" },
@@ -141,7 +141,7 @@ export const Orientation: Story = () => {
 }
 
 export const Shape: Story = () => {
-  const items = useMemo<RadioGroup.RootProps["items"]>(
+  const items = useMemo<RadioGroup.Item[]>(
     () => [
       { label: "織田信長", value: "1" },
       { label: "豊臣秀吉", value: "2" },
@@ -160,7 +160,7 @@ export const Shape: Story = () => {
 }
 
 export const Disabled: Story = () => {
-  const items = useMemo<RadioGroup.RootProps["items"]>(
+  const items = useMemo<RadioGroup.Item[]>(
     () => [
       { defaultChecked: true, label: "織田信長", value: "1" },
       { label: "豊臣秀吉", value: "2" },
@@ -205,7 +205,7 @@ export const Disabled: Story = () => {
 }
 
 export const ReadOnly: Story = () => {
-  const items = useMemo<RadioGroup.RootProps["items"]>(
+  const items = useMemo<RadioGroup.Item[]>(
     () => [
       { defaultChecked: true, label: "織田信長", value: "1" },
       { label: "豊臣秀吉", value: "2" },
@@ -250,7 +250,7 @@ export const ReadOnly: Story = () => {
 }
 
 export const Invalid: Story = () => {
-  const items = useMemo<RadioGroup.RootProps["items"]>(
+  const items = useMemo<RadioGroup.Item[]>(
     () => [
       { defaultChecked: true, label: "織田信長", value: "1" },
       { label: "豊臣秀吉", value: "2" },
@@ -310,7 +310,7 @@ export const BorderColor: Story = () => {
 
 export const CustomControl: Story = () => {
   const [value, setValue] = useState("1")
-  const items = useMemo<RadioGroup.RootProps["items"]>(
+  const items = useMemo<RadioGroup.Item[]>(
     () => [
       { label: "織田信長", value: "1" },
       { label: "豊臣秀吉", value: "2" },
@@ -401,7 +401,7 @@ export const ReactHookForm: Story = () => {
     formState: { errors },
     handleSubmit,
   } = useForm<Data>()
-  const items = useMemo<RadioGroup.RootProps["items"]>(
+  const items = useMemo<RadioGroup.Item[]>(
     () => [
       { label: "織田信長", value: "1" },
       { label: "豊臣秀吉", value: "2" },
@@ -450,7 +450,7 @@ export const ReactHookFormWithDefaultValue: Story = () => {
     formState: { errors },
     handleSubmit,
   } = useForm<Data>({ defaultValues })
-  const items = useMemo<RadioGroup.RootProps["items"]>(
+  const items = useMemo<RadioGroup.Item[]>(
     () => [
       { label: "織田信長", value: "1" },
       { label: "豊臣秀吉", value: "2" },

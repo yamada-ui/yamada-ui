@@ -81,7 +81,7 @@ import { Timeline } from "@workspaces/ui"
 ### Use Items
 
 ```tsx preview functional
-const items = useMemo<Timeline.RootProps["items"]>(
+const items = useMemo<Timeline.Item[]>(
   () => [
     {
       description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
@@ -106,7 +106,7 @@ return <Timeline.Root items={items} />
 ### Change Size
 
 ```tsx preview functional
-const items = useMemo<Timeline.RootProps["items"]>(
+const items = useMemo<Timeline.Item[]>(
   () => [
     {
       description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
@@ -137,7 +137,7 @@ return (
 ### Change Color Scheme
 
 ```tsx preview functional
-const items = useMemo<Timeline.RootProps["items"]>(
+const items = useMemo<Timeline.Item[]>(
   () => [
     {
       description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
@@ -176,7 +176,7 @@ return (
 To change the alignment of timeline items, set the `align` prop to `"start"` or `"end"` etc.
 
 ```tsx preview functional
-const items = useMemo<Timeline.RootProps["items"]>(
+const items = useMemo<Timeline.Item[]>(
   () => [
     {
       description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
@@ -222,7 +222,7 @@ return (
 To change the shape of timeline indicators, set the `shape` prop to `"circle"`, `"rounded"`, or `"square"`.
 
 ```tsx preview functional
-const items = useMemo<Timeline.RootProps["items"]>(
+const items = useMemo<Timeline.Item[]>(
   () => [
     {
       description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
@@ -255,7 +255,7 @@ return (
 To customize indicators, assign custom content to the `indicator` prop of items.
 
 ```tsx preview functional
-const items = useMemo<Timeline.RootProps["items"]>(
+const items = useMemo<Timeline.Item[]>(
   () => [
     {
       description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
@@ -285,7 +285,7 @@ return <Timeline.Root items={items} />
 To attach timeline indicators to the content, set `attached` to `true`.
 
 ```tsx preview functional
-const items = useMemo<Timeline.RootProps["items"]>(
+const items = useMemo<Timeline.Item[]>(
   () => [
     {
       description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",

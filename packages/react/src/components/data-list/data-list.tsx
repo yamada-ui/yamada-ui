@@ -20,7 +20,7 @@ export interface DataListRootProps
   /**
    * If provided, generate elements based on items.
    */
-  items?: DataListItemProps[]
+  items?: DataListItem[]
   /**
    * The props for the data list description component.
    */
@@ -129,6 +129,8 @@ export interface DataListItemProps extends HTMLStyledProps {
    */
   termProps?: DataListTermProps
 }
+
+export interface DataListItem extends DataListItemProps {}
 
 export const DataListItem = withContext<"div", DataListItemProps>(
   ({

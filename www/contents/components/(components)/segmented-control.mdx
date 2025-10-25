@@ -41,7 +41,7 @@ import { SegmentedControl } from "@workspaces/ui"
 ### Use items
 
 ```tsx preview functional
-const items = useMemo<SegmentedControl.RootProps["items"]>(
+const items = useMemo<SegmentedControl.Item[]>(
   () => [
     { label: "ハチワレ", value: "ハチワレ" },
     { label: "うさぎ", value: "うさぎ" },
@@ -56,7 +56,7 @@ return <SegmentedControl.Root defaultValue="ハチワレ" items={items} />
 ### Change size
 
 ```tsx preview functional
-const items = useMemo<SegmentedControl.RootProps["items"]>(
+const items = useMemo<SegmentedControl.Item[]>(
   () => [
     { label: "ハチワレ", value: "ハチワレ" },
     { label: "うさぎ", value: "うさぎ" },
@@ -84,7 +84,7 @@ return (
 ### Change orientation
 
 ```tsx preview functional
-const items = useMemo<SegmentedControl.RootProps["items"]>(
+const items = useMemo<SegmentedControl.Item[]>(
   () => [
     { label: "ハチワレ", value: "ハチワレ" },
     { label: "うさぎ", value: "うさぎ" },
@@ -112,7 +112,7 @@ return (
 ### Make rounded
 
 ```tsx preview functional
-const items = useMemo<SegmentedControl.RootProps["items"]>(
+const items = useMemo<SegmentedControl.Item[]>(
   () => [
     { label: "ハチワレ", value: "ハチワレ" },
     { label: "うさぎ", value: "うさぎ" },
@@ -129,7 +129,7 @@ return (
 ### Disable
 
 ```tsx preview functional
-const items = useMemo<SegmentedControl.RootProps["items"]>(
+const items = useMemo<SegmentedControl.Item[]>(
   () => [
     { label: "ハチワレ", value: "ハチワレ" },
     { label: "うさぎ", value: "うさぎ" },
@@ -156,7 +156,7 @@ return (
 ### Read-Only
 
 ```tsx preview functional
-const items = useMemo<SegmentedControl.RootProps["items"]>(
+const items = useMemo<SegmentedControl.Item[]>(
   () => [
     { label: "ハチワレ", value: "ハチワレ" },
     { label: "うさぎ", value: "うさぎ" },
@@ -184,7 +184,7 @@ return (
 
 ```tsx preview functional client
 const [value, setValue] = useState("ハチワレ")
-const items = useMemo<SegmentedControl.RootProps["items"]>(
+const items = useMemo<SegmentedControl.Item[]>(
   () => [
     { label: "ハチワレ", value: "ハチワレ" },
     { label: "うさぎ", value: "うさぎ" },

@@ -415,7 +415,6 @@ export const ManualSorting: Story = () => {
         } else {
           setData(defaultData)
         }
-        console.log(sorting)
       }}
     />
   )

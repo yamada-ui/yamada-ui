@@ -6,9 +6,11 @@ import {
   Center,
   CloseButton,
   Drawer,
+  Flex,
   Heading,
   HStack,
   Icon,
+  useClipboard,
   useDisclosure,
   VStack,
 } from "@yamada-ui/react"
@@ -24,6 +26,8 @@ export const PreviewDrawer = memo(function PreviewDrawer({
   ...rest
 }: PreviewDrawerProps) {
   const data = useRef<null | { Icon: ElementType; title: string }>(null)
+  const { Icon: PreviewIcon = Fragment, title } = data.current ?? {}
+  const { onCopy } = useClipboard(title)
   const { open, onClose, onOpen } = useDisclosure({
     onClose: () => {
       data.current = null
@@ -34,8 +38,6 @@ export const PreviewDrawer = memo(function PreviewDrawer({
     data.current = { Icon, title }
     onOpen()
   })
-
-  const { Icon: PreviewIcon = Fragment, title } = data.current ?? {}
 
   return (
     <Drawer.Root
@@ -91,9 +93,13 @@ export const PreviewDrawer = memo(function PreviewDrawer({
         </Center>
 
         <HStack alignItems="flex-start" minW="0" w="full">
-          <Heading as="h3" flex="1" lineClamp={1}>
-            {title}
-          </Heading>
+          <Flex flex="1">
+            <Flex as="button" rounded="l2" onClick={onCopy}>
+              <Heading as="h3" lineClamp={1}>
+                {title}
+              </Heading>
+            </Flex>
+          </Flex>
 
           <Drawer.CloseTrigger>
             <CloseButton />
@@ -104,9 +110,10 @@ export const PreviewDrawer = memo(function PreviewDrawer({
           <CodePreview
             lang="tsx"
             code={`import { ${title} } from "@yamada-ui/react"`}
+            tabIndex={-1}
           />
 
-          <CodePreview lang="tsx" code={`<${title} />`} />
+          <CodePreview lang="tsx" code={`<${title} />`} tabIndex={-1} />
         </VStack>
       </Drawer.Content>
     </Drawer.Root>

@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "סגור",
   },
+  colorPicker: {
+    "Pick a color": "בחר צבע",
+  },
+  colorSelector: {
+    "Pick a color": "בחר צבע",
+  },
   datePicker: {
     "Clear value": "נקה ערך",
   },

@@ -6,4 +6,5 @@ trace
 node_modules
 pnpm-lock.yaml
 coverage
+!scripts/issue/coverage
 storybook-static

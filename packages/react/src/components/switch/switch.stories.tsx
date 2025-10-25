@@ -143,11 +143,9 @@ export const ReactHookForm: Story = () => {
     switch: boolean
   }
 
-  const { control, handleSubmit, watch } = useForm<Data>()
+  const { control, handleSubmit } = useForm<Data>()
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
-
-  console.log("watch:", watch())
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
@@ -177,11 +175,9 @@ export const ReactHookFormWithDefaultValue: Story = () => {
     switch: true,
   }
 
-  const { control, handleSubmit, watch } = useForm<Data>({ defaultValues })
+  const { control, handleSubmit } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
-
-  console.log("watch:", watch())
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>

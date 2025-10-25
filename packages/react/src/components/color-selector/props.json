@@ -1,0 +1,1466 @@
+{
+  "ColorSelector": {
+    "AlphaSlider": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"outline\" | \"solid\"",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "color": {
+        "type": "string",
+        "description": "The color used for the slider.",
+        "required": false
+      },
+      "defaultValue": {
+        "type": "number",
+        "description": "The initial value of the slider.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be disabled.",
+        "required": false
+      },
+      "getAriaValueText": {
+        "type": "(value: number, index: number) => string | undefined",
+        "description": "This is used to format the value so that screen readers\ncan speak out a more human-friendly value.\n\nIt is used to set the `aria-valuetext` property of the input.",
+        "required": false
+      },
+      "indicatorFill": {
+        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "description": "The fill color of the indicator.",
+        "required": false
+      },
+      "indicatorRounded": {
+        "type": "\"-moz-initial\" | \"2xl\" | \"2xs\" | \"3xl\" | \"4xl\" | \"full\" | \"inherit\" | \"initial\" | \"l1\" | \"l2\" ...",
+        "description": "The rounded of the indicator.",
+        "required": false
+      },
+      "inputProps": {
+        "type": "SliderInputProps",
+        "description": "Props for the input element.",
+        "required": false
+      },
+      "invalid": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be invalid.",
+        "required": false
+      },
+      "max": {
+        "type": "number",
+        "defaultValue": "1",
+        "description": "The maximum allowed value of the slider. Cannot be less than min.",
+        "required": false
+      },
+      "min": {
+        "type": "number",
+        "defaultValue": "0",
+        "description": "The minimum allowed value of the slider. Cannot be greater than max.",
+        "required": false
+      },
+      "name": {
+        "type": "string",
+        "description": "The name attribute of the hidden `input` field.\nThis is particularly useful in forms.",
+        "required": false
+      },
+      "onChange": {
+        "type": "(value: number) => void",
+        "description": "Function called whenever the slider value changes.",
+        "required": false
+      },
+      "onChangeEnd": {
+        "type": "(value: number) => void",
+        "description": "Function called when the user is done selecting a new value.",
+        "required": false
+      },
+      "onChangeStart": {
+        "type": "(value: number) => void",
+        "description": "Function called when the user starts selecting a new value.",
+        "required": false
+      },
+      "orientation": {
+        "type": "\"horizontal\" | \"vertical\"",
+        "defaultValue": "\"horizontal\"",
+        "description": "The orientation of the slider.",
+        "required": false
+      },
+      "overlayProps": {
+        "type": "AlphaSliderOverlayProps",
+        "description": "Props for the overlay element.",
+        "required": false
+      },
+      "readOnly": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be readonly.",
+        "required": false
+      },
+      "required": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be required.",
+        "required": false
+      },
+      "shape": {
+        "type": "\"circle\" | \"rounded\" | \"square\"",
+        "defaultValue": "\"circle\"",
+        "description": "The shape of the thumb.",
+        "required": false
+      },
+      "step": {
+        "type": "number",
+        "defaultValue": "0.01",
+        "description": "The step in which increments or decrements have to be made.",
+        "required": false
+      },
+      "thumbProps": {
+        "type": "AlphaSliderThumbProps",
+        "description": "Props for the thumb element.",
+        "required": false
+      },
+      "thumbRounded": {
+        "type": "\"-moz-initial\" | \"2xl\" | \"2xs\" | \"3xl\" | \"4xl\" | \"full\" | \"inherit\" | \"initial\" | \"l1\" | \"l2\" ...",
+        "description": "The rounded of the thumb.",
+        "required": false
+      },
+      "thumbSize": {
+        "type": "\"-moz-fit-content\" | \"-moz-initial\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | \"-webkit-max-content\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" ...",
+        "description": "The size of the thumb.",
+        "required": false
+      },
+      "thumbStroke": {
+        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "description": "The stroke color of the thumb.",
+        "required": false
+      },
+      "trackProps": {
+        "type": "AlphaSliderTrackProps",
+        "description": "Props for the track element.",
+        "required": false
+      },
+      "trackRounded": {
+        "type": "\"-moz-initial\" | \"2xl\" | \"2xs\" | \"3xl\" | \"4xl\" | \"full\" | \"inherit\" | \"initial\" | \"l1\" | \"l2\" ...",
+        "description": "The rounded of the track.",
+        "required": false
+      },
+      "trackSize": {
+        "type": "\"-moz-fit-content\" | \"-moz-initial\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | \"-webkit-max-content\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" ...",
+        "description": "The size of the track.",
+        "required": false
+      },
+      "value": {
+        "type": "number",
+        "description": "The value of the slider.",
+        "required": false
+      }
+    },
+    "ColorSwatchGroup": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "ColorSwatchGroupLabel": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "ColorSwatchItem": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"2xl\" | \"2xs\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"circle\" | \"plain\" | \"square\"",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "value": {
+        "type": "string",
+        "description": "The value of the color swatch.",
+        "required": true
+      },
+      "layers": {
+        "type": "HTMLStyledProps[]",
+        "description": "The overlay used for the swatch element.",
+        "required": false
+      },
+      "withShadow": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the swatch element has an inner `box-shadow`.",
+        "required": false
+      }
+    },
+    "EyeDropper": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "icon": {
+        "type": "ReactNode",
+        "description": "The icon to display in the eye dropper.",
+        "required": false
+      }
+    },
+    "HueSlider": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"outline\" | \"solid\"",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "defaultValue": {
+        "type": "number",
+        "description": "The initial value of the slider.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be disabled.",
+        "required": false
+      },
+      "getAriaValueText": {
+        "type": "(value: number, index: number) => string | undefined",
+        "description": "This is used to format the value so that screen readers\ncan speak out a more human-friendly value.\n\nIt is used to set the `aria-valuetext` property of the input.",
+        "required": false
+      },
+      "indicatorFill": {
+        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "description": "The fill color of the indicator.",
+        "required": false
+      },
+      "indicatorRounded": {
+        "type": "\"-moz-initial\" | \"2xl\" | \"2xs\" | \"3xl\" | \"4xl\" | \"full\" | \"inherit\" | \"initial\" | \"l1\" | \"l2\" ...",
+        "description": "The rounded of the indicator.",
+        "required": false
+      },
+      "inputProps": {
+        "type": "SliderInputProps",
+        "description": "Props for the input element.",
+        "required": false
+      },
+      "invalid": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be invalid.",
+        "required": false
+      },
+      "max": {
+        "type": "number",
+        "defaultValue": "360",
+        "description": "The maximum allowed value of the slider. Cannot be less than min.",
+        "required": false
+      },
+      "min": {
+        "type": "number",
+        "defaultValue": "0",
+        "description": "The minimum allowed value of the slider. Cannot be greater than max.",
+        "required": false
+      },
+      "name": {
+        "type": "string",
+        "description": "The name attribute of the hidden `input` field.\nThis is particularly useful in forms.",
+        "required": false
+      },
+      "onChange": {
+        "type": "(value: number) => void",
+        "description": "Function called whenever the slider value changes.",
+        "required": false
+      },
+      "onChangeEnd": {
+        "type": "(value: number) => void",
+        "description": "Function called when the user is done selecting a new value.",
+        "required": false
+      },
+      "onChangeStart": {
+        "type": "(value: number) => void",
+        "description": "Function called when the user starts selecting a new value.",
+        "required": false
+      },
+      "orientation": {
+        "type": "\"horizontal\" | \"vertical\"",
+        "defaultValue": "\"horizontal\"",
+        "description": "The orientation of the slider.",
+        "required": false
+      },
+      "overlayProps": {
+        "type": "HueSliderOverlayProps",
+        "description": "Props for the overlay element.",
+        "required": false
+      },
+      "readOnly": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be readonly.",
+        "required": false
+      },
+      "required": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be required.",
+        "required": false
+      },
+      "shape": {
+        "type": "\"circle\" | \"rounded\" | \"square\"",
+        "defaultValue": "\"circle\"",
+        "description": "The shape of the thumb.",
+        "required": false
+      },
+      "step": {
+        "type": "number",
+        "defaultValue": "1",
+        "description": "The step in which increments or decrements have to be made.",
+        "required": false
+      },
+      "thumbProps": {
+        "type": "HueSliderThumbProps",
+        "description": "Props for the thumb element.",
+        "required": false
+      },
+      "thumbRounded": {
+        "type": "\"-moz-initial\" | \"2xl\" | \"2xs\" | \"3xl\" | \"4xl\" | \"full\" | \"inherit\" | \"initial\" | \"l1\" | \"l2\" ...",
+        "description": "The rounded of the thumb.",
+        "required": false
+      },
+      "thumbSize": {
+        "type": "\"-moz-fit-content\" | \"-moz-initial\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | \"-webkit-max-content\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" ...",
+        "description": "The size of the thumb.",
+        "required": false
+      },
+      "thumbStroke": {
+        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "description": "The stroke color of the thumb.",
+        "required": false
+      },
+      "trackProps": {
+        "type": "HueSliderTrackProps",
+        "description": "Props for the track element.",
+        "required": false
+      },
+      "trackRounded": {
+        "type": "\"-moz-initial\" | \"2xl\" | \"2xs\" | \"3xl\" | \"4xl\" | \"full\" | \"inherit\" | \"initial\" | \"l1\" | \"l2\" ...",
+        "description": "The rounded of the track.",
+        "required": false
+      },
+      "trackSize": {
+        "type": "\"-moz-fit-content\" | \"-moz-initial\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | \"-webkit-max-content\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" ...",
+        "description": "The size of the track.",
+        "required": false
+      },
+      "value": {
+        "type": "number",
+        "description": "The value of the slider.",
+        "required": false
+      }
+    },
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+        "defaultValue": "\"md\"",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "alphaSliderProps": {
+        "type": "ColorSelectorAlphaSliderProps",
+        "description": "Props for the alpha slider.",
+        "required": false
+      },
+      "colorSwatches": {
+        "type": "string[]",
+        "description": "An array of colors in one of the supported formats.\nUsed to render swatches list below the color selector.",
+        "required": false
+      },
+      "colorSwatchGroupColumns": {
+        "type": "number",
+        "defaultValue": "8",
+        "description": "The number of columns in the color swatch group.",
+        "required": false
+      },
+      "colorSwatchGroupLabel": {
+        "type": "ReactNode",
+        "description": "The label of the color swatch group.",
+        "required": false
+      },
+      "colorSwatchGroupLabelProps": {
+        "type": "ColorSelectorColorSwatchGroupLabelProps",
+        "description": "Props for the color swatch group label.",
+        "required": false
+      },
+      "colorSwatchGroupProps": {
+        "type": "ColorSelectorColorSwatchGroupProps",
+        "description": "Props for the color swatch group.",
+        "required": false
+      },
+      "colorSwatchItemProps": {
+        "type": "Omit<ColorSelectorColorSwatchItemProps, \"value\">",
+        "description": "Props for the color swatch item.",
+        "required": false
+      },
+      "defaultValue": {
+        "type": "string",
+        "defaultValue": "fallbackValue",
+        "description": "The initial value of the color selector.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the color selector will be disabled.",
+        "required": false
+      },
+      "fallbackValue": {
+        "type": "string",
+        "defaultValue": "\"#FFFFFF\"",
+        "description": "The fallback value of the color selector.",
+        "required": false
+      },
+      "format": {
+        "type": "ColorFormat",
+        "defaultValue": "\"hex\"",
+        "description": "The format of the color selector.\nAutomatically determines the format of `value` or `defaultValue`.",
+        "required": false
+      },
+      "hueSliderProps": {
+        "type": "ColorSelectorHueSliderProps",
+        "description": "Props for the hue slider.",
+        "required": false
+      },
+      "onChange": {
+        "type": "(value: string) => void",
+        "description": "The callback invoked when the value changes.",
+        "required": false
+      },
+      "onChangeEnd": {
+        "type": "(value: string) => void",
+        "description": "The callback invoked when the value changes ends.",
+        "required": false
+      },
+      "onChangeStart": {
+        "type": "(value: string) => void",
+        "description": "The callback invoked when the value changes starts.",
+        "required": false
+      },
+      "readOnly": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the color selector will be read only.",
+        "required": false
+      },
+      "saturationSliderProps": {
+        "type": "ColorSelectorSaturationSliderProps",
+        "description": "Props for the saturation slider.",
+        "required": false
+      },
+      "shape": {
+        "type": "\"circle\" | \"rounded\" | \"square\"",
+        "defaultValue": "\"circle\"",
+        "description": "The shape of the thumb and color swatch.",
+        "required": false
+      },
+      "value": {
+        "type": "string",
+        "description": "The value of the color selector.",
+        "required": false
+      },
+      "withAlpha": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the alpha slider will be displayed.",
+        "required": false
+      }
+    },
+    "SaturationSlider": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "defaultValue": {
+        "type": "[number, number, number]",
+        "defaultValue": "[0, 0, 1]",
+        "description": "The initial value of the saturation slider.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be disabled.",
+        "required": false
+      },
+      "getAriaValueText": {
+        "type": "(value: [number, number, number]) => string | undefined",
+        "description": "This is used to format the value so that screen readers\ncan speak out a more human-friendly value.\n\nIt is used to set the `aria-valuetext` property of the input.",
+        "required": false
+      },
+      "id": {
+        "type": "string",
+        "description": "The base `id` to use for the slider.",
+        "required": false
+      },
+      "inputProps": {
+        "type": "HTMLStyledProps<\"input\">",
+        "description": "Props for the input element.",
+        "required": false
+      },
+      "invalid": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be invalid.",
+        "required": false
+      },
+      "name": {
+        "type": "string",
+        "description": "The name attribute of the hidden `input` field.\nThis is particularly useful in forms.",
+        "required": false
+      },
+      "onChange": {
+        "type": "(value: [number, number, number]) => void",
+        "description": "Function called whenever the saturation slider value changes.",
+        "required": false
+      },
+      "onChangeEnd": {
+        "type": "(value: [number, number, number]) => void",
+        "description": "Function called when the user is done selecting a new value.",
+        "required": false
+      },
+      "onChangeStart": {
+        "type": "(value: [number, number, number]) => void",
+        "description": "Function called when the user starts selecting a new value.",
+        "required": false
+      },
+      "readOnly": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be readonly.",
+        "required": false
+      },
+      "required": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be required.",
+        "required": false
+      },
+      "shape": {
+        "type": "\"circle\" | \"rounded\" | \"square\"",
+        "defaultValue": "\"circle\"",
+        "description": "The shape of the thumb.",
+        "required": false
+      },
+      "step": {
+        "type": "number",
+        "defaultValue": "0.01",
+        "description": "The step in which increments or decrements have to be made.",
+        "required": false
+      },
+      "thumbProps": {
+        "type": "SaturationSliderThumbProps",
+        "description": "Props for the thumb element.",
+        "required": false
+      },
+      "trackProps": {
+        "type": "SaturationSliderTrackProps",
+        "description": "Props for the track element.",
+        "required": false
+      },
+      "value": {
+        "type": "[number, number, number]",
+        "description": "The value of the saturation slider.",
+        "required": false
+      }
+    }
+  },
+  "ColorSelectorAlphaSlider": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"outline\" | \"solid\"",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "color": {
+      "type": "string",
+      "description": "The color used for the slider.",
+      "required": false
+    },
+    "defaultValue": {
+      "type": "number",
+      "description": "The initial value of the slider.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be disabled.",
+      "required": false
+    },
+    "getAriaValueText": {
+      "type": "(value: number, index: number) => string | undefined",
+      "description": "This is used to format the value so that screen readers\ncan speak out a more human-friendly value.\n\nIt is used to set the `aria-valuetext` property of the input.",
+      "required": false
+    },
+    "indicatorFill": {
+      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "description": "The fill color of the indicator.",
+      "required": false
+    },
+    "indicatorRounded": {
+      "type": "\"-moz-initial\" | \"2xl\" | \"2xs\" | \"3xl\" | \"4xl\" | \"full\" | \"inherit\" | \"initial\" | \"l1\" | \"l2\" ...",
+      "description": "The rounded of the indicator.",
+      "required": false
+    },
+    "inputProps": {
+      "type": "SliderInputProps",
+      "description": "Props for the input element.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be invalid.",
+      "required": false
+    },
+    "max": {
+      "type": "number",
+      "defaultValue": "1",
+      "description": "The maximum allowed value of the slider. Cannot be less than min.",
+      "required": false
+    },
+    "min": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "The minimum allowed value of the slider. Cannot be greater than max.",
+      "required": false
+    },
+    "name": {
+      "type": "string",
+      "description": "The name attribute of the hidden `input` field.\nThis is particularly useful in forms.",
+      "required": false
+    },
+    "onChange": {
+      "type": "(value: number) => void",
+      "description": "Function called whenever the slider value changes.",
+      "required": false
+    },
+    "onChangeEnd": {
+      "type": "(value: number) => void",
+      "description": "Function called when the user is done selecting a new value.",
+      "required": false
+    },
+    "onChangeStart": {
+      "type": "(value: number) => void",
+      "description": "Function called when the user starts selecting a new value.",
+      "required": false
+    },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\"",
+      "defaultValue": "\"horizontal\"",
+      "description": "The orientation of the slider.",
+      "required": false
+    },
+    "overlayProps": {
+      "type": "AlphaSliderOverlayProps",
+      "description": "Props for the overlay element.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be required.",
+      "required": false
+    },
+    "shape": {
+      "type": "\"circle\" | \"rounded\" | \"square\"",
+      "defaultValue": "\"circle\"",
+      "description": "The shape of the thumb.",
+      "required": false
+    },
+    "step": {
+      "type": "number",
+      "defaultValue": "0.01",
+      "description": "The step in which increments or decrements have to be made.",
+      "required": false
+    },
+    "thumbProps": {
+      "type": "AlphaSliderThumbProps",
+      "description": "Props for the thumb element.",
+      "required": false
+    },
+    "thumbRounded": {
+      "type": "\"-moz-initial\" | \"2xl\" | \"2xs\" | \"3xl\" | \"4xl\" | \"full\" | \"inherit\" | \"initial\" | \"l1\" | \"l2\" ...",
+      "description": "The rounded of the thumb.",
+      "required": false
+    },
+    "thumbSize": {
+      "type": "\"-moz-fit-content\" | \"-moz-initial\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | \"-webkit-max-content\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" ...",
+      "description": "The size of the thumb.",
+      "required": false
+    },
+    "thumbStroke": {
+      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "description": "The stroke color of the thumb.",
+      "required": false
+    },
+    "trackProps": {
+      "type": "AlphaSliderTrackProps",
+      "description": "Props for the track element.",
+      "required": false
+    },
+    "trackRounded": {
+      "type": "\"-moz-initial\" | \"2xl\" | \"2xs\" | \"3xl\" | \"4xl\" | \"full\" | \"inherit\" | \"initial\" | \"l1\" | \"l2\" ...",
+      "description": "The rounded of the track.",
+      "required": false
+    },
+    "trackSize": {
+      "type": "\"-moz-fit-content\" | \"-moz-initial\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | \"-webkit-max-content\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" ...",
+      "description": "The size of the track.",
+      "required": false
+    },
+    "value": {
+      "type": "number",
+      "description": "The value of the slider.",
+      "required": false
+    }
+  },
+  "ColorSelectorColorSwatchGroup": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "ColorSelectorColorSwatchGroupLabel": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "ColorSelectorColorSwatchItem": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"2xl\" | \"2xs\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"circle\" | \"plain\" | \"square\"",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "value": {
+      "type": "string",
+      "description": "The value of the color swatch.",
+      "required": true
+    },
+    "layers": {
+      "type": "HTMLStyledProps[]",
+      "description": "The overlay used for the swatch element.",
+      "required": false
+    },
+    "withShadow": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the swatch element has an inner `box-shadow`.",
+      "required": false
+    }
+  },
+  "ColorSelectorEyeDropper": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "icon": {
+      "type": "ReactNode",
+      "description": "The icon to display in the eye dropper.",
+      "required": false
+    }
+  },
+  "ColorSelectorHueSlider": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"outline\" | \"solid\"",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "defaultValue": {
+      "type": "number",
+      "description": "The initial value of the slider.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be disabled.",
+      "required": false
+    },
+    "getAriaValueText": {
+      "type": "(value: number, index: number) => string | undefined",
+      "description": "This is used to format the value so that screen readers\ncan speak out a more human-friendly value.\n\nIt is used to set the `aria-valuetext` property of the input.",
+      "required": false
+    },
+    "indicatorFill": {
+      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "description": "The fill color of the indicator.",
+      "required": false
+    },
+    "indicatorRounded": {
+      "type": "\"-moz-initial\" | \"2xl\" | \"2xs\" | \"3xl\" | \"4xl\" | \"full\" | \"inherit\" | \"initial\" | \"l1\" | \"l2\" ...",
+      "description": "The rounded of the indicator.",
+      "required": false
+    },
+    "inputProps": {
+      "type": "SliderInputProps",
+      "description": "Props for the input element.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be invalid.",
+      "required": false
+    },
+    "max": {
+      "type": "number",
+      "defaultValue": "360",
+      "description": "The maximum allowed value of the slider. Cannot be less than min.",
+      "required": false
+    },
+    "min": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "The minimum allowed value of the slider. Cannot be greater than max.",
+      "required": false
+    },
+    "name": {
+      "type": "string",
+      "description": "The name attribute of the hidden `input` field.\nThis is particularly useful in forms.",
+      "required": false
+    },
+    "onChange": {
+      "type": "(value: number) => void",
+      "description": "Function called whenever the slider value changes.",
+      "required": false
+    },
+    "onChangeEnd": {
+      "type": "(value: number) => void",
+      "description": "Function called when the user is done selecting a new value.",
+      "required": false
+    },
+    "onChangeStart": {
+      "type": "(value: number) => void",
+      "description": "Function called when the user starts selecting a new value.",
+      "required": false
+    },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\"",
+      "defaultValue": "\"horizontal\"",
+      "description": "The orientation of the slider.",
+      "required": false
+    },
+    "overlayProps": {
+      "type": "HueSliderOverlayProps",
+      "description": "Props for the overlay element.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be required.",
+      "required": false
+    },
+    "shape": {
+      "type": "\"circle\" | \"rounded\" | \"square\"",
+      "defaultValue": "\"circle\"",
+      "description": "The shape of the thumb.",
+      "required": false
+    },
+    "step": {
+      "type": "number",
+      "defaultValue": "1",
+      "description": "The step in which increments or decrements have to be made.",
+      "required": false
+    },
+    "thumbProps": {
+      "type": "HueSliderThumbProps",
+      "description": "Props for the thumb element.",
+      "required": false
+    },
+    "thumbRounded": {
+      "type": "\"-moz-initial\" | \"2xl\" | \"2xs\" | \"3xl\" | \"4xl\" | \"full\" | \"inherit\" | \"initial\" | \"l1\" | \"l2\" ...",
+      "description": "The rounded of the thumb.",
+      "required": false
+    },
+    "thumbSize": {
+      "type": "\"-moz-fit-content\" | \"-moz-initial\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | \"-webkit-max-content\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" ...",
+      "description": "The size of the thumb.",
+      "required": false
+    },
+    "thumbStroke": {
+      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "description": "The stroke color of the thumb.",
+      "required": false
+    },
+    "trackProps": {
+      "type": "HueSliderTrackProps",
+      "description": "Props for the track element.",
+      "required": false
+    },
+    "trackRounded": {
+      "type": "\"-moz-initial\" | \"2xl\" | \"2xs\" | \"3xl\" | \"4xl\" | \"full\" | \"inherit\" | \"initial\" | \"l1\" | \"l2\" ...",
+      "description": "The rounded of the track.",
+      "required": false
+    },
+    "trackSize": {
+      "type": "\"-moz-fit-content\" | \"-moz-initial\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | \"-webkit-max-content\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" ...",
+      "description": "The size of the track.",
+      "required": false
+    },
+    "value": {
+      "type": "number",
+      "description": "The value of the slider.",
+      "required": false
+    }
+  },
+  "ColorSelectorRoot": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+      "defaultValue": "\"md\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "alphaSliderProps": {
+      "type": "ColorSelectorAlphaSliderProps",
+      "description": "Props for the alpha slider.",
+      "required": false
+    },
+    "colorSwatches": {
+      "type": "string[]",
+      "description": "An array of colors in one of the supported formats.\nUsed to render swatches list below the color selector.",
+      "required": false
+    },
+    "colorSwatchGroupColumns": {
+      "type": "number",
+      "defaultValue": "8",
+      "description": "The number of columns in the color swatch group.",
+      "required": false
+    },
+    "colorSwatchGroupLabel": {
+      "type": "ReactNode",
+      "description": "The label of the color swatch group.",
+      "required": false
+    },
+    "colorSwatchGroupLabelProps": {
+      "type": "ColorSelectorColorSwatchGroupLabelProps",
+      "description": "Props for the color swatch group label.",
+      "required": false
+    },
+    "colorSwatchGroupProps": {
+      "type": "ColorSelectorColorSwatchGroupProps",
+      "description": "Props for the color swatch group.",
+      "required": false
+    },
+    "colorSwatchItemProps": {
+      "type": "Omit<ColorSelectorColorSwatchItemProps, \"value\">",
+      "description": "Props for the color swatch item.",
+      "required": false
+    },
+    "defaultValue": {
+      "type": "string",
+      "defaultValue": "fallbackValue",
+      "description": "The initial value of the color selector.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the color selector will be disabled.",
+      "required": false
+    },
+    "fallbackValue": {
+      "type": "string",
+      "defaultValue": "\"#FFFFFF\"",
+      "description": "The fallback value of the color selector.",
+      "required": false
+    },
+    "format": {
+      "type": "ColorFormat",
+      "defaultValue": "\"hex\"",
+      "description": "The format of the color selector.\nAutomatically determines the format of `value` or `defaultValue`.",
+      "required": false
+    },
+    "hueSliderProps": {
+      "type": "ColorSelectorHueSliderProps",
+      "description": "Props for the hue slider.",
+      "required": false
+    },
+    "onChange": {
+      "type": "(value: string) => void",
+      "description": "The callback invoked when the value changes.",
+      "required": false
+    },
+    "onChangeEnd": {
+      "type": "(value: string) => void",
+      "description": "The callback invoked when the value changes ends.",
+      "required": false
+    },
+    "onChangeStart": {
+      "type": "(value: string) => void",
+      "description": "The callback invoked when the value changes starts.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the color selector will be read only.",
+      "required": false
+    },
+    "saturationSliderProps": {
+      "type": "ColorSelectorSaturationSliderProps",
+      "description": "Props for the saturation slider.",
+      "required": false
+    },
+    "shape": {
+      "type": "\"circle\" | \"rounded\" | \"square\"",
+      "defaultValue": "\"circle\"",
+      "description": "The shape of the thumb and color swatch.",
+      "required": false
+    },
+    "value": {
+      "type": "string",
+      "description": "The value of the color selector.",
+      "required": false
+    },
+    "withAlpha": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the alpha slider will be displayed.",
+      "required": false
+    }
+  },
+  "ColorSelectorSaturationSlider": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "defaultValue": {
+      "type": "[number, number, number]",
+      "defaultValue": "[0, 0, 1]",
+      "description": "The initial value of the saturation slider.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be disabled.",
+      "required": false
+    },
+    "getAriaValueText": {
+      "type": "(value: [number, number, number]) => string | undefined",
+      "description": "This is used to format the value so that screen readers\ncan speak out a more human-friendly value.\n\nIt is used to set the `aria-valuetext` property of the input.",
+      "required": false
+    },
+    "id": {
+      "type": "string",
+      "description": "The base `id` to use for the slider.",
+      "required": false
+    },
+    "inputProps": {
+      "type": "HTMLStyledProps<\"input\">",
+      "description": "Props for the input element.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be invalid.",
+      "required": false
+    },
+    "name": {
+      "type": "string",
+      "description": "The name attribute of the hidden `input` field.\nThis is particularly useful in forms.",
+      "required": false
+    },
+    "onChange": {
+      "type": "(value: [number, number, number]) => void",
+      "description": "Function called whenever the saturation slider value changes.",
+      "required": false
+    },
+    "onChangeEnd": {
+      "type": "(value: [number, number, number]) => void",
+      "description": "Function called when the user is done selecting a new value.",
+      "required": false
+    },
+    "onChangeStart": {
+      "type": "(value: [number, number, number]) => void",
+      "description": "Function called when the user starts selecting a new value.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be required.",
+      "required": false
+    },
+    "shape": {
+      "type": "\"circle\" | \"rounded\" | \"square\"",
+      "defaultValue": "\"circle\"",
+      "description": "The shape of the thumb.",
+      "required": false
+    },
+    "step": {
+      "type": "number",
+      "defaultValue": "0.01",
+      "description": "The step in which increments or decrements have to be made.",
+      "required": false
+    },
+    "thumbProps": {
+      "type": "SaturationSliderThumbProps",
+      "description": "Props for the thumb element.",
+      "required": false
+    },
+    "trackProps": {
+      "type": "SaturationSliderTrackProps",
+      "description": "Props for the track element.",
+      "required": false
+    },
+    "value": {
+      "type": "[number, number, number]",
+      "description": "The value of the saturation slider.",
+      "required": false
+    }
+  }
+}

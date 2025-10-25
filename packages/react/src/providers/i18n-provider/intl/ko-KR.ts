@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "닫기",
   },
+  colorPicker: {
+    "Pick a color": "색상 선택",
+  },
+  colorSelector: {
+    "Pick a color": "색상 선택",
+  },
   datePicker: {
     "Clear value": "값 지우기",
   },

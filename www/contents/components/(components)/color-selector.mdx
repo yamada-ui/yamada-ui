@@ -1,0 +1,169 @@
+---
+title: ColorSelector
+description: "`ColorSelector` is a component used by the user to select a color."
+storybook: components-colorselector--basic
+source: components/color-selector
+---
+
+```tsx preview
+<ColorSelector.Root maxW="md" />
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { ColorPicker } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { ColorPicker } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { ColorPicker } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<ColorSelector.Root>
+  <ColorSelector.SaturationSlider />
+  <ColorSelector.HueSlider />
+  <ColorSelector.AlphaSlider />
+  <ColorSelector.ColorSwatchGroupLabel />
+  <ColorSelector.ColorSwatchGroup>
+    <ColorSelector.ColorSwatchItem />
+  </ColorSelector.ColorSwatchGroup>
+</ColorSelector.Root>
+```
+
+### Change Size
+
+```tsx preview
+<VStack>
+  <For each={["sm", "md", "lg"]}>
+    {(size, index) => <ColorSelector.Root maxW="md" key={index} size={size} />}
+  </For>
+</VStack>
+```
+
+### Change Default Value
+
+To change the default value, set `defaultValue` to a value.
+
+```tsx preview
+<ColorSelector.Root defaultValue="#775999" maxW="md" />
+```
+
+### Change Alpha Value
+
+To change the alpha value, set `defaultValue` to a value containing the alpha value, or set `format` to `"hexa"` or `"hsla"` etc.
+
+```tsx preview
+<ColorSelector.Root defaultValue="#775999A0" maxW="md" />
+```
+
+### Change Color Swatches
+
+To change the color swatches, set `colorSwatches` to an array.
+
+```tsx preview
+<ColorSelector.Root
+  colorSwatches={[
+    "hsl(0, 100%, 50%)",
+    "hsl(45, 100%, 50%)",
+    "hsl(90, 100%, 50%)",
+    "hsl(135, 100%, 50%)",
+    "hsl(180, 100%, 50%)",
+    "hsl(225, 100%, 50%)",
+    "hsl(270, 100%, 50%)",
+    "hsl(315, 100%, 50%)",
+  ]}
+  colorSwatchGroupLabel="Pick a color"
+  maxW="md"
+/>
+```
+
+### Change Color Swatch Group Columns
+
+To change the number of columns in the color swatch group, set `colorSwatchGroupColumns` to a number.
+
+```tsx preview
+<ColorSelector.Root
+  colorSwatches={[
+    "hsl(0, 100%, 50%)",
+    "hsl(36, 100%, 50%)",
+    "hsl(72, 100%, 50%)",
+    "hsl(108, 100%, 50%)",
+    "hsl(144, 100%, 50%)",
+    "hsl(180, 100%, 50%)",
+    "hsl(216, 100%, 50%)",
+    "hsl(252, 100%, 50%)",
+    "hsl(288, 100%, 50%)",
+    "hsl(324, 100%, 50%)",
+  ]}
+  colorSwatchGroupColumns={10}
+  colorSwatchGroupLabel="Pick a color"
+  maxW="md"
+/>
+```
+
+### Change Shape
+
+```tsx preview
+<VStack>
+  <For each={["rounded", "circle", "square"]}>
+    {(shape, index) => (
+      <ColorSelector.Root key={index} format="hexa" maxW="md" shape={shape} />
+    )}
+  </For>
+</VStack>
+```
+
+### Make Disabled
+
+```tsx preview
+<ColorSelector.Root disabled maxW="md" />
+```
+
+### Make Read Only
+
+```tsx preview
+<ColorSelector.Root maxW="md" readOnly />
+```
+
+### Customize Component
+
+```tsx preview functional client
+const [value, setValue] = useState("#FF0000FF")
+
+return (
+  <Popover.Root placement="end-start">
+    <Popover.Trigger>
+      <Center rounded="full" w="fit-content">
+        <ColorSwatch color={value} variant="circle" />
+      </Center>
+    </Popover.Trigger>
+
+    <Popover.Content w="xs" p="1">
+      <Popover.Body>
+        <ColorSelector.Root value={value} onChange={setValue} />
+      </Popover.Body>
+    </Popover.Content>
+  </Popover.Root>
+)
+```
+
+### Control
+
+```tsx preview functional client
+const [value, setValue] = useState("#FF0000A0")
+
+return <ColorSelector.Root maxW="md" value={value} onChange={setValue} />
+```
+
+## Props
+
+<PropsTable name="color-selector" />

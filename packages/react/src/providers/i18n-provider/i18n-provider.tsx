@@ -24,7 +24,6 @@ import {
   isString,
   isUndefined,
   noop,
-  useSsr,
   useUpdateEffect,
 } from "../../utils"
 import INTL from "./intl"
@@ -122,7 +121,6 @@ export const I18nProvider: FC<I18nProviderProps> = ({
   intlMessageFormatOptions,
   locale: forcedLocale,
 }) => {
-  const ssr = useSsr()
   const [language, setLanguage] = useState(getLanguage(forcedLocale, forcedDir))
   const controlled = !isUndefined(forcedLocale)
   const { locale } = language
@@ -201,10 +199,8 @@ export const I18nProvider: FC<I18nProviderProps> = ({
   const value = useMemo(() => {
     const rest = { changeLanguage, getTranslation, t: getTranslation() }
 
-    if (ssr) return { ...DEFAULT_LANGUAGE, ...rest }
-
     return { ...language, ...rest }
-  }, [changeLanguage, getTranslation, ssr, language])
+  }, [changeLanguage, getTranslation, language])
 
   useEffect(() => {
     if (controlled) return

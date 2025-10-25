@@ -189,6 +189,12 @@ export const sliderStyle = defineComponentSlotStyle({
   },
 
   sizes: {
+    xs: {
+      root: {
+        "--thumb-size": "sizes.3",
+        "--track-size": "sizes.1",
+      },
+    },
     sm: {
       root: {
         "--thumb-size": "sizes.4",
@@ -205,6 +211,12 @@ export const sliderStyle = defineComponentSlotStyle({
       root: {
         "--thumb-size": "sizes.6",
         "--track-size": "sizes.2.5",
+      },
+    },
+    xl: {
+      root: {
+        "--thumb-size": "sizes.7",
+        "--track-size": "sizes.3",
       },
     },
   },

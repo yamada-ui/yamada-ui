@@ -645,6 +645,12 @@
               "title": "ZStack",
               "segment": "z-stack",
               "pathname": "/docs/components/z-stack"
+            },
+            {
+              "title": "ActionBar",
+              "segment": "chat",
+              "pathname": "/docs/components/chat",
+              "status": "planned"
             }
           ]
         },

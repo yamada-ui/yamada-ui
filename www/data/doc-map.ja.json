@@ -645,6 +645,12 @@
               "title": "ZStack",
               "segment": "z-stack",
               "pathname": "/docs/components/z-stack"
+            },
+            {
+              "title": "ActionBar",
+              "segment": "qr-code",
+              "pathname": "/docs/components/qr-code",
+              "status": "planned"
             }
           ]
         },

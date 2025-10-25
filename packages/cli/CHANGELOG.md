@@ -1,5 +1,14 @@
 # @yamada-ui/cli
 
+## 2.0.4
+
+### Patch Changes
+
+- [#5420](https://github.com/yamada-ui/yamada-ui/pull/5420) [`c69dc34`](https://github.com/yamada-ui/yamada-ui/commit/c69dc34a74cea99114826edaea50f651bdb24f40) Thanks [@bmthd](https://github.com/bmthd)! - Fix incorrect `devDependencies` installation command for `pnpm` in `packageAddArgs`.
+
+- Updated dependencies [[`db5c713`](https://github.com/yamada-ui/yamada-ui/commit/db5c713c8c4df48257349d32d605e44ffb959d23)]:
+  - @yamada-ui/utils@2.0.3
+
 ## 2.0.3
 
 ### Patch Changes

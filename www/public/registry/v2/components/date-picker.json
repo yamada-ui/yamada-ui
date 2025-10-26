@@ -16,6 +16,11 @@
     "hooks": ["use-field-sizing", "use-combobox", "use-controllable-state"],
     "providers": ["i18n-provider"]
   },
+  "dependents": {
+    "components": ["color-picker"],
+    "hooks": [],
+    "providers": []
+  },
   "section": "components",
   "sources": [
     {

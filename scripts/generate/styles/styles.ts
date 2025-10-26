@@ -165,9 +165,9 @@ export function generateStyles(
   return [
     `import type * as CSS from "csstype"`,
     `import type { AnyString } from "../../utils"`,
-    `import type { ColorScheme, ThemeTokens } from "../system"`,
+    `import type { ColorScheme } from "../system"`,
     `import type { StyleConfigs } from "./config"`,
-    `import type { CSSObject, StyleValueWithCondition } from "./index.types"`,
+    `import type { CSSContainerObject, CSSMediaObject, CSSObject, StyleValueWithCondition } from "./index.types"`,
     `import { transforms } from "./config"`,
     `import { pipe } from "./utils"`,
     ``,

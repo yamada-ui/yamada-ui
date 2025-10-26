@@ -6,7 +6,7 @@ import type { UseComboboxProps } from "../../hooks/use-combobox"
 import type { ColorFormat } from "../../utils"
 import type { UseColorSelectorProps } from "../color-selector"
 import type { FieldProps } from "../field"
-import { useCallback, useRef } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import { useCombobox } from "../../hooks/use-combobox"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useEyeDropper } from "../../hooks/use-eye-dropper"
@@ -16,6 +16,7 @@ import {
   calcFormat,
   contains,
   convertColor,
+  focusTransfer,
   handlerAll,
   mergeRefs,
   runIfFn,
@@ -155,6 +156,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     openOnSpace: !allowInput,
     placement: "end-start",
     readOnly,
+    transferFocus: false,
     ...ariaProps,
     ...dataProps,
     ...eventProps,
@@ -281,6 +283,15 @@ export const useColorPicker = (props: UseColorPickerProps) => {
 
     if (result?.sRGBHex) setValue(result.sRGBHex)
   }, [interactive, onOpenEyeDropper, setValue])
+
+  useEffect(() => {
+    if (!open) return
+
+    return focusTransfer(
+      contentRef.current,
+      allowInput ? inputRef.current : fieldRef.current,
+    )
+  }, [allowInput, open])
 
   const getRootProps: PropGetter = useCallback(
     (props) => ({

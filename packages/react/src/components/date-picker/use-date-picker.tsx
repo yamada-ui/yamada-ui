@@ -21,6 +21,7 @@ import {
   cloneElement,
   isValidElement,
   useCallback,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -33,6 +34,7 @@ import {
   cast,
   contains,
   dataAttr,
+  focusTransfer,
   handlerAll,
   isArray,
   isComposing,
@@ -381,6 +383,7 @@ export const useDatePicker = <
     openOnSpace: !allowInput,
     placement: "end-start",
     readOnly,
+    transferFocus: false,
     ...ariaProps,
     ...dataProps,
     ...eventProps,
@@ -766,6 +769,15 @@ export const useDatePicker = <
       }
     }
   }, [allowInput, focusOnClear, interactive, range, setInputValue, setValue])
+
+  useEffect(() => {
+    if (!open) return
+
+    return focusTransfer(
+      contentRef.current,
+      allowInput ? startInputRef.current : fieldRef.current,
+    )
+  }, [allowInput, open])
 
   useUpdateEffect(() => {
     setMonth((prev) => getAdjustedMonth(value, prev))

@@ -15,6 +15,7 @@
   "dependents": {
     "components": [
       "autocomplete",
+      "color-picker",
       "date-picker",
       "menu",
       "modal",

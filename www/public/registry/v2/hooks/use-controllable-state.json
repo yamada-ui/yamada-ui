@@ -14,6 +14,8 @@
       "calendar",
       "carousel",
       "checkbox",
+      "color-picker",
+      "color-selector",
       "date-picker",
       "editable",
       "file-input",

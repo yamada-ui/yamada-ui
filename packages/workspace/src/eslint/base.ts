@@ -74,6 +74,7 @@ export const baseConfigArray = [
       "**/dist/**",
       "**/bin/**",
       "**/coverage/**",
+      "!scripts/issue/coverage/**",
       "**/storybook-static/**",
       "pnpm-lock.yaml",
       "next-env.d.ts",

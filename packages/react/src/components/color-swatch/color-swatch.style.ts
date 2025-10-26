@@ -19,32 +19,34 @@ export const colorSwatchStyle = defineComponentSlotStyle({
       },
       "--checkers-bg": ["colors.whiteAlpha.500", "colors.blackAlpha.500"],
       "--checkers-fg": ["colors.blackAlpha.300", "colors.whiteAlpha.300"],
+      aspectRatio: "1",
       overflow: "hidden",
       position: "relative",
+      w: "{width}",
     },
   },
 
   sizes: {
     "2xs": {
-      root: { boxSize: "6" },
+      root: { "--width": "sizes.6" },
     },
     xs: {
-      root: { boxSize: "8" },
+      root: { "--width": "sizes.8" },
     },
     sm: {
-      root: { boxSize: "9" },
+      root: { "--width": "sizes.9" },
     },
     md: {
-      root: { boxSize: "10" },
+      root: { "--width": "sizes.10" },
     },
     lg: {
-      root: { boxSize: "11" },
+      root: { "--width": "sizes.11" },
     },
     xl: {
-      root: { boxSize: "12" },
+      root: { "--width": "sizes.12" },
     },
     "2xl": {
-      root: { boxSize: "14" },
+      root: { "--width": "sizes.14" },
     },
   },
 

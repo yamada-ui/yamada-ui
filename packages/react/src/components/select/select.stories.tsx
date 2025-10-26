@@ -862,7 +862,6 @@ export const ReactHookForm: Story = () => {
     control,
     formState: { errors },
     handleSubmit,
-    watch,
   } = useForm<Data>()
   const items = useMemo<Select.Item[]>(
     () => [
@@ -877,8 +876,6 @@ export const ReactHookForm: Story = () => {
   )
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
-
-  console.log("watch:", watch())
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
@@ -923,7 +920,6 @@ export const ReactHookFormDefaultValue: Story = () => {
     control,
     formState: { errors },
     handleSubmit,
-    watch,
   } = useForm<Data>({ defaultValues })
   const items = useMemo<Select.Item[]>(
     () => [
@@ -938,8 +934,6 @@ export const ReactHookFormDefaultValue: Story = () => {
   )
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
-
-  console.log("watch:", watch())
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>

@@ -1,5 +1,35 @@
 # @yamada-ui/react
 
+## 2.0.4
+
+### Patch Changes
+
+- [#5430](https://github.com/yamada-ui/yamada-ui/pull/5430) [`63b8cce`](https://github.com/yamada-ui/yamada-ui/commit/63b8cce7b303d58c7c7888aa655d34eddee47980) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the scroll position behaved incorrectly when using `reverse` with `InfiniteScrollArea` and `useInfiniteScroll`.
+
+- [#5313](https://github.com/yamada-ui/yamada-ui/pull/5313) [`db5c713`](https://github.com/yamada-ui/yamada-ui/commit/db5c713c8c4df48257349d32d605e44ffb959d23) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `ColorPicker` and `ColorSelector` components.
+
+- [#5427](https://github.com/yamada-ui/yamada-ui/pull/5427) [`6cc7a8a`](https://github.com/yamada-ui/yamada-ui/commit/6cc7a8aee4f0a19efeb94c2bcbd21dad4f9452e9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where keyboard interactions did not work when displaying notifications using `useNotice`.
+
+- [#5313](https://github.com/yamada-ui/yamada-ui/pull/5313) [`db5c713`](https://github.com/yamada-ui/yamada-ui/commit/db5c713c8c4df48257349d32d605e44ffb959d23) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `"xs"` and `"xl"` size variants to `Slider`.
+
+- Updated dependencies [[`db5c713`](https://github.com/yamada-ui/yamada-ui/commit/db5c713c8c4df48257349d32d605e44ffb959d23)]:
+  - @yamada-ui/utils@2.0.3
+
+## 2.0.3
+
+### Patch Changes
+
+- [#5302](https://github.com/yamada-ui/yamada-ui/pull/5302) [`1938f0f`](https://github.com/yamada-ui/yamada-ui/commit/1938f0ffa86bbd750f3ec0acba520939a22bbc4c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed the type definitions for `DatePickerProps` and `getCalendarProps` in `useDatePicker`.
+
+- [#5415](https://github.com/yamada-ui/yamada-ui/pull/5415) [`e75d02b`](https://github.com/yamada-ui/yamada-ui/commit/e75d02b33e0be9b5ca47ff34c8f97d86472d5960) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the type definitions of `@yamada-ui/utils` were not exported.
+
+- [#5417](https://github.com/yamada-ui/yamada-ui/pull/5417) [`1c2ea1c`](https://github.com/yamada-ui/yamada-ui/commit/1c2ea1c87f5f29cf81101ed873e86cd873d64f39) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the `locale` and `dir` set on `UIProvider` or `I18nProvider` were not correctly reflected during server-side rendering.
+
+- [#5317](https://github.com/yamada-ui/yamada-ui/pull/5317) [`7f3683f`](https://github.com/yamada-ui/yamada-ui/commit/7f3683ff56e794ac4862aa7ef898f80082db33b5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the background color of `NativeSelect` options did not reflect dark mode on Windows.
+
+- Updated dependencies [[`e75d02b`](https://github.com/yamada-ui/yamada-ui/commit/e75d02b33e0be9b5ca47ff34c8f97d86472d5960)]:
+  - @yamada-ui/utils@2.0.2
+
 ## 2.0.2
 
 ### Patch Changes

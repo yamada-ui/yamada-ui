@@ -7,7 +7,7 @@
     "providers": []
   },
   "dependents": {
-    "components": ["date-picker", "select"],
+    "components": ["color-picker", "color-selector", "date-picker", "select"],
     "hooks": [],
     "providers": []
   },

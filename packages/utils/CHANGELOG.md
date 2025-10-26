@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 2.0.3
+
+### Patch Changes
+
+- [#5313](https://github.com/yamada-ui/yamada-ui/pull/5313) [`db5c713`](https://github.com/yamada-ui/yamada-ui/commit/db5c713c8c4df48257349d32d605e44ffb959d23) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enhanced color calculation functions to allow for more type flexibility.
+
 ## 2.0.2
 
 ### Patch Changes

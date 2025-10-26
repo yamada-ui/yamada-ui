@@ -28,7 +28,12 @@ const meta: Meta<typeof DatePicker> = {
 export default meta
 
 export const Basic: Story = () => {
-  return <DatePicker />
+  return (
+    <>
+      <DatePicker />
+      <DatePicker />
+    </>
+  )
 }
 
 export const Variant: Story = () => {

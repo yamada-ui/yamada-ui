@@ -6,10 +6,10 @@ import type {
   HTMLProps,
   HTMLStyledProps,
   ThemeProps,
-  WithoutThemeProps,
 } from "../../core"
 import type { ColorSwatchProps } from "../color-swatch"
 import type { UseInputBorderProps } from "../input"
+import type { PopupAnimationProps } from "../popover"
 import type { ColorPickerStyle } from "./color-picker.style"
 import type {
   UseColorPickerProps,
@@ -23,7 +23,7 @@ import { ColorSwatch } from "../color-swatch"
 import { useGroupItemProps } from "../group"
 import { PipetteIcon } from "../icon"
 import { InputGroup, useInputBorder, useInputPropsContext } from "../input"
-import { Popover, usePopoverProps } from "../popover"
+import { Popover } from "../popover"
 import { colorPickerStyle } from "./color-picker.style"
 import { useColorPicker } from "./use-color-picker"
 
@@ -37,16 +37,7 @@ interface ComponentContext
 export interface ColorPickerProps
   extends Omit<HTMLStyledProps, "defaultValue" | "offset" | "onChange" | "ref">,
     UseColorPickerProps,
-    Omit<
-      WithoutThemeProps<Popover.RootProps, ColorPickerStyle>,
-      | "autoFocus"
-      | "children"
-      | "initialFocusRef"
-      | "modal"
-      | "transform"
-      | "updateRef"
-      | "withCloseButton"
-    >,
+    PopupAnimationProps,
     Pick<
       ColorSelector.RootProps,
       | "alphaSliderProps"
@@ -142,17 +133,18 @@ export { ColorPickerPropsContext, useColorPickerPropsContext }
  */
 export const ColorPicker = withProvider<"input", ColorPickerProps, "size">(
   (props) => {
-    const [groupItemProps, mergedProps] = useGroupItemProps(props)
     const [
-      popoverProps,
+      groupItemProps,
       {
         className,
         css,
         colorScheme,
         size,
+        animationScheme = "block-start",
         colorSwatches,
         colorSwatchGroupColumns,
         colorSwatchGroupLabel,
+        duration,
         errorBorderColor,
         focusBorderColor,
         withColorSwatch = true,
@@ -175,17 +167,8 @@ export const ColorPicker = withProvider<"input", ColorPickerProps, "size">(
         startElementProps,
         ...rest
       },
-    ] = usePopoverProps(mergedProps, [
-      "disabled",
-      "open",
-      "defaultOpen",
-      "onOpen",
-      "onClose",
-      "openOnClick",
-    ])
+    ] = useGroupItemProps(props)
     const {
-      interactive,
-      open,
       value,
       getContentProps,
       getEyeDropperProps,
@@ -193,22 +176,15 @@ export const ColorPicker = withProvider<"input", ColorPickerProps, "size">(
       getInputProps,
       getRootProps,
       getSelectorProps,
-      onClose,
-      onOpen,
+      popoverProps,
     } = useColorPicker(rest)
     const mergedPopoverProps = useMemo<Popover.RootProps>(
       () => ({
-        animationScheme: "block-start",
-        autoFocus: false,
-        matchWidth: true,
-        placement: "end-start",
+        animationScheme,
+        duration,
         ...popoverProps,
-        disabled: !interactive,
-        open,
-        onClose,
-        onOpen,
       }),
-      [interactive, onClose, onOpen, open, popoverProps],
+      [animationScheme, duration, popoverProps],
     )
     const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
     const componentContext = useMemo(

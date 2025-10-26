@@ -6,7 +6,7 @@ import type { UseComboboxProps } from "../../hooks/use-combobox"
 import type { ColorFormat } from "../../utils"
 import type { UseColorSelectorProps } from "../color-selector"
 import type { FieldProps } from "../field"
-import { useCallback, useRef } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import { useCombobox } from "../../hooks/use-combobox"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useEyeDropper } from "../../hooks/use-eye-dropper"
@@ -16,6 +16,7 @@ import {
   calcFormat,
   contains,
   convertColor,
+  focusTransfer,
   handlerAll,
   mergeRefs,
   runIfFn,
@@ -125,6 +126,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       format: formatProp,
       formatInput,
       openOnChange = true,
+      openOnClick = true,
       openOnFocus = true,
       pattern,
       placeholder,
@@ -144,13 +146,17 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     open,
     getContentProps: getComboboxContentProps,
     getTriggerProps,
+    popoverProps,
     onClose,
     onOpen,
   } = useCombobox({
     disabled,
+    openOnClick: false,
     openOnEnter: !allowInput,
     openOnSpace: !allowInput,
+    placement: "end-start",
     readOnly,
+    transferFocus: false,
     ...ariaProps,
     ...dataProps,
     ...eventProps,
@@ -159,10 +165,10 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   const format =
     formatProp ?? calcFormat(valueProp ?? defaultValue ?? fallbackValue)
   const alpha = format.endsWith("a")
-  const rootRef = useRef<HTMLDivElement>(null)
   const fieldRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const focusByClickRef = useRef<boolean>(false)
   const [value, setValue] = useControllableState({
     defaultValue,
     value: valueProp,
@@ -172,13 +178,17 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     useEyeDropper()
 
   const onClick = useCallback(() => {
-    if (!interactive || !allowInput) return
+    if (!interactive) return
 
-    inputRef.current?.focus()
-  }, [allowInput, interactive])
+    focusByClickRef.current = true
+
+    if (allowInput) inputRef.current?.focus()
+
+    if (openOnClick) onOpen()
+  }, [allowInput, interactive, onOpen, openOnClick])
 
   const onMouseDown = useCallback(
-    (ev: MouseEvent<HTMLInputElement>) => {
+    (ev: MouseEvent<HTMLDivElement | HTMLInputElement>) => {
       if (!openOnFocus) return
 
       ev.preventDefault()
@@ -187,12 +197,22 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     [openOnFocus],
   )
 
-  const onFocus = useCallback(
+  const onFieldFocus = useCallback(() => {
+    if (allowInput) return
+
+    if (openOnFocus) onOpen()
+
+    focusByClickRef.current = false
+  }, [allowInput, onOpen, openOnFocus])
+
+  const onInputFocus = useCallback(
     (ev: FocusEvent<HTMLInputElement>) => {
       ev.preventDefault()
       ev.stopPropagation()
 
-      if (openOnFocus) onOpen()
+      if (openOnFocus && !focusByClickRef.current) onOpen()
+
+      focusByClickRef.current = false
     },
     [onOpen, openOnFocus],
   )
@@ -200,7 +220,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   const onBlur = useCallback(
     (ev: FocusEvent<HTMLInputElement>) => {
       if (
-        contains(rootRef.current, ev.relatedTarget) ||
+        contains(fieldRef.current, ev.relatedTarget) ||
         contains(contentRef.current, ev.relatedTarget)
       ) {
         ev.preventDefault()
@@ -264,9 +284,17 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     if (result?.sRGBHex) setValue(result.sRGBHex)
   }, [interactive, onOpenEyeDropper, setValue])
 
+  useEffect(() => {
+    if (!open) return
+
+    return focusTransfer(
+      contentRef.current,
+      allowInput ? inputRef.current : fieldRef.current,
+    )
+  }, [allowInput, open])
+
   const getRootProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
-      ref: mergeRefs(ref, rootRef),
+    (props) => ({
       ...dataProps,
       ...props,
     }),
@@ -281,9 +309,11 @@ export const useColorPicker = (props: UseColorPickerProps) => {
         tabIndex: !allowInput ? 0 : -1,
         ...props,
         onClick: handlerAll(props.onClick, onClick),
+        onFocus: handlerAll(props.onFocus, onFieldFocus),
+        onMouseDown: handlerAll(props.onMouseDown, onMouseDown),
       }),
 
-    [allowInput, getTriggerProps, onClick],
+    [allowInput, getTriggerProps, onClick, onFieldFocus, onMouseDown],
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
@@ -306,7 +336,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       ...props,
       onBlur: handlerAll(props.onBlur, onBlur),
       onChange: handlerAll(props.onChange, onInputChange),
-      onFocus: handlerAll(props.onFocus, onFocus),
+      onFocus: handlerAll(props.onFocus, onInputFocus),
       onMouseDown: handlerAll(props.onMouseDown, onMouseDown),
     }),
     [
@@ -316,8 +346,8 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       id,
       name,
       onBlur,
-      onFocus,
       onInputChange,
+      onInputFocus,
       onMouseDown,
       placeholder,
       readOnly,
@@ -383,6 +413,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     getInputProps,
     getRootProps,
     getSelectorProps,
+    popoverProps,
     onClose,
     onOpen,
   }

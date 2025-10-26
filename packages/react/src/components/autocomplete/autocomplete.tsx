@@ -6,13 +6,13 @@ import type {
   HTMLProps,
   HTMLStyledProps,
   ThemeProps,
-  WithoutThemeProps,
 } from "../../core"
 import type {
   ComboboxItem,
   UseComboboxGroupProps,
 } from "../../hooks/use-combobox"
 import type { UseInputBorderProps } from "../input"
+import type { PopupAnimationProps } from "../popover"
 import type { AutocompleteStyle } from "./autocomplete.style"
 import type {
   UseAutocompleteOptionProps,
@@ -34,7 +34,7 @@ import { cast, isArray } from "../../utils"
 import { useGroupItemProps } from "../group"
 import { CheckIcon, ChevronDownIcon, MinusIcon, XIcon } from "../icon"
 import { InputGroup, useInputBorder, useInputPropsContext } from "../input"
-import { Popover, usePopoverProps } from "../popover"
+import { Popover } from "../popover"
 import { autocompleteStyle } from "./autocomplete.style"
 import {
   AutocompleteContext,
@@ -55,16 +55,7 @@ export interface AutocompleteRootProps<Multiple extends boolean = false>
       "defaultValue" | "filter" | "offset" | "onChange" | "ref" | "value"
     >,
     UseAutocompleteProps<Multiple>,
-    Omit<
-      WithoutThemeProps<Popover.RootProps, AutocompleteStyle>,
-      | "autoFocus"
-      | "children"
-      | "initialFocusRef"
-      | "modal"
-      | "transform"
-      | "updateRef"
-      | "withCloseButton"
-    >,
+    PopupAnimationProps,
     ThemeProps<AutocompleteStyle>,
     UseInputBorderProps {
   /**
@@ -143,16 +134,17 @@ export const AutocompleteRoot = withProvider(
   <Multiple extends boolean = false>(
     props: AutocompleteRootProps<Multiple>,
   ) => {
-    const [groupItemProps, mergedProps] = useGroupItemProps(props)
     const [
-      popoverProps,
+      groupItemProps,
       {
         className,
         css,
         colorScheme,
+        animationScheme = "block-start",
         children,
         clearable = true,
         clearIcon = <XIcon />,
+        duration,
         emptyIcon,
         errorBorderColor,
         focusBorderColor,
@@ -168,14 +160,7 @@ export const AutocompleteRoot = withProvider(
         rootProps,
         ...rest
       },
-    ] = usePopoverProps(mergedProps, [
-      "disabled",
-      "open",
-      "defaultOpen",
-      "onOpen",
-      "onClose",
-      "openOnClick",
-    ])
+    ] = useGroupItemProps(props)
     const items = useMemo<ComboboxItem[]>(() => {
       if (itemsProp) return itemsProp
 
@@ -188,10 +173,8 @@ export const AutocompleteRoot = withProvider(
     const {
       children: fieldChildren,
       descendants,
-      interactive,
       items: computedItems,
       max,
-      open,
       value,
       getClearIconProps,
       getContentProps,
@@ -200,23 +183,18 @@ export const AutocompleteRoot = withProvider(
       getInputProps,
       getRootProps,
       getSeparatorProps,
+      popoverProps,
       onActiveDescendant,
       onClose,
-      onOpen,
       onSelect,
     } = useAutocomplete({ items, ...rest })
     const mergedPopoverProps = useMemo<Popover.RootProps>(
       () => ({
-        animationScheme: "block-start",
-        autoFocus: false,
-        matchWidth: true,
+        animationScheme,
+        duration,
         ...popoverProps,
-        disabled: !interactive,
-        open,
-        onClose,
-        onOpen,
       }),
-      [interactive, onClose, onOpen, open, popoverProps],
+      [animationScheme, duration, popoverProps],
     )
     const computedChildren = useMemo(
       () =>

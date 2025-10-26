@@ -233,6 +233,7 @@ export const useDatePicker = <
       max,
       month: monthProp,
       openOnChange = true,
+      openOnClick = true,
       openOnFocus = true,
       parseDate,
       pattern,
@@ -268,11 +269,11 @@ export const useDatePicker = <
   }, [format])
   const [calendarProps, rest] = useCalendarProps<Multiple, Range>(computedProps)
   const { excludeDate } = calendarProps
-  const rootRef = useRef<HTMLDivElement>(null)
   const fieldRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const startInputRef = useRef<HTMLInputElement>(null)
   const endInputRef = useRef<HTMLInputElement>(null)
+  const focusByClickRef = useRef<boolean>(false)
   const [focused, setFocused] = useState(false)
   const [value, setValue] = useControllableState({
     defaultValue: defaultValue as MaybeDateValue<Multiple, Range>,
@@ -369,12 +370,16 @@ export const useDatePicker = <
     open,
     getContentProps: getComboboxContentProps,
     getTriggerProps,
+    popoverProps,
     onClose,
     onOpen,
   } = useCombobox({
     disabled,
+    matchWidth: false,
+    openOnClick: false,
     openOnEnter: !allowInput,
     openOnSpace: !allowInput,
+    placement: "end-start",
     readOnly,
     ...ariaProps,
     ...dataProps,
@@ -644,28 +649,34 @@ export const useDatePicker = <
 
   const onClick = useCallback(
     (ev: MouseEvent<HTMLDivElement>) => {
-      if (!interactive || !allowInput) return
+      if (!interactive) return
 
-      if (isObject(value) && !isArray(value) && !isDate(value)) {
-        if (contains(startInputRef.current, ev.target)) return
-        if (contains(endInputRef.current, ev.target)) return
+      focusByClickRef.current = true
 
-        const { end, start } = value
+      if (allowInput) {
+        if (isObject(value) && !isArray(value) && !isDate(value)) {
+          if (contains(startInputRef.current, ev.target)) return
+          if (contains(endInputRef.current, ev.target)) return
 
-        if ((!start && !end) || !!end) {
-          startInputRef.current?.focus()
+          const { end, start } = value
+
+          if ((!start && !end) || !!end) {
+            startInputRef.current?.focus()
+          } else {
+            endInputRef.current?.focus()
+          }
         } else {
-          endInputRef.current?.focus()
+          startInputRef.current?.focus()
         }
-      } else {
-        startInputRef.current?.focus()
       }
+
+      if (openOnClick) onOpen()
     },
-    [allowInput, interactive, value],
+    [allowInput, interactive, onOpen, openOnClick, value],
   )
 
   const onMouseDown = useCallback(
-    (ev: MouseEvent<HTMLInputElement>) => {
+    (ev: MouseEvent<HTMLDivElement | HTMLInputElement>) => {
       if (!openOnFocus) return
 
       ev.preventDefault()
@@ -674,14 +685,24 @@ export const useDatePicker = <
     [openOnFocus],
   )
 
-  const onFocus = useCallback(
+  const onFieldFocus = useCallback(() => {
+    if (allowInput) return
+
+    if (openOnFocus) onOpen()
+
+    focusByClickRef.current = false
+  }, [allowInput, onOpen, openOnFocus])
+
+  const onInputFocus = useCallback(
     (ev: FocusEvent<HTMLInputElement>) => {
       ev.preventDefault()
       ev.stopPropagation()
 
       setFocused(true)
 
-      if (openOnFocus) onOpen()
+      if (openOnFocus && !focusByClickRef.current) onOpen()
+
+      focusByClickRef.current = false
     },
     [onOpen, openOnFocus],
   )
@@ -691,7 +712,7 @@ export const useDatePicker = <
       setFocused(false)
 
       if (
-        contains(rootRef.current, ev.relatedTarget) ||
+        contains(fieldRef.current, ev.relatedTarget) ||
         contains(contentRef.current, ev.relatedTarget)
       ) {
         ev.preventDefault()
@@ -764,8 +785,7 @@ export const useDatePicker = <
   }, [valueProp])
 
   const getRootProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
-      ref: mergeRefs(ref, rootRef),
+    (props) => ({
       "data-range": dataAttr(range),
       ...dataProps,
       ...props,
@@ -781,9 +801,11 @@ export const useDatePicker = <
         tabIndex: !allowInput ? 0 : -1,
         ...props,
         onClick: handlerAll(props.onClick, onClick),
+        onFocus: handlerAll(props.onFocus, onFieldFocus),
+        onMouseDown: handlerAll(props.onMouseDown, onMouseDown),
       }),
 
-    [allowInput, getTriggerProps, onClick],
+    [allowInput, getTriggerProps, onClick, onFieldFocus, onMouseDown],
   )
 
   const getInputProps: PropGetter<"input", { align?: InputAlign }> =
@@ -803,7 +825,7 @@ export const useDatePicker = <
           ...props,
           onBlur: handlerAll(props.onBlur, onBlur),
           onChange: handlerAll(props.onChange, onInputChange),
-          onFocus: handlerAll(props.onFocus, onFocus),
+          onFocus: handlerAll(props.onFocus, onInputFocus),
           onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
           onMouseDown: handlerAll(props.onMouseDown, onMouseDown),
         }
@@ -865,7 +887,7 @@ export const useDatePicker = <
         max,
         name,
         onBlur,
-        onFocus,
+        onInputFocus,
         onInputChange,
         onKeyDown,
         onMouseDown,
@@ -965,6 +987,7 @@ export const useDatePicker = <
     getIconProps,
     getInputProps,
     getRootProps,
+    popoverProps,
     onChange,
     onClose,
     onInputChange,

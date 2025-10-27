@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 2.0.4
+
+### Patch Changes
+
+- [#5495](https://github.com/yamada-ui/yamada-ui/pull/5495) [`371fedb`](https://github.com/yamada-ui/yamada-ui/commit/371fedbc66a67ee69d2bcc1a51d2b94ebd26d0ab) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added fallback options to browser checks.
+
 ## 2.0.3
 
 ### Patch Changes

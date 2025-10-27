@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { useEffect, useMemo, useRef } from "react"
+import { useMemo, useRef } from "react"
 import { GripVerticalIcon } from "../icon"
 import { Resizable } from "./"
 
@@ -227,13 +227,6 @@ export const Refs: Story = () => {
   const groupRef = useRef<HTMLDivElement>(null)
   const itemRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    console.log("Root ref", rootRef)
-    console.log("Group ref", groupRef)
-    console.log("Item ref", itemRef)
-    console.log("Trigger ref", triggerRef)
-  }, [])
 
   return (
     <Resizable.Root

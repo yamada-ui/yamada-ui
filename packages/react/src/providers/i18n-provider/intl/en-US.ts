@@ -27,6 +27,12 @@ const data = {
   closeButton: {
     Close: "Close",
   },
+  colorPicker: {
+    "Pick a color": "Pick a color",
+  },
+  colorSelector: {
+    "Pick a color": "Pick a color",
+  },
   datePicker: {
     "Clear value": "Clear value",
   },

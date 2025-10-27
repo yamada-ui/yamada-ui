@@ -555,7 +555,6 @@ export const ReactHookForm: Story = () => {
     control,
     formState: { errors },
     handleSubmit,
-    watch,
   } = useForm<Data>()
   const items = useMemo<RadioCardGroup.ItemType[]>(
     () => [
@@ -582,8 +581,6 @@ export const ReactHookForm: Story = () => {
   )
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
-
-  console.log("watch:", watch())
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
@@ -624,7 +621,6 @@ export const ReactHookFormWithDefaultValue: Story = () => {
     control,
     formState: { errors },
     handleSubmit,
-    watch,
   } = useForm<Data>({ defaultValues })
   const items = useMemo<RadioCardGroup.ItemType[]>(
     () => [
@@ -651,8 +647,6 @@ export const ReactHookFormWithDefaultValue: Story = () => {
   )
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
-
-  console.log("watch:", watch())
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>

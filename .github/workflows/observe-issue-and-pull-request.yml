@@ -37,6 +37,8 @@ jobs:
           CODECOV_API_TOKEN: ${{ secrets.CODECOV_API_TOKEN }}
 
       - name: Create or update a11y issues
-        run: pnpm issue:a11y
+        run: |
+          pnpm react test:a11y
+          pnpm issue:a11y --no-report
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}

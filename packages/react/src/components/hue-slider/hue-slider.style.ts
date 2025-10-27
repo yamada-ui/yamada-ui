@@ -65,9 +65,13 @@ export const hueSliderStyle = defineComponentSlotStyle({
     },
   },
 
-  variants: {},
-
   sizes: {
+    xs: {
+      root: {
+        "--thumb-size": sliderStyle.sizes?.sm.root["--thumb-size"],
+        "--track-size": sliderStyle.sizes?.sm.root["--thumb-size"],
+      },
+    },
     sm: {
       root: {
         "--thumb-size": sliderStyle.sizes?.sm.root["--thumb-size"],
@@ -81,6 +85,12 @@ export const hueSliderStyle = defineComponentSlotStyle({
       },
     },
     lg: {
+      root: {
+        "--thumb-size": sliderStyle.sizes?.lg.root["--thumb-size"],
+        "--track-size": sliderStyle.sizes?.lg.root["--thumb-size"],
+      },
+    },
+    xl: {
       root: {
         "--thumb-size": sliderStyle.sizes?.lg.root["--thumb-size"],
         "--track-size": sliderStyle.sizes?.lg.root["--thumb-size"],

@@ -12,6 +12,7 @@ import type {
 import { useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { runIfFn } from "../../utils"
+import { resetFieldProps } from "../field"
 import { ChevronLeftIcon, ChevronRightIcon } from "../icon"
 import { Select } from "../select"
 import { calendarStyle } from "./calendar.style"
@@ -459,6 +460,7 @@ export const CalendarYearSelect = withContext<"div", CalendarYearSelectProps>(
           w: "{select-root-size}",
           ...rootProps,
         }}
+        {...resetFieldProps}
         {...getYearSelectProps(rest)}
       />
     )
@@ -489,6 +491,7 @@ export const CalendarMonthSelect = withContext<"div", CalendarMonthSelectProps>(
           w: "{select-root-size}",
           ...rootProps,
         }}
+        {...resetFieldProps}
         {...getMonthSelectProps(rest)}
       />
     )

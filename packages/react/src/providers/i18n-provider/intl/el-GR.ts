@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "Κλείσιμο",
   },
+  colorPicker: {
+    "Pick a color": "Επιλέξτε ένα χρώμα",
+  },
+  colorSelector: {
+    "Pick a color": "Επιλέξτε ένα χρώμα",
+  },
   datePicker: {
     "Clear value": "Καθαρισμός τιμής",
   },

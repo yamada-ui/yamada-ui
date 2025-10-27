@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "Bezárás",
   },
+  colorPicker: {
+    "Pick a color": "Válasszon színt",
+  },
+  colorSelector: {
+    "Pick a color": "Válasszon színt",
+  },
   datePicker: {
     "Clear value": "Érték törlése",
   },

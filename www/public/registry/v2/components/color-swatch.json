@@ -7,7 +7,7 @@
     "providers": []
   },
   "dependents": {
-    "components": ["alpha-slider"],
+    "components": ["alpha-slider", "color-picker", "color-selector"],
     "hooks": [],
     "providers": []
   },
@@ -19,7 +19,7 @@
     },
     {
       "name": "color-swatch.style.ts",
-      "content": "import { defineComponentSlotStyle } from \"@yamada-ui/react\"\n\nexport const colorSwatchStyle = defineComponentSlotStyle({\n  base: {\n    overlay: {\n      boxSize: \"full\",\n      inset: 0,\n      position: \"absolute\",\n    },\n    root: {\n      \"& > *\": {\n        alignItems: \"center\",\n        boxSize: \"full\",\n        display: \"flex\",\n        inset: 0,\n        justifyContent: \"center\",\n        overflow: \"hidden\",\n        position: \"absolute\",\n      },\n      \"--checkers-bg\": [\"colors.whiteAlpha.500\", \"colors.blackAlpha.500\"],\n      \"--checkers-fg\": [\"colors.blackAlpha.300\", \"colors.whiteAlpha.300\"],\n      overflow: \"hidden\",\n      position: \"relative\",\n    },\n  },\n\n  sizes: {\n    \"2xs\": {\n      root: { boxSize: \"6\" },\n    },\n    xs: {\n      root: { boxSize: \"8\" },\n    },\n    sm: {\n      root: { boxSize: \"9\" },\n    },\n    md: {\n      root: { boxSize: \"10\" },\n    },\n    lg: {\n      root: { boxSize: \"11\" },\n    },\n    xl: {\n      root: { boxSize: \"12\" },\n    },\n    \"2xl\": {\n      root: { boxSize: \"14\" },\n    },\n  },\n\n  variants: {\n    circle: {\n      root: { rounded: \"full\" },\n    },\n    plain: {\n      root: { rounded: \"l2\" },\n    },\n    square: {\n      root: { rounded: \"0\" },\n    },\n  },\n\n  defaultProps: {\n    size: \"xs\",\n    variant: \"plain\",\n  },\n})\n\nexport type ColorSwatchStyle = typeof colorSwatchStyle\n"
+      "content": "import { defineComponentSlotStyle } from \"@yamada-ui/react\"\n\nexport const colorSwatchStyle = defineComponentSlotStyle({\n  base: {\n    overlay: {\n      boxSize: \"full\",\n      inset: 0,\n      position: \"absolute\",\n    },\n    root: {\n      \"& > *\": {\n        alignItems: \"center\",\n        boxSize: \"full\",\n        display: \"flex\",\n        inset: 0,\n        justifyContent: \"center\",\n        overflow: \"hidden\",\n        position: \"absolute\",\n      },\n      \"--checkers-bg\": [\"colors.whiteAlpha.500\", \"colors.blackAlpha.500\"],\n      \"--checkers-fg\": [\"colors.blackAlpha.300\", \"colors.whiteAlpha.300\"],\n      aspectRatio: \"1\",\n      overflow: \"hidden\",\n      position: \"relative\",\n      w: \"{width}\",\n    },\n  },\n\n  sizes: {\n    \"2xs\": {\n      root: { \"--width\": \"sizes.6\" },\n    },\n    xs: {\n      root: { \"--width\": \"sizes.8\" },\n    },\n    sm: {\n      root: { \"--width\": \"sizes.9\" },\n    },\n    md: {\n      root: { \"--width\": \"sizes.10\" },\n    },\n    lg: {\n      root: { \"--width\": \"sizes.11\" },\n    },\n    xl: {\n      root: { \"--width\": \"sizes.12\" },\n    },\n    \"2xl\": {\n      root: { \"--width\": \"sizes.14\" },\n    },\n  },\n\n  variants: {\n    circle: {\n      root: { rounded: \"full\" },\n    },\n    plain: {\n      root: { rounded: \"l2\" },\n    },\n    square: {\n      root: { rounded: \"0\" },\n    },\n  },\n\n  defaultProps: {\n    size: \"xs\",\n    variant: \"plain\",\n  },\n})\n\nexport type ColorSwatchStyle = typeof colorSwatchStyle\n"
     },
     {
       "name": "color-swatch.tsx",

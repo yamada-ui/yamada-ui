@@ -45,7 +45,7 @@ import { Breadcrumb } from "@workspaces/ui"
 ### Use items
 
 ```tsx preview functional
-const items = useMemo<Breadcrumb.RootProps["items"]>(
+const items = useMemo<Breadcrumb.Item[]>(
   () => [
     {
       href: "/",
@@ -136,7 +136,7 @@ To use ellipsis, set `Breadcrumb.Ellipsis` at the position where you want to use
 Alternatively, you can use ellipsis by setting numerical values to `startBoundaries` and `endBoundaries`.
 
 ```tsx preview functional
-const items = useMemo<Breadcrumb.RootProps["items"]>(
+const items = useMemo<Breadcrumb.Item[]>(
   () => [
     {
       href: "/",
@@ -194,7 +194,7 @@ return <Breadcrumb.Root items={items} endBoundaries={1} startBoundaries={1} />
 ### Customize the Ellipsis
 
 ```tsx preview functional
-const items = useMemo<Breadcrumb.RootProps["items"]>(
+const items = useMemo<Breadcrumb.Item[]>(
   () => [
     {
       href: "/",

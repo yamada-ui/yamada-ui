@@ -24,7 +24,7 @@ import {
 interface ComponentContext
   extends Pick<TabsRootProps, "items" | "lazy" | "lazyBehavior"> {}
 
-interface TabsItem extends Omit<TabsTabProps, "index"> {
+export interface TabsItem extends Omit<TabsTabProps, "index"> {
   /**
    * The content for panel element.
    */

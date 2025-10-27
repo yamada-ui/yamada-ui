@@ -2,7 +2,7 @@ import { a11y, render, screen } from "#test"
 import { Button } from "../button"
 import { Menu } from "./"
 
-const items: Menu.ContentProps["items"] = [
+const items: Menu.Item[] = [
   { label: "Menu 1", value: "menu-1" },
   { label: "Menu 2", value: "menu-2" },
   { label: "Menu 3", value: "menu-3" },
@@ -18,7 +18,7 @@ const items: Menu.ContentProps["items"] = [
   },
 ]
 
-const itemsWithRadioGroup: Menu.ContentProps["items"] = [
+const itemsWithRadioGroup: Menu.Item[] = [
   {
     type: "radio",
     items: [
@@ -29,7 +29,7 @@ const itemsWithRadioGroup: Menu.ContentProps["items"] = [
   },
 ]
 
-const itemsWithCheckboxGroup: Menu.ContentProps["items"] = [
+const itemsWithCheckboxGroup: Menu.Item[] = [
   {
     type: "checkbox",
     items: [

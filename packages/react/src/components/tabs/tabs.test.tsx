@@ -2,7 +2,7 @@ import type { FC } from "react"
 import { a11y, render, screen } from "#test"
 import { Tabs } from "./"
 
-const items: Required<Tabs.RootProps>["items"] = [
+const items: Tabs.Item[] = [
   { panel: "This is home tab", tab: "Home" },
   { panel: "This is about tab", tab: "About" },
   { panel: "This is contact tab", tab: "Contact" },
@@ -55,7 +55,7 @@ describe("<Tabs />", () => {
   })
 
   test("should disable tab", async () => {
-    const items: Required<Tabs.RootProps>["items"] = [
+    const items: Tabs.Item[] = [
       {
         panel: "This is home tab",
         tab: "Home",

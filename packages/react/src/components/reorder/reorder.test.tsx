@@ -25,7 +25,7 @@ describe("<Reorder />", () => {
   })
 
   test("render items of props correctly", () => {
-    const items: Reorder.RootProps["items"] = [
+    const items: Reorder.Item[] = [
       { label: "Item 1", value: "Item 1" },
       { label: "Item 2", value: "Item 2" },
     ]
@@ -65,12 +65,12 @@ describe("<Reorder />", () => {
   })
 
   test("updates items correctly when props change", async () => {
-    const initialItems: Reorder.RootProps["items"] = [
+    const initialItems: Reorder.Item[] = [
       { label: "Item 1", value: "Item 1" },
       { label: "Item 2", value: "Item 2" },
     ]
 
-    const updatedItems: Reorder.RootProps["items"] = [
+    const updatedItems: Reorder.Item[] = [
       { label: "Item 3", value: "Item 3" },
       { label: "Item 4", value: "Item 4" },
     ]
@@ -105,7 +105,7 @@ describe("<Reorder />", () => {
     const onCompleteChange = vi.fn()
 
     const TestComponent = () => {
-      const [items, setItems] = useState<Reorder.RootProps["items"]>([
+      const [items, setItems] = useState<Reorder.Item[]>([
         { label: "Item 1", value: "Item 1" },
         { label: "Item 2", value: "Item 2" },
       ])

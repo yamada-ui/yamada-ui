@@ -1,7 +1,7 @@
 import { a11y, render, screen } from "#test"
 import { Timeline } from "."
 
-const items: Timeline.RootProps["items"] = [
+const items: Timeline.Item[] = [
   {
     description: "Step 1 description",
     title: "Step 1",

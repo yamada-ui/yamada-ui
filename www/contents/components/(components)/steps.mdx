@@ -7,7 +7,7 @@ style: components/steps/steps.style.ts.
 ---
 
 ```tsx preview functional
-const items = useMemo<Steps.RootProps["items"]>(
+const items = useMemo<Steps.Item[]>(
   () => [
     {
       content:
@@ -91,7 +91,7 @@ import { Steps } from "@workspaces/ui"
 ### Use items
 
 ```tsx preview functional
-const items = useMemo<Steps.RootProps["items"]>(
+const items = useMemo<Steps.Item[]>(
   () => [
     { description: "レッドリボン軍", title: "孫悟空少年編" },
     { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },
@@ -110,7 +110,7 @@ return (
 ### Change variant
 
 ```tsx preview functional
-const items = useMemo<Steps.RootProps["items"]>(
+const items = useMemo<Steps.Item[]>(
   () => [
     { description: "レッドリボン軍", title: "孫悟空少年編" },
     { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },
@@ -141,7 +141,7 @@ return (
 ### Change size
 
 ```tsx preview functional
-const items = useMemo<Steps.RootProps["items"]>(
+const items = useMemo<Steps.Item[]>(
   () => [
     { description: "レッドリボン軍", title: "孫悟空少年編" },
     { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },
@@ -166,7 +166,7 @@ return (
 ### Change orientation
 
 ```tsx preview functional
-const items = useMemo<Steps.RootProps["items"]>(
+const items = useMemo<Steps.Item[]>(
   () => [
     {
       content:
@@ -233,7 +233,7 @@ return (
 ### Enable lazy rendering
 
 ```tsx preview functional
-const items = useMemo<Steps.RootProps["items"]>(
+const items = useMemo<Steps.Item[]>(
   () => [
     {
       content:
@@ -288,7 +288,7 @@ return (
 ### Custom indicator
 
 ```tsx preview functional
-const items = useMemo<Steps.RootProps["items"]>(
+const items = useMemo<Steps.Item[]>(
   () => [
     {
       complete: `😇`,
@@ -389,7 +389,7 @@ return (
 
 ```tsx preview functional client
 const [index, setIndex] = useState(0)
-const items = useMemo<Steps.RootProps["items"]>(
+const items = useMemo<Steps.Item[]>(
   () => [
     { description: "レッドリボン軍", title: "孫悟空少年編" },
     { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },

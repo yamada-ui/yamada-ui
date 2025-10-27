@@ -59,7 +59,7 @@ import { CheckboxCard, CheckboxCardGroup } from "@workspaces/ui"
 ### itemsを使う
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+const items = useMemo<CheckboxCardGroup.ItemType[]>(
   () => [
     {
       description: "22世紀の未来から来たネコ型ロボット。",
@@ -86,7 +86,7 @@ return <CheckboxCardGroup.Root items={items} />
 ### バリアントを変更する
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+const items = useMemo<CheckboxCardGroup.ItemType[]>(
   () => [
     { label: "Checked", value: "1" },
     { label: "Unchecked", value: "2" },
@@ -113,7 +113,7 @@ return (
 ### サイズを変更する
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+const items = useMemo<CheckboxCardGroup.ItemType[]>(
   () => [
     { label: "Checked", value: "1" },
     { label: "Unchecked", value: "2" },
@@ -140,7 +140,7 @@ return (
 ### カラースキームを変更する
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+const items = useMemo<CheckboxCardGroup.ItemType[]>(
   () => [
     { label: "Checked", value: "1" },
     { label: "Unchecked", value: "2" },
@@ -169,7 +169,7 @@ return (
 デフォルトの値を設定する場合は、`defaultValue`に値を設定します。
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+const items = useMemo<CheckboxCardGroup.ItemType[]>(
   () => [
     {
       description: "22世紀の未来から来たネコ型ロボット。",
@@ -198,7 +198,7 @@ return <CheckboxCardGroup.Root defaultValue={["1", "2"]} items={items} />
 選択数を制限する場合は、`max`に数値を設定します。
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+const items = useMemo<CheckboxCardGroup.ItemType[]>(
   () => [
     {
       description: "22世紀の未来から来たネコ型ロボット。",
@@ -227,7 +227,7 @@ return <CheckboxCardGroup.Root items={items} max={2} />
 方向を変更する場合は、`orientation`に`"horizontal"`または`"vertical"`を設定します。デフォルトでは、`"horizontal"`が設定されています。
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+const items = useMemo<CheckboxCardGroup.ItemType[]>(
   () => [
     {
       description: "22世紀の未来から来たネコ型ロボット。",
@@ -254,7 +254,7 @@ return <CheckboxCardGroup.Root items={items} orientation="vertical" />
 ### 形を変更する
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+const items = useMemo<CheckboxCardGroup.ItemType[]>(
   () => [
     {
       description: "22世紀の未来から来たネコ型ロボット。",
@@ -296,7 +296,7 @@ return (
 配置を変更する場合は、`justify`に`"start"`または`"end"`などを設定します。デフォルトでは、`"start"`が設定されています。
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+const items = useMemo<CheckboxCardGroup.ItemType[]>(
   () => [
     {
       description: "22世紀の未来から来たネコ型ロボット。",
@@ -338,7 +338,7 @@ return (
 アドオンを追加する場合は、`addon`に`ReactNode`を設定します。
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+const items = useMemo<CheckboxCardGroup.ItemType[]>(
   () => [
     {
       addon: "藤子・F・不二雄",
@@ -391,7 +391,7 @@ return <CheckboxCardGroup.Root items={items} orientation="vertical" />
 無効にする場合は、`disabled`を`true`に設定します。
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+const items = useMemo<CheckboxCardGroup.ItemType[]>(
   () => [
     {
       description: "22世紀の未来から来たネコ型ロボット。",
@@ -438,7 +438,7 @@ return (
 読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+const items = useMemo<CheckboxCardGroup.ItemType[]>(
   () => [
     {
       description: "22世紀の未来から来たネコ型ロボット。",
@@ -481,7 +481,7 @@ return (
 無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+const items = useMemo<CheckboxCardGroup.ItemType[]>(
   () => [
     {
       description: "22世紀の未来から来たネコ型ロボット。",
@@ -524,7 +524,7 @@ return (
 ボーダーの色を変更する場合は、`focusBorderColor`または`errorBorderColor`に値を設定します。
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+const items = useMemo<CheckboxCardGroup.ItemType[]>(
   () => [
     {
       description: "22世紀の未来から来たネコ型ロボット。",
@@ -563,7 +563,7 @@ return (
 カスタムアイコンを使う場合は、`checkedIcon`に`ReactNode`を設定します。
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+const items = useMemo<CheckboxCardGroup.ItemType[]>(
   () => [
     {
       description: "22世紀の未来から来たネコ型ロボット。",
@@ -591,7 +591,7 @@ return <CheckboxCardGroup.Root checkedIcon={<PlusIcon />} items={items} />
 
 ```tsx preview functional client
 const [value, setValue] = useState(["1"])
-const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+const items = useMemo<CheckboxCardGroup.ItemType[]>(
   () => [
     {
       description: "22世紀の未来から来たネコ型ロボット。",

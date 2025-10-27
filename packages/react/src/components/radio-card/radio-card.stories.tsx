@@ -47,7 +47,7 @@ export const Basic: Story = () => {
 }
 
 export const Items: Story = () => {
-  const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  const items = useMemo<RadioCardGroup.ItemType[]>(
     () => [
       {
         description:
@@ -75,7 +75,7 @@ export const Items: Story = () => {
 }
 
 export const Variant: Story = () => {
-  const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  const items = useMemo<RadioCardGroup.ItemType[]>(
     () => [
       { label: "Checked", value: "1" },
       { label: "No checked", value: "2" },
@@ -102,7 +102,7 @@ export const Variant: Story = () => {
 }
 
 export const Size: Story = () => {
-  const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  const items = useMemo<RadioCardGroup.ItemType[]>(
     () => [
       { label: "Checked", value: "1" },
       { label: "No checked", value: "2" },
@@ -129,7 +129,7 @@ export const Size: Story = () => {
 }
 
 export const DefaultValue: Story = () => {
-  const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  const items = useMemo<RadioCardGroup.ItemType[]>(
     () => [
       {
         description:
@@ -157,7 +157,7 @@ export const DefaultValue: Story = () => {
 }
 
 export const DefaultChecked: Story = () => {
-  const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  const items = useMemo<RadioCardGroup.ItemType[]>(
     () => [
       {
         description:
@@ -186,7 +186,7 @@ export const DefaultChecked: Story = () => {
 }
 
 export const Orientation: Story = () => {
-  const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  const items = useMemo<RadioCardGroup.ItemType[]>(
     () => [
       {
         description:
@@ -214,7 +214,7 @@ export const Orientation: Story = () => {
 }
 
 export const Addon: Story = () => {
-  const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  const items = useMemo<RadioCardGroup.ItemType[]>(
     () => [
       {
         addon: "ドラゴンクエストV 天空の花嫁",
@@ -245,7 +245,7 @@ export const Addon: Story = () => {
 }
 
 export const Shape: Story = () => {
-  const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  const items = useMemo<RadioCardGroup.ItemType[]>(
     () => [
       {
         description:
@@ -284,7 +284,7 @@ export const Shape: Story = () => {
 }
 
 export const Justify: Story = () => {
-  const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  const items = useMemo<RadioCardGroup.ItemType[]>(
     () => [
       {
         description:
@@ -342,7 +342,7 @@ export const HiddenIndicator: Story = () => {
 }
 
 export const Disabled: Story = () => {
-  const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  const items = useMemo<RadioCardGroup.ItemType[]>(
     () => [
       {
         description:
@@ -388,7 +388,7 @@ export const Disabled: Story = () => {
 }
 
 export const ReadOnly: Story = () => {
-  const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  const items = useMemo<RadioCardGroup.ItemType[]>(
     () => [
       {
         description:
@@ -434,7 +434,7 @@ export const ReadOnly: Story = () => {
 }
 
 export const Invalid: Story = () => {
-  const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  const items = useMemo<RadioCardGroup.ItemType[]>(
     () => [
       {
         description:
@@ -480,7 +480,7 @@ export const Invalid: Story = () => {
 }
 
 export const BorderColor: Story = () => {
-  const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  const items = useMemo<RadioCardGroup.ItemType[]>(
     () => [
       {
         description:
@@ -519,7 +519,7 @@ export const BorderColor: Story = () => {
 
 export const CustomControl: Story = () => {
   const [value, setValue] = useState("2")
-  const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  const items = useMemo<RadioCardGroup.ItemType[]>(
     () => [
       {
         description:
@@ -557,7 +557,7 @@ export const ReactHookForm: Story = () => {
     handleSubmit,
     watch,
   } = useForm<Data>()
-  const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  const items = useMemo<RadioCardGroup.ItemType[]>(
     () => [
       {
         description:
@@ -626,7 +626,7 @@ export const ReactHookFormWithDefaultValue: Story = () => {
     handleSubmit,
     watch,
   } = useForm<Data>({ defaultValues })
-  const items = useMemo<RadioCardGroup.RootProps["items"]>(
+  const items = useMemo<RadioCardGroup.ItemType[]>(
     () => [
       {
         description:

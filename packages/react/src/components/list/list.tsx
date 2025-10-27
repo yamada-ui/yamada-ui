@@ -12,13 +12,15 @@ import { cloneElement, isValidElement, useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { listStyle } from "./list.style"
 
+export interface ListItem extends ListItemProps {}
+
 export interface ListRootProps
   extends HTMLStyledProps<"ul">,
     Omit<ThemeProps<ListStyle>, "styleType"> {
   /**
    * If provided, generate elements based on items.
    */
-  items?: ListItemProps[]
+  items?: ListItem[]
   /**
    * The CSS `list-style-position` property.
    */

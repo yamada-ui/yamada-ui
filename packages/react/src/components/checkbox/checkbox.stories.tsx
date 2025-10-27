@@ -39,7 +39,7 @@ export const Group: Story = () => {
 }
 
 export const Items: Story = () => {
-  const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxGroup.Item[]>(
     () => [
       { label: "ソラ", value: "1" },
       { label: "リク", value: "2" },
@@ -52,7 +52,7 @@ export const Items: Story = () => {
 }
 
 export const Variant: Story = () => {
-  const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxGroup.Item[]>(
     () => [
       { label: "Checked", value: "1" },
       { label: "No checked", value: "2" },
@@ -81,7 +81,7 @@ export const Variant: Story = () => {
 }
 
 export const Size: Story = () => {
-  const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxGroup.Item[]>(
     () => [
       { label: "Checked", value: "1" },
       { label: "No checked", value: "2" },
@@ -107,7 +107,7 @@ export const Size: Story = () => {
 }
 
 export const DefaultValue: Story = () => {
-  const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxGroup.Item[]>(
     () => [
       { label: "ソラ", value: "1" },
       { label: "リク", value: "2" },
@@ -177,7 +177,7 @@ export const Indeterminate: Story = () => {
 }
 
 export const Max: Story = () => {
-  const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxGroup.Item[]>(
     () => [
       { label: "ソラ", value: "1" },
       { label: "リク", value: "2" },
@@ -190,7 +190,7 @@ export const Max: Story = () => {
 }
 
 export const Orientation: Story = () => {
-  const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxGroup.Item[]>(
     () => [
       { label: "ソラ", value: "1" },
       { label: "リク", value: "2" },
@@ -203,7 +203,7 @@ export const Orientation: Story = () => {
 }
 
 export const Shape: Story = () => {
-  const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxGroup.Item[]>(
     () => [
       { defaultChecked: true, label: "ソラ", value: "1" },
       { label: "リク", value: "2" },
@@ -222,7 +222,7 @@ export const Shape: Story = () => {
 }
 
 export const Disabled: Story = () => {
-  const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxGroup.Item[]>(
     () => [
       { defaultChecked: true, label: "ソラ", value: "1" },
       { label: "リク", value: "2" },
@@ -267,7 +267,7 @@ export const Disabled: Story = () => {
 }
 
 export const ReadOnly: Story = () => {
-  const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxGroup.Item[]>(
     () => [
       { defaultChecked: true, label: "ソラ", value: "1" },
       { label: "リク", value: "2" },
@@ -312,7 +312,7 @@ export const ReadOnly: Story = () => {
 }
 
 export const Invalid: Story = () => {
-  const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxGroup.Item[]>(
     () => [
       { defaultChecked: true, label: "ソラ", value: "1" },
       { label: "リク", value: "2" },
@@ -372,7 +372,7 @@ export const BorderColor: Story = () => {
 
 export const CustomControl: Story = () => {
   const [value, setValue] = useState(["1"])
-  const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxGroup.Item[]>(
     () => [
       { label: "ソラ", value: "1" },
       { label: "リク", value: "2" },
@@ -429,7 +429,7 @@ export const CustomHook: Story = () => {
 }
 
 export const CustomIcon: Story = () => {
-  const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxGroup.Item[]>(
     () => [
       { label: "ソラ", value: "1" },
       { label: "リク", value: "2" },
@@ -482,7 +482,7 @@ export const ReactHookForm: Story = () => {
     handleSubmit,
     watch,
   } = useForm<Data>()
-  const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxGroup.Item[]>(
     () => [
       { label: "ソラ", value: "1" },
       { label: "リク", value: "2" },
@@ -557,7 +557,7 @@ export const ReactHookFormWithDefaultValue: Story = () => {
     handleSubmit,
     watch,
   } = useForm<Data>({ defaultValues })
-  const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  const items = useMemo<CheckboxGroup.Item[]>(
     () => [
       { label: "ソラ", value: "1" },
       { label: "リク", value: "2" },

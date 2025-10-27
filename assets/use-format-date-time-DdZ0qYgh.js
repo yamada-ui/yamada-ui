@@ -1,0 +1,1 @@
+import{G as n,r}from"./iframe-Cq3rcaMI.js";import{i}from"./i18n-cache-2nrF3WCd.js";const c=i(Intl.DateTimeFormat),p=(t,e)=>u(e)(t),u=({locale:t,...e}={})=>{const{locale:a}=n(),o=r.useRef(e);return t??=a,r.useCallback((m,s)=>c(t,{...o.current,...s}).format(m),[t])};export{p as a,u};

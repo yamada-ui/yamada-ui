@@ -1,0 +1,6 @@
+import{r as n,j as u}from"./iframe-Cq3rcaMI.js";import{B as m}from"./box-CJbmBmxj.js";import"./preload-helper-PPVm8Dsz.js";const p=["keypress","mousemove","touchmove","click","scroll"],E={events:p,initialState:!0},f=(e,c)=>{const{events:r,initialState:d}={...E,...c},[l,i]=n.useState(d),o=n.useRef(void 0);return n.useEffect(()=>{const a=()=>{i(!1),o.current&&clearTimeout(o.current),o.current=setTimeout(()=>i(!0),e)};return r.forEach(s=>document.addEventListener(s,a)),()=>{r.forEach(s=>document.removeEventListener(s,a))}},[r,e]),l},B={title:"Hooks / useIdle"},t=()=>{const e=f(2e3);return u.jsxs(m,{bg:e?"blue.500":"red.500",color:"white",p:"md",rounded:"l2",transitionDuration:"moderate",transitionProperty:"all",children:["Current state: ",e?"idle":"not idle"]})};t.parameters={...t.parameters,docs:{...t.parameters?.docs,source:{originalSource:`() => {
+  const idle = useIdle(2000);
+  return <Box bg={idle ? "blue.500" : "red.500"} color="white" p="md" rounded="l2" transitionDuration="moderate" transitionProperty="all">
+      Current state: {idle ? "idle" : "not idle"}
+    </Box>;
+}`,...t.parameters?.docs?.source}}};const I=["Basic"];export{t as Basic,I as __namedExportsOrder,B as default};

@@ -1,12 +1,11 @@
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
-import rehypeSlug from "rehype-slug"
 import remarkDirective from "remark-directive"
 import remarkGfm from "remark-gfm"
 import { defineCollection, defineConfig, s } from "velite"
+import { CONSTANTS } from "@/constants"
 import { generateDocMap } from "@/scripts/generate/docs/map"
 import { getLocale, langs } from "@/utils/i18n"
-import { rehypePre, rehypeSlugSync } from "@/utils/rehype-plugins"
-import { CONSTANTS } from "./constants"
+import { rehypePre, rehypeSlug, transformToc } from "@/utils/rehype-plugins"
 import {
   remarkCallout,
   remarkCardGroup,
@@ -15,7 +14,6 @@ import {
   remarkSteps,
 } from "./utils/remark-plugins"
 import { getPathname } from "./utils/route"
-import { transformUnifiedToc } from "./utils/transform-unified-toc"
 
 function getPath(value: string) {
   return value.replace(/\\/g, "/").replace(/.*\/contents\//, "")
@@ -60,11 +58,9 @@ const docs = defineCollection({
       title: s.string(),
       toc: s.toc(),
     })
-    .transform((data, { meta }) => {
+    .transform(async (data, { meta }) => {
       const { locale, slug } = getSlug(meta.path as string)
-      const path = getPath(meta.path as string)
-      const toc =
-        locale === "en-US" ? data.toc : transformUnifiedToc(data.toc, path)
+      const toc = await transformToc(data.toc, meta.path as string)
 
       return {
         ...data,
@@ -72,7 +68,7 @@ const docs = defineCollection({
           ? `${CONSTANTS.SNS.GITHUB.PACKAGE_EDIT_URL}/${data.style}`
           : undefined,
         locale,
-        path,
+        path: getPath(meta.path as string),
         pathname: getPathname("docs", ...slug),
         slug,
         source: data.source
@@ -94,7 +90,6 @@ export default defineConfig({
   mdx: {
     rehypePlugins: [
       rehypeSlug,
-      rehypeSlugSync,
       rehypePre,
       [
         rehypeAutolinkHeadings,

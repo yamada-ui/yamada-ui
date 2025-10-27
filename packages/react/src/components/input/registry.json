@@ -11,6 +11,7 @@
       "autocomplete",
       "checkbox",
       "checkbox-card",
+      "color-picker",
       "date-picker",
       "dropzone",
       "editable",

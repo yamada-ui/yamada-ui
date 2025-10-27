@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "Sluiten",
   },
+  colorPicker: {
+    "Pick a color": "Kies een kleur",
+  },
+  colorSelector: {
+    "Pick a color": "Kies een kleur",
+  },
   datePicker: {
     "Clear value": "Waarde wissen",
   },

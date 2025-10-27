@@ -5,7 +5,373 @@ storybook: components-colorpicker--basic
 source: components/color-picker
 ---
 
-Currently, this component is not migrated. This component will be migrated in v2.0.x.
+```tsx preview
+<ColorPicker placeholder="#4387f4" />
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { ColorPicker } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { ColorPicker } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { ColorPicker } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<ColorPicker />
+```
+
+### Change Variant
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed", "plain"]}>
+    {(variant, index) => (
+      <ColorPicker
+        key={index}
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Size
+
+```tsx preview
+<VStack>
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => (
+      <ColorPicker key={index} size={size} placeholder={`Size (${size})`} />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<VStack>
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <ColorPicker
+        key={index}
+        colorScheme={colorScheme}
+        placeholder="#4387f4"
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Set Default Value
+
+To set a default value, set `defaultValue` to a value.
+
+```tsx preview
+<ColorPicker defaultValue="#4387f4" placeholder="#4387f4" />
+```
+
+### Set Alpha Value
+
+To set an alpha value, set `defaultValue` to a value containing an alpha value or set `format` to `"hexa"` or `"hsla"` etc.
+
+```tsx preview
+<ColorPicker defaultValue="#775999A0" placeholder="#775999A0" />
+```
+
+### Change Format
+
+To change the format, set `format` to a value. The default is to determine the format from the string of `value` or `defaultValue`.
+
+```tsx preview
+<ColorPicker placeholder="hsl(0, 100%, 50%)" format="hsl" />
+```
+
+### Limit Input Value
+
+To limit the input value, set `pattern` to a regular expression.
+
+```tsx preview
+<ColorPicker placeholder="#4387f4" pattern={/[^a-fA-F0-9#]/g} />
+```
+
+### Format Input Value
+
+To format the input value, set `formatInput` to a function.
+
+```tsx preview client
+<ColorPicker
+  placeholder="#4387f4"
+  pattern={/[^a-fA-F0-9#]/g}
+  formatInput={(value) => value.toUpperCase()}
+/>
+```
+
+### Show Color Swatches
+
+To show color swatches, set `colorSwatches` to an array.
+
+```tsx preview
+<ColorPicker
+  placeholder="#4387f4"
+  colorSwatches={[
+    "hsl(0, 100%, 50%)",
+    "hsl(45, 100%, 50%)",
+    "hsl(90, 100%, 50%)",
+    "hsl(135, 100%, 50%)",
+    "hsl(180, 100%, 50%)",
+    "hsl(225, 100%, 50%)",
+    "hsl(270, 100%, 50%)",
+    "hsl(315, 100%, 50%)",
+  ]}
+  colorSwatchGroupLabel="Pick a color"
+/>
+```
+
+### Change Color Swatch Columns
+
+To change the number of columns in the color swatch group, set `colorSwatchGroupColumns` to a number.
+
+```tsx preview
+<ColorPicker
+  placeholder="#4387f4"
+  colorSwatches={[
+    "hsl(0, 100%, 50%)",
+    "hsl(36, 100%, 50%)",
+    "hsl(72, 100%, 50%)",
+    "hsl(108, 100%, 50%)",
+    "hsl(144, 100%, 50%)",
+    "hsl(180, 100%, 50%)",
+    "hsl(216, 100%, 50%)",
+    "hsl(252, 100%, 50%)",
+    "hsl(288, 100%, 50%)",
+    "hsl(324, 100%, 50%)",
+  ]}
+  colorSwatchGroupLabel="Pick a color"
+  colorSwatchGroupColumns={10}
+/>
+```
+
+### Change Offset
+
+To change the offset, set `gutter` or `offset` to a value.
+
+```tsx preview
+<ColorPicker placeholder="#4387f4" gutter={16} />
+```
+
+### Change Animation Scheme
+
+To change the animation scheme, set `animationScheme` to `"block-start"` or `"inline-end"` etc. The default is `"scale"`.
+
+```tsx preview
+<ColorPicker placeholder="#4387f4" animationScheme="inline-start" />
+```
+
+### Change Placement
+
+To change the placement, set `placement` to `"end"` or `"start-center"` etc. The default is `"end-start"`.
+
+```tsx preview
+<ColorPicker
+  placeholder="#4387f4"
+  animationScheme="inline-start"
+  placement="center-end"
+  rootProps={{ w: "xs" }}
+/>
+```
+
+### Blocking Scroll
+
+To block scrolling, set `blockScrollOnMount` to `true`.
+
+```tsx preview
+<ColorPicker placeholder="#4387f4" blockScrollOnMount />
+```
+
+### Close Dropdown On Scroll
+
+To close the dropdown on scroll, set `closeOnScroll` to `true`.
+
+```tsx preview
+<ColorPicker placeholder="#4387f4" closeOnScroll />
+```
+
+### Handle Opening Dropdown On Change
+
+To handle the event of opening the dropdown on change, set a function to `openOnChange`.
+
+```tsx preview client
+<ColorPicker
+  placeholder="#4387f4"
+  openOnFocus={false}
+  openOnChange={(ev) => ev.target.value.length > 1}
+/>
+```
+
+### Handle Closing Dropdown On Change
+
+To handle the event of closing the dropdown on change, set a function to `closeOnChange`.
+
+```tsx preview client
+<ColorPicker
+  placeholder="#4387f4"
+  openOnFocus={false}
+  closeOnChange={(ev) => !ev.target.value.length}
+/>
+```
+
+### Disable Open Dropdown On Focus
+
+To disable opening the dropdown on focus, set `openOnFocus` to `false`.
+
+```tsx preview
+<ColorPicker placeholder="#4387f4" openOnFocus={false} />
+```
+
+### Disable Open Dropdown On Click
+
+To disable opening the dropdown on click, set `openOnClick` to `false`.
+
+```tsx preview
+<ColorPicker placeholder="#4387f4" openOnClick={false} />
+```
+
+### Disable Close On Outside Click
+
+To disable closing the dropdown on outside click, set `closeOnBlur` to `false`.
+
+```tsx preview
+<ColorPicker placeholder="#4387f4" closeOnBlur={false} />
+```
+
+### Disable Close On Esc
+
+To disable closing the dropdown on ESC key, set `closeOnEsc` to `false`.
+
+```tsx preview
+<ColorPicker placeholder="#4387f4" closeOnEsc={false} />
+```
+
+### Disable Allow Input
+
+To disable allowing input, set `allowInput` to `false`.
+
+```tsx preview
+<ColorPicker placeholder="#4387f4" allowInput={false} />
+```
+
+### Change Shape
+
+```tsx preview
+<VStack>
+  <For each={["rounded", "circle", "square"]}>
+    {(shape, index) => (
+      <ColorPicker
+        key={index}
+        placeholder="#4387f4"
+        selectorProps={{ shape }}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Disable
+
+To disable, set `disabled` to `true`.
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant, index) => (
+      <ColorPicker
+        key={index}
+        variant={variant}
+        disabled
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Make Read Only
+
+To make read only, set `readOnly` to `true`.
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant, index) => (
+      <ColorPicker
+        key={index}
+        variant={variant}
+        readOnly
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Make Invalid
+
+To make invalid, set `invalid` to `true`.
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant, index) => (
+      <ColorPicker
+        key={index}
+        variant={variant}
+        invalid
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Border Color
+
+To change the border color, set `focusBorderColor` or `errorBorderColor` to a value.
+
+```tsx preview
+<VStack>
+  <ColorPicker focusBorderColor="green.500" placeholder="custom border color" />
+  <ColorPicker
+    invalid
+    errorBorderColor="orange.500"
+    placeholder="custom border color"
+  />
+</VStack>
+```
+
+### Control
+
+```tsx preview functional
+const [value, onChange] = useState<string>("#4387f4")
+
+return <ColorPicker value={value} onChange={onChange} />
+```
+
+## Props
+
+<PropsTable name="color-picker" />
 
 ## Accessibility
 

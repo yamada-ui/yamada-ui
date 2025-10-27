@@ -3,12 +3,8 @@
 import type { RefObject } from "react"
 import type { Orientation } from "../../core"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import {
-  assignRef,
-  isHTMLElement,
-  useCallbackRef,
-  useUnmountEffect,
-} from "../../utils"
+import { useEnvironment } from "../../core"
+import { assignRef, useCallbackRef } from "../../utils"
 
 const isScrollable = (el: HTMLElement, vertical: boolean) => {
   const style = getComputedStyle(el)
@@ -19,50 +15,6 @@ const isScrollable = (el: HTMLElement, vertical: boolean) => {
     return ["auto", "overlay", "scroll"].includes(style.overflowY)
   } else {
     return ["auto", "overlay", "scroll"].includes(style.overflowX)
-  }
-}
-
-const onScroll = ({
-  behavior,
-  position,
-  reverse,
-  root,
-  vertical,
-}: {
-  root: HTMLElement | null | undefined
-  vertical: boolean
-  behavior?: ScrollBehavior
-  position?: number
-  reverse?: boolean
-}) => {
-  let options: ScrollToOptions
-  const el =
-    isHTMLElement(root) && isScrollable(root, vertical) ? root : document.body
-
-  if (vertical) {
-    options = { behavior, top: position ?? (reverse ? el.scrollHeight : 0) }
-  } else {
-    options = { behavior, left: position ?? (reverse ? el.scrollWidth : 0) }
-  }
-
-  if (el === document.body) {
-    window.scrollTo(options)
-  } else {
-    el.scrollTo(options)
-  }
-}
-
-const getScrollPosition = (
-  root: HTMLElement | null | undefined,
-  vertical: boolean,
-) => {
-  const el =
-    isHTMLElement(root) && isScrollable(root, vertical) ? root : document.body
-
-  if (vertical) {
-    return el.scrollHeight - el.scrollTop
-  } else {
-    return el.scrollWidth - el.scrollLeft
   }
 }
 
@@ -159,14 +111,14 @@ export const useInfiniteScroll = <Y extends HTMLElement = HTMLDivElement>({
   onLoad: onLoadProp,
 }: UseInfiniteScrollProps = {}) => {
   const ref = useRef<Y>(null)
+  const { getDocument, getWindow } = useEnvironment()
   const indexRef = useRef<number>(startIndex)
   const processingRef = useRef<boolean>(false)
   const observerRef = useRef<IntersectionObserver | undefined>(undefined)
-  const mountedRef = useRef<boolean>(false)
-  const prevScrollPosition = useRef<number>(0)
   const [finish, setFinish] = useState<boolean>(false)
   const onLoad = useCallbackRef(onLoadProp)
   const vertical = orientation === "vertical"
+  const direction = vertical ? "top" : "left"
   const options: IntersectionObserverInit = useMemo(() => {
     const root = rootRef?.current
 
@@ -181,8 +133,19 @@ export const useInfiniteScroll = <Y extends HTMLElement = HTMLDivElement>({
 
       if (runScroll) {
         const root = rootRef?.current
+        const body = getDocument()?.body
+        const el = root && isScrollable(root, vertical) ? root : body
 
-        onScroll({ behavior, reverse, root, vertical })
+        if (el) {
+          const target = el === body ? getWindow() : el
+          const position = reverse
+            ? vertical
+              ? el.scrollHeight
+              : el.scrollWidth
+            : 0
+
+          target?.scrollTo({ behavior, [direction]: position })
+        }
       }
 
       if (disabled) return
@@ -194,7 +157,16 @@ export const useInfiniteScroll = <Y extends HTMLElement = HTMLDivElement>({
         if (el) observer?.observe(el)
       })
     },
-    [disabled, reverse, rootRef, vertical, behavior],
+    [
+      disabled,
+      rootRef,
+      getDocument,
+      vertical,
+      getWindow,
+      reverse,
+      behavior,
+      direction,
+    ],
   )
 
   const onFinish = useCallback(() => {
@@ -208,51 +180,69 @@ export const useInfiniteScroll = <Y extends HTMLElement = HTMLDivElement>({
 
   const createObserver = useCallback(() => {
     const observer = new IntersectionObserver(async ([entry]) => {
-      if (!entry?.isIntersecting || processingRef.current) return
+      const root = rootRef?.current
+      const body = getDocument()?.body
+      const el = root && isScrollable(root, vertical) ? root : body
+
+      if (!entry?.isIntersecting || processingRef.current || !el) return
 
       const props = { entry, finish: onFinish, index: indexRef.current }
 
       processingRef.current = true
 
-      const root = rootRef?.current
-
       if (root) root.ariaBusy = "true"
 
-      if (reverse) {
-        prevScrollPosition.current = getScrollPosition(root, vertical)
-      }
+      let prevScrollPosition = 0
+
+      if (reverse)
+        prevScrollPosition = vertical ? el.scrollHeight : el.scrollWidth
 
       await onLoad(props)
 
-      if (reverse) {
-        const position = prevScrollPosition.current
+      if (reverse)
+        setTimeout(() => {
+          const target = el === body ? getWindow() : el
+          const position =
+            (vertical ? el.scrollHeight : el.scrollWidth) - prevScrollPosition
 
-        onScroll({ position, root, vertical })
-      }
+          target?.scrollTo({ [direction]: position })
+        })
 
       indexRef.current += 1
       processingRef.current = false
+
       if (root) root.ariaBusy = "false"
     }, options)
 
     return observer
-  }, [onFinish, onLoad, options, rootRef, reverse, vertical])
+  }, [
+    options,
+    rootRef,
+    getDocument,
+    vertical,
+    onFinish,
+    reverse,
+    onLoad,
+    getWindow,
+    direction,
+  ])
 
   useEffect(() => {
     const setupObserver = async () => {
       const el = ref.current
-      const mounted = mountedRef.current
       const index = indexRef.current
       const root = rootRef?.current
 
-      if (initialLoad && !mounted) {
+      if (initialLoad) {
         processingRef.current = true
+
         if (root) root.ariaBusy = "true"
 
         await onLoad({ finish: onFinish, index })
 
         indexRef.current += 1
         processingRef.current = false
+
         if (root) root.ariaBusy = "false"
       }
 
@@ -262,12 +252,17 @@ export const useInfiniteScroll = <Y extends HTMLElement = HTMLDivElement>({
 
       const observer = observerRef.current
 
-      if (reverse && !mounted) {
+      if (reverse) {
         const root = rootRef?.current
+        const body = getDocument()?.body
+        const el = root && isScrollable(root, vertical) ? root : body
 
-        onScroll({ reverse, root, vertical })
+        if (el) {
+          const target = el === body ? getWindow() : el
+          const position = vertical ? el.scrollHeight : el.scrollWidth
 
-        mountedRef.current = true
+          target?.scrollTo({ [direction]: position })
+        }
       }
 
       setTimeout(() => {
@@ -289,9 +284,10 @@ export const useInfiniteScroll = <Y extends HTMLElement = HTMLDivElement>({
     onFinish,
     onLoad,
     rootRef,
+    getDocument,
+    getWindow,
+    direction,
   ])
-
-  useUnmountEffect(() => (mountedRef.current = false))
 
   assignRef(resetRef, onReset)
   assignRef(indexRefProp, (index) => (indexRef.current = index))

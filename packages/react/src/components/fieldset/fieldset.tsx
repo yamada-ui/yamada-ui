@@ -6,7 +6,8 @@ import type { FieldProps } from "../field"
 import type { FieldsetStyle } from "./fieldset.style"
 import { useId, useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
-import { createContext, dataAttr, useSplitChildren } from "../../utils"
+import { createContext, cx, dataAttr, useSplitChildren } from "../../utils"
+import { useFormContext } from "../form"
 import { fieldsetStyle } from "./fieldset.style"
 
 interface FieldsetContext
@@ -82,6 +83,7 @@ export { FieldsetPropsContext, useFieldsetPropsContext }
 export const FieldsetRoot = withProvider<"fieldset", FieldsetRootProps>(
   ({
     id,
+    "aria-labelledby": ariaLabelledBy,
     children,
     disabled,
     errorMessage,
@@ -129,7 +131,7 @@ export const FieldsetRoot = withProvider<"fieldset", FieldsetRootProps>(
 
     return (
       <FieldsetContext value={context}>
-        <styled.fieldset {...rest}>
+        <styled.fieldset aria-labelledby={cx(id, ariaLabelledBy)} {...rest}>
           {customHeader || (
             <FieldsetHeader {...headerProps}>
               {customLegend ||
@@ -163,7 +165,11 @@ export const FieldsetRoot = withProvider<"fieldset", FieldsetRootProps>(
     )
   },
   "root",
-)()
+)((props) => {
+  const { size, variant } = useFormContext() ?? {}
+
+  return { size, variant, ...props }
+})
 
 export interface FieldsetLegendProps extends HTMLStyledProps<"legend"> {}
 

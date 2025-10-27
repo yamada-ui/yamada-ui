@@ -54,7 +54,7 @@ export const fieldsetStyle = defineComponentSlotStyle({
         layerStyle: "panel",
       },
     },
-    plain: {},
+    plain: { root: {} },
   },
 
   sizes: {

@@ -6,6 +6,11 @@
     "hooks": ["use-value"],
     "providers": []
   },
+  "dependents": {
+    "components": ["color-selector"],
+    "hooks": [],
+    "providers": []
+  },
   "section": "components",
   "sources": [
     {

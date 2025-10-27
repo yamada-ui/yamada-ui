@@ -92,13 +92,14 @@ export const PreviewDrawer = memo(function PreviewDrawer({
           </Icon>
         </Center>
 
-        <HStack alignItems="flex-start" minW="0" w="full">
-          <Flex flex="1">
-            <Flex as="button" rounded="l2" onClick={onCopy}>
-              <Heading as="h3" lineClamp={1}>
-                {title}
-              </Heading>
-            </Flex>
+        <HStack
+          alignItems="flex-start"
+          justifyContent="space-between"
+          minW="0"
+          w="full"
+        >
+          <Flex as="button" lineClamp={1} rounded="l2" onClick={onCopy}>
+            <Heading as="h3">{title}</Heading>
           </Flex>
 
           <Drawer.CloseTrigger>

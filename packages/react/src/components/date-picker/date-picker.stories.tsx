@@ -28,7 +28,12 @@ const meta: Meta<typeof DatePicker> = {
 export default meta
 
 export const Basic: Story = () => {
-  return <DatePicker />
+  return (
+    <>
+      <DatePicker />
+      <DatePicker />
+    </>
+  )
 }
 
 export const Variant: Story = () => {
@@ -536,7 +541,7 @@ export const CustomCalendar: Story = () => {
 }
 
 export const CustomControl: Story = () => {
-  const [value, setValue] = useState<Date | undefined>(undefined)
+  const [value, setValue] = useState<Date | undefined>(new Date())
 
   return <DatePicker value={value} onChange={setValue} />
 }
@@ -580,7 +585,7 @@ export const ReactHookForm: Story = () => {
 
 export const ReactHookFormDefaultValue: Story = () => {
   interface Data {
-    datePicker: Date
+    datePicker: Date | null
   }
 
   const defaultValues: Data = {
@@ -605,7 +610,15 @@ export const ReactHookFormDefaultValue: Story = () => {
         <Controller
           name="datePicker"
           control={control}
-          render={({ field }) => <DatePicker {...field} />}
+          render={({ field: { value, onChange, ...rest } }) => {
+            return (
+              <DatePicker
+                value={value ?? undefined}
+                onChange={(value) => onChange(value ?? null)}
+                {...rest}
+              />
+            )
+          }}
           rules={{
             required: { message: "This is required.", value: true },
           }}

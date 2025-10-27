@@ -7,9 +7,9 @@ import type {
   HTMLProps,
   HTMLStyledProps,
   ThemeProps,
-  WithoutThemeProps,
 } from "../../core"
 import type { UseInputBorderProps } from "../input"
+import type { PopupAnimationProps } from "../popover"
 import type { DatePickerStyle } from "./date-picker.style"
 import type { UseDatePickerProps, UseDatePickerReturn } from "./use-date-picker"
 import { useMemo } from "react"
@@ -20,7 +20,7 @@ import { Calendar } from "../calendar"
 import { useGroupItemProps } from "../group"
 import { CalendarIcon, XIcon } from "../icon"
 import { InputGroup, useInputBorder, useInputPropsContext } from "../input"
-import { Popover, usePopoverProps } from "../popover"
+import { Popover } from "../popover"
 import { datePickerStyle } from "./date-picker.style"
 import { useDatePicker } from "./use-date-picker"
 
@@ -36,16 +36,7 @@ export interface DatePickerProps<
       "defaultValue" | "offset" | "onChange" | "ref" | "value"
     >,
     UseDatePickerProps<Multiple, Range>,
-    Omit<
-      WithoutThemeProps<Popover.RootProps, DatePickerStyle>,
-      | "autoFocus"
-      | "children"
-      | "initialFocusRef"
-      | "modal"
-      | "transform"
-      | "updateRef"
-      | "withCloseButton"
-    >,
+    PopupAnimationProps,
     ThemeProps<DatePickerStyle>,
     UseInputBorderProps {
   /**
@@ -117,17 +108,18 @@ export const DatePicker = withProvider(
   <Multiple extends boolean = false, Range extends boolean = false>(
     props: DatePickerProps<Multiple, Range>,
   ) => {
-    const [groupItemProps, mergedProps] = useGroupItemProps(props)
     const [
-      popoverProps,
+      groupItemProps,
       {
         className,
         css,
         colorScheme,
         size,
+        animationScheme = "block-start",
         children,
         clearable = true,
         clearIcon = <XIcon />,
+        duration,
         errorBorderColor,
         focusBorderColor,
         icon,
@@ -139,18 +131,9 @@ export const DatePicker = withProvider(
         rootProps,
         ...rest
       },
-    ] = usePopoverProps(mergedProps, [
-      "disabled",
-      "open",
-      "defaultOpen",
-      "onOpen",
-      "onClose",
-      "openOnClick",
-    ])
+    ] = useGroupItemProps(props)
     const {
       children: fieldChildren,
-      interactive,
-      open,
       range,
       separator,
       value,
@@ -161,21 +144,15 @@ export const DatePicker = withProvider(
       getIconProps,
       getInputProps,
       getRootProps,
-      onClose,
-      onOpen,
+      popoverProps,
     } = useDatePicker(rest)
     const mergedPopoverProps = useMemo<Popover.RootProps>(
       () => ({
-        animationScheme: "block-start",
-        autoFocus: false,
-        placement: "end-start",
+        animationScheme,
+        duration,
         ...popoverProps,
-        disabled: !interactive,
-        open,
-        onClose,
-        onOpen,
       }),
-      [interactive, onClose, onOpen, open, popoverProps],
+      [animationScheme, duration, popoverProps],
     )
     const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
     const selectProps = useMemo<Calendar.RootProps["selectProps"]>(

@@ -12,6 +12,7 @@
       "button",
       "checkbox",
       "checkbox-card",
+      "color-picker",
       "date-picker",
       "input",
       "native-select",

@@ -8,6 +8,8 @@ node_modules
 # compiled
 storybook-static
 coverage
+!scripts/issue/coverage
+report.json
 trace
 dist
 build

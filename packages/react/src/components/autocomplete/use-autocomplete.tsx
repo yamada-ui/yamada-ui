@@ -272,6 +272,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
       matcher = defaultMatcher,
       max,
       openOnChange = true,
+      openOnClick = true,
       openOnFocus = true,
       placeholder,
       readOnly,
@@ -287,9 +288,10 @@ export const useAutocomplete = <Multiple extends boolean = false>(
     dataProps,
     eventProps,
   } = useFieldProps(props)
-  const rootRef = useRef<HTMLDivElement>(null)
+  const fieldRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const focusByClickRef = useRef<boolean>(false)
   const valueMap = useMemo<{ [key: string]: ComboboxItemWithValue }>(() => {
     const valueMap: { [key: string]: ComboboxItemWithValue } = {}
 
@@ -358,6 +360,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
     getContentProps: getComboboxContentProps,
     getSeparatorProps,
     getTriggerProps,
+    popoverProps,
     onActiveDescendant,
     onClose,
     onOpen,
@@ -367,6 +370,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
     closeOnSelect,
     disabled,
     initialFocusValue: isArray(value) ? value[0] : value,
+    openOnClick: false,
     openOnEnter: false,
     openOnSpace: false,
     readOnly,
@@ -516,8 +520,12 @@ export const useAutocomplete = <Multiple extends boolean = false>(
   const onClick = useCallback(() => {
     if (!interactive) return
 
+    focusByClickRef.current = true
+
     inputRef.current?.focus()
-  }, [interactive])
+
+    if (openOnClick) onOpenWithActiveDescendant(descendants.enabledFirstValue)
+  }, [descendants, interactive, onOpenWithActiveDescendant, openOnClick])
 
   const onMouseDown = useCallback(
     (ev: MouseEvent<HTMLInputElement>) => {
@@ -536,9 +544,12 @@ export const useAutocomplete = <Multiple extends boolean = false>(
 
       setFocused(true)
 
-      if (openOnFocus) onOpenWithActiveDescendant(descendants.enabledFirstValue)
+      if (openOnFocus && !focusByClickRef.current)
+        onOpenWithActiveDescendant(descendants.enabledFirstValue)
+
+      focusByClickRef.current = false
     },
-    [openOnFocus, onOpenWithActiveDescendant, descendants],
+    [openOnFocus, onOpenWithActiveDescendant, descendants.enabledFirstValue],
   )
 
   const onBlur = useCallback(
@@ -546,7 +557,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
       setFocused(false)
 
       if (
-        contains(rootRef.current, ev.relatedTarget) ||
+        contains(fieldRef.current, ev.relatedTarget) ||
         contains(contentRef.current, ev.relatedTarget)
       ) {
         ev.preventDefault()
@@ -585,8 +596,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
   }, [valueProp])
 
   const getRootProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
-      ref: mergeRefs(ref, rootRef),
+    (props) => ({
       ...dataProps,
       ...props,
     }),
@@ -594,8 +604,9 @@ export const useAutocomplete = <Multiple extends boolean = false>(
   )
 
   const getFieldProps: PropGetter = useCallback(
-    (props = {}) =>
+    ({ ref, ...props } = {}) =>
       getTriggerProps({
+        ref: mergeRefs(ref, fieldRef),
         tabIndex: -1,
         ...props,
         onClick: handlerAll(props.onClick, onClick),
@@ -707,6 +718,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
     getInputProps,
     getRootProps,
     getSeparatorProps,
+    popoverProps,
     onActiveDescendant,
     onChange,
     onClose,

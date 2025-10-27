@@ -23,7 +23,7 @@ export const Basic: Story = () => {
 }
 
 export const Items: Story = () => {
-  const items = useMemo<SegmentedControl.RootProps["items"]>(
+  const items = useMemo<SegmentedControl.Item[]>(
     () => [
       { label: "ハチワレ", value: "ハチワレ" },
       { label: "うさぎ", value: "うさぎ" },
@@ -36,7 +36,7 @@ export const Items: Story = () => {
 }
 
 export const Size: Story = () => {
-  const items = useMemo<SegmentedControl.RootProps["items"]>(
+  const items = useMemo<SegmentedControl.Item[]>(
     () => [
       { label: "ハチワレ", value: "ハチワレ" },
       { label: "うさぎ", value: "うさぎ" },
@@ -60,7 +60,7 @@ export const Size: Story = () => {
 }
 
 export const Orientation: Story = () => {
-  const items = useMemo<SegmentedControl.RootProps["items"]>(
+  const items = useMemo<SegmentedControl.Item[]>(
     () => [
       { label: "ハチワレ", value: "ハチワレ" },
       { label: "うさぎ", value: "うさぎ" },
@@ -84,7 +84,7 @@ export const Orientation: Story = () => {
 }
 
 export const FullRounded: Story = () => {
-  const items = useMemo<SegmentedControl.RootProps["items"]>(
+  const items = useMemo<SegmentedControl.Item[]>(
     () => [
       { label: "ハチワレ", value: "ハチワレ" },
       { label: "うさぎ", value: "うさぎ" },
@@ -99,7 +99,7 @@ export const FullRounded: Story = () => {
 }
 
 export const Disabled: Story = () => {
-  const items = useMemo<SegmentedControl.RootProps["items"]>(
+  const items = useMemo<SegmentedControl.Item[]>(
     () => [
       { label: "ハチワレ", value: "ハチワレ" },
       { label: "うさぎ", value: "うさぎ" },
@@ -124,7 +124,7 @@ export const Disabled: Story = () => {
 }
 
 export const ReadOnly: Story = () => {
-  const items = useMemo<SegmentedControl.RootProps["items"]>(
+  const items = useMemo<SegmentedControl.Item[]>(
     () => [
       { label: "ハチワレ", value: "ハチワレ" },
       { label: "うさぎ", value: "うさぎ" },
@@ -150,7 +150,7 @@ export const ReadOnly: Story = () => {
 
 export const CustomControl: Story = () => {
   const [value, setValue] = useState("ハチワレ")
-  const items = useMemo<SegmentedControl.RootProps["items"]>(
+  const items = useMemo<SegmentedControl.Item[]>(
     () => [
       { label: "ハチワレ", value: "ハチワレ" },
       { label: "うさぎ", value: "うさぎ" },

@@ -136,7 +136,7 @@
         "required": false
       },
       "animationScheme": {
-        "type": "\"scale\" | \"none\" | SimplePlacement",
+        "type": "\"none\" | \"scale\" | SimplePlacement",
         "defaultValue": "\"scale\"",
         "description": "The animation of the element.",
         "required": false
@@ -210,7 +210,7 @@
         "required": false
       },
       "duration": {
-        "type": "number | MotionLifecycleProps<number>",
+        "type": "MotionTransitionProps[\"duration\"]",
         "defaultValue": "0.2",
         "description": "The animation duration.",
         "required": false
@@ -433,6 +433,12 @@
         "description": "The CSS positioning strategy to use.",
         "required": false
       },
+      "transferFocus": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the focus will be transferred to the popover content when the tab key is pressed.",
+        "required": false
+      },
       "value": {
         "type": "Multiple extends true ? string[] : string",
         "description": "The value of the select.",
@@ -609,7 +615,7 @@
       "required": false
     },
     "animationScheme": {
-      "type": "\"scale\" | \"none\" | SimplePlacement",
+      "type": "\"none\" | \"scale\" | SimplePlacement",
       "defaultValue": "\"scale\"",
       "description": "The animation of the element.",
       "required": false
@@ -683,7 +689,7 @@
       "required": false
     },
     "duration": {
-      "type": "number | MotionLifecycleProps<number>",
+      "type": "MotionTransitionProps[\"duration\"]",
       "defaultValue": "0.2",
       "description": "The animation duration.",
       "required": false
@@ -904,6 +910,12 @@
       "type": "Strategy",
       "defaultValue": "\"absolute\"",
       "description": "The CSS positioning strategy to use.",
+      "required": false
+    },
+    "transferFocus": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the focus will be transferred to the popover content when the tab key is pressed.",
       "required": false
     },
     "value": {

@@ -3,38 +3,39 @@ title: Changelog
 description: "Explore the changelog for the latest version of Yamada UI. Learn about the features, bug fixes, and improvements."
 ---
 
-This version was released on October 21, 2025.
+## @yamada-ui/react@2.0.5
 
-## @yamada-ui/react@2.0.2
-
-### Patch changes
-
-- [#5300](https://github.com/yamada-ui/yamada-ui/pull/5300) [89264dd](https://github.com/yamada-ui/yamada-ui/commit/89264dd68508aeb21cbcc39f404444b3ad627761) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where components such as `PasswordInput` and `NativeSelect` that use `InputGroup` internally did not apply spacing correctly when the `variant` was set to `"flushed"`.
-
-- [#5304](https://github.com/yamada-ui/yamada-ui/pull/5304) [f7791fb](https://github.com/yamada-ui/yamada-ui/commit/f7791fb9023f32c45dd8b0fc6bf3b8d21a6ca298) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Exported `useSlider` hook.
-
-- [#5308](https://github.com/yamada-ui/yamada-ui/pull/5308) [ca32ee4](https://github.com/yamada-ui/yamada-ui/commit/ca32ee46ecca6e6b73eb68a1ad9f10e5de9a53c0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the `id` and `name` were not set on the `input` for `DatePicker`, `Autocomplete`, and `Select`.
-
-- [#5309](https://github.com/yamada-ui/yamada-ui/pull/5309) [0980b98](https://github.com/yamada-ui/yamada-ui/commit/0980b98bed7f04cfe7bbb2793124d7b59481907e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the children of `Calendar` were not re-rendering correctly and the `descendants` were not properly managed.
-
-- [#5309](https://github.com/yamada-ui/yamada-ui/pull/5309) [878585f](https://github.com/yamada-ui/yamada-ui/commit/878585f2ee656a16fe10b510c0a46ce491d9da24) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed the default value of `openOnFocus` to `true` for both `Autocomplete` and `DatePicker`.
-
-- [#5308](https://github.com/yamada-ui/yamada-ui/pull/5308) [ca32ee4](https://github.com/yamada-ui/yamada-ui/commit/ca32ee46ecca6e6b73eb68a1ad9f10e5de9a53c0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `focusOnClear` to `Select`. This option controls whether the field is focused when the clear button is clicked.
-
-- [#5296](https://github.com/yamada-ui/yamada-ui/pull/5296) [7cebf47](https://github.com/yamada-ui/yamada-ui/commit/7cebf47e82412d721d7a1a60304b940f498986dd) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - `fieldStyle` have been prettied.
-
-- [#5307](https://github.com/yamada-ui/yamada-ui/pull/5307) [db0f8d2](https://github.com/yamada-ui/yamada-ui/commit/db0f8d2ef97a7a22de4aee3b6933a6a188157daf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `DatePicker`, `Autocomplete`, and `Select` allowed clearing the value even when they were in a `disabled` or `readOnly` state.
-
-- [#5298](https://github.com/yamada-ui/yamada-ui/pull/5298) [11471a3](https://github.com/yamada-ui/yamada-ui/commit/11471a3fabd944223816193a57f54cc14e9c0417) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - The `@default` in the JSDoc for `defaultValue` of `useSaturationProps` was incorrect, so this has been fixed.
-
-## @yamada-ui/cli@2.0.2
+This version was released on October 27, 2025.
 
 ### Patch changes
 
-- [#5287](https://github.com/yamada-ui/yamada-ui/pull/5287) [d5b44c6](https://github.com/yamada-ui/yamada-ui/commit/d5b44c64416bf2628dd6af71c48ab309856fa608) Thanks [@bmthd](https://github.com/bmthd)! - fix: add shebang to CLI binary via tsdown banner configuration
+- [#5435](https://github.com/yamada-ui/yamada-ui/pull/5435) [b7d4d7c](https://github.com/yamada-ui/yamada-ui/commit/b7d4d7c07fb9f17bd2d3407692350a431b5651ce) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the `Select` components inside the `Calendar` did not have correct styling when `DatePicker` had `invalid` set to `true`.
 
-  Add `#!/usr/bin/env node` shebang to the CLI binary by configuring tsdown's banner option.
-  This fixes execution issues on Linux where the CLI failed with "import: not found" errors
-  because the shell tried to execute the JavaScript file as a shell script.
+- [#5432](https://github.com/yamada-ui/yamada-ui/pull/5432) [71baee5](https://github.com/yamada-ui/yamada-ui/commit/71baee56d63f17c847fad6354e4203a0c7a2d72c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the popover did not open on focus when `allowInput` was enabled in `DatePicker` and `ColorPicker`.
 
-  Fixes #5286
+- [#5432](https://github.com/yamada-ui/yamada-ui/pull/5432) [eb55e1a](https://github.com/yamada-ui/yamada-ui/commit/eb55e1ace3557443c32958350de946ba8ae436b5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where focus did not move correctly in `DatePicker` and `ColorPicker`.
+
+- [#5432](https://github.com/yamada-ui/yamada-ui/pull/5432) [6a9d9bc](https://github.com/yamada-ui/yamada-ui/commit/6a9d9bcdbf5b5643d95f5404e9519b3bf415df17) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `transferFocus` option to `usePopover`. If `true`, the focus will be transferred to the popover content when the tab key is pressed. Default is `true`.
+
+- [#5489](https://github.com/yamada-ui/yamada-ui/pull/5489) [2c464f3](https://github.com/yamada-ui/yamada-ui/commit/2c464f3c0b2436e0d03b283d8c3f9576ba38c063) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the focused style for invalid input was incorrect when the variant was set to "flushed" for `Select`, `Autocomplete`, `DatePicker`, and `ColorPicker`.
+
+- [#5432](https://github.com/yamada-ui/yamada-ui/pull/5432) [bfff6d5](https://github.com/yamada-ui/yamada-ui/commit/bfff6d58e71806b24077c3ad4b3a42cf09f32d9d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - `useCombobox` now returns `popoverProps`.
+
+- [#5432](https://github.com/yamada-ui/yamada-ui/pull/5432) [71baee5](https://github.com/yamada-ui/yamada-ui/commit/71baee56d63f17c847fad6354e4203a0c7a2d72c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where `openOnClick` was not working for `DatePicker`, `ColorPicker`, `Autocomplete`, and `Select`.
+- [371fedb](https://github.com/yamada-ui/yamada-ui/commit/371fedbc66a67ee69d2bcc1a51d2b94ebd26d0ab) Updated dependencies.
+
+## @yamada-ui/cli@2.0.5
+
+This version was released on October 27, 2025.
+
+### Patch changes
+
+- [371fedb](https://github.com/yamada-ui/yamada-ui/commit/371fedbc66a67ee69d2bcc1a51d2b94ebd26d0ab) Updated dependencies.
+
+## @yamada-ui/utils@2.0.4
+
+This version was released on October 27, 2025.
+
+### Patch changes
+
+- [#5495](https://github.com/yamada-ui/yamada-ui/pull/5495) [371fedb](https://github.com/yamada-ui/yamada-ui/commit/371fedbc66a67ee69d2bcc1a51d2b94ebd26d0ab) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added fallback options to browser checks.

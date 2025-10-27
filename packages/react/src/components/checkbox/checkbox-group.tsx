@@ -21,7 +21,7 @@ import {
 } from "./checkbox"
 import { CheckboxGroupContext, useCheckboxGroup } from "./use-checkbox-group"
 
-export interface CheckboxItem<Y extends string = string>
+export interface CheckboxGroupItem<Y extends string = string>
   extends CheckboxProps<Y> {
   label: ReactNode
 }
@@ -40,7 +40,7 @@ export interface CheckboxGroupRootProps<Y extends string = string>
    *
    * @default []
    */
-  items?: CheckboxItem<Y>[]
+  items?: CheckboxGroupItem<Y>[]
 }
 
 /**
@@ -126,3 +126,5 @@ export const CheckboxGroupRoot = component<"div", CheckboxGroupRootProps>(
 )() as GenericsComponent<{
   <Y extends string = string>(props: CheckboxGroupRootProps<Y>): ReactElement
 }>
+
+export { Checkbox as CheckboxGroupItem }

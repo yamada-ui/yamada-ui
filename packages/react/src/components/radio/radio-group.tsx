@@ -21,7 +21,8 @@ import {
 } from "./radio"
 import { RadioGroupContext, useRadioGroup } from "./use-radio-group"
 
-export interface RadioItem<Y extends string = string> extends RadioProps<Y> {
+export interface RadioGroupItem<Y extends string = string>
+  extends RadioProps<Y> {
   label: ReactNode
 }
 
@@ -38,7 +39,7 @@ export interface RadioGroupRootProps<Y extends string = string>
    *
    * @default []
    */
-  items?: RadioItem<Y>[]
+  items?: RadioGroupItem<Y>[]
 }
 
 /**
@@ -118,3 +119,5 @@ export const RadioGroupRoot = component<"div", RadioGroupRootProps>((props) => {
 }, "group")() as GenericsComponent<{
   <Y extends string = string>(props: RadioGroupRootProps<Y>): ReactElement
 }>
+
+export { Radio as RadioGroupItem }

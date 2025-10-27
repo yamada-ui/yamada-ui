@@ -118,7 +118,7 @@ describe("<Breadcrumb />", () => {
   })
 
   test("renders breadcrumb correctly with items", () => {
-    const items: Breadcrumb.RootProps["items"] = [
+    const items: Breadcrumb.Item[] = [
       { href: "/", label: "サイヤ人編" },
       { href: "/", label: "ナメック星編" },
       { href: "/", label: "人造人間編" },
@@ -131,7 +131,7 @@ describe("<Breadcrumb />", () => {
   })
 
   test("is correctly truncated", () => {
-    const items: Breadcrumb.RootProps["items"] = [
+    const items: Breadcrumb.Item[] = [
       { href: "/1", label: "サイヤ人編" },
       { href: "/2", label: "ナメック星編" },
       { href: "/3", label: "人造人間編" },
@@ -152,7 +152,7 @@ describe("<Breadcrumb />", () => {
   })
 
   test("if boundaries is 0 or undefined, 1 is correctly reflected.", () => {
-    const items: Breadcrumb.RootProps["items"] = [
+    const items: Breadcrumb.Item[] = [
       { href: "/1", label: "サイヤ人編" },
       { href: "/2", label: "ナメック星編" },
       { href: "/3", label: "人造人間編" },
@@ -198,7 +198,7 @@ describe("<Breadcrumb />", () => {
   test("retrieve omitted items correctly", () => {
     const ellipsis = vi.fn()
 
-    const items: Breadcrumb.RootProps["items"] = [
+    const items: Breadcrumb.Item[] = [
       { href: "/", label: "サイヤ人編" },
       { href: "/", label: "ナメック星編" },
       { href: "/", label: "人造人間編" },

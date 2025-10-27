@@ -1,0 +1,332 @@
+{
+  "SaturationSlider": {
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+        "defaultValue": "\"md\"",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "defaultValue": {
+        "type": "[number, number, number]",
+        "defaultValue": "[0, 0, 1]",
+        "description": "The initial value of the saturation slider.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be disabled.",
+        "required": false
+      },
+      "getAriaValueText": {
+        "type": "(value: [number, number, number]) => string | undefined",
+        "description": "This is used to format the value so that screen readers\ncan speak out a more human-friendly value.\n\nIt is used to set the `aria-valuetext` property of the input.",
+        "required": false
+      },
+      "id": {
+        "type": "string",
+        "description": "The base `id` to use for the slider.",
+        "required": false
+      },
+      "inputProps": {
+        "type": "HTMLStyledProps<\"input\">",
+        "description": "Props for the input element.",
+        "required": false
+      },
+      "invalid": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be invalid.",
+        "required": false
+      },
+      "name": {
+        "type": "string",
+        "description": "The name attribute of the hidden `input` field.\nThis is particularly useful in forms.",
+        "required": false
+      },
+      "onChange": {
+        "type": "(value: [number, number, number]) => void",
+        "description": "Function called whenever the saturation slider value changes.",
+        "required": false
+      },
+      "onChangeEnd": {
+        "type": "(value: [number, number, number]) => void",
+        "description": "Function called when the user is done selecting a new value.",
+        "required": false
+      },
+      "onChangeStart": {
+        "type": "(value: [number, number, number]) => void",
+        "description": "Function called when the user starts selecting a new value.",
+        "required": false
+      },
+      "readOnly": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be readonly.",
+        "required": false
+      },
+      "required": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be required.",
+        "required": false
+      },
+      "shape": {
+        "type": "\"circle\" | \"rounded\" | \"square\"",
+        "defaultValue": "\"circle\"",
+        "description": "The shape of the thumb.",
+        "required": false
+      },
+      "step": {
+        "type": "number",
+        "defaultValue": "0.01",
+        "description": "The step in which increments or decrements have to be made.",
+        "required": false
+      },
+      "thumbProps": {
+        "type": "SaturationSliderThumbProps",
+        "description": "Props for the thumb element.",
+        "required": false
+      },
+      "trackProps": {
+        "type": "SaturationSliderTrackProps",
+        "description": "Props for the track element.",
+        "required": false
+      },
+      "value": {
+        "type": "[number, number, number]",
+        "description": "The value of the saturation slider.",
+        "required": false
+      }
+    },
+    "Thumb": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Track": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    }
+  },
+  "SaturationSliderRoot": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+      "defaultValue": "\"md\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "defaultValue": {
+      "type": "[number, number, number]",
+      "defaultValue": "[0, 0, 1]",
+      "description": "The initial value of the saturation slider.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be disabled.",
+      "required": false
+    },
+    "getAriaValueText": {
+      "type": "(value: [number, number, number]) => string | undefined",
+      "description": "This is used to format the value so that screen readers\ncan speak out a more human-friendly value.\n\nIt is used to set the `aria-valuetext` property of the input.",
+      "required": false
+    },
+    "id": {
+      "type": "string",
+      "description": "The base `id` to use for the slider.",
+      "required": false
+    },
+    "inputProps": {
+      "type": "HTMLStyledProps<\"input\">",
+      "description": "Props for the input element.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be invalid.",
+      "required": false
+    },
+    "name": {
+      "type": "string",
+      "description": "The name attribute of the hidden `input` field.\nThis is particularly useful in forms.",
+      "required": false
+    },
+    "onChange": {
+      "type": "(value: [number, number, number]) => void",
+      "description": "Function called whenever the saturation slider value changes.",
+      "required": false
+    },
+    "onChangeEnd": {
+      "type": "(value: [number, number, number]) => void",
+      "description": "Function called when the user is done selecting a new value.",
+      "required": false
+    },
+    "onChangeStart": {
+      "type": "(value: [number, number, number]) => void",
+      "description": "Function called when the user starts selecting a new value.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be required.",
+      "required": false
+    },
+    "shape": {
+      "type": "\"circle\" | \"rounded\" | \"square\"",
+      "defaultValue": "\"circle\"",
+      "description": "The shape of the thumb.",
+      "required": false
+    },
+    "step": {
+      "type": "number",
+      "defaultValue": "0.01",
+      "description": "The step in which increments or decrements have to be made.",
+      "required": false
+    },
+    "thumbProps": {
+      "type": "SaturationSliderThumbProps",
+      "description": "Props for the thumb element.",
+      "required": false
+    },
+    "trackProps": {
+      "type": "SaturationSliderTrackProps",
+      "description": "Props for the track element.",
+      "required": false
+    },
+    "value": {
+      "type": "[number, number, number]",
+      "description": "The value of the saturation slider.",
+      "required": false
+    }
+  },
+  "SaturationSliderThumb": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "SaturationSliderTrack": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  }
+}

@@ -6,7 +6,7 @@ on:
       - "packages/**/*.(html|ts|tsx)"
       - "packages/**/package.json"
       - "!packages/(cli|workspace)/**"
-      - "!packages/**/(scripts|test)/**"
+      - "!packages/**/test/**"
       - "!packages/**/*.test.(ts|tsx)"
       - "package.json"
     branches:
@@ -31,6 +31,12 @@ jobs:
 
       - name: Build Storybook
         run: pnpm react storybook:build
+
+      - name: Insert ignored-build-step.sh
+        run: |
+          dir="packages/react/storybook-static/www"
+          mkdir -p "$dir" && touch "$dir/ignored-build-step.sh"
+          echo "exit 0" > "$dir/ignored-build-step.sh"
 
       - name: Update Storybook
         uses: JamesIves/github-pages-deploy-action@v4.5.0

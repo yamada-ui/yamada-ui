@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "关闭",
   },
+  colorPicker: {
+    "Pick a color": "选择颜色",
+  },
+  colorSelector: {
+    "Pick a color": "选择颜色",
+  },
   datePicker: {
     "Clear value": "清除值",
   },
@@ -65,6 +71,11 @@ const data: IntlData = {
   progress: {
     "Loading...": "加载中...",
     "{value} percent": "{value}百分比",
+  },
+  saturationSlider: {
+    "Saturation and brightness thumb": "饱和度和亮度滑块",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "饱和度 {saturation}%, 亮度 {brightness}%",
   },
   select: {
     "Clear value": "清除值",

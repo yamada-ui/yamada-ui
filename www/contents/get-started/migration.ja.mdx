@@ -1,6 +1,6 @@
 ---
 title: マイグレーション
-description: v1.xからv2.xに移行する方法。
+description: v1.xからv2.xの新しい機能と改善点。
 ---
 
 ## 新しい機能
@@ -192,7 +192,7 @@ return (
 )
 ```
 
-上記の例では、`BadgePropsContext`の子要素にある`Badge`は、すべて`variant`が`outline`になります。
+上記の例では、`BadgePropsContext`の子要素にある`Badge`は、すべて`variant`が`"outline"`になります。
 
 ### ポリモーフィズム
 
@@ -496,7 +496,7 @@ return <Box animation={animation} />
 ### テーマ
 
 - `transitions`を削除しました。代わりに、[easings](/docs/theming/tokens/easings)と[durations](/docs/theming/tokens/durations)を使用してください。
-- `semanticTokens`を削除しました。代わりに`semantics`を使用してください。
+- `semantics`を削除しました。代わりに`semanticTokens`を使用してください。
 - `components`を削除しました。コンポーネントをスタイリングする場合は、[CLI](/docs/components/cli)を使用してください。
 - `extendBaseTheme`を削除しました。代わりに、`extendTheme`を使用してください。
 - `extendStyle`を削除しました。代わりに、`extendTheme`を使用してください。
@@ -620,9 +620,8 @@ return <Box animation={animation} />
 
 ## 移行が完了していないコンポーネント
 
-v2.0では、以下のコンポーネントの移行が完了していません。これらの移行は、v2.xで行われる予定です。
+v2.0では、以下のコンポーネントの移行が完了していません。これらの移行は、v2.0.xで行われる予定です。
 
-- [SaturationSlider](/docs/components/saturation-slider)
 - [AreaChart](/docs/components/area-chart)
 - [BarChart](/docs/components/bar-chart)
 - [DonutChart](/docs/components/donut-chart)

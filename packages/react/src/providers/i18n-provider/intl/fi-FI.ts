@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "Sulje",
   },
+  colorPicker: {
+    "Pick a color": "Valitse väri",
+  },
+  colorSelector: {
+    "Pick a color": "Valitse väri",
+  },
   datePicker: {
     "Clear value": "Tyhjennä arvo",
   },
@@ -65,6 +71,11 @@ const data: IntlData = {
   progress: {
     "Loading...": "Ladataan...",
     "{value} percent": "{value} prosenttia",
+  },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Kylläisyyden ja kirkkauden liukusäädin",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Kylläisyys {saturation}%, Kirkkaus {brightness}%",
   },
   select: {
     "Clear value": "Tyhjennä arvo",

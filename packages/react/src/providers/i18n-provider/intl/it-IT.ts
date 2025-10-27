@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "Chiudi",
   },
+  colorPicker: {
+    "Pick a color": "Scegli un colore",
+  },
+  colorSelector: {
+    "Pick a color": "Scegli un colore",
+  },
   datePicker: {
     "Clear value": "Cancella valore",
   },
@@ -65,6 +71,11 @@ const data: IntlData = {
   progress: {
     "Loading...": "Caricamento...",
     "{value} percent": "{value} percento",
+  },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Cursore di saturazione e luminosità",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Saturazione {saturation}%, Luminosità {brightness}%",
   },
   select: {
     "Clear value": "Cancella valore",

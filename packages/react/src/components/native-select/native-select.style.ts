@@ -1,13 +1,17 @@
 import { defineComponentSlotStyle } from "../../core"
 import {
   getInputHeightStyle,
-  getInputPaddingResetStyle,
+  getInputPaddingStartResetStyle,
   inputStyle,
 } from "../input"
 
 export const nativeSelectStyle = defineComponentSlotStyle({
   base: {
-    field: { ...inputStyle.base, _readOnly: { pointerEvents: "none" } },
+    field: {
+      ...inputStyle.base,
+      "& > option, optgroup": { bg: "bg.float" },
+      _readOnly: { pointerEvents: "none" },
+    },
     icon: {
       alignItems: "center",
       color: "colorScheme.outline",
@@ -15,9 +19,7 @@ export const nativeSelectStyle = defineComponentSlotStyle({
       fontSize: "1em",
       justifyContent: "center",
       rounded: "l1",
-      _disabled: {
-        layerStyle: "disabled",
-      },
+      _disabled: { layerStyle: "disabled" },
     },
     root: {},
   },
@@ -28,7 +30,9 @@ export const nativeSelectStyle = defineComponentSlotStyle({
     },
     flushed: {
       field: inputStyle.variants?.flushed,
-      root: getInputPaddingResetStyle("& > :is(select, [role='combobox'])"),
+      root: getInputPaddingStartResetStyle(
+        "& > :is(select, [role='combobox'])",
+      ),
     },
     outline: {
       field: inputStyle.variants?.outline,

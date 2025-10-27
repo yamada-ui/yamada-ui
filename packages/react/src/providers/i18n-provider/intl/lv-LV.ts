@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "Aizvērt",
   },
+  colorPicker: {
+    "Pick a color": "Izvēlieties krāsu",
+  },
+  colorSelector: {
+    "Pick a color": "Izvēlieties krāsu",
+  },
   datePicker: {
     "Clear value": "Notīrīt vērtību",
   },
@@ -65,6 +71,11 @@ const data: IntlData = {
   progress: {
     "Loading...": "Ielādē...",
     "{value} percent": "{value} procenti",
+  },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Piesātinājuma un spilgtuma slīdnis",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Piesātinājums {saturation}%, Spilgtums {brightness}%",
   },
   select: {
     "Clear value": "Notīrīt vērtību",

@@ -33,6 +33,11 @@
           "pathname": "/docs/get-started/accessibility"
         },
         {
+          "title": "レガシードキュメント",
+          "segment": "legacy",
+          "pathname": "/docs/get-started/legacy"
+        },
+        {
           "title": "フレームワーク",
           "segment": "frameworks",
           "items": [
@@ -176,6 +181,12 @@
               "pathname": "/docs/components/center"
             },
             {
+              "title": "Chat",
+              "segment": "chat",
+              "pathname": "/docs/components/chat",
+              "status": "planned"
+            },
+            {
               "title": "Checkbox",
               "segment": "checkbox",
               "pathname": "/docs/components/checkbox"
@@ -204,6 +215,11 @@
               "title": "ColorPicker",
               "segment": "color-picker",
               "pathname": "/docs/components/color-picker"
+            },
+            {
+              "title": "ColorSelector",
+              "segment": "color-selector",
+              "pathname": "/docs/components/color-selector"
             },
             {
               "title": "ColorSwatch",
@@ -285,6 +301,12 @@
               "title": "Float",
               "segment": "float",
               "pathname": "/docs/components/float"
+            },
+            {
+              "title": "Form",
+              "segment": "form",
+              "pathname": "/docs/components/form",
+              "status": "planned"
             },
             {
               "title": "Grid",
@@ -382,6 +404,12 @@
               "pathname": "/docs/components/modal"
             },
             {
+              "title": "NativePopover",
+              "segment": "native-popover",
+              "pathname": "/docs/components/native-popover",
+              "status": "planned"
+            },
+            {
               "title": "NativeSelect",
               "segment": "native-select",
               "pathname": "/docs/components/native-select"
@@ -431,6 +459,12 @@
               "title": "Progress",
               "segment": "progress",
               "pathname": "/docs/components/progress"
+            },
+            {
+              "title": "QrCode",
+              "segment": "qr-code",
+              "pathname": "/docs/components/qr-code",
+              "status": "planned"
             },
             {
               "title": "Radio",
@@ -567,6 +601,12 @@
               "title": "TimePicker",
               "segment": "time-picker",
               "pathname": "/docs/components/time-picker",
+              "status": "planned"
+            },
+            {
+              "title": "Tip",
+              "segment": "tip",
+              "pathname": "/docs/components/tip",
               "status": "planned"
             },
             {
@@ -1258,7 +1298,82 @@
     {
       "title": "変更履歴",
       "segment": "changelog",
-      "pathname": "/docs/changelog"
+      "pathname": "/docs/changelog",
+      "items": [
+        {
+          "title": "@yamada-ui/react",
+          "segment": "react",
+          "items": [
+            {
+              "title": "v2.0.4",
+              "segment": "2-0-4",
+              "pathname": "/docs/changelog/react/2-0-4"
+            },
+            {
+              "title": "v2.0.2",
+              "segment": "2-0-2",
+              "pathname": "/docs/changelog/react/2-0-2"
+            },
+            {
+              "title": "v2.0.1",
+              "segment": "2-0-1",
+              "pathname": "/docs/changelog/react/2-0-1"
+            },
+            {
+              "title": "v2.0.0",
+              "segment": "2-0-0",
+              "pathname": "/docs/changelog/react/2-0-0"
+            }
+          ]
+        },
+        {
+          "title": "@yamada-ui/cli",
+          "segment": "cli",
+          "items": [
+            {
+              "title": "v2.0.4",
+              "segment": "2-0-4",
+              "pathname": "/docs/changelog/cli/2-0-4"
+            },
+            {
+              "title": "v2.0.2",
+              "segment": "2-0-2",
+              "pathname": "/docs/changelog/cli/2-0-2"
+            },
+            {
+              "title": "v2.0.1",
+              "segment": "2-0-1",
+              "pathname": "/docs/changelog/cli/2-0-1"
+            },
+            {
+              "title": "v2.0.0",
+              "segment": "2-0-0",
+              "pathname": "/docs/changelog/cli/2-0-0"
+            }
+          ]
+        },
+        {
+          "title": "@yamada-ui/utils",
+          "segment": "utils",
+          "items": [
+            {
+              "title": "v2.0.3",
+              "segment": "2-0-3",
+              "pathname": "/docs/changelog/utils/2-0-3"
+            },
+            {
+              "title": "v2.0.1",
+              "segment": "2-0-1",
+              "pathname": "/docs/changelog/utils/2-0-1"
+            },
+            {
+              "title": "v2.0.0",
+              "segment": "2-0-0",
+              "pathname": "/docs/changelog/utils/2-0-0"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

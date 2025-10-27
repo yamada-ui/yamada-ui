@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "Κλείσιμο",
   },
+  colorPicker: {
+    "Pick a color": "Επιλέξτε ένα χρώμα",
+  },
+  colorSelector: {
+    "Pick a color": "Επιλέξτε ένα χρώμα",
+  },
   datePicker: {
     "Clear value": "Καθαρισμός τιμής",
   },
@@ -65,6 +71,11 @@ const data: IntlData = {
   progress: {
     "Loading...": "Φόρτωση...",
     "{value} percent": "{value} τοις εκατό",
+  },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Προσαρμογέας κορεσμού και φωτεινότητας",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Κορεσμός {saturation}%, Φωτεινότητα {brightness}%",
   },
   select: {
     "Clear value": "Καθαρισμός τιμής",

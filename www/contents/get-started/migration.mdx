@@ -1,6 +1,6 @@
 ---
 title: Migration
-description: How to migrate from v1.x to v2.x.
+description: New features and improvements from v1.x to v2.x.
 ---
 
 ## New Features
@@ -192,7 +192,7 @@ return (
 )
 ```
 
-In the above example, the `Badge` in the child elements of `BadgePropsContext` will all have `variant` set to `outline`.
+In the above example, the `Badge` in the child elements of `BadgePropsContext` will all have `variant` set to `"outline"`.
 
 ### Polymorphism
 
@@ -465,9 +465,9 @@ The improvement points of each component are described in the documentation of e
 - [CSS Value Functions](/docs/styling/css-value-functions) can now be used for tokens.
 - [Interpolation](/docs/styling/interpolation) can now be used for tokens.
 - [Theme](/docs/theming) can now be defined using `defineTheme`.
-- [Tokens](/docs/theming/tokens) can now be defined using `defineTokens`.
-- [Semantic Tokens](/docs/theming/tokens/semantic-tokens) can now be defined using `defineSemanticTokens`.
-- [Styles](/docs/theming/styles) can now be defined using `defineStyles`.
+- Tokens can now be defined using `defineTokens`.
+- Semantic tokens can now be defined using `defineSemanticTokens`.
+- Styles can now be defined using `defineStyles`.
 - [Config](/docs/theming/config) can now be defined using `defineConfig`.
 - The slot names of the components have been adjusted and changed.
 - The global styles have been adjusted.
@@ -496,7 +496,7 @@ The improvement points of each component are described in the documentation of e
 ### Theme
 
 - `transitions` has been removed. Use [easings](/docs/theming/tokens/easings) and [durations](/docs/theming/tokens/durations) instead.
-- `semanticTokens` has been removed. Use `semantics` instead.
+- `semantics` has been removed. Use `semanticTokens` instead.
 - `components` has been removed. Use [CLI](/docs/components/cli) to style components.
 - `extendBaseTheme` has been removed. Use `extendTheme` instead.
 - `extendStyle` has been removed. Use `extendTheme` instead.
@@ -620,9 +620,8 @@ The improvement points of each component are described in the documentation of e
 
 ## Components that have not been migrated
 
-v2.0 does not have all components migrated. These will be migrated in v2.x.
+v2.0 does not have all components migrated. These will be migrated in v2.0.x.
 
-- [SaturationSlider](/docs/components/saturation-slider)
 - [AreaChart](/docs/components/area-chart)
 - [BarChart](/docs/components/bar-chart)
 - [DonutChart](/docs/components/donut-chart)

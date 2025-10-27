@@ -5,4 +5,374 @@ storybook: components-colorpicker--basic
 source: components/color-picker
 ---
 
+```tsx preview
+<ColorPicker placeholder="#4387f4" />
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { ColorPicker } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { ColorPicker } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { ColorPicker } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<ColorPicker />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed", "plain"]}>
+    {(variant, index) => (
+      <ColorPicker
+        key={index}
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### サイズを変更する
+
+```tsx preview
+<VStack>
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => (
+      <ColorPicker key={index} size={size} placeholder={`Size (${size})`} />
+    )}
+  </For>
+</VStack>
+```
+
+### カラースキームを変更する
+
+```tsx preview
+<VStack>
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <ColorPicker
+        key={index}
+        colorScheme={colorScheme}
+        placeholder="#4387f4"
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### デフォルトの値を設定する
+
+デフォルトの値を設定する場合は、`defaultValue`に値を設定します。
+
+```tsx preview
+<ColorPicker defaultValue="#4387f4" placeholder="#4387f4" />
+```
+
+### アルファ値を設定する
+
+アルファ値を設定する場合は、`defaultValue`にアルファ値を含む値を設定するか、`format`に`"hexa"`や`"hsla"`などを設定します。
+
+```tsx preview
+<ColorPicker defaultValue="#775999A0" placeholder="#775999A0" />
+```
+
+### フォーマットを変更する
+
+フォーマットを変更する場合は、`format`に値を設定します。デフォルトでは、`value`または`defaultValue`の文字列からフォーマットを判定しています。
+
+```tsx preview
+<ColorPicker placeholder="hsl(0, 100%, 50%)" format="hsl" />
+```
+
+### 入力値を制限する
+
+入力値を制限する場合は、`pattern`に正規表現を設定します。
+
+```tsx preview
+<ColorPicker placeholder="#4387f4" pattern={/[^a-fA-F0-9#]/g} />
+```
+
+### 入力値をフォーマットする
+
+入力値をフォーマットする場合は、`formatInput`に関数を設定します。
+
+```tsx preview client
+<ColorPicker
+  placeholder="#4387f4"
+  pattern={/[^a-fA-F0-9#]/g}
+  formatInput={(value) => value.toUpperCase()}
+/>
+```
+
+### 候補を表示する
+
+候補を表示する場合は、`colorSwatches`に配列を設定します。
+
+```tsx preview
+<ColorPicker
+  placeholder="#4387f4"
+  colorSwatches={[
+    "hsl(0, 100%, 50%)",
+    "hsl(45, 100%, 50%)",
+    "hsl(90, 100%, 50%)",
+    "hsl(135, 100%, 50%)",
+    "hsl(180, 100%, 50%)",
+    "hsl(225, 100%, 50%)",
+    "hsl(270, 100%, 50%)",
+    "hsl(315, 100%, 50%)",
+  ]}
+  colorSwatchGroupLabel="Pick a color"
+/>
+```
+
+### 候補の列を変更する
+
+候補の列を変更する場合は、`colorSwatchGroupColumns`に数値を設定します。
+
+```tsx preview
+<ColorPicker
+  placeholder="#4387f4"
+  colorSwatches={[
+    "hsl(0, 100%, 50%)",
+    "hsl(36, 100%, 50%)",
+    "hsl(72, 100%, 50%)",
+    "hsl(108, 100%, 50%)",
+    "hsl(144, 100%, 50%)",
+    "hsl(180, 100%, 50%)",
+    "hsl(216, 100%, 50%)",
+    "hsl(252, 100%, 50%)",
+    "hsl(288, 100%, 50%)",
+    "hsl(324, 100%, 50%)",
+  ]}
+  colorSwatchGroupLabel="Pick a color"
+  colorSwatchGroupColumns={10}
+/>
+```
+
+### オフセットを変更する
+
+オフセットを変更する場合は、`gutter`または`offset`に値を設定します。
+
+```tsx preview
+<ColorPicker placeholder="#4387f4" gutter={16} />
+```
+
+### アニメーションを変更する
+
+アニメーションを変更する場合は、`animationScheme`に`"block-start"`や`"inline-end"`などを設定します。デフォルトでは、`"scale"`が設定されています。
+
+```tsx preview
+<ColorPicker placeholder="#4387f4" animationScheme="inline-start" />
+```
+
+### 表示位置を変更する
+
+表示位置を変更するには、`placement`に`end`や`start-center`などを設定します。デフォルトでは、`end-start`が設定されています。
+
+```tsx preview
+<ColorPicker
+  placeholder="#4387f4"
+  animationScheme="inline-start"
+  placement="center-end"
+  rootProps={{ w: "xs" }}
+/>
+```
+
+### スクロールをブロックする
+
+スクロールをブロックするには、`blockScrollOnMount`を`true`に設定します。
+
+```tsx preview
+<ColorPicker placeholder="#4387f4" blockScrollOnMount />
+```
+
+### スクロール時にドロップダウンを閉じる
+
+スクロール時にドロップダウンを閉じる場合は、`closeOnScroll`を`true`に設定します。
+
+```tsx preview
+<ColorPicker placeholder="#4387f4" closeOnScroll />
+```
+
+### 変更時にドロップダウンを開くイベントをハンドルする
+
+変更時にドロップダウンを開くイベントをハンドルする場合は、`openOnChange`に関数を設定します。
+
+```tsx preview client
+<ColorPicker
+  placeholder="#4387f4"
+  openOnFocus={false}
+  openOnChange={(ev) => ev.target.value.length > 1}
+/>
+```
+
+### 変更時にドロップダウンを閉じるイベントをハンドルする
+
+変更時にドロップダウンを閉じるイベントをハンドルする場合は、`closeOnChange`に関数を設定します。
+
+```tsx preview client
+<ColorPicker
+  placeholder="#4387f4"
+  openOnFocus={false}
+  closeOnChange={(ev) => !ev.target.value.length}
+/>
+```
+
+### フォーカス時にドロップダウンを開かない
+
+フォーカス時にドロップダウンを開かない場合は、`openOnFocus`を`false`に設定します。
+
+```tsx preview
+<ColorPicker placeholder="#4387f4" openOnFocus={false} />
+```
+
+### クリック時にドロップダウンを開かない
+
+クリック時にドロップダウンを開かない場合は、`openOnClick`を`false`に設定します。
+
+```tsx preview
+<ColorPicker placeholder="#4387f4" openOnClick={false} />
+```
+
+### フォーカスが外れた場合に閉じない
+
+フォーカスが外れた場合にドロップダウンを閉じない場合は、`closeOnBlur`を`false`に設定します。
+
+```tsx preview
+<ColorPicker placeholder="#4387f4" closeOnBlur={false} />
+```
+
+### ESCキーが入力された時にドロップダウンを閉じない
+
+ESCキーが入力された時にドロップダウンを閉じない場合は、`closeOnEsc`を`false`に設定します。
+
+```tsx preview
+<ColorPicker placeholder="#4387f4" closeOnEsc={false} />
+```
+
+### 入力を許可しない
+
+入力を許可しない場合は、`allowInput`を`false`に設定します。
+
+```tsx preview
+<ColorPicker placeholder="#4387f4" allowInput={false} />
+```
+
+### 形を変える
+
+```tsx preview
+<VStack>
+  <For each={["rounded", "circle", "square"]}>
+    {(shape, index) => (
+      <ColorPicker
+        key={index}
+        placeholder="#4387f4"
+        selectorProps={{ shape }}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`に設定します。
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant, index) => (
+      <ColorPicker
+        key={index}
+        variant={variant}
+        disabled
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant, index) => (
+      <ColorPicker
+        key={index}
+        variant={variant}
+        readOnly
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### 無効な入力にする
+
+無効な入力にする場合は、`invalid`を`true`に設定します。
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant, index) => (
+      <ColorPicker
+        key={index}
+        variant={variant}
+        invalid
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### ボーダーの色を変更する
+
+ボーダーの色を変更する場合は、`focusBorderColor`または`errorBorderColor`に値を設定します。
+
+```tsx preview
+<VStack>
+  <ColorPicker focusBorderColor="green.500" placeholder="custom border color" />
+  <ColorPicker
+    invalid
+    errorBorderColor="orange.500"
+    placeholder="custom border color"
+  />
+</VStack>
+```
+
+### 制御する
+
+```tsx preview functional
+const [value, onChange] = useState<string>("#4387f4")
+
+return <ColorPicker value={value} onChange={onChange} />
+```
+
+## Props
+
+<PropsTable name="color-picker" />
+
+## アクセシビリティ
+
+現在、v2の移行に伴い、このセクションは更新中です。

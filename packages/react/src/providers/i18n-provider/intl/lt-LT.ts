@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "Uždaryti",
   },
+  colorPicker: {
+    "Pick a color": "Pasirinkite spalvą",
+  },
+  colorSelector: {
+    "Pick a color": "Pasirinkite spalvą",
+  },
   datePicker: {
     "Clear value": "Išvalyti reikšmę",
   },
@@ -65,6 +71,11 @@ const data: IntlData = {
   progress: {
     "Loading...": "Įkeliama...",
     "{value} percent": "{value} procentų",
+  },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Sodrumo ir šviesumo slankiklis",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Sodrumas {saturation}%, Šviesumas {brightness}%",
   },
   select: {
     "Clear value": "Išvalyti reikšmę",

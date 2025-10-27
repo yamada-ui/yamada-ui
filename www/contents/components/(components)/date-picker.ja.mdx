@@ -78,7 +78,7 @@ import { DatePicker } from "@workspaces/ui"
 
 ### フォーマットを変更する
 
-フォーマットを変更する場合は、`format`オブジェクトを設定します。
+フォーマットを変更する場合は、`format`にオブジェクトを設定します。
 
 ```tsx preview functional
 const format = useMemo<DatePickerFormat>(
@@ -158,7 +158,7 @@ return <DatePicker format={format} />
 
 特定の曜日を無効にする場合は、`excludeDate`を使用します。
 
-```tsx preview
+```tsx preview client
 <DatePicker excludeDate={(date) => [0, 1, 6].includes(date.getDay())} />
 ```
 
@@ -225,7 +225,7 @@ return <DatePicker format={format} />
 
 入力された値の解析をハンドルする場合は、`parseDate`を使用します。
 
-```tsx preview
+```tsx preview client
 <DatePicker parseDate={(value) => new Date(value)} />
 ```
 
@@ -303,8 +303,7 @@ return <DatePicker holidays={holidays} />
 
 ### アニメーションを変更する
 
-アニメーションを変更する場合は、`animationScheme`に`"block-start"`や`"inline-end"`などを設定します。
-デフォルトでは、`"scale"`が設定されています。
+アニメーションを変更する場合は、`animationScheme`に`"block-start"`や`"inline-end"`などを設定します。デフォルトでは、`"scale"`が設定されています。
 
 ```tsx preview
 <DatePicker animationScheme="inline-start" />
@@ -330,14 +329,6 @@ return <DatePicker holidays={holidays} />
 <DatePicker blockScrollOnMount />
 ```
 
-### フォーカス時にドロップダウンを開く
-
-フォーカス時にドロップダウンを開く場合は、`openOnFocus`を`true`に設定します。
-
-```tsx preview
-<DatePicker openOnFocus />
-```
-
 ### スクロール時にドロップダウンを閉じる
 
 スクロール時にドロップダウンを閉じる場合は、`closeOnScroll`を`true`に設定します。
@@ -350,16 +341,30 @@ return <DatePicker holidays={holidays} />
 
 変更時にドロップダウンを開くイベントをハンドルする場合は、`openOnChange`に関数を設定します。
 
-```tsx preview
-<DatePicker openOnChange={(ev) => ev.target.value.length > 1} />
+```tsx preview client
+<DatePicker
+  openOnFocus={false}
+  openOnChange={(ev) => ev.target.value.length > 1}
+/>
 ```
 
 ### 変更時にドロップダウンを閉じるイベントをハンドルする
 
 変更時にドロップダウンを閉じるイベントをハンドルする場合は、`closeOnChange`に関数を設定します。
 
+```tsx preview client
+<DatePicker
+  openOnFocus={false}
+  closeOnChange={(ev) => !ev.target.value.length}
+/>
+```
+
+### フォーカス時にドロップダウンを開かない
+
+フォーカス時にドロップダウンを開かない場合は、`openOnFocus`を`false`に設定します。
+
 ```tsx preview
-<DatePicker closeOnChange={(ev) => !ev.target.value.length} />
+<DatePicker openOnFocus={false} />
 ```
 
 ### クリック時にドロップダウンを開かない
@@ -536,7 +541,7 @@ ESCキーが入力された時にドロップダウンを閉じない場合は�
 
 カレンダーをカスタマイズして、表示を変更できます。
 
-```tsx preview
+```tsx preview client
 <VStack>
   <DatePicker>
     <Calendar.Navigation>
@@ -581,3 +586,7 @@ return <DatePicker value={value} onChange={onChange} />
 ## Props
 
 <PropsTable name="date-picker" />
+
+## アクセシビリティ
+
+現在、v2の移行に伴い、このセクションは更新中です。

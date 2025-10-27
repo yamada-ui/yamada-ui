@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "Stäng",
   },
+  colorPicker: {
+    "Pick a color": "Välj en färg",
+  },
+  colorSelector: {
+    "Pick a color": "Välj en färg",
+  },
   datePicker: {
     "Clear value": "Rensa värde",
   },
@@ -65,6 +71,11 @@ const data: IntlData = {
   progress: {
     "Loading...": "Laddar...",
     "{value} percent": "{value} procent",
+  },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Mättnads- och ljusstyrkeregler",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Mättnad {saturation}%, Ljusstyrka {brightness}%",
   },
   select: {
     "Clear value": "Rensa värde",

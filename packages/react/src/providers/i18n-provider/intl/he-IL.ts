@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "סגור",
   },
+  colorPicker: {
+    "Pick a color": "בחר צבע",
+  },
+  colorSelector: {
+    "Pick a color": "בחר צבע",
+  },
   datePicker: {
     "Clear value": "נקה ערך",
   },
@@ -65,6 +71,11 @@ const data: IntlData = {
   progress: {
     "Loading...": "טוען...",
     "{value} percent": "{value} אחוז",
+  },
+  saturationSlider: {
+    "Saturation and brightness thumb": "מחוון רוויה ובהירות",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "רוויה {saturation}%, בהירות {brightness}%",
   },
   select: {
     "Clear value": "נקה ערך",

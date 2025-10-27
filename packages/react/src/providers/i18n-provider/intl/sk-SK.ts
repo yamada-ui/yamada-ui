@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "Zatvoriť",
   },
+  colorPicker: {
+    "Pick a color": "Vyberte farbu",
+  },
+  colorSelector: {
+    "Pick a color": "Vyberte farbu",
+  },
   datePicker: {
     "Clear value": "Vymazať hodnotu",
   },
@@ -65,6 +71,11 @@ const data: IntlData = {
   progress: {
     "Loading...": "Načítava sa...",
     "{value} percent": "{value} percent",
+  },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Posuvník sýtosti a jasu",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Sýtost {saturation}%, Jas {brightness}%",
   },
   select: {
     "Clear value": "Vymazať hodnotu",

@@ -11,7 +11,6 @@ import type { HTMLProps, HTMLRefAttributes, PropGetter } from "../../core"
 import type { UseComboboxProps } from "../../hooks/use-combobox"
 import type { Dict } from "../../utils"
 import type {
-  Calendar,
   CalendarFormat,
   MaybeDateValue,
   UseCalendarProps,
@@ -22,6 +21,7 @@ import {
   cloneElement,
   isValidElement,
   useCallback,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -30,9 +30,11 @@ import { useCombobox } from "../../hooks/use-combobox"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"
 import {
+  ariaAttr,
   cast,
   contains,
   dataAttr,
+  focusTransfer,
   handlerAll,
   isArray,
   isComposing,
@@ -110,6 +112,14 @@ export interface UseDatePickerProps<
     HTMLRefAttributes<"input">,
     FieldProps {
   /**
+   * The `id` attribute of the input element.
+   */
+  id?: string
+  /**
+   * The `name` attribute of the input element.
+   */
+  name?: string
+  /**
    * If `true`, allows input.
    *
    * @default true
@@ -157,7 +167,7 @@ export interface UseDatePickerProps<
   /**
    * If `true`, the date picker will be opened when the input is focused.
    *
-   * @default false
+   * @default true
    */
   openOnFocus?: boolean
   /**
@@ -201,7 +211,9 @@ export const useDatePicker = <
   const { locale: defaultLocale, t } = useI18n("datePicker")
   const {
     props: {
+      id,
       ref,
+      name,
       allowInput = true,
       allowInputBeyond = false,
       closeOnChange = false,
@@ -223,12 +235,14 @@ export const useDatePicker = <
       max,
       month: monthProp,
       openOnChange = true,
-      openOnFocus = false,
+      openOnClick = true,
+      openOnFocus = true,
       parseDate,
       pattern,
       placeholder: placeholderProp,
       readOnly,
       render = defaultRender,
+      required,
       separator = range ? "-" : ",",
       value: valueProp,
       onChange: onChangeProp,
@@ -257,11 +271,11 @@ export const useDatePicker = <
   }, [format])
   const [calendarProps, rest] = useCalendarProps<Multiple, Range>(computedProps)
   const { excludeDate } = calendarProps
-  const rootRef = useRef<HTMLDivElement>(null)
   const fieldRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const startInputRef = useRef<HTMLInputElement>(null)
   const endInputRef = useRef<HTMLInputElement>(null)
+  const focusByClickRef = useRef<boolean>(false)
   const [focused, setFocused] = useState(false)
   const [value, setValue] = useControllableState({
     defaultValue: defaultValue as MaybeDateValue<Multiple, Range>,
@@ -358,13 +372,18 @@ export const useDatePicker = <
     open,
     getContentProps: getComboboxContentProps,
     getTriggerProps,
+    popoverProps,
     onClose,
     onOpen,
   } = useCombobox({
     disabled,
+    matchWidth: false,
+    openOnClick: false,
     openOnEnter: !allowInput,
     openOnSpace: !allowInput,
+    placement: "end-start",
     readOnly,
+    transferFocus: false,
     ...ariaProps,
     ...dataProps,
     ...eventProps,
@@ -633,28 +652,34 @@ export const useDatePicker = <
 
   const onClick = useCallback(
     (ev: MouseEvent<HTMLDivElement>) => {
-      if (!interactive || !allowInput) return
+      if (!interactive) return
 
-      if (isObject(value) && !isArray(value) && !isDate(value)) {
-        if (contains(startInputRef.current, ev.target)) return
-        if (contains(endInputRef.current, ev.target)) return
+      focusByClickRef.current = true
 
-        const { end, start } = value
+      if (allowInput) {
+        if (isObject(value) && !isArray(value) && !isDate(value)) {
+          if (contains(startInputRef.current, ev.target)) return
+          if (contains(endInputRef.current, ev.target)) return
 
-        if ((!start && !end) || !!end) {
-          startInputRef.current?.focus()
+          const { end, start } = value
+
+          if ((!start && !end) || !!end) {
+            startInputRef.current?.focus()
+          } else {
+            endInputRef.current?.focus()
+          }
         } else {
-          endInputRef.current?.focus()
+          startInputRef.current?.focus()
         }
-      } else {
-        startInputRef.current?.focus()
       }
+
+      if (openOnClick) onOpen()
     },
-    [allowInput, interactive, value],
+    [allowInput, interactive, onOpen, openOnClick, value],
   )
 
   const onMouseDown = useCallback(
-    (ev: MouseEvent<HTMLInputElement>) => {
+    (ev: MouseEvent<HTMLDivElement | HTMLInputElement>) => {
       if (!openOnFocus) return
 
       ev.preventDefault()
@@ -663,14 +688,24 @@ export const useDatePicker = <
     [openOnFocus],
   )
 
-  const onFocus = useCallback(
+  const onFieldFocus = useCallback(() => {
+    if (allowInput) return
+
+    if (openOnFocus) onOpen()
+
+    focusByClickRef.current = false
+  }, [allowInput, onOpen, openOnFocus])
+
+  const onInputFocus = useCallback(
     (ev: FocusEvent<HTMLInputElement>) => {
       ev.preventDefault()
       ev.stopPropagation()
 
       setFocused(true)
 
-      if (openOnFocus) onOpen()
+      if (openOnFocus && !focusByClickRef.current) onOpen()
+
+      focusByClickRef.current = false
     },
     [onOpen, openOnFocus],
   )
@@ -680,7 +715,7 @@ export const useDatePicker = <
       setFocused(false)
 
       if (
-        contains(rootRef.current, ev.relatedTarget) ||
+        contains(fieldRef.current, ev.relatedTarget) ||
         contains(contentRef.current, ev.relatedTarget)
       ) {
         ev.preventDefault()
@@ -705,6 +740,8 @@ export const useDatePicker = <
   )
 
   const onClear = useCallback(() => {
+    if (!interactive) return
+
     setValue((prev) => {
       if (isDate(prev)) {
         return undefined as MaybeDateValue<Multiple, Range>
@@ -731,7 +768,16 @@ export const useDatePicker = <
         fieldRef.current?.focus()
       }
     }
-  }, [allowInput, focusOnClear, range, setInputValue, setValue])
+  }, [allowInput, focusOnClear, interactive, range, setInputValue, setValue])
+
+  useEffect(() => {
+    if (!open) return
+
+    return focusTransfer(
+      contentRef.current,
+      allowInput ? startInputRef.current : fieldRef.current,
+    )
+  }, [allowInput, open])
 
   useUpdateEffect(() => {
     setMonth((prev) => getAdjustedMonth(value, prev))
@@ -751,8 +797,7 @@ export const useDatePicker = <
   }, [valueProp])
 
   const getRootProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
-      ref: mergeRefs(ref, rootRef),
+    (props) => ({
       "data-range": dataAttr(range),
       ...dataProps,
       ...props,
@@ -767,11 +812,12 @@ export const useDatePicker = <
         "aria-haspopup": "dialog",
         tabIndex: !allowInput ? 0 : -1,
         ...props,
-        onBlur: handlerAll(props.onBlur, onBlur),
         onClick: handlerAll(props.onClick, onClick),
+        onFocus: handlerAll(props.onFocus, onFieldFocus),
+        onMouseDown: handlerAll(props.onMouseDown, onMouseDown),
       }),
 
-    [allowInput, getTriggerProps, onBlur, onClick],
+    [allowInput, getTriggerProps, onClick, onFieldFocus, onMouseDown],
   )
 
   const getInputProps: PropGetter<"input", { align?: InputAlign }> =
@@ -783,12 +829,15 @@ export const useDatePicker = <
             ...props.style,
           },
           autoComplete: "off",
-          disabled: !interactive,
+          disabled,
+          readOnly,
+          required,
           tabIndex: allowInput ? 0 : -1,
           ...dataProps,
           ...props,
+          onBlur: handlerAll(props.onBlur, onBlur),
           onChange: handlerAll(props.onChange, onInputChange),
-          onFocus: handlerAll(props.onFocus, onFocus),
+          onFocus: handlerAll(props.onFocus, onInputFocus),
           onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
           onMouseDown: handlerAll(props.onMouseDown, onMouseDown),
         }
@@ -803,9 +852,21 @@ export const useDatePicker = <
             inputProps.value = inputValue.end
             inputProps.placeholder = endPlaceholder
           }
+
+          if (!inputValue.start && align === "start") {
+            inputProps.id = id
+            inputProps.name = name
+          }
+
+          if (!!inputValue.start && align === "end") {
+            inputProps.id = id
+            inputProps.name = name
+          }
         } else {
           inputProps.ref = mergeRefs(props.ref, ref, startInputRef)
           inputProps.value = inputValue
+          inputProps.id = id
+          inputProps.name = name
 
           if (isArray(value)) {
             inputProps.style = {
@@ -830,16 +891,21 @@ export const useDatePicker = <
       [
         allowInput,
         dataProps,
+        disabled,
         endPlaceholder,
         focused,
+        id,
         inputValue,
-        interactive,
         max,
-        onFocus,
+        name,
+        onBlur,
+        onInputFocus,
         onInputChange,
         onKeyDown,
         onMouseDown,
+        readOnly,
         ref,
+        required,
         startPlaceholder,
         value,
       ],
@@ -855,15 +921,28 @@ export const useDatePicker = <
     [getComboboxContentProps],
   )
 
-  const getCalendarProps: PropGetter<
-    "div",
-    Calendar.RootProps<Multiple, Range>,
-    Calendar.RootProps<Multiple, Range>
-  > = useCallback(
-    (props) =>
-      ({
-        disabled: !interactive,
-        format: calendarFormat,
+  const getCalendarProps: PropGetter<UseCalendarProps<Multiple, Range>> =
+    useCallback(
+      (props) =>
+        ({
+          disabled: !interactive,
+          format: calendarFormat,
+          locale,
+          max,
+          maxDate,
+          minDate,
+          month,
+          multiple,
+          range,
+          value,
+          onChange,
+          onChangeMonth: setMonth,
+          ...calendarProps,
+          ...props,
+        }) as UseCalendarProps<Multiple, Range>,
+      [
+        interactive,
+        calendarFormat,
         locale,
         max,
         maxDate,
@@ -873,26 +952,10 @@ export const useDatePicker = <
         range,
         value,
         onChange,
-        onChangeMonth: setMonth,
-        ...calendarProps,
-        ...props,
-      }) as Calendar.RootProps<Multiple, Range>,
-    [
-      interactive,
-      calendarFormat,
-      locale,
-      max,
-      maxDate,
-      minDate,
-      month,
-      multiple,
-      range,
-      value,
-      onChange,
-      setMonth,
-      calendarProps,
-    ],
-  )
+        setMonth,
+        calendarProps,
+      ],
+    )
 
   const getIconProps: PropGetter = useCallback(
     (props) => ({ ...dataProps, ...props }),
@@ -902,19 +965,17 @@ export const useDatePicker = <
   const getClearIconProps: PropGetter = useCallback(
     (props = {}) =>
       getIconProps({
+        "aria-disabled": ariaAttr(!interactive),
         "aria-label": t("Clear value"),
         role: "button",
-        tabIndex: 0,
+        tabIndex: interactive ? 0 : -1,
         ...props,
         onClick: handlerAll(props.onClick, onClear),
         onKeyDown: handlerAll(props.onKeyDown, (ev) =>
-          runKeyAction(ev, {
-            Enter: onClear,
-            Space: onClear,
-          }),
+          runKeyAction(ev, { Enter: onClear, Space: onClear }),
         ),
       }),
-    [getIconProps, onClear, t],
+    [getIconProps, interactive, onClear, t],
   )
 
   return {
@@ -938,6 +999,7 @@ export const useDatePicker = <
     getIconProps,
     getInputProps,
     getRootProps,
+    popoverProps,
     onChange,
     onClose,
     onInputChange,

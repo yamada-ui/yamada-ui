@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "閉じる",
   },
+  colorPicker: {
+    "Pick a color": "色を選択する",
+  },
+  colorSelector: {
+    "Pick a color": "色を選択する",
+  },
   datePicker: {
     "Clear value": "値を消去する",
   },
@@ -65,6 +71,11 @@ const data: IntlData = {
   progress: {
     "Loading...": "読み込み中...",
     "{value} percent": "{value}パーセント",
+  },
+  saturationSlider: {
+    "Saturation and brightness thumb": "彩度と明度のつまみ",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "彩度 {saturation}%, 明度 {brightness}%",
   },
   select: {
     "Clear value": "値を消去する",

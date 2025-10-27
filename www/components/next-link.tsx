@@ -13,7 +13,7 @@ import { Link as OriginalLink } from "@/i18n"
 export interface NextLinkProps extends LinkProps {}
 
 export const NextLink: FC<NextLinkProps> = ({ ...rest }) => {
-  return <Link as={OriginalLink} {...rest} />
+  return <Link as={OriginalLink} colorScheme="mono" {...rest} />
 }
 
 export interface NextLinkButtonProps

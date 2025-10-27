@@ -6,13 +6,13 @@ import type {
   HTMLProps,
   HTMLStyledProps,
   ThemeProps,
-  WithoutThemeProps,
 } from "../../core"
 import type {
   ComboboxItem,
   UseComboboxGroupProps,
 } from "../../hooks/use-combobox"
 import type { UseInputBorderProps } from "../input"
+import type { PopupAnimationProps } from "../popover"
 import type { SelectStyle } from "./select.style"
 import type {
   UseSelectOptionProps,
@@ -34,7 +34,7 @@ import { cast, isArray } from "../../utils"
 import { useGroupItemProps } from "../group"
 import { CheckIcon, ChevronDownIcon, XIcon } from "../icon"
 import { InputGroup, useInputBorder, useInputPropsContext } from "../input"
-import { Popover, usePopoverProps } from "../popover"
+import { Popover } from "../popover"
 import { selectStyle } from "./select.style"
 import { SelectContext, useSelect, useSelectOption } from "./use-select"
 
@@ -48,16 +48,7 @@ export interface SelectRootProps<Multiple extends boolean = false>
       "defaultValue" | "offset" | "onChange" | "value"
     >,
     UseSelectProps<Multiple>,
-    Omit<
-      WithoutThemeProps<Popover.RootProps, SelectStyle>,
-      | "autoFocus"
-      | "children"
-      | "initialFocusRef"
-      | "modal"
-      | "transform"
-      | "updateRef"
-      | "withCloseButton"
-    >,
+    PopupAnimationProps,
     ThemeProps<SelectStyle>,
     UseInputBorderProps {
   /**
@@ -125,16 +116,17 @@ export { SelectPropsContext, useSelectPropsContext }
  */
 export const SelectRoot = withProvider<"div", SelectRootProps>(
   <Multiple extends boolean = false>(props: SelectRootProps<Multiple>) => {
-    const [groupItemProps, mergedProps] = useGroupItemProps(props)
     const [
-      popoverProps,
+      groupItemProps,
       {
         className,
         css,
         colorScheme,
+        animationScheme = "block-start",
         children,
         clearable,
         clearIcon = <XIcon />,
+        duration,
         errorBorderColor,
         focusBorderColor,
         icon,
@@ -148,14 +140,7 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
         rootProps,
         ...rest
       },
-    ] = usePopoverProps(mergedProps, [
-      "disabled",
-      "open",
-      "defaultOpen",
-      "onOpen",
-      "onClose",
-      "openOnClick",
-    ])
+    ] = useGroupItemProps(props)
     const items = useMemo<ComboboxItem[]>(() => {
       if (itemsProp) return itemsProp
 
@@ -168,36 +153,30 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
     const {
       descendants,
       includePlaceholder,
-      interactive,
       items: computedItems,
       max,
-      open,
       placeholder,
       value,
       getClearIconProps,
       getContentProps,
       getFieldProps,
       getIconProps,
+      getInputProps,
       getRootProps,
       getSeparatorProps,
+      popoverProps,
       onActiveDescendant,
       onChange,
       onClose,
-      onOpen,
       onSelect,
     } = useSelect({ items, ...rest })
     const mergedPopoverProps = useMemo<Popover.RootProps>(
       () => ({
-        animationScheme: "block-start",
-        autoFocus: false,
-        matchWidth: true,
+        animationScheme,
+        duration,
         ...popoverProps,
-        disabled: !interactive,
-        open,
-        onClose,
-        onOpen,
       }),
-      [interactive, onClose, onOpen, open, popoverProps],
+      [animationScheme, duration, popoverProps],
     )
     const computedChildren = useMemo(() => {
       if (children)
@@ -246,6 +225,8 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
           <SelectContext value={selectContext}>
             <ComponentContext value={componentContext}>
               <Popover.Root {...mergedPopoverProps}>
+                <styled.input {...getInputProps()} />
+
                 <InputGroup.Root
                   className={className}
                   css={css}

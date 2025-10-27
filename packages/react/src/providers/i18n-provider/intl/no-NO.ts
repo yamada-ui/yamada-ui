@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "Lukk",
   },
+  colorPicker: {
+    "Pick a color": "Velg en farge",
+  },
+  colorSelector: {
+    "Pick a color": "Velg en farge",
+  },
   datePicker: {
     "Clear value": "Tøm verdi",
   },
@@ -65,6 +71,11 @@ const data: IntlData = {
   progress: {
     "Loading...": "Laster...",
     "{value} percent": "{value} prosent",
+  },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Metnings- og lysstyrkeregler",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Metning {saturation}%, Lysstyrke {brightness}%",
   },
   select: {
     "Clear value": "Tøm verdi",

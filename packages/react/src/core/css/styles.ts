@@ -4622,7 +4622,9 @@ export interface StyleProps {
   /**
    * ### caret-shape
    *
-   * The CSS `caret-shape` property.
+   * The <code>caret-shape</code> CSS property controls the shape of the insertion caret, the symbol that shows where the next character is to be inserted or deleted.
+   *
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/caret-shape
    *
@@ -5303,7 +5305,11 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/display
    */
   display?: StyleValueWithCondition<
-    "center" | "hidden" | "inline-center" | CSS.Property.Display
+    | "absolute-center"
+    | "center"
+    | "hidden"
+    | "inline-center"
+    | CSS.Property.Display
   >
   /**
    * ### dominant-baseline
@@ -5326,7 +5332,7 @@ export interface StyleProps {
    *
    * The CSS `dynamic-range-limit` property.
    *
-   * @see https://drafts.csswg.org/css-color-hdr/#the-dynamic-range-limit-property
+   * @see https://developer.mozilla.org/docs/Web/CSS/dynamic-range-limit
    */
   dynamicRangeLimit?: StyleValueWithCondition<AnyString>
   /**
@@ -7673,7 +7679,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-images-5/#propdef-object-view-box
+   * @see https://developer.mozilla.org/docs/Web/CSS/object-view-box
    *
    * @experimental
    */

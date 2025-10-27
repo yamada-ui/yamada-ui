@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "Închide",
   },
+  colorPicker: {
+    "Pick a color": "Alege o culoare",
+  },
+  colorSelector: {
+    "Pick a color": "Alege o culoare",
+  },
   datePicker: {
     "Clear value": "Șterge valoarea",
   },
@@ -65,6 +71,11 @@ const data: IntlData = {
   progress: {
     "Loading...": "Se încarcă...",
     "{value} percent": "{value} la sută",
+  },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Glisor de saturație și luminozitate",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Saturație {saturation}%, Luminozitate {brightness}%",
   },
   select: {
     "Clear value": "Șterge valoarea",

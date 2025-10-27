@@ -1,7 +1,7 @@
 "use client"
 
 import type { GridProps } from "@yamada-ui/react"
-import { Box, useInjectVarsIntoProps } from "@yamada-ui/react"
+import { Box, Grid, useInjectVarsIntoProps } from "@yamada-ui/react"
 import { useLayoutEffect, useState } from "react"
 import { codeToHtml } from "@/libs/shiki"
 import { CopyButton } from "./copy-button"
@@ -21,6 +21,7 @@ export function CodePreview({
   children = code,
   highlight,
   html: htmlProp,
+  tabIndex = 0,
   ...props
 }: CodePreviewProps) {
   const rest = useInjectVarsIntoProps(
@@ -45,7 +46,7 @@ export function CodePreview({
   if (!html || !children) return null
 
   return (
-    <Box {...rest} bg="{bg}" position="relative" rounded="l2">
+    <Grid {...rest} bg="{bg}" position="relative" rounded="l2">
       <Box
         maxH={{ base: "lg", md: "md" }}
         minH={{ base: "16", md: "12" }}
@@ -119,7 +120,7 @@ export function CodePreview({
           ps="{space}"
           py="{space}"
           rounded="l2"
-          tabIndex={0}
+          tabIndex={tabIndex}
         />
       </Box>
 
@@ -129,6 +130,6 @@ export function CodePreview({
         top={{ base: "3.5", md: "2" }}
         value={children}
       />
-    </Box>
+    </Grid>
   )
 }

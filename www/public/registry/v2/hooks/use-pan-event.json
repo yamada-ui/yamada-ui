@@ -1,12 +1,16 @@
 {
-  "$schema": "https://v2.yamada-ui.com/registry/v2/schema.json",
+  "$schema": "https://yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
     "components": [],
     "externals": [],
     "hooks": [],
     "providers": []
   },
-  "dependents": { "components": ["slider"], "hooks": [], "providers": [] },
+  "dependents": {
+    "components": ["saturation-slider", "slider"],
+    "hooks": [],
+    "providers": []
+  },
   "section": "hooks",
   "sources": [
     {

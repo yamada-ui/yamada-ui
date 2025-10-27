@@ -7,7 +7,6 @@ on:
 jobs:
   issue-and-pull-request:
     runs-on: ubuntu-latest
-    if: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,7 +31,14 @@ jobs:
           ${{ vars.OBSERVE_API_URL }}
 
       - name: Create or update test issues
-        run: pnpm test:issue
+        run: pnpm issue:coverage
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
           CODECOV_API_TOKEN: ${{ secrets.CODECOV_API_TOKEN }}
+
+      - name: Create or update a11y issues
+        run: |
+          pnpm react test:a11y
+          pnpm issue:a11y --no-report
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}

@@ -28,6 +28,7 @@ import { useCombobox, useComboboxItem } from "../../hooks/use-combobox"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"
 import {
+  ariaAttr,
   cast,
   contains,
   createContext,
@@ -138,6 +139,14 @@ export interface UseAutocompleteProps<Multiple extends boolean = false>
     HTMLRefAttributes<"input">,
     FieldProps {
   /**
+   * The `id` attribute of the input element.
+   */
+  id?: string
+  /**
+   * The `name` attribute of the input element.
+   */
+  name?: string
+  /**
    * If `true`, the autocomplete will allow custom value.
    *
    * @default false
@@ -206,7 +215,7 @@ export interface UseAutocompleteProps<Multiple extends boolean = false>
   /**
    * If `true`, the autocomplete will be opened when the input is focused.
    *
-   * @default false
+   * @default true
    */
   openOnFocus?: boolean
   /**
@@ -245,7 +254,9 @@ export const useAutocomplete = <Multiple extends boolean = false>(
   const { t } = useI18n("autocomplete")
   const {
     props: {
+      id,
       ref,
+      name,
       allowCustomValue = false,
       closeOnChange = false,
       multiple = false,
@@ -261,10 +272,12 @@ export const useAutocomplete = <Multiple extends boolean = false>(
       matcher = defaultMatcher,
       max,
       openOnChange = true,
-      openOnFocus = false,
+      openOnClick = true,
+      openOnFocus = true,
       placeholder,
       readOnly,
       render = defaultRender,
+      required,
       separator = ",",
       value: valueProp,
       onChange: onChangeProp,
@@ -275,9 +288,10 @@ export const useAutocomplete = <Multiple extends boolean = false>(
     dataProps,
     eventProps,
   } = useFieldProps(props)
-  const rootRef = useRef<HTMLDivElement>(null)
+  const fieldRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const focusByClickRef = useRef<boolean>(false)
   const valueMap = useMemo<{ [key: string]: ComboboxItemWithValue }>(() => {
     const valueMap: { [key: string]: ComboboxItemWithValue } = {}
 
@@ -346,6 +360,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
     getContentProps: getComboboxContentProps,
     getSeparatorProps,
     getTriggerProps,
+    popoverProps,
     onActiveDescendant,
     onClose,
     onOpen,
@@ -355,6 +370,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
     closeOnSelect,
     disabled,
     initialFocusValue: isArray(value) ? value[0] : value,
+    openOnClick: false,
     openOnEnter: false,
     openOnSpace: false,
     readOnly,
@@ -504,8 +520,12 @@ export const useAutocomplete = <Multiple extends boolean = false>(
   const onClick = useCallback(() => {
     if (!interactive) return
 
+    focusByClickRef.current = true
+
     inputRef.current?.focus()
-  }, [interactive])
+
+    if (openOnClick) onOpenWithActiveDescendant(descendants.enabledFirstValue)
+  }, [descendants, interactive, onOpenWithActiveDescendant, openOnClick])
 
   const onMouseDown = useCallback(
     (ev: MouseEvent<HTMLInputElement>) => {
@@ -524,9 +544,12 @@ export const useAutocomplete = <Multiple extends boolean = false>(
 
       setFocused(true)
 
-      if (openOnFocus) onOpenWithActiveDescendant(descendants.enabledFirstValue)
+      if (openOnFocus && !focusByClickRef.current)
+        onOpenWithActiveDescendant(descendants.enabledFirstValue)
+
+      focusByClickRef.current = false
     },
-    [openOnFocus, onOpenWithActiveDescendant, descendants],
+    [openOnFocus, onOpenWithActiveDescendant, descendants.enabledFirstValue],
   )
 
   const onBlur = useCallback(
@@ -534,7 +557,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
       setFocused(false)
 
       if (
-        contains(rootRef.current, ev.relatedTarget) ||
+        contains(fieldRef.current, ev.relatedTarget) ||
         contains(contentRef.current, ev.relatedTarget)
       ) {
         ev.preventDefault()
@@ -556,11 +579,13 @@ export const useAutocomplete = <Multiple extends boolean = false>(
   )
 
   const onClear = useCallback(() => {
+    if (!interactive) return
+
     setValue((prev) => (isArray(prev) ? [] : "") as MaybeValue)
     setInputValue("")
 
     if (focusOnClear) inputRef.current?.focus()
-  }, [focusOnClear, setInputValue, setValue])
+  }, [focusOnClear, interactive, setInputValue, setValue])
 
   useUpdateEffect(() => {
     if (isArray(valueProp)) return
@@ -571,8 +596,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
   }, [valueProp])
 
   const getRootProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
-      ref: mergeRefs(ref, rootRef),
+    (props) => ({
       ...dataProps,
       ...props,
     }),
@@ -580,8 +604,9 @@ export const useAutocomplete = <Multiple extends boolean = false>(
   )
 
   const getFieldProps: PropGetter = useCallback(
-    (props = {}) =>
+    ({ ref, ...props } = {}) =>
       getTriggerProps({
+        ref: mergeRefs(ref, fieldRef),
         tabIndex: -1,
         ...props,
         onClick: handlerAll(props.onClick, onClick),
@@ -592,7 +617,9 @@ export const useAutocomplete = <Multiple extends boolean = false>(
 
   const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}) => ({
+      id,
       ref: mergeRefs(props.ref, ref, inputRef),
+      name,
       style: {
         ...(!focused && isArray(value) && !!value.length
           ? visuallyHiddenAttributes.style
@@ -605,8 +632,10 @@ export const useAutocomplete = <Multiple extends boolean = false>(
       autoCapitalize: "off",
       autoComplete: "off",
       autoCorrect: "off",
-      disabled: !interactive,
+      disabled,
       placeholder: hasValues ? undefined : placeholder,
+      readOnly,
+      required,
       spellCheck: false,
       value: inputValue,
       ...dataProps,
@@ -619,18 +648,22 @@ export const useAutocomplete = <Multiple extends boolean = false>(
     }),
     [
       dataProps,
+      disabled,
       focused,
       hasValues,
+      id,
       inputValue,
-      interactive,
       max,
+      name,
       onBlur,
       onFocus,
       onInputChange,
       onKeyDown,
       onMouseDown,
       placeholder,
+      readOnly,
       ref,
+      required,
       value,
     ],
   )
@@ -653,19 +686,17 @@ export const useAutocomplete = <Multiple extends boolean = false>(
   const getClearIconProps: PropGetter = useCallback(
     (props = {}) =>
       getIconProps({
+        "aria-disabled": ariaAttr(!interactive),
         "aria-label": t("Clear value"),
         role: "button",
-        tabIndex: 0,
+        tabIndex: interactive ? 0 : -1,
         ...props,
         onClick: handlerAll(props.onClick, onClear),
         onKeyDown: handlerAll(props.onKeyDown, (ev) =>
-          runKeyAction(ev, {
-            Enter: onClear,
-            Space: onClear,
-          }),
+          runKeyAction(ev, { Enter: onClear, Space: onClear }),
         ),
       }),
-    [getIconProps, onClear, t],
+    [getIconProps, interactive, onClear, t],
   )
 
   return {
@@ -687,6 +718,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
     getInputProps,
     getRootProps,
     getSeparatorProps,
+    popoverProps,
     onActiveDescendant,
     onChange,
     onClose,

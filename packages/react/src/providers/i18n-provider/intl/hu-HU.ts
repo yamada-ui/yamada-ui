@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "Bezárás",
   },
+  colorPicker: {
+    "Pick a color": "Válasszon színt",
+  },
+  colorSelector: {
+    "Pick a color": "Válasszon színt",
+  },
   datePicker: {
     "Clear value": "Érték törlése",
   },
@@ -65,6 +71,11 @@ const data: IntlData = {
   progress: {
     "Loading...": "Betöltés...",
     "{value} percent": "{value} százalék",
+  },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Telítettség és fényerő csúszka",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Telítettség {saturation}%, Fényerő {brightness}%",
   },
   select: {
     "Clear value": "Érték törlése",

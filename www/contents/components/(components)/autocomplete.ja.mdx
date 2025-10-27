@@ -543,29 +543,6 @@ return (
 )
 ```
 
-### フォーカス時にドロップダウンを開く
-
-フォーカス時にドロップダウンを開く場合は、`openOnFocus`を`true`に設定します。
-
-```tsx preview functional
-const items = useMemo<Autocomplete.Item[]>(
-  () => [
-    { label: "アグモン", value: "アグモン" },
-    { label: "ガブモン", value: "ガブモン" },
-    { label: "テントモン", value: "テントモン" },
-    { label: "ピヨモン", value: "ピヨモン" },
-    { label: "ゴマモン", value: "ゴマモン" },
-    { label: "パルモン", value: "パルモン" },
-    { label: "パタモン", value: "パタモン" },
-    { label: "テイルモン", value: "テイルモン" },
-  ],
-  [],
-)
-return (
-  <Autocomplete.Root openOnFocus placeholder="Select a digimon" items={items} />
-)
-```
-
 ### スクロール時にドロップダウンを閉じる
 
 スクロール時にドロップダウンを閉じる場合は、`closeOnScroll`を`true`に設定します。
@@ -614,8 +591,9 @@ const items = useMemo<Autocomplete.Item[]>(
 )
 return (
   <Autocomplete.Root
-    items={items}
+    openOnFocus={false}
     openOnChange={(ev) => ev.target.value.length > 2}
+    items={items}
     placeholder="Select a digimon"
   />
 )
@@ -642,9 +620,37 @@ const items = useMemo<Autocomplete.Item[]>(
 
 return (
   <Autocomplete.Root
+    openOnFocus={false}
     closeOnChange={(ev) => !ev.target.value.length}
     items={items}
     placeholder="Select a digimon"
+  />
+)
+```
+
+### フォーカス時にドロップダウンを開かない
+
+フォーカス時にドロップダウンを開かない場合は、`openOnFocus`を`false`に設定します。
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+return (
+  <Autocomplete.Root
+    openOnFocus={false}
+    placeholder="Select a digimon"
+    items={items}
   />
 )
 ```
@@ -670,8 +676,8 @@ const items = useMemo<Autocomplete.Item[]>(
 
 return (
   <Autocomplete.Root
-    items={items}
     openOnClick={false}
+    items={items}
     placeholder="Select a digimon"
   />
 )
@@ -1130,3 +1136,7 @@ return (
 ## Props
 
 <PropsTable name="autocomplete" />
+
+## アクセシビリティ
+
+現在、v2の移行に伴い、このセクションは更新中です。

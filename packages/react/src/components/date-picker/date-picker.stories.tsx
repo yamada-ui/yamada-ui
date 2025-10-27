@@ -28,7 +28,12 @@ const meta: Meta<typeof DatePicker> = {
 export default meta
 
 export const Basic: Story = () => {
-  return <DatePicker />
+  return (
+    <>
+      <DatePicker />
+      <DatePicker />
+    </>
+  )
 }
 
 export const Variant: Story = () => {
@@ -238,16 +243,22 @@ export const BlockScrollOnMount: Story = () => {
   )
 }
 
-export const OpenOnFocus: Story = () => {
-  return <DatePicker openOnFocus />
-}
-
 export const OpenOnChange: Story = () => {
-  return <DatePicker openOnChange={(ev) => ev.target.value.length > 1} />
+  return (
+    <DatePicker
+      openOnChange={(ev) => ev.target.value.length > 1}
+      openOnFocus={false}
+    />
+  )
 }
 
 export const CloseOnChange: Story = () => {
-  return <DatePicker closeOnChange={(ev) => !ev.target.value.length} />
+  return (
+    <DatePicker
+      closeOnChange={(ev) => !ev.target.value.length}
+      openOnFocus={false}
+    />
+  )
 }
 
 export const CloseOnScroll: Story = () => {
@@ -256,6 +267,10 @@ export const CloseOnScroll: Story = () => {
       <DatePicker closeOnScroll />
     </Box>
   )
+}
+
+export const DisabledOpenOnFocus: Story = () => {
+  return <DatePicker openOnFocus={false} />
 }
 
 export const DisabledOpenOnClick: Story = () => {
@@ -280,6 +295,10 @@ export const DisabledCloseOnEsc: Story = () => {
 
 export const DisabledClearable: Story = () => {
   return <DatePicker clearable={false} />
+}
+
+export const DisallowInput: Story = () => {
+  return <DatePicker allowInput={false} />
 }
 
 export const Shape: Story = () => {
@@ -522,7 +541,7 @@ export const CustomCalendar: Story = () => {
 }
 
 export const CustomControl: Story = () => {
-  const [value, setValue] = useState<Date | undefined>(undefined)
+  const [value, setValue] = useState<Date | undefined>(new Date())
 
   return <DatePicker value={value} onChange={setValue} />
 }
@@ -536,12 +555,9 @@ export const ReactHookForm: Story = () => {
     control,
     formState: { errors },
     handleSubmit,
-    watch,
   } = useForm<Data>()
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
-
-  console.log("watch:", watch())
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
@@ -569,7 +585,7 @@ export const ReactHookForm: Story = () => {
 
 export const ReactHookFormDefaultValue: Story = () => {
   interface Data {
-    datePicker: Date
+    datePicker: Date | null
   }
 
   const defaultValues: Data = {
@@ -580,12 +596,9 @@ export const ReactHookFormDefaultValue: Story = () => {
     control,
     formState: { errors },
     handleSubmit,
-    watch,
   } = useForm<Data>({ defaultValues })
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
-
-  console.log("watch:", watch())
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
@@ -597,7 +610,15 @@ export const ReactHookFormDefaultValue: Story = () => {
         <Controller
           name="datePicker"
           control={control}
-          render={({ field }) => <DatePicker {...field} />}
+          render={({ field: { value, onChange, ...rest } }) => {
+            return (
+              <DatePicker
+                value={value ?? undefined}
+                onChange={(value) => onChange(value ?? null)}
+                {...rest}
+              />
+            )
+          }}
           rules={{
             required: { message: "This is required.", value: true },
           }}

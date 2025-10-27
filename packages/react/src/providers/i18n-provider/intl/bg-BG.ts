@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "Затвори",
   },
+  colorPicker: {
+    "Pick a color": "Изберете цвят",
+  },
+  colorSelector: {
+    "Pick a color": "Изберете цвят",
+  },
   datePicker: {
     "Clear value": "Изчисти стойността",
   },
@@ -65,6 +71,11 @@ const data: IntlData = {
   progress: {
     "Loading...": "Зареждане...",
     "{value} percent": "{value} процента",
+  },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Плъзгач за насищане и яркост",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Насищане {saturation}%, Яркост {brightness}%",
   },
   select: {
     "Clear value": "Изчисти стойността",

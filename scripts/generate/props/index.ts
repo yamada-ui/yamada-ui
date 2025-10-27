@@ -182,19 +182,15 @@ function isPrivate(tags: JSDocTagInfo[]) {
   return !!tags.find(({ name }) => name === "private")
 }
 
-function getDefaultValue(name: string, prop: string, tags: JSDocTagInfo[]) {
-  if (prop === "variant" || prop === "size") {
-    return "hoge"
-  } else {
-    const value = tags
-      .find(({ name }) => name === "default")
-      ?.text?.map(({ text }) => text)
-      .join("\n")
+function getDefaultValue(tags: JSDocTagInfo[]) {
+  const value = tags
+    .find(({ name }) => name === "default")
+    ?.text?.map(({ text }) => text)
+    .join("\n")
 
-    if (!value) return
+  if (!value) return
 
-    return value.replace(/^'(.*)'$/, '"$1"')
-  }
+  return value.replace(/^'(.*)'$/, '"$1"')
 }
 
 function getDeprecated(tags: JSDocTagInfo[]) {
@@ -398,7 +394,7 @@ function extractPropsOfTypeName(
 
       const see = getSee(tags)
       const prop = property.getName()
-      const defaultValue = themeProps[prop] ?? getDefaultValue(name, prop, tags)
+      const defaultValue = themeProps[prop] ?? getDefaultValue(tags)
       const deprecated = getDeprecated(tags)
       const description = await getDescription(typeChecker)(property)
       const { type, required } = await getType(sourceFile, typeChecker)(

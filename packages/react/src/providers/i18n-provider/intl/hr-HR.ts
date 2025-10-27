@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "Zatvori",
   },
+  colorPicker: {
+    "Pick a color": "Odaberite boju",
+  },
+  colorSelector: {
+    "Pick a color": "Odaberite boju",
+  },
   datePicker: {
     "Clear value": "Očisti vrijednost",
   },
@@ -65,6 +71,11 @@ const data: IntlData = {
   progress: {
     "Loading...": "Učitavanje...",
     "{value} percent": "{value} posto",
+  },
+  saturationSlider: {
+    "Saturation and brightness thumb": "Klizač zasićenja i svjetline",
+    "Saturation {saturation}%, Brightness {brightness}%":
+      "Zasićenje {saturation}%, Svjetlina {brightness}%",
   },
   select: {
     "Clear value": "Očisti vrijednost",

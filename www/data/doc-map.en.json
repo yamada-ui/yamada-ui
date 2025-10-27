@@ -217,11 +217,6 @@
               "pathname": "/docs/components/color-picker"
             },
             {
-              "title": "ColorSelector",
-              "segment": "color-selector",
-              "pathname": "/docs/components/color-selector"
-            },
-            {
               "title": "ColorSwatch",
               "segment": "color-swatch",
               "pathname": "/docs/components/color-swatch"
@@ -1305,11 +1300,6 @@
           "segment": "react",
           "items": [
             {
-              "title": "v2.0.4",
-              "segment": "2-0-4",
-              "pathname": "/docs/changelog/react/2-0-4"
-            },
-            {
               "title": "v2.0.2",
               "segment": "2-0-2",
               "pathname": "/docs/changelog/react/2-0-2"
@@ -1331,11 +1321,6 @@
           "segment": "cli",
           "items": [
             {
-              "title": "v2.0.4",
-              "segment": "2-0-4",
-              "pathname": "/docs/changelog/cli/2-0-4"
-            },
-            {
               "title": "v2.0.2",
               "segment": "2-0-2",
               "pathname": "/docs/changelog/cli/2-0-2"
@@ -1356,11 +1341,6 @@
           "title": "@yamada-ui/utils",
           "segment": "utils",
           "items": [
-            {
-              "title": "v2.0.3",
-              "segment": "2-0-3",
-              "pathname": "/docs/changelog/utils/2-0-3"
-            },
             {
               "title": "v2.0.1",
               "segment": "2-0-1",

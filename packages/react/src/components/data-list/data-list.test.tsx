@@ -59,4 +59,56 @@ describe("<DataList />", () => {
     expect(screen.getByText("白石うらら").tagName).toBe("DT")
     expect(screen.getByText("入れ替わりの魔女").tagName).toBe("DD")
   })
+
+  test("DataList renders array terms correctly", () => {
+    const items: DataListItemProps[] = [
+      {
+        description: "入れ替わりの魔女",
+        term: ["白石うらら", "山田竜"],
+      },
+    ]
+
+    render(<DataList.Root items={items} />)
+
+    expect(screen.getByText("白石うらら")).toBeInTheDocument()
+    expect(screen.getByText("山田竜")).toBeInTheDocument()
+    expect(screen.getByText("入れ替わりの魔女")).toBeInTheDocument()
+  })
+
+  test("DataList renders array descriptions correctly", () => {
+    const items: DataListItemProps[] = [
+      {
+        description: ["入れ替わりの魔女", "テレポーテーション"],
+        term: "白石うらら",
+      },
+    ]
+
+    render(<DataList.Root items={items} />)
+
+    expect(screen.getByText("白石うらら")).toBeInTheDocument()
+    expect(screen.getByText("入れ替わりの魔女")).toBeInTheDocument()
+    expect(screen.getByText("テレポーテーション")).toBeInTheDocument()
+  })
+
+  test("DataList calculates columns when description is omitted", () => {
+    const items: DataListItemProps[] = [
+      { term: ["白石うらら", "山田竜"] },
+      { description: "虜の魔女", term: "小田切寧々" },
+    ]
+
+    render(<DataList.Root data-testid="root" items={items} />)
+
+    expect(screen.getByTestId("root").style.getPropertyValue("--col")).toBe("2")
+  })
+
+  test("DataList calculates columns when term is omitted", () => {
+    const items: DataListItemProps[] = [
+      { description: ["入れ替わりの魔女", "テレポーテーション"] },
+      { description: "虜の魔女", term: "小田切寧々" },
+    ]
+
+    render(<DataList.Root data-testid="root" items={items} />)
+
+    expect(screen.getByTestId("root").style.getPropertyValue("--col")).toBe("2")
+  })
 })

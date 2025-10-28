@@ -1,6 +1,7 @@
 export {
   NativePopoverAnchor as Anchor,
   NativePopoverBody as Body,
+  NativePopoverCloseTrigger as CloseTrigger,
   NativePopoverContent as Content,
   NativePopoverFooter as Footer,
   NativePopoverHeader as Header,
@@ -12,6 +13,7 @@ export {
 export type {
   NativePopoverAnchorProps as AnchorProps,
   NativePopoverBodyProps as BodyProps,
+  NativePopoverCloseTriggerProps as CloseTriggerProps,
   NativePopoverContentProps as ContentProps,
   NativePopoverFooterProps as FooterProps,
   NativePopoverHeaderProps as HeaderProps,

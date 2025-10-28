@@ -3,6 +3,7 @@ export * as NativePopover from "./namespace"
 export {
   NativePopoverAnchor,
   NativePopoverBody,
+  NativePopoverCloseTrigger,
   NativePopoverContent,
   NativePopoverFooter,
   NativePopoverHeader,
@@ -14,6 +15,7 @@ export {
 export type {
   NativePopoverAnchorProps,
   NativePopoverBodyProps,
+  NativePopoverCloseTriggerProps,
   NativePopoverContentProps,
   NativePopoverFooterProps,
   NativePopoverHeaderProps,

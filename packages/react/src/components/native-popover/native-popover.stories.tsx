@@ -268,3 +268,25 @@ export const Disabled: Story = () => {
     </NativePopover.Root>
   )
 }
+
+export const CloseTrigger: Story = () => {
+  return (
+    <NativePopover.Root>
+      <NativePopover.Trigger>
+        <Button>Click me</Button>
+      </NativePopover.Trigger>
+
+      <NativePopover.Content>
+        <NativePopover.Header>ベジータ!</NativePopover.Header>
+        <NativePopover.Body>
+          がんばれカカロット……お前がナンバー１だ！！
+        </NativePopover.Body>
+        <NativePopover.Footer>
+          <NativePopover.CloseTrigger>
+            <Button variant="ghost">Close</Button>
+          </NativePopover.CloseTrigger>
+        </NativePopover.Footer>
+      </NativePopover.Content>
+    </NativePopover.Root>
+  )
+}

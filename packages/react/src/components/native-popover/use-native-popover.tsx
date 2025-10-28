@@ -176,9 +176,21 @@ export const useNativePopover = ({
 
   const getFooterProps: PropGetter = useCallback((props) => ({ ...props }), [])
 
+  const getCloseTriggerProps: PropGetter<"button"> = useCallback(
+    (props = {}) => {
+      return {
+        popoverTarget: contentId,
+        popoverTargetAction: "hide",
+        ...props,
+      }
+    },
+    [contentId],
+  )
+
   return {
     getAnchorProps,
     getBodyProps,
+    getCloseTriggerProps,
     getContentProps,
     getFooterProps,
     getHeaderProps,

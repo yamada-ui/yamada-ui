@@ -1970,6 +1970,7 @@ export const atRuleStyles = {
   },
   _portrait: { properties: ["@media (orientation: portrait)"] },
   _print: { properties: ["@media print"] },
+  _startingStyle: { properties: ["@starting-style"] },
   _supports: { transform: transforms.supports },
 } as const satisfies StyleConfigs
 
@@ -11096,6 +11097,17 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
   _print?: StyleValueWithCondition<CSSObject>
+  /**
+   * ### starting-style
+   *
+   * The <code>@starting-style</code> CSS at-rule sets the starting values for properties that are transitioning when the target element's style is first updated.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2024-08-06
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/@starting-style
+   */
+  _startingStyle?: StyleValueWithCondition<CSSObject>
   /**
    * ### supports
    *

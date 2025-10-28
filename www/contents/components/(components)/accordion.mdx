@@ -328,4 +328,29 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+`Accordion` follows the [WAI-ARIA - Accordion Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) for accessibility.
+
+### Keyboard Navigation
+
+| Key              | Description                                                                                                         | State                              |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| `Tab`            | Focuses the first item when focus moves to the accordion. Focuses the next item if already within the accordion.    | -                                  |
+| `Shift` + `Tab`  | Focuses the previous item that is not disabled.                                                                     | -                                  |
+| `ArrowUp`        | Focuses the previous item that is not disabled. If it's the first item, focuses the last item that is not disabled. | -                                  |
+| `ArrowDown`      | Focuses the next item that is not disabled. If it's the last item, focuses the first item that is not disabled.     | -                                  |
+| `Space`, `Enter` | Expands the panel of the focused item.                                                                              | -                                  |
+|                  | Expands the panel of the focused item and collapses it if it is already expanded.                                   | `multiple={true}`, `toggle={true}` |
+| `Home`           | Focuses the first item that is not disabled.                                                                        | -                                  |
+| `End`            | Focuses the last item that is not disabled.                                                                         | -                                  |
+
+### ARIA Roles and Attributes
+
+| Component          | Role and Attributes    | Usage                                                                                                                                                                                                                            |
+| ------------------ | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Accordion.Button` | `aria-disabled="true"` | Sets to `"true"` when the panel of the item is expanded. However, if `Accordion.Root` is set with `multiple={true}` or `toggle={true}` and `Accordion.Item` is not disabled, it does not become `"true"` as it can be collapsed. |
+|                    | `id`                   | Used to associate with `Accordion.Panel`.                                                                                                                                                                                        |
+|                    | `aria-controls`        | Sets the `id` of the associated `Accordion.Panel`.                                                                                                                                                                               |
+|                    | `aria-expanded`        | Sets to `"true"` when the panel of the item is expanded, and `"false"` when it is collapsed.                                                                                                                                     |
+| `Accordion.Panel`  | `role="region"`        | Indicates that it is a landmark region.                                                                                                                                                                                          |
+|                    | `id`                   | Used to associate with `Accordion.Button`.                                                                                                                                                                                       |
+|                    | `aria-labelledby`      | Sets the `id` of the associated `Accordion.Button`.                                                                                                                                                                              |

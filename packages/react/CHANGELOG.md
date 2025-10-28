@@ -1,5 +1,26 @@
 # @yamada-ui/react
 
+## 2.0.5
+
+### Patch Changes
+
+- [#5435](https://github.com/yamada-ui/yamada-ui/pull/5435) [`b7d4d7c`](https://github.com/yamada-ui/yamada-ui/commit/b7d4d7c07fb9f17bd2d3407692350a431b5651ce) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the `Select` components inside the `Calendar` did not have correct styling when `DatePicker` had `invalid` set to `true`.
+
+- [#5432](https://github.com/yamada-ui/yamada-ui/pull/5432) [`71baee5`](https://github.com/yamada-ui/yamada-ui/commit/71baee56d63f17c847fad6354e4203a0c7a2d72c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the popover did not open on focus when `allowInput` was enabled in `DatePicker` and `ColorPicker`.
+
+- [#5432](https://github.com/yamada-ui/yamada-ui/pull/5432) [`eb55e1a`](https://github.com/yamada-ui/yamada-ui/commit/eb55e1ace3557443c32958350de946ba8ae436b5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where focus did not move correctly in `DatePicker` and `ColorPicker`.
+
+- [#5432](https://github.com/yamada-ui/yamada-ui/pull/5432) [`6a9d9bc`](https://github.com/yamada-ui/yamada-ui/commit/6a9d9bcdbf5b5643d95f5404e9519b3bf415df17) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `transferFocus` option to `usePopover`. If `true`, the focus will be transferred to the popover content when the tab key is pressed. Default is `true`.
+
+- [#5489](https://github.com/yamada-ui/yamada-ui/pull/5489) [`2c464f3`](https://github.com/yamada-ui/yamada-ui/commit/2c464f3c0b2436e0d03b283d8c3f9576ba38c063) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the focused style for invalid input was incorrect when the variant was set to "flushed" for `Select`, `Autocomplete`, `DatePicker`, and `ColorPicker`.
+
+- [#5432](https://github.com/yamada-ui/yamada-ui/pull/5432) [`bfff6d5`](https://github.com/yamada-ui/yamada-ui/commit/bfff6d58e71806b24077c3ad4b3a42cf09f32d9d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - `useCombobox` now returns `popoverProps`.
+
+- [#5432](https://github.com/yamada-ui/yamada-ui/pull/5432) [`71baee5`](https://github.com/yamada-ui/yamada-ui/commit/71baee56d63f17c847fad6354e4203a0c7a2d72c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where `openOnClick` was not working for `DatePicker`, `ColorPicker`, `Autocomplete`, and `Select`.
+
+- Updated dependencies [[`371fedb`](https://github.com/yamada-ui/yamada-ui/commit/371fedbc66a67ee69d2bcc1a51d2b94ebd26d0ab)]:
+  - @yamada-ui/utils@2.0.4
+
 ## 2.0.4
 
 ### Patch Changes

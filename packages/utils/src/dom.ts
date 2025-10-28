@@ -28,56 +28,60 @@ export function getUserAgent(): string {
   return navigator.userAgent
 }
 
-export function vendor(v: RegExp): boolean {
-  return createdDom() && v.test(navigator.vendor)
+export function vendor(v: RegExp, fallback = false): boolean {
+  return createdDom() ? v.test(navigator.vendor) : fallback
 }
 
-export function platform(v: RegExp): boolean {
-  return createdDom() && v.test(getPlatform())
+export function platform(v: RegExp, fallback = false): boolean {
+  return createdDom() ? v.test(getPlatform()) : fallback
 }
 
-export function userAgent(v: RegExp): boolean {
-  return createdDom() && v.test(getUserAgent())
+export function userAgent(v: RegExp, fallback = false): boolean {
+  return createdDom() ? v.test(getUserAgent()) : fallback
 }
 
-export function isMac(): boolean {
-  return platform(/^Mac/i)
+export function isMac(fallback = false): boolean {
+  return platform(/^Mac/i, fallback)
 }
 
-export function isIPhone(): boolean {
-  return platform(/^iPhone/i)
+export function isIPhone(fallback = false): boolean {
+  return platform(/^iPhone/i, fallback)
 }
 
-export function isIPad(): boolean {
-  return platform(/^iPad/i) || (isMac() && navigator.maxTouchPoints > 1)
+export function isIPad(fallback = false): boolean {
+  return (
+    platform(/^iPad/i, fallback) ||
+    (isMac(fallback) &&
+      (createdDom() ? navigator.maxTouchPoints > 1 : fallback))
+  )
 }
 
-export function isIos(): boolean {
-  return isIPhone() || isIPad()
+export function isIos(fallback = false): boolean {
+  return isIPhone(fallback) || isIPad(fallback)
 }
 
-export function isAndroid(): boolean {
-  return platform(/^Android/i)
+export function isAndroid(fallback = false): boolean {
+  return platform(/^Android/i, fallback)
 }
 
-export function isApple(): boolean {
-  return isMac() || isIos()
+export function isApple(fallback = false): boolean {
+  return isMac(fallback) || isIos(fallback)
 }
 
-export function isSafari(): boolean {
-  return isApple() && vendor(/apple/i)
+export function isSafari(fallback = false): boolean {
+  return isApple(fallback) && vendor(/apple/i, fallback)
 }
 
-export function isFirefox(): boolean {
-  return userAgent(/Firefox/i)
+export function isFirefox(fallback = false): boolean {
+  return userAgent(/Firefox/i, fallback)
 }
 
-export function isChrome(): boolean {
-  return userAgent(/Chrome/i)
+export function isChrome(fallback = false): boolean {
+  return userAgent(/Chrome/i, fallback)
 }
 
-export function isWebKit(): boolean {
-  return userAgent(/AppleWebKit/i) && !isChrome()
+export function isWebKit(fallback = false): boolean {
+  return userAgent(/AppleWebKit/i, fallback) && !isChrome()
 }
 
 export function isHTMLElement(el: any): el is HTMLElement {

@@ -21,7 +21,7 @@ import {
   useSegmentedControlItem,
 } from "./use-segmented-control"
 
-interface SegmentedControlItem extends SegmentedControlItemProps {
+export interface SegmentedControlItem extends SegmentedControlItemProps {
   label?: ReactNode
 }
 

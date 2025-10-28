@@ -8,6 +8,7 @@ export {
   useTabsPropsContext as usePropsContext,
 } from "./tabs"
 export type {
+  TabsItem as Item,
   TabsListProps as ListProps,
   TabsPanelProps as PanelProps,
   TabsPanelsProps as PanelsProps,

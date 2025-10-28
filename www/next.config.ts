@@ -41,6 +41,14 @@ const nextConfig: NextConfig = {
       },
     ])
   },
+  async rewrites() {
+    return Promise.resolve([
+      {
+        destination: "/:locale/llms.txt/:path*.mdx",
+        source: "/:locale/docs/:path*.mdx",
+      },
+    ])
+  },
 }
 
 export default withNextIntl(nextConfig)

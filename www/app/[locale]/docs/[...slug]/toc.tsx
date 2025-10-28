@@ -14,7 +14,10 @@ import { useMotionValueEvent, useScroll } from "motion/react"
 import { useTranslations } from "next-intl"
 import { createRef, useMemo, useRef, useState } from "react"
 import scrollIntoView from "scroll-into-view-if-needed"
+import { BASE_URL } from "@/app/[locale]/(llms)/_constant"
+import { getLang } from "@/utils/i18n"
 import { EditPageButton } from "./edit-page-button"
+import { LlmsLink } from "./llms-link"
 import { ScrollToTopButton } from "./scroll-to-top-button"
 
 interface FlattenTocEntry extends Omit<Doc["toc"][number], "items"> {
@@ -30,7 +33,7 @@ function flattenToc(toc: Doc["toc"], depth = 0): FlattenTocEntry[] {
 
 export interface TocProps extends Doc {}
 
-export function Toc({ path, toc }: TocProps) {
+export function Toc({ locale, path, pathname, slug, toc }: TocProps) {
   const t = useTranslations("component.toc")
   const [currentId, setCurrentId] = useState<string>("")
   const containerRef = useRef<HTMLDivElement>(null)
@@ -90,6 +93,26 @@ export function Toc({ path, toc }: TocProps) {
       scrollMode: "if-needed",
     })
   }, [currentId])
+
+  const slugPath = slug.length > 0 ? slug.join("/") : "components"
+  const readUrl = encodeURIComponent(
+    `Use web browsing to access links and information: ${BASE_URL}/${getLang(locale)}/docs/${slugPath}.mdx. I want to ask some questions`,
+  )
+
+  const items = [
+    {
+      href: `/${getLang(locale)}${pathname}.mdx`,
+      label: t("markdown"),
+    },
+    {
+      href: `https://chatgpt.com/?q=${readUrl}`,
+      label: t("chatgpt"),
+    },
+    {
+      href: `https://claude.ai/new?q=${readUrl}`,
+      label: t("claude"),
+    },
+  ] as const
 
   return (
     <VStack
@@ -153,7 +176,9 @@ export function Toc({ path, toc }: TocProps) {
 
       <VStack alignItems="flex-start" gap="sm">
         <EditPageButton path={path} />
-
+        {items.map(({ href, label }) => (
+          <LlmsLink key={label} href={href} label={label} />
+        ))}
         <ScrollToTopButton />
       </VStack>
     </VStack>

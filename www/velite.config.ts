@@ -14,6 +14,11 @@ import {
   remarkSteps,
 } from "./utils/remark-plugins"
 import { getPathname } from "./utils/route"
+import {
+  replaceComponentsToLinks,
+  replaceLinkListToMarkdown,
+  replacePropsTable,
+} from "./utils/transforms"
 
 function getPath(value: string) {
   return value.replace(/\\/g, "/").replace(/.*\/contents\//, "")
@@ -47,6 +52,25 @@ const docs = defineCollection({
       style: s.string().optional(),
       code: s.mdx(),
       description: s.string(),
+      llm: s.custom().transform((_data, { meta }) => {
+        if (typeof meta.content !== "string") {
+          console.warn(
+            `llm transform: meta.content is not a string for ${meta.path}`,
+          )
+          return ""
+        }
+
+        const transforms = [
+          replacePropsTable,
+          replaceLinkListToMarkdown,
+          replaceComponentsToLinks,
+        ]
+
+        return transforms.reduce(
+          (content, transform) => transform(content),
+          meta.content,
+        )
+      }),
       metadata: s.metadata(),
       release_date: s.string().optional(),
       release_url: s.string().optional(),

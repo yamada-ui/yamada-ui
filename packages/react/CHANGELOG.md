@@ -1,5 +1,11 @@
 # @yamada-ui/react
 
+## 2.0.6
+
+### Patch Changes
+
+- [#5328](https://github.com/yamada-ui/yamada-ui/pull/5328) [`6b44560`](https://github.com/yamada-ui/yamada-ui/commit/6b44560c567a2cf6cfd8d177c7a9186e2f788785) Thanks [@bmthd](https://github.com/bmthd)! - The type definition for `items` is now exported from each component's namespace.
+
 ## 2.0.5
 
 ### Patch Changes

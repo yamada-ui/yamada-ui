@@ -225,4 +225,16 @@ The loading for `Button` internally uses [Loading](/docs/components/loading).
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+The `Button` follows the [WAI-ARIA - Button Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/button/) for accessibility.
+
+### Keyboard Navigation
+
+| Key              | Description                           | State |
+| ---------------- | ------------------------------------- | ----- |
+| `Space`, `Enter` | When element has focus, activates it. | -     |
+
+### ARIA Roles and Attributes
+
+| Component | Role and Attribute | Usage                          |
+| --------- | ------------------ | ------------------------------ |
+| `Button`  | `role="button"`    | Indicates that it is a button. |

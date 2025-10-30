@@ -413,6 +413,9 @@ importers:
       use-mask-input:
         specifier: ^3.5.2
         version: 3.5.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      vitest-axe:
+        specifier: ^0.1.0
+        version: 0.1.0(vitest@3.2.4)
       vitest-browser-react:
         specifier: 1.0.1
         version: 1.0.1(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(@vitest/browser@3.2.4)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(vitest@3.2.4)

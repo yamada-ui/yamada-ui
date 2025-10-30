@@ -4,9 +4,9 @@ import type {
   Queries,
   queries,
 } from "@testing-library/react"
-import type { AxeCore } from "@yamada-ui/a11y/jsdom"
 import type { PropsWithChildren, ReactNode } from "react"
 import type { Container } from "react-dom/client"
+import type { AxeCore } from "vitest-axe"
 import type { UIProviderProps } from "../src"
 import {
   render as originalRender,
@@ -50,7 +50,7 @@ export async function a11y(
   ui: ReactNode,
   { axeOptions, ...options }: A11yOptions = {},
 ): Promise<void> {
-  const { axe } = await import("@yamada-ui/a11y/jsdom")
+  const { axe } = await import("vitest-axe")
   const container = isValidElement(ui) ? render(ui, options).container : ui
   const results = await axe(container as HTMLElement, axeOptions)
 

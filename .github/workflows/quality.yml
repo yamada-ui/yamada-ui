@@ -37,9 +37,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          key: ${{ runner.os }}-turbo-build-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-turbo-
+            ${{ runner.os }}-turbo-build-
         env:
           TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
           TURBO_TEAM: ${{ vars.TURBO_TEAM }}
@@ -69,6 +69,17 @@ jobs:
             !packages/**/src/**/*.stories.{ts,tsx}
             !packages/workspace/src/**
             packages/workspace/src/vitest/**
+
+      - name: Cache turbo test setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-test-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-test-
+        env:
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
       - name: Install
         if: steps.check-modified.outputs.any_changed == 'true'
@@ -128,6 +139,17 @@ jobs:
             www/tsconfig.json
             www/eslint.config.ts
 
+      - name: Cache turbo lint setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-lint-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-lint-
+        env:
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
       - name: Install
         if: steps.check-modified-packages.outputs.any_changed == 'true' || steps.check-modified-scripts.outputs.any_changed == 'true' || steps.check-modified-www.outputs.any_changed == 'true'
         uses: ./.github/composite-actions/install
@@ -182,6 +204,17 @@ jobs:
             www/**/*.{ts,tsx,mts}
             www/package.json
             www/tsconfig.json
+
+      - name: Cache turbo typecheck setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-typecheck-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-typecheck-
+        env:
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
       - name: Install
         if: steps.check-modified-packages.outputs.any_changed == 'true' || steps.check-modified-scripts.outputs.any_changed == 'true' || steps.check-modified-www.outputs.any_changed == 'true'
@@ -238,6 +271,17 @@ jobs:
             www/**
             .prettierignore
             .prettierrc.js
+
+      - name: Cache turbo format setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-format-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-format-
+        env:
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
       - name: Install
         if: steps.check-modified-packages.outputs.any_changed == 'true' || steps.check-modified-scripts.outputs.any_changed == 'true' || steps.check-modified-www.outputs.any_changed == 'true'

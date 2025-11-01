@@ -1,5 +1,12 @@
 # @yamada-ui/cli
 
+## 2.0.5
+
+### Patch Changes
+
+- Updated dependencies [[`371fedb`](https://github.com/yamada-ui/yamada-ui/commit/371fedbc66a67ee69d2bcc1a51d2b94ebd26d0ab)]:
+  - @yamada-ui/utils@2.0.4
+
 ## 2.0.4
 
 ### Patch Changes

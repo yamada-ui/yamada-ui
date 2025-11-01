@@ -40,7 +40,7 @@ import { Radio, RadioGroup } from "@workspaces/ui"
 ### Use Items
 
 ```tsx preview functional
-const items = useMemo<RadioGroup.RootProps["items"]>(
+const items = useMemo<RadioGroup.Item[]>(
   () => [
     { label: "織田信長", value: "1" },
     { label: "豊臣秀吉", value: "2" },
@@ -55,7 +55,7 @@ return <RadioGroup.Root items={items} />
 ### Change Variant
 
 ```tsx preview functional
-const items = useMemo<RadioGroup.RootProps["items"]>(
+const items = useMemo<RadioGroup.Item[]>(
   () => [
     { label: "Checked", value: "1" },
     { label: "No checked", value: "2" },
@@ -82,7 +82,7 @@ return (
 ### Change Size
 
 ```tsx preview functional
-const items = useMemo<RadioGroup.RootProps["items"]>(
+const items = useMemo<RadioGroup.Item[]>(
   () => [
     { label: "Checked", value: "1" },
     { label: "No checked", value: "2" },
@@ -111,7 +111,7 @@ return (
 To set a default value, set `defaultValue` to a value.
 
 ```tsx preview functional
-const items = useMemo<RadioGroup.RootProps["items"]>(
+const items = useMemo<RadioGroup.Item[]>(
   () => [
     { label: "織田信長", value: "1" },
     { label: "豊臣秀吉", value: "2" },
@@ -128,7 +128,7 @@ return <RadioGroup.Root defaultValue="1" items={items} />
 To default checked, set `defaultChecked` to `true`.
 
 ```tsx preview functional
-const items = useMemo<RadioGroup.RootProps["items"]>(
+const items = useMemo<RadioGroup.Item[]>(
   () => [
     { defaultChecked: true, label: "織田信長", value: "1" },
     { label: "豊臣秀吉", value: "2" },
@@ -145,7 +145,7 @@ return <RadioGroup.Root items={items} />
 To change the direction, set `orientation` to `"horizontal"` or `"vertical"`. The default is `"vertical"`.
 
 ```tsx preview functional
-const items = useMemo<RadioGroup.RootProps["items"]>(
+const items = useMemo<RadioGroup.Item[]>(
   () => [
     { label: "織田信長", value: "1" },
     { label: "豊臣秀吉", value: "2" },
@@ -162,7 +162,7 @@ return <RadioGroup.Root items={items} orientation="horizontal" />
 To change the shape, set `shape` to `"circle"`, `"square"` or `"rounded"`. The default is `"circle"`.
 
 ```tsx preview functional
-const items = useMemo<RadioGroup.RootProps["items"]>(
+const items = useMemo<RadioGroup.Item[]>(
   () => [
     { label: "織田信長", value: "1" },
     { label: "豊臣秀吉", value: "2" },
@@ -255,7 +255,7 @@ To change the border color, set `focusBorderColor` or `errorBorderColor` to a co
 
 ```tsx preview functional client
 const [value, setValue] = useState("1")
-const items = useMemo<RadioGroup.RootProps["items"]>(
+const items = useMemo<RadioGroup.Item[]>(
   () => [
     { label: "織田信長", value: "1" },
     { label: "豊臣秀吉", value: "2" },

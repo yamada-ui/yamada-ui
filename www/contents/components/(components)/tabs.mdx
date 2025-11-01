@@ -56,7 +56,7 @@ import { Tabs } from "@workspaces/ui"
 ### Use items
 
 ```tsx preview functional
-const items = useMemo<Tabs.RootProps["items"]>(
+const items = useMemo<Tabs.Item[]>(
   () => [
     {
       panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
@@ -86,7 +86,7 @@ return (
 ### Change Variants
 
 ```tsx preview functional
-const items = useMemo<Tabs.RootProps["items"]>(
+const items = useMemo<Tabs.Item[]>(
   () => [
     {
       panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
@@ -122,7 +122,7 @@ return (
 ### Change Size
 
 ```tsx preview functional
-const items = useMemo<Tabs.RootProps["items"]>(
+const items = useMemo<Tabs.Item[]>(
   () => [
     {
       panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
@@ -158,7 +158,7 @@ return (
 ### Select a Default Item
 
 ```tsx preview functional
-const items = useMemo<Tabs.RootProps["items"]>(
+const items = useMemo<Tabs.Item[]>(
   () => [
     {
       panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
@@ -188,7 +188,7 @@ return (
 ### Change Orientation
 
 ```tsx preview functional
-const items = useMemo<Tabs.RootProps["items"]>(
+const items = useMemo<Tabs.Item[]>(
   () => [
     {
       panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
@@ -224,7 +224,7 @@ return (
 ### Change Alignment
 
 ```tsx preview functional
-const items = useMemo<Tabs.RootProps["items"]>(
+const items = useMemo<Tabs.Item[]>(
   () => [
     {
       panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
@@ -260,7 +260,7 @@ return (
 ### Stretch to Container Width
 
 ```tsx preview functional
-const items = useMemo<Tabs.RootProps["items"]>(
+const items = useMemo<Tabs.Item[]>(
   () => [
     {
       panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
@@ -290,7 +290,7 @@ return (
 ### Disable
 
 ```tsx preview functional
-const items = useMemo<Tabs.RootProps["items"]>(
+const items = useMemo<Tabs.Item[]>(
   () => [
     {
       panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
@@ -323,7 +323,7 @@ return (
 By default, the focused tab is automatically activated. If you want to activate the tab at a specific time (when `Enter` or `Space` is pressed), set `manual` to `true`.
 
 ```tsx preview functional
-const items = useMemo<Tabs.RootProps["items"]>(
+const items = useMemo<Tabs.Item[]>(
   () => [
     {
       panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
@@ -353,7 +353,7 @@ return (
 ### Make Links
 
 ```tsx preview functional
-const items = useMemo<Tabs.RootProps["items"]>(
+const items = useMemo<Tabs.Item[]>(
   () => [
     {
       asChild: true,
@@ -398,7 +398,7 @@ return (
 ### Lazy Rendering
 
 ```tsx preview functional
-const items = useMemo<Tabs.RootProps["items"]>(
+const items = useMemo<Tabs.Item[]>(
   () => [
     {
       panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
@@ -440,7 +440,7 @@ return (
 
 ```tsx preview functional client
 const [index, setIndex] = useState(0)
-const [items, setItems] = useState<Required<Tabs.RootProps>["items"]>([
+const [items, setItems] = useState<Tabs.Item[]>([
   { id: uuid(), panel: "Tab Content", tab: "Tab" },
   { id: uuid(), panel: "Tab Content", tab: "Tab" },
   { id: uuid(), panel: "Tab Content", tab: "Tab" },
@@ -542,7 +542,7 @@ return (
 ```tsx preview functional client
 const [index, onChange] = useState<number>(0)
 
-const items = useMemo<Tabs.RootProps["items"]>(
+const items = useMemo<Tabs.Item[]>(
   () => [
     {
       panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",

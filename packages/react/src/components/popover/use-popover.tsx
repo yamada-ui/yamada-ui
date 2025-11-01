@@ -94,6 +94,12 @@ export interface UsePopoverProps
    */
   placement?: Direction
   /**
+   * If `true`, the focus will be transferred to the popover content when the tab key is pressed.
+   *
+   * @default true
+   */
+  transferFocus?: boolean
+  /**
    * Update the position of the floating element, re-rendering the component if required.
    */
   updateRef?: RefObject<() => void>
@@ -122,6 +128,7 @@ export const usePopover = ({
   platform,
   preventOverflow,
   strategy,
+  transferFocus = true,
   transform,
   updateRef,
   whileElementsMounted,
@@ -220,10 +227,10 @@ export const usePopover = ({
   }, [open, modal, blockScrollOnMount])
 
   useEffect(() => {
-    if (!open || modal) return
+    if (!open || modal || !transferFocus) return
 
     return focusTransfer(contentRef.current, triggerRef.current)
-  }, [open, modal])
+  }, [open, modal, transferFocus])
 
   useUnmountEffect(() => {
     clearTimeout(openTimeout.current)
@@ -341,6 +348,7 @@ export const popoverProps: (
 )[] = [
   ...popperProps,
   "autoFocus",
+  "transferFocus",
   "blockScrollOnMount",
   "closeOnBlur",
   "closeOnEsc",

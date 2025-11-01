@@ -274,6 +274,12 @@
         "description": "The CSS positioning strategy to use.",
         "required": false
       },
+      "transferFocus": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the focus will be transferred to the popover content when the tab key is pressed.",
+        "required": false
+      },
       "transform": {
         "type": "boolean",
         "defaultValue": "true",
@@ -592,6 +598,12 @@
       "type": "Strategy",
       "defaultValue": "\"absolute\"",
       "description": "The CSS positioning strategy to use.",
+      "required": false
+    },
+    "transferFocus": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the focus will be transferred to the popover content when the tab key is pressed.",
       "required": false
     },
     "transform": {

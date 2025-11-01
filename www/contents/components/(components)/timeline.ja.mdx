@@ -81,7 +81,7 @@ import { Timeline } from "@workspaces/ui"
 ### itemsを使う
 
 ```tsx preview functional
-const items = useMemo<Timeline.RootProps["items"]>(
+const items = useMemo<Timeline.Item[]>(
   () => [
     {
       description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
@@ -106,7 +106,7 @@ return <Timeline.Root items={items} />
 ### サイズを変更する
 
 ```tsx preview functional
-const items = useMemo<Timeline.RootProps["items"]>(
+const items = useMemo<Timeline.Item[]>(
   () => [
     {
       description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
@@ -137,7 +137,7 @@ return (
 ### カラースキームを変更する
 
 ```tsx preview functional
-const items = useMemo<Timeline.RootProps["items"]>(
+const items = useMemo<Timeline.Item[]>(
   () => [
     {
       description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
@@ -176,7 +176,7 @@ return (
 アイテムの配置を変更する場合は、`align`に`"start"`や`"end"`などを設定します。
 
 ```tsx preview functional
-const items = useMemo<Timeline.RootProps["items"]>(
+const items = useMemo<Timeline.Item[]>(
   () => [
     {
       description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
@@ -222,7 +222,7 @@ return (
 形を変更する場合は、`shape`に`"circle"`や`"rounded"`などを設定します。
 
 ```tsx preview functional
-const items = useMemo<Timeline.RootProps["items"]>(
+const items = useMemo<Timeline.Item[]>(
   () => [
     {
       description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
@@ -255,7 +255,7 @@ return (
 インジケーターをカスタマイズする場合は、`indicator`に`ReactNode`を設定します。
 
 ```tsx preview functional
-const items = useMemo<Timeline.RootProps["items"]>(
+const items = useMemo<Timeline.Item[]>(
   () => [
     {
       description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
@@ -285,7 +285,7 @@ return <Timeline.Root items={items} />
 連結する場合は、`attached`を`true`に設定します。
 
 ```tsx preview functional
-const items = useMemo<Timeline.RootProps["items"]>(
+const items = useMemo<Timeline.Item[]>(
   () => [
     {
       description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",

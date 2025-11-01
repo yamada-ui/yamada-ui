@@ -176,4 +176,10 @@ import { Alert } from "@workspaces/ui"
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`Alert`は、アクセシビリティに関して[WAI-ARIA - Alert Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/alert/)に従います。
+
+### ARIAロールと属性
+
+| コンポーネント | ロールと属性   | 用途                           |
+| -------------- | -------------- | ------------------------------ |
+| `Alert.Root`   | `role="alert"` | アラートであることを示します。 |

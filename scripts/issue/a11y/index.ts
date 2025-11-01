@@ -4,6 +4,7 @@ import {
   retryOnRateLimit,
   retryOnRateLimitWithPaging,
 } from "@yamada-ui/workspace/octokit"
+import { Command } from "commander"
 import { execa } from "execa"
 import { readFile } from "fs/promises"
 import ora from "ora"
@@ -208,76 +209,85 @@ function createBody(
   ].join("\n")
 }
 
-async function main() {
+function main() {
+  const program = new Command()
   const spinner = ora()
 
-  const start = process.hrtime.bigint()
+  program
+    .option("--no-report", "do not create a report")
+    .action(async ({ report: runReport = true }) => {
+      const start = process.hrtime.bigint()
 
-  spinner.start(`Getting issues`)
+      spinner.start(`Getting issues`)
 
-  const issues = await getIssues()
+      const issues = await getIssues()
 
-  spinner.succeed(`Got issues`)
+      spinner.succeed(`Got issues`)
 
-  spinner.start("Creating report")
+      if (runReport) {
+        spinner.start("Creating report")
 
-  await createReport()
+        await createReport()
 
-  spinner.succeed("Created report")
-
-  spinner.start("Getting report")
-
-  const report = await getReport()
-  const failures = getFailures(report)
-
-  spinner.succeed("Got report")
-
-  spinner.start(`Creating issues`)
-
-  await Promise.all(
-    Object.entries(failures).map(async ([categoryName, stories]) => {
-      const name = categoryName.split(" / ").at(-1)!
-
-      const issue = issues[name]
-      const body = createBody(categoryName, name, stories)
-
-      if (issue) {
-        if (issue.body === body) {
-          spinner.info(`Skipped issue ${issue.number} ${categoryName}`)
-        } else {
-          await retryOnRateLimit(() =>
-            octokit.issues.update({
-              body,
-              issue_number: issue.number,
-              owner: OWNER_NAME,
-              repo: REPO_NAME,
-            }),
-          )
-
-          spinner.info(`Updated issue ${issue.number} ${categoryName}`)
-        }
-      } else {
-        await retryOnRateLimit(() =>
-          octokit.issues.create({
-            body,
-            labels: ["a11y", "test", "good first issue"],
-            owner: OWNER_NAME,
-            repo: REPO_NAME,
-            title: `Enhance a11y for \`${name}\``,
-          }),
-        )
-
-        spinner.info(`Created issue ${categoryName}`)
+        spinner.succeed("Created report")
       }
-    }),
-  )
 
-  spinner.succeed(`Created issues`)
+      spinner.start("Getting report")
 
-  const end = process.hrtime.bigint()
-  const duration = (Number(end - start) / 1e9).toFixed(2)
+      const report = await getReport()
+      const failures = getFailures(report)
 
-  console.log("\n", c.green(`Done in ${duration}s`))
+      spinner.succeed("Got report")
+
+      spinner.start(`Creating issues`)
+
+      await Promise.all(
+        Object.entries(failures).map(async ([categoryName, stories]) => {
+          const name = categoryName.split(" / ").at(-1)!
+
+          const issue = issues[name]
+          const body = createBody(categoryName, name, stories)
+
+          if (issue) {
+            if (issue.body === body) {
+              spinner.info(`Skipped issue ${issue.number} ${categoryName}`)
+            } else {
+              await retryOnRateLimit(() =>
+                octokit.issues.update({
+                  body,
+                  issue_number: issue.number,
+                  owner: OWNER_NAME,
+                  repo: REPO_NAME,
+                }),
+              )
+
+              spinner.info(`Updated issue ${issue.number} ${categoryName}`)
+            }
+          } else {
+            await retryOnRateLimit(() =>
+              octokit.issues.create({
+                body,
+                labels: ["a11y", "test", "good first issue"],
+                owner: OWNER_NAME,
+                repo: REPO_NAME,
+                title: `Enhance a11y for \`${name}\``,
+              }),
+            )
+
+            spinner.info(`Created issue ${categoryName}`)
+          }
+        }),
+      )
+
+      spinner.succeed(`Created issues`)
+
+      const end = process.hrtime.bigint()
+      const duration = (Number(end - start) / 1e9).toFixed(2)
+
+      console.log("\n", c.green(`Done in ${duration}s`))
+    })
+
+  program.parse()
 }
 
 main()

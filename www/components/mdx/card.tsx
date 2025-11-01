@@ -1,25 +1,43 @@
+"use client"
+
 import type { As } from "@yamada-ui/react"
 import {
   ChevronRightIcon,
+  createContext,
   Heading,
   Card as OriginalCard,
   SimpleGrid,
 } from "@yamada-ui/react"
 import { Link } from "@/i18n"
 
-export interface CardGroupProps {}
+interface CardGroupContext {
+  depth: number
+}
 
-export function CardGroup(props: CardGroupProps) {
-  return <SimpleGrid gap="lg" minChildWidth="sm" my="lg" {...props} />
+const [CardGroupContext, useCardGroupContext] = createContext<CardGroupContext>(
+  { name: "CardGroupContext" },
+)
+
+export interface CardGroupProps {
+  depth: number
+}
+
+export function CardGroup({ depth = 3, ...rest }: CardGroupProps) {
+  return (
+    <CardGroupContext value={{ depth }}>
+      <SimpleGrid gap="lg" minChildWidth="sm" my="lg" {...rest} />
+    </CardGroupContext>
+  )
 }
 
 export interface CardProps extends OriginalCard.RootProps {
   href: string
-  depth: string
   title: string
 }
 
-export function Card({ href, children, depth, title }: CardProps) {
+export function Card({ href, children, title }: CardProps) {
+  const { depth } = useCardGroupContext()
+
   return (
     <OriginalCard.Root
       as={Link}

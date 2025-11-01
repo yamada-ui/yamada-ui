@@ -21,7 +21,7 @@ import {
   useRootComponentProps,
 } from "./radio-card"
 
-export interface RadioCardItem<Y extends string = string>
+export interface RadioCardGroupItem<Y extends string = string>
   extends RadioCardRootProps<Y> {}
 
 export interface RadioCardGroupRootProps<Y extends string = string>
@@ -38,7 +38,7 @@ export interface RadioCardGroupRootProps<Y extends string = string>
    *
    * @default []
    */
-  items?: RadioCardItem<Y>[]
+  items?: RadioCardGroupItem<Y>[]
 }
 
 /**
@@ -136,3 +136,5 @@ export const RadioCardGroupRoot = component<"div", RadioCardGroupRootProps>(
 )() as GenericsComponent<{
   <Y extends string = string>(props: RadioCardGroupRootProps<Y>): ReactElement
 }>
+
+export { RadioCardRoot as RadioCardGroupItem }

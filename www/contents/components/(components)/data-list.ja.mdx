@@ -75,7 +75,7 @@ import { DataList } from "@workspaces/ui"
 ### itemsを使う
 
 ```tsx preview functional
-const items = useMemo<DataList.RootProps["items"]>(
+const items = useMemo<DataList.Item[]>(
   () => [
     { description: "入れ替わりの魔女", term: "白石うらら" },
     { description: "虜の魔女", term: "小田切寧々" },
@@ -94,7 +94,7 @@ return <DataList.Root items={items} />
 ### バリアントを変更する
 
 ```tsx preview functional
-const items = useMemo<DataList.RootProps["items"]>(
+const items = useMemo<DataList.Item[]>(
   () => [
     { description: "入れ替わりの魔女", term: "白石うらら" },
     { description: "虜の魔女", term: "小田切寧々" },
@@ -121,7 +121,7 @@ return (
 ### サイズを変更する
 
 ```tsx preview functional
-const items = useMemo<DataList.RootProps["items"]>(
+const items = useMemo<DataList.Item[]>(
   () => [
     { description: "入れ替わりの魔女", term: "白石うらら" },
     { description: "虜の魔女", term: "小田切寧々" },
@@ -150,7 +150,7 @@ return (
 方向を変更する場合は、`orientation`に`"horizontal"`または`"vertical"`を設定します。デフォルトでは、`"horizontal"`が設定されています。
 
 ```tsx preview functional
-const items = useMemo<DataList.RootProps["items"]>(
+const items = useMemo<DataList.Item[]>(
   () => [
     { description: "入れ替わりの魔女", term: "白石うらら" },
     { description: "虜の魔女", term: "小田切寧々" },
@@ -177,7 +177,7 @@ return (
 複数の用語を表示する場合は、`term`に配列を設定します。
 
 ```tsx preview functional
-const items = useMemo<DataList.RootProps["items"]>(
+const items = useMemo<DataList.Item[]>(
   () => [
     { description: "入れ替わりの魔女", term: ["白石うらら", "清集院桃子"] },
     { description: "虜の魔女", term: ["小田切寧々", "紺野つばさ"] },
@@ -247,7 +247,7 @@ return <DataList.Root w="fit-content" items={items} />
 複数の説明を表示する場合は、`description`に配列を設定します。
 
 ```tsx preview functional
-const items = useMemo<DataList.RootProps["items"]>(
+const items = useMemo<DataList.Item[]>(
   () => [
     {
       description: ["入れ替わりの魔女", "絶望的味覚音痴"],
@@ -327,7 +327,7 @@ return <DataList.Root w="fit-content" items={items} />
 ### 用語をカスタマイズする
 
 ```tsx preview functional
-const items = useMemo<DataList.RootProps["items"]>(
+const items = useMemo<DataList.Item[]>(
   () => [
     {
       description: "入れ替わりの魔女",
@@ -395,7 +395,7 @@ return (
 ### 説明をカスタマイズする
 
 ```tsx preview functional
-const items = useMemo<DataList.RootProps["items"]>(
+const items = useMemo<DataList.Item[]>(
   () => [
     {
       description: "入れ替わりの魔女",

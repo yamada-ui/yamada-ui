@@ -45,33 +45,45 @@ export const selectStyle = defineComponentSlotStyle({
     filled: {
       ...nativeSelectStyle.variants?.filled,
       field: {
-        ...nativeSelectStyle.variants?.filled.field,
         _expanded: focusRingStyle.inside,
         _focus: focusRingStyle.inside,
+        ...nativeSelectStyle.variants?.filled.field,
       },
     },
     flushed: {
       ...nativeSelectStyle.variants?.flushed,
       field: {
+        _expanded: {
+          ...nativeSelectStyle.variants?.flushed.field?._focusVisible,
+          _invalid: {
+            borderColor: "{error-border-color}",
+            boxShadow: "0px 1px 0px 0px {error-border-color}",
+          },
+        },
+        _focus: {
+          ...nativeSelectStyle.variants?.flushed.field?._focusVisible,
+          _invalid: {
+            borderColor: "{error-border-color}",
+            boxShadow: "0px 1px 0px 0px {error-border-color}",
+          },
+        },
         ...nativeSelectStyle.variants?.flushed.field,
-        _expanded: nativeSelectStyle.variants?.flushed.field?._focusVisible,
-        _focus: nativeSelectStyle.variants?.flushed.field?._focusVisible,
       },
     },
     outline: {
       ...nativeSelectStyle.variants?.outline,
       field: {
-        ...nativeSelectStyle.variants?.outline.field,
         _expanded: focusRingStyle.inside,
         _focus: focusRingStyle.inside,
+        ...nativeSelectStyle.variants?.outline.field,
       },
     },
     plain: {
       ...nativeSelectStyle.variants?.plain,
       field: {
-        ...nativeSelectStyle.variants?.plain.field,
         _expanded: focusRingStyle.inside,
         _focus: focusRingStyle.inside,
+        ...nativeSelectStyle.variants?.plain.field,
       },
     },
   },

@@ -21,7 +21,7 @@ import {
   useRootComponentProps,
 } from "./checkbox-card"
 
-export interface CheckboxCardItem<Y extends string = string>
+export interface CheckboxCardGroupItem<Y extends string = string>
   extends CheckboxCardRootProps<Y> {}
 
 export interface CheckboxCardGroupRootProps<Y extends string = string>
@@ -38,7 +38,7 @@ export interface CheckboxCardGroupRootProps<Y extends string = string>
    *
    * @default []
    */
-  items?: CheckboxCardItem<Y>[]
+  items?: CheckboxCardGroupItem<Y>[]
 }
 
 /**
@@ -135,3 +135,5 @@ export const CheckboxCardGroupRoot = component<
     props: CheckboxCardGroupRootProps<Y>,
   ): ReactElement
 }>
+
+export { CheckboxCardRoot as CheckboxCardGroupItem }

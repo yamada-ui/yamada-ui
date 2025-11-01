@@ -7,11 +7,13 @@ import type {
   ReactNode,
   RefObject,
 } from "react"
+import type { UsePopoverProps } from "../../components/popover"
 import type { HTMLProps, PropGetter, SimpleDirection } from "../../core"
 import type { Descendant } from "../use-descendants"
 import type { UseDisclosureProps } from "../use-disclosure"
-import { useCallback, useId, useRef } from "react"
+import { useCallback, useId, useMemo, useRef } from "react"
 import scrollIntoView from "scroll-into-view-if-needed"
+import { usePopoverProps } from "../../components/popover"
 import { useEnvironment } from "../../core"
 import {
   ariaAttr,
@@ -174,7 +176,11 @@ export {
 
 export interface UseComboboxProps
   extends Omit<HTMLProps, "onChange">,
-    Omit<UseDisclosureProps, "timing"> {
+    Omit<UseDisclosureProps, "timing">,
+    Omit<
+      UsePopoverProps,
+      "autoFocus" | "initialFocusRef" | "modal" | "transform" | "updateRef"
+    > {
   /**
    * If `true`, the list element will be closed when value is selected.
    *
@@ -231,25 +237,36 @@ export interface UseComboboxProps
   onChange?: (value: string) => void
 }
 
-export const useCombobox = ({
-  "aria-label": ariaLabelProp,
-  "aria-labelledby": ariaLabelledbyProp,
-  closeOnSelect: closeOnSelectProp = true,
-  defaultOpen,
-  disabled,
-  initialFocusValue,
-  open: openProp,
-  openOnClick = true,
-  openOnEnter = true,
-  openOnSpace = true,
-  readOnly,
-  selectFocusRef,
-  selectOnSpace = true,
-  onChange: onChangeProp,
-  onClose: onCloseProp,
-  onOpen: onOpenProp,
-  ...rest
-}: UseComboboxProps = {}) => {
+export const useCombobox = (props: UseComboboxProps = {}) => {
+  const [
+    popoverProps,
+    {
+      "aria-label": ariaLabelProp,
+      "aria-labelledby": ariaLabelledbyProp,
+      closeOnSelect: closeOnSelectProp = true,
+      defaultOpen,
+      disabled,
+      initialFocusValue,
+      open: openProp,
+      openOnClick = true,
+      openOnEnter = true,
+      openOnSpace = true,
+      readOnly,
+      selectFocusRef,
+      selectOnSpace = true,
+      onChange: onChangeProp,
+      onClose: onCloseProp,
+      onOpen: onOpenProp,
+      ...rest
+    },
+  ] = usePopoverProps(props, [
+    "disabled",
+    "open",
+    "defaultOpen",
+    "onOpen",
+    "onClose",
+    "openOnClick",
+  ])
   const { getWindow } = useEnvironment()
   const interactive = !(readOnly || disabled)
   const triggerRef = useRef<HTMLDivElement>(null)
@@ -263,6 +280,19 @@ export const useCombobox = ({
     onOpen: onOpenProp,
   })
   const activeDescendant = useRef<ComboboxDescendant | null>(null)
+  const mergedPopoverProps = useMemo<UsePopoverProps>(
+    () => ({
+      autoFocus: false,
+      matchWidth: true,
+      openOnClick: false,
+      ...popoverProps,
+      disabled: !interactive,
+      open,
+      onClose,
+      onOpen,
+    }),
+    [interactive, onClose, onOpen, open, popoverProps],
+  )
 
   const onSelect = useCallback(
     (value?: string, closeOnSelect = closeOnSelectProp) => {
@@ -569,6 +599,7 @@ export const useCombobox = ({
     getContentProps,
     getSeparatorProps,
     getTriggerProps,
+    popoverProps: mergedPopoverProps,
     onActiveDescendant,
     onClose,
     onOpen,

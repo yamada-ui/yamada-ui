@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "Închide",
   },
+  colorPicker: {
+    "Pick a color": "Alege o culoare",
+  },
+  colorSelector: {
+    "Pick a color": "Alege o culoare",
+  },
   datePicker: {
     "Clear value": "Șterge valoarea",
   },

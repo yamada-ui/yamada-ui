@@ -80,7 +80,7 @@ describe("Color", () => {
   })
 
   test("parseToHsla returns correct fallback color", () => {
-    const [h, s, l, a] = parseToHsla("unknown-color", "#008000") ?? []
+    const [h, s, l, a] = parseToHsla("unknown-color", "#008000")
     expect(h).toBeCloseTo(120)
     expect(s).toBeCloseTo(1)
     expect(l).toBeCloseTo(0.25)
@@ -88,19 +88,19 @@ describe("Color", () => {
   })
 
   test("parseToHsv parses colors to HSV format", () => {
-    const [h1, s1, v1, a1] = parseToHsv("#00ffff")
+    const [h1, s1, v1, a1] = parseToHsv("#00ffff") ?? []
     expect(h1).toBeCloseTo(180)
     expect(s1).toBeCloseTo(1)
     expect(v1).toBeCloseTo(1)
     expect(a1).toBe(1)
 
-    const [h2, s2, v2, a2] = parseToHsv("#ff00ff")
+    const [h2, s2, v2, a2] = parseToHsv("#ff00ff") ?? []
     expect(h2).toBeCloseTo(300)
     expect(s2).toBeCloseTo(1)
     expect(v2).toBeCloseTo(1)
     expect(a2).toBe(1)
 
-    const [h3, s3, v3, a3] = parseToHsv("#ffff00")
+    const [h3, s3, v3, a3] = parseToHsv("#ffff00") ?? []
     expect(h3).toBeCloseTo(60)
     expect(s3).toBeCloseTo(1)
     expect(v3).toBeCloseTo(1)

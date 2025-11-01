@@ -47,7 +47,7 @@ export const Basic: Story = () => {
 }
 
 export const Items: Story = () => {
-  const items = useMemo<Accordion.RootProps["items"]>(
+  const items = useMemo<Accordion.Item[]>(
     () => [
       {
         button: "孫悟空少年編",
@@ -72,7 +72,7 @@ export const Items: Story = () => {
 }
 
 export const Variant: Story = () => {
-  const items = useMemo<Accordion.RootProps["items"]>(
+  const items = useMemo<Accordion.Item[]>(
     () => [
       {
         button: "孫悟空少年編",
@@ -103,7 +103,7 @@ export const Variant: Story = () => {
 }
 
 export const DefaultIndex: Story = () => {
-  const items = useMemo<Accordion.RootProps["items"]>(
+  const items = useMemo<Accordion.Item[]>(
     () => [
       {
         button: "孫悟空少年編",
@@ -128,7 +128,7 @@ export const DefaultIndex: Story = () => {
 }
 
 export const Toggle: Story = () => {
-  const items = useMemo<Accordion.RootProps["items"]>(
+  const items = useMemo<Accordion.Item[]>(
     () => [
       {
         button: "孫悟空少年編",
@@ -153,7 +153,7 @@ export const Toggle: Story = () => {
 }
 
 export const Multiple: Story = () => {
-  const items = useMemo<Accordion.RootProps["items"]>(
+  const items = useMemo<Accordion.Item[]>(
     () => [
       {
         button: "孫悟空少年編",
@@ -178,7 +178,7 @@ export const Multiple: Story = () => {
 }
 
 export const IconHidden: Story = () => {
-  const items = useMemo<Accordion.RootProps["items"]>(
+  const items = useMemo<Accordion.Item[]>(
     () => [
       {
         button: "孫悟空少年編",
@@ -203,7 +203,7 @@ export const IconHidden: Story = () => {
 }
 
 export const Disabled: Story = () => {
-  const items = useMemo<Accordion.RootProps["items"]>(
+  const items = useMemo<Accordion.Item[]>(
     () => [
       {
         button: "孫悟空少年編",
@@ -300,7 +300,7 @@ export const CustomPanel: Story = () => {
 }
 
 export const CustomIcon: Story = () => {
-  const items = useMemo<Accordion.RootProps["items"]>(
+  const items = useMemo<Accordion.Item[]>(
     () => [
       {
         button: "孫悟空少年編",
@@ -330,7 +330,7 @@ export const CustomIcon: Story = () => {
 }
 
 export const CustomControl: Story = () => {
-  const items = useMemo<Accordion.RootProps["items"]>(
+  const items = useMemo<Accordion.Item[]>(
     () => [
       {
         button: "孫悟空少年編",

@@ -1,7 +1,7 @@
 {
   "name": "@yamada-ui/react",
   "type": "module",
-  "version": "2.0.2",
+  "version": "2.0.5",
   "description": "React UI components of the Yamada, by the Yamada, for the Yamada built with React and Emotion",
   "keywords": [
     "yamada",
@@ -43,8 +43,9 @@
     "storybook:serve": "npx http-server ./storybook-static",
     "storybook:build": "storybook build -c storybook",
     "test": "vitest",
-    "test:coverage": "vitest run --coverage",
     "test:dev": "vitest --watch --ui",
+    "test:coverage": "vitest run --coverage",
+    "test:a11y": "storybook dev --ci -p 6006 -c storybook & wait-on http://localhost:6006 && test-storybook -c storybook --maxWorkers=8 --json --outputFile report.json",
     "typecheck": "tsc --noEmit",
     "typetrace": "tsc --noEmit --generateTrace ./trace --incremental false",
     "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
@@ -72,8 +73,8 @@
     "embla-carousel-react": "^8.6.0",
     "file-selector": "^2.1.2",
     "framesync": "6.1.2",
-    "intl-messageformat": "^10.7.17",
-    "lucide-react": "0.544.0",
+    "intl-messageformat": "^10.7.18",
+    "lucide-react": "0.546.0",
     "motion": "12.18.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -86,12 +87,12 @@
     "sonner": "^2.0.7"
   },
   "devDependencies": {
-    "@faker-js/faker": "^10.0.0",
+    "@faker-js/faker": "^10.1.0",
     "@lucide/lab": "^0.1.2",
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
     "clean-package": "2.2.0",
-    "react-hook-form": "^7.64.0",
+    "react-hook-form": "^7.65.0",
     "react-icons": "^5.5.0",
     "use-mask-input": "^3.5.2"
   },

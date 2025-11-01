@@ -461,6 +461,10 @@ export const pseudoClasses = {
    */
   _playing: "&:is(:playing, [data-playing])",
   /**
+   * The CSS `&:popover-open` pseudo-class.
+   */
+  _popoverOpen: "&:popover-open",
+  /**
    * The CSS `&:is(:read-write, [data-read-write])` pseudo-class.
    */
   _readWrite: "&:is(:read-write, [data-read-write])",

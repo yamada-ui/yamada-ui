@@ -273,12 +273,9 @@ export const usePopover = ({
     [refs.setReference],
   )
 
-  const getPositionerProps: PropGetter = useCallback(
-    (props) => {
-      return getPopperProps(props)
-    },
-    [getPopperProps],
-  )
+  const getPositionerProps: PropGetter = useCallback(getPopperProps, [
+    getPopperProps,
+  ])
 
   const getContentProps: PropGetter = useCallback(
     ({
@@ -311,18 +308,12 @@ export const usePopover = ({
   )
 
   const getHeaderProps: PropGetter = useCallback(
-    (props) => ({
-      id: headerId,
-      ...props,
-    }),
+    (props) => ({ id: headerId, ...props }),
     [headerId],
   )
 
   const getBodyProps: PropGetter = useCallback(
-    (props) => ({
-      id: bodyId,
-      ...props,
-    }),
+    (props) => ({ id: bodyId, ...props }),
     [bodyId],
   )
 

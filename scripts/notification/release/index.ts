@@ -1,5 +1,5 @@
+import { sendDiscord } from "@yamada-ui/workspace/discord"
 import ora from "ora"
-import { sendDiscord } from "packages/workspace/src/discord"
 import c from "picocolors"
 
 async function main() {

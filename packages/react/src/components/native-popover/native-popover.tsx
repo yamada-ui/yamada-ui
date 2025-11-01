@@ -140,7 +140,9 @@ export const NativePopoverContent = withContext<
       </styled.div>
     </NativePopoverPositioner>
   )
-}, "content")()
+}, "content")({
+  suppressHydrationWarning: true,
+})
 
 export interface NativePopoverHeaderProps extends HTMLStyledProps {}
 

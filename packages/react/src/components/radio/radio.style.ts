@@ -13,6 +13,12 @@ export const radioStyle = defineComponentSlotStyle({
       "input:focus-visible + &": focusRingStyle.outline,
       justifyContent: "center",
       _before: { display: "block" },
+      _container: [
+        { css: { bg: "bg" }, style: '--form-group-variant: "panel"' },
+        { css: { bg: "bg" }, style: '--fieldset-root-variant: "panel"' },
+        { css: { bg: "bg" }, style: '--form-group-variant: "elevated"' },
+        { css: { bg: "bg" }, style: '--fieldset-root-variant: "elevated"' },
+      ],
       _invalid: {
         borderColor: "{error-border-color}",
         focusRingColor: "{error-border-color}",

@@ -187,6 +187,7 @@ export function createComponent<
     const contextProps = usePropsContext() ?? {}
     const mergedProps = withContext ? mergeProps(contextProps, props)() : props
     const [, rest] = useComponentStyle(mergedProps, {
+      name,
       className,
       style,
       transferProps,
@@ -341,6 +342,7 @@ export function createSlotComponent<
     const contextProps = usePropsContext() ?? {}
     const mergedProps = withContext ? mergeProps(contextProps, props)() : props
     const [css, rest] = useComponentSlotStyle(mergedProps, {
+      name: rootName,
       className,
       style,
       slot,

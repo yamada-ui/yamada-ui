@@ -36,6 +36,7 @@ describe("<NativePopover />", () => {
     expect(NativePopover.Body.displayName).toBe("NativePopoverBody")
     expect(NativePopover.Footer.displayName).toBe("NativePopoverFooter")
     expect(NativePopover.Anchor.displayName).toBe("NativePopoverAnchor")
+    expect(NativePopover.CloseTrigger.name).toBe("NativePopoverCloseTrigger")
   })
 
   test("sets `className` correctly", () => {
@@ -160,5 +161,25 @@ describe("<NativePopover />", () => {
       "popoverTargetAction",
       "hide",
     )
+  })
+
+  test("should render custom close button when trigger is provided", () => {
+    render(
+      <NativePopover.Root>
+        <NativePopover.Trigger>
+          <Button>Open Popover</Button>
+        </NativePopover.Trigger>
+        <NativePopover.Content>
+          <NativePopover.CloseTrigger data-testid="close-trigger">
+            <Button>Close</Button>
+          </NativePopover.CloseTrigger>
+          <NativePopover.Body>Body content</NativePopover.Body>
+        </NativePopover.Content>
+      </NativePopover.Root>,
+    )
+
+    const closeTrigger = screen.getByTestId("close-trigger")
+    expect(closeTrigger).toHaveAttribute("popovertargetaction", "hide")
+    expect(closeTrigger).toHaveAttribute("popovertarget")
   })
 })

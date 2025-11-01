@@ -19,6 +19,7 @@ export const nativePopoverStyle = defineComponentSlotStyle({
       focusVisibleRing: "none",
       gap: "{gap}",
       p: "{padding}",
+      position: "relative",
       rounded: "l2",
     },
     footer: {

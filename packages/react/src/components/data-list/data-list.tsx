@@ -14,13 +14,15 @@ import {
 } from "../../utils"
 import { dataListStyle } from "./data-list.style"
 
+export interface DataListItem extends DataListItemProps {}
+
 export interface DataListRootProps
   extends HTMLStyledProps<"dl">,
     ThemeProps<DataListStyle> {
   /**
    * If provided, generate elements based on items.
    */
-  items?: DataListItemProps[]
+  items?: DataListItem[]
   /**
    * The props for the data list description component.
    */

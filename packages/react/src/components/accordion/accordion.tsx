@@ -26,6 +26,8 @@ interface AccordionCallBackProps {
   expanded?: boolean
 }
 
+export interface AccordionItem extends Omit<AccordionItemProps, "index"> {}
+
 interface AccordionComponentContext
   extends Pick<AccordionRootProps, "icon" | "iconHidden"> {}
 
@@ -46,7 +48,7 @@ export interface AccordionRootProps
   /**
    * If provided, generate elements based on items.
    */
-  items?: Omit<AccordionItemProps, "index">[]
+  items?: AccordionItem[]
 }
 
 interface AccordionItemComponentContext

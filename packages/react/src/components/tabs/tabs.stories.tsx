@@ -59,7 +59,7 @@ export const Basic: Story = () => {
 }
 
 export const Items: Story = () => {
-  const items = useMemo<Tabs.RootProps["items"]>(
+  const items = useMemo<Tabs.Item[]>(
     () => [
       {
         panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
@@ -87,7 +87,7 @@ export const Items: Story = () => {
 }
 
 export const Variant: Story = () => {
-  const items = useMemo<Tabs.RootProps["items"]>(
+  const items = useMemo<Tabs.Item[]>(
     () => [
       {
         panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
@@ -123,7 +123,7 @@ export const Variant: Story = () => {
 }
 
 export const Size: Story = () => {
-  const items = useMemo<Tabs.RootProps["items"]>(
+  const items = useMemo<Tabs.Item[]>(
     () => [
       {
         panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
@@ -159,7 +159,7 @@ export const Size: Story = () => {
 }
 
 export const DefaultIndex: Story = () => {
-  const items = useMemo<Tabs.RootProps["items"]>(
+  const items = useMemo<Tabs.Item[]>(
     () => [
       {
         panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
@@ -187,7 +187,7 @@ export const DefaultIndex: Story = () => {
 }
 
 export const Orientation: Story = () => {
-  const items = useMemo<Tabs.RootProps["items"]>(
+  const items = useMemo<Tabs.Item[]>(
     () => [
       {
         panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
@@ -219,7 +219,7 @@ export const Orientation: Story = () => {
 }
 
 export const Align: Story = () => {
-  const items = useMemo<Tabs.RootProps["items"]>(
+  const items = useMemo<Tabs.Item[]>(
     () => [
       {
         panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
@@ -261,7 +261,7 @@ export const Align: Story = () => {
 }
 
 export const Fitted: Story = () => {
-  const items = useMemo<Tabs.RootProps["items"]>(
+  const items = useMemo<Tabs.Item[]>(
     () => [
       {
         panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
@@ -293,7 +293,7 @@ export const Fitted: Story = () => {
 }
 
 export const Disabled: Story = () => {
-  const items = useMemo<Tabs.RootProps["items"]>(
+  const items = useMemo<Tabs.Item[]>(
     () => [
       {
         panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
@@ -322,7 +322,7 @@ export const Disabled: Story = () => {
 }
 
 export const Manual: Story = () => {
-  const items = useMemo<Tabs.RootProps["items"]>(
+  const items = useMemo<Tabs.Item[]>(
     () => [
       {
         panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
@@ -350,7 +350,7 @@ export const Manual: Story = () => {
 }
 
 export const Link: Story = () => {
-  const items = useMemo<Tabs.RootProps["items"]>(
+  const items = useMemo<Tabs.Item[]>(
     () => [
       {
         asChild: true,
@@ -400,7 +400,7 @@ export const Lazy: Story = () => {
     return <>Panel {state}</>
   }
 
-  const items = useMemo<Tabs.RootProps["items"]>(
+  const items = useMemo<Tabs.Item[]>(
     () => [
       { panel: <Panel />, tab: "Tab 1" },
       { panel: <Panel />, tab: "Tab 2" },
@@ -437,7 +437,7 @@ export const LazyBehavior: Story = () => {
     return <>Panel {state}</>
   }
 
-  const items = useMemo<Tabs.RootProps["items"]>(
+  const items = useMemo<Tabs.Item[]>(
     () => [
       { panel: <Panel />, tab: "Tab 1" },
       { panel: <Panel />, tab: "Tab 2" },
@@ -456,7 +456,7 @@ export const LazyBehavior: Story = () => {
 
 export const Dynamic: Story = () => {
   const [index, setIndex] = useState(0)
-  const [items, setItems] = useState<Required<Tabs.RootProps>["items"]>([
+  const [items, setItems] = useState<Tabs.Item[]>([
     { id: uuid(), panel: "Tab Content", tab: "Tab" },
     { id: uuid(), panel: "Tab Content", tab: "Tab" },
     { id: uuid(), panel: "Tab Content", tab: "Tab" },
@@ -538,7 +538,7 @@ export const Dynamic: Story = () => {
 
 export const CustomControl: Story = () => {
   const [index, setIndex] = useState(0)
-  const items = useMemo<Tabs.RootProps["items"]>(
+  const items = useMemo<Tabs.Item[]>(
     () => [
       {
         panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",

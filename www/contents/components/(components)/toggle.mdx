@@ -259,4 +259,52 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+When a toggle renders only an icon, provide an accessible name with `aria-label`.
+
+```tsx
+<Toggle icon={<BoldIcon />} aria-label="Toggle bold" />
+```
+
+Setting an `aria-label` on `ToggleGroup.Root` allows screen readers to announce the group, helping users understand its purpose.
+
+```tsx
+const [value, setValue] = useState<string[]>([])
+
+return (
+  <ToggleGroup.Root
+    value={value}
+    onChange={setValue}
+    aria-label="Text formatting options"
+  >
+    <ToggleGroup.Item
+      value="bold"
+      icon={<BoldIcon />}
+      aria-label="Toggle bold"
+    />
+    <ToggleGroup.Item
+      value="italic"
+      icon={<ItalicIcon />}
+      aria-label="Toggle italic"
+    />
+    <ToggleGroup.Item
+      value="underline"
+      icon={<UnderlineIcon />}
+      aria-label="Toggle underline"
+    />
+  </ToggleGroup.Root>
+)
+```
+
+### Keyboard Interaction
+
+| Key              | Description                  | State |
+| ---------------- | ---------------------------- | ----- |
+| `Tab`            | Focuses the element.         | -     |
+| `Space`, `Enter` | Toggles the focused element. | -     |
+
+### ARIA Roles and Attributes
+
+| Component                    | Role and Attributes | Usage                                                 |
+| ---------------------------- | ------------------- | ----------------------------------------------------- |
+| `ToggleGroup.Root`           | `role="group"`      | Indicates the collection of related toggles.          |
+| `Toggle`, `ToggleGroup.Item` | `aria-pressed`      | `true` when the toggle is on, `false` when it is off. |

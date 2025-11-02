@@ -15,7 +15,7 @@ const meta: Meta<typeof DataList.Root> = {
 export default meta
 
 export const Basic: Story = () => {
-  const items = useMemo<DataList.RootProps["items"]>(
+  const items = useMemo<DataList.Item[]>(
     () => [
       { description: "入れ替わりの魔女", term: "白石うらら" },
       { description: "虜の魔女", term: "小田切寧々" },
@@ -73,7 +73,7 @@ export const Children: Story = () => {
 }
 
 export const Variant: Story = () => {
-  const items = useMemo<DataList.RootProps["items"]>(
+  const items = useMemo<DataList.Item[]>(
     () => [
       { description: "入れ替わりの魔女", term: "白石うらら" },
       { description: "虜の魔女", term: "小田切寧々" },
@@ -107,7 +107,7 @@ export const Variant: Story = () => {
 }
 
 export const Size: Story = () => {
-  const items = useMemo<DataList.RootProps["items"]>(
+  const items = useMemo<DataList.Item[]>(
     () => [
       { description: "入れ替わりの魔女", term: "白石うらら" },
       { description: "虜の魔女", term: "小田切寧々" },
@@ -141,7 +141,7 @@ export const Size: Story = () => {
 }
 
 export const Orientation: Story = () => {
-  const items = useMemo<DataList.RootProps["items"]>(
+  const items = useMemo<DataList.Item[]>(
     () => [
       { description: "入れ替わりの魔女", term: "白石うらら" },
       { description: "虜の魔女", term: "小田切寧々" },
@@ -163,7 +163,7 @@ export const Orientation: Story = () => {
 }
 
 export const MultipleTerms: Story = () => {
-  const items = useMemo<DataList.RootProps["items"]>(
+  const items = useMemo<DataList.Item[]>(
     () => [
       { description: "入れ替わりの魔女", term: ["白石うらら", "清集院桃子"] },
       { description: "虜の魔女", term: ["小田切寧々", "紺野つばさ"] },
@@ -231,7 +231,7 @@ export const MultipleTerms: Story = () => {
 }
 
 export const MultipleDescriptions: Story = () => {
-  const items = useMemo<DataList.RootProps["items"]>(
+  const items = useMemo<DataList.Item[]>(
     () => [
       {
         description: ["入れ替わりの魔女", "絶望的味覚音痴"],
@@ -315,7 +315,7 @@ export const MultipleDescriptions: Story = () => {
 }
 
 export const CustomTerm: Story = () => {
-  const items = useMemo<DataList.RootProps["items"]>(
+  const items = useMemo<DataList.Item[]>(
     () => [
       {
         description: "入れ替わりの魔女",
@@ -380,7 +380,7 @@ export const CustomTerm: Story = () => {
 }
 
 export const CustomDescription: Story = () => {
-  const items = useMemo<DataList.RootProps["items"]>(
+  const items = useMemo<DataList.Item[]>(
     () => [
       {
         description: "入れ替わりの魔女",

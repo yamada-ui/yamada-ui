@@ -45,7 +45,7 @@ import { Reorder } from "@workspaces/ui"
 ### Use items
 
 ```tsx preview functional
-const items = useMemo<Reorder.RootProps["items"]>(
+const items = useMemo<Reorder.Item[]>(
   () => [
     { value: "虎杖悠仁", label: "虎杖悠仁" },
     { value: "伏黒恵", label: "伏黒恵" },
@@ -62,7 +62,7 @@ return <Reorder.Root items={items} />
 ### Change Variant
 
 ```tsx preview functional
-const items = useMemo<Reorder.RootProps["items"]>(
+const items = useMemo<Reorder.Item[]>(
   () => [
     { value: "虎杖悠仁", label: "虎杖悠仁" },
     { value: "伏黒恵", label: "伏黒恵" },
@@ -87,7 +87,7 @@ return (
 ### Change Size
 
 ```tsx preview functional
-const items = useMemo<Reorder.RootProps["items"]>(
+const items = useMemo<Reorder.Item[]>(
   () => [
     { value: "虎杖悠仁", label: "虎杖悠仁" },
     { value: "伏黒恵", label: "伏黒恵" },
@@ -111,7 +111,7 @@ return (
 To change the orientation, set `orientation` to `"vertical"` or `"horizontal"`. By default, `"vertical"` is set.
 
 ```tsx preview functional
-const items = useMemo<Reorder.RootProps["items"]>(
+const items = useMemo<Reorder.Item[]>(
   () => [
     { value: "虎杖悠仁", label: "虎杖悠仁" },
     { value: "伏黒恵", label: "伏黒恵" },
@@ -165,7 +165,7 @@ To limit the draggable area, use `ReorderTrigger`.
 If you want to handle the event when the user's drag and drop has finished and the order of items is completed, use `onCompleteChange`. `onCompleteChange` provides the completed order as an array.
 
 ```tsx preview functional
-const items = useMemo<Reorder.RootProps["items"]>(
+const items = useMemo<Reorder.Item[]>(
   () => [
     { value: "虎杖悠仁", label: "虎杖悠仁" },
     { value: "伏黒恵", label: "伏黒恵" },
@@ -197,7 +197,7 @@ return (
 When using in an area with scroll, set `layoutScroll` to `true` to ensure items can measure their offsets correctly.
 
 ```tsx preview functional
-const items = useMemo<Reorder.RootProps["items"]>(
+const items = useMemo<Reorder.Item[]>(
   () => [
     { value: "虎杖悠仁", label: "虎杖悠仁" },
     { value: "伏黒恵", label: "伏黒恵" },
@@ -218,7 +218,7 @@ return (
 ### Control
 
 ```tsx preview functional client
-const items = useMemo<Reorder.RootProps["items"]>(
+const items = useMemo<Reorder.Item[]>(
   () => [
     { value: "虎杖悠仁", label: "虎杖悠仁" },
     { value: "伏黒恵", label: "伏黒恵" },

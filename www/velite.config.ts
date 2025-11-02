@@ -1,12 +1,11 @@
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
-import rehypeSlug from "rehype-slug"
 import remarkDirective from "remark-directive"
 import remarkGfm from "remark-gfm"
 import { defineCollection, defineConfig, s } from "velite"
+import { CONSTANTS } from "@/constants"
 import { generateDocMap } from "@/scripts/generate/docs/map"
 import { getLocale, langs } from "@/utils/i18n"
-import { CONSTANTS } from "./constants"
-import { rehypePre } from "./utils/rehype-plugins"
+import { rehypePre, rehypeSlug, transformToc } from "@/utils/rehype-plugins"
 import {
   remarkCallout,
   remarkCardGroup,
@@ -83,8 +82,9 @@ const docs = defineCollection({
       title: s.string(),
       toc: s.toc(),
     })
-    .transform((data, { meta }) => {
+    .transform(async (data, { meta }) => {
       const { locale, slug } = getSlug(meta.path as string)
+      const toc = await transformToc(data.toc, meta.path as string)
 
       return {
         ...data,
@@ -101,6 +101,7 @@ const docs = defineCollection({
         storybook: data.storybook
           ? `${CONSTANTS.SNS.STORYBOOK}?path=/story/${data.storybook}`
           : undefined,
+        toc,
       }
     }),
 })

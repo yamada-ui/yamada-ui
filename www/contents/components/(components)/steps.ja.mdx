@@ -7,7 +7,7 @@ style: components/steps/steps.style.ts.
 ---
 
 ```tsx preview functional
-const items = useMemo<Steps.RootProps["items"]>(
+const items = useMemo<Steps.Item[]>(
   () => [
     {
       content:
@@ -91,7 +91,7 @@ import { Steps } from "@workspaces/ui"
 ### itemsを使う
 
 ```tsx preview functional
-const items = useMemo<Steps.RootProps["items"]>(
+const items = useMemo<Steps.Item[]>(
   () => [
     { description: "レッドリボン軍", title: "孫悟空少年編" },
     { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },
@@ -110,7 +110,7 @@ return (
 ### バリアントを変更する
 
 ```tsx preview functional
-const items = useMemo<Steps.RootProps["items"]>(
+const items = useMemo<Steps.Item[]>(
   () => [
     { description: "レッドリボン軍", title: "孫悟空少年編" },
     { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },
@@ -141,7 +141,7 @@ return (
 ### サイズを変更する
 
 ```tsx preview functional
-const items = useMemo<Steps.RootProps["items"]>(
+const items = useMemo<Steps.Item[]>(
   () => [
     { description: "レッドリボン軍", title: "孫悟空少年編" },
     { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },
@@ -166,7 +166,7 @@ return (
 ### 方向を変更する
 
 ```tsx preview functional
-const items = useMemo<Steps.RootProps["items"]>(
+const items = useMemo<Steps.Item[]>(
   () => [
     {
       content:
@@ -233,7 +233,7 @@ return (
 ### 遅延レンダリングを有効にする
 
 ```tsx preview functional
-const items = useMemo<Steps.RootProps["items"]>(
+const items = useMemo<Steps.Item[]>(
   () => [
     {
       content:
@@ -288,7 +288,7 @@ return (
 ### インジケーターをカスタマイズする
 
 ```tsx preview functional
-const items = useMemo<Steps.RootProps["items"]>(
+const items = useMemo<Steps.Item[]>(
   () => [
     {
       complete: `😇`,
@@ -389,7 +389,7 @@ return (
 
 ```tsx preview functional client
 const [index, setIndex] = useState(0)
-const items = useMemo<Steps.RootProps["items"]>(
+const items = useMemo<Steps.Item[]>(
   () => [
     { description: "レッドリボン軍", title: "孫悟空少年編" },
     { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },

@@ -60,7 +60,7 @@ import { List } from "@workspaces/ui"
 ### Use items
 
 ```tsx preview functional
-const items = useMemo<List.RootProps["items"]>(
+const items = useMemo<List.Item[]>(
   () => [
     { children: "【一つ】この世界におけるあらゆる殺傷、戦争、略奪を禁ずる" },
     { children: "【二つ】争いは全てゲームにおける勝敗で解決するものとする" },
@@ -114,7 +114,7 @@ return <List.Root items={items} />
 To use custom icons for items, set a `ReactNode` to the `icon` property or use `List.Icon`.
 
 ```tsx preview functional
-const items = useMemo<List.RootProps["items"]>(
+const items = useMemo<List.Item[]>(
   () => [
     {
       icon: <CircleCheckIcon color="success" />,

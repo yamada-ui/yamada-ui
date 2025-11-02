@@ -5,7 +5,7 @@ export {
   useCheckboxPropsContext,
 } from "./checkbox"
 export type { CheckboxProps } from "./checkbox"
-export { CheckboxGroupRoot } from "./checkbox-group"
+export { CheckboxGroupItem, CheckboxGroupRoot } from "./checkbox-group"
 export type { CheckboxGroupRootProps } from "./checkbox-group"
 export * as CheckboxGroup from "./namespace"
 export * from "./use-checkbox"

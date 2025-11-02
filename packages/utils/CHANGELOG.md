@@ -1,5 +1,17 @@
 # @yamada-ui/utils
 
+## 2.0.4
+
+### Patch Changes
+
+- [#5495](https://github.com/yamada-ui/yamada-ui/pull/5495) [`371fedb`](https://github.com/yamada-ui/yamada-ui/commit/371fedbc66a67ee69d2bcc1a51d2b94ebd26d0ab) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added fallback options to browser checks.
+
+## 2.0.3
+
+### Patch Changes
+
+- [#5313](https://github.com/yamada-ui/yamada-ui/pull/5313) [`db5c713`](https://github.com/yamada-ui/yamada-ui/commit/db5c713c8c4df48257349d32d605e44ffb959d23) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enhanced color calculation functions to allow for more type flexibility.
+
 ## 2.0.2
 
 ### Patch Changes

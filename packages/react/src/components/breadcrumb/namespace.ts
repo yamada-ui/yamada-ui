@@ -5,9 +5,9 @@ export {
   BreadcrumbRoot as Root,
   useBreadcrumbPropsContext as usePropsContext,
 } from "./breadcrumb"
-
 export type {
   BreadcrumbEllipsisProps as EllipsisProps,
   BreadcrumbLinkProps as LinkProps,
   BreadcrumbRootProps as RootProps,
 } from "./breadcrumb"
+export type { BreadcrumbItem as Item } from "./use-breadcrumb"

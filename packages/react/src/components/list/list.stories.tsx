@@ -15,7 +15,7 @@ const meta: Meta<typeof List.Root> = {
 export default meta
 
 export const Basic: Story = () => {
-  const items = useMemo<List.RootProps["items"]>(
+  const items = useMemo<List.Item[]>(
     () => [
       { children: "よろしければわたしが喜びのダンスを踊りましょうか！" },
       { children: "お命頂だい!!!　とうっ!!!" },
@@ -42,7 +42,7 @@ export const Children: Story = () => {
 }
 
 export const StyleType: Story = () => {
-  const items = useMemo<List.RootProps["items"]>(
+  const items = useMemo<List.Item[]>(
     () => [
       { children: "よろしければわたしが喜びのダンスを踊りましょうか！" },
       { children: "お命頂だい!!!　とうっ!!!" },
@@ -65,7 +65,7 @@ export const StyleType: Story = () => {
 }
 
 export const Gap: Story = () => {
-  const items = useMemo<List.RootProps["items"]>(
+  const items = useMemo<List.Item[]>(
     () => [
       { children: "よろしければわたしが喜びのダンスを踊りましょうか！" },
       { children: "お命頂だい!!!　とうっ!!!" },
@@ -80,7 +80,7 @@ export const Gap: Story = () => {
 }
 
 export const Icon: Story = () => {
-  const items = useMemo<List.RootProps["items"]>(
+  const items = useMemo<List.Item[]>(
     () => [
       {
         children: "よろしければわたしが喜びのダンスを踊りましょうか！",

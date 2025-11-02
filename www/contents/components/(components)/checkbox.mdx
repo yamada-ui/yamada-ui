@@ -50,7 +50,7 @@ import { Checkbox, CheckboxGroup } from "@workspaces/ui"
 ### Use Items
 
 ```tsx preview functional
-const items = useMemo<CheckboxGroup.RootProps["items"]>(
+const items = useMemo<CheckboxGroup.Item[]>(
   () => [
     { label: "ソラ", value: "sora" },
     { label: "リク", value: "riku" },
@@ -65,7 +65,7 @@ return <CheckboxGroup.Root items={items} />
 ### Change Variant
 
 ```tsx preview functional
-const items = useMemo<CheckboxGroup.RootProps["items"]>(
+const items = useMemo<CheckboxGroup.Item[]>(
   () => [
     { label: "Checked", value: "1" },
     { label: "No checked", value: "2" },
@@ -92,7 +92,7 @@ return (
 ### Change Size
 
 ```tsx preview functional
-const items = useMemo<CheckboxGroup.RootProps["items"]>(
+const items = useMemo<CheckboxGroup.Item[]>(
   () => [
     { label: "Checked", value: "1" },
     { label: "No checked", value: "2" },
@@ -121,7 +121,7 @@ return (
 To set a default value, set `defaultValue` to an array of values.
 
 ```tsx preview functional
-const items = useMemo<CheckboxGroup.RootProps["items"]>(
+const items = useMemo<CheckboxGroup.Item[]>(
   () => [
     { label: "ソラ", value: "sora" },
     { label: "リク", value: "riku" },
@@ -203,7 +203,7 @@ return (
 To limit the maximum number of selections, set `max` to a number.
 
 ```tsx preview functional
-const items = useMemo<CheckboxGroup.RootProps["items"]>(
+const items = useMemo<CheckboxGroup.Item[]>(
   () => [
     { label: "ソラ", value: "sora" },
     { label: "リク", value: "riku" },
@@ -220,7 +220,7 @@ return <CheckboxGroup.Root items={items} max={2} />
 To change the direction, set `orientation` to `"horizontal"` or `"vertical"`. The default is `"vertical"`.
 
 ```tsx preview functional
-const items = useMemo<CheckboxGroup.RootProps["items"]>(
+const items = useMemo<CheckboxGroup.Item[]>(
   () => [
     { label: "ソラ", value: "sora" },
     { label: "リク", value: "riku" },
@@ -334,7 +334,7 @@ To change the border color, set `focusBorderColor` or `errorBorderColor` to a co
 To customize icon, set `checkedIcon` to a `ReactNode`.
 
 ```tsx preview functional
-const items = useMemo<CheckboxGroup.RootProps["items"]>(
+const items = useMemo<CheckboxGroup.Item[]>(
   () => [
     { label: "ソラ", value: "sora" },
     { label: "リク", value: "riku" },

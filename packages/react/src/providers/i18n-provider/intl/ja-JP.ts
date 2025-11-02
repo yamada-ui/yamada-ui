@@ -29,6 +29,12 @@ const data: IntlData = {
   closeButton: {
     Close: "閉じる",
   },
+  colorPicker: {
+    "Pick a color": "色を選択する",
+  },
+  colorSelector: {
+    "Pick a color": "色を選択する",
+  },
   datePicker: {
     "Clear value": "値を消去する",
   },

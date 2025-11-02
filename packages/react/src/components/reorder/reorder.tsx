@@ -19,6 +19,8 @@ import {
   useReorderItemContext,
 } from "./use-reorder"
 
+export interface ReorderItem<Y = string> extends ReorderItemProps<Y> {}
+
 export interface ReorderRootProps<Y = string>
   extends Merge<
       HTMLMotionProps<"ul">,
@@ -29,7 +31,7 @@ export interface ReorderRootProps<Y = string>
    * If provided, generate reorder items based on items.
    *
    */
-  items?: ReorderItemProps<Y>[]
+  items?: ReorderItem<Y>[]
 }
 
 const {

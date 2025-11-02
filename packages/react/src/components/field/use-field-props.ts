@@ -108,3 +108,10 @@ export const useFieldProps = <Y extends HTMLElement, M extends Dict>(
     eventProps,
   }
 }
+
+export const resetFieldProps = {
+  disabled: false,
+  invalid: false,
+  readOnly: false,
+  required: false,
+}

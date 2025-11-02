@@ -1,7 +1,15 @@
 {
   "AArrowDownIcon": ["letter", "font size", "text", "formatting", "smaller"],
-  "AccessibilityIcon": ["disability", "disabled", "dda", "wheelchair"],
+  "AArrowUpIcon": [
+    "letter",
+    "font size",
+    "text",
+    "formatting",
+    "larger",
+    "bigger"
+  ],
   "ALargeSmallIcon": ["letter", "font size", "text", "formatting"],
+  "AccessibilityIcon": ["disability", "disabled", "dda", "wheelchair"],
   "ActivityIcon": [
     "pulse",
     "action",
@@ -31,14 +39,6 @@
     "synthesiser",
     "music"
   ],
-  "AArrowUpIcon": [
-    "letter",
-    "font size",
-    "text",
-    "formatting",
-    "larger",
-    "bigger"
-  ],
   "AirVentIcon": [
     "air conditioner",
     "ac",
@@ -46,7 +46,6 @@
     "cooling",
     "climate-control"
   ],
-  "AlarmClockCheckIcon": ["done", "todo", "tick", "complete", "task"],
   "AirplayIcon": [
     "stream",
     "cast",
@@ -56,8 +55,8 @@
     "macos",
     "osx"
   ],
+  "AlarmClockCheckIcon": ["done", "todo", "tick", "complete", "task"],
   "AlarmClockMinusIcon": ["remove"],
-  "AlarmClockOffIcon": ["morning", "turn-off"],
   "AlarmClockPlusIcon": ["add"],
   "AlarmClockIcon": ["morning"],
   "AlarmSmokeIcon": [
@@ -70,10 +69,12 @@
     "equipment",
     "amenities"
   ],
+  "AlarmClockOffIcon": ["morning", "turn-off"],
   "AlbumIcon": ["photo", "book"],
   "AlignCenterHorizontalIcon": ["items", "flex", "justify"],
   "AlignCenterVerticalIcon": ["items", "flex", "justify"],
   "AlignEndHorizontalIcon": ["items", "bottom", "flex", "justify"],
+  "AlignEndVerticalIcon": ["items", "right", "flex", "justify"],
   "AlignHorizontalDistributeCenterIcon": [
     "items",
     "flex",
@@ -82,11 +83,11 @@
     "evenly",
     "around"
   ],
-  "AlignEndVerticalIcon": ["items", "right", "flex", "justify"],
   "AlignHorizontalDistributeEndIcon": ["right", "items", "flex", "justify"],
   "AlignHorizontalDistributeStartIcon": ["left", "items", "flex", "justify"],
-  "AlignHorizontalJustifyCenterIcon": ["center", "items", "flex", "justify"],
   "AlignHorizontalJustifyEndIcon": ["right", "items", "flex", "justify"],
+  "AlignHorizontalJustifyCenterIcon": ["center", "items", "flex", "justify"],
+  "AlignHorizontalJustifyStartIcon": ["left", "items", "flex", "justify"],
   "AlignHorizontalSpaceAroundIcon": [
     "center",
     "items",
@@ -96,7 +97,6 @@
     "between"
   ],
   "AlignStartHorizontalIcon": ["top", "items", "flex", "justify"],
-  "AlignHorizontalJustifyStartIcon": ["left", "items", "flex", "justify"],
   "AlignHorizontalSpaceBetweenIcon": [
     "around",
     "items",
@@ -123,14 +123,6 @@
     "distribute",
     "between"
   ],
-  "AlignVerticalJustifyStartIcon": [
-    "top",
-    "items",
-    "flex",
-    "justify",
-    "distribute",
-    "between"
-  ],
   "AlignVerticalJustifyEndIcon": [
     "bottom",
     "items",
@@ -139,8 +131,8 @@
     "distribute",
     "between"
   ],
-  "AlignVerticalSpaceAroundIcon": [
-    "center",
+  "AlignVerticalJustifyStartIcon": [
+    "top",
     "items",
     "flex",
     "justify",
@@ -155,17 +147,13 @@
     "distribute",
     "between"
   ],
-  "AmbulanceIcon": [
-    "ambulance",
-    "emergency",
-    "medical",
-    "vehicle",
-    "siren",
-    "healthcare",
-    "transportation",
-    "rescue",
-    "urgent",
-    "first aid"
+  "AlignVerticalSpaceAroundIcon": [
+    "center",
+    "items",
+    "flex",
+    "justify",
+    "distribute",
+    "between"
   ],
   "AmpersandIcon": [
     "and",
@@ -212,7 +200,18 @@
     "satellite",
     "cable"
   ],
-  "ApertureIcon": ["camera", "photo", "pictures", "shutter", "exposure"],
+  "AmbulanceIcon": [
+    "ambulance",
+    "emergency",
+    "medical",
+    "vehicle",
+    "siren",
+    "healthcare",
+    "transportation",
+    "rescue",
+    "urgent",
+    "first aid"
+  ],
   "AnvilIcon": [
     "metal",
     "iron",
@@ -224,6 +223,7 @@
     "forge",
     "acme"
   ],
+  "ApertureIcon": ["camera", "photo", "pictures", "shutter", "exposure"],
   "AppWindowMacIcon": [
     "application",
     "menu bar",
@@ -233,7 +233,6 @@
     "osx",
     "executable"
   ],
-  "AppWindowIcon": ["application", "menu bar", "pane", "executable"],
   "AppleIcon": [
     "fruit",
     "food",
@@ -258,6 +257,7 @@
     "raw",
     "diet"
   ],
+  "AppWindowIcon": ["application", "menu bar", "pane", "executable"],
   "ArchiveRestoreIcon": [
     "unarchive",
     "index",
@@ -268,14 +268,6 @@
   ],
   "ArchiveXIcon": ["index", "backup", "box", "storage", "records", "junk"],
   "ArchiveIcon": ["index", "backup", "box", "storage", "records"],
-  "ArmchairIcon": [
-    "sofa",
-    "furniture",
-    "leisure",
-    "lounge",
-    "loveseat",
-    "couch"
-  ],
   "ArrowBigDownDashIcon": [
     "backwards",
     "reverse",
@@ -328,16 +320,13 @@
     "speed",
     "boost"
   ],
-  "ArrowDown01Icon": [
-    "filter",
-    "sort",
-    "ascending",
-    "descending",
-    "increasing",
-    "decreasing",
-    "rising",
-    "falling",
-    "numerical"
+  "ArmchairIcon": [
+    "sofa",
+    "furniture",
+    "leisure",
+    "lounge",
+    "loveseat",
+    "couch"
   ],
   "ArrowBigUpIcon": [
     "shift",
@@ -349,6 +338,17 @@
     "forward",
     "direction",
     "north"
+  ],
+  "ArrowDown01Icon": [
+    "filter",
+    "sort",
+    "ascending",
+    "descending",
+    "increasing",
+    "decreasing",
+    "rising",
+    "falling",
+    "numerical"
   ],
   "ArrowDown10Icon": [
     "filter",
@@ -383,6 +383,15 @@
     "vertical"
   ],
   "ArrowDownLeftIcon": ["direction", "south-west", "diagonal"],
+  "ArrowDownRightIcon": ["direction", "south-east", "diagonal"],
+  "ArrowDownToDotIcon": [
+    "direction",
+    "south",
+    "waypoint",
+    "location",
+    "step",
+    "into"
+  ],
   "ArrowDownNarrowWideIcon": [
     "filter",
     "sort",
@@ -393,15 +402,6 @@
     "rising",
     "falling"
   ],
-  "ArrowDownToDotIcon": [
-    "direction",
-    "south",
-    "waypoint",
-    "location",
-    "step",
-    "into"
-  ],
-  "ArrowDownRightIcon": ["direction", "south-east", "diagonal"],
   "ArrowDownToLineIcon": [
     "behind",
     "direction",
@@ -463,16 +463,6 @@
     "horizontal",
     "<-|"
   ],
-  "ArrowLeftToLineIcon": [
-    "previous",
-    "back",
-    "direction",
-    "west",
-    "collapse",
-    "fold",
-    "horizontal",
-    "|<-"
-  ],
   "ArrowLeftRightIcon": [
     "bidirectional",
     "two-way",
@@ -484,6 +474,16 @@
     "move",
     "<-",
     "->"
+  ],
+  "ArrowLeftToLineIcon": [
+    "previous",
+    "back",
+    "direction",
+    "west",
+    "collapse",
+    "fold",
+    "horizontal",
+    "|<-"
   ],
   "ArrowLeftIcon": ["previous", "back", "direction", "west", "<-"],
   "ArrowRightFromLineIcon": [
@@ -523,7 +523,6 @@
     "horizontal",
     "->|"
   ],
-  "ArrowRightIcon": ["forward", "next", "direction", "east", "->"],
   "ArrowUp01Icon": [
     "filter",
     "sort",
@@ -535,17 +534,7 @@
     "falling",
     "numerical"
   ],
-  "ArrowUp10Icon": [
-    "filter",
-    "sort",
-    "ascending",
-    "descending",
-    "increasing",
-    "decreasing",
-    "rising",
-    "falling",
-    "numerical"
-  ],
+  "ArrowRightIcon": ["forward", "next", "direction", "east", "->"],
   "ArrowUpAZIcon": [
     "filter",
     "sort",
@@ -556,6 +545,17 @@
     "rising",
     "falling",
     "alphabetical"
+  ],
+  "ArrowUp10Icon": [
+    "filter",
+    "sort",
+    "ascending",
+    "descending",
+    "increasing",
+    "decreasing",
+    "rising",
+    "falling",
+    "numerical"
   ],
   "ArrowUpDownIcon": [
     "bidirectional",
@@ -570,6 +570,7 @@
     "reorder",
     "move"
   ],
+  "ArrowUpLeftIcon": ["direction", "north-west", "diagonal"],
   "ArrowUpFromDotIcon": ["direction", "north", "step", "out"],
   "ArrowUpFromLineIcon": [
     "forward",
@@ -593,7 +594,6 @@
     "rising",
     "falling"
   ],
-  "ArrowUpLeftIcon": ["direction", "north-west", "diagonal"],
   "ArrowUpRightIcon": ["direction", "north-east", "diagonal"],
   "ArrowUpToLineIcon": [
     "forward",
@@ -626,17 +626,6 @@
     "alphabetical",
     "reverse"
   ],
-  "AsteriskIcon": [
-    "reference",
-    "times",
-    "multiply",
-    "multiplication",
-    "operator",
-    "code",
-    "glob pattern",
-    "wildcard",
-    "*"
-  ],
   "ArrowUpIcon": ["forward", "direction", "north"],
   "ArrowsUpFromLineIcon": [
     "direction",
@@ -649,7 +638,17 @@
     "postage",
     "shipping"
   ],
-  "AtSignIcon": ["mention", "at", "email", "message", "@"],
+  "AsteriskIcon": [
+    "reference",
+    "times",
+    "multiply",
+    "multiplication",
+    "operator",
+    "code",
+    "glob pattern",
+    "wildcard",
+    "*"
+  ],
   "AtomIcon": [
     "atomic",
     "nuclear",
@@ -686,6 +685,7 @@
     "singer",
     "song"
   ],
+  "AtSignIcon": ["mention", "at", "email", "message", "@"],
   "AudioWaveformIcon": [
     "sound",
     "noise",
@@ -727,6 +727,7 @@
   ],
   "Axis3dIcon": ["gizmo", "coordinates"],
   "BabyIcon": ["child", "childproof", "children"],
+  "BackpackIcon": ["bag", "hiking", "travel", "camping", "school", "childhood"],
   "BadgeAlertIcon": [
     "check",
     "verified",
@@ -735,7 +736,6 @@
     "safety",
     "issue"
   ],
-  "BackpackIcon": ["bag", "hiking", "travel", "camping", "school", "childhood"],
   "BadgeCentIcon": [
     "discount",
     "offer",
@@ -804,7 +804,6 @@
     "₹"
   ],
   "BadgeInfoIcon": ["verified", "unverified", "help"],
-  "BadgeMinusIcon": ["verified", "unverified", "delete", "remove", "erase"],
   "BadgeJapaneseYenIcon": [
     "discount",
     "offer",
@@ -821,6 +820,7 @@
     "jpy",
     "¥"
   ],
+  "BadgeMinusIcon": ["verified", "unverified", "delete", "remove", "erase"],
   "BadgePercentIcon": [
     "verified",
     "unverified",
@@ -831,7 +831,6 @@
     "sticker",
     "price tag"
   ],
-  "BadgePlusIcon": ["verified", "unverified", "add", "create", "new"],
   "BadgePoundSterlingIcon": [
     "discount",
     "offer",
@@ -849,22 +848,7 @@
     "gbp",
     "£"
   ],
-  "BadgeRussianRubleIcon": [
-    "discount",
-    "offer",
-    "sale",
-    "voucher",
-    "tag",
-    "monetization",
-    "marketing",
-    "finance",
-    "financial",
-    "exchange",
-    "transaction",
-    "payment",
-    "rub",
-    "₽"
-  ],
+  "BadgePlusIcon": ["verified", "unverified", "add", "create", "new"],
   "BadgeQuestionMarkIcon": ["verified", "unverified", "help"],
   "BadgeSwissFrancIcon": [
     "discount",
@@ -882,6 +866,22 @@
     "chf",
     "₣"
   ],
+  "BadgeRussianRubleIcon": [
+    "discount",
+    "offer",
+    "sale",
+    "voucher",
+    "tag",
+    "monetization",
+    "marketing",
+    "finance",
+    "financial",
+    "exchange",
+    "transaction",
+    "payment",
+    "rub",
+    "₽"
+  ],
   "BadgeTurkishLiraIcon": [
     "discount",
     "offer",
@@ -898,8 +898,8 @@
     "try",
     "₺"
   ],
-  "BadgeIcon": ["check", "verified", "unverified"],
   "BadgeXIcon": ["verified", "unverified", "lost", "delete", "remove"],
+  "BadgeIcon": ["check", "verified", "unverified"],
   "BaggageClaimIcon": [
     "baggage",
     "luggage",
@@ -978,7 +978,6 @@
     "growth",
     "increase"
   ],
-  "BanknoteIcon": ["currency", "money", "payment"],
   "BanknoteXIcon": [
     "bill",
     "currency",
@@ -996,6 +995,20 @@
     "lost",
     "delete",
     "remove"
+  ],
+  "BanknoteIcon": ["currency", "money", "payment"],
+  "BarcodeIcon": [
+    "scan",
+    "checkout",
+    "till",
+    "cart",
+    "transaction",
+    "purchase",
+    "buy",
+    "product",
+    "packaging",
+    "retail",
+    "consumer"
   ],
   "BarrelIcon": [
     "keg",
@@ -1017,20 +1030,6 @@
     "winery",
     "vineyard"
   ],
-  "BaselineIcon": ["text", "format", "color"],
-  "BarcodeIcon": [
-    "scan",
-    "checkout",
-    "till",
-    "cart",
-    "transaction",
-    "purchase",
-    "buy",
-    "product",
-    "packaging",
-    "retail",
-    "consumer"
-  ],
   "BatteryChargingIcon": [
     "power",
     "electricity",
@@ -1038,7 +1037,6 @@
     "accumulator",
     "charge"
   ],
-  "BathIcon": ["amenities", "services", "bathroom", "shower"],
   "BatteryFullIcon": [
     "power",
     "electricity",
@@ -1090,11 +1088,11 @@
     "intolerance",
     "diet"
   ],
-  "BedDoubleIcon": ["sleep", "hotel", "furniture"],
   "BeanIcon": ["legume", "soy", "food", "seed"],
+  "BedDoubleIcon": ["sleep", "hotel", "furniture"],
   "BedSingleIcon": ["sleep", "hotel", "furniture"],
-  "BeerOffIcon": ["alcohol", "bar", "beverage", "brewery", "drink"],
   "BedIcon": ["sleep", "hotel", "furniture"],
+  "BaselineIcon": ["text", "format", "color"],
   "BeefIcon": [
     "food",
     "dish",
@@ -1105,8 +1103,10 @@
     "bbq",
     "steak"
   ],
+  "BeerOffIcon": ["alcohol", "bar", "beverage", "brewery", "drink"],
   "BeerIcon": ["alcohol", "bar", "beverage", "brewery", "drink"],
   "BellDotIcon": ["alarm", "notification", "sound", "reminder", "unread"],
+  "BellOffIcon": ["alarm", "notification", "silent", "reminder"],
   "BellElectricIcon": [
     "fire alarm",
     "flames",
@@ -1137,7 +1137,6 @@
     "remove",
     "erase"
   ],
-  "BellOffIcon": ["alarm", "notification", "silent", "reminder"],
   "BellPlusIcon": [
     "notification",
     "silent",
@@ -1245,16 +1244,8 @@
     "forelimb",
     "curled"
   ],
-  "BinaryIcon": ["code", "digits", "computer", "zero", "one", "boolean"],
   "BikeIcon": ["bicycle", "transport", "trip"],
-  "BiohazardIcon": [
-    "fallout",
-    "waste",
-    "biology",
-    "chemistry",
-    "chemical",
-    "element"
-  ],
+  "BinaryIcon": ["code", "digits", "computer", "zero", "one", "boolean"],
   "BinocularsIcon": [
     "field glasses",
     "lorgnette",
@@ -1275,7 +1266,17 @@
     "tourism",
     "research"
   ],
+  "BiohazardIcon": [
+    "fallout",
+    "waste",
+    "biology",
+    "chemistry",
+    "chemical",
+    "element"
+  ],
+  "BirdIcon": ["peace", "freedom", "wing", "avian", "tweet"],
   "BitcoinIcon": ["currency", "money", "payment"],
+  "BirdhouseIcon": ["birdhouse", "bird", "garden", "home", "house", "woodwork"],
   "BlendIcon": [
     "mode",
     "overlay",
@@ -1296,7 +1297,6 @@
     "colors",
     "colours"
   ],
-  "BirdIcon": ["peace", "freedom", "wing", "avian", "tweet"],
   "BlindsIcon": [
     "shades",
     "screen",
@@ -1308,6 +1308,7 @@
     "household",
     "home"
   ],
+  "BluetoothConnectedIcon": ["paired"],
   "BlocksIcon": [
     "addon",
     "plugin",
@@ -1323,9 +1324,8 @@
     "squares",
     "corner"
   ],
-  "BluetoothConnectedIcon": ["paired"],
-  "BluetoothSearchingIcon": ["pairing"],
   "BluetoothOffIcon": ["lost"],
+  "BluetoothSearchingIcon": ["pairing"],
   "BluetoothIcon": ["wireless"],
   "BoldIcon": ["text", "strong", "format"],
   "BoltIcon": [
@@ -1393,22 +1393,6 @@
     "a-z",
     "ordered"
   ],
-  "BookAudioIcon": [
-    "audiobook",
-    "reading",
-    "listening",
-    "sound",
-    "story",
-    "fiction",
-    "novel",
-    "information",
-    "knowledge",
-    "education",
-    "student",
-    "study",
-    "learning",
-    "research"
-  ],
   "BookAlertIcon": [
     "reading",
     "paperback",
@@ -1443,6 +1427,22 @@
     "alert",
     "danger",
     "exclamation mark"
+  ],
+  "BookAudioIcon": [
+    "audiobook",
+    "reading",
+    "listening",
+    "sound",
+    "story",
+    "fiction",
+    "novel",
+    "information",
+    "knowledge",
+    "education",
+    "student",
+    "study",
+    "learning",
+    "research"
   ],
   "BookCheckIcon": [
     "read",
@@ -1483,6 +1483,23 @@
     "finished",
     "ticked"
   ],
+  "BookDashedIcon": [
+    "code",
+    "coding",
+    "version control",
+    "git",
+    "repository",
+    "template",
+    "draft",
+    "script",
+    "screenplay",
+    "writing",
+    "writer",
+    "author",
+    "unwritten",
+    "unpublished",
+    "untold"
+  ],
   "BookCopyIcon": [
     "code",
     "coding",
@@ -1518,23 +1535,6 @@
     "smart",
     "intelligent",
     "intellectual"
-  ],
-  "BookDashedIcon": [
-    "code",
-    "coding",
-    "version control",
-    "git",
-    "repository",
-    "template",
-    "draft",
-    "script",
-    "screenplay",
-    "writing",
-    "writer",
-    "author",
-    "unwritten",
-    "unpublished",
-    "untold"
   ],
   "BookDownIcon": [
     "code",
@@ -1595,21 +1595,6 @@
     "favourite",
     "high school"
   ],
-  "BookKeyIcon": [
-    "code",
-    "coding",
-    "version control",
-    "git",
-    "repository",
-    "private",
-    "public",
-    "secret",
-    "unlocked",
-    "hidden",
-    "revealed",
-    "knowledge",
-    "learning"
-  ],
   "BookImageIcon": [
     "images",
     "pictures",
@@ -1624,34 +1609,20 @@
     "browse",
     "gallery"
   ],
-  "BookMinusIcon": [
-    "code",
-    "coding",
-    "version control",
-    "git",
-    "repository",
-    "remove",
-    "delete",
-    "censor",
-    "cancel",
-    "forbid",
-    "prohibit",
-    "ban",
-    "uneducated",
-    "re-educate",
-    "unlearn",
-    "downgrade"
-  ],
-  "BookLockIcon": [
+  "BookKeyIcon": [
     "code",
     "coding",
     "version control",
     "git",
     "repository",
     "private",
+    "public",
     "secret",
+    "unlocked",
     "hidden",
-    "knowledge"
+    "revealed",
+    "knowledge",
+    "learning"
   ],
   "BookMarkedIcon": [
     "dictionary",
@@ -1694,6 +1665,35 @@
     "git",
     "repository"
   ],
+  "BookLockIcon": [
+    "code",
+    "coding",
+    "version control",
+    "git",
+    "repository",
+    "private",
+    "secret",
+    "hidden",
+    "knowledge"
+  ],
+  "BookMinusIcon": [
+    "code",
+    "coding",
+    "version control",
+    "git",
+    "repository",
+    "remove",
+    "delete",
+    "censor",
+    "cancel",
+    "forbid",
+    "prohibit",
+    "ban",
+    "uneducated",
+    "re-educate",
+    "unlearn",
+    "downgrade"
+  ],
   "BookOpenCheckIcon": [
     "read",
     "pages",
@@ -1733,6 +1733,40 @@
     "completed",
     "finished",
     "ticked"
+  ],
+  "BookOpenIcon": [
+    "reading",
+    "pages",
+    "booklet",
+    "magazine",
+    "leaflet",
+    "pamphlet",
+    "library",
+    "writing",
+    "written",
+    "writer",
+    "author",
+    "story",
+    "script",
+    "screenplay",
+    "fiction",
+    "novel",
+    "information",
+    "knowledge",
+    "education",
+    "high school",
+    "university",
+    "college",
+    "academy",
+    "student",
+    "study",
+    "learning",
+    "homework",
+    "research",
+    "documentation",
+    "revealed",
+    "blank",
+    "plain"
   ],
   "BookOpenTextIcon": [
     "reading",
@@ -1788,40 +1822,6 @@
     "upgrade",
     "level up"
   ],
-  "BookOpenIcon": [
-    "reading",
-    "pages",
-    "booklet",
-    "magazine",
-    "leaflet",
-    "pamphlet",
-    "library",
-    "writing",
-    "written",
-    "writer",
-    "author",
-    "story",
-    "script",
-    "screenplay",
-    "fiction",
-    "novel",
-    "information",
-    "knowledge",
-    "education",
-    "high school",
-    "university",
-    "college",
-    "academy",
-    "student",
-    "study",
-    "learning",
-    "homework",
-    "research",
-    "documentation",
-    "revealed",
-    "blank",
-    "plain"
-  ],
   "BookTextIcon": [
     "reading",
     "booklet",
@@ -1851,14 +1851,6 @@
     "homework",
     "research",
     "documentation"
-  ],
-  "BookUpIcon": [
-    "code",
-    "coding",
-    "version control",
-    "git",
-    "repository",
-    "push"
   ],
   "BookTypeIcon": [
     "thesaurus",
@@ -1905,6 +1897,41 @@
     "push",
     "force"
   ],
+  "BookUpIcon": [
+    "code",
+    "coding",
+    "version control",
+    "git",
+    "repository",
+    "push"
+  ],
+  "BookXIcon": [
+    "code",
+    "coding",
+    "version control",
+    "git",
+    "repository",
+    "remove",
+    "delete",
+    "reading",
+    "misinformation",
+    "disinformation",
+    "misinformed",
+    "charlatan",
+    "sophistry",
+    "false",
+    "lies",
+    "untruth",
+    "propaganda",
+    "censored",
+    "cancelled",
+    "forbidden",
+    "prohibited",
+    "banned",
+    "uneducated",
+    "re-education",
+    "unlearn"
+  ],
   "BookUserIcon": [
     "person",
     "people",
@@ -1950,33 +1977,6 @@
     "research",
     "documentation"
   ],
-  "BookXIcon": [
-    "code",
-    "coding",
-    "version control",
-    "git",
-    "repository",
-    "remove",
-    "delete",
-    "reading",
-    "misinformation",
-    "disinformation",
-    "misinformed",
-    "charlatan",
-    "sophistry",
-    "false",
-    "lies",
-    "untruth",
-    "propaganda",
-    "censored",
-    "cancelled",
-    "forbidden",
-    "prohibited",
-    "banned",
-    "uneducated",
-    "re-education",
-    "unlearn"
-  ],
   "BookmarkCheckIcon": [
     "read",
     "finished",
@@ -1987,17 +1987,7 @@
     "task",
     "todo"
   ],
-  "BoomBoxIcon": [
-    "radio",
-    "speakers",
-    "audio",
-    "music",
-    "sound",
-    "broadcast",
-    "live",
-    "frequency"
-  ],
-  "BookmarkMinusIcon": ["delete", "remove"],
+  "BookmarkPlusIcon": ["add"],
   "BookmarkIcon": ["read", "clip", "marker", "tag"],
   "BookmarkXIcon": [
     "read",
@@ -2010,9 +2000,19 @@
     "remove",
     "clear"
   ],
+  "BoomBoxIcon": [
+    "radio",
+    "speakers",
+    "audio",
+    "music",
+    "sound",
+    "broadcast",
+    "live",
+    "frequency"
+  ],
   "BotMessageSquareIcon": ["robot", "ai", "chat", "assistant"],
-  "BotOffIcon": ["robot", "ai", "chat", "assistant"],
   "BotIcon": ["robot", "ai", "chat", "assistant"],
+  "BotOffIcon": ["robot", "ai", "chat", "assistant"],
   "BottleWineIcon": [
     "alcohol",
     "drink",
@@ -2036,7 +2036,15 @@
     "meal"
   ],
   "BowArrowIcon": ["archer", "archery", "game", "war", "weapon"],
-  "BracesIcon": ["json", "code", "token", "curly brackets", "data", "{", "}"],
+  "BoxIcon": [
+    "cube",
+    "package",
+    "container",
+    "storage",
+    "geometry",
+    "3d",
+    "isometric"
+  ],
   "BoxesIcon": [
     "cubes",
     "packages",
@@ -2047,16 +2055,7 @@
     "cluster",
     "geometry"
   ],
-  "BoxIcon": [
-    "cube",
-    "package",
-    "container",
-    "storage",
-    "geometry",
-    "3d",
-    "isometric"
-  ],
-  "BracketsIcon": ["code", "token", "array", "list", "square", "[", "]"],
+  "BracesIcon": ["json", "code", "token", "curly brackets", "data", "{", "}"],
   "BrainCircuitIcon": [
     "mind",
     "intellect",
@@ -2066,22 +2065,16 @@
     "machine learning",
     "computing"
   ],
-  "BrainIcon": [
-    "medical",
+  "BrainCogIcon": [
     "mind",
-    "mental",
     "intellect",
-    "cerebral",
-    "consciousness",
-    "genius",
     "artificial intelligence",
     "ai",
-    "think",
-    "thought",
-    "insight",
-    "intelligent",
-    "smart"
+    "deep learning",
+    "machine learning",
+    "computing"
   ],
+  "BracketsIcon": ["code", "token", "array", "list", "square", "[", "]"],
   "BrickWallFireIcon": [
     "firewall",
     "security",
@@ -2104,15 +2097,6 @@
     "wood",
     "twigs",
     "sticks"
-  ],
-  "BrainCogIcon": [
-    "mind",
-    "intellect",
-    "artificial intelligence",
-    "ai",
-    "deep learning",
-    "machine learning",
-    "computing"
   ],
   "BrickWallShieldIcon": [
     "firewall",
@@ -2182,7 +2166,22 @@
     "blocks",
     "stone"
   ],
-  "BriefcaseBusinessIcon": ["work", "bag", "baggage", "folder", "portfolio"],
+  "BrainIcon": [
+    "medical",
+    "mind",
+    "mental",
+    "intellect",
+    "cerebral",
+    "consciousness",
+    "genius",
+    "artificial intelligence",
+    "ai",
+    "think",
+    "thought",
+    "insight",
+    "intelligent",
+    "smart"
+  ],
   "BriefcaseConveyorBeltIcon": [
     "baggage",
     "luggage",
@@ -2192,7 +2191,19 @@
     "carousel"
   ],
   "BriefcaseMedicalIcon": ["doctor", "medicine", "first aid"],
+  "BriefcaseBusinessIcon": ["work", "bag", "baggage", "folder", "portfolio"],
   "BriefcaseIcon": ["work", "bag", "baggage", "folder"],
+  "BringToFrontIcon": [
+    "bring",
+    "send",
+    "move",
+    "over",
+    "forward",
+    "front",
+    "overlap",
+    "layer",
+    "order"
+  ],
   "BrushCleaningIcon": [
     "cleaning",
     "utensil",
@@ -2226,16 +2237,15 @@
     "purge",
     "eliminate"
   ],
-  "BringToFrontIcon": [
-    "bring",
-    "send",
-    "move",
-    "over",
-    "forward",
-    "front",
-    "overlap",
-    "layer",
-    "order"
+  "BrushIcon": [
+    "clean",
+    "sweep",
+    "refactor",
+    "remove",
+    "draw",
+    "paint",
+    "color",
+    "artist"
   ],
   "BugOffIcon": [
     "issue",
@@ -2248,16 +2258,6 @@
     "kill",
     "exterminate",
     "pest control"
-  ],
-  "BrushIcon": [
-    "clean",
-    "sweep",
-    "refactor",
-    "remove",
-    "draw",
-    "paint",
-    "color",
-    "artist"
   ],
   "BubblesIcon": [
     "water",
@@ -2281,7 +2281,6 @@
     "floating",
     "drop"
   ],
-  "BugPlayIcon": ["issue", "testing", "debug", "reproduce", "code", "insect"],
   "Building2Icon": [
     "business",
     "company",
@@ -2291,6 +2290,7 @@
     "organization",
     "city"
   ],
+  "BugPlayIcon": ["issue", "testing", "debug", "reproduce", "code", "insect"],
   "BugIcon": [
     "issue",
     "error",
@@ -2305,8 +2305,8 @@
     "beetle"
   ],
   "BuildingIcon": ["organisation", "organization"],
-  "BusFrontIcon": ["coach", "vehicle", "trip", "road"],
   "BusIcon": ["bus", "vehicle", "transport", "trip"],
+  "BusFrontIcon": ["coach", "vehicle", "trip", "road"],
   "CableCarIcon": [
     "ski lift",
     "winter holiday",
@@ -2373,6 +2373,7 @@
     "sweet",
     "baking"
   ],
+  "CalculatorIcon": ["count", "calculating machine"],
   "Calendar1Icon": [
     "date",
     "month",
@@ -2384,7 +2385,6 @@
     "1",
     "first"
   ],
-  "CalculatorIcon": ["count", "calculating machine"],
   "CalendarArrowDownIcon": [
     "date",
     "month",
@@ -2398,6 +2398,29 @@
     "decreasing",
     "rising",
     "falling"
+  ],
+  "CalendarArrowUpIcon": [
+    "date",
+    "month",
+    "year",
+    "event",
+    "sort",
+    "order",
+    "ascending",
+    "descending",
+    "increasing",
+    "decreasing",
+    "rising",
+    "falling"
+  ],
+  "CalendarClockIcon": [
+    "date",
+    "day",
+    "month",
+    "year",
+    "event",
+    "clock",
+    "hour"
   ],
   "CalendarCheck2Icon": [
     "date",
@@ -2414,20 +2437,6 @@
     "complete",
     "task"
   ],
-  "CalendarArrowUpIcon": [
-    "date",
-    "month",
-    "year",
-    "event",
-    "sort",
-    "order",
-    "ascending",
-    "descending",
-    "increasing",
-    "decreasing",
-    "rising",
-    "falling"
-  ],
   "CalendarCheckIcon": [
     "date",
     "day",
@@ -2443,15 +2452,6 @@
     "complete",
     "task"
   ],
-  "CalendarClockIcon": [
-    "date",
-    "day",
-    "month",
-    "year",
-    "event",
-    "clock",
-    "hour"
-  ],
   "CalendarCogIcon": [
     "date",
     "day",
@@ -2461,16 +2461,6 @@
     "settings",
     "gear",
     "cog"
-  ],
-  "CalendarDaysIcon": ["date", "month", "year", "event"],
-  "CalendarFoldIcon": [
-    "date",
-    "month",
-    "year",
-    "event",
-    "birthday",
-    "birthdate",
-    "ics"
   ],
   "CalendarHeartIcon": [
     "date",
@@ -2482,16 +2472,17 @@
     "subscribe",
     "valentines day"
   ],
-  "CalendarMinusIcon": [
+  "CalendarDaysIcon": ["date", "month", "year", "event"],
+  "CalendarFoldIcon": [
     "date",
-    "day",
     "month",
     "year",
     "event",
-    "delete",
-    "remove"
+    "birthday",
+    "birthdate",
+    "ics"
   ],
-  "CalendarOffIcon": [
+  "CalendarMinusIcon": [
     "date",
     "day",
     "month",
@@ -2520,6 +2511,15 @@
     "create",
     "new"
   ],
+  "CalendarOffIcon": [
+    "date",
+    "day",
+    "month",
+    "year",
+    "event",
+    "delete",
+    "remove"
+  ],
   "CalendarPlusIcon": [
     "date",
     "day",
@@ -2531,15 +2531,6 @@
     "create",
     "new"
   ],
-  "CalendarRangeIcon": [
-    "date",
-    "day",
-    "month",
-    "year",
-    "event",
-    "range",
-    "period"
-  ],
   "CalendarSearchIcon": [
     "date",
     "day",
@@ -2549,6 +2540,16 @@
     "search",
     "lens"
   ],
+  "CalendarRangeIcon": [
+    "date",
+    "day",
+    "month",
+    "year",
+    "event",
+    "range",
+    "period"
+  ],
+  "CalendarX2Icon": ["date", "day", "month", "year", "event", "remove"],
   "CalendarSyncIcon": [
     "repeat",
     "refresh",
@@ -2566,9 +2567,9 @@
     "automatic",
     "auto"
   ],
-  "CalendarX2Icon": ["date", "day", "month", "year", "event", "remove"],
   "CalendarIcon": ["date", "month", "year", "event", "birthday", "birthdate"],
   "CalendarXIcon": ["date", "day", "month", "year", "event", "remove", "busy"],
+  "CandyCaneIcon": ["sugar", "food", "sweet", "christmas", "xmas"],
   "CameraIcon": [
     "photography",
     "lens",
@@ -2584,7 +2585,6 @@
     "video"
   ],
   "CameraOffIcon": ["photo", "webcam", "video"],
-  "CandyCaneIcon": ["sugar", "food", "sweet", "christmas", "xmas"],
   "CandyOffIcon": [
     "sugar free",
     "food",
@@ -2595,6 +2595,15 @@
   ],
   "CannabisIcon": ["cannabis", "weed", "leaf"],
   "CandyIcon": ["sugar", "food", "sweet"],
+  "CaptionsIcon": [
+    "closed captions",
+    "subtitles",
+    "subhead",
+    "transcription",
+    "transcribe",
+    "dialogue",
+    "accessibility"
+  ],
   "CaptionsOffIcon": [
     "closed captions",
     "subtitles",
@@ -2605,17 +2614,19 @@
     "accessibility"
   ],
   "CarFrontIcon": ["vehicle", "drive", "trip", "journey"],
-  "CarIcon": ["vehicle", "drive", "trip", "journey"],
-  "CaptionsIcon": [
-    "closed captions",
-    "subtitles",
-    "subhead",
-    "transcription",
-    "transcribe",
-    "dialogue",
-    "accessibility"
-  ],
   "CarTaxiFrontIcon": ["cab", "vehicle", "drive", "trip", "journey"],
+  "CarIcon": ["vehicle", "drive", "trip", "journey"],
+  "CaravanIcon": [
+    "trailer",
+    "tow",
+    "camping",
+    "campsite",
+    "mobile home",
+    "holiday",
+    "nomadic",
+    "wilderness",
+    "outdoors"
+  ],
   "CardSimIcon": [
     "cellphone",
     "smartphone",
@@ -2638,24 +2649,14 @@
     "circuit board",
     "chip"
   ],
-  "CaseLowerIcon": ["text", "letters", "characters", "font", "typography"],
-  "CaravanIcon": [
-    "trailer",
-    "tow",
-    "camping",
-    "campsite",
-    "mobile home",
-    "holiday",
-    "nomadic",
-    "wilderness",
-    "outdoors"
-  ],
   "CarrotIcon": ["vegetable", "food", "eat"],
-  "CaseUpperIcon": ["text", "letters", "characters", "font", "typography"],
   "CaseSensitiveIcon": ["text", "letters", "characters", "font", "typography"],
-  "CassetteTapeIcon": ["audio", "music", "recording", "play"],
+  "CaseUpperIcon": ["text", "letters", "characters", "font", "typography"],
+  "CaseLowerIcon": ["text", "letters", "characters", "font", "typography"],
   "CastIcon": ["chromecast", "airplay", "screen"],
+  "CassetteTapeIcon": ["audio", "music", "recording", "play"],
   "CastleIcon": ["fortress", "stronghold", "palace", "chateau", "building"],
+  "CatIcon": ["animal", "pet", "kitten", "feline"],
   "CctvIcon": [
     "camera",
     "surveillance",
@@ -2665,22 +2666,14 @@
     "crime",
     "watching"
   ],
-  "CatIcon": ["animal", "pet", "kitten", "feline"],
   "ChartBarBigIcon": ["statistics", "analytics", "diagram", "graph"],
+  "ChartAreaIcon": ["statistics", "analytics", "diagram", "graph", "area"],
   "ChartBarDecreasingIcon": [
     "statistics",
     "analytics",
     "diagram",
     "graph",
     "trending down"
-  ],
-  "ChartAreaIcon": ["statistics", "analytics", "diagram", "graph", "area"],
-  "ChartBarIncreasingIcon": [
-    "statistics",
-    "analytics",
-    "diagram",
-    "graph",
-    "trending up"
   ],
   "ChartBarStackedIcon": [
     "statistics",
@@ -2690,6 +2683,13 @@
     "multivariate",
     "categorical",
     "comparison"
+  ],
+  "ChartBarIncreasingIcon": [
+    "statistics",
+    "analytics",
+    "diagram",
+    "graph",
+    "trending up"
   ],
   "ChartBarIcon": ["statistics", "analytics", "diagram", "graph"],
   "ChartCandlestickIcon": [
@@ -2713,7 +2713,6 @@
     "diagram",
     "graph"
   ],
-  "ChartColumnBigIcon": ["statistics", "analytics", "diagram", "graph"],
   "ChartColumnDecreasingIcon": [
     "statistics",
     "analytics",
@@ -2721,13 +2720,7 @@
     "graph",
     "trending down"
   ],
-  "ChartColumnIncreasingIcon": [
-    "statistics",
-    "analytics",
-    "diagram",
-    "graph",
-    "trending up"
-  ],
+  "ChartColumnBigIcon": ["statistics", "analytics", "diagram", "graph"],
   "ChartColumnStackedIcon": [
     "statistics",
     "analytics",
@@ -2738,6 +2731,13 @@
     "comparison"
   ],
   "ChartColumnIcon": ["statistics", "analytics", "diagram", "graph"],
+  "ChartColumnIncreasingIcon": [
+    "statistics",
+    "analytics",
+    "diagram",
+    "graph",
+    "trending up"
+  ],
   "ChartLineIcon": ["statistics", "analytics", "diagram", "graph"],
   "ChartGanttIcon": ["diagram", "graph", "timeline", "planning"],
   "ChartNetworkIcon": [
@@ -2766,13 +2766,6 @@
     "graph",
     "trending up"
   ],
-  "ChartNoAxesCombinedIcon": [
-    "statistics",
-    "analytics",
-    "diagram",
-    "graph",
-    "trending up"
-  ],
   "ChartNoAxesColumnIcon": ["statistics", "analytics", "diagram", "graph"],
   "ChartNoAxesGanttIcon": [
     "projects",
@@ -2792,6 +2785,13 @@
     "agile",
     "code",
     "coding"
+  ],
+  "ChartNoAxesCombinedIcon": [
+    "statistics",
+    "analytics",
+    "diagram",
+    "graph",
+    "trending up"
   ],
   "ChartPieIcon": ["statistics", "analytics", "diagram", "presentation"],
   "ChartScatterIcon": ["statistics", "analytics", "diagram", "graph"],
@@ -2820,10 +2820,11 @@
   "CheckLineIcon": ["done", "todo", "tick", "complete", "task"],
   "CheckIcon": ["done", "todo", "tick", "complete", "task"],
   "CherryIcon": ["fruit", "food"],
-  "ChefHatIcon": ["cooking", "food", "kitchen", "restaurant"],
-  "ChevronLastIcon": ["skip", "next", "music"],
   "ChevronDownIcon": ["backwards", "reverse", "slow", "dropdown"],
   "ChevronFirstIcon": ["previous", "music"],
+  "ChevronLastIcon": ["skip", "next", "music"],
+  "ChefHatIcon": ["cooking", "food", "kitchen", "restaurant"],
+  "ChevronLeftIcon": ["back", "previous", "less than", "fewer", "menu", "<"],
   "ChevronUpIcon": [
     "caret",
     "keyboard",
@@ -2838,7 +2839,6 @@
     "^",
     "dropdown"
   ],
-  "ChevronLeftIcon": ["back", "previous", "less than", "fewer", "menu", "<"],
   "ChevronRightIcon": [
     "forward",
     "next",
@@ -2883,15 +2883,16 @@
     "output"
   ],
   "ChevronsLeftRightIcon": ["expand", "horizontal", "unfold"],
-  "ChevronsLeftIcon": ["turn", "corner"],
   "ChevronsRightLeftIcon": ["collapse", "fold", "horizontal"],
+  "ChevronsLeftIcon": ["turn", "corner"],
+  "ChevronsRightIcon": ["turn", "corner"],
   "ChevronsUpDownIcon": ["expand", "unfold", "vertical"],
   "ChevronsUpIcon": ["forward", "ahead", "faster", "speed", "boost"],
-  "ChevronsRightIcon": ["turn", "corner"],
   "ChromiumIcon": ["browser", "logo"],
   "ChurchIcon": ["temple", "building"],
   "CigaretteOffIcon": ["smoking", "no-smoking"],
   "CircleAlertIcon": ["warning", "alert", "danger", "exclamation mark"],
+  "CigaretteIcon": ["smoking"],
   "CircleArrowDownIcon": [
     "backwards",
     "reverse",
@@ -2900,13 +2901,6 @@
     "sign",
     "button"
   ],
-  "CircleArrowOutDownLeftIcon": [
-    "outwards",
-    "direction",
-    "south-west",
-    "diagonal"
-  ],
-  "CigaretteIcon": ["smoking"],
   "CircleArrowLeftIcon": [
     "previous",
     "back",
@@ -2917,21 +2911,17 @@
     "button",
     "<-"
   ],
+  "CircleArrowOutDownLeftIcon": [
+    "outwards",
+    "direction",
+    "south-west",
+    "diagonal"
+  ],
   "CircleArrowOutDownRightIcon": [
     "outwards",
     "direction",
     "south-east",
     "diagonal"
-  ],
-  "CircleArrowRightIcon": [
-    "next",
-    "forward",
-    "direction",
-    "east",
-    "sign",
-    "turn",
-    "button",
-    "->"
   ],
   "CircleArrowOutUpRightIcon": [
     "outwards",
@@ -2948,11 +2938,20 @@
     "button",
     "escape"
   ],
+  "CircleArrowRightIcon": [
+    "next",
+    "forward",
+    "direction",
+    "east",
+    "sign",
+    "turn",
+    "button",
+    "->"
+  ],
   "CircleArrowUpIcon": ["forward", "direction", "north", "sign", "button"],
   "CircleCheckBigIcon": ["done", "todo", "tick", "complete", "task"],
-  "CircleCheckIcon": ["done", "todo", "tick", "complete", "task"],
   "CircleChevronDownIcon": ["back", "menu"],
-  "CircleChevronRightIcon": ["back", "more than", "greater", "menu", ">"],
+  "CircleCheckIcon": ["done", "todo", "tick", "complete", "task"],
   "CircleChevronLeftIcon": [
     "back",
     "previous",
@@ -2961,7 +2960,7 @@
     "menu",
     "<"
   ],
-  "CircleChevronUpIcon": ["caret", "ahead", "menu", "^"],
+  "CircleChevronRightIcon": ["back", "more than", "greater", "menu", ">"],
   "CircleDashedIcon": [
     "pending",
     "dot",
@@ -2972,14 +2971,7 @@
     "coding",
     "version control"
   ],
-  "CircleDollarSignIcon": [
-    "monetization",
-    "marketing",
-    "currency",
-    "money",
-    "payment"
-  ],
-  "CircleDivideIcon": ["calculate", "math", "÷", "/"],
+  "CircleChevronUpIcon": ["caret", "ahead", "menu", "^"],
   "CircleDotDashedIcon": [
     "pending",
     "dot",
@@ -2990,17 +2982,13 @@
     "coding",
     "version control"
   ],
-  "CircleDotIcon": [
-    "pending",
-    "dot",
-    "progress",
-    "issue",
-    "code",
-    "coding",
-    "version control",
-    "choices",
-    "multiple choice",
-    "choose"
+  "CircleDivideIcon": ["calculate", "math", "÷", "/"],
+  "CircleDollarSignIcon": [
+    "monetization",
+    "marketing",
+    "currency",
+    "money",
+    "payment"
   ],
   "CircleEllipsisIcon": [
     "ellipsis",
@@ -3025,6 +3013,18 @@
     "…",
     "..."
   ],
+  "CircleDotIcon": [
+    "pending",
+    "dot",
+    "progress",
+    "issue",
+    "code",
+    "coding",
+    "version control",
+    "choices",
+    "multiple choice",
+    "choose"
+  ],
   "CircleEqualIcon": ["calculate", "shape", "="],
   "CircleFadingArrowUpIcon": [
     "north",
@@ -3033,15 +3033,6 @@
     "improve",
     "circle",
     "button"
-  ],
-  "CircleGaugeIcon": [
-    "dashboard",
-    "dial",
-    "meter",
-    "speed",
-    "pressure",
-    "measure",
-    "level"
   ],
   "CircleFadingPlusIcon": [
     "stories",
@@ -3052,20 +3043,6 @@
     "snapchat",
     "sharing",
     "content"
-  ],
-  "CircleMinusIcon": [
-    "subtract",
-    "remove",
-    "decrease",
-    "reduce",
-    "calculate",
-    "line",
-    "operator",
-    "code",
-    "coding",
-    "minimum",
-    "downgrade",
-    "-"
   ],
   "CircleOffIcon": [
     "diameter",
@@ -3086,9 +3063,32 @@
     "wrong",
     "failure"
   ],
+  "CircleGaugeIcon": [
+    "dashboard",
+    "dial",
+    "meter",
+    "speed",
+    "pressure",
+    "measure",
+    "level"
+  ],
+  "CircleMinusIcon": [
+    "subtract",
+    "remove",
+    "decrease",
+    "reduce",
+    "calculate",
+    "line",
+    "operator",
+    "code",
+    "coding",
+    "minimum",
+    "downgrade",
+    "-"
+  ],
   "CircleParkingOffIcon": ["parking lot", "car park", "no parking"],
-  "CircleParkingIcon": ["parking lot", "car park"],
   "CirclePauseIcon": ["music", "audio", "stop"],
+  "CircleParkingIcon": ["parking lot", "car park"],
   "CirclePercentIcon": [
     "verified",
     "unverified",
@@ -3099,6 +3099,7 @@
     "sticker",
     "price tag"
   ],
+  "CirclePlayIcon": ["music", "start", "run"],
   "CirclePlusIcon": [
     "add",
     "new",
@@ -3122,7 +3123,7 @@
     "coding",
     "+"
   ],
-  "CirclePlayIcon": ["music", "start", "run"],
+  "CircleQuestionMarkIcon": ["question mark"],
   "CirclePowerIcon": [
     "on",
     "off",
@@ -3149,8 +3150,6 @@
     "gbp",
     "£"
   ],
-  "CircleQuestionMarkIcon": ["question mark"],
-  "CircleSmallIcon": ["shape", "bullet", "gender", "genderless"],
   "CircleSlash2Icon": [
     "diameter",
     "zero",
@@ -3171,7 +3170,6 @@
     "median",
     "normal"
   ],
-  "CircleStopIcon": ["media", "music"],
   "CircleSlashIcon": [
     "diameter",
     "zero",
@@ -3195,6 +3193,7 @@
     "or",
     "/"
   ],
+  "CircleSmallIcon": ["shape", "bullet", "gender", "genderless"],
   "CircleStarIcon": [
     "badge",
     "medal",
@@ -3210,9 +3209,8 @@
     "silver",
     "gold"
   ],
-  "CircleUserIcon": ["person", "account", "contact"],
+  "CircleStopIcon": ["media", "music"],
   "CircleUserRoundIcon": ["person", "account", "contact"],
-  "CircuitBoardIcon": ["computing", "electricity", "electronics"],
   "CircleXIcon": [
     "cancel",
     "close",
@@ -3229,8 +3227,10 @@
     "multiply",
     "multiplication"
   ],
-  "CitrusIcon": ["lemon", "orange", "grapefruit", "fruit"],
+  "CircleUserIcon": ["person", "account", "contact"],
   "CircleIcon": ["off", "zero", "record", "shape"],
+  "CitrusIcon": ["lemon", "orange", "grapefruit", "fruit"],
+  "CircuitBoardIcon": ["computing", "electricity", "electronics"],
   "ClapperboardIcon": [
     "movie",
     "film",
@@ -3243,6 +3243,15 @@
     "tv",
     "show",
     "entertainment"
+  ],
+  "ClipboardCheckIcon": [
+    "copied",
+    "pasted",
+    "done",
+    "todo",
+    "tick",
+    "complete",
+    "task"
   ],
   "ClipboardClockIcon": [
     "copy",
@@ -3264,19 +3273,6 @@
     "appointment",
     "logbook"
   ],
-  "ClipboardCheckIcon": [
-    "copied",
-    "pasted",
-    "done",
-    "todo",
-    "tick",
-    "complete",
-    "task"
-  ],
-  "ClipboardCopyIcon": ["copy", "paste"],
-  "ClipboardListIcon": ["copy", "paste", "tasks"],
-  "ClipboardPasteIcon": ["copy", "paste"],
-  "ClipboardPenLineIcon": ["paste"],
   "ClipboardMinusIcon": [
     "copy",
     "delete",
@@ -3287,7 +3283,11 @@
     "report",
     "doctor"
   ],
+  "ClipboardListIcon": ["copy", "paste", "tasks"],
+  "ClipboardCopyIcon": ["copy", "paste"],
+  "ClipboardPasteIcon": ["copy", "paste"],
   "ClipboardPenIcon": ["paste", "signature"],
+  "ClipboardPenLineIcon": ["paste"],
   "ClipboardPlusIcon": [
     "copy",
     "paste",
@@ -3299,21 +3299,21 @@
     "report",
     "doctor"
   ],
+  "ClipboardIcon": ["copy", "paste"],
   "ClipboardTypeIcon": ["paste", "format", "text"],
   "ClipboardXIcon": ["copy", "paste", "discard", "remove"],
-  "ClipboardIcon": ["copy", "paste"],
-  "Clock10Icon": ["time", "watch", "alarm"],
   "Clock1Icon": ["time", "watch", "alarm"],
+  "Clock10Icon": ["time", "watch", "alarm"],
   "Clock11Icon": ["time", "watch", "alarm"],
   "Clock12Icon": ["time", "watch", "alarm", "noon", "midnight"],
-  "Clock2Icon": ["time", "watch", "alarm"],
   "Clock3Icon": ["time", "watch", "alarm"],
-  "Clock5Icon": ["time", "watch", "alarm"],
   "Clock4Icon": ["time", "watch", "alarm"],
-  "Clock6Icon": ["time", "watch", "alarm"],
-  "Clock8Icon": ["time", "watch", "alarm"],
+  "Clock2Icon": ["time", "watch", "alarm"],
+  "Clock5Icon": ["time", "watch", "alarm"],
   "Clock7Icon": ["time", "watch", "alarm"],
+  "Clock6Icon": ["time", "watch", "alarm"],
   "Clock9Icon": ["time", "watch", "alarm"],
+  "Clock8Icon": ["time", "watch", "alarm"],
   "ClockAlertIcon": ["time", "watch", "alarm", "warning", "wrong"],
   "ClockArrowDownIcon": [
     "time",
@@ -3341,6 +3341,7 @@
     "rising",
     "falling"
   ],
+  "ClockFadingIcon": ["time", "watch", "alarm"],
   "ClockPlusIcon": ["time", "watch", "alarm", "add", "create", "new"],
   "ClosedCaptionIcon": [
     "tv",
@@ -3354,8 +3355,16 @@
     "dialogue",
     "accessibility"
   ],
-  "ClockFadingIcon": ["time", "watch", "alarm"],
   "ClockIcon": ["time", "watch", "alarm"],
+  "CloudCheckIcon": [
+    "sync",
+    "network",
+    "success",
+    "done",
+    "completed",
+    "saved",
+    "persisted"
+  ],
   "CloudAlertIcon": [
     "weather",
     "danger",
@@ -3366,40 +3375,30 @@
     "network",
     "exclamation"
   ],
-  "CloudCheckIcon": [
-    "sync",
-    "network",
-    "success",
-    "done",
-    "completed",
-    "saved",
-    "persisted"
-  ],
-  "CloudCogIcon": ["computing", "ai", "cluster", "network"],
   "CloudDownloadIcon": ["import"],
   "CloudDrizzleIcon": ["weather", "shower"],
-  "CloudHailIcon": ["weather", "rainfall"],
+  "CloudCogIcon": ["computing", "ai", "cluster", "network"],
   "CloudFogIcon": ["weather", "mist"],
   "CloudLightningIcon": ["weather", "bolt"],
+  "CloudHailIcon": ["weather", "rainfall"],
   "CloudMoonRainIcon": ["weather", "partly", "night", "rainfall"],
   "CloudMoonIcon": ["weather", "night"],
   "CloudOffIcon": ["disconnect"],
-  "CloudRainIcon": ["weather", "rainfall"],
   "CloudRainWindIcon": ["weather", "rainfall"],
+  "CloudRainIcon": ["weather", "rainfall"],
+  "CloudSunIcon": ["weather", "partly"],
   "CloudSnowIcon": ["weather", "blizzard"],
   "CloudSunRainIcon": ["weather", "partly", "rainfall"],
   "CloudIcon": ["weather"],
-  "CloudSunIcon": ["weather", "partly"],
   "CloudUploadIcon": ["file"],
   "CloudyIcon": ["weather", "clouds"],
-  "CodeXmlIcon": ["source", "programming", "html", "xml"],
   "CloverIcon": ["leaf", "luck", "plant"],
   "ClubIcon": ["shape", "suit", "playing", "cards"],
-  "CodesandboxIcon": ["logo"],
+  "CodeXmlIcon": ["source", "programming", "html", "xml"],
   "CodepenIcon": ["logo"],
-  "CoffeeIcon": ["drink", "cup", "mug", "tea", "cafe", "hot", "beverage"],
   "CodeIcon": ["source", "programming", "html", "xml"],
-  "CoinsIcon": ["money", "cash", "finance", "gamble"],
+  "CodesandboxIcon": ["logo"],
+  "CoffeeIcon": ["drink", "cup", "mug", "tea", "cafe", "hot", "beverage"],
   "CogIcon": [
     "computing",
     "settings",
@@ -3438,6 +3437,7 @@
     "pagination",
     "pages"
   ],
+  "CoinsIcon": ["money", "cash", "finance", "gamble"],
   "Columns3CogIcon": [
     "columns",
     "settings",
@@ -3536,6 +3536,7 @@
   ],
   "ComputerIcon": ["pc", "chassis", "codespaces", "github"],
   "ConciergeBellIcon": ["reception", "bell", "porter"],
+  "ConstructionIcon": ["roadwork", "maintenance", "blockade", "barricade"],
   "ConeIcon": [
     "conical",
     "triangle",
@@ -3547,7 +3548,6 @@
     "spotlight",
     "searchlight"
   ],
-  "ConstructionIcon": ["roadwork", "maintenance", "blockade", "barricade"],
   "ContactRoundIcon": [
     "user",
     "person",
@@ -3566,6 +3566,7 @@
     "listing",
     "networking"
   ],
+  "ContrastIcon": ["display", "accessibility"],
   "ContainerIcon": [
     "storage",
     "shipping",
@@ -3578,8 +3579,6 @@
     "coding"
   ],
   "CookieIcon": ["biscuit", "privacy", "legal", "food"],
-  "CopyCheckIcon": ["clone", "duplicate", "done", "multiple"],
-  "ContrastIcon": ["display", "accessibility"],
   "CookingPotIcon": [
     "pod",
     "cooking",
@@ -3594,6 +3593,7 @@
     "meal",
     "eat"
   ],
+  "CopyCheckIcon": ["clone", "duplicate", "done", "multiple"],
   "CopyMinusIcon": [
     "clone",
     "duplicate",
@@ -3604,16 +3604,7 @@
     "multiple",
     "-"
   ],
-  "CopyPlusIcon": ["clone", "duplicate", "add", "multiple", "expand", "+"],
-  "BookmarkPlusIcon": ["add"],
-  "CopyIcon": ["clone", "duplicate", "multiple"],
-  "CopyleftIcon": ["licence"],
-  "CopyrightIcon": ["licence", "license"],
-  "CornerDownLeftIcon": ["arrow", "return"],
-  "CornerDownRightIcon": ["arrow", "indent", "tab"],
-  "CornerLeftDownIcon": ["arrow"],
-  "CornerLeftUpIcon": ["arrow"],
-  "CornerRightDownIcon": ["arrow"],
+  "BookmarkMinusIcon": ["delete", "remove"],
   "CopyXIcon": [
     "cancel",
     "close",
@@ -3625,6 +3616,32 @@
     "multiplication",
     "times"
   ],
+  "CopyPlusIcon": ["clone", "duplicate", "add", "multiple", "expand", "+"],
+  "CopySlashIcon": [
+    "clone",
+    "duplicate",
+    "cancel",
+    "ban",
+    "no",
+    "stop",
+    "forbidden",
+    "prohibited",
+    "error",
+    "multiple",
+    "divide",
+    "division",
+    "split",
+    "or",
+    "/"
+  ],
+  "CopyIcon": ["clone", "duplicate", "multiple"],
+  "CopyleftIcon": ["licence"],
+  "CornerDownLeftIcon": ["arrow", "return"],
+  "CopyrightIcon": ["licence", "license"],
+  "CornerDownRightIcon": ["arrow", "indent", "tab"],
+  "CornerLeftDownIcon": ["arrow"],
+  "CornerRightDownIcon": ["arrow"],
+  "CornerLeftUpIcon": ["arrow"],
   "CornerRightUpIcon": ["arrow"],
   "CornerUpRightIcon": ["arrow"],
   "CornerUpLeftIcon": ["arrow"],
@@ -3643,8 +3660,8 @@
   ],
   "CreativeCommonsIcon": ["licence", "license"],
   "CreditCardIcon": ["bank", "purchase", "payment", "cc"],
-  "CroissantIcon": ["bakery", "cooking", "food", "pastry"],
   "CropIcon": ["photo", "image"],
+  "CrossIcon": ["healthcare", "first aid"],
   "CrosshairIcon": ["aim", "target"],
   "CrownIcon": [
     "diadem",
@@ -3656,8 +3673,6 @@
     "winner",
     "favourite"
   ],
-  "CrossIcon": ["healthcare", "first aid"],
-  "CurrencyIcon": ["finance", "money"],
   "CuboidIcon": [
     "brick",
     "block",
@@ -3667,7 +3682,6 @@
     "rectangular",
     "hexahedron"
   ],
-  "CupSodaIcon": ["beverage", "cup", "drink", "soda", "straw", "water"],
   "CylinderIcon": [
     "shape",
     "elliptical",
@@ -3677,7 +3691,8 @@
     "tin",
     "pot"
   ],
-  "DamIcon": ["electricity", "energy", "water"],
+  "CupSodaIcon": ["beverage", "cup", "drink", "soda", "straw", "water"],
+  "CroissantIcon": ["bakery", "cooking", "food", "pastry"],
   "DatabaseBackupIcon": [
     "storage",
     "memory",
@@ -3689,15 +3704,7 @@
     "arrow",
     "left"
   ],
-  "DatabaseIcon": [
-    "storage",
-    "memory",
-    "container",
-    "tin",
-    "pot",
-    "bytes",
-    "servers"
-  ],
+  "DamIcon": ["electricity", "energy", "water"],
   "DatabaseZapIcon": [
     "cache busting",
     "storage",
@@ -3707,7 +3714,15 @@
     "power",
     "crash"
   ],
-  "DeleteIcon": ["backspace", "remove"],
+  "DatabaseIcon": [
+    "storage",
+    "memory",
+    "container",
+    "tin",
+    "pot",
+    "bytes",
+    "servers"
+  ],
   "DecimalsArrowLeftIcon": [
     "numerical",
     "decimal",
@@ -3721,6 +3736,7 @@
     "float",
     "number"
   ],
+  "DeleteIcon": ["backspace", "remove"],
   "DecimalsArrowRightIcon": [
     "numerical",
     "decimal",
@@ -3733,23 +3749,16 @@
     "float",
     "number"
   ],
-  "DessertIcon": [
-    "pudding",
-    "christmas",
-    "xmas",
-    "custard",
-    "iced bun",
-    "icing",
-    "fondant",
-    "cake",
-    "ice cream",
-    "gelato",
-    "sundae",
-    "scoop",
-    "dollop",
-    "sugar",
-    "food",
-    "sweet"
+  "DiameterIcon": [
+    "shape",
+    "circle",
+    "geometry",
+    "trigonometry",
+    "width",
+    "height",
+    "size",
+    "calculate",
+    "measure"
   ],
   "DiamondMinusIcon": [
     "keyframe",
@@ -3776,16 +3785,23 @@
     "minimum",
     "downgrade"
   ],
-  "DiameterIcon": [
-    "shape",
-    "circle",
-    "geometry",
-    "trigonometry",
-    "width",
-    "height",
-    "size",
-    "calculate",
-    "measure"
+  "DessertIcon": [
+    "pudding",
+    "christmas",
+    "xmas",
+    "custard",
+    "iced bun",
+    "icing",
+    "fondant",
+    "cake",
+    "ice cream",
+    "gelato",
+    "sundae",
+    "scoop",
+    "dollop",
+    "sugar",
+    "food",
+    "sweet"
   ],
   "DiamondPlusIcon": [
     "keyframe",
@@ -3817,8 +3833,6 @@
     "sticker",
     "price tag"
   ],
-  "Dice1Icon": ["dice", "random", "tabletop", "1", "board", "game"],
-  "Dice2Icon": ["dice", "random", "tabletop", "2", "board", "game"],
   "DiamondIcon": [
     "square",
     "rectangle",
@@ -3829,12 +3843,23 @@
     "playing",
     "cards"
   ],
+  "Dice1Icon": ["dice", "random", "tabletop", "1", "board", "game"],
+  "Dice2Icon": ["dice", "random", "tabletop", "2", "board", "game"],
   "Dice3Icon": ["dice", "random", "tabletop", "3", "board", "game"],
   "Dice4Icon": ["dice", "random", "tabletop", "4", "board", "game"],
-  "Dice5Icon": ["dice", "random", "tabletop", "5", "board", "game"],
   "Dice6Icon": ["dice", "random", "tabletop", "6", "board", "game"],
+  "Dice5Icon": ["dice", "random", "tabletop", "5", "board", "game"],
+  "DiffIcon": [
+    "patch",
+    "difference",
+    "compare",
+    "plus",
+    "minus",
+    "plus-minus",
+    "math"
+  ],
   "DicesIcon": ["dice", "random", "tabletop", "board", "game"],
-  "Disc2Icon": [
+  "Disc3Icon": [
     "album",
     "music",
     "vinyl",
@@ -3867,7 +3892,7 @@
     "rpm",
     "dj"
   ],
-  "Disc3Icon": [
+  "Disc2Icon": [
     "album",
     "music",
     "vinyl",
@@ -3880,6 +3905,7 @@
     "rotate",
     "rpm"
   ],
+  "DivideIcon": ["calculate", "math", "division", "operator", "code", "÷", "/"],
   "DiscIcon": [
     "album",
     "music",
@@ -3900,34 +3926,6 @@
     "rpm",
     "dj"
   ],
-  "CopySlashIcon": [
-    "clone",
-    "duplicate",
-    "cancel",
-    "ban",
-    "no",
-    "stop",
-    "forbidden",
-    "prohibited",
-    "error",
-    "multiple",
-    "divide",
-    "division",
-    "split",
-    "or",
-    "/"
-  ],
-  "DivideIcon": ["calculate", "math", "division", "operator", "code", "÷", "/"],
-  "DiffIcon": [
-    "patch",
-    "difference",
-    "compare",
-    "plus",
-    "minus",
-    "plus-minus",
-    "math"
-  ],
-  "DnaIcon": ["gene", "gmo", "helix", "heredity", "chromosome", "nucleic acid"],
   "DnaOffIcon": [
     "gene",
     "gmo free",
@@ -3936,6 +3934,7 @@
     "chromosome",
     "nucleic acid"
   ],
+  "DnaIcon": ["gene", "gmo", "helix", "heredity", "chromosome", "nucleic acid"],
   "DockIcon": [
     "desktop",
     "applications",
@@ -3948,38 +3947,6 @@
     "osx"
   ],
   "DogIcon": ["animal", "pet", "puppy", "hound", "canine"],
-  "DollarSignIcon": ["currency", "money", "payment"],
-  "DoorClosedLockedIcon": [
-    "entrance",
-    "entry",
-    "exit",
-    "ingress",
-    "egress",
-    "gate",
-    "gateway",
-    "emergency exit",
-    "lock"
-  ],
-  "DoorClosedIcon": [
-    "entrance",
-    "entry",
-    "exit",
-    "ingress",
-    "egress",
-    "gate",
-    "gateway",
-    "emergency exit"
-  ],
-  "DoorOpenIcon": [
-    "entrance",
-    "entry",
-    "exit",
-    "ingress",
-    "egress",
-    "gate",
-    "gateway",
-    "emergency exit"
-  ],
   "DonutIcon": [
     "doughnut",
     "sprinkles",
@@ -3994,7 +3961,38 @@
     "hollow",
     "ring"
   ],
-  "DownloadIcon": ["import", "export", "save"],
+  "DollarSignIcon": ["currency", "money", "payment"],
+  "DoorClosedIcon": [
+    "entrance",
+    "entry",
+    "exit",
+    "ingress",
+    "egress",
+    "gate",
+    "gateway",
+    "emergency exit"
+  ],
+  "DoorClosedLockedIcon": [
+    "entrance",
+    "entry",
+    "exit",
+    "ingress",
+    "egress",
+    "gate",
+    "gateway",
+    "emergency exit",
+    "lock"
+  ],
+  "DoorOpenIcon": [
+    "entrance",
+    "entry",
+    "exit",
+    "ingress",
+    "egress",
+    "gate",
+    "gateway",
+    "emergency exit"
+  ],
   "DotIcon": [
     "interpunct",
     "interpoint",
@@ -4034,6 +4032,7 @@
     "entertainment",
     "show"
   ],
+  "DownloadIcon": ["import", "export", "save"],
   "DribbbleIcon": ["design", "social"],
   "DrillIcon": [
     "power",
@@ -4044,6 +4043,16 @@
     "toolbox",
     "build",
     "construction"
+  ],
+  "DroneIcon": [
+    "quadcopter",
+    "uav",
+    "aerial",
+    "flight",
+    "flying",
+    "technology",
+    "airborne",
+    "robotics"
   ],
   "DropletOffIcon": [
     "water",
@@ -4056,15 +4065,17 @@
     "bead",
     "globule"
   ],
-  "DroneIcon": [
-    "quadcopter",
-    "uav",
-    "aerial",
-    "flight",
-    "flying",
-    "technology",
-    "airborne",
-    "robotics"
+  "DumbbellIcon": ["barbell", "weight", "workout", "gym"],
+  "DropletsIcon": [
+    "water",
+    "weather",
+    "liquid",
+    "fluid",
+    "wet",
+    "moisture",
+    "damp",
+    "bead",
+    "globule"
   ],
   "DropletIcon": [
     "water",
@@ -4077,17 +4088,7 @@
     "bead",
     "globule"
   ],
-  "DropletsIcon": [
-    "water",
-    "weather",
-    "liquid",
-    "fluid",
-    "wet",
-    "moisture",
-    "damp",
-    "bead",
-    "globule"
-  ],
+  "DrumstickIcon": ["food", "chicken", "meat"],
   "DrumIcon": [
     "drummer",
     "kit",
@@ -4108,8 +4109,6 @@
     "noise",
     "loud"
   ],
-  "DumbbellIcon": ["barbell", "weight", "workout", "gym"],
-  "DrumstickIcon": ["food", "chicken", "meat"],
   "EarOffIcon": [
     "hearing",
     "hard of hearing",
@@ -4120,7 +4119,6 @@
     "audio",
     "accessibility"
   ],
-  "EarIcon": ["hearing", "noise", "audio", "accessibility"],
   "EarthLockIcon": [
     "vpn",
     "private",
@@ -4133,8 +4131,8 @@
     "protection",
     "connection"
   ],
+  "EarIcon": ["hearing", "noise", "audio", "accessibility"],
   "EarthIcon": ["world", "browser", "language", "translate", "globe"],
-  "EggFriedIcon": ["food", "breakfast"],
   "EclipseIcon": [
     "lunar",
     "solar",
@@ -4160,6 +4158,7 @@
     "blend",
     "shade"
   ],
+  "EggOffIcon": ["egg free", "vegan", "hatched", "bad egg"],
   "EggIcon": [
     "bird",
     "chicken",
@@ -4174,7 +4173,7 @@
     "morning",
     "easter"
   ],
-  "EggOffIcon": ["egg free", "vegan", "hatched", "bad egg"],
+  "EggFriedIcon": ["food", "breakfast"],
   "EllipsisVerticalIcon": [
     "menu",
     "options",
@@ -4212,7 +4211,6 @@
     "..."
   ],
   "EqualNotIcon": ["calculate", "off", "math", "operator", "code", "≠"],
-  "EqualIcon": ["calculate", "math", "operator", "assignment", "code", "="],
   "EthernetPortIcon": [
     "internet",
     "network",
@@ -4240,6 +4238,7 @@
     "input",
     "output"
   ],
+  "EqualIcon": ["calculate", "math", "operator", "assignment", "code", "="],
   "EraserIcon": [
     "pencil",
     "drawing",
@@ -4249,6 +4248,7 @@
     "trash",
     "remove"
   ],
+  "EuroIcon": ["currency", "money", "payment"],
   "EvChargerIcon": [
     "electric",
     "charger",
@@ -4263,7 +4263,7 @@
     "accumulator",
     "charge"
   ],
-  "EuroIcon": ["currency", "money", "payment"],
+  "ExpandIcon": ["scale", "fullscreen", "maximize", "minimize", "contract"],
   "ExternalLinkIcon": ["outbound", "open", "share"],
   "EyeClosedIcon": [
     "view",
@@ -4276,7 +4276,26 @@
     "visibility",
     "vision"
   ],
-  "ExpandIcon": ["scale", "fullscreen", "maximize", "minimize", "contract"],
+  "EyeOffIcon": [
+    "view",
+    "watch",
+    "see",
+    "hide",
+    "conceal",
+    "mask",
+    "hidden",
+    "visibility",
+    "vision"
+  ],
+  "FacebookIcon": ["logo", "social"],
+  "FactoryIcon": [
+    "building",
+    "business",
+    "energy",
+    "industry",
+    "manufacture",
+    "sector"
+  ],
   "EyeIcon": [
     "view",
     "watch",
@@ -4291,29 +4310,19 @@
     "preview",
     "read"
   ],
-  "FacebookIcon": ["logo", "social"],
-  "EyeOffIcon": [
-    "view",
-    "watch",
-    "see",
-    "hide",
-    "conceal",
-    "mask",
-    "hidden",
-    "visibility",
-    "vision"
-  ],
-  "FactoryIcon": [
-    "building",
-    "business",
-    "energy",
-    "industry",
-    "manufacture",
-    "sector"
-  ],
-  "FastForwardIcon": ["music"],
   "FanIcon": ["air", "cooler", "ventilation", "ventilator", "blower"],
+  "FastForwardIcon": ["music"],
   "FeatherIcon": ["logo"],
+  "FerrisWheelIcon": [
+    "big wheel",
+    "daisy wheel",
+    "observation",
+    "attraction",
+    "entertainment",
+    "amusement park",
+    "theme park",
+    "funfair"
+  ],
   "FenceIcon": [
     "picket",
     "panels",
@@ -4325,29 +4334,11 @@
     "property",
     "territory"
   ],
-  "FerrisWheelIcon": [
-    "big wheel",
-    "daisy wheel",
-    "observation",
-    "attraction",
-    "entertainment",
-    "amusement park",
-    "theme park",
-    "funfair"
-  ],
-  "FigmaIcon": ["logo", "design", "tool"],
   "FileAudio2Icon": ["music", "audio", "sound", "headphones"],
   "FileArchiveIcon": ["zip", "package", "archive"],
   "FileAudioIcon": ["music", "audio", "sound", "headphones"],
+  "FigmaIcon": ["logo", "design", "tool"],
   "FileAxis3dIcon": ["model", "3d", "axis", "coordinates"],
-  "FileBadgeIcon": [
-    "award",
-    "achievement",
-    "badge",
-    "rosette",
-    "prize",
-    "winner"
-  ],
   "FileBadge2Icon": [
     "award",
     "achievement",
@@ -4357,6 +4348,14 @@
     "winner"
   ],
   "FileBoxIcon": ["box", "package", "model"],
+  "FileBadgeIcon": [
+    "award",
+    "achievement",
+    "badge",
+    "rosette",
+    "prize",
+    "winner"
+  ],
   "FileChartColumnIcon": [
     "statistics",
     "analytics",
@@ -4379,6 +4378,8 @@
     "graph",
     "presentation"
   ],
+  "FileCheck2Icon": ["done", "document", "todo", "tick", "complete", "task"],
+  "FileCheckIcon": ["done", "document", "todo", "tick", "complete", "task"],
   "FileChartPieIcon": [
     "statistics",
     "analytics",
@@ -4386,8 +4387,6 @@
     "graph",
     "presentation"
   ],
-  "FileCheck2Icon": ["done", "document", "todo", "tick", "complete", "task"],
-  "FileClockIcon": ["history", "log", "clock"],
   "FileCode2Icon": [
     "script",
     "document",
@@ -4396,8 +4395,6 @@
     "property list",
     "plist"
   ],
-  "FileCheckIcon": ["done", "document", "todo", "tick", "complete", "task"],
-  "FileCogIcon": ["executable", "settings", "cog", "edit", "gear"],
   "FileCodeIcon": [
     "script",
     "document",
@@ -4407,20 +4404,23 @@
     "property list",
     "plist"
   ],
-  "FileDigitIcon": ["number", "document"],
-  "FileDownIcon": ["download", "import", "export"],
+  "FileClockIcon": ["history", "log", "clock"],
+  "FileCogIcon": ["executable", "settings", "cog", "edit", "gear"],
   "FileDiffIcon": ["diff", "patch"],
+  "FileDownIcon": ["download", "import", "export"],
   "FileHeartIcon": ["heart", "favourite", "bookmark", "quick link"],
+  "FileDigitIcon": ["number", "document"],
   "FileImageIcon": ["image", "graphics", "photo", "picture"],
   "FileInputIcon": ["document"],
   "FileJsonIcon": ["code", "json", "curly braces", "curly brackets"],
-  "FileJson2Icon": ["code", "json", "curly braces", "curly brackets"],
   "FileKey2Icon": ["key", "private", "public", "security"],
+  "FileKeyIcon": ["key", "private", "public", "security"],
+  "FileJson2Icon": ["code", "json", "curly braces", "curly brackets"],
   "FileLock2Icon": ["lock", "password", "security"],
   "FileLockIcon": ["lock", "password", "security"],
-  "FileKeyIcon": ["key", "private", "public", "security"],
-  "FileMinusIcon": ["delete", "remove", "erase", "document"],
   "FileMinus2Icon": ["document"],
+  "FileMinusIcon": ["delete", "remove", "erase", "document"],
+  "FileOutputIcon": ["document"],
   "FileMusicIcon": [
     "audio",
     "sound",
@@ -4438,15 +4438,14 @@
     "octave"
   ],
   "FilePenLineIcon": ["edit"],
-  "FileOutputIcon": ["document"],
   "FilePenIcon": ["signature"],
   "FilePlayIcon": ["movie", "video", "film"],
   "FilePlus2Icon": ["add", "create", "new", "document"],
   "FileQuestionMarkIcon": ["readme", "help", "question"],
   "FilePlusIcon": ["add", "create", "new", "document"],
-  "FileScanIcon": ["scan", "code", "qr-code"],
   "FileSearchIcon": ["lost", "document", "find", "browser", "lens"],
   "FileSearch2Icon": ["lost", "document", "find", "browser", "lens"],
+  "FileScanIcon": ["scan", "code", "qr-code"],
   "FileSlidersIcon": [
     "cogged",
     "gear",
@@ -4472,11 +4471,12 @@
     "history"
   ],
   "FileTerminalIcon": ["terminal", "bash", "script", "executable"],
-  "FileTextIcon": ["data", "txt", "pdf", "document"],
-  "FileSymlinkIcon": ["symlink", "symbolic", "link"],
   "FileType2Icon": ["font", "text", "typography", "type"],
+  "FileSymlinkIcon": ["symlink", "symbolic", "link"],
+  "FileTextIcon": ["data", "txt", "pdf", "document"],
   "FileTypeIcon": ["font", "text", "typography", "type"],
   "FileUpIcon": ["upload", "import", "export"],
+  "FileVideoCameraIcon": ["movie", "video", "film"],
   "FileUserIcon": [
     "person",
     "personal information",
@@ -4491,9 +4491,7 @@
     "curriculum vitae",
     "application form"
   ],
-  "FileVideoCameraIcon": ["movie", "video", "film"],
   "FileVolume2Icon": ["audio", "music", "volume"],
-  "FileVolumeIcon": ["audio", "music", "volume"],
   "FileWarningIcon": [
     "hidden",
     "warning",
@@ -4502,10 +4500,12 @@
     "protected",
     "exclamation mark"
   ],
+  "FileVolumeIcon": ["audio", "music", "volume"],
   "FileX2Icon": ["lost", "delete", "remove", "document"],
   "FileXIcon": ["lost", "delete", "remove", "document"],
-  "FileIcon": ["document"],
+  "FilesIcon": ["multiple", "copy", "documents"],
   "FilmIcon": ["movie", "video", "reel", "camera", "cinema", "entertainment"],
+  "FileIcon": ["document"],
   "FingerprintIcon": [
     "2fa",
     "authentication",
@@ -4513,7 +4513,41 @@
     "identity",
     "security"
   ],
-  "FilesIcon": ["multiple", "copy", "documents"],
+  "FishSymbolIcon": [
+    "dish",
+    "restaurant",
+    "course",
+    "meal",
+    "seafood",
+    "pet",
+    "sea",
+    "marine"
+  ],
+  "FishOffIcon": [
+    "food",
+    "dish",
+    "restaurant",
+    "course",
+    "meal",
+    "seafood",
+    "animal",
+    "pet",
+    "sea",
+    "marine",
+    "allergy",
+    "intolerance",
+    "diet"
+  ],
+  "FishIcon": [
+    "dish",
+    "restaurant",
+    "course",
+    "meal",
+    "seafood",
+    "pet",
+    "sea",
+    "marine"
+  ],
   "FireExtinguisherIcon": [
     "flames",
     "smoke",
@@ -4535,31 +4569,7 @@
     "equipment",
     "amenities"
   ],
-  "FishOffIcon": [
-    "food",
-    "dish",
-    "restaurant",
-    "course",
-    "meal",
-    "seafood",
-    "animal",
-    "pet",
-    "sea",
-    "marine",
-    "allergy",
-    "intolerance",
-    "diet"
-  ],
-  "FishSymbolIcon": [
-    "dish",
-    "restaurant",
-    "course",
-    "meal",
-    "seafood",
-    "pet",
-    "sea",
-    "marine"
-  ],
+  "FlagTriangleLeftIcon": ["report", "timeline", "marker", "pin"],
   "FlagOffIcon": [
     "unflag",
     "unmark",
@@ -4574,17 +4584,7 @@
     "attention",
     "banner"
   ],
-  "FishIcon": [
-    "dish",
-    "restaurant",
-    "course",
-    "meal",
-    "seafood",
-    "pet",
-    "sea",
-    "marine"
-  ],
-  "FlagTriangleLeftIcon": ["report", "timeline", "marker", "pin"],
+  "FlagTriangleRightIcon": ["report", "timeline", "marker", "pin"],
   "FlagIcon": [
     "report",
     "marker",
@@ -4597,7 +4597,6 @@
     "attention",
     "banner"
   ],
-  "FlagTriangleRightIcon": ["report", "timeline", "marker", "pin"],
   "FlameKindlingIcon": [
     "campfire",
     "camping",
@@ -4632,6 +4631,15 @@
   ],
   "FlashlightOffIcon": ["torch"],
   "FlashlightIcon": ["torch"],
+  "FlaskConicalIcon": [
+    "beaker",
+    "erlenmeyer",
+    "lab",
+    "chemistry",
+    "experiment",
+    "test"
+  ],
+  "FlaskRoundIcon": ["beaker", "lab", "chemistry", "experiment", "test"],
   "FlaskConicalOffIcon": [
     "beaker",
     "erlenmeyer",
@@ -4641,38 +4649,17 @@
     "experiment",
     "test"
   ],
-  "FlaskRoundIcon": ["beaker", "lab", "chemistry", "experiment", "test"],
-  "FlaskConicalIcon": [
-    "beaker",
-    "erlenmeyer",
-    "lab",
-    "chemistry",
-    "experiment",
-    "test"
-  ],
   "FlipHorizontal2Icon": ["reflect", "mirror", "alignment", "dashed"],
   "FlipVertical2Icon": ["reflect", "mirror", "alignment", "dashed"],
   "FlipHorizontalIcon": ["reflect", "mirror", "alignment", "dashed"],
-  "Flower2Icon": ["sustainability", "nature", "plant"],
   "FlipVerticalIcon": ["reflect", "mirror", "alignment", "dashed"],
+  "Flower2Icon": ["sustainability", "nature", "plant"],
   "FocusIcon": ["camera", "lens", "photo", "dashed"],
   "FoldHorizontalIcon": ["arrow", "collapse", "fold", "vertical", "dashed"],
   "FlowerIcon": ["sustainability", "nature", "plant", "spring"],
+  "FolderCheckIcon": ["done", "directory", "todo", "tick", "complete", "task"],
   "FoldVerticalIcon": ["arrow", "collapse", "fold", "vertical", "dashed"],
   "FolderArchiveIcon": ["archive", "zip", "package"],
-  "FolderCheckIcon": ["done", "directory", "todo", "tick", "complete", "task"],
-  "FolderClockIcon": ["history", "directory", "clock"],
-  "FolderCodeIcon": ["directory", "coding", "develop", "software"],
-  "FolderClosedIcon": ["directory", "closed"],
-  "FolderCogIcon": [
-    "directory",
-    "settings",
-    "control",
-    "preferences",
-    "cog",
-    "edit",
-    "gear"
-  ],
   "FolderDotIcon": [
     "directory",
     "root",
@@ -4692,9 +4679,29 @@
     "admin",
     "edit"
   ],
+  "FolderClockIcon": ["history", "directory", "clock"],
+  "FolderClosedIcon": ["directory", "closed"],
+  "FolderCogIcon": [
+    "directory",
+    "settings",
+    "control",
+    "preferences",
+    "cog",
+    "edit",
+    "gear"
+  ],
+  "FolderCodeIcon": ["directory", "coding", "develop", "software"],
   "FolderDownIcon": ["directory", "download", "import", "export"],
-  "FolderGitIcon": ["directory", "root", "project", "git", "repo"],
   "FolderGit2Icon": ["directory", "root", "project", "git", "repo"],
+  "FolderGitIcon": ["directory", "root", "project", "git", "repo"],
+  "FolderHeartIcon": [
+    "directory",
+    "heart",
+    "favourite",
+    "bookmark",
+    "quick link"
+  ],
+  "FolderInputIcon": ["directory", "import", "export"],
   "FolderKanbanIcon": [
     "projects",
     "manage",
@@ -4714,18 +4721,8 @@
     "project",
     "root"
   ],
-  "FolderHeartIcon": [
-    "directory",
-    "heart",
-    "favourite",
-    "bookmark",
-    "quick link"
-  ],
-  "FolderInputIcon": ["directory", "import", "export"],
   "FolderLockIcon": ["directory", "lock", "private", "security", "protected"],
-  "FolderMinusIcon": ["directory", "remove", "delete"],
   "FolderKeyIcon": ["directory", "key", "private", "security", "protected"],
-  "FolderOpenIcon": ["directory"],
   "FolderOpenDotIcon": [
     "directory",
     "root",
@@ -4734,19 +4731,13 @@
     "current",
     "pinned"
   ],
+  "FolderOpenIcon": ["directory"],
+  "FolderMinusIcon": ["directory", "remove", "delete"],
   "FolderOutputIcon": ["directory", "import", "export"],
   "FolderPenIcon": ["directory", "rename"],
   "FolderPlusIcon": ["directory", "add", "create", "new"],
   "FolderRootIcon": ["directory", "root", "project", "git", "repo"],
   "FolderSearch2Icon": [
-    "directory",
-    "search",
-    "find",
-    "lost",
-    "browser",
-    "lens"
-  ],
-  "FolderSearchIcon": [
     "directory",
     "search",
     "find",
@@ -4764,17 +4755,26 @@
     "transfer",
     "backup"
   ],
+  "FolderSearchIcon": [
+    "directory",
+    "search",
+    "find",
+    "lost",
+    "browser",
+    "lens"
+  ],
+  "FolderUpIcon": ["directory", "upload", "import", "export"],
   "FolderTreeIcon": ["directory", "tree", "browser"],
   "FolderXIcon": ["directory", "remove", "delete"],
-  "FolderUpIcon": ["directory", "upload", "import", "export"],
   "FolderIcon": ["directory"],
   "FoldersIcon": ["multiple", "copy", "directories"],
-  "ForkliftIcon": ["vehicle", "transport", "logistics"],
   "FootprintsIcon": ["steps", "walking", "foot", "feet", "trail", "shoe"],
+  "ForkliftIcon": ["vehicle", "transport", "logistics"],
   "ForwardIcon": ["send", "share", "email"],
-  "FramerIcon": ["logo", "design", "tool"],
   "FrameIcon": ["logo", "design", "tool"],
   "FrownIcon": ["emoji", "face", "bad", "sad", "emotion"],
+  "FramerIcon": ["logo", "design", "tool"],
+  "FuelIcon": ["filling-station", "gas", "petrol", "tank"],
   "FullscreenIcon": [
     "expand",
     "zoom",
@@ -4784,23 +4784,9 @@
     "lens",
     "image"
   ],
-  "FuelIcon": ["filling-station", "gas", "petrol", "tank"],
-  "FunnelPlusIcon": ["filter", "hopper", "add", "create", "new"],
   "FunnelXIcon": ["filter", "hopper", "remove", "delete"],
+  "FunnelPlusIcon": ["filter", "hopper", "add", "create", "new"],
   "FunnelIcon": ["filter", "hopper"],
-  "GalleryHorizontalEndIcon": [
-    "carousel",
-    "pictures",
-    "images",
-    "scroll",
-    "swipe",
-    "album",
-    "portfolio",
-    "history",
-    "versions",
-    "backup",
-    "time machine"
-  ],
   "GalleryHorizontalIcon": [
     "carousel",
     "pictures",
@@ -4817,6 +4803,19 @@
     "album",
     "portfolio",
     "preview"
+  ],
+  "GalleryHorizontalEndIcon": [
+    "carousel",
+    "pictures",
+    "images",
+    "scroll",
+    "swipe",
+    "album",
+    "portfolio",
+    "history",
+    "versions",
+    "backup",
+    "time machine"
   ],
   "GalleryVerticalIcon": [
     "carousel",
@@ -4840,7 +4839,21 @@
     "backup",
     "time machine"
   ],
+  "GamepadDirectionalIcon": [
+    "direction",
+    "arrow",
+    "controller",
+    "navigation",
+    "button",
+    "move",
+    "pointer",
+    "arrowhead",
+    "console",
+    "game",
+    "gaming"
+  ],
   "Gamepad2Icon": ["console"],
+  "GamepadIcon": ["console"],
   "GaugeIcon": [
     "dashboard",
     "dial",
@@ -4850,7 +4863,6 @@
     "measure",
     "level"
   ],
-  "GamepadIcon": ["console"],
   "GavelIcon": [
     "justice",
     "law",
@@ -4880,10 +4892,10 @@
     "rubygems"
   ],
   "GeorgianLariIcon": ["currency", "money", "payment"],
-  "GhostIcon": ["pac-man", "spooky"],
   "GiftIcon": ["present", "box", "birthday", "party"],
-  "GitBranchPlusIcon": ["add", "create", "+"],
+  "GhostIcon": ["pac-man", "spooky"],
   "GitBranchIcon": ["code", "version control"],
+  "GitBranchPlusIcon": ["add", "create", "+"],
   "GitCommitHorizontalIcon": [
     "code",
     "version control",
@@ -4899,9 +4911,7 @@
     "station"
   ],
   "GitCompareArrowsIcon": ["code", "version control", "diff"],
-  "GitCompareIcon": ["code", "version control", "diff"],
   "GitForkIcon": ["code", "version control"],
-  "GitMergeIcon": ["code", "version control"],
   "GitGraphIcon": [
     "code",
     "version control",
@@ -4909,7 +4919,10 @@
     "commits",
     "gitlens"
   ],
-  "GitPullRequestCreateArrowIcon": [
+  "GitCompareIcon": ["code", "version control", "diff"],
+  "GitPullRequestArrowIcon": ["code", "version control", "open"],
+  "GitMergeIcon": ["code", "version control"],
+  "GitPullRequestCreateIcon": [
     "code",
     "version control",
     "open",
@@ -4925,8 +4938,7 @@
     "cancelled",
     "x"
   ],
-  "GitPullRequestArrowIcon": ["code", "version control", "open"],
-  "GitPullRequestCreateIcon": [
+  "GitPullRequestCreateArrowIcon": [
     "code",
     "version control",
     "open",
@@ -4934,6 +4946,7 @@
     "add",
     "+"
   ],
+  "GithubIcon": ["logo", "version control"],
   "GitPullRequestIcon": ["code", "version control", "open"],
   "GitPullRequestDraftIcon": [
     "code",
@@ -4942,10 +4955,9 @@
     "draft",
     "dashed"
   ],
-  "GithubIcon": ["logo", "version control"],
   "GitlabIcon": ["logo", "version control"],
-  "GlassWaterIcon": ["beverage", "drink", "glass", "water"],
   "GlassesIcon": ["glasses", "spectacles"],
+  "GlassWaterIcon": ["beverage", "drink", "glass", "water"],
   "GlobeLockIcon": [
     "vpn",
     "private",
@@ -4958,7 +4970,6 @@
     "protection",
     "connection"
   ],
-  "GoalIcon": ["flag", "bullseye"],
   "GlobeIcon": ["world", "browser", "language", "translate"],
   "GpuIcon": [
     "processor",
@@ -4976,6 +4987,7 @@
     "digital image processing",
     "crypto mining"
   ],
+  "GoalIcon": ["flag", "bullseye"],
   "GraduationCapIcon": [
     "school",
     "university",
@@ -4992,43 +5004,25 @@
     "doctorate"
   ],
   "GrapeIcon": ["fruit", "wine", "food"],
-  "Grid2x2CheckIcon": [
-    "table",
-    "rows",
-    "columns",
-    "blocks",
-    "plot",
-    "land",
-    "geometry",
-    "measure",
-    "data",
-    "size",
-    "width",
-    "height",
-    "distance",
-    "surface area",
-    "square meter",
-    "acre"
-  ],
-  "Grid2x2XIcon": [
-    "table",
-    "rows",
-    "columns",
-    "data",
-    "blocks",
-    "plot",
-    "land",
-    "geometry",
-    "measure",
-    "size",
-    "width",
-    "height",
-    "distance",
-    "surface area",
-    "square meter",
-    "acre"
-  ],
   "Grid2x2PlusIcon": [
+    "table",
+    "rows",
+    "columns",
+    "blocks",
+    "plot",
+    "land",
+    "geometry",
+    "measure",
+    "data",
+    "size",
+    "width",
+    "height",
+    "distance",
+    "surface area",
+    "square meter",
+    "acre"
+  ],
+  "Grid2x2CheckIcon": [
     "table",
     "rows",
     "columns",
@@ -5065,7 +5059,26 @@
     "window",
     "skylight"
   ],
+  "Grid2x2XIcon": [
+    "table",
+    "rows",
+    "columns",
+    "data",
+    "blocks",
+    "plot",
+    "land",
+    "geometry",
+    "measure",
+    "size",
+    "width",
+    "height",
+    "distance",
+    "surface area",
+    "square meter",
+    "acre"
+  ],
   "Grid3x3Icon": ["table", "rows", "columns"],
+  "GripHorizontalIcon": ["grab", "dots", "handle", "move", "drag"],
   "Grid3x2Icon": [
     "table",
     "rows",
@@ -5084,7 +5097,6 @@
     "acre",
     "window"
   ],
-  "GripHorizontalIcon": ["grab", "dots", "handle", "move", "drag"],
   "GripVerticalIcon": ["grab", "dots", "handle", "move", "drag"],
   "GripIcon": ["grab", "dots", "handle", "move", "drag"],
   "GroupIcon": [
@@ -5096,17 +5108,6 @@
     "cluster",
     "gather",
     "dashed"
-  ],
-  "HamIcon": [
-    "food",
-    "pork",
-    "pig",
-    "meat",
-    "bone",
-    "hock",
-    "knuckle",
-    "gammon",
-    "cured"
   ],
   "GuitarIcon": [
     "acoustic",
@@ -5125,6 +5126,48 @@
     "audio",
     "sound",
     "noise"
+  ],
+  "HamIcon": [
+    "food",
+    "pork",
+    "pig",
+    "meat",
+    "bone",
+    "hock",
+    "knuckle",
+    "gammon",
+    "cured"
+  ],
+  "HammerIcon": ["mallet", "nails", "diy", "toolbox", "build", "construction"],
+  "HandCoinsIcon": [
+    "savings",
+    "banking",
+    "money",
+    "finance",
+    "offers",
+    "mortgage",
+    "payment",
+    "received",
+    "wage",
+    "payroll",
+    "allowance",
+    "pocket money",
+    "handout",
+    "pennies"
+  ],
+  "HandFistIcon": [
+    "clench",
+    "strength",
+    "power",
+    "unity",
+    "solidarity",
+    "rebellion",
+    "victory",
+    "triumph",
+    "support",
+    "fight",
+    "combat",
+    "brawl"
   ],
   "HamburgerIcon": [
     "burger",
@@ -5159,39 +5202,9 @@
     "mustard",
     "mayonnaise"
   ],
-  "HammerIcon": ["mallet", "nails", "diy", "toolbox", "build", "construction"],
-  "HandCoinsIcon": [
-    "savings",
-    "banking",
-    "money",
-    "finance",
-    "offers",
-    "mortgage",
-    "payment",
-    "received",
-    "wage",
-    "payroll",
-    "allowance",
-    "pocket money",
-    "handout",
-    "pennies"
-  ],
-  "HandFistIcon": [
-    "clench",
-    "strength",
-    "power",
-    "unity",
-    "solidarity",
-    "rebellion",
-    "victory",
-    "triumph",
-    "support",
-    "fight",
-    "combat",
-    "brawl"
-  ],
   "HandGrabIcon": ["hand"],
   "HandHeartIcon": ["love", "like", "emotion"],
+  "HandMetalIcon": ["rock"],
   "HandHelpingIcon": [
     "agreement",
     "help",
@@ -5200,7 +5213,7 @@
     "begging",
     "terms"
   ],
-  "HandMetalIcon": ["rock"],
+  "HandIcon": ["wave", "move", "mouse", "grab"],
   "HandPlatterIcon": [
     "waiter",
     "waitress",
@@ -5224,7 +5237,6 @@
     "tote",
     "travel"
   ],
-  "HandIcon": ["wave", "move", "mouse", "grab"],
   "HandshakeIcon": [
     "agreement",
     "partnership",
@@ -5246,6 +5258,15 @@
     "hard disk",
     "save"
   ],
+  "HardDriveIcon": [
+    "computer",
+    "server",
+    "memory",
+    "data",
+    "ssd",
+    "disk",
+    "hard disk"
+  ],
   "HardDriveUploadIcon": [
     "computer",
     "server",
@@ -5256,17 +5277,9 @@
     "hard disk",
     "save"
   ],
-  "HardDriveIcon": [
-    "computer",
-    "server",
-    "memory",
-    "data",
-    "ssd",
-    "disk",
-    "hard disk"
-  ],
   "HardHatIcon": ["helmet", "construction", "safety", "savety"],
   "HashIcon": ["hashtag", "number", "pound"],
+  "HazeIcon": ["mist", "fog"],
   "HatGlassesIcon": [
     "incognito",
     "disguise",
@@ -5293,6 +5306,8 @@
     "sunglasses",
     "eyewear"
   ],
+  "Heading2Icon": ["h2", "html", "markup", "markdown"],
+  "Heading1Icon": ["h1", "html", "markup", "markdown"],
   "HdmiPortIcon": [
     "socket",
     "plug",
@@ -5310,16 +5325,12 @@
     "input",
     "output"
   ],
-  "HazeIcon": ["mist", "fog"],
-  "Heading1Icon": ["h1", "html", "markup", "markdown"],
-  "Heading2Icon": ["h2", "html", "markup", "markdown"],
   "Heading3Icon": ["h3", "html", "markup", "markdown"],
   "Heading4Icon": ["h4", "html", "markup", "markdown"],
   "Heading5Icon": ["h5", "html", "markup", "markdown"],
-  "Heading6Icon": ["h6", "html", "markup", "markdown"],
   "HeadphoneOffIcon": ["music", "audio", "sound", "mute", "off"],
   "HeadingIcon": ["h1", "html", "markup", "markdown"],
-  "HeadphonesIcon": ["music", "audio", "sound"],
+  "Heading6Icon": ["h6", "html", "markup", "markdown"],
   "HeadsetIcon": [
     "music",
     "audio",
@@ -5334,6 +5345,7 @@
     "voip",
     "video"
   ],
+  "HeadphonesIcon": ["music", "audio", "sound"],
   "HeartHandshakeIcon": [
     "agreement",
     "charity",
@@ -5344,9 +5356,9 @@
     "together",
     "handshake"
   ],
-  "HeartCrackIcon": ["heartbreak", "sadness", "emotion"],
   "HeartMinusIcon": ["unlike", "unfavorite", "remove", "damage", "ui & ux"],
   "HeartOffIcon": ["unlike", "dislike", "hate", "emotion"],
+  "HeartCrackIcon": ["heartbreak", "sadness", "emotion"],
   "HeartPlusIcon": ["plus", "like", "favorite", "add", "health", "support"],
   "HeartPulseIcon": [
     "heartbeat",
@@ -5358,9 +5370,7 @@
     "systole",
     "diastole"
   ],
-  "HeartIcon": ["like", "love", "emotion", "suit", "playing", "cards"],
   "HexagonIcon": ["shape", "node.js", "logo"],
-  "HighlighterIcon": ["mark", "text"],
   "HeaterIcon": [
     "heating",
     "warmth",
@@ -5371,6 +5381,18 @@
     "electronics",
     "amenities"
   ],
+  "HeartIcon": ["like", "love", "emotion", "suit", "playing", "cards"],
+  "HighlighterIcon": ["mark", "text"],
+  "HopOffIcon": [
+    "beer",
+    "brewery",
+    "drink",
+    "hop free",
+    "allergy",
+    "intolerance",
+    "diet"
+  ],
+  "HopIcon": ["beer", "brewery", "drink"],
   "HistoryIcon": [
     "time",
     "redo",
@@ -5383,17 +5405,6 @@
     "rotate",
     "ccw"
   ],
-  "HopIcon": ["beer", "brewery", "drink"],
-  "HopOffIcon": [
-    "beer",
-    "brewery",
-    "drink",
-    "hop free",
-    "allergy",
-    "intolerance",
-    "diet"
-  ],
-  "HotelIcon": ["building", "hostel", "motel", "inn"],
   "HospitalIcon": [
     "infirmary",
     "sanatorium",
@@ -5407,7 +5418,7 @@
     "medical",
     "vet"
   ],
-  "HourglassIcon": ["timer", "time", "sandglass"],
+  "HotelIcon": ["building", "hostel", "motel", "inn"],
   "HouseHeartIcon": [
     "home sweet home",
     "abode",
@@ -5425,6 +5436,8 @@
     "autarky",
     "energy"
   ],
+  "HourglassIcon": ["timer", "time", "sandglass"],
+  "HouseWifiIcon": ["home", "living", "building", "wifi", "connectivity"],
   "HousePlusIcon": [
     "home",
     "living",
@@ -5435,7 +5448,6 @@
     "residence",
     "architecture"
   ],
-  "HouseWifiIcon": ["home", "living", "building", "wifi", "connectivity"],
   "HouseIcon": ["home", "living", "building", "residence", "architecture"],
   "IceCreamBowlIcon": [
     "gelato",
@@ -5446,6 +5458,9 @@
     "course",
     "meal"
   ],
+  "IceCreamConeIcon": ["gelato", "food"],
+  "IdCardIcon": ["card", "badge", "identity", "authentication", "secure"],
+  "ImageDownIcon": ["picture", "photo", "download", "save", "export"],
   "IdCardLanyardIcon": [
     "id-card",
     "id-card-lanyard",
@@ -5454,15 +5469,11 @@
     "gate-pass",
     "badge"
   ],
-  "IceCreamConeIcon": ["gelato", "food"],
-  "IdCardIcon": ["card", "badge", "identity", "authentication", "secure"],
-  "ImageDownIcon": ["picture", "photo", "download", "save", "export"],
-  "ImagePlayIcon": ["picture", "gif", "photo"],
   "ImageMinusIcon": ["remove", "delete"],
-  "ImagePlusIcon": ["add", "create", "picture"],
   "ImageOffIcon": ["picture", "photo"],
+  "ImagePlayIcon": ["picture", "gif", "photo"],
+  "ImagePlusIcon": ["add", "create", "picture"],
   "ImageUpIcon": ["picture", "photo", "upload", "import"],
-  "ImageUpscaleIcon": ["resize", "picture", "sharpen", "increase"],
   "ImageIcon": ["picture", "photo"],
   "ImagesIcon": [
     "picture",
@@ -5475,12 +5486,12 @@
     "slideshow",
     "showcase"
   ],
-  "InboxIcon": ["email"],
+  "ImageUpscaleIcon": ["resize", "picture", "sharpen", "increase"],
   "ImportIcon": ["save"],
+  "InboxIcon": ["email"],
   "IndianRupeeIcon": ["currency", "money", "payment"],
   "InfinityIcon": ["unlimited", "forever", "loop", "math"],
   "InfoIcon": ["help"],
-  "InstagramIcon": ["logo", "camera", "social"],
   "InspectionPanelIcon": [
     "access",
     "cover",
@@ -5489,10 +5500,24 @@
     "materials",
     "screws"
   ],
+  "InstagramIcon": ["logo", "camera", "social"],
   "ItalicIcon": ["oblique", "text", "format"],
   "IterationCwIcon": ["arrow", "left"],
-  "IterationCcwIcon": ["arrow", "right"],
   "JapaneseYenIcon": ["currency", "money", "payment"],
+  "IterationCcwIcon": ["arrow", "right"],
+  "KayakIcon": [
+    "kayak",
+    "boat",
+    "paddle",
+    "water",
+    "sport",
+    "recreation",
+    "adventure",
+    "outdoors",
+    "equipment",
+    "lake",
+    "ocean"
+  ],
   "JoystickIcon": ["game", "console", "control stick"],
   "KanbanIcon": [
     "projects",
@@ -5509,19 +5534,6 @@
     "agile",
     "code",
     "coding"
-  ],
-  "KayakIcon": [
-    "kayak",
-    "boat",
-    "paddle",
-    "water",
-    "sport",
-    "recreation",
-    "adventure",
-    "outdoors",
-    "equipment",
-    "lake",
-    "ocean"
   ],
   "KeySquareIcon": [
     "password",
@@ -5543,6 +5555,7 @@
     "fob"
   ],
   "KeyboardOffIcon": ["unkeys", "layout", "spell", "settings", "mouse"],
+  "LampCeilingIcon": ["lighting", "household", "home", "furniture"],
   "KeyboardMusicIcon": [
     "music",
     "audio",
@@ -5567,7 +5580,6 @@
     "performance",
     "concert"
   ],
-  "LampCeilingIcon": ["lighting", "household", "home", "furniture"],
   "LampDeskIcon": [
     "lighting",
     "household",
@@ -5617,6 +5629,7 @@
     "government",
     "institution"
   ],
+  "LaptopMinimalIcon": ["computer", "screen", "remote"],
   "LaptopMinimalCheckIcon": [
     "computer",
     "screen",
@@ -5628,10 +5641,11 @@
     "complete",
     "task"
   ],
-  "LaptopIcon": ["computer", "screen", "remote"],
-  "LaptopMinimalIcon": ["computer", "screen", "remote"],
   "LassoSelectIcon": ["select", "cursor"],
   "LassoIcon": ["select", "cursor"],
+  "LaptopIcon": ["computer", "screen", "remote"],
+  "LaughIcon": ["emoji", "face", "happy", "good", "emotion"],
+  "LayoutDashboardIcon": ["masonry", "brick"],
   "Layers2Icon": [
     "stack",
     "pile",
@@ -5644,7 +5658,6 @@
     "double",
     "shortcuts"
   ],
-  "LaughIcon": ["emoji", "face", "happy", "good", "emotion"],
   "LayersIcon": [
     "stack",
     "pile",
@@ -5654,10 +5667,8 @@
     "copies",
     "copy"
   ],
-  "LayoutDashboardIcon": ["masonry", "brick"],
   "LayoutGridIcon": ["app", "home", "start"],
   "LayoutListIcon": ["todo", "tasks", "items", "pending", "image", "photo"],
-  "LayoutPanelLeftIcon": ["app", "home", "start", "grid"],
   "LayoutPanelTopIcon": [
     "window",
     "webpage",
@@ -5668,6 +5679,7 @@
     "structure"
   ],
   "LayoutTemplateIcon": ["window", "webpage", "block", "section"],
+  "LayoutPanelLeftIcon": ["app", "home", "start", "grid"],
   "LeafIcon": ["sustainability", "nature", "energy", "plant", "autumn"],
   "LeafyGreenIcon": [
     "salad",
@@ -5677,7 +5689,6 @@
     "cabbage",
     "bok choy"
   ],
-  "LecternIcon": ["pulpit", "podium", "stand"],
   "LibraryBigIcon": [
     "books",
     "reading",
@@ -5703,20 +5714,7 @@
     "music",
     "package"
   ],
-  "LifeBuoyIcon": [
-    "preserver",
-    "life belt",
-    "lifesaver",
-    "help",
-    "rescue",
-    "ship",
-    "ring",
-    "raft",
-    "inflatable",
-    "wheel",
-    "donut"
-  ],
-  "LigatureIcon": ["text", "font", "typography", "alternates", "alternatives"],
+  "LecternIcon": ["pulpit", "podium", "stand"],
   "LibraryIcon": [
     "books",
     "reading",
@@ -5742,8 +5740,23 @@
     "music",
     "package"
   ],
+  "LigatureIcon": ["text", "font", "typography", "alternates", "alternatives"],
   "LightbulbOffIcon": ["lights"],
+  "LifeBuoyIcon": [
+    "preserver",
+    "life belt",
+    "lifesaver",
+    "help",
+    "rescue",
+    "ship",
+    "ring",
+    "raft",
+    "inflatable",
+    "wheel",
+    "donut"
+  ],
   "LightbulbIcon": ["idea", "bright", "lights"],
+  "Link2OffIcon": ["unchain", "chain"],
   "LineSquiggleIcon": [
     "line",
     "snakes",
@@ -5759,19 +5772,9 @@
     "art",
     "road"
   ],
-  "Link2Icon": ["chain", "url"],
   "LinkIcon": ["chain", "url"],
-  "Link2OffIcon": ["unchain", "chain"],
+  "Link2Icon": ["chain", "url"],
   "LinkedinIcon": ["logo", "social media", "social"],
-  "ListCheckIcon": [
-    "done",
-    "check",
-    "tick",
-    "complete",
-    "list",
-    "to-do",
-    "bom"
-  ],
   "ListChecksIcon": [
     "todo",
     "done",
@@ -5782,7 +5785,16 @@
     "items",
     "pending"
   ],
-  "ListChevronsDownUpIcon": [
+  "ListCheckIcon": [
+    "done",
+    "check",
+    "tick",
+    "complete",
+    "list",
+    "to-do",
+    "bom"
+  ],
+  "ListChevronsUpDownIcon": [
     "options",
     "items",
     "collapse",
@@ -5814,7 +5826,7 @@
     "fold",
     "unfold"
   ],
-  "ListChevronsUpDownIcon": [
+  "ListChevronsDownUpIcon": [
     "options",
     "items",
     "collapse",
@@ -5831,11 +5843,15 @@
     "unfold",
     "vertical"
   ],
-  "ListFilterIcon": ["options"],
+  "ListFilterPlusIcon": ["filter", "plus", "options", "add"],
   "ListEndIcon": ["queue", "bottom", "end", "playlist"],
   "ListIndentDecreaseIcon": ["text", "tab"],
-  "ListFilterPlusIcon": ["filter", "plus", "options", "add"],
+  "ListFilterIcon": ["options"],
   "ListIndentIncreaseIcon": ["text", "tab"],
+  "ListOrderedIcon": ["number", "order", "queue"],
+  "ListRestartIcon": ["reset", "refresh", "reload", "playlist", "replay"],
+  "ListMusicIcon": ["playlist", "queue", "music", "audio", "playback"],
+  "ListPlusIcon": ["playlist", "add", "song", "track", "new"],
   "ListMinusIcon": [
     "playlist",
     "remove",
@@ -5844,10 +5860,6 @@
     "delete",
     "unqueue"
   ],
-  "ListMusicIcon": ["playlist", "queue", "music", "audio", "playback"],
-  "ListOrderedIcon": ["number", "order", "queue"],
-  "ListPlusIcon": ["playlist", "add", "song", "track", "new"],
-  "ListRestartIcon": ["reset", "refresh", "reload", "playlist", "replay"],
   "ListStartIcon": ["queue", "top", "start", "next", "playlist"],
   "ListTodoIcon": [
     "todo",
@@ -5859,9 +5871,10 @@
     "items",
     "pending"
   ],
-  "ListVideoIcon": ["playlist", "video", "playback"],
-  "ListXIcon": ["playlist", "subtract", "remove", "delete", "unqueue"],
   "ListTreeIcon": ["tree", "browser"],
+  "ListVideoIcon": ["playlist", "video", "playback"],
+  "ListIcon": ["options"],
+  "ListXIcon": ["playlist", "subtract", "remove", "delete", "unqueue"],
   "LoaderCircleIcon": [
     "loading",
     "wait",
@@ -5872,7 +5885,6 @@
     "throbber",
     "circle"
   ],
-  "ListIcon": ["options"],
   "LoaderPinwheelIcon": [
     "loading",
     "wait",
@@ -5894,15 +5906,14 @@
     "spinning",
     "throbber"
   ],
+  "LocateIcon": ["map", "gps", "location", "cross"],
   "LocateOffIcon": ["map", "gps", "location", "cross"],
   "LocateFixedIcon": ["map", "gps", "location", "cross"],
-  "LocateIcon": ["map", "gps", "location", "cross"],
-  "LockKeyholeIcon": ["security", "password", "secure", "admin"],
-  "LockIcon": ["security", "password", "secure", "admin"],
   "LockKeyholeOpenIcon": ["security"],
+  "LockKeyholeIcon": ["security", "password", "secure", "admin"],
   "LockOpenIcon": ["security"],
+  "LockIcon": ["security", "password", "secure", "admin"],
   "LogInIcon": ["sign in", "arrow", "enter", "auth"],
-  "LogOutIcon": ["sign out", "arrow", "exit", "auth"],
   "LogsIcon": ["options", "list", "menu", "order", "queue", "tasks", "logs"],
   "LollipopIcon": [
     "lolly",
@@ -5913,8 +5924,10 @@
     "dessert",
     "spiral"
   ],
-  "LuggageIcon": ["baggage", "luggage", "travel", "suitcase"],
+  "LogOutIcon": ["sign out", "arrow", "exit", "auth"],
   "MagnetIcon": ["horseshoe", "lock", "science", "snap"],
+  "LuggageIcon": ["baggage", "luggage", "travel", "suitcase"],
+  "MailMinusIcon": ["email", "message", "letter", "remove", "delete"],
   "MailOpenIcon": ["email", "message", "letter", "read"],
   "MailCheckIcon": [
     "email",
@@ -5930,7 +5943,6 @@
     "complete",
     "task"
   ],
-  "MailMinusIcon": ["email", "message", "letter", "remove", "delete"],
   "MailPlusIcon": [
     "email",
     "message",
@@ -5957,30 +5969,12 @@
     "exclamation mark"
   ],
   "MailIcon": ["email", "message", "letter", "unread"],
-  "MailsIcon": [
-    "emails",
-    "messages",
-    "letters",
-    "multiple",
-    "mailing list",
-    "newsletter",
-    "copy"
-  ],
   "MailboxIcon": [
     "emails",
     "messages",
     "letters",
     "mailing list",
     "newsletter"
-  ],
-  "MapMinusIcon": [
-    "location",
-    "navigation",
-    "travel",
-    "drop",
-    "delete",
-    "remove",
-    "erase"
   ],
   "MapPinCheckInsideIcon": [
     "location",
@@ -5992,6 +5986,24 @@
     "complete",
     "task",
     "added"
+  ],
+  "MailsIcon": [
+    "emails",
+    "messages",
+    "letters",
+    "multiple",
+    "mailing list",
+    "newsletter",
+    "copy"
+  ],
+  "MapMinusIcon": [
+    "location",
+    "navigation",
+    "travel",
+    "drop",
+    "delete",
+    "remove",
+    "erase"
   ],
   "MapPinCheckIcon": [
     "location",
@@ -6024,15 +6036,6 @@
     "place",
     "landmark"
   ],
-  "MapPinMinusInsideIcon": [
-    "location",
-    "waypoint",
-    "marker",
-    "drop",
-    "delete",
-    "remove",
-    "erase"
-  ],
   "MapPinMinusIcon": [
     "location",
     "waypoint",
@@ -6043,17 +6046,16 @@
     "erase"
   ],
   "MapPinOffIcon": ["location", "waypoint", "marker", "remove"],
-  "MapPinPenIcon": ["location", "waypoint", "marker", "drop", "edit"],
-  "MapPinPlusIcon": [
+  "MapPinMinusInsideIcon": [
     "location",
     "waypoint",
     "marker",
     "drop",
-    "add",
-    "create",
-    "new"
+    "delete",
+    "remove",
+    "erase"
   ],
-  "MapPinPlusInsideIcon": [
+  "MapPinPlusIcon": [
     "location",
     "waypoint",
     "marker",
@@ -6071,6 +6073,7 @@
     "remove",
     "erase"
   ],
+  "MapPinPenIcon": ["location", "waypoint", "marker", "drop", "edit"],
   "MapPinXIcon": [
     "location",
     "waypoint",
@@ -6080,16 +6083,25 @@
     "remove",
     "erase"
   ],
-  "MapPinIcon": ["location", "waypoint", "marker", "drop"],
+  "MapPinPlusInsideIcon": [
+    "location",
+    "waypoint",
+    "marker",
+    "drop",
+    "add",
+    "create",
+    "new"
+  ],
   "MapPinnedIcon": ["location", "waypoint", "marker", "drop"],
+  "MapPinIcon": ["location", "waypoint", "marker", "drop"],
   "MapPlusIcon": ["location", "navigation", "travel", "new", "add", "create"],
+  "MapIcon": ["location", "navigation", "travel"],
   "MarsIcon": ["gender", "sex", "male", "masculine", "man", "boy"],
   "MarsStrokeIcon": ["gender", "androgyne", "transgender"],
-  "MapIcon": ["location", "navigation", "travel"],
   "MartiniIcon": ["cocktail", "alcohol", "beverage", "bar", "drink", "glass"],
   "Maximize2Icon": ["fullscreen", "arrows", "expand"],
-  "MaximizeIcon": ["fullscreen", "expand", "dashed"],
   "MedalIcon": ["prize", "sports", "winner", "trophy", "award", "achievement"],
+  "MaximizeIcon": ["fullscreen", "expand", "dashed"],
   "MegaphoneOffIcon": [
     "advertisement",
     "announcement",
@@ -6101,7 +6113,6 @@
     "disable",
     "silent"
   ],
-  "MehIcon": ["emoji", "face", "neutral", "emotion"],
   "MegaphoneIcon": [
     "advertisement",
     "announcement",
@@ -6110,6 +6121,18 @@
     "loudspeaker",
     "megaphone",
     "notification"
+  ],
+  "MehIcon": ["emoji", "face", "neutral", "emotion"],
+  "MenuIcon": ["bars", "navigation", "hamburger", "options"],
+  "MessageCircleCodeIcon": [
+    "comment",
+    "chat",
+    "conversation",
+    "dialog",
+    "feedback",
+    "speech bubble",
+    "code review",
+    "coding"
   ],
   "MemoryStickIcon": [
     "ram",
@@ -6123,18 +6146,16 @@
     "gigabytes",
     "gb"
   ],
-  "MergeIcon": ["combine", "join", "unite"],
-  "MessageCircleCodeIcon": [
+  "MessageCircleDashedIcon": [
     "comment",
     "chat",
     "conversation",
     "dialog",
     "feedback",
     "speech bubble",
-    "code review",
-    "coding"
+    "draft"
   ],
-  "MenuIcon": ["bars", "navigation", "hamburger", "options"],
+  "MergeIcon": ["combine", "join", "unite"],
   "MessageCircleHeartIcon": [
     "comment",
     "chat",
@@ -6191,15 +6212,6 @@
     "speech bubble",
     "add"
   ],
-  "MessageCircleDashedIcon": [
-    "comment",
-    "chat",
-    "conversation",
-    "dialog",
-    "feedback",
-    "speech bubble",
-    "draft"
-  ],
   "MessageCircleQuestionMarkIcon": [
     "comment",
     "chat",
@@ -6235,14 +6247,6 @@
     "protected",
     "exclamation mark"
   ],
-  "MessageCircleIcon": [
-    "comment",
-    "chat",
-    "conversation",
-    "dialog",
-    "feedback",
-    "speech bubble"
-  ],
   "MessageCircleXIcon": [
     "comment",
     "chat",
@@ -6258,6 +6262,14 @@
     "silence",
     "mute",
     "moderate"
+  ],
+  "MessageCircleIcon": [
+    "comment",
+    "chat",
+    "conversation",
+    "dialog",
+    "feedback",
+    "speech bubble"
   ],
   "MessageSquareCodeIcon": [
     "comment",
@@ -6278,16 +6290,6 @@
     "speech bubble",
     "draft"
   ],
-  "MessageSquareDotIcon": [
-    "unread",
-    "unresolved",
-    "comment",
-    "chat",
-    "conversation",
-    "dialog",
-    "feedback",
-    "speech bubble"
-  ],
   "MessageSquareDiffIcon": [
     "comment",
     "chat",
@@ -6307,15 +6309,15 @@
     "version control",
     "git"
   ],
-  "MessageSquareLockIcon": [
+  "MessageSquareDotIcon": [
+    "unread",
+    "unresolved",
     "comment",
     "chat",
     "conversation",
     "dialog",
     "feedback",
-    "speech bubble",
-    "secure",
-    "encrypted"
+    "speech bubble"
   ],
   "MessageSquareHeartIcon": [
     "comment",
@@ -6347,6 +6349,16 @@
     "et cetera",
     "...",
     "…"
+  ],
+  "MessageSquareLockIcon": [
+    "comment",
+    "chat",
+    "conversation",
+    "dialog",
+    "feedback",
+    "speech bubble",
+    "secure",
+    "encrypted"
   ],
   "MessageSquareOffIcon": [
     "comment",
@@ -6386,16 +6398,6 @@
     "reply",
     "response"
   ],
-  "MessageSquareShareIcon": [
-    "comment",
-    "chat",
-    "conversation",
-    "dialog",
-    "feedback",
-    "speech bubble",
-    "network",
-    "forward"
-  ],
   "MessageSquareReplyIcon": [
     "comment",
     "chat",
@@ -6406,13 +6408,15 @@
     "reply",
     "response"
   ],
-  "MessageSquareTextIcon": [
+  "MessageSquareShareIcon": [
     "comment",
     "chat",
     "conversation",
     "dialog",
     "feedback",
-    "speech bubble"
+    "speech bubble",
+    "network",
+    "forward"
   ],
   "MessageSquareWarningIcon": [
     "comment",
@@ -6445,6 +6449,14 @@
     "silence",
     "mute",
     "moderate"
+  ],
+  "MessageSquareTextIcon": [
+    "comment",
+    "chat",
+    "conversation",
+    "dialog",
+    "feedback",
+    "speech bubble"
   ],
   "MessageSquareIcon": [
     "comment",
@@ -6480,6 +6492,7 @@
     "singing",
     "microphone"
   ],
+  "CurrencyIcon": ["finance", "money"],
   "MicIcon": ["record", "sound", "listen", "radio", "podcast", "microphone"],
   "MicrochipIcon": [
     "processor",
@@ -6495,8 +6508,6 @@
     "gigahertz",
     "ghz"
   ],
-  "MicroscopeIcon": ["medical", "education", "science", "imaging", "research"],
-  "MilkIcon": ["lactose", "bottle", "beverage", "drink", "water", "diet"],
   "MilkOffIcon": [
     "lactose free",
     "bottle",
@@ -6507,7 +6518,18 @@
     "intolerance",
     "diet"
   ],
+  "MilestoneIcon": [
+    "signpost",
+    "direction",
+    "right",
+    "east",
+    "forward",
+    "version control",
+    "waypoint"
+  ],
+  "MicrowaveIcon": ["oven", "cooker", "toaster oven", "bake"],
   "Minimize2Icon": ["exit fullscreen", "arrows", "close", "shrink"],
+  "MilkIcon": ["lactose", "bottle", "beverage", "drink", "water", "diet"],
   "MinimizeIcon": ["exit fullscreen", "close", "shrink"],
   "MonitorCheckIcon": [
     "tv",
@@ -6543,23 +6565,6 @@
     "minimum",
     "downgrade"
   ],
-  "MonitorCloudIcon": [
-    "virtual machine",
-    "virtual desktop",
-    "vm",
-    "vdi",
-    "computing",
-    "remote work",
-    "monitoring",
-    "infrastructure",
-    "software as a service",
-    "saas",
-    "workstation",
-    "environment",
-    "tv",
-    "screen",
-    "display"
-  ],
   "MonitorCogIcon": [
     "tv",
     "screen",
@@ -6578,6 +6583,23 @@
     "network",
     "computing"
   ],
+  "MonitorCloudIcon": [
+    "virtual machine",
+    "virtual desktop",
+    "vm",
+    "vdi",
+    "computing",
+    "remote work",
+    "monitoring",
+    "infrastructure",
+    "software as a service",
+    "saas",
+    "workstation",
+    "environment",
+    "tv",
+    "screen",
+    "display"
+  ],
   "MonitorDotIcon": [
     "tv",
     "screen",
@@ -6588,8 +6610,6 @@
     "virtual machine",
     "vm"
   ],
-  "MonitorDownIcon": ["tv", "screen", "display", "desktop", "download"],
-  "MonitorOffIcon": ["share"],
   "MonitorPauseIcon": [
     "tv",
     "screen",
@@ -6603,6 +6623,19 @@
     "boot",
     "virtual machine",
     "vm"
+  ],
+  "MonitorDownIcon": ["tv", "screen", "display", "desktop", "download"],
+  "MonitorOffIcon": ["share"],
+  "MonitorSmartphoneIcon": [
+    "smartphone",
+    "phone",
+    "cellphone",
+    "device",
+    "mobile",
+    "desktop",
+    "monitor",
+    "responsive",
+    "screens"
   ],
   "MonitorPlayIcon": [
     "tv",
@@ -6618,18 +6651,6 @@
     "virtual machine",
     "vm"
   ],
-  "MonitorSpeakerIcon": ["devices", "connect", "cast"],
-  "MonitorSmartphoneIcon": [
-    "smartphone",
-    "phone",
-    "cellphone",
-    "device",
-    "mobile",
-    "desktop",
-    "monitor",
-    "responsive",
-    "screens"
-  ],
   "MonitorStopIcon": [
     "tv",
     "screen",
@@ -6643,6 +6664,7 @@
     "virtual machine",
     "vm"
   ],
+  "MonitorSpeakerIcon": ["devices", "connect", "cast"],
   "MonitorUpIcon": [
     "tv",
     "screen",
@@ -6666,8 +6688,6 @@
     "delete"
   ],
   "MonitorIcon": ["tv", "screen", "display", "virtual machine", "vm"],
-  "MoonStarIcon": ["dark", "night", "star"],
-  "MoonIcon": ["dark", "night"],
   "MotorbikeIcon": [
     "moto",
     "motorcycle",
@@ -6681,10 +6701,10 @@
     "journey",
     "delivery"
   ],
-  "MountainSnowIcon": ["alpine", "climb", "snow"],
+  "MoonStarIcon": ["dark", "night", "star"],
+  "MoonIcon": ["dark", "night"],
   "MountainIcon": ["climb", "hike", "rock"],
-  "MouseOffIcon": ["device", "scroll", "click", "disabled"],
-  "MousePointer2Icon": ["click", "select"],
+  "MountainSnowIcon": ["alpine", "climb", "snow"],
   "MousePointerBanIcon": [
     "wait",
     "busy",
@@ -6693,9 +6713,12 @@
     "frozen",
     "freeze"
   ],
+  "MousePointer2Icon": ["click", "select"],
+  "MouseOffIcon": ["device", "scroll", "click", "disabled"],
   "MousePointerClickIcon": ["click", "select"],
   "MouseIcon": ["device", "scroll", "click"],
   "MousePointerIcon": ["click", "select"],
+  "MoveDiagonal2Icon": ["double", "arrow"],
   "Move3dIcon": [
     "arrows",
     "axis",
@@ -6704,28 +6727,27 @@
     "transform",
     "translate"
   ],
-  "MoveDiagonal2Icon": ["double", "arrow"],
-  "MoveDownLeftIcon": ["arrow", "direction"],
   "MoveDiagonalIcon": ["double", "arrow"],
-  "MoveDownRightIcon": ["arrow", "direction"],
+  "MoveDownLeftIcon": ["arrow", "direction"],
   "MoveDownIcon": ["arrow", "direction", "downwards", "south"],
+  "MoveDownRightIcon": ["arrow", "direction"],
   "MoveHorizontalIcon": ["double", "arrow"],
   "MoveLeftIcon": ["arrow", "direction", "back", "west"],
   "MoveRightIcon": ["arrow", "direction", "trend flat", "east"],
-  "MoveUpLeftIcon": ["arrow", "direction"],
   "MoveUpRightIcon": ["arrow", "direction"],
-  "MoveVerticalIcon": ["double", "arrow"],
+  "MoveUpLeftIcon": ["arrow", "direction"],
   "MoveUpIcon": ["arrow", "direction", "upwards", "north"],
-  "Music2Icon": ["quaver", "eighth note", "note"],
   "MoveIcon": ["arrows"],
+  "Music2Icon": ["quaver", "eighth note", "note"],
+  "MoveVerticalIcon": ["double", "arrow"],
   "Music3Icon": ["crotchet", "minim", "quarter note", "half note", "note"],
   "Music4Icon": ["semiquaver", "sixteenth note", "note"],
   "MusicIcon": ["note", "quaver", "eighth note"],
   "Navigation2OffIcon": ["location", "travel"],
   "Navigation2Icon": ["location", "travel"],
   "NavigationOffIcon": ["location", "travel"],
-  "NavigationIcon": ["location", "travel"],
   "NetworkIcon": ["tree"],
+  "NavigationIcon": ["location", "travel"],
   "NewspaperIcon": ["news", "feed", "home", "magazine", "article", "headline"],
   "NfcIcon": ["contactless", "payment", "near-field communication"],
   "NonBinaryIcon": ["gender", "nonbinary", "enby"],
@@ -6805,34 +6827,6 @@
     "lines",
     "opened"
   ],
-  "NotebookIcon": [
-    "notepad",
-    "notes",
-    "stationery",
-    "sketchbook",
-    "moleskine",
-    "closure",
-    "strap",
-    "band",
-    "elastic",
-    "organizer",
-    "organiser",
-    "planner",
-    "diary",
-    "journal",
-    "writing",
-    "written",
-    "writer",
-    "reading",
-    "high school",
-    "university",
-    "college",
-    "academy",
-    "student",
-    "study",
-    "homework",
-    "research"
-  ],
   "NotepadTextDashedIcon": [
     "notebook",
     "notes",
@@ -6875,8 +6869,37 @@
     "lines",
     "opened"
   ],
-  "NutOffIcon": ["hazelnut", "acorn", "food", "allergy", "intolerance", "diet"],
+  "NotebookIcon": [
+    "notepad",
+    "notes",
+    "stationery",
+    "sketchbook",
+    "moleskine",
+    "closure",
+    "strap",
+    "band",
+    "elastic",
+    "organizer",
+    "organiser",
+    "planner",
+    "diary",
+    "journal",
+    "writing",
+    "written",
+    "writer",
+    "reading",
+    "high school",
+    "university",
+    "college",
+    "academy",
+    "student",
+    "study",
+    "homework",
+    "research"
+  ],
+  "OctagonAlertIcon": ["warning", "alert", "danger", "exclamation mark"],
   "NutIcon": ["hazelnut", "acorn", "food", "diet"],
+  "NutOffIcon": ["hazelnut", "acorn", "food", "allergy", "intolerance", "diet"],
   "OctagonMinusIcon": [
     "stop",
     "forbidden",
@@ -6889,8 +6912,8 @@
     "halt",
     "restricted"
   ],
-  "OctagonAlertIcon": ["warning", "alert", "danger", "exclamation mark"],
   "OctagonPauseIcon": ["music", "audio", "stop"],
+  "OctagonIcon": ["stop", "shape"],
   "OctagonXIcon": [
     "delete",
     "stop",
@@ -6900,7 +6923,6 @@
     "clear",
     "math"
   ],
-  "OctagonIcon": ["stop", "shape"],
   "OmegaIcon": [
     "greek",
     "symbol",
@@ -6919,16 +6941,6 @@
   "OptionIcon": ["keyboard", "key", "mac", "alt", "button"],
   "OrbitIcon": ["planet", "space", "physics", "satellites", "moons"],
   "OrigamiIcon": ["paper", "bird"],
-  "PackageCheckIcon": [
-    "confirm",
-    "verified",
-    "done",
-    "todo",
-    "tick",
-    "complete",
-    "task",
-    "delivered"
-  ],
   "Package2Icon": [
     "box",
     "container",
@@ -6941,6 +6953,16 @@
     "zip"
   ],
   "PackageMinusIcon": ["delete", "remove"],
+  "PackageCheckIcon": [
+    "confirm",
+    "verified",
+    "done",
+    "todo",
+    "tick",
+    "complete",
+    "task",
+    "delivered"
+  ],
   "PackageOpenIcon": [
     "box",
     "container",
@@ -6953,7 +6975,7 @@
   ],
   "PackagePlusIcon": ["new", "add", "create"],
   "PackageSearchIcon": ["find", "product process", "lens"],
-  "PackageXIcon": ["delete", "remove"],
+  "PaintBucketIcon": ["fill", "paint", "bucket", "color", "colour"],
   "PackageIcon": [
     "box",
     "container",
@@ -6967,7 +6989,6 @@
     "zip",
     "module"
   ],
-  "PaintBucketIcon": ["fill", "paint", "bucket", "color", "colour"],
   "PaintRollerIcon": ["brush", "color", "colour", "decoration", "diy"],
   "PaintbrushVerticalIcon": [
     "brush",
@@ -6978,6 +6999,7 @@
     "decoration",
     "diy"
   ],
+  "MicroscopeIcon": ["medical", "education", "science", "imaging", "research"],
   "PaintbrushIcon": [
     "brush",
     "paintbrush",
@@ -6987,6 +7009,7 @@
     "decoration",
     "diy"
   ],
+  "PandaIcon": ["animal", "wildlife", "bear", "zoo", "bamboo"],
   "PaletteIcon": [
     "colors",
     "colours",
@@ -6997,7 +7020,7 @@
     "watercolour",
     "artist"
   ],
-  "PandaIcon": ["animal", "wildlife", "bear", "zoo", "bamboo"],
+  "PanelBottomIcon": ["drawer", "dock"],
   "PanelBottomCloseIcon": ["drawer", "dock", "hide", "chevron", "down"],
   "PanelBottomDashedIcon": [
     "drawer",
@@ -7011,7 +7034,6 @@
     "bleed"
   ],
   "PanelBottomOpenIcon": ["drawer", "dock", "show", "reveal", "chevron", "up"],
-  "PanelBottomIcon": ["drawer", "dock"],
   "PanelLeftCloseIcon": ["primary", "drawer", "hide", "chevron", "<"],
   "PanelLeftDashedIcon": [
     "sidebar",
@@ -7092,7 +7114,6 @@
     "horizontal",
     "bleed"
   ],
-  "PanelTopCloseIcon": ["menu bar", "drawer", "hide", "chevron", "up"],
   "PanelTopDashedIcon": [
     "menu bar",
     "drawer",
@@ -7104,6 +7125,8 @@
     "layout",
     "bleed"
   ],
+  "PanelTopCloseIcon": ["menu bar", "drawer", "hide", "chevron", "up"],
+  "PanelTopIcon": ["drawer", "browser", "webpage"],
   "PanelTopOpenIcon": [
     "menu bar",
     "drawer",
@@ -7112,8 +7135,8 @@
     "chevron",
     "down"
   ],
-  "PanelTopIcon": ["drawer", "browser", "webpage"],
   "PanelsLeftBottomIcon": ["drawers", "sidebar", "primary"],
+  "PanelsRightBottomIcon": ["drawers", "sidebar", "secondary"],
   "PanelsTopLeftIcon": [
     "menu bar",
     "sidebar",
@@ -7124,8 +7147,6 @@
     "projects",
     "overview"
   ],
-  "PanelsRightBottomIcon": ["drawers", "sidebar", "secondary"],
-  "PaperclipIcon": ["attachment", "file"],
   "ParenthesesIcon": [
     "code",
     "token",
@@ -7143,6 +7164,7 @@
     "(",
     ")"
   ],
+  "PaperclipIcon": ["attachment", "file"],
   "ParkingMeterIcon": ["driving", "car park", "pay", "sidewalk", "pavement"],
   "PartyPopperIcon": [
     "emoji",
@@ -7168,20 +7190,6 @@
     "bear"
   ],
   "PcCaseIcon": ["computer", "chassis"],
-  "PenLineIcon": [
-    "pencil",
-    "change",
-    "create",
-    "draw",
-    "writer",
-    "writing",
-    "biro",
-    "ink",
-    "marker",
-    "felt tip",
-    "stationery",
-    "artist"
-  ],
   "PenOffIcon": [
     "disabled",
     "inactive",
@@ -7205,6 +7213,21 @@
     "artist"
   ],
   "PenToolIcon": ["vector", "drawing", "path"],
+  "PenLineIcon": [
+    "pencil",
+    "change",
+    "create",
+    "draw",
+    "writer",
+    "writing",
+    "biro",
+    "ink",
+    "marker",
+    "felt tip",
+    "stationery",
+    "artist"
+  ],
+  "BathIcon": ["amenities", "services", "bathroom", "shower"],
   "PenIcon": [
     "pencil",
     "change",
@@ -7255,6 +7278,18 @@
     "stationery",
     "artist"
   ],
+  "PencilIcon": [
+    "rubber",
+    "edit",
+    "create",
+    "draw",
+    "sketch",
+    "draft",
+    "writer",
+    "writing",
+    "stationery",
+    "artist"
+  ],
   "PencilRulerIcon": [
     "edit",
     "create",
@@ -7284,18 +7319,6 @@
     "breadth",
     "extent"
   ],
-  "PencilIcon": [
-    "rubber",
-    "edit",
-    "create",
-    "draw",
-    "sketch",
-    "draft",
-    "writer",
-    "writing",
-    "stationery",
-    "artist"
-  ],
   "PentagonIcon": ["shape"],
   "PersonStandingIcon": ["people", "human", "accessibility", "stick figure"],
   "PercentIcon": [
@@ -7309,24 +7332,14 @@
     "offer",
     "marketing"
   ],
-  "PhilippinePesoIcon": ["currency", "peso", "money", "php"],
   "PhoneCallIcon": ["ring"],
   "PhoneForwardedIcon": ["call"],
-  "PhoneMissedIcon": ["call"],
+  "PhilippinePesoIcon": ["currency", "peso", "money", "php"],
   "PhoneIncomingIcon": ["call"],
+  "PhoneMissedIcon": ["call"],
   "PhoneOffIcon": ["call", "mute"],
   "PhoneOutgoingIcon": ["call"],
   "PhoneIcon": ["call"],
-  "PiIcon": [
-    "constant",
-    "code",
-    "coding",
-    "programming",
-    "symbol",
-    "trigonometry",
-    "geometry",
-    "formula"
-  ],
   "PianoIcon": [
     "music",
     "audio",
@@ -7366,6 +7379,16 @@
     "inset",
     "multitask"
   ],
+  "PiIcon": [
+    "constant",
+    "code",
+    "coding",
+    "programming",
+    "symbol",
+    "trigonometry",
+    "geometry",
+    "formula"
+  ],
   "PictureInPictureIcon": [
     "display",
     "play",
@@ -7377,7 +7400,7 @@
     "multitask"
   ],
   "PiggyBankIcon": ["money", "savings"],
-  "PilcrowLeftIcon": [
+  "PilcrowRightIcon": [
     "direction",
     "paragraph",
     "mark",
@@ -7389,7 +7412,7 @@
     "prose",
     "symbol"
   ],
-  "PilcrowRightIcon": [
+  "PilcrowLeftIcon": [
     "direction",
     "paragraph",
     "mark",
@@ -7412,6 +7435,14 @@
     "prose",
     "symbol"
   ],
+  "PillIcon": [
+    "medicine",
+    "medication",
+    "drug",
+    "prescription",
+    "tablet",
+    "pharmacy"
+  ],
   "PillBottleIcon": [
     "medicine",
     "medication",
@@ -7426,42 +7457,14 @@
     "pharmaceutical",
     "tablet"
   ],
-  "MilestoneIcon": [
-    "signpost",
-    "direction",
-    "right",
-    "east",
-    "forward",
-    "version control",
-    "waypoint"
-  ],
-  "PillIcon": [
-    "medicine",
-    "medication",
-    "drug",
-    "prescription",
-    "tablet",
-    "pharmacy"
-  ],
   "PinOffIcon": ["unpin", "map", "unlock", "unfix", "unsave", "remove"],
   "PinIcon": ["save", "map", "lock", "fix"],
-  "PizzaIcon": ["pie", "quiche", "food"],
   "PipetteIcon": ["eye dropper", "color picker", "lab", "chemistry"],
+  "PizzaIcon": ["pie", "quiche", "food"],
   "PlaneLandingIcon": ["arrival", "plane", "trip", "airplane", "landing"],
-  "PlaneIcon": ["plane", "trip", "airplane"],
   "PlaneTakeoffIcon": ["departure", "plane", "trip", "airplane", "takeoff"],
+  "PlaneIcon": ["plane", "trip", "airplane"],
   "PlayIcon": ["music", "audio", "video", "start", "run"],
-  "Plug2Icon": ["electricity", "energy", "socket", "outlet"],
-  "PlugIcon": ["electricity", "energy", "electronics", "socket", "outlet"],
-  "PlugZapIcon": [
-    "electricity",
-    "energy",
-    "electronics",
-    "charge",
-    "charging",
-    "battery",
-    "connect"
-  ],
   "PlusIcon": [
     "add",
     "new",
@@ -7480,6 +7483,17 @@
     "upgrade",
     "extra",
     "+"
+  ],
+  "Plug2Icon": ["electricity", "energy", "socket", "outlet"],
+  "PlugIcon": ["electricity", "energy", "electronics", "socket", "outlet"],
+  "PlugZapIcon": [
+    "electricity",
+    "energy",
+    "electronics",
+    "charge",
+    "charging",
+    "battery",
+    "connect"
   ],
   "PocketIcon": ["logo", "save"],
   "PocketKnifeIcon": [
@@ -7502,7 +7516,6 @@
     "subscription",
     "stream"
   ],
-  "PointerOffIcon": ["mouse"],
   "PointerIcon": ["mouse"],
   "PopcornIcon": [
     "cinema",
@@ -7514,23 +7527,10 @@
     "candy",
     "snack"
   ],
+  "PointerOffIcon": ["mouse"],
   "PopsicleIcon": ["ice lolly", "ice cream", "sweet", "food"],
   "PoundSterlingIcon": ["currency", "money", "payment"],
   "PowerOffIcon": ["on", "off", "device", "switch"],
-  "PowerIcon": [
-    "on",
-    "off",
-    "device",
-    "switch",
-    "toggle",
-    "binary",
-    "boolean",
-    "reboot",
-    "restart",
-    "button",
-    "keyboard",
-    "troubleshoot"
-  ],
   "PresentationIcon": [
     "screen",
     "whiteboard",
@@ -7547,33 +7547,22 @@
     "project",
     "planning"
   ],
+  "PowerIcon": [
+    "on",
+    "off",
+    "device",
+    "switch",
+    "toggle",
+    "binary",
+    "boolean",
+    "reboot",
+    "restart",
+    "button",
+    "keyboard",
+    "troubleshoot"
+  ],
   "PrinterCheckIcon": ["fax", "office", "device", "success", "printed"],
-  "ProjectorIcon": [
-    "cinema",
-    "film",
-    "movie",
-    "home video",
-    "presentation",
-    "slideshow",
-    "office",
-    "meeting",
-    "project",
-    "planning"
-  ],
   "PrinterIcon": ["fax", "office", "device"],
-  "PyramidIcon": [
-    "prism",
-    "triangle",
-    "triangular",
-    "hierarchy",
-    "structure",
-    "geometry",
-    "ancient",
-    "egyptian",
-    "landmark",
-    "tourism"
-  ],
-  "PuzzleIcon": ["component", "module", "part", "piece"],
   "ProportionsIcon": [
     "screens",
     "sizes",
@@ -7594,8 +7583,32 @@
     "portrait",
     "landscape"
   ],
+  "ProjectorIcon": [
+    "cinema",
+    "film",
+    "movie",
+    "home video",
+    "presentation",
+    "slideshow",
+    "office",
+    "meeting",
+    "project",
+    "planning"
+  ],
+  "PuzzleIcon": ["component", "module", "part", "piece"],
+  "PyramidIcon": [
+    "prism",
+    "triangle",
+    "triangular",
+    "hierarchy",
+    "structure",
+    "geometry",
+    "ancient",
+    "egyptian",
+    "landmark",
+    "tourism"
+  ],
   "QrCodeIcon": ["barcode", "scan", "link", "url", "information", "digital"],
-  "QuoteIcon": ["quotation"],
   "RabbitIcon": [
     "animal",
     "rodent",
@@ -7607,16 +7620,8 @@
     "speed",
     "hop"
   ],
+  "QuoteIcon": ["quotation"],
   "RadarIcon": ["scan", "sonar", "detect", "find", "locate"],
-  "RadicalIcon": [
-    "calculate",
-    "formula",
-    "math",
-    "operator",
-    "root",
-    "square",
-    "symbol"
-  ],
   "RadiationIcon": [
     "radioactive",
     "nuclear",
@@ -7628,8 +7633,15 @@
     "element",
     "molecule"
   ],
-  "RadioReceiverIcon": ["device", "music", "connect"],
-  "RadioIcon": ["signal", "broadcast", "connectivity", "live", "frequency"],
+  "RadicalIcon": [
+    "calculate",
+    "formula",
+    "math",
+    "operator",
+    "root",
+    "square",
+    "symbol"
+  ],
   "RadioTowerIcon": [
     "signal",
     "broadcast",
@@ -7637,6 +7649,9 @@
     "live",
     "frequency"
   ],
+  "RadioIcon": ["signal", "broadcast", "connectivity", "live", "frequency"],
+  "RadioReceiverIcon": ["device", "music", "connect"],
+  "RailSymbolIcon": ["railway", "train", "track", "line"],
   "RadiusIcon": [
     "shape",
     "circle",
@@ -7647,7 +7662,6 @@
     "measure",
     "size"
   ],
-  "RailSymbolIcon": ["railway", "train", "track", "line"],
   "RainbowIcon": [
     "colors",
     "colours",
@@ -7657,6 +7671,16 @@
     "arc",
     "clear",
     "sunshine"
+  ],
+  "RatIcon": [
+    "mouse",
+    "mice",
+    "gerbil",
+    "rodent",
+    "pet",
+    "pest",
+    "plague",
+    "disease"
   ],
   "RatioIcon": [
     "screens",
@@ -7692,16 +7716,6 @@
     "$",
     "¢"
   ],
-  "RatIcon": [
-    "mouse",
-    "mice",
-    "gerbil",
-    "rodent",
-    "pet",
-    "pest",
-    "plague",
-    "disease"
-  ],
   "ReceiptEuroIcon": [
     "bill",
     "voucher",
@@ -7710,16 +7724,6 @@
     "counterfoil",
     "currency",
     "€"
-  ],
-  "ReceiptJapaneseYenIcon": [
-    "bill",
-    "voucher",
-    "slip",
-    "check",
-    "counterfoil",
-    "currency",
-    "jpy",
-    "¥"
   ],
   "ReceiptIndianRupeeIcon": [
     "bill",
@@ -7731,25 +7735,15 @@
     "inr",
     "₹"
   ],
-  "ReceiptRussianRubleIcon": [
+  "ReceiptJapaneseYenIcon": [
     "bill",
     "voucher",
     "slip",
     "check",
     "counterfoil",
     "currency",
-    "rub",
-    "₽"
-  ],
-  "ReceiptSwissFrancIcon": [
-    "bill",
-    "voucher",
-    "slip",
-    "check",
-    "counterfoil",
-    "currency",
-    "chf",
-    "₣"
+    "jpy",
+    "¥"
   ],
   "ReceiptPoundSterlingIcon": [
     "bill",
@@ -7762,15 +7756,15 @@
     "gbp",
     "£"
   ],
-  "ReceiptTurkishLiraIcon": [
+  "ReceiptRussianRubleIcon": [
     "bill",
     "voucher",
     "slip",
     "check",
     "counterfoil",
     "currency",
-    "try",
-    "₺"
+    "rub",
+    "₽"
   ],
   "ReceiptTextIcon": [
     "bill",
@@ -7783,6 +7777,26 @@
     "terms",
     "conditions",
     "contract"
+  ],
+  "ReceiptTurkishLiraIcon": [
+    "bill",
+    "voucher",
+    "slip",
+    "check",
+    "counterfoil",
+    "currency",
+    "try",
+    "₺"
+  ],
+  "ReceiptSwissFrancIcon": [
+    "bill",
+    "voucher",
+    "slip",
+    "check",
+    "counterfoil",
+    "currency",
+    "chf",
+    "₣"
   ],
   "ReceiptIcon": [
     "bill",
@@ -7833,13 +7847,6 @@
     "headset",
     "goggles"
   ],
-  "RectangleVerticalIcon": [
-    "rectangle",
-    "aspect ratio",
-    "9:16",
-    "vertical",
-    "shape"
-  ],
   "RectangleHorizontalIcon": [
     "rectangle",
     "aspect ratio",
@@ -7847,20 +7854,17 @@
     "horizontal",
     "shape"
   ],
-  "RecycleIcon": ["sustainability", "salvage", "arrows"],
-  "RedoDotIcon": ["redo", "history", "step", "over", "forward"],
-  "Redo2Icon": ["undo", "rerun", "history"],
-  "RedoIcon": ["undo", "rerun", "history"],
-  "RefreshCcwIcon": [
-    "arrows",
-    "rotate",
-    "reload",
-    "rerun",
-    "synchronise",
-    "synchronize",
-    "circular",
-    "cycle"
+  "RectangleVerticalIcon": [
+    "rectangle",
+    "aspect ratio",
+    "9:16",
+    "vertical",
+    "shape"
   ],
+  "RecycleIcon": ["sustainability", "salvage", "arrows"],
+  "Redo2Icon": ["undo", "rerun", "history"],
+  "RedoDotIcon": ["redo", "history", "step", "over", "forward"],
+  "RedoIcon": ["undo", "rerun", "history"],
   "RefreshCcwDotIcon": [
     "arrows",
     "rotate",
@@ -7873,6 +7877,16 @@
     "code",
     "coding",
     "version control"
+  ],
+  "RefreshCcwIcon": [
+    "arrows",
+    "rotate",
+    "reload",
+    "rerun",
+    "synchronise",
+    "synchronize",
+    "circular",
+    "cycle"
   ],
   "RefreshCwOffIcon": [
     "rotate",
@@ -7890,16 +7904,6 @@
     "disconnect",
     "ignore"
   ],
-  "RefrigeratorIcon": [
-    "frigerator",
-    "fridge",
-    "freezer",
-    "cooler",
-    "icebox",
-    "chiller",
-    "cold storage"
-  ],
-  "RegexIcon": ["search", "text", "code"],
   "RefreshCwIcon": [
     "rotate",
     "reload",
@@ -7909,6 +7913,15 @@
     "arrows",
     "circular",
     "cycle"
+  ],
+  "RefrigeratorIcon": [
+    "frigerator",
+    "fridge",
+    "freezer",
+    "cooler",
+    "icebox",
+    "chiller",
+    "cold storage"
   ],
   "RemoveFormattingIcon": [
     "text",
@@ -7922,23 +7935,17 @@
     "clear"
   ],
   "Repeat1Icon": ["replay"],
-  "RepeatIcon": ["loop", "arrows"],
+  "RegexIcon": ["search", "text", "code"],
   "Repeat2Icon": ["arrows", "retweet", "repost", "share", "repeat", "loop"],
+  "RepeatIcon": ["loop", "arrows"],
+  "ReplaceIcon": ["search", "substitute", "swap", "change"],
   "ReplaceAllIcon": ["search", "substitute", "swap", "change"],
   "ReplyAllIcon": ["email"],
-  "ReplaceIcon": ["search", "substitute", "swap", "change"],
   "ReplyIcon": ["email"],
   "RewindIcon": ["music"],
   "RibbonIcon": ["awareness", "strip", "band", "tape", "strap", "cordon"],
   "RocketIcon": ["release", "boost", "launch", "space", "version"],
   "RockingChairIcon": ["chair", "furniture", "seat"],
-  "RollerCoasterIcon": [
-    "attraction",
-    "entertainment",
-    "amusement park",
-    "theme park",
-    "funfair"
-  ],
   "RoseIcon": [
     "roses",
     "thorns",
@@ -7962,6 +7969,13 @@
     "valentines day",
     "special occasion"
   ],
+  "RollerCoasterIcon": [
+    "attraction",
+    "entertainment",
+    "amusement park",
+    "theme park",
+    "funfair"
+  ],
   "Rotate3dIcon": ["gizmo", "transform", "orientation", "orbit", "axis"],
   "RotateCcwKeyIcon": ["password", "key", "refresh", "change"],
   "RotateCcwSquareIcon": [
@@ -7973,6 +7987,25 @@
     "45",
     "degrees",
     "°"
+  ],
+  "RotateCwSquareIcon": [
+    "right",
+    "clockwise",
+    "rotate",
+    "image",
+    "90",
+    "45",
+    "degrees",
+    "°"
+  ],
+  "RotateCwIcon": [
+    "arrow",
+    "right",
+    "clockwise",
+    "refresh",
+    "reload",
+    "rerun",
+    "redo"
   ],
   "RotateCcwIcon": [
     "arrow",
@@ -7990,16 +8023,6 @@
     "rewind",
     "reverse"
   ],
-  "RotateCwSquareIcon": [
-    "right",
-    "clockwise",
-    "rotate",
-    "image",
-    "90",
-    "45",
-    "degrees",
-    "°"
-  ],
   "RouteOffIcon": [
     "path",
     "journey",
@@ -8013,17 +8036,25 @@
     "closed",
     "blocked"
   ],
-  "RotateCwIcon": [
-    "arrow",
-    "right",
-    "clockwise",
-    "refresh",
-    "reload",
-    "rerun",
-    "redo"
-  ],
   "RouteIcon": ["path", "journey", "planner", "points", "stops", "stations"],
   "RouterIcon": ["computer", "server", "cloud"],
+  "Rows3Icon": [
+    "lines",
+    "list",
+    "queue",
+    "preview",
+    "paragraphs",
+    "parallel",
+    "series",
+    "split",
+    "vertical",
+    "horizontal",
+    "half",
+    "center",
+    "middle",
+    "even",
+    "drawers"
+  ],
   "Rows2Icon": [
     "lines",
     "list",
@@ -8042,23 +8073,6 @@
     "even",
     "drawer"
   ],
-  "Rows3Icon": [
-    "lines",
-    "list",
-    "queue",
-    "preview",
-    "paragraphs",
-    "parallel",
-    "series",
-    "split",
-    "vertical",
-    "horizontal",
-    "half",
-    "center",
-    "middle",
-    "even",
-    "drawers"
-  ],
   "Rows4Icon": [
     "lines",
     "list",
@@ -8076,48 +8090,6 @@
     "even",
     "drawers",
     "grill"
-  ],
-  "RulerIcon": [
-    "measurements",
-    "centimeters",
-    "cm",
-    "millimeters",
-    "mm",
-    "metre",
-    "foot",
-    "feet",
-    "inches",
-    "units",
-    "size",
-    "length",
-    "width",
-    "height",
-    "dimensions",
-    "depth",
-    "breadth",
-    "extent",
-    "stationery"
-  ],
-  "RulerDimensionLineIcon": [
-    "measurements",
-    "centimeters",
-    "cm",
-    "millimeters",
-    "mm",
-    "metre",
-    "foot",
-    "feet",
-    "inches",
-    "units",
-    "size",
-    "length",
-    "width",
-    "height",
-    "dimensions",
-    "depth",
-    "breadth",
-    "extent",
-    "stationery"
   ],
   "RssIcon": [
     "feed",
@@ -8143,6 +8115,49 @@
     "podcast"
   ],
   "RussianRubleIcon": ["currency", "money", "payment"],
+  "RulerDimensionLineIcon": [
+    "measurements",
+    "centimeters",
+    "cm",
+    "millimeters",
+    "mm",
+    "metre",
+    "foot",
+    "feet",
+    "inches",
+    "units",
+    "size",
+    "length",
+    "width",
+    "height",
+    "dimensions",
+    "depth",
+    "breadth",
+    "extent",
+    "stationery"
+  ],
+  "SailboatIcon": ["ship", "boat", "harbor", "harbour", "dock"],
+  "RulerIcon": [
+    "measurements",
+    "centimeters",
+    "cm",
+    "millimeters",
+    "mm",
+    "metre",
+    "foot",
+    "feet",
+    "inches",
+    "units",
+    "size",
+    "length",
+    "width",
+    "height",
+    "dimensions",
+    "depth",
+    "breadth",
+    "extent",
+    "stationery"
+  ],
   "SaladIcon": [
     "food",
     "vegetarian",
@@ -8154,48 +8169,16 @@
     "vegetables",
     "health"
   ],
-  "SailboatIcon": ["ship", "boat", "harbor", "harbour", "dock"],
   "SatelliteDishIcon": ["antenna", "receiver", "dish aerial", "saucer"],
   "SandwichIcon": ["food", "snack", "dish", "restaurant", "lunch", "meal"],
+  "SaudiRiyalIcon": ["currency", "money", "payment"],
   "SatelliteIcon": ["space station", "orbit", "transmitter"],
   "SaveAllIcon": ["floppy disks", "copy"],
-  "SaudiRiyalIcon": ["currency", "money", "payment"],
   "SaveOffIcon": ["floppy disk", "unsalvageable"],
   "SaveIcon": ["floppy disk"],
   "Scale3dIcon": ["gizmo", "transform", "size", "axis"],
   "ScaleIcon": ["balance", "legal", "license", "right", "rule", "law"],
-  "ScanBarcodeIcon": [
-    "checkout",
-    "till",
-    "cart",
-    "transaction",
-    "purchase",
-    "buy",
-    "product",
-    "packaging",
-    "retail",
-    "consumer"
-  ],
   "ScalingIcon": ["scale", "resize", "design"],
-  "ScanFaceIcon": [
-    "face",
-    "biometric",
-    "identification",
-    "authentication",
-    "2fa",
-    "access",
-    "login",
-    "dashed"
-  ],
-  "ScanHeartIcon": [
-    "health",
-    "heart rate",
-    "pulse",
-    "monitoring",
-    "healthiness",
-    "screening",
-    "dashed"
-  ],
   "ScanEyeIcon": [
     "preview",
     "zoom",
@@ -8215,6 +8198,46 @@
     "access",
     "login"
   ],
+  "ScanBarcodeIcon": [
+    "checkout",
+    "till",
+    "cart",
+    "transaction",
+    "purchase",
+    "buy",
+    "product",
+    "packaging",
+    "retail",
+    "consumer"
+  ],
+  "ScanFaceIcon": [
+    "face",
+    "biometric",
+    "identification",
+    "authentication",
+    "2fa",
+    "access",
+    "login",
+    "dashed"
+  ],
+  "ScanHeartIcon": [
+    "health",
+    "heart rate",
+    "pulse",
+    "monitoring",
+    "healthiness",
+    "screening",
+    "dashed"
+  ],
+  "ScanQrCodeIcon": [
+    "barcode",
+    "scan",
+    "qrcode",
+    "url",
+    "information",
+    "digital",
+    "scanner"
+  ],
   "ScanLineIcon": [
     "checkout",
     "till",
@@ -8229,15 +8252,6 @@
     "qr-code",
     "dashed"
   ],
-  "ScanQrCodeIcon": [
-    "barcode",
-    "scan",
-    "qrcode",
-    "url",
-    "information",
-    "digital",
-    "scanner"
-  ],
   "ScanSearchIcon": [
     "preview",
     "zoom",
@@ -8248,6 +8262,7 @@
     "focus",
     "lens"
   ],
+  "ScanTextIcon": ["recognition", "read", "translate", "copy", "lines"],
   "ScanIcon": [
     "qr-code",
     "barcode",
@@ -8268,7 +8283,6 @@
     "square",
     "dashed"
   ],
-  "ScanTextIcon": ["recognition", "read", "translate", "copy", "lines"],
   "SchoolIcon": [
     "building",
     "education",
@@ -8294,7 +8308,6 @@
     "assignment",
     "exam"
   ],
-  "ScissorsIcon": ["cut", "snip", "chop", "stationery", "crafts"],
   "ScissorsLineDashedIcon": [
     "cut here",
     "along",
@@ -8305,22 +8318,9 @@
     "instructions",
     "diagram"
   ],
+  "ScissorsIcon": ["cut", "snip", "chop", "stationery", "crafts"],
   "ScreenShareOffIcon": ["desktop", "disconnect", "monitor"],
   "ScreenShareIcon": ["host", "desktop", "monitor"],
-  "ScrollTextIcon": [
-    "paper",
-    "log",
-    "scripture",
-    "document",
-    "notes",
-    "parchment",
-    "list",
-    "long",
-    "script",
-    "story",
-    "code",
-    "coding"
-  ],
   "ScrollIcon": [
     "paper",
     "log",
@@ -8346,15 +8346,19 @@
     "tick",
     "lens"
   ],
-  "SearchCodeIcon": [
-    "find",
-    "scan",
-    "magnifier",
-    "magnifying glass",
-    "grep",
-    "chevrons",
-    "<>",
-    "lens"
+  "ScrollTextIcon": [
+    "paper",
+    "log",
+    "scripture",
+    "document",
+    "notes",
+    "parchment",
+    "list",
+    "long",
+    "script",
+    "story",
+    "code",
+    "coding"
   ],
   "SearchSlashIcon": [
     "find",
@@ -8366,6 +8370,16 @@
     "cancel",
     "abort",
     "/",
+    "lens"
+  ],
+  "SearchCodeIcon": [
+    "find",
+    "scan",
+    "magnifier",
+    "magnifying glass",
+    "grep",
+    "chevrons",
+    "<>",
     "lens"
   ],
   "SearchXIcon": [
@@ -8380,14 +8394,6 @@
     "lens"
   ],
   "SearchIcon": ["find", "scan", "magnifier", "magnifying glass", "lens"],
-  "SendHorizontalIcon": [
-    "email",
-    "message",
-    "mail",
-    "paper airplane",
-    "paper aeroplane",
-    "submit"
-  ],
   "SectionIcon": [
     "mark",
     "typography",
@@ -8398,7 +8404,7 @@
     "prose",
     "symbol"
   ],
-  "SendIcon": [
+  "SendHorizontalIcon": [
     "email",
     "message",
     "mail",
@@ -8417,13 +8423,20 @@
     "layer",
     "order"
   ],
-  "SeparatorVerticalIcon": ["move", "split"],
+  "SendIcon": [
+    "email",
+    "message",
+    "mail",
+    "paper airplane",
+    "paper aeroplane",
+    "submit"
+  ],
   "SeparatorHorizontalIcon": ["move", "split"],
   "ServerCogIcon": ["cloud", "storage", "computing", "cog", "gear"],
+  "SeparatorVerticalIcon": ["move", "split"],
   "ServerCrashIcon": ["cloud", "storage", "problem", "error"],
   "ServerOffIcon": ["cloud", "storage"],
   "ServerIcon": ["cloud", "storage"],
-  "Settings2Icon": ["cog", "edit", "gear", "preferences", "slider"],
   "ShapesIcon": [
     "triangle",
     "equilateral",
@@ -8437,6 +8450,7 @@
     "learning"
   ],
   "SettingsIcon": ["cog", "edit", "gear", "preferences"],
+  "Settings2Icon": ["cog", "edit", "gear", "preferences", "slider"],
   "Share2Icon": ["network", "connections"],
   "ShareIcon": ["network", "connections"],
   "SheetIcon": ["spreadsheets", "table", "excel"],
@@ -8594,6 +8608,35 @@
     "inactive",
     "/"
   ],
+  "ShieldEllipsisIcon": [
+    "cybersecurity",
+    "securing",
+    "protecting",
+    "guarding",
+    "armoring",
+    "armouring",
+    "defending",
+    "blocking",
+    "preventing",
+    "antivirus",
+    "detecting",
+    "scanning",
+    "finding",
+    "auditing",
+    "admin",
+    "verifying",
+    "crest",
+    "upgrading",
+    "loader",
+    "loading",
+    "throbber",
+    "progress",
+    "dots",
+    "more",
+    "etc",
+    "...",
+    "…"
+  ],
   "ShieldCheckIcon": [
     "cybersecurity",
     "secured",
@@ -8648,65 +8691,6 @@
     "checked",
     "crest",
     "bravery"
-  ],
-  "ShieldEllipsisIcon": [
-    "cybersecurity",
-    "securing",
-    "protecting",
-    "guarding",
-    "armoring",
-    "armouring",
-    "defending",
-    "blocking",
-    "preventing",
-    "antivirus",
-    "detecting",
-    "scanning",
-    "finding",
-    "auditing",
-    "admin",
-    "verifying",
-    "crest",
-    "upgrading",
-    "loader",
-    "loading",
-    "throbber",
-    "progress",
-    "dots",
-    "more",
-    "etc",
-    "...",
-    "…"
-  ],
-  "ShieldMinusIcon": [
-    "unshield",
-    "cybersecurity",
-    "unsecure",
-    "unguard",
-    "unblock",
-    "antivirus",
-    "clean",
-    "clear",
-    "disinfect",
-    "patch",
-    "fix",
-    "stop",
-    "cancel",
-    "remove",
-    "relax",
-    "admin",
-    "crest",
-    "bravery",
-    "weakened",
-    "damaged",
-    "hit",
-    "unarm",
-    "disable",
-    "deactivate",
-    "decommission",
-    "downgraded",
-    "minimum",
-    "-"
   ],
   "ShieldHalfIcon": [
     "cybersecurity",
@@ -8763,6 +8747,36 @@
     "army",
     "cadet",
     "scout"
+  ],
+  "ShieldMinusIcon": [
+    "unshield",
+    "cybersecurity",
+    "unsecure",
+    "unguard",
+    "unblock",
+    "antivirus",
+    "clean",
+    "clear",
+    "disinfect",
+    "patch",
+    "fix",
+    "stop",
+    "cancel",
+    "remove",
+    "relax",
+    "admin",
+    "crest",
+    "bravery",
+    "weakened",
+    "damaged",
+    "hit",
+    "unarm",
+    "disable",
+    "deactivate",
+    "decommission",
+    "downgraded",
+    "minimum",
+    "-"
   ],
   "ShieldOffIcon": [
     "unshielded",
@@ -8971,6 +8985,22 @@
     "eliminated",
     "exterminated"
   ],
+  "ShipWheelIcon": [
+    "steering",
+    "rudder",
+    "boat",
+    "knots",
+    "nautical mile",
+    "maritime",
+    "sailing",
+    "yacht",
+    "cruise",
+    "ocean liner",
+    "tanker",
+    "vessel",
+    "navy",
+    "trip"
+  ],
   "ShieldIcon": [
     "cybersecurity",
     "secure",
@@ -9015,22 +9045,6 @@
     "cadet",
     "scout"
   ],
-  "ShipWheelIcon": [
-    "steering",
-    "rudder",
-    "boat",
-    "knots",
-    "nautical mile",
-    "maritime",
-    "sailing",
-    "yacht",
-    "cruise",
-    "ocean liner",
-    "tanker",
-    "vessel",
-    "navy",
-    "trip"
-  ],
   "ShipIcon": [
     "boat",
     "knots",
@@ -9068,20 +9082,8 @@
     "items",
     "ingredients"
   ],
-  "ShowerHeadIcon": ["shower", "bath", "bathroom", "amenities", "services"],
   "ShovelIcon": ["dig", "spade", "treasure"],
-  "ShrimpIcon": [
-    "seafood",
-    "shellfish",
-    "crustacean",
-    "prawn",
-    "scallop",
-    "whelk",
-    "arthropod",
-    "littleneck",
-    "quahog",
-    "cherrystone"
-  ],
+  "ShowerHeadIcon": ["shower", "bath", "bathroom", "amenities", "services"],
   "ShredderIcon": [
     "file",
     "paper",
@@ -9104,8 +9106,21 @@
     "waste",
     "permanent"
   ],
-  "ShrinkIcon": ["scale", "fullscreen"],
+  "ShrimpIcon": [
+    "seafood",
+    "shellfish",
+    "crustacean",
+    "prawn",
+    "scallop",
+    "whelk",
+    "arthropod",
+    "littleneck",
+    "quahog",
+    "cherrystone"
+  ],
+  "ShuffleIcon": ["music", "random", "reorder"],
   "ShrubIcon": ["forest", "undergrowth", "park", "nature"],
+  "ShrinkIcon": ["scale", "fullscreen"],
   "SigmaIcon": [
     "sum",
     "calculate",
@@ -9114,7 +9129,6 @@
     "enumeration",
     "enumerate"
   ],
-  "ShuffleIcon": ["music", "random", "reorder"],
   "SignalHighIcon": [
     "connection",
     "wireless",
@@ -9145,16 +9159,6 @@
     "4g",
     "5g"
   ],
-  "SignalIcon": [
-    "connection",
-    "wireless",
-    "gsm",
-    "phone",
-    "2g",
-    "3g",
-    "4g",
-    "5g"
-  ],
   "SignalZeroIcon": [
     "connection",
     "wireless",
@@ -9165,6 +9169,16 @@
     "4g",
     "5g",
     "lost"
+  ],
+  "SignalIcon": [
+    "connection",
+    "wireless",
+    "gsm",
+    "phone",
+    "2g",
+    "3g",
+    "4g",
+    "5g"
   ],
   "SignatureIcon": [
     "text",
@@ -9189,9 +9203,7 @@
     "unique"
   ],
   "SignpostBigIcon": ["bidirectional", "left", "right", "east", "west"],
-  "SignpostIcon": ["bidirectional", "left", "right", "east", "west"],
   "SkipBackIcon": ["arrow", "previous", "music"],
-  "SkipForwardIcon": ["arrow", "skip", "next", "music"],
   "SirenIcon": [
     "police",
     "ambulance",
@@ -9201,21 +9213,22 @@
     "alarm",
     "light"
   ],
+  "SignpostIcon": ["bidirectional", "left", "right", "east", "west"],
+  "SkipForwardIcon": ["arrow", "skip", "next", "music"],
   "SlackIcon": ["logo"],
   "SkullIcon": ["death", "danger", "bone"],
-  "SlashIcon": ["divide", "division", "or", "/"],
   "SliceIcon": ["cutter", "scalpel", "knife"],
+  "SlashIcon": ["divide", "division", "or", "/"],
   "SlidersHorizontalIcon": ["settings", "filters", "controls"],
   "SlidersVerticalIcon": ["settings", "controls"],
+  "SmartphoneChargingIcon": ["phone", "cellphone", "device", "power", "screen"],
   "SmartphoneNfcIcon": [
     "contactless",
     "payment",
     "near-field communication",
     "screen"
   ],
-  "SmartphoneChargingIcon": ["phone", "cellphone", "device", "power", "screen"],
   "SmartphoneIcon": ["phone", "cellphone", "device", "screen"],
-  "SmileIcon": ["emoji", "face", "happy", "good", "emotion"],
   "SmilePlusIcon": [
     "emoji",
     "face",
@@ -9226,8 +9239,9 @@
     "reaction",
     "add"
   ],
-  "SnailIcon": ["animal", "insect", "slow", "speed", "delicacy", "spiral"],
   "SnowflakeIcon": ["cold", "weather", "freeze", "snow", "winter"],
+  "SmileIcon": ["emoji", "face", "happy", "good", "emotion"],
+  "SnailIcon": ["animal", "insect", "slow", "speed", "delicacy", "spiral"],
   "SoapDispenserDropletIcon": [
     "wash",
     "bath",
@@ -9276,8 +9290,8 @@
     "twinkle",
     "celebration"
   ],
-  "SparklesIcon": ["stars", "effect", "filter", "night", "magic"],
   "SpadeIcon": ["shape", "suit", "playing", "cards"],
+  "SparklesIcon": ["stars", "effect", "filter", "night", "magic"],
   "SpeakerIcon": [
     "sound",
     "audio",
@@ -9309,16 +9323,6 @@
     "linter",
     "a"
   ],
-  "SplinePointerIcon": [
-    "path",
-    "tool",
-    "curve",
-    "node",
-    "click",
-    "pointer",
-    "target",
-    "vector"
-  ],
   "SpellCheckIcon": [
     "spelling",
     "error",
@@ -9331,7 +9335,16 @@
     "a"
   ],
   "SplineIcon": ["path", "pen", "tool", "shape", "curve", "draw"],
-  "SplitIcon": ["break", "disband", "divide", "separate", "branch", "disunite"],
+  "SplinePointerIcon": [
+    "path",
+    "tool",
+    "curve",
+    "node",
+    "click",
+    "pointer",
+    "target",
+    "vector"
+  ],
   "SpoolIcon": [
     "bobbin",
     "spindle",
@@ -9341,6 +9354,7 @@
     "sewing",
     "needlework"
   ],
+  "SplitIcon": ["break", "disband", "divide", "separate", "branch", "disunite"],
   "SprayCanIcon": [
     "paint",
     "color",
@@ -9350,17 +9364,6 @@
     "deodorant",
     "shaving foam",
     "air freshener"
-  ],
-  "SproutIcon": [
-    "eco",
-    "green",
-    "growth",
-    "leaf",
-    "nature",
-    "plant",
-    "seed",
-    "spring",
-    "sustainability"
   ],
   "SpotlightIcon": [
     "winner",
@@ -9385,6 +9388,17 @@
     "followspot",
     "best",
     "highlight"
+  ],
+  "SproutIcon": [
+    "eco",
+    "green",
+    "growth",
+    "leaf",
+    "nature",
+    "plant",
+    "seed",
+    "spring",
+    "sustainability"
   ],
   "SquareActivityIcon": [
     "pulse",
@@ -9458,12 +9472,6 @@
     "south-west",
     "diagonal"
   ],
-  "SquareArrowOutUpLeftIcon": [
-    "outwards",
-    "direction",
-    "north-west",
-    "diagonal"
-  ],
   "SquareArrowOutDownRightIcon": [
     "outwards",
     "direction",
@@ -9480,13 +9488,11 @@
     "external",
     "link"
   ],
-  "SquareArrowUpLeftIcon": [
+  "SquareArrowOutUpLeftIcon": [
+    "outwards",
     "direction",
     "north-west",
-    "diagonal",
-    "sign",
-    "keyboard",
-    "button"
+    "diagonal"
   ],
   "SquareArrowRightIcon": [
     "next",
@@ -9497,6 +9503,14 @@
     "keyboard",
     "button",
     "->"
+  ],
+  "SquareArrowUpLeftIcon": [
+    "direction",
+    "north-west",
+    "diagonal",
+    "sign",
+    "keyboard",
+    "button"
   ],
   "SquareArrowUpRightIcon": [
     "direction",
@@ -9526,7 +9540,13 @@
     "wildcard",
     "*"
   ],
-  "SquareCheckBigIcon": ["done", "todo", "tick", "complete", "task"],
+  "SquareBottomDashedScissorsIcon": [
+    "cut",
+    "snippet",
+    "chop",
+    "stationery",
+    "crafts"
+  ],
   "SquareChartGanttIcon": [
     "projects",
     "manage",
@@ -9548,13 +9568,7 @@
     "toolbar",
     "button"
   ],
-  "SquareBottomDashedScissorsIcon": [
-    "cut",
-    "snippet",
-    "chop",
-    "stationery",
-    "crafts"
-  ],
+  "SquareCheckBigIcon": ["done", "todo", "tick", "complete", "task"],
   "SquareCheckIcon": ["done", "todo", "tick", "complete", "task"],
   "SquareChevronDownIcon": ["back", "menu", "panel"],
   "SquareChevronLeftIcon": [
@@ -9599,16 +9613,6 @@
     "panel",
     "^"
   ],
-  "SquareDashedBottomIcon": [
-    "rectangle",
-    "aspect ratio",
-    "1:1",
-    "shape",
-    "snippet",
-    "code",
-    "coding"
-  ],
-  "SquareCodeIcon": ["gist", "source", "programming", "html", "xml", "coding"],
   "SquareDashedBottomCodeIcon": [
     "rectangle",
     "aspect ratio",
@@ -9618,20 +9622,15 @@
     "code",
     "coding"
   ],
-  "SquareDashedTopSolidIcon": [
-    "square",
-    "border",
-    "width",
-    "layout",
-    "style",
-    "design",
-    "rectangular",
-    "marquee",
-    "dashed",
-    "box",
+  "SquareCodeIcon": ["gist", "source", "programming", "html", "xml", "coding"],
+  "SquareDashedBottomIcon": [
     "rectangle",
     "aspect ratio",
-    "1:1"
+    "1:1",
+    "shape",
+    "snippet",
+    "code",
+    "coding"
   ],
   "SquareDashedKanbanIcon": [
     "projects",
@@ -9674,9 +9673,24 @@
     "dashed",
     "box"
   ],
+  "SquareDashedTopSolidIcon": [
+    "square",
+    "border",
+    "width",
+    "layout",
+    "style",
+    "design",
+    "rectangular",
+    "marquee",
+    "dashed",
+    "box",
+    "rectangle",
+    "aspect ratio",
+    "1:1"
+  ],
   "SquareDivideIcon": ["calculate", "math", "÷", "/"],
-  "SquareEqualIcon": ["calculate", "="],
   "SquareDotIcon": ["git", "diff", "modified", "."],
+  "SquareEqualIcon": ["calculate", "="],
   "SquareFunctionIcon": ["programming", "code", "automation", "math"],
   "SquareKanbanIcon": [
     "projects",
@@ -9722,27 +9736,6 @@
     "package"
   ],
   "SquareMIcon": ["metro", "subway", "underground", "track", "line"],
-  "SquareMousePointerIcon": [
-    "inspector",
-    "element",
-    "mouse",
-    "click",
-    "pointer",
-    "box",
-    "browser",
-    "selector",
-    "target",
-    "dom",
-    "node"
-  ],
-  "SquareMenuIcon": [
-    "bars",
-    "navigation",
-    "hamburger",
-    "options",
-    "menu bar",
-    "panel"
-  ],
   "SquareMinusIcon": [
     "subtract",
     "remove",
@@ -9767,8 +9760,29 @@
     "minimum",
     "downgrade"
   ],
+  "SquareMenuIcon": [
+    "bars",
+    "navigation",
+    "hamburger",
+    "options",
+    "menu bar",
+    "panel"
+  ],
   "SquareParkingOffIcon": ["parking lot", "car park", "no parking"],
-  "SquareParkingIcon": ["parking lot", "car park"],
+  "SquareMousePointerIcon": [
+    "inspector",
+    "element",
+    "mouse",
+    "click",
+    "pointer",
+    "box",
+    "browser",
+    "selector",
+    "target",
+    "dom",
+    "node"
+  ],
+  "SquarePauseIcon": ["music", "audio", "stop"],
   "SquarePenIcon": [
     "pencil",
     "edit",
@@ -9786,16 +9800,16 @@
     "stationery",
     "artist"
   ],
-  "SquarePauseIcon": ["music", "audio", "stop"],
-  "SquarePiIcon": [
-    "constant",
-    "code",
-    "coding",
-    "programming",
-    "symbol",
-    "trigonometry",
-    "geometry",
-    "formula"
+  "SquareParkingIcon": ["parking lot", "car park"],
+  "SquarePercentIcon": [
+    "verified",
+    "unverified",
+    "sale",
+    "discount",
+    "offer",
+    "marketing",
+    "sticker",
+    "price tag"
   ],
   "SquarePilcrowIcon": [
     "paragraph",
@@ -9808,15 +9822,15 @@
     "prose",
     "symbol"
   ],
-  "SquarePercentIcon": [
-    "verified",
-    "unverified",
-    "sale",
-    "discount",
-    "offer",
-    "marketing",
-    "sticker",
-    "price tag"
+  "SquarePiIcon": [
+    "constant",
+    "code",
+    "coding",
+    "programming",
+    "symbol",
+    "trigonometry",
+    "geometry",
+    "formula"
   ],
   "SquarePlayIcon": ["music", "audio", "video", "start", "run"],
   "SquarePlusIcon": [
@@ -9840,20 +9854,6 @@
     "coding",
     "+"
   ],
-  "SquarePowerIcon": [
-    "on",
-    "off",
-    "device",
-    "switch",
-    "toggle",
-    "binary",
-    "boolean",
-    "reboot",
-    "restart",
-    "button",
-    "keyboard",
-    "troubleshoot"
-  ],
   "SquareRadicalIcon": [
     "calculate",
     "formula",
@@ -9873,15 +9873,27 @@
     "round",
     "rounded"
   ],
-  "SquareSlashIcon": [
-    "git",
-    "diff",
-    "ignored",
-    "divide",
-    "division",
-    "shortcut",
-    "or",
-    "/"
+  "SquareSigmaIcon": [
+    "sum",
+    "calculate",
+    "formula",
+    "math",
+    "enumeration",
+    "enumerate"
+  ],
+  "SquarePowerIcon": [
+    "on",
+    "off",
+    "device",
+    "switch",
+    "toggle",
+    "binary",
+    "boolean",
+    "reboot",
+    "restart",
+    "button",
+    "keyboard",
+    "troubleshoot"
   ],
   "SquareScissorsIcon": [
     "cut",
@@ -9892,16 +9904,30 @@
     "toolbar",
     "button"
   ],
-  "SquareSplitVerticalIcon": ["split", "divide"],
-  "SquareSigmaIcon": [
-    "sum",
-    "calculate",
-    "formula",
-    "math",
-    "enumeration",
-    "enumerate"
+  "SquareSlashIcon": [
+    "git",
+    "diff",
+    "ignored",
+    "divide",
+    "division",
+    "shortcut",
+    "or",
+    "/"
   ],
+  "SquareSplitHorizontalIcon": ["split", "divide"],
+  "SquareSplitVerticalIcon": ["split", "divide"],
   "SquareSquareIcon": ["float", "center", "rectangle"],
+  "SquareStackIcon": [
+    "versions",
+    "clone",
+    "copy",
+    "duplicate",
+    "multiple",
+    "revisions",
+    "version control",
+    "backup",
+    "history"
+  ],
   "SquareStarIcon": [
     "badge",
     "medal",
@@ -9917,22 +9943,21 @@
     "silver",
     "gold"
   ],
-  "SquareSplitHorizontalIcon": ["split", "divide"],
-  "SquareStackIcon": [
-    "versions",
-    "clone",
-    "copy",
-    "duplicate",
-    "multiple",
-    "revisions",
-    "version control",
-    "backup",
-    "history"
-  ],
   "SquareStopIcon": ["media", "music"],
-  "SquareUserRoundIcon": ["person", "account", "contact"],
-  "SquareTerminalIcon": ["code", "command line", "prompt", "shell"],
   "SquareUserIcon": ["person", "account", "contact"],
+  "SquareTerminalIcon": ["code", "command line", "prompt", "shell"],
+  "SquareUserRoundIcon": ["person", "account", "contact"],
+  "SquareXIcon": [
+    "cancel",
+    "close",
+    "delete",
+    "remove",
+    "times",
+    "clear",
+    "math",
+    "multiply",
+    "multiplication"
+  ],
   "SquareIcon": [
     "stop",
     "playback",
@@ -9954,17 +9979,6 @@
     "shape",
     "vector"
   ],
-  "SquareXIcon": [
-    "cancel",
-    "close",
-    "delete",
-    "remove",
-    "times",
-    "clear",
-    "math",
-    "multiply",
-    "multiplication"
-  ],
   "SquaresIntersectIcon": [
     "square",
     "pathfinder",
@@ -9972,16 +9986,6 @@
     "intersect",
     "shape",
     "include",
-    "vector"
-  ],
-  "SquaresUniteIcon": [
-    "square",
-    "pathfinder",
-    "path",
-    "unite",
-    "union",
-    "shape",
-    "merge",
     "vector"
   ],
   "SquaresSubtractIcon": [
@@ -10005,6 +10009,16 @@
     "coding",
     "version control"
   ],
+  "SquaresUniteIcon": [
+    "square",
+    "pathfinder",
+    "path",
+    "unite",
+    "union",
+    "shape",
+    "merge",
+    "vector"
+  ],
   "SquircleIcon": ["shape"],
   "SquirrelIcon": [
     "animal",
@@ -10017,14 +10031,14 @@
     "storage",
     "stash"
   ],
+  "StampIcon": ["mark", "print", "clone", "loyalty", "library"],
   "StarHalfIcon": ["bookmark", "favorite", "like", "review", "rating"],
   "StarOffIcon": ["dislike", "unlike", "remove", "unrate"],
-  "StampIcon": ["mark", "print", "clone", "loyalty", "library"],
   "StarIcon": ["bookmark", "favorite", "like", "review", "rating"],
   "StepBackIcon": ["arrow", "previous", "music", "left", "reverse"],
   "StepForwardIcon": ["arrow", "next", "music", "right", "continue"],
-  "StethoscopeIcon": ["phonendoscope", "medical", "heart", "lungs", "sound"],
   "StickerIcon": ["reaction", "emotion", "smile", "happy", "feedback"],
+  "StethoscopeIcon": ["phonendoscope", "medical", "heart", "lungs", "sound"],
   "StickyNoteIcon": [
     "post-it",
     "comment",
@@ -10043,12 +10057,13 @@
     "stationary",
     "office"
   ],
-  "StretchHorizontalIcon": ["items", "flex", "justify", "distribute"],
   "StoreIcon": ["shop", "supermarket", "stand", "boutique", "building"],
-  "StretchVerticalIcon": ["items", "flex", "justify", "distribute"],
-  "SubscriptIcon": ["text"],
+  "StretchHorizontalIcon": ["items", "flex", "justify", "distribute"],
   "StrikethroughIcon": ["cross out", "delete", "remove", "format"],
   "SunDimIcon": ["brightness", "dim", "low", "brightness low"],
+  "StretchVerticalIcon": ["items", "flex", "justify", "distribute"],
+  "SubscriptIcon": ["text"],
+  "SunMediumIcon": ["brightness", "medium"],
   "SunMoonIcon": [
     "dark",
     "light",
@@ -10060,9 +10075,7 @@
     "system theme",
     "appearance"
   ],
-  "SunMediumIcon": ["brightness", "medium"],
   "SunIcon": ["brightness", "weather", "light", "summer"],
-  "SunriseIcon": ["weather", "time", "morning", "day"],
   "SunSnowIcon": [
     "weather",
     "air conditioning",
@@ -10071,8 +10084,7 @@
     "cold",
     "seasons"
   ],
-  "SuperscriptIcon": ["text", "exponent"],
-  "SunsetIcon": ["weather", "time", "evening", "night"],
+  "SunriseIcon": ["weather", "time", "morning", "day"],
   "SwatchBookIcon": [
     "colors",
     "colours",
@@ -10090,8 +10102,12 @@
     "textile",
     "carpet"
   ],
-  "SwissFrancIcon": ["currency", "money", "payment"],
+  "SunsetIcon": ["weather", "time", "evening", "night"],
+  "SuperscriptIcon": ["text", "exponent"],
   "SwitchCameraIcon": ["photo", "selfie", "front", "back"],
+  "SwissFrancIcon": ["currency", "money", "payment"],
+  "SwordIcon": ["battle", "challenge", "game", "war", "weapon"],
+  "SwordsIcon": ["battle", "challenge", "game", "war", "weapon"],
   "SyringeIcon": [
     "medicine",
     "medical",
@@ -10101,11 +10117,18 @@
     "nozzle",
     "blood"
   ],
-  "SwordsIcon": ["battle", "challenge", "game", "war", "weapon"],
-  "SwordIcon": ["battle", "challenge", "game", "war", "weapon"],
-  "TableCellsMergeIcon": ["spreadsheet", "grid", "row"],
   "Table2Icon": ["spreadsheet", "grid"],
+  "TableCellsMergeIcon": ["spreadsheet", "grid", "row"],
   "TableCellsSplitIcon": ["spreadsheet", "grid", "row"],
+  "TableColumnsSplitIcon": [
+    "spreadsheet",
+    "grid",
+    "cut",
+    "break",
+    "divide",
+    "separate",
+    "segment"
+  ],
   "TableOfContentsIcon": [
     "toc",
     "outline",
@@ -10120,15 +10143,6 @@
     "manual",
     "knowledge base",
     "faq"
-  ],
-  "TableColumnsSplitIcon": [
-    "spreadsheet",
-    "grid",
-    "cut",
-    "break",
-    "divide",
-    "separate",
-    "segment"
   ],
   "TablePropertiesIcon": [
     "property list",
@@ -10149,6 +10163,14 @@
     "segment"
   ],
   "TableIcon": ["spreadsheet", "grid"],
+  "TabletSmartphoneIcon": [
+    "responsive",
+    "screens",
+    "browser",
+    "testing",
+    "mobile"
+  ],
+  "TabletIcon": ["device"],
   "TabletsIcon": [
     "medicine",
     "medication",
@@ -10157,14 +10179,7 @@
     "pills",
     "pharmacy"
   ],
-  "TabletIcon": ["device"],
-  "TabletSmartphoneIcon": [
-    "responsive",
-    "screens",
-    "browser",
-    "testing",
-    "mobile"
-  ],
+  "TagIcon": ["label", "badge", "ticket", "mark"],
   "Tally1Icon": [
     "count",
     "score",
@@ -10178,8 +10193,6 @@
     "cell",
     "sentence"
   ],
-  "TagsIcon": ["labels", "badges", "tickets", "marks", "copy", "multiple"],
-  "TagIcon": ["label", "badge", "ticket", "mark"],
   "Tally2Icon": [
     "count",
     "score",
@@ -10194,14 +10207,16 @@
     "cell",
     "sentence"
   ],
-  "Tally4Icon": [
+  "TagsIcon": ["labels", "badges", "tickets", "marks", "copy", "multiple"],
+  "Tally3Icon": [
     "count",
     "score",
     "enumerate",
     "days",
-    "4",
-    "fourth",
-    "quadruple",
+    "three",
+    "3",
+    "third",
+    "triple",
     "bars",
     "prison",
     "cell",
@@ -10222,15 +10237,14 @@
     "slash",
     "/"
   ],
-  "Tally3Icon": [
+  "Tally4Icon": [
     "count",
     "score",
     "enumerate",
     "days",
-    "three",
-    "3",
-    "third",
-    "triple",
+    "4",
+    "fourth",
+    "quadruple",
     "bars",
     "prison",
     "cell",
@@ -10275,7 +10289,6 @@
     "wilderness",
     "outdoors"
   ],
-  "TerminalIcon": ["code", "command line", "prompt", "shell"],
   "TentIcon": [
     "tipi",
     "teepee",
@@ -10291,18 +10304,7 @@
     "wilderness",
     "outdoors"
   ],
-  "TestTubeIcon": [
-    "tube",
-    "vial",
-    "phial",
-    "flask",
-    "ampoule",
-    "ampule",
-    "lab",
-    "chemistry",
-    "experiment",
-    "test"
-  ],
+  "TerminalIcon": ["code", "command line", "prompt", "shell"],
   "TestTubeDiagonalIcon": [
     "tube",
     "vial",
@@ -10327,10 +10329,22 @@
     "experiment",
     "test"
   ],
+  "TestTubeIcon": [
+    "tube",
+    "vial",
+    "phial",
+    "flask",
+    "ampoule",
+    "ampule",
+    "lab",
+    "chemistry",
+    "experiment",
+    "test"
+  ],
   "TextAlignCenterIcon": ["text", "alignment", "center"],
   "TextAlignEndIcon": ["text", "alignment", "right"],
-  "TextAlignStartIcon": ["text", "alignment", "left", "list"],
   "TextAlignJustifyIcon": ["text", "alignment", "justified", "menu", "list"],
+  "TextAlignStartIcon": ["text", "alignment", "left", "list"],
   "TextCursorInputIcon": ["select"],
   "TextCursorIcon": ["select"],
   "TextInitialIcon": [
@@ -10355,24 +10369,7 @@
     "lens"
   ],
   "TextSelectIcon": ["find", "search", "selection", "dashed"],
-  "TheaterIcon": [
-    "theater",
-    "theatre",
-    "entertainment",
-    "podium",
-    "stage",
-    "musical"
-  ],
   "TextWrapIcon": ["words", "lines", "break", "paragraph"],
-  "ThermometerSunIcon": [
-    "temperature",
-    "celsius",
-    "fahrenheit",
-    "weather",
-    "warm",
-    "hot"
-  ],
-  "ThermometerIcon": ["temperature", "celsius", "fahrenheit", "weather"],
   "ThermometerSnowflakeIcon": [
     "temperature",
     "celsius",
@@ -10382,8 +10379,24 @@
     "freeze",
     "freezing"
   ],
+  "TheaterIcon": [
+    "theater",
+    "theatre",
+    "entertainment",
+    "podium",
+    "stage",
+    "musical"
+  ],
+  "ThermometerSunIcon": [
+    "temperature",
+    "celsius",
+    "fahrenheit",
+    "weather",
+    "warm",
+    "hot"
+  ],
+  "ThermometerIcon": ["temperature", "celsius", "fahrenheit", "weather"],
   "ThumbsUpIcon": ["like", "good", "emotion"],
-  "ThumbsDownIcon": ["dislike", "bad", "emotion"],
   "TicketCheckIcon": [
     "entry",
     "pass",
@@ -10401,6 +10414,7 @@
     "checked",
     "used"
   ],
+  "ThumbsDownIcon": ["dislike", "bad", "emotion"],
   "TicketMinusIcon": [
     "entry",
     "pass",
@@ -10520,7 +10534,6 @@
     "check-in",
     "airport"
   ],
-  "TimerResetIcon": ["time", "timer", "stopwatch"],
   "TicketsIcon": [
     "trip",
     "travel",
@@ -10533,13 +10546,14 @@
     "perforated",
     "dashed"
   ],
-  "TimerIcon": ["time", "timer", "stopwatch"],
   "TimerOffIcon": ["time", "timer", "stopwatch"],
+  "TimerResetIcon": ["time", "timer", "stopwatch"],
+  "TimerIcon": ["time", "timer", "stopwatch"],
+  "ToggleLeftIcon": ["on", "off", "switch", "boolean"],
   "ToggleRightIcon": ["on", "off", "switch", "boolean"],
   "ToiletIcon": ["toilet", "potty", "bathroom", "washroom"],
-  "ToggleLeftIcon": ["on", "off", "switch", "boolean"],
-  "ToolCaseIcon": ["tools", "maintenance", "repair"],
   "TornadoIcon": ["weather", "wind", "storm", "hurricane"],
+  "ToolCaseIcon": ["tools", "maintenance", "repair"],
   "TorusIcon": [
     "donut",
     "doughnut",
@@ -10554,7 +10568,9 @@
     "sugar",
     "dessert"
   ],
+  "TouchpadIcon": ["trackpad", "cursor"],
   "TouchpadOffIcon": ["trackpad", "cursor"],
+  "ToyBrickIcon": ["lego", "block", "addon", "plugin", "integration"],
   "TowerControlIcon": [
     "airport",
     "travel",
@@ -10562,8 +10578,6 @@
     "transportation",
     "lighthouse"
   ],
-  "TouchpadIcon": ["trackpad", "cursor"],
-  "ToyBrickIcon": ["lego", "block", "addon", "plugin", "integration"],
   "TractorIcon": [
     "farming",
     "farmer",
@@ -10571,17 +10585,6 @@
     "harvest",
     "equipment",
     "vehicle"
-  ],
-  "TrainFrontIcon": [
-    "railway",
-    "metro",
-    "subway",
-    "underground",
-    "high-speed",
-    "bullet",
-    "fast",
-    "track",
-    "line"
   ],
   "TrainFrontTunnelIcon": [
     "railway",
@@ -10596,6 +10599,17 @@
   ],
   "TrafficConeIcon": ["roadworks", "tarmac", "safety", "block"],
   "TrainTrackIcon": ["railway", "line"],
+  "TrainFrontIcon": [
+    "railway",
+    "metro",
+    "subway",
+    "underground",
+    "high-speed",
+    "bullet",
+    "fast",
+    "track",
+    "line"
+  ],
   "TramFrontIcon": [
     "railway",
     "metro",
@@ -10606,7 +10620,6 @@
     "tourism"
   ],
   "TransgenderIcon": ["gender", "inclusive"],
-  "Trash2Icon": ["garbage", "delete", "remove", "bin"],
   "TrashIcon": [
     "empty",
     "deletion",
@@ -10623,12 +10636,13 @@
     "binoculars",
     "rubbish"
   ],
+  "Trash2Icon": ["garbage", "delete", "remove", "bin"],
   "TreeDeciduousIcon": ["tree", "forest", "park", "nature"],
-  "TreePalmIcon": ["vacation", "leisure", "island"],
   "TreePineIcon": ["tree", "pine", "forest", "park", "nature"],
+  "TreePalmIcon": ["vacation", "leisure", "island"],
   "TreesIcon": ["tree", "forest", "park", "nature"],
-  "TrelloIcon": ["logo", "brand"],
   "TrendingDownIcon": ["statistics"],
+  "TrelloIcon": ["logo", "brand"],
   "TrendingUpIcon": ["statistics"],
   "TrendingUpDownIcon": [
     "arrows",
@@ -10649,15 +10663,6 @@
     "exclamation mark",
     "linter"
   ],
-  "TriangleDashedIcon": [
-    "equilateral",
-    "delta",
-    "shape",
-    "pyramid",
-    "hierarchy",
-    "dashed"
-  ],
-  "TriangleIcon": ["equilateral", "delta", "shape", "pyramid", "hierarchy"],
   "TriangleRightIcon": [
     "volume",
     "controls",
@@ -10670,13 +10675,13 @@
     "incline",
     "increase"
   ],
-  "TruckElectricIcon": [
-    "delivery",
-    "van",
-    "shipping",
-    "haulage",
-    "lorry",
-    "electric"
+  "TriangleDashedIcon": [
+    "equilateral",
+    "delta",
+    "shape",
+    "pyramid",
+    "hierarchy",
+    "dashed"
   ],
   "TrophyIcon": [
     "prize",
@@ -10688,6 +10693,15 @@
     "celebration",
     "victory"
   ],
+  "TruckElectricIcon": [
+    "delivery",
+    "van",
+    "shipping",
+    "haulage",
+    "lorry",
+    "electric"
+  ],
+  "TriangleIcon": ["equilateral", "delta", "shape", "pyramid", "hierarchy"],
   "TruckIcon": ["delivery", "van", "shipping", "haulage", "lorry"],
   "TurkishLiraIcon": ["currency", "money", "payment"],
   "TurntableIcon": [
@@ -10708,7 +10722,6 @@
     "scratch",
     "spinning"
   ],
-  "TurtleIcon": ["animal", "pet", "tortoise", "slow", "speed"],
   "TvMinimalPlayIcon": [
     "flatscreen",
     "television",
@@ -10735,6 +10748,7 @@
     "channels",
     "catchup"
   ],
+  "TurtleIcon": ["animal", "pet", "tortoise", "slow", "speed"],
   "TvMinimalIcon": [
     "flatscreen",
     "television",
@@ -10786,7 +10800,6 @@
     "connection",
     "connectivity"
   ],
-  "TwitterIcon": ["logo", "social"],
   "TwitchIcon": ["logo", "social"],
   "TypeOutlineIcon": [
     "text",
@@ -10798,6 +10811,9 @@
     "stroke",
     "line"
   ],
+  "TwitterIcon": ["logo", "social"],
+  "TypeIcon": ["text", "font", "typography"],
+  "UmbrellaIcon": ["rain", "weather"],
   "UmbrellaOffIcon": [
     "rain",
     "weather",
@@ -10807,9 +10823,8 @@
     "unprotected",
     "risky"
   ],
-  "TypeIcon": ["text", "font", "typography"],
-  "UmbrellaIcon": ["rain", "weather"],
   "UnderlineIcon": ["text", "format"],
+  "UndoDotIcon": ["redo", "history", "step", "back"],
   "Undo2Icon": [
     "redo",
     "rerun",
@@ -10821,9 +10836,8 @@
     "direction",
     "u-turn"
   ],
-  "UndoDotIcon": ["redo", "history", "step", "back"],
-  "UnfoldHorizontalIcon": ["arrow", "collapse", "fold", "vertical", "dashed"],
   "UndoIcon": ["redo", "rerun", "history"],
+  "UnfoldHorizontalIcon": ["arrow", "collapse", "fold", "vertical", "dashed"],
   "UnfoldVerticalIcon": ["arrow", "expand", "vertical", "dashed"],
   "UngroupIcon": [
     "cubes",
@@ -10834,7 +10848,6 @@
     "cluster",
     "separate"
   ],
-  "Unlink2Icon": ["url", "unchain"],
   "UniversityIcon": [
     "building",
     "education",
@@ -10844,6 +10857,7 @@
     "academy",
     "institute"
   ],
+  "Unlink2Icon": ["url", "unchain"],
   "UnlinkIcon": ["url", "unchain"],
   "UploadIcon": ["file"],
   "UnplugIcon": [
@@ -10863,9 +10877,6 @@
     "complete",
     "task"
   ],
-  "UserCogIcon": ["settings", "edit", "cog", "gear"],
-  "UserLockIcon": ["person", "lock", "locked", "account", "secure"],
-  "UserMinusIcon": ["delete", "remove", "unfollow", "unsubscribe"],
   "UsbIcon": [
     "universal",
     "serial",
@@ -10874,9 +10885,11 @@
     "connector",
     "interface"
   ],
+  "UserCogIcon": ["settings", "edit", "cog", "gear"],
+  "UserLockIcon": ["person", "lock", "locked", "account", "secure"],
+  "UserMinusIcon": ["delete", "remove", "unfollow", "unsubscribe"],
   "UserPenIcon": ["person", "account", "contact", "profile", "edit", "change"],
   "UserPlusIcon": ["new", "add", "create", "follow", "subscribe"],
-  "UserRoundCogIcon": ["settings", "edit", "cog", "gear"],
   "UserRoundCheckIcon": [
     "followed",
     "subscribed",
@@ -10886,6 +10899,9 @@
     "complete",
     "task"
   ],
+  "UserRoundCogIcon": ["settings", "edit", "cog", "gear"],
+  "UserRoundMinusIcon": ["delete", "remove", "unfollow", "unsubscribe"],
+  "UserRoundPlusIcon": ["new", "add", "create", "follow", "subscribe"],
   "UserRoundPenIcon": [
     "person",
     "account",
@@ -10894,8 +10910,6 @@
     "edit",
     "change"
   ],
-  "UserRoundMinusIcon": ["delete", "remove", "unfollow", "unsubscribe"],
-  "UserRoundPlusIcon": ["new", "add", "create", "follow", "subscribe"],
   "UserRoundSearchIcon": [
     "person",
     "account",
@@ -10906,7 +10920,6 @@
     "magnifying glass",
     "lens"
   ],
-  "UserRoundIcon": ["person", "account", "contact"],
   "UserRoundXIcon": [
     "delete",
     "remove",
@@ -10924,6 +10937,7 @@
     "magnifying glass",
     "lens"
   ],
+  "UserRoundIcon": ["person", "account", "contact"],
   "UserStarIcon": [
     "person",
     "account",
@@ -10935,8 +10949,8 @@
     "admin"
   ],
   "UserXIcon": ["delete", "remove", "unfollow", "unsubscribe", "unavailable"],
-  "UsersRoundIcon": ["group", "people"],
   "UserIcon": ["person", "account", "contact"],
+  "UsersRoundIcon": ["group", "people"],
   "UsersIcon": ["group", "people"],
   "UtensilsIcon": [
     "fork",
@@ -10966,6 +10980,14 @@
     "dinner",
     "supper"
   ],
+  "UtilityPoleIcon": [
+    "electricity",
+    "energy",
+    "transmission line",
+    "telegraph pole",
+    "power lines",
+    "phone"
+  ],
   "VariableIcon": [
     "code",
     "coding",
@@ -10981,13 +11003,18 @@
     "(",
     ")"
   ],
-  "UtilityPoleIcon": [
-    "electricity",
-    "energy",
-    "transmission line",
-    "telegraph pole",
-    "power lines",
-    "phone"
+  "VectorSquareIcon": [
+    "shape",
+    "geometry",
+    "art",
+    "width",
+    "height",
+    "size",
+    "calculate",
+    "measure",
+    "select",
+    "graphics",
+    "box"
   ],
   "VaultIcon": [
     "safe",
@@ -11002,18 +11029,12 @@
     "valuables",
     "bank"
   ],
-  "VectorSquareIcon": [
-    "shape",
-    "geometry",
-    "art",
-    "width",
-    "height",
-    "size",
-    "calculate",
-    "measure",
-    "select",
-    "graphics",
-    "box"
+  "VeganIcon": [
+    "vegetarian",
+    "fruitarian",
+    "herbivorous",
+    "animal rights",
+    "diet"
   ],
   "VenetianMaskIcon": [
     "mask",
@@ -11022,13 +11043,7 @@
     "secret",
     "incognito"
   ],
-  "VeganIcon": [
-    "vegetarian",
-    "fruitarian",
-    "herbivorous",
-    "animal rights",
-    "diet"
-  ],
+  "VenusIcon": ["gender", "sex", "female", "feminine", "woman", "girl"],
   "VenusAndMarsIcon": [
     "gender",
     "sex",
@@ -11036,7 +11051,6 @@
     "androgynous",
     "hermaphrodite"
   ],
-  "VenusIcon": ["gender", "sex", "female", "feminine", "woman", "girl"],
   "VibrateOffIcon": [
     "smartphone",
     "notification",
@@ -11044,15 +11058,6 @@
     "haptic feedback",
     "notifications",
     "screen"
-  ],
-  "VideoIcon": [
-    "camera",
-    "movie",
-    "film",
-    "recording",
-    "motion picture",
-    "camcorder",
-    "reel"
   ],
   "VibrateIcon": [
     "smartphone",
@@ -11062,6 +11067,15 @@
     "screen"
   ],
   "VideoOffIcon": ["camera", "movie", "film"],
+  "VideoIcon": [
+    "camera",
+    "movie",
+    "film",
+    "recording",
+    "motion picture",
+    "camcorder",
+    "reel"
+  ],
   "VideotapeIcon": [
     "vhs",
     "movie",
@@ -11123,6 +11137,8 @@
     "consumer",
     "cc"
   ],
+  "WalletMinimalIcon": ["finance", "pocket"],
+  "WalletIcon": ["money", "finance", "pocket"],
   "WallpaperIcon": [
     "background",
     "texture",
@@ -11136,8 +11152,6 @@
     "cover",
     "lock screen"
   ],
-  "WalletIcon": ["money", "finance", "pocket"],
-  "WalletMinimalIcon": ["finance", "pocket"],
   "WandSparklesIcon": ["magic", "wizard", "magician"],
   "WandIcon": ["magic", "selection"],
   "WarehouseIcon": [
@@ -11150,7 +11164,6 @@
     "logistics",
     "building"
   ],
-  "WatchIcon": ["clock", "time"],
   "WashingMachineIcon": [
     "tumble dryer",
     "amenities",
@@ -11161,6 +11174,7 @@
     "spin",
     "drum"
   ],
+  "WatchIcon": ["clock", "time"],
   "WavesLadderIcon": [
     "swimming",
     "water",
@@ -11173,7 +11187,7 @@
     "🏊",
     "🥽"
   ],
-  "WavesIcon": ["water", "sea", "sound", "hertz", "wavelength", "vibrate"],
+  "WebcamIcon": ["camera", "security"],
   "WaypointsIcon": [
     "indirection",
     "vpn",
@@ -11191,9 +11205,9 @@
     "spread",
     "viral"
   ],
-  "WebcamIcon": ["camera", "security"],
-  "WebhookIcon": ["push api", "interface", "callback"],
+  "WavesIcon": ["water", "sea", "sound", "hertz", "wavelength", "vibrate"],
   "WebhookOffIcon": ["push api", "interface", "callback"],
+  "WebhookIcon": ["push api", "interface", "callback"],
   "WeightIcon": [
     "mass",
     "heavy",
@@ -11214,7 +11228,14 @@
     "diet"
   ],
   "WheatIcon": ["corn", "cereal", "grain", "gluten"],
-  "WifiHighIcon": ["connection", "signal", "wireless"],
+  "WholeWordIcon": [
+    "text",
+    "selection",
+    "letters",
+    "characters",
+    "font",
+    "typography"
+  ],
   "WifiCogIcon": [
     "connection",
     "signal",
@@ -11227,18 +11248,10 @@
     "edit",
     "gear"
   ],
-  "WholeWordIcon": [
-    "text",
-    "selection",
-    "letters",
-    "characters",
-    "font",
-    "typography"
-  ],
+  "WifiHighIcon": ["connection", "signal", "wireless"],
+  "WifiOffIcon": ["disabled"],
   "WifiLowIcon": ["connection", "signal", "wireless"],
   "WifiPenIcon": ["edit", "wifi", "pen", "change", "network"],
-  "WifiOffIcon": ["disabled"],
-  "WifiZeroIcon": ["connection", "signal", "wireless"],
   "WifiSyncIcon": [
     "connection",
     "signal",
@@ -11248,6 +11261,7 @@
     "reset",
     "restart"
   ],
+  "WifiZeroIcon": ["connection", "signal", "wireless"],
   "WifiIcon": ["connection", "signal", "wireless"],
   "WindIcon": ["weather", "air", "blow"],
   "WindArrowDownIcon": ["weather", "air", "pressure", "blow"],
@@ -11262,6 +11276,16 @@
     "teetotalism",
     "allergy",
     "intolerance"
+  ],
+  "WineIcon": [
+    "alcohol",
+    "beverage",
+    "bar",
+    "drink",
+    "glass",
+    "sommelier",
+    "vineyard",
+    "winery"
   ],
   "WorkflowIcon": [
     "action",
@@ -11285,16 +11309,6 @@
     "computer virus",
     "malware"
   ],
-  "WineIcon": [
-    "alcohol",
-    "beverage",
-    "bar",
-    "drink",
-    "glass",
-    "sommelier",
-    "vineyard",
-    "winery"
-  ],
   "XIcon": [
     "cancel",
     "close",
@@ -11308,7 +11322,6 @@
     "multiply",
     "multiplication"
   ],
-  "YoutubeIcon": ["logo", "social", "video", "play"],
   "WrenchIcon": [
     "account",
     "settings",
@@ -11318,9 +11331,10 @@
     "build",
     "construction"
   ],
+  "YoutubeIcon": ["logo", "social", "video", "play"],
   "ZapOffIcon": ["flash", "camera", "lightning", "electricity", "energy"],
   "ZapIcon": ["flash", "camera", "lightning", "electricity", "energy"],
-  "ZoomInIcon": ["magnifying glass", "plus"],
   "ZoomOutIcon": ["magnifying glass", "plus"],
-  "MicrowaveIcon": ["oven", "cooker", "toaster oven", "bake"]
+  "ZoomInIcon": ["magnifying glass", "plus"],
+  "PackageXIcon": ["delete", "remove"]
 }

@@ -424,6 +424,28 @@ export const DisabledIncludePlaceholder: Story = () => {
   )
 }
 
+export const DisabledOpenOnClick: Story = () => {
+  const items = useMemo<Select.Item[]>(
+    () => [
+      { label: "木ノ下和也", value: "木ノ下和也" },
+      { closeOnSelect: true, label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+      { label: "七海麻美", value: "七海麻美" },
+      { label: "更科瑠夏", value: "更科瑠夏" },
+      { label: "桜沢墨", value: "桜沢墨" },
+      { label: "八重森みに", value: "八重森みに" },
+    ],
+    [],
+  )
+
+  return (
+    <Select.Root
+      items={items}
+      openOnClick={false}
+      placeholder="Select a character"
+    />
+  )
+}
+
 export const DisabledCloseOnSelect: Story = () => {
   const items = useMemo<Select.Item[]>(
     () => [
@@ -862,7 +884,6 @@ export const ReactHookForm: Story = () => {
     control,
     formState: { errors },
     handleSubmit,
-    watch,
   } = useForm<Data>()
   const items = useMemo<Select.Item[]>(
     () => [
@@ -877,8 +898,6 @@ export const ReactHookForm: Story = () => {
   )
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
-
-  console.log("watch:", watch())
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
@@ -923,7 +942,6 @@ export const ReactHookFormDefaultValue: Story = () => {
     control,
     formState: { errors },
     handleSubmit,
-    watch,
   } = useForm<Data>({ defaultValues })
   const items = useMemo<Select.Item[]>(
     () => [
@@ -938,8 +956,6 @@ export const ReactHookFormDefaultValue: Story = () => {
   )
 
   const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
-
-  console.log("watch:", watch())
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>

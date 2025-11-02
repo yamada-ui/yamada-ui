@@ -85,6 +85,7 @@ interface ComponentContext
       UsePopoverReturn,
       | "getAnchorProps"
       | "getBodyProps"
+      | "getCloseTriggerProps"
       | "getContentProps"
       | "getFooterProps"
       | "getHeaderProps"
@@ -92,8 +93,7 @@ interface ComponentContext
       | "getTriggerProps"
       | "open"
     >,
-    PopupAnimationProps,
-    Pick<PopoverRootProps, "withCloseButton"> {}
+    PopupAnimationProps {}
 
 export interface PopoverRootProps
   extends UsePopoverProps,
@@ -112,12 +112,6 @@ export interface PopoverRootProps
    * @default 0.2
    */
   duration?: PopupAnimationProps["duration"]
-  /**
-   * If `true`, display the popover close button.
-   *
-   * @default true
-   */
-  withCloseButton?: boolean
 }
 
 const {
@@ -143,18 +137,13 @@ export { PopoverPropsContext, usePopoverPropsContext }
 export const PopoverRoot: FC<PopoverRootProps> = (props) => {
   const [
     styleContext,
-    {
-      animationScheme = "scale",
-      children,
-      duration = 0.1,
-      withCloseButton = true,
-      ...rest
-    },
+    { animationScheme = "scale", children, duration = 0.1, ...rest },
   ] = useRootComponentProps(props)
   const {
     open,
     getAnchorProps,
     getBodyProps,
+    getCloseTriggerProps,
     getContentProps,
     getFooterProps,
     getHeaderProps,
@@ -167,9 +156,9 @@ export const PopoverRoot: FC<PopoverRootProps> = (props) => {
       animationScheme,
       duration,
       open,
-      withCloseButton,
       getAnchorProps,
       getBodyProps,
+      getCloseTriggerProps,
       getContentProps,
       getFooterProps,
       getHeaderProps,
@@ -177,12 +166,12 @@ export const PopoverRoot: FC<PopoverRootProps> = (props) => {
       getTriggerProps,
     }),
     [
-      withCloseButton,
       open,
       animationScheme,
       duration,
       getAnchorProps,
       getBodyProps,
+      getCloseTriggerProps,
       getContentProps,
       getFooterProps,
       getHeaderProps,
@@ -210,6 +199,20 @@ export const PopoverTrigger = withContext<"button", PopoverTriggerProps>(
 
   return getTriggerProps(props)
 })
+
+export interface PopoverCloseTriggerProps extends HTMLStyledProps<"button"> {}
+
+export const PopoverCloseTrigger = withContext<
+  "button",
+  PopoverCloseTriggerProps
+>("button", { name: "CloseTrigger", slot: ["trigger", "close"] })(
+  { asChild: true },
+  (props) => {
+    const { getCloseTriggerProps } = useComponentContext()
+
+    return getCloseTriggerProps(props)
+  },
+)
 
 export interface PopoverAnchorProps extends HTMLStyledProps {}
 

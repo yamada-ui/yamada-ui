@@ -326,10 +326,23 @@ export const usePopover = ({
 
   const getFooterProps: PropGetter = useCallback((props) => ({ ...props }), [])
 
+  const getCloseTriggerProps: PropGetter<"button"> = useCallback(
+    (props = {}) => ({
+      ...props,
+      onClick: handlerAll(props.onClick, () => {
+        onClose()
+
+        triggerRef.current?.focus()
+      }),
+    }),
+    [onClose],
+  )
+
   return {
     open,
     getAnchorProps,
     getBodyProps,
+    getCloseTriggerProps,
     getContentProps,
     getFooterProps,
     getHeaderProps,

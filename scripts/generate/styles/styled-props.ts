@@ -285,6 +285,10 @@ export const atRuleProps = {
     type: "CSSObject",
     properties: ["@media print"],
   },
+  _startingStyle: {
+    type: "CSSObject",
+    properties: ["@starting-style"],
+  },
   _supports: {
     type: `{ ${["query?: AnyString", "css?: CSSObject"].join(";")} }[]`,
     variableLength: true,

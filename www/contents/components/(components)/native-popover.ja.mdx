@@ -1,7 +1,318 @@
 ---
 title: NativePopover
-description: "`NativePopover`は、現在作成を検討しています。"
-status: planned
+description: "`NativePopover`は、ネイティブHTML Popover APIを使用して要素の周りにフローティングして情報を表示するコンポーネントです。"
+storybook: components-native-popover--basic
+source: components/native-popover
+style: components/native-popover/native-popover.style.ts
+status: new
 ---
 
-このGitHubの[イシュー](https://github.com/yamada-ui/yamada-ui/issues/3845)であなたの意見を投稿してください。作成の優先順位を決めるのに役立ちます。
+```tsx preview
+<NativePopover.Root>
+  <NativePopover.Trigger>
+    <Button>Click Me</Button>
+  </NativePopover.Trigger>
+
+  <NativePopover.Content>
+    <NativePopover.Header>ベジータ!</NativePopover.Header>
+    <NativePopover.Body>
+      がんばれカカロット……お前がナンバー１だ！！
+    </NativePopover.Body>
+  </NativePopover.Content>
+</NativePopover.Root>
+```
+
+:::note
+`NativePopover`はネイティブHTML Popover APIを使用しており、通常の`Popover`コンポーネントと比較して、パフォーマンスとアクセシビリティが向上しています。ただし、Popover APIをサポートしているモダンブラウザが必要です。
+:::
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { NativePopover } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { NativePopover } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { NativePopover } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<NativePopover.Root>
+  <NativePopover.Anchor />
+  <NativePopover.Trigger />
+  <NativePopover.Content>
+    <NativePopover.Header />
+    <NativePopover.Body />
+    <NativePopover.Footer />
+  </NativePopover.Content>
+</NativePopover.Root>
+```
+
+### サイズを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["xs", "sm", "md", "lg"]}>
+    {(size) => (
+      <NativePopover.Root key={size} size={size}>
+        <NativePopover.Trigger>
+          <Button>Size ({size})</Button>
+        </NativePopover.Trigger>
+
+        <NativePopover.Content>
+          <NativePopover.Header>ベジータ!</NativePopover.Header>
+          <NativePopover.Body>
+            がんばれカカロット……お前がナンバー１だ！！
+          </NativePopover.Body>
+        </NativePopover.Content>
+      </NativePopover.Root>
+    )}
+  </For>
+</Wrap>
+```
+
+### フッターを追加する
+
+```tsx preview
+<NativePopover.Root>
+  <NativePopover.Trigger>
+    <Button>Click Me</Button>
+  </NativePopover.Trigger>
+
+  <NativePopover.Content>
+    <NativePopover.Header>ベジータ!</NativePopover.Header>
+    <NativePopover.Body>
+      がんばれカカロット……お前がナンバー１だ！！
+    </NativePopover.Body>
+    <NativePopover.Footer>第280話</NativePopover.Footer>
+  </NativePopover.Content>
+</NativePopover.Root>
+```
+
+### 閉じるトリガーを追加する
+
+ポップオーバー内に閉じるボタンを追加する場合は、`NativePopover.CloseTrigger`を使用します。
+
+```tsx preview
+<NativePopover.Root>
+  <NativePopover.Trigger>
+    <Button>Click Me</Button>
+  </NativePopover.Trigger>
+
+  <NativePopover.Content>
+    <NativePopover.Header>ベジータ!</NativePopover.Header>
+    <NativePopover.Body>
+      がんばれカカロット……お前がナンバー１だ！！
+    </NativePopover.Body>
+    <NativePopover.Footer>
+      <NativePopover.CloseTrigger>
+        <Button>Close</Button>
+      </NativePopover.CloseTrigger>
+    </NativePopover.Footer>
+  </NativePopover.Content>
+</NativePopover.Root>
+```
+
+### 別の要素を参照して表示する
+
+別の要素を参照して表示する場合は、`NativePopover.Anchor`を使用します。
+
+```tsx preview
+<NativePopover.Root>
+  <Wrap gap="md">
+    <NativePopover.Anchor>
+      <Center borderWidth="1px" h="10" px="3" rounded="l2">
+        Display Popover Here
+      </Center>
+    </NativePopover.Anchor>
+
+    <NativePopover.Trigger>
+      <Button>Click Me</Button>
+    </NativePopover.Trigger>
+  </Wrap>
+
+  <NativePopover.Content>
+    <NativePopover.Header>ベジータ!</NativePopover.Header>
+    <NativePopover.Body>
+      がんばれカカロット……お前がナンバー１だ！！
+    </NativePopover.Body>
+  </NativePopover.Content>
+</NativePopover.Root>
+```
+
+### 配置を変更する
+
+配置を変更する場合は、`placement`に`"start"`や`"end-end"`などを指定します。デフォルトでは`"end"`が設定されています。
+
+```tsx preview
+<Wrap gap="md">
+  <For
+    each={[
+      "start",
+      "start-start",
+      "start-end",
+      "start-center",
+      "end",
+      "end-start",
+      "end-end",
+      "end-center",
+      "center-start",
+      "center-end",
+    ]}
+  >
+    {(placement) => (
+      <NativePopover.Root key={placement} placement={placement}>
+        <NativePopover.Trigger>
+          <Button>{toTitleCase(placement)}</Button>
+        </NativePopover.Trigger>
+
+        <NativePopover.Content>
+          <NativePopover.Header>ベジータ!</NativePopover.Header>
+          <NativePopover.Body>
+            がんばれカカロット……お前がナンバー１だ！！
+          </NativePopover.Body>
+        </NativePopover.Content>
+      </NativePopover.Root>
+    )}
+  </For>
+</Wrap>
+```
+
+### オフセットを変更する
+
+オフセットを変更する場合は、`gutter`または`offset`に値を設定します。
+
+```tsx preview
+<HStack>
+  <NativePopover.Root gutter={32}>
+    <NativePopover.Trigger>
+      <Button>Gutter</Button>
+    </NativePopover.Trigger>
+
+    <NativePopover.Content>
+      <NativePopover.Header>ベジータ!</NativePopover.Header>
+      <NativePopover.Body>
+        がんばれカカロット……お前がナンバー１だ！！
+      </NativePopover.Body>
+    </NativePopover.Content>
+  </NativePopover.Root>
+
+  <NativePopover.Root offset={[16, 16]}>
+    <NativePopover.Trigger>
+      <Button>Offset</Button>
+    </NativePopover.Trigger>
+    <NativePopover.Content>
+      <NativePopover.Header>ベジータ!</NativePopover.Header>
+      <NativePopover.Body>
+        がんばれカカロット……お前がナンバー１だ！！
+      </NativePopover.Body>
+    </NativePopover.Content>
+  </NativePopover.Root>
+</HStack>
+```
+
+### ポップオーバーのモード
+
+ネイティブHTML Popover APIは、ポップオーバーの動作を制御するための異なるモードをサポートしています。これは`NativePopover`を通常の`Popover`コンポーネントと区別する重要な機能です。
+
+```tsx preview
+<Wrap gap="md">
+  <NativePopover.Root popover="auto">
+    <NativePopover.Trigger>
+      <Button>Auto (default)</Button>
+    </NativePopover.Trigger>
+
+    <NativePopover.Content>
+      <NativePopover.Header>Auto Popover</NativePopover.Header>
+      <NativePopover.Body>
+        Auto popover closes automatically when clicking outside or opening
+        another popover.
+      </NativePopover.Body>
+    </NativePopover.Content>
+  </NativePopover.Root>
+
+  <NativePopover.Root popover="hint">
+    <NativePopover.Trigger>
+      <Button>Hint</Button>
+    </NativePopover.Trigger>
+
+    <NativePopover.Content>
+      <NativePopover.Header>Hint Popover</NativePopover.Header>
+      <NativePopover.Body>
+        Hint popover does not close auto popovers when displayed, but closes
+        other hint popovers.
+      </NativePopover.Body>
+    </NativePopover.Content>
+  </NativePopover.Root>
+
+  <NativePopover.Root popover="manual">
+    <NativePopover.Trigger>
+      <Button>Manual</Button>
+    </NativePopover.Trigger>
+
+    <NativePopover.Content>
+      <NativePopover.Header>Manual Popover</NativePopover.Header>
+      <NativePopover.Body>
+        Manual popover must be explicitly closed with the trigger button.
+      </NativePopover.Body>
+    </NativePopover.Content>
+  </NativePopover.Root>
+</Wrap>
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`に設定します。
+
+```tsx preview
+<NativePopover.Root disabled>
+  <NativePopover.Trigger>
+    <Button>Click Me</Button>
+  </NativePopover.Trigger>
+
+  <NativePopover.Content>
+    <NativePopover.Header>ベジータ!</NativePopover.Header>
+    <NativePopover.Body>
+      がんばれカカロット……お前がナンバー１だ！！
+    </NativePopover.Body>
+  </NativePopover.Content>
+</NativePopover.Root>
+```
+
+### ネストさせる
+
+```tsx preview
+<NativePopover.Root>
+  <NativePopover.Trigger>
+    <Button>Open Parent</Button>
+  </NativePopover.Trigger>
+
+  <NativePopover.Content>
+    <NativePopover.Header>ベジータ!</NativePopover.Header>
+    <NativePopover.Body>
+      <Text>がんばれカカロット……お前がナンバー１だ！！</Text>
+
+      <NativePopover.Root>
+        <NativePopover.Trigger>
+          <Button>Click Me</Button>
+        </NativePopover.Trigger>
+
+        <NativePopover.Content>
+          <NativePopover.Header>ベジータ!</NativePopover.Header>
+          <NativePopover.Body>
+            がんばれカカロット……お前がナンバー１だ！！
+          </NativePopover.Body>
+        </NativePopover.Content>
+      </NativePopover.Root>
+    </NativePopover.Body>
+  </NativePopover.Content>
+</NativePopover.Root>
+```

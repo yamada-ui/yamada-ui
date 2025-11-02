@@ -26,6 +26,24 @@ export const ratingStyle = defineComponentSlotStyle({
       "--filled-color": "colorScheme.solid",
       display: "flex",
       w: "max-content",
+      _container: [
+        {
+          css: { "--empty-color": "colors.bg" },
+          style: '--form-group-variant: "panel"',
+        },
+        {
+          css: { "--empty-color": "colors.bg" },
+          style: '--fieldset-root-variant: "panel"',
+        },
+        {
+          css: { "--empty-color": "colors.bg" },
+          style: '--form-group-variant: "elevated"',
+        },
+        {
+          css: { "--empty-color": "colors.bg" },
+          style: '--fieldset-root-variant: "elevated"',
+        },
+      ],
     },
   },
 

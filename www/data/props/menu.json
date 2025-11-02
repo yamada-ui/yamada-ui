@@ -513,6 +513,12 @@
         "description": "The direction of the sub menu.",
         "required": false
       },
+      "transferFocus": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the focus will be transferred to the popover content when the tab key is pressed.",
+        "required": false
+      },
       "transform": {
         "type": "boolean",
         "defaultValue": "true",
@@ -1081,6 +1087,12 @@
       "type": "SubMenuDirection",
       "defaultValue": "\"end\"",
       "description": "The direction of the sub menu.",
+      "required": false
+    },
+    "transferFocus": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the focus will be transferred to the popover content when the tab key is pressed.",
       "required": false
     },
     "transform": {

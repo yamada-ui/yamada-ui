@@ -20,6 +20,12 @@ export const editableStyle = defineComponentSlotStyle({
       transitionDuration: "moderate",
       transitionProperty: "common",
       w: "full",
+      _container: [
+        { css: { bg: "bg" }, style: '--form-group-variant: "panel"' },
+        { css: { bg: "bg" }, style: '--fieldset-root-variant: "panel"' },
+        { css: { bg: "bg" }, style: '--form-group-variant: "elevated"' },
+        { css: { bg: "bg" }, style: '--fieldset-root-variant: "elevated"' },
+      ],
       _invalid: {
         borderColor: "{error-border-color}",
         focusRingColor: "{error-border-color}",
@@ -74,6 +80,12 @@ export const editableStyle = defineComponentSlotStyle({
       transitionDuration: "moderate",
       transitionProperty: "common",
       w: "full",
+      _container: [
+        { css: { bg: "bg" }, style: '--form-group-variant: "panel"' },
+        { css: { bg: "bg" }, style: '--fieldset-root-variant: "panel"' },
+        { css: { bg: "bg" }, style: '--form-group-variant: "elevated"' },
+        { css: { bg: "bg" }, style: '--fieldset-root-variant: "elevated"' },
+      ],
       _invalid: {
         borderColor: "{error-border-color}",
         focusRingColor: "{error-border-color}",

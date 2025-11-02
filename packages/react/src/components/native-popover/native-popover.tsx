@@ -18,6 +18,7 @@ interface ComponentContext
     UseNativePopoverReturn,
     | "getAnchorProps"
     | "getBodyProps"
+    | "getCloseTriggerProps"
     | "getContentProps"
     | "getFooterProps"
     | "getHeaderProps"
@@ -56,6 +57,7 @@ export const NativePopoverRoot: FC<NativePopoverRootProps> = (props) => {
   const {
     getAnchorProps,
     getBodyProps,
+    getCloseTriggerProps,
     getContentProps,
     getFooterProps,
     getHeaderProps,
@@ -66,6 +68,7 @@ export const NativePopoverRoot: FC<NativePopoverRootProps> = (props) => {
     () => ({
       getAnchorProps,
       getBodyProps,
+      getCloseTriggerProps,
       getContentProps,
       getFooterProps,
       getHeaderProps,
@@ -75,6 +78,7 @@ export const NativePopoverRoot: FC<NativePopoverRootProps> = (props) => {
     [
       getAnchorProps,
       getBodyProps,
+      getCloseTriggerProps,
       getContentProps,
       getFooterProps,
       getHeaderProps,
@@ -123,6 +127,21 @@ const NativePopoverPositioner = withContext<
   return getPositionerProps(props)
 })
 
+export interface NativePopoverCloseTriggerProps
+  extends HTMLStyledProps<"button"> {}
+
+export const NativePopoverCloseTrigger = withContext<
+  "button",
+  NativePopoverCloseTriggerProps
+>("button", { name: "CloseTrigger", slot: ["trigger", "close"] })(
+  { asChild: true },
+  (props) => {
+    const { getCloseTriggerProps } = useComponentContext()
+
+    return getCloseTriggerProps(props)
+  },
+)
+
 export interface NativePopoverContentProps
   extends HTMLStyledProps,
     PropsWithChildren {}
@@ -140,7 +159,9 @@ export const NativePopoverContent = withContext<
       </styled.div>
     </NativePopoverPositioner>
   )
-}, "content")()
+}, "content")({
+  suppressHydrationWarning: true,
+})
 
 export interface NativePopoverHeaderProps extends HTMLStyledProps {}
 

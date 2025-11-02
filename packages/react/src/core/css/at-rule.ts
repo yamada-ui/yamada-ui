@@ -1,6 +1,6 @@
 import type { Dict } from "../../utils"
 import type { Transform } from "./utils"
-import { filterUndefined, isArray, toKebabCase } from "../../utils"
+import { filterUndefined, isArray, toArray, toKebabCase } from "../../utils"
 import { tokenToVar } from "./utils"
 
 export const generateAtRule =
@@ -15,6 +15,7 @@ export const generateAtRule =
           type,
           name,
           css,
+          style,
           h,
           height,
           maxH,
@@ -40,24 +41,30 @@ export const generateAtRule =
         maxHeight ??= maxH
 
         if (!query) {
-          const resolvedRest = filterUndefined({
-            height,
-            maxHeight,
-            maxWidth,
-            minHeight,
-            minWidth,
-            prefersColorScheme: prefersColorMode,
-            width,
-            ...rest,
-          })
-
-          query = Object.entries(resolvedRest)
-            .map(([key, value]) => {
-              value = tokenToVar(system)("sizes", value)
-
-              return `(${toKebabCase(key)}: ${value})`
+          if (style) {
+            query = toArray(style)
+              .map((style) => `style(${style})`)
+              .join(" and ")
+          } else {
+            const resolvedRest = filterUndefined({
+              height,
+              maxHeight,
+              maxWidth,
+              minHeight,
+              minWidth,
+              prefersColorScheme: prefersColorMode,
+              width,
+              ...rest,
             })
-            .join(" and ")
+
+            query = Object.entries(resolvedRest)
+              .map(([key, value]) => {
+                value = tokenToVar(system)("sizes", value)
+
+                return `(${toKebabCase(key)}: ${value})`
+              })
+              .join(" and ")
+          }
         }
 
         const condition = `@${identifier} ${type ?? name ?? ""} ${query}`

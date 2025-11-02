@@ -100,6 +100,12 @@ export const checkboxCardStyle = defineComponentSlotStyle({
       },
       root: {
         _checked: { "--indicator-border-color": "colorScheme.solid" },
+        _container: [
+          { css: { bg: "bg" }, style: '--form-group-variant: "panel"' },
+          { css: { bg: "bg" }, style: '--fieldset-root-variant: "panel"' },
+          { css: { bg: "bg" }, style: '--form-group-variant: "elevated"' },
+          { css: { bg: "bg" }, style: '--fieldset-root-variant: "elevated"' },
+        ],
         _indeterminate: { "--indicator-border-color": "colorScheme.solid" },
       },
     },

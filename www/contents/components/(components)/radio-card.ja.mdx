@@ -59,7 +59,7 @@ import { RadioCard, RadioCardGroup } from "@workspaces/ui"
 ### itemsを使う
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.RootProps["items"]>(
+const items = useMemo<RadioCardGroup.ItemType[]>(
   () => [
     {
       description:
@@ -89,7 +89,7 @@ return <RadioCardGroup.Root items={items} />
 ### バリアントを変更する
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.RootProps["items"]>(
+const items = useMemo<RadioCardGroup.ItemType[]>(
   () => [
     { label: "Checked", value: "1" },
     { label: "Unchecked", value: "2" },
@@ -116,7 +116,7 @@ return (
 ### サイズを変更する
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.RootProps["items"]>(
+const items = useMemo<RadioCardGroup.ItemType[]>(
   () => [
     { label: "Checked", value: "1" },
     { label: "Unchecked", value: "2" },
@@ -143,7 +143,7 @@ return (
 ### カラースキームを変更する
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.RootProps["items"]>(
+const items = useMemo<RadioCardGroup.ItemType[]>(
   () => [
     { label: "Checked", value: "1" },
     { label: "Unchecked", value: "2" },
@@ -172,7 +172,7 @@ return (
 デフォルトの値を設定する場合は、`defaultValue`に値を設定します。
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.RootProps["items"]>(
+const items = useMemo<RadioCardGroup.ItemType[]>(
   () => [
     {
       description:
@@ -204,7 +204,7 @@ return <RadioCardGroup.Root defaultValue="2" items={items} />
 方向を変更する場合は、`orientation`に`"horizontal"`または`"vertical"`を設定します。デフォルトでは、`"horizontal"`が設定されています。
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.RootProps["items"]>(
+const items = useMemo<RadioCardGroup.ItemType[]>(
   () => [
     {
       description:
@@ -234,7 +234,7 @@ return <RadioCardGroup.Root items={items} orientation="vertical" />
 ### 形を変更する
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.RootProps["items"]>(
+const items = useMemo<RadioCardGroup.ItemType[]>(
   () => [
     {
       description:
@@ -279,7 +279,7 @@ return (
 配置を変更する場合は、`justify`に`"start"`または`"end"`などを設定します。デフォルトでは、`"start"`が設定されています。
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.RootProps["items"]>(
+const items = useMemo<RadioCardGroup.ItemType[]>(
   () => [
     {
       description:
@@ -324,7 +324,7 @@ return (
 アドオンを追加する場合は、`addon`に`ReactNode`を設定します。
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.RootProps["items"]>(
+const items = useMemo<RadioCardGroup.ItemType[]>(
   () => [
     {
       addon: "ドラゴンクエストV 天空の花嫁",
@@ -380,7 +380,7 @@ return <RadioCardGroup.Root items={items} orientation="vertical" />
 無効にする場合は、`disabled`を`true`に設定します。
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.RootProps["items"]>(
+const items = useMemo<RadioCardGroup.ItemType[]>(
   () => [
     {
       description:
@@ -430,7 +430,7 @@ return (
 読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.RootProps["items"]>(
+const items = useMemo<RadioCardGroup.ItemType[]>(
   () => [
     {
       description:
@@ -480,7 +480,7 @@ return (
 無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.RootProps["items"]>(
+const items = useMemo<RadioCardGroup.ItemType[]>(
   () => [
     {
       description:
@@ -530,7 +530,7 @@ return (
 ボーダーの色を変更する場合は、`focusBorderColor`または`errorBorderColor`に値を設定します。
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.RootProps["items"]>(
+const items = useMemo<RadioCardGroup.ItemType[]>(
   () => [
     {
       description:
@@ -571,7 +571,7 @@ return (
 
 ```tsx preview functional client
 const [value, setValue] = useState("2")
-const items = useMemo<RadioCardGroup.RootProps["items"]>(
+const items = useMemo<RadioCardGroup.ItemType[]>(
   () => [
     {
       description:

@@ -136,6 +136,13 @@
     "tokensTable": {
       "token": "Token",
       "value": "Value"
+    },
+    "llmsButtonGroup": {
+      "copyPage": "Copy Page",
+      "markdown": "View as Markdown",
+      "chatgpt": "Open in ChatGPT",
+      "claude": "Open in Claude",
+      "query": "Use web browsing to access links and information: {url}.\n\nI want to ask some questions.\n"
     }
   }
 }

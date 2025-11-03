@@ -109,7 +109,7 @@
       "title": "このページでは",
       "scrollToTop": "上にスクロールする",
       "edit": "GitHubでこのページを編集する",
-      "markdown": "Markdownとして表示",
+      "markdown": "Markdownで表示する",
       "chatgpt": "ChatGPTで開く",
       "claude": "Claudeで開く"
     },
@@ -136,6 +136,13 @@
     "tokensTable": {
       "token": "トークン",
       "value": "値"
+    },
+    "llmsButtonGroup": {
+      "copyPage": "ページをコピー",
+      "markdown": "Markdownで表示する",
+      "chatgpt": "ChatGPTで開く",
+      "claude": "Claudeで開く",
+      "query": "Webブラウザを使用してリンクと情報にアクセスします: {url}\n\nいくつかの質問があります。\n"
     }
   }
 }

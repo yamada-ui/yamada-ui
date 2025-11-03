@@ -1,1 +1,0 @@
-import{p as l,q as p}from"./iframe-Cq3rcaMI.js";const x=l({base:{display:"flex"}}),{PropsContext:d,withContext:f}=p("flex",x),C=f("div")(void 0,({align:e,basis:t,direction:o,grow:s,justify:n,shrink:i,wrap:a,...r})=>({alignItems:e,flexBasis:t,flexDirection:o,flexGrow:s,flexShrink:i,flexWrap:a,justifyContent:n,...r}));export{C as F,d as a};

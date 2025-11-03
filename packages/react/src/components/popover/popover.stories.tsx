@@ -377,6 +377,26 @@ export const DisabledCloseOnEsc: Story = () => {
   )
 }
 
+export const CloseTrigger: Story = () => {
+  return (
+    <Popover.Root>
+      <Popover.Trigger>
+        <Button>Click me</Button>
+      </Popover.Trigger>
+
+      <Popover.Content>
+        <Popover.Header>ベジータ!</Popover.Header>
+        <Popover.Body>がんばれカカロット……お前がナンバー１だ！！</Popover.Body>
+        <Popover.Footer>
+          <Popover.CloseTrigger>
+            <Button>Close</Button>
+          </Popover.CloseTrigger>
+        </Popover.Footer>
+      </Popover.Content>
+    </Popover.Root>
+  )
+}
+
 export const DisabledAutoFocus: Story = () => {
   return (
     <Popover.Root autoFocus={false}>

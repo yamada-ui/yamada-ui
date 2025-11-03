@@ -150,4 +150,30 @@ To use animation, set `value` to `null`.
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+The `Progress` follows the [WAI-ARIA - Meter](https://www.w3.org/WAI/ARIA/apg/patterns/meter/) for accessibility.
+
+Setting `aria-label` or `aria-labelledby` on `Progress` will make it readable by screen readers.
+
+```tsx
+<Progress value={88} aria-label="Central Processing Unit (CPU) Usage" />
+```
+
+```tsx
+<VStack gap="sm">
+  <Text as="h3" id="label">
+    Central Processing Unit (CPU) Usage
+  </Text>
+
+  <Progress value={88} aria-labelledby="label" />
+</VStack>
+```
+
+### ARIA Roles and Attributes
+
+| Component  | Role and Attribute   | Usage                                  |
+| ---------- | -------------------- | -------------------------------------- |
+| `Progress` | `role="progressbar"` | Indicates that it is a progress bar.   |
+|            | `aria-valuemin`      | Sets the minimum value. Default: `0`   |
+|            | `aria-valuemax`      | Sets the maximum value. Default: `100` |
+|            | `aria-valuenow`      | Represents the current value.          |
+|            | `aria-label`         | Provides a label for the progress bar. |

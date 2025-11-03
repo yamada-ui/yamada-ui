@@ -108,7 +108,10 @@
     "toc": {
       "title": "このページでは",
       "scrollToTop": "上にスクロールする",
-      "edit": "GitHubでこのページを編集する"
+      "edit": "GitHubでこのページを編集する",
+      "markdown": "Markdownで表示する",
+      "chatgpt": "ChatGPTで開く",
+      "claude": "Claudeで開く"
     },
     "copyButton": {
       "copied": "コピーしました",
@@ -133,6 +136,13 @@
     "tokensTable": {
       "token": "トークン",
       "value": "値"
+    },
+    "llmsButtonGroup": {
+      "copyPage": "ページをコピー",
+      "markdown": "Markdownで表示する",
+      "chatgpt": "ChatGPTで開く",
+      "claude": "Claudeで開く",
+      "query": "Webブラウザを使用してリンクと情報にアクセスします: {url}\n\nいくつかの質問があります。\n"
     }
   }
 }

@@ -1,8 +1,48 @@
 import type { Doc } from "#velite"
+import type { ThemeToken } from "@yamada-ui/react"
 import { docs } from "#velite"
 import { getPathname } from "@/utils/route"
 import en from "./doc-map.en.json"
 import ja from "./doc-map.ja.json"
+
+interface Prop {
+  type: string
+  description: string
+  required: boolean
+  defaultValue?: string
+  deprecated?: string
+  see?: string
+}
+
+export interface Props {
+  [key: string]: Prop
+}
+
+export interface Namespace {
+  [key: string]: {
+    [key: string]: Prop
+  }
+}
+
+export interface MdnDoc {
+  deprecated: boolean
+  description: string
+  experimental: boolean
+  see?: string
+}
+
+export interface MdnDocs {
+  [key: string]: MdnDoc
+}
+
+export interface StyleConfig {
+  as?: boolean
+  type?: string
+  docs?: MdnDocs
+  properties?: string[]
+  shorthands?: string[]
+  token?: ThemeToken
+}
 
 export interface DocMap {
   segment: string

@@ -1,0 +1,19 @@
+{
+  "_after": "&::after",
+  "_backdrop": "&::backdrop",
+  "_before": "&::before",
+  "_cue": "&::cue",
+  "_cueRegion": "&::cue-region",
+  "_fileSelector": "&::file-selector-button",
+  "_firstLetter": "&::first-letter",
+  "_firstLine": "&::first-line",
+  "_marker": "&::marker",
+  "_placeholder": "&::placeholder, &[data-placeholder]",
+  "_scrollbar": "&::-webkit-scrollbar, &[data-scrollbar]",
+  "_scrollbarButton": "&::-webkit-scrollbar-button",
+  "_scrollbarCorner": "&::-webkit-scrollbar-corner",
+  "_scrollbarThumb": "&::-webkit-scrollbar-thumb",
+  "_scrollbarTrack": "&::-webkit-scrollbar-track",
+  "_scrollbarTrackPiece": "&::-webkit-scrollbar-track-piece",
+  "_selection": "&::selection"
+}

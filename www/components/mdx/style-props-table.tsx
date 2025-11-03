@@ -1,4 +1,4 @@
-import type { ThemeToken } from "@yamada-ui/react"
+import type { StyleConfig } from "@/data"
 import type { ReactNode } from "react"
 import {
   Box,
@@ -13,7 +13,7 @@ import { useMemo } from "react"
 import styles from "@/data/styles.json"
 import { NextLink } from "../next-link"
 
-function createRow(prop: string, { as, docs, properties, token }: Config) {
+function createRow(prop: string, { as, docs, properties, token }: StyleConfig) {
   let value: ReactNode
 
   if (as) {
@@ -91,32 +91,12 @@ function createRow(prop: string, { as, docs, properties, token }: Config) {
   }
 }
 
-export interface Doc {
-  deprecated: boolean
-  description: string
-  experimental: boolean
-  see?: string
-}
-
-export interface Docs {
-  [key: string]: Doc
-}
-
-export interface Config {
-  as?: boolean
-  type?: string
-  docs?: Docs | string
-  properties?: string[]
-  shorthands?: string[]
-  token?: ThemeToken
-}
-
 export function StylePropsTable() {
   const t = useTranslations("component.stylePropsTable")
   const rows = useMemo(() => {
     return (["standard", "additional", "styled"] as const)
       .flatMap((type) => {
-        const data = styles[type] as { [key: string]: Config }
+        const data = styles[type] as { [key: string]: StyleConfig }
 
         return Object.entries(data).flatMap(([prop, config]) => {
           const rows = [{ prop, ...createRow(prop, config) }]

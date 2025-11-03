@@ -5,6 +5,25 @@ import { getPathname } from "@/utils/route"
 import en from "./doc-map.en.json"
 import ja from "./doc-map.ja.json"
 
+interface Prop {
+  type: string
+  description: string
+  required: boolean
+  defaultValue?: string
+  deprecated?: string
+  see?: string
+}
+
+export interface Props {
+  [key: string]: Prop
+}
+
+export interface Namespace {
+  [key: string]: {
+    [key: string]: Prop
+  }
+}
+
 export interface MdnDoc {
   deprecated: boolean
   description: string
@@ -157,81 +176,4 @@ export function getDefaultContents(locale: string): PageContent[] {
       ...getItems(items, title),
     ]) ?? []
   )
-}
-
-interface Prop {
-  type: string
-  description: string
-  required: boolean
-  defaultValue?: string
-  deprecated?: string
-  see?: string
-}
-
-export interface Props {
-  [key: string]: Prop
-}
-
-interface Namespace {
-  [key: string]: Props
-}
-
-interface Data {
-  [key: string]: Namespace | Props
-}
-
-export function isNamespace(data: Namespace | Props): data is Namespace {
-  const key = Object.keys(data).at(0)!
-  const first = key.charAt(0)
-
-  return first === first.toUpperCase()
-}
-
-export function isSingle(data: Data) {
-  return Object.keys(data).length === 1 && !isNamespace(Object.values(data)[0]!)
-}
-
-function sortRoot([a]: [string, any], [b]: [string, any]) {
-  return a.endsWith("Root") ? -1 : b.endsWith("Root") ? 1 : a.localeCompare(b)
-}
-
-interface GetDataOptions {
-  cwd?: string
-  omit?: string[]
-  pick?: string[]
-}
-
-export async function getProps(
-  name: string,
-  { cwd = "@", omit, pick }: GetDataOptions = {},
-) {
-  const data = (
-    await import(`${cwd}/data/props/${name}.json`, {
-      with: { type: "json" },
-    })
-  ).default as Data
-
-  return Object.fromEntries(
-    Object.entries(data)
-      .sort(sortRoot)
-      .filter(([rootName]) => !pick || pick.includes(rootName))
-      .filter(([rootName]) => !omit?.includes(rootName))
-      .map(([rootName, propsOrNamespace]) => {
-        if (isNamespace(propsOrNamespace)) {
-          return [
-            rootName,
-            Object.fromEntries(
-              Object.entries(propsOrNamespace)
-                .sort(sortRoot)
-                .filter(
-                  ([name]) => !pick || pick.includes(`${rootName}.${name}`),
-                )
-                .filter(([name]) => !omit?.includes(`${rootName}.${name}`)),
-            ),
-          ]
-        } else {
-          return [rootName, propsOrNamespace]
-        }
-      }),
-  ) as Data
 }

@@ -1,5 +1,5 @@
 import type { Props } from "@/data"
-import { getProps, isNamespace, isSingle } from "@/data"
+import { getProps, isNamespace, isSingle } from "@/utils/props"
 import { createTable } from "./create-table"
 
 function createRows(props: Props) {

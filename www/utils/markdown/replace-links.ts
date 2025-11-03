@@ -1,29 +1,75 @@
+import type { AnyString } from "@yamada-ui/utils"
+import { globSync } from "glob"
+import path from "path"
 import { CONSTANTS } from "@/constants"
-import docMap from "@/data/doc-map.en.json"
 
-const componentItems = docMap
-  .items!.find(({ segment }) => segment === "components")!
-  .items!.filter(({ items }) => !!items)
-  .flatMap(({ items }) => items ?? [])
+function toCamelCase(value: AnyString): string {
+  return value
+    .replace(/[_-](.)/g, (_, val) => val.toUpperCase())
+    .replace(/^(.)/, (_, val) => val.toLowerCase())
+}
 
-const hookItems = docMap.items!.find(
-  ({ segment }) => segment === "hooks",
-)!.items!
+function toPascalCase(value: AnyString): string {
+  return value
+    .replace(/[_-](.)/g, (_, val) => val.toUpperCase())
+    .replace(/^(.)/, (_, val) => val.toUpperCase())
+}
+
+const componentItems = globSync(
+  path.resolve("contents", "components", "**", "*.mdx"),
+)
+  .map((filePath) => filePath.replace(/.*\/contents\//, ""))
+  .filter(
+    (filePath) =>
+      !/\.(.+)\.mdx$/.test(filePath) && filePath.split("/").length === 3,
+  )
+  .map((filePath) => {
+    const name = filePath
+      .split("/")
+      .at(-1)!
+      .replace(/\.mdx$/, "")
+    const title = toPascalCase(name)
+
+    return {
+      path: `/docs/components/${name}`,
+      title,
+    }
+  })
+  .sort((a, b) => a.title.localeCompare(b.title))
+
+const hookItems = globSync(path.resolve("contents", "hooks", "**", "*.mdx"))
+  .map((filePath) => filePath.replace(/.*\/contents\//, ""))
+  .filter(
+    (filePath) =>
+      !/\.(.+)\.mdx$/.test(filePath) &&
+      filePath.split("/").at(-1) !== "index.mdx",
+  )
+  .map((filePath) => {
+    const name = filePath
+      .split("/")
+      .at(-1)!
+      .replace(/\.mdx$/, "")
+    const title = toCamelCase(name)
+
+    return {
+      path: `/docs/hooks/${name}`,
+      title,
+    }
+  })
+  .sort((a, b) => a.title.localeCompare(b.title))
 
 export function replaceLinks(text: string) {
   try {
     text = text.replace(
       /<ComponentList\s*\/>/g,
       componentItems
-        .map(({ pathname, title }) => `- [${title}](${pathname})`)
+        .map(({ path, title }) => `- [${title}](${path})`)
         .join("\n"),
     )
 
     text = text.replace(
       /<HookList\s*\/>/g,
-      hookItems
-        .map(({ pathname, title }) => `- [${title}](${pathname})`)
-        .join("\n"),
+      hookItems.map(({ path, title }) => `- [${title}](${path})`).join("\n"),
     )
 
     const matches = text.matchAll(

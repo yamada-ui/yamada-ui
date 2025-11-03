@@ -1,4 +1,3 @@
-export * from "./create-table"
 export * from "./replace-card-group"
 export * from "./replace-code-block"
 export * from "./replace-code-group"

@@ -428,11 +428,11 @@ The `Popover` follows the [WAI-ARIA - Dialog (Modal) Pattern](https://www.w3.org
 
 When the `Popover` opens, focus is trapped within it. That is, you cannot focus on elements outside the popover unless the popper is closed.
 
-| Key             | Description                                                                                                        | State                               |
-| --------------- | ------------------------------------------------------------------------------------------------------------------ | ----------------------------------- |
-| `Tab`           | Focuses the next element within the popover that is not disabled. If it's the last element, the popover is closed. | `open={true}`                       |
-| `Shift` + `Tab` | Focuses the next element within the popover that is not disabled. If it's the last element, the popover is closed. | `open={true}`                       |
-| `Escape`        | Closes the popover.                                                                                                | `open={true}` + `closeOnEsc={true}` |
+| Key             | Description                                                                                                             | State                               |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| `Tab`           | Focuses the next element within the popover that is not disabled. If it's the last element, the popover is closed.      | `open={true}`                       |
+| `Shift` + `Tab` | Focuses the previous element within the popover that is not disabled. If it's the first element, the popover is closed. | `open={true}`                       |
+| `Escape`        | Closes the popover.                                                                                                     | `open={true}` + `closeOnEsc={true}` |
 
 ### ARIA Roles and Attributes
 

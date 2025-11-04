@@ -12,6 +12,7 @@ export const modalStyle = defineComponentSlotStyle({
       px: "lg",
     },
     closeButton: {
+      colorScheme: "mono",
       position: "absolute",
       right: "md",
       top: "md",

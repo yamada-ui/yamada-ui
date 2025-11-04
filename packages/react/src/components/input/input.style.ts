@@ -68,7 +68,7 @@ export const inputStyle = defineComponentStyle({
       },
     },
     outline: {
-      border: "1px solid {colorScheme.muted}",
+      border: "1px solid {colors.border}",
       focusRingColor: "{focus-border-color}",
       focusVisibleRing: "inside",
       _invalid: {

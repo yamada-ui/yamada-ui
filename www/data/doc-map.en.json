@@ -28,6 +28,11 @@
           "pathname": "/docs/get-started/cli"
         },
         {
+          "title": "LLMs.txt",
+          "segment": "llms",
+          "pathname": "/docs/get-started/llms"
+        },
+        {
           "title": "Accessibility",
           "segment": "accessibility",
           "pathname": "/docs/get-started/accessibility"

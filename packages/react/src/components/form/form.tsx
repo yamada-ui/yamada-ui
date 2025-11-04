@@ -225,32 +225,36 @@ export const FormRoot = withProvider<"form", FormRootProps, "size" | "variant">(
           noValidate={noValidate}
           {...rest}
         >
-          {customHeader || (
-            <FormHeader {...headerProps}>
-              {customTitle ||
-                (title ? <FormTitle {...titleProps}>{title}</FormTitle> : null)}
+          {customHeader ||
+            (customTitle || title || customDescription || description ? (
+              <FormHeader {...headerProps}>
+                {customTitle ||
+                  (title ? (
+                    <FormTitle {...titleProps}>{title}</FormTitle>
+                  ) : null)}
 
-              {customDescription ||
-                (description ? (
-                  <FormDescription {...descriptionProps}>
-                    {description}
-                  </FormDescription>
-                ) : null)}
-            </FormHeader>
-          )}
+                {customDescription ||
+                  (description ? (
+                    <FormDescription {...descriptionProps}>
+                      {description}
+                    </FormDescription>
+                  ) : null)}
+              </FormHeader>
+            ) : null)}
 
           {customBody || <FormBody {...bodyProps}>{omittedChildren}</FormBody>}
 
-          {customFooter || (
-            <FormFooter {...footerProps}>
-              {customSubmitButton ||
-                (submitButton ? (
-                  <FormSubmitButton {...submitButtonProps}>
-                    {submitButton}
-                  </FormSubmitButton>
-                ) : null)}
-            </FormFooter>
-          )}
+          {customFooter ||
+            (customSubmitButton || submitButton ? (
+              <FormFooter {...footerProps}>
+                {customSubmitButton ||
+                  (submitButton ? (
+                    <FormSubmitButton {...submitButtonProps}>
+                      {submitButton}
+                    </FormSubmitButton>
+                  ) : null)}
+              </FormFooter>
+            ) : null)}
         </styled.form>
       </FormContext>
     )

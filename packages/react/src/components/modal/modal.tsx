@@ -345,6 +345,7 @@ export const ShorthandModalContent: FC<ShorthandModalContentProps> = ({
   const customBody = wrapOrPassProps(ModalBody, body)
   const customFooter = wrapOrPassProps(ModalFooter, footer)
   const customCancel = wrapOrPassProps(Button, cancel, {
+    colorScheme: "mono",
     variant: "ghost",
     onClick: () => (onCancel ? onCancel(onClose) : onClose()),
   })

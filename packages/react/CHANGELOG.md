@@ -1,5 +1,15 @@
 # @yamada-ui/react
 
+## 2.0.6
+
+### Patch Changes
+
+- [#5536](https://github.com/yamada-ui/yamada-ui/pull/5536) [`139f9fb`](https://github.com/yamada-ui/yamada-ui/commit/139f9fbd30cb85618d1808769808d477c987e60d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Adjusted the border color for the "outline" variant of the `Input` component.
+
+- [#5328](https://github.com/yamada-ui/yamada-ui/pull/5328) [`6b44560`](https://github.com/yamada-ui/yamada-ui/commit/6b44560c567a2cf6cfd8d177c7a9186e2f788785) Thanks [@bmthd](https://github.com/bmthd)! - The type definition for `items` is now exported from each component's namespace.
+
+- [#5536](https://github.com/yamada-ui/yamada-ui/pull/5536) [`39e87e1`](https://github.com/yamada-ui/yamada-ui/commit/39e87e1d919050427fc561ba3bc8d7b88de88f25) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed the default color scheme of the `CloseButton` and cancel button in `Modal` and `Drawer` to `mono`.
+
 ## 2.0.5
 
 ### Patch Changes

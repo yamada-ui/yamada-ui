@@ -412,7 +412,7 @@
               "title": "NativePopover",
               "segment": "native-popover",
               "pathname": "/docs/components/native-popover",
-              "status": "planned"
+              "status": "new"
             },
             {
               "title": "NativeSelect",

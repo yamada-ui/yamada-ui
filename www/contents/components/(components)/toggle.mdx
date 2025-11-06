@@ -295,7 +295,7 @@ return (
 )
 ```
 
-### Keyboard Interaction
+### Keyboard Navigation
 
 | Key              | Description                  | State |
 | ---------------- | ---------------------------- | ----- |
@@ -304,7 +304,7 @@ return (
 
 ### ARIA Roles and Attributes
 
-| Component                    | Role and Attributes | Usage                                                 |
-| ---------------------------- | ------------------- | ----------------------------------------------------- |
-| `ToggleGroup.Root`           | `role="group"`      | Indicates the collection of related toggles.          |
-| `Toggle`, `ToggleGroup.Item` | `aria-pressed`      | `true` when the toggle is on, `false` when it is off. |
+| Component                    | Role and Attributes | Usage                                                                     |
+| ---------------------------- | ------------------- | ------------------------------------------------------------------------- |
+| `ToggleGroup.Root`           | `role="group"`      | Indicates that it's a group.                                              |
+| `Toggle`, `ToggleGroup.Item` | `aria-pressed`      | Set to `true` if the element is pressed, or `false` if it is not pressed. |

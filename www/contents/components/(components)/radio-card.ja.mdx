@@ -608,7 +608,7 @@ return <RadioCardGroup.Root items={items} value={value} onChange={setValue} />
 
 `Fieldset`を使用しない場合は、`RadioCardGroup.Root`に`aria-label`または`aria-labelledby`を設定します。
 
-```tsx live=false
+```tsx
 const items = useMemo<RadioCardGroup.ItemType[]>(
   () => [
     { label: "ビアンカ", value: "1" },
@@ -621,7 +621,7 @@ const items = useMemo<RadioCardGroup.ItemType[]>(
 return <RadioCardGroup.Root items={items} aria-label="キャラクター" />
 ```
 
-```tsx live=false
+```tsx
 const items = useMemo<RadioCardGroup.ItemType[]>(
   () => [
     { label: "ビアンカ", value: "1" },
@@ -655,8 +655,8 @@ return (
 
 ### ARIAロールと属性
 
-| コンポーネント             | ロールと属性        | 使い方                                                                                                    |
-| -------------------------- | ------------------- | --------------------------------------------------------------------------------------------------------- |
-| `RadioCardGroup.Root`      | `role="radiogroup"` | ラジオグループであることを示します。                                                                      |
-|                            | `aria-labelledby`   | `RadioCardGroup.Root`が`Field`内にあり、`Field`に`label`が設定されている場合は、その`id`を設定します。    |
-| `RadioCardGroup.Item.Root` | `aria-checked`      | ラジオボタンがチェックされている場合は`"true"`を設定し、チェックされていない場合は`"false"`を設定します。 |
+| コンポーネント                               | ロールと属性        | 使い方                                                                                                                              |
+| -------------------------------------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `RadioCardGroup.Root`                        | `role="radiogroup"` | ラジオグループであることを示します。                                                                                                |
+|                                              | `aria-labelledby`   | `RadioCardGroup.Root`が`Field.Root`内にあり、`Field.Root`に`label`または`Field.Label`が設定されている場合は、その`id`を設定します。 |
+| `RadioCard.Root`, `RadioCardGroup.Item.Root` | `aria-checked`      | ラジオボタンがチェックされている場合は`"true"`を設定し、チェックされていない場合は`"false"`を設定します。                           |

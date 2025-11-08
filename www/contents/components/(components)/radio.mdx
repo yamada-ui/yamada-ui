@@ -318,7 +318,7 @@ The `Radio` follows the [WAI-ARIA - Radio Pattern](https://www.w3.org/WAI/ARIA/a
 
 If you are not using `Fieldset`, set `aria-label` or `aria-labelledby` to `RadioGroup.Root`.
 
-```tsx live=false
+```tsx
 <RadioGroup.Root aria-label="キャラクター">
   <RadioGroup.Item value="孫悟空">孫悟空</RadioGroup.Item>
   <RadioGroup.Item value="ベジータ">ベジータ</RadioGroup.Item>
@@ -326,7 +326,7 @@ If you are not using `Fieldset`, set `aria-label` or `aria-labelledby` to `Radio
 </RadioGroup.Root>
 ```
 
-```tsx live=false
+```tsx
 <VStack gap="sm">
   <Text as="h3" id="label">
     キャラクター
@@ -353,8 +353,8 @@ If you are not using `Fieldset`, set `aria-label` or `aria-labelledby` to `Radio
 
 ### ARIA Roles and Attributes
 
-| Component         | Roles and Attributes | Usage                                                                            |
-| ----------------- | -------------------- | -------------------------------------------------------------------------------- |
-| `RadioGroup.Root` | `role="radiogroup"`  | Indicates that this is a radio group.                                            |
-|                   | `aria-labelledby`    | If RadioGroup.Root is within a Field and Field has a label or Label, set its id. |
-| `RadioGroup.Item` | `aria-checked`       | Sets to "true" if the radio button is checked, and "false" if it is not checked. |
+| Component                | Roles and Attributes | Usage                                                                                                        |
+| ------------------------ | -------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `RadioGroup.Root`        | `role="radiogroup"`  | Indicates that this is a radio group.                                                                        |
+|                          | `aria-labelledby`    | If `RadioGroup.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, set its `id`. |
+| `Radio, RadioGroup.Item` | `aria-checked`       | Sets to `"true"` if the radio button is checked, and `"false"` if it is not checked.                         |

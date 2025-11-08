@@ -318,7 +318,7 @@ return <RadioGroup.Root items={items} value={value} onChange={setValue} />
 
 `Fieldset`を使用しない場合は、`RadioGroup.Root`に`aria-label`または`aria-labelledby`を設定します。
 
-```tsx live=false
+```tsx
 <RadioGroup.Root aria-label="キャラクター">
   <RadioGroup.Item value="孫悟空">孫悟空</RadioGroup.Item>
   <RadioGroup.Item value="ベジータ">ベジータ</RadioGroup.Item>
@@ -326,7 +326,7 @@ return <RadioGroup.Root items={items} value={value} onChange={setValue} />
 </RadioGroup.Root>
 ```
 
-```tsx live=false
+```tsx
 <VStack gap="sm">
   <Text as="h3" id="label">
     キャラクター
@@ -353,8 +353,8 @@ return <RadioGroup.Root items={items} value={value} onChange={setValue} />
 
 ### ARIAロールと属性
 
-| コンポーネント    | ロールと属性        | 使い方                                                                                                          |
-| ----------------- | ------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `RadioGroup.Root` | `role="radiogroup"` | ラジオグループであることを示します。                                                                            |
-|                   | `aria-labelledby`   | `RadioGroup.Root`が`Field`内にあり、`Field`に`label`または`Label`が設定されている場合は、その`id`を設定します。 |
-| `RadioGroup.Item` | `aria-checked`      | ラジオボタンがチェックされている場合は`"true"`を設定し、チェックされていない場合は`"false"`を設定します。       |
+| コンポーネント             | ロールと属性        | 使い方                                                                                                                          |
+| -------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `RadioGroup.Root`          | `role="radiogroup"` | ラジオグループであることを示します。                                                                                            |
+|                            | `aria-labelledby`   | `RadioGroup.Root`が`Field.Root`内にあり、`Field.Root`に`label`または`Field.Label`が設定されている場合は、その`id`を設定します。 |
+| `Radio`, `RadioGroup.Item` | `aria-checked`      | ラジオボタンがチェックされている場合は`"true"`を設定し、チェックされていない場合は`"false"`を設定します。                       |

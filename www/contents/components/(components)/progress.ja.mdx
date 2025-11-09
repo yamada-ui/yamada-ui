@@ -150,7 +150,7 @@ import { Progress } from "@workspaces/ui"
 
 ## アクセシビリティ
 
-`Progress`は、アクセシビリティに関して[WAI-ARIA - Meter](https://www.w3.org/WAI/ARIA/apg/patterns/meter/)に従います。
+`Progress`は、アクセシビリティに関して[WAI-ARIA - Meter Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/meter/)に従います。
 
 `Progress`に`aria-label`または`aria-labelledby`を設定すると、スクリーンリーダーによって読み上げられます。
 
@@ -170,10 +170,10 @@ import { Progress } from "@workspaces/ui"
 
 ### ARIAロールと属性
 
-| コンポーネント | ロールと属性         | 用途                                  |
-| -------------- | -------------------- | ------------------------------------- |
-| `Progress`     | `role="progressbar"` | プログレスバーであることを示します。  |
-|                | `aria-valuemin`      | 最小値を設定します。デフォルト: `0`   |
-|                | `aria-valuemax`      | 最大値を設定します。デフォルト: `100` |
-|                | `aria-valuenow`      | 現在の値を表します。                  |
-|                | `aria-label`         | プログレスバーにラベルを提供します。  |
+| コンポーネント | ロールと属性         | 用途                                     |
+| -------------- | -------------------- | ---------------------------------------- |
+| `Progress`     | `role="progressbar"` | プログレスバーであることを示します。     |
+|                | `aria-valuemin`      | 最小値を設定します。デフォルト: `0`      |
+|                | `aria-valuemax`      | 最大値を設定します。デフォルト: `100`    |
+|                | `aria-valuenow`      | 現在の値を表します。                     |
+|                | `aria-label`         | 現在の進行状況を示すラベルを設定します。 |

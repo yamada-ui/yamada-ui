@@ -150,7 +150,7 @@ To use animation, set `value` to `null`.
 
 ## Accessibility
 
-The `Progress` follows the [WAI-ARIA - Meter](https://www.w3.org/WAI/ARIA/apg/patterns/meter/) for accessibility.
+The `Progress` follows the [WAI-ARIA - Meter Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/meter/) for accessibility.
 
 Setting `aria-label` or `aria-labelledby` on `Progress` will make it readable by screen readers.
 
@@ -170,10 +170,10 @@ Setting `aria-label` or `aria-labelledby` on `Progress` will make it readable by
 
 ### ARIA Roles and Attributes
 
-| Component  | Role and Attribute   | Usage                                  |
-| ---------- | -------------------- | -------------------------------------- |
-| `Progress` | `role="progressbar"` | Indicates that it is a progress bar.   |
-|            | `aria-valuemin`      | Sets the minimum value. Default: `0`   |
-|            | `aria-valuemax`      | Sets the maximum value. Default: `100` |
-|            | `aria-valuenow`      | Represents the current value.          |
-|            | `aria-label`         | Provides a label for the progress bar. |
+| Component  | Role and Attribute   | Usage                                              |
+| ---------- | -------------------- | -------------------------------------------------- |
+| `Progress` | `role="progressbar"` | Indicates that it is a progress bar.               |
+|            | `aria-valuemin`      | Sets the minimum value. Default: `0`               |
+|            | `aria-valuemax`      | Sets the maximum value. Default: `100`             |
+|            | `aria-valuenow`      | Represents the current value.                      |
+|            | `aria-label`         | Set the label that describes the current progress. |

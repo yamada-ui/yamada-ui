@@ -316,7 +316,7 @@ return (
 
 The `Radio` follows the [WAI-ARIA - Radio Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/radio) for accessibility.
 
-If you are not using `Fieldset`, set `aria-label` or `aria-labelledby` to `RadioGroup.Root`.
+If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `RadioGroup.Root`.
 
 ```tsx
 <RadioGroup.Root aria-label="キャラクター">
@@ -353,8 +353,14 @@ If you are not using `Fieldset`, set `aria-label` or `aria-labelledby` to `Radio
 
 ### ARIA Roles and Attributes
 
-| Component                | Roles and Attributes | Usage                                                                                                        |
-| ------------------------ | -------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `RadioGroup.Root`        | `role="radiogroup"`  | Indicates that this is a radio group.                                                                        |
-|                          | `aria-labelledby`    | If `RadioGroup.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, set its `id`. |
-| `Radio, RadioGroup.Item` | `aria-checked`       | Sets to `"true"` if the radio button is checked, and `"false"` if it is not checked.                         |
+| Component         | Roles and Attributes | Usage                                                                                                                |
+| ----------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `RadioGroup.Root` | `role="radiogroup"`  | Indicates that this is a radio group.                                                                                |
+|                   | `aria-labelledby`    | If `RadioGroup.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id`.        |
+|                   | `aria-describedby`   | If `RadioGroup.Root` is within a `Field.Root` and `Field.Root` has a helper message or error message, sets its `id`. |
+| `RadioGroup.Item` | `aria-checked`       | Sets to `"true"` if the radio button is checked, and `"false"` if it is not checked.                                 |
+|                   | `aria-describedby`   | Sets the value if `aria-describedby` is set on `RadioGroup.Item`.                                                    |
+|                   | `aria-disabled`      | Sets to `"true"` if `disabled` or `readOnly` is set.                                                                 |
+|                   | `aria-invalid`       | Sets to `"true"` if `invalid` is set.                                                                                |
+|                   | `aria-required`      | Sets to `"true"` if `required` is set.                                                                               |
+| `RadioIndicator`  | `aria-hidden`        | Sets to `"true"` to hide the radio button indicator from screen readers.                                             |

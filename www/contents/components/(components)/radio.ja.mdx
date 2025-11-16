@@ -353,14 +353,14 @@ return <RadioGroup.Root items={items} value={value} onChange={setValue} />
 
 ### ARIAロールと属性
 
-| コンポーネント    | ロールと属性        | 使い方                                                                                                                                        |
-| ----------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `RadioGroup.Root` | `role="radiogroup"` | ラジオグループであることを示します。                                                                                                          |
-|                   | `aria-labelledby`   | `RadioGroup.Root`が`Field.Root`内にあり、`Field.Root`に`label`または`Field.Label`が設定されている場合は、その`id`を設定します。               |
-|                   | `aria-describedby`  | `RadioGroup.Root`が`Field.Root`内にあり、`Field.Root`にヘルパーメッセージまたはエラーメッセージが設定されている場合は、その`id`を設定します。 |
-| `RadioGroup.Item` | `aria-checked`      | ラジオボタンがチェックされている場合は`"true"`を設定し、チェックされていない場合は`"false"`を設定します。                                     |
-|                   | `aria-describedby`  | `RadioGroup.Item`に`aria-describedby`を設定した場合は、その値を設定します。                                                                   |
-|                   | `aria-disabled`     | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                                        |
-|                   | `aria-invalid`      | `invalid`が設定されている場合は`"true"`を設定します。                                                                                         |
-|                   | `aria-required`     | `required`が設定されている場合は`"true"`を設定します。                                                                                        |
-| `RadioIndicator`  | `aria-hidden`       | ラジオボタンのインジケーターをスクリーンリーダーから隠すために`"true"`を設定します。                                                          |
+| コンポーネント             | ロールと属性        | 使い方                                                                                                                                                                                                         |
+| -------------------------- | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `RadioGroup.Root`          | `role="radiogroup"` | ラジオグループであることを示します。                                                                                                                                                                           |
+|                            | `aria-labelledby`   | `RadioGroup.Root`が`Field.Root`内にあり、`Field.Root`に`label`または`Field.Label`が設定されている場合は、その`id`を設定します。                                                                                |
+|                            | `aria-describedby`  | `RadioGroup.Root`が`Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。              |
+| `Radio`, `RadioGroup.Item` | `aria-checked`      | ラジオボタンがチェックされている場合は`"true"`を設定し、チェックされていない場合は`"false"`を設定します。                                                                                                      |
+|                            | `aria-describedby`  | `Radio`または`RadioGroup.Item`が`Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
+|                            | `aria-disabled`     | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                                         |
+|                            | `aria-invalid`      | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                                          |
+|                            | `aria-required`     | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                                         |
+| `RadioIndicator`           | `aria-hidden`       | 要素をアクセシビリティツリーから除外します。                                                                                                                                                                   |

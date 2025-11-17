@@ -98,6 +98,10 @@ const data: IntlData = {
   tag: {
     "Close tag": "Închide eticheta",
   },
+  tip: {
+    "More information": "Mai multe informații",
+  },
+
   toggle: {
     "Toggle button": "Buton de comutare",
   },

@@ -98,6 +98,10 @@ const data: IntlData = {
   tag: {
     "Close tag": "Sulge silt",
   },
+  tip: {
+    "More information": "Lisateave",
+  },
+
   toggle: {
     "Toggle button": "Lülitusnupp",
   },

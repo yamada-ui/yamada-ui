@@ -606,7 +606,7 @@ return <RadioCardGroup.Root items={items} value={value} onChange={setValue} />
 
 The `RadioCard` follows the [WAI-ARIA - Radio Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/radio) for accessibility.
 
-If you are not using `Fieldset`, set `aria-label` or `aria-labelledby` to `RadioCardGroup.Root`.
+If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `RadioCardGroup.Root`.
 
 ```tsx
 const items = useMemo<RadioCardGroup.ItemType[]>(
@@ -618,7 +618,7 @@ const items = useMemo<RadioCardGroup.ItemType[]>(
   [],
 )
 
-return <RadioCardGroup.Root items={items} aria-label="キャラクター" />
+return <RadioCardGroup.Root aria-label="キャラクター" items={items} />
 ```
 
 ```tsx
@@ -637,7 +637,7 @@ return (
       キャラクター
     </Text>
 
-    <RadioCardGroup.Root items={items} aria-labelledby="label" />
+    <RadioCardGroup.Root aria-labelledby="label" items={items} />
   </VStack>
 )
 ```
@@ -655,8 +655,14 @@ return (
 
 ### ARIA Roles and Attributes
 
-| Component                                    | Role and Attribute  | Usage                                                                                                            |
-| -------------------------------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `RadioCardGroup.Root`                        | `role="radiogroup"` | Indicates that this is a radio group.                                                                            |
-|                                              | `aria-labelledby`   | If `RadioCardGroup.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, set its `id`. |
-| `RadioCard.Root`, `RadioCardGroup.Item.Root` | `aria-checked`      | Sets to `"true"` if the radio button is checked, and `"false"` if it is not checked.                             |
+| Component                                    | Role and Attribute  | Usage                                                                                                                                                                                                |
+| -------------------------------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `RadioCardGroup.Root`                        | `role="radiogroup"` | Indicates that this is a radio group.                                                                                                                                                                |
+|                                              | `aria-labelledby`   | If `RadioCardGroup.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, set its `id`.                                                                                     |
+|                                              | `aria-describedby`  | If `RadioCardGroup.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`.                          |
+| `RadioCard.Root`, `RadioCardGroup.Item.Root` | `aria-checked`      | Sets to `"true"` if the radio button is checked, and `"false"` if it is not checked.                                                                                                                 |
+|                                              | `aria-describedby`  | If `RadioCard.Root` or `RadioCardGroup.Item.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|                                              | `aria-disabled`     | Sets to `"true"` if `disabled` or `readOnly` is set.                                                                                                                                                 |
+|                                              | `aria-invalid`      | Sets to `"true"` if `invalid` is set.                                                                                                                                                                |
+|                                              | `aria-required`     | Sets to `"true"` if `required` is set.                                                                                                                                                               |
+| `RadioIndicator`                             | `aria-hidden`       | Excludes the element from the accessibility tree.                                                                                                                                                    |

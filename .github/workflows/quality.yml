@@ -52,8 +52,8 @@ jobs:
         if: steps.check-modified.outputs.any_changed == 'true'
         run: pnpm build
 
-  test-chromium:
-    name: Tests on jsdom and Chromium
+  test-coverage:
+    name: Tests on jsdom and Chromium (with coverage)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -94,13 +94,15 @@ jobs:
           verbose: true
           codecov_yml_path: ./codecov.yml
 
-  test-webkit:
-    name: Browser Test on Webkit
+  test-browsers:
+    name: Browser Test on ${{ matrix.browser }}
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [webkit, firefox]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Check modified files
         id: check-modified
         uses: tj-actions/changed-files@v46
@@ -111,52 +113,17 @@ jobs:
             !packages/**/src/**/*.stories.{ts,tsx}
             !packages/workspace/src/**
             packages/workspace/src/vitest/**
-
       - name: Install
         if: steps.check-modified.outputs.any_changed == 'true'
         uses: ./.github/composite-actions/install
-
       - name: Setup Browsers
         if: steps.check-modified.outputs.any_changed == 'true'
         working-directory: packages/react
-        run: pnpm playwright install webkit --with-deps
-
+        run: pnpm playwright install ${{ matrix.browser }} --with-deps
       - name: Run tests
         if: steps.check-modified.outputs.any_changed == 'true'
         working-directory: packages/react
-        run: pnpm test:webkit
-
-  test-firefox:
-    name: Browser Test on Firefox
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Check modified files
-        id: check-modified
-        uses: tj-actions/changed-files@v46
-        with:
-          files: |
-            packages/**/(package.json|vitest.config.ts)
-            packages/**/(src|test)/**/*.{ts,tsx}
-            !packages/**/src/**/*.stories.{ts,tsx}
-            !packages/workspace/src/**
-            packages/workspace/src/vitest/**
-
-      - name: Install
-        if: steps.check-modified.outputs.any_changed == 'true'
-        uses: ./.github/composite-actions/install
-
-      - name: Setup Browsers
-        if: steps.check-modified.outputs.any_changed == 'true'
-        working-directory: packages/react
-        run: pnpm playwright install firefox --with-deps
-
-      - name: Run tests
-        if: steps.check-modified.outputs.any_changed == 'true'
-        working-directory: packages/react
-        run: pnpm test:firefox
+        run: pnpm test:${{ matrix.browser }}
 
   eslint:
     name: ESLint

@@ -98,6 +98,9 @@ const data: IntlData = {
   tag: {
     "Close tag": "タグを閉じる",
   },
+  tip: {
+    "More information": "詳細情報",
+  },
   toggle: {
     "Toggle button": "トグルボタン",
   },

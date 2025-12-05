@@ -1,0 +1,1 @@
+import{J as r}from"./iframe-BIJNUwA0.js";const c={enter:function(e){return function(t,n){return{...e??{duration:.2,ease:[0,0,.58,1]},...n?{duration:r(n)?n:n.enter}:{},delay:r(t)?t:t==null?void 0:t.enter}}},exit:function(e){return function(t,n){return{...e??{duration:.2,ease:[.42,0,1,1]},...n?{duration:r(n)?n:n.exit}:{},delay:r(t)?t:t==null?void 0:t.exit}}}};export{c};

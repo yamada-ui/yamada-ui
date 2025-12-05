@@ -1,3 +1,4 @@
+// @ts-nocheck -- vite version mismatch between storybook (5.x) and vitest (7.x)
 import sharedConfig from "@yamada-ui/workspace/vitest/config"
 import { resolve } from "node:path"
 import { defineProject, mergeConfig } from "vitest/config"

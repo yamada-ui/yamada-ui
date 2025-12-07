@@ -100,10 +100,3 @@ export const QrCodeOverlay = withContext<"div", QrCodeOverlayProps>((rest) => {
 
   return <styled.div {...getOverlayProps(rest)} />
 }, "overlay")()
-
-export const QrCode = {
-  Frame: QrCodeFrame,
-  Overlay: QrCodeOverlay,
-  Pattern: QrCodePattern,
-  Root: QrCodeRoot,
-}

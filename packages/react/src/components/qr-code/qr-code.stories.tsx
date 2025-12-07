@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "#storybook"
 import { Icon } from "../icon"
-import { QrCode } from "./qr-code"
+import { QrCode } from "./"
 
 type Story = StoryFn<typeof QrCode.Root>
 

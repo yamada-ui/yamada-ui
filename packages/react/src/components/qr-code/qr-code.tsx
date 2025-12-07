@@ -23,8 +23,12 @@ export interface QrCodeRootProps
   border?: number
   /**
    * The error correction level.
+   * `L` allows for up to 7% error correction,
+   * `M` allows for up to 15% error correction,
+   * `Q` allows for up to 25% error correction,
+   * `H` allows for up to 30% error correction.
    *
-   * @default 'M'
+   * @default 'L'
    */
   ecc?: "H" | "L" | "M" | "Q"
   /**
@@ -68,7 +72,7 @@ export const QrCodeRoot = withProvider<"div", QrCodeRootProps>(
     )
   },
   "root",
-)({ border: 2, ecc: "M" })
+)({ border: 2, ecc: "L" })
 
 export interface QrCodeFrameProps
   extends HTMLStyledProps<"svg">,

@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self' 'unsafe-inline' blob: 'unsafe-eval' https://esm.sh; style-src 'unsafe-inline'; img-src data:; connect-src 'self' https://esm.sh;"
+    />
+    <title>Preview Runtime</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@19.2.0",
+          "react/jsx-runtime": "https://esm.sh/react@19.2.0/jsx-runtime",
+          "react-dom": "https://esm.sh/react-dom@19.2.0",
+          "react-dom/client": "https://esm.sh/react-dom@19.2.0/client",
+          "@yamada-ui/react": "/vendor/@yamada-ui/react/index.mjs"
+        }
+      }
+    </script>
+    <script type="module">
+      console.log("[Runtime] Script started")
+      let root = null
+      let scriptCounter = 0
+
+      // Track import errors and module loading errors
+      window.addEventListener(
+        "error",
+        function (event) {
+          console.error("[Runtime] Error event:", {
+            message: event.message,
+            filename: event.filename,
+            lineno: event.lineno,
+            colno: event.colno,
+            errorObject: event.error,
+          })
+
+          // Always send errors to parent for visibility
+          window.parent.postMessage(
+            {
+              type: "error",
+              message: event.error?.message || event.message || "Unknown error",
+              filename: event.filename,
+              lineno: event.lineno,
+            },
+            "*",
+          )
+        },
+        true,
+      )
+
+      window.addEventListener("unhandledrejection", function (event) {
+        // Only capture module/import related promise rejections
+        if (event.reason) {
+          const message = event.reason.message || String(event.reason)
+          if (
+            message.includes("Failed to fetch") ||
+            message.includes("Failed to resolve") ||
+            message.includes("import") ||
+            message.toLowerCase().includes("module")
+          ) {
+            console.error("[Runtime] Module/Import rejection:", event.reason)
+            window.parent.postMessage(
+              { type: "error", message: `Module load error: ${message}` },
+              "*",
+            )
+          }
+        }
+      })
+
+      function sendReady() {
+        console.log("[Runtime] Sending ready message to parent")
+        console.log("[Runtime] window.parent:", window.parent)
+        console.log(
+          "[Runtime] window.parent === window:",
+          window.parent === window,
+        )
+        try {
+          window.parent.postMessage({ type: "ready" }, "*")
+          console.log("[Runtime] postMessage succeeded")
+        } catch (err) {
+          console.error("[Runtime] postMessage failed:", err)
+        }
+      }
+
+      // Listen for ping from parent to know when it's ready to receive messages
+      window.addEventListener("message", function pingHandler(event) {
+        if (event.data.type === "ping") {
+          console.log("[Runtime] Received ping from parent, sending ready")
+          sendReady()
+          window.removeEventListener("message", pingHandler)
+        }
+      })
+
+      console.log("[Runtime] Waiting for ping from parent...")
+
+      window.addEventListener("message", async function (event) {
+        if (event.data.type === "execute") {
+          console.log(
+            "[Runtime] Received execute message, code length:",
+            event.data.code?.length,
+          )
+          try {
+            const { code } = event.data
+
+            // Remove previous user script if exists
+            const oldScript = document.getElementById("user-script")
+            if (oldScript) {
+              oldScript.remove()
+            }
+
+            // Create wrapper code that imports React and renders the user's component
+            const wrapperCode = `
+            import { createElement } from "react";
+            import { createRoot } from "react-dom/client";
+            import { UIProvider } from "@yamada-ui/react";
+
+            ${code}
+
+            try {
+              const rootEl = document.getElementById("root");
+              if (!window.__playgroundRoot) {
+                window.__playgroundRoot = createRoot(rootEl);
+              }
+
+              window.__playgroundRoot.render(
+                createElement(UIProvider, null, createElement(App))
+              );
+
+              window.parent.postMessage({ type: "success" }, "*");
+            } catch (err) {
+              console.error('[Runtime] Render error:', err);
+              window.parent.postMessage(
+                { type: "error", message: err.message || String(err) },
+                "*"
+              );
+            }
+          `
+
+            console.log(
+              "[Runtime] Wrapper code first 200 chars:",
+              wrapperCode.substring(0, 200),
+            )
+
+            // Use data URL to avoid template literal issues
+            const blob = new Blob([wrapperCode], {
+              type: "application/javascript",
+            })
+            const url = URL.createObjectURL(blob)
+
+            // Inject code as module script
+            const script = document.createElement("script")
+            script.type = "module"
+            script.id = "user-script"
+            script.src = url
+
+            // Handle script load errors
+            script.onerror = function (err) {
+              console.error("[Runtime] Script load error:", err)
+              URL.revokeObjectURL(url)
+              window.parent.postMessage(
+                { type: "error", message: "Failed to load script module" },
+                "*",
+              )
+            }
+
+            script.onload = function () {
+              console.log("[Runtime] Script loaded successfully")
+              URL.revokeObjectURL(url)
+            }
+
+            document.body.appendChild(script)
+          } catch (err) {
+            window.parent.postMessage(
+              { type: "error", message: err.message || String(err) },
+              "*",
+            )
+          }
+        } else if (event.data.type === "screenshot") {
+          try {
+            console.log("[Runtime] Screenshot request received")
+
+            const rootElement = document.getElementById("root")
+            if (!rootElement) {
+              throw new Error("Root element not found")
+            }
+
+            const { toBlob } = await import(
+              "https://esm.sh/html-to-image@1.11.13"
+            )
+
+            console.log("[Runtime] Capturing screenshot of root element")
+
+            const blob = await toBlob(rootElement, {
+              pixelRatio: 2,
+            })
+
+            if (!blob) {
+              throw new Error("Failed to create blob")
+            }
+
+            console.log("[Runtime] Blob created, converting to data URL")
+
+            const reader = new FileReader()
+            reader.onloadend = function () {
+              console.log("[Runtime] Sending screenshot result to parent")
+              window.parent.postMessage(
+                {
+                  type: "screenshot-result",
+                  dataUrl: reader.result,
+                },
+                "*",
+              )
+            }
+            reader.readAsDataURL(blob)
+          } catch (err) {
+            console.error("[Runtime] Screenshot error:", err)
+            window.parent.postMessage(
+              {
+                type: "screenshot-error",
+                message: err.message || String(err),
+              },
+              "*",
+            )
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

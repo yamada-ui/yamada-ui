@@ -108,4 +108,18 @@ return <Tag onClose={onClose}>Tag</Tag>
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+### Keyboard Navigation
+
+| Key              | Description                        | State            |
+| ---------------- | ---------------------------------- | ---------------- |
+| `Tab`            | Moves focus to the close button.   | `TagCloseButton` |
+| `Enter`, `Space` | Executes the focused close button. | `TagCloseButton` |
+
+### ARIA Roles and Attributes
+
+| Component                    | Roles and Attributes | Usage                                             |
+| ---------------------------- | -------------------- | ------------------------------------------------- |
+| `TagCloseButton`             | `role="button"`      | Indicates that this is a close button.            |
+|                              | `aria-label`         | Sets to `"Close tag"`.                            |
+|                              | `aria-disabled`      | Sets to `"true"` if `disabled` is set.            |
+| `TagStartIcon`, `TagEndIcon` | `aria-hidden`        | Excludes the element from the accessibility tree. |

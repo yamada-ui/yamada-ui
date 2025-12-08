@@ -22,6 +22,7 @@ import {
 } from "./use-accordion"
 
 interface AccordionCallBackProps {
+  test: number
   disabled?: boolean
   expanded?: boolean
 }

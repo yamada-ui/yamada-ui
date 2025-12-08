@@ -95,11 +95,17 @@ jobs:
           codecov_yml_path: ./codecov.yml
 
   test-browsers:
-    name: Browser Test on ${{ matrix.browser }}
+    name: Browser Test on ${{ matrix.name }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        browser: [webkit, firefox]
+        include:
+          - id: firefox
+            name: Firefox
+
+          - id: webkit
+            name: Webkit
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -120,10 +126,10 @@ jobs:
         if: steps.check-modified.outputs.any_changed == 'true'
         working-directory: packages/react
         run: pnpm playwright install ${{ matrix.browser }} --with-deps
-      - name: Run tests
+      - name: Run Browser Test on ${{ matrix.name }}
         if: steps.check-modified.outputs.any_changed == 'true'
         working-directory: packages/react
-        run: pnpm test:${{ matrix.browser }}
+        run: pnpm test:${{ matrix.id }}
 
   eslint:
     name: ESLint

@@ -16,6 +16,10 @@ const items = [
     button: "Accordion Label 3",
     children: "This is an accordion item 3",
   },
+  {
+    button: "Accordion Label 4",
+    children: "This is an accordion item 4",
+  },
 ]
 
 describe("<Accordion />", () => {

@@ -53,7 +53,7 @@ jobs:
         run: pnpm build
 
   test-coverage:
-    name: Test on jsdom and Chromium (with coverage)
+    name: Test (Chromium)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -95,7 +95,7 @@ jobs:
           codecov_yml_path: ./codecov.yml
 
   test-browser:
-    name: Test on ${{ matrix.name }}
+    name: Test (${{ matrix.name }})
     runs-on: ubuntu-latest
     strategy:
       matrix:

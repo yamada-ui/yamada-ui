@@ -56,7 +56,7 @@ export { QrCodePropsContext, useQrCodePropsContext }
  * @see https://yamada-ui.com/docs/components/qr-code
  */
 export const QrCodeRoot = withProvider<"div", QrCodeRootProps>(
-  ({ border, ecc, pixelSize, value, ...rest }) => {
+  ({ border = 2, ecc = "L", pixelSize, value, ...rest }) => {
     const { getFrameProps, getOverlayProps, getPatternProps, getRootProps } =
       useQrCode({ border, ecc, pixelSize, value })
 
@@ -72,7 +72,7 @@ export const QrCodeRoot = withProvider<"div", QrCodeRootProps>(
     )
   },
   "root",
-)({ border: 2, ecc: "L" })
+)()
 
 export interface QrCodeFrameProps
   extends HTMLStyledProps<"svg">,

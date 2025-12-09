@@ -1,9 +1,12 @@
+import react from "@vitejs/plugin-react-swc"
 // @ts-nocheck -- vite version mismatch between storybook (5.x) and vitest (7.x)
 import sharedConfig from "@yamada-ui/workspace/vitest/config"
 import { resolve } from "node:path"
 import { defineProject, mergeConfig } from "vitest/config"
 
 export default mergeConfig(sharedConfig, {
+  // @ts-expect-error
+  plugins: [react()],
   test: {
     projects: [
       defineProject({

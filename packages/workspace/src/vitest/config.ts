@@ -1,9 +1,6 @@
 import type { ViteUserConfig } from "vitest/config"
-import react from "@vitejs/plugin-react-swc"
 
 export default {
-  // @ts-expect-error
-  plugins: [react()],
   test: {
     coverage: {
       exclude: [

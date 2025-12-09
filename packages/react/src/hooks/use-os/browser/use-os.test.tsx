@@ -1,5 +1,5 @@
 import { renderHook } from "#browser-test"
-import { useOS } from "./"
+import { useOS } from "../"
 
 describe("useOS", () => {
   beforeEach(() => {

@@ -1,5 +1,5 @@
 import { page, render } from "#browser-test"
-import { Badge } from "./"
+import { Badge } from "../"
 
 describe("<Badge />", () => {
   test("sets `displayName` correctly", () => {

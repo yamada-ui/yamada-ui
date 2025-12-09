@@ -16,7 +16,7 @@ export default mergeConfig(sharedConfig, {
         test: {
           name: "jsdom",
           environment: "jsdom",
-          exclude: ["src/**/*.browser.test.{ts,tsx}"],
+          exclude: ["src/**/browser/*.test.{ts,tsx}"],
           globals: true,
           include: ["src/**/*.test.{ts,tsx}"],
           setupFiles: ["@yamada-ui/workspace/vitest/setup"],
@@ -48,7 +48,7 @@ export default mergeConfig(sharedConfig, {
             provider: "playwright",
           },
           globals: true,
-          include: ["src/**/*.browser.test.{ts,tsx}"],
+          include: ["src/**/browser/*.test.{ts,tsx}"],
         },
       }),
     ],

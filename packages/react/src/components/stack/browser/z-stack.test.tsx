@@ -1,6 +1,6 @@
 import { page, render } from "#browser-test"
-import { Box } from "../box"
-import { ZStack } from "./z-stack"
+import { Box } from "../../box"
+import { ZStack } from "./../z-stack"
 
 describe("<ZStack />", () => {
   test("sets `displayName` correctly", () => {

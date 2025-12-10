@@ -20,8 +20,9 @@ interface UseControllableStateMethods<Y> {
   onUpdate?: (prev: Y, next: Y) => boolean
 }
 
-export interface UseControllableStateProps<Y>
-  extends UseControllableStateMethods<Y> {
+export interface UseControllableStateProps<
+  Y,
+> extends UseControllableStateMethods<Y> {
   defaultValue?: (() => Y) | Y
   value?: Y
 }

@@ -7,8 +7,7 @@ import { useI18n } from "../../providers/i18n-provider"
 import { cx, handlerAll } from "../../utils"
 
 export interface UseModalProps
-  extends HTMLProps,
-    Omit<UseDisclosureProps, "timing"> {
+  extends HTMLProps, Omit<UseDisclosureProps, "timing"> {
   /**
    * If `true`, the modal will close when the `Esc` key is pressed.
    *

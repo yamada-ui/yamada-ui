@@ -7,8 +7,10 @@ import { cloneElement, useCallback, useMemo } from "react"
 import { ariaAttr, handlerAll, mergeRefs } from "../../utils"
 import { useFieldProps } from "../field"
 
-interface NativeSelectSharedItem
-  extends Omit<HTMLProps<"option">, "children" | "label" | "value"> {
+interface NativeSelectSharedItem extends Omit<
+  HTMLProps<"option">,
+  "children" | "label" | "value"
+> {
   label: string
 }
 

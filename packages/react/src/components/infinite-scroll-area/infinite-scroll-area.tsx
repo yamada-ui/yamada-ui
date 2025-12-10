@@ -12,7 +12,8 @@ import { infiniteScrollAreaStyle } from "./infinite-scroll-area.style"
 import { useInfiniteScroll } from "./use-infinite-scroll"
 
 export interface InfiniteScrollAreaProps
-  extends Omit<HTMLStyledProps, keyof UseInfiniteScrollProps>,
+  extends
+    Omit<HTMLStyledProps, keyof UseInfiniteScrollProps>,
     Omit<UseInfiniteScrollProps, "orientation">,
     ThemeProps<InfiniteScrollAreaStyle> {
   /**

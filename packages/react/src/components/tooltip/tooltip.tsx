@@ -17,7 +17,8 @@ import { tooltipStyle } from "./tooltip.style"
 import { useTooltip } from "./use-tooltip"
 
 export interface TooltipProps
-  extends UseTooltipProps,
+  extends
+    UseTooltipProps,
     PropsWithChildren,
     PopupAnimationProps,
     ThemeProps<TooltipStyle> {
@@ -114,8 +115,10 @@ const TooltipTrigger = withContext<"button", TooltipTriggerProps>(
   "trigger",
 )()
 
-interface TooltipContentProps
-  extends Omit<HTMLMotionProps, "children" | "offset" | "transform"> {}
+interface TooltipContentProps extends Omit<
+  HTMLMotionProps,
+  "children" | "offset" | "transform"
+> {}
 
 const TooltipContent = withContext<"div", TooltipContentProps>(
   motion.div,

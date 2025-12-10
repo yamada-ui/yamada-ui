@@ -1,7 +1,7 @@
 import type { ThemeToken } from "@yamada-ui/react"
 import type { Baseline, Config, Docs } from "."
 import type { TransformOptions } from "./transform-props"
-import { isString } from "@yamada-ui/react"
+import { isString } from "@yamada-ui/utils"
 import { tokenPropertyMap } from "./tokens"
 
 function generateBaseline({

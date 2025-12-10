@@ -29,8 +29,7 @@ interface Rect {
 }
 
 export interface FlipProps
-  extends Omit<HTMLMotionProps<"button">, "onChange">,
-    ThemeProps<FlipStyle> {
+  extends Omit<HTMLMotionProps<"button">, "onChange">, ThemeProps<FlipStyle> {
   /**
    * Passing React elements to "from" is required.
    */

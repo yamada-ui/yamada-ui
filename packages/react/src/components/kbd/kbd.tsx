@@ -6,8 +6,7 @@ import { createComponent } from "../../core"
 import { kbdStyle } from "./kbd.style"
 
 export interface KbdProps
-  extends HTMLStyledProps<"kbd">,
-    ThemeProps<KbdStyle> {}
+  extends HTMLStyledProps<"kbd">, ThemeProps<KbdStyle> {}
 
 const {
   PropsContext: KbdPropsContext,

@@ -16,19 +16,19 @@ import { dataAttr, isNumber } from "../../utils"
 import { sliderStyle } from "./slider.style"
 import { useSlider } from "./use-slider"
 
-interface ComponentContext
-  extends Pick<
-    UseSliderReturn,
-    | "getInputProps"
-    | "getMarkProps"
-    | "getRangeProps"
-    | "getThumbProps"
-    | "getTrackProps"
-    | "range"
-  > {}
+interface ComponentContext extends Pick<
+  UseSliderReturn,
+  | "getInputProps"
+  | "getMarkProps"
+  | "getRangeProps"
+  | "getThumbProps"
+  | "getTrackProps"
+  | "range"
+> {}
 
 export interface SliderRootProps<Y extends [number, number] | number = number>
-  extends Omit<HTMLStyledProps, "defaultValue" | "onChange" | "ref">,
+  extends
+    Omit<HTMLStyledProps, "defaultValue" | "onChange" | "ref">,
     Omit<UseSliderProps<Y>, "orientation">,
     ThemeProps<SliderStyle> {
   /**

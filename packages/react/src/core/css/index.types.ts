@@ -127,10 +127,7 @@ export interface CSSAnimationObject {
 }
 
 export interface CSSProps
-  extends StyleProps,
-    ConditionProps,
-    VendorProps,
-    CSSVariableProps {
+  extends StyleProps, ConditionProps, VendorProps, CSSVariableProps {
   /**
    * The CSS object.
    */

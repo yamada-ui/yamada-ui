@@ -25,7 +25,8 @@ import {
 import { useFieldProps } from "../field"
 
 export interface UseColorPickerProps
-  extends Omit<
+  extends
+    Omit<
       UseComboboxProps,
       | "closeOnSelect"
       | "initialFocusValue"

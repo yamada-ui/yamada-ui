@@ -33,8 +33,7 @@ const [RatingContext, useRatingContext] = createContext<RatingContext>({
 export { RatingContext, useRatingContext }
 
 export interface UseRatingProps
-  extends FieldProps,
-    Omit<HTMLProps, "color" | "defaultValue" | "onChange"> {
+  extends FieldProps, Omit<HTMLProps, "color" | "defaultValue" | "onChange"> {
   /**
    * The top-level id string that will be applied to the rating.
    * The index of the rating item will be appended to this top-level id.

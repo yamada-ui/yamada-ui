@@ -10,8 +10,7 @@ import { useFieldsetContext } from "../fieldset"
 import { fieldStyle } from "./field.style"
 
 export interface FieldContext
-  extends FieldProps,
-    Pick<FieldRootProps, "replace"> {
+  extends FieldProps, Pick<FieldRootProps, "replace"> {
   id: string
   errorMessageId: string
   focused: boolean
@@ -56,7 +55,8 @@ export interface FieldProps {
 }
 
 export interface FieldRootProps
-  extends HTMLStyledProps,
+  extends
+    HTMLStyledProps,
     ThemeProps<FieldStyle>,
     Pick<FieldLabelProps, "optionalIndicator" | "requiredIndicator">,
     FieldProps {

@@ -17,8 +17,10 @@ const {
 
 export { StepsDescendantsContext, useStepsDescendant, useStepsDescendants }
 
-interface StepsContext
-  extends Omit<UseStepsReturn, "descendants" | "getRootProps"> {}
+interface StepsContext extends Omit<
+  UseStepsReturn,
+  "descendants" | "getRootProps"
+> {}
 
 const [StepsContext, useStepsContext] = createContext<StepsContext>({
   name: "StepsContext",

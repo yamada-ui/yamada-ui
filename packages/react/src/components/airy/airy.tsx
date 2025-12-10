@@ -17,8 +17,7 @@ import { motion } from "../motion"
 import { airyStyle } from "./airy.style"
 
 export interface AiryProps
-  extends Omit<HTMLMotionProps<"button">, "onChange">,
-    ThemeProps<AiryStyle> {
+  extends Omit<HTMLMotionProps<"button">, "onChange">, ThemeProps<AiryStyle> {
   /**
    * Passing React elements to "from" is required.
    */

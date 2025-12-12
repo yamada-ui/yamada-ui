@@ -17,8 +17,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Check modified files
         id: check-modified
@@ -256,3 +254,35 @@ jobs:
         run: |
           pnpm www build:content
           pnpm www format
+
+  changeset:
+    name: Changeset
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check modified files
+        id: check-modified
+        uses: tj-actions/changed-files@v46
+        with:
+          files: |
+            packages/{cli,react,utils}/src/**/*.{ts,tsx}
+            !packages/{cli,react,utils}/src/**/*.test.{ts,tsx}
+            !packages/{cli,react,utils}/src/**/*.stories.{ts,tsx}
+
+      - name: Check changeset files
+        if: steps.check-modified.outputs.any_changed == 'true'
+        id: check-changeset
+        uses: tj-actions/changed-files@v46
+        with:
+          files: |
+            .changeset/*.md
+            !.changeset/README.md
+
+      - name: Fail if no changeset
+        if: steps.check-modified.outputs.any_changed == 'true' && steps.check-changeset.outputs.any_changed == 'false'
+        run: |
+          echo "::error::Changes detected in packages (cli/react/utils) but no changeset file was added."
+          echo "Please run 'pnpm changeset' to generate a changeset file."
+          echo ""
+          echo "Modified files:"
+          echo "${{ steps.check-modified.outputs.all_changed_files }}"
+          exit 1

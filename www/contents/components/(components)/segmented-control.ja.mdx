@@ -1,6 +1,6 @@
 ---
 title: SegmentedControl
-description: "`SegmentedControl`は、ユーザーが複数の選択肢の中から1つを選択するための使用されるコンポーネントです。"
+description: "`SegmentedControl`は、ユーザーが複数の選択肢の中から1つを選択するために使用されるコンポーネントです。"
 storybook: components-segmentedcontrol--basic
 source: components/segmented-control
 style: components/segmented-control/segmented-control.style.ts
@@ -202,4 +202,35 @@ return <SegmentedControl.Root items={items} value={value} onChange={setValue} />
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`SegmentedControl.Item`にアイコンのみを使用する場合は、`SegmentedControl.Item`に`aria-label`を設定します。
+
+```tsx
+<SegmentedControl.Root defaultValue="plus">
+  <SegmentedControl.Item aria-label="plus" value="plus">
+    <PlusIcon />
+  </SegmentedControl.Item>
+  <SegmentedControl.Item aria-label="minus" value="minus">
+    <MinusIcon />
+  </SegmentedControl.Item>
+</SegmentedControl.Root>
+```
+
+### キーボード操作
+
+| キー         | 説明                                                                                                 | 状態 |
+| ------------ | ---------------------------------------------------------------------------------------------------- | ---- |
+| `Tab`        | 選択されている項目をフォーカスします。                                                               | -    |
+| `ArrowLeft`  | 無効ではない前の項目をフォーカスします。最初の項目の場合は無効ではない最後の項目をフォーカスします。 | -    |
+| `ArrowRight` | 無効ではない次の項目をフォーカスします。最後の項目の場合は無効ではない最初の項目をフォーカスします。 | -    |
+| `ArrowUp`    | 無効ではない前の項目をフォーカスします。最初の項目の場合は無効ではない最後の項目をフォーカスします。 | -    |
+| `ArrowDown`  | 無効ではない次の項目をフォーカスします。最後の項目の場合は無効ではない最初の項目をフォーカスします。 | -    |
+
+### ARIAロールと属性
+
+| コンポーネント          | ロールと属性        | 使い方                                                                                                    |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------------------------- |
+| `SegmentedControl.Root` | `role="radiogroup"` | ラジオグループであることを示します。                                                                      |
+|                         | `aria-disabled`     | `disabled`が設定されている場合は`"true"`を設定します。                                                    |
+|                         | `aria-orientation`  | `orientation`の値に基づいて`"horizontal"`または`"vertical"`を設定します。デフォルトは`"horizontal"`です。 |
+| `SegmentedControl.Item` | `aria-disabled`     | `disabled`が設定されている場合は、`"true"`を設定します。                                                  |
+|                         | `aria-readonly`     | `readOnly`が設定されている場合は、`"true"`を設定します。                                                  |

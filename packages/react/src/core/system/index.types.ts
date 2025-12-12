@@ -422,16 +422,15 @@ export interface DefineThemeColorSemanticTokens {
     | Dict
 }
 
-export interface DefineThemeSemanticTokens
-  extends Omit<
-    DefineTheme,
-    | "animations"
-    | "breakpoints"
-    | "colors"
-    | "semanticTokens"
-    | "styles"
-    | "themeSchemes"
-  > {
+export interface DefineThemeSemanticTokens extends Omit<
+  DefineTheme,
+  | "animations"
+  | "breakpoints"
+  | "colors"
+  | "semanticTokens"
+  | "styles"
+  | "themeSchemes"
+> {
   animations?: DefineThemeAnimationTokens<CSSAnimationObject | string>
   colors?: DefineThemeColorSemanticTokens
   colorSchemes?: DefineThemeColorSchemeSemanticTokens

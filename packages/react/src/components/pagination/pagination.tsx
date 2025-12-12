@@ -30,7 +30,8 @@ import {
 } from "./use-pagination"
 
 export interface PaginationRootProps
-  extends WithoutThemeProps<
+  extends
+    WithoutThemeProps<
       Omit<ButtonGroup.RootProps, "onChange" | "page">,
       PaginationStyle
     >,
@@ -324,8 +325,10 @@ export const PaginationItem = withContext<"button", PaginationItemProps>(
   "item",
 )()
 
-export interface PaginationTextProps
-  extends Omit<HTMLStyledProps<"span">, "children"> {
+export interface PaginationTextProps extends Omit<
+  HTMLStyledProps<"span">,
+  "children"
+> {
   /**
    * The children of the text.
    * if function, it will be called with `{ page: number; total: number }`.
@@ -367,8 +370,7 @@ export const PaginationText = withContext<"span", PaginationTextProps>(
   }
 })
 
-export interface PaginationStartTriggerProps
-  extends HTMLStyledProps<"button"> {}
+export interface PaginationStartTriggerProps extends HTMLStyledProps<"button"> {}
 
 export const PaginationStartTrigger = withContext<
   "button",

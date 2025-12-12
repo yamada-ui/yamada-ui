@@ -29,8 +29,7 @@ const defaultLayers = (
 }
 
 export interface ColorSwatchProps
-  extends Omit<HTMLStyledProps, "color">,
-    ThemeProps<ColorSwatchStyle> {
+  extends Omit<HTMLStyledProps, "color">, ThemeProps<ColorSwatchStyle> {
   /**
    * The color used for the swatch element.
    *

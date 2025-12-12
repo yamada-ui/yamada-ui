@@ -17,7 +17,8 @@ import { motion } from "../motion"
 import { rotateStyle } from "./rotate.style"
 
 export interface RotateProps
-  extends Omit<HTMLMotionProps<"button">, "onChange" | "rotate">,
+  extends
+    Omit<HTMLMotionProps<"button">, "onChange" | "rotate">,
     ThemeProps<RotateStyle> {
   /**
    * Passing React elements to "from" is required.

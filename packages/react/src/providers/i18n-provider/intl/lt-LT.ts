@@ -98,6 +98,10 @@ const data: IntlData = {
   tag: {
     "Close tag": "Uždaryti žymą",
   },
+  tip: {
+    "More information": "Daugiau informacijos",
+  },
+
   toggle: {
     "Toggle button": "Perjungimo mygtukas",
   },

@@ -314,4 +314,53 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+The `Radio` follows the [WAI-ARIA - Radio Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/radio) for accessibility.
+
+If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `RadioGroup.Root`.
+
+```tsx
+<RadioGroup.Root aria-label="キャラクター">
+  <RadioGroup.Item value="孫悟空">孫悟空</RadioGroup.Item>
+  <RadioGroup.Item value="ベジータ">ベジータ</RadioGroup.Item>
+  <RadioGroup.Item value="フリーザ">フリーザ</RadioGroup.Item>
+</RadioGroup.Root>
+```
+
+```tsx
+<VStack gap="sm">
+  <Text as="h3" id="label">
+    キャラクター
+  </Text>
+
+  <RadioGroup.Root aria-labelledby="label">
+    <RadioGroup.Item value="孫悟空">孫悟空</RadioGroup.Item>
+    <RadioGroup.Item value="ベジータ">ベジータ</RadioGroup.Item>
+    <RadioGroup.Item value="フリーザ">フリーザ</RadioGroup.Item>
+  </RadioGroup.Root>
+</VStack>
+```
+
+### Keyboard Navigation
+
+| Key          | Description                                                                                                                           | State |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| `Tab`        | Moves focus to the checked radio button within the radio group. If no radio button is checked, moves focus to the first radio button. | -     |
+| `Space`      | Checks the focused radio button.                                                                                                      | -     |
+| `ArrowLeft`  | Checks the previous enabled radio button.                                                                                             | -     |
+| `ArrowRight` | Checks the next enabled radio button.                                                                                                 | -     |
+| `ArrowUp`    | Checks the previous enabled radio button.                                                                                             | -     |
+| `ArrowDown`  | Checks the next enabled radio button.                                                                                                 | -     |
+
+### ARIA Roles and Attributes
+
+| Component                  | Roles and Attributes | Usage                                                                                                                                                                              |
+| -------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `RadioGroup.Root`          | `role="radiogroup"`  | Indicates that this is a radio group.                                                                                                                                              |
+|                            | `aria-labelledby`    | If `RadioGroup.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id`.                                                                      |
+|                            | `aria-describedby`   | If `RadioGroup.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`.            |
+| `Radio`, `RadioGroup.Item` | `aria-checked`       | Sets to `"true"` if the radio button is checked, and `"false"` if it is not checked.                                                                                               |
+|                            | `aria-describedby`   | If `Radio` or `RadioGroup.Item` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|                            | `aria-disabled`      | Sets to `"true"` if `disabled` or `readOnly` is set.                                                                                                                               |
+|                            | `aria-invalid`       | Sets to `"true"` if `invalid` is set.                                                                                                                                              |
+|                            | `aria-required`      | Sets to `"true"` if `required` is set.                                                                                                                                             |
+| `RadioIndicator`           | `aria-hidden`        | Excludes the element from the accessibility tree.                                                                                                                                  |

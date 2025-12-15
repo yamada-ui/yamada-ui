@@ -8,8 +8,9 @@ export const SNS = {
       "https://github.com/yamada-ui/yamada-ui/tree/main/packages/react/src",
     PROJECT: "https://github.com/yamada-ui/yamada-ui",
   },
+  HOMEPAGE: "https://yamada-ui.com",
   STORYBOOK: "https://yamada-ui.github.io/yamada-ui",
   X: {
-    HIROTOMO_YAMADA: "https://twitter.com/hirotomoyamada",
+    HIROTOMO_YAMADA: "https://x.com/hirotomoyamada",
   },
 }

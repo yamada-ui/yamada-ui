@@ -38,7 +38,7 @@ jobs:
 
       - name: Create or update a11y issues
         run: |
-          pnpm exec playwright install
+          pnpm dlx playwright install
           pnpm react test:a11y
           pnpm issue:a11y --no-report
         env:

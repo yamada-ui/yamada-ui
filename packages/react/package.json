@@ -36,6 +36,15 @@
   "bugs": {
     "url": "https://github.com/yamada-ui/yamada-ui/issues"
   },
+  "exports": {
+    ".": "./src/index.ts",
+    "./core": "./src/core/index.ts",
+    "./utils": "./src/utils/index.ts",
+    "./theme": "./src/theme/index.ts",
+    "./providers/*": "./src/providers/*/index.ts",
+    "./components/*": "./src/components/*/index.ts",
+    "./hooks/*": "./src/hooks/*/index.ts"
+  },
   "scripts": {
     "clean": "rimraf node_modules dist trace coverage storybook-static .turbo .eslintcache",
     "build": "tsdown",
@@ -76,8 +85,8 @@
     "intl-messageformat": "^10.7.18",
     "lucide-react": "0.546.0",
     "motion": "12.18.1",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "react-dropzone": "^14.3.8",
     "react-fast-compare": "^3.2.2",
     "react-focus-lock": "^2.13.6",

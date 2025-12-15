@@ -1,12 +1,12 @@
+import type { StyleConfig } from "@/data"
 import type { ReactNode } from "react"
-import type { Config } from "./style-props-table"
 import { Box, Code, isObject, NativeTable, toKebabCase } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import { useMemo } from "react"
 import styles from "@/data/styles.json"
 import { NextLink } from "../next-link"
 
-function createRow(prop: string, { docs, token }: Config) {
+function createRow(prop: string, { docs, token }: StyleConfig) {
   let value: ReactNode
 
   const [name, { see } = {}] =
@@ -45,7 +45,7 @@ function createRow(prop: string, { docs, token }: Config) {
 export function AtRulePropsTable() {
   const t = useTranslations("component.stylePropsTable")
   const rows = useMemo(() => {
-    const data = styles.atRule as { [key: string]: Config }
+    const data = styles.atRule as { [key: string]: StyleConfig }
 
     return Object.entries(data)
       .map(([prop, config]) => {

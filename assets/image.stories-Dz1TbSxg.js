@@ -1,0 +1,3 @@
+import{j as e}from"./iframe-C1QqsVA9.js";import{I as a}from"./image-BcHDpKPf.js";import"./preload-helper-C1FmrZbK.js";const c={component:a,title:"Components / Image"},o=()=>e.jsx(a,{src:"https://dragon-ball-official.com/assets/img/intro/intro_1.png",alt:"ドラゴンボール",boxSize:"xl"});var r,t,s;o.parameters={...o.parameters,docs:{...(r=o.parameters)==null?void 0:r.docs,source:{originalSource:`() => {
+  return <Image src="https://dragon-ball-official.com/assets/img/intro/intro_1.png" alt="ドラゴンボール" boxSize="xl" />;
+}`,...(s=(t=o.parameters)==null?void 0:t.docs)==null?void 0:s.source}}};const p=["Basic"];export{o as Basic,p as __namedExportsOrder,c as default};

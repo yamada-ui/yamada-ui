@@ -1,6 +1,0 @@
-import{r as n,j as E}from"./iframe-BIJNUwA0.js";import{B as f}from"./box-C2FMWqo9.js";import"./preload-helper-C1FmrZbK.js";const v=["keypress","mousemove","touchmove","click","scroll"],x={events:v,initialState:!0},h=(e,u)=>{const{events:r,initialState:m}={...x,...u},[p,i]=n.useState(m),o=n.useRef(void 0);return n.useEffect(()=>{const a=()=>{i(!1),o.current&&clearTimeout(o.current),o.current=setTimeout(()=>i(!0),e)};return r.forEach(s=>document.addEventListener(s,a)),()=>{r.forEach(s=>document.removeEventListener(s,a))}},[r,e]),p},T={title:"Hooks / useIdle"},t=()=>{const e=h(2e3);return E.jsxs(f,{bg:e?"blue.500":"red.500",color:"white",p:"md",rounded:"l2",transitionDuration:"moderate",transitionProperty:"all",children:["Current state: ",e?"idle":"not idle"]})};var c,d,l;t.parameters={...t.parameters,docs:{...(c=t.parameters)==null?void 0:c.docs,source:{originalSource:`() => {
-  const idle = useIdle(2000);
-  return <Box bg={idle ? "blue.500" : "red.500"} color="white" p="md" rounded="l2" transitionDuration="moderate" transitionProperty="all">
-      Current state: {idle ? "idle" : "not idle"}
-    </Box>;
-}`,...(l=(d=t.parameters)==null?void 0:d.docs)==null?void 0:l.source}}};const b=["Basic"];export{t as Basic,b as __namedExportsOrder,T as default};

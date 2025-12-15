@@ -2,3 +2,5 @@ packages:
   - "packages/**"
   - "playgrounds/**"
   - "www/**"
+
+minimumReleaseAge: 10080 # = 60 [minutes/h] * 24 [h/day] * 7 [day]

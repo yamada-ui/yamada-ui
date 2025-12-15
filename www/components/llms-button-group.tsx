@@ -27,7 +27,7 @@ export function useLlmsUrls(locale: string, pathname: string) {
   )
 
   return {
-    chatgptUrl: `https://chatgpt.com/?q=${query}`,
+    chatgptUrl: `https://chatgpt.com/?hints=search&prompt=${query}`,
     claudeUrl: `https://claude.ai/new?q=${query}`,
     markdownUrl: `/${getLang(locale)}${pathname}.md`,
   }

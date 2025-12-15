@@ -5,7 +5,6 @@ import { resolve } from "node:path"
 import { defineProject, mergeConfig } from "vitest/config"
 
 export default mergeConfig(sharedConfig, {
-  // @ts-expect-error
   plugins: [react()],
   test: {
     projects: [

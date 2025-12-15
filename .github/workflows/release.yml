@@ -10,6 +10,10 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write
+  contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 

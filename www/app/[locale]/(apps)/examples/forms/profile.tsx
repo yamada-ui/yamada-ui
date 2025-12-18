@@ -39,7 +39,7 @@ export function Profile({ ...rest }: ProfileProps) {
     defaultValues: {
       urls: [
         { url: "https://yamada-ui.com/" },
-        { url: "https://twitter.com/hirotomoyamada" },
+        { url: "https://x.com/hirotomoyamada" },
       ],
     },
   })

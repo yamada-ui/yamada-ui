@@ -400,7 +400,7 @@ return (
 ### Set Selectable Items
 
 ```tsx preview functional
-const [value, setValue] = useState("naruto")
+const [value, setValue] = useState<string[]>(["naruto"])
 const items = useMemo<Menu.Item[]>(
   () => [
     {

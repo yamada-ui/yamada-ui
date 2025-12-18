@@ -97,7 +97,7 @@
     "glob": "^11.0.3",
     "jiti": "^2.6.1",
     "jsdom": "^27.0.1",
-    "lefthook": "^2.0.0",
+    "lefthook": "^2.0.12",
     "node-fetch": "^3.3.2",
     "ora": "^9.0.0",
     "picocolors": "^1.1.1",

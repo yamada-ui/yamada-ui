@@ -1,5 +1,5 @@
 import { page, render } from "#browser-test"
-import { Flex } from "../flex"
+import { Flex } from "./flex"
 
 describe("<Flex />", () => {
   test("sets `displayName` correctly", () => {

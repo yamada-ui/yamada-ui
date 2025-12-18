@@ -1,6 +1,6 @@
 import type { FC } from "react"
 import { page, render } from "#browser-test"
-import { Carousel } from "../"
+import { Carousel } from "./"
 
 interface TestComponentProps extends Carousel.RootProps {}
 

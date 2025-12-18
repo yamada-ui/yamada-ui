@@ -18,7 +18,14 @@ export default mergeConfig(sharedConfig, {
         test: {
           name: "jsdom",
           environment: "jsdom",
-          exclude: ["src/**/browser/*.test.{ts,tsx}"],
+          exclude: [
+            "src/components/badge/badge.test.tsx",
+            "src/components/carousel/carousel.test.tsx",
+            "src/components/flex/flex.test.tsx",
+            "src/components/list/list.test.tsx",
+            "src/components/stack/z-stack.test.tsx",
+            "src/hooks/use-os/use-os.test.tsx",
+          ],
           globals: true,
           include: ["src/**/*.test.{ts,tsx}"],
           setupFiles: ["@yamada-ui/workspace/vitest/setup"],

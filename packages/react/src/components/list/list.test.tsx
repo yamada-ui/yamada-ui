@@ -1,6 +1,6 @@
 import { page, render } from "#browser-test"
-import { List } from "../"
-import { BoxIcon } from "../../icon"
+import { BoxIcon } from "../icon"
+import { List } from "./"
 
 describe("<List />", () => {
   test("sets `displayName` correctly", () => {

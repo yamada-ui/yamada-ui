@@ -30,6 +30,8 @@ Yamada UIは、[Chakra UI](https://github.com/chakra-ui/chakra-ui)、[shadcn/ui]
 
 <a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/organizations.svg?avatarHeight=40&button=false" /></a>
 
+<a href="https://vercel.com/oss"><img alt="Vercel OSS Program" src="https://vercel.com/oss/program-badge.svg" /></a>
+
 ### 個人
 
 <a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/individuals.svg?avatarHeight=40" /></a>

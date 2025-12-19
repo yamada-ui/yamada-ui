@@ -1,0 +1,33 @@
+{
+  "name": "@playgrounds/react-router",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "react-router build",
+    "dev": "react-router dev",
+    "start": "react-router-serve ./build/server/index.js",
+    "typecheck": "react-router typegen && tsc",
+    "lint": "eslint . --max-warnings=0 --cache",
+    "format": "prettier . --ignore-path ../../../.prettierignore --check --cache",
+    "yamada-cli": "pnpm -C ../../../packages/cli dev"
+  },
+  "dependencies": {
+    "@react-router/node": "7.10.1",
+    "@react-router/serve": "7.10.1",
+    "@yamada-ui/react": "workspace:*",
+    "isbot": "^5.1.31",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-router": "7.10.1"
+  },
+  "devDependencies": {
+    "@react-router/dev": "7.10.1",
+    "@types/node": "^24.9.1",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.11",
+    "vite-tsconfig-paths": "^5.1.4"
+  }
+}

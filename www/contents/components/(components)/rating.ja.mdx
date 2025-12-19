@@ -237,4 +237,39 @@ return <Rating value={value} onChange={onChange} />
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`Rating`は、アクセシビリティに関して[WAI-ARIA - Radio Group Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/radio/examples/radio-rating/)に従います。
+
+`Rating`に`aria-label`または`aria-labelledby`を設定すると、スクリーンリーダーによって読み上げられます。
+
+```tsx
+<Rating aria-label="Rating" />
+```
+
+```tsx
+<VStack gap="sm">
+  <Heading as="h3" id="label">
+    Rating
+  </Heading>
+
+  <Rating aria-labelledby="label" />
+</VStack>
+```
+
+### キーボード操作
+
+| キー                      | 説明                                                                                                                                       | 状態 |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ---- |
+| `Tab`                     | 選択された項目をフォーカスします。項目が選択されていない場合は、最初の項目をフォーカスします。                                             | -    |
+| `ArrowLeft`, `ArrowUp`    | 前の項目をフォーカスして選択します。最初の項目の場合は、最後の項目をフォーカスして選択します。以前に選択されていた項目は、未選択にします。 | -    |
+| `ArrowRight`, `ArrowDown` | 次の項目をフォーカスして選択します。最後の項目の場合は、最初の項目をフォーカスして選択します。以前に選択されていた項目は、未選択にします。 | -    |
+
+### ARIAロールと属性
+
+| コンポーネント | ロールと属性         | 使い方                                                 |
+| -------------- | -------------------- | ------------------------------------------------------ |
+| `Rating`       | `role="radiogroup"`  | ラジオグループであることを示します。                   |
+|                | `aria-label`         | 選択されたアイテムの数を示します。                     |
+|                | `aria-readonly`      | `readOnly`が設定されている場合は`"true"`を設定します。 |
+|                | `aria-disabled`      | `disabled`が設定されている場合は`"true"`を設定します。 |
+| `RatingItem`   | `aria-label`         | `value`を設定します。                                  |
+| `RatingIcon`   | `aria-hidden="true"` | `RatingIcon`をアクセシビリティツリーから除外します。   |

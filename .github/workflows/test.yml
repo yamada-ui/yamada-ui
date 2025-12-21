@@ -1,0 +1,64 @@
+name: Test
+
+on:
+  workflow_call:
+
+jobs:
+  browser:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - id: chromium
+            name: Chromium
+            coverage: "true"
+          - id: firefox
+            name: Firefox
+            coverage: "false"
+          - id: webkit
+            name: Webkit
+            coverage: "false"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check modified files
+        id: check-modified
+        uses: tj-actions/changed-files@v46
+        with:
+          files: |
+            packages/**/(package.json|vitest.config.ts)
+            packages/**/(src|test)/**/*.{ts,tsx}
+            !packages/**/src/**/*.stories.{ts,tsx}
+            !packages/workspace/src/**
+            packages/workspace/src/vitest/**
+
+      - name: Install
+        if: steps.check-modified.outputs.any_changed == 'true'
+        uses: ./.github/composite-actions/install
+
+      - name: Setup Browser
+        if: steps.check-modified.outputs.any_changed == 'true'
+        working-directory: packages/react
+        run: pnpm playwright install ${{ matrix.id }} --with-deps
+
+      - name: Run tests
+        if: steps.check-modified.outputs.any_changed == 'true' && matrix.coverage == 'true'
+        run: pnpm test:coverage
+
+      - name: Run Browser Test on ${{ matrix.name }}
+        if: steps.check-modified.outputs.any_changed == 'true' && matrix.coverage != 'true'
+        working-directory: packages/react
+        run: pnpm test:${{ matrix.id }}
+
+      - name: Upload coverage
+        if: steps.check-modified.outputs.any_changed == 'true' && matrix.coverage == 'true'
+        uses: codecov/codecov-action@v4
+        with:
+          fail_ci_if_error: false
+          file: ./packages/react/coverage/coverage-final.json,./packages/utils/coverage/coverage-final.json
+          flags: unittests
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
+          codecov_yml_path: ./codecov.yml

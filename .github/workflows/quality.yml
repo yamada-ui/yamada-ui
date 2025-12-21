@@ -50,87 +50,9 @@ jobs:
         if: steps.check-modified.outputs.any_changed == 'true'
         run: pnpm build
 
-  test-coverage:
-    name: Test (Chromium)
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Check modified files
-        id: check-modified
-        uses: tj-actions/changed-files@v46
-        with:
-          files: |
-            packages/**/(package.json|vitest.config.ts)
-            packages/**/(src|test)/**/*.{ts,tsx}
-            !packages/**/src/**/*.stories.{ts,tsx}
-            !packages/workspace/src/**
-            packages/workspace/src/vitest/**
-
-      - name: Install
-        if: steps.check-modified.outputs.any_changed == 'true'
-        uses: ./.github/composite-actions/install
-
-      - name: Setup Browser
-        if: steps.check-modified.outputs.any_changed == 'true'
-        working-directory: packages/react
-        run: pnpm playwright install chromium --with-deps
-
-      - name: Run tests
-        if: steps.check-modified.outputs.any_changed == 'true'
-        run: pnpm test:coverage
-
-      - name: Upload coverage
-        if: steps.check-modified.outputs.any_changed == 'true'
-        uses: codecov/codecov-action@v4
-        with:
-          fail_ci_if_error: false
-          file: ./packages/react/coverage/coverage-final.json,./packages/utils/coverage/coverage-final.json
-          flags: unittests
-          token: ${{ secrets.CODECOV_TOKEN }}
-          verbose: true
-          codecov_yml_path: ./codecov.yml
-
-  test-browser:
-    name: Test (${{ matrix.name }})
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - id: firefox
-            name: Firefox
-
-          - id: webkit
-            name: Webkit
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Check modified files
-        id: check-modified
-        uses: tj-actions/changed-files@v46
-        with:
-          files: |
-            packages/**/(package.json|vitest.config.ts)
-            packages/**/(src|test)/**/*.{ts,tsx}
-            !packages/**/src/**/*.stories.{ts,tsx}
-            !packages/workspace/src/**
-            packages/workspace/src/vitest/**
-
-      - name: Install
-        if: steps.check-modified.outputs.any_changed == 'true'
-        uses: ./.github/composite-actions/install
-
-      - name: Setup Browser
-        if: steps.check-modified.outputs.any_changed == 'true'
-        working-directory: packages/react
-        run: pnpm playwright install ${{ matrix.id }} --with-deps
-
-      - name: Run Browser Test on ${{ matrix.name }}
-        if: steps.check-modified.outputs.any_changed == 'true'
-        working-directory: packages/react
-        run: pnpm test:${{ matrix.id }}
+  test:
+    name: Test
+    uses: ./.github/workflows/test.yml
 
   eslint:
     name: ESLint

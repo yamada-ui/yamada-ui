@@ -51,6 +51,7 @@ jobs:
         run: pnpm build
 
   test:
+    name: Test
     uses: ./.github/workflows/test.yml
 
   eslint:

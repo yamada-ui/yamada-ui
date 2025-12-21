@@ -1,0 +1,1 @@
+import{au as u,ag as c,r as E}from"./iframe-LqombrNM.js";const d=(e,o,t)=>{const{getWindow:n}=u(),r=c(o);E.useEffect(()=>{var s;return(s=n())==null||s.addEventListener(e,r,t),()=>{var a;(a=n())==null||a.removeEventListener(e,r,t)}},[e,r,t,n])};export{d as u};

@@ -1,5 +1,5 @@
 {
-  "name": "@playgrounds/react-router",
+  "name": "@playgrounds/react-router-framework",
   "version": "2.0.0",
   "private": true,
   "type": "module",
@@ -13,16 +13,16 @@
     "yamada-cli": "pnpm -C ../../../packages/cli dev"
   },
   "dependencies": {
-    "@react-router/node": "7.10.1",
-    "@react-router/serve": "7.10.1",
+    "@react-router/node": "^7.10.1",
+    "@react-router/serve": "^7.10.1",
     "@yamada-ui/react": "workspace:*",
     "isbot": "^5.1.31",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "react-router": "7.10.1"
+    "react-router": "^7.10.1"
   },
   "devDependencies": {
-    "@react-router/dev": "7.10.1",
+    "@react-router/dev": "^7.10.1",
     "@types/node": "^24.9.1",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",

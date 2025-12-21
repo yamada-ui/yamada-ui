@@ -567,10 +567,10 @@ importers:
   playgrounds/react-router/framework:
     dependencies:
       '@react-router/node':
-        specifier: 7.10.1
+        specifier: ^7.10.1
         version: 7.10.1(react-router@7.10.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)
       '@react-router/serve':
-        specifier: 7.10.1
+        specifier: ^7.10.1
         version: 7.10.1(react-router@7.10.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)
       '@yamada-ui/react':
         specifier: workspace:*
@@ -585,11 +585,11 @@ importers:
         specifier: ^19.0.0
         version: 19.2.3(react@19.2.3)
       react-router:
-        specifier: 7.10.1
+        specifier: ^7.10.1
         version: 7.10.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
     devDependencies:
       '@react-router/dev':
-        specifier: 7.10.1
+        specifier: ^7.10.1
         version: 7.10.1(@react-router/serve@7.10.1(react-router@7.10.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3))(@types/node@24.9.2)(babel-plugin-macros@3.1.0)(jiti@2.6.1)(react-router@7.10.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(terser@5.44.0)(tsx@4.20.6)(typescript@5.9.3)(vite@7.1.12(@types/node@24.9.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.6)(yaml@2.8.1))(yaml@2.8.1)
       '@types/node':
         specifier: ^24.9.1

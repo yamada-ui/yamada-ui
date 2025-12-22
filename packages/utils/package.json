@@ -44,11 +44,11 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "color2k": "^2.0.3"
+    "color2k": "catalog:"
   },
   "devDependencies": {
-    "clean-package": "2.2.0",
-    "react": "^19.2.3"
+    "clean-package": "catalog:",
+    "react": "catalog:"
   },
   "peerDependencies": {
     "react": ">=19"

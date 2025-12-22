@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { a11y, fireEvent, render, screen } from "#test"
+import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { Carousel } from "."
 
 interface TestComponentProps extends Carousel.RootProps {}
@@ -98,17 +98,23 @@ describe("<Carousel />", () => {
   test("should render correctly slide when using control button", async () => {
     const { user } = render(<TestComponent />)
     await user.click(screen.getByRole("button", { name: "Go to next slide" }))
-    expect(screen.getByText("Slide 2")).toHaveAttribute("data-selected")
+    await waitFor(() => {
+      expect(screen.getByText("Slide 2")).toHaveAttribute("data-selected")
+    })
     await user.click(
       screen.getByRole("button", { name: "Go to previous slide" }),
     )
-    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    await waitFor(() => {
+      expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    })
   })
 
   test("should switch to correctly slide when click on indicator", async () => {
     const { user } = render(<TestComponent />)
     await user.click(screen.getByRole("tab", { name: "Go to 2 slide" }))
-    expect(screen.getByText("Slide 2")).toHaveAttribute("data-selected")
+    await waitFor(() => {
+      expect(screen.getByText("Slide 2")).toHaveAttribute("data-selected")
+    })
   })
 
   test("should disabled next and prev button when looping is disabled", async () => {
@@ -117,9 +123,11 @@ describe("<Carousel />", () => {
       screen.getByRole("button", { name: "Go to previous slide" }),
     ).toBeDisabled()
     await user.click(screen.getByRole("tab", { name: "Go to 5 slide" }))
-    expect(
-      screen.getByRole("button", { name: "Go to next slide" }),
-    ).toBeDisabled()
+    await waitFor(() => {
+      expect(
+        screen.getByRole("button", { name: "Go to next slide" }),
+      ).toBeDisabled()
+    })
   })
 
   test("should move the carousel correctly when left or right arrow keys are pressed", async () => {

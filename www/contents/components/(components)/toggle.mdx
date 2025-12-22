@@ -259,7 +259,7 @@ return (
 
 ## Accessibility
 
-When a toggle renders only an icon, provide an accessible name with `aria-label`.
+When using only icons in `Toggle`, set `aria-label` for the `Toggle`.
 
 ```tsx
 <Toggle icon={<BoldIcon />} aria-label="Toggle bold" />
@@ -268,31 +268,19 @@ When a toggle renders only an icon, provide an accessible name with `aria-label`
 Setting an `aria-label` on `ToggleGroup.Root` allows screen readers to announce the group, helping users understand its purpose.
 
 ```tsx
-const [value, setValue] = useState<string[]>([])
-
-return (
-  <ToggleGroup.Root
-    value={value}
-    onChange={setValue}
-    aria-label="Text formatting options"
-  >
-    <ToggleGroup.Item
-      value="bold"
-      icon={<BoldIcon />}
-      aria-label="Toggle bold"
-    />
-    <ToggleGroup.Item
-      value="italic"
-      icon={<ItalicIcon />}
-      aria-label="Toggle italic"
-    />
-    <ToggleGroup.Item
-      value="underline"
-      icon={<UnderlineIcon />}
-      aria-label="Toggle underline"
-    />
-  </ToggleGroup.Root>
-)
+<ToggleGroup.Root aria-label="Text formatting options">
+  <ToggleGroup.Item value="bold" icon={<BoldIcon />} aria-label="Toggle bold" />
+  <ToggleGroup.Item
+    value="italic"
+    icon={<ItalicIcon />}
+    aria-label="Toggle italic"
+  />
+  <ToggleGroup.Item
+    value="underline"
+    icon={<UnderlineIcon />}
+    aria-label="Toggle underline"
+  />
+</ToggleGroup.Root>
 ```
 
 ### Keyboard Navigation
@@ -308,3 +296,6 @@ return (
 | ---------------------------- | ------------------- | ------------------------------------------------------------------------- |
 | `ToggleGroup.Root`           | `role="group"`      | Indicates that it's a group.                                              |
 | `Toggle`, `ToggleGroup.Item` | `aria-pressed`      | Set to `true` if the element is pressed, or `false` if it is not pressed. |
+|                            | `aria-disabled`     | Set to `"true"` if `disabled` or `readOnly` is set.                                                                                                                                         |
+|                            | `aria-label`         | Set `value` if provided, otherwise default to `"Toggle button"`.                                |
+

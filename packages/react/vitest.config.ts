@@ -34,7 +34,7 @@ export default mergeConfig(sharedConfig, {
       defineProject({
         resolve: {
           alias: {
-            "#browser-test": resolve(__dirname, "./browser-test"),
+            "#test/browser": resolve(__dirname, "./test/browser"),
             "@": resolve(__dirname, "./src"),
           },
         },

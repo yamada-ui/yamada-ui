@@ -1,4 +1,4 @@
-import { page, render } from "#browser-test"
+import { page, render } from "#test/browser"
 import { Box } from "../box"
 import { ZStack } from "./z-stack"
 

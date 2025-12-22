@@ -4,13 +4,13 @@ import type {
   RenderHookOptions as OriginalRenderHookOptions,
   RenderHookResult as OriginalRenderHookResult,
 } from "vitest-browser-react"
-import type { UIProviderProps } from "../src"
+import type { UIProviderProps } from "../../src"
 import { userEvent } from "@vitest/browser/context"
 import {
   render as originalRender,
   renderHook as originalRenderHook,
 } from "vitest-browser-react"
-import { UIProvider } from "../src"
+import { UIProvider } from "../../src"
 
 export interface ComponentRenderOptions extends OriginalComponentRenderOptions {
   withProvider?: boolean

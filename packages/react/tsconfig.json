@@ -4,7 +4,7 @@
     "paths": {
       "#storybook": ["./storybook"],
       "#test": ["./test"],
-      "#browser-test": ["./browser-test"]
+      "#test/browser": ["./test/browser"]
     },
     "types": ["vitest/globals", "@vitest/browser/providers/playwright"]
   },

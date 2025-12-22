@@ -1,4 +1,4 @@
-import { renderHook } from "#browser-test"
+import { renderHook } from "#test/browser"
 import { useOS } from "./"
 
 describe("useOS", () => {

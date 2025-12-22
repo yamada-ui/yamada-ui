@@ -314,3 +314,45 @@ export default function App({ Component, pageProps }: AppProps) {
 ```
 
 ::::
+
+## コンポーネントの統合
+
+`Link`や`Image`などのNext.jsコンポーネントをYamada UIのスタイリングシステムと統合します。
+これにより、Yamada UIのテーマやスタイルをNext.jsコンポーネントに適用できます。
+
+### Link
+
+`as` propを使用して、`next/link`とYamada UIの`Link`を統合します。
+
+```tsx
+import type { LinkProps, HTMLRefAttributes, Merge } from "@yamada-ui/react"
+import { Link } from "@yamada-ui/react"
+import OriginalLink from "next/link"
+import type { ComponentProps } from "react"
+
+export interface AppLinkProps
+  extends Omit<
+      Merge<ComponentProps<typeof OriginalLink>, LinkProps>,
+      "as" | "ref"
+    >,
+    HTMLRefAttributes<"a"> {}
+
+export const AppLink = (props: AppLinkProps) => {
+  return <Link as={OriginalLink} {...props} />
+}
+```
+
+### Image
+
+`styled`を使用して、`next/image`とYamada UIのスタイリングシステムを統合します。
+
+```tsx
+import { styled } from "@yamada-ui/react"
+import Image from "next/image"
+
+export const AppImage = styled(Image, {
+  forwardProps: ["fill", "height", "width"],
+})
+```
+
+`forwardProps`オプションは、Next.js固有のpropsをスタイルpropsとして扱わず、`Image`コンポーネントに渡します。

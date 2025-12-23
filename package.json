@@ -67,7 +67,7 @@
     "@commitlint/config-conventional": "^20.0.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@mdn/browser-compat-data": "7.1.14",
+    "@mdn/browser-compat-data": "7.2.2",
     "@storybook/addon-a11y": "^9.1.17",
     "@storybook/addon-docs": "^9.1.17",
     "@storybook/cli": "^9.1.17",
@@ -90,7 +90,7 @@
     "@yamada-ui/workspace": "workspace:*",
     "axe-playwright": "^2.2.2",
     "commander": "^14.0.1",
-    "csstype": "^3.1.3",
+    "csstype": "^3.2.3",
     "dayjs": "^1.11.18",
     "execa": "9.3.1",
     "find-packages": "^10.0.4",
@@ -114,7 +114,7 @@
     "vitest-axe": "^0.1.0",
     "vitest-matchmedia-mock": "^1.0.6",
     "wait-on": "^9.0.1",
-    "web-features": "3.5.0"
+    "web-features": "3.12.0"
   },
   "pnpm": {
     "overrides": {

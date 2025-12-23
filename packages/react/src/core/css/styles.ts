@@ -1697,6 +1697,7 @@ export const standardStyles = {
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
+  textDecorationInset: true,
   textDecorationLine: true,
   textDecorationSkip: true,
   textDecorationSkipInk: true,
@@ -2316,7 +2317,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/accent-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/accent-color
    */
   accent?: StyleValueWithCondition<CSS.Property.AccentColor, "colors">
   /**
@@ -2326,7 +2327,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/accent-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/accent-color
    */
   accentColor?: StyleValueWithCondition<CSS.Property.AccentColor, "colors">
   /**
@@ -2338,7 +2339,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/align-content
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-content
    */
   alignContent?: StyleValueWithCondition<CSS.Property.AlignContent>
   /**
@@ -2350,7 +2351,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/align-items
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-items
    */
   alignItems?: StyleValueWithCondition<CSS.Property.AlignItems>
   /**
@@ -2360,7 +2361,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/alignment-baseline
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/alignment-baseline
    */
   alignmentBaseline?: StyleValueWithCondition<CSS.Property.AlignmentBaseline>
   /**
@@ -2372,7 +2373,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/align-self
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-self
    */
   alignSelf?: StyleValueWithCondition<CSS.Property.AlignSelf>
   /**
@@ -2384,7 +2385,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/all
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/all
    */
   all?: StyleValueWithCondition<CSS.Globals>
   /**
@@ -2394,9 +2395,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/anchor-name
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/anchor-name
    */
-  anchorName?: StyleValueWithCondition<AnyString>
+  anchorName?: StyleValueWithCondition<CSS.Property.AnchorName>
   /**
    * ### anchor-scope
    *
@@ -2406,7 +2407,7 @@ export interface StyleProps {
    *
    * @see https://drafts.csswg.org/css-anchor-position-1/#propdef-anchor-scope
    */
-  anchorScope?: StyleValueWithCondition<AnyString>
+  anchorScope?: StyleValueWithCondition<CSS.Property.AnchorScope>
   /**
    * ### animation
    *
@@ -2416,7 +2417,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/animation
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation
    */
   animation?: StyleValueWithCondition<CSS.Property.Animation, "animations">
   /**
@@ -2427,7 +2428,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2023-07-04
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/animation-composition
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-composition
    */
   animationComposition?: StyleValueWithCondition<CSS.Property.AnimationComposition>
   /**
@@ -2439,7 +2440,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/animation-delay
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-delay
    */
   animationDelay?: StyleValueWithCondition<CSS.Property.AnimationDelay>
   /**
@@ -2451,7 +2452,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/animation-direction
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-direction
    */
   animationDirection?: StyleValueWithCondition<CSS.Property.AnimationDirection>
   /**
@@ -2463,7 +2464,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/animation-duration
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-duration
    */
   animationDuration?: StyleValueWithCondition<
     CSS.Property.AnimationDuration,
@@ -2478,7 +2479,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/animation-fill-mode
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-fill-mode
    */
   animationFillMode?: StyleValueWithCondition<CSS.Property.AnimationFillMode>
   /**
@@ -2490,7 +2491,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/animation-iteration-count
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-iteration-count
    */
   animationIterationCount?: StyleValueWithCondition<CSS.Property.AnimationIterationCount>
   /**
@@ -2502,7 +2503,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/animation-name
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-name
    */
   animationName?: StyleValueWithCondition<
     CSS.Property.AnimationName,
@@ -2517,7 +2518,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/animation-play-state
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-play-state
    */
   animationPlayState?: StyleValueWithCondition<CSS.Property.AnimationPlayState>
   /**
@@ -2527,7 +2528,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/animation-range
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range
    */
   animationRange?: StyleValueWithCondition<CSS.Property.AnimationRange>
   /**
@@ -2537,7 +2538,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/animation-range-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range-end
    */
   animationRangeEnd?: StyleValueWithCondition<CSS.Property.AnimationRangeEnd>
   /**
@@ -2547,7 +2548,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/animation-range-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range-start
    */
   animationRangeStart?: StyleValueWithCondition<CSS.Property.AnimationRangeStart>
   /**
@@ -2557,7 +2558,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/animation-timeline
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-timeline
    */
   animationTimeline?: StyleValueWithCondition<CSS.Property.AnimationTimeline>
   /**
@@ -2569,7 +2570,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/animation-timing-function
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-timing-function
    */
   animationTimingFunction?: StyleValueWithCondition<
     CSS.Property.AnimationTimingFunction,
@@ -2584,7 +2585,7 @@ export interface StyleProps {
    * @widely_available_date 2024-09-14
    * @newly_available_date 2022-03-14
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/appearance
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/appearance
    */
   appearance?: StyleValueWithCondition<CSS.Property.Appearance>
   /**
@@ -2596,7 +2597,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/aspect-ratio
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/aspect-ratio
    */
   aspectRatio?: StyleValueWithCondition<
     CSS.Property.AspectRatio,
@@ -2626,7 +2627,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2024-09-16
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/backdrop-filter
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/backdrop-filter
    */
   backdropFilter?: StyleValueWithCondition<CSS.Property.BackdropFilter>
   /**
@@ -2658,7 +2659,7 @@ export interface StyleProps {
    * @widely_available_date 2024-09-14
    * @newly_available_date 2022-03-14
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/backface-visibility
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/backface-visibility
    */
   backfaceVisibility?: StyleValueWithCondition<
     CSS.Property.BackfaceVisibility | number,
@@ -2673,7 +2674,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background
    */
   background?: StyleValueWithCondition<CSS.Property.Background, "colors">
   /**
@@ -2685,7 +2686,7 @@ export interface StyleProps {
    * @widely_available_date 2024-09-14
    * @newly_available_date 2022-03-14
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-attachment
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-attachment
    */
   backgroundAttachment?: StyleValueWithCondition<CSS.Property.BackgroundAttachment>
   /**
@@ -2697,7 +2698,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-blend-mode
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-blend-mode
    */
   backgroundBlendMode?: StyleValueWithCondition<CSS.Property.BackgroundBlendMode>
   /**
@@ -2709,7 +2710,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-clip
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-clip
    */
   backgroundClip?: StyleValueWithCondition<CSS.Property.BackgroundClip>
   /**
@@ -2721,7 +2722,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-color
    */
   backgroundColor?: StyleValueWithCondition<
     CSS.Property.BackgroundColor,
@@ -2736,7 +2737,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-image
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-image
    */
   backgroundImage?: StyleValueWithCondition<
     CSS.Property.BackgroundImage,
@@ -2751,7 +2752,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-origin
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-origin
    */
   backgroundOrigin?: StyleValueWithCondition<CSS.Property.BackgroundOrigin>
   /**
@@ -2763,7 +2764,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-position
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position
    */
   backgroundPosition?: StyleValueWithCondition<CSS.Property.BackgroundPosition>
   /**
@@ -2775,7 +2776,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-position-x
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position-x
    */
   backgroundPositionX?: StyleValueWithCondition<CSS.Property.BackgroundPositionX>
   /**
@@ -2787,7 +2788,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-position-y
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position-y
    */
   backgroundPositionY?: StyleValueWithCondition<CSS.Property.BackgroundPositionY>
   /**
@@ -2799,7 +2800,7 @@ export interface StyleProps {
    * @widely_available_date 2019-03-20
    * @newly_available_date 2016-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-repeat
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-repeat
    */
   backgroundRepeat?: StyleValueWithCondition<CSS.Property.BackgroundRepeat>
   /**
@@ -2831,7 +2832,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-size
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-size
    */
   backgroundSize?: StyleValueWithCondition<CSS.Property.BackgroundSize>
   /**
@@ -2851,7 +2852,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-inline/#baseline-source
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/baseline-source
    */
   baselineSource?: StyleValueWithCondition<AnyString>
   /**
@@ -2863,7 +2864,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background
    */
   bg?: StyleValueWithCondition<CSS.Property.Background, "colors">
   /**
@@ -2875,7 +2876,7 @@ export interface StyleProps {
    * @widely_available_date 2024-09-14
    * @newly_available_date 2022-03-14
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-attachment
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-attachment
    */
   bgAttachment?: StyleValueWithCondition<CSS.Property.BackgroundAttachment>
   /**
@@ -2887,7 +2888,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-blend-mode
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-blend-mode
    */
   bgBlendMode?: StyleValueWithCondition<CSS.Property.BackgroundBlendMode>
   /**
@@ -2899,7 +2900,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-clip
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-clip
    */
   bgClip?: StyleValueWithCondition<CSS.Property.BackgroundClip>
   /**
@@ -2911,7 +2912,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-color
    */
   bgColor?: StyleValueWithCondition<CSS.Property.BackgroundColor, "colors">
   /**
@@ -2923,7 +2924,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-image
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-image
    */
   bgGradient?: StyleValueWithCondition<
     CSS.Property.BackgroundImage,
@@ -2938,7 +2939,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-image
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-image
    */
   bgImage?: StyleValueWithCondition<CSS.Property.BackgroundImage, "gradients">
   /**
@@ -2950,7 +2951,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-image
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-image
    */
   bgImg?: StyleValueWithCondition<CSS.Property.BackgroundImage, "gradients">
   /**
@@ -2962,7 +2963,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-origin
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-origin
    */
   bgOrigin?: StyleValueWithCondition<CSS.Property.BackgroundOrigin>
   /**
@@ -2974,7 +2975,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-position
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position
    */
   bgPosition?: StyleValueWithCondition<CSS.Property.BackgroundPosition>
   /**
@@ -2986,7 +2987,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-position-x
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position-x
    */
   bgPositionX?: StyleValueWithCondition<CSS.Property.BackgroundPositionX>
   /**
@@ -2998,7 +2999,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-position-y
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position-y
    */
   bgPositionY?: StyleValueWithCondition<CSS.Property.BackgroundPositionY>
   /**
@@ -3010,7 +3011,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-position-x
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position-x
    */
   bgPosX?: StyleValueWithCondition<CSS.Property.BackgroundPositionX>
   /**
@@ -3022,7 +3023,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-position-y
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position-y
    */
   bgPosY?: StyleValueWithCondition<CSS.Property.BackgroundPositionY>
   /**
@@ -3034,7 +3035,7 @@ export interface StyleProps {
    * @widely_available_date 2019-03-20
    * @newly_available_date 2016-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-repeat
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-repeat
    */
   bgRepeat?: StyleValueWithCondition<CSS.Property.BackgroundRepeat>
   /**
@@ -3046,7 +3047,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/background-size
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-size
    */
   bgSize?: StyleValueWithCondition<CSS.Property.BackgroundSize>
   /**
@@ -3058,7 +3059,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/mix-blend-mode
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mix-blend-mode
    */
   blendMode?: StyleValueWithCondition<CSS.Property.MixBlendMode>
   /**
@@ -3070,7 +3071,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/block-size
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/block-size
    */
   blockSize?: StyleValueWithCondition<CSS.Property.BlockSize | number, "sizes">
   /**
@@ -3086,7 +3087,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border
    */
   border?: StyleValueWithCondition<CSS.Property.Border | number, "borders">
   /**
@@ -3098,7 +3099,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-block
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block
    */
   borderBlock?: StyleValueWithCondition<
     CSS.Property.BorderBlock | number,
@@ -3113,7 +3114,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-color
    */
   borderBlockColor?: StyleValueWithCondition<
     CSS.Property.BorderBlockColor,
@@ -3128,7 +3129,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end
    */
   borderBlockEnd?: StyleValueWithCondition<
     CSS.Property.BorderBlockEnd | number,
@@ -3143,7 +3144,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-color
    */
   borderBlockEndColor?: StyleValueWithCondition<
     CSS.Property.BorderBlockEndColor,
@@ -3158,7 +3159,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-style
    */
   borderBlockEndStyle?: StyleValueWithCondition<CSS.Property.BorderBlockEndStyle>
   /**
@@ -3170,7 +3171,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-width
    */
   borderBlockEndWidth?: StyleValueWithCondition<
     CSS.Property.BorderBlockEndWidth | number
@@ -3184,7 +3185,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start
    */
   borderBlockStart?: StyleValueWithCondition<
     CSS.Property.BorderBlockStart | number,
@@ -3199,7 +3200,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-color
    */
   borderBlockStartColor?: StyleValueWithCondition<
     CSS.Property.BorderBlockStartColor,
@@ -3214,7 +3215,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-style
    */
   borderBlockStartStyle?: StyleValueWithCondition<CSS.Property.BorderBlockStartStyle>
   /**
@@ -3226,7 +3227,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-width
    */
   borderBlockStartWidth?: StyleValueWithCondition<
     CSS.Property.BorderBlockStartWidth | number
@@ -3240,7 +3241,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-style
    */
   borderBlockStyle?: StyleValueWithCondition<CSS.Property.BorderBlockStyle>
   /**
@@ -3252,7 +3253,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-width
    */
   borderBlockWidth?: StyleValueWithCondition<
     CSS.Property.BorderBlockWidth | number
@@ -3266,7 +3267,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom
    */
   borderBottom?: StyleValueWithCondition<
     CSS.Property.BorderBottom | number,
@@ -3281,7 +3282,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-color
    */
   borderBottomColor?: StyleValueWithCondition<
     CSS.Property.BorderBottomColor,
@@ -3296,7 +3297,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-end-radius
    */
   borderBottomEndRadius?: StyleValueWithCondition<
     CSS.Property.BorderEndEndRadius | number,
@@ -3311,7 +3312,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-left-radius
    */
   borderBottomLeftRadius?: StyleValueWithCondition<
     CSS.Property.BorderBottomLeftRadius | number,
@@ -3326,7 +3327,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-left-radius
    *
    * ------------------------------------
    *
@@ -3338,7 +3339,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-right-radius
    */
   borderBottomRadius?: StyleValueWithCondition<
     | CSS.Property.BorderBottomLeftRadius
@@ -3355,7 +3356,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-right-radius
    */
   borderBottomRightRadius?: StyleValueWithCondition<
     CSS.Property.BorderBottomRightRadius | number,
@@ -3370,7 +3371,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-start-radius
    */
   borderBottomStartRadius?: StyleValueWithCondition<
     CSS.Property.BorderEndStartRadius | number,
@@ -3385,7 +3386,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-style
    */
   borderBottomStyle?: StyleValueWithCondition<CSS.Property.BorderBottomStyle>
   /**
@@ -3397,7 +3398,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-width
    */
   borderBottomWidth?: StyleValueWithCondition<
     CSS.Property.BorderBottomWidth | number
@@ -3411,7 +3412,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-collapse
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-collapse
    */
   borderCollapse?: StyleValueWithCondition<CSS.Property.BorderCollapse>
   /**
@@ -3423,7 +3424,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-color
    */
   borderColor?: StyleValueWithCondition<CSS.Property.BorderColor, "colors">
   /**
@@ -3435,7 +3436,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end
    */
   borderEnd?: StyleValueWithCondition<
     CSS.Property.BorderInlineEnd | number,
@@ -3450,7 +3451,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-color
    */
   borderEndColor?: StyleValueWithCondition<
     CSS.Property.BorderInlineEndColor,
@@ -3465,7 +3466,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-end-radius
    */
   borderEndEndRadius?: StyleValueWithCondition<
     CSS.Property.BorderEndEndRadius | number,
@@ -3480,7 +3481,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-end-radius
    *
    * ------------------------------------
    *
@@ -3492,7 +3493,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-start-radius
    */
   borderEndRadius?: StyleValueWithCondition<
     | CSS.Property.BorderEndEndRadius
@@ -3509,7 +3510,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-start-radius
    */
   borderEndStartRadius?: StyleValueWithCondition<
     CSS.Property.BorderEndStartRadius | number,
@@ -3524,7 +3525,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-style
    */
   borderEndStyle?: StyleValueWithCondition<CSS.Property.BorderInlineEndStyle>
   /**
@@ -3536,7 +3537,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-width
    */
   borderEndWidth?: StyleValueWithCondition<
     CSS.Property.BorderInlineEndWidth | number
@@ -3550,7 +3551,7 @@ export interface StyleProps {
    * @widely_available_date 2019-08-01
    * @newly_available_date 2017-02-01
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-image
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image
    */
   borderImage?: StyleValueWithCondition<
     CSS.Property.BorderImage | number,
@@ -3565,7 +3566,7 @@ export interface StyleProps {
    * @widely_available_date 2019-08-01
    * @newly_available_date 2017-02-01
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-image-outset
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-outset
    */
   borderImageOutset?: StyleValueWithCondition<CSS.Property.BorderImageOutset>
   /**
@@ -3577,7 +3578,7 @@ export interface StyleProps {
    * @widely_available_date 2019-08-01
    * @newly_available_date 2017-02-01
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-image-repeat
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-repeat
    */
   borderImageRepeat?: StyleValueWithCondition<CSS.Property.BorderImageRepeat>
   /**
@@ -3589,7 +3590,7 @@ export interface StyleProps {
    * @widely_available_date 2019-08-01
    * @newly_available_date 2017-02-01
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-image-slice
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-slice
    */
   borderImageSlice?: StyleValueWithCondition<CSS.Property.BorderImageSlice>
   /**
@@ -3601,7 +3602,7 @@ export interface StyleProps {
    * @widely_available_date 2019-08-01
    * @newly_available_date 2017-02-01
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-image-source
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-source
    */
   borderImageSource?: StyleValueWithCondition<
     CSS.Property.BorderImageSource,
@@ -3616,7 +3617,7 @@ export interface StyleProps {
    * @widely_available_date 2019-08-01
    * @newly_available_date 2017-02-01
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-image-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-width
    */
   borderImageWidth?: StyleValueWithCondition<
     CSS.Property.BorderImageWidth | number
@@ -3630,7 +3631,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline
    */
   borderInline?: StyleValueWithCondition<
     CSS.Property.BorderInline | number,
@@ -3645,7 +3646,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-color
    */
   borderInlineColor?: StyleValueWithCondition<
     CSS.Property.BorderInlineColor,
@@ -3660,7 +3661,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end
    */
   borderInlineEnd?: StyleValueWithCondition<
     CSS.Property.BorderInlineEnd | number,
@@ -3675,7 +3676,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-color
    */
   borderInlineEndColor?: StyleValueWithCondition<
     CSS.Property.BorderInlineEndColor,
@@ -3690,7 +3691,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-end-radius
    *
    * ------------------------------------
    *
@@ -3702,7 +3703,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-start-radius
    */
   borderInlineEndRadius?: StyleValueWithCondition<
     | CSS.Property.BorderEndEndRadius
@@ -3719,7 +3720,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-style
    */
   borderInlineEndStyle?: StyleValueWithCondition<CSS.Property.BorderInlineEndStyle>
   /**
@@ -3731,7 +3732,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-width
    */
   borderInlineEndWidth?: StyleValueWithCondition<
     CSS.Property.BorderInlineEndWidth | number
@@ -3745,7 +3746,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start
    */
   borderInlineStart?: StyleValueWithCondition<
     CSS.Property.BorderInlineStart | number,
@@ -3760,7 +3761,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-color
    */
   borderInlineStartColor?: StyleValueWithCondition<
     CSS.Property.BorderInlineStartColor,
@@ -3775,7 +3776,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-end-radius
    *
    * ------------------------------------
    *
@@ -3787,7 +3788,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-start-radius
    */
   borderInlineStartRadius?: StyleValueWithCondition<
     | CSS.Property.BorderStartEndRadius
@@ -3804,7 +3805,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-style
    */
   borderInlineStartStyle?: StyleValueWithCondition<CSS.Property.BorderInlineStartStyle>
   /**
@@ -3816,7 +3817,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-width
    */
   borderInlineStartWidth?: StyleValueWithCondition<
     CSS.Property.BorderInlineStartWidth | number
@@ -3830,7 +3831,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-style
    */
   borderInlineStyle?: StyleValueWithCondition<CSS.Property.BorderInlineStyle>
   /**
@@ -3842,7 +3843,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-width
    */
   borderInlineWidth?: StyleValueWithCondition<
     CSS.Property.BorderInlineWidth | number
@@ -3856,7 +3857,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-left
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left
    */
   borderLeft?: StyleValueWithCondition<
     CSS.Property.BorderLeft | number,
@@ -3871,7 +3872,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-left-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-color
    */
   borderLeftColor?: StyleValueWithCondition<
     CSS.Property.BorderLeftColor,
@@ -3886,7 +3887,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-left-radius
    *
    * ------------------------------------
    *
@@ -3898,7 +3899,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-left-radius
    */
   borderLeftRadius?: StyleValueWithCondition<
     | CSS.Property.BorderBottomLeftRadius
@@ -3915,7 +3916,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-left-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-style
    */
   borderLeftStyle?: StyleValueWithCondition<CSS.Property.BorderLeftStyle>
   /**
@@ -3927,7 +3928,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-left-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-width
    */
   borderLeftWidth?: StyleValueWithCondition<
     CSS.Property.BorderLeftWidth | number
@@ -3941,7 +3942,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-radius
    */
   borderRadius?: StyleValueWithCondition<
     CSS.Property.BorderRadius | number,
@@ -3956,7 +3957,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-right
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right
    */
   borderRight?: StyleValueWithCondition<
     CSS.Property.BorderRight | number,
@@ -3971,7 +3972,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-right-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-color
    */
   borderRightColor?: StyleValueWithCondition<
     CSS.Property.BorderRightColor,
@@ -3986,7 +3987,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-right-radius
    *
    * ------------------------------------
    *
@@ -3998,7 +3999,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-right-radius
    */
   borderRightRadius?: StyleValueWithCondition<
     | CSS.Property.BorderBottomRightRadius
@@ -4015,7 +4016,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-right-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-style
    */
   borderRightStyle?: StyleValueWithCondition<CSS.Property.BorderRightStyle>
   /**
@@ -4027,7 +4028,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-right-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-width
    */
   borderRightWidth?: StyleValueWithCondition<
     CSS.Property.BorderRightWidth | number
@@ -4041,7 +4042,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-spacing
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-spacing
    */
   borderSpacing?: StyleValueWithCondition<CSS.Property.BorderSpacing>
   /**
@@ -4053,7 +4054,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start
    */
   borderStart?: StyleValueWithCondition<
     CSS.Property.BorderInlineStart | number,
@@ -4068,7 +4069,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-color
    */
   borderStartColor?: StyleValueWithCondition<
     CSS.Property.BorderInlineStartColor,
@@ -4083,7 +4084,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-end-radius
    */
   borderStartEndRadius?: StyleValueWithCondition<
     CSS.Property.BorderStartEndRadius | number,
@@ -4098,7 +4099,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-end-radius
    *
    * ------------------------------------
    *
@@ -4110,7 +4111,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-start-radius
    */
   borderStartRadius?: StyleValueWithCondition<
     | CSS.Property.BorderStartEndRadius
@@ -4127,7 +4128,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-start-radius
    */
   borderStartStartRadius?: StyleValueWithCondition<
     CSS.Property.BorderStartStartRadius | number,
@@ -4142,7 +4143,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-style
    */
   borderStartStyle?: StyleValueWithCondition<CSS.Property.BorderInlineStartStyle>
   /**
@@ -4154,7 +4155,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-width
    */
   borderStartWidth?: StyleValueWithCondition<
     CSS.Property.BorderInlineStartWidth | number
@@ -4168,7 +4169,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-style
    */
   borderStyle?: StyleValueWithCondition<CSS.Property.BorderStyle>
   /**
@@ -4180,7 +4181,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-top
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top
    */
   borderTop?: StyleValueWithCondition<
     CSS.Property.BorderTop | number,
@@ -4195,7 +4196,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-color
    */
   borderTopColor?: StyleValueWithCondition<
     CSS.Property.BorderTopColor,
@@ -4210,7 +4211,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-end-radius
    */
   borderTopEndRadius?: StyleValueWithCondition<
     CSS.Property.BorderStartEndRadius | number,
@@ -4225,7 +4226,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-left-radius
    */
   borderTopLeftRadius?: StyleValueWithCondition<
     CSS.Property.BorderTopLeftRadius | number,
@@ -4240,7 +4241,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-left-radius
    *
    * ------------------------------------
    *
@@ -4252,7 +4253,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-right-radius
    */
   borderTopRadius?: StyleValueWithCondition<
     | CSS.Property.BorderTopLeftRadius
@@ -4269,7 +4270,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-right-radius
    */
   borderTopRightRadius?: StyleValueWithCondition<
     CSS.Property.BorderTopRightRadius | number,
@@ -4284,7 +4285,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-start-radius
    */
   borderTopStartRadius?: StyleValueWithCondition<
     CSS.Property.BorderStartStartRadius | number,
@@ -4299,7 +4300,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-style
    */
   borderTopStyle?: StyleValueWithCondition<CSS.Property.BorderTopStyle>
   /**
@@ -4311,7 +4312,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-width
    */
   borderTopWidth?: StyleValueWithCondition<CSS.Property.BorderTopWidth | number>
   /**
@@ -4323,7 +4324,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-width
    */
   borderWidth?: StyleValueWithCondition<CSS.Property.BorderWidth | number>
   /**
@@ -4335,7 +4336,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-left
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left
    *
    * ------------------------------------
    *
@@ -4347,7 +4348,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-right
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right
    */
   borderX?: StyleValueWithCondition<
     CSS.Property.BorderLeft | CSS.Property.BorderRight | number,
@@ -4362,7 +4363,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom
    *
    * ------------------------------------
    *
@@ -4374,7 +4375,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-top
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top
    */
   borderY?: StyleValueWithCondition<
     CSS.Property.BorderBottom | CSS.Property.BorderTop | number,
@@ -4389,7 +4390,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/bottom
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/bottom
    */
   bottom?: StyleValueWithCondition<CSS.Property.Bottom | number, "spaces">
   /**
@@ -4397,7 +4398,7 @@ export interface StyleProps {
    *
    * The CSS `box-align` property.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/box-align
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-align
    *
    * @deprecated
    */
@@ -4409,7 +4410,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/box-decoration-break
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-decoration-break
    */
   boxDecorationBreak?: StyleValueWithCondition<CSS.Property.BoxDecorationBreak>
   /**
@@ -4417,7 +4418,7 @@ export interface StyleProps {
    *
    * The CSS `box-direction` property.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/box-direction
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-direction
    *
    * @deprecated
    */
@@ -4427,7 +4428,7 @@ export interface StyleProps {
    *
    * The CSS `box-flex` property.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/box-flex
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-flex
    *
    * @deprecated
    */
@@ -4437,7 +4438,7 @@ export interface StyleProps {
    *
    * The CSS `box-flex-group` property.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/box-flex-group
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-flex-group
    *
    * @deprecated
    */
@@ -4447,7 +4448,7 @@ export interface StyleProps {
    *
    * The CSS `box-lines` property.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/box-lines
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-lines
    *
    * @deprecated
    */
@@ -4457,7 +4458,7 @@ export interface StyleProps {
    *
    * The CSS `box-ordinal-group` property.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/box-ordinal-group
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-ordinal-group
    *
    * @deprecated
    */
@@ -4467,7 +4468,7 @@ export interface StyleProps {
    *
    * The CSS `box-orient` property.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/box-orient
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-orient
    *
    * @deprecated
    */
@@ -4477,7 +4478,7 @@ export interface StyleProps {
    *
    * The CSS `box-pack` property.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/box-pack
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-pack
    *
    * @deprecated
    */
@@ -4491,7 +4492,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/box-shadow
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-shadow
    */
   boxShadow?: StyleValueWithCondition<CSS.Property.BoxShadow, "shadows">
   /**
@@ -4503,7 +4504,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/height
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/height
    *
    * ------------------------------------
    *
@@ -4515,7 +4516,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/width
    */
   boxSize?: StyleValueWithCondition<
     CSS.Property.Height | CSS.Property.Width | number,
@@ -4530,7 +4531,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/box-sizing
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-sizing
    */
   boxSizing?: StyleValueWithCondition<CSS.Property.BoxSizing>
   /**
@@ -4542,7 +4543,7 @@ export interface StyleProps {
    * @widely_available_date 2021-07-29
    * @newly_available_date 2019-01-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/break-after
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-after
    */
   breakAfter?: StyleValueWithCondition<CSS.Property.BreakAfter>
   /**
@@ -4554,7 +4555,7 @@ export interface StyleProps {
    * @widely_available_date 2021-07-29
    * @newly_available_date 2019-01-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/break-before
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-before
    */
   breakBefore?: StyleValueWithCondition<CSS.Property.BreakBefore>
   /**
@@ -4566,7 +4567,7 @@ export interface StyleProps {
    * @widely_available_date 2021-07-29
    * @newly_available_date 2019-01-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/break-inside
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-inside
    */
   breakInside?: StyleValueWithCondition<CSS.Property.BreakInside>
   /**
@@ -4582,7 +4583,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/caption-side
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caption-side
    */
   captionSide?: StyleValueWithCondition<CSS.Property.CaptionSide>
   /**
@@ -4594,7 +4595,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/caret-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caret-color
    */
   caret?: StyleValueWithCondition<CSS.Property.CaretColor, "colors">
   /**
@@ -4602,7 +4603,7 @@ export interface StyleProps {
    *
    * The CSS `caret-animation` property.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/caret-animation
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caret-animation
    *
    * @experimental
    */
@@ -4616,17 +4617,17 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/caret-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caret-color
    */
   caretColor?: StyleValueWithCondition<CSS.Property.CaretColor, "colors">
   /**
    * ### caret-shape
    *
-   * The <code>caret-shape</code> CSS property controls the shape of the insertion caret, the symbol that shows where the next character is to be inserted or deleted.
+   * The <code>caret-shape</code> CSS property sets the shape of the insertion caret, the symbol that shows where the next character is to be inserted or deleted.
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/caret-shape
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caret-shape
    *
    * @experimental
    */
@@ -4640,7 +4641,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/clear
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/clear
    */
   clear?: StyleValueWithCondition<CSS.Property.Clear>
   /**
@@ -4648,7 +4649,7 @@ export interface StyleProps {
    *
    * The <code>clip</code> CSS property sets the visible area of an absolutely positioned element.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/clip
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/clip
    *
    * @deprecated
    */
@@ -4662,7 +4663,7 @@ export interface StyleProps {
    * @widely_available_date 2023-07-21
    * @newly_available_date 2021-01-21
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/clip-path
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/clip-path
    */
   clipPath?: StyleValueWithCondition<CSS.Property.ClipPath>
   /**
@@ -4674,7 +4675,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/clip-rule
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/clip-rule
    */
   clipRule?: StyleValueWithCondition<CSS.Property.ClipRule>
   /**
@@ -4686,7 +4687,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/color
    */
   color?: StyleValueWithCondition<CSS.Property.Color, "colors">
   /**
@@ -4708,7 +4709,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/color-interpolation
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/color-interpolation
    */
   colorInterpolation?: StyleValueWithCondition<CSS.Property.ColorInterpolation>
   /**
@@ -4720,9 +4721,9 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/color-interpolation-filters
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/color-interpolation-filters
    */
-  colorInterpolationFilters?: StyleValueWithCondition<AnyString>
+  colorInterpolationFilters?: StyleValueWithCondition<CSS.Property.ColorInterpolationFilters>
   /**
    * ### color-scheme
    *
@@ -4732,7 +4733,7 @@ export interface StyleProps {
    * @widely_available_date 2024-08-03
    * @newly_available_date 2022-02-03
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/color-scheme
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/color-scheme
    */
   colorMode?: StyleValueWithCondition<CSS.Property.ColorScheme>
   /**
@@ -4744,7 +4745,7 @@ export interface StyleProps {
    * @widely_available_date 2019-09-07
    * @newly_available_date 2017-03-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/column-count
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-count
    */
   columnCount?: StyleValueWithCondition<CSS.Property.ColumnCount>
   /**
@@ -4756,7 +4757,7 @@ export interface StyleProps {
    * @widely_available_date 2019-09-07
    * @newly_available_date 2017-03-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/column-fill
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-fill
    */
   columnFill?: StyleValueWithCondition<CSS.Property.ColumnFill>
   /**
@@ -4768,7 +4769,7 @@ export interface StyleProps {
    * @widely_available_date 2019-09-07
    * @newly_available_date 2017-03-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/column-gap
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-gap
    */
   columnGap?: StyleValueWithCondition<CSS.Property.ColumnGap | number, "spaces">
   /**
@@ -4780,7 +4781,7 @@ export interface StyleProps {
    * @widely_available_date 2019-09-07
    * @newly_available_date 2017-03-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/column-rule
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule
    */
   columnRule?: StyleValueWithCondition<CSS.Property.ColumnRule | number>
   /**
@@ -4792,7 +4793,7 @@ export interface StyleProps {
    * @widely_available_date 2019-09-07
    * @newly_available_date 2017-03-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/column-rule-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule-color
    */
   columnRuleColor?: StyleValueWithCondition<
     CSS.Property.ColumnRuleColor,
@@ -4807,7 +4808,7 @@ export interface StyleProps {
    * @widely_available_date 2019-09-07
    * @newly_available_date 2017-03-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/column-rule-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule-style
    */
   columnRuleStyle?: StyleValueWithCondition<CSS.Property.ColumnRuleStyle>
   /**
@@ -4819,7 +4820,7 @@ export interface StyleProps {
    * @widely_available_date 2019-09-07
    * @newly_available_date 2017-03-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/column-rule-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule-width
    */
   columnRuleWidth?: StyleValueWithCondition<
     CSS.Property.ColumnRuleWidth | number
@@ -4833,7 +4834,7 @@ export interface StyleProps {
    * @widely_available_date 2019-09-07
    * @newly_available_date 2017-03-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/columns
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/columns
    */
   columns?: StyleValueWithCondition<CSS.Property.Columns>
   /**
@@ -4845,7 +4846,7 @@ export interface StyleProps {
    * @widely_available_date 2023-01-28
    * @newly_available_date 2020-07-28
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/column-span
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-span
    */
   columnSpan?: StyleValueWithCondition<CSS.Property.ColumnSpan>
   /**
@@ -4857,7 +4858,7 @@ export interface StyleProps {
    * @widely_available_date 2019-09-07
    * @newly_available_date 2017-03-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/column-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-width
    */
   columnWidth?: StyleValueWithCondition<
     CSS.Property.ColumnWidth | number,
@@ -4872,7 +4873,7 @@ export interface StyleProps {
    * @widely_available_date 2024-09-14
    * @newly_available_date 2022-03-14
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/contain
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain
    */
   contain?: StyleValueWithCondition<CSS.Property.Contain>
   /**
@@ -4884,7 +4885,7 @@ export interface StyleProps {
    * @widely_available_date 2025-08-14
    * @newly_available_date 2023-02-14
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/container
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/container
    */
   container?: StyleValueWithCondition<CSS.Property.Container>
   /**
@@ -4896,7 +4897,7 @@ export interface StyleProps {
    * @widely_available_date 2025-08-14
    * @newly_available_date 2023-02-14
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/container-name
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/container-name
    */
   containerName?: StyleValueWithCondition<CSS.Property.ContainerName>
   /**
@@ -4908,7 +4909,7 @@ export interface StyleProps {
    * @widely_available_date 2025-08-14
    * @newly_available_date 2023-02-14
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/container-type
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/container-type
    */
   containerType?: StyleValueWithCondition<CSS.Property.ContainerType>
   /**
@@ -4919,7 +4920,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2023-09-18
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-block-size
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-block-size
    */
   containIntrinsicBlockSize?: StyleValueWithCondition<CSS.Property.ContainIntrinsicBlockSize>
   /**
@@ -4930,7 +4931,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2023-09-18
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-height
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-height
    */
   containIntrinsicHeight?: StyleValueWithCondition<CSS.Property.ContainIntrinsicHeight>
   /**
@@ -4941,7 +4942,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2023-09-18
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-inline-size
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-inline-size
    */
   containIntrinsicInlineSize?: StyleValueWithCondition<CSS.Property.ContainIntrinsicInlineSize>
   /**
@@ -4952,7 +4953,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2023-09-18
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-size
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-size
    */
   containIntrinsicSize?: StyleValueWithCondition<CSS.Property.ContainIntrinsicSize>
   /**
@@ -4963,7 +4964,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2023-09-18
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-width
    */
   containIntrinsicWidth?: StyleValueWithCondition<
     CSS.Property.ContainIntrinsicWidth | number,
@@ -4978,7 +4979,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/content
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/content
    */
   content?: StyleValueWithCondition<CSS.Property.Content>
   /**
@@ -4989,7 +4990,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2025-09-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/content-visibility
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/content-visibility
    */
   contentVisibility?: StyleValueWithCondition<CSS.Property.ContentVisibility>
   /**
@@ -5003,7 +5004,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/corner-block-end-shape
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/corner-block-end-shape
    *
    * @experimental
    */
@@ -5015,7 +5016,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/corner-block-start-shape
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/corner-block-start-shape
    *
    * @experimental
    */
@@ -5027,7 +5028,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/corner-bottom-left-shape
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/corner-bottom-left-shape
    *
    * @experimental
    */
@@ -5039,7 +5040,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/corner-bottom-right-shape
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/corner-bottom-right-shape
    *
    * @experimental
    */
@@ -5051,7 +5052,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/corner-bottom-shape
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/corner-bottom-shape
    *
    * @experimental
    */
@@ -5063,7 +5064,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/corner-end-end-shape
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/corner-end-end-shape
    *
    * @experimental
    */
@@ -5075,7 +5076,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/corner-end-start-shape
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/corner-end-start-shape
    *
    * @experimental
    */
@@ -5087,7 +5088,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/corner-inline-end-shape
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/corner-inline-end-shape
    *
    * @experimental
    */
@@ -5099,7 +5100,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/corner-inline-start-shape
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/corner-inline-start-shape
    *
    * @experimental
    */
@@ -5111,7 +5112,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/corner-left-shape
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/corner-left-shape
    *
    * @experimental
    */
@@ -5123,7 +5124,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/corner-right-shape
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/corner-right-shape
    *
    * @experimental
    */
@@ -5135,7 +5136,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/corner-shape
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/corner-shape
    *
    * @experimental
    */
@@ -5147,7 +5148,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/corner-start-end-shape
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/corner-start-end-shape
    *
    * @experimental
    */
@@ -5159,7 +5160,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/corner-start-start-shape
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/corner-start-start-shape
    *
    * @experimental
    */
@@ -5171,7 +5172,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/corner-top-left-shape
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/corner-top-left-shape
    *
    * @experimental
    */
@@ -5183,7 +5184,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/corner-top-right-shape
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/corner-top-right-shape
    *
    * @experimental
    */
@@ -5195,7 +5196,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/corner-top-shape
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/corner-top-shape
    *
    * @experimental
    */
@@ -5209,7 +5210,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/counter-increment
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/counter-increment
    */
   counterIncrement?: StyleValueWithCondition<CSS.Property.CounterIncrement>
   /**
@@ -5221,7 +5222,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/counter-reset
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/counter-reset
    */
   counterReset?: StyleValueWithCondition<CSS.Property.CounterReset>
   /**
@@ -5232,7 +5233,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2023-12-11
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/counter-set
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/counter-set
    */
   counterSet?: StyleValueWithCondition<CSS.Property.CounterSet>
   /**
@@ -5242,7 +5243,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/cursor
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/cursor
    */
   cursor?: StyleValueWithCondition<CSS.Property.Cursor>
   /**
@@ -5254,9 +5255,9 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/cx
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/cx
    */
-  cx?: StyleValueWithCondition<AnyString>
+  cx?: StyleValueWithCondition<CSS.Property.Cx>
   /**
    * ### cy
    *
@@ -5266,9 +5267,9 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/cy
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/cy
    */
-  cy?: StyleValueWithCondition<AnyString>
+  cy?: StyleValueWithCondition<CSS.Property.Cy>
   /**
    * ### d
    *
@@ -5278,9 +5279,9 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/d
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/d
    */
-  d?: StyleValueWithCondition<AnyString>
+  d?: StyleValueWithCondition<CSS.Property.D>
   /**
    * ### direction
    *
@@ -5290,7 +5291,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/direction
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/direction
    */
   direction?: StyleValueWithCondition<CSS.Property.Direction>
   /**
@@ -5302,7 +5303,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/display
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/display
    */
   display?: StyleValueWithCondition<
     | "absolute-center"
@@ -5320,7 +5321,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/dominant-baseline
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/dominant-baseline
    */
   dominantBaseline?: StyleValueWithCondition<CSS.Property.DominantBaseline>
   /**
@@ -5332,7 +5333,7 @@ export interface StyleProps {
    *
    * The CSS `dynamic-range-limit` property.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/dynamic-range-limit
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/dynamic-range-limit
    */
   dynamicRangeLimit?: StyleValueWithCondition<AnyString>
   /**
@@ -5344,7 +5345,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/empty-cells
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/empty-cells
    */
   emptyCells?: StyleValueWithCondition<CSS.Property.EmptyCells>
   /**
@@ -5354,11 +5355,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/field-sizing
-   *
-   * @experimental
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/field-sizing
    */
-  fieldSizing?: StyleValueWithCondition<AnyString>
+  fieldSizing?: StyleValueWithCondition<CSS.Property.FieldSizing>
   /**
    * ### fill
    *
@@ -5368,7 +5367,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/fill
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/fill
    */
   fill?: StyleValueWithCondition<CSS.Property.Fill, "colors">
   /**
@@ -5380,7 +5379,7 @@ export interface StyleProps {
    * @widely_available_date ≤2022-09-24
    * @newly_available_date ≤2020-03-24
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/fill-opacity
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/fill-opacity
    */
   fillOpacity?: StyleValueWithCondition<CSS.Property.FillOpacity>
   /**
@@ -5392,7 +5391,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/fill-rule
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/fill-rule
    */
   fillRule?: StyleValueWithCondition<CSS.Property.FillRule>
   /**
@@ -5404,7 +5403,7 @@ export interface StyleProps {
    * @widely_available_date 2019-03-07
    * @newly_available_date 2016-09-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/filter
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/filter
    */
   filter?: StyleValueWithCondition<CSS.Property.Filter>
   /**
@@ -5416,7 +5415,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/flex
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex
    */
   flex?: StyleValueWithCondition<CSS.Property.Flex>
   /**
@@ -5428,7 +5427,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/flex-basis
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-basis
    */
   flexBasis?: StyleValueWithCondition<CSS.Property.FlexBasis | number, "sizes">
   /**
@@ -5440,7 +5439,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/flex-direction
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-direction
    */
   flexDir?: StyleValueWithCondition<CSS.Property.FlexDirection>
   /**
@@ -5452,7 +5451,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/flex-direction
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-direction
    */
   flexDirection?: StyleValueWithCondition<CSS.Property.FlexDirection>
   /**
@@ -5464,7 +5463,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/flex-flow
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-flow
    */
   flexFlow?: StyleValueWithCondition<CSS.Property.FlexFlow>
   /**
@@ -5476,7 +5475,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/flex-grow
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-grow
    */
   flexGrow?: StyleValueWithCondition<CSS.Property.FlexGrow>
   /**
@@ -5488,7 +5487,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/flex-shrink
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-shrink
    */
   flexShrink?: StyleValueWithCondition<CSS.Property.FlexShrink>
   /**
@@ -5500,7 +5499,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/flex-wrap
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-wrap
    */
   flexWrap?: StyleValueWithCondition<CSS.Property.FlexWrap>
   /**
@@ -5512,7 +5511,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/float
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/float
    */
   float?: StyleValueWithCondition<CSS.Property.Float>
   /**
@@ -5524,7 +5523,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/flood-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flood-color
    */
   floodColor?: StyleValueWithCondition<CSS.Property.FloodColor, "colors">
   /**
@@ -5536,7 +5535,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/flood-opacity
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flood-opacity
    */
   floodOpacity?: StyleValueWithCondition<CSS.Property.FloodOpacity>
   /**
@@ -5576,7 +5575,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font
    */
   font?: StyleValueWithCondition<CSS.Property.Font>
   /**
@@ -5588,7 +5587,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-family
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-family
    */
   fontFamily?: StyleValueWithCondition<CSS.Property.FontFamily, "fonts">
   /**
@@ -5600,7 +5599,7 @@ export interface StyleProps {
    * @widely_available_date 2019-10-05
    * @newly_available_date 2017-04-05
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-feature-settings
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-feature-settings
    */
   fontFeatureSettings?: StyleValueWithCondition<CSS.Property.FontFeatureSettings>
   /**
@@ -5612,7 +5611,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-kerning
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-kerning
    */
   fontKerning?: StyleValueWithCondition<CSS.Property.FontKerning>
   /**
@@ -5622,7 +5621,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-language-override
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-language-override
    */
   fontLanguageOverride?: StyleValueWithCondition<CSS.Property.FontLanguageOverride>
   /**
@@ -5634,7 +5633,7 @@ export interface StyleProps {
    * @widely_available_date 2022-09-24
    * @newly_available_date 2020-03-24
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-optical-sizing
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-optical-sizing
    */
   fontOpticalSizing?: StyleValueWithCondition<CSS.Property.FontOpticalSizing>
   /**
@@ -5646,7 +5645,7 @@ export interface StyleProps {
    * @widely_available_date 2025-05-15
    * @newly_available_date 2022-11-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-palette
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-palette
    */
   fontPalette?: StyleValueWithCondition<CSS.Property.FontPalette>
   /**
@@ -5658,7 +5657,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-size
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-size
    */
   fontSize?: StyleValueWithCondition<
     CSS.Property.FontSize | number,
@@ -5672,7 +5671,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2024-07-25
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-size-adjust
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-size-adjust
    */
   fontSizeAdjust?: StyleValueWithCondition<CSS.Property.FontSizeAdjust>
   /**
@@ -5680,7 +5679,7 @@ export interface StyleProps {
    *
    * The CSS `font-smooth` property.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-smooth
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-smooth
    */
   fontSmooth?: StyleValueWithCondition<CSS.Property.FontSmooth>
   /**
@@ -5688,7 +5687,7 @@ export interface StyleProps {
    *
    * The <code>font-stretch</code> CSS property selects a font face from a font family based on width, either by a keyword such as <code>condensed</code> or a percentage.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-stretch
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-stretch
    *
    * @deprecated
    */
@@ -5702,7 +5701,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-style
    */
   fontStyle?: StyleValueWithCondition<CSS.Property.FontStyle>
   /**
@@ -5714,7 +5713,7 @@ export interface StyleProps {
    * @widely_available_date 2024-07-06
    * @newly_available_date 2022-01-06
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis
    */
   fontSynthesis?: StyleValueWithCondition<CSS.Property.FontSynthesis>
   /**
@@ -5724,7 +5723,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-position
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis-position
    *
    * @experimental
    */
@@ -5738,7 +5737,7 @@ export interface StyleProps {
    * @widely_available_date 2025-09-27
    * @newly_available_date 2023-03-27
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-small-caps
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis-small-caps
    */
   fontSynthesisSmallCaps?: StyleValueWithCondition<CSS.Property.FontSynthesisSmallCaps>
   /**
@@ -5750,7 +5749,7 @@ export interface StyleProps {
    * @widely_available_date 2025-09-27
    * @newly_available_date 2023-03-27
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis-style
    */
   fontSynthesisStyle?: StyleValueWithCondition<CSS.Property.FontSynthesisStyle>
   /**
@@ -5762,7 +5761,7 @@ export interface StyleProps {
    * @widely_available_date 2025-09-27
    * @newly_available_date 2023-03-27
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-weight
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis-weight
    */
   fontSynthesisWeight?: StyleValueWithCondition<CSS.Property.FontSynthesisWeight>
   /**
@@ -5774,7 +5773,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-variant
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant
    */
   fontVariant?: StyleValueWithCondition<CSS.Property.FontVariant>
   /**
@@ -5786,7 +5785,7 @@ export interface StyleProps {
    * @widely_available_date 2025-09-13
    * @newly_available_date 2023-03-13
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-alternates
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-alternates
    */
   fontVariantAlternates?: StyleValueWithCondition<CSS.Property.FontVariantAlternates>
   /**
@@ -5798,7 +5797,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-caps
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-caps
    */
   fontVariantCaps?: StyleValueWithCondition<CSS.Property.FontVariantCaps>
   /**
@@ -5810,7 +5809,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-east-asian
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-east-asian
    */
   fontVariantEastAsian?: StyleValueWithCondition<CSS.Property.FontVariantEastAsian>
   /**
@@ -5820,7 +5819,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-emoji
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-emoji
    */
   fontVariantEmoji?: StyleValueWithCondition<CSS.Property.FontVariantEmoji>
   /**
@@ -5832,7 +5831,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-ligatures
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-ligatures
    */
   fontVariantLigatures?: StyleValueWithCondition<CSS.Property.FontVariantLigatures>
   /**
@@ -5844,7 +5843,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-numeric
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-numeric
    */
   fontVariantNumeric?: StyleValueWithCondition<CSS.Property.FontVariantNumeric>
   /**
@@ -5854,7 +5853,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-position
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-position
    */
   fontVariantPosition?: StyleValueWithCondition<CSS.Property.FontVariantPosition>
   /**
@@ -5866,7 +5865,7 @@ export interface StyleProps {
    * @widely_available_date 2021-03-05
    * @newly_available_date 2018-09-05
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-variation-settings
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variation-settings
    */
   fontVariationSettings?: StyleValueWithCondition<CSS.Property.FontVariationSettings>
   /**
@@ -5878,7 +5877,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-weight
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-weight
    */
   fontWeight?: StyleValueWithCondition<CSS.Property.FontWeight, "fontWeights">
   /**
@@ -5892,7 +5891,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  fontWidth?: StyleValueWithCondition<AnyString>
+  fontWidth?: StyleValueWithCondition<CSS.Property.FontWidth>
   /**
    * ### forced-color-adjust
    *
@@ -5902,7 +5901,7 @@ export interface StyleProps {
    * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/forced-color-adjust
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/forced-color-adjust
    */
   forcedColorAdjust?: StyleValueWithCondition<CSS.Property.ForcedColorAdjust>
   /**
@@ -5914,7 +5913,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/gap
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/gap
    */
   g?: StyleValueWithCondition<CSS.Property.Gap | number, "spaces">
   /**
@@ -5926,7 +5925,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/gap
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/gap
    */
   gap?: StyleValueWithCondition<CSS.Property.Gap | number, "spaces">
   /**
@@ -5938,7 +5937,7 @@ export interface StyleProps {
    * @widely_available_date 2019-09-07
    * @newly_available_date 2017-03-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/column-gap
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-gap
    */
   gapX?: StyleValueWithCondition<CSS.Property.ColumnGap | number, "spaces">
   /**
@@ -5950,7 +5949,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/row-gap
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/row-gap
    */
   gapY?: StyleValueWithCondition<CSS.Property.RowGap | number, "spaces">
   /**
@@ -5986,7 +5985,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/grid
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid
    */
   grid?: StyleValueWithCondition<CSS.Property.Grid>
   /**
@@ -5998,7 +5997,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/grid-area
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-area
    */
   gridArea?: StyleValueWithCondition<CSS.Property.GridArea>
   /**
@@ -6010,7 +6009,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/grid-auto-columns
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-auto-columns
    */
   gridAutoColumns?: StyleValueWithCondition<
     CSS.Property.GridAutoColumns | number,
@@ -6025,7 +6024,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/grid-auto-flow
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-auto-flow
    */
   gridAutoFlow?: StyleValueWithCondition<CSS.Property.GridAutoFlow>
   /**
@@ -6037,7 +6036,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/grid-auto-rows
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-auto-rows
    */
   gridAutoRows?: StyleValueWithCondition<
     CSS.Property.GridAutoRows | number,
@@ -6052,7 +6051,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/grid-column
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-column
    */
   gridColumn?: StyleValueWithCondition<CSS.Property.GridColumn>
   /**
@@ -6064,7 +6063,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/grid-column-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-column-end
    */
   gridColumnEnd?: StyleValueWithCondition<CSS.Property.GridColumnEnd>
   /**
@@ -6076,7 +6075,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/grid-column-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-column-start
    */
   gridColumnStart?: StyleValueWithCondition<CSS.Property.GridColumnStart>
   /**
@@ -6088,7 +6087,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/grid-row
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-row
    */
   gridRow?: StyleValueWithCondition<CSS.Property.GridRow>
   /**
@@ -6100,7 +6099,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/grid-row-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-row-end
    */
   gridRowEnd?: StyleValueWithCondition<CSS.Property.GridRowEnd>
   /**
@@ -6112,7 +6111,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/grid-row-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-row-start
    */
   gridRowStart?: StyleValueWithCondition<CSS.Property.GridRowStart>
   /**
@@ -6124,7 +6123,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/grid-template
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-template
    */
   gridTemplate?: StyleValueWithCondition<CSS.Property.GridTemplate>
   /**
@@ -6136,7 +6135,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/grid-template-areas
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-template-areas
    */
   gridTemplateAreas?: StyleValueWithCondition<CSS.Property.GridTemplateAreas>
   /**
@@ -6148,7 +6147,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/grid-template-columns
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-template-columns
    */
   gridTemplateColumns?: StyleValueWithCondition<
     CSS.Property.GridTemplateColumns | number,
@@ -6163,7 +6162,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/grid-template-rows
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-template-rows
    */
   gridTemplateRows?: StyleValueWithCondition<
     CSS.Property.GridTemplateRows | number,
@@ -6178,7 +6177,7 @@ export interface StyleProps {
    * @widely_available_date 2019-09-07
    * @newly_available_date 2017-03-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/column-gap
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-gap
    */
   gx?: StyleValueWithCondition<CSS.Property.ColumnGap | number, "spaces">
   /**
@@ -6190,7 +6189,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/row-gap
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/row-gap
    */
   gy?: StyleValueWithCondition<CSS.Property.RowGap | number, "spaces">
   /**
@@ -6202,7 +6201,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/height
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/height
    */
   h?: StyleValueWithCondition<CSS.Property.Height | number, "sizes">
   /**
@@ -6212,7 +6211,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/hanging-punctuation
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hanging-punctuation
    */
   hangingPunctuation?: StyleValueWithCondition<CSS.Property.HangingPunctuation>
   /**
@@ -6224,7 +6223,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/height
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/height
    */
   height?: StyleValueWithCondition<CSS.Property.Height | number, "sizes">
   /**
@@ -6239,7 +6238,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2023-09-18
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/hyphenate-character
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hyphenate-character
    */
   hyphenateCharacter?: StyleValueWithCondition<CSS.Property.HyphenateCharacter>
   /**
@@ -6249,7 +6248,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/hyphenate-limit-chars
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hyphenate-limit-chars
    */
   hyphenateLimitChars?: StyleValueWithCondition<CSS.Property.HyphenateLimitChars>
   /**
@@ -6260,7 +6259,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2023-09-18
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/hyphens
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hyphens
    */
   hyphens?: StyleValueWithCondition<CSS.Property.Hyphens>
   /**
@@ -6272,7 +6271,7 @@ export interface StyleProps {
    * @widely_available_date 2022-10-13
    * @newly_available_date 2020-04-13
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/image-orientation
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/image-orientation
    */
   imageOrientation?: StyleValueWithCondition<CSS.Property.ImageOrientation>
   /**
@@ -6284,7 +6283,7 @@ export interface StyleProps {
    * @widely_available_date 2024-04-05
    * @newly_available_date 2021-10-05
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/image-rendering
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/image-rendering
    */
   imageRendering?: StyleValueWithCondition<CSS.Property.ImageRendering>
   /**
@@ -6304,7 +6303,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/initial-letter
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/initial-letter
    */
   initialLetter?: StyleValueWithCondition<CSS.Property.InitialLetter>
   /**
@@ -6316,7 +6315,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/inline-size
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inline-size
    */
   inlineSize?: StyleValueWithCondition<
     CSS.Property.InlineSize | number,
@@ -6331,7 +6330,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/inset
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset
    */
   inset?: StyleValueWithCondition<CSS.Property.Inset | number, "spaces">
   /**
@@ -6343,7 +6342,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/inset-block
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-block
    */
   insetBlock?: StyleValueWithCondition<
     CSS.Property.InsetBlock | number,
@@ -6358,7 +6357,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/inset-block-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-block-end
    */
   insetBlockEnd?: StyleValueWithCondition<
     CSS.Property.InsetBlockEnd | number,
@@ -6373,7 +6372,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/inset-block-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-block-start
    */
   insetBlockStart?: StyleValueWithCondition<
     CSS.Property.InsetBlockStart | number,
@@ -6388,7 +6387,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline-end
    */
   insetEnd?: StyleValueWithCondition<
     CSS.Property.InsetInlineEnd | number,
@@ -6403,7 +6402,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline
    */
   insetInline?: StyleValueWithCondition<
     CSS.Property.InsetInline | number,
@@ -6418,7 +6417,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline-end
    */
   insetInlineEnd?: StyleValueWithCondition<
     CSS.Property.InsetInlineEnd | number,
@@ -6433,7 +6432,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline-start
    */
   insetInlineStart?: StyleValueWithCondition<
     CSS.Property.InsetInlineStart | number,
@@ -6448,7 +6447,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline-start
    */
   insetStart?: StyleValueWithCondition<
     CSS.Property.InsetInlineStart | number,
@@ -6463,7 +6462,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/left
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/left
    *
    * ------------------------------------
    *
@@ -6475,7 +6474,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/right
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/right
    */
   insetX?: StyleValueWithCondition<
     CSS.Property.Left | CSS.Property.Right | number,
@@ -6490,7 +6489,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/bottom
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/bottom
    *
    * ------------------------------------
    *
@@ -6502,7 +6501,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/top
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/top
    */
   insetY?: StyleValueWithCondition<
     CSS.Property.Bottom | CSS.Property.Top | number,
@@ -6515,7 +6514,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-ui-4/#propdef-interactivity
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/interactivity
    *
    * @experimental
    */
@@ -6525,7 +6524,7 @@ export interface StyleProps {
    *
    * The CSS `interest-delay` property.
    *
-   * @see https://drafts.csswg.org/css-ui-4/#propdef-interest-delay
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/interest-delay
    *
    * @experimental
    */
@@ -6535,7 +6534,7 @@ export interface StyleProps {
    *
    * The CSS `interest-delay-end` property.
    *
-   * @see https://drafts.csswg.org/css-ui-4/#propdef-interest-delay-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/interest-delay-end
    *
    * @experimental
    */
@@ -6545,7 +6544,7 @@ export interface StyleProps {
    *
    * The CSS `interest-delay-start` property.
    *
-   * @see https://drafts.csswg.org/css-ui-4/#propdef-interest-delay-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/interest-delay-start
    *
    * @experimental
    */
@@ -6557,11 +6556,11 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/interpolate-size
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/interpolate-size
    *
    * @experimental
    */
-  interpolateSize?: StyleValueWithCondition<AnyString>
+  interpolateSize?: StyleValueWithCondition<CSS.Property.InterpolateSize>
   /**
    * Sets the value of `--invert`.
    */
@@ -6575,7 +6574,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/isolation
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/isolation
    */
   isolation?: StyleValueWithCondition<CSS.Property.Isolation>
   /**
@@ -6587,7 +6586,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/justify-content
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-content
    */
   justifyContent?: StyleValueWithCondition<CSS.Property.JustifyContent>
   /**
@@ -6599,7 +6598,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/justify-items
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-items
    */
   justifyItems?: StyleValueWithCondition<CSS.Property.JustifyItems>
   /**
@@ -6611,7 +6610,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/justify-self
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-self
    */
   justifySelf?: StyleValueWithCondition<CSS.Property.JustifySelf>
   /**
@@ -6623,7 +6622,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/line-height
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/line-height
    */
   leading?: StyleValueWithCondition<CSS.Property.LineHeight, "lineHeights">
   /**
@@ -6635,7 +6634,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/left
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/left
    */
   left?: StyleValueWithCondition<CSS.Property.Left | number, "spaces">
   /**
@@ -6647,7 +6646,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/letter-spacing
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/letter-spacing
    */
   letterSpacing?: StyleValueWithCondition<
     CSS.Property.LetterSpacing,
@@ -6662,7 +6661,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/lighting-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/lighting-color
    */
   lightingColor?: StyleValueWithCondition<CSS.Property.LightingColor, "colors">
   /**
@@ -6674,7 +6673,7 @@ export interface StyleProps {
    * @widely_available_date 2023-01-28
    * @newly_available_date 2020-07-28
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/line-break
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/line-break
    */
   lineBreak?: StyleValueWithCondition<CSS.Property.LineBreak>
   /**
@@ -6690,7 +6689,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/line-height
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/line-height
    */
   lineHeight?: StyleValueWithCondition<CSS.Property.LineHeight, "lineHeights">
   /**
@@ -6702,7 +6701,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/list-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style
    */
   listStyle?: StyleValueWithCondition<CSS.Property.ListStyle>
   /**
@@ -6714,7 +6713,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/list-style-image
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style-image
    */
   listStyleImage?: StyleValueWithCondition<
     CSS.Property.ListStyleImage,
@@ -6729,7 +6728,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/list-style-image
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style-image
    */
   listStyleImg?: StyleValueWithCondition<
     CSS.Property.ListStyleImage,
@@ -6744,7 +6743,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/list-style-position
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style-position
    */
   listStylePos?: StyleValueWithCondition<CSS.Property.ListStylePosition>
   /**
@@ -6756,7 +6755,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/list-style-position
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style-position
    */
   listStylePosition?: StyleValueWithCondition<CSS.Property.ListStylePosition>
   /**
@@ -6768,7 +6767,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/list-style-type
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style-type
    */
   listStyleType?: StyleValueWithCondition<CSS.Property.ListStyleType>
   /**
@@ -6780,7 +6779,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin
    */
   m?: StyleValueWithCondition<CSS.Property.Margin | number, "spaces">
   /**
@@ -6792,7 +6791,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin
    */
   margin?: StyleValueWithCondition<CSS.Property.Margin | number, "spaces">
   /**
@@ -6804,7 +6803,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-block
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-block
    */
   marginBlock?: StyleValueWithCondition<
     CSS.Property.MarginBlock | number,
@@ -6819,7 +6818,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-block-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-block-end
    */
   marginBlockEnd?: StyleValueWithCondition<
     CSS.Property.MarginBlockEnd | number,
@@ -6834,7 +6833,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-block-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-block-start
    */
   marginBlockStart?: StyleValueWithCondition<
     CSS.Property.MarginBlockStart | number,
@@ -6849,7 +6848,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-bottom
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-bottom
    */
   marginBottom?: StyleValueWithCondition<
     CSS.Property.MarginBottom | number,
@@ -6864,7 +6863,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-inline-end
    */
   marginEnd?: StyleValueWithCondition<
     CSS.Property.MarginInlineEnd | number,
@@ -6879,7 +6878,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-inline
    */
   marginInline?: StyleValueWithCondition<
     CSS.Property.MarginInline | number,
@@ -6894,7 +6893,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-inline-end
    */
   marginInlineEnd?: StyleValueWithCondition<
     CSS.Property.MarginInlineEnd | number,
@@ -6909,7 +6908,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-inline-start
    */
   marginInlineStart?: StyleValueWithCondition<
     CSS.Property.MarginInlineStart | number,
@@ -6924,7 +6923,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-left
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-left
    */
   marginLeft?: StyleValueWithCondition<
     CSS.Property.MarginLeft | number,
@@ -6939,7 +6938,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-right
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-right
    */
   marginRight?: StyleValueWithCondition<
     CSS.Property.MarginRight | number,
@@ -6954,7 +6953,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-inline-start
    */
   marginStart?: StyleValueWithCondition<
     CSS.Property.MarginInlineStart | number,
@@ -6969,7 +6968,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-top
    */
   marginTop?: StyleValueWithCondition<CSS.Property.MarginTop | number, "spaces">
   /**
@@ -6979,7 +6978,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-trim
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-trim
    *
    * @experimental
    */
@@ -6993,7 +6992,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-inline-end
    *
    * ------------------------------------
    *
@@ -7005,7 +7004,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-inline-start
    */
   marginX?: StyleValueWithCondition<
     CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
@@ -7020,7 +7019,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-bottom
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-bottom
    *
    * ------------------------------------
    *
@@ -7032,7 +7031,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-top
    */
   marginY?: StyleValueWithCondition<
     CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
@@ -7047,7 +7046,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/marker
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/marker
    */
   marker?: StyleValueWithCondition<CSS.Property.Marker>
   /**
@@ -7059,7 +7058,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/marker-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/marker-end
    */
   markerEnd?: StyleValueWithCondition<CSS.Property.MarkerEnd>
   /**
@@ -7071,7 +7070,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/marker-mid
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/marker-mid
    */
   markerMid?: StyleValueWithCondition<CSS.Property.MarkerMid>
   /**
@@ -7083,7 +7082,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/marker-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/marker-start
    */
   markerStart?: StyleValueWithCondition<CSS.Property.MarkerStart>
   /**
@@ -7094,7 +7093,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2023-12-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/mask
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask
    */
   mask?: StyleValueWithCondition<CSS.Property.Mask>
   /**
@@ -7104,7 +7103,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/mask-border
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border
    */
   maskBorder?: StyleValueWithCondition<CSS.Property.MaskBorder>
   /**
@@ -7114,7 +7113,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-outset
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-outset
    */
   maskBorderOutset?: StyleValueWithCondition<CSS.Property.MaskBorderOutset>
   /**
@@ -7124,7 +7123,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-repeat
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-repeat
    */
   maskBorderRepeat?: StyleValueWithCondition<CSS.Property.MaskBorderRepeat>
   /**
@@ -7134,7 +7133,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-slice
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-slice
    */
   maskBorderSlice?: StyleValueWithCondition<CSS.Property.MaskBorderSlice>
   /**
@@ -7144,7 +7143,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-source
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-source
    */
   maskBorderSource?: StyleValueWithCondition<CSS.Property.MaskBorderSource>
   /**
@@ -7154,7 +7153,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-width
    */
   maskBorderWidth?: StyleValueWithCondition<
     CSS.Property.MaskBorderWidth | number
@@ -7167,7 +7166,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2023-12-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/mask-clip
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-clip
    */
   maskClip?: StyleValueWithCondition<CSS.Property.MaskClip>
   /**
@@ -7178,7 +7177,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2023-12-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/mask-composite
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-composite
    */
   maskComposite?: StyleValueWithCondition<CSS.Property.MaskComposite>
   /**
@@ -7189,7 +7188,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2023-12-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/mask-image
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-image
    */
   maskImage?: StyleValueWithCondition<CSS.Property.MaskImage, "gradients">
   /**
@@ -7200,7 +7199,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2023-12-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/mask-mode
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-mode
    */
   maskMode?: StyleValueWithCondition<CSS.Property.MaskMode>
   /**
@@ -7211,7 +7210,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2023-12-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/mask-origin
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-origin
    */
   maskOrigin?: StyleValueWithCondition<CSS.Property.MaskOrigin>
   /**
@@ -7222,7 +7221,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2023-12-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/mask-position
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-position
    */
   maskPosition?: StyleValueWithCondition<CSS.Property.MaskPosition>
   /**
@@ -7233,7 +7232,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2023-12-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/mask-repeat
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-repeat
    */
   maskRepeat?: StyleValueWithCondition<CSS.Property.MaskRepeat>
   /**
@@ -7244,7 +7243,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2023-12-07
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/mask-size
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-size
    */
   maskSize?: StyleValueWithCondition<CSS.Property.MaskSize>
   /**
@@ -7256,7 +7255,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/mask-type
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-type
    */
   maskType?: StyleValueWithCondition<CSS.Property.MaskType>
   /**
@@ -7268,7 +7267,7 @@ export interface StyleProps {
    * @widely_available_date 2025-07-12
    * @newly_available_date 2023-01-12
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/math-depth
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/math-depth
    */
   mathDepth?: StyleValueWithCondition<CSS.Property.MathDepth>
   /**
@@ -7280,9 +7279,7 @@ export interface StyleProps {
    * @widely_available_date 2025-07-12
    * @newly_available_date 2023-01-12
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/math-shift
-   *
-   * @experimental
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/math-shift
    */
   mathShift?: StyleValueWithCondition<CSS.Property.MathShift>
   /**
@@ -7294,7 +7291,7 @@ export interface StyleProps {
    * @widely_available_date 2025-07-12
    * @newly_available_date 2023-01-12
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/math-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/math-style
    */
   mathStyle?: StyleValueWithCondition<CSS.Property.MathStyle>
   /**
@@ -7306,7 +7303,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/max-block-size
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-block-size
    */
   maxBlockSize?: StyleValueWithCondition<
     CSS.Property.MaxBlockSize | number,
@@ -7321,7 +7318,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/max-height
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-height
    *
    * ------------------------------------
    *
@@ -7333,7 +7330,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/max-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-width
    */
   maxBoxSize?: StyleValueWithCondition<
     CSS.Property.MaxHeight | CSS.Property.MaxWidth | number,
@@ -7348,7 +7345,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/max-height
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-height
    */
   maxH?: StyleValueWithCondition<CSS.Property.MaxHeight | number, "sizes">
   /**
@@ -7360,7 +7357,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/max-height
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-height
    */
   maxHeight?: StyleValueWithCondition<CSS.Property.MaxHeight | number, "sizes">
   /**
@@ -7372,7 +7369,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/max-inline-size
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-inline-size
    */
   maxInlineSize?: StyleValueWithCondition<
     CSS.Property.MaxInlineSize | number,
@@ -7387,7 +7384,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/max-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-width
    */
   maxW?: StyleValueWithCondition<CSS.Property.MaxWidth | number, "sizes">
   /**
@@ -7399,7 +7396,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/max-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-width
    */
   maxWidth?: StyleValueWithCondition<CSS.Property.MaxWidth | number, "sizes">
   /**
@@ -7411,7 +7408,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-bottom
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-bottom
    */
   mb?: StyleValueWithCondition<CSS.Property.MarginBottom | number, "spaces">
   /**
@@ -7423,7 +7420,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-inline-end
    */
   me?: StyleValueWithCondition<CSS.Property.MarginInlineEnd | number, "spaces">
   /**
@@ -7435,7 +7432,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/min-block-size
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-block-size
    */
   minBlockSize?: StyleValueWithCondition<
     CSS.Property.MinBlockSize | number,
@@ -7450,7 +7447,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/min-height
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-height
    *
    * ------------------------------------
    *
@@ -7462,7 +7459,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/min-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-width
    */
   minBoxSize?: StyleValueWithCondition<
     CSS.Property.MinHeight | CSS.Property.MinWidth | number,
@@ -7477,7 +7474,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/min-height
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-height
    */
   minH?: StyleValueWithCondition<CSS.Property.MinHeight | number, "sizes">
   /**
@@ -7489,7 +7486,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/min-height
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-height
    */
   minHeight?: StyleValueWithCondition<CSS.Property.MinHeight | number, "sizes">
   /**
@@ -7501,7 +7498,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/min-inline-size
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-inline-size
    */
   minInlineSize?: StyleValueWithCondition<
     CSS.Property.MinInlineSize | number,
@@ -7516,7 +7513,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/min-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-width
    */
   minW?: StyleValueWithCondition<CSS.Property.MinWidth | number, "sizes">
   /**
@@ -7528,7 +7525,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/min-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-width
    */
   minWidth?: StyleValueWithCondition<CSS.Property.MinWidth | number, "sizes">
   /**
@@ -7540,7 +7537,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/mix-blend-mode
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mix-blend-mode
    */
   mixBlendMode?: StyleValueWithCondition<CSS.Property.MixBlendMode>
   /**
@@ -7552,7 +7549,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-left
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-left
    */
   ml?: StyleValueWithCondition<CSS.Property.MarginLeft | number, "spaces">
   /**
@@ -7564,7 +7561,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-right
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-right
    */
   mr?: StyleValueWithCondition<CSS.Property.MarginRight | number, "spaces">
   /**
@@ -7576,7 +7573,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-inline-start
    */
   ms?: StyleValueWithCondition<
     CSS.Property.MarginInlineStart | number,
@@ -7591,7 +7588,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-top
    */
   mt?: StyleValueWithCondition<CSS.Property.MarginTop | number, "spaces">
   /**
@@ -7603,7 +7600,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-inline-end
    *
    * ------------------------------------
    *
@@ -7615,7 +7612,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-inline-start
    */
   mx?: StyleValueWithCondition<
     CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
@@ -7630,7 +7627,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-bottom
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-bottom
    *
    * ------------------------------------
    *
@@ -7642,7 +7639,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-top
    */
   my?: StyleValueWithCondition<
     CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
@@ -7657,7 +7654,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/object-fit
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/object-fit
    */
   objectFit?: StyleValueWithCondition<CSS.Property.ObjectFit>
   /**
@@ -7669,7 +7666,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/object-position
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/object-position
    */
   objectPosition?: StyleValueWithCondition<CSS.Property.ObjectPosition>
   /**
@@ -7679,11 +7676,11 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/object-view-box
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/object-view-box
    *
    * @experimental
    */
-  objectViewBox?: StyleValueWithCondition<AnyString>
+  objectViewBox?: StyleValueWithCondition<CSS.Property.ObjectViewBox>
   /**
    * ### offset
    *
@@ -7693,7 +7690,7 @@ export interface StyleProps {
    * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/offset
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset
    */
   offset?: StyleValueWithCondition<CSS.Property.Offset>
   /**
@@ -7705,7 +7702,7 @@ export interface StyleProps {
    * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/offset-anchor
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-anchor
    */
   offsetAnchor?: StyleValueWithCondition<CSS.Property.OffsetAnchor>
   /**
@@ -7717,7 +7714,7 @@ export interface StyleProps {
    * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/offset-distance
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-distance
    */
   offsetDistance?: StyleValueWithCondition<CSS.Property.OffsetDistance>
   /**
@@ -7729,7 +7726,7 @@ export interface StyleProps {
    * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/offset-path
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-path
    */
   offsetPath?: StyleValueWithCondition<CSS.Property.OffsetPath>
   /**
@@ -7741,7 +7738,7 @@ export interface StyleProps {
    * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/offset-position
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-position
    */
   offsetPosition?: StyleValueWithCondition<CSS.Property.OffsetPosition>
   /**
@@ -7753,7 +7750,7 @@ export interface StyleProps {
    * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/offset-rotate
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-rotate
    */
   offsetRotate?: StyleValueWithCondition<CSS.Property.OffsetRotate>
   /**
@@ -7765,7 +7762,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/opacity
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/opacity
    */
   opacity?: StyleValueWithCondition<CSS.Property.Opacity>
   /**
@@ -7777,7 +7774,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/order
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/order
    */
   order?: StyleValueWithCondition<CSS.Property.Order>
   /**
@@ -7787,7 +7784,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/orphans
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/orphans
    */
   orphans?: StyleValueWithCondition<CSS.Property.Orphans>
   /**
@@ -7799,7 +7796,7 @@ export interface StyleProps {
    * @widely_available_date 2025-09-27
    * @newly_available_date 2023-03-27
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/outline
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline
    */
   outline?: StyleValueWithCondition<CSS.Property.Outline>
   /**
@@ -7811,7 +7808,7 @@ export interface StyleProps {
    * @widely_available_date 2019-10-05
    * @newly_available_date 2017-04-05
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/outline-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline-color
    */
   outlineColor?: StyleValueWithCondition<CSS.Property.OutlineColor, "colors">
   /**
@@ -7823,7 +7820,7 @@ export interface StyleProps {
    * @widely_available_date 2019-10-05
    * @newly_available_date 2017-04-05
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/outline-offset
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline-offset
    */
   outlineOffset?: StyleValueWithCondition<CSS.Property.OutlineOffset>
   /**
@@ -7835,9 +7832,9 @@ export interface StyleProps {
    * @widely_available_date 2019-10-05
    * @newly_available_date 2017-04-05
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/outline-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline-style
    */
-  outlineStyle?: StyleValueWithCondition<CSS.Property.OutlineStyle>
+  outlineStyle?: StyleValueWithCondition<AnyString | CSS.Property.OutlineStyle>
   /**
    * ### outline-width
    *
@@ -7847,7 +7844,7 @@ export interface StyleProps {
    * @widely_available_date 2019-10-05
    * @newly_available_date 2017-04-05
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/outline-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline-width
    */
   outlineWidth?: StyleValueWithCondition<CSS.Property.OutlineWidth | number>
   /**
@@ -7859,7 +7856,7 @@ export interface StyleProps {
    * @widely_available_date 2022-09-24
    * @newly_available_date 2020-03-24
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/overflow
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow
    */
   overflow?: StyleValueWithCondition<CSS.Property.Overflow>
   /**
@@ -7869,7 +7866,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/overflow-anchor
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-anchor
    */
   overflowAnchor?: StyleValueWithCondition<CSS.Property.OverflowAnchor>
   /**
@@ -7881,7 +7878,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/overflow-block
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-block
    */
   overflowBlock?: StyleValueWithCondition<CSS.Property.OverflowBlock>
   /**
@@ -7891,7 +7888,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/overflow-clip-margin
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-clip-margin
    */
   overflowClipMargin?: StyleValueWithCondition<CSS.Property.OverflowClipMargin>
   /**
@@ -7903,7 +7900,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/overflow-inline
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-inline
    */
   overflowInline?: StyleValueWithCondition<CSS.Property.OverflowInline>
   /**
@@ -7915,7 +7912,7 @@ export interface StyleProps {
    * @widely_available_date 2021-04-02
    * @newly_available_date 2018-10-02
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/overflow-wrap
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-wrap
    */
   overflowWrap?: StyleValueWithCondition<CSS.Property.OverflowWrap>
   /**
@@ -7927,7 +7924,7 @@ export interface StyleProps {
    * @widely_available_date 2022-09-24
    * @newly_available_date 2020-03-24
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/overflow-x
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-x
    */
   overflowX?: StyleValueWithCondition<CSS.Property.OverflowX>
   /**
@@ -7939,7 +7936,7 @@ export interface StyleProps {
    * @widely_available_date 2022-09-24
    * @newly_available_date 2020-03-24
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/overflow-y
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-y
    */
   overflowY?: StyleValueWithCondition<CSS.Property.OverflowY>
   /**
@@ -7949,7 +7946,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/overlay
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overlay
    *
    * @experimental
    */
@@ -7963,7 +7960,7 @@ export interface StyleProps {
    * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior
    */
   overscroll?: StyleValueWithCondition<CSS.Property.OverscrollBehavior>
   /**
@@ -7975,7 +7972,7 @@ export interface StyleProps {
    * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior
    */
   overscrollBehavior?: StyleValueWithCondition<CSS.Property.OverscrollBehavior>
   /**
@@ -7987,7 +7984,7 @@ export interface StyleProps {
    * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-block
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-block
    */
   overscrollBehaviorBlock?: StyleValueWithCondition<CSS.Property.OverscrollBehaviorBlock>
   /**
@@ -7999,7 +7996,7 @@ export interface StyleProps {
    * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-inline
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-inline
    */
   overscrollBehaviorInline?: StyleValueWithCondition<CSS.Property.OverscrollBehaviorInline>
   /**
@@ -8011,7 +8008,7 @@ export interface StyleProps {
    * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-x
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-x
    */
   overscrollBehaviorX?: StyleValueWithCondition<CSS.Property.OverscrollBehaviorX>
   /**
@@ -8023,7 +8020,7 @@ export interface StyleProps {
    * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-y
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-y
    */
   overscrollBehaviorY?: StyleValueWithCondition<CSS.Property.OverscrollBehaviorY>
   /**
@@ -8035,7 +8032,7 @@ export interface StyleProps {
    * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-x
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-x
    */
   overscrollX?: StyleValueWithCondition<CSS.Property.OverscrollBehaviorX>
   /**
@@ -8047,7 +8044,7 @@ export interface StyleProps {
    * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-y
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-y
    */
   overscrollY?: StyleValueWithCondition<CSS.Property.OverscrollBehaviorY>
   /**
@@ -8059,7 +8056,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding
    */
   p?: StyleValueWithCondition<CSS.Property.Padding | number, "spaces">
   /**
@@ -8071,7 +8068,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding
    */
   padding?: StyleValueWithCondition<CSS.Property.Padding | number, "spaces">
   /**
@@ -8083,7 +8080,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-block
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block
    */
   paddingBlock?: StyleValueWithCondition<
     CSS.Property.PaddingBlock | number,
@@ -8098,7 +8095,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-block-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block-end
    */
   paddingBlockEnd?: StyleValueWithCondition<
     CSS.Property.PaddingBlockEnd | number,
@@ -8113,7 +8110,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-block-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block-start
    */
   paddingBlockStart?: StyleValueWithCondition<
     CSS.Property.PaddingBlockStart | number,
@@ -8128,7 +8125,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-bottom
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-bottom
    */
   paddingBottom?: StyleValueWithCondition<
     CSS.Property.PaddingBottom | number,
@@ -8143,7 +8140,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-end
    */
   paddingEnd?: StyleValueWithCondition<
     CSS.Property.PaddingInlineEnd | number,
@@ -8158,7 +8155,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline
    */
   paddingInline?: StyleValueWithCondition<
     CSS.Property.PaddingInline | number,
@@ -8173,7 +8170,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-end
    */
   paddingInlineEnd?: StyleValueWithCondition<
     CSS.Property.PaddingInlineEnd | number,
@@ -8188,7 +8185,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-start
    */
   paddingInlineStart?: StyleValueWithCondition<
     CSS.Property.PaddingInlineStart | number,
@@ -8203,7 +8200,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-left
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-left
    */
   paddingLeft?: StyleValueWithCondition<
     CSS.Property.PaddingLeft | number,
@@ -8218,7 +8215,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-right
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-right
    */
   paddingRight?: StyleValueWithCondition<
     CSS.Property.PaddingRight | number,
@@ -8233,7 +8230,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-start
    */
   paddingStart?: StyleValueWithCondition<
     CSS.Property.PaddingInlineStart | number,
@@ -8248,7 +8245,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-top
    */
   paddingTop?: StyleValueWithCondition<
     CSS.Property.PaddingTop | number,
@@ -8263,7 +8260,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-end
    *
    * ------------------------------------
    *
@@ -8275,7 +8272,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-start
    */
   paddingX?: StyleValueWithCondition<
     CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
@@ -8290,7 +8287,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-bottom
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-bottom
    *
    * ------------------------------------
    *
@@ -8302,7 +8299,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-top
    */
   paddingY?: StyleValueWithCondition<
     CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
@@ -8315,7 +8312,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/page
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/page
    */
   page?: StyleValueWithCondition<CSS.Property.Page>
   /**
@@ -8323,7 +8320,7 @@ export interface StyleProps {
    *
    * The <code>page-break-before</code>, <code>page-break-inside</code>, and <code>page-break-after</code> CSS properties are aliases to the <code>break-before</code>, <code>break-inside</code>, and <code>break-after</code> properties.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/page-break-after
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/page-break-after
    *
    * @deprecated
    */
@@ -8333,7 +8330,7 @@ export interface StyleProps {
    *
    * The <code>page-break-before</code>, <code>page-break-inside</code>, and <code>page-break-after</code> CSS properties are aliases to the <code>break-before</code>, <code>break-inside</code>, and <code>break-after</code> properties.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/page-break-before
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/page-break-before
    *
    * @deprecated
    */
@@ -8343,7 +8340,7 @@ export interface StyleProps {
    *
    * The <code>page-break-before</code>, <code>page-break-inside</code>, and <code>page-break-after</code> CSS properties are aliases to the <code>break-before</code>, <code>break-inside</code>, and <code>break-after</code> properties.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/page-break-inside
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/page-break-inside
    *
    * @deprecated
    */
@@ -8355,7 +8352,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/paint-order
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/paint-order
    */
   paintOrder?: StyleValueWithCondition<CSS.Property.PaintOrder>
   /**
@@ -8367,7 +8364,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-bottom
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-bottom
    */
   pb?: StyleValueWithCondition<CSS.Property.PaddingBottom | number, "spaces">
   /**
@@ -8379,7 +8376,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-end
    */
   pe?: StyleValueWithCondition<CSS.Property.PaddingInlineEnd | number, "spaces">
   /**
@@ -8391,7 +8388,7 @@ export interface StyleProps {
    * @widely_available_date 2024-09-14
    * @newly_available_date 2022-03-14
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/perspective
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/perspective
    */
   perspective?: StyleValueWithCondition<CSS.Property.Perspective>
   /**
@@ -8403,7 +8400,7 @@ export interface StyleProps {
    * @widely_available_date 2024-09-14
    * @newly_available_date 2022-03-14
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/perspective-origin
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/perspective-origin
    */
   perspectiveOrigin?: StyleValueWithCondition<CSS.Property.PerspectiveOrigin>
   /**
@@ -8415,7 +8412,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-left
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-left
    */
   pl?: StyleValueWithCondition<CSS.Property.PaddingLeft | number, "spaces">
   /**
@@ -8427,7 +8424,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/place-content
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/place-content
    */
   placeContent?: StyleValueWithCondition<CSS.Property.PlaceContent>
   /**
@@ -8439,7 +8436,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/place-items
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/place-items
    */
   placeItems?: StyleValueWithCondition<CSS.Property.PlaceItems>
   /**
@@ -8451,7 +8448,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/place-self
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/place-self
    */
   placeSelf?: StyleValueWithCondition<CSS.Property.PlaceSelf>
   /**
@@ -8463,7 +8460,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/pointer-events
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/pointer-events
    */
   pointerEvents?: StyleValueWithCondition<CSS.Property.PointerEvents>
   /**
@@ -8475,7 +8472,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/position
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position
    */
   pos?: StyleValueWithCondition<CSS.Property.Position>
   /**
@@ -8487,7 +8484,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/position
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position
    */
   position?: StyleValueWithCondition<CSS.Property.Position>
   /**
@@ -8497,9 +8494,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/position-anchor
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-anchor
    */
-  positionAnchor?: StyleValueWithCondition<AnyString>
+  positionAnchor?: StyleValueWithCondition<CSS.Property.PositionAnchor>
   /**
    * ### position-area
    *
@@ -8507,9 +8504,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/position-area
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-area
    */
-  positionArea?: StyleValueWithCondition<AnyString>
+  positionArea?: StyleValueWithCondition<CSS.Property.PositionArea>
   /**
    * ### position-try
    *
@@ -8517,9 +8514,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/position-try
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-try
    */
-  positionTry?: StyleValueWithCondition<AnyString>
+  positionTry?: StyleValueWithCondition<CSS.Property.PositionTry>
   /**
    * ### position-try-fallbacks
    *
@@ -8527,9 +8524,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/position-try-fallbacks
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-try-fallbacks
    */
-  positionTryFallbacks?: StyleValueWithCondition<AnyString>
+  positionTryFallbacks?: StyleValueWithCondition<CSS.Property.PositionTryFallbacks>
   /**
    * ### position-try-order
    *
@@ -8537,9 +8534,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/position-try-order
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-try-order
    */
-  positionTryOrder?: StyleValueWithCondition<AnyString>
+  positionTryOrder?: StyleValueWithCondition<CSS.Property.PositionTryOrder>
   /**
    * ### position-visibility
    *
@@ -8547,11 +8544,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/position-visibility
-   *
-   * @experimental
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-visibility
    */
-  positionVisibility?: StyleValueWithCondition<AnyString>
+  positionVisibility?: StyleValueWithCondition<CSS.Property.PositionVisibility>
   /**
    * ### padding-right
    *
@@ -8561,7 +8556,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-right
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-right
    */
   pr?: StyleValueWithCondition<CSS.Property.PaddingRight | number, "spaces">
   /**
@@ -8572,7 +8567,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2025-05-01
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/print-color-adjust
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/print-color-adjust
    */
   printColorAdjust?: StyleValueWithCondition<CSS.Property.PrintColorAdjust>
   /**
@@ -8584,7 +8579,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-start
    */
   ps?: StyleValueWithCondition<
     CSS.Property.PaddingInlineStart | number,
@@ -8599,7 +8594,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-top
    */
   pt?: StyleValueWithCondition<CSS.Property.PaddingTop | number, "spaces">
   /**
@@ -8611,7 +8606,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-end
    *
    * ------------------------------------
    *
@@ -8623,7 +8618,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-start
    */
   px?: StyleValueWithCondition<
     CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
@@ -8638,7 +8633,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-bottom
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-bottom
    *
    * ------------------------------------
    *
@@ -8650,7 +8645,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-top
    */
   py?: StyleValueWithCondition<
     CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
@@ -8665,7 +8660,7 @@ export interface StyleProps {
    * @widely_available_date 2023-10-26
    * @newly_available_date 2021-04-26
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/quotes
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/quotes
    */
   quotes?: StyleValueWithCondition<CSS.Property.Quotes>
   /**
@@ -8677,9 +8672,9 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/r
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/r
    */
-  r?: StyleValueWithCondition<AnyString>
+  r?: StyleValueWithCondition<CSS.Property.R>
   /**
    * ### reading-flow
    *
@@ -8687,7 +8682,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/reading-flow
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/reading-flow
    *
    * @experimental
    */
@@ -8699,7 +8694,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/reading-order
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/reading-order
    *
    * @experimental
    */
@@ -8711,7 +8706,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/resize
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/resize
    */
   resize?: StyleValueWithCondition<CSS.Property.Resize>
   /**
@@ -8723,7 +8718,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/right
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/right
    */
   right?: StyleValueWithCondition<CSS.Property.Right | number, "spaces">
   /**
@@ -8735,7 +8730,7 @@ export interface StyleProps {
    * @widely_available_date 2025-02-05
    * @newly_available_date 2022-08-05
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/rotate
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/rotate
    */
   rotate?: StyleValueWithCondition<CSS.Property.Rotate>
   /**
@@ -8759,7 +8754,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-radius
    */
   rounded?: StyleValueWithCondition<CSS.Property.BorderRadius | number, "radii">
   /**
@@ -8771,7 +8766,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-left-radius
    *
    * ------------------------------------
    *
@@ -8783,7 +8778,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-right-radius
    */
   roundedBottom?: StyleValueWithCondition<
     | CSS.Property.BorderBottomLeftRadius
@@ -8800,7 +8795,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-end-radius
    */
   roundedBottomEnd?: StyleValueWithCondition<
     CSS.Property.BorderEndEndRadius | number,
@@ -8815,7 +8810,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-left-radius
    */
   roundedBottomLeft?: StyleValueWithCondition<
     CSS.Property.BorderBottomLeftRadius | number,
@@ -8830,7 +8825,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-right-radius
    */
   roundedBottomRight?: StyleValueWithCondition<
     CSS.Property.BorderBottomRightRadius | number,
@@ -8845,7 +8840,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-start-radius
    */
   roundedBottomStart?: StyleValueWithCondition<
     CSS.Property.BorderEndStartRadius | number,
@@ -8860,7 +8855,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-end-radius
    *
    * ------------------------------------
    *
@@ -8872,7 +8867,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-start-radius
    */
   roundedEnd?: StyleValueWithCondition<
     | CSS.Property.BorderEndEndRadius
@@ -8889,7 +8884,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-left-radius
    *
    * ------------------------------------
    *
@@ -8901,7 +8896,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-left-radius
    */
   roundedLeft?: StyleValueWithCondition<
     | CSS.Property.BorderBottomLeftRadius
@@ -8918,7 +8913,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-right-radius
    *
    * ------------------------------------
    *
@@ -8930,7 +8925,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-right-radius
    */
   roundedRight?: StyleValueWithCondition<
     | CSS.Property.BorderBottomRightRadius
@@ -8947,7 +8942,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-end-radius
    *
    * ------------------------------------
    *
@@ -8959,7 +8954,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-start-radius
    */
   roundedStart?: StyleValueWithCondition<
     | CSS.Property.BorderStartEndRadius
@@ -8976,7 +8971,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-left-radius
    *
    * ------------------------------------
    *
@@ -8988,7 +8983,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-right-radius
    */
   roundedTop?: StyleValueWithCondition<
     | CSS.Property.BorderTopLeftRadius
@@ -9005,7 +9000,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-end-radius
    */
   roundedTopEnd?: StyleValueWithCondition<
     CSS.Property.BorderStartEndRadius | number,
@@ -9020,7 +9015,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-left-radius
    */
   roundedTopLeft?: StyleValueWithCondition<
     CSS.Property.BorderTopLeftRadius | number,
@@ -9035,7 +9030,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-right-radius
    */
   roundedTopRight?: StyleValueWithCondition<
     CSS.Property.BorderTopRightRadius | number,
@@ -9050,7 +9045,7 @@ export interface StyleProps {
    * @widely_available_date 2024-03-20
    * @newly_available_date 2021-09-20
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-start-radius
    */
   roundedTopStart?: StyleValueWithCondition<
     CSS.Property.BorderStartStartRadius | number,
@@ -9065,7 +9060,7 @@ export interface StyleProps {
    * @widely_available_date 2020-04-17
    * @newly_available_date 2017-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/row-gap
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/row-gap
    */
   rowGap?: StyleValueWithCondition<CSS.Property.RowGap | number, "spaces">
   /**
@@ -9076,7 +9071,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2024-12-11
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/ruby-align
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-align
    */
   rubyAlign?: StyleValueWithCondition<CSS.Property.RubyAlign>
   /**
@@ -9086,9 +9081,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/ruby-overhang
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-overhang
    */
-  rubyOverhang?: StyleValueWithCondition<AnyString>
+  rubyOverhang?: StyleValueWithCondition<CSS.Property.RubyOverhang>
   /**
    * ### ruby-position
    *
@@ -9097,7 +9092,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2024-12-11
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/ruby-position
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-position
    */
   rubyPosition?: StyleValueWithCondition<CSS.Property.RubyPosition>
   /**
@@ -9109,9 +9104,9 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/rx
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/rx
    */
-  rx?: StyleValueWithCondition<AnyString>
+  rx?: StyleValueWithCondition<CSS.Property.Rx>
   /**
    * ### ry
    *
@@ -9121,9 +9116,9 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/ry
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ry
    */
-  ry?: StyleValueWithCondition<AnyString>
+  ry?: StyleValueWithCondition<CSS.Property.Ry>
   /**
    * Sets the value of `--saturate`.
    */
@@ -9137,7 +9132,7 @@ export interface StyleProps {
    * @widely_available_date 2025-02-05
    * @newly_available_date 2022-08-05
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scale
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scale
    */
   scale?: StyleValueWithCondition<CSS.Property.Scale>
   /**
@@ -9157,9 +9152,10 @@ export interface StyleProps {
    *
    * The <code>scrollbar-color</code> CSS property sets the color of the scrollbar track and thumb.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2025-12-12
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scrollbar-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scrollbar-color
    */
   scrollbarColor?: StyleValueWithCondition<
     CSS.Property.ScrollbarColor,
@@ -9173,7 +9169,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2024-12-11
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scrollbar-gutter
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scrollbar-gutter
    */
   scrollbarGutter?: StyleValueWithCondition<CSS.Property.ScrollbarGutter>
   /**
@@ -9184,7 +9180,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2024-12-11
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scrollbar-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scrollbar-width
    */
   scrollbarWidth?: StyleValueWithCondition<CSS.Property.ScrollbarWidth | number>
   /**
@@ -9196,7 +9192,7 @@ export interface StyleProps {
    * @widely_available_date 2024-09-14
    * @newly_available_date 2022-03-14
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-behavior
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-behavior
    */
   scrollBehavior?: StyleValueWithCondition<CSS.Property.ScrollBehavior>
   /**
@@ -9210,7 +9206,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  scrollInitialTarget?: StyleValueWithCondition<AnyString>
+  scrollInitialTarget?: StyleValueWithCondition<CSS.Property.ScrollInitialTarget>
   /**
    * ### scroll-margin
    *
@@ -9220,7 +9216,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin
    */
   scrollMargin?: StyleValueWithCondition<
     CSS.Property.ScrollMargin | number,
@@ -9235,7 +9231,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block
    */
   scrollMarginBlock?: StyleValueWithCondition<CSS.Property.ScrollMarginBlock>
   /**
@@ -9247,7 +9243,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block-end
    */
   scrollMarginBlockEnd?: StyleValueWithCondition<CSS.Property.ScrollMarginBlockEnd>
   /**
@@ -9259,7 +9255,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block-start
    */
   scrollMarginBlockStart?: StyleValueWithCondition<CSS.Property.ScrollMarginBlockStart>
   /**
@@ -9271,7 +9267,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-bottom
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-bottom
    */
   scrollMarginBottom?: StyleValueWithCondition<
     CSS.Property.ScrollMarginBottom | number,
@@ -9286,7 +9282,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline
    */
   scrollMarginInline?: StyleValueWithCondition<CSS.Property.ScrollMarginInline>
   /**
@@ -9298,7 +9294,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline-end
    */
   scrollMarginInlineEnd?: StyleValueWithCondition<CSS.Property.ScrollMarginInlineEnd>
   /**
@@ -9310,7 +9306,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline-start
    */
   scrollMarginInlineStart?: StyleValueWithCondition<CSS.Property.ScrollMarginInlineStart>
   /**
@@ -9322,7 +9318,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-left
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-left
    */
   scrollMarginLeft?: StyleValueWithCondition<
     CSS.Property.ScrollMarginLeft | number,
@@ -9337,7 +9333,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-right
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-right
    */
   scrollMarginRight?: StyleValueWithCondition<
     CSS.Property.ScrollMarginRight | number,
@@ -9352,7 +9348,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-top
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-top
    */
   scrollMarginTop?: StyleValueWithCondition<
     CSS.Property.ScrollMarginTop | number,
@@ -9367,7 +9363,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-left
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-left
    *
    * ------------------------------------
    *
@@ -9379,7 +9375,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-right
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-right
    */
   scrollMarginX?: StyleValueWithCondition<
     CSS.Property.ScrollMarginLeft | CSS.Property.ScrollMarginRight | number,
@@ -9394,7 +9390,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-bottom
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-bottom
    *
    * ------------------------------------
    *
@@ -9406,7 +9402,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-top
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-top
    */
   scrollMarginY?: StyleValueWithCondition<
     CSS.Property.ScrollMarginBottom | CSS.Property.ScrollMarginTop | number,
@@ -9415,11 +9411,11 @@ export interface StyleProps {
   /**
    * ### scroll-marker-group
    *
-   * A scroll container can be navigated by activating <code>::scroll-marker</code> pseudo-elements which appear in a generated <code>::scroll-marker-group</code> pseudo-element, either before or after the scroll container.
+   * A scroll marker scrolls a container to a scroll target. The <code>::scroll-marker</code> CSS pseudo-element selects a scroll marker in a <code>::scroll-marker-group</code> pseudo-element, generated before or after the scroll container. You can use them to navigate and style tables of contents, tab panels, and carousels.
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-marker-group
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-marker-group
    *
    * @experimental
    */
@@ -9433,7 +9429,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding
    */
   scrollPadding?: StyleValueWithCondition<
     CSS.Property.ScrollPadding | number,
@@ -9448,7 +9444,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block
    */
   scrollPaddingBlock?: StyleValueWithCondition<CSS.Property.ScrollPaddingBlock>
   /**
@@ -9460,7 +9456,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block-end
    */
   scrollPaddingBlockEnd?: StyleValueWithCondition<CSS.Property.ScrollPaddingBlockEnd>
   /**
@@ -9472,7 +9468,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block-start
    */
   scrollPaddingBlockStart?: StyleValueWithCondition<CSS.Property.ScrollPaddingBlockStart>
   /**
@@ -9484,7 +9480,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-bottom
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-bottom
    */
   scrollPaddingBottom?: StyleValueWithCondition<
     CSS.Property.ScrollPaddingBottom | number,
@@ -9499,7 +9495,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline
    */
   scrollPaddingInline?: StyleValueWithCondition<CSS.Property.ScrollPaddingInline>
   /**
@@ -9511,7 +9507,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline-end
    */
   scrollPaddingInlineEnd?: StyleValueWithCondition<CSS.Property.ScrollPaddingInlineEnd>
   /**
@@ -9523,7 +9519,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline-start
    */
   scrollPaddingInlineStart?: StyleValueWithCondition<CSS.Property.ScrollPaddingInlineStart>
   /**
@@ -9535,7 +9531,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-left
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-left
    */
   scrollPaddingLeft?: StyleValueWithCondition<
     CSS.Property.ScrollPaddingLeft | number,
@@ -9550,7 +9546,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-right
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-right
    */
   scrollPaddingRight?: StyleValueWithCondition<
     CSS.Property.ScrollPaddingRight | number,
@@ -9565,7 +9561,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-top
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-top
    */
   scrollPaddingTop?: StyleValueWithCondition<
     CSS.Property.ScrollPaddingTop | number,
@@ -9580,7 +9576,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-left
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-left
    *
    * ------------------------------------
    *
@@ -9592,7 +9588,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-right
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-right
    */
   scrollPaddingX?: StyleValueWithCondition<
     CSS.Property.ScrollPaddingLeft | CSS.Property.ScrollPaddingRight | number,
@@ -9607,7 +9603,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-bottom
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-bottom
    *
    * ------------------------------------
    *
@@ -9619,7 +9615,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-top
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-top
    */
   scrollPaddingY?: StyleValueWithCondition<
     CSS.Property.ScrollPaddingBottom | CSS.Property.ScrollPaddingTop | number,
@@ -9634,7 +9630,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-snap-align
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-snap-align
    */
   scrollSnapAlign?: StyleValueWithCondition<CSS.Property.ScrollSnapAlign>
   /**
@@ -9646,7 +9642,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-snap-stop
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-snap-stop
    */
   scrollSnapStop?: StyleValueWithCondition<CSS.Property.ScrollSnapStop>
   /**
@@ -9658,15 +9654,17 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-snap-type
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-snap-type
    */
   scrollSnapType?: StyleValueWithCondition<CSS.Property.ScrollSnapType>
   /**
    * ### scroll-target-group
    *
-   * The CSS `scroll-target-group` property.
+   * The <code>scroll-target-group</code> CSS property sets the container where anchor links act as scroll markers. Using selectors such as <code>:target-current</code>, you can style elements when a target has scrolled into view. It's an alternative to the <code>::scroll-marker-group</code> pseudo-element, which generates scroll markers.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-target-group
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-target-group
    *
    * @experimental
    */
@@ -9678,7 +9676,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-timeline
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-timeline
    */
   scrollTimeline?: StyleValueWithCondition<CSS.Property.ScrollTimeline>
   /**
@@ -9688,7 +9686,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-timeline-axis
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-timeline-axis
    */
   scrollTimelineAxis?: StyleValueWithCondition<CSS.Property.ScrollTimelineAxis>
   /**
@@ -9698,7 +9696,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-timeline-name
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-timeline-name
    */
   scrollTimelineName?: StyleValueWithCondition<CSS.Property.ScrollTimelineName>
   /**
@@ -9714,7 +9712,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/box-shadow
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-shadow
    */
   shadow?: StyleValueWithCondition<CSS.Property.BoxShadow, "shadows">
   /**
@@ -9726,7 +9724,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/shape-image-threshold
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-image-threshold
    */
   shapeImageThreshold?: StyleValueWithCondition<CSS.Property.ShapeImageThreshold>
   /**
@@ -9738,7 +9736,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/shape-margin
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-margin
    */
   shapeMargin?: StyleValueWithCondition<CSS.Property.ShapeMargin>
   /**
@@ -9750,7 +9748,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/shape-outside
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-outside
    */
   shapeOutside?: StyleValueWithCondition<CSS.Property.ShapeOutside>
   /**
@@ -9762,7 +9760,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/shape-rendering
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-rendering
    */
   shapeRendering?: StyleValueWithCondition<CSS.Property.ShapeRendering>
   /**
@@ -9790,11 +9788,11 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/speak-as
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/speak-as
    *
    * @experimental
    */
-  speakAs?: StyleValueWithCondition<AnyString>
+  speakAs?: StyleValueWithCondition<CSS.Property.SpeakAs>
   /**
    * ### stop-color
    *
@@ -9804,7 +9802,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/stop-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stop-color
    */
   stopColor?: StyleValueWithCondition<CSS.Property.StopColor>
   /**
@@ -9816,7 +9814,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/stop-opacity
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stop-opacity
    */
   stopOpacity?: StyleValueWithCondition<CSS.Property.StopOpacity>
   /**
@@ -9828,7 +9826,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/stroke
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke
    */
   stroke?: StyleValueWithCondition<CSS.Property.Stroke, "colors">
   /**
@@ -9844,7 +9842,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  strokeColor?: StyleValueWithCondition<AnyString>
+  strokeColor?: StyleValueWithCondition<CSS.Property.StrokeColor>
   /**
    * ### stroke-dasharray
    *
@@ -9854,7 +9852,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/stroke-dasharray
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-dasharray
    */
   strokeDasharray?: StyleValueWithCondition<CSS.Property.StrokeDasharray>
   /**
@@ -9866,7 +9864,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/stroke-dashoffset
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-dashoffset
    */
   strokeDashoffset?: StyleValueWithCondition<
     CSS.Property.StrokeDashoffset | number
@@ -9880,7 +9878,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/stroke-linecap
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-linecap
    */
   strokeLinecap?: StyleValueWithCondition<CSS.Property.StrokeLinecap>
   /**
@@ -9892,7 +9890,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/stroke-linejoin
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-linejoin
    */
   strokeLinejoin?: StyleValueWithCondition<CSS.Property.StrokeLinejoin>
   /**
@@ -9904,7 +9902,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/stroke-miterlimit
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-miterlimit
    */
   strokeMiterlimit?: StyleValueWithCondition<CSS.Property.StrokeMiterlimit>
   /**
@@ -9916,7 +9914,7 @@ export interface StyleProps {
    * @widely_available_date ≤2022-09-24
    * @newly_available_date ≤2020-03-24
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/stroke-opacity
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-opacity
    */
   strokeOpacity?: StyleValueWithCondition<CSS.Property.StrokeOpacity>
   /**
@@ -9928,7 +9926,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/stroke-width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-width
    */
   strokeWidth?: StyleValueWithCondition<CSS.Property.StrokeWidth | number>
   /**
@@ -9940,7 +9938,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/table-layout
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/table-layout
    */
   tableLayout?: StyleValueWithCondition<CSS.Property.TableLayout>
   /**
@@ -9952,7 +9950,7 @@ export interface StyleProps {
    * @widely_available_date 2024-02-10
    * @newly_available_date 2021-08-10
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/tab-size
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/tab-size
    */
   tabSize?: StyleValueWithCondition<CSS.Property.TabSize>
   /**
@@ -9964,7 +9962,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/font-size
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-size
    */
   text?: StyleValueWithCondition<CSS.Property.FontSize | number, "fontSizes">
   /**
@@ -9976,7 +9974,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-align
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-align
    */
   textAlign?: StyleValueWithCondition<CSS.Property.TextAlign>
   /**
@@ -9988,7 +9986,7 @@ export interface StyleProps {
    * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-align-last
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-align-last
    */
   textAlignLast?: StyleValueWithCondition<CSS.Property.TextAlignLast>
   /**
@@ -10000,7 +9998,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-anchor
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-anchor
    */
   textAnchor?: StyleValueWithCondition<CSS.Property.TextAnchor>
   /**
@@ -10010,9 +10008,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-autospace
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-autospace
    */
-  textAutospace?: StyleValueWithCondition<AnyString>
+  textAutospace?: StyleValueWithCondition<CSS.Property.TextAutospace>
   /**
    * ### text-box
    *
@@ -10020,9 +10018,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-box
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-box
    */
-  textBox?: StyleValueWithCondition<AnyString>
+  textBox?: StyleValueWithCondition<CSS.Property.TextBox>
   /**
    * ### text-box-edge
    *
@@ -10030,9 +10028,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-box-edge
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-box-edge
    */
-  textBoxEdge?: StyleValueWithCondition<AnyString>
+  textBoxEdge?: StyleValueWithCondition<CSS.Property.TextBoxEdge>
   /**
    * ### text-box-trim
    *
@@ -10040,9 +10038,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-box-trim
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-box-trim
    */
-  textBoxTrim?: StyleValueWithCondition<AnyString>
+  textBoxTrim?: StyleValueWithCondition<CSS.Property.TextBoxTrim>
   /**
    * ### color
    *
@@ -10052,7 +10050,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/color
    */
   textColor?: StyleValueWithCondition<CSS.Property.Color, "colors">
   /**
@@ -10064,7 +10062,7 @@ export interface StyleProps {
    * @widely_available_date 2024-09-14
    * @newly_available_date 2022-03-14
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-combine-upright
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-combine-upright
    */
   textCombineUpright?: StyleValueWithCondition<CSS.Property.TextCombineUpright>
   /**
@@ -10076,7 +10074,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration
    */
   textDecor?: StyleValueWithCondition<CSS.Property.TextDecoration>
   /**
@@ -10088,7 +10086,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration
    */
   textDecoration?: StyleValueWithCondition<CSS.Property.TextDecoration>
   /**
@@ -10100,12 +10098,22 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-color
    */
   textDecorationColor?: StyleValueWithCondition<
     CSS.Property.TextDecorationColor,
     "colors"
   >
+  /**
+   * ### text-decoration-inset
+   *
+   * The CSS `text-decoration-inset` property.
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-inset
+   *
+   * @experimental
+   */
+  textDecorationInset?: StyleValueWithCondition<AnyString>
   /**
    * ### text-decoration-line
    *
@@ -10115,7 +10123,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-line
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-line
    */
   textDecorationLine?: StyleValueWithCondition<CSS.Property.TextDecorationLine>
   /**
@@ -10127,7 +10135,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-skip
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-skip
    *
    * @experimental
    */
@@ -10141,7 +10149,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-skip-ink
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-skip-ink
    */
   textDecorationSkipInk?: StyleValueWithCondition<CSS.Property.TextDecorationSkipInk>
   /**
@@ -10153,7 +10161,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-style
    */
   textDecorationStyle?: StyleValueWithCondition<CSS.Property.TextDecorationStyle>
   /**
@@ -10165,7 +10173,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-thickness
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-thickness
    */
   textDecorationThickness?: StyleValueWithCondition<CSS.Property.TextDecorationThickness>
   /**
@@ -10177,7 +10185,7 @@ export interface StyleProps {
    * @widely_available_date 2024-09-03
    * @newly_available_date 2022-03-03
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-emphasis
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis
    */
   textEmphasis?: StyleValueWithCondition<CSS.Property.TextEmphasis>
   /**
@@ -10189,7 +10197,7 @@ export interface StyleProps {
    * @widely_available_date 2024-09-03
    * @newly_available_date 2022-03-03
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-emphasis-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis-color
    */
   textEmphasisColor?: StyleValueWithCondition<
     CSS.Property.TextEmphasisColor,
@@ -10204,7 +10212,7 @@ export interface StyleProps {
    * @widely_available_date 2024-09-03
    * @newly_available_date 2022-03-03
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-emphasis-position
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis-position
    */
   textEmphasisPosition?: StyleValueWithCondition<CSS.Property.TextEmphasisPosition>
   /**
@@ -10216,7 +10224,7 @@ export interface StyleProps {
    * @widely_available_date 2024-09-03
    * @newly_available_date 2022-03-03
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-emphasis-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis-style
    */
   textEmphasisStyle?: StyleValueWithCondition<CSS.Property.TextEmphasisStyle>
   /**
@@ -10228,7 +10236,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-indent
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-indent
    */
   textIndent?: StyleValueWithCondition<CSS.Property.TextIndent>
   /**
@@ -10238,7 +10246,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-justify
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-justify
    */
   textJustify?: StyleValueWithCondition<CSS.Property.TextJustify>
   /**
@@ -10250,7 +10258,7 @@ export interface StyleProps {
    * @widely_available_date 2023-03-16
    * @newly_available_date 2020-09-16
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-orientation
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-orientation
    */
   textOrientation?: StyleValueWithCondition<CSS.Property.TextOrientation>
   /**
@@ -10262,7 +10270,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-overflow
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-overflow
    */
   textOverflow?: StyleValueWithCondition<CSS.Property.TextOverflow>
   /**
@@ -10274,7 +10282,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-rendering
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-rendering
    */
   textRendering?: StyleValueWithCondition<CSS.Property.TextRendering>
   /**
@@ -10286,7 +10294,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-shadow
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-shadow
    */
   textShadow?: StyleValueWithCondition<CSS.Property.TextShadow, "shadows">
   /**
@@ -10296,7 +10304,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-size-adjust
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-size-adjust
    *
    * @experimental
    */
@@ -10308,11 +10316,11 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-spacing-trim
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-spacing-trim
    *
    * @experimental
    */
-  textSpacingTrim?: StyleValueWithCondition<AnyString>
+  textSpacingTrim?: StyleValueWithCondition<CSS.Property.TextSpacingTrim>
   /**
    * ### text-transform
    *
@@ -10322,7 +10330,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-transform
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-transform
    */
   textTransform?: StyleValueWithCondition<CSS.Property.TextTransform>
   /**
@@ -10334,7 +10342,7 @@ export interface StyleProps {
    * @widely_available_date 2023-05-19
    * @newly_available_date 2020-11-19
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-underline-offset
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-underline-offset
    */
   textUnderlineOffset?: StyleValueWithCondition<CSS.Property.TextUnderlineOffset>
   /**
@@ -10346,7 +10354,7 @@ export interface StyleProps {
    * @widely_available_date 2023-01-28
    * @newly_available_date 2020-07-28
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-underline-position
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-underline-position
    */
   textUnderlinePosition?: StyleValueWithCondition<CSS.Property.TextUnderlinePosition>
   /**
@@ -10357,7 +10365,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2024-03-19
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-wrap
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap
    */
   textWrap?: StyleValueWithCondition<CSS.Property.TextWrap>
   /**
@@ -10368,9 +10376,9 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2024-10-17
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-wrap-mode
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap-mode
    */
-  textWrapMode?: StyleValueWithCondition<AnyString>
+  textWrapMode?: StyleValueWithCondition<CSS.Property.TextWrapMode>
   /**
    * ### text-wrap-style
    *
@@ -10378,9 +10386,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/text-wrap-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap-style
    */
-  textWrapStyle?: StyleValueWithCondition<AnyString>
+  textWrapStyle?: StyleValueWithCondition<CSS.Property.TextWrapStyle>
   /**
    * ### timeline-scope
    *
@@ -10388,7 +10396,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/timeline-scope
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/timeline-scope
    */
   timelineScope?: StyleValueWithCondition<CSS.Property.TimelineScope>
   /**
@@ -10400,7 +10408,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/top
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/top
    */
   top?: StyleValueWithCondition<CSS.Property.Top | number, "spaces">
   /**
@@ -10412,7 +10420,7 @@ export interface StyleProps {
    * @widely_available_date 2022-03-19
    * @newly_available_date 2019-09-19
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/touch-action
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/touch-action
    */
   touchAction?: StyleValueWithCondition<CSS.Property.TouchAction>
   /**
@@ -10424,7 +10432,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/letter-spacing
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/letter-spacing
    */
   tracking?: StyleValueWithCondition<
     CSS.Property.LetterSpacing,
@@ -10439,7 +10447,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/transform
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform
    */
   transform?: StyleValueWithCondition<CSS.Property.Transform>
   /**
@@ -10450,7 +10458,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2024-04-16
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/transform-box
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-box
    */
   transformBox?: StyleValueWithCondition<CSS.Property.TransformBox>
   /**
@@ -10462,7 +10470,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/transform-origin
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-origin
    */
   transformOrigin?: StyleValueWithCondition<CSS.Property.TransformOrigin>
   /**
@@ -10474,7 +10482,7 @@ export interface StyleProps {
    * @widely_available_date 2024-09-14
    * @newly_available_date 2022-03-14
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/transform-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-style
    */
   transformStyle?: StyleValueWithCondition<CSS.Property.TransformStyle>
   /**
@@ -10486,7 +10494,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/transition
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition
    */
   transition?: StyleValueWithCondition<
     | "all"
@@ -10507,7 +10515,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2024-08-06
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/transition-behavior
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-behavior
    */
   transitionBehavior?: StyleValueWithCondition<CSS.Property.TransitionBehavior>
   /**
@@ -10519,7 +10527,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/transition-delay
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-delay
    */
   transitionDelay?: StyleValueWithCondition<CSS.Property.TransitionDelay>
   /**
@@ -10531,7 +10539,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/transition-duration
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-duration
    */
   transitionDuration?: StyleValueWithCondition<
     CSS.Property.TransitionDuration,
@@ -10546,7 +10554,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/transition-property
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-property
    */
   transitionProperty?: StyleValueWithCondition<
     | "all"
@@ -10568,7 +10576,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/transition-timing-function
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-timing-function
    */
   transitionTimingFunction?: StyleValueWithCondition<
     CSS.Property.TransitionTimingFunction,
@@ -10599,7 +10607,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/unicode-bidi
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/unicode-bidi
    */
   unicodeBidi?: StyleValueWithCondition<CSS.Property.UnicodeBidi>
   /**
@@ -10607,7 +10615,7 @@ export interface StyleProps {
    *
    * The CSS `user-modify` property.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/user-modify
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/user-modify
    *
    * @deprecated
    */
@@ -10619,7 +10627,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/user-select
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/user-select
    */
   userSelect?: StyleValueWithCondition<CSS.Property.UserSelect>
   /**
@@ -10631,7 +10639,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/vector-effect
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/vector-effect
    */
   vectorEffect?: StyleValueWithCondition<CSS.Property.VectorEffect>
   /**
@@ -10643,7 +10651,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/vertical-align
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/vertical-align
    */
   verticalAlign?: StyleValueWithCondition<CSS.Property.VerticalAlign>
   /**
@@ -10653,7 +10661,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/view-timeline
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-timeline
    */
   viewTimeline?: StyleValueWithCondition<CSS.Property.ViewTimeline>
   /**
@@ -10663,7 +10671,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/view-timeline-axis
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-timeline-axis
    */
   viewTimelineAxis?: StyleValueWithCondition<CSS.Property.ViewTimelineAxis>
   /**
@@ -10673,7 +10681,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/view-timeline-inset
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-timeline-inset
    */
   viewTimelineInset?: StyleValueWithCondition<CSS.Property.ViewTimelineInset>
   /**
@@ -10683,7 +10691,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/view-timeline-name
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-timeline-name
    */
   viewTimelineName?: StyleValueWithCondition<CSS.Property.ViewTimelineName>
   /**
@@ -10691,11 +10699,12 @@ export interface StyleProps {
    *
    * The <code>view-transition-class</code> CSS property sets a name that can be used to apply styles to multiple named view transition pseudo-elements.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2025-10-14
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/view-transition-class
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-transition-class
    */
-  viewTransitionClass?: StyleValueWithCondition<AnyString>
+  viewTransitionClass?: StyleValueWithCondition<CSS.Property.ViewTransitionClass>
   /**
    * ### view-transition-group
    *
@@ -10711,9 +10720,10 @@ export interface StyleProps {
    *
    * View transitions allow you to create animated visual transitions between different states of a document.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2025-10-14
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/view-transition-name
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-transition-name
    */
   viewTransitionName?: StyleValueWithCondition<CSS.Property.ViewTransitionName>
   /**
@@ -10725,7 +10735,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/visibility
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/visibility
    */
   visibility?: StyleValueWithCondition<CSS.Property.Visibility>
   /**
@@ -10737,7 +10747,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/width
    */
   w?: StyleValueWithCondition<CSS.Property.Width | number, "sizes">
   /**
@@ -10749,7 +10759,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/white-space
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/white-space
    */
   whiteSpace?: StyleValueWithCondition<CSS.Property.WhiteSpace>
   /**
@@ -10760,7 +10770,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2024-03-19
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/white-space-collapse
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/white-space-collapse
    */
   whiteSpaceCollapse?: StyleValueWithCondition<CSS.Property.WhiteSpaceCollapse>
   /**
@@ -10770,7 +10780,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/widows
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/widows
    */
   widows?: StyleValueWithCondition<CSS.Property.Widows>
   /**
@@ -10782,7 +10792,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/width
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/width
    */
   width?: StyleValueWithCondition<CSS.Property.Width | number, "sizes">
   /**
@@ -10794,7 +10804,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/will-change
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/will-change
    */
   willChange?: StyleValueWithCondition<CSS.Property.WillChange>
   /**
@@ -10806,7 +10816,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/word-break
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/word-break
    */
   wordBreak?: StyleValueWithCondition<CSS.Property.WordBreak>
   /**
@@ -10818,7 +10828,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/word-spacing
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/word-spacing
    */
   wordSpacing?: StyleValueWithCondition<CSS.Property.WordSpacing>
   /**
@@ -10830,7 +10840,7 @@ export interface StyleProps {
    * @widely_available_date 2019-09-27
    * @newly_available_date 2017-03-27
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/writing-mode
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/writing-mode
    */
   writingMode?: StyleValueWithCondition<CSS.Property.WritingMode>
   /**
@@ -10842,9 +10852,9 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/x
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/x
    */
-  x?: StyleValueWithCondition<AnyString>
+  x?: StyleValueWithCondition<CSS.Property.X>
   /**
    * ### y
    *
@@ -10854,9 +10864,9 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/y
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/y
    */
-  y?: StyleValueWithCondition<AnyString>
+  y?: StyleValueWithCondition<CSS.Property.Y>
   /**
    * ### z-index
    *
@@ -10866,7 +10876,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/z-index
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/z-index
    */
   z?: StyleValueWithCondition<CSS.Property.ZIndex, "zIndices">
   /**
@@ -10878,7 +10888,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/z-index
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/z-index
    */
   zIndex?: StyleValueWithCondition<CSS.Property.ZIndex, "zIndices">
   /**
@@ -10889,7 +10899,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2024-05-14
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/zoom
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/zoom
    */
   zoom?: StyleValueWithCondition<CSS.Property.Zoom>
   /**
@@ -10901,7 +10911,7 @@ export interface StyleProps {
    * @widely_available_date 2025-08-14
    * @newly_available_date 2023-02-14
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/@container
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@container
    */
   _container?: {
     [key: string]: any
@@ -10940,7 +10950,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/@keyframes
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@keyframes
    */
   _keyframes?: StyleValueWithCondition<
     AnyString | { [key: string]: CSSObject },
@@ -10955,7 +10965,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/@media
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
    */
   _landscape?: StyleValueWithCondition<CSSObject>
   /**
@@ -10967,7 +10977,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/@media
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
    */
   _media?: {
     [key: string]: any
@@ -11045,7 +11055,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/@media
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
    */
   _mediaDark?: StyleValueWithCondition<CSSObject>
   /**
@@ -11057,7 +11067,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/@media
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
    */
   _mediaLight?: StyleValueWithCondition<CSSObject>
   /**
@@ -11069,7 +11079,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/@media
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
    */
   _mediaReduceMotion?: StyleValueWithCondition<CSSObject>
   /**
@@ -11081,7 +11091,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/@media
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
    */
   _portrait?: StyleValueWithCondition<CSSObject>
   /**
@@ -11093,7 +11103,7 @@ export interface StyleProps {
    * @widely_available_date 2018-01-29
    * @newly_available_date 2015-07-29
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/@media
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
    */
   _print?: StyleValueWithCondition<CSSObject>
   /**
@@ -11105,7 +11115,7 @@ export interface StyleProps {
    * @widely_available_date 2018-03-30
    * @newly_available_date 2015-09-30
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/@supports
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@supports
    */
   _supports?: { css?: CSSObject; query?: AnyString }[]
 }

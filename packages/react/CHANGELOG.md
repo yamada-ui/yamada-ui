@@ -1,5 +1,13 @@
 # @yamada-ui/react
 
+## 2.0.7
+
+### Patch Changes
+
+- [#5609](https://github.com/yamada-ui/yamada-ui/pull/5609) [`7e3fb67`](https://github.com/yamada-ui/yamada-ui/commit/7e3fb67ea69a275653493d35036fb755ecbf2f30) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated style props.
+
+- [#5609](https://github.com/yamada-ui/yamada-ui/pull/5609) [`7e3fb67`](https://github.com/yamada-ui/yamada-ui/commit/7e3fb67ea69a275653493d35036fb755ecbf2f30) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added new icons.
+
 ## 2.0.6
 
 ### Patch Changes

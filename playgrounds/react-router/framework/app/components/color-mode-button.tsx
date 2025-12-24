@@ -1,3 +1,5 @@
+"use client"
+
 import type { ButtonProps } from "@yamada-ui/react"
 import type { FC } from "react"
 import { Button, MoonIcon, SunIcon, useColorMode } from "@yamada-ui/react"

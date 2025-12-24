@@ -38,6 +38,10 @@ export const links: Route.LinksFunction = () => [
   },
 ]
 
+export function meta() {
+  return [{ title: "React Router - Yamada UI" }]
+}
+
 export function loader({ request }: Route.LoaderArgs) {
   const cookie = request.headers.get("cookie") ?? ""
   return data({ cookie })

@@ -3,4 +3,43 @@ packages:
   - "playgrounds/**"
   - "www/**"
 
+catalog:
+  "@types/node": ^24.9.1
+  "@types/react": ^19.2.2
+  "@types/react-dom": ^19.2.2
+  "@emotion/react": ^11.14.0
+  "@emotion/styled": ^11.14.1
+  "@faker-js/faker": ^10.1.0
+  "@lucide/lab": ^0.1.2
+  "@next/eslint-plugin-next": ^15.5.9
+  "@vitejs/plugin-react-swc": ^4.1.0
+  "clean-package": 2.2.0
+  "color2k": ^2.0.3
+  "commander": ^14.0.1
+  "csstype": ^3.2.3
+  "dayjs": ^1.11.18
+  "dotenv": ^17.2.3
+  "eslint": ^9.38.0
+  "execa": 9.3.1
+  "glob": ^11.0.3
+  "motion": 12.18.1
+  "next": ^15.5.9
+  "node-fetch": ^3.3.2
+  "ora": ^9.0.0
+  "picocolors": ^1.1.1
+  "prettier": ^3.6.2
+  "react": ^19.2.3
+  "react-dom": ^19.2.3
+  "react-hook-form": ^7.65.0
+  "react-icons": ^5.5.0
+  "rimraf": ^6.0.1
+  "scroll-into-view-if-needed": ^3.1.0
+  "sucrase": ^3.35.0
+  "tsx": ^4.20.6
+  "typescript": ^5.9.3
+  "vite": ^7.1.11
+  "vitest": ^3.2.4
+  "vitest-axe": ^0.1.0
+
 minimumReleaseAge: 10080 # = 60 [minutes/h] * 24 [h/day] * 7 [day]
+

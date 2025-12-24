@@ -19,15 +19,15 @@
     "@remix-run/serve": "^2.17.1",
     "@yamada-ui/react": "workspace:*",
     "isbot": "^5.1.31",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3"
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.17.1",
-    "@types/node": "^24.9.1",
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2",
-    "vite": "^7.1.11",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "vite": "catalog:",
     "vite-tsconfig-paths": "^5.1.4"
   }
 }

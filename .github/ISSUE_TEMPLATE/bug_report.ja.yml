@@ -1,6 +1,7 @@
 name: "Bug Report (日本語)"
 description: "バグ報告を作成します。"
 labels: ["triage"]
+type: Bug
 body:
   - type: markdown
     attributes:

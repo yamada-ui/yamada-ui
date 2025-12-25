@@ -16,6 +16,10 @@ build
 .vercel
 .velite
 
+# tanstack start
+.tanstack
+routeTree.gen.ts
+
 # misc
 .DS_Store
 *.pem

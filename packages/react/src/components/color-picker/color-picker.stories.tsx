@@ -389,7 +389,13 @@ export const BorderColor: Story = () => {
 export const CustomControl: Story = () => {
   const [value, setValue] = useState("#4387f4")
 
-  return <ColorPicker value={value} onChange={setValue} />
+  return (
+    <ColorPicker
+      value={value}
+      inputProps={{ "aria-label": "Pick a color" }}
+      onChange={setValue}
+    />
+  )
 }
 
 export const ReactHookForm: Story = () => {

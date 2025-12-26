@@ -110,10 +110,10 @@ export const Disabled: Story = () => {
       <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <PinInput.Root key={index} variant={variant}>
-            <PinInput.Field disabled index={0} />
-            <PinInput.Field disabled index={1} />
-            <PinInput.Field disabled index={2} />
-            <PinInput.Field disabled index={3} />
+            <PinInput.Field aria-label="PIN digit 1" disabled index={0} />
+            <PinInput.Field aria-label="PIN digit 2" disabled index={1} />
+            <PinInput.Field aria-label="PIN digit 3" disabled index={2} />
+            <PinInput.Field aria-label="PIN digit 4" disabled index={3} />
           </PinInput.Root>
         )}
       </For>
@@ -142,10 +142,10 @@ export const ReadOnly: Story = () => {
       <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <PinInput.Root key={index} variant={variant}>
-            <PinInput.Field index={0} readOnly />
-            <PinInput.Field index={1} readOnly />
-            <PinInput.Field index={2} readOnly />
-            <PinInput.Field index={3} readOnly />
+            <PinInput.Field aria-label="PIN digit 1" index={0} readOnly />
+            <PinInput.Field aria-label="PIN digit 2" index={1} readOnly />
+            <PinInput.Field aria-label="PIN digit 3" index={2} readOnly />
+            <PinInput.Field aria-label="PIN digit 4" index={3} readOnly />
           </PinInput.Root>
         )}
       </For>
@@ -174,10 +174,10 @@ export const Invalid: Story = () => {
       <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <PinInput.Root key={index} variant={variant}>
-            <PinInput.Field index={0} invalid />
-            <PinInput.Field index={1} invalid />
-            <PinInput.Field index={2} invalid />
-            <PinInput.Field index={3} invalid />
+            <PinInput.Field aria-label="PIN digit 1" index={0} invalid />
+            <PinInput.Field aria-label="PIN digit 2" index={1} invalid />
+            <PinInput.Field aria-label="PIN digit 3" index={2} invalid />
+            <PinInput.Field aria-label="PIN digit 4" index={3} invalid />
           </PinInput.Root>
         )}
       </For>
@@ -209,10 +209,10 @@ export const BorderColor: Story = () => {
 export const CustomFields: Story = () => {
   return (
     <PinInput.Root>
-      <PinInput.Field index={0} />
-      <PinInput.Field index={1} />
-      <PinInput.Field index={2} />
-      <PinInput.Field index={3} />
+      <PinInput.Field aria-label="PIN digit 1" index={0} />
+      <PinInput.Field aria-label="PIN digit 2" index={1} />
+      <PinInput.Field aria-label="PIN digit 3" index={2} />
+      <PinInput.Field aria-label="PIN digit 4" index={3} />
     </PinInput.Root>
   )
 }

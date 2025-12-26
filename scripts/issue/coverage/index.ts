@@ -218,6 +218,7 @@ async function main() {
           } else {
             await retryOnRateLimit(() =>
               octokit.issues.create({
+                type: "Task",
                 body,
                 labels: ["coverage", "test", "good first issue"],
                 owner: OWNER_NAME,

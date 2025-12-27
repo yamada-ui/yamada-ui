@@ -65,6 +65,7 @@ To improve our development process, we have set up tools and systems. Yamada UI 
     "playgrounds/next/app",
     "playgrounds/next/pages",
     "playgrounds/remix",
+    "playgrounds/tanstack/start",
     "playgrounds/vite"
   ]
 }

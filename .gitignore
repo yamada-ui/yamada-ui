@@ -13,12 +13,8 @@ report.json
 trace
 dist
 build
-.vercel
-.velite
-
-# tanstack start
-.tanstack
 routeTree.gen.ts
+.vercel
 
 # misc
 .DS_Store
@@ -42,6 +38,8 @@ next-env.d.ts
 .eslintcache
 .turbo
 .next
+.velite
+.tanstack
 
 # dotenv environment variables file
 .env

@@ -83,6 +83,13 @@ pre-commit:
               pnpm eslint {staged_files} --max-warnings=0 --fix --cache
             stage_fixed: true
 
+          - name: tanstack-start
+            root: playgrounds/tanstack/start/
+            glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+            run: |
+              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+            stage_fixed: true
+
 commit-msg:
   commands:
     commitlint:

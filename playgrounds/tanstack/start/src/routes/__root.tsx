@@ -1,19 +1,17 @@
 /// <reference types="vite/client" />
+import type { ReactNode } from "react"
+
 import {
   createRootRoute,
   HeadContent,
   Outlet,
-  Link as RouterLink,
   Scripts,
 } from "@tanstack/react-router"
 import {
-  Box,
   ColorModeScript,
-  HStack,
   ThemeSchemeScript,
   UIProvider,
 } from "@yamada-ui/react"
-import type { ReactNode } from "react"
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -59,23 +57,9 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       <body suppressHydrationWarning>
         <ColorModeScript type="cookie" />
         <ThemeSchemeScript type="cookie" />
-        <UIProvider storage="cookie">
-          <Nav />
-          {children}
-        </UIProvider>
+        <UIProvider storage="cookie">{children}</UIProvider>
         <Scripts />
       </body>
     </html>
-  )
-}
-
-function Nav() {
-  return (
-    <Box as="nav" borderBottomWidth="1px" px="lg" py="md">
-      <HStack gap="md">
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </HStack>
-    </Box>
   )
 }

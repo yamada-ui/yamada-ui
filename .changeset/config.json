@@ -22,6 +22,7 @@
     "@playgrounds/next-app",
     "@playgrounds/next-pages",
     "@playgrounds/vite",
-    "@playgrounds/remix"
+    "@playgrounds/remix",
+    "@playgrounds/tanstack-start"
   ]
 }

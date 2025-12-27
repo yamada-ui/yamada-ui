@@ -13,8 +13,8 @@ report.json
 trace
 dist
 build
+routeTree.gen.ts
 .vercel
-.velite
 
 # misc
 .DS_Store
@@ -39,6 +39,8 @@ next-env.d.ts
 .turbo
 .next
 .react-router
+.tanstack
+.velite
 
 # dotenv environment variables file
 .env

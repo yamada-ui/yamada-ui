@@ -13,7 +13,6 @@ report.json
 trace
 dist
 build
-routeTree.gen.ts
 .vercel
 
 # misc

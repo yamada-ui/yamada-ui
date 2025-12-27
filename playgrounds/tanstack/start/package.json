@@ -23,7 +23,7 @@
     "@types/node": "^24.9.1",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
-    "@vitejs/plugin-react-swc": "^4.1.0",
+    "@vitejs/plugin-react": "^4.3.4",
     "vite": "^7.1.11",
     "vite-tsconfig-paths": "^5.1.4"
   }

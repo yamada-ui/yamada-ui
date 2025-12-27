@@ -21,7 +21,6 @@
     "@yamada-ui/workspace",
     "@playgrounds/next-app",
     "@playgrounds/next-pages",
-    "@playgrounds/vite",
-    "@playgrounds/remix"
+    "@playgrounds/vite"
   ]
 }

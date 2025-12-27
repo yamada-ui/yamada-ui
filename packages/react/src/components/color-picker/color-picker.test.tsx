@@ -6,6 +6,33 @@ describe("<ColorPicker />", () => {
     await a11y(<ColorPicker placeholder="Choose a color" />)
   })
 
+  test("passes a11y test with aria-label", async () => {
+    await a11y(<ColorPicker aria-label="Choose a color" />)
+  })
+
+  test("applies aria-label to input element", () => {
+    render(<ColorPicker aria-label="Choose a color" />)
+
+    expect(screen.getByRole("textbox")).toHaveAttribute(
+      "aria-label",
+      "Choose a color",
+    )
+  })
+
+  test("applies aria-labelledby to input element", () => {
+    render(
+      <>
+        <span id="color-label">Choose a color</span>
+        <ColorPicker aria-labelledby="color-label" />
+      </>,
+    )
+
+    expect(screen.getByRole("textbox")).toHaveAttribute(
+      "aria-labelledby",
+      "color-label",
+    )
+  })
+
   test("sets `displayName` correctly", () => {
     expect(ColorPicker.displayName).toBe("ColorPickerRoot")
   })

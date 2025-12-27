@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
       </Head>
 
-      <UIProvider cookie={cookie} storage="cookie">
+      <UIProvider cookie={cookie}>
         <Component {...{ ...pageProps, inter }} />
       </UIProvider>
     </>

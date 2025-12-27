@@ -69,15 +69,15 @@ pre-commit:
               pnpm eslint {staged_files} --max-warnings=0 --fix --cache
             stage_fixed: true
 
-          - name: vite
-            root: playgrounds/vite/
+          - name: react-router-framework
+            root: playgrounds/react-router/framework/
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
             run: |
               pnpm eslint {staged_files} --max-warnings=0 --fix --cache
             stage_fixed: true
 
-          - name: remix
-            root: playgrounds/remix/
+          - name: vite
+            root: playgrounds/vite/
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
             run: |
               pnpm eslint {staged_files} --max-warnings=0 --fix --cache

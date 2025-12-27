@@ -33,9 +33,7 @@ export default async function RootLayout({
         <ColorModeScript type="cookie" />
         <ThemeSchemeScript type="cookie" />
 
-        <UIProvider cookie={cookieStore.toString()} storage="cookie">
-          {children}
-        </UIProvider>
+        <UIProvider cookie={cookieStore.toString()}>{children}</UIProvider>
       </body>
     </html>
   )

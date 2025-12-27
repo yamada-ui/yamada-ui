@@ -628,14 +628,14 @@ importers:
         specifier: ^5.1.4
         version: 5.1.4(typescript@5.9.3)(vite@7.1.12(@types/node@24.9.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.6)(yaml@2.8.1))
 
-  playgrounds/tanstack-router:
+  playgrounds/tanstack/router:
     dependencies:
       '@tanstack/react-router':
         specifier: ^1.120.3
         version: 1.143.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@yamada-ui/react':
         specifier: workspace:*
-        version: link:../../packages/react
+        version: link:../../../packages/react
       react:
         specifier: ^19.0.0
         version: 19.2.3

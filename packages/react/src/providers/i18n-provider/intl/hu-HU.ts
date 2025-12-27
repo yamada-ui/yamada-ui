@@ -98,6 +98,10 @@ const data: IntlData = {
   tag: {
     "Close tag": "Címke bezárása",
   },
+  tip: {
+    "More information": "További információk",
+  },
+
   toggle: {
     "Toggle button": "Kapcsoló gomb",
   },

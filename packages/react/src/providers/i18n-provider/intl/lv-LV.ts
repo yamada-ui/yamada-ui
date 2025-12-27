@@ -98,6 +98,10 @@ const data: IntlData = {
   tag: {
     "Close tag": "Aizvērt tagu",
   },
+  tip: {
+    "More information": "Papildu informācija",
+  },
+
   toggle: {
     "Toggle button": "Pārslēgt pogu",
   },

@@ -56,6 +56,7 @@ cd yamada-ui
     "playgrounds/next/pages",
     "playgrounds/react-router/framework",
     "playgrounds/remix",
+    "playgrounds/tanstack/router",
     "playgrounds/vite"
   ]
 }

@@ -24,6 +24,7 @@
     "www": "pnpm -C www",
     "next:pages": "pnpm -C playgrounds/next/pages",
     "next:app": "pnpm -C playgrounds/next/app",
+    "react-router:framework": "pnpm -C playgrounds/react-router/framework",
     "vite": "pnpm -C playgrounds/vite",
     "remix": "pnpm -C playgrounds/remix",
     "hono": "pnpm -C playgrounds/hono",

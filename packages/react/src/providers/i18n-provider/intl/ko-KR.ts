@@ -98,6 +98,10 @@ const data: IntlData = {
   tag: {
     "Close tag": "태그 닫기",
   },
+  tip: {
+    "More information": "자세한 정보",
+  },
+
   toggle: {
     "Toggle button": "토글 버튼",
   },

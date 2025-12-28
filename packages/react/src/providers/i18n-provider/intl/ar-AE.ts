@@ -98,6 +98,10 @@ const data: IntlData = {
   tag: {
     "Close tag": "إغلاق العلامة",
   },
+  tip: {
+    "More information": "مزيد من المعلومات",
+  },
+
   toggle: {
     "Toggle button": "زر التبديل",
   },

@@ -317,34 +317,48 @@ export default function App({ Component, pageProps }: AppProps) {
 
 ## Component Integration
 
-Integrate Next.js components like `Link` and `Image` with Yamada UI's styling system.
-This allows you to apply Yamada UI's theme and styles to Next.js components.
+You can integrate Next.js components such as [Link](https://nextjs.org/docs/pages/api-reference/components/link) and [Image](https://nextjs.org/docs/pages/api-reference/components/image) with Yamada UI components.
 
 ### Link
 
-Use the `as` prop to integrate `next/link` with Yamada UI's `Link`.
-
 ```tsx
-import type { LinkProps, HTMLRefAttributes, Merge } from "@yamada-ui/react"
-import { Link } from "@yamada-ui/react"
+import type {
+  ButtonProps,
+  HTMLRefAttributes,
+  IconButtonProps,
+  LinkProps,
+  Merge,
+} from "@yamada-ui/react"
+import type { LinkProps as OriginalLinkProps } from "next/link"
+import type { FC } from "react"
+import { Button, IconButton, Link } from "@yamada-ui/react"
 import OriginalLink from "next/link"
-import type { ComponentProps } from "react"
 
-export interface AppLinkProps
-  extends Omit<
-      Merge<ComponentProps<typeof OriginalLink>, LinkProps>,
-      "as" | "ref"
-    >,
+export interface NextLinkProps
+  extends Omit<Merge<OriginalLinkProps, LinkProps>, "as" | "ref"> {}
+
+export const NextLink: FC<NextLinkProps> = (props) => {
+  return <Link as={OriginalLink} {...props} />
+}
+
+export interface NextLinkButtonProps
+  extends Omit<Merge<OriginalLinkProps, ButtonProps>, "as" | "ref">,
     HTMLRefAttributes<"a"> {}
 
-export const AppLink = (props: AppLinkProps) => {
-  return <Link as={OriginalLink} {...props} />
+export const NextLinkButton: FC<NextLinkButtonProps> = (props) => {
+  return <Button as={OriginalLink} {...props} />
+}
+
+export interface NextLinkIconButtonProps
+  extends Omit<Merge<OriginalLinkProps, IconButtonProps>, "as" | "ref">,
+    HTMLRefAttributes<"a"> {}
+
+export const NextLinkIconButton: FC<NextLinkIconButtonProps> = (props) => {
+  return <IconButton as={OriginalLink} {...props} />
 }
 ```
 
 ### Image
-
-Use `styled` to integrate `next/image` with Yamada UI's styling system.
 
 ```tsx
 import { styled } from "@yamada-ui/react"
@@ -354,5 +368,3 @@ export const AppImage = styled(Image, {
   forwardProps: ["fill", "height", "width"],
 })
 ```
-
-The `forwardProps` option passes Next.js-specific props to the `Image` component instead of treating them as style props.

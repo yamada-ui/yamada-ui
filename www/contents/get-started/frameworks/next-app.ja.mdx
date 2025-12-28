@@ -252,36 +252,54 @@ export default function RootLayout({
 
 ## コンポーネントの統合
 
-`Link`や`Image`などのNext.jsコンポーネントをYamada UIのスタイリングシステムと統合します。
-これにより、Yamada UIのテーマやスタイルをNext.jsコンポーネントに適用できます。
+Next.jsの[Link](https://nextjs.org/docs/app/api-reference/components/link)や[Image](https://nextjs.org/docs/app/api-reference/components/image)などのコンポーネントとYamada UIのコンポーネントを統合することができます。
 
 ### Link
 
-`as` propを使用して、`next/link`とYamada UIの`Link`を統合します。
-
 ```tsx
-import type { LinkProps, HTMLRefAttributes, Merge } from "@yamada-ui/react"
-import { Link } from "@yamada-ui/react"
-import OriginalLink from "next/link"
-import type { ComponentProps } from "react"
+"use client"
 
-export interface AppLinkProps
-  extends Omit<
-      Merge<ComponentProps<typeof OriginalLink>, LinkProps>,
-      "as" | "ref"
-    >,
+import type {
+  ButtonProps,
+  HTMLRefAttributes,
+  IconButtonProps,
+  LinkProps,
+  Merge,
+} from "@yamada-ui/react"
+import type { LinkProps as OriginalLinkProps } from "next/link"
+import type { FC } from "react"
+import { Button, IconButton, Link } from "@yamada-ui/react"
+import OriginalLink from "next/link"
+
+export interface NextLinkProps
+  extends Omit<Merge<OriginalLinkProps, LinkProps>, "as" | "ref"> {}
+
+export const NextLink: FC<NextLinkProps> = (props) => {
+  return <Link as={OriginalLink} {...props} />
+}
+
+export interface NextLinkButtonProps
+  extends Omit<Merge<OriginalLinkProps, ButtonProps>, "as" | "ref">,
     HTMLRefAttributes<"a"> {}
 
-export const AppLink = (props: AppLinkProps) => {
-  return <Link as={OriginalLink} {...props} />
+export const NextLinkButton: FC<NextLinkButtonProps> = (props) => {
+  return <Button as={OriginalLink} {...props} />
+}
+
+export interface NextLinkIconButtonProps
+  extends Omit<Merge<OriginalLinkProps, IconButtonProps>, "as" | "ref">,
+    HTMLRefAttributes<"a"> {}
+
+export const NextLinkIconButton: FC<NextLinkIconButtonProps> = (props) => {
+  return <IconButton as={OriginalLink} {...props} />
 }
 ```
 
 ### Image
 
-`styled`を使用して、`next/image`とYamada UIのスタイリングシステムを統合します。
-
 ```tsx
+"use client"
+
 import { styled } from "@yamada-ui/react"
 import Image from "next/image"
 
@@ -289,5 +307,3 @@ export const AppImage = styled(Image, {
   forwardProps: ["fill", "height", "width"],
 })
 ```
-
-`forwardProps`オプションは、Next.js固有のpropsをスタイルpropsとして扱わず、`Image`コンポーネントに渡します。

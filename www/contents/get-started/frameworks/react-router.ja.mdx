@@ -327,24 +327,43 @@ export default function App() {
 
 ## コンポーネントの統合
 
-React Routerの`Link`コンポーネントをYamada UIのスタイリングシステムと統合します。
-これにより、Yamada UIのテーマやスタイルをReact Routerコンポーネントに適用できます。
+React Routerの[Link](https://reactrouter.com/api/components/Link)などのコンポーネントとYamada UIのコンポーネントを統合することができます。
 
 ### Link
 
-`as` propを使用して、React Routerの`Link`とYamada UIの`Link`を統合します。
-
 ```tsx
-import type { LinkProps, Merge, HTMLRefAttributes } from "@yamada-ui/react"
-import { Link } from "@yamada-ui/react"
+import type {
+  ButtonProps,
+  HTMLRefAttributes,
+  IconButtonProps,
+  LinkProps,
+  Merge,
+} from "@yamada-ui/react"
+import type { FC } from "react"
+import type { LinkProps as OriginalLinkProps } from "react-router"
+import { Button, IconButton, Link } from "@yamada-ui/react"
 import { Link as OriginalLink } from "react-router"
-import type { LinkProps as RouterLinkProps } from "react-router"
 
-interface AppLinkProps
-  extends Omit<Merge<RouterLinkProps, LinkProps>, "as" | "ref">,
+export interface RouterLinkProps
+  extends Omit<Merge<OriginalLinkProps, LinkProps>, "as" | "ref"> {}
+
+export const RouterLink: FC<RouterLinkProps> = (props) => {
+  return <Link as={OriginalLink} {...props} />
+}
+
+export interface RouterLinkButtonProps
+  extends Omit<Merge<OriginalLinkProps, ButtonProps>, "as" | "ref">,
     HTMLRefAttributes<"a"> {}
 
-export const AppLink = (props: AppLinkProps) => {
-  return <Link as={OriginalLink} {...props} />
+export const RouterLinkButton: FC<RouterLinkButtonProps> = (props) => {
+  return <Button as={OriginalLink} {...props} />
+}
+
+export interface RouterLinkIconButtonProps
+  extends Omit<Merge<OriginalLinkProps, IconButtonProps>, "as" | "ref">,
+    HTMLRefAttributes<"a"> {}
+
+export const RouterLinkIconButton: FC<RouterLinkIconButtonProps> = (props) => {
+  return <IconButton as={OriginalLink} {...props} />
 }
 ```

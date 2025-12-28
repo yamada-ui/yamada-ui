@@ -108,4 +108,20 @@ return <Tag onClose={onClose}>Tag</Tag>
 
 ## Accessibility
 
+`Tag` is a component that displays a categorization label, optionally with a close button for dismissal.
+
+### Keyboard Navigation
+
+| Key | Description | State |
+| --------------- | -------------------------------------- | ----- |
+| `Tab` | Moves focus to the close button if present. | - |
+| `Space`, `Enter` | When the close button has focus, activates it. | - |
+
+### ARIA Roles and Attributes
+
+| Component | Role and Attribute | Usage |
+| --------- | ------------------ | --------------------- |
+| `Tag` | `role="status"` | Indicates that the tag contains status information. |
+| `TagCloseButton` | `aria-label` | Provides an accessible label for the close button. |
+
 Currently, this section is being updated due to the migration of v2.

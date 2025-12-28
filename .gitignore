@@ -40,7 +40,6 @@ next-env.d.ts
 .next
 .react-router
 .tanstack
-.velite
 
 # dotenv environment variables file
 .env

@@ -1,6 +1,7 @@
 name: "Bug Report"
 description: "Create a bug report."
 labels: ["triage"]
+type: Bug
 body:
   - type: markdown
     attributes:

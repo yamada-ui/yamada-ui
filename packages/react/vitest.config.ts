@@ -1,8 +1,34 @@
 import react from "@vitejs/plugin-react-swc"
 // @ts-nocheck -- vite version mismatch between storybook (5.x) and vitest (7.x)
 import sharedConfig from "@yamada-ui/workspace/vitest/config"
+import { readFile } from "fs/promises"
+import { glob } from "glob"
 import { resolve } from "node:path"
 import { defineProject, mergeConfig } from "vitest/config"
+
+async function getBrowserTestFiles() {
+  const paths = await glob(resolve(__dirname, "src", "**", "*.test.{ts,tsx}"))
+  const targetPaths: string[] = []
+
+  await Promise.all(
+    paths.map(async (path) => {
+      try {
+        const content = await readFile(path, "utf-8")
+        const browser = /^import\s+\{[^}]*\}\s+from\s+"#test\/browser"/m.test(
+          content,
+        )
+
+        if (browser) {
+          targetPaths.push(path.replace(resolve(__dirname) + "/", ""))
+        }
+      } catch {}
+    }),
+  )
+
+  return targetPaths
+}
+
+const browserTestFiles = await getBrowserTestFiles()
 
 export default mergeConfig(sharedConfig, {
   plugins: [react()],
@@ -18,14 +44,7 @@ export default mergeConfig(sharedConfig, {
         test: {
           name: "jsdom",
           environment: "jsdom",
-          exclude: [
-            "src/components/badge/badge.test.tsx",
-            "src/components/carousel/carousel.test.tsx",
-            "src/components/flex/flex.test.tsx",
-            "src/components/list/list.test.tsx",
-            "src/components/stack/z-stack.test.tsx",
-            "src/hooks/use-os/use-os.test.tsx",
-          ],
+          exclude: browserTestFiles,
           globals: true,
           include: ["src/**/*.test.{ts,tsx}"],
           setupFiles: ["@yamada-ui/workspace/vitest/setup"],
@@ -57,14 +76,7 @@ export default mergeConfig(sharedConfig, {
             provider: "playwright",
           },
           globals: true,
-          include: [
-            "src/components/badge/badge.test.tsx",
-            "src/components/carousel/carousel.test.tsx",
-            "src/components/flex/flex.test.tsx",
-            "src/components/list/list.test.tsx",
-            "src/components/stack/z-stack.test.tsx",
-            "src/hooks/use-os/use-os.test.tsx",
-          ],
+          include: browserTestFiles,
         },
       }),
     ],

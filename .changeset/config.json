@@ -22,8 +22,8 @@
     "@playgrounds/next-app",
     "@playgrounds/next-pages",
     "@playgrounds/react-router-framework",
-    "@playgrounds/vite",
     "@playgrounds/remix",
-    "@playgrounds/tanstack-start"
+    "@playgrounds/tanstack-start",
+    "@playgrounds/vite"
   ]
 }

@@ -12,11 +12,6 @@ export const qrCodeStyle = defineComponentSlotStyle({
       top: "50%",
       transform: "translate(-50%, -50%)",
     },
-    pattern: {
-      "svg path": {
-        fill: "currentColor",
-      },
-    },
     root: {
       position: "relative",
     },

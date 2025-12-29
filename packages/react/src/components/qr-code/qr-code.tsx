@@ -78,7 +78,7 @@ export interface QrCodeFrameProps
   extends HTMLStyledProps<"svg">,
     ThemeProps<QrCodeStyle> {}
 
-export const QrCodeFrame = withContext<"div", QrCodeFrameProps>((rest) => {
+export const QrCodeFrame = withContext<"svg", QrCodeFrameProps>((rest) => {
   const { getFrameProps } = useComponentContext()
 
   return <styled.svg {...getFrameProps(rest)} />

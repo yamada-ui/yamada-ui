@@ -15,7 +15,7 @@ export default meta
 export const Basic: Story = () => {
   return (
     <QrCode.Root size="xl" value="https://yamada-ui.com">
-      <QrCode.Frame color="blue.100">
+      <QrCode.Frame>
         <QrCode.Pattern />
       </QrCode.Frame>
     </QrCode.Root>

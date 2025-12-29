@@ -33,7 +33,10 @@ export const useQrCode = ({
   pixelSize = 10,
   value,
 }: UseQrCodeProps) => {
-  const encoded = encode(value, { border, ecc })
+  const encoded = useMemo(
+    () => encode(value, { border, ecc }),
+    [value, border, ecc],
+  )
 
   const height = encoded.size * pixelSize
   const width = encoded.size * pixelSize

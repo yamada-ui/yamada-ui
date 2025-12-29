@@ -62,7 +62,7 @@ export const QrCodeRoot = withProvider<"div", QrCodeRootProps>(
 
     const context = useMemo(
       () => ({ getFrameProps, getOverlayProps, getPatternProps }),
-      [getFrameProps, getPatternProps, getOverlayProps],
+      [getFrameProps, getOverlayProps, getPatternProps],
     )
 
     return (

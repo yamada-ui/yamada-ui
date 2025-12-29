@@ -16,7 +16,7 @@ export interface UseQrCodeProps {
   /**
    * The error correction level.
    *
-   * @default 'M'
+   * @default 'L'
    */
   ecc?: "H" | "L" | "M" | "Q"
   /**

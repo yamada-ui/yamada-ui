@@ -9,8 +9,8 @@
     "start": "node dist/server/server.js",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings=0 --cache",
-    "format": "prettier . --ignore-path ../../.prettierignore --check --cache",
-    "yamada-cli": "pnpm -C ../../packages/cli dev"
+    "format": "prettier . --ignore-path ../../../.prettierignore --check --cache",
+    "yamada-cli": "pnpm -C ../../../packages/cli dev"
   },
   "dependencies": {
     "@tanstack/react-router": "^1.120.3",

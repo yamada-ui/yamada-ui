@@ -65,4 +65,15 @@ import { LucideIcon } from "@yamada-ui/react"
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+If you set `aria-hidden={false}` and `aria-label` on `Icon` or `LucideIcon`, it will be read by screen readers.
+
+```tsx
+<Icon as={FaRobot} aria-hidden={false} aria-label="Robot" />
+```
+
+### ARIA Roles and Attributes
+
+| Component            | Roles and Attributes | Usage                                             |
+| -------------------- | -------------------- | ------------------------------------------------- |
+| `Icon`, `LucideIcon` | `role="img"`         | Indicates that this is an image.                  |
+|                      | `aria-hidden`        | Excludes the element from the accessibility tree. |

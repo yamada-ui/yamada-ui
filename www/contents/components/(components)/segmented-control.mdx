@@ -202,4 +202,35 @@ return <SegmentedControl.Root items={items} value={value} onChange={setValue} />
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+When using only icons in `SegmentedControl.Item`, set `aria-label` for the `SegmentedControl.Item`.
+
+```tsx
+<SegmentedControl.Root defaultValue="plus">
+  <SegmentedControl.Item aria-label="plus" value="plus">
+    <PlusIcon />
+  </SegmentedControl.Item>
+  <SegmentedControl.Item aria-label="minus" value="minus">
+    <MinusIcon />
+  </SegmentedControl.Item>
+</SegmentedControl.Root>
+```
+
+### Keyboard Navigation
+
+| Key          | Description                                                                                                            | State |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------- | ----- |
+| `Tab`        | Focuses the selected item.                                                                                             | -     |
+| `ArrowLeft`  | Focuses the previous item that is not disabled. If it's the first item, it focuses the last item that is not disabled. | -     |
+| `ArrowRight` | Focuses the next item that is not disabled. If it's the last item, it focuses the first item that is not disabled.     | -     |
+| `ArrowUp`    | Focuses the previous item that is not disabled. If it's the first item, it focuses the last item that is not disabled. | -     |
+| `ArrowDown`  | Focuses the next item that is not disabled. If it's the last item, it focuses the first item that is not disabled.     | -     |
+
+### ARIA Roles and Attributes
+
+| Component               | Roles and Attributes | Description                                                                                      |
+| ----------------------- | -------------------- | ------------------------------------------------------------------------------------------------ |
+| `SegmentedControl.Root` | `role="radiogroup"`  | Indicates that it is a radio group.                                                              |
+|                         | `aria-disabled`      | Sets to `"true"` if `disabled` is set.                                                           |
+|                         | `aria-orientation`   | Sets `"horizontal"` or `"vertical"` based on the `orientation` value. Default is `"horizontal"`. |
+| `SegmentedControl.Item` | `aria-disabled`      | Sets to `"true"` if `disabled` is set.                                                           |
+|                         | `aria-readonly`      | Sets to `"true"` if `readOnly` is set.                                                           |

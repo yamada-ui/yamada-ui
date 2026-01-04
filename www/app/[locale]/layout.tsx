@@ -19,6 +19,7 @@ import { routing } from "@/i18n"
 import { theme } from "@/theme"
 import { getLang } from "@/utils/i18n"
 import { generateSharedMetadata } from "@/utils/next"
+import { Balloons } from "./balloons"
 
 export function generateStaticParams() {
   return CONSTANTS.I18N.LOCALES.map((locale) => ({ locale }))
@@ -108,6 +109,8 @@ export default async function Layout({ children, params }: LayoutProps) {
                 <Footer />
               </Flex>
             </Flex>
+
+            <Balloons />
           </UIProvider>
         </NextIntlClientProvider>
 

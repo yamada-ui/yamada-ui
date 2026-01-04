@@ -43,6 +43,17 @@ export const tagStyle = defineComponentSlotStyle({
     startIcon: {},
   },
 
+  props: {
+    /**
+     * If `true`, the tag is full rounded. Else, it'll be slightly round.
+     *
+     * @default false
+     */
+    fullRounded: {
+      true: { root: { rounded: "full" } },
+    },
+  },
+
   variants: {
     outline: {
       root: {

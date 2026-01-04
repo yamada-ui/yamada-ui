@@ -47,6 +47,9 @@ export const segmentedControlStyle = defineComponentSlotStyle({
      */
     fullRounded: {
       true: {
+        indicator: {
+          rounded: "full",
+        },
         item: {
           rounded: "full",
         },

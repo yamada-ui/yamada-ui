@@ -195,4 +195,23 @@ describe("<Field />", () => {
     )
     expect(screen.getByTestId("optional")).toHaveTextContent("optional")
   })
+
+  test("should render aria-describedby with HelperMessage", () => {
+    render(
+      <Field.Root
+        helperMessage="We'll never share your email."
+        label="Email address"
+      >
+        <Input type="email" placeholder="your email address" />
+      </Field.Root>,
+    )
+    expect(
+      screen.getByText("We'll never share your email."),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole("textbox", {
+        description: "We'll never share your email.",
+      }),
+    ).toBeInTheDocument()
+  })
 })

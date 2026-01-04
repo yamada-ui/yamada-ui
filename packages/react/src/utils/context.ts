@@ -24,7 +24,13 @@ export function createContext<Y = any>(options: {
   hookName?: string
   strict?: true
 }): CreateContextReturn<Y>
-
+export function createContext<Y = any>(options: {
+  defaultValue: Y
+  name?: string
+  errorMessage?: string
+  hookName?: string
+  strict?: false
+}): CreateContextReturn<Y>
 export function createContext<Y = any>(options: {
   name?: string
   defaultValue?: Y

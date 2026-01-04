@@ -37,6 +37,10 @@ export type AnySelector =
 
 export const attributes = {
   /**
+   * The CSS `&[data-inactive]` attribute selector.
+   */
+  _inactive: "&[data-inactive]",
+  /**
    * The CSS `&[data-accept]` attribute selector.
    */
   _accept: "&[data-accept]",
@@ -44,6 +48,10 @@ export const attributes = {
    * The CSS `&[data-between]` attribute selector.
    */
   _between: "&[data-between]",
+  /**
+   * The CSS `&:is([data-center], [data-group-center])` attribute selector.
+   */
+  _center: "&:is([data-center], [data-group-center])",
   /**
    * The CSS `&[data-complete]` attribute selector.
    */

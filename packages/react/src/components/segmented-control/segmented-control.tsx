@@ -25,6 +25,9 @@ export interface SegmentedControlItem extends SegmentedControlItemProps {
   label?: ReactNode
 }
 
+interface ComponentContext
+  extends Pick<SegmentedControlRootProps, "indicatorProps" | "itemProps"> {}
+
 export interface SegmentedControlRootProps<Y extends string = string>
   extends Omit<HTMLStyledProps, "defaultValue" | "onChange">,
     ThemeProps<SegmentedControlStyle>,
@@ -35,17 +38,28 @@ export interface SegmentedControlRootProps<Y extends string = string>
    * @default []
    */
   items?: SegmentedControlItem[]
+  /**
+   * Props for the indicator component.
+   */
+  indicatorProps?: SegmentedControlIndicatorProps
+  /**
+   * Props for the item component.
+   */
+  itemProps?: SegmentedControlItemProps
 }
 
 const {
+  ComponentContext,
   PropsContext: SegmentedControlPropsContext,
+  useComponentContext,
   usePropsContext: useSegmentedControlPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<SegmentedControlRootProps, SegmentedControlStyle>(
-  "segmented-control",
-  segmentedControlStyle,
-)
+} = createSlotComponent<
+  SegmentedControlRootProps,
+  SegmentedControlStyle,
+  ComponentContext
+>("segmented-control", segmentedControlStyle)
 
 export { SegmentedControlPropsContext, useSegmentedControlPropsContext }
 
@@ -55,7 +69,14 @@ export { SegmentedControlPropsContext, useSegmentedControlPropsContext }
  * @see https://yamada-ui.com/docs/components/segmented-control
  */
 export const SegmentedControlRoot = withProvider(
-  ({ children, items = [], orientation: orientationProp, ...rest }) => {
+  ({
+    children,
+    items = [],
+    orientation: orientationProp,
+    indicatorProps,
+    itemProps,
+    ...rest
+  }) => {
     const computedOrientation = useValue(orientationProp)
     const {
       id,
@@ -83,14 +104,20 @@ export const SegmentedControlRoot = withProvider(
       () => ({ id, name, disabled, orientation, readOnly, setValue, value }),
       [id, name, disabled, readOnly, orientation, setValue, value],
     )
+    const componentContext = useMemo(
+      () => ({ indicatorProps, itemProps }),
+      [itemProps, indicatorProps],
+    )
 
     return (
       <SegmentedControlContext value={context}>
-        <SegmentedControlDescendantsContext value={descendants}>
-          <LayoutGroup id={id}>
-            <styled.div {...getRootProps()}>{cloneChildren}</styled.div>
-          </LayoutGroup>
-        </SegmentedControlDescendantsContext>
+        <ComponentContext value={componentContext}>
+          <SegmentedControlDescendantsContext value={descendants}>
+            <LayoutGroup id={id}>
+              <styled.div {...getRootProps()}>{cloneChildren}</styled.div>
+            </LayoutGroup>
+          </SegmentedControlDescendantsContext>
+        </ComponentContext>
       </SegmentedControlContext>
     )
   },
@@ -102,12 +129,17 @@ export const SegmentedControlRoot = withProvider(
 
 export interface SegmentedControlItemProps<Y extends string = string>
   extends HTMLStyledProps<"label">,
-    UseSegmentedControlItemProps<Y> {}
+    UseSegmentedControlItemProps<Y> {
+  /**
+   * Props for the indicator component.
+   */
+  indicatorProps?: SegmentedControlIndicatorProps
+}
 
 export const SegmentedControlItem = withContext<
   "label",
   SegmentedControlItemProps
->(({ children, ...rest }) => {
+>(({ children, indicatorProps, ...rest }) => {
   const { checked, getInputProps, getLabelProps } =
     useSegmentedControlItem(rest)
 
@@ -117,10 +149,22 @@ export const SegmentedControlItem = withContext<
 
       <styled.span>{children}</styled.span>
 
-      {checked ? <SegmentedControlIndicator /> : null}
+      {checked ? <SegmentedControlIndicator {...indicatorProps} /> : null}
     </styled.label>
   )
-}, "item")() as GenericsComponent<{
+}, "item")((props) => {
+  const { indicatorProps, itemProps } = useComponentContext()
+
+  return {
+    ...itemProps,
+    ...props,
+    indicatorProps: {
+      ...indicatorProps,
+      ...itemProps?.indicatorProps,
+      ...props.indicatorProps,
+    },
+  }
+}) as GenericsComponent<{
   <Y extends string = string>(props: SegmentedControlItemProps<Y>): ReactElement
 }>
 

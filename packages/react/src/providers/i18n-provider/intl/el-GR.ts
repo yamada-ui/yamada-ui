@@ -98,6 +98,10 @@ const data: IntlData = {
   tag: {
     "Close tag": "Κλείσιμο ετικέτας",
   },
+  tip: {
+    "More information": "Περισσότερες πληροφορίες",
+  },
+
   toggle: {
     "Toggle button": "Κουμπί εναλλαγής",
   },

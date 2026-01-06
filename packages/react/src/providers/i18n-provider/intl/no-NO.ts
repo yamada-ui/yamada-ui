@@ -98,6 +98,10 @@ const data: IntlData = {
   tag: {
     "Close tag": "Lukk tag",
   },
+  tip: {
+    "More information": "Mer informasjon",
+  },
+
   toggle: {
     "Toggle button": "Bytt knapp",
   },

@@ -140,7 +140,10 @@ interface BreadcrumbSeparatorProps extends HTMLStyledProps<"li"> {}
 const BreadcrumbSeparator = withContext<"li", BreadcrumbSeparatorProps>(
   BreadcrumbItem,
   "separator",
-)({ children: <ChevronRightIcon /> })
+)(({ children, ...rest }) => ({
+  children: children ?? <ChevronRightIcon />,
+  ...rest,
+}))
 
 export interface BreadcrumbLinkProps extends HTMLStyledProps<"a"> {
   /**

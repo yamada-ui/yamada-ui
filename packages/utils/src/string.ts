@@ -1,7 +1,7 @@
 import type { AnyString } from "./index.types"
 import { isString } from "./assertion"
 
-export function cx(...classNames: (string | undefined)[]) {
+export function cx(...classNames: (null | string | undefined)[]) {
   return classNames
     .filter((className) => !!className)
     .map((className) => className!.trim())

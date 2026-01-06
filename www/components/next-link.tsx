@@ -1,9 +1,11 @@
+"use client"
+
 import type { LinkProps as OriginalLinkProps } from "@/i18n"
 import type {
   ButtonProps,
   HTMLRefAttributes,
   IconButtonProps,
-  LinkProps as LinkProps,
+  LinkProps,
   Merge,
 } from "@yamada-ui/react"
 import type { FC } from "react"

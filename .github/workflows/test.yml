@@ -2,11 +2,29 @@ name: Test
 
 on:
   workflow_dispatch:
+    inputs:
+      chromium:
+        description: "Chromium"
+        required: false
+        default: true
+        type: boolean
+      firefox:
+        description: "Firefox"
+        required: false
+        default: false
+        type: boolean
+      webkit:
+        description: "Webkit"
+        required: false
+        default: false
+        type: boolean
   workflow_call:
 
 jobs:
   browser:
     name: ${{ matrix.name }}
+    env:
+      run_browser: ${{ github.event_name != 'workflow_dispatch' || (matrix.id == 'chromium' && inputs.chromium) || (matrix.id == 'firefox' && inputs.firefox) || (matrix.id == 'webkit' && inputs.webkit) }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -22,10 +40,12 @@ jobs:
             coverage: "false"
     steps:
       - name: Checkout
+        if: env.run_browser == 'true'
         uses: actions/checkout@v4
 
       - name: Check modified files
         id: check-modified
+        if: env.run_browser == 'true'
         uses: tj-actions/changed-files@v46
         with:
           files: |
@@ -35,26 +55,30 @@ jobs:
             !packages/workspace/src/**
             packages/workspace/src/vitest/**
 
+      - name: Set run flag
+        if: env.run_browser == 'true'
+        run: echo "RUN_TESTS=${{ github.event_name == 'workflow_dispatch' || steps.check-modified.outputs.any_changed == 'true' }}" >> "$GITHUB_ENV"
+
       - name: Install
-        if: steps.check-modified.outputs.any_changed == 'true'
+        if: env.run_browser == 'true' && env.RUN_TESTS == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Setup Browser
-        if: steps.check-modified.outputs.any_changed == 'true'
+        if: env.run_browser == 'true' && env.RUN_TESTS == 'true'
         working-directory: packages/react
         run: pnpm playwright install ${{ matrix.id }} --with-deps
 
       - name: Run tests
-        if: steps.check-modified.outputs.any_changed == 'true' && matrix.coverage == 'true'
+        if: env.run_browser == 'true' && env.RUN_TESTS == 'true' && matrix.coverage == 'true'
         run: pnpm test:coverage
 
       - name: Run Browser Test on ${{ matrix.name }}
-        if: steps.check-modified.outputs.any_changed == 'true' && matrix.coverage != 'true'
+        if: env.run_browser == 'true' && env.RUN_TESTS == 'true' && matrix.coverage != 'true'
         working-directory: packages/react
         run: pnpm test:${{ matrix.id }}
 
       - name: Upload coverage
-        if: steps.check-modified.outputs.any_changed == 'true' && matrix.coverage == 'true'
+        if: env.run_browser == 'true' && env.RUN_TESTS == 'true' && matrix.coverage == 'true'
         uses: codecov/codecov-action@v4
         with:
           fail_ci_if_error: false

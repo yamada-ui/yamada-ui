@@ -93,9 +93,10 @@ export const EmptyStateRoot = withProvider<"div", EmptyStateRootProps>(
 
         {customContent ?? (
           <EmptyStateContent {...contentProps}>
-            {customTitle ?? (
-              <EmptyStateTitle {...titleProps}>{title}</EmptyStateTitle>
-            )}
+            {customTitle ??
+              (title ? (
+                <EmptyStateTitle {...titleProps}>{title}</EmptyStateTitle>
+              ) : null)}
 
             {customDescription ?? (
               <EmptyStateDescription {...descriptionProps}>

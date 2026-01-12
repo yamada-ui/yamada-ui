@@ -60,7 +60,10 @@ export const Avatar = withProvider<"div", AvatarProps>(
     )
   },
   "root",
-)({ icon: <UserRoundIcon fontSize="1.2em" /> })
+)(({ icon, ...rest }) => ({
+  icon: icon ?? <UserRoundIcon fontSize="1.2em" />,
+  ...rest,
+}))
 
 interface AvatarImageProps extends HTMLStyledProps<"img"> {}
 

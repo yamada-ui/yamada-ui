@@ -1,7 +1,7 @@
 {
   "name": "@yamada-ui/cli",
   "type": "module",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "The official CLI for Yamada UI projects",
   "keywords": [
     "theme",
@@ -15,7 +15,7 @@
   ],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "src/index.ts",
   "files": [
     "dist"
   ],
@@ -32,9 +32,6 @@
   "bugs": {
     "url": "https://github.com/yamada-ui/yamada-ui/issues"
   },
-  "bin": {
-    "yamada-cli": "dist/index.js"
-  },
   "scripts": {
     "clean": "rimraf node_modules dist trace coverage .turbo .eslintcache",
     "dev": "tsx src/index.ts",
@@ -43,7 +40,9 @@
     "typetrace": "tsc --noEmit --generateTrace ./trace --incremental false",
     "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
     "lint": "eslint . --max-warnings=0 --cache",
-    "format": "prettier . --ignore-path ../../.prettierignore --check --cache"
+    "format": "prettier . --ignore-path ../../.prettierignore --check --cache",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
   },
   "dependencies": {
     "@yamada-ui/utils": "workspace:*",
@@ -75,8 +74,10 @@
     "@types/update-notifier": "6.0.8",
     "@types/validate-npm-package-name": "^4.0.2",
     "@types/yamljs": "^0.2.34",
+    "clean-package": "2.2.0",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
     "update-notifier": "^7.3.1"
-  }
+  },
+  "clean-package": "./clean-package.config.json"
 }

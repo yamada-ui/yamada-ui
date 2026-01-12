@@ -115,7 +115,10 @@ const {
   useComponentContext,
   usePropsContext: useButtonPropsContext,
   withContext,
-} = createComponent<ButtonProps, ButtonStyle>("button", buttonStyle)
+} = createComponent<ButtonProps, ButtonStyle, ComponentContext>(
+  "button",
+  buttonStyle,
+)
 
 export { ButtonPropsContext, useButtonPropsContext }
 

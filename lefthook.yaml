@@ -1,94 +1,87 @@
 pre-commit:
   piped: true
-  commands:
-    prettier:
-      priority: 1
+  jobs:
+    - name: prettier
       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css}"
-      run: |
-        pnpm prettier {staged_files} --write
+      run: pnpm prettier {staged_files} --write
       stage_fixed: true
 
-    eslint:
-      priority: 2
-      run: |
-        pnpm lefthook run eslint
-      stage_fixed: true
+    - name: eslint
+      group:
+        parallel: true
+        jobs:
+          - name: root
+            glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+            exclude:
+              - packages/**
+              - playgrounds/**
+              - www/**
+            run: |
+              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+            stage_fixed: true
 
-eslint:
-  parallel: true
-  commands:
-    root:
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-      exclude:
-        - packages/**
-        - playgrounds/**
-        - www/**
-      run: |
-        pnpm eslint {staged_files} --max-warnings=0 --fix --cache
-      stage_fixed: true
+          - name: cli
+            root: packages/cli/
+            glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+            run: |
+              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+            stage_fixed: true
 
-    cli:
-      root: packages/cli/
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-      run: |
-        pnpm eslint {staged_files} --max-warnings=0 --fix --cache
-      stage_fixed: true
+          - name: react
+            root: packages/react/
+            glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+            run: |
+              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+            stage_fixed: true
 
-    react:
-      root: packages/react/
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-      run: |
-        pnpm eslint {staged_files} --max-warnings=0 --fix --cache
-      stage_fixed: true
+          - name: utils
+            root: packages/utils/
+            glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+            run: |
+              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+            stage_fixed: true
 
-    utils:
-      root: packages/utils/
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-      run: |
-        pnpm eslint {staged_files} --max-warnings=0 --fix --cache
-      stage_fixed: true
+          - name: workspace
+            root: packages/workspace/
+            glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+            run: |
+              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+            stage_fixed: true
 
-    workspace:
-      root: packages/workspace/
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-      run: |
-        pnpm eslint {staged_files} --max-warnings=0 --fix --cache
-      stage_fixed: true
+          - name: www
+            root: packages/www/
+            glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+            run: |
+              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+            stage_fixed: true
 
-    www:
-      root: www/
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-      run: |
-        pnpm eslint {staged_files} --max-warnings=0 --fix --cache
-      stage_fixed: true
+          - name: next-app
+            root: playgrounds/next/app/
+            glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+            run: |
+              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+            stage_fixed: true
 
-    next-app:
-      root: playgrounds/next/app/
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-      run: |
-        pnpm eslint {staged_files} --max-warnings=0 --fix --cache
-      stage_fixed: true
+          - name: next-pages
+            root: playgrounds/next/pages/
+            glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+            run: |
+              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+            stage_fixed: true
 
-    next-pages:
-      root: playgrounds/next/pages/
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-      run: |
-        pnpm eslint {staged_files} --max-warnings=0 --fix --cache
-      stage_fixed: true
+          - name: react-router-framework
+            root: playgrounds/react-router/framework/
+            glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+            run: |
+              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+            stage_fixed: true
 
-    vite:
-      root: playgrounds/vite/
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-      run: |
-        pnpm eslint {staged_files} --max-warnings=0 --fix --cache
-      stage_fixed: true
-
-    remix:
-      root: playgrounds/remix/
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-      run: |
-        pnpm eslint {staged_files} --max-warnings=0 --fix --cache
-      stage_fixed: true
+          - name: vite
+            root: playgrounds/vite/
+            glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+            run: |
+              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+            stage_fixed: true
 
 commit-msg:
   commands:

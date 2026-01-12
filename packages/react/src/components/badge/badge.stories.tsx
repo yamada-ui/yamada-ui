@@ -2,7 +2,7 @@ import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { BadgeProps } from "./badge"
 import { PropsTable } from "#storybook"
 import { useMemo } from "react"
-import { COLOR_SCHEMES } from "../../utils"
+import { COLOR_SCHEMES, toTitleCase } from "../../utils"
 import { For } from "../for"
 import { Wrap } from "../wrap"
 import { Badge, BadgePropsContext } from "./badge"
@@ -29,7 +29,7 @@ export const Variant: Story = () => {
       {(column, row, key) => {
         return (
           <Badge key={key} colorScheme={row} variant={column}>
-            Badge
+            {toTitleCase(column)}
           </Badge>
         )
       }}
@@ -43,11 +43,25 @@ export const Size: Story = () => {
       {(column, row, key) => {
         return (
           <Badge key={key} colorScheme={row} size={column}>
-            Badge
+            {toTitleCase(column)}
           </Badge>
         )
       }}
     </PropsTable>
+  )
+}
+
+export const FullRounded: Story = () => {
+  return (
+    <Wrap gap="md">
+      <For each={["solid", "subtle", "surface", "outline"] as const}>
+        {(variant, index) => (
+          <Badge key={index} variant={variant} fullRounded>
+            {toTitleCase(variant)}
+          </Badge>
+        )}
+      </For>
+    </Wrap>
   )
 }
 

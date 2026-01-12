@@ -112,6 +112,7 @@ export function CodePreview({
           data-lang={lang}
           bg="transparent!"
           dangerouslySetInnerHTML={{ __html: html }}
+          focusVisibleRing="inside"
           fontFamily="mono"
           fontSize="sm"
           lineHeight="1.1"

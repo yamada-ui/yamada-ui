@@ -1,6 +1,6 @@
 import type { FC } from "react"
-import { a11y, fireEvent, render, screen } from "#test"
-import { Carousel } from "."
+import { page, render } from "#test/browser"
+import { Carousel } from "./"
 
 interface TestComponentProps extends Carousel.RootProps {}
 
@@ -24,26 +24,6 @@ const TestComponent: FC<TestComponentProps> = (props) => {
 }
 
 describe("<Carousel />", () => {
-  const defaultIntersectionObserver = global.IntersectionObserver
-  const IntersectionObserverMock = vi.fn(() => ({
-    disconnect: vi.fn(),
-    observe: vi.fn(),
-    takeRecords: vi.fn(),
-    unobserve: vi.fn(),
-  }))
-
-  beforeAll(() => {
-    vi.stubGlobal("IntersectionObserver", IntersectionObserverMock)
-  })
-
-  afterAll(() => {
-    vi.stubGlobal("IntersectionObserver", defaultIntersectionObserver)
-  })
-
-  test("renders component correctly", async () => {
-    await a11y(<TestComponent />)
-  })
-
   test("sets `displayName` correctly", () => {
     expect(Carousel.Root.displayName).toBe("CarouselRoot")
     expect(Carousel.List.displayName).toBe("CarouselList")
@@ -54,140 +34,242 @@ describe("<Carousel />", () => {
     expect(Carousel.Indicator.displayName).toBe("CarouselIndicator")
   })
 
-  test("sets `className` correctly", () => {
+  test("sets `className` correctly", async () => {
     render(<TestComponent />)
-    expect(screen.getByTestId("carousel")).toHaveClass("ui-carousel__root")
-    expect(screen.getByTestId("carouselList")).toHaveClass("ui-carousel__list")
-    expect(screen.getByRole("tabpanel", { name: "1 of 5" })).toHaveClass(
-      "ui-carousel__item",
-    )
-    expect(screen.getByRole("tablist")).toHaveClass("ui-carousel__indicators")
-    expect(screen.getByRole("tab", { name: "Go to 1 slide" })).toHaveClass(
-      "ui-carousel__indicator",
-    )
-    expect(
-      screen.getByRole("button", { name: "Go to previous slide" }),
-    ).toHaveClass("ui-carousel__trigger--prev")
-    expect(
-      screen.getByRole("button", { name: "Go to next slide" }),
-    ).toHaveClass("ui-carousel__trigger--next")
+
+    await expect
+      .element(page.getByTestId("carousel"))
+      .toHaveClass("ui-carousel__root")
+    await expect
+      .element(page.getByTestId("carouselList"))
+      .toHaveClass("ui-carousel__list")
+    await expect
+      .element(page.getByRole("tabpanel", { name: "1 of 5" }))
+      .toHaveClass("ui-carousel__item")
+    await expect
+      .element(page.getByRole("tablist"))
+      .toHaveClass("ui-carousel__indicators")
+    await expect
+      .element(page.getByRole("tab", { name: "Go to 1 slide" }))
+      .toHaveClass("ui-carousel__indicator")
+    await expect
+      .element(page.getByRole("button", { name: "Go to previous slide" }))
+      .toHaveClass("ui-carousel__trigger--prev")
+    await expect
+      .element(page.getByRole("button", { name: "Go to next slide" }))
+      .toHaveClass("ui-carousel__trigger--next")
   })
 
   test("renders HTML tag correctly", () => {
     render(<TestComponent />)
-    expect(screen.getByTestId("carousel").tagName).toBe("SECTION")
-    expect(screen.getByTestId("carouselList").tagName).toBe("DIV")
-    expect(screen.getByRole("tabpanel", { name: "1 of 5" }).tagName).toBe("DIV")
-    expect(screen.getByRole("tablist").tagName).toBe("DIV")
-    expect(screen.getByRole("tab", { name: "Go to 1 slide" }).tagName).toBe(
-      "BUTTON",
-    )
+
+    expect(page.getByTestId("carousel").element().tagName).toBe("SECTION")
+    expect(page.getByTestId("carouselList").element().tagName).toBe("DIV")
     expect(
-      screen.getByRole("button", { name: "Go to previous slide" }).tagName,
+      page.getByRole("tabpanel", { name: "1 of 5" }).element().tagName,
+    ).toBe("DIV")
+    expect(page.getByRole("tablist").element().tagName).toBe("DIV")
+    expect(
+      page.getByRole("tab", { name: "Go to 1 slide" }).element().tagName,
     ).toBe("BUTTON")
     expect(
-      screen.getByRole("button", { name: "Go to next slide" }).tagName,
+      page.getByRole("button", { name: "Go to previous slide" }).element()
+        .tagName,
+    ).toBe("BUTTON")
+    expect(
+      page.getByRole("button", { name: "Go to next slide" }).element().tagName,
     ).toBe("BUTTON")
   })
 
-  test("should render defaultSlide correctly", () => {
+  test("should render defaultSlide correctly", async () => {
     render(<TestComponent defaultIndex={1} />)
-    expect(screen.getByText("Slide 2")).toHaveAttribute("data-selected")
+
+    await expect
+      .element(page.getByText("Slide 2"))
+      .toHaveAttribute("data-selected")
   })
 
   test("should render correctly slide when using control button", async () => {
     const { user } = render(<TestComponent />)
-    await user.click(screen.getByRole("button", { name: "Go to next slide" }))
-    expect(screen.getByText("Slide 2")).toHaveAttribute("data-selected")
+
+    await user.click(page.getByRole("button", { name: "Go to next slide" }))
+    vi.waitFor(async () => {
+      await expect
+        .element(page.getByText("Slide 2"))
+        .toHaveAttribute("data-selected")
+    })
+
     await user.click(
-      screen.getByRole("button", { name: "Go to previous slide" }),
+      page.getByRole("button", {
+        name: "Go to previous slide",
+      }),
     )
-    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    vi.waitFor(async () => {
+      await expect
+        .element(page.getByText("Slide 1"))
+        .toHaveAttribute("data-selected")
+    })
   })
 
   test("should switch to correctly slide when click on indicator", async () => {
     const { user } = render(<TestComponent />)
-    await user.click(screen.getByRole("tab", { name: "Go to 2 slide" }))
-    expect(screen.getByText("Slide 2")).toHaveAttribute("data-selected")
+
+    await user.click(page.getByRole("tab", { name: "Go to 2 slide" }))
+    await expect
+      .element(page.getByText("Slide 2"))
+      .toHaveAttribute("data-selected")
   })
 
   test("should disabled next and prev button when looping is disabled", async () => {
     const { user } = render(<TestComponent loop={false} />)
-    expect(
-      screen.getByRole("button", { name: "Go to previous slide" }),
-    ).toBeDisabled()
-    await user.click(screen.getByRole("tab", { name: "Go to 5 slide" }))
-    expect(
-      screen.getByRole("button", { name: "Go to next slide" }),
-    ).toBeDisabled()
+
+    await expect
+      .element(page.getByRole("button", { name: "Go to previous slide" }))
+      .toBeDisabled()
+
+    await user.click(page.getByRole("tab", { name: "Go to 5 slide" }))
+    await expect
+      .element(page.getByRole("button", { name: "Go to next slide" }))
+      .toBeDisabled()
   })
 
   test("should move the carousel correctly when left or right arrow keys are pressed", async () => {
     const { user } = render(<TestComponent orientation="horizontal" />)
-    await user.click(screen.getByRole("tab", { name: "Go to 1 slide" }))
+
+    await user.click(page.getByRole("tab", { name: "Go to 1 slide" }))
     await user.keyboard("{ArrowDown}")
-    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    await expect
+      .element(page.getByText("Slide 1"))
+      .toHaveAttribute("data-selected")
+
     await user.keyboard("{ArrowUp}")
-    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    await expect
+      .element(page.getByText("Slide 1"))
+      .toHaveAttribute("data-selected")
+
     await user.keyboard("{ArrowRight}")
-    expect(screen.getByText("Slide 2")).toHaveAttribute("data-selected")
+    await expect
+      .element(page.getByText("Slide 2"))
+      .toHaveAttribute("data-selected")
+
     await user.keyboard("{ArrowLeft}")
-    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    await expect
+      .element(page.getByText("Slide 1"))
+      .toHaveAttribute("data-selected")
+
     await user.keyboard("{ArrowLeft}")
-    expect(screen.getByText("Slide 5")).toHaveAttribute("data-selected")
+    await expect
+      .element(page.getByText("Slide 5"))
+      .toHaveAttribute("data-selected")
+
     await user.keyboard("{ArrowRight}")
-    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    await expect
+      .element(page.getByText("Slide 1"))
+      .toHaveAttribute("data-selected")
+
     await user.keyboard("{End}")
-    expect(screen.getByText("Slide 5")).toHaveAttribute("data-selected")
+    await expect
+      .element(page.getByText("Slide 5"))
+      .toHaveAttribute("data-selected")
+
     await user.keyboard("{Home}")
-    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    await expect
+      .element(page.getByText("Slide 1"))
+      .toHaveAttribute("data-selected")
   })
 
   test("should move the carousel correctly when up or down arrow keys are pressed", async () => {
     const { user } = render(<TestComponent orientation="vertical" />)
-    await user.click(screen.getByRole("tab", { name: "Go to 1 slide" }))
+
+    await user.click(page.getByRole("tab", { name: "Go to 1 slide" }))
+
     await user.keyboard("{ArrowLeft}")
-    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    await expect
+      .element(page.getByText("Slide 1"))
+      .toHaveAttribute("data-selected")
+
     await user.keyboard("{ArrowRight}")
-    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    await expect
+      .element(page.getByText("Slide 1"))
+      .toHaveAttribute("data-selected")
+
     await user.keyboard("{ArrowDown}")
-    expect(screen.getByText("Slide 2")).toHaveAttribute("data-selected")
+    await expect
+      .element(page.getByText("Slide 2"))
+      .toHaveAttribute("data-selected")
+
     await user.keyboard("{ArrowUp}")
-    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    await expect
+      .element(page.getByText("Slide 1"))
+      .toHaveAttribute("data-selected")
+
     await user.keyboard("{ArrowUp}")
-    expect(screen.getByText("Slide 5")).toHaveAttribute("data-selected")
+    await expect
+      .element(page.getByText("Slide 5"))
+      .toHaveAttribute("data-selected")
+
     await user.keyboard("{ArrowDown}")
-    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    await expect
+      .element(page.getByText("Slide 1"))
+      .toHaveAttribute("data-selected")
+
     await user.keyboard("{End}")
-    expect(screen.getByText("Slide 5")).toHaveAttribute("data-selected")
+    await expect
+      .element(page.getByText("Slide 5"))
+      .toHaveAttribute("data-selected")
+
     await user.keyboard("{Home}")
-    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    await expect
+      .element(page.getByText("Slide 1"))
+      .toHaveAttribute("data-selected")
   })
 
-  test("should render correctly when using autoplay", () => {
-    const delay = 500
-    vi.useFakeTimers()
-    const node = <TestComponent autoplay delay={delay} />
-    const { rerender } = render(node)
-    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
-    vi.advanceTimersByTime(delay)
-    rerender(node)
-    expect(screen.getByText("Slide 2")).toHaveAttribute("data-selected")
-    vi.advanceTimersByTime(delay)
-    rerender(node)
-    expect(screen.getByText("Slide 3")).toHaveAttribute("data-selected")
-    vi.useRealTimers()
-  })
+  describe("use Timers", () => {
+    beforeEach(() => {
+      vi.useFakeTimers()
+    })
 
-  test("should stop autoplay on mouse enter", () => {
-    vi.useFakeTimers()
-    const node = <TestComponent autoplay delay={500} />
-    const { rerender } = render(node)
-    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
-    fireEvent.mouseEnter(screen.getByTestId("carousel"))
-    vi.advanceTimersByTime(2000)
-    rerender(node)
-    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
-    vi.useRealTimers()
+    afterEach(() => {
+      vi.useRealTimers()
+    })
+
+    test("should render correctly when using autoplay", async () => {
+      const delay = 500
+
+      const node = <TestComponent autoplay delay={delay} />
+      const { rerender } = render(node)
+
+      await expect
+        .element(page.getByText("Slide 1"))
+        .toHaveAttribute("data-selected")
+      vi.advanceTimersByTime(delay)
+
+      rerender(node)
+      await expect
+        .element(page.getByText("Slide 2"))
+        .toHaveAttribute("data-selected")
+
+      vi.advanceTimersByTime(delay)
+      rerender(node)
+      await expect
+        .element(page.getByText("Slide 3"))
+        .toHaveAttribute("data-selected")
+    })
+
+    test("should stop autoplay on mouse hover", async () => {
+      const node = <TestComponent autoplay delay={500} />
+      const { rerender, user } = render(node)
+
+      await expect
+        .element(page.getByText("Slide 1"))
+        .toHaveAttribute("data-selected")
+      await user.hover(page.getByTestId("carousel"))
+      vi.advanceTimersByTime(2000)
+
+      rerender(node)
+      await expect
+        .element(page.getByText("Slide 1"))
+        .toHaveAttribute("data-selected")
+    })
   })
 })

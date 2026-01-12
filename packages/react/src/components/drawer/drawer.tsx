@@ -381,6 +381,7 @@ export const ShorthandDrawerContent: FC<ShorthandDrawerContentProps> = ({
   const customBody = wrapOrPassProps(DrawerBody, body)
   const customFooter = wrapOrPassProps(DrawerFooter, footer)
   const customCancel = wrapOrPassProps(Button, cancel, {
+    colorScheme: "mono",
     variant: "ghost",
     onClick: () => (onCancel ? onCancel(onClose) : onClose()),
   })

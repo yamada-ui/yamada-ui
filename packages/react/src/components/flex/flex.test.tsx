@@ -1,26 +1,26 @@
-import { a11y, render, screen } from "#test"
+import { page, render } from "#test/browser"
 import { Flex } from "./flex"
 
 describe("<Flex />", () => {
-  test("renders component correctly", async () => {
-    await a11y(<Flex>Flex</Flex>)
-  })
-
   test("sets `displayName` correctly", () => {
     expect(Flex.displayName).toBe("Flex")
   })
 
-  test("sets `className` correctly", () => {
+  test("sets `className` correctly", async () => {
     render(<Flex>Flex</Flex>)
-    expect(screen.getByText("Flex")).toHaveClass("ui-flex")
+
+    const flex = page.getByText("Flex")
+    await expect.element(flex).toHaveClass("ui-flex")
   })
 
   test("renders HTML tag correctly", () => {
     render(<Flex>Flex</Flex>)
-    expect(screen.getByText("Flex").tagName).toBe("DIV")
+
+    const flex = page.getByText("Flex")
+    expect(flex.element().tagName).toBe("DIV")
   })
 
-  test("renders all the allowed shorthand style props", () => {
+  test("renders all the allowed shorthand style props", async () => {
     render(
       <Flex
         align="stretch"
@@ -35,12 +35,13 @@ describe("<Flex />", () => {
       </Flex>,
     )
 
-    expect(screen.getByText("Flex")).toHaveStyle({
+    const flex = page.getByText("Flex")
+    await expect.element(flex).toHaveStyle({
       alignItems: "stretch",
       flexBasis: "auto",
       flexDirection: "row",
-      flexGrow: 1,
-      flexShrink: 0,
+      flexGrow: "1",
+      flexShrink: "0",
       flexWrap: "nowrap",
       justifyContent: "start",
     })

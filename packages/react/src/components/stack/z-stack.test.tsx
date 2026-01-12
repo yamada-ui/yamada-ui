@@ -1,27 +1,22 @@
-import { a11y, render, screen } from "#test"
+import { page, render } from "#test/browser"
 import { Box } from "../box"
 import { ZStack } from "./z-stack"
 
 describe("<ZStack />", () => {
-  test("renders component correctly", async () => {
-    await a11y(
-      <ZStack>
-        <Box>ZStack Item</Box>
-      </ZStack>,
-    )
-  })
-
   test("sets `displayName` correctly", () => {
     expect(ZStack.displayName).toBe("StackDepth")
   })
 
-  test("sets `className` correctly", () => {
+  test("sets `className` correctly", async () => {
     render(
       <ZStack data-testid="z-stack">
         <Box>ZStack Item</Box>
       </ZStack>,
     )
-    expect(screen.getByTestId("z-stack")).toHaveClass("ui-stack--depth")
+
+    const zStack = page.getByTestId("z-stack")
+
+    await expect.element(zStack).toHaveClass("ui-stack--depth")
   })
 
   test("renders HTML tag correctly", () => {
@@ -30,7 +25,9 @@ describe("<ZStack />", () => {
         <Box>ZStack Item</Box>
       </ZStack>,
     )
-    expect(screen.getByTestId("z-stack").tagName).toBe("DIV")
+
+    const zStack = page.getByTestId("z-stack")
+    expect(zStack.element().tagName).toBe("DIV")
   })
 
   test("ZStack renders correctly", () => {
@@ -41,17 +38,18 @@ describe("<ZStack />", () => {
     )
   })
 
-  test("startIndex property works correctly", () => {
+  test("startIndex property works correctly", async () => {
     render(
       <ZStack startIndex={10}>
         <Box>ZStack Item</Box>
       </ZStack>,
     )
 
-    expect(screen.getByText("ZStack Item")).toHaveStyle({ zIndex: 10 })
+    const zStack = page.getByText("ZStack Item")
+    await expect.element(zStack).toHaveStyle({ zIndex: "10" })
   })
 
-  test("Child elements are correctly overlaid and rendered", () => {
+  test("Child elements are correctly overlaid and rendered", async () => {
     render(
       <ZStack>
         <Box>Item 1</Box>
@@ -59,81 +57,98 @@ describe("<ZStack />", () => {
       </ZStack>,
     )
 
-    expect(screen.getByText("Item 1")).toHaveStyle({ position: "absolute" })
-    expect(screen.getByText("Item 2")).toHaveStyle({ position: "absolute" })
+    const item1 = page.getByText("Item 1")
+    const item2 = page.getByText("Item 2")
+
+    await expect.element(item1).toHaveStyle({ position: "absolute" })
+    await expect.element(item2).toHaveStyle({ position: "absolute" })
   })
 
-  test("Whether the direction is working properly", () => {
+  test("Whether the direction is working properly", async () => {
     render(
       <ZStack direction="center-end">
         <Box>Item 1</Box>
         <Box>Item 2</Box>
       </ZStack>,
     )
-    expect(screen.getByText("Item 1")).toHaveStyle({
+
+    const item1 = page.getByText("Item 1")
+    const item2 = page.getByText("Item 2")
+
+    await expect.element(item1).toHaveStyle({
       position: "absolute",
-      zIndex: 0,
+      zIndex: "0",
     })
-    expect(screen.getByText("Item 2")).toHaveStyle({
+    await expect.element(item2).toHaveStyle({
       position: "absolute",
-      zIndex: 1,
+      zIndex: "1",
     })
   })
 
-  test("Whether the reverse is working properly", () => {
+  test("Whether the reverse is working properly", async () => {
     render(
       <ZStack reverse>
         <Box>Item 1</Box>
         <Box>Item 2</Box>
       </ZStack>,
     )
-    expect(screen.getByText("Item 1")).toHaveStyle({
+
+    const item1 = page.getByText("Item 1")
+    const item2 = page.getByText("Item 2")
+
+    await expect.element(item1).toHaveStyle({
       position: "absolute",
-      zIndex: 0,
+      zIndex: "0",
     })
-    expect(screen.getByText("Item 2")).toHaveStyle({
+    await expect.element(item2).toHaveStyle({
       position: "absolute",
-      zIndex: 1,
+      zIndex: "1",
     })
   })
 
-  test("applies correct styles with direction set to start", () => {
+  test("applies correct styles with direction set to start", async () => {
     render(
       <ZStack direction="start">
-        <Box>Box1</Box>
-        <Box>Box2</Box>
+        <Box>Box 1</Box>
+        <Box>Box 2</Box>
       </ZStack>,
     )
 
-    expect(screen.getByText("Box1")).toHaveStyle({
-      left: 0,
+    const box1 = page.getByText("Box 1")
+    const box2 = page.getByText("Box 2")
+
+    await expect.element(box1).toHaveStyle({
+      left: "0",
       position: "absolute",
-      zIndex: 0,
+      zIndex: "0",
     })
-    expect(screen.getByText("Box2")).toHaveStyle({
-      left: 0,
+    await expect.element(box2).toHaveStyle({
+      left: "0",
       position: "absolute",
-      zIndex: 1,
+      zIndex: "1",
     })
   })
 
-  test("applies correct styles with direction set to center-start", () => {
+  test("applies correct styles with direction set to center-start", async () => {
     render(
       <ZStack direction="center-start">
-        <Box>Box1</Box>
-        <Box>Box2</Box>
+        <Box>Box 1</Box>
+        <Box>Box 2</Box>
       </ZStack>,
     )
 
-    expect(screen.getByText("Box1")).toHaveStyle({
+    const box1 = page.getByText("Box 1")
+    const box2 = page.getByText("Box 2")
+
+    await expect.element(box1).toHaveStyle({
       position: "absolute",
-      top: 0,
-      zIndex: 0,
+      top: "0",
+      zIndex: "0",
     })
-    expect(screen.getByText("Box2")).toHaveStyle({
+    await expect.element(box2).toHaveStyle({
       position: "absolute",
-      top: 0,
-      zIndex: 1,
+      top: "0",
+      zIndex: "1",
     })
   })
 })

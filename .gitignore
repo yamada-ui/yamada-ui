@@ -38,6 +38,7 @@ next-env.d.ts
 .eslintcache
 .turbo
 .next
+.react-router
 
 # dotenv environment variables file
 .env

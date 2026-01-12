@@ -75,39 +75,32 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   storageKey = COLOR_MODE_STORAGE_KEY,
 }) => {
   const storageManager = useMemo(
-    () => createStorageManager(storage, storageKey, defaultColorMode, cookie),
+    () =>
+      createStorageManager<ColorModeWithSystem, ColorMode>(
+        storage,
+        storageKey,
+        defaultColorMode,
+        cookie,
+      ),
     [cookie, defaultColorMode, storage, storageKey],
   )
   const environment = useEnvironment()
-  const { getDocument, getWindow } = environment
-  const [colorMode, setColorMode] = useState<ColorModeWithSystem>(
-    storageManager.get(),
-  )
-  const systemColorMode = useSystemColorMode({
+  const { getDocument } = environment
+  const [internalColorMode, setInternalColorMode] =
+    useState<ColorModeWithSystem>(storageManager.get())
+  const { getSystemColorMode, systemColorMode } = useSystemColorMode({
     callback: (systemColorMode) => {
-      if (colorMode !== "system") return
+      if (internalColorMode !== "system") return
 
       setClassName(systemColorMode === "dark")
       setDataset(systemColorMode)
     },
+    defaultColorMode: storageManager.default(
+      defaultColorMode === "dark" ? "dark" : "light",
+    ),
   })
-  const computedColorMode = defaultColorMode === "dark" ? "dark" : "light"
-  const resolvedColorMode =
-    colorMode === "system"
-      ? systemColorMode
-        ? systemColorMode
-        : computedColorMode
-      : colorMode
-
-  const getSystemColorMode = useCallback(
-    (fallback?: ColorMode) => {
-      const mql = getWindow()?.matchMedia("(prefers-color-scheme: dark)")
-      const dark = mql?.matches ?? fallback === "dark"
-
-      return dark ? "dark" : "light"
-    },
-    [getWindow],
-  )
+  const colorMode =
+    internalColorMode === "system" ? systemColorMode : internalColorMode
 
   const setDataset = useCallback(
     (colorMode: ColorMode) => {
@@ -140,40 +133,43 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   )
 
   const changeColorMode = useCallback(
-    (colorMode: ColorModeWithSystem): void => {
-      const resolved = colorMode === "system" ? getSystemColorMode() : colorMode
+    (internalColorMode: ColorModeWithSystem) => {
+      const colorMode =
+        internalColorMode === "system"
+          ? getSystemColorMode()
+          : internalColorMode
 
-      setColorMode(colorMode)
-      setClassName(resolved === "dark")
-      setDataset(resolved)
+      setInternalColorMode(internalColorMode)
+      setClassName(colorMode === "dark")
+      setDataset(colorMode)
 
-      storageManager.set(colorMode)
+      storageManager.set(internalColorMode)
     },
     [storageManager, getSystemColorMode, setClassName, setDataset],
   )
 
-  const toggleColorMode = useCallback((): void => {
-    changeColorMode(resolvedColorMode === "dark" ? "light" : "dark")
-  }, [changeColorMode, resolvedColorMode])
+  const toggleColorMode = useCallback(() => {
+    changeColorMode(colorMode === "dark" ? "light" : "dark")
+  }, [changeColorMode, colorMode])
 
   useEffect(() => {
-    const colorMode = storageManager.get()
+    const internalColorMode = storageManager.get()
 
-    changeColorMode(colorMode)
+    changeColorMode(internalColorMode)
   }, [changeColorMode, storageManager])
 
   const context = useMemo(
     () => ({
       changeColorMode: forcedColorMode ? noop : changeColorMode,
-      colorMode: forcedColorMode ?? resolvedColorMode,
+      colorMode: forcedColorMode ?? colorMode,
       forced: forcedColorMode !== undefined,
-      internalColorMode: colorMode,
+      internalColorMode,
       toggleColorMode: forcedColorMode ? noop : toggleColorMode,
     }),
     [
       forcedColorMode,
-      resolvedColorMode,
       colorMode,
+      internalColorMode,
       changeColorMode,
       toggleColorMode,
     ],

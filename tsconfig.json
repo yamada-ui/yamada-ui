@@ -1,21 +1,10 @@
 {
   "extends": "@yamada-ui/workspace/typescript/tsconfig.json",
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "#storybook": ["packages/react/storybook"],
-      "#test": ["packages/react/test"]
-    }
-  },
   "include": [
     "scripts/**/*.ts",
     "scripts/**/*.tsx",
     "scripts/**/*.mts",
     "scripts/**/*.cts",
-    "packages/**/*.ts",
-    "packages/**/*.tsx",
-    "packages/**/*.mts",
-    "packages/**/*.cts",
     "eslint.config.ts"
   ],
   "exclude": ["node_modules"]

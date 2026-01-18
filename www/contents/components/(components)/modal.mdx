@@ -581,4 +581,28 @@ To disable (hide) the modal's close button, set `withCloseButton` to `false`.
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+The `Modal` follows the [WAI-ARIA - Dialog (Modal) Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) for accessibility.
+
+### Keyboard Navigation
+
+| Key             | Description                                                                                                                 | State                               |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| `Tab`           | Focuses the next non-disabled element inside the modal. If on the last element, focuses the first non-disabled element.     | `open={true}`                       |
+| `Shift` + `Tab` | Focuses the previous non-disabled element inside the modal. If on the first element, focuses the last non-disabled element. | `open={true}`                       |
+| `Escape`        | Closes the modal.                                                                                                           | `open={true}` + `closeOnEsc={true}` |
+
+### ARIA Roles and Attributes
+
+| Component            | Roles and Attributes       | Usage                                                                 |
+| -------------------- | -------------------------- | --------------------------------------------------------------------- |
+| `Modal.Content`      | `role="dialog"`            | Indicates that this is a dialog.                                      |
+|                      | `aria-modal="true"`        | Indicates that the displayed widget is modal.                         |
+|                      | `aria-labelledby`          | Sets to the `id` of `Modal.Title`.                                    |
+|                      | `aria-describedby`         | Sets to the `id` of `Modal.Body`.                                     |
+| `Modal.OpenTrigger`  | `aria-haspopup`            | Sets to `"dialog"`.                                                   |
+|                      | `aria-expanded`            | Sets to `"true"` if the modal is open, and `"false"` if it is closed. |
+|                      | `aria-controls`            | If the modal is open, sets to the `id` of `Modal.Content`.            |
+|                      | `aria-label="Open modal"`  | Sets to `"Open modal"`.                                               |
+| `Modal.CloseButton`  | `aria-label="Close modal"` | Sets to `"Close modal"`.                                              |
+| `Modal.CloseTrigger` | `aria-label="Close modal"` | Sets to `"Close modal"`.                                              |
+| `Modal.Overlay`      | `aria-hidden`              | Excludes the element from the accessibility tree.                     |

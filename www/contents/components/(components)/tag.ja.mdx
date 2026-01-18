@@ -108,6 +108,14 @@ return <Tag onClose={onClose}>Tag</Tag>
 
 ## アクセシビリティ
 
+`Tag`は、`onClose`が設定されると閉じるボタンを表示します。この閉じるボタンの`aria-label`は、デフォルトで`"タグを閉じる"`を設定しています。もし、`aria-label`を任意の値に変更したい場合は、`closeButtonProps`に`aria-label`を設定します。
+
+```tsx
+<Tag onClose={() => {}} closeButtonProps={{ "aria-label": "Close custom tag" }}>
+  Tag
+</Tag>
+```
+
 ### キーボード操作
 
 | キー             | 説明                                       | 状態             |
@@ -117,9 +125,8 @@ return <Tag onClose={onClose}>Tag</Tag>
 
 ### ARIAロールと属性
 
-| コンポーネント               | ロールと属性    | 使い方                                                 |
-| ---------------------------- | --------------- | ------------------------------------------------------ |
-| `TagCloseButton`             | `role="button"` | 閉じるボタンであることを示します。                     |
-|                              | `aria-label`    | `"タグを閉じる"`を設定します。                         |
-|                              | `aria-disabled` | `disabled`が設定されている場合は`"true"`を設定します。 |
-| `TagStartIcon`, `TagEndIcon` | `aria-hidden`   | 要素をアクセシビリティツリーから除外します。           |
+| コンポーネント   | ロールと属性    | 使い方                                                 |
+| ---------------- | --------------- | ------------------------------------------------------ |
+| `TagCloseButton` | `role="button"` | 閉じるボタンであることを示します。                     |
+|                  | `aria-label`    | `"タグを閉じる"`を設定します。                         |
+|                  | `aria-disabled` | `disabled`が設定されている場合は`"true"`を設定します。 |

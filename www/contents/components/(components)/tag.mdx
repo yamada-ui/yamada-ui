@@ -108,6 +108,14 @@ return <Tag onClose={onClose}>Tag</Tag>
 
 ## Accessibility
 
+`Tag` displays a close button when `onClose` is set. The `aria-label` of this close button is set to `"Close tag"` by default. If you want to change the `aria-label` to a custom value, set the `aria-label` in `closeButtonProps`.
+
+```tsx
+<Tag onClose={() => {}} closeButtonProps={{ "aria-label": "Close custom tag" }}>
+  Tag
+</Tag>
+```
+
 ### Keyboard Navigation
 
 | Key              | Description                        | State            |
@@ -117,9 +125,8 @@ return <Tag onClose={onClose}>Tag</Tag>
 
 ### ARIA Roles and Attributes
 
-| Component                    | Roles and Attributes | Usage                                             |
-| ---------------------------- | -------------------- | ------------------------------------------------- |
-| `TagCloseButton`             | `role="button"`      | Indicates that this is a close button.            |
-|                              | `aria-label`         | Sets to `"Close tag"`.                            |
-|                              | `aria-disabled`      | Sets to `"true"` if `disabled` is set.            |
-| `TagStartIcon`, `TagEndIcon` | `aria-hidden`        | Excludes the element from the accessibility tree. |
+| Component        | Roles and Attributes | Usage                                  |
+| ---------------- | -------------------- | -------------------------------------- |
+| `TagCloseButton` | `role="button"`      | Indicates that this is a close button. |
+|                  | `aria-label`         | Sets to `"Close tag"`.                 |
+|                  | `aria-disabled`      | Sets to `"true"` if `disabled` is set. |

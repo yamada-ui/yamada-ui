@@ -1,5 +1,6 @@
 import { isArray, isNumber, isObject, isUndefined } from "./assertion"
 import { noop } from "./function"
+import { cx } from "./string"
 
 export function createdDom(): boolean {
   return !!(
@@ -28,16 +29,16 @@ export function getUserAgent(): string {
   return navigator.userAgent
 }
 
-export function vendor(v: RegExp, fallback = false): boolean {
-  return createdDom() ? v.test(navigator.vendor) : fallback
+export function vendor(value: RegExp, fallback = false): boolean {
+  return createdDom() ? value.test(navigator.vendor) : fallback
 }
 
-export function platform(v: RegExp, fallback = false): boolean {
-  return createdDom() ? v.test(getPlatform()) : fallback
+export function platform(value: RegExp, fallback = false): boolean {
+  return createdDom() ? value.test(getPlatform()) : fallback
 }
 
-export function userAgent(v: RegExp, fallback = false): boolean {
-  return createdDom() ? v.test(getUserAgent()) : fallback
+export function userAgent(value: RegExp, fallback = false): boolean {
+  return createdDom() ? value.test(getUserAgent()) : fallback
 }
 
 export function isMac(fallback = false): boolean {
@@ -450,17 +451,20 @@ export function getFirstFocusableElement(
   return first || null
 }
 
-export function setAttribute(el: Element, attr: string, v: string) {
-  const prev = el.getAttribute(attr)
-  const exists = prev != null
+export function setAttribute(
+  el: Element,
+  qualifiedName: string,
+  value: string,
+) {
+  const prev = el.getAttribute(qualifiedName)
 
-  el.setAttribute(attr, v)
+  el.setAttribute(qualifiedName, cx(prev, value))
 
   return () => {
-    if (!exists) {
-      el.removeAttribute(attr)
+    if (!prev) {
+      el.removeAttribute(qualifiedName)
     } else {
-      el.setAttribute(attr, prev)
+      el.setAttribute(qualifiedName, prev)
     }
   }
 }

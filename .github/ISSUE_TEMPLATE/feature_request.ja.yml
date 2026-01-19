@@ -1,6 +1,7 @@
 name: "Feature Request (日本語)"
 description: "機能や強化をリクエストします。"
-labels: ["triage", "enhancement"]
+labels: ["triage"]
+type: Feature
 body:
   - type: markdown
     attributes:

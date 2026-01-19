@@ -195,4 +195,24 @@ return <Pagination.Root page={page} total={10} onChange={onChange} />
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+### Keyboard Navigation
+
+| Key              | Description                              | State |
+| ---------------- | ---------------------------------------- | ----- |
+| `Tab`            | Moves focus to the next page button.     | -     |
+| `Shift + Tab`    | Moves focus to the previous page button. | -     |
+| `Enter`, `Space` | Activates the focused page button.       | -     |
+
+### ARIA Roles and Attributes
+
+| Component                 | Roles and Attributes  | Usage                                                          |
+| ------------------------- | --------------------- | -------------------------------------------------------------- |
+| `Pagination.Root`         | `role="navigation"`   | Indicates that this is a navigation region between pages.      |
+|                           | `aria-label`          | Sets to `"Pagination"`.                                        |
+| `Pagination.Item`         | `aria-label`          | Sets to `"Go to page {value}"` for page number buttons.        |
+|                           | `aria-current="page"` | Sets to the current page number button.                        |
+|                           | `role="presentation"` | Indicates that this is a presentation for page number buttons. |
+| `Pagination.PrevTrigger`  | `aria-label`          | Sets to `"Go to previous page"`.                               |
+| `Pagination.NextTrigger`  | `aria-label`          | Sets to `"Go to next page"`.                                   |
+| `Pagination.StartTrigger` | `aria-label`          | Sets to `"Go to first page"`.                                  |
+| `Pagination.EndTrigger`   | `aria-label`          | Sets to `"Go to last page"`.                                   |

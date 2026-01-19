@@ -135,6 +135,10 @@ export const attributes = {
    */
   _numeric: "&[data-numeric]",
   /**
+   * The CSS `&:is([open], [data-open])` attribute selector.
+   */
+  _open: "&:is([open], [data-open])",
+  /**
    * The CSS `&:is([data-pressed], [aria-pressed=true])` attribute selector.
    */
   _pressed: "&:is([data-pressed], [aria-pressed=true])",
@@ -204,6 +208,10 @@ export const pseudoElements = {
    * The CSS `&::cue-region` pseudo-element.
    */
   _cueRegion: "&::cue-region",
+  /**
+   * The CSS `&::details-content` pseudo-element.
+   */
+  _detailsContent: "&::details-content",
   /**
    * The CSS `&::file-selector-button` pseudo-element.
    */

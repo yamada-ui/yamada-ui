@@ -56,12 +56,14 @@ export const nativeAccordionStyle = defineComponentSlotStyle({
     animate: {
       true: {
         item: {
-          "&::details-content": {
+          _detailsContent: {
             opacity: 0,
             transition: "content-visibility 0.4s allow-discrete, opacity 0.4s",
           },
-          "&[open]::details-content": {
-            opacity: 1,
+          _open: {
+            _detailsContent: {
+              opacity: 1,
+            },
           },
         },
         panel: {

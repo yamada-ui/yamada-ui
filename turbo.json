@@ -1,12 +1,26 @@
 {
-  "$schema": "https://turborepo.org/schema.json",
+  "$schema": "https://turborepo.dev/schema.v2.json",
   "tasks": {
-    "build": { "dependsOn": ["^build"], "outputs": ["dist/**"] },
-    "test": { "cache": false },
-    "test:coverage": { "cache": false },
-    "typecheck": { "cache": false },
-    "lint": { "cache": false },
-    "format": { "cache": false }
+    "transit": { "dependsOn": ["^transit"] },
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "test": {
+      "dependsOn": ["build"]
+    },
+    "test:coverage": {
+      "dependsOn": ["build"]
+    },
+    "typecheck": {
+      "dependsOn": ["transit"]
+    },
+    "lint": {
+      "dependsOn": ["transit"]
+    },
+    "format": {
+      "dependsOn": ["transit"]
+    }
   },
   "globalDependencies": ["tsconfig.json"]
 }

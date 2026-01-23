@@ -2,7 +2,6 @@
 
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { QrCodeStyle } from "./qr-code.style"
-
 import { useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { qrCodeStyle } from "./qr-code.style"

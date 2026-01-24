@@ -1146,4 +1146,62 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+The `Autocomplete` follows the [WAI-ARIA - Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox) for accessibility.
+
+If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Autocomplete.Root`.
+
+```tsx
+<Autocomplete.Root aria-label="Select a digimon" placeholder="Select a digimon">
+  <Autocomplete.Option value="アグモン">アグモン</Autocomplete.Option>
+  <Autocomplete.Option value="ガブモン">ガブモン</Autocomplete.Option>
+  <Autocomplete.Option value="テントモン">テントモン</Autocomplete.Option>
+</Autocomplete.Root>
+```
+
+```tsx
+<VStack gap="sm">
+  <Text as="h3" id="label">
+    Digimon
+  </Text>
+
+  <Autocomplete.Root aria-labelledby="label" placeholder="Select a digimon">
+    <Autocomplete.Option value="アグモン">アグモン</Autocomplete.Option>
+    <Autocomplete.Option value="ガブモン">ガブモン</Autocomplete.Option>
+    <Autocomplete.Option value="テントモン">テントモン</Autocomplete.Option>
+  </Autocomplete.Root>
+</VStack>
+```
+
+### Keyboard Navigation
+
+| Key         | Description                                                                                                      | State               |
+| ----------- | ---------------------------------------------------------------------------------------------------------------- | ------------------- |
+| `ArrowDown` | Focuses the next item that is not disabled. When the last item, focuses the first item that is not disabled.     | -                   |
+| `ArrowUp`   | Focuses the previous item that is not disabled. When the first item, focuses the last item that is not disabled. | -                   |
+| `Enter`     | Selects the focused item. When there is no focused item and the input has text, selects the first matching item. | -                   |
+| `Home`      | When the listbox is open, focuses the first item that is not disabled.                                           | -                   |
+| `End`       | When the listbox is open, focuses the last item that is not disabled.                                            | -                   |
+| `Escape`    | Closes the listbox.                                                                                              | `closeOnEsc={true}` |
+| `Backspace` | Removes the last selected value when the input is empty.                                                         | `multiple={true}`   |
+
+### ARIA Roles and Attributes
+
+| Component             | Roles and Attributes       | Usage                                                                                                           |
+| --------------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `Autocomplete.Root`   | `role="combobox"`          | Indicates that this is a combobox.                                                                              |
+|                       | `aria-expanded`            | Sets to `"true"` when the listbox is open, and `"false"` when it is closed.                                     |
+|                       | `aria-haspopup="listbox"`  | Indicates that there is a listbox.                                                                              |
+|                       | `aria-controls`            | Sets the `id` of the listbox when open, and is not set when closed.                                             |
+|                       | `aria-activedescendant`    | Sets the `id` of the focused item.                                                                              |
+|                       | `aria-disabled`            | Sets to `"true"` when `disabled` or `readOnly` is set.                                                          |
+|                       | `aria-labelledby`          | If `Autocomplete.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id`. |
+| `AutocompleteContent` | `role="listbox"`           | Indicates that this is a listbox.                                                                               |
+| `Autocomplete.Option` | `role="option"`            | Indicates that this is an option.                                                                               |
+|                       | `aria-selected`            | Sets to `"true"` when the option is selected.                                                                   |
+|                       | `aria-disabled`            | Sets to `"true"` when `disabled` is set.                                                                        |
+| `Autocomplete.Group`  | `role="group"`             | Indicates that this is a group of options.                                                                      |
+|                       | `aria-labelledby`          | Sets the `id` of the group label.                                                                               |
+| `Autocomplete.Label`  | `role="presentation"`      | Indicates that this is presentational.                                                                          |
+| `AutocompleteIcon`    | `role="button"`            | When `clearable` and has a value, indicates that this is a button.                                              |
+|                       | `aria-label="Clear value"` | Sets to `"Clear value"`.                                                                                        |
+|                       | `aria-disabled`            | Sets to `"true"` when `disabled` or `readOnly` is set.                                                          |

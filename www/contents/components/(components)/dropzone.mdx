@@ -386,4 +386,41 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Dropzone.Root`.
+
+```tsx
+<Dropzone.Root aria-label="Upload file">
+  <Text>Drag file here or click to select file</Text>
+</Dropzone.Root>
+```
+
+```tsx
+<VStack gap="sm">
+  <Text as="h3" id="label">
+    Upload file
+  </Text>
+
+  <Dropzone.Root aria-labelledby="label">
+    <Text>Drag file here or click to select file</Text>
+  </Dropzone.Root>
+</VStack>
+```
+
+### Keyboard Navigation
+
+| Key              | Description                      | State |
+| ---------------- | -------------------------------- | ----- |
+| `Space`, `Enter` | Opens the file selection dialog. | -     |
+
+### ARIA Roles and Attributes
+
+| Component       | Roles and Attributes  | Usage                                                                                                                                                                 |
+| --------------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Dropzone.Root` | `role="presentation"` | Indicates that this is a presentation.                                                                                                                                |
+|                 | `aria-disabled`       | Sets to `"true"` when `disabled`, `readOnly`, or `loading` is set.                                                                                                    |
+| `input`         | `aria-labelledby`     | Sets the `id` of the associated `Dropzone.Root`.                                                                                                                      |
+|                 | `aria-disabled`       | Sets to `"true"` when `disabled` is set.                                                                                                                              |
+|                 | `aria-invalid`        | Sets to `"true"` when `invalid` is set.                                                                                                                               |
+|                 | `aria-readonly`       | Sets to `"true"` when `readOnly` is set.                                                                                                                              |
+|                 | `aria-required`       | Sets to `"true"` when `required` is set.                                                                                                                              |
+|                 | `aria-describedby`    | If `Dropzone.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |

@@ -102,4 +102,17 @@ To create color swatch containing multiple colors, use `ColorSwatchGroup`.
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+If you set `aria-label`, it will be read by screen readers.
+
+```tsx
+<ColorSwatch color="#4387f4" aria-label="Blue" />
+```
+
+### ARIA Roles and Attributes
+
+| Component          | Roles and Attributes                  | Usage                            |
+| ------------------ | ------------------------------------- | -------------------------------- |
+| `ColorSwatch`      | `role="img"`                          | Indicates that this is an image. |
+|                    | `aria-roledescription="color swatch"` | Sets to `"color swatch"`.        |
+|                    | `aria-label`                          | Sets to the `color` value.       |
+| `ColorSwatchGroup` | `aria-label="color swatch group"`     | Sets to `"color swatch group"`.  |

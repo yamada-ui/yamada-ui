@@ -339,4 +339,9 @@ To customize the content, use `Fieldset.Content`.
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+### ARIA Roles and Attributes
+
+| Component                | Roles and Attributes | Usage                                              |
+| ------------------------ | -------------------- | -------------------------------------------------- |
+| `Fieldset.HelperMessage` | `aria-describedby`   | Sets the `id` of the associated `Fieldset.Legend`. |
+| `Fieldset.ErrorMessage`  | `aria-live="polite"` | Indicates that it may be updated outside of focus. |

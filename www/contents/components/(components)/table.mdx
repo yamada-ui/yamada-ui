@@ -978,4 +978,56 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+The `Table` follows the [WAI-ARIA - Table Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/table/) for accessibility.
+
+Setting an `aria-label` on the `tableProps` allows it to be read by screen readers.
+
+```tsx
+const data = useMemo<Data[]>(() => createData(), [])
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    tableProps={{ "aria-label": "User list" }}
+  />
+)
+```
+
+### Keyboard Navigation
+
+| Key          | Description                                                                                           | State                     |
+| ------------ | ----------------------------------------------------------------------------------------------------- | ------------------------- |
+| `ArrowLeft`  | Moves focus one cell to the left.If focus is on the left-most cell in the row, focus does not move.   | -                         |
+| `ArrowRight` | Moves focus one cell to the right.If focus is on the right-most cell in the row, focus does not move. | -                         |
+| `ArrowUp`    | Moves focus one cell Up.If focus is on the top cell in the column, focus does not move.               | -                         |
+| `ArrowDown`  | Moves focus one cell down.If focus is on the bottom cell in the column, focus does not move.          | -                         |
+| `Home`       | Moves focus to the first cell in the row that contains focus.                                         | -                         |
+| `End`        | Moves focus to the last cell in the row that contains focus.                                          | -                         |
+| `PageUp`     | Move to the previous page.                                                                            | `enablePagination={true}` |
+| `PageDown`   | Move to the next page.                                                                                | `enablePagination={true}` |
+
+### ARIA Roles and Attributes
+
+| Component           | Role and Attributes    | Usage                                                                                                                                      |
+| ------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `NativeTable.Root`  | `role="grid"`          | Indicates that the element is a grid.                                                                                                      |
+|                     | `aria-rowcount`        | Indicates the total number of rows in the table.                                                                                           |
+|                     | `aria-colcount`        | Indicates the total number of columns in the table.                                                                                        |
+|                     | `aria-multiselectable` | Set to `"true"` if `enableRowSelection` is set.                                                                                            |
+| `NativeTable.Thead` | `role="rowgroup"`      | Indicates that the element is a rowgroup.                                                                                                  |
+| `NativeTable.Tr`    | `role="row"`           | Indicates that the element is a row.                                                                                                       |
+|                     | `aria-rowindex`        | Indicates which row the element is in the table.                                                                                           |
+|                     | `aria-disabled`        | When `enableRowSelection` is provided as a function, set `"true"` for rows that return `false`.                                            |
+|                     | `aria-selected`        | Set to `"true"` if the row is selected, `"false"` if not selected.                                                                         |
+| `NativeTable.Th`    | `role="columnheader"`  | Indicates that the element is a columnheader.                                                                                              |
+|                     | `aria-rowindex`        | Indicates which row the element is in the table.                                                                                           |
+|                     | `aria-colindex`        | Indicates which column the element is in the table.                                                                                        |
+|                     | `aria-sort`            | Set to `"ascending"` for ascending order, `"descending"` for descending order, and `"none"` if no order is specified.                      |
+| `NativeTable.Tbody` | `role="rowgroup"`      | Indicates that the element is a rowgroup.                                                                                                  |
+| `NativeTable.Td`    | `role="gridcell"`      | Indicates that the element is a gridcell.                                                                                                  |
+|                     | `aria-colindex`        | Indicates which column the element is in the table.                                                                                        |
+|                     | `aria-rowindex`        | Indicates which row the element is in the table.                                                                                           |
+| `NativeTable.Tfoot` | `role="rowgroup"`      | Indicates that the element is a rowgroup.                                                                                                  |
+| `Checkbox`          | `aria-label`           | Set to `"Select all rows"` for the header, and `"Select row"` for body rows.                                                               |
+| `SortingIcon`       | `aria-label`           | Set to `"Sort ascending"` for ascending order, `"Sort descending"` for descending order, and `"Clear sorting"` when no order is specified. |

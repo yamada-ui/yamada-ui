@@ -18,9 +18,9 @@ jobs:
         id: generate_signature
         run: |
           body='{"owner":"yamada-ui","repo":"yamada-ui"}'
-          echo "body=$body" >> $GITHUB_OUTPUT
-          signature=$(echo -n $body | openssl dgst -sha256 -hmac "${{ secrets.API_SECRET }}" | sed 's/^.* //')
-          echo "signature=$signature" >> $GITHUB_OUTPUT
+          echo "body=$body" >> "$GITHUB_OUTPUT"
+          signature=$(echo -n "$body" | openssl dgst -sha256 -hmac "${{ secrets.API_SECRET }}" | sed 's/^.* //')
+          echo "signature=$signature" >> "$GITHUB_OUTPUT"
 
       - name: Update issues and pull requests
         run: |

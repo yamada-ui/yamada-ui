@@ -460,7 +460,6 @@ export const useCarousel = ({
       onClick: handlerAll(props.onClick, () => carousel?.scrollPrev()),
       onPointerDownCapture: handlerAll(props.onPointerDownCapture, (e) => {
         e.preventDefault()
-        e.stopPropagation()
       }),
     }),
     [carousel, listId, orientation, t],
@@ -476,7 +475,6 @@ export const useCarousel = ({
       onClick: handlerAll(props.onClick, () => carousel?.scrollNext()),
       onPointerDownCapture: handlerAll(props.onPointerDownCapture, (e) => {
         e.preventDefault()
-        e.stopPropagation()
       }),
     }),
     [carousel, listId, orientation, t],
@@ -516,6 +514,9 @@ export const useCarousel = ({
             carousel?.scrollTo(indexProp),
           ),
           onKeyDown: handlerAll(props.onKeyDown, onKeyDown(indexProp)),
+          onPointerDownCapture: handlerAll(props.onPointerDownCapture, (e) => {
+            e.preventDefault()
+          }),
         }
       },
       [index, listId, t, orientation, onKeyDown, carousel],

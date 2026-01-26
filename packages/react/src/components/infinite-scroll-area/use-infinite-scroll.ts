@@ -228,6 +228,17 @@ export const useInfiniteScroll = <Y extends HTMLElement = HTMLDivElement>({
   ])
 
   useEffect(() => {
+    const setTabIndexAttribute = () => {
+      const root = rootRef?.current
+      if (
+        root &&
+        isScrollable(root, vertical) &&
+        !root.hasAttribute("tabindex")
+      ) {
+        root.setAttribute("tabindex", "0")
+      }
+    }
+
     const setupObserver = async () => {
       const el = ref.current
       const index = indexRef.current
@@ -274,6 +285,7 @@ export const useInfiniteScroll = <Y extends HTMLElement = HTMLDivElement>({
       }
     }
 
+    setTabIndexAttribute()
     setupObserver()
   }, [
     createObserver,

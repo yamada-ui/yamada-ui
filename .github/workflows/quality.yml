@@ -16,11 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Check modified files
         id: check-modified
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
           files: |
             turbo.json
@@ -32,7 +32,7 @@ jobs:
             packages/workspace/src/typescript/**
 
       - name: Cache turbo build setup
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: .turbo
           key: ${{ runner.os }}-turbo-${{ github.sha }}
@@ -59,11 +59,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Check modified files
         id: check-modified-packages
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
           files: |
             packages/**/(package.json|tsconfig.json)
@@ -71,7 +71,7 @@ jobs:
 
       - name: Check modified files
         id: check-modified-scripts
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
           files: |
             packages/workspace/src/eslint/**
@@ -83,7 +83,7 @@ jobs:
 
       - name: Check modified files
         id: check-modified-www
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
           files: |
             packages/workspace/src/eslint/**
@@ -116,11 +116,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Check modified files
         id: check-modified-packages
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
           files: |
             packages/**/(package.json|tsconfig.json)
@@ -128,7 +128,7 @@ jobs:
 
       - name: Check modified files
         id: check-modified-scripts
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
           files: |
             packages/workspace/src/typescript/**
@@ -139,7 +139,7 @@ jobs:
 
       - name: Check modified files
         id: check-modified-www
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
           files: |
             packages/workspace/src/typescript/**
@@ -171,11 +171,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Check modified files
         id: check-modified-packages
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
           files: |
             packages/**
@@ -184,7 +184,7 @@ jobs:
 
       - name: Check modified files
         id: check-modified-scripts
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
           files: |
             packages/workspace/src/prettier/**
@@ -195,7 +195,7 @@ jobs:
 
       - name: Check modified files
         id: check-modified-www
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
           files: |
             packages/workspace/src/prettier/**
@@ -228,7 +228,7 @@ jobs:
     steps:
       - name: Check modified files
         id: check-modified
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
           files: |
             packages/{cli,react,utils}/src/**/*.{ts,tsx}
@@ -238,7 +238,7 @@ jobs:
       - name: Check changeset files
         if: steps.check-modified.outputs.any_changed == 'true'
         id: check-changeset
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
           files: |
             .changeset/*.md

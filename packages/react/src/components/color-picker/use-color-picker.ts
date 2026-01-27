@@ -118,6 +118,8 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       id,
       ref,
       name,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledby,
       allowInput = true,
       closeOnChange = false,
       defaultValue,
@@ -321,6 +323,8 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       id,
       ref: mergeRefs(props.ref, ref, inputRef),
       name,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledby,
       style: {
         ...(!allowInput ? { pointerEvents: "none" } : {}),
         ...props.style,
@@ -341,6 +345,8 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     }),
     [
       allowInput,
+      ariaLabel,
+      ariaLabelledby,
       dataProps,
       disabled,
       id,

@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Install
         uses: ./.github/composite-actions/install
@@ -18,9 +18,9 @@ jobs:
         id: generate_signature
         run: |
           body='{"owner":"yamada-ui","repo":"yamada-ui"}'
-          echo "::set-output name=body::$body"
-          signature=$(echo -n $body | openssl dgst -sha256 -hmac "${{ secrets.API_SECRET }}" | sed 's/^.* //')
-          echo "::set-output name=signature::$signature"
+          echo "body=$body" >> "$GITHUB_OUTPUT"
+          signature=$(echo -n "$body" | openssl dgst -sha256 -hmac "${{ secrets.API_SECRET }}" | sed 's/^.* //')
+          echo "signature=$signature" >> "$GITHUB_OUTPUT"
 
       - name: Update issues and pull requests
         run: |

@@ -22,11 +22,11 @@ jobs:
             coverage: "false"
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Check modified files
         id: check-modified
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
           files: |
             packages/**/(package.json|vitest.config.ts)
@@ -55,7 +55,7 @@ jobs:
 
       - name: Upload coverage
         if: steps.check-modified.outputs.any_changed == 'true' && matrix.coverage == 'true'
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238 # v4.6.0
         with:
           fail_ci_if_error: false
           file: ./packages/react/coverage/coverage-final.json,./packages/utils/coverage/coverage-final.json

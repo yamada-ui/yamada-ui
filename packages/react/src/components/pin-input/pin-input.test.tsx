@@ -320,4 +320,19 @@ describe("<PinInput />", () => {
     expect(inputs[2]).toHaveValue("")
     expect(inputs[3]).toHaveValue("4")
   })
+
+  test("each input has a unique accessible label", () => {
+    render(<PinInput.Root items={4} />)
+    const inputs = screen.getAllByRole("textbox")
+    expect(inputs[0]).toHaveAttribute("aria-label", "Pin Input 1 of 4")
+    expect(inputs[1]).toHaveAttribute("aria-label", "Pin Input 2 of 4")
+    expect(inputs[2]).toHaveAttribute("aria-label", "Pin Input 3 of 4")
+    expect(inputs[3]).toHaveAttribute("aria-label", "Pin Input 4 of 4")
+  })
+
+  test("uses provided aria-label in input labels", () => {
+    render(<PinInput.Root aria-label="OTP" items={3} />)
+    const inputs = screen.getAllByRole("textbox")
+    expect(inputs[0]).toHaveAttribute("aria-label", "OTP 1 of 3")
+  })
 })

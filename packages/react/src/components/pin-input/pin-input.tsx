@@ -63,7 +63,10 @@ export { PinInputPropsContext, usePinInputPropsContext }
  */
 export const PinInputRoot = withProvider<"div", PinInputRootProps>(
   ({ children, errorBorderColor, focusBorderColor, items = 4, ...rest }) => {
-    const { descendants, getInputProps, getRootProps } = usePinInput(rest)
+    const { descendants, getInputProps, getRootProps } = usePinInput({
+      ...rest,
+      items,
+    })
     const cloneChildren = useMemo(() => {
       const validChildren = getValidChildren(children)
 

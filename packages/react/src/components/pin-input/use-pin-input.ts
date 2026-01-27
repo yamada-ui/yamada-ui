@@ -105,6 +105,7 @@ export const usePinInput = (props: UsePinInputProps = {}) => {
       autoFocus,
       defaultValue,
       disabled,
+      items = 4,
       manageFocus = true,
       mask,
       otp = false,
@@ -297,26 +298,38 @@ export const usePinInput = (props: UsePinInputProps = {}) => {
 
   const getInputProps: RequiredPropGetter<"input", { index: number }> =
     useCallback(
-      ({ index, ...props }) => ({
-        ...ariaProps,
-        ...dataProps,
-        type: mask ? "password" : type === "number" ? "tel" : "text",
-        autoComplete: otp ? "one-time-code" : "off",
-        disabled,
-        inputMode: type === "number" ? "numeric" : "text",
-        placeholder:
-          focusedIndex === index && !readOnly && !props.readOnly
-            ? ""
-            : placeholder,
-        readOnly,
-        value: values[index] || "",
-        ...filterUndefined(props),
-        id: `${id}${index ? `-${index}` : ""}`,
-        onBlur: handlerAll(eventProps.onBlur, props.onBlur, onBlur),
-        onChange: handlerAll(props.onChange, onChange(index)),
-        onFocus: handlerAll(eventProps.onFocus, props.onFocus, onFocus(index)),
-        onKeyDown: handlerAll(props.onKeyDown, onKeyDown(index)),
-      }),
+      ({ index, ...props }) => {
+        const inputLabel = props["aria-label"]
+        const rootLabel = ariaProps["aria-label"] ?? "Pin Input"
+
+        const label = inputLabel ?? `${rootLabel} ${index + 1} of ${items}`
+
+        return {
+          ...ariaProps,
+          ...dataProps,
+          type: mask ? "password" : type === "number" ? "tel" : "text",
+          autoComplete: otp ? "one-time-code" : "off",
+          disabled,
+          inputMode: type === "number" ? "numeric" : "text",
+          placeholder:
+            focusedIndex === index && !readOnly && !props.readOnly
+              ? ""
+              : placeholder,
+          readOnly,
+          value: values[index] || "",
+          ...filterUndefined(props),
+          id: `${id}${index ? `-${index}` : ""}`,
+          "aria-label": label,
+          onBlur: handlerAll(eventProps.onBlur, props.onBlur, onBlur),
+          onChange: handlerAll(props.onChange, onChange(index)),
+          onFocus: handlerAll(
+            eventProps.onFocus,
+            props.onFocus,
+            onFocus(index),
+          ),
+          onKeyDown: handlerAll(props.onKeyDown, onKeyDown(index)),
+        }
+      },
       [
         ariaProps,
         dataProps,
@@ -334,6 +347,7 @@ export const usePinInput = (props: UsePinInputProps = {}) => {
         onChange,
         onFocus,
         onKeyDown,
+        items,
       ],
     )
 

@@ -266,4 +266,44 @@ return <Slider.Root value={value} onChange={setValue} />
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`Slider`は、アクセシビリティに関して[WAI-ARIA - Slider Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/slider/)に従います。
+
+### キーボード操作
+
+| キー         | 説明                                       | 状態 |
+| ------------ | ------------------------------------------ | ---- |
+| `ArrowRight` | `step`の値に基づいて値を増加します。       | -    |
+| `ArrowLeft`  | `step`の値に基づいて値を減少します。       | -    |
+| `ArrowUp`    | `step`の値に基づいて値を増加します。       | -    |
+| `ArrowDown`  | `step`の値に基づいて値を減少します。       | -    |
+| `Home`       | `min`の値を設定します。                    | -    |
+| `End`        | `max`の値を設定します。                    | -    |
+| `PageUp`     | `min`と`max`の値に基づいて値を増加します。 | -    |
+| `PageDown`   | `min`と`max`の値に基づいて値を減少します。 | -    |
+
+### ARIAロールと属性
+
+| コンポーネント | ロールと属性          | 使い方                                                                                                                                                                                        |
+| -------------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Slider.Thumb` | `role="slider"`       | スライダーであることを示します。                                                                                                                                                              |
+|                | `aria-label`          | `"スライダーのつまみ"`を設定します。                                                                                                                                                          |
+|                | `aria-labelledby`     | 関連する`Slider.Root`の`id`を設定します。                                                                                                                                                     |
+|                | `aria-orientation`    | `orientation`の値に基づいて`"horizontal"`または`"vertical"`を設定します。デフォルトは`"horizontal"`です。                                                                                     |
+|                | `aria-valuemin`       | `min`の値を設定します。デフォルトは`0`です。                                                                                                                                                  |
+|                | `aria-valuemax`       | `max`の値を設定します。デフォルトは`100`です。                                                                                                                                                |
+|                | `aria-valuenow`       | 現在の値を設定します。                                                                                                                                                                        |
+|                | `aria-valuetext`      | 現在の値を設定します。                                                                                                                                                                        |
+|                | `aria-describedby`    | `Slider.Root`が`Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
+|                | `aria-readonly`       | `readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                                        |
+|                | `aria-disabled`       | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                                                        |
+|                | `aria-invalid`        | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                         |
+|                | `aria-required`       | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                        |
+| `Slider.Mark`  | `aria-hidden`         | 要素をアクセシビリティツリーから除外します。                                                                                                                                                  |
+|                | `role="presentation"` | プレゼンテーションであることを示します。                                                                                                                                                      |
+| `SliderInput`  | `type="hidden"`       | 要素をアクセシビリティツリーから除外します。                                                                                                                                                  |
+|                | `aria-hidden`         | 要素をアクセシビリティツリーから除外します。                                                                                                                                                  |
+|                | `aria-describedby`    | `Slider.Root`が`Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
+|                | `aria-readonly`       | `readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                                        |
+|                | `aria-disabled`       | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                                                        |
+|                | `aria-invalid`        | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                         |
+|                | `aria-required`       | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                        |

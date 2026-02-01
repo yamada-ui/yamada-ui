@@ -132,4 +132,33 @@ To change the thickness of the progress bar, set a string or number to `thicknes
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+The `CircleProgress` follows the [WAI-ARIA - Meter Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/meter/) for accessibility.
+
+Setting `aria-label` or `aria-labelledby` on `CircleProgress.Root` will make it readable by screen readers.
+
+```tsx
+<CircleProgress.Root
+  value={88}
+  aria-label="Central Processing Unit (CPU) Usage"
+/>
+```
+
+```tsx
+<VStack gap="sm">
+  <Text as="h3" id="label">
+    Central Processing Unit (CPU) Usage
+  </Text>
+
+  <CircleProgress.Root value={88} aria-labelledby="label" />
+</VStack>
+```
+
+### ARIA Roles and Attributes
+
+| Component              | Role and Attribute   | Usage                                                                      |
+| ---------------------- | -------------------- | -------------------------------------------------------------------------- |
+| `CircleProgressCircle` | `role="progressbar"` | Indicates that it is a progress bar.                                       |
+|                        | `aria-label`         | Set the label that describes the current progress, such as `"18 percent"`. |
+|                        | `aria-valuemin`      | Sets the minimum value. Default is `0`                                     |
+|                        | `aria-valuemax`      | Sets the maximum value. Default is `100`                                   |
+|                        | `aria-valuenow`      | Sets the current value.                                                    |

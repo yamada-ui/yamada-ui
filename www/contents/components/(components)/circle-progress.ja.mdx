@@ -132,4 +132,33 @@ import { CircleProgress } from "@workspaces/ui"
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`CircleProgress`は、アクセシビリティに関して[WAI-ARIA - Meter Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/meter/)に従います。
+
+`CircleProgress.Root`に`aria-label`または`aria-labelledby`を設定すると、スクリーンリーダーによって読み上げられます。
+
+```tsx
+<CircleProgress.Root
+  value={88}
+  aria-label="Central Processing Unit (CPU) Usage"
+/>
+```
+
+```tsx
+<VStack gap="sm">
+  <Text as="h3" id="label">
+    Central Processing Unit (CPU) Usage
+  </Text>
+
+  <CircleProgress.Root value={88} aria-labelledby="label" />
+</VStack>
+```
+
+### ARIAロールと属性
+
+| コンポーネント         | ロールと属性         | 使い方                                                           |
+| ---------------------- | -------------------- | ---------------------------------------------------------------- |
+| `CircleProgressCircle` | `role="progressbar"` | プログレスバーであることを示します。                             |
+|                        | `aria-label`         | `"18パーセント"`のように現在の進行状況を示すラベルを設定します。 |
+|                        | `aria-valuemin`      | `min`の値を設定します。デフォルトは`0`です。                     |
+|                        | `aria-valuemax`      | `max`の値を設定します。デフォルトは`100`です。                   |
+|                        | `aria-valuenow`      | 現在の値を設定します。                                           |

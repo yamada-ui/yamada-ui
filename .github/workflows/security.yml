@@ -2,6 +2,8 @@ name: Security
 
 on:
   pull_request:
+    paths:
+      - ".github/**/*.(yml,yaml)"
     branches:
       - main
       - v*
@@ -13,13 +15,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-
-      - name: Check modified files
-        id: check-modified-packages
-        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
-        with:
-          files: |
-            .github/**/*.{yml,yaml}
 
       - name: Run pinact
         uses: suzuki-shunsuke/pinact-action@3d49c6412901042473ffa78becddab1aea46bbea # v1.3.1

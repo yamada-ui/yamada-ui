@@ -1,4 +1,4 @@
-name: lint workflows
+name: lint workflow
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   lint:
-    name: Lint workflows
+    name: Lint workflow
     runs-on: ubuntu-latest
 
     steps:

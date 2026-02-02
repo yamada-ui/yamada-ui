@@ -10,7 +10,8 @@
       "dependsOn": ["build"]
     },
     "test:coverage": {
-      "dependsOn": ["build"]
+      "dependsOn": ["build"],
+      "outputs": ["coverage/**"]
     },
     "typecheck": {
       "dependsOn": ["transit"]

@@ -3,7 +3,8 @@ name: Security
 on:
   pull_request:
     paths:
-      - ".github/**/*.(yml,yaml)"
+      - ".github/**/*.yml"
+      - ".github/**/*.yaml"
     branches:
       - main
       - v*

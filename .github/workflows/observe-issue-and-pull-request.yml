@@ -6,10 +6,10 @@ on:
 
 jobs:
   issue-and-pull-request:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
       - name: Install
         uses: ./.github/composite-actions/install
@@ -18,9 +18,9 @@ jobs:
         id: generate_signature
         run: |
           body='{"owner":"yamada-ui","repo":"yamada-ui"}'
-          echo "::set-output name=body::$body"
-          signature=$(echo -n $body | openssl dgst -sha256 -hmac "${{ secrets.API_SECRET }}" | sed 's/^.* //')
-          echo "::set-output name=signature::$signature"
+          echo "body=$body" >> "$GITHUB_OUTPUT"
+          signature=$(echo -n "$body" | openssl dgst -sha256 -hmac "${{ secrets.API_SECRET }}" | sed 's/^.* //')
+          echo "signature=$signature" >> "$GITHUB_OUTPUT"
 
       - name: Update issues and pull requests
         run: |

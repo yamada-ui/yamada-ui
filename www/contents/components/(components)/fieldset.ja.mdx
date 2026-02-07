@@ -339,4 +339,9 @@ import { Fieldset } from "@workspaces/ui"
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+### ARIAロールと属性
+
+| コンポーネント           | ロールと属性         | 使い方                                                   |
+| ------------------------ | -------------------- | -------------------------------------------------------- |
+| `Fieldset.HelperMessage` | `aria-describedby`   | 関連した`Fieldset.Legend`の`id`を設定します。            |
+| `Fieldset.ErrorMessage`  | `aria-live="polite"` | フォーカスの外側で更新される可能性があることを示します。 |

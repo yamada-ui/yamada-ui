@@ -281,4 +281,56 @@ describe("useInfiniteScroll", () => {
     await user.click(reset)
     expect(mockObserve).not.toHaveBeenCalled()
   })
+
+  test("should add tabIndex=0 to scrollable root when missing", async () => {
+    const MyComponent = () => {
+      const mockOnLoad = vi.fn().mockImplementation(({ finish }) => {
+        finish()
+      })
+      const rootRef = useRef<HTMLDivElement>(null)
+      const { ref, finish } = useInfiniteScroll({
+        rootRef,
+        onLoad: mockOnLoad,
+      })
+
+      return (
+        <div ref={rootRef} style={{ overflowY: "auto" }}>
+          {!finish ? <div ref={ref} data-testid="trigger" /> : null}
+        </div>
+      )
+    }
+
+    const { container } = render(<MyComponent />)
+    const root = container.firstChild as HTMLDivElement
+
+    await waitFor(() => {
+      expect(root.tabIndex).toBe(0)
+    })
+  })
+
+  test("should not override existing tabindex on root", async () => {
+    const MyComponent = () => {
+      const mockOnLoad = vi.fn().mockImplementation(({ finish }) => {
+        finish()
+      })
+      const rootRef = useRef<HTMLDivElement>(null)
+      const { ref, finish } = useInfiniteScroll({
+        rootRef,
+        onLoad: mockOnLoad,
+      })
+
+      return (
+        <div ref={rootRef} style={{ overflowY: "auto" }} tabIndex={-1}>
+          {!finish ? <div ref={ref} data-testid="trigger" /> : null}
+        </div>
+      )
+    }
+
+    const { container } = render(<MyComponent />)
+    const root = container.firstChild as HTMLDivElement
+
+    await waitFor(() => {
+      expect(root.tabIndex).toBe(-1)
+    })
+  })
 })

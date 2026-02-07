@@ -300,4 +300,34 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `FileInput`.
+
+```tsx
+<FileInput aria-label="Upload file" placeholder="Please upload file" />
+```
+
+```tsx
+<VStack gap="sm">
+  <Text as="h3" id="label">
+    Upload file
+  </Text>
+
+  <FileInput aria-labelledby="label" placeholder="Please upload file" />
+</VStack>
+```
+
+### Keyboard Navigation
+
+| Key              | Description                    | State |
+| ---------------- | ------------------------------ | ----- |
+| `Tab`            | Focuses the element.           | -     |
+| `Space`, `Enter` | Activates the focused element. | -     |
+
+### ARIA Roles and Attributes
+
+| Component   | Roles and Attributes | Usage                                                                                                                                                           |
+| ----------- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `FileInput` | `role="button"`      | Indicates that this is a button.                                                                                                                                |
+|             | `aria-disabled`      | Sets to `"true"` if `disabled` is set.                                                                                                                          |
+|             | `aria-labelledby`    | If `FileInput` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id`.                                                         |
+|             | `aria-describedby`   | If `FileInput` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, `Field.ErrorMessage`, or `Field.HelperMessage`, sets its `id`. |

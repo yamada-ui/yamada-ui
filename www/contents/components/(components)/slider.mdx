@@ -266,4 +266,44 @@ return <Slider.Root value={value} onChange={setValue} />
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+The `Slider` follows the [WAI-ARIA - Slider Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/slider/) for accessibility.
+
+### Keyboard Navigation
+
+| Key          | Description                                              | State |
+| ------------ | -------------------------------------------------------- | ----- |
+| `ArrowRight` | Increases the value based on the `step` value.           | -     |
+| `ArrowLeft`  | Decreases the value based on the `step` value.           | -     |
+| `ArrowUp`    | Increases the value based on the `step` value.           | -     |
+| `ArrowDown`  | Decreases the value based on the `step` value.           | -     |
+| `Home`       | Sets the value to `min`.                                 | -     |
+| `End`        | Sets the value to `max`.                                 | -     |
+| `PageUp`     | Increases the value based on the `min` and `max` values. | -     |
+| `PageDown`   | Decreases the value based on the `min` and `max` values. | -     |
+
+### ARIA Roles and Attributes
+
+| Component      | Roles and Attributes  | Usage                                                                                                                                                               |
+| -------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Slider.Thumb` | `role="slider"`       | Indicates that this is a slider.                                                                                                                                    |
+|                | `aria-label`          | Sets `"Slider thumb"`.                                                                                                                                              |
+|                | `aria-labelledby`     | Sets the `id` of the related `Slider.Root`.                                                                                                                         |
+|                | `aria-orientation`    | Sets `"horizontal"` or `"vertical"` based on the `orientation` value. Default is `"horizontal"`.                                                                    |
+|                | `aria-valuemin`       | Sets the `min` value. Default is `0`.                                                                                                                               |
+|                | `aria-valuemax`       | Sets the `max` value. Default is `100`.                                                                                                                             |
+|                | `aria-valuenow`       | Sets the current value.                                                                                                                                             |
+|                | `aria-valuetext`      | Sets the current value.                                                                                                                                             |
+|                | `aria-describedby`    | If `Slider.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|                | `aria-readonly`       | Set to `"true"` if `readOnly` is set.                                                                                                                               |
+|                | `aria-disabled`       | Set to `"true"` if `disabled` is set.                                                                                                                               |
+|                | `aria-invalid`        | Set to `"true"` if `invalid` is set.                                                                                                                                |
+|                | `aria-required`       | Set to `"true"` if `required` is set.                                                                                                                               |
+| `Slider.Mark`  | `aria-hidden`         | Excludes the element from the accessibility tree.                                                                                                                   |
+|                | `role="presentation"` | Indicates that this is a presentation                                                                                                                               |
+| `SliderInput`  | `type="hidden"`       | Excludes the element from the accessibility tree.                                                                                                                   |
+|                | `aria-hidden`         | Excludes the element from the accessibility tree.                                                                                                                   |
+|                | `aria-describedby`    | If `Slider.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|                | `aria-readonly`       | Set to `"true"` if `readOnly` is set.                                                                                                                               |
+|                | `aria-disabled`       | Set to `"true"` if `disabled` is set.                                                                                                                               |
+|                | `aria-invalid`        | Set to `"true"` if `Invalid` is set.                                                                                                                                |
+|                | `aria-required`       | Set to `"true"` if `required` is set.                                                                                                                               |

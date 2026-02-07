@@ -265,4 +265,47 @@ return (
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`Field.Root`を使用しない場合は、`Editable.Root`に`aria-label`または`aria-labelledby`を設定します。
+
+```tsx
+<Editable.Root defaultValue="なんとかなれーッ！" aria-label="Feedback">
+  <Editable.Preview />
+  <Editable.Input />
+</Editable.Root>
+```
+
+```tsx
+<VStack gap="sm">
+  <Text as="h3" id="label">
+    Feedback
+  </Text>
+
+  <Editable.Root defaultValue="なんとかなれーッ！" aria-labelledby="label">
+    <Editable.Preview />
+    <Editable.Input />
+  </Editable.Root>
+</VStack>
+```
+
+### キーボード操作
+
+| キー     | 説明                                           | 状態 |
+| -------- | ---------------------------------------------- | ---- |
+| `Enter`  | `Editable.Input`の場合、編集内容を確定します。 | -    |
+| `Escape` | 編集モードをキャンセルします。                 | -    |
+
+### ARIAロールと属性
+
+| コンポーネント            | ロールと属性       | 使い方                                                                                                                                                                                          |
+| ------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Editable.Input`          | `aria-describedby` | `Editable.Root`が`Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
+|                           | `aria-disabled`    | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                                                          |
+|                           | `aria-invalid`     | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                           |
+|                           | `aria-readonly`    | `readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                                          |
+|                           | `aria-required`    | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                          |
+| `Editable.Textarea`       | `aria-describedby` | `Editable.Root`が`Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
+|                           | `aria-disabled`    | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                                                          |
+|                           | `aria-invalid`     | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                           |
+|                           | `aria-readonly`    | `readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                                          |
+|                           | `aria-required`    | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                          |
+| `EditableControl.Control` | `role="group"`     | グループであることを示します。                                                                                                                                                                  |

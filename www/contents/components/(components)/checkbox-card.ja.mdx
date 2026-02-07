@@ -623,4 +623,60 @@ return (
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`CheckboxCard`は、アクセシビリティに関して[WAI-ARIA - Checkbox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox)に従います。
+
+`Field.Root`を使用しない場合は、`CheckboxCardGroup.Root`に`aria-label`または`aria-labelledby`を設定します。
+
+```tsx
+const items = useMemo<CheckboxCardGroup.ItemType[]>(
+  () => [
+    { label: "ドラえもん", value: "1" },
+    { label: "ドラミ", value: "2" },
+    { label: "ガチャ子", value: "3" },
+  ],
+  [],
+)
+
+return <CheckboxCardGroup.Root aria-label="キャラクター" items={items} />
+```
+
+```tsx
+const items = useMemo<CheckboxCardGroup.ItemType[]>(
+  () => [
+    { label: "ドラえもん", value: "1" },
+    { label: "ドラミ", value: "2" },
+    { label: "ガチャ子", value: "3" },
+  ],
+  [],
+)
+
+return (
+  <VStack gap="sm">
+    <Text as="h3" id="label">
+      キャラクター
+    </Text>
+
+    <CheckboxCardGroup.Root aria-labelledby="label" items={items} />
+  </VStack>
+)
+```
+
+### キーボード操作
+
+| キー    | 説明                                             | 状態 |
+| ------- | ------------------------------------------------ | ---- |
+| `Tab`   | 無効ではないチェックボックスをフォーカスします。 | -    |
+| `Space` | チェックボックスのチェックの状態を切り替えます。 | -    |
+
+### ARIAロールと属性
+
+| コンポーネント           | ロールと属性       | 使い方                                                                                                                                                                             |
+| ------------------------ | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CheckboxCardGroup.Root` | `role="group"`     | グループであることを示します。                                                                                                                                                     |
+|                          | `aria-labelledby`  | `CheckboxCardGroup.Root`が`Field.Root`内にあり、`Field.Root`に`label`または`Field.Label`がある場合、その`id`を設定します。                                                         |
+|                          | `aria-describedby` | `CheckboxCardGroup.Root`が`Field.Root`内にあり、`Field.Root`に`errorMessage`、`helperMessage`、または`Field.ErrorMessage`、`Field.HelperMessage`がある場合、その`id`を設定します。 |
+| `CheckboxCard.Root`      | `aria-checked`     | `indeterminate`が設定されている場合は`"mixed"`を設定し、チェックされている場合は`"true"`、されていない場合は`"false"`を設定します。                                                |
+|                          | `aria-disabled`    | `readOnly`が設定されている場合、またはグループで`max`に達した場合は`"true"`を設定します。                                                                                          |
+|                          | `aria-invalid`     | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                              |
+|                          | `aria-required`    | `required`が設定されている場合は`"true"`を設定します。                                                                                                                             |
+| `CheckboxCardIndicator`  | `aria-hidden`      | 要素をアクセシビリティツリーから除外します。                                                                                                                                       |

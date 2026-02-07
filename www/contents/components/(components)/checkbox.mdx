@@ -409,4 +409,48 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+The `Checkbox` follows the [WAI-ARIA - Checkbox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/) for accessibility.
+
+If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `CheckboxGroup.Root`.
+
+```tsx
+<CheckboxGroup.Root aria-label="Character">
+  <CheckboxGroup.Item value="sora">ソラ</CheckboxGroup.Item>
+  <CheckboxGroup.Item value="riku">リク</CheckboxGroup.Item>
+  <CheckboxGroup.Item value="kairi">カイリ</CheckboxGroup.Item>
+</CheckboxGroup.Root>
+```
+
+```tsx
+<VStack gap="sm">
+  <Text as="h3" id="label">
+    Character
+  </Text>
+
+  <CheckboxGroup.Root aria-labelledby="label">
+    <CheckboxGroup.Item value="sora">ソラ</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="riku">リク</CheckboxGroup.Item>
+    <CheckboxGroup.Item value="kairi">カイリ</CheckboxGroup.Item>
+  </CheckboxGroup.Root>
+</VStack>
+```
+
+### Keyboard Navigation
+
+| Key     | Description                                        | State |
+| ------- | -------------------------------------------------- | ----- |
+| `Tab`   | Focuses a checkbox that is not disabled.           | -     |
+| `Space` | Toggles the checked state of the focused checkbox. | -     |
+
+### ARIA Roles and Attributes
+
+| Component                        | Roles and Attributes | Usage                                                                                                                                                                      |
+| -------------------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CheckboxGroup.Root`             | `role="group"`       | Indicates that it's a group.                                                                                                                                               |
+|                                  | `aria-labelledby`    | If `CheckboxGroup.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id`.                                                           |
+|                                  | `aria-describedby`   | If `CheckboxGroup.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+| `Checkbox`, `CheckboxGroup.Item` | `aria-checked`       | Sets to `"true"` if the checkbox is checked, `"false"` if it is not checked, and `"mixed"` if `indeterminate` is set.                                                      |
+|                                  | `aria-describedby`   | If `Checkbox` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`.           |
+|                                  | `aria-disabled`      | Sets to `"true"` if `readOnly` is set, or if the checkbox is not checked and `max` is reached in a group.                                                                  |
+|                                  | `aria-invalid`       | Sets to `"true"` if `invalid` is set.                                                                                                                                      |
+|                                  | `aria-required`      | Sets to `"true"` if `required` is set.                                                                                                                                     |

@@ -201,4 +201,27 @@ return (
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`FileButton`は、アクセシビリティに関して[WAI-ARIA - Button Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/button/)に従います。
+
+`FileButton`にアイコンのみを使用する場合は、`FileButton`に`aria-label`を設定します。
+
+```tsx
+<FileButton
+  as={IconButton}
+  aria-label="Upload file"
+  icon={<PlusIcon fontSize="2xl" />}
+/>
+```
+
+### キーボード操作
+
+| キー             | 説明                             | 状態 |
+| ---------------- | -------------------------------- | ---- |
+| `Tab`            | ボタンにフォーカスを移動します。 | -    |
+| `Enter`, `Space` | ファイルダイアログを開きます。   | -    |
+
+### ARIAロールと属性
+
+| コンポーネント | ロールと属性    | 使い方                                                                 |
+| -------------- | --------------- | ---------------------------------------------------------------------- |
+| `FileButton`   | `aria-disabled` | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。 |

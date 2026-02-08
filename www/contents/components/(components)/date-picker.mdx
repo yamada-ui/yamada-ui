@@ -589,4 +589,52 @@ return <DatePicker value={value} onChange={onChange} />
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+### Keyboard Navigation
+
+| Key                  | Description                                                                                                                                         | State               |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| `Enter`              | When the input value is valid, applies it to the selection. Toggles the focused date if focus is in the calendar.                                   | -                   |
+| `Backspace`          | Clears the last selection.                                                                                                                          |                     |
+| `Escape`             | Closes the calendar.                                                                                                                                | `closeOnEsc={true}` |
+| `ArrowUp`            | Moves focus to the date above if focus is in the calendar.                                                                                          | -                   |
+| `ArrowDown`          | Moves focus to the date below if focus is in the calendar.                                                                                          | -                   |
+| `ArrowLeft`          | Moves focus to the date to the left if focus is in the calendar. If it's the first date, moves to the last date of the previous month.              | -                   |
+| `ArrowRight`         | Moves focus to the date to the right if focus is in the calendar. If it's the last date, moves to the first date of the next month.                 | -                   |
+| `Home`               | Moves focus to the first date in the same week if focus is in the calendar.                                                                         | -                   |
+| `End`                | Moves focus to the last date in the same week if focus is in the calendar.                                                                          | -                   |
+| `PageUp`             | Moves focus to the same date in the previous month if focus is in the calendar. If that date doesn't exist, moves to an enabled date in that month. | -                   |
+| `Shift` + `PageUp`   | Moves focus to the same date in the previous year if focus is in the calendar. If that date doesn't exist, moves to an enabled date in that month.  | -                   |
+| `PageDown`           | Moves focus to the same date in the next month if focus is in the calendar. If that date doesn't exist, moves to an enabled date in that month.     | -                   |
+| `Shift` + `PageDown` | Moves focus to the same date in the next year if focus is in the calendar. If that date doesn't exist, moves to an enabled date in that month.      | -                   |
+| `Space`              | Toggles the selection state of the focused date if focus is in the calendar.                                                                        | -                   |
+
+### ARIA Roles and Attributes
+
+| Component              | Roles and Attributes     | Usage                                                                                                                                                                      |
+| ---------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DatePickerField`      | `role="combobox"`        | Indicates that it is a combobox.                                                                                                                                           |
+|                        | `aria-controls`          | When the calendar is open, sets the `id` of the associated `DatePickerContent`. When closed, sets `undefined`.                                                             |
+|                        | `aria-disabled`          | Sets to `"true"` if `disabled` or `readOnly` is set.                                                                                                                       |
+|                        | `aria-describedby`       | When `DatePicker` is within `Field.Root` and `Field.Root` has `errorMessage` or `helperMessage`, or `Field.ErrorMessage` or `Field.HelperMessage` is set, sets their `id`. |
+|                        | `aria-expanded`          | Sets to `"true"` when the calendar is open, and `"false"` when it is closed.                                                                                               |
+|                        | `aria-haspopup="dialog"` | Indicates that a dialog is exists.                                                                                                                                         |
+|                        | `aria-invalid`           | Sets to `"true"` if `invalid` is set.                                                                                                                                      |
+|                        | `aria-readonly`          | Sets to `"true"` if `readOnly` is set.                                                                                                                                     |
+|                        | `aria-required`          | Sets to `"true"` if `required` is set.                                                                                                                                     |
+| `DatePickerContent`    | `role="dialog"`          | Indicates that it is a dialog.                                                                                                                                             |
+|                        | `aria-hidden`            | When the calendar is open, sets to `"false"`. When closed, sets to `"true"`.                                                                                               |
+| `DatePickerIcon`       | `role="button"`          | Indicates that it is a button when `clearable` and there is a value.                                                                                                       |
+|                        | `aria-disabled`          | When `clearable` and there is a value, and `disabled` or `readOnly` is set, sets to `"true"`.                                                                              |
+|                        | `aria-label`             | When `clearable` and there is a value, sets `"Clear value"`.                                                                                                               |
+| `Calendar.YearSelect`  | `aria-label`             | Sets `"Choose the year"`.                                                                                                                                                  |
+| `Calendar.MonthSelect` | `aria-label`             | Sets `"Choose the month"`.                                                                                                                                                 |
+| `Calendar.Control`     | `role="status"`          | Indicates that it is a status.                                                                                                                                             |
+|                        | `aria-live="polite"`     | Indicates that it may be updated outside of focus.                                                                                                                         |
+| `Calendar.Month`       | `role="grid"`            | Indicates that it is a grid.                                                                                                                                               |
+|                        | `aria-label`             | Sets the displayed month and year, like `"February 2026"`.                                                                                                                 |
+|                        | `aria-multiselectable`   | Sets `"true"` if multiple selection or range selection is enabled.                                                                                                         |
+| `Calendar.PrevButton`  | `aria-label`             | Sets `"Go to the previous month"`.                                                                                                                                         |
+| `Calendar.NextButton`  | `aria-label`             | Sets `"Go to the next month"`.                                                                                                                                             |
+| `CalendarDay`          | `aria-label`             | Sets the date, like `"Thursday, February 5, 2026"`. If today, sets `"Today, Thursday, February 5, 2026"`.                                                                  |
+|                        | `aria-disabled`          | Sets `"true"` if the date is disabled.                                                                                                                                     |
+|                        | `aria-selected`          | Sets `"true"` if the date is selected.                                                                                                                                     |

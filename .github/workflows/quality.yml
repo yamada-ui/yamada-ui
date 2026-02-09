@@ -34,6 +34,7 @@ jobs:
             !packages/**/src/**/*.test.{ts,tsx}
             !packages/workspace/src/**
             packages/workspace/src/typescript/**
+            .github/workflows/quality.yml
 
       - name: Restore turbo cache
         if: steps.check-modified.outputs.any_changed == 'true'
@@ -70,6 +71,7 @@ jobs:
           files: |
             packages/**/(package.json|tsconfig.json)
             packages/**/*.{ts,tsx,mts}
+            .github/workflows/quality.yml
 
       - name: Check modified files
         id: check-modified-scripts
@@ -136,6 +138,7 @@ jobs:
           files: |
             packages/**/(package.json|tsconfig.json)
             packages/**/*.{ts,tsx,mts}
+            .github/workflows/quality.yml
 
       - name: Check modified files
         id: check-modified-scripts
@@ -201,6 +204,7 @@ jobs:
             packages/**
             .prettierignore
             .prettierrc.js
+            .github/workflows/quality.yml
 
       - name: Check modified files
         id: check-modified-scripts

@@ -41,6 +41,7 @@ jobs:
             !packages/**/src/**/*.stories.{ts,tsx}
             !packages/workspace/src/**
             packages/workspace/src/vitest/**
+            .github/workflows/test.yml
 
       - name: Restore turbo cache
         if: steps.check-modified.outputs.any_changed == 'true'

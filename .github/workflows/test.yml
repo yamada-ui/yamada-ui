@@ -6,6 +6,8 @@ on:
     secrets:
       TURBO_TOKEN:
         required: false
+      CODECOV_TOKEN:
+        required: false
 
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}

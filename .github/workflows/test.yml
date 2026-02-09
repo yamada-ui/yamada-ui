@@ -3,6 +3,13 @@ name: Test
 on:
   workflow_dispatch:
   workflow_call:
+    secrets:
+      TURBO_TOKEN:
+        required: false
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
   browser:
@@ -34,6 +41,15 @@ jobs:
             !packages/**/src/**/*.stories.{ts,tsx}
             !packages/workspace/src/**
             packages/workspace/src/vitest/**
+
+      - name: Restore turbo cache
+        if: steps.check-modified.outputs.any_changed == 'true'
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
 
       - name: Install
         if: steps.check-modified.outputs.any_changed == 'true'

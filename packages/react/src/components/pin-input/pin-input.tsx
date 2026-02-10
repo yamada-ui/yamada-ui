@@ -33,14 +33,7 @@ export interface PinInputRootProps
     >,
     ThemeProps<PinInputStyle>,
     UseInputBorderProps,
-    UsePinInputProps {
-  /**
-   * The number of inputs to display.
-   *
-   * @default 4
-   */
-  items?: number
-}
+    UsePinInputProps {}
 
 const {
   ComponentContext,
@@ -62,8 +55,9 @@ export { PinInputPropsContext, usePinInputPropsContext }
  * @see https://yamada-ui.com/docs/components/pin-input
  */
 export const PinInputRoot = withProvider<"div", PinInputRootProps>(
-  ({ children, errorBorderColor, focusBorderColor, items = 4, ...rest }) => {
-    const { descendants, getInputProps, getRootProps } = usePinInput(rest)
+  ({ children, errorBorderColor, focusBorderColor, ...rest }) => {
+    const { descendants, items, getInputProps, getRootProps } =
+      usePinInput(rest)
     const cloneChildren = useMemo(() => {
       const validChildren = getValidChildren(children)
 

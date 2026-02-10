@@ -524,4 +524,28 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+The `Resizable` follows the [WAI-ARIA - Window Splitter Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/) for accessibility.
+
+### Keyboard Navigation
+
+| Key          | Description                                                            | State                      |
+| ------------ | ---------------------------------------------------------------------- | -------------------------- |
+| `ArrowRight` | Increases the value based on the `keyboardStep` value.                 | `orientation="horizontal"` |
+| `ArrowLeft`  | Decreases the value based on the `keyboardStep` value.                 | `orientation="horizontal"` |
+| `ArrowUp`    | Increases the value based on the `keyboardStep` value.                 | `orientation="vertical"`   |
+| `ArrowDown`  | Decreases the value based on the `keyboardStep` value.                 | `orientation="vertical"`   |
+| `Enter`      | If expanded, collapses the pane; if collapsed, restores it to minSize. | `collapsible="true"`       |
+| `Home`       | Sets the value to `minSize`.                                           | -                          |
+| `End`        | Sets the value to `maxSize`.                                           | -                          |
+
+### ARIA Roles and Attributes
+
+| Component           | Roles and Attributes | Usage                                                                                            |
+| ------------------- | -------------------- | ------------------------------------------------------------------------------------------------ |
+| `Resizable.Item`    | `id`                 | Used to associate with `Resizable.Trigger`.                                                      |
+| `Resizable.Trigger` | `role="separator"`   | Indicates that this is a separator.                                                              |
+|                     | `aria-controls`      | Sets the `id` of the associated `Resizable.Item`.                                                |
+|                     | `aria-orientation`   | Sets `"horizontal"` or `"vertical"` based on the `orientation` value. Default is `"horizontal"`. |
+|                     | `aria-valuemin`      | Sets the `minSize` value. Default is `0`.                                                        |
+|                     | `aria-valuemax`      | Sets the `maxSize` value. Default is `100`.                                                      |
+|                     | `aria-valuenow`      | Sets the current value.                                                                          |

@@ -126,7 +126,11 @@ describe("<Indicator />", () => {
         <div />
       </Indicator>,
     )
-    expect(screen.getByTestId("indicator-root")).toBeInTheDocument()
+    const label = screen.getByTestId("indicator")
+
+    expect(label).toBeInTheDocument()
+    // Verify the label element exists (ping affects pseudo-element styling)
+    expect(label.parentElement).toHaveClass("ui-indicator__float")
   })
 
   test("should apply ping prop with object configuration", () => {
@@ -146,7 +150,14 @@ describe("<Indicator />", () => {
         <div />
       </Indicator>,
     )
-    expect(screen.getByTestId("indicator-root")).toBeInTheDocument()
+    const root = screen.getByTestId("indicator-root")
+    const styles = getComputedStyle(root)
+
+    expect(styles.getPropertyValue("--animation-scale")).toBe("1.5")
+    expect(styles.getPropertyValue("--iteration-count")).toBe("infinite")
+    expect(styles.getPropertyValue("--ping-color")).toBeTruthy()
+    expect(styles.getPropertyValue("--duration")).toBeTruthy()
+    expect(styles.getPropertyValue("--timing-function")).toBeTruthy()
   })
 
   test("should apply offset prop", () => {
@@ -154,12 +165,17 @@ describe("<Indicator />", () => {
       <Indicator
         label="New"
         offset={10}
+        floatProps={{ "data-testid": "float-element" }}
         labelProps={{ "data-testid": "indicator" }}
       >
         <div />
       </Indicator>,
     )
-    expect(screen.getByTestId("indicator")).toBeInTheDocument()
+    const floatElement = screen.getByTestId("float-element")
+    const styles = getComputedStyle(floatElement)
+
+    expect(styles.getPropertyValue("--offset-block")).toBeTruthy()
+    expect(styles.getPropertyValue("--offset-inline")).toBeTruthy()
   })
 
   test("should apply placement prop", () => {
@@ -167,12 +183,18 @@ describe("<Indicator />", () => {
       <Indicator
         label="New"
         placement="start-start"
+        floatProps={{ "data-testid": "float-element" }}
         labelProps={{ "data-testid": "indicator" }}
       >
         <div />
       </Indicator>,
     )
-    expect(screen.getByTestId("indicator")).toBeInTheDocument()
+    const floatElement = screen.getByTestId("float-element")
+    const label = screen.getByTestId("indicator")
+
+    // Verify Float element renders and contains the label
+    expect(floatElement).toBeInTheDocument()
+    expect(floatElement).toContainElement(label)
   })
 
   test("should apply floatProps", () => {

@@ -179,9 +179,17 @@ describe("<CheckboxGroup />", () => {
     expect(checkboxes[1]).toBeChecked()
   })
 
-  test("should render with required prop", () => {
+  test("should accept required prop", () => {
+    // Note: Currently, the required prop on CheckboxGroup doesn't propagate
+    // as observable attributes (required/aria-required/data-required) on checkbox inputs.
+    // This test verifies the component accepts the prop without error.
+    // Ideally, we would assert: checkboxes have required/aria-required attributes.
     const { container } = render(<CheckboxGroup.Root items={items} required />)
 
-    expect(container).toBeInTheDocument()
+    const group = container.querySelector('[role="group"]')
+    const checkboxes = screen.getAllByRole("checkbox")
+
+    expect(group).toBeInTheDocument()
+    expect(checkboxes).toHaveLength(items.length)
   })
 })

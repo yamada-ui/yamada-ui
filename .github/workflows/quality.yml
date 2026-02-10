@@ -41,9 +41,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          key: ${{ runner.os }}-turbo-${{ github.job }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-turbo-
+            ${{ runner.os }}-turbo-${{ github.job }}-
 
       - name: Install
         if: steps.check-modified.outputs.any_changed == 'true'
@@ -57,6 +57,7 @@ jobs:
     name: Test
     uses: ./.github/workflows/test.yml
     secrets:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   eslint:
@@ -104,9 +105,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          key: ${{ runner.os }}-turbo-${{ github.job }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-turbo-
+            ${{ runner.os }}-turbo-${{ github.job }}-
 
       - name: Install
         if: steps.check-modified-packages.outputs.any_changed == 'true' || steps.check-modified-scripts.outputs.any_changed == 'true' || steps.check-modified-www.outputs.any_changed == 'true'
@@ -169,9 +170,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          key: ${{ runner.os }}-turbo-${{ github.job }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-turbo-
+            ${{ runner.os }}-turbo-${{ github.job }}-
 
       - name: Install
         if: steps.check-modified-packages.outputs.any_changed == 'true' || steps.check-modified-scripts.outputs.any_changed == 'true' || steps.check-modified-www.outputs.any_changed == 'true'
@@ -235,9 +236,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          key: ${{ runner.os }}-turbo-${{ github.job }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-turbo-
+            ${{ runner.os }}-turbo-${{ github.job }}-
 
       - name: Install
         if: steps.check-modified-packages.outputs.any_changed == 'true' || steps.check-modified-scripts.outputs.any_changed == 'true' || steps.check-modified-www.outputs.any_changed == 'true'

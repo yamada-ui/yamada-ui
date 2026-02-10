@@ -524,4 +524,28 @@ return (
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`Resizable`は、アクセシビリティに関して[WAI-ARIA - Window Splitter Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/)に従います。
+
+### キーボード操作
+
+| キー         | 説明                                                                | 状態                       |
+| ------------ | ------------------------------------------------------------------- | -------------------------- |
+| `ArrowRight` | `keyboardStep`の値に基づいて値を増加します。                        | `orientation="horizontal"` |
+| `ArrowLeft`  | `keyboardStep`の値に基づいて値を減少します。                        | `orientation="horizontal"` |
+| `ArrowUp`    | `keyboardStep`の値に基づいて値を増加します。                        | `orientation="vertical"`   |
+| `ArrowDown`  | `keyboardStep`の値に基づいて値を減少します。                        | `orientation="vertical"`   |
+| `Enter`      | 折りたたみ前なら折りたたみ、折りたたみ後なら`minSize`まで戻します。 | `collapsible="true"`       |
+| `Home`       | `minSize`の値を設定します。                                         | -                          |
+| `End`        | `maxSize`の値を設定します。                                         | -                          |
+
+### ARIAロールと属性
+
+| コンポーネント      | ロールと属性       | 使い方                                                                                                    |
+| ------------------- | ------------------ | --------------------------------------------------------------------------------------------------------- |
+| `Resizable.Item`    | `id`               | `Resizable.Trigger`と関連付けるために使用する`id`。                                                       |
+| `Resizable.Trigger` | `role="separator"` | セパレーターであることを示します。                                                                        |
+|                     | `aria-controls`    | 関連した`Resizable.Item`の`id`を設定します。                                                              |
+|                     | `aria-orientation` | `orientation`の値に基づいて`"horizontal"`または`"vertical"`を設定します。デフォルトは`"horizontal"`です。 |
+|                     | `aria-valuemin`    | `minSize`の値を設定します。デフォルトは`0`です。                                                          |
+|                     | `aria-valuemax`    | `maxSize`の値を設定します。デフォルトは`100`です。                                                        |
+|                     | `aria-valuenow`    | 現在の値を設定します。                                                                                    |

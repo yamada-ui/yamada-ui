@@ -34,11 +34,9 @@ export const Oval = withContext<"svg", OvalProps>(
               animationIterationCount="infinite"
               animationName="spin"
               animationTimingFunction="linear"
-              asChild
+              d="M36 18c0-9.94-8.06-18-18-18"
               transformOrigin="18px 18px"
-            >
-              <path d="M36 18c0-9.94-8.06-18-18-18" />
-            </styled.path>
+            />
           </g>
         </g>
       </Icon>

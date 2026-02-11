@@ -117,7 +117,8 @@ export const useFieldProps = <Y extends HTMLElement, M extends Dict>(
   )
   const ariaProps = useMemo(
     () => ({
-      "aria-describedby": cx(errorMessageId, helperMessageId, ariaDescribedby),
+      "aria-describedby":
+        ariaDescribedby ?? cx(errorMessageId, helperMessageId),
       "aria-disabled": ariaAttr(
         notSupportReadOnly ? readOnly || disabled : disabled,
       ),

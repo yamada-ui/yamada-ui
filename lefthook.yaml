@@ -1,11 +1,6 @@
 pre-commit:
   piped: true
   jobs:
-    - name: prettier
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css}"
-      run: pnpm prettier {staged_files} --write
-      stage_fixed: true
-
     - name: eslint
       group:
         parallel: true
@@ -69,6 +64,13 @@ pre-commit:
               pnpm eslint {staged_files} --max-warnings=0 --fix --cache
             stage_fixed: true
 
+          - name: react-router-framework
+            root: playgrounds/react-router/framework/
+            glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+            run: |
+              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+            stage_fixed: true
+
           - name: vite
             root: playgrounds/vite/
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
@@ -76,12 +78,10 @@ pre-commit:
               pnpm eslint {staged_files} --max-warnings=0 --fix --cache
             stage_fixed: true
 
-          - name: remix
-            root: playgrounds/remix/
-            glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-            run: |
-              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
-            stage_fixed: true
+    - name: prettier
+      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css}"
+      run: pnpm prettier {staged_files} --write
+      stage_fixed: true
 
 commit-msg:
   commands:

@@ -1,10 +1,15 @@
 {
   "$schema": "https://turborepo.dev/schema.v2.json",
   "tasks": {
+    "//#transit": { "dependsOn": ["^transit"] },
     "transit": { "dependsOn": ["^transit"] },
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
+    },
+    "build:content": {
+      "dependsOn": ["transit"],
+      "outputs": [".velite/**", "data/doc-map.*.json"]
     },
     "test": {
       "dependsOn": ["build"]
@@ -16,11 +21,23 @@
     "typecheck": {
       "dependsOn": ["transit"]
     },
+    "//#typecheck:scripts": {
+      "dependsOn": ["transit"],
+      "inputs": ["scripts/**", "tsconfig.json", "package.json", "packages/workspace/src/typescript/**", "packages/workspace/package.json"]
+    },
     "lint": {
       "dependsOn": ["transit"]
     },
+    "//#lint:scripts": {
+      "dependsOn": ["transit"],
+      "inputs": ["scripts/**", "eslint.config.ts", "package.json", "packages/workspace/src/eslint/**", "packages/workspace/package.json"]
+    },
     "format": {
       "dependsOn": ["transit"]
+    },
+    "//#format:scripts": {
+      "dependsOn": ["transit"],
+      "inputs": ["scripts/**", ".prettierrc.js", ".prettierignore", "package.json", "packages/workspace/src/prettier/**", "packages/workspace/package.json"]
     }
   },
   "globalDependencies": ["tsconfig.json"]

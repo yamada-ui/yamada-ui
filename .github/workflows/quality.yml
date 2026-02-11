@@ -73,22 +73,27 @@ jobs:
         with:
           files_yaml: |
             packages:
+              - turbo.json
               - packages/**/(package.json|tsconfig.json)
               - packages/**/*.{ts,tsx,mts}
               - .github/workflows/quality.yml
             scripts:
+              - turbo.json
               - packages/workspace/src/eslint/**
               - packages/workspace/package.json
               - scripts/**
               - package.json
               - tsconfig.json
               - eslint.config.ts
+              - .github/workflows/quality.yml
             www:
+              - turbo.json
               - packages/workspace/src/eslint/**
               - packages/workspace/package.json
               - www/**/*.{ts,tsx,mts,mdx}
               - www/package.json
               - www/tsconfig.json
+              - www/turbo.json
               - www/eslint.config.ts
 
       - name: Restore turbo cache
@@ -110,13 +115,11 @@ jobs:
 
       - name: Run lint
         if: steps.changed-files.outputs.scripts_any_changed == 'true'
-        run: pnpm lint:scripts
+        run: pnpm turbo run lint:scripts
 
       - name: Run lint
         if: steps.changed-files.outputs.www_any_changed == 'true'
-        run: |
-          pnpm www build:content
-          pnpm www lint
+        run: pnpm turbo run lint --filter www
 
   typescript:
     name: TypeScript
@@ -131,21 +134,27 @@ jobs:
         with:
           files_yaml: |
             packages:
+              - turbo.json
               - packages/**/(package.json|tsconfig.json)
               - packages/**/*.{ts,tsx,mts}
               - .github/workflows/quality.yml
             scripts:
+              - turbo.json
               - packages/workspace/src/typescript/**
               - packages/workspace/package.json
               - scripts/**
               - package.json
               - tsconfig.json
+              - .github/workflows/quality.yml
             www:
+              - turbo.json
               - packages/workspace/src/typescript/**
               - packages/workspace/package.json
               - www/**/*.{ts,tsx,mts}
               - www/package.json
               - www/tsconfig.json
+              - www/turbo.json
+              - .github/workflows/quality.yml
 
       - name: Restore turbo cache
         if: steps.changed-files.outputs.changed_keys != ''
@@ -166,13 +175,11 @@ jobs:
 
       - name: Run typecheck
         if: steps.changed-files.outputs.scripts_any_changed == 'true'
-        run: pnpm typecheck:scripts
+        run: pnpm turbo run typecheck:scripts
 
       - name: Run typecheck
         if: steps.changed-files.outputs.www_any_changed == 'true'
-        run: |
-          pnpm www build:content
-          pnpm www typecheck
+        run: pnpm turbo run typecheck --filter www
 
   prettier:
     name: Prettier
@@ -187,22 +194,27 @@ jobs:
         with:
           files_yaml: |
             packages:
+              - turbo.json
               - packages/**
               - .prettierignore
               - .prettierrc.js
               - .github/workflows/quality.yml
             scripts:
+              - turbo.json
               - packages/workspace/src/prettier/**
               - packages/workspace/package.json
               - scripts/**
               - .prettierignore
               - .prettierrc.js
+              - .github/workflows/quality.yml
             www:
+              - turbo.json
               - packages/workspace/src/prettier/**
               - packages/workspace/package.json
               - www/**
               - .prettierignore
               - .prettierrc.js
+              - .github/workflows/quality.yml
 
       - name: Restore turbo cache
         if: steps.changed-files.outputs.changed_keys != ''
@@ -223,13 +235,11 @@ jobs:
 
       - name: Run format
         if: steps.changed-files.outputs.scripts_any_changed == 'true'
-        run: pnpm format:scripts
+        run: pnpm turbo run format:scripts
 
       - name: Run format
         if: steps.changed-files.outputs.www_any_changed == 'true'
-        run: |
-          pnpm www build:content
-          pnpm www format
+        run: pnpm turbo run format --filter www
 
   changeset:
     name: Changeset

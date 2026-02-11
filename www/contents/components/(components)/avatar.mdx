@@ -174,8 +174,9 @@ If you want to control the number of avatars displayed, specify a number with `m
 
 ### ARIA Roles and Attributes
 
-| Component        | Roles and Attributes | Usage                                                                                                                                                                            |
-| ---------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AvatarImage`    | `alt`                | Alternative text for the avatar image. The component uses the `name` prop as the value for the `alt` attribute; if `name` is not provided, it uses the `alt` prop value instead. |
-| `AvatarFallback` | `role="img"`         | Indicates that this is an image.                                                                                                                                                 |
-|                  | `aria-label`         | This is set when `fallback` is not provided. Sets the value of `name` or `alt` if provided. Otherwise, sets `"Avatar Icon"`.                                                     |
+| Component          | Roles and Attributes | Usage                                                                                                                                                                            |
+| ------------------ | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AvatarImage`      | `alt`                | Alternative text for the avatar image. The component uses the `name` prop as the value for the `alt` attribute; if `name` is not provided, it uses the `alt` prop value instead. |
+| `AvatarFallback`   | `role="img"`         | Indicates that this is an image.                                                                                                                                                 |
+|                    | `aria-label`         | This is set when `fallback` is not provided. Sets the value of `name` or `alt` if provided. Otherwise, sets `"Avatar Icon"`.                                                     |
+| `AvatarGroup.Root` | `role="group"`       | Indicates that it is a group.                                                                                                                                                    |

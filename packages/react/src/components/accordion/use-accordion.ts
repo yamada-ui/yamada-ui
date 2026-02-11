@@ -282,13 +282,13 @@ export const useAccordionItem = ({
 
   const getIconProps: PropGetter<"svg"> = useCallback(
     (props) => ({
-      "aria-disabled": ariaAttr(disabled),
+      "aria-disabled": ariaAttr((!multiple && !toggle && open) || disabled),
       "aria-expanded": open,
       "aria-hidden": true,
       role: "presentation",
       ...props,
     }),
-    [open, disabled],
+    [multiple, toggle, open, disabled],
   )
 
   return {

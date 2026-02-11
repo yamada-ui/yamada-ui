@@ -657,7 +657,6 @@ export const standardStyles = {
   cursor: true,
   cx: true,
   cy: true,
-  d: true,
   direction: true,
   display: { transform: transforms.display },
   dominantBaseline: true,
@@ -5276,18 +5275,6 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/cy
    */
   cy?: StyleValueWithCondition<CSS.Property.Cy>
-  /**
-   * ### d
-   *
-   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2022-07-15
-   * @newly_available_date 2020-01-15
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/d
-   */
-  d?: StyleValueWithCondition<CSS.Property.D>
   /**
    * ### direction
    *
@@ -11027,7 +11014,7 @@ export interface StyleProps {
    * @baseline `Newly available`
    * @newly_available_date 2024-08-06
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/@starting-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@starting-style
    */
   _startingStyle?: StyleValueWithCondition<CSSObject>
   /**

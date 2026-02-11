@@ -39,6 +39,7 @@ next-env.d.ts
 .turbo
 .next
 .react-router
+.tanstack
 
 # dotenv environment variables file
 .env

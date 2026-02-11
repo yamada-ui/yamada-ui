@@ -28,6 +28,7 @@
     "vite": "pnpm -C playgrounds/vite",
     "remix": "pnpm -C playgrounds/remix",
     "hono": "pnpm -C playgrounds/hono",
+    "tanstack:start": "pnpm -C playgrounds/tanstack-start",
     "prebuild": "pnpm gen:tokens",
     "build": "turbo run build --filter=./packages/**",
     "lint": "turbo run lint --filter=./packages/**",

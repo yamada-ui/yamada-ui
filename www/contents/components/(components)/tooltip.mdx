@@ -158,4 +158,16 @@ To always display the tooltip, set `open` to `true`.
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+`Tooltip` follows the [WAI-ARIA - Tooltip Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/) for accessibility.
+
+### Keyboard Navigation
+
+| Key      | Description                                  | State |
+| -------- | -------------------------------------------- | ----- |
+| `Escape` | Hides the currently displayed popup element. | -     |
+
+### ARIA Roles and Attributes
+
+| Component | Role and Attribute | Usage                             |
+| --------- | ------------------ | --------------------------------- |
+| `Tooltip` | `role="tooltip"`   | Indicates that it is a `Tooltip`. |

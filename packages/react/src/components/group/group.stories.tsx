@@ -56,7 +56,7 @@ export const Attached: Story = () => {
   return (
     <>
       <Group attached>
-        <Input />
+        <Input aria-label="Username" />
         <IconButton
           variant="surface"
           aria-label="Add"

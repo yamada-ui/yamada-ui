@@ -89,7 +89,17 @@ export const radioCardStyle = defineComponentSlotStyle({
   },
 
   variants: {
-    base: { indicator: radioStyle.variants?.base.indicator },
+    base: {
+      indicator: radioStyle.variants?.base.indicator,
+      root: {
+        _container: [
+          { css: { bg: "bg" }, style: '--form-group-variant: "panel"' },
+          { css: { bg: "bg" }, style: '--fieldset-root-variant: "panel"' },
+          { css: { bg: "bg" }, style: '--form-group-variant: "elevated"' },
+          { css: { bg: "bg" }, style: '--fieldset-root-variant: "elevated"' },
+        ],
+      },
+    },
     outline: {
       root: {
         _checked: {

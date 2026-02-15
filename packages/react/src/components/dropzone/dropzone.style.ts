@@ -49,6 +49,12 @@ export const dropzoneStyle = defineComponentSlotStyle({
       root: {
         color: "fg.subtle",
         _accept: { bg: "success.bg" },
+        _container: [
+          { css: { bg: "bg" }, style: '--form-group-variant: "panel"' },
+          { css: { bg: "bg" }, style: '--fieldset-root-variant: "panel"' },
+          { css: { bg: "bg" }, style: '--form-group-variant: "elevated"' },
+          { css: { bg: "bg" }, style: '--fieldset-root-variant: "elevated"' },
+        ],
         _reject: { bg: "error.bg" },
       },
       title: { color: "fg.muted" },

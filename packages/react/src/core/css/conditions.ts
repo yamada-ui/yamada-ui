@@ -135,6 +135,10 @@ export const attributes = {
    */
   _numeric: "&[data-numeric]",
   /**
+   * The CSS `&:is([open], [data-open])` attribute selector.
+   */
+  _open: "&:is([open], [data-open])",
+  /**
    * The CSS `&:is([data-pressed], [aria-pressed=true])` attribute selector.
    */
   _pressed: "&:is([data-pressed], [aria-pressed=true])",
@@ -204,6 +208,10 @@ export const pseudoElements = {
    * The CSS `&::cue-region` pseudo-element.
    */
   _cueRegion: "&::cue-region",
+  /**
+   * The CSS `&::details-content` pseudo-element.
+   */
+  _detailsContent: "&::details-content",
   /**
    * The CSS `&::file-selector-button` pseudo-element.
    */
@@ -461,6 +469,10 @@ export const pseudoClasses = {
    */
   _playing: "&:is(:playing, [data-playing])",
   /**
+   * The CSS `&:popover-open` pseudo-class.
+   */
+  _popoverOpen: "&:popover-open",
+  /**
    * The CSS `&:is(:read-write, [data-read-write])` pseudo-class.
    */
   _readWrite: "&:is(:read-write, [data-read-write])",
@@ -616,6 +628,10 @@ export const groupAttributes = {
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is loading.
    */
   _groupLoading: toGroup(attributes._loading),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is open.
+   */
+  _groupOpen: toGroup(attributes._open),
   /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is optional.
    */

@@ -290,12 +290,9 @@ export const usePopover = ({
     [refs.setReference],
   )
 
-  const getPositionerProps: PropGetter = useCallback(
-    (props) => {
-      return getPopperProps(props)
-    },
-    [getPopperProps],
-  )
+  const getPositionerProps: PropGetter = useCallback(getPopperProps, [
+    getPopperProps,
+  ])
 
   const getContentProps: PropGetter = useCallback(
     ({ ref, ...props } = {}) => ({
@@ -316,27 +313,34 @@ export const usePopover = ({
   )
 
   const getHeaderProps: PropGetter = useCallback(
-    (props) => ({
-      id: headerId,
-      ...props,
-    }),
+    (props) => ({ id: headerId, ...props }),
     [headerId],
   )
 
   const getBodyProps: PropGetter = useCallback(
-    (props) => ({
-      id: bodyId,
-      ...props,
-    }),
+    (props) => ({ id: bodyId, ...props }),
     [bodyId],
   )
 
   const getFooterProps: PropGetter = useCallback((props) => ({ ...props }), [])
 
+  const getCloseTriggerProps: PropGetter<"button"> = useCallback(
+    (props = {}) => ({
+      ...props,
+      onClick: handlerAll(props.onClick, () => {
+        onClose()
+
+        triggerRef.current?.focus()
+      }),
+    }),
+    [onClose],
+  )
+
   return {
     open,
     getAnchorProps,
     getBodyProps,
+    getCloseTriggerProps,
     getContentProps,
     getFooterProps,
     getHeaderProps,

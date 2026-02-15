@@ -3,6 +3,7 @@ export * as Popover from "./namespace"
 export type {
   PopoverAnchorProps,
   PopoverBodyProps,
+  PopoverCloseTriggerProps,
   PopoverContentProps,
   PopoverFooterProps,
   PopoverHeaderProps,
@@ -14,6 +15,7 @@ export {
   getPopupAnimationProps,
   PopoverAnchor,
   PopoverBody,
+  PopoverCloseTrigger,
   PopoverContent,
   PopoverFooter,
   PopoverHeader,

@@ -28,7 +28,7 @@ interface AccordionCallBackProps {
 
 export interface AccordionItem extends Omit<AccordionItemProps, "index"> {}
 
-interface AccordionComponentContext
+interface ComponentContext
   extends Pick<AccordionRootProps, "icon" | "iconHidden"> {}
 
 export interface AccordionRootProps
@@ -51,12 +51,11 @@ export interface AccordionRootProps
   items?: AccordionItem[]
 }
 
-interface AccordionItemComponentContext
-  extends Pick<AccordionItemProps, "icon"> {}
+interface ItemComponentContext extends Pick<AccordionItemProps, "icon"> {}
 
-const [AccordionItemComponentContext, useAccordionItemComponentContext] =
-  createContext<AccordionItemComponentContext>({
-    name: "AccordionItemComponentContext",
+const [ItemComponentContext, useItemComponentContext] =
+  createContext<ItemComponentContext>({
+    name: "ItemComponentContext",
   })
 
 const {
@@ -66,11 +65,10 @@ const {
   usePropsContext: useAccordionPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<
-  AccordionRootProps,
-  AccordionStyle,
-  AccordionComponentContext
->("accordion", accordionStyle)
+} = createSlotComponent<AccordionRootProps, AccordionStyle, ComponentContext>(
+  "accordion",
+  accordionStyle,
+)
 
 export { AccordionPropsContext, useAccordionPropsContext }
 
@@ -165,15 +163,12 @@ export const AccordionItem = withContext<"div", AccordionItemProps>(
       getItemProps,
       getPanelProps,
     } = useAccordionItem(rest)
-
-    children = useMemo(
+    const computedChildren = useMemo(
       () => runIfFn(children, { disabled, expanded: open }),
       [children, disabled, open],
     )
-
     const [omittedChildren, customAccordionButton, customAccordionPanel] =
-      useSplitChildren(children, AccordionButton, AccordionPanel)
-
+      useSplitChildren(computedChildren, AccordionButton, AccordionPanel)
     const context = useMemo(
       () => ({
         disabled,
@@ -189,7 +184,7 @@ export const AccordionItem = withContext<"div", AccordionItemProps>(
 
     return (
       <AccordionItemContext value={context}>
-        <AccordionItemComponentContext value={componentContext}>
+        <ItemComponentContext value={componentContext}>
           <styled.div {...getItemProps()}>
             {customAccordionButton ?? (
               <AccordionButton>
@@ -200,7 +195,7 @@ export const AccordionItem = withContext<"div", AccordionItemProps>(
               <AccordionPanel>{omittedChildren}</AccordionPanel>
             )}
           </styled.div>
-        </AccordionItemComponentContext>
+        </ItemComponentContext>
       </AccordionItemContext>
     )
   },
@@ -211,7 +206,7 @@ export interface AccordionButtonProps extends HTMLStyledProps<"button"> {
   /**
    * The accordion icon to use.
    */
-  icon?: ReactNodeOrFunction<{ disabled?: boolean; expanded?: boolean }>
+  icon?: ReactNodeOrFunction<AccordionCallBackProps>
   /**
    * Props the container element.
    */
@@ -221,7 +216,7 @@ export interface AccordionButtonProps extends HTMLStyledProps<"button"> {
 export const AccordionButton = withContext<"button", AccordionButtonProps>(
   ({ children, icon: customIcon, containerProps, ...rest }) => {
     const { icon: rootIcon } = useComponentContext()
-    const { icon: itemIcon } = useAccordionItemComponentContext()
+    const { icon: itemIcon } = useItemComponentContext()
     const { disabled, open, getButtonProps } = useAccordionItemContext()
     const props = { disabled, expanded: open }
 
@@ -231,9 +226,9 @@ export const AccordionButton = withContext<"button", AccordionButtonProps>(
           {children}
 
           <AccordionIcon>
-            {runIfFn(itemIcon, props) ??
-              runIfFn(rootIcon, props) ??
-              runIfFn(customIcon, props)}
+            {runIfFn(customIcon, props) ??
+              runIfFn(itemIcon, props) ??
+              runIfFn(rootIcon, props)}
           </AccordionIcon>
         </styled.button>
       </styled.h3>

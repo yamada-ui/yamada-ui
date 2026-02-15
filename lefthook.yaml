@@ -1,11 +1,6 @@
 pre-commit:
   piped: true
   jobs:
-    - name: prettier
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css}"
-      run: pnpm prettier {staged_files} --write
-      stage_fixed: true
-
     - name: eslint
       group:
         parallel: true
@@ -82,6 +77,11 @@ pre-commit:
             run: |
               pnpm eslint {staged_files} --max-warnings=0 --fix --cache
             stage_fixed: true
+
+    - name: prettier
+      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css}"
+      run: pnpm prettier {staged_files} --write
+      stage_fixed: true
 
 commit-msg:
   commands:

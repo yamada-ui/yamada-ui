@@ -375,4 +375,75 @@ return <ColorPicker value={value} onChange={onChange} />
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`ColorPicker`は、アクセシビリティに関して[WAI-ARIA - Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)に従います。
+
+`Field.Root`を使用しない場合は、`ColorPicker`に`aria-label`または`aria-labelledby`を設定します。
+
+```tsx
+<ColorPicker placeholder="#4387f4" aria-label="Pick color" />
+```
+
+```tsx
+<VStack gap="sm">
+  <Heading as="h3" id="label">
+    Pick Color
+  </Heading>
+
+  <ColorPicker placeholder="#4387f4" aria-labelledby="label" />
+</VStack>
+```
+
+## キーボード操作
+
+| キー                    | 説明                                                                                   | 状態                 |
+| ----------------------- | -------------------------------------------------------------------------------------- | -------------------- |
+| `Tab`                   | フォーカスがカラーピッカーに移動するとダイアログを開きます。                           | `openOnFocus={true}` |
+| `Escape`                | ダイアログを閉じます。                                                                 | `closeOnEsc={true}`  |
+| `ArrowRight`,`ArrowUp`  | スライダー内である場合は`step`の値に基づいて値を増加します。                           | -                    |
+| `ArrowLeft`,`ArrowDown` | スライダー内である場合は`step`の値に基づいて値を減少します。                           | -                    |
+| `Home`                  | `HueSlider`または`AlphaSlider`内である場合は`min`の値を設定します。                    | -                    |
+| `End`                   | `HueSlider`または`AlphaSlider`内である場合は`max`の値を設定します。                    | -                    |
+| `PageUp`                | `HueSlider`または`AlphaSlider`内である場合は`min`と`max`の値に基づいて値を増加します。 | -                    |
+| `PageDown`              | `HueSlider`または`AlphaSlider`内である場合は`min`と`max`の値に基づいて値を減少します。 | -                    |
+
+## ARIAロールと属性
+
+| コンポーネント           | ロールと属性             | 使い方                                                                                                                                                                                        |
+| ------------------------ | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ColorPickerField`       | `role="combobox"`        | コンボボックスであることを示します。                                                                                                                                                          |
+|                          | `aria-controls`          | ダイアログが開いている場合は関連した`ColorPickerContent`の`id`を設定し、閉じている場合は`undefined`を設定します。                                                                             |
+|                          | `aria-describedby`       | `ColorPicker`が`Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
+|                          | `aria-disabled`          | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                        |
+|                          | `aria-expanded`          | ダイアログが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。                                                                                                         |
+|                          | `aria-haspopup="dialog"` | ダイアログが存在することを示します。                                                                                                                                                          |
+|                          | `aria-invalid`           | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                         |
+|                          | `aria-readonly`          | `readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                                        |
+|                          | `aria-required`          | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                        |
+| `ColorPickerEyeDropper`  | `role="button"`          | ボタンであることを示します。                                                                                                                                                                  |
+|                          | `aria-disabled`          | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                        |
+|                          | `aria-label`             | `"色を選択する"`を設定します。                                                                                                                                                                |
+| `ColorPickerContent`     | `role="dialog"`          | ダイアログであることを示します。                                                                                                                                                              |
+| `ColorPickerColorSwatch` | `role="img"`             | 画像であることを示します。                                                                                                                                                                    |
+|                          | `aria-label`             | 現在の値を設定します。                                                                                                                                                                        |
+|                          | `aria-roledescription`   | `"color swatch"`を設定します。                                                                                                                                                                |
+| `SaturationSlider.Thumb` | `role="slider"`          | スライダーであることを示します。                                                                                                                                                              |
+|                          | `aria-label`             | `"彩度と明度のつまみ"`を設定します。                                                                                                                                                          |
+|                          | `aria-roledescription`   | `"2D slider"`を設定します。                                                                                                                                                                   |
+|                          | `aria-valuemin`          | `min`の値を設定します。デフォルトは`0`です。                                                                                                                                                  |
+|                          | `aria-valuemax`          | `max`の値を設定します。デフォルトは`100`です。                                                                                                                                                |
+|                          | `aria-valuenow`          | 現在の値を設定します。                                                                                                                                                                        |
+|                          | `aria-valuetext`         | `"彩度 18%, 明度 18%"`のように、現在の値を設定します。                                                                                                                                        |
+| `HueSlider.Thumb`        | `role="slider"`          | スライダーであることを示します。                                                                                                                                                              |
+|                          | `aria-label`             | `"スライダーのつまみ"`を設定します。                                                                                                                                                          |
+|                          | `aria-orientation`       | `orientation`の値に基づいて`"horizontal"`または`"vertical"`を設定します。デフォルトは`"horizontal"`です。                                                                                     |
+|                          | `aria-valuemin`          | `min`の値を設定します。デフォルトは`0`です。                                                                                                                                                  |
+|                          | `aria-valuemax`          | `max`の値を設定します。デフォルトは`360`です。                                                                                                                                                |
+|                          | `aria-valuenow`          | 現在の値を設定します。                                                                                                                                                                        |
+|                          | `aria-valuetext`         | `"18°, 赤"`のように、現在の値を設定します。                                                                                                                                                   |
+| `AlphaSlider.Thumb`      | `role="slider"`          | スライダーであることを示します。                                                                                                                                                              |
+|                          | `aria-label`             | `"スライダーのつまみ"`を設定します。                                                                                                                                                          |
+|                          | `aria-orientation`       | `orientation`の値に基づいて`"horizontal"`または`"vertical"`を設定します。デフォルトは`"horizontal"`です。                                                                                     |
+|                          | `aria-valuemin`          | `min`の値を設定します。デフォルトは`0`です。                                                                                                                                                  |
+|                          | `aria-valuemax`          | `max`の値を設定します。デフォルトは`1`です。                                                                                                                                                  |
+|                          | `aria-valuenow`          | 現在の値を設定します。                                                                                                                                                                        |
+|                          | `aria-valuetext`         | `"18%"`のように、現在の値を設定します。                                                                                                                                                       |

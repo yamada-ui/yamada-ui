@@ -1121,4 +1121,37 @@ return (
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`Carousel`は、アクセシビリティに関して[WAI-ARIA - Carousel (Slide Show or Image Rotator) Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/carousel/)に従います。
+
+### キーボード操作
+
+| キー         | 説明                                                                                         | 状態                       |
+| ------------ | -------------------------------------------------------------------------------------------- | -------------------------- |
+| `Tab`        | フォーカスがカルーセルに移動すると、アクティブな項目をフォーカスします。                     | -                          |
+| `ArrowLeft`  | 前の項目をフォーカスしてアクティブにします。最初の項目の場合は最後の項目をフォーカスします。 | `orientation="horizontal"` |
+| `ArrowRight` | 次の項目をフォーカスしてアクティブにします。最後の項目の場合は最初の項目をフォーカスします。 | `orientation="horizontal"` |
+| `ArrowUp`    | 前の項目をフォーカスしてアクティブにします。最初の項目の場合は最後の項目をフォーカスします。 | `orientation="vertical"`   |
+| `ArrowDown`  | 次の項目をフォーカスしてアクティブにします。最後の項目の場合は最初の項目をフォーカスします。 | `orientation="vertical"`   |
+| `Home`       | 最初の項目をフォーカスしてアクティブにします。                                               | -                          |
+| `End`        | 最後の項目をフォーカスしてアクティブにします。                                               | -                          |
+
+### ARIAロールと属性
+
+| コンポーネント         | ロールと属性                      | 使い方                                                                                                    |
+| ---------------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `Carousel.Root`        | `aria-roledescription="carousel"` | カルーセルであることを示します。                                                                          |
+| `Carousel.List`        | `aria-live`                       | `autoplay`が`true`の場合は`"off"`を設定し、`false`の場合は`"polite"`を設定します。                        |
+| `Carousel.Item`        | `role="tabpanel"`                 | タブパネルであることを示します。                                                                          |
+|                        | `aria-label`                      | `1 of 4`のように、現在のスライドの番号を設定します。                                                      |
+|                        | `aria-roledescription="slide"`    | スライドであることを示します。                                                                            |
+| `Carousel.PrevTrigger` | `aria-controls`                   | 関連した`Carousel.List`の`id`を設定します。                                                               |
+|                        | `aria-label`                      | `"前のスライドに移動する"`を設定します。                                                                  |
+| `Carousel.NextTrigger` | `aria-controls`                   | 関連した`Carousel.List`の`id`を設定します。                                                               |
+|                        | `aria-label`                      | `"次のスライドに移動する"`を設定します。                                                                  |
+| `Carousel.Indicators`  | `role="tablist"`                  | タブリストであることを示します。                                                                          |
+|                        | `aria-label`                      | `"スライド"`を設定します。                                                                                |
+|                        | `aria-orientation`                | `orientation`の値に基づいて`"horizontal"`または`"vertical"`を設定します。デフォルトは`"horizontal"`です。 |
+| `Carousel.Indicator`   | `role="tab"`                      | タブであることを示します。                                                                                |
+|                        | `aria-controls`                   | 関連した`Carousel.List`の`id`を設定します。                                                               |
+|                        | `aria-label`                      | `"1スライドに移動する"`のように、移動先のスライドの番号を設定します。                                     |
+|                        | `aria-selected`                   | 関連したスライドが選択されている場合は`true`を設定し、選択されていない場合は`false`を設定します。         |

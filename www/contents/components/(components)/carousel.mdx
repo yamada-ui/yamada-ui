@@ -1121,4 +1121,37 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+The `Carousel` follows the [WAI-ARIA - Carousel (Slide Show or Image Rotator) Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/carousel/) for accessibility.
+
+### Keyboard Navigation
+
+| Key          | Description                                                                              | State                      |
+| ------------ | ---------------------------------------------------------------------------------------- | -------------------------- |
+| `Tab`        | When focus moves to the carousel, it focuses the active item.                            | -                          |
+| `ArrowLeft`  | Focuses and activates the previous item. If it is the first item, focuses the last item. | `orientation="horizontal"` |
+| `ArrowRight` | Focuses and activates the next item. If it is the last item, focuses the first item.     | `orientation="horizontal"` |
+| `ArrowUp`    | Focuses and activates the previous item. If it is the first item, focuses the last item. | `orientation="vertical"`   |
+| `ArrowDown`  | Focuses and activates the next item. If it is the last item, focuses the first item.     | `orientation="vertical"`   |
+| `Home`       | Focuses and activates the first item.                                                    | -                          |
+| `End`        | Focuses and activates the last item.                                                     | -                          |
+
+### ARIA Roles and Attributes
+
+| Component              | Roles and Attributes              | Usage                                                                                         |
+| ---------------------- | --------------------------------- | --------------------------------------------------------------------------------------------- |
+| `Carousel.Root`        | `aria-roledescription="carousel"` | Indicates that this is a carousel.                                                            |
+| `Carousel.List`        | `aria-live`                       | Sets to `"off"` if `autoplay` is `true`, `"polite"` if `false`.                               |
+| `Carousel.Item`        | `role="tabpanel"`                 | Indicates that this is a tab panel.                                                           |
+|                        | `aria-label`                      | Sets the current slide number, such as `1 of 4`.                                              |
+|                        | `aria-roledescription="slide"`    | Indicates that this is a slide.                                                               |
+| `Carousel.PrevTrigger` | `aria-controls`                   | Sets the `id` of the associated `Carousel.List`.                                              |
+|                        | `aria-label`                      | Sets to `"Go to previous slide"`.                                                             |
+| `Carousel.NextTrigger` | `aria-controls`                   | Sets the `id` of the associated `Carousel.List`.                                              |
+|                        | `aria-label`                      | Sets to `"Go to next slide"`.                                                                 |
+| `Carousel.Indicators`  | `role="tablist"`                  | Indicates that this is a tab list.                                                            |
+|                        | `aria-label`                      | Sets to `"Slides"`.                                                                           |
+|                        | `aria-orientation`                | Sets to `"horizontal"` or `"vertical"` based on `orientation`. The default is `"horizontal"`. |
+| `Carousel.Indicator`   | `role="tab"`                      | Indicates that this is a tab.                                                                 |
+|                        | `aria-controls`                   | Sets the `id` of the associated `Carousel.List`.                                              |
+|                        | `aria-label`                      | Sets the destination slide number, such as `"Go to slide 1"`.                                 |
+|                        | `aria-selected`                   | Sets `true` if the associated slide is selected, `false` if not.                              |

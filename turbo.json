@@ -18,6 +18,15 @@
       "dependsOn": ["build"],
       "outputs": ["coverage/**"]
     },
+    "test:chromium": {
+      "dependsOn": ["build"]
+    },
+    "test:firefox": {
+      "dependsOn": ["build"]
+    },
+    "test:webkit": {
+      "dependsOn": ["build"]
+    },
     "typecheck": {
       "dependsOn": ["transit"]
     },

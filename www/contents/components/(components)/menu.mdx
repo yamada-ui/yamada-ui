@@ -854,4 +854,46 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+The `Menu` follows the [WAI-ARIA - Menu and Menubar Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/) and [WAI-ARIA - Menu Button Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/) for accessibility.
+
+### Keyboard Navigation
+
+| Key             | Description                                                                                                                                            | State                      |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------- |
+| `Space`,`Enter` | Opens the menu and focuses the first enabled item.                                                                                                     |                            |
+|                 | Activates the focused item and closes all menus if already within the menu.                                                                            | `closeOnSelect={true}`     |
+| `ArrowRight`    | If the focused item is a submenu trigger, opens the submenu and focuses the first enabled item.                                                        | `subMenuDirection="end"`   |
+|                 | Closes the submenu and focuses the submenu trigger if already within a submenu.                                                                        | `subMenuDirection="start"` |
+| `ArrowLeft`     | If the focused item is a submenu trigger, opens the submenu and focuses the first enabled item.                                                        | `subMenuDirection="start"` |
+|                 | Closes the submenu and focuses the submenu trigger if already within a submenu.                                                                        | `subMenuDirection="end"`   |
+| `ArrowUp`       | Opens the menu and focuses the last enabled item.Focuses the previous enabled item if already within the menu. If on the first item, focuses the last. |                            |
+| `ArrowDown`     | Opens the menu and focuses the first enabled item. Focuses the next enabled item if already within the menu. If on the last item, focuses the first.   |                            |
+| `Home`          | Focuses the first enabled item if already within the menu.                                                                                             |                            |
+| `End`           | Focuses the last enabled item if already within the menu.                                                                                              |                            |
+| `Escape`        | Closes the menu and focuses the trigger.                                                                                                               | `closeOnEsc={true}`        |
+
+### ARIA Roles and Attributes
+
+| Component             | Roles and Attributes    | Usage                                                                                                                  |
+| --------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `Menu.Trigger`        | `role="button"`         | Indicates that it is a button.                                                                                         |
+|                       | `aria-controls`         | Set to the related `Menu.Content` `id` when the menu is open, `undefined` when closed.                                 |
+|                       | `aria-disabled`         | Set to `"true"` when `disabled` is set.                                                                                |
+|                       | `aria-expanded`         | Set to `"true"` when the menu is open, `"false"` when closed.                                                          |
+|                       | `aria-haspopup="menu"`  | Indicates that a menu exists.                                                                                          |
+| `Menu.ContextTrigger` | `role="application"`    | Indicates that it is an application.                                                                                   |
+|                       | `aria-controls`         | Set to the related `Menu.Content` `id` when the menu is open, `undefined` when closed.                                 |
+|                       | `aria-disabled`         | Set to `"true"` when `disabled` is set.                                                                                |
+|                       | `aria-expanded`         | Set to `"true"` when the menu is open, `"false"` when closed.                                                          |
+|                       | `aria-haspopup="menu"`  | Indicates that a menu exists.                                                                                          |
+| `Menu.Content`        | `role="menu"`           | Indicates that it is a menu.                                                                                           |
+|                       | `aria-activedescendant` | Set to the `id` of the focused item.                                                                                   |
+|                       | `aria-hidden`           | Set to `"false"` when the menu is open, `"true"` when closed.                                                          |
+|                       | `aria-labelledby`       | Set to the `id` of the related `Menu.Trigger` or `Menu.ContextTrigger`.                                                |
+| `Menu.Label`          | `role="presentation"`   | Indicates that it is for presentation.                                                                                 |
+| `Menu.Group`          | `role="group"`          | Indicates that it is a group.                                                                                          |
+|                       | `aria-labelledby`       | Set to the `id` of the related `Menu.Label`.                                                                           |
+| `Menu.Item`           | `role="menuitem"`       | Indicates that it is a menu item.                                                                                      |
+|                       | `aria-disabled`         | Set to `"true"` when `disabled` is set.                                                                                |
+| `Menu.OptionItem`     | `role`                  | Set to `menuitemradio` when `Menu.OptionGroup` type is `"radio"`, set to `menuitemcheckbox` when type is `"checkbox"`. |
+| `Menu.Separator`      | `role="separator"`      | Indicates that it is a separator.                                                                                      |

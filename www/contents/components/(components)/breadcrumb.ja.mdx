@@ -254,4 +254,26 @@ return (
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`Breadcrumb`は、アクセシビリティに関して[WAI-ARIA - Breadcrumb Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/)に従います。
+
+`Breadcrumb`を使用する場合は、`Breadcrumb.Root`に`aria-label`を設定します。
+
+```tsx
+<Breadcrumb.Root aria-label="パンくずリスト">
+  <Breadcrumb.Link href="/">サイヤ人編</Breadcrumb.Link>
+  <Breadcrumb.Link href="/">ナメック星編</Breadcrumb.Link>
+  <Breadcrumb.Link href="/">人造人間編</Breadcrumb.Link>
+  <Breadcrumb.Link href="/" currentPage>
+    魔人ブウ編
+  </Breadcrumb.Link>
+</Breadcrumb.Root>
+```
+
+### ARIAロールと属性
+
+| コンポーネント        | ロールと属性          | 使い方                                                                   |
+| --------------------- | --------------------- | ------------------------------------------------------------------------ |
+| `Breadcrumb.Root`     | `aria-label`          | `aria-label`が設定されていない場合は、`"パンくずリスト"`が設定されます。 |
+| `Breadcrumb.Link`     | `aria-current="page"` | `currentPage`が`true`の場合に設定されます。                              |
+| `Breadcrumb.Ellipsis` | `role="presentation"` | プレゼンテーションであることを示します。                                 |
+|                       | `aria-label`          | `"省略記号"`を設定します。                                               |

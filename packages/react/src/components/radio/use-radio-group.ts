@@ -28,8 +28,7 @@ const [RadioGroupContext, useRadioGroupContext] =
 export { RadioGroupContext, useRadioGroupContext }
 
 export interface UseRadioGroupProps<Y extends string = string>
-  extends Omit<HTMLProps, "defaultValue" | "onChange" | "value">,
-    FieldProps {
+  extends Omit<HTMLProps, "defaultValue" | "onChange" | "value">, FieldProps {
   /**
    * The initial value of the radio group.
    */

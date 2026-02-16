@@ -36,8 +36,10 @@ export const PLACEMENT_MAP: {
   "start-start": "top-left",
 }
 
-export interface NoticeRootProps
-  extends Pick<Required<NoticeConfig>, "expand" | "limit" | "placement"> {
+export interface NoticeRootProps extends Pick<
+  Required<NoticeConfig>,
+  "expand" | "limit" | "placement"
+> {
   ref: RefObject<Controller>
 }
 
@@ -97,8 +99,7 @@ export const NoticeRoot = withProvider<"fragment", NoticeRootProps>(
 )()
 
 export interface NoticeItemProps
-  extends UseNoticeOptions,
-    Omit<HTMLStyledProps, "id" | "title"> {
+  extends UseNoticeOptions, Omit<HTMLStyledProps, "id" | "title"> {
   closeStrategies?: NoticeCloseStrategy[]
 }
 

@@ -10,21 +10,20 @@ import { createContext, cx, useSplitChildren } from "../../utils"
 import { Button } from "../button"
 import { formStyle } from "./form.style"
 
-interface FormContext
-  extends Pick<
-    FormRootProps,
-    | "disabled"
-    | "errorMessage"
-    | "helperMessage"
-    | "invalid"
-    | "optionalIndicator"
-    | "readOnly"
-    | "replace"
-    | "required"
-    | "requiredIndicator"
-    | "size"
-    | "variant"
-  > {
+interface FormContext extends Pick<
+  FormRootProps,
+  | "disabled"
+  | "errorMessage"
+  | "helperMessage"
+  | "invalid"
+  | "optionalIndicator"
+  | "readOnly"
+  | "replace"
+  | "required"
+  | "requiredIndicator"
+  | "size"
+  | "variant"
+> {
   id: string
   descriptionId: string
   titleId: string
@@ -38,8 +37,7 @@ const [FormContext, useFormContext] = createContext<FormContext>({
 export { FormContext, useFormContext }
 
 export interface FormRootProps
-  extends Omit<HTMLStyledProps<"form">, "title">,
-    ThemeProps<FormStyle> {
+  extends Omit<HTMLStyledProps<"form">, "title">, ThemeProps<FormStyle> {
   /**
    * The form description to use.
    */

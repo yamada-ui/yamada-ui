@@ -43,14 +43,16 @@ import {
 } from "./use-autocomplete"
 
 interface ComponentContext
-  extends Pick<UseAutocompleteReturn, "getInputProps" | "getSeparatorProps">,
+  extends
+    Pick<UseAutocompleteReturn, "getInputProps" | "getSeparatorProps">,
     Pick<
       AutocompleteRootProps,
       "emptyIcon" | "emptyProps" | "groupProps" | "inputProps" | "optionProps"
     > {}
 
 export interface AutocompleteRootProps<Multiple extends boolean = false>
-  extends Omit<
+  extends
+    Omit<
       HTMLStyledProps,
       "defaultValue" | "filter" | "offset" | "onChange" | "ref" | "value"
     >,
@@ -350,8 +352,7 @@ export const AutocompleteLabel = withContext<"span", AutocompleteLabelProps>(
 })
 
 export interface AutocompleteGroupProps
-  extends UseComboboxGroupProps,
-    HTMLStyledProps {
+  extends UseComboboxGroupProps, HTMLStyledProps {
   /**
    * The label of the group.
    */
@@ -386,8 +387,7 @@ export const AutocompleteGroup = withContext<"div", AutocompleteGroupProps>(
 )()
 
 export interface AutocompleteOptionProps
-  extends UseAutocompleteOptionProps,
-    HTMLStyledProps {
+  extends UseAutocompleteOptionProps, HTMLStyledProps {
   /**
    * The icon to be used in the autocomplete option.
    */

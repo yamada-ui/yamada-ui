@@ -13,7 +13,8 @@ import { useRadio } from "../radio"
 import { radioCardStyle } from "./radio-card.style"
 
 export interface RadioCardRootProps<Y extends string = string>
-  extends Merge<HTMLStyledProps<"label">, UseRadioProps<Y>>,
+  extends
+    Merge<HTMLStyledProps<"label">, UseRadioProps<Y>>,
     ThemeProps<RadioCardStyle>,
     UseInputBorderProps {
   /**

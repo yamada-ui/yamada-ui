@@ -21,11 +21,13 @@ import {
   useRootComponentProps,
 } from "./checkbox-card"
 
-export interface CheckboxCardGroupItem<Y extends string = string>
-  extends CheckboxCardRootProps<Y> {}
+export interface CheckboxCardGroupItem<
+  Y extends string = string,
+> extends CheckboxCardRootProps<Y> {}
 
 export interface CheckboxCardGroupRootProps<Y extends string = string>
-  extends Omit<
+  extends
+    Omit<
       WithoutThemeProps<GroupProps, CheckboxCardStyle>,
       "defaultValue" | "onChange" | "value"
     >,

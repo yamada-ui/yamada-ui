@@ -49,8 +49,7 @@ const variants: Variants = {
 } satisfies MotionTransitionVariants
 
 export interface CollapseProps
-  extends WithTransitionProps<HTMLMotionProps>,
-    ThemeProps<CollapseStyle> {
+  extends WithTransitionProps<HTMLMotionProps>, ThemeProps<CollapseStyle> {
   /**
    * If `true`, the opacity of the content will be animated.
    *

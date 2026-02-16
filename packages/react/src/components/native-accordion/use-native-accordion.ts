@@ -10,8 +10,10 @@ import {
   mergeRefs,
 } from "../../utils"
 
-interface NativeAccordionContext
-  extends Pick<UseNativeAccordionReturn, "name"> {}
+interface NativeAccordionContext extends Pick<
+  UseNativeAccordionReturn,
+  "name"
+> {}
 
 const [NativeAccordionContext, useNativeAccordionContext] =
   createContext<NativeAccordionContext>({

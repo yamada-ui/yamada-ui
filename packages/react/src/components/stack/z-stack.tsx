@@ -29,8 +29,7 @@ import { getValidChildren, mergeRefs } from "../../utils"
 import { zStackStyle } from "./z-stack.style"
 
 export interface ZStackProps
-  extends Omit<HTMLStyledProps, "direction">,
-    ThemeProps<ZStackStyle> {
+  extends Omit<HTMLStyledProps, "direction">, ThemeProps<ZStackStyle> {
   /**
    * Stack in the specified direction.
    *

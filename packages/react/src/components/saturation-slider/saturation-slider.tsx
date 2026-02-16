@@ -12,11 +12,14 @@ import { createSlotComponent, styled } from "../../core"
 import { saturationSliderStyle } from "./saturation-slider.style"
 import { useSaturationSlider } from "./use-saturation-slider"
 
-interface ComponentContext
-  extends Pick<UseSaturationSliderReturn, "getThumbProps" | "getTrackProps"> {}
+interface ComponentContext extends Pick<
+  UseSaturationSliderReturn,
+  "getThumbProps" | "getTrackProps"
+> {}
 
 export interface SaturationSliderRootProps
-  extends Merge<HTMLStyledProps, UseSaturationSliderProps>,
+  extends
+    Merge<HTMLStyledProps, UseSaturationSliderProps>,
     ThemeProps<SaturationSliderStyle> {
   /**
    * Props for the input element.

@@ -4,8 +4,8 @@ packages:
   - "www/**"
 
 catalog:
-  "@next/eslint-plugin-next": ^16.1.0
-  next: ^16.1.0
+  "@next/eslint-plugin-next": ^16.1.6
+  next: ^16.1.6
 
 minimumReleaseAge: 10080 # = 60 [minutes/h] * 24 [h/day] * 7 [day]
 

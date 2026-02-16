@@ -89,8 +89,8 @@ interface classNameOptions<Y extends string = string> {
 
 export interface ComponentWithContextOptions<
   Y extends number | string | symbol = string,
-> extends ComponentOptions,
-    UseComponentPropsOptions<Y> {}
+>
+  extends ComponentOptions, UseComponentPropsOptions<Y> {}
 
 function createProxyComponent<
   Y extends AsWithFragment = "div",

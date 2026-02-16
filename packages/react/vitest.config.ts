@@ -1,5 +1,5 @@
 import react from "@vitejs/plugin-react-swc"
-// @ts-nocheck -- vite version mismatch between storybook (5.x) and vitest (7.x)
+import { playwright } from "@vitest/browser-playwright"
 import sharedConfig from "@yamada-ui/workspace/vitest/config"
 import { readFile } from "fs/promises"
 import { glob } from "glob"
@@ -73,7 +73,7 @@ export default mergeConfig(sharedConfig, {
                 browser: "firefox",
               },
             ],
-            provider: "playwright",
+            provider: playwright() as any,
           },
           globals: true,
           include: browserTestFiles,

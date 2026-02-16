@@ -73,10 +73,10 @@ interface DatePickerRenderProps {
   date: Date
   focused: boolean
   index: number
+  max?: number
   separator: string
   value: string
   onClear: () => void
-  max?: number
 }
 
 export interface DatePickerRender {
@@ -104,7 +104,9 @@ const defaultRender: DatePickerRender = ({
 export interface UseDatePickerProps<
   Multiple extends boolean = false,
   Range extends boolean = false,
-> extends Omit<UseCalendarProps<Multiple, Range>, "format" | "ref">,
+>
+  extends
+    Omit<UseCalendarProps<Multiple, Range>, "format" | "ref">,
     Omit<
       UseComboboxProps,
       "defaultValue" | "initialFocusValue" | "onChange" | "ref" | "value"

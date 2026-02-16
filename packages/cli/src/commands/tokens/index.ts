@@ -273,8 +273,8 @@ async function getTheme(path: string, cwd: string) {
 interface Options {
   config: string
   cwd: string
-  internal: boolean
   format?: boolean
+  internal: boolean
   lint?: boolean
   out?: string
 }

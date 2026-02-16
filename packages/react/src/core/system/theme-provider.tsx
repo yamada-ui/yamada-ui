@@ -56,7 +56,8 @@ export const getPreventTransition = (environment: Environment) => {
 }
 
 export interface ThemeProviderProps
-  extends PropsWithChildren,
+  extends
+    PropsWithChildren,
     Omit<EmotionThemeProviderProps, "children" | "theme"> {
   /**
    * The config of the yamada ui.

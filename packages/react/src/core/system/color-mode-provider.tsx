@@ -21,9 +21,9 @@ import { useSystemColorMode } from "./use-system-color-mode"
 interface ColorModeContext {
   changeColorMode: (colorMode: ColorModeWithSystem) => void
   colorMode: ColorMode
+  forced?: boolean
   internalColorMode: ColorModeWithSystem
   toggleColorMode: () => void
-  forced?: boolean
 }
 
 export const ColorModeContext = createContext<ColorModeContext>({

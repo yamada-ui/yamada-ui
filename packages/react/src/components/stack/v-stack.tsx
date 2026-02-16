@@ -8,8 +8,7 @@ import { Stack } from "./stack"
 import { vStackStyle } from "./v-stack.style"
 
 export interface VStackProps
-  extends WithoutThemeProps<StackProps, VStackStyle>,
-    ThemeProps<VStackStyle> {}
+  extends WithoutThemeProps<StackProps, VStackStyle>, ThemeProps<VStackStyle> {}
 
 const {
   PropsContext: VStackPropsContext,

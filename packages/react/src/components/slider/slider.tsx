@@ -16,19 +16,19 @@ import { dataAttr, isNumber } from "../../utils"
 import { sliderStyle } from "./slider.style"
 import { useSlider } from "./use-slider"
 
-interface ComponentContext
-  extends Pick<
-    UseSliderReturn,
-    | "getInputProps"
-    | "getMarkProps"
-    | "getRangeProps"
-    | "getThumbProps"
-    | "getTrackProps"
-    | "range"
-  > {}
+interface ComponentContext extends Pick<
+  UseSliderReturn,
+  | "getInputProps"
+  | "getMarkProps"
+  | "getRangeProps"
+  | "getThumbProps"
+  | "getTrackProps"
+  | "range"
+> {}
 
 export interface SliderRootProps<Y extends [number, number] | number = number>
-  extends Omit<HTMLStyledProps, "defaultValue" | "onChange" | "ref">,
+  extends
+    Omit<HTMLStyledProps, "defaultValue" | "onChange" | "ref">,
     Omit<UseSliderProps<Y>, "orientation">,
     ThemeProps<SliderStyle> {
   /**
@@ -259,15 +259,15 @@ export const SliderRange = withContext<"div", SliderRangeProps>("div", "range")(
 
 export interface SliderMarkProps extends HTMLStyledProps {
   /**
-   * The value of the mark.
-   */
-  value: number
-  /**
    * Whether the mark is an indicator.
    *
    * @default true
    */
   indicator?: boolean
+  /**
+   * The value of the mark.
+   */
+  value: number
 }
 
 export const SliderMark = withContext<"div", SliderMarkProps>("div", "mark")(
@@ -283,7 +283,7 @@ export interface SliderMarksProps extends Omit<SliderMarkProps, "value"> {
   /**
    * The marks to display on the slider.
    */
-  marks: (number | { label: ReactNode; value: number; indicator?: boolean })[]
+  marks: (number | { indicator?: boolean; label: ReactNode; value: number })[]
 }
 
 export const SliderMarks: FC<SliderMarksProps> = ({ marks, ...props }) => {

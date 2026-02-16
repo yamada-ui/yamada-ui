@@ -1,1 +1,0 @@
-import{i as p}from"./iframe-FV6Pf4zG.js";const m=({children:u,each:r,fallback:e,filter:s,limit:n,offset:t=0,reverse:v=!1,sort:o})=>{if(!r||!p(r)||!r.length)return e||null;const l=[...r],d=s?l.filter(s):l,i=o?d.sort(o):d,c=(v?i.reverse():i).slice(t,n?t+n:void 0);return c.length?c.map(u):e||null};export{m as F};

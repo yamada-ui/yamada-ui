@@ -1,0 +1,9 @@
+import{j as o,bY as c}from"./iframe-Bh9OJiMa.js";import{W as s}from"./wrap-BLv8Ry5J.js";import{F as p}from"./for-Drx2NpVa.js";import{B as d}from"./box-Bg2AiZ11.js";import"./preload-helper-C1FmrZbK.js";import"./flex-Cq9fG4Y2.js";const E={component:s,title:"Components / Wrap"},r=()=>o.jsx(s,{gap:"md",children:o.jsx(p,{each:c,children:(t,m)=>o.jsx(d,{bg:`${t}.500`,color:"white",p:"md",rounded:"l2",children:"Box"},m)})});var e,a,n;r.parameters={...r.parameters,docs:{...(e=r.parameters)==null?void 0:e.docs,source:{originalSource:`() => {
+  return <Wrap gap="md">
+      <For each={DEFAULT_COLOR_SCHEMES}>
+        {(colorScheme, index) => <Box key={index} bg={\`\${colorScheme}.500\`} color="white" p="md" rounded="l2">
+            Box
+          </Box>}
+      </For>
+    </Wrap>;
+}`,...(n=(a=r.parameters)==null?void 0:a.docs)==null?void 0:n.source}}};const S=["Basic"];export{r as Basic,S as __namedExportsOrder,E as default};

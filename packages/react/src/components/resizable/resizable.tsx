@@ -13,7 +13,7 @@ import type {
   UseResizableTriggerProps,
 } from "./use-resizable"
 import { useMemo } from "react"
-import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels"
+import { Group, Panel, Separator } from "react-resizable-panels"
 import { createSlotComponent, styled } from "../../core"
 import { useValue } from "../../hooks/use-value"
 import { resizableStyle } from "./resizable.style"
@@ -59,18 +59,18 @@ export const ResizableRoot = withProvider<
 >(
   ({ children, orientation: orientationProp, rootRef, ...rest }) => {
     const computedOrientation = useValue(orientationProp)
-    const { controlRef, disabled, orientation, getGroupProps, getRootProps } =
+    const { disabled, groupRef, orientation, getGroupProps, getRootProps } =
       useResizable({ orientation: computedOrientation, ...rest })
 
     const context = useMemo(
-      () => ({ controlRef, disabled, orientation }),
-      [disabled, orientation, controlRef],
+      () => ({ disabled, groupRef, orientation }),
+      [disabled, orientation, groupRef],
     )
 
     return (
       <ResizableContext value={context}>
         <styled.div {...getRootProps({ ref: rootRef })}>
-          <PanelGroup {...getGroupProps()}>{children}</PanelGroup>
+          <Group {...getGroupProps()}>{children}</Group>
         </styled.div>
       </ResizableContext>
     )
@@ -79,15 +79,13 @@ export const ResizableRoot = withProvider<
   { transferProps: ["orientation"] },
 )()
 
-const StyledPanel = styled(Panel, { forwardProps: ["order"] })
-
 export interface ResizableItemProps
-  extends Omit<HTMLStyledPropsWithoutAs, "order">, UseResizableItemProps {}
+  extends HTMLStyledPropsWithoutAs, UseResizableItemProps {}
 
 export const ResizableItem = withContext<"div", ResizableItemProps>((props) => {
   const { getItemProps } = useResizableItem(props)
 
-  return <StyledPanel {...getItemProps()} />
+  return <styled.div as={Panel} {...getItemProps()} />
 }, "item")()
 
 export interface ResizableTriggerProps
@@ -107,7 +105,7 @@ export const ResizableTrigger = withContext<"div", ResizableTriggerProps>(
     const { getIconProps, getTriggerProps } = useResizableTrigger(rest)
 
     return (
-      <styled.div as={PanelResizeHandle} {...getTriggerProps()}>
+      <styled.div as={Separator} {...getTriggerProps()}>
         {icon ? (
           <ResizableIcon {...getIconProps(iconProps)}>{icon}</ResizableIcon>
         ) : null}

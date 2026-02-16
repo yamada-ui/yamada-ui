@@ -5,10 +5,6 @@ import { encode } from "uqr"
 
 export interface UseQrCodeProps extends HTMLProps {
   /**
-   * The value to encode as a QR code.
-   */
-  value: string
-  /**
    * The error correction level to boost the error correction level to the maximum allowed by the version and size.
    *
    * @default false
@@ -61,6 +57,10 @@ export interface UseQrCodeProps extends HTMLProps {
    * @default 10
    */
   pixelSize?: number
+  /**
+   * The value to encode as a QR code.
+   */
+  value: string
   /**
    * Callback function to receive the generated QR Code.
    */

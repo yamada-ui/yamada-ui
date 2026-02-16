@@ -8,8 +8,10 @@ import { createSlotComponent, styled, varAttr } from "../../core"
 import { dataAttr, isUndefined } from "../../utils"
 import { timelineStyle } from "./timeline.style"
 
-export interface TimelineItem
-  extends Omit<TimelineItemProps, "content" | "title"> {
+export interface TimelineItem extends Omit<
+  TimelineItemProps,
+  "content" | "title"
+> {
   align?: "end" | "start"
   content?: ReactNode
   description?: ReactNode
@@ -25,8 +27,7 @@ export interface TimelineItem
 interface ComponentContext extends Pick<TimelineRootProps, "index"> {}
 
 export interface TimelineRootProps
-  extends HTMLStyledProps<"ul">,
-    ThemeProps<TimelineStyle> {
+  extends HTMLStyledProps<"ul">, ThemeProps<TimelineStyle> {
   /**
    * The index of the active timeline item.
    */

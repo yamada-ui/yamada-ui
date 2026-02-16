@@ -8,8 +8,7 @@ import { useSplitChildren } from "../../utils"
 import { emptyState } from "./empty-state.style"
 
 export interface EmptyStateRootProps
-  extends Omit<HTMLStyledProps, "title">,
-    ThemeProps<EmptyState> {
+  extends Omit<HTMLStyledProps, "title">, ThemeProps<EmptyState> {
   /**
    * The empty state description to use.
    */
@@ -93,15 +92,17 @@ export const EmptyStateRoot = withProvider<"div", EmptyStateRootProps>(
 
         {customContent ?? (
           <EmptyStateContent {...contentProps}>
-            {customTitle ?? (
-              <EmptyStateTitle {...titleProps}>{title}</EmptyStateTitle>
-            )}
+            {customTitle ??
+              (title ? (
+                <EmptyStateTitle {...titleProps}>{title}</EmptyStateTitle>
+              ) : null)}
 
-            {customDescription ?? (
-              <EmptyStateDescription {...descriptionProps}>
-                {description}
-              </EmptyStateDescription>
-            )}
+            {customDescription ??
+              (description ? (
+                <EmptyStateDescription {...descriptionProps}>
+                  {description}
+                </EmptyStateDescription>
+              ) : null)}
           </EmptyStateContent>
         )}
 

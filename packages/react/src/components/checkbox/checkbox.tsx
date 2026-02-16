@@ -14,7 +14,8 @@ import { checkboxStyle } from "./checkbox.style"
 import { useCheckbox } from "./use-checkbox"
 
 export interface CheckboxProps<Y extends string = string>
-  extends Merge<HTMLStyledProps<"label">, UseCheckboxProps<Y>>,
+  extends
+    Merge<HTMLStyledProps<"label">, UseCheckboxProps<Y>>,
     ThemeProps<CheckboxStyle>,
     UseInputBorderProps {
   /**

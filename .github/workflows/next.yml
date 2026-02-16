@@ -13,6 +13,10 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
 jobs:
   release:
     name: Release
@@ -24,16 +28,13 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.PAT_TOKEN }}
 
-      - name: Cache turbo build setup
+      - name: Restore turbo cache
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          key: ${{ runner.os }}-turbo-${{ github.job }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-turbo-
-        env:
-          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+            ${{ runner.os }}-turbo-${{ github.job }}-
 
       - name: Install
         uses: ./.github/composite-actions/install

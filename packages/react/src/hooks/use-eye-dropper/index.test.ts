@@ -13,9 +13,9 @@ describe("useEyeDropper", () => {
   beforeEach(() => {
     Object.defineProperty(window, "EyeDropper", {
       configurable: true,
-      value: vi.fn().mockImplementation(() => ({
-        open: vi.fn().mockResolvedValue({ sRGBHex: "#FFFFFF" }),
-      })),
+      value: class EyeDropperMock {
+        open = vi.fn().mockResolvedValue({ sRGBHex: "#FFFFFF" })
+      },
       writable: true,
     })
   })

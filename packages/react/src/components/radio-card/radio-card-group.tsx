@@ -21,11 +21,13 @@ import {
   useRootComponentProps,
 } from "./radio-card"
 
-export interface RadioCardGroupItem<Y extends string = string>
-  extends RadioCardRootProps<Y> {}
+export interface RadioCardGroupItem<
+  Y extends string = string,
+> extends RadioCardRootProps<Y> {}
 
 export interface RadioCardGroupRootProps<Y extends string = string>
-  extends Omit<
+  extends
+    Omit<
       WithoutThemeProps<GroupProps, RadioCardStyle>,
       "defaultValue" | "onChange" | "value"
     >,

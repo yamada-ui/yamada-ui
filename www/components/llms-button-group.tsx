@@ -1,6 +1,6 @@
 "use client"
 
-import type { Doc } from "@/.velite"
+import type { Doc } from "#velite"
 import type { Direction } from "@yamada-ui/react"
 import {
   ButtonGroup,
@@ -34,8 +34,7 @@ export function useLlmsUrls(locale: string, pathname: string) {
 }
 
 export interface LlmsButtonGroupProps
-  extends ButtonGroup.RootProps,
-    Pick<Doc, "locale" | "md" | "pathname"> {}
+  extends ButtonGroup.RootProps, Pick<Doc, "locale" | "md" | "pathname"> {}
 
 export function LlmsButtonGroup({
   md,

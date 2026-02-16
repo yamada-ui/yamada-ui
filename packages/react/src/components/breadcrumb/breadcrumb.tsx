@@ -16,7 +16,8 @@ interface ComponentContext {
 }
 
 export interface BreadcrumbRootProps
-  extends HTMLStyledProps<"nav">,
+  extends
+    HTMLStyledProps<"nav">,
     ThemeProps<BreadcrumbStyle>,
     Omit<UseBreadcrumbProps, "endBoundaries" | "startBoundaries"> {
   /**

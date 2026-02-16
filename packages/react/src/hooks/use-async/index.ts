@@ -31,19 +31,19 @@ export type AsyncState<Y> =
       value?: undefined
     }
   | {
-      loading: boolean
+      error?: Error | undefined
+      loading: true
+      value?: Y
+    }
+  | {
       error?: undefined
+      loading: boolean
       value?: undefined
     }
   | {
+      error?: undefined
       loading: false
       value: Y
-      error?: undefined
-    }
-  | {
-      loading: true
-      error?: Error | undefined
-      value?: Y
     }
 
 export type PromiseType<P extends Promise<any>> =

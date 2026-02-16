@@ -10,6 +10,10 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
 jobs:
   build:
     name: Build
@@ -30,17 +34,16 @@ jobs:
             !packages/**/src/**/*.test.{ts,tsx}
             !packages/workspace/src/**
             packages/workspace/src/typescript/**
+            .github/workflows/quality.yml
 
-      - name: Cache turbo build setup
+      - name: Restore turbo cache
+        if: steps.check-modified.outputs.any_changed == 'true'
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          key: ${{ runner.os }}-turbo-${{ github.job }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-turbo-
-        env:
-          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+            ${{ runner.os }}-turbo-${{ github.job }}-
 
       - name: Install
         if: steps.check-modified.outputs.any_changed == 'true'
@@ -53,6 +56,9 @@ jobs:
   test:
     name: Test
     uses: ./.github/workflows/test.yml
+    secrets:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   eslint:
     name: ESLint
@@ -62,54 +68,58 @@ jobs:
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
       - name: Check modified files
-        id: check-modified-packages
+        id: changed-files
         uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
-          files: |
-            packages/**/(package.json|tsconfig.json)
-            packages/**/*.{ts,tsx,mts}
+          files_yaml: |
+            packages:
+              - turbo.json
+              - packages/**/(package.json|tsconfig.json)
+              - packages/**/*.{ts,tsx,mts}
+              - .github/workflows/quality.yml
+            scripts:
+              - turbo.json
+              - packages/workspace/src/eslint/**
+              - packages/workspace/package.json
+              - scripts/**
+              - package.json
+              - tsconfig.json
+              - eslint.config.ts
+              - .github/workflows/quality.yml
+            www:
+              - turbo.json
+              - packages/workspace/src/eslint/**
+              - packages/workspace/package.json
+              - www/**/*.{ts,tsx,mts,mdx}
+              - www/package.json
+              - www/tsconfig.json
+              - www/turbo.json
+              - www/eslint.config.ts
 
-      - name: Check modified files
-        id: check-modified-scripts
-        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
+      - name: Restore turbo cache
+        if: steps.changed-files.outputs.changed_keys != ''
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
-          files: |
-            packages/workspace/src/eslint/**
-            packages/workspace/package.json
-            scripts/**
-            package.json
-            tsconfig.json
-            eslint.config.ts
-
-      - name: Check modified files
-        id: check-modified-www
-        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
-        with:
-          files: |
-            packages/workspace/src/eslint/**
-            packages/workspace/package.json
-            www/**/*.{ts,tsx,mts,mdx}
-            www/package.json
-            www/tsconfig.json
-            www/eslint.config.ts
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.job }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-${{ github.job }}-
 
       - name: Install
-        if: steps.check-modified-packages.outputs.any_changed == 'true' || steps.check-modified-scripts.outputs.any_changed == 'true' || steps.check-modified-www.outputs.any_changed == 'true'
+        if: steps.changed-files.outputs.changed_keys != ''
         uses: ./.github/composite-actions/install
 
       - name: Run lint
-        if: steps.check-modified-packages.outputs.any_changed == 'true'
+        if: steps.changed-files.outputs.packages_any_changed == 'true'
         run: pnpm lint
 
       - name: Run lint
-        if: steps.check-modified-scripts.outputs.any_changed == 'true'
-        run: pnpm lint:scripts
+        if: steps.changed-files.outputs.scripts_any_changed == 'true'
+        run: pnpm turbo run lint:scripts
 
       - name: Run lint
-        if: steps.check-modified-www.outputs.any_changed == 'true'
-        run: |
-          pnpm www build:content
-          pnpm www lint
+        if: steps.changed-files.outputs.www_any_changed == 'true'
+        run: pnpm turbo run lint --filter www
 
   typescript:
     name: TypeScript
@@ -119,52 +129,57 @@ jobs:
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
       - name: Check modified files
-        id: check-modified-packages
+        id: changed-files
         uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
-          files: |
-            packages/**/(package.json|tsconfig.json)
-            packages/**/*.{ts,tsx,mts}
+          files_yaml: |
+            packages:
+              - turbo.json
+              - packages/**/(package.json|tsconfig.json)
+              - packages/**/*.{ts,tsx,mts}
+              - .github/workflows/quality.yml
+            scripts:
+              - turbo.json
+              - packages/workspace/src/typescript/**
+              - packages/workspace/package.json
+              - scripts/**
+              - package.json
+              - tsconfig.json
+              - .github/workflows/quality.yml
+            www:
+              - turbo.json
+              - packages/workspace/src/typescript/**
+              - packages/workspace/package.json
+              - www/**/*.{ts,tsx,mts}
+              - www/package.json
+              - www/tsconfig.json
+              - www/turbo.json
+              - .github/workflows/quality.yml
 
-      - name: Check modified files
-        id: check-modified-scripts
-        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
+      - name: Restore turbo cache
+        if: steps.changed-files.outputs.changed_keys != ''
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
-          files: |
-            packages/workspace/src/typescript/**
-            packages/workspace/package.json
-            scripts/**
-            package.json
-            tsconfig.json
-
-      - name: Check modified files
-        id: check-modified-www
-        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
-        with:
-          files: |
-            packages/workspace/src/typescript/**
-            packages/workspace/package.json
-            www/**/*.{ts,tsx,mts}
-            www/package.json
-            www/tsconfig.json
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.job }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-${{ github.job }}-
 
       - name: Install
-        if: steps.check-modified-packages.outputs.any_changed == 'true' || steps.check-modified-scripts.outputs.any_changed == 'true' || steps.check-modified-www.outputs.any_changed == 'true'
+        if: steps.changed-files.outputs.changed_keys != ''
         uses: ./.github/composite-actions/install
 
       - name: Run typecheck
-        if: steps.check-modified-packages.outputs.any_changed == 'true'
+        if: steps.changed-files.outputs.packages_any_changed == 'true'
         run: pnpm typecheck
 
       - name: Run typecheck
-        if: steps.check-modified-scripts.outputs.any_changed == 'true'
-        run: pnpm typecheck:scripts
+        if: steps.changed-files.outputs.scripts_any_changed == 'true'
+        run: pnpm turbo run typecheck:scripts
 
       - name: Run typecheck
-        if: steps.check-modified-www.outputs.any_changed == 'true'
-        run: |
-          pnpm www build:content
-          pnpm www typecheck
+        if: steps.changed-files.outputs.www_any_changed == 'true'
+        run: pnpm turbo run typecheck --filter www
 
   prettier:
     name: Prettier
@@ -174,82 +189,81 @@ jobs:
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
       - name: Check modified files
-        id: check-modified-packages
+        id: changed-files
         uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
-          files: |
-            packages/**
-            .prettierignore
-            .prettierrc.js
+          files_yaml: |
+            packages:
+              - turbo.json
+              - packages/**
+              - .prettierignore
+              - .prettierrc.js
+              - .github/workflows/quality.yml
+            scripts:
+              - turbo.json
+              - packages/workspace/src/prettier/**
+              - packages/workspace/package.json
+              - scripts/**
+              - .prettierignore
+              - .prettierrc.js
+              - .github/workflows/quality.yml
+            www:
+              - turbo.json
+              - packages/workspace/src/prettier/**
+              - packages/workspace/package.json
+              - www/**
+              - .prettierignore
+              - .prettierrc.js
+              - .github/workflows/quality.yml
 
-      - name: Check modified files
-        id: check-modified-scripts
-        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
+      - name: Restore turbo cache
+        if: steps.changed-files.outputs.changed_keys != ''
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
-          files: |
-            packages/workspace/src/prettier/**
-            packages/workspace/package.json
-            scripts/**
-            .prettierignore
-            .prettierrc.js
-
-      - name: Check modified files
-        id: check-modified-www
-        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
-        with:
-          files: |
-            packages/workspace/src/prettier/**
-            packages/workspace/package.json
-            www/**
-            .prettierignore
-            .prettierrc.js
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.job }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-${{ github.job }}-
 
       - name: Install
-        if: steps.check-modified-packages.outputs.any_changed == 'true' || steps.check-modified-scripts.outputs.any_changed == 'true' || steps.check-modified-www.outputs.any_changed == 'true'
+        if: steps.changed-files.outputs.changed_keys != ''
         uses: ./.github/composite-actions/install
 
       - name: Run format
-        if: steps.check-modified-packages.outputs.any_changed == 'true'
+        if: steps.changed-files.outputs.packages_any_changed == 'true'
         run: pnpm format
 
       - name: Run format
-        if: steps.check-modified-scripts.outputs.any_changed == 'true'
-        run: pnpm format:scripts
+        if: steps.changed-files.outputs.scripts_any_changed == 'true'
+        run: pnpm turbo run format:scripts
 
       - name: Run format
-        if: steps.check-modified-www.outputs.any_changed == 'true'
-        run: |
-          pnpm www build:content
-          pnpm www format
+        if: steps.changed-files.outputs.www_any_changed == 'true'
+        run: pnpm turbo run format --filter www
 
   changeset:
     name: Changeset
     runs-on: ubuntu-24.04
     steps:
       - name: Check modified files
-        id: check-modified
+        id: changed-files
         uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
-          files: |
-            packages/{cli,react,utils}/src/**/*.{ts,tsx}
-            !packages/{cli,react,utils}/src/**/*.test.{ts,tsx}
-            !packages/{cli,react,utils}/src/**/*.stories.{ts,tsx}
-
-      - name: Check changeset files
-        if: steps.check-modified.outputs.any_changed == 'true'
-        id: check-changeset
-        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
-        with:
-          files: |
-            .changeset/*.md
-            !.changeset/README.md
+          files_yaml: |
+            src:
+              - packages/{cli,react,utils}/src/**/*.{ts,tsx}
+              - '!packages/{cli,react,utils}/src/**/*.test.{ts,tsx}'
+              - '!packages/{cli,react,utils}/src/**/*.stories.{ts,tsx}'
+            changeset:
+              - .changeset/*.md
+              - '!.changeset/README.md'
 
       - name: Fail if no changeset
-        if: steps.check-modified.outputs.any_changed == 'true' && steps.check-changeset.outputs.any_changed == 'false'
+        if: steps.changed-files.outputs.src_any_changed == 'true' && steps.changed-files.outputs.changeset_any_changed == 'false'
         run: |
           echo "::error::Changes detected in packages (cli/react/utils) but no changeset file was added."
           echo "Please run 'pnpm changeset' to generate a changeset file."
           echo ""
           echo "Modified files:"
-          echo "${{ steps.check-modified.outputs.all_changed_files }}"
+          echo "${{ steps.changed-files.outputs.src_all_changed_files }}"
           exit 1

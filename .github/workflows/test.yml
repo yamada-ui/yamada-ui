@@ -3,6 +3,15 @@ name: Test
 on:
   workflow_dispatch:
   workflow_call:
+    secrets:
+      TURBO_TOKEN:
+        required: false
+      CODECOV_TOKEN:
+        required: false
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
   browser:
@@ -29,11 +38,24 @@ jobs:
         uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
           files: |
+            turbo.json
             packages/**/(package.json|vitest.config.ts)
             packages/**/(src|test)/**/*.{ts,tsx}
             !packages/**/src/**/*.stories.{ts,tsx}
             !packages/workspace/src/**
             packages/workspace/src/vitest/**
+            .github/workflows/test.yml
+            .github/workflows/quality.yml
+
+      - name: Restore turbo cache
+        if: steps.check-modified.outputs.any_changed == 'true'
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.job }}-${{ matrix.id }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-${{ github.job }}-${{ matrix.id }}-
+            ${{ runner.os }}-turbo-${{ github.job }}-
 
       - name: Install
         if: steps.check-modified.outputs.any_changed == 'true'
@@ -50,7 +72,6 @@ jobs:
 
       - name: Run Browser Test on ${{ matrix.name }}
         if: steps.check-modified.outputs.any_changed == 'true' && matrix.coverage != 'true'
-        working-directory: packages/react
         run: pnpm test:${{ matrix.id }}
 
       - name: Upload coverage

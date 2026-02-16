@@ -35,11 +35,10 @@ export {
   useTabPanelDescendants,
 }
 
-interface TabsContext
-  extends Omit<
-    UseTabsReturn,
-    "getRootProps" | "tabDescendants" | "tabPanelDescendants"
-  > {}
+interface TabsContext extends Omit<
+  UseTabsReturn,
+  "getRootProps" | "tabDescendants" | "tabPanelDescendants"
+> {}
 
 const [TabsContext, useTabsContext] = createContext<TabsContext>({
   name: "TabsContext",

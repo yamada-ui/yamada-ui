@@ -59,9 +59,8 @@ const [ReorderItemContext, useReorderItemContext] =
 export { ReorderItemContext, useReorderItemContext }
 
 export interface UseReorderProps<Y = string>
-  extends Partial<
-      Omit<ReorderGroupProps<Y>, "children" | "onChange" | "values">
-    >,
+  extends
+    Partial<Omit<ReorderGroupProps<Y>, "children" | "onChange" | "values">>,
     PropsWithChildren {
   /**
    * The component to be used for the item.

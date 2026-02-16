@@ -1,8 +1,8 @@
 "use client"
 
-import type { FragmentContent, PageContent } from "@/data"
 import type { Descendant, HTMLProps } from "@yamada-ui/react"
 import type { ElementType, KeyboardEvent, ReactNode, RefObject } from "react"
+import type { FragmentContent, PageContent } from "@/data"
 import {
   assignRef,
   Box,
@@ -390,13 +390,13 @@ function SearchContentBody({
 
 interface ItemProps extends Omit<HTMLProps<"a">, "href" | "popover" | "title"> {
   href: string
+  description?: ReactNode
   icon: ElementType
   title: ReactNode
   onActive: (
     descendant?: Descendant<HTMLAnchorElement, { href: string }>,
   ) => void
   onClose: () => void
-  description?: ReactNode
 }
 
 const Item = function Item({

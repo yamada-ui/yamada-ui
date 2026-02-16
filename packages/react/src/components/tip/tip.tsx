@@ -23,7 +23,8 @@ const icons = {
 } as const
 
 export interface TipProps
-  extends WithoutThemeProps<TooltipProps, TooltipStyle>,
+  extends
+    WithoutThemeProps<TooltipProps, TooltipStyle>,
     Omit<IconButtonProps, "content" | "offset" | "transform"> {
   /**
    * The status of the tip.

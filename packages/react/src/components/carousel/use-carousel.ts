@@ -39,8 +39,10 @@ export type CarouselWatchSlides = EmblaOptions["watchSlides"]
 export type CarouselControl = EmblaCarouselType
 export type CarouselPlugin = EmblaPluginType
 
-export interface CarouselContext
-  extends Omit<UseCarouselReturn, "getRootProps"> {}
+export interface CarouselContext extends Omit<
+  UseCarouselReturn,
+  "getRootProps"
+> {}
 
 const [CarouselContext, useCarouselContext] = createContext<CarouselContext>({
   name: "CarouselContext",
@@ -48,8 +50,10 @@ const [CarouselContext, useCarouselContext] = createContext<CarouselContext>({
 
 export { CarouselContext, useCarouselContext }
 
-export interface UseCarouselProps
-  extends Omit<HTMLProps<"section">, "onChange"> {
+export interface UseCarouselProps extends Omit<
+  HTMLProps<"section">,
+  "onChange"
+> {
   /**
    * The alignment of the carousel.
    *

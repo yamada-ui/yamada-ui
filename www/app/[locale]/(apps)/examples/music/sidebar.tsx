@@ -25,8 +25,8 @@ import {
 import { useMemo } from "react"
 
 interface MenuItem extends Omit<ButtonProps, "children"> {
-  label: string
   icon?: ElementType
+  label: string
   selected?: boolean
 }
 
@@ -92,8 +92,8 @@ export function Sidebar({ collapsed, ...rest }: SidebarProps) {
 }
 
 interface SidebarGroupProps extends StackProps {
-  label: string
   items?: MenuItem[]
+  label: string
   buttonGroupProps?: ButtonGroup.RootProps
   labelProps?: HeadingProps
 }

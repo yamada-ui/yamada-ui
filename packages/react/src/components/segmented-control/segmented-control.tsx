@@ -25,11 +25,14 @@ export interface SegmentedControlItem extends SegmentedControlItemProps {
   label?: ReactNode
 }
 
-interface ComponentContext
-  extends Pick<SegmentedControlRootProps, "indicatorProps" | "itemProps"> {}
+interface ComponentContext extends Pick<
+  SegmentedControlRootProps,
+  "indicatorProps" | "itemProps"
+> {}
 
 export interface SegmentedControlRootProps<Y extends string = string>
-  extends Omit<HTMLStyledProps, "defaultValue" | "onChange">,
+  extends
+    Omit<HTMLStyledProps, "defaultValue" | "onChange">,
     ThemeProps<SegmentedControlStyle>,
     Omit<UseSegmentedControlProps<Y>, "orientation"> {
   /**
@@ -128,8 +131,7 @@ export const SegmentedControlRoot = withProvider(
 }>
 
 export interface SegmentedControlItemProps<Y extends string = string>
-  extends HTMLStyledProps<"label">,
-    UseSegmentedControlItemProps<Y> {
+  extends HTMLStyledProps<"label">, UseSegmentedControlItemProps<Y> {
   /**
    * Props for the indicator component.
    */

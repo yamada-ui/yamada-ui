@@ -19,9 +19,9 @@ import {
 import { Fragment } from "react"
 
 export interface TokensPreviewProps {
-  token: ThemeToken
   fractional?: boolean
   semantic?: boolean
+  token: ThemeToken
 }
 
 export function TokensPreview({

@@ -20,7 +20,8 @@ import { merge } from "../../utils"
 import { I18nProvider } from "../i18n-provider"
 
 export interface UIProviderProps
-  extends Omit<ThemeProviderProps, "storageKey">,
+  extends
+    Omit<ThemeProviderProps, "storageKey">,
     Pick<ColorModeProviderProps, "colorMode">,
     I18nProviderProps {
   /**

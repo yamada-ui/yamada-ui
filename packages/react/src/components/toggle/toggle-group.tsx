@@ -21,7 +21,8 @@ import { ToggleGroupContext, useToggleGroup } from "./use-toggle-group"
  * @see https://yamada-ui.com/docs/components/toggle
  */
 export interface ToggleGroupRootProps<Y extends string | string[] = string>
-  extends Omit<
+  extends
+    Omit<
       WithoutThemeProps<GroupProps, ToggleStyle>,
       "defaultValue" | "onChange" | "value"
     >,

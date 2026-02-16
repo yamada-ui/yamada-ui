@@ -6,8 +6,7 @@ import { createSlotComponent } from "../../core"
 import { containerStyle } from "./container.style"
 
 export interface ContainerRootProps
-  extends HTMLStyledProps<"section">,
-    ThemeProps<ContainerStyle> {}
+  extends HTMLStyledProps<"section">, ThemeProps<ContainerStyle> {}
 
 const {
   PropsContext: ContainerPropsContext,

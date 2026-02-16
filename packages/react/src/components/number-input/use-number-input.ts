@@ -51,7 +51,8 @@ const getStepRatio = <Y extends KeyboardEvent | WheelEvent>({
 }
 
 export interface UseNumberInputProps
-  extends Omit<HTMLProps<"input">, keyof UseCounterProps>,
+  extends
+    Omit<HTMLProps<"input">, keyof UseCounterProps>,
     UseCounterProps,
     FieldProps {
   /**

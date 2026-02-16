@@ -19,7 +19,8 @@ import { useFieldProps } from "../field"
 import { useCheckboxGroupContext } from "./use-checkbox-group"
 
 export interface UseCheckboxProps<Y extends string = string>
-  extends Omit<HTMLProps<"label">, "onBlur" | "onChange" | "onFocus" | "ref">,
+  extends
+    Omit<HTMLProps<"label">, "onBlur" | "onChange" | "onFocus" | "ref">,
     HTMLRefAttributes<"input">,
     FieldProps {
   /**

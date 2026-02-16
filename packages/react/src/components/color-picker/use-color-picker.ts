@@ -16,6 +16,7 @@ import {
   calcFormat,
   contains,
   convertColor,
+  cx,
   focusTransfer,
   handlerAll,
   mergeRefs,
@@ -25,7 +26,8 @@ import {
 import { useFieldProps } from "../field"
 
 export interface UseColorPickerProps
-  extends Omit<
+  extends
+    Omit<
       UseComboboxProps,
       | "closeOnSelect"
       | "initialFocusValue"
@@ -118,6 +120,8 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       id,
       ref,
       name,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledbyProp,
       allowInput = true,
       closeOnChange = false,
       defaultValue,
@@ -317,7 +321,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    (props = {}) => ({
+    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
       id,
       ref: mergeRefs(props.ref, ref, inputRef),
       name,
@@ -325,6 +329,8 @@ export const useColorPicker = (props: UseColorPickerProps) => {
         ...(!allowInput ? { pointerEvents: "none" } : {}),
         ...props.style,
       },
+      "aria-label": ariaLabel,
+      "aria-labelledby": cx(ariaLabelledby, ariaLabelledbyProp),
       autoComplete: "off",
       disabled,
       placeholder,
@@ -341,6 +347,8 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     }),
     [
       allowInput,
+      ariaLabel,
+      ariaLabelledbyProp,
       dataProps,
       disabled,
       id,

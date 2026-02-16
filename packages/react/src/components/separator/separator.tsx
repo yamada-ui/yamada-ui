@@ -6,8 +6,7 @@ import { createComponent } from "../../core"
 import { separatorStyle } from "./separator.style"
 
 export interface SeparatorProps
-  extends HTMLStyledProps<"hr">,
-    ThemeProps<SeparatorStyle> {}
+  extends HTMLStyledProps<"hr">, ThemeProps<SeparatorStyle> {}
 
 const {
   PropsContext: SeparatorPropsContext,

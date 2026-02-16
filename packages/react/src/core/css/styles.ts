@@ -51,6 +51,7 @@ export const standardStyles = {
     token: "easings",
     transform: transforms.token("easings"),
   },
+  animationTrigger: true,
   appearance: true,
   aspectRatio: {
     properties: ["aspectRatio"],
@@ -550,6 +551,7 @@ export const standardStyles = {
     properties: ["--brightness"],
     transform: pipe(transforms.function("brightness"), transforms.filter()),
   },
+  bufferedRendering: true,
   captionSide: true,
   caretAnimation: true,
   caretColor: {
@@ -571,6 +573,7 @@ export const standardStyles = {
   colorInterpolation: true,
   colorInterpolationFilters: true,
   colorMode: { properties: ["colorScheme"] },
+  colorRendering: true,
   columnCount: true,
   columnFill: true,
   columnGap: {
@@ -582,6 +585,7 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
+  columnHeight: true,
   columnRule: { properties: ["columnRule"], transform: transforms.px },
   columnRuleColor: {
     properties: ["columnRuleColor"],
@@ -605,6 +609,7 @@ export const standardStyles = {
       transforms.calc("sizes"),
     ),
   },
+  columnWrap: true,
   contain: true,
   container: true,
   containerName: true,
@@ -1730,6 +1735,9 @@ export const standardStyles = {
   textWrapMode: true,
   textWrapStyle: true,
   timelineScope: true,
+  timelineTrigger: true,
+  timelineTriggerName: true,
+  timelineTriggerSource: true,
   top: {
     properties: ["top"],
     token: "spaces",
@@ -1784,6 +1792,7 @@ export const standardStyles = {
     properties: ["--translate-z"],
     transform: pipe(transforms.function("translateZ"), transforms.transform),
   },
+  triggerScope: true,
   unicodeBidi: true,
   userModify: true,
   userSelect: true,
@@ -2405,7 +2414,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-anchor-position-1/#propdef-anchor-scope
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/anchor-scope
    */
   anchorScope?: StyleValueWithCondition<CSS.Property.AnchorScope>
   /**
@@ -2425,7 +2434,8 @@ export interface StyleProps {
    *
    * The <code>animation-composition</code> CSS property chooses how to combine animations that affect the same property.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-01-04
    * @newly_available_date 2023-07-04
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-composition
@@ -2577,6 +2587,16 @@ export interface StyleProps {
     "easings"
   >
   /**
+   * ### animation-trigger
+   *
+   * The CSS `animation-trigger` property.
+   *
+   * @see https://drafts.csswg.org/css-animations-2/#animation-trigger-prop
+   *
+   * @experimental
+   */
+  animationTrigger?: StyleValueWithCondition<AnyString>
+  /**
    * ### appearance
    *
    * The <code>appearance</code> CSS property controls the appearance of form controls. Using <code>appearance: none</code> disables any default native appearance and allows the elements to be styled with CSS.
@@ -2682,9 +2702,7 @@ export interface StyleProps {
    *
    * The <code>background-attachment</code> CSS property sets whether an element's background image or gradient moves as the element scrolls.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2024-09-14
-   * @newly_available_date 2022-03-14
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-attachment
    */
@@ -2872,9 +2890,7 @@ export interface StyleProps {
    *
    * The <code>background-attachment</code> CSS property sets whether an element's background image or gradient moves as the element scrolls.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2024-09-14
-   * @newly_available_date 2022-03-14
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-attachment
    */
@@ -4575,6 +4591,14 @@ export interface StyleProps {
    */
   brightness?: StyleValueWithCondition<AnyString>
   /**
+   * ### buffered-rendering
+   *
+   * The CSS `buffered-rendering` property.
+   *
+   * @deprecated
+   */
+  bufferedRendering?: StyleValueWithCondition<AnyString>
+  /**
    * ### caption-side
    *
    * The <code>&#x3C;table></code> HTML element, with several related elements, represents tabular data in rows and columns of cells.
@@ -4737,6 +4761,14 @@ export interface StyleProps {
    */
   colorMode?: StyleValueWithCondition<CSS.Property.ColorScheme>
   /**
+   * ### color-rendering
+   *
+   * The CSS `color-rendering` property.
+   *
+   * @deprecated
+   */
+  colorRendering?: StyleValueWithCondition<CSS.Property.ColorRendering>
+  /**
    * ### column-count
    *
    * Multi-column layout flows an element's content across one or more columns in a single row, without affecting the <code>display</code> property of its children.
@@ -4772,6 +4804,16 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-gap
    */
   columnGap?: StyleValueWithCondition<CSS.Property.ColumnGap | number, "spaces">
+  /**
+   * ### column-height
+   *
+   * The CSS `column-height` property.
+   *
+   * @see https://drafts.csswg.org/css-multicol-2/#propdef-column-height
+   *
+   * @experimental
+   */
+  columnHeight?: StyleValueWithCondition<AnyString>
   /**
    * ### column-rule
    *
@@ -4864,6 +4906,16 @@ export interface StyleProps {
     CSS.Property.ColumnWidth | number,
     "sizes"
   >
+  /**
+   * ### column-wrap
+   *
+   * The CSS `column-wrap` property.
+   *
+   * @see https://drafts.csswg.org/css-multicol-2/#propdef-column-wrap
+   *
+   * @experimental
+   */
+  columnWrap?: StyleValueWithCondition<AnyString>
   /**
    * ### contain
    *
@@ -5397,7 +5449,7 @@ export interface StyleProps {
   /**
    * ### filter
    *
-   * The <code>filter</code> CSS property applies one or more graphic effects to an element. You can use filter functions, such as <code>blur()</code> and <code>drop-shadow()</code>, alone or combined to produce different effects.
+   * The <code>filter</code> CSS property applies one or more graphic effects to an element. You can use filter functions, such as <code>blur()</code> and <code>drop-shadow()</code>, alone or combined to produce different effects. For instance, <code>filter: blur(2px)</code>.
    *
    * @baseline `Widely available`
    * @widely_available_date 2019-03-07
@@ -5687,9 +5739,11 @@ export interface StyleProps {
    *
    * The <code>font-stretch</code> CSS property selects a font face from a font family based on width, either by a keyword such as <code>condensed</code> or a percentage.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-stretch
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
    *
-   * @deprecated
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-stretch
    */
   fontStretch?: StyleValueWithCondition<CSS.Property.FontStretch>
   /**
@@ -8308,9 +8362,10 @@ export interface StyleProps {
   /**
    * ### page
    *
-   * The <code>:first</code>, <code>:left</code>, and <code>:right</code> pseudo-classes select pages based on their position in sequence after pagination. They're often used with the <code>page</code> CSS property, to choose a print layout defined by the <code>@page</code> rule.
+   * The <code>@page</code> CSS at-rule sets the page-specific dimensions and margins for content such as printed documents, ebooks, or slides.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2024-12-11
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/page
    */
@@ -8350,7 +8405,8 @@ export interface StyleProps {
    *
    * The <code>paint-order</code> CSS property sets the z-order of strokes, fills, and (in SVG content) markers. For example, <code>paint-order: markers stroke fill;</code> draws the markers, then stroke on top of markers, then fill on top of both markers and stroke.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2024-03-22
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/paint-order
    */
@@ -9838,7 +9894,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://drafts.fxtf.org/fill-stroke-3/#stroke-color
+   * @see https://drafts.csswg.org/fill-stroke-3/#stroke-color
    *
    * @experimental
    */
@@ -10400,6 +10456,36 @@ export interface StyleProps {
    */
   timelineScope?: StyleValueWithCondition<CSS.Property.TimelineScope>
   /**
+   * ### timeline-trigger
+   *
+   * The CSS `timeline-trigger` property.
+   *
+   * @see https://drafts.csswg.org/css-animations-2/#timeline-trigger-shorthand
+   *
+   * @experimental
+   */
+  timelineTrigger?: StyleValueWithCondition<AnyString>
+  /**
+   * ### timeline-trigger-name
+   *
+   * The CSS `timeline-trigger-name` property.
+   *
+   * @see https://drafts.csswg.org/css-animations-2/#timeline-trigger-name
+   *
+   * @experimental
+   */
+  timelineTriggerName?: StyleValueWithCondition<AnyString>
+  /**
+   * ### timeline-trigger-source
+   *
+   * The CSS `timeline-trigger-source` property.
+   *
+   * @see https://drafts.csswg.org/css-animations-2/#timeline-trigger-source
+   *
+   * @experimental
+   */
+  timelineTriggerSource?: StyleValueWithCondition<AnyString>
+  /**
    * ### top
    *
    * The physical CSS properties, <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code>, set the inset position of an element relative to the corresponding side of a container determined by the element's <code>position</code> property.
@@ -10594,6 +10680,16 @@ export interface StyleProps {
    * Sets the value of `--translate-z`.
    */
   translateZ?: StyleValueWithCondition<AnyString | number>
+  /**
+   * ### trigger-scope
+   *
+   * The CSS `trigger-scope` property.
+   *
+   * @see https://drafts.csswg.org/css-animations-2/#trigger-scope
+   *
+   * @experimental
+   */
+  triggerScope?: StyleValueWithCondition<AnyString>
   /**
    * If `true`, it clamps truncate a text after one line.
    */
@@ -10914,9 +11010,9 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@container
    */
   _container?: {
-    [key: string]: any
     name?: AnyString
     css?: CSSObject
+    [key: string]: any
     aspectRatio?: CSS.Property.AspectRatio
     blockSize?: CSS.Property.BlockSize | number | ThemeTokens["sizes"]
     h?: CSS.Property.Height | number | ThemeTokens["sizes"]
@@ -10980,9 +11076,9 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
    */
   _media?: {
-    [key: string]: any
     type?: "all" | "print" | "screen" | "speech" | AnyString
     css?: CSSObject
+    [key: string]: any
     anyHover?: "hover" | "none" | AnyString
     anyPointer?: "coarse" | "fine" | "none" | AnyString
     aspectRatio?: CSS.Property.AspectRatio

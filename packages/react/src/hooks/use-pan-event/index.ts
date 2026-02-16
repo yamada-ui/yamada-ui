@@ -27,9 +27,7 @@ export interface PanEventProps {
 }
 
 interface Props<Y extends HTMLElement>
-  extends DataAttributes,
-    HTMLAttributes<Y>,
-    RefAttributes<Y> {}
+  extends DataAttributes, HTMLAttributes<Y>, RefAttributes<Y> {}
 
 export const usePanEvent = <Y extends HTMLElement>({
   threshold = 3,

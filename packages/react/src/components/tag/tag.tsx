@@ -14,8 +14,7 @@ import { tagStyle } from "./tag.style"
 interface ComponentContext extends Pick<TagProps, "disabled"> {}
 
 export interface TagProps
-  extends HTMLStyledProps<"span">,
-    ThemeProps<TagStyle> {
+  extends HTMLStyledProps<"span">, ThemeProps<TagStyle> {
   /**
    * If `true`, the tag is disabled.
    *

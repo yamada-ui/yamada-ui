@@ -9,7 +9,8 @@ import { mergeProps } from "../../core"
 import { useFindChild, useValidChildren } from "../../utils"
 
 export interface SlotProps
-  extends HTMLAttributes<HTMLElement>,
+  extends
+    HTMLAttributes<HTMLElement>,
     RefAttributes<HTMLElement>,
     PropsWithChildren {}
 
@@ -49,8 +50,7 @@ export const Slot: FC<SlotProps> = ({ children, ...rest }) => {
 }
 
 interface SlotCloneProps
-  extends RefAttributes<HTMLElement>,
-    PropsWithChildren {}
+  extends RefAttributes<HTMLElement>, PropsWithChildren {}
 
 const SlotClone: FC<SlotCloneProps> = ({ children, ...rest }) => {
   if (isValidElement<RefAttributes<HTMLElement>>(children))

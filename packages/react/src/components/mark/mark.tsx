@@ -6,8 +6,7 @@ import { createComponent } from "../../core"
 import { markStyle } from "./mark.style"
 
 export interface MarkProps
-  extends HTMLStyledProps<"mark">,
-    ThemeProps<MarkStyle> {}
+  extends HTMLStyledProps<"mark">, ThemeProps<MarkStyle> {}
 
 const {
   PropsContext: MarkPropsContext,

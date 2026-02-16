@@ -6,8 +6,7 @@ import { createComponent } from "../../core"
 import { badgeStyle } from "./badge.style"
 
 export interface BadgeProps
-  extends HTMLStyledProps<"span">,
-    ThemeProps<BadgeStyle> {}
+  extends HTMLStyledProps<"span">, ThemeProps<BadgeStyle> {}
 
 const {
   PropsContext: BadgePropsContext,

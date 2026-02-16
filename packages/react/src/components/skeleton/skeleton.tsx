@@ -7,8 +7,7 @@ import { dataAttr, isNumber, useValidChildren } from "../../utils"
 import { skeletonStyle } from "./skeleton.style"
 
 export interface SkeletonProps
-  extends HTMLStyledProps,
-    ThemeProps<SkeletonStyle> {
+  extends HTMLStyledProps, ThemeProps<SkeletonStyle> {
   /**
    * The animation duration in seconds.
    */

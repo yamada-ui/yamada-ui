@@ -91,10 +91,10 @@ export function Sidebar({ collapsed }: SidebarProps) {
 }
 
 interface SidebarItemProps {
-  icon: Component<"svg", IconProps>
-  label: string
   collapsed?: boolean
+  icon: Component<"svg", IconProps>
   isSelected?: boolean
+  label: string
   num?: number
 }
 

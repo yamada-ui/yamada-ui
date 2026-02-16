@@ -26,10 +26,6 @@ interface ComponentContext {
 
 export interface SnacksProps extends HTMLMotionProps {
   /**
-   * The snacks created by `useSnacks`.
-   */
-  snacks: UseSnacksReturn["snacks"]
-  /**
    * The CSS `gap` property.
    *
    * @default 'md'
@@ -47,6 +43,10 @@ export interface SnacksProps extends HTMLMotionProps {
    * @default true
    */
   negativeMargins?: boolean
+  /**
+   * The snacks created by `useSnacks`.
+   */
+  snacks: UseSnacksReturn["snacks"]
   /**
    * Props for the snacks list element.
    */
@@ -181,8 +181,10 @@ const SnackList = withContext<"div", SnackListProps>(
   },
 })
 
-interface SnackProps
-  extends Merge<HTMLMotionProps, Merge<Alert.RootProps, Snack>> {
+interface SnackProps extends Merge<
+  HTMLMotionProps,
+  Merge<Alert.RootProps, Snack>
+> {
   index: number
   lastIndex: number
 }

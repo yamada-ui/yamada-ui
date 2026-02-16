@@ -12,7 +12,8 @@ import { textareaStyle } from "./textarea.style"
 import { useTextarea } from "./use-textarea"
 
 export interface TextareaProps
-  extends HTMLStyledProps<"textarea">,
+  extends
+    HTMLStyledProps<"textarea">,
     ThemeProps<TextareaStyle>,
     UseInputBorderProps,
     FieldProps,

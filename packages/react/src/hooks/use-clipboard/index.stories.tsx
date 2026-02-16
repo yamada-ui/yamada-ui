@@ -62,7 +62,7 @@ export const DirectCopy = () => {
 
   return (
     <HStack>
-      <Input readOnly value={value} />
+      <Input aria-label="Copy content" readOnly value={value} />
       <Button onClick={() => onCopy(value)}>
         {copied ? "Copied!" : "Copy"}
       </Button>

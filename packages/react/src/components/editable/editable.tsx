@@ -15,14 +15,14 @@ import {
   useEditableContext,
 } from "./use-editable"
 
-interface EditableElementProps
-  extends Pick<
-    UseEditableReturn,
-    "editing" | "onCancel" | "onEdit" | "onSubmit"
-  > {}
+interface EditableElementProps extends Pick<
+  UseEditableReturn,
+  "editing" | "onCancel" | "onEdit" | "onSubmit"
+> {}
 
 export interface EditableRootProps
-  extends Omit<
+  extends
+    Omit<
       HTMLStyledProps,
       "children" | "defaultValue" | "onChange" | "onSubmit" | "value"
     >,

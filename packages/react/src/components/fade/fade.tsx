@@ -30,8 +30,7 @@ export const fadeVariants: Variants = {
 } satisfies MotionTransitionVariants
 
 export interface FadeProps
-  extends WithTransitionProps<HTMLMotionProps>,
-    ThemeProps<FadeStyle> {}
+  extends WithTransitionProps<HTMLMotionProps>, ThemeProps<FadeStyle> {}
 
 const {
   PropsContext: FadePropsContext,

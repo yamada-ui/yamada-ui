@@ -276,24 +276,23 @@ export {
   useCalendarDescendants,
 }
 
-interface CalendarContext
-  extends Omit<
-    UseCalendarReturn,
-    | "descendants"
-    | "getMonthProps"
-    | "getMonthSelectProps"
-    | "getNavigationProps"
-    | "getNextButtonProps"
-    | "getPrevButtonProps"
-    | "getRootProps"
-    | "getStatusProps"
-    | "getWeekdayProps"
-    | "getYearSelectProps"
-    | "monthDays"
-    | "monthItems"
-    | "weekdays"
-    | "yearItems"
-  > {}
+interface CalendarContext extends Omit<
+  UseCalendarReturn,
+  | "descendants"
+  | "getMonthProps"
+  | "getMonthSelectProps"
+  | "getNavigationProps"
+  | "getNextButtonProps"
+  | "getPrevButtonProps"
+  | "getRootProps"
+  | "getStatusProps"
+  | "getWeekdayProps"
+  | "getYearSelectProps"
+  | "monthDays"
+  | "monthItems"
+  | "weekdays"
+  | "yearItems"
+> {}
 
 const [CalendarContext, useCalendarContext] = createContext<CalendarContext>({
   name: "CalendarContext",

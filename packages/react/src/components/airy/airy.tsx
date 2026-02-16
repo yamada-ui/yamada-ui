@@ -17,16 +17,7 @@ import { motion } from "../motion"
 import { airyStyle } from "./airy.style"
 
 export interface AiryProps
-  extends Omit<HTMLMotionProps<"button">, "onChange">,
-    ThemeProps<AiryStyle> {
-  /**
-   * Passing React elements to "from" is required.
-   */
-  from: ReactNode
-  /**
-   * Passing React elements to "to" is required.
-   */
-  to: ReactNode
+  extends Omit<HTMLMotionProps<"button">, "onChange">, ThemeProps<AiryStyle> {
   /**
    * You can set the initial state.
    *
@@ -52,11 +43,19 @@ export interface AiryProps
    */
   duration?: number
   /**
+   * Passing React elements to "from" is required.
+   */
+  from: ReactNode
+  /**
    * If `true`, the component is readonly.
    *
    * @default false
    */
   readOnly?: boolean
+  /**
+   * Passing React elements to "to" is required.
+   */
+  to: ReactNode
   /**
    * Use this when you want to control the animation from outside the component.
    */

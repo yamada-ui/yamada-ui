@@ -13,7 +13,8 @@ import { passwordInputStyle } from "./password-input.style"
 import { usePasswordInput } from "./use-password-input"
 
 export interface PasswordInputProps
-  extends WithoutThemeProps<InputProps, PasswordInputStyle>,
+  extends
+    WithoutThemeProps<InputProps, PasswordInputStyle>,
     ThemeProps<PasswordInputStyle>,
     UsePasswordInputProps {
   /**

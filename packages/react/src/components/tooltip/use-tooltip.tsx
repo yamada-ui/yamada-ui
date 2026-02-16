@@ -19,8 +19,7 @@ import {
 } from "../../utils"
 
 export interface UseTooltipProps
-  extends Omit<UseDisclosureProps, "timing">,
-    UsePopperProps<"button"> {
+  extends Omit<UseDisclosureProps, "timing">, UsePopperProps<"button"> {
   /**
    * The delay before hiding the tooltip.
    *

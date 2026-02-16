@@ -28,8 +28,7 @@ interface ComponentContext {
 }
 
 export interface AlertRootProps
-  extends HTMLStyledProps,
-    ThemeProps<AlertStyle> {
+  extends HTMLStyledProps, ThemeProps<AlertStyle> {
   /**
    * The status of the alert.
    *

@@ -10,11 +10,13 @@ import { QuoteIcon } from "../icon"
 import { blockquoteStyle } from "./blockquote.style"
 
 interface ComponentContext
-  extends Pick<BlockquoteContentProps, "citeUrl">,
+  extends
+    Pick<BlockquoteContentProps, "citeUrl">,
     Pick<BlockquoteCaptionProps, "withDash"> {}
 
 export interface BlockquoteRootProps
-  extends Omit<HTMLStyledProps<"figure">, "cite">,
+  extends
+    Omit<HTMLStyledProps<"figure">, "cite">,
     ThemeProps<BlockquoteStyle>,
     Pick<BlockquoteContentProps, "citeUrl">,
     Pick<BlockquoteCaptionProps, "withDash"> {

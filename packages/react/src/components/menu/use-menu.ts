@@ -40,17 +40,16 @@ const {
 
 export { MenuDescendantsContext, useMenuDescendant, useMenuDescendants }
 
-interface MenuContext
-  extends Pick<
-    UseMenuReturn,
-    | "onActiveDescendant"
-    | "onClose"
-    | "onCloseSubMenu"
-    | "onOpen"
-    | "onSelect"
-    | "subMenu"
-    | "subMenuDirection"
-  > {}
+interface MenuContext extends Pick<
+  UseMenuReturn,
+  | "onActiveDescendant"
+  | "onClose"
+  | "onCloseSubMenu"
+  | "onOpen"
+  | "onSelect"
+  | "subMenu"
+  | "subMenuDirection"
+> {}
 
 const [MenuContext, useMenuContext] = createContext<MenuContext>({
   name: "MenuContext",
@@ -65,11 +64,11 @@ const [MenuGroupContext, useMenuGroupContext] = createContext<MenuGroupContext>(
 )
 
 interface MainMenuContext {
+  closeOnSelect?: boolean
   descendants: Descendants<HTMLDivElement, MenuDescendantProps>
   onActiveDescendant: (descendant?: MenuDescendant) => void
   onCloseRef: RefObject<() => void>
   onSelect: (value?: string, closeOnSelect?: boolean) => void
-  closeOnSelect?: boolean
 }
 
 const [MainMenuContext, useMainMenuContext] = createContext<MainMenuContext>({
@@ -331,12 +330,14 @@ export const useMenu = ({
 
 export type UseMenuReturn = ReturnType<typeof useMenu>
 
-export interface UseSubMenuProps
-  extends Omit<Required<UseDisclosureProps>, "defaultOpen" | "timing"> {
+export interface UseSubMenuProps extends Omit<
+  Required<UseDisclosureProps>,
+  "defaultOpen" | "timing"
+> {
   descendants: Descendants<HTMLDivElement, MenuDescendantProps>
-  onActiveDescendant: (descendant?: MenuDescendant) => void
   disabled?: boolean
   subMenuDirection?: SubMenuDirection
+  onActiveDescendant: (descendant?: MenuDescendant) => void
 }
 
 export const useSubMenu = ({

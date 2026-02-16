@@ -13,9 +13,7 @@ import { Portal } from "../portal"
 import { NoticeRoot, PLACEMENT_MAP } from "./notice"
 
 export interface NoticeProviderProps
-  extends HTMLStyledProps,
-    NoticeConfig,
-    ThemeProps<NoticeStyle> {
+  extends HTMLStyledProps, NoticeConfig, ThemeProps<NoticeStyle> {
   /**
    * Container ref for the portal.
    */

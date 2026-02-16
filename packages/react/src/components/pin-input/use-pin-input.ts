@@ -33,7 +33,8 @@ const validate = (value: string, type: UsePinInputProps["type"]) => {
 }
 
 export interface UsePinInputProps
-  extends Omit<HTMLProps, "defaultValue" | "mask" | "onChange" | "value">,
+  extends
+    Omit<HTMLProps, "defaultValue" | "mask" | "onChange" | "value">,
     FieldProps {
   /**
    * The top-level id string that will be applied to the input fields.

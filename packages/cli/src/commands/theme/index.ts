@@ -41,10 +41,10 @@ import {
 interface Options {
   config: string
   cwd: string
-  overwrite: boolean
   format?: boolean
   js?: boolean
   lint?: boolean
+  overwrite: boolean
 }
 
 export const theme = new Command("theme")

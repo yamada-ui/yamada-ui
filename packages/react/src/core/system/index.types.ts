@@ -400,8 +400,8 @@ export type DefineThemeColorSemanticValue =
   | ThemeTokens["colors"]
 
 export interface DefineThemeColorSemanticToken {
-  [key: string]: any
   base?: DefineThemeColorSemanticValue
+  [key: string]: any
   bg?: DefineThemeColorSemanticValue
   contrast?: DefineThemeColorSemanticValue
   default?: DefineThemeColorSemanticValue
@@ -422,16 +422,15 @@ export interface DefineThemeColorSemanticTokens {
     | Dict
 }
 
-export interface DefineThemeSemanticTokens
-  extends Omit<
-    DefineTheme,
-    | "animations"
-    | "breakpoints"
-    | "colors"
-    | "semanticTokens"
-    | "styles"
-    | "themeSchemes"
-  > {
+export interface DefineThemeSemanticTokens extends Omit<
+  DefineTheme,
+  | "animations"
+  | "breakpoints"
+  | "colors"
+  | "semanticTokens"
+  | "styles"
+  | "themeSchemes"
+> {
   animations?: DefineThemeAnimationTokens<CSSAnimationObject | string>
   colors?: DefineThemeColorSemanticTokens
   colorSchemes?: DefineThemeColorSchemeSemanticTokens
@@ -566,11 +565,11 @@ export type ComponentCompound<
           | RegExp
       }) & {
     css: Y
-    [key: string]: any
     colorScheme?:
       | RegExp
       | ThemeTokens["colorSchemes"]
       | ThemeTokens["colorSchemes"][]
+    [key: string]: any
     layer?: LayerScheme
   }
 

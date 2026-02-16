@@ -31,14 +31,11 @@ if (typeof window.matchMedia !== "function") {
 
 global.TextEncoder = require("util").TextEncoder
 
-global.ResizeObserver = vi.fn().mockImplementation(() => ({
-  disconnect: vi.fn(),
-  observe: vi.fn(),
-  unobserve: vi.fn(),
-}))
-
-// @ts-ignore
-global.EyeDropper = vi.fn()
+global.ResizeObserver = class ResizeObserverMock {
+  disconnect = vi.fn()
+  observe = vi.fn()
+  unobserve = vi.fn()
+}
 
 vi.spyOn(window.HTMLCanvasElement.prototype, "getContext").mockImplementation(
   () => null,

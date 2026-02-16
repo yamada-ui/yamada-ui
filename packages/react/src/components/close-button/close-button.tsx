@@ -10,10 +10,8 @@ import { XIcon } from "../icon"
 import { closeButtonStyle } from "./close-button.style"
 
 export interface CloseButtonProps
-  extends Omit<
-      WithoutThemeProps<IconButtonProps, CloseButtonStyle>,
-      "aria-label"
-    >,
+  extends
+    Omit<WithoutThemeProps<IconButtonProps, CloseButtonStyle>, "aria-label">,
     Pick<HTMLProps<"button">, "aria-label">,
     ThemeProps<CloseButtonStyle> {}
 

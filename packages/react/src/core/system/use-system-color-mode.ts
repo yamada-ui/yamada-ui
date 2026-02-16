@@ -6,8 +6,8 @@ import { fnAll, useCallbackRef, useSafeLayoutEffect } from "../../utils"
 import { useEnvironment } from "./environment-provider"
 
 export interface UseSystemColorModeProps {
-  defaultColorMode: ColorMode
   callback?: (colorMode: ColorMode) => void
+  defaultColorMode: ColorMode
 }
 
 /**

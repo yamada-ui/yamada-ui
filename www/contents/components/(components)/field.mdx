@@ -241,4 +241,10 @@ To use an optional indicator, set a `ReactNode` to `optionalIndicator`.
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+### ARIA Roles and Attributes
+
+| Component                | Roles and Attributes  | Usage                                              |
+| ------------------------ | --------------------- | -------------------------------------------------- |
+| `FieldRequiredIndicator` | `role="presentation"` | Indicates that this is a presentation element.     |
+|                          | `aria-hidden`         | Excludes the element from the accessibility tree.  |
+| `Field.ErrorMessage`     | `aria-live="polite"`  | Indicates that it may be updated outside of focus. |

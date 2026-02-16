@@ -15,7 +15,8 @@ import { Grid } from "../grid"
 import { simpleGridStyle } from "./simple-grid.style"
 
 export interface SimpleGridProps
-  extends Omit<WithoutThemeProps<GridProps, SimpleGridStyle>, "columns">,
+  extends
+    Omit<WithoutThemeProps<GridProps, SimpleGridStyle>, "columns">,
     ThemeProps<SimpleGridStyle> {
   /**
    * The number of columns.

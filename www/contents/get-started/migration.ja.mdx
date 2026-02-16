@@ -116,8 +116,7 @@ const componentStyle = defineComponentStyle({
 type ComponentStyle = typeof componentStyle
 
 export interface ComponentProps
-  extends HTMLStyledProps<"div">,
-    ThemeProps<ComponentStyle> {}
+  extends HTMLStyledProps<"div">, ThemeProps<ComponentStyle> {}
 
 const {
   component,

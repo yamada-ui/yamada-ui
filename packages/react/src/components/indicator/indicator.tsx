@@ -34,7 +34,8 @@ interface PingOptions {
 }
 
 export interface IndicatorProps
-  extends Omit<HTMLStyledProps, "offset">,
+  extends
+    Omit<HTMLStyledProps, "offset">,
     Omit<ThemeProps<IndicatorStyle>, "ping">,
     Pick<FloatProps, "offset" | "placement"> {
   /**

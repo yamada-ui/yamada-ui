@@ -2,15 +2,26 @@ import type { InfiniteScrollAreaProps } from "."
 import { a11y, fireEvent, render, waitFor } from "#test"
 import { useRef, useState } from "react"
 import { InfiniteScrollArea } from "."
+import { noop } from "../../utils"
 
 describe("<InfiniteScrollArea />", () => {
   const defaultIntersectionObserver = global.IntersectionObserver
-  const IntersectionObserverMock = vi.fn(() => ({
-    disconnect: vi.fn(),
-    observe: vi.fn(),
-    takeRecords: vi.fn(),
-    unobserve: vi.fn(),
-  }))
+  const IntersectionObserverMock = vi.fn(function IntersectionObserverMock(
+    this: {
+      disconnect: () => void
+      observe: (el: Element) => void
+      takeRecords: () => void
+      unobserve: (el: Element) => void
+    },
+    cb: (entries: IntersectionObserverEntry[]) => void,
+  ) {
+    this.disconnect = noop
+    this.observe = (el: Element) => {
+      cb([{ target: el, isIntersecting: true } as IntersectionObserverEntry])
+    }
+    this.takeRecords = noop
+    this.unobserve = noop
+  })
 
   beforeAll(() => {
     vi.stubGlobal("IntersectionObserver", IntersectionObserverMock)

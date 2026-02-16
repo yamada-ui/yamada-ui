@@ -77,7 +77,8 @@ const [SelectContext, useSelectContext] = createContext<SelectContext>({
 export { SelectContext, useSelectContext }
 
 export interface UseSelectProps<Multiple extends boolean = false>
-  extends Omit<HTMLProps, "defaultValue" | "onChange" | "value">,
+  extends
+    Omit<HTMLProps, "defaultValue" | "onChange" | "value">,
     Omit<
       UseComboboxProps,
       "defaultValue" | "initialFocusValue" | "onChange" | "value"

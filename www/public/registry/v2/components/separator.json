@@ -18,7 +18,7 @@
     },
     {
       "name": "separator.tsx",
-      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { SeparatorStyle } from \"./separator.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { separatorStyle } from \"./separator.style\"\n\nexport interface SeparatorProps\n  extends HTMLStyledProps<\"hr\">,\n    ThemeProps<SeparatorStyle> {}\n\nconst {\n  PropsContext: SeparatorPropsContext,\n  usePropsContext: useSeparatorPropsContext,\n  withContext,\n} = createComponent<SeparatorProps, SeparatorStyle>(\"separator\", separatorStyle)\n\nexport { SeparatorPropsContext, useSeparatorPropsContext }\n\n/**\n * `Separator` is a component that represents a division between elements.\n *\n * @see https://yamada-ui.com/docs/components/separator\n */\nexport const Separator = withContext(\"hr\")()\n"
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { SeparatorStyle } from \"./separator.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { separatorStyle } from \"./separator.style\"\n\nexport interface SeparatorProps\n  extends HTMLStyledProps<\"hr\">, ThemeProps<SeparatorStyle> {}\n\nconst {\n  PropsContext: SeparatorPropsContext,\n  usePropsContext: useSeparatorPropsContext,\n  withContext,\n} = createComponent<SeparatorProps, SeparatorStyle>(\"separator\", separatorStyle)\n\nexport { SeparatorPropsContext, useSeparatorPropsContext }\n\n/**\n * `Separator` is a component that represents a division between elements.\n *\n * @see https://yamada-ui.com/docs/components/separator\n */\nexport const Separator = withContext(\"hr\")()\n"
     }
   ]
 }

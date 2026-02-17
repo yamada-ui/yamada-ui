@@ -2,7 +2,7 @@
   "$schema": "https://yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
     "components": [],
-    "externals": ["react-focus-lock@^2.13.6"],
+    "externals": ["react-focus-lock@^2.13.7"],
     "hooks": [],
     "providers": []
   },

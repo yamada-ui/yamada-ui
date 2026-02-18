@@ -1,6 +1,8 @@
 "use client"
 
-import { MailSearch } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { MailSearch as OriginalMailSearchIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const MailSearchIcon = component(Icon)({ as: MailSearch })
+export const MailSearchIcon = component(Icon)({
+  as: OriginalMailSearchIcon,
+}) as Component<"svg", IconProps>

@@ -1,6 +1,8 @@
 "use client"
 
-import { TableRowsSplit } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { TableRowsSplit as OriginalTableRowsSplitIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const TableRowsSplitIcon = component(Icon)({ as: TableRowsSplit })
+export const TableRowsSplitIcon = component(Icon)({
+  as: OriginalTableRowsSplitIcon,
+}) as Component<"svg", IconProps>

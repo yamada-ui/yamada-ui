@@ -1,6 +1,8 @@
 "use client"
 
-import { Cctv } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Cctv as OriginalCctvIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,7 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const CctvIcon = component(Icon)({ as: Cctv })
+export const CctvIcon = component(Icon)({ as: OriginalCctvIcon }) as Component<
+  "svg",
+  IconProps
+>

@@ -1,6 +1,8 @@
 "use client"
 
-import { WholeWord } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { WholeWord as OriginalWholeWordIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const WholeWordIcon = component(Icon)({ as: WholeWord })
+export const WholeWordIcon = component(Icon)({
+  as: OriginalWholeWordIcon,
+}) as Component<"svg", IconProps>

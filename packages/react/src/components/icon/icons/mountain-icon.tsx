@@ -1,6 +1,8 @@
 "use client"
 
-import { Mountain } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Mountain as OriginalMountainIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const MountainIcon = component(Icon)({ as: Mountain })
+export const MountainIcon = component(Icon)({
+  as: OriginalMountainIcon,
+}) as Component<"svg", IconProps>

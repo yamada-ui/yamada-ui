@@ -1,6 +1,8 @@
 "use client"
 
-import { RadioReceiver } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { RadioReceiver as OriginalRadioReceiverIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const RadioReceiverIcon = component(Icon)({ as: RadioReceiver })
+export const RadioReceiverIcon = component(Icon)({
+  as: OriginalRadioReceiverIcon,
+}) as Component<"svg", IconProps>

@@ -1,6 +1,8 @@
 "use client"
 
-import { Ellipsis } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Ellipsis as OriginalEllipsisIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const EllipsisIcon = component(Icon)({ as: Ellipsis })
+export const EllipsisIcon = component(Icon)({
+  as: OriginalEllipsisIcon,
+}) as Component<"svg", IconProps>

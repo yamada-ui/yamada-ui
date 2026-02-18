@@ -1,6 +1,8 @@
 "use client"
 
-import { TramFront } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { TramFront as OriginalTramFrontIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const TramFrontIcon = component(Icon)({ as: TramFront })
+export const TramFrontIcon = component(Icon)({
+  as: OriginalTramFrontIcon,
+}) as Component<"svg", IconProps>

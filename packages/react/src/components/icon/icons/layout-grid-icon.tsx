@@ -1,6 +1,8 @@
 "use client"
 
-import { LayoutGrid } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { LayoutGrid as OriginalLayoutGridIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const LayoutGridIcon = component(Icon)({ as: LayoutGrid })
+export const LayoutGridIcon = component(Icon)({
+  as: OriginalLayoutGridIcon,
+}) as Component<"svg", IconProps>

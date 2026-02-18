@@ -1,6 +1,8 @@
 "use client"
 
-import { Airplay } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Airplay as OriginalAirplayIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const AirplayIcon = component(Icon)({ as: Airplay })
+export const AirplayIcon = component(Icon)({
+  as: OriginalAirplayIcon,
+}) as Component<"svg", IconProps>

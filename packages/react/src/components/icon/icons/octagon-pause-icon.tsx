@@ -1,6 +1,8 @@
 "use client"
 
-import { OctagonPause } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { OctagonPause as OriginalOctagonPauseIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const OctagonPauseIcon = component(Icon)({ as: OctagonPause })
+export const OctagonPauseIcon = component(Icon)({
+  as: OriginalOctagonPauseIcon,
+}) as Component<"svg", IconProps>

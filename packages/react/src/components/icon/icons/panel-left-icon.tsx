@@ -1,6 +1,8 @@
 "use client"
 
-import { PanelLeft } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { PanelLeft as OriginalPanelLeftIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const PanelLeftIcon = component(Icon)({ as: PanelLeft })
+export const PanelLeftIcon = component(Icon)({
+  as: OriginalPanelLeftIcon,
+}) as Component<"svg", IconProps>

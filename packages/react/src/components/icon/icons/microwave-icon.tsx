@@ -1,6 +1,8 @@
 "use client"
 
-import { Microwave } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Microwave as OriginalMicrowaveIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const MicrowaveIcon = component(Icon)({ as: Microwave })
+export const MicrowaveIcon = component(Icon)({
+  as: OriginalMicrowaveIcon,
+}) as Component<"svg", IconProps>

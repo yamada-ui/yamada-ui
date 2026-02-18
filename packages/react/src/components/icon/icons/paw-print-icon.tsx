@@ -1,6 +1,8 @@
 "use client"
 
-import { PawPrint } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { PawPrint as OriginalPawPrintIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const PawPrintIcon = component(Icon)({ as: PawPrint })
+export const PawPrintIcon = component(Icon)({
+  as: OriginalPawPrintIcon,
+}) as Component<"svg", IconProps>

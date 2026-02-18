@@ -1,6 +1,8 @@
 "use client"
 
-import { SmartphoneNfc } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { SmartphoneNfc as OriginalSmartphoneNfcIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const SmartphoneNfcIcon = component(Icon)({ as: SmartphoneNfc })
+export const SmartphoneNfcIcon = component(Icon)({
+  as: OriginalSmartphoneNfcIcon,
+}) as Component<"svg", IconProps>

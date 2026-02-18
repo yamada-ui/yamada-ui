@@ -1,6 +1,8 @@
 "use client"
 
-import { DatabaseZap } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { DatabaseZap as OriginalDatabaseZapIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const DatabaseZapIcon = component(Icon)({ as: DatabaseZap })
+export const DatabaseZapIcon = component(Icon)({
+  as: OriginalDatabaseZapIcon,
+}) as Component<"svg", IconProps>

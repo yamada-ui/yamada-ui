@@ -1,6 +1,8 @@
 "use client"
 
-import { Pin } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Pin as OriginalPinIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,7 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const PinIcon = component(Icon)({ as: Pin })
+export const PinIcon = component(Icon)({ as: OriginalPinIcon }) as Component<
+  "svg",
+  IconProps
+>

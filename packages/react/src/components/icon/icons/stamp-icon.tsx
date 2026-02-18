@@ -1,6 +1,8 @@
 "use client"
 
-import { Stamp } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Stamp as OriginalStampIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const StampIcon = component(Icon)({ as: Stamp })
+export const StampIcon = component(Icon)({
+  as: OriginalStampIcon,
+}) as Component<"svg", IconProps>

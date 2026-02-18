@@ -1,6 +1,8 @@
 "use client"
 
-import { RedoDot } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { RedoDot as OriginalRedoDotIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const RedoDotIcon = component(Icon)({ as: RedoDot })
+export const RedoDotIcon = component(Icon)({
+  as: OriginalRedoDotIcon,
+}) as Component<"svg", IconProps>

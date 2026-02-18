@@ -1,6 +1,8 @@
 "use client"
 
-import { ScreenShare } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { ScreenShare as OriginalScreenShareIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const ScreenShareIcon = component(Icon)({ as: ScreenShare })
+export const ScreenShareIcon = component(Icon)({
+  as: OriginalScreenShareIcon,
+}) as Component<"svg", IconProps>

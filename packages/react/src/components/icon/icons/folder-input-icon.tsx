@@ -1,6 +1,8 @@
 "use client"
 
-import { FolderInput } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FolderInput as OriginalFolderInputIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const FolderInputIcon = component(Icon)({ as: FolderInput })
+export const FolderInputIcon = component(Icon)({
+  as: OriginalFolderInputIcon,
+}) as Component<"svg", IconProps>

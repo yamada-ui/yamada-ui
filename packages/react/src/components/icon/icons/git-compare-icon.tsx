@@ -1,6 +1,8 @@
 "use client"
 
-import { GitCompare } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { GitCompare as OriginalGitCompareIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const GitCompareIcon = component(Icon)({ as: GitCompare })
+export const GitCompareIcon = component(Icon)({
+  as: OriginalGitCompareIcon,
+}) as Component<"svg", IconProps>

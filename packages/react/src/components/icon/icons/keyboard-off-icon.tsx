@@ -1,6 +1,8 @@
 "use client"
 
-import { KeyboardOff } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { KeyboardOff as OriginalKeyboardOffIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const KeyboardOffIcon = component(Icon)({ as: KeyboardOff })
+export const KeyboardOffIcon = component(Icon)({
+  as: OriginalKeyboardOffIcon,
+}) as Component<"svg", IconProps>

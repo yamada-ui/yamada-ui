@@ -1,6 +1,8 @@
 "use client"
 
-import { DnaOff } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { DnaOff as OriginalDnaOffIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const DnaOffIcon = component(Icon)({ as: DnaOff })
+export const DnaOffIcon = component(Icon)({
+  as: OriginalDnaOffIcon,
+}) as Component<"svg", IconProps>

@@ -1,6 +1,8 @@
 "use client"
 
-import { LassoSelect } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { LassoSelect as OriginalLassoSelectIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const LassoSelectIcon = component(Icon)({ as: LassoSelect })
+export const LassoSelectIcon = component(Icon)({
+  as: OriginalLassoSelectIcon,
+}) as Component<"svg", IconProps>

@@ -1,6 +1,8 @@
 "use client"
 
-import { Slack } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Slack as OriginalSlackIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const SlackIcon = component(Icon)({ as: Slack })
+export const SlackIcon = component(Icon)({
+  as: OriginalSlackIcon,
+}) as Component<"svg", IconProps>

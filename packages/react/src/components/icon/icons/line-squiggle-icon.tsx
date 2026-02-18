@@ -1,6 +1,8 @@
 "use client"
 
-import { LineSquiggle } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { LineSquiggle as OriginalLineSquiggleIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const LineSquiggleIcon = component(Icon)({ as: LineSquiggle })
+export const LineSquiggleIcon = component(Icon)({
+  as: OriginalLineSquiggleIcon,
+}) as Component<"svg", IconProps>

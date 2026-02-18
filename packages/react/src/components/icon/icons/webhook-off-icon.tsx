@@ -1,6 +1,8 @@
 "use client"
 
-import { WebhookOff } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { WebhookOff as OriginalWebhookOffIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const WebhookOffIcon = component(Icon)({ as: WebhookOff })
+export const WebhookOffIcon = component(Icon)({
+  as: OriginalWebhookOffIcon,
+}) as Component<"svg", IconProps>

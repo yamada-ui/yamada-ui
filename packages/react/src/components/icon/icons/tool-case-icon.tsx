@@ -1,6 +1,8 @@
 "use client"
 
-import { ToolCase } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { ToolCase as OriginalToolCaseIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const ToolCaseIcon = component(Icon)({ as: ToolCase })
+export const ToolCaseIcon = component(Icon)({
+  as: OriginalToolCaseIcon,
+}) as Component<"svg", IconProps>

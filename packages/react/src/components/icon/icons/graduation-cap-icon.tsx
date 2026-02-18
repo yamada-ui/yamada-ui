@@ -1,6 +1,8 @@
 "use client"
 
-import { GraduationCap } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { GraduationCap as OriginalGraduationCapIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const GraduationCapIcon = component(Icon)({ as: GraduationCap })
+export const GraduationCapIcon = component(Icon)({
+  as: OriginalGraduationCapIcon,
+}) as Component<"svg", IconProps>

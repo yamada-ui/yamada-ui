@@ -1,6 +1,8 @@
 "use client"
 
-import { Panda } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Panda as OriginalPandaIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const PandaIcon = component(Icon)({ as: Panda })
+export const PandaIcon = component(Icon)({
+  as: OriginalPandaIcon,
+}) as Component<"svg", IconProps>

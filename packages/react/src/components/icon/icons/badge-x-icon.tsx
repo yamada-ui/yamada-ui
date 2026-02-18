@@ -1,6 +1,8 @@
 "use client"
 
-import { BadgeX } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { BadgeX as OriginalBadgeXIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const BadgeXIcon = component(Icon)({ as: BadgeX })
+export const BadgeXIcon = component(Icon)({
+  as: OriginalBadgeXIcon,
+}) as Component<"svg", IconProps>

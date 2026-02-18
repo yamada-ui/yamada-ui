@@ -1,6 +1,8 @@
 "use client"
 
-import { EthernetPort } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { EthernetPort as OriginalEthernetPortIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const EthernetPortIcon = component(Icon)({ as: EthernetPort })
+export const EthernetPortIcon = component(Icon)({
+  as: OriginalEthernetPortIcon,
+}) as Component<"svg", IconProps>

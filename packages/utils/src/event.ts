@@ -61,7 +61,8 @@ export function getEventPoint(
 }
 
 export interface EventMap
-  extends DocumentEventMap,
+  extends
+    DocumentEventMap,
     GlobalEventHandlersEventMap,
     WindowEventMap,
     FontFaceSetEventMap {}

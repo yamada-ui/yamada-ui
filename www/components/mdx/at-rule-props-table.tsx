@@ -1,5 +1,5 @@
-import type { StyleConfig } from "@/data"
 import type { ReactNode } from "react"
+import type { StyleConfig } from "@/data"
 import { Box, Code, isObject, NativeTable, toKebabCase } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import { useMemo } from "react"

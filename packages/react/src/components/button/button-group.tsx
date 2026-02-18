@@ -10,8 +10,7 @@ import { ButtonPropsContext } from "./button"
 import { IconButtonPropsContext } from "./icon-button"
 
 export interface ButtonGroupRootProps
-  extends WithoutThemeProps<GroupProps, ButtonStyle>,
-    ThemeProps<ButtonStyle> {
+  extends WithoutThemeProps<GroupProps, ButtonStyle>, ThemeProps<ButtonStyle> {
   /**
    * If `true`, all wrapped button will be disabled.
    *

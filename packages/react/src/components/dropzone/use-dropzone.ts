@@ -18,8 +18,7 @@ import {
 import { useFieldProps } from "../field"
 
 export interface UseDropzoneProps
-  extends Omit<HTMLProps, "onDrop" | "onError">,
-    FieldProps {
+  extends Omit<HTMLProps, "onDrop" | "onError">, FieldProps {
   /**
    * The HTML `name` attribute used for forms.
    */

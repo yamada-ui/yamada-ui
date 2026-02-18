@@ -14,7 +14,8 @@ import { useInputBorder } from "../input"
 import { checkboxCardStyle } from "./checkbox-card.style"
 
 export interface CheckboxCardRootProps<Y extends string = string>
-  extends Merge<HTMLStyledProps<"label">, UseCheckboxProps<Y>>,
+  extends
+    Merge<HTMLStyledProps<"label">, UseCheckboxProps<Y>>,
     ThemeProps<CheckboxCardStyle>,
     UseInputBorderProps {
   /**

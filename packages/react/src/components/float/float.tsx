@@ -7,8 +7,7 @@ import { isArray } from "../../utils"
 import { floatStyle } from "./float.style"
 
 export interface FloatProps
-  extends Omit<HTMLStyledProps, "offset">,
-    ThemeProps<FloatStyle> {
+  extends Omit<HTMLStyledProps, "offset">, ThemeProps<FloatStyle> {
   /**
    * Changes position offset.
    */

@@ -7,8 +7,10 @@ import type { SnackCloseButtonProps, SnackContentProps } from "./snacks"
 import { useCallback, useMemo, useState } from "react"
 import { useSystem } from "../../core"
 
-export interface Snack
-  extends Omit<UseSnacksOptions, "direction" | "limit" | "startIndex"> {
+export interface Snack extends Omit<
+  UseSnacksOptions,
+  "direction" | "limit" | "startIndex"
+> {
   id: string
   onClose: () => void
   onCloseComplete?: () => void
@@ -19,7 +21,8 @@ let counter = 0
 interface SnackMethodsOptions extends Partial<Omit<Snack, "onClose">> {}
 
 export interface UseSnacksOptions
-  extends Omit<Alert.RootProps, "direction" | "title">,
+  extends
+    Omit<Alert.RootProps, "direction" | "title">,
     Pick<Alert.LoadingProps, "loadingScheme">,
     SnacksConfig {
   /**

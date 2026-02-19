@@ -7,7 +7,6 @@ import {
   FileIcon,
   Heading,
   HStack,
-  IconButton,
   InboxIcon,
   MessageSquareIcon,
   SendIcon,
@@ -38,26 +37,20 @@ export const SUB_MENU_ITEMS = [
   { icon: ArchiveIcon, label: "Promotions", num: 13 },
 ]
 
-interface SidebarProps {
-  collapsed: boolean
-}
-
-export function Sidebar({ collapsed }: SidebarProps) {
+export function Sidebar() {
   return (
-    <VStack gap="0" h="full">
-      <Header
-        justifyContent={
-          collapsed ? "center" : { base: "flex-start", xl: "center" }
-        }
-        ms={{ base: collapsed ? "0" : "sm", xl: "0" }}
-      >
+    <VStack alignItems="flex-start" gap="0" h="full">
+      <Header ms="1">
         <CloudIcon fontSize="3xl" />
 
-        {!collapsed ? (
-          <Heading as="h3" size="lg" display={{ base: "inline", xl: "none" }}>
-            Yamada UI
-          </Heading>
-        ) : null}
+        <Heading
+          as="h3"
+          size="lg"
+          lineClamp={1}
+          _container={[{ css: { display: "none" }, maxW: "53px" }]}
+        >
+          Yamada UI
+        </Heading>
       </Header>
 
       <VStack as="nav" gap="0" separator={<Separator />}>
@@ -65,7 +58,6 @@ export function Sidebar({ collapsed }: SidebarProps) {
           {MAIN_MENU_ITEMS.map(({ icon, label, num }) => (
             <SidebarItem
               key={label}
-              collapsed={collapsed}
               icon={icon}
               isSelected={label === "Inbox"}
               label={label}
@@ -76,13 +68,7 @@ export function Sidebar({ collapsed }: SidebarProps) {
 
         <VStack as="ul" gap="sm" p="sm">
           {SUB_MENU_ITEMS.map(({ icon, label, num }) => (
-            <SidebarItem
-              key={label}
-              collapsed={collapsed}
-              icon={icon}
-              label={label}
-              num={num}
-            />
+            <SidebarItem key={label} icon={icon} label={label} num={num} />
           ))}
         </VStack>
       </VStack>
@@ -91,7 +77,6 @@ export function Sidebar({ collapsed }: SidebarProps) {
 }
 
 interface SidebarItemProps {
-  collapsed?: boolean
   icon: Component<"svg", IconProps>
   isSelected?: boolean
   label: string
@@ -99,7 +84,6 @@ interface SidebarItemProps {
 }
 
 function SidebarItem({
-  collapsed = false,
   icon: Icon,
   isSelected = false,
   label,
@@ -108,35 +92,32 @@ function SidebarItem({
   const showNum = num && num > 0
 
   return (
-    <HStack as="li" justifyContent={collapsed ? "center" : "flex-start"}>
-      {collapsed ? (
-        <Tooltip
-          content={
-            <HStack gap="sm">
-              <Text as="span">{label}</Text>
+    <HStack as="li" justifyContent="flex-start">
+      <Tooltip
+        content={
+          <HStack gap="sm">
+            <Text as="span">{label}</Text>
 
-              {showNum ? (
-                <Text as="span" color="fg.muted">
-                  {num}
-                </Text>
-              ) : null}
-            </HStack>
-          }
-          placement="end"
-        >
-          <IconButton
-            size="sm"
-            variant={isSelected ? "solid" : "ghost"}
-            icon={<Icon color={isSelected ? "mono.contrast" : "fg.muted"} />}
-          />
-        </Tooltip>
-      ) : (
+            {showNum ? (
+              <Text as="span" color="fg.muted">
+                {num}
+              </Text>
+            ) : null}
+          </HStack>
+        }
+        flip={false}
+        placement="center-end"
+        contentProps={{
+          display: "none",
+          _container: [{ css: { display: "block" }, maxW: "53px" }],
+        }}
+        portalProps={{ disabled: true }}
+      >
         <Button
           size="sm"
           variant={isSelected ? "solid" : "ghost"}
-          display={{ base: "flex", xl: "center" }}
           justifyContent="flex-start"
-          px={{ base: "2", xl: "0" }}
+          px="7px"
           startIcon={
             <Icon
               color={isSelected ? "mono.contrast" : "fg.muted"}
@@ -147,8 +128,8 @@ function SidebarItem({
         >
           <Text
             as="span"
-            display={{ base: "inline", xl: "none" }}
             fontSize="md"
+            _container={[{ css: { display: "none" }, maxW: "53px" }]}
           >
             {label}
           </Text>
@@ -158,14 +139,14 @@ function SidebarItem({
           {showNum ? (
             <Text
               as="span"
-              display={{ base: "inline", xl: "none" }}
               fontSize="sm"
+              _container={[{ css: { display: "none" }, maxW: "53px" }]}
             >
               {num}
             </Text>
           ) : null}
         </Button>
-      )}
+      </Tooltip>
     </HStack>
   )
 }

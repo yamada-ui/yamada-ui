@@ -51,9 +51,9 @@ interface AutocompleteRenderProps extends ComboboxItemWithValue {
   count: number
   focused: boolean
   index: number
+  max?: number
   separator: string
   onClear: () => void
-  max?: number
 }
 
 export interface AutocompleteItemRender {
@@ -120,8 +120,10 @@ export interface AutocompleteMatcher {
 const defaultMatcher: AutocompleteMatcher = (input, target) =>
   target?.toLowerCase().includes(input.toLowerCase()) ?? false
 
-interface AutocompleteContext
-  extends Pick<UseAutocompleteReturn, "max" | "value"> {}
+interface AutocompleteContext extends Pick<
+  UseAutocompleteReturn,
+  "max" | "value"
+> {}
 
 const [AutocompleteContext, useAutocompleteContext] =
   createContext<AutocompleteContext>({
@@ -131,7 +133,8 @@ const [AutocompleteContext, useAutocompleteContext] =
 export { AutocompleteContext, useAutocompleteContext }
 
 export interface UseAutocompleteProps<Multiple extends boolean = false>
-  extends Omit<HTMLProps, "defaultValue" | "onChange" | "ref" | "value">,
+  extends
+    Omit<HTMLProps, "defaultValue" | "onChange" | "ref" | "value">,
     Omit<
       UseComboboxProps,
       "defaultValue" | "initialFocusValue" | "onChange" | "ref" | "value"

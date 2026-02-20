@@ -49,8 +49,7 @@ type Style<Y extends boolean = false> = Y extends false
 type MergedStyle = CSSModifierObject | CSSModifierObject<CSSSlotObject>
 
 interface GetStyleOptions
-  extends Partial<Breakpoints>,
-    Pick<Partial<Layers>, "wrap"> {
+  extends Partial<Breakpoints>, Pick<Partial<Layers>, "wrap"> {
   name?: string
   hasSlot?: boolean
   modifier?: string

@@ -1,5 +1,8 @@
 import type { StorybookConfig } from "@storybook/react-vite"
-import { resolve } from "node:path"
+import path from "node:path"
+import { fileURLToPath } from "node:url"
+
+const dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export const config: StorybookConfig = {
   addons: ["@storybook/addon-docs", "@storybook/addon-a11y"],
@@ -17,8 +20,8 @@ export const config: StorybookConfig = {
     if (config.resolve) {
       config.resolve.alias = {
         ...config.resolve.alias,
-        "#storybook": resolve(__dirname, "./"),
-        "@": resolve(__dirname, "../src"),
+        "#storybook": path.resolve(dirname, "./"),
+        "@": path.resolve(dirname, "../src"),
       }
     }
     return config

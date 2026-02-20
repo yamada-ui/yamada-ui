@@ -41,25 +41,54 @@ const otherPseudos = sortPseudos
   .join("|")
 
 const sortObjectGroups = {
-  customGroups: {
-    aria: "^aria-.+",
-    callback: "^on.*",
-    data: "^data-.+",
-    internal: "^__.+",
-    primary: ["^key$", "^ref$", "^id$", "^lang$"],
-    props: ".+Props$",
-    pseudos: `^_(?!.*(${otherPseudos})$).*$`,
-    ...Object.fromEntries(
-      sortPseudos.map((pseudos, index) => [`pseudos${index + 1}`, pseudos]),
-    ),
-    quaternary: ["^className$", "^alt$"],
-    quinary: ["^css$", "^sx$", "^style$"],
-    secondary: ["^as$", "^form$", "^type$", "^htmlFor$"],
-    senary: ["^layerStyle$", "^textStyle$", "^apply$"],
-    septenary: ["^variant$", "^size$", "^colorScheme$"],
-    tertiary: ["^name$", "^src$", "^srcSet$", "^href$", "^target$", "^rel$"],
-    ...semanticSizes,
-  },
+  customGroups: [
+    { elementNamePattern: "^aria-.+", groupName: "aria" },
+    { elementNamePattern: "^on.*", groupName: "callback" },
+    { elementNamePattern: "^data-.+", groupName: "data" },
+    { elementNamePattern: "^__.+", groupName: "internal" },
+    { elementNamePattern: ".+Props$", groupName: "props" },
+    {
+      elementNamePattern: `^_(?!.*(${otherPseudos})$).*$`,
+      groupName: "pseudos",
+    },
+    ...sortPseudos.map((elementNamePattern, index) => ({
+      elementNamePattern,
+      groupName: `pseudos${index + 1}`,
+    })),
+    ...Object.entries(semanticSizes).map(([groupName, elementNamePattern]) => ({
+      elementNamePattern,
+      groupName,
+    })),
+    {
+      elementNamePattern: ["^key$", "^ref$", "^id$", "^lang$"],
+      groupName: "primary",
+    },
+    {
+      elementNamePattern: ["^as$", "^form$", "^type$", "^htmlFor$"],
+      groupName: "secondary",
+    },
+    {
+      elementNamePattern: [
+        "^name$",
+        "^src$",
+        "^srcSet$",
+        "^href$",
+        "^target$",
+        "^rel$",
+      ],
+      groupName: "tertiary",
+    },
+    { elementNamePattern: ["^className$", "^alt$"], groupName: "quaternary" },
+    { elementNamePattern: ["^css$", "^sx$", "^style$"], groupName: "quinary" },
+    {
+      elementNamePattern: ["^layerStyle$", "^textStyle$", "^apply$"],
+      groupName: "senary",
+    },
+    {
+      elementNamePattern: ["^variant$", "^size$", "^colorScheme$"],
+      groupName: "septenary",
+    },
+  ],
   groups: [
     "primary",
     "secondary",
@@ -105,17 +134,17 @@ export const perfectionistConfig = {
       {
         type,
         groups: [
-          "type",
-          ["external-type", "builtin-type", "internal-type"],
-          ["parent-type", "sibling-type", "index-type"],
-          ["builtin", "external"],
-          "internal",
-          ["parent", "sibling", "index"],
-          "object",
+          "type-import",
+          ["type-parent", "type-sibling", "type-index"],
+          "type-internal",
+          ["value-builtin", "value-external"],
+          "value-internal",
+          ["value-parent", "value-sibling", "value-index"],
+          "ts-equals-import",
           "unknown",
-          ["side-effect", "side-effect-style"],
         ],
         newlinesBetween: "ignore",
+        newlinesInside: "ignore",
         partitionByNewLine: true,
       },
     ],
@@ -125,7 +154,6 @@ export const perfectionistConfig = {
       "warn",
       {
         type,
-        groupKind: "required-first",
         partitionByNewLine: true,
         ...sortObjectGroups,
       },
@@ -145,7 +173,6 @@ export const perfectionistConfig = {
       "warn",
       {
         type,
-        groupKind: "required-first",
         partitionByNewLine: true,
         ...sortObjectGroups,
       },

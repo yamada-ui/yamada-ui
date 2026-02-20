@@ -12,7 +12,8 @@ import { numberInputStyle } from "./number-input.style"
 import { useNumberInput } from "./use-number-input"
 
 export interface NumberInputProps
-  extends Omit<
+  extends
+    Omit<
       WithoutThemeProps<InputProps, NumberInputStyle>,
       keyof UseNumberInputProps
     >,

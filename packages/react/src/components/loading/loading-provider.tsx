@@ -85,8 +85,9 @@ const createMethods = (refs: RefObject<Controller>): LoadingMethods => ({
 const incrementCount = (prev: number) => prev + 1
 const decrementCount = (prev: number) => (prev === 0 ? prev : prev - 1)
 
-export interface LoadingProviderProps
-  extends PropsWithChildren<ThemeConfig["loading"]> {}
+export interface LoadingProviderProps extends PropsWithChildren<
+  ThemeConfig["loading"]
+> {}
 
 export const LoadingProvider: FC<LoadingProviderProps> = ({
   background: backgroundConfig,
@@ -127,10 +128,10 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
 
 export interface LoadingSharedProps {
   duration: null | number
+  initial?: boolean | string
   loadingScheme: LoadingScheme
   message: ReactNode | undefined
   onFinish: () => void
-  initial?: boolean | string
 }
 
 interface ControllerProps extends LoadingConfig {

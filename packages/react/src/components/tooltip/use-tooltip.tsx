@@ -3,11 +3,13 @@
 import type { PropGetter } from "../../core"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import type { UsePopperProps } from "../../hooks/use-popper"
+import type { Dict } from "../../utils"
 import { useCallback, useId, useRef } from "react"
+import { useSplitProps } from "../../core"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { useEventListener } from "../../hooks/use-event-listener"
 import { useOutsideClick } from "../../hooks/use-outside-click"
-import { usePopper, usePopperProps } from "../../hooks/use-popper"
+import { popperProps, usePopper, usePopperProps } from "../../hooks/use-popper"
 import {
   cx,
   dataAttr,
@@ -19,8 +21,7 @@ import {
 } from "../../utils"
 
 export interface UseTooltipProps
-  extends Omit<UseDisclosureProps, "timing">,
-    UsePopperProps<"button"> {
+  extends Omit<UseDisclosureProps, "timing">, UsePopperProps<"button"> {
   /**
    * The delay before hiding the tooltip.
    *
@@ -216,3 +217,40 @@ export const useTooltip = (props: UseTooltipProps = {}) => {
 }
 
 export type UseTooltipReturn = ReturnType<typeof useTooltip>
+
+export const tooltipProps: (keyof UseTooltipProps)[] = [
+  ...popperProps,
+  "open",
+  "defaultOpen",
+  "onOpen",
+  "onClose",
+  "closeDelay",
+  "closeOnClick",
+  "closeOnEsc",
+  "closeOnScroll",
+  "disabled",
+  "openDelay",
+]
+
+export const useTooltipProps = <
+  Y extends Dict = Dict,
+  M extends keyof UseTooltipProps = keyof UseTooltipProps,
+>(
+  props: Y,
+  omitKeys?: M[],
+) => {
+  return useSplitProps(
+    props,
+    tooltipProps.filter((key) => !omitKeys?.includes(key as M)),
+  ) as unknown as [
+    keyof UseTooltipProps extends M
+      ? UseTooltipProps
+      : Omit<UseTooltipProps, M>,
+    Omit<
+      Y,
+      keyof UseTooltipProps extends M
+        ? keyof UseTooltipProps
+        : Exclude<keyof UseTooltipProps, M>
+    >,
+  ]
+}

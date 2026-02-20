@@ -19,7 +19,8 @@ import {
 import { useFieldProps } from "../field"
 
 export interface UseSwitchProps<Y extends number | string = string>
-  extends Omit<HTMLProps<"label">, "onBlur" | "onChange" | "onFocus" | "ref">,
+  extends
+    Omit<HTMLProps<"label">, "onBlur" | "onChange" | "onFocus" | "ref">,
     HTMLRefAttributes<"input">,
     FieldProps {
   /**

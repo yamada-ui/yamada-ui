@@ -31,7 +31,8 @@ import {
 import { useFieldProps } from "../field"
 
 export interface UseSliderProps<Y extends [number, number] | number = number>
-  extends Omit<HTMLProps, "defaultValue" | "onChange" | "ref">,
+  extends
+    Omit<HTMLProps, "defaultValue" | "onChange" | "ref">,
     HTMLRefAttributes<"input">,
     FieldProps {
   /**

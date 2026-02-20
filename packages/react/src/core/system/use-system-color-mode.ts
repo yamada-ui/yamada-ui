@@ -7,7 +7,7 @@ import { useEnvironment } from "./environment-provider"
 
 export interface UseSystemColorModeProps {
   callback?: (colorMode: ColorMode) => void
-  initialColorMode?: ColorMode
+  defaultColorMode: ColorMode
 }
 
 /**
@@ -15,13 +15,12 @@ export interface UseSystemColorModeProps {
  */
 export const useSystemColorMode = ({
   callback,
-  initialColorMode,
-}: UseSystemColorModeProps = {}) => {
+  defaultColorMode,
+}: UseSystemColorModeProps) => {
   const { getWindow } = useEnvironment()
   const callbackRef = useCallbackRef(callback)
-  const [colorMode, setColorMode] = useState<ColorMode | undefined>(
-    initialColorMode,
-  )
+  const [systemColorMode, setSystemColorMode] =
+    useState<ColorMode>(defaultColorMode)
 
   const getSystemColorMode = useCallback(
     (fallback?: ColorMode) => {
@@ -59,12 +58,12 @@ export const useSystemColorMode = ({
   )
 
   useSafeLayoutEffect(() => {
-    setColorMode(getSystemColorMode())
+    setSystemColorMode(getSystemColorMode())
   }, [getSystemColorMode])
 
   useEffect(() => {
-    return systemColorModeObserver(fnAll(setColorMode, callbackRef))
+    return systemColorModeObserver(fnAll(setSystemColorMode, callbackRef))
   }, [systemColorModeObserver, getSystemColorMode, callbackRef])
 
-  return colorMode
+  return { getSystemColorMode, systemColorMode }
 }

@@ -1,5 +1,5 @@
-import type { StyleConfig } from "@/data"
 import type { Dict } from "@yamada-ui/react"
+import type { StyleConfig } from "@/data"
 import pseudoClasses from "@/data/pseudo-classes.json"
 import pseudoElements from "@/data/pseudo-elements.json"
 import selectors from "@/data/selectors.json"

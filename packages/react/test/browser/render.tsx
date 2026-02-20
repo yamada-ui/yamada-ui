@@ -5,11 +5,11 @@ import type {
   RenderHookResult as OriginalRenderHookResult,
 } from "vitest-browser-react"
 import type { UIProviderProps } from "../../src"
-import { userEvent } from "@vitest/browser/context"
 import {
   render as originalRender,
   renderHook as originalRenderHook,
 } from "vitest-browser-react"
+import { userEvent } from "vitest/browser"
 import { UIProvider } from "../../src"
 
 export interface ComponentRenderOptions extends OriginalComponentRenderOptions {
@@ -17,13 +17,14 @@ export interface ComponentRenderOptions extends OriginalComponentRenderOptions {
   providerProps?: Omit<UIProviderProps, "children">
 }
 
-export interface BrowserRenderHookOptions<Y>
-  extends OriginalRenderHookOptions<Y> {
+export interface BrowserRenderHookOptions<
+  Y,
+> extends OriginalRenderHookOptions<Y> {
   withProvider?: boolean
   providerProps?: Omit<UIProviderProps, "children">
 }
 
-export function render(
+export async function render(
   ui: ReactNode,
   {
     withProvider = true,
@@ -39,7 +40,7 @@ export function render(
     )
   }
 
-  const result = originalRender(ui, options)
+  const result = await originalRender(ui, options)
 
   return { user, ...result }
 }
@@ -51,7 +52,7 @@ export function renderHook<Y, M>(
     providerProps,
     ...options
   }: BrowserRenderHookOptions<M> = {},
-): OriginalRenderHookResult<Y, M> {
+): Promise<OriginalRenderHookResult<Y, M>> {
   if (withProvider) {
     options.wrapper ??= (props: PropsWithChildren) => (
       <UIProvider {...props} {...providerProps} />

@@ -13,21 +13,21 @@
     "yamada-cli": "pnpm -C ../../../packages/cli dev"
   },
   "dependencies": {
-    "@react-router/node": "^7.10.1",
-    "@react-router/serve": "^7.10.1",
+    "@react-router/node": "^7.13.0",
+    "@react-router/serve": "^7.13.0",
     "@yamada-ui/react": "workspace:*",
-    "isbot": "^5.1.31",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-    "react-router": "^7.10.1"
+    "isbot": "^5.1.35",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-router": "^7.13.0"
   },
   "devDependencies": {
-    "@react-router/dev": "^7.10.1",
-    "@types/node": "^24.9.1",
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2",
+    "@react-router/dev": "^7.13.0",
+    "@types/node": "^25.2.3",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "typescript": "^5.9.3",
-    "vite": "^7.1.11",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite": "^7.3.1",
+    "vite-tsconfig-paths": "^6.1.1"
   }
 }

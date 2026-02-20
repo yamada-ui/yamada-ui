@@ -324,3 +324,50 @@ export default function App() {
   return <Outlet />
 }
 ```
+
+## Component Integration
+
+You can integrate React Router components such as [Link](https://reactrouter.com/api/components/Link) with Yamada UI components.
+
+### Link
+
+```tsx
+import type {
+  ButtonProps,
+  HTMLRefAttributes,
+  IconButtonProps,
+  LinkProps,
+  Merge,
+} from "@yamada-ui/react"
+import type { FC } from "react"
+import type { LinkProps as OriginalLinkProps } from "react-router"
+import { Button, IconButton, Link } from "@yamada-ui/react"
+import { Link as OriginalLink } from "react-router"
+
+export interface RouterLinkProps extends Omit<
+  Merge<OriginalLinkProps, LinkProps>,
+  "as" | "ref"
+> {}
+
+export const RouterLink: FC<RouterLinkProps> = (props) => {
+  return <Link as={OriginalLink} {...props} />
+}
+
+export interface RouterLinkButtonProps
+  extends
+    Omit<Merge<OriginalLinkProps, ButtonProps>, "as" | "ref">,
+    HTMLRefAttributes<"a"> {}
+
+export const RouterLinkButton: FC<RouterLinkButtonProps> = (props) => {
+  return <Button as={OriginalLink} {...props} />
+}
+
+export interface RouterLinkIconButtonProps
+  extends
+    Omit<Merge<OriginalLinkProps, IconButtonProps>, "as" | "ref">,
+    HTMLRefAttributes<"a"> {}
+
+export const RouterLinkIconButton: FC<RouterLinkIconButtonProps> = (props) => {
+  return <IconButton as={OriginalLink} {...props} />
+}
+```

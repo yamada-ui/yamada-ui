@@ -11,7 +11,8 @@ import { switchStyle } from "./switch.style"
 import { useSwitch } from "./use-switch"
 
 export interface SwitchProps
-  extends Merge<HTMLStyledProps<"label">, UseSwitchProps>,
+  extends
+    Merge<HTMLStyledProps<"label">, UseSwitchProps>,
     ThemeProps<SwitchStyle> {
   /**
    * The switch icon to use.

@@ -1,7 +1,7 @@
 {
   "name": "@yamada-ui/utils",
   "type": "module",
-  "version": "2.0.4",
+  "version": "2.0.6",
   "description": "The utilities for Yamada UI projects",
   "keywords": [
     "utils",
@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "clean-package": "2.2.0",
-    "react": "^19.2.3"
+    "react": "^19.2.4"
   },
   "peerDependencies": {
     "react": ">=19"

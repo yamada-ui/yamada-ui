@@ -14,7 +14,8 @@ import { InputAddonPropsContext } from "./input-addon"
 import { InputElement, InputElementPropsContext } from "./input-element"
 
 export interface InputGroupRootProps
-  extends WithoutThemeProps<GroupProps, InputStyle>,
+  extends
+    WithoutThemeProps<GroupProps, InputStyle>,
     ThemeProps<InputStyle>,
     Pick<InputProps, "errorBorderColor" | "focusBorderColor">,
     FieldProps {}

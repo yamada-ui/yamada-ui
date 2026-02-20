@@ -6,8 +6,7 @@ import { createComponent } from "../../core"
 import { imageStyle } from "./image.style"
 
 export interface ImageProps
-  extends HTMLStyledProps<"img">,
-    ThemeProps<ImageStyle> {
+  extends HTMLStyledProps<"img">, ThemeProps<ImageStyle> {
   /**
    * The CSS `object-fit` property.
    */

@@ -854,4 +854,46 @@ return (
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`Menu`は、アクセシビリティに関して[WAI-ARIA - Menu and Menubar Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/)および[WAI-ARIA - Menu Button Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/)に従います。
+
+### キーボード操作
+
+| キー            | 説明                                                                                                                                                                                 | 状態                       |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------- |
+| `Space`,`Enter` | メニューを開き、無効ではない最初の項目をフォーカスします。                                                                                                                           |                            |
+|                 | メニュー内である場合はフォーカスされている項目をアクティブにして、すべてのメニューを閉じます。                                                                                       | `closeOnSelect={true}`     |
+| `ArrowRight`    | サブメニューのトリガーである場合はサブメニューを開き、無効ではない最初の項目をフォーカスします。                                                                                     | `subMenuDirection="end"`   |
+|                 | サブメニュー内である場合はサブメニューを閉じ、サブメニューのトリガーにフォーカスします。                                                                                             | `subMenuDirection="start"` |
+| `ArrowLeft`     | サブメニューのトリガーである場合はサブメニューを開き、無効ではない最初の項目をフォーカスします。                                                                                     | `subMenuDirection="start"` |
+|                 | サブメニュー内である場合はサブメニューを閉じ、サブメニューのトリガーにフォーカスします。                                                                                             | `subMenuDirection="end"`   |
+| `ArrowUp`       | メニューを開き、無効ではない最後の項目をフォーカスします。メニュー内である場合は無効ではない前の項目をフォーカスします。最初の項目の場合は無効ではない最後の項目をフォーカスします。 |                            |
+| `ArrowDown`     | メニューを開き、無効ではない最初の項目をフォーカスします。メニュー内である場合は無効ではない次の項目をフォーカスします。最後の項目の場合は無効ではない最初の項目をフォーカスします。 |                            |
+| `Home`          | メニュー内である場合は無効ではない最初の項目をフォーカスします。                                                                                                                     |                            |
+| `End`           | メニュー内である場合は無効ではない最後の項目をフォーカスします。                                                                                                                     |                            |
+| `Escape`        | メニューを閉じてトリガーにフォーカスします。                                                                                                                                         | `closeOnEsc={true}`        |
+
+### ARIAロールと属性
+
+| コンポーネント        | ロールと属性            | 使い方                                                                                                                                                    |
+| --------------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Menu.Trigger`        | `role="button"`         | ボタンであることを示します。                                                                                                                              |
+|                       | `aria-controls`         | メニューが開いている場合は関連した`Menu.Content`の`id`を設定し、閉じている場合は`undefined`を設定します。                                                 |
+|                       | `aria-disabled`         | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                    |
+|                       | `aria-expanded`         | メニューが開いている場合は`"true"`を設定し、閉じている場合は、`"false"`を設定します。                                                                     |
+|                       | `aria-haspopup="menu"`  | メニューが存在することを示します。                                                                                                                        |
+| `Menu.ContextTrigger` | `role="application"`    | アプリケーションであることを示します。                                                                                                                    |
+|                       | `aria-controls`         | メニューが開いている場合は関連した`Menu.Content`の`id`を設定し、閉じている場合は`undefined`を設定します。                                                 |
+|                       | `aria-disabled`         | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                    |
+|                       | `aria-expanded`         | メニューが開いている場合は`"true"`を設定し、閉じている場合は、`"false"`を設定します。                                                                     |
+|                       | `aria-haspopup="menu"`  | メニューが存在することを示します。                                                                                                                        |
+| `Menu.Content`        | `role="menu"`           | メニューであることを示します。                                                                                                                            |
+|                       | `aria-activedescendant` | フォーカスされた項目の`id`を設定します。                                                                                                                  |
+|                       | `aria-hidden`           | メニューが開いている場合は`"false"`を設定し、閉じている場合は`"true"`を設定します。                                                                       |
+|                       | `aria-labelledby`       | 関連した`Menu.Trigger`または`Menu.ContextTrigger`の`id`を設定します。                                                                                     |
+| `Menu.Label`          | `role="presentation"`   | プレゼンテーションであることを示します。                                                                                                                  |
+| `Menu.Group`          | `role="group"`          | グループであることを示します。                                                                                                                            |
+|                       | `aria-labelledby`       | 関連した`Menu.Label`の`id`を設定します。                                                                                                                  |
+| `Menu.Item`           | `role="menuitem"`       | メニュー項目であることを示します。                                                                                                                        |
+|                       | `aria-disabled`         | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                    |
+| `Menu.OptionItem`     | `role`                  | `Menu.OptionGroup`の`type`が`"radio"`に設定されている場合は`menuitemradio"`を設定し、`"checkbox"`に設定されている場合は`"menuitemcheckbox"`を設定します。 |
+| `Menu.Separator`      | `role="separator"`      | セパレーターであることを示します。                                                                                                                        |

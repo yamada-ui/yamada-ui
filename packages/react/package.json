@@ -58,6 +58,7 @@
     "test:webkit": "vitest --project=browser --browser=webkit",
     "test:firefox": "vitest --project=browser --browser=firefox",
     "test:dev": "vitest --watch --ui",
+    "test:dev:jsdom": "vitest --watch --ui --project=jsdom",
     "test:dev:browser": "vitest --watch --ui --project=browser",
     "test:dev:chromium": "vitest --watch --ui --project=browser --browser=chromium",
     "test:dev:webkit": "vitest --watch --ui --project=browser --browser=webkit",

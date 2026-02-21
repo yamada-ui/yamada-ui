@@ -375,4 +375,75 @@ return <ColorPicker value={value} onChange={onChange} />
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+`ColorPicker` follows the [WAI-ARIA - Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) for accessibility.
+
+If you do not use `Field.Root`, set `aria-label` or `aria-labelledby` on `ColorPicker`.
+
+```tsx
+<ColorPicker placeholder="#4387f4" aria-label="Pick color" />
+```
+
+```tsx
+<VStack gap="sm">
+  <Heading as="h3" id="label">
+    Pick Color
+  </Heading>
+
+  <ColorPicker placeholder="#4387f4" aria-labelledby="label" />
+</VStack>
+```
+
+### Keyboard Navigation
+
+| Key                     | Description                                                                           | State                |
+| ----------------------- | ------------------------------------------------------------------------------------- | -------------------- |
+| `Tab`                   | Opens the dialog when focus moves to the color picker.                                | `openOnFocus={true}` |
+| `Escape`                | Closes the dialog.                                                                    | `closeOnEsc={true}`  |
+| `ArrowRight`,`ArrowUp`  | If within a slider, increases the value based on `step`.                              | -                    |
+| `ArrowLeft`,`ArrowDown` | If within a slider, decreases the value based on `step`.                              | -                    |
+| `Home`                  | If within `HueSlider` or `AlphaSlider`, sets the value to `min`.                      | -                    |
+| `End`                   | If within `HueSlider` or `AlphaSlider`, sets the value to `max`.                      | -                    |
+| `PageUp`                | If within `HueSlider` or `AlphaSlider`, increases the value based on `min` and `max`. | -                    |
+| `PageDown`              | If within `HueSlider` or `AlphaSlider`, decreases the value based on `min` and `max`. | -                    |
+
+### ARIA Roles and Attributes
+
+| Component                | Roles and Attributes     | Usage                                                                                                                                                               |
+| ------------------------ | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ColorPickerField`       | `role="combobox"`        | Indicates that this is a combobox.                                                                                                                                  |
+|                          | `aria-controls`          | If the dialog is open, sets the `id` of the related `ColorPickerContent`; when closed, sets `undefined`.                                                            |
+|                          | `aria-describedby`       | If `ColorPicker` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|                          | `aria-disabled`          | Sets to `"true"` if `disabled` or `readOnly` is set.                                                                                                                |
+|                          | `aria-expanded`          | Sets to `"true"` when the dialog is open, `"false"` when closed.                                                                                                    |
+|                          | `aria-haspopup="dialog"` | Indicates that a dialog exists.                                                                                                                                     |
+|                          | `aria-invalid`           | Sets to `"true"` if `invalid` is set.                                                                                                                               |
+|                          | `aria-readonly`          | Sets to `"true"` if `readOnly` is set.                                                                                                                              |
+|                          | `aria-required`          | Sets to `"true"` if `required` is set.                                                                                                                              |
+| `ColorPickerEyeDropper`  | `role="button"`          | Indicates that this is a button.                                                                                                                                    |
+|                          | `aria-disabled`          | Sets to `"true"` if `disabled` or `readOnly` is set.                                                                                                                |
+|                          | `aria-label`             | Sets to `"Pick a color"`.                                                                                                                                           |
+| `ColorPickerContent`     | `role="dialog"`          | Indicates that this is a dialog.                                                                                                                                    |
+| `ColorPickerColorSwatch` | `role="img"`             | Indicates that this is an image.                                                                                                                                    |
+|                          | `aria-label`             | Sets the current value.                                                                                                                                             |
+|                          | `aria-roledescription`   | Sets to `"color swatch"`.                                                                                                                                           |
+| `SaturationSlider.Thumb` | `role="slider"`          | Indicates that this is a slider.                                                                                                                                    |
+|                          | `aria-label`             | Sets to `"Saturation and brightness thumb"`.                                                                                                                        |
+|                          | `aria-roledescription`   | Sets to `"2D slider"`.                                                                                                                                              |
+|                          | `aria-valuemin`          | Sets the value of `min`. The default is `0`.                                                                                                                        |
+|                          | `aria-valuemax`          | Sets the value of `max`. The default is `100`.                                                                                                                      |
+|                          | `aria-valuenow`          | Sets the current value.                                                                                                                                             |
+|                          | `aria-valuetext`         | Sets the current value like `"Saturation 18%, Brightness 18%"`.                                                                                                     |
+| `HueSlider.Thumb`        | `role="slider"`          | Indicates that this is a slider.                                                                                                                                    |
+|                          | `aria-label`             | Sets to `"Slider thumb"`.                                                                                                                                           |
+|                          | `aria-orientation`       | Sets to `"horizontal"` or `"vertical"` based on `orientation`. The default is `"horizontal"`.                                                                       |
+|                          | `aria-valuemin`          | Sets the value of `min`. The default is `0`.                                                                                                                        |
+|                          | `aria-valuemax`          | Sets the value of `max`. The default is `360`.                                                                                                                      |
+|                          | `aria-valuenow`          | Sets the current value.                                                                                                                                             |
+|                          | `aria-valuetext`         | Sets the current value like `"18°, Red"`.                                                                                                                           |
+| `AlphaSlider.Thumb`      | `role="slider"`          | Indicates that this is a slider.                                                                                                                                    |
+|                          | `aria-label`             | Sets to `"Slider thumb"`.                                                                                                                                           |
+|                          | `aria-orientation`       | Sets to `"horizontal"` or `"vertical"` based on `orientation`. The default is `"horizontal"`.                                                                       |
+|                          | `aria-valuemin`          | Sets the value of `min`. The default is `0`.                                                                                                                        |
+|                          | `aria-valuemax`          | Sets the value of `max`. The default is `1`.                                                                                                                        |
+|                          | `aria-valuenow`          | Sets the current value.                                                                                                                                             |
+|                          | `aria-valuetext`         | Sets the current value like `"18%"`.                                                                                                                                |

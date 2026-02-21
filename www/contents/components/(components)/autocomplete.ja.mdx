@@ -1139,4 +1139,62 @@ return (
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`Autocomplete`は、アクセシビリティに関して[WAI-ARIA - Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox)に従っています。
+
+`Field.Root`を使用しない場合は、`Autocomplete.Root`に`aria-label`または`aria-labelledby`を設定してください。
+
+```tsx
+<Autocomplete.Root aria-label="デジモンを選択" placeholder="デジモンを選択">
+  <Autocomplete.Option value="アグモン">アグモン</Autocomplete.Option>
+  <Autocomplete.Option value="ガブモン">ガブモン</Autocomplete.Option>
+  <Autocomplete.Option value="テントモン">テントモン</Autocomplete.Option>
+</Autocomplete.Root>
+```
+
+```tsx
+<VStack gap="sm">
+  <Text as="h3" id="label">
+    デジモン
+  </Text>
+
+  <Autocomplete.Root aria-labelledby="label" placeholder="デジモンを選択">
+    <Autocomplete.Option value="アグモン">アグモン</Autocomplete.Option>
+    <Autocomplete.Option value="ガブモン">ガブモン</Autocomplete.Option>
+    <Autocomplete.Option value="テントモン">テントモン</Autocomplete.Option>
+  </Autocomplete.Root>
+</VStack>
+```
+
+### キーボード操作
+
+| キー        | 説明                                                                                                                       | 状態                |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| `ArrowDown` | 無効ではない次の項目にフォーカスします。最後の項目の場合は、無効ではない最初の項目にフォーカスします。                     | -                   |
+| `ArrowUp`   | 無効ではない前の項目にフォーカスします。最初の項目の場合は、無効ではない最後の項目にフォーカスします。                     | -                   |
+| `Enter`     | フォーカスしている項目を選択します。フォーカスしている項目がなく入力テキストがある場合は、最初に一致する項目を選択します。 | -                   |
+| `Home`      | リストボックスが開いている場合、無効ではない最初の項目にフォーカスします。                                                 | -                   |
+| `End`       | リストボックスが開いている場合、無効ではない最後の項目にフォーカスします。                                                 | -                   |
+| `Escape`    | リストボックスを閉じます。                                                                                                 | `closeOnEsc={true}` |
+| `Backspace` | 入力が空の場合、最後に選択された値を削除します。                                                                           | `multiple={true}`   |
+
+### ARIAロールと属性
+
+| コンポーネント        | ロールと属性                | 使い方                                                                                                                            |
+| --------------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `Autocomplete.Root`   | `role="combobox"`           | コンボボックスであることを示します。                                                                                              |
+|                       | `aria-expanded`             | リストボックスが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。                                         |
+|                       | `aria-haspopup="listbox"`   | リストボックスがあることを示します。                                                                                              |
+|                       | `aria-controls`             | リストボックスが開いている場合はリストボックスの`id`を設定し、閉じている場合は設定しません。                                      |
+|                       | `aria-activedescendant`     | フォーカスされた項目の`id`を設定します。                                                                                          |
+|                       | `aria-disabled`             | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                            |
+|                       | `aria-labelledby`           | `Autocomplete.Root`が`Field.Root`内にあり、`Field.Root`に`label`または`Field.Label`が設定されている場合は、その`id`を設定します。 |
+| `AutocompleteContent` | `role="listbox"`            | リストボックスであることを示します。                                                                                              |
+| `Autocomplete.Option` | `role="option"`             | オプションであることを示します。                                                                                                  |
+|                       | `aria-selected`             | オプションが選択されている場合は`"true"`を設定します。                                                                            |
+|                       | `aria-disabled`             | `disabled`が設定されている場合は`"true"`を設定します。                                                                            |
+| `Autocomplete.Group`  | `role="group"`              | オプションのグループであることを示します。                                                                                        |
+|                       | `aria-labelledby`           | グループラベルの`id`を設定します。                                                                                                |
+| `Autocomplete.Label`  | `role="presentation"`       | プレゼンテーションであることを示します。                                                                                          |
+| `AutocompleteIcon`    | `role="button"`             | `clearable`かつ値がある場合、ボタンであることを示します。                                                                         |
+|                       | `aria-label="値を消去する"` | `"値を消去する"`を設定します。                                                                                                    |
+|                       | `aria-disabled`             | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                            |

@@ -424,4 +424,60 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `NativeSelect.Root`.
+
+```tsx
+const items = useMemo<NativeSelect.Item[]>(
+  () => [
+    { label: "日比野カフカ", value: "日比野カフカ" },
+    { label: "市川レノ", value: "市川レノ" },
+    { label: "亜白ミナ", value: "亜白ミナ" },
+    { label: "四ノ宮キコル", value: "四ノ宮キコル" },
+  ],
+  [],
+)
+
+return (
+  <NativeSelect.Root
+    items={items}
+    placeholder="Select a character"
+    aria-label="キャラクター"
+  />
+)
+```
+
+```tsx
+const items = useMemo<NativeSelect.Item[]>(
+  () => [
+    { label: "日比野カフカ", value: "日比野カフカ" },
+    { label: "市川レノ", value: "市川レノ" },
+    { label: "亜白ミナ", value: "亜白ミナ" },
+    { label: "四ノ宮キコル", value: "四ノ宮キコル" },
+  ],
+  [],
+)
+
+return (
+  <VStack gap="sm">
+    <Heading as="h3" id="label">
+      キャラクター
+    </Heading>
+
+    <NativeSelect.Root
+      items={items}
+      placeholder="Select a character"
+      aria-labelledby="label"
+    />
+  </VStack>
+)
+```
+
+### ARIA Roles and Attributes
+
+| Component            | Roles and Attributes | Usage                                                                                                                                                                     |
+| -------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `NativeSelect.Field` | `aria-describedby`   | If `NativeSelect.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|                      | `aria-disabled`      | Set to `"true"` when `isDisabled` is set.                                                                                                                                 |
+|                      | `aria-invalid`       | Set to `"true"` when `isInvalid` is set.                                                                                                                                  |
+|                      | `aria-label`         | If `aria-label` is not set, the `placeholder` value is set.                                                                                                               |
+|                      | `aria-required`      | Sets to `"true"` if `required` is set.                                                                                                                                    |

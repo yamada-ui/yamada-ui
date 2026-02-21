@@ -278,4 +278,49 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+The `NumberInput` follows the [WAI-ARIA - Spinbutton Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/) for accessibility.
+
+If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `NumberInput`.
+
+```tsx
+<NumberInput aria-label="Age" />
+```
+
+```tsx
+<VStack gap="sm">
+  <Text as="h3" id="label">
+    Age
+  </Text>
+
+  <NumberInput aria-labelledby="label" />
+</VStack>
+```
+
+### Keyboard Navigation
+
+| Key                                    | Description                                               | State |
+| -------------------------------------- | --------------------------------------------------------- | ----- |
+| `ArrowUp`                              | Increases the value based on `step` value.                | -     |
+| `ArrowDown`                            | Decreases the value based on `step` value.                | -     |
+| `Home`                                 | Sets to `min` value.                                      | -     |
+| `End`                                  | Sets to `max` value.                                      | -     |
+| `Shift + ArrowUp`, `Shift + ArrowDown` | Increases or decreases the value based on 10x the `step`. | -     |
+
+### ARIA Roles and Attributes
+
+| Component                    | Roles and Attributes | Usage                                                                                                                                                               |
+| ---------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `NumberInput`                | `role="spinbutton"`  | Indicates that this is a spinbutton.                                                                                                                                |
+|                              | `aria-valuemin`      | Sets to `min` value.                                                                                                                                                |
+|                              | `aria-valuemax`      | Sets to `max` value.                                                                                                                                                |
+|                              | `aria-valuenow`      | Sets to current value.                                                                                                                                              |
+|                              | `aria-valuetext`     | Sets to current value.                                                                                                                                              |
+|                              | `aria-invalid`       | Sets to `"true"` if `invalid` is set or if the value is out of range.                                                                                               |
+|                              | `aria-describedby`   | If `NumberInput` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|                              | `aria-disabled`      | Sets to `"true"` if `disabled` is set.                                                                                                                              |
+|                              | `aria-readonly`      | Sets to `"true"` if `readOnly` is set.                                                                                                                              |
+|                              | `aria-required`      | Sets to `"true"` if `required` is set.                                                                                                                              |
+| `NumberInputIncrementButton` | `aria-label`         | Sets to `"Increase"`.                                                                                                                                               |
+|                              | `tabindex`           | Sets to `"-1"`.                                                                                                                                                     |
+| `NumberInputDecrementButton` | `aria-label`         | Sets to `"Decrease"`.                                                                                                                                               |
+|                              | `tabindex`           | Sets to `"-1"`.                                                                                                                                                     |

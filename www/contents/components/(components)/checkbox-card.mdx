@@ -658,4 +658,60 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+The `CheckboxCard` follows the [WAI-ARIA - Checkbox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox) for accessibility.
+
+If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `CheckboxCardGroup.Root`.
+
+```tsx
+const items = useMemo<CheckboxCardGroup.ItemType[]>(
+  () => [
+    { label: "ビアンカ", value: "1" },
+    { label: "フローラ", value: "2" },
+    { label: "ルドマン", value: "3" },
+  ],
+  [],
+)
+
+return <CheckboxCardGroup.Root aria-label="キャラクター" items={items} />
+```
+
+```tsx
+const items = useMemo<CheckboxCardGroup.ItemType[]>(
+  () => [
+    { label: "ビアンカ", value: "1" },
+    { label: "フローラ", value: "2" },
+    { label: "ルドマン", value: "3" },
+  ],
+  [],
+)
+
+return (
+  <VStack gap="sm">
+    <Text as="h3" id="label">
+      キャラクター
+    </Text>
+
+    <CheckboxCardGroup.Root aria-labelledby="label" items={items} />
+  </VStack>
+)
+```
+
+### Keyboard Navigation
+
+| Key     | Description                                | State |
+| ------- | ------------------------------------------ | ----- |
+| `Tab`   | Focuses a checkbox that is not disabled.   | -     |
+| `Space` | Toggles the checked state of the checkbox. | -     |
+
+### ARIA Roles and Attributes
+
+| Component                | Roles and Attributes | Usage                                                                                                                                                                          |
+| ------------------------ | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `CheckboxCardGroup.Root` | `role="group"`       | Indicates that it's a group.                                                                                                                                                   |
+|                          | `aria-labelledby`    | If `CheckboxCardGroup.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id`.                                                           |
+|                          | `aria-describedby`   | If `CheckboxCardGroup.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+| `CheckboxCard.Root`      | `aria-checked`       | Sets to `"mixed"` if `indeterminate` is set, `"true"` if checked, and `"false"` if unchecked.                                                                                  |
+|                          | `aria-disabled`      | Sets to `"true"` if `readOnly` is set, or if `max` is reached in a group.                                                                                                      |
+|                          | `aria-invalid`       | Sets to `"true"` if `invalid` is set.                                                                                                                                          |
+|                          | `aria-required`      | Sets to `"true"` if `required` is set.                                                                                                                                         |
+| `CheckboxCardIndicator`  | `aria-hidden`        | Excludes the element from the accessibility tree.                                                                                                                              |

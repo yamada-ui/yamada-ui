@@ -818,4 +818,73 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+The `Select` follows the [WAI-ARIA - Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) for accessibility.
+
+If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Select`.
+
+```tsx
+<Select.Root placeholder="Select a character" aria-label="Character">
+  <Select.Option value="木ノ下和也">木ノ下和也</Select.Option>
+  <Select.Option value="一ノ瀬ちづる">一ノ瀬ちづる</Select.Option>
+  <Select.Option value="七海麻美">七海麻美</Select.Option>
+  <Select.Option value="更科瑠夏">更科瑠夏</Select.Option>
+  <Select.Option value="桜沢墨">桜沢墨</Select.Option>
+  <Select.Option value="八重森みに">八重森みに</Select.Option>
+</Select.Root>
+```
+
+```tsx
+<VStack gap="sm">
+  <Heading as="h3" id="label">
+    Character
+  </Heading>
+
+  <Select.Root placeholder="Select a character" aria-labelledby="label">
+    <Select.Option value="木ノ下和也">木ノ下和也</Select.Option>
+    <Select.Option value="一ノ瀬ちづる">一ノ瀬ちづる</Select.Option>
+    <Select.Option value="七海麻美">七海麻美</Select.Option>
+    <Select.Option value="更科瑠夏">更科瑠夏</Select.Option>
+    <Select.Option value="桜沢墨">桜沢墨</Select.Option>
+    <Select.Option value="八重森みに">八重森みに</Select.Option>
+  </Select.Root>
+</VStack>
+```
+
+### Keyboard Navigation
+
+| Key              | Description                                                                                       | State                  |
+| ---------------- | ------------------------------------------------------------------------------------------------- | ---------------------- |
+| `ArrowUp`        | Focuses the previous non-disabled item. If on the first item, focuses the last non-disabled item. | -                      |
+| `ArrowDown`      | Focuses the next non-disabled item. If on the last item, focuses the first non-disabled item.     | -                      |
+| `Home`           | Focuses the first non-disabled item.                                                              | -                      |
+| `End`            | Focuses the last non-disabled item.                                                               | -                      |
+| `Space`, `Enter` | Selects the focused item and closes the listbox.                                                  | `closeOnSelect={true}` |
+| `Escape`         | Closes the listbox.                                                                               | `closeOnEsc={true}`    |
+
+### ARIA Roles and Attributes
+
+| Component          | Roles and Attributes      | Usage                                                                                                                                                               |
+| ------------------ | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SelectField`      | `role="combobox"`         | Indicates that this is a combobox.                                                                                                                                  |
+|                    | `aria-activedescendant`   | Sets the `id` of the focused item.                                                                                                                                  |
+|                    | `aria-controls`           | If the listbox is open, sets the `id` of the related `SelectContent`; when closed, sets `undefined`.                                                                |
+|                    | `aria-describedby`        | If `Select.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|                    | `aria-disabled`           | Sets to `"true"` if `disabled` or `readOnly` is set.                                                                                                                |
+|                    | `aria-expanded`           | Sets to `"true"` when the listbox is open, `"false"` when closed.                                                                                                   |
+|                    | `aria-haspopup="listbox"` | Indicates that a listbox exists.                                                                                                                                    |
+|                    | `aria-invalid`            | Sets to `"true"` if `invalid` is set.                                                                                                                               |
+|                    | `aria-label`              | Sets the value of `placeholder`.                                                                                                                                    |
+|                    | `aria-labelledby`         | If `Select.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id`.                                                           |
+|                    | `aria-readonly`           | Sets to `"true"` if `readOnly` is set.                                                                                                                              |
+|                    | `aria-required`           | Sets to `"true"` if `required` is set.                                                                                                                              |
+| `SelectIcon`       | `role="button"`           | Indicates that this is a button when `clearable` is set and a value is present.                                                                                     |
+|                    | `aria-disabled`           | Sets to `"true"` when `clearable` is set, a value is present, and `disabled` or `readOnly` is set.                                                                  |
+|                    | `aria-label`              | Sets to `"Clear value"` when `clearable` is set and a value is present.                                                                                             |
+| `SelectContent`    | `role="listbox"`          | Indicates that this is a listbox.                                                                                                                                   |
+| `Select.Label`     | `role="presentation"`     | Indicates that this is a presentation.                                                                                                                              |
+| `Select.Group`     | `role="group"`            | Indicates that this is a group.                                                                                                                                     |
+|                    | `aria-labelledby`         | Sets the `id` of the associated `Select.Label`.                                                                                                                     |
+| `Select.Option`    | `role="option"`           | Indicates that this is an option.                                                                                                                                   |
+|                    | `aria-disabled`           | Sets to `"true"` if the option is disabled.                                                                                                                         |
+|                    | `aria-selected`           | Sets to `"true"` when the option is selected, `"false"` when not selected.                                                                                          |
+| `Select.Separator` | `role="separator"`        | Indicates that this is a separator.                                                                                                                                 |

@@ -1,6 +1,8 @@
 "use client"
 
-import { GitPullRequestCreateArrow } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { GitPullRequestCreateArrow as OriginalGitPullRequestCreateArrowIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -9,5 +11,5 @@ import { component, Icon } from "../icon"
  * @see https://yamada-ui.com/docs/components/icon
  */
 export const GitPullRequestCreateArrowIcon = component(Icon)({
-  as: GitPullRequestCreateArrow,
-})
+  as: OriginalGitPullRequestCreateArrowIcon,
+}) as Component<"svg", IconProps>

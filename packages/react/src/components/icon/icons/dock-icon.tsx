@@ -1,6 +1,8 @@
 "use client"
 
-import { Dock } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Dock as OriginalDockIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,7 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const DockIcon = component(Icon)({ as: Dock })
+export const DockIcon = component(Icon)({ as: OriginalDockIcon }) as Component<
+  "svg",
+  IconProps
+>

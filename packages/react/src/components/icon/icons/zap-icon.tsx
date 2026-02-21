@@ -1,6 +1,8 @@
 "use client"
 
-import { Zap } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Zap as OriginalZapIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,7 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const ZapIcon = component(Icon)({ as: Zap })
+export const ZapIcon = component(Icon)({ as: OriginalZapIcon }) as Component<
+  "svg",
+  IconProps
+>

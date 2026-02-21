@@ -1,6 +1,8 @@
 "use client"
 
-import { StickyNote } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { StickyNote as OriginalStickyNoteIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const StickyNoteIcon = component(Icon)({ as: StickyNote })
+export const StickyNoteIcon = component(Icon)({
+  as: OriginalStickyNoteIcon,
+}) as Component<"svg", IconProps>

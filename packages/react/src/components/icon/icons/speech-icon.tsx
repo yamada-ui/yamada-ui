@@ -1,6 +1,8 @@
 "use client"
 
-import { Speech } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Speech as OriginalSpeechIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const SpeechIcon = component(Icon)({ as: Speech })
+export const SpeechIcon = component(Icon)({
+  as: OriginalSpeechIcon,
+}) as Component<"svg", IconProps>

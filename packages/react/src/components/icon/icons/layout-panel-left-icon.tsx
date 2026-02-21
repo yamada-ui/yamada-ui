@@ -1,6 +1,8 @@
 "use client"
 
-import { LayoutPanelLeft } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { LayoutPanelLeft as OriginalLayoutPanelLeftIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const LayoutPanelLeftIcon = component(Icon)({ as: LayoutPanelLeft })
+export const LayoutPanelLeftIcon = component(Icon)({
+  as: OriginalLayoutPanelLeftIcon,
+}) as Component<"svg", IconProps>

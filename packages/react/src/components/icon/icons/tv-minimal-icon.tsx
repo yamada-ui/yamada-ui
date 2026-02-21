@@ -1,6 +1,8 @@
 "use client"
 
-import { TvMinimal } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { TvMinimal as OriginalTvMinimalIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const TvMinimalIcon = component(Icon)({ as: TvMinimal })
+export const TvMinimalIcon = component(Icon)({
+  as: OriginalTvMinimalIcon,
+}) as Component<"svg", IconProps>

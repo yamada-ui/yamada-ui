@@ -1,6 +1,8 @@
 "use client"
 
-import { Scale } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Scale as OriginalScaleIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const ScaleIcon = component(Icon)({ as: Scale })
+export const ScaleIcon = component(Icon)({
+  as: OriginalScaleIcon,
+}) as Component<"svg", IconProps>

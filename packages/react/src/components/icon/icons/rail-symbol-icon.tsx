@@ -1,6 +1,8 @@
 "use client"
 
-import { RailSymbol } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { RailSymbol as OriginalRailSymbolIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const RailSymbolIcon = component(Icon)({ as: RailSymbol })
+export const RailSymbolIcon = component(Icon)({
+  as: OriginalRailSymbolIcon,
+}) as Component<"svg", IconProps>

@@ -1,6 +1,8 @@
 "use client"
 
-import { LocateOff } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { LocateOff as OriginalLocateOffIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const LocateOffIcon = component(Icon)({ as: LocateOff })
+export const LocateOffIcon = component(Icon)({
+  as: OriginalLocateOffIcon,
+}) as Component<"svg", IconProps>

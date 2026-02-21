@@ -1,6 +1,8 @@
 "use client"
 
-import { BoomBox } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { BoomBox as OriginalBoomBoxIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const BoomBoxIcon = component(Icon)({ as: BoomBox })
+export const BoomBoxIcon = component(Icon)({
+  as: OriginalBoomBoxIcon,
+}) as Component<"svg", IconProps>

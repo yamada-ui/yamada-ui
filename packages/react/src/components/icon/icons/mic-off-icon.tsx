@@ -1,6 +1,8 @@
 "use client"
 
-import { MicOff } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { MicOff as OriginalMicOffIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const MicOffIcon = component(Icon)({ as: MicOff })
+export const MicOffIcon = component(Icon)({
+  as: OriginalMicOffIcon,
+}) as Component<"svg", IconProps>

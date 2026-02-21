@@ -1,6 +1,8 @@
 "use client"
 
-import { Eclipse } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Eclipse as OriginalEclipseIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const EclipseIcon = component(Icon)({ as: Eclipse })
+export const EclipseIcon = component(Icon)({
+  as: OriginalEclipseIcon,
+}) as Component<"svg", IconProps>

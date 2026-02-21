@@ -1,6 +1,8 @@
 "use client"
 
-import { TextWrap } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { TextWrap as OriginalTextWrapIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const TextWrapIcon = component(Icon)({ as: TextWrap })
+export const TextWrapIcon = component(Icon)({
+  as: OriginalTextWrapIcon,
+}) as Component<"svg", IconProps>

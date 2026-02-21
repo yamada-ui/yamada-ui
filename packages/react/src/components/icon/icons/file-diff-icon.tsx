@@ -1,6 +1,8 @@
 "use client"
 
-import { FileDiff } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FileDiff as OriginalFileDiffIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const FileDiffIcon = component(Icon)({ as: FileDiff })
+export const FileDiffIcon = component(Icon)({
+  as: OriginalFileDiffIcon,
+}) as Component<"svg", IconProps>

@@ -1,6 +1,8 @@
 "use client"
 
-import { Terminal } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Terminal as OriginalTerminalIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const TerminalIcon = component(Icon)({ as: Terminal })
+export const TerminalIcon = component(Icon)({
+  as: OriginalTerminalIcon,
+}) as Component<"svg", IconProps>

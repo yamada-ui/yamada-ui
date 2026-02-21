@@ -1,6 +1,8 @@
 "use client"
 
-import { Orbit } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Orbit as OriginalOrbitIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const OrbitIcon = component(Icon)({ as: Orbit })
+export const OrbitIcon = component(Icon)({
+  as: OriginalOrbitIcon,
+}) as Component<"svg", IconProps>

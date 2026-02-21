@@ -1,6 +1,8 @@
 "use client"
 
-import { Minimize } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Minimize as OriginalMinimizeIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const MinimizeIcon = component(Icon)({ as: Minimize })
+export const MinimizeIcon = component(Icon)({
+  as: OriginalMinimizeIcon,
+}) as Component<"svg", IconProps>

@@ -1,6 +1,8 @@
 "use client"
 
-import { TurkishLira } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { TurkishLira as OriginalTurkishLiraIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const TurkishLiraIcon = component(Icon)({ as: TurkishLira })
+export const TurkishLiraIcon = component(Icon)({
+  as: OriginalTurkishLiraIcon,
+}) as Component<"svg", IconProps>

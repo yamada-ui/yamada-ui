@@ -1,6 +1,8 @@
 "use client"
 
-import { LayersPlus } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { LayersPlus as OriginalLayersPlusIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const LayersPlusIcon = component(Icon)({ as: LayersPlus })
+export const LayersPlusIcon = component(Icon)({
+  as: OriginalLayersPlusIcon,
+}) as Component<"svg", IconProps>

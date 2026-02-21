@@ -1,6 +1,8 @@
 "use client"
 
-import { CircleFadingArrowUp } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { CircleFadingArrowUp as OriginalCircleFadingArrowUpIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -9,5 +11,5 @@ import { component, Icon } from "../icon"
  * @see https://yamada-ui.com/docs/components/icon
  */
 export const CircleFadingArrowUpIcon = component(Icon)({
-  as: CircleFadingArrowUp,
-})
+  as: OriginalCircleFadingArrowUpIcon,
+}) as Component<"svg", IconProps>

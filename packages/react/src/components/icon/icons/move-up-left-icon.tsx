@@ -1,6 +1,8 @@
 "use client"
 
-import { MoveUpLeft } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { MoveUpLeft as OriginalMoveUpLeftIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const MoveUpLeftIcon = component(Icon)({ as: MoveUpLeft })
+export const MoveUpLeftIcon = component(Icon)({
+  as: OriginalMoveUpLeftIcon,
+}) as Component<"svg", IconProps>

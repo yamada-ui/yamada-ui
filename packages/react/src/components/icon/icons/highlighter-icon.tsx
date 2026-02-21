@@ -1,6 +1,8 @@
 "use client"
 
-import { Highlighter } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Highlighter as OriginalHighlighterIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const HighlighterIcon = component(Icon)({ as: Highlighter })
+export const HighlighterIcon = component(Icon)({
+  as: OriginalHighlighterIcon,
+}) as Component<"svg", IconProps>

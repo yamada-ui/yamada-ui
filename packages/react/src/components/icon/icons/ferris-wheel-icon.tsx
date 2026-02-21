@@ -1,6 +1,8 @@
 "use client"
 
-import { FerrisWheel } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FerrisWheel as OriginalFerrisWheelIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const FerrisWheelIcon = component(Icon)({ as: FerrisWheel })
+export const FerrisWheelIcon = component(Icon)({
+  as: OriginalFerrisWheelIcon,
+}) as Component<"svg", IconProps>

@@ -1,6 +1,8 @@
 "use client"
 
-import { Copyright } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Copyright as OriginalCopyrightIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const CopyrightIcon = component(Icon)({ as: Copyright })
+export const CopyrightIcon = component(Icon)({
+  as: OriginalCopyrightIcon,
+}) as Component<"svg", IconProps>

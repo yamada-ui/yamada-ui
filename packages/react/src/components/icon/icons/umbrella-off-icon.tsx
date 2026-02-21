@@ -1,6 +1,8 @@
 "use client"
 
-import { UmbrellaOff } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { UmbrellaOff as OriginalUmbrellaOffIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const UmbrellaOffIcon = component(Icon)({ as: UmbrellaOff })
+export const UmbrellaOffIcon = component(Icon)({
+  as: OriginalUmbrellaOffIcon,
+}) as Component<"svg", IconProps>

@@ -1,6 +1,8 @@
 "use client"
 
-import { TextAlignStart } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { TextAlignStart as OriginalTextAlignStartIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const TextAlignStartIcon = component(Icon)({ as: TextAlignStart })
+export const TextAlignStartIcon = component(Icon)({
+  as: OriginalTextAlignStartIcon,
+}) as Component<"svg", IconProps>

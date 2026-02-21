@@ -1,6 +1,8 @@
 "use client"
 
-import { LaptopMinimalCheck } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { LaptopMinimalCheck as OriginalLaptopMinimalCheckIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -9,5 +11,5 @@ import { component, Icon } from "../icon"
  * @see https://yamada-ui.com/docs/components/icon
  */
 export const LaptopMinimalCheckIcon = component(Icon)({
-  as: LaptopMinimalCheck,
-})
+  as: OriginalLaptopMinimalCheckIcon,
+}) as Component<"svg", IconProps>

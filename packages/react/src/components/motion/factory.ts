@@ -1,8 +1,10 @@
-import type { ComponentType } from "react"
+import type { FC } from "react"
 import type { DOMElement, StyledOptions } from "../../core"
 import type { MotionStyledComponent } from "./index.types"
-import { motion as _motion } from "motion/react"
+import { motion as originalMotion } from "motion/react"
 import { styled } from "../../core"
+
+type ProxyTarget = (el: DOMElement, options?: StyledOptions) => unknown
 
 type Components = {
   [Y in DOMElement]: MotionStyledComponent<Y>
@@ -16,24 +18,25 @@ interface Factory extends Components {
 }
 
 function factory() {
-  const cache = new Map<DOMElement, ComponentType<any>>()
+  const cache = new Map<DOMElement, FC>()
+  const target: ProxyTarget = (el, options) => styled(el, options)
 
-  return new Proxy(styled, {
+  return new Proxy(target, {
     apply: function (
       _target,
       _thisArg,
       [el, options]: [DOMElement, StyledOptions],
     ) {
-      const component = styled(el, options) as ComponentType<any>
+      const component = styled(el, options) as FC
 
-      return _motion.create(component)
+      return originalMotion.create(component)
     },
 
     get: function (_target, el: DOMElement) {
       if (!cache.has(el)) {
-        const component = styled(el) as ComponentType<any>
+        const component = styled(el) as FC
 
-        cache.set(el, _motion.create(component))
+        cache.set(el, originalMotion.create(component) as FC)
       }
 
       return cache.get(el)

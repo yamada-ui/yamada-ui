@@ -1,6 +1,8 @@
 "use client"
 
-import { AppWindow } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { AppWindow as OriginalAppWindowIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const AppWindowIcon = component(Icon)({ as: AppWindow })
+export const AppWindowIcon = component(Icon)({
+  as: OriginalAppWindowIcon,
+}) as Component<"svg", IconProps>

@@ -1,6 +1,8 @@
 "use client"
 
-import { GlobeLock } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { GlobeLock as OriginalGlobeLockIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const GlobeLockIcon = component(Icon)({ as: GlobeLock })
+export const GlobeLockIcon = component(Icon)({
+  as: OriginalGlobeLockIcon,
+}) as Component<"svg", IconProps>

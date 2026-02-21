@@ -1,6 +1,8 @@
 "use client"
 
-import { FileChartColumn } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FileChartColumn as OriginalFileChartColumnIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const FileChartColumnIcon = component(Icon)({ as: FileChartColumn })
+export const FileChartColumnIcon = component(Icon)({
+  as: OriginalFileChartColumnIcon,
+}) as Component<"svg", IconProps>

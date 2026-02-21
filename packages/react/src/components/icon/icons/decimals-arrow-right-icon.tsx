@@ -1,6 +1,8 @@
 "use client"
 
-import { DecimalsArrowRight } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { DecimalsArrowRight as OriginalDecimalsArrowRightIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -9,5 +11,5 @@ import { component, Icon } from "../icon"
  * @see https://yamada-ui.com/docs/components/icon
  */
 export const DecimalsArrowRightIcon = component(Icon)({
-  as: DecimalsArrowRight,
-})
+  as: OriginalDecimalsArrowRightIcon,
+}) as Component<"svg", IconProps>

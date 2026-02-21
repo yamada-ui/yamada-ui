@@ -1,6 +1,8 @@
 "use client"
 
-import { TimerReset } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { TimerReset as OriginalTimerResetIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const TimerResetIcon = component(Icon)({ as: TimerReset })
+export const TimerResetIcon = component(Icon)({
+  as: OriginalTimerResetIcon,
+}) as Component<"svg", IconProps>

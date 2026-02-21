@@ -1,6 +1,8 @@
 "use client"
 
-import { FoldHorizontal } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FoldHorizontal as OriginalFoldHorizontalIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const FoldHorizontalIcon = component(Icon)({ as: FoldHorizontal })
+export const FoldHorizontalIcon = component(Icon)({
+  as: OriginalFoldHorizontalIcon,
+}) as Component<"svg", IconProps>

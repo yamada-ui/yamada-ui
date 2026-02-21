@@ -1,6 +1,8 @@
 "use client"
 
-import { Brackets } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Brackets as OriginalBracketsIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const BracketsIcon = component(Icon)({ as: Brackets })
+export const BracketsIcon = component(Icon)({
+  as: OriginalBracketsIcon,
+}) as Component<"svg", IconProps>

@@ -1,6 +1,8 @@
 "use client"
 
-import { SendToBack } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { SendToBack as OriginalSendToBackIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const SendToBackIcon = component(Icon)({ as: SendToBack })
+export const SendToBackIcon = component(Icon)({
+  as: OriginalSendToBackIcon,
+}) as Component<"svg", IconProps>

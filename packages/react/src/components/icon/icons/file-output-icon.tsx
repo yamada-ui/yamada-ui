@@ -1,6 +1,8 @@
 "use client"
 
-import { FileOutput } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FileOutput as OriginalFileOutputIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const FileOutputIcon = component(Icon)({ as: FileOutput })
+export const FileOutputIcon = component(Icon)({
+  as: OriginalFileOutputIcon,
+}) as Component<"svg", IconProps>

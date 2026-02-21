@@ -1,6 +1,8 @@
 "use client"
 
-import { Sandwich } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Sandwich as OriginalSandwichIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const SandwichIcon = component(Icon)({ as: Sandwich })
+export const SandwichIcon = component(Icon)({
+  as: OriginalSandwichIcon,
+}) as Component<"svg", IconProps>

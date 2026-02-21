@@ -1,6 +1,8 @@
 "use client"
 
-import { ScissorsLineDashed } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { ScissorsLineDashed as OriginalScissorsLineDashedIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -9,5 +11,5 @@ import { component, Icon } from "../icon"
  * @see https://yamada-ui.com/docs/components/icon
  */
 export const ScissorsLineDashedIcon = component(Icon)({
-  as: ScissorsLineDashed,
-})
+  as: OriginalScissorsLineDashedIcon,
+}) as Component<"svg", IconProps>

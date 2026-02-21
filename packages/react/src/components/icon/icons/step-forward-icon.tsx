@@ -1,6 +1,8 @@
 "use client"
 
-import { StepForward } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { StepForward as OriginalStepForwardIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const StepForwardIcon = component(Icon)({ as: StepForward })
+export const StepForwardIcon = component(Icon)({
+  as: OriginalStepForwardIcon,
+}) as Component<"svg", IconProps>

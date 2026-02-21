@@ -1,6 +1,8 @@
 "use client"
 
-import { Sprout } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Sprout as OriginalSproutIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const SproutIcon = component(Icon)({ as: Sprout })
+export const SproutIcon = component(Icon)({
+  as: OriginalSproutIcon,
+}) as Component<"svg", IconProps>

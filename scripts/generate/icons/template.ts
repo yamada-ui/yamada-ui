@@ -1,7 +1,9 @@
 export const ICON_TEMPLATE = [
   `"use client"`,
   ``,
-  `import { {{iconName}} } from "lucide-react"`,
+  `import type { Component } from "../../../core"`,
+  `import type { IconProps } from "../icon"`,
+  `import { {{iconName}} as Original{{iconName}}Icon } from "lucide-react"`,
   `import { component, Icon } from "../icon"`,
   ``,
   `/**`,
@@ -9,6 +11,6 @@ export const ICON_TEMPLATE = [
   ` *`,
   ` * @see https://yamada-ui.com/docs/components/icon`,
   ` */`,
-  `export const {{iconName}}Icon = component(Icon)({ as: {{iconName}} })`,
+  `export const {{iconName}}Icon = component(Icon)({ as: Original{{iconName}}Icon }) as Component<"svg", IconProps>`,
   ``,
 ].join("\n")

@@ -409,6 +409,12 @@
               "pathname": "/docs/components/modal"
             },
             {
+              "title": "NativeAccordion",
+              "segment": "native-accordion",
+              "pathname": "/docs/components/native-accordion",
+              "status": "new"
+            },
+            {
               "title": "NativePopover",
               "segment": "native-popover",
               "pathname": "/docs/components/native-popover",

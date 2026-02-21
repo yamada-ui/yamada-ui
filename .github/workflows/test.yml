@@ -16,7 +16,7 @@ env:
 jobs:
   browser:
     name: ${{ matrix.name }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         include:
@@ -31,11 +31,11 @@ jobs:
             coverage: "false"
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
       - name: Check modified files
         id: check-modified
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
           files: |
             turbo.json
@@ -49,7 +49,7 @@ jobs:
 
       - name: Restore turbo cache
         if: steps.check-modified.outputs.any_changed == 'true'
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: .turbo
           key: ${{ runner.os }}-turbo-${{ github.job }}-${{ matrix.id }}-${{ github.sha }}
@@ -76,7 +76,7 @@ jobs:
 
       - name: Upload coverage
         if: steps.check-modified.outputs.any_changed == 'true' && matrix.coverage == 'true'
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238 # v4.6.0
         with:
           fail_ci_if_error: false
           file: ./packages/react/coverage/coverage-final.json,./packages/utils/coverage/coverage-final.json

@@ -382,4 +382,32 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+The `Drawer` follows the [WAI-ARIA - Dialog (Modal) Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) for accessibility.
+
+### Keyboard Navigation
+
+When the `Drawer` opens, focus is trapped within it. That is, you cannot focus on elements outside the modal unless the modal is closed.
+
+| Key             | Description                                                                                                                                   | State                               |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| `Tab`           | Focuses the next element inside the modal that is not disabled. If it's the last element, focuses the first element that is not disabled.     | `open={true}`                       |
+| `Shift` + `Tab` | Focuses the previous element inside the modal that is not disabled. If it's the first element, focuses the last element that is not disabled. | `open={true}`                       |
+| `Escape`        | Closes the modal.                                                                                                                             | `open={true}` + `closeOnEsc={true}` |
+
+### ARIA Roles and Attributes
+
+| Component             | Roles and Attributes     | Usage                                                                        |
+| --------------------- | ------------------------ | ---------------------------------------------------------------------------- |
+| `Drawer.Content`      | `role="dialog"`          | Indicates that it is a dialog.                                               |
+|                       | `aria-modal="true"`      | Indicates that the displayed widget is modal.                                |
+|                       | `aria-labelledby`        | Sets the `id` of the associated `Drawer.Title`.                              |
+|                       | `aria-describedby`       | Sets the `id` of the associated `Drawer.Body`.                               |
+| `Drawer.OpenTrigger`  | `aria-expanded`          | Sets to `"true"` when modal is opened, and `"false"` when it is closed.      |
+|                       | `aria-controls`          | Sets the `id` of the `Drawer.Content` when open, and is not set when closed. |
+|                       | `aria-haspopup="dialog"` | Indicates that there is a dialog.                                            |
+|                       | `aria-label`             | Sets to `"Open modal"`.                                                      |
+| `Drawer.CloseButton`  | `aria-label`             | Sets to `"Close modal"`.                                                     |
+| `Drawer.CloseTrigger` | `aria-label`             | Sets to `"Close modal"`.                                                     |
+| `Drawer.Overlay`      | `aria-hidden="true"`     | Excludes the element from the accessibility tree.                            |
+| `Drawer.Title`        | `id`                     | Used to associate with `Drawer.Content`.                                     |
+| `Drawer.Body`         | `id`                     | Used to associate with `Drawer.Content`.                                     |

@@ -1,6 +1,8 @@
 "use client"
 
-import { Biohazard } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Biohazard as OriginalBiohazardIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const BiohazardIcon = component(Icon)({ as: Biohazard })
+export const BiohazardIcon = component(Icon)({
+  as: OriginalBiohazardIcon,
+}) as Component<"svg", IconProps>

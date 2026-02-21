@@ -1,6 +1,8 @@
 "use client"
 
-import { UserLock } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { UserLock as OriginalUserLockIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const UserLockIcon = component(Icon)({ as: UserLock })
+export const UserLockIcon = component(Icon)({
+  as: OriginalUserLockIcon,
+}) as Component<"svg", IconProps>

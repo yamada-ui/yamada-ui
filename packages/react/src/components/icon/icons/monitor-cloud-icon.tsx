@@ -1,6 +1,8 @@
 "use client"
 
-import { MonitorCloud } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { MonitorCloud as OriginalMonitorCloudIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const MonitorCloudIcon = component(Icon)({ as: MonitorCloud })
+export const MonitorCloudIcon = component(Icon)({
+  as: OriginalMonitorCloudIcon,
+}) as Component<"svg", IconProps>

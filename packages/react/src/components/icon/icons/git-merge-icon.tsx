@@ -1,6 +1,8 @@
 "use client"
 
-import { GitMerge } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { GitMerge as OriginalGitMergeIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const GitMergeIcon = component(Icon)({ as: GitMerge })
+export const GitMergeIcon = component(Icon)({
+  as: OriginalGitMergeIcon,
+}) as Component<"svg", IconProps>

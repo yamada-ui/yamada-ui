@@ -1,6 +1,8 @@
 "use client"
 
-import { FlaskRound } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FlaskRound as OriginalFlaskRoundIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const FlaskRoundIcon = component(Icon)({ as: FlaskRound })
+export const FlaskRoundIcon = component(Icon)({
+  as: OriginalFlaskRoundIcon,
+}) as Component<"svg", IconProps>

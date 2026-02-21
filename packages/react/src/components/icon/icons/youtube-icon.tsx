@@ -1,6 +1,8 @@
 "use client"
 
-import { Youtube } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Youtube as OriginalYoutubeIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const YoutubeIcon = component(Icon)({ as: Youtube })
+export const YoutubeIcon = component(Icon)({
+  as: OriginalYoutubeIcon,
+}) as Component<"svg", IconProps>

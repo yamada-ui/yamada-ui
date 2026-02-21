@@ -1,6 +1,8 @@
 "use client"
 
-import { Recycle } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Recycle as OriginalRecycleIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const RecycleIcon = component(Icon)({ as: Recycle })
+export const RecycleIcon = component(Icon)({
+  as: OriginalRecycleIcon,
+}) as Component<"svg", IconProps>

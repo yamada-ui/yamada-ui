@@ -1,6 +1,8 @@
 "use client"
 
-import { CakeSlice } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { CakeSlice as OriginalCakeSliceIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const CakeSliceIcon = component(Icon)({ as: CakeSlice })
+export const CakeSliceIcon = component(Icon)({
+  as: OriginalCakeSliceIcon,
+}) as Component<"svg", IconProps>

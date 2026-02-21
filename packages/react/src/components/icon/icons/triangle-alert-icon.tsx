@@ -1,6 +1,8 @@
 "use client"
 
-import { TriangleAlert } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { TriangleAlert as OriginalTriangleAlertIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const TriangleAlertIcon = component(Icon)({ as: TriangleAlert })
+export const TriangleAlertIcon = component(Icon)({
+  as: OriginalTriangleAlertIcon,
+}) as Component<"svg", IconProps>

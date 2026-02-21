@@ -1,6 +1,8 @@
 "use client"
 
-import { VolumeOff } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { VolumeOff as OriginalVolumeOffIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const VolumeOffIcon = component(Icon)({ as: VolumeOff })
+export const VolumeOffIcon = component(Icon)({
+  as: OriginalVolumeOffIcon,
+}) as Component<"svg", IconProps>

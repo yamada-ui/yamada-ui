@@ -1,6 +1,8 @@
 "use client"
 
-import { Gamepad2 } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Gamepad2 as OriginalGamepad2Icon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const Gamepad2Icon = component(Icon)({ as: Gamepad2 })
+export const Gamepad2Icon = component(Icon)({
+  as: OriginalGamepad2Icon,
+}) as Component<"svg", IconProps>

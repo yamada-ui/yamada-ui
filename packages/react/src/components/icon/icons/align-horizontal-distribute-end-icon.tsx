@@ -1,6 +1,8 @@
 "use client"
 
-import { AlignHorizontalDistributeEnd } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { AlignHorizontalDistributeEnd as OriginalAlignHorizontalDistributeEndIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -9,5 +11,5 @@ import { component, Icon } from "../icon"
  * @see https://yamada-ui.com/docs/components/icon
  */
 export const AlignHorizontalDistributeEndIcon = component(Icon)({
-  as: AlignHorizontalDistributeEnd,
-})
+  as: OriginalAlignHorizontalDistributeEndIcon,
+}) as Component<"svg", IconProps>

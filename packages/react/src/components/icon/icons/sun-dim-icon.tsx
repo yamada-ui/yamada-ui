@@ -1,6 +1,8 @@
 "use client"
 
-import { SunDim } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { SunDim as OriginalSunDimIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const SunDimIcon = component(Icon)({ as: SunDim })
+export const SunDimIcon = component(Icon)({
+  as: OriginalSunDimIcon,
+}) as Component<"svg", IconProps>

@@ -1,6 +1,8 @@
 "use client"
 
-import { Cloud } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Cloud as OriginalCloudIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const CloudIcon = component(Icon)({ as: Cloud })
+export const CloudIcon = component(Icon)({
+  as: OriginalCloudIcon,
+}) as Component<"svg", IconProps>

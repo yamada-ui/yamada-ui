@@ -1,6 +1,8 @@
 "use client"
 
-import { Ruler } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Ruler as OriginalRulerIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const RulerIcon = component(Icon)({ as: Ruler })
+export const RulerIcon = component(Icon)({
+  as: OriginalRulerIcon,
+}) as Component<"svg", IconProps>

@@ -1,6 +1,8 @@
 "use client"
 
-import { QrCode } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { QrCode as OriginalQrCodeIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const QrCodeIcon = component(Icon)({ as: QrCode })
+export const QrCodeIcon = component(Icon)({
+  as: OriginalQrCodeIcon,
+}) as Component<"svg", IconProps>

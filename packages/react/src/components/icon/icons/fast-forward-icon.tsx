@@ -1,6 +1,8 @@
 "use client"
 
-import { FastForward } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FastForward as OriginalFastForwardIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const FastForwardIcon = component(Icon)({ as: FastForward })
+export const FastForwardIcon = component(Icon)({
+  as: OriginalFastForwardIcon,
+}) as Component<"svg", IconProps>

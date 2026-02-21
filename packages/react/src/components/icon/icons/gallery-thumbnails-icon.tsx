@@ -1,6 +1,8 @@
 "use client"
 
-import { GalleryThumbnails } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { GalleryThumbnails as OriginalGalleryThumbnailsIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const GalleryThumbnailsIcon = component(Icon)({ as: GalleryThumbnails })
+export const GalleryThumbnailsIcon = component(Icon)({
+  as: OriginalGalleryThumbnailsIcon,
+}) as Component<"svg", IconProps>

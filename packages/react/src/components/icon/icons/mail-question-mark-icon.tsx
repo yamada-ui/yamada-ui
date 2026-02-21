@@ -1,6 +1,8 @@
 "use client"
 
-import { MailQuestionMark } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { MailQuestionMark as OriginalMailQuestionMarkIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const MailQuestionMarkIcon = component(Icon)({ as: MailQuestionMark })
+export const MailQuestionMarkIcon = component(Icon)({
+  as: OriginalMailQuestionMarkIcon,
+}) as Component<"svg", IconProps>

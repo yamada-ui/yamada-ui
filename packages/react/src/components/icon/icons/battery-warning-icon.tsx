@@ -1,6 +1,8 @@
 "use client"
 
-import { BatteryWarning } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { BatteryWarning as OriginalBatteryWarningIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const BatteryWarningIcon = component(Icon)({ as: BatteryWarning })
+export const BatteryWarningIcon = component(Icon)({
+  as: OriginalBatteryWarningIcon,
+}) as Component<"svg", IconProps>

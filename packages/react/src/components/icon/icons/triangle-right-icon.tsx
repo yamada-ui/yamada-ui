@@ -1,6 +1,8 @@
 "use client"
 
-import { TriangleRight } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { TriangleRight as OriginalTriangleRightIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const TriangleRightIcon = component(Icon)({ as: TriangleRight })
+export const TriangleRightIcon = component(Icon)({
+  as: OriginalTriangleRightIcon,
+}) as Component<"svg", IconProps>

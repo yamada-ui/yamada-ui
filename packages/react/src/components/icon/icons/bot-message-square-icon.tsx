@@ -1,6 +1,8 @@
 "use client"
 
-import { BotMessageSquare } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { BotMessageSquare as OriginalBotMessageSquareIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const BotMessageSquareIcon = component(Icon)({ as: BotMessageSquare })
+export const BotMessageSquareIcon = component(Icon)({
+  as: OriginalBotMessageSquareIcon,
+}) as Component<"svg", IconProps>

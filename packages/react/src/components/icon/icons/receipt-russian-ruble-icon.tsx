@@ -1,6 +1,8 @@
 "use client"
 
-import { ReceiptRussianRuble } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { ReceiptRussianRuble as OriginalReceiptRussianRubleIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -9,5 +11,5 @@ import { component, Icon } from "../icon"
  * @see https://yamada-ui.com/docs/components/icon
  */
 export const ReceiptRussianRubleIcon = component(Icon)({
-  as: ReceiptRussianRuble,
-})
+  as: OriginalReceiptRussianRubleIcon,
+}) as Component<"svg", IconProps>

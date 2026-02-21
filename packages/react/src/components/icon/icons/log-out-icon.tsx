@@ -1,6 +1,8 @@
 "use client"
 
-import { LogOut } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { LogOut as OriginalLogOutIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const LogOutIcon = component(Icon)({ as: LogOut })
+export const LogOutIcon = component(Icon)({
+  as: OriginalLogOutIcon,
+}) as Component<"svg", IconProps>

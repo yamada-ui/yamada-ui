@@ -1,6 +1,8 @@
 "use client"
 
-import { Microscope } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Microscope as OriginalMicroscopeIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const MicroscopeIcon = component(Icon)({ as: Microscope })
+export const MicroscopeIcon = component(Icon)({
+  as: OriginalMicroscopeIcon,
+}) as Component<"svg", IconProps>

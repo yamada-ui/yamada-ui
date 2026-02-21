@@ -1,6 +1,8 @@
 "use client"
 
-import { Grid2x2Plus } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Grid2x2Plus as OriginalGrid2x2PlusIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const Grid2x2PlusIcon = component(Icon)({ as: Grid2x2Plus })
+export const Grid2x2PlusIcon = component(Icon)({
+  as: OriginalGrid2x2PlusIcon,
+}) as Component<"svg", IconProps>

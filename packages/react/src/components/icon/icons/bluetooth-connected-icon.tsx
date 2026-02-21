@@ -1,6 +1,8 @@
 "use client"
 
-import { BluetoothConnected } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { BluetoothConnected as OriginalBluetoothConnectedIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -9,5 +11,5 @@ import { component, Icon } from "../icon"
  * @see https://yamada-ui.com/docs/components/icon
  */
 export const BluetoothConnectedIcon = component(Icon)({
-  as: BluetoothConnected,
-})
+  as: OriginalBluetoothConnectedIcon,
+}) as Component<"svg", IconProps>

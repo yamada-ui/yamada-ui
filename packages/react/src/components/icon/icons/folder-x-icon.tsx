@@ -1,6 +1,8 @@
 "use client"
 
-import { FolderX } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FolderX as OriginalFolderXIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const FolderXIcon = component(Icon)({ as: FolderX })
+export const FolderXIcon = component(Icon)({
+  as: OriginalFolderXIcon,
+}) as Component<"svg", IconProps>

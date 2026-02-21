@@ -1,6 +1,8 @@
 "use client"
 
-import { Twitter } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Twitter as OriginalTwitterIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const TwitterIcon = component(Icon)({ as: Twitter })
+export const TwitterIcon = component(Icon)({
+  as: OriginalTwitterIcon,
+}) as Component<"svg", IconProps>

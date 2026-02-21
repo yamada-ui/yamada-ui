@@ -1,6 +1,8 @@
 "use client"
 
-import { FlameKindling } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FlameKindling as OriginalFlameKindlingIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const FlameKindlingIcon = component(Icon)({ as: FlameKindling })
+export const FlameKindlingIcon = component(Icon)({
+  as: OriginalFlameKindlingIcon,
+}) as Component<"svg", IconProps>

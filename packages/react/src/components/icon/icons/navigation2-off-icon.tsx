@@ -1,6 +1,8 @@
 "use client"
 
-import { Navigation2Off } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Navigation2Off as OriginalNavigation2OffIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const Navigation2OffIcon = component(Icon)({ as: Navigation2Off })
+export const Navigation2OffIcon = component(Icon)({
+  as: OriginalNavigation2OffIcon,
+}) as Component<"svg", IconProps>

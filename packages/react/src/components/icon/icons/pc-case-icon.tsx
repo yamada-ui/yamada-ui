@@ -1,6 +1,8 @@
 "use client"
 
-import { PcCase } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { PcCase as OriginalPcCaseIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const PcCaseIcon = component(Icon)({ as: PcCase })
+export const PcCaseIcon = component(Icon)({
+  as: OriginalPcCaseIcon,
+}) as Component<"svg", IconProps>

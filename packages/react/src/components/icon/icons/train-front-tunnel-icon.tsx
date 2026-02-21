@@ -1,6 +1,8 @@
 "use client"
 
-import { TrainFrontTunnel } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { TrainFrontTunnel as OriginalTrainFrontTunnelIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const TrainFrontTunnelIcon = component(Icon)({ as: TrainFrontTunnel })
+export const TrainFrontTunnelIcon = component(Icon)({
+  as: OriginalTrainFrontTunnelIcon,
+}) as Component<"svg", IconProps>

@@ -1,6 +1,8 @@
 "use client"
 
-import { Microchip } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Microchip as OriginalMicrochipIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const MicrochipIcon = component(Icon)({ as: Microchip })
+export const MicrochipIcon = component(Icon)({
+  as: OriginalMicrochipIcon,
+}) as Component<"svg", IconProps>

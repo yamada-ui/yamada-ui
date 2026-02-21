@@ -1,6 +1,8 @@
 "use client"
 
-import { SoapDispenserDroplet } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { SoapDispenserDroplet as OriginalSoapDispenserDropletIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -9,5 +11,5 @@ import { component, Icon } from "../icon"
  * @see https://yamada-ui.com/docs/components/icon
  */
 export const SoapDispenserDropletIcon = component(Icon)({
-  as: SoapDispenserDroplet,
-})
+  as: OriginalSoapDispenserDropletIcon,
+}) as Component<"svg", IconProps>

@@ -1,6 +1,8 @@
 "use client"
 
-import { Crosshair } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Crosshair as OriginalCrosshairIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const CrosshairIcon = component(Icon)({ as: Crosshair })
+export const CrosshairIcon = component(Icon)({
+  as: OriginalCrosshairIcon,
+}) as Component<"svg", IconProps>

@@ -1,6 +1,8 @@
 "use client"
 
-import { JapaneseYen } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { JapaneseYen as OriginalJapaneseYenIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const JapaneseYenIcon = component(Icon)({ as: JapaneseYen })
+export const JapaneseYenIcon = component(Icon)({
+  as: OriginalJapaneseYenIcon,
+}) as Component<"svg", IconProps>

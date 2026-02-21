@@ -1,6 +1,8 @@
 "use client"
 
-import { Delete } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Delete as OriginalDeleteIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const DeleteIcon = component(Icon)({ as: Delete })
+export const DeleteIcon = component(Icon)({
+  as: OriginalDeleteIcon,
+}) as Component<"svg", IconProps>

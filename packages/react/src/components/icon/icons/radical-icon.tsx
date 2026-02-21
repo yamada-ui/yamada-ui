@@ -1,6 +1,8 @@
 "use client"
 
-import { Radical } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Radical as OriginalRadicalIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const RadicalIcon = component(Icon)({ as: Radical })
+export const RadicalIcon = component(Icon)({
+  as: OriginalRadicalIcon,
+}) as Component<"svg", IconProps>

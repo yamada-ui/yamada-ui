@@ -1,6 +1,8 @@
 "use client"
 
-import { TicketSlash } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { TicketSlash as OriginalTicketSlashIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const TicketSlashIcon = component(Icon)({ as: TicketSlash })
+export const TicketSlashIcon = component(Icon)({
+  as: OriginalTicketSlashIcon,
+}) as Component<"svg", IconProps>

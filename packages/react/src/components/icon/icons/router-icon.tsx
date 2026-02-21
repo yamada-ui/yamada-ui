@@ -1,6 +1,8 @@
 "use client"
 
-import { Router } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Router as OriginalRouterIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const RouterIcon = component(Icon)({ as: Router })
+export const RouterIcon = component(Icon)({
+  as: OriginalRouterIcon,
+}) as Component<"svg", IconProps>

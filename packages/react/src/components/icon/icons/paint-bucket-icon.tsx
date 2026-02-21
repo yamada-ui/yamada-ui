@@ -1,6 +1,8 @@
 "use client"
 
-import { PaintBucket } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { PaintBucket as OriginalPaintBucketIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const PaintBucketIcon = component(Icon)({ as: PaintBucket })
+export const PaintBucketIcon = component(Icon)({
+  as: OriginalPaintBucketIcon,
+}) as Component<"svg", IconProps>

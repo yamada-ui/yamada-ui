@@ -267,4 +267,47 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Editable.Root`.
+
+```tsx
+<Editable.Root defaultValue="なんとかなれーッ！" aria-label="Feedback">
+  <Editable.Preview />
+  <Editable.Input />
+</Editable.Root>
+```
+
+```tsx
+<VStack gap="sm">
+  <Text as="h3" id="label">
+    Feedback
+  </Text>
+
+  <Editable.Root defaultValue="なんとかなれーッ！" aria-labelledby="label">
+    <Editable.Preview />
+    <Editable.Input />
+  </Editable.Root>
+</VStack>
+```
+
+### Keyboard Navigation
+
+| Key      | Description                            | State |
+| -------- | -------------------------------------- | ----- |
+| `Enter`  | Submits the edit for `Editable.Input`. | -     |
+| `Escape` | Cancels the edit mode.                 | -     |
+
+### ARIA Roles and Attributes
+
+| Component                 | Role and Attributes | Usage                                                                                                                                                                  |
+| ------------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Editable.Input`          | `aria-describedby`  | If `Editable.Field` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|                           | `aria-disabled`     | Set to `"true"` if `disabled` is set.                                                                                                                                  |
+|                           | `aria-invalid`      | Set to `"true"` if `invalid` is set.                                                                                                                                   |
+|                           | `aria-readonly`     | Set to `"true"` if `readOnly` is set.                                                                                                                                  |
+|                           | `aria-required`     | Set to `"true"` if `required` is set.                                                                                                                                  |
+| `Editable.Textarea`       | `aria-describedby`  | If `Editable.Field` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|                           | `aria-disabled`     | Set to `"true"` if `disabled` is set.                                                                                                                                  |
+|                           | `aria-invalid`      | Set to `"true"` if `invalid` is set.                                                                                                                                   |
+|                           | `aria-readonly`     | Set to `"true"` if `readOnly` is set.                                                                                                                                  |
+|                           | `aria-required`     | Set to `"true"` if `required` is set.                                                                                                                                  |
+| `EditableControl.Control` | `role="group"`      | Indicates that this is a group.                                                                                                                                        |

@@ -19,6 +19,7 @@ export type {
   ChartLabelListProps,
   ChartLineProps,
   ChartReferenceLineProps,
+  ChartTickLine,
   ChartXAxisProps,
   ChartXAxisTick,
   ChartYAxisProps,

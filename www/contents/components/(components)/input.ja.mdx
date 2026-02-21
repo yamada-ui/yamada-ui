@@ -264,4 +264,28 @@ return <Input value={value} onChange={(ev) => setValue(ev.target.value)} />
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`Field.Root`を使用しない場合は、`Input`に`aria-label`または`aria-labelledby`を設定します。
+
+```tsx
+<Input type="email" aria-label="Email address" />
+```
+
+```tsx
+<VStack gap="sm">
+  <Text as="h3" id="label">
+    Email address
+  </Text>
+
+  <Input type="email" aria-labelledby="label" />
+</VStack>
+```
+
+### ARIAロールと属性
+
+| コンポーネント | ロールと属性       | 使い方                                                                                                                                                                                  |
+| -------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Input`        | `aria-invalid`     | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                   |
+|                | `aria-disabled`    | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                                                  |
+|                | `aria-describedby` | `Input`が`Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
+|                | `aria-readonly`    | `readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                                  |
+|                | `aria-required`    | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                  |

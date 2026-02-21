@@ -149,4 +149,38 @@ return <SaturationSlider.Root value={value} onChange={setValue} maxW="sm" />
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+The `SaturationSlider` follows the [WAI-ARIA - Slider Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/slider/) for accessibility.
+
+### Keyboard Navigation
+
+| Key          | Description                                     | State |
+| ------------ | ----------------------------------------------- | ----- |
+| `ArrowRight` | Increases saturation based on the `step` value. | -     |
+| `ArrowLeft`  | Decreases saturation based on the `step` value. | -     |
+| `ArrowUp`    | Increases brightness based on the `step` value. | -     |
+| `ArrowDown`  | Decreases brightness based on the `step` value. | -     |
+
+### ARIA Roles and Attributes
+
+| Component                | Role and Attributes    | Usage                                                                                                                                                                         |
+| ------------------------ | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SaturationSlider.Thumb` | `role="slider"`        | Indicates that this is a slider.                                                                                                                                              |
+|                          | `aria-label`           | Sets `"Saturation and brightness thumb"`.                                                                                                                                     |
+|                          | `aria-labelledby`      | Sets the `id` of the related `SaturationSlider.Root`.                                                                                                                         |
+|                          | `aria-roledescription` | Sets `"2D slider"`.                                                                                                                                                           |
+|                          | `aria-valuemin`        | Sets `0`.                                                                                                                                                                     |
+|                          | `aria-valuemax`        | Sets `100`.                                                                                                                                                                   |
+|                          | `aria-valuenow`        | Sets the current value.                                                                                                                                                       |
+|                          | `aria-valuetext`       | Sets the current value, such as `"Saturation 18%, Brightness 18%"`.                                                                                                           |
+|                          | `aria-readonly`        | Set to `"true"` if `readOnly` is set.                                                                                                                                         |
+|                          | `aria-disabled`        | Set to `"true"` if `disabled` is set.                                                                                                                                         |
+|                          | `aria-invalid`         | Set to `"true"` if `invalid` is set.                                                                                                                                          |
+|                          | `aria-required`        | Set to `"true"` if `required` is set.                                                                                                                                         |
+|                          | `aria-describedby`     | If `SaturationSlider.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+| `input`                  | `type="hidden"`        | Excludes the element from the accessibility tree.                                                                                                                             |
+|                          | `aria-hidden`          | Excludes the element from the accessibility tree.                                                                                                                             |
+|                          | `aria-readonly`        | Set to `"true"` if `readOnly` is set.                                                                                                                                         |
+|                          | `aria-disabled`        | Set to `"true"` if `disabled` is set.                                                                                                                                         |
+|                          | `aria-invalid`         | Set to `"true"` if `invalid` is set.                                                                                                                                          |
+|                          | `aria-required`        | Set to `"true"` if `required` is set.                                                                                                                                         |
+|                          | `aria-describedby`     | If `SaturationSlider.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |

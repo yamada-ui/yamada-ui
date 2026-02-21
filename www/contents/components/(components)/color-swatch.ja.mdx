@@ -102,4 +102,17 @@ import { ColorSwatch } from "@workspaces/ui"
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`aria-label`を設定すると、スクリーンリーダーによって読み上げられます。
+
+```tsx
+<ColorSwatch color="#4387f4" aria-label="Blue" />
+```
+
+### ARIAロールと属性
+
+| コンポーネント     | ロールと属性                          | 使い方                               |
+| ------------------ | ------------------------------------- | ------------------------------------ |
+| `ColorSwatch`      | `role="img"`                          | 画像であることを示します。           |
+|                    | `aria-roledescription="color swatch"` | `"color swatch"`を設定します。       |
+|                    | `aria-label`                          | `color`の値を設定します。            |
+| `ColorSwatchGroup` | `aria-label="color swatch group"`     | `"color swatch group"`を設定します。 |

@@ -1,5 +1,11 @@
 # @yamada-ui/react
 
+## 2.0.10
+
+### Patch Changes
+
+- [#5728](https://github.com/yamada-ui/yamada-ui/pull/5728) [`ac9fd97`](https://github.com/yamada-ui/yamada-ui/commit/ac9fd9761cfbd69d64377976bbf7ae15d5680254) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved type performance.
+
 ## 2.0.9
 
 ### Patch Changes

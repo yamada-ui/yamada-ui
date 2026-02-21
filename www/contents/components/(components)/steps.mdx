@@ -420,4 +420,17 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+### Keyboard Navigation
+
+| Key              | Description                                | State                                    |
+| ---------------- | ------------------------------------------ | ---------------------------------------- |
+| `Tab`            | Moves focus to the next focusable element. | -                                        |
+| `Space`, `Enter` | Clicks the button and moves to the step.   | `Steps.PrevTrigger`, `Steps.NextTrigger` |
+
+### ARIA Roles and Attributes
+
+| Component         | Roles and Attributes  | Usage                                            |
+| ----------------- | --------------------- | ------------------------------------------------ |
+| `Steps.Item`      | `aria-current="step"` | Indicates the current step.                      |
+|                   | `aria-labelledby`     | Sets the `id` of the associated `Steps.Content`. |
+| `Steps.Separator` | `role="separator"`    | Indicates that this is a separator.              |

@@ -283,7 +283,7 @@ export const CloseTrigger: Story = () => {
         </NativePopover.Body>
         <NativePopover.Footer>
           <NativePopover.CloseTrigger>
-            <Button variant="ghost">Close</Button>
+            <Button>Close</Button>
           </NativePopover.CloseTrigger>
         </NativePopover.Footer>
       </NativePopover.Content>

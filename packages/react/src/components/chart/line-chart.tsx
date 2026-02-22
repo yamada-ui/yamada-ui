@@ -26,7 +26,7 @@ export interface LineChartProps<Y extends Dict = Dict>
   /**
    * Props for the line chart component.
    */
-  chartProps?: OriginalCartesianChartProps
+  chartProps?: Omit<OriginalCartesianChartProps, "data">
 }
 
 const {

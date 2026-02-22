@@ -39,8 +39,10 @@ export type CarouselWatchSlides = EmblaOptions["watchSlides"]
 export type CarouselControl = EmblaCarouselType
 export type CarouselPlugin = EmblaPluginType
 
-export interface CarouselContext
-  extends Omit<UseCarouselReturn, "getRootProps"> {}
+export interface CarouselContext extends Omit<
+  UseCarouselReturn,
+  "getRootProps"
+> {}
 
 const [CarouselContext, useCarouselContext] = createContext<CarouselContext>({
   name: "CarouselContext",
@@ -48,8 +50,10 @@ const [CarouselContext, useCarouselContext] = createContext<CarouselContext>({
 
 export { CarouselContext, useCarouselContext }
 
-export interface UseCarouselProps
-  extends Omit<HTMLProps<"section">, "onChange"> {
+export interface UseCarouselProps extends Omit<
+  HTMLProps<"section">,
+  "onChange"
+> {
   /**
    * The alignment of the carousel.
    *
@@ -412,11 +416,11 @@ export const useCarousel = ({
       "data-orientation": orientation,
       ...rest,
       ...props,
-      ref: mergeRefs(ref, rest.ref, carouselRef),
+      ref: mergeRefs(ref, rest.ref),
       onMouseEnter: handlerAll(props.onMouseEnter, onMouseEnter),
       onMouseLeave: handlerAll(props.onMouseLeave, onMouseLeave),
     }),
-    [id, onMouseEnter, onMouseLeave, rest, carouselRef, orientation],
+    [id, onMouseEnter, onMouseLeave, rest, orientation],
   )
 
   const getListProps: PropGetter = useCallback(
@@ -425,9 +429,9 @@ export const useCarousel = ({
       "aria-live": autoplay ? "off" : "polite",
       "data-orientation": orientation,
       ...props,
-      ref: mergeRefs(ref, listRef),
+      ref: mergeRefs(ref, listRef, carouselRef),
     }),
-    [autoplay, listId, orientation],
+    [autoplay, listId, orientation, carouselRef],
   )
 
   const getItemProps: RequiredPropGetter<"div", { index: number }> =

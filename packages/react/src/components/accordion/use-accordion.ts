@@ -28,8 +28,10 @@ export {
   useAccordionDescendants,
 }
 
-interface AccordionContext
-  extends Omit<UseAccordionReturn, "descendants" | "getRootProps"> {}
+interface AccordionContext extends Omit<
+  UseAccordionReturn,
+  "descendants" | "getRootProps"
+> {}
 
 const [AccordionContext, useAccordionContext] = createContext<AccordionContext>(
   {
@@ -39,8 +41,10 @@ const [AccordionContext, useAccordionContext] = createContext<AccordionContext>(
 
 export { AccordionContext, useAccordionContext }
 
-interface AccordionItemContext
-  extends Omit<UseAccordionItemReturn, "getItemProps"> {}
+interface AccordionItemContext extends Omit<
+  UseAccordionItemReturn,
+  "getItemProps"
+> {}
 
 const [AccordionItemContext, useAccordionItemContext] =
   createContext<AccordionItemContext>({
@@ -140,15 +144,15 @@ export type UseAccordionReturn = ReturnType<typeof useAccordion>
 
 export interface UseAccordionItemProps extends HTMLProps {
   /**
-   * The index of the accordion item.
-   */
-  index: number
-  /**
    * If `true`, the accordion item will be disabled.
    *
    * @default false
    */
   disabled?: boolean
+  /**
+   * The index of the accordion item.
+   */
+  index: number
 }
 
 export const useAccordionItem = ({

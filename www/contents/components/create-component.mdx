@@ -59,8 +59,7 @@ const componentStyle = defineComponentStyle({
 type ComponentStyle = typeof componentStyle
 
 export interface ComponentProps
-  extends HTMLStyledProps<"div">,
-    ThemeProps<ComponentStyle> {}
+  extends HTMLStyledProps<"div">, ThemeProps<ComponentStyle> {}
 
 const {
   component,
@@ -172,8 +171,7 @@ const additionalComponentStyle = defineComponentStyle({
 type AdditionalComponentStyle = typeof additionalComponentStyle
 
 export interface AdditionalComponentProps
-  extends HTMLStyledProps<"div">,
-    ThemeProps<AdditionalComponentStyle> {}
+  extends HTMLStyledProps<"div">, ThemeProps<AdditionalComponentStyle> {}
 
 const {
   ComponentContext,
@@ -302,8 +300,7 @@ const componentStyle = defineComponentSlotStyle({
 type ComponentStyle = typeof componentStyle
 
 export interface ComponentRootProps
-  extends HTMLStyledProps<"div">,
-    ThemeProps<ComponentStyle> {}
+  extends HTMLStyledProps<"div">, ThemeProps<ComponentStyle> {}
 
 const {
   ComponentContext,

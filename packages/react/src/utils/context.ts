@@ -25,8 +25,8 @@ export function createContext<Y = any>(options: {
   strict?: true
 }): CreateContextReturn<Y>
 export function createContext<Y = any>(options: {
-  defaultValue: Y
   name?: string
+  defaultValue: Y
   errorMessage?: string
   hookName?: string
   strict?: false

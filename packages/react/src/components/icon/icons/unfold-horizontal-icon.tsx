@@ -1,6 +1,8 @@
 "use client"
 
-import { UnfoldHorizontal } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { UnfoldHorizontal as OriginalUnfoldHorizontalIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const UnfoldHorizontalIcon = component(Icon)({ as: UnfoldHorizontal })
+export const UnfoldHorizontalIcon = component(Icon)({
+  as: OriginalUnfoldHorizontalIcon,
+}) as Component<"svg", IconProps>

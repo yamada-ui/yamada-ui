@@ -1,6 +1,8 @@
 "use client"
 
-import { BrickWallShield } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { BrickWallShield as OriginalBrickWallShieldIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const BrickWallShieldIcon = component(Icon)({ as: BrickWallShield })
+export const BrickWallShieldIcon = component(Icon)({
+  as: OriginalBrickWallShieldIcon,
+}) as Component<"svg", IconProps>

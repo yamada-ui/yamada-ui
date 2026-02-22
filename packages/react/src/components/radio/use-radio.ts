@@ -17,7 +17,8 @@ import { useFieldProps } from "../field"
 import { useRadioGroupContext } from "./use-radio-group"
 
 export interface UseRadioProps<Y extends string = string>
-  extends Omit<HTMLProps<"label">, "onBlur" | "onChange" | "onFocus" | "ref">,
+  extends
+    Omit<HTMLProps<"label">, "onBlur" | "onChange" | "onFocus" | "ref">,
     HTMLRefAttributes<"input">,
     FieldProps {
   /**

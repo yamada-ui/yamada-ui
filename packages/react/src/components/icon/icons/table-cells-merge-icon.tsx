@@ -1,6 +1,8 @@
 "use client"
 
-import { TableCellsMerge } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { TableCellsMerge as OriginalTableCellsMergeIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const TableCellsMergeIcon = component(Icon)({ as: TableCellsMerge })
+export const TableCellsMergeIcon = component(Icon)({
+  as: OriginalTableCellsMergeIcon,
+}) as Component<"svg", IconProps>

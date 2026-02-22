@@ -1,6 +1,8 @@
 "use client"
 
-import { EarOff } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { EarOff as OriginalEarOffIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const EarOffIcon = component(Icon)({ as: EarOff })
+export const EarOffIcon = component(Icon)({
+  as: OriginalEarOffIcon,
+}) as Component<"svg", IconProps>

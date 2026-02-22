@@ -1,6 +1,8 @@
 "use client"
 
-import { Maximize } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Maximize as OriginalMaximizeIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const MaximizeIcon = component(Icon)({ as: Maximize })
+export const MaximizeIcon = component(Icon)({
+  as: OriginalMaximizeIcon,
+}) as Component<"svg", IconProps>

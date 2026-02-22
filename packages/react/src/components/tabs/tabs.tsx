@@ -21,8 +21,10 @@ import {
   useTabsContext,
 } from "./use-tabs"
 
-interface ComponentContext
-  extends Pick<TabsRootProps, "items" | "lazy" | "lazyBehavior"> {}
+interface ComponentContext extends Pick<
+  TabsRootProps,
+  "items" | "lazy" | "lazyBehavior"
+> {}
 
 export interface TabsItem extends Omit<TabsTabProps, "index"> {
   /**
@@ -40,7 +42,8 @@ export interface TabsItem extends Omit<TabsTabProps, "index"> {
 }
 
 export interface TabsRootProps
-  extends Omit<HTMLStyledProps, "onChange">,
+  extends
+    Omit<HTMLStyledProps, "onChange">,
     Omit<UseTabsProps, "orientation">,
     Pick<UseLazyMountProps, "lazy" | "lazyBehavior">,
     ThemeProps<TabsStyle> {

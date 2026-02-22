@@ -1,6 +1,8 @@
 "use client"
 
-import { SplinePointer } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { SplinePointer as OriginalSplinePointerIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const SplinePointerIcon = component(Icon)({ as: SplinePointer })
+export const SplinePointerIcon = component(Icon)({
+  as: OriginalSplinePointerIcon,
+}) as Component<"svg", IconProps>

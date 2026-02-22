@@ -1,5 +1,5 @@
-import type { StyleConfig } from "@/data"
 import type { ReactNode } from "react"
+import type { StyleConfig } from "@/data"
 import {
   Box,
   Code,

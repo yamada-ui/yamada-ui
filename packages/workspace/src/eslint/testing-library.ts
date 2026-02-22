@@ -1,12 +1,11 @@
 import type { TSESLint } from "@typescript-eslint/utils"
-import { fixupPluginRules } from "@eslint/compat"
 import testingLibraryPlugin from "eslint-plugin-testing-library"
 import { sharedTestFiles } from "./shared"
 
 export const testingLibraryConfig = {
   name: "eslint/testing-library",
   files: sharedTestFiles,
-  plugins: { "testing-library": fixupPluginRules(testingLibraryPlugin) },
+  plugins: { "testing-library": testingLibraryPlugin },
   rules: {
     "testing-library/no-await-sync-queries": "error",
     "testing-library/no-debugging-utils": "error",

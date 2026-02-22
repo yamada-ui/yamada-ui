@@ -3,8 +3,8 @@
 import { getComponent } from "./get-component"
 
 export interface ClientOnlyProps {
-  code: string
   lang?: string
+  code: string
   functional?: boolean
 }
 

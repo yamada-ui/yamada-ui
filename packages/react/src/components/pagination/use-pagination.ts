@@ -17,12 +17,10 @@ const [PaginationContext, usePaginationContext] =
 
 export { PaginationContext, usePaginationContext }
 
-export interface UsePaginationProps
-  extends Omit<HTMLProps, "onChange" | "page"> {
-  /**
-   * The total number of pages in pagination.
-   */
-  total: number
+export interface UsePaginationProps extends Omit<
+  HTMLProps,
+  "onChange" | "page"
+> {
   /**
    * Number of elements visible on the left/right edges.
    *
@@ -52,6 +50,10 @@ export interface UsePaginationProps
    * @default 1
    */
   siblings?: number
+  /**
+   * The total number of pages in pagination.
+   */
+  total: number
   /**
    * The callback invoked when the page changes.
    */

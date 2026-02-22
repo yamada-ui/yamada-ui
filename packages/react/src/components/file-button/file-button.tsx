@@ -13,7 +13,8 @@ import { fileButtonStyle } from "./file-button.style"
 import { useFileButton } from "./use-file-button"
 
 export interface FileButtonProps
-  extends Omit<ButtonProps, "defaultValue" | "onChange" | "ref" | "value">,
+  extends
+    Omit<ButtonProps, "defaultValue" | "onChange" | "ref" | "value">,
     UseFileButtonProps,
     Pick<UseInputBorderProps, "errorBorderColor">,
     ThemeProps<FileButtonStyle> {}

@@ -7,15 +7,15 @@ import { dataAttr } from "../../utils"
 
 export interface UseStrengthMeterProps extends HTMLProps {
   /**
-   * The value of the password strength meter.
-   */
-  value: number
-  /**
    * The maximum value of the password strength meter.
    *
    * @default 4
    */
   max?: number
+  /**
+   * The value of the password strength meter.
+   */
+  value: number
 }
 
 export const useStrengthMeter = ({

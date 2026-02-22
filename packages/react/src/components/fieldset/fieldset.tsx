@@ -9,11 +9,10 @@ import { createSlotComponent, styled } from "../../core"
 import { createContext, dataAttr, useSplitChildren } from "../../utils"
 import { fieldsetStyle } from "./fieldset.style"
 
-interface FieldsetContext
-  extends Pick<
-    FieldsetRootProps,
-    "disabled" | "invalid" | "readOnly" | "required"
-  > {
+interface FieldsetContext extends Pick<
+  FieldsetRootProps,
+  "disabled" | "invalid" | "readOnly" | "required"
+> {
   id?: string
 }
 
@@ -25,9 +24,7 @@ const [FieldsetContext, useFieldsetContext] = createContext<FieldsetContext>({
 export { FieldsetContext, useFieldsetContext }
 
 export interface FieldsetRootProps
-  extends HTMLStyledProps<"fieldset">,
-    ThemeProps<FieldsetStyle>,
-    FieldProps {
+  extends HTMLStyledProps<"fieldset">, ThemeProps<FieldsetStyle>, FieldProps {
   /**
    * The fieldset error message to use.
    */

@@ -30,15 +30,31 @@ describe("<Toggle />", () => {
   })
 
   test("should handle disabled prop", () => {
-    render(<Toggle disabled>Toggle</Toggle>)
+    const onChange = vi.fn()
+    render(
+      <Toggle disabled onChange={onChange}>
+        Toggle
+      </Toggle>,
+    )
 
-    expect(screen.getByRole("button")).toBeDisabled()
+    const button = screen.getByRole("button")
+    expect(button).toBeDisabled()
+    fireEvent.click(button)
+    expect(onChange).not.toHaveBeenCalled()
   })
 
   test("should handle readOnly prop", () => {
-    render(<Toggle readOnly>Toggle</Toggle>)
+    const onChange = vi.fn()
+    render(
+      <Toggle readOnly onChange={onChange}>
+        Toggle
+      </Toggle>,
+    )
 
-    expect(screen.getByRole("button")).toHaveAttribute("data-readonly")
+    const button = screen.getByRole("button")
+    expect(button).toHaveAttribute("data-readonly")
+    fireEvent.click(button)
+    expect(onChange).not.toHaveBeenCalled()
   })
 
   test("should handle icon prop", () => {

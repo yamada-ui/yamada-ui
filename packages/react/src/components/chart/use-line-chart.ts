@@ -54,7 +54,6 @@ export const useLineChart = <Y extends Dict>({
   )
 
   return {
-    layout,
     getChartProps,
     getRootProps,
   }

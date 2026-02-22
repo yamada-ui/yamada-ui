@@ -282,6 +282,33 @@ export const Legend: Story = () => {
   )
 }
 
+export const Name: Story = () => {
+  const series = useMemo<LineChart.LineProps<Data>[]>(
+    () => [
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
+    ],
+    [],
+  )
+  const data = useMemo(() => createData(), [])
+
+  return (
+    <LineChart.Root
+      data={data}
+      series={series}
+      withLegend
+      tooltipProps={{
+        labelFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+      xAxisProps={{
+        dataKey: "date",
+        tickFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+    />
+  )
+}
+
 export const Grid: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [

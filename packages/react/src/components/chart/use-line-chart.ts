@@ -20,7 +20,7 @@ export interface UseLineChartProps<Y extends Dict>
   /**
    * Chart data.
    */
-  data: Y[]
+  data?: Y[]
 }
 
 export const useLineChart = <Y extends Dict>({

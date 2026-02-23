@@ -1,6 +1,8 @@
 "use client"
 
-import { Rss } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Rss as OriginalRssIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,7 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const RssIcon = component(Icon)({ as: Rss })
+export const RssIcon = component(Icon)({ as: OriginalRssIcon }) as Component<
+  "svg",
+  IconProps
+>

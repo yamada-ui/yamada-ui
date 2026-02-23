@@ -25,6 +25,7 @@ describe("Calc", () => {
     expect(calc(10).negate().toString()).toBe("-10")
     expect(calc(-10).negate().toString()).toBe("10")
     expect(calc("10px").negate().toString()).toBe("-10px")
+    expect(calc(10).add(20).negate().toString()).toBe("calc((10 + 20) * -1)")
   })
 
   test("chain methods", () => {

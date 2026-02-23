@@ -59,7 +59,8 @@ import { NativeTable } from "../native-table"
 
 declare module "@tanstack/react-table" {
   interface ColumnDefExtensions<TData extends RowData, TValue = unknown>
-    extends VisibilityColumnDef,
+    extends
+      VisibilityColumnDef,
       ColumnPinningColumnDef,
       ColumnFiltersColumnDef<TData>,
       GlobalFilterColumnDef,
@@ -68,7 +69,8 @@ declare module "@tanstack/react-table" {
       ColumnSizingColumnDef {}
 
   interface ColumnDefBase<TData extends RowData, TValue = unknown>
-    extends ColumnDefExtensions<TData, TValue>,
+    extends
+      ColumnDefExtensions<TData, TValue>,
       Pick<CSSProps, "lineClamp" | "truncated">,
       Pick<NativeTable.TdProps, "numeric"> {
     cell?: ColumnDefTemplate<CellContext<TData, TValue>>
@@ -148,45 +150,43 @@ export interface ColumnSort<Y extends RowData> {
 }
 export type SortingState<Y extends RowData> = ColumnSort<Y>[]
 
-interface ComponentContext
-  extends Pick<
-    TableProps<any>,
-    | "columnResizeMode"
-    | "resizableTriggerProps"
-    | "sortingIcon"
-    | "sortingIconProps"
-  > {
+interface ComponentContext extends Pick<
+  TableProps<any>,
+  | "columnResizeMode"
+  | "resizableTriggerProps"
+  | "sortingIcon"
+  | "sortingIconProps"
+> {
   table: ReactTable<any>
 }
 
-interface OmittedTableOptions<Y extends RowData>
-  extends Omit<
-    TableOptions<Y>,
-    | "getCoreRowModel"
-    | "onColumnFiltersChange"
-    | "onPaginationChange"
-    | "onSortingChange"
-  > {}
+interface OmittedTableOptions<Y extends RowData> extends Omit<
+  TableOptions<Y>,
+  | "getCoreRowModel"
+  | "onColumnFiltersChange"
+  | "onPaginationChange"
+  | "onSortingChange"
+> {}
 
-interface PickedNativeTableProps
-  extends Pick<
-    NativeTable.RootProps,
-    | "highlightOnHover"
-    | "highlightOnSelected"
-    | "layout"
-    | "scrollAreaProps"
-    | "size"
-    | "stickyFooter"
-    | "stickyHeader"
-    | "striped"
-    | "variant"
-    | "withBorder"
-    | "withColumnBorders"
-    | "withScrollArea"
-  > {}
+interface PickedNativeTableProps extends Pick<
+  NativeTable.RootProps,
+  | "highlightOnHover"
+  | "highlightOnSelected"
+  | "layout"
+  | "scrollAreaProps"
+  | "size"
+  | "stickyFooter"
+  | "stickyHeader"
+  | "striped"
+  | "variant"
+  | "withBorder"
+  | "withColumnBorders"
+  | "withScrollArea"
+> {}
 
 export interface TableProps<Y extends RowData>
-  extends OmittedTableOptions<Y>,
+  extends
+    OmittedTableOptions<Y>,
     PickedNativeTableProps,
     Pick<CSSProps, "colorScheme" | "lineClamp" | "truncated"> {
   /**

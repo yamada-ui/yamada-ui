@@ -493,7 +493,7 @@ export type ChartActiveDot =
 
 export interface ChartLineProps<Y extends Dict = Dict> extends Merge<
   HTMLStyledProps<"line">,
-  Omit<UseChartLineProps, "activeDot" | "dataKey" | "dot" | "label">
+  Omit<UseChartLineProps, "activeDot" | "data" | "dataKey" | "dot" | "label">
 > {
   /**
    * The active dot to use for the line.
@@ -501,6 +501,10 @@ export interface ChartLineProps<Y extends Dict = Dict> extends Merge<
    * @default true
    */
   activeDot?: ChartActiveDot
+  /**
+   * The data to use for the line.
+   */
+  data?: Y[]
   /**
    * The key of a group of data which should be unique in an chart.
    */

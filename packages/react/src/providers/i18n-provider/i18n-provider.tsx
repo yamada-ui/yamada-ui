@@ -69,8 +69,10 @@ type Translation<Y extends object = IntlData, M extends string = IntlPath> = <
     : [replaceValues: IcuArgs<Value<Y, D>, IntlPath | M>]
 ) => string
 
-interface I18nContext<Y extends object = IntlData, M extends string = IntlPath>
-  extends Language {
+interface I18nContext<
+  Y extends object = IntlData,
+  M extends string = IntlPath,
+> extends Language {
   changeLanguage: (locale?: string, dir?: TextDirection) => void
   getTranslation: (key?: IntlKey) => Translation<Y, M>
   t: Translation<Y, M>

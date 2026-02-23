@@ -14,7 +14,7 @@
     },
     {
       "name": "badge.tsx",
-      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { BadgeStyle } from \"./badge.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { badgeStyle } from \"./badge.style\"\n\nexport interface BadgeProps\n  extends HTMLStyledProps<\"span\">,\n    ThemeProps<BadgeStyle> {}\n\nconst {\n  PropsContext: BadgePropsContext,\n  usePropsContext: useBadgePropsContext,\n  withContext,\n} = createComponent<BadgeProps, BadgeStyle>(\"badge\", badgeStyle)\n\nexport { BadgePropsContext, useBadgePropsContext }\n\n/**\n * `Badge` is a component that emphasizes the status of an item to make it immediately recognizable.\n *\n * @see https://yamada-ui.com/docs/components/badge\n */\nexport const Badge = withContext(\"span\")()\n"
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { BadgeStyle } from \"./badge.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { badgeStyle } from \"./badge.style\"\n\nexport interface BadgeProps\n  extends HTMLStyledProps<\"span\">, ThemeProps<BadgeStyle> {}\n\nconst {\n  PropsContext: BadgePropsContext,\n  usePropsContext: useBadgePropsContext,\n  withContext,\n} = createComponent<BadgeProps, BadgeStyle>(\"badge\", badgeStyle)\n\nexport { BadgePropsContext, useBadgePropsContext }\n\n/**\n * `Badge` is a component that emphasizes the status of an item to make it immediately recognizable.\n *\n * @see https://yamada-ui.com/docs/components/badge\n */\nexport const Badge = withContext(\"span\")()\n"
     },
     {
       "name": "index.ts",

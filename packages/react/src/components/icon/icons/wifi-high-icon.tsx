@@ -1,6 +1,8 @@
 "use client"
 
-import { WifiHigh } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { WifiHigh as OriginalWifiHighIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const WifiHighIcon = component(Icon)({ as: WifiHigh })
+export const WifiHighIcon = component(Icon)({
+  as: OriginalWifiHighIcon,
+}) as Component<"svg", IconProps>

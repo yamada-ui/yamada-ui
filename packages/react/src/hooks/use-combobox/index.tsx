@@ -83,9 +83,9 @@ export const createComboboxItem = (
 }
 
 export interface CreateComboboxChildrenOptions {
+  Empty?: JSXElementConstructor<any>
   Group: JSXElementConstructor<any>
   Option: JSXElementConstructor<any>
-  Empty?: JSXElementConstructor<any>
 }
 
 export const createComboboxChildren = (
@@ -149,18 +149,19 @@ export {
   useComboboxDescendants,
 }
 
-interface ComboboxContext
-  extends Pick<
-    UseComboboxReturn,
-    "onActiveDescendant" | "onClose" | "onSelect"
-  > {}
+interface ComboboxContext extends Pick<
+  UseComboboxReturn,
+  "onActiveDescendant" | "onClose" | "onSelect"
+> {}
 
 const [ComboboxContext, useComboboxContext] = createContext<ComboboxContext>({
   name: "ComboboxContext",
 })
 
-interface ComboboxGroupContext
-  extends Pick<UseComboboxGroupReturn, "getLabelProps"> {}
+interface ComboboxGroupContext extends Pick<
+  UseComboboxGroupReturn,
+  "getLabelProps"
+> {}
 
 const [ComboboxGroupContext, useComboboxGroupContext] =
   createContext<ComboboxGroupContext>({
@@ -175,7 +176,8 @@ export {
 }
 
 export interface UseComboboxProps
-  extends Omit<HTMLProps, "onChange">,
+  extends
+    Omit<HTMLProps, "onChange">,
     Omit<UseDisclosureProps, "timing">,
     Omit<
       UsePopoverProps,

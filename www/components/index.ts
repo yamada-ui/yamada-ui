@@ -1,4 +1,3 @@
-export * from "./balloon-icon"
 export * from "./chatgpt-icon"
 export * from "./claude-icon"
 export * from "./code-preview"

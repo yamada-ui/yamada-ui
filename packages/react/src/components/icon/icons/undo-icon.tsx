@@ -1,6 +1,8 @@
 "use client"
 
-import { Undo } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Undo as OriginalUndoIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,7 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const UndoIcon = component(Icon)({ as: Undo })
+export const UndoIcon = component(Icon)({ as: OriginalUndoIcon }) as Component<
+  "svg",
+  IconProps
+>

@@ -30,7 +30,8 @@ import {
  * @see https://yamada-ui.com/docs/components/resizable
  */
 export interface ResizableRootProps
-  extends HTMLStyledProps,
+  extends
+    HTMLStyledProps,
     ThemeProps<ResizableStyle>,
     Omit<UseResizableProps, "orientation"> {
   /**
@@ -81,8 +82,7 @@ export const ResizableRoot = withProvider<
 const StyledPanel = styled(Panel, { forwardProps: ["order"] })
 
 export interface ResizableItemProps
-  extends Omit<HTMLStyledPropsWithoutAs, "order">,
-    UseResizableItemProps {}
+  extends Omit<HTMLStyledPropsWithoutAs, "order">, UseResizableItemProps {}
 
 export const ResizableItem = withContext<"div", ResizableItemProps>((props) => {
   const { getItemProps } = useResizableItem(props)
@@ -91,8 +91,7 @@ export const ResizableItem = withContext<"div", ResizableItemProps>((props) => {
 }, "item")()
 
 export interface ResizableTriggerProps
-  extends HTMLStyledPropsWithoutAs,
-    UseResizableTriggerProps {
+  extends HTMLStyledPropsWithoutAs, UseResizableTriggerProps {
   /**
    * The resizable trigger icon to use.
    */

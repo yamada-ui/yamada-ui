@@ -1,6 +1,8 @@
 "use client"
 
-import { SignalMedium } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { SignalMedium as OriginalSignalMediumIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const SignalMediumIcon = component(Icon)({ as: SignalMedium })
+export const SignalMediumIcon = component(Icon)({
+  as: OriginalSignalMediumIcon,
+}) as Component<"svg", IconProps>

@@ -10,7 +10,7 @@ describe("<List />", () => {
   })
 
   test("sets `className` correctly", async () => {
-    render(
+    await render(
       <List.Root data-testid="list-root">
         <List.Item>Item one</List.Item>
       </List.Root>,
@@ -23,8 +23,8 @@ describe("<List />", () => {
     await expect.element(listItem).toHaveClass("ui-list__item")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(
+  test("renders HTML tag correctly", async () => {
+    await render(
       <List.Root data-testid="list-root">
         <List.Item>Item one</List.Item>
       </List.Root>,
@@ -38,7 +38,7 @@ describe("<List />", () => {
   })
 
   test("should render list with an icon", async () => {
-    render(
+    await render(
       <List.Root>
         <List.Item icon={<BoxIcon data-testid="box-icon" />} />
       </List.Root>,
@@ -50,7 +50,7 @@ describe("<List />", () => {
   })
 
   test("should render list with different style types", async () => {
-    render(
+    await render(
       <>
         <List.Root data-testid="disc" styleType="disc">
           <List.Item>List item</List.Item>

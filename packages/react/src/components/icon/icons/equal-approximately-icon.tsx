@@ -1,6 +1,8 @@
 "use client"
 
-import { EqualApproximately } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { EqualApproximately as OriginalEqualApproximatelyIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -9,5 +11,5 @@ import { component, Icon } from "../icon"
  * @see https://yamada-ui.com/docs/components/icon
  */
 export const EqualApproximatelyIcon = component(Icon)({
-  as: EqualApproximately,
-})
+  as: OriginalEqualApproximatelyIcon,
+}) as Component<"svg", IconProps>

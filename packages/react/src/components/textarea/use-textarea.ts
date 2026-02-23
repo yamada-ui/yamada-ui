@@ -8,8 +8,7 @@ import { assignRef, handlerAll, mergeRefs, noop } from "../../utils"
 import { useAutosize } from "./use-autosize"
 
 export interface UseTextareaProps
-  extends HTMLProps<"textarea">,
-    Omit<UseAutosizeProps, "disabled" | "ref"> {
+  extends HTMLProps<"textarea">, Omit<UseAutosizeProps, "disabled" | "ref"> {
   /**
    * If `true`, the Textarea height auto-adjusts to text height.
    */

@@ -14,11 +14,11 @@ import {
 } from "../../utils"
 
 interface ToggleGroupContext {
-  onChangeMapRef: RefObject<Map<string, (value: boolean) => void>>
   disabled?: boolean
   readOnly?: boolean
   value?: string | string[]
   onChange?: <Y extends string = string>(value: undefined | Y) => void
+  onChangeMapRef: RefObject<Map<string, (value: boolean) => void>>
 }
 
 const [ToggleGroupContext, useToggleGroupContext] =
@@ -29,8 +29,9 @@ const [ToggleGroupContext, useToggleGroupContext] =
 
 export { ToggleGroupContext, useToggleGroupContext }
 
-export interface UseToggleGroupProps<Y extends string | string[] = string>
-  extends Omit<HTMLProps, "defaultValue" | "onChange" | "value"> {
+export interface UseToggleGroupProps<
+  Y extends string | string[] = string,
+> extends Omit<HTMLProps, "defaultValue" | "onChange" | "value"> {
   /**
    * The initial value of the toggle button group.
    */

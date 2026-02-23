@@ -15,8 +15,13 @@ const clamp = (value: number, min: number, max: number) =>
   Math.min(Math.max(value, min), max)
 
 export interface RippleProps
-  extends HTMLMotionProps<"span">,
-    ThemeProps<RippleStyle> {
+  extends HTMLMotionProps<"span">, ThemeProps<RippleStyle> {
+  /**
+   * If `true`, disable ripple effects when pressing a element.
+   *
+   * @default false
+   */
+  disabled?: boolean
   /**
    * The ripples to use.
    */
@@ -25,12 +30,6 @@ export interface RippleProps
    * The callback invoked when a ripple is cleared.
    */
   onClear: (key: Key) => void
-  /**
-   * If `true`, disable ripple effects when pressing a element.
-   *
-   * @default false
-   */
-  disabled?: boolean
 }
 
 const {

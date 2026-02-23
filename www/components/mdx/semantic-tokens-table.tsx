@@ -8,8 +8,8 @@ import { useTranslations } from "next-intl"
 import { Row } from "./tokens-table"
 
 export interface SemanticTokensTableProps {
-  token: Exclude<keyof typeof defaultTheme.semanticTokens, "colorSchemes">
   fractional?: boolean
+  token: Exclude<keyof typeof defaultTheme.semanticTokens, "colorSchemes">
 }
 
 export function SemanticTokensTable({

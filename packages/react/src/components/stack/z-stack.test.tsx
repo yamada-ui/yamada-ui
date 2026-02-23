@@ -8,7 +8,7 @@ describe("<ZStack />", () => {
   })
 
   test("sets `className` correctly", async () => {
-    render(
+    await render(
       <ZStack data-testid="z-stack">
         <Box>ZStack Item</Box>
       </ZStack>,
@@ -19,8 +19,8 @@ describe("<ZStack />", () => {
     await expect.element(zStack).toHaveClass("ui-stack--depth")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(
+  test("renders HTML tag correctly", async () => {
+    await render(
       <ZStack data-testid="z-stack">
         <Box>ZStack Item</Box>
       </ZStack>,
@@ -30,16 +30,8 @@ describe("<ZStack />", () => {
     expect(zStack.element().tagName).toBe("DIV")
   })
 
-  test("ZStack renders correctly", () => {
-    render(
-      <ZStack>
-        <Box>ZStack Item</Box>
-      </ZStack>,
-    )
-  })
-
   test("startIndex property works correctly", async () => {
-    render(
+    await render(
       <ZStack startIndex={10}>
         <Box>ZStack Item</Box>
       </ZStack>,
@@ -50,7 +42,7 @@ describe("<ZStack />", () => {
   })
 
   test("Child elements are correctly overlaid and rendered", async () => {
-    render(
+    await render(
       <ZStack>
         <Box>Item 1</Box>
         <Box>Item 2</Box>
@@ -65,7 +57,7 @@ describe("<ZStack />", () => {
   })
 
   test("Whether the direction is working properly", async () => {
-    render(
+    await render(
       <ZStack direction="center-end">
         <Box>Item 1</Box>
         <Box>Item 2</Box>
@@ -86,7 +78,7 @@ describe("<ZStack />", () => {
   })
 
   test("Whether the reverse is working properly", async () => {
-    render(
+    await render(
       <ZStack reverse>
         <Box>Item 1</Box>
         <Box>Item 2</Box>
@@ -107,7 +99,7 @@ describe("<ZStack />", () => {
   })
 
   test("applies correct styles with direction set to start", async () => {
-    render(
+    await render(
       <ZStack direction="start">
         <Box>Box 1</Box>
         <Box>Box 2</Box>
@@ -130,7 +122,7 @@ describe("<ZStack />", () => {
   })
 
   test("applies correct styles with direction set to center-start", async () => {
-    render(
+    await render(
       <ZStack direction="center-start">
         <Box>Box 1</Box>
         <Box>Box 2</Box>

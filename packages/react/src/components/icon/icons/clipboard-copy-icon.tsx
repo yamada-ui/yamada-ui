@@ -1,6 +1,8 @@
 "use client"
 
-import { ClipboardCopy } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { ClipboardCopy as OriginalClipboardCopyIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const ClipboardCopyIcon = component(Icon)({ as: ClipboardCopy })
+export const ClipboardCopyIcon = component(Icon)({
+  as: OriginalClipboardCopyIcon,
+}) as Component<"svg", IconProps>

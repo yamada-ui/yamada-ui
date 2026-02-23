@@ -593,16 +593,16 @@ return (
 
 ### ARIAロールと属性
 
-| コンポーネント       | ロールと属性                    | 使い方                                                                              |
-| -------------------- | ------------------------------- | ----------------------------------------------------------------------------------- |
-| `Modal.Content`      | `role="dialog"`                 | ダイアログであることを示します。                                                    |
-|                      | `aria-modal="true"`             | 表示されているウィジェットがモーダルであることを示します。                          |
-|                      | `aria-labelledby`               | `Modal.Title`の`id`を設定します。                                                   |
-|                      | `aria-describedby`              | `Modal.Body`の`id`を設定します。                                                    |
-| `Modal.OpenTrigger`  | `aria-haspopup`                 | `"dialog"`を設定します。                                                            |
-|                      | `aria-expanded`                 | モーダルが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。 |
-|                      | `aria-controls`                 | モーダルが開いている場合は、`Modal.Content`の`id`を設定します。                     |
-|                      | `aria-label="モーダルを開く"`   | `"モーダルを開く"`を設定します。                                                    |
-| `Modal.CloseButton`  | `aria-label="モーダルを閉じる"` | `"モーダルを閉じる"`を設定します。                                                  |
-| `Modal.CloseTrigger` | `aria-label="モーダルを閉じる"` | `"モーダルを閉じる"`を設定します。                                                  |
-| `Modal.Overlay`      | `aria-hidden`                   | 要素をアクセシビリティツリーから除外します。                                        |
+| コンポーネント       | ロールと属性             | 使い方                                                                              |
+| -------------------- | ------------------------ | ----------------------------------------------------------------------------------- |
+| `Modal.Content`      | `role="dialog"`          | ダイアログであることを示します。                                                    |
+|                      | `aria-modal="true"`      | 表示されているウィジェットがモーダルであることを示します。                          |
+|                      | `aria-labelledby`        | `Modal.Title`の`id`を設定します。                                                   |
+|                      | `aria-describedby`       | `Modal.Body`の`id`を設定します。                                                    |
+| `Modal.OpenTrigger`  | `aria-haspopup="dialog"` | ダイアログが存在することを示します。                                                |
+|                      | `aria-expanded`          | モーダルが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。 |
+|                      | `aria-controls`          | モーダルが開いている場合は、`Modal.Content`の`id`を設定します。                     |
+|                      | `aria-label`             | `"モーダルを開く"`を設定します。                                                    |
+| `Modal.CloseButton`  | `aria-label`             | `"モーダルを閉じる"`を設定します。                                                  |
+| `Modal.CloseTrigger` | `aria-label`             | `"モーダルを閉じる"`を設定します。                                                  |
+| `Modal.Overlay`      | `aria-hidden`            | 要素をアクセシビリティツリーから除外します。                                        |

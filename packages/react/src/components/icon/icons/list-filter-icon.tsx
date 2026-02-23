@@ -1,6 +1,8 @@
 "use client"
 
-import { ListFilter } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { ListFilter as OriginalListFilterIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const ListFilterIcon = component(Icon)({ as: ListFilter })
+export const ListFilterIcon = component(Icon)({
+  as: OriginalListFilterIcon,
+}) as Component<"svg", IconProps>

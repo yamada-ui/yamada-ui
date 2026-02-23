@@ -28,7 +28,8 @@ function clampValue(value: [number, number, number]) {
 }
 
 export interface UseSaturationSliderProps
-  extends Omit<HTMLProps, "defaultValue" | "onChange" | "ref">,
+  extends
+    Omit<HTMLProps, "defaultValue" | "onChange" | "ref">,
     HTMLRefAttributes<"input">,
     FieldProps {
   /**

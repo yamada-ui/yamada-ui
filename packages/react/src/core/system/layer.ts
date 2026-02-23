@@ -5,9 +5,9 @@ import { DEFAULT_LAYERS } from "../constant"
 
 export interface Layers {
   atRule: string | undefined
+  getAtRule?: (name: LayerScheme) => string
   names: string[]
   wrap: (name: LayerScheme, style?: (() => Dict) | Dict) => Dict
-  getAtRule?: (name: LayerScheme) => string
 }
 
 export const defaultLayers: Layers = {

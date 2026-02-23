@@ -1,6 +1,8 @@
 "use client"
 
-import { StretchVertical } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { StretchVertical as OriginalStretchVerticalIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const StretchVerticalIcon = component(Icon)({ as: StretchVertical })
+export const StretchVerticalIcon = component(Icon)({
+  as: OriginalStretchVerticalIcon,
+}) as Component<"svg", IconProps>

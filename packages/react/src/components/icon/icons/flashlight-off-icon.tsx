@@ -1,6 +1,8 @@
 "use client"
 
-import { FlashlightOff } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FlashlightOff as OriginalFlashlightOffIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const FlashlightOffIcon = component(Icon)({ as: FlashlightOff })
+export const FlashlightOffIcon = component(Icon)({
+  as: OriginalFlashlightOffIcon,
+}) as Component<"svg", IconProps>

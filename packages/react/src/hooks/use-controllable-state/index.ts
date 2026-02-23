@@ -20,16 +20,17 @@ interface UseControllableStateMethods<Y> {
   onUpdate?: (prev: Y, next: Y) => boolean
 }
 
-export interface UseControllableStateProps<Y>
-  extends UseControllableStateMethods<Y> {
+export interface UseControllableStateProps<
+  Y,
+> extends UseControllableStateMethods<Y> {
   defaultValue?: (() => Y) | Y
   value?: Y
 }
 
 export function useControllableState<Y>(
   props: UseControllableStateMethods<Y> & {
-    value: Y
     defaultValue?: (() => Y) | Y
+    value: Y
   },
 ): [Y, Dispatch<SetStateAction<Y>>]
 
@@ -96,8 +97,8 @@ export function useControllableEventState<
   M extends HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement,
 >(
   props: UseControllableEventStateMethods<M> & {
-    value: Y
     defaultValue?: (() => Y) | Y
+    value: Y
   },
 ): [Y, ChangeEventHandler<M>]
 

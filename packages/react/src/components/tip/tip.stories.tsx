@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { Tip } from "."
-import { CircleQuestionMarkIcon, HStack, Text, toTitleCase } from "../.."
+import { HStack, MessageCircleWarningIcon, Text, toTitleCase } from "../.."
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { For } from "../for"
 
@@ -208,7 +208,7 @@ export const CustomIcon: Story = () => {
       </Text>
       <Tip
         content="俺は俺の責務を全うする!!"
-        icon={<CircleQuestionMarkIcon />}
+        icon={<MessageCircleWarningIcon />}
       />
     </HStack>
   )

@@ -9,14 +9,18 @@ import { isString } from "../../utils"
 import { IconButton } from "../button"
 import {
   CircleCheckBigIcon,
+  CircleQuestionMarkIcon,
   InfoIcon,
   OctagonAlertIcon,
   TriangleAlertIcon,
 } from "../icon"
 import { Tooltip, useTooltipProps } from "../tooltip"
 
+export type TipStatusScheme = "help" | StatusScheme
+
 const icons = {
   error: OctagonAlertIcon,
+  help: CircleQuestionMarkIcon,
   info: InfoIcon,
   success: CircleCheckBigIcon,
   warning: TriangleAlertIcon,
@@ -29,9 +33,9 @@ export interface TipProps
   /**
    * The status of the tip.
    *
-   * @default 'info'
+   * @default 'help'
    */
-  status?: StatusScheme
+  status?: TipStatusScheme
 }
 
 /**
@@ -46,7 +50,7 @@ export const Tip: FC<TipProps> = (props) => {
       animationScheme,
       content,
       duration,
-      status = "info",
+      status = "help",
       contentProps,
       portalProps,
       ...rest

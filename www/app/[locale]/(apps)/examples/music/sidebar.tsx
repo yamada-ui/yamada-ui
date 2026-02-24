@@ -7,11 +7,9 @@ import {
   Button,
   ButtonGroup,
   CirclePlayIcon,
-  createContext,
   GlobeIcon,
   Heading,
   Icon,
-  IconButton,
   ListMusicIcon,
   MicVocalIcon,
   Music2Icon,
@@ -22,7 +20,6 @@ import {
   UserIcon,
   VStack,
 } from "@yamada-ui/react"
-import { useMemo } from "react"
 
 interface MenuItem extends Omit<ButtonProps, "children"> {
   icon?: ElementType
@@ -54,40 +51,28 @@ const PLAYLISTS_MENU_ITEMS: MenuItem[] = [
   { label: "Bedtime Beats" },
 ]
 
-interface SidebarContext {
-  collapsed: boolean
-}
+export interface SidebarProps extends StackProps {}
 
-const [SidebarProvider, useSidebar] = createContext<SidebarContext>({
-  name: "SidebarContext",
-})
-
-export interface SidebarProps extends StackProps {
-  collapsed: boolean
-}
-
-export function Sidebar({ collapsed, ...rest }: SidebarProps) {
-  const value = useMemo(() => ({ collapsed }), [collapsed])
-
+export function Sidebar({ ...rest }: SidebarProps) {
   return (
-    <SidebarProvider value={value}>
-      <VStack
-        as="nav"
-        gap={!collapsed ? { base: "lg", lg: "md" } : "md"}
-        px="sm"
-        py="lg"
-        separator={
-          <Separator
-            display={collapsed ? "block" : { base: "none", lg: "block" }}
-          />
-        }
-        {...rest}
-      >
-        <SidebarGroup items={DISCOVER_MENU_ITEMS} label="Discover" />
-        <SidebarGroup items={LIBRARY_MENU_ITEMS} label="Library" />
-        <SidebarGroup items={PLAYLISTS_MENU_ITEMS} label="Playlists" />
-      </VStack>
-    </SidebarProvider>
+    <VStack
+      as="nav"
+      gap="lg"
+      px="sm"
+      py="lg"
+      separator={
+        <Separator
+          display="none"
+          _container={[{ css: { display: "block" }, maxW: "53px" }]}
+        />
+      }
+      _container={[{ css: { gap: "sm" }, maxW: "53px" }]}
+      {...rest}
+    >
+      <SidebarGroup items={DISCOVER_MENU_ITEMS} label="Discover" />
+      <SidebarGroup items={LIBRARY_MENU_ITEMS} label="Library" />
+      <SidebarGroup items={PLAYLISTS_MENU_ITEMS} label="Playlists" />
+    </VStack>
   )
 }
 
@@ -106,11 +91,13 @@ function SidebarGroup({
   labelProps,
   ...rest
 }: SidebarGroupProps) {
-  const { collapsed } = useSidebar()
-
   return (
     <VStack gap="sm" {...rest}>
-      <Box display={collapsed ? "none" : { base: "block", lg: "none" }} px="3">
+      <Box
+        lineClamp={1}
+        px="3"
+        _container={[{ css: { display: "none" }, maxW: "53px" }]}
+      >
         <Heading as="h3" size="md" {...labelProps}>
           {label}
         </Heading>
@@ -121,6 +108,8 @@ function SidebarGroup({
         size="sm"
         direction="column"
         gap="xs"
+        isolation="inherit"
+        position="inherit"
         {...buttonGroupProps}
       >
         {items
@@ -133,6 +122,7 @@ function SidebarGroup({
                       <Icon
                         as={icon}
                         color={selected ? "mono.contrast" : "fg.muted"}
+                        fontSize="xl"
                       />
                     }
                     {...rest}
@@ -153,23 +143,32 @@ interface SidebarButtonProps extends ButtonProps {
 }
 
 function SidebarButton({ children, icon, ...rest }: SidebarButtonProps) {
-  const { collapsed } = useSidebar()
-
-  return collapsed ? (
-    <Tooltip content={children} placement="end">
-      <IconButton icon={icon} {...rest} />
-    </Tooltip>
-  ) : (
-    <Button
-      justifyContent="flex-start"
-      px="3"
-      startIcon={icon}
-      w="full"
-      {...rest}
+  return (
+    <Tooltip
+      content={children}
+      flip={false}
+      placement="center-end"
+      contentProps={{
+        display: "none",
+        _container: [{ css: { display: "block" }, maxW: "53px" }],
+      }}
+      portalProps={{ disabled: true }}
     >
-      <Text as="span" display={{ base: "inline", lg: "none" }}>
-        {children}
-      </Text>
-    </Button>
+      <Button
+        justifyContent="flex-start"
+        px="7px"
+        startIcon={icon}
+        w="full"
+        {...rest}
+      >
+        <Text
+          as="span"
+          lineClamp={1}
+          _container={[{ css: { display: "none" }, maxW: "53px" }]}
+        >
+          {children}
+        </Text>
+      </Button>
+    </Tooltip>
   )
 }

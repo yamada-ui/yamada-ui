@@ -1,6 +1,8 @@
 "use client"
 
-import { PoundSterling } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { PoundSterling as OriginalPoundSterlingIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const PoundSterlingIcon = component(Icon)({ as: PoundSterling })
+export const PoundSterlingIcon = component(Icon)({
+  as: OriginalPoundSterlingIcon,
+}) as Component<"svg", IconProps>

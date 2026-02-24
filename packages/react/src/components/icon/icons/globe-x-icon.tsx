@@ -1,6 +1,8 @@
 "use client"
 
-import { GlobeX } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { GlobeX as OriginalGlobeXIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const GlobeXIcon = component(Icon)({ as: GlobeX })
+export const GlobeXIcon = component(Icon)({
+  as: OriginalGlobeXIcon,
+}) as Component<"svg", IconProps>

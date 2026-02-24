@@ -51,7 +51,7 @@ type Component<
 
 export type ComponentSlotName<
   Y extends ComponentSlotStyle | ComponentStyle = ComponentSlotStyle,
-> = AnyString | Extract<keyof Required<Y>["base"], string>
+> = AnyString | Extract<keyof NonNullable<Y["base"]>, string>
 
 export type ComponentSlot<Y extends string> =
   | [Y, Y]

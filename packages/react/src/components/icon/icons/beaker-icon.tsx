@@ -1,6 +1,8 @@
 "use client"
 
-import { Beaker } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Beaker as OriginalBeakerIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const BeakerIcon = component(Icon)({ as: Beaker })
+export const BeakerIcon = component(Icon)({
+  as: OriginalBeakerIcon,
+}) as Component<"svg", IconProps>

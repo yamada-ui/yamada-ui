@@ -1,6 +1,8 @@
 "use client"
 
-import { ChartCandlestick } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { ChartCandlestick as OriginalChartCandlestickIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const ChartCandlestickIcon = component(Icon)({ as: ChartCandlestick })
+export const ChartCandlestickIcon = component(Icon)({
+  as: OriginalChartCandlestickIcon,
+}) as Component<"svg", IconProps>

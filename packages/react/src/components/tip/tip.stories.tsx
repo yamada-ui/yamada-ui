@@ -27,7 +27,7 @@ export const Basic: Story = () => {
 
 export const Status: Story = () => {
   return (
-    <For each={["info", "success", "warning", "error"] as const}>
+    <For each={["help", "info", "success", "warning", "error"] as const}>
       {(status) => (
         <HStack key={status} alignSelf="center" gap="xs">
           <Text as="span" whiteSpace="nowrap">
@@ -42,14 +42,14 @@ export const Status: Story = () => {
 
 export const ColorScheme: Story = () => {
   return (
-    <For each={["info", "success", "warning", "error"] as const}>
+    <For each={["help", "info", "success", "warning", "error"] as const}>
       {(status) => (
         <HStack key={status} alignSelf="center" gap="xs">
           <Text as="span" whiteSpace="nowrap">
             Open "{toTitleCase(status)}" Tip
           </Text>
           <Tip
-            colorScheme={status}
+            colorScheme={status === "help" ? "mono" : status}
             content="俺は俺の責務を全うする!!"
             status={status}
           />

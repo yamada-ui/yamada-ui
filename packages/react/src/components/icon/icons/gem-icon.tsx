@@ -1,6 +1,8 @@
 "use client"
 
-import { Gem } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Gem as OriginalGemIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,7 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const GemIcon = component(Icon)({ as: Gem })
+export const GemIcon = component(Icon)({ as: OriginalGemIcon }) as Component<
+  "svg",
+  IconProps
+>

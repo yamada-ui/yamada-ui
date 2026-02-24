@@ -1,6 +1,8 @@
 "use client"
 
-import { Unlink } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Unlink as OriginalUnlinkIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const UnlinkIcon = component(Icon)({ as: Unlink })
+export const UnlinkIcon = component(Icon)({
+  as: OriginalUnlinkIcon,
+}) as Component<"svg", IconProps>

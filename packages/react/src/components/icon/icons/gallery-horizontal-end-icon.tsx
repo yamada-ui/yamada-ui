@@ -1,6 +1,8 @@
 "use client"
 
-import { GalleryHorizontalEnd } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { GalleryHorizontalEnd as OriginalGalleryHorizontalEndIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -9,5 +11,5 @@ import { component, Icon } from "../icon"
  * @see https://yamada-ui.com/docs/components/icon
  */
 export const GalleryHorizontalEndIcon = component(Icon)({
-  as: GalleryHorizontalEnd,
-})
+  as: OriginalGalleryHorizontalEndIcon,
+}) as Component<"svg", IconProps>

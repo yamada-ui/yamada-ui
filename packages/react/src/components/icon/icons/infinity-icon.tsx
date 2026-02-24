@@ -1,6 +1,8 @@
 "use client"
 
-import { Infinity } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Infinity as OriginalInfinityIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const InfinityIcon = component(Icon)({ as: Infinity })
+export const InfinityIcon = component(Icon)({
+  as: OriginalInfinityIcon,
+}) as Component<"svg", IconProps>

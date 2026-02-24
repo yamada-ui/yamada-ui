@@ -1,6 +1,8 @@
 "use client"
 
-import { Eraser } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Eraser as OriginalEraserIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const EraserIcon = component(Icon)({ as: Eraser })
+export const EraserIcon = component(Icon)({
+  as: OriginalEraserIcon,
+}) as Component<"svg", IconProps>

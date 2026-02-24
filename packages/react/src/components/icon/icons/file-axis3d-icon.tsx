@@ -1,6 +1,8 @@
 "use client"
 
-import { FileAxis3d } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FileAxis3d as OriginalFileAxis3dIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const FileAxis3dIcon = component(Icon)({ as: FileAxis3d })
+export const FileAxis3dIcon = component(Icon)({
+  as: OriginalFileAxis3dIcon,
+}) as Component<"svg", IconProps>

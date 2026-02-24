@@ -1,6 +1,8 @@
 "use client"
 
-import { FileChartLine } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FileChartLine as OriginalFileChartLineIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const FileChartLineIcon = component(Icon)({ as: FileChartLine })
+export const FileChartLineIcon = component(Icon)({
+  as: OriginalFileChartLineIcon,
+}) as Component<"svg", IconProps>

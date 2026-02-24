@@ -13,8 +13,7 @@ interface IndicatorProps extends HTMLStyledProps {
 }
 
 export interface StrengthMeterProps
-  extends HTMLStyledProps,
-    UseStrengthMeterProps {
+  extends HTMLStyledProps, UseStrengthMeterProps {
   /**
    * If `true`, the password strength meter will display the label.
    *

@@ -31,8 +31,10 @@ type ComponentProps<
   as?: M
 }
 
-export interface MotionComponent<Y extends DOMElement, D extends object = {}>
-  extends ComponentArgs {
+export interface MotionComponent<
+  Y extends DOMElement,
+  D extends object = {},
+> extends ComponentArgs {
   <M extends DOMElement = Y>(props: ComponentProps<Y, M, D>): React.ReactElement
 }
 
@@ -43,8 +45,10 @@ export interface MotionStyledComponent<
 
 interface StyledPropsWithoutAs extends Omit<StyledProps, "as"> {}
 
-interface MotionStyledProps
-  extends Merge<StyledPropsWithoutAs, OriginMotionProps> {
+interface MotionStyledProps extends Merge<
+  StyledPropsWithoutAs,
+  OriginMotionProps
+> {
   /**
    * The HTML element to render.
    */

@@ -13,7 +13,7 @@ export function replaceCardGroup(text: string) {
 
       const matches = items.matchAll(/:::card{([^}]+)}([\s\S]+?)\s+:::/g)
 
-      const links: { href: string; label: string; description?: string }[] = []
+      const links: { href: string; description?: string; label: string }[] = []
 
       for (const [, data, description] of matches) {
         const [, title] = data?.match(/title="([^"]+)"/) ?? []

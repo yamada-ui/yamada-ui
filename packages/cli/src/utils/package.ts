@@ -180,8 +180,10 @@ export async function installDependencies(
   }
 }
 
-export interface UninstallDependenciesOptions
-  extends Pick<InstallDependenciesOptions, "cwd"> {}
+export interface UninstallDependenciesOptions extends Pick<
+  InstallDependenciesOptions,
+  "cwd"
+> {}
 
 export async function uninstallDependencies(
   dependencies: string[],

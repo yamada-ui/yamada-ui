@@ -1,6 +1,8 @@
 "use client"
 
-import { FlaskConical } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FlaskConical as OriginalFlaskConicalIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const FlaskConicalIcon = component(Icon)({ as: FlaskConical })
+export const FlaskConicalIcon = component(Icon)({
+  as: OriginalFlaskConicalIcon,
+}) as Component<"svg", IconProps>

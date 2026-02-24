@@ -1,6 +1,8 @@
 "use client"
 
-import { FingerprintPattern } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FingerprintPattern as OriginalFingerprintPatternIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -9,5 +11,5 @@ import { component, Icon } from "../icon"
  * @see https://yamada-ui.com/docs/components/icon
  */
 export const FingerprintPatternIcon = component(Icon)({
-  as: FingerprintPattern,
-})
+  as: OriginalFingerprintPatternIcon,
+}) as Component<"svg", IconProps>

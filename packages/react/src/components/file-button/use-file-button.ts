@@ -8,8 +8,7 @@ import { ariaAttr } from "../../utils"
 import { useFileInput } from "../file-input"
 
 export interface UseFileButtonProps
-  extends UseFileInputProps<"button">,
-    FieldProps {}
+  extends UseFileInputProps<"button">, FieldProps {}
 
 export const useFileButton = (props: UseFileButtonProps = {}) => {
   const { interactive, clickableProps, getInputProps } =

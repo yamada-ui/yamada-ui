@@ -29,16 +29,7 @@ interface Rect {
 }
 
 export interface FlipProps
-  extends Omit<HTMLMotionProps<"button">, "onChange">,
-    ThemeProps<FlipStyle> {
-  /**
-   * Passing React elements to "from" is required.
-   */
-  from: ReactNode
-  /**
-   * Passing React elements to "to" is required.
-   */
-  to: ReactNode
+  extends Omit<HTMLMotionProps<"button">, "onChange">, ThemeProps<FlipStyle> {
   /**
    * You can set the initial state.
    *
@@ -64,6 +55,10 @@ export interface FlipProps
    */
   duration?: number
   /**
+   * Passing React elements to "from" is required.
+   */
+  from: ReactNode
+  /**
    * The orientation of the flip effect. Determines whether the flip occurs horizontally or vertically.
    *
    * @default 'horizontal'
@@ -75,6 +70,10 @@ export interface FlipProps
    * @default false
    */
   readOnly?: boolean
+  /**
+   * Passing React elements to "to" is required.
+   */
+  to: ReactNode
   /**
    * Use this when you want to control the animation from outside the component.
    */

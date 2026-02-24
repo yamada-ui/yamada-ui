@@ -25,7 +25,11 @@ export const chartStyle = defineComponentSlotStyle({
       ...buttonStyle.sizes?.xs,
       ...buttonStyle.variants?.ghost,
     },
-    legendSwatch: { bg: "{line-stroke}", boxSize: "2", rounded: "full" },
+    legendSwatch: {
+      bg: "{legend-swatch-color}",
+      boxSize: "2",
+      rounded: "full",
+    },
     legendValue: { color: "fg.muted", flex: "1", fontSize: "sm" },
     root: { "*": { outline: "none" }, w: "full" },
     tooltipContent: {
@@ -42,22 +46,12 @@ export const chartStyle = defineComponentSlotStyle({
     tooltipLabel: {},
     tooltipList: { display: "flex", flexDirection: "column", gap: "2xs" },
     tooltipName: { color: "fg.muted" },
-    tooltipSwatch: { bg: "{line-stroke}", boxSize: "2", rounded: "full" },
+    tooltipSwatch: {
+      bg: "{tooltip-swatch-color}",
+      boxSize: "2",
+      rounded: "full",
+    },
     tooltipValue: { color: "fg.emphasized", flex: "1", textAlign: "end" },
-    xAxis: {
-      color: "fg.muted",
-      fontSize: "xs",
-      fontWeight: "medium",
-      stroke: "border",
-    },
-    xAxisLabel: { color: "fg.muted", fontSize: "xs", fontWeight: "medium" },
-    yAxis: {
-      color: "fg.muted",
-      fontSize: "xs",
-      fontWeight: "medium",
-      stroke: "border",
-    },
-    yAxisLabel: { color: "fg.muted", fontSize: "xs", fontWeight: "medium" },
   },
 
   sizes: {

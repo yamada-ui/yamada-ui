@@ -1,6 +1,8 @@
 "use client"
 
-import { WeightTilde } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { WeightTilde as OriginalWeightTildeIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const WeightTildeIcon = component(Icon)({ as: WeightTilde })
+export const WeightTildeIcon = component(Icon)({
+  as: OriginalWeightTildeIcon,
+}) as Component<"svg", IconProps>

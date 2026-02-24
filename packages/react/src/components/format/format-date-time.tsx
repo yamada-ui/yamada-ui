@@ -8,7 +8,8 @@ import { formatDateTimeStyle } from "./format-date-time.style"
 import { useFormatDateTime } from "./use-format-date-time"
 
 export interface FormatDateTimeProps
-  extends HTMLStyledProps<"span">,
+  extends
+    HTMLStyledProps<"span">,
     ThemeProps<FormatDateTimeStyle>,
     FormatDateTimeOptions {
   /**

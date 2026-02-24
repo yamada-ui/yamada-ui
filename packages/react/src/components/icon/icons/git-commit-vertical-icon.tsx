@@ -1,6 +1,8 @@
 "use client"
 
-import { GitCommitVertical } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { GitCommitVertical as OriginalGitCommitVerticalIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const GitCommitVerticalIcon = component(Icon)({ as: GitCommitVertical })
+export const GitCommitVerticalIcon = component(Icon)({
+  as: OriginalGitCommitVerticalIcon,
+}) as Component<"svg", IconProps>

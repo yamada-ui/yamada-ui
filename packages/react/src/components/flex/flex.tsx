@@ -6,8 +6,7 @@ import { createComponent } from "../../core"
 import { flexStyle } from "./flex.style"
 
 export interface FlexProps
-  extends Omit<HTMLStyledProps, "direction">,
-    ThemeProps<FlexStyle> {
+  extends Omit<HTMLStyledProps, "direction">, ThemeProps<FlexStyle> {
   /**
    * The CSS `align-items` property.
    */

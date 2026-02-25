@@ -60,30 +60,26 @@ describe("<Skeleton />", () => {
 
   test("sets duration as number (appends 's')", () => {
     render(<Skeleton data-testid="skeleton" duration={2} />)
-    expect(screen.getByTestId("skeleton")).toHaveStyle({
-      "--duration": "2s",
-    })
+    expect(screen.getByTestId("skeleton")).toHaveStyle("--duration: 2s")
   })
 
   test("sets duration as string (passes through)", () => {
     render(<Skeleton data-testid="skeleton" duration="0.5s" />)
-    expect(screen.getByTestId("skeleton")).toHaveStyle({
-      "--duration": "0.5s",
-    })
+    expect(screen.getByTestId("skeleton")).toHaveStyle("--duration: 0.5s")
   })
 
   test("sets fadeDuration as number (appends 's')", () => {
     render(<Skeleton data-testid="skeleton" fadeDuration={0.4} />)
-    expect(screen.getByTestId("skeleton")).toHaveStyle({
-      "--fade-duration": "0.4s",
-    })
+    expect(screen.getByTestId("skeleton")).toHaveStyle(
+      "--fade-duration: 0.4s",
+    )
   })
 
   test("sets fadeDuration as string (passes through)", () => {
     render(<Skeleton data-testid="skeleton" fadeDuration="0.8s" />)
-    expect(screen.getByTestId("skeleton")).toHaveStyle({
-      "--fade-duration": "0.8s",
-    })
+    expect(screen.getByTestId("skeleton")).toHaveStyle(
+      "--fade-duration: 0.8s",
+    )
   })
 
   test("sets startColor and endColor", () => {
@@ -100,10 +96,9 @@ describe("<Skeleton />", () => {
 
   test("sets fitContent when explicitly true (no children)", () => {
     render(<Skeleton data-testid="skeleton" fitContent />)
-    expect(screen.getByTestId("skeleton")).toHaveStyle({
-      "--height": "fit-content",
-      "--width": "fit-content",
-    })
+    expect(screen.getByTestId("skeleton")).toHaveStyle(
+      "--height: fit-content; --width: fit-content",
+    )
   })
 
   test("sets fitContent automatically when children are present", () => {
@@ -112,10 +107,9 @@ describe("<Skeleton />", () => {
         <span>Content</span>
       </Skeleton>,
     )
-    expect(screen.getByTestId("skeleton")).toHaveStyle({
-      "--height": "fit-content",
-      "--width": "fit-content",
-    })
+    expect(screen.getByTestId("skeleton")).toHaveStyle(
+      "--height: fit-content; --width: fit-content",
+    )
   })
 
   test("does not set fitContent when false and no children", () => {

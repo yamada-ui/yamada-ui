@@ -5,13 +5,13 @@ import { tokens } from "./tokens"
 type TransformProperties = ConditionSelector | Properties
 
 export interface TransformOptions {
-  transform: Transforms
   args?: string[]
+  transform: Transforms
 }
 
 interface TransformValue {
-  properties: TransformProperties
   args?: string[]
+  properties: TransformProperties
 }
 
 type TransformProps = {

@@ -84,10 +84,10 @@ export interface Dependencies {
 }
 
 export interface Registry {
-  section: RegistrySection
-  sources: Source[]
   dependencies?: Dependencies
   dependents?: Dependents
+  section: RegistrySection
+  sources: Source[]
 }
 
 export interface Registries {
@@ -95,8 +95,8 @@ export interface Registries {
 }
 
 export interface WantedVersion {
-  wanted: string
   current?: string
+  wanted: string
 }
 
 export type PackageNameWithVersion = string | (WantedVersion & { name: string })

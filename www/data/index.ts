@@ -7,10 +7,10 @@ import ja from "./doc-map.ja.json"
 
 interface Prop {
   type: string
-  description: string
-  required: boolean
   defaultValue?: string
   deprecated?: string
+  description: string
+  required: boolean
   see?: string
 }
 
@@ -45,11 +45,11 @@ export interface StyleConfig {
 }
 
 export interface DocMap {
-  segment: string
-  title: Doc["title"]
   items?: DocMap[]
   pathname?: string
+  segment: string
   status?: Doc["status"]
+  title: Doc["title"]
   __exists?: boolean
 }
 
@@ -75,10 +75,10 @@ export function flattenDocMap(items: DocMap[]): DocMap[] {
 
 export interface FragmentContent {
   type: "fragment"
+  group?: string
   hierarchy: { [key: number]: string }
   pathname: string
   title: string
-  group?: string
 }
 
 function getFragments(
@@ -110,9 +110,9 @@ function getFragments(
 
 export interface PageContent {
   type: "page"
+  group?: string
   pathname: string
   title: string
-  group?: string
 }
 
 export function getContents(locale: string): (FragmentContent | PageContent)[] {

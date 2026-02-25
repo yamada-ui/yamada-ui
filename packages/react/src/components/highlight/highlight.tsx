@@ -12,15 +12,15 @@ export interface HighlightProps extends Omit<TextProps, "children"> {
    */
   children: string
   /**
-   * Can be a single string or an array of strings. These are the terms that are highlighted in the text.
-   */
-  query: string | string[]
-  /**
    * If `true`, `Fragment` is used for rendering.
    *
    * @default false
    */
   fragment?: boolean
+  /**
+   * Can be a single string or an array of strings. These are the terms that are highlighted in the text.
+   */
+  query: string | string[]
   /**
    * Properties passed to the Mark component which is used to highlight the matched terms.
    */

@@ -1,6 +1,8 @@
 "use client"
 
-import { SlidersHorizontal } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { SlidersHorizontal as OriginalSlidersHorizontalIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const SlidersHorizontalIcon = component(Icon)({ as: SlidersHorizontal })
+export const SlidersHorizontalIcon = component(Icon)({
+  as: OriginalSlidersHorizontalIcon,
+}) as Component<"svg", IconProps>

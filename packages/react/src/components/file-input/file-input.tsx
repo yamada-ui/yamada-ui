@@ -16,7 +16,8 @@ import { useFileInput } from "./use-file-input"
 const defaultFormat: (value: File, index: number) => string = ({ name }) => name
 
 export interface FileInputProps
-  extends Omit<
+  extends
+    Omit<
       HTMLStyledProps<"input">,
       "children" | "defaultValue" | "onChange" | "value"
     >,

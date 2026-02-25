@@ -64,8 +64,8 @@ export type FeatureData = Extract<
 export type BrowserIdentifier = FeatureData["status"]["support"]
 
 export interface CSSCompatStatement extends CompatStatement {
-  name: string
   type?: string
+  name: string
   feature?: FeatureData
 }
 
@@ -272,10 +272,10 @@ function generateType({
 }
 
 export interface Doc {
+  baseline?: Baseline
   deprecated: boolean
   description: string
   experimental: boolean
-  baseline?: Baseline
   see?: string
 }
 

@@ -7,11 +7,11 @@ import { isObject, isString, isUndefined } from "../../utils"
 import { getColorSchemeVar, isColorScheme } from "../system"
 
 export interface TransformOptions {
-  system: System
   css?: CSSFunction
   fallback?: any
   prev?: Dict
   properties?: CSSProperties[]
+  system: System
   theme?: UsageTheme
 }
 

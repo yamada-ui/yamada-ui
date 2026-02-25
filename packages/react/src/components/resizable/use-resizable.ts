@@ -31,8 +31,10 @@ import {
   mergeRefs,
 } from "../../utils"
 
-interface ResizableContext
-  extends Omit<UseResizableReturn, "getGroupProps" | "getRootProps"> {}
+interface ResizableContext extends Omit<
+  UseResizableReturn,
+  "getGroupProps" | "getRootProps"
+> {}
 
 const [ResizableContext, useResizableContext] = createContext<ResizableContext>(
   {
@@ -46,8 +48,10 @@ export interface ResizableStorage extends PanelGroupStorage {}
 export interface ResizableGroupControl extends ImperativePanelGroupHandle {}
 export interface ResizableItemControl extends ImperativePanelHandle {}
 
-interface ResizableGroupProps
-  extends Omit<Partial<PanelGroupProps>, "tagName"> {
+interface ResizableGroupProps extends Omit<
+  Partial<PanelGroupProps>,
+  "tagName"
+> {
   /**
    * Ref of the resizable group callback.
    */
@@ -68,8 +72,7 @@ interface ResizableItemProps extends Omit<PanelProps, "tagName"> {
   as?: keyof HTMLElementTagNameMap
 }
 interface ResizableTriggerProps
-  extends Omit<PanelResizeHandleProps, "tagName">,
-    HTMLRefAttributes {
+  extends Omit<PanelResizeHandleProps, "tagName">, HTMLRefAttributes {
   /**
    * The HTML element to render.
    */
@@ -186,8 +189,7 @@ export const useResizable = ({
 export type UseResizableReturn = ReturnType<typeof useResizable>
 
 export interface UseResizableItemProps
-  extends HTMLProps,
-    Pick<ResizableItemProps, "as"> {
+  extends HTMLProps, Pick<ResizableItemProps, "as"> {
   /**
    * The collapsed size of the resizable item.
    */
@@ -275,8 +277,7 @@ export const useResizableItem = ({
 export type UseResizableItemReturn = ReturnType<typeof useResizableItem>
 
 export interface UseResizableTriggerProps
-  extends HTMLProps,
-    Pick<ResizableTriggerProps, "as"> {
+  extends HTMLProps, Pick<ResizableTriggerProps, "as"> {
   /**
    * If `true`, the resizable trigger will be disabled.
    *

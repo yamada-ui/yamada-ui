@@ -1,6 +1,8 @@
 "use client"
 
-import { FileXCorner } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FileXCorner as OriginalFileXCornerIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const FileXCornerIcon = component(Icon)({ as: FileXCorner })
+export const FileXCornerIcon = component(Icon)({
+  as: OriginalFileXCornerIcon,
+}) as Component<"svg", IconProps>

@@ -33,17 +33,17 @@ import {
 } from "typescript"
 
 interface ExportedType {
-  name: string
   as?: string
+  name: string
   namespace?: string
 }
 
 interface Prop {
   type: string
-  description: string
-  required: boolean
   defaultValue?: string
   deprecated?: string
+  description: string
+  required: boolean
   see?: string
 }
 
@@ -51,7 +51,12 @@ interface Props {
   [key: string]: Prop
 }
 
-const CONFIG_PATH = path.join(process.cwd(), "tsconfig.json")
+const CONFIG_PATH = path.join(
+  process.cwd(),
+  "packages",
+  "react",
+  "tsconfig.json",
+)
 const ENTRY_PATH = path.join(
   process.cwd(),
   "packages",

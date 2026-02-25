@@ -16,6 +16,7 @@ import type {
 } from "recharts/types/util/types"
 import type {
   CSSObject,
+  CSSProps,
   GenericsComponent,
   HTMLProps,
   HTMLStyledProps,
@@ -40,6 +41,7 @@ import {
   styled,
   useSystem,
   useTheme,
+  varAttr,
 } from "../../core"
 import { cx, isFunction, isObject, splitObject } from "../../utils"
 import { cartesianChartStyle } from "./cartesian-chart.style"
@@ -62,6 +64,74 @@ interface ComponentContext extends Pick<
 export interface CartesianChartProps<Y extends Dict = Dict>
   extends ChartProps<Y>, ThemeProps<CartesianChartStyle> {
   /**
+   * The fill color of the active dots.
+   */
+  activeDotFill?: CSSProps["color"]
+  /**
+   * The radius of the active dots.
+   */
+  activeDotRadius?: number
+  /**
+   * The stroke color of the active dots.
+   */
+  activeDotStroke?: CSSProps["color"]
+  /**
+   * The stroke width of the active dots.
+   */
+  activeDotStrokeWidth?: number
+  /**
+   * The fill color of the dots.
+   */
+  dotFill?: CSSProps["color"]
+  /**
+   * The radius of the dots.
+   */
+  dotRadius?: number
+  /**
+   * The stroke color of the dots.
+   */
+  dotStroke?: CSSProps["color"]
+  /**
+   * The stroke width of the dots.
+   */
+  dotStrokeWidth?: number
+  /**
+   * The opacity of the inactive lines.
+   */
+  inactiveLineOpacity?: number
+  /**
+   * The fill color of the labels.
+   */
+  labelFill?: CSSProps["color"]
+  /**
+   * The color of the lines.
+   */
+  lineColor?: CSSProps["color"]
+  /**
+   * The stroke color of the lines.
+   */
+  lineStroke?: CSSProps["color"]
+  /**
+   * The stroke width of the lines.
+   */
+  lineStrokeWidth?: number
+  /**
+   * The color of the reference lines.
+   */
+  referenceLineColor?: CSSProps["color"]
+  /**
+   * The stroke color of the reference lines.
+   */
+  referenceLineStroke?: CSSProps["color"]
+  /**
+   * The stroke width of the reference lines.
+   */
+  referenceLineStrokeWidth?: number
+  /**
+   * The text fill color of the reference lines.
+   */
+  referenceLineTextFill?: CSSProps["color"]
+  /**
    * If `true`, grid is visible.
    *
    * @default true
@@ -79,6 +149,38 @@ export interface CartesianChartProps<Y extends Dict = Dict>
    * @default false
    */
   withYAxis?: boolean
+  /**
+   * The stroke color of the x-axis lines.
+   */
+  xAxisLineStroke?: CSSProps["color"]
+  /**
+   * The stroke width of the x-axis lines.
+   */
+  xAxisLineStrokeWidth?: number
+  /**
+   * The text color of the x-axis.
+   */
+  xAxisTextColor?: CSSProps["color"]
+  /**
+   * The text fill color of the x-axis.
+   */
+  xAxisTextFill?: CSSProps["color"]
+  /**
+   * The stroke color of the y-axis lines.
+   */
+  yAxisLineStroke?: CSSProps["color"]
+  /**
+   * The stroke width of the y-axis lines.
+   */
+  yAxisLineStrokeWidth?: number
+  /**
+   * The text color of the y-axis.
+   */
+  yAxisTextColor?: CSSProps["color"]
+  /**
+   * The text fill color of the y-axis.
+   */
+  yAxisTextFill?: CSSProps["color"]
   /**
    * Props for the grid component.
    */
@@ -166,7 +268,64 @@ export const CartesianChart = withProvider(
     )
   },
   "root",
-)() as GenericsComponent<{
+)(
+  undefined,
+  ({
+    activeDotFill,
+    activeDotRadius,
+    activeDotStroke,
+    activeDotStrokeWidth,
+    dotFill,
+    dotRadius,
+    dotStroke,
+    dotStrokeWidth,
+    inactiveLineOpacity,
+    labelFill,
+    lineColor,
+    lineStroke,
+    lineStrokeWidth,
+    referenceLineColor,
+    referenceLineStroke,
+    referenceLineStrokeWidth,
+    referenceLineTextFill,
+    xAxisLineStroke,
+    xAxisLineStrokeWidth,
+    xAxisTextColor,
+    xAxisTextFill,
+    yAxisLineStroke,
+    yAxisLineStrokeWidth,
+    yAxisTextColor,
+    yAxisTextFill,
+    ...rest
+  }) => ({
+    "--active-dot-fill": varAttr(activeDotFill, "colors"),
+    "--active-dot-r": activeDotRadius,
+    "--active-dot-stroke": varAttr(activeDotStroke, "colors"),
+    "--active-dot-stroke-width": activeDotStrokeWidth,
+    "--dot-fill": varAttr(dotFill, "colors"),
+    "--dot-r": dotRadius,
+    "--dot-stroke": varAttr(dotStroke, "colors"),
+    "--dot-stroke-width": dotStrokeWidth,
+    "--inactive-line-opacity": inactiveLineOpacity,
+    "--label-fill": varAttr(labelFill, "colors"),
+    "--line-color": varAttr(lineColor, "colors"),
+    "--line-stroke": varAttr(lineStroke, "colors"),
+    "--line-stroke-width": lineStrokeWidth,
+    "--reference-line-color": varAttr(referenceLineColor, "colors"),
+    "--reference-line-stroke": varAttr(referenceLineStroke, "colors"),
+    "--reference-line-stroke-width": referenceLineStrokeWidth,
+    "--reference-line-text-fill": varAttr(referenceLineTextFill, "colors"),
+    "--x-axis-line-stroke": varAttr(xAxisLineStroke, "colors"),
+    "--x-axis-line-stroke-width": xAxisLineStrokeWidth,
+    "--x-axis-text-color": varAttr(xAxisTextColor, "colors"),
+    "--x-axis-text-fill": varAttr(xAxisTextFill, "colors"),
+    "--y-axis-line-stroke": varAttr(yAxisLineStroke, "colors"),
+    "--y-axis-line-stroke-width": yAxisLineStrokeWidth,
+    "--y-axis-text-color": varAttr(yAxisTextColor, "colors"),
+    "--y-axis-text-fill": varAttr(yAxisTextFill, "colors"),
+    ...rest,
+  }),
+) as GenericsComponent<{
   <Y extends Dict>(props: CartesianChartProps<Y>): ReactElement
 }>
 

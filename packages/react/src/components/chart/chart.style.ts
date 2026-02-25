@@ -5,8 +5,8 @@ import { tooltipStyle } from "../tooltip"
 export const chartStyle = defineComponentSlotStyle({
   base: {
     labelList: {
-      color: "{label-color}",
-      fill: "{label-fill}",
+      color: "{label-list-color}",
+      fill: "{label-list-fill}",
       fontSize: "xs",
       fontWeight: "medium",
       stroke: "none",
@@ -40,8 +40,8 @@ export const chartStyle = defineComponentSlotStyle({
     legendValue: { color: "fg.muted", flex: "1", fontSize: "sm" },
     root: {
       "*": { outline: "none" },
-      "--label-color": "currentColor",
-      "--label-fill": "currentColor",
+      "--label-list-color": "currentColor",
+      "--label-list-fill": "currentColor",
       w: "full",
     },
     tooltipContent: {

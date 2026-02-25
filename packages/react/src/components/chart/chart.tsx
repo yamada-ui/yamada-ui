@@ -11,12 +11,13 @@ import type { Dict, Merge } from "../../utils"
 import type { ChartLineProps } from "./cartesian-chart"
 import type { ChartStyle } from "./chart.style"
 import type {
+  UseChartLabelListProps,
   UseChartLegendProps,
   UseChartLegendReturn,
   UseChartTooltipProps,
 } from "./use-chart"
 import { Fragment, isValidElement, useMemo } from "react"
-import { Legend, ResponsiveContainer, Tooltip } from "recharts"
+import { LabelList, Legend, ResponsiveContainer, Tooltip } from "recharts"
 import { createSlotComponent, styled, varAttr } from "../../core"
 import {
   createContext,
@@ -30,6 +31,7 @@ import { chartStyle } from "./chart.style"
 import {
   ChartContext,
   useChart,
+  useChartLabelList,
   useChartLegend,
   useChartTooltip,
 } from "./use-chart"
@@ -498,4 +500,22 @@ interface ChartTooltipValue extends HTMLStyledProps<"span"> {}
 const ChartTooltipValue = withContext<"span", ChartTooltipValue>(
   "span",
   "tooltipValue",
+)()
+
+export interface ChartLabelListProps extends Merge<
+  HTMLStyledProps<"text">,
+  UseChartLabelListProps
+> {}
+
+export const ChartLabelList = withContext<"text", ChartLabelListProps>(
+  (props) => {
+    const { getLabelListProps, getRootProps } = useChartLabelList(props)
+
+    return (
+      <styled.text asChild {...getRootProps()}>
+        <LabelList {...getLabelListProps()} />
+      </styled.text>
+    )
+  },
+  "labelList",
 )()

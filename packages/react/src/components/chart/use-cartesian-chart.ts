@@ -2,7 +2,6 @@
 
 import type {
   CartesianGridProps,
-  LabelListProps,
   LineProps,
   ReferenceLineProps,
   XAxisProps,
@@ -611,75 +610,6 @@ export const useChartReferenceLine = ({
 export type UseChartReferenceLineReturn = ReturnType<
   typeof useChartReferenceLine
 >
-
-export interface UseChartLabelListProps extends Merge<
-  HTMLProps<"text">,
-  Pick<
-    LabelListProps,
-    | "angle"
-    | "clockWise"
-    | "content"
-    | "dataKey"
-    | "formatter"
-    | "offset"
-    | "position"
-    | "textBreakAll"
-    | "valueAccessor"
-    | "zIndex"
-  >
-> {}
-
-export const useChartLabelList = ({
-  angle,
-  clockWise,
-  content,
-  dataKey,
-  formatter,
-  offset = 12,
-  position = "top",
-  textBreakAll,
-  valueAccessor,
-  zIndex,
-  ...rest
-}: UseChartLabelListProps = {}) => {
-  const getRootProps: PropGetter<"text"> = useCallback(
-    (props) => ({ ...rest, ...props }),
-    [rest],
-  )
-
-  const getLabelListProps: PropGetter<LabelListProps> = useCallback(
-    (props) => ({
-      angle,
-      clockWise,
-      content,
-      dataKey,
-      fill: "",
-      formatter,
-      offset,
-      position,
-      textBreakAll,
-      valueAccessor,
-      zIndex,
-      ...props,
-    }),
-    [
-      angle,
-      clockWise,
-      content,
-      dataKey,
-      formatter,
-      offset,
-      position,
-      textBreakAll,
-      valueAccessor,
-      zIndex,
-    ],
-  )
-
-  return { getLabelListProps, getRootProps }
-}
-
-export type UseChartLabelListReturn = ReturnType<typeof useChartLabelList>
 
 export interface UseChartGridProps extends Merge<
   HTMLProps<"line">,

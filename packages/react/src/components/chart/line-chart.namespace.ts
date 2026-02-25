@@ -3,7 +3,7 @@ import type {
   ChartDot as Dot,
   ChartGridProps as GridProps,
   ChartLabel as Label,
-  ChartLabelListProps as LabelListProps,
+  ChartLineLabel as LineLabel,
   ChartLineProps as LineProps,
   ChartReferenceLineProps as ReferenceLineProps,
   ChartTickLine as TickLine,
@@ -13,19 +13,23 @@ import type {
   ChartYAxisTick as YAxisTick,
 } from "./cartesian-chart"
 import type {
+  ChartLabelListProps as LabelListProps,
   ChartLegendProps as LegendProps,
   ChartTooltipProps as TooltipProps,
 } from "./chart"
 import type { LineChartProps as RootProps } from "./line-chart"
 import {
   ChartGrid as Grid,
-  ChartLabelList as LabelList,
   ChartLine as Line,
   ChartReferenceLine as ReferenceLine,
   ChartXAxis as XAxis,
   ChartYAxis as YAxis,
 } from "./cartesian-chart"
-import { ChartLegend as Legend, ChartTooltip as Tooltip } from "./chart"
+import {
+  ChartLabelList as LabelList,
+  ChartLegend as Legend,
+  ChartTooltip as Tooltip,
+} from "./chart"
 import {
   LineChartPropsContext as PropsContext,
   LineChart as Root,
@@ -52,6 +56,7 @@ export type {
   Label,
   LabelListProps,
   LegendProps,
+  LineLabel,
   LineProps,
   ReferenceLineProps,
   RootProps,

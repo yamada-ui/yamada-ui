@@ -4,6 +4,13 @@ import { tooltipStyle } from "../tooltip"
 
 export const chartStyle = defineComponentSlotStyle({
   base: {
+    labelList: {
+      color: "{label-color}",
+      fill: "{label-fill}",
+      fontSize: "xs",
+      fontWeight: "medium",
+      stroke: "none",
+    },
     legend: { mb: "md" },
     legendContent: {
       "&:is([data-align=center])": { justifyContent: "center" },
@@ -31,7 +38,12 @@ export const chartStyle = defineComponentSlotStyle({
       rounded: "full",
     },
     legendValue: { color: "fg.muted", flex: "1", fontSize: "sm" },
-    root: { "*": { outline: "none" }, w: "full" },
+    root: {
+      "*": { outline: "none" },
+      "--label-color": "currentColor",
+      "--label-fill": "currentColor",
+      w: "full",
+    },
     tooltipContent: {
       ...tooltipStyle.base?.content,
       display: "flex",

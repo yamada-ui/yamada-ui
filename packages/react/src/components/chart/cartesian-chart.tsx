@@ -23,24 +23,16 @@ import type {
 } from "../../core"
 import type { Dict, Merge } from "../../utils"
 import type { CartesianChartStyle } from "./cartesian-chart.style"
-import type { ChartProps } from "./chart"
+import type { ChartLabelListProps, ChartProps } from "./chart"
 import type {
   UseChartGridProps,
-  UseChartLabelListProps,
   UseChartLineProps,
   UseChartReferenceLineProps,
   UseChartXAxisProps,
   UseChartYAxisProps,
 } from "./use-cartesian-chart"
 import { cloneElement, isValidElement, useMemo } from "react"
-import {
-  CartesianGrid,
-  LabelList,
-  Line,
-  ReferenceLine,
-  XAxis,
-  YAxis,
-} from "recharts"
+import { CartesianGrid, Line, ReferenceLine, XAxis, YAxis } from "recharts"
 import {
   createShouldForwardProp,
   createSlotComponent,
@@ -54,7 +46,6 @@ import { cartesianChartStyle } from "./cartesian-chart.style"
 import { Chart, useChartComponentContext } from "./chart"
 import {
   useChartGrid,
-  useChartLabelList,
   useChartLine,
   useChartReferenceLine,
   useChartXAxis,
@@ -95,7 +86,7 @@ export interface CartesianChartProps<Y extends Dict = Dict>
   /**
    * Props for the line component.
    */
-  lineProps?: Omit<ChartLineProps, "dataKey">
+  lineProps?: Omit<ChartLineProps, "data" | "dataKey">
   /**
    * Props for the reference line component.
    */
@@ -491,6 +482,12 @@ export type ChartActiveDot =
   | Merge<Partial<ActiveDotProps>, HTMLStyledProps<"circle">>
   | ReactElement
 
+export type ChartLineLabel =
+  | ((props: LabelProps) => ReactElement | RenderableText)
+  | boolean
+  | ChartLabelListProps
+  | ReactElement
+
 export interface ChartLineProps<Y extends Dict = Dict> extends Merge<
   HTMLStyledProps<"line">,
   Omit<UseChartLineProps, "activeDot" | "data" | "dataKey" | "dot" | "label">
@@ -520,11 +517,7 @@ export interface ChartLineProps<Y extends Dict = Dict> extends Merge<
    *
    * @default false
    */
-  label?:
-    | ((props: LabelProps) => ReactElement | RenderableText)
-    | boolean
-    | ChartLabelListProps
-    | ReactElement
+  label?: ChartLineLabel
 }
 
 export const ChartLine = withContext<"line", ChartLineProps>((props) => {
@@ -661,24 +654,6 @@ export const ChartLine = withContext<"line", ChartLineProps>((props) => {
 }, "line")() as GenericsComponent<{
   <Y extends Dict>(props: ChartLineProps<Y>): ReactElement
 }>
-
-export interface ChartLabelListProps extends Merge<
-  HTMLStyledProps<"text">,
-  UseChartLabelListProps
-> {}
-
-export const ChartLabelList = withContext<"text", ChartLabelListProps>(
-  (props) => {
-    const { getLabelListProps, getRootProps } = useChartLabelList(props)
-
-    return (
-      <styled.text asChild {...getRootProps()}>
-        <LabelList {...getLabelListProps()} />
-      </styled.text>
-    )
-  },
-  "labelList",
-)()
 
 export interface ChartReferenceLineProps extends Omit<
   Merge<HTMLStyledProps<"line">, UseChartReferenceLineProps>,

@@ -4,7 +4,6 @@ export * from "./line-chart.style"
 export {
   CartesianChart,
   ChartGrid,
-  ChartLabelList,
   ChartLine,
   ChartReferenceLine,
   ChartXAxis,
@@ -16,7 +15,7 @@ export type {
   ChartDot,
   ChartGridProps,
   ChartLabel,
-  ChartLabelListProps,
+  ChartLineLabel,
   ChartLineProps,
   ChartReferenceLineProps,
   ChartTickLine,
@@ -27,12 +26,18 @@ export type {
 } from "./cartesian-chart"
 export {
   Chart,
+  ChartLabelList,
   ChartLegend,
   ChartPropsContext,
   ChartTooltip,
   useChartPropsContext,
 } from "./chart"
-export type { ChartLegendProps, ChartProps, ChartTooltipProps } from "./chart"
+export type {
+  ChartLabelListProps,
+  ChartLegendProps,
+  ChartProps,
+  ChartTooltipProps,
+} from "./chart"
 export * as LineChart from "./line-chart.namespace"
 export * from "./use-cartesian-chart"
 export * from "./use-chart"

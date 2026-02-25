@@ -1,4 +1,5 @@
 import { defineComponentSlotStyle } from "../../core"
+import { chartStyle } from "./chart.style"
 
 export const cartesianChartStyle = defineComponentSlotStyle({
   base: {
@@ -15,12 +16,7 @@ export const cartesianChartStyle = defineComponentSlotStyle({
       strokeWidth: "{dot-stroke-width}",
     },
     grid: { stroke: "border" },
-    labelList: {
-      fill: "{label-fill}",
-      fontSize: "xs",
-      fontWeight: "medium",
-      stroke: "none",
-    },
+    labelList: chartStyle.base?.labelList,
     line: {
       "&:has(> path[data-inactive])": {
         opacity: "{inactive-line-opacity}",
@@ -50,7 +46,6 @@ export const cartesianChartStyle = defineComponentSlotStyle({
       "--dot-stroke": "{line-stroke}",
       "--dot-stroke-width": "0",
       "--inactive-line-opacity": "0.4",
-      "--label-fill": "currentColor",
       "--line-color": "colorScheme.solid",
       "--line-stroke": "currentColor",
       "--line-stroke-width": "2",

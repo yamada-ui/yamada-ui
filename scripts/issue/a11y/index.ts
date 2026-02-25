@@ -56,10 +56,10 @@ interface AssertionResult {
 }
 
 interface TestResult {
-  name: string
   assertionResults: AssertionResult[]
   endTime: number
   message: string
+  name: string
   startTime: number
   status: string
   summary: string

@@ -39,14 +39,6 @@ export interface UseColorPickerProps
     HTMLRefAttributes<"input">,
     FieldProps {
   /**
-   * The `id` attribute of the input element.
-   */
-  id?: string
-  /**
-   * The `name` attribute of the input element.
-   */
-  name?: string
-  /**
    * If `true`, allows input.
    *
    * @default true
@@ -76,9 +68,13 @@ export interface UseColorPickerProps
    */
   format?: ColorFormat
   /**
-   * The function to format the input value.
+   * The `id` attribute of the input element.
    */
-  formatInput?: (value: string) => string
+  id?: string
+  /**
+   * The `name` attribute of the input element.
+   */
+  name?: string
   /**
    * If `true`, the color picker will be opened when the input value changes.
    *
@@ -103,6 +99,10 @@ export interface UseColorPickerProps
    * The value of the color picker.
    */
   value?: string
+  /**
+   * The function to format the input value.
+   */
+  formatInput?: (value: string) => string
   /**
    * The callback invoked when the value changes.
    */

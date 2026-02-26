@@ -10,22 +10,20 @@ import { checkersProps } from "../color-swatch"
 import { HueSlider } from "../hue-slider"
 import { alphaSliderStyle } from "./alpha-slider.style"
 
-interface ComponentContext
-  extends Pick<
-    Required<AlphaSliderRootProps>,
-    "color" | "max" | "min" | "orientation"
-  > {}
+interface ComponentContext extends Pick<
+  Required<AlphaSliderRootProps>,
+  "color" | "max" | "min" | "orientation"
+> {}
 
 export const getAriaValueText = (alpha: number) => `${alpha * 100}%`
 
-export interface AlphaSliderRootProps
-  extends WithoutThemeProps<
-    Omit<
-      HueSlider.RootProps,
-      "color" | "max" | "step" | "thumbProps" | "trackProps"
-    >,
-    AlphaSliderStyle
-  > {
+export interface AlphaSliderRootProps extends WithoutThemeProps<
+  Omit<
+    HueSlider.RootProps,
+    "color" | "max" | "step" | "thumbProps" | "trackProps"
+  >,
+  AlphaSliderStyle
+> {
   /**
    * The color used for the slider.
    */

@@ -10,11 +10,11 @@ import { transform as originalTransform } from "sucrase"
 import { wait } from "@/utils/async"
 
 interface Data {
-  id: string
   age: number
   createdAt: Date
   email: string
   firstName: string
+  id: string
   lastName: string
   phone: string
   role: string

@@ -1,6 +1,8 @@
 "use client"
 
-import { SquareDashedMousePointer } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { SquareDashedMousePointer as OriginalSquareDashedMousePointerIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -9,5 +11,5 @@ import { component, Icon } from "../icon"
  * @see https://yamada-ui.com/docs/components/icon
  */
 export const SquareDashedMousePointerIcon = component(Icon)({
-  as: SquareDashedMousePointer,
-})
+  as: OriginalSquareDashedMousePointerIcon,
+}) as Component<"svg", IconProps>

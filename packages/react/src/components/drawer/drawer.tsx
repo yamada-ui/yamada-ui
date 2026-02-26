@@ -27,14 +27,16 @@ import { drawerStyle } from "./drawer.style"
 import { useDrawer } from "./use-drawer"
 
 interface ComponentContext
-  extends Omit<UseDrawerReturn, "getRootProps">,
+  extends
+    Omit<UseDrawerReturn, "getRootProps">,
     Pick<
       DrawerRootProps,
       "duration" | "placement" | "withCloseButton" | "withDragBar"
     > {}
 
 export interface DrawerRootProps
-  extends ThemeProps<DrawerStyle>,
+  extends
+    ThemeProps<DrawerStyle>,
     Omit<UseDrawerProps, "placement" | "title">,
     Pick<
       FocusLockProps,
@@ -284,8 +286,7 @@ export const DrawerOverlay = withContext<"div", DrawerOverlayProps>((props) => {
 }, "overlay")()
 
 export interface DrawerContentProps
-  extends Omit<HTMLMotionProps<"section">, "children">,
-    PropsWithChildren {}
+  extends Omit<HTMLMotionProps<"section">, "children">, PropsWithChildren {}
 
 export const DrawerContent = withContext<"div", DrawerContentProps>(
   ({ children, ...rest }) => {

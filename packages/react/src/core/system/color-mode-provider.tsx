@@ -19,9 +19,9 @@ import { getPreventTransition } from "./theme-provider"
 import { useSystemColorMode } from "./use-system-color-mode"
 
 interface ColorModeContext {
-  changeColorMode: (colorMode: ColorModeWithSystem) => void
   colorMode: ColorMode
   internalColorMode: ColorModeWithSystem
+  changeColorMode: (colorMode: ColorModeWithSystem) => void
   toggleColorMode: () => void
   forced?: boolean
 }

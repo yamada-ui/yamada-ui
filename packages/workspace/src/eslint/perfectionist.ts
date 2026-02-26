@@ -41,25 +41,53 @@ const otherPseudos = sortPseudos
   .join("|")
 
 const sortObjectGroups = {
-  customGroups: {
-    aria: "^aria-.+",
-    callback: "^on.*",
-    data: "^data-.+",
-    internal: "^__.+",
-    primary: ["^key$", "^ref$", "^id$", "^lang$"],
-    props: ".+Props$",
-    pseudos: `^_(?!.*(${otherPseudos})$).*$`,
-    ...Object.fromEntries(
-      sortPseudos.map((pseudos, index) => [`pseudos${index + 1}`, pseudos]),
-    ),
-    quaternary: ["^className$", "^alt$"],
-    quinary: ["^css$", "^sx$", "^style$"],
-    secondary: ["^as$", "^form$", "^type$", "^htmlFor$"],
-    senary: ["^layerStyle$", "^textStyle$", "^apply$"],
-    septenary: ["^variant$", "^size$", "^colorScheme$"],
-    tertiary: ["^name$", "^src$", "^srcSet$", "^href$", "^target$", "^rel$"],
-    ...semanticSizes,
-  },
+  customGroups: [
+    {
+      elementNamePattern: ["^key$", "^ref$", "^id$", "^lang$"],
+      groupName: "primary",
+    },
+    {
+      elementNamePattern: ["^as$", "^form$", "^type$", "^htmlFor$"],
+      groupName: "secondary",
+    },
+    {
+      elementNamePattern: [
+        "^name$",
+        "^src$",
+        "^srcSet$",
+        "^href$",
+        "^target$",
+        "^rel$",
+      ],
+      groupName: "tertiary",
+    },
+    { elementNamePattern: ["^className$", "^alt$"], groupName: "quaternary" },
+    { elementNamePattern: ["^css$", "^style$"], groupName: "quinary" },
+    {
+      elementNamePattern: ["^layerStyle$", "^textStyle$", "^apply$"],
+      groupName: "senary",
+    },
+    {
+      elementNamePattern: ["^variant$", "^size$", "^colorScheme$"],
+      groupName: "septenary",
+    },
+    ...Object.entries(semanticSizes).map(([groupName, elementNamePattern]) => ({
+      elementNamePattern,
+      groupName,
+    })),
+    { elementNamePattern: "^aria-.+", groupName: "aria" },
+    { elementNamePattern: "^data-.+", groupName: "data" },
+    {
+      elementNamePattern: `^_(?!.*(${otherPseudos})$).*$`,
+      groupName: "pseudo",
+    },
+    ...sortPseudos.map((elementNamePattern, index) => ({
+      elementNamePattern,
+      groupName: `pseudo${index + 1}`,
+    })),
+    { elementNamePattern: ".+Props$", groupName: "props" },
+    { elementNamePattern: "^on.*", groupName: "handler" },
+  ],
   groups: [
     "primary",
     "secondary",
@@ -71,11 +99,44 @@ const sortObjectGroups = {
     ...Object.keys(semanticSizes),
     ["aria", "data"],
     "unknown",
-    "pseudos",
-    ...sortPseudos.map((_, index) => `pseudos${index + 1}`),
+    "pseudo",
+    ...sortPseudos.map((_, index) => `pseudo${index + 1}`),
     "props",
-    "callback",
-    "internal",
+    "handler",
+  ],
+}
+
+const sortObjectTypeGroups = {
+  customGroups: [
+    {
+      elementNamePattern: ".+Props$",
+      groupName: "required-props",
+      modifiers: ["required"],
+    },
+    {
+      elementNamePattern: "^on.*",
+      groupName: "required-handler",
+      modifiers: ["required"],
+    },
+    {
+      elementNamePattern: ".+Props$",
+      groupName: "optional-props",
+      modifiers: ["optional"],
+    },
+    {
+      elementNamePattern: "^on.*",
+      groupName: "optional-handler",
+      modifiers: ["optional"],
+    },
+  ],
+  groups: [
+    "index-signature",
+    "required-property",
+    "required-props",
+    ["required-method", "required-handler"],
+    "optional-property",
+    "optional-props",
+    ["optional-method", "optional-handler"],
   ],
 }
 
@@ -105,17 +166,17 @@ export const perfectionistConfig = {
       {
         type,
         groups: [
-          "type",
-          ["external-type", "builtin-type", "internal-type"],
-          ["parent-type", "sibling-type", "index-type"],
-          ["builtin", "external"],
-          "internal",
-          ["parent", "sibling", "index"],
-          "object",
+          "type-import",
+          ["type-parent", "type-sibling", "type-index"],
+          "type-internal",
+          ["value-builtin", "value-external"],
+          "value-internal",
+          ["value-parent", "value-sibling", "value-index"],
+          "ts-equals-import",
           "unknown",
-          ["side-effect", "side-effect-style"],
         ],
         newlinesBetween: "ignore",
+        newlinesInside: "ignore",
         partitionByNewLine: true,
       },
     ],
@@ -123,40 +184,20 @@ export const perfectionistConfig = {
     "perfectionist/sort-array-includes": ["warn", { type }],
     "perfectionist/sort-interfaces": [
       "warn",
-      {
-        type,
-        groupKind: "required-first",
-        partitionByNewLine: true,
-        ...sortObjectGroups,
-      },
+      { type, partitionByNewLine: true, ...sortObjectTypeGroups },
     ],
     "perfectionist/sort-intersection-types": ["warn", { type }],
-    "perfectionist/sort-jsx-props": [
-      "warn",
-      {
-        type,
-        ...sortObjectGroups,
-      },
-    ],
+    "perfectionist/sort-jsx-props": ["warn", { type, ...sortObjectGroups }],
     "perfectionist/sort-maps": ["warn", { type }],
     "perfectionist/sort-named-exports": ["warn", { type }],
     "perfectionist/sort-named-imports": ["warn", { type }],
     "perfectionist/sort-object-types": [
       "warn",
-      {
-        type,
-        groupKind: "required-first",
-        partitionByNewLine: true,
-        ...sortObjectGroups,
-      },
+      { type, partitionByNewLine: true, ...sortObjectTypeGroups },
     ],
     "perfectionist/sort-objects": [
       "warn",
-      {
-        type,
-        partitionByNewLine: true,
-        ...sortObjectGroups,
-      },
+      { type, partitionByNewLine: true, ...sortObjectGroups },
     ],
     "perfectionist/sort-sets": ["warn", { type }],
     "perfectionist/sort-union-types": ["warn", { type }],

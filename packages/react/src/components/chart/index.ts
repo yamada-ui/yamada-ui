@@ -1,10 +1,13 @@
+export * from "./area-chart.style"
 export * from "./cartesian-chart.style"
 export * from "./chart.style"
 export * from "./line-chart.style"
 export * from "./pie-chart.style"
 export * from "./polar-chart.style"
+export * as AreaChart from "./area-chart.namespace"
 export {
   CartesianChart,
+  ChartArea,
   ChartGrid,
   ChartLine,
   ChartReferenceLine,
@@ -14,6 +17,7 @@ export {
 export type {
   CartesianChartProps,
   ChartActiveDot,
+  ChartAreaProps,
   ChartDot,
   ChartGridProps,
   ChartLabel,
@@ -50,6 +54,7 @@ export type {
   ChartPieProps,
   PolarChartProps,
 } from "./polar-chart"
+export * from "./use-area-chart"
 export * from "./use-cartesian-chart"
 export * from "./use-chart"
 export * from "./use-line-chart"

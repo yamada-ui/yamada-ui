@@ -11,12 +11,13 @@ import type {
   ChartPieProps as PieProps,
 } from "./polar-chart"
 import {
+  gradients,
   ChartLabelList as LabelList,
   ChartLegend as Legend,
+  mergeData,
   ChartTooltip as Tooltip,
 } from "./chart"
 import {
-  gradients,
   PieChartPropsContext as PropsContext,
   PieChart as Root,
   usePieChartPropsContext as usePropsContext,
@@ -27,6 +28,7 @@ export {
   gradients,
   LabelList,
   Legend,
+  mergeData,
   Pie,
   PropsContext,
   Root,

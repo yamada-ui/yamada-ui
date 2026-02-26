@@ -2,7 +2,7 @@
 
 import type { ReactElement } from "react"
 import type { PolarChartProps as OriginalPolarChartProps } from "recharts/types/util/types"
-import type { CSSProps, GenericsComponent, ThemeProps } from "../../core"
+import type { GenericsComponent, ThemeProps } from "../../core"
 import type { Dict } from "../../utils"
 import type { ChartTooltipProps } from "./chart"
 import type { PieChartStyle } from "./pie-chart.style"
@@ -86,23 +86,3 @@ export const PieChart = withContext<"div", PieChartProps>(
 )() as GenericsComponent<{
   <Y extends Dict>(props: PieChartProps<Y>): ReactElement
 }>
-
-export function gradients(
-  length: number,
-  color: CSSProps["color"] = "mono",
-  strategy: "invert" | "shade" | "tint" = "invert",
-): CSSProps["fill"][] {
-  return Array.from({ length }, (_, index) => {
-    const value = Math.floor(100 - (100 / length) * index)
-    const percent = `${value}%`
-
-    if (strategy === "invert") {
-      return [
-        `tint(colors.${color}, ${percent})`,
-        `shade(colors.${color}, ${percent})`,
-      ]
-    } else {
-      return `${strategy}(colors.${color}, ${percent})`
-    }
-  })
-}

@@ -24,23 +24,23 @@ interface Data {
 const randomValue = (max = 5000) =>
   Math.floor(Math.random() * (max - 1000 + 1)) + 1000
 
-const gradients = PieChart.gradients(6)
-const defaultData: Data[] = [
+const createData = (): Data[] => [
   { browser: "chrome", downloads: randomValue(), visits: randomValue() },
   { browser: "edge", downloads: randomValue(), visits: randomValue() },
   { browser: "firefox", downloads: randomValue(), visits: randomValue() },
   { browser: "opera", downloads: randomValue(), visits: randomValue() },
   { browser: "safari", downloads: randomValue(), visits: randomValue() },
   { browser: "other", downloads: randomValue(), visits: randomValue() },
-].map((item, index) => ({ ...item, fill: gradients[index] }))
+]
 
 export const Basic: Story = () => {
   const series = useMemo<PieChart.PieProps<Data>[]>(
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
+  const data = useMemo(() => PieChart.mergeData(createData()), [])
 
-  return <PieChart.Root data={defaultData} series={series} />
+  return <PieChart.Root data={data} series={series} />
 }
 
 export const Composition: Story = () => {
@@ -102,40 +102,32 @@ export const Size: Story = () => {
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
+  const data = useMemo(() => PieChart.mergeData(createData()), [])
 
   return (
     <PropsTable variant="stack" rows={["xs", "sm", "md", "lg", "xl"]}>
       {(_, row, key) => (
-        <PieChart.Root
-          key={key}
-          size={row}
-          data={defaultData}
-          series={series}
-        />
+        <PieChart.Root key={key} size={row} data={data} series={series} />
       )}
     </PropsTable>
   )
 }
 
 export const Gradients: Story = () => {
-  const gradients = useMemo<CSSProps["fill"][]>(
-    () => PieChart.gradients(defaultData.length, "red"),
-    [],
-  )
-  const data = useMemo<Data[]>(
-    () =>
-      defaultData.map((item, index) => ({ ...item, fill: gradients[index] })),
-    [gradients],
-  )
   const series = useMemo<PieChart.PieProps<Data>[]>(
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
+  const data = useMemo(() => PieChart.mergeData(createData(), "blue"), [])
 
   return <PieChart.Root data={data} series={series} />
 }
 
 export const SectorColors: Story = () => {
+  const series = useMemo<PieChart.PieProps<Data>[]>(
+    () => [{ dataKey: "visits", nameKey: "browser" }],
+    [],
+  )
   const data = useMemo<Data[]>(
     () => [
       {
@@ -175,10 +167,6 @@ export const SectorColors: Story = () => {
         visits: randomValue(),
       },
     ],
-    [],
-  )
-  const series = useMemo<PieChart.PieProps<Data>[]>(
-    () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
 
@@ -186,6 +174,10 @@ export const SectorColors: Story = () => {
 }
 
 export const SectorStroke: Story = () => {
+  const series = useMemo<PieChart.PieProps<Data>[]>(
+    () => [{ dataKey: "visits", nameKey: "browser" }],
+    [],
+  )
   const data = useMemo<Data[]>(
     () => [
       {
@@ -225,10 +217,6 @@ export const SectorStroke: Story = () => {
         visits: randomValue(),
       },
     ],
-    [],
-  )
-  const series = useMemo<PieChart.PieProps<Data>[]>(
-    () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
 
@@ -236,6 +224,10 @@ export const SectorStroke: Story = () => {
 }
 
 export const Legend: Story = () => {
+  const series = useMemo<PieChart.PieProps<Data>[]>(
+    () => [{ dataKey: "visits", nameKey: "browser" }],
+    [],
+  )
   const data = useMemo<Data[]>(
     () => [
       {
@@ -275,10 +267,6 @@ export const Legend: Story = () => {
         visits: randomValue(),
       },
     ],
-    [],
-  )
-  const series = useMemo<PieChart.PieProps<Data>[]>(
-    () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
 
@@ -326,11 +314,16 @@ export const Stacked: Story = () => {
     ],
     [],
   )
+  const data = useMemo(() => PieChart.mergeData(createData()), [])
 
-  return <PieChart.Root data={defaultData} series={series} />
+  return <PieChart.Root data={data} series={series} />
 }
 
 export const Label: Story = () => {
+  const series = useMemo<PieChart.PieProps<Data>[]>(
+    () => [{ dataKey: "visits", nameKey: "browser" }],
+    [],
+  )
   const data = useMemo<Data[]>(
     () => [
       {
@@ -370,10 +363,6 @@ export const Label: Story = () => {
         visits: randomValue(),
       },
     ],
-    [],
-  )
-  const series = useMemo<PieChart.PieProps<Data>[]>(
-    () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
 
@@ -383,6 +372,11 @@ export const Label: Story = () => {
 }
 
 export const LabelLine: Story = () => {
+  const series = useMemo<PieChart.PieProps<Data>[]>(
+    () => [{ dataKey: "visits", nameKey: "browser" }],
+    [],
+  )
+
   const data = useMemo<Data[]>(
     () => [
       {
@@ -422,10 +416,6 @@ export const LabelLine: Story = () => {
         visits: randomValue(),
       },
     ],
-    [],
-  )
-  const series = useMemo<PieChart.PieProps<Data>[]>(
-    () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
 
@@ -439,6 +429,10 @@ export const LabelLine: Story = () => {
 }
 
 export const LabelOffset: Story = () => {
+  const series = useMemo<PieChart.PieProps<Data>[]>(
+    () => [{ dataKey: "visits", nameKey: "browser" }],
+    [],
+  )
   const data = useMemo<Data[]>(
     () => [
       {
@@ -478,10 +472,6 @@ export const LabelOffset: Story = () => {
         visits: randomValue(),
       },
     ],
-    [],
-  )
-  const series = useMemo<PieChart.PieProps<Data>[]>(
-    () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
 
@@ -495,6 +485,10 @@ export const LabelOffset: Story = () => {
 }
 
 export const LabelList: Story = () => {
+  const series = useMemo<PieChart.PieProps<Data>[]>(
+    () => [{ dataKey: "visits", nameKey: "browser" }],
+    [],
+  )
   const data = useMemo<Data[]>(
     () => [
       {
@@ -534,10 +528,6 @@ export const LabelList: Story = () => {
         visits: randomValue(),
       },
     ],
-    [],
-  )
-  const series = useMemo<PieChart.PieProps<Data>[]>(
-    () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
 
@@ -555,10 +545,11 @@ export const PaddingAngle: Story = () => {
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
+  const data = useMemo(() => PieChart.mergeData(createData()), [])
 
   return (
     <PieChart.Root
-      data={defaultData}
+      data={data}
       series={series}
       pieProps={{ paddingAngle: 15 }}
     />
@@ -570,13 +561,10 @@ export const StartAngle: Story = () => {
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
+  const data = useMemo(() => PieChart.mergeData(createData()), [])
 
   return (
-    <PieChart.Root
-      data={defaultData}
-      series={series}
-      pieProps={{ startAngle: 0 }}
-    />
+    <PieChart.Root data={data} series={series} pieProps={{ startAngle: 0 }} />
   )
 }
 
@@ -585,13 +573,10 @@ export const EndAngle: Story = () => {
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
+  const data = useMemo(() => PieChart.mergeData(createData()), [])
 
   return (
-    <PieChart.Root
-      data={defaultData}
-      series={series}
-      pieProps={{ endAngle: -180 }}
-    />
+    <PieChart.Root data={data} series={series} pieProps={{ endAngle: -180 }} />
   )
 }
 
@@ -600,13 +585,10 @@ export const InnerRadius: Story = () => {
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
+  const data = useMemo(() => PieChart.mergeData(createData()), [])
 
   return (
-    <PieChart.Root
-      data={defaultData}
-      series={series}
-      pieProps={{ innerRadius: 90 }}
-    />
+    <PieChart.Root data={data} series={series} pieProps={{ innerRadius: 90 }} />
   )
 }
 
@@ -615,13 +597,10 @@ export const OuterRadius: Story = () => {
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
+  const data = useMemo(() => PieChart.mergeData(createData()), [])
 
   return (
-    <PieChart.Root
-      data={defaultData}
-      series={series}
-      pieProps={{ outerRadius: 90 }}
-    />
+    <PieChart.Root data={data} series={series} pieProps={{ outerRadius: 90 }} />
   )
 }
 
@@ -636,10 +615,11 @@ export const ActiveSector: Story = () => {
     ],
     [],
   )
+  const data = useMemo(() => PieChart.mergeData(createData()), [])
 
   return (
     <PieChart.Root
-      data={defaultData}
+      data={data}
       series={series}
       pieProps={{
         innerRadius: 90,
@@ -656,16 +636,21 @@ export const Synced: Story = () => {
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
+  const data = useMemo(() => PieChart.mergeData(createData()), [])
 
   return (
     <>
-      <PieChart.Root data={defaultData} series={series} syncId="chart" />
-      <PieChart.Root data={defaultData} series={series} syncId="chart" />
+      <PieChart.Root data={data} series={series} syncId="chart" />
+      <PieChart.Root data={data} series={series} syncId="chart" />
     </>
   )
 }
 
 export const Formatter: Story = () => {
+  const series = useMemo<PieChart.PieProps<Data>[]>(
+    () => [{ dataKey: "visits", nameKey: "browser" }],
+    [],
+  )
   const data = useMemo<Data[]>(
     () => [
       {
@@ -705,10 +690,6 @@ export const Formatter: Story = () => {
         visits: randomValue(),
       },
     ],
-    [],
-  )
-  const series = useMemo<PieChart.PieProps<Data>[]>(
-    () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
 
@@ -743,8 +724,7 @@ export const DisabledTooltip: Story = () => {
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
+  const data = useMemo(() => PieChart.mergeData(createData()), [])
 
-  return (
-    <PieChart.Root data={defaultData} series={series} withTooltip={false} />
-  )
+  return <PieChart.Root data={data} series={series} withTooltip={false} />
 }

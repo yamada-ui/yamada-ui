@@ -1,6 +1,8 @@
 "use client"
 
-import { TrendingDown } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { TrendingDown as OriginalTrendingDownIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const TrendingDownIcon = component(Icon)({ as: TrendingDown })
+export const TrendingDownIcon = component(Icon)({
+  as: OriginalTrendingDownIcon,
+}) as Component<"svg", IconProps>

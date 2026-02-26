@@ -1,6 +1,8 @@
 "use client"
 
-import { ChartColumnStacked } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { ChartColumnStacked as OriginalChartColumnStackedIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -9,5 +11,5 @@ import { component, Icon } from "../icon"
  * @see https://yamada-ui.com/docs/components/icon
  */
 export const ChartColumnStackedIcon = component(Icon)({
-  as: ChartColumnStacked,
-})
+  as: OriginalChartColumnStackedIcon,
+}) as Component<"svg", IconProps>

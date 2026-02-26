@@ -24,4 +24,31 @@ describe("<Float />", () => {
     render(<Float>Float</Float>)
     expect(screen.getByText("Float").tagName).toBe("DIV")
   })
+
+  test("applies to both block and inline given a single offset", () => {
+    render(<Float offset="2">Float</Float>)
+    const floatElement = screen.getByText("Float")
+    const styles = getComputedStyle(floatElement)
+
+    expect(styles.getPropertyValue("--offset-block")).toBeTruthy()
+    expect(styles.getPropertyValue("--offset-inline")).toBeTruthy()
+  })
+
+  test("applies separate block and inline offsets given an array", () => {
+    render(<Float offset={["2", "4"]}>Float</Float>)
+    const floatElement = screen.getByText("Float")
+    const styles = getComputedStyle(floatElement)
+
+    expect(styles.getPropertyValue("--offset-block")).toBeTruthy()
+    expect(styles.getPropertyValue("--offset-inline")).toBeTruthy()
+  })
+
+  test("applies undefined offset correctly", () => {
+    render(<Float offset="">Float</Float>)
+    const floatElement = screen.getByText("Float")
+    const styles = getComputedStyle(floatElement)
+
+    expect(styles.getPropertyValue("--offset-block")).toBeTruthy()
+    expect(styles.getPropertyValue("--offset-inline")).toBeTruthy()
+  })
 })

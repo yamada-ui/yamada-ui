@@ -26,10 +26,10 @@ describe("Event", () => {
         clientY,
         identifier,
       }: {
-        target: EventTarget
         clientX: number
         clientY: number
         identifier: number
+        target: EventTarget
       }) {
         this.identifier = identifier
         this.target = target

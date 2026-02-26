@@ -1,6 +1,8 @@
 "use client"
 
-import { BetweenVerticalStart } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { BetweenVerticalStart as OriginalBetweenVerticalStartIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -9,5 +11,5 @@ import { component, Icon } from "../icon"
  * @see https://yamada-ui.com/docs/components/icon
  */
 export const BetweenVerticalStartIcon = component(Icon)({
-  as: BetweenVerticalStart,
-})
+  as: OriginalBetweenVerticalStartIcon,
+}) as Component<"svg", IconProps>

@@ -181,8 +181,10 @@ const SnackList = withContext<"div", SnackListProps>(
   },
 })
 
-interface SnackProps
-  extends Merge<HTMLMotionProps, Merge<Alert.RootProps, Snack>> {
+interface SnackProps extends Merge<
+  HTMLMotionProps,
+  Merge<Alert.RootProps, Snack>
+> {
   index: number
   lastIndex: number
 }

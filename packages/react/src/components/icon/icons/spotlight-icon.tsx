@@ -1,6 +1,8 @@
 "use client"
 
-import { Spotlight } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Spotlight as OriginalSpotlightIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const SpotlightIcon = component(Icon)({ as: Spotlight })
+export const SpotlightIcon = component(Icon)({
+  as: OriginalSpotlightIcon,
+}) as Component<"svg", IconProps>

@@ -6,7 +6,7 @@
       "#test": ["./test"],
       "#test/browser": ["./test/browser"]
     },
-    "types": ["vitest/globals", "@vitest/browser/providers/playwright"]
+    "types": ["vitest/globals"]
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
   "exclude": ["node_modules", "trace", "dist", "coverage", "storybook-static"]

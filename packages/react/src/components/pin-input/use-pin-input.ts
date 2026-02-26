@@ -6,7 +6,7 @@ import type { FieldProps } from "../field"
 import { useCallback, useEffect, useId, useState } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
-import { filterUndefined, handlerAll, runKeyAction } from "../../utils"
+import { cx, filterUndefined, handlerAll, runKeyAction } from "../../utils"
 import { useFieldProps } from "../field"
 
 const {
@@ -33,19 +33,9 @@ const validate = (value: string, type: UsePinInputProps["type"]) => {
 }
 
 export interface UsePinInputProps
-  extends Omit<HTMLProps, "defaultValue" | "mask" | "onChange" | "value">,
+  extends
+    Omit<HTMLProps, "defaultValue" | "mask" | "onChange" | "value">,
     FieldProps {
-  /**
-   * The top-level id string that will be applied to the input fields.
-   * The index of the input will be appended to this top-level id.
-   */
-  id?: string
-  /**
-   * The type of values the pin-input should allow.
-   *
-   * @default 'number'
-   */
-  type?: "alphanumeric" | "number"
   /**
    * If `true`, the pin input receives focus on mount.
    *
@@ -56,6 +46,11 @@ export interface UsePinInputProps
    * The initial value of the pin input.
    */
   defaultValue?: string
+  /**
+   * The top-level id string that will be applied to the input fields.
+   * The index of the input will be appended to this top-level id.
+   */
+  id?: string
   /**
    * The number of inputs to display.
    *
@@ -83,6 +78,12 @@ export interface UsePinInputProps
    */
   placeholder?: string
   /**
+   * The type of values the pin-input should allow.
+   *
+   * @default 'number'
+   */
+  type?: "alphanumeric" | "number"
+  /**
    * The value of the pin input.
    */
   value?: string
@@ -99,12 +100,14 @@ export interface UsePinInputProps
 export const usePinInput = (props: UsePinInputProps = {}) => {
   const uuid = useId()
   const {
+    context: { labelId } = {},
     props: {
       id = uuid,
       type = "number",
       autoFocus,
       defaultValue,
       disabled,
+      items = 4,
       manageFocus = true,
       mask,
       otp = false,
@@ -297,10 +300,11 @@ export const usePinInput = (props: UsePinInputProps = {}) => {
 
   const getInputProps: RequiredPropGetter<"input", { index: number }> =
     useCallback(
-      ({ index, ...props }) => ({
+      ({ "aria-labelledby": ariaLabelledby, index, ...props }) => ({
         ...ariaProps,
         ...dataProps,
         type: mask ? "password" : type === "number" ? "tel" : "text",
+        "aria-labelledby": cx(ariaLabelledby, labelId),
         autoComplete: otp ? "one-time-code" : "off",
         disabled,
         inputMode: type === "number" ? "numeric" : "text",
@@ -323,13 +327,14 @@ export const usePinInput = (props: UsePinInputProps = {}) => {
         eventProps,
         mask,
         type,
-        disabled,
-        readOnly,
-        id,
+        labelId,
         otp,
+        disabled,
         focusedIndex,
+        readOnly,
         placeholder,
         values,
+        id,
         onBlur,
         onChange,
         onFocus,
@@ -339,6 +344,7 @@ export const usePinInput = (props: UsePinInputProps = {}) => {
 
   return {
     descendants,
+    items,
     getInputProps,
     getRootProps,
   }

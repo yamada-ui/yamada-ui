@@ -7,21 +7,21 @@ describe("<Flex />", () => {
   })
 
   test("sets `className` correctly", async () => {
-    render(<Flex>Flex</Flex>)
+    await render(<Flex>Flex</Flex>)
 
     const flex = page.getByText("Flex")
     await expect.element(flex).toHaveClass("ui-flex")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Flex>Flex</Flex>)
+  test("renders HTML tag correctly", async () => {
+    await render(<Flex>Flex</Flex>)
 
     const flex = page.getByText("Flex")
     expect(flex.element().tagName).toBe("DIV")
   })
 
   test("renders all the allowed shorthand style props", async () => {
-    render(
+    await render(
       <Flex
         align="stretch"
         basis="auto"

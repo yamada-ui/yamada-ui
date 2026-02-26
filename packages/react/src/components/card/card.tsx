@@ -6,8 +6,7 @@ import { createSlotComponent } from "../../core"
 import { cardStyle } from "./card.style"
 
 export interface CardRootProps
-  extends HTMLStyledProps<"article">,
-    ThemeProps<CardStyle> {}
+  extends HTMLStyledProps<"article">, ThemeProps<CardStyle> {}
 
 const {
   PropsContext: CardPropsContext,

@@ -19,7 +19,7 @@ export interface LineChartProps<Y extends Dict = Dict>
     Omit<CartesianChartProps<Y>, "components" | "render" | "series">,
     UseLineChartProps<Y>,
     ThemeProps<LineChartStyle> {
-  /***
+  /**
    * If provided, generate lines based on series.
    */
   series?: ChartLineProps<Y>[]

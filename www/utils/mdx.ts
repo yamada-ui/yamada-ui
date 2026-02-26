@@ -125,6 +125,7 @@ const insertElement =
 
 export const mdx = async (source: string) => {
   const mdxSource = await serialize(source, {
+    blockJS: false,
     mdxOptions: {
       rehypePlugins: [rehypeCodeMeta, rehypeSlug],
       remarkPlugins: [remarkGfm, remarkEmoji, remarkUIComponent, remarkBreaks],

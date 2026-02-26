@@ -22,7 +22,7 @@
     "@yamada-ui/next": "workspace:*",
     "@yamada-ui/react": "workspace:*",
     "@yamada-ui/table": "workspace:*",
-    "next": "15.1.11",
+    "next": "^15.1.11",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

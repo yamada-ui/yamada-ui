@@ -373,7 +373,7 @@ export const CartesianChart = withProvider(
   <Y extends Dict>(props: CartesianChartProps<Y>): ReactElement
 }>
 
-export type ChartLabel =
+export type CartesianChartLabel =
   | ((props: any) => ReactElement | RenderableText)
   | boolean
   | (Merge<
@@ -415,7 +415,7 @@ export interface ChartXAxisProps extends Merge<
    *
    * @default false
    */
-  label?: ChartLabel
+  label?: CartesianChartLabel
   /**
    * The tick to use for the axis.
    *
@@ -542,7 +542,7 @@ export interface ChartYAxisProps extends Merge<
    *
    * @default false
    */
-  label?: ChartLabel
+  label?: CartesianChartLabel
   /**
    * The tick to use for the axis.
    *
@@ -685,7 +685,7 @@ export type ChartActiveDot =
   | Merge<Partial<ActiveDotProps>, HTMLStyledProps<"circle">>
   | ReactElement
 
-export type ChartCartesianLabel =
+export type CartesianChartLabelList =
   | ((props: LabelProps) => ReactElement | RenderableText)
   | boolean
   | ChartLabelListProps
@@ -720,7 +720,7 @@ export interface ChartLineProps<Y extends Dict = Dict> extends Merge<
    *
    * @default false
    */
-  label?: ChartCartesianLabel
+  label?: CartesianChartLabelList
 }
 
 export const ChartLine = withContext<"line", ChartLineProps>((props) => {
@@ -877,7 +877,7 @@ export interface ChartAreaProps<Y extends Dict = Dict> extends Merge<
    *
    * @default false
    */
-  label?: ChartCartesianLabel
+  label?: CartesianChartLabelList
   /**
    * Determines whether the chart area should be represented with a gradient instead of the solid color.
    */
@@ -1050,7 +1050,7 @@ export interface ChartBarProps<Y extends Dict = Dict> extends Merge<
    *
    * @default false
    */
-  label?: ChartCartesianLabel
+  label?: CartesianChartLabelList
 }
 
 export const ChartBar = withContext<"path", ChartBarProps>((props) => {
@@ -1117,7 +1117,7 @@ export interface ChartReferenceLineProps extends Omit<
    *
    * @default false
    */
-  label?: ChartLabel
+  label?: CartesianChartLabel
 }
 
 export const ChartReferenceLine = withContext<"line", ChartReferenceLineProps>(

@@ -22,12 +22,19 @@ import type { ChartStyle } from "./chart.style"
 import type { ChartPieProps } from "./polar-chart"
 import type {
   UseChartLabelListProps,
+  UseChartLabelProps,
   UseChartLegendProps,
   UseChartLegendReturn,
   UseChartTooltipProps,
 } from "./use-chart"
 import { Fragment, isValidElement, useMemo } from "react"
-import { LabelList, Legend, ResponsiveContainer, Tooltip } from "recharts"
+import {
+  Label,
+  LabelList,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts"
 import { createSlotComponent, styled, varAttr } from "../../core"
 import {
   createContext,
@@ -41,6 +48,7 @@ import { chartStyle } from "./chart.style"
 import {
   ChartContext,
   useChart,
+  useChartLabel,
   useChartLabelList,
   useChartLegend,
   useChartTooltip,
@@ -603,3 +611,18 @@ export const ChartLabelList = withContext<"text", ChartLabelListProps>(
   },
   "labelList",
 )()
+
+export interface ChartLabelProps extends Merge<
+  HTMLStyledProps<"text">,
+  UseChartLabelProps
+> {}
+
+export const ChartLabel = withContext<"text", ChartLabelProps>((props) => {
+  const { getLabelProps, getRootProps } = useChartLabel(props)
+
+  return (
+    <styled.text asChild {...getRootProps()}>
+      <Label {...getLabelProps()} />
+    </styled.text>
+  )
+}, "label")()

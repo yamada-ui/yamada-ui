@@ -72,7 +72,7 @@ export const useChartPie = ({
   endAngle = -270,
   hide,
   inactiveShape,
-  innerRadius,
+  innerRadius = "0%",
   isAnimationActive = false,
   label,
   labelLine = false,
@@ -80,7 +80,7 @@ export const useChartPie = ({
   maxRadius,
   minAngle,
   nameKey,
-  outerRadius,
+  outerRadius = !label ? "100%" : undefined,
   paddingAngle,
   rootTabIndex,
   shape,
@@ -269,7 +269,7 @@ export const useChartSector = ({
 
 export type UseChartSectorReturn = ReturnType<typeof useChartSector>
 
-export interface UseChartLabelProps extends Merge<
+export interface UseChartPieLabelProps extends Merge<
   HTMLProps<"text">,
   Pick<
     PieLabelRenderProps,
@@ -309,7 +309,7 @@ export interface UseChartLabelProps extends Merge<
   formatter?: (value: number, percent: number) => RenderableText
 }
 
-export const useChartLabel = ({
+export const useChartPieLabel = ({
   name: nameProp,
   cornerRadius,
   cx,
@@ -335,7 +335,7 @@ export const useChartLabel = ({
   x: _x,
   y: _y,
   ...rest
-}: UseChartLabelProps) => {
+}: UseChartPieLabelProps) => {
   const { highlightedDataKey } = useChartContext()
   const offset = (outerRadius - innerRadius) * 0.5 + offsetProp
   const radian = Math.PI / 180
@@ -411,9 +411,9 @@ export const useChartLabel = ({
   return { getRootProps, getTextProps }
 }
 
-export type UseChartLabelReturn = ReturnType<typeof useChartLabel>
+export type UseChartPieLabelReturn = ReturnType<typeof useChartPieLabel>
 
-export interface UseChartLabelLineProps
+export interface UseChartPieLabelLineProps
   extends
     Merge<
       Omit<HTMLProps<"path">, "points">,
@@ -441,7 +441,7 @@ export interface UseChartLabelLineProps
   index?: number
 }
 
-export const useChartLabelLine = ({
+export const useChartPieLabelLine = ({
   name: nameProp,
   cornerRadius,
   dataKey,
@@ -461,7 +461,7 @@ export const useChartLabelLine = ({
   tooltipPosition,
   value,
   ...rest
-}: UseChartLabelLineProps) => {
+}: UseChartPieLabelLineProps) => {
   const { highlightedDataKey } = useChartContext()
 
   const getRootProps: PropGetter<"path"> = useCallback(
@@ -523,4 +523,4 @@ export const useChartLabelLine = ({
   return { getCurveProps, getRootProps }
 }
 
-export type UseChartLabelLineReturn = ReturnType<typeof useChartLabelLine>
+export type UseChartPieLabelLineReturn = ReturnType<typeof useChartPieLabelLine>

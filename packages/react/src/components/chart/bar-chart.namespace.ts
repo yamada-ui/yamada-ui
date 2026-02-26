@@ -1,9 +1,9 @@
 import type { BarChartProps as RootProps } from "./bar-chart"
 import type {
-  ChartCartesianLabel as BarLabel,
+  CartesianChartLabel as BarLabel,
+  CartesianChartLabelList as BarLabelList,
   ChartBarProps as BarProps,
   ChartGridProps as GridProps,
-  ChartLabel as Label,
   ChartReferenceLineProps as ReferenceLineProps,
   ChartTickLine as TickLine,
   ChartXAxisProps as XAxisProps,
@@ -13,6 +13,7 @@ import type {
 } from "./cartesian-chart"
 import type {
   ChartLabelListProps as LabelListProps,
+  ChartLabelProps as LabelProps,
   ChartLegendProps as LegendProps,
   ChartTooltipProps as TooltipProps,
 } from "./chart"
@@ -29,6 +30,7 @@ import {
   ChartYAxis as YAxis,
 } from "./cartesian-chart"
 import {
+  ChartLabel as Label,
   ChartLabelList as LabelList,
   ChartLegend as Legend,
   ChartTooltip as Tooltip,
@@ -37,6 +39,7 @@ import {
 export {
   Bar,
   Grid,
+  Label,
   LabelList,
   Legend,
   PropsContext,
@@ -49,10 +52,11 @@ export {
 }
 export type {
   BarLabel,
+  BarLabelList,
   BarProps,
   GridProps,
-  Label,
   LabelListProps,
+  LabelProps,
   LegendProps,
   ReferenceLineProps,
   RootProps,

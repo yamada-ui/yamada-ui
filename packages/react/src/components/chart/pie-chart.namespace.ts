@@ -1,17 +1,19 @@
 import type {
   ChartLabelListProps as LabelListProps,
+  ChartLabelProps as LabelProps,
   ChartLegendProps as LegendProps,
   ChartTooltipProps as TooltipProps,
 } from "./chart"
 import type { PieChartProps as RootProps } from "./pie-chart"
 import type {
-  ChartLabelLine as LabelLine,
   ChartPieLabel as PieLabel,
+  ChartPieLabelLine as PieLabelLine,
   ChartPieLabelList as PieLabelList,
   ChartPieProps as PieProps,
 } from "./polar-chart"
 import {
   gradients,
+  ChartLabel as Label,
   ChartLabelList as LabelList,
   ChartLegend as Legend,
   mergeData,
@@ -26,6 +28,7 @@ import { ChartPie as Pie } from "./polar-chart"
 
 export {
   gradients,
+  Label,
   LabelList,
   Legend,
   mergeData,
@@ -36,10 +39,11 @@ export {
   usePropsContext,
 }
 export type {
-  LabelLine,
   LabelListProps,
+  LabelProps,
   LegendProps,
   PieLabel,
+  PieLabelLine,
   PieLabelList,
   PieProps,
   RootProps,

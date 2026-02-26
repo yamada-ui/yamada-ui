@@ -18,14 +18,14 @@ export {
   ChartYAxis,
 } from "./cartesian-chart"
 export type {
+  CartesianChartLabel,
+  CartesianChartLabelList,
   CartesianChartProps,
   ChartActiveDot,
   ChartAreaProps,
   ChartBarProps,
-  ChartCartesianLabel,
   ChartDot,
   ChartGridProps,
-  ChartLabel,
   ChartLineProps,
   ChartReferenceLineProps,
   ChartTickLine,
@@ -36,6 +36,7 @@ export type {
 } from "./cartesian-chart"
 export {
   Chart,
+  ChartLabel,
   ChartLabelList,
   ChartLegend,
   ChartPropsContext,
@@ -44,6 +45,7 @@ export {
 } from "./chart"
 export type {
   ChartLabelListProps,
+  ChartLabelProps,
   ChartLegendProps,
   ChartProps,
   ChartTooltipProps,
@@ -52,8 +54,8 @@ export * as LineChart from "./line-chart.namespace"
 export * as PieChart from "./pie-chart.namespace"
 export { ChartPie, PolarChart } from "./polar-chart"
 export type {
-  ChartLabelLine,
   ChartPieLabel,
+  ChartPieLabelLine,
   ChartPieLabelList,
   ChartPieProps,
   PolarChartProps,

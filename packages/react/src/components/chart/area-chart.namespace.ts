@@ -1,11 +1,11 @@
 import type { AreaChartProps as RootProps } from "./area-chart"
 import type {
   ChartActiveDot as ActiveDot,
-  ChartCartesianLabel as AreaLabel,
+  CartesianChartLabel as AreaLabel,
+  CartesianChartLabelList as AreaLabelList,
   ChartAreaProps as AreaProps,
   ChartDot as Dot,
   ChartGridProps as GridProps,
-  ChartLabel as Label,
   ChartReferenceLineProps as ReferenceLineProps,
   ChartTickLine as TickLine,
   ChartXAxisProps as XAxisProps,
@@ -15,6 +15,7 @@ import type {
 } from "./cartesian-chart"
 import type {
   ChartLabelListProps as LabelListProps,
+  ChartLabelProps as LabelProps,
   ChartLegendProps as LegendProps,
   ChartTooltipProps as TooltipProps,
 } from "./chart"
@@ -32,6 +33,7 @@ import {
 } from "./cartesian-chart"
 import {
   gradients,
+  ChartLabel as Label,
   ChartLabelList as LabelList,
   ChartLegend as Legend,
   mergeSeries,
@@ -42,6 +44,7 @@ export {
   Area,
   gradients,
   Grid,
+  Label,
   LabelList,
   Legend,
   mergeSeries,
@@ -56,11 +59,12 @@ export {
 export type {
   ActiveDot,
   AreaLabel,
+  AreaLabelList,
   AreaProps,
   Dot,
   GridProps,
-  Label,
   LabelListProps,
+  LabelProps,
   LegendProps,
   ReferenceLineProps,
   RootProps,

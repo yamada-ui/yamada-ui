@@ -1,6 +1,11 @@
 "use client"
 
-import type { LabelListProps, LegendProps, TooltipProps } from "recharts"
+import type {
+  LabelListProps,
+  LabelProps,
+  LegendProps,
+  TooltipProps,
+} from "recharts"
 import type {
   Direction,
   HTMLProps,
@@ -352,3 +357,76 @@ export const useChartLabelList = ({
 }
 
 export type UseChartLabelListReturn = ReturnType<typeof useChartLabelList>
+
+export interface UseChartLabelProps extends Merge<
+  HTMLProps<"text">,
+  Pick<
+    LabelProps,
+    | "angle"
+    | "children"
+    | "content"
+    | "formatter"
+    | "labelRef"
+    | "offset"
+    | "parentViewBox"
+    | "position"
+    | "value"
+    | "viewBox"
+    | "zIndex"
+  >
+> {}
+
+export const useChartLabel = ({
+  angle,
+  children,
+  content,
+  formatter,
+  labelRef,
+  offset,
+  parentViewBox,
+  position,
+  value,
+  viewBox,
+  zIndex,
+  ...rest
+}: UseChartLabelProps = {}) => {
+  const getRootProps: PropGetter<"text"> = useCallback(
+    (props) => ({ ...rest, ...props }),
+    [rest],
+  )
+
+  const getLabelProps: PropGetter<LabelProps> = useCallback(
+    (props) => ({
+      angle,
+      children,
+      content,
+      fill: "",
+      formatter,
+      labelRef,
+      offset,
+      parentViewBox,
+      position,
+      value,
+      viewBox,
+      zIndex,
+      ...props,
+    }),
+    [
+      angle,
+      children,
+      content,
+      formatter,
+      labelRef,
+      offset,
+      parentViewBox,
+      position,
+      value,
+      viewBox,
+      zIndex,
+    ],
+  )
+
+  return { getLabelProps, getRootProps }
+}
+
+export type UseChartLabelReturn = ReturnType<typeof useChartLabel>

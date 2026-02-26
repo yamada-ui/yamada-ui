@@ -4,6 +4,7 @@ import { tooltipStyle } from "../tooltip"
 
 export const chartStyle = defineComponentSlotStyle({
   base: {
+    label: { fill: "currentColor", fontSize: "xs", fontWeight: "medium" },
     labelList: {
       color: "{label-list-color}",
       fill: "{label-list-fill}",

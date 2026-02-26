@@ -13,8 +13,8 @@ import type { Dict, Merge } from "../../utils"
 import type { ChartLabelListProps, ChartProps } from "./chart"
 import type { PolarChartStyle } from "./polar-chart.style"
 import type {
-  UseChartLabelLineProps,
-  UseChartLabelProps,
+  UseChartPieLabelLineProps,
+  UseChartPieLabelProps,
   UseChartPieProps,
   UseChartSectorProps,
 } from "./use-polar-chart"
@@ -25,9 +25,9 @@ import { isNumber, isObject, runIfFn } from "../../utils"
 import { Chart, ChartLabelList, useChartComponentContext } from "./chart"
 import { polarChartStyle } from "./polar-chart.style"
 import {
-  useChartLabel,
-  useChartLabelLine,
   useChartPie,
+  useChartPieLabel,
+  useChartPieLabelLine,
   useChartSector,
 } from "./use-polar-chart"
 
@@ -160,14 +160,14 @@ export const PolarChart = withProvider(
 }>
 
 export type ChartPieLabel =
-  | ((props: PieLabelRenderProps) => Partial<ChartLabelProps>)
+  | ((props: PieLabelRenderProps) => Partial<ChartPieLabelProps>)
   | boolean
-  | Partial<ChartLabelProps>
+  | Partial<ChartPieLabelProps>
 
-export type ChartLabelLine =
-  | ((props: any) => ChartLabelLineProps)
+export type ChartPieLabelLine =
+  | ((props: any) => ChartPieLabelLineProps)
   | boolean
-  | ChartLabelLineProps
+  | ChartPieLabelLineProps
 
 export type ChartPieLabelList = boolean | ChartLabelListProps
 
@@ -200,7 +200,7 @@ export interface ChartPieProps<Y extends Dict = Dict> extends Merge<
    *
    * @default false
    */
-  labelLine?: ChartLabelLine
+  labelLine?: ChartPieLabelLine
   /**
    * If `true`, the label list is visible.
    *
@@ -249,7 +249,7 @@ export const ChartPie = withContext<"svg", ChartPieProps>((props) => {
     if (!labelProp) return labelProp
 
     const Component = (props: any) => (
-      <ChartLabel
+      <ChartPieLabel
         {...props}
         {...(labelProp !== true ? runIfFn(labelProp, props) : {})}
       />
@@ -261,7 +261,7 @@ export const ChartPie = withContext<"svg", ChartPieProps>((props) => {
     if (!labelLineProp) return labelLineProp
 
     const Component = ({ key: _, ...rest }: any) => (
-      <ChartLabelLine
+      <ChartPieLabelLine
         {...rest}
         {...(labelLineProp !== true ? runIfFn(labelLineProp, rest) : {})}
       />
@@ -310,18 +310,18 @@ const ChartSector = withContext<"path", ChartSectorProps>((props) => {
 
   return (
     <styled.path asChild {...getRootProps()}>
-      <Sector fill="red" {...getSectorProps()} />
+      <Sector {...getSectorProps()} />
     </styled.path>
   )
 }, "sector")()
 
-interface ChartLabelProps extends Merge<
+interface ChartPieLabelProps extends Merge<
   HTMLStyledProps<"text">,
-  UseChartLabelProps
+  UseChartPieLabelProps
 > {}
 
-const ChartLabel = withContext<"text", ChartLabelProps>((props) => {
-  const { getRootProps, getTextProps } = useChartLabel(props)
+const ChartPieLabel = withContext<"text", ChartPieLabelProps>((props) => {
+  const { getRootProps, getTextProps } = useChartPieLabel(props)
 
   return (
     <styled.text asChild {...getRootProps()}>
@@ -330,17 +330,20 @@ const ChartLabel = withContext<"text", ChartLabelProps>((props) => {
   )
 }, "label")()
 
-interface ChartLabelLineProps extends Merge<
+interface ChartPieLabelLineProps extends Merge<
   HTMLStyledProps<"path">,
-  UseChartLabelLineProps
+  UseChartPieLabelLineProps
 > {}
 
-const ChartLabelLine = withContext<"path", ChartLabelLineProps>((props) => {
-  const { getCurveProps, getRootProps } = useChartLabelLine(props)
+const ChartPieLabelLine = withContext<"path", ChartPieLabelLineProps>(
+  (props) => {
+    const { getCurveProps, getRootProps } = useChartPieLabelLine(props)
 
-  return (
-    <styled.path asChild {...getRootProps()}>
-      <Curve {...getCurveProps()} />
-    </styled.path>
-  )
-}, "labelLine")()
+    return (
+      <styled.path asChild {...getRootProps()}>
+        <Curve {...getCurveProps()} />
+      </styled.path>
+    )
+  },
+  "labelLine",
+)()

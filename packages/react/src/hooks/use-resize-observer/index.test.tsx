@@ -1,8 +1,9 @@
+import type { FC } from "react"
 import { page, render } from "#test/browser"
 import { useElementSize, useResizeObserver } from "./"
 
 describe("useResizeObserver", () => {
-  const ButtonWithSize = () => {
+  const ButtonWithSize: FC = () => {
     const [ref, rect] = useResizeObserver()
 
     return (
@@ -13,7 +14,7 @@ describe("useResizeObserver", () => {
   }
 
   test("return contentRect value correctly", async () => {
-    render(<ButtonWithSize />)
+    await render(<ButtonWithSize />)
 
     const button = page.getByRole("button")
     await expect.element(button).toHaveTextContent("400 x 320")
@@ -21,7 +22,7 @@ describe("useResizeObserver", () => {
 })
 
 describe("useElementSize", () => {
-  const ButtonWithSize = () => {
+  const ButtonWithSize: FC = () => {
     const { ref, height, width } = useElementSize()
 
     return (
@@ -32,7 +33,7 @@ describe("useElementSize", () => {
   }
 
   test("returns width and height correctly", async () => {
-    render(<ButtonWithSize />)
+    await render(<ButtonWithSize />)
 
     const button = page.getByRole("button")
     await expect.element(button).toHaveTextContent("150 x 200")

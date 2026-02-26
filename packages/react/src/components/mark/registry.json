@@ -19,7 +19,7 @@
     },
     {
       "name": "mark.tsx",
-      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { MarkStyle } from \"./mark.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { markStyle } from \"./mark.style\"\n\nexport interface MarkProps\n  extends HTMLStyledProps<\"mark\">,\n    ThemeProps<MarkStyle> {}\n\nconst {\n  PropsContext: MarkPropsContext,\n  usePropsContext: useMarkPropsContext,\n  withContext,\n} = createComponent<MarkProps, MarkStyle>(\"mark\", markStyle)\n\nexport { MarkPropsContext, useMarkPropsContext }\n\n/**\n * `Mark` is a component that emphasizes a specific part of the text.\n *\n * @see https://yamada-ui.com/docs/components/mark\n */\nexport const Mark = withContext(\"mark\")()\n"
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { MarkStyle } from \"./mark.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { markStyle } from \"./mark.style\"\n\nexport interface MarkProps\n  extends HTMLStyledProps<\"mark\">, ThemeProps<MarkStyle> {}\n\nconst {\n  PropsContext: MarkPropsContext,\n  usePropsContext: useMarkPropsContext,\n  withContext,\n} = createComponent<MarkProps, MarkStyle>(\"mark\", markStyle)\n\nexport { MarkPropsContext, useMarkPropsContext }\n\n/**\n * `Mark` is a component that emphasizes a specific part of the text.\n *\n * @see https://yamada-ui.com/docs/components/mark\n */\nexport const Mark = withContext(\"mark\")()\n"
     }
   ]
 }

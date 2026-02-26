@@ -9,7 +9,8 @@ import { handlerAll, mergeRefs, useAttributeObserver } from "../../utils"
 import { useSpinner } from "./use-spinner"
 
 export interface UseNumberCounterProps
-  extends HTMLProps<"button">,
+  extends
+    HTMLProps<"button">,
     Pick<UseCounterProps, "keepWithinRange">,
     Pick<UseCounterReturn, "max" | "min">,
     UseSpinnerProps {}

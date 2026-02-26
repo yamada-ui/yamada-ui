@@ -12,41 +12,60 @@
       "outputs": [".velite/**", "data/doc-map.*.json"]
     },
     "test": {
-      "dependsOn": ["build"]
+      "dependsOn": ["transit"]
     },
     "test:coverage": {
-      "dependsOn": ["build"],
+      "dependsOn": ["transit"],
       "outputs": ["coverage/**"]
     },
     "test:chromium": {
-      "dependsOn": ["build"]
+      "dependsOn": ["transit"]
     },
     "test:firefox": {
-      "dependsOn": ["build"]
+      "dependsOn": ["transit"]
     },
     "test:webkit": {
-      "dependsOn": ["build"]
+      "dependsOn": ["transit"]
     },
     "typecheck": {
       "dependsOn": ["transit"]
     },
     "//#typecheck:scripts": {
       "dependsOn": ["transit"],
-      "inputs": ["scripts/**", "tsconfig.json", "package.json", "packages/workspace/src/typescript/**", "packages/workspace/package.json"]
+      "inputs": [
+        "scripts/**",
+        "tsconfig.json",
+        "package.json",
+        "packages/workspace/src/typescript/**",
+        "packages/workspace/package.json"
+      ]
     },
     "lint": {
       "dependsOn": ["transit"]
     },
     "//#lint:scripts": {
       "dependsOn": ["transit"],
-      "inputs": ["scripts/**", "eslint.config.ts", "package.json", "packages/workspace/src/eslint/**", "packages/workspace/package.json"]
+      "inputs": [
+        "scripts/**",
+        "eslint.config.ts",
+        "package.json",
+        "packages/workspace/src/eslint/**",
+        "packages/workspace/package.json"
+      ]
     },
     "format": {
       "dependsOn": ["transit"]
     },
     "//#format:scripts": {
       "dependsOn": ["transit"],
-      "inputs": ["scripts/**", ".prettierrc.js", ".prettierignore", "package.json", "packages/workspace/src/prettier/**", "packages/workspace/package.json"]
+      "inputs": [
+        "scripts/**",
+        ".prettierrc.js",
+        ".prettierignore",
+        "package.json",
+        "packages/workspace/src/prettier/**",
+        "packages/workspace/package.json"
+      ]
     }
   },
   "globalDependencies": ["tsconfig.json"]

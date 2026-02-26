@@ -1,6 +1,8 @@
 "use client"
 
-import { CornerRightDown } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { CornerRightDown as OriginalCornerRightDownIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const CornerRightDownIcon = component(Icon)({ as: CornerRightDown })
+export const CornerRightDownIcon = component(Icon)({
+  as: OriginalCornerRightDownIcon,
+}) as Component<"svg", IconProps>

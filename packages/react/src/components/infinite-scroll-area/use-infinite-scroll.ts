@@ -18,8 +18,10 @@ const isScrollable = (el: HTMLElement, vertical: boolean) => {
   }
 }
 
-export interface UseInfiniteScrollProps
-  extends Omit<IntersectionObserverInit, "root"> {
+export interface UseInfiniteScrollProps extends Omit<
+  IntersectionObserverInit,
+  "root"
+> {
   /**
    * Determines whether scrolling is instant or animates smoothly.
    */
@@ -85,8 +87,8 @@ export interface UseInfiniteScrollProps
     finish,
     index,
   }: {
-    finish: () => void
     index: number
+    finish: () => void
     entry?: IntersectionObserverEntry
   }) => Promise<void> | void
 }

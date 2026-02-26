@@ -9,9 +9,7 @@ import { progressStyle } from "./progress.style"
 import { useProgress } from "./use-progress"
 
 export interface ProgressProps
-  extends HTMLStyledProps,
-    UseProgressProps,
-    ThemeProps<ProgressStyle> {
+  extends HTMLStyledProps, UseProgressProps, ThemeProps<ProgressStyle> {
   /**
    * The animation duration in seconds.
    */

@@ -290,4 +290,35 @@ return <Calendar.Root value={value} onChange={setValue} />
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+### Keyboard Navigation
+
+| Key                  | Description                                                                                                | State |
+| -------------------- | ---------------------------------------------------------------------------------------------------------- | ----- |
+| `ArrowUp`            | Moves focus to the date above.                                                                             | -     |
+| `ArrowDown`          | Moves focus to the date below.                                                                             | -     |
+| `ArrowLeft`          | Moves focus to the date to the left. If it's the first date, moves to the last date of the previous month. | -     |
+| `ArrowRight`         | Moves focus to the date to the right. If it's the last date, moves to the first date of the next month.    | -     |
+| `Home`               | Moves focus to the first date in the same week.                                                            | -     |
+| `End`                | Moves focus to the last date in the same week.                                                             | -     |
+| `PageUp`             | Moves focus to the date in the previous month.                                                             | -     |
+| `Shift` + `PageUp`   | Moves focus to the date in the previous year.                                                              | -     |
+| `PageDown`           | Moves focus to the date in the next month.                                                                 | -     |
+| `Shift` + `PageDown` | Moves focus to the date in the next year.                                                                  | -     |
+| `Space`, `Enter`     | Toggles the selection state of the focused date.                                                           | -     |
+
+### ARIA Roles and Attributes
+
+| Component              | Roles and Attributes   | Usage                                                                                                     |
+| ---------------------- | ---------------------- | --------------------------------------------------------------------------------------------------------- |
+| `Calendar.YearSelect`  | `aria-label`           | Sets `"Choose the year"`.                                                                                 |
+| `Calendar.MonthSelect` | `aria-label`           | Sets `"Choose the month"`.                                                                                |
+| `Calendar.Control`     | `role="status"`        | Indicates that it is a status.                                                                            |
+|                        | `aria-live="polite"`   | Indicates that it may be updated outside of focus.                                                        |
+| `Calendar.Month`       | `role="grid"`          | Indicates that it is a grid.                                                                              |
+|                        | `aria-label`           | Sets the displayed month and year, like `"February 2026"`.                                                |
+|                        | `aria-multiselectable` | Sets `"true"` if multiple selection or range selection is enabled.                                        |
+| `Calendar.PrevButton`  | `aria-label`           | Sets `"Go to the previous month"`.                                                                        |
+| `Calendar.NextButton`  | `aria-label`           | Sets `"Go to the next month"`.                                                                            |
+| `CalendarDay`          | `aria-label`           | Sets the date, like `"Thursday, February 5, 2026"`. If today, sets `"Today, Thursday, February 5, 2026"`. |
+|                        | `aria-disabled`        | Sets `"true"` if the date is disabled.                                                                    |
+|                        | `aria-selected`        | Sets `"true"` if the date is selected.                                                                    |

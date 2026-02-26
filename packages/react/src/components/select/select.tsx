@@ -39,14 +39,13 @@ import { selectStyle } from "./select.style"
 import { SelectContext, useSelect, useSelectOption } from "./use-select"
 
 interface ComponentContext
-  extends Pick<UseSelectReturn, "getSeparatorProps">,
+  extends
+    Pick<UseSelectReturn, "getSeparatorProps">,
     Pick<SelectRootProps, "groupProps" | "optionProps"> {}
 
 export interface SelectRootProps<Multiple extends boolean = false>
-  extends Omit<
-      HTMLStyledProps,
-      "defaultValue" | "offset" | "onChange" | "value"
-    >,
+  extends
+    Omit<HTMLStyledProps, "defaultValue" | "offset" | "onChange" | "value">,
     UseSelectProps<Multiple>,
     PopupAnimationProps,
     ThemeProps<SelectStyle>,
@@ -324,8 +323,7 @@ export const SelectLabel = withContext<"span", SelectLabelProps>(
 })
 
 export interface SelectGroupProps
-  extends UseComboboxGroupProps,
-    HTMLStyledProps {
+  extends UseComboboxGroupProps, HTMLStyledProps {
   /**
    * The label of the group.
    */
@@ -358,8 +356,7 @@ export const SelectGroup = withContext<"div", SelectGroupProps>(
 )()
 
 export interface SelectOptionProps
-  extends UseSelectOptionProps,
-    HTMLStyledProps {
+  extends UseSelectOptionProps, HTMLStyledProps {
   /**
    * The icon to be used in the select option.
    */

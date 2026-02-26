@@ -6,9 +6,9 @@ import en from "./doc-map.en.json"
 import ja from "./doc-map.ja.json"
 
 interface Prop {
-  type: string
   description: string
   required: boolean
+  type: string
   defaultValue?: string
   deprecated?: string
   see?: string
@@ -37,20 +37,20 @@ export interface MdnDocs {
 
 export interface StyleConfig {
   as?: boolean
-  type?: string
   docs?: MdnDocs
   properties?: string[]
   shorthands?: string[]
   token?: ThemeToken
+  type?: string
 }
 
 export interface DocMap {
   segment: string
   title: Doc["title"]
+  __exists?: boolean
   items?: DocMap[]
   pathname?: string
   status?: Doc["status"]
-  __exists?: boolean
 }
 
 export function getDocs(locale: string): Doc[] {
@@ -74,10 +74,10 @@ export function flattenDocMap(items: DocMap[]): DocMap[] {
 }
 
 export interface FragmentContent {
-  type: "fragment"
   hierarchy: { [key: number]: string }
   pathname: string
   title: string
+  type: "fragment"
   group?: string
 }
 
@@ -109,9 +109,9 @@ function getFragments(
 }
 
 export interface PageContent {
-  type: "page"
   pathname: string
   title: string
+  type: "page"
   group?: string
 }
 

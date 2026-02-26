@@ -65,21 +65,10 @@ describe("<Highlight />", () => {
       }),
     )
 
-    expect(result.current).toMatchInlineSnapshot(`
-      [
-        {
-          "match": false,
-          "text": "this is an ordinary ",
-        },
-        {
-          "match": true,
-          "text": "text",
-        },
-        {
-          "match": false,
-          "text": " which should have one match ",
-        },
-      ]
-    `)
+    expect(result.current).toStrictEqual([
+      { match: false, text: "this is an ordinary " },
+      { match: true, text: "text" },
+      { match: false, text: " which should have one match " },
+    ])
   })
 })

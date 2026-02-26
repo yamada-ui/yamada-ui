@@ -1,6 +1,8 @@
 "use client"
 
-import { IterationCw } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { IterationCw as OriginalIterationCwIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const IterationCwIcon = component(Icon)({ as: IterationCw })
+export const IterationCwIcon = component(Icon)({
+  as: OriginalIterationCwIcon,
+}) as Component<"svg", IconProps>

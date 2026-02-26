@@ -1,6 +1,8 @@
 "use client"
 
-import { FileExclamationPoint } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FileExclamationPoint as OriginalFileExclamationPointIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -9,5 +11,5 @@ import { component, Icon } from "../icon"
  * @see https://yamada-ui.com/docs/components/icon
  */
 export const FileExclamationPointIcon = component(Icon)({
-  as: FileExclamationPoint,
-})
+  as: OriginalFileExclamationPointIcon,
+}) as Component<"svg", IconProps>

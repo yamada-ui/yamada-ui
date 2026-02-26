@@ -10,8 +10,7 @@ import {
 import { iconStyle } from "./icon.style"
 
 export interface IconProps
-  extends HTMLStyledProps<"svg">,
-    ThemeProps<IconStyle> {}
+  extends HTMLStyledProps<"svg">, ThemeProps<IconStyle> {}
 
 const {
   component,

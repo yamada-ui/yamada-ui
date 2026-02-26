@@ -1,6 +1,8 @@
 "use client"
 
-import { Github } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Github as OriginalGithubIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const GithubIcon = component(Icon)({ as: Github })
+export const GithubIcon = component(Icon)({
+  as: OriginalGithubIcon,
+}) as Component<"svg", IconProps>

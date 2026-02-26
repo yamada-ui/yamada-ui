@@ -3,21 +3,17 @@ import { isArray } from "../../utils"
 
 export interface ForProps<Y> {
   /**
-   * The render function to render each item in the array.
-   */
-  children: (value: Y, index: number, array: Y[]) => ReactNode
-  /**
    * The array to iterate over.
    */
   each: readonly Y[] | undefined | Y[]
   /**
+   * The render function to render each item in the array.
+   */
+  children: (value: Y, index: number, array: Y[]) => ReactNode
+  /**
    * The fallback content to render when the array is empty.
    */
   fallback?: ReactNode
-  /**
-   * A function that returns a boolean indicating whether the item should be included in the render result.
-   */
-  filter?: (value: Y, index: number, array: Y[]) => boolean
   /**
    * The maximum number of items to include in the render result.
    */
@@ -34,6 +30,10 @@ export interface ForProps<Y> {
    * @default false
    */
   reverse?: boolean
+  /**
+   * A function that returns a boolean indicating whether the item should be included in the render result.
+   */
+  filter?: (value: Y, index: number, array: Y[]) => boolean
   /**
    * The function to sort the items in the array.
    * If function is provided, the items will be sorted based on the return value.

@@ -20,7 +20,8 @@ import { colorSelectorStyle } from "./color-selector.style"
 import { useColorSelector } from "./use-color-selector"
 
 interface ComponentContext
-  extends Pick<
+  extends
+    Pick<
       ColorSelectorRootProps,
       | "alphaSliderProps"
       | "colorSwatches"
@@ -45,7 +46,8 @@ interface ComponentContext
     > {}
 
 export interface ColorSelectorRootProps
-  extends Merge<HTMLStyledProps, UseColorSelectorProps>,
+  extends
+    Merge<HTMLStyledProps, UseColorSelectorProps>,
     ThemeProps<ColorSelectorStyle> {
   /**
    * An array of colors in one of the supported formats.
@@ -257,8 +259,7 @@ export const ColorSelectorHueSlider = withContext<
   )
 }, "hueSlider")()
 
-export interface ColorSelectorAlphaSliderProps
-  extends Partial<AlphaSlider.RootProps> {}
+export interface ColorSelectorAlphaSliderProps extends Partial<AlphaSlider.RootProps> {}
 
 export const ColorSelectorAlphaSlider = withContext<
   "input",
@@ -297,8 +298,7 @@ export const ColorSelectorEyeDropper = withContext<
   })
 })
 
-export interface ColorSelectorColorSwatchGroupLabelProps
-  extends HTMLStyledProps<"span"> {}
+export interface ColorSelectorColorSwatchGroupLabelProps extends HTMLStyledProps<"span"> {}
 
 export const ColorSelectorColorSwatchGroupLabel = withContext<
   "span",
@@ -334,8 +334,10 @@ export const ColorSelectorColorSwatchGroup = withContext<
   })
 })
 
-export interface ColorSelectorColorSwatchItemProps
-  extends Omit<ColorSwatchProps, "color"> {
+export interface ColorSelectorColorSwatchItemProps extends Omit<
+  ColorSwatchProps,
+  "color"
+> {
   /**
    * The value of the color swatch.
    */

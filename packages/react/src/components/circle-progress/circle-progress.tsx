@@ -9,9 +9,7 @@ import { useProgress } from "../progress"
 import { circleProgressStyle } from "./circle-progress.style"
 
 export interface CircleProgressRootProps
-  extends HTMLStyledProps,
-    UseProgressProps,
-    ThemeProps<CircleProgressStyle> {
+  extends HTMLStyledProps, UseProgressProps, ThemeProps<CircleProgressStyle> {
   /**
    * The animation duration in seconds.
    */

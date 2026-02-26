@@ -15,8 +15,7 @@ const clamp = (value: number, min: number, max: number) =>
   Math.min(Math.max(value, min), max)
 
 export interface RippleProps
-  extends HTMLMotionProps<"span">,
-    ThemeProps<RippleStyle> {
+  extends HTMLMotionProps<"span">, ThemeProps<RippleStyle> {
   /**
    * The ripples to use.
    */

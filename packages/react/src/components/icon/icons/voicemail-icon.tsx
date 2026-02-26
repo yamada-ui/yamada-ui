@@ -1,6 +1,8 @@
 "use client"
 
-import { Voicemail } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Voicemail as OriginalVoicemailIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const VoicemailIcon = component(Icon)({ as: Voicemail })
+export const VoicemailIcon = component(Icon)({
+  as: OriginalVoicemailIcon,
+}) as Component<"svg", IconProps>

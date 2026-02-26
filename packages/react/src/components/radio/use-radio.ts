@@ -17,17 +17,10 @@ import { useFieldProps } from "../field"
 import { useRadioGroupContext } from "./use-radio-group"
 
 export interface UseRadioProps<Y extends string = string>
-  extends Omit<HTMLProps<"label">, "onBlur" | "onChange" | "onFocus" | "ref">,
+  extends
+    Omit<HTMLProps<"label">, "onBlur" | "onChange" | "onFocus" | "ref">,
     HTMLRefAttributes<"input">,
     FieldProps {
-  /**
-   * id assigned to input.
-   */
-  id?: string
-  /**
-   * The name of the input field in a radio.
-   */
-  name?: string
   /**
    * If `true`, the radio will be checked.
    */
@@ -38,6 +31,14 @@ export interface UseRadioProps<Y extends string = string>
    * @default false
    */
   defaultChecked?: boolean
+  /**
+   * id assigned to input.
+   */
+  id?: string
+  /**
+   * The name of the input field in a radio.
+   */
+  name?: string
   /**
    * The value of the radio.
    */

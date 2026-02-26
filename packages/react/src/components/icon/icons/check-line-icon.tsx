@@ -1,6 +1,8 @@
 "use client"
 
-import { CheckLine } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { CheckLine as OriginalCheckLineIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const CheckLineIcon = component(Icon)({ as: CheckLine })
+export const CheckLineIcon = component(Icon)({
+  as: OriginalCheckLineIcon,
+}) as Component<"svg", IconProps>

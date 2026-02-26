@@ -26,6 +26,10 @@ interface ComponentContext {
 
 export interface SnacksProps extends HTMLMotionProps {
   /**
+   * The snacks created by `useSnacks`.
+   */
+  snacks: UseSnacksReturn["snacks"]
+  /**
    * The CSS `gap` property.
    *
    * @default 'md'
@@ -43,10 +47,6 @@ export interface SnacksProps extends HTMLMotionProps {
    * @default true
    */
   negativeMargins?: boolean
-  /**
-   * The snacks created by `useSnacks`.
-   */
-  snacks: UseSnacksReturn["snacks"]
   /**
    * Props for the snacks list element.
    */

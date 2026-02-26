@@ -1,8 +1,8 @@
 import type { UsageThemeTokens } from "./system"
 
 export interface GeneratedThemeTokens extends UsageThemeTokens {
-  apply: never
   animations: never
+  apply: never
   aspectRatios:
     | "bronze"
     | "golden"

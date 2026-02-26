@@ -50,9 +50,9 @@ type MergedStyle = CSSModifierObject | CSSModifierObject<CSSSlotObject>
 
 interface GetStyleOptions
   extends Partial<Breakpoints>, Pick<Partial<Layers>, "wrap"> {
-  name?: string
   hasSlot?: boolean
   modifier?: string
+  name?: string
   selectors?: (string | undefined)[]
   value?: string
 }
@@ -405,11 +405,11 @@ interface UseStyleOptions<
   D extends keyof Y = keyof Y,
   H extends boolean = false,
 > {
-  name?: string
   className?: string
-  style?: M
   hasSlot?: H
+  name?: string
   slot?: ComponentSlot<ComponentSlotName<M>>
+  style?: M
   transferProps?: D[]
 }
 

@@ -8,34 +8,34 @@ function getErrorMessage(hookName: string, ContextName: string) {
 }
 
 interface Options<Y = any> {
-  name?: string
   defaultValue?: Y
   errorMessage?: string
   hookName?: string
+  name?: string
   strict?: boolean
 }
 
 type CreateContextReturn<Y> = [React.Context<Y>, () => Y]
 
 export function createContext<Y = any>(options: {
-  name?: string
   defaultValue?: Y
   errorMessage?: string
   hookName?: string
+  name?: string
   strict?: true
 }): CreateContextReturn<Y>
 export function createContext<Y = any>(options: {
-  name?: string
   defaultValue: Y
   errorMessage?: string
   hookName?: string
+  name?: string
   strict?: false
 }): CreateContextReturn<Y>
 export function createContext<Y = any>(options: {
-  name?: string
   defaultValue?: Y
   errorMessage?: string
   hookName?: string
+  name?: string
   strict?: false
 }): CreateContextReturn<undefined | Y>
 

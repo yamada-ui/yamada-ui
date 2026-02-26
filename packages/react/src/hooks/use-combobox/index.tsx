@@ -83,9 +83,9 @@ export const createComboboxItem = (
 }
 
 export interface CreateComboboxChildrenOptions {
-  Empty?: JSXElementConstructor<any>
   Group: JSXElementConstructor<any>
   Option: JSXElementConstructor<any>
+  Empty?: JSXElementConstructor<any>
 }
 
 export const createComboboxChildren = (

@@ -73,9 +73,9 @@ interface I18nContext<
   Y extends object = IntlData,
   M extends string = IntlPath,
 > extends Language {
+  t: Translation<Y, M>
   changeLanguage: (locale?: string, dir?: TextDirection) => void
   getTranslation: (key?: IntlKey) => Translation<Y, M>
-  t: Translation<Y, M>
 }
 
 export const I18nContext = createContext<I18nContext>({

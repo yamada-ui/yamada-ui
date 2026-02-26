@@ -17,12 +17,12 @@ interface BreakpointQuery {
 }
 
 export interface Breakpoints {
-  getQuery: (key: string) => string | undefined
-  isResponsive: (obj: any, strict?: boolean) => boolean
-  isResponsiveKey: (key: string) => boolean
   keys: Breakpoint[]
   queries: BreakpointQuery[]
   queriesObj: { [key: string]: BreakpointQuery }
+  getQuery: (key: string) => string | undefined
+  isResponsive: (obj: any, strict?: boolean) => boolean
+  isResponsiveKey: (key: string) => boolean
 }
 
 function createQuery(

@@ -16,10 +16,6 @@ export type UseClickableProps<
   M extends Props<Y> = Props<Y>,
 > = M & {
   /**
-   * The ref for the element.
-   */
-  ref?: Ref<Y>
-  /**
    * Whether or not trigger click on pressing `Enter`.
    *
    * @default true
@@ -56,6 +52,10 @@ export type UseClickableProps<
    * @default true
    */
   focusOnClick?: boolean
+  /**
+   * The ref for the element.
+   */
+  ref?: Ref<Y>
 }
 
 const isValidElement = (

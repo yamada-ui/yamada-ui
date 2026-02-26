@@ -51,6 +51,7 @@ export const standardStyles = {
     token: "easings",
     transform: transforms.token("easings"),
   },
+  animationTrigger: true,
   appearance: true,
   aspectRatio: {
     properties: ["aspectRatio"],
@@ -550,6 +551,7 @@ export const standardStyles = {
     properties: ["--brightness"],
     transform: pipe(transforms.function("brightness"), transforms.filter()),
   },
+  bufferedRendering: true,
   captionSide: true,
   caretAnimation: true,
   caretColor: {
@@ -571,6 +573,7 @@ export const standardStyles = {
   colorInterpolation: true,
   colorInterpolationFilters: true,
   colorMode: { properties: ["colorScheme"] },
+  colorRendering: true,
   columnCount: true,
   columnFill: true,
   columnGap: {
@@ -582,6 +585,7 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
+  columnHeight: true,
   columnRule: { properties: ["columnRule"], transform: transforms.px },
   columnRuleColor: {
     properties: ["columnRuleColor"],
@@ -605,6 +609,7 @@ export const standardStyles = {
       transforms.calc("sizes"),
     ),
   },
+  columnWrap: true,
   contain: true,
   container: true,
   containerName: true,
@@ -1730,6 +1735,9 @@ export const standardStyles = {
   textWrapMode: true,
   textWrapStyle: true,
   timelineScope: true,
+  timelineTrigger: true,
+  timelineTriggerName: true,
+  timelineTriggerSource: true,
   top: {
     properties: ["top"],
     token: "spaces",
@@ -1784,6 +1792,7 @@ export const standardStyles = {
     properties: ["--translate-z"],
     transform: pipe(transforms.function("translateZ"), transforms.transform),
   },
+  triggerScope: true,
   unicodeBidi: true,
   userModify: true,
   userSelect: true,
@@ -2295,21 +2304,221 @@ export const zIndexProperties = ["zIndex", "z"] as const
 
 export interface StyleProps {
   /**
-   * Apply other styles defined in `theme.styles`.
+   * ### container
+   *
+   * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2025-08-14
+   * @newly_available_date 2023-02-14
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@container
    */
-  apply?: StyleValueWithCondition<AnyString, "apply">
+  _container?: {
+    [key: string]: any
+    aspectRatio?: CSS.Property.AspectRatio
+    blockSize?: CSS.Property.BlockSize | number | ThemeTokens["sizes"]
+    css?: CSSObject
+    h?: CSS.Property.Height | number | ThemeTokens["sizes"]
+    height?: CSS.Property.Height | number | ThemeTokens["sizes"]
+    inlineSize?: CSS.Property.InlineSize | number | ThemeTokens["sizes"]
+    maxAspectRatio?: CSS.Property.AspectRatio
+    maxBlockSize?: CSS.Property.MaxBlockSize | number | ThemeTokens["sizes"]
+    maxH?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
+    maxHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
+    maxInlineSize?: CSS.Property.MaxInlineSize | number | ThemeTokens["sizes"]
+    maxW?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
+    maxWidth?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
+    minAspectRatio?: CSS.Property.AspectRatio
+    minBlockSize?: CSS.Property.MinBlockSize | number | ThemeTokens["sizes"]
+    minH?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
+    minHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
+    minInlineSize?: CSS.Property.MinInlineSize | number | ThemeTokens["sizes"]
+    minW?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
+    minWidth?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
+    name?: AnyString
+    orientation?: "landscape" | "portrait" | AnyString
+    query?: AnyString
+    w?: CSS.Property.Width | number | ThemeTokens["sizes"]
+    width?: CSS.Property.Width | number | ThemeTokens["sizes"]
+  }[]
   /**
-   * Apply layer styles defined in `theme.layerStyles`.
+   * ### keyframes
+   *
+   * The <code>animation</code> CSS property animates an element's style over time, using keyframes described in <code>@keyframes</code> rules.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@keyframes
    */
-  layerStyle?: StyleValueWithCondition<AnyString, "layerStyles">
+  _keyframes?: StyleValueWithCondition<
+    AnyString | { [key: string]: CSSObject },
+    "keyframes"
+  >
   /**
-   * Apply text styles defined in `theme.textStyles`.
+   * ### media
+   *
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
    */
-  textStyle?: StyleValueWithCondition<AnyString, "textStyles">
+  _landscape?: StyleValueWithCondition<CSSObject>
   /**
-   * Set color scheme variables.
+   * ### media
+   *
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
    */
-  colorScheme?: StyleValueWithCondition<AnyString | ColorScheme>
+  _media?: {
+    [key: string]: any
+    anyHover?: "hover" | "none" | AnyString
+    anyPointer?: "coarse" | "fine" | "none" | AnyString
+    aspectRatio?: CSS.Property.AspectRatio
+    color?: AnyString | number
+    colorGamut?: "p3" | "rec2020" | "srgb" | AnyString
+    colorIndex?: AnyString | number
+    css?: CSSObject
+    deviceAspectRatio?: CSS.Property.AspectRatio
+    deviceHeight?: CSS.Property.Height | number | ThemeTokens["sizes"]
+    deviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
+    displayMode?:
+      | "browser"
+      | "fullscreen"
+      | "minimal-ui"
+      | "picture-in-picture"
+      | "standalone"
+      | "window-controls-overlay"
+      | AnyString
+    dynamicRange?: "high" | "standard" | AnyString
+    forcedColors?: "active" | "none" | AnyString
+    grid?: 0 | 1 | "AnyString"
+    h?: CSS.Property.Height | number | ThemeTokens["sizes"]
+    height?: CSS.Property.Height | number | ThemeTokens["sizes"]
+    hover?: "hover" | "none" | AnyString
+    invertedColors?: "inverted" | "none" | AnyString
+    maxColor?: AnyString | number
+    maxColorIndex?: AnyString | number
+    maxDeviceAspectRatio?: CSS.Property.AspectRatio
+    maxDeviceHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
+    maxH?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
+    maxHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
+    maxMonochrome?: AnyString | number
+    maxResolution?: AnyString
+    maxW?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
+    maxWidth?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
+    mazDeviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
+    minColor?: AnyString | number
+    minColorIndex?: AnyString | number
+    minDeviceAspectRatio?: CSS.Property.AspectRatio
+    minDeviceHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
+    minDeviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
+    minH?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
+    minHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
+    minMonochrome?: AnyString | number
+    minResolution?: AnyString
+    minW?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
+    minWidth?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
+    monochrome?: AnyString | number
+    orientation?: "landscape" | "portrait" | AnyString
+    overflowBlock?: "none" | "optional-paged" | "paged" | "scroll" | AnyString
+    overflowInline?: "none" | "scroll" | AnyString
+    pointer?: "coarse" | "fine" | "none" | AnyString
+    prefersColorScheme?: "dark" | "light" | AnyString
+    prefersContrast?: "custom" | "high" | "low" | "no-preference" | AnyString
+    prefersReducedMotion?: "no-preference" | "reduce" | AnyString
+    query?: AnyString
+    resolution?: AnyString
+    scan?: "interlace" | "progressive" | AnyString
+    scripting?: "enabled" | "initial-only" | "none" | AnyString
+    type?: "all" | "print" | "screen" | "speech" | AnyString
+    update?: "fast" | "none" | "slow" | AnyString
+    videoDynamicRange?: "high" | "standard" | AnyString
+    w?: CSS.Property.Width | number | ThemeTokens["sizes"]
+    width?: CSS.Property.Width | number | ThemeTokens["sizes"]
+  }[]
+  /**
+   * ### media
+   *
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
+   */
+  _mediaDark?: StyleValueWithCondition<CSSObject>
+  /**
+   * ### media
+   *
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
+   */
+  _mediaLight?: StyleValueWithCondition<CSSObject>
+  /**
+   * ### media
+   *
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
+   */
+  _mediaReduceMotion?: StyleValueWithCondition<CSSObject>
+  /**
+   * ### media
+   *
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
+   */
+  _portrait?: StyleValueWithCondition<CSSObject>
+  /**
+   * ### media
+   *
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
+   */
+  _print?: StyleValueWithCondition<CSSObject>
+  /**
+   * ### supports
+   *
+   * The <code>@supports</code> at-rule applies styles based on a browser's support for CSS features, such as a CSS property and value. Also known as feature queries.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@supports
+   */
+  _supports?: { css?: CSSObject; query?: AnyString }[]
   /**
    * ### accent-color
    *
@@ -2405,7 +2614,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-anchor-position-1/#propdef-anchor-scope
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/anchor-scope
    */
   anchorScope?: StyleValueWithCondition<CSS.Property.AnchorScope>
   /**
@@ -2425,7 +2634,8 @@ export interface StyleProps {
    *
    * The <code>animation-composition</code> CSS property chooses how to combine animations that affect the same property.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-01-04
    * @newly_available_date 2023-07-04
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-composition
@@ -2577,6 +2787,16 @@ export interface StyleProps {
     "easings"
   >
   /**
+   * ### animation-trigger
+   *
+   * The CSS `animation-trigger` property.
+   *
+   * @see https://drafts.csswg.org/css-animations-2/#animation-trigger-prop
+   *
+   * @experimental
+   */
+  animationTrigger?: StyleValueWithCondition<AnyString>
+  /**
    * ### appearance
    *
    * The <code>appearance</code> CSS property controls the appearance of form controls. Using <code>appearance: none</code> disables any default native appearance and allows the elements to be styled with CSS.
@@ -2588,6 +2808,10 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/appearance
    */
   appearance?: StyleValueWithCondition<CSS.Property.Appearance>
+  /**
+   * Apply other styles defined in `theme.styles`.
+   */
+  apply?: StyleValueWithCondition<AnyString, "apply">
   /**
    * ### aspect-ratio
    *
@@ -2682,9 +2906,7 @@ export interface StyleProps {
    *
    * The <code>background-attachment</code> CSS property sets whether an element's background image or gradient moves as the element scrolls.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2024-09-14
-   * @newly_available_date 2022-03-14
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-attachment
    */
@@ -2872,9 +3094,7 @@ export interface StyleProps {
    *
    * The <code>background-attachment</code> CSS property sets whether an element's background image or gradient moves as the element scrolls.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2024-09-14
-   * @newly_available_date 2022-03-14
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-attachment
    */
@@ -4575,6 +4795,14 @@ export interface StyleProps {
    */
   brightness?: StyleValueWithCondition<AnyString>
   /**
+   * ### buffered-rendering
+   *
+   * The CSS `buffered-rendering` property.
+   *
+   * @deprecated
+   */
+  bufferedRendering?: StyleValueWithCondition<AnyString>
+  /**
    * ### caption-side
    *
    * The <code>&#x3C;table></code> HTML element, with several related elements, represents tabular data in rows and columns of cells.
@@ -4737,6 +4965,18 @@ export interface StyleProps {
    */
   colorMode?: StyleValueWithCondition<CSS.Property.ColorScheme>
   /**
+   * ### color-rendering
+   *
+   * The CSS `color-rendering` property.
+   *
+   * @deprecated
+   */
+  colorRendering?: StyleValueWithCondition<CSS.Property.ColorRendering>
+  /**
+   * Set color scheme variables.
+   */
+  colorScheme?: StyleValueWithCondition<AnyString | ColorScheme>
+  /**
    * ### column-count
    *
    * Multi-column layout flows an element's content across one or more columns in a single row, without affecting the <code>display</code> property of its children.
@@ -4772,6 +5012,16 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-gap
    */
   columnGap?: StyleValueWithCondition<CSS.Property.ColumnGap | number, "spaces">
+  /**
+   * ### column-height
+   *
+   * The CSS `column-height` property.
+   *
+   * @see https://drafts.csswg.org/css-multicol-2/#propdef-column-height
+   *
+   * @experimental
+   */
+  columnHeight?: StyleValueWithCondition<AnyString>
   /**
    * ### column-rule
    *
@@ -4864,6 +5114,16 @@ export interface StyleProps {
     CSS.Property.ColumnWidth | number,
     "sizes"
   >
+  /**
+   * ### column-wrap
+   *
+   * The CSS `column-wrap` property.
+   *
+   * @see https://drafts.csswg.org/css-multicol-2/#propdef-column-wrap
+   *
+   * @experimental
+   */
+  columnWrap?: StyleValueWithCondition<AnyString>
   /**
    * ### contain
    *
@@ -5397,7 +5657,7 @@ export interface StyleProps {
   /**
    * ### filter
    *
-   * The <code>filter</code> CSS property applies one or more graphic effects to an element. You can use filter functions, such as <code>blur()</code> and <code>drop-shadow()</code>, alone or combined to produce different effects.
+   * The <code>filter</code> CSS property applies one or more graphic effects to an element. You can use filter functions, such as <code>blur()</code> and <code>drop-shadow()</code>, alone or combined to produce different effects. For instance, <code>filter: blur(2px)</code>.
    *
    * @baseline `Widely available`
    * @widely_available_date 2019-03-07
@@ -5687,9 +5947,11 @@ export interface StyleProps {
    *
    * The <code>font-stretch</code> CSS property selects a font face from a font family based on width, either by a keyword such as <code>condensed</code> or a percentage.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-stretch
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
    *
-   * @deprecated
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-stretch
    */
   fontStretch?: StyleValueWithCondition<CSS.Property.FontStretch>
   /**
@@ -6613,6 +6875,10 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-self
    */
   justifySelf?: StyleValueWithCondition<CSS.Property.JustifySelf>
+  /**
+   * Apply layer styles defined in `theme.layerStyles`.
+   */
+  layerStyle?: StyleValueWithCondition<AnyString, "layerStyles">
   /**
    * ### line-height
    *
@@ -8308,9 +8574,10 @@ export interface StyleProps {
   /**
    * ### page
    *
-   * The <code>:first</code>, <code>:left</code>, and <code>:right</code> pseudo-classes select pages based on their position in sequence after pagination. They're often used with the <code>page</code> CSS property, to choose a print layout defined by the <code>@page</code> rule.
+   * The <code>@page</code> CSS at-rule sets the page-specific dimensions and margins for content such as printed documents, ebooks, or slides.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2024-12-11
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/page
    */
@@ -8350,7 +8617,8 @@ export interface StyleProps {
    *
    * The <code>paint-order</code> CSS property sets the z-order of strokes, fills, and (in SVG content) markers. For example, <code>paint-order: markers stroke fill;</code> draws the markers, then stroke on top of markers, then fill on top of both markers and stroke.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2024-03-22
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/paint-order
    */
@@ -9838,7 +10106,7 @@ export interface StyleProps {
    * @widely_available_date 2022-07-15
    * @newly_available_date 2020-01-15
    *
-   * @see https://drafts.fxtf.org/fill-stroke-3/#stroke-color
+   * @see https://drafts.csswg.org/fill-stroke-3/#stroke-color
    *
    * @experimental
    */
@@ -10322,6 +10590,10 @@ export interface StyleProps {
    */
   textSpacingTrim?: StyleValueWithCondition<CSS.Property.TextSpacingTrim>
   /**
+   * Apply text styles defined in `theme.textStyles`.
+   */
+  textStyle?: StyleValueWithCondition<AnyString, "textStyles">
+  /**
    * ### text-transform
    *
    * The <code>text-transform</code> CSS property sets text case and capitalization.
@@ -10399,6 +10671,36 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/timeline-scope
    */
   timelineScope?: StyleValueWithCondition<CSS.Property.TimelineScope>
+  /**
+   * ### timeline-trigger
+   *
+   * The CSS `timeline-trigger` property.
+   *
+   * @see https://drafts.csswg.org/css-animations-2/#timeline-trigger-shorthand
+   *
+   * @experimental
+   */
+  timelineTrigger?: StyleValueWithCondition<AnyString>
+  /**
+   * ### timeline-trigger-name
+   *
+   * The CSS `timeline-trigger-name` property.
+   *
+   * @see https://drafts.csswg.org/css-animations-2/#timeline-trigger-name
+   *
+   * @experimental
+   */
+  timelineTriggerName?: StyleValueWithCondition<AnyString>
+  /**
+   * ### timeline-trigger-source
+   *
+   * The CSS `timeline-trigger-source` property.
+   *
+   * @see https://drafts.csswg.org/css-animations-2/#timeline-trigger-source
+   *
+   * @experimental
+   */
+  timelineTriggerSource?: StyleValueWithCondition<AnyString>
   /**
    * ### top
    *
@@ -10594,6 +10896,16 @@ export interface StyleProps {
    * Sets the value of `--translate-z`.
    */
   translateZ?: StyleValueWithCondition<AnyString | number>
+  /**
+   * ### trigger-scope
+   *
+   * The CSS `trigger-scope` property.
+   *
+   * @see https://drafts.csswg.org/css-animations-2/#trigger-scope
+   *
+   * @experimental
+   */
+  triggerScope?: StyleValueWithCondition<AnyString>
   /**
    * If `true`, it clamps truncate a text after one line.
    */
@@ -10902,220 +11214,4 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/zoom
    */
   zoom?: StyleValueWithCondition<CSS.Property.Zoom>
-  /**
-   * ### container
-   *
-   * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2025-08-14
-   * @newly_available_date 2023-02-14
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@container
-   */
-  _container?: {
-    [key: string]: any
-    name?: AnyString
-    css?: CSSObject
-    aspectRatio?: CSS.Property.AspectRatio
-    blockSize?: CSS.Property.BlockSize | number | ThemeTokens["sizes"]
-    h?: CSS.Property.Height | number | ThemeTokens["sizes"]
-    height?: CSS.Property.Height | number | ThemeTokens["sizes"]
-    inlineSize?: CSS.Property.InlineSize | number | ThemeTokens["sizes"]
-    maxAspectRatio?: CSS.Property.AspectRatio
-    maxBlockSize?: CSS.Property.MaxBlockSize | number | ThemeTokens["sizes"]
-    maxH?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
-    maxHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
-    maxInlineSize?: CSS.Property.MaxInlineSize | number | ThemeTokens["sizes"]
-    maxW?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
-    maxWidth?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
-    minAspectRatio?: CSS.Property.AspectRatio
-    minBlockSize?: CSS.Property.MinBlockSize | number | ThemeTokens["sizes"]
-    minH?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
-    minHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
-    minInlineSize?: CSS.Property.MinInlineSize | number | ThemeTokens["sizes"]
-    minW?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
-    minWidth?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
-    orientation?: "landscape" | "portrait" | AnyString
-    query?: AnyString
-    w?: CSS.Property.Width | number | ThemeTokens["sizes"]
-    width?: CSS.Property.Width | number | ThemeTokens["sizes"]
-  }[]
-  /**
-   * ### keyframes
-   *
-   * The <code>animation</code> CSS property animates an element's style over time, using keyframes described in <code>@keyframes</code> rules.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-03-30
-   * @newly_available_date 2015-09-30
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@keyframes
-   */
-  _keyframes?: StyleValueWithCondition<
-    AnyString | { [key: string]: CSSObject },
-    "keyframes"
-  >
-  /**
-   * ### media
-   *
-   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
-   */
-  _landscape?: StyleValueWithCondition<CSSObject>
-  /**
-   * ### media
-   *
-   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
-   */
-  _media?: {
-    [key: string]: any
-    type?: "all" | "print" | "screen" | "speech" | AnyString
-    css?: CSSObject
-    anyHover?: "hover" | "none" | AnyString
-    anyPointer?: "coarse" | "fine" | "none" | AnyString
-    aspectRatio?: CSS.Property.AspectRatio
-    color?: AnyString | number
-    colorGamut?: "p3" | "rec2020" | "srgb" | AnyString
-    colorIndex?: AnyString | number
-    deviceAspectRatio?: CSS.Property.AspectRatio
-    deviceHeight?: CSS.Property.Height | number | ThemeTokens["sizes"]
-    deviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
-    displayMode?:
-      | "browser"
-      | "fullscreen"
-      | "minimal-ui"
-      | "picture-in-picture"
-      | "standalone"
-      | "window-controls-overlay"
-      | AnyString
-    dynamicRange?: "high" | "standard" | AnyString
-    forcedColors?: "active" | "none" | AnyString
-    grid?: 0 | 1 | "AnyString"
-    h?: CSS.Property.Height | number | ThemeTokens["sizes"]
-    height?: CSS.Property.Height | number | ThemeTokens["sizes"]
-    hover?: "hover" | "none" | AnyString
-    invertedColors?: "inverted" | "none" | AnyString
-    maxColor?: AnyString | number
-    maxColorIndex?: AnyString | number
-    maxDeviceAspectRatio?: CSS.Property.AspectRatio
-    maxDeviceHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
-    maxH?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
-    maxHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
-    maxMonochrome?: AnyString | number
-    maxResolution?: AnyString
-    maxW?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
-    maxWidth?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
-    mazDeviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
-    minColor?: AnyString | number
-    minColorIndex?: AnyString | number
-    minDeviceAspectRatio?: CSS.Property.AspectRatio
-    minDeviceHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
-    minDeviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
-    minH?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
-    minHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
-    minMonochrome?: AnyString | number
-    minResolution?: AnyString
-    minW?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
-    minWidth?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
-    monochrome?: AnyString | number
-    orientation?: "landscape" | "portrait" | AnyString
-    overflowBlock?: "none" | "optional-paged" | "paged" | "scroll" | AnyString
-    overflowInline?: "none" | "scroll" | AnyString
-    pointer?: "coarse" | "fine" | "none" | AnyString
-    prefersColorScheme?: "dark" | "light" | AnyString
-    prefersContrast?: "custom" | "high" | "low" | "no-preference" | AnyString
-    prefersReducedMotion?: "no-preference" | "reduce" | AnyString
-    query?: AnyString
-    resolution?: AnyString
-    scan?: "interlace" | "progressive" | AnyString
-    scripting?: "enabled" | "initial-only" | "none" | AnyString
-    update?: "fast" | "none" | "slow" | AnyString
-    videoDynamicRange?: "high" | "standard" | AnyString
-    w?: CSS.Property.Width | number | ThemeTokens["sizes"]
-    width?: CSS.Property.Width | number | ThemeTokens["sizes"]
-  }[]
-  /**
-   * ### media
-   *
-   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
-   */
-  _mediaDark?: StyleValueWithCondition<CSSObject>
-  /**
-   * ### media
-   *
-   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
-   */
-  _mediaLight?: StyleValueWithCondition<CSSObject>
-  /**
-   * ### media
-   *
-   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
-   */
-  _mediaReduceMotion?: StyleValueWithCondition<CSSObject>
-  /**
-   * ### media
-   *
-   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
-   */
-  _portrait?: StyleValueWithCondition<CSSObject>
-  /**
-   * ### media
-   *
-   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
-   */
-  _print?: StyleValueWithCondition<CSSObject>
-  /**
-   * ### supports
-   *
-   * The <code>@supports</code> at-rule applies styles based on a browser's support for CSS features, such as a CSS property and value. Also known as feature queries.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-03-30
-   * @newly_available_date 2015-09-30
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@supports
-   */
-  _supports?: { css?: CSSObject; query?: AnyString }[]
 }

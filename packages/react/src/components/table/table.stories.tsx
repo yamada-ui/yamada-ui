@@ -28,11 +28,11 @@ const meta: Meta<typeof Table> = {
 export default meta
 
 interface Data {
-  id: string
   age: number
   createdAt: Date
   email: string
   firstName: string
+  id: string
   lastName: string
   phone: string
   role: string

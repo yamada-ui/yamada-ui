@@ -14,7 +14,7 @@
     },
     {
       "name": "code.tsx",
-      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { CodeStyle } from \"./code.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { codeStyle } from \"./code.style\"\n\nexport interface CodeProps\n  extends HTMLStyledProps<\"code\">,\n    ThemeProps<CodeStyle> {}\n\nconst {\n  PropsContext: CodePropsContext,\n  usePropsContext: useCodePropsContext,\n  withContext,\n} = createComponent<CodeProps, CodeStyle>(\"code\", codeStyle)\n\nexport { CodePropsContext, useCodePropsContext }\n\n/**\n * `Code` is a component that represents a code block. By default, it renders a `code` element.\n *\n * @see https://yamada-ui.com/docs/components/code\n */\nexport const Code = withContext(\"code\")()\n"
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { CodeStyle } from \"./code.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { codeStyle } from \"./code.style\"\n\nexport interface CodeProps\n  extends HTMLStyledProps<\"code\">, ThemeProps<CodeStyle> {}\n\nconst {\n  PropsContext: CodePropsContext,\n  usePropsContext: useCodePropsContext,\n  withContext,\n} = createComponent<CodeProps, CodeStyle>(\"code\", codeStyle)\n\nexport { CodePropsContext, useCodePropsContext }\n\n/**\n * `Code` is a component that represents a code block. By default, it renders a `code` element.\n *\n * @see https://yamada-ui.com/docs/components/code\n */\nexport const Code = withContext(\"code\")()\n"
     },
     {
       "name": "index.ts",

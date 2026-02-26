@@ -10,8 +10,7 @@ import { TriangleIcon } from "../icon"
 import { statStyle } from "./stat.style"
 
 export interface StatRootProps
-  extends HTMLStyledProps<"dl">,
-    ThemeProps<StatStyle> {
+  extends HTMLStyledProps<"dl">, ThemeProps<StatStyle> {
   /**
    * If `true`, container will center its children regardless of their width.
    *

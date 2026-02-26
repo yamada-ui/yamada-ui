@@ -144,15 +144,15 @@ export type UseAccordionReturn = ReturnType<typeof useAccordion>
 
 export interface UseAccordionItemProps extends HTMLProps {
   /**
+   * The index of the accordion item.
+   */
+  index: number
+  /**
    * If `true`, the accordion item will be disabled.
    *
    * @default false
    */
   disabled?: boolean
-  /**
-   * The index of the accordion item.
-   */
-  index: number
 }
 
 export const useAccordionItem = ({

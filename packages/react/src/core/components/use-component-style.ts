@@ -370,9 +370,9 @@ interface UseStyleOptions<
   H extends boolean = false,
 > {
   className?: string
-  style?: M
   hasSlot?: H
   slot?: ComponentSlot<ComponentSlotName<M>>
+  style?: M
   transferProps?: D[]
 }
 

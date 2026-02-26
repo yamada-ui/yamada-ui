@@ -390,13 +390,13 @@ function SearchContentBody({
 
 interface ItemProps extends Omit<HTMLProps<"a">, "href" | "popover" | "title"> {
   href: string
-  description?: ReactNode
   icon: ElementType
   title: ReactNode
   onActive: (
     descendant?: Descendant<HTMLAnchorElement, { href: string }>,
   ) => void
   onClose: () => void
+  description?: ReactNode
 }
 
 const Item = function Item({

@@ -128,15 +128,15 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
 
 export interface LoadingSharedProps {
   duration: null | number
-  initial?: boolean | string
   loadingScheme: LoadingScheme
   message: ReactNode | undefined
   onFinish: () => void
+  initial?: boolean | string
 }
 
 interface ControllerProps extends LoadingConfig {
-  ref: RefObject<Controller>
   component: FC<LoadingSharedProps>
+  ref: RefObject<Controller>
 }
 
 const Controller: FC<ControllerProps> = ({

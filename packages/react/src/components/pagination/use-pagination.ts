@@ -22,6 +22,10 @@ export interface UsePaginationProps extends Omit<
   "onChange" | "page"
 > {
   /**
+   * The total number of pages in pagination.
+   */
+  total: number
+  /**
    * Number of elements visible on the left/right edges.
    *
    * @default 1
@@ -50,10 +54,6 @@ export interface UsePaginationProps extends Omit<
    * @default 1
    */
   siblings?: number
-  /**
-   * The total number of pages in pagination.
-   */
-  total: number
   /**
    * The callback invoked when the page changes.
    */

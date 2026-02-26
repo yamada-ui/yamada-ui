@@ -64,11 +64,11 @@ const [MenuGroupContext, useMenuGroupContext] = createContext<MenuGroupContext>(
 )
 
 interface MainMenuContext {
-  closeOnSelect?: boolean
   descendants: Descendants<HTMLDivElement, MenuDescendantProps>
   onActiveDescendant: (descendant?: MenuDescendant) => void
   onCloseRef: RefObject<() => void>
   onSelect: (value?: string, closeOnSelect?: boolean) => void
+  closeOnSelect?: boolean
 }
 
 const [MainMenuContext, useMainMenuContext] = createContext<MainMenuContext>({
@@ -335,9 +335,9 @@ export interface UseSubMenuProps extends Omit<
   "defaultOpen" | "timing"
 > {
   descendants: Descendants<HTMLDivElement, MenuDescendantProps>
+  onActiveDescendant: (descendant?: MenuDescendant) => void
   disabled?: boolean
   subMenuDirection?: SubMenuDirection
-  onActiveDescendant: (descendant?: MenuDescendant) => void
 }
 
 export const useSubMenu = ({
@@ -705,13 +705,13 @@ export interface UseMenuOptionGroupProps<
   M extends MenuOptionGroupValue<Y> = MenuOptionGroupValue<Y>,
 > {
   /**
-   * The type of the menu option group.
-   */
-  type?: Y
-  /**
    * The initial value of the menu item group.
    */
   defaultValue?: M
+  /**
+   * The type of the menu option group.
+   */
+  type?: Y
   /**
    * The value of the menu item group.
    */

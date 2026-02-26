@@ -14,11 +14,11 @@ import {
 } from "../../utils"
 
 interface ToggleGroupContext {
+  onChangeMapRef: RefObject<Map<string, (value: boolean) => void>>
   disabled?: boolean
   readOnly?: boolean
   value?: string | string[]
   onChange?: <Y extends string = string>(value: undefined | Y) => void
-  onChangeMapRef: RefObject<Map<string, (value: boolean) => void>>
 }
 
 const [ToggleGroupContext, useToggleGroupContext] =

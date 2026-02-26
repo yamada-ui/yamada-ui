@@ -33,17 +33,17 @@ import {
 } from "typescript"
 
 interface ExportedType {
-  as?: string
   name: string
+  as?: string
   namespace?: string
 }
 
 interface Prop {
+  description: string
+  required: boolean
   type: string
   defaultValue?: string
   deprecated?: string
-  description: string
-  required: boolean
   see?: string
 }
 

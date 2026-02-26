@@ -1,6 +1,8 @@
 "use client"
 
-import { Rotate3d } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Rotate3d as OriginalRotate3dIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const Rotate3dIcon = component(Icon)({ as: Rotate3d })
+export const Rotate3dIcon = component(Icon)({
+  as: OriginalRotate3dIcon,
+}) as Component<"svg", IconProps>

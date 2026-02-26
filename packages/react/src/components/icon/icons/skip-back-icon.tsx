@@ -1,6 +1,8 @@
 "use client"
 
-import { SkipBack } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { SkipBack as OriginalSkipBackIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const SkipBackIcon = component(Icon)({ as: SkipBack })
+export const SkipBackIcon = component(Icon)({
+  as: OriginalSkipBackIcon,
+}) as Component<"svg", IconProps>

@@ -1,6 +1,8 @@
 "use client"
 
-import { LockOpen } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { LockOpen as OriginalLockOpenIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const LockOpenIcon = component(Icon)({ as: LockOpen })
+export const LockOpenIcon = component(Icon)({
+  as: OriginalLockOpenIcon,
+}) as Component<"svg", IconProps>

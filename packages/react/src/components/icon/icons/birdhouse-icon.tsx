@@ -1,6 +1,8 @@
 "use client"
 
-import { Birdhouse } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Birdhouse as OriginalBirdhouseIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const BirdhouseIcon = component(Icon)({ as: Birdhouse })
+export const BirdhouseIcon = component(Icon)({
+  as: OriginalBirdhouseIcon,
+}) as Component<"svg", IconProps>

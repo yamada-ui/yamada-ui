@@ -1,6 +1,8 @@
 "use client"
 
-import { PackageCheck } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { PackageCheck as OriginalPackageCheckIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const PackageCheckIcon = component(Icon)({ as: PackageCheck })
+export const PackageCheckIcon = component(Icon)({
+  as: OriginalPackageCheckIcon,
+}) as Component<"svg", IconProps>

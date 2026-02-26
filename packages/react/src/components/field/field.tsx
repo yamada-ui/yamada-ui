@@ -11,10 +11,10 @@ import { fieldStyle } from "./field.style"
 
 export interface FieldContext
   extends FieldProps, Pick<FieldRootProps, "replace"> {
-  id: string
   errorMessageId: string
   focused: boolean
   helperMessageId: string
+  id: string
   labelId: string
   onBlur: () => void
   onFocus: () => void

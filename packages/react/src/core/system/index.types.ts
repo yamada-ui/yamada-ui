@@ -215,6 +215,10 @@ export interface LoadingConfig {
 
 export interface ThemeConfig {
   /**
+   * The config of breakpoint.
+   */
+  breakpoint?: BreakpointConfig
+  /**
    * The config of the CSS.
    */
   css?: {
@@ -233,10 +237,6 @@ export interface ThemeConfig {
      */
     varPrefix?: string
   }
-  /**
-   * The config of breakpoint.
-   */
-  breakpoint?: BreakpointConfig
   /**
    * The default color mode.
    * If `system`, the system will apply the color mode.
@@ -296,38 +296,46 @@ export interface ThemeConfig {
   }
 }
 
+type ThemeToken<Y extends string, M extends Dict> = M extends {
+  [H in Y]?: infer D
+}
+  ? Exclude<Extract<keyof NonNullable<D>, string>, "base">
+  : never
+
 type ThemeVariantProps<Y extends Dict = Dict> =
-  string extends keyof Required<Y>["variants"]
-    ? {}
-    : {
-        /**
-         * The variant of the component.
-         */
-        variant?: StyleValueWithCondition<
-          Exclude<keyof Required<Y>["variants"], "base">
-        >
-      }
+  ThemeToken<"variants", Y> extends infer M
+    ? string extends M
+      ? {}
+      : {
+          /**
+           * The variant of the component.
+           */
+          variant?: StyleValueWithCondition<M>
+        }
+    : {}
 
 type ThemeSizeProps<Y extends Dict = Dict> =
-  string extends keyof Required<Y>["sizes"]
-    ? {}
-    : {
-        /**
-         * The size of the component.
-         */
-        size?: StyleValueWithCondition<
-          Exclude<keyof Required<Y>["sizes"], "base">
-        >
-      }
+  ThemeToken<"sizes", Y> extends infer M
+    ? string extends M
+      ? {}
+      : {
+          /**
+           * The size of the component.
+           */
+          size?: StyleValueWithCondition<M>
+        }
+    : {}
 
-type ThemeComponentProps<Y extends Dict = Dict> =
-  string extends keyof Required<Y>["props"]
-    ? {}
-    : {
-        [K in keyof Required<Y>["props"]]?: StyleValue<
-          Booleanish<keyof Required<Y>["props"][K]>
-        >
-      }
+export type ThemeComponentProps<Y extends Dict = Dict> =
+  ThemeToken<"props", Y> extends infer M
+    ? string extends M
+      ? {}
+      : {
+          [D in Extract<M, string>]?: StyleValue<
+            Booleanish<Extract<keyof NonNullable<Y["props"]>[D], string>>
+          >
+        }
+    : {}
 
 export type ThemeProps<Y extends Dict = Dict> = ThemeComponentProps<Y> &
   ThemeSizeProps<Y> &
@@ -340,11 +348,21 @@ export type WithoutThemeProps<
 > = Omit<
   Y,
   Exclude<
-    | (string extends keyof Required<M>["props"]
-        ? never
-        : keyof Required<M>["props"])
-    | (string extends keyof Required<M>["sizes"] ? never : "size")
-    | (string extends keyof Required<M>["variants"] ? never : "variant"),
+    | (ThemeToken<"props", M> extends infer H
+        ? string extends H
+          ? never
+          : H
+        : never)
+    | (ThemeToken<"sizes", M> extends infer H
+        ? string extends H
+          ? never
+          : "size"
+        : never)
+    | (ThemeToken<"variants", M> extends infer H
+        ? string extends H
+          ? never
+          : "variant"
+        : never),
     keyof Y extends D ? never : D
   >
 >
@@ -400,8 +418,8 @@ export type DefineThemeColorSemanticValue =
   | ThemeTokens["colors"]
 
 export interface DefineThemeColorSemanticToken {
-  base?: DefineThemeColorSemanticValue
   [key: string]: any
+  base?: DefineThemeColorSemanticValue
   bg?: DefineThemeColorSemanticValue
   contrast?: DefineThemeColorSemanticValue
   default?: DefineThemeColorSemanticValue
@@ -519,11 +537,11 @@ export type ComponentDefaultProps<
   /**
    * The size of the component.
    */
-  size?: StyleValueWithCondition<keyof M>
+  size?: StyleValueWithCondition<Exclude<keyof M, "base">>
   /**
    * The variant of the component.
    */
-  variant?: StyleValueWithCondition<keyof D>
+  variant?: StyleValueWithCondition<Exclude<keyof D, "base">>
 }
 
 interface ComponentSharedStyle<
@@ -564,12 +582,12 @@ export type ComponentCompound<
           | Booleanish<keyof M[key]>[]
           | RegExp
       }) & {
+    [key: string]: any
     css: Y
     colorScheme?:
       | RegExp
       | ThemeTokens["colorSchemes"]
       | ThemeTokens["colorSchemes"][]
-    [key: string]: any
     layer?: LayerScheme
   }
 

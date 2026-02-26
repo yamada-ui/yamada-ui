@@ -106,12 +106,12 @@ export interface StyledOptions<
   D extends CSSModifierObject = CSSModifierObject,
   H extends number | string | symbol = string,
 > extends Omit<ComponentStyle<Y, M, D>, "className"> {
-  name?: string
-  target?: string
   className?: ((system: System) => string) | string
   displayName?: string
   forwardAsChild?: boolean
+  name?: string
   shouldForwardProp?: boolean | ShouldForwardProp
+  target?: string
   forwardProps?: string[]
   transferProps?: H[]
 }

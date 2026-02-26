@@ -1,6 +1,8 @@
 "use client"
 
-import { ChevronsDownUp } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { ChevronsDownUp as OriginalChevronsDownUpIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const ChevronsDownUpIcon = component(Icon)({ as: ChevronsDownUp })
+export const ChevronsDownUpIcon = component(Icon)({
+  as: OriginalChevronsDownUpIcon,
+}) as Component<"svg", IconProps>

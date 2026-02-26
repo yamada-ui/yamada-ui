@@ -21,6 +21,14 @@ export interface RotateProps
     Omit<HTMLMotionProps<"button">, "onChange" | "rotate">,
     ThemeProps<RotateStyle> {
   /**
+   * Passing React elements to "from" is required.
+   */
+  from: ReactNode
+  /**
+   * Passing React elements to "to" is required.
+   */
+  to: ReactNode
+  /**
    * You can set the initial state.
    *
    * @default 'from'
@@ -45,10 +53,6 @@ export interface RotateProps
    */
   duration?: number
   /**
-   * Passing React elements to "from" is required.
-   */
-  from: ReactNode
-  /**
    * If `true`, the component is readonly.
    *
    * @default false
@@ -60,10 +64,6 @@ export interface RotateProps
    * @default 45
    */
   rotate?: number
-  /**
-   * Passing React elements to "to" is required.
-   */
-  to: ReactNode
   /**
    * Use this when you want to control the animation from outside the component.
    */

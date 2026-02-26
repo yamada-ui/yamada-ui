@@ -263,4 +263,28 @@ return <Input value={value} onChange={(ev) => setValue(ev.target.value)} />
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Input`.
+
+```tsx
+<Input type="email" aria-label="Email address" />
+```
+
+```tsx
+<VStack gap="sm">
+  <Text as="h3" id="label">
+    Email address
+  </Text>
+
+  <Input type="email" aria-labelledby="label" />
+</VStack>
+```
+
+### ARIA Roles and Attributes
+
+| Component | Roles and Attributes | Usage                                                                                                                                                         |
+| --------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Input`   | `aria-invalid`       | Sets to `"true"` if `invalid` is set.                                                                                                                         |
+|           | `aria-disabled`      | Sets to `"true"` if `disabled` is set.                                                                                                                        |
+|           | `aria-describedby`   | If `Input` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|           | `aria-readonly`      | Sets to `"true"` if `readOnly` is set.                                                                                                                        |
+|           | `aria-required`      | Sets to `"true"` if `required` is set.                                                                                                                        |

@@ -1,6 +1,8 @@
 "use client"
 
-import { WineOff } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { WineOff as OriginalWineOffIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const WineOffIcon = component(Icon)({ as: WineOff })
+export const WineOffIcon = component(Icon)({
+  as: OriginalWineOffIcon,
+}) as Component<"svg", IconProps>

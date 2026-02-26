@@ -87,9 +87,9 @@ export interface UseInfiniteScrollProps extends Omit<
     finish,
     index,
   }: {
-    entry?: IntersectionObserverEntry
-    finish: () => void
     index: number
+    finish: () => void
+    entry?: IntersectionObserverEntry
   }) => Promise<void> | void
 }
 

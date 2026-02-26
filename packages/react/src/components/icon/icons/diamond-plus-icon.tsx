@@ -1,6 +1,8 @@
 "use client"
 
-import { DiamondPlus } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { DiamondPlus as OriginalDiamondPlusIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const DiamondPlusIcon = component(Icon)({ as: DiamondPlus })
+export const DiamondPlusIcon = component(Icon)({
+  as: OriginalDiamondPlusIcon,
+}) as Component<"svg", IconProps>

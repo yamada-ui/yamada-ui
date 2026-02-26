@@ -18,19 +18,19 @@ export interface PointerCoords {
 }
 
 export interface PointerInput {
-  target?: HTMLElement
   coords?: PointerCoords
   keys?: string
   node?: Node
   offset?: number
+  target?: HTMLElement
 }
 
 export interface DragOptions {
-  target?: HTMLElement
   coords?: ((index: number) => PointerCoords | undefined) | PointerCoords
   count?: number
   interval?: number
   keys?: ((index: number) => string | undefined) | string
+  target?: HTMLElement
 }
 
 const defaultKeys = (i: number) => {

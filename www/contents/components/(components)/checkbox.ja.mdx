@@ -439,18 +439,18 @@ return (
 
 | キー    | 説明                                                           | 状態 |
 | ------- | -------------------------------------------------------------- | ---- |
-| `Tab`   | 無効ではないチェックボックスをフォーカスします。               | -    |
 | `Space` | フォーカスされたチェックボックスのチェック状態を切り替えます。 | -    |
 
 ### ARIAロールと属性
 
-| コンポーネント                   | ロールと属性       | 使い方                                                                                                                                                                                               |
-| -------------------------------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CheckboxGroup.Root`             | `role="group"`     | グループであることを示します。                                                                                                                                                                       |
-|                                  | `aria-labelledby`  | `CheckboxGroup.Root`が`Field.Root`内にあり、`Field.Root`に`label`または`Field.Label`が設定されている場合は、その`id`を設定します。                                                                   |
-|                                  | `aria-describedby` | `CheckboxGroup.Root`が`Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
-| `Checkbox`, `CheckboxGroup.Item` | `aria-checked`     | チェックボックスがチェックされている場合は`"true"`を設定し、チェックされていない場合は`"false"`を設定し、`indeterminate`が設定されている場合は`"mixed"`を設定します。                                |
-|                                  | `aria-describedby` | `Checkbox`が`Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。           |
-|                                  | `aria-disabled`    | `readOnly`が設定されている場合、またはチェックボックスが未選択でグループの`max`に達した場合に`"true"`を設定します。                                                                                  |
-|                                  | `aria-invalid`     | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                                |
-|                                  | `aria-required`    | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                               |
+| コンポーネント       | ロールと属性       | 使い方                                                                                                                                                                                               |
+| -------------------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CheckboxGroup.Root` | `role="group"`     | グループであることを示します。                                                                                                                                                                       |
+|                      | `aria-labelledby`  | `CheckboxGroup.Root`が`Field.Root`内にあり、`Field.Root`に`label`または`Field.Label`が設定されている場合は、その`id`を設定します。                                                                   |
+|                      | `aria-describedby` | `CheckboxGroup.Root`が`Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
+| `input`              | `aria-checked`     | チェックボックスがチェックされている場合は`"true"`を設定し、チェックされていない場合は`"false"`を設定し、`indeterminate`が設定されている場合は`"mixed"`を設定します。                                |
+|                      | `aria-describedby` | `Checkbox`が`Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。           |
+|                      | `aria-disabled`    | `readOnly`が設定されている場合、またはチェックボックスが未選択でグループの`max`に達した場合に`"true"`を設定します。                                                                                  |
+|                      | `aria-invalid`     | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                                |
+|                      | `aria-required`    | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                               |
+| `CheckboxIndicator`  | `aria-hidden`      | 要素をアクセシビリティツリーから除外します。                                                                                                                                                         |

@@ -493,6 +493,10 @@ export interface ChartLineProps<Y extends Dict = Dict> extends Merge<
   Omit<UseChartLineProps, "activeDot" | "data" | "dataKey" | "dot" | "label">
 > {
   /**
+   * The key of a group of data which should be unique in an chart.
+   */
+  dataKey: keyof Y
+  /**
    * The active dot to use for the line.
    *
    * @default true
@@ -502,10 +506,6 @@ export interface ChartLineProps<Y extends Dict = Dict> extends Merge<
    * The data to use for the line.
    */
   data?: Y[]
-  /**
-   * The key of a group of data which should be unique in an chart.
-   */
-  dataKey: keyof Y
   /**
    * The dot to use for the line.
    *

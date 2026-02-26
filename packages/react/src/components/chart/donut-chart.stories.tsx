@@ -2,14 +2,16 @@ import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { CSSProps } from "../../core"
 import { PropsTable } from "#storybook"
 import { useMemo } from "react"
-import { PieChart } from "."
+import { DonutChart } from "."
+import { styled } from "../../core"
 import { isString, toTitleCase } from "../../utils"
+import { Text } from "../text"
 
-type Story = StoryFn<typeof PieChart.Root>
+type Story = StoryFn<typeof DonutChart.Root>
 
-const meta: Meta<typeof PieChart.Root> = {
-  component: PieChart.Root,
-  title: "Components / Chart / PieChart",
+const meta: Meta<typeof DonutChart.Root> = {
+  component: DonutChart.Root,
+  title: "Components / Chart / DonutChart",
 }
 
 export default meta
@@ -34,13 +36,13 @@ const createData = (): Data[] => [
 ]
 
 export const Basic: Story = () => {
-  const series = useMemo<PieChart.PieProps<Data>[]>(
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
-  const data = useMemo(() => PieChart.mergeData(createData()), [])
+  const data = useMemo(() => DonutChart.mergeData(createData()), [])
 
-  return <PieChart.Root data={data} series={series} />
+  return <DonutChart.Root data={data} series={series} />
 }
 
 export const Composition: Story = () => {
@@ -87,44 +89,45 @@ export const Composition: Story = () => {
   )
 
   return (
-    <PieChart.Root>
-      <PieChart.Pie data={data} dataKey="visits" nameKey="browser">
-        <PieChart.LabelList color="white" dataKey="browser" />
-      </PieChart.Pie>
-      <PieChart.Tooltip />
-      <PieChart.Legend />
-    </PieChart.Root>
+    <DonutChart.Root>
+      <DonutChart.Donut data={data} dataKey="visits" nameKey="browser">
+        <DonutChart.LabelList color="white" dataKey="browser" />
+        <Text as="span">Donut Chart</Text>
+      </DonutChart.Donut>
+      <DonutChart.Tooltip />
+      <DonutChart.Legend />
+    </DonutChart.Root>
   )
 }
 
 export const Size: Story = () => {
-  const series = useMemo<PieChart.PieProps<Data>[]>(
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
-  const data = useMemo(() => PieChart.mergeData(createData()), [])
+  const data = useMemo(() => DonutChart.mergeData(createData()), [])
 
   return (
     <PropsTable variant="stack" rows={["xs", "sm", "md", "lg", "xl"]}>
       {(_, row, key) => (
-        <PieChart.Root key={key} size={row} data={data} series={series} />
+        <DonutChart.Root key={key} size={row} data={data} series={series} />
       )}
     </PropsTable>
   )
 }
 
 export const Gradients: Story = () => {
-  const series = useMemo<PieChart.PieProps<Data>[]>(
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
-  const data = useMemo(() => PieChart.mergeData(createData(), "blue"), [])
+  const data = useMemo(() => DonutChart.mergeData(createData(), "blue"), [])
 
-  return <PieChart.Root data={data} series={series} />
+  return <DonutChart.Root data={data} series={series} />
 }
 
 export const SectorColors: Story = () => {
-  const series = useMemo<PieChart.PieProps<Data>[]>(
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
@@ -170,11 +173,11 @@ export const SectorColors: Story = () => {
     [],
   )
 
-  return <PieChart.Root data={data} series={series} />
+  return <DonutChart.Root data={data} series={series} />
 }
 
 export const SectorStroke: Story = () => {
-  const series = useMemo<PieChart.PieProps<Data>[]>(
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
@@ -220,11 +223,11 @@ export const SectorStroke: Story = () => {
     [],
   )
 
-  return <PieChart.Root data={data} sectorStroke="none" series={series} />
+  return <DonutChart.Root data={data} sectorStroke="none" series={series} />
 }
 
 export const Legend: Story = () => {
-  const series = useMemo<PieChart.PieProps<Data>[]>(
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
@@ -285,7 +288,7 @@ export const Legend: Story = () => {
       ]}
     >
       {(_, placement, key) => (
-        <PieChart.Root
+        <DonutChart.Root
           key={key}
           data={data}
           series={series}
@@ -298,7 +301,7 @@ export const Legend: Story = () => {
 }
 
 export const Stacked: Story = () => {
-  const series = useMemo<PieChart.PieProps<Data>[]>(
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
     () => [
       {
         dataKey: "visits",
@@ -313,13 +316,13 @@ export const Stacked: Story = () => {
     ],
     [],
   )
-  const data = useMemo(() => PieChart.mergeData(createData()), [])
+  const data = useMemo(() => DonutChart.mergeData(createData()), [])
 
-  return <PieChart.Root data={data} series={series} />
+  return <DonutChart.Root data={data} series={series} />
 }
 
 export const Label: Story = () => {
-  const series = useMemo<PieChart.PieProps<Data>[]>(
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
@@ -366,12 +369,12 @@ export const Label: Story = () => {
   )
 
   return (
-    <PieChart.Root data={data} series={series} pieProps={{ label: true }} />
+    <DonutChart.Root data={data} series={series} donutProps={{ label: true }} />
   )
 }
 
 export const LabelLine: Story = () => {
-  const series = useMemo<PieChart.PieProps<Data>[]>(
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
@@ -419,16 +422,16 @@ export const LabelLine: Story = () => {
   )
 
   return (
-    <PieChart.Root
+    <DonutChart.Root
       data={data}
       series={series}
-      pieProps={{ label: true, labelLine: true }}
+      donutProps={{ label: true, labelLine: true }}
     />
   )
 }
 
 export const LabelOffset: Story = () => {
-  const series = useMemo<PieChart.PieProps<Data>[]>(
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
@@ -475,16 +478,16 @@ export const LabelOffset: Story = () => {
   )
 
   return (
-    <PieChart.Root
+    <DonutChart.Root
       data={data}
       series={series}
-      pieProps={{ label: { offset: 12 } }}
+      donutProps={{ label: { offset: 12 } }}
     />
   )
 }
 
 export const LabelList: Story = () => {
-  const series = useMemo<PieChart.PieProps<Data>[]>(
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
@@ -531,88 +534,158 @@ export const LabelList: Story = () => {
   )
 
   return (
-    <PieChart.Root
+    <DonutChart.Root
       data={data}
       series={series}
-      pieProps={{ labelList: { color: "white" } }}
+      donutProps={{ labelList: { color: "white" } }}
     />
   )
 }
 
-export const PaddingAngle: Story = () => {
-  const series = useMemo<PieChart.PieProps<Data>[]>(
+export const CenterLabel: Story = () => {
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
-  const data = useMemo(() => PieChart.mergeData(createData()), [])
+  const data = useMemo(() => DonutChart.mergeData(createData()), [])
+  const total = useMemo(
+    () => data.reduce((acc, { visits }) => acc + (visits ?? 0), 0),
+    [data],
+  )
 
   return (
-    <PieChart.Root
+    <>
+      <DonutChart.Root
+        data={data}
+        series={series}
+        tooltipProps={{ labelFormatter: () => null }}
+      >
+        <DonutChart.Label fontSize="5xl" fontWeight="bold" position="center">
+          Visitors
+        </DonutChart.Label>
+      </DonutChart.Root>
+
+      <DonutChart.Root
+        data={data}
+        tooltipProps={{ labelFormatter: () => null }}
+      >
+        <DonutChart.Donut dataKey="visits" nameKey="browser">
+          <DonutChart.Label
+            content={({ className, viewBox }) => {
+              if (!viewBox) return null
+              if (!("cx" in viewBox) || !("cy" in viewBox)) return null
+
+              return (
+                <text
+                  className={className}
+                  dominantBaseline="middle"
+                  textAnchor="middle"
+                  x={viewBox.cx}
+                  y={viewBox.cy}
+                >
+                  <styled.tspan asChild fontSize="6xl" fontWeight="bold">
+                    <tspan x={viewBox.cx} y={viewBox.cy}>
+                      {total.toLocaleString()}
+                    </tspan>
+                  </styled.tspan>
+
+                  <styled.tspan asChild color="fg.muted" fontSize="xl">
+                    <tspan x={viewBox.cx} y={viewBox.cy + 36}>
+                      Visitors
+                    </tspan>
+                  </styled.tspan>
+                </text>
+              )
+            }}
+          />
+        </DonutChart.Donut>
+      </DonutChart.Root>
+    </>
+  )
+}
+
+export const PaddingAngle: Story = () => {
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
+    () => [{ dataKey: "visits", nameKey: "browser" }],
+    [],
+  )
+  const data = useMemo(() => DonutChart.mergeData(createData()), [])
+
+  return (
+    <DonutChart.Root
       data={data}
       series={series}
-      pieProps={{ paddingAngle: 15 }}
+      donutProps={{ paddingAngle: 15 }}
     />
   )
 }
 
 export const StartAngle: Story = () => {
-  const series = useMemo<PieChart.PieProps<Data>[]>(
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
-  const data = useMemo(() => PieChart.mergeData(createData()), [])
+  const data = useMemo(() => DonutChart.mergeData(createData()), [])
 
   return (
-    <PieChart.Root data={data} series={series} pieProps={{ startAngle: 0 }} />
+    <DonutChart.Root
+      data={data}
+      series={series}
+      donutProps={{ startAngle: 0 }}
+    />
   )
 }
 
 export const EndAngle: Story = () => {
-  const series = useMemo<PieChart.PieProps<Data>[]>(
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
-  const data = useMemo(() => PieChart.mergeData(createData()), [])
+  const data = useMemo(() => DonutChart.mergeData(createData()), [])
 
   return (
-    <PieChart.Root data={data} series={series} pieProps={{ endAngle: -180 }} />
+    <DonutChart.Root
+      data={data}
+      series={series}
+      donutProps={{ endAngle: -180 }}
+    />
   )
 }
 
 export const InnerRadius: Story = () => {
-  const series = useMemo<PieChart.PieProps<Data>[]>(
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
-  const data = useMemo(() => PieChart.mergeData(createData()), [])
+  const data = useMemo(() => DonutChart.mergeData(createData()), [])
 
   return (
-    <PieChart.Root
+    <DonutChart.Root
       data={data}
       series={series}
-      pieProps={{ innerRadius: "70%" }}
+      donutProps={{ innerRadius: "50%" }}
     />
   )
 }
 
 export const OuterRadius: Story = () => {
-  const series = useMemo<PieChart.PieProps<Data>[]>(
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
-  const data = useMemo(() => PieChart.mergeData(createData()), [])
+  const data = useMemo(() => DonutChart.mergeData(createData()), [])
 
   return (
-    <PieChart.Root
+    <DonutChart.Root
       data={data}
       series={series}
-      pieProps={{ outerRadius: "90%" }}
+      donutProps={{ outerRadius: "80%" }}
     />
   )
 }
 
 export const ActiveSector: Story = () => {
-  const series = useMemo<PieChart.PieProps<Data>[]>(
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
     () => [
       {
         activeIndex: 0,
@@ -622,14 +695,13 @@ export const ActiveSector: Story = () => {
     ],
     [],
   )
-  const data = useMemo(() => PieChart.mergeData(createData()), [])
+  const data = useMemo(() => DonutChart.mergeData(createData()), [])
 
   return (
-    <PieChart.Root
+    <DonutChart.Root
       data={data}
       series={series}
-      pieProps={{
-        innerRadius: "70%",
+      donutProps={{
         sectorProps: ({ isActive, outerRadius }) => ({
           outerRadius: isActive ? outerRadius + 15 : outerRadius,
         }),
@@ -639,22 +711,22 @@ export const ActiveSector: Story = () => {
 }
 
 export const Synced: Story = () => {
-  const series = useMemo<PieChart.PieProps<Data>[]>(
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
-  const data = useMemo(() => PieChart.mergeData(createData()), [])
+  const data = useMemo(() => DonutChart.mergeData(createData()), [])
 
   return (
     <>
-      <PieChart.Root data={data} series={series} syncId="chart" />
-      <PieChart.Root data={data} series={series} syncId="chart" />
+      <DonutChart.Root data={data} series={series} syncId="chart" />
+      <DonutChart.Root data={data} series={series} syncId="chart" />
     </>
   )
 }
 
 export const Formatter: Story = () => {
-  const series = useMemo<PieChart.PieProps<Data>[]>(
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
@@ -701,10 +773,10 @@ export const Formatter: Story = () => {
   )
 
   return (
-    <PieChart.Root
+    <DonutChart.Root
       data={data}
       series={series}
-      pieProps={{
+      donutProps={{
         label: {
           formatter: (_, percent) => `${(percent * 100).toFixed(0)}%`,
         },
@@ -727,11 +799,11 @@ export const Formatter: Story = () => {
 }
 
 export const DisabledTooltip: Story = () => {
-  const series = useMemo<PieChart.PieProps<Data>[]>(
+  const series = useMemo<DonutChart.DonutProps<Data>[]>(
     () => [{ dataKey: "visits", nameKey: "browser" }],
     [],
   )
-  const data = useMemo(() => PieChart.mergeData(createData()), [])
+  const data = useMemo(() => DonutChart.mergeData(createData()), [])
 
-  return <PieChart.Root data={data} series={series} withTooltip={false} />
+  return <DonutChart.Root data={data} series={series} withTooltip={false} />
 }

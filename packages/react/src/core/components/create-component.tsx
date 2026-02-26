@@ -203,11 +203,17 @@ export function createComponent<
     const displayName = getDisplayName(name, defaultDisplayName)
     const ProxyComponent = createProxyComponent(el, options)
 
-    return function (...superProps: SuperProps<H>[]) {
+    return function (
+      initialProps?: InitialProps<H>,
+      ...superProps: SuperProps<H>[]
+    ) {
       return withDisplayName<D, H>((props) => {
         className = useClassName(name, className)
 
-        const mergedProps = chainProps<any>(...superProps)()(props)
+        const computedProps = isFunction(initialProps)
+          ? initialProps(props)
+          : mergeProps(initialProps ?? {}, props)()
+        const mergedProps = chainProps<any>(...superProps)()(computedProps)
 
         return (
           <ProxyComponent
@@ -380,11 +386,17 @@ export function createSlotComponent<
 
     classNameMap.set(slotKey, { className, slot })
 
-    return function (...superProps: SuperProps<R>[]) {
+    return function (
+      initialProps?: InitialProps<R>,
+      ...superProps: SuperProps<R>[]
+    ) {
       return withDisplayName<H, R>((props) => {
         className = useClassName(slot, className)
 
-        const mergedProps = chainProps(...superProps)()(props)
+        const computedProps = isFunction(initialProps)
+          ? initialProps(props)
+          : mergeProps(initialProps ?? {}, props)()
+        const mergedProps = chainProps(...superProps)()(computedProps)
 
         return (
           <ProxyComponent

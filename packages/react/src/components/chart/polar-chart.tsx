@@ -83,6 +83,10 @@ export interface PolarChartProps<Y extends Dict = Dict>
    */
   sectorStrokeWidth?: CSSProps["strokeWidth"]
   /**
+   * Props for the donut component.
+   */
+  donutProps?: Omit<ChartPieProps, "data" | "dataKey" | "nameKey">
+  /**
    * Props for the pie component.
    */
   pieProps?: Omit<ChartPieProps, "data" | "dataKey" | "nameKey">
@@ -93,6 +97,7 @@ export interface PolarChartProps<Y extends Dict = Dict>
 }
 
 const {
+  component,
   ComponentContext,
   PropsContext: PolarChartPropsContext,
   useComponentContext,
@@ -109,7 +114,8 @@ export { PolarChartPropsContext, usePolarChartPropsContext }
 export const PolarChart = withProvider(
   <Y extends Dict>({
     components: componentsProp,
-    pieProps,
+    donutProps,
+    pieProps = donutProps,
     sectorProps,
     ...rest
   }: PolarChartProps<Y>) => {
@@ -347,3 +353,19 @@ const ChartPieLabelLine = withContext<"path", ChartPieLabelLineProps>(
   },
   "labelLine",
 )()
+
+export interface ChartDonutProps<
+  Y extends Dict = Dict,
+> extends ChartPieProps<Y> {}
+
+export const ChartDonut = component<"svg", ChartDonutProps>(ChartPie, "donut")(
+  undefined,
+  (props) => {
+    const { pieProps } = useComponentContext()
+
+    return { ...pieProps, ...props }
+  },
+  ({ label, ...rest }) => ({ innerRadius: !label ? "70%" : "50%", ...rest }),
+) as GenericsComponent<{
+  <Y extends Dict>(props: ChartDonutProps<Y>): ReactElement
+}>

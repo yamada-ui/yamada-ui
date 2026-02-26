@@ -19,7 +19,7 @@ import type {
   ChartLineProps,
 } from "./cartesian-chart"
 import type { ChartStyle } from "./chart.style"
-import type { ChartPieProps } from "./polar-chart"
+import type { ChartDonutProps, ChartPieProps } from "./polar-chart"
 import type {
   UseChartLabelListProps,
   UseChartLabelProps,
@@ -121,6 +121,7 @@ export interface ChartProps<Y extends Dict = Dict>
   series?:
     | ChartAreaProps<Y>[]
     | ChartBarProps<Y>[]
+    | ChartDonutProps<Y>[]
     | ChartLineProps<Y>[]
     | ChartPieProps<Y>[]
   /**

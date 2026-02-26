@@ -5,25 +5,25 @@ import type { PolarChartProps as OriginalPolarChartProps } from "recharts/types/
 import type { GenericsComponent, ThemeProps } from "../../core"
 import type { Dict } from "../../utils"
 import type { ChartTooltipProps } from "./chart"
-import type { PieChartStyle } from "./pie-chart.style"
-import type { ChartPieProps, PolarChartProps } from "./polar-chart"
+import type { DonutChartStyle } from "./donut-chart.style"
+import type { ChartDonutProps, PolarChartProps } from "./polar-chart"
 import type { UsePieChartProps } from "./use-pie-chart"
 import { useCallback, useMemo } from "react"
 import { PieChart as OriginalPieChart } from "recharts"
 import { createComponent } from "../../core"
-import { pieChartStyle } from "./pie-chart.style"
-import { ChartPie, PolarChart } from "./polar-chart"
+import { donutChartStyle } from "./donut-chart.style"
+import { ChartDonut, PolarChart } from "./polar-chart"
 import { usePieChart } from "./use-pie-chart"
 
-export interface PieChartProps<Y extends Dict = Dict>
+export interface DonutChartProps<Y extends Dict = Dict>
   extends
-    Omit<PolarChartProps<Y>, "components" | "donutProps" | "render" | "series">,
+    Omit<PolarChartProps<Y>, "components" | "pieProps" | "render" | "series">,
     UsePieChartProps<Y>,
-    ThemeProps<PieChartStyle> {
+    ThemeProps<DonutChartStyle> {
   /***
    * If provided, generate lines based on series.
    */
-  series?: ChartPieProps<Y>[]
+  series?: ChartDonutProps<Y>[]
   /**
    * Props for the polar chart component.
    */
@@ -31,33 +31,36 @@ export interface PieChartProps<Y extends Dict = Dict>
 }
 
 const {
-  PropsContext: PieChartPropsContext,
-  usePropsContext: usePieChartPropsContext,
+  PropsContext: DonutChartPropsContext,
+  usePropsContext: useDonutChartPropsContext,
   withContext,
-} = createComponent<PieChartProps, PieChartStyle>("pie-chart", pieChartStyle)
+} = createComponent<DonutChartProps, DonutChartStyle>(
+  "donut-chart",
+  donutChartStyle,
+)
 
-export { PieChartPropsContext, usePieChartPropsContext }
+export { DonutChartPropsContext, useDonutChartPropsContext }
 
 /**
- * `PieChart` is a component for drawing pie charts to compare multiple sets of data.
+ * `DonutChart` is a component for drawing donut charts to compare multiple sets of data.
  *
- * @see https://yamada-ui.com/docs/components/pie-chart
+ * @see https://yamada-ui.com/docs/components/donut-chart
  */
-export const PieChart = withContext<"div", PieChartProps>(
+export const DonutChart = withContext<"div", DonutChartProps>(
   <Y extends Dict>({
     children,
     series = [],
     chartProps,
     tooltipProps,
     ...rest
-  }: PieChartProps<Y>) => {
+  }: DonutChartProps<Y>) => {
     const { getChartProps, getRootProps } = usePieChart(rest)
     const components = useMemo(
       () => [
         {
-          component: ChartPie,
+          component: ChartDonut,
           fallback: series.map((props, index) => (
-            <ChartPie key={index} {...props} />
+            <ChartDonut key={index} {...props} />
           )),
         },
       ],
@@ -84,5 +87,5 @@ export const PieChart = withContext<"div", PieChartProps>(
     )
   },
 )() as GenericsComponent<{
-  <Y extends Dict>(props: PieChartProps<Y>): ReactElement
+  <Y extends Dict>(props: DonutChartProps<Y>): ReactElement
 }>

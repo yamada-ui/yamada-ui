@@ -6,10 +6,16 @@ import type {
   ResponsiveContainerProps,
   TooltipContentProps,
 } from "recharts"
-import type { GenericsComponent, HTMLStyledProps, ThemeProps } from "../../core"
+import type {
+  CSSProps,
+  GenericsComponent,
+  HTMLStyledProps,
+  ThemeProps,
+} from "../../core"
 import type { Dict, Merge } from "../../utils"
-import type { ChartLineProps } from "./cartesian-chart"
+import type { ChartAreaProps, ChartLineProps } from "./cartesian-chart"
 import type { ChartStyle } from "./chart.style"
+import type { ChartPieProps } from "./polar-chart"
 import type {
   UseChartLabelListProps,
   UseChartLegendProps,
@@ -36,6 +42,48 @@ import {
   useChartTooltip,
 } from "./use-chart"
 
+type GradientStrategy = "invert" | "shade" | "tint"
+
+export function mergeSeries<Y>(
+  series: Y[],
+  color: CSSProps["color"] = "mono",
+  strategy: GradientStrategy = "invert",
+): (Y & { color: CSSProps["fill"] })[] {
+  const colors = gradients(series.length, color, strategy)
+
+  return series.map((item, index) => ({ ...item, color: colors[index] }))
+}
+
+export function mergeData<Y>(
+  data: Y[],
+  color: CSSProps["fill"] = "mono",
+  strategy: GradientStrategy = "invert",
+): (Y & { fill: CSSProps["fill"] })[] {
+  const colors = gradients(data.length, color, strategy)
+
+  return data.map((item, index) => ({ ...item, fill: colors[index] }))
+}
+
+export function gradients(
+  length: number,
+  color: CSSProps["color"] = "mono",
+  strategy: GradientStrategy = "invert",
+): CSSProps["fill"][] {
+  return Array.from({ length }, (_, index) => {
+    const value = Math.floor(100 - (100 / length) * index)
+    const percent = `${value}%`
+
+    if (strategy === "invert") {
+      return [
+        `tint(colors.${color}, ${percent})`,
+        `shade(colors.${color}, ${percent})`,
+      ]
+    } else {
+      return `${strategy}(colors.${color}, ${percent})`
+    }
+  })
+}
+
 interface ComponentContext extends Pick<
   ChartProps,
   "legendProps" | "tooltipProps"
@@ -50,7 +98,15 @@ export interface ChartProps<Y extends Dict = Dict>
     fallback: ReactNode
   }[]
   render: (props: PropsWithChildren) => ReactNode
-  series?: ChartLineProps<Y>[]
+  /**
+   * The color of the label list.
+   */
+  labelListColor?: CSSProps["color"]
+  /**
+   * The fill of the label list.
+   */
+  labelListFill?: CSSProps["fill"]
+  series?: ChartAreaProps<Y>[] | ChartLineProps<Y>[] | ChartPieProps<Y>[]
   /**
    * If `true`, legend is visible.
    *
@@ -107,6 +163,7 @@ export const Chart = withProvider(
     const { highlightedDataKey, onHighlight } = useChart()
     const components = useMemo(
       () => [
+        ...componentsProp,
         {
           component: ChartLegend,
           fallback: withLegend ? <ChartLegend /> : null,
@@ -115,7 +172,6 @@ export const Chart = withProvider(
           component: ChartTooltip,
           fallback: withTooltip ? <ChartTooltip /> : null,
         },
-        ...componentsProp,
       ],
       [componentsProp, withLegend, withTooltip],
     )
@@ -125,24 +181,24 @@ export const Chart = withProvider(
     )
     const varProps = useMemo(
       () =>
-        series.reduce<Dict>(
-          (acc, { color, dataKey }) => ({
-            ...acc,
-            [`--${dataKey.toString()}`]: varAttr(color, "colors"),
-          }),
-          {},
-        ),
+        series.reduce<Dict>((acc, data) => {
+          const key = `--${data.dataKey.toString()}`
+
+          if (data.color) acc[key] = varAttr(data.color, "colors")
+
+          return acc
+        }, {}),
       [series],
     )
     const varMap = useMemo(
       () =>
-        series.reduce<Dict>(
-          (acc, { color, dataKey }) => ({
-            ...acc,
-            [dataKey.toString()]: color ? `{${dataKey.toString()}}` : undefined,
-          }),
-          {},
-        ),
+        series.reduce<Dict>((acc, data) => {
+          const key = data.dataKey.toString()
+
+          if (data.color) acc[key] = `var(--${key})`
+
+          return acc
+        }, {}),
       [series],
     )
     const context = useMemo(
@@ -186,7 +242,11 @@ export const Chart = withProvider(
     )
   },
   "root",
-)() as GenericsComponent<{
+)(undefined, ({ labelListColor, labelListFill, ...rest }) => ({
+  "--label-list-color": varAttr(labelListColor, "colors"),
+  "--label-list-fill": varAttr(labelListFill, "colors"),
+  ...rest,
+})) as GenericsComponent<{
   <Y extends Dict>(props: ChartProps<Y>): ReactElement
 }>
 
@@ -257,22 +317,15 @@ const ChartLegendContent = withContext<"div", ChartLegendContentProps>(
     return (
       <styled.div {...rest}>
         {payload?.map((data, index) => {
-          const color =
+          const dataKey =
             isString(data.dataKey) || isNumber(data.dataKey)
-              ? varMap[data.dataKey]
-              : undefined
+              ? data.dataKey
+              : data.value
+          const color = data.color || (dataKey ? varMap[dataKey] : undefined)
           const value = formatter?.(data.value, data, index) ?? data.value
 
           return (
-            <ChartLegendItem
-              key={index}
-              {...getLegendItemProps({
-                dataKey:
-                  isString(data.dataKey) || isNumber(data.dataKey)
-                    ? data.dataKey
-                    : undefined,
-              })}
-            >
+            <ChartLegendItem key={index} {...getLegendItemProps({ dataKey })}>
               {withSwatch ? <ChartLegendSwatch bg={color} /> : null}
               <ChartLegendValue>{value}</ChartLegendValue>
             </ChartLegendItem>
@@ -330,7 +383,7 @@ export const ChartTooltip = <
 ) => {
   const { tooltipProps } = useChartComponentContext()
   const {
-    cursor = true,
+    cursor = false,
     contentProps,
     ...rest
   } = {
@@ -421,25 +474,22 @@ interface ChartTooltipContentProps
 const ChartTooltipContent = withContext<"div", ChartTooltipContentProps>(
   ({
     formatter,
-    label,
+    label: labelProp,
     labelFormatter,
     payload,
     withSwatch = true,
     ...rest
   }) => {
     const { varMap } = useChartComponentContext()
+    const label = labelFormatter?.(labelProp, payload) ?? labelProp
 
     return (
       <styled.div {...rest}>
-        {label ? (
-          <ChartTooltipLabel>
-            {labelFormatter?.(label, payload) ?? label}
-          </ChartTooltipLabel>
-        ) : null}
+        {label ? <ChartTooltipLabel>{label}</ChartTooltipLabel> : null}
 
         <ChartTooltipList>
           {payload.map((data, index) => {
-            const color = varMap[data.dataKey.toString()]
+            const color = data.payload.fill ?? varMap[data.dataKey.toString()]
             const result =
               formatter?.(data.value, data.name, data, index, payload) ??
               (isArray(data.value) ? data.value.join(", ") : data.value)

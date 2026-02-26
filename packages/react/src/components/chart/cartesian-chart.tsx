@@ -26,14 +26,22 @@ import type { Dict, Merge } from "../../utils"
 import type { CartesianChartStyle } from "./cartesian-chart.style"
 import type { ChartLabelListProps, ChartProps } from "./chart"
 import type {
+  UseChartAreaProps,
   UseChartGridProps,
   UseChartLineProps,
   UseChartReferenceLineProps,
   UseChartXAxisProps,
   UseChartYAxisProps,
 } from "./use-cartesian-chart"
-import { cloneElement, isValidElement, useMemo } from "react"
-import { CartesianGrid, Line, ReferenceLine, XAxis, YAxis } from "recharts"
+import { cloneElement, isValidElement, useId, useMemo } from "react"
+import {
+  Area,
+  CartesianGrid,
+  Line,
+  ReferenceLine,
+  XAxis,
+  YAxis,
+} from "recharts"
 import {
   createShouldForwardProp,
   createSlotComponent,
@@ -47,6 +55,7 @@ import { cx, isFunction, isObject, splitObject } from "../../utils"
 import { cartesianChartStyle } from "./cartesian-chart.style"
 import { Chart, useChartComponentContext } from "./chart"
 import {
+  useChartArea,
   useChartGrid,
   useChartLine,
   useChartReferenceLine,
@@ -58,7 +67,12 @@ const shouldForwardProp = createShouldForwardProp()
 
 interface ComponentContext extends Pick<
   CartesianChartProps,
-  "gridProps" | "lineProps" | "referenceLineProps" | "xAxisProps" | "yAxisProps"
+  | "areaProps"
+  | "gridProps"
+  | "lineProps"
+  | "referenceLineProps"
+  | "xAxisProps"
+  | "yAxisProps"
 > {}
 
 export interface CartesianChartProps<Y extends Dict = Dict>
@@ -66,43 +80,43 @@ export interface CartesianChartProps<Y extends Dict = Dict>
   /**
    * The fill color of the active dots.
    */
-  activeDotFill?: CSSProps["color"]
+  activeDotFill?: CSSProps["fill"]
   /**
    * The radius of the active dots.
    */
-  activeDotRadius?: number
+  activeDotRadius?: CSSProps["r"]
   /**
    * The stroke color of the active dots.
    */
-  activeDotStroke?: CSSProps["color"]
+  activeDotStroke?: CSSProps["stroke"]
   /**
    * The stroke width of the active dots.
    */
-  activeDotStrokeWidth?: number
+  activeDotStrokeWidth?: CSSProps["strokeWidth"]
+  /**
+   * The fill opacity of the area.
+   */
+  areaFillOpacity?: CSSProps["fillOpacity"]
   /**
    * The fill color of the dots.
    */
-  dotFill?: CSSProps["color"]
+  dotFill?: CSSProps["fill"]
   /**
    * The radius of the dots.
    */
-  dotRadius?: number
+  dotRadius?: CSSProps["r"]
   /**
    * The stroke color of the dots.
    */
-  dotStroke?: CSSProps["color"]
+  dotStroke?: CSSProps["stroke"]
   /**
    * The stroke width of the dots.
    */
-  dotStrokeWidth?: number
+  dotStrokeWidth?: CSSProps["strokeWidth"]
   /**
    * The opacity of the inactive lines.
    */
-  inactiveLineOpacity?: number
-  /**
-   * The fill color of the labels.
-   */
-  labelFill?: CSSProps["color"]
+  inactiveLineOpacity?: CSSProps["opacity"]
   /**
    * The color of the lines.
    */
@@ -110,11 +124,11 @@ export interface CartesianChartProps<Y extends Dict = Dict>
   /**
    * The stroke color of the lines.
    */
-  lineStroke?: CSSProps["color"]
+  lineStroke?: CSSProps["stroke"]
   /**
    * The stroke width of the lines.
    */
-  lineStrokeWidth?: number
+  lineStrokeWidth?: CSSProps["strokeWidth"]
   /**
    * The color of the reference lines.
    */
@@ -122,15 +136,15 @@ export interface CartesianChartProps<Y extends Dict = Dict>
   /**
    * The stroke color of the reference lines.
    */
-  referenceLineStroke?: CSSProps["color"]
+  referenceLineStroke?: CSSProps["stroke"]
   /**
    * The stroke width of the reference lines.
    */
-  referenceLineStrokeWidth?: number
+  referenceLineStrokeWidth?: CSSProps["strokeWidth"]
   /**
    * The text fill color of the reference lines.
    */
-  referenceLineTextFill?: CSSProps["color"]
+  referenceLineTextFill?: CSSProps["fill"]
   /**
    * If `true`, grid is visible.
    *
@@ -152,11 +166,11 @@ export interface CartesianChartProps<Y extends Dict = Dict>
   /**
    * The stroke color of the x-axis lines.
    */
-  xAxisLineStroke?: CSSProps["color"]
+  xAxisLineStroke?: CSSProps["stroke"]
   /**
    * The stroke width of the x-axis lines.
    */
-  xAxisLineStrokeWidth?: number
+  xAxisLineStrokeWidth?: CSSProps["strokeWidth"]
   /**
    * The text color of the x-axis.
    */
@@ -164,15 +178,15 @@ export interface CartesianChartProps<Y extends Dict = Dict>
   /**
    * The text fill color of the x-axis.
    */
-  xAxisTextFill?: CSSProps["color"]
+  xAxisTextFill?: CSSProps["fill"]
   /**
    * The stroke color of the y-axis lines.
    */
-  yAxisLineStroke?: CSSProps["color"]
+  yAxisLineStroke?: CSSProps["stroke"]
   /**
    * The stroke width of the y-axis lines.
    */
-  yAxisLineStrokeWidth?: number
+  yAxisLineStrokeWidth?: CSSProps["strokeWidth"]
   /**
    * The text color of the y-axis.
    */
@@ -180,7 +194,11 @@ export interface CartesianChartProps<Y extends Dict = Dict>
   /**
    * The text fill color of the y-axis.
    */
-  yAxisTextFill?: CSSProps["color"]
+  yAxisTextFill?: CSSProps["fill"]
+  /**
+   * Props for the area component.
+   */
+  areaProps?: Omit<ChartAreaProps, "data" | "dataKey">
   /**
    * Props for the grid component.
    */
@@ -225,6 +243,7 @@ export const CartesianChart = withProvider(
     withGrid = true,
     withXAxis = true,
     withYAxis = false,
+    areaProps,
     gridProps,
     lineProps,
     referenceLineProps,
@@ -252,13 +271,21 @@ export const CartesianChart = withProvider(
     )
     const componentContext = useMemo(
       () => ({
+        areaProps,
         gridProps,
         lineProps,
         referenceLineProps,
         xAxisProps,
         yAxisProps,
       }),
-      [gridProps, lineProps, referenceLineProps, xAxisProps, yAxisProps],
+      [
+        gridProps,
+        lineProps,
+        areaProps,
+        referenceLineProps,
+        xAxisProps,
+        yAxisProps,
+      ],
     )
 
     return (
@@ -275,12 +302,12 @@ export const CartesianChart = withProvider(
     activeDotRadius,
     activeDotStroke,
     activeDotStrokeWidth,
+    areaFillOpacity,
     dotFill,
     dotRadius,
     dotStroke,
     dotStrokeWidth,
     inactiveLineOpacity,
-    labelFill,
     lineColor,
     lineStroke,
     lineStrokeWidth,
@@ -302,12 +329,12 @@ export const CartesianChart = withProvider(
     "--active-dot-r": activeDotRadius,
     "--active-dot-stroke": varAttr(activeDotStroke, "colors"),
     "--active-dot-stroke-width": activeDotStrokeWidth,
+    "--area-fill-opacity": areaFillOpacity,
     "--dot-fill": varAttr(dotFill, "colors"),
     "--dot-r": dotRadius,
     "--dot-stroke": varAttr(dotStroke, "colors"),
     "--dot-stroke-width": dotStrokeWidth,
     "--inactive-line-opacity": inactiveLineOpacity,
-    "--label-fill": varAttr(labelFill, "colors"),
     "--line-color": varAttr(lineColor, "colors"),
     "--line-stroke": varAttr(lineStroke, "colors"),
     "--line-stroke-width": lineStrokeWidth,
@@ -708,14 +735,9 @@ export const ChartLine = withContext<"line", ChartLineProps>((props) => {
 
     if (isFunction(dotProp)) {
       return (props) =>
-        dotProp({
-          ...props,
-          className: cx(className, props.className),
-        })
+        dotProp({ ...props, className: cx(className, props.className) })
     } else if (isValidElement(dotProp)) {
-      return cloneElement<any>(dotProp, {
-        className,
-      })
+      return cloneElement<any>(dotProp, { className })
     } else if (isObject(dotProp)) {
       const [omittedProps, styleProps] = splitObject<DotProps, CSSObject>(
         dotProp,
@@ -742,14 +764,9 @@ export const ChartLine = withContext<"line", ChartLineProps>((props) => {
 
     if (isFunction(activeDotProp)) {
       return (props) =>
-        activeDotProp({
-          ...props,
-          className: cx(className, props.className),
-        })
+        activeDotProp({ ...props, className: cx(className, props.className) })
     } else if (isValidElement(activeDotProp)) {
-      return cloneElement<any>(activeDotProp, {
-        className,
-      })
+      return cloneElement<any>(activeDotProp, { className })
     } else if (isObject(activeDotProp)) {
       const [omittedProps, styleProps] = splitObject<ActiveDotProps, CSSObject>(
         activeDotProp,
@@ -812,6 +829,195 @@ export const ChartLine = withContext<"line", ChartLineProps>((props) => {
   )
 }, "line")() as GenericsComponent<{
   <Y extends Dict>(props: ChartLineProps<Y>): ReactElement
+}>
+
+export interface ChartAreaProps<Y extends Dict = Dict> extends Merge<
+  HTMLStyledProps<"line">,
+  Omit<UseChartAreaProps, "activeDot" | "data" | "dataKey" | "dot" | "label">
+> {
+  /**
+   * The key of a group of data which should be unique in an chart.
+   */
+  dataKey: keyof Y
+  /**
+   * The active dot to use for the line.
+   *
+   * @default true
+   */
+  activeDot?: ChartActiveDot
+  /**
+   * The data to use for the area.
+   */
+  data?: Y[]
+  /**
+   * The dot to use for the line.
+   *
+   * @default true
+   */
+  dot?: ChartDot
+  /**
+   * The label list to use for the line.
+   *
+   * @default false
+   */
+  label?: ChartLineLabel
+  /**
+   * Determines whether the chart area should be represented with a gradient instead of the solid color.
+   */
+  withGradient?: boolean
+}
+
+export const ChartArea = withContext<"line", ChartAreaProps>((props) => {
+  const { areaProps } = useComponentContext()
+  const {
+    activeDot: activeDotProp = true,
+    children,
+    dataKey,
+    dot: dotProp = false,
+    label: labelProp = false,
+    withGradient,
+    ...rest
+  } = { ...areaProps, ...props }
+  const id = useId()
+  const system = useSystem()
+  const { theme } = useTheme()
+  const { varMap } = useChartComponentContext()
+  const color = varMap[dataKey.toString()]
+  const dotProps = useSlotComponentProps({}, "dot")
+  const activeDotProps = useSlotComponentProps({}, "activeDot")
+  const labelProps = useSlotComponentProps({}, "labelList")
+  const dot = useMemo<UseChartLineProps["dot"]>(() => {
+    if (!dotProp) return dotProp
+
+    const css = getCSS(system, theme)
+    const className = cx(
+      dotProps.className,
+      css(dotProps.css),
+      css({ fill: color, stroke: color }),
+    )
+
+    if (isFunction(dotProp)) {
+      return (props) =>
+        dotProp({
+          ...props,
+          className: cx(className, props.className),
+        })
+    } else if (isValidElement(dotProp)) {
+      return cloneElement<any>(dotProp, {
+        className,
+      })
+    } else if (isObject(dotProp)) {
+      const [omittedProps, styleProps] = splitObject<DotProps, CSSObject>(
+        dotProp,
+        shouldForwardProp,
+      )
+
+      return {
+        ...omittedProps,
+        className: cx(className, omittedProps.className, css(styleProps)),
+      }
+    } else {
+      return { className }
+    }
+  }, [dotProp, system, theme, dotProps.className, dotProps.css, color])
+  const activeDot = useMemo<UseChartLineProps["activeDot"]>(() => {
+    if (!activeDotProp) return activeDotProp
+
+    const css = getCSS(system, theme)
+    const className = cx(
+      activeDotProps.className,
+      css(activeDotProps.css),
+      css({ fill: color, stroke: color }),
+    )
+
+    if (isFunction(activeDotProp)) {
+      return (props) =>
+        activeDotProp({ ...props, className: cx(className, props.className) })
+    } else if (isValidElement(activeDotProp)) {
+      return cloneElement<any>(activeDotProp, { className })
+    } else if (isObject(activeDotProp)) {
+      const [omittedProps, styleProps] = splitObject<ActiveDotProps, CSSObject>(
+        activeDotProp,
+        shouldForwardProp,
+      )
+
+      return {
+        ...omittedProps,
+        className: cx(className, omittedProps.className, css(styleProps)),
+      }
+    } else {
+      return { className }
+    }
+  }, [
+    activeDotProp,
+    system,
+    theme,
+    activeDotProps.className,
+    activeDotProps.css,
+    color,
+  ])
+  const label = useMemo<UseChartLineProps["label"]>(() => {
+    if (!labelProp) return labelProp
+
+    const css = getCSS(system, theme)
+    const className = cx(labelProps.className, css(labelProps.css))
+
+    if (isFunction(labelProp)) {
+      return (props) =>
+        labelProp({ ...props, className: cx(className, props.className) })
+    } else if (isValidElement(labelProp)) {
+      return cloneElement<any>(labelProp, { className })
+    } else if (isObject(labelProp)) {
+      const [omittedProps, styleProps] = splitObject<LabelListProps, CSSObject>(
+        labelProp,
+        shouldForwardProp,
+      )
+
+      return {
+        ...omittedProps,
+        className: cx(className, omittedProps.className, css(styleProps)),
+      }
+    } else {
+      return { className }
+    }
+  }, [system, theme, labelProp, labelProps.className, labelProps.css])
+  const gradientProps = useMemo(() => {
+    const css = getCSS(system, theme)
+
+    return { className: cx(css({ stopColor: color })) }
+  }, [color, system, theme])
+  const { getAreaProps, getRootProps } = useChartArea({
+    activeDot,
+    dataKey,
+    dot,
+    fill: color ? `url(#${id})` : "",
+    label,
+    stroke: color,
+    ...rest,
+  })
+
+  return (
+    <>
+      <styled.line asChild {...getRootProps()}>
+        <Area {...getAreaProps()}>{children}</Area>
+      </styled.line>
+
+      <defs>
+        {withGradient ? (
+          <linearGradient id={id} x1="0" x2="0" y1="0" y2="1">
+            <stop offset="5%" stopOpacity={0.8} {...gradientProps} />
+            <stop offset="95%" stopOpacity={0.1} {...gradientProps} />
+          </linearGradient>
+        ) : (
+          <linearGradient id={id} x1="0" x2="0" y1="0" y2="1">
+            <stop stopOpacity={0.4} {...gradientProps} />
+          </linearGradient>
+        )}
+      </defs>
+    </>
+  )
+}, "area")() as GenericsComponent<{
+  <Y extends Dict>(props: ChartAreaProps<Y>): ReactElement
 }>
 
 export interface ChartReferenceLineProps extends Omit<

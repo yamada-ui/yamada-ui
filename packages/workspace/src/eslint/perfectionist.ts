@@ -42,23 +42,6 @@ const otherPseudos = sortPseudos
 
 const sortObjectGroups = {
   customGroups: [
-    { elementNamePattern: "^aria-.+", groupName: "aria" },
-    { elementNamePattern: "^on.*", groupName: "callback" },
-    { elementNamePattern: "^data-.+", groupName: "data" },
-    { elementNamePattern: "^__.+", groupName: "internal" },
-    { elementNamePattern: ".+Props$", groupName: "props" },
-    {
-      elementNamePattern: `^_(?!.*(${otherPseudos})$).*$`,
-      groupName: "pseudos",
-    },
-    ...sortPseudos.map((elementNamePattern, index) => ({
-      elementNamePattern,
-      groupName: `pseudos${index + 1}`,
-    })),
-    ...Object.entries(semanticSizes).map(([groupName, elementNamePattern]) => ({
-      elementNamePattern,
-      groupName,
-    })),
     {
       elementNamePattern: ["^key$", "^ref$", "^id$", "^lang$"],
       groupName: "primary",
@@ -79,7 +62,7 @@ const sortObjectGroups = {
       groupName: "tertiary",
     },
     { elementNamePattern: ["^className$", "^alt$"], groupName: "quaternary" },
-    { elementNamePattern: ["^css$", "^sx$", "^style$"], groupName: "quinary" },
+    { elementNamePattern: ["^css$", "^style$"], groupName: "quinary" },
     {
       elementNamePattern: ["^layerStyle$", "^textStyle$", "^apply$"],
       groupName: "senary",
@@ -88,6 +71,22 @@ const sortObjectGroups = {
       elementNamePattern: ["^variant$", "^size$", "^colorScheme$"],
       groupName: "septenary",
     },
+    ...Object.entries(semanticSizes).map(([groupName, elementNamePattern]) => ({
+      elementNamePattern,
+      groupName,
+    })),
+    { elementNamePattern: "^aria-.+", groupName: "aria" },
+    { elementNamePattern: "^data-.+", groupName: "data" },
+    {
+      elementNamePattern: `^_(?!.*(${otherPseudos})$).*$`,
+      groupName: "pseudo",
+    },
+    ...sortPseudos.map((elementNamePattern, index) => ({
+      elementNamePattern,
+      groupName: `pseudo${index + 1}`,
+    })),
+    { elementNamePattern: ".+Props$", groupName: "props" },
+    { elementNamePattern: "^on.*", groupName: "handler" },
   ],
   groups: [
     "primary",
@@ -100,11 +99,44 @@ const sortObjectGroups = {
     ...Object.keys(semanticSizes),
     ["aria", "data"],
     "unknown",
-    "pseudos",
-    ...sortPseudos.map((_, index) => `pseudos${index + 1}`),
+    "pseudo",
+    ...sortPseudos.map((_, index) => `pseudo${index + 1}`),
     "props",
-    "callback",
-    "internal",
+    "handler",
+  ],
+}
+
+const sortObjectTypeGroups = {
+  customGroups: [
+    {
+      elementNamePattern: ".+Props$",
+      groupName: "required-props",
+      modifiers: ["required"],
+    },
+    {
+      elementNamePattern: "^on.*",
+      groupName: "required-handler",
+      modifiers: ["required"],
+    },
+    {
+      elementNamePattern: ".+Props$",
+      groupName: "optional-props",
+      modifiers: ["optional"],
+    },
+    {
+      elementNamePattern: "^on.*",
+      groupName: "optional-handler",
+      modifiers: ["optional"],
+    },
+  ],
+  groups: [
+    "index-signature",
+    "required-property",
+    "required-props",
+    ["required-method", "required-handler"],
+    "optional-property",
+    "optional-props",
+    ["optional-method", "optional-handler"],
   ],
 }
 
@@ -152,38 +184,20 @@ export const perfectionistConfig = {
     "perfectionist/sort-array-includes": ["warn", { type }],
     "perfectionist/sort-interfaces": [
       "warn",
-      {
-        type,
-        partitionByNewLine: true,
-        ...sortObjectGroups,
-      },
+      { type, partitionByNewLine: true, ...sortObjectTypeGroups },
     ],
     "perfectionist/sort-intersection-types": ["warn", { type }],
-    "perfectionist/sort-jsx-props": [
-      "warn",
-      {
-        type,
-        ...sortObjectGroups,
-      },
-    ],
+    "perfectionist/sort-jsx-props": ["warn", { type, ...sortObjectGroups }],
     "perfectionist/sort-maps": ["warn", { type }],
     "perfectionist/sort-named-exports": ["warn", { type }],
     "perfectionist/sort-named-imports": ["warn", { type }],
     "perfectionist/sort-object-types": [
       "warn",
-      {
-        type,
-        partitionByNewLine: true,
-        ...sortObjectGroups,
-      },
+      { type, partitionByNewLine: true, ...sortObjectTypeGroups },
     ],
     "perfectionist/sort-objects": [
       "warn",
-      {
-        type,
-        partitionByNewLine: true,
-        ...sortObjectGroups,
-      },
+      { type, partitionByNewLine: true, ...sortObjectGroups },
     ],
     "perfectionist/sort-sets": ["warn", { type }],
     "perfectionist/sort-union-types": ["warn", { type }],

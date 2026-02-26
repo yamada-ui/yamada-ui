@@ -174,8 +174,8 @@ function ContentDisplay({ mode }: ContentDisplayProps) {
 }
 
 interface ContentItemHeaderProps extends Omit<StackProps, "title"> {
-  description?: ReactNode
   title: ReactNode
+  description?: ReactNode
 }
 
 function ContentItemHeader({
@@ -288,8 +288,8 @@ function ContentItem({ ...rest }: ContentItemProps) {
 }
 
 interface ContentCarouselProps extends StackProps {
-  size?: "md" | "sm"
   items: CarouselItem[]
+  size?: "md" | "sm"
 }
 
 function ContentCarousel({

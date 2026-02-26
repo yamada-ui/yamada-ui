@@ -5,7 +5,7 @@ import { NextLink } from "@/components"
 import { langConditions } from "./i18n"
 
 interface FC<Y extends object = {}> {
-  (props: Y & { key?: number | string; children: ReactNode }): ReactNode
+  (props: Y & { children: ReactNode; key?: number | string }): ReactNode
 }
 
 function transformCode(

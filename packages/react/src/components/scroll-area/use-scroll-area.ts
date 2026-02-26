@@ -14,17 +14,17 @@ import {
 
 export interface UseScrollAreaProps extends HTMLProps {
   /**
-   * Scrollbar visibility type.
-   *
-   * @default 'hover'
-   */
-  type?: "always" | "hover" | "never" | "scroll"
-  /**
    * Delay in milliseconds before scrollbars are hidden.
    *
    * @default 1000
    */
   scrollHideDelay?: number
+  /**
+   * Scrollbar visibility type.
+   *
+   * @default 'hover'
+   */
+  type?: "always" | "hover" | "never" | "scroll"
   /**
    * Callback function for when the scroll position changes.
    */

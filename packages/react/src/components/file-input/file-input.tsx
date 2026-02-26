@@ -26,6 +26,12 @@ export interface FileInputProps
     FieldProps,
     Omit<UseFileInputProps, "children"> {
   /**
+   * The string to separate uploaded files.
+   *
+   * @default ','
+   */
+  separator?: string
+  /**
    * A callback that returns a React node.
    */
   children?: (files: File[] | undefined) => ReactNode
@@ -37,12 +43,6 @@ export interface FileInputProps
    * A callback that formats the name of the uploaded file.
    */
   format?: (value: File, index: number) => string
-  /**
-   * The string to separate uploaded files.
-   *
-   * @default ','
-   */
-  separator?: string
 }
 
 const {

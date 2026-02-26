@@ -215,6 +215,10 @@ export interface LoadingConfig {
 
 export interface ThemeConfig {
   /**
+   * The config of breakpoint.
+   */
+  breakpoint?: BreakpointConfig
+  /**
    * The config of the CSS.
    */
   css?: {
@@ -233,10 +237,6 @@ export interface ThemeConfig {
      */
     varPrefix?: string
   }
-  /**
-   * The config of breakpoint.
-   */
-  breakpoint?: BreakpointConfig
   /**
    * The default color mode.
    * If `system`, the system will apply the color mode.
@@ -418,8 +418,8 @@ export type DefineThemeColorSemanticValue =
   | ThemeTokens["colors"]
 
 export interface DefineThemeColorSemanticToken {
-  base?: DefineThemeColorSemanticValue
   [key: string]: any
+  base?: DefineThemeColorSemanticValue
   bg?: DefineThemeColorSemanticValue
   contrast?: DefineThemeColorSemanticValue
   default?: DefineThemeColorSemanticValue
@@ -582,12 +582,12 @@ export type ComponentCompound<
           | Booleanish<keyof M[key]>[]
           | RegExp
       }) & {
+    [key: string]: any
     css: Y
     colorScheme?:
       | RegExp
       | ThemeTokens["colorSchemes"]
       | ThemeTokens["colorSchemes"][]
-    [key: string]: any
     layer?: LayerScheme
   }
 

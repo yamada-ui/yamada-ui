@@ -40,19 +40,19 @@ export interface SectionConfigWithPaths extends SectionConfig {
 }
 
 export interface Paths {
-  src: string
   index: string
   registry: string
   root: string
+  src: string
 }
 
 export interface Config extends UserConfig {
   cwd: string
+  paths: { theme: Paths; ui: Paths }
   getSection: (value?: string) => SectionConfigWithPaths | undefined
   getSectionPath: (section: Section) => string
   getSectionResolvedPath: (section: Section) => string
   isSection: (section: string) => section is Section
-  paths: { theme: Paths; ui: Paths }
 }
 
 export type RegistrySection =
@@ -84,10 +84,10 @@ export interface Dependencies {
 }
 
 export interface Registry {
-  dependencies?: Dependencies
-  dependents?: Dependents
   section: RegistrySection
   sources: Source[]
+  dependencies?: Dependencies
+  dependents?: Dependents
 }
 
 export interface Registries {
@@ -95,8 +95,8 @@ export interface Registries {
 }
 
 export interface WantedVersion {
-  current?: string
   wanted: string
+  current?: string
 }
 
 export type PackageNameWithVersion = string | (WantedVersion & { name: string })

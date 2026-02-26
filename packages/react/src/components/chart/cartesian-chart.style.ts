@@ -19,6 +19,15 @@ export const cartesianChartStyle = defineComponentSlotStyle({
       stroke: "{line-stroke}",
       strokeWidth: "{line-stroke-width}",
     },
+    bar: {
+      "&:has(path[data-inactive])": {
+        opacity: "{inactive-line-opacity}",
+      },
+      color: "{line-color}",
+      fill: "{line-stroke}",
+      stroke: "{line-stroke}",
+      strokeWidth: "{line-stroke-width}",
+    },
     dot: {
       fill: "{dot-fill}",
       r: "{dot-r}",
@@ -41,6 +50,7 @@ export const cartesianChartStyle = defineComponentSlotStyle({
       strokeWidth: "{reference-line-stroke-width}",
     },
     referenceLineLabel: {
+      color: "{reference-line-text-color}",
       fill: "{reference-line-text-fill}",
       fontSize: "xs",
       fontWeight: "medium",
@@ -63,6 +73,7 @@ export const cartesianChartStyle = defineComponentSlotStyle({
       "--reference-line-color": "colors.fg.error",
       "--reference-line-stroke": "currentColor",
       "--reference-line-stroke-width": "1",
+      "--reference-line-text-color": "colors.fg.error",
       "--reference-line-text-fill": "currentColor",
       "--x-axis-line-stroke": "currentColor",
       "--x-axis-line-stroke-width": "1",

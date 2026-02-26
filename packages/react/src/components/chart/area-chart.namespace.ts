@@ -1,7 +1,7 @@
 import type { AreaChartProps as RootProps } from "./area-chart"
 import type {
   ChartActiveDot as ActiveDot,
-  ChartLineLabel as AreaLabel,
+  ChartCartesianLabel as AreaLabel,
   ChartAreaProps as AreaProps,
   ChartDot as Dot,
   ChartGridProps as GridProps,

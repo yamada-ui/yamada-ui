@@ -42,6 +42,9 @@ export const chartStyle = defineComponentSlotStyle({
       "*": { outline: "none" },
       "--label-list-color": "currentColor",
       "--label-list-fill": "currentColor",
+      "--tooltip-cursor-fill": "colors.border",
+      "--tooltip-cursor-fill-opacity": "1",
+      "--tooltip-cursor-stroke": "colors.border",
       w: "full",
     },
     tooltipContent: {
@@ -53,7 +56,12 @@ export const chartStyle = defineComponentSlotStyle({
       minW: "3xs",
       zIndex: "recoome",
     },
-    tooltipCursor: { stroke: "border", strokeWidth: "1" },
+    tooltipCursor: {
+      fill: "{tooltip-cursor-fill}",
+      fillOpacity: "{tooltip-cursor-fill-opacity}",
+      stroke: "{tooltip-cursor-stroke}",
+      strokeWidth: "1",
+    },
     tooltipItem: { alignItems: "center", display: "flex", gap: "sm" },
     tooltipLabel: {},
     tooltipList: { display: "flex", flexDirection: "column", gap: "2xs" },

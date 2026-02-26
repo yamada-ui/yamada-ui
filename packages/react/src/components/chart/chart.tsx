@@ -13,7 +13,11 @@ import type {
   ThemeProps,
 } from "../../core"
 import type { Dict, Merge } from "../../utils"
-import type { ChartAreaProps, ChartLineProps } from "./cartesian-chart"
+import type {
+  ChartAreaProps,
+  ChartBarProps,
+  ChartLineProps,
+} from "./cartesian-chart"
 import type { ChartStyle } from "./chart.style"
 import type { ChartPieProps } from "./polar-chart"
 import type {
@@ -106,7 +110,23 @@ export interface ChartProps<Y extends Dict = Dict>
    * The fill of the label list.
    */
   labelListFill?: CSSProps["fill"]
-  series?: ChartAreaProps<Y>[] | ChartLineProps<Y>[] | ChartPieProps<Y>[]
+  series?:
+    | ChartAreaProps<Y>[]
+    | ChartBarProps<Y>[]
+    | ChartLineProps<Y>[]
+    | ChartPieProps<Y>[]
+  /**
+   * The fill of the tooltip cursor.
+   */
+  tooltipCursorFill?: CSSProps["fill"]
+  /**
+   * The fill opacity of the tooltip cursor.
+   */
+  tooltipCursorFillOpacity?: CSSProps["fillOpacity"]
+  /**
+   * The stroke of the tooltip cursor.
+   */
+  tooltipCursorStroke?: CSSProps["stroke"]
   /**
    * If `true`, legend is visible.
    *
@@ -242,11 +262,24 @@ export const Chart = withProvider(
     )
   },
   "root",
-)(undefined, ({ labelListColor, labelListFill, ...rest }) => ({
-  "--label-list-color": varAttr(labelListColor, "colors"),
-  "--label-list-fill": varAttr(labelListFill, "colors"),
-  ...rest,
-})) as GenericsComponent<{
+)(
+  undefined,
+  ({
+    labelListColor,
+    labelListFill,
+    tooltipCursorFill,
+    tooltipCursorFillOpacity,
+    tooltipCursorStroke,
+    ...rest
+  }) => ({
+    "--label-list-color": varAttr(labelListColor, "colors"),
+    "--label-list-fill": varAttr(labelListFill, "colors"),
+    "--tooltip-cursor-fill": varAttr(tooltipCursorFill, "colors"),
+    "--tooltip-cursor-fill-opacity": tooltipCursorFillOpacity,
+    "--tooltip-cursor-stroke": varAttr(tooltipCursorStroke, "colors"),
+    ...rest,
+  }),
+) as GenericsComponent<{
   <Y extends Dict>(props: ChartProps<Y>): ReactElement
 }>
 
@@ -432,26 +465,27 @@ const ChartTooltipCursor = withContext<"path", ChartTooltipCursorProps>(
   ({
     bottom: _bottom,
     brushBottom: _brushBottom,
+    fill,
     height,
     left: _left,
     payload: _payload,
     payloadIndex: _payloadIndex,
-    points = [],
+    points,
     right: _right,
     stroke,
     top: _top,
     width,
+    x,
+    y,
     ...rest
   }) => {
+    const d = !!points
+      ? `M${points[0]?.x},${points[0]?.y}L${points[1]?.x},${points[1]?.y}`
+      : `M ${x},${y} h ${width} v ${height} h -${width} Z`
     return {
       asChild: true,
-      children: (
-        <path
-          d={`M${points[0]?.x},${points[0]?.y}L${points[1]?.x},${points[1]?.y}`}
-          height={height}
-          width={width}
-        />
-      ),
+      children: <path d={d} height={height} width={width} />,
+      fill: fill === "#ccc" ? undefined : fill,
       stroke: stroke === "#ccc" ? undefined : stroke,
       ...rest,
     }

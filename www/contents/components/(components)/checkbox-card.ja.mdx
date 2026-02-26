@@ -665,7 +665,6 @@ return (
 
 | キー    | 説明                                             | 状態 |
 | ------- | ------------------------------------------------ | ---- |
-| `Tab`   | 無効ではないチェックボックスをフォーカスします。 | -    |
 | `Space` | チェックボックスのチェックの状態を切り替えます。 | -    |
 
 ### ARIAロールと属性
@@ -675,7 +674,7 @@ return (
 | `CheckboxCardGroup.Root` | `role="group"`     | グループであることを示します。                                                                                                                                                     |
 |                          | `aria-labelledby`  | `CheckboxCardGroup.Root`が`Field.Root`内にあり、`Field.Root`に`label`または`Field.Label`がある場合、その`id`を設定します。                                                         |
 |                          | `aria-describedby` | `CheckboxCardGroup.Root`が`Field.Root`内にあり、`Field.Root`に`errorMessage`、`helperMessage`、または`Field.ErrorMessage`、`Field.HelperMessage`がある場合、その`id`を設定します。 |
-| `CheckboxCard.Root`      | `aria-checked`     | `indeterminate`が設定されている場合は`"mixed"`を設定し、チェックされている場合は`"true"`、されていない場合は`"false"`を設定します。                                                |
+| `input`                  | `aria-checked`     | `indeterminate`が設定されている場合は`"mixed"`を設定し、チェックされている場合は`"true"`、されていない場合は`"false"`を設定します。                                                |
 |                          | `aria-disabled`    | `readOnly`が設定されている場合、またはグループで`max`に達した場合は`"true"`を設定します。                                                                                          |
 |                          | `aria-invalid`     | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                              |
 |                          | `aria-required`    | `required`が設定されている場合は`"true"`を設定します。                                                                                                                             |

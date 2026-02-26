@@ -700,7 +700,6 @@ return (
 
 | Key     | Description                                | State |
 | ------- | ------------------------------------------ | ----- |
-| `Tab`   | Focuses a checkbox that is not disabled.   | -     |
 | `Space` | Toggles the checked state of the checkbox. | -     |
 
 ### ARIA Roles and Attributes
@@ -710,7 +709,7 @@ return (
 | `CheckboxCardGroup.Root` | `role="group"`       | Indicates that it's a group.                                                                                                                                                   |
 |                          | `aria-labelledby`    | If `CheckboxCardGroup.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id`.                                                           |
 |                          | `aria-describedby`   | If `CheckboxCardGroup.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
-| `CheckboxCard.Root`      | `aria-checked`       | Sets to `"mixed"` if `indeterminate` is set, `"true"` if checked, and `"false"` if unchecked.                                                                                  |
+| `input`                  | `aria-checked`       | Sets to `"mixed"` if `indeterminate` is set, `"true"` if checked, and `"false"` if unchecked.                                                                                  |
 |                          | `aria-disabled`      | Sets to `"true"` if `readOnly` is set, or if `max` is reached in a group.                                                                                                      |
 |                          | `aria-invalid`       | Sets to `"true"` if `invalid` is set.                                                                                                                                          |
 |                          | `aria-required`      | Sets to `"true"` if `required` is set.                                                                                                                                         |

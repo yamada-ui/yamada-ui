@@ -8,9 +8,7 @@ import { scrollAreaStyle } from "./scroll-area.style"
 import { useScrollArea } from "./use-scroll-area"
 
 export interface ScrollAreaProps
-  extends HTMLStyledProps,
-    ThemeProps<ScrollAreaStyle>,
-    UseScrollAreaProps {}
+  extends HTMLStyledProps, ThemeProps<ScrollAreaStyle>, UseScrollAreaProps {}
 
 const {
   PropsContext: ScrollAreaPropsContext,

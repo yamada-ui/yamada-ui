@@ -2,8 +2,8 @@ import type { Dict } from "@yamada-ui/utils"
 
 export interface Config {
   key: string
-  flatMap?: (value: string) => string | string[]
   maxDepth?: number
+  flatMap?: (value: string) => string | string[]
   replaceKey?: (key: string) => string
   shouldProcess?: (obj: Dict) => boolean
 }

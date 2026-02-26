@@ -209,4 +209,28 @@ return (
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`Field.Root`を使用しない場合は、`Textarea`に`aria-label`または`aria-labelledby`を設定します。
+
+```tsx
+<Textarea aria-label="Comments" />
+```
+
+```tsx
+<VStack gap="sm">
+  <Text as="h3" id="label">
+    Comments
+  </Text>
+
+  <Textarea aria-labelledby="label" />
+</VStack>
+```
+
+### ARIAロールと属性
+
+| コンポーネント | ロールと属性       | 使い方                                                                                                                                                                                     |
+| -------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Textarea`     | `aria-invalid`     | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                      |
+|                | `aria-disabled`    | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                                                     |
+|                | `aria-describedby` | `Textarea`が`Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
+|                | `aria-readonly`    | `readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                                     |
+|                | `aria-required`    | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                     |

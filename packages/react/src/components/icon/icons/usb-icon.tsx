@@ -1,6 +1,8 @@
 "use client"
 
-import { Usb } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Usb as OriginalUsbIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,7 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const UsbIcon = component(Icon)({ as: Usb })
+export const UsbIcon = component(Icon)({ as: OriginalUsbIcon }) as Component<
+  "svg",
+  IconProps
+>

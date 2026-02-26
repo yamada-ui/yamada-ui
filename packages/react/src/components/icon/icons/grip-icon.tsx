@@ -1,6 +1,8 @@
 "use client"
 
-import { Grip } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Grip as OriginalGripIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,7 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const GripIcon = component(Icon)({ as: Grip })
+export const GripIcon = component(Icon)({ as: OriginalGripIcon }) as Component<
+  "svg",
+  IconProps
+>

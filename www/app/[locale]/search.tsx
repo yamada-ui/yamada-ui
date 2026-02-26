@@ -1,8 +1,8 @@
 "use client"
 
-import type { FragmentContent, PageContent } from "@/data"
 import type { Descendant, HTMLProps } from "@yamada-ui/react"
 import type { ElementType, KeyboardEvent, ReactNode, RefObject } from "react"
+import type { FragmentContent, PageContent } from "@/data"
 import {
   assignRef,
   Box,

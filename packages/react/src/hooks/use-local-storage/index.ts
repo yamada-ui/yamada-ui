@@ -9,8 +9,8 @@ export type StorageType = "localStorage" | "sessionStorage"
 export interface StorageProps<Y> {
   key: string
   defaultValue?: Y
-  deserialize?: (value: string | undefined) => Y
   getInitialValueInEffect?: boolean
+  deserialize?: (value: string | undefined) => Y
   serialize?: (value: Y) => string
 }
 

@@ -18,12 +18,7 @@ import {
 import { useFieldProps } from "../field"
 
 export interface UseDropzoneProps
-  extends Omit<HTMLProps, "onDrop" | "onError">,
-    FieldProps {
-  /**
-   * The HTML `name` attribute used for forms.
-   */
-  name?: string
+  extends Omit<HTMLProps, "onDrop" | "onError">, FieldProps {
   /**
    * Set accepted file types.
    */
@@ -69,6 +64,10 @@ export interface UseDropzoneProps
    * @default false
    */
   multiple?: boolean
+  /**
+   * The HTML `name` attribute used for forms.
+   */
+  name?: string
   /**
    * If true, disables click to open the native file selection dialog.
    *

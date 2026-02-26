@@ -1,6 +1,8 @@
 "use client"
 
-import { EyeClosed } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { EyeClosed as OriginalEyeClosedIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const EyeClosedIcon = component(Icon)({ as: EyeClosed })
+export const EyeClosedIcon = component(Icon)({
+  as: OriginalEyeClosedIcon,
+}) as Component<"svg", IconProps>

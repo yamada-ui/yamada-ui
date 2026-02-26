@@ -41,8 +41,7 @@ export const fadeScaleVariants: Variants = {
 } satisfies MotionTransitionVariants
 
 export interface FadeScaleProps
-  extends WithTransitionProps<HTMLMotionProps>,
-    ThemeProps<FadeScaleStyle> {
+  extends WithTransitionProps<HTMLMotionProps>, ThemeProps<FadeScaleStyle> {
   /**
    * If `true`, the element will transition back to exit state.
    *

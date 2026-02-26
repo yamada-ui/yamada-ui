@@ -1,6 +1,8 @@
 "use client"
 
-import { BookmarkMinus } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { BookmarkMinus as OriginalBookmarkMinusIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const BookmarkMinusIcon = component(Icon)({ as: BookmarkMinus })
+export const BookmarkMinusIcon = component(Icon)({
+  as: OriginalBookmarkMinusIcon,
+}) as Component<"svg", IconProps>

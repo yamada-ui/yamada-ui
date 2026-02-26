@@ -6,9 +6,14 @@ import type {
   ResponsiveContainerProps,
   TooltipContentProps,
 } from "recharts"
-import type { GenericsComponent, HTMLStyledProps, ThemeProps } from "../../core"
+import type {
+  CSSProps,
+  GenericsComponent,
+  HTMLStyledProps,
+  ThemeProps,
+} from "../../core"
 import type { Dict, Merge } from "../../utils"
-import type { ChartLineProps } from "./cartesian-chart"
+import type { ChartAreaProps, ChartLineProps } from "./cartesian-chart"
 import type { ChartStyle } from "./chart.style"
 import type {
   UseChartLabelListProps,
@@ -36,6 +41,48 @@ import {
   useChartTooltip,
 } from "./use-chart"
 
+type GradientStrategy = "invert" | "shade" | "tint"
+
+export function mergeSeries<Y>(
+  series: Y[],
+  color: CSSProps["color"] = "mono",
+  strategy: GradientStrategy = "invert",
+): (Y & { color: CSSProps["fill"] })[] {
+  const colors = gradients(series.length, color, strategy)
+
+  return series.map((item, index) => ({ ...item, color: colors[index] }))
+}
+
+export function mergeData<Y>(
+  data: Y[],
+  color: CSSProps["fill"] = "mono",
+  strategy: GradientStrategy = "invert",
+): (Y & { fill: CSSProps["fill"] })[] {
+  const colors = gradients(data.length, color, strategy)
+
+  return data.map((item, index) => ({ ...item, fill: colors[index] }))
+}
+
+export function gradients(
+  length: number,
+  color: CSSProps["color"] = "mono",
+  strategy: GradientStrategy = "invert",
+): CSSProps["fill"][] {
+  return Array.from({ length }, (_, index) => {
+    const value = Math.floor(100 - (100 / length) * index)
+    const percent = `${value}%`
+
+    if (strategy === "invert") {
+      return [
+        `tint(colors.${color}, ${percent})`,
+        `shade(colors.${color}, ${percent})`,
+      ]
+    } else {
+      return `${strategy}(colors.${color}, ${percent})`
+    }
+  })
+}
+
 interface ComponentContext extends Pick<
   ChartProps,
   "legendProps" | "tooltipProps"
@@ -50,7 +97,7 @@ export interface ChartProps<Y extends Dict = Dict>
     fallback: ReactNode
   }[]
   render: (props: PropsWithChildren) => ReactNode
-  series?: ChartLineProps<Y>[]
+  series?: ChartAreaProps<Y>[] | ChartLineProps<Y>[]
   /**
    * If `true`, legend is visible.
    *
@@ -330,7 +377,7 @@ export const ChartTooltip = <
 ) => {
   const { tooltipProps } = useChartComponentContext()
   const {
-    cursor = true,
+    cursor = false,
     contentProps,
     ...rest
   } = {

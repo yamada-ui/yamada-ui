@@ -104,21 +104,15 @@ const defaultRender: DatePickerRender = ({
 export interface UseDatePickerProps<
   Multiple extends boolean = false,
   Range extends boolean = false,
-> extends Omit<UseCalendarProps<Multiple, Range>, "format" | "ref">,
+>
+  extends
+    Omit<UseCalendarProps<Multiple, Range>, "format" | "ref">,
     Omit<
       UseComboboxProps,
       "defaultValue" | "initialFocusValue" | "onChange" | "ref" | "value"
     >,
     HTMLRefAttributes<"input">,
     FieldProps {
-  /**
-   * The `id` attribute of the input element.
-   */
-  id?: string
-  /**
-   * The `name` attribute of the input element.
-   */
-  name?: string
   /**
    * If `true`, allows input.
    *
@@ -155,9 +149,17 @@ export interface UseDatePickerProps<
    */
   format?: DatePickerFormat
   /**
+   * The `id` attribute of the input element.
+   */
+  id?: string
+  /**
    * The value of the input.
    */
   inputValue?: MaybeInputValue<Range>
+  /**
+   * The `name` attribute of the input element.
+   */
+  name?: string
   /**
    * If `true`, the date picker will be opened when the input value changes.
    *
@@ -171,10 +173,6 @@ export interface UseDatePickerProps<
    */
   openOnFocus?: boolean
   /**
-   * Function that converts the input value to Date type.
-   */
-  parseDate?: (value: string) => Date | undefined
-  /**
    * The pattern used to check the input element.
    */
   pattern?: RegExp
@@ -182,10 +180,6 @@ export interface UseDatePickerProps<
    * The placeholder for date picker.
    */
   placeholder?: string
-  /**
-   * The function to render the selected date.
-   */
-  render?: (props: DatePickerRenderProps) => ReactNode
   /**
    * The visual separator between each value.
    *
@@ -196,6 +190,14 @@ export interface UseDatePickerProps<
    * The callback invoked when input value state changes.
    */
   onInputChange?: (value: MaybeInputValue<Range>) => void
+  /**
+   * Function that converts the input value to Date type.
+   */
+  parseDate?: (value: string) => Date | undefined
+  /**
+   * The function to render the selected date.
+   */
+  render?: (props: DatePickerRenderProps) => ReactNode
 }
 
 export const useDatePicker = <

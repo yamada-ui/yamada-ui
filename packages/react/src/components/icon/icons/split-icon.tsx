@@ -1,6 +1,8 @@
 "use client"
 
-import { Split } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Split as OriginalSplitIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const SplitIcon = component(Icon)({ as: Split })
+export const SplitIcon = component(Icon)({
+  as: OriginalSplitIcon,
+}) as Component<"svg", IconProps>

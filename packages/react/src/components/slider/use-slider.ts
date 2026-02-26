@@ -31,18 +31,10 @@ import {
 import { useFieldProps } from "../field"
 
 export interface UseSliderProps<Y extends [number, number] | number = number>
-  extends Omit<HTMLProps, "defaultValue" | "onChange" | "ref">,
+  extends
+    Omit<HTMLProps, "defaultValue" | "onChange" | "ref">,
     HTMLRefAttributes<"input">,
     FieldProps {
-  /**
-   * The base `id` to use for the slider.
-   */
-  id?: string
-  /**
-   * The name attribute of the hidden `input` field.
-   * This is particularly useful in forms.
-   */
-  name?: string
   /**
    * The minimum distance between slider thumbs.
    * Useful for preventing the thumbs from being too close together.
@@ -55,12 +47,9 @@ export interface UseSliderProps<Y extends [number, number] | number = number>
    */
   defaultValue?: Y
   /**
-   * This is used to format the value so that screen readers
-   * can speak out a more human-friendly value.
-   *
-   * It is used to set the `aria-valuetext` property of the input.
+   * The base `id` to use for the slider.
    */
-  getAriaValueText?: (value: number, index: number) => string | undefined
+  id?: string
   /**
    * The maximum allowed value of the slider. Cannot be less than min.
    *
@@ -73,6 +62,11 @@ export interface UseSliderProps<Y extends [number, number] | number = number>
    * @default 0
    */
   min?: number
+  /**
+   * The name attribute of the hidden `input` field.
+   * This is particularly useful in forms.
+   */
+  name?: string
   /**
    * The orientation of the slider.
    *
@@ -89,6 +83,13 @@ export interface UseSliderProps<Y extends [number, number] | number = number>
    * The value of the slider.
    */
   value?: Y
+  /**
+   * This is used to format the value so that screen readers
+   * can speak out a more human-friendly value.
+   *
+   * It is used to set the `aria-valuetext` property of the input.
+   */
+  getAriaValueText?: (value: number, index: number) => string | undefined
   /**
    * Function called whenever the slider value changes.
    */

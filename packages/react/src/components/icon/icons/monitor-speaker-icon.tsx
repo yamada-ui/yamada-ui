@@ -1,6 +1,8 @@
 "use client"
 
-import { MonitorSpeaker } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { MonitorSpeaker as OriginalMonitorSpeakerIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const MonitorSpeakerIcon = component(Icon)({ as: MonitorSpeaker })
+export const MonitorSpeakerIcon = component(Icon)({
+  as: OriginalMonitorSpeakerIcon,
+}) as Component<"svg", IconProps>

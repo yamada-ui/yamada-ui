@@ -1,6 +1,8 @@
 "use client"
 
-import { CirclePercent } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { CirclePercent as OriginalCirclePercentIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const CirclePercentIcon = component(Icon)({ as: CirclePercent })
+export const CirclePercentIcon = component(Icon)({
+  as: OriginalCirclePercentIcon,
+}) as Component<"svg", IconProps>

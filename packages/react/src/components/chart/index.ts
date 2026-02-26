@@ -2,6 +2,7 @@ export * from "./area-chart.style"
 export * from "./bar-chart.style"
 export * from "./cartesian-chart.style"
 export * from "./chart.style"
+export * from "./donut-chart.style"
 export * from "./line-chart.style"
 export * from "./pie-chart.style"
 export * from "./polar-chart.style"
@@ -50,10 +51,12 @@ export type {
   ChartProps,
   ChartTooltipProps,
 } from "./chart"
+export * as DonutChart from "./donut-chart.namespace"
 export * as LineChart from "./line-chart.namespace"
 export * as PieChart from "./pie-chart.namespace"
-export { ChartPie, PolarChart } from "./polar-chart"
+export { ChartDonut, ChartPie, PolarChart } from "./polar-chart"
 export type {
+  ChartDonutProps,
   ChartPieLabel,
   ChartPieLabelLine,
   ChartPieLabelList,

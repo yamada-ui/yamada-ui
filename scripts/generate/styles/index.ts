@@ -65,8 +65,8 @@ export type BrowserIdentifier = FeatureData["status"]["support"]
 
 export interface CSSCompatStatement extends CompatStatement {
   name: string
-  type?: string
   feature?: FeatureData
+  type?: string
 }
 
 export interface CSSCompatData {
@@ -166,7 +166,7 @@ function getCSSCompatData(cssTypes: Awaited<ReturnType<typeof getCSSTypes>>) {
 }
 
 async function getCSSTypes() {
-  const data: { [key: string]: { type: string; deprecated: boolean } } = {}
+  const data: { [key: string]: { deprecated: boolean; type: string } } = {}
 
   const paths = await glob("node_modules/**/csstype/index.d.ts")
 
@@ -236,10 +236,10 @@ function generateType({
   transforms,
   variableLength = false,
 }: {
-  type?: string | string[]
   prop?: Properties
   token?: ThemeToken
   transforms?: TransformOptions[]
+  type?: string | string[]
   variableLength?: boolean
 }) {
   const overrideType = prop ? overrideTypes[prop] : undefined
@@ -285,7 +285,6 @@ export interface Docs {
 
 export interface Config {
   as?: boolean
-  type?: string
   css?: CSSObject
   docs?: Docs | string
   important?: boolean
@@ -293,6 +292,7 @@ export interface Config {
   shorthands?: string[]
   token?: ThemeToken
   transforms?: TransformOptions[]
+  type?: string
 }
 
 interface GetConfigOptions {

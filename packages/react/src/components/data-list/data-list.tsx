@@ -17,8 +17,7 @@ import { dataListStyle } from "./data-list.style"
 export interface DataListItem extends DataListItemProps {}
 
 export interface DataListRootProps
-  extends HTMLStyledProps<"dl">,
-    ThemeProps<DataListStyle> {
+  extends HTMLStyledProps<"dl">, ThemeProps<DataListStyle> {
   /**
    * If provided, generate elements based on items.
    */
@@ -33,8 +32,10 @@ export interface DataListRootProps
   termProps?: DataListTermProps
 }
 
-interface ComponentContext
-  extends Pick<DataListRootProps, "descriptionProps" | "termProps"> {}
+interface ComponentContext extends Pick<
+  DataListRootProps,
+  "descriptionProps" | "termProps"
+> {}
 
 const {
   ComponentContext,

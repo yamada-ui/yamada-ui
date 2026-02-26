@@ -1,6 +1,8 @@
 "use client"
 
-import { TextSelect } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { TextSelect as OriginalTextSelectIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const TextSelectIcon = component(Icon)({ as: TextSelect })
+export const TextSelectIcon = component(Icon)({
+  as: OriginalTextSelectIcon,
+}) as Component<"svg", IconProps>

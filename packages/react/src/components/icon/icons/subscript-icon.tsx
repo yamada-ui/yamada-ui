@@ -1,6 +1,8 @@
 "use client"
 
-import { Subscript } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Subscript as OriginalSubscriptIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const SubscriptIcon = component(Icon)({ as: Subscript })
+export const SubscriptIcon = component(Icon)({
+  as: OriginalSubscriptIcon,
+}) as Component<"svg", IconProps>

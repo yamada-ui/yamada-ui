@@ -27,7 +27,8 @@ interface ComponentContext extends UseInputBorderProps {
 }
 
 export interface PinInputRootProps
-  extends Omit<
+  extends
+    Omit<
       WithoutThemeProps<GroupProps, PinInputStyle>,
       "defaultValue" | "mask" | "onChange"
     >,

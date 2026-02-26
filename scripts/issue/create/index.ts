@@ -7,8 +7,8 @@ type Issue = Awaited<
 >["data"][number]
 
 interface Data {
-  name: string
   body: string
+  name: string
   title: string
 }
 

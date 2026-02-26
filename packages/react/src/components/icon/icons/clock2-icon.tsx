@@ -1,6 +1,8 @@
 "use client"
 
-import { Clock2 } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Clock2 as OriginalClock2Icon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const Clock2Icon = component(Icon)({ as: Clock2 })
+export const Clock2Icon = component(Icon)({
+  as: OriginalClock2Icon,
+}) as Component<"svg", IconProps>

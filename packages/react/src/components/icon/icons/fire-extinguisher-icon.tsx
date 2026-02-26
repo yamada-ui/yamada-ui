@@ -1,6 +1,8 @@
 "use client"
 
-import { FireExtinguisher } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FireExtinguisher as OriginalFireExtinguisherIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const FireExtinguisherIcon = component(Icon)({ as: FireExtinguisher })
+export const FireExtinguisherIcon = component(Icon)({
+  as: OriginalFireExtinguisherIcon,
+}) as Component<"svg", IconProps>

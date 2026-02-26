@@ -1,6 +1,8 @@
 "use client"
 
-import { IdCardLanyard } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { IdCardLanyard as OriginalIdCardLanyardIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const IdCardLanyardIcon = component(Icon)({ as: IdCardLanyard })
+export const IdCardLanyardIcon = component(Icon)({
+  as: OriginalIdCardLanyardIcon,
+}) as Component<"svg", IconProps>

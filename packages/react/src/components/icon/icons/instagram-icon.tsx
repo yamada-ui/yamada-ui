@@ -1,6 +1,8 @@
 "use client"
 
-import { Instagram } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Instagram as OriginalInstagramIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const InstagramIcon = component(Icon)({ as: Instagram })
+export const InstagramIcon = component(Icon)({
+  as: OriginalInstagramIcon,
+}) as Component<"svg", IconProps>

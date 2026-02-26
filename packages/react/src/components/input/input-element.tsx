@@ -8,7 +8,8 @@ import { inputElementStyle } from "./input-element.style"
 import { useInputBorder } from "./use-input-border"
 
 export interface InputElementProps
-  extends HTMLStyledProps,
+  extends
+    HTMLStyledProps,
     ThemeProps<InputElementStyle>,
     Pick<InputProps, "errorBorderColor" | "focusBorderColor"> {}
 

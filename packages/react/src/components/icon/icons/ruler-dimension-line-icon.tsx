@@ -1,6 +1,8 @@
 "use client"
 
-import { RulerDimensionLine } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { RulerDimensionLine as OriginalRulerDimensionLineIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -9,5 +11,5 @@ import { component, Icon } from "../icon"
  * @see https://yamada-ui.com/docs/components/icon
  */
 export const RulerDimensionLineIcon = component(Icon)({
-  as: RulerDimensionLine,
-})
+  as: OriginalRulerDimensionLineIcon,
+}) as Component<"svg", IconProps>

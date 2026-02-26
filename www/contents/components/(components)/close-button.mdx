@@ -96,4 +96,16 @@ To disable, set `disabled` to `true`.
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+`CloseButton` follows the [WAI-ARIA - Button Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/button/) for accessibility.
+
+### Keyboard Navigation
+
+| Key              | Description                           | State |
+| ---------------- | ------------------------------------- | ----- |
+| `Space`, `Enter` | When element has focus, activates it. | -     |
+
+### ARIA Roles and Attributes
+
+| Component     | Roles and Attributes | Usage              |
+| ------------- | -------------------- | ------------------ |
+| `CloseButton` | `aria-label`         | Sets to `"Close"`. |

@@ -1,6 +1,8 @@
 "use client"
 
-import { Asterisk } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Asterisk as OriginalAsteriskIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const AsteriskIcon = component(Icon)({ as: Asterisk })
+export const AsteriskIcon = component(Icon)({
+  as: OriginalAsteriskIcon,
+}) as Component<"svg", IconProps>

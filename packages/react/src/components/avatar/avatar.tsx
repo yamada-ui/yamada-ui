@@ -10,9 +10,7 @@ import { avatarStyle } from "./avatar.style"
 import { useAvatar } from "./use-avatar"
 
 export interface AvatarProps
-  extends HTMLStyledProps,
-    ThemeProps<AvatarStyle>,
-    UseAvatarProps {
+  extends HTMLStyledProps, ThemeProps<AvatarStyle>, UseAvatarProps {
   /**
    * The avatar icon to use.
    */

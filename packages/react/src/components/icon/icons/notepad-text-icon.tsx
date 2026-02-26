@@ -1,6 +1,8 @@
 "use client"
 
-import { NotepadText } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { NotepadText as OriginalNotepadTextIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const NotepadTextIcon = component(Icon)({ as: NotepadText })
+export const NotepadTextIcon = component(Icon)({
+  as: OriginalNotepadTextIcon,
+}) as Component<"svg", IconProps>

@@ -1,6 +1,8 @@
 "use client"
 
-import { FileTerminal } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FileTerminal as OriginalFileTerminalIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const FileTerminalIcon = component(Icon)({ as: FileTerminal })
+export const FileTerminalIcon = component(Icon)({
+  as: OriginalFileTerminalIcon,
+}) as Component<"svg", IconProps>

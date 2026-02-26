@@ -1,6 +1,8 @@
 "use client"
 
-import { GitBranchMinus } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { GitBranchMinus as OriginalGitBranchMinusIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const GitBranchMinusIcon = component(Icon)({ as: GitBranchMinus })
+export const GitBranchMinusIcon = component(Icon)({
+  as: OriginalGitBranchMinusIcon,
+}) as Component<"svg", IconProps>

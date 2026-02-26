@@ -51,7 +51,7 @@ type Component<
 
 export type ComponentSlotName<
   Y extends ComponentSlotStyle | ComponentStyle = ComponentSlotStyle,
-> = AnyString | Extract<keyof Required<Y>["base"], string>
+> = AnyString | Extract<keyof NonNullable<Y["base"]>, string>
 
 export type ComponentSlot<Y extends string> =
   | [Y, Y]
@@ -89,8 +89,8 @@ interface classNameOptions<Y extends string = string> {
 
 export interface ComponentWithContextOptions<
   Y extends number | string | symbol = string,
-> extends ComponentOptions,
-    UseComponentPropsOptions<Y> {}
+>
+  extends ComponentOptions, UseComponentPropsOptions<Y> {}
 
 function createProxyComponent<
   Y extends AsWithFragment = "div",

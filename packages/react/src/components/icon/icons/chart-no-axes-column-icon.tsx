@@ -1,6 +1,8 @@
 "use client"
 
-import { ChartNoAxesColumn } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { ChartNoAxesColumn as OriginalChartNoAxesColumnIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const ChartNoAxesColumnIcon = component(Icon)({ as: ChartNoAxesColumn })
+export const ChartNoAxesColumnIcon = component(Icon)({
+  as: OriginalChartNoAxesColumnIcon,
+}) as Component<"svg", IconProps>

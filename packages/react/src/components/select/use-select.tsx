@@ -77,20 +77,13 @@ const [SelectContext, useSelectContext] = createContext<SelectContext>({
 export { SelectContext, useSelectContext }
 
 export interface UseSelectProps<Multiple extends boolean = false>
-  extends Omit<HTMLProps, "defaultValue" | "onChange" | "value">,
+  extends
+    Omit<HTMLProps, "defaultValue" | "onChange" | "value">,
     Omit<
       UseComboboxProps,
       "defaultValue" | "initialFocusValue" | "onChange" | "value"
     >,
     FieldProps {
-  /**
-   * The `id` attribute of the input element.
-   */
-  id?: string
-  /**
-   * The `name` attribute of the input element.
-   */
-  name?: string
   /**
    * The initial value of the select.
    */
@@ -101,6 +94,10 @@ export interface UseSelectProps<Multiple extends boolean = false>
    * @default true
    */
   focusOnClear?: boolean
+  /**
+   * The `id` attribute of the input element.
+   */
+  id?: string
   /**
    * If `true`, include placeholder in options.
    *
@@ -124,13 +121,13 @@ export interface UseSelectProps<Multiple extends boolean = false>
    */
   multiple?: Multiple
   /**
+   * The `name` attribute of the input element.
+   */
+  name?: string
+  /**
    * The placeholder for select.
    */
   placeholder?: string
-  /**
-   * The function to render the selected items.
-   */
-  render?: (props: SelectRenderProps) => ReactNode
   /**
    * The visual separator between each value.
    *
@@ -145,6 +142,10 @@ export interface UseSelectProps<Multiple extends boolean = false>
    * The callback invoked when value state changes.
    */
   onChange?: (value: Multiple extends true ? string[] : string) => void
+  /**
+   * The function to render the selected items.
+   */
+  render?: (props: SelectRenderProps) => ReactNode
 }
 
 export const useSelect = <Multiple extends boolean = false>(

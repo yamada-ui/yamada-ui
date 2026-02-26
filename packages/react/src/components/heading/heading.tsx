@@ -6,8 +6,7 @@ import { createComponent } from "../../core"
 import { headingStyle } from "./heading.style"
 
 export interface HeadingProps
-  extends HTMLStyledProps<"h1">,
-    ThemeProps<HeadingStyle> {}
+  extends HTMLStyledProps<"h1">, ThemeProps<HeadingStyle> {}
 
 const {
   PropsContext: HeadingPropsContext,

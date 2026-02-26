@@ -8,7 +8,8 @@ import { formatNumberStyle } from "./format-number.style"
 import { useFormatNumber } from "./use-format-number"
 
 export interface FormatNumberProps
-  extends Omit<HTMLStyledProps<"span">, "style">,
+  extends
+    Omit<HTMLStyledProps<"span">, "style">,
     ThemeProps<FormatNumberStyle>,
     FormatNumberOptions {
   /**

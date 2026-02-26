@@ -36,9 +36,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
           CODECOV_API_TOKEN: ${{ secrets.CODECOV_API_TOKEN }}
 
+      - name: Setup Browser
+        working-directory: packages/react
+        run: pnpm playwright install --with-deps
+
       - name: Create or update a11y issues
         run: |
-          pnpm dlx playwright@1.56.1 install
           pnpm react test:a11y || true
           pnpm issue:a11y --no-report
         env:

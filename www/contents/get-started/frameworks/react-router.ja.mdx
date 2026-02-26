@@ -344,15 +344,18 @@ import type { LinkProps as OriginalLinkProps } from "react-router"
 import { Button, IconButton, Link } from "@yamada-ui/react"
 import { Link as OriginalLink } from "react-router"
 
-export interface RouterLinkProps
-  extends Omit<Merge<OriginalLinkProps, LinkProps>, "as" | "ref"> {}
+export interface RouterLinkProps extends Omit<
+  Merge<OriginalLinkProps, LinkProps>,
+  "as" | "ref"
+> {}
 
 export const RouterLink: FC<RouterLinkProps> = (props) => {
   return <Link as={OriginalLink} {...props} />
 }
 
 export interface RouterLinkButtonProps
-  extends Omit<Merge<OriginalLinkProps, ButtonProps>, "as" | "ref">,
+  extends
+    Omit<Merge<OriginalLinkProps, ButtonProps>, "as" | "ref">,
     HTMLRefAttributes<"a"> {}
 
 export const RouterLinkButton: FC<RouterLinkButtonProps> = (props) => {
@@ -360,7 +363,8 @@ export const RouterLinkButton: FC<RouterLinkButtonProps> = (props) => {
 }
 
 export interface RouterLinkIconButtonProps
-  extends Omit<Merge<OriginalLinkProps, IconButtonProps>, "as" | "ref">,
+  extends
+    Omit<Merge<OriginalLinkProps, IconButtonProps>, "as" | "ref">,
     HTMLRefAttributes<"a"> {}
 
 export const RouterLinkIconButton: FC<RouterLinkIconButtonProps> = (props) => {

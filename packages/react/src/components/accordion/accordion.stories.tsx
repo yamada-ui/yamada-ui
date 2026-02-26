@@ -95,9 +95,14 @@ export const Variant: Story = () => {
 
   return (
     <PropsTable variant="stack" rows={["plain", "panel"]}>
-      {(_, row, key) => (
-        <Accordion.Root key={key} variant={row} items={items} />
-      )}
+      {(_, row, key) => {
+        const variantItems = items.map((item) => ({
+          ...item,
+          button: `${item.button} (${row})`,
+        }))
+
+        return <Accordion.Root key={key} variant={row} items={variantItems} />
+      }}
     </PropsTable>
   )
 }

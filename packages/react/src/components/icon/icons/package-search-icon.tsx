@@ -1,6 +1,8 @@
 "use client"
 
-import { PackageSearch } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { PackageSearch as OriginalPackageSearchIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const PackageSearchIcon = component(Icon)({ as: PackageSearch })
+export const PackageSearchIcon = component(Icon)({
+  as: OriginalPackageSearchIcon,
+}) as Component<"svg", IconProps>

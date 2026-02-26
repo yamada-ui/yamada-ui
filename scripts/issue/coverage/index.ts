@@ -35,8 +35,8 @@ interface Totals {
 }
 
 interface File {
-  name: string
   line_coverage: [number, number][]
+  name: string
   totals: Totals
 }
 

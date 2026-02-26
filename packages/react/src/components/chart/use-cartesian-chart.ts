@@ -2,6 +2,7 @@
 
 import type {
   AreaProps,
+  BarProps,
   CartesianGridProps,
   LineProps,
   ReferenceLineProps,
@@ -675,6 +676,161 @@ export const useChartArea = ({
 }
 
 export type UseChartAreaReturn = ReturnType<typeof useChartArea>
+
+export interface UseChartBarProps extends Merge<
+  HTMLProps<"path">,
+  Pick<
+    BarProps,
+    | "activeBar"
+    | "animationBegin"
+    | "animationDuration"
+    | "animationEasing"
+    | "background"
+    | "barSize"
+    | "dangerouslySetInnerHTML"
+    | "dataKey"
+    | "hide"
+    | "index"
+    | "isAnimationActive"
+    | "label"
+    | "legendType"
+    | "maxBarSize"
+    | "minPointSize"
+    | "name"
+    | "onAnimationEnd"
+    | "onAnimationStart"
+    | "radius"
+    | "shape"
+    | "stackId"
+    | "tooltipType"
+    | "unit"
+    | "xAxisId"
+    | "yAxisId"
+    | "zIndex"
+  >
+> {}
+
+export const useChartBar = ({
+  name,
+  activeBar,
+  animationBegin,
+  animationDuration,
+  animationEasing,
+  background,
+  barSize,
+  children,
+  dangerouslySetInnerHTML,
+  dataKey: dataKeyProp,
+  hide,
+  index,
+  isAnimationActive = false,
+  label: labelProp = false,
+  legendType,
+  maxBarSize,
+  minPointSize,
+  radius = 4,
+  shape,
+  tooltipType,
+  unit,
+  xAxisId,
+  yAxisId,
+  zIndex,
+  onAnimationEnd,
+  onAnimationStart,
+  ...rest
+}: UseChartBarProps = {}) => {
+  const { highlightedDataKey } = useChartContext()
+
+  const label = useMemo<UseChartBarProps["label"]>(() => {
+    if (!labelProp) return labelProp
+    if (isFunction(labelProp) || isValidElement(labelProp)) return labelProp
+
+    return {
+      fill: "",
+      offset: 12,
+      position: "top",
+      ...(isObject(labelProp) ? labelProp : {}),
+    }
+  }, [labelProp])
+
+  const getRootProps: PropGetter<"path"> = useCallback(
+    (props) => ({ ...rest, ...props }),
+    [rest],
+  )
+
+  const getBarProps: PropGetter<BarProps> = useCallback(
+    ({ dataKey = dataKeyProp, ...props } = {}) => ({
+      name,
+      "data-active": dataAttr(
+        !isUndefined(highlightedDataKey) && highlightedDataKey === dataKey,
+      ),
+      "data-inactive": dataAttr(
+        !isUndefined(highlightedDataKey) && highlightedDataKey !== dataKey,
+      ),
+      activeBar,
+      animationBegin,
+      animationDuration,
+      animationEasing,
+      background,
+      barSize,
+      children,
+      dangerouslySetInnerHTML,
+      dataKey,
+      hide,
+      index,
+      isAnimationActive,
+      label,
+      legendType,
+      maxBarSize,
+      minPointSize,
+      radius,
+      shape,
+      stroke: "",
+      strokeWidth: "",
+      tooltipType,
+      unit,
+      xAxisId,
+      yAxisId,
+      zIndex,
+      onAnimationEnd,
+      onAnimationStart,
+      ...props,
+    }),
+    [
+      activeBar,
+      animationBegin,
+      animationDuration,
+      animationEasing,
+      background,
+      barSize,
+      children,
+      dangerouslySetInnerHTML,
+      dataKeyProp,
+      hide,
+      highlightedDataKey,
+      index,
+      isAnimationActive,
+      label,
+      legendType,
+      maxBarSize,
+      minPointSize,
+      name,
+      onAnimationEnd,
+      onAnimationStart,
+      radius,
+      shape,
+      tooltipType,
+      unit,
+      xAxisId,
+      yAxisId,
+      zIndex,
+    ],
+  )
+
+  return { getBarProps, getRootProps }
+}
+
+export type UseChartBarReturn = ReturnType<typeof useChartBar>
 
 export interface UseChartReferenceLineProps extends Merge<
   HTMLProps<"line">,

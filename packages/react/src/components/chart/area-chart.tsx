@@ -16,7 +16,10 @@ import { useAreaChart } from "./use-area-chart"
 
 export interface AreaChartProps<Y extends Dict = Dict>
   extends
-    Omit<CartesianChartProps<Y>, "components" | "render" | "series">,
+    Omit<
+      CartesianChartProps<Y>,
+      "barProps" | "components" | "lineProps" | "render" | "series"
+    >,
     UseAreaChartProps<Y>,
     ThemeProps<AreaChartStyle> {
   /***

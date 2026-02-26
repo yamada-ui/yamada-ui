@@ -2,23 +2,23 @@ import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "#storybook"
 import dayjs from "dayjs"
 import { useMemo } from "react"
-import { AreaChart } from "."
+import { BarChart } from "."
 import { COLOR_SCHEMES, toTitleCase } from "../../utils"
 
-type Story = StoryFn<typeof AreaChart.Root>
+type Story = StoryFn<typeof BarChart.Root>
 
-const meta: Meta<typeof AreaChart.Root> = {
-  component: AreaChart.Root,
-  title: "Components / Chart / AreaChart",
+const meta: Meta<typeof BarChart.Root> = {
+  component: BarChart.Root,
+  title: "Components / Chart / BarChart",
 }
 
 export default meta
 
 interface Data {
   date: string
-  desktop: null | number
-  mobile: null | number
-  tablet: null | number
+  desktop: null | number | number[]
+  mobile: null | number | number[]
+  tablet: null | number | number[]
 }
 
 const randomValue = (min = 1000, max = 5000) =>
@@ -27,25 +27,24 @@ const randomValue = (min = 1000, max = 5000) =>
 const createData = (length = 6): Data[] =>
   Array.from({ length }, (_, index) => ({
     date: dayjs().add(index, "month").format("YYYY-MM-DD"),
-    desktop: randomValue(1000, 2000),
-    mobile: randomValue(3000, 4000),
-    tablet: randomValue(2000, 3000),
+    desktop: randomValue(),
+    mobile: randomValue(),
+    tablet: randomValue(),
   }))
 
 export const Basic: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root
+    <BarChart.Root
       data={data}
       series={series}
       tooltipProps={{
@@ -60,43 +59,33 @@ export const Basic: Story = () => {
 }
 
 export const Composition: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
-    [],
-  )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root data={data} series={series}>
-      <AreaChart.Tooltip
+    <BarChart.Root data={data}>
+      <BarChart.Tooltip
         labelFormatter={(value) => dayjs(value).format("MMM")}
       />
-      <AreaChart.XAxis
+      <BarChart.XAxis
         dataKey="date"
         tickFormatter={(value) => dayjs(value).format("MMM")}
       />
-      <AreaChart.Area dataKey="desktop" dot>
-        <AreaChart.LabelList />
-      </AreaChart.Area>
-      <AreaChart.Area dataKey="tablet" />
-      <AreaChart.Area dataKey="mobile" />
-    </AreaChart.Root>
+      <BarChart.Bar dataKey="desktop">
+        <BarChart.LabelList />
+      </BarChart.Bar>
+      <BarChart.Bar dataKey="tablet" />
+      <BarChart.Bar dataKey="mobile" />
+    </BarChart.Root>
   )
 }
 
 export const Size: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -104,7 +93,7 @@ export const Size: Story = () => {
   return (
     <PropsTable variant="stack" rows={["xs", "sm", "md", "lg", "xl"]}>
       {(_, row, key) => (
-        <AreaChart.Root
+        <BarChart.Root
           key={key}
           size={row}
           data={data}
@@ -123,122 +112,24 @@ export const Size: Story = () => {
 }
 
 export const ColorScheme: Story = () => {
-  const data = useMemo(() => createData(), [])
-
-  return (
-    <PropsTable variant="stack" rows={COLOR_SCHEMES}>
-      {(_, row, key) => (
-        <AreaChart.Root
-          key={key}
-          data={data}
-          series={
-            AreaChart.mergeSeries(
-              [
-                { dataKey: "desktop" },
-                { dataKey: "tablet" },
-                { dataKey: "mobile" },
-              ],
-              row,
-            ) as AreaChart.AreaProps<Data>[]
-          }
-          tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
-          }}
-          xAxisProps={{
-            dataKey: "date",
-            tickFormatter: (value) => dayjs(value).format("MMM"),
-          }}
-        />
-      )}
-    </PropsTable>
-  )
-}
-
-export const Gradient: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries(
-        [{ dataKey: "desktop" }, { dataKey: "tablet" }, { dataKey: "mobile" }],
-        "blue",
-      ),
-    [],
-  )
-  const data = useMemo(() => createData(), [])
-
-  return (
-    <AreaChart.Root
-      data={data}
-      series={series}
-      areaProps={{ withGradient: true }}
-      tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
-      }}
-      xAxisProps={{
-        dataKey: "date",
-        tickFormatter: (value) => dayjs(value).format("MMM"),
-      }}
-    />
-  )
-}
-
-export const Color: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { color: "red", dataKey: "desktop" },
-      { color: "green", dataKey: "tablet" },
-      { color: "blue", dataKey: "mobile" },
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
     ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root
-      data={data}
-      series={series}
-      areaProps={{ stackId: "stack" }}
-      tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
-      }}
-      xAxisProps={{
-        dataKey: "date",
-        tickFormatter: (value) => dayjs(value).format("MMM"),
-      }}
-    />
-  )
-}
-
-export const Type: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
-    [],
-  )
-  const data = useMemo(() => createData(), [])
-
-  return (
-    <PropsTable
-      variant="stack"
-      rows={[
-        "monotone",
-        "bump",
-        "linear",
-        "natural",
-        "step",
-        "stepBefore",
-        "stepAfter",
-      ]}
-    >
-      {(_, type, key) => (
-        <AreaChart.Root
+    <PropsTable variant="stack" rows={COLOR_SCHEMES}>
+      {(_, row, key) => (
+        <BarChart.Root
           key={key}
+          colorScheme={row}
           data={data}
           series={series}
-          areaProps={{ type }}
           tooltipProps={{
             labelFormatter: (value) => dayjs(value).format("MMM"),
           }}
@@ -252,68 +143,120 @@ export const Type: Story = () => {
   )
 }
 
-export const Stacked: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
+export const Color: Story = () => {
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { color: "red", dataKey: "desktop" },
+      { color: "blue", dataKey: "tablet" },
+      { color: "green", dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
-    <>
-      <AreaChart.Root
-        data={data}
-        series={series}
-        syncId="chart"
-        areaProps={{ stackId: "stack" }}
-        tooltipProps={{
-          labelFormatter: (value) => dayjs(value).format("MMM"),
-        }}
-        xAxisProps={{
-          dataKey: "date",
-          tickFormatter: (value) => dayjs(value).format("MMM"),
-        }}
-      />
-
-      <AreaChart.Root data={data} series={series}>
-        <AreaChart.Tooltip
-          labelFormatter={(value) => dayjs(value).format("MMM")}
-        />
-        <AreaChart.XAxis
-          dataKey="date"
-          tickFormatter={(value) => dayjs(value).format("MMM")}
-        />
-        <AreaChart.Area dataKey="desktop" stackId={1} />
-        <AreaChart.Area dataKey="tablet" stackId={1} />
-        <AreaChart.Area dataKey="mobile" />
-      </AreaChart.Root>
-    </>
+    <BarChart.Root
+      data={data}
+      series={series}
+      tooltipProps={{
+        labelFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+      xAxisProps={{
+        dataKey: "date",
+        tickFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+    />
   )
 }
 
-export const StackedExpanded: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
+export const Range: Story = () => {
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop", range: true },
+      { dataKey: "tablet", range: true },
+      { dataKey: "mobile", range: true },
+    ],
+    [],
+  )
+  const data = useMemo(
     () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
+      Array.from({ length: 6 }, (_, index) => ({
+        date: dayjs().add(index, "month").format("YYYY-MM-DD"),
+        desktop: [randomValue(1000, 2000), randomValue(4000, 5000)],
+        mobile: [randomValue(1000, 2000), randomValue(4000, 5000)],
+        tablet: [randomValue(1000, 2000), randomValue(4000, 5000)],
+      })),
+    [],
+  )
+
+  return (
+    <BarChart.Root
+      data={data}
+      series={series}
+      tooltipProps={{
+        labelFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+      xAxisProps={{
+        dataKey: "date",
+        tickFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+    />
+  )
+}
+
+export const Stacked: Story = () => {
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { color: "red", dataKey: "desktop" },
+      {
+        color: "blue",
+        dataKey: "tablet",
+        radius: [0, 0, 4, 4],
+        stackId: "stack",
+      },
+      {
+        color: "green",
+        dataKey: "mobile",
+        radius: [4, 4, 0, 0],
+        stackId: "stack",
+      },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root
+    <BarChart.Root
+      data={data}
+      series={series}
+      tooltipProps={{
+        labelFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+      xAxisProps={{
+        dataKey: "date",
+        tickFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+    />
+  )
+}
+
+export const Percent: Story = () => {
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { color: "red", dataKey: "desktop" },
+      { color: "blue", dataKey: "tablet" },
+      { color: "green", dataKey: "mobile" },
+    ],
+    [],
+  )
+  const data = useMemo(() => createData(), [])
+
+  return (
+    <BarChart.Root
       data={data}
       series={series}
       withYAxis
-      areaProps={{ stackId: "stack" }}
+      barProps={{ radius: 0, stackId: "stack" }}
       chartProps={{ stackOffset: "expand" }}
       tooltipProps={{
         labelFormatter: (value) => dayjs(value).format("MMM"),
@@ -330,19 +273,18 @@ export const StackedExpanded: Story = () => {
 }
 
 export const YAxis: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root
+    <BarChart.Root
       data={data}
       series={series}
       withYAxis
@@ -359,11 +301,11 @@ export const YAxis: Story = () => {
 }
 
 export const Legend: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
       { color: "red", dataKey: "desktop" },
-      { color: "green", dataKey: "tablet" },
-      { color: "blue", dataKey: "mobile" },
+      { color: "blue", dataKey: "tablet" },
+      { color: "green", dataKey: "mobile" },
     ],
     [],
   )
@@ -384,12 +326,11 @@ export const Legend: Story = () => {
       ]}
     >
       {(_, placement, key) => (
-        <AreaChart.Root
+        <BarChart.Root
           key={key}
           data={data}
           series={series}
           withLegend
-          areaProps={{ stackId: "stack" }}
           legendProps={{ placement }}
           xAxisProps={{
             dataKey: "date",
@@ -402,22 +343,18 @@ export const Legend: Story = () => {
 }
 
 export const Name: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries(
-        [
-          { name: "Desktop", dataKey: "desktop" },
-          { name: "Tablet", dataKey: "tablet" },
-          { name: "Mobile", dataKey: "mobile" },
-        ],
-        "blue",
-      ),
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { name: "Desktop", color: "red", dataKey: "desktop" },
+      { name: "Tablet", color: "blue", dataKey: "tablet" },
+      { name: "Mobile", color: "green", dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root
+    <BarChart.Root
       data={data}
       series={series}
       withLegend
@@ -433,13 +370,12 @@ export const Name: Story = () => {
 }
 
 export const Grid: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -447,7 +383,7 @@ export const Grid: Story = () => {
   return (
     <PropsTable variant="stack" rows={["xy", "x", "y", "none"]}>
       {(_, row, key) => (
-        <AreaChart.Root
+        <BarChart.Root
           key={key}
           data={data}
           series={series}
@@ -465,43 +401,23 @@ export const Grid: Story = () => {
   )
 }
 
-export const Dot: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
-    [],
-  )
-  const data = useMemo(() => createData(), [])
-
-  return (
-    <AreaChart.Root
-      data={data}
-      series={series}
-      areaProps={{ dot: true, label: true }}
-      tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
-      }}
-      xAxisProps={{
-        dataKey: "date",
-        tickFormatter: (value) => dayjs(value).format("MMM"),
-      }}
-    />
-  )
-}
-
 export const Unit: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root
+    <BarChart.Root
       data={data}
       series={series}
       withYAxis
-      areaProps={{
-        dot: true,
+      barProps={{
         label: {
           formatter: (value) => `${(Number(value) / 1000).toFixed(1)}k`,
         },
@@ -526,18 +442,22 @@ export const Unit: Story = () => {
 }
 
 export const LabelList: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
     <>
-      <AreaChart.Root
+      <BarChart.Root
         data={data}
         series={series}
-        areaProps={{ dot: true, label: true }}
+        barProps={{ label: true }}
         tooltipProps={{
           labelFormatter: (value) => dayjs(value).format("MMM"),
         }}
@@ -551,13 +471,12 @@ export const LabelList: Story = () => {
         }}
       />
 
-      <AreaChart.Root
+      <BarChart.Root
         data={data}
         series={series}
         withTooltip={false}
         withXAxis={false}
-        areaProps={{
-          dot: true,
+        barProps={{
           label: {
             dataKey: "date",
             formatter: (value) => dayjs(String(value)).format("MMM"),
@@ -575,14 +494,45 @@ export const LabelList: Story = () => {
   )
 }
 
+export const Vertical: Story = () => {
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
+    [],
+  )
+  const data = useMemo(() => createData(), [])
+
+  return (
+    <BarChart.Root
+      data={data}
+      series={series}
+      withYAxis
+      chartProps={{ layout: "vertical" }}
+      tooltipProps={{
+        labelFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+      xAxisProps={{
+        type: "number",
+      }}
+      yAxisProps={{
+        type: "category",
+        dataKey: "date",
+        tickFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+    />
+  )
+}
+
 export const Orientation: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -590,7 +540,7 @@ export const Orientation: Story = () => {
   return (
     <PropsTable variant="stack" rows={["left", "right"]}>
       {(_, orientation, key) => (
-        <AreaChart.Root
+        <BarChart.Root
           key={key}
           data={data}
           series={series}
@@ -616,20 +566,19 @@ export const Orientation: Story = () => {
 }
 
 export const Synced: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
     <>
-      <AreaChart.Root
+      <BarChart.Root
         data={data}
         series={series}
         syncId="chart"
@@ -642,7 +591,7 @@ export const Synced: Story = () => {
         }}
       />
 
-      <AreaChart.Root
+      <BarChart.Root
         data={data}
         series={series}
         syncId="chart"
@@ -658,57 +607,19 @@ export const Synced: Story = () => {
   )
 }
 
-export const ConnectNull: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
-    [],
-  )
-  const data = useMemo(
-    () =>
-      createData().map(({ date, desktop, mobile, tablet }, index) => ({
-        date,
-        desktop: index === 3 ? null : desktop,
-        mobile: index === 3 ? null : mobile,
-        tablet: index === 3 ? null : tablet,
-      })),
-    [],
-  )
-
-  return (
-    <AreaChart.Root
-      data={data}
-      series={series}
-      areaProps={{ connectNulls: true, dot: true }}
-      tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
-      }}
-      xAxisProps={{
-        dataKey: "date",
-        tickFormatter: (value) => dayjs(value).format("MMM"),
-      }}
-    />
-  )
-}
-
 export const Formatter: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root
+    <BarChart.Root
       data={data}
       series={series}
       withYAxis
@@ -732,19 +643,18 @@ export const Formatter: Story = () => {
 }
 
 export const ReferenceLine: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root
+    <BarChart.Root
       data={data}
       series={series}
       tooltipProps={{
@@ -755,36 +665,35 @@ export const ReferenceLine: Story = () => {
         tickFormatter: (value) => dayjs(value).format("MMM"),
       }}
     >
-      <AreaChart.ReferenceLine label="Reference line" y={3000} />
-      <AreaChart.ReferenceLine
+      <BarChart.ReferenceLine label="Reference line" y={3000} />
+      <BarChart.ReferenceLine
         label={{ position: "insideTopLeft", value: "Reference line" }}
         x={dayjs().add(3, "month").format("YYYY-MM-DD")}
       />
-      <AreaChart.ReferenceLine
+      <BarChart.ReferenceLine
         label={{ position: "center", value: "Reference line" }}
         segment={[
           { x: dayjs().format("YYYY-MM-DD"), y: 0 },
           { x: dayjs().add(3, "month").format("YYYY-MM-DD"), y: 3000 },
         ]}
       />
-    </AreaChart.Root>
+    </BarChart.Root>
   )
 }
 
 export const AxisTickLine: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root
+    <BarChart.Root
       data={data}
       series={series}
       withYAxis
@@ -803,19 +712,18 @@ export const AxisTickLine: Story = () => {
 }
 
 export const AxisLabel: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root
+    <BarChart.Root
       data={data}
       series={series}
       withYAxis
@@ -834,19 +742,18 @@ export const AxisLabel: Story = () => {
 }
 
 export const Domain: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root
+    <BarChart.Root
       data={data}
       series={series}
       withYAxis
@@ -866,20 +773,86 @@ export const Domain: Story = () => {
   )
 }
 
-export const TooltipCursor: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
+export const Gap: Story = () => {
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root
+    <BarChart.Root
+      data={data}
+      series={series}
+      chartProps={{ barCategoryGap: 32, barGap: 8 }}
+      tooltipProps={{
+        labelFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+      xAxisProps={{
+        dataKey: "date",
+        tickFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+    />
+  )
+}
+
+export const Radius: Story = () => {
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      {
+        color: "red",
+        dataKey: "desktop",
+        radius: 8,
+      },
+      {
+        color: "blue",
+        dataKey: "tablet",
+        radius: [0, 0, 8, 8],
+        stackId: "stack",
+      },
+      {
+        color: "green",
+        dataKey: "mobile",
+        radius: [8, 8, 0, 0],
+        stackId: "stack",
+      },
+    ],
+    [],
+  )
+  const data = useMemo(() => createData(), [])
+
+  return (
+    <BarChart.Root
+      data={data}
+      series={series}
+      tooltipProps={{
+        labelFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+      xAxisProps={{
+        dataKey: "date",
+        tickFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+    />
+  )
+}
+
+export const TooltipCursor: Story = () => {
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
+    [],
+  )
+  const data = useMemo(() => createData(), [])
+
+  return (
+    <BarChart.Root
       data={data}
       series={series}
       tooltipProps={{ cursor: true }}
@@ -892,19 +865,18 @@ export const TooltipCursor: Story = () => {
 }
 
 export const DisabledXAxis: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root
+    <BarChart.Root
       data={data}
       series={series}
       withXAxis={false}
@@ -916,48 +888,19 @@ export const DisabledXAxis: Story = () => {
   )
 }
 
-export const DisabledActiveDot: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
-    [],
-  )
-  const data = useMemo(() => createData(), [])
-
-  return (
-    <AreaChart.Root
-      data={data}
-      series={series}
-      areaProps={{ activeDot: false }}
-      tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
-      }}
-      xAxisProps={{
-        dataKey: "date",
-        tickFormatter: (value) => dayjs(value).format("MMM"),
-      }}
-    />
-  )
-}
-
 export const DisabledTooltip: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root
+    <BarChart.Root
       data={data}
       series={series}
       withTooltip={false}
@@ -970,19 +913,18 @@ export const DisabledTooltip: Story = () => {
 }
 
 export const CustomAxis: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root
+    <BarChart.Root
       data={data}
       series={series}
       withYAxis
@@ -1006,48 +948,19 @@ export const CustomAxis: Story = () => {
   )
 }
 
-export const CustomArea: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
-    [],
-  )
-  const data = useMemo(() => createData(), [])
-
-  return (
-    <AreaChart.Root
-      data={data}
-      series={series}
-      areaProps={{ strokeDasharray: "15 15" }}
-      tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
-      }}
-      xAxisProps={{
-        dataKey: "date",
-        tickFormatter: (value) => dayjs(value).format("MMM"),
-      }}
-    />
-  )
-}
-
 export const CustomReferenceLine: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root
+    <BarChart.Root
       data={data}
       series={series}
       tooltipProps={{
@@ -1058,7 +971,7 @@ export const CustomReferenceLine: Story = () => {
         tickFormatter: (value) => dayjs(value).format("MMM"),
       }}
     >
-      <AreaChart.ReferenceLine
+      <BarChart.ReferenceLine
         color={["green", "blue"]}
         label={{
           color: ["green", "blue"],
@@ -1068,85 +981,22 @@ export const CustomReferenceLine: Story = () => {
         strokeDasharray="15 15"
         y={3000}
       />
-    </AreaChart.Root>
-  )
-}
-
-export const CustomDot: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet", dot: { fill: "blue" } },
-        {
-          dataKey: "mobile",
-          dot: { fill: ["white", "black"], stroke: "red", strokeWidth: 1 },
-        },
-      ]),
-    [],
-  )
-  const data = useMemo(() => createData(), [])
-
-  return (
-    <AreaChart.Root
-      data={data}
-      series={series}
-      areaProps={{ activeDot: false }}
-      tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
-        contentProps: { withSwatch: false },
-      }}
-      xAxisProps={{
-        dataKey: "date",
-        tickFormatter: (value) => dayjs(value).format("MMM"),
-      }}
-    />
-  )
-}
-
-export const CustomActiveDot: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
-    [],
-  )
-  const data = useMemo(() => createData(), [])
-
-  return (
-    <AreaChart.Root
-      data={data}
-      series={series}
-      areaProps={{ activeDot: { fill: ["blue", "red"] } }}
-      tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
-        contentProps: { withSwatch: false },
-      }}
-      xAxisProps={{
-        dataKey: "date",
-        tickFormatter: (value) => dayjs(value).format("MMM"),
-      }}
-    />
+    </BarChart.Root>
   )
 }
 
 export const CustomLabelList: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [{ color: "blue", dataKey: "desktop" }],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root
+    <BarChart.Root
       data={data}
       series={series}
-      areaProps={{
-        activeDot: { fill: "red" },
-        dot: { fill: "red" },
+      barProps={{
         label: { color: "red" },
       }}
       tooltipProps={{
@@ -1166,19 +1016,18 @@ export const CustomLabelList: Story = () => {
 }
 
 export const CustomGrid: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root
+    <BarChart.Root
       data={data}
       series={series}
       gridProps={{ strokeDasharray: "15 15" }}
@@ -1195,23 +1044,22 @@ export const CustomGrid: Story = () => {
 }
 
 export const CustomTooltipCursor: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
+  const series = useMemo<BarChart.BarProps<Data>[]>(
+    () => [
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ],
     [],
   )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root
+    <BarChart.Root
       data={data}
       series={series}
       tooltipProps={{
-        cursor: { stroke: ["red", "blue"] },
+        cursor: { fill: "red", fillOpacity: 0.2 },
         labelFormatter: (value) => dayjs(value).format("MMM"),
       }}
       xAxisProps={{

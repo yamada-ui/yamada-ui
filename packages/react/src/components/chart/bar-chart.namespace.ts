@@ -1,10 +1,9 @@
+import type { BarChartProps as RootProps } from "./bar-chart"
 import type {
-  ChartActiveDot as ActiveDot,
-  ChartDot as Dot,
+  ChartCartesianLabel as BarLabel,
+  ChartBarProps as BarProps,
   ChartGridProps as GridProps,
   ChartLabel as Label,
-  ChartCartesianLabel as LineLabel,
-  ChartLineProps as LineProps,
   ChartReferenceLineProps as ReferenceLineProps,
   ChartTickLine as TickLine,
   ChartXAxisProps as XAxisProps,
@@ -17,10 +16,14 @@ import type {
   ChartLegendProps as LegendProps,
   ChartTooltipProps as TooltipProps,
 } from "./chart"
-import type { LineChartProps as RootProps } from "./line-chart"
 import {
+  BarChartPropsContext as PropsContext,
+  BarChart as Root,
+  useBarChartPropsContext as usePropsContext,
+} from "./bar-chart"
+import {
+  ChartBar as Bar,
   ChartGrid as Grid,
-  ChartLine as Line,
   ChartReferenceLine as ReferenceLine,
   ChartXAxis as XAxis,
   ChartYAxis as YAxis,
@@ -30,17 +33,12 @@ import {
   ChartLegend as Legend,
   ChartTooltip as Tooltip,
 } from "./chart"
-import {
-  LineChartPropsContext as PropsContext,
-  LineChart as Root,
-  useLineChartPropsContext as usePropsContext,
-} from "./line-chart"
 
 export {
+  Bar,
   Grid,
   LabelList,
   Legend,
-  Line,
   PropsContext,
   ReferenceLine,
   Root,
@@ -50,14 +48,12 @@ export {
   YAxis,
 }
 export type {
-  ActiveDot,
-  Dot,
+  BarLabel,
+  BarProps,
   GridProps,
   Label,
   LabelListProps,
   LegendProps,
-  LineLabel,
-  LineProps,
   ReferenceLineProps,
   RootProps,
   TickLine,

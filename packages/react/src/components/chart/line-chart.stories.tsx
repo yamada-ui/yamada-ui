@@ -285,9 +285,9 @@ export const Legend: Story = () => {
 export const Name: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { name: "Desktop", dataKey: "desktop" },
-      { name: "Tablet", dataKey: "tablet" },
-      { name: "Mobile", dataKey: "mobile" },
+      { name: "Desktop", color: "red", dataKey: "desktop" },
+      { name: "Tablet", color: "blue", dataKey: "tablet" },
+      { name: "Mobile", color: "green", dataKey: "mobile" },
     ],
     [],
   )
@@ -921,7 +921,11 @@ export const CustomReferenceLine: Story = () => {
     >
       <LineChart.ReferenceLine
         color={["green", "blue"]}
-        label={{ position: "insideTopRight", value: "Reference line" }}
+        label={{
+          color: ["green", "blue"],
+          position: "insideTopRight",
+          value: "Reference line",
+        }}
         strokeDasharray="15 15"
         y={3000}
       />

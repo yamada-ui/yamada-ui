@@ -16,7 +16,15 @@ import { useLineChart } from "./use-line-chart"
 
 export interface LineChartProps<Y extends Dict = Dict>
   extends
-    Omit<CartesianChartProps<Y>, "components" | "render" | "series">,
+    Omit<
+      CartesianChartProps<Y>,
+      | "areaFillOpacity"
+      | "areaProps"
+      | "barProps"
+      | "components"
+      | "render"
+      | "series"
+    >,
     UseLineChartProps<Y>,
     ThemeProps<LineChartStyle> {
   /**

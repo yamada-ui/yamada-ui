@@ -27,6 +27,7 @@ import type { CartesianChartStyle } from "./cartesian-chart.style"
 import type { ChartLabelListProps, ChartProps } from "./chart"
 import type {
   UseChartAreaProps,
+  UseChartBarProps,
   UseChartGridProps,
   UseChartLineProps,
   UseChartReferenceLineProps,
@@ -36,6 +37,7 @@ import type {
 import { cloneElement, isValidElement, useId, useMemo } from "react"
 import {
   Area,
+  Bar,
   CartesianGrid,
   Line,
   ReferenceLine,
@@ -56,6 +58,7 @@ import { cartesianChartStyle } from "./cartesian-chart.style"
 import { Chart, useChartComponentContext } from "./chart"
 import {
   useChartArea,
+  useChartBar,
   useChartGrid,
   useChartLine,
   useChartReferenceLine,
@@ -68,6 +71,7 @@ const shouldForwardProp = createShouldForwardProp()
 interface ComponentContext extends Pick<
   CartesianChartProps,
   | "areaProps"
+  | "barProps"
   | "gridProps"
   | "lineProps"
   | "referenceLineProps"
@@ -142,6 +146,10 @@ export interface CartesianChartProps<Y extends Dict = Dict>
    */
   referenceLineStrokeWidth?: CSSProps["strokeWidth"]
   /**
+   * The text color of the reference lines.
+   */
+  referenceLineTextColor?: CSSProps["color"]
+  /**
    * The text fill color of the reference lines.
    */
   referenceLineTextFill?: CSSProps["fill"]
@@ -200,6 +208,10 @@ export interface CartesianChartProps<Y extends Dict = Dict>
    */
   areaProps?: Omit<ChartAreaProps, "data" | "dataKey">
   /**
+   * Props for the bar component.
+   */
+  barProps?: Omit<ChartBarProps, "dataKey">
+  /**
    * Props for the grid component.
    */
   gridProps?: ChartGridProps
@@ -244,6 +256,7 @@ export const CartesianChart = withProvider(
     withXAxis = true,
     withYAxis = false,
     areaProps,
+    barProps,
     gridProps,
     lineProps,
     referenceLineProps,
@@ -272,6 +285,7 @@ export const CartesianChart = withProvider(
     const componentContext = useMemo(
       () => ({
         areaProps,
+        barProps,
         gridProps,
         lineProps,
         referenceLineProps,
@@ -279,9 +293,10 @@ export const CartesianChart = withProvider(
         yAxisProps,
       }),
       [
+        areaProps,
+        barProps,
         gridProps,
         lineProps,
-        areaProps,
         referenceLineProps,
         xAxisProps,
         yAxisProps,
@@ -314,6 +329,7 @@ export const CartesianChart = withProvider(
     referenceLineColor,
     referenceLineStroke,
     referenceLineStrokeWidth,
+    referenceLineTextColor,
     referenceLineTextFill,
     xAxisLineStroke,
     xAxisLineStrokeWidth,
@@ -341,6 +357,7 @@ export const CartesianChart = withProvider(
     "--reference-line-color": varAttr(referenceLineColor, "colors"),
     "--reference-line-stroke": varAttr(referenceLineStroke, "colors"),
     "--reference-line-stroke-width": referenceLineStrokeWidth,
+    "--reference-line-text-color": varAttr(referenceLineTextColor, "colors"),
     "--reference-line-text-fill": varAttr(referenceLineTextFill, "colors"),
     "--x-axis-line-stroke": varAttr(xAxisLineStroke, "colors"),
     "--x-axis-line-stroke-width": xAxisLineStrokeWidth,
@@ -668,7 +685,7 @@ export type ChartActiveDot =
   | Merge<Partial<ActiveDotProps>, HTMLStyledProps<"circle">>
   | ReactElement
 
-export type ChartLineLabel =
+export type ChartCartesianLabel =
   | ((props: LabelProps) => ReactElement | RenderableText)
   | boolean
   | ChartLabelListProps
@@ -703,7 +720,7 @@ export interface ChartLineProps<Y extends Dict = Dict> extends Merge<
    *
    * @default false
    */
-  label?: ChartLineLabel
+  label?: ChartCartesianLabel
 }
 
 export const ChartLine = withContext<"line", ChartLineProps>((props) => {
@@ -860,7 +877,7 @@ export interface ChartAreaProps<Y extends Dict = Dict> extends Merge<
    *
    * @default false
    */
-  label?: ChartLineLabel
+  label?: ChartCartesianLabel
   /**
    * Determines whether the chart area should be represented with a gradient instead of the solid color.
    */
@@ -1018,6 +1035,77 @@ export const ChartArea = withContext<"line", ChartAreaProps>((props) => {
   )
 }, "area")() as GenericsComponent<{
   <Y extends Dict>(props: ChartAreaProps<Y>): ReactElement
+}>
+
+export interface ChartBarProps<Y extends Dict = Dict> extends Merge<
+  HTMLStyledProps<"path">,
+  Omit<UseChartBarProps, "dataKey" | "label">
+> {
+  /**
+   * The key of a group of data which should be unique in an chart.
+   */
+  dataKey: keyof Y
+  /**
+   * The label list to use for the bar.
+   *
+   * @default false
+   */
+  label?: ChartCartesianLabel
+}
+
+export const ChartBar = withContext<"path", ChartBarProps>((props) => {
+  const { barProps } = useComponentContext()
+  const {
+    children,
+    dataKey,
+    label: labelProp = false,
+    ...rest
+  } = { ...barProps, ...props }
+  const system = useSystem()
+  const { theme } = useTheme()
+  const { varMap } = useChartComponentContext()
+  const color = varMap[dataKey.toString()]
+  const labelProps = useSlotComponentProps({}, "labelList")
+  const label = useMemo<UseChartBarProps["label"]>(() => {
+    if (!labelProp) return labelProp
+
+    const css = getCSS(system, theme)
+    const className = cx(labelProps.className, css(labelProps.css))
+
+    if (isFunction(labelProp)) {
+      return (props) =>
+        labelProp({ ...props, className: cx(className, props.className) })
+    } else if (isValidElement(labelProp)) {
+      return cloneElement<any>(labelProp, { className })
+    } else if (isObject(labelProp)) {
+      const [omittedProps, styleProps] = splitObject<LabelListProps, CSSObject>(
+        labelProp,
+        shouldForwardProp,
+      )
+
+      return {
+        ...omittedProps,
+        className: cx(className, omittedProps.className, css(styleProps)),
+      }
+    } else {
+      return { className }
+    }
+  }, [system, theme, labelProp, labelProps.className, labelProps.css])
+  const { getBarProps, getRootProps } = useChartBar({
+    dataKey,
+    fill: color,
+    label,
+    stroke: color,
+    ...rest,
+  })
+
+  return (
+    <styled.path asChild {...getRootProps()}>
+      <Bar {...getBarProps()}>{children}</Bar>
+    </styled.path>
+  )
+}, "bar")() as GenericsComponent<{
+  <Y extends Dict>(props: ChartBarProps<Y>): ReactElement
 }>
 
 export interface ChartReferenceLineProps extends Omit<

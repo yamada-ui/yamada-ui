@@ -24,14 +24,6 @@ export interface UseCheckboxProps<Y extends string = string>
     HTMLRefAttributes<"input">,
     FieldProps {
   /**
-   * id assigned to input.
-   */
-  id?: string
-  /**
-   * The name of the input field in a checkbox.
-   */
-  name?: string
-  /**
    * If `true`, the checkbox will be checked.
    */
   checked?: boolean
@@ -42,11 +34,19 @@ export interface UseCheckboxProps<Y extends string = string>
    */
   defaultChecked?: boolean
   /**
+   * id assigned to input.
+   */
+  id?: string
+  /**
    * If `true`, the checkbox will be indeterminate.
    *
    * @default false
    */
   indeterminate?: boolean
+  /**
+   * The name of the input field in a checkbox.
+   */
+  name?: string
   /**
    * The value of the checkbox.
    */

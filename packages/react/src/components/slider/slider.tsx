@@ -259,15 +259,15 @@ export const SliderRange = withContext<"div", SliderRangeProps>("div", "range")(
 
 export interface SliderMarkProps extends HTMLStyledProps {
   /**
+   * The value of the mark.
+   */
+  value: number
+  /**
    * Whether the mark is an indicator.
    *
    * @default true
    */
   indicator?: boolean
-  /**
-   * The value of the mark.
-   */
-  value: number
 }
 
 export const SliderMark = withContext<"div", SliderMarkProps>("div", "mark")(
@@ -283,7 +283,7 @@ export interface SliderMarksProps extends Omit<SliderMarkProps, "value"> {
   /**
    * The marks to display on the slider.
    */
-  marks: (number | { indicator?: boolean; label: ReactNode; value: number })[]
+  marks: (number | { label: ReactNode; value: number; indicator?: boolean })[]
 }
 
 export const SliderMarks: FC<SliderMarksProps> = ({ marks, ...props }) => {

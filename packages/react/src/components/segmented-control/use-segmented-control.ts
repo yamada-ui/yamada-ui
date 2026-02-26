@@ -43,10 +43,6 @@ export interface UseSegmentedControlProps<
   Y extends string = string,
 > extends Omit<HTMLProps, "onChange"> {
   /**
-   * The HTML `name` attribute used for forms.
-   */
-  name?: string
-  /**
    * The initial value of the segmented control.
    */
   defaultValue?: Y
@@ -56,6 +52,10 @@ export interface UseSegmentedControlProps<
    * @default false
    */
   disabled?: boolean
+  /**
+   * The HTML `name` attribute used for forms.
+   */
+  name?: string
   /**
    * The orientation of the segmented control.
    *

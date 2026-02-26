@@ -29,8 +29,8 @@ export interface UseControllableStateProps<
 
 export function useControllableState<Y>(
   props: UseControllableStateMethods<Y> & {
-    defaultValue?: (() => Y) | Y
     value: Y
+    defaultValue?: (() => Y) | Y
   },
 ): [Y, Dispatch<SetStateAction<Y>>]
 
@@ -97,8 +97,8 @@ export function useControllableEventState<
   M extends HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement,
 >(
   props: UseControllableEventStateMethods<M> & {
-    defaultValue?: (() => Y) | Y
     value: Y
+    defaultValue?: (() => Y) | Y
   },
 ): [Y, ChangeEventHandler<M>]
 

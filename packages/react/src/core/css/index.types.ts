@@ -116,12 +116,12 @@ export type CSSKeyframeObject = {
 }
 
 export interface CSSAnimationObject {
+  keyframes: Token<CSSKeyframeObject, "keyframes">
   delay?: Token<CSS.Property.AnimationDelay>
   direction?: Token<CSS.Property.AnimationDirection>
   duration?: Token<CSS.Property.AnimationDuration, "durations">
   fillMode?: Token<CSS.Property.AnimationFillMode>
   iterationCount?: Token<CSS.Property.AnimationIterationCount>
-  keyframes: Token<CSSKeyframeObject, "keyframes">
   playState?: Token<CSS.Property.AnimationPlayState>
   timingFunction?: Token<CSS.Property.AnimationTimingFunction, "easings">
 }

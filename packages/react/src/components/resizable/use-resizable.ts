@@ -53,23 +53,23 @@ interface ResizableGroupProps extends Omit<
   "tagName"
 > {
   /**
+   * The HTML element to render.
+   */
+  as?: keyof HTMLElementTagNameMap
+  /**
    * Ref of the resizable group callback.
    */
   ref?: RefObject<ResizableGroupControl>
+}
+interface ResizableItemProps extends Omit<PanelProps, "tagName"> {
   /**
    * The HTML element to render.
    */
   as?: keyof HTMLElementTagNameMap
-}
-interface ResizableItemProps extends Omit<PanelProps, "tagName"> {
   /**
    * Ref of the resizable item callback.
    */
   ref?: RefObject<ResizableItemControl>
-  /**
-   * The HTML element to render.
-   */
-  as?: keyof HTMLElementTagNameMap
 }
 interface ResizableTriggerProps
   extends Omit<PanelResizeHandleProps, "tagName">, HTMLRefAttributes {

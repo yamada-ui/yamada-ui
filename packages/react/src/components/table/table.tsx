@@ -145,8 +145,8 @@ function getMergeFooterGroups(
 }
 
 export interface ColumnSort<Y extends RowData> {
-  id: keyof Y
   desc: boolean
+  id: keyof Y
 }
 export type SortingState<Y extends RowData> = ColumnSort<Y>[]
 

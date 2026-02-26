@@ -70,16 +70,12 @@ describe("<Skeleton />", () => {
 
   test("sets fadeDuration as number (appends 's')", () => {
     render(<Skeleton data-testid="skeleton" fadeDuration={0.4} />)
-    expect(screen.getByTestId("skeleton")).toHaveStyle(
-      "--fade-duration: 0.4s",
-    )
+    expect(screen.getByTestId("skeleton")).toHaveStyle("--fade-duration: 0.4s")
   })
 
   test("sets fadeDuration as string (passes through)", () => {
     render(<Skeleton data-testid="skeleton" fadeDuration="0.8s" />)
-    expect(screen.getByTestId("skeleton")).toHaveStyle(
-      "--fade-duration: 0.8s",
-    )
+    expect(screen.getByTestId("skeleton")).toHaveStyle("--fade-duration: 0.8s")
   })
 
   test("sets startColor and endColor", () => {

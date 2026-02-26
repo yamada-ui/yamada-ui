@@ -14,7 +14,8 @@ import { nativeSelectStyle } from "./native-select.style"
 import { useNativeSelect } from "./use-native-select"
 
 export interface NativeSelectRootProps
-  extends Omit<HTMLStyledProps<"select">, "size">,
+  extends
+    Omit<HTMLStyledProps<"select">, "size">,
     UseNativeSelectProps,
     ThemeProps<NativeSelectStyle>,
     FieldProps,

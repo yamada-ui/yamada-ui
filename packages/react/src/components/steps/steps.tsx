@@ -27,11 +27,14 @@ import {
   useStepsItemContext,
 } from "./use-steps"
 
-interface ComponentContext
-  extends Pick<StepsRootProps, "items" | "lazy" | "lazyBehavior"> {}
+interface ComponentContext extends Pick<
+  StepsRootProps,
+  "items" | "lazy" | "lazyBehavior"
+> {}
 
 export interface StepsItem
-  extends Omit<StepsItemProps, "content" | "index" | "title">,
+  extends
+    Omit<StepsItemProps, "content" | "index" | "title">,
     Pick<StepsIndicatorProps, "complete" | "current" | "incomplete"> {
   /**
    * The content for step element.
@@ -74,7 +77,8 @@ export interface StepsItem
 }
 
 export interface StepsRootProps
-  extends Omit<HTMLStyledProps, "onChange">,
+  extends
+    Omit<HTMLStyledProps, "onChange">,
     Omit<UseStepsProps, "count" | "orientation">,
     Pick<UseLazyMountProps, "lazy" | "lazyBehavior">,
     ThemeProps<StepsStyle> {
@@ -245,8 +249,7 @@ export const StepsList = withContext<"ol", StepsListProps>(
 )()
 
 export interface StepsItemProps
-  extends HTMLStyledProps<"li">,
-    UseStepsItemProps {}
+  extends HTMLStyledProps<"li">, UseStepsItemProps {}
 
 export const StepsItem = withContext<"li", StepsItemProps>((props) => {
   const {

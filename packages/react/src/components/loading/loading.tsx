@@ -30,8 +30,7 @@ export const superProps = ({
 })
 
 export interface LoadingProps
-  extends WithoutThemeProps<IconProps>,
-    ThemeProps<LoadingStyle> {
+  extends WithoutThemeProps<IconProps>, ThemeProps<LoadingStyle> {
   /**
    * The CSS `dur` property.
    */

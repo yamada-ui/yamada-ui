@@ -1,6 +1,8 @@
 "use client"
 
-import { MapPinPen } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { MapPinPen as OriginalMapPinPenIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const MapPinPenIcon = component(Icon)({ as: MapPinPen })
+export const MapPinPenIcon = component(Icon)({
+  as: OriginalMapPinPenIcon,
+}) as Component<"svg", IconProps>

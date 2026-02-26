@@ -1,6 +1,8 @@
 "use client"
 
-import { CaseLower } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { CaseLower as OriginalCaseLowerIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const CaseLowerIcon = component(Icon)({ as: CaseLower })
+export const CaseLowerIcon = component(Icon)({
+  as: OriginalCaseLowerIcon,
+}) as Component<"svg", IconProps>

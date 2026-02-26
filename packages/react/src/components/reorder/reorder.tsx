@@ -22,7 +22,8 @@ import {
 export interface ReorderItem<Y = string> extends ReorderItemProps<Y> {}
 
 export interface ReorderRootProps<Y = string>
-  extends Merge<
+  extends
+    Merge<
       HTMLMotionProps<"ul">,
       Omit<UseReorderProps<Y>, "item" | "items" | "orientation">
     >,
@@ -79,10 +80,8 @@ export const ReorderRoot = withProvider<"ul", ReorderRootProps>(
 }>
 
 export interface ReorderItemProps<Y = string>
-  extends Omit<
-      Merge<HTMLMotionProps<"li">, UseReorderItemProps<Y>>,
-      "children"
-    >,
+  extends
+    Omit<Merge<HTMLMotionProps<"li">, UseReorderItemProps<Y>>, "children">,
     PropsWithChildren {}
 
 export const ReorderItem = withContext<"li", ReorderItemProps>(

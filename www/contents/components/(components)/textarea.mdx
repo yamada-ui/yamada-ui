@@ -209,4 +209,28 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Textarea`.
+
+```tsx
+<Textarea aria-label="Comments" />
+```
+
+```tsx
+<VStack gap="sm">
+  <Text as="h3" id="label">
+    Comments
+  </Text>
+
+  <Textarea aria-labelledby="label" />
+</VStack>
+```
+
+### ARIA Roles and Attributes
+
+| Component  | Roles and Attributes | Usage                                                                                                                                                            |
+| ---------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Textarea` | `aria-invalid`       | Sets to `"true"` if `invalid` is set.                                                                                                                            |
+|            | `aria-disabled`      | Sets to `"true"` if `disabled` is set.                                                                                                                           |
+|            | `aria-describedby`   | If `Textarea` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|            | `aria-readonly`      | Sets to `"true"` if `readOnly` is set.                                                                                                                           |
+|            | `aria-required`      | Sets to `"true"` if `required` is set.                                                                                                                           |

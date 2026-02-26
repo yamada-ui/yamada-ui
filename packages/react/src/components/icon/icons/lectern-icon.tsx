@@ -1,6 +1,8 @@
 "use client"
 
-import { Lectern } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Lectern as OriginalLecternIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const LecternIcon = component(Icon)({ as: Lectern })
+export const LecternIcon = component(Icon)({
+  as: OriginalLecternIcon,
+}) as Component<"svg", IconProps>

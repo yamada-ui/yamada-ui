@@ -1,6 +1,8 @@
 "use client"
 
-import { SpellCheck2 } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { SpellCheck2 as OriginalSpellCheck2Icon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const SpellCheck2Icon = component(Icon)({ as: SpellCheck2 })
+export const SpellCheck2Icon = component(Icon)({
+  as: OriginalSpellCheck2Icon,
+}) as Component<"svg", IconProps>

@@ -1,4 +1,4 @@
-import type { Doc } from "@/.velite"
+import type { Doc } from "#velite"
 import type { TagProps } from "@yamada-ui/react"
 import { Tag } from "@yamada-ui/react"
 

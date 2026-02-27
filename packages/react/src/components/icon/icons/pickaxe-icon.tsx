@@ -1,6 +1,8 @@
 "use client"
 
-import { Pickaxe } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Pickaxe as OriginalPickaxeIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const PickaxeIcon = component(Icon)({ as: Pickaxe })
+export const PickaxeIcon = component(Icon)({
+  as: OriginalPickaxeIcon,
+}) as Component<"svg", IconProps>

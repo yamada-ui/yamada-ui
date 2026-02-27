@@ -13,17 +13,18 @@ import { NoticeItem } from "./notice"
 import { useNoticeContext } from "./notice-provider"
 
 export interface UseNoticeOptions
-  extends Omit<NoticeConfig, "expand">,
+  extends
+    Omit<NoticeConfig, "expand">,
     Omit<Alert.RootProps, "direction" | "id" | "status" | "title">,
     Pick<Alert.LoadingProps, "loadingScheme"> {
-  /**
-   * Unique identifier for the notice.
-   */
-  id?: number | string
   /**
    * The description of the notice.
    */
   description?: ReactNode
+  /**
+   * Unique identifier for the notice.
+   */
+  id?: number | string
   /**
    * The status of the notice.
    */

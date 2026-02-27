@@ -378,9 +378,9 @@ export const FloatingLabel: Story = () => {
 
 export const ReactHookForm: Story = () => {
   interface Data {
-    name: string
     cellphone: string
     email: string
+    name: string
   }
 
   const {
@@ -451,9 +451,9 @@ export const ReactHookForm: Story = () => {
 
 export const ReactHookFormWithDefaultValue: Story = () => {
   interface Data {
-    name: string
     cellphone: string
     email: string
+    name: string
   }
 
   const defaultValues: Data = {

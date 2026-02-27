@@ -59,10 +59,10 @@ describe("useOS", () => {
       userAgent:
         "Mozilla/5.0 (PlayStation; PlayStation 5/2.26) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15",
     },
-  ])("should return $expected", ({ expected, userAgent }) => {
+  ])("should return $expected", async ({ expected, userAgent }) => {
     vi.stubGlobal("navigator", { userAgent })
 
-    const { result } = renderHook(() => useOS())
+    const { result } = await renderHook(() => useOS())
     expect(result.current).toBe(expected)
   })
 })

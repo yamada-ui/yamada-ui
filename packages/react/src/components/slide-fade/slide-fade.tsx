@@ -59,8 +59,7 @@ export const slideFadeVariants: Variants = {
 } satisfies MotionTransitionVariants
 
 export interface SlideFadeProps
-  extends WithTransitionProps<HTMLMotionProps>,
-    ThemeProps<SlideFadeStyle> {
+  extends WithTransitionProps<HTMLMotionProps>, ThemeProps<SlideFadeStyle> {
   /**
    * The offset on the horizontal or `x` axis.
    *

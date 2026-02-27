@@ -1,6 +1,8 @@
 "use client"
 
-import { ArchiveRestore } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { ArchiveRestore as OriginalArchiveRestoreIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const ArchiveRestoreIcon = component(Icon)({ as: ArchiveRestore })
+export const ArchiveRestoreIcon = component(Icon)({
+  as: OriginalArchiveRestoreIcon,
+}) as Component<"svg", IconProps>

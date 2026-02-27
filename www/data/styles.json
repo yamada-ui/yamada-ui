@@ -1258,7 +1258,7 @@
             "newly_available_date": "2016-09-07"
           },
           "deprecated": false,
-          "description": "The <code>filter</code> CSS property applies one or more graphic effects to an element. You can use filter functions, such as <code>blur()</code> and <code>drop-shadow()</code>, alone or combined to produce different effects.",
+          "description": "The <code>filter</code> CSS property applies one or more graphic effects to an element. You can use filter functions, such as <code>blur()</code> and <code>drop-shadow()</code>, alone or combined to produce different effects. For instance, <code>filter: blur(2px)</code>.",
           "experimental": false,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/filter"
         }
@@ -1357,7 +1357,12 @@
       "type": "StyleValueWithCondition<CSS.Property.FontStretch>",
       "docs": {
         "font-stretch": {
-          "deprecated": true,
+          "baseline": {
+            "status": "Widely available",
+            "widely_available_date": "2022-07-15",
+            "newly_available_date": "2020-01-15"
+          },
+          "deprecated": false,
           "description": "The <code>font-stretch</code> CSS property selects a font face from a font family based on width, either by a keyword such as <code>condensed</code> or a percentage.",
           "experimental": false,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-stretch"
@@ -1613,7 +1618,10 @@
       "type": "StyleValueWithCondition<CSS.Property.PaintOrder>",
       "docs": {
         "paint-order": {
-          "baseline": { "status": "Limited available" },
+          "baseline": {
+            "status": "Newly available",
+            "newly_available_date": "2024-03-22"
+          },
           "deprecated": false,
           "description": "The <code>paint-order</code> CSS property sets the z-order of strokes, fills, and (in SVG content) markers. For example, <code>paint-order: markers stroke fill;</code> draws the markers, then stroke on top of markers, then fill on top of both markers and stroke.",
           "experimental": false,
@@ -2136,7 +2144,7 @@
           "deprecated": false,
           "description": "Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.",
           "experimental": false,
-          "see": "https://drafts.csswg.org/css-anchor-position-1/#propdef-anchor-scope"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/anchor-scope"
         }
       }
     },
@@ -2164,7 +2172,8 @@
       "docs": {
         "animation-composition": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2026-01-04",
             "newly_available_date": "2023-07-04"
           },
           "deprecated": false,
@@ -2365,6 +2374,18 @@
         }
       }
     },
+    "animationTrigger": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "animation-trigger": {
+          "deprecated": false,
+          "description": "The CSS `animation-trigger` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-animations-2/#animation-trigger-prop"
+        }
+      }
+    },
     "appearance": {
       "as": true,
       "type": "StyleValueWithCondition<CSS.Property.Appearance>",
@@ -2458,11 +2479,7 @@
       "type": "StyleValueWithCondition<CSS.Property.BackgroundAttachment>",
       "docs": {
         "background-attachment": {
-          "baseline": {
-            "status": "Widely available",
-            "widely_available_date": "2024-09-14",
-            "newly_available_date": "2022-03-14"
-          },
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
           "description": "The <code>background-attachment</code> CSS property sets whether an element's background image or gradient moves as the element scrolls.",
           "experimental": false,
@@ -4009,6 +4026,17 @@
         }
       }
     },
+    "bufferedRendering": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "buffered-rendering": {
+          "deprecated": true,
+          "description": "The CSS `buffered-rendering` property.",
+          "experimental": false
+        }
+      }
+    },
     "captionSide": {
       "as": true,
       "type": "StyleValueWithCondition<CSS.Property.CaptionSide>",
@@ -4099,6 +4127,17 @@
         }
       }
     },
+    "colorRendering": {
+      "as": true,
+      "type": "StyleValueWithCondition<CSS.Property.ColorRendering>",
+      "docs": {
+        "color-rendering": {
+          "deprecated": true,
+          "description": "The CSS `color-rendering` property.",
+          "experimental": false
+        }
+      }
+    },
     "columnCount": {
       "as": true,
       "type": "StyleValueWithCondition<CSS.Property.ColumnCount>",
@@ -4151,6 +4190,18 @@
         }
       },
       "shorthands": ["gx", "gapX"]
+    },
+    "columnHeight": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "column-height": {
+          "deprecated": false,
+          "description": "The CSS `column-height` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-multicol-2/#propdef-column-height"
+        }
+      }
     },
     "columnRule": {
       "properties": ["columnRule"],
@@ -4253,6 +4304,18 @@
           "description": "Multi-column layout flows an element's content across one or more columns in a single row, without affecting the <code>display</code> property of its children.",
           "experimental": false,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-width"
+        }
+      }
+    },
+    "columnWrap": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "column-wrap": {
+          "deprecated": false,
+          "description": "The CSS `column-wrap` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-multicol-2/#propdef-column-wrap"
         }
       }
     },
@@ -7472,9 +7535,12 @@
       "type": "StyleValueWithCondition<CSS.Property.Page>",
       "docs": {
         "page": {
-          "baseline": { "status": "Limited available" },
+          "baseline": {
+            "status": "Newly available",
+            "newly_available_date": "2024-12-11"
+          },
           "deprecated": false,
-          "description": "The <code>:first</code>, <code>:left</code>, and <code>:right</code> pseudo-classes select pages based on their position in sequence after pagination. They're often used with the <code>page</code> CSS property, to choose a print layout defined by the <code>@page</code> rule.",
+          "description": "The <code>@page</code> CSS at-rule sets the page-specific dimensions and margins for content such as printed documents, ebooks, or slides.",
           "experimental": false,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/page"
         }
@@ -8605,7 +8671,7 @@
           "deprecated": false,
           "description": "The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.",
           "experimental": true,
-          "see": "https://drafts.fxtf.org/fill-stroke-3/#stroke-color"
+          "see": "https://drafts.csswg.org/fill-stroke-3/#stroke-color"
         }
       }
     },
@@ -9130,6 +9196,42 @@
         }
       }
     },
+    "timelineTrigger": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "timeline-trigger": {
+          "deprecated": false,
+          "description": "The CSS `timeline-trigger` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-animations-2/#timeline-trigger-shorthand"
+        }
+      }
+    },
+    "timelineTriggerName": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "timeline-trigger-name": {
+          "deprecated": false,
+          "description": "The CSS `timeline-trigger-name` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-animations-2/#timeline-trigger-name"
+        }
+      }
+    },
+    "timelineTriggerSource": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "timeline-trigger-source": {
+          "deprecated": false,
+          "description": "The CSS `timeline-trigger-source` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-animations-2/#timeline-trigger-source"
+        }
+      }
+    },
     "top": {
       "properties": ["top"],
       "token": "spaces",
@@ -9264,6 +9366,18 @@
           "description": "The <code>transition</code> shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.",
           "experimental": false,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-timing-function"
+        }
+      }
+    },
+    "triggerScope": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "trigger-scope": {
+          "deprecated": false,
+          "description": "The CSS `trigger-scope` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-animations-2/#trigger-scope"
         }
       }
     },

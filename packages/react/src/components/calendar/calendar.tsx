@@ -25,7 +25,8 @@ import {
 } from "./use-calendar"
 
 interface ComponentContext
-  extends Pick<
+  extends
+    Pick<
       UseCalendarReturn,
       | "getMonthProps"
       | "getMonthSelectProps"
@@ -62,7 +63,9 @@ interface ComponentContext
 export interface CalendarRootProps<
   Multiple extends boolean = false,
   Range extends boolean = false,
-> extends Omit<HTMLStyledProps, "defaultValue" | "onChange">,
+>
+  extends
+    Omit<HTMLStyledProps, "defaultValue" | "onChange">,
     ThemeProps<CalendarStyle>,
     UseCalendarProps<Multiple, Range>,
     Pick<CalendarMonthProps, "day"> {
@@ -356,8 +359,10 @@ export const CalendarNavigation = withContext<"nav", CalendarNavigationProps>(
   }
 })
 
-export interface CalendarControlProps
-  extends Omit<HTMLStyledProps, "children"> {
+export interface CalendarControlProps extends Omit<
+  HTMLStyledProps,
+  "children"
+> {
   /**
    * The control children to use.
    */
@@ -499,8 +504,10 @@ export const CalendarMonthSelect = withContext<"div", CalendarMonthSelectProps>(
   ["select", "months"],
 )()
 
-export interface CalendarMonthProps
-  extends Omit<HTMLStyledProps<"table">, "children"> {
+export interface CalendarMonthProps extends Omit<
+  HTMLStyledProps<"table">,
+  "children"
+> {
   /**
    * The day component to use.
    */
@@ -576,8 +583,7 @@ const CalendarWeeks = withContext("tbody", "weeks")()
 const CalendarWeek = withContext("tr", ["row", "week"])()
 
 interface CalendarDayProps
-  extends Omit<HTMLStyledProps<"td">, "value">,
-    UseCalendarDayProps {}
+  extends Omit<HTMLStyledProps<"td">, "value">, UseCalendarDayProps {}
 
 const CalendarDay = withContext<"td", CalendarDayProps>("td", ["cell", "day"])(
   undefined,

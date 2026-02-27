@@ -1,6 +1,8 @@
 "use client"
 
-import { KeyRound } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { KeyRound as OriginalKeyRoundIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const KeyRoundIcon = component(Icon)({ as: KeyRound })
+export const KeyRoundIcon = component(Icon)({
+  as: OriginalKeyRoundIcon,
+}) as Component<"svg", IconProps>

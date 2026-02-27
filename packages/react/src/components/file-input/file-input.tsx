@@ -16,7 +16,8 @@ import { useFileInput } from "./use-file-input"
 const defaultFormat: (value: File, index: number) => string = ({ name }) => name
 
 export interface FileInputProps
-  extends Omit<
+  extends
+    Omit<
       HTMLStyledProps<"input">,
       "children" | "defaultValue" | "onChange" | "value"
     >,
@@ -24,6 +25,12 @@ export interface FileInputProps
     UseInputBorderProps,
     FieldProps,
     Omit<UseFileInputProps, "children"> {
+  /**
+   * The string to separate uploaded files.
+   *
+   * @default ','
+   */
+  separator?: string
   /**
    * A callback that returns a React node.
    */
@@ -36,12 +43,6 @@ export interface FileInputProps
    * A callback that formats the name of the uploaded file.
    */
   format?: (value: File, index: number) => string
-  /**
-   * The string to separate uploaded files.
-   *
-   * @default ','
-   */
-  separator?: string
 }
 
 const {

@@ -20,8 +20,10 @@ import {
 } from "../../utils"
 import { useFieldProps } from "../field"
 
-interface CheckboxGroupContext
-  extends Omit<UseCheckboxGroupReturn, "getRootProps"> {}
+interface CheckboxGroupContext extends Omit<
+  UseCheckboxGroupReturn,
+  "getRootProps"
+> {}
 
 const [CheckboxGroupContext, useCheckboxGroupContext] =
   createContext<CheckboxGroupContext>({
@@ -32,8 +34,7 @@ const [CheckboxGroupContext, useCheckboxGroupContext] =
 export { CheckboxGroupContext, useCheckboxGroupContext }
 
 export interface UseCheckboxGroupProps<Y extends string = string>
-  extends Omit<HTMLProps, "defaultValue" | "onChange" | "value">,
-    FieldProps {
+  extends Omit<HTMLProps, "defaultValue" | "onChange" | "value">, FieldProps {
   /**
    * The initial value of the checkbox group.
    *

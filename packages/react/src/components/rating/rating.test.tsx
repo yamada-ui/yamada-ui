@@ -124,7 +124,7 @@ describe("<Rating />", () => {
     }
   })
 
-  test.skip("should work correctly when out of focus", async () => {
+  test.todo("should work correctly when out of focus", async () => {
     const { container, user } = render(<Rating data-testid="rating" />)
 
     const items = container.querySelectorAll(".ui-rating__item")

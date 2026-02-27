@@ -818,4 +818,73 @@ return (
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`Select`は、アクセシビリティに関して[WAI-ARIA - Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)に従います。
+
+`Field.Root`を使用しない場合は、`Select`に`aria-label`または`aria-labelledby`を設定します。
+
+```tsx
+<Select.Root placeholder="Select a character" aria-label="Character">
+  <Select.Option value="木ノ下和也">木ノ下和也</Select.Option>
+  <Select.Option value="一ノ瀬ちづる">一ノ瀬ちづる</Select.Option>
+  <Select.Option value="七海麻美">七海麻美</Select.Option>
+  <Select.Option value="更科瑠夏">更科瑠夏</Select.Option>
+  <Select.Option value="桜沢墨">桜沢墨</Select.Option>
+  <Select.Option value="八重森みに">八重森みに</Select.Option>
+</Select.Root>
+```
+
+```tsx
+<VStack gap="sm">
+  <Heading as="h3" id="label">
+    Character
+  </Heading>
+
+  <Select.Root placeholder="Select a character" aria-labelledby="label">
+    <Select.Option value="木ノ下和也">木ノ下和也</Select.Option>
+    <Select.Option value="一ノ瀬ちづる">一ノ瀬ちづる</Select.Option>
+    <Select.Option value="七海麻美">七海麻美</Select.Option>
+    <Select.Option value="更科瑠夏">更科瑠夏</Select.Option>
+    <Select.Option value="桜沢墨">桜沢墨</Select.Option>
+    <Select.Option value="八重森みに">八重森みに</Select.Option>
+  </Select.Root>
+</VStack>
+```
+
+### キーボード操作
+
+| キー             | 説明                                                                                                 | 状態                   |
+| ---------------- | ---------------------------------------------------------------------------------------------------- | ---------------------- |
+| `ArrowUp`        | 無効ではない前の項目をフォーカスします。最初の項目の場合は無効ではない最後の項目をフォーカスします。 | -                      |
+| `ArrowDown`      | 無効ではない次の項目をフォーカスします。最後の項目の場合は無効ではない最初の項目をフォーカスします。 | -                      |
+| `Home`           | 無効ではない最初の項目をフォーカスします。                                                           | -                      |
+| `End`            | 無効ではない最後の項目をフォーカスします。                                                           | -                      |
+| `Space`, `Enter` | フォーカスされている項目を選択し、リストボックスを閉じます。                                         | `closeOnSelect={true}` |
+| `Escape`         | リストボックスを閉じます。                                                                           | `closeOnEsc={true}`    |
+
+### ARIAロールと属性
+
+| コンポーネント     | ロールと属性              | 使い方                                                                                                                                                                                        |
+| ------------------ | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SelectField`      | `role="combobox"`         | コンボボックスであることを示します。                                                                                                                                                          |
+|                    | `aria-activedescendant`   | フォーカスされた項目の`id`を設定します。                                                                                                                                                      |
+|                    | `aria-controls`           | リストボックスが開いている場合は関連した`SelectContent`の`id`を設定し、閉じている場合は`undefined`を設定します。                                                                              |
+|                    | `aria-describedby`        | `Select.Root`が`Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
+|                    | `aria-disabled`           | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                        |
+|                    | `aria-expanded`           | リストボックスが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。                                                                                                     |
+|                    | `aria-haspopup="listbox"` | リストボックスが存在することを示します。                                                                                                                                                      |
+|                    | `aria-invalid`            | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                         |
+|                    | `aria-label`              | `placeholder`の値を設定します。                                                                                                                                                               |
+|                    | `aria-labelledby`         | `Select.Root`が`Field.Root`内にあり、`Field.Root`に`label`、もしくは`Field.Label`が設定されている場合は、その`id`を設定します。                                                               |
+|                    | `aria-readonly`           | `readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                                        |
+|                    | `aria-required`           | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                        |
+| `SelectIcon`       | `role="button"`           | `clearable`かつ値がある場合はボタンであることを示します。                                                                                                                                     |
+|                    | `aria-disabled`           | `clearable`かつ値がある場合かつ、`disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                                                       |
+|                    | `aria-label`              | `clearable`かつ値がある場合は`"値を消去する"`を設定します。                                                                                                                                   |
+| `SelectContent`    | `role="listbox"`          | リストボックスであることを示します。                                                                                                                                                          |
+| `Select.Label`     | `role="presentation"`     | プレゼンテーションであることを示します。                                                                                                                                                      |
+| `Select.Group`     | `role="group"`            | グループであることを示します。                                                                                                                                                                |
+|                    | `aria-labelledby`         | 関連した`Select.Label`の`id`を設定します。                                                                                                                                                    |
+| `Select.Option`    | `role="option"`           | オプションであることを示します。                                                                                                                                                              |
+|                    | `aria-disabled`           | オプションが無効な場合は`"true"`を設定します。                                                                                                                                                |
+|                    | `aria-selected`           | オプションが選択されている場合は`"true"`を設定し、選択されていない場合は`"false"`を設定します。                                                                                               |
+| `Select.Separator` | `role="separator"`        | セパレーターであることを示します。                                                                                                                                                            |

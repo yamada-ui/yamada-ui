@@ -1,8 +1,8 @@
 export interface MailItem {
-  id: number
   authorName: string
   content: string
   email: string
+  id: number
   tags: string[]
   timestamp: Date
   title: string

@@ -28,9 +28,16 @@ function clampValue(value: [number, number, number]) {
 }
 
 export interface UseSaturationSliderProps
-  extends Omit<HTMLProps, "defaultValue" | "onChange" | "ref">,
+  extends
+    Omit<HTMLProps, "defaultValue" | "onChange" | "ref">,
     HTMLRefAttributes<"input">,
     FieldProps {
+  /**
+   * The initial value of the saturation slider.
+   *
+   * @default [0, 0, 1]
+   */
+  defaultValue?: [number, number, number]
   /**
    * The base `id` to use for the slider.
    */
@@ -41,19 +48,6 @@ export interface UseSaturationSliderProps
    */
   name?: string
   /**
-   * The initial value of the saturation slider.
-   *
-   * @default [0, 0, 1]
-   */
-  defaultValue?: [number, number, number]
-  /**
-   * This is used to format the value so that screen readers
-   * can speak out a more human-friendly value.
-   *
-   * It is used to set the `aria-valuetext` property of the input.
-   */
-  getAriaValueText?: (value: [number, number, number]) => string | undefined
-  /**
    * The step in which increments or decrements have to be made.
    *
    * @default 0.01
@@ -63,6 +57,13 @@ export interface UseSaturationSliderProps
    * The value of the saturation slider.
    */
   value?: [number, number, number]
+  /**
+   * This is used to format the value so that screen readers
+   * can speak out a more human-friendly value.
+   *
+   * It is used to set the `aria-valuetext` property of the input.
+   */
+  getAriaValueText?: (value: [number, number, number]) => string | undefined
   /**
    * Function called whenever the saturation slider value changes.
    */

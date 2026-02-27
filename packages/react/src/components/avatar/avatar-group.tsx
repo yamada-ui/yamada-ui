@@ -14,9 +14,7 @@ import {
 import { useAvatarGroup } from "./use-avatar-group"
 
 export interface AvatarGroupRootProps
-  extends HTMLStyledProps,
-    ThemeProps<AvatarStyle>,
-    UseAvatarGroupProps {}
+  extends HTMLStyledProps, ThemeProps<AvatarStyle>, UseAvatarGroupProps {}
 
 /**
  * `Avatar` is a component that displays a profile picture or an icon with initials representing a user.

@@ -11,8 +11,7 @@ import { createSlotComponent, styled } from "../../core"
 import { nativeTableStyle } from "./native-table.style"
 
 export interface NativeTableRootProps
-  extends HTMLStyledProps<"table">,
-    ThemeProps<NativeTableStyle> {
+  extends HTMLStyledProps<"table">, ThemeProps<NativeTableStyle> {
   /**
    * The CSS `table-layout` property.
    */
@@ -65,8 +64,7 @@ export const NativeTableRoot = withProvider(
 }))
 
 interface NativeTableAreaProps
-  extends HTMLStyledProps,
-    ThemeProps<NativeTableStyle> {}
+  extends HTMLStyledProps, ThemeProps<NativeTableStyle> {}
 
 const NativeTableScrollArea = withContext<"div", NativeTableAreaProps>(
   "div",

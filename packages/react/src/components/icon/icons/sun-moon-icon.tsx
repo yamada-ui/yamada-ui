@@ -1,6 +1,8 @@
 "use client"
 
-import { SunMoon } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { SunMoon as OriginalSunMoonIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const SunMoonIcon = component(Icon)({ as: SunMoon })
+export const SunMoonIcon = component(Icon)({
+  as: OriginalSunMoonIcon,
+}) as Component<"svg", IconProps>

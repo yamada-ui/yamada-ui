@@ -13,8 +13,8 @@ describe("<Badge />", () => {
     await expect.element(badge).toHaveClass("ui-badge")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Badge>Badge</Badge>)
+  test("renders HTML tag correctly", async () => {
+    await render(<Badge>Badge</Badge>)
 
     const badge = page.getByText("Badge")
     expect(badge.element().tagName).toBe("SPAN")

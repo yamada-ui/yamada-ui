@@ -1,6 +1,6 @@
 "use client"
 
-import type { HTMLProps, ThemeProps, WithoutThemeProps } from "../../core"
+import type { HTMLProps, WithoutThemeProps } from "../../core"
 import type { IconButtonProps } from "../button"
 import type { CloseButtonStyle } from "./close-button.style"
 import { createComponent } from "../../core"
@@ -10,12 +10,9 @@ import { XIcon } from "../icon"
 import { closeButtonStyle } from "./close-button.style"
 
 export interface CloseButtonProps
-  extends Omit<
-      WithoutThemeProps<IconButtonProps, CloseButtonStyle>,
-      "aria-label"
-    >,
-    Pick<HTMLProps<"button">, "aria-label">,
-    ThemeProps<CloseButtonStyle> {}
+  extends
+    Omit<WithoutThemeProps<IconButtonProps, CloseButtonStyle>, "aria-label">,
+    Pick<HTMLProps<"button">, "aria-label"> {}
 
 const {
   PropsContext: CloseButtonPropsContext,

@@ -54,14 +54,16 @@ interface MenuItemWithSeparator extends MenuSeparatorProps {
 }
 
 interface MenuItemWithRadioGroup<Y extends string = string>
-  extends Omit<MenuItemWithItems, "defaultValue" | "items" | "onChange">,
+  extends
+    Omit<MenuItemWithItems, "defaultValue" | "items" | "onChange">,
     MenuOptionGroupProps<"radio", Y> {
   type: "radio"
   items?: MenuOptionItem[]
 }
 
 interface MenuItemWithCheckboxGroup<Y extends string[] = string[]>
-  extends Omit<MenuItemWithItems, "defaultValue" | "items" | "onChange">,
+  extends
+    Omit<MenuItemWithItems, "defaultValue" | "items" | "onChange">,
     MenuOptionGroupProps<"checkbox", Y> {
   type: "checkbox"
   items?: MenuOptionItem[]
@@ -82,17 +84,17 @@ export type MenuItem =
   | MenuItemWithSeparator
   | MenuItemWithValue
 
-interface ComponentContext
-  extends Pick<
-    UseMenuReturn,
-    | "getContentProps"
-    | "getContextTriggerProps"
-    | "getSeparatorProps"
-    | "getTriggerProps"
-  > {}
+interface ComponentContext extends Pick<
+  UseMenuReturn,
+  | "getContentProps"
+  | "getContextTriggerProps"
+  | "getSeparatorProps"
+  | "getTriggerProps"
+> {}
 
 export interface MenuRootProps
-  extends UseMenuProps,
+  extends
+    UseMenuProps,
     Omit<
       WithoutThemeProps<Popover.RootProps, MenuStyle>,
       "autoFocus" | "modal" | "updateRef" | "withCloseButton"
@@ -510,7 +512,9 @@ export const MenuGroup = withContext<"div", MenuGroupProps>(
 export interface MenuOptionGroupProps<
   Y extends MenuOptionGroupType = "checkbox",
   M extends MenuOptionGroupValue<Y> = MenuOptionGroupValue<Y>,
-> extends UseMenuOptionGroupProps<Y, M>,
+>
+  extends
+    UseMenuOptionGroupProps<Y, M>,
     Omit<MenuGroupProps, "defaultValue" | "onChange"> {}
 
 export const MenuOptionGroup = withContext<"div", MenuOptionGroupProps>(
@@ -568,8 +572,7 @@ export const MenuItem = withContext<"div", MenuItemProps>(
 )()
 
 export interface MenuOptionItemProps
-  extends HTMLStyledProps,
-    UseMenuOptionItemProps {
+  extends HTMLStyledProps, UseMenuOptionItemProps {
   /**
    * The icon to be used in the menu option item.
    */

@@ -1,6 +1,8 @@
 "use client"
 
-import { SignpostBig } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { SignpostBig as OriginalSignpostBigIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const SignpostBigIcon = component(Icon)({ as: SignpostBig })
+export const SignpostBigIcon = component(Icon)({
+  as: OriginalSignpostBigIcon,
+}) as Component<"svg", IconProps>

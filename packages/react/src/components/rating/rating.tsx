@@ -16,20 +16,20 @@ import {
   useRatingItem,
 } from "./use-rating"
 
-interface ComponentContext
-  extends Pick<
-    RatingProps,
-    | "color"
-    | "emptyIcon"
-    | "filledIcon"
-    | "groupProps"
-    | "iconProps"
-    | "inputProps"
-    | "itemProps"
-  > {}
+interface ComponentContext extends Pick<
+  RatingProps,
+  | "color"
+  | "emptyIcon"
+  | "filledIcon"
+  | "groupProps"
+  | "iconProps"
+  | "inputProps"
+  | "itemProps"
+> {}
 
 export interface RatingProps
-  extends Merge<Omit<HTMLStyledProps, "children" | "color">, UseRatingProps>,
+  extends
+    Merge<Omit<HTMLStyledProps, "children" | "color">, UseRatingProps>,
     ThemeProps<RatingStyle> {
   /**
    * The color of the filled icons.
@@ -221,8 +221,7 @@ const RatingGroup = withContext<"div", RatingGroupProps>(
 )()
 
 interface RatingItemProps
-  extends HTMLStyledProps<"label">,
-    UseRatingItemProps {}
+  extends HTMLStyledProps<"label">, UseRatingItemProps {}
 
 const RatingItem = withContext<"label", RatingItemProps>((props) => {
   const {

@@ -1,6 +1,8 @@
 "use client"
 
-import { Regex } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Regex as OriginalRegexIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const RegexIcon = component(Icon)({ as: Regex })
+export const RegexIcon = component(Icon)({
+  as: OriginalRegexIcon,
+}) as Component<"svg", IconProps>

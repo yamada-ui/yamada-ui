@@ -1,6 +1,8 @@
 "use client"
 
-import { FolderKanban } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FolderKanban as OriginalFolderKanbanIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const FolderKanbanIcon = component(Icon)({ as: FolderKanban })
+export const FolderKanbanIcon = component(Icon)({
+  as: OriginalFolderKanbanIcon,
+}) as Component<"svg", IconProps>

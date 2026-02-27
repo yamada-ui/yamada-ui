@@ -100,8 +100,7 @@ export function Inbox({ defaultMail, mails, setMailRef, ...rest }: InboxProps) {
 }
 
 interface InboxItemProps
-  extends MailItem,
-    Omit<Card.RootProps, "content" | "id" | "title"> {
+  extends MailItem, Omit<Card.RootProps, "content" | "id" | "title"> {
   resetMapRef: RefObject<Map<number, () => void>>
   defaultSelected?: boolean
 }

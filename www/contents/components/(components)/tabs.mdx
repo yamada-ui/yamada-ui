@@ -579,30 +579,25 @@ return (
 
 ### Keyboard Navigation
 
-| Key | Description | State |
-| --- | --- | --- |
-| `Tab` | When focus moves into the tab list, places focus on the active tab. When focus is on a tab, moves focus to the next focusable element in the tab panel. | - |
-| `ArrowLeft` | Moves focus to the previous tab that is not disabled. If focus is on the first tab, moves focus to the last tab that is not disabled. | `orientation="horizontal"` |
-| `ArrowRight` | Moves focus to the next tab that is not disabled. If focus is on the last tab, moves focus to the first tab that is not disabled. | `orientation="horizontal"` |
-| `ArrowUp` | Moves focus to the previous tab that is not disabled. If focus is on the first tab, moves focus to the last tab that is not disabled. | `orientation="vertical"` |
-| `ArrowDown` | Moves focus to the next tab that is not disabled. If focus is on the last tab, moves focus to the first tab that is not disabled. | `orientation="vertical"` |
-| `Space`, `Enter` | Activates the focused tab if `manual={true}` is set. | `manual={true}` |
-| `Home` | Moves focus to the first tab that is not disabled. | - |
-| `End` | Moves focus to the last tab that is not disabled. | - |
+| Key              | Description                                                                                                           | State                      |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| `Tab`            | Focuses the active tab when focus moves to the tab list. Moves focus to the tab panel if already within the tab list. | -                          |
+| `ArrowLeft`      | Focuses the previous tab that is not disabled. If it's the first tab, focuses the last tab that is not disabled.      | `orientation="horizontal"` |
+| `ArrowRight`     | Focuses the next tab that is not disabled. If it's the last tab, focuses the first tab that is not disabled.          | `orientation="horizontal"` |
+| `ArrowUp`        | Focuses the previous tab that is not disabled. If it's the first tab, focuses the last tab that is not disabled.      | `orientation="vertical"`   |
+| `ArrowDown`      | Focuses the next tab that is not disabled. If it's the last tab, focuses the first tab that is not disabled.          | `orientation="vertical"`   |
+| `Space`, `Enter` | Activates the focused tab.                                                                                            | `manual={true}`            |
+| `Home`           | Focuses the first tab that is not disabled.                                                                           | -                          |
+| `End`            | Focuses the last tab that is not disabled.                                                                            | -                          |
 
 ### ARIA Roles and Attributes
 
-| Component | Role and Attributes | Usage |
-| --- | --- | --- |
-| `Tabs.List` | `role="tablist"` | Indicates that it is a container for tab elements. |
-| | `aria-orientation` | Sets to `"horizontal"` or `"vertical"` based on the `orientation` prop. |
-| `Tabs.Tab` | `role="tab"` | Indicates that it is a tab element. |
-| | `id` | Used to associate with `Tabs.Panel`. |
-| | `aria-controls` | Sets the `id` of the associated `Tabs.Panel`. |
-| | `aria-selected` | Sets to `"true"` when the tab is selected, and `"false"` when it is not selected. |
-| | `aria-disabled` | Sets to `"true"` when the tab is disabled. |
-| | `tabindex` | Sets to `0` when the tab is selected, and `-1` when it is not selected. |
-| `Tabs.Panel` | `role="tabpanel"` | Indicates that it is a tab panel. |
-| | `id` | Used to associate with `Tabs.Tab`. |
-| | `aria-labelledby` | Sets the `id` of the associated `Tabs.Tab`. |
-| | `tabindex="0"` | Makes the panel focusable. |
+| Component    | Roles and Attributes | Usage                                                                                         |
+| ------------ | -------------------- | --------------------------------------------------------------------------------------------- |
+| `Tabs.List`  | `role="tablist"`     | Indicates that this is a tab list.                                                            |
+|              | `aria-orientation`   | Sets to `"horizontal"` or `"vertical"` based on `orientation`. The default is `"horizontal"`. |
+| `Tabs.Tab`   | `role="tab"`         | Indicates that this is a tab.                                                                 |
+|              | `aria-selected`      | Sets to `"true"` when the tab is selected, `"false"` when not selected.                       |
+|              | `aria-controls`      | Sets the `id` of the associated `Tabs.Panel`.                                                 |
+| `Tabs.Panel` | `role="tabpanel"`    | Indicates that this is a tab panel.                                                           |
+|              | `aria-labelledby`    | Sets the `id` of the associated `Tabs.Tab`.                                                   |

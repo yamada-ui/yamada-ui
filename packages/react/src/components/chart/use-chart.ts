@@ -84,7 +84,6 @@ export interface UseChartLegendProps extends Merge<
 
 export const useChartLegend = ({
   placement = "start-end",
-
   align = PLACEMENT_MAP[placement].align,
   content,
   formatter,

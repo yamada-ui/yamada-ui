@@ -23,8 +23,8 @@ interface Data {
   fill?: CSSProps["fill"]
 }
 
-const randomValue = (max = 5000) =>
-  Math.floor(Math.random() * (max - 1000 + 1)) + 1000
+const randomValue = (min = 1000, max = 5000) =>
+  Math.floor(Math.random() * (max - min + 1)) + min
 
 const createData = (): Data[] => [
   { browser: "chrome", downloads: randomValue(), visits: randomValue() },

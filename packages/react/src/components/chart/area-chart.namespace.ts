@@ -1,22 +1,22 @@
 import type { AreaChartProps as RootProps } from "./area-chart"
 import type {
-  ChartActiveDot as ActiveDot,
-  CartesianChartLabel as AreaLabel,
-  CartesianChartLabelList as AreaLabelList,
   ChartAreaProps as AreaProps,
-  ChartDot as Dot,
   ChartGridProps as GridProps,
   ChartReferenceLineProps as ReferenceLineProps,
-  ChartTickLine as TickLine,
   ChartXAxisProps as XAxisProps,
   ChartXAxisTick as XAxisTick,
   ChartYAxisProps as YAxisProps,
   ChartYAxisTick as YAxisTick,
 } from "./cartesian-chart"
 import type {
+  ChartActiveDot as ActiveDot,
+  ChartLabel as AreaLabel,
+  ChartLabelList as AreaLabelList,
+  ChartDot as Dot,
   ChartLabelListProps as LabelListProps,
   ChartLabelProps as LabelProps,
   ChartLegendProps as LegendProps,
+  ChartTickLine as TickLine,
   ChartTooltipProps as TooltipProps,
 } from "./chart"
 import {

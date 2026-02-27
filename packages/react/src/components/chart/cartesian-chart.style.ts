@@ -34,7 +34,7 @@ export const cartesianChartStyle = defineComponentSlotStyle({
       stroke: "{dot-stroke}",
       strokeWidth: "{dot-stroke-width}",
     },
-    grid: { stroke: "border" },
+    grid: { stroke: "{grid-stroke}" },
     labelList: chartStyle.base?.labelList,
     line: {
       "&:has(> path[data-inactive])": {
@@ -66,6 +66,7 @@ export const cartesianChartStyle = defineComponentSlotStyle({
       "--dot-r": "4",
       "--dot-stroke": "{line-stroke}",
       "--dot-stroke-width": "0",
+      "--grid-stroke": "colors.border",
       "--inactive-line-opacity": "0.4",
       "--line-color": "colorScheme.solid",
       "--line-stroke": "currentColor",

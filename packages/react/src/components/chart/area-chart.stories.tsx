@@ -60,19 +60,10 @@ export const Basic: Story = () => {
 }
 
 export const Composition: Story = () => {
-  const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () =>
-      AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
-      ]),
-    [],
-  )
   const data = useMemo(() => createData(), [])
 
   return (
-    <AreaChart.Root data={data} series={series}>
+    <AreaChart.Root data={data}>
       <AreaChart.Tooltip
         labelFormatter={(value) => dayjs(value).format("MMM")}
       />
@@ -909,9 +900,7 @@ export const DisabledXAxis: Story = () => {
       series={series}
       withXAxis={false}
       chartProps={{ margin: { left: 0, right: 0 } }}
-      tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
-      }}
+      tooltipProps={{ labelFormatter: () => null }}
     />
   )
 }

@@ -96,9 +96,9 @@ export const useChartXAxis = ({
     if (!tickLineProp) return tickLineProp
 
     return {
-      ...(isObject(tickLineProp) ? tickLineProp : {}),
       fill: "",
       stroke: "",
+      ...(isObject(tickLineProp) ? tickLineProp : {}),
     }
   }, [tickLineProp])
   const label = useMemo<UseChartXAxisProps["label"]>(() => {
@@ -268,15 +268,15 @@ export const useChartYAxis = ({
     if (!tickProp) return tickProp
     if (isFunction(tickProp) || isValidElement(tickProp)) return tickProp
 
-    return { ...(isObject(tickProp) ? tickProp : {}), fill: "" }
+    return { fill: "", ...(isObject(tickProp) ? tickProp : {}) }
   }, [tickProp])
   const tickLine = useMemo<UseChartYAxisProps["tickLine"]>(() => {
     if (!tickLineProp) return tickLineProp
 
     return {
-      ...(isObject(tickLineProp) ? tickLineProp : {}),
       fill: "",
       stroke: "",
+      ...(isObject(tickLineProp) ? tickLineProp : {}),
     }
   }, [tickLineProp])
   const label = useMemo<UseChartYAxisProps["label"]>(() => {
@@ -407,7 +407,7 @@ export interface UseChartLineProps extends Merge<
 export const useChartLine = ({
   type = "monotone",
   name,
-  activeDot,
+  activeDot: activeDotProp,
   animateNewValues,
   animationBegin,
   animationDuration,
@@ -416,7 +416,7 @@ export const useChartLine = ({
   connectNulls,
   data,
   dataKey: dataKeyProp,
-  dot,
+  dot: dotProp,
   hide,
   isAnimationActive = false,
   label: labelProp = false,
@@ -432,7 +432,6 @@ export const useChartLine = ({
   ...rest
 }: UseChartLineProps = {}) => {
   const { highlightedDataKey } = useChartContext()
-
   const label = useMemo<UseChartLineProps["label"]>(() => {
     if (!labelProp) return labelProp
     if (isFunction(labelProp) || isValidElement(labelProp)) return labelProp
@@ -444,6 +443,23 @@ export const useChartLine = ({
       ...(isObject(labelProp) ? labelProp : {}),
     }
   }, [labelProp])
+  const dot = useMemo<UseChartLineProps["dot"]>(() => {
+    if (!dotProp) return dotProp
+    if (isFunction(dotProp) || isValidElement(dotProp)) return dotProp
+
+    return { fill: "", stroke: "", ...(isObject(dotProp) ? dotProp : {}) }
+  }, [dotProp])
+  const activeDot = useMemo<UseChartLineProps["activeDot"]>(() => {
+    if (!activeDotProp) return activeDotProp
+    if (isFunction(activeDotProp) || isValidElement(activeDotProp))
+      return activeDotProp
+
+    return {
+      fill: "",
+      stroke: "",
+      ...(isObject(activeDotProp) ? activeDotProp : {}),
+    }
+  }, [activeDotProp])
 
   const getRootProps: PropGetter<"line"> = useCallback(
     (props) => ({ ...rest, ...props }),
@@ -555,7 +571,7 @@ export interface UseChartAreaProps extends Merge<
 export const useChartArea = ({
   type = "monotone",
   name,
-  activeDot,
+  activeDot: activeDotProp,
   animationBegin,
   animationDuration,
   animationEasing,
@@ -565,7 +581,7 @@ export const useChartArea = ({
   connectNulls,
   data,
   dataKey: dataKeyProp,
-  dot,
+  dot: dotProp,
   hide,
   isAnimationActive = false,
   label: labelProp = false,
@@ -581,7 +597,6 @@ export const useChartArea = ({
   ...rest
 }: UseChartAreaProps) => {
   const { highlightedDataKey } = useChartContext()
-
   const label = useMemo<UseChartAreaProps["label"]>(() => {
     if (!labelProp) return labelProp
     if (isFunction(labelProp) || isValidElement(labelProp)) return labelProp
@@ -593,6 +608,23 @@ export const useChartArea = ({
       ...(isObject(labelProp) ? labelProp : {}),
     }
   }, [labelProp])
+  const dot = useMemo<UseChartAreaProps["dot"]>(() => {
+    if (!dotProp) return dotProp
+    if (isFunction(dotProp) || isValidElement(dotProp)) return dotProp
+
+    return { fill: "", stroke: "", ...(isObject(dotProp) ? dotProp : {}) }
+  }, [dotProp])
+  const activeDot = useMemo<UseChartAreaProps["activeDot"]>(() => {
+    if (!activeDotProp) return activeDotProp
+    if (isFunction(activeDotProp) || isValidElement(activeDotProp))
+      return activeDotProp
+
+    return {
+      fill: "",
+      stroke: "",
+      ...(isObject(activeDotProp) ? activeDotProp : {}),
+    }
+  }, [activeDotProp])
 
   const getRootProps: PropGetter<"line"> = useCallback(
     (props) => ({ ...rest, ...props }),

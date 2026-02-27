@@ -1,21 +1,21 @@
 import type {
-  ChartActiveDot as ActiveDot,
-  ChartDot as Dot,
   ChartGridProps as GridProps,
-  CartesianChartLabel as LineLabel,
-  CartesianChartLabelList as LineLabelList,
   ChartLineProps as LineProps,
   ChartReferenceLineProps as ReferenceLineProps,
-  ChartTickLine as TickLine,
   ChartXAxisProps as XAxisProps,
   ChartXAxisTick as XAxisTick,
   ChartYAxisProps as YAxisProps,
   ChartYAxisTick as YAxisTick,
 } from "./cartesian-chart"
 import type {
+  ChartActiveDot as ActiveDot,
+  ChartDot as Dot,
   ChartLabelListProps as LabelListProps,
   ChartLabelProps as LabelProps,
   ChartLegendProps as LegendProps,
+  ChartLabel as LineLabel,
+  ChartLabelList as LineLabelList,
+  ChartTickLine as TickLine,
   ChartTooltipProps as TooltipProps,
 } from "./chart"
 import type { LineChartProps as RootProps } from "./line-chart"

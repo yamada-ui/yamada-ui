@@ -881,9 +881,7 @@ export const DisabledXAxis: Story = () => {
       series={series}
       withXAxis={false}
       chartProps={{ margin: { left: 0, right: 0 } }}
-      tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
-      }}
+      tooltipProps={{ labelFormatter: () => null }}
     />
   )
 }

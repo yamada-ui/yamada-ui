@@ -2,7 +2,13 @@
 
 import type { PropsWithChildren, ReactElement, ReactNode } from "react"
 import type {
+  ActiveDotProps,
+  DataKey,
   DefaultLegendContentProps,
+  DotItemDotProps,
+  DotProps,
+  LabelProps,
+  RenderableText,
   ResponsiveContainerProps,
   TooltipContentProps,
 } from "recharts"
@@ -19,7 +25,11 @@ import type {
   ChartLineProps,
 } from "./cartesian-chart"
 import type { ChartStyle } from "./chart.style"
-import type { ChartDonutProps, ChartPieProps } from "./polar-chart"
+import type {
+  ChartDonutProps,
+  ChartPieProps,
+  ChartRadarProps,
+} from "./polar-chart"
 import type {
   UseChartLabelListProps,
   UseChartLabelProps,
@@ -39,9 +49,11 @@ import { createSlotComponent, styled, varAttr } from "../../core"
 import {
   createContext,
   isArray,
+  isNull,
   isNumber,
   isObject,
   isString,
+  isUndefined,
   useSplitChildren,
 } from "../../utils"
 import { chartStyle } from "./chart.style"
@@ -53,6 +65,51 @@ import {
   useChartLegend,
   useChartTooltip,
 } from "./use-chart"
+
+export type ChartDot =
+  | ((props: DotItemDotProps) => ReactNode)
+  | boolean
+  | Merge<Partial<DotProps>, HTMLStyledProps<"circle">>
+  | ReactElement
+
+export type ChartActiveDot =
+  | ((props: ActiveDotProps) => ReactNode)
+  | boolean
+  | Merge<Partial<ActiveDotProps>, HTMLStyledProps<"circle">>
+  | ReactElement
+
+export type ChartLabel =
+  | ((props: any) => ReactElement | RenderableText)
+  | boolean
+  | (Merge<
+      HTMLStyledProps<"text">,
+      Pick<
+        LabelProps,
+        | "angle"
+        | "content"
+        | "formatter"
+        | "index"
+        | "labelRef"
+        | "offset"
+        | "parentViewBox"
+        | "position"
+        | "textBreakAll"
+        | "value"
+        | "viewBox"
+        | "zIndex"
+      >
+    > & { dataKey?: DataKey<any> })
+  | number
+  | ReactElement
+  | string
+
+export type ChartLabelList =
+  | ((props: LabelProps) => ReactElement | RenderableText)
+  | boolean
+  | ChartLabelListProps
+  | ReactElement
+
+export type ChartTickLine = boolean | HTMLStyledProps<"line">
 
 type GradientStrategy = "invert" | "shade" | "tint"
 
@@ -124,6 +181,7 @@ export interface ChartProps<Y extends Dict = Dict>
     | ChartDonutProps<Y>[]
     | ChartLineProps<Y>[]
     | ChartPieProps<Y>[]
+    | ChartRadarProps<Y>[]
   /**
    * The fill of the tooltip cursor.
    */
@@ -524,11 +582,15 @@ const ChartTooltipContent = withContext<"div", ChartTooltipContentProps>(
     ...rest
   }) => {
     const { varMap } = useChartComponentContext()
-    const label = labelFormatter?.(labelProp, payload) ?? labelProp
+    const label = labelFormatter
+      ? labelFormatter(labelProp, payload)
+      : labelProp
 
     return (
       <styled.div {...rest}>
-        {label ? <ChartTooltipLabel>{label}</ChartTooltipLabel> : null}
+        {!isUndefined(label) && !isNull(label) ? (
+          <ChartTooltipLabel>{label}</ChartTooltipLabel>
+        ) : null}
 
         <ChartTooltipList>
           {payload.map((data, index) => {

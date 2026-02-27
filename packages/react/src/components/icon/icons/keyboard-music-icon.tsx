@@ -1,6 +1,8 @@
 "use client"
 
-import { KeyboardMusic } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { KeyboardMusic as OriginalKeyboardMusicIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const KeyboardMusicIcon = component(Icon)({ as: KeyboardMusic })
+export const KeyboardMusicIcon = component(Icon)({
+  as: OriginalKeyboardMusicIcon,
+}) as Component<"svg", IconProps>

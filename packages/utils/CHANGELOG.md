@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 2.0.6
+
+### Patch Changes
+
+- [#5706](https://github.com/yamada-ui/yamada-ui/pull/5706) [`1b12488`](https://github.com/yamada-ui/yamada-ui/commit/1b1248801bd5229913975da1d84e1b27661acbad) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
 ## 2.0.5
 
 ### Patch Changes

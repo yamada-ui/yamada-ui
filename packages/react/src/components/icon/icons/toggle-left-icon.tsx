@@ -1,6 +1,8 @@
 "use client"
 
-import { ToggleLeft } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { ToggleLeft as OriginalToggleLeftIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const ToggleLeftIcon = component(Icon)({ as: ToggleLeft })
+export const ToggleLeftIcon = component(Icon)({
+  as: OriginalToggleLeftIcon,
+}) as Component<"svg", IconProps>

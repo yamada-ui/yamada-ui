@@ -10,7 +10,8 @@ import { inputStyle } from "./input.style"
 import { useInputBorder } from "./use-input-border"
 
 export interface InputProps
-  extends Omit<HTMLStyledProps<"input">, "size">,
+  extends
+    Omit<HTMLStyledProps<"input">, "size">,
     ThemeProps<InputStyle>,
     UseInputBorderProps,
     FieldProps {

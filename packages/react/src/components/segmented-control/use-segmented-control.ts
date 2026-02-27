@@ -15,8 +15,10 @@ import {
   visuallyHiddenAttributes,
 } from "../../utils"
 
-interface SegmentedControlContext
-  extends Omit<UseSegmentedControlReturn, "descendants" | "getRootProps"> {}
+interface SegmentedControlContext extends Omit<
+  UseSegmentedControlReturn,
+  "descendants" | "getRootProps"
+> {}
 
 const [SegmentedControlContext, useSegmentedControlContext] =
   createContext<SegmentedControlContext>({
@@ -37,12 +39,9 @@ export {
   useSegmentedControlDescendants,
 }
 
-export interface UseSegmentedControlProps<Y extends string = string>
-  extends Omit<HTMLProps, "onChange"> {
-  /**
-   * The HTML `name` attribute used for forms.
-   */
-  name?: string
+export interface UseSegmentedControlProps<
+  Y extends string = string,
+> extends Omit<HTMLProps, "onChange"> {
   /**
    * The initial value of the segmented control.
    */
@@ -53,6 +52,10 @@ export interface UseSegmentedControlProps<Y extends string = string>
    * @default false
    */
   disabled?: boolean
+  /**
+   * The HTML `name` attribute used for forms.
+   */
+  name?: string
   /**
    * The orientation of the segmented control.
    *
@@ -128,8 +131,7 @@ export const useSegmentedControl = <Y extends string = string>({
 export type UseSegmentedControlReturn = ReturnType<typeof useSegmentedControl>
 
 export interface UseSegmentedControlItemProps<Y extends string = string>
-  extends HTMLProps<"label">,
-    Pick<FieldProps, "disabled" | "readOnly"> {
+  extends HTMLProps<"label">, Pick<FieldProps, "disabled" | "readOnly"> {
   /**
    * The value of the segmented control item.
    */

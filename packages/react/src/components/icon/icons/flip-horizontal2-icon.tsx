@@ -1,6 +1,8 @@
 "use client"
 
-import { FlipHorizontal2 } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { FlipHorizontal2 as OriginalFlipHorizontal2Icon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const FlipHorizontal2Icon = component(Icon)({ as: FlipHorizontal2 })
+export const FlipHorizontal2Icon = component(Icon)({
+  as: OriginalFlipHorizontal2Icon,
+}) as Component<"svg", IconProps>

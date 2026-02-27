@@ -328,6 +328,12 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Fil
 | Component   | Roles and Attributes | Usage                                                                                                                                                           |
 | ----------- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `FileInput` | `role="button"`      | Indicates that this is a button.                                                                                                                                |
-|             | `aria-disabled`      | Sets to `"true"` if `disabled` is set.                                                                                                                          |
-|             | `aria-labelledby`    | If `FileInput` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id`.                                                         |
+|             | `aria-disabled`      | Sets to `"true"` if `disabled` or `readOnly` is set.                                                                                                            |
 |             | `aria-describedby`   | If `FileInput` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, `Field.ErrorMessage`, or `Field.HelperMessage`, sets its `id`. |
+|             | `aria-invalid`       | Sets to `"true"` if `invalid` is set.                                                                                                                           |
+|             | `aria-required`      | Sets to `"true"` if `required` is set.                                                                                                                          |
+| `input`     | `aria-disabled`      | Sets to `"true"` if `disabled` or `readOnly` is set.                                                                                                            |
+|             | `aria-describedby`   | If `FileInput` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, `Field.ErrorMessage`, or `Field.HelperMessage`, sets its `id`. |
+|             | `aria-hidden`        | Excludes the element from the accessibility tree.                                                                                                               |
+|             | `aria-invalid`       | Sets to `"true"` if `invalid` is set.                                                                                                                           |
+|             | `aria-required`      | Sets to `"true"` if `required` is set.                                                                                                                          |

@@ -749,7 +749,10 @@ export const TooltipCursor: Story = () => {
     <LineChart.Root
       data={data}
       series={series}
-      tooltipProps={{ cursor: true }}
+      tooltipProps={{
+        cursor: true,
+        labelFormatter: (value) => dayjs(value).format("MMM"),
+      }}
       xAxisProps={{
         dataKey: "date",
         tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -775,9 +778,7 @@ export const DisabledXAxis: Story = () => {
       series={series}
       withXAxis={false}
       chartProps={{ margin: { left: 0, right: 0 } }}
-      tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
-      }}
+      tooltipProps={{ labelFormatter: () => null }}
     />
   )
 }

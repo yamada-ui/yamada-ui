@@ -1,20 +1,20 @@
 import type { BarChartProps as RootProps } from "./bar-chart"
 import type {
-  CartesianChartLabel as BarLabel,
-  CartesianChartLabelList as BarLabelList,
   ChartBarProps as BarProps,
   ChartGridProps as GridProps,
   ChartReferenceLineProps as ReferenceLineProps,
-  ChartTickLine as TickLine,
   ChartXAxisProps as XAxisProps,
   ChartXAxisTick as XAxisTick,
   ChartYAxisProps as YAxisProps,
   ChartYAxisTick as YAxisTick,
 } from "./cartesian-chart"
 import type {
+  ChartLabel as BarLabel,
+  ChartLabelList as BarLabelList,
   ChartLabelListProps as LabelListProps,
   ChartLabelProps as LabelProps,
   ChartLegendProps as LegendProps,
+  ChartTickLine as TickLine,
   ChartTooltipProps as TooltipProps,
 } from "./chart"
 import {

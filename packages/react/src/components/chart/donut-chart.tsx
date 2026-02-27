@@ -17,7 +17,21 @@ import { usePieChart } from "./use-pie-chart"
 
 export interface DonutChartProps<Y extends Dict = Dict>
   extends
-    Omit<PolarChartProps<Y>, "components" | "pieProps" | "render" | "series">,
+    Omit<
+      PolarChartProps<Y>,
+      | "angleAxisProps"
+      | "components"
+      | "gridProps"
+      | "nameKey"
+      | "pieProps"
+      | "radarProps"
+      | "radiusAxisProps"
+      | "render"
+      | "series"
+      | "withAngleAxis"
+      | "withGrid"
+      | "withRadiusAxis"
+    >,
     UsePieChartProps<Y>,
     ThemeProps<DonutChartStyle> {
   /***

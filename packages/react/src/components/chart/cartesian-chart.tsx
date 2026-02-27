@@ -6,11 +6,8 @@ import type {
   DotProps,
   LabelListProps,
   LabelProps,
-  RenderableText,
 } from "recharts"
 import type {
-  DataKey,
-  DotItemDotProps,
   XAxisTickContentProps,
   YAxisTickContentProps,
 } from "recharts/types/util/types"
@@ -24,7 +21,14 @@ import type {
 } from "../../core"
 import type { Dict, Merge } from "../../utils"
 import type { CartesianChartStyle } from "./cartesian-chart.style"
-import type { ChartLabelListProps, ChartProps } from "./chart"
+import type {
+  ChartActiveDot,
+  ChartDot,
+  ChartLabel,
+  ChartLabelList,
+  ChartProps,
+  ChartTickLine,
+} from "./chart"
 import type {
   UseChartAreaProps,
   UseChartBarProps,
@@ -117,6 +121,10 @@ export interface CartesianChartProps<Y extends Dict = Dict>
    * The stroke width of the dots.
    */
   dotStrokeWidth?: CSSProps["strokeWidth"]
+  /**
+   * The stroke color of the grid.
+   */
+  gridStroke?: CSSProps["stroke"]
   /**
    * The opacity of the inactive lines.
    */
@@ -322,6 +330,7 @@ export const CartesianChart = withProvider(
     dotRadius,
     dotStroke,
     dotStrokeWidth,
+    gridStroke,
     inactiveLineOpacity,
     lineColor,
     lineStroke,
@@ -350,6 +359,7 @@ export const CartesianChart = withProvider(
     "--dot-r": dotRadius,
     "--dot-stroke": varAttr(dotStroke, "colors"),
     "--dot-stroke-width": dotStrokeWidth,
+    "--grid-stroke": varAttr(gridStroke, "colors"),
     "--inactive-line-opacity": inactiveLineOpacity,
     "--line-color": varAttr(lineColor, "colors"),
     "--line-stroke": varAttr(lineStroke, "colors"),
@@ -373,33 +383,6 @@ export const CartesianChart = withProvider(
   <Y extends Dict>(props: CartesianChartProps<Y>): ReactElement
 }>
 
-export type CartesianChartLabel =
-  | ((props: any) => ReactElement | RenderableText)
-  | boolean
-  | (Merge<
-      HTMLStyledProps<"text">,
-      Pick<
-        LabelProps,
-        | "angle"
-        | "content"
-        | "formatter"
-        | "index"
-        | "labelRef"
-        | "offset"
-        | "parentViewBox"
-        | "position"
-        | "textBreakAll"
-        | "value"
-        | "viewBox"
-        | "zIndex"
-      >
-    > & { dataKey?: DataKey<any> })
-  | number
-  | ReactElement
-  | string
-
-export type ChartTickLine = boolean | HTMLStyledProps<"line">
-
 export type ChartXAxisTick =
   | ((props: XAxisTickContentProps) => ReactNode)
   | boolean
@@ -415,7 +398,7 @@ export interface ChartXAxisProps extends Merge<
    *
    * @default false
    */
-  label?: CartesianChartLabel
+  label?: ChartLabel
   /**
    * The tick to use for the axis.
    *
@@ -425,7 +408,7 @@ export interface ChartXAxisProps extends Merge<
   /**
    * The tick line to use for the axis.
    *
-   * @default true
+   * @default false
    */
   tickLine?: ChartTickLine
 }
@@ -542,7 +525,7 @@ export interface ChartYAxisProps extends Merge<
    *
    * @default false
    */
-  label?: CartesianChartLabel
+  label?: ChartLabel
   /**
    * The tick to use for the axis.
    *
@@ -552,7 +535,7 @@ export interface ChartYAxisProps extends Merge<
   /**
    * The tick line to use for the axis.
    *
-   * @default true
+   * @default false
    */
   tickLine?: ChartTickLine
 }
@@ -673,24 +656,6 @@ export const ChartGrid = withContext<"line", ChartGridProps>((props) => {
   )
 }, "grid")()
 
-export type ChartDot =
-  | ((props: DotItemDotProps) => ReactNode)
-  | boolean
-  | Merge<Partial<DotProps>, HTMLStyledProps<"circle">>
-  | ReactElement
-
-export type ChartActiveDot =
-  | ((props: ActiveDotProps) => ReactNode)
-  | boolean
-  | Merge<Partial<ActiveDotProps>, HTMLStyledProps<"circle">>
-  | ReactElement
-
-export type CartesianChartLabelList =
-  | ((props: LabelProps) => ReactElement | RenderableText)
-  | boolean
-  | ChartLabelListProps
-  | ReactElement
-
 export interface ChartLineProps<Y extends Dict = Dict> extends Merge<
   HTMLStyledProps<"line">,
   Omit<UseChartLineProps, "activeDot" | "data" | "dataKey" | "dot" | "label">
@@ -712,7 +677,7 @@ export interface ChartLineProps<Y extends Dict = Dict> extends Merge<
   /**
    * The dot to use for the line.
    *
-   * @default true
+   * @default false
    */
   dot?: ChartDot
   /**
@@ -720,14 +685,13 @@ export interface ChartLineProps<Y extends Dict = Dict> extends Merge<
    *
    * @default false
    */
-  label?: CartesianChartLabelList
+  label?: ChartLabelList
 }
 
 export const ChartLine = withContext<"line", ChartLineProps>((props) => {
   const { lineProps } = useComponentContext()
   const {
     activeDot: activeDotProp = true,
-    children,
     dataKey,
     dot: dotProp = false,
     label: labelProp = false,
@@ -736,7 +700,7 @@ export const ChartLine = withContext<"line", ChartLineProps>((props) => {
   const system = useSystem()
   const { theme } = useTheme()
   const { varMap } = useChartComponentContext()
-  const color = varMap[dataKey.toString()]
+  const color = varMap[dataKey.toString()] ?? rest.stroke ?? rest.color
   const dotProps = useSlotComponentProps({}, "dot")
   const activeDotProps = useSlotComponentProps({}, "activeDot")
   const labelProps = useSlotComponentProps({}, "labelList")
@@ -841,7 +805,7 @@ export const ChartLine = withContext<"line", ChartLineProps>((props) => {
 
   return (
     <styled.line asChild {...getRootProps()}>
-      <Line {...getLineProps()}>{children}</Line>
+      <Line {...getLineProps()} />
     </styled.line>
   )
 }, "line")() as GenericsComponent<{
@@ -869,7 +833,7 @@ export interface ChartAreaProps<Y extends Dict = Dict> extends Merge<
   /**
    * The dot to use for the line.
    *
-   * @default true
+   * @default false
    */
   dot?: ChartDot
   /**
@@ -877,7 +841,7 @@ export interface ChartAreaProps<Y extends Dict = Dict> extends Merge<
    *
    * @default false
    */
-  label?: CartesianChartLabelList
+  label?: ChartLabelList
   /**
    * Determines whether the chart area should be represented with a gradient instead of the solid color.
    */
@@ -888,7 +852,6 @@ export const ChartArea = withContext<"line", ChartAreaProps>((props) => {
   const { areaProps } = useComponentContext()
   const {
     activeDot: activeDotProp = true,
-    children,
     dataKey,
     dot: dotProp = false,
     label: labelProp = false,
@@ -899,7 +862,7 @@ export const ChartArea = withContext<"line", ChartAreaProps>((props) => {
   const system = useSystem()
   const { theme } = useTheme()
   const { varMap } = useChartComponentContext()
-  const color = varMap[dataKey.toString()]
+  const color = varMap[dataKey.toString()] ?? rest.stroke ?? rest.color
   const dotProps = useSlotComponentProps({}, "dot")
   const activeDotProps = useSlotComponentProps({}, "activeDot")
   const labelProps = useSlotComponentProps({}, "labelList")
@@ -998,11 +961,6 @@ export const ChartArea = withContext<"line", ChartAreaProps>((props) => {
       return { className }
     }
   }, [system, theme, labelProp, labelProps.className, labelProps.css])
-  const gradientProps = useMemo(() => {
-    const css = getCSS(system, theme)
-
-    return { className: cx(css({ stopColor: color })) }
-  }, [color, system, theme])
   const { getAreaProps, getRootProps } = useChartArea({
     activeDot,
     dataKey,
@@ -1016,18 +974,18 @@ export const ChartArea = withContext<"line", ChartAreaProps>((props) => {
   return (
     <>
       <styled.line asChild {...getRootProps()}>
-        <Area {...getAreaProps()}>{children}</Area>
+        <Area {...getAreaProps()} />
       </styled.line>
 
       <defs>
         {withGradient ? (
           <linearGradient id={id} x1="0" x2="0" y1="0" y2="1">
-            <stop offset="5%" stopOpacity={0.8} {...gradientProps} />
-            <stop offset="95%" stopOpacity={0.1} {...gradientProps} />
+            <styled.stop offset="5%" stopColor={color} stopOpacity={0.8} />
+            <styled.stop offset="95%" stopColor={color} stopOpacity={0.1} />
           </linearGradient>
         ) : (
           <linearGradient id={id} x1="0" x2="0" y1="0" y2="1">
-            <stop stopOpacity={0.4} {...gradientProps} />
+            <styled.stop stopColor={color} stopOpacity={0.4} />
           </linearGradient>
         )}
       </defs>
@@ -1050,13 +1008,12 @@ export interface ChartBarProps<Y extends Dict = Dict> extends Merge<
    *
    * @default false
    */
-  label?: CartesianChartLabelList
+  label?: ChartLabelList
 }
 
 export const ChartBar = withContext<"path", ChartBarProps>((props) => {
   const { barProps } = useComponentContext()
   const {
-    children,
     dataKey,
     label: labelProp = false,
     ...rest
@@ -1101,7 +1058,7 @@ export const ChartBar = withContext<"path", ChartBarProps>((props) => {
 
   return (
     <styled.path asChild {...getRootProps()}>
-      <Bar {...getBarProps()}>{children}</Bar>
+      <Bar {...getBarProps()} />
     </styled.path>
   )
 }, "bar")() as GenericsComponent<{
@@ -1117,7 +1074,7 @@ export interface ChartReferenceLineProps extends Omit<
    *
    * @default false
    */
-  label?: CartesianChartLabel
+  label?: ChartLabel
 }
 
 export const ChartReferenceLine = withContext<"line", ChartReferenceLineProps>(

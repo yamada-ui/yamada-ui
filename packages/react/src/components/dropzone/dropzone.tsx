@@ -17,14 +17,14 @@ import { Portal } from "../portal"
 import { dropzoneStyle } from "./dropzone.style"
 import { useDropzone } from "./use-dropzone"
 
-interface ComponentContext
-  extends Pick<
-    UseDropzoneReturn,
-    "dragAccept" | "dragIdle" | "dragReject" | "loading"
-  > {}
+interface ComponentContext extends Pick<
+  UseDropzoneReturn,
+  "dragAccept" | "dragIdle" | "dragReject" | "loading"
+> {}
 
 export interface DropzoneRootProps
-  extends Merge<HTMLStyledProps, UseDropzoneProps>,
+  extends
+    Merge<HTMLStyledProps, UseDropzoneProps>,
     UseInputBorderProps,
     ThemeProps<DropzoneStyle>,
     Pick<DropzoneLoadingProps, "loadingScheme"> {

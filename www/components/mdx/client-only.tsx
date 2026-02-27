@@ -4,8 +4,8 @@ import { getComponent } from "./get-component"
 
 export interface ClientOnlyProps {
   code: string
-  lang?: string
   functional?: boolean
+  lang?: string
 }
 
 export function ClientOnly({

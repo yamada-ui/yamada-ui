@@ -173,4 +173,31 @@ describe("<EmptyState />", () => {
     expect(EmptyStateComponent).toContainElement(svgIcon)
     expect(EmptyStateComponent).toContainElement(ButtonElement)
   })
+
+  test("EmptyState does not render title when title prop is not provided", () => {
+    const description = "Please add items to the cart"
+    render(
+      <EmptyState.Root data-testid="empty-state" description={description} />,
+    )
+
+    const EmptyStateComponent = screen.getByTestId("empty-state")
+    expect(EmptyStateComponent).toBeInTheDocument()
+
+    const headingElements = screen.queryAllByRole("heading", { level: 3 })
+    expect(headingElements).toHaveLength(0)
+
+    const ParagraphComponent = screen.getByText(description)
+    expect(ParagraphComponent).toBeInTheDocument()
+  })
+
+  test("EmptyState does not render description when description prop is not provided", () => {
+    const title = "Cart is empty"
+    render(<EmptyState.Root data-testid="empty-state" title={title} />)
+
+    const EmptyStateComponent = screen.getByTestId("empty-state")
+    expect(EmptyStateComponent).toBeInTheDocument()
+
+    const ParagraphComponent = screen.queryAllByRole("paragraph")
+    expect(ParagraphComponent).toHaveLength(0)
+  })
 })

@@ -1,6 +1,8 @@
 "use client"
 
-import { BugOff } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { BugOff as OriginalBugOffIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const BugOffIcon = component(Icon)({ as: BugOff })
+export const BugOffIcon = component(Icon)({
+  as: OriginalBugOffIcon,
+}) as Component<"svg", IconProps>

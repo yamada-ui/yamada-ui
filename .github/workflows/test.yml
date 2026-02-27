@@ -3,23 +3,24 @@ name: Test
 on:
   workflow_dispatch:
   workflow_call:
+    secrets:
+      TURBO_TOKEN:
+        required: false
+      CODECOV_TOKEN:
+        required: false
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
-  browser:
-    name: ${{ matrix.name }}
+  chromium_coverage:
+    name: Chromium ${{ matrix.shard_index }}/4
     runs-on: ubuntu-latest
     strategy:
+      max-parallel: 4
       matrix:
-        include:
-          - id: chromium
-            name: Chromium
-            coverage: "true"
-          - id: firefox
-            name: Firefox
-            coverage: "false"
-          - id: webkit
-            name: Webkit
-            coverage: "false"
+        shard_index: [1, 2, 3, 4]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,11 +30,86 @@ jobs:
         uses: tj-actions/changed-files@v46
         with:
           files: |
+            turbo.json
             packages/**/(package.json|vitest.config.ts)
             packages/**/(src|test)/**/*.{ts,tsx}
             !packages/**/src/**/*.stories.{ts,tsx}
             !packages/workspace/src/**
             packages/workspace/src/vitest/**
+            .github/workflows/test.yml
+            .github/workflows/quality.yml
+
+      - name: Restore turbo cache
+        if: steps.check-modified.outputs.any_changed == 'true'
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.job }}-chromium-shard-${{ matrix.shard_index }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-${{ github.job }}-chromium-shard-${{ matrix.shard_index }}-
+            ${{ runner.os }}-turbo-${{ github.job }}-
+
+      - name: Install
+        if: steps.check-modified.outputs.any_changed == 'true'
+        uses: ./.github/composite-actions/install
+
+      - name: Setup Browser
+        if: steps.check-modified.outputs.any_changed == 'true'
+        working-directory: packages/react
+        run: pnpm playwright install chromium --with-deps
+
+      - name: Run chromium coverage shard
+        if: steps.check-modified.outputs.any_changed == 'true'
+        run: pnpm test:coverage -- --shard=${{ matrix.shard_index }}/4
+
+      - name: Upload coverage
+        if: steps.check-modified.outputs.any_changed == 'true'
+        uses: codecov/codecov-action@v4
+        with:
+          fail_ci_if_error: false
+          file: ./packages/react/coverage/coverage-final.json,./packages/utils/coverage/coverage-final.json
+          flags: unittests
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
+          codecov_yml_path: ./codecov.yml
+
+  browser:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - id: firefox
+            name: Firefox
+          - id: webkit
+            name: Webkit
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check modified files
+        id: check-modified
+        uses: tj-actions/changed-files@v46
+        with:
+          files: |
+            turbo.json
+            packages/**/(package.json|vitest.config.ts)
+            packages/**/(src|test)/**/*.{ts,tsx}
+            !packages/**/src/**/*.stories.{ts,tsx}
+            !packages/workspace/src/**
+            packages/workspace/src/vitest/**
+            .github/workflows/test.yml
+            .github/workflows/quality.yml
+
+      - name: Restore turbo cache
+        if: steps.check-modified.outputs.any_changed == 'true'
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.job }}-${{ matrix.id }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-${{ github.job }}-${{ matrix.id }}-
+            ${{ runner.os }}-turbo-${{ github.job }}-
 
       - name: Install
         if: steps.check-modified.outputs.any_changed == 'true'
@@ -44,22 +120,6 @@ jobs:
         working-directory: packages/react
         run: pnpm playwright install ${{ matrix.id }} --with-deps
 
-      - name: Run tests
-        if: steps.check-modified.outputs.any_changed == 'true' && matrix.coverage == 'true'
-        run: pnpm test:coverage
-
-      - name: Run Browser Test on ${{ matrix.name }}
-        if: steps.check-modified.outputs.any_changed == 'true' && matrix.coverage != 'true'
-        working-directory: packages/react
+      - name: Run Browser Test on ${{ matrix.id }}
+        if: steps.check-modified.outputs.any_changed == 'true'
         run: pnpm test:${{ matrix.id }}
-
-      - name: Upload coverage
-        if: steps.check-modified.outputs.any_changed == 'true' && matrix.coverage == 'true'
-        uses: codecov/codecov-action@v4
-        with:
-          fail_ci_if_error: false
-          file: ./packages/react/coverage/coverage-final.json,./packages/utils/coverage/coverage-final.json
-          flags: unittests
-          token: ${{ secrets.CODECOV_TOKEN }}
-          verbose: true
-          codecov_yml_path: ./codecov.yml

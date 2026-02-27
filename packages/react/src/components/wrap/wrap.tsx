@@ -8,8 +8,7 @@ import { Flex } from "../flex"
 import { wrapStyle } from "./wrap.style"
 
 export interface WrapProps
-  extends WithoutThemeProps<FlexProps, WrapStyle>,
-    ThemeProps<WrapStyle> {}
+  extends WithoutThemeProps<FlexProps, WrapStyle>, ThemeProps<WrapStyle> {}
 
 const {
   PropsContext: WrapPropsContext,

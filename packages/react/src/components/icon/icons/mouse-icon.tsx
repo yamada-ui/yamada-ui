@@ -1,6 +1,8 @@
 "use client"
 
-import { Mouse } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Mouse as OriginalMouseIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const MouseIcon = component(Icon)({ as: Mouse })
+export const MouseIcon = component(Icon)({
+  as: OriginalMouseIcon,
+}) as Component<"svg", IconProps>

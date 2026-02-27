@@ -1,6 +1,8 @@
 "use client"
 
-import { Anchor } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Anchor as OriginalAnchorIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const AnchorIcon = component(Icon)({ as: Anchor })
+export const AnchorIcon = component(Icon)({
+  as: OriginalAnchorIcon,
+}) as Component<"svg", IconProps>

@@ -5,7 +5,15 @@ import { useCallback, useId } from "react"
 import { useEnvironment } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
-import { createContext, cx, dataAttr, handlerAll, mergeRefs } from "../../utils"
+import {
+  createContext,
+  cx,
+  dataAttr,
+  handlerAll,
+  mergeRefs,
+  setAttribute,
+  useSafeLayoutEffect,
+} from "../../utils"
 
 export type StepStatusScheme = "complete" | "current" | "incomplete"
 
@@ -17,8 +25,10 @@ const {
 
 export { StepsDescendantsContext, useStepsDescendant, useStepsDescendants }
 
-interface StepsContext
-  extends Omit<UseStepsReturn, "descendants" | "getRootProps"> {}
+interface StepsContext extends Omit<
+  UseStepsReturn,
+  "descendants" | "getRootProps"
+> {}
 
 const [StepsContext, useStepsContext] = createContext<StepsContext>({
   name: "StepsContext",
@@ -191,17 +201,18 @@ export const useStepsItem = ({
   const statusDataAttr = `data-${status}`
   const { getDocument } = useEnvironment()
 
+  useSafeLayoutEffect(() => {
+    const el = descendants.value(index)?.node
+    const hasContent = !!getDocument()?.getElementById(`${id}-${index}`)
+
+    if (el && hasContent) setAttribute(el, "aria-labelledby", `${id}-${index}`)
+  }, [descendants, getDocument, id, index])
+
   const getRootProps: PropGetter<"li"> = useCallback(
     ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) => {
-      const hasContent = !!getDocument()?.getElementById(`${id}-${index}`)
-
       return {
         "aria-current": current ? "step" : undefined,
-        "aria-labelledby": cx(
-          ariaLabelledbyProp,
-          ariaLabelledby,
-          hasContent ? `${id}-${index}` : undefined,
-        ),
+        "aria-labelledby": cx(ariaLabelledbyProp, ariaLabelledby),
         "data-orientation": orientation,
         [statusDataAttr]: dataAttr(true),
         ...rest,
@@ -209,17 +220,7 @@ export const useStepsItem = ({
         ref: mergeRefs(ref, register),
       }
     },
-    [
-      ariaLabelledbyProp,
-      getDocument,
-      id,
-      index,
-      current,
-      orientation,
-      statusDataAttr,
-      rest,
-      register,
-    ],
+    [ariaLabelledbyProp, current, orientation, statusDataAttr, rest, register],
   )
 
   const getTitleProps: PropGetter<"h3"> = useCallback(

@@ -16,7 +16,8 @@ interface ComponentContext {
 }
 
 export interface BreadcrumbRootProps
-  extends HTMLStyledProps<"nav">,
+  extends
+    HTMLStyledProps<"nav">,
     ThemeProps<BreadcrumbStyle>,
     Omit<UseBreadcrumbProps, "endBoundaries" | "startBoundaries"> {
   /**
@@ -140,7 +141,10 @@ interface BreadcrumbSeparatorProps extends HTMLStyledProps<"li"> {}
 const BreadcrumbSeparator = withContext<"li", BreadcrumbSeparatorProps>(
   BreadcrumbItem,
   "separator",
-)({ children: <ChevronRightIcon /> })
+)(({ children, ...rest }) => ({
+  children: children ?? <ChevronRightIcon />,
+  ...rest,
+}))
 
 export interface BreadcrumbLinkProps extends HTMLStyledProps<"a"> {
   /**

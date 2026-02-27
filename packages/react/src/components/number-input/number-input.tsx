@@ -12,7 +12,8 @@ import { numberInputStyle } from "./number-input.style"
 import { useNumberInput } from "./use-number-input"
 
 export interface NumberInputProps
-  extends Omit<
+  extends
+    Omit<
       WithoutThemeProps<InputProps, NumberInputStyle>,
       keyof UseNumberInputProps
     >,
@@ -122,11 +123,17 @@ type NumberInputIncrementButtonProps = HTMLStyledProps<"button">
 const NumberInputIncrementButton = withContext<
   "button",
   NumberInputIncrementButtonProps
->("button", ["button", "increment"])({ children: <ChevronUpIcon /> })
+>("button", ["button", "increment"])(({ children, ...rest }) => ({
+  children: children ?? <ChevronUpIcon />,
+  ...rest,
+}))
 
 type NumberInputDecrementButtonProps = HTMLStyledProps<"button">
 
 const NumberInputDecrementButton = withContext<
   "button",
   NumberInputDecrementButtonProps
->("button", ["button", "decrement"])({ children: <ChevronDownIcon /> })
+>("button", ["button", "decrement"])(({ children, ...rest }) => ({
+  children: children ?? <ChevronDownIcon />,
+  ...rest,
+}))

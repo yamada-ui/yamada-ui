@@ -28,14 +28,16 @@ import { colorPickerStyle } from "./color-picker.style"
 import { useColorPicker } from "./use-color-picker"
 
 interface ComponentContext
-  extends Pick<ColorPickerProps, "inputProps">,
+  extends
+    Pick<ColorPickerProps, "inputProps">,
     Pick<
       UseColorPickerReturn,
       "getEyeDropperProps" | "getInputProps" | "value"
     > {}
 
 export interface ColorPickerProps
-  extends Omit<HTMLStyledProps, "defaultValue" | "offset" | "onChange" | "ref">,
+  extends
+    Omit<HTMLStyledProps, "defaultValue" | "offset" | "onChange" | "ref">,
     UseColorPickerProps,
     PopupAnimationProps,
     Pick<

@@ -17,7 +17,6 @@ import {
   ariaAttr,
   assignRef,
   contains,
-  cx,
   dataAttr,
   focusTransfer,
   focusTrap,
@@ -26,12 +25,13 @@ import {
   mergeRefs,
   runKeyAction,
   scrollLock,
+  setAttribute,
+  useSafeLayoutEffect,
   useUnmountEffect,
 } from "../../utils"
 
 export interface UsePopoverProps
-  extends Omit<UseDisclosureProps, "timing">,
-    UsePopperProps<"button"> {
+  extends Omit<UseDisclosureProps, "timing">, UsePopperProps<"button"> {
   /**
    * If `true`, focus will be transferred to the first interactive element when the popover opens.
    *
@@ -214,6 +214,15 @@ export const usePopover = ({
     handler: onClose,
   })
 
+  useSafeLayoutEffect(() => {
+    const el = contentRef.current
+    const hasHeader = !!getDocument()?.getElementById(headerId)
+    const hasBody = !!getDocument()?.getElementById(bodyId)
+
+    if (el && hasHeader) setAttribute(el, "aria-labelledby", headerId)
+    if (el && hasBody) setAttribute(el, "aria-describedby", bodyId)
+  }, [open, headerId, bodyId])
+
   useEffect(() => {
     if (!open || !modal) return
 
@@ -288,33 +297,21 @@ export const usePopover = ({
   )
 
   const getContentProps: PropGetter = useCallback(
-    ({
-      ref,
-      "aria-describedby": ariaDescribedby,
-      "aria-labelledby": ariaLabelledby,
-      ...props
-    } = {}) => {
-      const hasHeader = !!getDocument()?.getElementById(headerId)
-      const hasBody = !!getDocument()?.getElementById(bodyId)
-
-      return {
-        id: contentId,
-        "aria-describedby": cx(ariaDescribedby, hasBody ? bodyId : undefined),
-        "aria-hidden": !open,
-        "aria-labelledby": cx(ariaLabelledby, hasHeader ? headerId : undefined),
-        "aria-modal": modal ? "true" : undefined,
-        "data-close": dataAttr(!open),
-        "data-open": dataAttr(open),
-        "data-popup": dataAttr(true),
-        role: "dialog",
-        tabIndex: -1,
-        ...props,
-        ref: mergeRefs(ref, contentRef),
-        onBlur: handlerAll(props.onBlur, onBlur),
-        onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
-      }
-    },
-    [getDocument, headerId, bodyId, contentId, open, modal, onBlur, onKeyDown],
+    ({ ref, ...props } = {}) => ({
+      id: contentId,
+      "aria-hidden": !open,
+      "aria-modal": modal ? "true" : undefined,
+      "data-close": dataAttr(!open),
+      "data-open": dataAttr(open),
+      "data-popup": dataAttr(true),
+      role: "dialog",
+      tabIndex: -1,
+      ...props,
+      ref: mergeRefs(ref, contentRef),
+      onBlur: handlerAll(props.onBlur, onBlur),
+      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
+    }),
+    [contentId, open, modal, onBlur, onKeyDown],
   )
 
   const getHeaderProps: PropGetter = useCallback(

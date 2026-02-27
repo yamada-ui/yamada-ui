@@ -1,6 +1,8 @@
 "use client"
 
-import { SquareSplitHorizontal } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { SquareSplitHorizontal as OriginalSquareSplitHorizontalIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -9,5 +11,5 @@ import { component, Icon } from "../icon"
  * @see https://yamada-ui.com/docs/components/icon
  */
 export const SquareSplitHorizontalIcon = component(Icon)({
-  as: SquareSplitHorizontal,
-})
+  as: OriginalSquareSplitHorizontalIcon,
+}) as Component<"svg", IconProps>

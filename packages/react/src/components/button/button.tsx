@@ -23,11 +23,10 @@ import { getLoadingComponent, isLoadingScheme } from "../loading"
 import { Ripple, useRipple } from "../ripple"
 import { buttonStyle } from "./button.style"
 
-interface ComponentContext
-  extends Pick<
-    ButtonProps,
-    "endIcon" | "iconProps" | "loadingIcon" | "loadingMessage" | "startIcon"
-  > {}
+interface ComponentContext extends Pick<
+  ButtonProps,
+  "endIcon" | "iconProps" | "loadingIcon" | "loadingMessage" | "startIcon"
+> {}
 
 const useButtonType = (value?: ElementType) => {
   const buttonRef = useRef(!value)
@@ -42,14 +41,7 @@ const useButtonType = (value?: ElementType) => {
 }
 
 export interface ButtonProps
-  extends HTMLStyledProps<"button">,
-    ThemeProps<ButtonStyle> {
-  /**
-   * The type of button. Accepts `button`, `reset`, or `submit`.
-   *
-   * @default 'button'
-   */
-  type?: HTMLProps<"button">["type"]
+  extends HTMLStyledProps<"button">, ThemeProps<ButtonStyle> {
   /**
    * If `true`, the button is represented as active.
    *
@@ -99,6 +91,12 @@ export interface ButtonProps
    */
   startIcon?: ReactNode
   /**
+   * The type of button. Accepts `button`, `reset`, or `submit`.
+   *
+   * @default 'button'
+   */
+  type?: HTMLProps<"button">["type"]
+  /**
    * The props of the icon element.
    */
   iconProps?: ButtonIconProps
@@ -115,7 +113,10 @@ const {
   useComponentContext,
   usePropsContext: useButtonPropsContext,
   withContext,
-} = createComponent<ButtonProps, ButtonStyle>("button", buttonStyle)
+} = createComponent<ButtonProps, ButtonStyle, ComponentContext>(
+  "button",
+  buttonStyle,
+)
 
 export { ButtonPropsContext, useButtonPropsContext }
 

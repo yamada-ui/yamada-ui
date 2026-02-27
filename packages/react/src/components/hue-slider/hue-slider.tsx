@@ -9,11 +9,14 @@ import { useI18n } from "../../providers/i18n-provider"
 import { Slider } from "../slider"
 import { hueSliderStyle } from "./hue-slider.style"
 
-interface ComponentContext
-  extends Pick<Required<HueSliderRootProps>, "max" | "min" | "orientation"> {}
+interface ComponentContext extends Pick<
+  Required<HueSliderRootProps>,
+  "max" | "min" | "orientation"
+> {}
 
 export interface HueSliderRootProps
-  extends WithoutThemeProps<
+  extends
+    WithoutThemeProps<
       Omit<
         Slider.RootProps,
         | "betweenThumbs"

@@ -1,6 +1,8 @@
 "use client"
 
-import { SearchCheck } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { SearchCheck as OriginalSearchCheckIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const SearchCheckIcon = component(Icon)({ as: SearchCheck })
+export const SearchCheckIcon = component(Icon)({
+  as: OriginalSearchCheckIcon,
+}) as Component<"svg", IconProps>

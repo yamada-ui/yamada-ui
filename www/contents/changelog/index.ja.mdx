@@ -3,39 +3,42 @@ title: 変更履歴
 description: "Yamada UIの最新バージョンの変更履歴をご覧ください。機能・バグ修正・改善点についてご確認ください。"
 ---
 
-## @yamada-ui/react@2.0.5
+## @yamada-ui/react@2.0.9
 
-このバージョンは、2025年10月27日にリリースされました。
-
-### パッチ変更
-
-- [#5435](https://github.com/yamada-ui/yamada-ui/pull/5435) [b7d4d7c](https://github.com/yamada-ui/yamada-ui/commit/b7d4d7c07fb9f17bd2d3407692350a431b5651ce) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the `Select` components inside the `Calendar` did not have correct styling when `DatePicker` had `invalid` set to `true`.
-
-- [#5432](https://github.com/yamada-ui/yamada-ui/pull/5432) [71baee5](https://github.com/yamada-ui/yamada-ui/commit/71baee56d63f17c847fad6354e4203a0c7a2d72c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the popover did not open on focus when `allowInput` was enabled in `DatePicker` and `ColorPicker`.
-
-- [#5432](https://github.com/yamada-ui/yamada-ui/pull/5432) [eb55e1a](https://github.com/yamada-ui/yamada-ui/commit/eb55e1ace3557443c32958350de946ba8ae436b5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where focus did not move correctly in `DatePicker` and `ColorPicker`.
-
-- [#5432](https://github.com/yamada-ui/yamada-ui/pull/5432) [6a9d9bc](https://github.com/yamada-ui/yamada-ui/commit/6a9d9bcdbf5b5643d95f5404e9519b3bf415df17) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `transferFocus` option to `usePopover`. If `true`, the focus will be transferred to the popover content when the tab key is pressed. Default is `true`.
-
-- [#5489](https://github.com/yamada-ui/yamada-ui/pull/5489) [2c464f3](https://github.com/yamada-ui/yamada-ui/commit/2c464f3c0b2436e0d03b283d8c3f9576ba38c063) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the focused style for invalid input was incorrect when the variant was set to "flushed" for `Select`, `Autocomplete`, `DatePicker`, and `ColorPicker`.
-
-- [#5432](https://github.com/yamada-ui/yamada-ui/pull/5432) [bfff6d5](https://github.com/yamada-ui/yamada-ui/commit/bfff6d58e71806b24077c3ad4b3a42cf09f32d9d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - `useCombobox` now returns `popoverProps`.
-
-- [#5432](https://github.com/yamada-ui/yamada-ui/pull/5432) [71baee5](https://github.com/yamada-ui/yamada-ui/commit/71baee56d63f17c847fad6354e4203a0c7a2d72c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where `openOnClick` was not working for `DatePicker`, `ColorPicker`, `Autocomplete`, and `Select`.
-- [371fedb](https://github.com/yamada-ui/yamada-ui/commit/371fedbc66a67ee69d2bcc1a51d2b94ebd26d0ab) Updated dependencies.
-
-## @yamada-ui/cli@2.0.5
-
-このバージョンは、2025年10月27日にリリースされました。
+このバージョンは、2026年2月16日にリリースされました。
 
 ### パッチ変更
 
-- [371fedb](https://github.com/yamada-ui/yamada-ui/commit/371fedbc66a67ee69d2bcc1a51d2b94ebd26d0ab) Updated dependencies.
+- [#5706](https://github.com/yamada-ui/yamada-ui/pull/5706) [1b12488](https://github.com/yamada-ui/yamada-ui/commit/1b1248801bd5229913975da1d84e1b27661acbad) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added new style props.
 
-## @yamada-ui/utils@2.0.4
+- [#5706](https://github.com/yamada-ui/yamada-ui/pull/5706) [1b12488](https://github.com/yamada-ui/yamada-ui/commit/1b1248801bd5229913975da1d84e1b27661acbad) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
 
-このバージョンは、2025年10月27日にリリースされました。
+- [#5650](https://github.com/yamada-ui/yamada-ui/pull/5650) [4c7e42a](https://github.com/yamada-ui/yamada-ui/commit/4c7e42a2fecb9f9cac9c515d3e9f62d3538e736f) Thanks [@SahilJat](https://github.com/SahilJat)! - Fixed an issue where `aria-label` and `aria-labelledby` were not correctly passed to the `input` element in `ColorPicker`, causing accessibility violations.
+
+- [#5657](https://github.com/yamada-ui/yamada-ui/pull/5657) [4f17dfb](https://github.com/yamada-ui/yamada-ui/commit/4f17dfbbcfc4bc8ab7d717adcb52feff1e7ce285) Thanks [@watataku11xx](https://github.com/watataku11xx)! - Fixed a bug where unnecessary HTML tags were rendered when `title` or `description` was not provided.
+
+- [#5236](https://github.com/yamada-ui/yamada-ui/pull/5236) [ec04f5f](https://github.com/yamada-ui/yamada-ui/commit/ec04f5fdf9bd58b05aff517019c623f7af68668a) Thanks [@kaehehehe](https://github.com/kaehehehe)! - Fixed `Carousel` next/prev control buttons affecting slide animations.
+
+- [#5655](https://github.com/yamada-ui/yamada-ui/pull/5655) [d4476e0](https://github.com/yamada-ui/yamada-ui/commit/d4476e021228eb15f49ce581bf6e6651e1326ca6) Thanks [@watataku11xx](https://github.com/watataku11xx)! - Add `tabindex="0"` to scrollable root in `useInfiniteScroll` for keyboard focus (a11y).
+
+- [#5652](https://github.com/yamada-ui/yamada-ui/pull/5652) [0408223](https://github.com/yamada-ui/yamada-ui/commit/04082237b43e7918e01da97d9f8e2519154decd9) Thanks [@SahilJat](https://github.com/SahilJat)! - Fixed a bug where `aria-labelledby` was not set correctly when rendering for the first time or when the element was displayed.
+
+- [#5706](https://github.com/yamada-ui/yamada-ui/pull/5706) [1b12488](https://github.com/yamada-ui/yamada-ui/commit/1b1248801bd5229913975da1d84e1b27661acbad) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added new icons.
+- [1b12488](https://github.com/yamada-ui/yamada-ui/commit/1b1248801bd5229913975da1d84e1b27661acbad) Updated dependencies.
+
+## @yamada-ui/cli@2.0.7
+
+このバージョンは、2026年2月16日にリリースされました。
 
 ### パッチ変更
 
-- [#5495](https://github.com/yamada-ui/yamada-ui/pull/5495) [371fedb](https://github.com/yamada-ui/yamada-ui/commit/371fedbc66a67ee69d2bcc1a51d2b94ebd26d0ab) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added fallback options to browser checks.
+- [#5706](https://github.com/yamada-ui/yamada-ui/pull/5706) [1b12488](https://github.com/yamada-ui/yamada-ui/commit/1b1248801bd5229913975da1d84e1b27661acbad) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+- [1b12488](https://github.com/yamada-ui/yamada-ui/commit/1b1248801bd5229913975da1d84e1b27661acbad) Updated dependencies.
+
+## @yamada-ui/utils@2.0.6
+
+このバージョンは、2026年2月16日にリリースされました。
+
+### パッチ変更
+
+- [#5706](https://github.com/yamada-ui/yamada-ui/pull/5706) [1b12488](https://github.com/yamada-ui/yamada-ui/commit/1b1248801bd5229913975da1d84e1b27661acbad) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.

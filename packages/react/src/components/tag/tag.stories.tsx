@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "#storybook"
-import { COLOR_SCHEMES, noop } from "../../utils"
+import { COLOR_SCHEMES, noop, toTitleCase } from "../../utils"
 import { For } from "../for"
 import { PlusIcon } from "../icon"
 import { Wrap } from "../wrap"
@@ -28,7 +28,7 @@ export const Variant: Story = () => {
       {(column, row, key) => {
         return (
           <Tag key={key} colorScheme={row} variant={column}>
-            Tag
+            {toTitleCase(column)}
           </Tag>
         )
       }}
@@ -42,11 +42,25 @@ export const Size: Story = () => {
       {(column, row, key) => {
         return (
           <Tag key={key} colorScheme={row} size={column}>
-            Tag
+            {toTitleCase(column)}
           </Tag>
         )
       }}
     </PropsTable>
+  )
+}
+
+export const FullRounded: Story = () => {
+  return (
+    <Wrap gap="md">
+      <For each={["solid", "subtle", "surface", "outline"] as const}>
+        {(variant, index) => (
+          <Tag key={index} variant={variant} fullRounded>
+            {toTitleCase(variant)}
+          </Tag>
+        )}
+      </For>
+    </Wrap>
   )
 }
 

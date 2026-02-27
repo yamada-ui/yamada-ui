@@ -8,7 +8,8 @@ import { formatByteStyle } from "./format-byte.style"
 import { useFormatByte } from "./use-format-byte"
 
 export interface FormatByteProps
-  extends HTMLStyledProps<"span">,
+  extends
+    HTMLStyledProps<"span">,
     ThemeProps<FormatByteStyle>,
     FormatBytesOptions {
   /**

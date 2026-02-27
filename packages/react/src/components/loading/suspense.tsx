@@ -23,6 +23,7 @@ export const Suspense: FC<SuspenseProps> = ({
   children,
   fallback,
   loadingScheme = "oval",
+  loadingProps,
   ...rest
 }) => {
   const Component = useLoadingComponent(loadingScheme)
@@ -33,7 +34,7 @@ export const Suspense: FC<SuspenseProps> = ({
       fallback={
         fallback ?? (
           <styled.div boxSize="full" display="center" fontSize="6xl" {...rest}>
-            <Component fontSize="1em" />
+            <Component fontSize="1em" {...loadingProps} />
           </styled.div>
         )
       }

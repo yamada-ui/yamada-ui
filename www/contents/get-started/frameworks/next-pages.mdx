@@ -314,3 +314,61 @@ export default function App({ Component, pageProps }: AppProps) {
 ```
 
 ::::
+
+## Component Integration
+
+You can integrate Next.js components such as [Link](https://nextjs.org/docs/pages/api-reference/components/link) and [Image](https://nextjs.org/docs/pages/api-reference/components/image) with Yamada UI components.
+
+### Link
+
+```tsx
+import type {
+  ButtonProps,
+  HTMLRefAttributes,
+  IconButtonProps,
+  LinkProps,
+  Merge,
+} from "@yamada-ui/react"
+import type { LinkProps as OriginalLinkProps } from "next/link"
+import type { FC } from "react"
+import { Button, IconButton, Link } from "@yamada-ui/react"
+import OriginalLink from "next/link"
+
+export interface NextLinkProps extends Omit<
+  Merge<OriginalLinkProps, LinkProps>,
+  "as" | "ref"
+> {}
+
+export const NextLink: FC<NextLinkProps> = (props) => {
+  return <Link as={OriginalLink} {...props} />
+}
+
+export interface NextLinkButtonProps
+  extends
+    Omit<Merge<OriginalLinkProps, ButtonProps>, "as" | "ref">,
+    HTMLRefAttributes<"a"> {}
+
+export const NextLinkButton: FC<NextLinkButtonProps> = (props) => {
+  return <Button as={OriginalLink} {...props} />
+}
+
+export interface NextLinkIconButtonProps
+  extends
+    Omit<Merge<OriginalLinkProps, IconButtonProps>, "as" | "ref">,
+    HTMLRefAttributes<"a"> {}
+
+export const NextLinkIconButton: FC<NextLinkIconButtonProps> = (props) => {
+  return <IconButton as={OriginalLink} {...props} />
+}
+```
+
+### Image
+
+```tsx
+import { styled } from "@yamada-ui/react"
+import Image from "next/image"
+
+export const AppImage = styled(Image, {
+  forwardProps: ["fill", "height", "width"],
+})
+```

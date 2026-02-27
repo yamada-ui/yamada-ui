@@ -276,24 +276,23 @@ export {
   useCalendarDescendants,
 }
 
-interface CalendarContext
-  extends Omit<
-    UseCalendarReturn,
-    | "descendants"
-    | "getMonthProps"
-    | "getMonthSelectProps"
-    | "getNavigationProps"
-    | "getNextButtonProps"
-    | "getPrevButtonProps"
-    | "getRootProps"
-    | "getStatusProps"
-    | "getWeekdayProps"
-    | "getYearSelectProps"
-    | "monthDays"
-    | "monthItems"
-    | "weekdays"
-    | "yearItems"
-  > {}
+interface CalendarContext extends Omit<
+  UseCalendarReturn,
+  | "descendants"
+  | "getMonthProps"
+  | "getMonthSelectProps"
+  | "getNavigationProps"
+  | "getNextButtonProps"
+  | "getPrevButtonProps"
+  | "getRootProps"
+  | "getStatusProps"
+  | "getWeekdayProps"
+  | "getYearSelectProps"
+  | "monthDays"
+  | "monthItems"
+  | "weekdays"
+  | "yearItems"
+> {}
 
 const [CalendarContext, useCalendarContext] = createContext<CalendarContext>({
   name: "CalendarContext",
@@ -321,10 +320,6 @@ export interface UseCalendarProps<
    * @default false
    */
   disabled?: boolean
-  /**
-   * Callback function to determine whether the day should be disabled.
-   */
-  excludeDate?: (date: Date) => boolean
   /**
    * The format used for conversion.
    * Check the docs to see the format of possible modifiers you can pass.
@@ -396,6 +391,10 @@ export interface UseCalendarProps<
    * @default [0, 6]
    */
   weekendDays?: number[]
+  /**
+   * Callback function to determine whether the day should be disabled.
+   */
+  excludeDate?: (date: Date) => boolean
   /**
    * The callback invoked when value state changes.
    */

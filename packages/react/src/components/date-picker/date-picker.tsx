@@ -25,13 +25,16 @@ import { datePickerStyle } from "./date-picker.style"
 import { useDatePicker } from "./use-date-picker"
 
 interface ComponentContext
-  extends Pick<UseDatePickerReturn, "getInputProps" | "range" | "separator">,
+  extends
+    Pick<UseDatePickerReturn, "getInputProps" | "range" | "separator">,
     Pick<DatePickerProps, "inputProps"> {}
 
 export interface DatePickerProps<
   Multiple extends boolean = false,
   Range extends boolean = false,
-> extends Omit<
+>
+  extends
+    Omit<
       HTMLStyledProps,
       "defaultValue" | "offset" | "onChange" | "ref" | "value"
     >,

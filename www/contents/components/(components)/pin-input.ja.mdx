@@ -222,4 +222,37 @@ return (
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`Field.Root`を使用しない場合は、`PinInput.Root`に`aria-label`または`aria-labelledby`を設定します。
+
+```tsx
+<PinInput.Root aria-label="Please one-time password" />
+```
+
+```tsx
+<VStack gap="sm">
+  <Text as="h3" id="label">
+    Please one-time password
+  </Text>
+
+  <PinInput.Root aria-labelledby="label" />
+</VStack>
+```
+
+### キーボード操作
+
+| キー         | 説明                               | 状態 |
+| ------------ | ---------------------------------- | ---- |
+| `Tab`        | フォーカスを次の項目に移動します。 | -    |
+| `ArrowRight` | フォーカスを次の項目に移動します。 | -    |
+| `ArrowLeft`  | フォーカスを前の項目に移動します。 | -    |
+
+### ARIAロールと属性
+
+| コンポーネント   | ロールと属性       | 使い方                                                                                                                                                                                           |
+| ---------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `PinInput.Root`  | `role="group"`     | グループであることを示します。                                                                                                                                                                   |
+| `PinInput.Field` | `aria-invalid`     | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                            |
+|                  | `aria-disabled`    | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                                                           |
+|                  | `aria-describedby` | `PinInput.Field`が`Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
+|                  | `aria-readonly`    | `readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                                           |
+|                  | `aria-required`    | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                           |

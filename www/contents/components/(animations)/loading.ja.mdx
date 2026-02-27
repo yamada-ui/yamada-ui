@@ -36,6 +36,7 @@ import { Loading } from "@workspaces/ui"
 <Loading.Puff />
 <Loading.Rings />
 <Loading.Circles />
+<Loading.Suspense />
 ```
 
 ### バリアントを変更する
@@ -64,6 +65,56 @@ import { Loading } from "@workspaces/ui"
   <Loading.Rings color="blue.500" fontSize="5xl" />
   <Loading.Circles color="cyan.500" fontSize="6xl" />
 </Wrap>
+```
+
+### Suspenseを使う
+
+```tsx preview functional client
+const SuspendButton = ({ children }: { children: React.ReactNode }) => {
+  const [suspend, setSuspend] = useState(false)
+
+  if (suspend) {
+    throw new Promise((resolve) => {
+      setTimeout(() => {
+        setSuspend(false)
+        resolve()
+      }, 2000)
+    })
+  }
+
+  return (
+    <Button onClick={() => setSuspend(true)} w="full">
+      {children}
+    </Button>
+  )
+}
+
+return (
+  <Wrap gap="sm">
+    <For
+      each={Object.entries({
+        oval: "red.500",
+        grid: "orange.500",
+        audio: "yellow.500",
+        dots: "green.500",
+        puff: "teal.500",
+        rings: "blue.500",
+        circles: "cyan.500",
+      })}
+    >
+      {([loadingScheme, color]) => (
+        <Box key={loadingScheme} w="20" h="10">
+          <Loading.Suspense
+            loadingScheme={loadingScheme}
+            loadingProps={{ fontSize: "2xl", color }}
+          >
+            <SuspendButton>{loadingScheme}</SuspendButton>
+          </Loading.Suspense>
+        </Box>
+      )}
+    </For>
+  </Wrap>
+)
 ```
 
 ## Props

@@ -21,13 +21,15 @@ import {
 } from "./checkbox"
 import { CheckboxGroupContext, useCheckboxGroup } from "./use-checkbox-group"
 
-export interface CheckboxGroupItem<Y extends string = string>
-  extends CheckboxProps<Y> {
+export interface CheckboxGroupItem<
+  Y extends string = string,
+> extends CheckboxProps<Y> {
   label: ReactNode
 }
 
 export interface CheckboxGroupRootProps<Y extends string = string>
-  extends Omit<
+  extends
+    Omit<
       WithoutThemeProps<GroupProps, CheckboxStyle>,
       "defaultValue" | "onChange" | "value"
     >,

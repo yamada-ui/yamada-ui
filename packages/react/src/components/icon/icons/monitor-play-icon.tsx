@@ -1,6 +1,8 @@
 "use client"
 
-import { MonitorPlay } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { MonitorPlay as OriginalMonitorPlayIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const MonitorPlayIcon = component(Icon)({ as: MonitorPlay })
+export const MonitorPlayIcon = component(Icon)({
+  as: OriginalMonitorPlayIcon,
+}) as Component<"svg", IconProps>

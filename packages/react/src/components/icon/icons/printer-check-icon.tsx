@@ -1,6 +1,8 @@
 "use client"
 
-import { PrinterCheck } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { PrinterCheck as OriginalPrinterCheckIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const PrinterCheckIcon = component(Icon)({ as: PrinterCheck })
+export const PrinterCheckIcon = component(Icon)({
+  as: OriginalPrinterCheckIcon,
+}) as Component<"svg", IconProps>

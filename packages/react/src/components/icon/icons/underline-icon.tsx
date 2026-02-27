@@ -1,6 +1,8 @@
 "use client"
 
-import { Underline } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Underline as OriginalUnderlineIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const UnderlineIcon = component(Icon)({ as: Underline })
+export const UnderlineIcon = component(Icon)({
+  as: OriginalUnderlineIcon,
+}) as Component<"svg", IconProps>

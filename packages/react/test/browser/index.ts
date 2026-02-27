@@ -1,2 +1,2 @@
 export * from "./render"
-export { page } from "@vitest/browser/context"
+export { page } from "vitest/browser"

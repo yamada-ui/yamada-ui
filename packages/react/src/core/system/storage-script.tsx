@@ -5,10 +5,10 @@ import type { Storage } from "./storage-manager"
 import { COLOR_MODE_STORAGE_KEY, THEME_SCHEME_STORAGE_KEY } from "../constant"
 
 export interface StorageScriptProps<Y extends string> {
-  key?: string
-  type?: Storage
   defaultValue?: Y
+  key?: string
   nonce?: string
+  type?: Storage
 }
 
 export function getStorageScript<Y extends string>(

@@ -1,6 +1,8 @@
 "use client"
 
-import { ChartColumnBig } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { ChartColumnBig as OriginalChartColumnBigIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const ChartColumnBigIcon = component(Icon)({ as: ChartColumnBig })
+export const ChartColumnBigIcon = component(Icon)({
+  as: OriginalChartColumnBigIcon,
+}) as Component<"svg", IconProps>

@@ -25,6 +25,7 @@ export interface DonutChartProps<Y extends Dict = Dict>
       | "nameKey"
       | "pieProps"
       | "radarProps"
+      | "radialProps"
       | "radiusAxisProps"
       | "render"
       | "series"
@@ -82,9 +83,7 @@ export const DonutChart = withContext<"div", DonutChartProps>(
     )
     const labelFormatter = useCallback<
       NonNullable<ChartTooltipProps["labelFormatter"]>
-    >((label, payload) => {
-      return label ?? payload[0]?.dataKey
-    }, [])
+    >(() => null, [])
 
     return (
       <PolarChart

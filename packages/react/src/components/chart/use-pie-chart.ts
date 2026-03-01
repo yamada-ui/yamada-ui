@@ -13,12 +13,8 @@ export interface UsePieChartProps<Y extends Dict>
       | "accessibilityLayer"
       | "cx"
       | "cy"
-      | "endAngle"
-      | "innerRadius"
       | "layout"
-      | "outerRadius"
       | "responsive"
-      | "startAngle"
       | "syncId"
       | "syncMethod"
     > {
@@ -33,12 +29,8 @@ export const usePieChart = <Y extends Dict>({
   cx,
   cy,
   data,
-  endAngle,
-  innerRadius,
   layout,
-  outerRadius,
   responsive,
-  startAngle,
   syncId,
   syncMethod,
   ...rest
@@ -54,31 +46,14 @@ export const usePieChart = <Y extends Dict>({
       cx,
       cy,
       data,
-      endAngle,
-      innerRadius,
       layout,
       margin: { left: 16, right: 16 },
-      outerRadius,
       responsive,
-      startAngle,
       syncId,
       syncMethod,
       ...props,
     }),
-    [
-      accessibilityLayer,
-      cx,
-      cy,
-      data,
-      endAngle,
-      innerRadius,
-      layout,
-      outerRadius,
-      responsive,
-      startAngle,
-      syncId,
-      syncMethod,
-    ],
+    [accessibilityLayer, cx, cy, data, layout, responsive, syncId, syncMethod],
   )
 
   return {

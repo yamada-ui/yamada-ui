@@ -18,8 +18,8 @@ export default meta
 
 interface Data {
   browser: string
-  downloads: null | number
-  visits: null | number
+  downloads: number
+  visits: number
   fill?: CSSProps["fill"]
 }
 
@@ -549,26 +549,19 @@ export const CenterLabel: Story = () => {
   )
   const data = useMemo(() => DonutChart.mergeData(createData()), [])
   const total = useMemo(
-    () => data.reduce((acc, { visits }) => acc + (visits ?? 0), 0),
+    () => data.reduce((acc, { visits }) => acc + visits, 0),
     [data],
   )
 
   return (
     <>
-      <DonutChart.Root
-        data={data}
-        series={series}
-        tooltipProps={{ labelFormatter: () => null }}
-      >
+      <DonutChart.Root data={data} series={series}>
         <DonutChart.Label fontSize="5xl" fontWeight="bold" position="center">
           Visitors
         </DonutChart.Label>
       </DonutChart.Root>
 
-      <DonutChart.Root
-        data={data}
-        tooltipProps={{ labelFormatter: () => null }}
-      >
+      <DonutChart.Root data={data}>
         <DonutChart.Donut dataKey="visits" nameKey="browser">
           <DonutChart.Label
             content={({ className, viewBox }) => {
@@ -791,8 +784,6 @@ export const Formatter: Story = () => {
           Number(value).toLocaleString(),
           toTitleCase(name),
         ],
-        labelFormatter: (_, [data]) =>
-          toTitleCase(isString(data?.dataKey) ? data.dataKey : ""),
       }}
     />
   )

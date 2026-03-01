@@ -9,13 +9,14 @@ import type {
   PolarGridProps,
   PolarRadiusAxisProps,
   RadarProps,
+  RadialBarProps,
   RenderableText,
   SectorProps,
   TextProps,
 } from "recharts"
 import type { TickItem } from "recharts/types/util/types"
 import type { HTMLProps, PropGetter } from "../../core"
-import type { Merge } from "../../utils"
+import type { Dict, Merge } from "../../utils"
 import { isValidElement, useCallback, useMemo } from "react"
 import { dataAttr, isFunction, isObject, isUndefined } from "../../utils"
 import { useChartContext } from "./use-chart"
@@ -1169,3 +1170,193 @@ export const usePolarGrid = ({
 }
 
 export type UsePolarGridReturn = ReturnType<typeof usePolarGrid>
+
+export interface UseChartRadialProps<Y extends Dict = Dict> extends Merge<
+  HTMLProps<"svg">,
+  Pick<
+    RadialBarProps,
+    | "activeShape"
+    | "angleAxisId"
+    | "animationBegin"
+    | "animationDuration"
+    | "animationEasing"
+    | "background"
+    | "barSize"
+    | "cornerIsExternal"
+    | "cornerRadius"
+    | "dataKey"
+    | "forceCornerRadius"
+    | "hide"
+    | "isAnimationActive"
+    | "label"
+    | "legendType"
+    | "maxBarSize"
+    | "onAnimationEnd"
+    | "onAnimationStart"
+    | "onClick"
+    | "onMouseDown"
+    | "onMouseEnter"
+    | "onMouseLeave"
+    | "onMouseMove"
+    | "onMouseOut"
+    | "onMouseOver"
+    | "onMouseUp"
+    | "radius"
+    | "radiusAxisId"
+    | "shape"
+    | "stackId"
+    | "tooltipType"
+    | "zIndex"
+  >
+> {
+  /**
+   * The key to use for the name.
+   */
+  nameKey: keyof Y
+}
+
+export const useChartRadial = <Y extends Dict>({
+  activeShape,
+  angleAxisId,
+  animationBegin,
+  animationDuration,
+  animationEasing,
+  background: backgroundProp,
+  barSize,
+  cornerIsExternal,
+  stackId,
+  cornerRadius = !stackId ? 4 : undefined,
+  dataKey,
+  forceCornerRadius,
+  hide,
+  isAnimationActive = false,
+  label,
+  legendType,
+  maxBarSize,
+  nameKey,
+  radius,
+  radiusAxisId,
+  shape: shapeProp,
+  tooltipType,
+  zIndex,
+  onAnimationEnd,
+  onAnimationStart,
+  onClick,
+  onMouseDown,
+  onMouseEnter,
+  onMouseLeave,
+  onMouseMove,
+  onMouseOut,
+  onMouseOver,
+  onMouseUp,
+  ...rest
+}: UseChartRadialProps<Y>) => {
+  const shape = useMemo<UseChartRadialProps<Y>["shape"]>(() => {
+    if (isFunction(shapeProp)) {
+      return (props: any) => {
+        props.className = props.className?.replace(/\s*\bundefined\b/g, "")
+
+        const name = props.payload?.[nameKey]
+
+        return shapeProp({ name, ...props })
+      }
+    } else {
+      return shapeProp
+    }
+  }, [nameKey, shapeProp])
+  const background = useMemo<UseChartRadialProps<Y>["background"]>(() => {
+    if (!backgroundProp) return backgroundProp
+    if (isFunction(backgroundProp) || isValidElement(backgroundProp))
+      return backgroundProp
+
+    return {
+      fill: "",
+      ...(backgroundProp !== true ? backgroundProp : {}),
+    }
+  }, [backgroundProp])
+
+  const getRootProps: PropGetter<"svg"> = useCallback(
+    (props) => ({ ...rest, ...props }),
+    [rest],
+  )
+
+  const getRadialProps: PropGetter<
+    Partial<RadialBarProps>,
+    undefined,
+    RadialBarProps
+  > = useCallback(
+    (props) => ({
+      activeShape,
+      angleAxisId,
+      animationBegin,
+      animationDuration,
+      animationEasing,
+      background,
+      barSize,
+      cornerIsExternal,
+      cornerRadius,
+      dataKey,
+      forceCornerRadius,
+      hide,
+      isAnimationActive,
+      label,
+      legendType,
+      maxBarSize,
+      radius,
+      radiusAxisId,
+      shape,
+      stackId,
+      tooltipType,
+      zIndex,
+      onAnimationEnd,
+      onAnimationStart,
+      onClick,
+      onMouseDown,
+      onMouseEnter,
+      onMouseLeave,
+      onMouseMove,
+      onMouseOut,
+      onMouseOver,
+      onMouseUp,
+      ...props,
+    }),
+    [
+      activeShape,
+      angleAxisId,
+      animationBegin,
+      animationDuration,
+      animationEasing,
+      background,
+      barSize,
+      cornerIsExternal,
+      cornerRadius,
+      dataKey,
+      forceCornerRadius,
+      hide,
+      isAnimationActive,
+      label,
+      legendType,
+      maxBarSize,
+      onAnimationEnd,
+      onAnimationStart,
+      onClick,
+      onMouseDown,
+      onMouseEnter,
+      onMouseLeave,
+      onMouseMove,
+      onMouseOut,
+      onMouseOver,
+      onMouseUp,
+      radius,
+      radiusAxisId,
+      shape,
+      stackId,
+      tooltipType,
+      zIndex,
+    ],
+  )
+
+  return { getRadialProps, getRootProps }
+}
+
+export type UseChartRadialReturn = ReturnType<typeof useChartRadial>

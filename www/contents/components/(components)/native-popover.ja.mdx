@@ -1,10 +1,10 @@
 ---
 title: NativePopover
-description: "`NativePopover`は、ネイティブHTML Popover APIを使用して要素の周りにフローティングして情報を表示するコンポーネントです。"
+description: "`NativePopover`は、HTML Popover APIを使用して要素の周りにフローティングして情報を表示するコンポーネントです。"
+status: new
 storybook: components-native-popover--basic
 source: components/native-popover
 style: components/native-popover/native-popover.style.ts
-status: new
 ---
 
 ```tsx preview
@@ -23,7 +23,7 @@ status: new
 ```
 
 :::note
-`NativePopover`はネイティブHTML Popover APIを使用しており、通常の`Popover`コンポーネントと比較して、パフォーマンスとアクセシビリティが向上しています。ただし、Popover APIをサポートしているモダンブラウザが必要です。
+`NativePopover`はHTML Popover APIを使用しており、`Popover`コンポーネントと比較して、パフォーマンスとアクセシビリティが向上しています。ただし、HTML Popover APIをサポートしているブラウザが必要です。
 :::
 
 ## 使い方
@@ -221,47 +221,45 @@ import { NativePopover } from "@workspaces/ui"
 
 ### ポップオーバーのモード
 
-ネイティブHTML Popover APIは、ポップオーバーの動作を制御するための異なるモードをサポートしています。これは`NativePopover`を通常の`Popover`コンポーネントと区別する重要な機能です。
+HTML Popover APIは、ポップオーバーの動作を制御するための異なる[モード](https://developer.mozilla.org/ja/docs/Web/HTML/Reference/Global_attributes/popover#値)をサポートしています。これは`NativePopover`を`Popover`コンポーネントと区別する重要な機能です。
 
 ```tsx preview
 <Wrap gap="md">
   <NativePopover.Root popover="auto">
     <NativePopover.Trigger>
-      <Button>Auto (default)</Button>
+      <Button>Click Me</Button>
     </NativePopover.Trigger>
 
     <NativePopover.Content>
-      <NativePopover.Header>Auto Popover</NativePopover.Header>
+      <NativePopover.Header>ベジータ!</NativePopover.Header>
       <NativePopover.Body>
-        Auto popover closes automatically when clicking outside or opening
-        another popover.
+        がんばれカカロット……お前がナンバー１だ！！
       </NativePopover.Body>
     </NativePopover.Content>
   </NativePopover.Root>
 
   <NativePopover.Root popover="hint">
     <NativePopover.Trigger>
-      <Button>Hint</Button>
+      <Button>Click Me</Button>
     </NativePopover.Trigger>
 
     <NativePopover.Content>
-      <NativePopover.Header>Hint Popover</NativePopover.Header>
+      <NativePopover.Header>ベジータ!</NativePopover.Header>
       <NativePopover.Body>
-        Hint popover does not close auto popovers when displayed, but closes
-        other hint popovers.
+        がんばれカカロット……お前がナンバー１だ！！
       </NativePopover.Body>
     </NativePopover.Content>
   </NativePopover.Root>
 
   <NativePopover.Root popover="manual">
     <NativePopover.Trigger>
-      <Button>Manual</Button>
+      <Button>Click Me</Button>
     </NativePopover.Trigger>
 
     <NativePopover.Content>
-      <NativePopover.Header>Manual Popover</NativePopover.Header>
+      <NativePopover.Header>ベジータ!</NativePopover.Header>
       <NativePopover.Body>
-        Manual popover must be explicitly closed with the trigger button.
+        がんばれカカロット……お前がナンバー１だ！！
       </NativePopover.Body>
     </NativePopover.Content>
   </NativePopover.Root>
@@ -316,3 +314,7 @@ import { NativePopover } from "@workspaces/ui"
   </NativePopover.Content>
 </NativePopover.Root>
 ```
+
+## Props
+
+<PropsTable name="native-popover" />

@@ -36,14 +36,21 @@ function getColor(system: System) {
       color = tokenToVar(system)("colors", color, fallbackColor)
     }
 
-    if (percent && !percent.endsWith("%")) percent = `${percent}%`
+    if (percent && !percent.startsWith("var") && !percent.endsWith("%"))
+      percent = `${percent}%`
 
     return !percent ? color : `${color} ${percent}`
   }
 }
 
 function omitPercent(value?: string) {
-  if (value?.endsWith("%")) return value.replace(/\d{1,3}%$/, "").trim()
+  if (!value) return value
+
+  if (value.endsWith("%")) return value.replace(/\d{1,3}%$/, "").trim()
+
+  const values = value.trim().match(/[a-z-]+\([^)]*\)|[^\s]+/gi) ?? []
+
+  if (values.length > 1) return values[0]
 
   return value
 }

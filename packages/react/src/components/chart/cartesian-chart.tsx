@@ -6,16 +6,14 @@ import type {
   DotProps,
   LabelListProps,
   LabelProps,
-  RenderableText,
 } from "recharts"
 import type {
-  DataKey,
-  DotItemDotProps,
   XAxisTickContentProps,
   YAxisTickContentProps,
 } from "recharts/types/util/types"
 import type {
   CSSObject,
+  CSSProps,
   GenericsComponent,
   HTMLProps,
   HTMLStyledProps,
@@ -23,19 +21,28 @@ import type {
 } from "../../core"
 import type { Dict, Merge } from "../../utils"
 import type { CartesianChartStyle } from "./cartesian-chart.style"
-import type { ChartProps } from "./chart"
 import type {
+  ChartActiveDot,
+  ChartDot,
+  ChartLabel,
+  ChartLabelList,
+  ChartProps,
+  ChartTickLine,
+} from "./chart"
+import type {
+  UseChartAreaProps,
+  UseChartBarProps,
   UseChartGridProps,
-  UseChartLabelListProps,
   UseChartLineProps,
   UseChartReferenceLineProps,
   UseChartXAxisProps,
   UseChartYAxisProps,
 } from "./use-cartesian-chart"
-import { cloneElement, isValidElement, useMemo } from "react"
+import { cloneElement, isValidElement, useId, useMemo } from "react"
 import {
+  Area,
+  Bar,
   CartesianGrid,
-  LabelList,
   Line,
   ReferenceLine,
   XAxis,
@@ -48,13 +55,15 @@ import {
   styled,
   useSystem,
   useTheme,
+  varAttr,
 } from "../../core"
 import { cx, isFunction, isObject, splitObject } from "../../utils"
 import { cartesianChartStyle } from "./cartesian-chart.style"
 import { Chart, useChartComponentContext } from "./chart"
 import {
+  useChartArea,
+  useChartBar,
   useChartGrid,
-  useChartLabelList,
   useChartLine,
   useChartReferenceLine,
   useChartXAxis,
@@ -65,11 +74,93 @@ const shouldForwardProp = createShouldForwardProp()
 
 interface ComponentContext extends Pick<
   CartesianChartProps,
-  "gridProps" | "lineProps" | "referenceLineProps" | "xAxisProps" | "yAxisProps"
+  | "areaProps"
+  | "barProps"
+  | "gridProps"
+  | "lineProps"
+  | "referenceLineProps"
+  | "xAxisProps"
+  | "yAxisProps"
 > {}
 
 export interface CartesianChartProps<Y extends Dict = Dict>
   extends ChartProps<Y>, ThemeProps<CartesianChartStyle> {
+  /**
+   * The fill color of the active dots.
+   */
+  activeDotFill?: CSSProps["fill"]
+  /**
+   * The radius of the active dots.
+   */
+  activeDotRadius?: CSSProps["r"]
+  /**
+   * The stroke color of the active dots.
+   */
+  activeDotStroke?: CSSProps["stroke"]
+  /**
+   * The stroke width of the active dots.
+   */
+  activeDotStrokeWidth?: CSSProps["strokeWidth"]
+  /**
+   * The fill opacity of the area.
+   */
+  areaFillOpacity?: CSSProps["fillOpacity"]
+  /**
+   * The fill color of the dots.
+   */
+  dotFill?: CSSProps["fill"]
+  /**
+   * The radius of the dots.
+   */
+  dotRadius?: CSSProps["r"]
+  /**
+   * The stroke color of the dots.
+   */
+  dotStroke?: CSSProps["stroke"]
+  /**
+   * The stroke width of the dots.
+   */
+  dotStrokeWidth?: CSSProps["strokeWidth"]
+  /**
+   * The stroke color of the grid.
+   */
+  gridStroke?: CSSProps["stroke"]
+  /**
+   * The opacity of the inactive lines.
+   */
+  inactiveLineOpacity?: CSSProps["opacity"]
+  /**
+   * The color of the lines.
+   */
+  lineColor?: CSSProps["color"]
+  /**
+   * The stroke color of the lines.
+   */
+  lineStroke?: CSSProps["stroke"]
+  /**
+   * The stroke width of the lines.
+   */
+  lineStrokeWidth?: CSSProps["strokeWidth"]
+  /**
+   * The color of the reference lines.
+   */
+  referenceLineColor?: CSSProps["color"]
+  /**
+   * The stroke color of the reference lines.
+   */
+  referenceLineStroke?: CSSProps["stroke"]
+  /**
+   * The stroke width of the reference lines.
+   */
+  referenceLineStrokeWidth?: CSSProps["strokeWidth"]
+  /**
+   * The text color of the reference lines.
+   */
+  referenceLineTextColor?: CSSProps["color"]
+  /**
+   * The text fill color of the reference lines.
+   */
+  referenceLineTextFill?: CSSProps["fill"]
   /**
    * If `true`, grid is visible.
    *
@@ -89,13 +180,53 @@ export interface CartesianChartProps<Y extends Dict = Dict>
    */
   withYAxis?: boolean
   /**
+   * The stroke color of the x-axis lines.
+   */
+  xAxisLineStroke?: CSSProps["stroke"]
+  /**
+   * The stroke width of the x-axis lines.
+   */
+  xAxisLineStrokeWidth?: CSSProps["strokeWidth"]
+  /**
+   * The text color of the x-axis.
+   */
+  xAxisTextColor?: CSSProps["color"]
+  /**
+   * The text fill color of the x-axis.
+   */
+  xAxisTextFill?: CSSProps["fill"]
+  /**
+   * The stroke color of the y-axis lines.
+   */
+  yAxisLineStroke?: CSSProps["stroke"]
+  /**
+   * The stroke width of the y-axis lines.
+   */
+  yAxisLineStrokeWidth?: CSSProps["strokeWidth"]
+  /**
+   * The text color of the y-axis.
+   */
+  yAxisTextColor?: CSSProps["color"]
+  /**
+   * The text fill color of the y-axis.
+   */
+  yAxisTextFill?: CSSProps["fill"]
+  /**
+   * Props for the area component.
+   */
+  areaProps?: Omit<ChartAreaProps, "data" | "dataKey">
+  /**
+   * Props for the bar component.
+   */
+  barProps?: Omit<ChartBarProps, "dataKey">
+  /**
    * Props for the grid component.
    */
   gridProps?: ChartGridProps
   /**
    * Props for the line component.
    */
-  lineProps?: Omit<ChartLineProps, "dataKey">
+  lineProps?: Omit<ChartLineProps, "data" | "dataKey">
   /**
    * Props for the reference line component.
    */
@@ -132,6 +263,8 @@ export const CartesianChart = withProvider(
     withGrid = true,
     withXAxis = true,
     withYAxis = false,
+    areaProps,
+    barProps,
     gridProps,
     lineProps,
     referenceLineProps,
@@ -159,13 +292,23 @@ export const CartesianChart = withProvider(
     )
     const componentContext = useMemo(
       () => ({
+        areaProps,
+        barProps,
         gridProps,
         lineProps,
         referenceLineProps,
         xAxisProps,
         yAxisProps,
       }),
-      [gridProps, lineProps, referenceLineProps, xAxisProps, yAxisProps],
+      [
+        areaProps,
+        barProps,
+        gridProps,
+        lineProps,
+        referenceLineProps,
+        xAxisProps,
+        yAxisProps,
+      ],
     )
 
     return (
@@ -175,36 +318,70 @@ export const CartesianChart = withProvider(
     )
   },
   "root",
-)() as GenericsComponent<{
+)(
+  undefined,
+  ({
+    activeDotFill,
+    activeDotRadius,
+    activeDotStroke,
+    activeDotStrokeWidth,
+    areaFillOpacity,
+    dotFill,
+    dotRadius,
+    dotStroke,
+    dotStrokeWidth,
+    gridStroke,
+    inactiveLineOpacity,
+    lineColor,
+    lineStroke,
+    lineStrokeWidth,
+    referenceLineColor,
+    referenceLineStroke,
+    referenceLineStrokeWidth,
+    referenceLineTextColor,
+    referenceLineTextFill,
+    xAxisLineStroke,
+    xAxisLineStrokeWidth,
+    xAxisTextColor,
+    xAxisTextFill,
+    yAxisLineStroke,
+    yAxisLineStrokeWidth,
+    yAxisTextColor,
+    yAxisTextFill,
+    ...rest
+  }) => ({
+    "--active-dot-fill": varAttr(activeDotFill, "colors"),
+    "--active-dot-r": activeDotRadius,
+    "--active-dot-stroke": varAttr(activeDotStroke, "colors"),
+    "--active-dot-stroke-width": activeDotStrokeWidth,
+    "--area-fill-opacity": areaFillOpacity,
+    "--dot-fill": varAttr(dotFill, "colors"),
+    "--dot-r": dotRadius,
+    "--dot-stroke": varAttr(dotStroke, "colors"),
+    "--dot-stroke-width": dotStrokeWidth,
+    "--grid-stroke": varAttr(gridStroke, "colors"),
+    "--inactive-line-opacity": inactiveLineOpacity,
+    "--line-color": varAttr(lineColor, "colors"),
+    "--line-stroke": varAttr(lineStroke, "colors"),
+    "--line-stroke-width": lineStrokeWidth,
+    "--reference-line-color": varAttr(referenceLineColor, "colors"),
+    "--reference-line-stroke": varAttr(referenceLineStroke, "colors"),
+    "--reference-line-stroke-width": referenceLineStrokeWidth,
+    "--reference-line-text-color": varAttr(referenceLineTextColor, "colors"),
+    "--reference-line-text-fill": varAttr(referenceLineTextFill, "colors"),
+    "--x-axis-line-stroke": varAttr(xAxisLineStroke, "colors"),
+    "--x-axis-line-stroke-width": xAxisLineStrokeWidth,
+    "--x-axis-text-color": varAttr(xAxisTextColor, "colors"),
+    "--x-axis-text-fill": varAttr(xAxisTextFill, "colors"),
+    "--y-axis-line-stroke": varAttr(yAxisLineStroke, "colors"),
+    "--y-axis-line-stroke-width": yAxisLineStrokeWidth,
+    "--y-axis-text-color": varAttr(yAxisTextColor, "colors"),
+    "--y-axis-text-fill": varAttr(yAxisTextFill, "colors"),
+    ...rest,
+  }),
+) as GenericsComponent<{
   <Y extends Dict>(props: CartesianChartProps<Y>): ReactElement
 }>
-
-export type ChartLabel =
-  | ((props: any) => ReactElement | RenderableText)
-  | boolean
-  | (Merge<
-      HTMLStyledProps<"text">,
-      Pick<
-        LabelProps,
-        | "angle"
-        | "content"
-        | "formatter"
-        | "index"
-        | "labelRef"
-        | "offset"
-        | "parentViewBox"
-        | "position"
-        | "textBreakAll"
-        | "value"
-        | "viewBox"
-        | "zIndex"
-      >
-    > & { dataKey?: DataKey<any> })
-  | number
-  | ReactElement
-  | string
-
-export type ChartTickLine = boolean | HTMLStyledProps<"line">
 
 export type ChartXAxisTick =
   | ((props: XAxisTickContentProps) => ReactNode)
@@ -231,7 +408,7 @@ export interface ChartXAxisProps extends Merge<
   /**
    * The tick line to use for the axis.
    *
-   * @default true
+   * @default false
    */
   tickLine?: ChartTickLine
 }
@@ -239,6 +416,7 @@ export interface ChartXAxisProps extends Merge<
 export const ChartXAxis = withContext<"svg", ChartXAxisProps>((props) => {
   const { xAxisProps } = useComponentContext()
   const {
+    children,
     label: labelProp = false,
     tick: tickProp = true,
     tickLine: tickLineProp = false,
@@ -328,7 +506,7 @@ export const ChartXAxis = withContext<"svg", ChartXAxisProps>((props) => {
 
   return (
     <styled.svg asChild {...getRootProps()}>
-      <XAxis {...getXAxisProps()} />
+      <XAxis {...getXAxisProps()}>{children}</XAxis>
     </styled.svg>
   )
 }, "xAxis")()
@@ -358,7 +536,7 @@ export interface ChartYAxisProps extends Merge<
   /**
    * The tick line to use for the axis.
    *
-   * @default true
+   * @default false
    */
   tickLine?: ChartTickLine
 }
@@ -366,6 +544,7 @@ export interface ChartYAxisProps extends Merge<
 export const ChartYAxis = withContext<"svg", ChartYAxisProps>((props) => {
   const { yAxisProps } = useComponentContext()
   const {
+    children,
     label: labelProp = false,
     tick: tickProp = true,
     tickLine: tickLineProp = false,
@@ -455,7 +634,7 @@ export const ChartYAxis = withContext<"svg", ChartYAxisProps>((props) => {
 
   return (
     <styled.svg asChild {...getRootProps()}>
-      <YAxis {...getYAxisProps()} />
+      <YAxis {...getYAxisProps()}>{children}</YAxis>
     </styled.svg>
   )
 }, "yAxis")()
@@ -479,22 +658,14 @@ export const ChartGrid = withContext<"line", ChartGridProps>((props) => {
   )
 }, "grid")()
 
-export type ChartDot =
-  | ((props: DotItemDotProps) => ReactNode)
-  | boolean
-  | Merge<Partial<DotProps>, HTMLStyledProps<"circle">>
-  | ReactElement
-
-export type ChartActiveDot =
-  | ((props: ActiveDotProps) => ReactNode)
-  | boolean
-  | Merge<Partial<ActiveDotProps>, HTMLStyledProps<"circle">>
-  | ReactElement
-
 export interface ChartLineProps<Y extends Dict = Dict> extends Merge<
   HTMLStyledProps<"line">,
   Omit<UseChartLineProps, "activeDot" | "data" | "dataKey" | "dot" | "label">
 > {
+  /**
+   * The key of a group of data which should be unique in an chart.
+   */
+  dataKey: keyof Y
   /**
    * The active dot to use for the line.
    *
@@ -506,13 +677,9 @@ export interface ChartLineProps<Y extends Dict = Dict> extends Merge<
    */
   data?: Y[]
   /**
-   * The key of a group of data which should be unique in an chart.
-   */
-  dataKey: keyof Y
-  /**
    * The dot to use for the line.
    *
-   * @default true
+   * @default false
    */
   dot?: ChartDot
   /**
@@ -520,11 +687,7 @@ export interface ChartLineProps<Y extends Dict = Dict> extends Merge<
    *
    * @default false
    */
-  label?:
-    | ((props: LabelProps) => ReactElement | RenderableText)
-    | boolean
-    | ChartLabelListProps
-    | ReactElement
+  label?: ChartLabelList
 }
 
 export const ChartLine = withContext<"line", ChartLineProps>((props) => {
@@ -540,7 +703,7 @@ export const ChartLine = withContext<"line", ChartLineProps>((props) => {
   const system = useSystem()
   const { theme } = useTheme()
   const { varMap } = useChartComponentContext()
-  const color = varMap[dataKey.toString()]
+  const color = varMap[dataKey.toString()] ?? rest.stroke ?? rest.color
   const dotProps = useSlotComponentProps({}, "dot")
   const activeDotProps = useSlotComponentProps({}, "activeDot")
   const labelProps = useSlotComponentProps({}, "labelList")
@@ -556,14 +719,9 @@ export const ChartLine = withContext<"line", ChartLineProps>((props) => {
 
     if (isFunction(dotProp)) {
       return (props) =>
-        dotProp({
-          ...props,
-          className: cx(className, props.className),
-        })
+        dotProp({ ...props, className: cx(className, props.className) })
     } else if (isValidElement(dotProp)) {
-      return cloneElement<any>(dotProp, {
-        className,
-      })
+      return cloneElement<any>(dotProp, { className })
     } else if (isObject(dotProp)) {
       const [omittedProps, styleProps] = splitObject<DotProps, CSSObject>(
         dotProp,
@@ -590,14 +748,9 @@ export const ChartLine = withContext<"line", ChartLineProps>((props) => {
 
     if (isFunction(activeDotProp)) {
       return (props) =>
-        activeDotProp({
-          ...props,
-          className: cx(className, props.className),
-        })
+        activeDotProp({ ...props, className: cx(className, props.className) })
     } else if (isValidElement(activeDotProp)) {
-      return cloneElement<any>(activeDotProp, {
-        className,
-      })
+      return cloneElement<any>(activeDotProp, { className })
     } else if (isObject(activeDotProp)) {
       const [omittedProps, styleProps] = splitObject<ActiveDotProps, CSSObject>(
         activeDotProp,
@@ -662,23 +815,260 @@ export const ChartLine = withContext<"line", ChartLineProps>((props) => {
   <Y extends Dict>(props: ChartLineProps<Y>): ReactElement
 }>
 
-export interface ChartLabelListProps extends Merge<
-  HTMLStyledProps<"text">,
-  UseChartLabelListProps
-> {}
+export interface ChartAreaProps<Y extends Dict = Dict> extends Merge<
+  HTMLStyledProps<"line">,
+  Omit<UseChartAreaProps, "activeDot" | "data" | "dataKey" | "dot" | "label">
+> {
+  /**
+   * The key of a group of data which should be unique in an chart.
+   */
+  dataKey: keyof Y
+  /**
+   * The active dot to use for the line.
+   *
+   * @default true
+   */
+  activeDot?: ChartActiveDot
+  /**
+   * The data to use for the area.
+   */
+  data?: Y[]
+  /**
+   * The dot to use for the line.
+   *
+   * @default false
+   */
+  dot?: ChartDot
+  /**
+   * The label list to use for the line.
+   *
+   * @default false
+   */
+  label?: ChartLabelList
+  /**
+   * Determines whether the chart area should be represented with a gradient instead of the solid color.
+   */
+  withGradient?: boolean
+}
 
-export const ChartLabelList = withContext<"text", ChartLabelListProps>(
-  (props) => {
-    const { getLabelListProps, getRootProps } = useChartLabelList(props)
+export const ChartArea = withContext<"line", ChartAreaProps>((props) => {
+  const { areaProps } = useComponentContext()
+  const {
+    activeDot: activeDotProp = true,
+    children,
+    dataKey,
+    dot: dotProp = false,
+    label: labelProp = false,
+    withGradient,
+    ...rest
+  } = { ...areaProps, ...props }
+  const id = useId()
+  const system = useSystem()
+  const { theme } = useTheme()
+  const { varMap } = useChartComponentContext()
+  const color = varMap[dataKey.toString()] ?? rest.stroke ?? rest.color
+  const dotProps = useSlotComponentProps({}, "dot")
+  const activeDotProps = useSlotComponentProps({}, "activeDot")
+  const labelProps = useSlotComponentProps({}, "labelList")
+  const dot = useMemo<UseChartLineProps["dot"]>(() => {
+    if (!dotProp) return dotProp
 
-    return (
-      <styled.text asChild {...getRootProps()}>
-        <LabelList {...getLabelListProps()} />
-      </styled.text>
+    const css = getCSS(system, theme)
+    const className = cx(
+      dotProps.className,
+      css(dotProps.css),
+      css({ fill: color, stroke: color }),
     )
-  },
-  "labelList",
-)()
+
+    if (isFunction(dotProp)) {
+      return (props) =>
+        dotProp({
+          ...props,
+          className: cx(className, props.className),
+        })
+    } else if (isValidElement(dotProp)) {
+      return cloneElement<any>(dotProp, {
+        className,
+      })
+    } else if (isObject(dotProp)) {
+      const [omittedProps, styleProps] = splitObject<DotProps, CSSObject>(
+        dotProp,
+        shouldForwardProp,
+      )
+
+      return {
+        ...omittedProps,
+        className: cx(className, omittedProps.className, css(styleProps)),
+      }
+    } else {
+      return { className }
+    }
+  }, [dotProp, system, theme, dotProps.className, dotProps.css, color])
+  const activeDot = useMemo<UseChartLineProps["activeDot"]>(() => {
+    if (!activeDotProp) return activeDotProp
+
+    const css = getCSS(system, theme)
+    const className = cx(
+      activeDotProps.className,
+      css(activeDotProps.css),
+      css({ fill: color, stroke: color }),
+    )
+
+    if (isFunction(activeDotProp)) {
+      return (props) =>
+        activeDotProp({ ...props, className: cx(className, props.className) })
+    } else if (isValidElement(activeDotProp)) {
+      return cloneElement<any>(activeDotProp, { className })
+    } else if (isObject(activeDotProp)) {
+      const [omittedProps, styleProps] = splitObject<ActiveDotProps, CSSObject>(
+        activeDotProp,
+        shouldForwardProp,
+      )
+
+      return {
+        ...omittedProps,
+        className: cx(className, omittedProps.className, css(styleProps)),
+      }
+    } else {
+      return { className }
+    }
+  }, [
+    activeDotProp,
+    system,
+    theme,
+    activeDotProps.className,
+    activeDotProps.css,
+    color,
+  ])
+  const label = useMemo<UseChartLineProps["label"]>(() => {
+    if (!labelProp) return labelProp
+
+    const css = getCSS(system, theme)
+    const className = cx(labelProps.className, css(labelProps.css))
+
+    if (isFunction(labelProp)) {
+      return (props) =>
+        labelProp({ ...props, className: cx(className, props.className) })
+    } else if (isValidElement(labelProp)) {
+      return cloneElement<any>(labelProp, { className })
+    } else if (isObject(labelProp)) {
+      const [omittedProps, styleProps] = splitObject<LabelListProps, CSSObject>(
+        labelProp,
+        shouldForwardProp,
+      )
+
+      return {
+        ...omittedProps,
+        className: cx(className, omittedProps.className, css(styleProps)),
+      }
+    } else {
+      return { className }
+    }
+  }, [system, theme, labelProp, labelProps.className, labelProps.css])
+  const { getAreaProps, getRootProps } = useChartArea({
+    activeDot,
+    dataKey,
+    dot,
+    fill: color ? `url(#${id})` : "",
+    label,
+    stroke: color,
+    ...rest,
+  })
+
+  return (
+    <>
+      <styled.line asChild {...getRootProps()}>
+        <Area {...getAreaProps()}>{children}</Area>
+      </styled.line>
+
+      <defs>
+        {withGradient ? (
+          <linearGradient id={id} x1="0" x2="0" y1="0" y2="1">
+            <styled.stop offset="5%" stopColor={color} stopOpacity={0.8} />
+            <styled.stop offset="95%" stopColor={color} stopOpacity={0.1} />
+          </linearGradient>
+        ) : (
+          <linearGradient id={id} x1="0" x2="0" y1="0" y2="1">
+            <styled.stop stopColor={color} stopOpacity={0.4} />
+          </linearGradient>
+        )}
+      </defs>
+    </>
+  )
+}, "area")() as GenericsComponent<{
+  <Y extends Dict>(props: ChartAreaProps<Y>): ReactElement
+}>
+
+export interface ChartBarProps<Y extends Dict = Dict> extends Merge<
+  HTMLStyledProps<"path">,
+  Omit<UseChartBarProps, "dataKey" | "label">
+> {
+  /**
+   * The key of a group of data which should be unique in an chart.
+   */
+  dataKey: keyof Y
+  /**
+   * The label list to use for the bar.
+   *
+   * @default false
+   */
+  label?: ChartLabelList
+}
+
+export const ChartBar = withContext<"path", ChartBarProps>((props) => {
+  const { barProps } = useComponentContext()
+  const {
+    children,
+    dataKey,
+    label: labelProp = false,
+    ...rest
+  } = { ...barProps, ...props }
+  const system = useSystem()
+  const { theme } = useTheme()
+  const { varMap } = useChartComponentContext()
+  const color = varMap[dataKey.toString()]
+  const labelProps = useSlotComponentProps({}, "labelList")
+  const label = useMemo<UseChartBarProps["label"]>(() => {
+    if (!labelProp) return labelProp
+
+    const css = getCSS(system, theme)
+    const className = cx(labelProps.className, css(labelProps.css))
+
+    if (isFunction(labelProp)) {
+      return (props) =>
+        labelProp({ ...props, className: cx(className, props.className) })
+    } else if (isValidElement(labelProp)) {
+      return cloneElement<any>(labelProp, { className })
+    } else if (isObject(labelProp)) {
+      const [omittedProps, styleProps] = splitObject<LabelListProps, CSSObject>(
+        labelProp,
+        shouldForwardProp,
+      )
+
+      return {
+        ...omittedProps,
+        className: cx(className, omittedProps.className, css(styleProps)),
+      }
+    } else {
+      return { className }
+    }
+  }, [system, theme, labelProp, labelProps.className, labelProps.css])
+  const { getBarProps, getRootProps } = useChartBar({
+    dataKey,
+    fill: color,
+    label,
+    stroke: color,
+    ...rest,
+  })
+
+  return (
+    <styled.path asChild {...getRootProps()}>
+      <Bar {...getBarProps()}>{children}</Bar>
+    </styled.path>
+  )
+}, "bar")() as GenericsComponent<{
+  <Y extends Dict>(props: ChartBarProps<Y>): ReactElement
+}>
 
 export interface ChartReferenceLineProps extends Omit<
   Merge<HTMLStyledProps<"line">, UseChartReferenceLineProps>,

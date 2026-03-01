@@ -42,10 +42,10 @@ interface Dependencies {
 
 interface Registry {
   $schema: string
-  dependencies?: Dependencies
-  dependents?: Dependents
   section: RegistrySection
   sources: Source[]
+  dependencies?: Dependencies
+  dependents?: Dependents
 }
 
 interface Map<Y> {

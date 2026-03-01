@@ -10,13 +10,13 @@ import { ClientOnly } from "./client-only"
 import { Iframe } from "./iframe"
 
 export interface CodeBlockProps extends Omit<GridProps, "children"> {
-  lang?: string
   children?: string
   client?: boolean
   code?: string
   functional?: boolean
   highlight?: string
   iframe?: boolean
+  lang?: string
   preview?: boolean
   title?: string
 }

@@ -1,43 +1,169 @@
 "use client"
 
-import type { PropsWithChildren, ReactElement, ReactNode } from "react"
 import type {
+  PropsWithChildren,
+  ReactElement,
+  ReactNode,
+  RefObject,
+} from "react"
+import type {
+  ActiveDotProps,
+  DataKey,
   DefaultLegendContentProps,
+  DotItemDotProps,
+  DotProps,
+  LabelProps,
+  RenderableText,
   ResponsiveContainerProps,
   TooltipContentProps,
 } from "recharts"
-import type { GenericsComponent, HTMLStyledProps, ThemeProps } from "../../core"
+import type {
+  CSSProps,
+  GenericsComponent,
+  HTMLStyledProps,
+  ThemeProps,
+} from "../../core"
 import type { Dict, Merge } from "../../utils"
-import type { ChartLineProps } from "./cartesian-chart"
+import type {
+  ChartAreaProps,
+  ChartBarProps,
+  ChartLineProps,
+} from "./cartesian-chart"
 import type { ChartStyle } from "./chart.style"
 import type {
+  ChartDonutProps,
+  ChartPieProps,
+  ChartRadarProps,
+  ChartRadialProps,
+} from "./polar-chart"
+import type {
+  UseChartLabelListProps,
+  UseChartLabelProps,
   UseChartLegendProps,
   UseChartLegendReturn,
   UseChartTooltipProps,
 } from "./use-chart"
-import { Fragment, isValidElement, useMemo } from "react"
-import { Legend, ResponsiveContainer, Tooltip } from "recharts"
+import { Fragment, isValidElement, useMemo, useRef } from "react"
+import {
+  Label,
+  LabelList,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts"
 import { createSlotComponent, styled, varAttr } from "../../core"
 import {
   createContext,
   isArray,
+  isNull,
   isNumber,
   isObject,
   isString,
+  isUndefined,
   useSplitChildren,
 } from "../../utils"
 import { chartStyle } from "./chart.style"
 import {
   ChartContext,
   useChart,
+  useChartLabel,
+  useChartLabelList,
   useChartLegend,
   useChartTooltip,
 } from "./use-chart"
+
+export type ChartDot =
+  | ((props: DotItemDotProps) => ReactNode)
+  | boolean
+  | Merge<Partial<DotProps>, HTMLStyledProps<"circle">>
+  | ReactElement
+
+export type ChartActiveDot =
+  | ((props: ActiveDotProps) => ReactNode)
+  | boolean
+  | Merge<Partial<ActiveDotProps>, HTMLStyledProps<"circle">>
+  | ReactElement
+
+export type ChartLabel =
+  | ((props: any) => ReactElement | RenderableText)
+  | boolean
+  | (Merge<
+      HTMLStyledProps<"text">,
+      Pick<
+        LabelProps,
+        | "angle"
+        | "content"
+        | "formatter"
+        | "index"
+        | "labelRef"
+        | "offset"
+        | "parentViewBox"
+        | "position"
+        | "textBreakAll"
+        | "value"
+        | "viewBox"
+        | "zIndex"
+      >
+    > & { dataKey?: DataKey<any> })
+  | number
+  | ReactElement
+  | string
+
+export type ChartLabelList =
+  | ((props: LabelProps) => ReactElement | RenderableText)
+  | boolean
+  | ChartLabelListProps
+  | ReactElement
+
+export type ChartTickLine = boolean | HTMLStyledProps<"line">
+
+type GradientStrategy = "invert" | "shade" | "tint"
+
+export function mergeSeries<Y>(
+  series: Y[],
+  color: CSSProps["color"] = "mono",
+  strategy: GradientStrategy = "invert",
+): (Y & { color: CSSProps["fill"] })[] {
+  const colors = gradients(series.length, color, strategy)
+
+  return series.map((item, index) => ({ ...item, color: colors[index] }))
+}
+
+export function mergeData<Y>(
+  data: Y[],
+  color: CSSProps["fill"] = "mono",
+  strategy: GradientStrategy = "invert",
+): (Y & { fill: CSSProps["fill"] })[] {
+  const colors = gradients(data.length, color, strategy)
+
+  return data.map((item, index) => ({ ...item, fill: colors[index] }))
+}
+
+export function gradients(
+  length: number,
+  color: CSSProps["color"] = "mono",
+  strategy: GradientStrategy = "invert",
+): CSSProps["fill"][] {
+  return Array.from({ length }, (_, index) => {
+    const value = Math.floor(100 - (100 / length) * index)
+    const percent = `${value}%`
+
+    if (strategy === "invert") {
+      return [
+        `tint(colors.${color}, ${percent})`,
+        `shade(colors.${color}, ${percent})`,
+      ]
+    } else {
+      return `${strategy}(colors.${color}, ${percent})`
+    }
+  })
+}
 
 interface ComponentContext extends Pick<
   ChartProps,
   "legendProps" | "tooltipProps"
 > {
+  nameKeyRef: RefObject<string | undefined>
   varMap: Dict<string>
 }
 
@@ -48,7 +174,34 @@ export interface ChartProps<Y extends Dict = Dict>
     fallback: ReactNode
   }[]
   render: (props: PropsWithChildren) => ReactNode
-  series?: ChartLineProps<Y>[]
+  /**
+   * The color of the label list.
+   */
+  labelListColor?: CSSProps["color"]
+  /**
+   * The fill of the label list.
+   */
+  labelListFill?: CSSProps["fill"]
+  series?:
+    | ChartAreaProps<Y>[]
+    | ChartBarProps<Y>[]
+    | ChartDonutProps<Y>[]
+    | ChartLineProps<Y>[]
+    | ChartPieProps<Y>[]
+    | ChartRadarProps<Y>[]
+    | ChartRadialProps<Y>[]
+  /**
+   * The fill of the tooltip cursor.
+   */
+  tooltipCursorFill?: CSSProps["fill"]
+  /**
+   * The fill opacity of the tooltip cursor.
+   */
+  tooltipCursorFillOpacity?: CSSProps["fillOpacity"]
+  /**
+   * The stroke of the tooltip cursor.
+   */
+  tooltipCursorStroke?: CSSProps["stroke"]
   /**
    * If `true`, legend is visible.
    *
@@ -103,8 +256,10 @@ export const Chart = withProvider(
     ...rest
   }: ChartProps<Y>) => {
     const { highlightedDataKey, onHighlight } = useChart()
+    const nameKeyRef = useRef<string | undefined>(undefined)
     const components = useMemo(
       () => [
+        ...componentsProp,
         {
           component: ChartLegend,
           fallback: withLegend ? <ChartLegend /> : null,
@@ -113,7 +268,6 @@ export const Chart = withProvider(
           component: ChartTooltip,
           fallback: withTooltip ? <ChartTooltip /> : null,
         },
-        ...componentsProp,
       ],
       [componentsProp, withLegend, withTooltip],
     )
@@ -123,24 +277,24 @@ export const Chart = withProvider(
     )
     const varProps = useMemo(
       () =>
-        series.reduce<Dict>(
-          (acc, { color, dataKey }) => ({
-            ...acc,
-            [`--${dataKey.toString()}`]: varAttr(color, "colors"),
-          }),
-          {},
-        ),
+        series.reduce<Dict>((acc, data) => {
+          const key = `--${data.dataKey.toString()}`
+
+          if (data.color) acc[key] = varAttr(data.color, "colors")
+
+          return acc
+        }, {}),
       [series],
     )
     const varMap = useMemo(
       () =>
-        series.reduce<Dict>(
-          (acc, { color, dataKey }) => ({
-            ...acc,
-            [dataKey.toString()]: color ? `{${dataKey.toString()}}` : undefined,
-          }),
-          {},
-        ),
+        series.reduce<Dict>((acc, data) => {
+          const key = data.dataKey.toString()
+
+          if (data.color) acc[key] = `var(--${key})`
+
+          return acc
+        }, {}),
       [series],
     )
     const context = useMemo(
@@ -152,6 +306,7 @@ export const Chart = withProvider(
     )
     const componentContext = useMemo(
       () => ({
+        nameKeyRef,
         varMap,
         legendProps,
         tooltipProps,
@@ -184,7 +339,24 @@ export const Chart = withProvider(
     )
   },
   "root",
-)() as GenericsComponent<{
+)(
+  undefined,
+  ({
+    labelListColor,
+    labelListFill,
+    tooltipCursorFill,
+    tooltipCursorFillOpacity,
+    tooltipCursorStroke,
+    ...rest
+  }) => ({
+    "--label-list-color": varAttr(labelListColor, "colors"),
+    "--label-list-fill": varAttr(labelListFill, "colors"),
+    "--tooltip-cursor-fill": varAttr(tooltipCursorFill, "colors"),
+    "--tooltip-cursor-fill-opacity": tooltipCursorFillOpacity,
+    "--tooltip-cursor-stroke": varAttr(tooltipCursorStroke, "colors"),
+    ...rest,
+  }),
+) as GenericsComponent<{
   <Y extends Dict>(props: ChartProps<Y>): ReactElement
 }>
 
@@ -249,30 +421,28 @@ interface ChartLegendContentProps
 
 const ChartLegendContent = withContext<"div", ChartLegendContentProps>(
   ({ formatter, payload, withSwatch = true, ...rest }) => {
-    const { varMap } = useChartComponentContext()
+    const { nameKeyRef, varMap } = useChartComponentContext()
     const { getLegendItemProps } = useChartLegendContext()
 
     return (
       <styled.div {...rest}>
         {payload?.map((data, index) => {
-          const color =
+          let value = data.value
+
+          if (nameKeyRef.current)
+            value = (data.payload as any)?.[nameKeyRef.current]
+
+          const dataKey =
             isString(data.dataKey) || isNumber(data.dataKey)
-              ? varMap[data.dataKey]
-              : undefined
-          const value = formatter?.(data.value, data, index) ?? data.value
+              ? data.dataKey
+              : value
+          const color = data.color || (dataKey ? varMap[dataKey] : undefined)
+          const formattedValue = formatter?.(value, data, index) ?? value
 
           return (
-            <ChartLegendItem
-              key={index}
-              {...getLegendItemProps({
-                dataKey:
-                  isString(data.dataKey) || isNumber(data.dataKey)
-                    ? data.dataKey
-                    : undefined,
-              })}
-            >
+            <ChartLegendItem key={index} {...getLegendItemProps({ dataKey })}>
               {withSwatch ? <ChartLegendSwatch bg={color} /> : null}
-              <ChartLegendValue>{value}</ChartLegendValue>
+              <ChartLegendValue>{formattedValue}</ChartLegendValue>
             </ChartLegendItem>
           )
         })}
@@ -328,7 +498,7 @@ export const ChartTooltip = <
 ) => {
   const { tooltipProps } = useChartComponentContext()
   const {
-    cursor = true,
+    cursor = false,
     contentProps,
     ...rest
   } = {
@@ -377,26 +547,27 @@ const ChartTooltipCursor = withContext<"path", ChartTooltipCursorProps>(
   ({
     bottom: _bottom,
     brushBottom: _brushBottom,
+    fill,
     height,
     left: _left,
     payload: _payload,
     payloadIndex: _payloadIndex,
-    points = [],
+    points,
     right: _right,
     stroke,
     top: _top,
     width,
+    x,
+    y,
     ...rest
   }) => {
+    const d = !!points
+      ? `M${points[0]?.x},${points[0]?.y}L${points[1]?.x},${points[1]?.y}`
+      : `M ${x},${y} h ${width} v ${height} h -${width} Z`
     return {
       asChild: true,
-      children: (
-        <path
-          d={`M${points[0]?.x},${points[0]?.y}L${points[1]?.x},${points[1]?.y}`}
-          height={height}
-          width={width}
-        />
-      ),
+      children: <path d={d} height={height} width={width} />,
+      fill: fill === "#ccc" ? undefined : fill,
       stroke: stroke === "#ccc" ? undefined : stroke,
       ...rest,
     }
@@ -419,25 +590,28 @@ interface ChartTooltipContentProps
 const ChartTooltipContent = withContext<"div", ChartTooltipContentProps>(
   ({
     formatter,
-    label,
+    label: labelProp,
     labelFormatter,
     payload,
     withSwatch = true,
     ...rest
   }) => {
-    const { varMap } = useChartComponentContext()
+    const { nameKeyRef, varMap } = useChartComponentContext()
+    const label = labelFormatter
+      ? labelFormatter(labelProp, payload)
+      : labelProp
 
     return (
       <styled.div {...rest}>
-        {label ? (
-          <ChartTooltipLabel>
-            {labelFormatter?.(label, payload) ?? label}
-          </ChartTooltipLabel>
+        {!isUndefined(label) && !isNull(label) ? (
+          <ChartTooltipLabel>{label}</ChartTooltipLabel>
         ) : null}
 
         <ChartTooltipList>
           {payload.map((data, index) => {
-            const color = varMap[data.dataKey.toString()]
+            if (nameKeyRef.current) data.name = data.payload[nameKeyRef.current]
+
+            const color = data.payload.fill ?? varMap[data.dataKey.toString()]
             const result =
               formatter?.(data.value, data.name, data, index, payload) ??
               (isArray(data.value) ? data.value.join(", ") : data.value)
@@ -499,3 +673,36 @@ const ChartTooltipValue = withContext<"span", ChartTooltipValue>(
   "span",
   "tooltipValue",
 )()
+
+export interface ChartLabelListProps extends Merge<
+  HTMLStyledProps<"text">,
+  UseChartLabelListProps
+> {}
+
+export const ChartLabelList = withContext<"text", ChartLabelListProps>(
+  (props) => {
+    const { getLabelListProps, getRootProps } = useChartLabelList(props)
+
+    return (
+      <styled.text asChild {...getRootProps()}>
+        <LabelList {...getLabelListProps()} />
+      </styled.text>
+    )
+  },
+  "labelList",
+)()
+
+export interface ChartLabelProps extends Merge<
+  HTMLStyledProps<"text">,
+  UseChartLabelProps
+> {}
+
+export const ChartLabel = withContext<"text", ChartLabelProps>((props) => {
+  const { getLabelProps, getRootProps } = useChartLabel(props)
+
+  return (
+    <styled.text asChild {...getRootProps()}>
+      <Label {...getLabelProps()} />
+    </styled.text>
+  )
+}, "label")()

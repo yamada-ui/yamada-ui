@@ -73,10 +73,10 @@ interface DatePickerRenderProps {
   date: Date
   focused: boolean
   index: number
-  max?: number
   separator: string
   value: string
   onClear: () => void
+  max?: number
 }
 
 export interface DatePickerRender {
@@ -114,14 +114,6 @@ export interface UseDatePickerProps<
     HTMLRefAttributes<"input">,
     FieldProps {
   /**
-   * The `id` attribute of the input element.
-   */
-  id?: string
-  /**
-   * The `name` attribute of the input element.
-   */
-  name?: string
-  /**
    * If `true`, allows input.
    *
    * @default true
@@ -157,9 +149,17 @@ export interface UseDatePickerProps<
    */
   format?: DatePickerFormat
   /**
+   * The `id` attribute of the input element.
+   */
+  id?: string
+  /**
    * The value of the input.
    */
   inputValue?: MaybeInputValue<Range>
+  /**
+   * The `name` attribute of the input element.
+   */
+  name?: string
   /**
    * If `true`, the date picker will be opened when the input value changes.
    *
@@ -173,10 +173,6 @@ export interface UseDatePickerProps<
    */
   openOnFocus?: boolean
   /**
-   * Function that converts the input value to Date type.
-   */
-  parseDate?: (value: string) => Date | undefined
-  /**
    * The pattern used to check the input element.
    */
   pattern?: RegExp
@@ -184,10 +180,6 @@ export interface UseDatePickerProps<
    * The placeholder for date picker.
    */
   placeholder?: string
-  /**
-   * The function to render the selected date.
-   */
-  render?: (props: DatePickerRenderProps) => ReactNode
   /**
    * The visual separator between each value.
    *
@@ -198,6 +190,14 @@ export interface UseDatePickerProps<
    * The callback invoked when input value state changes.
    */
   onInputChange?: (value: MaybeInputValue<Range>) => void
+  /**
+   * Function that converts the input value to Date type.
+   */
+  parseDate?: (value: string) => Date | undefined
+  /**
+   * The function to render the selected date.
+   */
+  render?: (props: DatePickerRenderProps) => ReactNode
 }
 
 export const useDatePicker = <

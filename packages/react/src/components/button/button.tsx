@@ -43,12 +43,6 @@ const useButtonType = (value?: ElementType) => {
 export interface ButtonProps
   extends HTMLStyledProps<"button">, ThemeProps<ButtonStyle> {
   /**
-   * The type of button. Accepts `button`, `reset`, or `submit`.
-   *
-   * @default 'button'
-   */
-  type?: HTMLProps<"button">["type"]
-  /**
    * If `true`, the button is represented as active.
    *
    * @default false
@@ -96,6 +90,12 @@ export interface ButtonProps
    * The icon to display at the start side of the button.
    */
   startIcon?: ReactNode
+  /**
+   * The type of button. Accepts `button`, `reset`, or `submit`.
+   *
+   * @default 'button'
+   */
+  type?: HTMLProps<"button">["type"]
   /**
    * The props of the icon element.
    */

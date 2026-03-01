@@ -51,9 +51,9 @@ interface AutocompleteRenderProps extends ComboboxItemWithValue {
   count: number
   focused: boolean
   index: number
-  max?: number
   separator: string
   onClear: () => void
+  max?: number
 }
 
 export interface AutocompleteItemRender {
@@ -142,14 +142,6 @@ export interface UseAutocompleteProps<Multiple extends boolean = false>
     HTMLRefAttributes<"input">,
     FieldProps {
   /**
-   * The `id` attribute of the input element.
-   */
-  id?: string
-  /**
-   * The `name` attribute of the input element.
-   */
-  name?: string
-  /**
    * If `true`, the autocomplete will allow custom value.
    *
    * @default false
@@ -186,6 +178,10 @@ export interface UseAutocompleteProps<Multiple extends boolean = false>
    */
   focusOnClear?: boolean
   /**
+   * The `id` attribute of the input element.
+   */
+  id?: string
+  /**
    * The value of the input.
    */
   inputValue?: string
@@ -210,6 +206,10 @@ export interface UseAutocompleteProps<Multiple extends boolean = false>
    */
   multiple?: Multiple
   /**
+   * The `name` attribute of the input element.
+   */
+  name?: string
+  /**
    * If `true`, the autocomplete will be opened when the input value changes.
    *
    * @default true
@@ -225,10 +225,6 @@ export interface UseAutocompleteProps<Multiple extends boolean = false>
    * The placeholder for autocomplete.
    */
   placeholder?: string
-  /**
-   * The function to render the selected items.
-   */
-  render?: (props: AutocompleteRenderProps) => ReactNode
   /**
    * The visual separator between each value.
    *
@@ -247,6 +243,10 @@ export interface UseAutocompleteProps<Multiple extends boolean = false>
    * The callback invoked when input value state changes.
    */
   onInputChange?: (value: string) => void
+  /**
+   * The function to render the selected items.
+   */
+  render?: (props: AutocompleteRenderProps) => ReactNode
 }
 
 export const useAutocomplete = <Multiple extends boolean = false>(

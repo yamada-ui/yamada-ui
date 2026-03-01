@@ -63,7 +63,10 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
     ariaProps,
     dataProps,
     eventProps,
-  } = useFieldProps<HTMLElement, UseFileInputProps<Y>>(props)
+  } = useFieldProps<HTMLElement, UseFileInputProps<Y>>({
+    ...props,
+    notSupportReadOnly: true,
+  })
   const interactive = !(readOnly || disabled)
   const inputRef = useRef<HTMLInputElement>(null)
   const [values, setValues] = useControllableState<File[] | undefined>({
@@ -97,10 +100,12 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
   )
 
   const clickableProps = useClickable<HTMLElement, Dict>({
+    ...ariaProps,
     ...dataProps,
     ...eventProps,
     ...rest,
-    disabled,
+    disabled: !interactive,
+    focusable: readOnly && !disabled,
     focusOnClick: interactive,
     onClick: handlerAll(onClickProp, onClick),
   })

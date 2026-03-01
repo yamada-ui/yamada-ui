@@ -1,6 +1,11 @@
 "use client"
 
-import type { LegendProps, TooltipProps } from "recharts"
+import type {
+  LabelListProps,
+  LabelProps,
+  LegendProps,
+  TooltipProps,
+} from "recharts"
 import type {
   Direction,
   HTMLProps,
@@ -79,7 +84,6 @@ export interface UseChartLegendProps extends Merge<
 
 export const useChartLegend = ({
   placement = "start-end",
-
   align = PLACEMENT_MAP[placement].align,
   content,
   formatter,
@@ -283,3 +287,145 @@ export type UseChartTooltipReturn<
   Y extends (number | string)[] | number | string,
   M extends number | string,
 > = ReturnType<typeof useChartTooltip<Y, M>>
+
+export interface UseChartLabelListProps extends Merge<
+  HTMLProps<"text">,
+  Pick<
+    LabelListProps,
+    | "angle"
+    | "clockWise"
+    | "content"
+    | "dataKey"
+    | "formatter"
+    | "offset"
+    | "position"
+    | "textBreakAll"
+    | "valueAccessor"
+    | "zIndex"
+  >
+> {}
+
+export const useChartLabelList = ({
+  angle,
+  clockWise,
+  content,
+  dataKey,
+  formatter,
+  offset = 12,
+  position = "top",
+  textBreakAll,
+  valueAccessor,
+  zIndex,
+  ...rest
+}: UseChartLabelListProps = {}) => {
+  const getRootProps: PropGetter<"text"> = useCallback(
+    (props) => ({ ...rest, ...props }),
+    [rest],
+  )
+
+  const getLabelListProps: PropGetter<LabelListProps> = useCallback(
+    (props) => ({
+      angle,
+      clockWise,
+      content,
+      dataKey,
+      fill: "",
+      formatter,
+      offset,
+      position,
+      textBreakAll,
+      valueAccessor,
+      zIndex,
+      ...props,
+    }),
+    [
+      angle,
+      clockWise,
+      content,
+      dataKey,
+      formatter,
+      offset,
+      position,
+      textBreakAll,
+      valueAccessor,
+      zIndex,
+    ],
+  )
+
+  return { getLabelListProps, getRootProps }
+}
+
+export type UseChartLabelListReturn = ReturnType<typeof useChartLabelList>
+
+export interface UseChartLabelProps extends Merge<
+  HTMLProps<"text">,
+  Pick<
+    LabelProps,
+    | "angle"
+    | "children"
+    | "content"
+    | "formatter"
+    | "labelRef"
+    | "offset"
+    | "parentViewBox"
+    | "position"
+    | "value"
+    | "viewBox"
+    | "zIndex"
+  >
+> {}
+
+export const useChartLabel = ({
+  angle,
+  children,
+  content,
+  formatter,
+  labelRef,
+  offset,
+  parentViewBox,
+  position,
+  value,
+  viewBox,
+  zIndex,
+  ...rest
+}: UseChartLabelProps = {}) => {
+  const getRootProps: PropGetter<"text"> = useCallback(
+    (props) => ({ ...rest, ...props }),
+    [rest],
+  )
+
+  const getLabelProps: PropGetter<LabelProps> = useCallback(
+    (props) => ({
+      angle,
+      children,
+      content,
+      fill: "",
+      formatter,
+      labelRef,
+      offset,
+      parentViewBox,
+      position,
+      value,
+      viewBox,
+      zIndex,
+      ...props,
+    }),
+    [
+      angle,
+      children,
+      content,
+      formatter,
+      labelRef,
+      offset,
+      parentViewBox,
+      position,
+      value,
+      viewBox,
+      zIndex,
+    ],
+  )
+
+  return { getLabelProps, getRootProps }
+}
+
+export type UseChartLabelReturn = ReturnType<typeof useChartLabel>

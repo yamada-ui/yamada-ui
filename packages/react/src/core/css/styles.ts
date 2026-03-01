@@ -708,6 +708,7 @@ export const standardStyles = {
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   floodOpacity: true,
+  flowTolerance: true,
   focusRing: { transform: transforms.focusRing("&:is(:focus, [data-focus])") },
   focusRingColor: {
     properties: ["--focus-ring-color"],
@@ -2309,21 +2310,139 @@ export const zIndexProperties = ["zIndex", "z"] as const
 
 export interface StyleProps {
   /**
-   * Apply other styles defined in `theme.styles`.
+   * ### container
+   *
+   * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2025-08-14
+   * @newly_available_date 2023-02-14
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@container
    */
-  apply?: StyleValueWithCondition<AnyString, "apply">
+  _container?: CSSContainerObject[]
   /**
-   * Apply layer styles defined in `theme.layerStyles`.
+   * ### keyframes
+   *
+   * The <code>animation</code> CSS property animates an element's style over time, using keyframes described in <code>@keyframes</code> rules.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@keyframes
    */
-  layerStyle?: StyleValueWithCondition<AnyString, "layerStyles">
+  _keyframes?: StyleValueWithCondition<
+    AnyString | { [key: string]: CSSObject },
+    "keyframes"
+  >
   /**
-   * Apply text styles defined in `theme.textStyles`.
+   * ### media
+   *
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
    */
-  textStyle?: StyleValueWithCondition<AnyString, "textStyles">
+  _landscape?: StyleValueWithCondition<CSSObject>
   /**
-   * Set color scheme variables.
+   * ### media
+   *
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
    */
-  colorScheme?: StyleValueWithCondition<AnyString | ColorScheme>
+  _media?: CSSMediaObject[]
+  /**
+   * ### media
+   *
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
+   */
+  _mediaDark?: StyleValueWithCondition<CSSObject>
+  /**
+   * ### media
+   *
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
+   */
+  _mediaLight?: StyleValueWithCondition<CSSObject>
+  /**
+   * ### media
+   *
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
+   */
+  _mediaReduceMotion?: StyleValueWithCondition<CSSObject>
+  /**
+   * ### media
+   *
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
+   */
+  _portrait?: StyleValueWithCondition<CSSObject>
+  /**
+   * ### media
+   *
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
+   */
+  _print?: StyleValueWithCondition<CSSObject>
+  /**
+   * ### starting-style
+   *
+   * The <code>@starting-style</code> CSS at-rule sets the starting values for properties that are transitioning when the target element's style is first updated.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2024-08-06
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@starting-style
+   */
+  _startingStyle?: StyleValueWithCondition<CSSObject>
+  /**
+   * ### supports
+   *
+   * The <code>@supports</code> at-rule applies styles based on a browser's support for CSS features, such as a CSS property and value. Also known as feature queries.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@supports
+   */
+  _supports?: { css?: CSSObject; query?: AnyString }[]
   /**
    * ### accent-color
    *
@@ -2614,6 +2733,10 @@ export interface StyleProps {
    */
   appearance?: StyleValueWithCondition<CSS.Property.Appearance>
   /**
+   * Apply other styles defined in `theme.styles`.
+   */
+  apply?: StyleValueWithCondition<AnyString, "apply">
+  /**
    * ### aspect-ratio
    *
    * The <code>aspect-ratio</code> CSS property controls the width-to-height ratio of elements. For <code>&#x3C;img></code> and <code>&#x3C;video></code> elements, the <code>width</code> and <code>height</code> attributes used together with <code>height: auto</code> control the aspect ratio while the image/video is loading.
@@ -2865,7 +2988,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-inline/#baseline-shift-property
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/baseline-shift
    */
   baselineShift?: StyleValueWithCondition<CSS.Property.BaselineShift>
   /**
@@ -4774,6 +4897,10 @@ export interface StyleProps {
    */
   colorRendering?: StyleValueWithCondition<CSS.Property.ColorRendering>
   /**
+   * Set color scheme variables.
+   */
+  colorScheme?: StyleValueWithCondition<AnyString | ColorScheme>
+  /**
    * ### column-count
    *
    * Multi-column layout flows an element's content across one or more columns in a single row, without affecting the <code>display</code> property of its children.
@@ -5583,6 +5710,16 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flood-opacity
    */
   floodOpacity?: StyleValueWithCondition<CSS.Property.FloodOpacity>
+  /**
+   * ### flow-tolerance
+   *
+   * The CSS `flow-tolerance` property.
+   *
+   * @see https://drafts.csswg.org/css-grid-3/#propdef-flow-tolerance
+   *
+   * @experimental
+   */
+  flowTolerance?: StyleValueWithCondition<AnyString>
   /**
    * The focus ring is used to identify the currently focused element.
    */
@@ -6660,6 +6797,10 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-self
    */
   justifySelf?: StyleValueWithCondition<CSS.Property.JustifySelf>
+  /**
+   * Apply layer styles defined in `theme.layerStyles`.
+   */
+  layerStyle?: StyleValueWithCondition<AnyString, "layerStyles">
   /**
    * ### line-height
    *
@@ -10371,6 +10512,10 @@ export interface StyleProps {
    */
   textSpacingTrim?: StyleValueWithCondition<CSS.Property.TextSpacingTrim>
   /**
+   * Apply text styles defined in `theme.textStyles`.
+   */
+  textStyle?: StyleValueWithCondition<AnyString, "textStyles">
+  /**
    * ### text-transform
    *
    * The <code>text-transform</code> CSS property sets text case and capitalization.
@@ -10412,7 +10557,7 @@ export interface StyleProps {
    * The <code>text-wrap</code> CSS property sets how lines break in text that overflows the container. It is a shorthand for <code>text-wrap-style</code> and <code>text-wrap-mode</code>.
    *
    * @baseline `Newly available`
-   * @newly_available_date 2024-03-19
+   * @newly_available_date 2024-10-17
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap
    */
@@ -10420,7 +10565,7 @@ export interface StyleProps {
   /**
    * ### text-wrap-mode
    *
-   * The <code>text-wrap-mode</code> CSS property sets whether lines may wrap with the values <code>wrap</code> and <code>nowrap</code>. It is a longhand property for both <code>white-space</code> and <code>text-wrap</code>.
+   * The <code>text-wrap</code> CSS property sets how lines break in text that overflows the container. It is a shorthand for <code>text-wrap-style</code> and <code>text-wrap-mode</code>.
    *
    * @baseline `Newly available`
    * @newly_available_date 2024-10-17
@@ -10431,9 +10576,10 @@ export interface StyleProps {
   /**
    * ### text-wrap-style
    *
-   * The <code>text-wrap-style</code> CSS property sets how lines break in text that overflows the container. It can also be set with the <code>text-wrap</code> shorthand.
+   * The <code>text-wrap</code> CSS property sets how lines break in text that overflows the container. It is a shorthand for <code>text-wrap-style</code> and <code>text-wrap-mode</code>.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2024-10-17
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap-style
    */
@@ -10991,138 +11137,4 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/zoom
    */
   zoom?: StyleValueWithCondition<CSS.Property.Zoom>
-  /**
-   * ### container
-   *
-   * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2025-08-14
-   * @newly_available_date 2023-02-14
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@container
-   */
-  _container?: CSSContainerObject[]
-  /**
-   * ### keyframes
-   *
-   * The <code>animation</code> CSS property animates an element's style over time, using keyframes described in <code>@keyframes</code> rules.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-03-30
-   * @newly_available_date 2015-09-30
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@keyframes
-   */
-  _keyframes?: StyleValueWithCondition<
-    AnyString | { [key: string]: CSSObject },
-    "keyframes"
-  >
-  /**
-   * ### media
-   *
-   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
-   */
-  _landscape?: StyleValueWithCondition<CSSObject>
-  /**
-   * ### media
-   *
-   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
-   */
-  _media?: CSSMediaObject[]
-  /**
-   * ### media
-   *
-   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
-   */
-  _mediaDark?: StyleValueWithCondition<CSSObject>
-  /**
-   * ### media
-   *
-   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
-   */
-  _mediaLight?: StyleValueWithCondition<CSSObject>
-  /**
-   * ### media
-   *
-   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
-   */
-  _mediaReduceMotion?: StyleValueWithCondition<CSSObject>
-  /**
-   * ### media
-   *
-   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
-   */
-  _portrait?: StyleValueWithCondition<CSSObject>
-  /**
-   * ### media
-   *
-   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
-   */
-  _print?: StyleValueWithCondition<CSSObject>
-  /**
-   * ### starting-style
-   *
-   * The <code>@starting-style</code> CSS at-rule sets the starting values for properties that are transitioning when the target element's style is first updated.
-   *
-   * @baseline `Newly available`
-   * @newly_available_date 2024-08-06
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@starting-style
-   */
-  _startingStyle?: StyleValueWithCondition<CSSObject>
-  /**
-   * ### supports
-   *
-   * The <code>@supports</code> at-rule applies styles based on a browser's support for CSS features, such as a CSS property and value. Also known as feature queries.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-03-30
-   * @newly_available_date 2015-09-30
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@supports
-   */
-  _supports?: { css?: CSSObject; query?: AnyString }[]
 }

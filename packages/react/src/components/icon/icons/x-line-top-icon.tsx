@@ -2,14 +2,14 @@
 
 import type { Component } from "../../../core"
 import type { IconProps } from "../icon"
-import { FlipHorizontal as OriginalFlipHorizontalIcon } from "lucide-react"
+import { XLineTop as OriginalXLineTopIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
- * `FlipHorizontalIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ * `XLineTopIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const FlipHorizontalIcon = component(Icon)({
-  as: OriginalFlipHorizontalIcon,
+export const XLineTopIcon = component(Icon)({
+  as: OriginalXLineTopIcon,
 }) as Component<"svg", IconProps>

@@ -1,4 +1,5 @@
 import { defineComponentSlotStyle } from "../../core"
+import { chartStyle } from "./chart.style"
 
 export const cartesianChartStyle = defineComponentSlotStyle({
   base: {
@@ -8,19 +9,33 @@ export const cartesianChartStyle = defineComponentSlotStyle({
       stroke: "{active-dot-stroke}",
       strokeWidth: "{active-dot-stroke-width}",
     },
+    area: {
+      "&:has(path[data-inactive])": {
+        opacity: "{inactive-line-opacity}",
+      },
+      color: "{line-color}",
+      fill: "{line-stroke}",
+      fillOpacity: "{area-fill-opacity}",
+      stroke: "{line-stroke}",
+      strokeWidth: "{line-stroke-width}",
+    },
+    bar: {
+      "&:has(path[data-inactive])": {
+        opacity: "{inactive-line-opacity}",
+      },
+      color: "{line-color}",
+      fill: "{line-stroke}",
+      stroke: "{line-stroke}",
+      strokeWidth: "{line-stroke-width}",
+    },
     dot: {
       fill: "{dot-fill}",
       r: "{dot-r}",
       stroke: "{dot-stroke}",
       strokeWidth: "{dot-stroke-width}",
     },
-    grid: { stroke: "border" },
-    labelList: {
-      fill: "{label-fill}",
-      fontSize: "xs",
-      fontWeight: "medium",
-      stroke: "none",
-    },
+    grid: { stroke: "{grid-stroke}" },
+    labelList: chartStyle.base?.labelList,
     line: {
       "&:has(> path[data-inactive])": {
         opacity: "{inactive-line-opacity}",
@@ -35,6 +50,7 @@ export const cartesianChartStyle = defineComponentSlotStyle({
       strokeWidth: "{reference-line-stroke-width}",
     },
     referenceLineLabel: {
+      color: "{reference-line-text-color}",
       fill: "{reference-line-text-fill}",
       fontSize: "xs",
       fontWeight: "medium",
@@ -45,18 +61,20 @@ export const cartesianChartStyle = defineComponentSlotStyle({
       "--active-dot-r": "4",
       "--active-dot-stroke": "{line-color}",
       "--active-dot-stroke-width": "0",
+      "--area-fill-opacity": "0.4",
       "--dot-fill": "{line-stroke}",
       "--dot-r": "4",
       "--dot-stroke": "{line-stroke}",
       "--dot-stroke-width": "0",
+      "--grid-stroke": "colors.border",
       "--inactive-line-opacity": "0.4",
-      "--label-fill": "currentColor",
       "--line-color": "colorScheme.solid",
       "--line-stroke": "currentColor",
       "--line-stroke-width": "2",
       "--reference-line-color": "colors.fg.error",
       "--reference-line-stroke": "currentColor",
       "--reference-line-stroke-width": "1",
+      "--reference-line-text-color": "colors.fg.error",
       "--reference-line-text-fill": "currentColor",
       "--x-axis-line-stroke": "currentColor",
       "--x-axis-line-stroke-width": "1",

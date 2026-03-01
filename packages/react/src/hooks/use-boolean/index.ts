@@ -21,5 +21,5 @@ export const useBoolean = (init = false): UseBooleanReturn => {
 
 export type UseBooleanReturn = [
   flg: boolean,
-  setFlg: { off: () => void; toggle: () => void; on: () => void },
+  setFlg: { off: () => void; on: () => void; toggle: () => void },
 ]

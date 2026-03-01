@@ -3,11 +3,11 @@ import type { AnyString } from "@yamada-ui/utils"
 import type { CSSProperties } from "."
 
 export interface StyleConfig {
-  type?: string
   description?: string[]
   important?: boolean
   properties?: (AnyString | CSSProperties)[]
   static?: CSSObject
+  type?: string
   variableLength?: boolean
 }
 

@@ -30,6 +30,7 @@ import {
   getStyle,
   gradient,
   injectKeyframes,
+  isCSSFunction,
 } from "../css"
 import { defaultSystem } from "../system"
 
@@ -332,7 +333,7 @@ export function varAttr(
   token?: ThemeToken,
   fallbackValue?: string,
 ): StyleValueWithCondition<number | string> | undefined {
-  if (isUndefined(value) || isNull(value)) return value
+  if (isUndefined(value) || isNull(value) || isCSSFunction(value)) return value
 
   if (isObject(value) || isArray(value)) {
     return replaceObject(value, (value) => varAttr(value, token, fallbackValue))

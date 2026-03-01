@@ -1,9 +1,9 @@
 import { getComponent } from "./get-component"
 
 export interface ServerOnlyProps {
-  lang?: string
   code: string
   functional?: boolean
+  lang?: string
 }
 
 export function ServerOnly({

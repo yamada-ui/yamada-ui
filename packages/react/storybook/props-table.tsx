@@ -3,7 +3,7 @@ import { Fragment } from "react"
 import { Center, Flex, For, Grid, GridItem, Heading, toTitleCase } from "../src"
 
 interface PropsTableProps<Y extends string, M extends string> {
-  variant?: "grid" | "stack"
+  rows: M[]
   children: (
     column: Y,
     row: M,
@@ -12,7 +12,7 @@ interface PropsTableProps<Y extends string, M extends string> {
     rowIndex: number,
   ) => ReactNode
   columns?: Y[]
-  rows: M[]
+  variant?: "grid" | "stack"
 }
 
 export const PropsTable = <Y extends string, M extends string>({

@@ -24,15 +24,15 @@ export { NativeAccordionContext, useNativeAccordionContext }
 
 export interface UseNativeAccordionProps extends HTMLProps {
   /**
-   * The HTML `name` attribute used for forms.
-   */
-  name?: string
-  /**
    * If `true`, multiple accordion items can be expanded at once.
    *
    * @default false
    */
   multiple?: boolean
+  /**
+   * The HTML `name` attribute used for forms.
+   */
+  name?: string
 }
 
 export const useNativeAccordion = ({

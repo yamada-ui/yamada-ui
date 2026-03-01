@@ -78,8 +78,9 @@ export function Sidebar() {
 
 interface SidebarItemProps {
   icon: Component<"svg", IconProps>
-  isSelected?: boolean
   label: string
+  collapsed?: boolean
+  isSelected?: boolean
   num?: number
 }
 

@@ -4,6 +4,14 @@ import { tooltipStyle } from "../tooltip"
 
 export const chartStyle = defineComponentSlotStyle({
   base: {
+    label: { fill: "currentColor", fontSize: "xs", fontWeight: "medium" },
+    labelList: {
+      color: "{label-list-color}",
+      fill: "{label-list-fill}",
+      fontSize: "xs",
+      fontWeight: "medium",
+      stroke: "none",
+    },
     legend: { mb: "md" },
     legendContent: {
       "&:is([data-align=center])": { justifyContent: "center" },
@@ -31,7 +39,15 @@ export const chartStyle = defineComponentSlotStyle({
       rounded: "full",
     },
     legendValue: { color: "fg.muted", flex: "1", fontSize: "sm" },
-    root: { "*": { outline: "none" }, w: "full" },
+    root: {
+      "*": { outline: "none" },
+      "--label-list-color": "currentColor",
+      "--label-list-fill": "currentColor",
+      "--tooltip-cursor-fill": "colors.border",
+      "--tooltip-cursor-fill-opacity": "1",
+      "--tooltip-cursor-stroke": "colors.border",
+      w: "full",
+    },
     tooltipContent: {
       ...tooltipStyle.base?.content,
       display: "flex",
@@ -41,7 +57,12 @@ export const chartStyle = defineComponentSlotStyle({
       minW: "3xs",
       zIndex: "recoome",
     },
-    tooltipCursor: { stroke: "border", strokeWidth: "1" },
+    tooltipCursor: {
+      fill: "{tooltip-cursor-fill}",
+      fillOpacity: "{tooltip-cursor-fill-opacity}",
+      stroke: "{tooltip-cursor-stroke}",
+      strokeWidth: "1",
+    },
     tooltipItem: { alignItems: "center", display: "flex", gap: "sm" },
     tooltipLabel: {},
     tooltipList: { display: "flex", flexDirection: "column", gap: "2xs" },

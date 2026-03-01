@@ -57,10 +57,10 @@ type SizingProperties = Extract<
 >
 
 interface SizingStyle {
-  style: Pick<CSSStyleDeclaration, SizingProperties>
   border: number
   padding: number
   rowHeight: number
+  style: Pick<CSSStyleDeclaration, SizingProperties>
 }
 
 const getSizingStyle = (el: HTMLElement): null | SizingStyle => {

@@ -24,14 +24,6 @@ export interface UseSwitchProps<Y extends number | string = string>
     HTMLRefAttributes<"input">,
     FieldProps {
   /**
-   * id assigned to input.
-   */
-  id?: string
-  /**
-   * The HTML `name` attribute used for forms.
-   */
-  name?: string
-  /**
    * If `true`, the switch will be checked.
    *
    * @default false
@@ -49,6 +41,14 @@ export interface UseSwitchProps<Y extends number | string = string>
    * @default false
    */
   defaultChecked?: boolean
+  /**
+   * id assigned to input.
+   */
+  id?: string
+  /**
+   * The HTML `name` attribute used for forms.
+   */
+  name?: string
   /**
    * The tab-index property of the underlying input element.
    */

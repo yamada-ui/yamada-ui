@@ -22,14 +22,6 @@ export interface UseRadioProps<Y extends string = string>
     HTMLRefAttributes<"input">,
     FieldProps {
   /**
-   * id assigned to input.
-   */
-  id?: string
-  /**
-   * The name of the input field in a radio.
-   */
-  name?: string
-  /**
    * If `true`, the radio will be checked.
    */
   checked?: boolean
@@ -39,6 +31,14 @@ export interface UseRadioProps<Y extends string = string>
    * @default false
    */
   defaultChecked?: boolean
+  /**
+   * id assigned to input.
+   */
+  id?: string
+  /**
+   * The name of the input field in a radio.
+   */
+  name?: string
   /**
    * The value of the radio.
    */

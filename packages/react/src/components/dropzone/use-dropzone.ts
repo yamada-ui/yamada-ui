@@ -238,8 +238,8 @@ export const useDropzone = (props: UseDropzoneProps = {}) => {
   assignRef(openRef, open)
 
   const getRootProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) =>
-      getOriginalRootProps({
+    ({ ref, ...props } = {}) => {
+      const { ref: rootRef, ...rootProps } = getOriginalRootProps({
         id: labelledbyId,
         ...dataProps,
         ...eventProps,
@@ -250,8 +250,13 @@ export const useDropzone = (props: UseDropzoneProps = {}) => {
         "data-reject": dataAttr(dragReject),
         ...rest,
         ...props,
-        ref: mergeRefs(ref, rest.ref),
-      }),
+      })
+
+      return {
+        ...rootProps,
+        ref: mergeRefs(ref, rest.ref, rootRef),
+      }
+    },
     [
       getOriginalRootProps,
       labelledbyId,

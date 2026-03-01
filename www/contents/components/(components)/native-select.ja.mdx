@@ -424,4 +424,60 @@ return (
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`Field.Root`を使用しない場合は、`NativeSelect.Root`に`aria-label`または`aria-labelledby`を設定します。
+
+```tsx
+const items = useMemo<NativeSelect.Item[]>(
+  () => [
+    { label: "日比野カフカ", value: "日比野カフカ" },
+    { label: "市川レノ", value: "市川レノ" },
+    { label: "亜白ミナ", value: "亜白ミナ" },
+    { label: "四ノ宮キコル", value: "四ノ宮キコル" },
+  ],
+  [],
+)
+
+return (
+  <NativeSelect.Root
+    items={items}
+    placeholder="Select a character"
+    aria-label="キャラクター"
+  />
+)
+```
+
+```tsx
+const items = useMemo<NativeSelect.Item[]>(
+  () => [
+    { label: "日比野カフカ", value: "日比野カフカ" },
+    { label: "市川レノ", value: "市川レノ" },
+    { label: "亜白ミナ", value: "亜白ミナ" },
+    { label: "四ノ宮キコル", value: "四ノ宮キコル" },
+  ],
+  [],
+)
+
+return (
+  <VStack gap="sm">
+    <Heading as="h3" id="label">
+      キャラクター
+    </Heading>
+
+    <NativeSelect.Root
+      items={items}
+      placeholder="Select a character"
+      aria-labelledby="label"
+    />
+  </VStack>
+)
+```
+
+### ARIAロールと属性
+
+| コンポーネント       | ロールと属性       | 使い方                                                                                                                                                                                               |
+| -------------------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `NativeSelect.Field` | `aria-describedby` | `NativeSelect.Field`が`Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
+|                      | `aria-disabled`    | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                               |
+|                      | `aria-invalid`     | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                                |
+|                      | `aria-label`       | `aria-label`が設定されていない場合は、`placeholder`の値を設定します。                                                                                                                                |
+|                      | `aria-required`    | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                               |

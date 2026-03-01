@@ -612,7 +612,7 @@
               "title": "Tip",
               "segment": "tip",
               "pathname": "/docs/components/tip",
-              "status": "planned"
+              "status": "new"
             },
             {
               "title": "Toggle",

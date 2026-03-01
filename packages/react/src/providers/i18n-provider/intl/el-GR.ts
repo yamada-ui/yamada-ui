@@ -35,6 +35,9 @@ const data: IntlData = {
   colorSelector: {
     "Pick a color": "Επιλέξτε ένα χρώμα",
   },
+  colorSwatch: {
+    "Color swatch group": "Ομάδα δειγμάτων χρωμάτων",
+  },
   datePicker: {
     "Clear value": "Καθαρισμός τιμής",
   },

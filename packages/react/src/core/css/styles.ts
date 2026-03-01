@@ -708,6 +708,7 @@ export const standardStyles = {
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   floodOpacity: true,
+  flowTolerance: true,
   focusRing: { transform: transforms.focusRing("&:is(:focus, [data-focus])") },
   focusRingColor: {
     properties: ["--focus-ring-color"],
@@ -2987,7 +2988,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-inline/#baseline-shift-property
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/baseline-shift
    */
   baselineShift?: StyleValueWithCondition<CSS.Property.BaselineShift>
   /**
@@ -5709,6 +5710,16 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flood-opacity
    */
   floodOpacity?: StyleValueWithCondition<CSS.Property.FloodOpacity>
+  /**
+   * ### flow-tolerance
+   *
+   * The CSS `flow-tolerance` property.
+   *
+   * @see https://drafts.csswg.org/css-grid-3/#propdef-flow-tolerance
+   *
+   * @experimental
+   */
+  flowTolerance?: StyleValueWithCondition<AnyString>
   /**
    * The focus ring is used to identify the currently focused element.
    */
@@ -10546,7 +10557,7 @@ export interface StyleProps {
    * The <code>text-wrap</code> CSS property sets how lines break in text that overflows the container. It is a shorthand for <code>text-wrap-style</code> and <code>text-wrap-mode</code>.
    *
    * @baseline `Newly available`
-   * @newly_available_date 2024-03-19
+   * @newly_available_date 2024-10-17
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap
    */
@@ -10554,7 +10565,7 @@ export interface StyleProps {
   /**
    * ### text-wrap-mode
    *
-   * The <code>text-wrap-mode</code> CSS property sets whether lines may wrap with the values <code>wrap</code> and <code>nowrap</code>. It is a longhand property for both <code>white-space</code> and <code>text-wrap</code>.
+   * The <code>text-wrap</code> CSS property sets how lines break in text that overflows the container. It is a shorthand for <code>text-wrap-style</code> and <code>text-wrap-mode</code>.
    *
    * @baseline `Newly available`
    * @newly_available_date 2024-10-17
@@ -10565,9 +10576,10 @@ export interface StyleProps {
   /**
    * ### text-wrap-style
    *
-   * The <code>text-wrap-style</code> CSS property sets how lines break in text that overflows the container. It can also be set with the <code>text-wrap</code> shorthand.
+   * The <code>text-wrap</code> CSS property sets how lines break in text that overflows the container. It is a shorthand for <code>text-wrap-style</code> and <code>text-wrap-mode</code>.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2024-10-17
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap-style
    */

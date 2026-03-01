@@ -51,7 +51,7 @@ type Component<
 
 export type ComponentSlotName<
   Y extends ComponentSlotStyle | ComponentStyle = ComponentSlotStyle,
-> = AnyString | Extract<keyof Required<Y>["base"], string>
+> = AnyString | Extract<keyof NonNullable<Y["base"]>, string>
 
 export type ComponentSlot<Y extends string> =
   | [Y, Y]
@@ -89,8 +89,8 @@ interface classNameOptions<Y extends string = string> {
 
 export interface ComponentWithContextOptions<
   Y extends number | string | symbol = string,
-> extends ComponentOptions,
-    UseComponentPropsOptions<Y> {}
+>
+  extends ComponentOptions, UseComponentPropsOptions<Y> {}
 
 function createProxyComponent<
   Y extends AsWithFragment = "div",
@@ -203,11 +203,17 @@ export function createComponent<
     const displayName = getDisplayName(name, defaultDisplayName)
     const ProxyComponent = createProxyComponent(el, options)
 
-    return function (...superProps: SuperProps<H>[]) {
+    return function (
+      initialProps?: InitialProps<H>,
+      ...superProps: SuperProps<H>[]
+    ) {
       return withDisplayName<D, H>((props) => {
         className = useClassName(name, className)
 
-        const mergedProps = chainProps<any>(...superProps)()(props)
+        const computedProps = isFunction(initialProps)
+          ? initialProps(props)
+          : mergeProps(initialProps ?? {}, props)()
+        const mergedProps = chainProps<any>(...superProps)()(computedProps)
 
         return (
           <ProxyComponent
@@ -380,11 +386,17 @@ export function createSlotComponent<
 
     classNameMap.set(slotKey, { className, slot })
 
-    return function (...superProps: SuperProps<R>[]) {
+    return function (
+      initialProps?: InitialProps<R>,
+      ...superProps: SuperProps<R>[]
+    ) {
       return withDisplayName<H, R>((props) => {
         className = useClassName(slot, className)
 
-        const mergedProps = chainProps(...superProps)()(props)
+        const computedProps = isFunction(initialProps)
+          ? initialProps(props)
+          : mergeProps(initialProps ?? {}, props)()
+        const mergedProps = chainProps(...superProps)()(computedProps)
 
         return (
           <ProxyComponent

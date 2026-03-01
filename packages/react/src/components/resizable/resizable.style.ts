@@ -64,9 +64,6 @@ export const resizableStyle = defineComponentSlotStyle({
         color: "colorScheme.fg",
         transitionDuration: "moderate",
         transitionProperty: "common",
-        _active: {
-          color: "transparent",
-        },
       },
       trigger: {
         focusVisibleRing: "none",

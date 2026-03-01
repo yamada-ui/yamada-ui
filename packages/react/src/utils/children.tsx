@@ -185,17 +185,23 @@ export function splitChildren<Y = any, M = any>(
   )[]
 ): [
   React.ReactElement<M>[] | React.ReactNode,
-  ...(React.ReactElement<Y> | undefined)[],
+  ...(React.ReactElement<Y>[] | undefined)[],
 ] {
   const validChildren = getValidChildren(children)
 
   if (isEmpty(validChildren)) return [children]
 
-  const pickedChildren = types.map((types) =>
-    isArray(types)
-      ? findChild(validChildren, ...types)
-      : findChild(validChildren, types),
-  )
+  const pickedChildren = types.map((types) => {
+    if (isArray(types)) {
+      const pickedChildren = pickChildren(validChildren, ...types)
+
+      return !isEmpty(pickedChildren) ? pickedChildren : undefined
+    } else {
+      const pickedChildren = pickChildren(validChildren, types)
+
+      return !isEmpty(pickedChildren) ? pickedChildren : undefined
+    }
+  })
 
   const omittedChildren = omitChildren(validChildren, ...types.flat())
 
@@ -211,7 +217,7 @@ export function useSplitChildren<Y = any, M = any>(
   )[]
 ): [
   React.ReactElement<M>[] | React.ReactNode,
-  ...(React.ReactElement<Y> | undefined)[],
+  ...(React.ReactElement<Y>[] | undefined)[],
 ] {
   const typesRef = React.useRef(types)
 

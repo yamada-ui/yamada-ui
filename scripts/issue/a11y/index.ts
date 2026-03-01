@@ -56,10 +56,10 @@ interface AssertionResult {
 }
 
 interface TestResult {
-  name: string
   assertionResults: AssertionResult[]
   endTime: number
   message: string
+  name: string
   startTime: number
   status: string
   summary: string
@@ -266,6 +266,7 @@ function main() {
           } else {
             await retryOnRateLimit(() =>
               octokit.issues.create({
+                type: "Task",
                 body,
                 labels: ["a11y", "test", "good first issue"],
                 owner: OWNER_NAME,

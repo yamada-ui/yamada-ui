@@ -10,23 +10,22 @@ import { createContext, cx, useSplitChildren } from "../../utils"
 import { Button } from "../button"
 import { formStyle } from "./form.style"
 
-interface FormContext
-  extends Pick<
-    FormRootProps,
-    | "disabled"
-    | "errorMessage"
-    | "helperMessage"
-    | "invalid"
-    | "optionalIndicator"
-    | "readOnly"
-    | "replace"
-    | "required"
-    | "requiredIndicator"
-    | "size"
-    | "variant"
-  > {
-  id: string
+interface FormContext extends Pick<
+  FormRootProps,
+  | "disabled"
+  | "errorMessage"
+  | "helperMessage"
+  | "invalid"
+  | "optionalIndicator"
+  | "readOnly"
+  | "replace"
+  | "required"
+  | "requiredIndicator"
+  | "size"
+  | "variant"
+> {
   descriptionId: string
+  id: string
   titleId: string
 }
 
@@ -38,8 +37,7 @@ const [FormContext, useFormContext] = createContext<FormContext>({
 export { FormContext, useFormContext }
 
 export interface FormRootProps
-  extends Omit<HTMLStyledProps<"form">, "title">,
-    ThemeProps<FormStyle> {
+  extends Omit<HTMLStyledProps<"form">, "title">, ThemeProps<FormStyle> {
   /**
    * The form description to use.
    */
@@ -225,32 +223,36 @@ export const FormRoot = withProvider<"form", FormRootProps, "size" | "variant">(
           noValidate={noValidate}
           {...rest}
         >
-          {customHeader || (
-            <FormHeader {...headerProps}>
-              {customTitle ||
-                (title ? <FormTitle {...titleProps}>{title}</FormTitle> : null)}
+          {customHeader ||
+            (customTitle || title || customDescription || description ? (
+              <FormHeader {...headerProps}>
+                {customTitle ||
+                  (title ? (
+                    <FormTitle {...titleProps}>{title}</FormTitle>
+                  ) : null)}
 
-              {customDescription ||
-                (description ? (
-                  <FormDescription {...descriptionProps}>
-                    {description}
-                  </FormDescription>
-                ) : null)}
-            </FormHeader>
-          )}
+                {customDescription ||
+                  (description ? (
+                    <FormDescription {...descriptionProps}>
+                      {description}
+                    </FormDescription>
+                  ) : null)}
+              </FormHeader>
+            ) : null)}
 
           {customBody || <FormBody {...bodyProps}>{omittedChildren}</FormBody>}
 
-          {customFooter || (
-            <FormFooter {...footerProps}>
-              {customSubmitButton ||
-                (submitButton ? (
-                  <FormSubmitButton {...submitButtonProps}>
-                    {submitButton}
-                  </FormSubmitButton>
-                ) : null)}
-            </FormFooter>
-          )}
+          {customFooter ||
+            (customSubmitButton || submitButton ? (
+              <FormFooter {...footerProps}>
+                {customSubmitButton ||
+                  (submitButton ? (
+                    <FormSubmitButton {...submitButtonProps}>
+                      {submitButton}
+                    </FormSubmitButton>
+                  ) : null)}
+              </FormFooter>
+            ) : null)}
         </styled.form>
       </FormContext>
     )

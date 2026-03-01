@@ -7,11 +7,11 @@ import { codeToHtml } from "@/libs/shiki"
 import { CopyButton } from "./copy-button"
 
 export interface CodePreviewProps extends Omit<GridProps, "children"> {
-  lang?: string
   children?: string
   code?: string
   highlight?: string
   html?: string
+  lang?: string
 }
 
 export function CodePreview({
@@ -112,6 +112,7 @@ export function CodePreview({
           data-lang={lang}
           bg="transparent!"
           dangerouslySetInnerHTML={{ __html: html }}
+          focusVisibleRing="inside"
           fontFamily="mono"
           fontSize="sm"
           lineHeight="1.1"

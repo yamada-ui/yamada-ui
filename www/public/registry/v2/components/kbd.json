@@ -18,7 +18,7 @@
     },
     {
       "name": "kbd.tsx",
-      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { KbdStyle } from \"./kbd.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { kbdStyle } from \"./kbd.style\"\n\nexport interface KbdProps\n  extends HTMLStyledProps<\"kbd\">,\n    ThemeProps<KbdStyle> {}\n\nconst {\n  PropsContext: KbdPropsContext,\n  usePropsContext: useKbdPropsContext,\n  withContext,\n} = createComponent<KbdProps, KbdStyle>(\"kbd\", kbdStyle)\n\nexport { KbdPropsContext, useKbdPropsContext }\n\n/**\n * `Kbd` is a component that represents keyboard input.\n *\n * @see https://yamada-ui.com/docs/components/kbd\n */\nexport const Kbd = withContext(\"kbd\")()\n"
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { KbdStyle } from \"./kbd.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { kbdStyle } from \"./kbd.style\"\n\nexport interface KbdProps\n  extends HTMLStyledProps<\"kbd\">, ThemeProps<KbdStyle> {}\n\nconst {\n  PropsContext: KbdPropsContext,\n  usePropsContext: useKbdPropsContext,\n  withContext,\n} = createComponent<KbdProps, KbdStyle>(\"kbd\", kbdStyle)\n\nexport { KbdPropsContext, useKbdPropsContext }\n\n/**\n * `Kbd` is a component that represents keyboard input.\n *\n * @see https://yamada-ui.com/docs/components/kbd\n */\nexport const Kbd = withContext(\"kbd\")()\n"
     }
   ]
 }

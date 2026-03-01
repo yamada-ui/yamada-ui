@@ -13,9 +13,10 @@ export type {
 export {
   ResizableContext as Context,
   useResizableContext as useContext,
+  useResizableLayout as useLayout,
 } from "./use-resizable"
 export type {
-  ResizableGroupControl as GroupControl,
   ResizableItemControl as ItemControl,
+  ResizableRootControl as RootControl,
   ResizableStorage as Storage,
 } from "./use-resizable"

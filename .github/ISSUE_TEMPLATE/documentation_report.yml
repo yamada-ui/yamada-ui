@@ -1,6 +1,7 @@
 name: "Documentation Report"
 description: "Create a report for errors or inappropriate expressions in the documentation site."
-labels: ["triage", "documentation"]
+labels: ["triage"]
+type: Bug
 body:
   - type: markdown
     attributes:

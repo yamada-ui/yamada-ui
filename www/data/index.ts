@@ -1,16 +1,56 @@
 import type { Doc } from "#velite"
+import type { ThemeToken } from "@yamada-ui/react"
 import { docs } from "#velite"
 import { getPathname } from "@/utils/route"
 import en from "./doc-map.en.json"
 import ja from "./doc-map.ja.json"
 
+interface Prop {
+  description: string
+  required: boolean
+  type: string
+  defaultValue?: string
+  deprecated?: string
+  see?: string
+}
+
+export interface Props {
+  [key: string]: Prop
+}
+
+export interface Namespace {
+  [key: string]: {
+    [key: string]: Prop
+  }
+}
+
+export interface MdnDoc {
+  deprecated: boolean
+  description: string
+  experimental: boolean
+  see?: string
+}
+
+export interface MdnDocs {
+  [key: string]: MdnDoc
+}
+
+export interface StyleConfig {
+  as?: boolean
+  docs?: MdnDocs
+  properties?: string[]
+  shorthands?: string[]
+  token?: ThemeToken
+  type?: string
+}
+
 export interface DocMap {
   segment: string
   title: Doc["title"]
+  __exists?: boolean
   items?: DocMap[]
   pathname?: string
   status?: Doc["status"]
-  __exists?: boolean
 }
 
 export function getDocs(locale: string): Doc[] {
@@ -34,10 +74,10 @@ export function flattenDocMap(items: DocMap[]): DocMap[] {
 }
 
 export interface FragmentContent {
-  type: "fragment"
   hierarchy: { [key: number]: string }
   pathname: string
   title: string
+  type: "fragment"
   group?: string
 }
 
@@ -69,9 +109,9 @@ function getFragments(
 }
 
 export interface PageContent {
-  type: "page"
   pathname: string
   title: string
+  type: "page"
   group?: string
 }
 

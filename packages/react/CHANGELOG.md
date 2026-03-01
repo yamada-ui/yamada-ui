@@ -1,5 +1,69 @@
 # @yamada-ui/react
 
+## 2.0.9
+
+### Patch Changes
+
+- [#5706](https://github.com/yamada-ui/yamada-ui/pull/5706) [`1b12488`](https://github.com/yamada-ui/yamada-ui/commit/1b1248801bd5229913975da1d84e1b27661acbad) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added new style props.
+
+- [#5706](https://github.com/yamada-ui/yamada-ui/pull/5706) [`1b12488`](https://github.com/yamada-ui/yamada-ui/commit/1b1248801bd5229913975da1d84e1b27661acbad) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#5650](https://github.com/yamada-ui/yamada-ui/pull/5650) [`4c7e42a`](https://github.com/yamada-ui/yamada-ui/commit/4c7e42a2fecb9f9cac9c515d3e9f62d3538e736f) Thanks [@SahilJat](https://github.com/SahilJat)! - Fixed an issue where `aria-label` and `aria-labelledby` were not correctly passed to the `input` element in `ColorPicker`, causing accessibility violations.
+
+- [#5657](https://github.com/yamada-ui/yamada-ui/pull/5657) [`4f17dfb`](https://github.com/yamada-ui/yamada-ui/commit/4f17dfbbcfc4bc8ab7d717adcb52feff1e7ce285) Thanks [@watataku11xx](https://github.com/watataku11xx)! - Fixed a bug where unnecessary HTML tags were rendered when `title` or `description` was not provided.
+
+- [#5236](https://github.com/yamada-ui/yamada-ui/pull/5236) [`ec04f5f`](https://github.com/yamada-ui/yamada-ui/commit/ec04f5fdf9bd58b05aff517019c623f7af68668a) Thanks [@kaehehehe](https://github.com/kaehehehe)! - Fixed `Carousel` next/prev control buttons affecting slide animations.
+
+- [#5655](https://github.com/yamada-ui/yamada-ui/pull/5655) [`d4476e0`](https://github.com/yamada-ui/yamada-ui/commit/d4476e021228eb15f49ce581bf6e6651e1326ca6) Thanks [@watataku11xx](https://github.com/watataku11xx)! - Add `tabindex="0"` to scrollable root in `useInfiniteScroll` for keyboard focus (a11y).
+
+- [#5652](https://github.com/yamada-ui/yamada-ui/pull/5652) [`0408223`](https://github.com/yamada-ui/yamada-ui/commit/04082237b43e7918e01da97d9f8e2519154decd9) Thanks [@SahilJat](https://github.com/SahilJat)! - Fixed a bug where `aria-labelledby` was not set correctly when rendering for the first time or when the element was displayed.
+
+- [#5706](https://github.com/yamada-ui/yamada-ui/pull/5706) [`1b12488`](https://github.com/yamada-ui/yamada-ui/commit/1b1248801bd5229913975da1d84e1b27661acbad) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added new icons.
+
+- Updated dependencies [[`1b12488`](https://github.com/yamada-ui/yamada-ui/commit/1b1248801bd5229913975da1d84e1b27661acbad)]:
+  - @yamada-ui/utils@2.0.6
+
+## 2.0.8
+
+### Patch Changes
+
+- [#5618](https://github.com/yamada-ui/yamada-ui/pull/5618) [`499d68d`](https://github.com/yamada-ui/yamada-ui/commit/499d68d5bcd009db1c229e1baef9171d06878438) Thanks [@72umesh](https://github.com/72umesh)! - Fix SegmentedControl indicator border radius when fullRounded is enabled
+
+- [#5608](https://github.com/yamada-ui/yamada-ui/pull/5608) [`fda1a1b`](https://github.com/yamada-ui/yamada-ui/commit/fda1a1baa9b32e64dce65f81bb1273904f07caa7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `fullRounded` to `Tag` component.
+
+- [#5632](https://github.com/yamada-ui/yamada-ui/pull/5632) [`c162fcb`](https://github.com/yamada-ui/yamada-ui/commit/c162fcb8e416aea752e9c99223160aeccae00385) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `aria-labelledby` and `aria-describedby` were not set correctly when rendering for the first time or when the element was displayed.
+
+- [#5641](https://github.com/yamada-ui/yamada-ui/pull/5641) [`599e51b`](https://github.com/yamada-ui/yamada-ui/commit/599e51b102ada0bc271bc534d312fce7dab5acd4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where setting `"system"` as the `defaultValue` for `ColorModeScript` did not enable dynamic switching based on the system color mode.
+
+- Updated dependencies [[`b31a9e6`](https://github.com/yamada-ui/yamada-ui/commit/b31a9e6c1555a1cb0f05d735cc9591f44ad0485b), [`414ff70`](https://github.com/yamada-ui/yamada-ui/commit/414ff70331a844e1c2d94a09c8af451c3fe36c27)]:
+  - @yamada-ui/utils@2.0.5
+
+## 2.0.7
+
+### Patch Changes
+
+- [#5609](https://github.com/yamada-ui/yamada-ui/pull/5609) [`7e3fb67`](https://github.com/yamada-ui/yamada-ui/commit/7e3fb67ea69a275653493d35036fb755ecbf2f30) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated style props.
+
+- [#5609](https://github.com/yamada-ui/yamada-ui/pull/5609) [`7e3fb67`](https://github.com/yamada-ui/yamada-ui/commit/7e3fb67ea69a275653493d35036fb755ecbf2f30) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added new icons.
+
+## 2.0.6
+
+### Patch Changes
+
+- [#5593](https://github.com/yamada-ui/yamada-ui/pull/5593) [`dda3659`](https://github.com/yamada-ui/yamada-ui/commit/dda3659e48e45cdb74f0679d4d9190dc6112fc17) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `itemProps` and `indicatorProps` to `SegmentedControl.Root`.
+
+- [#5536](https://github.com/yamada-ui/yamada-ui/pull/5536) [`139f9fb`](https://github.com/yamada-ui/yamada-ui/commit/139f9fbd30cb85618d1808769808d477c987e60d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Adjusted the border color for the "outline" variant of the `Input` component.
+
+- [#5328](https://github.com/yamada-ui/yamada-ui/pull/5328) [`6b44560`](https://github.com/yamada-ui/yamada-ui/commit/6b44560c567a2cf6cfd8d177c7a9186e2f788785) Thanks [@bmthd](https://github.com/bmthd)! - The type definition for `items` is now exported from each component's namespace.
+
+- [#5591](https://github.com/yamada-ui/yamada-ui/pull/5591) [`d398f02`](https://github.com/yamada-ui/yamada-ui/commit/d398f021ae2c8852c12a8da70e3f00bbfb3a3a77) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed unnecessary type generic arguments.
+
+- [#5536](https://github.com/yamada-ui/yamada-ui/pull/5536) [`39e87e1`](https://github.com/yamada-ui/yamada-ui/commit/39e87e1d919050427fc561ba3bc8d7b88de88f25) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed the default color scheme of the `CloseButton` and cancel button in `Modal` and `Drawer` to `mono`.
+
+- [#5594](https://github.com/yamada-ui/yamada-ui/pull/5594) [`b6983fb`](https://github.com/yamada-ui/yamada-ui/commit/b6983fb4af423eda92bcddc067ffc996deaebbf9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated the return value type definition when `defaultValue` is set to `createContext`.
+
+- [#5592](https://github.com/yamada-ui/yamada-ui/pull/5592) [`bbd2d40`](https://github.com/yamada-ui/yamada-ui/commit/bbd2d40cb26e63a1febcb1adc2caf49d41025881) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Pass `loadingProps` to `Loading.Suspense` component.
+
 ## 2.0.5
 
 ### Patch Changes

@@ -26,12 +26,14 @@ import { modalStyle } from "./modal.style"
 import { useModal } from "./use-modal"
 
 interface ComponentContext
-  extends Omit<UseModalReturn, "getRootProps">,
+  extends
+    Omit<UseModalReturn, "getRootProps">,
     PopupAnimationProps,
     Pick<ModalRootProps, "withCloseButton"> {}
 
 export interface ModalRootProps
-  extends ThemeProps<ModalStyle>,
+  extends
+    ThemeProps<ModalStyle>,
     Omit<UseModalProps, "title">,
     Pick<
       FocusLockProps,
@@ -256,8 +258,7 @@ export const ModalOverlay = withContext<"div", ModalOverlayProps>((props) => {
 }, "overlay")()
 
 export interface ModalContentProps
-  extends Omit<HTMLMotionProps<"section">, "children">,
-    PropsWithChildren {}
+  extends Omit<HTMLMotionProps<"section">, "children">, PropsWithChildren {}
 
 export const ModalContent = withContext<"section", ModalContentProps>(
   ({ children, ...rest }) => {
@@ -345,6 +346,7 @@ export const ShorthandModalContent: FC<ShorthandModalContentProps> = ({
   const customBody = wrapOrPassProps(ModalBody, body)
   const customFooter = wrapOrPassProps(ModalFooter, footer)
   const customCancel = wrapOrPassProps(Button, cancel, {
+    colorScheme: "mono",
     variant: "ghost",
     onClick: () => (onCancel ? onCancel(onClose) : onClose()),
   })

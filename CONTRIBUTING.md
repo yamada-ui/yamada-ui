@@ -64,7 +64,7 @@ To improve our development process, we have set up tools and systems. Yamada UI 
     "packages/workspace",
     "playgrounds/next/app",
     "playgrounds/next/pages",
-    "playgrounds/remix",
+    "playgrounds/react-router/framework",
     "playgrounds/vite"
   ]
 }

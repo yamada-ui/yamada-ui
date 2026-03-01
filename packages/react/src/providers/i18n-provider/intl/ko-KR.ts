@@ -35,6 +35,9 @@ const data: IntlData = {
   colorSelector: {
     "Pick a color": "색상 선택",
   },
+  colorSwatch: {
+    "Color swatch group": "색상 견본 그룹",
+  },
   datePicker: {
     "Clear value": "값 지우기",
   },

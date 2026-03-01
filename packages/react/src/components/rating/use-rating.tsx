@@ -33,17 +33,7 @@ const [RatingContext, useRatingContext] = createContext<RatingContext>({
 export { RatingContext, useRatingContext }
 
 export interface UseRatingProps
-  extends FieldProps,
-    Omit<HTMLProps, "color" | "defaultValue" | "onChange"> {
-  /**
-   * The top-level id string that will be applied to the rating.
-   * The index of the rating item will be appended to this top-level id.
-   */
-  id?: string
-  /**
-   * The name of the input element.
-   */
-  name?: string
+  extends FieldProps, Omit<HTMLProps, "color" | "defaultValue" | "onChange"> {
   /**
    * Number of controls that should be rendered.
    *
@@ -68,6 +58,15 @@ export interface UseRatingProps
    * @default false
    */
   highlightSelectedOnly?: boolean
+  /**
+   * The top-level id string that will be applied to the rating.
+   * The index of the rating item will be appended to this top-level id.
+   */
+  id?: string
+  /**
+   * The name of the input element.
+   */
+  name?: string
   /**
    * The value of the rating.
    */

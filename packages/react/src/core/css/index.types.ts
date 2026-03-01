@@ -128,8 +128,8 @@ export interface CSSAnimationObject {
 
 export interface CSSAtRuleObject {
   [key: string]: any
-  css?: CSSObject
   aspectRatio?: CSS.Property.AspectRatio
+  css?: CSSObject
   h?: CSS.Property.Height | number | ThemeTokens["sizes"]
   height?: CSS.Property.Height | number | ThemeTokens["sizes"]
   maxAspectRatio?: CSS.Property.AspectRatio
@@ -149,8 +149,6 @@ export interface CSSAtRuleObject {
 }
 
 export interface CSSContainerObject extends CSSAtRuleObject {
-  name?: AnyString
-  style?: string | string[]
   blockSize?: CSS.Property.BlockSize | number | ThemeTokens["sizes"]
   inlineSize?: CSS.Property.InlineSize | number | ThemeTokens["sizes"]
   maxAspectRatio?: CSS.Property.AspectRatio
@@ -159,10 +157,11 @@ export interface CSSContainerObject extends CSSAtRuleObject {
   minAspectRatio?: CSS.Property.AspectRatio
   minBlockSize?: CSS.Property.MinBlockSize | number | ThemeTokens["sizes"]
   minInlineSize?: CSS.Property.MinInlineSize | number | ThemeTokens["sizes"]
+  name?: AnyString
+  style?: string | string[]
 }
 
 export interface CSSMediaObject extends CSSAtRuleObject {
-  type?: "all" | "print" | "screen" | "speech" | AnyString
   anyHover?: "hover" | "none" | AnyString
   anyPointer?: "coarse" | "fine" | "none" | AnyString
   color?: AnyString | number
@@ -209,15 +208,13 @@ export interface CSSMediaObject extends CSSAtRuleObject {
   resolution?: AnyString
   scan?: "interlace" | "progressive" | AnyString
   scripting?: "enabled" | "initial-only" | "none" | AnyString
+  type?: "all" | "print" | "screen" | "speech" | AnyString
   update?: "fast" | "none" | "slow" | AnyString
   videoDynamicRange?: "high" | "standard" | AnyString
 }
 
 export interface CSSProps
-  extends StyleProps,
-    ConditionProps,
-    VendorProps,
-    CSSVariableProps {
+  extends StyleProps, ConditionProps, VendorProps, CSSVariableProps {
   /**
    * The CSS object.
    */

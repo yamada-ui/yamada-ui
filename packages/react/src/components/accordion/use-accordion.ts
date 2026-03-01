@@ -28,8 +28,10 @@ export {
   useAccordionDescendants,
 }
 
-interface AccordionContext
-  extends Omit<UseAccordionReturn, "descendants" | "getRootProps"> {}
+interface AccordionContext extends Omit<
+  UseAccordionReturn,
+  "descendants" | "getRootProps"
+> {}
 
 const [AccordionContext, useAccordionContext] = createContext<AccordionContext>(
   {
@@ -39,8 +41,10 @@ const [AccordionContext, useAccordionContext] = createContext<AccordionContext>(
 
 export { AccordionContext, useAccordionContext }
 
-interface AccordionItemContext
-  extends Omit<UseAccordionItemReturn, "getItemProps"> {}
+interface AccordionItemContext extends Omit<
+  UseAccordionItemReturn,
+  "getItemProps"
+> {}
 
 const [AccordionItemContext, useAccordionItemContext] =
   createContext<AccordionItemContext>({
@@ -282,13 +286,13 @@ export const useAccordionItem = ({
 
   const getIconProps: PropGetter<"svg"> = useCallback(
     (props) => ({
-      "aria-disabled": ariaAttr(disabled),
+      "aria-disabled": ariaAttr((!multiple && !toggle && open) || disabled),
       "aria-expanded": open,
       "aria-hidden": true,
       role: "presentation",
       ...props,
     }),
-    [open, disabled],
+    [multiple, toggle, open, disabled],
   )
 
   return {

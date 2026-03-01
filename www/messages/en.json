@@ -108,7 +108,10 @@
     "toc": {
       "title": "On this page",
       "scrollToTop": "Scroll to top",
-      "edit": "Edit this page on GitHub"
+      "edit": "Edit this page on GitHub",
+      "markdown": "View as Markdown",
+      "chatgpt": "Open in ChatGPT",
+      "claude": "Open in Claude"
     },
     "copyButton": {
       "copied": "Copied",
@@ -133,6 +136,13 @@
     "tokensTable": {
       "token": "Token",
       "value": "Value"
+    },
+    "llmsButtonGroup": {
+      "copyPage": "Copy Page",
+      "markdown": "View as Markdown",
+      "chatgpt": "Open in ChatGPT",
+      "claude": "Open in Claude",
+      "query": "Use web browsing to access links and information: {url}.\n\nI want to ask some questions.\n"
     }
   }
 }

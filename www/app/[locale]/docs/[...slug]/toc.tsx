@@ -1,6 +1,7 @@
 "use client"
 
 import type { Doc } from "#velite"
+import type { TextProps } from "@yamada-ui/react"
 import type { RefObject } from "react"
 import {
   Link,
@@ -14,7 +15,8 @@ import { useMotionValueEvent, useScroll } from "motion/react"
 import { useTranslations } from "next-intl"
 import { createRef, useMemo, useRef, useState } from "react"
 import scrollIntoView from "scroll-into-view-if-needed"
-import { EditPageButton } from "./edit-page-button"
+import { useLlmsUrls } from "@/components"
+import { CONSTANTS } from "@/constants"
 import { ScrollToTopButton } from "./scroll-to-top-button"
 
 interface FlattenTocEntry extends Omit<Doc["toc"][number], "items"> {
@@ -30,7 +32,7 @@ function flattenToc(toc: Doc["toc"], depth = 0): FlattenTocEntry[] {
 
 export interface TocProps extends Doc {}
 
-export function Toc({ path, toc }: TocProps) {
+export function Toc({ md, locale, path, pathname, toc }: TocProps) {
   const t = useTranslations("component.toc")
   const [currentId, setCurrentId] = useState<string>("")
   const containerRef = useRef<HTMLDivElement>(null)
@@ -41,6 +43,7 @@ export function Toc({ path, toc }: TocProps) {
   const prevValue = useRef(0)
   const directionRef = useRef<"down" | "up">("down")
   const flattenedToc = useMemo(() => flattenToc(toc), [toc])
+  const { chatgptUrl, claudeUrl, markdownUrl } = useLlmsUrls(locale, pathname)
 
   useMotionValueEvent(scrollY, "change", (value) => {
     directionRef.current = prevValue.current < value ? "down" : "up"
@@ -152,10 +155,40 @@ export function Toc({ path, toc }: TocProps) {
       ) : null}
 
       <VStack alignItems="flex-start" gap="sm">
-        <EditPageButton path={path} />
+        <TocLink href={`${CONSTANTS.SNS.GITHUB.CONTENT_EDIT_URL}/${path}`}>
+          {t("edit")}
+        </TocLink>
 
+        {md ? (
+          <>
+            <TocLink href={markdownUrl}>{t("markdown")}</TocLink>
+            <TocLink href={chatgptUrl}>{t("chatgpt")}</TocLink>
+            <TocLink href={claudeUrl}>{t("claude")}</TocLink>
+          </>
+        ) : null}
         <ScrollToTopButton />
       </VStack>
     </VStack>
+  )
+}
+
+interface TocLinkProps extends Omit<TextProps, "as" | "ref"> {
+  href: string
+}
+
+function TocLink({ href, ...rest }: TocLinkProps) {
+  return (
+    <Text
+      as="a"
+      href={href}
+      rel="noopener"
+      target="_blank"
+      color={{ base: "fg.muted", _hover: "fg" }}
+      fontSize="sm"
+      rounded="l1"
+      transitionDuration="moderate"
+      transitionProperty="colors"
+      {...rest}
+    />
   )
 }

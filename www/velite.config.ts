@@ -1,3 +1,4 @@
+import { format } from "@yamada-ui/workspace/prettier"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import remarkDirective from "remark-directive"
 import remarkGfm from "remark-gfm"
@@ -5,6 +6,17 @@ import { defineCollection, defineConfig, s } from "velite"
 import { CONSTANTS } from "@/constants"
 import { generateDocMap } from "@/scripts/generate/docs/map"
 import { getLocale, langs } from "@/utils/i18n"
+import {
+  replaceCardGroup,
+  replaceCodeBlock,
+  replaceCodeGroup,
+  replaceLinks,
+  replaceProps,
+  replaceSteps,
+  replaceStylePropsTable,
+  replaceTokensPreview,
+  replaceTokensTable,
+} from "@/utils/markdown"
 import { rehypePre, rehypeSlug, transformToc } from "@/utils/rehype-plugins"
 import {
   remarkCallout,
@@ -12,8 +24,8 @@ import {
   remarkCodeBlock,
   remarkCodeGroup,
   remarkSteps,
-} from "./utils/remark-plugins"
-import { getPathname } from "./utils/route"
+} from "@/utils/remark-plugins"
+import { getPathname } from "@/utils/route"
 
 function getPath(value: string) {
   return value.replace(/\\/g, "/").replace(/.*\/contents\//, "")
@@ -25,7 +37,7 @@ function getSlug(value: string) {
     .replace(/.*\/contents\//, "")
     .replace(/\.mdx$/, "")
   const match = transformedValue.match(
-    new RegExp(`^(.*?)(?:\.(${langs.join("|")}))?$`),
+    new RegExp(`^(.+?)(?:\\.(${langs.join("|")}))?$`),
   )
   const [, path, lang] = match ?? []
 
@@ -45,6 +57,28 @@ const docs = defineCollection({
   schema: s
     .object({
       style: s.string().optional(),
+      md: s.custom().transform(async (_, { meta }) => {
+        const path = getPath(meta.path as string)
+        const exclude = CONSTANTS.LLMS.EXCLUDE.some((exclude) =>
+          path.startsWith(`${exclude}/`),
+        )
+
+        if (exclude) return
+
+        let content = meta.content as string
+
+        content = await replaceProps(content)
+        content = replaceCodeGroup(content)
+        content = replaceCodeBlock(content)
+        content = replaceSteps(content)
+        content = replaceCardGroup(content)
+        content = replaceTokensPreview(content)
+        content = replaceTokensTable(content)
+        content = replaceStylePropsTable(content)
+        content = replaceLinks(content)
+
+        return await format(content, { parser: "mdx" })
+      }),
       code: s.mdx(),
       description: s.string(),
       metadata: s.metadata(),

@@ -1,4 +1,4 @@
-import { CONSTANTS } from "@/constants"
+import { CONSTANTS } from "../constants"
 
 export type Locale = (typeof CONSTANTS.I18N.LOCALES)[number]
 export type Lang = Locale extends `${infer M}-${string}` ? M : never

@@ -13,21 +13,21 @@ import { cast } from "../../utils"
 import { nativePopoverStyle } from "./native-popover.style"
 import { useNativePopover } from "./use-native-popover"
 
-interface ComponentContext
-  extends Pick<
-    UseNativePopoverReturn,
-    | "getAnchorProps"
-    | "getBodyProps"
-    | "getCloseTriggerProps"
-    | "getContentProps"
-    | "getFooterProps"
-    | "getHeaderProps"
-    | "getPositionerProps"
-    | "getTriggerProps"
-  > {}
+interface ComponentContext extends Pick<
+  UseNativePopoverReturn,
+  | "getAnchorProps"
+  | "getBodyProps"
+  | "getCloseTriggerProps"
+  | "getContentProps"
+  | "getFooterProps"
+  | "getHeaderProps"
+  | "getPositionerProps"
+  | "getTriggerProps"
+> {}
 
 export interface NativePopoverRootProps
-  extends UseNativePopoverProps,
+  extends
+    UseNativePopoverProps,
     ThemeProps<NativePopoverStyle>,
     PropsWithChildren {}
 
@@ -127,8 +127,7 @@ const NativePopoverPositioner = withContext<
   return getPositionerProps(props)
 })
 
-export interface NativePopoverCloseTriggerProps
-  extends HTMLStyledProps<"button"> {}
+export interface NativePopoverCloseTriggerProps extends HTMLStyledProps<"button"> {}
 
 export const NativePopoverCloseTrigger = withContext<
   "button",
@@ -143,8 +142,7 @@ export const NativePopoverCloseTrigger = withContext<
 )
 
 export interface NativePopoverContentProps
-  extends HTMLStyledProps,
-    PropsWithChildren {}
+  extends HTMLStyledProps, PropsWithChildren {}
 
 export const NativePopoverContent = withContext<
   "div",

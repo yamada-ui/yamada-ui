@@ -237,4 +237,39 @@ return <Rating value={value} onChange={onChange} />
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+The `Rating` follows the [WAI-ARIA - Radio Group Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/radio/examples/radio-rating/) for accessibility.
+
+Setting `aria-label` or `aria-labelledby` on `Rating` will make it readable by screen readers.
+
+```tsx
+<Rating aria-label="Rating" />
+```
+
+```tsx
+<VStack gap="sm">
+  <Heading as="h3" id="label">
+    Rating
+  </Heading>
+
+  <Rating aria-labelledby="label" />
+</VStack>
+```
+
+### Keyboard Navigation
+
+| Key                       | Description                                                                                                                                           | State |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| `Tab`                     | Focus on the selected item. If no item is selected, focus on the first item.                                                                          | -     |
+| `ArrowLeft`, `ArrowUp`    | Focus on and select the previous item. If the first item is selected, select the last item. Deselect the previously selected item.                    | -     |
+| `ArrowRight`, `ArrowDown` | Focus on and select the next item. If the last item is selected, focus on and select the first item. The previously selected item will be deselected. | -     |
+
+### ARIA Roles and Attributes
+
+| Component    | Role and Attribute   | Usage                                             |
+| ------------ | -------------------- | ------------------------------------------------- |
+| `Rating`     | `role="radiogroup"`  | Indicates that this is a radio group.             |
+|              | `aria-label`         | Indicates the number of selected items.           |
+|              | `aria-readonly`      | Set to `"true"` when `readOnly` is specified.     |
+|              | `aria-disabled`      | Set to `"true"` when `disabled` is specified.     |
+| `RatingItem` | `aria-label`         | Set `value`.                                      |
+| `RatingIcon` | `aria-hidden="true"` | Exclude `RatingIcon` from the accessibility tree. |

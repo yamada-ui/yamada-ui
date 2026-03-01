@@ -22,8 +22,8 @@ export default meta
 
 export const Basic: Story = () => {
   interface Data {
-    name: string
     email: string
+    name: string
     password: string
   }
 
@@ -87,8 +87,8 @@ export const Basic: Story = () => {
 
 export const PropsPattern: Story = () => {
   interface Data {
-    name: string
     email: string
+    name: string
     password: string
   }
 
@@ -143,9 +143,9 @@ export const PropsPattern: Story = () => {
 
 export const Variant: Story = () => {
   interface Data {
-    name: string
     address: string
     email: string
+    name: string
     password: string
     phone: string
   }
@@ -227,9 +227,9 @@ export const Variant: Story = () => {
 
 export const Size: Story = () => {
   interface Data {
-    name: string
     address: string
     email: string
+    name: string
     password: string
     phone: string
   }
@@ -305,8 +305,8 @@ export const Size: Story = () => {
 
 export const Disabled: Story = () => {
   interface Data {
-    name: string
     email: string
+    name: string
     password: string
   }
 
@@ -362,8 +362,8 @@ export const Disabled: Story = () => {
 
 export const ReadOnly: Story = () => {
   interface Data {
-    name: string
     email: string
+    name: string
     password: string
   }
 
@@ -419,8 +419,8 @@ export const ReadOnly: Story = () => {
 
 export const RequiredIndicator: Story = () => {
   interface Data {
-    name: string
     email: string
+    name: string
     password: string
   }
 
@@ -480,8 +480,8 @@ export const RequiredIndicator: Story = () => {
 
 export const OptionalIndicator: Story = () => {
   interface Data {
-    name: string
     email: string
+    name: string
     password: string
   }
 

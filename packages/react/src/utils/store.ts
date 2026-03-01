@@ -18,9 +18,9 @@ interface Subscribe {
 }
 
 interface Store<Y> {
+  queue: Map<string, (() => void)[]>
   ref: { current: Y }
   get: () => Y
-  queue: Map<string, (() => void)[]>
   set: (nextState: ((prevState: Y) => Y) | Y, key?: string | string[]) => void
   update: (key?: string | string[]) => void
   key?: string

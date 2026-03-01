@@ -10,9 +10,7 @@ import { avatarStyle } from "./avatar.style"
 import { useAvatar } from "./use-avatar"
 
 export interface AvatarProps
-  extends HTMLStyledProps,
-    ThemeProps<AvatarStyle>,
-    UseAvatarProps {
+  extends HTMLStyledProps, ThemeProps<AvatarStyle>, UseAvatarProps {
   /**
    * The avatar icon to use.
    */
@@ -60,7 +58,10 @@ export const Avatar = withProvider<"div", AvatarProps>(
     )
   },
   "root",
-)({ icon: <UserRoundIcon fontSize="1.2em" /> })
+)(({ icon, ...rest }) => ({
+  icon: icon ?? <UserRoundIcon fontSize="1.2em" />,
+  ...rest,
+}))
 
 interface AvatarImageProps extends HTMLStyledProps<"img"> {}
 

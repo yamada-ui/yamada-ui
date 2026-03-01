@@ -1,16 +1,10 @@
 import type { Dict } from "@yamada-ui/react"
-import {
-  attributes,
-  Box,
-  Code,
-  groupAttributes,
-  NativeTable,
-  peerAttributes,
-  pseudoClasses,
-  pseudoElements,
-} from "@yamada-ui/react"
+import { Box, Code, NativeTable } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import { useMemo } from "react"
+import pseudoClasses from "@/data/pseudo-classes.json"
+import pseudoElements from "@/data/pseudo-elements.json"
+import selectors from "@/data/selectors.json"
 
 export interface ConditionPropsTable {
   type: string
@@ -23,8 +17,7 @@ export function ConditionPropsTable({ type }: ConditionPropsTable) {
 
     if (type === "pseudoElement") conditions = pseudoElements
     if (type === "pseudoClass") conditions = pseudoClasses
-    if (type === "selector")
-      conditions = { ...attributes, ...groupAttributes, ...peerAttributes }
+    if (type === "selector") conditions = selectors
 
     return Object.entries(conditions)
       .map(([prop, value]) => ({

@@ -6,8 +6,7 @@ import { createComponent } from "../../core"
 import { codeStyle } from "./code.style"
 
 export interface CodeProps
-  extends HTMLStyledProps<"code">,
-    ThemeProps<CodeStyle> {}
+  extends HTMLStyledProps<"code">, ThemeProps<CodeStyle> {}
 
 const {
   PropsContext: CodePropsContext,

@@ -16,8 +16,8 @@ export default meta
 
 interface Data {
   browser: string
-  downloads: null | number
-  visits: null | number
+  downloads: number
+  visits: number
   fill?: CSSProps["fill"]
 }
 
@@ -719,8 +719,6 @@ export const Formatter: Story = () => {
           Number(value).toLocaleString(),
           toTitleCase(name),
         ],
-        labelFormatter: (_, [data]) =>
-          toTitleCase(isString(data?.dataKey) ? data.dataKey : ""),
       }}
     />
   )

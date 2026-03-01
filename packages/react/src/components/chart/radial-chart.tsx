@@ -5,40 +5,38 @@ import type { PolarChartProps as OriginalPolarChartProps } from "recharts/types/
 import type { GenericsComponent, ThemeProps } from "../../core"
 import type { Dict } from "../../utils"
 import type { ChartTooltipProps } from "./chart"
-import type { PieChartStyle } from "./pie-chart.style"
-import type { ChartPieProps, PolarChartProps } from "./polar-chart"
-import type { UsePieChartProps } from "./use-pie-chart"
+import type { ChartRadialProps, PolarChartProps } from "./polar-chart"
+import type { RadialChartStyle } from "./radial-chart.style"
+import type { UseRadialChartProps } from "./use-radial-chart"
 import { useCallback, useMemo } from "react"
-import { PieChart as OriginalPieChart } from "recharts"
+import { RadialBarChart } from "recharts"
 import { createComponent } from "../../core"
-import { pieChartStyle } from "./pie-chart.style"
-import { ChartPie, PolarChart } from "./polar-chart"
-import { usePieChart } from "./use-pie-chart"
+import { ChartRadial, PolarChart } from "./polar-chart"
+import { radialChartStyle } from "./radial-chart.style"
+import { useRadialChart } from "./use-radial-chart"
 
-export interface PieChartProps<Y extends Dict = Dict>
+export interface RadialChartProps<Y extends Dict = Dict>
   extends
     Omit<
       PolarChartProps<Y>,
       | "angleAxisProps"
       | "components"
       | "donutProps"
-      | "gridProps"
       | "nameKey"
+      | "pieProps"
       | "radarProps"
-      | "radialProps"
       | "radiusAxisProps"
       | "render"
       | "series"
       | "withAngleAxis"
-      | "withGrid"
       | "withRadiusAxis"
     >,
-    UsePieChartProps<Y>,
-    ThemeProps<PieChartStyle> {
+    UseRadialChartProps<Y>,
+    ThemeProps<RadialChartStyle> {
   /***
    * If provided, generate lines based on series.
    */
-  series?: ChartPieProps<Y>[]
+  series?: ChartRadialProps<Y>[]
   /**
    * Props for the polar chart component.
    */
@@ -46,33 +44,43 @@ export interface PieChartProps<Y extends Dict = Dict>
 }
 
 const {
-  PropsContext: PieChartPropsContext,
-  usePropsContext: usePieChartPropsContext,
+  PropsContext: RadialChartPropsContext,
+  usePropsContext: useRadialChartPropsContext,
   withContext,
-} = createComponent<PieChartProps, PieChartStyle>("pie-chart", pieChartStyle)
+} = createComponent<RadialChartProps, RadialChartStyle>(
+  "radial-chart",
+  radialChartStyle,
+)
 
-export { PieChartPropsContext, usePieChartPropsContext }
+export { RadialChartPropsContext, useRadialChartPropsContext }
 
 /**
- * `PieChart` is a component for drawing pie charts to compare multiple sets of data.
+ * `RadialChart` is a component for drawing radial charts to compare multiple sets of data.
  *
- * @see https://yamada-ui.com/docs/components/pie-chart
+ * @see https://yamada-ui.com/docs/components/radial-chart
  */
-export const PieChart = withContext<"div", PieChartProps>(
+export const RadialChart = withContext<"div", RadialChartProps>(
   <Y extends Dict>({
     children,
     series = [],
     chartProps,
+    gridProps,
     tooltipProps,
     ...rest
-  }: PieChartProps<Y>) => {
-    const { getChartProps, getRootProps } = usePieChart(rest)
+  }: RadialChartProps<Y>) => {
+    const { getChartProps, getRootProps } = useRadialChart({
+      endAngle: -270,
+      innerRadius: "20%",
+      outerRadius: "90%",
+      startAngle: 90,
+      ...rest,
+    })
     const components = useMemo(
       () => [
         {
-          component: ChartPie,
+          component: ChartRadial,
           fallback: series.map((props, index) => (
-            <ChartPie key={index} {...props} />
+            <ChartRadial key={index} {...props} />
           )),
         },
       ],
@@ -86,9 +94,10 @@ export const PieChart = withContext<"div", PieChartProps>(
       <PolarChart
         components={components}
         render={(props) => (
-          <OriginalPieChart {...getChartProps({ ...props, ...chartProps })} />
+          <RadialBarChart {...getChartProps({ ...props, ...chartProps })} />
         )}
         series={series}
+        gridProps={{ type: "circle", ...gridProps }}
         tooltipProps={{ labelFormatter, ...tooltipProps }}
         {...getRootProps()}
       >
@@ -97,5 +106,5 @@ export const PieChart = withContext<"div", PieChartProps>(
     )
   },
 )() as GenericsComponent<{
-  <Y extends Dict>(props: PieChartProps<Y>): ReactElement
+  <Y extends Dict>(props: RadialChartProps<Y>): ReactElement
 }>

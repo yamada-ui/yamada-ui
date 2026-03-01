@@ -18,7 +18,13 @@ export interface RadarChartProps<Y extends Dict = Dict>
   extends
     Omit<
       PolarChartProps<Y>,
-      "components" | "donutProps" | "pieProps" | "render" | "series"
+      | "components"
+      | "donutProps"
+      | "pieProps"
+      | "radialProps"
+      | "render"
+      | "sectorProps"
+      | "series"
     >,
     UseRadarChartProps<Y>,
     ThemeProps<RadarChartStyle> {

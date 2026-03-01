@@ -5,11 +5,13 @@ import type { ReactElement, ReactNode } from "react"
 import type {
   ActiveDotProps,
   BaseTickContentProps,
+  DataKey,
   DotProps,
   LabelListProps,
   LabelProps,
   PieLabelRenderProps,
   PieSectorShapeProps,
+  SectorProps,
 } from "recharts"
 import type {
   CSSObject,
@@ -36,6 +38,7 @@ import type {
   UseChartPieLabelProps,
   UseChartPieProps,
   UseChartRadarProps,
+  UseChartRadialProps,
   UseChartSectorProps,
   UsePolarGridProps,
   UseRadiusAxisProps,
@@ -54,6 +57,7 @@ import {
   PolarGrid,
   PolarRadiusAxis,
   Radar,
+  RadialBar,
   Sector,
   Text,
 } from "recharts"
@@ -67,6 +71,7 @@ import {
   varAttr,
 } from "../../core"
 import {
+  assignRef,
   cx,
   isFunction,
   isNumber,
@@ -82,6 +87,7 @@ import {
   useChartPieLabel,
   useChartPieLabelLine,
   useChartRadar,
+  useChartRadial,
   useChartSector,
   usePolarGrid,
   useRadiusAxis,
@@ -96,12 +102,65 @@ interface ComponentContext extends Pick<
   | "nameKey"
   | "pieProps"
   | "radarProps"
+  | "radialProps"
   | "radiusAxisProps"
   | "sectorProps"
 > {}
 
 export interface PolarChartProps<Y extends Dict = Dict>
   extends Omit<ChartProps<Y>, "cx" | "cy">, ThemeProps<PolarChartStyle> {
+  /**
+   * The fill of the active dot.
+   */
+  activeDotFill?: CSSProps["fill"]
+  /**
+   * The radius of the active dot.
+   */
+  activeDotRadius?: CSSProps["r"]
+  /**
+   * The stroke of the active dot.
+   */
+  activeDotStroke?: CSSProps["stroke"]
+  /**
+   * The width of the active dot stroke.
+   */
+  activeDotStrokeWidth?: CSSProps["strokeWidth"]
+  /**
+   * The stroke of the angle axis line.
+   */
+  angleAxisLineStroke?: CSSProps["stroke"]
+  /**
+   * The width of the angle axis line stroke.
+   */
+  angleAxisLineStrokeWidth?: CSSProps["strokeWidth"]
+  /**
+   * The color of the angle axis text.
+   */
+  angleAxisTextColor?: CSSProps["color"]
+  /**
+   * The fill of the angle axis text.
+   */
+  angleAxisTextFill?: CSSProps["fill"]
+  /**
+   * The fill of the dot.
+   */
+  dotFill?: CSSProps["fill"]
+  /**
+   * The radius of the dot.
+   */
+  dotRadius?: CSSProps["r"]
+  /**
+   * The stroke of the dot.
+   */
+  dotStroke?: CSSProps["stroke"]
+  /**
+   * The width of the dot stroke.
+   */
+  dotStrokeWidth?: CSSProps["strokeWidth"]
+  /**
+   * The stroke of the grid.
+   */
+  gridStroke?: CSSProps["stroke"]
   /**
    * The opacity of the inactive label line.
    */
@@ -110,6 +169,10 @@ export interface PolarChartProps<Y extends Dict = Dict>
    * The opacity of the inactive label.
    */
   inactiveLabelOpacity?: CSSProps["opacity"]
+  /**
+   * The opacity of the inactive radar.
+   */
+  inactiveRadarOpacity?: CSSProps["opacity"]
   /**
    * The opacity of the inactive sector.
    */
@@ -134,6 +197,54 @@ export interface PolarChartProps<Y extends Dict = Dict>
    * The key to use for the angle axis.
    */
   nameKey?: keyof Y
+  /**
+   * The color of the radar.
+   */
+  radarColor?: CSSProps["color"]
+  /**
+   * The fill opacity of the radar.
+   */
+  radarFillOpacity?: CSSProps["fillOpacity"]
+  /**
+   * The stroke of the radar.
+   */
+  radarStroke?: CSSProps["stroke"]
+  /**
+   * The width of the radar stroke.
+   */
+  radarStrokeWidth?: CSSProps["strokeWidth"]
+  /**
+   * The color of the radial background.
+   */
+  radialBackgroundColor?: CSSProps["color"]
+  /**
+   * The fill of the radial background.
+   */
+  radialBackgroundFill?: CSSProps["fill"]
+  /**
+   * The stroke of the radial background.
+   */
+  radialBackgroundStroke?: CSSProps["stroke"]
+  /**
+   * The width of the radial background stroke.
+   */
+  radialBackgroundStrokeWidth?: CSSProps["strokeWidth"]
+  /**
+   * The stroke of the radius axis line.
+   */
+  radiusAxisLineStroke?: CSSProps["stroke"]
+  /**
+   * The width of the radius axis line stroke.
+   */
+  radiusAxisLineStrokeWidth?: CSSProps["strokeWidth"]
+  /**
+   * The color of the radius axis text.
+   */
+  radiusAxisTextColor?: CSSProps["color"]
+  /**
+   * The fill of the radius axis text.
+   */
+  radiusAxisTextFill?: CSSProps["fill"]
   /**
    * The color of the sector.
    */
@@ -189,6 +300,10 @@ export interface PolarChartProps<Y extends Dict = Dict>
    */
   radarProps?: Omit<ChartRadarProps, "data" | "dataKey">
   /**
+   * Props for the radial component.
+   */
+  radialProps?: Omit<ChartRadialProps, "dataKey" | "nameKey">
+  /**
    * Props for the radius axis component.
    */
   radiusAxisProps?: UseRadiusAxisProps
@@ -226,6 +341,7 @@ export const PolarChart = withProvider(
     gridProps,
     pieProps = donutProps,
     radarProps,
+    radialProps,
     radiusAxisProps,
     sectorProps,
     ...rest
@@ -255,6 +371,7 @@ export const PolarChart = withProvider(
         gridProps,
         pieProps,
         radarProps,
+        radialProps,
         radiusAxisProps,
         sectorProps,
       }),
@@ -266,6 +383,7 @@ export const PolarChart = withProvider(
         radiusAxisProps,
         gridProps,
         nameKey,
+        radialProps,
       ],
     )
 
@@ -279,26 +397,78 @@ export const PolarChart = withProvider(
 )(
   undefined,
   ({
+    activeDotFill,
+    activeDotRadius,
+    activeDotStroke,
+    activeDotStrokeWidth,
+    angleAxisLineStroke,
+    angleAxisLineStrokeWidth,
+    angleAxisTextColor,
+    angleAxisTextFill,
+    dotFill,
+    dotRadius,
+    dotStroke,
+    dotStrokeWidth,
+    gridStroke,
     inactiveLabelLineOpacity,
     inactiveLabelOpacity,
+    inactiveRadarOpacity,
     inactiveSectorOpacity,
     labelColor,
     labelFill,
     labelLineStroke,
     labelLineStrokeWidth,
+    radarColor,
+    radarFillOpacity,
+    radarStroke,
+    radarStrokeWidth,
+    radialBackgroundColor,
+    radialBackgroundFill,
+    radialBackgroundStroke,
+    radialBackgroundStrokeWidth,
+    radiusAxisLineStroke,
+    radiusAxisLineStrokeWidth,
+    radiusAxisTextColor,
+    radiusAxisTextFill,
     sectorColor,
     sectorFill,
     sectorStroke,
     sectorStrokeWidth,
     ...rest
   }) => ({
+    "--active-dot-fill": varAttr(activeDotFill, "colors"),
+    "--active-dot-r": activeDotRadius,
+    "--active-dot-stroke": varAttr(activeDotStroke, "colors"),
+    "--active-dot-stroke-width": activeDotStrokeWidth,
+    "--angle-axis-line-stroke": varAttr(angleAxisLineStroke, "colors"),
+    "--angle-axis-line-stroke-width": angleAxisLineStrokeWidth,
+    "--angle-axis-text-color": varAttr(angleAxisTextColor, "colors"),
+    "--angle-axis-text-fill": varAttr(angleAxisTextFill, "colors"),
+    "--dot-fill": varAttr(dotFill, "colors"),
+    "--dot-r": dotRadius,
+    "--dot-stroke": varAttr(dotStroke, "colors"),
+    "--dot-stroke-width": dotStrokeWidth,
+    "--grid-stroke": varAttr(gridStroke, "colors"),
     "--inactive-label-line-opacity": inactiveLabelLineOpacity,
     "--inactive-label-opacity": inactiveLabelOpacity,
+    "--inactive-radar-opacity": inactiveRadarOpacity,
     "--inactive-sector-opacity": inactiveSectorOpacity,
     "--label-color": varAttr(labelColor, "colors"),
     "--label-fill": varAttr(labelFill, "colors"),
     "--label-line-stroke": varAttr(labelLineStroke, "colors"),
     "--label-line-stroke-width": labelLineStrokeWidth,
+    "--radar-color": varAttr(radarColor, "colors"),
+    "--radar-fill-opacity": radarFillOpacity,
+    "--radar-stroke": varAttr(radarStroke, "colors"),
+    "--radar-stroke-width": radarStrokeWidth,
+    "--radial-background-color": varAttr(radialBackgroundColor, "colors"),
+    "--radial-background-fill": varAttr(radialBackgroundFill, "colors"),
+    "--radial-background-stroke": varAttr(radialBackgroundStroke, "colors"),
+    "--radial-background-stroke-width": radialBackgroundStrokeWidth,
+    "--radius-axis-line-stroke": varAttr(radiusAxisLineStroke, "colors"),
+    "--radius-axis-line-stroke-width": radiusAxisLineStrokeWidth,
+    "--radius-axis-text-color": varAttr(radiusAxisTextColor, "colors"),
+    "--radius-axis-text-fill": varAttr(radiusAxisTextFill, "colors"),
     "--sector-color": varAttr(sectorColor, "colors"),
     "--sector-fill": varAttr(sectorFill, "colors"),
     "--sector-stroke": varAttr(sectorStroke, "colors"),
@@ -546,6 +716,7 @@ export const ChartRadar = withContext<"path", ChartRadarProps>((props) => {
   const { radarProps } = useComponentContext()
   const {
     activeDot: activeDotProp = true,
+    children,
     dataKey,
     dot: dotProp = false,
     label: labelProp = false,
@@ -662,7 +833,7 @@ export const ChartRadar = withContext<"path", ChartRadarProps>((props) => {
   return (
     <>
       <styled.path asChild {...getRootProps()}>
-        <Radar {...getRadarProps()} />
+        <Radar {...getRadarProps()}>{children}</Radar>
       </styled.path>
 
       <linearGradient id={id} x1="0" x2="0" y1="0" y2="1">
@@ -724,6 +895,7 @@ export const ChartAngleAxis = withContext<"text", ChartAngleAxisProps>(
     const { nameKey, angleAxisProps } = useComponentContext()
     const {
       axisLine: axisLineProp = false,
+      children,
       label: labelProp = false,
       tick: tickProp = true,
       tickLine: tickLineProp = false,
@@ -848,7 +1020,7 @@ export const ChartAngleAxis = withContext<"text", ChartAngleAxisProps>(
 
     return (
       <styled.text asChild {...getRootProps()}>
-        <PolarAngleAxis {...getAngleAxisProps()} />
+        <PolarAngleAxis {...getAngleAxisProps()}>{children}</PolarAngleAxis>
       </styled.text>
     )
   },
@@ -899,6 +1071,7 @@ export const ChartRadiusAxis = withContext<"text", ChartRadiusAxisProps>(
     const { radiusAxisProps } = useComponentContext()
     const {
       axisLine: axisLineProp = false,
+      children,
       label: labelProp = false,
       tick: tickProp = true,
       tickLine: tickLineProp = false,
@@ -1022,7 +1195,7 @@ export const ChartRadiusAxis = withContext<"text", ChartRadiusAxisProps>(
 
     return (
       <styled.text asChild {...getRootProps()}>
-        <PolarRadiusAxis {...getRadiusAxisProps()} />
+        <PolarRadiusAxis {...getRadiusAxisProps()}>{children}</PolarRadiusAxis>
       </styled.text>
     )
   },
@@ -1052,3 +1225,167 @@ export const ChartPolarGrid = withContext<"line", ChartPolarGridProps>(
   },
   "grid",
 )()
+
+export type ChartRadialBackground =
+  | ((props: SectorProps) => null | ReactElement | undefined)
+  | boolean
+  | HTMLStyledProps<"svg">
+  | ReactElement
+
+export interface ChartRadialProps<Y extends Dict = Dict> extends Merge<
+  Omit<HTMLStyledProps<"svg">, "background">,
+  Omit<UseChartRadialProps<Y>, "background" | "dataKey" | "label">
+> {
+  /**
+   * The key of a group of data which should be unique in an chart.
+   */
+  dataKey: keyof Y
+  /**
+   * The background to use for the radial chart.
+   */
+  background?: ChartRadialBackground
+  /**
+   * The label to use for the radial.
+   *
+   * @default false
+   */
+  label?: ChartLabelListType
+  /**
+   * If `true`, the label list is visible.
+   *
+   * @default false
+   */
+  labelList?: ChartPieLabelList
+  /**
+   * Props for the sector component.
+   */
+  sectorProps?:
+    | ((props: PieSectorShapeProps) => ChartSectorProps)
+    | ChartSectorProps
+}
+
+export const ChartRadial = withContext<"svg", ChartRadialProps>(
+  <Y extends Dict>(props: ChartRadialProps<Y>) => {
+    const { radialProps } = useComponentContext()
+    const {
+      background: backgroundProp = true,
+      children,
+      dataKey,
+      label: labelProp = false,
+      labelList = false,
+      nameKey,
+      sectorProps,
+      ...rest
+    } = { ...radialProps, ...props }
+    const system = useSystem()
+    const { theme } = useTheme()
+    const { nameKeyRef, varMap } = useChartComponentContext()
+    const labelProps = useSlotComponentProps({}, "labelList")
+    const backgroundProps = useSlotComponentProps({}, "radialBackground")
+    const shape = useCallback(
+      (props: any) => {
+        const color =
+          varMap[`${dataKey.toString()}-${props.name}`] ??
+          rest.fill ??
+          rest.color
+
+        return (
+          <ChartSector
+            color={color}
+            {...props}
+            {...runIfFn(sectorProps, props)}
+          />
+        )
+      },
+      [dataKey, rest.fill, rest.color, sectorProps, varMap],
+    )
+    const label = useMemo<UseChartRadialProps<Y>["label"]>(() => {
+      if (!labelProp) return labelProp
+
+      const css = getCSS(system, theme)
+      const className = cx(labelProps.className, css(labelProps.css))
+
+      if (isFunction(labelProp)) {
+        return (props) =>
+          labelProp({ ...props, className: cx(className, props.className) })
+      } else if (isValidElement(labelProp)) {
+        return cloneElement<any>(labelProp, { className })
+      } else if (isObject(labelProp)) {
+        const [omittedProps, styleProps] = splitObject<
+          LabelListProps,
+          CSSObject
+        >(labelProp, shouldForwardProp)
+
+        return {
+          ...omittedProps,
+          className: cx(className, omittedProps.className, css(styleProps)),
+        }
+      } else {
+        return { className }
+      }
+    }, [system, theme, labelProp, labelProps.className, labelProps.css])
+    const background = useMemo<UseChartRadialProps<Y>["background"]>(() => {
+      if (!backgroundProp) return backgroundProp
+
+      const css = getCSS(system, theme)
+      const className = cx(backgroundProps.className, css(backgroundProps.css))
+
+      if (isFunction(backgroundProp)) {
+        return (props) =>
+          backgroundProp({
+            ...props,
+            className: cx(className, props.className),
+          })
+      } else if (isValidElement(backgroundProp)) {
+        return cloneElement<any>(backgroundProp, { className })
+      } else if (isObject(backgroundProp)) {
+        const [omittedProps, styleProps] = splitObject<
+          HTMLProps<"svg">,
+          CSSObject
+        >(backgroundProp, shouldForwardProp)
+        return {
+          ...omittedProps,
+          className: cx(className, omittedProps.className, css(styleProps)),
+        }
+      } else {
+        return { className }
+      }
+    }, [
+      system,
+      theme,
+      backgroundProp,
+      backgroundProps.className,
+      backgroundProps.css,
+    ])
+    const { getRadialProps, getRootProps } = useChartRadial({
+      background,
+      dataKey: dataKey as DataKey<any>,
+      label,
+      nameKey,
+      shape,
+      ...rest,
+    })
+
+    assignRef(nameKeyRef, nameKey)
+
+    return (
+      <styled.svg asChild {...getRootProps()}>
+        <RadialBar {...getRadialProps()}>
+          {children}
+
+          {labelList ? (
+            <ChartLabelList
+              dataKey={nameKey as DataKey<any>}
+              offset={4}
+              position="insideStart"
+              {...(isObject(labelList) ? labelList : {})}
+            />
+          ) : null}
+        </RadialBar>
+      </styled.svg>
+    )
+  },
+  "radial",
+)() as GenericsComponent<{
+  <Y extends Dict>(props: ChartRadialProps<Y>): ReactElement
+}>

@@ -1,6 +1,11 @@
 "use client"
 
-import type { PropsWithChildren, ReactElement, ReactNode } from "react"
+import type {
+  PropsWithChildren,
+  ReactElement,
+  ReactNode,
+  RefObject,
+} from "react"
 import type {
   ActiveDotProps,
   DataKey,
@@ -29,6 +34,7 @@ import type {
   ChartDonutProps,
   ChartPieProps,
   ChartRadarProps,
+  ChartRadialProps,
 } from "./polar-chart"
 import type {
   UseChartLabelListProps,
@@ -37,7 +43,7 @@ import type {
   UseChartLegendReturn,
   UseChartTooltipProps,
 } from "./use-chart"
-import { Fragment, isValidElement, useMemo } from "react"
+import { Fragment, isValidElement, useMemo, useRef } from "react"
 import {
   Label,
   LabelList,
@@ -157,6 +163,7 @@ interface ComponentContext extends Pick<
   ChartProps,
   "legendProps" | "tooltipProps"
 > {
+  nameKeyRef: RefObject<string | undefined>
   varMap: Dict<string>
 }
 
@@ -182,6 +189,7 @@ export interface ChartProps<Y extends Dict = Dict>
     | ChartLineProps<Y>[]
     | ChartPieProps<Y>[]
     | ChartRadarProps<Y>[]
+    | ChartRadialProps<Y>[]
   /**
    * The fill of the tooltip cursor.
    */
@@ -248,6 +256,7 @@ export const Chart = withProvider(
     ...rest
   }: ChartProps<Y>) => {
     const { highlightedDataKey, onHighlight } = useChart()
+    const nameKeyRef = useRef<string | undefined>(undefined)
     const components = useMemo(
       () => [
         ...componentsProp,
@@ -297,6 +306,7 @@ export const Chart = withProvider(
     )
     const componentContext = useMemo(
       () => ({
+        nameKeyRef,
         varMap,
         legendProps,
         tooltipProps,
@@ -411,23 +421,28 @@ interface ChartLegendContentProps
 
 const ChartLegendContent = withContext<"div", ChartLegendContentProps>(
   ({ formatter, payload, withSwatch = true, ...rest }) => {
-    const { varMap } = useChartComponentContext()
+    const { nameKeyRef, varMap } = useChartComponentContext()
     const { getLegendItemProps } = useChartLegendContext()
 
     return (
       <styled.div {...rest}>
         {payload?.map((data, index) => {
+          let value = data.value
+
+          if (nameKeyRef.current)
+            value = (data.payload as any)?.[nameKeyRef.current]
+
           const dataKey =
             isString(data.dataKey) || isNumber(data.dataKey)
               ? data.dataKey
-              : data.value
+              : value
           const color = data.color || (dataKey ? varMap[dataKey] : undefined)
-          const value = formatter?.(data.value, data, index) ?? data.value
+          const formattedValue = formatter?.(value, data, index) ?? value
 
           return (
             <ChartLegendItem key={index} {...getLegendItemProps({ dataKey })}>
               {withSwatch ? <ChartLegendSwatch bg={color} /> : null}
-              <ChartLegendValue>{value}</ChartLegendValue>
+              <ChartLegendValue>{formattedValue}</ChartLegendValue>
             </ChartLegendItem>
           )
         })}
@@ -581,7 +596,7 @@ const ChartTooltipContent = withContext<"div", ChartTooltipContentProps>(
     withSwatch = true,
     ...rest
   }) => {
-    const { varMap } = useChartComponentContext()
+    const { nameKeyRef, varMap } = useChartComponentContext()
     const label = labelFormatter
       ? labelFormatter(labelProp, payload)
       : labelProp
@@ -594,6 +609,8 @@ const ChartTooltipContent = withContext<"div", ChartTooltipContentProps>(
 
         <ChartTooltipList>
           {payload.map((data, index) => {
+            if (nameKeyRef.current) data.name = data.payload[nameKeyRef.current]
+
             const color = data.payload.fill ?? varMap[data.dataKey.toString()]
             const result =
               formatter?.(data.value, data.name, data, index, payload) ??

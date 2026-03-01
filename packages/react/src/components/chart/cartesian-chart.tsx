@@ -416,6 +416,7 @@ export interface ChartXAxisProps extends Merge<
 export const ChartXAxis = withContext<"svg", ChartXAxisProps>((props) => {
   const { xAxisProps } = useComponentContext()
   const {
+    children,
     label: labelProp = false,
     tick: tickProp = true,
     tickLine: tickLineProp = false,
@@ -505,7 +506,7 @@ export const ChartXAxis = withContext<"svg", ChartXAxisProps>((props) => {
 
   return (
     <styled.svg asChild {...getRootProps()}>
-      <XAxis {...getXAxisProps()} />
+      <XAxis {...getXAxisProps()}>{children}</XAxis>
     </styled.svg>
   )
 }, "xAxis")()
@@ -543,6 +544,7 @@ export interface ChartYAxisProps extends Merge<
 export const ChartYAxis = withContext<"svg", ChartYAxisProps>((props) => {
   const { yAxisProps } = useComponentContext()
   const {
+    children,
     label: labelProp = false,
     tick: tickProp = true,
     tickLine: tickLineProp = false,
@@ -632,7 +634,7 @@ export const ChartYAxis = withContext<"svg", ChartYAxisProps>((props) => {
 
   return (
     <styled.svg asChild {...getRootProps()}>
-      <YAxis {...getYAxisProps()} />
+      <YAxis {...getYAxisProps()}>{children}</YAxis>
     </styled.svg>
   )
 }, "yAxis")()
@@ -692,6 +694,7 @@ export const ChartLine = withContext<"line", ChartLineProps>((props) => {
   const { lineProps } = useComponentContext()
   const {
     activeDot: activeDotProp = true,
+    children,
     dataKey,
     dot: dotProp = false,
     label: labelProp = false,
@@ -805,7 +808,7 @@ export const ChartLine = withContext<"line", ChartLineProps>((props) => {
 
   return (
     <styled.line asChild {...getRootProps()}>
-      <Line {...getLineProps()} />
+      <Line {...getLineProps()}>{children}</Line>
     </styled.line>
   )
 }, "line")() as GenericsComponent<{
@@ -852,6 +855,7 @@ export const ChartArea = withContext<"line", ChartAreaProps>((props) => {
   const { areaProps } = useComponentContext()
   const {
     activeDot: activeDotProp = true,
+    children,
     dataKey,
     dot: dotProp = false,
     label: labelProp = false,
@@ -974,7 +978,7 @@ export const ChartArea = withContext<"line", ChartAreaProps>((props) => {
   return (
     <>
       <styled.line asChild {...getRootProps()}>
-        <Area {...getAreaProps()} />
+        <Area {...getAreaProps()}>{children}</Area>
       </styled.line>
 
       <defs>
@@ -1014,6 +1018,7 @@ export interface ChartBarProps<Y extends Dict = Dict> extends Merge<
 export const ChartBar = withContext<"path", ChartBarProps>((props) => {
   const { barProps } = useComponentContext()
   const {
+    children,
     dataKey,
     label: labelProp = false,
     ...rest
@@ -1058,7 +1063,7 @@ export const ChartBar = withContext<"path", ChartBarProps>((props) => {
 
   return (
     <styled.path asChild {...getRootProps()}>
-      <Bar {...getBarProps()} />
+      <Bar {...getBarProps()}>{children}</Bar>
     </styled.path>
   )
 }, "bar")() as GenericsComponent<{

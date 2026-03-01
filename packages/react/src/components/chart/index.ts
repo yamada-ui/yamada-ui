@@ -7,6 +7,7 @@ export * from "./line-chart.style"
 export * from "./pie-chart.style"
 export * from "./polar-chart.style"
 export * from "./radar-chart.style"
+export * from "./radial-chart.style"
 export * as AreaChart from "./area-chart.namespace"
 export * as BarChart from "./bar-chart.namespace"
 export {
@@ -59,6 +60,7 @@ export {
   ChartPie,
   ChartPolarGrid,
   ChartRadar,
+  ChartRadial,
   ChartRadiusAxis,
   PolarChart,
 } from "./polar-chart"
@@ -71,10 +73,12 @@ export type {
   ChartPieProps,
   ChartPolarGridProps,
   ChartRadarProps,
+  ChartRadialProps,
   ChartRadiusAxisProps,
   PolarChartProps,
 } from "./polar-chart"
 export * as RadarChart from "./radar-chart.namespace"
+export * as RadialChart from "./radial-chart.namespace"
 export * from "./use-area-chart"
 export * from "./use-bar-chart"
 export * from "./use-cartesian-chart"
@@ -83,3 +87,4 @@ export * from "./use-line-chart"
 export * from "./use-pie-chart"
 export * from "./use-polar-chart"
 export * from "./use-radar-chart"
+export * from "./use-radial-chart"

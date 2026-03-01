@@ -1,5 +1,4 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import type { CSSProps } from "../../core"
 import { PropsTable } from "#storybook"
 import { useMemo } from "react"
 import { RadarChart } from "."
@@ -18,7 +17,6 @@ interface Data {
   browser: string
   downloads: null | number
   visits: null | number
-  fill?: CSSProps["fill"]
 }
 
 const randomValue = (min = 1000, max = 5000) =>

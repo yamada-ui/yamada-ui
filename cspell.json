@@ -178,6 +178,7 @@
     "rehype",
     "relayout",
     "remark",
+    "Renderable",
     "Rendererable",
     "Rohg",
     "roledescription",

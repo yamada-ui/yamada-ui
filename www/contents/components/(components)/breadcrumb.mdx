@@ -254,4 +254,26 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+`Breadcrumb` follows the [WAI-ARIA - Breadcrumb Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/) for accessibility.
+
+When using `Breadcrumb`, set the `aria-label` for `Breadcrumb.Root`.
+
+```tsx
+<Breadcrumb.Root aria-label="Breadcrumb">
+  <Breadcrumb.Link href="/">サイヤ人編</Breadcrumb.Link>
+  <Breadcrumb.Link href="/">ナメック星編</Breadcrumb.Link>
+  <Breadcrumb.Link href="/">人造人間編</Breadcrumb.Link>
+  <Breadcrumb.Link href="/" currentPage>
+    魔人ブウ編
+  </Breadcrumb.Link>
+</Breadcrumb.Root>
+```
+
+### ARIA Roles and Attributes
+
+| Component             | Role and Attributes   | Usage                                                              |
+| --------------------- | --------------------- | ------------------------------------------------------------------ |
+| `Breadcrumb.Root`     | `aria-label`          | If `aria-label` is not set, `"Breadcrumb"` will be set by default. |
+| `Breadcrumb.Link`     | `aria-current="page"` | Sets when `currentPage` is `true`.                                 |
+| `Breadcrumb.Ellipsis` | `role="presentation"` | Indicates that this is a presentation.                             |
+|                       | `aria-label`          | Sets `"Ellipsis"`.                                                 |

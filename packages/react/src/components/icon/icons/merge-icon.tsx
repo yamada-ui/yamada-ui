@@ -1,6 +1,8 @@
 "use client"
 
-import { Merge } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Merge as OriginalMergeIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const MergeIcon = component(Icon)({ as: Merge })
+export const MergeIcon = component(Icon)({
+  as: OriginalMergeIcon,
+}) as Component<"svg", IconProps>

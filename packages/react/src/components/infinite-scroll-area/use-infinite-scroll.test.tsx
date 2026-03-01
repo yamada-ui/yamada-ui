@@ -5,14 +5,22 @@ import { useInfiniteScroll } from "./use-infinite-scroll"
 
 describe("useInfiniteScroll", () => {
   const defaultIntersectionObserver = global.IntersectionObserver
-  const IntersectionObserverMock = vi.fn((cb) => ({
-    disconnect: vi.fn(),
-    observe: vi.fn().mockImplementation((el) => {
-      cb([{ target: el, isIntersecting: true }])
-    }),
-    takeRecords: vi.fn(),
-    unobserve: vi.fn(),
-  }))
+  const IntersectionObserverMock = vi.fn(function IntersectionObserverMock(
+    this: {
+      disconnect: () => void
+      observe: (el: Element) => void
+      takeRecords: () => void
+      unobserve: (el: Element) => void
+    },
+    cb: (entries: IntersectionObserverEntry[]) => void,
+  ) {
+    this.disconnect = noop
+    this.observe = (el: Element) => {
+      cb([{ target: el, isIntersecting: true } as IntersectionObserverEntry])
+    }
+    this.takeRecords = noop
+    this.unobserve = noop
+  })
 
   beforeEach(() => {
     vi.stubGlobal("IntersectionObserver", IntersectionObserverMock)

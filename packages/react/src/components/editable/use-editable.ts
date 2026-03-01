@@ -17,11 +17,10 @@ import {
 } from "../../utils"
 import { useFieldProps } from "../field"
 
-interface EditableContext
-  extends Omit<
-    UseEditableReturn,
-    "getRootProps" | "onCancel" | "onEdit" | "onSubmit" | "value"
-  > {}
+interface EditableContext extends Omit<
+  UseEditableReturn,
+  "getRootProps" | "onCancel" | "onEdit" | "onSubmit" | "value"
+> {}
 
 const [EditableContext, useEditableContext] = createContext<EditableContext>({
   name: "EditableContext",

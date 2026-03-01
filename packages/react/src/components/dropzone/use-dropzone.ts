@@ -18,12 +18,7 @@ import {
 import { useFieldProps } from "../field"
 
 export interface UseDropzoneProps
-  extends Omit<HTMLProps, "onDrop" | "onError">,
-    FieldProps {
-  /**
-   * The HTML `name` attribute used for forms.
-   */
-  name?: string
+  extends Omit<HTMLProps, "onDrop" | "onError">, FieldProps {
   /**
    * Set accepted file types.
    */
@@ -69,6 +64,10 @@ export interface UseDropzoneProps
    * @default false
    */
   multiple?: boolean
+  /**
+   * The HTML `name` attribute used for forms.
+   */
+  name?: string
   /**
    * If true, disables click to open the native file selection dialog.
    *
@@ -239,8 +238,8 @@ export const useDropzone = (props: UseDropzoneProps = {}) => {
   assignRef(openRef, open)
 
   const getRootProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) =>
-      getOriginalRootProps({
+    ({ ref, ...props } = {}) => {
+      const { ref: rootRef, ...rootProps } = getOriginalRootProps({
         id: labelledbyId,
         ...dataProps,
         ...eventProps,
@@ -251,8 +250,13 @@ export const useDropzone = (props: UseDropzoneProps = {}) => {
         "data-reject": dataAttr(dragReject),
         ...rest,
         ...props,
-        ref: mergeRefs(ref, rest.ref),
-      }),
+      })
+
+      return {
+        ...rootProps,
+        ref: mergeRefs(ref, rest.ref, rootRef),
+      }
+    },
     [
       getOriginalRootProps,
       labelledbyId,

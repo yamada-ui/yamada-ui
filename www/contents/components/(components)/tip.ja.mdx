@@ -1,7 +1,256 @@
 ---
 title: Tip
-description: "`Tip`は、現在作成を検討しています。"
-status: planned
+description: "`Tip`は、アイコンボタンをトリガーとして補足情報を表示するコンポーネントです。"
+status: new
+storybook: components-tip--basic
+source: components/tip
 ---
 
-このGitHubの[イシュー](https://github.com/yamada-ui/yamada-ui/issues/5281)であなたの意見を投稿してください。作成の優先順位を決めるのに役立ちます。
+```tsx preview
+<HStack gap="xs">
+  <Text as="span" whiteSpace="nowrap">
+    煉獄杏寿郎
+  </Text>
+  <Tip content="俺は俺の責務を全うする!!" />
+</HStack>
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Tip } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Tip } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Tip } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Tip />
+```
+
+### ステータスを変更する
+
+ステータスを変更する場合は、`status`に`"help"`や`"info"`などを指定します。デフォルトでは`"help"`が設定されています。
+
+```tsx preview
+<VStack>
+  <For each={["help", "info", "success", "warning", "error"]}>
+    {(status) => (
+      <HStack key={status} gap="xs">
+        <Text as="span" whiteSpace="nowrap">
+          {toTitleCase(status)}
+        </Text>
+        <Tip content="俺は俺の責務を全うする!!" status={status} />
+      </HStack>
+    )}
+  </For>
+</VStack>
+```
+
+### カラースキームを変更する
+
+```tsx preview
+<VStack>
+  <For each={["help", "info", "success", "warning", "error"]}>
+    {(status) => (
+      <HStack key={status} gap="xs">
+        <Text as="span" whiteSpace="nowrap">
+          {toTitleCase(status)}
+        </Text>
+        <Tip
+          colorScheme={status === "help" ? "mono" : status}
+          content="俺は俺の責務を全うする!!"
+          status={status}
+        />
+      </HStack>
+    )}
+  </For>
+</VStack>
+```
+
+### 所要時間を変更する
+
+所要時間を変更する場合は、`duration`に数値(秒)を設定します。
+
+```tsx preview
+<HStack gap="xs">
+  <Text as="span" whiteSpace="nowrap">
+    煉獄杏寿郎
+  </Text>
+  <Tip content="俺は俺の責務を全うする!!" duration={0.7} />
+</HStack>
+```
+
+### 遅延させる
+
+表示または非表示を遅延させる場合は、`openDelay`または`closeDelay`に数値(ミリ秒)を設定します。
+
+```tsx preview
+<VStack>
+  <HStack gap="xs">
+    <Text as="span" whiteSpace="nowrap">
+      Delay Open 1000ms
+    </Text>
+    <Tip content="俺は俺の責務を全うする!!" openDelay={1000} />
+  </HStack>
+
+  <HStack gap="xs">
+    <Text as="span" whiteSpace="nowrap">
+      Delay Close 1000ms
+    </Text>
+    <Tip content="俺は俺の責務を全うする!!" closeDelay={1000} />
+  </HStack>
+</VStack>
+```
+
+### オフセットを変更する
+
+オフセットを変更する場合は、`gutter`または`offset`に値を設定します。
+
+`gutter`は、単純な要素との差を設定でき、`offset`は、`[横軸, 縦軸]`を設定できます。
+
+```tsx preview
+<VStack>
+  <HStack gap="xs">
+    <Text as="span" whiteSpace="nowrap">
+      煉獄杏寿郎
+    </Text>
+    <Tip content="俺は俺の責務を全うする!!" gutter={32} />
+  </HStack>
+
+  <HStack gap="xs">
+    <Text as="span" whiteSpace="nowrap">
+      煉獄杏寿郎
+    </Text>
+    <Tip content="俺は俺の責務を全うする!!" offset={[16, 16]} />
+  </HStack>
+</VStack>
+```
+
+### アニメーションを変更する
+
+表示または非表示のアニメーションを変更する場合は、`animationScheme`に`"scale"`や`"block-end"`などを設定します。デフォルトでは、`"scale"`が設定されています。
+
+```tsx preview
+<VStack>
+  <For
+    each={["scale", "block-end", "inline-start", "inline-end", "block-start"]}
+  >
+    {(animationScheme) => (
+      <HStack key={animationScheme} gap="xs">
+        <Text as="span" whiteSpace="nowrap">
+          {toTitleCase(animationScheme)}
+        </Text>
+        <Tip
+          animationScheme={animationScheme}
+          content="俺は俺の責務を全うする!!"
+        />
+      </HStack>
+    )}
+  </For>
+</VStack>
+```
+
+### 表示位置を変更する
+
+表示位置を変更する場合は、`placement`に`"end"`や`"center-start"`などを設定します。デフォルトでは、`"start"`が設定されています。
+
+```tsx preview
+<VStack>
+  <For
+    each={[
+      "start",
+      "start-start",
+      "start-end",
+      "start-center",
+      "end",
+      "end-start",
+      "end-end",
+      "end-center",
+      "center-start",
+      "center-end",
+    ]}
+  >
+    {(placement) => (
+      <HStack key={placement} gap="xs">
+        <Text as="span" whiteSpace="nowrap">
+          {toTitleCase(placement)}
+        </Text>
+        <Tip content="俺は俺の責務を全うする!!" placement={placement} />
+      </HStack>
+    )}
+  </For>
+</VStack>
+```
+
+### 無効にする
+
+ツールチップを無効にする場合は、`disabled`を`true`に設定します。
+
+```tsx preview
+<HStack gap="xs">
+  <Text as="span" whiteSpace="nowrap">
+    煉獄杏寿郎
+  </Text>
+  <Tip content="俺は俺の責務を全うする!!" disabled />
+</HStack>
+```
+
+### 常に表示する
+
+ツールチップを常に表示する場合は、`open`を`true`に設定します。
+
+```tsx preview
+<HStack gap="xs">
+  <Text as="span" whiteSpace="nowrap">
+    煉獄杏寿郎
+  </Text>
+  <Tip content="俺は俺の責務を全うする!!" open />
+</HStack>
+```
+
+### アイコンをカスタマイズする
+
+アイコンをカスタマイズする場合は、`icon`にアイコンを設定します。
+
+```tsx preview
+<HStack gap="xs">
+  <Text as="span" whiteSpace="nowrap">
+    煉獄杏寿郎
+  </Text>
+  <Tip content="俺は俺の責務を全うする!!" icon={<MessageCircleWarningIcon />} />
+</HStack>
+```
+
+### 制御する
+
+```tsx preview functional client
+const { open, onClose, onOpen } = useDisclosure()
+
+return (
+  <HStack gap="xs">
+    <Text as="span" whiteSpace="nowrap">
+      煉獄杏寿郎
+    </Text>
+    <Tip
+      content="俺は俺の責務を全うする!!"
+      open={open}
+      onClose={onClose}
+      onOpen={onOpen}
+    />
+  </HStack>
+)
+```
+
+## Props
+
+<PropsTable name="tip" />

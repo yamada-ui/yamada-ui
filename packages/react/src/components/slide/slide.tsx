@@ -59,8 +59,7 @@ export const slideVariants: Variants = {
 } satisfies MotionTransitionVariants
 
 export interface SlideProps
-  extends WithTransitionProps<HTMLMotionProps>,
-    ThemeProps<SlideStyle> {}
+  extends WithTransitionProps<HTMLMotionProps>, ThemeProps<SlideStyle> {}
 
 const {
   PropsContext: SlidePropsContext,

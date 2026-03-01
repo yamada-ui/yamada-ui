@@ -16,12 +16,11 @@ import { useFormContext } from "../form"
 import { fieldStyle } from "./field.style"
 
 export interface FieldContext
-  extends FieldProps,
-    Pick<FieldRootProps, "replace"> {
-  id: string
+  extends FieldProps, Pick<FieldRootProps, "replace"> {
   errorMessageId: string
   focused: boolean
   helperMessageId: string
+  id: string
   labelId: string
   onBlur: () => void
   onFocus: () => void
@@ -62,14 +61,11 @@ export interface FieldProps {
 }
 
 export interface FieldRootProps
-  extends HTMLStyledProps,
+  extends
+    HTMLStyledProps,
     ThemeProps<FieldStyle>,
     Pick<FieldLabelProps, "optionalIndicator" | "requiredIndicator">,
     FieldProps {
-  /**
-   * The name of the field.
-   */
-  name?: string
   /**
    * The field error message to use.
    */
@@ -82,6 +78,10 @@ export interface FieldRootProps
    * The field label to use.
    */
   label?: ReactNode
+  /**
+   * The name of the field.
+   */
+  name?: string
   /**
    * If `true`, switch between helper message and error message using invalid.
    *

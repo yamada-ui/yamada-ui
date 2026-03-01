@@ -81,7 +81,8 @@ export const getPopupAnimationProps = (
 }
 
 interface ComponentContext
-  extends Pick<
+  extends
+    Pick<
       UsePopoverReturn,
       | "getAnchorProps"
       | "getBodyProps"
@@ -96,9 +97,7 @@ interface ComponentContext
     PopupAnimationProps {}
 
 export interface PopoverRootProps
-  extends UsePopoverProps,
-    PopupAnimationProps,
-    ThemeProps<PopoverStyle> {
+  extends UsePopoverProps, PopupAnimationProps, ThemeProps<PopoverStyle> {
   /**
    * The children of the popover.
    */
@@ -237,8 +236,7 @@ const PopoverPositioner = withContext<"div", PopoverPositionerProps>(
 })
 
 export interface PopoverContentProps
-  extends Omit<HTMLMotionProps, "children">,
-    PropsWithChildren {
+  extends Omit<HTMLMotionProps, "children">, PropsWithChildren {
   /**
    * Props for portal component.
    */

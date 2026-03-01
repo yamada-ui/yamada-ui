@@ -10,14 +10,16 @@ import { qrCodeStyle } from "./qr-code.style"
 import { useQrCode } from "./use-qr-code"
 
 interface ComponentContext
-  extends Pick<
+  extends
+    Pick<
       UseQrCodeReturn,
       "getFrameProps" | "getOverlayProps" | "getPatternProps"
     >,
     Pick<QrCodeRootProps, "patternProps"> {}
 
 export interface QrCodeRootProps
-  extends Omit<HTMLStyledProps, "border" | "invert">,
+  extends
+    Omit<HTMLStyledProps, "border" | "invert">,
     ThemeProps<QrCodeStyle>,
     UseQrCodeProps {
   /**

@@ -35,6 +35,9 @@ const data: IntlData = {
   colorSelector: {
     "Pick a color": "Виберіть колір",
   },
+  colorSwatch: {
+    "Color swatch group": "Група зразків кольорів",
+  },
   datePicker: {
     "Clear value": "Очистити значення",
   },

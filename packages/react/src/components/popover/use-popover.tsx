@@ -31,8 +31,7 @@ import {
 } from "../../utils"
 
 export interface UsePopoverProps
-  extends Omit<UseDisclosureProps, "timing">,
-    UsePopperProps<"button"> {
+  extends Omit<UseDisclosureProps, "timing">, UsePopperProps<"button"> {
   /**
    * If `true`, focus will be transferred to the first interactive element when the popover opens.
    *

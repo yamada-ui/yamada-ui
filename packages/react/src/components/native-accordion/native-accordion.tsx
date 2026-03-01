@@ -21,11 +21,14 @@ import {
 
 export interface NativeAccordionItem extends NativeAccordionItemProps {}
 
-interface ComponentContext
-  extends Pick<NativeAccordionRootProps, "icon" | "iconHidden"> {}
+interface ComponentContext extends Pick<
+  NativeAccordionRootProps,
+  "icon" | "iconHidden"
+> {}
 
 export interface NativeAccordionRootProps
-  extends Omit<HTMLStyledProps, "onChange">,
+  extends
+    Omit<HTMLStyledProps, "onChange">,
     ThemeProps<NativeAccordionStyle>,
     UseNativeAccordionProps {
   /**
@@ -45,7 +48,8 @@ export interface NativeAccordionRootProps
 }
 
 interface ItemComponentContext
-  extends Pick<NativeAccordionItemProps, "icon">,
+  extends
+    Pick<NativeAccordionItemProps, "icon">,
     Omit<UseNativeAccordionItemReturn, "getItemProps"> {}
 
 const [ItemComponentContext, useItemComponentContext] =
@@ -101,8 +105,7 @@ export const NativeAccordionRoot = withProvider<
 }, "root")()
 
 export interface NativeAccordionItemProps
-  extends HTMLStyledProps<"details">,
-    UseNativeAccordionItemProps {
+  extends HTMLStyledProps<"details">, UseNativeAccordionItemProps {
   /**
    * The accordion button to use.
    */

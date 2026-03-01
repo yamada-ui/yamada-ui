@@ -33,19 +33,9 @@ const validate = (value: string, type: UsePinInputProps["type"]) => {
 }
 
 export interface UsePinInputProps
-  extends Omit<HTMLProps, "defaultValue" | "mask" | "onChange" | "value">,
+  extends
+    Omit<HTMLProps, "defaultValue" | "mask" | "onChange" | "value">,
     FieldProps {
-  /**
-   * The top-level id string that will be applied to the input fields.
-   * The index of the input will be appended to this top-level id.
-   */
-  id?: string
-  /**
-   * The type of values the pin-input should allow.
-   *
-   * @default 'number'
-   */
-  type?: "alphanumeric" | "number"
   /**
    * If `true`, the pin input receives focus on mount.
    *
@@ -56,6 +46,11 @@ export interface UsePinInputProps
    * The initial value of the pin input.
    */
   defaultValue?: string
+  /**
+   * The top-level id string that will be applied to the input fields.
+   * The index of the input will be appended to this top-level id.
+   */
+  id?: string
   /**
    * The number of inputs to display.
    *
@@ -82,6 +77,12 @@ export interface UsePinInputProps
    * @default '◯'
    */
   placeholder?: string
+  /**
+   * The type of values the pin-input should allow.
+   *
+   * @default 'number'
+   */
+  type?: "alphanumeric" | "number"
   /**
    * The value of the pin input.
    */

@@ -28,11 +28,14 @@ interface AccordionCallBackProps {
 
 export interface AccordionItem extends Omit<AccordionItemProps, "index"> {}
 
-interface ComponentContext
-  extends Pick<AccordionRootProps, "icon" | "iconHidden"> {}
+interface ComponentContext extends Pick<
+  AccordionRootProps,
+  "icon" | "iconHidden"
+> {}
 
 export interface AccordionRootProps
-  extends Omit<HTMLStyledProps, "onChange">,
+  extends
+    Omit<HTMLStyledProps, "onChange">,
     ThemeProps<AccordionStyle>,
     UseAccordionProps {
   /**
@@ -137,7 +140,8 @@ export const AccordionRoot = withProvider<"div", AccordionRootProps>(
 )()
 
 export interface AccordionItemProps
-  extends Omit<HTMLStyledProps, "children">,
+  extends
+    Omit<HTMLStyledProps, "children">,
     Omit<UseAccordionItemProps, "children"> {
   /**
    * The accordion button to use.
@@ -261,7 +265,8 @@ export const AccordionIcon = withContext<"svg", AccordionIconProps>(
 )()
 
 export interface AccordionPanelProps
-  extends Omit<HTMLStyledProps, "transition">,
+  extends
+    Omit<HTMLStyledProps, "transition">,
     Pick<
       CollapseProps,
       | "animationOpacity"

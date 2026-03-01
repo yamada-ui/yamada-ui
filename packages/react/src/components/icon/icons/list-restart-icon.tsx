@@ -1,6 +1,8 @@
 "use client"
 
-import { ListRestart } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { ListRestart as OriginalListRestartIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const ListRestartIcon = component(Icon)({ as: ListRestart })
+export const ListRestartIcon = component(Icon)({
+  as: OriginalListRestartIcon,
+}) as Component<"svg", IconProps>

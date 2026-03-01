@@ -20,7 +20,8 @@ import { useFieldProps } from "../field"
 import { useToggleGroupContext } from "./use-toggle-group"
 
 export interface UseToggleProps<Y extends string = string>
-  extends FieldProps,
+  extends
+    FieldProps,
     HTMLRefAttributes<"input">,
     Omit<HTMLProps<"button">, "onChange" | "ref" | "value"> {
   /**

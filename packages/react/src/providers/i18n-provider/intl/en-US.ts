@@ -33,6 +33,9 @@ const data = {
   colorSelector: {
     "Pick a color": "Pick a color",
   },
+  colorSwatch: {
+    "Color swatch group": "Color swatch group",
+  },
   datePicker: {
     "Clear value": "Clear value",
   },

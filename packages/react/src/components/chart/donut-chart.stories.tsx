@@ -310,6 +310,7 @@ export const Stacked: Story = () => {
       },
       {
         dataKey: "downloads",
+        innerRadius: "50%",
         nameKey: "browser",
         outerRadius: "70%",
       },
@@ -695,6 +696,8 @@ export const ActiveSector: Story = () => {
       data={data}
       series={series}
       donutProps={{
+        innerRadius: "70%",
+        outerRadius: "90%",
         sectorProps: ({ isActive, outerRadius }) => ({
           outerRadius: isActive ? outerRadius + 15 : outerRadius,
         }),

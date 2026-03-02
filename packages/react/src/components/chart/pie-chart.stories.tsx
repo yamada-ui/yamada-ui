@@ -630,6 +630,7 @@ export const ActiveSector: Story = () => {
       series={series}
       pieProps={{
         innerRadius: "70%",
+        outerRadius: "90%",
         sectorProps: ({ isActive, outerRadius }) => ({
           outerRadius: isActive ? outerRadius + 15 : outerRadius,
         }),

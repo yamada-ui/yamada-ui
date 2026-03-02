@@ -1,8 +1,707 @@
 ---
 title: RadarChart
 description: "`RadarChart`は、複数のデータを比較するためのレーダーチャートを描画するコンポーネントです。"
-storybook: components-radarchart--basic
-source: components/radar-chart
+storybook: components-chart-radarchart--basic
+source: components/chart
+style: components/chart/radar-chart.style.ts
 ---
 
-現在、このコンポーネントは移行が完了していません。このコンポーネントの移行は、v2.0.xで行われる予定です。
+```tsx functional preview
+interface Data {
+  browser: string
+  visits: number
+  downloads: number
+  fill?: CSSProps["fill"]
+}
+
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () =>
+    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+  [],
+)
+const data = useMemo<Data[]>(
+  () => [
+    {
+      browser: "chrome",
+      visits: faker.number.int({ max: 5000, min: 1000 }),
+      downloads: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      browser: "edge",
+      visits: faker.number.int({ max: 5000, min: 1000 }),
+      downloads: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      browser: "firefox",
+      visits: faker.number.int({ max: 5000, min: 1000 }),
+      downloads: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      browser: "opera",
+      visits: faker.number.int({ max: 5000, min: 1000 }),
+      downloads: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      browser: "safari",
+      visits: faker.number.int({ max: 5000, min: 1000 }),
+      downloads: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      browser: "other",
+      visits: faker.number.int({ max: 5000, min: 1000 }),
+      downloads: faker.number.int({ max: 5000, min: 1000 }),
+    },
+  ],
+  [],
+)
+
+return <RadarChart.Root nameKey="browser" data={data} series={series} />
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { RadarChart } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { RadarChart } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { RadarChart } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<RadarChart.Root>
+  <RadarChart.Radar>
+    <RadarChart.LabelList />
+  </RadarChart.Radar>
+  <RadarChart.Label />
+  <RadarChart.Grid />
+  <RadarChart.RadiusAxis />
+  <RadarChart.AngleAxis />
+  <RadarChart.Tooltip />
+  <RadarChart.Legend />
+</RadarChart.Root>
+```
+
+### コンポジション
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <RadarChart.Root data={data}>
+    <RadarChart.Tooltip />
+    <RadarChart.Radar color="blue" dataKey="visits" />
+    <RadarChart.Radar color="green" dataKey="downloads" />
+    <RadarChart.RadiusAxis />
+    <RadarChart.AngleAxis dataKey="browser" />
+  </RadarChart.Root>
+)
+```
+
+### サイズを変更する
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () =>
+    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <VStack>
+    <For each={["xs", "sm", "md", "lg", "xl"]}>
+      {(size, index) => (
+        <RadarChart.Root
+          key={index}
+          data={data}
+          nameKey="browser"
+          series={series}
+          size={size}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### グラデーションの色を変更する
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () =>
+    RadarChart.mergeSeries(
+      [{ dataKey: "visits" }, { dataKey: "downloads" }],
+      "blue",
+    ),
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return <RadarChart.Root data={data} nameKey="browser" series={series} />
+```
+
+### 色を変更する
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () => [
+    { color: "red", dataKey: "visits" },
+    { color: "green", dataKey: "downloads" },
+  ],
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return <RadarChart.Root data={data} nameKey="browser" series={series} />
+```
+
+### 半径軸を表示する
+
+半径軸を表示する場合は、`withRadiusAxis`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () =>
+    RadarChart.mergeSeries(
+      [{ dataKey: "visits" }, { dataKey: "downloads" }],
+      "blue",
+    ),
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <RadarChart.Root
+    data={data}
+    nameKey="browser"
+    series={series}
+    withRadiusAxis
+  />
+)
+```
+
+### 半径軸の角度を変更する
+
+半径軸の角度を変更する場合は、`radiusAxisProps.angle`を設定します。デフォルトは、`90`です。
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () =>
+    RadarChart.mergeSeries(
+      [{ dataKey: "visits" }, { dataKey: "downloads" }],
+      "blue",
+    ),
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <RadarChart.Root
+    data={data}
+    nameKey="browser"
+    series={series}
+    withRadiusAxis
+    radiusAxisProps={{ angle: 30 }}
+  />
+)
+```
+
+### 凡例を表示する
+
+凡例を表示する場合は、`withLegend`を`true`に設定します。配置を変更する場合は、`legendProps.placement`を設定します。
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () => [
+    { color: "red", dataKey: "visits" },
+    { color: "green", dataKey: "downloads" },
+  ],
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <RadarChart.Root data={data} nameKey="browser" series={series} withLegend />
+)
+```
+
+### ラベルを表示する
+
+ラベルを表示する場合は、`series`の`label`または`radarProps.label`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () => [{ color: "blue", dataKey: "visits" }],
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <RadarChart.Root
+    data={data}
+    nameKey="browser"
+    radarProps={{ dot: true, label: true }}
+    series={series}
+  />
+)
+```
+
+### グリッドのタイプを変更する
+
+グリッドのタイプを変更する場合は、`gridProps.gridType`に`"polygon"`または`"circle"`を設定します。
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () =>
+    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <VStack>
+    <For each={["polygon", "circle"]}>
+      {(gridType, index) => (
+        <RadarChart.Root
+          key={index}
+          data={data}
+          gridProps={{ gridType }}
+          nameKey="browser"
+          series={series}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### グリッドを塗りつぶす
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () =>
+    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <VStack>
+    <For each={["polygon", "circle"]}>
+      {(gridType, index) => (
+        <RadarChart.Root
+          key={index}
+          data={data}
+          gridProps={{ fill: "mono.emphasized", gridType, opacity: 0.2 }}
+          nameKey="browser"
+          series={series}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### 線のみ表示する
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () => [
+    { color: "red", dataKey: "visits" },
+    { color: "green", dataKey: "downloads" },
+  ],
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <RadarChart.Root
+    data={data}
+    nameKey="browser"
+    radarProps={{ fill: "transparent" }}
+    series={series}
+  />
+)
+```
+
+### ドットを表示する
+
+ドットを表示する場合は、`series`の`dot`または`radarProps.dot`を`true`に設定します。
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () =>
+    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <RadarChart.Root
+    data={data}
+    nameKey="browser"
+    radarProps={{ dot: true }}
+    series={series}
+  />
+)
+```
+
+### 同期させる
+
+同期させる場合は、`syncId`に文字列を設定します。
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () =>
+    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <VStack>
+    <RadarChart.Root
+      data={data}
+      nameKey="browser"
+      series={series}
+      syncId="chart"
+    />
+    <RadarChart.Root
+      data={data}
+      nameKey="browser"
+      series={series}
+      syncId="chart"
+    />
+  </VStack>
+)
+```
+
+### フォーマットする
+
+フォーマットする場合は、`formatter`や`tickFormatter`などを使用します。
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () => [{ color: "blue", dataKey: "visits" }],
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <RadarChart.Root
+    angleAxisProps={{ tickFormatter: (value) => toTitleCase(value) }}
+    data={data}
+    nameKey="browser"
+    radarProps={{
+      dot: true,
+      label: { formatter: (value) => Number(value).toLocaleString() },
+    }}
+    series={series}
+    tooltipProps={{
+      formatter: (value, name = "") => [
+        Number(value).toLocaleString(),
+        toTitleCase(name),
+      ],
+      labelFormatter: (value) => toTitleCase(isString(value) ? value : ""),
+    }}
+  />
+)
+```
+
+### 角度軸の軸線を表示する
+
+角度軸の軸線を表示する場合は、`angleAxisProps.axisLine`を`true`に設定します。
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () =>
+    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <RadarChart.Root
+    angleAxisProps={{ axisLine: true }}
+    data={data}
+    nameKey="browser"
+    series={series}
+  />
+)
+```
+
+### 角度軸の目盛線を表示する
+
+角度軸の目盛線を表示する場合は、`angleAxisProps.tickLine`を`true`に設定します。
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () =>
+    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <RadarChart.Root
+    angleAxisProps={{ tickLine: true }}
+    data={data}
+    nameKey="browser"
+    series={series}
+  />
+)
+```
+
+### 範囲を設定する
+
+範囲を設定する場合は、`radiusAxisProps.domain`に`[最小, 最大]`を設定します。間隔を設定する場合は、`radiusAxisProps.ticks`に配列を設定します。
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () =>
+    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <RadarChart.Root
+    data={data}
+    nameKey="browser"
+    radiusAxisProps={{
+      axisLine: false,
+      domain: [0, 7000],
+      tick: false,
+      ticks: [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000],
+    }}
+    series={series}
+    withRadiusAxis
+  />
+)
+```
+
+### ツールチップカーソルを表示する
+
+ツールチップカーソルを表示する場合は、`tooltipProps.cursor`を`true`に設定します。
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () =>
+    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <RadarChart.Root
+    data={data}
+    nameKey="browser"
+    series={series}
+    tooltipProps={{ cursor: true }}
+  />
+)
+```
+
+### 角度軸を非表示にする
+
+角度軸を非表示にする場合は、`withAngleAxis`を`false`に設定します。デフォルトは、`true`です。
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () =>
+    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <RadarChart.Root
+    data={data}
+    nameKey="browser"
+    series={series}
+    withAngleAxis={false}
+  />
+)
+```
+
+### グリッドを非表示にする
+
+グリッドを非表示にする場合は、`withGrid`を`false`に設定します。デフォルトは、`true`です。
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () =>
+    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <RadarChart.Root
+    data={data}
+    nameKey="browser"
+    series={series}
+    withGrid={false}
+  />
+)
+```
+
+### アクティブドットを非表示にする
+
+アクティブドットを非表示にする場合は、`series`の`activeDot`または`radarProps.activeDot`を`false`に設定します。
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () =>
+    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <RadarChart.Root
+    data={data}
+    nameKey="browser"
+    radarProps={{ activeDot: false }}
+    series={series}
+  />
+)
+```
+
+### ツールチップを非表示にする
+
+ツールチップを非表示にする場合は、`withTooltip`を`false`に設定します。デフォルトは、`true`です。
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () =>
+    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <RadarChart.Root
+    data={data}
+    nameKey="browser"
+    series={series}
+    withTooltip={false}
+  />
+)
+```
+
+### ドットをカスタマイズする
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () =>
+    RadarChart.mergeSeries([
+      { dataKey: "visits", dot: { fill: "blue" } },
+      { dataKey: "downloads" },
+    ]),
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <RadarChart.Root
+    data={data}
+    nameKey="browser"
+    radarProps={{ activeDot: false }}
+    series={series}
+    tooltipProps={{ contentProps: { withSwatch: false } }}
+  />
+)
+```
+
+### アクティブドットをカスタマイズする
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () =>
+    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <RadarChart.Root
+    data={data}
+    nameKey="browser"
+    radarProps={{ activeDot: { fill: ["blue", "red"] } }}
+    series={series}
+    tooltipProps={{ contentProps: { withSwatch: false } }}
+  />
+)
+```
+
+### ラベルをカスタマイズする
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () => [{ color: "blue", dataKey: "visits" }],
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <RadarChart.Root
+    data={data}
+    nameKey="browser"
+    radarProps={{
+      activeDot: { fill: "red" },
+      dot: { fill: "red" },
+      label: { color: "red" },
+    }}
+    series={series}
+    tooltipProps={{ contentProps: { withSwatch: false } }}
+  />
+)
+```
+
+### ツールチップのカーソルをカスタマイズする
+
+```tsx preview functional
+const series = useMemo<RadarChart.RadarProps<Data>[]>(
+  () =>
+    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+  [],
+)
+const data = useMemo<Data[]>(() => createPolarChartData(), [])
+
+return (
+  <RadarChart.Root
+    data={data}
+    nameKey="browser"
+    series={series}
+    tooltipProps={{ cursor: { stroke: ["red", "blue"] } }}
+  />
+)
+```
+
+## Props
+
+<PropsTable
+  name="chart"
+  pick={[
+    "RadarChart",
+    "RadarChart.Root",
+    "RadarChart.Radar",
+    "RadarChart.AngleAxis",
+    "RadarChart.Grid",
+    "RadarChart.Label",
+    "RadarChart.LabelList",
+    "RadarChart.Legend",
+    "RadarChart.RadiusAxis",
+    "RadarChart.Tooltip",
+  ]}
+/>

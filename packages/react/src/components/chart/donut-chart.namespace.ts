@@ -1,17 +1,10 @@
-import type {
+export type {
   ChartLabelListProps as LabelListProps,
   ChartLabelProps as LabelProps,
   ChartLegendProps as LegendProps,
   ChartTooltipProps as TooltipProps,
 } from "./chart"
-import type { DonutChartProps as RootProps } from "./donut-chart"
-import type {
-  ChartPieLabel as DonutLabel,
-  ChartPieLabelLine as DonutLabelLine,
-  ChartPieLabelList as DonutLabelList,
-  ChartDonutProps as DonutProps,
-} from "./polar-chart"
-import {
+export {
   gradients,
   ChartLabel as Label,
   ChartLabelList as LabelList,
@@ -19,33 +12,16 @@ import {
   mergeData,
   ChartTooltip as Tooltip,
 } from "./chart"
-import {
+export type { DonutChartProps as RootProps } from "./donut-chart"
+export {
   DonutChartPropsContext as PropsContext,
   DonutChart as Root,
   useDonutChartPropsContext as usePropsContext,
 } from "./donut-chart"
-import { ChartDonut as Donut } from "./polar-chart"
-
-export {
-  Donut,
-  gradients,
-  Label,
-  LabelList,
-  Legend,
-  mergeData,
-  PropsContext,
-  Root,
-  Tooltip,
-  usePropsContext,
-}
 export type {
-  DonutLabel,
-  DonutLabelLine,
-  DonutLabelList,
-  DonutProps,
-  LabelListProps,
-  LabelProps,
-  LegendProps,
-  RootProps,
-  TooltipProps,
-}
+  ChartPieLabel as DonutLabel,
+  ChartPieLabelLine as DonutLabelLine,
+  ChartPieLabelList as DonutLabelList,
+  ChartDonutProps as DonutProps,
+} from "./polar-chart"
+export { ChartDonut as Donut } from "./polar-chart"

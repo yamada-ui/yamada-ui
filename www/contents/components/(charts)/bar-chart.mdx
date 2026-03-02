@@ -1,8 +1,1171 @@
 ---
 title: BarChart
 description: "`BarChart` is a component for drawing bar charts to compare multiple sets of data."
-storybook: components-barchart--basic
-source: components/bar-chart
+storybook: components-chart-barchart--basic
+source: components/chart
+style: components/chart/bar-chart.style.ts
 ---
 
-Currently, this component is not migrated. This component will be migrated in v2.0.x.
+```tsx functional preview
+interface Data {
+  date: string
+  desktop: number
+  mobile: number
+  tablet: number
+}
+
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo<Data[]>(
+  () => [
+    {
+      date: "2026-03-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      date: "2026-04-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      date: "2026-05-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      date: "2026-06-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      date: "2026-07-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      date: "2026-08-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+  ],
+  [],
+)
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { BarChart } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { BarChart } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { BarChart } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<BarChart.Root>
+  <BarChart.Bar>
+    <BarChart.LabelList />
+  </BarChart.Bar>
+  <BarChart.Label />
+  <BarChart.ReferenceLine />
+  <BarChart.Grid />
+  <BarChart.XAxis />
+  <BarChart.YAxis />
+  <BarChart.Tooltip />
+  <BarChart.Legend />
+</BarChart.Root>
+```
+
+### Composition
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root data={data}>
+    <BarChart.Tooltip labelFormatter={(value) => dayjs(value).format("MMM")} />
+    <BarChart.XAxis
+      dataKey="date"
+      tickFormatter={(value) => dayjs(value).format("MMM")}
+    />
+    <BarChart.Bar dataKey="desktop">
+      <BarChart.LabelList />
+    </BarChart.Bar>
+    <BarChart.Bar dataKey="tablet" />
+    <BarChart.Bar dataKey="mobile" />
+  </BarChart.Root>
+)
+```
+
+### Change Size
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <For each={["xs", "sm", "md", "lg", "xl"]}>
+      {(size, index) => (
+        <BarChart.Root
+          key={index}
+          size={size}
+          data={data}
+          series={series}
+          tooltipProps={{
+            labelFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+          xAxisProps={{
+            dataKey: "date",
+            tickFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Color Scheme
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    colorScheme="blue"
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Change Color
+
+To change the color, set `color` or `barProps.color` to a color. The default is `"mono.500"`.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", color: "red" },
+    { dataKey: "tablet", color: "blue" },
+    { dataKey: "mobile", color: "green" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Add Range
+
+To add a range, set `range` or `barProps.range` to `true`. The default is `false`.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", range: true },
+    { dataKey: "tablet", range: true },
+    { dataKey: "mobile", range: true },
+  ],
+  [],
+)
+const data = useMemo<Data[]>(
+  () =>
+    Array.from({ length: 6 }, (_, index) => ({
+      date: dayjs().add(index, "month").format("YYYY-MM-DD"),
+      desktop: [
+        faker.number.int({ min: 1000, max: 2000 }),
+        faker.number.int({ min: 4000, max: 5000 }),
+      ],
+      mobile: [
+        faker.number.int({ min: 1000, max: 2000 }),
+        faker.number.int({ min: 4000, max: 5000 }),
+      ],
+      tablet: [
+        faker.number.int({ min: 1000, max: 2000 }),
+        faker.number.int({ min: 4000, max: 5000 }),
+      ],
+    })),
+  [],
+)
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Stacked
+
+To stack the series, set `stackId` or `barProps.stackId` to a string.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", color: "red" },
+    {
+      dataKey: "tablet",
+      color: "blue",
+      radius: [0, 0, 4, 4],
+      stackId: "stack",
+    },
+    {
+      dataKey: "mobile",
+      color: "green",
+      radius: [4, 4, 0, 0],
+      stackId: "stack",
+    },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Percent
+
+To make the series a percentage, set `stackId` or `barProps.stackId` to a string and set `chartProps.stackOffset` to `"expand"`.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", color: "red" },
+    { dataKey: "tablet", color: "blue" },
+    { dataKey: "mobile", color: "green" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    barProps={{ radius: 0, stackId: "stack" }}
+    chartProps={{ stackOffset: "expand" }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      tickFormatter: (value) => `${(Number(value) * 100).toFixed(0)}%`,
+    }}
+  />
+)
+```
+
+### Add Y Axis
+
+To add the Y axis, set `withYAxis` to `true`. The default is `false`.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+To change the orientation of the Y axis, set `yAxisProps.orientation` to `"start"` or `"end"`. The default is `"start"`.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { left: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{ orientation: "end" }}
+  />
+)
+```
+
+### Add Legend
+
+To add the legend, set `withLegend` to `true`. The default is `false`. To change the placement of the legend, set `legendProps.placement` to `"start-start"`, `"end-end"`, etc. The default is `"start-end"`.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", color: "red" },
+    { dataKey: "tablet", color: "blue" },
+    { dataKey: "mobile", color: "green" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withLegend
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Change Name
+
+To change the name of the tooltip or legend, set `name` to a string in `series`.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", name: "Desktop", color: "red" },
+    { dataKey: "tablet", name: "Tablet", color: "blue" },
+    { dataKey: "mobile", name: "Mobile", color: "green" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withLegend
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Change Grid
+
+To change the grid, set `horizontal` and `vertical` to a boolean in `gridProps`.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <For each={["xy", "x", "y", "none"]}>
+      {(value, index) => (
+        <BarChart.Root
+          key={index}
+          gridProps={{
+            horizontal: value.includes("x"),
+            vertical: value.includes("y"),
+          }}
+          data={data}
+          series={series}
+          tooltipProps={{
+            labelFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+          xAxisProps={{
+            dataKey: "date",
+            tickFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Add Label
+
+To add a label, set `label` of `series` or `barProps.label` to `true`. The default is `false`.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () => BarChart.mergeSeries([{ dataKey: "desktop" }]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    barProps={{ label: true }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Add Unit
+
+To add a unit, use `formatter` or `tickFormatter` or set `unit` to a string.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () => BarChart.mergeSeries([{ dataKey: "desktop" }]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    barProps={{
+      label: {
+        formatter: (value) => `${(Number(value) / 1000).toFixed(1)}k`,
+      },
+    }}
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      formatter: (value) => `${(Number(value) / 1000).toFixed(1)}k`,
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      domain: [0, 10000],
+      tickFormatter: (value) => (value / 1000).toFixed(1),
+      ticks: [0, 2500, 5000, 7500, 10000],
+      unit: "k",
+    }}
+  />
+)
+```
+
+### Vertical
+
+To make the chart vertical, set `layout` to `"vertical"` in `chartProps` and adjust the type of the axes.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ layout: "vertical" }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{ type: "number" }}
+    yAxisProps={{
+      type: "category",
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Sync
+
+To sync the chart, set `syncId` to a string.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <BarChart.Root
+      data={data}
+      series={series}
+      syncId="chart"
+      tooltipProps={{
+        labelFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+      xAxisProps={{
+        dataKey: "date",
+        tickFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+    />
+    <BarChart.Root
+      data={data}
+      series={series}
+      syncId="chart"
+      tooltipProps={{
+        labelFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+      xAxisProps={{
+        dataKey: "date",
+        tickFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+    />
+  </VStack>
+)
+```
+
+### Format
+
+To format the chart, use `formatter` or `tickFormatter` etc.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      formatter: (value, name = "") => [
+        Number(value).toLocaleString(),
+        toTitleCase(name),
+      ],
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{ tickFormatter: (value) => value.toLocaleString() }}
+  />
+)
+```
+
+### Add Reference Line
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  >
+    <BarChart.ReferenceLine label="Reference line" y={3000} />
+    <BarChart.ReferenceLine
+      label={{ position: "insideTopLeft", value: "Reference line" }}
+      x={dayjs().add(3, "month").format("YYYY-MM-DD")}
+    />
+    <BarChart.ReferenceLine
+      label={{ position: "center", value: "Reference line" }}
+      segment={[
+        { x: dayjs().format("YYYY-MM-DD"), y: 0 },
+        { x: dayjs().add(3, "month").format("YYYY-MM-DD"), y: 3000 },
+      ]}
+    />
+  </BarChart.Root>
+)
+```
+
+### Add Tick Line
+
+To add a reference line, set `tickLine` to `true` in `xAxisProps` or `yAxisProps`. The default is `false`.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+      tickLine: true,
+    }}
+    yAxisProps={{ tickLine: true }}
+  />
+)
+```
+
+### Add Axis Label
+
+To add an axis label, set `label` to a string in `xAxisProps` or `yAxisProps`. The default is `false`.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      label: "Date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{ label: "Value" }}
+  />
+)
+```
+
+### Set Domain
+
+To set the domain, set `domain` to an array in `yAxisProps`. To set the ticks, set `ticks` to an array in `yAxisProps`.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      domain: [0, 5000],
+      ticks: [0, 1000, 2000, 3000, 4000, 5000],
+    }}
+  />
+)
+```
+
+### Change Gap
+
+To change the gap, set `barCategoryGap` and `barGap` in `chartProps` to a number or string.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    chartProps={{ barCategoryGap: 16, barGap: 8 }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Change Radius
+
+To change the radius, set `radius` or `barProps.radius` to a number or an array.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () => [
+    { color: "red", dataKey: "desktop", radius: 8 },
+    {
+      color: "blue",
+      dataKey: "tablet",
+      radius: [0, 0, 8, 8],
+      stackId: "stack",
+    },
+    {
+      color: "green",
+      dataKey: "mobile",
+      radius: [8, 8, 0, 0],
+      stackId: "stack",
+    },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Add Tooltip Cursor
+
+To add a tooltip cursor, set `cursor` to `true` in `tooltipProps`. The default is `false`.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      cursor: true,
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Hide X Axis
+
+To hide the X axis, set `withXAxis` to `false`. The default is `true`.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withXAxis={false}
+    chartProps={{ margin: { left: 0, right: 0 } }}
+    tooltipProps={{ labelFormatter: () => null }}
+  />
+)
+```
+
+### Hide Tooltip
+
+To hide the tooltip, set `withTooltip` to `false`. The default is `true`.
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withTooltip={false}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Customize Axis
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      label: { color: ["red", "blue"] },
+      tick: { color: ["red", "blue"] },
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+      tickLine: { color: ["red", "blue"] },
+    }}
+    yAxisProps={{
+      label: { color: ["red", "blue"] },
+      tick: { color: ["red", "blue"] },
+      tickLine: { color: ["red", "blue"] },
+    }}
+  />
+)
+```
+
+### Customize Label
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () => [{ color: "blue", dataKey: "desktop" }],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    barProps={{
+      label: { color: "red" },
+    }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+      contentProps: { withSwatch: false },
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      domain: [0, 10000],
+      ticks: [0, 2500, 5000, 7500, 10000],
+    }}
+  />
+)
+```
+
+### Customize Grid
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    gridProps={{ strokeDasharray: "15 15" }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+      contentProps: { withSwatch: false },
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Customize Tooltip Cursor
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      cursor: { fill: "red", fillOpacity: 0.2 },
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+## Props
+
+<PropsTable
+  name="chart"
+  pick={[
+    "BarChart",
+    "BarChart.Root",
+    "BarChart.Bar",
+    "BarChart.Grid",
+    "BarChart.Label",
+    "BarChart.LabelList",
+    "BarChart.Legend",
+    "BarChart.ReferenceLine",
+    "BarChart.Tooltip",
+    "BarChart.XAxis",
+    "BarChart.YAxis",
+  ]}
+/>

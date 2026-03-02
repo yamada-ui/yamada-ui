@@ -19,6 +19,7 @@ export const qrCodeStyle = defineComponentSlotStyle({
     root: {
       "--overlay-bg": "colors.bg",
       "--overlay-size": "calc({size} / 3)",
+      color: "colorScheme.solid",
       position: "relative",
       w: "fit-content",
     },

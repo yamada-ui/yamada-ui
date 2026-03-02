@@ -4,7 +4,6 @@ import { PropsTable } from "#storybook"
 import { useForm } from "react-hook-form"
 import { Form } from "."
 import { extractObject, toTitleCase } from "../../utils"
-import { Box } from "../box"
 import { Field } from "../field"
 import { Fieldset } from "../fieldset"
 import { Input } from "../input"
@@ -164,62 +163,58 @@ export const Variant: Story = () => {
       rows={["plain", "elevated", "outline", "panel"]}
     >
       {(_, row, key) => (
-        <Box key={key}>
-          <Form.Root
-            variant={row}
-            description="Create an account to get started."
-            errorMessage={extractObject(errors, (value) => value?.message)}
-            invalid={extractObject(errors, (value) => !!value)}
-            required={{ name: true, email: true }}
-            submitButton="Submit"
-            title={`Create an account (${toTitleCase(row)})`}
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <Fieldset.Root legend="Personal information">
-              <Field.Root name="name" label="Name">
-                <Input
-                  placeholder="Hirotomo Yamada"
-                  {...register("name", {
-                    required: { message: "Name is required", value: true },
-                  })}
-                />
-              </Field.Root>
+        <Form.Root
+          key={key}
+          variant={row}
+          description="Create an account to get started."
+          errorMessage={extractObject(errors, (value) => value?.message)}
+          invalid={extractObject(errors, (value) => !!value)}
+          required={{ name: true, email: true }}
+          submitButton="Submit"
+          title={`Create an account (${toTitleCase(row)})`}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <Fieldset.Root legend="Personal information">
+            <Field.Root name="name" label="Name">
+              <Input
+                placeholder="Hirotomo Yamada"
+                {...register("name", {
+                  required: { message: "Name is required", value: true },
+                })}
+              />
+            </Field.Root>
 
-              <Field.Root
-                name="password"
-                helperMessage="If not set, a password will be automatically generated."
-                label="Password"
-              >
-                <PasswordInput
-                  placeholder="password"
-                  {...register("password")}
-                />
-              </Field.Root>
-            </Fieldset.Root>
+            <Field.Root
+              name="password"
+              helperMessage="If not set, a password will be automatically generated."
+              label="Password"
+            >
+              <PasswordInput placeholder="password" {...register("password")} />
+            </Field.Root>
+          </Fieldset.Root>
 
-            <Fieldset.Root legend="Contact information">
-              <Field.Root name="email" label="Email address">
-                <Input
-                  placeholder="hirotomo@yamada-ui.com"
-                  {...register("email", {
-                    required: { message: "Email is required", value: true },
-                  })}
-                />
-              </Field.Root>
+          <Fieldset.Root legend="Contact information">
+            <Field.Root name="email" label="Email address">
+              <Input
+                placeholder="hirotomo@yamada-ui.com"
+                {...register("email", {
+                  required: { message: "Email is required", value: true },
+                })}
+              />
+            </Field.Root>
 
-              <Field.Root name="phone" label="Phone number">
-                <Input placeholder="090-1234-5678" {...register("phone")} />
-              </Field.Root>
+            <Field.Root name="phone" label="Phone number">
+              <Input placeholder="090-1234-5678" {...register("phone")} />
+            </Field.Root>
 
-              <Field.Root name="address" label="Address">
-                <Input
-                  placeholder="123 Main Street, Anytown, USA"
-                  {...register("address")}
-                />
-              </Field.Root>
-            </Fieldset.Root>
-          </Form.Root>
-        </Box>
+            <Field.Root name="address" label="Address">
+              <Input
+                placeholder="123 Main Street, Anytown, USA"
+                {...register("address")}
+              />
+            </Field.Root>
+          </Fieldset.Root>
+        </Form.Root>
       )}
     </PropsTable>
   )

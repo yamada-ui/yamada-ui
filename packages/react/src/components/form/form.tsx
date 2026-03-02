@@ -49,11 +49,11 @@ export interface FormRootProps
   /**
    * An object managing the error message of each field.
    */
-  errorMessage?: { [key: string]: string | undefined }
+  errorMessage?: { [key: string]: ReactNode }
   /**
    * An object managing the helper message of each field.
    */
-  helperMessage?: { [key: string]: string | undefined }
+  helperMessage?: { [key: string]: ReactNode }
   /**
    * An object managing the invalid state of each field.
    */

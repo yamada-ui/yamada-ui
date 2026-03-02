@@ -311,7 +311,7 @@
               "title": "Form",
               "segment": "form",
               "pathname": "/docs/components/form",
-              "status": "planned"
+              "status": "new"
             },
             {
               "title": "Grid",
@@ -409,10 +409,16 @@
               "pathname": "/docs/components/modal"
             },
             {
+              "title": "NativeAccordion",
+              "segment": "native-accordion",
+              "pathname": "/docs/components/native-accordion",
+              "status": "new"
+            },
+            {
               "title": "NativePopover",
               "segment": "native-popover",
               "pathname": "/docs/components/native-popover",
-              "status": "planned"
+              "status": "new"
             },
             {
               "title": "NativeSelect",
@@ -469,7 +475,7 @@
               "title": "QrCode",
               "segment": "qr-code",
               "pathname": "/docs/components/qr-code",
-              "status": "planned"
+              "status": "new"
             },
             {
               "title": "Radio",
@@ -612,7 +618,7 @@
               "title": "Tip",
               "segment": "tip",
               "pathname": "/docs/components/tip",
-              "status": "planned"
+              "status": "new"
             },
             {
               "title": "Toggle",

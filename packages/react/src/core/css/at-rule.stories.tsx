@@ -1,6 +1,8 @@
 import { Box } from "../../components/box"
+import { Button } from "../../components/button"
 import { Center } from "../../components/center"
 import { Text } from "../../components/text"
+import { useBoolean } from "../../hooks/use-boolean"
 
 export default {
   title: "Styled System / At-rule",
@@ -90,5 +92,27 @@ export const Supports = () => {
     <Box _supports={[{ css: { color: "success" }, query: "(display: flex)" }]}>
       <Text>Supported flex</Text>
     </Box>
+  )
+}
+
+export const StartingStyle = () => {
+  const [open, { toggle }] = useBoolean()
+
+  return (
+    <>
+      <Button onClick={toggle}>Toggle</Button>
+      {open ? (
+        <Center
+          bg="bg.contrast"
+          color="fg.contrast"
+          p="md"
+          transition="all 0.3s ease-out"
+          w="fit-content"
+          _startingStyle={{ opacity: 0, transform: "translateY(-20px)" }}
+        >
+          <Text>Starting style</Text>
+        </Center>
+      ) : null}
+    </>
   )
 }

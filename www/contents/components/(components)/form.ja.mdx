@@ -1,7 +1,654 @@
 ---
 title: Form
-description: "`Form`は、現在作成を検討しています。"
-status: planned
+description: "`Form`は、複数のフォーム要素をグループ化するためのコンポーネントです。"
+status: new
+storybook: components-form--basic
+source: components/form
+style: components/form/form.style.ts
 ---
 
-このGitHubの[イシュー](https://github.com/yamada-ui/yamada-ui/issues/5280)であなたの意見を投稿してください。作成の優先順位を決めるのに役立ちます。
+```tsx functional preview
+interface Data {
+  email: string
+  name: string
+  password: string
+}
+
+const {
+  formState: { errors },
+  handleSubmit,
+  register,
+} = useForm<Data>()
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+return (
+  <Form.Root
+    helperMessage={{
+      password: "If not set, a password will be automatically generated.",
+    }}
+    errorMessage={extractObject(errors, (value) => value?.message)}
+    invalid={extractObject(errors, (value) => !!value)}
+    required={{ name: true, email: true }}
+    onSubmit={handleSubmit(onSubmit)}
+  >
+    <Form.Header>
+      <Form.Title>Create an account</Form.Title>
+      <Form.Description>Create an account to get started.</Form.Description>
+    </Form.Header>
+
+    <Form.Body>
+      <Form.Group>
+        <Field.Root name="name" label="Name">
+          <Input
+            placeholder="Hirotomo Yamada"
+            {...register("name", {
+              required: { message: "Name is required", value: true },
+            })}
+          />
+        </Field.Root>
+
+        <Field.Root name="email" label="Email address">
+          <Input
+            placeholder="hirotomo@yamada-ui.com"
+            {...register("email", {
+              required: { message: "Email is required", value: true },
+            })}
+          />
+        </Field.Root>
+
+        <Field.Root name="password" label="Password">
+          <PasswordInput placeholder="password" {...register("password")} />
+        </Field.Root>
+      </Form.Group>
+    </Form.Body>
+
+    <Form.Footer>
+      <Form.SubmitButton>Submit</Form.SubmitButton>
+    </Form.Footer>
+  </Form.Root>
+)
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Form } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Form } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Form } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Form.Root>
+  <Form.Header>
+    <Form.Title />
+    <Form.Description />
+  </Form.Header>
+  <Form.Body>
+    <Form.Group />
+  </Form.Body>
+  <Form.Footer>
+    <Form.SubmitButton />
+  </Form.Footer>
+</Form.Root>
+```
+
+### propsを使う
+
+```tsx functional preview
+const {
+  formState: { errors },
+  handleSubmit,
+  register,
+} = useForm<Data>()
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+return (
+  <Form.Root
+    title="Create an account"
+    description="Create an account to get started."
+    submitButton="Submit"
+    helperMessage={{
+      password: "If not set, a password will be automatically generated.",
+    }}
+    errorMessage={extractObject(errors, (value) => value?.message)}
+    invalid={extractObject(errors, (value) => !!value)}
+    required={{ name: true, email: true }}
+    onSubmit={handleSubmit(onSubmit)}
+  >
+    <Form.Group>
+      <Field.Root name="name" label="Name">
+        <Input
+          placeholder="Hirotomo Yamada"
+          {...register("name", {
+            required: { message: "Name is required", value: true },
+          })}
+        />
+      </Field.Root>
+
+      <Field.Root name="email" label="Email address">
+        <Input
+          placeholder="hirotomo@yamada-ui.com"
+          {...register("email", {
+            required: { message: "Email is required", value: true },
+          })}
+        />
+      </Field.Root>
+
+      <Field.Root name="password" label="Password">
+        <PasswordInput placeholder="password" {...register("password")} />
+      </Field.Root>
+    </Form.Group>
+  </Form.Root>
+)
+```
+
+### バリアントを変更する
+
+```tsx functional preview
+const {
+  formState: { errors },
+  handleSubmit,
+  register,
+} = useForm<Data>()
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+return (
+  <VStack>
+    <For each={["plain", "elevated", "outline", "panel"]}>
+      {(variant, key) => (
+        <Form.Root
+          key={key}
+          variant={variant}
+          title="Create an account"
+          description="Create an account to get started."
+          submitButton="Submit"
+          helperMessage={{
+            password: "If not set, a password will be automatically generated.",
+          }}
+          errorMessage={extractObject(errors, (value) => value?.message)}
+          invalid={extractObject(errors, (value) => !!value)}
+          required={{ name: true, email: true }}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <Fieldset.Root legend="Personal information">
+            <Field.Root name="name" label="Name">
+              <Input
+                placeholder="Hirotomo Yamada"
+                {...register("name", {
+                  required: { message: "Name is required", value: true },
+                })}
+              />
+            </Field.Root>
+
+            <Field.Root name="password" label="Password">
+              <PasswordInput placeholder="password" {...register("password")} />
+            </Field.Root>
+          </Fieldset.Root>
+        </Form.Root>
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### サイズを変更する
+
+```tsx functional preview
+const {
+  formState: { errors },
+  handleSubmit,
+  register,
+} = useForm<Data>()
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+return (
+  <VStack>
+    <For each={["sm", "md", "lg"]}>
+      {(size, key) => (
+        <Form.Root
+          key={key}
+          size={size}
+          variant="panel"
+          title="Create an account"
+          description="Create an account to get started."
+          submitButton="Submit"
+          helperMessage={{
+            password: "If not set, a password will be automatically generated.",
+          }}
+          errorMessage={extractObject(errors, (value) => value?.message)}
+          invalid={extractObject(errors, (value) => !!value)}
+          required={{ name: true, email: true }}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <Fieldset.Root legend="Personal information">
+            <Field.Root name="name" label="Name">
+              <Input
+                placeholder="Hirotomo Yamada"
+                {...register("name", {
+                  required: { message: "Name is required", value: true },
+                })}
+              />
+            </Field.Root>
+
+            <Field.Root name="password" label="Password">
+              <PasswordInput placeholder="password" {...register("password")} />
+            </Field.Root>
+          </Fieldset.Root>
+        </Form.Root>
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### ヘルプメッセージを表示する
+
+ヘルプメッセージを表示する場合は、`helperMessage`に`{[key: string]: ReactNode}`を設定します。
+
+```tsx functional preview
+const {
+  formState: { errors },
+  handleSubmit,
+  register,
+} = useForm<Data>()
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+return (
+  <Form.Root
+    title="Create an account"
+    description="Create an account to get started."
+    submitButton="Submit"
+    helperMessage={{
+      password: "If not set, a password will be automatically generated.",
+    }}
+    errorMessage={extractObject(errors, (value) => value?.message)}
+    invalid={extractObject(errors, (value) => !!value)}
+    required={{ name: true, email: true }}
+    onSubmit={handleSubmit(onSubmit)}
+  >
+    <Form.Group>
+      <Field.Root name="name" label="Name">
+        <Input
+          placeholder="Hirotomo Yamada"
+          {...register("name", {
+            required: { message: "Name is required", value: true },
+          })}
+        />
+      </Field.Root>
+
+      <Field.Root name="email" label="Email address">
+        <Input
+          placeholder="hirotomo@yamada-ui.com"
+          {...register("email", {
+            required: { message: "Email is required", value: true },
+          })}
+        />
+      </Field.Root>
+
+      <Field.Root name="password" label="Password">
+        <PasswordInput placeholder="password" {...register("password")} />
+      </Field.Root>
+    </Form.Group>
+  </Form.Root>
+)
+```
+
+### エラーメッセージを表示する
+
+エラーメッセージを表示する場合は、`errorMessage`に`{[key: string]: ReactNode}`を設定します。
+
+```tsx functional preview
+const {
+  formState: { errors },
+  handleSubmit,
+  register,
+} = useForm<Data>()
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+return (
+  <Form.Root
+    title="Create an account"
+    description="Create an account to get started."
+    submitButton="Submit"
+    errorMessage={extractObject(errors, (value) => value?.message)}
+    invalid={extractObject(errors, (value) => !!value)}
+    required={{ name: true, email: true }}
+    onSubmit={handleSubmit(onSubmit)}
+  >
+    <Form.Group>
+      <Field.Root name="name" label="Name">
+        <Input
+          placeholder="Hirotomo Yamada"
+          {...register("name", {
+            required: { message: "Name is required", value: true },
+          })}
+        />
+      </Field.Root>
+
+      <Field.Root name="email" label="Email address">
+        <Input
+          placeholder="hirotomo@yamada-ui.com"
+          {...register("email", {
+            required: { message: "Email is required", value: true },
+          })}
+        />
+      </Field.Root>
+
+      <Field.Root
+        name="password"
+        helperMessage="If not set, a password will be automatically generated."
+        label="Password"
+      >
+        <PasswordInput placeholder="password" {...register("password")} />
+      </Field.Root>
+    </Form.Group>
+  </Form.Root>
+)
+```
+
+### 必須にする
+
+必須にする場合は、`required`に`{[key: string]: boolean}`を設定します。
+
+```tsx functional preview
+const {
+  formState: { errors },
+  handleSubmit,
+  register,
+} = useForm<Data>()
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+return (
+  <Form.Root
+    title="Create an account"
+    description="Create an account to get started."
+    submitButton="Submit"
+    errorMessage={extractObject(errors, (value) => value?.message)}
+    invalid={extractObject(errors, (value) => !!value)}
+    required={{ name: true, email: true }}
+    onSubmit={handleSubmit(onSubmit)}
+  >
+    <Form.Group>
+      <Field.Root name="name" label="Name">
+        <Input
+          placeholder="Hirotomo Yamada"
+          {...register("name", {
+            required: { message: "Name is required", value: true },
+          })}
+        />
+      </Field.Root>
+
+      <Field.Root name="email" label="Email address">
+        <Input
+          placeholder="hirotomo@yamada-ui.com"
+          {...register("email", {
+            required: { message: "Email is required", value: true },
+          })}
+        />
+      </Field.Root>
+
+      <Field.Root
+        name="password"
+        helperMessage="If not set, a password will be automatically generated."
+        label="Password"
+      >
+        <PasswordInput placeholder="password" {...register("password")} />
+      </Field.Root>
+    </Form.Group>
+  </Form.Root>
+)
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`に`{[key: string]: boolean}`を設定します。
+
+```tsx functional preview
+const {
+  formState: { errors },
+  handleSubmit,
+  register,
+} = useForm<Data>()
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+return (
+  <Form.Root
+    title="Create an account"
+    description="Create an account to get started."
+    submitButton="Submit"
+    errorMessage={extractObject(errors, (value) => value?.message)}
+    invalid={extractObject(errors, (value) => !!value)}
+    required={{ name: true, email: true }}
+    disabled={{ password: true }}
+    onSubmit={handleSubmit(onSubmit)}
+  >
+    <Form.Group>
+      <Field.Root name="name" label="Name">
+        <Input
+          placeholder="Hirotomo Yamada"
+          {...register("name", {
+            required: { message: "Name is required", value: true },
+          })}
+        />
+      </Field.Root>
+
+      <Field.Root name="email" label="Email address">
+        <Input
+          placeholder="hirotomo@yamada-ui.com"
+          {...register("email", {
+            required: { message: "Email is required", value: true },
+          })}
+        />
+      </Field.Root>
+
+      <Field.Root
+        name="password"
+        helperMessage="If not set, a password will be automatically generated."
+        label="Password"
+      >
+        <PasswordInput placeholder="password" {...register("password")} />
+      </Field.Root>
+    </Form.Group>
+  </Form.Root>
+)
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`readOnly`に`{[key: string]: boolean}`を設定します。
+
+```tsx functional preview
+const {
+  formState: { errors },
+  handleSubmit,
+  register,
+} = useForm<Data>()
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+return (
+  <Form.Root
+    description="Create an account to get started."
+    errorMessage={extractObject(errors, (value) => value?.message)}
+    invalid={extractObject(errors, (value) => !!value)}
+    required={{ name: true, email: true }}
+    readOnly={{ password: true }}
+    submitButton="Submit"
+    title="Create an account"
+    onSubmit={handleSubmit(onSubmit)}
+  >
+    <Form.Group>
+      <Field.Root name="name" label="Name">
+        <Input
+          placeholder="Hirotomo Yamada"
+          {...register("name", {
+            required: { message: "Name is required", value: true },
+          })}
+        />
+      </Field.Root>
+
+      <Field.Root name="email" label="Email address">
+        <Input
+          placeholder="hirotomo@yamada-ui.com"
+          {...register("email", {
+            required: { message: "Email is required", value: true },
+          })}
+        />
+      </Field.Root>
+
+      <Field.Root
+        name="password"
+        helperMessage="If not set, a password will be automatically generated."
+        label="Password"
+      >
+        <PasswordInput placeholder="password" {...register("password")} />
+      </Field.Root>
+    </Form.Group>
+  </Form.Root>
+)
+```
+
+### 必須インジケーターをカスタマイズする
+
+必須インジケーターをカスタマイズする場合は、`requiredIndicator`に`ReactNode`を設定します。
+
+```tsx functional preview
+const {
+  formState: { errors },
+  handleSubmit,
+  register,
+} = useForm<Data>()
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+return (
+  <Form.Root
+    title="Create an account"
+    description="Create an account to get started."
+    submitButton="Submit"
+    errorMessage={extractObject(errors, (value) => value?.message)}
+    invalid={extractObject(errors, (value) => !!value)}
+    required={{ name: true, email: true }}
+    requiredIndicator={
+      <Tag colorScheme="red" size="sm">
+        required
+      </Tag>
+    }
+    onSubmit={handleSubmit(onSubmit)}
+  >
+    <Form.Group>
+      <Field.Root name="name" label="Name">
+        <Input
+          placeholder="Hirotomo Yamada"
+          {...register("name", {
+            required: { message: "Name is required", value: true },
+          })}
+        />
+      </Field.Root>
+
+      <Field.Root name="email" label="Email address">
+        <Input
+          placeholder="hirotomo@yamada-ui.com"
+          {...register("email", {
+            required: { message: "Email is required", value: true },
+          })}
+        />
+      </Field.Root>
+
+      <Field.Root
+        name="password"
+        helperMessage="If not set, a password will be automatically generated."
+        label="Password"
+      >
+        <PasswordInput placeholder="password" {...register("password")} />
+      </Field.Root>
+    </Form.Group>
+  </Form.Root>
+)
+```
+
+### オプショナルインジケーターを使う
+
+オプショナルインジケーターを使う場合は、`optionalIndicator`に`ReactNode`を設定します。
+
+```tsx functional preview
+const {
+  formState: { errors },
+  handleSubmit,
+  register,
+} = useForm<Data>()
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+return (
+  <Form.Root
+    title="Create an account"
+    description="Create an account to get started."
+    submitButton="Submit"
+    errorMessage={extractObject(errors, (value) => value?.message)}
+    invalid={extractObject(errors, (value) => !!value)}
+    required={{ name: true, email: true }}
+    requiredIndicator={
+      <Tag colorScheme="red" size="sm">
+        required
+      </Tag>
+    }
+    optionalIndicator={
+      <Tag colorScheme="mono" size="sm">
+        optional
+      </Tag>
+    }
+    onSubmit={handleSubmit(onSubmit)}
+  >
+    <Form.Group>
+      <Field.Root name="name" label="Name">
+        <Input
+          placeholder="Hirotomo Yamada"
+          {...register("name", {
+            required: { message: "Name is required", value: true },
+          })}
+        />
+      </Field.Root>
+
+      <Field.Root name="email" label="Email address">
+        <Input
+          placeholder="hirotomo@yamada-ui.com"
+          {...register("email", {
+            required: { message: "Email is required", value: true },
+          })}
+        />
+      </Field.Root>
+
+      <Field.Root
+        name="password"
+        helperMessage="If not set, a password will be automatically generated."
+        label="Password"
+      >
+        <PasswordInput placeholder="password" {...register("password")} />
+      </Field.Root>
+    </Form.Group>
+  </Form.Root>
+)
+```
+
+## Props
+
+<PropsTable name="form" />

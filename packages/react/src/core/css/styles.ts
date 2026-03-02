@@ -1,8 +1,13 @@
 import type * as CSS from "csstype"
 import type { AnyString } from "../../utils"
-import type { ColorScheme, ThemeTokens } from "../system"
+import type { ColorScheme } from "../system"
 import type { StyleConfigs } from "./config"
-import type { CSSObject, StyleValueWithCondition } from "./index.types"
+import type {
+  CSSContainerObject,
+  CSSMediaObject,
+  CSSObject,
+  StyleValueWithCondition,
+} from "./index.types"
 import { transforms } from "./config"
 import { pipe } from "./utils"
 
@@ -657,7 +662,6 @@ export const standardStyles = {
   cursor: true,
   cx: true,
   cy: true,
-  d: true,
   direction: true,
   display: { transform: transforms.display },
   dominantBaseline: true,
@@ -1672,14 +1676,22 @@ export const standardStyles = {
   },
   speak: true,
   speakAs: true,
-  stopColor: true,
+  stopColor: {
+    properties: ["stopColor"],
+    token: "colors",
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
+  },
   stopOpacity: true,
   stroke: {
     properties: ["stroke"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
-  strokeColor: true,
+  strokeColor: {
+    properties: ["strokeColor"],
+    token: "colors",
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
+  },
   strokeDasharray: true,
   strokeDashoffset: true,
   strokeLinecap: true,
@@ -1981,6 +1993,7 @@ export const atRuleStyles = {
   },
   _portrait: { properties: ["@media (orientation: portrait)"] },
   _print: { properties: ["@media print"] },
+  _startingStyle: { properties: ["@starting-style"] },
   _supports: { transform: transforms.supports },
 } as const satisfies StyleConfigs
 
@@ -2080,6 +2093,7 @@ export const colorProperties = [
   "textColor",
   "floodColor",
   "lightingColor",
+  "stopColor",
   "stroke",
   "accentColor",
   "accent",
@@ -2106,6 +2120,7 @@ export const colorProperties = [
   "fill",
   "outlineColor",
   "scrollbarColor",
+  "strokeColor",
   "textDecorationColor",
   "textEmphasisColor",
   "focusRingColor",
@@ -2315,34 +2330,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@container
    */
-  _container?: {
-    [key: string]: any
-    aspectRatio?: CSS.Property.AspectRatio
-    blockSize?: CSS.Property.BlockSize | number | ThemeTokens["sizes"]
-    css?: CSSObject
-    h?: CSS.Property.Height | number | ThemeTokens["sizes"]
-    height?: CSS.Property.Height | number | ThemeTokens["sizes"]
-    inlineSize?: CSS.Property.InlineSize | number | ThemeTokens["sizes"]
-    maxAspectRatio?: CSS.Property.AspectRatio
-    maxBlockSize?: CSS.Property.MaxBlockSize | number | ThemeTokens["sizes"]
-    maxH?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
-    maxHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
-    maxInlineSize?: CSS.Property.MaxInlineSize | number | ThemeTokens["sizes"]
-    maxW?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
-    maxWidth?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
-    minAspectRatio?: CSS.Property.AspectRatio
-    minBlockSize?: CSS.Property.MinBlockSize | number | ThemeTokens["sizes"]
-    minH?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
-    minHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
-    minInlineSize?: CSS.Property.MinInlineSize | number | ThemeTokens["sizes"]
-    minW?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
-    minWidth?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
-    name?: AnyString
-    orientation?: "landscape" | "portrait" | AnyString
-    query?: AnyString
-    w?: CSS.Property.Width | number | ThemeTokens["sizes"]
-    width?: CSS.Property.Width | number | ThemeTokens["sizes"]
-  }[]
+  _container?: CSSContainerObject[]
   /**
    * ### keyframes
    *
@@ -2381,73 +2369,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
    */
-  _media?: {
-    [key: string]: any
-    anyHover?: "hover" | "none" | AnyString
-    anyPointer?: "coarse" | "fine" | "none" | AnyString
-    aspectRatio?: CSS.Property.AspectRatio
-    color?: AnyString | number
-    colorGamut?: "p3" | "rec2020" | "srgb" | AnyString
-    colorIndex?: AnyString | number
-    css?: CSSObject
-    deviceAspectRatio?: CSS.Property.AspectRatio
-    deviceHeight?: CSS.Property.Height | number | ThemeTokens["sizes"]
-    deviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
-    displayMode?:
-      | "browser"
-      | "fullscreen"
-      | "minimal-ui"
-      | "picture-in-picture"
-      | "standalone"
-      | "window-controls-overlay"
-      | AnyString
-    dynamicRange?: "high" | "standard" | AnyString
-    forcedColors?: "active" | "none" | AnyString
-    grid?: 0 | 1 | "AnyString"
-    h?: CSS.Property.Height | number | ThemeTokens["sizes"]
-    height?: CSS.Property.Height | number | ThemeTokens["sizes"]
-    hover?: "hover" | "none" | AnyString
-    invertedColors?: "inverted" | "none" | AnyString
-    maxColor?: AnyString | number
-    maxColorIndex?: AnyString | number
-    maxDeviceAspectRatio?: CSS.Property.AspectRatio
-    maxDeviceHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
-    maxH?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
-    maxHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
-    maxMonochrome?: AnyString | number
-    maxResolution?: AnyString
-    maxW?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
-    maxWidth?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
-    mazDeviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
-    minColor?: AnyString | number
-    minColorIndex?: AnyString | number
-    minDeviceAspectRatio?: CSS.Property.AspectRatio
-    minDeviceHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
-    minDeviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
-    minH?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
-    minHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
-    minMonochrome?: AnyString | number
-    minResolution?: AnyString
-    minW?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
-    minWidth?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
-    monochrome?: AnyString | number
-    orientation?: "landscape" | "portrait" | AnyString
-    overflowBlock?: "none" | "optional-paged" | "paged" | "scroll" | AnyString
-    overflowInline?: "none" | "scroll" | AnyString
-    pointer?: "coarse" | "fine" | "none" | AnyString
-    prefersColorScheme?: "dark" | "light" | AnyString
-    prefersContrast?: "custom" | "high" | "low" | "no-preference" | AnyString
-    prefersReducedMotion?: "no-preference" | "reduce" | AnyString
-    query?: AnyString
-    resolution?: AnyString
-    scan?: "interlace" | "progressive" | AnyString
-    scripting?: "enabled" | "initial-only" | "none" | AnyString
-    type?: "all" | "print" | "screen" | "speech" | AnyString
-    update?: "fast" | "none" | "slow" | AnyString
-    videoDynamicRange?: "high" | "standard" | AnyString
-    w?: CSS.Property.Width | number | ThemeTokens["sizes"]
-    width?: CSS.Property.Width | number | ThemeTokens["sizes"]
-  }[]
+  _media?: CSSMediaObject[]
   /**
    * ### media
    *
@@ -2508,6 +2430,17 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@media
    */
   _print?: StyleValueWithCondition<CSSObject>
+  /**
+   * ### starting-style
+   *
+   * The <code>@starting-style</code> CSS at-rule sets the starting values for properties that are transitioning when the target element's style is first updated.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2024-08-06
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@starting-style
+   */
+  _startingStyle?: StyleValueWithCondition<CSSObject>
   /**
    * ### supports
    *
@@ -5531,18 +5464,6 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/cy
    */
   cy?: StyleValueWithCondition<CSS.Property.Cy>
-  /**
-   * ### d
-   *
-   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2022-07-15
-   * @newly_available_date 2020-01-15
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/d
-   */
-  d?: StyleValueWithCondition<CSS.Property.D>
   /**
    * ### direction
    *
@@ -10083,7 +10004,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stop-color
    */
-  stopColor?: StyleValueWithCondition<CSS.Property.StopColor>
+  stopColor?: StyleValueWithCondition<CSS.Property.StopColor, "colors">
   /**
    * ### stop-opacity
    *
@@ -10121,7 +10042,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  strokeColor?: StyleValueWithCondition<CSS.Property.StrokeColor>
+  strokeColor?: StyleValueWithCondition<CSS.Property.StrokeColor, "colors">
   /**
    * ### stroke-dasharray
    *

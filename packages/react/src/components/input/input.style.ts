@@ -45,6 +45,12 @@ export const inputStyle = defineComponentStyle({
       border: "1px solid transparent",
       focusRingColor: "{focus-border-color}",
       focusVisibleRing: "inside",
+      _container: [
+        { css: { bg: "bg" }, style: '--form-group-variant: "panel"' },
+        { css: { bg: "bg" }, style: '--fieldset-root-variant: "panel"' },
+        { css: { bg: "bg" }, style: '--form-group-variant: "elevated"' },
+        { css: { bg: "bg" }, style: '--fieldset-root-variant: "elevated"' },
+      ],
       _invalid: {
         borderColor: "{error-border-color}",
         focusRingColor: "{error-border-color}",
@@ -71,6 +77,12 @@ export const inputStyle = defineComponentStyle({
       border: "1px solid {colors.border}",
       focusRingColor: "{focus-border-color}",
       focusVisibleRing: "inside",
+      _container: [
+        { css: { bg: "bg" }, style: '--form-group-variant: "panel"' },
+        { css: { bg: "bg" }, style: '--fieldset-root-variant: "panel"' },
+        { css: { bg: "bg" }, style: '--form-group-variant: "elevated"' },
+        { css: { bg: "bg" }, style: '--fieldset-root-variant: "elevated"' },
+      ],
       _invalid: {
         borderColor: "{error-border-color}",
         focusRingColor: "{error-border-color}",

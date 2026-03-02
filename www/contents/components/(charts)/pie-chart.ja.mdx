@@ -1,8 +1,530 @@
 ---
 title: PieChart
 description: "`PieChart`は、複数のデータを比較するためのパイチャートを描画するコンポーネントです。"
-storybook: components-piechart--basic
-source: components/pie-chart
+storybook: components-chart-piechart--basic
+source: components/chart
+style: components/chart/pie-chart.style.ts
 ---
 
-現在、このコンポーネントは移行が完了していません。このコンポーネントの移行は、v2.0.xで行われる予定です。
+```tsx functional preview
+interface Data {
+  browser: string
+  visits: number
+  fill?: CSSProps["fill"]
+}
+
+const series = useMemo<PieChart.PieProps<Data>[]>(
+  () => [{ dataKey: "visits", nameKey: "browser" }],
+  [],
+)
+const data = useMemo<Data[]>(
+  () =>
+    PieChart.mergeData([
+      {
+        browser: "chrome",
+        visits: faker.number.int({ max: 5000, min: 1000 }),
+      },
+      {
+        browser: "edge",
+        visits: faker.number.int({ max: 5000, min: 1000 }),
+      },
+      {
+        browser: "firefox",
+        visits: faker.number.int({ max: 5000, min: 1000 }),
+      },
+      {
+        browser: "opera",
+        visits: faker.number.int({ max: 5000, min: 1000 }),
+      },
+      {
+        browser: "safari",
+        visits: faker.number.int({ max: 5000, min: 1000 }),
+      },
+      {
+        browser: "other",
+        visits: faker.number.int({ max: 5000, min: 1000 }),
+      },
+    ]),
+  [],
+)
+
+return <PieChart.Root data={data} series={series} />
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { PieChart } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { PieChart } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { PieChart } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<PieChart.Root>
+  <PieChart.Pie>
+    <PieChart.LabelList />
+  </PieChart.Pie>
+  <PieChart.Label />
+  <PieChart.Tooltip />
+  <PieChart.Legend />
+</PieChart.Root>
+```
+
+### コンポジション
+
+```tsx preview functional
+const data = useMemo<Data[]>(
+  () =>
+    createPolarChartData().map((item, index) => ({
+      ...item,
+      fill: ["cyan", "green", "orange", "red", "blue", "gray"][index],
+    })),
+  [],
+)
+
+return (
+  <PieChart.Root>
+    <PieChart.Pie data={data} dataKey="visits" nameKey="browser">
+      <PieChart.LabelList color="white" dataKey="browser" />
+    </PieChart.Pie>
+    <PieChart.Tooltip />
+    <PieChart.Legend />
+  </PieChart.Root>
+)
+```
+
+### サイズを変更する
+
+```tsx preview functional
+const series = useMemo<PieChart.PieProps<Data>[]>(
+  () => [{ dataKey: "visits", nameKey: "browser" }],
+  [],
+)
+const data = useMemo<Data[]>(
+  () => PieChart.mergeData(createPolarChartData()),
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["xs", "sm", "md", "lg", "xl"]}>
+      {(size, index) => (
+        <PieChart.Root key={index} data={data} series={series} size={size} />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### 色を変更する
+
+```tsx preview functional
+const series = useMemo<PieChart.PieProps<Data>[]>(
+  () => [{ dataKey: "visits", nameKey: "browser" }],
+  [],
+)
+const data = useMemo<Data[]>(
+  () => PieChart.mergeData(createPolarChartData(), "blue"),
+  [],
+)
+
+return <PieChart.Root data={data} series={series} />
+```
+
+### セクターの色を変更する
+
+```tsx preview functional
+const series = useMemo<PieChart.PieProps<Data>[]>(
+  () => [{ dataKey: "visits", nameKey: "browser" }],
+  [],
+)
+const data = useMemo<Data[]>(
+  () =>
+    createPolarChartData().map((item, index) => ({
+      ...item,
+      fill: ["cyan", "green", "orange", "red", "blue", "gray"][index],
+    })),
+  [],
+)
+
+return <PieChart.Root data={data} series={series} />
+```
+
+### セクターの境界線を非表示にする
+
+セクターの境界線を非表示にする場合は、`sectorStroke`に`"none"`を設定します。
+
+```tsx preview functional
+const series = useMemo<PieChart.PieProps<Data>[]>(
+  () => [{ dataKey: "visits", nameKey: "browser" }],
+  [],
+)
+const data = useMemo<Data[]>(
+  () =>
+    createPolarChartData().map((item, index) => ({
+      ...item,
+      fill: ["cyan", "green", "orange", "red", "blue", "gray"][index],
+    })),
+  [],
+)
+
+return <PieChart.Root data={data} sectorStroke="none" series={series} />
+```
+
+### 凡例を表示する
+
+凡例を表示する場合は、`withLegend`を`true`に設定します。デフォルトは、`false`です。また、凡例の配置を変更する場合は、`legendProps.placement`に`"start-start"`や`"end-end"`などを設定します。デフォルトは、`"start-end"`です。
+
+```tsx preview functional
+const series = useMemo<PieChart.PieProps<Data>[]>(
+  () => [{ dataKey: "visits", nameKey: "browser" }],
+  [],
+)
+const data = useMemo<Data[]>(
+  () =>
+    createPolarChartData().map((item, index) => ({
+      ...item,
+      fill: ["cyan", "green", "orange", "red", "blue", "gray"][index],
+    })),
+  [],
+)
+
+return <PieChart.Root data={data} series={series} withLegend />
+```
+
+### 複数の円を表示する
+
+```tsx preview functional
+const series = useMemo<PieChart.PieProps<Data>[]>(
+  () => [
+    {
+      dataKey: "visits",
+      innerRadius: "80%",
+      nameKey: "browser",
+    },
+    {
+      dataKey: "downloads",
+      nameKey: "browser",
+      outerRadius: "70%",
+    },
+  ],
+  [],
+)
+const data = useMemo<Data[]>(
+  () => PieChart.mergeData(createPolarChartData()),
+  [],
+)
+
+return <PieChart.Root data={data} series={series} />
+```
+
+### ラベルを表示する
+
+ラベルを表示する場合は、`series`の`label`または`pieProps.label`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo<PieChart.PieProps<Data>[]>(
+  () => [{ dataKey: "visits", nameKey: "browser" }],
+  [],
+)
+const data = useMemo<Data[]>(
+  () =>
+    createPolarChartData().map((item, index) => ({
+      ...item,
+      fill: ["cyan", "green", "orange", "red", "blue", "gray"][index],
+    })),
+  [],
+)
+
+return <PieChart.Root data={data} pieProps={{ label: true }} series={series} />
+```
+
+### ラベル線を表示する
+
+ラベル線を表示する場合は、`series`の`labelLine`または`pieProps.labelLine`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo<PieChart.PieProps<Data>[]>(
+  () => [{ dataKey: "visits", nameKey: "browser" }],
+  [],
+)
+const data = useMemo<Data[]>(
+  () =>
+    createPolarChartData().map((item, index) => ({
+      ...item,
+      fill: ["cyan", "green", "orange", "red", "blue", "gray"][index],
+    })),
+  [],
+)
+
+return (
+  <PieChart.Root
+    data={data}
+    pieProps={{ label: true, labelLine: true }}
+    series={series}
+  />
+)
+```
+
+### ラベルのオフセットを変更する
+
+ラベルのオフセットを変更する場合は、`series`の`label.offset`または`pieProps.label.offset`に数値を設定します。デフォルトは、`0`です。
+
+```tsx preview functional
+const series = useMemo<PieChart.PieProps<Data>[]>(
+  () => [{ dataKey: "visits", nameKey: "browser" }],
+  [],
+)
+const data = useMemo<Data[]>(
+  () =>
+    createPolarChartData().map((item, index) => ({
+      ...item,
+      fill: ["cyan", "green", "orange", "red", "blue", "gray"][index],
+    })),
+  [],
+)
+
+return (
+  <PieChart.Root
+    data={data}
+    pieProps={{ label: { offset: 12 } }}
+    series={series}
+  />
+)
+```
+
+### ラベルリストを表示する
+
+値をラベルリストで表示する場合は、`series`の`labelList`または`pieProps.labelList`に`true`を設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo<PieChart.PieProps<Data>[]>(
+  () => [{ dataKey: "visits", nameKey: "browser" }],
+  [],
+)
+const data = useMemo<Data[]>(
+  () =>
+    createPolarChartData().map((item, index) => ({
+      ...item,
+      fill: ["cyan", "green", "orange", "red", "blue", "gray"][index],
+    })),
+  [],
+)
+
+return (
+  <PieChart.Root
+    data={data}
+    pieProps={{ labelList: { color: "white" } }}
+    series={series}
+  />
+)
+```
+
+### 余白を変更する
+
+余白を変更する場合は、`series`の`paddingAngle`または`pieProps.paddingAngle`に数値を設定します。デフォルトは、`0`です。
+
+```tsx preview functional
+const series = useMemo<PieChart.PieProps<Data>[]>(
+  () => [{ dataKey: "visits", nameKey: "browser" }],
+  [],
+)
+const data = useMemo<Data[]>(
+  () => PieChart.mergeData(createPolarChartData()),
+  [],
+)
+
+return (
+  <PieChart.Root data={data} pieProps={{ paddingAngle: 15 }} series={series} />
+)
+```
+
+### 開始角度を変更する
+
+開始角度を変更する場合は、`series`の`startAngle`または`pieProps.startAngle`に数値を設定します。デフォルトは、`90`です。
+
+```tsx preview functional
+const series = useMemo<PieChart.PieProps<Data>[]>(
+  () => [{ dataKey: "visits", nameKey: "browser" }],
+  [],
+)
+const data = useMemo<Data[]>(
+  () => PieChart.mergeData(createPolarChartData()),
+  [],
+)
+
+return (
+  <PieChart.Root data={data} pieProps={{ startAngle: 0 }} series={series} />
+)
+```
+
+### 終了角度を変更する
+
+終了角度を変更する場合は、`series`の`endAngle`または`pieProps.endAngle`に数値を設定します。デフォルトは、`-270`です。
+
+```tsx preview functional
+const series = useMemo<PieChart.PieProps<Data>[]>(
+  () => [{ dataKey: "visits", nameKey: "browser" }],
+  [],
+)
+const data = useMemo<Data[]>(
+  () => PieChart.mergeData(createPolarChartData()),
+  [],
+)
+
+return (
+  <PieChart.Root data={data} pieProps={{ endAngle: -180 }} series={series} />
+)
+```
+
+### 内側の半径を変更する
+
+内側の半径を変更する場合は、`series`の`innerRadius`または`pieProps.innerRadius`に数値または文字列を設定します。デフォルトは、`"0%"`です。
+
+```tsx preview functional
+const series = useMemo<PieChart.PieProps<Data>[]>(
+  () => [{ dataKey: "visits", nameKey: "browser" }],
+  [],
+)
+const data = useMemo<Data[]>(
+  () => PieChart.mergeData(createPolarChartData()),
+  [],
+)
+
+return (
+  <PieChart.Root
+    data={data}
+    pieProps={{ innerRadius: "70%" }}
+    series={series}
+  />
+)
+```
+
+### 外側の半径を変更する
+
+外側の半径を変更する場合は、`series`の`outerRadius`または`pieProps.outerRadius`に数値または文字列を設定します。デフォルトは、`"100%"`です。
+
+```tsx preview functional
+const series = useMemo<PieChart.PieProps<Data>[]>(
+  () => [{ dataKey: "visits", nameKey: "browser" }],
+  [],
+)
+const data = useMemo<Data[]>(
+  () => PieChart.mergeData(createPolarChartData()),
+  [],
+)
+
+return (
+  <PieChart.Root
+    data={data}
+    pieProps={{ outerRadius: "90%" }}
+    series={series}
+  />
+)
+```
+
+### 同期させる
+
+同期させる場合は、`syncId`に文字列を設定します。
+
+```tsx preview functional
+const series = useMemo<PieChart.PieProps<Data>[]>(
+  () => [{ dataKey: "visits", nameKey: "browser" }],
+  [],
+)
+const data = useMemo<Data[]>(
+  () => PieChart.mergeData(createPolarChartData()),
+  [],
+)
+
+return (
+  <VStack>
+    <PieChart.Root data={data} series={series} syncId="chart" />
+    <PieChart.Root data={data} series={series} syncId="chart" />
+  </VStack>
+)
+```
+
+### フォーマットする
+
+フォーマットする場合は、`formatter`を使用します。
+
+```tsx preview functional
+const series = useMemo<PieChart.PieProps<Data>[]>(
+  () => [{ dataKey: "visits", nameKey: "browser" }],
+  [],
+)
+const data = useMemo<Data[]>(
+  () =>
+    createPolarChartData().map((item, index) => ({
+      ...item,
+      fill: ["cyan", "green", "orange", "red", "blue", "gray"][index],
+    })),
+  [],
+)
+
+return (
+  <PieChart.Root
+    data={data}
+    series={series}
+    pieProps={{
+      label: {
+        formatter: (_, percent) => `${(percent * 100).toFixed(0)}%`,
+      },
+      labelLine: true,
+      labelList: {
+        color: "white",
+        formatter: (value) => (isString(value) ? toTitleCase(value) : value),
+      },
+    }}
+    tooltipProps={{
+      formatter: (value, name = "") => [
+        Number(value).toLocaleString(),
+        toTitleCase(name),
+      ],
+    }}
+  />
+)
+```
+
+### ツールチップを非表示にする
+
+ツールチップを非表示にする場合は、`withTooltip`を`false`に設定します。デフォルトは、`true`です。
+
+```tsx preview functional
+const series = useMemo<PieChart.PieProps<Data>[]>(
+  () => [{ dataKey: "visits", nameKey: "browser" }],
+  [],
+)
+const data = useMemo<Data[]>(
+  () => PieChart.mergeData(createPolarChartData()),
+  [],
+)
+
+return <PieChart.Root data={data} series={series} withTooltip={false} />
+```
+
+## Props
+
+<PropsTable
+  name="chart"
+  pick={[
+    "PieChart",
+    "PieChart.Root",
+    "PieChart.Pie",
+    "PieChart.Label",
+    "PieChart.LabelList",
+    "PieChart.Legend",
+    "PieChart.Tooltip",
+  ]}
+/>

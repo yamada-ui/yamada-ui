@@ -1,19 +1,11 @@
-import type {
+export type {
   ChartLabelListProps as LabelListProps,
   ChartLabelProps as LabelProps,
   ChartLegendProps as LegendProps,
   ChartLabelList as RadialLabel,
   ChartTooltipProps as TooltipProps,
 } from "./chart"
-import type {
-  ChartAngleAxisProps as AngleAxisProps,
-  ChartRadialBackground as RadialBackground,
-  ChartPieLabelList as RadialLabelList,
-  ChartRadialProps as RadialProps,
-  ChartRadiusAxisProps as RadiusAxisProps,
-} from "./polar-chart"
-import type { RadialChartProps as RootProps } from "./radial-chart"
-import {
+export {
   gradients,
   ChartLabel as Label,
   ChartLabelList as LabelList,
@@ -21,41 +13,23 @@ import {
   mergeData,
   ChartTooltip as Tooltip,
 } from "./chart"
-import {
+export type {
+  ChartAngleAxisProps as AngleAxisProps,
+  ChartPolarGridProps as GridProps,
+  ChartRadialBackground as RadialBackground,
+  ChartPieLabelList as RadialLabelList,
+  ChartRadialProps as RadialProps,
+  ChartRadiusAxisProps as RadiusAxisProps,
+} from "./polar-chart"
+export {
   ChartAngleAxis as AngleAxis,
+  ChartPolarGrid as Grid,
   ChartRadial as Radial,
   ChartRadiusAxis as RadiusAxis,
 } from "./polar-chart"
-import {
+export type { RadialChartProps as RootProps } from "./radial-chart"
+export {
   RadialChartPropsContext as PropsContext,
   RadialChart as Root,
   useRadialChartPropsContext as usePropsContext,
 } from "./radial-chart"
-
-export {
-  AngleAxis,
-  gradients,
-  Label,
-  LabelList,
-  Legend,
-  mergeData,
-  PropsContext,
-  Radial,
-  RadiusAxis,
-  Root,
-  Tooltip,
-  usePropsContext,
-}
-export type {
-  AngleAxisProps,
-  LabelListProps,
-  LabelProps,
-  LegendProps,
-  RadialBackground,
-  RadialLabel,
-  RadialLabelList,
-  RadialProps,
-  RadiusAxisProps,
-  RootProps,
-  TooltipProps,
-}

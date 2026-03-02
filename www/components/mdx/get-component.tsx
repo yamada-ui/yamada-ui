@@ -1,15 +1,17 @@
+import type { CSSProps } from "@yamada-ui/react"
 import type { ComponentType } from "react"
 import type { Transform } from "sucrase"
 import { faker } from "@faker-js/faker"
 import { burger } from "@lucide/lab"
 import * as Components from "@yamada-ui/react"
 import { createColumnHelper, isFunction, Text } from "@yamada-ui/react"
+import dayjs from "dayjs"
 import { AnimatePresence } from "motion/react"
 import React, { isValidElement } from "react"
 import { useForm } from "react-hook-form"
 import { transform as originalTransform } from "sucrase"
 
-interface Data {
+interface TableData {
   age: number
   createdAt: Date
   email: string
@@ -22,24 +24,7 @@ interface Data {
   updatedAt: Date
 }
 
-const columnHelper = createColumnHelper<Data>()
-
-function createData(length = 10): Data[] {
-  return Array.from({ length }, function (_, index) {
-    return {
-      id: index.toString(),
-      age: faker.number.int({ max: 65, min: 18 }),
-      createdAt: faker.date.past(),
-      email: faker.internet.email(),
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
-      phone: faker.phone.number(),
-      role: faker.helpers.arrayElement(["admin", "user"]),
-      status: faker.helpers.arrayElement(["active", "inactive"]),
-      updatedAt: faker.date.past(),
-    }
-  })
-}
+const columnHelper = createColumnHelper<TableData>()
 
 const columns = [
   columnHelper.accessor("id", {
@@ -85,13 +70,95 @@ const columnsFull = [
   }),
 ]
 
+function createTableData(length = 10): TableData[] {
+  return Array.from({ length }, function (_, index) {
+    return {
+      id: index.toString(),
+      age: faker.number.int({ max: 65, min: 18 }),
+      createdAt: faker.date.past(),
+      email: faker.internet.email(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      phone: faker.phone.number(),
+      role: faker.helpers.arrayElement(["admin", "user"]),
+      status: faker.helpers.arrayElement(["active", "inactive"]),
+      updatedAt: faker.date.past(),
+    }
+  })
+}
+
+interface CartesianChartData {
+  date: string
+  desktop: null | number | number[]
+  mobile: null | number | number[]
+  tablet: null | number | number[]
+}
+
+function createCartesianChartData(
+  length = 6,
+  min = 1000,
+  max = 5000,
+): CartesianChartData[] {
+  return Array.from({ length }, (_, index) => ({
+    date: dayjs().add(index, "month").format("YYYY-MM-DD"),
+    desktop: faker.number.int({ max, min }),
+    mobile: faker.number.int({ max, min }),
+    tablet: faker.number.int({ max, min }),
+  }))
+}
+
+interface PolarChartData {
+  browser: string
+  downloads: null | number
+  visits: null | number
+  fill?: CSSProps["fill"]
+}
+
+function createPolarChartData(min = 1000, max = 5000): PolarChartData[] {
+  return [
+    {
+      browser: "chrome",
+      downloads: faker.number.int({ max, min }),
+      visits: faker.number.int({ max, min }),
+    },
+    {
+      browser: "edge",
+      downloads: faker.number.int({ max, min }),
+      visits: faker.number.int({ max, min }),
+    },
+    {
+      browser: "firefox",
+      downloads: faker.number.int({ max, min }),
+      visits: faker.number.int({ max, min }),
+    },
+    {
+      browser: "opera",
+      downloads: faker.number.int({ max, min }),
+      visits: faker.number.int({ max, min }),
+    },
+    {
+      browser: "safari",
+      downloads: faker.number.int({ max, min }),
+      visits: faker.number.int({ max, min }),
+    },
+    {
+      browser: "other",
+      downloads: faker.number.int({ max, min }),
+      visits: faker.number.int({ max, min }),
+    },
+  ]
+}
+
 const components = {
   AnimatePresence,
   burger,
   columnHelper,
   columns,
   columnsFull,
-  createData,
+  createCartesianChartData,
+  createPolarChartData,
+  createTableData,
+  dayjs,
   faker,
   React,
   useForm,

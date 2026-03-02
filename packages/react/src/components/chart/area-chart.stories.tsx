@@ -71,11 +71,11 @@ export const Composition: Story = () => {
         dataKey="date"
         tickFormatter={(value) => dayjs(value).format("MMM")}
       />
-      <AreaChart.Area dataKey="desktop" dot>
+      <AreaChart.Area color="mono.900" dataKey="desktop" dot>
         <AreaChart.LabelList />
       </AreaChart.Area>
-      <AreaChart.Area dataKey="tablet" />
-      <AreaChart.Area dataKey="mobile" />
+      <AreaChart.Area color="mono.600" dataKey="tablet" />
+      <AreaChart.Area color="mono.300" dataKey="mobile" />
     </AreaChart.Root>
   )
 }
@@ -579,7 +579,7 @@ export const Orientation: Story = () => {
   const data = useMemo(() => createData(), [])
 
   return (
-    <PropsTable variant="stack" rows={["left", "right"]}>
+    <PropsTable variant="stack" rows={["start", "end"]}>
       {(_, orientation, key) => (
         <AreaChart.Root
           key={key}
@@ -588,8 +588,8 @@ export const Orientation: Story = () => {
           withYAxis
           chartProps={{
             margin: {
-              left: orientation === "right" ? 16 : 0,
-              right: orientation === "left" ? 16 : 0,
+              left: orientation === "end" ? 16 : 0,
+              right: orientation === "start" ? 16 : 0,
             },
           }}
           tooltipProps={{
@@ -873,7 +873,10 @@ export const TooltipCursor: Story = () => {
     <AreaChart.Root
       data={data}
       series={series}
-      tooltipProps={{ cursor: true }}
+      tooltipProps={{
+        cursor: true,
+        labelFormatter: (value) => dayjs(value).format("MMM"),
+      }}
       xAxisProps={{
         dataKey: "date",
         tickFormatter: (value) => dayjs(value).format("MMM"),

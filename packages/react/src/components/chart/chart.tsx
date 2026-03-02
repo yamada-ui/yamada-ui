@@ -1,6 +1,7 @@
 "use client"
 
 import type {
+  JSXElementConstructor,
   PropsWithChildren,
   ReactElement,
   ReactNode,
@@ -169,10 +170,16 @@ interface ComponentContext extends Pick<
 
 export interface ChartProps<Y extends Dict = Dict>
   extends HTMLStyledProps, ThemeProps<ChartStyle> {
+  /**
+   * The components to render the chart components.
+   */
   components: {
-    component: React.JSXElementConstructor<any>
+    component: JSXElementConstructor<any>
     fallback: ReactNode
   }[]
+  /**
+   * The function to render the chart.
+   */
   render: (props: PropsWithChildren) => ReactNode
   /**
    * The color of the label list.
@@ -182,6 +189,9 @@ export interface ChartProps<Y extends Dict = Dict>
    * The fill of the label list.
    */
   labelListFill?: CSSProps["fill"]
+  /**
+   * If provided, generate shapes based on series.
+   */
   series?:
     | ChartAreaProps<Y>[]
     | ChartBarProps<Y>[]

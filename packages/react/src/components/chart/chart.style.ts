@@ -53,7 +53,7 @@ export const chartStyle = defineComponentSlotStyle({
       display: "flex",
       flexDirection: "column",
       fontWeight: "medium",
-      gap: "2xs",
+      gap: "0.5",
       minW: "3xs",
       zIndex: "recoome",
     },
@@ -65,7 +65,7 @@ export const chartStyle = defineComponentSlotStyle({
     },
     tooltipItem: { alignItems: "center", display: "flex", gap: "sm" },
     tooltipLabel: {},
-    tooltipList: { display: "flex", flexDirection: "column", gap: "2xs" },
+    tooltipList: { display: "flex", flexDirection: "column", gap: "0" },
     tooltipName: { color: "fg.muted" },
     tooltipSwatch: {
       bg: "{tooltip-swatch-color}",

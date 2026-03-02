@@ -475,7 +475,7 @@
               "title": "QrCode",
               "segment": "qr-code",
               "pathname": "/docs/components/qr-code",
-              "status": "planned"
+              "status": "new"
             },
             {
               "title": "Radio",

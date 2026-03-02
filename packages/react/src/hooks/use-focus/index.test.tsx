@@ -1,13 +1,24 @@
 import type { FC } from "react"
+import type * as Utils from "../../utils"
 import type { UseFocusOnMouseDownProps, UseFocusOnShowProps } from "./"
 import { act, fireEvent, render, waitFor } from "#test"
 import { useRef } from "react"
-import * as utils from "../../utils"
+import { getFirstFocusableElement } from "../../utils"
 import { useFocusOnPointerDown, useFocusOnShow } from "./"
+
+vi.mock("../../utils", async (importOriginal) => {
+  const actual = (await importOriginal()) as typeof Utils
+
+  return {
+    ...actual,
+    getFirstFocusableElement: vi.fn(actual.getFirstFocusableElement),
+  }
+})
 
 describe("useFocusOnShow", () => {
   afterEach(() => {
     vi.restoreAllMocks()
+    vi.mocked(getFirstFocusableElement).mockReset()
   })
 
   const Component: FC<Omit<UseFocusOnShowProps, "focusTarget">> = (props) => {
@@ -72,18 +83,14 @@ describe("useFocusOnShow", () => {
       <ComponentWithoutFocusTarget visible={false} />,
     )
     const button = getByTestId("button")
-    const focusSpy = vi.spyOn(button, "focus")
-    const getFirstFocusableElementSpy = vi
-      .spyOn(utils, "getFirstFocusableElement")
-      .mockReturnValue(button)
+    vi.mocked(getFirstFocusableElement).mockReturnValue(button)
 
     expect(button).not.toHaveFocus()
 
     rerender(<ComponentWithoutFocusTarget visible />)
 
     await waitFor(() => {
-      expect(getFirstFocusableElementSpy).toHaveBeenCalledWith()
-      expect(focusSpy).toHaveBeenCalledWith()
+      expect(button).toHaveFocus()
     })
   })
 
@@ -92,16 +99,12 @@ describe("useFocusOnShow", () => {
       <ComponentWithoutFocusableChild visible={false} />,
     )
     const target = getByTestId("target")
-    const focusSpy = vi.spyOn(target, "focus")
-    const getFirstFocusableElementSpy = vi
-      .spyOn(utils, "getFirstFocusableElement")
-      .mockReturnValue(null)
+    vi.mocked(getFirstFocusableElement).mockReturnValue(null)
 
     rerender(<ComponentWithoutFocusableChild visible />)
 
     await waitFor(() => {
-      expect(getFirstFocusableElementSpy).toHaveBeenCalledWith()
-      expect(focusSpy).toHaveBeenCalledWith()
+      expect(target).toHaveFocus()
     })
   })
 
@@ -110,6 +113,7 @@ describe("useFocusOnShow", () => {
     target.tabIndex = -1
     const button = document.createElement("button")
     target.appendChild(button)
+    vi.mocked(getFirstFocusableElement).mockReturnValue(button)
 
     const ComponentWithElementTarget: FC<
       Omit<UseFocusOnShowProps, "focusTarget">
@@ -119,19 +123,16 @@ describe("useFocusOnShow", () => {
       return null
     }
 
-    const focusSpy = vi.spyOn(button, "focus")
-    const getFirstFocusableElementSpy = vi
-      .spyOn(utils, "getFirstFocusableElement")
-      .mockReturnValue(button)
-
+    document.body.append(target)
     const { rerender } = render(<ComponentWithElementTarget visible={false} />)
 
     rerender(<ComponentWithElementTarget visible />)
 
     await waitFor(() => {
-      expect(getFirstFocusableElementSpy).toHaveBeenCalledWith()
-      expect(focusSpy).toHaveBeenCalledWith()
+      expect(button).toHaveFocus()
     })
+
+    target.remove()
   })
 
   test("does nothing when shouldFocus is false", async () => {
@@ -147,12 +148,11 @@ describe("useFocusOnShow", () => {
       return null
     }
 
-    const firstFocusableSpy = vi.spyOn(utils, "getFirstFocusableElement")
     const { rerender } = render(<ComponentWithDisabledFocus visible={false} />)
     rerender(<ComponentWithDisabledFocus visible />)
 
     await waitFor(() => {
-      expect(firstFocusableSpy).not.toHaveBeenCalled()
+      expect(getFirstFocusableElement).not.toHaveBeenCalled()
     })
   })
 
@@ -173,7 +173,6 @@ describe("useFocusOnShow", () => {
       )
     }
 
-    const firstFocusableSpy = vi.spyOn(utils, "getFirstFocusableElement")
     const { getByTestId, rerender } = render(
       <ComponentWithActiveElement visible={false} />,
     )
@@ -184,12 +183,13 @@ describe("useFocusOnShow", () => {
     rerender(<ComponentWithActiveElement visible />)
 
     await waitFor(() => {
-      expect(firstFocusableSpy).not.toHaveBeenCalled()
+      expect(getFirstFocusableElement).not.toHaveBeenCalled()
       expect(focusSpy).not.toHaveBeenCalled()
+      expect(button).toHaveFocus()
     })
   })
 
-  test("does nothing when target cannot be resolved", async () => {
+  test("does not throw when ref.current is null", async () => {
     const ComponentWithNullTarget: FC<{ visible: boolean }> = ({ visible }) => {
       const ref = useRef<HTMLDivElement>(null)
       useFocusOnShow(ref, { shouldFocus: true, visible })
@@ -197,12 +197,12 @@ describe("useFocusOnShow", () => {
       return null
     }
 
-    const firstFocusableSpy = vi.spyOn(utils, "getFirstFocusableElement")
     const { rerender } = render(<ComponentWithNullTarget visible={false} />)
-    rerender(<ComponentWithNullTarget visible />)
-
+    expect(() =>
+      rerender(<ComponentWithNullTarget visible />),
+    ).not.toThrowError()
     await waitFor(() => {
-      expect(firstFocusableSpy).not.toHaveBeenCalled()
+      expect(getFirstFocusableElement).not.toHaveBeenCalled()
     })
   })
 })
@@ -260,12 +260,10 @@ describe("useFocusOnPointerDown", () => {
   test("prevents default behavior and focuses on the target element", async () => {
     const { getByTestId } = render(<Component />)
     const button = getByTestId("button")
-    const focusSpy = vi.spyOn(button, "focus")
 
     act(() => fireEvent.pointerDown(button))
 
     await waitFor(() => {
-      expect(focusSpy).toHaveBeenCalledWith()
       expect(button).toHaveFocus()
     })
   })
@@ -297,49 +295,66 @@ describe("useFocusOnPointerDown", () => {
   test("uses ref as fallback when elements is not provided", async () => {
     const { getByTestId } = render(<Component elements={undefined} />)
     const button = getByTestId("button")
-    const focusSpy = vi.spyOn(button, "focus")
 
     act(() => fireEvent.pointerDown(button))
 
     await waitFor(() => {
-      expect(focusSpy).toHaveBeenCalledWith()
+      expect(button).toHaveFocus()
     })
   })
 
   test("supports raw HTMLElement in elements and ignores null entries", async () => {
     const { getByTestId, rerender } = render(<Component />)
     const button = getByTestId("button")
-    const focusSpy = vi.spyOn(button, "focus")
 
     rerender(<Component elements={[button]} />)
     act(() => fireEvent.pointerDown(button))
 
     await waitFor(() => {
-      expect(focusSpy).toHaveBeenCalledWith()
+      expect(button).toHaveFocus()
     })
 
     // Move focus away so the second assertion checks null-elements handling only.
     button.blur()
-    focusSpy.mockClear()
     rerender(<Component elements={[null]} />)
     act(() => fireEvent.pointerDown(button))
 
     await waitFor(() => {
-      expect(focusSpy).not.toHaveBeenCalled()
+      expect(button).not.toHaveFocus()
     })
   })
 
   test("does not focus on non-safari browsers", async () => {
-    vi.spyOn(utils, "isSafari").mockReturnValue(false)
+    const previousPlatform = window.navigator.platform
+    const previousVendor = window.navigator.vendor
 
-    const { getByTestId } = render(<Component />)
-    const button = getByTestId("button")
-    const focusSpy = vi.spyOn(button, "focus")
+    try {
+      Object.defineProperty(window.navigator, "platform", {
+        value: "Win32",
+        writable: true,
+      })
+      Object.defineProperty(window.navigator, "vendor", {
+        value: "Google Inc.",
+        writable: true,
+      })
 
-    act(() => fireEvent.pointerDown(button))
+      const { getByTestId } = render(<Component />)
+      const button = getByTestId("button")
 
-    await waitFor(() => {
-      expect(focusSpy).not.toHaveBeenCalled()
-    })
+      act(() => fireEvent.pointerDown(button))
+
+      await waitFor(() => {
+        expect(button).not.toHaveFocus()
+      })
+    } finally {
+      Object.defineProperty(window.navigator, "platform", {
+        value: previousPlatform,
+        writable: true,
+      })
+      Object.defineProperty(window.navigator, "vendor", {
+        value: previousVendor,
+        writable: true,
+      })
+    }
   })
 })

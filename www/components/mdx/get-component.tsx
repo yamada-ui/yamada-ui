@@ -6,8 +6,8 @@ import * as Components from "@yamada-ui/react"
 import { createColumnHelper, isFunction, Text } from "@yamada-ui/react"
 import { AnimatePresence } from "motion/react"
 import React, { isValidElement } from "react"
+import { useForm } from "react-hook-form"
 import { transform as originalTransform } from "sucrase"
-import { wait } from "@/utils/async"
 
 interface Data {
   age: number
@@ -94,7 +94,7 @@ const components = {
   createData,
   faker,
   React,
-  wait,
+  useForm,
   ...React,
   ...Components,
 }

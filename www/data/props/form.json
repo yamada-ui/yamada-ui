@@ -1,0 +1,714 @@
+{
+  "Form": {
+    "Body": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Description": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Footer": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Group": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Header": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"lg\" | \"md\" | \"sm\"",
+        "defaultValue": "\"md\"",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"elevated\" | \"outline\" | \"panel\" | \"plain\"",
+        "defaultValue": "\"plain\"",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "bodyProps": {
+        "type": "FormBodyProps",
+        "description": "Props the body component.",
+        "required": false
+      },
+      "description": {
+        "type": "ReactNode",
+        "description": "The form description to use.",
+        "required": false
+      },
+      "descriptionProps": {
+        "type": "FormDescriptionProps",
+        "description": "Props the description component.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean | { [key: string]: boolean | undefined }",
+        "description": "An object managing the disabled state of each field.",
+        "required": false
+      },
+      "errorMessage": {
+        "type": "{ [key: string]: ReactNode }",
+        "description": "An object managing the error message of each field.",
+        "required": false
+      },
+      "footerProps": {
+        "type": "FormFooterProps",
+        "description": "Props the footer component.",
+        "required": false
+      },
+      "headerProps": {
+        "type": "FormHeaderProps",
+        "description": "Props the header component.",
+        "required": false
+      },
+      "helperMessage": {
+        "type": "{ [key: string]: ReactNode }",
+        "description": "An object managing the helper message of each field.",
+        "required": false
+      },
+      "invalid": {
+        "type": "boolean | { [key: string]: boolean | undefined }",
+        "description": "An object managing the invalid state of each field.",
+        "required": false
+      },
+      "optionalIndicator": {
+        "type": "ReactNode",
+        "description": "The optional indicator to use for each field.",
+        "required": false
+      },
+      "readOnly": {
+        "type": "boolean | { [key: string]: boolean | undefined }",
+        "description": "An object managing the read only state of each field.",
+        "required": false
+      },
+      "replace": {
+        "type": "boolean | { [key: string]: boolean | undefined }",
+        "description": "An object managing the replace state of each field.",
+        "required": false
+      },
+      "required": {
+        "type": "boolean | { [key: string]: boolean | undefined }",
+        "description": "An object managing the required state of each field.",
+        "required": false
+      },
+      "requiredIndicator": {
+        "type": "ReactNode",
+        "description": "The required indicator to use for each field.",
+        "required": false
+      },
+      "submitButton": {
+        "type": "ReactNode",
+        "description": "The submit button to use.",
+        "required": false
+      },
+      "submitButtonProps": {
+        "type": "FormSubmitButtonProps",
+        "description": "Props the submit button component.",
+        "required": false
+      },
+      "title": {
+        "type": "ReactNode",
+        "description": "The form title to use.",
+        "required": false
+      },
+      "titleProps": {
+        "type": "FormTitleProps",
+        "description": "Props the title component.",
+        "required": false
+      }
+    },
+    "SubmitButton": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "active": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is represented as active.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is disabled.",
+        "required": false
+      },
+      "disableRipple": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, disable ripple effects when pressing a element.",
+        "required": false
+      },
+      "endIcon": {
+        "type": "ReactNode",
+        "description": "The icon to display at the end side of the button.",
+        "required": false
+      },
+      "iconProps": {
+        "type": "ButtonIconProps",
+        "description": "The props of the icon element.",
+        "required": false
+      },
+      "loading": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the loading state of the button is represented.",
+        "required": false
+      },
+      "loadingIcon": {
+        "type": "Loading.Scheme | ReactNode",
+        "defaultValue": "\"oval\"",
+        "description": "The icon to display when the button is loading.",
+        "required": false
+      },
+      "loadingMessage": {
+        "type": "ReactNode",
+        "description": "The message to display when the button is loading.",
+        "required": false
+      },
+      "loadingPlacement": {
+        "type": "\"end\" | \"start\"",
+        "defaultValue": "\"start\"",
+        "description": "The placement of the loading indicator. Accepts `start` or `end`.",
+        "required": false
+      },
+      "loadingProps": {
+        "type": "ButtonLoadingProps",
+        "description": "The props of the loading icon element.",
+        "required": false
+      },
+      "startIcon": {
+        "type": "ReactNode",
+        "description": "The icon to display at the start side of the button.",
+        "required": false
+      },
+      "type": {
+        "type": "HTMLProps<\"button\">[\"type\"]",
+        "defaultValue": "\"button\"",
+        "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
+        "required": false
+      }
+    },
+    "Title": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    }
+  },
+  "FormBody": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "FormDescription": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "FormFooter": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "FormGroup": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "FormHeader": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "FormRoot": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\"",
+      "defaultValue": "\"md\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"elevated\" | \"outline\" | \"panel\" | \"plain\"",
+      "defaultValue": "\"plain\"",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "bodyProps": {
+      "type": "FormBodyProps",
+      "description": "Props the body component.",
+      "required": false
+    },
+    "description": {
+      "type": "ReactNode",
+      "description": "The form description to use.",
+      "required": false
+    },
+    "descriptionProps": {
+      "type": "FormDescriptionProps",
+      "description": "Props the description component.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean | { [key: string]: boolean | undefined }",
+      "description": "An object managing the disabled state of each field.",
+      "required": false
+    },
+    "errorMessage": {
+      "type": "{ [key: string]: ReactNode }",
+      "description": "An object managing the error message of each field.",
+      "required": false
+    },
+    "footerProps": {
+      "type": "FormFooterProps",
+      "description": "Props the footer component.",
+      "required": false
+    },
+    "headerProps": {
+      "type": "FormHeaderProps",
+      "description": "Props the header component.",
+      "required": false
+    },
+    "helperMessage": {
+      "type": "{ [key: string]: ReactNode }",
+      "description": "An object managing the helper message of each field.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean | { [key: string]: boolean | undefined }",
+      "description": "An object managing the invalid state of each field.",
+      "required": false
+    },
+    "optionalIndicator": {
+      "type": "ReactNode",
+      "description": "The optional indicator to use for each field.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean | { [key: string]: boolean | undefined }",
+      "description": "An object managing the read only state of each field.",
+      "required": false
+    },
+    "replace": {
+      "type": "boolean | { [key: string]: boolean | undefined }",
+      "description": "An object managing the replace state of each field.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean | { [key: string]: boolean | undefined }",
+      "description": "An object managing the required state of each field.",
+      "required": false
+    },
+    "requiredIndicator": {
+      "type": "ReactNode",
+      "description": "The required indicator to use for each field.",
+      "required": false
+    },
+    "submitButton": {
+      "type": "ReactNode",
+      "description": "The submit button to use.",
+      "required": false
+    },
+    "submitButtonProps": {
+      "type": "FormSubmitButtonProps",
+      "description": "Props the submit button component.",
+      "required": false
+    },
+    "title": {
+      "type": "ReactNode",
+      "description": "The form title to use.",
+      "required": false
+    },
+    "titleProps": {
+      "type": "FormTitleProps",
+      "description": "Props the title component.",
+      "required": false
+    }
+  },
+  "FormSubmitButton": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "active": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is represented as active.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is disabled.",
+      "required": false
+    },
+    "disableRipple": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, disable ripple effects when pressing a element.",
+      "required": false
+    },
+    "endIcon": {
+      "type": "ReactNode",
+      "description": "The icon to display at the end side of the button.",
+      "required": false
+    },
+    "iconProps": {
+      "type": "ButtonIconProps",
+      "description": "The props of the icon element.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the loading state of the button is represented.",
+      "required": false
+    },
+    "loadingIcon": {
+      "type": "Loading.Scheme | ReactNode",
+      "defaultValue": "\"oval\"",
+      "description": "The icon to display when the button is loading.",
+      "required": false
+    },
+    "loadingMessage": {
+      "type": "ReactNode",
+      "description": "The message to display when the button is loading.",
+      "required": false
+    },
+    "loadingPlacement": {
+      "type": "\"end\" | \"start\"",
+      "defaultValue": "\"start\"",
+      "description": "The placement of the loading indicator. Accepts `start` or `end`.",
+      "required": false
+    },
+    "loadingProps": {
+      "type": "ButtonLoadingProps",
+      "description": "The props of the loading icon element.",
+      "required": false
+    },
+    "startIcon": {
+      "type": "ReactNode",
+      "description": "The icon to display at the start side of the button.",
+      "required": false
+    },
+    "type": {
+      "type": "HTMLProps<\"button\">[\"type\"]",
+      "defaultValue": "\"button\"",
+      "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
+      "required": false
+    }
+  },
+  "FormTitle": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  }
+}

@@ -7,7 +7,7 @@
     "providers": []
   },
   "dependents": {
-    "components": ["alert", "notice"],
+    "components": ["alert", "notice", "tip"],
     "hooks": [],
     "providers": []
   },

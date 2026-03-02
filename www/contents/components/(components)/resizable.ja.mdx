@@ -302,7 +302,7 @@ import { Resizable } from "@workspaces/ui"
 
 ### リサイズイベントをハンドルする
 
-```tsx preview
+```tsx preview client
 <Resizable.Root
   h="md"
   borderWidth="1px"
@@ -328,44 +328,9 @@ import { Resizable } from "@workspaces/ui"
 </Resizable.Root>
 ```
 
-### ローカルストレージに値を保存する
+### ローカルストレージまたはCookieに値を保存する
 
-ローカルストレージに値を保存する場合は、`Resizable.useLayout`を使用します。
-
-:::warning
-保存された各値と`Resizable.Item`を関連付けするために`Resizable.Item`に`id`を設定する必要があります。
-:::
-
-```tsx preview functional client
-const { defaultLayout, onLayoutChanged } = Resizable.useLayout({
-  id: "persistence",
-  storage: localStorage,
-})
-
-return (
-  <Resizable.Root
-    borderWidth="1px"
-    defaultLayout={defaultLayout}
-    h="md"
-    rounded="l2"
-    onLayoutChanged={onLayoutChanged}
-  >
-    <Resizable.Item id="one" display="center">
-      One
-    </Resizable.Item>
-
-    <Resizable.Trigger />
-
-    <Resizable.Item id="two" display="center">
-      Two
-    </Resizable.Item>
-  </Resizable.Root>
-)
-```
-
-### Cookieに値を保存する
-
-`cookies`に値を保存する場合は、`Resizable.useLayout`を使用します。
+ローカルストレージまたはCookieに値を保存する場合は、`Resizable.useLayout`を使用します。
 
 :::warning
 保存された各値と`Resizable.Item`を関連付けるために`Resizable.Item`に`id`を設定する必要があります。
@@ -375,11 +340,15 @@ return (
 const storage: Resizable.Storage = useMemo(
   () => ({
     getItem: (key) => {
+      if (!createdDom()) return null
+
       const match = document.cookie.match(new RegExp(`(^| )${key}=([^;]+)`))
 
       return match ? (match[2] ?? null) : null
     },
     setItem: (key, value) => {
+      if (!createdDom()) return
+
       document.cookie = `${key}=${value}; max-age=31536000; path=/`
     },
   }),
@@ -409,6 +378,15 @@ return (
     </Resizable.Item>
   </Resizable.Root>
 )
+```
+
+ローカルストレージを使用する場合は、`storage`に`localStorage`を設定します。
+
+```tsx
+const { defaultLayout, onLayoutChanged } = Resizable.useLayout({
+  id: "persistence",
+  storage: localStorage,
+})
 ```
 
 ### 制御する

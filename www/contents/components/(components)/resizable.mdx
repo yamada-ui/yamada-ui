@@ -302,7 +302,7 @@ To disable, set `disabled` to `true`.
 
 ### Handle Resize Events
 
-```tsx preview
+```tsx preview client
 <Resizable.Root
   h="md"
   borderWidth="1px"
@@ -328,44 +328,9 @@ To disable, set `disabled` to `true`.
 </Resizable.Root>
 ```
 
-### Save Values to Local Storage
+### Save Values to Local Storage or Cookies
 
-To save values to local storage, use `Resizable.useLayout`.
-
-:::warning
-You must set an `id` to `Resizable.Item` to associate each saved value with the `Resizable.Item`.
-:::
-
-```tsx preview functional client
-const { defaultLayout, onLayoutChanged } = Resizable.useLayout({
-  id: "persistence",
-  storage: localStorage,
-})
-
-return (
-  <Resizable.Root
-    borderWidth="1px"
-    defaultLayout={defaultLayout}
-    h="md"
-    rounded="l2"
-    onLayoutChanged={onLayoutChanged}
-  >
-    <Resizable.Item id="one" display="center">
-      One
-    </Resizable.Item>
-
-    <Resizable.Trigger />
-
-    <Resizable.Item id="two" display="center">
-      Two
-    </Resizable.Item>
-  </Resizable.Root>
-)
-```
-
-### Save Values to Cookies
-
-To save values to `cookies`, use `Resizable.useLayout`.
+To save values to local storage or Cookies, use `Resizable.useLayout`.
 
 :::note
 You must set an `id` to `Resizable.Item` to associate each saved value with the `Resizable.Item`.
@@ -375,11 +340,15 @@ You must set an `id` to `Resizable.Item` to associate each saved value with the 
 const storage: Resizable.Storage = useMemo(
   () => ({
     getItem: (key) => {
+      if (!createdDom()) return null
+
       const match = document.cookie.match(new RegExp(`(^| )${key}=([^;]+)`))
 
       return match ? (match[2] ?? null) : null
     },
     setItem: (key, value) => {
+      if (!createdDom()) return
+
       document.cookie = `${key}=${value}; max-age=31536000; path=/`
     },
   }),
@@ -409,6 +378,15 @@ return (
     </Resizable.Item>
   </Resizable.Root>
 )
+```
+
+To use local storage, set `localStorage` to `storage`.
+
+```tsx
+const { defaultLayout, onLayoutChanged } = Resizable.useLayout({
+  id: "persistence",
+  storage: localStorage,
+})
 ```
 
 ### Control

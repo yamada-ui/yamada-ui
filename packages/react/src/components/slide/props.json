@@ -52,12 +52,6 @@
       "description": "Show the component. triggers when enter or exit states.",
       "required": false
     },
-    "placement": {
-      "type": "\"block-end\" | \"block-start\" | \"inline-end\" | \"inline-start\" ...",
-      "defaultValue": "\"inline-end\"",
-      "description": "The placement of the slide.",
-      "required": false
-    },
     "transition": {
       "type": "MotionLifecycleProps<Transition>",
       "description": "Custom `transition` definition for `enter` and `exit`.",

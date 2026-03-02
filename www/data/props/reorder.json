@@ -66,7 +66,7 @@
         "required": false
       },
       "items": {
-        "type": "ReorderItemProps<Y>[]",
+        "type": "ReorderItem<Y>[]",
         "description": "If provided, generate reorder items based on items.",
         "required": false
       },
@@ -78,12 +78,6 @@
       "onCompleteChange": {
         "type": "(values: Y[]) => void",
         "description": "The callback invoked when the movement of reorder items is completed.",
-        "required": false
-      },
-      "orientation": {
-        "type": "\"horizontal\" | \"vertical\"",
-        "defaultValue": "\"vertical\"",
-        "description": "The orientation of the reorder.",
         "required": false
       }
     },
@@ -176,7 +170,7 @@
       "required": false
     },
     "items": {
-      "type": "ReorderItemProps<Y>[]",
+      "type": "ReorderItem<Y>[]",
       "description": "If provided, generate reorder items based on items.",
       "required": false
     },
@@ -188,12 +182,6 @@
     "onCompleteChange": {
       "type": "(values: Y[]) => void",
       "description": "The callback invoked when the movement of reorder items is completed.",
-      "required": false
-    },
-    "orientation": {
-      "type": "\"horizontal\" | \"vertical\"",
-      "defaultValue": "\"vertical\"",
-      "description": "The orientation of the reorder.",
       "required": false
     }
   },

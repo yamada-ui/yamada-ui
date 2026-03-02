@@ -1,34 +1,6 @@
 {
-  "Blockquote": {
-    "Caption": {
-      "as": {
-        "type": "As",
-        "description": "The HTML element to render.",
-        "required": false
-      },
-      "asChild": {
-        "type": "boolean",
-        "description": "Merges its props onto its immediate child.",
-        "required": false
-      },
-      "css": {
-        "type": "CSSObject | CSSObject[]",
-        "description": "The CSS object.",
-        "required": false
-      },
-      "colorScheme": {
-        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-        "description": "Set color scheme variables.",
-        "required": false
-      },
-      "withDash": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the dash will be shown.",
-        "required": false
-      }
-    },
-    "Cite": {
+  "QrCode": {
+    "Frame": {
       "as": {
         "type": "As",
         "description": "The HTML element to render.",
@@ -50,7 +22,7 @@
         "required": false
       }
     },
-    "Content": {
+    "Overlay": {
       "as": {
         "type": "As",
         "description": "The HTML element to render.",
@@ -70,14 +42,9 @@
         "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
-      },
-      "citeUrl": {
-        "type": "string",
-        "description": "The URL of the citation of the blockquote.",
-        "required": false
       }
     },
-    "Icon": {
+    "Pattern": {
       "as": {
         "type": "As",
         "description": "The HTML element to render.",
@@ -120,51 +87,149 @@
         "description": "Set color scheme variables.",
         "required": false
       },
-      "variant": {
-        "type": "\"plain\" | \"solid\" | \"subtle\"",
-        "defaultValue": "\"subtle\"",
-        "description": "The variant of the component.",
+      "size": {
+        "type": "\"2xl\" | \"2xs\" | \"3xl\" | \"4xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" ...",
+        "defaultValue": "\"md\"",
+        "description": "The size of the component.",
         "required": false
       },
-      "captionProps": {
-        "type": "HTMLStyledProps<\"figcaption\">",
-        "description": "The props for the `BlockquoteCaption` component.",
-        "required": false
-      },
-      "cite": {
-        "type": "ReactNode",
-        "description": "The citation of the blockquote.",
-        "required": false
-      },
-      "citeProps": {
-        "type": "HTMLStyledProps<\"cite\">",
-        "description": "The props for the `BlockquoteCite` component.",
-        "required": false
-      },
-      "citeUrl": {
+      "value": {
         "type": "string",
-        "description": "The URL of the citation of the blockquote.",
-        "required": false
+        "description": "The value to encode as a QR code.",
+        "required": true
       },
-      "contentProps": {
-        "type": "HTMLStyledProps<\"blockquote\">",
-        "description": "The props for the `BlockquoteContent` component.",
-        "required": false
-      },
-      "icon": {
-        "type": "ReactNode",
-        "description": "The icon of the blockquote.",
-        "required": false
-      },
-      "withDash": {
+      "boostEcc": {
         "type": "boolean",
         "defaultValue": "false",
-        "description": "If `true`, the dash will be shown.",
+        "description": "The error correction level to boost the error correction level to the maximum allowed by the version and size.",
+        "required": false
+      },
+      "border": {
+        "type": "number",
+        "defaultValue": "1",
+        "description": "The border width around the QR code.",
+        "required": false
+      },
+      "ecc": {
+        "type": "\"H\" | \"L\" | \"M\" | \"Q\"",
+        "defaultValue": "\"L\"",
+        "description": "The error correction level.\n\n- `L` allows for up to 7% error correction,\n- `M` allows for up to 15% error correction,\n- `Q` allows for up to 25% error correction,\n- `H` allows for up to 30% error correction.",
+        "required": false
+      },
+      "frameProps": {
+        "type": "QrCodeFrameProps",
+        "description": "Props for the frame component.",
+        "required": false
+      },
+      "invert": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "Inverts the black and white of the QR code.",
+        "required": false
+      },
+      "maskPattern": {
+        "type": "number",
+        "defaultValue": "-1",
+        "description": "The mask pattern to use.",
+        "required": false
+      },
+      "maxVersion": {
+        "type": "number",
+        "defaultValue": "40",
+        "description": "The maximum version of the QR code (1-40).",
+        "required": false
+      },
+      "minVersion": {
+        "type": "number",
+        "defaultValue": "1",
+        "description": "The minimum version of the QR code (1-40).",
+        "required": false
+      },
+      "onEncoded": {
+        "type": "(qr: QrCodeGenerateResult) => void",
+        "description": "Callback function to receive the generated QR Code.",
+        "required": false
+      },
+      "patternProps": {
+        "type": "QrCodePatternProps",
+        "description": "Props for the pattern component.",
+        "required": false
+      },
+      "pixelSize": {
+        "type": "number",
+        "defaultValue": "10",
+        "description": "The pixel size of the QR code.",
         "required": false
       }
     }
   },
-  "BlockquoteCaption": {
+  "QrCodeFrame": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "QrCodeOverlay": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "QrCodePattern": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "QrCodeRoot": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -185,145 +250,78 @@
       "description": "Set color scheme variables.",
       "required": false
     },
-    "withDash": {
+    "size": {
+      "type": "\"2xl\" | \"2xs\" | \"3xl\" | \"4xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" ...",
+      "defaultValue": "\"md\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "value": {
+      "type": "string",
+      "description": "The value to encode as a QR code.",
+      "required": true
+    },
+    "boostEcc": {
       "type": "boolean",
       "defaultValue": "false",
-      "description": "If `true`, the dash will be shown.",
-      "required": false
-    }
-  },
-  "BlockquoteCite": {
-    "as": {
-      "type": "As",
-      "description": "The HTML element to render.",
+      "description": "The error correction level to boost the error correction level to the maximum allowed by the version and size.",
       "required": false
     },
-    "asChild": {
-      "type": "boolean",
-      "description": "Merges its props onto its immediate child.",
+    "border": {
+      "type": "number",
+      "defaultValue": "1",
+      "description": "The border width around the QR code.",
       "required": false
     },
-    "css": {
-      "type": "CSSObject | CSSObject[]",
-      "description": "The CSS object.",
+    "ecc": {
+      "type": "\"H\" | \"L\" | \"M\" | \"Q\"",
+      "defaultValue": "\"L\"",
+      "description": "The error correction level.\n\n- `L` allows for up to 7% error correction,\n- `M` allows for up to 15% error correction,\n- `Q` allows for up to 25% error correction,\n- `H` allows for up to 30% error correction.",
       "required": false
     },
-    "colorScheme": {
-      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-      "description": "Set color scheme variables.",
-      "required": false
-    }
-  },
-  "BlockquoteContent": {
-    "as": {
-      "type": "As",
-      "description": "The HTML element to render.",
+    "frameProps": {
+      "type": "QrCodeFrameProps",
+      "description": "Props for the frame component.",
       "required": false
     },
-    "asChild": {
-      "type": "boolean",
-      "description": "Merges its props onto its immediate child.",
-      "required": false
-    },
-    "css": {
-      "type": "CSSObject | CSSObject[]",
-      "description": "The CSS object.",
-      "required": false
-    },
-    "colorScheme": {
-      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-      "description": "Set color scheme variables.",
-      "required": false
-    },
-    "citeUrl": {
-      "type": "string",
-      "description": "The URL of the citation of the blockquote.",
-      "required": false
-    }
-  },
-  "BlockquoteIcon": {
-    "as": {
-      "type": "As",
-      "description": "The HTML element to render.",
-      "required": false
-    },
-    "asChild": {
-      "type": "boolean",
-      "description": "Merges its props onto its immediate child.",
-      "required": false
-    },
-    "css": {
-      "type": "CSSObject | CSSObject[]",
-      "description": "The CSS object.",
-      "required": false
-    },
-    "colorScheme": {
-      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-      "description": "Set color scheme variables.",
-      "required": false
-    }
-  },
-  "BlockquoteRoot": {
-    "as": {
-      "type": "As",
-      "description": "The HTML element to render.",
-      "required": false
-    },
-    "asChild": {
-      "type": "boolean",
-      "description": "Merges its props onto its immediate child.",
-      "required": false
-    },
-    "css": {
-      "type": "CSSObject | CSSObject[]",
-      "description": "The CSS object.",
-      "required": false
-    },
-    "colorScheme": {
-      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-      "description": "Set color scheme variables.",
-      "required": false
-    },
-    "variant": {
-      "type": "\"plain\" | \"solid\" | \"subtle\"",
-      "defaultValue": "\"subtle\"",
-      "description": "The variant of the component.",
-      "required": false
-    },
-    "captionProps": {
-      "type": "HTMLStyledProps<\"figcaption\">",
-      "description": "The props for the `BlockquoteCaption` component.",
-      "required": false
-    },
-    "cite": {
-      "type": "ReactNode",
-      "description": "The citation of the blockquote.",
-      "required": false
-    },
-    "citeProps": {
-      "type": "HTMLStyledProps<\"cite\">",
-      "description": "The props for the `BlockquoteCite` component.",
-      "required": false
-    },
-    "citeUrl": {
-      "type": "string",
-      "description": "The URL of the citation of the blockquote.",
-      "required": false
-    },
-    "contentProps": {
-      "type": "HTMLStyledProps<\"blockquote\">",
-      "description": "The props for the `BlockquoteContent` component.",
-      "required": false
-    },
-    "icon": {
-      "type": "ReactNode",
-      "description": "The icon of the blockquote.",
-      "required": false
-    },
-    "withDash": {
+    "invert": {
       "type": "boolean",
       "defaultValue": "false",
-      "description": "If `true`, the dash will be shown.",
+      "description": "Inverts the black and white of the QR code.",
+      "required": false
+    },
+    "maskPattern": {
+      "type": "number",
+      "defaultValue": "-1",
+      "description": "The mask pattern to use.",
+      "required": false
+    },
+    "maxVersion": {
+      "type": "number",
+      "defaultValue": "40",
+      "description": "The maximum version of the QR code (1-40).",
+      "required": false
+    },
+    "minVersion": {
+      "type": "number",
+      "defaultValue": "1",
+      "description": "The minimum version of the QR code (1-40).",
+      "required": false
+    },
+    "onEncoded": {
+      "type": "(qr: QrCodeGenerateResult) => void",
+      "description": "Callback function to receive the generated QR Code.",
+      "required": false
+    },
+    "patternProps": {
+      "type": "QrCodePatternProps",
+      "description": "Props for the pattern component.",
+      "required": false
+    },
+    "pixelSize": {
+      "type": "number",
+      "defaultValue": "10",
+      "description": "The pixel size of the QR code.",
       "required": false
     }
   }

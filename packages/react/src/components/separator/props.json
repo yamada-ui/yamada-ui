@@ -31,12 +31,6 @@
       "defaultValue": "\"solid\"",
       "description": "The variant of the component.",
       "required": false
-    },
-    "orientation": {
-      "type": "\"horizontal\" | \"vertical\"",
-      "defaultValue": "\"horizontal\"",
-      "description": "The orientation of the divider.",
-      "required": false
     }
   }
 }

@@ -21,7 +21,7 @@
       "required": false
     },
     "align": {
-      "type": "\"-moz-initial\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" | \"revert-layer\" ...",
+      "type": "\"-moz-initial\" | \"anchor-center\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" ...",
       "description": "The CSS `align-items` property.",
       "required": false
     },

@@ -103,14 +103,8 @@
         "required": false
       },
       "items": {
-        "type": "DataListItemProps[]",
+        "type": "DataListItem[]",
         "description": "If provided, generate elements based on items.",
-        "required": false
-      },
-      "orientation": {
-        "type": "\"horizontal\" | \"vertical\"",
-        "defaultValue": "\"horizontal\"",
-        "description": "The orientation of the data list.",
         "required": false
       },
       "termProps": {
@@ -245,14 +239,8 @@
       "required": false
     },
     "items": {
-      "type": "DataListItemProps[]",
+      "type": "DataListItem[]",
       "description": "If provided, generate elements based on items.",
-      "required": false
-    },
-    "orientation": {
-      "type": "\"horizontal\" | \"vertical\"",
-      "defaultValue": "\"horizontal\"",
-      "description": "The orientation of the data list.",
       "required": false
     },
     "termProps": {

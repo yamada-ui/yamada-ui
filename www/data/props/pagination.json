@@ -71,12 +71,6 @@
         "description": "If `true`, disable ripple effects when pressing a element.",
         "required": false
       },
-      "fullRounded": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
-        "required": false
-      },
       "icon": {
         "type": "ReactNode",
         "description": "The icon to be used in the button.",
@@ -190,14 +184,8 @@
         "required": true
       },
       "align": {
-        "type": "\"-moz-initial\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" | \"revert-layer\" ...",
+        "type": "\"-moz-initial\" | \"anchor-center\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" ...",
         "description": "The CSS `align-items` property.",
-        "required": false
-      },
-      "attached": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
         "required": false
       },
       "basis": {
@@ -263,18 +251,6 @@
         "description": "Props for ellipsis of the element.",
         "required": false
       },
-      "fullRounded": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
-        "required": false
-      },
-      "grow": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the children will grow to fill the available space.",
-        "required": false
-      },
       "itemProps": {
         "type": "PaginationItemProps",
         "description": "Props for item of the button element.",
@@ -288,12 +264,6 @@
       "onChange": {
         "type": "(page: number) => void",
         "description": "The callback invoked when the page changes.",
-        "required": false
-      },
-      "orientation": {
-        "type": "\"horizontal\" | \"vertical\"",
-        "defaultValue": "\"horizontal\"",
-        "description": "The orientation of the group.",
         "required": false
       },
       "page": {
@@ -310,11 +280,6 @@
         "type": "number",
         "defaultValue": "1",
         "description": "Number of siblings displayed on the left/right side of selected page.",
-        "required": false
-      },
-      "stacking": {
-        "type": "\"first-on-top\" | \"last-on-top\"",
-        "description": "The stacking order of the group.",
         "required": false
       },
       "withControls": {
@@ -462,12 +427,6 @@
       "description": "If `true`, disable ripple effects when pressing a element.",
       "required": false
     },
-    "fullRounded": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
-      "required": false
-    },
     "icon": {
       "type": "ReactNode",
       "description": "The icon to be used in the button.",
@@ -581,14 +540,8 @@
       "required": true
     },
     "align": {
-      "type": "\"-moz-initial\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" | \"revert-layer\" ...",
+      "type": "\"-moz-initial\" | \"anchor-center\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" ...",
       "description": "The CSS `align-items` property.",
-      "required": false
-    },
-    "attached": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
       "required": false
     },
     "basis": {
@@ -654,18 +607,6 @@
       "description": "Props for ellipsis of the element.",
       "required": false
     },
-    "fullRounded": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
-      "required": false
-    },
-    "grow": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the children will grow to fill the available space.",
-      "required": false
-    },
     "itemProps": {
       "type": "PaginationItemProps",
       "description": "Props for item of the button element.",
@@ -679,12 +620,6 @@
     "onChange": {
       "type": "(page: number) => void",
       "description": "The callback invoked when the page changes.",
-      "required": false
-    },
-    "orientation": {
-      "type": "\"horizontal\" | \"vertical\"",
-      "defaultValue": "\"horizontal\"",
-      "description": "The orientation of the group.",
       "required": false
     },
     "page": {
@@ -701,11 +636,6 @@
       "type": "number",
       "defaultValue": "1",
       "description": "Number of siblings displayed on the left/right side of selected page.",
-      "required": false
-    },
-    "stacking": {
-      "type": "\"first-on-top\" | \"last-on-top\"",
-      "description": "The stacking order of the group.",
       "required": false
     },
     "withControls": {

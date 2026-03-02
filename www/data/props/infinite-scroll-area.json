@@ -53,14 +53,8 @@
       "required": false
     },
     "onLoad": {
-      "type": "({ entry, finish, index }: { finish: () => void; index: number; entry?: IntersectionObserverEntry | undefined }) => void | Promise<void>",
+      "type": "({ entry, finish, index }: { index: number; finish: () => void; entry?: IntersectionObserverEntry | undefined }) => void | Promise<void>",
       "description": "The callback invoked when trigger is intersect.",
-      "required": false
-    },
-    "orientation": {
-      "type": "\"horizontal\" | \"vertical\"",
-      "defaultValue": "\"vertical\"",
-      "description": "The orientation of the infinite scroll.",
       "required": false
     },
     "resetRef": {

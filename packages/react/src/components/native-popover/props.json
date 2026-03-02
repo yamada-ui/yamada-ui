@@ -1,6 +1,50 @@
 {
-  "Steps": {
-    "CompletedContent": {
+  "NativePopover": {
+    "Anchor": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Body": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "CloseTrigger": {
       "as": {
         "type": "As",
         "description": "The HTML element to render.",
@@ -42,14 +86,9 @@
         "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
-      },
-      "index": {
-        "type": "number",
-        "description": "The index of the step content.",
-        "required": true
       }
     },
-    "Description": {
+    "Footer": {
       "as": {
         "type": "As",
         "description": "The HTML element to render.",
@@ -71,140 +110,7 @@
         "required": false
       }
     },
-    "Indicator": {
-      "as": {
-        "type": "As",
-        "description": "The HTML element to render.",
-        "required": false
-      },
-      "asChild": {
-        "type": "boolean",
-        "description": "Merges its props onto its immediate child.",
-        "required": false
-      },
-      "css": {
-        "type": "CSSObject | CSSObject[]",
-        "description": "The CSS object.",
-        "required": false
-      },
-      "colorScheme": {
-        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-        "description": "Set color scheme variables.",
-        "required": false
-      },
-      "complete": {
-        "type": "ReactNode",
-        "defaultValue": "<CheckIcon />",
-        "description": "The element for the complete indicator.",
-        "required": false
-      },
-      "current": {
-        "type": "ReactNode",
-        "defaultValue": "<StepsNumber />",
-        "description": "The element for the current indicator.",
-        "required": false
-      },
-      "incomplete": {
-        "type": "ReactNode",
-        "defaultValue": "<StepsNumber />",
-        "description": "The element for the incomplete indicator.",
-        "required": false
-      }
-    },
-    "Item": {
-      "as": {
-        "type": "As",
-        "description": "The HTML element to render.",
-        "required": false
-      },
-      "asChild": {
-        "type": "boolean",
-        "description": "Merges its props onto its immediate child.",
-        "required": false
-      },
-      "css": {
-        "type": "CSSObject | CSSObject[]",
-        "description": "The CSS object.",
-        "required": false
-      },
-      "colorScheme": {
-        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-        "description": "Set color scheme variables.",
-        "required": false
-      },
-      "index": {
-        "type": "number",
-        "description": "The index of the step.",
-        "required": true
-      }
-    },
-    "List": {
-      "as": {
-        "type": "As",
-        "description": "The HTML element to render.",
-        "required": false
-      },
-      "asChild": {
-        "type": "boolean",
-        "description": "Merges its props onto its immediate child.",
-        "required": false
-      },
-      "css": {
-        "type": "CSSObject | CSSObject[]",
-        "description": "The CSS object.",
-        "required": false
-      },
-      "colorScheme": {
-        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-        "description": "Set color scheme variables.",
-        "required": false
-      }
-    },
-    "NextTrigger": {
-      "as": {
-        "type": "As",
-        "description": "The HTML element to render.",
-        "required": false
-      },
-      "asChild": {
-        "type": "boolean",
-        "description": "Merges its props onto its immediate child.",
-        "required": false
-      },
-      "css": {
-        "type": "CSSObject | CSSObject[]",
-        "description": "The CSS object.",
-        "required": false
-      },
-      "colorScheme": {
-        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-        "description": "Set color scheme variables.",
-        "required": false
-      }
-    },
-    "Number": {
-      "as": {
-        "type": "As",
-        "description": "The HTML element to render.",
-        "required": false
-      },
-      "asChild": {
-        "type": "boolean",
-        "description": "Merges its props onto its immediate child.",
-        "required": false
-      },
-      "css": {
-        "type": "CSSObject | CSSObject[]",
-        "description": "The CSS object.",
-        "required": false
-      },
-      "colorScheme": {
-        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-        "description": "Set color scheme variables.",
-        "required": false
-      }
-    },
-    "PrevTrigger": {
+    "Header": {
       "as": {
         "type": "As",
         "description": "The HTML element to render.",
@@ -227,73 +133,121 @@
       }
     },
     "Root": {
-      "as": {
-        "type": "As",
-        "description": "The HTML element to render.",
-        "required": false
-      },
-      "asChild": {
-        "type": "boolean",
-        "description": "Merges its props onto its immediate child.",
-        "required": false
-      },
-      "css": {
-        "type": "CSSObject | CSSObject[]",
-        "description": "The CSS object.",
-        "required": false
-      },
-      "colorScheme": {
-        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-        "description": "Set color scheme variables.",
-        "required": false
-      },
       "size": {
-        "type": "\"lg\" | \"md\" | \"sm\"",
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xs\"",
         "defaultValue": "\"md\"",
         "description": "The size of the component.",
         "required": false
       },
-      "variant": {
-        "type": "\"solid\" | \"subtle\"",
-        "defaultValue": "\"solid\"",
-        "description": "The variant of the component.",
+      "autoUpdate": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, automatically updates the position of the floating element when necessary.",
         "required": false
       },
-      "defaultIndex": {
-        "type": "number",
-        "defaultValue": "0",
-        "description": "The initial index of the active step.",
-        "required": false
-      },
-      "index": {
-        "type": "number",
-        "description": "The index of the active step.",
-        "required": false
-      },
-      "items": {
-        "type": "StepsItem[]",
-        "description": "If provided, generate step components based on steps.",
-        "required": false
-      },
-      "lazy": {
+      "disabled": {
         "type": "boolean",
         "defaultValue": "false",
-        "description": "If `true`, rendering of the content will be deferred until it is selected.",
+        "description": "If `true`, the popover will be disabled.",
         "required": false
       },
-      "lazyBehavior": {
-        "type": "LazyBehavior",
-        "defaultValue": "\"unmount\"",
-        "description": "The lazy behavior of content when not active. Only works when `lazy={true}`.\n\n- `unmount`: The content is always unmounted.\n- `keepMounted`: The content is initially unmounted, but stays mounted when selected.",
+      "elements": {
+        "type": "{\n  floating?: HTMLElement | null\n  reference?: null | Reference<Y>\n}",
+        "description": "Object containing the reference and floating elements.",
         "required": false
       },
-      "onChange": {
-        "type": "(index: number) => void",
-        "description": "The callback function that is called when the active step index is changed.",
+      "flip": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area.",
+        "required": false
+      },
+      "gutter": {
+        "type": "number",
+        "defaultValue": "8",
+        "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier.",
+        "required": false
+      },
+      "matchWidth": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns.",
+        "required": false
+      },
+      "middleware": {
+        "type": "(false | Middleware | null | undefined)[]",
+        "description": "Array of middleware objects to modify the positioning or provide data for\nrendering.",
+        "required": false
+      },
+      "offset": {
+        "type": "[number, number]",
+        "description": "The main and cross-axis offset to displace popper element from its reference element.",
+        "required": false
+      },
+      "open": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "Whether the popper should be enabled.",
+        "required": false
+      },
+      "placement": {
+        "type": "Direction",
+        "defaultValue": "\"end\"",
+        "description": "The placement of the popper relative to its reference.",
+        "required": false
+      },
+      "platform": {
+        "type": "Platform",
+        "description": "Custom or extended platform object.",
+        "required": false
+      },
+      "popover": {
+        "type": "\"\" | \"auto\" | \"hint\" | \"manual\" | true",
+        "defaultValue": "\"auto\"",
+        "description": "The mode of the popover.",
+        "required": false
+      },
+      "popoverTarget": {
+        "type": "string",
+        "description": "The target element ID for the popover trigger.\nIf not provided, a generated ID will be used.",
+        "required": false
+      },
+      "popoverTargetAction": {
+        "type": "\"hide\" | \"show\" | \"toggle\"",
+        "defaultValue": "\"toggle\"",
+        "description": "The action for the popover target.",
+        "required": false
+      },
+      "preventOverflow": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+        "required": false
+      },
+      "strategy": {
+        "type": "Strategy",
+        "defaultValue": "\"absolute\"",
+        "description": "The CSS positioning strategy to use.",
+        "required": false
+      },
+      "transform": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "Whether to use `transform` for positioning instead of `top` and `left`\n(layout) in the `floatingStyles` object.",
+        "required": false
+      },
+      "updateRef": {
+        "type": "RefObject<() => void>",
+        "description": "Update the position of the floating element, re-rendering the component if required.",
+        "required": false
+      },
+      "whileElementsMounted": {
+        "type": "(reference: Reference<Y>, floating: HTMLElement, update: () => void) => () => void",
+        "description": "A callback invoked when both the reference and floating elements are\nmounted, and cleaned up when either is unmounted. This is useful for\nsetting up event listeners (e.g. pass `autoUpdate`).",
         "required": false
       }
     },
-    "Separator": {
+    "Trigger": {
       "as": {
         "type": "As",
         "description": "The HTML element to render.",
@@ -314,31 +268,9 @@
         "description": "Set color scheme variables.",
         "required": false
       }
-    },
-    "Title": {
-      "as": {
-        "type": "As",
-        "description": "The HTML element to render.",
-        "required": false
-      },
-      "asChild": {
-        "type": "boolean",
-        "description": "Merges its props onto its immediate child.",
-        "required": false
-      },
-      "css": {
-        "type": "CSSObject | CSSObject[]",
-        "description": "The CSS object.",
-        "required": false
-      },
-      "colorScheme": {
-        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-        "description": "Set color scheme variables.",
-        "required": false
-      }
     }
   },
-  "StepsDescription": {
+  "NativePopoverAnchor": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -360,74 +292,7 @@
       "required": false
     }
   },
-  "StepsIndicator": {
-    "as": {
-      "type": "As",
-      "description": "The HTML element to render.",
-      "required": false
-    },
-    "asChild": {
-      "type": "boolean",
-      "description": "Merges its props onto its immediate child.",
-      "required": false
-    },
-    "css": {
-      "type": "CSSObject | CSSObject[]",
-      "description": "The CSS object.",
-      "required": false
-    },
-    "colorScheme": {
-      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-      "description": "Set color scheme variables.",
-      "required": false
-    },
-    "complete": {
-      "type": "ReactNode",
-      "defaultValue": "<CheckIcon />",
-      "description": "The element for the complete indicator.",
-      "required": false
-    },
-    "current": {
-      "type": "ReactNode",
-      "defaultValue": "<StepsNumber />",
-      "description": "The element for the current indicator.",
-      "required": false
-    },
-    "incomplete": {
-      "type": "ReactNode",
-      "defaultValue": "<StepsNumber />",
-      "description": "The element for the incomplete indicator.",
-      "required": false
-    }
-  },
-  "StepsItem": {
-    "as": {
-      "type": "As",
-      "description": "The HTML element to render.",
-      "required": false
-    },
-    "asChild": {
-      "type": "boolean",
-      "description": "Merges its props onto its immediate child.",
-      "required": false
-    },
-    "css": {
-      "type": "CSSObject | CSSObject[]",
-      "description": "The CSS object.",
-      "required": false
-    },
-    "colorScheme": {
-      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-      "description": "Set color scheme variables.",
-      "required": false
-    },
-    "index": {
-      "type": "number",
-      "description": "The index of the step.",
-      "required": true
-    }
-  },
-  "StepsList": {
+  "NativePopoverBody": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -449,7 +314,7 @@
       "required": false
     }
   },
-  "StepsNextTrigger": {
+  "NativePopoverCloseTrigger": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -471,7 +336,7 @@
       "required": false
     }
   },
-  "StepsNumber": {
+  "NativePopoverContent": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -493,7 +358,7 @@
       "required": false
     }
   },
-  "StepsPrevTrigger": {
+  "NativePopoverFooter": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -515,7 +380,7 @@
       "required": false
     }
   },
-  "StepsRoot": {
+  "NativePopoverHeader": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -535,76 +400,124 @@
       "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
-    },
+    }
+  },
+  "NativePopoverRoot": {
     "size": {
-      "type": "\"lg\" | \"md\" | \"sm\"",
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xs\"",
       "defaultValue": "\"md\"",
       "description": "The size of the component.",
       "required": false
     },
-    "variant": {
-      "type": "\"solid\" | \"subtle\"",
-      "defaultValue": "\"solid\"",
-      "description": "The variant of the component.",
+    "autoUpdate": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, automatically updates the position of the floating element when necessary.",
       "required": false
     },
-    "defaultIndex": {
-      "type": "number",
-      "defaultValue": "0",
-      "description": "The initial index of the active step.",
-      "required": false
-    },
-    "index": {
-      "type": "number",
-      "description": "The index of the active step.",
-      "required": false
-    },
-    "items": {
-      "type": "StepsItem[]",
-      "description": "If provided, generate step components based on steps.",
-      "required": false
-    },
-    "lazy": {
+    "disabled": {
       "type": "boolean",
       "defaultValue": "false",
-      "description": "If `true`, rendering of the content will be deferred until it is selected.",
+      "description": "If `true`, the popover will be disabled.",
       "required": false
     },
-    "lazyBehavior": {
-      "type": "LazyBehavior",
-      "defaultValue": "\"unmount\"",
-      "description": "The lazy behavior of content when not active. Only works when `lazy={true}`.\n\n- `unmount`: The content is always unmounted.\n- `keepMounted`: The content is initially unmounted, but stays mounted when selected.",
+    "elements": {
+      "type": "{\n  floating?: HTMLElement | null\n  reference?: null | Reference<Y>\n}",
+      "description": "Object containing the reference and floating elements.",
       "required": false
     },
-    "onChange": {
-      "type": "(index: number) => void",
-      "description": "The callback function that is called when the active step index is changed.",
-      "required": false
-    }
-  },
-  "StepsSeparator": {
-    "as": {
-      "type": "As",
-      "description": "The HTML element to render.",
-      "required": false
-    },
-    "asChild": {
+    "flip": {
       "type": "boolean",
-      "description": "Merges its props onto its immediate child.",
+      "defaultValue": "true",
+      "description": "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area.",
       "required": false
     },
-    "css": {
-      "type": "CSSObject | CSSObject[]",
-      "description": "The CSS object.",
+    "gutter": {
+      "type": "number",
+      "defaultValue": "8",
+      "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier.",
       "required": false
     },
-    "colorScheme": {
-      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-      "description": "Set color scheme variables.",
+    "matchWidth": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns.",
+      "required": false
+    },
+    "middleware": {
+      "type": "(false | Middleware | null | undefined)[]",
+      "description": "Array of middleware objects to modify the positioning or provide data for\nrendering.",
+      "required": false
+    },
+    "offset": {
+      "type": "[number, number]",
+      "description": "The main and cross-axis offset to displace popper element from its reference element.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "Whether the popper should be enabled.",
+      "required": false
+    },
+    "placement": {
+      "type": "Direction",
+      "defaultValue": "\"end\"",
+      "description": "The placement of the popper relative to its reference.",
+      "required": false
+    },
+    "platform": {
+      "type": "Platform",
+      "description": "Custom or extended platform object.",
+      "required": false
+    },
+    "popover": {
+      "type": "\"\" | \"auto\" | \"hint\" | \"manual\" | true",
+      "defaultValue": "\"auto\"",
+      "description": "The mode of the popover.",
+      "required": false
+    },
+    "popoverTarget": {
+      "type": "string",
+      "description": "The target element ID for the popover trigger.\nIf not provided, a generated ID will be used.",
+      "required": false
+    },
+    "popoverTargetAction": {
+      "type": "\"hide\" | \"show\" | \"toggle\"",
+      "defaultValue": "\"toggle\"",
+      "description": "The action for the popover target.",
+      "required": false
+    },
+    "preventOverflow": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "strategy": {
+      "type": "Strategy",
+      "defaultValue": "\"absolute\"",
+      "description": "The CSS positioning strategy to use.",
+      "required": false
+    },
+    "transform": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "Whether to use `transform` for positioning instead of `top` and `left`\n(layout) in the `floatingStyles` object.",
+      "required": false
+    },
+    "updateRef": {
+      "type": "RefObject<() => void>",
+      "description": "Update the position of the floating element, re-rendering the component if required.",
+      "required": false
+    },
+    "whileElementsMounted": {
+      "type": "(reference: Reference<Y>, floating: HTMLElement, update: () => void) => () => void",
+      "description": "A callback invoked when both the reference and floating elements are\nmounted, and cleaned up when either is unmounted. This is useful for\nsetting up event listeners (e.g. pass `autoUpdate`).",
       "required": false
     }
   },
-  "StepsTitle": {
+  "NativePopoverTrigger": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",

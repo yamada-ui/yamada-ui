@@ -226,7 +226,7 @@
         "required": false
       },
       "errorBorderColor": {
-        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
         "description": "The border color when the input is invalid.",
         "required": false
       },
@@ -237,7 +237,7 @@
         "required": false
       },
       "focusBorderColor": {
-        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
         "description": "The border color when the input is focused.",
         "required": false
       },
@@ -298,7 +298,7 @@
         "required": false
       },
       "middleware": {
-        "type": "(false | { name: string; options?: any; fn: (state: { x: number; y: number; placement: Placement; platform: Platform; strategy: Strategy; initialPlacement: Placement; middlewareData: MiddlewareData; rects: ElementRects; elements: Elements; }) => Promisable<...>; } | null | undefined)[]",
+        "type": "(false | { name: string; options?: any; fn: (state: { x: number; y: number; placement: Placement; platform: { detectOverflow: (state: MiddlewareState, options?: DetectOverflowOptions | Derivable<...> | undefined) => Promise<...>; } & Platform; ... 4 more ...; elements: Elements; }) => Promisable<...>; } | null | und...",
         "description": "Array of middleware objects to modify the positioning or provide data for\nrendering.",
         "required": false
       },
@@ -447,12 +447,6 @@
       "whileElementsMounted": {
         "type": "(reference: HTMLButtonElement, floating: HTMLElement, update: () => void) => () => void",
         "description": "A callback invoked when both the reference and floating elements are\nmounted, and cleaned up when either is unmounted. This is useful for\nsetting up event listeners (e.g. pass `autoUpdate`).",
-        "required": false
-      },
-      "wrap": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, wrap the value text.",
         "required": false
       }
     },
@@ -705,7 +699,7 @@
       "required": false
     },
     "errorBorderColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The border color when the input is invalid.",
       "required": false
     },
@@ -716,7 +710,7 @@
       "required": false
     },
     "focusBorderColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The border color when the input is focused.",
       "required": false
     },
@@ -777,7 +771,7 @@
       "required": false
     },
     "middleware": {
-      "type": "(false | { name: string; options?: any; fn: (state: { x: number; y: number; placement: Placement; platform: Platform; strategy: Strategy; initialPlacement: Placement; middlewareData: MiddlewareData; rects: ElementRects; elements: Elements; }) => Promisable<...>; } | null | undefined)[]",
+      "type": "(false | { name: string; options?: any; fn: (state: { x: number; y: number; placement: Placement; platform: { detectOverflow: (state: MiddlewareState, options?: DetectOverflowOptions | Derivable<...> | undefined) => Promise<...>; } & Platform; ... 4 more ...; elements: Elements; }) => Promisable<...>; } | null | und...",
       "description": "Array of middleware objects to modify the positioning or provide data for\nrendering.",
       "required": false
     },
@@ -926,12 +920,6 @@
     "whileElementsMounted": {
       "type": "(reference: HTMLButtonElement, floating: HTMLElement, update: () => void) => () => void",
       "description": "A callback invoked when both the reference and floating elements are\nmounted, and cleaned up when either is unmounted. This is useful for\nsetting up event listeners (e.g. pass `autoUpdate`).",
-      "required": false
-    },
-    "wrap": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, wrap the value text.",
       "required": false
     }
   },

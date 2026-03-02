@@ -1,6 +1,6 @@
 {
-  "Steps": {
-    "CompletedContent": {
+  "Form": {
+    "Body": {
       "as": {
         "type": "As",
         "description": "The HTML element to render.",
@@ -20,33 +20,6 @@
         "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
-      }
-    },
-    "Content": {
-      "as": {
-        "type": "As",
-        "description": "The HTML element to render.",
-        "required": false
-      },
-      "asChild": {
-        "type": "boolean",
-        "description": "Merges its props onto its immediate child.",
-        "required": false
-      },
-      "css": {
-        "type": "CSSObject | CSSObject[]",
-        "description": "The CSS object.",
-        "required": false
-      },
-      "colorScheme": {
-        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-        "description": "Set color scheme variables.",
-        "required": false
-      },
-      "index": {
-        "type": "number",
-        "description": "The index of the step content.",
-        "required": true
       }
     },
     "Description": {
@@ -71,74 +44,7 @@
         "required": false
       }
     },
-    "Indicator": {
-      "as": {
-        "type": "As",
-        "description": "The HTML element to render.",
-        "required": false
-      },
-      "asChild": {
-        "type": "boolean",
-        "description": "Merges its props onto its immediate child.",
-        "required": false
-      },
-      "css": {
-        "type": "CSSObject | CSSObject[]",
-        "description": "The CSS object.",
-        "required": false
-      },
-      "colorScheme": {
-        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-        "description": "Set color scheme variables.",
-        "required": false
-      },
-      "complete": {
-        "type": "ReactNode",
-        "defaultValue": "<CheckIcon />",
-        "description": "The element for the complete indicator.",
-        "required": false
-      },
-      "current": {
-        "type": "ReactNode",
-        "defaultValue": "<StepsNumber />",
-        "description": "The element for the current indicator.",
-        "required": false
-      },
-      "incomplete": {
-        "type": "ReactNode",
-        "defaultValue": "<StepsNumber />",
-        "description": "The element for the incomplete indicator.",
-        "required": false
-      }
-    },
-    "Item": {
-      "as": {
-        "type": "As",
-        "description": "The HTML element to render.",
-        "required": false
-      },
-      "asChild": {
-        "type": "boolean",
-        "description": "Merges its props onto its immediate child.",
-        "required": false
-      },
-      "css": {
-        "type": "CSSObject | CSSObject[]",
-        "description": "The CSS object.",
-        "required": false
-      },
-      "colorScheme": {
-        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-        "description": "Set color scheme variables.",
-        "required": false
-      },
-      "index": {
-        "type": "number",
-        "description": "The index of the step.",
-        "required": true
-      }
-    },
-    "List": {
+    "Footer": {
       "as": {
         "type": "As",
         "description": "The HTML element to render.",
@@ -160,7 +66,7 @@
         "required": false
       }
     },
-    "NextTrigger": {
+    "Group": {
       "as": {
         "type": "As",
         "description": "The HTML element to render.",
@@ -182,29 +88,7 @@
         "required": false
       }
     },
-    "Number": {
-      "as": {
-        "type": "As",
-        "description": "The HTML element to render.",
-        "required": false
-      },
-      "asChild": {
-        "type": "boolean",
-        "description": "Merges its props onto its immediate child.",
-        "required": false
-      },
-      "css": {
-        "type": "CSSObject | CSSObject[]",
-        "description": "The CSS object.",
-        "required": false
-      },
-      "colorScheme": {
-        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-        "description": "Set color scheme variables.",
-        "required": false
-      }
-    },
-    "PrevTrigger": {
+    "Header": {
       "as": {
         "type": "As",
         "description": "The HTML element to render.",
@@ -254,46 +138,103 @@
         "required": false
       },
       "variant": {
-        "type": "\"solid\" | \"subtle\"",
-        "defaultValue": "\"solid\"",
+        "type": "\"elevated\" | \"outline\" | \"panel\" | \"plain\"",
+        "defaultValue": "\"plain\"",
         "description": "The variant of the component.",
         "required": false
       },
-      "defaultIndex": {
-        "type": "number",
-        "defaultValue": "0",
-        "description": "The initial index of the active step.",
+      "bodyProps": {
+        "type": "FormBodyProps",
+        "description": "Props the body component.",
         "required": false
       },
-      "index": {
-        "type": "number",
-        "description": "The index of the active step.",
+      "description": {
+        "type": "ReactNode",
+        "description": "The form description to use.",
         "required": false
       },
-      "items": {
-        "type": "StepsItem[]",
-        "description": "If provided, generate step components based on steps.",
+      "descriptionProps": {
+        "type": "FormDescriptionProps",
+        "description": "Props the description component.",
         "required": false
       },
-      "lazy": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, rendering of the content will be deferred until it is selected.",
+      "disabled": {
+        "type": "boolean | { [key: string]: boolean | undefined }",
+        "description": "An object managing the disabled state of each field.",
         "required": false
       },
-      "lazyBehavior": {
-        "type": "LazyBehavior",
-        "defaultValue": "\"unmount\"",
-        "description": "The lazy behavior of content when not active. Only works when `lazy={true}`.\n\n- `unmount`: The content is always unmounted.\n- `keepMounted`: The content is initially unmounted, but stays mounted when selected.",
+      "errorMessage": {
+        "type": "{ [key: string]: ReactNode }",
+        "description": "An object managing the error message of each field.",
         "required": false
       },
-      "onChange": {
-        "type": "(index: number) => void",
-        "description": "The callback function that is called when the active step index is changed.",
+      "footerProps": {
+        "type": "FormFooterProps",
+        "description": "Props the footer component.",
+        "required": false
+      },
+      "headerProps": {
+        "type": "FormHeaderProps",
+        "description": "Props the header component.",
+        "required": false
+      },
+      "helperMessage": {
+        "type": "{ [key: string]: ReactNode }",
+        "description": "An object managing the helper message of each field.",
+        "required": false
+      },
+      "invalid": {
+        "type": "boolean | { [key: string]: boolean | undefined }",
+        "description": "An object managing the invalid state of each field.",
+        "required": false
+      },
+      "optionalIndicator": {
+        "type": "ReactNode",
+        "description": "The optional indicator to use for each field.",
+        "required": false
+      },
+      "readOnly": {
+        "type": "boolean | { [key: string]: boolean | undefined }",
+        "description": "An object managing the read only state of each field.",
+        "required": false
+      },
+      "replace": {
+        "type": "boolean | { [key: string]: boolean | undefined }",
+        "description": "An object managing the replace state of each field.",
+        "required": false
+      },
+      "required": {
+        "type": "boolean | { [key: string]: boolean | undefined }",
+        "description": "An object managing the required state of each field.",
+        "required": false
+      },
+      "requiredIndicator": {
+        "type": "ReactNode",
+        "description": "The required indicator to use for each field.",
+        "required": false
+      },
+      "submitButton": {
+        "type": "ReactNode",
+        "description": "The submit button to use.",
+        "required": false
+      },
+      "submitButtonProps": {
+        "type": "FormSubmitButtonProps",
+        "description": "Props the submit button component.",
+        "required": false
+      },
+      "title": {
+        "type": "ReactNode",
+        "description": "The form title to use.",
+        "required": false
+      },
+      "titleProps": {
+        "type": "FormTitleProps",
+        "description": "Props the title component.",
         "required": false
       }
     },
-    "Separator": {
+    "SubmitButton": {
       "as": {
         "type": "As",
         "description": "The HTML element to render.",
@@ -312,6 +253,83 @@
       "colorScheme": {
         "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "active": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is represented as active.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is disabled.",
+        "required": false
+      },
+      "disableRipple": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, disable ripple effects when pressing a element.",
+        "required": false
+      },
+      "endIcon": {
+        "type": "ReactNode",
+        "description": "The icon to display at the end side of the button.",
+        "required": false
+      },
+      "iconProps": {
+        "type": "ButtonIconProps",
+        "description": "The props of the icon element.",
+        "required": false
+      },
+      "loading": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the loading state of the button is represented.",
+        "required": false
+      },
+      "loadingIcon": {
+        "type": "Loading.Scheme | ReactNode",
+        "defaultValue": "\"oval\"",
+        "description": "The icon to display when the button is loading.",
+        "required": false
+      },
+      "loadingMessage": {
+        "type": "ReactNode",
+        "description": "The message to display when the button is loading.",
+        "required": false
+      },
+      "loadingPlacement": {
+        "type": "\"end\" | \"start\"",
+        "defaultValue": "\"start\"",
+        "description": "The placement of the loading indicator. Accepts `start` or `end`.",
+        "required": false
+      },
+      "loadingProps": {
+        "type": "ButtonLoadingProps",
+        "description": "The props of the loading icon element.",
+        "required": false
+      },
+      "startIcon": {
+        "type": "ReactNode",
+        "description": "The icon to display at the start side of the button.",
+        "required": false
+      },
+      "type": {
+        "type": "HTMLProps<\"button\">[\"type\"]",
+        "defaultValue": "\"button\"",
+        "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
         "required": false
       }
     },
@@ -338,7 +356,7 @@
       }
     }
   },
-  "StepsDescription": {
+  "FormBody": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -360,74 +378,7 @@
       "required": false
     }
   },
-  "StepsIndicator": {
-    "as": {
-      "type": "As",
-      "description": "The HTML element to render.",
-      "required": false
-    },
-    "asChild": {
-      "type": "boolean",
-      "description": "Merges its props onto its immediate child.",
-      "required": false
-    },
-    "css": {
-      "type": "CSSObject | CSSObject[]",
-      "description": "The CSS object.",
-      "required": false
-    },
-    "colorScheme": {
-      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-      "description": "Set color scheme variables.",
-      "required": false
-    },
-    "complete": {
-      "type": "ReactNode",
-      "defaultValue": "<CheckIcon />",
-      "description": "The element for the complete indicator.",
-      "required": false
-    },
-    "current": {
-      "type": "ReactNode",
-      "defaultValue": "<StepsNumber />",
-      "description": "The element for the current indicator.",
-      "required": false
-    },
-    "incomplete": {
-      "type": "ReactNode",
-      "defaultValue": "<StepsNumber />",
-      "description": "The element for the incomplete indicator.",
-      "required": false
-    }
-  },
-  "StepsItem": {
-    "as": {
-      "type": "As",
-      "description": "The HTML element to render.",
-      "required": false
-    },
-    "asChild": {
-      "type": "boolean",
-      "description": "Merges its props onto its immediate child.",
-      "required": false
-    },
-    "css": {
-      "type": "CSSObject | CSSObject[]",
-      "description": "The CSS object.",
-      "required": false
-    },
-    "colorScheme": {
-      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
-      "description": "Set color scheme variables.",
-      "required": false
-    },
-    "index": {
-      "type": "number",
-      "description": "The index of the step.",
-      "required": true
-    }
-  },
-  "StepsList": {
+  "FormDescription": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -449,7 +400,7 @@
       "required": false
     }
   },
-  "StepsNextTrigger": {
+  "FormFooter": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -471,7 +422,7 @@
       "required": false
     }
   },
-  "StepsNumber": {
+  "FormGroup": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -493,7 +444,7 @@
       "required": false
     }
   },
-  "StepsPrevTrigger": {
+  "FormHeader": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -515,7 +466,7 @@
       "required": false
     }
   },
-  "StepsRoot": {
+  "FormRoot": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -543,46 +494,103 @@
       "required": false
     },
     "variant": {
-      "type": "\"solid\" | \"subtle\"",
-      "defaultValue": "\"solid\"",
+      "type": "\"elevated\" | \"outline\" | \"panel\" | \"plain\"",
+      "defaultValue": "\"plain\"",
       "description": "The variant of the component.",
       "required": false
     },
-    "defaultIndex": {
-      "type": "number",
-      "defaultValue": "0",
-      "description": "The initial index of the active step.",
+    "bodyProps": {
+      "type": "FormBodyProps",
+      "description": "Props the body component.",
       "required": false
     },
-    "index": {
-      "type": "number",
-      "description": "The index of the active step.",
+    "description": {
+      "type": "ReactNode",
+      "description": "The form description to use.",
       "required": false
     },
-    "items": {
-      "type": "StepsItem[]",
-      "description": "If provided, generate step components based on steps.",
+    "descriptionProps": {
+      "type": "FormDescriptionProps",
+      "description": "Props the description component.",
       "required": false
     },
-    "lazy": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, rendering of the content will be deferred until it is selected.",
+    "disabled": {
+      "type": "boolean | { [key: string]: boolean | undefined }",
+      "description": "An object managing the disabled state of each field.",
       "required": false
     },
-    "lazyBehavior": {
-      "type": "LazyBehavior",
-      "defaultValue": "\"unmount\"",
-      "description": "The lazy behavior of content when not active. Only works when `lazy={true}`.\n\n- `unmount`: The content is always unmounted.\n- `keepMounted`: The content is initially unmounted, but stays mounted when selected.",
+    "errorMessage": {
+      "type": "{ [key: string]: ReactNode }",
+      "description": "An object managing the error message of each field.",
       "required": false
     },
-    "onChange": {
-      "type": "(index: number) => void",
-      "description": "The callback function that is called when the active step index is changed.",
+    "footerProps": {
+      "type": "FormFooterProps",
+      "description": "Props the footer component.",
+      "required": false
+    },
+    "headerProps": {
+      "type": "FormHeaderProps",
+      "description": "Props the header component.",
+      "required": false
+    },
+    "helperMessage": {
+      "type": "{ [key: string]: ReactNode }",
+      "description": "An object managing the helper message of each field.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean | { [key: string]: boolean | undefined }",
+      "description": "An object managing the invalid state of each field.",
+      "required": false
+    },
+    "optionalIndicator": {
+      "type": "ReactNode",
+      "description": "The optional indicator to use for each field.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean | { [key: string]: boolean | undefined }",
+      "description": "An object managing the read only state of each field.",
+      "required": false
+    },
+    "replace": {
+      "type": "boolean | { [key: string]: boolean | undefined }",
+      "description": "An object managing the replace state of each field.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean | { [key: string]: boolean | undefined }",
+      "description": "An object managing the required state of each field.",
+      "required": false
+    },
+    "requiredIndicator": {
+      "type": "ReactNode",
+      "description": "The required indicator to use for each field.",
+      "required": false
+    },
+    "submitButton": {
+      "type": "ReactNode",
+      "description": "The submit button to use.",
+      "required": false
+    },
+    "submitButtonProps": {
+      "type": "FormSubmitButtonProps",
+      "description": "Props the submit button component.",
+      "required": false
+    },
+    "title": {
+      "type": "ReactNode",
+      "description": "The form title to use.",
+      "required": false
+    },
+    "titleProps": {
+      "type": "FormTitleProps",
+      "description": "Props the title component.",
       "required": false
     }
   },
-  "StepsSeparator": {
+  "FormSubmitButton": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -602,9 +610,86 @@
       "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
+    },
+    "size": {
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "active": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is represented as active.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is disabled.",
+      "required": false
+    },
+    "disableRipple": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, disable ripple effects when pressing a element.",
+      "required": false
+    },
+    "endIcon": {
+      "type": "ReactNode",
+      "description": "The icon to display at the end side of the button.",
+      "required": false
+    },
+    "iconProps": {
+      "type": "ButtonIconProps",
+      "description": "The props of the icon element.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the loading state of the button is represented.",
+      "required": false
+    },
+    "loadingIcon": {
+      "type": "Loading.Scheme | ReactNode",
+      "defaultValue": "\"oval\"",
+      "description": "The icon to display when the button is loading.",
+      "required": false
+    },
+    "loadingMessage": {
+      "type": "ReactNode",
+      "description": "The message to display when the button is loading.",
+      "required": false
+    },
+    "loadingPlacement": {
+      "type": "\"end\" | \"start\"",
+      "defaultValue": "\"start\"",
+      "description": "The placement of the loading indicator. Accepts `start` or `end`.",
+      "required": false
+    },
+    "loadingProps": {
+      "type": "ButtonLoadingProps",
+      "description": "The props of the loading icon element.",
+      "required": false
+    },
+    "startIcon": {
+      "type": "ReactNode",
+      "description": "The icon to display at the start side of the button.",
+      "required": false
+    },
+    "type": {
+      "type": "HTMLProps<\"button\">[\"type\"]",
+      "defaultValue": "\"button\"",
+      "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
+      "required": false
     }
   },
-  "StepsTitle": {
+  "FormTitle": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",

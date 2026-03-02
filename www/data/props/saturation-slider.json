@@ -92,12 +92,6 @@
         "description": "If `true`, the field will be required.",
         "required": false
       },
-      "shape": {
-        "type": "\"circle\" | \"rounded\" | \"square\"",
-        "defaultValue": "\"circle\"",
-        "description": "The shape of the thumb.",
-        "required": false
-      },
       "step": {
         "type": "number",
         "defaultValue": "0.01",
@@ -255,12 +249,6 @@
       "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, the field will be required.",
-      "required": false
-    },
-    "shape": {
-      "type": "\"circle\" | \"rounded\" | \"square\"",
-      "defaultValue": "\"circle\"",
-      "description": "The shape of the thumb.",
       "required": false
     },
     "step": {

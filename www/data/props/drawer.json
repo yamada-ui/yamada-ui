@@ -49,12 +49,6 @@
         "description": "If `true`, disable ripple effects when pressing a element.",
         "required": false
       },
-      "fullRounded": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
-        "required": false
-      },
       "icon": {
         "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
         "description": "The icon to be used in the button.",
@@ -379,12 +373,6 @@
         "description": "If `true`, the element will be opened.",
         "required": false
       },
-      "placement": {
-        "type": "\"block-end\" | \"block-start\" | \"inline-end\" | \"inline-start\" ...",
-        "defaultValue": "\"inline-end\"",
-        "description": "The placement of the drawer.",
-        "required": false
-      },
       "portalProps": {
         "type": "Omit<PortalProps, \"children\">",
         "description": "Props to be forwarded to the portal component.",
@@ -522,12 +510,6 @@
       "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, disable ripple effects when pressing a element.",
-      "required": false
-    },
-    "fullRounded": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
       "required": false
     },
     "icon": {
@@ -852,12 +834,6 @@
     "open": {
       "type": "boolean",
       "description": "If `true`, the element will be opened.",
-      "required": false
-    },
-    "placement": {
-      "type": "\"block-end\" | \"block-start\" | \"inline-end\" | \"inline-start\" ...",
-      "defaultValue": "\"inline-end\"",
-      "description": "The placement of the drawer.",
       "required": false
     },
     "portalProps": {

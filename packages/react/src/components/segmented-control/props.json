@@ -32,6 +32,11 @@
         "description": "If `true`, the field will be disabled.",
         "required": false
       },
+      "indicatorProps": {
+        "type": "SegmentedControlIndicatorProps",
+        "description": "Props for the indicator component.",
+        "required": false
+      },
       "inputProps": {
         "type": "HTMLProps<\"input\">",
         "description": "Props for the input element.",
@@ -82,10 +87,14 @@
         "description": "If `true`, the segmented control will be disabled.",
         "required": false
       },
-      "fullRounded": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the segmented control will be full rounded.",
+      "indicatorProps": {
+        "type": "SegmentedControlIndicatorProps",
+        "description": "Props for the indicator component.",
+        "required": false
+      },
+      "itemProps": {
+        "type": "SegmentedControlItemProps",
+        "description": "Props for the item component.",
         "required": false
       },
       "items": {
@@ -102,12 +111,6 @@
       "onChange": {
         "type": "(value: Y) => void",
         "description": "The callback fired when any children radio is checked or unchecked.",
-        "required": false
-      },
-      "orientation": {
-        "type": "\"horizontal\" | \"vertical\"",
-        "defaultValue": "\"horizontal\"",
-        "description": "The orientation of the segmented control.",
         "required": false
       },
       "readOnly": {
@@ -153,6 +156,11 @@
       "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, the field will be disabled.",
+      "required": false
+    },
+    "indicatorProps": {
+      "type": "SegmentedControlIndicatorProps",
+      "description": "Props for the indicator component.",
       "required": false
     },
     "inputProps": {
@@ -205,10 +213,14 @@
       "description": "If `true`, the segmented control will be disabled.",
       "required": false
     },
-    "fullRounded": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the segmented control will be full rounded.",
+    "indicatorProps": {
+      "type": "SegmentedControlIndicatorProps",
+      "description": "Props for the indicator component.",
+      "required": false
+    },
+    "itemProps": {
+      "type": "SegmentedControlItemProps",
+      "description": "Props for the item component.",
       "required": false
     },
     "items": {
@@ -225,12 +237,6 @@
     "onChange": {
       "type": "(value: Y) => void",
       "description": "The callback fired when any children radio is checked or unchecked.",
-      "required": false
-    },
-    "orientation": {
-      "type": "\"horizontal\" | \"vertical\"",
-      "defaultValue": "\"horizontal\"",
-      "description": "The orientation of the segmented control.",
       "required": false
     },
     "readOnly": {

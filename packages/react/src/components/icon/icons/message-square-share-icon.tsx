@@ -1,6 +1,8 @@
 "use client"
 
-import { MessageSquareShare } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { MessageSquareShare as OriginalMessageSquareShareIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -9,5 +11,5 @@ import { component, Icon } from "../icon"
  * @see https://yamada-ui.com/docs/components/icon
  */
 export const MessageSquareShareIcon = component(Icon)({
-  as: MessageSquareShare,
-})
+  as: OriginalMessageSquareShareIcon,
+}) as Component<"svg", IconProps>

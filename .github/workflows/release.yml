@@ -13,6 +13,10 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
 jobs:
   release:
     name: Release
@@ -28,12 +32,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          key: ${{ runner.os }}-turbo-${{ github.job }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-turbo-
-        env:
-          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+            ${{ runner.os }}-turbo-${{ github.job }}-
 
       - name: Install
         uses: ./.github/composite-actions/install

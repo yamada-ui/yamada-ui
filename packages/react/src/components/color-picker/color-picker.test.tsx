@@ -37,4 +37,22 @@ describe("<ColorPicker />", () => {
     expect(screen.getByTestId("root").tagName).toBe("DIV")
     expect(screen.getAllByRole("combobox")[0]?.tagName).toBe("DIV")
   })
+
+  test("passes `aria-label` to the input", () => {
+    const { container } = render(<ColorPicker aria-label="Choose a color" />)
+
+    expect(container.querySelector("input")).toHaveAttribute(
+      "aria-label",
+      "Choose a color",
+    )
+  })
+
+  test("passes `aria-labelledby` to the input", () => {
+    const { container } = render(<ColorPicker aria-labelledby="color-label" />)
+
+    expect(container.querySelector("input")).toHaveAttribute(
+      "aria-labelledby",
+      "color-label",
+    )
+  })
 })

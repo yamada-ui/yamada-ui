@@ -1,6 +1,8 @@
 "use client"
 
-import { Superscript } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Superscript as OriginalSuperscriptIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const SuperscriptIcon = component(Icon)({ as: Superscript })
+export const SuperscriptIcon = component(Icon)({
+  as: OriginalSuperscriptIcon,
+}) as Component<"svg", IconProps>

@@ -26,9 +26,7 @@ export const fieldsetStyle = defineComponentSlotStyle({
     },
     legend: {
       fontWeight: "medium",
-      _disabled: {
-        opacity: 0.4,
-      },
+      _disabled: { opacity: 0.4 },
     },
     root: {
       display: "flex",
@@ -38,116 +36,52 @@ export const fieldsetStyle = defineComponentSlotStyle({
   },
 
   variants: {
-    elevated: {
-      root: {
-        bg: "bg.panel",
-        boxShadow: "md",
-      },
-    },
-    outline: {
-      root: {
-        borderWidth: "1px",
-      },
-    },
-    panel: {
-      root: {
-        layerStyle: "panel",
-      },
-    },
-    plain: {},
+    elevated: { root: { bg: "bg.panel", boxShadow: "md" } },
+    outline: { root: { borderWidth: "1px" } },
+    panel: { root: { layerStyle: "panel" } },
+    plain: { root: {} },
   },
 
   sizes: {
     sm: {
-      content: {
-        gap: "3",
-      },
-      errorMessage: {
-        fontSize: "sm",
-      },
-      header: {
-        gap: "1",
-      },
-      helperMessage: {
-        fontSize: "sm",
-      },
-      legend: {
-        fontSize: "md",
-      },
-      root: {
-        gap: "3",
-      },
+      content: { gap: "3" },
+      errorMessage: { fontSize: "sm" },
+      header: { gap: "1" },
+      helperMessage: { fontSize: "sm" },
+      legend: { fontSize: "md" },
+      root: { gap: "3" },
     },
     md: {
-      content: {
-        gap: "4",
-      },
-      errorMessage: {
-        fontSize: "sm",
-      },
-      header: {
-        gap: "1",
-      },
-      helperMessage: {
-        fontSize: "sm",
-      },
-      legend: {
-        fontSize: "md",
-      },
-      root: {
-        gap: "4",
-      },
+      content: { gap: "4" },
+      errorMessage: { fontSize: "sm" },
+      header: { gap: "1" },
+      helperMessage: { fontSize: "sm" },
+      legend: { fontSize: "md" },
+      root: { gap: "4" },
     },
     lg: {
-      content: {
-        gap: "6",
-      },
-      errorMessage: {
-        fontSize: "md",
-      },
-      header: {
-        gap: "1",
-      },
-      helperMessage: {
-        fontSize: "md",
-      },
-      legend: {
-        fontSize: "lg",
-      },
-      root: {
-        gap: "6",
-      },
+      content: { gap: "6" },
+      errorMessage: { fontSize: "md" },
+      header: { gap: "1" },
+      helperMessage: { fontSize: "md" },
+      legend: { fontSize: "lg" },
+      root: { gap: "6" },
     },
   },
 
   compounds: [
     {
-      css: {
-        root: {
-          p: "3",
-          rounded: "l2",
-        },
-      },
+      css: { root: { p: "3", rounded: "l2" } },
       size: "sm",
       variant: ["elevated", "outline", "panel"],
     },
     {
-      css: {
-        root: {
-          p: "4",
-          rounded: "l2",
-        },
-      },
+      css: { root: { p: "4", rounded: "l2" } },
       size: "md",
       variant: ["elevated", "outline", "panel"],
     },
     {
-      css: {
-        root: {
-          p: "6",
-          rounded: "l2",
-        },
-      },
+      css: { root: { p: "6", rounded: "l2" } },
       size: "lg",
       variant: ["elevated", "outline", "panel"],
     },

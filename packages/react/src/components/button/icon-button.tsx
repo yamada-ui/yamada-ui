@@ -9,7 +9,8 @@ import { Button } from "./button"
 import { iconButtonStyle } from "./icon-button.style"
 
 export interface IconButtonProps
-  extends Omit<
+  extends
+    Omit<
       WithoutThemeProps<ButtonProps, IconButtonStyle>,
       | "endIcon"
       | "iconProps"

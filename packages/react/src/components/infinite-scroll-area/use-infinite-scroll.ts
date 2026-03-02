@@ -18,8 +18,10 @@ const isScrollable = (el: HTMLElement, vertical: boolean) => {
   }
 }
 
-export interface UseInfiniteScrollProps
-  extends Omit<IntersectionObserverInit, "root"> {
+export interface UseInfiniteScrollProps extends Omit<
+  IntersectionObserverInit,
+  "root"
+> {
   /**
    * Determines whether scrolling is instant or animates smoothly.
    */
@@ -85,8 +87,8 @@ export interface UseInfiniteScrollProps
     finish,
     index,
   }: {
-    finish: () => void
     index: number
+    finish: () => void
     entry?: IntersectionObserverEntry
   }) => Promise<void> | void
 }
@@ -228,6 +230,17 @@ export const useInfiniteScroll = <Y extends HTMLElement = HTMLDivElement>({
   ])
 
   useEffect(() => {
+    const setTabIndexAttribute = () => {
+      const root = rootRef?.current
+      if (
+        root &&
+        isScrollable(root, vertical) &&
+        !root.hasAttribute("tabindex")
+      ) {
+        root.setAttribute("tabindex", "0")
+      }
+    }
+
     const setupObserver = async () => {
       const el = ref.current
       const index = indexRef.current
@@ -274,6 +287,7 @@ export const useInfiniteScroll = <Y extends HTMLElement = HTMLDivElement>({
       }
     }
 
+    setTabIndexAttribute()
     setupObserver()
   }, [
     createObserver,

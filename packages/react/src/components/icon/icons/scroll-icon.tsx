@@ -1,6 +1,8 @@
 "use client"
 
-import { Scroll } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Scroll as OriginalScrollIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const ScrollIcon = component(Icon)({ as: Scroll })
+export const ScrollIcon = component(Icon)({
+  as: OriginalScrollIcon,
+}) as Component<"svg", IconProps>

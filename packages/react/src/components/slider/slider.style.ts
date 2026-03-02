@@ -168,6 +168,28 @@ export const sliderStyle = defineComponentSlotStyle({
   },
 
   variants: {
+    base: {
+      root: {
+        _container: [
+          {
+            css: { "--track-fill": "colors.bg" },
+            style: '--form-group-variant: "panel"',
+          },
+          {
+            css: { "--track-fill": "colors.bg" },
+            style: '--fieldset-root-variant: "panel"',
+          },
+          {
+            css: { "--track-fill": "colors.bg" },
+            style: '--form-group-variant: "elevated"',
+          },
+          {
+            css: { "--track-fill": "colors.bg" },
+            style: '--fieldset-root-variant: "elevated"',
+          },
+        ],
+      },
+    },
     outline: {
       root: {
         "--indicator-fill": "colorScheme.solid",

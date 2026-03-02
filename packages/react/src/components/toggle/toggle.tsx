@@ -18,7 +18,8 @@ import { toggleStyle } from "./toggle.style"
 import { useToggle } from "./use-toggle"
 
 export interface ToggleProps<Y extends string = string>
-  extends Omit<
+  extends
+    Omit<
       WithoutThemeProps<IconButtonProps, ToggleStyle>,
       "aria-label" | "onChange" | "ref" | "value"
     >,

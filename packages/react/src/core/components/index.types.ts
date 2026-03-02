@@ -51,11 +51,15 @@ type ComponentProps<
   as?: M
 }
 
-export interface ComponentArgs
-  extends Pick<React.FunctionComponent, "displayName" | "propTypes"> {}
+export interface ComponentArgs extends Pick<
+  React.FunctionComponent,
+  "displayName" | "propTypes"
+> {}
 
-export interface Component<Y extends As, D extends object = {}>
-  extends ComponentArgs {
+export interface Component<
+  Y extends As,
+  D extends object = {},
+> extends ComponentArgs {
   <M extends As = Y>(
     props: ComponentProps<Y, M, D>,
   ): React.ReactElement | React.ReactNode
@@ -65,18 +69,19 @@ export type GenericsComponent<Y extends Function> = ComponentArgs & Y
 
 export type As = React.ElementType
 
-export interface StyledComponent<Y extends As = As, M extends object = {}>
-  extends Component<Y, Merge<StyledProps, M>> {}
+export interface StyledComponent<
+  Y extends As = As,
+  M extends object = {},
+> extends Component<Y, Merge<StyledProps, M>> {}
 
 export interface HTMLRefAttributes<Y extends DOMElement = "div"> {
   ref?: React.Ref<React.ComponentRef<Y>>
 }
 
-export interface HTMLElementProps
-  extends React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLElement>,
-    HTMLElement
-  > {}
+export interface HTMLElementProps extends React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLElement>,
+  HTMLElement
+> {}
 
 export type HTMLProps<Y extends DOMElement = "div"> = Omit<
   React.JSX.IntrinsicElements[Y],

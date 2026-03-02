@@ -28,6 +28,10 @@ export const resetStyle = defineStyles.resetStyle({
     display: "none",
   },
 
+  "::-webkit-details-marker": {
+    display: "none",
+  },
+
   a: {
     color: "inherit",
     textDecoration: "none",

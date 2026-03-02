@@ -1,6 +1,7 @@
 export {
   PopoverAnchor as Anchor,
   PopoverBody as Body,
+  PopoverCloseTrigger as CloseTrigger,
   PopoverContent as Content,
   PopoverFooter as Footer,
   PopoverHeader as Header,
@@ -12,6 +13,7 @@ export {
 export type {
   PopoverAnchorProps as AnchorProps,
   PopoverBodyProps as BodyProps,
+  PopoverCloseTriggerProps as CloseTriggerProps,
   PopoverContentProps as ContentProps,
   PopoverFooterProps as FooterProps,
   PopoverHeaderProps as HeaderProps,

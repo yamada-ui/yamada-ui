@@ -88,6 +88,31 @@ export function filterUndefined<Y extends Dict>(obj: Y): Y {
   return filterObject(obj, (_, val) => val !== null && val !== undefined)
 }
 
+export function extractObject<Y extends Dict, M>(
+  obj: Y,
+  getter: (value: Y[keyof Y]) => M,
+) {
+  return Object.fromEntries(
+    Object.entries(obj).map(([key, value]) => [key, getter(value)]),
+  ) as { [key in keyof Y]: M }
+}
+
+export function extractFlatObject<Y extends Dict, M>(
+  obj: Y,
+  getter: (value: Y[keyof Y]) => M,
+  condition?: (key: keyof Y, value: Y[keyof Y]) => boolean,
+) {
+  function flatMap(obj: Y, rootKey?: string): [string, M][] {
+    return Object.entries(obj).flatMap(([key, value]) =>
+      condition?.(key, value)
+        ? flatMap(value, rootKey ? `${rootKey}.${key}` : key)
+        : [[rootKey ? `${rootKey}.${key}` : key, getter(value)] as const],
+    )
+  }
+
+  return Object.fromEntries(flatMap(obj)) as { [key: string]: M }
+}
+
 export interface MergeOptions {
   debug?: boolean
   mergeArray?: boolean

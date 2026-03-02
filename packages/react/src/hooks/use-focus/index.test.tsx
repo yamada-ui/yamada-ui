@@ -6,8 +6,16 @@ import { useRef } from "react"
 import { getFirstFocusableElement } from "../../utils"
 import { useFocusOnPointerDown, useFocusOnShow } from "./"
 
+const mockState = vi.hoisted(() => {
+  return {
+    defaultGetFirstFocusableElement:
+      undefined as unknown as Utils.getFirstFocusableElement,
+  }
+})
+
 vi.mock("../../utils", async (importOriginal) => {
   const actual = (await importOriginal()) as typeof Utils
+  mockState.defaultGetFirstFocusableElement = actual.getFirstFocusableElement
 
   return {
     ...actual,
@@ -17,8 +25,12 @@ vi.mock("../../utils", async (importOriginal) => {
 
 describe("useFocusOnShow", () => {
   afterEach(() => {
+    const firstFocusableMock = vi.mocked(getFirstFocusableElement)
     vi.restoreAllMocks()
-    vi.mocked(getFirstFocusableElement).mockReset()
+    firstFocusableMock.mockReset()
+    firstFocusableMock.mockImplementation(
+      mockState.defaultGetFirstFocusableElement,
+    )
   })
 
   const Component: FC<Omit<UseFocusOnShowProps, "focusTarget">> = (props) => {
@@ -128,11 +140,13 @@ describe("useFocusOnShow", () => {
 
     rerender(<ComponentWithElementTarget visible />)
 
-    await waitFor(() => {
-      expect(button).toHaveFocus()
-    })
-
-    target.remove()
+    try {
+      await waitFor(() => {
+        expect(button).toHaveFocus()
+      })
+    } finally {
+      target.remove()
+    }
   })
 
   test("does nothing when shouldFocus is false", async () => {

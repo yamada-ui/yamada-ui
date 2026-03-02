@@ -1,5 +1,10 @@
-import type { AreaChartProps as RootProps } from "./area-chart"
-import type {
+export type { AreaChartProps as RootProps } from "./area-chart"
+export {
+  AreaChartPropsContext as PropsContext,
+  AreaChart as Root,
+  useAreaChartPropsContext as usePropsContext,
+} from "./area-chart"
+export type {
   ChartAreaProps as AreaProps,
   ChartGridProps as GridProps,
   ChartReferenceLineProps as ReferenceLineProps,
@@ -8,7 +13,14 @@ import type {
   ChartYAxisProps as YAxisProps,
   ChartYAxisTick as YAxisTick,
 } from "./cartesian-chart"
-import type {
+export {
+  ChartArea as Area,
+  ChartGrid as Grid,
+  ChartReferenceLine as ReferenceLine,
+  ChartXAxis as XAxis,
+  ChartYAxis as YAxis,
+} from "./cartesian-chart"
+export type {
   ChartActiveDot as ActiveDot,
   ChartLabel as AreaLabel,
   ChartLabelList as AreaLabelList,
@@ -19,19 +31,7 @@ import type {
   ChartTickLine as TickLine,
   ChartTooltipProps as TooltipProps,
 } from "./chart"
-import {
-  AreaChartPropsContext as PropsContext,
-  AreaChart as Root,
-  useAreaChartPropsContext as usePropsContext,
-} from "./area-chart"
-import {
-  ChartArea as Area,
-  ChartGrid as Grid,
-  ChartReferenceLine as ReferenceLine,
-  ChartXAxis as XAxis,
-  ChartYAxis as YAxis,
-} from "./cartesian-chart"
-import {
+export {
   gradients,
   ChartLabel as Label,
   ChartLabelList as LabelList,
@@ -39,39 +39,3 @@ import {
   mergeSeries,
   ChartTooltip as Tooltip,
 } from "./chart"
-
-export {
-  Area,
-  gradients,
-  Grid,
-  Label,
-  LabelList,
-  Legend,
-  mergeSeries,
-  PropsContext,
-  ReferenceLine,
-  Root,
-  Tooltip,
-  usePropsContext,
-  XAxis,
-  YAxis,
-}
-export type {
-  ActiveDot,
-  AreaLabel,
-  AreaLabelList,
-  AreaProps,
-  Dot,
-  GridProps,
-  LabelListProps,
-  LabelProps,
-  LegendProps,
-  ReferenceLineProps,
-  RootProps,
-  TickLine,
-  TooltipProps,
-  XAxisProps,
-  XAxisTick,
-  YAxisProps,
-  YAxisTick,
-}

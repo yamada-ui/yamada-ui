@@ -984,8 +984,12 @@ export const ChartArea = withContext<"line", ChartAreaProps>((props) => {
       <defs>
         {withGradient ? (
           <linearGradient id={id} x1="0" x2="0" y1="0" y2="1">
-            <styled.stop offset="5%" stopColor={color} stopOpacity={0.8} />
-            <styled.stop offset="95%" stopColor={color} stopOpacity={0.1} />
+            <styled.stop asChild stopColor={color} stopOpacity={0.8}>
+              <stop offset="5%" />
+            </styled.stop>
+            <styled.stop asChild stopColor={color} stopOpacity={0.1}>
+              <stop offset="95%" />
+            </styled.stop>
           </linearGradient>
         ) : (
           <linearGradient id={id} x1="0" x2="0" y1="0" y2="1">

@@ -9,7 +9,7 @@ import type {
   XAxisProps,
   YAxisProps,
 } from "recharts"
-import type { HTMLProps, PropGetter } from "../../core"
+import type { HTMLProps, PropGetter, SimpleDirection } from "../../core"
 import type { Merge } from "../../utils"
 import { isValidElement, useCallback, useMemo } from "react"
 import { dataAttr, isFunction, isObject, isUndefined } from "../../utils"
@@ -211,7 +211,6 @@ export interface UseChartYAxisProps extends Merge<
     | "minTickGap"
     | "mirror"
     | "name"
-    | "orientation"
     | "padding"
     | "range"
     | "reversed"
@@ -228,7 +227,14 @@ export interface UseChartYAxisProps extends Merge<
     | "width"
     | "yAxisId"
   >
-> {}
+> {
+  /**
+   * The orientation of axis.
+   *
+   * @defaultValue "start"
+   */
+  orientation?: SimpleDirection
+}
 
 export const useChartYAxis = ({
   type,
@@ -289,7 +295,7 @@ export const useChartYAxis = ({
       offset: 4,
       position: "insideLeft",
       transform:
-        orientation === "right" ? "translate(10, 0)" : "translate(-10, 0)",
+        orientation === "end" ? "translate(10, 0)" : "translate(-10, 0)",
       ...(isObject(labelProp) ? labelProp : {}),
     }
   }, [labelProp, orientation])
@@ -317,7 +323,12 @@ export const useChartYAxis = ({
       label,
       minTickGap,
       mirror,
-      orientation,
+      orientation:
+        orientation === "end"
+          ? "right"
+          : orientation === "start"
+            ? "left"
+            : undefined,
       padding,
       range,
       reversed,

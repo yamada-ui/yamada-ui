@@ -1,4 +1,4 @@
-import type {
+export type {
   ChartActiveDot as ActiveDot,
   ChartDot as Dot,
   ChartLabelListProps as LabelListProps,
@@ -9,16 +9,7 @@ import type {
   ChartTickLine as TickLine,
   ChartTooltipProps as TooltipProps,
 } from "./chart"
-import type {
-  ChartAngleAxisProps as AngleAxisProps,
-  ChartAxisLine as AxisLine,
-  ChartPolarAxisTick as AxisTick,
-  ChartPolarGridProps as GridProps,
-  ChartRadarProps as RadarProps,
-  ChartRadiusAxisProps as RadiusAxisProps,
-} from "./polar-chart"
-import type { RadarChartProps as RootProps } from "./radar-chart"
-import {
+export {
   gradients,
   ChartLabel as Label,
   ChartLabelList as LabelList,
@@ -26,48 +17,23 @@ import {
   mergeSeries,
   ChartTooltip as Tooltip,
 } from "./chart"
-import {
+export type {
+  ChartAngleAxisProps as AngleAxisProps,
+  ChartAxisLine as AxisLine,
+  ChartPolarAxisTick as AxisTick,
+  ChartPolarGridProps as GridProps,
+  ChartRadarProps as RadarProps,
+  ChartRadiusAxisProps as RadiusAxisProps,
+} from "./polar-chart"
+export {
   ChartAngleAxis as AngleAxis,
   ChartPolarGrid as Grid,
   ChartRadar as Radar,
   ChartRadiusAxis as RadiusAxis,
 } from "./polar-chart"
-import {
+export type { RadarChartProps as RootProps } from "./radar-chart"
+export {
   RadarChartPropsContext as PropsContext,
   RadarChart as Root,
   useRadarChartPropsContext as usePropsContext,
 } from "./radar-chart"
-
-export {
-  AngleAxis,
-  gradients,
-  Grid,
-  Label,
-  LabelList,
-  Legend,
-  mergeSeries,
-  PropsContext,
-  Radar,
-  RadiusAxis,
-  Root,
-  Tooltip,
-  usePropsContext,
-}
-export type {
-  ActiveDot,
-  AngleAxisProps,
-  AxisLine,
-  AxisTick,
-  Dot,
-  GridProps,
-  LabelListProps,
-  LabelProps,
-  LegendProps,
-  RadarLabel,
-  RadarLabelList,
-  RadarProps,
-  RadiusAxisProps,
-  RootProps,
-  TickLine,
-  TooltipProps,
-}

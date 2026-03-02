@@ -1676,14 +1676,22 @@ export const standardStyles = {
   },
   speak: true,
   speakAs: true,
-  stopColor: true,
+  stopColor: {
+    properties: ["stopColor"],
+    token: "colors",
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
+  },
   stopOpacity: true,
   stroke: {
     properties: ["stroke"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
-  strokeColor: true,
+  strokeColor: {
+    properties: ["strokeColor"],
+    token: "colors",
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
+  },
   strokeDasharray: true,
   strokeDashoffset: true,
   strokeLinecap: true,
@@ -2085,6 +2093,7 @@ export const colorProperties = [
   "textColor",
   "floodColor",
   "lightingColor",
+  "stopColor",
   "stroke",
   "accentColor",
   "accent",
@@ -2111,6 +2120,7 @@ export const colorProperties = [
   "fill",
   "outlineColor",
   "scrollbarColor",
+  "strokeColor",
   "textDecorationColor",
   "textEmphasisColor",
   "focusRingColor",
@@ -9994,7 +10004,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stop-color
    */
-  stopColor?: StyleValueWithCondition<CSS.Property.StopColor>
+  stopColor?: StyleValueWithCondition<CSS.Property.StopColor, "colors">
   /**
    * ### stop-opacity
    *
@@ -10032,7 +10042,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  strokeColor?: StyleValueWithCondition<CSS.Property.StrokeColor>
+  strokeColor?: StyleValueWithCondition<CSS.Property.StrokeColor, "colors">
   /**
    * ### stroke-dasharray
    *

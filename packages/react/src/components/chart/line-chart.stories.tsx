@@ -463,7 +463,7 @@ export const Orientation: Story = () => {
   const data = useMemo(() => createData(), [])
 
   return (
-    <PropsTable variant="stack" rows={["left", "right"]}>
+    <PropsTable variant="stack" rows={["start", "end"]}>
       {(_, orientation, key) => (
         <LineChart.Root
           key={key}
@@ -472,8 +472,8 @@ export const Orientation: Story = () => {
           withYAxis
           chartProps={{
             margin: {
-              left: orientation === "right" ? 16 : 0,
-              right: orientation === "left" ? 16 : 0,
+              left: orientation === "end" ? 16 : 0,
+              right: orientation === "start" ? 16 : 0,
             },
           }}
           tooltipProps={{

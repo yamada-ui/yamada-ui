@@ -406,6 +406,7 @@ export interface UseChartLineProps extends Merge<
     | "onAnimationEnd"
     | "onAnimationStart"
     | "shape"
+    | "stroke"
     | "tooltipType"
     | "type"
     | "unit"
@@ -433,6 +434,7 @@ export const useChartLine = ({
   label: labelProp = false,
   legendType,
   shape,
+  stroke = "",
   tooltipType,
   unit,
   xAxisId,
@@ -502,7 +504,7 @@ export const useChartLine = ({
       label,
       legendType,
       shape,
-      stroke: "",
+      stroke,
       strokeWidth: "",
       tooltipType,
       unit,
@@ -533,6 +535,7 @@ export const useChartLine = ({
       onAnimationEnd,
       onAnimationStart,
       shape,
+      stroke,
       tooltipType,
       type,
       unit,
@@ -570,6 +573,7 @@ export interface UseChartAreaProps extends Merge<
     | "onAnimationEnd"
     | "onAnimationStart"
     | "stackId"
+    | "stroke"
     | "tooltipType"
     | "type"
     | "unit"
@@ -598,6 +602,7 @@ export const useChartArea = ({
   label: labelProp = false,
   legendType,
   stackId,
+  stroke = "",
   tooltipType,
   unit,
   xAxisId,
@@ -674,7 +679,7 @@ export const useChartArea = ({
       label,
       legendType,
       stackId,
-      stroke: "",
+      stroke,
       strokeWidth: "",
       tooltipType,
       unit,
@@ -706,6 +711,7 @@ export const useChartArea = ({
       onAnimationEnd,
       onAnimationStart,
       stackId,
+      stroke,
       tooltipType,
       type,
       unit,
@@ -732,6 +738,7 @@ export interface UseChartBarProps extends Merge<
     | "barSize"
     | "dangerouslySetInnerHTML"
     | "dataKey"
+    | "fill"
     | "hide"
     | "index"
     | "isAnimationActive"
@@ -764,6 +771,7 @@ export const useChartBar = ({
   children,
   dangerouslySetInnerHTML,
   dataKey: dataKeyProp,
+  fill,
   hide,
   index,
   isAnimationActive = false,
@@ -819,6 +827,7 @@ export const useChartBar = ({
       children,
       dangerouslySetInnerHTML,
       dataKey,
+      fill,
       hide,
       index,
       isAnimationActive,
@@ -849,6 +858,7 @@ export const useChartBar = ({
       children,
       dangerouslySetInnerHTML,
       dataKeyProp,
+      fill,
       hide,
       highlightedDataKey,
       index,

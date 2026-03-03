@@ -108,7 +108,7 @@ interface ComponentContext extends Pick<
 > {}
 
 export interface PolarChartProps<Y extends Dict = Dict>
-  extends Omit<ChartProps<Y>, "cx" | "cy">, ThemeProps<PolarChartStyle> {
+  extends Omit<ChartProps, "cx" | "cy">, ThemeProps<PolarChartStyle> {
   /**
    * The fill of the active dot.
    */
@@ -540,7 +540,6 @@ export const ChartPie = withContext<"svg", ChartPieProps>((props) => {
   const {
     activeIndex,
     children,
-    dataKey,
     label: labelProp,
     labelLine: labelLineProp = false,
     labelList = false,
@@ -548,22 +547,13 @@ export const ChartPie = withContext<"svg", ChartPieProps>((props) => {
     sectorProps,
     ...rest
   } = { ...pieProps, ...props }
-  const { varMap } = useChartComponentContext()
   const shape = useCallback(
     (props: any, index: number) => {
       if (isNumber(activeIndex)) props.isActive = index === activeIndex
 
-      const color = varMap[`${dataKey.toString()}-${props.name}`]
-
-      return (
-        <ChartSector
-          color={color}
-          {...props}
-          {...runIfFn(sectorProps, props, index)}
-        />
-      )
+      return <ChartSector {...props} {...runIfFn(sectorProps, props, index)} />
     },
-    [activeIndex, dataKey, sectorProps, varMap],
+    [activeIndex, sectorProps],
   )
   const label = useMemo<UseChartPieProps["label"]>(() => {
     if (!labelProp) return labelProp
@@ -590,7 +580,6 @@ export const ChartPie = withContext<"svg", ChartPieProps>((props) => {
     return Component
   }, [labelLineProp])
   const { getPieProps, getRootProps } = useChartPie({
-    dataKey,
     label,
     labelLine,
     nameKey,
@@ -686,7 +675,7 @@ export const ChartDonut = component<"svg", ChartDonutProps>(ChartPie, "donut")(
 
 export interface ChartRadarProps<Y extends Dict = Dict> extends Merge<
   HTMLStyledProps<"path">,
-  Omit<UseChartRadarProps, "activeDot" | "dataKey" | "dot" | "label">
+  Omit<UseChartRadarProps, "activeDot" | "dataKey" | "dot" | "label" | "stroke">
 > {
   /**
    * The key of a group of data which should be unique in an chart.
@@ -720,20 +709,21 @@ export const ChartRadar = withContext<"path", ChartRadarProps>((props) => {
     dataKey,
     dot: dotProp = false,
     label: labelProp = false,
+    stroke: strokeProp,
     ...rest
   } = { ...radarProps, ...props }
   const id = useId()
   const system = useSystem()
   const { theme } = useTheme()
-  const { varMap } = useChartComponentContext()
-  const color = varMap[dataKey.toString()] ?? rest.stroke ?? rest.color
+  const color = strokeProp ?? rest.fill ?? rest.color
+  const stroke = JSON.stringify(color)
   const dotProps = useSlotComponentProps({}, "dot")
   const activeDotProps = useSlotComponentProps({}, "activeDot")
   const labelProps = useSlotComponentProps({}, "labelList")
+  const css = useMemo(() => getCSS(system, theme), [system, theme])
   const dot = useMemo<UseChartRadarProps["dot"]>(() => {
     if (!dotProp) return dotProp
 
-    const css = getCSS(system, theme)
     const className = cx(
       dotProps.className,
       css(dotProps.css),
@@ -758,11 +748,10 @@ export const ChartRadar = withContext<"path", ChartRadarProps>((props) => {
     } else {
       return { className }
     }
-  }, [dotProp, system, theme, dotProps.className, dotProps.css, color])
+  }, [dotProp, dotProps.className, dotProps.css, css, color])
   const activeDot = useMemo<UseChartRadarProps["activeDot"]>(() => {
     if (!activeDotProp) return activeDotProp
 
-    const css = getCSS(system, theme)
     const className = cx(
       activeDotProps.className,
       css(activeDotProps.css),
@@ -787,18 +776,10 @@ export const ChartRadar = withContext<"path", ChartRadarProps>((props) => {
     } else {
       return { className }
     }
-  }, [
-    activeDotProp,
-    system,
-    theme,
-    activeDotProps.className,
-    activeDotProps.css,
-    color,
-  ])
+  }, [activeDotProp, activeDotProps.className, activeDotProps.css, css, color])
   const label = useMemo<UseChartRadarProps["label"]>(() => {
     if (!labelProp) return labelProp
 
-    const css = getCSS(system, theme)
     const className = cx(labelProps.className, css(labelProps.css))
 
     if (isFunction(labelProp)) {
@@ -819,14 +800,14 @@ export const ChartRadar = withContext<"path", ChartRadarProps>((props) => {
     } else {
       return { className }
     }
-  }, [system, theme, labelProp, labelProps.className, labelProps.css])
+  }, [labelProp, labelProps.className, labelProps.css, css])
   const { getRadarProps, getRootProps } = useChartRadar({
     activeDot,
     dataKey,
     dot,
     fill: color ? `url(#${id})` : "",
     label,
-    stroke: color,
+    stroke,
     ...rest,
   })
 
@@ -910,10 +891,10 @@ export const ChartAngleAxis = withContext<"text", ChartAngleAxisProps>(
     const labelProps = useSlotComponentProps({}, "angleAxisLabel")
     const tickLineProps = useSlotComponentProps({}, "angleAxisTickLine")
     const axisLineProps = useSlotComponentProps({}, "angleAxisLine")
+    const css = useMemo(() => getCSS(system, theme), [system, theme])
     const tick = useMemo<UseAngleAxisProps["tick"]>(() => {
       if (!tickProp) return tickProp
 
-      const css = getCSS(system, theme)
       const className = cx(tickProps.className, css(tickProps.css))
 
       if (isFunction(tickProp)) {
@@ -934,11 +915,10 @@ export const ChartAngleAxis = withContext<"text", ChartAngleAxisProps>(
       } else {
         return { className }
       }
-    }, [system, theme, tickProp, tickProps.className, tickProps.css])
+    }, [tickProp, tickProps.className, tickProps.css, css])
     const tickLine = useMemo<UseAngleAxisProps["tickLine"]>(() => {
       if (!tickLineProp) return tickLineProp
 
-      const css = getCSS(system, theme)
       const className = cx(tickLineProps.className, css(tickLineProps.css))
 
       if (isObject(tickLineProp)) {
@@ -954,17 +934,10 @@ export const ChartAngleAxis = withContext<"text", ChartAngleAxisProps>(
       } else {
         return { className }
       }
-    }, [
-      system,
-      theme,
-      tickLineProp,
-      tickLineProps.className,
-      tickLineProps.css,
-    ])
+    }, [tickLineProp, tickLineProps.className, tickLineProps.css, css])
     const axisLine = useMemo<UseAngleAxisProps["axisLine"]>(() => {
       if (!axisLineProp) return axisLineProp
 
-      const css = getCSS(system, theme)
       const className = cx(axisLineProps.className, css(axisLineProps.css))
 
       if (isObject(axisLineProp)) {
@@ -980,17 +953,10 @@ export const ChartAngleAxis = withContext<"text", ChartAngleAxisProps>(
       } else {
         return { className }
       }
-    }, [
-      system,
-      theme,
-      axisLineProp,
-      axisLineProps.className,
-      axisLineProps.css,
-    ])
+    }, [axisLineProp, axisLineProps.className, axisLineProps.css, css])
     const label = useMemo<UseAngleAxisProps["label"]>(() => {
       if (!labelProp) return labelProp
 
-      const css = getCSS(system, theme)
       const className = cx(labelProps.className, css(labelProps.css))
 
       if (isFunction(labelProp)) {
@@ -1011,7 +977,7 @@ export const ChartAngleAxis = withContext<"text", ChartAngleAxisProps>(
       } else {
         return { className, children: labelProp }
       }
-    }, [system, theme, labelProp, labelProps.className, labelProps.css])
+    }, [labelProp, labelProps.className, labelProps.css, css])
     const { getAngleAxisProps, getRootProps } = useAngleAxis({
       axisLine,
       dataKey: nameKey,
@@ -1086,10 +1052,10 @@ export const ChartRadiusAxis = withContext<"text", ChartRadiusAxisProps>(
     const labelProps = useSlotComponentProps({}, "radiusAxisLabel")
     const tickLineProps = useSlotComponentProps({}, "radiusAxisTickLine")
     const axisLineProps = useSlotComponentProps({}, "radiusAxisLine")
+    const css = useMemo(() => getCSS(system, theme), [system, theme])
     const tick = useMemo<UseRadiusAxisProps["tick"]>(() => {
       if (!tickProp) return tickProp
 
-      const css = getCSS(system, theme)
       const className = cx(tickProps.className, css(tickProps.css))
 
       if (isFunction(tickProp)) {
@@ -1110,11 +1076,10 @@ export const ChartRadiusAxis = withContext<"text", ChartRadiusAxisProps>(
       } else {
         return { className }
       }
-    }, [system, theme, tickProp, tickProps.className, tickProps.css])
+    }, [tickProp, tickProps.className, tickProps.css, css])
     const tickLine = useMemo<UseRadiusAxisProps["tickLine"]>(() => {
       if (!tickLineProp) return tickLineProp
 
-      const css = getCSS(system, theme)
       const className = cx(tickLineProps.className, css(tickLineProps.css))
 
       if (isObject(tickLineProp)) {
@@ -1130,17 +1095,10 @@ export const ChartRadiusAxis = withContext<"text", ChartRadiusAxisProps>(
       } else {
         return { className }
       }
-    }, [
-      system,
-      theme,
-      tickLineProp,
-      tickLineProps.className,
-      tickLineProps.css,
-    ])
+    }, [tickLineProp, tickLineProps.className, tickLineProps.css, css])
     const axisLine = useMemo<UseRadiusAxisProps["axisLine"]>(() => {
       if (!axisLineProp) return axisLineProp
 
-      const css = getCSS(system, theme)
       const className = cx(axisLineProps.className, css(axisLineProps.css))
 
       if (isObject(axisLineProp)) {
@@ -1156,17 +1114,10 @@ export const ChartRadiusAxis = withContext<"text", ChartRadiusAxisProps>(
       } else {
         return { className }
       }
-    }, [
-      system,
-      theme,
-      axisLineProp,
-      axisLineProps.className,
-      axisLineProps.css,
-    ])
+    }, [axisLineProp, axisLineProps.className, axisLineProps.css, css])
     const label = useMemo<UseRadiusAxisProps["label"]>(() => {
       if (!labelProp) return labelProp
 
-      const css = getCSS(system, theme)
       const className = cx(labelProps.className, css(labelProps.css))
 
       if (isFunction(labelProp)) {
@@ -1187,7 +1138,7 @@ export const ChartRadiusAxis = withContext<"text", ChartRadiusAxisProps>(
       } else {
         return { className, children: labelProp }
       }
-    }, [system, theme, labelProp, labelProps.className, labelProps.css])
+    }, [labelProp, labelProps.className, labelProps.css, css])
     const { getRadiusAxisProps, getRootProps } = useRadiusAxis({
       axisLine,
       label,
@@ -1282,15 +1233,13 @@ export const ChartRadial = withContext<"svg", ChartRadialProps>(
     } = { ...radialProps, ...props }
     const system = useSystem()
     const { theme } = useTheme()
-    const { nameKeyRef, varMap } = useChartComponentContext()
+    const { nameKeyRef } = useChartComponentContext()
     const labelProps = useSlotComponentProps({}, "labelList")
     const backgroundProps = useSlotComponentProps({}, "radialBackground")
+    const css = useMemo(() => getCSS(system, theme), [system, theme])
     const shape = useCallback(
       (props: any) => {
-        const color =
-          varMap[`${dataKey.toString()}-${props.name}`] ??
-          rest.fill ??
-          rest.color
+        const color = rest.fill ?? rest.color
 
         return (
           <ChartSector
@@ -1300,12 +1249,11 @@ export const ChartRadial = withContext<"svg", ChartRadialProps>(
           />
         )
       },
-      [dataKey, rest.fill, rest.color, sectorProps, varMap],
+      [rest.fill, rest.color, sectorProps],
     )
     const label = useMemo<UseChartRadialProps<Y>["label"]>(() => {
       if (!labelProp) return labelProp
 
-      const css = getCSS(system, theme)
       const className = cx(labelProps.className, css(labelProps.css))
 
       if (isFunction(labelProp)) {
@@ -1326,11 +1274,10 @@ export const ChartRadial = withContext<"svg", ChartRadialProps>(
       } else {
         return { className }
       }
-    }, [system, theme, labelProp, labelProps.className, labelProps.css])
+    }, [labelProp, labelProps.className, labelProps.css, css])
     const background = useMemo<UseChartRadialProps<Y>["background"]>(() => {
       if (!backgroundProp) return backgroundProp
 
-      const css = getCSS(system, theme)
       const className = cx(backgroundProps.className, css(backgroundProps.css))
 
       if (isFunction(backgroundProp)) {
@@ -1353,13 +1300,7 @@ export const ChartRadial = withContext<"svg", ChartRadialProps>(
       } else {
         return { className }
       }
-    }, [
-      system,
-      theme,
-      backgroundProp,
-      backgroundProps.className,
-      backgroundProps.css,
-    ])
+    }, [backgroundProp, backgroundProps.className, backgroundProps.css, css])
     const { getRadialProps, getRootProps } = useChartRadial({
       background,
       dataKey: dataKey as DataKey<any>,

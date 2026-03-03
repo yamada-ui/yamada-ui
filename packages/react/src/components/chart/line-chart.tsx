@@ -17,7 +17,7 @@ import { useLineChart } from "./use-line-chart"
 export interface LineChartProps<Y extends Dict = Dict>
   extends
     Omit<
-      CartesianChartProps<Y>,
+      CartesianChartProps,
       | "areaFillOpacity"
       | "areaProps"
       | "barProps"
@@ -79,7 +79,6 @@ export const LineChart = withContext<"div", LineChartProps>(
         render={(props) => (
           <OriginalLineChart {...getChartProps({ ...props, ...chartProps })} />
         )}
-        series={series}
         {...getRootProps()}
       >
         {children}

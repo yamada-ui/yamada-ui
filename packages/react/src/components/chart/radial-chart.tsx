@@ -96,7 +96,6 @@ export const RadialChart = withContext<"div", RadialChartProps>(
         render={(props) => (
           <RadialBarChart {...getChartProps({ ...props, ...chartProps })} />
         )}
-        series={series}
         gridProps={{ type: "circle", ...gridProps }}
         tooltipProps={{ labelFormatter, ...tooltipProps }}
         {...getRootProps()}

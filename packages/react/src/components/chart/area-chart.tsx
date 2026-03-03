@@ -17,7 +17,7 @@ import { useAreaChart } from "./use-area-chart"
 export interface AreaChartProps<Y extends Dict = Dict>
   extends
     Omit<
-      CartesianChartProps<Y>,
+      CartesianChartProps,
       "barProps" | "components" | "lineProps" | "render" | "series"
     >,
     UseAreaChartProps<Y>,
@@ -74,7 +74,6 @@ export const AreaChart = withContext<"div", AreaChartProps>(
         render={(props) => (
           <OriginalAreaChart {...getChartProps({ ...props, ...chartProps })} />
         )}
-        series={series}
         {...getRootProps()}
       >
         {children}

@@ -17,7 +17,7 @@ import { useBarChart } from "./use-bar-chart"
 export interface BarChartProps<Y extends Dict = Dict>
   extends
     Omit<
-      CartesianChartProps<Y>,
+      CartesianChartProps,
       | "areaFillOpacity"
       | "areaProps"
       | "components"
@@ -76,7 +76,6 @@ export const BarChart = withContext<"div", BarChartProps>(
         render={(props) => (
           <OriginalBarChart {...getChartProps({ ...props, ...chartProps })} />
         )}
-        series={series}
         {...getRootProps()}
       >
         {children}

@@ -172,9 +172,9 @@ export const Color: Story = () => {
 export const Range: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop", range: true },
-      { dataKey: "tablet", range: true },
-      { dataKey: "mobile", range: true },
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
     ],
     [],
   )

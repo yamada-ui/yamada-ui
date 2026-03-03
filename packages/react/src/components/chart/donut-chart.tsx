@@ -91,7 +91,6 @@ export const DonutChart = withContext<"div", DonutChartProps>(
         render={(props) => (
           <OriginalPieChart {...getChartProps({ ...props, ...chartProps })} />
         )}
-        series={series}
         tooltipProps={{ labelFormatter, ...tooltipProps }}
         {...getRootProps()}
       >

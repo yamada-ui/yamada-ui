@@ -5,8 +5,14 @@ on:
     paths:
       - ".changeset/**"
       - "packages/**"
-      - "!packages/**/(storybook|test)/**"
-      - "!packages/**/*.(stories|test).(ts|tsx|mdx)"
+      - "!packages/**/storybook/**"
+      - "!packages/**/test/**"
+      - "!packages/**/*.stories.ts"
+      - "!packages/**/*.stories.tsx"
+      - "!packages/**/*.stories.mdx"
+      - "!packages/**/*.test.ts"
+      - "!packages/**/*.test.tsx"
+      - "!packages/**/*.test.mdx"
     branches:
       - main
 

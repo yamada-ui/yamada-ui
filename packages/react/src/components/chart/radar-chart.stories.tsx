@@ -127,6 +127,26 @@ export const Color: Story = () => {
   return <RadarChart.Root data={data} nameKey="browser" series={series} />
 }
 
+export const Filled: Story = () => {
+  const series = useMemo<RadarChart.RadarProps<Data>[]>(
+    () => [
+      { color: "red", dataKey: "visits" },
+      { color: "green", dataKey: "downloads" },
+    ],
+    [],
+  )
+  const data = useMemo(() => createData(), [])
+
+  return (
+    <RadarChart.Root
+      data={data}
+      nameKey="browser"
+      series={series}
+      radarProps={{ fillOpacity: "1" }}
+    />
+  )
+}
+
 export const RadiusAxis: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>

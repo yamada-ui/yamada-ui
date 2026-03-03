@@ -837,7 +837,10 @@ export const ChartRadar = withContext<"path", ChartRadarProps>((props) => {
       </styled.path>
 
       <linearGradient id={id} x1="0" x2="0" y1="0" y2="1">
-        <styled.stop stopColor={color} stopOpacity={0.4} />
+        <styled.stop
+          stopColor={color}
+          stopOpacity={rest.fillOpacity ?? "{radar-fill-opacity}"}
+        />
       </linearGradient>
     </>
   )

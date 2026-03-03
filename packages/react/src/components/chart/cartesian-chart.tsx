@@ -102,9 +102,17 @@ export interface CartesianChartProps<Y extends Dict = Dict>
    */
   activeDotStrokeWidth?: CSSProps["strokeWidth"]
   /**
+   * The fill opacity of the area end.
+   */
+  areaEndFillOpacity?: CSSProps["fillOpacity"]
+  /**
    * The fill opacity of the area.
    */
   areaFillOpacity?: CSSProps["fillOpacity"]
+  /**
+   * The fill opacity of the area start.
+   */
+  areaStartFillOpacity?: CSSProps["fillOpacity"]
   /**
    * The fill color of the dots.
    */
@@ -325,7 +333,9 @@ export const CartesianChart = withProvider(
     activeDotRadius,
     activeDotStroke,
     activeDotStrokeWidth,
+    areaEndFillOpacity,
     areaFillOpacity,
+    areaStartFillOpacity,
     dotFill,
     dotRadius,
     dotStroke,
@@ -354,7 +364,9 @@ export const CartesianChart = withProvider(
     "--active-dot-r": activeDotRadius,
     "--active-dot-stroke": varAttr(activeDotStroke, "colors"),
     "--active-dot-stroke-width": activeDotStrokeWidth,
+    "--area-end-fill-opacity": areaEndFillOpacity,
     "--area-fill-opacity": areaFillOpacity,
+    "--area-start-fill-opacity": areaStartFillOpacity,
     "--dot-fill": varAttr(dotFill, "colors"),
     "--dot-r": dotRadius,
     "--dot-stroke": varAttr(dotStroke, "colors"),
@@ -815,6 +827,11 @@ export const ChartLine = withContext<"line", ChartLineProps>((props) => {
   <Y extends Dict>(props: ChartLineProps<Y>): ReactElement
 }>
 
+export interface ChartAreaGradient {
+  end?: CSSProps["stopColor"]
+  start?: CSSProps["stopColor"]
+}
+
 export interface ChartAreaProps<Y extends Dict = Dict> extends Merge<
   HTMLStyledProps<"line">,
   Omit<UseChartAreaProps, "activeDot" | "data" | "dataKey" | "dot" | "label">
@@ -840,6 +857,10 @@ export interface ChartAreaProps<Y extends Dict = Dict> extends Merge<
    */
   dot?: ChartDot
   /**
+   * The gradient to use for the area.
+   */
+  gradient?: ChartAreaGradient
+  /**
    * The label list to use for the line.
    *
    * @default false
@@ -858,6 +879,7 @@ export const ChartArea = withContext<"line", ChartAreaProps>((props) => {
     children,
     dataKey,
     dot: dotProp = false,
+    gradient,
     label: labelProp = false,
     withGradient,
     ...rest
@@ -984,16 +1006,27 @@ export const ChartArea = withContext<"line", ChartAreaProps>((props) => {
       <defs>
         {withGradient ? (
           <linearGradient id={id} x1="0" x2="0" y1="0" y2="1">
-            <styled.stop asChild stopColor={color} stopOpacity={0.8}>
+            <styled.stop
+              asChild
+              stopColor={color}
+              stopOpacity={gradient?.start ?? "{area-start-fill-opacity}"}
+            >
               <stop offset="5%" />
             </styled.stop>
-            <styled.stop asChild stopColor={color} stopOpacity={0.1}>
+            <styled.stop
+              asChild
+              stopColor={color}
+              stopOpacity={gradient?.end ?? "{area-end-fill-opacity}"}
+            >
               <stop offset="95%" />
             </styled.stop>
           </linearGradient>
         ) : (
           <linearGradient id={id} x1="0" x2="0" y1="0" y2="1">
-            <styled.stop stopColor={color} stopOpacity={0.4} />
+            <styled.stop
+              stopColor={color}
+              stopOpacity={rest.fillOpacity ?? "{area-fill-opacity}"}
+            />
           </linearGradient>
         )}
       </defs>

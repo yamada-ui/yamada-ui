@@ -55,7 +55,7 @@
     "execa": "9.3.1",
     "glob": "^13.0.6",
     "https-proxy-agent": "^7.0.6",
-    "listr2": "^10.1.1",
+    "listr2": "^10.2.1",
     "node-eval": "^2.0.0",
     "node-fetch": "^3.3.2",
     "ora": "^9.3.0",

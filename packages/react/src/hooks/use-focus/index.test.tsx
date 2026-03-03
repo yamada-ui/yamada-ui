@@ -9,12 +9,12 @@ import { useFocusOnPointerDown, useFocusOnShow } from "./"
 const mockState = vi.hoisted(() => {
   return {
     defaultGetFirstFocusableElement:
-      undefined as unknown as Utils.getFirstFocusableElement,
+      undefined as unknown as typeof getFirstFocusableElement,
   }
 })
 
 vi.mock("../../utils", async (importOriginal) => {
-  const actual = (await importOriginal()) as typeof Utils
+  const actual = await importOriginal<typeof Utils>()
   mockState.defaultGetFirstFocusableElement = actual.getFirstFocusableElement
 
   return {

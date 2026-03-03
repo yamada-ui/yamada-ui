@@ -1,46 +1,25 @@
 "use client"
 
 import type { ReactElement } from "react"
-import type { PolarChartProps as OriginalPolarChartProps } from "recharts/types/util/types"
 import type { GenericsComponent, ThemeProps } from "../../core"
 import type { Dict } from "../../utils"
 import type { ChartTooltipProps } from "./chart"
 import type { ChartRadialProps, PolarChartProps } from "./polar-chart"
 import type { RadialChartStyle } from "./radial-chart.style"
-import type { UseRadialChartProps } from "./use-radial-chart"
 import { useCallback, useMemo } from "react"
 import { RadialBarChart } from "recharts"
 import { createComponent } from "../../core"
 import { ChartRadial, PolarChart } from "./polar-chart"
 import { radialChartStyle } from "./radial-chart.style"
-import { useRadialChart } from "./use-radial-chart"
 
 export interface RadialChartProps<Y extends Dict = Dict>
   extends
-    Omit<
-      PolarChartProps<Y>,
-      | "angleAxisProps"
-      | "components"
-      | "donutProps"
-      | "nameKey"
-      | "pieProps"
-      | "radarProps"
-      | "radiusAxisProps"
-      | "render"
-      | "series"
-      | "withAngleAxis"
-      | "withRadiusAxis"
-    >,
-    UseRadialChartProps<Y>,
+    Omit<PolarChartProps<Y>, "components" | "nameKey" | "render">,
     ThemeProps<RadialChartStyle> {
   /***
    * If provided, generate lines based on series.
    */
   series?: ChartRadialProps<Y>[]
-  /**
-   * Props for the polar chart component.
-   */
-  chartProps?: Omit<OriginalPolarChartProps, "data">
 }
 
 const {
@@ -62,19 +41,15 @@ export { RadialChartPropsContext, useRadialChartPropsContext }
 export const RadialChart = withContext<"div", RadialChartProps>(
   <Y extends Dict>({
     children,
+    endAngle = -270,
+    innerRadius = "20%",
+    outerRadius = "90%",
     series = [],
-    chartProps,
+    startAngle = 90,
     gridProps,
     tooltipProps,
     ...rest
   }: RadialChartProps<Y>) => {
-    const { getChartProps, getRootProps } = useRadialChart({
-      endAngle: -270,
-      innerRadius: "20%",
-      outerRadius: "90%",
-      startAngle: 90,
-      ...rest,
-    })
     const components = useMemo(
       () => [
         {
@@ -93,12 +68,14 @@ export const RadialChart = withContext<"div", RadialChartProps>(
     return (
       <PolarChart
         components={components}
-        render={(props) => (
-          <RadialBarChart {...getChartProps({ ...props, ...chartProps })} />
-        )}
+        endAngle={endAngle}
+        innerRadius={innerRadius}
+        outerRadius={outerRadius}
+        render={(props) => <RadialBarChart {...props} />}
+        startAngle={startAngle}
         gridProps={{ type: "circle", ...gridProps }}
         tooltipProps={{ labelFormatter, ...tooltipProps }}
-        {...getRootProps()}
+        {...rest}
       >
         {children}
       </PolarChart>

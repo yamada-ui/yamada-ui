@@ -102,13 +102,13 @@ export type ChartLabelList =
 
 export type ChartTickLine = boolean | HTMLStyledProps<"line">
 
-type GradientStrategy = "invert" | "shade" | "tint"
+export type GradientStrategy = "invert" | "shade" | "tint"
 
 export function mergeSeries<Y>(
   series: Y[],
   color: CSSProps["color"] = "mono",
   strategy: GradientStrategy = "invert",
-): (Y & { color: CSSProps["fill"] })[] {
+): (Y & { color: CSSProps["color"] })[] {
   const colors = gradients(series.length, color, strategy)
 
   return series.map((item, index) => ({ ...item, color: colors[index] }))
@@ -128,7 +128,7 @@ export function gradients(
   length: number,
   color: CSSProps["color"] = "mono",
   strategy: GradientStrategy = "invert",
-): CSSProps["fill"][] {
+): CSSProps["color"][] {
   return Array.from({ length }, (_, index) => {
     const value = Math.floor(100 - (100 / length) * index)
     const percent = `${value}%`

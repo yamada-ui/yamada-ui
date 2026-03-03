@@ -1,40 +1,24 @@
 "use client"
 
 import type { ReactElement } from "react"
-import type { CartesianChartProps as OriginalCartesianChartProps } from "recharts/types/util/types"
 import type { GenericsComponent, ThemeProps } from "../../core"
 import type { Dict } from "../../utils"
 import type { BarChartStyle } from "./bar-chart.style"
 import type { CartesianChartProps, ChartBarProps } from "./cartesian-chart"
-import type { UseBarChartProps } from "./use-bar-chart"
 import { useMemo } from "react"
 import { BarChart as OriginalBarChart } from "recharts"
 import { createComponent } from "../../core"
 import { barChartStyle } from "./bar-chart.style"
 import { CartesianChart, ChartBar } from "./cartesian-chart"
-import { useBarChart } from "./use-bar-chart"
 
 export interface BarChartProps<Y extends Dict = Dict>
   extends
-    Omit<
-      CartesianChartProps,
-      | "areaFillOpacity"
-      | "areaProps"
-      | "components"
-      | "lineProps"
-      | "render"
-      | "series"
-    >,
-    UseBarChartProps<Y>,
+    Omit<CartesianChartProps<Y>, "components" | "render">,
     ThemeProps<BarChartStyle> {
   /***
    * If provided, generate bars based on series.
    */
   series?: ChartBarProps<Y>[]
-  /**
-   * Props for the bar chart component.
-   */
-  chartProps?: Omit<OriginalCartesianChartProps, "data">
 }
 
 const {
@@ -51,13 +35,7 @@ export { BarChartPropsContext, useBarChartPropsContext }
  * @see https://yamada-ui.com/docs/components/bar-chart
  */
 export const BarChart = withContext<"div", BarChartProps>(
-  <Y extends Dict>({
-    children,
-    series = [],
-    chartProps,
-    ...rest
-  }: BarChartProps<Y>) => {
-    const { getChartProps, getRootProps } = useBarChart(rest)
+  <Y extends Dict>({ children, series = [], ...rest }: BarChartProps<Y>) => {
     const components = useMemo(
       () => [
         {
@@ -73,10 +51,8 @@ export const BarChart = withContext<"div", BarChartProps>(
     return (
       <CartesianChart
         components={components}
-        render={(props) => (
-          <OriginalBarChart {...getChartProps({ ...props, ...chartProps })} />
-        )}
-        {...getRootProps()}
+        render={(props) => <OriginalBarChart {...props} />}
+        {...rest}
       >
         {children}
       </CartesianChart>

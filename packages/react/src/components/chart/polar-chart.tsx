@@ -13,6 +13,7 @@ import type {
   PieSectorShapeProps,
   SectorProps,
 } from "recharts"
+import type { PolarChartProps as OriginalPolarChartProps } from "recharts/types/util/types"
 import type {
   CSSObject,
   CSSProps,
@@ -40,6 +41,7 @@ import type {
   UseChartRadarProps,
   UseChartRadialProps,
   UseChartSectorProps,
+  UsePolarChartProps,
   UsePolarGridProps,
   UseRadiusAxisProps,
 } from "./use-polar-chart"
@@ -89,6 +91,7 @@ import {
   useChartRadar,
   useChartRadial,
   useChartSector,
+  usePolarChart,
   usePolarGrid,
   useRadiusAxis,
 } from "./use-polar-chart"
@@ -108,7 +111,10 @@ interface ComponentContext extends Pick<
 > {}
 
 export interface PolarChartProps<Y extends Dict = Dict>
-  extends Omit<ChartProps, "cx" | "cy">, ThemeProps<PolarChartStyle> {
+  extends
+    Omit<ChartProps, "cx" | "cy">,
+    UsePolarChartProps<Y>,
+    ThemeProps<PolarChartStyle> {
   /**
    * The fill of the active dot.
    */
@@ -284,6 +290,10 @@ export interface PolarChartProps<Y extends Dict = Dict>
    */
   angleAxisProps?: UseAngleAxisProps
   /**
+   * Props for the polar chart component.
+   */
+  chartProps?: Omit<OriginalPolarChartProps, "data">
+  /**
    * Props for the donut component.
    */
   donutProps?: Omit<ChartPieProps, "data" | "dataKey" | "nameKey">
@@ -333,10 +343,12 @@ export const PolarChart = withProvider(
   <Y extends Dict>({
     components: componentsProp,
     nameKey,
+    render,
     withAngleAxis = false,
     withGrid = false,
     withRadiusAxis = false,
     angleAxisProps,
+    chartProps,
     donutProps,
     gridProps,
     pieProps = donutProps,
@@ -346,6 +358,7 @@ export const PolarChart = withProvider(
     sectorProps,
     ...rest
   }: PolarChartProps<Y>) => {
+    const { getChartProps, getRootProps } = usePolarChart(rest)
     const components = useMemo(
       () => [
         {
@@ -389,7 +402,11 @@ export const PolarChart = withProvider(
 
     return (
       <ComponentContext value={componentContext}>
-        <Chart components={components} {...rest} />
+        <Chart
+          components={components}
+          render={(props) => render(getChartProps({ ...props, ...chartProps }))}
+          {...getRootProps()}
+        />
       </ComponentContext>
     )
   },

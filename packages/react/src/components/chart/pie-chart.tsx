@@ -1,48 +1,25 @@
 "use client"
 
 import type { ReactElement } from "react"
-import type { PolarChartProps as OriginalPolarChartProps } from "recharts/types/util/types"
 import type { GenericsComponent, ThemeProps } from "../../core"
 import type { Dict } from "../../utils"
 import type { ChartTooltipProps } from "./chart"
 import type { PieChartStyle } from "./pie-chart.style"
 import type { ChartPieProps, PolarChartProps } from "./polar-chart"
-import type { UsePieChartProps } from "./use-pie-chart"
 import { useCallback, useMemo } from "react"
 import { PieChart as OriginalPieChart } from "recharts"
 import { createComponent } from "../../core"
 import { pieChartStyle } from "./pie-chart.style"
 import { ChartPie, PolarChart } from "./polar-chart"
-import { usePieChart } from "./use-pie-chart"
 
 export interface PieChartProps<Y extends Dict = Dict>
   extends
-    Omit<
-      PolarChartProps<Y>,
-      | "angleAxisProps"
-      | "components"
-      | "donutProps"
-      | "gridProps"
-      | "nameKey"
-      | "radarProps"
-      | "radialProps"
-      | "radiusAxisProps"
-      | "render"
-      | "series"
-      | "withAngleAxis"
-      | "withGrid"
-      | "withRadiusAxis"
-    >,
-    UsePieChartProps<Y>,
+    Omit<PolarChartProps<Y>, "components" | "nameKey" | "render">,
     ThemeProps<PieChartStyle> {
   /***
    * If provided, generate lines based on series.
    */
   series?: ChartPieProps<Y>[]
-  /**
-   * Props for the polar chart component.
-   */
-  chartProps?: Omit<OriginalPolarChartProps, "data">
 }
 
 const {
@@ -62,11 +39,9 @@ export const PieChart = withContext<"div", PieChartProps>(
   <Y extends Dict>({
     children,
     series = [],
-    chartProps,
     tooltipProps,
     ...rest
   }: PieChartProps<Y>) => {
-    const { getChartProps, getRootProps } = usePieChart(rest)
     const components = useMemo(
       () => [
         {
@@ -85,11 +60,9 @@ export const PieChart = withContext<"div", PieChartProps>(
     return (
       <PolarChart
         components={components}
-        render={(props) => (
-          <OriginalPieChart {...getChartProps({ ...props, ...chartProps })} />
-        )}
+        render={(props) => <OriginalPieChart {...props} />}
         tooltipProps={{ labelFormatter, ...tooltipProps }}
-        {...getRootProps()}
+        {...rest}
       >
         {children}
       </PolarChart>

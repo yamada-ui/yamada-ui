@@ -8,6 +8,7 @@ import type {
   LabelProps,
 } from "recharts"
 import type {
+  CartesianChartProps as OriginalCartesianChartProps,
   XAxisTickContentProps,
   YAxisTickContentProps,
 } from "recharts/types/util/types"
@@ -30,6 +31,7 @@ import type {
   ChartTickLine,
 } from "./chart"
 import type {
+  UseCartesianChartProps,
   UseChartAreaProps,
   UseChartBarProps,
   UseChartGridProps,
@@ -61,6 +63,7 @@ import { cx, isFunction, isObject, splitObject } from "../../utils"
 import { cartesianChartStyle } from "./cartesian-chart.style"
 import { Chart } from "./chart"
 import {
+  useCartesianChart,
   useChartArea,
   useChartBar,
   useChartGrid,
@@ -83,8 +86,11 @@ interface ComponentContext extends Pick<
   | "yAxisProps"
 > {}
 
-export interface CartesianChartProps
-  extends ChartProps, ThemeProps<CartesianChartStyle> {
+export interface CartesianChartProps<Y extends Dict = Dict>
+  extends
+    ChartProps,
+    UseCartesianChartProps<Y>,
+    ThemeProps<CartesianChartStyle> {
   /**
    * The fill color of the active dots.
    */
@@ -114,6 +120,26 @@ export interface CartesianChartProps
    */
   areaStartFillOpacity?: CSSProps["fillOpacity"]
   /**
+   * The color of the bars.
+   */
+  barColor?: CSSProps["color"]
+  /**
+   * The fill color of the bars.
+   */
+  barFill?: CSSProps["fill"]
+  /**
+   * The fill opacity of the bars.
+   */
+  barFillOpacity?: CSSProps["fillOpacity"]
+  /**
+   * The stroke color of the bars.
+   */
+  barStroke?: CSSProps["stroke"]
+  /**
+   * The stroke width of the bars.
+   */
+  barStrokeWidth?: CSSProps["strokeWidth"]
+  /**
    * The fill color of the dots.
    */
   dotFill?: CSSProps["fill"]
@@ -133,6 +159,10 @@ export interface CartesianChartProps
    * The stroke color of the grid.
    */
   gridStroke?: CSSProps["stroke"]
+  /**
+   * The opacity of the inactive bars.
+   */
+  inactiveBarOpacity?: CSSProps["opacity"]
   /**
    * The opacity of the inactive lines.
    */
@@ -228,6 +258,10 @@ export interface CartesianChartProps
    */
   barProps?: Omit<ChartBarProps, "dataKey">
   /**
+   * Props for the line chart component.
+   */
+  chartProps?: Omit<OriginalCartesianChartProps, "data">
+  /**
    * Props for the grid component.
    */
   gridProps?: ChartGridProps
@@ -266,20 +300,23 @@ const {
 export { CartesianChartPropsContext, useCartesianChartPropsContext }
 
 export const CartesianChart = withProvider(
-  ({
+  <Y extends Dict = Dict>({
     components: componentsProp,
+    render,
     withGrid = true,
     withXAxis = true,
     withYAxis = false,
     areaProps,
     barProps,
+    chartProps,
     gridProps,
     lineProps,
     referenceLineProps,
     xAxisProps,
     yAxisProps,
     ...rest
-  }: CartesianChartProps) => {
+  }: CartesianChartProps<Y>) => {
+    const { getChartProps, getRootProps } = useCartesianChart(rest)
     const components = useMemo(
       () => [
         {
@@ -321,7 +358,11 @@ export const CartesianChart = withProvider(
 
     return (
       <ComponentContext value={componentContext}>
-        <Chart components={components} {...rest} />
+        <Chart
+          components={components}
+          render={(props) => render(getChartProps({ ...props, ...chartProps }))}
+          {...getRootProps()}
+        />
       </ComponentContext>
     )
   },
@@ -336,11 +377,17 @@ export const CartesianChart = withProvider(
     areaEndFillOpacity,
     areaFillOpacity,
     areaStartFillOpacity,
+    barColor,
+    barFill,
+    barFillOpacity,
+    barStroke,
+    barStrokeWidth,
     dotFill,
     dotRadius,
     dotStroke,
     dotStrokeWidth,
     gridStroke,
+    inactiveBarOpacity,
     inactiveLineOpacity,
     lineColor,
     lineStroke,
@@ -367,11 +414,17 @@ export const CartesianChart = withProvider(
     "--area-end-fill-opacity": areaEndFillOpacity,
     "--area-fill-opacity": areaFillOpacity,
     "--area-start-fill-opacity": areaStartFillOpacity,
+    "--bar-color": varAttr(barColor, "colors"),
+    "--bar-fill": varAttr(barFill, "colors"),
+    "--bar-fill-opacity": barFillOpacity,
+    "--bar-stroke": varAttr(barStroke, "colors"),
+    "--bar-stroke-width": barStrokeWidth,
     "--dot-fill": varAttr(dotFill, "colors"),
     "--dot-r": dotRadius,
     "--dot-stroke": varAttr(dotStroke, "colors"),
     "--dot-stroke-width": dotStrokeWidth,
     "--grid-stroke": varAttr(gridStroke, "colors"),
+    "--inactive-bar-opacity": inactiveBarOpacity,
     "--inactive-line-opacity": inactiveLineOpacity,
     "--line-color": varAttr(lineColor, "colors"),
     "--line-stroke": varAttr(lineStroke, "colors"),
@@ -391,7 +444,9 @@ export const CartesianChart = withProvider(
     "--y-axis-text-fill": varAttr(yAxisTextFill, "colors"),
     ...rest,
   }),
-)
+) as GenericsComponent<{
+  <Y extends Dict = Dict>(props: CartesianChartProps<Y>): ReactElement
+}>
 
 export type ChartXAxisTick =
   | ((props: XAxisTickContentProps) => ReactNode)

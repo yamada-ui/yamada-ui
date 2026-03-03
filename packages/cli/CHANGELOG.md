@@ -1,5 +1,13 @@
 # @yamada-ui/cli
 
+## 2.0.9
+
+### Patch Changes
+
+- [#5778](https://github.com/yamada-ui/yamada-ui/pull/5778) [`46fa811`](https://github.com/yamada-ui/yamada-ui/commit/46fa81183de5d8429e413a24784346c8e347b87f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#5777](https://github.com/yamada-ui/yamada-ui/pull/5777) [`cac36ed`](https://github.com/yamada-ui/yamada-ui/commit/cac36ed5fbbbdfdee168fbcc249ba81583a2517e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the files specified in `main` and `bin` of `package.json` did not exist, causing the CLI to not work correctly.
+
 ## 2.0.8
 
 ### Patch Changes

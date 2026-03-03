@@ -1,35 +1,24 @@
 "use client"
 
 import type { ReactElement } from "react"
-import type { CartesianChartProps as OriginalCartesianChartProps } from "recharts/types/util/types"
 import type { GenericsComponent, ThemeProps } from "../../core"
 import type { Dict } from "../../utils"
 import type { AreaChartStyle } from "./area-chart.style"
 import type { CartesianChartProps, ChartAreaProps } from "./cartesian-chart"
-import type { UseAreaChartProps } from "./use-area-chart"
 import { useMemo } from "react"
 import { AreaChart as OriginalAreaChart } from "recharts"
 import { createComponent } from "../../core"
 import { areaChartStyle } from "./area-chart.style"
 import { CartesianChart, ChartArea } from "./cartesian-chart"
-import { useAreaChart } from "./use-area-chart"
 
 export interface AreaChartProps<Y extends Dict = Dict>
   extends
-    Omit<
-      CartesianChartProps,
-      "barProps" | "components" | "lineProps" | "render" | "series"
-    >,
-    UseAreaChartProps<Y>,
+    Omit<CartesianChartProps<Y>, "components" | "render">,
     ThemeProps<AreaChartStyle> {
   /***
    * If provided, generate areas based on series.
    */
   series?: ChartAreaProps<Y>[]
-  /**
-   * Props for the area chart component.
-   */
-  chartProps?: Omit<OriginalCartesianChartProps, "data">
 }
 
 const {
@@ -49,13 +38,7 @@ export { AreaChartPropsContext, useAreaChartPropsContext }
  * @see https://yamada-ui.com/docs/components/area-chart
  */
 export const AreaChart = withContext<"div", AreaChartProps>(
-  <Y extends Dict>({
-    children,
-    series = [],
-    chartProps,
-    ...rest
-  }: AreaChartProps<Y>) => {
-    const { getChartProps, getRootProps } = useAreaChart(rest)
+  <Y extends Dict>({ children, series = [], ...rest }: AreaChartProps<Y>) => {
     const components = useMemo(
       () => [
         {
@@ -71,10 +54,8 @@ export const AreaChart = withContext<"div", AreaChartProps>(
     return (
       <CartesianChart
         components={components}
-        render={(props) => (
-          <OriginalAreaChart {...getChartProps({ ...props, ...chartProps })} />
-        )}
-        {...getRootProps()}
+        render={(props) => <OriginalAreaChart {...props} />}
+        {...rest}
       >
         {children}
       </CartesianChart>

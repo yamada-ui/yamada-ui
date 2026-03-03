@@ -3,42 +3,119 @@ title: Changelog
 description: "Explore the changelog for the latest version of Yamada UI. Learn about the features, bug fixes, and improvements."
 ---
 
-## @yamada-ui/react@2.0.9
+## @yamada-ui/react@2.1.0
 
-This version was released on February 16, 2026.
+This version was released on March 2, 2026.
+
+### Minor changes
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added support for CSS [@starting-style](https://developer.mozilla.org/en-US/docs/Web/CSS/@starting-style) at-rule.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `RadialChart` component.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Form` component.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `RadarChart` component.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added the `QrCode` component.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add `Tip` component.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added CSS custom properties to each variant and size for use with conditions such as [Container style queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#container_style_queries).
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `PieChart` component.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `AreaChart` component.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Update `Accordion` to use `NativeAccordion` styles.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `BarChart` component.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Upgraded [react-resizable-panels](https://github.com/bvaughn/react-resizable-panels) from version 3 to 4. This update introduces several major changes:
+  - `keyboardStep` prop of `Resizable.Root` has been removed.
+  - `storageKey` and `storage` props of `Resizable.Root` have been removed. Please use `Resizable.useLayout` instead.
+  - `onLayout` prop of `Resizable.Root` has been removed. Please use `Resizable.useLayoutChange` and `Resizable.useLayoutChanged` instead.
+  - The `as` prop of `Resizable.Item` has been removed. Instead, apply styling directly to `Resizable.Item`.
+  - The `defaultSize`, `minSize`, and `maxSize` props of `Resizable.Item` now support `%`, `rem`, and `vw` units. If you use a number, it will be converted from `%` to `px`, so you should change `30` to `"30%"`, etc.
+  - The `onCollapse` and `onExpand` props of `Resizable.Item` have been removed. Please use `onResize` on `Resizable.Item` instead.
+  - The `onDragging` prop of `Resizable.Trigger` has been removed.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - The `component` of both `createComponent` and `createSlotComponent` now supports initial props.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `NativeAccordion` component.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `DonutChart` component.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `LineChart` component.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added a condition to change the background color of components such as `Input` and `Checkbox` using [container style queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#container_style_queries) when the variant of `Form` or `Fieldset` is set to `panel` or `elevated`. However, this condition is not supported by some browsers, so developers need to style them manually for unsupported browsers.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `NativePopover` component.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added support for [Container style queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries#container_style_queries).
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed `withCloseButton` and added `CloseTrigger` to `Popover`.
 
 ### Patch changes
 
-- [#5706](https://github.com/yamada-ui/yamada-ui/pull/5706) [1b12488](https://github.com/yamada-ui/yamada-ui/commit/1b1248801bd5229913975da1d84e1b27661acbad) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added new style props.
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - The argument of `useCSS` now supports arrays.
 
-- [#5706](https://github.com/yamada-ui/yamada-ui/pull/5706) [1b12488](https://github.com/yamada-ui/yamada-ui/commit/1b1248801bd5229913975da1d84e1b27661acbad) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `_popoverOpen` to style props.
 
-- [#5650](https://github.com/yamada-ui/yamada-ui/pull/5650) [4c7e42a](https://github.com/yamada-ui/yamada-ui/commit/4c7e42a2fecb9f9cac9c515d3e9f62d3538e736f) Thanks [@SahilJat](https://github.com/SahilJat)! - Fixed an issue where `aria-label` and `aria-labelledby` were not correctly passed to the `input` element in `ColorPicker`, causing accessibility violations.
+- [#5747](https://github.com/yamada-ui/yamada-ui/pull/5747) [44e9fc9](https://github.com/yamada-ui/yamada-ui/commit/44e9fc9cacd1dda20567775db022497cb0d7c275) Thanks [@odendayoko](https://github.com/odendayoko)! - Fixed `FileInput`/`FileButton` a11y by applying field aria state to the visible control and keeping `readOnly` focusable via `aria-disabled`.
 
-- [#5657](https://github.com/yamada-ui/yamada-ui/pull/5657) [4f17dfb](https://github.com/yamada-ui/yamada-ui/commit/4f17dfbbcfc4bc8ab7d717adcb52feff1e7ce285) Thanks [@watataku11xx](https://github.com/watataku11xx)! - Fixed a bug where unnecessary HTML tags were rendered when `title` or `description` was not provided.
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where using a CSS variable as the percentage in `color-mix` did not work correctly.
 
-- [#5236](https://github.com/yamada-ui/yamada-ui/pull/5236) [ec04f5f](https://github.com/yamada-ui/yamada-ui/commit/ec04f5fdf9bd58b05aff517019c623f7af68668a) Thanks [@kaehehehe](https://github.com/kaehehehe)! - Fixed `Carousel` next/prev control buttons affecting slide animations.
+- [#5753](https://github.com/yamada-ui/yamada-ui/pull/5753) [cb06f8d](https://github.com/yamada-ui/yamada-ui/commit/cb06f8d2ba8715834520ec053f896d059dc512fd) Thanks [@kaehehehe](https://github.com/kaehehehe)! - Internationalized `ColorSwatchGroup` `aria-label` using `useI18n` hook, supporting all 36 locales.
 
-- [#5655](https://github.com/yamada-ui/yamada-ui/pull/5655) [d4476e0](https://github.com/yamada-ui/yamada-ui/commit/d4476e021228eb15f49ce581bf6e6651e1326ca6) Thanks [@watataku11xx](https://github.com/watataku11xx)! - Add `tabindex="0"` to scrollable root in `useInfiniteScroll` for keyboard focus (a11y).
+- [#5754](https://github.com/yamada-ui/yamada-ui/pull/5754) [a44dc67](https://github.com/yamada-ui/yamada-ui/commit/a44dc67443df3351fb57757427f1d00059cde727) Thanks [@kaehehehe](https://github.com/kaehehehe)! - Fixed `Dropzone` keyboard open (Space/Enter) breaking when `ref` is passed via `getRootProps` by preventing react-dropzone's internal `rootRef` from being overwritten.
 
-- [#5652](https://github.com/yamada-ui/yamada-ui/pull/5652) [0408223](https://github.com/yamada-ui/yamada-ui/commit/04082237b43e7918e01da97d9f8e2519154decd9) Thanks [@SahilJat](https://github.com/SahilJat)! - Fixed a bug where `aria-labelledby` was not set correctly when rendering for the first time or when the element was displayed.
+- [#5743](https://github.com/yamada-ui/yamada-ui/pull/5743) [c6427ff](https://github.com/yamada-ui/yamada-ui/commit/c6427ff7e732e9c9ebab5bff845ba717c6024b36) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted codes.
 
-- [#5706](https://github.com/yamada-ui/yamada-ui/pull/5706) [1b12488](https://github.com/yamada-ui/yamada-ui/commit/1b1248801bd5229913975da1d84e1b27661acbad) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added new icons.
-- [1b12488](https://github.com/yamada-ui/yamada-ui/commit/1b1248801bd5229913975da1d84e1b27661acbad) Updated dependencies.
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where extra elements were mounted in `Form` when `Form.Header` or `title` were not set.
 
-## @yamada-ui/cli@2.0.7
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed `d` from Style Props.
 
-This version was released on February 16, 2026.
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the display priority of the `icon` prop in `Accordion.Button` was too low.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `_center` and `_inactive` to condition props.
+
+- [#5750](https://github.com/yamada-ui/yamada-ui/pull/5750) [238ca66](https://github.com/yamada-ui/yamada-ui/commit/238ca66bcc42a4c057f6f3932ac6e1d33de66faf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added new icons.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `_open`, `_groupOpen` and `_detailsContent` to style props.
+
+- [#5750](https://github.com/yamada-ui/yamada-ui/pull/5750) [238ca66](https://github.com/yamada-ui/yamada-ui/commit/238ca66bcc42a4c057f6f3932ac6e1d33de66faf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#5728](https://github.com/yamada-ui/yamada-ui/pull/5728) [ac9fd97](https://github.com/yamada-ui/yamada-ui/commit/ac9fd9761cfbd69d64377976bbf7ae15d5680254) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved type performance.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed unnecessary position property.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where values were not generated correctly when using CSS value functions or CSS variables with `varAttr`.
+- [c6427ff](https://github.com/yamada-ui/yamada-ui/commit/c6427ff7e732e9c9ebab5bff845ba717c6024b36) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Updated dependencies.
+
+## @yamada-ui/cli@2.0.8
+
+This version was released on March 2, 2026.
 
 ### Patch changes
 
-- [#5706](https://github.com/yamada-ui/yamada-ui/pull/5706) [1b12488](https://github.com/yamada-ui/yamada-ui/commit/1b1248801bd5229913975da1d84e1b27661acbad) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
-- [1b12488](https://github.com/yamada-ui/yamada-ui/commit/1b1248801bd5229913975da1d84e1b27661acbad) Updated dependencies.
+- [#5743](https://github.com/yamada-ui/yamada-ui/pull/5743) [c6427ff](https://github.com/yamada-ui/yamada-ui/commit/c6427ff7e732e9c9ebab5bff845ba717c6024b36) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted codes.
 
-## @yamada-ui/utils@2.0.6
+- [#5750](https://github.com/yamada-ui/yamada-ui/pull/5750) [238ca66](https://github.com/yamada-ui/yamada-ui/commit/238ca66bcc42a4c057f6f3932ac6e1d33de66faf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+- [c6427ff](https://github.com/yamada-ui/yamada-ui/commit/c6427ff7e732e9c9ebab5bff845ba717c6024b36) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Updated dependencies.
 
-This version was released on February 16, 2026.
+## @yamada-ui/utils@2.1.0
+
+This version was released on March 2, 2026.
+
+### Minor changes
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `extractFlatObject` function.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `extractObject` function.
 
 ### Patch changes
 
-- [#5706](https://github.com/yamada-ui/yamada-ui/pull/5706) [1b12488](https://github.com/yamada-ui/yamada-ui/commit/1b1248801bd5229913975da1d84e1b27661acbad) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+- [#5743](https://github.com/yamada-ui/yamada-ui/pull/5743) [c6427ff](https://github.com/yamada-ui/yamada-ui/commit/c6427ff7e732e9c9ebab5bff845ba717c6024b36) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted codes.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [4cddce4](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Modified `splitChildren` to return the matched elements as an array.

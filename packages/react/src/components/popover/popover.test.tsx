@@ -46,6 +46,7 @@ describe("<Popover />", () => {
   test("sets `displayName` correctly", () => {
     expect(Popover.Root.name).toBe("PopoverRoot")
     expect(Popover.Trigger.displayName).toBe("PopoverTrigger")
+    expect(Popover.CloseTrigger.displayName).toBe("PopoverCloseTrigger")
     expect(Popover.Anchor.displayName).toBe("PopoverAnchor")
     expect(Popover.Content.displayName).toBe("PopoverContent")
     expect(Popover.Header.displayName).toBe("PopoverHeader")

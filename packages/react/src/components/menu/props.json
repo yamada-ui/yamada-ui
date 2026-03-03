@@ -86,7 +86,7 @@
         "required": false
       },
       "items": {
-        "type": "(MenuItemWithCheckboxGroup | MenuItemWithItems | MenuItemWithRadioGroup | MenuItemWithSeparator | MenuItemWithValue)[]",
+        "type": "MenuItem[]",
         "description": "If provided, generate elements based on items.",
         "required": false
       },
@@ -449,7 +449,7 @@
         "required": false
       },
       "middleware": {
-        "type": "(false | { name: string; options?: any; fn: (state: { x: number; y: number; placement: Placement; platform: Platform; strategy: Strategy; initialPlacement: Placement; middlewareData: MiddlewareData; rects: ElementRects; elements: Elements; }) => Promisable<...>; } | null | undefined)[]",
+        "type": "(false | { name: string; options?: any; fn: (state: { x: number; y: number; placement: Placement; platform: { detectOverflow: (state: MiddlewareState, options?: DetectOverflowOptions | Derivable<...> | undefined) => Promise<...>; } & Platform; ... 4 more ...; elements: Elements; }) => Promisable<...>; } | null | und...",
         "description": "Array of middleware objects to modify the positioning or provide data for\nrendering.",
         "required": false
       },
@@ -662,7 +662,7 @@
       "required": false
     },
     "items": {
-      "type": "(MenuItemWithCheckboxGroup | MenuItemWithItems | MenuItemWithRadioGroup | MenuItemWithSeparator | MenuItemWithValue)[]",
+      "type": "MenuItem[]",
       "description": "If provided, generate elements based on items.",
       "required": false
     },
@@ -1025,7 +1025,7 @@
       "required": false
     },
     "middleware": {
-      "type": "(false | { name: string; options?: any; fn: (state: { x: number; y: number; placement: Placement; platform: Platform; strategy: Strategy; initialPlacement: Placement; middlewareData: MiddlewareData; rects: ElementRects; elements: Elements; }) => Promisable<...>; } | null | undefined)[]",
+      "type": "(false | { name: string; options?: any; fn: (state: { x: number; y: number; placement: Placement; platform: { detectOverflow: (state: MiddlewareState, options?: DetectOverflowOptions | Derivable<...> | undefined) => Promise<...>; } & Platform; ... 4 more ...; elements: Elements; }) => Promisable<...>; } | null | und...",
       "description": "Array of middleware objects to modify the positioning or provide data for\nrendering.",
       "required": false
     },

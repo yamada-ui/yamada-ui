@@ -868,7 +868,7 @@
   },
   "atRule": {
     "_container": {
-      "type": "{ name?: AnyString;query?: AnyString;w?: CSS.Property.Width | number | ThemeTokens[\"sizes\"];width?: CSS.Property.Width | number | ThemeTokens[\"sizes\"];minW?: CSS.Property.MinWidth | number | ThemeTokens[\"sizes\"];minWidth?: CSS.Property.MinWidth | number | ThemeTokens[\"sizes\"];maxW?: CSS.Property.MaxWidth | number | ThemeTokens[\"sizes\"];maxWidth?: CSS.Property.MaxWidth | number | ThemeTokens[\"sizes\"];h?: CSS.Property.Height | number | ThemeTokens[\"sizes\"];height?: CSS.Property.Height | number | ThemeTokens[\"sizes\"];minH?: CSS.Property.MinHeight | number | ThemeTokens[\"sizes\"];minHeight?: CSS.Property.MinHeight | number | ThemeTokens[\"sizes\"];maxH?: CSS.Property.MaxHeight | number | ThemeTokens[\"sizes\"];maxHeight?: CSS.Property.MaxHeight | number | ThemeTokens[\"sizes\"];aspectRatio?: CSS.Property.AspectRatio;minAspectRatio?: CSS.Property.AspectRatio;maxAspectRatio?: CSS.Property.AspectRatio;blockSize?: CSS.Property.BlockSize | number | ThemeTokens[\"sizes\"];minBlockSize?: CSS.Property.MinBlockSize | number | ThemeTokens[\"sizes\"];maxBlockSize?: CSS.Property.MaxBlockSize | number | ThemeTokens[\"sizes\"];inlineSize?: CSS.Property.InlineSize | number | ThemeTokens[\"sizes\"];minInlineSize?: CSS.Property.MinInlineSize | number | ThemeTokens[\"sizes\"];maxInlineSize?: CSS.Property.MaxInlineSize | number | ThemeTokens[\"sizes\"];orientation?: \"portrait\" | \"landscape\" | AnyString;css?: CSSObject;[key: string]: any}[]",
+      "type": "CSSContainerObject[]",
       "docs": {
         "container": {
           "baseline": {
@@ -919,7 +919,7 @@
       }
     },
     "_media": {
-      "type": "{ type?: \"all\" | \"print\" | \"screen\" | \"speech\" | AnyString;query?: AnyString;w?: CSS.Property.Width | number | ThemeTokens[\"sizes\"];width?: CSS.Property.Width | number | ThemeTokens[\"sizes\"];minW?: CSS.Property.MinWidth | number | ThemeTokens[\"sizes\"];minWidth?: CSS.Property.MinWidth | number | ThemeTokens[\"sizes\"];maxW?: CSS.Property.MaxWidth | number | ThemeTokens[\"sizes\"];maxWidth?: CSS.Property.MaxWidth | number | ThemeTokens[\"sizes\"];h?: CSS.Property.Height | number | ThemeTokens[\"sizes\"];height?: CSS.Property.Height | number | ThemeTokens[\"sizes\"];minH?: CSS.Property.MinHeight | number | ThemeTokens[\"sizes\"];minHeight?: CSS.Property.MinHeight | number | ThemeTokens[\"sizes\"];maxH?: CSS.Property.MaxHeight | number | ThemeTokens[\"sizes\"];maxHeight?: CSS.Property.MaxHeight | number | ThemeTokens[\"sizes\"];anyHover?: \"none\" | \"hover\" | AnyString;anyPointer?: \"none\" | \"coarse\" | \"fine\" | AnyString;aspectRatio?: CSS.Property.AspectRatio;color?: number | AnyString;minColor?: number | AnyString;maxColor?: number | AnyString;colorGamut?: \"srgb\" | \"p3\" | \"rec2020\" | AnyString;colorIndex?: number | AnyString;minColorIndex?: number | AnyString;maxColorIndex?: number | AnyString;deviceAspectRatio?: CSS.Property.AspectRatio;minDeviceAspectRatio?: CSS.Property.AspectRatio;maxDeviceAspectRatio?: CSS.Property.AspectRatio;deviceHeight?: CSS.Property.Height | number | ThemeTokens[\"sizes\"];minDeviceHeight?: CSS.Property.MinHeight | number | ThemeTokens[\"sizes\"];maxDeviceHeight?: CSS.Property.MaxHeight | number | ThemeTokens[\"sizes\"];deviceWidth?: CSS.Property.Width | number | ThemeTokens[\"sizes\"];minDeviceWidth?: CSS.Property.Width | number | ThemeTokens[\"sizes\"];mazDeviceWidth?: CSS.Property.Width | number | ThemeTokens[\"sizes\"];displayMode?: \"browser\" | \"fullscreen\" | \"minimal-ui\" | \"picture-in-picture\" | \"standalone\" | \"window-controls-overlay\" | AnyString;dynamicRange?: \"standard\" | \"high\" | AnyString;forcedColors?: \"none\" | \"active\" | AnyString;grid?: 0 | 1 | \"AnyString\";hover?: \"none\" | \"hover\" | AnyString;invertedColors?: \"none\" | \"inverted\" | AnyString;monochrome?: number | AnyString;minMonochrome?: number | AnyString;maxMonochrome?: number | AnyString;orientation?: \"portrait\" | \"landscape\" | AnyString;overflowBlock?: \"none\" | \"scroll\" | \"paged\" | \"optional-paged\" | AnyString;overflowInline?: \"none\" | \"scroll\" | AnyString;pointer?: \"none\" | \"coarse\" | \"fine\" | AnyString;prefersColorScheme?: \"light\" | \"dark\" | AnyString;prefersContrast?: \"no-preference\" | \"high\" | \"low\" | \"custom\" | AnyString;prefersReducedMotion?: \"no-preference\" | \"reduce\" | AnyString;resolution?: AnyString;minResolution?: AnyString;maxResolution?: AnyString;scan?: \"interlace\" | \"progressive\" | AnyString;scripting?: \"none\" | \"initial-only\" | \"enabled\" | AnyString;update?: \"none\" | \"slow\" | \"fast\" | AnyString;videoDynamicRange?: \"standard\" | \"high\" | AnyString;css?: CSSObject;[key: string]: any }[]",
+      "type": "CSSMediaObject[]",
       "docs": {
         "media": {
           "baseline": {
@@ -1019,6 +1019,22 @@
         }
       }
     },
+    "_startingStyle": {
+      "properties": ["@starting-style"],
+      "type": "StyleValueWithCondition<CSSObject>",
+      "docs": {
+        "starting-style": {
+          "baseline": {
+            "status": "Newly available",
+            "newly_available_date": "2024-08-06"
+          },
+          "deprecated": false,
+          "description": "The <code>@starting-style</code> CSS at-rule sets the starting values for properties that are transitioning when the target element's style is first updated.",
+          "experimental": false,
+          "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@starting-style"
+        }
+      }
+    },
     "_supports": {
       "type": "{ query?: AnyString;css?: CSSObject }[]",
       "docs": {
@@ -1063,7 +1079,7 @@
           "deprecated": false,
           "description": "The <code>baseline-shift</code> CSS property sets the position of an element relative to its dominant baseline.",
           "experimental": false,
-          "see": "https://drafts.csswg.org/css-inline/#baseline-shift-property"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/baseline-shift"
         }
       }
     },
@@ -1664,8 +1680,9 @@
       }
     },
     "stopColor": {
-      "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.StopColor>",
+      "properties": ["stopColor"],
+      "token": "colors",
+      "type": "StyleValueWithCondition<CSS.Property.StopColor, \"colors\">",
       "docs": {
         "stop-color": {
           "baseline": {
@@ -4823,23 +4840,6 @@
         }
       }
     },
-    "d": {
-      "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.D>",
-      "docs": {
-        "d": {
-          "baseline": {
-            "status": "Widely available",
-            "widely_available_date": "2022-07-15",
-            "newly_available_date": "2020-01-15"
-          },
-          "deprecated": false,
-          "description": "The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.",
-          "experimental": false,
-          "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/d"
-        }
-      }
-    },
     "dynamicRangeLimit": {
       "as": true,
       "type": "StyleValueWithCondition<AnyString>",
@@ -5035,6 +5035,18 @@
           "description": "The <code>float</code> CSS property aligns an element to either side of its container, allowing text and inline elements to flow around it. The <code>clear</code> CSS property sets whether an element is moved below floating elements that proceed it.",
           "experimental": false,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/float"
+        }
+      }
+    },
+    "flowTolerance": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "flow-tolerance": {
+          "deprecated": false,
+          "description": "The CSS `flow-tolerance` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-grid-3/#propdef-flow-tolerance"
         }
       }
     },
@@ -8659,8 +8671,9 @@
       }
     },
     "strokeColor": {
-      "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.StrokeColor>",
+      "properties": ["strokeColor"],
+      "token": "colors",
+      "type": "StyleValueWithCondition<CSS.Property.StrokeColor, \"colors\">",
       "docs": {
         "stroke-color": {
           "baseline": {
@@ -9145,7 +9158,7 @@
         "text-wrap": {
           "baseline": {
             "status": "Newly available",
-            "newly_available_date": "2024-03-19"
+            "newly_available_date": "2024-10-17"
           },
           "deprecated": false,
           "description": "The <code>text-wrap</code> CSS property sets how lines break in text that overflows the container. It is a shorthand for <code>text-wrap-style</code> and <code>text-wrap-mode</code>.",
@@ -9164,7 +9177,7 @@
             "newly_available_date": "2024-10-17"
           },
           "deprecated": false,
-          "description": "The <code>text-wrap-mode</code> CSS property sets whether lines may wrap with the values <code>wrap</code> and <code>nowrap</code>. It is a longhand property for both <code>white-space</code> and <code>text-wrap</code>.",
+          "description": "The <code>text-wrap</code> CSS property sets how lines break in text that overflows the container. It is a shorthand for <code>text-wrap-style</code> and <code>text-wrap-mode</code>.",
           "experimental": false,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap-mode"
         }
@@ -9175,9 +9188,12 @@
       "type": "StyleValueWithCondition<CSS.Property.TextWrapStyle>",
       "docs": {
         "text-wrap-style": {
-          "baseline": { "status": "Limited available" },
+          "baseline": {
+            "status": "Newly available",
+            "newly_available_date": "2024-10-17"
+          },
           "deprecated": false,
-          "description": "The <code>text-wrap-style</code> CSS property sets how lines break in text that overflows the container. It can also be set with the <code>text-wrap</code> shorthand.",
+          "description": "The <code>text-wrap</code> CSS property sets how lines break in text that overflows the container. It is a shorthand for <code>text-wrap-style</code> and <code>text-wrap-mode</code>.",
           "experimental": false,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap-style"
         }

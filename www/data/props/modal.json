@@ -71,12 +71,6 @@
         "description": "If `true`, disable ripple effects when pressing a element.",
         "required": false
       },
-      "fullRounded": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
-        "required": false
-      },
       "icon": {
         "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
         "description": "The icon to be used in the button.",
@@ -356,12 +350,6 @@
         "description": "If `true`, the element will be opened.",
         "required": false
       },
-      "placement": {
-        "type": "\"center-center\" | \"center-end\" | \"center-start\" | \"center\" | \"end-center\" | \"end-end\" | \"end-start\" | \"start-center\" | \"start-end\" | \"start-start\" ...",
-        "defaultValue": "\"center\"",
-        "description": "The placement of the modal.",
-        "required": false
-      },
       "portalProps": {
         "type": "Omit<PortalProps, \"children\">",
         "description": "Props to be forwarded to the portal component.",
@@ -371,12 +359,6 @@
         "type": "boolean",
         "defaultValue": "false",
         "description": "If `true`, focus will be restored to the element that triggered the `FocusLock` once it unmounts.",
-        "required": false
-      },
-      "scrollBehavior": {
-        "type": "\"inside\" | \"outside\"",
-        "defaultValue": "\"inside\"",
-        "description": "Where scroll behavior should originate.\n\n- `inside`: scroll only occurs within the `ModalBody`.\n- `outside`: the entire `ModalContent` will scroll within the viewport.",
         "required": false
       },
       "success": {
@@ -499,12 +481,6 @@
       "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, disable ripple effects when pressing a element.",
-      "required": false
-    },
-    "fullRounded": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
       "required": false
     },
     "icon": {
@@ -786,12 +762,6 @@
       "description": "If `true`, the element will be opened.",
       "required": false
     },
-    "placement": {
-      "type": "\"center-center\" | \"center-end\" | \"center-start\" | \"center\" | \"end-center\" | \"end-end\" | \"end-start\" | \"start-center\" | \"start-end\" | \"start-start\" ...",
-      "defaultValue": "\"center\"",
-      "description": "The placement of the modal.",
-      "required": false
-    },
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
       "description": "Props to be forwarded to the portal component.",
@@ -801,12 +771,6 @@
       "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, focus will be restored to the element that triggered the `FocusLock` once it unmounts.",
-      "required": false
-    },
-    "scrollBehavior": {
-      "type": "\"inside\" | \"outside\"",
-      "defaultValue": "\"inside\"",
-      "description": "Where scroll behavior should originate.\n\n- `inside`: scroll only occurs within the `ModalBody`.\n- `outside`: the entire `ModalContent` will scroll within the viewport.",
       "required": false
     },
     "success": {

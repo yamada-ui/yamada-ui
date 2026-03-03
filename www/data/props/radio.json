@@ -50,12 +50,12 @@
       "required": false
     },
     "errorBorderColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The border color when the input is invalid.",
       "required": false
     },
     "focusBorderColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The border color when the input is focused.",
       "required": false
     },
@@ -122,12 +122,6 @@
       "description": "Props for the label element.",
       "required": false
     },
-    "shape": {
-      "type": "\"circle\" | \"rounded\" | \"square\"",
-      "defaultValue": "\"circle\"",
-      "description": "The shape of the component",
-      "required": false
-    },
     "value": {
       "type": "Y",
       "description": "The value of the radio.",
@@ -186,12 +180,12 @@
         "required": false
       },
       "errorBorderColor": {
-        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
         "description": "The border color when the input is invalid.",
         "required": false
       },
       "focusBorderColor": {
-        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
         "description": "The border color when the input is focused.",
         "required": false
       },
@@ -258,12 +252,6 @@
         "description": "Props for the label element.",
         "required": false
       },
-      "shape": {
-        "type": "\"circle\" | \"rounded\" | \"square\"",
-        "defaultValue": "\"circle\"",
-        "description": "The shape of the component",
-        "required": false
-      },
       "value": {
         "type": "Y",
         "description": "The value of the radio.",
@@ -304,14 +292,8 @@
         "required": false
       },
       "align": {
-        "type": "\"-moz-initial\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" | \"revert-layer\" ...",
+        "type": "\"-moz-initial\" | \"anchor-center\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" ...",
         "description": "The CSS `align-items` property.",
-        "required": false
-      },
-      "attached": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
         "required": false
       },
       "basis": {
@@ -336,19 +318,13 @@
         "required": false
       },
       "errorBorderColor": {
-        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
         "description": "The border color when the input is invalid.",
         "required": false
       },
       "focusBorderColor": {
-        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
         "description": "The border color when the input is focused.",
-        "required": false
-      },
-      "grow": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the children will grow to fill the available space.",
         "required": false
       },
       "invalid": {
@@ -358,7 +334,7 @@
         "required": false
       },
       "items": {
-        "type": "RadioItem<Y>[]",
+        "type": "RadioGroupItem<Y>[]",
         "defaultValue": "[]",
         "description": "If provided, generate options based on items.",
         "required": false
@@ -373,12 +349,6 @@
         "description": "The callback fired when any children radio is checked or unchecked.",
         "required": false
       },
-      "orientation": {
-        "type": "\"horizontal\" | \"vertical\"",
-        "defaultValue": "\"horizontal\"",
-        "description": "The orientation of the group.",
-        "required": false
-      },
       "readOnly": {
         "type": "boolean",
         "defaultValue": "false",
@@ -391,20 +361,9 @@
         "description": "If `true`, the field will be required.",
         "required": false
       },
-      "shape": {
-        "type": "\"circle\" | \"rounded\" | \"square\"",
-        "defaultValue": "\"circle\"",
-        "description": "The shape of the component",
-        "required": false
-      },
       "shrink": {
         "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
         "description": "The CSS `flex-shrink` property.",
-        "required": false
-      },
-      "stacking": {
-        "type": "\"first-on-top\" | \"last-on-top\"",
-        "description": "The stacking order of the group.",
         "required": false
       },
       "value": {
@@ -453,14 +412,8 @@
       "required": false
     },
     "align": {
-      "type": "\"-moz-initial\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" | \"revert-layer\" ...",
+      "type": "\"-moz-initial\" | \"anchor-center\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" ...",
       "description": "The CSS `align-items` property.",
-      "required": false
-    },
-    "attached": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
       "required": false
     },
     "basis": {
@@ -485,19 +438,13 @@
       "required": false
     },
     "errorBorderColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The border color when the input is invalid.",
       "required": false
     },
     "focusBorderColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The border color when the input is focused.",
-      "required": false
-    },
-    "grow": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the children will grow to fill the available space.",
       "required": false
     },
     "invalid": {
@@ -507,7 +454,7 @@
       "required": false
     },
     "items": {
-      "type": "RadioItem<Y>[]",
+      "type": "RadioGroupItem<Y>[]",
       "defaultValue": "[]",
       "description": "If provided, generate options based on items.",
       "required": false
@@ -522,12 +469,6 @@
       "description": "The callback fired when any children radio is checked or unchecked.",
       "required": false
     },
-    "orientation": {
-      "type": "\"horizontal\" | \"vertical\"",
-      "defaultValue": "\"horizontal\"",
-      "description": "The orientation of the group.",
-      "required": false
-    },
     "readOnly": {
       "type": "boolean",
       "defaultValue": "false",
@@ -540,20 +481,9 @@
       "description": "If `true`, the field will be required.",
       "required": false
     },
-    "shape": {
-      "type": "\"circle\" | \"rounded\" | \"square\"",
-      "defaultValue": "\"circle\"",
-      "description": "The shape of the component",
-      "required": false
-    },
     "shrink": {
       "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
       "description": "The CSS `flex-shrink` property.",
-      "required": false
-    },
-    "stacking": {
-      "type": "\"first-on-top\" | \"last-on-top\"",
-      "description": "The stacking order of the group.",
       "required": false
     },
     "value": {

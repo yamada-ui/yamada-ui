@@ -21,17 +21,17 @@
       "required": false
     },
     "align": {
-      "type": "\"-moz-initial\" | \"-webkit-match-parent\" | \"center\" | \"end\" | \"inherit\" | \"initial\" | \"justify\" | \"left\" | \"match-parent\" | \"revert-layer\" ...",
+      "type": "\"-khtml-center\" | \"-khtml-left\" | \"-khtml-right\" | \"-moz-center\" | \"-moz-initial\" | \"-moz-left\" | \"-moz-right\" | \"-webkit-center\" | \"-webkit-left\" | \"-webkit-match-parent\" ...",
       "description": "The CSS `text-align` property.",
       "required": false
     },
     "casing": {
-      "type": "\"-moz-initial\" | \"capitalize\" | \"full-size-kana\" | \"full-width\" | \"inherit\" | \"initial\" | \"lowercase\" | \"none\" | \"revert-layer\" | \"revert\" ...",
+      "type": "\"-moz-initial\" | \"capitalize\" | \"full-size-kana\" | \"full-width\" | \"inherit\" | \"initial\" | \"lowercase\" | \"math-auto\" | \"none\" | \"revert-layer\" ...",
       "description": "The CSS `text-transform` property.",
       "required": false
     },
     "decoration": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"antiquewhite\" | \"AppWorkspace\" | \"aqua\" | \"aquamarine\" | \"auto\" | \"azure\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"antiquewhite\" | \"AppWorkspace\" | \"aqua\" ...",
       "description": "The CSS `text-decoration` property.",
       "required": false
     }

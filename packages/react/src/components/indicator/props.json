@@ -41,12 +41,6 @@
       "description": "Props for the float element.",
       "required": false
     },
-    "inline": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, set the indicator as an inline element.",
-      "required": false
-    },
     "label": {
       "type": "ReactNode",
       "description": "The indicator label to use.",
@@ -74,22 +68,10 @@
       "description": "If `true`, make an element scale and fade like a radar ping or ripple of water.",
       "required": false
     },
-    "placement": {
-      "type": "\"center-center\" | \"center-end\" | \"center-start\" | \"center\" | \"end-center\" | \"end-end\" | \"end-start\" | \"end\" | \"start-center\" | \"start-end\" ...",
-      "defaultValue": "\"start-end\"",
-      "description": "The placement of the float.",
-      "required": false
-    },
     "showZero": {
       "type": "boolean",
       "defaultValue": "true",
       "description": "If `true`, display 0.",
-      "required": false
-    },
-    "withBorder": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, display the border of the indicator.",
       "required": false
     }
   }

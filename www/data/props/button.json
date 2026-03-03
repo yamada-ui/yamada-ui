@@ -55,12 +55,6 @@
       "description": "The icon to display at the end side of the button.",
       "required": false
     },
-    "fullRounded": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
-      "required": false
-    },
     "iconProps": {
       "type": "ButtonIconProps",
       "description": "The props of the icon element.",
@@ -158,12 +152,6 @@
         "description": "If `true`, disable ripple effects when pressing a element.",
         "required": false
       },
-      "fullRounded": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
-        "required": false
-      },
       "icon": {
         "type": "ReactNode",
         "description": "The icon to be used in the button.",
@@ -216,14 +204,8 @@
         "required": false
       },
       "align": {
-        "type": "\"-moz-initial\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" | \"revert-layer\" ...",
+        "type": "\"-moz-initial\" | \"anchor-center\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" ...",
         "description": "The CSS `align-items` property.",
-        "required": false
-      },
-      "attached": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
         "required": false
       },
       "basis": {
@@ -242,37 +224,14 @@
         "description": "If `true`, all wrapped button will be disabled.",
         "required": false
       },
-      "fullRounded": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
-        "required": false
-      },
-      "grow": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the children will grow to fill the available space.",
-        "required": false
-      },
       "justify": {
         "type": "\"-moz-initial\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"left\" | \"normal\" | \"revert-layer\" ...",
         "description": "The CSS `justify-content` property.",
         "required": false
       },
-      "orientation": {
-        "type": "\"horizontal\" | \"vertical\"",
-        "defaultValue": "\"horizontal\"",
-        "description": "The orientation of the group.",
-        "required": false
-      },
       "shrink": {
         "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
         "description": "The CSS `flex-shrink` property.",
-        "required": false
-      },
-      "stacking": {
-        "type": "\"first-on-top\" | \"last-on-top\"",
-        "description": "The stacking order of the group.",
         "required": false
       },
       "wrap": {
@@ -335,12 +294,6 @@
       "endIcon": {
         "type": "ReactNode",
         "description": "The icon to display at the end side of the button.",
-        "required": false
-      },
-      "fullRounded": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
         "required": false
       },
       "iconProps": {
@@ -423,14 +376,8 @@
       "required": false
     },
     "align": {
-      "type": "\"-moz-initial\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" | \"revert-layer\" ...",
+      "type": "\"-moz-initial\" | \"anchor-center\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" ...",
       "description": "The CSS `align-items` property.",
-      "required": false
-    },
-    "attached": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
       "required": false
     },
     "basis": {
@@ -449,37 +396,14 @@
       "description": "If `true`, all wrapped button will be disabled.",
       "required": false
     },
-    "fullRounded": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
-      "required": false
-    },
-    "grow": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the children will grow to fill the available space.",
-      "required": false
-    },
     "justify": {
       "type": "\"-moz-initial\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"left\" | \"normal\" | \"revert-layer\" ...",
       "description": "The CSS `justify-content` property.",
       "required": false
     },
-    "orientation": {
-      "type": "\"horizontal\" | \"vertical\"",
-      "defaultValue": "\"horizontal\"",
-      "description": "The orientation of the group.",
-      "required": false
-    },
     "shrink": {
       "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
       "description": "The CSS `flex-shrink` property.",
-      "required": false
-    },
-    "stacking": {
-      "type": "\"first-on-top\" | \"last-on-top\"",
-      "description": "The stacking order of the group.",
       "required": false
     },
     "wrap": {
@@ -537,12 +461,6 @@
       "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, disable ripple effects when pressing a element.",
-      "required": false
-    },
-    "fullRounded": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
       "required": false
     },
     "icon": {

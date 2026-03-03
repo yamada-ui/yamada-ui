@@ -1,8 +1,1213 @@
 ---
 title: AreaChart
 description: "`AreaChart`は、複数のデータを比較するためのエリアチャートを描画するコンポーネントです。"
-storybook: components-areachart--basic
-source: components/area-chart
+storybook: components-chart-areachart--basic
+source: components/chart
+style: components/chart/area-chart.style.ts
 ---
 
-現在、このコンポーネントは移行が完了していません。このコンポーネントの移行は、v2.0.xで行われる予定です。
+```tsx functional preview
+interface Data {
+  date: string
+  desktop: number
+  mobile: number
+  tablet: number
+}
+
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo<Data[]>(
+  () => [
+    {
+      date: "2026-03-01",
+      desktop: faker.number.int({ max: 2000, min: 1000 }),
+      mobile: faker.number.int({ max: 4000, min: 3000 }),
+      tablet: faker.number.int({ max: 3000, min: 2000 }),
+    },
+    {
+      date: "2026-04-01",
+      desktop: faker.number.int({ max: 2000, min: 1000 }),
+      mobile: faker.number.int({ max: 4000, min: 3000 }),
+      tablet: faker.number.int({ max: 3000, min: 2000 }),
+    },
+    {
+      date: "2026-05-01",
+      desktop: faker.number.int({ max: 2000, min: 1000 }),
+      mobile: faker.number.int({ max: 4000, min: 3000 }),
+      tablet: faker.number.int({ max: 3000, min: 2000 }),
+    },
+    {
+      date: "2026-06-01",
+      desktop: faker.number.int({ max: 2000, min: 1000 }),
+      mobile: faker.number.int({ max: 4000, min: 3000 }),
+      tablet: faker.number.int({ max: 3000, min: 2000 }),
+    },
+    {
+      date: "2026-07-01",
+      desktop: faker.number.int({ max: 2000, min: 1000 }),
+      mobile: faker.number.int({ max: 4000, min: 3000 }),
+      tablet: faker.number.int({ max: 3000, min: 2000 }),
+    },
+    {
+      date: "2026-08-01",
+      desktop: faker.number.int({ max: 2000, min: 1000 }),
+      mobile: faker.number.int({ max: 4000, min: 3000 }),
+      tablet: faker.number.int({ max: 3000, min: 2000 }),
+    },
+  ],
+  [],
+)
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { AreaChart } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { AreaChart } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { AreaChart } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<AreaChart.Root>
+  <AreaChart.Area>
+    <AreaChart.LabelList />
+  </AreaChart.Area>
+  <AreaChart.Label />
+  <AreaChart.ReferenceLine />
+  <AreaChart.Grid />
+  <AreaChart.XAxis />
+  <AreaChart.YAxis />
+  <AreaChart.Tooltip />
+  <AreaChart.Legend />
+</AreaChart.Root>
+```
+
+### コンポジション
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root data={data} chartProps={{ margin: { right: 16 } }}>
+    <AreaChart.Area dataKey="desktop" dot stroke="colorScheme.900">
+      <AreaChart.LabelList />
+    </AreaChart.Area>
+    <AreaChart.Area dataKey="tablet" stroke="colorScheme.600" />
+    <AreaChart.Area dataKey="mobile" stroke="colorScheme.300" />
+    <AreaChart.XAxis
+      dataKey="date"
+      tickFormatter={(value) => dayjs(value).format("MMM")}
+    />
+    <AreaChart.YAxis />
+    <AreaChart.Grid />
+    <AreaChart.Tooltip labelFormatter={(value) => dayjs(value).format("MMM")} />
+  </AreaChart.Root>
+)
+```
+
+### サイズを変更する
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <For each={["xs", "sm", "md", "lg", "xl"]}>
+      {(size, index) => (
+        <AreaChart.Root
+          key={index}
+          size={size}
+          data={data}
+          series={series}
+          tooltipProps={{
+            labelFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+          xAxisProps={{
+            dataKey: "date",
+            tickFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### カラースキームを変更する
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries(
+      [{ dataKey: "desktop" }, { dataKey: "tablet" }, { dataKey: "mobile" }],
+      "blue",
+    ),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### カラーを変更する
+
+カラーを変更する場合は、`series`の`color`または`areaProps.color`に色を設定します。デフォルトは、`"mono.500"`です。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", color: "blue" },
+    { dataKey: "tablet", color: "green" },
+    { dataKey: "mobile", color: "red" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### グラデーションを表示する
+
+グラデーションを表示する場合は、`series`の`withGradient`または`areaProps.withGradient`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries(
+      [{ dataKey: "desktop" }, { dataKey: "tablet" }, { dataKey: "mobile" }],
+      "blue",
+    ),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    areaProps={{ withGradient: true }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### タイプを変更する
+
+タイプを変更する場合は、`series`の`type`または`areaProps.type`に`"monotone"`や`"linear"`などを設定します。デフォルトは、`"monotone"`です。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <For
+      each={[
+        "monotone",
+        "bump",
+        "linear",
+        "natural",
+        "step",
+        "stepBefore",
+        "stepAfter",
+      ]}
+    >
+      {(type, index) => (
+        <AreaChart.Root
+          key={index}
+          areaProps={{ type }}
+          data={data}
+          series={series}
+          tooltipProps={{
+            labelFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+          xAxisProps={{
+            dataKey: "date",
+            tickFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### 積み上げる
+
+積み上げる場合は、`series`の`stackId`または`areaProps.stackId`に文字列を設定します。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", color: "blue" },
+    { dataKey: "tablet", color: "green" },
+    { dataKey: "mobile", color: "red" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    areaProps={{ stackId: "stack" }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### 割合にする
+
+割合にする場合は、`series`の`stackId`または`areaProps.stackId`に文字列を設定し、`chartProps.stackOffset`に`"expand"`を設定します。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", color: "blue" },
+    { dataKey: "tablet", color: "green" },
+    { dataKey: "mobile", color: "red" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    areaProps={{ stackId: "stack" }}
+    chartProps={{ stackOffset: "expand" }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Y軸を表示する
+
+Y軸を表示する場合は、`withYAxis`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+また、`yAxisProps.orientation`に`"start"`や`"end"`を設定することで、Y軸の配置を変更することができます。デフォルトは、`"start"`です。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { left: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{ orientation: "end" }}
+  />
+)
+```
+
+### 凡例を表示する
+
+凡例を表示する場合は、`withLegend`を`true`に設定します。デフォルトは、`false`です。また、凡例の配置を変更する場合は、`legendProps.placement`に`"start-start"`や`"end-end"`などを設定します。デフォルトは、`"start-end"`です。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", color: "blue" },
+    { dataKey: "tablet", color: "green" },
+    { dataKey: "mobile", color: "red" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withLegend
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### 項目名を変更する
+
+ツールチップや凡例の項目名を変更する場合は、`series`の`name`に文字列を設定します。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", name: "Desktop", color: "blue" },
+    { dataKey: "tablet", name: "Tablet", color: "green" },
+    { dataKey: "mobile", name: "Mobile", color: "red" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withLegend
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### グリッドを変更する
+
+グリッドを変更する場合は、`gridProps.horizontal`と`gridProps.vertical`に真偽値を設定します。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <For each={["xy", "x", "y", "none"]}>
+      {(value, index) => (
+        <AreaChart.Root
+          key={index}
+          gridProps={{
+            horizontal: value.includes("x"),
+            vertical: value.includes("y"),
+          }}
+          data={data}
+          series={series}
+          tooltipProps={{
+            labelFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+          xAxisProps={{
+            dataKey: "date",
+            tickFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### ドットを表示する
+
+ドットを表示する場合は、`series`の`dot`または`areaProps.dot`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    areaProps={{ dot: true }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### ラベルを表示する
+
+ラベルを表示する場合は、`series`の`label`または`areaProps.label`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    areaProps={{ dot: true, label: true }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### 単位を表示する
+
+単位を表示する場合は、`formatter`や`tickFormatter`を使用するか、`unit`に文字列を設定します。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    areaProps={{
+      dot: true,
+      label: {
+        formatter: (value) => `${(Number(value) / 1000).toFixed(1)}k`,
+      },
+    }}
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      formatter: (value) => `${(Number(value) / 1000).toFixed(1)}k`,
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      domain: [0, 10000],
+      tickFormatter: (value) => (value / 1000).toFixed(1),
+      ticks: [0, 2500, 5000, 7500, 10000],
+      unit: "k",
+    }}
+  />
+)
+```
+
+### 同期させる
+
+同期させる場合は、`syncId`に文字列を設定します。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <AreaChart.Root
+      data={data}
+      series={series}
+      syncId="chart"
+      tooltipProps={{
+        labelFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+      xAxisProps={{
+        dataKey: "date",
+        tickFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+    />
+    <AreaChart.Root
+      data={data}
+      series={series}
+      syncId="chart"
+      tooltipProps={{
+        labelFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+      xAxisProps={{
+        dataKey: "date",
+        tickFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+    />
+  </VStack>
+)
+```
+
+### フォーマットする
+
+フォーマットする場合は、`formatter`や`tickFormatter`などを使用します。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      formatter: (value, name = "") => [
+        Number(value).toLocaleString(),
+        toTitleCase(name),
+      ],
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      tickFormatter: (value) => value.toLocaleString(),
+    }}
+  />
+)
+```
+
+### 基準線を表示する
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  >
+    <AreaChart.ReferenceLine label="Reference line" y={3000} />
+    <AreaChart.ReferenceLine
+      label={{ position: "insideTopLeft", value: "Reference line" }}
+      x={dayjs().add(3, "month").format("YYYY-MM-DD")}
+    />
+    <AreaChart.ReferenceLine
+      label={{ position: "center", value: "Reference line" }}
+      segment={[
+        { x: dayjs().format("YYYY-MM-DD"), y: 0 },
+        { x: dayjs().add(3, "month").format("YYYY-MM-DD"), y: 3000 },
+      ]}
+    />
+  </AreaChart.Root>
+)
+```
+
+### 目盛線を表示する
+
+目盛線を表示する場合は、`xAxisProps.tickLine`または`yAxisProps.tickLine`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+      tickLine: true,
+    }}
+    yAxisProps={{
+      tickFormatter: (value) => value.toLocaleString(),
+      tickLine: true,
+    }}
+  />
+)
+```
+
+### 軸のラベルを表示する
+
+軸のラベルを表示する場合は、`xAxisProps.label`または`yAxisProps.label`に文字列を設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      label: "Date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{ label: "Value" }}
+  />
+)
+```
+
+### 範囲を設定する
+
+範囲を設定する場合は、`yAxisProps.domain`に`[最小, 最大]`を設定します。また、間隔を設定する場合は、`yAxisProps.ticks`に配列を設定します。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      domain: [0, 10000],
+      ticks: [0, 2500, 5000, 7500, 10000],
+    }}
+  />
+)
+```
+
+### ツールチップのカーソルを表示する
+
+ツールチップのカーソルを表示する場合は、`tooltipProps.cursor`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{ cursor: true }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### X軸を非表示にする
+
+X軸を非表示にする場合は、`withXAxis`を`false`に設定します。デフォルトは、`true`です。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withXAxis={false}
+    chartProps={{ margin: { left: 0, right: 0 } }}
+    tooltipProps={{ labelFormatter: () => null }}
+  />
+)
+```
+
+### アクティブドットを非表示にする
+
+アクティブドットを非表示にする場合は、`series`の`activeDot`または`areaProps.activeDot`を`false`に設定します。デフォルトは、`true`です。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    areaProps={{ activeDot: false }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### ツールチップを非表示にする
+
+ツールチップを非表示にする場合は、`withTooltip`を`false`に設定します。デフォルトは、`true`です。
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withTooltip={false}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### 軸をカスタマイズする
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      label: { color: ["red", "blue"] },
+      tick: { color: ["red", "blue"] },
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+      tickLine: { color: ["red", "blue"] },
+    }}
+    yAxisProps={{
+      label: { color: ["red", "blue"] },
+      tick: { color: ["red", "blue"] },
+      tickLine: { color: ["red", "blue"] },
+    }}
+  />
+)
+```
+
+### ドットをカスタマイズする
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet", dot: { fill: "blue" } },
+      {
+        dataKey: "mobile",
+        dot: { fill: ["white", "black"], stroke: "red", strokeWidth: 1 },
+      },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    areaProps={{ activeDot: false }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+      contentProps: { withSwatch: false },
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### アクティブドットをカスタマイズする
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    areaProps={{ activeDot: { fill: ["blue", "red"] } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+      contentProps: { withSwatch: false },
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### ラベルをカスタマイズする
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () => [{ color: "blue", dataKey: "desktop" }],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    areaProps={{
+      activeDot: { fill: "red" },
+      dot: { fill: "red" },
+      label: { color: "red" },
+    }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+      contentProps: { withSwatch: false },
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      domain: [0, 10000],
+      ticks: [0, 2500, 5000, 7500, 10000],
+    }}
+  />
+)
+```
+
+### グリッドをカスタマイズする
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    gridProps={{ strokeDasharray: "15 15" }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+      contentProps: { withSwatch: false },
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### ツールチップのカーソルをカスタマイズする
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      cursor: { stroke: ["red", "blue"] },
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+## Props
+
+<PropsTable
+  name="chart"
+  pick={[
+    "AreaChart",
+    "AreaChart.Root",
+    "AreaChart.Area",
+    "AreaChart.Grid",
+    "AreaChart.Label",
+    "AreaChart.LabelList",
+    "AreaChart.Legend",
+    "AreaChart.ReferenceLine",
+    "AreaChart.Tooltip",
+    "AreaChart.XAxis",
+    "AreaChart.YAxis",
+  ]}
+/>
+```

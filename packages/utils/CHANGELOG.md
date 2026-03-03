@@ -1,5 +1,19 @@
 # @yamada-ui/utils
 
+## 2.1.0
+
+### Minor Changes
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [`4cddce4`](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `extractFlatObject` function.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [`4cddce4`](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `extractObject` function.
+
+### Patch Changes
+
+- [#5743](https://github.com/yamada-ui/yamada-ui/pull/5743) [`c6427ff`](https://github.com/yamada-ui/yamada-ui/commit/c6427ff7e732e9c9ebab5bff845ba717c6024b36) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted codes.
+
+- [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [`4cddce4`](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Modified `splitChildren` to return the matched elements as an array.
+
 ## 2.0.6
 
 ### Patch Changes

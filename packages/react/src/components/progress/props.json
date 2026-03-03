@@ -32,12 +32,6 @@
       "description": "The variant of the component.",
       "required": false
     },
-    "animated": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the progress bar will animate.",
-      "required": false
-    },
     "duration": {
       "type": "number | string",
       "description": "The animation duration in seconds.",
@@ -56,7 +50,7 @@
       "required": false
     },
     "rangeColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The color of the progress range.",
       "required": false
     },
@@ -65,20 +59,8 @@
       "description": "Props for the progress range element.",
       "required": false
     },
-    "shape": {
-      "type": "\"circle\" | \"rounded\" | \"square\"",
-      "defaultValue": "\"rounded\"",
-      "description": "The shape of the progress bar.",
-      "required": false
-    },
-    "striped": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the progress bar will show stripe.",
-      "required": false
-    },
     "trackColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The color of the progress track.",
       "required": false
     },

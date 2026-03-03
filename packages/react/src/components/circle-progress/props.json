@@ -78,7 +78,7 @@
         "required": false
       },
       "rangeColor": {
-        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
         "description": "The color of the progress range.",
         "required": false
       },
@@ -87,19 +87,13 @@
         "description": "Props for the progress range element.",
         "required": false
       },
-      "shape": {
-        "type": "\"rounded\" | \"square\"",
-        "defaultValue": "\"rounded\"",
-        "description": "The shape of the progress bar.",
-        "required": false
-      },
       "thickness": {
         "type": "\"-moz-fit-content\" | \"-moz-initial\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | \"-webkit-max-content\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" ...",
         "description": "The thickness of the progress bar.",
         "required": false
       },
       "trackColor": {
-        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
         "description": "The color of the progress track.",
         "required": false
       },
@@ -194,7 +188,7 @@
       "required": false
     },
     "rangeColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The color of the progress range.",
       "required": false
     },
@@ -203,19 +197,13 @@
       "description": "Props for the progress range element.",
       "required": false
     },
-    "shape": {
-      "type": "\"rounded\" | \"square\"",
-      "defaultValue": "\"rounded\"",
-      "description": "The shape of the progress bar.",
-      "required": false
-    },
     "thickness": {
       "type": "\"-moz-fit-content\" | \"-moz-initial\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | \"-webkit-max-content\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" ...",
       "description": "The thickness of the progress bar.",
       "required": false
     },
     "trackColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The color of the progress track.",
       "required": false
     },

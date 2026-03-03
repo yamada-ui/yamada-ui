@@ -83,12 +83,6 @@
       "description": "Defining which referrer is sent when fetching the resource.",
       "required": false
     },
-    "shape": {
-      "type": "\"circle\" | \"rounded\" | \"square\"",
-      "defaultValue": "\"circle\"",
-      "description": "The shape of the component",
-      "required": false
-    },
     "src": {
       "type": "HTMLProps<\"img\">[\"src\"]",
       "description": "The image url of the avatar.",
@@ -185,12 +179,6 @@
         "description": "Defining which referrer is sent when fetching the resource.",
         "required": false
       },
-      "shape": {
-        "type": "\"circle\" | \"rounded\" | \"square\"",
-        "defaultValue": "\"circle\"",
-        "description": "The shape of the component",
-        "required": false
-      },
       "src": {
         "type": "HTMLProps<\"img\">[\"src\"]",
         "description": "The image url of the avatar.",
@@ -244,12 +232,6 @@
         "type": "boolean",
         "description": "Whether to reverse the order of the avatars.",
         "required": false
-      },
-      "shape": {
-        "type": "\"circle\" | \"rounded\" | \"square\"",
-        "defaultValue": "\"circle\"",
-        "description": "The shape of the component",
-        "required": false
       }
     }
   },
@@ -294,12 +276,6 @@
     "reverse": {
       "type": "boolean",
       "description": "Whether to reverse the order of the avatars.",
-      "required": false
-    },
-    "shape": {
-      "type": "\"circle\" | \"rounded\" | \"square\"",
-      "defaultValue": "\"circle\"",
-      "description": "The shape of the component",
       "required": false
     }
   }

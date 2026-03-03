@@ -157,12 +157,6 @@
         "description": "If `true`, disable ripple effects when pressing a element.",
         "required": false
       },
-      "fullRounded": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
-        "required": false
-      },
       "icon": {
         "type": "ReactNode",
         "description": "The icon to be used in the button.",
@@ -228,12 +222,6 @@
         "type": "boolean",
         "defaultValue": "false",
         "description": "If `true`, disable ripple effects when pressing a element.",
-        "required": false
-      },
-      "fullRounded": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
         "required": false
       },
       "icon": {
@@ -578,12 +566,6 @@
       "description": "If `true`, disable ripple effects when pressing a element.",
       "required": false
     },
-    "fullRounded": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
-      "required": false
-    },
     "icon": {
       "type": "ReactNode",
       "description": "The icon to be used in the button.",
@@ -649,12 +631,6 @@
       "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, disable ripple effects when pressing a element.",
-      "required": false
-    },
-    "fullRounded": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
       "required": false
     },
     "icon": {

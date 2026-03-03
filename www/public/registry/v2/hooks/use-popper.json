@@ -7,7 +7,7 @@
     "providers": []
   },
   "dependents": {
-    "components": ["popover", "tooltip"],
+    "components": ["native-popover", "popover", "tooltip"],
     "hooks": [],
     "providers": []
   },

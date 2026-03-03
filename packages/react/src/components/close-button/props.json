@@ -22,13 +22,11 @@
     },
     "size": {
       "type": "\"2xl\" | \"2xs\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
-      "defaultValue": "\"xs\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
-      "defaultValue": "\"ghost\"",
       "description": "The variant of the component.",
       "required": false
     },
@@ -48,12 +46,6 @@
       "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, disable ripple effects when pressing a element.",
-      "required": false
-    },
-    "fullRounded": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
       "required": false
     },
     "icon": {

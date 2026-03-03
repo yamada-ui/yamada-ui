@@ -114,18 +114,6 @@
       "description": "If `true`, the field will be required.",
       "required": false
     },
-    "reverse": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "Change switch label from right to left.",
-      "required": false
-    },
-    "shape": {
-      "type": "\"circle\" | \"rounded\" | \"square\"",
-      "defaultValue": "circle",
-      "description": "The shape of the switch.",
-      "required": false
-    },
     "tabIndex": {
       "type": "number",
       "description": "The tab-index property of the underlying input element.",

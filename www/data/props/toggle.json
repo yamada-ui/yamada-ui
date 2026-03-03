@@ -56,14 +56,8 @@
       "required": false
     },
     "errorBorderColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The border color when the input is invalid.",
-      "required": false
-    },
-    "fullRounded": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If true, the toggle button is full rounded. Else, it'll be slightly round.",
       "required": false
     },
     "icon": {
@@ -170,14 +164,8 @@
         "required": false
       },
       "errorBorderColor": {
-        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
         "description": "The border color when the input is invalid.",
-        "required": false
-      },
-      "fullRounded": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If true, the toggle button is full rounded. Else, it'll be slightly round.",
         "required": false
       },
       "icon": {
@@ -260,14 +248,8 @@
         "required": false
       },
       "align": {
-        "type": "\"-moz-initial\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" | \"revert-layer\" ...",
+        "type": "\"-moz-initial\" | \"anchor-center\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" ...",
         "description": "The CSS `align-items` property.",
-        "required": false
-      },
-      "attached": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
         "required": false
       },
       "basis": {
@@ -291,18 +273,6 @@
         "description": "If `true`, all wrapped toggle button will be disabled.",
         "required": false
       },
-      "fullRounded": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If true, the toggle button is full rounded. Else, it'll be slightly round.",
-        "required": false
-      },
-      "grow": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the children will grow to fill the available space.",
-        "required": false
-      },
       "justify": {
         "type": "\"-moz-initial\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"left\" | \"normal\" | \"revert-layer\" ...",
         "description": "The CSS `justify-content` property.",
@@ -311,12 +281,6 @@
       "onChange": {
         "type": "(value: Y extends any[] ? Y : undefined | Y) => void",
         "description": "The callback fired when any children toggle button is selected or unselected.",
-        "required": false
-      },
-      "orientation": {
-        "type": "\"horizontal\" | \"vertical\"",
-        "defaultValue": "\"horizontal\"",
-        "description": "The orientation of the group.",
         "required": false
       },
       "readOnly": {
@@ -328,11 +292,6 @@
       "shrink": {
         "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
         "description": "The CSS `flex-shrink` property.",
-        "required": false
-      },
-      "stacking": {
-        "type": "\"first-on-top\" | \"last-on-top\"",
-        "description": "The stacking order of the group.",
         "required": false
       },
       "value": {
@@ -381,14 +340,8 @@
       "required": false
     },
     "align": {
-      "type": "\"-moz-initial\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" | \"revert-layer\" ...",
+      "type": "\"-moz-initial\" | \"anchor-center\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" ...",
       "description": "The CSS `align-items` property.",
-      "required": false
-    },
-    "attached": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
       "required": false
     },
     "basis": {
@@ -412,18 +365,6 @@
       "description": "If `true`, all wrapped toggle button will be disabled.",
       "required": false
     },
-    "fullRounded": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If true, the toggle button is full rounded. Else, it'll be slightly round.",
-      "required": false
-    },
-    "grow": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the children will grow to fill the available space.",
-      "required": false
-    },
     "justify": {
       "type": "\"-moz-initial\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"left\" | \"normal\" | \"revert-layer\" ...",
       "description": "The CSS `justify-content` property.",
@@ -432,12 +373,6 @@
     "onChange": {
       "type": "(value: Y extends any[] ? Y : undefined | Y) => void",
       "description": "The callback fired when any children toggle button is selected or unselected.",
-      "required": false
-    },
-    "orientation": {
-      "type": "\"horizontal\" | \"vertical\"",
-      "defaultValue": "\"horizontal\"",
-      "description": "The orientation of the group.",
       "required": false
     },
     "readOnly": {
@@ -449,11 +384,6 @@
     "shrink": {
       "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
       "description": "The CSS `flex-shrink` property.",
-      "required": false
-    },
-    "stacking": {
-      "type": "\"first-on-top\" | \"last-on-top\"",
-      "description": "The stacking order of the group.",
       "required": false
     },
     "value": {

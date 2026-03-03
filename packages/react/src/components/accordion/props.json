@@ -157,7 +157,7 @@
         "required": false
       },
       "transitionEnd": {
-        "type": "MotionLifecycleProps<ResolvedValues>",
+        "type": "MotionLifecycleProps<ResolvedValues$1>",
         "description": "Custom `transitionEnd` definition for `enter` and `exit`.",
         "required": false
       },
@@ -396,7 +396,7 @@
       "required": false
     },
     "transitionEnd": {
-      "type": "MotionLifecycleProps<ResolvedValues>",
+      "type": "MotionLifecycleProps<ResolvedValues$1>",
       "description": "Custom `transitionEnd` definition for `enter` and `exit`.",
       "required": false
     },

@@ -231,17 +231,13 @@ return (
 )
 ```
 
-### Add Range
+### Range
 
-To add a range, set `range` or `barProps.range` to `true`. The default is `false`.
+To display a range, set the values of the `data` items as `[min, max]` arrays.
 
 ```tsx preview functional
 const series = useMemo<BarChart.BarProps<Data>[]>(
-  () => [
-    { dataKey: "desktop", range: true },
-    { dataKey: "tablet", range: true },
-    { dataKey: "mobile", range: true },
-  ],
+  () => [{ dataKey: "desktop" }, { dataKey: "tablet" }, { dataKey: "mobile" }],
   [],
 )
 const data = useMemo<Data[]>(

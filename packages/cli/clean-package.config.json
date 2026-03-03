@@ -1,8 +1,8 @@
 {
   "replace": {
-    "main": "dist/index.js",
+    "main": "dist/index.mjs",
     "bin": {
-      "yamada-cli": "dist/index.js"
+      "yamada-cli": "dist/index.mjs"
     }
   }
 }

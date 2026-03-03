@@ -3,11 +3,15 @@ name: Storybook
 on:
   push:
     paths:
-      - "packages/**/*.(html|ts|tsx)"
+      - "packages/**/*.html"
+      - "packages/**/*.ts"
+      - "packages/**/*.tsx"
       - "packages/**/package.json"
-      - "!packages/(cli|workspace)/**"
+      - "!packages/cli/**"
+      - "!packages/workspace/**"
       - "!packages/**/test/**"
-      - "!packages/**/*.test.(ts|tsx)"
+      - "!packages/**/*.test.ts"
+      - "!packages/**/*.test.tsx"
       - "package.json"
     branches:
       - main

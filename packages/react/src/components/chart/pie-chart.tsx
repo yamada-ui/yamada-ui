@@ -88,7 +88,6 @@ export const PieChart = withContext<"div", PieChartProps>(
         render={(props) => (
           <OriginalPieChart {...getChartProps({ ...props, ...chartProps })} />
         )}
-        series={series}
         tooltipProps={{ labelFormatter, ...tooltipProps }}
         {...getRootProps()}
       >

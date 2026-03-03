@@ -84,7 +84,6 @@ export const RadarChart = withContext<"div", RadarChartProps>(
         render={(props) => (
           <OriginalRadarChart {...getChartProps({ ...props, ...chartProps })} />
         )}
-        series={series}
         withAngleAxis={withAngleAxis}
         withGrid={withGrid}
         {...getRootProps()}

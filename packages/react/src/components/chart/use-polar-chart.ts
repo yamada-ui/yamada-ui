@@ -556,6 +556,7 @@ export interface UseChartRadarProps extends Merge<
     | "points"
     | "radiusAxisId"
     | "shape"
+    | "stroke"
     | "tooltipType"
     | "zIndex"
   >
@@ -579,6 +580,7 @@ export const useChartRadar = ({
   points,
   radiusAxisId,
   shape,
+  stroke,
   tooltipType,
   zIndex,
   onAnimationEnd,
@@ -647,6 +649,7 @@ export const useChartRadar = ({
       points,
       radiusAxisId,
       shape,
+      stroke,
       tooltipType,
       zIndex,
       onAnimationEnd,
@@ -673,6 +676,7 @@ export const useChartRadar = ({
       legendType,
       points,
       radiusAxisId,
+      stroke,
       shape,
       tooltipType,
       zIndex,

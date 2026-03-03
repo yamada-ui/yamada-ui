@@ -1,5 +1,6 @@
 import type { Component, CSSProps } from "../../core"
 import type { ColorSwatchProps } from "./color-swatch"
+import { useI18n } from "../../providers/i18n-provider"
 import { Grid } from "../grid"
 import { ColorSwatch } from "./color-swatch"
 
@@ -28,8 +29,10 @@ export const ColorSwatchGroup = (({
   itemProps,
   ...rest
 }: ColorSwatchGroupProps) => {
+  const { t } = useI18n("colorSwatch")
+
   if (items.length > 4)
-    console.warn("ColorSwatchMix: doesn't support more than 4 items")
+    console.warn("ColorSwatchGroup: doesn't support more than 4 items")
 
   const empty = items.length === 0
   const threeColors = items.length === 3
@@ -37,7 +40,7 @@ export const ColorSwatchGroup = (({
   if (empty) {
     return (
       <ColorSwatch
-        aria-label="color swatch group"
+        aria-label={t("Color swatch group")}
         layers={layers}
         overflow="hidden"
         withShadow={withShadow}
@@ -47,7 +50,7 @@ export const ColorSwatchGroup = (({
   } else {
     return (
       <ColorSwatch
-        aria-label="color swatch group"
+        aria-label={t("Color swatch group")}
         layers={withShadow ? [{ boxShadow: "inner" }] : []}
         {...rest}
       >

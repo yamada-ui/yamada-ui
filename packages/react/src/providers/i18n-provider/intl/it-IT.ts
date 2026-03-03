@@ -35,6 +35,9 @@ const data: IntlData = {
   colorSelector: {
     "Pick a color": "Scegli un colore",
   },
+  colorSwatch: {
+    "Color swatch group": "Gruppo campioni colore",
+  },
   datePicker: {
     "Clear value": "Cancella valore",
   },

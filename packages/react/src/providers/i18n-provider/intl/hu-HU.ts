@@ -35,6 +35,9 @@ const data: IntlData = {
   colorSelector: {
     "Pick a color": "Válasszon színt",
   },
+  colorSwatch: {
+    "Color swatch group": "Színminta-csoport",
+  },
   datePicker: {
     "Clear value": "Érték törlése",
   },

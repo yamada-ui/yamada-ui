@@ -8,6 +8,15 @@ describe("<Airy />", () => {
     await a11y(<Airy from="ON" to="OFF" />)
   })
 
+  test("applies custom `aria-label`", () => {
+    render(<Airy aria-label="Toggle navigation" from="ON" to="OFF" />)
+
+    expect(screen.getByRole("button")).toHaveAttribute(
+      "aria-label",
+      "Toggle navigation",
+    )
+  })
+
   test("sets `displayName` correctly", () => {
     expect(Airy.displayName).toBe("Airy")
   })

@@ -69,7 +69,7 @@ interface NativeTableAreaProps
 const NativeTableScrollArea = withContext<"div", NativeTableAreaProps>(
   "div",
   "scrollArea",
-)()
+)({ tabIndex: 0 })
 
 export interface CaptionProps extends HTMLStyledProps<"caption"> {
   /**

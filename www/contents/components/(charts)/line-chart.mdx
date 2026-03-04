@@ -203,8 +203,6 @@ return (
 
 ### Change Color
 
-To change colors, set a color in `series.color` or `lineProps.color`. The default is `"mono.500"`.
-
 ```tsx preview functional
 const series = useMemo<LineChart.LineProps<Data>[]>(
   () => [
@@ -233,7 +231,7 @@ return (
 
 ### Change Type
 
-To change the type, set `type` or `lineProps.type` to `"monotone"`, `"linear"`, etc. The default is `"monotone"`.
+To change the type, set `type` in `series` or `lineProps.type` to `"monotone"`, `"linear"`, etc. The default is `"monotone"`.
 
 ```tsx preview functional
 const series = useMemo<LineChart.LineProps<Data>[]>(
@@ -840,7 +838,7 @@ return (
 
 ### Hide Active Dot
 
-To hide active dots, set `activeDot` or `lineProps.activeDot` to `false`. The default is `true`.
+To hide active dots, set `activeDot` in `series` or `lineProps.activeDot` to `false`. The default is `true`.
 
 ```tsx preview functional
 const series = useMemo<LineChart.LineProps<Data>[]>(

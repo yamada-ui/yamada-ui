@@ -1,5 +1,7 @@
 import {
   addDomEvent,
+  focusTransfer,
+  focusTrap,
   getEventPoint,
   getEventWindow,
   isMouseEvent,
@@ -56,6 +58,20 @@ describe("Event", () => {
   test("isMouseEvent identifies mouse events", () => {
     const mouseEvent = new MouseEvent("click")
     expect(isMouseEvent(mouseEvent)).toBeTruthy()
+  })
+
+  test("isMouseEvent identifies PointerEvent with mouse pointerType", () => {
+    const pointerEvent = new PointerEvent("pointerdown", {
+      pointerType: "mouse",
+    })
+    expect(isMouseEvent(pointerEvent)).toBeTruthy()
+  })
+
+  test("isMouseEvent returns false for PointerEvent with touch pointerType", () => {
+    const pointerEvent = new PointerEvent("pointerdown", {
+      pointerType: "touch",
+    })
+    expect(isMouseEvent(pointerEvent)).toBeFalsy()
   })
 
   test("isTouchEvent identifies touch events", () => {
@@ -139,5 +155,78 @@ describe("Event", () => {
 
     window.dispatchEvent(new MouseEvent("click"))
     expect(mockCallback).not.toHaveBeenCalled()
+  })
+
+  describe("focusTrap", () => {
+    test("should return noop when el is null", () => {
+      const cleanup = focusTrap(null)
+      expect(cleanup).toBeTypeOf("function")
+      cleanup()
+    })
+
+    test("should register keydown listener and return cleanup", () => {
+      const container = document.createElement("div")
+      document.body.appendChild(container)
+
+      const addSpy = vi.spyOn(container, "addEventListener")
+      const cleanup = focusTrap(container)
+
+      expect(addSpy).toHaveBeenCalledWith("keydown", expect.any(Function), true)
+      expect(cleanup).toBeTypeOf("function")
+
+      cleanup()
+      document.body.removeChild(container)
+    })
+
+    test("should ignore non-Tab keys", () => {
+      const container = document.createElement("div")
+      document.body.appendChild(container)
+
+      const cleanup = focusTrap(container)
+
+      const enterEvent = new KeyboardEvent("keydown", {
+        key: "Enter",
+        bubbles: true,
+      })
+      const preventSpy = vi.spyOn(enterEvent, "preventDefault")
+      container.dispatchEvent(enterEvent)
+
+      expect(preventSpy).not.toHaveBeenCalled()
+
+      cleanup()
+      document.body.removeChild(container)
+    })
+  })
+
+  describe("focusTransfer", () => {
+    test("should return a cleanup function", () => {
+      const container = document.createElement("div")
+      document.body.appendChild(container)
+
+      const cleanup = focusTransfer(container)
+      expect(cleanup).toBeTypeOf("function")
+
+      cleanup()
+      document.body.removeChild(container)
+    })
+
+    test("should ignore non-Tab keys", () => {
+      const container = document.createElement("div")
+      document.body.appendChild(container)
+
+      const cleanup = focusTransfer(container)
+
+      const enterEvent = new KeyboardEvent("keydown", {
+        key: "Enter",
+        bubbles: true,
+      })
+      const preventSpy = vi.spyOn(enterEvent, "preventDefault")
+      document.dispatchEvent(enterEvent)
+
+      expect(preventSpy).not.toHaveBeenCalled()
+
+      cleanup()
+      document.body.removeChild(container)
+    })
   })
 })

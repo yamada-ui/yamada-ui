@@ -15,13 +15,18 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <Airy from={<MenuIcon fontSize="2xl" />} to={<XIcon fontSize="2xl" />} />
+    <Airy
+      aria-label="Toggle navigation"
+      from={<MenuIcon fontSize="2xl" />}
+      to={<XIcon fontSize="2xl" />}
+    />
   )
 }
 
 export const Duration: Story = () => {
   return (
     <Airy
+      aria-label="Toggle navigation"
       duration={0.6}
       from={<MenuIcon fontSize="2xl" />}
       to={<XIcon fontSize="2xl" />}
@@ -32,6 +37,7 @@ export const Duration: Story = () => {
 export const Delay: Story = () => {
   return (
     <Airy
+      aria-label="Toggle navigation"
       delay={1}
       from={<MenuIcon fontSize="2xl" />}
       to={<XIcon fontSize="2xl" />}
@@ -42,6 +48,7 @@ export const Delay: Story = () => {
 export const Disabled: Story = () => {
   return (
     <Airy
+      aria-label="Toggle navigation"
       disabled
       from={<MenuIcon fontSize="2xl" />}
       to={<XIcon fontSize="2xl" />}
@@ -52,6 +59,7 @@ export const Disabled: Story = () => {
 export const ReadOnly: Story = () => {
   return (
     <Airy
+      aria-label="Toggle navigation"
       from={<MenuIcon fontSize="2xl" />}
       readOnly
       to={<XIcon fontSize="2xl" />}
@@ -64,6 +72,7 @@ export const CustomControl: Story = () => {
 
   return (
     <Airy
+      aria-label="Toggle navigation"
       from={<MenuIcon fontSize="2xl" />}
       to={<XIcon fontSize="2xl" />}
       value={value}

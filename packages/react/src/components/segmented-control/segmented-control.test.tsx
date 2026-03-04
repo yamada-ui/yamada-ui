@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { a11y, render, screen } from "#test"
+import { a11y, fireEvent, render, screen } from "#test"
 import { SegmentedControl } from "./"
 
 const items: Required<SegmentedControl.RootProps>["items"] = [
@@ -48,6 +48,37 @@ describe("<SegmentedControl />", () => {
       screen.getByRole("radiogroup").getElementsByTagName("input"),
     ).forEach((input) => {
       expect(input).toBeDisabled()
+    })
+  })
+
+  test("should call onChange when a different item is selected", () => {
+    const onChange = vi.fn()
+    render(<TestComponent onChange={onChange} />)
+
+    const radios = screen.getAllByRole("radio")
+    fireEvent.click(radios[1]!)
+    expect(onChange).toHaveBeenCalledWith("two")
+  })
+
+  test("should update selected item when clicked", () => {
+    render(<TestComponent />)
+
+    const radios = screen.getAllByRole("radio")
+    expect(radios[0]).toBeChecked()
+
+    fireEvent.click(radios[1]!)
+    expect(radios[1]).toBeChecked()
+  })
+
+  test("should apply readOnly attributes", () => {
+    render(<TestComponent readOnly />)
+
+    const root = screen.getByRole("radiogroup")
+    expect(root).toHaveAttribute("data-readonly")
+
+    const radios = screen.getAllByRole("radio")
+    radios.forEach((radio) => {
+      expect(radio).toHaveAttribute("aria-readonly")
     })
   })
 })

@@ -78,7 +78,7 @@ describe("<SegmentedControl />", () => {
 
     const radios = screen.getAllByRole("radio")
     radios.forEach((radio) => {
-      expect(radio).toHaveAttribute("aria-readonly")
+      expect(radio).toHaveAttribute("data-readonly")
     })
   })
 })

@@ -203,6 +203,33 @@ describe("useFocusOnShow", () => {
     })
   })
 
+  test("focuses first focusable child when focusTarget is explicitly null", async () => {
+    const ComponentWithNullFocusTarget: FC<{ visible: boolean }> = ({
+      visible,
+    }) => {
+      const ref = useRef<HTMLDivElement>(null)
+      useFocusOnShow(ref, { focusTarget: null, shouldFocus: true, visible })
+
+      return (
+        <div ref={ref}>
+          <button data-testid="focusable-child">Focusable</button>
+        </div>
+      )
+    }
+
+    const { getByTestId, rerender } = render(
+      <ComponentWithNullFocusTarget visible={false} />,
+    )
+    const button = getByTestId("focusable-child")
+    vi.mocked(getFirstFocusableElement).mockReturnValue(button)
+
+    rerender(<ComponentWithNullFocusTarget visible />)
+
+    await waitFor(() => {
+      expect(button).toHaveFocus()
+    })
+  })
+
   test("does not throw when ref.current is null", async () => {
     const ComponentWithNullTarget: FC<{ visible: boolean }> = ({ visible }) => {
       const ref = useRef<HTMLDivElement>(null)
@@ -335,6 +362,37 @@ describe("useFocusOnPointerDown", () => {
 
     await waitFor(() => {
       expect(button).not.toHaveFocus()
+    })
+  })
+
+  test("does not focus when clicking outside elements", async () => {
+    const ComponentWithOutsideTarget: FC = () => {
+      const ref = useRef<HTMLDivElement>(null)
+      const buttonRef = useRef<HTMLButtonElement>(null)
+      useFocusOnPointerDown({
+        ref,
+        elements: [buttonRef],
+        enabled: true,
+      })
+
+      return (
+        <div ref={ref} data-testid="container">
+          <button ref={buttonRef} data-testid="button">
+            Button
+          </button>
+          <span data-testid="outside">Outside</span>
+        </div>
+      )
+    }
+
+    const { getByTestId } = render(<ComponentWithOutsideTarget />)
+    const outsideElement = getByTestId("outside")
+    const focusSpy = vi.spyOn(outsideElement, "focus")
+
+    act(() => fireEvent.pointerDown(outsideElement))
+
+    await waitFor(() => {
+      expect(focusSpy).not.toHaveBeenCalled()
     })
   })
 

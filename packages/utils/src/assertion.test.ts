@@ -1,13 +1,19 @@
 import {
+  cast,
   is,
   isArray,
+  isBoolean,
+  isBooleanish,
+  isDate,
   isEmpty,
+  isEmptyObject,
   isFunction,
   isNotNumber,
   isNull,
   isNumber,
   isNumeric,
   isObject,
+  isRegExp,
   isString,
   isUndefined,
   isUnit,
@@ -159,6 +165,78 @@ describe("Assertion", () => {
 
     test("Returns false for strings without units", () => {
       expect(isUnit("100")).toBeFalsy()
+    })
+  })
+
+  describe("isBooleanish", () => {
+    test("Returns true for boolean values and boolean strings", () => {
+      expect(isBooleanish(true)).toBeTruthy()
+      expect(isBooleanish(false)).toBeTruthy()
+      expect(isBooleanish("true")).toBeTruthy()
+      expect(isBooleanish("false")).toBeTruthy()
+    })
+
+    test("Returns false for non-booleanish values", () => {
+      expect(isBooleanish("yes")).toBeFalsy()
+      expect(isBooleanish(1)).toBeFalsy()
+      expect(isBooleanish(null)).toBeFalsy()
+    })
+  })
+
+  describe("isBoolean", () => {
+    test("Returns true for boolean values", () => {
+      expect(isBoolean(true)).toBeTruthy()
+      expect(isBoolean(false)).toBeTruthy()
+    })
+
+    test("Returns false for non-boolean values", () => {
+      expect(isBoolean("true")).toBeFalsy()
+      expect(isBoolean(1)).toBeFalsy()
+    })
+  })
+
+  describe("isRegExp", () => {
+    test("Returns true for RegExp values", () => {
+      expect(isRegExp(/test/)).toBeTruthy()
+      expect(isRegExp(new RegExp("test"))).toBeTruthy()
+    })
+
+    test("Returns false for non-RegExp values", () => {
+      expect(isRegExp("test")).toBeFalsy()
+      expect(isRegExp({})).toBeFalsy()
+    })
+  })
+
+  describe("isDate", () => {
+    test("Returns true for Date values", () => {
+      expect(isDate(new Date())).toBeTruthy()
+    })
+
+    test("Returns false for non-Date values", () => {
+      expect(isDate("2024-01-01")).toBeFalsy()
+      expect(isDate(123)).toBeFalsy()
+    })
+  })
+
+  describe("isEmptyObject", () => {
+    test("Returns true for empty objects", () => {
+      expect(isEmptyObject({})).toBeTruthy()
+    })
+
+    test("Returns false for non-empty objects", () => {
+      expect(isEmptyObject({ a: 1 })).toBeFalsy()
+    })
+
+    test("Returns false for non-objects", () => {
+      expect(isEmptyObject(null)).toBeFalsy()
+      expect(isEmptyObject([])).toBeFalsy()
+    })
+  })
+
+  describe("cast", () => {
+    test("Returns the value as-is", () => {
+      expect(cast<string>(123)).toBe(123)
+      expect(cast<number>("test")).toBe("test")
     })
   })
 })

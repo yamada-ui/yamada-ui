@@ -98,3 +98,23 @@ return (
 ## Props
 
 <PropsTable name="airy" />
+
+## アクセシビリティ
+
+`Airy`は、アクセシビリティに関して[WAI-ARIA - Button Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/button/)に従います。
+
+`aria-label`を設定すると、スクリーンリーダーによって読み上げられます。
+
+```tsx
+<Airy
+  aria-label="Menu"
+  from={<MenuIcon fontSize="2xl" />}
+  to={<XIcon fontSize="2xl" />}
+/>
+```
+
+### キーボード操作
+
+| キー             | 説明                                           | 状態 |
+| ---------------- | ---------------------------------------------- | ---- |
+| `Enter`, `Space` | フォーカスしているボタンをアクティブにします。 | -    |

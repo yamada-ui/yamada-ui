@@ -1,6 +1,8 @@
 import type { CSSAnimationObject } from "../../core"
 import { renderHook, waitFor } from "#test"
+import { StrictMode } from "react"
 import { useAnimation, useDynamicAnimation } from "."
+import { UIProvider } from "../../providers/ui-provider"
 
 describe("useAnimation", () => {
   test("should generate a single animation string", () => {
@@ -312,5 +314,109 @@ describe("useDynamicAnimation", () => {
     const { result } = renderHook(() => useDynamicAnimation(style))
 
     expect(result.current[0]).toBeUndefined()
+  })
+
+  test("Should work with array-based animations and single key", async () => {
+    const style: CSSAnimationObject[] = [
+      {
+        duration: "slower",
+        fillMode: "forwards",
+        keyframes: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(400%)" },
+        },
+        timingFunction: "ease-out",
+      },
+      {
+        duration: "slow",
+        fillMode: "forwards",
+        keyframes: {
+          "0%": { transform: "translateX(400%)" },
+          "100%": { transform: "translateX(0%)" },
+        },
+        timingFunction: "ease-in-out",
+      },
+    ]
+
+    const { result } = renderHook(() => useDynamicAnimation(style, 0))
+
+    expect(result.current[0]).toMatch(
+      /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-out\) 0s 1 normal forwards running/,
+    )
+
+    result.current[1](1)
+
+    await waitFor(() => {
+      expect(result.current[0]).toMatch(
+        /animation-.* var\(--ui-durations-slow\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running/,
+      )
+    })
+  })
+
+  test("Should work with array-based animations and multiple keys", async () => {
+    const style: CSSAnimationObject[] = [
+      {
+        duration: "slower",
+        fillMode: "forwards",
+        keyframes: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(400%)" },
+        },
+        timingFunction: "ease-out",
+      },
+      {
+        duration: "slow",
+        fillMode: "forwards",
+        keyframes: {
+          "0%": { transform: "translateX(400%)" },
+          "100%": { transform: "translateX(0%)" },
+        },
+        timingFunction: "ease-in-out",
+      },
+    ]
+
+    const { result } = renderHook(() => useDynamicAnimation(style, [0, 1]))
+
+    expect(result.current[0]).toMatch(
+      /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-out\) 0s 1 normal forwards running, animation-.* var\(--ui-durations-slow\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running/,
+    )
+
+    result.current[1]([1, 0])
+
+    await waitFor(() => {
+      expect(result.current[0]).toMatch(
+        /animation-.* var\(--ui-durations-slow\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-out\) 0s 1 normal forwards running/,
+      )
+    })
+  })
+
+  test("Should handle cache correctly in strict mode", () => {
+    const style: { [key: string]: CSSAnimationObject } = {
+      moveLeft: {
+        duration: "slower",
+        fillMode: "forwards",
+        keyframes: {
+          "0%": { transform: "translateX(400%)" },
+          "100%": { transform: "translateX(0%)" },
+        },
+        timingFunction: "ease-in-out",
+      },
+    }
+
+    const { result } = renderHook(
+      () => useDynamicAnimation(style, "moveLeft"),
+      {
+        withProvider: false,
+        wrapper: ({ children }) => (
+          <StrictMode>
+            <UIProvider>{children}</UIProvider>
+          </StrictMode>
+        ),
+      },
+    )
+
+    expect(result.current[0]).toMatch(
+      /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running/,
+    )
   })
 })

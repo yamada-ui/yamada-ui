@@ -13,6 +13,15 @@ describe("<Checkbox />", () => {
     await a11y(<Checkbox defaultChecked>checkbox</Checkbox>)
   })
 
+  test("sets `aria-checked` to mixed and native `indeterminate` when indeterminate", () => {
+    render(<Checkbox indeterminate>checkbox</Checkbox>)
+
+    const input = screen.getByRole("checkbox")
+
+    expect(input).toHaveAttribute("aria-checked", "mixed")
+    expect((input as HTMLInputElement).indeterminate).toBeTruthy()
+  })
+
   test("sets `displayName` correctly", () => {
     expect(Checkbox.displayName).toBe("CheckboxRoot")
     expect(CheckboxGroup.Root.displayName).toBe("CheckboxGroup")

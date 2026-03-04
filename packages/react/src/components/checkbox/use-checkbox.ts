@@ -113,6 +113,12 @@ export const useCheckbox = <Y extends string = string>({
   const trulyDisabled =
     !checked && isNumber(max) && group && group.value.length >= max
   const interactive = !(readOnly || trulyDisabled)
+  const indeterminateRef = useCallback(
+    (el: HTMLInputElement | null) => {
+      if (el) el.indeterminate = indeterminate
+    },
+    [indeterminate],
+  )
 
   const onChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {
@@ -160,7 +166,7 @@ export const useCheckbox = <Y extends string = string>({
         required,
         value,
         ...props,
-        ref: mergeRefs(props.ref, ref),
+        ref: mergeRefs(props.ref, ref, indeterminateRef),
         onBlur: handlerAll(props.onBlur, eventProps.onBlur),
         onChange: handlerAll(props.onChange, onChange),
         onFocus: handlerAll(props.onFocus, eventProps.onFocus),
@@ -173,15 +179,16 @@ export const useCheckbox = <Y extends string = string>({
       ariaProps,
       id,
       name,
-      indeterminate,
       checked,
       resolvedAriaDescribedby,
       interactive,
+      indeterminate,
       disabled,
       readOnly,
       required,
       value,
       ref,
+      indeterminateRef,
       eventProps,
       onChange,
       getGroupInputProps,

@@ -7,7 +7,11 @@ style: components/flip/flip.style.ts
 ---
 
 ```tsx preview
-<Flip from={<AppleIcon fontSize="2xl" />} to={<CherryIcon fontSize="2xl" />} />
+<Flip
+  aria-label="Toggle icon"
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
 ```
 
 ## Usage
@@ -38,6 +42,7 @@ To change the direction, set `orientation` to `"horizontal"` or `"vertical"`. By
 
 ```tsx preview
 <Flip
+  aria-label="Toggle icon"
   orientation="vertical"
   from={<AppleIcon fontSize="2xl" />}
   to={<CherryIcon fontSize="2xl" />}
@@ -50,6 +55,7 @@ To change the duration, set a numerical value (seconds) to `duration`.
 
 ```tsx preview
 <Flip
+  aria-label="Toggle icon"
   duration={1.4}
   from={<AppleIcon fontSize="2xl" />}
   to={<CherryIcon fontSize="2xl" />}
@@ -62,6 +68,7 @@ If you want to delay the switch, set a numerical value (seconds) to `delay`.
 
 ```tsx preview
 <Flip
+  aria-label="Toggle icon"
   delay={1}
   from={<AppleIcon fontSize="2xl" />}
   to={<CherryIcon fontSize="2xl" />}
@@ -74,6 +81,7 @@ To disable, set `disabled` to `true`.
 
 ```tsx preview
 <Flip
+  aria-label="Toggle icon"
   disabled
   from={<AppleIcon fontSize="2xl" />}
   to={<CherryIcon fontSize="2xl" />}
@@ -86,6 +94,7 @@ To ready-Only, set `readOnly` to `true`.
 
 ```tsx preview
 <Flip
+  aria-label="Toggle icon"
   readOnly
   from={<AppleIcon fontSize="2xl" />}
   to={<CherryIcon fontSize="2xl" />}
@@ -99,6 +108,7 @@ const [value, onChange] = useState<KeyframeIdent>("from")
 
 return (
   <Flip
+    aria-label="Toggle icon"
     from={<AppleIcon fontSize="2xl" />}
     to={<CherryIcon fontSize="2xl" />}
     value={value}

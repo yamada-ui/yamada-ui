@@ -10,6 +10,15 @@ describe("<Flip />", () => {
     a11y(<Flip from="ON" to="OFF" />)
   })
 
+  test("applies custom `aria-label`", () => {
+    render(<Flip aria-label="Toggle icon" from="ON" to="OFF" />)
+
+    expect(screen.getByRole("button")).toHaveAttribute(
+      "aria-label",
+      "Toggle icon",
+    )
+  })
+
   test("sets `displayName` correctly", () => {
     expect(Flip.displayName).toBe("FlipRoot")
   })

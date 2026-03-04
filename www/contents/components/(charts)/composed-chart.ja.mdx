@@ -1,0 +1,1283 @@
+---
+title: ComposedChart
+description: "`ComposedChart`は、複数のデータを比較するための複合チャートを描画するコンポーネントです。"
+status: new
+storybook: components-chart-composedchart--basic
+source: components/chart
+style: components/chart/composed-chart.style.ts
+---
+
+```tsx functional preview
+interface Data {
+  date: string
+  desktop: number
+  mobile: number
+  tablet: number
+}
+
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo<Data[]>(
+  () => [
+    {
+      date: "2026-03-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      date: "2026-04-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      date: "2026-05-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      date: "2026-06-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      date: "2026-07-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      date: "2026-08-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+  ],
+  [],
+)
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+## 使い方
+
+::::code-group
+
+```tsx [package]
+import { ComposedChart } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { ComposedChart } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { ComposedChart } from "@workspaces/ui"
+```
+
+::::
+
+```tsx
+<ComposedChart.Root>
+  <ComposedChart.Area />
+  <ComposedChart.Bar />
+  <ComposedChart.Line>
+    <ComposedChart.LabelList />
+  </ComposedChart.Line>
+  <ComposedChart.Label />
+  <ComposedChart.ReferenceLine />
+  <ComposedChart.Grid />
+  <ComposedChart.XAxis />
+  <ComposedChart.YAxis />
+  <ComposedChart.Tooltip />
+  <ComposedChart.Legend />
+</ComposedChart.Root>
+```
+
+### コンポジション
+
+```tsx preview functional
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root data={data}>
+    <ComposedChart.Legend />
+    <ComposedChart.Tooltip
+      labelFormatter={(value) => dayjs(value).format("MMM")}
+    />
+    <ComposedChart.XAxis
+      dataKey="date"
+      tickFormatter={(value) => dayjs(value).format("MMM")}
+    />
+    <ComposedChart.Bar color="blue" dataKey="desktop" />
+    <ComposedChart.Area color="green" dataKey="tablet" dot />
+    <ComposedChart.Line color="red" dataKey="mobile" dot>
+      <ComposedChart.LabelList />
+    </ComposedChart.Line>
+  </ComposedChart.Root>
+)
+```
+
+### サイズを変更する
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <For each={["xs", "sm", "md", "lg", "xl"]}>
+      {(size, index) => (
+        <ComposedChart.Root
+          key={index}
+          size={size}
+          data={data}
+          series={series}
+          tooltipProps={{
+            labelFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+          xAxisProps={{
+            dataKey: "date",
+            tickFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### カラースキームを変更する
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>(
+      [
+        [
+          "bar",
+          { dataKey: "desktop" },
+        ] satisfies ComposedChart.ComposedProps<Data>,
+        [
+          "area",
+          { dataKey: "tablet" },
+        ] satisfies ComposedChart.ComposedProps<Data>,
+        [
+          "line",
+          { dataKey: "mobile" },
+        ] satisfies ComposedChart.ComposedProps<Data>,
+      ],
+      "blue",
+    ),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    colorScheme="blue"
+    data={data}
+    series={series}
+    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### 色を変更する
+
+```tsx preview functional
+const series = useMemo<ComposedChart.ComposedProps<Data>[]>(
+  () => [
+    [
+      "bar",
+      { color: "blue", dataKey: "desktop" },
+    ] satisfies ComposedChart.ComposedProps<Data>,
+    [
+      "area",
+      { color: "green", dataKey: "tablet" },
+    ] satisfies ComposedChart.ComposedProps<Data>,
+    [
+      "line",
+      { color: "red", dataKey: "mobile" },
+    ] satisfies ComposedChart.ComposedProps<Data>,
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Y軸を表示する
+
+Y軸を表示する場合は、`withYAxis`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+また、`yAxisProps.orientation`に`"start"`や`"end"`を設定することで、Y軸の配置を変更できます。デフォルトは、`"start"`です。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{ orientation: "end" }}
+  />
+)
+```
+
+### 凡例を表示する
+
+凡例を表示する場合は、`withLegend`を`true`に設定します。デフォルトは、`false`です。また、凡例の配置を変更する場合は、`legendProps.placement`に`"start-start"`や`"end-end"`などを設定します。デフォルトは、`"start-end"`です。
+
+```tsx preview functional
+const series = useMemo<ComposedChart.ComposedProps<Data>[]>(
+  () => [
+    ["bar", { color: "blue", dataKey: "desktop" }],
+    ["area", { color: "green", dataKey: "tablet" }],
+    ["line", { color: "red", dataKey: "mobile" }],
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    withLegend
+    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### 項目名を変更する
+
+ツールチップや凡例の項目名を変更する場合は、`series`の`name`に文字列を設定します。
+
+```tsx preview functional
+const series = useMemo<ComposedChart.ComposedProps<Data>[]>(
+  () => [
+    ["bar", { name: "Desktop", color: "blue", dataKey: "desktop" }],
+    ["area", { name: "Tablet", color: "green", dataKey: "tablet" }],
+    ["line", { name: "Mobile", color: "red", dataKey: "mobile" }],
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    withLegend
+    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### グリッドを変更する
+
+グリッドを変更する場合は、`gridProps.horizontal`と`gridProps.vertical`に真偽値を設定します。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <For each={["xy", "x", "y", "none"]}>
+      {(value, index) => (
+        <ComposedChart.Root
+          key={index}
+          gridProps={{
+            horizontal: value.includes("x"),
+            vertical: value.includes("y"),
+          }}
+          data={data}
+          series={series}
+          xAxisProps={{
+            dataKey: "date",
+            tickFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### 線のタイプを変更する
+
+線のタイプを変更する場合は、`series`の`type`または`lineProps.type`または`areaProps.type`に`"monotone"`や`"linear"`などを設定します。デフォルトは、`"monotone"`です。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <For
+      each={[
+        "monotone",
+        "bump",
+        "linear",
+        "natural",
+        "step",
+        "stepBefore",
+        "stepAfter",
+      ]}
+    >
+      {(type, index) => (
+        <ComposedChart.Root
+          key={index}
+          data={data}
+          series={series}
+          areaProps={{ type }}
+          lineProps={{ type }}
+          tooltipProps={{
+            labelFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+          xAxisProps={{
+            dataKey: "date",
+            tickFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### 線のドットを表示する
+
+線のドットを表示する場合は、`series`の`dot`または`lineProps.dot`または`areaProps.dot`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    areaProps={{ dot: true }}
+    lineProps={{ dot: true }}
+    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### 棒を範囲にする
+
+棒を範囲にする場合は、`data`の項目の値を`[最小, 最大]`の配列に設定します。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(
+  () =>
+    Array.from({ length: 6 }, (_, index) => ({
+      date: dayjs().add(index, "month").format("YYYY-MM-DD"),
+      desktop: [
+        faker.number.int({ min: 1000, max: 2000 }),
+        faker.number.int({ min: 4000, max: 5000 }),
+      ],
+      mobile: faker.number.int({ min: 1000, max: 5000 }),
+      tablet: faker.number.int({ min: 1000, max: 5000 }),
+    })),
+  [],
+)
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### 棒を積み上げる
+
+棒を積み上げる場合は、`series`の`stackId`または`barProps.stackId`に文字列を設定します。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      ["bar", { dataKey: "desktop", radius: [0, 0, 4, 4] }],
+      ["bar", { dataKey: "tablet", radius: [4, 4, 0, 0] }],
+      ["line", { dataKey: "mobile" }],
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    barProps={{ stackId: "stack" }}
+    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### バーのサイズを変更する
+
+バーのサイズを変更する場合は、`series`の`barSize`または`barProps.barSize`に数値を設定します。デフォルトは、`40`です。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    barProps={{ barSize: 50 }}
+    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### 棒の角丸を変更する
+
+棒の角丸を変更する場合は、`series`の`radius`または`barProps.radius`に数値または配列を設定します。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    barProps={{ radius: 8 }}
+    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### 棒の間隔を変更する
+
+棒の間隔を変更する場合は、`chartProps.barCategoryGap`と`chartProps.barGap`に文字列または数値を設定します。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      ["bar", { dataKey: "desktop" }],
+      ["bar", { dataKey: "tablet" }],
+      ["line", { dataKey: "mobile" }],
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    chartProps={{ barGap: 16 }}
+    barProps={{ barSize: 20 }}
+    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### ラベルを表示する
+
+ラベルを表示する場合は、`series`の`label`または`lineProps.label`または`areaProps.label`または`barProps.label`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    lineProps={{ dot: true, label: true }}
+    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{ domain: [0, 10000], ticks: [0, 2500, 5000, 7500, 10000] }}
+  />
+)
+```
+
+### 単位を表示する
+
+単位を表示する場合は、`formatter`や`tickFormatter`を使用するか、`unit`に文字列を設定します。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    lineProps={{
+      dot: true,
+      label: { formatter: (value) => `${(Number(value) / 1000).toFixed(1)}k` },
+    }}
+    tooltipProps={{
+      formatter: (value) => `${(Number(value) / 1000).toFixed(1)}k`,
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      domain: [0, 10000],
+      tickFormatter: (value) => (value / 1000).toFixed(1),
+      ticks: [0, 2500, 5000, 7500, 10000],
+      unit: "k",
+    }}
+  />
+)
+```
+
+### 同期させる
+
+同期させる場合は、`syncId`に文字列を設定します。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <ComposedChart.Root
+      data={data}
+      series={series}
+      syncId="chart"
+      tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+      xAxisProps={{
+        dataKey: "date",
+        tickFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+    />
+    <ComposedChart.Root
+      data={data}
+      series={series}
+      syncId="chart"
+      tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+      xAxisProps={{
+        dataKey: "date",
+        tickFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+    />
+  </VStack>
+)
+```
+
+### フォーマットする
+
+フォーマットする場合は、`formatter`や`tickFormatter`などを使用します。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      formatter: (value, name = "") => [
+        Number(value).toLocaleString(),
+        toTitleCase(name),
+      ],
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{ tickFormatter: (value) => value.toLocaleString() }}
+  />
+)
+```
+
+### 基準線を表示する
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  >
+    <ComposedChart.ReferenceLine label="Reference line" y={3000} />
+    <ComposedChart.ReferenceLine
+      label={{ position: "insideTopLeft", value: "Reference line" }}
+      x={dayjs().add(3, "month").format("YYYY-MM-DD")}
+    />
+    <ComposedChart.ReferenceLine
+      label={{ position: "center", value: "Reference line" }}
+      segment={[
+        { x: dayjs().format("YYYY-MM-DD"), y: 0 },
+        { x: dayjs().add(3, "month").format("YYYY-MM-DD"), y: 3000 },
+      ]}
+    />
+  </ComposedChart.Root>
+)
+```
+
+### 目盛線を表示する
+
+目盛線を表示する場合は、`xAxisProps.tickLine`または`yAxisProps.tickLine`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+      tickLine: true,
+    }}
+    yAxisProps={{ tickLine: true }}
+  />
+)
+```
+
+### 軸のラベルを表示する
+
+軸のラベルを表示する場合は、`xAxisProps.label`または`yAxisProps.label`に文字列を設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    xAxisProps={{
+      dataKey: "date",
+      label: "Date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{ label: "Value" }}
+  />
+)
+```
+
+### 範囲を設定する
+
+範囲を設定する場合は、`yAxisProps.domain`に`[最小, 最大]`を設定します。間隔を設定する場合は、`yAxisProps.ticks`に配列を設定します。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{ domain: [0, 5000], ticks: [0, 1000, 2000, 3000, 4000, 5000] }}
+  />
+)
+```
+
+### ツールチップのカーソルを表示する
+
+ツールチップのカーソルを表示する場合は、`tooltipProps.cursor`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      cursor: true,
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### X軸を非表示にする
+
+X軸を非表示にする場合は、`withXAxis`を`false`に設定します。デフォルトは、`true`です。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    withXAxis={false}
+    chartProps={{ margin: { left: 0, right: 0 } }}
+    tooltipProps={{ labelFormatter: () => null }}
+  />
+)
+```
+
+### アクティブドットを非表示にする
+
+アクティブドットを非表示にする場合は、`series`の`activeDot`または`lineProps.activeDot`または`areaProps.activeDot`を`false`に設定します。デフォルトは、`true`です。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    areaProps={{ activeDot: false }}
+    lineProps={{ activeDot: false }}
+    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### ツールチップを非表示にする
+
+ツールチップを非表示にする場合は、`withTooltip`を`false`に設定します。デフォルトは、`true`です。
+
+```tsx preview functional
+const series = useMemo(
+  () =>
+    ComposedChart.mergeSeries<Data>([
+      [
+        "bar",
+        { dataKey: "desktop" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "area",
+        { dataKey: "tablet" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+      [
+        "line",
+        { dataKey: "mobile" },
+      ] satisfies ComposedChart.ComposedProps<Data>,
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <ComposedChart.Root
+    data={data}
+    series={series}
+    withTooltip={false}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+## Props
+
+<PropsTable
+  name="chart"
+  pick={[
+    "ComposedChart",
+    "ComposedChart.Root",
+    "ComposedChart.Area",
+    "ComposedChart.Bar",
+    "ComposedChart.Grid",
+    "ComposedChart.Label",
+    "ComposedChart.LabelList",
+    "ComposedChart.Legend",
+    "ComposedChart.Line",
+    "ComposedChart.ReferenceLine",
+    "ComposedChart.Tooltip",
+    "ComposedChart.XAxis",
+    "ComposedChart.YAxis",
+  ]}
+/>

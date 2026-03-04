@@ -679,6 +679,12 @@
               "pathname": "/docs/components/donut-chart"
             },
             {
+              "title": "ComposedChart",
+              "segment": "composed-chart",
+              "pathname": "/docs/components/composed-chart",
+              "status": "new"
+            },
+            {
               "title": "LineChart",
               "segment": "line-chart",
               "pathname": "/docs/components/line-chart"

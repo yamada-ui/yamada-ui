@@ -126,7 +126,7 @@ export const useAvatar = ({
         : undefined,
       children: fallbackMessage || initials || icon,
       hidden: !fallback,
-      role: "img",
+      role: !fallbackMessage ? "img" : undefined,
     }),
     [name, initials, fallback, icon, fallbackMessage, alt, t],
   )

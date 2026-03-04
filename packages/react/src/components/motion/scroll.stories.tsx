@@ -95,6 +95,7 @@ export const Viewport: Story = () => {
         overflow="scroll"
         p="md"
         rounded="l2"
+        tabIndex={0}
         w="full"
       >
         <Motion

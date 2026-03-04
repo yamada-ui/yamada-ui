@@ -1,7 +1,9 @@
 import {
   antonym,
+  bem,
   cx,
   escape,
+  isSize,
   toCamelCase,
   toKebabCase,
   toPascalCase,
@@ -85,6 +87,49 @@ describe("String", () => {
       expect(transformSize("9xl", 1)).toBe("9xl")
       expect(transformSize("md", 1)).toBe("lg")
       expect(transformSize("lg", -2)).toBe("sm")
+    })
+
+    test("should return undefined when token is undefined", () => {
+      expect(transformSize(undefined, 1)).toBeUndefined()
+    })
+
+    test("should skip omitted tokens", () => {
+      expect(transformSize("sm", 1, ["md"])).toBe("lg")
+    })
+  })
+
+  describe("isSize", () => {
+    test("should return true for valid size tokens", () => {
+      expect(isSize("xs")).toBeTruthy()
+      expect(isSize("sm")).toBeTruthy()
+      expect(isSize("md")).toBeTruthy()
+      expect(isSize("lg")).toBeTruthy()
+      expect(isSize("xl")).toBeTruthy()
+      expect(isSize("2xl")).toBeTruthy()
+    })
+
+    test("should return false for invalid values", () => {
+      expect(isSize("large")).toBeFalsy()
+      expect(isSize(123)).toBeFalsy()
+      expect(isSize(null)).toBeFalsy()
+    })
+  })
+
+  describe("bem", () => {
+    test("should return block only", () => {
+      expect(bem("button")).toBe("button")
+    })
+
+    test("should return block with element", () => {
+      expect(bem("button", "icon")).toBe("button__icon")
+    })
+
+    test("should return block with modifier", () => {
+      expect(bem("button", undefined, "primary")).toBe("button--primary")
+    })
+
+    test("should return block with element and modifier", () => {
+      expect(bem("button", "icon", "large")).toBe("button__icon--large")
     })
   })
 })

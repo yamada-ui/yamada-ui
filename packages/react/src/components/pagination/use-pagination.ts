@@ -139,11 +139,11 @@ export const usePagination = ({
 
   const getRootProps: PropGetter = useCallback(
     ({ ref, ...props } = {}) => ({
+      "aria-label": t("Pagination"),
+      role: "navigation",
       ...rest,
       ...props,
       ref: mergeRefs(ref, rest.ref),
-      "aria-label": t("Pagination"),
-      role: "navigation",
     }),
     [rest, t],
   )

@@ -184,6 +184,14 @@ describe("<Pagination />", () => {
     expect(screen.queryByLabelText("Go to next page")).not.toBeInTheDocument()
   })
 
+  test("applies custom `aria-label` to the nav element", () => {
+    render(<Pagination.Root aria-label="Custom Pagination" total={10} />)
+    expect(screen.getByRole("navigation")).toHaveAttribute(
+      "aria-label",
+      "Custom Pagination",
+    )
+  })
+
   test("should render custom component for item", () => {
     render(
       <Pagination.Root total={10}>

@@ -26,4 +26,17 @@ describe("useUpdateEffect", () => {
     renderHook(() => useUpdateEffect(effect, []))
     expect(effect).not.toHaveBeenCalled()
   })
+
+  test("should call effect on dependency change", () => {
+    const effect = vi.fn()
+    const { rerender } = renderHook(
+      ({ dep }) => useUpdateEffect(effect, [dep]),
+      { initialProps: { dep: 0 } },
+    )
+
+    expect(effect).not.toHaveBeenCalled()
+
+    rerender({ dep: 1 })
+    expect(effect).toHaveBeenCalledTimes(1)
+  })
 })

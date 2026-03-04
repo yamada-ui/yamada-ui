@@ -8,6 +8,7 @@ style: components/rotate/rotate.style.ts
 
 ```tsx preview
 <Rotate
+  aria-label="Toggle icon"
   from={<AppleIcon fontSize="2xl" />}
   to={<CherryIcon fontSize="2xl" />}
 />
@@ -41,6 +42,7 @@ To change the rotate, set `rotate` to a numerical value. By default, `45` is set
 
 ```tsx preview
 <Rotate
+  aria-label="Toggle icon"
   rotate={-360}
   from={<AppleIcon fontSize="2xl" />}
   to={<CherryIcon fontSize="2xl" />}
@@ -53,6 +55,7 @@ To change the duration, set a numerical value (seconds) to `duration`.
 
 ```tsx preview
 <Rotate
+  aria-label="Toggle icon"
   duration={1.4}
   from={<AppleIcon fontSize="2xl" />}
   to={<CherryIcon fontSize="2xl" />}
@@ -65,6 +68,7 @@ If you want to delay the switch, set a numerical value (seconds) to `delay`.
 
 ```tsx preview
 <Rotate
+  aria-label="Toggle icon"
   delay={1}
   from={<AppleIcon fontSize="2xl" />}
   to={<CherryIcon fontSize="2xl" />}
@@ -77,6 +81,7 @@ To disable, set `disabled` to `true`.
 
 ```tsx preview
 <Rotate
+  aria-label="Toggle icon"
   disabled
   from={<AppleIcon fontSize="2xl" />}
   to={<CherryIcon fontSize="2xl" />}
@@ -89,6 +94,7 @@ To ready-Only, set `readOnly` to `true`.
 
 ```tsx preview
 <Rotate
+  aria-label="Toggle icon"
   readOnly
   from={<AppleIcon fontSize="2xl" />}
   to={<CherryIcon fontSize="2xl" />}
@@ -102,6 +108,7 @@ const [value, onChange] = useState<KeyframeIdent>("from")
 
 return (
   <Rotate
+    aria-label="Toggle icon"
     from={<AppleIcon fontSize="2xl" />}
     to={<CherryIcon fontSize="2xl" />}
     value={value}

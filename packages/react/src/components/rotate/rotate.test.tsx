@@ -9,6 +9,15 @@ describe("<Rotate />", () => {
     a11y(<Rotate from="ON" to="OFF" />)
   })
 
+  test("applies custom `aria-label`", () => {
+    render(<Rotate aria-label="Toggle icon" from="ON" to="OFF" />)
+
+    expect(screen.getByRole("button")).toHaveAttribute(
+      "aria-label",
+      "Toggle icon",
+    )
+  })
+
   test("sets `displayName` correctly", () => {
     expect(Rotate.displayName).toBe("Rotate")
   })

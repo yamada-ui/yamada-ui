@@ -1,0 +1,1 @@
+import{d as o}from"./iframe-B_bR2KLr.js";const e=o({base:{content:{bg:"bg.float",borderColor:"border.muted",borderWidth:"1px",boxShadow:"sm",fontSize:"sm",maxW:"xs",position:"relative",px:"sm",py:"xs",rounded:"l2"},positioner:{zIndex:"ginyu"}}});export{e as t};

@@ -201,9 +201,7 @@ return (
 )
 ```
 
-### カラーを変更する
-
-カラーを変更する場合は、`series.color`または`lineProps.color`に色を設定します。デフォルトは、`"mono.500"`です。
+### 色を変更する
 
 ```tsx preview functional
 const series = useMemo<LineChart.LineProps<Data>[]>(
@@ -233,7 +231,7 @@ return (
 
 ### タイプを変更する
 
-タイプを変更する場合は、`type`または`lineProps.type`に`"monotone"`や`"linear"`などを設定します。デフォルトは、`"monotone"`です。
+タイプを変更する場合は、`series`の`type`または`lineProps.type`に`"monotone"`や`"linear"`などを設定します。デフォルトは、`"monotone"`です。
 
 ```tsx preview functional
 const series = useMemo<LineChart.LineProps<Data>[]>(
@@ -378,7 +376,7 @@ return (
 
 ### 項目名を変更する
 
-ツールチップや凡例の項目名を変更する場合は、`series.name`に文字列を設定します。
+ツールチップや凡例の項目名を変更する場合は、`series`の`name`に文字列を設定します。
 
 ```tsx preview functional
 const series = useMemo<LineChart.LineProps<Data>[]>(
@@ -840,7 +838,7 @@ return (
 
 ### アクティブドットを非表示にする
 
-アクティブドットを非表示にする場合は、`activeDot`または`lineProps.activeDot`を`false`に設定します。デフォルトは、`true`です。
+アクティブドットを非表示にする場合は、`series`の`activeDot`または`lineProps.activeDot`を`false`に設定します。デフォルトは、`true`です。
 
 ```tsx preview functional
 const series = useMemo<LineChart.LineProps<Data>[]>(

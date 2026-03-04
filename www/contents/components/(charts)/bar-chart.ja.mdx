@@ -201,9 +201,7 @@ return (
 )
 ```
 
-### カラーを変更する
-
-カラーを変更する場合は、`series.color`または`barProps.color`に色を設定します。デフォルトは、`"mono.500"`です。
+### 色を変更する
 
 ```tsx preview functional
 const series = useMemo<BarChart.BarProps<Data>[]>(
@@ -277,7 +275,7 @@ return (
 
 ### 積み上げる
 
-積み上げる場合は、`stackId`または`barProps.stackId`に文字列を設定します。
+積み上げる場合は、`series`の`stackId`または`barProps.stackId`に文字列を設定します。
 
 ```tsx preview functional
 const series = useMemo<BarChart.BarProps<Data>[]>(
@@ -449,7 +447,7 @@ return (
 
 ### 項目名を変更する
 
-ツールチップや凡例の項目名を変更する場合は、`series.name`に文字列を設定します。
+ツールチップや凡例の項目名を変更する場合は、`series`の`name`に文字列を設定します。
 
 ```tsx preview functional
 const series = useMemo<BarChart.BarProps<Data>[]>(
@@ -889,7 +887,7 @@ return (
 
 ### 角丸を変更する
 
-角丸を変更する場合は、`series.radius`または`barProps.radius`に数値または配列を設定します。
+角丸を変更する場合は、`series`の`radius`または`barProps.radius`に数値または配列を設定します。
 
 ```tsx preview functional
 const series = useMemo<BarChart.BarProps<Data>[]>(

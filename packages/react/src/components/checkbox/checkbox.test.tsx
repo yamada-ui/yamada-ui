@@ -41,6 +41,19 @@ describe("<Checkbox />", () => {
     expect(checkbox?.parentElement?.children[2]?.tagName).toBe("SPAN")
   })
 
+  test("renders children as label text", () => {
+    render(<Checkbox>test</Checkbox>)
+    expect(screen.getByText("test")).toBeInTheDocument()
+    expect(screen.getByText("test").tagName).toBe("SPAN")
+    expect(screen.getByText("test")).toHaveClass("ui-checkbox__label")
+  })
+
+  test("does not render label when children is not provided", () => {
+    render(<Checkbox data-testid="checkbox" />)
+    const checkbox = screen.getByTestId("checkbox")
+    expect(checkbox.querySelector(".ui-checkbox__label")).toBeNull()
+  })
+
   test("should set `aria-checked` to `mixed` when indeterminate", () => {
     render(<Checkbox indeterminate>checkbox</Checkbox>)
     expect(screen.getByRole("checkbox")).toHaveAttribute(

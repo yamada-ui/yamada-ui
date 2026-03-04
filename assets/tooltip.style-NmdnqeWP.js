@@ -1,1 +1,0 @@
-import{d as o}from"./iframe-aH-fNnWG.js";const e=o({base:{content:{bg:"bg.float",borderColor:"border.muted",borderWidth:"1px",boxShadow:"sm",fontSize:"sm",maxW:"xs",position:"relative",px:"sm",py:"xs",rounded:"l2"},positioner:{zIndex:"ginyu"}}});export{e as t};

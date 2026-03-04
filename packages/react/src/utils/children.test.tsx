@@ -1,10 +1,15 @@
 import {
+  findChild,
   findChildren,
   getValidChildren,
   includesChildren,
+  isSomeDisplayName,
+  isSomeElement,
   isValidElement,
   omitChildren,
   pickChildren,
+  splitChildren,
+  wrapOrPassProps,
 } from "./children"
 
 describe("getValidChildren", () => {
@@ -121,5 +126,99 @@ describe("pickChildren", () => {
     expect(pickedChildren).toHaveLength(2)
     expect(pickedChildren.some((child) => child.type === "span")).toBeTruthy()
     expect(pickedChildren.some((child) => child.type === "div")).toBeTruthy()
+  })
+})
+
+describe("isSomeDisplayName", () => {
+  test("should return false when either argument is undefined", () => {
+    expect(isSomeDisplayName(undefined, "test")).toBeFalsy()
+    expect(isSomeDisplayName("test", undefined)).toBeFalsy()
+  })
+
+  test("should match by displayName", () => {
+    const a = { displayName: "MyComponent" }
+    const b = { displayName: "MyComponent" }
+    expect(isSomeDisplayName(a, b)).toBeTruthy()
+  })
+
+  test("should match by name", () => {
+    const a = { name: "MyComponent" }
+    const b = { name: "MyComponent" }
+    expect(isSomeDisplayName(a, b)).toBeTruthy()
+  })
+
+  test("should match array includes", () => {
+    expect(isSomeDisplayName(["div", "span"], "span")).toBeTruthy()
+    expect(isSomeDisplayName(["div", "span"], "section")).toBeFalsy()
+  })
+
+  test("should match array with displayName", () => {
+    const b = { displayName: "span" }
+    expect(isSomeDisplayName(["span"], b)).toBeTruthy()
+  })
+})
+
+describe("isSomeElement", () => {
+  test("should return false when either argument is undefined", () => {
+    expect(isSomeElement(undefined, "test")).toBeFalsy()
+  })
+
+  test("should return true when both are the same", () => {
+    expect(isSomeElement("div", "div")).toBeTruthy()
+  })
+})
+
+describe("findChild", () => {
+  test("should find child of specified type", () => {
+    const children = [<div key="1">Div</div>, <span key="2">Span</span>]
+    const found = findChild(children, "span")
+    expect(found?.type).toBe("span")
+  })
+
+  test("should return undefined if not found", () => {
+    const children = [<div key="1">Div</div>]
+    const found = findChild(children, "span")
+    expect(found).toBeUndefined()
+  })
+})
+
+describe("splitChildren", () => {
+  test("should split children by type", () => {
+    const children = [
+      <div key="1">Div</div>,
+      <span key="2">Span</span>,
+      <section key="3">Section</section>,
+    ]
+    const [rest, spans] = splitChildren(children, "span")
+    expect(spans).toHaveLength(1)
+    expect(rest as any[]).toHaveLength(2)
+  })
+
+  test("should return children as-is when no valid children", () => {
+    const result = splitChildren(null, "span")
+    expect(result).toStrictEqual([null])
+  })
+})
+
+describe("wrapOrPassProps", () => {
+  test("should return null for undefined", () => {
+    const Component = ({ children }: { children?: React.ReactNode }) => (
+      <div>{children}</div>
+    )
+    expect(wrapOrPassProps(Component, undefined)).toBeNull()
+  })
+
+  test("should wrap valid element as children", () => {
+    const Component = ({ children }: { children?: React.ReactNode }) => (
+      <div>{children}</div>
+    )
+    const result = wrapOrPassProps(Component, "hello")
+    expect(result).not.toBeNull()
+  })
+
+  test("should pass props when nodeOrProps is not a valid element", () => {
+    const Component = ({ title }: { title: string }) => <div>{title}</div>
+    const result = wrapOrPassProps(Component, { title: "test" } as any)
+    expect(result).not.toBeNull()
   })
 })

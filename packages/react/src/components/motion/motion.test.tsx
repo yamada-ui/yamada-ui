@@ -6,6 +6,17 @@ describe("<Motion />", () => {
     await a11y(<Motion />)
   })
 
+  test("applies custom `aria-label`", () => {
+    render(
+      <Motion as="button" aria-label="Toggle layout" data-testid="motion" />,
+    )
+
+    expect(screen.getByTestId("motion")).toHaveAttribute(
+      "aria-label",
+      "Toggle layout",
+    )
+  })
+
   test("sets `displayName` correctly", () => {
     expect(Motion.name).toBe("Motion")
   })

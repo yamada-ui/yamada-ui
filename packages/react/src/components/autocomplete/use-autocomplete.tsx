@@ -557,14 +557,14 @@ export const useAutocomplete = <Multiple extends boolean = false>(
 
   const onBlur = useCallback(
     (ev: FocusEvent<HTMLInputElement>) => {
-      setFocused(false)
-
       if (
         contains(fieldRef.current, ev.relatedTarget) ||
         contains(contentRef.current, ev.relatedTarget)
       ) {
         ev.preventDefault()
       } else {
+        setFocused(false)
+
         if (isArray(value)) {
           setInputValue("")
         } else {

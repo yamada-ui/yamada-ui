@@ -40,6 +40,14 @@ describe("<Checkbox />", () => {
     expect(checkbox?.parentElement?.children[1]?.tagName).toBe("DIV")
     expect(checkbox?.parentElement?.children[2]?.tagName).toBe("SPAN")
   })
+
+  test("should set `aria-checked` to `mixed` when indeterminate", () => {
+    render(<Checkbox indeterminate>checkbox</Checkbox>)
+    expect(screen.getByRole("checkbox")).toHaveAttribute(
+      "aria-checked",
+      "mixed",
+    )
+  })
 })
 
 describe("<CheckboxGroup />", () => {

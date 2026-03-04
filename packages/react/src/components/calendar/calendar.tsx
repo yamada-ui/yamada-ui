@@ -333,10 +333,10 @@ export const CalendarRoot = withProvider(
   ): ReactElement
 }>
 
-export interface CalendarNavigationProps extends HTMLStyledProps<"nav"> {}
+export interface CalendarNavigationProps extends HTMLStyledProps {}
 
-export const CalendarNavigation = withContext<"nav", CalendarNavigationProps>(
-  "nav",
+export const CalendarNavigation = withContext<"div", CalendarNavigationProps>(
+  "div",
   ["row", "navigation"],
 )(undefined, ({ children, ...rest }) => {
   const { getNavigationProps, navigationProps } = useComponentContext()

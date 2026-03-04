@@ -164,6 +164,7 @@ export const Layout: Story = () => {
   return (
     <Box
       as="button"
+      aria-label="Toggle layout"
       bg="mono"
       display="flex"
       h="8"
@@ -192,6 +193,7 @@ export const GroupLayout: Story = () => {
     return (
       <Motion
         as="button"
+        aria-label="Toggle accordion"
         bg="mono"
         display="flex"
         h="16"

@@ -91,6 +91,32 @@ describe("<Toggle />", () => {
     expect(screen.getByRole("button")).not.toHaveAttribute("data-checked")
   })
 
+  test("should handle hidden checkbox change event", async () => {
+    const onChange = vi.fn()
+    const { user } = render(<Toggle onChange={onChange}>Toggle</Toggle>)
+
+    const checkbox = screen.getByRole("checkbox", { hidden: true })
+    await user.click(checkbox)
+    expect(onChange).toHaveBeenLastCalledWith(true)
+
+    await user.click(checkbox)
+    expect(onChange).toHaveBeenLastCalledWith(false)
+  })
+
+  test("should handle hidden checkbox change event in toggle group", async () => {
+    const onChange = vi.fn()
+    const { user } = render(
+      <ToggleGroup.Root defaultValue={[]} onChange={onChange}>
+        <ToggleGroup.Item value="a">A</ToggleGroup.Item>
+        <ToggleGroup.Item value="b">B</ToggleGroup.Item>
+      </ToggleGroup.Root>,
+    )
+
+    const checkboxes = screen.getAllByRole("checkbox", { hidden: true })
+    await user.click(checkboxes[0]!)
+    expect(onChange).toHaveBeenCalledWith(["a"])
+  })
+
   test("should warn when value is not provided in controlled mode", () => {
     vi.spyOn(console, "warn").mockImplementation(noop)
 

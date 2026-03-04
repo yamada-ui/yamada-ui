@@ -51,6 +51,25 @@ describe("<Checkbox />", () => {
 })
 
 describe("<CheckboxGroup />", () => {
+  test("should render with children", () => {
+    render(
+      <CheckboxGroup.Root>
+        <Checkbox value="1">Item1</Checkbox>
+      </CheckboxGroup.Root>,
+    )
+
+    expect(screen.getByText("Item1")).toBeInTheDocument()
+  })
+
+  test("should render items without value", () => {
+    render(
+      <CheckboxGroup.Root items={[{ label: "Item1" }, { label: "Item2" }]} />,
+    )
+
+    expect(screen.getByText("Item1")).toBeInTheDocument()
+    expect(screen.getByText("Item2")).toBeInTheDocument()
+  })
+
   test("should handle onChange callback when checking checkboxes", () => {
     const onChange = vi.fn()
     render(<CheckboxGroup.Root items={items} onChange={onChange} />)

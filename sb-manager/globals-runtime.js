@@ -61029,9 +61029,9 @@ var init12 = ({
         return;
       await api.setIndex(index4);
       let refs = await fullAPI.getRefs();
-      Object.entries(refs).forEach(([refId, { internal_index, ...ref }]) => {
-        fullAPI.setRef(refId, { ...ref, storyIndex: internal_index }, !0);
-      }), provider.channel?.emit(SET_FILTER, { id });
+      for (let [refId, { internal_index, ...ref }] of Object.entries(refs))
+        await fullAPI.setRef(refId, { ...ref, storyIndex: internal_index }, !0);
+      provider.channel?.emit(SET_FILTER, { id });
     }
   };
   provider.channel?.on(
@@ -62127,7 +62127,7 @@ var parseBoolean = (value) => {
       } = options;
       if (refId && !refs[refId])
         throw new Error(`Invalid refId: ${refId}`);
-      let pathname = location4.pathname || "/", originAddress = scope.window.location.origin + pathname, networkAddress = scope.STORYBOOK_NETWORK_ADDRESS ?? originAddress, managerBase = base === "origin" ? originAddress : base === "network" ? networkAddress : pathname, previewBase = refId ? refs[refId].url + "/iframe.html" : scope.PREVIEW_URL || `${managerBase.replace(/\/[^/]*$/, "/")}iframe.html`, refParam = refId ? `&refId=${encodeURIComponent(refId)}` : "", { args = "", globals = "", ...otherParams } = queryParams, argsParam = inheritArgs ? mergeSerializedParams(customQueryParams?.args ?? "", args) : args, globalsParam = inheritGlobals ? mergeSerializedParams(customQueryParams?.globals ?? "", globals) : globals, customManagerParams = (0, import_picoquery5.stringify)(otherParams, {
+      let pathname = location4.pathname || "/", originAddress = scope.window.location.origin + pathname, networkAddress = scope.STORYBOOK_NETWORK_ADDRESS ?? originAddress, managerBase = base === "origin" ? originAddress : base === "network" ? networkAddress : pathname, previewBase = refId ? refs[refId].url + "/iframe.html" : scope.PREVIEW_URL || `${managerBase.replace(/\/[^/]*\.html$/, "").replace(/\/?$/, "/")}iframe.html`, refParam = refId ? `&refId=${encodeURIComponent(refId)}` : "", { args = "", globals = "", ...otherParams } = queryParams, argsParam = inheritArgs ? mergeSerializedParams(customQueryParams?.args ?? "", args) : args, globalsParam = inheritGlobals ? mergeSerializedParams(customQueryParams?.globals ?? "", globals) : globals, customManagerParams = (0, import_picoquery5.stringify)(otherParams, {
         nesting: !0,
         nestingSyntax: "js"
       }), customPreviewParams = (0, import_picoquery5.stringify)(omit(otherParams, ["id", "viewMode"]), {
@@ -62202,7 +62202,7 @@ init_dist();
 var import_memoizerific8 = __toESM(require_memoizerific(), 1), import_semver = __toESM(require_semver2(), 1);
 
 // src/manager-api/version.ts
-var version = "10.2.14";
+var version = "10.2.15";
 
 // src/manager-api/modules/versions.ts
 var { VERSIONCHECK } = scope, getVersionCheckData = (0, import_memoizerific8.default)(1)(() => {

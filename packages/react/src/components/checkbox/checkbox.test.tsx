@@ -61,6 +61,14 @@ describe("<Checkbox />", () => {
       "mixed",
     )
   })
+
+  test("should set `checked` to `true` when clicking indeterminate checkbox", () => {
+    render(<Checkbox indeterminate>checkbox</Checkbox>)
+    const checkbox = screen.getByRole("checkbox") as HTMLInputElement
+
+    fireEvent.click(checkbox)
+    expect(checkbox.checked).toBeTruthy()
+  })
 })
 
 describe("<CheckboxGroup />", () => {

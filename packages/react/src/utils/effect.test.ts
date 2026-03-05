@@ -9,6 +9,23 @@ describe("useSafeLayoutEffect", () => {
   test("should use useLayoutEffect when document is defined", () => {
     expect(useSafeLayoutEffect).toBeDefined()
   })
+
+  test("should use useEffect when document is not defined", async () => {
+    vi.resetModules()
+
+    const originalDocument = globalThis.document
+    // @ts-ignore
+    delete globalThis.document
+
+    try {
+      const { useSafeLayoutEffect: ssrEffect } = await import("./effect")
+      const React = await import("react")
+
+      expect(ssrEffect).toBe(React.useEffect)
+    } finally {
+      globalThis.document = originalDocument
+    }
+  })
 })
 
 describe("useUnmountEffect", () => {

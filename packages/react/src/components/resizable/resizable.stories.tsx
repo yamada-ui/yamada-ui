@@ -359,7 +359,7 @@ export const OnResize: Story = () => {
   )
 }
 
-export const LocaleStorage: Story = () => {
+export const LocalStorage: Story = () => {
   const { defaultLayout, onLayoutChanged } = Resizable.useLayout({
     id: "persistence",
     storage: localStorage,
@@ -386,7 +386,7 @@ export const LocaleStorage: Story = () => {
   )
 }
 
-export const ConditionalLocaleStorage: Story = () => {
+export const ConditionalLocalStorage: Story = () => {
   const [showLeft, showLeftControls] = useLocalStorage({
     key: "showLeft",
     defaultValue: true,

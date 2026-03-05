@@ -39,6 +39,7 @@
     "typecheck:playgrounds": "turbo run typecheck --filter=./playgrounds/**",
     "test": "turbo run test --filter=./packages/**",
     "test:coverage": "turbo run test:coverage --filter=./packages/**",
+    "test:coverage:merge": "turbo run test:coverage:merge --filter=./packages/react --filter=./packages/utils",
     "test:chromium": "turbo run test:chromium --filter=./packages/react",
     "test:firefox": "turbo run test:firefox --filter=./packages/react",
     "test:webkit": "turbo run test:webkit --filter=./packages/react",

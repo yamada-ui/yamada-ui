@@ -18,6 +18,11 @@
       "dependsOn": ["transit"],
       "outputs": ["coverage/**"]
     },
+    "test:coverage:merge": {
+      "dependsOn": ["transit"],
+      "inputs": [".vitest-reports/**", "vitest.config.ts", "package.json"],
+      "outputs": ["coverage/**"]
+    },
     "test:chromium": {
       "dependsOn": ["transit"]
     },

@@ -34,6 +34,7 @@
     "build": "tsdown",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
+    "test:coverage:merge": "vitest --merge-reports --coverage.enabled --coverage.reporter=json",
     "test:dev": "vitest --watch --ui",
     "typecheck": "tsc --noEmit",
     "typetrace": "tsc --noEmit --generateTrace ./trace --incremental false",

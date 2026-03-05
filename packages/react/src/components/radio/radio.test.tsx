@@ -1,6 +1,8 @@
 import { a11y, fireEvent, render, screen } from "#test"
+import { useState } from "react"
 import { RadioGroup } from "."
 import { Radio } from "./radio"
+import { useRadioGroupContext } from "./use-radio-group"
 
 const items = [
   { label: "Item 1", value: "1" },
@@ -136,5 +138,97 @@ describe("<Radio />", () => {
 
     expect(radios[0]).not.toBeChecked()
     expect(radios[1]).toBeChecked()
+  })
+
+  test("should handle controlled value in group", () => {
+    const ControlledGroup = () => {
+      const [value, setValue] = useState("1")
+
+      return (
+        <RadioGroup.Root value={value} onChange={setValue}>
+          <Radio value="1">Option 1</Radio>
+          <Radio value="2">Option 2</Radio>
+        </RadioGroup.Root>
+      )
+    }
+
+    render(<ControlledGroup />)
+
+    const radios = screen.getAllByRole("radio")
+
+    expect(radios[0]).toBeChecked()
+    expect(radios[1]).not.toBeChecked()
+
+    fireEvent.click(radios[1]!)
+
+    expect(radios[0]).not.toBeChecked()
+    expect(radios[1]).toBeChecked()
+  })
+
+  test("should check standalone radio on click", () => {
+    render(<Radio>Standalone</Radio>)
+
+    const radio = screen.getByRole("radio")
+
+    expect(radio).not.toBeChecked()
+
+    fireEvent.click(radio)
+
+    expect(radio).toBeChecked()
+  })
+
+  test("should call onChange for standalone radio", () => {
+    const onChange = vi.fn()
+
+    render(<Radio onChange={onChange}>Standalone</Radio>)
+
+    const radio = screen.getByRole("radio")
+
+    fireEvent.click(radio)
+
+    expect(onChange).toHaveBeenCalledTimes(1)
+  })
+
+  test("should call group onChange with string value via context", () => {
+    const onChangeMock = vi.fn()
+
+    const ContextConsumer = () => {
+      const group = useRadioGroupContext()
+
+      return (
+        <button data-testid="trigger" onClick={() => group?.onChange("3")}>
+          Set to 3
+        </button>
+      )
+    }
+
+    render(
+      <RadioGroup.Root defaultValue="1" onChange={onChangeMock}>
+        <Radio value="1">Option 1</Radio>
+        <Radio value="2">Option 2</Radio>
+        <ContextConsumer />
+      </RadioGroup.Root>,
+    )
+
+    fireEvent.click(screen.getByTestId("trigger"))
+
+    expect(onChangeMock).toHaveBeenCalledWith("3")
+  })
+
+  test("should call group onChange callback on radio click", () => {
+    const onChangeMock = vi.fn()
+
+    render(
+      <RadioGroup.Root onChange={onChangeMock}>
+        <Radio value="1">Option 1</Radio>
+        <Radio value="2">Option 2</Radio>
+      </RadioGroup.Root>,
+    )
+
+    const radios = screen.getAllByRole("radio")
+
+    fireEvent.click(radios[0]!)
+
+    expect(onChangeMock).toHaveBeenCalledWith("1")
   })
 })

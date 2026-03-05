@@ -36,6 +36,12 @@ describe("Number", () => {
       expect(countDecimal(123.456)).toBe(3)
       expect(countDecimal(123)).toBe(0)
     })
+
+    test("should return 0 for non-finite numbers", () => {
+      expect(countDecimal(Infinity)).toBe(0)
+      expect(countDecimal(-Infinity)).toBe(0)
+      expect(countDecimal(NaN)).toBe(0)
+    })
   })
 
   describe("roundNumberToStep", () => {

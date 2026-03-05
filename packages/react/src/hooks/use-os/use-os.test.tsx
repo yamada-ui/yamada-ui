@@ -1,9 +1,13 @@
-import { renderHook } from "#test/browser"
-import { useOS } from "./"
+import { renderHook } from "#test"
 
 describe("useOS", () => {
   beforeEach(() => {
     vi.unstubAllGlobals()
+  })
+
+  afterEach(() => {
+    vi.doUnmock("../../core")
+    vi.resetModules()
   })
 
   test.each([
@@ -62,7 +66,24 @@ describe("useOS", () => {
   ])("should return $expected", async ({ expected, userAgent }) => {
     vi.stubGlobal("navigator", { userAgent })
 
-    const { result } = await renderHook(() => useOS())
+    const { useOS } = await import("./")
+    const { result } = renderHook(() => useOS())
+
     expect(result.current).toBe(expected)
+  })
+
+  test("returns undetermined when window is undefined", async () => {
+    vi.resetModules()
+
+    vi.doMock("../../core", () => ({
+      useEnvironment: () => ({
+        getWindow: () => undefined,
+      }),
+    }))
+
+    const { useOS } = await import("./")
+    const { result } = renderHook(() => useOS())
+
+    expect(result.current).toBe("undetermined")
   })
 })

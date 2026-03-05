@@ -1,4 +1,4 @@
-import { toPascalCase } from "@yamada-ui/utils"
+import { toKebabCase, toPascalCase } from "@yamada-ui/utils"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
 import { execa } from "execa"
 import { readdir, readFile } from "fs/promises"
@@ -9,16 +9,57 @@ import { rimraf } from "rimraf"
 
 const REPOSITORY_PATH = path.resolve(".lucide")
 const DIST_PATH = path.resolve("data", "icons.json")
+const MAX_RELATED_ICONS = 68
+const NAME_WEIGHT = 5
+const KEYWORD_WEIGHT = 4
+const CATEGORY_WEIGHT = 3
 
-async function getKeywords(fileName: string): Promise<string[]> {
+interface Data {
+  categories: string[]
+  keywords: string[]
+  related: string[]
+}
+
+async function getData(fileName: string): Promise<Data> {
   const data = await readFile(
     path.resolve(REPOSITORY_PATH, "icons", fileName),
     "utf-8",
   )
 
-  const { tags = [] } = JSON.parse(data || "{}")
+  const { categories = [], tags: keywords = [] } = JSON.parse(data || "{}")
 
-  return tags
+  return { categories, keywords, related: [] }
+}
+
+function nameParts(name: string) {
+  return toKebabCase(name)
+    .split("-")
+    .filter((part) => part.length > 2)
+}
+
+function arrayMatches(a: string[], b: string[]) {
+  return a.filter((item) => b.includes(item)).length
+}
+
+function getRelatedData(data: { [key: string]: Data }) {
+  return function (currentName: string, currentData: Data) {
+    function iconSimilarity(name: string, data: Data) {
+      return (
+        NAME_WEIGHT * arrayMatches(nameParts(name), nameParts(currentName)) +
+        CATEGORY_WEIGHT *
+          arrayMatches(data.categories, currentData.categories) +
+        KEYWORD_WEIGHT * arrayMatches(data.keywords, currentData.keywords)
+      )
+    }
+
+    return Object.entries(data)
+      .filter(([name]) => name !== currentName)
+      .map(([name, data]) => [name, iconSimilarity(name, data)] as const)
+      .filter((a) => a[1] > 0)
+      .sort((a, b) => b[1] - a[1])
+      .map(([name]) => name)
+      .slice(0, MAX_RELATED_ICONS)
+  }
 }
 
 async function main() {
@@ -48,9 +89,9 @@ async function main() {
 
   spinner.succeed(`Got icons`)
 
-  const data: { [key: string]: string[] } = {}
+  const data: { [key: string]: Data } = {}
 
-  spinner.start(`Getting keywords`)
+  spinner.start(`Getting keywords and categories`)
 
   await Promise.all(
     fileNames.map(async (fileName) => {
@@ -58,11 +99,19 @@ async function main() {
 
       const iconName = fileName.replace(".json", "")
 
-      data[`${toPascalCase(iconName)}Icon`] = await getKeywords(fileName)
+      data[`${toPascalCase(iconName)}Icon`] = await getData(fileName)
     }),
   )
 
-  spinner.succeed(`Got keywords`)
+  spinner.succeed(`Got keywords and categories`)
+
+  spinner.start(`Getting related icons`)
+
+  Object.entries(data).forEach(([currentName, currentData]) => {
+    currentData.related = getRelatedData(data)(currentName, currentData)
+  })
+
+  spinner.succeed(`Got related icons`)
 
   spinner.start(`Writing data`)
 

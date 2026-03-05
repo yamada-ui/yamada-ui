@@ -62,4 +62,24 @@ describe("<Alert />", () => {
 
     expect(screen.getByRole("alert")).toBeInTheDocument()
   })
+
+  test("renders Alert.Loading with default loadingScheme", () => {
+    render(
+      <Alert.Root status="loading">
+        <Alert.Loading data-testid="loading" />
+      </Alert.Root>,
+    )
+
+    expect(screen.getByTestId("loading")).toBeInTheDocument()
+  })
+
+  test("renders Alert.Loading with custom loadingScheme", () => {
+    render(
+      <Alert.Root status="loading">
+        <Alert.Loading data-testid="loading" loadingScheme="dots" />
+      </Alert.Root>,
+    )
+
+    expect(screen.getByTestId("loading")).toBeInTheDocument()
+  })
 })

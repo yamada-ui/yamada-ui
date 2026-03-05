@@ -112,4 +112,16 @@ describe("<Input />", () => {
     const input = await screen.findByRole("textbox")
     expect(input).toHaveAttribute("size", "4")
   })
+
+  test("renders correctly with errorBorderColor", () => {
+    render(<Input errorBorderColor="red.500" />)
+
+    expect(screen.getByRole("textbox")).toBeInTheDocument()
+  })
+
+  test("renders correctly with focusBorderColor", () => {
+    render(<Input focusBorderColor="blue.500" />)
+
+    expect(screen.getByRole("textbox")).toBeInTheDocument()
+  })
 })

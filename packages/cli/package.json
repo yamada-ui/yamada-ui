@@ -52,7 +52,7 @@
     "diff": "^8.0.3",
     "esbuild": "^0.27.3",
     "eslint": "^9.39.3",
-    "execa": "9.3.1",
+    "execa": "9.6.1",
     "glob": "^13.0.6",
     "https-proxy-agent": "^7.0.6",
     "listr2": "^10.2.1",

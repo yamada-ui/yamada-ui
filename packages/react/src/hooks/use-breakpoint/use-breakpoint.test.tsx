@@ -27,6 +27,61 @@ describe("useBreakpoint", () => {
     expect(result.current).toBe("md")
   })
 
+  test("renders correctly with direction up", () => {
+    const defaultResizeObserver = global.ResizeObserver
+
+    global.ResizeObserver = class ResizeObserver {
+      constructor(cb: ResizeObserverCallback) {
+        ;(() => {
+          cb(
+            [
+              {
+                contentRect: {
+                  height: 0,
+                  width: 500,
+                },
+              },
+            ] as ResizeObserverEntry[],
+            this,
+          )
+        })()
+      }
+      observe = vi.fn()
+      unobserve = vi.fn()
+      disconnect = vi.fn()
+    }
+
+    const containerRef = { current: document.createElement("div") }
+    const config: ThemeConfig = {
+      ...defaultConfig,
+      breakpoint: {
+        containerRef,
+        direction: "up",
+        identifier: "@container",
+      },
+    }
+
+    const Component: FC = () => {
+      const breakpoint = useBreakpoint()
+
+      return <styled.p data-testid="bp">{breakpoint}</styled.p>
+    }
+
+    render(
+      <ThemeProvider config={config} theme={defaultTheme}>
+        <styled.div ref={containerRef} containerType="inline-size">
+          <Component />
+        </styled.div>
+      </ThemeProvider>,
+    )
+
+    waitFor(() => {
+      expect(screen.getByTestId("bp")).toBeInTheDocument()
+    })
+
+    global.ResizeObserver = defaultResizeObserver
+  })
+
   test("renders correctly and updates breakpoint", () => {
     const defaultResizeObserver = global.ResizeObserver
 

@@ -55,4 +55,82 @@ describe("<ColorPicker />", () => {
       "color-label",
     )
   })
+
+  test("does not render color swatch when `withColorSwatch` is false", () => {
+    render(
+      <ColorPicker
+        defaultOpen
+        placeholder="Choose a color"
+        withColorSwatch={false}
+        startElementProps={{ "data-testid": "swatch" }}
+      />,
+    )
+
+    expect(screen.queryByTestId("swatch")).toBeNull()
+  })
+
+  test("does not render eye dropper when `withEyeDropper` is false", () => {
+    render(
+      <ColorPicker
+        defaultOpen
+        placeholder="Choose a color"
+        withEyeDropper={false}
+        endElementProps={{ "data-testid": "eye-dropper" }}
+      />,
+    )
+
+    expect(screen.queryByTestId("eye-dropper")).toBeNull()
+  })
+
+  test("renders custom eye dropper icon when `eyeDropperProps.icon` is provided", () => {
+    render(
+      <ColorPicker
+        defaultOpen
+        placeholder="Choose a color"
+        endElementProps={{ "data-testid": "eye-dropper" }}
+        eyeDropperProps={{ icon: <span data-testid="custom-icon">X</span> }}
+      />,
+    )
+
+    expect(screen.getByTestId("custom-icon")).toBeInTheDocument()
+    expect(screen.getByTestId("eye-dropper")).toBeInTheDocument()
+  })
+
+  test("renders default eye dropper icon when no children/icon provided", () => {
+    render(
+      <ColorPicker
+        placeholder="Choose a color"
+        endElementProps={{ "data-testid": "eye-dropper" }}
+      />,
+    )
+
+    const eyeDropper = screen.getByTestId("eye-dropper")
+
+    expect(eyeDropper.childElementCount).toBeGreaterThan(0)
+    expect(eyeDropper.querySelector("svg")).not.toBeNull()
+  })
+
+  test("renders color swatch by default and keeps it rendered when value changes", () => {
+    const { rerender } = render(
+      <ColorPicker
+        defaultOpen
+        defaultValue="#ff0000"
+        placeholder="Choose a color"
+        startElementProps={{ "data-testid": "swatch" }}
+      />,
+    )
+
+    expect(screen.getByTestId("swatch")).toBeInTheDocument()
+
+    rerender(
+      <ColorPicker
+        defaultOpen
+        placeholder="Choose a color"
+        value="#00ff00"
+        startElementProps={{ "data-testid": "swatch" }}
+      />,
+    )
+
+    expect(screen.getByTestId("swatch")).toBeInTheDocument()
+  })
 })

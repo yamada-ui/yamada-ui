@@ -70,6 +70,7 @@ jobs:
           path: |
             ./packages/react/.vitest-reports
             ./packages/utils/.vitest-reports
+          include-hidden-files: true
 
   merge_coverage:
     name: Merge Coverage
@@ -101,6 +102,7 @@ jobs:
         if: steps.check-modified.outputs.any_changed == 'true'
         uses: actions/download-artifact@v4
         with:
+          path: ./packages
           pattern: coverage-blob-*
           merge-multiple: true
 

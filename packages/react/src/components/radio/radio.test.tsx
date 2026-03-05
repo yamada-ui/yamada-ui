@@ -1,4 +1,5 @@
 import { a11y, fireEvent, render, screen } from "#test"
+import { vi } from "vitest"
 import { RadioGroup } from "."
 import { Radio } from "./radio"
 
@@ -136,5 +137,22 @@ describe("<Radio />", () => {
 
     expect(radios[0]).not.toBeChecked()
     expect(radios[1]).toBeChecked()
+  })
+
+  test("should call onChange callback when radio is selected", () => {
+    const onChange = vi.fn()
+
+    render(
+      <RadioGroup.Root onChange={onChange}>
+        <Radio value="1">Option 1</Radio>
+        <Radio value="2">Option 2</Radio>
+      </RadioGroup.Root>,
+    )
+
+    const radios = screen.getAllByRole("radio")
+
+    fireEvent.click(radios[0]!)
+
+    expect(onChange).toHaveBeenCalledWith("1")
   })
 })

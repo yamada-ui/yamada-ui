@@ -23,7 +23,7 @@ import { getDirPath } from "../diff/get-diff"
 
 async function mergeContent(
   remotePath: string,
-  localePath: string,
+  localPath: string,
   currentPath: string,
   fallback: string,
 ) {
@@ -34,7 +34,7 @@ async function mergeContent(
     const { stdout } = await execa("diff3", [
       "-m",
       remotePath,
-      localePath,
+      localPath,
       currentPath,
     ])
 
@@ -51,7 +51,7 @@ async function mergeContent(
   }
 
   content = content.replaceAll(remotePath, "remote")
-  content = content.replaceAll(localePath, "locale")
+  content = content.replaceAll(localPath, "local")
   content = content.replaceAll(currentPath, "current")
   content = content.replace(/\|\|\|\|\|\|\|[\s\S]*?=======/g, "=======")
 
@@ -103,7 +103,7 @@ export async function updateFiles(
                 const name = config.paths.ui.index.split("/").at(-1)!
                 const data = changes[name]!
 
-                if (!("locale" in data && "remote" in data)) return
+                if (!("local" in data && "remote" in data)) return
 
                 if (force) {
                   await writeFileSafe(
@@ -113,7 +113,7 @@ export async function updateFiles(
                   )
                 } else {
                   const remotePath = path.join(tempDirPath, `remote-${name}`)
-                  const localePath = path.join(tempDirPath, `locale-${name}`)
+                  const localPath = path.join(tempDirPath, `local-${name}`)
 
                   await Promise.all([
                     writeFileSafe(
@@ -121,17 +121,13 @@ export async function updateFiles(
                       data.remote,
                       disabledFormatAndLint,
                     ),
-                    writeFileSafe(
-                      localePath,
-                      data.locale,
-                      disabledFormatAndLint,
-                    ),
+                    writeFileSafe(localPath, data.local, disabledFormatAndLint),
                   ])
 
                   const { conflict, content: mergedContent } =
                     await mergeContent(
                       remotePath,
-                      localePath,
+                      localPath,
                       config.paths.ui.index,
                       data.remote,
                     )
@@ -152,7 +148,7 @@ export async function updateFiles(
                   Object.entries(changes).map(async ([name, { ...data }]) => {
                     const currentPath = path.join(dirPath, name)
 
-                    if ("locale" in data && "remote" in data) {
+                    if ("local" in data && "remote" in data) {
                       if (force) {
                         await writeFileSafe(currentPath, data.remote, config)
                       } else {
@@ -160,9 +156,9 @@ export async function updateFiles(
                           tempDirPath,
                           `remote-${name}`,
                         )
-                        const localePath = path.join(
+                        const localPath = path.join(
                           tempDirPath,
-                          `locale-${name}`,
+                          `local-${name}`,
                         )
 
                         await Promise.all([
@@ -172,8 +168,8 @@ export async function updateFiles(
                             disabledFormatAndLint,
                           ),
                           writeFileSafe(
-                            localePath,
-                            data.locale,
+                            localPath,
+                            data.local,
                             disabledFormatAndLint,
                           ),
                         ])
@@ -181,7 +177,7 @@ export async function updateFiles(
                         const { conflict, content: mergedContent } =
                           await mergeContent(
                             remotePath,
-                            localePath,
+                            localPath,
                             currentPath,
                             data.remote,
                           )

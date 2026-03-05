@@ -51,6 +51,24 @@ describe("<Blockquote />", () => {
     )
   })
 
+  test("renders cite prop as caption when no custom BlockquoteCaption is provided", () => {
+    render(
+      <Blockquote.Root
+        data-testid="blockquote"
+        cite="Wikipedia"
+        citeUrl="https://example.com"
+        captionProps={{ "data-testid": "caption" } as any}
+        citeProps={{ "data-testid": "cite" } as any}
+      >
+        Blockquote content
+      </Blockquote.Root>,
+    )
+
+    expect(screen.getByTestId("caption")).toHaveClass("ui-blockquote__caption")
+    expect(screen.getByTestId("cite")).toHaveClass("ui-blockquote__cite")
+    expect(screen.getByText("Wikipedia")).toBeInTheDocument()
+  })
+
   test("renders HTML tag correctly", () => {
     render(
       <Blockquote.Root

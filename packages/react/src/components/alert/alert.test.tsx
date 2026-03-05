@@ -65,7 +65,7 @@ describe("<Alert />", () => {
 
   test("renders Alert.Loading with default loadingScheme", () => {
     render(
-      <Alert.Root status="loading">
+      <Alert.Root status="info">
         <Alert.Loading data-testid="loading" />
       </Alert.Root>,
     )
@@ -75,7 +75,7 @@ describe("<Alert />", () => {
 
   test("renders Alert.Loading with custom loadingScheme", () => {
     render(
-      <Alert.Root status="loading">
+      <Alert.Root status="info">
         <Alert.Loading data-testid="loading" loadingScheme="dots" />
       </Alert.Root>,
     )

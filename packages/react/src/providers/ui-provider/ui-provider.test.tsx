@@ -22,8 +22,8 @@ describe("extendTheme", () => {
 
 describe("extendConfig", () => {
   test("merges custom config with default config", () => {
-    const result = extendConfig({ initialColorMode: "dark" })
+    const result = extendConfig({ defaultColorMode: "dark" })
 
-    expect(result.initialColorMode).toBe("dark")
+    expect(result.defaultColorMode).toBe("dark")
   })
 })

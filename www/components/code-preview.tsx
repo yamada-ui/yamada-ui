@@ -36,7 +36,7 @@ export function CodePreview({
   const [html, setHtml] = useState<string | undefined>(htmlProp)
 
   useLayoutEffect(() => {
-    if (html || !children || !lang) return
+    if (!children || !lang) return
 
     codeToHtml(children, { lang, meta: { __raw: highlight ?? "" } }).then(
       setHtml,

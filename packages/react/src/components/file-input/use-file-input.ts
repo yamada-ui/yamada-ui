@@ -9,6 +9,7 @@ import { useClickable } from "../../hooks/use-clickable"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import {
   assignRef,
+  cx,
   dataAttr,
   handlerAll,
   isNull,
@@ -43,11 +44,13 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
   props: UseFileInputProps<Y>,
 ) => {
   const {
+    context: { labelId } = {},
     props: {
       id,
       ref,
       form,
       name,
+      "aria-labelledby": ariaLabelledby,
       accept,
       defaultValue,
       disabled,
@@ -104,6 +107,7 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
     ...dataProps,
     ...eventProps,
     ...rest,
+    "aria-labelledby": cx(ariaLabelledby, labelId),
     disabled: !interactive,
     focusable: readOnly && !disabled,
     focusOnClick: interactive,
@@ -147,9 +151,10 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
   )
 
   const getFieldProps: PropGetter = useCallback(
-    (props = {}) => ({
+    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
       "data-placeholder": dataAttr(!count),
       ...clickableProps,
+      "aria-labelledby": cx(ariaLabelledby, clickableProps["aria-labelledby"]),
       tabIndex: interactive ? 0 : clickableProps.tabIndex,
       ...props,
     }),

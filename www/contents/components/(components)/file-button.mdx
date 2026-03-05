@@ -221,6 +221,7 @@ If you use only an icon for `FileButton`, set `aria-label` to `FileButton`.
 
 ### ARIA Roles and Attributes
 
-| Component    | Roles and Attributes | Usage                                                |
-| ------------ | -------------------- | ---------------------------------------------------- |
-| `FileButton` | `aria-disabled`      | Sets to `"true"` if `disabled` or `readOnly` is set. |
+| Component    | Roles and Attributes | Usage                                                                                   |
+| ------------ | -------------------- | --------------------------------------------------------------------------------------- |
+| `FileButton` | `aria-labelledby`    | If `FileButton` is within a `Field.Root` and `Field.Root` has a `label`, sets its `id`. |
+|              | `aria-disabled`      | Sets to `"true"` if `disabled` or `readOnly` is set.                                    |

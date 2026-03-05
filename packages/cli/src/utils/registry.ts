@@ -172,7 +172,7 @@ export function pruneRegistry() {
   registryStore.clear()
 }
 
-export async function fetchLocaleRegistry(path: string) {
+export async function fetchLocalRegistry(path: string) {
   return JSON.parse(await readFile(path, "utf-8")) as Registry
 }
 

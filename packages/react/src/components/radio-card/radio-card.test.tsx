@@ -65,4 +65,32 @@ describe("<RadioCard />", () => {
     expect(radio?.parentElement?.children[3]?.tagName).toBe("SPAN")
     expect(radio?.parentElement?.children[4]?.tagName).toBe("SPAN")
   })
+
+  test("renders label via shorthand prop", () => {
+    render(<RadioCard.Root label="Label" value="1" />)
+    expect(screen.getByText("Label")).toHaveClass("ui-radio-card__label")
+  })
+
+  test("renders description via shorthand prop", () => {
+    render(<RadioCard.Root description="Description" value="1" />)
+    expect(screen.getByText("Description")).toHaveClass(
+      "ui-radio-card__description",
+    )
+  })
+
+  test("renders addon via shorthand prop", () => {
+    render(<RadioCard.Root addon="Addon" value="1" />)
+    expect(screen.getByText("Addon")).toHaveClass("ui-radio-card__addon")
+  })
+
+  test("does not render indicator when withIndicator is false", () => {
+    render(
+      <RadioCard.Root value="1" withIndicator={false}>
+        radio card
+      </RadioCard.Root>,
+    )
+    const radio = screen.getByRole("radio")
+    const indicator = radio.parentElement?.querySelector("[data-indicator]")
+    expect(indicator).toBeNull()
+  })
 })

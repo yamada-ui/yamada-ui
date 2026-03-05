@@ -26,6 +26,7 @@ interface Options {
   install: boolean
   lint: boolean
   sequential: boolean
+  yes: boolean
 }
 
 export const update = new Command("update")
@@ -35,11 +36,20 @@ export const update = new Command("update")
   .option("-c, --config <path>", "path to the config file", CONFIG_FILE_NAME)
   .option("-i, --install", "install dependencies", false)
   .option("-s, --sequential", "run tasks sequentially.", false)
+  .option("-y, --yes", "skip all confirmation prompts", false)
   .option("-f, --format", "format the output files.")
   .option("-l, --lint", "lint the output files.")
   .action(async function (
     targetNames: string[],
-    { config: configPath, cwd, format, install, lint, sequential }: Options,
+    {
+      config: configPath,
+      cwd,
+      format,
+      install,
+      lint,
+      sequential,
+      yes,
+    }: Options,
   ) {
     const spinner = ora()
 
@@ -143,7 +153,7 @@ export const update = new Command("update")
           dependencyMap,
           registryMap,
           config,
-          { concurrent: !sequential, install },
+          { concurrent: !sequential, install, yes },
         )
 
         if (Object.keys(conflictMap).length) {

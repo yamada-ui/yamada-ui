@@ -1,7 +1,7 @@
 import type { PackageNameWithVersion, UserConfig } from "../../index.type"
 import { isObject, merge } from "@yamada-ui/utils"
 import boxen from "boxen"
-import { Command } from "commander"
+import { Command, Option } from "commander"
 import { existsSync } from "fs"
 import { Listr } from "listr2"
 import ora from "ora"
@@ -44,6 +44,11 @@ interface Options {
   cwd: string
   jsx: boolean
   overwrite: boolean
+  yes: boolean
+  monorepo?: boolean
+  outdir?: string
+  packageName?: string
+  src?: boolean
 }
 
 export const init = new Command("init")
@@ -52,11 +57,23 @@ export const init = new Command("init")
   .option("-c, --config <path>", "path to the config file", CONFIG_FILE_NAME)
   .option("-o, --overwrite", "overwrite existing files.", false)
   .option("-j, --jsx", "use jsx instead of tsx", false)
+  .option("-y, --yes", "skip all confirmation prompts", false)
+  .addOption(new Option("--monorepo", "enable monorepo mode"))
+  .addOption(new Option("--no-monorepo", "disable monorepo mode (polyrepo)"))
+  .option("--outdir <path>", "output directory path")
+  .option("--package-name <name>", "package name")
+  .addOption(new Option("--src", "use src/ directory"))
+  .addOption(new Option("--no-src", "disable src/ directory"))
   .action(async function ({
+    src: srcOption,
     config: configPath,
     cwd,
     jsx,
+    monorepo: monorepoOption,
+    outdir: outdirOption,
     overwrite,
+    packageName: packageNameOption,
+    yes,
   }: Options) {
     const spinner = ora()
 
@@ -76,72 +93,117 @@ export const init = new Command("init")
       let dependencies: string[] | undefined
       let devDependencies: string[] | undefined
 
-      let {
-        src = true,
-        format = true,
-        lint = true,
-        monorepo = true,
-        outdir = "",
-        packageName = "",
-      } = await prompts([
-        {
-          type: "toggle",
-          name: "monorepo",
-          active: "Yes",
-          inactive: "No",
-          initial: true,
-          message: c.reset(`Would you like to use monorepo? (recommended)`),
-        },
-        {
-          type: "text",
-          name: "outdir",
-          initial: (_, { monorepo }) =>
-            monorepo ? DEFAULT_PATH.ui.monorepo : DEFAULT_PATH.ui.polyrepo,
-          message: (_, { monorepo }) =>
-            monorepo
-              ? c.reset(`What is the path to the monorepo?`)
-              : c.reset(`What is the path to the directory?`),
-        },
-        {
-          type: (_, { monorepo }) => (monorepo ? "text" : null),
-          name: "packageName",
-          initial: DEFAULT_PACKAGE_NAME.ui,
-          message: c.reset("What is the package name?"),
-        },
-        {
-          type: (_, { monorepo }) => (monorepo ? "toggle" : null),
-          name: "src",
-          active: "Yes",
-          inactive: "No",
-          initial: true,
-          message: c.reset(
-            "Would you like your code inside a `src/` directory?",
-          ),
-        },
-        {
-          type: "toggle",
-          name: "format",
-          active: "Yes",
-          inactive: "No",
-          initial: true,
-          message: c.reset(`Would you like to use Prettier?`),
-        },
-        {
-          type: "toggle",
-          name: "lint",
-          active: "Yes",
-          inactive: "No",
-          initial: true,
-          message: c.reset(`Would you like to use ESLint?`),
-        },
-      ])
+      const monorepo =
+        monorepoOption !== undefined
+          ? monorepoOption
+          : yes
+            ? true
+            : ((
+                await prompts({
+                  type: "toggle",
+                  name: "monorepo",
+                  active: "Yes",
+                  inactive: "No",
+                  initial: true,
+                  message: c.reset(
+                    `Would you like to use monorepo? (recommended)`,
+                  ),
+                })
+              ).monorepo ?? true)
+
+      let outdir =
+        outdirOption !== undefined
+          ? outdirOption
+          : yes
+            ? monorepo
+              ? DEFAULT_PATH.ui.monorepo
+              : DEFAULT_PATH.ui.polyrepo
+            : ((
+                await prompts({
+                  type: "text",
+                  name: "outdir",
+                  initial: monorepo
+                    ? DEFAULT_PATH.ui.monorepo
+                    : DEFAULT_PATH.ui.polyrepo,
+                  message: monorepo
+                    ? c.reset(`What is the path to the monorepo?`)
+                    : c.reset(`What is the path to the directory?`),
+                })
+              ).outdir ?? "")
 
       // eslint-disable-next-line no-control-regex
       outdir = outdir.replace(/\x17/g, "").trim()
       outdir ||= monorepo ? DEFAULT_PATH.ui.monorepo : DEFAULT_PATH.ui.polyrepo
-      // eslint-disable-next-line no-control-regex
-      packageName = packageName.replace(/\x17/g, "").trim()
-      packageName ||= DEFAULT_PACKAGE_NAME
+
+      let packageName = DEFAULT_PACKAGE_NAME.ui
+
+      if (monorepo) {
+        packageName =
+          packageNameOption !== undefined
+            ? packageNameOption
+            : yes
+              ? DEFAULT_PACKAGE_NAME.ui
+              : ((
+                  await prompts({
+                    type: "text",
+                    name: "packageName",
+                    initial: DEFAULT_PACKAGE_NAME.ui,
+                    message: c.reset("What is the package name?"),
+                  })
+                ).packageName ?? "")
+
+        // eslint-disable-next-line no-control-regex
+        packageName = packageName.replace(/\x17/g, "").trim()
+        packageName ||= DEFAULT_PACKAGE_NAME.ui
+      }
+
+      let src = true
+
+      if (monorepo) {
+        src =
+          srcOption !== undefined
+            ? srcOption
+            : yes
+              ? true
+              : ((
+                  await prompts({
+                    type: "toggle",
+                    name: "src",
+                    active: "Yes",
+                    inactive: "No",
+                    initial: true,
+                    message: c.reset(
+                      "Would you like your code inside a `src/` directory?",
+                    ),
+                  })
+                ).src ?? true)
+      }
+
+      const format = yes
+        ? true
+        : ((
+            await prompts({
+              type: "toggle",
+              name: "format",
+              active: "Yes",
+              inactive: "No",
+              initial: true,
+              message: c.reset(`Would you like to use Prettier?`),
+            })
+          ).format ?? true)
+
+      const lint = yes
+        ? true
+        : ((
+            await prompts({
+              type: "toggle",
+              name: "lint",
+              active: "Yes",
+              inactive: "No",
+              initial: true,
+              message: c.reset(`Would you like to use ESLint?`),
+            })
+          ).lint ?? true)
 
       if (monorepo) config.monorepo = monorepo
       if (jsx) config.jsx = jsx
@@ -150,17 +212,25 @@ export const init = new Command("init")
       config.format = { enabled: format }
       config.lint = { enabled: lint }
 
-      const { generate } = await prompts({
-        type: "confirm",
-        name: "generate",
-        initial: true,
-        message: c.reset(`Generate ${c.cyan(configFileName)}. Proceed?`),
-      })
+      if (!yes) {
+        const { generate } = await prompts({
+          type: "confirm",
+          name: "generate",
+          initial: true,
+          message: c.reset(`Generate ${c.cyan(configFileName)}. Proceed?`),
+        })
 
-      if (!generate) process.exit(0)
+        if (!generate) process.exit(0)
+      }
 
       if (!overwrite && existsSync(configPath)) {
-        const { overwrite } = await prompts({
+        if (yes) {
+          throw new Error(
+            `The config file already exists. Use ${c.cyan("--overwrite")} to overwrite it.`,
+          )
+        }
+
+        const { overwrite: shouldOverwrite } = await prompts({
           type: "confirm",
           name: "overwrite",
           initial: false,
@@ -169,7 +239,7 @@ export const init = new Command("init")
           ),
         })
 
-        if (!overwrite) process.exit(0)
+        if (!shouldOverwrite) process.exit(0)
       }
 
       spinner.start(`Generating ${c.cyan(configFileName)}`)
@@ -185,7 +255,13 @@ export const init = new Command("init")
       const outdirPath = path.resolve(cwd, outdir)
 
       if (!overwrite && existsSync(outdirPath)) {
-        const { overwrite } = await prompts({
+        if (yes) {
+          throw new Error(
+            `The ${c.yellow(outdir)} directory already exists. Use ${c.cyan("--overwrite")} to overwrite it.`,
+          )
+        }
+
+        const { overwrite: shouldOverwrite } = await prompts({
           type: "confirm",
           name: "overwrite",
           initial: false,
@@ -197,7 +273,7 @@ export const init = new Command("init")
           ),
         })
 
-        if (!overwrite) process.exit(0)
+        if (!shouldOverwrite) process.exit(0)
 
         spinner.start("Clearing directory")
 
@@ -207,14 +283,16 @@ export const init = new Command("init")
       }
 
       if (monorepo) {
-        const { generate } = await prompts({
-          type: "confirm",
-          name: "generate",
-          initial: true,
-          message: c.reset(`Generate ${c.cyan(packageName)}. Proceed?`),
-        })
+        if (!yes) {
+          const { generate } = await prompts({
+            type: "confirm",
+            name: "generate",
+            initial: true,
+            message: c.reset(`Generate ${c.cyan(packageName)}. Proceed?`),
+          })
 
-        if (!generate) process.exit(0)
+          if (!generate) process.exit(0)
+        }
 
         const tasks = new Listr(
           [
@@ -330,16 +408,20 @@ export const init = new Command("init")
 
         await tasks.run()
 
-        const { install } = await prompts({
-          type: "confirm",
-          name: "install",
-          initial: true,
-          message: c.reset(
-            `The workspace is generated. Do you want to install dependencies?`,
-          ),
-        })
+        if (!yes) {
+          const { install } = await prompts({
+            type: "confirm",
+            name: "install",
+            initial: true,
+            message: c.reset(
+              `The workspace is generated. Do you want to install dependencies?`,
+            ),
+          })
 
-        if (install) dependencies = []
+          if (install) dependencies = []
+        } else {
+          dependencies = []
+        }
       } else {
         const notInstalledDependencies: PackageNameWithVersion[] = []
         const notInstalledDevDependencies: PackageNameWithVersion[] = []
@@ -416,19 +498,28 @@ export const init = new Command("init")
             ),
           )
 
-          const { install } = await prompts({
-            type: "confirm",
-            name: "install",
-            initial: true,
-            message: c.reset(
-              [
-                `The following dependencies are not installed: ${colorizedNames.join(", ")}.`,
-                "Do you want to install them?",
-              ].join(" "),
-            ),
-          })
+          if (!yes) {
+            const { install } = await prompts({
+              type: "confirm",
+              name: "install",
+              initial: true,
+              message: c.reset(
+                [
+                  `The following dependencies are not installed: ${colorizedNames.join(", ")}.`,
+                  "Do you want to install them?",
+                ].join(" "),
+              ),
+            })
 
-          if (install) {
+            if (install) {
+              dependencies = notInstalledDependencies.map(
+                getPackageNameWithVersion,
+              )
+              devDependencies = notInstalledDevDependencies.map(
+                getPackageNameWithVersion,
+              )
+            }
+          } else {
             dependencies = notInstalledDependencies.map(
               getPackageNameWithVersion,
             )

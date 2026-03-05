@@ -66,6 +66,7 @@ export interface ConflictMap {
 
 export interface UpdateFilesOptions {
   concurrent?: boolean
+  force?: boolean
   install?: boolean
 }
 
@@ -74,7 +75,11 @@ export async function updateFiles(
   { add, remove, update }: DependencyMap,
   { remote }: RegistryMap,
   config: Config,
-  { concurrent = true, install = false }: UpdateFilesOptions = {},
+  {
+    concurrent = true,
+    force = false,
+    install = false,
+  }: UpdateFilesOptions = {},
 ) {
   const conflictMap: ConflictMap = {}
   const disabledFormatAndLint = {
@@ -100,30 +105,43 @@ export async function updateFiles(
 
                 if (!("local" in data && "remote" in data)) return
 
-                const remotePath = path.join(tempDirPath, `remote-${name}`)
-                const localPath = path.join(tempDirPath, `local-${name}`)
+                if (force) {
+                  await writeFileSafe(
+                    config.paths.ui.index,
+                    data.remote,
+                    config,
+                  )
+                } else {
+                  const remotePath = path.join(tempDirPath, `remote-${name}`)
+                  const localPath = path.join(tempDirPath, `local-${name}`)
 
-                await Promise.all([
-                  writeFileSafe(remotePath, data.remote, disabledFormatAndLint),
-                  writeFileSafe(localPath, data.local, disabledFormatAndLint),
-                ])
+                  await Promise.all([
+                    writeFileSafe(
+                      remotePath,
+                      data.remote,
+                      disabledFormatAndLint,
+                    ),
+                    writeFileSafe(localPath, data.local, disabledFormatAndLint),
+                  ])
 
-                const { conflict, content: mergedContent } = await mergeContent(
-                  remotePath,
-                  localPath,
-                  config.paths.ui.index,
-                  data.remote,
-                )
+                  const { conflict, content: mergedContent } =
+                    await mergeContent(
+                      remotePath,
+                      localPath,
+                      config.paths.ui.index,
+                      data.remote,
+                    )
 
-                await writeFileSafe(
-                  config.paths.ui.index,
-                  mergedContent,
-                  conflict ? merge(config, disabledFormatAndLint) : config,
-                )
+                  await writeFileSafe(
+                    config.paths.ui.index,
+                    mergedContent,
+                    conflict ? merge(config, disabledFormatAndLint) : config,
+                  )
 
-                if (conflict) {
-                  conflictMap[componentName] ??= {}
-                  conflictMap[componentName][name] = config.paths.ui.index
+                  if (conflict) {
+                    conflictMap[componentName] ??= {}
+                    conflictMap[componentName][name] = config.paths.ui.index
+                  }
                 }
               } else {
                 await Promise.all(
@@ -131,44 +149,51 @@ export async function updateFiles(
                     const currentPath = path.join(dirPath, name)
 
                     if ("local" in data && "remote" in data) {
-                      const remotePath = path.join(
-                        tempDirPath,
-                        `remote-${name}`,
-                      )
-                      const localPath = path.join(tempDirPath, `local-${name}`)
-
-                      await Promise.all([
-                        writeFileSafe(
-                          remotePath,
-                          data.remote,
-                          disabledFormatAndLint,
-                        ),
-                        writeFileSafe(
-                          localPath,
-                          data.local,
-                          disabledFormatAndLint,
-                        ),
-                      ])
-
-                      const { conflict, content: mergedContent } =
-                        await mergeContent(
-                          remotePath,
-                          localPath,
-                          currentPath,
-                          data.remote,
+                      if (force) {
+                        await writeFileSafe(currentPath, data.remote, config)
+                      } else {
+                        const remotePath = path.join(
+                          tempDirPath,
+                          `remote-${name}`,
+                        )
+                        const localPath = path.join(
+                          tempDirPath,
+                          `local-${name}`,
                         )
 
-                      await writeFileSafe(
-                        currentPath,
-                        mergedContent,
-                        conflict
-                          ? merge(config, disabledFormatAndLint)
-                          : config,
-                      )
+                        await Promise.all([
+                          writeFileSafe(
+                            remotePath,
+                            data.remote,
+                            disabledFormatAndLint,
+                          ),
+                          writeFileSafe(
+                            localPath,
+                            data.local,
+                            disabledFormatAndLint,
+                          ),
+                        ])
 
-                      if (conflict) {
-                        conflictMap[componentName] ??= {}
-                        conflictMap[componentName][name] = currentPath
+                        const { conflict, content: mergedContent } =
+                          await mergeContent(
+                            remotePath,
+                            localPath,
+                            currentPath,
+                            data.remote,
+                          )
+
+                        await writeFileSafe(
+                          currentPath,
+                          mergedContent,
+                          conflict
+                            ? merge(config, disabledFormatAndLint)
+                            : config,
+                        )
+
+                        if (conflict) {
+                          conflictMap[componentName] ??= {}
+                          conflictMap[componentName][name] = currentPath
+                        }
                       }
                     } else if ("remote" in data) {
                       await writeFileSafe(currentPath, data.remote, config)

@@ -561,6 +561,7 @@ export type IconNames =
   | "EggFriedIcon"
   | "EggIcon"
   | "EggOffIcon"
+  | "EllipseIcon"
   | "EllipsisIcon"
   | "EllipsisVerticalIcon"
   | "EqualApproximatelyIcon"

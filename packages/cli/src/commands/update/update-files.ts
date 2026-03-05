@@ -67,6 +67,7 @@ export interface ConflictMap {
 export interface UpdateFilesOptions {
   concurrent?: boolean
   install?: boolean
+  yes?: boolean
 }
 
 export async function updateFiles(
@@ -74,7 +75,7 @@ export async function updateFiles(
   { add, remove, update }: DependencyMap,
   { remote }: RegistryMap,
   config: Config,
-  { concurrent = true, install = false }: UpdateFilesOptions = {},
+  { concurrent = true, install = false, yes = false }: UpdateFilesOptions = {},
 ) {
   const conflictMap: ConflictMap = {}
   const disabledFormatAndLint = {
@@ -203,16 +204,20 @@ export async function updateFiles(
   await tasks.run()
 
   if (!install && (add.length || remove.length || update.length)) {
-    const { install } = await prompts({
-      type: "confirm",
-      name: "install",
-      initial: true,
-      message: c.reset(
-        "There are dependency updates. Do you want to install them?",
-      ),
-    })
+    if (!yes) {
+      const result = await prompts({
+        type: "confirm",
+        name: "install",
+        initial: true,
+        message: c.reset(
+          "There are dependency updates. Do you want to install them?",
+        ),
+      })
 
-    if (!install) return conflictMap
+      if (!result.install) return conflictMap
+    } else {
+      install = true
+    }
   }
 
   const cwd = config.monorepo ? config.paths.ui.root : config.cwd

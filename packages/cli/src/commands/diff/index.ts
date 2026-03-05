@@ -32,6 +32,8 @@ interface Options {
   cwd: string
   detail: boolean
   sequential: boolean
+  update: boolean
+  yes: boolean
 }
 
 export const diff = new Command("diff")
@@ -41,9 +43,15 @@ export const diff = new Command("diff")
   .option("-c, --config <path>", "path to the config file", CONFIG_FILE_NAME)
   .option("-s, --sequential", "run tasks sequentially.", false)
   .option("-d, --detail", "show detailed changes", false)
+  .option("-y, --yes", "skip all confirmation prompts", false)
+  .option(
+    "-u, --update",
+    "automatically update files after showing diff.",
+    false,
+  )
   .action(async function (
     targetName: string | undefined,
-    { config: configPath, cwd, detail, sequential }: Options,
+    { config: configPath, cwd, detail, sequential, update, yes }: Options,
   ) {
     const spinner = ora()
 
@@ -165,14 +173,20 @@ export const diff = new Command("diff")
 
         console.log("---------------------------------")
 
-        const { update } = await prompts({
-          type: "confirm",
-          name: "update",
-          initial: true,
-          message: c.reset("Do you want to update the files?"),
-        })
+        let shouldUpdate = update || yes
 
-        if (update) {
+        if (!shouldUpdate) {
+          const result = await prompts({
+            type: "confirm",
+            name: "update",
+            initial: true,
+            message: c.reset("Do you want to update the files?"),
+          })
+
+          shouldUpdate = result.update
+        }
+
+        if (shouldUpdate) {
           spinner.start("Validating methods")
 
           await validateDiff3()
@@ -184,7 +198,7 @@ export const diff = new Command("diff")
             dependencyMap,
             registryMap,
             config,
-            { concurrent: !sequential },
+            { concurrent: !sequential, yes },
           )
 
           if (Object.keys(conflictMap).length) {

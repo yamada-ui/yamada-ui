@@ -37,6 +37,7 @@ interface Options {
   install: boolean
   overwrite: boolean
   sequential: boolean
+  yes: boolean
   format?: boolean
   lint?: boolean
 }
@@ -49,6 +50,7 @@ export const add = new Command("add")
   .option("-o, --overwrite", "overwrite existing files.", false)
   .option("-i, --install", "install dependencies", false)
   .option("-s, --sequential", "run tasks sequentially.", false)
+  .option("-y, --yes", "skip all confirmation prompts", false)
   .option("-f, --format", "format the output files.")
   .option("-l, --lint", "lint the output files.")
   .action(async function (
@@ -61,6 +63,7 @@ export const add = new Command("add")
       lint,
       overwrite,
       sequential,
+      yes,
     }: Options,
   ) {
     const spinner = ora()
@@ -85,17 +88,25 @@ export const add = new Command("add")
       const omittedGeneratedNames: string[] = []
 
       if (!componentNames.length) {
-        const { proceed } = await prompts({
-          type: "confirm",
-          name: "proceed",
-          initial: true,
-          message: c.reset(`Add all available components?`),
-        })
+        if (!yes) {
+          const { proceed } = await prompts({
+            type: "confirm",
+            name: "proceed",
+            initial: true,
+            message: c.reset(`Add all available components?`),
+          })
 
-        if (!proceed) process.exit(0)
+          if (!proceed) process.exit(0)
+        }
 
         if (!overwrite && existsSync(config.paths.ui.src)) {
-          const { overwrite } = await prompts({
+          if (yes) {
+            throw new Error(
+              `The directory already exists. Use ${c.cyan("--overwrite")} to overwrite it.`,
+            )
+          }
+
+          const { overwrite: shouldOverwrite } = await prompts({
             type: "confirm",
             name: "overwrite",
             initial: false,
@@ -104,7 +115,7 @@ export const add = new Command("add")
             ),
           })
 
-          if (!overwrite) process.exit(0)
+          if (!shouldOverwrite) process.exit(0)
         }
 
         spinner.start("Fetching all available components")
@@ -125,9 +136,15 @@ export const add = new Command("add")
         spinner.succeed("Got generated components")
 
         if (!overwrite && existsNames.length) {
+          if (yes) {
+            throw new Error(
+              `The ${existsNames.map((name) => c.yellow(name)).join(", ")} components already exist. Use ${c.cyan("--overwrite")} to overwrite them.`,
+            )
+          }
+
           const colorizedNames = existsNames.map((name) => c.yellow(name))
 
-          const { overwrite } = await prompts({
+          const { overwrite: shouldOverwrite } = await prompts({
             type: "confirm",
             name: "overwrite",
             initial: false,
@@ -139,7 +156,7 @@ export const add = new Command("add")
             ),
           })
 
-          if (!overwrite) process.exit(0)
+          if (!shouldOverwrite) process.exit(0)
         }
 
         omittedGeneratedNames.push(
@@ -179,18 +196,20 @@ export const add = new Command("add")
       spinner.succeed("Fetched registries")
 
       if (componentNames.length !== registryNames.length) {
-        const colorizedNames = registryNames.map((name) => c.yellow(name))
+        if (!yes) {
+          const colorizedNames = registryNames.map((name) => c.yellow(name))
 
-        const { proceed } = await prompts({
-          type: "confirm",
-          name: "proceed",
-          initial: true,
-          message: c.reset(
-            `The following components will be added: ${colorizedNames.join(", ")}. Do you want to add them?`,
-          ),
-        })
+          const { proceed } = await prompts({
+            type: "confirm",
+            name: "proceed",
+            initial: true,
+            message: c.reset(
+              `The following components will be added: ${colorizedNames.join(", ")}. Do you want to add them?`,
+            ),
+          })
 
-        if (!proceed) process.exit(0)
+          if (!proceed) process.exit(0)
+        }
       }
 
       const targetNames = [
@@ -220,21 +239,25 @@ export const add = new Command("add")
 
       if (affectedNames.length && generatedNameMap) {
         if (!overwrite) {
-          const colorizedNames = affectedNames.map((name) => c.yellow(name))
+          if (!yes) {
+            const colorizedNames = affectedNames.map((name) => c.yellow(name))
 
-          const { update } = await prompts({
-            type: "confirm",
-            name: "update",
-            initial: true,
-            message: c.reset(
-              [
-                `The following generated files will be updated: ${colorizedNames.join(", ")}.`,
-                "Do you want to update them?",
-              ].join(" "),
-            ),
-          })
+            const { update } = await prompts({
+              type: "confirm",
+              name: "update",
+              initial: true,
+              message: c.reset(
+                [
+                  `The following generated files will be updated: ${colorizedNames.join(", ")}.`,
+                  "Do you want to update them?",
+                ].join(" "),
+              ),
+            })
 
-          if (update) overwrite = update
+            if (update) overwrite = update
+          } else {
+            overwrite = true
+          }
         }
 
         if (overwrite) {
@@ -360,29 +383,33 @@ export const add = new Command("add")
         spinner.succeed(`Checked ${c.cyan("package.json")} dependencies`)
 
         if (!install && notInstalledDependencies.length) {
-          const colorizedNames = notInstalledDependencies.map((value) =>
-            c.yellow(
-              isObject(value)
-                ? value.current
-                  ? `${value.name}@${value.current}->${c.red(value.wanted)}`
-                  : value.name
-                : value,
-            ),
-          )
+          if (!yes) {
+            const colorizedNames = notInstalledDependencies.map((value) =>
+              c.yellow(
+                isObject(value)
+                  ? value.current
+                    ? `${value.name}@${value.current}->${c.red(value.wanted)}`
+                    : value.name
+                  : value,
+              ),
+            )
 
-          const { proceed } = await prompts({
-            type: "confirm",
-            name: "proceed",
-            initial: true,
-            message: c.reset(
-              [
-                `The following dependencies are not installed: ${colorizedNames.join(", ")}.`,
-                "Do you want to install them?",
-              ].join(" "),
-            ),
-          })
+            const { proceed } = await prompts({
+              type: "confirm",
+              name: "proceed",
+              initial: true,
+              message: c.reset(
+                [
+                  `The following dependencies are not installed: ${colorizedNames.join(", ")}.`,
+                  "Do you want to install them?",
+                ].join(" "),
+              ),
+            })
 
-          install = proceed
+            install = proceed
+          } else {
+            install = true
+          }
         }
 
         if (install) {

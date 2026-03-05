@@ -52,13 +52,12 @@ interface CreateMethod<Y, M extends Function> {
   (store: Store<Y>): M
 }
 
-type Methods<Y, M extends CustomMethods<Y>> = {
+type Methods<Y, M extends CustomMethods<Y>> = Omit<
+  Store<Y>,
+  "key" | "update"
+> & {
   [D in keyof M]: ReturnType<M[D]>
-} & {
-  get: () => Y
-  set: (nextState: ((prevState: Y) => Y) | Y, key?: string | string[]) => void
-  update: () => void
-}
+} & { update: () => void }
 
 interface CustomMethods<Y> {
   [key: string]: CreateMethod<Y, (...args: any[]) => Promise<void> | void>

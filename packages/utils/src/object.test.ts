@@ -22,6 +22,11 @@ describe("Object", () => {
       const obj = { a: 1, b: 2, c: 3 }
       expect(omitObject(obj, ["a", "c"])).toStrictEqual({ b: 2 })
     })
+
+    test("should return original object when keys is empty", () => {
+      const obj = { a: 1, b: 2 }
+      expect(omitObject(obj, [])).toBe(obj)
+    })
   })
 
   describe("pickObject", () => {
@@ -29,12 +34,31 @@ describe("Object", () => {
       const obj = { a: 1, b: 2, c: 3 }
       expect(pickObject(obj, ["a", "c"])).toStrictEqual({ a: 1, c: 3 })
     })
+
+    test("should return empty object when keys is empty", () => {
+      expect(pickObject({ a: 1, b: 2 }, [])).toStrictEqual({})
+    })
+
+    test("should ignore keys not present in object", () => {
+      const obj = { a: 1, b: 2 }
+      expect(pickObject(obj, ["a", "c" as any])).toStrictEqual({ a: 1 })
+    })
   })
 
   describe("splitObject", () => {
     test("should split an object into two objects based on specified keys", () => {
       const obj = { a: 1, b: 2, c: 3 }
       const [picked, omitted] = splitObject(obj, ["a", "c"])
+      expect(picked).toStrictEqual({ a: 1, c: 3 })
+      expect(omitted).toStrictEqual({ b: 2 })
+    })
+
+    test("should split an object using a function predicate", () => {
+      const obj = { a: 1, b: 2, c: 3 }
+      const [picked, omitted] = splitObject(
+        obj,
+        (key: string) => key === "a" || key === "c",
+      )
       expect(picked).toStrictEqual({ a: 1, c: 3 })
       expect(omitted).toStrictEqual({ b: 2 })
     })
@@ -90,6 +114,20 @@ describe("Object", () => {
       const obj1 = { a: 1 }
       const obj2 = { a: fn }
       expect(merge(obj1, obj2).a).toBe(fn)
+    })
+
+    test("should not process source when shouldProcess returns false for it", () => {
+      const obj1 = { a: 1 }
+      const obj2 = { a: 2 }
+      const result = merge(obj1, obj2, { shouldProcess: () => false })
+      expect(result).toStrictEqual({ a: 1 })
+    })
+
+    test("should return copy of target when source is not an object", () => {
+      const obj1 = { a: 1 }
+      expect(merge(obj1, null)).toStrictEqual({ a: 1 })
+      expect(merge(obj1, "string")).toStrictEqual({ a: 1 })
+      expect(merge(obj1, 42)).toStrictEqual({ a: 1 })
     })
   })
 

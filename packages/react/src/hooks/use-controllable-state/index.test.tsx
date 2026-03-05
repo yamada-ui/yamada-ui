@@ -35,7 +35,7 @@ describe("useControllableEventState", () => {
       })
     })
 
-    expect(onChange).toHaveBeenCalledWith()
+    expect(onChange).toHaveBeenCalledTimes(1)
     const ev = onChange.mock.calls[0]![0] as ChangeEvent<HTMLInputElement>
     expect(ev.target.value).toBe("hello")
   })

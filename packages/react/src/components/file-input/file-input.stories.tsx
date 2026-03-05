@@ -107,7 +107,7 @@ export const Format: Story = () => {
 
 export const Children: Story = () => {
   return (
-    <FileInput multiple>
+    <FileInput aria-label="Files" multiple>
       {(files) => <Text>Selected: {files?.length ?? 0}</Text>}
     </FileInput>
   )

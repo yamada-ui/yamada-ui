@@ -1,15 +1,19 @@
-import { renderHook } from "#test/browser"
-import { useOS } from "./"
+import { renderHook } from "@testing-library/react"
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest"
 
 describe("useOS", () => {
   beforeEach(() => {
     vi.unstubAllGlobals()
   })
 
+  afterEach(() => {
+    vi.doUnmock("../../core")
+    vi.resetModules()
+  })
+
   test.each([
     {
       expected: "macos",
-      // M1 MacBook Air
       userAgent:
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
     },
@@ -20,25 +24,21 @@ describe("useOS", () => {
     },
     {
       expected: "ios",
-      // iPhone13 Pro Max
       userAgent:
         "Mozilla/5.0 (iPhone14,3; U; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) Version/10.0 Mobile/19A346 Safari/602.1",
     },
     {
       expected: "ios",
-      // iPad
       userAgent:
         "Mozilla/5.0 (iPad; CPU OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko)",
     },
     {
       expected: "android",
-      // Google Pixel 7
       userAgent:
         "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36",
     },
     {
       expected: "linux",
-      // A smart TV
       userAgent:
         "Mozilla/5.0 (Web0S; Linux/SmartTV) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.6261.105 Safari/537.36 WebAppManager",
     },
@@ -49,20 +49,35 @@ describe("useOS", () => {
     },
     {
       expected: "undetermined",
-      // Nintendo Switch
       userAgent:
         "Mozilla/5.0 (Nintendo Switch; WifiWebAuthApplet) AppleWebKit/601.6 (KHTML, like Gecko) NF/4.0.0.5.10 NintendoBrowser/5.1.0.13343",
     },
     {
       expected: "undetermined",
-      // PlayStation 5
       userAgent:
         "Mozilla/5.0 (PlayStation; PlayStation 5/2.26) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15",
     },
   ])("should return $expected", async ({ expected, userAgent }) => {
     vi.stubGlobal("navigator", { userAgent })
 
-    const { result } = await renderHook(() => useOS())
+    const { useOS } = await import("./")
+    const { result } = renderHook(() => useOS())
+
     expect(result.current).toBe(expected)
+  })
+
+  test("returns undetermined when window is undefined", async () => {
+    vi.resetModules()
+
+    vi.doMock("../../core", () => ({
+      useEnvironment: () => ({
+        getWindow: () => undefined,
+      }),
+    }))
+
+    const { useOS } = await import("./")
+    const { result } = renderHook(() => useOS())
+
+    expect(result.current).toBe("undetermined")
   })
 })

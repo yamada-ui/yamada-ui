@@ -122,7 +122,7 @@ describe("I18nProvider", () => {
 
 describe("useI18n", () => {
   test("returns translation function with key", () => {
-    const { result } = renderHook(() => useI18n("common"))
+    const { result } = renderHook(() => useI18n("closeButton"))
 
     expect(typeof result.current.t).toBe("function")
   })

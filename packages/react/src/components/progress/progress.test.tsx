@@ -23,4 +23,11 @@ describe("<Progress />", () => {
     expect(el.tagName).toBe("DIV")
     expect(el.children[0]?.tagName).toBe("DIV")
   })
+
+  test("renders indeterminate state when value is null", () => {
+    render(<Progress value={null} />)
+    const el = screen.getByRole("progressbar")
+    expect(el).toHaveAttribute("data-indeterminate")
+    expect(el).toHaveAttribute("aria-label", "Loading...")
+  })
 })

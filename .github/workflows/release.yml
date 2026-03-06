@@ -76,10 +76,10 @@ jobs:
           pnpm gen:styles -p
           git add .
           git diff --staged --exit-code || git commit -m 'ci(changesets): update styles'
-          pnpm gen:props -p
+          pnpm gen:props
           git add .
           git diff --staged --exit-code || git commit -m 'ci(changesets): update props'
-          pnpm gen:registries -p
+          pnpm gen:registries
           git add .
           git diff --staged --exit-code || git commit -m 'ci(changesets): update registries'
           pnpm www build:content

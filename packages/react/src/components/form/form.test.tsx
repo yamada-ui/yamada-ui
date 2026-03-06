@@ -77,6 +77,40 @@ describe("<Form />", () => {
     )
   })
 
+  test("renders header with title prop", () => {
+    render(<Form.Root data-testid="root" title="My Form" />)
+
+    expect(screen.getByText("My Form")).toBeInTheDocument()
+    expect(screen.getByText("My Form").tagName).toBe("H3")
+  })
+
+  test("renders header with description prop", () => {
+    render(<Form.Root data-testid="root" description="Form description" />)
+
+    expect(screen.getByText("Form description")).toBeInTheDocument()
+    expect(screen.getByText("Form description").tagName).toBe("P")
+  })
+
+  test("renders header with both title and description props", () => {
+    render(
+      <Form.Root
+        data-testid="root"
+        description="Form description"
+        title="My Form"
+      />,
+    )
+
+    expect(screen.getByText("My Form")).toBeInTheDocument()
+    expect(screen.getByText("Form description")).toBeInTheDocument()
+  })
+
+  test("renders footer with submitButton prop", () => {
+    render(<Form.Root data-testid="root" submitButton="Submit" />)
+
+    expect(screen.getByText("Submit")).toBeInTheDocument()
+    expect(screen.getByText("Submit").tagName).toBe("BUTTON")
+  })
+
   test("renders HTML tag correctly", () => {
     render(
       <Form.Root data-testid="root">

@@ -33,6 +33,24 @@ describe("useBreakpoint", () => {
     expect(result.current).toBe("base")
   })
 
+  test("updates breakpoint when media query changes", async () => {
+    const Component: FC = () => {
+      const breakpoint = useBreakpoint()
+
+      return <styled.p data-testid="bp">{breakpoint}</styled.p>
+    }
+
+    render(<Component />)
+
+    expect(screen.getByTestId("bp").textContent).toBe("base")
+
+    matchMediaMock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
+
+    await waitFor(() => {
+      expect(screen.getByTestId("bp").textContent).toBe("md")
+    })
+  })
+
   test("renders correctly with direction up", async () => {
     const defaultResizeObserver = global.ResizeObserver
 
@@ -165,7 +183,8 @@ describe("useBreakpoint", () => {
       }
     } as unknown as typeof ResizeObserver
 
-    const containerRef = { current: document.createElement("div") }
+    const container = document.createElement("div")
+    const containerRef = { current: container }
     const config: ThemeConfig = {
       ...defaultConfig,
       breakpoint: {
@@ -188,7 +207,7 @@ describe("useBreakpoint", () => {
     )
 
     await waitFor(() => {
-      expect(observeMock).toHaveBeenCalledWith()
+      expect(observeMock).toHaveBeenCalledWith(container)
     })
 
     unmount()
@@ -198,22 +217,19 @@ describe("useBreakpoint", () => {
     global.ResizeObserver = defaultResizeObserver
   })
 
-  test("ResizeObserver callback skips requestAnimationFrame when entry is empty", () => {
+  test("ResizeObserver callback skips when entry is empty", () => {
     const defaultResizeObserver = global.ResizeObserver
-    const cafMock = vi.fn()
-    const originalCaf = window.cancelAnimationFrame
-    window.cancelAnimationFrame = cafMock
+    let capturedCb: ResizeObserverCallback | undefined
 
-    global.ResizeObserver = class ResizeObserver {
-      constructor(cb: ResizeObserverCallback) {
-        ;(() => {
-          cb([] as unknown as ResizeObserverEntry[], this)
-        })()
-      }
+    global.ResizeObserver = class MockResizeObserver {
       observe = vi.fn()
       unobserve = vi.fn()
       disconnect = vi.fn()
-    }
+
+      constructor(cb: ResizeObserverCallback) {
+        capturedCb = cb
+      }
+    } as unknown as typeof ResizeObserver
 
     const containerRef = { current: document.createElement("div") }
     const config: ThemeConfig = {
@@ -237,35 +253,13 @@ describe("useBreakpoint", () => {
       { withProvider: false },
     )
 
-    expect(cafMock).not.toHaveBeenCalled()
+    const rafSpy = vi.spyOn(window, "requestAnimationFrame")
 
+    capturedCb?.([] as unknown as ResizeObserverEntry[], {} as ResizeObserver)
+
+    expect(rafSpy).not.toHaveBeenCalled()
+
+    rafSpy.mockRestore()
     global.ResizeObserver = defaultResizeObserver
-    window.cancelAnimationFrame = originalCaf
-  })
-
-  test("returns base when container is set and getBreakpoint is called without width", () => {
-    const containerRef = { current: document.createElement("div") }
-    const config: ThemeConfig = {
-      ...defaultConfig,
-      breakpoint: {
-        containerRef,
-        identifier: "@container",
-      },
-    }
-
-    const Component: FC = () => {
-      const breakpoint = useBreakpoint()
-
-      return <styled.p data-testid="bp">{breakpoint}</styled.p>
-    }
-
-    render(
-      <UIProvider config={config}>
-        <Component />
-      </UIProvider>,
-      { withProvider: false },
-    )
-
-    expect(screen.getByTestId("bp").textContent).toBe("base")
   })
 })

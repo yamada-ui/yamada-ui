@@ -253,12 +253,19 @@ describe("useBreakpoint", () => {
       },
     }
 
-    const { result } = renderHook(() => useBreakpoint(), {
-      wrapper: ({ children }) => (
-        <UIProvider config={config}>{children}</UIProvider>
-      ),
-    })
+    const Component: FC = () => {
+      const breakpoint = useBreakpoint()
 
-    expect(result.current).toBe("base")
+      return <styled.p data-testid="bp">{breakpoint}</styled.p>
+    }
+
+    render(
+      <UIProvider config={config}>
+        <Component />
+      </UIProvider>,
+      { withProvider: false },
+    )
+
+    expect(screen.getByTestId("bp").textContent).toBe("base")
   })
 })

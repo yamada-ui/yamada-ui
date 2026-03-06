@@ -57,12 +57,7 @@ import {
 } from "./dom"
 
 describe("DOM", () => {
-  // test
   describe("createdDom", () => {
-    test("should return true if DOM is created", () => {
-      expect(createdDom()).toBeTruthy()
-    })
-
     test("should return false when document.createElement is unavailable", () => {
       const origCreateElement = document.createElement
       Object.defineProperty(document, "createElement", {

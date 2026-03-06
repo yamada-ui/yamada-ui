@@ -16,9 +16,10 @@
     },
     "test:coverage": {
       "dependsOn": ["transit"],
-      "outputs": ["coverage/**"]
+      "outputs": ["coverage/**", ".vitest-reports/**"]
     },
     "test:coverage:merge": {
+      "cache": false,
       "dependsOn": ["transit"],
       "inputs": [".vitest-reports/**", "vitest.config.ts", "package.json"],
       "outputs": ["coverage/**"]

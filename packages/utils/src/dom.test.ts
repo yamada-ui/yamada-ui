@@ -57,6 +57,7 @@ import {
 } from "./dom"
 
 describe("DOM", () => {
+  // test
   describe("createdDom", () => {
     test("should return true if DOM is created", () => {
       expect(createdDom()).toBeTruthy()

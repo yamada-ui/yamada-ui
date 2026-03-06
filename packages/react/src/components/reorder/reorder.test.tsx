@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, fireEvent, render, screen } from "#test"
 import { useState } from "react"
 import { Reorder } from "./"
 
@@ -159,5 +159,137 @@ describe("<Reorder />", () => {
 
     expect(onChange).toHaveBeenCalledTimes(1)
     expect(onCompleteChange).toHaveBeenCalledTimes(1)
+  })
+
+  test("renders children without explicit value using label fallback", () => {
+    render(
+      <Reorder.Root>
+        <Reorder.Item label="Label A">Label A</Reorder.Item>
+        <Reorder.Item label="Label B">Label B</Reorder.Item>
+      </Reorder.Root>,
+    )
+
+    expect(screen.getByText("Label A")).toBeInTheDocument()
+    expect(screen.getByText("Label B")).toBeInTheDocument()
+  })
+
+  test("renders items without explicit value using label fallback", () => {
+    const items: Reorder.Item[] = [
+      { label: "Fallback A" },
+      { label: "Fallback B" },
+    ]
+
+    render(<Reorder.Root items={items} />)
+
+    expect(screen.getByText("Fallback A")).toBeInTheDocument()
+    expect(screen.getByText("Fallback B")).toBeInTheDocument()
+  })
+
+  test("calls onCompleteChange on mouseUp when values have changed", () => {
+    const onCompleteChange = vi.fn()
+    const onChange = vi.fn()
+
+    render(
+      <Reorder.Root onChange={onChange} onCompleteChange={onCompleteChange}>
+        <Reorder.Item value="Item 1">Item 1</Reorder.Item>
+        <Reorder.Item value="Item 2">Item 2</Reorder.Item>
+      </Reorder.Root>,
+    )
+
+    const list = screen.getByRole("list")
+
+    fireEvent.mouseUp(list)
+
+    expect(onCompleteChange).not.toHaveBeenCalled()
+  })
+
+  test("calls onCompleteChange on touchEnd", () => {
+    const onCompleteChange = vi.fn()
+
+    render(
+      <Reorder.Root onCompleteChange={onCompleteChange}>
+        <Reorder.Item value="Item 1">Item 1</Reorder.Item>
+        <Reorder.Item value="Item 2">Item 2</Reorder.Item>
+      </Reorder.Root>,
+    )
+
+    const list = screen.getByRole("list")
+
+    fireEvent.touchEnd(list)
+
+    expect(onCompleteChange).not.toHaveBeenCalled()
+  })
+
+  test("trigger fires pointerDown event", () => {
+    render(
+      <Reorder.Root>
+        <Reorder.Item data-testid="item" value="Item 1">
+          <Reorder.Trigger data-testid="trigger" />
+        </Reorder.Item>
+      </Reorder.Root>,
+    )
+
+    const trigger = screen.getByTestId("trigger")
+
+    fireEvent.pointerDown(trigger)
+
+    const item = screen.getByTestId("item")
+
+    expect(item).toHaveAttribute("data-has-trigger", "")
+  })
+
+  test("renders with horizontal orientation", () => {
+    render(
+      <Reorder.Root orientation="horizontal">
+        <Reorder.Item value="Item 1">Item 1</Reorder.Item>
+        <Reorder.Item value="Item 2">Item 2</Reorder.Item>
+      </Reorder.Root>,
+    )
+
+    expect(screen.getByText("Item 1")).toBeInTheDocument()
+    expect(screen.getByText("Item 2")).toBeInTheDocument()
+  })
+
+  test("does not update items when props remain the same", async () => {
+    const items: Reorder.Item[] = [
+      { label: "Item 1", value: "Item 1" },
+      { label: "Item 2", value: "Item 2" },
+    ]
+
+    const Component = () => {
+      const [, setCount] = useState(0)
+
+      return (
+        <>
+          <button onClick={() => setCount((c) => c + 1)}>Rerender</button>
+
+          <Reorder.Root items={items} />
+        </>
+      )
+    }
+
+    const { user } = render(<Component />)
+
+    expect(screen.getByText("Item 1")).toBeInTheDocument()
+    expect(screen.getByText("Item 2")).toBeInTheDocument()
+
+    await user.click(screen.getByText("Rerender"))
+
+    expect(screen.getByText("Item 1")).toBeInTheDocument()
+    expect(screen.getByText("Item 2")).toBeInTheDocument()
+  })
+
+  test("item has data-has-trigger attribute when trigger is present", () => {
+    render(
+      <Reorder.Root>
+        <Reorder.Item data-testid="item" value="Item 1">
+          <Reorder.Trigger data-testid="trigger" />
+        </Reorder.Item>
+      </Reorder.Root>,
+    )
+
+    const item = screen.getByTestId("item")
+
+    expect(item).toHaveAttribute("data-has-trigger", "")
   })
 })

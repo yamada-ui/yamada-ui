@@ -1,6 +1,6 @@
 import { a11y, render, screen, waitFor } from "#test"
 import { useState } from "react"
-import { Slide } from "./slide"
+import { Slide, slideVariants } from "./slide"
 
 describe("<Slide />", () => {
   test("renders component correctly", async () => {
@@ -67,6 +67,25 @@ describe("<Slide />", () => {
     const slide = await screen.findByText("Slide")
 
     expect(slide).toHaveStyle({ transform: "translateY(100%)" })
+  })
+
+  describe("slideVariants", () => {
+    test("returns default animation props when placement is undefined", () => {
+      const enterFn = slideVariants.enter as unknown as (custom: {
+        [key: string]: unknown
+      }) => { [key: string]: unknown }
+      const exitFn = slideVariants.exit as unknown as (custom: {
+        [key: string]: unknown
+      }) => { [key: string]: unknown }
+
+      const enterResult = enterFn({ placement: undefined })
+      const exitResult = exitFn({ placement: undefined })
+
+      expect(enterResult).not.toHaveProperty("x")
+      expect(enterResult).not.toHaveProperty("y")
+      expect(exitResult).not.toHaveProperty("x")
+      expect(exitResult).not.toHaveProperty("y")
+    })
   })
 
   test("unmountOnExit works correctly", async () => {

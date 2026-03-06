@@ -1,4 +1,5 @@
 import type { Dict, FlattenObjectOptions } from "../../utils"
+import type { CSSAnimationObject, CSSModifierObject } from "../css"
 import type {
   DefineThemeValue,
   System,
@@ -20,9 +21,24 @@ export type VariableColorModeValue = [
   DefineThemeValue | Dict<DefineThemeValue>,
 ]
 
+export type VariableKeyframeValue =
+  | [
+      CSSModifierObject | Dict<CSSModifierObject>,
+      CSSModifierObject | Dict<CSSModifierObject>,
+    ]
+  | CSSModifierObject
+  | Dict<CSSModifierObject>
+
+export type VariableAnimationValue =
+  | CSSAnimationObject
+  | CSSAnimationObject[]
+  | Dict<CSSAnimationObject>
+
 export type VariableValue =
   | DefineThemeValue
+  | VariableAnimationValue
   | VariableColorModeValue
+  | VariableKeyframeValue
   | VariableResponsiveValue
 
 interface VariableToken {

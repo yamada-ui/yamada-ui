@@ -1,3 +1,4 @@
+import { system } from "#test"
 import { focusRingStyle, generateFocusRing } from "./focus-ring"
 
 describe("generateFocusRing", () => {
@@ -7,7 +8,7 @@ describe("generateFocusRing", () => {
     const transform = generateFocusRing(selector)
     const result = transform("outline", {
       prev: {},
-      system: {} as any,
+      system,
     })
     expect(result["--focus-ring-color"]).toBe("{colorScheme.outline}")
     expect(result.outlineColor).toBe("{focus-ring-color}")
@@ -18,7 +19,7 @@ describe("generateFocusRing", () => {
     const transform = generateFocusRing(selector)
     const result = transform("none", {
       prev: {},
-      system: {} as any,
+      system,
     })
     expect(result[selector]).toStrictEqual(focusRingStyle.none)
   })
@@ -27,7 +28,7 @@ describe("generateFocusRing", () => {
     const transform = generateFocusRing(selector)
     const result = transform("unknown", {
       prev: {},
-      system: {} as any,
+      system,
     })
     expect(result[selector]).toStrictEqual(focusRingStyle.none)
   })
@@ -36,7 +37,7 @@ describe("generateFocusRing", () => {
     const transform = generateFocusRing(selector)
     const result = transform("outline", {
       prev: { "--focus-ring-color": "blue" },
-      system: {} as any,
+      system,
     })
     expect(result["--focus-ring-color"]).toBe("blue")
   })

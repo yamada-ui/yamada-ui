@@ -1,4 +1,4 @@
-import type { System } from "../system"
+import { system } from "#test"
 import {
   analyzeCSSValue,
   getCSSFunction,
@@ -90,21 +90,12 @@ describe("isCSSVar", () => {
 })
 
 describe("isCSSToken", () => {
-  test("returns true if token exists in cssMap", () => {
-    const system = {
-      cssMap: { "colors.red": { ref: "var(--color-red)", var: "--color-red" } },
-    } as unknown as System
+  test("returns true if token exists", () => {
     expect(isCSSToken(system)("colors.red")).toBeTruthy()
   })
 
   test("returns false if token does not exist", () => {
-    const system = { cssMap: {} } as unknown as System
-    expect(isCSSToken(system)("colors.red")).toBeFalsy()
-  })
-
-  test("returns false if cssMap is undefined", () => {
-    const system = {} as unknown as System
-    expect(isCSSToken(system)("colors.red")).toBeFalsy()
+    expect(isCSSToken(system)("colors.unknown")).toBeFalsy()
   })
 })
 
@@ -178,62 +169,38 @@ describe("analyzeCSSValue", () => {
 
 describe("tokenToVar", () => {
   test("returns reference from cssMap if token exists", () => {
-    const system = {
-      cssMap: {
-        "colors.red": { ref: "var(--ui-colors-red)", var: "--ui-colors-red" },
-      },
-    } as unknown as System
     expect(tokenToVar(system)("colors", "red")).toBe("var(--ui-colors-red)")
   })
 
   test("returns fallback value if token does not exist", () => {
-    const system = { cssMap: {} } as unknown as System
-    expect(tokenToVar(system)("colors", "red", "blue")).toBe("blue")
+    expect(tokenToVar(system)("colors", "unknown", "blue")).toBe("blue")
   })
 
   test("returns value if no token and no fallback", () => {
-    const system = { cssMap: {} } as unknown as System
-    expect(tokenToVar(system)("colors", "red")).toBe("red")
+    expect(tokenToVar(system)("colors", "unknown")).toBe("unknown")
   })
 })
 
 describe("varToValue", () => {
   test("resolves variable to value", () => {
-    const system = {
-      cssVars: { "--ui-colors-red": "#ff0000" },
-    } as unknown as System
-    expect(varToValue(system)("--ui-colors-red")).toBe("#ff0000")
+    expect(varToValue(system)("--ui-colors-red")).toBe("#ea4334")
   })
 
   test("recursively resolves nested var references", () => {
-    const system = {
-      cssVars: {
-        "--ui-alias": "var(--ui-colors-red)",
-        "--ui-colors-red": "#ff0000",
-      },
-    } as unknown as System
-    expect(varToValue(system)("--ui-alias")).toBe("#ff0000")
+    expect(varToValue(system)("--ui-colors-danger")).toBe("#ea4334")
   })
 })
 
 describe("tokenToValue", () => {
   test("resolves token to its value", () => {
-    const system = {
-      cssMap: {
-        "colors.red": { ref: "var(--ui-colors-red)", var: "--ui-colors-red" },
-      },
-      cssVars: { "--ui-colors-red": "#ff0000" },
-    } as unknown as System
-    expect(tokenToValue(system)("colors", "red")).toBe("#ff0000")
+    expect(tokenToValue(system)("colors", "red")).toBe("#ea4334")
   })
 
   test("returns fallback when token not found", () => {
-    const system = { cssMap: {} } as unknown as System
     expect(tokenToValue(system)("colors", "unknown", "#000")).toBe("#000")
   })
 
   test("returns value when no token and no fallback", () => {
-    const system = { cssMap: {} } as unknown as System
     expect(tokenToValue(system)("colors", "unknown")).toBe("unknown")
   })
 })

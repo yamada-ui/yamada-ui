@@ -1,24 +1,7 @@
-import type { System } from "../system"
+import { system } from "#test"
 import { colorMix } from "./color-mix"
 
-const createMockSystem = (): System =>
-  ({
-    config: { css: { varPrefix: "ui" } },
-    cssMap: {
-      "colors.blue.500": {
-        ref: "var(--ui-colors-blue-500)",
-        var: "--ui-colors-blue-500",
-      },
-      "colors.red.500": {
-        ref: "var(--ui-colors-red-500)",
-        var: "--ui-colors-red-500",
-      },
-    },
-  }) as unknown as System
-
 describe("colorMix", () => {
-  const system = createMockSystem()
-
   test("returns null/undefined as-is", () => {
     expect(colorMix(null, { system })).toBeNull()
     expect(colorMix(undefined, { system })).toBeUndefined()

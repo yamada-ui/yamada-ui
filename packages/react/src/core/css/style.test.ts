@@ -1,4 +1,5 @@
 import type { UsageTheme } from "../system"
+import { system } from "#test"
 import { generateStyle } from "./style"
 
 describe("generateStyle", () => {
@@ -11,7 +12,7 @@ describe("generateStyle", () => {
         },
       },
     } as unknown as UsageTheme
-    const result = transform("heading", { prev: {}, system: {} as any, theme })
+    const result = transform("heading", { prev: {}, system, theme })
     expect(result).toStrictEqual({ fontSize: "2xl", fontWeight: "bold" })
   })
 
@@ -26,7 +27,7 @@ describe("generateStyle", () => {
     } as unknown as UsageTheme
     const result = transform("textStyles.heading.xl", {
       prev: {},
-      system: {} as any,
+      system,
       theme,
     })
     expect(result).toStrictEqual({ fontSize: "4xl" })
@@ -43,7 +44,7 @@ describe("generateStyle", () => {
     } as unknown as UsageTheme
     const result = transform("heading", {
       prev: { fontSize: "1rem" },
-      system: {} as any,
+      system,
       theme,
     })
     expect(result).toStrictEqual({ color: "red" })
@@ -52,7 +53,7 @@ describe("generateStyle", () => {
   test("returns empty object when style not found", () => {
     const transform = generateStyle("textStyles")
     const theme = { styles: {} } as unknown as UsageTheme
-    const result = transform("missing", { prev: {}, system: {} as any, theme })
+    const result = transform("missing", { prev: {}, system, theme })
     expect(result).toStrictEqual({})
   })
 })

@@ -1,3 +1,4 @@
+import { system } from "#test"
 import { generateFilter } from "./filter"
 
 describe("generateFilter", () => {
@@ -6,7 +7,7 @@ describe("generateFilter", () => {
     const result = transform("10px", {
       prev: {},
       properties: ["--blur"] as any,
-      system: {} as any,
+      system,
     })
     expect(result).toStrictEqual({
       "--blur": "10px",
@@ -19,7 +20,7 @@ describe("generateFilter", () => {
     const result = transform("10px", {
       prev: { filter: "brightness(0.5)" },
       properties: ["--blur"] as any,
-      system: {} as any,
+      system,
     })
     expect(result).toStrictEqual({
       "--blur": "10px",
@@ -32,7 +33,7 @@ describe("generateFilter", () => {
     const result = transform("5px", {
       prev: {},
       properties: ["--backdrop-blur"] as any,
-      system: {} as any,
+      system,
     })
     expect(result).toStrictEqual({
       "--backdrop-blur": "5px",
@@ -45,7 +46,7 @@ describe("generateFilter", () => {
     const result = transform("10px", {
       prev: {},
       properties: ["--blur"] as any,
-      system: {} as any,
+      system,
     })
     expect(result.filter).toBeDefined()
   })

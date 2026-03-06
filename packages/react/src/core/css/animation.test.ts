@@ -1,38 +1,38 @@
-import type { System, UsageTheme } from "../system"
+import type { UsageTheme } from "../system"
+import { system } from "#test"
 import { animation, keyframes } from "./animation"
 
 const createMockOptions = () => ({
   css: () => () => ({}),
-  system: {
-    config: {},
-    cssMap: {},
-  } as unknown as System,
+  system,
   theme: {} as UsageTheme,
 })
 
 describe("animation", () => {
-  test("returns null/undefined as-is", () => {
+  test("handles not values", () => {
     const options = createMockOptions()
     expect(animation(null, options)).toBeNull()
     expect(animation(undefined, options)).toBeUndefined()
   })
 
-  test("returns global values as-is", () => {
+  test("handles global values", () => {
     const options = createMockOptions()
     expect(animation("inherit", options)).toBe("inherit")
     expect(animation("none", options)).toBe("none")
   })
 
-  test("handles object value with animation properties", () => {
+  test("handles object values", () => {
     const options = createMockOptions()
     options.css = (() => () => ({
       animationDuration: "1s",
       animationName: "fadeIn",
       animationTimingFunction: "ease-in",
+      delay: "1s",
     })) as any
 
     const result = animation(
       {
+        delay: "1s",
         duration: "1s",
         keyframes: { from: { opacity: 0 }, to: { opacity: 1 } },
         timingFunction: "ease-in",
@@ -58,18 +58,18 @@ describe("animation", () => {
 })
 
 describe("keyframes", () => {
-  test("returns null/undefined as-is", () => {
+  test("handles not values", () => {
     const options = createMockOptions()
     expect(keyframes(null, options)).toBeNull()
     expect(keyframes(undefined, options)).toBeUndefined()
   })
 
-  test("returns string value as-is", () => {
+  test("handles string values", () => {
     const options = createMockOptions()
     expect(keyframes("fadeIn", options)).toBe("fadeIn")
   })
 
-  test("processes object value with css function", () => {
+  test("handles object values", () => {
     const options = createMockOptions()
     options.css = (() => () => ({
       from: { opacity: 0 },
@@ -80,7 +80,6 @@ describe("keyframes", () => {
       { from: { opacity: 0 }, to: { opacity: 1 } },
       options,
     )
-    // should return a keyframe name (string)
     expect(typeof result).toBe("string")
   })
 })

@@ -1,8 +1,9 @@
+import { system } from "#test"
 import { visuallyHiddenAttributes } from "../../utils"
 import { display } from "./display"
 
 describe("display", () => {
-  const options = { prev: {}, system: {} } as any
+  const options = { prev: {}, system } as any
 
   test("returns center flex styles", () => {
     const result = display("center", options)
@@ -46,7 +47,7 @@ describe("display", () => {
   test("preserves existing placeContent/placeItems from prev", () => {
     const optionsWithPrev = {
       prev: { placeContent: "start", placeItems: "end" },
-      system: {},
+      system,
     } as any
     const result = display("center", optionsWithPrev)
     expect(result).toStrictEqual({

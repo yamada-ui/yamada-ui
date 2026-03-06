@@ -43,8 +43,8 @@ describe("mergeProps", () => {
     const fn2 = vi.fn()
     const result = mergeProps({ onClick: fn1 }, { onClick: fn2 })()
     result.onClick()
-    expect(fn1).toHaveBeenCalledWith()
-    expect(fn2).toHaveBeenCalledWith()
+    expect(fn1).toHaveBeenCalledWith(undefined)
+    expect(fn2).toHaveBeenCalledWith(undefined)
   })
 
   test("merges className with cx", () => {
@@ -112,35 +112,47 @@ describe("chainProps", () => {
   })
 
   test("merges single props object", () => {
-    const chain = chainProps({ a: 1, b: 2 })()
-    const result = chain({ b: 3, c: 4 } as any)
+    const chain = chainProps<{ a?: number; b?: number; c?: number }>({
+      a: 1,
+      b: 2,
+    })()
+    const result = chain({ b: 3, c: 4 })
     expect(result.a).toBe(1)
     expect(result.b).toBe(3)
     expect(result.c).toBe(4)
   })
 
   test("applies single callback function", () => {
-    const chain = chainProps((props: any) => ({
+    const chain = chainProps<{ a?: number; extra?: boolean }>((props) => ({
       ...props,
       extra: true,
     }))()
-    const result = chain({ a: 1 } as any)
+    const result = chain({ a: 1 })
     expect(result.extra).toBeTruthy()
   })
 
   test("chains multiple props objects", () => {
-    const chain = chainProps({ a: 1 }, { b: 2 })()
-    const result = chain({ c: 3 } as any)
+    const chain = chainProps<{ a?: number; b?: number; c?: number }>({
+      a: 1,
+      b: 2,
+    })()
+    const result = chain({ c: 3 })
     expect(result.a).toBe(1)
     expect(result.b).toBe(2)
     expect(result.c).toBe(3)
   })
 
   test("chains multiple callback functions", () => {
-    const addA = (props: any) => ({ ...props, a: 1 })
-    const addB = (props: any) => ({ ...props, b: 2 })
+    const addA = (props: { a?: number; b?: number; c?: number }) => ({
+      ...props,
+      a: 1,
+    })
+    const addB = (props: { a?: number; b?: number; c?: number }) => ({
+      ...props,
+      b: 2,
+    })
     const chain = chainProps(addA, addB)()
-    const result = chain({ c: 3 } as any)
+    const result = chain({ c: 3 })
     expect(result.a).toBe(1)
     expect(result.b).toBe(2)
     expect(result.c).toBe(3)

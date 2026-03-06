@@ -1,6 +1,7 @@
 import type { FC } from "react"
-import { render, renderHook, screen, waitFor } from "#test"
+import { act, render, renderHook, screen, waitFor } from "#test"
 import { useContext } from "react"
+import { noop } from "../../utils"
 import {
   getLanguage,
   I18nContext,
@@ -118,6 +119,147 @@ describe("I18nProvider", () => {
 
     addSpy.mockRestore()
   })
+
+  test("updates language when languagechange event is fired", async () => {
+    const TestComponent: FC = () => {
+      const { locale } = useI18n()
+
+      return <span data-testid="locale">{locale}</span>
+    }
+
+    render(
+      <I18nProvider>
+        <TestComponent />
+      </I18nProvider>,
+      { withProvider: false },
+    )
+
+    act(() => {
+      window.dispatchEvent(new Event("languagechange"))
+    })
+
+    await waitFor(() => {
+      expect(screen.getByTestId("locale")).toBeInTheDocument()
+    })
+  })
+
+  test("updates language when forcedLocale prop changes", async () => {
+    const TestComponent: FC = () => {
+      const { locale } = useI18n()
+
+      return <span data-testid="locale">{locale}</span>
+    }
+
+    const { rerender } = render(
+      <I18nProvider locale="en">
+        <TestComponent />
+      </I18nProvider>,
+      { withProvider: false },
+    )
+
+    expect(screen.getByTestId("locale").textContent).toBe("en")
+
+    rerender(
+      <I18nProvider locale="ja">
+        <TestComponent />
+      </I18nProvider>,
+    )
+
+    await waitFor(() => {
+      expect(screen.getByTestId("locale").textContent).toBe("ja")
+    })
+  })
+
+  test("translation with replaceValues formats message", () => {
+    const customIntl = {
+      "en-US": {
+        carousel: {
+          "Go to {page} slide": "Go to {page} slide",
+        },
+      },
+    }
+
+    const TestComponent: FC = () => {
+      const { t } = useI18n()
+
+      return (
+        <span data-testid="result">
+          {t("carousel.Go to {page} slide" as any, { page: "3" } as any)}
+        </span>
+      )
+    }
+
+    render(
+      <I18nProvider intl={customIntl} locale="en-US">
+        <TestComponent />
+      </I18nProvider>,
+      { withProvider: false },
+    )
+
+    expect(screen.getByTestId("result").textContent).toBe("Go to 3 slide")
+  })
+
+  test("translation with non-string replaceValues", () => {
+    const customIntl = {
+      "en-US": {
+        test: {
+          "Count is {count}": "Count is {count}",
+        },
+      },
+    }
+
+    const TestComponent: FC = () => {
+      const { t } = useI18n()
+
+      return (
+        <span data-testid="result">
+          {t("test.Count is {count}" as any, { count: 5 } as any)}
+        </span>
+      )
+    }
+
+    render(
+      <I18nProvider intl={customIntl} locale="en-US">
+        <TestComponent />
+      </I18nProvider>,
+      { withProvider: false },
+    )
+
+    expect(screen.getByTestId("result").textContent).toBe("Count is 5")
+  })
+
+  test("translation returns value when IntlMessageFormat throws", () => {
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
+
+    const customIntl = {
+      "en-US": {
+        test: {
+          broken: "{invalid, select,}",
+        },
+      },
+    }
+
+    const TestComponent: FC = () => {
+      const { t } = useI18n()
+
+      return (
+        <span data-testid="result">
+          {t("test.broken" as any, { invalid: "value" } as any)}
+        </span>
+      )
+    }
+
+    render(
+      <I18nProvider intl={customIntl} locale="en-US">
+        <TestComponent />
+      </I18nProvider>,
+      { withProvider: false },
+    )
+
+    expect(screen.getByTestId("result").textContent).toBe("{invalid, select,}")
+
+    warnSpy.mockRestore()
+  })
 })
 
 describe("useI18n", () => {
@@ -162,6 +304,18 @@ describe("I18nContext default value", () => {
       const t = ctx.getTranslation()
 
       return <span data-testid="result">{t("test" as any)}</span>
+    }
+
+    render(<TestComponent />, { withProvider: false })
+
+    expect(screen.getByTestId("result").textContent).toBe("")
+  })
+
+  test("default t returns empty string", () => {
+    const TestComponent: FC = () => {
+      const ctx = useContext(I18nContext)
+
+      return <span data-testid="result">{ctx.t("test" as any)}</span>
     }
 
     render(<TestComponent />, { withProvider: false })

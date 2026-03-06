@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, fireEvent, render, screen } from "#test"
 import { NativePopover } from "."
 import { Button } from "../button"
 
@@ -181,5 +181,17 @@ describe("<NativePopover />", () => {
     const closeTrigger = screen.getByTestId("close-trigger")
     expect(closeTrigger).toHaveAttribute("popovertargetaction", "hide")
     expect(closeTrigger).toHaveAttribute("popovertarget")
+  })
+
+  test("should prevent default and stop propagation when disabled", () => {
+    render(<Component disabled />)
+
+    const trigger = screen.getByTestId("trigger")
+
+    expect(trigger).toHaveAttribute("aria-disabled", "true")
+
+    const defaultPrevented = !fireEvent.click(trigger)
+
+    expect(defaultPrevented).toBeTruthy()
   })
 })

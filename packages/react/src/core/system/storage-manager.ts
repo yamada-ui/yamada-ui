@@ -13,13 +13,13 @@ function parseCookie<Y extends string>(
   return match?.[2] as undefined | Y
 }
 
-export interface StorageManager<Y extends string, M extends Y> {
+export interface StorageManager<Y extends string, M extends Y = Y> {
   default(value: M): M
   get(value?: Y): Y
   set(value: Y): void
 }
 
-export function createStorageManager<Y extends string, M extends Y>(
+export function createStorageManager<Y extends string, M extends Y = Y>(
   storage: Storage,
   storageKey: string,
   defaultValue: Y,

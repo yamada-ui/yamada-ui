@@ -135,6 +135,40 @@ describe("<ScrollArea />", () => {
     )
   })
 
+  test("shows scroll indicators on scroll type and hides them after delay", async () => {
+    render(
+      <ScrollArea type="scroll" data-testid="scroll-area" scrollHideDelay={200}>
+        <TestContent />
+      </ScrollArea>,
+    )
+
+    const scrollArea = screen.getByTestId("scroll-area")
+
+    expect(scrollArea).not.toHaveAttribute("data-scroll")
+
+    await act(() =>
+      fireEvent.scroll(scrollArea, {
+        target: { scrollTop: 100 },
+      }),
+    )
+    expect(scrollArea).toHaveAttribute("data-scroll")
+
+    // Scroll again to trigger clearTimeout (line 95) before the previous timeout fires
+    await act(() =>
+      fireEvent.scroll(scrollArea, {
+        target: { scrollTop: 200 },
+      }),
+    )
+    expect(scrollArea).toHaveAttribute("data-scroll")
+
+    await waitFor(
+      () => {
+        expect(scrollArea).not.toHaveAttribute("data-scroll")
+      },
+      { timeout: 1000 },
+    )
+  })
+
   test("applies safari specific key format", () => {
     // Mock Safari environment
     Object.defineProperty(window.navigator, "platform", {

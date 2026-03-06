@@ -67,9 +67,13 @@ export const generateAtRule =
           }
         }
 
-        const condition = `@${identifier} ${type ?? name ?? ""} ${query}`
+        const conditions = [`@${identifier}`]
 
-        prev[condition] = css
+        if (type) conditions.push(type)
+        if (name) conditions.push(name)
+        if (query) conditions.push(query)
+
+        prev[conditions.join(" ")] = css
 
         return prev
       },

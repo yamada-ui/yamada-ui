@@ -59,7 +59,12 @@ export const transforms = {
   deg: (value) => {
     if (isCSSVar(value) || value == null) return value
 
-    const isUnitless = typeof value === "string" && !value.endsWith("deg")
+    const isUnitless =
+      typeof value === "string" &&
+      !value.endsWith("deg") &&
+      !value.endsWith("grad") &&
+      !value.endsWith("turn") &&
+      !value.endsWith("rad")
 
     return isUnitless || isNumber(value) ? `${value}deg` : value
   },

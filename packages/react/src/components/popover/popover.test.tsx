@@ -254,7 +254,9 @@ describe("<Popover />", () => {
 
     render(<Popover.Root defaultOpen>{childrenFn}</Popover.Root>)
 
-    expect(childrenFn).toHaveBeenCalledWith()
+    expect(childrenFn).toHaveBeenCalledWith(
+      expect.objectContaining({ open: true }),
+    )
     expect(screen.getByTestId("fn-child")).toHaveTextContent("open")
   })
 })
@@ -265,7 +267,7 @@ describe("getPopupAnimationProps", () => {
     expect(props).toHaveProperty("animate", "enter")
     expect(props).toHaveProperty("exit", "exit")
     expect(props).toHaveProperty("initial", "exit")
-    expect(props.custom).toStrictEqual({
+    expect("custom" in props && props.custom).toStrictEqual({
       duration: undefined,
       reverse: true,
       scale: 0.95,
@@ -275,7 +277,7 @@ describe("getPopupAnimationProps", () => {
   test("returns slide-fade props for `inline-end`", () => {
     const props = getPopupAnimationProps("inline-end")
     expect(props).toHaveProperty("animate", "enter")
-    expect(props.custom).toStrictEqual({
+    expect("custom" in props && props.custom).toStrictEqual({
       duration: undefined,
       offsetX: 16,
       reverse: true,
@@ -284,7 +286,7 @@ describe("getPopupAnimationProps", () => {
 
   test("returns slide-fade props for `inline-start`", () => {
     const props = getPopupAnimationProps("inline-start")
-    expect(props.custom).toStrictEqual({
+    expect("custom" in props && props.custom).toStrictEqual({
       duration: undefined,
       offsetX: -16,
       reverse: true,
@@ -293,7 +295,7 @@ describe("getPopupAnimationProps", () => {
 
   test("returns slide-fade props for `block-start`", () => {
     const props = getPopupAnimationProps("block-start")
-    expect(props.custom).toStrictEqual({
+    expect("custom" in props && props.custom).toStrictEqual({
       duration: undefined,
       offsetY: -16,
       reverse: true,
@@ -302,7 +304,7 @@ describe("getPopupAnimationProps", () => {
 
   test("returns slide-fade props for `block-end`", () => {
     const props = getPopupAnimationProps("block-end")
-    expect(props.custom).toStrictEqual({
+    expect("custom" in props && props.custom).toStrictEqual({
       duration: undefined,
       offsetY: 16,
       reverse: true,
@@ -316,7 +318,7 @@ describe("getPopupAnimationProps", () => {
 
   test("passes custom duration", () => {
     const props = getPopupAnimationProps("scale", 0.5)
-    expect(props.custom).toStrictEqual({
+    expect("custom" in props && props.custom).toStrictEqual({
       duration: 0.5,
       reverse: true,
       scale: 0.95,

@@ -84,4 +84,47 @@ describe("<Fieldset />", () => {
     )
     expect(screen.getByText("Error").tagName).toBe("SPAN")
   })
+
+  test("renders legend via `legend` prop", () => {
+    render(<Fieldset.Root legend="My Legend">Content</Fieldset.Root>)
+
+    expect(screen.getByText("My Legend")).toHaveClass("ui-fieldset__legend")
+    expect(screen.getByText("My Legend").tagName).toBe("LEGEND")
+  })
+
+  test("renders helperMessage via `helperMessage` prop", () => {
+    render(
+      <Fieldset.Root helperMessage="Help text" legend="Legend">
+        Content
+      </Fieldset.Root>,
+    )
+
+    expect(screen.getByText("Help text")).toHaveClass(
+      "ui-fieldset__helper-message",
+    )
+    expect(screen.getByText("Help text").tagName).toBe("SPAN")
+  })
+
+  test("renders errorMessage via `errorMessage` prop", () => {
+    render(
+      <Fieldset.Root errorMessage="Error text" invalid legend="Legend">
+        Content
+      </Fieldset.Root>,
+    )
+
+    expect(screen.getByText("Error text")).toHaveClass(
+      "ui-fieldset__error-message",
+    )
+    expect(screen.getByText("Error text").tagName).toBe("SPAN")
+  })
+
+  test("does not render errorMessage when `errorMessage` prop is not provided", () => {
+    render(
+      <Fieldset.Root invalid legend="Legend">
+        Content
+      </Fieldset.Root>,
+    )
+
+    expect(screen.queryByText("Error text")).not.toBeInTheDocument()
+  })
 })

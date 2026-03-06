@@ -75,4 +75,16 @@ describe("<NativeTable />", () => {
     expect(screen.getByTestId("tr").tagName).toBe("TR")
     expect(screen.getByTestId("th").tagName).toBe("TH")
   })
+
+  test("renders with scroll area when withScrollArea is true", () => {
+    render(
+      <Table
+        withScrollArea
+        scrollAreaProps={{ "data-testid": "scroll-area" } as any}
+      />,
+    )
+    expect(screen.getByTestId("scroll-area")).toBeInTheDocument()
+    expect(screen.getByTestId("scroll-area").tagName).toBe("DIV")
+    expect(screen.getByTestId("root").tagName).toBe("TABLE")
+  })
 })

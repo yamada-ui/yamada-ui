@@ -71,14 +71,19 @@ describe("<Slide />", () => {
 
   describe("slideVariants", () => {
     test("returns default animation props when placement is undefined", () => {
-      const enterResult =
-        typeof slideVariants.enter === "function"
-          ? slideVariants.enter({ placement: undefined })
-          : {}
-      const exitResult =
-        typeof slideVariants.exit === "function"
-          ? slideVariants.exit({ placement: undefined })
-          : {}
+      const enterFn = slideVariants.enter as (
+        custom: { [key: string]: unknown },
+        current: string,
+        velocity: number,
+      ) => { [key: string]: unknown }
+      const exitFn = slideVariants.exit as (
+        custom: { [key: string]: unknown },
+        current: string,
+        velocity: number,
+      ) => { [key: string]: unknown }
+
+      const enterResult = enterFn({ placement: undefined }, "", 0)
+      const exitResult = exitFn({ placement: undefined }, "", 0)
 
       expect(enterResult).not.toHaveProperty("x")
       expect(enterResult).not.toHaveProperty("y")

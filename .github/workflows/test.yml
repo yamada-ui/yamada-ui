@@ -60,7 +60,7 @@ jobs:
 
       - name: Run chromium coverage shard
         if: steps.check-modified.outputs.any_changed == 'true'
-        run: pnpm run test:coverage --shard=${{ matrix.shard_index }}/4 --reporter=blob
+        run: pnpm run test:coverage -- --shard=${{ matrix.shard_index }}/4 --reporter=blob
 
       - name: Upload coverage blob reports
         if: steps.check-modified.outputs.any_changed == 'true'

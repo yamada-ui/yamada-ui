@@ -249,6 +249,30 @@ describe("<Editable />", () => {
     )
     expect(getByTestId("EditableInput")).not.toHaveAttribute("hidden")
   })
+
+  test("supports children as a function", () => {
+    const childrenFn = vi.fn(({ editing }) => (
+      <>
+        <Editable.Preview data-testid="EditablePreview" />
+        <Editable.Input data-testid="EditableInput" />
+        {editing ? <span data-testid="editing-indicator" /> : null}
+      </>
+    ))
+    const { getByTestId, queryByTestId } = render(
+      <Editable.Root defaultValue="Some text">{childrenFn}</Editable.Root>,
+    )
+    expect(childrenFn).toHaveBeenCalledWith(
+      expect.objectContaining({
+        editing: false,
+        onCancel: expect.any(Function),
+        onEdit: expect.any(Function),
+        onSubmit: expect.any(Function),
+      }),
+    )
+    expect(queryByTestId("editing-indicator")).toBeNull()
+    act(() => fireEvent.focus(getByTestId("EditablePreview")))
+    expect(queryByTestId("editing-indicator")).toBeInTheDocument()
+  })
 })
 
 describe("<EditableTextarea />", () => {
@@ -274,5 +298,119 @@ describe("<EditableTextarea />", () => {
     )
     const textarea = getByTestId("EditableTextarea")
     expect(textarea).toHaveClass("custom-class")
+  })
+
+  test("calls onCancel when Escape is pressed in textarea", () => {
+    const onCancel = vi.fn()
+    const { getByTestId } = render(
+      <Editable.Root
+        defaultValue="Some text"
+        startWithEditView
+        onCancel={onCancel}
+      >
+        <Editable.Preview />
+        <Editable.Textarea data-testid="EditableTextarea" />
+      </Editable.Root>,
+    )
+    fireEvent.keyDown(getByTestId("EditableTextarea"), { key: "Escape" })
+    expect(onCancel).toHaveBeenCalledExactlyOnceWith("Some text")
+  })
+
+  test("does not submit when Enter is pressed in textarea", () => {
+    const onSubmit = vi.fn()
+    const { getByTestId } = render(
+      <Editable.Root
+        defaultValue="Some text"
+        startWithEditView
+        onSubmit={onSubmit}
+      >
+        <Editable.Preview />
+        <Editable.Textarea data-testid="EditableTextarea" />
+      </Editable.Root>,
+    )
+    fireEvent.keyDown(getByTestId("EditableTextarea"), { key: "Enter" })
+    expect(onSubmit).not.toHaveBeenCalled()
+  })
+})
+
+describe("<EditableControl />", () => {
+  test("renders correctly with role group", () => {
+    const { getByTestId } = render(
+      <Editable.Root defaultValue="Some text">
+        <Editable.Control data-testid="EditableControl">
+          <Editable.Preview />
+          <Editable.Input />
+        </Editable.Control>
+      </Editable.Root>,
+    )
+    const control = getByTestId("EditableControl")
+    expect(control).toBeInTheDocument()
+    expect(control).toHaveAttribute("role", "group")
+  })
+})
+
+describe("<EditableEditTrigger />", () => {
+  test("renders and triggers edit mode on click", () => {
+    const onEdit = vi.fn()
+    const { getByTestId } = render(
+      <Editable.Root defaultValue="Some text" onEdit={onEdit}>
+        <Editable.Preview />
+        <Editable.Input data-testid="EditableInput" />
+        <Editable.EditTrigger data-testid="EditTrigger">
+          <button>Edit</button>
+        </Editable.EditTrigger>
+      </Editable.Root>,
+    )
+    const trigger = getByTestId("EditTrigger")
+    expect(trigger).toBeInTheDocument()
+    act(() => fireEvent.click(trigger))
+    expect(onEdit).toHaveBeenCalledExactlyOnceWith()
+    expect(getByTestId("EditableInput")).not.toHaveAttribute("hidden")
+  })
+})
+
+describe("<EditableCancelTrigger />", () => {
+  test("renders and triggers cancel on click", () => {
+    const onCancel = vi.fn()
+    const { getByTestId } = render(
+      <Editable.Root
+        defaultValue="Some text"
+        startWithEditView
+        onCancel={onCancel}
+      >
+        <Editable.Preview />
+        <Editable.Input data-testid="EditableInput" />
+        <Editable.CancelTrigger data-testid="CancelTrigger">
+          <button>Cancel</button>
+        </Editable.CancelTrigger>
+      </Editable.Root>,
+    )
+    const trigger = getByTestId("CancelTrigger")
+    expect(trigger).toBeInTheDocument()
+    act(() => fireEvent.click(trigger))
+    expect(onCancel).toHaveBeenCalledExactlyOnceWith("Some text")
+  })
+})
+
+describe("<EditableSubmitTrigger />", () => {
+  test("renders and triggers submit on click", () => {
+    const onSubmit = vi.fn()
+    const { getByTestId } = render(
+      <Editable.Root
+        defaultValue="Some text"
+        startWithEditView
+        onSubmit={onSubmit}
+      >
+        <Editable.Preview />
+        <Editable.Input data-testid="EditableInput" />
+        <Editable.SubmitTrigger data-testid="SubmitTrigger">
+          <button>Submit</button>
+        </Editable.SubmitTrigger>
+      </Editable.Root>,
+    )
+    const trigger = getByTestId("SubmitTrigger")
+    expect(trigger).toBeInTheDocument()
+    act(() => fireEvent.click(trigger))
+    expect(onSubmit).toHaveBeenCalledExactlyOnceWith("Some text")
   })
 })

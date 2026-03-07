@@ -199,7 +199,7 @@ describe("<ColorSelector />", () => {
 
     await waitFor(() => {
       expect(openEyeDropper).toHaveBeenCalledTimes(1)
-      expect(onChange).toHaveBeenCalledWith()
+      expect(onChange).toHaveBeenCalledWith("#00ff00")
     })
   })
 
@@ -218,7 +218,7 @@ describe("<ColorSelector />", () => {
 
     await waitFor(() => {
       expect(openEyeDropper).toHaveBeenCalledTimes(1)
-      expect(onChange).toHaveBeenCalledWith()
+      expect(onChange).toHaveBeenCalledWith("#00ff00")
     })
   })
 
@@ -240,7 +240,7 @@ describe("<ColorSelector />", () => {
 
     await waitFor(() => {
       expect(openEyeDropper).toHaveBeenCalledTimes(1)
-      expect(onChange).toHaveBeenCalledWith()
+      expect(onChange).toHaveBeenCalledWith("#00ff00")
     })
   })
 
@@ -320,7 +320,7 @@ describe("<ColorSelector />", () => {
 
     fireEvent.click(options[1]!)
 
-    expect(onChange).toHaveBeenCalledWith()
+    expect(onChange).toHaveBeenCalledWith("#00ff00")
   })
 
   test("calls onChange when pressing Enter on a color swatch item", () => {
@@ -338,7 +338,7 @@ describe("<ColorSelector />", () => {
 
     fireEvent.keyDown(options[0]!, { key: "Enter" })
 
-    expect(onChange).toHaveBeenCalledWith()
+    expect(onChange).toHaveBeenCalledWith("#ff0000")
   })
 
   test("calls onChange when pressing Space on a color swatch item", () => {
@@ -356,7 +356,7 @@ describe("<ColorSelector />", () => {
 
     fireEvent.keyDown(options[0]!, { key: " ", code: "Space" })
 
-    expect(onChange).toHaveBeenCalledWith()
+    expect(onChange).toHaveBeenCalledWith("#ff0000")
   })
 
   test("does not call onChange on swatch click when disabled", () => {

@@ -9,31 +9,55 @@ import { toString } from "hast-util-to-string"
 import { visit } from "unist-util-visit"
 import { CONSTANTS } from "@/constants"
 import { getLocale, langs } from "@/utils/i18n"
+import { replaceProps } from "@/utils/markdown"
 
-async function getSlugs(path: string) {
+function extractSlugs(content: string) {
+  const slugger = new GithubSlugger()
+  const slugs: string[] = []
+  const regex = /^#{1,6}\s+(.+)$/gm
+
+  let match
+
+  while ((match = regex.exec(content)) !== null) {
+    const [, content] = match
+
+    if (!content) continue
+
+    slugs.push(
+      slugger.slug(content.trim().replace(/\s*\{#[a-z0-9-]+\}\s*$/i, "")),
+    )
+  }
+
+  return slugs
+}
+
+async function readContent(path: string) {
   try {
-    const slugger = new GithubSlugger()
     const data = await readFile(`${path}.mdx`, "utf-8")
     const { content } = matter(data)
-    const slugs: string[] = []
-    const regex = /^#{1,6}\s+(.+)$/gm
 
-    let match
-
-    while ((match = regex.exec(content)) !== null) {
-      const [, content] = match
-
-      if (!content) continue
-
-      slugs.push(
-        slugger.slug(content.trim().replace(/\s*\{#[a-z0-9-]+\}\s*$/i, "")),
-      )
-    }
-
-    return slugs
+    return content
   } catch {
     console.warn(`${path}.mdx not found. Please create it.`)
   }
+}
+
+async function getSlugs(path: string) {
+  const content = await readContent(path)
+
+  if (!content) return
+
+  return extractSlugs(content)
+}
+
+async function getAllSlugs(path: string) {
+  const content = await readContent(path)
+
+  if (!content) return
+
+  const replaced = await replaceProps(content)
+
+  return extractSlugs(replaced)
 }
 
 function getPath(filePath: string) {
@@ -100,7 +124,7 @@ export async function transformToc(toc: TocEntry[], filePath: string) {
   if (locale === CONSTANTS.I18N.DEFAULT_LOCALE) {
     return toc
   } else {
-    const slugs = await getSlugs(path)
+    const slugs = await getAllSlugs(path)
 
     if (!slugs) return toc
 

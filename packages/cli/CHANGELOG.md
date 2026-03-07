@@ -1,5 +1,17 @@
 # @yamada-ui/cli
 
+## 2.1.0
+
+### Minor Changes
+
+- [#5866](https://github.com/yamada-ui/yamada-ui/pull/5866) [`c746d55`](https://github.com/yamada-ui/yamada-ui/commit/c746d5574a2bb32e8cf36a6c3bcfa8b9865f2e39) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `--force` (`-F`) option to the `update` command to force overwrite local changes with remote source code.
+
+### Patch Changes
+
+- [#5852](https://github.com/yamada-ui/yamada-ui/pull/5852) [`479d290`](https://github.com/yamada-ui/yamada-ui/commit/479d290108fab4dd2fd9612f7d5282d65834d390) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#5869](https://github.com/yamada-ui/yamada-ui/pull/5869) [`bf38fba`](https://github.com/yamada-ui/yamada-ui/commit/bf38fba31d05f4db658f97ea9d131e7851c1702a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
 ## 2.0.9
 
 ### Patch Changes

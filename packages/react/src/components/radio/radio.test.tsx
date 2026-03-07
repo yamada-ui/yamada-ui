@@ -161,7 +161,7 @@ describe("<Radio />", () => {
     const onChangeMock = vi.fn()
 
     const { result } = renderHook(() =>
-      useRadioGroup({ defaultValue: "1", onChange: onChangeMock }),
+      useRadioGroup({ defaultValue: "1" as string, onChange: onChangeMock }),
     )
 
     act(() => {

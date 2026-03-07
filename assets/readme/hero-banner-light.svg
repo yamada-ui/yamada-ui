@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f6f8fa;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="brand-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#5a9fd4;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#9b6bc4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d4606e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="brand-gradient-v" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7bb4e3;stop-opacity:0.15" />
+      <stop offset="100%" style="stop-color:#e87e8d;stop-opacity:0.03" />
+    </linearGradient>
+    <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7bb4e3;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#b388d9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e87e8d;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="400" fill="url(#bg-gradient)" rx="12" />
+  <rect width="1200" height="400" fill="none" rx="12" stroke="#d0d7de" stroke-width="1" />
+
+  <!-- Decorative gradient orb -->
+  <circle cx="1050" cy="120" r="200" fill="url(#brand-gradient-v)" opacity="0.6" />
+  <circle cx="150" cy="320" r="150" fill="url(#brand-gradient-v)" opacity="0.5" />
+
+  <!-- Logo mark -->
+  <g transform="translate(80, 120) scale(0.5)" fill="url(#logo-gradient)">
+    <path d="M95.4499 0H100.521C105.565 0.195483 109.752 0.567222 113.081 1.11522C117.34 1.81383 122.177 2.9659 127.593 4.57143C130.711 5.49437 133.747 6.60798 136.702 7.91227C154.221 15.6291 168.393 27.3741 179.218 43.1474C181.599 46.618 184.065 50.9859 186.616 56.2512C188.055 59.2283 189.282 62.183 190.298 65.1152C197.921 87.1087 197.901 109.088 190.235 131.052C189.165 134.116 187.922 137.108 186.505 140.027C176.43 160.803 161.028 176.252 140.297 186.376C137.362 187.808 134.449 189.037 131.559 190.063C109.412 197.898 87.2703 197.978 65.1333 190.303C57.6684 187.712 50.0784 183.78 43.6661 179.569C39.5771 176.884 35.4705 173.618 31.3463 169.773C19.6465 158.874 11.1112 145.992 5.74036 131.129C4.4938 127.678 3.26486 123.238 2.05354 117.809C-0.133561 108.013 -0.460424 97.5574 0.539393 87.6166C1.0361 82.6975 2.10802 77.2384 3.75515 71.2393C5.75478 63.9519 8.62926 56.9674 12.3786 50.2857C13.7854 47.7829 15.1777 45.5172 16.5557 43.4887C20.9139 37.0633 25.8985 31.2437 31.5097 26.0297C34.9754 22.8139 38.9122 19.7086 42.7192 17.0455C44.8149 15.581 47.4266 13.9787 50.5543 12.2385C56.316 9.02749 62.1739 6.48781 68.128 4.6195C77.0334 1.82184 86.1407 0.282009 95.4499 0ZM154.074 37.4367C146.57 30.5339 137.572 24.6598 127.905 21.0401C121.589 18.6719 115.63 17.0872 110.029 16.286C96.0251 14.2831 82.3129 15.7412 68.8923 20.6604C66.1331 21.6746 63.6192 22.9389 60.9947 24.1598C58.4038 25.3664 56.1302 26.8806 53.6595 28.3323C52.7334 28.8771 51.8249 29.4795 50.934 30.1397C48.7421 31.7693 46.43 33.3844 44.4352 35.1534C43.288 36.1724 42.0991 37.2332 40.8685 38.3356C38.2056 40.7246 35.9608 43.5511 33.6199 46.2815C33.6059 46.2986 33.5959 46.3188 33.591 46.3403C33.586 46.3618 33.5861 46.384 33.5913 46.4052C33.5964 46.4263 33.6065 46.4458 33.6207 46.4619C33.6349 46.478 33.6527 46.4903 33.6727 46.4978L148.161 89.3423C148.265 89.3813 148.375 89.3963 148.484 89.3863C148.594 89.3763 148.698 89.3416 148.791 89.2847L176.238 72.3882C176.294 72.3545 176.336 72.3028 176.359 72.2417C176.382 72.1806 176.383 72.1136 176.363 72.0517C173.376 63.2133 169.166 55.1904 163.731 47.9832C160.943 44.2914 157.506 40.5949 154.074 37.4367ZM131.717 99.7927C131.836 99.719 131.829 99.6565 131.698 99.6052L25.0301 59.6833C24.9243 59.6449 24.8474 59.6769 24.7994 59.7795C24.1104 61.244 23.4022 62.7133 22.6748 64.1875C22.0242 65.5046 21.4042 66.9787 20.8145 68.6099C19.1257 73.2854 17.8455 77.7864 16.9739 82.1127C15.1954 90.9415 14.955 100.137 16.2529 109.7C16.6855 112.895 17.3376 116.035 18.2092 119.122C19.4398 123.461 20.6239 126.978 21.7615 129.673C23.806 134.512 26.2478 139.13 29.087 143.526C29.9619 144.882 31.2085 146.59 32.8267 148.651C33.8682 149.981 34.9465 151.25 36.0617 152.458C37.1929 153.682 38.3049 154.93 39.3977 156.202C39.4625 156.276 39.5508 156.325 39.6468 156.34C39.7429 156.355 39.8403 156.335 39.9216 156.284L131.717 99.7927ZM73.401 176.815C79.5377 178.712 86.2881 179.906 93.6521 180.396C96.7606 180.604 99.9699 180.587 103.28 180.343C107.561 180.026 111.336 179.532 114.605 178.863C119.466 177.866 124.584 176.251 129.958 174.017C133.01 172.743 136.197 171.335 139.024 169.595C141.119 168.311 143.278 167.1 145.272 165.643C148.051 163.618 149.908 162.198 150.844 161.384C156.368 156.59 160.866 151.857 164.336 147.185C167.086 143.486 169.665 139.248 172.075 134.47C174.286 130.081 176.18 124.818 177.459 120.395C180.458 110.003 181.298 99.3328 179.978 88.3857C179.962 88.2383 179.89 88.2031 179.761 88.28L52.5154 166.6C52.4875 166.616 52.4642 166.639 52.448 166.667C52.4319 166.695 52.4234 166.726 52.4234 166.759C52.4234 166.791 52.4319 166.822 52.448 166.85C52.4642 166.878 52.4875 166.901 52.5154 166.917C55.2313 168.494 57.7933 170.21 60.6149 171.59C65.3096 173.891 69.5716 175.632 73.401 176.815Z" />
+  </g>
+
+  <!-- Title -->
+  <text x="230" y="165" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="56" font-weight="700" fill="url(#brand-gradient)">Yamada UI</text>
+
+  <!-- Tagline -->
+  <text x="232" y="205" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="20" fill="#57606a" letter-spacing="0.5">Build beautiful, accessible React apps at lightning speed</text>
+
+  <!-- Feature pills -->
+  <g transform="translate(232, 230)">
+    <rect x="0" y="0" width="170" height="34" rx="17" fill="#5a9fd4" fill-opacity="0.08" stroke="#5a9fd4" stroke-opacity="0.25" stroke-width="1" />
+    <text x="85" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#5a9fd4" text-anchor="middle" font-weight="500">120+ Components</text>
+
+    <rect x="185" y="0" width="130" height="34" rx="17" fill="#9b6bc4" fill-opacity="0.08" stroke="#9b6bc4" stroke-opacity="0.25" stroke-width="1" />
+    <text x="250" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#9b6bc4" text-anchor="middle" font-weight="500">Accessible</text>
+
+    <rect x="330" y="0" width="130" height="34" rx="17" fill="#d4606e" fill-opacity="0.08" stroke="#d4606e" stroke-opacity="0.25" stroke-width="1" />
+    <text x="395" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#d4606e" text-anchor="middle" font-weight="500">Themeable</text>
+
+    <rect x="475" y="0" width="140" height="34" rx="17" fill="#5a9fd4" fill-opacity="0.08" stroke="#5a9fd4" stroke-opacity="0.25" stroke-width="1" />
+    <text x="545" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#5a9fd4" text-anchor="middle" font-weight="500">TypeScript</text>
+  </g>
+
+  <!-- Code snippet preview -->
+  <g transform="translate(232, 290)">
+    <rect x="0" y="0" width="520" height="80" rx="8" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1" />
+    <text x="16" y="28" font-family="'SF Mono', 'Fira Code', monospace" font-size="13" fill="#6e7781">// Get started in seconds</text>
+    <text x="16" y="50" font-family="'SF Mono', 'Fira Code', monospace" font-size="13">
+      <tspan fill="#cf222e">npm</tspan><tspan fill="#24292f"> install </tspan><tspan fill="#0550ae">@yamada-ui/react</tspan>
+    </text>
+    <text x="16" y="70" font-family="'SF Mono', 'Fira Code', monospace" font-size="13">
+      <tspan fill="#cf222e">import</tspan><tspan fill="#24292f"> { </tspan><tspan fill="#8250df">Button</tspan><tspan fill="#24292f"> } </tspan><tspan fill="#cf222e">from</tspan><tspan fill="#24292f"> </tspan><tspan fill="#0a3069">"@yamada-ui/react"</tspan>
+    </text>
+  </g>
+
+  <!-- Decorative component cards on the right -->
+  <g transform="translate(830, 70)">
+    <rect x="0" y="0" width="160" height="70" rx="8" fill="white" stroke="#d0d7de" stroke-width="1" />
+    <text x="16" y="24" font-family="system-ui, sans-serif" font-size="11" fill="#6e7781">Button</text>
+    <rect x="16" y="36" width="80" height="22" rx="6" fill="url(#brand-gradient)" />
+    <text x="56" y="51" font-family="system-ui, sans-serif" font-size="11" fill="white" text-anchor="middle" font-weight="500">Click me</text>
+  </g>
+
+  <g transform="translate(870, 155)">
+    <rect x="0" y="0" width="160" height="70" rx="8" fill="white" stroke="#d0d7de" stroke-width="1" />
+    <text x="16" y="24" font-family="system-ui, sans-serif" font-size="11" fill="#6e7781">Switch</text>
+    <rect x="16" y="36" width="44" height="22" rx="11" fill="url(#logo-gradient)" />
+    <circle cx="48" cy="47" r="8" fill="white" />
+    <text x="72" y="51" font-family="system-ui, sans-serif" font-size="11" fill="#24292f">Dark mode</text>
+  </g>
+
+  <g transform="translate(830, 240)">
+    <rect x="0" y="0" width="160" height="70" rx="8" fill="white" stroke="#d0d7de" stroke-width="1" />
+    <text x="16" y="24" font-family="system-ui, sans-serif" font-size="11" fill="#6e7781">Badge</text>
+    <rect x="16" y="36" width="50" height="20" rx="10" fill="#5a9fd4" fill-opacity="0.12" />
+    <text x="41" y="50" font-family="system-ui, sans-serif" font-size="10" fill="#5a9fd4" text-anchor="middle" font-weight="500">New</text>
+    <rect x="74" y="36" width="65" height="20" rx="10" fill="#9b6bc4" fill-opacity="0.12" />
+    <text x="106" y="50" font-family="system-ui, sans-serif" font-size="10" fill="#9b6bc4" text-anchor="middle" font-weight="500">Popular</text>
+  </g>
+
+  <g transform="translate(1010, 100)">
+    <rect x="0" y="0" width="140" height="70" rx="8" fill="white" stroke="#d0d7de" stroke-width="1" />
+    <text x="16" y="24" font-family="system-ui, sans-serif" font-size="11" fill="#6e7781">Slider</text>
+    <rect x="16" y="44" width="108" height="4" rx="2" fill="#e1e4e8" />
+    <rect x="16" y="44" width="70" height="4" rx="2" fill="url(#brand-gradient)" />
+    <circle cx="86" cy="46" r="7" fill="url(#brand-gradient)" />
+  </g>
+
+  <g transform="translate(1010, 195)">
+    <rect x="0" y="0" width="140" height="70" rx="8" fill="white" stroke="#d0d7de" stroke-width="1" />
+    <text x="16" y="24" font-family="system-ui, sans-serif" font-size="11" fill="#6e7781">Progress</text>
+    <rect x="16" y="40" width="108" height="8" rx="4" fill="#e1e4e8" />
+    <rect x="16" y="40" width="75" height="8" rx="4" fill="url(#brand-gradient)" />
+    <text x="100" y="54" font-family="system-ui, sans-serif" font-size="10" fill="#6e7781" text-anchor="end">69%</text>
+  </g>
+</svg>

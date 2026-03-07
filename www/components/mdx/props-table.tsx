@@ -1,5 +1,6 @@
 import type { Props } from "@/data"
 import { Box, Code, Grid, NativeTable, Text } from "@yamada-ui/react"
+import GithubSlugger from "github-slugger"
 import { useTranslations } from "next-intl"
 import { Fragment } from "react"
 import { getProps, isNamespace, isSingle } from "@/utils/props"
@@ -23,19 +24,18 @@ export async function PropsTable({
   const data = await getProps(name, { omit, pick })
   const single = isSingle(data)
   const namespace = Object.values(data).some((data) => isNamespace(data))
+  const slugger = new GithubSlugger()
 
   return Object.entries(data).map(([rootName, propsOrNamespace], index) => {
     if (isNamespace(propsOrNamespace)) {
       return Object.entries(propsOrNamespace)
 
         .map(([name, props], index) => {
+          const title = `${rootName}.${name}`
+
           return (
             <Fragment key={index}>
-              {!single ? (
-                <H3>
-                  {rootName}.{name}
-                </H3>
-              ) : null}
+              {!single ? <H3 id={slugger.slug(title)}>{title}</H3> : null}
               <Table props={props} />
             </Fragment>
           )
@@ -43,7 +43,7 @@ export async function PropsTable({
     } else if (!namespace || all) {
       return (
         <Fragment key={index}>
-          {!single ? <H3>{rootName}</H3> : null}
+          {!single ? <H3 id={slugger.slug(rootName)}>{rootName}</H3> : null}
           <Table props={propsOrNamespace} />
         </Fragment>
       )

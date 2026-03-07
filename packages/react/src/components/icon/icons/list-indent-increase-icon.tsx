@@ -1,6 +1,8 @@
 "use client"
 
-import { ListIndentIncrease } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { ListIndentIncrease as OriginalListIndentIncreaseIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -9,5 +11,5 @@ import { component, Icon } from "../icon"
  * @see https://yamada-ui.com/docs/components/icon
  */
 export const ListIndentIncreaseIcon = component(Icon)({
-  as: ListIndentIncrease,
-})
+  as: OriginalListIndentIncreaseIcon,
+}) as Component<"svg", IconProps>

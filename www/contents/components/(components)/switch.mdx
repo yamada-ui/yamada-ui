@@ -160,4 +160,24 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+The `Switch` follows the [WAI-ARIA - Switch Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/switch/) for accessibility.
+
+### Keyboard Navigation
+
+| Key     | Description                                                            | State |
+| ------- | ---------------------------------------------------------------------- | ----- |
+| `Tab`   | Focuses on a switch that is not disabled.                              | -     |
+| `Space` | Toggles the state of the focused switch.                               | -     |
+| `Enter` | Toggles the state of the focused switch when `checkOnEnter` is `true`. | -     |
+
+### ARIA Roles and Attributes
+
+| Component | Roles and Attributes | Usage                                                                                                                                                          |
+| --------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Switch`  | `role="switch"`      | Indicates that this is a switch.                                                                                                                               |
+|           | `aria-checked`       | Sets to `"true"` if the switch is on, and `"false"` if it is off.                                                                                              |
+|           | `aria-describedby`   | If `Switch` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|           | `aria-disabled`      | Sets to `"true"` if `disabled` is set.                                                                                                                         |
+|           | `aria-invalid`       | Sets to `"true"` if `invalid` is set.                                                                                                                          |
+|           | `aria-readonly`      | Sets to `"true"` if `readOnly` is set.                                                                                                                         |
+|           | `aria-required`      | Sets to `"true"` if `required` is set.                                                                                                                         |

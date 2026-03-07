@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, fireEvent, render, screen } from "#test"
 import { Autocomplete } from "."
 
 describe("<Autocomplete />", () => {
@@ -47,6 +47,65 @@ describe("<Autocomplete />", () => {
     expect(option.firstChild).toHaveClass("ui-autocomplete__indicator")
     expect(group).toHaveClass("ui-autocomplete__group")
     expect(group.firstChild).toHaveClass("ui-autocomplete__label")
+  })
+
+  test("does not hide separator when blurring to content in multiple mode", () => {
+    render(
+      <Autocomplete.Root
+        defaultOpen
+        defaultValue={["one", "two"]}
+        items={[
+          { label: "Option 1", value: "one" },
+          { label: "Option 2", value: "two" },
+          { label: "Option 3", value: "three" },
+        ]}
+        multiple
+      />,
+    )
+
+    const field = screen.getByRole("combobox")
+    const input = field.querySelector("input")!
+    const option = screen.getByRole("option", { name: "Option 3" })
+
+    fireEvent.focus(input)
+
+    // The separator should still be visible after blurring to an option in the content
+    fireEvent.blur(input, { relatedTarget: option })
+
+    const spans = [...field.querySelectorAll("span")]
+    const lastSpan = spans.at(-1)
+
+    expect(lastSpan?.textContent).toContain(",")
+  })
+
+  test("hides separator when blurring outside the component in multiple mode", () => {
+    render(
+      <>
+        <button data-testid="outside">outside</button>
+        <Autocomplete.Root
+          defaultOpen
+          defaultValue={["one", "two"]}
+          items={[
+            { label: "Option 1", value: "one" },
+            { label: "Option 2", value: "two" },
+            { label: "Option 3", value: "three" },
+          ]}
+          multiple
+        />
+      </>,
+    )
+
+    const field = screen.getByRole("combobox")
+    const input = field.querySelector("input")!
+    const outside = screen.getByTestId("outside")
+
+    fireEvent.focus(input)
+    fireEvent.blur(input, { relatedTarget: outside })
+
+    const spans = [...field.querySelectorAll("span")]
+    const lastSpan = spans.at(-1)
+
+    expect(lastSpan?.textContent).not.toContain(",")
   })
 
   test("renders HTML tag correctly", () => {

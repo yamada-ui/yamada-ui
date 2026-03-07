@@ -16,6 +16,7 @@ export default meta
 export const Basic: Story = () => {
   return (
     <Rotate
+      aria-label="Toggle icon"
       from={<AppleIcon fontSize="2xl" />}
       to={<CherryIcon fontSize="2xl" />}
     />
@@ -25,6 +26,7 @@ export const Basic: Story = () => {
 export const RotateDegree: Story = () => {
   return (
     <Rotate
+      aria-label="Toggle icon"
       from={<AppleIcon fontSize="2xl" />}
       rotate={-360}
       to={<CherryIcon fontSize="2xl" />}
@@ -35,6 +37,7 @@ export const RotateDegree: Story = () => {
 export const Duration: Story = () => {
   return (
     <Rotate
+      aria-label="Toggle icon"
       duration={0.6}
       from={<AppleIcon fontSize="2xl" />}
       to={<CherryIcon fontSize="2xl" />}
@@ -45,6 +48,7 @@ export const Duration: Story = () => {
 export const Delay: Story = () => {
   return (
     <Rotate
+      aria-label="Toggle icon"
       delay={1}
       from={<AppleIcon fontSize="2xl" />}
       to={<CherryIcon fontSize="2xl" />}
@@ -55,6 +59,7 @@ export const Delay: Story = () => {
 export const Disabled: Story = () => {
   return (
     <Rotate
+      aria-label="Toggle icon"
       disabled
       from={<AppleIcon fontSize="2xl" />}
       to={<CherryIcon fontSize="2xl" />}
@@ -65,6 +70,7 @@ export const Disabled: Story = () => {
 export const ReadOnly: Story = () => {
   return (
     <Rotate
+      aria-label="Toggle icon"
       from={<AppleIcon fontSize="2xl" />}
       readOnly
       to={<CherryIcon fontSize="2xl" />}
@@ -77,6 +83,7 @@ export const CustomControl: Story = () => {
 
   return (
     <Rotate
+      aria-label="Toggle icon"
       from={<AppleIcon fontSize="2xl" />}
       to={<CherryIcon fontSize="2xl" />}
       value={value}

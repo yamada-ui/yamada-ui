@@ -17,9 +17,9 @@ const LANGUAGE_ITEMS = [
 ]
 
 interface Data {
-  name: string
   dateOfBirth: Date
   language: string
+  name: string
 }
 
 export interface AccountProps extends StackProps {}

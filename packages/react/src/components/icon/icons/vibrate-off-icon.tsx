@@ -1,6 +1,8 @@
 "use client"
 
-import { VibrateOff } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { VibrateOff as OriginalVibrateOffIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const VibrateOffIcon = component(Icon)({ as: VibrateOff })
+export const VibrateOffIcon = component(Icon)({
+  as: OriginalVibrateOffIcon,
+}) as Component<"svg", IconProps>

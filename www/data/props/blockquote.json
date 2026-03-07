@@ -156,12 +156,6 @@
         "description": "The icon of the blockquote.",
         "required": false
       },
-      "justify": {
-        "type": "\"center\" | \"end\" | \"start\"",
-        "defaultValue": "\"start\"",
-        "description": "The alignment of the blockquote.",
-        "required": false
-      },
       "withDash": {
         "type": "boolean",
         "defaultValue": "false",
@@ -324,12 +318,6 @@
     "icon": {
       "type": "ReactNode",
       "description": "The icon of the blockquote.",
-      "required": false
-    },
-    "justify": {
-      "type": "\"center\" | \"end\" | \"start\"",
-      "defaultValue": "\"start\"",
-      "description": "The alignment of the blockquote.",
       "required": false
     },
     "withDash": {

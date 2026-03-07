@@ -36,6 +36,15 @@ describe("Color", () => {
     expect(convertColor("unknown-color", "#ff0000")("hex")).toBe("#ff0000")
   })
 
+  test("convertColor handles hexa with alpha in source", () => {
+    const result = convertColor("rgba(0, 128, 0, 0.5)")("hexa")
+    expect(result).toBeDefined()
+  })
+
+  test("convertColor strips alpha from hexa to hex", () => {
+    expect(convertColor("#008000ff")("hex")).toBe("#008000")
+  })
+
   test("calcFormat returns the correct format", () => {
     expect(calcFormat("#008000")).toBe("hex")
     expect(calcFormat("#008000ff")).toBe("hexa")
@@ -107,6 +116,42 @@ describe("Color", () => {
     expect(a3).toBe(1)
   })
 
+  test("parseToHsv handles grayscale colors (min === max)", () => {
+    const result = parseToHsv("#808080")
+    expect(result).toBeDefined()
+    const [h, s, v, a] = result!
+    expect(h).toBe(0)
+    expect(s).toBe(0)
+    expect(v).toBeCloseTo(128 / 255, 2)
+    expect(a).toBe(1)
+  })
+
+  test("parseToHsv returns undefined for invalid color without fallback", () => {
+    expect(parseToHsv("invalid")).toBeUndefined()
+  })
+
+  test("parseToHsv handles black color (max === 0)", () => {
+    const result = parseToHsv("#000000")
+    expect(result).toBeDefined()
+    const [h, s, v, a] = result!
+    expect(h).toBe(0)
+    expect(s).toBe(0)
+    expect(v).toBe(0)
+    expect(a).toBe(1)
+  })
+
+  test("convertColor returns undefined for invalid color without fallback", () => {
+    expect(convertColor("invalid-color")("hex")).toBeUndefined()
+  })
+
+  test("parseToHsla returns undefined for invalid color without fallback", () => {
+    expect(parseToHsla("invalid")).toBeUndefined()
+  })
+
+  test("parseToRgba returns undefined for invalid color without fallback", () => {
+    expect(parseToRgba("invalid")).toBeUndefined()
+  })
+
   test("rgbaTo converts RGBA to specified format", () => {
     expect(rgbaTo([0, 128, 0, 1])("hex")).toBe("#008000")
   })
@@ -132,5 +177,21 @@ describe("Color", () => {
   test("sameColor checks if two colors are the same", () => {
     expect(sameColor("#008000", "#008000")).toBeTruthy()
     expect(sameColor("#008000", "#FF0000")).toBeFalsy()
+  })
+
+  test("sameColor returns false for undefined inputs", () => {
+    expect(sameColor(undefined, "#008000")).toBeFalsy()
+    expect(sameColor("#008000", undefined)).toBeFalsy()
+  })
+
+  test("sameColor checks each RGBA channel", () => {
+    expect(sameColor("#FF0000", "#FF8000")).toBeFalsy()
+    expect(sameColor("#FF0000", "#FF00FF")).toBeFalsy()
+    expect(sameColor("#FF0000", "rgba(255,0,0,0.5)")).toBeFalsy()
+  })
+
+  test("sameColor handles invalid colors gracefully", () => {
+    expect(sameColor("invalid", "#008000")).toBeFalsy()
+    expect(sameColor("#008000", "invalid")).toBeFalsy()
   })
 })

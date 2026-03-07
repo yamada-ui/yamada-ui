@@ -2,12 +2,12 @@
   "$schema": "https://yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
     "components": [],
-    "externals": ["@floating-ui/react-dom@^2.1.6"],
+    "externals": ["@floating-ui/react-dom@^2.1.8"],
     "hooks": [],
     "providers": []
   },
   "dependents": {
-    "components": ["popover", "tooltip"],
+    "components": ["native-popover", "popover", "tooltip"],
     "hooks": [],
     "providers": []
   },

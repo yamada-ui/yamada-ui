@@ -1,6 +1,6 @@
 import type { FC } from "react"
 import { render, screen } from "#test"
-import { isUndefined } from "@yamada-ui/utils"
+import { isUndefined, noop } from "@yamada-ui/utils"
 import { createStore } from "./store"
 
 describe("createStore", () => {
@@ -315,6 +315,105 @@ describe("createStore", () => {
       const a = screen.getByTestId("a")
 
       expect(a).toHaveTextContent("1")
+    })
+  })
+
+  describe("Store warnings", () => {
+    test("should warn when updating a key with no subscribers", () => {
+      const warnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
+
+      const [, methods] = createStore(0)
+      methods.update()
+
+      expect(warnSpy).toHaveBeenCalledWith(
+        "createStore: default is not subscribed.",
+      )
+      warnSpy.mockRestore()
+    })
+
+    test("should warn when subscribing with a key that is already subscribed", () => {
+      const warnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
+
+      const [useStore] = createStore(0)
+
+      const A: FC = () => {
+        useStore(undefined, "shared-key")
+        return null
+      }
+
+      const B: FC = () => {
+        useStore(undefined, "shared-key")
+        return null
+      }
+
+      render(
+        <div>
+          <A />
+          <B />
+        </div>,
+      )
+
+      expect(warnSpy).toHaveBeenCalledWith(
+        "createStore: shared-key is already subscribed.",
+      )
+      warnSpy.mockRestore()
+    })
+
+    test("should clean up default listeners on unmount", () => {
+      const [useStore, methods] = createStore(0)
+
+      const A: FC = () => {
+        useStore()
+        return null
+      }
+
+      const { unmount } = render(<A />)
+      expect(methods.queue.get("default")).toHaveLength(1)
+
+      unmount()
+      expect(methods.queue.get("default")).toHaveLength(0)
+    })
+
+    test("should delete keyed listener on unmount", () => {
+      const [useStore, methods] = createStore(0)
+
+      const A: FC = () => {
+        useStore(undefined, "key")
+        return null
+      }
+
+      const { unmount } = render(<A />)
+      expect(methods.queue.has("key")).toBeTruthy()
+
+      unmount()
+      expect(methods.queue.has("key")).toBeFalsy()
+    })
+
+    test("should not throw on unmount when default queue is cleared", () => {
+      const [useStore, methods] = createStore(0)
+
+      const A: FC = () => {
+        useStore()
+        return null
+      }
+
+      const { unmount } = render(<A />)
+      methods.queue.delete("default")
+
+      expect(() => unmount()).not.toThrowError()
+    })
+
+    test("should handle getSnapshot for primitive with path", () => {
+      const [useStore] = createStore(42)
+
+      const A: FC = () => {
+        const val = useStore(0 as any)
+        return <p data-testid="val">{val}</p>
+      }
+
+      render(<A />)
+
+      expect(screen.getByTestId("val")).toHaveTextContent("42")
     })
   })
 })

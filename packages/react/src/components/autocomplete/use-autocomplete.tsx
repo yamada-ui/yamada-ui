@@ -120,8 +120,10 @@ export interface AutocompleteMatcher {
 const defaultMatcher: AutocompleteMatcher = (input, target) =>
   target?.toLowerCase().includes(input.toLowerCase()) ?? false
 
-interface AutocompleteContext
-  extends Pick<UseAutocompleteReturn, "max" | "value"> {}
+interface AutocompleteContext extends Pick<
+  UseAutocompleteReturn,
+  "max" | "value"
+> {}
 
 const [AutocompleteContext, useAutocompleteContext] =
   createContext<AutocompleteContext>({
@@ -131,21 +133,14 @@ const [AutocompleteContext, useAutocompleteContext] =
 export { AutocompleteContext, useAutocompleteContext }
 
 export interface UseAutocompleteProps<Multiple extends boolean = false>
-  extends Omit<HTMLProps, "defaultValue" | "onChange" | "ref" | "value">,
+  extends
+    Omit<HTMLProps, "defaultValue" | "onChange" | "ref" | "value">,
     Omit<
       UseComboboxProps,
       "defaultValue" | "initialFocusValue" | "onChange" | "ref" | "value"
     >,
     HTMLRefAttributes<"input">,
     FieldProps {
-  /**
-   * The `id` attribute of the input element.
-   */
-  id?: string
-  /**
-   * The `name` attribute of the input element.
-   */
-  name?: string
   /**
    * If `true`, the autocomplete will allow custom value.
    *
@@ -183,6 +178,10 @@ export interface UseAutocompleteProps<Multiple extends boolean = false>
    */
   focusOnClear?: boolean
   /**
+   * The `id` attribute of the input element.
+   */
+  id?: string
+  /**
    * The value of the input.
    */
   inputValue?: string
@@ -207,6 +206,10 @@ export interface UseAutocompleteProps<Multiple extends boolean = false>
    */
   multiple?: Multiple
   /**
+   * The `name` attribute of the input element.
+   */
+  name?: string
+  /**
    * If `true`, the autocomplete will be opened when the input value changes.
    *
    * @default true
@@ -222,10 +225,6 @@ export interface UseAutocompleteProps<Multiple extends boolean = false>
    * The placeholder for autocomplete.
    */
   placeholder?: string
-  /**
-   * The function to render the selected items.
-   */
-  render?: (props: AutocompleteRenderProps) => ReactNode
   /**
    * The visual separator between each value.
    *
@@ -244,6 +243,10 @@ export interface UseAutocompleteProps<Multiple extends boolean = false>
    * The callback invoked when input value state changes.
    */
   onInputChange?: (value: string) => void
+  /**
+   * The function to render the selected items.
+   */
+  render?: (props: AutocompleteRenderProps) => ReactNode
 }
 
 export const useAutocomplete = <Multiple extends boolean = false>(
@@ -554,14 +557,14 @@ export const useAutocomplete = <Multiple extends boolean = false>(
 
   const onBlur = useCallback(
     (ev: FocusEvent<HTMLInputElement>) => {
-      setFocused(false)
-
       if (
         contains(fieldRef.current, ev.relatedTarget) ||
         contains(contentRef.current, ev.relatedTarget)
       ) {
         ev.preventDefault()
       } else {
+        setFocused(false)
+
         if (isArray(value)) {
           setInputValue("")
         } else {

@@ -4,6 +4,7 @@
   "_before": "&::before",
   "_cue": "&::cue",
   "_cueRegion": "&::cue-region",
+  "_detailsContent": "&::details-content",
   "_fileSelector": "&::file-selector-button",
   "_firstLetter": "&::first-letter",
   "_firstLine": "&::first-line",

@@ -37,12 +37,12 @@
         "required": true
       },
       "errorBorderColor": {
-        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
         "description": "The border color when the input is invalid.",
         "required": false
       },
       "focusBorderColor": {
-        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
         "description": "The border color when the input is focused.",
         "required": false
       },
@@ -92,14 +92,8 @@
         "required": false
       },
       "align": {
-        "type": "\"-moz-initial\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" | \"revert-layer\" ...",
+        "type": "\"-moz-initial\" | \"anchor-center\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" ...",
         "description": "The CSS `align-items` property.",
-        "required": false
-      },
-      "attached": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
         "required": false
       },
       "basis": {
@@ -124,19 +118,13 @@
         "required": false
       },
       "errorBorderColor": {
-        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
         "description": "The border color when the input is invalid.",
         "required": false
       },
       "focusBorderColor": {
-        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
         "description": "The border color when the input is focused.",
-        "required": false
-      },
-      "grow": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the children will grow to fill the available space.",
         "required": false
       },
       "invalid": {
@@ -177,12 +165,6 @@
         "description": "Function called when all inputs have valid values.",
         "required": false
       },
-      "orientation": {
-        "type": "\"horizontal\" | \"vertical\"",
-        "defaultValue": "\"horizontal\"",
-        "description": "The orientation of the group.",
-        "required": false
-      },
       "otp": {
         "type": "boolean",
         "description": "If `true`, the pin input component signals to its fields that they should.",
@@ -209,11 +191,6 @@
       "shrink": {
         "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
         "description": "The CSS `flex-shrink` property.",
-        "required": false
-      },
-      "stacking": {
-        "type": "\"first-on-top\" | \"last-on-top\"",
-        "description": "The stacking order of the group.",
         "required": false
       },
       "type": {
@@ -271,12 +248,12 @@
       "required": true
     },
     "errorBorderColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The border color when the input is invalid.",
       "required": false
     },
     "focusBorderColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The border color when the input is focused.",
       "required": false
     },
@@ -326,14 +303,8 @@
       "required": false
     },
     "align": {
-      "type": "\"-moz-initial\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" | \"revert-layer\" ...",
+      "type": "\"-moz-initial\" | \"anchor-center\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" ...",
       "description": "The CSS `align-items` property.",
-      "required": false
-    },
-    "attached": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
       "required": false
     },
     "basis": {
@@ -358,19 +329,13 @@
       "required": false
     },
     "errorBorderColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The border color when the input is invalid.",
       "required": false
     },
     "focusBorderColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The border color when the input is focused.",
-      "required": false
-    },
-    "grow": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the children will grow to fill the available space.",
       "required": false
     },
     "invalid": {
@@ -411,12 +376,6 @@
       "description": "Function called when all inputs have valid values.",
       "required": false
     },
-    "orientation": {
-      "type": "\"horizontal\" | \"vertical\"",
-      "defaultValue": "\"horizontal\"",
-      "description": "The orientation of the group.",
-      "required": false
-    },
     "otp": {
       "type": "boolean",
       "description": "If `true`, the pin input component signals to its fields that they should.",
@@ -443,11 +402,6 @@
     "shrink": {
       "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
       "description": "The CSS `flex-shrink` property.",
-      "required": false
-    },
-    "stacking": {
-      "type": "\"first-on-top\" | \"last-on-top\"",
-      "description": "The stacking order of the group.",
       "required": false
     },
     "type": {

@@ -17,8 +17,10 @@ const [PaginationContext, usePaginationContext] =
 
 export { PaginationContext, usePaginationContext }
 
-export interface UsePaginationProps
-  extends Omit<HTMLProps, "onChange" | "page"> {
+export interface UsePaginationProps extends Omit<
+  HTMLProps,
+  "onChange" | "page"
+> {
   /**
    * The total number of pages in pagination.
    */
@@ -137,11 +139,11 @@ export const usePagination = ({
 
   const getRootProps: PropGetter = useCallback(
     ({ ref, ...props } = {}) => ({
+      "aria-label": t("Pagination"),
+      role: "navigation",
       ...rest,
       ...props,
       ref: mergeRefs(ref, rest.ref),
-      "aria-label": t("Pagination"),
-      role: "navigation",
     }),
     [rest, t],
   )

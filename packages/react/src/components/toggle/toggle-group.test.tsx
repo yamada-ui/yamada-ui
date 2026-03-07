@@ -145,6 +145,23 @@ describe("<ToggleGroup />", () => {
     expect(onChange).toHaveBeenLastCalledWith(["opt1", "opt2"])
   })
 
+  test("should call onChange callback when hidden checkbox is clicked", () => {
+    const onChange = vi.fn()
+
+    render(
+      <ToggleGroup.Root defaultValue={[]} onChange={onChange}>
+        <ToggleGroup.Item value="opt1">Option 1</ToggleGroup.Item>
+      </ToggleGroup.Root>,
+    )
+
+    const checkbox = screen.getByRole("checkbox", { hidden: true })
+    fireEvent.click(checkbox)
+    expect(onChange).toHaveBeenLastCalledWith(["opt1"])
+
+    fireEvent.click(checkbox)
+    expect(onChange).toHaveBeenLastCalledWith([])
+  })
+
   test("should set all toggles to readonly when readOnly prop is true", () => {
     render(
       <ToggleGroup.Root readOnly>

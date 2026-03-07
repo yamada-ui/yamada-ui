@@ -1,6 +1,8 @@
 "use client"
 
-import { GalleryVertical } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { GalleryVertical as OriginalGalleryVerticalIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const GalleryVerticalIcon = component(Icon)({ as: GalleryVertical })
+export const GalleryVerticalIcon = component(Icon)({
+  as: OriginalGalleryVerticalIcon,
+}) as Component<"svg", IconProps>

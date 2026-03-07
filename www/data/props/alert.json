@@ -77,7 +77,7 @@
         "required": false
       },
       "secondaryColor": {
-        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
         "description": "The CSS `color` property.",
         "required": false
       }
@@ -216,7 +216,7 @@
       "required": false
     },
     "secondaryColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The CSS `color` property.",
       "required": false
     }

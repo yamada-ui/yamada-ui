@@ -125,14 +125,14 @@
         "description": "Props the label component.",
         "required": false
       },
+      "name": {
+        "type": "string",
+        "description": "The name of the field.",
+        "required": false
+      },
       "optionalIndicator": {
         "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
         "description": "The optional indicator to use.",
-        "required": false
-      },
-      "orientation": {
-        "type": "\"horizontal\" | \"vertical\"",
-        "description": "The orientation of the field.",
         "required": false
       },
       "readOnly": {
@@ -305,14 +305,14 @@
       "description": "Props the label component.",
       "required": false
     },
+    "name": {
+      "type": "string",
+      "description": "The name of the field.",
+      "required": false
+    },
     "optionalIndicator": {
       "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
       "description": "The optional indicator to use.",
-      "required": false
-    },
-    "orientation": {
-      "type": "\"horizontal\" | \"vertical\"",
-      "description": "The orientation of the field.",
       "required": false
     },
     "readOnly": {

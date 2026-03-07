@@ -74,6 +74,21 @@ describe("assignRef", () => {
     assignRef(refCallback, 123)
     expect(refCallback).toHaveBeenCalledExactlyOnceWith(123)
   })
+
+  test("should return early when ref is null", () => {
+    expect(() => assignRef(null, 123)).not.toThrowError()
+  })
+
+  test("should return early when ref is undefined", () => {
+    expect(() => assignRef(undefined, 123)).not.toThrowError()
+  })
+
+  test("should throw when ref.current cannot be assigned", () => {
+    const ref = Object.freeze({ current: null })
+    expect(() => assignRef(ref, "test")).toThrowError(
+      "Cannot assign value 'test' to ref",
+    )
+  })
 })
 
 describe("mergeRefs", () => {

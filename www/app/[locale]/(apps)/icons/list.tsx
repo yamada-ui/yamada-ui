@@ -3,7 +3,6 @@
 import type { CenterProps, StackProps } from "@yamada-ui/react"
 import type { ElementType } from "react"
 import {
-  AspectRatio,
   BirdIcon,
   Box,
   Button,
@@ -15,6 +14,7 @@ import {
   Input,
   InputGroup,
   noop,
+  IconButton as OriginalIconButton,
   RabbitIcon,
   SearchIcon,
   SnailIcon,
@@ -26,14 +26,22 @@ import {
 import { matchSorter } from "match-sorter"
 import { useTranslations } from "next-intl"
 import { memo, useCallback, useRef, useState, useTransition } from "react"
-import keywords from "@/data/icons.json"
+import data from "@/data/icons.json"
+import { useRouter } from "@/i18n"
 import { PreviewDrawer } from "./preview-drawer"
 
-const CONTENTS = Object.entries(icons).map(([title, Icon]) => ({
-  type: "icon" as const,
+export interface Data {
+  categories: string[]
+  Icon: ElementType
+  keywords: string[]
+  name: string
+  related: string[]
+}
+
+const CONTENTS: Data[] = Object.entries(icons).map(([name, Icon]) => ({
+  name,
   Icon,
-  keywords: keywords[title as keyof typeof keywords],
-  title,
+  ...data[name as keyof typeof data],
 }))
 
 const PER_PAGE = 200
@@ -47,7 +55,8 @@ export function List({ ...rest }: ListProps) {
   const hitsRef = useRef(CONTENTS)
   const [list, setList] = useState(CONTENTS.slice(0, PER_PAGE))
   const resetRef = useRef<() => void>(noop)
-  const openRef = useRef<(title: string, Icon: ElementType) => void>(noop)
+  const openRef = useRef<(data: Data) => void>(noop)
+  const router = useRouter()
   const totalIndex = Math.ceil(total / PER_PAGE) - 1
   const [, startTransition] = useTransition()
 
@@ -78,8 +87,11 @@ export function List({ ...rest }: ListProps) {
   }, [])
 
   const onOpen = useCallback(
-    (title: string, Icon: ElementType) => openRef.current(title, Icon),
-    [],
+    (data: Data) => {
+      router.replace({ pathname: "/icons", query: { name: data.name } })
+      openRef.current(data)
+    },
+    [router],
   )
 
   return (
@@ -118,15 +130,10 @@ export function List({ ...rest }: ListProps) {
           {list.length ? (
             <Grid
               gap="md"
-              templateColumns="repeat(auto-fill, minmax(56px, 1fr))"
+              templateColumns="repeat(auto-fill, minmax(3.5rem, 1fr))"
             >
-              {list.map(({ Icon, title }) => (
-                <IconButton
-                  key={title}
-                  Icon={Icon}
-                  title={title}
-                  onOpen={onOpen}
-                />
+              {list.map((data) => (
+                <IconButton key={data.name} data={data} onOpen={onOpen} />
               ))}
             </Grid>
           ) : (
@@ -140,42 +147,29 @@ export function List({ ...rest }: ListProps) {
   )
 }
 
-interface IconButtonProps extends CenterProps {
-  Icon: ElementType
-  title: string
-  onOpen: (title: string, Icon: ElementType) => void
+interface IconButtonProps {
+  data: Data
+  onOpen: (data: Data) => void
 }
 
-const IconButton = memo(function IconButton({
-  Icon,
-  title,
-  onOpen,
-  ...rest
-}: IconButtonProps) {
+const IconButton = memo(function IconButton({ data, onOpen }: IconButtonProps) {
+  const { name, Icon } = data
   const t = useTranslations("icons")
 
   return (
-    <Tooltip content={title}>
-      <AspectRatio ratio={1 / 1}>
-        <Center
-          as="button"
-          aria-label={t("openPreview", { title })}
-          bg={{
-            base: "bg.panel",
-            _hover: ["bg.subtle", "bg.muted"],
-          }}
-          cursor="pointer"
-          focusVisibleRing="outline"
-          outline="0"
-          rounded="l2"
-          transitionDuration="moderate"
-          transitionProperty="background"
-          onClick={() => onOpen(title, Icon)}
-          {...rest}
-        >
-          <Icon fontSize="2xl" />
-        </Center>
-      </AspectRatio>
+    <Tooltip content={name}>
+      <OriginalIconButton
+        as="button"
+        variant="subtle"
+        aria-label={t("openPreview", { name })}
+        aspectRatio={1}
+        bg={{
+          base: "bg.panel",
+          _hover: ["bg.subtle", "bg.muted"],
+        }}
+        icon={<Icon fontSize="2xl" />}
+        onClick={() => onOpen(data)}
+      />
     </Tooltip>
   )
 })

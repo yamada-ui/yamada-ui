@@ -32,6 +32,26 @@ describe("usePromiseDisclosure", () => {
     expect(result.current.open).toBeFalsy()
   })
 
+  test("should reject the pending promise when onClose is called", async () => {
+    const error = new Error("closed")
+    const { result } = renderHook(() => usePromiseDisclosure({ error }))
+
+    let promise: Promise<void>
+
+    act(() => {
+      promise = result.current.onOpen() as Promise<void>
+    })
+
+    expect(result.current.open).toBeTruthy()
+
+    act(() => {
+      result.current.onClose()
+    })
+
+    await expect(promise!).rejects.toThrowError("closed")
+    expect(result.current.open).toBeFalsy()
+  })
+
   test("should handle disableCloseOnSuccess correctly", () => {
     const { result } = renderHook(() =>
       usePromiseDisclosure({ disableCloseOnSuccess: true }),

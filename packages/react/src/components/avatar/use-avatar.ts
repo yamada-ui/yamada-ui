@@ -18,21 +18,6 @@ const defaultFormat = (name: string) => {
 
 export interface UseAvatarProps extends HTMLProps {
   /**
-   * The name of the person in the avatar.
-   *
-   * - If `src` has loaded, the name will be used as the `alt` attribute of the `img`
-   * - If `src` is not loaded, the name will be used to create the initials
-   */
-  name?: string
-  /**
-   * The image url of the avatar.
-   */
-  src?: HTMLProps<"img">["src"]
-  /**
-   * List of sources to use for different screen resolutions.
-   */
-  srcSet?: HTMLProps<"img">["srcSet"]
-  /**
    * The `HTMLImageElement` property `alt`.
    */
   alt?: HTMLProps<"img">["alt"]
@@ -45,10 +30,6 @@ export interface UseAvatarProps extends HTMLProps {
    */
   fallback?: ReactNode
   /**
-   * Function to get the initials to display.
-   */
-  format?: (name: string) => string
-  /**
    * The avatar icon to use.
    */
   icon?: ReactElement
@@ -57,11 +38,30 @@ export interface UseAvatarProps extends HTMLProps {
    */
   loading?: HTMLProps<"img">["loading"]
   /**
+   * The name of the person in the avatar.
+   *
+   * - If `src` has loaded, the name will be used as the `alt` attribute of the `img`
+   * - If `src` is not loaded, the name will be used to create the initials
+   */
+  name?: string
+  /**
    * Defining which referrer is sent when fetching the resource.
    *
    * @default 'no-referrer'
    */
   referrerPolicy?: HTMLProps<"img">["referrerPolicy"]
+  /**
+   * The image url of the avatar.
+   */
+  src?: HTMLProps<"img">["src"]
+  /**
+   * List of sources to use for different screen resolutions.
+   */
+  srcSet?: HTMLProps<"img">["srcSet"]
+  /**
+   * Function to get the initials to display.
+   */
+  format?: (name: string) => string
 }
 
 export const useAvatar = ({
@@ -126,7 +126,7 @@ export const useAvatar = ({
         : undefined,
       children: fallbackMessage || initials || icon,
       hidden: !fallback,
-      role: "img",
+      role: !fallbackMessage ? "img" : undefined,
     }),
     [name, initials, fallback, icon, fallbackMessage, alt, t],
   )

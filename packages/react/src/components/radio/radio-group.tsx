@@ -21,13 +21,15 @@ import {
 } from "./radio"
 import { RadioGroupContext, useRadioGroup } from "./use-radio-group"
 
-export interface RadioGroupItem<Y extends string = string>
-  extends RadioProps<Y> {
+export interface RadioGroupItem<
+  Y extends string = string,
+> extends RadioProps<Y> {
   label: ReactNode
 }
 
 export interface RadioGroupRootProps<Y extends string = string>
-  extends Omit<
+  extends
+    Omit<
       WithoutThemeProps<GroupProps, RadioStyle>,
       "defaultValue" | "onChange" | "value"
     >,

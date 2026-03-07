@@ -59,7 +59,7 @@
     "placeholder": "{total}個のアイコンを検索する...",
     "notFound": "アイコンが見つかりません。",
     "reset": "検索をクリアしてもう一度試す",
-    "openPreview": "{title}のプレビューを開く"
+    "openPreview": "{name}のプレビューを開く"
   },
   "themes": {
     "title": "あなただけのテーマ",

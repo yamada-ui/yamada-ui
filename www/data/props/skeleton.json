@@ -32,7 +32,7 @@
       "required": false
     },
     "endColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The color at the animation end.",
       "required": false
     },
@@ -47,14 +47,8 @@
       "description": "If `true`, the skeleton will take the width of it's children.",
       "required": false
     },
-    "loading": {
-      "type": "boolean",
-      "defaultValue": "true",
-      "description": "If `false`, it'll render its children with a nice fade transition.",
-      "required": false
-    },
     "startColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The color at the animation start.",
       "required": false
     }
@@ -91,7 +85,7 @@
       "required": false
     },
     "endColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The color at the animation end.",
       "required": false
     },
@@ -106,14 +100,8 @@
       "description": "If `true`, the skeleton will take the width of it's children.",
       "required": false
     },
-    "loading": {
-      "type": "boolean",
-      "defaultValue": "true",
-      "description": "If `false`, it'll render its children with a nice fade transition.",
-      "required": false
-    },
     "startColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The color at the animation start.",
       "required": false
     }
@@ -150,7 +138,7 @@
       "required": false
     },
     "endColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The color at the animation end.",
       "required": false
     },
@@ -170,19 +158,13 @@
       "description": "The number of lines to display.",
       "required": false
     },
-    "loading": {
-      "type": "boolean",
-      "defaultValue": "true",
-      "description": "If `false`, it'll render its children with a nice fade transition.",
-      "required": false
-    },
     "rootProps": {
       "type": "HTMLStyledProps",
       "description": "Props for the root element.",
       "required": false
     },
     "startColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The color at the animation start.",
       "required": false
     }

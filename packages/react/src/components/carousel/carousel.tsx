@@ -28,11 +28,14 @@ import {
   useCarouselContext,
 } from "./use-carousel"
 
-interface ComponentContext
-  extends Pick<CarouselRootProps, "includeGapInSize"> {}
+interface ComponentContext extends Pick<
+  CarouselRootProps,
+  "includeGapInSize"
+> {}
 
 export interface CarouselRootProps
-  extends Omit<HTMLStyledProps<"section">, "draggable" | "onChange">,
+  extends
+    Omit<HTMLStyledProps<"section">, "draggable" | "onChange">,
     Omit<
       UseCarouselProps,
       | "align"

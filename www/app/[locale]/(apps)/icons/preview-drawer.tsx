@@ -1,41 +1,65 @@
 "use client"
 
-import type { ElementType, RefObject } from "react"
+import type { RefObject } from "react"
+import type { Data } from "./list"
 import {
   assignRef,
   Center,
   CloseButton,
   Drawer,
   Flex,
+  Grid,
   Heading,
   HStack,
   Icon,
+  IconButton,
+  icons,
+  Separator,
+  Tooltip,
   useClipboard,
   useDisclosure,
   VStack,
 } from "@yamada-ui/react"
-import { Fragment, memo, useRef } from "react"
+import { useTranslations } from "next-intl"
+import { useSearchParams } from "next/navigation"
+import { Fragment, memo, useState } from "react"
 import { CodePreview } from "@/components"
+import data from "@/data/icons.json"
+import { useRouter } from "@/i18n"
 
 export interface PreviewDrawerProps extends Drawer.RootProps {
-  onOpenRef: RefObject<(title: string, Icon: ElementType) => void>
+  onOpenRef: RefObject<(data: Data) => void>
 }
 
 export const PreviewDrawer = memo(function PreviewDrawer({
   onOpenRef,
   ...rest
 }: PreviewDrawerProps) {
-  const data = useRef<null | { Icon: ElementType; title: string }>(null)
-  const { Icon: PreviewIcon = Fragment, title } = data.current ?? {}
-  const { onCopy } = useClipboard(title)
+  const searchParams = useSearchParams()
+  const defaultName = searchParams.get("name")
+  const [item, setItem] = useState<Data | null>(() => {
+    if (!defaultName || !(defaultName in icons)) return null
+
+    return {
+      name: defaultName,
+      Icon: icons[defaultName as keyof typeof icons],
+      ...data[defaultName as keyof typeof data],
+    }
+  })
+  const { name, Icon: PreviewIcon = Fragment, related } = item ?? {}
+  const { onCopy } = useClipboard(name)
+  const router = useRouter()
+  const t = useTranslations("icons")
   const { open, onClose, onOpen } = useDisclosure({
+    defaultOpen: !!item,
     onClose: () => {
-      data.current = null
+      setItem(null)
+      router.replace({ pathname: "/icons" })
     },
   })
 
-  assignRef(onOpenRef, (title, Icon) => {
-    data.current = { Icon, title }
+  assignRef(onOpenRef, (data) => {
+    setItem(data)
     onOpen()
   })
 
@@ -98,8 +122,10 @@ export const PreviewDrawer = memo(function PreviewDrawer({
           minW="0"
           w="full"
         >
-          <Flex as="button" lineClamp={1} rounded="l2" onClick={onCopy}>
-            <Heading as="h3">{title}</Heading>
+          <Flex as="button" flex="1" minW="0" rounded="l2" onClick={onCopy}>
+            <Heading as="h3" lineClamp={1}>
+              {name}
+            </Heading>
           </Flex>
 
           <Drawer.CloseTrigger>
@@ -110,12 +136,46 @@ export const PreviewDrawer = memo(function PreviewDrawer({
         <VStack minW="0">
           <CodePreview
             lang="tsx"
-            code={`import { ${title} } from "@yamada-ui/react"`}
+            code={`import { ${name} } from "@yamada-ui/react"`}
             tabIndex={-1}
           />
 
-          <CodePreview lang="tsx" code={`<${title} />`} tabIndex={-1} />
+          <CodePreview lang="tsx" code={`<${name} />`} tabIndex={-1} />
         </VStack>
+
+        {related ? (
+          <>
+            <Separator gridColumn={{ base: "1 / 3", lg: "1 / 2" }} />
+            <Grid
+              gap="md"
+              gridColumn={{ base: "1 / 3", lg: "1 / 2" }}
+              maxH={{ base: "auto", sm: "6rem" }}
+              overflowY="auto"
+              templateColumns="repeat(auto-fill, minmax(3.5rem, 1fr))"
+            >
+              {related.map((name, index) => {
+                const Icon = icons[name as keyof typeof icons]
+                const rest = data[name as keyof typeof data]
+
+                return (
+                  <Tooltip key={index} content={name}>
+                    <IconButton
+                      size="2xl"
+                      variant="subtle"
+                      aria-label={t("openPreview", { name })}
+                      bg={{
+                        base: "bg.panel",
+                        _hover: ["bg.subtle", "bg.muted"],
+                      }}
+                      icon={<Icon fontSize="2xl" />}
+                      onClick={() => setItem({ name, Icon, ...rest })}
+                    />
+                  </Tooltip>
+                )
+              })}
+            </Grid>
+          </>
+        ) : null}
       </Drawer.Content>
     </Drawer.Root>
   )

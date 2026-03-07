@@ -49,10 +49,12 @@ type Style<Y extends boolean = false> = Y extends false
 type MergedStyle = CSSModifierObject | CSSModifierObject<CSSSlotObject>
 
 interface GetStyleOptions
-  extends Partial<Breakpoints>,
-    Pick<Partial<Layers>, "wrap"> {
+  extends Partial<Breakpoints>, Pick<Partial<Layers>, "wrap"> {
   hasSlot?: boolean
+  modifier?: string
+  name?: string
   selectors?: (string | undefined)[]
+  value?: string
 }
 
 function getSelectorStyle<Y extends Dict = Dict>(
@@ -69,8 +71,11 @@ function getStyle<Y extends boolean = false>(
   style: CSSObject | CSSSlotObject | undefined,
 ) {
   return function ({
+    name: rootName,
     hasSlot = false,
+    modifier,
     selectors = [],
+    value,
   }: GetStyleOptions): Style<Y> | undefined {
     if (!style || isEmptyObject(style)) return
 
@@ -78,15 +83,39 @@ function getStyle<Y extends boolean = false>(
       return Object.fromEntries(
         Object.entries(style as CSSSlotObject).map(([name, style]) => {
           if (selectors.length) {
+            if (value && modifier)
+              style = {
+                [`--${rootName}-${name}-${modifier}`]: `"${value}"`,
+                ...style,
+              } as CSSObject
+
             return [name, getSelectorStyle(selectors, style ?? {})]
           } else {
+            if (value && modifier)
+              style = {
+                [`--${rootName}-${name}-${modifier}`]: `"${value}"`,
+                ...style,
+              } as CSSObject
+
             return [name, style]
           }
         }),
       ) as Style<Y>
     } else if (selectors.length) {
+      if (value && modifier)
+        style = {
+          [`--${rootName}-${modifier}`]: `"${value}"`,
+          ...style,
+        } as CSSObject
+
       return getSelectorStyle(selectors, style) as Style<Y>
     } else {
+      if (value && modifier)
+        style = {
+          [`--${rootName}-${modifier}`]: `"${value}"`,
+          ...style,
+        } as CSSObject
+
       return style as Style<Y>
     }
   }
@@ -170,7 +199,7 @@ function getModifierStyle<Y extends boolean = false>(
     } else if (isObject(value)) {
       style = getConditionStyle<Y>(value, mergedStyle)(options)
     } else {
-      style = getStyle<Y>(mergedStyle[value])(options)
+      style = getStyle<Y>(mergedStyle[value])({ ...options, value })
     }
 
     return style
@@ -187,11 +216,14 @@ function getPropStyle<Y extends boolean = false>(
   return function (options: GetStyleOptions) {
     if (!variants.length) return style
 
-    variants.forEach(([name, variants]) => {
-      const prop = props[name as keyof typeof props]
+    variants.forEach(([modifier, variants]) => {
+      const value = props[modifier as keyof typeof props]
 
-      if (prop) {
-        const propStyle = getModifierStyle<Y>(prop, variants)(options)
+      if (value) {
+        const propStyle = getModifierStyle<Y>(
+          value,
+          variants,
+        )({ modifier, value, ...options })
 
         if (propStyle)
           style = merge(style, wrapStyle<Y>("props", propStyle)(options))
@@ -199,7 +231,10 @@ function getPropStyle<Y extends boolean = false>(
         const boolean = Object.keys(variants).every((key) => isBooleanish(key))
 
         if (boolean) {
-          const propStyle = getModifierStyle<Y>("false", variants)(options)
+          const propStyle = getModifierStyle<Y>(
+            "false",
+            variants,
+          )({ modifier, value: "true", ...options })
 
           if (propStyle)
             style = merge(style, wrapStyle<Y>("props", propStyle)(options))
@@ -371,9 +406,10 @@ interface UseStyleOptions<
   H extends boolean = false,
 > {
   className?: string
-  style?: M
   hasSlot?: H
+  name?: string
   slot?: ComponentSlot<ComponentSlotName<M>>
+  style?: M
   transferProps?: D[]
 }
 
@@ -385,6 +421,7 @@ function useStyle<
 >(
   props: Y,
   {
+    name,
     className: defaultClassName,
     style: componentStyle,
     hasSlot,
@@ -395,7 +432,7 @@ function useStyle<
   const system = useSystem()
   const { getAtRule, wrap } = system.layers
   const rootColorScheme = useColorSchemeContext()
-  const options = { ...system.breakpoints, hasSlot, wrap }
+  const options = { ...system.breakpoints, name, hasSlot, wrap }
 
   const propsRef = useRef<Dict>({})
   const mergedPropsRef = useRef<Dict>({})
@@ -452,7 +489,7 @@ function useStyle<
       if (sizes && !hasSize) {
         const sizeStyle = merge(
           sizes.base,
-          getModifierStyle<H>(size, sizes)(options),
+          getModifierStyle<H>(size, sizes)({ modifier: "size", ...options }),
         )
 
         style = merge(style, wrapStyle<H>("size", sizeStyle)(options))
@@ -461,7 +498,10 @@ function useStyle<
       if (variants && !hasVariant) {
         const variantStyle = merge(
           variants.base,
-          getModifierStyle<H>(variant, variants)(options),
+          getModifierStyle<H>(
+            variant,
+            variants,
+          )({ modifier: "variant", ...options }),
         )
 
         style = merge(style, wrapStyle<H>("variant", variantStyle)(options))

@@ -1,8 +1,1116 @@
 ---
 title: LineChart
 description: "`LineChart` is a component for drawing line charts to compare multiple sets of data."
-storybook: components-linechart--basic
-source: components/line-chart
+storybook: components-chart-linechart--basic
+source: components/chart
+style: components/chart/line-chart.style.ts
 ---
 
-Currently, this component is not migrated. This component will be migrated in v2.0.x.
+```tsx functional preview
+interface Data {
+  date: string
+  desktop: number
+  mobile: number
+  tablet: number
+}
+
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo<Data[]>(
+  () => [
+    {
+      date: "2026-03-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      date: "2026-04-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      date: "2026-05-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      date: "2026-06-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      date: "2026-07-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      date: "2026-08-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+  ],
+  [],
+)
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { LineChart } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { LineChart } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { LineChart } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<LineChart.Root>
+  <LineChart.Line>
+    <LineChart.LabelList />
+  </LineChart.Line>
+  <LineChart.Label />
+  <LineChart.ReferenceLine />
+  <LineChart.Grid />
+  <LineChart.XAxis />
+  <LineChart.YAxis />
+  <LineChart.Tooltip />
+  <LineChart.Legend />
+</LineChart.Root>
+```
+
+### Composition
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root data={data}>
+    <LineChart.Tooltip labelFormatter={(value) => dayjs(value).format("MMM")} />
+    <LineChart.XAxis
+      dataKey="date"
+      tickFormatter={(value) => dayjs(value).format("MMM")}
+    />
+    <LineChart.Line dataKey="desktop" dot>
+      <LineChart.LabelList />
+    </LineChart.Line>
+    <LineChart.Line dataKey="tablet" />
+    <LineChart.Line dataKey="mobile" />
+  </LineChart.Root>
+)
+```
+
+### Change Size
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <For each={["xs", "sm", "md", "lg", "xl"]}>
+      {(size, index) => (
+        <LineChart.Root
+          key={index}
+          size={size}
+          data={data}
+          series={series}
+          tooltipProps={{
+            labelFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+          xAxisProps={{
+            dataKey: "date",
+            tickFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Color Scheme
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    colorScheme="blue"
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Change Color
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", color: "red" },
+    { dataKey: "tablet", color: "blue" },
+    { dataKey: "mobile", color: "green" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Change Type
+
+To change the type, set `type` in `series` or `lineProps.type` to `"monotone"`, `"linear"`, etc. The default is `"monotone"`.
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <For
+      each={[
+        "monotone",
+        "bump",
+        "linear",
+        "natural",
+        "step",
+        "stepBefore",
+        "stepAfter",
+      ]}
+    >
+      {(type, index) => (
+        <LineChart.Root
+          key={index}
+          lineProps={{ type }}
+          data={data}
+          series={series}
+          tooltipProps={{
+            labelFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+          xAxisProps={{
+            dataKey: "date",
+            tickFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Add Y Axis
+
+To add the Y axis, set `withYAxis` to `true`. The default is `false`.
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+To change the orientation of the Y axis, set `yAxisProps.orientation` to `"start"` or `"end"`. The default is `"start"`.
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { left: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{ orientation: "end" }}
+  />
+)
+```
+
+### Add Legend
+
+To add the legend, set `withLegend` to `true`. The default is `false`. To change the placement of the legend, set `legendProps.placement` to `"start-start"`, `"end-end"`, etc. The default is `"start-end"`.
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", color: "red" },
+    { dataKey: "tablet", color: "blue" },
+    { dataKey: "mobile", color: "green" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    withLegend
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Change Name
+
+To change item names in the tooltip or legend, set `name` in `series`.
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", name: "Desktop", color: "red" },
+    { dataKey: "tablet", name: "Tablet", color: "blue" },
+    { dataKey: "mobile", name: "Mobile", color: "green" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    withLegend
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Change Grid
+
+To change the grid, set booleans in `gridProps.horizontal` and `gridProps.vertical`.
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <For each={["xy", "x", "y", "none"]}>
+      {(value, index) => (
+        <LineChart.Root
+          key={index}
+          gridProps={{
+            horizontal: value.includes("x"),
+            vertical: value.includes("y"),
+          }}
+          data={data}
+          series={series}
+          tooltipProps={{
+            labelFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+          xAxisProps={{
+            dataKey: "date",
+            tickFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Add Dot
+
+To add dots, set `dot` of `series` or `lineProps.dot` to `true`. The default is `false`.
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () => LineChart.mergeSeries([{ dataKey: "desktop" }]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    lineProps={{ dot: true }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Add Label
+
+To add labels, set `label` of `series` or `lineProps.label` to `true`. The default is `false`.
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () => LineChart.mergeSeries([{ dataKey: "desktop" }]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    lineProps={{ dot: true, label: true }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Add Unit
+
+To add units, use `formatter`, `tickFormatter`, or set a string in `unit`.
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () => LineChart.mergeSeries([{ dataKey: "desktop" }]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    lineProps={{
+      dot: true,
+      label: {
+        formatter: (value) => `${(Number(value) / 1000).toFixed(1)}k`,
+      },
+    }}
+    tooltipProps={{
+      formatter: (value) => `${(Number(value) / 1000).toFixed(1)}k`,
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      domain: [0, 10000],
+      tickFormatter: (value) => (value / 1000).toFixed(1),
+      ticks: [0, 2500, 5000, 7500, 10000],
+      unit: "k",
+    }}
+  />
+)
+```
+
+### Sync
+
+To sync charts, set `syncId` to a string.
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <LineChart.Root
+      data={data}
+      series={series}
+      syncId="chart"
+      tooltipProps={{
+        labelFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+      xAxisProps={{
+        dataKey: "date",
+        tickFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+    />
+    <LineChart.Root
+      data={data}
+      series={series}
+      syncId="chart"
+      tooltipProps={{
+        labelFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+      xAxisProps={{
+        dataKey: "date",
+        tickFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+    />
+  </VStack>
+)
+```
+
+### Format
+
+To format values, use `formatter`, `tickFormatter`, etc.
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      formatter: (value, name = "") => [
+        Number(value).toLocaleString(),
+        toTitleCase(name),
+      ],
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      tickFormatter: (value) => value.toLocaleString(),
+    }}
+  />
+)
+```
+
+### Add Reference Line
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  >
+    <LineChart.ReferenceLine label="Reference line" y={3000} />
+    <LineChart.ReferenceLine
+      label={{ position: "insideTopLeft", value: "Reference line" }}
+      x={dayjs().add(3, "month").format("YYYY-MM-DD")}
+    />
+    <LineChart.ReferenceLine
+      label={{ position: "center", value: "Reference line" }}
+      segment={[
+        { x: dayjs().format("YYYY-MM-DD"), y: 0 },
+        { x: dayjs().add(3, "month").format("YYYY-MM-DD"), y: 3000 },
+      ]}
+    />
+  </LineChart.Root>
+)
+```
+
+### Add Tick Line
+
+To add tick lines, set `xAxisProps.tickLine` or `yAxisProps.tickLine` to `true`. The default is `false`.
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+      tickLine: true,
+    }}
+    yAxisProps={{ tickLine: true }}
+  />
+)
+```
+
+### Add Axis Label
+
+To add axis labels, set a string in `xAxisProps.label` or `yAxisProps.label`. The default is `false`.
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      label: "Date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{ label: "Value" }}
+  />
+)
+```
+
+### Set Domain
+
+To set the range, set `yAxisProps.domain` to `[min, max]`. To set the interval, set an array in `yAxisProps.ticks`.
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      domain: [0, 5000],
+      ticks: [0, 1000, 2000, 3000, 4000, 5000],
+    }}
+  />
+)
+```
+
+### Add Tooltip Cursor
+
+To add a tooltip cursor, set `tooltipProps.cursor` to `true`. The default is `false`.
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      cursor: true,
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Hide X Axis
+
+To hide the X axis, set `withXAxis` to `false`. The default is `true`.
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    withXAxis={false}
+    chartProps={{ margin: { left: 0, right: 0 } }}
+    tooltipProps={{ labelFormatter: () => null }}
+  />
+)
+```
+
+### Hide Active Dot
+
+To hide active dots, set `activeDot` in `series` or `lineProps.activeDot` to `false`. The default is `true`.
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    lineProps={{ activeDot: false }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Hide Tooltip
+
+To hide the tooltip, set `withTooltip` to `false`. The default is `true`.
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    withTooltip={false}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Customize Axis
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      label: { color: ["red", "blue"] },
+      tick: { color: ["red", "blue"] },
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+      tickLine: { color: ["red", "blue"] },
+    }}
+    yAxisProps={{
+      label: { color: ["red", "blue"] },
+      tick: { color: ["red", "blue"] },
+      tickLine: { color: ["red", "blue"] },
+    }}
+  />
+)
+```
+
+### Customize Dot
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet", dot: { fill: "blue" } },
+      {
+        dataKey: "mobile",
+        dot: { fill: ["white", "black"], stroke: "red", strokeWidth: 1 },
+      },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    lineProps={{ activeDot: false }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+      contentProps: { withSwatch: false },
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Customize Active Dot
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    lineProps={{ activeDot: { fill: ["red", "blue"] } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+      contentProps: { withSwatch: false },
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Customize Label
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () => [{ color: "blue", dataKey: "desktop" }],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    lineProps={{
+      activeDot: { fill: "red" },
+      dot: { fill: "red" },
+      label: { color: "red" },
+    }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+      contentProps: { withSwatch: false },
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      domain: [0, 10000],
+      ticks: [0, 2500, 5000, 7500, 10000],
+    }}
+  />
+)
+```
+
+### Customize Grid
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    gridProps={{ strokeDasharray: "15 15" }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+      contentProps: { withSwatch: false },
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Customize Tooltip Cursor
+
+```tsx preview functional
+const series = useMemo<LineChart.LineProps<Data>[]>(
+  () =>
+    LineChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <LineChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      cursor: { stroke: ["red", "blue"] },
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+## Props
+
+<PropsTable
+  name="chart"
+  pick={[
+    "LineChart",
+    "LineChart.Root",
+    "LineChart.Grid",
+    "LineChart.Label",
+    "LineChart.LabelList",
+    "LineChart.Legend",
+    "LineChart.Line",
+    "LineChart.ReferenceLine",
+    "LineChart.Tooltip",
+    "LineChart.XAxis",
+    "LineChart.YAxis",
+  ]}
+/>

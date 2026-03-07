@@ -8,6 +8,7 @@ style: components/rotate/rotate.style.ts
 
 ```tsx preview
 <Rotate
+  aria-label="Toggle icon"
   from={<AppleIcon fontSize="2xl" />}
   to={<CherryIcon fontSize="2xl" />}
 />
@@ -41,6 +42,7 @@ import { Rotate } from "@workspaces/ui"
 
 ```tsx preview
 <Rotate
+  aria-label="Toggle icon"
   rotate={-360}
   from={<AppleIcon fontSize="2xl" />}
   to={<CherryIcon fontSize="2xl" />}
@@ -53,6 +55,7 @@ import { Rotate } from "@workspaces/ui"
 
 ```tsx preview
 <Rotate
+  aria-label="Toggle icon"
   duration={1.4}
   from={<AppleIcon fontSize="2xl" />}
   to={<CherryIcon fontSize="2xl" />}
@@ -65,6 +68,7 @@ import { Rotate } from "@workspaces/ui"
 
 ```tsx preview
 <Rotate
+  aria-label="Toggle icon"
   delay={1}
   from={<AppleIcon fontSize="2xl" />}
   to={<CherryIcon fontSize="2xl" />}
@@ -77,6 +81,7 @@ import { Rotate } from "@workspaces/ui"
 
 ```tsx preview
 <Rotate
+  aria-label="Toggle icon"
   disabled
   from={<AppleIcon fontSize="2xl" />}
   to={<CherryIcon fontSize="2xl" />}
@@ -89,6 +94,7 @@ import { Rotate } from "@workspaces/ui"
 
 ```tsx preview
 <Rotate
+  aria-label="Toggle icon"
   readOnly
   from={<AppleIcon fontSize="2xl" />}
   to={<CherryIcon fontSize="2xl" />}
@@ -102,6 +108,7 @@ const [value, onChange] = useState<KeyframeIdent>("from")
 
 return (
   <Rotate
+    aria-label="Toggle icon"
     from={<AppleIcon fontSize="2xl" />}
     to={<CherryIcon fontSize="2xl" />}
     value={value}
@@ -113,3 +120,23 @@ return (
 ## Props
 
 <PropsTable name="rotate" />
+
+## アクセシビリティ
+
+`Rotate`は、アクセシビリティに関して[WAI-ARIA - Button Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/button/)に従います。
+
+`aria-label`を設定すると、スクリーンリーダーによって読み上げられます。
+
+```tsx
+<Rotate
+  aria-label="Menu"
+  from={<MenuIcon fontSize="2xl" />}
+  to={<XIcon fontSize="2xl" />}
+/>
+```
+
+### キーボード操作
+
+| キー             | 説明                                           | 状態 |
+| ---------------- | ---------------------------------------------- | ---- |
+| `Enter`, `Space` | フォーカスしているボタンをアクティブにします。 | -    |

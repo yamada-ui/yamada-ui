@@ -111,4 +111,31 @@ describe("<DataList />", () => {
 
     expect(screen.getByTestId("root").style.getPropertyValue("--col")).toBe("2")
   })
+
+  test("DataListItem renders array term prop", () => {
+    render(
+      <DataList.Root>
+        <DataList.Item description="魔女" term={["白石うらら", "山田竜"]} />
+      </DataList.Root>,
+    )
+
+    expect(screen.getByText("白石うらら")).toBeInTheDocument()
+    expect(screen.getByText("山田竜")).toBeInTheDocument()
+    expect(screen.getByText("魔女")).toBeInTheDocument()
+  })
+
+  test("DataListItem renders array description prop", () => {
+    render(
+      <DataList.Root>
+        <DataList.Item
+          description={["入れ替わりの魔女", "テレポーテーション"]}
+          term="白石うらら"
+        />
+      </DataList.Root>,
+    )
+
+    expect(screen.getByText("白石うらら")).toBeInTheDocument()
+    expect(screen.getByText("入れ替わりの魔女")).toBeInTheDocument()
+    expect(screen.getByText("テレポーテーション")).toBeInTheDocument()
+  })
 })

@@ -19,17 +19,10 @@ import { useFieldProps } from "../field"
 import { useCheckboxGroupContext } from "./use-checkbox-group"
 
 export interface UseCheckboxProps<Y extends string = string>
-  extends Omit<HTMLProps<"label">, "onBlur" | "onChange" | "onFocus" | "ref">,
+  extends
+    Omit<HTMLProps<"label">, "onBlur" | "onChange" | "onFocus" | "ref">,
     HTMLRefAttributes<"input">,
     FieldProps {
-  /**
-   * id assigned to input.
-   */
-  id?: string
-  /**
-   * The name of the input field in a checkbox.
-   */
-  name?: string
   /**
    * If `true`, the checkbox will be checked.
    */
@@ -41,11 +34,19 @@ export interface UseCheckboxProps<Y extends string = string>
    */
   defaultChecked?: boolean
   /**
+   * id assigned to input.
+   */
+  id?: string
+  /**
    * If `true`, the checkbox will be indeterminate.
    *
    * @default false
    */
   indeterminate?: boolean
+  /**
+   * The name of the input field in a checkbox.
+   */
+  name?: string
   /**
    * The value of the checkbox.
    */
@@ -112,6 +113,12 @@ export const useCheckbox = <Y extends string = string>({
   const trulyDisabled =
     !checked && isNumber(max) && group && group.value.length >= max
   const interactive = !(readOnly || trulyDisabled)
+  const indeterminateRef = useCallback(
+    (el: HTMLInputElement | null) => {
+      if (el) el.indeterminate = indeterminate
+    },
+    [indeterminate],
+  )
 
   const onChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {
@@ -159,7 +166,7 @@ export const useCheckbox = <Y extends string = string>({
         required,
         value,
         ...props,
-        ref: mergeRefs(props.ref, ref),
+        ref: mergeRefs(props.ref, ref, indeterminateRef),
         onBlur: handlerAll(props.onBlur, eventProps.onBlur),
         onChange: handlerAll(props.onChange, onChange),
         onFocus: handlerAll(props.onFocus, eventProps.onFocus),
@@ -172,15 +179,16 @@ export const useCheckbox = <Y extends string = string>({
       ariaProps,
       id,
       name,
-      indeterminate,
       checked,
       resolvedAriaDescribedby,
       interactive,
+      indeterminate,
       disabled,
       readOnly,
       required,
       value,
       ref,
+      indeterminateRef,
       eventProps,
       onChange,
       getGroupInputProps,

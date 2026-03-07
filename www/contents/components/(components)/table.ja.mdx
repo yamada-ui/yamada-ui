@@ -71,7 +71,7 @@ import { Table } from "@workspaces/ui"
 ### バリアントを変更する
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <VStack>
@@ -93,7 +93,7 @@ return (
 ### サイズを変更する
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <VStack>
@@ -112,10 +112,10 @@ return (
 )
 ```
 
-### カラースキーマを変更する
+### カラースキームを変更する
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <VStack>
@@ -140,7 +140,7 @@ return (
 外枠の区切り線を追加する場合は、`withBorder`を`true`にします。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return <Table columns={columns} data={data} withBorder withScrollArea />
 ```
@@ -150,7 +150,7 @@ return <Table columns={columns} data={data} withBorder withScrollArea />
 列の区切り線を追加する場合は、`withColumnBorders`を`true`にします。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return <Table columns={columns} data={data} withColumnBorders withScrollArea />
 ```
@@ -160,7 +160,7 @@ return <Table columns={columns} data={data} withColumnBorders withScrollArea />
 行がホバーされたときにハイライトする場合は、`highlightOnHover`を`true`にします。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return <Table columns={columns} data={data} highlightOnHover withScrollArea />
 ```
@@ -170,7 +170,7 @@ return <Table columns={columns} data={data} highlightOnHover withScrollArea />
 ストライプを使う場合は、`striped`を`true`にします。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return <Table columns={columns} data={data} striped withScrollArea />
 ```
@@ -180,7 +180,7 @@ return <Table columns={columns} data={data} striped withScrollArea />
 スクロールエリアを使う場合は、`withScrollArea`を`true`にします。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return <Table columns={columnsFull} data={data} withScrollArea />
 ```
@@ -227,7 +227,7 @@ const columns = useMemo(
   ],
   [],
 )
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -282,7 +282,7 @@ const columns = useMemo(
   ],
   [],
 )
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -301,7 +301,7 @@ return (
 キーボードナビゲーションを無効にする場合は、`enableKeyboardNavigation`を`false`に設定します。デフォルトは、`true`です。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -318,7 +318,7 @@ return (
 初回のフォーカス可能なセルを設定する場合は、`initialFocusableCell`にセルの列と行を指定したオブジェクト(`{ colIndex: number, rowIndex: number }`)を設定します。デフォルトは、`{ colIndex: 0, rowIndex: 0 }`です。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -335,7 +335,7 @@ return (
 行のクリックイベントをハンドルする場合は、`onRowClick`を使用します。
 
 ```tsx preview functional client
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -352,7 +352,7 @@ return (
 行のダブルクリックイベントをハンドルする場合は、`onRowDoubleClick`を使用します。
 
 ```tsx preview functional client
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -369,7 +369,7 @@ return (
 デフォルトのソートを設定する場合は、`defaultSorting`に配列を設定します。配列のオブジェクトには、ソートをする列の`id`と方向を設定します。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -386,7 +386,7 @@ return (
 ソートを無効にする場合は、`enableSorting`を`false`に設定します。デフォルトは、`true`です。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <Table columns={columns} data={data} enableSorting={false} withScrollArea />
@@ -398,7 +398,7 @@ return (
 複数列のソートを無効にする場合は、`enableMultiSort`を`false`に設定します。デフォルトは、`true`です。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <Table columns={columns} data={data} enableMultiSort={false} withScrollArea />
@@ -410,7 +410,7 @@ return (
 最大のソート可能な列数を設定する場合は、`maxMultiSortColCount`に数値を設定します。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -427,7 +427,7 @@ return (
 手動のソートを使う場合は、`manualSorting`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx preview functional client
-const defaultData = useMemo<Data[]>(() => createData(), [])
+const defaultData = useMemo<Data[]>(() => createTableData(), [])
 const [data, setData] = useState<Data[]>(defaultData)
 
 return (
@@ -468,7 +468,7 @@ return (
 デフォルトでは、ソートが有効になったとき、昇順から始まります。もし、降順から始めたい場合は、`sortDescFirst`を`true`に設定するか、特定の列だけ設定したい場合は、`columns`の列ごとに`sortDescFirst`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return <Table columns={columns} data={data} sortDescFirst withScrollArea />
 ```
@@ -479,7 +479,7 @@ return <Table columns={columns} data={data} sortDescFirst withScrollArea />
 const [sorting, setSorting] = useState<SortingState<Data>>([
   { id: "age", desc: true },
 ])
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return <Table columns={columns} data={data} withScrollArea />
 ```
@@ -490,7 +490,7 @@ return <Table columns={columns} data={data} withScrollArea />
 
 ```tsx preview functional client
 const { t } = useI18n("table")
-const data = useMemo<Data[]>(() => createData(40), [])
+const data = useMemo<Data[]>(() => createTableData(40), [])
 
 return (
   <VStack>
@@ -542,7 +542,7 @@ return (
 
 ```tsx preview functional client
 const { t } = useI18n("table")
-const data = useMemo<Data[]>(() => createData(20), [])
+const data = useMemo<Data[]>(() => createTableData(20), [])
 
 return (
   <VStack>
@@ -600,7 +600,7 @@ const [pagination, setPagination] = useState<PaginationState>({
   pageSize: 20,
 })
 const rowCount = 40
-const defaultData = useMemo<Data[]>(() => createData(rowCount), [])
+const defaultData = useMemo<Data[]>(() => createTableData(rowCount), [])
 const data = useMemo<Data[]>(
   () =>
     defaultData.slice(
@@ -666,7 +666,7 @@ const [pagination, setPagination] = useState<PaginationState>({
   pageSize: 20,
 })
 const { t } = useI18n("table")
-const data = useMemo<Data[]>(() => createData(40), [])
+const data = useMemo<Data[]>(() => createTableData(40), [])
 
 return (
   <VStack>
@@ -719,7 +719,7 @@ return (
 行の選択を有効にする場合は、`enableRowSelection`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return <Table columns={columns} data={data} enableRowSelection withScrollArea />
 ```
@@ -729,7 +729,7 @@ return <Table columns={columns} data={data} enableRowSelection withScrollArea />
 デフォルトの選択された行を設定する場合は、`defaultRowSelection`に`data`のインデックスをキーとしたオブジェクトを設定します。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -747,7 +747,7 @@ return (
 行のクリックで選択を有効にする場合は、`selectOnClickRow`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -765,7 +765,7 @@ return (
 チェックボックスを非表示にする場合は、`withCheckbox`を`false`に設定します。デフォルトは、`true`です。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -784,7 +784,7 @@ return (
 行を無効にする場合は、`enableRowSelection`に条件の関数を設定します。
 
 ```tsx preview functional client
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -800,7 +800,7 @@ return (
 
 ```tsx preview functional client
 const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -819,7 +819,7 @@ return (
 フィルターを使う場合は、フィルターをコントロールするコンポーネントを`header`または`footer`に設定します。
 
 ```tsx preview functional client
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <VStack>
@@ -858,7 +858,7 @@ return (
 デフォルトのフィルターを設定する場合は、`defaultColumnFilters`に配列を設定します。配列のオブジェクトには、フィルターする列の`id`と値を設定します。
 
 ```tsx preview functional client
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <VStack>
@@ -899,7 +899,7 @@ return (
 const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([
   { id: "email", value: "" },
 ])
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <VStack>
@@ -940,7 +940,7 @@ return (
 列のサイズ変更を有効にする場合は、`enableColumnResizing`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -958,7 +958,7 @@ return (
 デフォルトでは、列のサイズ変更のタイミングは、ドラッグしている間に変更されます。ドラッグが終わったときに変更する場合は、`columnResizeMode`に`"onEnd"`を設定します。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createData(), [])
+const data = useMemo<Data[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -978,4 +978,56 @@ return (
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`Table`は、アクセシビリティに関して[WAI-ARIA - Table Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/table/)に従います。
+
+`tableProps`に`aria-label`を設定すると、スクリーンリーダーによって読み上げられます。
+
+```tsx
+const data = useMemo<Data[]>(() => createTableData(), [])
+
+return (
+  <Table
+    columns={columns}
+    data={data}
+    tableProps={{ "aria-label": "User list" }}
+  />
+)
+```
+
+### キーボード操作
+
+| キー         | 説明                                                                                                    | 状態                      |
+| ------------ | ------------------------------------------------------------------------------------------------------- | ------------------------- |
+| `ArrowLeft`  | フォーカスを左のセルに1つ移動します。行の一番左のセルにフォーカスがある場合、フォーカスは移動しません。 | -                         |
+| `ArrowRight` | フォーカスを右のセルに1つ移動します。行の一番右のセルにフォーカスがある場合、フォーカスは移動しません。 | -                         |
+| `ArrowUp`    | フォーカスを上のセルに1つ移動します。列の一番上のセルにフォーカスがある場合、フォーカスは移動しません。 | -                         |
+| `ArrowDown`  | フォーカスを下のセルに1つ移動します。列の一番下のセルにフォーカスがある場合、フォーカスは移動しません。 | -                         |
+| `Home`       | フォーカスのある行の最初のセルにフォーカスを移動します。                                                | -                         |
+| `End`        | フォーカスのある行の最後のセルにフォーカスを移動します。                                                | -                         |
+| `PageUp`     | 前のページに移動します。                                                                                | `enablePagination={true}` |
+| `PageDown`   | 次のページに移動します。                                                                                | `enablePagination={true}` |
+
+### ARIAロールと属性
+
+| コンポーネント      | ロールと属性           | 使い方                                                                                                                                   |
+| ------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `NativeTable.Root`  | `role="grid"`          | グリッドであることを示します。                                                                                                           |
+|                     | `aria-rowcount`        | テーブルの行数を示します。                                                                                                               |
+|                     | `aria-colcount`        | テーブルの列数を示します。                                                                                                               |
+|                     | `aria-multiselectable` | `enableRowSelection`が設定されている場合は`"true"`を設定します。                                                                         |
+| `NativeTable.Thead` | `role="rowgroup"`      | 行グループであることを示します。                                                                                                         |
+| `NativeTable.Tr`    | `role="row"`           | 行であることを示します。                                                                                                                 |
+|                     | `aria-rowindex`        | 行がテーブルの何行目であるかを示します。                                                                                                 |
+|                     | `aria-disabled`        | `enableRowSelection`を関数で設定し、`false`の行には`"true"`を設定します。                                                                |
+|                     | `aria-selected`        | 行が選択されている場合は`"true"`を設定し、未選択の場合は`"false"`を設定します。                                                          |
+| `NativeTable.Th`    | `role="columnheader"`  | カラムヘッダーであることを示します。                                                                                                     |
+|                     | `aria-rowindex`        | 行がテーブルの何行目であるかを示します。                                                                                                 |
+|                     | `aria-colindex`        | 列がテーブルの何列目であるかを示します。                                                                                                 |
+|                     | `aria-sort`            | 列が昇順の場合は`"ascending"`を設定し、降順の場合は`"descending"`を設定、指定がない場合は`"none"`を設定します。                          |
+| `NativeTable.Tbody` | `role="rowgroup"`      | 行グループであることを示します。                                                                                                         |
+| `NativeTable.Td`    | `role="gridcell"`      | グリッドセルであることを示します。                                                                                                       |
+|                     | `aria-colindex`        | 列がテーブルの何列目であるかを示します。                                                                                                 |
+|                     | `aria-rowindex`        | 行がテーブルの何行目であるかを示します。                                                                                                 |
+| `NativeTable.Tfoot` | `role="rowgroup"`      | 行グループであることを示します。                                                                                                         |
+| `Checkbox`          | `aria-label`           | ヘッダーの場合は`"すべての行を選択する"`、それ以外の行の場合は`"行を選択する"`を設定します。                                             |
+| `SortingIcon`       | `aria-label`           | 列が昇順の場合は`"昇順でソートする"`を設定し、降順の場合は`"降順でソートする"`を設定、指定がない場合は`"ソートを解除する"`を設定します。 |

@@ -82,21 +82,9 @@
         "description": "The variant of the component.",
         "required": false
       },
-      "align": {
-        "type": "\"center\" | \"end\" | \"start\"",
-        "defaultValue": "\"start\"",
-        "description": "The alignment of the tabs.",
-        "required": false
-      },
       "defaultIndex": {
         "type": "number",
         "description": "The index of the selected tab.",
-        "required": false
-      },
-      "fitted": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, tabs will stretch to width of the tablist.",
         "required": false
       },
       "index": {
@@ -130,12 +118,6 @@
       "onChange": {
         "type": "(index: number) => void",
         "description": "The callback invoked when the index changes.",
-        "required": false
-      },
-      "orientation": {
-        "type": "\"horizontal\" | \"vertical\"",
-        "defaultValue": "\"horizontal\"",
-        "description": "The orientation of the tab list.",
         "required": false
       }
     },
@@ -249,21 +231,9 @@
       "description": "The variant of the component.",
       "required": false
     },
-    "align": {
-      "type": "\"center\" | \"end\" | \"start\"",
-      "defaultValue": "\"start\"",
-      "description": "The alignment of the tabs.",
-      "required": false
-    },
     "defaultIndex": {
       "type": "number",
       "description": "The index of the selected tab.",
-      "required": false
-    },
-    "fitted": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, tabs will stretch to width of the tablist.",
       "required": false
     },
     "index": {
@@ -297,12 +267,6 @@
     "onChange": {
       "type": "(index: number) => void",
       "description": "The callback invoked when the index changes.",
-      "required": false
-    },
-    "orientation": {
-      "type": "\"horizontal\" | \"vertical\"",
-      "defaultValue": "\"horizontal\"",
-      "description": "The orientation of the tab list.",
       "required": false
     }
   },

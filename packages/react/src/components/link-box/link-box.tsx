@@ -15,8 +15,7 @@ import { linkBoxStyle } from "./link-box.style"
 interface ComponentContext extends Dict {}
 
 export interface LinkBoxRootProps
-  extends HTMLStyledProps,
-    ThemeProps<LinkBoxStyle> {}
+  extends HTMLStyledProps, ThemeProps<LinkBoxStyle> {}
 
 const {
   ComponentContext,

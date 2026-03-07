@@ -1,6 +1,8 @@
 "use client"
 
-import { AudioWaveform } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { AudioWaveform as OriginalAudioWaveformIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const AudioWaveformIcon = component(Icon)({ as: AudioWaveform })
+export const AudioWaveformIcon = component(Icon)({
+  as: OriginalAudioWaveformIcon,
+}) as Component<"svg", IconProps>

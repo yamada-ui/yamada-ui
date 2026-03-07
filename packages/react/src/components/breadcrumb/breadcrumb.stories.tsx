@@ -56,7 +56,12 @@ export const Variant: Story = () => {
   return (
     <PropsTable variant="stack" rows={["plain", "underline"]}>
       {(_, row, key) => (
-        <Breadcrumb.Root key={key} variant={row} items={items} />
+        <Breadcrumb.Root
+          key={key}
+          variant={row}
+          aria-label={`Breadcrumb-${row}`}
+          items={items}
+        />
       )}
     </PropsTable>
   )
@@ -75,7 +80,14 @@ export const Size: Story = () => {
 
   return (
     <PropsTable variant="stack" rows={["sm", "md", "lg"]}>
-      {(_, row, key) => <Breadcrumb.Root key={key} size={row} items={items} />}
+      {(_, row, key) => (
+        <Breadcrumb.Root
+          key={key}
+          size={row}
+          aria-label={`Breadcrumb-${row}`}
+          items={items}
+        />
+      )}
     </PropsTable>
   )
 }
@@ -110,7 +122,7 @@ export const Ellipsis: Story = () => {
 export const Separator: Story = () => {
   return (
     <>
-      <Breadcrumb.Root separator="/">
+      <Breadcrumb.Root aria-label="Breadcrumb-slash" separator="/">
         <Breadcrumb.Link href="/">サイヤ人編</Breadcrumb.Link>
         <Breadcrumb.Link href="/">ナメック星編</Breadcrumb.Link>
         <Breadcrumb.Link href="/">人造人間編</Breadcrumb.Link>
@@ -119,7 +131,10 @@ export const Separator: Story = () => {
         </Breadcrumb.Link>
       </Breadcrumb.Root>
 
-      <Breadcrumb.Root separator={<ChevronsRightIcon />}>
+      <Breadcrumb.Root
+        aria-label="Breadcrumb-icon"
+        separator={<ChevronsRightIcon />}
+      >
         <Breadcrumb.Link href="/">サイヤ人編</Breadcrumb.Link>
         <Breadcrumb.Link href="/">ナメック星編</Breadcrumb.Link>
         <Breadcrumb.Link href="/">人造人間編</Breadcrumb.Link>
@@ -145,15 +160,18 @@ export const CustomEllipsis: Story = () => {
   return (
     <>
       <Breadcrumb.Root
+        aria-label="Breadcrumb-items"
         ellipsis={({ items }) => {
           return (
             <Menu.Root>
               <Menu.Trigger>
                 <Breadcrumb.Ellipsis
+                  aria-hidden={false}
                   cursor="pointer"
                   focusVisibleRing="outline"
                   outline="none"
                   rounded="l1"
+                  tabIndex={-1}
                 />
               </Menu.Trigger>
 
@@ -172,15 +190,17 @@ export const CustomEllipsis: Story = () => {
         startBoundaries={1}
       />
 
-      <Breadcrumb.Root>
+      <Breadcrumb.Root aria-label="Breadcrumb-children">
         <Breadcrumb.Link href="/">孫悟空少年編</Breadcrumb.Link>
         <Menu.Root>
           <Menu.Trigger>
             <Breadcrumb.Ellipsis
+              aria-hidden={false}
               cursor="pointer"
               focusVisibleRing="outline"
               outline="none"
               rounded="l1"
+              tabIndex={-1}
             />
           </Menu.Trigger>
 

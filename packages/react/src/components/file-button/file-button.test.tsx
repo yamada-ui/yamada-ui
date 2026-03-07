@@ -49,7 +49,7 @@ describe("<FileButton />", () => {
     })
   })
 
-  test("should call onClick (when readonly)", async () => {
+  test("should not call onClick (when readonly)", async () => {
     const onClickMock = vi.fn()
 
     const { user } = render(
@@ -60,9 +60,7 @@ describe("<FileButton />", () => {
 
     const fileButton = await screen.findByRole("button", { name: /Upload/i })
     await user.click(fileButton)
-    waitFor(() => {
-      expect(onClickMock).toHaveBeenCalledTimes(1)
-    })
+    expect(onClickMock).not.toHaveBeenCalled()
   })
 
   test("should not call onClick when disabled", async () => {

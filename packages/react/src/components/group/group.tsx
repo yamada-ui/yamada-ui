@@ -11,8 +11,7 @@ import { groupStyle } from "./group.style"
 import { useGroup } from "./use-group"
 
 export interface GroupProps
-  extends Omit<FlexProps, "grow">,
-    ThemeProps<GroupStyle> {}
+  extends Omit<FlexProps, "grow">, ThemeProps<GroupStyle> {}
 
 const {
   PropsContext: GroupPropsContext,

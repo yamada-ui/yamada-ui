@@ -19,7 +19,7 @@ import {
 } from "@yamada-ui/utils"
 import { format, writeFileWithFormat } from "@yamada-ui/workspace/prettier"
 import { Command } from "commander"
-import { readdir, readFile } from "fs/promises"
+import { mkdir, readdir, readFile } from "fs/promises"
 import ora from "ora"
 import path from "path"
 import c from "picocolors"
@@ -39,9 +39,9 @@ interface ExportedType {
 }
 
 interface Prop {
-  type: string
   description: string
   required: boolean
+  type: string
   defaultValue?: string
   deprecated?: string
   see?: string
@@ -51,7 +51,12 @@ interface Props {
   [key: string]: Prop
 }
 
-const CONFIG_PATH = path.join(process.cwd(), "tsconfig.json")
+const CONFIG_PATH = path.join(
+  process.cwd(),
+  "packages",
+  "react",
+  "tsconfig.json",
+)
 const ENTRY_PATH = path.join(
   process.cwd(),
   "packages",
@@ -422,8 +427,7 @@ function main() {
 
   program
     .argument("[components...]")
-    .option("-p, --publish", "publish the props data")
-    .action(async (components: string[] = [], { publish = false }) => {
+    .action(async (components: string[] = []) => {
       const start = process.hrtime.bigint()
 
       spinner.start("Getting tsconfig")
@@ -531,15 +535,7 @@ function main() {
                 }),
             )
 
-            await writeFileWithFormat(
-              path.join(dirPath, "props.json"),
-              sortedData,
-              {
-                parser: "json",
-              },
-            )
-
-            if (!publish) return
+            await mkdir(DATA_PATH, { recursive: true })
 
             await writeFileWithFormat(
               path.join(DATA_PATH, `${dirent.name}.json`),

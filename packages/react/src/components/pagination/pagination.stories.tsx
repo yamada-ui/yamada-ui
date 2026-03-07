@@ -43,6 +43,7 @@ export const Variant: Story = () => {
           key={key}
           colorScheme={row}
           variant={column}
+          aria-label={`Pagination-${column}-${row}`}
           total={10}
         />
       )}
@@ -53,7 +54,14 @@ export const Variant: Story = () => {
 export const Size: Story = () => {
   return (
     <PropsTable variant="stack" rows={["xs", "sm", "md", "lg", "xl"]}>
-      {(_, row, key) => <Pagination.Root key={key} size={row} total={10} />}
+      {(_, row, key) => (
+        <Pagination.Root
+          key={key}
+          size={row}
+          aria-label={`Pagination-${row}`}
+          total={10}
+        />
+      )}
     </PropsTable>
   )
 }
@@ -90,7 +98,13 @@ export const Text: Story = () => {
       rows={["xs", "sm", "md", "lg", "xl"]}
     >
       {(column, row, key) => (
-        <Pagination.Root key={key} size={row} gap="md" total={10}>
+        <Pagination.Root
+          key={key}
+          size={row}
+          aria-label={`Pagination-${column}-${row}`}
+          gap="md"
+          total={10}
+        >
           <Pagination.PrevTrigger>
             <Pagination.Item icon={<ChevronLeftIcon />} />
           </Pagination.PrevTrigger>
@@ -144,6 +158,7 @@ export const CustomIcon: Story = () => {
   return (
     <>
       <Pagination.Root
+        aria-label="Pagination-ghost-icon"
         total={10}
         withEdges
         controlProps={{ icon: <GhostIcon /> }}
@@ -152,6 +167,7 @@ export const CustomIcon: Story = () => {
       />
 
       <Pagination.Root
+        aria-label="Pagination-arrow-icon"
         total={10}
         withEdges
         controlNextProps={{ icon: <ArrowRightIcon /> }}

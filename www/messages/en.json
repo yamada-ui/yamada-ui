@@ -59,7 +59,7 @@
     "placeholder": "Search {total} icons...",
     "notFound": "Icon not found.",
     "reset": "Clear your search and try again",
-    "openPreview": "Open {title} preview"
+    "openPreview": "Open {name} preview"
   },
   "themes": {
     "title": "Your Own Themes",

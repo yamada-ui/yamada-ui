@@ -7,11 +7,11 @@ import { codeToHtml } from "@/libs/shiki"
 import { CopyButton } from "./copy-button"
 
 export interface CodePreviewProps extends Omit<GridProps, "children"> {
-  lang?: string
   children?: string
   code?: string
   highlight?: string
   html?: string
+  lang?: string
 }
 
 export function CodePreview({
@@ -36,7 +36,7 @@ export function CodePreview({
   const [html, setHtml] = useState<string | undefined>(htmlProp)
 
   useLayoutEffect(() => {
-    if (html || !children || !lang) return
+    if (!children || !lang) return
 
     codeToHtml(children, { lang, meta: { __raw: highlight ?? "" } }).then(
       setHtml,

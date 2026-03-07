@@ -142,25 +142,13 @@
         "description": "The size of the component.",
         "required": false
       },
-      "align": {
-        "type": "\"center\" | \"end\" | \"start\"",
-        "defaultValue": "\"start\"",
-        "description": "The alignment of the timeline.",
-        "required": false
-      },
-      "attached": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the timeline will be attached.",
-        "required": false
-      },
       "index": {
         "type": "number",
         "description": "The index of the active timeline item.",
         "required": false
       },
       "indicatorFill": {
-        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
         "description": "The fill color of the indicator.",
         "required": false
       },
@@ -170,7 +158,7 @@
         "required": false
       },
       "indicatorStroke": {
-        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
         "description": "The stroke color of the indicator.",
         "required": false
       },
@@ -180,7 +168,7 @@
         "required": false
       },
       "separatorColor": {
-        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
         "description": "The color of the separator.",
         "required": false
       },
@@ -197,12 +185,6 @@
       "separatorWidth": {
         "type": "\"-moz-fit-content\" | \"-moz-initial\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | \"-webkit-max-content\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" ...",
         "description": "The width of the separator.",
-        "required": false
-      },
-      "shape": {
-        "type": "\"circle\" | \"rounded\" | \"square\"",
-        "defaultValue": "\"circle\"",
-        "description": "The shape of the timeline.",
         "required": false
       }
     },
@@ -371,25 +353,13 @@
       "description": "The size of the component.",
       "required": false
     },
-    "align": {
-      "type": "\"center\" | \"end\" | \"start\"",
-      "defaultValue": "\"start\"",
-      "description": "The alignment of the timeline.",
-      "required": false
-    },
-    "attached": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the timeline will be attached.",
-      "required": false
-    },
     "index": {
       "type": "number",
       "description": "The index of the active timeline item.",
       "required": false
     },
     "indicatorFill": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The fill color of the indicator.",
       "required": false
     },
@@ -399,7 +369,7 @@
       "required": false
     },
     "indicatorStroke": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The stroke color of the indicator.",
       "required": false
     },
@@ -409,7 +379,7 @@
       "required": false
     },
     "separatorColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The color of the separator.",
       "required": false
     },
@@ -426,12 +396,6 @@
     "separatorWidth": {
       "type": "\"-moz-fit-content\" | \"-moz-initial\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | \"-webkit-max-content\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" ...",
       "description": "The width of the separator.",
-      "required": false
-    },
-    "shape": {
-      "type": "\"circle\" | \"rounded\" | \"square\"",
-      "defaultValue": "\"circle\"",
-      "description": "The shape of the timeline.",
       "required": false
     }
   },

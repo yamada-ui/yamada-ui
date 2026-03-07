@@ -1,6 +1,8 @@
 "use client"
 
-import { Sticker } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { Sticker as OriginalStickerIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const StickerIcon = component(Icon)({ as: Sticker })
+export const StickerIcon = component(Icon)({
+  as: OriginalStickerIcon,
+}) as Component<"svg", IconProps>

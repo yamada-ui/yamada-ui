@@ -259,4 +259,42 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+When using only icons in `Toggle`, set `aria-label` for the `Toggle`.
+
+```tsx
+<Toggle icon={<BoldIcon />} aria-label="Toggle bold" />
+```
+
+Setting an `aria-label` on `ToggleGroup.Root` allows screen readers to announce the group, helping users understand its purpose.
+
+```tsx
+<ToggleGroup.Root aria-label="Text formatting options">
+  <ToggleGroup.Item value="bold" icon={<BoldIcon />} aria-label="Toggle bold" />
+  <ToggleGroup.Item
+    value="italic"
+    icon={<ItalicIcon />}
+    aria-label="Toggle italic"
+  />
+  <ToggleGroup.Item
+    value="underline"
+    icon={<UnderlineIcon />}
+    aria-label="Toggle underline"
+  />
+</ToggleGroup.Root>
+```
+
+### Keyboard Navigation
+
+| Key              | Description                  | State |
+| ---------------- | ---------------------------- | ----- |
+| `Tab`            | Focuses the element.         | -     |
+| `Space`, `Enter` | Toggles the focused element. | -     |
+
+### ARIA Roles and Attributes
+
+| Component                    | Role and Attributes | Usage                                                                     |
+| ---------------------------- | ------------------- | ------------------------------------------------------------------------- |
+| `ToggleGroup.Root`           | `role="group"`      | Indicates that it's a group.                                              |
+| `Toggle`, `ToggleGroup.Item` | `aria-pressed`      | Set to `true` if the element is pressed, or `false` if it is not pressed. |
+|                              | `aria-disabled`     | Set to `"true"` if `disabled` or `readOnly` is set.                       |
+|                              | `aria-label`        | Set `value` if provided, otherwise default to `"Toggle button"`.          |

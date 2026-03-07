@@ -47,6 +47,7 @@
   "_picture": "&:picture-in-picture",
   "_placeholderShown": "&:placeholder-shown",
   "_playing": "&:is(:playing, [data-playing])",
+  "_popoverOpen": "&:popover-open",
   "_readWrite": "&:is(:read-write, [data-read-write])",
   "_required": "&:is(:required, [required])",
   "_target": "&:is(:target, [data-target])",

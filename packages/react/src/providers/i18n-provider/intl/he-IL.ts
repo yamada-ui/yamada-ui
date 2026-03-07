@@ -35,6 +35,9 @@ const data: IntlData = {
   colorSelector: {
     "Pick a color": "בחר צבע",
   },
+  colorSwatch: {
+    "Color swatch group": "קבוצת דוגמיות צבע",
+  },
   datePicker: {
     "Clear value": "נקה ערך",
   },

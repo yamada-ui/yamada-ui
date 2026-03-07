@@ -1,5 +1,6 @@
-import { a11y, filterVisuallyHidden, render, screen } from "#test"
+import { a11y, filterVisuallyHidden, fireEvent, render, screen } from "#test"
 import { Field } from "."
+import { Form } from "../form"
 import { Input } from "../input"
 
 describe("<Field />", () => {
@@ -194,5 +195,105 @@ describe("<Field />", () => {
       </Field.Root>,
     )
     expect(screen.getByTestId("optional")).toHaveTextContent("optional")
+  })
+
+  test("should render aria-describedby with HelperMessage", () => {
+    render(
+      <Field.Root
+        helperMessage="We'll never share your email."
+        label="Email address"
+      >
+        <Input type="email" placeholder="your email address" />
+      </Field.Root>,
+    )
+    expect(
+      screen.getByText("We'll never share your email."),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole("textbox", {
+        description: "We'll never share your email.",
+      }),
+    ).toBeInTheDocument()
+  })
+
+  test("should inherit object-based disabled from Form context", () => {
+    render(
+      <Form.Root disabled={{ email: true }}>
+        <Field.Root name="email" label="Email">
+          <Input type="email" />
+        </Field.Root>
+      </Form.Root>,
+    )
+    expect(screen.getByRole("textbox")).toBeDisabled()
+  })
+
+  test("should inherit object-based invalid from Form context", () => {
+    render(
+      <Form.Root invalid={{ email: true }}>
+        <Field.Root name="email" label="Email">
+          <Input type="email" />
+        </Field.Root>
+      </Form.Root>,
+    )
+    expect(screen.getByRole("textbox")).toBeInvalid()
+  })
+
+  test("should inherit object-based readOnly from Form context", () => {
+    render(
+      <Form.Root readOnly={{ email: true }}>
+        <Field.Root name="email" label="Email">
+          <Input type="email" />
+        </Field.Root>
+      </Form.Root>,
+    )
+    expect(screen.getByRole("textbox")).toHaveAttribute("aria-readonly", "true")
+  })
+
+  test("should inherit object-based required from Form context", () => {
+    render(
+      <Form.Root required={{ email: true }}>
+        <Field.Root name="email" label="Email">
+          <Input type="email" />
+        </Field.Root>
+      </Form.Root>,
+    )
+    expect(screen.getByRole("textbox")).toBeRequired()
+  })
+
+  test("should inherit object-based replace from Form context", () => {
+    render(
+      <Form.Root
+        errorMessage={{ email: "Email is required." }}
+        helperMessage={{ email: "Please enter your email" }}
+        invalid={{ email: true }}
+        replace={{ email: true }}
+      >
+        <Field.Root name="email" label="Email">
+          <Input type="email" />
+        </Field.Root>
+      </Form.Root>,
+    )
+    expect(
+      screen.getByText(filterVisuallyHidden("Email is required.")),
+    ).toBeInTheDocument()
+    expect(
+      screen.queryByText(filterVisuallyHidden("Please enter your email")),
+    ).not.toBeVisible()
+  })
+
+  test("should set focused state on focus and blur", () => {
+    render(
+      <Field.Root data-testid="root" label="Email">
+        <Input type="email" />
+      </Field.Root>,
+    )
+    const input = screen.getByRole("textbox")
+    const root = screen.getByTestId("root")
+
+    fireEvent.focus(input)
+    expect(root).toHaveAttribute("data-focus")
+
+    fireEvent.blur(input)
+    expect(root).not.toHaveAttribute("data-focus")
   })
 })

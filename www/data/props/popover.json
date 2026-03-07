@@ -44,6 +44,28 @@
         "required": false
       }
     },
+    "CloseTrigger": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
     "Content": {
       "as": {
         "type": "keyof IntrinsicElements",
@@ -295,12 +317,6 @@
         "type": "(reference: Reference<Y>, floating: HTMLElement, update: () => void) => () => void",
         "description": "A callback invoked when both the reference and floating elements are\nmounted, and cleaned up when either is unmounted. This is useful for\nsetting up event listeners (e.g. pass `autoUpdate`).",
         "required": false
-      },
-      "withCloseButton": {
-        "type": "boolean",
-        "defaultValue": "true",
-        "description": "If `true`, display the popover close button.",
-        "required": false
       }
     },
     "Trigger": {
@@ -349,6 +365,28 @@
     }
   },
   "PopoverBody": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "PopoverCloseTrigger": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -620,12 +658,6 @@
     "whileElementsMounted": {
       "type": "(reference: Reference<Y>, floating: HTMLElement, update: () => void) => () => void",
       "description": "A callback invoked when both the reference and floating elements are\nmounted, and cleaned up when either is unmounted. This is useful for\nsetting up event listeners (e.g. pass `autoUpdate`).",
-      "required": false
-    },
-    "withCloseButton": {
-      "type": "boolean",
-      "defaultValue": "true",
-      "description": "If `true`, display the popover close button.",
       "required": false
     }
   },

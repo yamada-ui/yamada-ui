@@ -190,7 +190,7 @@ export const CustomOptionalIndicator: Story = () => {
       <Field.Root
         label="Email address"
         optionalIndicator={
-          <Tag colorScheme="primary" size="sm">
+          <Tag colorScheme="mono" size="sm">
             optional
           </Tag>
         }
@@ -201,7 +201,7 @@ export const CustomOptionalIndicator: Story = () => {
       <Field.Root>
         <Field.Label
           optionalIndicator={
-            <Tag colorScheme="primary" size="sm">
+            <Tag colorScheme="mono" size="sm">
               optional
             </Tag>
           }

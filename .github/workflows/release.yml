@@ -5,13 +5,23 @@ on:
     paths:
       - ".changeset/**"
       - "packages/**"
-      - "!packages/**/(storybook|test)/**"
-      - "!packages/**/*.(stories|test).(ts|tsx|mdx)"
+      - "!packages/**/storybook/**"
+      - "!packages/**/test/**"
+      - "!packages/**/*.stories.ts"
+      - "!packages/**/*.stories.tsx"
+      - "!packages/**/*.stories.mdx"
+      - "!packages/**/*.test.ts"
+      - "!packages/**/*.test.tsx"
+      - "!packages/**/*.test.mdx"
     branches:
       - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
   release:
@@ -28,12 +38,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          key: ${{ runner.os }}-turbo-${{ github.job }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-turbo-
-        env:
-          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+            ${{ runner.os }}-turbo-${{ github.job }}-
 
       - name: Install
         uses: ./.github/composite-actions/install
@@ -69,10 +76,10 @@ jobs:
           pnpm gen:styles -p
           git add .
           git diff --staged --exit-code || git commit -m 'ci(changesets): update styles'
-          pnpm gen:props -p
+          pnpm gen:props
           git add .
           git diff --staged --exit-code || git commit -m 'ci(changesets): update props'
-          pnpm gen:registries -p
+          pnpm gen:registries
           git add .
           git diff --staged --exit-code || git commit -m 'ci(changesets): update registries'
           pnpm www build:content

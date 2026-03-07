@@ -1,6 +1,8 @@
 "use client"
 
-import { BrainCog } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { BrainCog as OriginalBrainCogIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const BrainCogIcon = component(Icon)({ as: BrainCog })
+export const BrainCogIcon = component(Icon)({
+  as: OriginalBrainCogIcon,
+}) as Component<"svg", IconProps>

@@ -148,12 +148,12 @@
         "required": false
       },
       "errorBorderColor": {
-        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
         "description": "The border color when the input is invalid.",
         "required": false
       },
       "focusBorderColor": {
-        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+        "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
         "description": "The border color when the input is focused.",
         "required": false
       },
@@ -422,12 +422,12 @@
       "required": false
     },
     "errorBorderColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The border color when the input is invalid.",
       "required": false
     },
     "focusBorderColor": {
-      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
       "description": "The border color when the input is focused.",
       "required": false
     },

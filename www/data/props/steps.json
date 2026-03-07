@@ -291,12 +291,6 @@
         "type": "(index: number) => void",
         "description": "The callback function that is called when the active step index is changed.",
         "required": false
-      },
-      "orientation": {
-        "type": "\"horizontal\" | \"vertical\"",
-        "defaultValue": "\"horizontal\"",
-        "description": "The orientation of the steps.",
-        "required": false
       }
     },
     "Separator": {
@@ -585,12 +579,6 @@
     "onChange": {
       "type": "(index: number) => void",
       "description": "The callback function that is called when the active step index is changed.",
-      "required": false
-    },
-    "orientation": {
-      "type": "\"horizontal\" | \"vertical\"",
-      "defaultValue": "\"horizontal\"",
-      "description": "The orientation of the steps.",
       "required": false
     }
   },

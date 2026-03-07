@@ -1,8 +1,1209 @@
 ---
 title: AreaChart
 description: "`AreaChart` is a component for drawing area charts to compare multiple sets of data."
-storybook: components-areachart--basic
-source: components/area-chart
+storybook: components-chart-areachart--basic
+source: components/chart
+style: components/chart/area-chart.style.ts
 ---
 
-Currently, this component is not migrated. This component will be migrated in v2.0.x.
+```tsx functional preview
+interface Data {
+  date: string
+  desktop: number
+  mobile: number
+  tablet: number
+}
+
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo<Data[]>(
+  () => [
+    {
+      date: "2026-03-01",
+      desktop: faker.number.int({ max: 2000, min: 1000 }),
+      mobile: faker.number.int({ max: 4000, min: 3000 }),
+      tablet: faker.number.int({ max: 3000, min: 2000 }),
+    },
+    {
+      date: "2026-04-01",
+      desktop: faker.number.int({ max: 2000, min: 1000 }),
+      mobile: faker.number.int({ max: 4000, min: 3000 }),
+      tablet: faker.number.int({ max: 3000, min: 2000 }),
+    },
+    {
+      date: "2026-05-01",
+      desktop: faker.number.int({ max: 2000, min: 1000 }),
+      mobile: faker.number.int({ max: 4000, min: 3000 }),
+      tablet: faker.number.int({ max: 3000, min: 2000 }),
+    },
+    {
+      date: "2026-06-01",
+      desktop: faker.number.int({ max: 2000, min: 1000 }),
+      mobile: faker.number.int({ max: 4000, min: 3000 }),
+      tablet: faker.number.int({ max: 3000, min: 2000 }),
+    },
+    {
+      date: "2026-07-01",
+      desktop: faker.number.int({ max: 2000, min: 1000 }),
+      mobile: faker.number.int({ max: 4000, min: 3000 }),
+      tablet: faker.number.int({ max: 3000, min: 2000 }),
+    },
+    {
+      date: "2026-08-01",
+      desktop: faker.number.int({ max: 2000, min: 1000 }),
+      mobile: faker.number.int({ max: 4000, min: 3000 }),
+      tablet: faker.number.int({ max: 3000, min: 2000 }),
+    },
+  ],
+  [],
+)
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { AreaChart } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { AreaChart } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { AreaChart } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<AreaChart.Root>
+  <AreaChart.Area>
+    <AreaChart.LabelList />
+  </AreaChart.Area>
+  <AreaChart.Label />
+  <AreaChart.ReferenceLine />
+  <AreaChart.Grid />
+  <AreaChart.XAxis />
+  <AreaChart.YAxis />
+  <AreaChart.Tooltip />
+  <AreaChart.Legend />
+</AreaChart.Root>
+```
+
+### Composition
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root data={data} chartProps={{ margin: { right: 16 } }}>
+    <AreaChart.Area dataKey="desktop" dot stroke="colorScheme.900">
+      <AreaChart.LabelList />
+    </AreaChart.Area>
+    <AreaChart.Area dataKey="tablet" stroke="colorScheme.600" />
+    <AreaChart.Area dataKey="mobile" stroke="colorScheme.300" />
+    <AreaChart.XAxis
+      dataKey="date"
+      tickFormatter={(value) => dayjs(value).format("MMM")}
+    />
+    <AreaChart.YAxis />
+    <AreaChart.Grid />
+    <AreaChart.Tooltip labelFormatter={(value) => dayjs(value).format("MMM")} />
+  </AreaChart.Root>
+)
+```
+
+### Change Size
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <For each={["xs", "sm", "md", "lg", "xl"]}>
+      {(size, index) => (
+        <AreaChart.Root
+          key={index}
+          size={size}
+          data={data}
+          series={series}
+          tooltipProps={{
+            labelFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+          xAxisProps={{
+            dataKey: "date",
+            tickFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Color Scheme
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries(
+      [{ dataKey: "desktop" }, { dataKey: "tablet" }, { dataKey: "mobile" }],
+      "blue",
+    ),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Change Color
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", color: "blue" },
+    { dataKey: "tablet", color: "green" },
+    { dataKey: "mobile", color: "red" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Add Gradient
+
+To add a gradient, set `withGradient` or `areaProps.withGradient` to `true`. The default is `false`.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries(
+      [{ dataKey: "desktop" }, { dataKey: "tablet" }, { dataKey: "mobile" }],
+      "blue",
+    ),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    areaProps={{ withGradient: true }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Change Type
+
+To change the type, set `type` in `series` or `areaProps.type` to `"monotone"`, `"linear"`, etc. The default is `"monotone"`.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <For
+      each={[
+        "monotone",
+        "bump",
+        "linear",
+        "natural",
+        "step",
+        "stepBefore",
+        "stepAfter",
+      ]}
+    >
+      {(type, index) => (
+        <AreaChart.Root
+          key={index}
+          areaProps={{ type }}
+          data={data}
+          series={series}
+          tooltipProps={{
+            labelFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+          xAxisProps={{
+            dataKey: "date",
+            tickFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Stacked
+
+To stack the series, set `stackId` or `areaProps.stackId` to a string.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", color: "blue" },
+    { dataKey: "tablet", color: "green" },
+    { dataKey: "mobile", color: "red" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    areaProps={{ stackId: "stack" }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Percent
+
+To make the series a percentage, set `stackId` or `areaProps.stackId` to a string and set `chartProps.stackOffset` to `"expand"`.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", color: "blue" },
+    { dataKey: "tablet", color: "green" },
+    { dataKey: "mobile", color: "red" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    areaProps={{ stackId: "stack" }}
+    chartProps={{ stackOffset: "expand" }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Add Y Axis
+
+To add the Y axis, set `withYAxis` to `true`. The default is `false`.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+To change the orientation of the Y axis, set `yAxisProps.orientation` to `"start"` or `"end"`. The default is `"start"`.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { left: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{ orientation: "end" }}
+  />
+)
+```
+
+### Add Legend
+
+To add the legend, set `withLegend` to `true`. The default is `false`. To change the placement of the legend, set `legendProps.placement` to `"start-start"`, `"end-end"`, etc. The default is `"start-end"`.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", color: "blue" },
+    { dataKey: "tablet", color: "green" },
+    { dataKey: "mobile", color: "red" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withLegend
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Change Name
+
+To change the name of the tooltip or legend, set `name` to a string in `series`.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", name: "Desktop", color: "blue" },
+    { dataKey: "tablet", name: "Tablet", color: "green" },
+    { dataKey: "mobile", name: "Mobile", color: "red" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withLegend
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Change Grid
+
+To change the grid, set `horizontal` and `vertical` to a boolean in `gridProps`.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <For each={["xy", "x", "y", "none"]}>
+      {(value, index) => (
+        <AreaChart.Root
+          key={index}
+          gridProps={{
+            horizontal: value.includes("x"),
+            vertical: value.includes("y"),
+          }}
+          data={data}
+          series={series}
+          tooltipProps={{
+            labelFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+          xAxisProps={{
+            dataKey: "date",
+            tickFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Add Dot
+
+To add a dot, set `dot` of `series` or `areaProps.dot` to `true`. The default is `false`.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    areaProps={{ dot: true }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Add Label
+
+To add a label, set `label` of `series` or `areaProps.label` to `true`. The default is `false`.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    areaProps={{ dot: true, label: true }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Add Unit
+
+To add a unit, use `formatter` or `tickFormatter` or set `unit` to a string.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    areaProps={{
+      dot: true,
+      label: {
+        formatter: (value) => `${(Number(value) / 1000).toFixed(1)}k`,
+      },
+    }}
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      formatter: (value) => `${(Number(value) / 1000).toFixed(1)}k`,
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      domain: [0, 10000],
+      tickFormatter: (value) => (value / 1000).toFixed(1),
+      ticks: [0, 2500, 5000, 7500, 10000],
+      unit: "k",
+    }}
+  />
+)
+```
+
+### Sync
+
+To sync the chart, set `syncId` to a string.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <AreaChart.Root
+      data={data}
+      series={series}
+      syncId="chart"
+      tooltipProps={{
+        labelFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+      xAxisProps={{
+        dataKey: "date",
+        tickFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+    />
+    <AreaChart.Root
+      data={data}
+      series={series}
+      syncId="chart"
+      tooltipProps={{
+        labelFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+      xAxisProps={{
+        dataKey: "date",
+        tickFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+    />
+  </VStack>
+)
+```
+
+### Format
+
+To format the chart, use `formatter` or `tickFormatter` etc.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      formatter: (value, name = "") => [
+        Number(value).toLocaleString(),
+        toTitleCase(name),
+      ],
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      tickFormatter: (value) => value.toLocaleString(),
+    }}
+  />
+)
+```
+
+### Add Reference Line
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  >
+    <AreaChart.ReferenceLine label="Reference line" y={3000} />
+    <AreaChart.ReferenceLine
+      label={{ position: "insideTopLeft", value: "Reference line" }}
+      x={dayjs().add(3, "month").format("YYYY-MM-DD")}
+    />
+    <AreaChart.ReferenceLine
+      label={{ position: "center", value: "Reference line" }}
+      segment={[
+        { x: dayjs().format("YYYY-MM-DD"), y: 0 },
+        { x: dayjs().add(3, "month").format("YYYY-MM-DD"), y: 3000 },
+      ]}
+    />
+  </AreaChart.Root>
+)
+```
+
+### Add Tick Line
+
+To add a tick line, set `tickLine` to `true` in `xAxisProps` or `yAxisProps`. The default is `false`.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+      tickLine: true,
+    }}
+    yAxisProps={{
+      tickFormatter: (value) => value.toLocaleString(),
+      tickLine: true,
+    }}
+  />
+)
+```
+
+### Add Axis Label
+
+To add an axis label, set `label` to a string in `xAxisProps` or `yAxisProps`. The default is `false`.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      label: "Date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{ label: "Value" }}
+  />
+)
+```
+
+### Set Domain
+
+To set the domain, set `domain` to an array in `yAxisProps`. To set the ticks, set `ticks` to an array in `yAxisProps`.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      domain: [0, 10000],
+      ticks: [0, 2500, 5000, 7500, 10000],
+    }}
+  />
+)
+```
+
+### Add Tooltip Cursor
+
+To add a tooltip cursor, set `cursor` to `true` in `tooltipProps`. The default is `false`.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{ cursor: true }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Hide X Axis
+
+To hide the X axis, set `withXAxis` to `false`. The default is `true`.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withXAxis={false}
+    chartProps={{ margin: { left: 0, right: 0 } }}
+    tooltipProps={{ labelFormatter: () => null }}
+  />
+)
+```
+
+### Hide Active Dot
+
+To hide the active dot, set `activeDot` or `areaProps.activeDot` to `false`. The default is `true`.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    areaProps={{ activeDot: false }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Hide Tooltip
+
+To hide the tooltip, set `withTooltip` to `false`. The default is `true`.
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withTooltip={false}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Customize Axis
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      label: { color: ["red", "blue"] },
+      tick: { color: ["red", "blue"] },
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+      tickLine: { color: ["red", "blue"] },
+    }}
+    yAxisProps={{
+      label: { color: ["red", "blue"] },
+      tick: { color: ["red", "blue"] },
+      tickLine: { color: ["red", "blue"] },
+    }}
+  />
+)
+```
+
+### Customize Dot
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet", dot: { fill: "blue" } },
+      {
+        dataKey: "mobile",
+        dot: { fill: ["white", "black"], stroke: "red", strokeWidth: 1 },
+      },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    areaProps={{ activeDot: false }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+      contentProps: { withSwatch: false },
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Customize Active Dot
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    areaProps={{ activeDot: { fill: ["blue", "red"] } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+      contentProps: { withSwatch: false },
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Customize Label
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () => [{ color: "blue", dataKey: "desktop" }],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    areaProps={{
+      activeDot: { fill: "red" },
+      dot: { fill: "red" },
+      label: { color: "red" },
+    }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+      contentProps: { withSwatch: false },
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      domain: [0, 10000],
+      ticks: [0, 2500, 5000, 7500, 10000],
+    }}
+  />
+)
+```
+
+### Customize Grid
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    gridProps={{ strokeDasharray: "15 15" }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+      contentProps: { withSwatch: false },
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### Customize Tooltip Cursor
+
+```tsx preview functional
+const series = useMemo<AreaChart.AreaProps<Data>[]>(
+  () =>
+    AreaChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <AreaChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      cursor: { stroke: ["red", "blue"] },
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+## Props
+
+<PropsTable
+  name="chart"
+  pick={[
+    "AreaChart",
+    "AreaChart.Root",
+    "AreaChart.Area",
+    "AreaChart.Grid",
+    "AreaChart.Label",
+    "AreaChart.LabelList",
+    "AreaChart.Legend",
+    "AreaChart.ReferenceLine",
+    "AreaChart.Tooltip",
+    "AreaChart.XAxis",
+    "AreaChart.YAxis",
+  ]}
+/>

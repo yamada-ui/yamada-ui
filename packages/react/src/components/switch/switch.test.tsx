@@ -68,4 +68,49 @@ describe("<Switch />", () => {
     const icon = container.querySelector("svg")
     expect(icon).toBeInTheDocument()
   })
+
+  test("renders object-form icon and toggles between on and off", async () => {
+    const { user } = render(
+      <Switch
+        icon={{
+          off: <span data-testid="icon-off">OFF</span>,
+          on: <span data-testid="icon-on">ON</span>,
+        }}
+      >
+        Switch
+      </Switch>,
+    )
+
+    expect(screen.getByTestId("icon-off")).toBeInTheDocument()
+    expect(screen.queryByTestId("icon-on")).not.toBeInTheDocument()
+
+    const switchElement = await screen.findByRole("switch", { name: /Switch/i })
+
+    await user.click(switchElement)
+
+    expect(screen.getByTestId("icon-on")).toBeInTheDocument()
+    expect(screen.queryByTestId("icon-off")).not.toBeInTheDocument()
+  })
+
+  test("passes labelProps to the label element", () => {
+    render(
+      <Switch data-testid="switch" labelProps={{ "data-testid": "label" }}>
+        Switch
+      </Switch>,
+    )
+
+    const label = screen.getByTestId("label")
+
+    expect(label).toBeInTheDocument()
+    expect(label).toHaveTextContent("Switch")
+  })
+
+  test("does not render the label element when children is not provided", () => {
+    render(<Switch data-testid="switch" />)
+
+    const el = screen.getByTestId("switch")
+    const labelElement = el.querySelector(".ui-switch__label")
+
+    expect(labelElement).toBeNull()
+  })
 })

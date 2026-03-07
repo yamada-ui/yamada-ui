@@ -575,4 +575,29 @@ return (
 
 ## Accessibility
 
-Currently, this section is being updated due to the migration of v2.
+`Tabs` follows the [WAI-ARIA - Tabs Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) for accessibility.
+
+### Keyboard Navigation
+
+| Key              | Description                                                                                                           | State                      |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| `Tab`            | Focuses the active tab when focus moves to the tab list. Moves focus to the tab panel if already within the tab list. | -                          |
+| `ArrowLeft`      | Focuses the previous tab that is not disabled. If it's the first tab, focuses the last tab that is not disabled.      | `orientation="horizontal"` |
+| `ArrowRight`     | Focuses the next tab that is not disabled. If it's the last tab, focuses the first tab that is not disabled.          | `orientation="horizontal"` |
+| `ArrowUp`        | Focuses the previous tab that is not disabled. If it's the first tab, focuses the last tab that is not disabled.      | `orientation="vertical"`   |
+| `ArrowDown`      | Focuses the next tab that is not disabled. If it's the last tab, focuses the first tab that is not disabled.          | `orientation="vertical"`   |
+| `Space`, `Enter` | Activates the focused tab.                                                                                            | `manual={true}`            |
+| `Home`           | Focuses the first tab that is not disabled.                                                                           | -                          |
+| `End`            | Focuses the last tab that is not disabled.                                                                            | -                          |
+
+### ARIA Roles and Attributes
+
+| Component    | Roles and Attributes | Usage                                                                                         |
+| ------------ | -------------------- | --------------------------------------------------------------------------------------------- |
+| `Tabs.List`  | `role="tablist"`     | Indicates that this is a tab list.                                                            |
+|              | `aria-orientation`   | Sets to `"horizontal"` or `"vertical"` based on `orientation`. The default is `"horizontal"`. |
+| `Tabs.Tab`   | `role="tab"`         | Indicates that this is a tab.                                                                 |
+|              | `aria-selected`      | Sets to `"true"` when the tab is selected, `"false"` when not selected.                       |
+|              | `aria-controls`      | Sets the `id` of the associated `Tabs.Panel`.                                                 |
+| `Tabs.Panel` | `role="tabpanel"`    | Indicates that this is a tab panel.                                                           |
+|              | `aria-labelledby`    | Sets the `id` of the associated `Tabs.Tab`.                                                   |

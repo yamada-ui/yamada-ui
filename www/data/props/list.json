@@ -71,7 +71,7 @@
         "required": false
       },
       "items": {
-        "type": "ListItemProps[]",
+        "type": "ListItem[]",
         "description": "If provided, generate elements based on items.",
         "required": false
       },
@@ -158,7 +158,7 @@
       "required": false
     },
     "items": {
-      "type": "ListItemProps[]",
+      "type": "ListItem[]",
       "description": "If provided, generate elements based on items.",
       "required": false
     },

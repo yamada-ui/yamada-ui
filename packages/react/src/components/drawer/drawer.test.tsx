@@ -125,4 +125,216 @@ describe("<Drawer />", () => {
     expect(title).toHaveAttribute("id")
     expect(body).toHaveAttribute("id")
   })
+
+  test("renders shorthand content with title, body, and footer", () => {
+    render(<Drawer.Root body="Shorthand Body" open title="Shorthand Title" />)
+
+    expect(screen.getByText("Shorthand Title")).toBeInTheDocument()
+    expect(screen.getByText("Shorthand Body")).toBeInTheDocument()
+  })
+
+  test("renders shorthand content with cancel, middle, and success buttons", () => {
+    render(
+      <Drawer.Root
+        body="Drawer Body"
+        cancel="Cancel"
+        middle="Middle"
+        open
+        success="OK"
+        title="Drawer Title"
+      />,
+    )
+
+    expect(screen.getByText("Cancel")).toBeInTheDocument()
+    expect(screen.getByText("Middle")).toBeInTheDocument()
+    expect(screen.getByText("OK")).toBeInTheDocument()
+  })
+
+  test("calls onCancel callback when cancel button is clicked", async () => {
+    const onCancel = vi.fn()
+    const { user } = render(
+      <Drawer.Root body="Body" cancel="Cancel" open onCancel={onCancel} />,
+    )
+
+    await user.click(screen.getByText("Cancel"))
+    expect(onCancel).toHaveBeenCalledTimes(1)
+  })
+
+  test("calls onMiddle callback when middle button is clicked", async () => {
+    const onMiddle = vi.fn()
+    const { user } = render(
+      <Drawer.Root body="Body" middle="Middle" open onMiddle={onMiddle} />,
+    )
+
+    await user.click(screen.getByText("Middle"))
+    expect(onMiddle).toHaveBeenCalledTimes(1)
+  })
+
+  test("calls onSuccess callback when success button is clicked", async () => {
+    const onSuccess = vi.fn()
+    const { user } = render(
+      <Drawer.Root body="Body" open success="OK" onSuccess={onSuccess} />,
+    )
+
+    await user.click(screen.getByText("OK"))
+    expect(onSuccess).toHaveBeenCalledTimes(1)
+  })
+
+  test("renders default drag bar when closeOnDrag and withDragBar are true", () => {
+    render(
+      <Drawer.Root closeOnDrag open withDragBar>
+        <Drawer.Content data-testid="content">
+          <Drawer.Body>Content</Drawer.Body>
+        </Drawer.Content>
+      </Drawer.Root>,
+    )
+
+    const content = screen.getByTestId("content")
+    expect(content).toBeInTheDocument()
+    expect(content.querySelector(".ui-drawer__drag-bar")).toBeInTheDocument()
+  })
+
+  test("does not render drag bar when closeOnDrag is false", () => {
+    render(
+      <Drawer.Root closeOnDrag={false} open withDragBar>
+        <Drawer.Content data-testid="content">
+          <Drawer.Body>Content</Drawer.Body>
+        </Drawer.Content>
+      </Drawer.Root>,
+    )
+
+    const content = screen.getByTestId("content")
+    expect(
+      content.querySelector(".ui-drawer__drag-bar"),
+    ).not.toBeInTheDocument()
+  })
+
+  test("renders without overlay when withOverlay is false", () => {
+    render(
+      <Drawer.Root open withOverlay={false}>
+        <Drawer.Content>
+          <Drawer.Body>Content</Drawer.Body>
+        </Drawer.Content>
+      </Drawer.Root>,
+    )
+
+    expect(
+      document.querySelector(".ui-drawer__overlay"),
+    ).not.toBeInTheDocument()
+  })
+
+  test("renders with trigger prop", () => {
+    render(
+      <Drawer.Root trigger={<Button>Trigger Button</Button>}>
+        <Drawer.Content>
+          <Drawer.Body>Content</Drawer.Body>
+        </Drawer.Content>
+      </Drawer.Root>,
+    )
+
+    expect(screen.getByText("Trigger Button")).toBeInTheDocument()
+  })
+
+  test("renders with placement block-start", () => {
+    render(
+      <Drawer.Root closeOnDrag open placement="block-start">
+        <Drawer.Content data-testid="content">
+          <Drawer.Body>Content</Drawer.Body>
+        </Drawer.Content>
+      </Drawer.Root>,
+    )
+
+    expect(screen.getByTestId("content")).toBeInTheDocument()
+  })
+
+  test("renders with placement block-end", () => {
+    render(
+      <Drawer.Root closeOnDrag open placement="block-end">
+        <Drawer.Content data-testid="content">
+          <Drawer.Body>Content</Drawer.Body>
+        </Drawer.Content>
+      </Drawer.Root>,
+    )
+
+    expect(screen.getByTestId("content")).toBeInTheDocument()
+  })
+
+  test("renders with placement inline-start", () => {
+    render(
+      <Drawer.Root closeOnDrag open placement="inline-start">
+        <Drawer.Content data-testid="content">
+          <Drawer.Body>Content</Drawer.Body>
+        </Drawer.Content>
+      </Drawer.Root>,
+    )
+
+    expect(screen.getByTestId("content")).toBeInTheDocument()
+  })
+
+  test("renders with placement inline-end", () => {
+    render(
+      <Drawer.Root closeOnDrag open placement="inline-end">
+        <Drawer.Content data-testid="content">
+          <Drawer.Body>Content</Drawer.Body>
+        </Drawer.Content>
+      </Drawer.Root>,
+    )
+
+    expect(screen.getByTestId("content")).toBeInTheDocument()
+  })
+
+  test("renders shorthand content with header as props object", () => {
+    render(
+      <Drawer.Root
+        body="Body Content"
+        header={{ children: "Header Content" }}
+        open
+      />,
+    )
+
+    expect(screen.getByText("Header Content")).toBeInTheDocument()
+    expect(screen.getByText("Body Content")).toBeInTheDocument()
+  })
+
+  test("renders shorthand content with footer as props object", () => {
+    render(
+      <Drawer.Root
+        body="Body Content"
+        footer={{ children: "Footer Content" }}
+        open
+      />,
+    )
+
+    expect(screen.getByText("Footer Content")).toBeInTheDocument()
+  })
+
+  test("closes drawer when cancel button is clicked without onCancel", async () => {
+    const onClose = vi.fn()
+    const { user } = render(
+      <Drawer.Root body="Body" cancel="Cancel" open onClose={onClose} />,
+    )
+
+    await user.click(screen.getByText("Cancel"))
+    expect(onClose).toHaveBeenCalledWith(undefined)
+  })
+
+  test("closes drawer when middle button is clicked without onMiddle", async () => {
+    const onClose = vi.fn()
+    const { user } = render(
+      <Drawer.Root body="Body" middle="Middle" open onClose={onClose} />,
+    )
+
+    await user.click(screen.getByText("Middle"))
+    expect(onClose).toHaveBeenCalledWith(undefined)
+  })
+
+  test("closes drawer when success button is clicked without onSuccess", async () => {
+    const onClose = vi.fn()
+    const { user } = render(
+      <Drawer.Root body="Body" open success="OK" onClose={onClose} />,
+    )
+
+    await user.click(screen.getByText("OK"))
+    expect(onClose).toHaveBeenCalledWith(undefined)
+  })
 })

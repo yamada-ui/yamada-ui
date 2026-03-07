@@ -58,8 +58,6 @@ export const useDynamicAnimation = <
 
   const [animations, setAnimations] = useState<string | undefined>(() => {
     for (const [key, styles] of Object.entries(arrayOrObj)) {
-      if (cache.current.has(key)) return
-
       if (isArray(styles)) {
         cache.current.set(
           key,

@@ -259,4 +259,42 @@ return (
 
 ## アクセシビリティ
 
-現在、v2の移行に伴い、このセクションは更新中です。
+`Toggle`にアイコンのみを使用する場合は、`Toggle`に`aria-label`を設定します。
+
+```tsx
+<Toggle icon={<BoldIcon />} aria-label="Toggle bold" />
+```
+
+`ToggleGroup.Root`に`aria-label`を設定すると、スクリーンリーダーによって読み上げられます。これにより、グループの目的や機能をユーザーに伝えることができます。
+
+```tsx
+<ToggleGroup.Root aria-label="Text formatting options">
+  <ToggleGroup.Item value="bold" icon={<BoldIcon />} aria-label="Toggle bold" />
+  <ToggleGroup.Item
+    value="italic"
+    icon={<ItalicIcon />}
+    aria-label="Toggle italic"
+  />
+  <ToggleGroup.Item
+    value="underline"
+    icon={<UnderlineIcon />}
+    aria-label="Toggle underline"
+  />
+</ToggleGroup.Root>
+```
+
+### キーボード操作
+
+| キー             | 説明                                 | 状態 |
+| ---------------- | ------------------------------------ | ---- |
+| `Tab`            | 要素をフォーカスします。             | -    |
+| `Space`, `Enter` | フォーカスされた要素を切り替えます。 | -    |
+
+### ARIAロールと属性
+
+| コンポーネント               | ロールと属性    | 使い方                                                                                             |
+| ---------------------------- | --------------- | -------------------------------------------------------------------------------------------------- |
+| `ToggleGroup.Root`           | `role="group"`  | グループであることを示します。                                                                     |
+| `Toggle`, `ToggleGroup.Item` | `aria-pressed`  | 要素が押されているの場合は`true`を設定し、押されていないの場合は`false`を設定します。              |
+|                              | `aria-disabled` | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                             |
+|                              | `aria-label`    | `value`が設定されている場合は`value`を設定し、設定されていない場合は`"トグルボタン"`を設定します。 |

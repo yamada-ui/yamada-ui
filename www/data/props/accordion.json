@@ -27,7 +27,7 @@
         "required": false
       },
       "icon": {
-        "type": "ReactNodeOrFunction<{ disabled?: boolean; expanded?: boolean }>",
+        "type": "ReactNodeOrFunction<AccordionCallBackProps>",
         "description": "The accordion icon to use.",
         "required": false
       }
@@ -157,7 +157,7 @@
         "required": false
       },
       "transitionEnd": {
-        "type": "MotionLifecycleProps<ResolvedValues>",
+        "type": "MotionLifecycleProps<ResolvedValues$1>",
         "description": "Custom `transitionEnd` definition for `enter` and `exit`.",
         "required": false
       },
@@ -216,7 +216,7 @@
         "required": false
       },
       "items": {
-        "type": "Omit<AccordionItemProps, \"index\">[]",
+        "type": "AccordionItem[]",
         "description": "If provided, generate elements based on items.",
         "required": false
       },
@@ -266,7 +266,7 @@
       "required": false
     },
     "icon": {
-      "type": "ReactNodeOrFunction<{ disabled?: boolean; expanded?: boolean }>",
+      "type": "ReactNodeOrFunction<AccordionCallBackProps>",
       "description": "The accordion icon to use.",
       "required": false
     }
@@ -396,7 +396,7 @@
       "required": false
     },
     "transitionEnd": {
-      "type": "MotionLifecycleProps<ResolvedValues>",
+      "type": "MotionLifecycleProps<ResolvedValues$1>",
       "description": "Custom `transitionEnd` definition for `enter` and `exit`.",
       "required": false
     },
@@ -455,7 +455,7 @@
       "required": false
     },
     "items": {
-      "type": "Omit<AccordionItemProps, \"index\">[]",
+      "type": "AccordionItem[]",
       "description": "If provided, generate elements based on items.",
       "required": false
     },

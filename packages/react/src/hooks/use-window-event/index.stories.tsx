@@ -29,7 +29,7 @@ export const Basic = () => {
       <Text>
         Focus: <Kbd>{isMac ? "Cmd" : "Ctrl"}</Kbd> + <Kbd>K</Kbd>
       </Text>
-      <Input ref={inputRef} />
+      <Input ref={inputRef} placeholder="Search" />
     </>
   )
 }

@@ -4,7 +4,7 @@ import { toKebabCase } from "@yamada-ui/utils"
 import { format, writeFileWithFormat } from "@yamada-ui/workspace/prettier"
 import { Command } from "commander"
 import { existsSync } from "fs"
-import { mkdir, readdir, readFile, writeFile } from "fs/promises"
+import { mkdir, readdir, readFile } from "fs/promises"
 import { glob } from "glob"
 import ora from "ora"
 import path from "path"
@@ -431,6 +431,10 @@ async function generateRegistries(
       if (!dirent.isDirectory()) return
       if (!TARGET_SECTIONS.includes(sectionName)) return
 
+      const sectionDir = path.join(PUBLIC_PATH, sectionName)
+
+      if (!existsSync(sectionDir)) await mkdir(sectionDir, { recursive: true })
+
       const targetPath = path.join(dirent.parentPath, sectionName)
       const dirents = await readdir(targetPath, { withFileTypes: true })
 
@@ -440,7 +444,7 @@ async function generateRegistries(
 
           if (!dirent.isDirectory()) return
 
-          const targetPath = path.join(dirent.parentPath, name, "registry.json")
+          const outputPath = path.join(PUBLIC_PATH, sectionName, `${name}.json`)
           const sources = (sourceMap[sectionName]?.[name] ?? []).sort((a, b) =>
             a.name.localeCompare(b.name),
           )
@@ -455,7 +459,7 @@ async function generateRegistries(
           }
           const content = JSON.stringify(registry)
 
-          await writeFileWithFormat(targetPath, content, { parser: "json" })
+          await writeFileWithFormat(outputPath, content, { parser: "json" })
         }),
       )
     }),
@@ -487,7 +491,9 @@ async function generateThemeRegistry() {
   }
   const content = JSON.stringify(registry)
 
-  await writeFileWithFormat(path.join(themePath, "registry.json"), content, {
+  if (!existsSync(PUBLIC_PATH)) await mkdir(PUBLIC_PATH, { recursive: true })
+
+  await writeFileWithFormat(path.join(PUBLIC_PATH, "theme.json"), content, {
     parser: "json",
   })
 }
@@ -506,110 +512,71 @@ async function generateIndexRegistry() {
   }
   const content = JSON.stringify(registry)
 
-  await writeFileWithFormat(path.join(ENTRY_PATH, "registry.json"), content, {
-    parser: "json",
-  })
-}
-
-async function publishRegistries() {
-  const filePaths = await glob(path.join(ENTRY_PATH, "**", "registry.json"))
-
   if (!existsSync(PUBLIC_PATH)) await mkdir(PUBLIC_PATH, { recursive: true })
 
-  await Promise.all(
-    filePaths.map(async (filePath) => {
-      const [sectionName, name] = filePath.split("/").slice(-3)
-
-      if (!sectionName || !name) return
-
-      const content = await readFile(filePath, "utf-8")
-
-      let targetPath: string
-
-      if (sectionName === "react") {
-        targetPath = path.join(PUBLIC_PATH, "index.json")
-      } else if (name === "theme") {
-        targetPath = path.join(PUBLIC_PATH, "theme.json")
-      } else {
-        if (!existsSync(path.join(PUBLIC_PATH, sectionName)))
-          await mkdir(path.join(PUBLIC_PATH, sectionName), { recursive: true })
-
-        targetPath = path.join(PUBLIC_PATH, sectionName, `${name}.json`)
-      }
-
-      await writeFile(targetPath, content)
-    }),
-  )
+  await writeFileWithFormat(path.join(PUBLIC_PATH, "index.json"), content, {
+    parser: "json",
+  })
 }
 
 function main() {
   const program = new Command()
   const spinner = ora()
 
-  program
-    .option("-p, --publish", "publish the registries")
-    .action(async ({ publish = false }) => {
-      const start = process.hrtime.bigint()
+  program.action(async () => {
+    const start = process.hrtime.bigint()
 
-      spinner.start("Getting tsconfig")
+    spinner.start("Getting tsconfig")
 
-      const { config } = readConfigFile(CONFIG_PATH, sys.readFile)
-      const { fileNames, options } = parseJsonConfigFileContent(
-        config,
-        sys,
-        path.dirname(CONFIG_PATH),
-      )
-      const { getSourceFile } = createProgram(fileNames, options)
+    const { config } = readConfigFile(CONFIG_PATH, sys.readFile)
+    const { fileNames, options } = parseJsonConfigFileContent(
+      config,
+      sys,
+      path.dirname(CONFIG_PATH),
+    )
+    const { getSourceFile } = createProgram(fileNames, options)
 
-      spinner.succeed("Got tsconfig")
+    spinner.succeed("Got tsconfig")
 
-      spinner.start("Getting package.json")
+    spinner.start("Getting package.json")
 
-      const externalMap = await getExternals()
+    const externalMap = await getExternals()
 
-      spinner.succeed("Got package.json")
+    spinner.succeed("Got package.json")
 
-      spinner.start("Getting sources")
+    spinner.start("Getting sources")
 
-      const sourceMap = await getSources()
+    const sourceMap = await getSources()
 
-      spinner.succeed("Got sources")
+    spinner.succeed("Got sources")
 
-      spinner.start("Getting dependencies")
+    spinner.start("Getting dependencies")
 
-      const dependencyMap = await getDependencies(getSourceFile, externalMap)
+    const dependencyMap = await getDependencies(getSourceFile, externalMap)
 
-      spinner.succeed("Got dependencies")
+    spinner.succeed("Got dependencies")
 
-      spinner.start("Getting dependents")
+    spinner.start("Getting dependents")
 
-      const dependentMap = getDependents(dependencyMap)
+    const dependentMap = getDependents(dependencyMap)
 
-      spinner.succeed("Got dependents")
+    spinner.succeed("Got dependents")
 
-      spinner.start("Generating registries")
+    spinner.start("Generating registries")
 
-      await Promise.all([
-        generateRegistries(sourceMap, dependencyMap, dependentMap),
-        generateThemeRegistry(),
-        generateIndexRegistry(),
-      ])
+    await Promise.all([
+      generateRegistries(sourceMap, dependencyMap, dependentMap),
+      generateThemeRegistry(),
+      generateIndexRegistry(),
+    ])
 
-      spinner.succeed("Generated registries")
+    spinner.succeed("Generated registries")
 
-      if (publish) {
-        spinner.start("Publishing registries")
+    const end = process.hrtime.bigint()
+    const duration = (Number(end - start) / 1e9).toFixed(2)
 
-        await publishRegistries()
-
-        spinner.succeed("Published registries")
-      }
-
-      const end = process.hrtime.bigint()
-      const duration = (Number(end - start) / 1e9).toFixed(2)
-
-      console.log("\n", c.green(`Done in ${duration}s`))
-    })
+    console.log("\n", c.green(`Done in ${duration}s`))
+  })
 
   program.parse()
 }

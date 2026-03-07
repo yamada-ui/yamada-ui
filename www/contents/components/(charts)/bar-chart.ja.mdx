@@ -1,8 +1,1165 @@
 ---
 title: BarChart
 description: "`BarChart`は、複数のデータを比較するための棒グラフを描画するコンポーネントです。"
-storybook: components-barchart--basic
-source: components/bar-chart
+storybook: components-chart-barchart--basic
+source: components/chart
+style: components/chart/bar-chart.style.ts
 ---
 
-現在、このコンポーネントは移行が完了していません。このコンポーネントの移行は、v2.0.xで行われる予定です。
+```tsx functional preview
+interface Data {
+  date: string
+  desktop: number
+  mobile: number
+  tablet: number
+}
+
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo<Data[]>(
+  () => [
+    {
+      date: "2026-03-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      date: "2026-04-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      date: "2026-05-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      date: "2026-06-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      date: "2026-07-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+    {
+      date: "2026-08-01",
+      desktop: faker.number.int({ max: 5000, min: 1000 }),
+      mobile: faker.number.int({ max: 5000, min: 1000 }),
+      tablet: faker.number.int({ max: 5000, min: 1000 }),
+    },
+  ],
+  [],
+)
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { BarChart } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { BarChart } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { BarChart } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<BarChart.Root>
+  <BarChart.Bar>
+    <BarChart.LabelList />
+  </BarChart.Bar>
+  <BarChart.Label />
+  <BarChart.ReferenceLine />
+  <BarChart.Grid />
+  <BarChart.XAxis />
+  <BarChart.YAxis />
+  <BarChart.Tooltip />
+  <BarChart.Legend />
+</BarChart.Root>
+```
+
+### コンポジション
+
+```tsx preview functional
+const data = useMemo<Data[]>(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root data={data}>
+    <BarChart.Tooltip labelFormatter={(value) => dayjs(value).format("MMM")} />
+    <BarChart.XAxis
+      dataKey="date"
+      tickFormatter={(value) => dayjs(value).format("MMM")}
+    />
+    <BarChart.Bar dataKey="desktop">
+      <BarChart.LabelList />
+    </BarChart.Bar>
+    <BarChart.Bar dataKey="tablet" />
+    <BarChart.Bar dataKey="mobile" />
+  </BarChart.Root>
+)
+```
+
+### サイズを変更する
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <For each={["xs", "sm", "md", "lg", "xl"]}>
+      {(size, index) => (
+        <BarChart.Root
+          key={index}
+          size={size}
+          data={data}
+          series={series}
+          tooltipProps={{
+            labelFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+          xAxisProps={{
+            dataKey: "date",
+            tickFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### カラースキームを変更する
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    colorScheme="blue"
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### 色を変更する
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", color: "red" },
+    { dataKey: "tablet", color: "blue" },
+    { dataKey: "mobile", color: "green" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### 範囲にする
+
+範囲にする場合は、`data`の項目の値を`[最小, 最大]`の配列に設定します。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () => [{ dataKey: "desktop" }, { dataKey: "tablet" }, { dataKey: "mobile" }],
+  [],
+)
+const data = useMemo<Data[]>(
+  () =>
+    Array.from({ length: 6 }, (_, index) => ({
+      date: dayjs().add(index, "month").format("YYYY-MM-DD"),
+      desktop: [
+        faker.number.int({ min: 1000, max: 2000 }),
+        faker.number.int({ min: 4000, max: 5000 }),
+      ],
+      mobile: [
+        faker.number.int({ min: 1000, max: 2000 }),
+        faker.number.int({ min: 4000, max: 5000 }),
+      ],
+      tablet: [
+        faker.number.int({ min: 1000, max: 2000 }),
+        faker.number.int({ min: 4000, max: 5000 }),
+      ],
+    })),
+  [],
+)
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### 積み上げる
+
+積み上げる場合は、`series`の`stackId`または`barProps.stackId`に文字列を設定します。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", color: "red" },
+    {
+      dataKey: "tablet",
+      color: "blue",
+      radius: [0, 0, 4, 4],
+      stackId: "stack",
+    },
+    {
+      dataKey: "mobile",
+      color: "green",
+      radius: [4, 4, 0, 0],
+      stackId: "stack",
+    },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### 割合にする
+
+割合にする場合は、`stackId`を設定し、`chartProps.stackOffset`に`"expand"`を設定します。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", color: "red" },
+    { dataKey: "tablet", color: "blue" },
+    { dataKey: "mobile", color: "green" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    barProps={{ radius: 0, stackId: "stack" }}
+    chartProps={{ stackOffset: "expand" }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      tickFormatter: (value) => `${(Number(value) * 100).toFixed(0)}%`,
+    }}
+  />
+)
+```
+
+### Y軸を表示する
+
+Y軸を表示する場合は、`withYAxis`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+また、`yAxisProps.orientation`に`"start"`や`"end"`を設定することで、Y軸の配置を変更できます。デフォルトは、`"start"`です。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { left: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{ orientation: "end" }}
+  />
+)
+```
+
+### 凡例を表示する
+
+凡例を表示する場合は、`withLegend`を`true`に設定します。デフォルトは、`false`です。また、凡例の配置を変更する場合は、`legendProps.placement`に`"start-start"`や`"end-end"`などを設定します。デフォルトは、`"start-end"`です。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", color: "red" },
+    { dataKey: "tablet", color: "blue" },
+    { dataKey: "mobile", color: "green" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withLegend
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### 項目名を変更する
+
+ツールチップや凡例の項目名を変更する場合は、`series`の`name`に文字列を設定します。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () => [
+    { dataKey: "desktop", name: "Desktop", color: "red" },
+    { dataKey: "tablet", name: "Tablet", color: "blue" },
+    { dataKey: "mobile", name: "Mobile", color: "green" },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withLegend
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### グリッドを変更する
+
+グリッドを変更する場合は、`gridProps.horizontal`と`gridProps.vertical`に真偽値を設定します。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <For each={["xy", "x", "y", "none"]}>
+      {(value, index) => (
+        <BarChart.Root
+          key={index}
+          gridProps={{
+            horizontal: value.includes("x"),
+            vertical: value.includes("y"),
+          }}
+          data={data}
+          series={series}
+          tooltipProps={{
+            labelFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+          xAxisProps={{
+            dataKey: "date",
+            tickFormatter: (value) => dayjs(value).format("MMM"),
+          }}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### ラベルを表示する
+
+ラベルを表示する場合は、`series`の`label`または`barProps.label`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () => BarChart.mergeSeries([{ dataKey: "desktop" }]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    barProps={{ label: true }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### 単位を表示する
+
+単位を表示する場合は、`formatter`や`tickFormatter`を使用するか、`unit`に文字列を設定します。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () => BarChart.mergeSeries([{ dataKey: "desktop" }]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    barProps={{
+      label: {
+        formatter: (value) => `${(Number(value) / 1000).toFixed(1)}k`,
+      },
+    }}
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      formatter: (value) => `${(Number(value) / 1000).toFixed(1)}k`,
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      domain: [0, 10000],
+      tickFormatter: (value) => (value / 1000).toFixed(1),
+      ticks: [0, 2500, 5000, 7500, 10000],
+      unit: "k",
+    }}
+  />
+)
+```
+
+### 縦方向にする
+
+縦方向にする場合は、`chartProps.layout`に`"vertical"`を設定します。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ layout: "vertical" }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{ type: "number" }}
+    yAxisProps={{
+      type: "category",
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### 同期させる
+
+同期させる場合は、`syncId`に文字列を設定します。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <VStack>
+    <BarChart.Root
+      data={data}
+      series={series}
+      syncId="chart"
+      tooltipProps={{
+        labelFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+      xAxisProps={{
+        dataKey: "date",
+        tickFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+    />
+    <BarChart.Root
+      data={data}
+      series={series}
+      syncId="chart"
+      tooltipProps={{
+        labelFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+      xAxisProps={{
+        dataKey: "date",
+        tickFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+    />
+  </VStack>
+)
+```
+
+### フォーマットする
+
+フォーマットする場合は、`formatter`や`tickFormatter`などを使用します。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      formatter: (value, name = "") => [
+        Number(value).toLocaleString(),
+        toTitleCase(name),
+      ],
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{ tickFormatter: (value) => value.toLocaleString() }}
+  />
+)
+```
+
+### 基準線を表示する
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  >
+    <BarChart.ReferenceLine label="Reference line" y={3000} />
+    <BarChart.ReferenceLine
+      label={{ position: "insideTopLeft", value: "Reference line" }}
+      x={dayjs().add(3, "month").format("YYYY-MM-DD")}
+    />
+    <BarChart.ReferenceLine
+      label={{ position: "center", value: "Reference line" }}
+      segment={[
+        { x: dayjs().format("YYYY-MM-DD"), y: 0 },
+        { x: dayjs().add(3, "month").format("YYYY-MM-DD"), y: 3000 },
+      ]}
+    />
+  </BarChart.Root>
+)
+```
+
+### 目盛線を表示する
+
+目盛線を表示する場合は、`xAxisProps.tickLine`または`yAxisProps.tickLine`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+      tickLine: true,
+    }}
+    yAxisProps={{ tickLine: true }}
+  />
+)
+```
+
+### 軸のラベルを表示する
+
+軸のラベルを表示する場合は、`xAxisProps.label`または`yAxisProps.label`に文字列を設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      label: "Date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{ label: "Value" }}
+  />
+)
+```
+
+### 範囲を設定する
+
+範囲を設定する場合は、`yAxisProps.domain`に`[最小, 最大]`を設定します。間隔を設定する場合は、`yAxisProps.ticks`に配列を設定します。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      domain: [0, 5000],
+      ticks: [0, 1000, 2000, 3000, 4000, 5000],
+    }}
+  />
+)
+```
+
+### 間隔を変更する
+
+間隔を変更する場合は、`chartProps.barCategoryGap`と`chartProps.barGap`に文字列または数値を設定します。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    chartProps={{ barCategoryGap: 16, barGap: 8 }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### 角丸を変更する
+
+角丸を変更する場合は、`series`の`radius`または`barProps.radius`に数値または配列を設定します。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () => [
+    { color: "red", dataKey: "desktop", radius: 8 },
+    {
+      color: "blue",
+      dataKey: "tablet",
+      radius: [0, 0, 8, 8],
+      stackId: "stack",
+    },
+    {
+      color: "green",
+      dataKey: "mobile",
+      radius: [8, 8, 0, 0],
+      stackId: "stack",
+    },
+  ],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### ツールチップのカーソルを表示する
+
+ツールチップのカーソルを表示する場合は、`tooltipProps.cursor`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      cursor: true,
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### X軸を非表示にする
+
+X軸を非表示にする場合は、`withXAxis`を`false`に設定します。デフォルトは、`true`です。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withXAxis={false}
+    chartProps={{ margin: { left: 0, right: 0 } }}
+    tooltipProps={{ labelFormatter: () => null }}
+  />
+)
+```
+
+### ツールチップを非表示にする
+
+ツールチップを非表示にする場合は、`withTooltip`を`false`に設定します。デフォルトは、`true`です。
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withTooltip={false}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### 軸をカスタマイズする
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    withYAxis
+    chartProps={{ margin: { right: 16 } }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      label: { color: ["red", "blue"] },
+      tick: { color: ["red", "blue"] },
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+      tickLine: { color: ["red", "blue"] },
+    }}
+    yAxisProps={{
+      label: { color: ["red", "blue"] },
+      tick: { color: ["red", "blue"] },
+      tickLine: { color: ["red", "blue"] },
+    }}
+  />
+)
+```
+
+### ラベルをカスタマイズする
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () => [{ color: "blue", dataKey: "desktop" }],
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    barProps={{
+      label: { color: "red" },
+    }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+      contentProps: { withSwatch: false },
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    yAxisProps={{
+      domain: [0, 10000],
+      ticks: [0, 2500, 5000, 7500, 10000],
+    }}
+  />
+)
+```
+
+### グリッドをカスタマイズする
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    gridProps={{ strokeDasharray: "15 15" }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+      contentProps: { withSwatch: false },
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+### ツールチップのカーソルをカスタマイズする
+
+```tsx preview functional
+const series = useMemo<BarChart.BarProps<Data>[]>(
+  () =>
+    BarChart.mergeSeries([
+      { dataKey: "desktop" },
+      { dataKey: "tablet" },
+      { dataKey: "mobile" },
+    ]),
+  [],
+)
+const data = useMemo(() => createCartesianChartData(), [])
+
+return (
+  <BarChart.Root
+    data={data}
+    series={series}
+    tooltipProps={{
+      cursor: { fill: "red", fillOpacity: 0.2 },
+      labelFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+    xAxisProps={{
+      dataKey: "date",
+      tickFormatter: (value) => dayjs(value).format("MMM"),
+    }}
+  />
+)
+```
+
+## Props
+
+<PropsTable
+  name="chart"
+  pick={[
+    "BarChart",
+    "BarChart.Root",
+    "BarChart.Bar",
+    "BarChart.Grid",
+    "BarChart.Label",
+    "BarChart.LabelList",
+    "BarChart.Legend",
+    "BarChart.ReferenceLine",
+    "BarChart.Tooltip",
+    "BarChart.XAxis",
+    "BarChart.YAxis",
+  ]}
+/>

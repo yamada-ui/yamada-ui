@@ -1,6 +1,8 @@
 "use client"
 
-import { LoaderPinwheel } from "lucide-react"
+import type { Component } from "../../../core"
+import type { IconProps } from "../icon"
+import { LoaderPinwheel as OriginalLoaderPinwheelIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
@@ -8,4 +10,6 @@ import { component, Icon } from "../icon"
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const LoaderPinwheelIcon = component(Icon)({ as: LoaderPinwheel })
+export const LoaderPinwheelIcon = component(Icon)({
+  as: OriginalLoaderPinwheelIcon,
+}) as Component<"svg", IconProps>

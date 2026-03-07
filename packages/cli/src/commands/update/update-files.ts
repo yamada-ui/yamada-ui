@@ -23,7 +23,7 @@ import { getDirPath } from "../diff/get-diff"
 
 async function mergeContent(
   remotePath: string,
-  localePath: string,
+  localPath: string,
   currentPath: string,
   fallback: string,
 ) {
@@ -34,7 +34,7 @@ async function mergeContent(
     const { stdout } = await execa("diff3", [
       "-m",
       remotePath,
-      localePath,
+      localPath,
       currentPath,
     ])
 
@@ -51,7 +51,7 @@ async function mergeContent(
   }
 
   content = content.replaceAll(remotePath, "remote")
-  content = content.replaceAll(localePath, "locale")
+  content = content.replaceAll(localPath, "local")
   content = content.replaceAll(currentPath, "current")
   content = content.replace(/\|\|\|\|\|\|\|[\s\S]*?=======/g, "=======")
 
@@ -66,6 +66,7 @@ export interface ConflictMap {
 
 export interface UpdateFilesOptions {
   concurrent?: boolean
+  force?: boolean
   install?: boolean
 }
 
@@ -74,7 +75,11 @@ export async function updateFiles(
   { add, remove, update }: DependencyMap,
   { remote }: RegistryMap,
   config: Config,
-  { concurrent = true, install = false }: UpdateFilesOptions = {},
+  {
+    concurrent = true,
+    force = false,
+    install = false,
+  }: UpdateFilesOptions = {},
 ) {
   const conflictMap: ConflictMap = {}
   const disabledFormatAndLint = {
@@ -98,80 +103,97 @@ export async function updateFiles(
                 const name = config.paths.ui.index.split("/").at(-1)!
                 const data = changes[name]!
 
-                if (!("locale" in data && "remote" in data)) return
+                if (!("local" in data && "remote" in data)) return
 
-                const remotePath = path.join(tempDirPath, `remote-${name}`)
-                const localePath = path.join(tempDirPath, `locale-${name}`)
+                if (force) {
+                  await writeFileSafe(
+                    config.paths.ui.index,
+                    data.remote,
+                    config,
+                  )
+                } else {
+                  const remotePath = path.join(tempDirPath, `remote-${name}`)
+                  const localPath = path.join(tempDirPath, `local-${name}`)
 
-                await Promise.all([
-                  writeFileSafe(remotePath, data.remote, disabledFormatAndLint),
-                  writeFileSafe(localePath, data.locale, disabledFormatAndLint),
-                ])
+                  await Promise.all([
+                    writeFileSafe(
+                      remotePath,
+                      data.remote,
+                      disabledFormatAndLint,
+                    ),
+                    writeFileSafe(localPath, data.local, disabledFormatAndLint),
+                  ])
 
-                const { conflict, content: mergedContent } = await mergeContent(
-                  remotePath,
-                  localePath,
-                  config.paths.ui.index,
-                  data.remote,
-                )
+                  const { conflict, content: mergedContent } =
+                    await mergeContent(
+                      remotePath,
+                      localPath,
+                      config.paths.ui.index,
+                      data.remote,
+                    )
 
-                await writeFileSafe(
-                  config.paths.ui.index,
-                  mergedContent,
-                  conflict ? merge(config, disabledFormatAndLint) : config,
-                )
+                  await writeFileSafe(
+                    config.paths.ui.index,
+                    mergedContent,
+                    conflict ? merge(config, disabledFormatAndLint) : config,
+                  )
 
-                if (conflict) {
-                  conflictMap[componentName] ??= {}
-                  conflictMap[componentName][name] = config.paths.ui.index
+                  if (conflict) {
+                    conflictMap[componentName] ??= {}
+                    conflictMap[componentName][name] = config.paths.ui.index
+                  }
                 }
               } else {
                 await Promise.all(
                   Object.entries(changes).map(async ([name, { ...data }]) => {
                     const currentPath = path.join(dirPath, name)
 
-                    if ("locale" in data && "remote" in data) {
-                      const remotePath = path.join(
-                        tempDirPath,
-                        `remote-${name}`,
-                      )
-                      const localePath = path.join(
-                        tempDirPath,
-                        `locale-${name}`,
-                      )
-
-                      await Promise.all([
-                        writeFileSafe(
-                          remotePath,
-                          data.remote,
-                          disabledFormatAndLint,
-                        ),
-                        writeFileSafe(
-                          localePath,
-                          data.locale,
-                          disabledFormatAndLint,
-                        ),
-                      ])
-
-                      const { conflict, content: mergedContent } =
-                        await mergeContent(
-                          remotePath,
-                          localePath,
-                          currentPath,
-                          data.remote,
+                    if ("local" in data && "remote" in data) {
+                      if (force) {
+                        await writeFileSafe(currentPath, data.remote, config)
+                      } else {
+                        const remotePath = path.join(
+                          tempDirPath,
+                          `remote-${name}`,
+                        )
+                        const localPath = path.join(
+                          tempDirPath,
+                          `local-${name}`,
                         )
 
-                      await writeFileSafe(
-                        currentPath,
-                        mergedContent,
-                        conflict
-                          ? merge(config, disabledFormatAndLint)
-                          : config,
-                      )
+                        await Promise.all([
+                          writeFileSafe(
+                            remotePath,
+                            data.remote,
+                            disabledFormatAndLint,
+                          ),
+                          writeFileSafe(
+                            localPath,
+                            data.local,
+                            disabledFormatAndLint,
+                          ),
+                        ])
 
-                      if (conflict) {
-                        conflictMap[componentName] ??= {}
-                        conflictMap[componentName][name] = currentPath
+                        const { conflict, content: mergedContent } =
+                          await mergeContent(
+                            remotePath,
+                            localPath,
+                            currentPath,
+                            data.remote,
+                          )
+
+                        await writeFileSafe(
+                          currentPath,
+                          mergedContent,
+                          conflict
+                            ? merge(config, disabledFormatAndLint)
+                            : config,
+                        )
+
+                        if (conflict) {
+                          conflictMap[componentName] ??= {}
+                          conflictMap[componentName][name] = currentPath
+                        }
                       }
                     } else if ("remote" in data) {
                       await writeFileSafe(currentPath, data.remote, config)

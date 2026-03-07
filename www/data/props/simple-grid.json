@@ -51,7 +51,7 @@
       "required": false
     },
     "minChildWidth": {
-      "type": "\"-moz-fit-content\" | \"-moz-initial\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fill-available\" | \"-webkit-fit-content\" | \"-webkit-max-content\" | \"-webkit-min-content\" | \"0.5\" | \"1.5\" ...",
+      "type": "\"-moz-fit-content\" | \"-moz-initial\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | \"-webkit-max-content\" | \"-webkit-min-content\" | \"0.5\" | \"1.5\" | \"1\" ...",
       "description": "The width at which child elements will break into columns.\nPass a number for pixel values or a string for any other valid CSS length.",
       "required": false
     },

@@ -106,12 +106,12 @@ export interface StyledOptions<
   D extends CSSModifierObject = CSSModifierObject,
   H extends number | string | symbol = string,
 > extends Omit<ComponentStyle<Y, M, D>, "className"> {
-  name?: string
-  target?: string
   className?: ((system: System) => string) | string
   displayName?: string
   forwardAsChild?: boolean
+  name?: string
   shouldForwardProp?: boolean | ShouldForwardProp
+  target?: string
   forwardProps?: string[]
   transferProps?: H[]
 }
@@ -125,6 +125,7 @@ export function createStyled<
 >(
   el: Y,
   {
+    name,
     base,
     compounds,
     props,
@@ -135,7 +136,7 @@ export function createStyled<
     ...options
   }: StyledOptions<D, H, R, keyof M> = {},
 ) {
-  const displayName = options.displayName ?? getDisplayName(options.name, "")
+  const displayName = options.displayName ?? getDisplayName(name, "")
   const shouldForwardProp = !options.shouldForwardProp
     ? createShouldForwardProp(options.forwardProps)
     : undefined
@@ -158,8 +159,9 @@ export function createStyled<
     const system = useSystem()
     const { theme } = useTheme<UsageTheme>()
     const componentStyleOptions = {
+      name,
       className: system.utils.getClassName(
-        runIfFn(options.className, system) ?? toKebabCase(options.name ?? ""),
+        runIfFn(options.className, system) ?? toKebabCase(name ?? ""),
       ),
       style,
       transferProps,

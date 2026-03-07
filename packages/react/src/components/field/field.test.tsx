@@ -281,6 +281,43 @@ describe("<Field />", () => {
     ).not.toBeVisible()
   })
 
+  test("should inherit object-based form flags via input name", () => {
+    render(
+      <Form.Root
+        disabled={{ email: true }}
+        invalid={{ email: true }}
+        readOnly={{ email: true }}
+        required={{ email: true }}
+      >
+        <Field.Root label="Email">
+          <Input type="email" name="email" />
+        </Field.Root>
+      </Form.Root>,
+    )
+
+    const input = screen.getByRole("textbox")
+    expect(input).toBeDisabled()
+    expect(input).toHaveAttribute("aria-invalid", "true")
+    expect(input).toHaveAttribute("aria-readonly", "true")
+    expect(input).toBeRequired()
+  })
+
+  test("should inherit scalar form flags via input name", () => {
+    render(
+      <Form.Root disabled invalid readOnly required>
+        <Field.Root label="Email">
+          <Input type="email" name="email" />
+        </Field.Root>
+      </Form.Root>,
+    )
+
+    const input = screen.getByRole("textbox")
+    expect(input).toBeDisabled()
+    expect(input).toHaveAttribute("aria-invalid", "true")
+    expect(input).toHaveAttribute("aria-readonly", "true")
+    expect(input).toBeRequired()
+  })
+
   test("should set focused state on focus and blur", () => {
     render(
       <Field.Root data-testid="root" label="Email">

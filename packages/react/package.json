@@ -64,6 +64,7 @@
     "test:dev:webkit": "vitest --watch --ui --project=browser --browser=webkit",
     "test:dev:firefox": "vitest --watch --ui --project=browser --browser=firefox",
     "test:coverage": "vitest run --browser=chromium --coverage",
+    "test:coverage:merge": "vitest --merge-reports --coverage.enabled --coverage.reporter=json --browser=chromium",
     "test:a11y": "storybook dev --ci -p 6006 -c storybook & wait-on http://localhost:6006 && test-storybook -c storybook --maxWorkers=8 --json --outputFile report.json",
     "typecheck": "tsc --noEmit",
     "typetrace": "tsc --noEmit --generateTrace ./trace --incremental false",

@@ -49,9 +49,57 @@ describe("<Checkbox />", () => {
     expect(checkbox?.parentElement?.children[1]?.tagName).toBe("DIV")
     expect(checkbox?.parentElement?.children[2]?.tagName).toBe("SPAN")
   })
+
+  test("renders children as label text", () => {
+    render(<Checkbox>test</Checkbox>)
+    expect(screen.getByText("test")).toBeInTheDocument()
+    expect(screen.getByText("test").tagName).toBe("SPAN")
+    expect(screen.getByText("test")).toHaveClass("ui-checkbox__label")
+  })
+
+  test("does not render label when children is not provided", () => {
+    render(<Checkbox data-testid="checkbox" />)
+    const checkbox = screen.getByTestId("checkbox")
+    expect(checkbox.querySelector(".ui-checkbox__label")).toBeNull()
+  })
+
+  test("should set `aria-checked` to `mixed` when indeterminate", () => {
+    render(<Checkbox indeterminate>checkbox</Checkbox>)
+    expect(screen.getByRole("checkbox")).toHaveAttribute(
+      "aria-checked",
+      "mixed",
+    )
+  })
+
+  test("should set `checked` to `true` when clicking indeterminate checkbox", () => {
+    render(<Checkbox indeterminate>checkbox</Checkbox>)
+    const checkbox = screen.getByRole("checkbox") as HTMLInputElement
+
+    fireEvent.click(checkbox)
+    expect(checkbox.checked).toBeTruthy()
+  })
 })
 
 describe("<CheckboxGroup />", () => {
+  test("should render with children", () => {
+    render(
+      <CheckboxGroup.Root>
+        <Checkbox value="1">Item1</Checkbox>
+      </CheckboxGroup.Root>,
+    )
+
+    expect(screen.getByText("Item1")).toBeInTheDocument()
+  })
+
+  test("should render items without value", () => {
+    render(
+      <CheckboxGroup.Root items={[{ label: "Item1" }, { label: "Item2" }]} />,
+    )
+
+    expect(screen.getByText("Item1")).toBeInTheDocument()
+    expect(screen.getByText("Item2")).toBeInTheDocument()
+  })
+
   test("should handle onChange callback when checking checkboxes", () => {
     const onChange = vi.fn()
     render(<CheckboxGroup.Root items={items} onChange={onChange} />)

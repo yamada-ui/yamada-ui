@@ -170,6 +170,7 @@ interface OmittedTableOptions<Y extends RowData> extends Omit<
 
 interface PickedNativeTableProps extends Pick<
   NativeTable.RootProps,
+  | "className"
   | "highlightOnHover"
   | "highlightOnSelected"
   | "layout"
@@ -386,6 +387,7 @@ export { TablePropsContext, useTablePropsContext }
  */
 export const Table = withContext(
   <Y extends RowData>({
+    className,
     colorScheme,
     size,
     variant,
@@ -816,6 +818,7 @@ export const Table = withContext(
           {...mergeProps(
             {
               ref,
+              className,
               style:
                 enableColumnResizing && enableAutoResizeTableWidth
                   ? { width: table.getCenterTotalSize() }

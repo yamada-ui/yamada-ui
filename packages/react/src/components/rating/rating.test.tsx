@@ -136,6 +136,68 @@ describe("<Rating />", () => {
     expect(items[3]).not.toHaveAttribute("data-focus")
   })
 
+  test("value should be updated on root touchStart event", () => {
+    const onChange = vi.fn()
+
+    render(<Rating data-testid="rating" onChange={onChange} />)
+
+    const rating = screen.getByTestId("rating")
+
+    fireEvent.touchStart(rating, {
+      touches: [{ clientX: 50, clientY: 10 }],
+    })
+
+    expect(onChange).toHaveBeenCalledWith(2)
+  })
+
+  test("root touchEnd should call preventDefault", () => {
+    render(<Rating data-testid="rating" />)
+
+    const rating = screen.getByTestId("rating")
+
+    const event = new TouchEvent("touchend", {
+      bubbles: true,
+      cancelable: true,
+    })
+    const preventDefaultSpy = vi.spyOn(event, "preventDefault")
+
+    rating.dispatchEvent(event)
+
+    expect(preventDefaultSpy).toHaveBeenCalledWith()
+  })
+
+  test("should update hovered value on input change event", async () => {
+    const { container, user } = render(<Rating />)
+
+    const inputs = container.querySelectorAll("input[type='radio']")
+
+    await user.click(inputs[3]!)
+
+    expect(inputs[3]).toHaveAttribute("data-checked")
+  })
+
+  test("should not update hovered value on input change when disabled", () => {
+    const { container } = render(<Rating disabled />)
+
+    const inputs = container.querySelectorAll("input[type='radio']")
+
+    fireEvent.change(inputs[3]!, { target: { value: "3" } })
+
+    expect(inputs[3]).not.toHaveAttribute("data-active")
+  })
+
+  test("should update value on Space key press", () => {
+    const onChange = vi.fn()
+
+    const { container } = render(<Rating onChange={onChange} />)
+
+    const inputs = container.querySelectorAll("input[type='radio']")
+
+    fireEvent.keyDown(inputs[3]!, { key: " ", code: "Space" })
+
+    expect(onChange).toHaveBeenCalledWith(3)
+  })
+
   test("should use custom color correctly", () => {
     const colors: { [key: number]: string } = {
       1: "red.500",

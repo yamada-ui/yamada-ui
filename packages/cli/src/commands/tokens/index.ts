@@ -11,7 +11,7 @@ import {
 import { Command } from "commander"
 import ora from "ora"
 import path from "path"
-import { CONFIG_FILE_NAME } from "../../constant"
+import { CONFIG_FILE_NAME, PACKAGE_NAME } from "../../constant"
 import {
   cwd,
   getConfig,
@@ -242,9 +242,9 @@ function generateThemeTokens(
     ].join("\n")
   } else {
     return [
-      `import type { UsageThemeTokens } from "@yamada-ui/react"`,
+      `import type { UsageThemeTokens } from "${PACKAGE_NAME}"`,
       ``,
-      `declare module '@yamada-ui/react' {`,
+      `declare module "${PACKAGE_NAME}" {`,
       `  interface CustomThemeTokens extends UsageThemeTokens {`,
       `    ${print({
         ...tokens,

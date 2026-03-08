@@ -39,6 +39,7 @@ interface Options {
   sequential: boolean
   format?: boolean
   lint?: boolean
+  tag?: string
 }
 
 export const add = new Command("add")
@@ -51,6 +52,7 @@ export const add = new Command("add")
   .option("-s, --sequential", "run tasks sequentially.", false)
   .option("-f, --format", "format the output files.")
   .option("-l, --lint", "lint the output files.")
+  .option("-t, --tag <name>", "tag for the registries (e.g. dev, next)")
   .action(async function (
     componentNames: string[],
     {
@@ -61,6 +63,7 @@ export const add = new Command("add")
       lint,
       overwrite,
       sequential,
+      tag,
     }: Options,
   ) {
     const spinner = ora()
@@ -109,7 +112,7 @@ export const add = new Command("add")
 
         spinner.start("Fetching all available components")
 
-        componentNames = await fetchRegistryNames()
+        componentNames = await fetchRegistryNames(tag)
 
         spinner.succeed("Fetched all available components")
       } else {
@@ -153,6 +156,7 @@ export const add = new Command("add")
         dependencies: !!componentNames.length,
         dependents: !!componentNames.length,
         omit: omittedGeneratedNames,
+        tag,
       })
       const registryNames = Object.keys(registries)
       const dependencies = [
@@ -333,7 +337,7 @@ export const add = new Command("add")
           task: async (_, task) => {
             const {
               sources: [source],
-            } = await fetchRegistry("index")
+            } = await fetchRegistry("index", { tag })
             let content = transformIndex(targetNames, source!.content!, config)
 
             if (config.jsx) content = transformTsToJs(content)

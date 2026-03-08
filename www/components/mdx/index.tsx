@@ -24,6 +24,7 @@ import { HookList } from "./hook-list"
 import { Link } from "./link"
 import { LinkList } from "./link-list"
 import { PropsTable } from "./props-table"
+import { UsedBy, Uses } from "./relations"
 import { SemanticTokensTable } from "./semantic-tokens-table"
 import { Sponsors } from "./sponsors"
 import { Steps } from "./steps"
@@ -123,6 +124,8 @@ const mdxComponents: MDXComponents = {
   TokensTable,
   tr: (props) => <NativeTable.Tr {...props} />,
   ul: (props) => <List.Root my="md" styleType="disc" {...props} />,
+  UsedBy,
+  Uses,
 }
 
 function getContent(code?: string): MDXContent | null {

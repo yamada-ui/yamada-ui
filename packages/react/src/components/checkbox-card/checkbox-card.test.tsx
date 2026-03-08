@@ -67,4 +67,34 @@ describe("<CheckboxCard />", () => {
     expect(checkbox?.parentElement?.children[3]?.tagName).toBe("SPAN")
     expect(checkbox?.parentElement?.children[4]?.tagName).toBe("SPAN")
   })
+
+  test("renders label, description, and addon via props", () => {
+    render(
+      <CheckboxCard.Root
+        addon="Test Addon"
+        description="Test Description"
+        label="Test Label"
+        value="test"
+      />,
+    )
+
+    expect(screen.getByText("Test Label")).toBeInTheDocument()
+    expect(screen.getByText("Test Description")).toBeInTheDocument()
+    expect(screen.getByText("Test Addon")).toBeInTheDocument()
+  })
+
+  test("renders without indicator when withIndicator is false", () => {
+    render(
+      <CheckboxCard.Root
+        label="No Indicator"
+        value="test"
+        withIndicator={false}
+      />,
+    )
+
+    expect(screen.getByText("No Indicator")).toBeInTheDocument()
+    const checkbox = screen.getByRole("checkbox")
+    const indicator = checkbox.parentElement?.querySelector("[data-indicator]")
+    expect(indicator).toBeNull()
+  })
 })

@@ -98,6 +98,11 @@
         },
         "required": ["name"]
       }
+    },
+    "tag": {
+      "type": "string",
+      "description": "The tag of the package.",
+      "enum": ["dev", "next"]
     }
   },
   "required": ["section", "sources"]

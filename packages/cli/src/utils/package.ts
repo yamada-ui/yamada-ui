@@ -107,6 +107,17 @@ export function splitVersion(value: string) {
   }
 }
 
+export function replaceVersion(value: string, target: string, tag?: string) {
+  if (!tag) return value
+
+  const [name, version] = splitVersion(value)
+
+  if (!version) return value
+  if (name !== target) return value
+
+  return `${name}@${tag}`
+}
+
 export function getPackageName(value: string) {
   return splitVersion(value)[0]
 }

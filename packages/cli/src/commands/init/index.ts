@@ -16,6 +16,7 @@ import {
   DEFAULT_PACKAGE_JSON_EXPORTS,
   DEFAULT_PACKAGE_NAME,
   DEFAULT_PATH,
+  PACKAGE_NAME,
   REGISTRY_FILE_NAME,
   REQUIRED_DEPENDENCIES,
   REQUIRED_DEV_DEPENDENCIES,
@@ -31,6 +32,7 @@ import {
   getPackageNameWithVersion,
   installDependencies,
   packageAddArgs,
+  replaceVersion,
   splitVersion,
   timer,
   transformExtension,
@@ -44,6 +46,7 @@ interface Options {
   cwd: string
   jsx: boolean
   overwrite: boolean
+  tag?: string
 }
 
 export const init = new Command("init")
@@ -51,12 +54,14 @@ export const init = new Command("init")
   .option("--cwd <path>", "current working directory", cwd)
   .option("-c, --config <path>", "path to the config file", CONFIG_FILE_NAME)
   .option("-o, --overwrite", "overwrite existing files.", false)
+  .option("-t, --tag <name>", "tag for the registries (e.g. dev, next)")
   .option("-j, --jsx", "use jsx instead of tsx", false)
   .action(async function ({
     config: configPath,
     cwd,
     jsx,
     overwrite,
+    tag,
   }: Options) {
     const spinner = ora()
 
@@ -237,12 +242,16 @@ export const init = new Command("init")
                   ...DEFAULT_PACKAGE_JSON,
                   dependencies: Object.fromEntries(
                     REQUIRED_DEPENDENCIES.ui.map((dependency) =>
-                      splitVersion(dependency),
+                      splitVersion(
+                        replaceVersion(dependency, PACKAGE_NAME, tag),
+                      ),
                     ),
                   ),
                   devDependencies: Object.fromEntries(
                     REQUIRED_DEV_DEPENDENCIES.ui.map((dependency) =>
-                      splitVersion(dependency),
+                      splitVersion(
+                        replaceVersion(dependency, PACKAGE_NAME, tag),
+                      ),
                     ),
                   ),
                   exports,
@@ -261,7 +270,7 @@ export const init = new Command("init")
             {
               task: async (_, task) => {
                 const targetPath = path.resolve(outdirPath, src ? "src" : "")
-                const registry = await fetchRegistry("index")
+                const registry = await fetchRegistry("index", { tag })
 
                 let content = registry.sources[0]!.content!
 
@@ -353,14 +362,18 @@ export const init = new Command("init")
                 notInstalledDependencies.push(
                   ...getNotInstalledDependencies(
                     packageJson,
-                    REQUIRED_DEPENDENCIES.ui,
+                    REQUIRED_DEPENDENCIES.ui.map((dependency) =>
+                      replaceVersion(dependency, PACKAGE_NAME, tag),
+                    ),
                   ),
                 )
 
                 notInstalledDevDependencies.push(
                   ...getNotInstalledDependencies(
                     packageJson,
-                    REQUIRED_DEV_DEPENDENCIES.ui,
+                    REQUIRED_DEV_DEPENDENCIES.ui.map((dependency) =>
+                      replaceVersion(dependency, PACKAGE_NAME, tag),
+                    ),
                   ),
                 )
 
@@ -370,7 +383,7 @@ export const init = new Command("init")
             },
             {
               task: async (_, task) => {
-                const registry = await fetchRegistry("index")
+                const registry = await fetchRegistry("index", { tag })
 
                 let content = registry.sources[0]!.content!
 

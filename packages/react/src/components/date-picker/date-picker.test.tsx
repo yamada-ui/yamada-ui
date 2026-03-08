@@ -738,15 +738,15 @@ describe("<DatePicker />", () => {
   test("handles closeOnSelect for single date via calendar click", async () => {
     render(<DatePicker defaultOpen placeholder="Select date" />)
 
-    // Find a day button in the calendar and click it
+    // Find a day cell in the calendar and click it
     const dialog = screen.getByRole("dialog")
-    const dayButtons = dialog.querySelectorAll("button[data-value]")
-    const validButton = Array.from(dayButtons).find(
-      (btn) =>
-        !btn.hasAttribute("data-outside") && !btn.hasAttribute("data-disabled"),
+    const dayCells = dialog.querySelectorAll("td")
+    const validDay = Array.from(dayCells).find(
+      (td) =>
+        !td.hasAttribute("data-outside") && !td.hasAttribute("data-disabled"),
     )!
 
-    fireEvent.click(validButton)
+    fireEvent.click(validDay)
 
     // closeOnSelect defaults to true for single, so dialog should close
     await waitFor(() => {
@@ -763,15 +763,15 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    // Find a day button in the calendar and click it
+    // Find a day cell in the calendar and click it
     const dialog = screen.getByRole("dialog")
-    const dayButtons = dialog.querySelectorAll("button[data-value]")
-    const validButton = Array.from(dayButtons).find(
-      (btn) =>
-        !btn.hasAttribute("data-outside") && !btn.hasAttribute("data-disabled"),
+    const dayCells = dialog.querySelectorAll("td")
+    const validDay = Array.from(dayCells).find(
+      (td) =>
+        !td.hasAttribute("data-outside") && !td.hasAttribute("data-disabled"),
     )!
 
-    fireEvent.click(validButton)
+    fireEvent.click(validDay)
 
     // closeOnSelect is false, so dialog should remain open
     expect(screen.getByRole("dialog")).toBeInTheDocument()

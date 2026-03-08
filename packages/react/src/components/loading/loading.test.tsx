@@ -2,7 +2,10 @@ import type { FC } from "react"
 import { a11y, act, render, renderHook, screen, waitFor } from "#test"
 import { Text } from "../text"
 import { Loading } from "./"
+import { Background } from "./background"
 import { useLoading } from "./loading-provider"
+import { Page } from "./page"
+import { Screen } from "./screen"
 import { Suspense } from "./suspense"
 
 const TargetComponent = () => (
@@ -614,6 +617,48 @@ describe("<Loading.Suspense />", () => {
 
     act(() => {
       resolve!("loaded")
+    })
+  })
+
+  describe.each([
+    ["Background", Background, "bg msg"],
+    ["Page", Page, "page msg"],
+    ["Screen", Screen, "screen msg"],
+  ])("%s message branch", (_, Component, text) => {
+    test("renders string message with Text branch", () => {
+      render(
+        <Component
+          duration={null}
+          initial={false}
+          loadingScheme="oval"
+          message={text}
+          onFinish={vi.fn()}
+        />,
+      )
+
+      expect(screen.getByText(text)).toBeInTheDocument()
+      expect(document.querySelector("[data-loading]")).toBeInTheDocument()
+    })
+  })
+
+  describe.each([
+    ["Background", Background, true],
+    ["Page", Page, true],
+    ["Screen", Screen, true],
+  ])("%s message branch", (_, Component, text) => {
+    test("renders without message with Text branch", () => {
+      render(
+        <Component
+          duration={null}
+          initial={false}
+          loadingScheme="oval"
+          message={text}
+          onFinish={vi.fn()}
+        />,
+      )
+
+      expect(screen.queryByTestId("screen-node")).not.toBeInTheDocument()
+      expect(document.querySelector("[data-loading]")).toBeInTheDocument()
     })
   })
 })

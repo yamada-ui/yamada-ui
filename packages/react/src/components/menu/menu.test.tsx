@@ -2221,12 +2221,12 @@ describe("<Menu />", () => {
 
     await user.click(screen.getByRole("button", { name: /Menu/i }))
     await waitFor(() => {
-      expect(onOpen).toHaveBeenCalledWith()
+      expect(onOpen).toHaveBeenCalledWith(undefined)
     })
 
     await user.click(screen.getByRole("button", { name: /Menu/i }))
     await waitFor(() => {
-      expect(onClose).toHaveBeenCalledWith()
+      expect(onClose).toHaveBeenCalledWith(undefined)
     })
   })
 

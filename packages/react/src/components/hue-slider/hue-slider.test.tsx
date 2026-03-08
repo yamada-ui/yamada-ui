@@ -32,6 +32,16 @@ describe("<HueSlider />", () => {
     expect(overlay[0]).toHaveClass("ui-hue-slider__overlay")
   })
 
+  test("renders custom children correctly", () => {
+    render(
+      <HueSlider.Root defaultValue={180}>
+        <div data-testid="custom-child" />
+      </HueSlider.Root>,
+    )
+
+    expect(screen.getByTestId("custom-child")).toBeVisible()
+  })
+
   test("sets aria attributes correctly", () => {
     render(<HueSlider.Root defaultValue={180} />)
 
@@ -45,6 +55,25 @@ describe("<HueSlider />", () => {
     expect(screen.getByRole("slider")).toHaveAttribute(
       "aria-orientation",
       "horizontal",
+    )
+  })
+
+  test("sets vertical orientation correctly", () => {
+    render(
+      <HueSlider.Root
+        defaultValue={180}
+        orientation="vertical"
+        overlayProps={{ "data-testid": "overlay" }}
+      />,
+    )
+
+    expect(screen.getByRole("slider")).toHaveAttribute(
+      "aria-orientation",
+      "vertical",
+    )
+    expect(screen.getByTestId("overlay")).toHaveAttribute(
+      "data-orientation",
+      "vertical",
     )
   })
 

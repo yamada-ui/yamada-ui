@@ -33,11 +33,8 @@ interface Dependents {
   providers: string[]
 }
 
-interface Dependencies {
-  components: string[]
+interface Dependencies extends Dependents {
   externals: string[]
-  hooks: string[]
-  providers: string[]
 }
 
 interface Registry {

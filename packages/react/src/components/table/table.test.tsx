@@ -254,7 +254,7 @@ describe("<Table />", () => {
 
       await user.click(headerCheckbox)
 
-      expect(onRowSelectionChange).toHaveBeenCalledWith()
+      expect(onRowSelectionChange).toHaveBeenCalledWith(expect.any(Object))
     })
 
     test("selects individual row when row checkbox is clicked", async () => {
@@ -275,7 +275,7 @@ describe("<Table />", () => {
 
       await user.click(firstRowCheckbox)
 
-      expect(onRowSelectionChange).toHaveBeenCalledWith()
+      expect(onRowSelectionChange).toHaveBeenCalledWith(expect.any(Object))
     })
 
     test("selects row on click when selectOnClickRow is true", async () => {
@@ -297,7 +297,7 @@ describe("<Table />", () => {
 
       await user.click(firstDataRow)
 
-      expect(onRowSelectionChange).toHaveBeenCalledWith()
+      expect(onRowSelectionChange).toHaveBeenCalledWith(expect.any(Object))
     })
 
     test("renders footer checkbox when withFooterCheckbox is true", () => {
@@ -473,7 +473,7 @@ describe("<Table />", () => {
 
       await user.click(sortButton)
 
-      expect(onSortingChange).toHaveBeenCalledWith()
+      expect(onSortingChange).toHaveBeenCalledWith(expect.any(Array))
     })
 
     test("renders custom sorting icon", () => {
@@ -515,7 +515,6 @@ describe("<Table />", () => {
           columns={sortableColumns}
           data={data}
           enableSorting
-          // @ts-expect-error testing plain object sortingIconProps
           sortingIconProps={{ className: "custom-sorting-icon" }}
           tableProps={{ "data-testid": "table" }}
         />,
@@ -594,7 +593,6 @@ describe("<Table />", () => {
           columns={resizableColumns}
           data={data}
           enableColumnResizing
-          // @ts-expect-error testing plain object resizableTriggerProps
           resizableTriggerProps={{ "data-testid": "resize-handle" }}
           tableProps={{ "data-testid": "table" }}
         />,
@@ -621,7 +619,6 @@ describe("<Table />", () => {
           columns={resizableColumns}
           data={data}
           enableColumnResizing
-          // @ts-expect-error testing plain object resizableTriggerProps
           resizableTriggerProps={{ className: "custom-resize-trigger" }}
           tableProps={{ "data-testid": "table" }}
         />,

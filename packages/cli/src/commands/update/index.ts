@@ -22,10 +22,12 @@ import { validateDiff3 } from "./validate-diff-3"
 interface Options {
   config: string
   cwd: string
+  force: boolean
   format: boolean
   install: boolean
   lint: boolean
   sequential: boolean
+  tag?: string
 }
 
 export const update = new Command("update")
@@ -35,11 +37,22 @@ export const update = new Command("update")
   .option("-c, --config <path>", "path to the config file", CONFIG_FILE_NAME)
   .option("-i, --install", "install dependencies", false)
   .option("-s, --sequential", "run tasks sequentially.", false)
+  .option("-F, --force", "force update, overwriting local changes.", false)
   .option("-f, --format", "format the output files.")
   .option("-l, --lint", "lint the output files.")
+  .option("-t, --tag <name>", "tag for the registries (e.g. dev, next)")
   .action(async function (
     targetNames: string[],
-    { config: configPath, cwd, format, install, lint, sequential }: Options,
+    {
+      config: configPath,
+      cwd,
+      force,
+      format,
+      install,
+      lint,
+      sequential,
+      tag,
+    }: Options,
   ) {
     const spinner = ora()
 
@@ -58,11 +71,13 @@ export const update = new Command("update")
 
       spinner.succeed("Validated directory")
 
-      spinner.start("Validating methods")
+      if (!force) {
+        spinner.start("Validating methods")
 
-      await validateDiff3()
+        await validateDiff3()
 
-      spinner.succeed("Validated methods")
+        spinner.succeed("Validated methods")
+      }
 
       spinner.start("Fetching config")
 
@@ -119,7 +134,7 @@ export const update = new Command("update")
       const { registryMap } = await getRegistriesAndFiles(
         componentNames,
         config,
-        { concurrent: !sequential, index, theme },
+        { concurrent: !sequential, index, tag, theme },
       )
       const { changeMap, dependencyMap } = await getDiff(
         generatedNames,
@@ -143,7 +158,7 @@ export const update = new Command("update")
           dependencyMap,
           registryMap,
           config,
-          { concurrent: !sequential, install },
+          { concurrent: !sequential, force, install },
         )
 
         if (Object.keys(conflictMap).length) {

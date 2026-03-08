@@ -121,7 +121,7 @@ export const polarChartStyle = defineComponentSlotStyle({
       "--label-line-stroke": "colors.fg.muted",
       "--label-line-stroke-width": "1",
       "--radar-color": "colorScheme.solid",
-      "--radar-fill-opacity": "0.6",
+      "--radar-fill-opacity": "0.4",
       "--radar-stroke": "currentColor",
       "--radar-stroke-width": "2",
       "--radial-background-color": "colors.bg.subtle",

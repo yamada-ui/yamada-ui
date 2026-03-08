@@ -1,0 +1,42 @@
+name: Codecov
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+jobs:
+  coverage:
+    name: Coverage ${{ matrix.shard_index }}/4
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        shard_index: [1, 2, 3, 4]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: ./.github/composite-actions/install
+
+      - name: Setup Browser
+        working-directory: packages/react
+        run: pnpm playwright install chromium --with-deps
+
+      - name: Run coverage
+        run: pnpm test:coverage -- --shard=${{ matrix.shard_index }}/4
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v4
+        with:
+          fail_ci_if_error: false
+          file: ./packages/react/coverage/coverage-final.json,./packages/utils/coverage/coverage-final.json
+          flags: unittests
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
+          codecov_yml_path: ./codecov.yml

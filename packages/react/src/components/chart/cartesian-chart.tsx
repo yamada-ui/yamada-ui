@@ -8,6 +8,7 @@ import type {
   LabelProps,
 } from "recharts"
 import type {
+  CartesianChartProps as OriginalCartesianChartProps,
   XAxisTickContentProps,
   YAxisTickContentProps,
 } from "recharts/types/util/types"
@@ -30,6 +31,7 @@ import type {
   ChartTickLine,
 } from "./chart"
 import type {
+  UseCartesianChartProps,
   UseChartAreaProps,
   UseChartBarProps,
   UseChartGridProps,
@@ -59,8 +61,9 @@ import {
 } from "../../core"
 import { cx, isFunction, isObject, splitObject } from "../../utils"
 import { cartesianChartStyle } from "./cartesian-chart.style"
-import { Chart, useChartComponentContext } from "./chart"
+import { Chart } from "./chart"
 import {
+  useCartesianChart,
   useChartArea,
   useChartBar,
   useChartGrid,
@@ -84,7 +87,10 @@ interface ComponentContext extends Pick<
 > {}
 
 export interface CartesianChartProps<Y extends Dict = Dict>
-  extends ChartProps<Y>, ThemeProps<CartesianChartStyle> {
+  extends
+    ChartProps,
+    UseCartesianChartProps<Y>,
+    ThemeProps<CartesianChartStyle> {
   /**
    * The fill color of the active dots.
    */
@@ -102,9 +108,37 @@ export interface CartesianChartProps<Y extends Dict = Dict>
    */
   activeDotStrokeWidth?: CSSProps["strokeWidth"]
   /**
+   * The fill opacity of the area end.
+   */
+  areaEndFillOpacity?: CSSProps["fillOpacity"]
+  /**
    * The fill opacity of the area.
    */
   areaFillOpacity?: CSSProps["fillOpacity"]
+  /**
+   * The fill opacity of the area start.
+   */
+  areaStartFillOpacity?: CSSProps["fillOpacity"]
+  /**
+   * The color of the bars.
+   */
+  barColor?: CSSProps["color"]
+  /**
+   * The fill color of the bars.
+   */
+  barFill?: CSSProps["fill"]
+  /**
+   * The fill opacity of the bars.
+   */
+  barFillOpacity?: CSSProps["fillOpacity"]
+  /**
+   * The stroke color of the bars.
+   */
+  barStroke?: CSSProps["stroke"]
+  /**
+   * The stroke width of the bars.
+   */
+  barStrokeWidth?: CSSProps["strokeWidth"]
   /**
    * The fill color of the dots.
    */
@@ -125,6 +159,10 @@ export interface CartesianChartProps<Y extends Dict = Dict>
    * The stroke color of the grid.
    */
   gridStroke?: CSSProps["stroke"]
+  /**
+   * The opacity of the inactive bars.
+   */
+  inactiveBarOpacity?: CSSProps["opacity"]
   /**
    * The opacity of the inactive lines.
    */
@@ -220,6 +258,10 @@ export interface CartesianChartProps<Y extends Dict = Dict>
    */
   barProps?: Omit<ChartBarProps, "dataKey">
   /**
+   * Props for the line chart component.
+   */
+  chartProps?: Omit<OriginalCartesianChartProps, "data">
+  /**
    * Props for the grid component.
    */
   gridProps?: ChartGridProps
@@ -258,13 +300,15 @@ const {
 export { CartesianChartPropsContext, useCartesianChartPropsContext }
 
 export const CartesianChart = withProvider(
-  <Y extends Dict>({
+  <Y extends Dict = Dict>({
     components: componentsProp,
+    render,
     withGrid = true,
     withXAxis = true,
     withYAxis = false,
     areaProps,
     barProps,
+    chartProps,
     gridProps,
     lineProps,
     referenceLineProps,
@@ -272,6 +316,7 @@ export const CartesianChart = withProvider(
     yAxisProps,
     ...rest
   }: CartesianChartProps<Y>) => {
+    const { getChartProps, getRootProps } = useCartesianChart(rest)
     const components = useMemo(
       () => [
         {
@@ -313,7 +358,11 @@ export const CartesianChart = withProvider(
 
     return (
       <ComponentContext value={componentContext}>
-        <Chart components={components} {...rest} />
+        <Chart
+          components={components}
+          render={(props) => render(getChartProps({ ...props, ...chartProps }))}
+          {...getRootProps()}
+        />
       </ComponentContext>
     )
   },
@@ -325,12 +374,20 @@ export const CartesianChart = withProvider(
     activeDotRadius,
     activeDotStroke,
     activeDotStrokeWidth,
+    areaEndFillOpacity,
     areaFillOpacity,
+    areaStartFillOpacity,
+    barColor,
+    barFill,
+    barFillOpacity,
+    barStroke,
+    barStrokeWidth,
     dotFill,
     dotRadius,
     dotStroke,
     dotStrokeWidth,
     gridStroke,
+    inactiveBarOpacity,
     inactiveLineOpacity,
     lineColor,
     lineStroke,
@@ -354,12 +411,20 @@ export const CartesianChart = withProvider(
     "--active-dot-r": activeDotRadius,
     "--active-dot-stroke": varAttr(activeDotStroke, "colors"),
     "--active-dot-stroke-width": activeDotStrokeWidth,
+    "--area-end-fill-opacity": areaEndFillOpacity,
     "--area-fill-opacity": areaFillOpacity,
+    "--area-start-fill-opacity": areaStartFillOpacity,
+    "--bar-color": varAttr(barColor, "colors"),
+    "--bar-fill": varAttr(barFill, "colors"),
+    "--bar-fill-opacity": barFillOpacity,
+    "--bar-stroke": varAttr(barStroke, "colors"),
+    "--bar-stroke-width": barStrokeWidth,
     "--dot-fill": varAttr(dotFill, "colors"),
     "--dot-r": dotRadius,
     "--dot-stroke": varAttr(dotStroke, "colors"),
     "--dot-stroke-width": dotStrokeWidth,
     "--grid-stroke": varAttr(gridStroke, "colors"),
+    "--inactive-bar-opacity": inactiveBarOpacity,
     "--inactive-line-opacity": inactiveLineOpacity,
     "--line-color": varAttr(lineColor, "colors"),
     "--line-stroke": varAttr(lineStroke, "colors"),
@@ -380,7 +445,7 @@ export const CartesianChart = withProvider(
     ...rest,
   }),
 ) as GenericsComponent<{
-  <Y extends Dict>(props: CartesianChartProps<Y>): ReactElement
+  <Y extends Dict = Dict>(props: CartesianChartProps<Y>): ReactElement
 }>
 
 export type ChartXAxisTick =
@@ -427,10 +492,10 @@ export const ChartXAxis = withContext<"svg", ChartXAxisProps>((props) => {
   const tickProps = useSlotComponentProps({}, "xAxisTick")
   const labelProps = useSlotComponentProps({}, "xAxisLabel")
   const tickLineProps = useSlotComponentProps({}, "xAxisTickLine")
+  const css = useMemo(() => getCSS(system, theme), [system, theme])
   const tick = useMemo<UseChartXAxisProps["tick"]>(() => {
     if (!tickProp) return tickProp
 
-    const css = getCSS(system, theme)
     const className = cx(tickProps.className, css(tickProps.css))
 
     if (isFunction(tickProp)) {
@@ -451,11 +516,10 @@ export const ChartXAxis = withContext<"svg", ChartXAxisProps>((props) => {
     } else {
       return { className }
     }
-  }, [system, theme, tickProp, tickProps.className, tickProps.css])
+  }, [tickProp, tickProps.className, tickProps.css, css])
   const tickLine = useMemo<UseChartXAxisProps["tickLine"]>(() => {
     if (!tickLineProp) return tickLineProp
 
-    const css = getCSS(system, theme)
     const className = cx(tickLineProps.className, css(tickLineProps.css))
 
     if (isObject(tickLineProp)) {
@@ -471,11 +535,10 @@ export const ChartXAxis = withContext<"svg", ChartXAxisProps>((props) => {
     } else {
       return { className }
     }
-  }, [system, theme, tickLineProp, tickLineProps.className, tickLineProps.css])
+  }, [tickLineProp, tickLineProps.className, tickLineProps.css, css])
   const label = useMemo<UseChartXAxisProps["label"]>(() => {
     if (!labelProp) return labelProp
 
-    const css = getCSS(system, theme)
     const className = cx(labelProps.className, css(labelProps.css))
 
     if (isFunction(labelProp)) {
@@ -496,7 +559,7 @@ export const ChartXAxis = withContext<"svg", ChartXAxisProps>((props) => {
     } else {
       return { className, children: labelProp }
     }
-  }, [system, theme, labelProp, labelProps.className, labelProps.css])
+  }, [labelProp, labelProps.className, labelProps.css, css])
   const { getRootProps, getXAxisProps } = useChartXAxis({
     label,
     tick,
@@ -555,10 +618,10 @@ export const ChartYAxis = withContext<"svg", ChartYAxisProps>((props) => {
   const tickProps = useSlotComponentProps({}, "yAxisTick")
   const labelProps = useSlotComponentProps({}, "yAxisLabel")
   const tickLineProps = useSlotComponentProps({}, "yAxisTickLine")
+  const css = useMemo(() => getCSS(system, theme), [system, theme])
   const tick = useMemo<UseChartYAxisProps["tick"]>(() => {
     if (!tickProp) return tickProp
 
-    const css = getCSS(system, theme)
     const className = cx(tickProps.className, css(tickProps.css))
 
     if (isFunction(tickProp)) {
@@ -579,11 +642,10 @@ export const ChartYAxis = withContext<"svg", ChartYAxisProps>((props) => {
     } else {
       return { className }
     }
-  }, [system, theme, tickProp, tickProps.className, tickProps.css])
+  }, [tickProp, tickProps.className, tickProps.css, css])
   const tickLine = useMemo<UseChartXAxisProps["tickLine"]>(() => {
     if (!tickLineProp) return tickLineProp
 
-    const css = getCSS(system, theme)
     const className = cx(tickLineProps.className, css(tickLineProps.css))
 
     if (isObject(tickLineProp)) {
@@ -599,11 +661,10 @@ export const ChartYAxis = withContext<"svg", ChartYAxisProps>((props) => {
     } else {
       return { className }
     }
-  }, [system, theme, tickLineProp, tickLineProps.className, tickLineProps.css])
+  }, [tickLineProp, tickLineProps.className, tickLineProps.css, css])
   const label = useMemo<UseChartYAxisProps["label"]>(() => {
     if (!labelProp) return labelProp
 
-    const css = getCSS(system, theme)
     const className = cx(labelProps.className, css(labelProps.css))
 
     if (isFunction(labelProp)) {
@@ -624,7 +685,7 @@ export const ChartYAxis = withContext<"svg", ChartYAxisProps>((props) => {
     } else {
       return { className, children: labelProp }
     }
-  }, [system, theme, labelProp, labelProps.className, labelProps.css])
+  }, [labelProp, labelProps.className, labelProps.css, css])
   const { getRootProps, getYAxisProps } = useChartYAxis({
     label,
     tick,
@@ -660,7 +721,10 @@ export const ChartGrid = withContext<"line", ChartGridProps>((props) => {
 
 export interface ChartLineProps<Y extends Dict = Dict> extends Merge<
   HTMLStyledProps<"line">,
-  Omit<UseChartLineProps, "activeDot" | "data" | "dataKey" | "dot" | "label">
+  Omit<
+    UseChartLineProps,
+    "activeDot" | "data" | "dataKey" | "dot" | "label" | "stroke"
+  >
 > {
   /**
    * The key of a group of data which should be unique in an chart.
@@ -698,19 +762,20 @@ export const ChartLine = withContext<"line", ChartLineProps>((props) => {
     dataKey,
     dot: dotProp = false,
     label: labelProp = false,
+    stroke: strokeProp,
     ...rest
   } = { ...lineProps, ...props }
   const system = useSystem()
   const { theme } = useTheme()
-  const { varMap } = useChartComponentContext()
-  const color = varMap[dataKey.toString()] ?? rest.stroke ?? rest.color
+  const color = strokeProp ?? rest.color
+  const stroke = JSON.stringify(color)
   const dotProps = useSlotComponentProps({}, "dot")
   const activeDotProps = useSlotComponentProps({}, "activeDot")
   const labelProps = useSlotComponentProps({}, "labelList")
+  const css = useMemo(() => getCSS(system, theme), [system, theme])
   const dot = useMemo<UseChartLineProps["dot"]>(() => {
     if (!dotProp) return dotProp
 
-    const css = getCSS(system, theme)
     const className = cx(
       dotProps.className,
       css(dotProps.css),
@@ -735,11 +800,10 @@ export const ChartLine = withContext<"line", ChartLineProps>((props) => {
     } else {
       return { className }
     }
-  }, [dotProp, system, theme, dotProps.className, dotProps.css, color])
+  }, [dotProp, dotProps.className, dotProps.css, css, color])
   const activeDot = useMemo<UseChartLineProps["activeDot"]>(() => {
     if (!activeDotProp) return activeDotProp
 
-    const css = getCSS(system, theme)
     const className = cx(
       activeDotProps.className,
       css(activeDotProps.css),
@@ -764,18 +828,10 @@ export const ChartLine = withContext<"line", ChartLineProps>((props) => {
     } else {
       return { className }
     }
-  }, [
-    activeDotProp,
-    system,
-    theme,
-    activeDotProps.className,
-    activeDotProps.css,
-    color,
-  ])
+  }, [activeDotProp, activeDotProps.className, activeDotProps.css, css, color])
   const label = useMemo<UseChartLineProps["label"]>(() => {
     if (!labelProp) return labelProp
 
-    const css = getCSS(system, theme)
     const className = cx(labelProps.className, css(labelProps.css))
 
     if (isFunction(labelProp)) {
@@ -796,13 +852,13 @@ export const ChartLine = withContext<"line", ChartLineProps>((props) => {
     } else {
       return { className }
     }
-  }, [system, theme, labelProp, labelProps.className, labelProps.css])
+  }, [labelProp, labelProps.className, labelProps.css, css])
   const { getLineProps, getRootProps } = useChartLine({
     activeDot,
     dataKey,
     dot,
     label,
-    stroke: color,
+    stroke,
     ...rest,
   })
 
@@ -815,9 +871,17 @@ export const ChartLine = withContext<"line", ChartLineProps>((props) => {
   <Y extends Dict>(props: ChartLineProps<Y>): ReactElement
 }>
 
+export interface ChartAreaGradient {
+  end?: CSSProps["stopColor"]
+  start?: CSSProps["stopColor"]
+}
+
 export interface ChartAreaProps<Y extends Dict = Dict> extends Merge<
   HTMLStyledProps<"line">,
-  Omit<UseChartAreaProps, "activeDot" | "data" | "dataKey" | "dot" | "label">
+  Omit<
+    UseChartAreaProps,
+    "activeDot" | "data" | "dataKey" | "dot" | "label" | "stroke"
+  >
 > {
   /**
    * The key of a group of data which should be unique in an chart.
@@ -840,6 +904,10 @@ export interface ChartAreaProps<Y extends Dict = Dict> extends Merge<
    */
   dot?: ChartDot
   /**
+   * The gradient to use for the area.
+   */
+  gradient?: ChartAreaGradient
+  /**
    * The label list to use for the line.
    *
    * @default false
@@ -858,22 +926,24 @@ export const ChartArea = withContext<"line", ChartAreaProps>((props) => {
     children,
     dataKey,
     dot: dotProp = false,
+    gradient,
     label: labelProp = false,
+    stroke: strokeProp,
     withGradient,
     ...rest
   } = { ...areaProps, ...props }
   const id = useId()
   const system = useSystem()
   const { theme } = useTheme()
-  const { varMap } = useChartComponentContext()
-  const color = varMap[dataKey.toString()] ?? rest.stroke ?? rest.color
+  const color = strokeProp ?? rest.fill ?? rest.color
+  const stroke = JSON.stringify(color)
   const dotProps = useSlotComponentProps({}, "dot")
   const activeDotProps = useSlotComponentProps({}, "activeDot")
   const labelProps = useSlotComponentProps({}, "labelList")
+  const css = useMemo(() => getCSS(system, theme), [system, theme])
   const dot = useMemo<UseChartLineProps["dot"]>(() => {
     if (!dotProp) return dotProp
 
-    const css = getCSS(system, theme)
     const className = cx(
       dotProps.className,
       css(dotProps.css),
@@ -903,11 +973,10 @@ export const ChartArea = withContext<"line", ChartAreaProps>((props) => {
     } else {
       return { className }
     }
-  }, [dotProp, system, theme, dotProps.className, dotProps.css, color])
+  }, [dotProp, dotProps.className, dotProps.css, css, color])
   const activeDot = useMemo<UseChartLineProps["activeDot"]>(() => {
     if (!activeDotProp) return activeDotProp
 
-    const css = getCSS(system, theme)
     const className = cx(
       activeDotProps.className,
       css(activeDotProps.css),
@@ -932,18 +1001,10 @@ export const ChartArea = withContext<"line", ChartAreaProps>((props) => {
     } else {
       return { className }
     }
-  }, [
-    activeDotProp,
-    system,
-    theme,
-    activeDotProps.className,
-    activeDotProps.css,
-    color,
-  ])
+  }, [activeDotProp, activeDotProps.className, activeDotProps.css, css, color])
   const label = useMemo<UseChartLineProps["label"]>(() => {
     if (!labelProp) return labelProp
 
-    const css = getCSS(system, theme)
     const className = cx(labelProps.className, css(labelProps.css))
 
     if (isFunction(labelProp)) {
@@ -964,14 +1025,14 @@ export const ChartArea = withContext<"line", ChartAreaProps>((props) => {
     } else {
       return { className }
     }
-  }, [system, theme, labelProp, labelProps.className, labelProps.css])
+  }, [labelProp, labelProps.className, labelProps.css, css])
   const { getAreaProps, getRootProps } = useChartArea({
     activeDot,
     dataKey,
     dot,
     fill: color ? `url(#${id})` : "",
     label,
-    stroke: color,
+    stroke,
     ...rest,
   })
 
@@ -984,16 +1045,27 @@ export const ChartArea = withContext<"line", ChartAreaProps>((props) => {
       <defs>
         {withGradient ? (
           <linearGradient id={id} x1="0" x2="0" y1="0" y2="1">
-            <styled.stop asChild stopColor={color} stopOpacity={0.8}>
+            <styled.stop
+              asChild
+              stopColor={color}
+              stopOpacity={gradient?.start ?? "{area-start-fill-opacity}"}
+            >
               <stop offset="5%" />
             </styled.stop>
-            <styled.stop asChild stopColor={color} stopOpacity={0.1}>
+            <styled.stop
+              asChild
+              stopColor={color}
+              stopOpacity={gradient?.end ?? "{area-end-fill-opacity}"}
+            >
               <stop offset="95%" />
             </styled.stop>
           </linearGradient>
         ) : (
           <linearGradient id={id} x1="0" x2="0" y1="0" y2="1">
-            <styled.stop stopColor={color} stopOpacity={0.4} />
+            <styled.stop
+              stopColor={color}
+              stopOpacity={rest.fillOpacity ?? "{area-fill-opacity}"}
+            />
           </linearGradient>
         )}
       </defs>
@@ -1005,7 +1077,7 @@ export const ChartArea = withContext<"line", ChartAreaProps>((props) => {
 
 export interface ChartBarProps<Y extends Dict = Dict> extends Merge<
   HTMLStyledProps<"path">,
-  Omit<UseChartBarProps, "dataKey" | "label">
+  Omit<UseChartBarProps, "dataKey" | "fill" | "label">
 > {
   /**
    * The key of a group of data which should be unique in an chart.
@@ -1024,18 +1096,19 @@ export const ChartBar = withContext<"path", ChartBarProps>((props) => {
   const {
     children,
     dataKey,
+    fill: fillProp,
     label: labelProp = false,
     ...rest
   } = { ...barProps, ...props }
   const system = useSystem()
   const { theme } = useTheme()
-  const { varMap } = useChartComponentContext()
-  const color = varMap[dataKey.toString()]
+  const color = fillProp ?? rest.color
+  const fill = JSON.stringify(color)
   const labelProps = useSlotComponentProps({}, "labelList")
+  const css = useMemo(() => getCSS(system, theme), [system, theme])
   const label = useMemo<UseChartBarProps["label"]>(() => {
     if (!labelProp) return labelProp
 
-    const css = getCSS(system, theme)
     const className = cx(labelProps.className, css(labelProps.css))
 
     if (isFunction(labelProp)) {
@@ -1056,12 +1129,11 @@ export const ChartBar = withContext<"path", ChartBarProps>((props) => {
     } else {
       return { className }
     }
-  }, [system, theme, labelProp, labelProps.className, labelProps.css])
+  }, [labelProp, labelProps.className, labelProps.css, css])
   const { getBarProps, getRootProps } = useChartBar({
     dataKey,
-    fill: color,
+    fill,
     label,
-    stroke: color,
     ...rest,
   })
 
@@ -1096,10 +1168,10 @@ export const ChartReferenceLine = withContext<"line", ChartReferenceLineProps>(
     const system = useSystem()
     const { theme } = useTheme()
     const labelProps = useSlotComponentProps({}, "referenceLineLabel")
+    const css = useMemo(() => getCSS(system, theme), [system, theme])
     const label = useMemo<UseChartReferenceLineProps["label"]>(() => {
       if (!labelProp) return labelProp
 
-      const css = getCSS(system, theme)
       const className = cx(labelProps.className, css(labelProps.css))
 
       if (isFunction(labelProp)) {
@@ -1120,7 +1192,7 @@ export const ChartReferenceLine = withContext<"line", ChartReferenceLineProps>(
       } else {
         return { className, children: labelProp }
       }
-    }, [system, theme, labelProp, labelProps.className, labelProps.css])
+    }, [labelProp, labelProps.className, labelProps.css, css])
     const { getReferenceLineProps, getRootProps } = useChartReferenceLine({
       label,
       ...rest,

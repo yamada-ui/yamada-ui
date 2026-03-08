@@ -47,7 +47,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-testing-library": "^7.16.0",
     "eslint-plugin-unused-imports": "^4.4.1",
-    "globals": "^17.3.0",
+    "globals": "^17.4.0",
     "prettier": "^3.8.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

@@ -195,6 +195,53 @@ describe("<Breadcrumb />", () => {
     ).toHaveLength(7)
   })
 
+  test("applies custom `aria-label` to the nav element", () => {
+    render(
+      <Breadcrumb.Root aria-label="Custom Breadcrumb" data-testid="root">
+        <Breadcrumb.Link href="/">Link 1</Breadcrumb.Link>
+        <Breadcrumb.Link href="/" currentPage>
+          Link 2
+        </Breadcrumb.Link>
+      </Breadcrumb.Root>,
+    )
+
+    expect(screen.getByTestId("root")).toHaveAttribute(
+      "aria-label",
+      "Custom Breadcrumb",
+    )
+  })
+
+  test("ellipsis respects `aria-hidden` override", () => {
+    render(
+      <Breadcrumb.Root>
+        <Breadcrumb.Link href="/">Link 1</Breadcrumb.Link>
+        <Breadcrumb.Ellipsis aria-hidden={false} data-testid="ellipsis" />
+        <Breadcrumb.Link href="/" currentPage>
+          Link 2
+        </Breadcrumb.Link>
+      </Breadcrumb.Root>,
+    )
+
+    expect(screen.getByTestId("ellipsis")).toHaveAttribute(
+      "aria-hidden",
+      "false",
+    )
+  })
+
+  test("ellipsis respects `tabIndex` override", () => {
+    render(
+      <Breadcrumb.Root>
+        <Breadcrumb.Link href="/">Link 1</Breadcrumb.Link>
+        <Breadcrumb.Ellipsis data-testid="ellipsis" tabIndex={-1} />
+        <Breadcrumb.Link href="/" currentPage>
+          Link 2
+        </Breadcrumb.Link>
+      </Breadcrumb.Root>,
+    )
+
+    expect(screen.getByTestId("ellipsis")).toHaveAttribute("tabindex", "-1")
+  })
+
   test("retrieve omitted items correctly", () => {
     const ellipsis = vi.fn()
 

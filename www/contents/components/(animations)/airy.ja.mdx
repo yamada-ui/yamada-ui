@@ -7,7 +7,11 @@ style: components/airy/airy.style.ts
 ---
 
 ```tsx preview
-<Airy from={<MenuIcon fontSize="2xl" />} to={<XIcon fontSize="2xl" />} />
+<Airy
+  aria-label="Toggle navigation"
+  from={<MenuIcon fontSize="2xl" />}
+  to={<XIcon fontSize="2xl" />}
+/>
 ```
 
 ## 使い方
@@ -38,6 +42,7 @@ import { Airy } from "@workspaces/ui"
 
 ```tsx preview
 <Airy
+  aria-label="Toggle navigation"
   duration={0.6}
   from={<MenuIcon fontSize="2xl" />}
   to={<XIcon fontSize="2xl" />}
@@ -50,6 +55,7 @@ import { Airy } from "@workspaces/ui"
 
 ```tsx preview
 <Airy
+  aria-label="Toggle navigation"
   delay={1}
   from={<MenuIcon fontSize="2xl" />}
   to={<XIcon fontSize="2xl" />}
@@ -62,6 +68,7 @@ import { Airy } from "@workspaces/ui"
 
 ```tsx preview
 <Airy
+  aria-label="Toggle navigation"
   disabled
   from={<MenuIcon fontSize="2xl" />}
   to={<XIcon fontSize="2xl" />}
@@ -74,6 +81,7 @@ import { Airy } from "@workspaces/ui"
 
 ```tsx preview
 <Airy
+  aria-label="Toggle navigation"
   readOnly
   from={<MenuIcon fontSize="2xl" />}
   to={<XIcon fontSize="2xl" />}
@@ -87,6 +95,7 @@ const [value, onChange] = useState<KeyframeIdent>("to")
 
 return (
   <Airy
+    aria-label="Toggle navigation"
     from={<MenuIcon fontSize="2xl" />}
     to={<XIcon fontSize="2xl" />}
     value={value}
@@ -95,6 +104,30 @@ return (
 )
 ```
 
+## 使用しているコンポーネント・フック
+
+<Uses name="airy" />
+
 ## Props
 
 <PropsTable name="airy" />
+
+## アクセシビリティ
+
+`Airy`は、アクセシビリティに関して[WAI-ARIA - Button Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/button/)に従います。
+
+`aria-label`を設定すると、スクリーンリーダーによって読み上げられます。
+
+```tsx
+<Airy
+  aria-label="Menu"
+  from={<MenuIcon fontSize="2xl" />}
+  to={<XIcon fontSize="2xl" />}
+/>
+```
+
+### キーボード操作
+
+| キー             | 説明                                           | 状態 |
+| ---------------- | ---------------------------------------------- | ---- |
+| `Enter`, `Space` | フォーカスしているボタンをアクティブにします。 | -    |

@@ -203,8 +203,6 @@ return (
 
 ### Change Color
 
-To change the color, set `color` or `barProps.color` to a color. The default is `"mono.500"`.
-
 ```tsx preview functional
 const series = useMemo<BarChart.BarProps<Data>[]>(
   () => [
@@ -231,17 +229,13 @@ return (
 )
 ```
 
-### Add Range
+### Range
 
-To add a range, set `range` or `barProps.range` to `true`. The default is `false`.
+To display a range, set the values of the `data` items as `[min, max]` arrays.
 
 ```tsx preview functional
 const series = useMemo<BarChart.BarProps<Data>[]>(
-  () => [
-    { dataKey: "desktop", range: true },
-    { dataKey: "tablet", range: true },
-    { dataKey: "mobile", range: true },
-  ],
+  () => [{ dataKey: "desktop" }, { dataKey: "tablet" }, { dataKey: "mobile" }],
   [],
 )
 const data = useMemo<Data[]>(
@@ -281,7 +275,7 @@ return (
 
 ### Stacked
 
-To stack the series, set `stackId` or `barProps.stackId` to a string.
+To stack the series, set `stackId` in `series` or `barProps.stackId` to a string.
 
 ```tsx preview functional
 const series = useMemo<BarChart.BarProps<Data>[]>(
@@ -893,7 +887,7 @@ return (
 
 ### Change Radius
 
-To change the radius, set `radius` or `barProps.radius` to a number or an array.
+To change the radius, set `radius` in `series` or `barProps.radius` to a number or an array.
 
 ```tsx preview functional
 const series = useMemo<BarChart.BarProps<Data>[]>(

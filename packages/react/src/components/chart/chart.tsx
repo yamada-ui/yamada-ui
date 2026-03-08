@@ -18,25 +18,9 @@ import type {
   ResponsiveContainerProps,
   TooltipContentProps,
 } from "recharts"
-import type {
-  CSSProps,
-  GenericsComponent,
-  HTMLStyledProps,
-  ThemeProps,
-} from "../../core"
+import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { Dict, Merge } from "../../utils"
-import type {
-  ChartAreaProps,
-  ChartBarProps,
-  ChartLineProps,
-} from "./cartesian-chart"
 import type { ChartStyle } from "./chart.style"
-import type {
-  ChartDonutProps,
-  ChartPieProps,
-  ChartRadarProps,
-  ChartRadialProps,
-} from "./polar-chart"
 import type {
   UseChartLabelListProps,
   UseChartLabelProps,
@@ -118,13 +102,13 @@ export type ChartLabelList =
 
 export type ChartTickLine = boolean | HTMLStyledProps<"line">
 
-type GradientStrategy = "invert" | "shade" | "tint"
+export type GradientStrategy = "invert" | "shade" | "tint"
 
 export function mergeSeries<Y>(
   series: Y[],
   color: CSSProps["color"] = "mono",
   strategy: GradientStrategy = "invert",
-): (Y & { color: CSSProps["fill"] })[] {
+): (Y & { color: CSSProps["color"] })[] {
   const colors = gradients(series.length, color, strategy)
 
   return series.map((item, index) => ({ ...item, color: colors[index] }))
@@ -144,7 +128,7 @@ export function gradients(
   length: number,
   color: CSSProps["color"] = "mono",
   strategy: GradientStrategy = "invert",
-): CSSProps["fill"][] {
+): CSSProps["color"][] {
   return Array.from({ length }, (_, index) => {
     const value = Math.floor(100 - (100 / length) * index)
     const percent = `${value}%`
@@ -160,16 +144,22 @@ export function gradients(
   })
 }
 
+function parseJSON(value: any) {
+  try {
+    return JSON.parse(value)
+  } catch {
+    return value
+  }
+}
+
 interface ComponentContext extends Pick<
   ChartProps,
   "legendProps" | "tooltipProps"
 > {
   nameKeyRef: RefObject<string | undefined>
-  varMap: Dict<string>
 }
 
-export interface ChartProps<Y extends Dict = Dict>
-  extends HTMLStyledProps, ThemeProps<ChartStyle> {
+export interface ChartProps extends HTMLStyledProps, ThemeProps<ChartStyle> {
   /**
    * The components to render the chart components.
    */
@@ -189,17 +179,6 @@ export interface ChartProps<Y extends Dict = Dict>
    * The fill of the label list.
    */
   labelListFill?: CSSProps["fill"]
-  /**
-   * If provided, generate shapes based on series.
-   */
-  series?:
-    | ChartAreaProps<Y>[]
-    | ChartBarProps<Y>[]
-    | ChartDonutProps<Y>[]
-    | ChartLineProps<Y>[]
-    | ChartPieProps<Y>[]
-    | ChartRadarProps<Y>[]
-    | ChartRadialProps<Y>[]
   /**
    * The fill of the tooltip cursor.
    */
@@ -253,18 +232,17 @@ const {
 export { ChartPropsContext, useChartComponentContext, useChartPropsContext }
 
 export const Chart = withProvider(
-  <Y extends Dict>({
+  ({
     children,
     components: componentsProp,
     render,
-    series = [],
     withLegend = false,
     withTooltip = true,
     legendProps,
     responsiveContainerProps,
     tooltipProps,
     ...rest
-  }: ChartProps<Y>) => {
+  }: ChartProps) => {
     const { highlightedDataKey, onHighlight } = useChart()
     const nameKeyRef = useRef<string | undefined>(undefined)
     const components = useMemo(
@@ -285,28 +263,6 @@ export const Chart = withProvider(
       children,
       ...components.map(({ component }) => component),
     )
-    const varProps = useMemo(
-      () =>
-        series.reduce<Dict>((acc, data) => {
-          const key = `--${data.dataKey.toString()}`
-
-          if (data.color) acc[key] = varAttr(data.color, "colors")
-
-          return acc
-        }, {}),
-      [series],
-    )
-    const varMap = useMemo(
-      () =>
-        series.reduce<Dict>((acc, data) => {
-          const key = data.dataKey.toString()
-
-          if (data.color) acc[key] = `var(--${key})`
-
-          return acc
-        }, {}),
-      [series],
-    )
     const context = useMemo(
       () => ({
         highlightedDataKey,
@@ -317,17 +273,16 @@ export const Chart = withProvider(
     const componentContext = useMemo(
       () => ({
         nameKeyRef,
-        varMap,
         legendProps,
         tooltipProps,
       }),
-      [varMap, legendProps, tooltipProps],
+      [legendProps, tooltipProps],
     )
 
     return (
       <ChartContext value={context}>
         <ComponentContext value={componentContext}>
-          <styled.div {...varProps} {...rest}>
+          <styled.div {...rest}>
             <ResponsiveContainer {...responsiveContainerProps}>
               {render({
                 children: (
@@ -366,9 +321,7 @@ export const Chart = withProvider(
     "--tooltip-cursor-stroke": varAttr(tooltipCursorStroke, "colors"),
     ...rest,
   }),
-) as GenericsComponent<{
-  <Y extends Dict>(props: ChartProps<Y>): ReactElement
-}>
+)
 
 interface ChartLegendContext extends Pick<
   UseChartLegendReturn,
@@ -431,7 +384,7 @@ interface ChartLegendContentProps
 
 const ChartLegendContent = withContext<"div", ChartLegendContentProps>(
   ({ formatter, payload, withSwatch = true, ...rest }) => {
-    const { nameKeyRef, varMap } = useChartComponentContext()
+    const { nameKeyRef } = useChartComponentContext()
     const { getLegendItemProps } = useChartLegendContext()
 
     return (
@@ -446,7 +399,7 @@ const ChartLegendContent = withContext<"div", ChartLegendContentProps>(
             isString(data.dataKey) || isNumber(data.dataKey)
               ? data.dataKey
               : value
-          const color = data.color || (dataKey ? varMap[dataKey] : undefined)
+          const color = parseJSON(data.color)
           const formattedValue = formatter?.(value, data, index) ?? value
 
           return (
@@ -606,7 +559,7 @@ const ChartTooltipContent = withContext<"div", ChartTooltipContentProps>(
     withSwatch = true,
     ...rest
   }) => {
-    const { nameKeyRef, varMap } = useChartComponentContext()
+    const { nameKeyRef } = useChartComponentContext()
     const label = labelFormatter
       ? labelFormatter(labelProp, payload)
       : labelProp
@@ -621,7 +574,7 @@ const ChartTooltipContent = withContext<"div", ChartTooltipContentProps>(
           {payload.map((data, index) => {
             if (nameKeyRef.current) data.name = data.payload[nameKeyRef.current]
 
-            const color = data.payload.fill ?? varMap[data.dataKey.toString()]
+            const color = parseJSON(data.color) || data.payload.fill
             const result =
               formatter?.(data.value, data.name, data, index, payload) ??
               (isArray(data.value) ? data.value.join(", ") : data.value)

@@ -9,11 +9,70 @@ import type {
   XAxisProps,
   YAxisProps,
 } from "recharts"
+import type { CartesianChartProps } from "recharts/types/util/types"
 import type { HTMLProps, PropGetter, SimpleDirection } from "../../core"
-import type { Merge } from "../../utils"
+import type { Dict, Merge } from "../../utils"
 import { isValidElement, useCallback, useMemo } from "react"
 import { dataAttr, isFunction, isObject, isUndefined } from "../../utils"
 import { useChartContext } from "./use-chart"
+
+export interface UseCartesianChartProps<Y extends Dict>
+  extends
+    HTMLProps,
+    Pick<
+      CartesianChartProps,
+      | "accessibilityLayer"
+      | "compact"
+      | "layout"
+      | "responsive"
+      | "syncId"
+      | "syncMethod"
+    > {
+  /**
+   * Chart data.
+   */
+  data?: Y[]
+}
+
+export const useCartesianChart = <Y extends Dict>({
+  accessibilityLayer = true,
+  compact,
+  data,
+  layout = "horizontal",
+  responsive,
+  syncId,
+  syncMethod,
+  ...rest
+}: UseCartesianChartProps<Y>) => {
+  const getRootProps: PropGetter = useCallback(
+    (props) => ({ ...props, ...rest }),
+    [rest],
+  )
+
+  const getChartProps: PropGetter<CartesianChartProps> = useCallback(
+    (props) => ({
+      accessibilityLayer,
+      compact,
+      data,
+      layout,
+      margin: { left: 16, right: 16 },
+      responsive,
+      syncId,
+      syncMethod,
+      ...props,
+    }),
+    [accessibilityLayer, compact, data, layout, responsive, syncId, syncMethod],
+  )
+
+  return {
+    getChartProps,
+    getRootProps,
+  }
+}
+
+export type UseCartesianChartReturn<Y extends Dict> = ReturnType<
+  typeof useCartesianChart<Y>
+>
 
 export interface UseChartXAxisProps extends Merge<
   HTMLProps<"svg">,
@@ -406,6 +465,7 @@ export interface UseChartLineProps extends Merge<
     | "onAnimationEnd"
     | "onAnimationStart"
     | "shape"
+    | "stroke"
     | "tooltipType"
     | "type"
     | "unit"
@@ -433,6 +493,7 @@ export const useChartLine = ({
   label: labelProp = false,
   legendType,
   shape,
+  stroke = "",
   tooltipType,
   unit,
   xAxisId,
@@ -502,7 +563,7 @@ export const useChartLine = ({
       label,
       legendType,
       shape,
-      stroke: "",
+      stroke,
       strokeWidth: "",
       tooltipType,
       unit,
@@ -533,6 +594,7 @@ export const useChartLine = ({
       onAnimationEnd,
       onAnimationStart,
       shape,
+      stroke,
       tooltipType,
       type,
       unit,
@@ -570,6 +632,7 @@ export interface UseChartAreaProps extends Merge<
     | "onAnimationEnd"
     | "onAnimationStart"
     | "stackId"
+    | "stroke"
     | "tooltipType"
     | "type"
     | "unit"
@@ -598,6 +661,7 @@ export const useChartArea = ({
   label: labelProp = false,
   legendType,
   stackId,
+  stroke = "",
   tooltipType,
   unit,
   xAxisId,
@@ -674,7 +738,7 @@ export const useChartArea = ({
       label,
       legendType,
       stackId,
-      stroke: "",
+      stroke,
       strokeWidth: "",
       tooltipType,
       unit,
@@ -706,6 +770,7 @@ export const useChartArea = ({
       onAnimationEnd,
       onAnimationStart,
       stackId,
+      stroke,
       tooltipType,
       type,
       unit,
@@ -732,6 +797,7 @@ export interface UseChartBarProps extends Merge<
     | "barSize"
     | "dangerouslySetInnerHTML"
     | "dataKey"
+    | "fill"
     | "hide"
     | "index"
     | "isAnimationActive"
@@ -764,6 +830,7 @@ export const useChartBar = ({
   children,
   dangerouslySetInnerHTML,
   dataKey: dataKeyProp,
+  fill,
   hide,
   index,
   isAnimationActive = false,
@@ -819,6 +886,7 @@ export const useChartBar = ({
       children,
       dangerouslySetInnerHTML,
       dataKey,
+      fill,
       hide,
       index,
       isAnimationActive,
@@ -849,6 +917,7 @@ export const useChartBar = ({
       children,
       dangerouslySetInnerHTML,
       dataKeyProp,
+      fill,
       hide,
       highlightedDataKey,
       index,

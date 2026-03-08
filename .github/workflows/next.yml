@@ -5,8 +5,14 @@ on:
     paths:
       - ".changeset/**"
       - "packages/**"
-      - "!packages/**/(storybook|test)/**"
-      - "!packages/**/*.(stories|test).(ts|tsx|mdx)"
+      - "!packages/**/storybook/**"
+      - "!packages/**/test/**"
+      - "!packages/**/*.stories.ts"
+      - "!packages/**/*.stories.tsx"
+      - "!packages/**/*.stories.mdx"
+      - "!packages/**/*.test.ts"
+      - "!packages/**/*.test.tsx"
+      - "!packages/**/*.test.mdx"
     branches:
       - v*
 
@@ -47,3 +53,10 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate @next registries
+        run: |
+          pnpm gen:registries --tag next
+          git add .
+          git diff --staged --exit-code || git commit -m 'ci(changesets): update next registries'
+          git push

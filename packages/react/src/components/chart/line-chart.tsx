@@ -1,40 +1,24 @@
 "use client"
 
 import type { ReactElement } from "react"
-import type { CartesianChartProps as OriginalCartesianChartProps } from "recharts/types/util/types"
 import type { GenericsComponent, ThemeProps } from "../../core"
 import type { Dict } from "../../utils"
 import type { CartesianChartProps, ChartLineProps } from "./cartesian-chart"
 import type { LineChartStyle } from "./line-chart.style"
-import type { UseLineChartProps } from "./use-line-chart"
 import { useMemo } from "react"
 import { LineChart as OriginalLineChart } from "recharts"
 import { createComponent } from "../../core"
 import { CartesianChart, ChartLine } from "./cartesian-chart"
 import { lineChartStyle } from "./line-chart.style"
-import { useLineChart } from "./use-line-chart"
 
 export interface LineChartProps<Y extends Dict = Dict>
   extends
-    Omit<
-      CartesianChartProps<Y>,
-      | "areaFillOpacity"
-      | "areaProps"
-      | "barProps"
-      | "components"
-      | "render"
-      | "series"
-    >,
-    UseLineChartProps<Y>,
+    Omit<CartesianChartProps<Y>, "components" | "render">,
     ThemeProps<LineChartStyle> {
   /**
    * If provided, generate lines based on series.
    */
   series?: ChartLineProps<Y>[]
-  /**
-   * Props for the line chart component.
-   */
-  chartProps?: Omit<OriginalCartesianChartProps, "data">
 }
 
 const {
@@ -54,13 +38,7 @@ export { LineChartPropsContext, useLineChartPropsContext }
  * @see https://yamada-ui.com/docs/components/line-chart
  */
 export const LineChart = withContext<"div", LineChartProps>(
-  <Y extends Dict>({
-    children,
-    series = [],
-    chartProps,
-    ...rest
-  }: LineChartProps<Y>) => {
-    const { getChartProps, getRootProps } = useLineChart(rest)
+  <Y extends Dict>({ children, series = [], ...rest }: LineChartProps<Y>) => {
     const components = useMemo(
       () => [
         {
@@ -76,11 +54,8 @@ export const LineChart = withContext<"div", LineChartProps>(
     return (
       <CartesianChart
         components={components}
-        render={(props) => (
-          <OriginalLineChart {...getChartProps({ ...props, ...chartProps })} />
-        )}
-        series={series}
-        {...getRootProps()}
+        render={(props) => <OriginalLineChart {...props} />}
+        {...rest}
       >
         {children}
       </CartesianChart>

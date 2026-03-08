@@ -1,5 +1,29 @@
 # @yamada-ui/cli
 
+## 2.1.0-dev-20260308051035
+
+### Minor Changes
+
+- [#5866](https://github.com/yamada-ui/yamada-ui/pull/5866) [`c746d55`](https://github.com/yamada-ui/yamada-ui/commit/c746d5574a2bb32e8cf36a6c3bcfa8b9865f2e39) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `--force` (`-F`) option to the `update` command to force overwrite local changes with remote source code.
+
+- [#5959](https://github.com/yamada-ui/yamada-ui/pull/5959) [`b766ea3`](https://github.com/yamada-ui/yamada-ui/commit/b766ea35c95bbded01efd04909b322088e782dc4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - You can now use commands such as `init` and `add` with the `@next` or `@dev` tags. This allows you to specify the tag for `@yamada-ui/react` and download the source code locally.
+
+### Patch Changes
+
+- [#5852](https://github.com/yamada-ui/yamada-ui/pull/5852) [`479d290`](https://github.com/yamada-ui/yamada-ui/commit/479d290108fab4dd2fd9612f7d5282d65834d390) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#5869](https://github.com/yamada-ui/yamada-ui/pull/5869) [`bf38fba`](https://github.com/yamada-ui/yamada-ui/commit/bf38fba31d05f4db658f97ea9d131e7851c1702a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- [#5958](https://github.com/yamada-ui/yamada-ui/pull/5958) [`bc4abf9`](https://github.com/yamada-ui/yamada-ui/commit/bc4abf9040e7f1cc8d0f830169b9d02f56d552e5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactor code.
+
+## 2.0.9
+
+### Patch Changes
+
+- [#5778](https://github.com/yamada-ui/yamada-ui/pull/5778) [`46fa811`](https://github.com/yamada-ui/yamada-ui/commit/46fa81183de5d8429e413a24784346c8e347b87f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#5777](https://github.com/yamada-ui/yamada-ui/pull/5777) [`cac36ed`](https://github.com/yamada-ui/yamada-ui/commit/cac36ed5fbbbdfdee168fbcc249ba81583a2517e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the files specified in `main` and `bin` of `package.json` did not exist, causing the CLI to not work correctly.
+
 ## 2.0.8
 
 ### Patch Changes

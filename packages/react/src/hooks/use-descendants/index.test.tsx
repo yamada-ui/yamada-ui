@@ -193,4 +193,384 @@ describe("useDescendant", () => {
     expect(descendants.enabledPrevValue(0)).toBeUndefined()
     expect(descendants.enabledNextValue(0)).toBeUndefined()
   })
+
+  test("indexOf with a Descendant object", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC<DescendantProps> = ({ ...props }) => {
+      const { register } = useDescendant(props)
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
+
+    const descendant = descendants.values()[1]!
+
+    expect(descendants.indexOf(descendant)).toBe(1)
+  })
+
+  test("enabledIndexOf with a Descendant object", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC<DescendantProps> = ({ ...props }) => {
+      const { register } = useDescendant(props)
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(
+      <Wrapper>
+        <Item />
+        <Item disabled />
+        <Item />
+      </Wrapper>,
+    )
+
+    const descendant = descendants.values()[2]!
+
+    expect(descendants.enabledIndexOf(descendant)).toBe(1)
+  })
+
+  test("value with a node element", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC<DescendantProps> = ({ ...props }) => {
+      const { register } = useDescendant(props)
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
+
+    const node = descendants.values()[0]!.node
+
+    expect(descendants.value(node)?.index).toBe(0)
+  })
+
+  test("prevValue and nextValue with a Descendant object", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC = () => {
+      const { register } = useDescendant()
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
+
+    const descendant1 = descendants.values()[1]!
+    const descendant2 = descendants.values()[2]!
+
+    expect(descendants.prevValue(descendant1)?.node).toBe(
+      descendants.values()[0]?.node,
+    )
+    expect(descendants.nextValue(descendant1)?.node).toBe(
+      descendants.values()[2]?.node,
+    )
+    expect(descendants.prevValue(descendant2)?.node).toBe(
+      descendants.values()[1]?.node,
+    )
+  })
+
+  test("prevValue and nextValue with a node element", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC = () => {
+      const { register } = useDescendant()
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
+
+    const node = descendants.values()[1]!.node
+
+    expect(descendants.prevValue(node)?.node).toBe(
+      descendants.values()[0]?.node,
+    )
+    expect(descendants.nextValue(node)?.node).toBe(
+      descendants.values()[2]?.node,
+    )
+  })
+
+  test("active with a Descendant object", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC = () => {
+      const { register } = useDescendant()
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
+
+    const descendant = descendants.values()[1]!
+
+    descendants.active(descendant)
+
+    expect(descendant.node.dataset.activedescendant).toBe("")
+  })
+
+  test("active with focus options", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC = () => {
+      const { register } = useDescendant()
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
+
+    const node = descendants.values()[0]!.node
+    const focusSpy = vi.spyOn(node, "focus")
+
+    descendants.active(node, { preventScroll: true })
+
+    expect(node.dataset.activedescendant).toBe("")
+    expect(focusSpy).toHaveBeenCalledWith({ preventScroll: true })
+  })
+
+  test("active skips if already active", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC = () => {
+      const { register } = useDescendant()
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
+
+    const node = descendants.values()[0]!.node
+
+    node.dataset.activedescendant = ""
+
+    const focusSpy = vi.spyOn(node, "focus")
+
+    descendants.active(node, { preventScroll: true })
+
+    expect(focusSpy).not.toHaveBeenCalled()
+  })
+
+  test("nextValue without loop returns undefined at the end", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC = () => {
+      const { register } = useDescendant()
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
+
+    expect(descendants.nextValue(2, false)).toBeUndefined()
+  })
+
+  test("prevValue without loop returns undefined at the start", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC = () => {
+      const { register } = useDescendant()
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
+
+    expect(descendants.prevValue(0, false)).toBeUndefined()
+  })
+
+  test("enabledNextValue with loop wraps around", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC<DescendantProps> = ({ ...props }) => {
+      const { register } = useDescendant(props)
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(
+      <Wrapper>
+        <Item />
+        <Item disabled />
+        <Item />
+      </Wrapper>,
+    )
+
+    const result = descendants.enabledNextValue(2)
+
+    expect(result?.node).toBe(descendants.values()[0]?.node)
+    expect(result?.recurred).toBeTruthy()
+  })
+
+  test("enabledPrevValue with loop wraps around", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC<DescendantProps> = ({ ...props }) => {
+      const { register } = useDescendant(props)
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(
+      <Wrapper>
+        <Item />
+        <Item disabled />
+        <Item />
+      </Wrapper>,
+    )
+
+    const result = descendants.enabledPrevValue(0)
+
+    expect(result?.node).toBe(descendants.values()[2]?.node)
+    expect(result?.recurred).toBeTruthy()
+  })
+
+  test("enabledNextValue without loop returns undefined at the end", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC<DescendantProps> = ({ ...props }) => {
+      const { register } = useDescendant(props)
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(
+      <Wrapper>
+        <Item />
+        <Item />
+        <Item disabled />
+      </Wrapper>,
+    )
+
+    expect(descendants.enabledNextValue(1, false)).toBeUndefined()
+  })
+
+  test("enabledPrevValue without loop returns undefined at the start", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC<DescendantProps> = ({ ...props }) => {
+      const { register } = useDescendant(props)
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(
+      <Wrapper>
+        <Item disabled />
+        <Item />
+        <Item />
+      </Wrapper>,
+    )
+
+    expect(descendants.enabledPrevValue(1, false)).toBeUndefined()
+  })
+
+  test("prevValue and nextValue return undefined for unknown node", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC = () => {
+      const { register } = useDescendant()
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
+
+    const unknownNode = document.createElement("div") as HTMLElement
+
+    expect(descendants.prevValue(unknownNode)).toBeUndefined()
+    expect(descendants.nextValue(unknownNode)).toBeUndefined()
+  })
+
+  test("unregister with null does nothing", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC = () => {
+      const { register } = useDescendant()
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
+
+    descendants.unregister(null)
+
+    expect(descendants.count()).toBe(2)
+  })
+
+  test("sortNodes returns -1 when node a precedes node b", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC = () => {
+      const { register } = useDescendant()
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
+
+    const values = descendants.values()
+
+    expect(values[0]!.index).toBe(0)
+    expect(values[1]!.index).toBe(1)
+    expect(values[2]!.index).toBe(2)
+  })
+
+  test("sortNodes returns 1 when node a follows node b", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC = () => {
+      const { register } = useDescendant()
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
+
+    const nodeA = descendants.values()[1]!.node
+    const nodeB = descendants.values()[0]!.node
+
+    const position = nodeA.compareDocumentPosition(nodeB)
+
+    expect(
+      position & Node.DOCUMENT_POSITION_PRECEDING ||
+        position & Node.DOCUMENT_POSITION_CONTAINS,
+    ).toBeTruthy()
+  })
+
+  test("sortNodes warns and returns 0 for disconnected nodes", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC = () => {
+      const { register } = useDescendant()
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(<Wrapper>{renderItems(1, Item)}</Wrapper>)
+
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(vi.fn())
+
+    const newNode = document.createElement("div")
+    const newNodeSpy = vi.spyOn(newNode, "compareDocumentPosition")
+    newNodeSpy.mockReturnValue(Node.DOCUMENT_POSITION_DISCONNECTED)
+
+    const registeredNode = descendants.values()[0]!.node
+    const registeredNodeSpy = vi.spyOn(
+      registeredNode,
+      "compareDocumentPosition",
+    )
+    registeredNodeSpy.mockReturnValue(Node.DOCUMENT_POSITION_DISCONNECTED)
+
+    descendants.register()(newNode)
+
+    expect(warnSpy).toHaveBeenCalledWith("Cannot sort the given nodes.")
+
+    newNodeSpy.mockRestore()
+    registeredNodeSpy.mockRestore()
+    warnSpy.mockRestore()
+  })
 })

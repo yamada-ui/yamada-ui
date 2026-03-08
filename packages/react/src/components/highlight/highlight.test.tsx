@@ -46,6 +46,32 @@ describe("<Highlight />", () => {
     expect(container.firstChild?.nodeName).toBe("#text")
   })
 
+  test("fragment prop renders Mark for matched text", () => {
+    const { container } = render(
+      <Highlight fragment query="High">
+        Highlight
+      </Highlight>,
+    )
+
+    const mark = screen.getByText("High")
+    expect(mark.tagName).toBe("MARK")
+    expect(container.querySelector("p")).toBeNull()
+  })
+
+  test("renders non-matching chunks as plain text alongside matches", () => {
+    render(
+      <Highlight data-testid="highlight" query="world">
+        Hello world
+      </Highlight>,
+    )
+
+    const container = screen.getByTestId("highlight")
+    const mark = screen.getByText("world")
+    expect(mark.tagName).toBe("MARK")
+    expect(container.tagName).toBe("P")
+    expect(container).toHaveTextContent("Hello world")
+  })
+
   test("markProps prop works correctly", () => {
     const { getByText } = render(
       <Highlight query="Highlight" markProps={{ borderRadius: "12px" }}>

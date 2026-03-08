@@ -202,8 +202,6 @@ return (
 
 ### Change Color
 
-カラーを変更する場合は、`series`の`color`または`areaProps.color`に色を設定します。デフォルトは、`"mono.500"`です。
-
 ```tsx preview functional
 const series = useMemo<AreaChart.AreaProps<Data>[]>(
   () => [
@@ -263,7 +261,7 @@ return (
 
 ### Change Type
 
-To change the type, set `type` or `areaProps.type` to `"monotone"`, `"linear"`, etc. The default is `"monotone"`.
+To change the type, set `type` in `series` or `areaProps.type` to `"monotone"`, `"linear"`, etc. The default is `"monotone"`.
 
 ```tsx preview functional
 const series = useMemo<AreaChart.AreaProps<Data>[]>(

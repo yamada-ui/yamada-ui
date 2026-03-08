@@ -175,7 +175,6 @@ export const useSegmentedControlItem = <Y extends string = string>({
   const getLabelProps: PropGetter<"label"> = useCallback(
     (props) => ({
       "aria-disabled": ariaAttr(trulyDisabled),
-      "aria-readonly": ariaAttr(trulyReadOnly),
       "data-checked": dataAttr(checked),
       "data-disabled": dataAttr(trulyDisabled),
       "data-orientation": orientation,
@@ -202,7 +201,6 @@ export const useSegmentedControlItem = <Y extends string = string>({
       name,
       style: visuallyHiddenAttributes.style,
       "aria-disabled": ariaAttr(trulyDisabled),
-      "aria-readonly": ariaAttr(trulyReadOnly),
       "data-checked": dataAttr(checked),
       "data-disabled": dataAttr(trulyDisabled),
       "data-orientation": orientation,

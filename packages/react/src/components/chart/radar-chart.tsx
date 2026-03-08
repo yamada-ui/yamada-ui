@@ -6,27 +6,15 @@ import type { GenericsComponent, ThemeProps } from "../../core"
 import type { Dict } from "../../utils"
 import type { ChartRadarProps, PolarChartProps } from "./polar-chart"
 import type { RadarChartStyle } from "./radar-chart.style"
-import type { UseRadarChartProps } from "./use-radar-chart"
 import { useMemo } from "react"
 import { RadarChart as OriginalRadarChart } from "recharts"
 import { createComponent } from "../../core"
 import { ChartRadar, PolarChart } from "./polar-chart"
 import { radarChartStyle } from "./radar-chart.style"
-import { useRadarChart } from "./use-radar-chart"
 
 export interface RadarChartProps<Y extends Dict = Dict>
   extends
-    Omit<
-      PolarChartProps<Y>,
-      | "components"
-      | "donutProps"
-      | "pieProps"
-      | "radialProps"
-      | "render"
-      | "sectorProps"
-      | "series"
-    >,
-    UseRadarChartProps<Y>,
+    Omit<PolarChartProps<Y>, "components" | "render">,
     ThemeProps<RadarChartStyle> {
   /***
    * If provided, generate lines based on series.
@@ -61,10 +49,8 @@ export const RadarChart = withContext<"div", RadarChartProps>(
     series = [],
     withAngleAxis = !!nameKey,
     withGrid = true,
-    chartProps,
     ...rest
   }: RadarChartProps<Y>) => {
-    const { getChartProps, getRootProps } = useRadarChart(rest)
     const components = useMemo(
       () => [
         {
@@ -81,13 +67,10 @@ export const RadarChart = withContext<"div", RadarChartProps>(
       <PolarChart
         components={components}
         nameKey={nameKey}
-        render={(props) => (
-          <OriginalRadarChart {...getChartProps({ ...props, ...chartProps })} />
-        )}
-        series={series}
+        render={(props) => <OriginalRadarChart {...props} />}
         withAngleAxis={withAngleAxis}
         withGrid={withGrid}
-        {...getRootProps()}
+        {...rest}
       >
         {children}
       </PolarChart>

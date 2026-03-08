@@ -1,7 +1,7 @@
 {
   "name": "@yamada-ui/cli",
   "type": "module",
-  "version": "2.0.8",
+  "version": "2.1.0-dev-20260308051035",
   "description": "The official CLI for Yamada UI projects",
   "keywords": [
     "theme",
@@ -52,10 +52,10 @@
     "diff": "^8.0.3",
     "esbuild": "^0.27.3",
     "eslint": "^9.39.3",
-    "execa": "9.3.1",
+    "execa": "9.6.1",
     "glob": "^13.0.6",
     "https-proxy-agent": "^7.0.6",
-    "listr2": "^10.1.1",
+    "listr2": "^10.2.1",
     "node-eval": "^2.0.0",
     "node-fetch": "^3.3.2",
     "ora": "^9.3.0",

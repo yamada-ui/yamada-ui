@@ -224,6 +224,79 @@ describe("<Carousel />", () => {
       .toHaveAttribute("data-selected")
   })
 
+  test("renders custom children in CarouselIndicators", async () => {
+    await render(
+      <Carousel.Root>
+        <Carousel.List>
+          {Array.from({ length: 3 }).map((_, index) => (
+            <Carousel.Item key={index} index={index}>
+              Slide {index + 1}
+            </Carousel.Item>
+          ))}
+        </Carousel.List>
+
+        <Carousel.Indicators>
+          <button data-testid="custom-indicator">Custom</button>
+        </Carousel.Indicators>
+      </Carousel.Root>,
+    )
+
+    await expect
+      .element(page.getByTestId("custom-indicator"))
+      .toBeInTheDocument()
+  })
+
+  test("renders CarouselIndicators with render prop returning a valid element", async () => {
+    await render(
+      <Carousel.Root>
+        <Carousel.List>
+          {Array.from({ length: 3 }).map((_, index) => (
+            <Carousel.Item key={index} index={index}>
+              Slide {index + 1}
+            </Carousel.Item>
+          ))}
+        </Carousel.List>
+
+        <Carousel.Indicators
+          render={({ index, selected }) => (
+            <button data-testid={`render-indicator-${index}`}>
+              {selected ? "active" : "inactive"}
+            </button>
+          )}
+        />
+      </Carousel.Root>,
+    )
+
+    await expect
+      .element(page.getByTestId("render-indicator-0"))
+      .toBeInTheDocument()
+    await expect
+      .element(page.getByTestId("render-indicator-1"))
+      .toBeInTheDocument()
+    await expect
+      .element(page.getByTestId("render-indicator-2"))
+      .toBeInTheDocument()
+  })
+
+  test("renders CarouselIndicators with render prop returning a non-element", async () => {
+    await render(
+      <Carousel.Root>
+        <Carousel.List>
+          {Array.from({ length: 3 }).map((_, index) => (
+            <Carousel.Item key={index} index={index}>
+              Slide {index + 1}
+            </Carousel.Item>
+          ))}
+        </Carousel.List>
+
+        <Carousel.Indicators render={({ index }) => `dot-${index}`} />
+      </Carousel.Root>,
+    )
+
+    await expect.element(page.getByText("dot-0")).toBeInTheDocument()
+    await expect.element(page.getByText("dot-1")).toBeInTheDocument()
+  })
+
   describe.todo("use Timers", () => {
     beforeEach(() => {
       vi.useFakeTimers()

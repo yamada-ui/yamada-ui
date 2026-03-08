@@ -34,4 +34,16 @@ describe("<Show />", () => {
     )
     expect(screen.getByText("Hello")).toBeInTheDocument()
   })
+
+  test("renders nothing when when is false and no fallback is provided", () => {
+    render(<Show when={false}>Hello</Show>)
+
+    expect(screen.queryByText("Hello")).not.toBeInTheDocument()
+  })
+
+  test("renders nothing when when is null and no fallback is provided", () => {
+    render(<Show when={null}>Hello</Show>)
+
+    expect(screen.queryByText("Hello")).not.toBeInTheDocument()
+  })
 })

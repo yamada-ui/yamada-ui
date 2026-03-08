@@ -199,6 +199,33 @@ export const Color: Story = () => {
   )
 }
 
+export const Filled: Story = () => {
+  const series = useMemo<AreaChart.AreaProps<Data>[]>(
+    () => [
+      { color: "red", dataKey: "desktop" },
+      { color: "green", dataKey: "tablet" },
+      { color: "blue", dataKey: "mobile" },
+    ],
+    [],
+  )
+  const data = useMemo(() => createData(), [])
+
+  return (
+    <AreaChart.Root
+      data={data}
+      series={series}
+      areaProps={{ fillOpacity: "1", stackId: "stack" }}
+      tooltipProps={{
+        labelFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+      xAxisProps={{
+        dataKey: "date",
+        tickFormatter: (value) => dayjs(value).format("MMM"),
+      }}
+    />
+  )
+}
+
 export const Type: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>

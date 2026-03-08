@@ -294,6 +294,14 @@ return (
 )
 ```
 
+## 使用しているコンポーネント・フック
+
+<Uses name="file-input" />
+
+## 使用されているコンポーネント・フック
+
+<UsedBy name="file-input" />
+
 ## Props
 
 <PropsTable name="file-input" />
@@ -329,6 +337,7 @@ return (
 | -------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `FileInput`    | `role="button"`    | ボタンであることを示します。                                                                                                                                                      |
 |                | `aria-disabled`    | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                                                                            |
+|                | `aria-labelledby`  | `FileInput`が`Field.Root`内にあり、`Field.Root`に`label`が設定されている場合は、その`id`を設定します。                                                                            |
 |                | `aria-describedby` | `FileInput`が`Field.Root`内にあり、`Field.Root`に`errorMessage`、`helperMessage`、`Field.ErrorMessage`、または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
 |                | `aria-invalid`     | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                             |
 |                | `aria-required`    | `required`が設定されている場合は`"true"`を設定します。                                                                                                                            |

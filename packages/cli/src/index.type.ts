@@ -76,11 +76,8 @@ export interface Dependents {
   providers: string[]
 }
 
-export interface Dependencies {
-  components: string[]
+export interface Dependencies extends Dependents {
   externals: string[]
-  hooks: string[]
-  providers: string[]
 }
 
 export interface Registry {

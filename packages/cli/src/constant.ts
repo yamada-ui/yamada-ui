@@ -1,13 +1,16 @@
 /* eslint-disable perfectionist/sort-objects */
 import type { UserConfig } from "./index.type"
 
+export const PACKAGE_NAME = "@yamada-ui/react"
 export const CONFIG_FILE_NAME = "ui.json"
 export const REGISTRY_FILE_NAME = "registry.json"
+export const REGISTRY_VERSION = "v2"
+export const REGISTRY_URL = "https://yamada-ui.com/registry"
+export const SECTION_NAMES = ["components", "hooks", "providers"] as const
 export const DEFAULT_PACKAGE_NAME = {
   ui: "@workspaces/ui",
   theme: "@workspaces/theme",
 }
-export const REGISTRY_URL = "https://yamada-ui.com/registry/v2"
 export const DEFAULT_PATH = {
   components: "./components",
   hooks: "./hooks",
@@ -21,16 +24,15 @@ export const DEFAULT_PATH = {
     polyrepo: "./theme",
   },
 }
-export const SECTION_NAMES = ["components", "hooks", "providers"] as const
 export const DEFAULT_CONFIG: UserConfig = {
-  $schema: `${REGISTRY_URL}/config.schema.json`,
+  $schema: `${REGISTRY_URL}/${REGISTRY_VERSION}/config.schema.json`,
   components: { overwrite: true },
   hooks: { overwrite: true },
   providers: { overwrite: true },
 }
 export const REQUIRED_DEPENDENCIES = {
-  ui: ["react@^19", "react-dom@^19", "@yamada-ui/react@^2"],
-  theme: ["@yamada-ui/react@^2"],
+  ui: ["react@^19", "react-dom@^19", `${PACKAGE_NAME}@^2`],
+  theme: [`${PACKAGE_NAME}@^2`],
 }
 export const REQUIRED_DEV_DEPENDENCIES = {
   ui: ["@types/react@^19", "@types/react-dom@^19"],

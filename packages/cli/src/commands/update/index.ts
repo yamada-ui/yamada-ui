@@ -27,6 +27,7 @@ interface Options {
   install: boolean
   lint: boolean
   sequential: boolean
+  tag?: string
 }
 
 export const update = new Command("update")
@@ -39,6 +40,7 @@ export const update = new Command("update")
   .option("-F, --force", "force update, overwriting local changes.", false)
   .option("-f, --format", "format the output files.")
   .option("-l, --lint", "lint the output files.")
+  .option("-t, --tag <name>", "tag for the registries (e.g. dev, next)")
   .action(async function (
     targetNames: string[],
     {
@@ -49,6 +51,7 @@ export const update = new Command("update")
       install,
       lint,
       sequential,
+      tag,
     }: Options,
   ) {
     const spinner = ora()
@@ -131,7 +134,7 @@ export const update = new Command("update")
       const { registryMap } = await getRegistriesAndFiles(
         componentNames,
         config,
-        { concurrent: !sequential, index, theme },
+        { concurrent: !sequential, index, tag, theme },
       )
       const { changeMap, dependencyMap } = await getDiff(
         generatedNames,

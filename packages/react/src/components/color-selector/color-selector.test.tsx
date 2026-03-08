@@ -1,5 +1,26 @@
 import { fireEvent, render, screen, waitFor } from "#test"
+import { noop } from "../../utils"
 import { ColorSelector } from "./"
+
+const mockRect = (el: HTMLElement, rect: Partial<DOMRect>): (() => void) => {
+  const original = el.getBoundingClientRect
+  el.getBoundingClientRect = () =>
+    ({
+      bottom: 0,
+      height: 0,
+      left: 0,
+      right: 0,
+      toJSON: noop,
+      top: 0,
+      width: 0,
+      x: 0,
+      y: 0,
+      ...rect,
+    }) as DOMRect
+  return () => {
+    el.getBoundingClientRect = original
+  }
+}
 
 describe("<ColorSelector />", () => {
   const defaultEyeDropper = (window as any).EyeDropper
@@ -536,5 +557,234 @@ describe("<ColorSelector />", () => {
     )
 
     expect(screen.getByTestId("saturation")).toBeInTheDocument()
+  })
+
+  test("hue slider pointer interaction triggers onChange, onChangeStart and onChangeEnd", () => {
+    const onChange = vi.fn()
+    const onChangeStart = vi.fn()
+    const onChangeEnd = vi.fn()
+
+    render(
+      <ColorSelector.Root
+        defaultValue="#ff0000"
+        hueSliderProps={{ trackProps: { "data-testid": "hue-track" } }}
+        onChange={onChange}
+        onChangeEnd={onChangeEnd}
+        onChangeStart={onChangeStart}
+      />,
+    )
+
+    const track = screen.getByTestId("hue-track")
+    const cleanup = mockRect(track, { left: 0, width: 360 })
+
+    fireEvent.pointerDown(track, { clientX: 180, clientY: 0 })
+    expect(onChangeStart).toHaveBeenCalledWith(expect.any(String))
+
+    fireEvent.pointerUp(window, { clientX: 180, clientY: 0 })
+    expect(onChangeEnd).toHaveBeenCalledWith(expect.any(String))
+
+    cleanup()
+  })
+
+  test("saturation slider pointer interaction triggers onChangeStart and onChangeEnd", () => {
+    const onChangeStart = vi.fn()
+    const onChangeEnd = vi.fn()
+
+    render(
+      <ColorSelector.Root
+        defaultValue="#ff0000"
+        saturationSliderProps={{
+          trackProps: { "data-testid": "saturation-track" },
+        }}
+        onChangeEnd={onChangeEnd}
+        onChangeStart={onChangeStart}
+      />,
+    )
+
+    const track = screen.getByTestId("saturation-track")
+    const cleanup = mockRect(track, {
+      height: 200,
+      left: 0,
+      top: 0,
+      width: 200,
+    })
+
+    fireEvent.pointerDown(track, { clientX: 100, clientY: 100 })
+    expect(onChangeStart).toHaveBeenCalledWith(expect.any(String))
+
+    fireEvent.pointerUp(window, { clientX: 100, clientY: 100 })
+    expect(onChangeEnd).toHaveBeenCalledWith(expect.any(String))
+
+    cleanup()
+  })
+
+  test("alpha slider pointer interaction triggers onChangeStart and onChangeEnd", () => {
+    const onChangeStart = vi.fn()
+    const onChangeEnd = vi.fn()
+
+    render(
+      <ColorSelector.Root
+        defaultValue="hsla(0, 100%, 50%, 0.5)"
+        format="hsla"
+        alphaSliderProps={{ trackProps: { "data-testid": "alpha-track" } }}
+        onChangeEnd={onChangeEnd}
+        onChangeStart={onChangeStart}
+      />,
+    )
+
+    const track = screen.getByTestId("alpha-track")
+    const cleanup = mockRect(track, { left: 0, width: 100 })
+
+    fireEvent.pointerDown(track, { clientX: 50, clientY: 0 })
+    expect(onChangeStart).toHaveBeenCalledWith(expect.any(String))
+
+    fireEvent.pointerUp(window, { clientX: 50, clientY: 0 })
+    expect(onChangeEnd).toHaveBeenCalledWith(expect.any(String))
+
+    cleanup()
+  })
+
+  test("does not trigger onChangeStart or onChangeEnd when disabled", () => {
+    const onChangeStart = vi.fn()
+    const onChangeEnd = vi.fn()
+
+    render(
+      <ColorSelector.Root
+        defaultValue="#ff0000"
+        disabled
+        hueSliderProps={{ trackProps: { "data-testid": "hue-track" } }}
+        onChangeEnd={onChangeEnd}
+        onChangeStart={onChangeStart}
+      />,
+    )
+
+    const track = screen.getByTestId("hue-track")
+    const cleanup = mockRect(track, { left: 0, width: 360 })
+
+    fireEvent.pointerDown(track, { clientX: 180, clientY: 0 })
+    fireEvent.pointerUp(window, { clientX: 180, clientY: 0 })
+
+    expect(onChangeStart).not.toHaveBeenCalled()
+    expect(onChangeEnd).not.toHaveBeenCalled()
+
+    cleanup()
+  })
+
+  test("does not trigger onChangeStart or onChangeEnd when readOnly", () => {
+    const onChangeStart = vi.fn()
+    const onChangeEnd = vi.fn()
+
+    render(
+      <ColorSelector.Root
+        defaultValue="#ff0000"
+        readOnly
+        hueSliderProps={{ trackProps: { "data-testid": "hue-track" } }}
+        onChangeEnd={onChangeEnd}
+        onChangeStart={onChangeStart}
+      />,
+    )
+
+    const track = screen.getByTestId("hue-track")
+    const cleanup = mockRect(track, { left: 0, width: 360 })
+
+    fireEvent.pointerDown(track, { clientX: 180, clientY: 0 })
+    fireEvent.pointerUp(window, { clientX: 180, clientY: 0 })
+
+    expect(onChangeStart).not.toHaveBeenCalled()
+    expect(onChangeEnd).not.toHaveBeenCalled()
+
+    cleanup()
+  })
+
+  test("eye dropper has correct tabIndex when interactive", () => {
+    render(
+      <ColorSelector.Root defaultValue="#ff0000">
+        <ColorSelector.EyeDropper data-testid="eye-dropper" />
+      </ColorSelector.Root>,
+    )
+
+    expect(screen.getByTestId("eye-dropper")).toHaveAttribute("tabindex", "0")
+  })
+
+  test("renders eye dropper with children when no icon prop", () => {
+    render(
+      <ColorSelector.Root defaultValue="#ff0000">
+        <ColorSelector.EyeDropper data-testid="eye-dropper">
+          <span data-testid="child-content">dropper</span>
+        </ColorSelector.EyeDropper>
+      </ColorSelector.Root>,
+    )
+
+    expect(screen.getByTestId("child-content")).toBeInTheDocument()
+  })
+
+  test("renders with rgba format", () => {
+    const onChange = vi.fn()
+
+    render(
+      <ColorSelector.Root
+        data-testid="root"
+        defaultValue="rgba(255, 0, 0, 0.5)"
+        format="rgba"
+        alphaSliderProps={{ "data-testid": "alpha" }}
+        onChange={onChange}
+      />,
+    )
+
+    expect(screen.getByTestId("alpha")).toBeInTheDocument()
+  })
+
+  test("color swatch item does not trigger onChange on keyDown when disabled", () => {
+    const onChange = vi.fn()
+
+    render(
+      <ColorSelector.Root
+        colorSwatches={["#ff0000", "#00ff00"]}
+        defaultValue="#ffffff"
+        disabled
+        onChange={onChange}
+      />,
+    )
+
+    const options = screen.getAllByRole("option")
+
+    fireEvent.keyDown(options[0]!, { key: "Enter" })
+
+    expect(onChange).not.toHaveBeenCalled()
+  })
+
+  test("color swatch item does not trigger onChange on keyDown when readOnly", () => {
+    const onChange = vi.fn()
+
+    render(
+      <ColorSelector.Root
+        colorSwatches={["#ff0000", "#00ff00"]}
+        defaultValue="#ffffff"
+        readOnly
+        onChange={onChange}
+      />,
+    )
+
+    const options = screen.getAllByRole("option")
+
+    fireEvent.keyDown(options[0]!, { key: " ", code: "Space" })
+
+    expect(onChange).not.toHaveBeenCalled()
+  })
+
+  test("eye dropper does not trigger on Enter key when disabled", async () => {
+    openEyeDropper.mockResolvedValue({ sRGBHex: "#00ff00" })
+
+    render(
+      <ColorSelector.Root defaultValue="#ff0000" disabled>
+        <ColorSelector.EyeDropper data-testid="eye-dropper" />
+      </ColorSelector.Root>,
+    )
+
+    fireEvent.keyDown(screen.getByTestId("eye-dropper"), { key: "Enter" })
+
+    await waitFor(() => {
+      expect(openEyeDropper).not.toHaveBeenCalled()
+    })
   })
 })

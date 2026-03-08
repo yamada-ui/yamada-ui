@@ -500,4 +500,77 @@ describe("useDescendant", () => {
 
     expect(descendants.count()).toBe(2)
   })
+
+  test("sortNodes returns -1 when node a precedes node b", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC = () => {
+      const { register } = useDescendant()
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
+
+    const values = descendants.values()
+
+    expect(values[0]!.index).toBe(0)
+    expect(values[1]!.index).toBe(1)
+    expect(values[2]!.index).toBe(2)
+  })
+
+  test("sortNodes returns 1 when node a follows node b", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC = () => {
+      const { register } = useDescendant()
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
+
+    const nodeA = descendants.values()[1]!.node
+    const nodeB = descendants.values()[0]!.node
+
+    const position = nodeA.compareDocumentPosition(nodeB)
+
+    expect(
+      position & Node.DOCUMENT_POSITION_PRECEDING ||
+        position & Node.DOCUMENT_POSITION_CONTAINS,
+    ).toBeTruthy()
+  })
+
+  test("sortNodes warns and returns 0 for disconnected nodes", () => {
+    const { descendants, useDescendant, Wrapper } = setup()
+
+    const Item: FC = () => {
+      const { register } = useDescendant()
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(<Wrapper>{renderItems(1, Item)}</Wrapper>)
+
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(vi.fn())
+
+    const newNode = document.createElement("div")
+    const newNodeSpy = vi.spyOn(newNode, "compareDocumentPosition")
+    newNodeSpy.mockReturnValue(Node.DOCUMENT_POSITION_DISCONNECTED)
+
+    const registeredNode = descendants.values()[0]!.node
+    const registeredNodeSpy = vi.spyOn(
+      registeredNode,
+      "compareDocumentPosition",
+    )
+    registeredNodeSpy.mockReturnValue(Node.DOCUMENT_POSITION_DISCONNECTED)
+
+    descendants.register()(newNode)
+
+    expect(warnSpy).toHaveBeenCalledWith("Cannot sort the given nodes.")
+
+    newNodeSpy.mockRestore()
+    registeredNodeSpy.mockRestore()
+    warnSpy.mockRestore()
+  })
 })

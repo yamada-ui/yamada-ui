@@ -33,22 +33,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Check modified files
-        id: check-modified
-        uses: tj-actions/changed-files@v46
-        with:
-          files: |
-            turbo.json
-            packages/**/(package.json|vitest.config.ts)
-            packages/**/(src|test)/**/*.{ts,tsx}
-            !packages/**/src/**/*.stories.{ts,tsx}
-            !packages/workspace/src/**
-            packages/workspace/src/vitest/**
-            .github/workflows/test.yml
-            .github/workflows/quality.yml
+      # - name: Check modified files
+      #   id: check-modified
+      #   uses: tj-actions/changed-files@v46
+      #   with:
+      #     files: |
+      #       turbo.json
+      #       packages/**/(package.json|vitest.config.ts)
+      #       packages/**/(src|test)/**/*.{ts,tsx}
+      #       !packages/**/src/**/*.stories.{ts,tsx}
+      #       !packages/workspace/src/**
+      #       packages/workspace/src/vitest/**
+      #       .github/workflows/test.yml
+      #       .github/workflows/quality.yml
 
       - name: Restore turbo cache
-        if: steps.check-modified.outputs.any_changed == 'true'
+        # if: steps.check-modified.outputs.any_changed == 'true'
         uses: actions/cache@v4
         with:
           path: .turbo
@@ -58,24 +58,27 @@ jobs:
             ${{ runner.os }}-turbo-${{ github.job }}-
 
       - name: Install
-        if: steps.check-modified.outputs.any_changed == 'true'
+        # if: steps.check-modified.outputs.any_changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Setup Browser
-        if: steps.check-modified.outputs.any_changed == 'true'
+        # if: steps.check-modified.outputs.any_changed == 'true'
         working-directory: packages/react
         run: pnpm playwright install ${{ matrix.id }} --with-deps
 
       - name: Run tests
-        if: steps.check-modified.outputs.any_changed == 'true' && matrix.coverage == 'true'
+        if: matrix.coverage == 'true'
+        # steps.check-modified.outputs.any_changed == 'true' &&
         run: pnpm test:coverage
 
       - name: Run Browser Test on ${{ matrix.name }}
-        if: steps.check-modified.outputs.any_changed == 'true' && matrix.coverage != 'true'
+        if: matrix.coverage != 'true'
+        # steps.check-modified.outputs.any_changed == 'true' &&
         run: pnpm test:${{ matrix.id }}
 
       - name: Upload coverage
-        if: steps.check-modified.outputs.any_changed == 'true' && matrix.coverage == 'true'
+        if: matrix.coverage == 'true'
+        # steps.check-modified.outputs.any_changed == 'true' &&
         uses: codecov/codecov-action@v4
         with:
           fail_ci_if_error: false

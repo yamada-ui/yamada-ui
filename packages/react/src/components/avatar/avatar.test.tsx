@@ -83,4 +83,76 @@ describe("<AvatarGroup />", () => {
   test("should have the correct displayName", () => {
     expect(AvatarGroup.Root.displayName).toBe("AvatarGroup")
   })
+
+  test("renders child avatars with the given variant", () => {
+    const { container: subtleContainer } = render(
+      <AvatarGroup.Root variant="subtle">
+        <AvatarGroup.Item name="Hirotomo Yamada" />
+      </AvatarGroup.Root>,
+    )
+    const { container: solidContainer } = render(
+      <AvatarGroup.Root variant="solid">
+        <AvatarGroup.Item name="Hirotomo Yamada" />
+      </AvatarGroup.Root>,
+    )
+
+    const subtleAvatar = subtleContainer.querySelector(".ui-avatar__root")
+    const solidAvatar = solidContainer.querySelector(".ui-avatar__root")
+
+    expect(subtleAvatar?.className).not.toBe(solidAvatar?.className)
+  })
+
+  test("renders child avatars with the given size", () => {
+    const { container: lgContainer } = render(
+      <AvatarGroup.Root size="lg">
+        <AvatarGroup.Item name="Hirotomo Yamada" />
+      </AvatarGroup.Root>,
+    )
+    const { container: mdContainer } = render(
+      <AvatarGroup.Root size="md">
+        <AvatarGroup.Item name="Hirotomo Yamada" />
+      </AvatarGroup.Root>,
+    )
+
+    const lgAvatar = lgContainer.querySelector(".ui-avatar__root")
+    const mdAvatar = mdContainer.querySelector(".ui-avatar__root")
+
+    expect(lgAvatar?.className).not.toBe(mdAvatar?.className)
+  })
+
+  test("renders child avatars with the given colorScheme", () => {
+    const { container: primaryContainer } = render(
+      <AvatarGroup.Root colorScheme="primary">
+        <AvatarGroup.Item name="Hirotomo Yamada" />
+      </AvatarGroup.Root>,
+    )
+    const { container: defaultContainer } = render(
+      <AvatarGroup.Root>
+        <AvatarGroup.Item name="Hirotomo Yamada" />
+      </AvatarGroup.Root>,
+    )
+
+    const primaryAvatar = primaryContainer.querySelector(".ui-avatar__root")
+    const defaultAvatar = defaultContainer.querySelector(".ui-avatar__root")
+
+    expect(primaryAvatar?.className).not.toBe(defaultAvatar?.className)
+  })
+
+  test("renders child avatars with the given shape", () => {
+    const { container: squareContainer } = render(
+      <AvatarGroup.Root shape="square">
+        <AvatarGroup.Item name="Hirotomo Yamada" />
+      </AvatarGroup.Root>,
+    )
+    const { container: circleContainer } = render(
+      <AvatarGroup.Root shape="circle">
+        <AvatarGroup.Item name="Hirotomo Yamada" />
+      </AvatarGroup.Root>,
+    )
+
+    const squareAvatar = squareContainer.querySelector(".ui-avatar__root")
+    const circleAvatar = circleContainer.querySelector(".ui-avatar__root")
+
+    expect(squareAvatar?.className).not.toBe(circleAvatar?.className)
+  })
 })

@@ -1481,7 +1481,7 @@ describe("<Table />", () => {
 
       await user.click(secondDataRow)
 
-      expect(onRowClick).toHaveBeenCalledWith()
+      expect(onRowClick).toHaveBeenCalledTimes(1)
     })
 
     test("enabled rows invoke onRowDoubleClick", async () => {
@@ -1502,7 +1502,7 @@ describe("<Table />", () => {
 
       await user.dblClick(secondDataRow)
 
-      expect(onRowDoubleClick).toHaveBeenCalledWith()
+      expect(onRowDoubleClick).toHaveBeenCalledTimes(1)
     })
 
     test("sets aria-disabled on disabled rows", () => {
@@ -2349,7 +2349,7 @@ describe("<Table />", () => {
 
       await user.click(secondDataRow)
 
-      expect(onRowSelectionChange).toHaveBeenCalledWith()
+      expect(onRowSelectionChange).toHaveBeenCalledTimes(1)
     })
 
     test("does not select disabled row on click", () => {

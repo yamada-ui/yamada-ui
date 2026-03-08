@@ -65,6 +65,16 @@
               "title": "React Router",
               "segment": "react-router",
               "pathname": "/docs/get-started/frameworks/react-router"
+            },
+            {
+              "title": "TanStack Start",
+              "segment": "tanstack-start",
+              "pathname": "/docs/get-started/frameworks/tanstack-start"
+            },
+            {
+              "title": "TanStack Router",
+              "segment": "tanstack-router",
+              "pathname": "/docs/get-started/frameworks/tanstack-router"
             }
           ]
         }

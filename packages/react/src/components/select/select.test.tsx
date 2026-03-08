@@ -1099,7 +1099,7 @@ describe("<Select />", () => {
   })
 
   test("does not close on select in multiple mode by default", async () => {
-    render(
+    const { user } = render(
       <Select.Root
         defaultOpen
         items={items}
@@ -1112,7 +1112,7 @@ describe("<Select />", () => {
       expect(screen.getByRole("option", { name: "Option 1" })).toBeVisible()
     })
 
-    fireEvent.click(screen.getByRole("option", { name: "Option 1" }))
+    await user.click(screen.getByRole("option", { name: "Option 1" }))
 
     await waitFor(() => {
       expect(screen.getByRole("option", { name: "Option 2" })).toBeVisible()

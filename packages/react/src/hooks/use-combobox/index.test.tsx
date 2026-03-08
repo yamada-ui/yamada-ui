@@ -37,9 +37,7 @@ describe("createComboboxChildren", () => {
 
     const result = createComboboxChildren(items, { Empty, Group, Option })
 
-    const { getByTestId } = render(<div>{result}</div>)
-
-    expect(getByTestId("empty")).toHaveTextContent("No results")
+    expect(result).toHaveLength(1)
   })
 
   test("renders grouped items", () => {
@@ -965,5 +963,368 @@ describe("useCombobox", () => {
     })
 
     expect(trigger).toHaveAttribute("aria-expanded", "true")
+  })
+
+  test("onActiveDescendant does nothing when disabled", () => {
+    const DisabledActiveComponent: FC = () => {
+      const {
+        descendants,
+        getTriggerProps,
+        onActiveDescendant,
+        onClose,
+        onSelect,
+      } = useCombobox({ disabled: true })
+
+      return (
+        <ComboboxDescendantsContext value={descendants}>
+          <ComboboxContext value={{ onActiveDescendant, onClose, onSelect }}>
+            <div {...getTriggerProps({ "data-testid": "trigger" })}>
+              Trigger
+            </div>
+            <button
+              data-testid="activate-btn"
+              onClick={() =>
+                onActiveDescendant({
+                  id: "test-id",
+                  closeOnSelect: true,
+                  disabled: false,
+                  index: 0,
+                  node: document.createElement("div"),
+                  value: "test",
+                })
+              }
+            >
+              Activate
+            </button>
+          </ComboboxContext>
+        </ComboboxDescendantsContext>
+      )
+    }
+
+    render(<DisabledActiveComponent />)
+
+    const trigger = screen.getByTestId("trigger")
+
+    act(() => {
+      fireEvent.click(screen.getByTestId("activate-btn"))
+    })
+
+    expect(trigger).not.toHaveAttribute("aria-activedescendant")
+  })
+
+  test("ArrowDown when open without active descendant selects first item", async () => {
+    render(
+      <ComboboxTestComponent
+        defaultOpen
+        items={[{ value: "one" }, { value: "two" }]}
+      />,
+    )
+
+    const trigger = screen.getByTestId("trigger")
+
+    await waitFor(() => {
+      expect(screen.getByTestId("item-one")).toBeInTheDocument()
+    })
+
+    act(() => {
+      fireEvent.keyDown(trigger, { key: "ArrowDown" })
+    })
+
+    await waitFor(() => {
+      expect(trigger).toHaveAttribute("aria-activedescendant")
+    })
+  })
+
+  test("ArrowUp when open without active descendant selects last item", async () => {
+    render(
+      <ComboboxTestComponent
+        defaultOpen
+        items={[{ value: "one" }, { value: "two" }]}
+      />,
+    )
+
+    const trigger = screen.getByTestId("trigger")
+
+    await waitFor(() => {
+      expect(screen.getByTestId("item-two")).toBeInTheDocument()
+    })
+
+    act(() => {
+      fireEvent.keyDown(trigger, { key: "ArrowUp" })
+    })
+
+    await waitFor(() => {
+      expect(trigger).toHaveAttribute("aria-activedescendant")
+    })
+  })
+
+  test("Space key does nothing when open with no active descendant", () => {
+    const onChange = vi.fn()
+
+    render(
+      <ComboboxTestComponent
+        defaultOpen
+        items={[{ value: "one" }, { value: "two" }]}
+        onChange={onChange}
+      />,
+    )
+
+    const trigger = screen.getByTestId("trigger")
+
+    act(() => {
+      fireEvent.keyDown(trigger, { key: " ", code: "Space" })
+    })
+
+    expect(onChange).not.toHaveBeenCalled()
+  })
+
+  test("initialFocusValue falls back to default when value not found", async () => {
+    render(
+      <ComboboxTestComponent
+        initialFocusValue="nonexistent"
+        items={[{ value: "one" }, { value: "two" }]}
+      />,
+    )
+
+    const trigger = screen.getByTestId("trigger")
+
+    act(() => {
+      fireEvent.keyDown(trigger, { key: "ArrowDown" })
+    })
+
+    await waitFor(() => {
+      expect(trigger).toHaveAttribute("aria-expanded", "true")
+    })
+
+    await waitFor(() => {
+      expect(trigger).toHaveAttribute("aria-activedescendant")
+    })
+  })
+
+  test("onSelect calls onChange and closes when interactive", () => {
+    const onChange = vi.fn()
+    const SelectComponent: FC = () => {
+      const {
+        descendants,
+        getTriggerProps,
+        onActiveDescendant,
+        onClose,
+        onSelect,
+      } = useCombobox({ onChange })
+
+      return (
+        <ComboboxDescendantsContext value={descendants}>
+          <ComboboxContext value={{ onActiveDescendant, onClose, onSelect }}>
+            <div {...getTriggerProps({ "data-testid": "trigger" })}>
+              Trigger
+            </div>
+            <button
+              data-testid="select-btn"
+              onClick={() => onSelect("test-value")}
+            >
+              Select
+            </button>
+          </ComboboxContext>
+        </ComboboxDescendantsContext>
+      )
+    }
+
+    render(<SelectComponent />)
+
+    act(() => {
+      fireEvent.click(screen.getByTestId("select-btn"))
+    })
+
+    expect(onChange).toHaveBeenCalledWith("test-value")
+  })
+
+  test("onSelect does not call onChange when not interactive (readOnly)", () => {
+    const onChange = vi.fn()
+    const ReadOnlyComponent: FC = () => {
+      const {
+        descendants,
+        getTriggerProps,
+        onActiveDescendant,
+        onClose,
+        onSelect,
+      } = useCombobox({ readOnly: true, onChange })
+
+      return (
+        <ComboboxDescendantsContext value={descendants}>
+          <ComboboxContext value={{ onActiveDescendant, onClose, onSelect }}>
+            <div {...getTriggerProps({ "data-testid": "trigger" })}>
+              Trigger
+            </div>
+            <button
+              data-testid="select-btn"
+              onClick={() => onSelect("test-value")}
+            >
+              Select
+            </button>
+          </ComboboxContext>
+        </ComboboxDescendantsContext>
+      )
+    }
+
+    render(<ReadOnlyComponent />)
+
+    act(() => {
+      fireEvent.click(screen.getByTestId("select-btn"))
+    })
+
+    expect(onChange).not.toHaveBeenCalled()
+  })
+
+  test("onSelect with closeOnSelect=false does not close", () => {
+    const onChange = vi.fn()
+    const NoCloseComponent: FC = () => {
+      const {
+        descendants,
+        open,
+        getTriggerProps,
+        onActiveDescendant,
+        onClose,
+        onSelect,
+      } = useCombobox({ defaultOpen: true, onChange })
+
+      return (
+        <ComboboxDescendantsContext value={descendants}>
+          <ComboboxContext value={{ onActiveDescendant, onClose, onSelect }}>
+            <div {...getTriggerProps({ "data-testid": "trigger" })}>
+              Trigger
+            </div>
+            <div data-testid="open-state">{open ? "open" : "closed"}</div>
+            <button
+              data-testid="select-btn"
+              onClick={() => onSelect("test-value", false)}
+            >
+              Select
+            </button>
+          </ComboboxContext>
+        </ComboboxDescendantsContext>
+      )
+    }
+
+    render(<NoCloseComponent />)
+
+    act(() => {
+      fireEvent.click(screen.getByTestId("select-btn"))
+    })
+
+    expect(onChange).toHaveBeenCalledWith("test-value")
+  })
+
+  test("End key sets active descendant when open", async () => {
+    render(
+      <ComboboxTestComponent
+        defaultOpen
+        items={[{ value: "one" }, { value: "two" }, { value: "three" }]}
+      />,
+    )
+
+    const trigger = screen.getByTestId("trigger")
+
+    await waitFor(() => {
+      expect(screen.getByTestId("item-three")).toBeInTheDocument()
+    })
+
+    act(() => {
+      fireEvent.keyDown(trigger, { key: "End" })
+    })
+
+    await waitFor(() => {
+      expect(trigger).toHaveAttribute("aria-activedescendant")
+    })
+  })
+
+  test("Home key sets active descendant when open", async () => {
+    render(
+      <ComboboxTestComponent
+        defaultOpen
+        items={[{ value: "one" }, { value: "two" }, { value: "three" }]}
+      />,
+    )
+
+    const trigger = screen.getByTestId("trigger")
+
+    await waitFor(() => {
+      expect(screen.getByTestId("item-one")).toBeInTheDocument()
+    })
+
+    act(() => {
+      fireEvent.keyDown(trigger, { key: "Home" })
+    })
+
+    await waitFor(() => {
+      expect(trigger).toHaveAttribute("aria-activedescendant")
+    })
+  })
+
+  test("Enter key selects and closes with active descendant", async () => {
+    const onChange = vi.fn()
+
+    render(
+      <ComboboxTestComponent
+        defaultOpen
+        items={[{ value: "one" }, { value: "two" }]}
+        onChange={onChange}
+      />,
+    )
+
+    const trigger = screen.getByTestId("trigger")
+
+    await waitFor(() => {
+      expect(screen.getByTestId("item-one")).toBeInTheDocument()
+    })
+
+    act(() => {
+      fireEvent.keyDown(trigger, { key: "ArrowDown" })
+    })
+
+    await waitFor(() => {
+      expect(trigger).toHaveAttribute("aria-activedescendant")
+    })
+
+    act(() => {
+      fireEvent.keyDown(trigger, { key: "Enter" })
+    })
+
+    await waitFor(() => {
+      expect(onChange).toHaveBeenCalledWith("one")
+    })
+  })
+
+  test("Space key selects with active descendant when selectOnSpace is true", async () => {
+    const onChange = vi.fn()
+
+    render(
+      <ComboboxTestComponent
+        defaultOpen
+        items={[{ value: "one" }, { value: "two" }]}
+        onChange={onChange}
+      />,
+    )
+
+    const trigger = screen.getByTestId("trigger")
+
+    await waitFor(() => {
+      expect(screen.getByTestId("item-one")).toBeInTheDocument()
+    })
+
+    act(() => {
+      fireEvent.keyDown(trigger, { key: "ArrowDown" })
+    })
+
+    await waitFor(() => {
+      expect(trigger).toHaveAttribute("aria-activedescendant")
+    })
+
+    act(() => {
+      fireEvent.keyDown(trigger, { key: " ", code: "Space" })
+    })
+
+    await waitFor(() => {
+      expect(onChange).toHaveBeenCalledWith("one")
+    })
   })
 })

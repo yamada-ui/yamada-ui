@@ -53,4 +53,32 @@ describe("<SimpleGrid />", () => {
       gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
     })
   })
+
+  test("returns undefined for null value in `minChildWidth` responsive array", () => {
+    // @ts-expect-error - testing null handling in responsive array
+    render(<SimpleGrid minChildWidth={[null, "200px"]}>SimpleGrid</SimpleGrid>)
+    expect(screen.getByText("SimpleGrid")).toBeInTheDocument()
+  })
+
+  test("returns undefined for undefined value in `minChildWidth` responsive object", () => {
+    render(
+      <SimpleGrid minChildWidth={{ base: undefined, md: "200px" }}>
+        SimpleGrid
+      </SimpleGrid>,
+    )
+    expect(screen.getByText("SimpleGrid")).toBeInTheDocument()
+  })
+
+  test("returns undefined for null value in `columns` responsive array", () => {
+    // @ts-expect-error - testing null handling in responsive array
+    render(<SimpleGrid columns={[null, 3]}>SimpleGrid</SimpleGrid>)
+    expect(screen.getByText("SimpleGrid")).toBeInTheDocument()
+  })
+
+  test("returns undefined for undefined value in `columns` responsive object", () => {
+    render(
+      <SimpleGrid columns={{ base: undefined, md: 3 }}>SimpleGrid</SimpleGrid>,
+    )
+    expect(screen.getByText("SimpleGrid")).toBeInTheDocument()
+  })
 })

@@ -26,6 +26,7 @@
     "next:app": "pnpm -C playgrounds/next/app",
     "react-router:framework": "pnpm -C playgrounds/react-router/framework",
     "vite": "pnpm -C playgrounds/vite",
+    "tanstack:start": "pnpm -C playgrounds/tanstack/start",
     "prebuild": "pnpm gen:tokens",
     "build": "turbo run build --filter=./packages/**",
     "lint": "turbo run lint --filter=./packages/**",

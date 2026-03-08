@@ -1,4 +1,6 @@
-import { a11y, render, screen } from "#test"
+import type { ResizableRootControl } from "./"
+import { a11y, fireEvent, render, screen } from "#test"
+import { useRef } from "react"
 import { GripVerticalIcon } from "../icon"
 import { Resizable } from "./"
 
@@ -68,6 +70,47 @@ describe("<Resizable />", () => {
     )
     expect(screen.getByTestId("left-item")).toHaveStyle({ flex: "30 1 0px" })
     expect(screen.getByTestId("right-item")).toHaveStyle({ flex: "70 1 0px" })
+  })
+})
+
+describe("<ResizableTrigger />", () => {
+  test("handles double-click to equalize panel sizes", () => {
+    const setLayoutMock = vi.fn()
+
+    const Wrapper = () => {
+      const controlRef = useRef<ResizableRootControl>(null)
+
+      return (
+        <>
+          <button
+            data-testid="mock-set-layout"
+            onClick={() => {
+              if (controlRef.current) {
+                controlRef.current.setLayout = setLayoutMock
+              }
+            }}
+          />
+
+          <Resizable.Root controlRef={controlRef}>
+            <Resizable.Item>One</Resizable.Item>
+
+            <Resizable.Trigger id="trigger" />
+
+            <Resizable.Item>Two</Resizable.Item>
+          </Resizable.Root>
+        </>
+      )
+    }
+
+    render(<Wrapper />)
+
+    fireEvent.click(screen.getByTestId("mock-set-layout"))
+
+    const trigger = screen.getByTestId("trigger")
+
+    fireEvent.dblClick(trigger)
+
+    expect(setLayoutMock).toHaveBeenCalledWith(expect.objectContaining({}))
   })
 })
 

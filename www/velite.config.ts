@@ -7,6 +7,7 @@ import { CONSTANTS } from "@/constants"
 import { generateDocMap } from "@/scripts/generate/docs/map"
 import { getLocale, langs } from "@/utils/i18n"
 import {
+  extractToc,
   replaceCardGroup,
   replaceCodeBlock,
   replaceCodeGroup,
@@ -90,7 +91,11 @@ const docs = defineCollection({
         .optional(),
       storybook: s.string().optional(),
       title: s.string(),
-      toc: s.toc(),
+      toc: s.custom().transform(async (_, { meta }) => {
+        const content = await replaceProps(meta.content as string)
+
+        return extractToc(content)
+      }),
     })
     .transform(async (data, { meta }) => {
       const { locale, slug } = getSlug(meta.path as string)

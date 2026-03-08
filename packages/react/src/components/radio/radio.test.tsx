@@ -1,7 +1,8 @@
-import { a11y, fireEvent, render, screen } from "#test"
+import { a11y, act, fireEvent, render, renderHook, screen } from "#test"
 import { vi } from "vitest"
 import { RadioGroup } from "."
 import { Radio } from "./radio"
+import { useRadioGroup } from "./use-radio-group"
 
 const items = [
   { label: "Item 1", value: "1" },
@@ -154,5 +155,20 @@ describe("<Radio />", () => {
     fireEvent.click(radios[0]!)
 
     expect(onChange).toHaveBeenCalledWith("1")
+  })
+
+  test("should update value when onChange is called with a string value", () => {
+    const onChangeMock = vi.fn()
+
+    const { result } = renderHook(() =>
+      useRadioGroup({ defaultValue: "1" as string, onChange: onChangeMock }),
+    )
+
+    act(() => {
+      result.current.onChange("2")
+    })
+
+    expect(onChangeMock).toHaveBeenCalledWith("2")
+    expect(result.current.value).toBe("2")
   })
 })

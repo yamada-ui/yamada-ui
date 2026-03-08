@@ -84,34 +84,14 @@ describe("useLoading", () => {
 
   test("screen.start renders screen loading", async () => {
     const TestComponent: FC = () => {
-      const { screen } = useLoading()
-
-      return (
-        <button data-testid="start" onClick={() => screen.start()}>
-          Start
-        </button>
-      )
-    }
-
-    const { user } = render(<TestComponent />)
-
-    await user.click(screen.getByTestId("start"))
-
-    await waitFor(() => {
-      expect(document.querySelector("div[data-loading]")).toBeInTheDocument()
-    })
-  })
-
-  test("screen.finish removes screen loading", async () => {
-    const TestComponent: FC = () => {
-      const { screen } = useLoading()
+      const { screen: screenLoading } = useLoading()
 
       return (
         <>
-          <button data-testid="start" onClick={() => screen.start()}>
+          <button data-testid="start" onClick={() => screenLoading.start()}>
             Start
           </button>
-          <button data-testid="finish" onClick={() => screen.finish()}>
+          <button data-testid="finish" onClick={() => screenLoading.finish()}>
             Finish
           </button>
         </>
@@ -127,25 +107,67 @@ describe("useLoading", () => {
     })
 
     await user.click(screen.getByTestId("finish"))
+  })
+
+  test("screen.finish removes screen loading", async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true })
+
+    const TestComponent: FC = () => {
+      const { screen: screenLoading } = useLoading()
+
+      return (
+        <>
+          <button data-testid="start" onClick={() => screenLoading.start()}>
+            Start
+          </button>
+          <button data-testid="finish" onClick={() => screenLoading.finish()}>
+            Finish
+          </button>
+        </>
+      )
+    }
+
+    render(<TestComponent />)
+
+    act(() => {
+      screen.getByTestId("start").click()
+    })
+
+    expect(document.querySelector("div[data-loading]")).toBeInTheDocument()
+
+    act(() => {
+      screen.getByTestId("finish").click()
+    })
+
+    act(() => {
+      vi.advanceTimersByTime(500)
+    })
 
     await waitFor(() => {
       expect(
         document.querySelector("div[data-loading]"),
       ).not.toBeInTheDocument()
     })
+
+    vi.useRealTimers()
   })
 
   test("screen.start renders with string message", async () => {
     const TestComponent: FC = () => {
-      const { screen } = useLoading()
+      const { screen: screenLoading } = useLoading()
 
       return (
-        <button
-          data-testid="start"
-          onClick={() => screen.start({ message: "Screen loading" })}
-        >
-          Start
-        </button>
+        <>
+          <button
+            data-testid="start"
+            onClick={() => screenLoading.start({ message: "Screen loading" })}
+          >
+            Start
+          </button>
+          <button data-testid="finish" onClick={() => screenLoading.finish()}>
+            Finish
+          </button>
+        </>
       )
     }
 
@@ -156,23 +178,30 @@ describe("useLoading", () => {
     await waitFor(() => {
       expect(screen.getByText("Screen loading")).toBeInTheDocument()
     })
+
+    await user.click(screen.getByTestId("finish"))
   })
 
   test("screen.start renders with ReactNode message", async () => {
     const TestComponent: FC = () => {
-      const { screen } = useLoading()
+      const { screen: screenLoading } = useLoading()
 
       return (
-        <button
-          data-testid="start"
-          onClick={() =>
-            screen.start({
-              message: <Text data-testid="screen-msg">Custom Screen</Text>,
-            })
-          }
-        >
-          Start
-        </button>
+        <>
+          <button
+            data-testid="start"
+            onClick={() =>
+              screenLoading.start({
+                message: <Text data-testid="screen-msg">Custom Screen</Text>,
+              })
+            }
+          >
+            Start
+          </button>
+          <button data-testid="finish" onClick={() => screenLoading.finish()}>
+            Finish
+          </button>
+        </>
       )
     }
 
@@ -183,6 +212,8 @@ describe("useLoading", () => {
     await waitFor(() => {
       expect(screen.getByTestId("screen-msg")).toBeInTheDocument()
     })
+
+    await user.click(screen.getByTestId("finish"))
   })
 
   test("page.start renders page loading with string message", async () => {
@@ -190,12 +221,17 @@ describe("useLoading", () => {
       const { page } = useLoading()
 
       return (
-        <button
-          data-testid="start"
-          onClick={() => page.start({ message: "Loading data" })}
-        >
-          Start
-        </button>
+        <>
+          <button
+            data-testid="start"
+            onClick={() => page.start({ message: "Loading data" })}
+          >
+            Start
+          </button>
+          <button data-testid="finish" onClick={() => page.finish()}>
+            Finish
+          </button>
+        </>
       )
     }
 
@@ -206,6 +242,8 @@ describe("useLoading", () => {
     await waitFor(() => {
       expect(screen.getByText("Loading data")).toBeInTheDocument()
     })
+
+    await user.click(screen.getByTestId("finish"))
   })
 
   test("page.start renders page loading with ReactNode message", async () => {
@@ -213,16 +251,21 @@ describe("useLoading", () => {
       const { page } = useLoading()
 
       return (
-        <button
-          data-testid="start"
-          onClick={() =>
-            page.start({
-              message: <Text data-testid="custom-msg">Custom</Text>,
-            })
-          }
-        >
-          Start
-        </button>
+        <>
+          <button
+            data-testid="start"
+            onClick={() =>
+              page.start({
+                message: <Text data-testid="custom-msg">Custom</Text>,
+              })
+            }
+          >
+            Start
+          </button>
+          <button data-testid="finish" onClick={() => page.finish()}>
+            Finish
+          </button>
+        </>
       )
     }
 
@@ -233,6 +276,8 @@ describe("useLoading", () => {
     await waitFor(() => {
       expect(screen.getByTestId("custom-msg")).toBeInTheDocument()
     })
+
+    await user.click(screen.getByTestId("finish"))
   })
 
   test("background.start renders background loading", async () => {
@@ -240,9 +285,14 @@ describe("useLoading", () => {
       const { background } = useLoading()
 
       return (
-        <button data-testid="start" onClick={() => background.start()}>
-          Start
-        </button>
+        <>
+          <button data-testid="start" onClick={() => background.start()}>
+            Start
+          </button>
+          <button data-testid="finish" onClick={() => background.finish()}>
+            Finish
+          </button>
+        </>
       )
     }
 
@@ -253,6 +303,8 @@ describe("useLoading", () => {
     await waitFor(() => {
       expect(document.querySelector("div[data-loading]")).toBeInTheDocument()
     })
+
+    await user.click(screen.getByTestId("finish"))
   })
 
   test("background.start renders with string message", async () => {
@@ -260,12 +312,17 @@ describe("useLoading", () => {
       const { background } = useLoading()
 
       return (
-        <button
-          data-testid="start"
-          onClick={() => background.start({ message: "Saving" })}
-        >
-          Start
-        </button>
+        <>
+          <button
+            data-testid="start"
+            onClick={() => background.start({ message: "Saving" })}
+          >
+            Start
+          </button>
+          <button data-testid="finish" onClick={() => background.finish()}>
+            Finish
+          </button>
+        </>
       )
     }
 
@@ -276,6 +333,8 @@ describe("useLoading", () => {
     await waitFor(() => {
       expect(screen.getByText("Saving")).toBeInTheDocument()
     })
+
+    await user.click(screen.getByTestId("finish"))
   })
 
   test("background.start renders with ReactNode message", async () => {
@@ -283,16 +342,21 @@ describe("useLoading", () => {
       const { background } = useLoading()
 
       return (
-        <button
-          data-testid="start"
-          onClick={() =>
-            background.start({
-              message: <Text data-testid="bg-msg">Custom BG</Text>,
-            })
-          }
-        >
-          Start
-        </button>
+        <>
+          <button
+            data-testid="start"
+            onClick={() =>
+              background.start({
+                message: <Text data-testid="bg-msg">Custom BG</Text>,
+              })
+            }
+          >
+            Start
+          </button>
+          <button data-testid="finish" onClick={() => background.finish()}>
+            Finish
+          </button>
+        </>
       )
     }
 
@@ -303,6 +367,8 @@ describe("useLoading", () => {
     await waitFor(() => {
       expect(screen.getByTestId("bg-msg")).toBeInTheDocument()
     })
+
+    await user.click(screen.getByTestId("finish"))
   })
 
   test("update changes loading message", async () => {
@@ -386,12 +452,17 @@ describe("useLoading", () => {
       const { screen: screenLoading } = useLoading()
 
       return (
-        <button
-          data-testid="start"
-          onClick={() => screenLoading.start({ loadingScheme: "dots" })}
-        >
-          Start
-        </button>
+        <>
+          <button
+            data-testid="start"
+            onClick={() => screenLoading.start({ loadingScheme: "dots" })}
+          >
+            Start
+          </button>
+          <button data-testid="finish" onClick={() => screenLoading.finish()}>
+            Finish
+          </button>
+        </>
       )
     }
 
@@ -402,6 +473,8 @@ describe("useLoading", () => {
     await waitFor(() => {
       expect(document.querySelector("div[data-loading]")).toBeInTheDocument()
     })
+
+    await user.click(screen.getByTestId("finish"))
   })
 
   test("start with duration auto-finishes", async () => {

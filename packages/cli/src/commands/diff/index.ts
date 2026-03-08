@@ -32,6 +32,7 @@ interface Options {
   cwd: string
   detail: boolean
   sequential: boolean
+  tag?: string
 }
 
 export const diff = new Command("diff")
@@ -41,9 +42,10 @@ export const diff = new Command("diff")
   .option("-c, --config <path>", "path to the config file", CONFIG_FILE_NAME)
   .option("-s, --sequential", "run tasks sequentially.", false)
   .option("-d, --detail", "show detailed changes", false)
+  .option("-t, --tag <name>", "tag for the registries (e.g. dev, next)")
   .action(async function (
     targetName: string | undefined,
-    { config: configPath, cwd, detail, sequential }: Options,
+    { config: configPath, cwd, detail, sequential, tag }: Options,
   ) {
     const spinner = ora()
 
@@ -126,7 +128,7 @@ export const diff = new Command("diff")
       const { registryMap } = await getRegistriesAndFiles(
         componentNames,
         config,
-        { concurrent: !sequential, index, theme },
+        { concurrent: !sequential, index, tag, theme },
       )
       const { changeMap, dependencyMap } = await getDiff(
         generatedNames,

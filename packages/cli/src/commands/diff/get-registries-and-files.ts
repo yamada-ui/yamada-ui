@@ -28,6 +28,7 @@ export interface RegistryMap {
 export interface GetComponentDataOptions {
   concurrent?: boolean
   index?: boolean
+  tag?: string
   theme?: boolean
 }
 
@@ -37,6 +38,7 @@ export async function getRegistriesAndFiles(
   {
     concurrent = true,
     index = false,
+    tag,
     theme = false,
   }: GetComponentDataOptions = {},
 ) {
@@ -67,7 +69,7 @@ export async function getRegistriesAndFiles(
       },
       {
         task: async (_, task) => {
-          registryMap.remote.index = await fetchRegistry("index")
+          registryMap.remote.index = await fetchRegistry("index", { tag })
 
           task.title = `Fetched ${c.cyan("index")} registry`
         },
@@ -95,7 +97,7 @@ export async function getRegistriesAndFiles(
       },
       {
         task: async (_, task) => {
-          registryMap.remote.theme = await fetchRegistry("theme")
+          registryMap.remote.theme = await fetchRegistry("theme", { tag })
           task.title = `Fetched ${c.cyan("theme")} registry`
         },
         title: `Fetching ${c.cyan("theme")} registry`,
@@ -124,8 +126,10 @@ export async function getRegistriesAndFiles(
             },
             {
               task: async (_, task) => {
-                registryMap.remote[componentName] =
-                  await fetchRegistry(componentName)
+                registryMap.remote[componentName] = await fetchRegistry(
+                  componentName,
+                  { tag },
+                )
 
                 task.title = `Fetched ${c.cyan(componentName)} registry`
               },

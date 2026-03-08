@@ -13,7 +13,13 @@ import { HttpsProxyAgent } from "https-proxy-agent"
 import fetch from "node-fetch"
 import path from "path"
 import c from "picocolors"
-import { REGISTRY_FILE_NAME, REGISTRY_URL, SECTION_NAMES } from "../constant"
+import {
+  PACKAGE_NAME,
+  REGISTRY_FILE_NAME,
+  REGISTRY_URL,
+  REGISTRY_VERSION,
+  SECTION_NAMES,
+} from "../constant"
 import { writeFileSafe } from "./fs"
 import { lintText } from "./lint"
 import { formatText } from "./prettier"
@@ -30,22 +36,40 @@ const agent = process.env.https_proxy
 
 const registryStore = new Map<string, Registry>()
 
-function getRegistryUrl(name: string) {
+function getRegistryUrl(name: string, tag = "") {
   if (name === "index") {
-    return path.posix.join(REGISTRY_URL, "index.json")
+    return path.posix.join(REGISTRY_URL, tag, REGISTRY_VERSION, "index.json")
   } else if (name === "theme") {
-    return path.posix.join(REGISTRY_URL, "theme.json")
+    return path.posix.join(REGISTRY_URL, tag, REGISTRY_VERSION, "theme.json")
   } else if (name.startsWith("use-")) {
-    return path.posix.join(REGISTRY_URL, "hooks", `${name}.json`)
+    return path.posix.join(
+      REGISTRY_URL,
+      tag,
+      REGISTRY_VERSION,
+      "hooks",
+      `${name}.json`,
+    )
   } else if (name.endsWith("-provider")) {
-    return path.posix.join(REGISTRY_URL, "providers", `${name}.json`)
+    return path.posix.join(
+      REGISTRY_URL,
+      tag,
+      REGISTRY_VERSION,
+      "providers",
+      `${name}.json`,
+    )
   } else {
-    return path.posix.join(REGISTRY_URL, "components", `${name}.json`)
+    return path.posix.join(
+      REGISTRY_URL,
+      tag,
+      REGISTRY_VERSION,
+      "components",
+      `${name}.json`,
+    )
   }
 }
 
-export async function fetchRegistryNames(): Promise<string[]> {
-  const { sources } = await fetchRegistry("index")
+export async function fetchRegistryNames(tag?: string): Promise<string[]> {
+  const { sources } = await fetchRegistry("index", { tag })
   const content = sources[0]!.content!
 
   const regex = /"@yamada-ui\/react\/([^"/]+)(?:\/([^"/]+))?"/g
@@ -64,13 +88,14 @@ export async function fetchRegistryNames(): Promise<string[]> {
 
 export interface FetchRegistryOptions {
   cache?: boolean
+  tag?: string
 }
 
 export async function fetchRegistry(
   name: string,
-  { cache = true }: FetchRegistryOptions = {},
+  { cache = true, tag }: FetchRegistryOptions = {},
 ): Promise<Registry> {
-  const url = getRegistryUrl(name)
+  const url = getRegistryUrl(name, tag)
 
   if (cache && registryStore.has(url)) return registryStore.get(url)!
 
@@ -111,6 +136,7 @@ export interface FetchRegistriesOptions extends FetchRegistryOptions {
   dependencies?: boolean
   dependents?: boolean
   omit?: string[]
+  tag?: string
 }
 
 export async function fetchRegistries(
@@ -121,6 +147,7 @@ export async function fetchRegistries(
     dependencies: withDependencies = true,
     dependents: withDependents = true,
     omit = [],
+    tag,
   }: FetchRegistriesOptions = {},
 ): Promise<Registries> {
   const results: { [key: string]: Promise<Registry> | Registry } = {}
@@ -130,8 +157,7 @@ export async function fetchRegistries(
       names.map(async (name) => {
         if (results[name] || omit.includes(name)) return
 
-        results[name] = fetchRegistry(name, { cache })
-
+        results[name] = fetchRegistry(name, { cache, tag })
         results[name] = await results[name]
 
         const { dependencies, dependents, section } = results[name]
@@ -248,7 +274,7 @@ export function transformContent(
         if (generated) {
           replaceValue = `from "${path.join("..", name)}"`
         } else {
-          replaceValue = `from "@yamada-ui/react/${targetSection}/${name}"`
+          replaceValue = `from "${PACKAGE_NAME}/${targetSection}/${name}"`
         }
       } else {
         const omittedValue = value.replace(/(\.\.\/|\.\/)/g, "")
@@ -266,7 +292,7 @@ export function transformContent(
 
           replaceValue = `from "${position}${omittedTargetPath}/${name}"`
         } else {
-          replaceValue = `from "@yamada-ui/react/${section}/${name}"`
+          replaceValue = `from "${PACKAGE_NAME}/${section}/${name}"`
         }
       }
     }
@@ -347,7 +373,7 @@ export function transformIndex(
 
       if (!section) return
 
-      replaceValue = `from "@yamada-ui/react/${section}/${name}"`
+      replaceValue = `from "${PACKAGE_NAME}/${section}/${name}"`
     }
 
     content = content.replace(searchValue, replaceValue)

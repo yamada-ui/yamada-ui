@@ -16,6 +16,7 @@ import {
   DEFAULT_PACKAGE_JSON_EXPORTS,
   DEFAULT_PACKAGE_NAME,
   DEFAULT_PATH,
+  PACKAGE_NAME,
   REGISTRY_FILE_NAME,
   REQUIRED_DEPENDENCIES,
   REQUIRED_DEV_DEPENDENCIES,
@@ -29,6 +30,7 @@ import {
   installDependencies,
   isTsx,
   packageAddArgs,
+  replaceVersion,
   splitVersion,
   timer,
   transformExtension,
@@ -45,6 +47,7 @@ interface Options {
   format?: boolean
   js?: boolean
   lint?: boolean
+  tag?: string
 }
 
 export const theme = new Command("theme")
@@ -56,9 +59,10 @@ export const theme = new Command("theme")
   .option("-j, --js", "use js instead of ts")
   .option("-f, --format", "format the output files.")
   .option("-l, --lint", "lint the output files.")
+  .option("-t, --tag <name>", "tag for the registries (e.g. dev, next)")
   .action(async function (
     themePath: string | undefined,
-    { config: configPath, cwd, format, js, lint, overwrite }: Options,
+    { config: configPath, cwd, format, js, lint, overwrite, tag }: Options,
   ) {
     const spinner = ora()
 
@@ -151,7 +155,7 @@ export const theme = new Command("theme")
 
       spinner.start("Fetching registry")
 
-      const registry = await fetchRegistry("theme")
+      const registry = await fetchRegistry("theme", { tag })
 
       spinner.succeed("Fetched registry")
 
@@ -235,12 +239,12 @@ export const theme = new Command("theme")
               ...DEFAULT_PACKAGE_JSON,
               dependencies: Object.fromEntries(
                 REQUIRED_DEPENDENCIES.theme.map((dependency) =>
-                  splitVersion(dependency),
+                  splitVersion(replaceVersion(dependency, PACKAGE_NAME, tag)),
                 ),
               ),
               devDependencies: Object.fromEntries(
                 REQUIRED_DEV_DEPENDENCIES.theme.map((dependency) =>
-                  splitVersion(dependency),
+                  splitVersion(replaceVersion(dependency, PACKAGE_NAME, tag)),
                 ),
               ),
               exports,

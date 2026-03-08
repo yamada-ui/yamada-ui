@@ -1,0 +1,1459 @@
+{
+  "accordion": {
+    "dependencies": {
+      "components": ["native-accordion", "collapse", "motion", "icon"],
+      "hooks": ["use-descendants"]
+    }
+  },
+  "airy": {
+    "dependencies": {
+      "components": ["motion"],
+      "hooks": []
+    }
+  },
+  "alert": {
+    "dependencies": {
+      "components": ["icon", "loading", "status"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["snacks"],
+      "hooks": []
+    }
+  },
+  "alpha-slider": {
+    "dependencies": {
+      "components": ["color-swatch", "hue-slider"],
+      "hooks": ["use-value"]
+    },
+    "dependents": {
+      "components": ["color-selector"],
+      "hooks": []
+    }
+  },
+  "aspect-ratio": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "autocomplete": {
+    "dependencies": {
+      "components": ["select", "input", "popover", "group", "icon", "field"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["date-picker"],
+      "hooks": []
+    }
+  },
+  "avatar": {
+    "dependencies": {
+      "components": ["icon"],
+      "hooks": []
+    }
+  },
+  "badge": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "bleed": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "blockquote": {
+    "dependencies": {
+      "components": ["icon"],
+      "hooks": []
+    }
+  },
+  "box": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "breadcrumb": {
+    "dependencies": {
+      "components": ["icon"],
+      "hooks": []
+    }
+  },
+  "button": {
+    "dependencies": {
+      "components": ["group", "loading", "ripple"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": [
+        "calendar",
+        "carousel",
+        "close-button",
+        "drawer",
+        "file-button",
+        "form",
+        "modal",
+        "number-input",
+        "pagination",
+        "password-input",
+        "tip",
+        "toggle"
+      ],
+      "hooks": []
+    }
+  },
+  "calendar": {
+    "dependencies": {
+      "components": ["button", "field", "icon", "select", "format"],
+      "hooks": ["use-descendants"]
+    },
+    "dependents": {
+      "components": ["date-picker"],
+      "hooks": []
+    }
+  },
+  "card": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "carousel": {
+    "dependencies": {
+      "components": ["button", "icon"],
+      "hooks": ["use-boolean"]
+    }
+  },
+  "center": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["loading"],
+      "hooks": []
+    }
+  },
+  "chart": {
+    "dependencies": {
+      "components": ["button", "tooltip"],
+      "hooks": []
+    }
+  },
+  "checkbox-card": {
+    "dependencies": {
+      "components": ["checkbox", "group", "input", "icon"],
+      "hooks": []
+    }
+  },
+  "checkbox": {
+    "dependencies": {
+      "components": ["group", "input", "icon", "field"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["checkbox-card", "table"],
+      "hooks": []
+    }
+  },
+  "circle-progress": {
+    "dependencies": {
+      "components": ["progress"],
+      "hooks": []
+    }
+  },
+  "client-only": {
+    "dependencies": {
+      "components": ["show"],
+      "hooks": []
+    }
+  },
+  "close-button": {
+    "dependencies": {
+      "components": ["button", "icon"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["drawer", "modal", "snacks"],
+      "hooks": []
+    }
+  },
+  "code": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "collapse": {
+    "dependencies": {
+      "components": ["motion"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["accordion"],
+      "hooks": []
+    }
+  },
+  "color-picker": {
+    "dependencies": {
+      "components": [
+        "date-picker",
+        "native-select",
+        "color-swatch",
+        "input",
+        "popover",
+        "color-selector",
+        "group",
+        "icon",
+        "field"
+      ],
+      "hooks": ["use-eye-dropper"]
+    }
+  },
+  "color-selector": {
+    "dependencies": {
+      "components": [
+        "native-select",
+        "color-swatch",
+        "alpha-slider",
+        "hue-slider",
+        "icon",
+        "saturation-slider",
+        "slider"
+      ],
+      "hooks": ["use-eye-dropper"]
+    },
+    "dependents": {
+      "components": ["color-picker"],
+      "hooks": []
+    }
+  },
+  "color-swatch": {
+    "dependencies": {
+      "components": ["grid"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["alpha-slider", "color-picker", "color-selector"],
+      "hooks": []
+    }
+  },
+  "container": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "data-list": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "date-picker": {
+    "dependencies": {
+      "components": [
+        "autocomplete",
+        "native-select",
+        "input",
+        "popover",
+        "calendar",
+        "group",
+        "icon",
+        "field",
+        "format"
+      ],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["color-picker"],
+      "hooks": []
+    }
+  },
+  "drawer": {
+    "dependencies": {
+      "components": [
+        "modal",
+        "button",
+        "close-button",
+        "focus-lock",
+        "motion",
+        "portal",
+        "slide",
+        "fade"
+      ],
+      "hooks": ["use-value"]
+    }
+  },
+  "dropzone": {
+    "dependencies": {
+      "components": ["fade", "input", "loading", "portal", "field"],
+      "hooks": []
+    }
+  },
+  "editable": {
+    "dependencies": {
+      "components": ["input", "field"],
+      "hooks": []
+    }
+  },
+  "em": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "empty-state": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "fade-scale": {
+    "dependencies": {
+      "components": ["motion"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["popover"],
+      "hooks": []
+    }
+  },
+  "fade": {
+    "dependencies": {
+      "components": ["motion"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["drawer", "dropzone", "modal"],
+      "hooks": []
+    }
+  },
+  "field": {
+    "dependencies": {
+      "components": ["fieldset", "form"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": [
+        "autocomplete",
+        "calendar",
+        "checkbox",
+        "color-picker",
+        "date-picker",
+        "dropzone",
+        "editable",
+        "fieldset",
+        "file-button",
+        "file-input",
+        "input",
+        "native-select",
+        "number-input",
+        "password-input",
+        "pin-input",
+        "radio",
+        "rating",
+        "saturation-slider",
+        "segmented-control",
+        "select",
+        "slider",
+        "switch",
+        "textarea",
+        "toggle"
+      ],
+      "hooks": []
+    }
+  },
+  "fieldset": {
+    "dependencies": {
+      "components": ["field", "form"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["field", "form"],
+      "hooks": []
+    }
+  },
+  "file-button": {
+    "dependencies": {
+      "components": ["button", "input", "portal", "field", "file-input"],
+      "hooks": []
+    }
+  },
+  "file-input": {
+    "dependencies": {
+      "components": ["input", "field", "portal"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["file-button"],
+      "hooks": []
+    }
+  },
+  "flex": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["group", "wrap"],
+      "hooks": []
+    }
+  },
+  "flip": {
+    "dependencies": {
+      "components": ["motion"],
+      "hooks": []
+    }
+  },
+  "float": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["indicator"],
+      "hooks": []
+    }
+  },
+  "focus-lock": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["drawer", "modal"],
+      "hooks": []
+    }
+  },
+  "for": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "form": {
+    "dependencies": {
+      "components": ["fieldset", "button"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["field", "fieldset"],
+      "hooks": []
+    }
+  },
+  "format": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["calendar", "date-picker"],
+      "hooks": []
+    }
+  },
+  "grid": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["color-swatch", "simple-grid"],
+      "hooks": []
+    }
+  },
+  "group": {
+    "dependencies": {
+      "components": ["flex"],
+      "hooks": ["use-value"]
+    },
+    "dependents": {
+      "components": [
+        "autocomplete",
+        "button",
+        "checkbox",
+        "checkbox-card",
+        "color-picker",
+        "date-picker",
+        "input",
+        "native-select",
+        "number-input",
+        "password-input",
+        "pin-input",
+        "radio",
+        "radio-card",
+        "select",
+        "toggle"
+      ],
+      "hooks": []
+    }
+  },
+  "heading": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "highlight": {
+    "dependencies": {
+      "components": ["mark", "text"],
+      "hooks": []
+    }
+  },
+  "hue-slider": {
+    "dependencies": {
+      "components": ["slider"],
+      "hooks": ["use-value"]
+    },
+    "dependents": {
+      "components": ["alpha-slider", "color-selector", "saturation-slider"],
+      "hooks": []
+    }
+  },
+  "icon": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": [
+        "accordion",
+        "alert",
+        "autocomplete",
+        "avatar",
+        "blockquote",
+        "breadcrumb",
+        "calendar",
+        "carousel",
+        "checkbox",
+        "checkbox-card",
+        "close-button",
+        "color-picker",
+        "color-selector",
+        "date-picker",
+        "loading",
+        "menu",
+        "native-accordion",
+        "native-select",
+        "number-input",
+        "pagination",
+        "password-input",
+        "rating",
+        "reorder",
+        "select",
+        "stat",
+        "steps",
+        "table",
+        "tag",
+        "tip"
+      ],
+      "hooks": []
+    }
+  },
+  "image": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["picture"],
+      "hooks": []
+    }
+  },
+  "indicator": {
+    "dependencies": {
+      "components": ["float"],
+      "hooks": []
+    }
+  },
+  "infinite-scroll-area": {
+    "dependencies": {
+      "components": [],
+      "hooks": ["use-value"]
+    }
+  },
+  "input": {
+    "dependencies": {
+      "components": ["field", "group"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": [
+        "autocomplete",
+        "checkbox",
+        "checkbox-card",
+        "color-picker",
+        "date-picker",
+        "dropzone",
+        "editable",
+        "file-button",
+        "file-input",
+        "native-select",
+        "number-input",
+        "password-input",
+        "pin-input",
+        "radio",
+        "radio-card",
+        "select",
+        "textarea",
+        "toggle"
+      ],
+      "hooks": []
+    }
+  },
+  "kbd": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "link-box": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "link": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "list": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "loading": {
+    "dependencies": {
+      "components": ["icon", "motion", "text", "portal", "center"],
+      "hooks": ["use-timeout"]
+    },
+    "dependents": {
+      "components": ["alert", "button", "dropzone"],
+      "hooks": ["use-async-callback"]
+    }
+  },
+  "mark": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["highlight"],
+      "hooks": []
+    }
+  },
+  "menu": {
+    "dependencies": {
+      "components": ["popover", "icon"],
+      "hooks": ["use-descendants", "use-disclosure"]
+    },
+    "dependents": {
+      "components": ["select"],
+      "hooks": []
+    }
+  },
+  "modal": {
+    "dependencies": {
+      "components": [
+        "button",
+        "close-button",
+        "focus-lock",
+        "motion",
+        "popover",
+        "portal",
+        "fade"
+      ],
+      "hooks": ["use-disclosure"]
+    },
+    "dependents": {
+      "components": ["drawer"],
+      "hooks": []
+    }
+  },
+  "motion": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": [
+        "accordion",
+        "airy",
+        "collapse",
+        "drawer",
+        "fade",
+        "fade-scale",
+        "flip",
+        "loading",
+        "modal",
+        "popover",
+        "reorder",
+        "ripple",
+        "rotate",
+        "segmented-control",
+        "slide",
+        "slide-fade",
+        "snacks",
+        "tooltip"
+      ],
+      "hooks": []
+    }
+  },
+  "native-accordion": {
+    "dependencies": {
+      "components": ["icon"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["accordion"],
+      "hooks": []
+    }
+  },
+  "native-popover": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["popover"],
+      "hooks": []
+    }
+  },
+  "native-select": {
+    "dependencies": {
+      "components": ["input", "field", "group", "icon"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["color-picker", "color-selector", "date-picker", "select"],
+      "hooks": []
+    }
+  },
+  "native-table": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["table"],
+      "hooks": []
+    }
+  },
+  "notice": {
+    "dependencies": {
+      "components": ["portal", "close-button", "alert", "status"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "number-input": {
+    "dependencies": {
+      "components": ["button", "input", "group", "icon", "field"],
+      "hooks": ["use-counter", "use-interval"]
+    }
+  },
+  "pagination": {
+    "dependencies": {
+      "components": ["button", "icon"],
+      "hooks": []
+    }
+  },
+  "password-input": {
+    "dependencies": {
+      "components": ["button", "input", "group", "icon", "field"],
+      "hooks": []
+    }
+  },
+  "picture": {
+    "dependencies": {
+      "components": ["image"],
+      "hooks": []
+    }
+  },
+  "pin-input": {
+    "dependencies": {
+      "components": ["input", "group", "field"],
+      "hooks": ["use-descendants"]
+    }
+  },
+  "popover": {
+    "dependencies": {
+      "components": [
+        "native-popover",
+        "motion",
+        "portal",
+        "fade-scale",
+        "slide-fade"
+      ],
+      "hooks": ["use-disclosure", "use-outside-click"]
+    },
+    "dependents": {
+      "components": [
+        "autocomplete",
+        "color-picker",
+        "date-picker",
+        "menu",
+        "modal",
+        "select",
+        "tooltip"
+      ],
+      "hooks": []
+    }
+  },
+  "portal": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": [
+        "drawer",
+        "dropzone",
+        "file-button",
+        "file-input",
+        "loading",
+        "modal",
+        "popover",
+        "toggle",
+        "tooltip"
+      ],
+      "hooks": []
+    }
+  },
+  "progress": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["circle-progress"],
+      "hooks": []
+    }
+  },
+  "qr-code": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "radio-card": {
+    "dependencies": {
+      "components": ["group", "input", "radio"],
+      "hooks": []
+    }
+  },
+  "radio": {
+    "dependencies": {
+      "components": ["group", "input", "field"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["radio-card"],
+      "hooks": []
+    }
+  },
+  "rating": {
+    "dependencies": {
+      "components": ["icon", "field"],
+      "hooks": []
+    }
+  },
+  "reorder": {
+    "dependencies": {
+      "components": ["motion", "icon"],
+      "hooks": ["use-value"]
+    }
+  },
+  "resizable": {
+    "dependencies": {
+      "components": [],
+      "hooks": ["use-value"]
+    }
+  },
+  "ripple": {
+    "dependencies": {
+      "components": ["motion"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["button"],
+      "hooks": []
+    }
+  },
+  "rotate": {
+    "dependencies": {
+      "components": ["motion"],
+      "hooks": []
+    }
+  },
+  "saturation-slider": {
+    "dependencies": {
+      "components": ["hue-slider", "slider", "field"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["color-selector"],
+      "hooks": []
+    }
+  },
+  "scroll-area": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "segmented-control": {
+    "dependencies": {
+      "components": ["motion", "field"],
+      "hooks": ["use-value", "use-descendants"]
+    }
+  },
+  "select": {
+    "dependencies": {
+      "components": [
+        "menu",
+        "native-select",
+        "input",
+        "popover",
+        "group",
+        "icon",
+        "field"
+      ],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["autocomplete", "calendar"],
+      "hooks": []
+    }
+  },
+  "separator": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "show": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["client-only"],
+      "hooks": []
+    }
+  },
+  "simple-grid": {
+    "dependencies": {
+      "components": ["grid"],
+      "hooks": []
+    }
+  },
+  "skeleton": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "slide-fade": {
+    "dependencies": {
+      "components": ["motion"],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["popover"],
+      "hooks": []
+    }
+  },
+  "slide": {
+    "dependencies": {
+      "components": ["motion"],
+      "hooks": ["use-value"]
+    },
+    "dependents": {
+      "components": ["drawer"],
+      "hooks": []
+    }
+  },
+  "slider": {
+    "dependencies": {
+      "components": ["field"],
+      "hooks": ["use-value"]
+    },
+    "dependents": {
+      "components": ["color-selector", "hue-slider", "saturation-slider"],
+      "hooks": []
+    }
+  },
+  "slot": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "snacks": {
+    "dependencies": {
+      "components": ["close-button", "motion", "alert"],
+      "hooks": ["use-timeout"]
+    }
+  },
+  "stack": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "stat": {
+    "dependencies": {
+      "components": ["icon"],
+      "hooks": []
+    }
+  },
+  "status": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["alert", "tip"],
+      "hooks": []
+    }
+  },
+  "steps": {
+    "dependencies": {
+      "components": ["icon"],
+      "hooks": ["use-value", "use-descendants"]
+    }
+  },
+  "switch": {
+    "dependencies": {
+      "components": ["field"],
+      "hooks": []
+    }
+  },
+  "table": {
+    "dependencies": {
+      "components": ["checkbox", "icon", "native-table"],
+      "hooks": []
+    }
+  },
+  "tabs": {
+    "dependencies": {
+      "components": [],
+      "hooks": ["use-value", "use-descendants"]
+    }
+  },
+  "tag": {
+    "dependencies": {
+      "components": ["icon"],
+      "hooks": []
+    }
+  },
+  "text": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["highlight", "loading"],
+      "hooks": []
+    }
+  },
+  "textarea": {
+    "dependencies": {
+      "components": ["input", "field"],
+      "hooks": []
+    }
+  },
+  "timeline": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "tip": {
+    "dependencies": {
+      "components": ["button", "status", "tooltip", "icon"],
+      "hooks": []
+    }
+  },
+  "toggle": {
+    "dependencies": {
+      "components": ["group", "button", "input", "portal", "field"],
+      "hooks": []
+    }
+  },
+  "tooltip": {
+    "dependencies": {
+      "components": ["motion", "popover", "portal"],
+      "hooks": ["use-disclosure", "use-outside-click"]
+    },
+    "dependents": {
+      "components": ["tip"],
+      "hooks": []
+    }
+  },
+  "visually-hidden": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "wrap": {
+    "dependencies": {
+      "components": ["flex"],
+      "hooks": []
+    }
+  },
+  "use-animation": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "use-async-callback": {
+    "dependencies": {
+      "components": ["loading"],
+      "hooks": ["use-processing"]
+    }
+  },
+  "use-async": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "use-boolean": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["carousel"],
+      "hooks": ["use-processing"]
+    }
+  },
+  "use-breakpoint": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": [],
+      "hooks": ["use-value"]
+    }
+  },
+  "use-clickable": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["file-input", "tag"],
+      "hooks": []
+    }
+  },
+  "use-clipboard": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "use-combobox": {
+    "dependencies": {
+      "components": ["popover"],
+      "hooks": ["use-descendants", "use-disclosure"]
+    },
+    "dependents": {
+      "components": ["autocomplete", "color-picker", "date-picker", "select"],
+      "hooks": []
+    }
+  },
+  "use-controllable-state": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": [
+        "accordion",
+        "airy",
+        "autocomplete",
+        "calendar",
+        "carousel",
+        "checkbox",
+        "color-picker",
+        "color-selector",
+        "date-picker",
+        "editable",
+        "file-input",
+        "flip",
+        "menu",
+        "pagination",
+        "password-input",
+        "pin-input",
+        "radio",
+        "rating",
+        "rotate",
+        "saturation-slider",
+        "segmented-control",
+        "select",
+        "slider",
+        "steps",
+        "switch",
+        "table",
+        "tabs",
+        "toggle"
+      ],
+      "hooks": []
+    }
+  },
+  "use-counter": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["number-input"],
+      "hooks": []
+    }
+  },
+  "use-descendants": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": [
+        "accordion",
+        "calendar",
+        "menu",
+        "pin-input",
+        "segmented-control",
+        "steps",
+        "tabs"
+      ],
+      "hooks": []
+    }
+  },
+  "use-disclosure": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["menu", "modal", "popover", "tooltip"],
+      "hooks": []
+    }
+  },
+  "use-event-listener": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["number-input", "popover", "tooltip"],
+      "hooks": []
+    }
+  },
+  "use-eye-dropper": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["color-picker", "color-selector"],
+      "hooks": []
+    }
+  },
+  "use-field-sizing": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["date-picker"],
+      "hooks": []
+    }
+  },
+  "use-focus": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["editable", "popover"],
+      "hooks": []
+    }
+  },
+  "use-hover": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "use-idle": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "use-interval": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["number-input"],
+      "hooks": []
+    }
+  },
+  "use-lazy-mount": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["steps", "tabs"],
+      "hooks": []
+    }
+  },
+  "use-local-storage": {
+    "dependencies": {
+      "components": [],
+      "hooks": ["use-window-event"]
+    }
+  },
+  "use-media-query": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "use-mounted": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["client-only"],
+      "hooks": ["use-async"]
+    }
+  },
+  "use-online": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "use-os": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "use-outside-click": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["popover", "tooltip"],
+      "hooks": []
+    }
+  },
+  "use-pan-event": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["saturation-slider", "slider"],
+      "hooks": []
+    }
+  },
+  "use-popper": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["native-popover", "popover", "tooltip"],
+      "hooks": []
+    }
+  },
+  "use-previous": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "use-processing": {
+    "dependencies": {
+      "components": [],
+      "hooks": ["use-boolean"]
+    },
+    "dependents": {
+      "components": [],
+      "hooks": ["use-async-callback"]
+    }
+  },
+  "use-resize-observer": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    }
+  },
+  "use-timeout": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": ["loading", "snacks"],
+      "hooks": []
+    }
+  },
+  "use-value": {
+    "dependencies": {
+      "components": [],
+      "hooks": ["use-breakpoint"]
+    },
+    "dependents": {
+      "components": [
+        "alpha-slider",
+        "drawer",
+        "group",
+        "hue-slider",
+        "infinite-scroll-area",
+        "reorder",
+        "resizable",
+        "segmented-control",
+        "slide",
+        "slider",
+        "steps",
+        "tabs"
+      ],
+      "hooks": []
+    }
+  },
+  "use-window-event": {
+    "dependencies": {
+      "components": [],
+      "hooks": []
+    },
+    "dependents": {
+      "components": [],
+      "hooks": ["use-local-storage"]
+    }
+  }
+}

@@ -23,7 +23,8 @@
     "gen:theme": "tsx scripts/generate/theme",
     "gen:conditions": "tsx scripts/generate/conditions",
     "gen:changelog": "tsx scripts/generate/changelog",
-    "gen:contributors": "tsx scripts/generate/contributors"
+    "gen:contributors": "tsx scripts/generate/contributors",
+    "gen:relations": "tsx scripts/generate/relations"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",

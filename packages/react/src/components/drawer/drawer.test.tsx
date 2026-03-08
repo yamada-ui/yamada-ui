@@ -1,7 +1,9 @@
 import type { FC } from "react"
-import { a11y, render, screen } from "#test"
+import { a11y, render, renderHook, screen } from "#test"
+import { act } from "@testing-library/react"
 import { Button } from "../button"
 import { Drawer } from "./"
+import { useDrawer } from "./use-drawer"
 
 const TestComponent: FC<Drawer.RootProps> = (props) => {
   return (
@@ -335,6 +337,235 @@ describe("<Drawer />", () => {
     )
 
     await user.click(screen.getByText("OK"))
+    expect(onClose).toHaveBeenCalledWith(undefined)
+  })
+})
+
+describe("useDrawer", () => {
+  const mockEvent = {} as MouseEvent
+
+  test("calls onClose when dragged up with sufficient velocity for block-start", () => {
+    const onClose = vi.fn()
+    const { result } = renderHook(() =>
+      useDrawer({
+        closeOnDrag: true,
+        open: true,
+        placement: "block-start",
+        onClose,
+      }),
+    )
+
+    const contentProps = result.current.getContentProps()
+
+    act(() => {
+      contentProps.onDragEnd?.(mockEvent, {
+        delta: { x: 0, y: 0 },
+        offset: { x: 0, y: 0 },
+        point: { x: 0, y: 0 },
+        velocity: { x: 0, y: -200 },
+      })
+    })
+
+    expect(onClose).toHaveBeenCalledWith(undefined)
+  })
+
+  test("calls onClose when dragged up with sufficient offset for block-start", () => {
+    const onClose = vi.fn()
+    const { result } = renderHook(() =>
+      useDrawer({
+        closeOnDrag: true,
+        open: true,
+        placement: "block-start",
+        onClose,
+      }),
+    )
+
+    const contentProps = result.current.getContentProps()
+
+    act(() => {
+      contentProps.onDragEnd?.(mockEvent, {
+        delta: { x: 0, y: 0 },
+        offset: { x: 0, y: -100 },
+        point: { x: 0, y: 0 },
+        velocity: { x: 0, y: 0 },
+      })
+    })
+
+    expect(onClose).toHaveBeenCalledWith(undefined)
+  })
+
+  test("does not call onClose when drag is insufficient for block-start", () => {
+    const onClose = vi.fn()
+    const { result } = renderHook(() =>
+      useDrawer({
+        closeOnDrag: true,
+        open: true,
+        placement: "block-start",
+        onClose,
+      }),
+    )
+
+    const contentProps = result.current.getContentProps()
+
+    act(() => {
+      contentProps.onDragEnd?.(mockEvent, {
+        delta: { x: 0, y: 0 },
+        offset: { x: 0, y: -10 },
+        point: { x: 0, y: 0 },
+        velocity: { x: 0, y: -10 },
+      })
+    })
+
+    expect(onClose).not.toHaveBeenCalledWith(undefined)
+  })
+
+  test("calls onClose when dragged down with sufficient velocity for block-end", () => {
+    const onClose = vi.fn()
+    const { result } = renderHook(() =>
+      useDrawer({
+        closeOnDrag: true,
+        open: true,
+        placement: "block-end",
+        onClose,
+      }),
+    )
+
+    const contentProps = result.current.getContentProps()
+
+    act(() => {
+      contentProps.onDragEnd?.(mockEvent, {
+        delta: { x: 0, y: 0 },
+        offset: { x: 0, y: 0 },
+        point: { x: 0, y: 0 },
+        velocity: { x: 0, y: 200 },
+      })
+    })
+
+    expect(onClose).toHaveBeenCalledWith(undefined)
+  })
+
+  test("calls onClose when dragged down with sufficient offset for block-end", () => {
+    const onClose = vi.fn()
+    const { result } = renderHook(() =>
+      useDrawer({
+        closeOnDrag: true,
+        open: true,
+        placement: "block-end",
+        onClose,
+      }),
+    )
+
+    const contentProps = result.current.getContentProps()
+
+    act(() => {
+      contentProps.onDragEnd?.(mockEvent, {
+        delta: { x: 0, y: 0 },
+        offset: { x: 0, y: 100 },
+        point: { x: 0, y: 0 },
+        velocity: { x: 0, y: 0 },
+      })
+    })
+
+    expect(onClose).toHaveBeenCalledWith(undefined)
+  })
+
+  test("calls onClose when dragged left with sufficient velocity for inline-start", () => {
+    const onClose = vi.fn()
+    const { result } = renderHook(() =>
+      useDrawer({
+        closeOnDrag: true,
+        open: true,
+        placement: "inline-start",
+        onClose,
+      }),
+    )
+
+    const contentProps = result.current.getContentProps()
+
+    act(() => {
+      contentProps.onDragEnd?.(mockEvent, {
+        delta: { x: 0, y: 0 },
+        offset: { x: 0, y: 0 },
+        point: { x: 0, y: 0 },
+        velocity: { x: -200, y: 0 },
+      })
+    })
+
+    expect(onClose).toHaveBeenCalledWith(undefined)
+  })
+
+  test("calls onClose when dragged left with sufficient offset for inline-start", () => {
+    const onClose = vi.fn()
+    const { result } = renderHook(() =>
+      useDrawer({
+        closeOnDrag: true,
+        open: true,
+        placement: "inline-start",
+        onClose,
+      }),
+    )
+
+    const contentProps = result.current.getContentProps()
+
+    act(() => {
+      contentProps.onDragEnd?.(mockEvent, {
+        delta: { x: 0, y: 0 },
+        offset: { x: -100, y: 0 },
+        point: { x: 0, y: 0 },
+        velocity: { x: 0, y: 0 },
+      })
+    })
+
+    expect(onClose).toHaveBeenCalledWith(undefined)
+  })
+
+  test("calls onClose when dragged right with sufficient velocity for inline-end", () => {
+    const onClose = vi.fn()
+    const { result } = renderHook(() =>
+      useDrawer({
+        closeOnDrag: true,
+        open: true,
+        placement: "inline-end",
+        onClose,
+      }),
+    )
+
+    const contentProps = result.current.getContentProps()
+
+    act(() => {
+      contentProps.onDragEnd?.(mockEvent, {
+        delta: { x: 0, y: 0 },
+        offset: { x: 0, y: 0 },
+        point: { x: 0, y: 0 },
+        velocity: { x: 200, y: 0 },
+      })
+    })
+
+    expect(onClose).toHaveBeenCalledWith(undefined)
+  })
+
+  test("calls onClose when dragged right with sufficient offset for inline-end", () => {
+    const onClose = vi.fn()
+    const { result } = renderHook(() =>
+      useDrawer({
+        closeOnDrag: true,
+        open: true,
+        placement: "inline-end",
+        onClose,
+      }),
+    )
+
+    const contentProps = result.current.getContentProps()
+
+    act(() => {
+      contentProps.onDragEnd?.(mockEvent, {
+        delta: { x: 0, y: 0 },
+        offset: { x: 100, y: 0 },
+        point: { x: 0, y: 0 },
+        velocity: { x: 0, y: 0 },
+      })
+    })
+
     expect(onClose).toHaveBeenCalledWith(undefined)
   })
 })

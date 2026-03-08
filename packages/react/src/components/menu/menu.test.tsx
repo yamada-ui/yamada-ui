@@ -1067,4 +1067,453 @@ describe("<Menu />", () => {
 
     expect(onChange).not.toHaveBeenCalled()
   })
+
+  test("context trigger sets aria attributes correctly", () => {
+    render(
+      <Menu.Root>
+        <Menu.ContextTrigger>
+          <div data-testid="context-area">Right click here</div>
+        </Menu.ContextTrigger>
+
+        <Menu.Content>
+          <Menu.Item value="item-1">Item 1</Menu.Item>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    const area = screen.getByTestId("context-area")
+    expect(area).toHaveAttribute("aria-haspopup", "menu")
+    expect(area).toHaveAttribute("aria-expanded", "false")
+  })
+
+  test("context trigger updates aria-expanded when opened", async () => {
+    render(
+      <Menu.Root>
+        <Menu.ContextTrigger>
+          <div data-testid="context-area">Right click here</div>
+        </Menu.ContextTrigger>
+
+        <Menu.Content>
+          <Menu.Item value="item-1">Item 1</Menu.Item>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    const area = screen.getByTestId("context-area")
+    fireEvent.contextMenu(area, { clientX: 150, clientY: 250 })
+
+    await waitFor(() => {
+      expect(area).toHaveAttribute("aria-expanded", "true")
+    })
+  })
+
+  test("submenu trigger renders indicator icon", () => {
+    render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.Root>
+            <Menu.Trigger>
+              <Menu.Item>Sub Menu</Menu.Item>
+            </Menu.Trigger>
+
+            <Menu.Content>
+              <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
+            </Menu.Content>
+          </Menu.Root>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    const subMenuText = screen.getByText("Sub Menu")
+    const indicator = subMenuText.querySelector(".ui-menu__indicator")
+    expect(indicator).toBeInTheDocument()
+  })
+
+  test("submenu trigger has correct attributes", () => {
+    render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.Item value="item-1">Item 1</Menu.Item>
+
+          <Menu.Root>
+            <Menu.Trigger>
+              <Menu.Item>Sub Menu</Menu.Item>
+            </Menu.Trigger>
+
+            <Menu.Content>
+              <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
+            </Menu.Content>
+          </Menu.Root>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    const subMenuText = screen.getByText("Sub Menu")
+    expect(subMenuText).toHaveAttribute("aria-haspopup", "menu")
+    expect(subMenuText).toHaveAttribute("aria-expanded", "false")
+  })
+
+  test("submenu content renders when defaultOpen", () => {
+    render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.Item value="item-1">Item 1</Menu.Item>
+
+          <Menu.Root defaultOpen>
+            <Menu.Trigger>
+              <Menu.Item>Sub Menu</Menu.Item>
+            </Menu.Trigger>
+
+            <Menu.Content>
+              <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
+            </Menu.Content>
+          </Menu.Root>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    expect(screen.getByText("Sub Item 1")).toBeInTheDocument()
+  })
+
+  test("submenu click is prevented on disabled submenu trigger", () => {
+    render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.Root disabled>
+            <Menu.Trigger>
+              <Menu.Item disabled>Sub Menu</Menu.Item>
+            </Menu.Trigger>
+
+            <Menu.Content>
+              <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
+            </Menu.Content>
+          </Menu.Root>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    const subMenuText = screen.getByText("Sub Menu")
+    expect(subMenuText).toHaveAttribute("aria-disabled", "true")
+  })
+
+  test("submenu does not open on mouse enter when disabled", () => {
+    render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.Root disabled>
+            <Menu.Trigger>
+              <Menu.Item disabled>Sub Menu</Menu.Item>
+            </Menu.Trigger>
+
+            <Menu.Content>
+              <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
+            </Menu.Content>
+          </Menu.Root>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    const subMenuText = screen.getByText("Sub Menu")
+    fireEvent.mouseEnter(subMenuText)
+
+    expect(screen.queryByText("Sub Item 1")).not.toBeInTheDocument()
+  })
+
+  test("submenu does not respond to keyboard when disabled", () => {
+    render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.Root disabled>
+            <Menu.Trigger>
+              <Menu.Item disabled>Sub Menu</Menu.Item>
+            </Menu.Trigger>
+
+            <Menu.Content>
+              <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
+            </Menu.Content>
+          </Menu.Root>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    const subMenuText = screen.getByText("Sub Menu")
+    fireEvent.keyDown(subMenuText, { key: "ArrowRight" })
+
+    expect(screen.queryByText("Sub Item 1")).not.toBeInTheDocument()
+  })
+
+  test("radio option item indicator has opacity 1 when selected", () => {
+    render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.OptionGroup type="radio" defaultValue="opt-1">
+            <Menu.OptionItem value="opt-1">Opt 1</Menu.OptionItem>
+            <Menu.OptionItem value="opt-2">Opt 2</Menu.OptionItem>
+          </Menu.OptionGroup>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    const selectedItem = screen.getByRole("menuitemradio", {
+      name: /Opt 1/i,
+    })
+    const indicator = selectedItem.querySelector(".ui-menu__indicator")
+    expect(indicator).toHaveStyle({ opacity: "1" })
+  })
+
+  test("radio option item indicator has opacity 0 when not selected", () => {
+    render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.OptionGroup type="radio" defaultValue="opt-1">
+            <Menu.OptionItem value="opt-1">Opt 1</Menu.OptionItem>
+            <Menu.OptionItem value="opt-2">Opt 2</Menu.OptionItem>
+          </Menu.OptionGroup>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    const unselectedItem = screen.getByRole("menuitemradio", {
+      name: /Opt 2/i,
+    })
+    const indicator = unselectedItem.querySelector(".ui-menu__indicator")
+    expect(indicator).toHaveStyle({ opacity: "0" })
+  })
+
+  test("checkbox option item indicator has opacity 1 when selected", () => {
+    render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.OptionGroup type="checkbox" defaultValue={["opt-1"]}>
+            <Menu.OptionItem value="opt-1">Opt 1</Menu.OptionItem>
+            <Menu.OptionItem value="opt-2">Opt 2</Menu.OptionItem>
+          </Menu.OptionGroup>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    const selectedItem = screen.getByRole("menuitemcheckbox", {
+      name: /Opt 1/i,
+    })
+    const indicator = selectedItem.querySelector(".ui-menu__indicator")
+    expect(indicator).toHaveStyle({ opacity: "1" })
+  })
+
+  test("checkbox option item indicator has opacity 0 when not selected", () => {
+    render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.OptionGroup type="checkbox" defaultValue={["opt-1"]}>
+            <Menu.OptionItem value="opt-1">Opt 1</Menu.OptionItem>
+            <Menu.OptionItem value="opt-2">Opt 2</Menu.OptionItem>
+          </Menu.OptionGroup>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    const unselectedItem = screen.getByRole("menuitemcheckbox", {
+      name: /Opt 2/i,
+    })
+    const indicator = unselectedItem.querySelector(".ui-menu__indicator")
+    expect(indicator).toHaveStyle({ opacity: "0" })
+  })
+
+  test("renders submenu with start direction", () => {
+    render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.Root subMenuDirection="start">
+            <Menu.Trigger>
+              <Menu.Item>Sub Menu</Menu.Item>
+            </Menu.Trigger>
+
+            <Menu.Content>
+              <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
+            </Menu.Content>
+          </Menu.Root>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    const subMenuText = screen.getByText("Sub Menu")
+    expect(subMenuText).toHaveAttribute("aria-haspopup", "menu")
+  })
+
+  test("renders menu with controlled open state", async () => {
+    const ControlledMenu = () => {
+      const [open, setOpen] = useState(false)
+      return (
+        <>
+          <Button data-testid="external-toggle" onClick={() => setOpen(!open)}>
+            Toggle
+          </Button>
+          <Menu.Root
+            open={open}
+            onClose={() => setOpen(false)}
+            onOpen={() => setOpen(true)}
+          >
+            <Menu.Trigger>
+              <Button>Menu</Button>
+            </Menu.Trigger>
+
+            <Menu.Content>
+              <Menu.Item value="item-1">Item 1</Menu.Item>
+            </Menu.Content>
+          </Menu.Root>
+        </>
+      )
+    }
+
+    const { user } = render(<ControlledMenu />)
+
+    expect(screen.queryByRole("menu")).not.toBeInTheDocument()
+
+    await user.click(screen.getByTestId("external-toggle"))
+
+    await waitFor(() => {
+      expect(screen.getByRole("menu")).toBeInTheDocument()
+    })
+  })
+
+  test("renders items with hasStartSeparator and hasEndSeparator for radio group", () => {
+    render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content
+          items={[
+            {
+              type: "radio",
+              hasEndSeparator: true,
+              hasStartSeparator: true,
+              items: [{ label: "R1", value: "r1" }],
+            },
+          ]}
+        />
+      </Menu.Root>,
+    )
+
+    const separators = screen.getAllByRole("separator")
+    expect(separators.length).toBeGreaterThanOrEqual(2)
+  })
+
+  test("renders items with hasStartSeparator and hasEndSeparator for checkbox group", () => {
+    render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content
+          items={[
+            {
+              type: "checkbox",
+              hasEndSeparator: true,
+              hasStartSeparator: true,
+              items: [{ label: "C1", value: "c1" }],
+            },
+          ]}
+        />
+      </Menu.Root>,
+    )
+
+    const separators = screen.getAllByRole("separator")
+    expect(separators.length).toBeGreaterThanOrEqual(2)
+  })
+
+  test("renders items with hasStartSeparator and hasEndSeparator for group", () => {
+    render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content
+          items={[
+            {
+              hasEndSeparator: true,
+              hasStartSeparator: true,
+              items: [{ label: "G1", value: "g1" }],
+              label: "Group",
+            },
+          ]}
+        />
+      </Menu.Root>,
+    )
+
+    const separators = screen.getAllByRole("separator")
+    expect(separators.length).toBeGreaterThanOrEqual(2)
+  })
+
+  test("disabled menu item does not activate on onFocus handler", () => {
+    render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.Item disabled value="item-1">
+            Disabled Item
+          </Menu.Item>
+          <Menu.Item value="item-2">Enabled Item</Menu.Item>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    const menu = screen.getByRole("menu")
+    const disabledItem = screen.getByRole("menuitem", {
+      name: /Disabled Item/i,
+    })
+
+    fireEvent.focus(disabledItem)
+
+    expect(menu.getAttribute("aria-activedescendant")).toBeNull()
+  })
 })

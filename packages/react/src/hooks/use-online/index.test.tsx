@@ -1,5 +1,6 @@
 import type { FC } from "react"
 import { act, render } from "#test"
+import { renderToString } from "react-dom/server"
 import { useOnline } from "./"
 
 const Component: FC<{ getServerSnapshot?: () => boolean }> = ({
@@ -83,19 +84,15 @@ describe("useOnline", () => {
     removeSpy.mockRestore()
   })
 
-  test("uses custom getServerSnapshot", () => {
-    const { getByTestId } = render(
-      <Component getServerSnapshot={() => false} />,
-    )
+  test("uses default getServerSnapshot during SSR", () => {
+    const html = renderToString(<Component />)
 
-    expect(getByTestId("status").textContent).toBeDefined()
+    expect(html).toContain("true")
   })
 
-  test("uses default getServerSnapshot that returns true", () => {
-    onLineSpy.mockReturnValue(true)
+  test("uses custom getServerSnapshot during SSR", () => {
+    const html = renderToString(<Component getServerSnapshot={() => false} />)
 
-    const { getByTestId } = render(<Component />)
-
-    expect(getByTestId("status").textContent).toBe("true")
+    expect(html).toContain("false")
   })
 })

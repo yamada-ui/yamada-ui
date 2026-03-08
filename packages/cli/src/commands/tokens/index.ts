@@ -280,14 +280,16 @@ interface Options {
 }
 
 export const tokens = new Command("tokens")
-  .description("generate theme typings")
-  .argument("[path]", "path to the theme file")
-  .option("--cwd <path>", "current working directory", cwd)
-  .option("-c, --config <path>", "path to the config file", CONFIG_FILE_NAME)
-  .option("-o, --out <path>", `output path`)
-  .option("-f, --format", "format the output file")
-  .option("-l, --lint", "lint the output file")
-  .option("--internal", "generate internal tokens", false)
+  .description("generate theme typings.")
+  .argument("[path]", "path to the theme file.")
+  .option("--cwd <path>", "current working directory.", cwd)
+  .option("-c, --config <path>", "path to the config file.", CONFIG_FILE_NAME)
+  .option("-o, --out <path>", `output path.`)
+  .option("-f, --format", "format the output file.")
+  .option("--no-format", "do not format the output file.")
+  .option("-l, --lint", "lint the output file.")
+  .option("--no-lint", "do not lint the output file.")
+  .option("--internal", "generate internal tokens.", false)
   .action(async function (
     inputPath: string | undefined,
     { config: configPath, cwd, format, internal, lint, out: outPath }: Options,

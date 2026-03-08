@@ -1,6 +1,27 @@
 import { a11y, fireEvent, render, screen } from "#test"
 import { vi } from "vitest"
 import { SaturationSlider } from "."
+import { noop } from "../../utils"
+
+const mockRect = (el: HTMLElement, rect: Partial<DOMRect>): (() => void) => {
+  const original = el.getBoundingClientRect
+  el.getBoundingClientRect = () =>
+    ({
+      bottom: 0,
+      height: 0,
+      left: 0,
+      right: 0,
+      toJSON: noop,
+      top: 0,
+      width: 0,
+      x: 0,
+      y: 0,
+      ...rect,
+    }) as DOMRect
+  return () => {
+    el.getBoundingClientRect = original
+  }
+}
 
 describe("<SaturationSlider />", () => {
   test("renders component correctly", async () => {
@@ -266,5 +287,98 @@ describe("<SaturationSlider />", () => {
 
     const input = container.querySelector("input#saturation-input")
     expect(input).toBeInTheDocument()
+  })
+
+  test("pointer interaction triggers onChangeStart and onChangeEnd", () => {
+    const onChangeStart = vi.fn()
+    const onChangeEnd = vi.fn()
+
+    render(
+      <SaturationSlider.Root
+        defaultValue={[120, 0.5, 0.5]}
+        trackProps={{ "data-testid": "track" }}
+        onChangeEnd={onChangeEnd}
+        onChangeStart={onChangeStart}
+      />,
+    )
+
+    const track = screen.getByTestId("track")
+    const cleanup = mockRect(track, {
+      bottom: 200,
+      height: 200,
+      left: 0,
+      width: 200,
+    })
+
+    fireEvent.pointerDown(track, { clientX: 100, clientY: 100 })
+    expect(onChangeStart).toHaveBeenCalledWith([120, 0.5, 0.5])
+
+    fireEvent.pointerUp(window, { clientX: 140, clientY: 60 })
+    expect(onChangeEnd).toHaveBeenCalledWith([120, 0.7, 0.7])
+
+    cleanup()
+  })
+
+  test("pointer interaction triggers onChange on move", () => {
+    const onChange = vi.fn()
+
+    render(
+      <SaturationSlider.Root
+        defaultValue={[120, 0.5, 0.5]}
+        trackProps={{ "data-testid": "track" }}
+        onChange={onChange}
+      />,
+    )
+
+    const track = screen.getByTestId("track")
+    const cleanup = mockRect(track, {
+      bottom: 200,
+      height: 200,
+      left: 0,
+      width: 200,
+    })
+
+    fireEvent.pointerDown(track, { clientX: 100, clientY: 100 })
+    fireEvent.pointerMove(window, { clientX: 160, clientY: 40 })
+    expect(onChange).toHaveBeenCalledWith([120, 0.8, 0.8])
+
+    fireEvent.pointerUp(window, { clientX: 160, clientY: 40 })
+
+    cleanup()
+  })
+
+  test("pointer interaction does not trigger callbacks when disabled", () => {
+    const onChangeStart = vi.fn()
+    const onChange = vi.fn()
+    const onChangeEnd = vi.fn()
+
+    render(
+      <SaturationSlider.Root
+        defaultValue={[0, 0.5, 0.5]}
+        disabled
+        trackProps={{ "data-testid": "track" }}
+        onChange={onChange}
+        onChangeEnd={onChangeEnd}
+        onChangeStart={onChangeStart}
+      />,
+    )
+
+    const track = screen.getByTestId("track")
+    const cleanup = mockRect(track, {
+      bottom: 200,
+      height: 200,
+      left: 0,
+      width: 200,
+    })
+
+    fireEvent.pointerDown(track, { clientX: 100, clientY: 100 })
+    fireEvent.pointerMove(window, { clientX: 120, clientY: 80 })
+    fireEvent.pointerUp(window, { clientX: 120, clientY: 80 })
+
+    expect(onChangeStart).not.toHaveBeenCalled()
+    expect(onChange).not.toHaveBeenCalled()
+    expect(onChangeEnd).not.toHaveBeenCalled()
+
+    cleanup()
   })
 })

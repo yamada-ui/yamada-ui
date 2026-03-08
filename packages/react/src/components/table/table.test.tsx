@@ -171,7 +171,10 @@ describe("<Table />", () => {
       />,
     )
 
-    expect(screen.getByTestId("table")).toBeInTheDocument()
+    const table = screen.getByTestId("table")
+    const spans = table.querySelectorAll("td span")
+
+    expect(spans.length).toBeGreaterThan(0)
   })
 
   describe("grouped columns", () => {
@@ -651,7 +654,10 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getByTestId("table")).toBeInTheDocument()
+      const table = screen.getByTestId("table")
+
+      expect(table).toBeInTheDocument()
+      expect(table.style.width).not.toBe("")
     })
   })
 
@@ -804,7 +810,6 @@ describe("<Table />", () => {
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
-
       fireEvent.focus(table, { target: firstTh })
       fireEvent.keyDown(firstTh, { key: "End" })
       fireEvent.keyDown(firstTh, { key: "Home" })
@@ -1166,11 +1171,13 @@ describe("<Table />", () => {
           columns={resizableColumns}
           data={data}
           enableColumnResizing
+          resizableTriggerProps={{ "data-testid": "resize-trigger" }}
           tableProps={{ "data-testid": "table" }}
         />,
       )
 
       expect(screen.getByTestId("table")).toBeInTheDocument()
+      expect(screen.getByTestId("resize-trigger")).toBeInTheDocument()
     })
   })
 
@@ -1860,7 +1867,13 @@ describe("<Table />", () => {
 
       await user.dblClick(resizeTrigger)
 
+      // After double-click, the table still renders and resize trigger is still present
       expect(screen.getByTestId("table")).toBeInTheDocument()
+      expect(screen.getByTestId("resize-trigger")).toBeInTheDocument()
+
+      const th = screen.getByTestId("table").querySelector("th")
+
+      expect(th?.style.width).toBeDefined()
     })
 
     test("renders resizable trigger with custom class", () => {
@@ -2522,7 +2535,19 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getByTestId("table")).toBeInTheDocument()
+      const table = screen.getByTestId("table")
+
+      expect(table).toBeInTheDocument()
+
+      // The sort button should be present and functional
+      const sortButton = table.querySelector("button[data-focusable]")
+
+      expect(sortButton).toBeInTheDocument()
+
+      // Column should be sortable but not yet sorted
+      const th = table.querySelector("th")
+
+      expect(th).toHaveAttribute("aria-sort", "none")
     })
   })
 
@@ -2674,7 +2699,8 @@ describe("<Table />", () => {
 
       const table = screen.getByTestId("table")
 
-      expect(table.style.width).toBeDefined()
+      // Width should be set to a non-empty value based on column sizes
+      expect(table.style.width).not.toBe("")
     })
 
     test("does not set width when enableAutoResizeTableWidth is false", () => {

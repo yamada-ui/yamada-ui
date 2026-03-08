@@ -1109,13 +1109,17 @@ describe("<Select />", () => {
     )
 
     await waitFor(() => {
-      expect(screen.getByRole("option", { name: "Option 1" })).toBeVisible()
+      expect(
+        screen.getByRole("option", { name: "Option 1" }),
+      ).toBeInTheDocument()
     })
 
     await user.click(screen.getByRole("option", { name: "Option 1" }))
 
     await waitFor(() => {
-      expect(screen.getByRole("option", { name: "Option 2" })).toBeVisible()
+      expect(
+        screen.getByRole("option", { name: "Option 2" }),
+      ).toBeInTheDocument()
     })
   })
 

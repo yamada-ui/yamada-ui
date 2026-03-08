@@ -1286,7 +1286,7 @@ describe("<Menu />", () => {
       name: /Opt 1/i,
     })
     const indicator = selectedItem.querySelector(".ui-menu__indicator")
-    expect(indicator).toHaveStyle({ opacity: 1 })
+    expect(indicator).toHaveStyle({ opacity: "1" })
   })
 
   test("radio option item indicator has opacity 0 when not selected", () => {
@@ -1309,7 +1309,7 @@ describe("<Menu />", () => {
       name: /Opt 2/i,
     })
     const indicator = unselectedItem.querySelector(".ui-menu__indicator")
-    expect(indicator).toHaveStyle({ opacity: 0 })
+    expect(indicator).toHaveStyle({ opacity: "0" })
   })
 
   test("checkbox option item indicator has opacity 1 when selected", () => {
@@ -1332,7 +1332,7 @@ describe("<Menu />", () => {
       name: /Opt 1/i,
     })
     const indicator = selectedItem.querySelector(".ui-menu__indicator")
-    expect(indicator).toHaveStyle({ opacity: 1 })
+    expect(indicator).toHaveStyle({ opacity: "1" })
   })
 
   test("checkbox option item indicator has opacity 0 when not selected", () => {
@@ -1355,7 +1355,7 @@ describe("<Menu />", () => {
       name: /Opt 2/i,
     })
     const indicator = unselectedItem.querySelector(".ui-menu__indicator")
-    expect(indicator).toHaveStyle({ opacity: 0 })
+    expect(indicator).toHaveStyle({ opacity: "0" })
   })
 
   test("renders submenu with start direction", () => {

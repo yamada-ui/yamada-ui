@@ -5,6 +5,17 @@ import { getPathname } from "@/utils/route"
 import en from "./doc-map.en.json"
 import ja from "./doc-map.ja.json"
 
+interface Dependencies {
+  components: string[]
+  hooks: string[]
+}
+
+interface Dependents extends Dependencies {}
+
+export interface Relations {
+  [key: string]: { dependencies?: Dependencies; dependents?: Dependents }
+}
+
 interface Prop {
   description: string
   required: boolean

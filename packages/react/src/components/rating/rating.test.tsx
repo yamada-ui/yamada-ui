@@ -124,18 +124,6 @@ describe("<Rating />", () => {
     }
   })
 
-  test.todo("should work correctly when out of focus", async () => {
-    const { container, user } = render(<Rating data-testid="rating" />)
-
-    const items = container.querySelectorAll(".ui-rating__item")
-
-    await user.click(items[3]!)
-    expect(items[3]).toHaveAttribute("data-focus")
-
-    await user.click(items[4]!)
-    expect(items[3]).not.toHaveAttribute("data-focus")
-  })
-
   test("value should be updated on root touchStart event", () => {
     const onChange = vi.fn()
 
@@ -166,36 +154,14 @@ describe("<Rating />", () => {
     expect(preventDefaultSpy).toHaveBeenCalledWith()
   })
 
-  test("should update hovered value on input change event", async () => {
-    const { container, user } = render(<Rating />)
+  test("should not update value when disabled", async () => {
+    const { container, user } = render(<Rating disabled />)
 
-    const inputs = container.querySelectorAll("input[type='radio']")
+    const items = container.querySelectorAll(".ui-rating__item")
 
-    await user.click(inputs[3]!)
+    await user.click(items[3]!)
 
-    expect(inputs[3]).toHaveAttribute("data-checked")
-  })
-
-  test("should not update hovered value on input change when disabled", () => {
-    const { container } = render(<Rating disabled />)
-
-    const inputs = container.querySelectorAll("input[type='radio']")
-
-    fireEvent.change(inputs[3]!, { target: { value: "3" } })
-
-    expect(inputs[3]).not.toHaveAttribute("data-active")
-  })
-
-  test("should update value on Space key press", () => {
-    const onChange = vi.fn()
-
-    const { container } = render(<Rating onChange={onChange} />)
-
-    const inputs = container.querySelectorAll("input[type='radio']")
-
-    fireEvent.keyDown(inputs[3]!, { key: " ", code: "Space" })
-
-    expect(onChange).toHaveBeenCalledWith(3)
+    expect(items[3]?.firstChild).not.toHaveAttribute("data-checked")
   })
 
   test("should use custom color correctly", () => {
@@ -230,5 +196,35 @@ describe("<Rating />", () => {
         cssText.includes(`color:${expectedVar}`)
       expect(ruleExists).toBeTruthy()
     }
+  })
+
+  test("should reset hovered value on blur when mouse is outside", () => {
+    const { container } = render(<Rating />)
+    const inputs = container.querySelectorAll("input[type='radio']")
+    const firstInput = inputs[0] as HTMLInputElement
+
+    fireEvent.focus(firstInput)
+    fireEvent.mouseLeave(container.firstChild!)
+    fireEvent.blur(firstInput)
+
+    const activeInput = container.querySelector("input[data-active='true']")
+    expect(activeInput).toBeNull()
+  })
+
+  test("should update value on KeyboardEvent", async () => {
+    const onChange = vi.fn()
+
+    const { container, user } = render(<Rating onChange={onChange} />)
+
+    const inputs = container.querySelectorAll("input[type='radio']")
+
+    await user.tab()
+    await user.keyboard("{ArrowRight}")
+
+    expect(inputs[1]).toHaveAttribute("data-active")
+
+    await user.keyboard("{Space}")
+
+    expect(onChange).toHaveBeenCalledWith(1)
   })
 })

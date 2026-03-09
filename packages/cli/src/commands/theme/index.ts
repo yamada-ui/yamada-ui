@@ -1,5 +1,5 @@
 import type { UserConfig } from "../../index.type"
-import { merge } from "@yamada-ui/utils"
+import { isUndefined, merge } from "@yamada-ui/utils"
 import boxen from "boxen"
 import { Command } from "commander"
 import { existsSync } from "fs"
@@ -44,25 +44,52 @@ interface Options {
   config: string
   cwd: string
   overwrite: boolean
+  yes: boolean
   format?: boolean
+  install?: boolean
   js?: boolean
   lint?: boolean
+  packageName?: string
+  src?: boolean
   tag?: string
 }
 
 export const theme = new Command("theme")
-  .description("generate theme to your project")
-  .argument("[path]", "path to the theme directory")
-  .option("--cwd <path>", "current working directory", cwd)
-  .option("-c, --config <path>", "path to the config file", CONFIG_FILE_NAME)
+  .description("generate theme to your project.")
+  .argument("[path]", "path to the theme directory.")
+  .option("--cwd <path>", "current working directory.", cwd)
+  .option("-c, --config <path>", "path to the config file.", CONFIG_FILE_NAME)
   .option("-o, --overwrite", "overwrite existing directory.", false)
-  .option("-j, --js", "use js instead of ts")
+  .option("-j, --js", "use js instead of ts.")
+  .option("-y, --yes", "skip all confirmation prompts.", false)
+  .option("-p, --package-name <name>", "package name (for monorepo).")
+  .option("-s, --src", "use src/ directory.")
+  .option("--no-src", "do not use src/ directory.")
+  .option("-i, --install", "install dependencies when choice is monorepo.")
+  .option(
+    "--no-install",
+    "do not install dependencies when choice is monorepo.",
+  )
   .option("-f, --format", "format the output files.")
+  .option("--no-format", "do not format the output files.")
   .option("-l, --lint", "lint the output files.")
-  .option("-t, --tag <name>", "tag for the registries (e.g. dev, next)")
+  .option("--no-lint", "do not lint the output files.")
+  .option("-t, --tag <name>", "tag for the registries (e.g. dev, next).")
   .action(async function (
     themePath: string | undefined,
-    { config: configPath, cwd, format, js, lint, overwrite, tag }: Options,
+    {
+      src,
+      config: configPath,
+      cwd,
+      format,
+      install,
+      js,
+      lint,
+      overwrite,
+      packageName,
+      tag,
+      yes,
+    }: Options,
   ) {
     const spinner = ora()
 
@@ -87,33 +114,29 @@ export const theme = new Command("theme")
         ? DEFAULT_PATH.theme.monorepo
         : DEFAULT_PATH.theme.polyrepo
 
-      if (!themePath) {
-        let { outdir = "" } = await prompts({
-          type: "text",
-          name: "outdir",
-          initial: defaultThemePath,
-          message: "What is the path to the theme directory?",
-        })
+      const answer = await prompts({
+        type: !yes && !themePath ? "text" : null,
+        name: "themePath",
+        initial: defaultThemePath,
+        message: "What is the path to the theme directory?",
+      })
 
-        // eslint-disable-next-line no-control-regex
-        outdir = outdir.replace(/\x17/g, "").trim()
-        outdir ||= defaultThemePath
-
-        themePath = outdir as string
-      }
+      // eslint-disable-next-line no-control-regex
+      themePath ??= (answer.themePath ?? "").replace(/\x17/g, "").trim()
+      themePath ||= defaultThemePath
 
       const monorepoConfig = { src: false, packageName: "" }
 
       if (config.monorepo) {
-        let { src = true, packageName = "" } = await prompts([
+        const answer = await prompts([
           {
-            type: "text",
+            type: !yes && !packageName ? "text" : null,
             name: "packageName",
             initial: DEFAULT_PACKAGE_NAME.theme,
             message: c.reset("What is the package name?"),
           },
           {
-            type: "toggle",
+            type: !yes && isUndefined(src) ? "toggle" : null,
             name: "src",
             active: "Yes",
             inactive: "No",
@@ -125,16 +148,21 @@ export const theme = new Command("theme")
         ])
 
         // eslint-disable-next-line no-control-regex
-        packageName = packageName.replace(/\x17/g, "").trim()
-        packageName ||= DEFAULT_PACKAGE_NAME.theme
+        packageName = (answer.packageName ?? "").replace(/\x17/g, "").trim()
 
-        monorepoConfig.src = src
-        monorepoConfig.packageName = packageName
+        monorepoConfig.src = answer.src ?? true
+        monorepoConfig.packageName = packageName || DEFAULT_PACKAGE_NAME.theme
       }
 
       const outdirPath = path.resolve(cwd, themePath)
 
       if (!overwrite && existsSync(outdirPath)) {
+        if (yes) {
+          throw new Error(
+            `The directory already exists. Use ${c.cyan("--overwrite")} to overwrite it.`,
+          )
+        }
+
         const { overwrite } = await prompts({
           type: "confirm",
           name: "overwrite",
@@ -291,14 +319,16 @@ export const theme = new Command("theme")
       await tasks.run()
 
       if (config.monorepo) {
-        const { install } = await prompts({
-          type: "confirm",
+        const answer = await prompts({
+          type: !yes && isUndefined(install) ? "confirm" : null,
           name: "install",
           initial: true,
           message: c.reset(
             `The theme is generated. Do you want to install dependencies?`,
           ),
         })
+
+        install ??= answer.install ?? true
 
         if (install) {
           spinner.start("Installing dependencies")

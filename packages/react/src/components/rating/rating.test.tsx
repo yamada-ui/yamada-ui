@@ -245,13 +245,20 @@ describe("<Rating />", () => {
     expect(activeInput).toBeNull()
   })
 
-  test("should not update hovered value on input change when readOnly", () => {
-    const { container } = render(<Rating readOnly />)
+  test("should update value on KeyboardEvent", async () => {
+    const onChange = vi.fn()
+
+    const { container, user } = render(<Rating onChange={onChange} />)
+
     const inputs = container.querySelectorAll("input[type='radio']")
-    const targetInput = inputs[3] as HTMLInputElement
 
-    fireEvent.change(targetInput, { target: { value: "3" } })
+    await user.tab()
+    await user.keyboard("{ArrowRight}")
 
-    expect(targetInput).not.toHaveAttribute("data-active")
+    expect(inputs[1]).toHaveAttribute("data-active")
+
+    await user.keyboard("{Space}")
+
+    expect(onChange).toHaveBeenCalledWith(1)
   })
 })

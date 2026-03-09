@@ -1,5 +1,5 @@
 import type { PackageNameWithVersion, UserConfig } from "../../index.type"
-import { isObject, merge } from "@yamada-ui/utils"
+import { isObject, isUndefined, merge } from "@yamada-ui/utils"
 import boxen from "boxen"
 import { Command } from "commander"
 import { existsSync } from "fs"
@@ -46,22 +46,53 @@ interface Options {
   cwd: string
   jsx: boolean
   overwrite: boolean
+  yes: boolean
+  format?: boolean
+  install?: boolean
+  lint?: boolean
+  monorepo?: boolean
+  outdir?: string
+  packageName?: string
+  src?: boolean
   tag?: string
 }
 
 export const init = new Command("init")
-  .description("initialize your project and install dependencies")
-  .option("--cwd <path>", "current working directory", cwd)
-  .option("-c, --config <path>", "path to the config file", CONFIG_FILE_NAME)
+  .description("initialize your project and install dependencies.")
+  .option("--cwd <path>", "current working directory.", cwd)
+  .option("-c, --config <path>", "path to the config file.", CONFIG_FILE_NAME)
   .option("-o, --overwrite", "overwrite existing files.", false)
-  .option("-t, --tag <name>", "tag for the registries (e.g. dev, next)")
-  .option("-j, --jsx", "use jsx instead of tsx", false)
+  .option("-t, --tag <name>", "tag for the registries (e.g. dev, next).")
+  .option("-j, --jsx", "use jsx instead of tsx.", false)
+  .option("-y, --yes", "skip all confirmation prompts.", false)
+  .option("-m, --monorepo", "enable monorepo mode.")
+  .option("--no-monorepo", "disable monorepo mode.")
+  .option("-p, --package-name <name>", "package name.")
+  .option("-s, --src", "use src/ directory.")
+  .option("-i, --install", "install dependencies when choice is monorepo.")
+  .option(
+    "--no-install",
+    "do not install dependencies when choice is monorepo.",
+  )
+  .option("-f, --format", "use Prettier.")
+  .option("--no-format", "do not use Prettier.")
+  .option("-l, --lint", "use ESLint.")
+  .option("--no-lint", "do not use ESLint.")
+  .option("--outdir <path>", "output directory path.")
   .action(async function ({
+    src,
     config: configPath,
     cwd,
+    format,
+    install,
     jsx,
+    lint,
+    monorepo,
+    outdir = "",
     overwrite,
+    packageName = "",
     tag,
+    yes,
   }: Options) {
     const spinner = ora()
 
@@ -81,16 +112,9 @@ export const init = new Command("init")
       let dependencies: string[] | undefined
       let devDependencies: string[] | undefined
 
-      let {
-        src = true,
-        format = true,
-        lint = true,
-        monorepo = true,
-        outdir = "",
-        packageName = "",
-      } = await prompts([
+      const answer = await prompts([
         {
-          type: "toggle",
+          type: !yes && isUndefined(monorepo) ? "toggle" : null,
           name: "monorepo",
           active: "Yes",
           inactive: "No",
@@ -98,23 +122,31 @@ export const init = new Command("init")
           message: c.reset(`Would you like to use monorepo? (recommended)`),
         },
         {
-          type: "text",
+          type: !yes && !outdir ? "text" : null,
           name: "outdir",
-          initial: (_, { monorepo }) =>
-            monorepo ? DEFAULT_PATH.ui.monorepo : DEFAULT_PATH.ui.polyrepo,
-          message: (_, { monorepo }) =>
-            monorepo
+          initial: (_, answer) =>
+            (answer.monorepo ?? monorepo)
+              ? DEFAULT_PATH.ui.monorepo
+              : DEFAULT_PATH.ui.polyrepo,
+          message: (_, answer) =>
+            (answer.monorepo ?? monorepo)
               ? c.reset(`What is the path to the monorepo?`)
               : c.reset(`What is the path to the directory?`),
         },
         {
-          type: (_, { monorepo }) => (monorepo ? "text" : null),
+          type:
+            !yes && !packageName
+              ? (_, answer) => ((answer.monorepo ?? monorepo) ? "text" : null)
+              : null,
           name: "packageName",
           initial: DEFAULT_PACKAGE_NAME.ui,
           message: c.reset("What is the package name?"),
         },
         {
-          type: (_, { monorepo }) => (monorepo ? "toggle" : null),
+          type:
+            !yes && isUndefined(src)
+              ? (_, answer) => ((answer.monorepo ?? monorepo) ? "toggle" : null)
+              : null,
           name: "src",
           active: "Yes",
           inactive: "No",
@@ -124,7 +156,7 @@ export const init = new Command("init")
           ),
         },
         {
-          type: "toggle",
+          type: !yes && isUndefined(format) ? "toggle" : null,
           name: "format",
           active: "Yes",
           inactive: "No",
@@ -132,7 +164,7 @@ export const init = new Command("init")
           message: c.reset(`Would you like to use Prettier?`),
         },
         {
-          type: "toggle",
+          type: !yes && isUndefined(lint) ? "toggle" : null,
           name: "lint",
           active: "Yes",
           inactive: "No",
@@ -141,12 +173,16 @@ export const init = new Command("init")
         },
       ])
 
+      monorepo ??= answer.monorepo ?? true
+      src ??= answer.src ?? true
+      lint ??= answer.lint ?? true
+      format ??= answer.format ?? true
       // eslint-disable-next-line no-control-regex
-      outdir = outdir.replace(/\x17/g, "").trim()
+      outdir = (answer.outdir ?? "").replace(/\x17/g, "").trim()
       outdir ||= monorepo ? DEFAULT_PATH.ui.monorepo : DEFAULT_PATH.ui.polyrepo
       // eslint-disable-next-line no-control-regex
-      packageName = packageName.replace(/\x17/g, "").trim()
-      packageName ||= DEFAULT_PACKAGE_NAME
+      packageName = (answer.packageName ?? "").replace(/\x17/g, "").trim()
+      packageName ||= DEFAULT_PACKAGE_NAME.ui
 
       if (monorepo) config.monorepo = monorepo
       if (jsx) config.jsx = jsx
@@ -155,16 +191,24 @@ export const init = new Command("init")
       config.format = { enabled: format }
       config.lint = { enabled: lint }
 
-      const { generate } = await prompts({
-        type: "confirm",
-        name: "generate",
-        initial: true,
-        message: c.reset(`Generate ${c.cyan(configFileName)}. Proceed?`),
-      })
+      if (!yes) {
+        const { generate } = await prompts({
+          type: "confirm",
+          name: "generate",
+          initial: true,
+          message: c.reset(`Generate ${c.cyan(configFileName)}. Proceed?`),
+        })
 
-      if (!generate) process.exit(0)
+        if (!generate) process.exit(0)
+      }
 
       if (!overwrite && existsSync(configPath)) {
+        if (yes) {
+          throw new Error(
+            `The config file already exists. Use ${c.cyan("--overwrite")} to overwrite it.`,
+          )
+        }
+
         const { overwrite } = await prompts({
           type: "confirm",
           name: "overwrite",
@@ -190,6 +234,12 @@ export const init = new Command("init")
       const outdirPath = path.resolve(cwd, outdir)
 
       if (!overwrite && existsSync(outdirPath)) {
+        if (yes) {
+          throw new Error(
+            `The ${c.yellow(outdir)} directory already exists. Use ${c.cyan("--overwrite")} to overwrite it.`,
+          )
+        }
+
         const { overwrite } = await prompts({
           type: "confirm",
           name: "overwrite",
@@ -212,14 +262,16 @@ export const init = new Command("init")
       }
 
       if (monorepo) {
-        const { generate } = await prompts({
-          type: "confirm",
-          name: "generate",
-          initial: true,
-          message: c.reset(`Generate ${c.cyan(packageName)}. Proceed?`),
-        })
+        if (!yes) {
+          const { generate } = await prompts({
+            type: "confirm",
+            name: "generate",
+            initial: true,
+            message: c.reset(`Generate ${c.cyan(packageName)}. Proceed?`),
+          })
 
-        if (!generate) process.exit(0)
+          if (!generate) process.exit(0)
+        }
 
         const tasks = new Listr(
           [
@@ -339,16 +391,22 @@ export const init = new Command("init")
 
         await tasks.run()
 
-        const { install } = await prompts({
-          type: "confirm",
-          name: "install",
-          initial: true,
-          message: c.reset(
-            `The workspace is generated. Do you want to install dependencies?`,
-          ),
-        })
+        if (isUndefined(install)) {
+          const answer = await prompts({
+            type: !yes ? "confirm" : null,
+            name: "install",
+            initial: true,
+            message: c.reset(
+              `The workspace is generated. Do you want to install dependencies?`,
+            ),
+          })
 
-        if (install) dependencies = []
+          install = answer.install ?? true
+
+          if (install) dependencies = []
+        } else {
+          if (install) dependencies = []
+        }
       } else {
         const notInstalledDependencies: PackageNameWithVersion[] = []
         const notInstalledDevDependencies: PackageNameWithVersion[] = []
@@ -429,17 +487,21 @@ export const init = new Command("init")
             ),
           )
 
-          const { install } = await prompts({
-            type: "confirm",
-            name: "install",
-            initial: true,
-            message: c.reset(
-              [
-                `The following dependencies are not installed: ${colorizedNames.join(", ")}.`,
-                "Do you want to install them?",
-              ].join(" "),
-            ),
-          })
+          if (isUndefined(install)) {
+            const answer = await prompts({
+              type: !yes ? "confirm" : null,
+              name: "install",
+              initial: true,
+              message: c.reset(
+                [
+                  `The following dependencies are not installed: ${colorizedNames.join(", ")}.`,
+                  "Do you want to install them?",
+                ].join(" "),
+              ),
+            })
+
+            install = answer.install ?? true
+          }
 
           if (install) {
             dependencies = notInstalledDependencies.map(
@@ -452,7 +514,7 @@ export const init = new Command("init")
         }
       }
 
-      if (dependencies || devDependencies) {
+      if (install && (dependencies || devDependencies)) {
         spinner.start("Installing dependencies")
 
         if (dependencies) await installDependencies(dependencies, { cwd })

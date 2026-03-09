@@ -57,6 +57,6 @@ jobs:
       - name: Generate @next registries
         run: |
           pnpm gen:registries --tag next
-          git add .
+          git add ./www/public/registry
           git diff --staged --exit-code || git commit -m 'ci(changesets): update next registries'
           git push

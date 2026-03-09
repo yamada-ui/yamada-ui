@@ -19,7 +19,7 @@ jobs:
         shard_index: [1, 2, 3, 4]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
       - name: Install
         uses: ./.github/composite-actions/install
@@ -32,7 +32,7 @@ jobs:
         run: pnpm test:coverage -- --shard=${{ matrix.shard_index }}/4
 
       - name: Upload coverage
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238 # v4.6.0
         with:
           fail_ci_if_error: false
           file: ./packages/react/coverage/coverage-final.json,./packages/utils/coverage/coverage-final.json

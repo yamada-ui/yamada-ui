@@ -1,3 +1,4 @@
+import { isUndefined } from "@yamada-ui/utils"
 import { Command } from "commander"
 import { existsSync } from "fs"
 import ora from "ora"
@@ -32,20 +33,37 @@ interface Options {
   cwd: string
   detail: boolean
   sequential: boolean
+  yes: boolean
+  install?: boolean
   tag?: string
+  update?: boolean
 }
 
 export const diff = new Command("diff")
-  .description("check for updates against the registry")
-  .argument("[component]", "component to check")
-  .option("--cwd <path>", "current working directory", cwd)
-  .option("-c, --config <path>", "path to the config file", CONFIG_FILE_NAME)
+  .description("check for updates against the registry.")
+  .argument("[component]", "component to check.")
+  .option("--cwd <path>", "current working directory.", cwd)
+  .option("-c, --config <path>", "path to the config file.", CONFIG_FILE_NAME)
   .option("-s, --sequential", "run tasks sequentially.", false)
-  .option("-d, --detail", "show detailed changes", false)
-  .option("-t, --tag <name>", "tag for the registries (e.g. dev, next)")
+  .option("-d, --detail", "show detailed changes.", false)
+  .option("-y, --yes", "skip all confirmation prompts.", false)
+  .option("-u, --update", "update files when there are file diff.")
+  .option("--no-update", "do not update files when there are file diff.")
+  .option("-i, --install", "install dependencies when updating files.")
+  .option("--no-install", "do not install dependencies when updating files.")
+  .option("-t, --tag <name>", "tag for the registries (e.g. dev, next).")
   .action(async function (
     targetName: string | undefined,
-    { config: configPath, cwd, detail, sequential, tag }: Options,
+    {
+      config: configPath,
+      cwd,
+      detail,
+      install,
+      sequential,
+      tag,
+      update,
+      yes,
+    }: Options,
   ) {
     const spinner = ora()
 
@@ -167,12 +185,14 @@ export const diff = new Command("diff")
 
         console.log("---------------------------------")
 
-        const { update } = await prompts({
-          type: "confirm",
+        const answer = await prompts({
+          type: !yes && isUndefined(update) ? "confirm" : null,
           name: "update",
           initial: true,
           message: c.reset("Do you want to update the files?"),
         })
+
+        update ??= answer.update ?? true
 
         if (update) {
           spinner.start("Validating methods")
@@ -186,7 +206,7 @@ export const diff = new Command("diff")
             dependencyMap,
             registryMap,
             config,
-            { concurrent: !sequential },
+            { concurrent: !sequential, install, yes },
           )
 
           if (Object.keys(conflictMap).length) {

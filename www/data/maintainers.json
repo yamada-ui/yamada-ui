@@ -10,8 +10,7 @@
       "icon": "https://avatars.githubusercontent.com/u/84060430?v=4",
       "url": "https://github.com/hirotomoyamada"
     },
-    "x": { "url": "https://x.com/hirotomoyamada" },
-    "discord": { "id": "434987704162451467" }
+    "x": { "url": "https://x.com/hirotomoyamada" }
   },
   {
     "name": { "en": "Kazuki Shirai", "ja": "Kazuki Shirai" },
@@ -24,13 +23,12 @@
       "icon": "https://avatars.githubusercontent.com/u/9676316?v=4",
       "url": "https://github.com/108yen"
     },
-    "x": { "url": "https://x.com/108yen___" },
-    "discord": { "id": "281653488084189184" }
+    "x": { "url": "https://x.com/108yen___" }
   },
   {
     "name": { "en": "koralle", "ja": "koralle" },
     "description": {
-      "en": "Front-end engineer, likes React and Neovim.",
+      "en": "Frontend engineer, likes React and Neovim.",
       "ja": "ReactとNeovimが好きなフロントエンドエンジニア。"
     },
     "github": {
@@ -38,8 +36,7 @@
       "icon": "https://avatars.githubusercontent.com/u/33865215?v=4",
       "url": "https://github.com/koralle"
     },
-    "x": { "url": "https://x.com/koralle_tech" },
-    "discord": { "id": "702799711404425246" }
+    "x": { "url": "https://x.com/koralle_tech" }
   },
   {
     "name": { "en": "jougen", "ja": "じょうげん" },
@@ -52,40 +49,37 @@
       "icon": "https://avatars.githubusercontent.com/u/81406938?v=4",
       "url": "https://github.com/bmthd"
     },
-    "x": { "url": "https://x.com/j_ktwr" },
-    "discord": { "id": "217631628380340227" }
+    "x": { "url": "https://x.com/j_ktwr" }
   },
   {
     "name": { "en": "Kae Okamura", "ja": "Okamura Kae" },
     "description": {
-      "en": "Japanese front-end engineer in South Korea.",
+      "en": "Japanese frontend engineer in South Korea.",
       "ja": "韓国でフロントエンジニアとして活動している日本人です。"
     },
     "github": {
       "id": "kaehehehe",
       "icon": "https://avatars.githubusercontent.com/u/77221488?v=4",
       "url": "https://github.com/kaehehehe"
-    },
-    "discord": { "id": "857882104339628063" }
+    }
   },
   {
     "name": { "en": "Shintaro Jokagi", "ja": "Shintaro Jokagi" },
     "description": {
-      "en": "Developer from New Zealand and a university student.",
-      "ja": "ニュージーランドのエンジニア。大学生。"
+      "en": "Student software engineer based in New Zealand.",
+      "ja": "ニュージーランドで活動する学生ソフトウェアエンジニア。"
     },
     "github": {
       "id": "taroj1205",
       "icon": "https://avatars.githubusercontent.com/u/61367823?v=4",
       "url": "https://github.com/taroj1205"
     },
-    "x": { "url": "https://x.com/taroj1205" },
-    "discord": { "id": "631578250144907269" }
+    "x": { "url": "https://x.com/taroj1205" }
   },
   {
     "name": { "en": "Takaaki Chida", "ja": "Takaaki Chida" },
     "description": {
-      "en": "Front-end engineer, developing web applications.",
+      "en": "Frontend engineer, developing web applications.",
       "ja": "フロントエンドエンジニア。Webアプリケーションの開発を行っています。"
     },
     "github": {
@@ -93,13 +87,12 @@
       "icon": "https://avatars.githubusercontent.com/u/49680717?v=4",
       "url": "https://github.com/chida09"
     },
-    "x": { "url": "https://x.com/_c0909" },
-    "discord": { "id": "841466932187234354" }
+    "x": { "url": "https://x.com/_c0909" }
   },
   {
     "name": { "en": "Yoko Odenda", "ja": "Yoko Odenda" },
     "description": {
-      "en": "Former pharmacist turned front-end engineer.",
+      "en": "Former pharmacist turned frontend engineer.",
       "ja": "元薬剤師のフロントエンドエンジニア。"
     },
     "github": {
@@ -107,7 +100,185 @@
       "icon": "https://avatars.githubusercontent.com/u/128268777?v=4",
       "url": "https://github.com/odendayoko"
     },
-    "x": { "url": "https://x.com/odendayoko" },
-    "discord": { "id": "413329189635227650" }
+    "x": { "url": "https://x.com/odendayoko" }
+  },
+  {
+    "name": { "en": "Dai Kakudate", "ja": "Dai Kakudate" },
+    "description": {
+      "en": "Frontend engineer.",
+      "ja": "フロントエンドエンジニア。"
+    },
+    "github": {
+      "id": "angle-create",
+      "icon": "https://avatars.githubusercontent.com/u/118153400?v=4",
+      "url": "https://github.com/angle-create"
+    },
+    "x": { "url": "https://x.com/sherlock_dai" }
+  },
+  {
+    "name": { "en": "188cm => T.Miura", "ja": "身長188cm => T.Miura" },
+    "description": {
+      "en": "An engineer who is 188cm tall.",
+      "ja": "身長が188cmあるエンジニア。"
+    },
+    "github": {
+      "id": "miura-188cm",
+      "icon": "https://avatars.githubusercontent.com/u/144312244?v=4",
+      "url": "https://github.com/miura-188cm"
+    },
+    "x": { "url": "https://x.com/miura_188cm" }
+  },
+  {
+    "name": { "en": "Banri Kakehi", "ja": "Banri Kakehi" },
+    "description": {
+      "en": "Engineer in the Cloud Native.",
+      "ja": "Cloud Nativeのエンジニア。"
+    },
+    "github": {
+      "id": "Melonps",
+      "icon": "https://avatars.githubusercontent.com/u/95263124?v=4",
+      "url": "https://github.com/Melonps"
+    },
+    "x": { "url": "https://x.com/Melonps_" }
+  },
+  {
+    "name": { "en": "Itsuki Koshiishi", "ja": "Itsuki Koshiishi" },
+    "description": {
+      "en": "Cat lover & Vimmer, Authentication Platform Engineer.",
+      "ja": "猫好きVimmer。 認証基盤エンジニア。"
+    },
+    "github": {
+      "id": "nurazon59",
+      "icon": "https://avatars.githubusercontent.com/u/104209850?v=4",
+      "url": "https://github.com/nurazon59"
+    }
+  },
+  {
+    "name": { "en": "cosara", "ja": "こさら" },
+    "description": {
+      "en": "Pharmacist exploring healthcare DX. Builds prototypes and automation tools for pharmacy operations.",
+      "ja": "薬剤師。医療DX推進・薬局業務の自動化ツール開発に取り組んでいます。"
+    },
+    "github": {
+      "id": "cosara22",
+      "icon": "https://avatars.githubusercontent.com/u/153890787?v=4",
+      "url": "https://github.com/cosara22"
+    },
+    "x": { "url": "https://x.com/nygFEPScwiO5gj3" }
+  },
+  {
+    "name": { "en": "NanoNano", "ja": "なのなの" },
+    "description": {
+      "en": "A frontend engineer who travels between the real world and VRChat.",
+      "ja": "リアルとVRChatを行き来するフロントエンドエンジニア。"
+    },
+    "github": {
+      "id": "nano-nano",
+      "icon": "https://avatars.githubusercontent.com/u/29051777?v=4",
+      "url": "https://github.com/nano-nano"
+    },
+    "x": { "url": "https://x.com/nano2_aloerina" }
+  },
+  {
+    "name": { "en": "daichi09167", "ja": "daichi09167" },
+    "description": {
+      "en": "Fourth-year Undergraduate Student, frontend Engineer.",
+      "ja": "学部4年生、フロントエンドエンジニア。"
+    },
+    "github": {
+      "id": "daichi09167",
+      "icon": "https://avatars.githubusercontent.com/u/192768429?v=4",
+      "url": "https://github.com/daichi09167"
+    }
+  },
+  {
+    "name": { "en": "akazdayo", "ja": "あかず" },
+    "description": {
+      "en": "Nostr and Nix enthusiast.",
+      "ja": "NostrとNixが好きな人。"
+    },
+    "github": {
+      "id": "akazdayo",
+      "icon": "https://avatars.githubusercontent.com/u/82073147?v=4",
+      "url": "https://github.com/akazdayo"
+    },
+    "x": { "url": "https://x.com/akazdango" }
+  },
+  {
+    "name": { "en": "kattsuuu", "ja": "かっつー" },
+    "description": {
+      "en": "Frontend Engineer interested in Dioxus.",
+      "ja": "Dioxusに興味のあるフロントエンドエンジニア。"
+    },
+    "github": {
+      "id": "fkatsuhiro",
+      "icon": "https://avatars.githubusercontent.com/u/113022468?v=4",
+      "url": "https://github.com/fkatsuhiro"
+    },
+    "x": { "url": "https://x.com/astrotyotogood" }
+  },
+  {
+    "name": { "en": "Choucho ", "ja": "ちょうちょ" },
+    "description": {
+      "en": "I develop web applications using Next.js and AWS.",
+      "ja": "Next.jsやAWSでWebアプリケーションを開発しています。"
+    },
+    "github": {
+      "id": "Jin5555C",
+      "icon": "https://avatars.githubusercontent.com/u/134184805?v=4",
+      "url": "https://github.com/Jin5555C"
+    }
+  },
+  {
+    "name": { "en": "Taisei Hasegawa", "ja": "Taisei Hasegawa" },
+    "description": {
+      "en": "Frontend engineer.",
+      "ja": "フロントエンドエンジニア。"
+    },
+    "github": {
+      "id": "nefleia",
+      "icon": "https://avatars.githubusercontent.com/nefleia",
+      "url": "https://github.com/nefleia"
+    },
+    "x": { "url": "https://x.com/tortillataco0" }
+  },
+  {
+    "name": { "en": "Hiroki Sugiyama", "ja": "Hiroki Sugiyama" },
+    "description": {
+      "en": "Software engineer mainly working on backend development with TypeScript.",
+      "ja": "ソフトウェアエンジニア。主にTypeScriptを用いたバックエンド開発をしています。"
+    },
+    "github": {
+      "id": "sh-1101",
+      "icon": "https://avatars.githubusercontent.com/u/137602731?v=4",
+      "url": "https://github.com/sh-1101"
+    },
+    "x": { "url": "https://x.com/sh_11011" }
+  },
+  {
+    "name": { "en": "nkoji", "ja": "えぬこじ" },
+    "description": {
+      "en": "Make software people love to use.",
+      "ja": "もう一度使いたいと思えるモノを作ること。"
+    },
+    "github": {
+      "id": "nkoji21",
+      "icon": "https://avatars.githubusercontent.com/u/133028205?v=4",
+      "url": "https://github.com/nkoji21"
+    },
+    "x": { "url": "https://x.com/nkoji21" }
+  },
+  {
+    "name": { "en": "Sora Fujitani", "ja": "Sora Fujitani" },
+    "description": {
+      "en": "software engineer, 2001, a bright introvert.",
+      "ja": "software engineer, 2001, 明るい根暗です。"
+    },
+    "github": {
+      "id": "sorafujitani",
+      "icon": "https://avatars.githubusercontent.com/u/76100848?v=4",
+      "url": "https://github.com/sorafujitani"
+    },
+    "x": { "url": "https://x.com/sorafujitani" }
   }
 ]

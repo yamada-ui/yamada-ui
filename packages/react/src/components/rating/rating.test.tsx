@@ -231,4 +231,27 @@ describe("<Rating />", () => {
       expect(ruleExists).toBeTruthy()
     }
   })
+
+  test("should reset hovered value on blur when mouse is outside", () => {
+    const { container } = render(<Rating />)
+    const inputs = container.querySelectorAll("input[type='radio']")
+    const firstInput = inputs[0] as HTMLInputElement
+
+    fireEvent.focus(firstInput)
+    fireEvent.mouseLeave(container.firstChild!)
+    fireEvent.blur(firstInput)
+
+    const activeInput = container.querySelector("input[data-active='true']")
+    expect(activeInput).toBeNull()
+  })
+
+  test("should not update hovered value on input change when readOnly", () => {
+    const { container } = render(<Rating readOnly />)
+    const inputs = container.querySelectorAll("input[type='radio']")
+    const targetInput = inputs[3] as HTMLInputElement
+
+    fireEvent.change(targetInput, { target: { value: "3" } })
+
+    expect(targetInput).not.toHaveAttribute("data-active")
+  })
 })

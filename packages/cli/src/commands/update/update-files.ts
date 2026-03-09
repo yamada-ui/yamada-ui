@@ -2,7 +2,7 @@ import type { ListrTask } from "listr2"
 import type { Config } from "../../index.type"
 import type { ChangeMap, DependencyMap } from "../diff/get-diff"
 import type { RegistryMap } from "../diff/get-registries-and-files"
-import { merge } from "@yamada-ui/utils"
+import { isUndefined, merge } from "@yamada-ui/utils"
 import { execa, ExecaError } from "execa"
 import { mkdtemp } from "fs/promises"
 import { Listr } from "listr2"
@@ -68,6 +68,7 @@ export interface UpdateFilesOptions {
   concurrent?: boolean
   force?: boolean
   install?: boolean
+  yes?: boolean
 }
 
 export async function updateFiles(
@@ -78,7 +79,8 @@ export async function updateFiles(
   {
     concurrent = true,
     force = false,
-    install = false,
+    install,
+    yes = false,
   }: UpdateFilesOptions = {},
 ) {
   const conflictMap: ConflictMap = {}
@@ -225,14 +227,16 @@ export async function updateFiles(
   await tasks.run()
 
   if (!install && (add.length || remove.length || update.length)) {
-    const { install } = await prompts({
-      type: "confirm",
+    const answer = await prompts({
+      type: !yes && isUndefined(install) ? "confirm" : null,
       name: "install",
       initial: true,
       message: c.reset(
         "There are dependency updates. Do you want to install them?",
       ),
     })
+
+    install ??= answer.install ?? true
 
     if (!install) return conflictMap
   }

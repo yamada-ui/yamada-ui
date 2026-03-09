@@ -23,24 +23,29 @@ interface Options {
   config: string
   cwd: string
   force: boolean
-  format: boolean
-  install: boolean
-  lint: boolean
   sequential: boolean
+  yes: boolean
+  format?: boolean
+  install?: boolean
+  lint?: boolean
   tag?: string
 }
 
 export const update = new Command("update")
-  .description("update components in your project")
-  .argument("[components...]", "components to update")
-  .option("--cwd <path>", "current working directory", cwd)
-  .option("-c, --config <path>", "path to the config file", CONFIG_FILE_NAME)
-  .option("-i, --install", "install dependencies", false)
+  .description("update components in your project.")
+  .argument("[components...]", "components to update.")
+  .option("--cwd <path>", "current working directory.", cwd)
+  .option("-c, --config <path>", "path to the config file.", CONFIG_FILE_NAME)
   .option("-s, --sequential", "run tasks sequentially.", false)
   .option("-F, --force", "force update, overwriting local changes.", false)
+  .option("-y, --yes", "skip all confirmation prompts.", false)
+  .option("-i, --install", "install dependencies.")
+  .option("--no-install", "do not install dependencies.")
   .option("-f, --format", "format the output files.")
+  .option("--no-format", "do not format the output files.")
   .option("-l, --lint", "lint the output files.")
-  .option("-t, --tag <name>", "tag for the registries (e.g. dev, next)")
+  .option("--no-lint", "do not lint the output files.")
+  .option("-t, --tag <name>", "tag for the registries (e.g. dev, next).")
   .action(async function (
     targetNames: string[],
     {
@@ -52,6 +57,7 @@ export const update = new Command("update")
       lint,
       sequential,
       tag,
+      yes,
     }: Options,
   ) {
     const spinner = ora()
@@ -158,7 +164,7 @@ export const update = new Command("update")
           dependencyMap,
           registryMap,
           config,
-          { concurrent: !sequential, force, install },
+          { concurrent: !sequential, force, install, yes },
         )
 
         if (Object.keys(conflictMap).length) {

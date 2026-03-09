@@ -1,8 +1,5 @@
-import { Outlet, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
-import { TanStackDevtools } from '@tanstack/react-devtools'
-
-import '../styles.css'
+import { createRootRoute, Outlet } from "@tanstack/react-router"
+import { UIProvider } from "@yamada-ui/react"
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -10,19 +7,8 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   return (
-    <>
+    <UIProvider>
       <Outlet />
-      <TanStackDevtools
-        config={{
-          position: 'bottom-right',
-        }}
-        plugins={[
-          {
-            name: 'TanStack Router',
-            render: <TanStackRouterDevtoolsPanel />,
-          },
-        ]}
-      />
-    </>
+    </UIProvider>
   )
 }

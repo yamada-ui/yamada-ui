@@ -33,6 +33,13 @@ const browserTestFiles = await getBrowserTestFiles()
 export default mergeConfig(sharedConfig, {
   plugins: [react()],
   test: {
+    coverage: {
+      exclude: [
+        "src/components/icon/icons/**/*.{ts,tsx}",
+        "src/providers/i18n-provider/intl/**/*.{ts,tsx}",
+        "src/theme/**/*.{ts,tsx}",
+      ],
+    },
     projects: [
       defineProject({
         resolve: {

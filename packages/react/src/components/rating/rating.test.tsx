@@ -197,4 +197,34 @@ describe("<Rating />", () => {
       expect(ruleExists).toBeTruthy()
     }
   })
+
+  test("should reset hovered value on blur when mouse is outside", () => {
+    const { container } = render(<Rating />)
+    const inputs = container.querySelectorAll("input[type='radio']")
+    const firstInput = inputs[0] as HTMLInputElement
+
+    fireEvent.focus(firstInput)
+    fireEvent.mouseLeave(container.firstChild!)
+    fireEvent.blur(firstInput)
+
+    const activeInput = container.querySelector("input[data-active='true']")
+    expect(activeInput).toBeNull()
+  })
+
+  test("should update value on KeyboardEvent", async () => {
+    const onChange = vi.fn()
+
+    const { container, user } = render(<Rating onChange={onChange} />)
+
+    const inputs = container.querySelectorAll("input[type='radio']")
+
+    await user.tab()
+    await user.keyboard("{ArrowRight}")
+
+    expect(inputs[1]).toHaveAttribute("data-active")
+
+    await user.keyboard("{Space}")
+
+    expect(onChange).toHaveBeenCalledWith(1)
+  })
 })

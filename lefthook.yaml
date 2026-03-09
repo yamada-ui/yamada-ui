@@ -80,6 +80,7 @@ pre-commit:
 
           - name: tanstack-router
             root: playgrounds/tanstack/router/
+            exclude: "**/*.gen.ts"
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
             run: |
               pnpm eslint {staged_files} --max-warnings=0 --fix --cache

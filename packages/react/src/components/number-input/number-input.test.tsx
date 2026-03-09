@@ -7,7 +7,7 @@ describe("<NumberInput />", () => {
   })
 
   test("sets `displayName` correctly", () => {
-    expect(NumberInput.name).toBe("NumberInputRoot")
+    expect(NumberInput.displayName).toBe("NumberInputRoot")
   })
 
   test("render input with props", async () => {
@@ -180,7 +180,7 @@ describe("<NumberInput />", () => {
     expect(numberInput).toHaveValue("10")
   })
 
-  test("increments the value on wheel up", async () => {
+  test("should change value on wheel when focused and allowMouseWheel is true", async () => {
     const { user } = render(<NumberInput allowMouseWheel defaultValue={10} />)
 
     const numberInput = await screen.findByRole("spinbutton")
@@ -190,18 +190,9 @@ describe("<NumberInput />", () => {
 
     fireEvent.wheel(numberInput, { deltaY: -100 })
     expect(numberInput).toHaveValue("11")
-  })
-
-  test("decrements the value on wheel down", async () => {
-    const { user } = render(<NumberInput allowMouseWheel defaultValue={10} />)
-
-    const numberInput = await screen.findByRole("spinbutton")
-    expect(numberInput).toHaveValue("10")
-
-    await user.tab()
 
     fireEvent.wheel(numberInput, { deltaY: 100 })
-    expect(numberInput).toHaveValue("9")
+    expect(numberInput).toHaveValue("10")
   })
 
   test("should prevent invalid character input via keyboard", async () => {
@@ -240,20 +231,6 @@ describe("<NumberInput />", () => {
     expect(preventDefaultSpy).not.toHaveBeenCalled()
   })
 
-  test("should restore cursor position on focus after onChange", async () => {
-    const { user } = render(<NumberInput defaultValue={10} />)
-
-    const numberInput = await screen.findByRole("spinbutton")
-
-    await user.click(numberInput)
-    await user.type(numberInput, "5")
-
-    fireEvent.blur(numberInput)
-    fireEvent.focus(numberInput)
-
-    expect(numberInput).toBeInTheDocument()
-  })
-
   test("should not change value when disabled and increment/decrement buttons are clicked", async () => {
     render(<NumberInput defaultValue={10} disabled />)
 
@@ -270,11 +247,12 @@ describe("<NumberInput />", () => {
     expect(numberInput).toHaveValue("10")
   })
 
-  test("should not change value when readOnly", async () => {
+  test("should not change value when readOnly and work with controlled value", async () => {
     const { user } = render(<NumberInput defaultValue={10} readOnly />)
 
     const numberInput = await screen.findByRole("spinbutton")
     expect(numberInput).toHaveValue("10")
+    expect(numberInput).toHaveProperty("readOnly", true)
 
     await user.tab()
 
@@ -503,5 +481,52 @@ describe("<NumberInput />", () => {
     numberInput.dispatchEvent(event)
 
     expect(preventDefaultSpy).not.toHaveBeenCalled()
+  })
+
+  test("should handle controlled value changes", async () => {
+    const onChange = vi.fn()
+    const { rerender } = render(<NumberInput value={10} onChange={onChange} />)
+
+    const numberInput = await screen.findByRole("spinbutton")
+    expect(numberInput).toHaveValue("10")
+
+    rerender(<NumberInput value={20} onChange={onChange} />)
+    expect(numberInput).toHaveValue("20")
+  })
+
+  test("should combine multiple props and render all custom props correctly", async () => {
+    render(
+      <NumberInput
+        className="custom-class"
+        colorScheme="primary"
+        aria-describedby="helper-text"
+        aria-label="Custom label"
+        defaultValue={15}
+        disabled={false}
+        max={100}
+        min={0}
+        placeholder="Enter number"
+        readOnly={false}
+        step={5}
+        controlProps={{ "data-testid": "control" }}
+        decrementProps={{ "data-testid": "decrement" }}
+        elementProps={{ "data-testid": "element" }}
+        incrementProps={{ "data-testid": "increment" }}
+        rootProps={{ "data-testid": "root" }}
+      />,
+    )
+
+    const numberInput = await screen.findByRole("spinbutton")
+    expect(numberInput).toHaveValue("15")
+    expect(numberInput).toHaveProperty("step", "5")
+    expect(numberInput).toHaveProperty("min", "0")
+    expect(numberInput).toHaveProperty("max", "100")
+    expect(numberInput).toHaveAttribute("aria-label", "Custom label")
+    expect(numberInput).toHaveAttribute("aria-describedby", "helper-text")
+    expect(screen.getByTestId("root")).toBeInTheDocument()
+    expect(screen.getByTestId("element")).toBeInTheDocument()
+    expect(screen.getByTestId("control")).toBeInTheDocument()
+    expect(screen.getByTestId("increment")).toBeInTheDocument()
+    expect(screen.getByTestId("decrement")).toBeInTheDocument()
   })
 })

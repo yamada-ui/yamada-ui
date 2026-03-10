@@ -1,7 +1,7 @@
 {
   "name": "@yamada-ui/cli",
   "type": "module",
-  "version": "2.1.0-dev-20260308051035",
+  "version": "2.0.9",
   "description": "The official CLI for Yamada UI projects",
   "keywords": [
     "theme",

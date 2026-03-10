@@ -2,13 +2,15 @@ import { parse } from "@babel/parser"
 import traverse from "@babel/traverse"
 import { interopDefault, toKebabCase } from "@yamada-ui/utils"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
-import { execa } from "execa"
+import { execFile } from "child_process"
 import { readdir, readFile, unlink } from "fs/promises"
 import ora from "ora"
 import path from "path"
 import c from "picocolors"
+import { promisify } from "util"
 import { ICON_TEMPLATE } from "./template"
 
+const execFileAsync = promisify(execFile)
 const resolvedTraverse = interopDefault(traverse)
 
 const ENTRY_PATH = path.join(
@@ -110,7 +112,8 @@ async function main() {
 
   spinner.start(`Fixing eslint`)
 
-  await execa("eslint", [
+  await execFileAsync("npx", [
+    "eslint",
     "packages/react/src/components/icon/icons/index.ts",
     "packages/react/src/components/icon/icons/index.types.ts",
     "--fix",

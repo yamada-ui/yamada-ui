@@ -4,13 +4,16 @@ import {
   retryOnRateLimit,
   retryOnRateLimitWithPaging,
 } from "@yamada-ui/workspace/octokit"
+import { execFile } from "child_process"
 import { Command } from "commander"
-import { execa } from "execa"
 import { readFile } from "fs/promises"
 import ora from "ora"
 import path from "path"
 import c from "picocolors"
 import stripAnsi from "strip-ansi"
+import { promisify } from "util"
+
+const execFileAsync = promisify(execFile)
 
 const OWNER_NAME = "yamada-ui"
 const REPO_NAME = "yamada-ui"
@@ -109,7 +112,7 @@ async function getIssues() {
 }
 
 async function createReport() {
-  await execa("pnpm", ["react", "test:a11y"]).catch((e) => e)
+  await execFileAsync("pnpm", ["react", "test:a11y"]).catch((e) => e)
 }
 
 async function getReport() {

@@ -1,11 +1,14 @@
 import { toKebabCase, toPascalCase } from "@yamada-ui/utils"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
-import { execa } from "execa"
+import { execFile } from "child_process"
 import { readdir, readFile } from "fs/promises"
 import ora from "ora"
 import path from "path"
 import c from "picocolors"
 import { rimraf } from "rimraf"
+import { promisify } from "util"
+
+const execFileAsync = promisify(execFile)
 
 const REPOSITORY_PATH = path.resolve(".lucide")
 const DIST_PATH = path.resolve("data", "icons.json")
@@ -75,7 +78,7 @@ async function main() {
 
   spinner.start(`Cloning .lucide`)
 
-  await execa("git", [
+  await execFileAsync("git", [
     "clone",
     "https://github.com/lucide-icons/lucide.git",
     REPOSITORY_PATH,

@@ -44,7 +44,7 @@ pre-commit:
             stage_fixed: true
 
           - name: www
-            root: packages/www/
+            root: www/
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
             run: |
               pnpm eslint {staged_files} --max-warnings=0 --fix --cache

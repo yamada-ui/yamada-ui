@@ -529,4 +529,258 @@ describe("<NumberInput />", () => {
     expect(screen.getByTestId("increment")).toBeInTheDocument()
     expect(screen.getByTestId("decrement")).toBeInTheDocument()
   })
+
+  test("should not increment beyond max when at max boundary with stepper", async () => {
+    const { user } = render(
+      <NumberInput defaultValue={30} max={30} min={0} keepWithinRange />,
+    )
+
+    const numberInput = await screen.findByRole("spinbutton")
+    const incrementStepper = screen.getByRole("button", { name: "Increase" })
+
+    expect(numberInput).toHaveValue("30")
+    expect(incrementStepper).toBeDisabled()
+
+    await user.click(incrementStepper)
+    expect(numberInput).toHaveValue("30")
+  })
+
+  test("should not decrement below min when at min boundary with stepper", async () => {
+    const { user } = render(
+      <NumberInput defaultValue={0} max={30} min={0} keepWithinRange />,
+    )
+
+    const numberInput = await screen.findByRole("spinbutton")
+    const decrementStepper = screen.getByRole("button", { name: "Decrease" })
+
+    expect(numberInput).toHaveValue("0")
+    expect(decrementStepper).toBeDisabled()
+
+    await user.click(decrementStepper)
+    expect(numberInput).toHaveValue("0")
+  })
+
+  test("should apply ctrl key step ratio for finer increments", async () => {
+    render(<NumberInput defaultValue={10} step={1} precision={1} />)
+
+    const numberInput = screen.getByRole("spinbutton")
+    act(() => {
+      numberInput.focus()
+    })
+
+    fireEvent.keyDown(numberInput, { key: "ArrowUp", ctrlKey: true })
+    expect(numberInput).toHaveValue("10.1")
+  })
+
+  test("should apply meta key step ratio for finer increments", async () => {
+    render(<NumberInput defaultValue={10} step={1} precision={1} />)
+
+    const numberInput = screen.getByRole("spinbutton")
+    act(() => {
+      numberInput.focus()
+    })
+
+    fireEvent.keyDown(numberInput, { key: "ArrowUp", metaKey: true })
+    expect(numberInput).toHaveValue("10.1")
+  })
+
+  test("should apply ctrl key step ratio for finer decrements", async () => {
+    render(<NumberInput defaultValue={10} step={1} precision={1} />)
+
+    const numberInput = screen.getByRole("spinbutton")
+    act(() => {
+      numberInput.focus()
+    })
+
+    fireEvent.keyDown(numberInput, { key: "ArrowDown", ctrlKey: true })
+    expect(numberInput).toHaveValue("9.9")
+  })
+
+  test("should handle format and parse with programmatic input", async () => {
+    render(
+      <NumberInput
+        defaultValue={12.5}
+        format={(val) => `$${Number(val).toFixed(2)}`}
+        parse={(val) => val.replace(/[$,]/g, "")}
+      />,
+    )
+
+    const numberInput = await screen.findByRole("spinbutton")
+    expect(numberInput).toHaveValue("$12.50")
+
+    fireEvent.change(numberInput, { target: { value: "25.99" } })
+    fireEvent.blur(numberInput)
+    expect(numberInput).toHaveValue("$25.99")
+  })
+
+  test("should call onChange when value changes", async () => {
+    const onChange = vi.fn()
+    const { user } = render(
+      <NumberInput defaultValue={10} onChange={onChange} />,
+    )
+
+    const numberInput = await screen.findByRole("spinbutton")
+    await user.clear(numberInput)
+    await user.type(numberInput, "25")
+
+    expect(onChange).toHaveBeenCalled()
+  })
+
+  test("should not update on blur when value is empty", async () => {
+    const { user } = render(<NumberInput />)
+
+    const numberInput = await screen.findByRole("spinbutton")
+    await user.click(numberInput)
+    fireEvent.blur(numberInput)
+
+    expect(numberInput).toHaveValue("")
+  })
+
+  test("should restore selection on focus after change", async () => {
+    const { user } = render(<NumberInput defaultValue={123} />)
+
+    const numberInput = await screen.findByRole("spinbutton")
+    await user.click(numberInput)
+    await user.type(numberInput, "4")
+    fireEvent.blur(numberInput)
+    await user.click(numberInput)
+
+    expect(numberInput).toHaveValue("1234")
+  })
+
+  test("should handle stepper with non-zero button (right click)", async () => {
+    render(<NumberInput defaultValue={10} />)
+
+    const numberInput = screen.getByRole("spinbutton")
+    const incrementStepper = screen.getByRole("button", { name: "Increase" })
+
+    fireEvent.pointerDown(incrementStepper, { button: 1 })
+    expect(numberInput).toHaveValue("10")
+  })
+
+  test("should clamp value when both min and max are exceeded on blur", async () => {
+    render(<NumberInput defaultValue={100} min={0} max={50} />)
+
+    const numberInput = await screen.findByRole("spinbutton")
+    expect(numberInput).toHaveValue("100")
+
+    fireEvent.blur(numberInput)
+    expect(numberInput).toHaveValue("50")
+  })
+
+  test("should handle value at exact min on blur", async () => {
+    render(<NumberInput defaultValue={0} min={0} max={100} />)
+
+    const numberInput = await screen.findByRole("spinbutton")
+    fireEvent.blur(numberInput)
+    expect(numberInput).toHaveValue("0")
+  })
+
+  test("should handle value at exact max on blur", async () => {
+    render(<NumberInput defaultValue={100} min={0} max={100} />)
+
+    const numberInput = await screen.findByRole("spinbutton")
+    fireEvent.blur(numberInput)
+    expect(numberInput).toHaveValue("100")
+  })
+
+  test("should handle decimal step increments", async () => {
+    const { user } = render(
+      <NumberInput defaultValue={1} step={0.1} precision={1} />,
+    )
+
+    const numberInput = await screen.findByRole("spinbutton")
+    await user.tab()
+
+    await user.keyboard("{arrowup}")
+    expect(numberInput).toHaveValue("1.1")
+
+    await user.keyboard("{arrowup}")
+    expect(numberInput).toHaveValue("1.2")
+
+    await user.keyboard("{arrowdown}")
+    expect(numberInput).toHaveValue("1.1")
+  })
+
+  test("should handle invalid input and clamp on blur", async () => {
+    const { user } = render(<NumberInput min={0} max={100} />)
+
+    const numberInput = await screen.findByRole("spinbutton")
+    await user.click(numberInput)
+    await user.type(numberInput, "abc")
+    fireEvent.blur(numberInput)
+
+    expect(numberInput).toHaveValue("")
+  })
+
+  test("should allow plus and minus in isValidCharacter", async () => {
+    render(<NumberInput defaultValue={10} />)
+
+    const numberInput = screen.getByRole("spinbutton")
+
+    const preventDefaultSpy = vi.fn()
+    const plusEvent = new KeyboardEvent("keydown", {
+      key: "+",
+      bubbles: true,
+      cancelable: true,
+    })
+    Object.defineProperty(plusEvent, "preventDefault", {
+      value: preventDefaultSpy,
+    })
+    numberInput.dispatchEvent(plusEvent)
+    expect(preventDefaultSpy).not.toHaveBeenCalled()
+
+    const minusEvent = new KeyboardEvent("keydown", {
+      key: "-",
+      bubbles: true,
+      cancelable: true,
+    })
+    Object.defineProperty(minusEvent, "preventDefault", {
+      value: vi.fn(),
+    })
+    numberInput.dispatchEvent(minusEvent)
+  })
+
+  test("should allow period in isValidCharacter", async () => {
+    render(<NumberInput defaultValue={10} />)
+
+    const numberInput = screen.getByRole("spinbutton")
+
+    const preventDefaultSpy = vi.fn()
+    const event = new KeyboardEvent("keydown", {
+      key: ".",
+      bubbles: true,
+      cancelable: true,
+    })
+    Object.defineProperty(event, "preventDefault", { value: preventDefaultSpy })
+
+    numberInput.dispatchEvent(event)
+    expect(preventDefaultSpy).not.toHaveBeenCalled()
+  })
+
+  test("should not change value when readonly and stepper is clicked", async () => {
+    render(<NumberInput defaultValue={10} readOnly />)
+
+    const numberInput = screen.getByRole("spinbutton")
+    const incrementStepper = screen.getByRole("button", { name: "Increase" })
+    const decrementStepper = screen.getByRole("button", { name: "Decrease" })
+
+    fireEvent.pointerDown(incrementStepper, { button: 0 })
+    expect(numberInput).toHaveValue("10")
+
+    fireEvent.pointerDown(decrementStepper, { button: 0 })
+    expect(numberInput).toHaveValue("10")
+  })
+
+  test("should render with custom increment and decrement button children", async () => {
+    render(
+      <NumberInput
+        incrementProps={{ children: "▲" }}
+        decrementProps={{ children: "▼" }}
+      />,
+    )
+
+    expect(screen.getByText("▲")).toBeInTheDocument()
+    expect(screen.getByText("▼")).toBeInTheDocument()
+  })
 })

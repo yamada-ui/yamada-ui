@@ -69,7 +69,7 @@ export function MobileMenu({ items }: MobileMenuProps) {
         <IconButton
           aria-label={t("component.header.menu")}
           color="fg.emphasized"
-          display={{ base: "none", md: "flex" }}
+          display={{ base: "none", lg: "flex" }}
           icon={<MenuIcon />}
         />
       </Drawer.OpenTrigger>

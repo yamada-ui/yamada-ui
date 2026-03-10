@@ -8,7 +8,7 @@ export default async function Page({ params }: PageProps<"/[locale]">) {
   const t = await getTranslations({ locale, namespace: "home" })
 
   return (
-    <VStack gap="0">
+    <>
       <Hero
         description={t("description")}
         title={t("title")}
@@ -27,6 +27,6 @@ export default async function Page({ params }: PageProps<"/[locale]">) {
 
         <Examples />
       </VStack>
-    </VStack>
+    </>
   )
 }

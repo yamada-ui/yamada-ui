@@ -23,6 +23,7 @@ export function Header() {
       { href: "/docs/get-started", label: t("component.header.docs") },
       { href: "/icons", label: t("component.header.icons") },
       { href: "/themes", label: t("component.header.themes") },
+      { href: "/showcase", label: t("component.header.showcase") },
       {
         href: "https://yamada-colors.app",
         label: t("component.header.colors"),
@@ -46,9 +47,9 @@ export function Header() {
     >
       <NextLinkIconButton href="/" variant="ghost" icon={<LogoIcon />} />
 
-      <NavMenu display={{ base: "flex", md: "none" }} flex="1" items={items} />
+      <NavMenu display={{ base: "flex", lg: "none" }} flex="1" items={items} />
 
-      <Spacer display={{ base: "none", md: "block" }} />
+      <Spacer display={{ base: "none", lg: "block" }} />
 
       <ButtonGroup.Root size="sm" variant="ghost" alignItems="center" gap="sm">
         <Search />
@@ -87,7 +88,7 @@ export function Header() {
           <ColorModeButton />
 
           <Separator
-            display={{ base: "none", md: "block" }}
+            display={{ base: "none", lg: "block" }}
             h="4"
             orientation="vertical"
           />

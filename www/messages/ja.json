@@ -77,6 +77,12 @@
       "pink": "ピンク"
     }
   },
+  "showcase": {
+    "title": "ショーケース",
+    "description": "Yamada UIで構築されたプロジェクトを発見し、次のプロジェクトのインスピレーションを得ましょう。",
+    "primaryAction": "はじめる",
+    "secondaryAction": "プロジェクトを提出する"
+  },
   "changelog": {
     "title": "変更履歴",
     "latest": "Yamada UIの最新バージョンの変更履歴をご覧ください。機能・バグ修正・改善点についてご確認ください。",
@@ -91,8 +97,9 @@
       "docs": "ドキュメント",
       "icons": "アイコン",
       "playground": "プレイグラウンド",
-      "colors": "カラー",
       "themes": "テーマ",
+      "showcase": "ショーケース",
+      "colors": "カラー",
       "github": "GitHubリポジトリ",
       "colorMode": "{colorMode}に変更する",
       "lang": "言語を変更する",

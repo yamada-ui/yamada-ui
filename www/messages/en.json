@@ -77,6 +77,12 @@
       "pink": "Pink"
     }
   },
+  "showcase": {
+    "title": "Showcase",
+    "description": "Discover projects built with Yamada UI. Get inspired before starting your next project.",
+    "primaryAction": "Get Started",
+    "secondaryAction": "Submit Your Project"
+  },
   "changelog": {
     "title": "Changelog",
     "latest": "Explore the changelog for the latest version of Yamada UI. Learn about the features, bug fixes, and improvements.",
@@ -92,6 +98,7 @@
       "icons": "Icons",
       "playground": "Playground",
       "themes": "Themes",
+      "showcase": "Showcase",
       "colors": "Colors",
       "github": "GitHub repository",
       "colorMode": "Change to {colorMode}",

@@ -13,8 +13,8 @@ import {
   toCamelCase,
 } from "@yamada-ui/utils"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { execFile } from "child_process"
 import { Command } from "commander"
-import { execa } from "execa"
 import { glob } from "glob"
 import ora from "ora"
 import path from "path"
@@ -24,6 +24,7 @@ import {
   isInterfaceDeclaration,
   isTypeAliasDeclaration,
 } from "typescript"
+import { promisify } from "util"
 import { features } from "web-features"
 import { checkProps } from "./check"
 import { excludeProps } from "./exclude-props"
@@ -33,6 +34,8 @@ import { additionalProps, atRuleProps, styledProps } from "./styled-props"
 import { generateStyles } from "./styles"
 import { tokenMap } from "./tokens"
 import { transformMap } from "./transform-props"
+
+const execFileAsync = promisify(execFile)
 
 export const STYLES_PATH = path.resolve(
   process.cwd(),
@@ -648,7 +651,7 @@ function main() {
 
       spinner.start(`Fixing eslint`)
 
-      if (!publish) await execa("eslint", [STYLES_PATH, "--fix"])
+      if (!publish) await execFileAsync("npx", ["eslint", STYLES_PATH, "--fix"])
 
       spinner.succeed(`Fixed eslint`)
 

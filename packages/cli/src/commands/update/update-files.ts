@@ -3,7 +3,6 @@ import type { Config } from "../../index.type"
 import type { ChangeMap, DependencyMap } from "../diff/get-diff"
 import type { RegistryMap } from "../diff/get-registries-and-files"
 import { isUndefined, merge } from "@yamada-ui/utils"
-import { execa, ExecaError } from "execa"
 import { mkdtemp } from "fs/promises"
 import { Listr } from "listr2"
 import { tmpdir } from "os"
@@ -13,6 +12,7 @@ import prompts from "prompts"
 import { rimraf } from "rimraf"
 import { REGISTRY_FILE_NAME } from "../../constant"
 import {
+  execFileAsync,
   getPackageName,
   getPackageNameWithVersion,
   installDependencies,
@@ -31,7 +31,7 @@ async function mergeContent(
   let conflict = false
 
   try {
-    const { stdout } = await execa("diff3", [
+    const { stdout } = await execFileAsync("diff3", [
       "-m",
       remotePath,
       localPath,
@@ -39,14 +39,12 @@ async function mergeContent(
     ])
 
     content = stdout
-  } catch (e) {
-    if (e instanceof ExecaError) {
-      if (e.stdout as string | undefined) {
-        conflict = true
-        content = e.stdout as unknown as string
-      } else {
-        content = fallback
-      }
+  } catch (e: any) {
+    if (e?.stdout) {
+      conflict = true
+      content = e.stdout
+    } else {
+      content = fallback
     }
   }
 

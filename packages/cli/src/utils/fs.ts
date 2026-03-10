@@ -1,6 +1,7 @@
 import type { ObjectEncodingOptions } from "fs"
 import type { LintFilesOptions } from "./lint"
 import type { FormatOptions } from "./prettier"
+import { execFile } from "child_process"
 import fs, { existsSync, statSync } from "fs"
 import {
   mkdir,
@@ -11,11 +12,14 @@ import {
 import { glob } from "glob"
 import path from "path"
 import c from "picocolors"
+import { promisify } from "util"
 import { REGISTRY_FILE_NAME } from "../constant"
 import { lintFiles } from "./lint"
 import { formatFiles } from "./prettier"
 
 export const cwd = process.env.INIT_CWD ?? process.cwd()
+
+export const execFileAsync = promisify(execFile)
 
 export async function isWriteable(directory: string) {
   try {

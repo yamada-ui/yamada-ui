@@ -3,33 +3,60 @@ title: Changelog
 description: "Explore the changelog for the latest version of Yamada UI. Learn about the features, bug fixes, and improvements."
 ---
 
-## @yamada-ui/react@2.1.1
+## @yamada-ui/react@2.1.2
 
-This version was released on March 3, 2026.
-
-### Patch changes
-
-- [#5771](https://github.com/yamada-ui/yamada-ui/pull/5771) [c38c9aa](https://github.com/yamada-ui/yamada-ui/commit/c38c9aa8e8cb645454dbcf1584048dba7fe07bbe) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `areaStartFillOpacity` and `areaEndFillOpacity` to `AreaChart`. These properties are only effective when `withGradient` is set to `true` on `AreaChart.Area`.
-
-- [#5778](https://github.com/yamada-ui/yamada-ui/pull/5778) [46fa811](https://github.com/yamada-ui/yamada-ui/commit/46fa81183de5d8429e413a24784346c8e347b87f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
-
-- [#5771](https://github.com/yamada-ui/yamada-ui/pull/5771) [c38c9aa](https://github.com/yamada-ui/yamada-ui/commit/c38c9aa8e8cb645454dbcf1584048dba7fe07bbe) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `fillOpacity` was not properly applied in both `AreaChart` and `RadarChart`.
-
-- [#5770](https://github.com/yamada-ui/yamada-ui/pull/5770) [015a208](https://github.com/yamada-ui/yamada-ui/commit/015a208e60c9f7dd1f1926c287f2225fa78afcb8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Made the type definition of `varAttr` generic.
-
-- [#5774](https://github.com/yamada-ui/yamada-ui/pull/5774) [b6f79f4](https://github.com/yamada-ui/yamada-ui/commit/b6f79f40030697fc233c14f1f2966b52bbd89a9a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `ComposedChart` component.
-
-- [#5770](https://github.com/yamada-ui/yamada-ui/pull/5770) [015a208](https://github.com/yamada-ui/yamada-ui/commit/015a208e60c9f7dd1f1926c287f2225fa78afcb8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the `swatch` color in `Tooltip` and `Legend` was not correctly reflected when using chart components with composition.
-
-## @yamada-ui/cli@2.0.9
-
-This version was released on March 3, 2026.
+This version was released on March 10, 2026.
 
 ### Patch changes
 
-- [#5778](https://github.com/yamada-ui/yamada-ui/pull/5778) [46fa811](https://github.com/yamada-ui/yamada-ui/commit/46fa81183de5d8429e413a24784346c8e347b87f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - `SegmentedControl` now removes `aria-readonly` from the label and input element.
 
-- [#5777](https://github.com/yamada-ui/yamada-ui/pull/5777) [cac36ed](https://github.com/yamada-ui/yamada-ui/commit/cac36ed5fbbbdfdee168fbcc249ba81583a2517e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the files specified in `main` and `bin` of `package.json` did not exist, causing the CLI to not work correctly.
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed `onBlur` incorrectly setting `focused` to `false` when clicking on the dropdown content in `Autocomplete` with `multiple` mode, which caused the separator to disappear during mousedown.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Remove `aria-checked` from native checkbox input and use the native `indeterminate` property instead to fix `aria-conditional-attr` a11y violation.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed unreachable dead code in `useDynamicAnimation`.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the `className` prop was not correctly applied to the `Table` component.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the fallback icon shown when the number of items in `AvatarGroup` exceeds the specified `max` incorrectly had a `role` of `"img"`.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed the return type of `createStore` to include the `queue` and `ref`.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed the `Calendar.Navigation` from `nav` to `div` for better accessibility.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where unnecessary spaces were inserted with `_media` and `_container`.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where values containing "grad", "turn", or "rad" in `rotate` were not handled correctly.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Allow custom `aria-label` to override default on Pagination nav element.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `tabIndex="0"` to the scrollable root in `NativeTable` for keyboard focus (a11y).
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Applied `aria-labelledby` to the visible control in `FileInput` and `FileButton` for better accessibility.
+
+## @yamada-ui/cli@2.1.0
+
+This version was released on March 10, 2026.
+
+### Minor changes
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `--force` (`-F`) option to the `update` command to force overwrite local changes with remote source code.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - You can now use commands such as `init` and `add` with the `@next` or `@dev` tags. This allows you to specify the tag for `@yamada-ui/react` and download the source code locally.
+
+- [#5980](https://github.com/yamada-ui/yamada-ui/pull/5980) [bca6d3e](https://github.com/yamada-ui/yamada-ui/commit/bca6d3e8024ded595e753a63a8b3fc3f9599063d) Thanks [@bmthd](https://github.com/bmthd)! - - Add --yes/-y auto-confirm support to the add/diff/init/theme/update CLI commands so scripted runs can bypass interactive prompts.
+  - Surface the previously missing non-interactive flags across add/diff/init/theme to keep automated and manual flows aligned.
+
+### Patch changes
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactor code.
 
 ## @yamada-ui/utils@2.1.0
 

@@ -494,6 +494,224 @@ describe("<NumberInput />", () => {
     expect(numberInput).toHaveValue("20")
   })
 
+  test("should apply step ratio with ctrl key on keyboard (ratio 0.1)", () => {
+    render(<NumberInput defaultValue={10} step={1} />)
+
+    const numberInput = screen.getByRole("spinbutton")
+
+    act(() => {
+      numberInput.focus()
+    })
+
+    fireEvent.keyDown(numberInput, { key: "ArrowUp", ctrlKey: true })
+    expect(numberInput).toHaveValue("10.1")
+  })
+
+  test("should apply step ratio with meta key on keyboard (ratio 0.1)", () => {
+    render(<NumberInput defaultValue={10} step={1} />)
+
+    const numberInput = screen.getByRole("spinbutton")
+
+    act(() => {
+      numberInput.focus()
+    })
+
+    fireEvent.keyDown(numberInput, { key: "ArrowDown", metaKey: true })
+    expect(numberInput).toHaveValue("9.9")
+  })
+
+  test("should apply step ratio with ctrl key on wheel (ratio 0.1)", () => {
+    render(<NumberInput allowMouseWheel defaultValue={10} step={1} />)
+
+    const numberInput = screen.getByRole("spinbutton")
+
+    act(() => {
+      numberInput.focus()
+    })
+
+    fireEvent.wheel(numberInput, { deltaY: -100, ctrlKey: true })
+    expect(numberInput).toHaveValue("10.1")
+  })
+
+  test("should not change value on blur when input is empty", async () => {
+    render(<NumberInput />)
+
+    const numberInput = await screen.findByRole("spinbutton")
+    expect(numberInput).toHaveValue("")
+
+    fireEvent.blur(numberInput)
+    expect(numberInput).toHaveValue("")
+  })
+
+  test("should set aria-valuenow to undefined when value is NaN (empty input)", async () => {
+    render(<NumberInput />)
+
+    const numberInput = await screen.findByRole("spinbutton")
+    expect(numberInput).not.toHaveAttribute("aria-valuenow")
+  })
+
+  test("should not prevent keydown when alt key is pressed", () => {
+    render(<NumberInput defaultValue={10} />)
+
+    const numberInput = screen.getByRole("spinbutton")
+
+    const preventDefaultSpy = vi.fn()
+    const event = new KeyboardEvent("keydown", {
+      key: "a",
+      bubbles: true,
+      cancelable: true,
+      altKey: true,
+    })
+    Object.defineProperty(event, "preventDefault", { value: preventDefaultSpy })
+
+    numberInput.dispatchEvent(event)
+
+    expect(preventDefaultSpy).not.toHaveBeenCalled()
+  })
+
+  test("should not prevent keydown when meta key is pressed", () => {
+    render(<NumberInput defaultValue={10} />)
+
+    const numberInput = screen.getByRole("spinbutton")
+
+    const preventDefaultSpy = vi.fn()
+    const event = new KeyboardEvent("keydown", {
+      key: "a",
+      bubbles: true,
+      cancelable: true,
+      metaKey: true,
+    })
+    Object.defineProperty(event, "preventDefault", { value: preventDefaultSpy })
+
+    numberInput.dispatchEvent(event)
+
+    expect(preventDefaultSpy).not.toHaveBeenCalled()
+  })
+
+  test("should not change value when right mouse button is used on stepper", () => {
+    render(<NumberInput defaultValue={10} />)
+
+    const numberInput = screen.getByRole("spinbutton")
+    const incrementStepper = screen.getByRole("button", { name: "Increase" })
+
+    fireEvent.pointerDown(incrementStepper, { button: 2 })
+    expect(numberInput).toHaveValue("10")
+  })
+
+  test("should not focus input on decrement when focusInputOnChange is false", async () => {
+    render(<NumberInput defaultValue={10} focusInputOnChange={false} />)
+
+    const numberInput = await screen.findByRole("spinbutton")
+    const decrementStepper = screen.getByRole("button", { name: "Decrease" })
+
+    fireEvent.pointerDown(decrementStepper, { button: 0 })
+    fireEvent.pointerUp(decrementStepper)
+
+    await waitFor(() => {
+      expect(numberInput).toHaveValue("9")
+    })
+  })
+
+  test("should handle input change with format and parse on increment", async () => {
+    const { user } = render(
+      <NumberInput
+        defaultValue={10}
+        format={(val) => `$${val}`}
+        parse={(val) => val.replace("$", "")}
+      />,
+    )
+
+    const numberInput = await screen.findByRole("spinbutton")
+    expect(numberInput).toHaveValue("$10")
+
+    const incrementStepper = screen.getByRole("button", { name: "Increase" })
+    await user.click(incrementStepper)
+    expect(numberInput).toHaveValue("$11")
+  })
+
+  test("should clear value on blur if value starts with uppercase E", async () => {
+    const { user } = render(<NumberInput />)
+
+    const numberInput = await screen.findByRole("spinbutton")
+
+    await user.click(numberInput)
+    await user.type(numberInput, "E5")
+    fireEvent.blur(numberInput)
+
+    expect(numberInput).toHaveValue("")
+  })
+
+  test("should render without any props", async () => {
+    render(<NumberInput />)
+
+    const numberInput = await screen.findByRole("spinbutton")
+    expect(numberInput).toBeInTheDocument()
+    expect(numberInput).toHaveValue("")
+  })
+
+  test("should stop spinning on pointer up for decrement button", () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true })
+
+    render(<NumberInput defaultValue={10} />)
+
+    const numberInput = screen.getByRole("spinbutton")
+    const decrementStepper = screen.getByRole("button", { name: "Decrease" })
+
+    fireEvent.pointerDown(decrementStepper, { button: 0 })
+    expect(numberInput).toHaveValue("9")
+
+    act(() => {
+      vi.advanceTimersByTime(350)
+    })
+
+    fireEvent.pointerLeave(decrementStepper)
+
+    const valueAfterLeave = numberInput.getAttribute("value")
+
+    act(() => {
+      vi.advanceTimersByTime(200)
+    })
+
+    expect(numberInput).toHaveValue(valueAfterLeave)
+
+    vi.useRealTimers()
+  })
+
+  test("should apply step ratio with shift key on wheel for decrement", () => {
+    render(<NumberInput allowMouseWheel defaultValue={10} />)
+
+    const numberInput = screen.getByRole("spinbutton")
+
+    act(() => {
+      numberInput.focus()
+    })
+
+    fireEvent.wheel(numberInput, { deltaY: 100, shiftKey: true })
+    expect(numberInput).toHaveValue("0")
+  })
+
+  test("should not allow non-left-click on decrement button", () => {
+    render(<NumberInput defaultValue={10} />)
+
+    const numberInput = screen.getByRole("spinbutton")
+    const decrementStepper = screen.getByRole("button", { name: "Decrease" })
+
+    fireEvent.pointerDown(decrementStepper, { button: 2 })
+    expect(numberInput).toHaveValue("10")
+  })
+
+  test("should handle getAriaValueText returning undefined", async () => {
+    render(
+      <NumberInput
+        defaultValue={10}
+        getAriaValueText={() => undefined}
+      />,
+    )
+
+    const numberInput = await screen.findByRole("spinbutton")
+    expect(numberInput).toHaveAttribute("aria-valuetext", "10")
+  })
+
   test("should combine multiple props and render all custom props correctly", async () => {
     render(
       <NumberInput

@@ -641,14 +641,6 @@ describe("<NumberInput />", () => {
     expect(numberInput).toHaveValue("")
   })
 
-  test("should render without any props", async () => {
-    render(<NumberInput />)
-
-    const numberInput = await screen.findByRole("spinbutton")
-    expect(numberInput).toBeInTheDocument()
-    expect(numberInput).toHaveValue("")
-  })
-
   test("should stop spinning on pointer up for decrement button", () => {
     vi.useFakeTimers({ shouldAdvanceTime: true })
 
@@ -716,7 +708,7 @@ describe("<NumberInput />", () => {
     render(
       <NumberInput
         className="custom-class"
-        colorScheme="primary"
+        colorScheme="secondary"
         aria-describedby="helper-text"
         aria-label="Custom label"
         defaultValue={15}

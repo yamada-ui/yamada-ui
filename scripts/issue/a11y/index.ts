@@ -158,7 +158,16 @@ function getFailures({ testResults }: Report) {
     })
   })
 
-  return failures
+  return Object.fromEntries(
+    Object.entries(failures)
+      .filter(([, stories]) => Object.keys(stories).length)
+      .map(([categoryName, stories]) => [
+        categoryName,
+        Object.fromEntries(
+          Object.entries(stories).filter(([, details]) => details.length),
+        ),
+      ]),
+  )
 }
 
 function createBody(

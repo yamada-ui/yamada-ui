@@ -5,6 +5,8 @@ import type { Data } from "./list"
 import {
   assignRef,
   Center,
+  CheckIcon,
+  ClipboardIcon,
   CloseButton,
   Drawer,
   Flex,
@@ -14,6 +16,7 @@ import {
   Icon,
   IconButton,
   icons,
+  LinkIcon,
   Separator,
   Tooltip,
   useClipboard,
@@ -47,14 +50,13 @@ export const PreviewDrawer = memo(function PreviewDrawer({
     }
   })
   const { name, Icon: PreviewIcon = Fragment, related } = item ?? {}
-  const { onCopy } = useClipboard(name)
   const router = useRouter()
   const t = useTranslations("icons")
   const { open, onClose, onOpen } = useDisclosure({
     defaultOpen: !!item,
     onClose: () => {
       setItem(null)
-      router.replace({ pathname: "/icons" })
+      router.replace({ pathname: "/icons" }, { scroll: false })
     },
   })
 
@@ -117,19 +119,22 @@ export const PreviewDrawer = memo(function PreviewDrawer({
         </Center>
 
         <HStack
-          alignItems="flex-start"
+          gap={{ base: "sm", md: "0" }}
           justifyContent="space-between"
           minW="0"
           w="full"
         >
-          <Flex as="button" flex="1" minW="0" rounded="l2" onClick={onCopy}>
+          <Flex flex="1" minW="0">
             <Heading as="h3" lineClamp={1}>
               {name}
             </Heading>
           </Flex>
 
+          <CopyButton value={name} />
+          <CopyUrlButton />
+
           <Drawer.CloseTrigger>
-            <CloseButton />
+            <CloseButton size="sm" />
           </Drawer.CloseTrigger>
         </HStack>
 
@@ -168,7 +173,13 @@ export const PreviewDrawer = memo(function PreviewDrawer({
                         _hover: ["bg.subtle", "bg.muted"],
                       }}
                       icon={<Icon fontSize="2xl" />}
-                      onClick={() => setItem({ name, Icon, ...rest })}
+                      onClick={() => {
+                        setItem({ name, Icon, ...rest })
+                        router.replace(
+                          { pathname: "/icons", query: { name } },
+                          { scroll: false },
+                        )
+                      }}
                     />
                   </Tooltip>
                 )
@@ -180,3 +191,41 @@ export const PreviewDrawer = memo(function PreviewDrawer({
     </Drawer.Root>
   )
 })
+
+interface CopyButtonProps {
+  value: string | undefined
+}
+
+function CopyButton({ value }: CopyButtonProps) {
+  const t = useTranslations("component.copyButton")
+  const { copied, onCopy } = useClipboard(value)
+
+  return (
+    <Tooltip content={copied ? t("copied") : t("copy")} placement="start">
+      <IconButton
+        size="sm"
+        variant="ghost"
+        icon={
+          copied ? <CheckIcon fontSize="xl" /> : <ClipboardIcon fontSize="xl" />
+        }
+        onClick={onCopy}
+      />
+    </Tooltip>
+  )
+}
+
+function CopyUrlButton() {
+  const t = useTranslations("component.copyUrlButton")
+  const { copied, onCopy } = useClipboard(window.location.href)
+
+  return (
+    <Tooltip content={copied ? t("copied") : t("copy")} placement="start">
+      <IconButton
+        size="sm"
+        variant="ghost"
+        icon={copied ? <CheckIcon fontSize="xl" /> : <LinkIcon fontSize="xl" />}
+        onClick={onCopy}
+      />
+    </Tooltip>
+  )
+}

@@ -88,7 +88,10 @@ export function List({ ...rest }: ListProps) {
 
   const onOpen = useCallback(
     (data: Data) => {
-      router.replace({ pathname: "/icons", query: { name: data.name } })
+      router.replace(
+        { pathname: "/icons", query: { name: data.name } },
+        { scroll: false },
+      )
       openRef.current(data)
     },
     [router],

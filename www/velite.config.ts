@@ -13,6 +13,7 @@ import {
   replaceCodeGroup,
   replaceLinks,
   replaceProps,
+  replaceRelations,
   replaceSteps,
   replaceStylePropsTable,
   replaceTokensPreview,
@@ -60,6 +61,7 @@ const docs = defineCollection({
       style: s.string().optional(),
       md: s.custom().transform(async (_, { meta }) => {
         const path = getPath(meta.path as string)
+        const { locale } = getSlug(meta.path as string)
         const exclude = CONSTANTS.LLMS.EXCLUDE.some((exclude) =>
           path.startsWith(`${exclude}/`),
         )
@@ -69,6 +71,7 @@ const docs = defineCollection({
         let content = meta.content as string
 
         content = await replaceProps(content)
+        content = await replaceRelations(content, locale)
         content = replaceCodeGroup(content)
         content = replaceCodeBlock(content)
         content = replaceSteps(content)

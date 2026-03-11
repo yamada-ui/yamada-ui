@@ -40,10 +40,7 @@ export function mdToHtml(
       <Code
         key={key}
         css={{
-          [langConditions.ja]: {
-            mx: "1",
-            verticalAlign: "top",
-          },
+          [langConditions.ja]: { mx: "px", verticalAlign: "top" },
         }}
         variant="surface"
         verticalAlign="middle"

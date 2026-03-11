@@ -1,6 +1,7 @@
 ---
 title: Avatar
 description: "`Avatar`は、ユーザーを表すプロフィール写真やイニシャルのアイコンを表示するコンポーネントです。"
+tags: ["media", "indicator", "icon"]
 storybook: components-avatar--basic
 source: components/avatar
 style: components/avatar/avatar.style.ts
@@ -164,10 +165,6 @@ return (
 </AvatarGroup.Root>
 ```
 
-## 使用しているコンポーネント・フック
-
-<Uses name="avatar" />
-
 ## Props
 
 <PropsTable name="avatar" all omit={["AvatarGroupRoot"]} />
@@ -182,3 +179,11 @@ return (
 | `AvatarFallback`   | `role="img"`   | 画像であることを示します。                                                                                                                              |
 |                    | `aria-label`   | `fallback`が設定されていない場合に設定します。`name`または`alt`が設定されている場合はその値を、設定されていない場合は`"アバターアイコン"`を設定します。 |
 | `AvatarGroup.Root` | `role="group"` | グループであることを示します。                                                                                                                          |
+
+## 類似のコンポーネント
+
+<Similar name="avatar" />
+
+## 使用しているコンポーネント・フック
+
+<Uses name="avatar" />

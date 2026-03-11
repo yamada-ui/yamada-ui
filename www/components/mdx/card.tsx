@@ -1,6 +1,6 @@
 "use client"
 
-import type { As } from "@yamada-ui/react"
+import type { As, SimpleGridProps } from "@yamada-ui/react"
 import {
   ChevronRightIcon,
   createContext,
@@ -18,14 +18,24 @@ const [CardGroupContext, useCardGroupContext] = createContext<CardGroupContext>(
   { name: "CardGroupContext" },
 )
 
-export interface CardGroupProps {
-  depth: number
+export interface CardGroupProps extends SimpleGridProps {
+  depth?: number
 }
 
 export function CardGroup({ depth = 3, ...rest }: CardGroupProps) {
   return (
     <CardGroupContext value={{ depth }}>
-      <SimpleGrid gap="lg" minChildWidth="sm" my="lg" {...rest} />
+      <SimpleGrid
+        gap="lg"
+        gridTemplateColumns={{
+          base: "repeat(2, 1fr)",
+          sm: "repeat(1, 1fr)",
+          md: "repeat(2, 1fr)",
+          lg: "repeat(1, 1fr)",
+        }}
+        my="lg"
+        {...rest}
+      />
     </CardGroupContext>
   )
 }

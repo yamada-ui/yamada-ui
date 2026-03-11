@@ -12,7 +12,7 @@ const execFileAsync = promisify(execFile)
 
 const REPOSITORY_PATH = path.resolve(".lucide")
 const DIST_PATH = path.resolve("data", "icons.json")
-const MAX_RELATED_ICONS = 68
+const MAX_RELATED_COUNT = 68
 const NAME_WEIGHT = 5
 const KEYWORD_WEIGHT = 4
 const CATEGORY_WEIGHT = 3
@@ -61,7 +61,7 @@ function getRelatedData(data: { [key: string]: Data }) {
       .filter((a) => a[1] > 0)
       .sort((a, b) => b[1] - a[1])
       .map(([name]) => name)
-      .slice(0, MAX_RELATED_ICONS)
+      .slice(0, MAX_RELATED_COUNT)
   }
 }
 

@@ -1,6 +1,7 @@
 ---
 title: Rating
 description: "`Rating` is a component used to allow users to provide ratings."
+tags: ["form-control", "selection"]
 storybook: components-rating--basic
 source: components/rating
 ---
@@ -231,10 +232,6 @@ const [value, onChange] = useState(3)
 return <Rating value={value} onChange={onChange} />
 ```
 
-## Uses Components & Hooks
-
-<Uses name="rating" />
-
 ## Props
 
 <PropsTable name="rating" />
@@ -277,3 +274,11 @@ Setting `aria-label` or `aria-labelledby` on `Rating` will make it readable by s
 |              | `aria-disabled`      | Set to `"true"` when `disabled` is specified.     |
 | `RatingItem` | `aria-label`         | Set `value`.                                      |
 | `RatingIcon` | `aria-hidden="true"` | Exclude `RatingIcon` from the accessibility tree. |
+
+## Similar Components
+
+<Similar name="rating" />
+
+## Uses Components & Hooks
+
+<Uses name="rating" />

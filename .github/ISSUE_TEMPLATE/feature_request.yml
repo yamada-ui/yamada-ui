@@ -56,6 +56,13 @@ body:
       options:
         - "Yes"
         - "No"
+  - type: checkboxes
+    id: ai-used
+    attributes:
+      label: "AI used"
+      options:
+        - label: "I did not use AI to create this issue."
+        - label: "(If there is no check above) I checked the generated content before submitting."
   - type: textarea
     id: "additional-information"
     attributes:
@@ -65,5 +72,5 @@ body:
   - type: markdown
     attributes:
       value: |
-        This issue will be automatically unassigned after two weeks have passed since it was assigned.
+        This issue will be automatically unassigned after one week has passed since it was assigned.
         Once unassigned, it may be picked up by someone else for work.

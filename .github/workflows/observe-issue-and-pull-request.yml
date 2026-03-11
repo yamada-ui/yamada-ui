@@ -15,6 +15,7 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Create or update test issues
+        if: false
         run: pnpm issue:coverage
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}

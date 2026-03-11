@@ -1,6 +1,7 @@
 ---
 title: SaturationSlider
 description: "`SaturationSlider`は、ユーザーが色の彩度を選択するために使用されるコンポーネントです。"
+tags: ["form-control", "slider", "color"]
 storybook: components-saturationslider--basic
 source: components/saturation-slider
 ---
@@ -143,14 +144,6 @@ const [value, setValue] = useState([120, 0.33, 0.33])
 return <SaturationSlider.Root value={value} onChange={setValue} maxW="sm" />
 ```
 
-## 使用しているコンポーネント・フック
-
-<Uses name="saturation-slider" />
-
-## 使用されているコンポーネント・フック
-
-<UsedBy name="saturation-slider" />
-
 ## Props
 
 <PropsTable name="saturation-slider" />
@@ -191,3 +184,15 @@ return <SaturationSlider.Root value={value} onChange={setValue} maxW="sm" />
 |                          | `aria-invalid`         | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                                   |
 |                          | `aria-required`        | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                                  |
 |                          | `aria-describedby`     | `SaturationSlider.Root`が`Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
+
+## 類似のコンポーネント
+
+<Similar name="saturation-slider" />
+
+## 使用しているコンポーネント・フック
+
+<Uses name="saturation-slider" />
+
+## 使用されているコンポーネント・フック
+
+<UsedBy name="saturation-slider" />

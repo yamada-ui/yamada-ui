@@ -1,6 +1,7 @@
 ---
 title: SaturationSlider
 description: "`SaturationSlider` is a component used to allow the user to select a color saturation."
+tags: ["form-control", "slider", "color"]
 storybook: components-saturationslider--basic
 source: components/saturation-slider
 ---
@@ -143,14 +144,6 @@ const [value, setValue] = useState([120, 0.33, 0.33])
 return <SaturationSlider.Root value={value} onChange={setValue} maxW="sm" />
 ```
 
-## Uses Components & Hooks
-
-<Uses name="saturation-slider" />
-
-## Used By Components & Hooks
-
-<UsedBy name="saturation-slider" />
-
 ## Props
 
 <PropsTable name="saturation-slider" />
@@ -191,3 +184,15 @@ The `SaturationSlider` follows the [WAI-ARIA - Slider Pattern](https://www.w3.or
 |                          | `aria-invalid`         | Set to `"true"` if `invalid` is set.                                                                                                                                          |
 |                          | `aria-required`        | Set to `"true"` if `required` is set.                                                                                                                                         |
 |                          | `aria-describedby`     | If `SaturationSlider.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+
+## Similar Components
+
+<Similar name="saturation-slider" />
+
+## Uses Components & Hooks
+
+<Uses name="saturation-slider" />
+
+## Used By Components & Hooks
+
+<UsedBy name="saturation-slider" />

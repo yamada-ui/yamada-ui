@@ -1,6 +1,7 @@
 ---
 title: Input
 description: "`Input` is a component used to obtain text input from the user."
+tags: ["form-control", "text-input"]
 storybook: components-input--basic
 source: components/input
 style: components/input/input.style.ts
@@ -253,14 +254,6 @@ const [value, setValue] = useState<string>("オッス！オラ悟空！")
 return <Input value={value} onChange={(ev) => setValue(ev.target.value)} />
 ```
 
-## Uses Components & Hooks
-
-<Uses name="input" />
-
-## Used By Components & Hooks
-
-<UsedBy name="input" />
-
 ## Props
 
 <PropsTable
@@ -296,3 +289,15 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Inp
 |           | `aria-describedby`   | If `Input` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
 |           | `aria-readonly`      | Sets to `"true"` if `readOnly` is set.                                                                                                                        |
 |           | `aria-required`      | Sets to `"true"` if `required` is set.                                                                                                                        |
+
+## Similar Components
+
+<Similar name="input" />
+
+## Uses Components & Hooks
+
+<Uses name="input" />
+
+## Used By Components & Hooks
+
+<UsedBy name="input" />

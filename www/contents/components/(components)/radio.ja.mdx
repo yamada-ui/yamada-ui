@@ -1,6 +1,7 @@
 ---
 title: Radio
 description: "`Radio`は、ユーザーが複数の選択肢の中から1つの値を選択するために使用されるコンポーネントです。"
+tags: ["form-control", "selection"]
 storybook: components-radio--basic
 source: components/radio
 ---
@@ -308,14 +309,6 @@ const items = useMemo<RadioGroup.Item[]>(
 return <RadioGroup.Root items={items} value={value} onChange={setValue} />
 ```
 
-## 使用しているコンポーネント・フック
-
-<Uses name="radio" />
-
-## 使用されているコンポーネント・フック
-
-<UsedBy name="radio" />
-
 ## Props
 
 <PropsTable name="radio" all omit={["RadioGroupRoot"]} />
@@ -372,3 +365,15 @@ return <RadioGroup.Root items={items} value={value} onChange={setValue} />
 |                            | `aria-invalid`      | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                                          |
 |                            | `aria-required`     | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                                         |
 | `RadioIndicator`           | `aria-hidden`       | 要素をアクセシビリティツリーから除外します。                                                                                                                                                                   |
+
+## 類似のコンポーネント
+
+<Similar name="radio" />
+
+## 使用しているコンポーネント・フック
+
+<Uses name="radio" />
+
+## 使用されているコンポーネント・フック
+
+<UsedBy name="radio" />

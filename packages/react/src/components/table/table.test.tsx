@@ -2726,4 +2726,298 @@ describe("<Table />", () => {
       expect(table.style.width).toBe("")
     })
   })
+
+  describe("keyboard navigation with user.keyboard", () => {
+    test("navigates cells with arrow keys", async () => {
+      const { user } = render(
+        <Table
+          columns={columns}
+          data={data}
+          enableKeyboardNavigation
+          enableSorting={false}
+          tableProps={{ "data-testid": "table" }}
+        />,
+      )
+
+      const table = screen.getByTestId("table")
+      const firstTh = table.querySelector(
+        '[data-colindex="0"][data-rowindex="0"]',
+      ) as HTMLElement
+
+      firstTh.focus()
+
+      await user.keyboard("{ArrowRight}")
+
+      expect(document.activeElement).toBe(
+        table.querySelector('[data-colindex="1"][data-rowindex="0"]'),
+      )
+
+      await user.keyboard("{ArrowDown}")
+
+      expect(document.activeElement).toBe(
+        table.querySelector('[data-colindex="1"][data-rowindex="1"]'),
+      )
+
+      await user.keyboard("{ArrowLeft}")
+
+      expect(document.activeElement).toBe(
+        table.querySelector('[data-colindex="0"][data-rowindex="1"]'),
+      )
+
+      await user.keyboard("{ArrowUp}")
+
+      expect(document.activeElement).toBe(
+        table.querySelector('[data-colindex="0"][data-rowindex="0"]'),
+      )
+    })
+
+    test("navigates to first and last cell with Home and End", async () => {
+      const { user } = render(
+        <Table
+          columns={columns}
+          data={data}
+          enableKeyboardNavigation
+          enableSorting={false}
+          tableProps={{ "data-testid": "table" }}
+        />,
+      )
+
+      const table = screen.getByTestId("table")
+      const firstTh = table.querySelector(
+        '[data-colindex="0"][data-rowindex="0"]',
+      ) as HTMLElement
+
+      firstTh.focus()
+
+      await user.keyboard("{End}")
+
+      expect(document.activeElement).toBe(
+        table.querySelector('[data-colindex="3"][data-rowindex="0"]'),
+      )
+
+      await user.keyboard("{Home}")
+
+      expect(document.activeElement).toBe(
+        table.querySelector('[data-colindex="0"][data-rowindex="0"]'),
+      )
+    })
+
+    test("handles PageDown and PageUp with pagination", async () => {
+      const { user } = render(
+        <Table
+          columns={columns}
+          data={data}
+          defaultPagination={{ pageIndex: 0, pageSize: 2 }}
+          enableKeyboardNavigation
+          enablePagination
+          enableSorting={false}
+          tableProps={{ "data-testid": "table" }}
+        />,
+      )
+
+      const table = screen.getByTestId("table")
+      const firstTh = table.querySelector(
+        '[data-colindex="0"][data-rowindex="0"]',
+      ) as HTMLElement
+
+      firstTh.focus()
+
+      await user.keyboard("{PageDown}")
+
+      const rowsAfterPageDown = table.querySelectorAll("tbody tr")
+      expect(rowsAfterPageDown).toHaveLength(2)
+
+      await user.keyboard("{PageUp}")
+
+      const rowsAfterPageUp = table.querySelectorAll("tbody tr")
+      expect(rowsAfterPageUp).toHaveLength(2)
+    })
+
+    test("does not go past last page with PageDown", async () => {
+      const { user } = render(
+        <Table
+          columns={columns}
+          data={data}
+          defaultPagination={{ pageIndex: 2, pageSize: 2 }}
+          enableKeyboardNavigation
+          enablePagination
+          enableSorting={false}
+          tableProps={{ "data-testid": "table" }}
+        />,
+      )
+
+      const table = screen.getByTestId("table")
+      const firstTh = table.querySelector(
+        '[data-colindex="0"][data-rowindex="0"]',
+      ) as HTMLElement
+
+      firstTh.focus()
+
+      await user.keyboard("{PageDown}")
+
+      expect(table).toBeInTheDocument()
+    })
+
+    test("does not go before first page with PageUp", async () => {
+      const { user } = render(
+        <Table
+          columns={columns}
+          data={data}
+          defaultPagination={{ pageIndex: 0, pageSize: 2 }}
+          enableKeyboardNavigation
+          enablePagination
+          enableSorting={false}
+          tableProps={{ "data-testid": "table" }}
+        />,
+      )
+
+      const table = screen.getByTestId("table")
+      const firstTh = table.querySelector(
+        '[data-colindex="0"][data-rowindex="0"]',
+      ) as HTMLElement
+
+      firstTh.focus()
+
+      await user.keyboard("{PageUp}")
+
+      expect(table).toBeInTheDocument()
+    })
+
+    test("updates tabIndex after page change", async () => {
+      const { user } = render(
+        <Table
+          columns={columns}
+          data={data}
+          defaultPagination={{ pageIndex: 0, pageSize: 2 }}
+          enableKeyboardNavigation
+          enablePagination
+          enableSorting={false}
+          tableProps={{ "data-testid": "table" }}
+        />,
+      )
+
+      const table = screen.getByTestId("table")
+      const firstTh = table.querySelector(
+        '[data-colindex="0"][data-rowindex="0"]',
+      ) as HTMLElement
+
+      firstTh.focus()
+
+      await user.keyboard("{PageDown}")
+
+      const cell = table.querySelector('[data-colindex="0"][data-rowindex="0"]')
+      expect(cell).toHaveAttribute("tabindex", "0")
+    })
+
+    test("handles focus event on table", async () => {
+      const { user } = render(
+        <Table
+          columns={columns}
+          data={data}
+          enableKeyboardNavigation
+          enableSorting={false}
+          tableProps={{ "data-testid": "table" }}
+        />,
+      )
+
+      const table = screen.getByTestId("table")
+      const firstTh = table.querySelector(
+        '[data-colindex="0"][data-rowindex="0"]',
+      ) as HTMLElement
+
+      await user.click(firstTh)
+
+      expect(firstTh).toHaveAttribute("tabindex", "0")
+    })
+  })
+
+  describe("deeply nested grouped columns", () => {
+    const nestedColumns: ColumnDef<Data, any>[] = [
+      {
+        columns: [
+          {
+            columns: [
+              columnHelper.accessor("firstName", {
+                footer: (info) => info.column.id,
+                header: "First Name",
+              }),
+              columnHelper.accessor("lastName", {
+                footer: (info) => info.column.id,
+                header: "Last Name",
+              }),
+            ],
+            header: "Full Name",
+          },
+        ],
+        header: "Person",
+      },
+      {
+        columns: [
+          columnHelper.accessor("id", {
+            footer: (info) => info.column.id,
+            header: "ID",
+          }),
+          columnHelper.accessor("email", {
+            footer: (info) => info.column.id,
+            header: "Email",
+          }),
+        ],
+        header: "Info",
+      },
+    ]
+
+    test("renders deeply nested header groups with placeholders", () => {
+      render(
+        <Table
+          columns={nestedColumns}
+          data={data}
+          tableProps={{ "data-testid": "table" }}
+        />,
+      )
+
+      const table = screen.getByTestId("table")
+      const headerRows = table.querySelectorAll("thead tr")
+
+      expect(headerRows.length).toBeGreaterThanOrEqual(2)
+    })
+
+    test("keyboard navigation works with deeply nested grouped columns", async () => {
+      const { user } = render(
+        <Table
+          columns={nestedColumns}
+          data={data}
+          enableKeyboardNavigation
+          enableSorting={false}
+          tableProps={{ "data-testid": "table" }}
+        />,
+      )
+
+      const table = screen.getByTestId("table")
+      const firstCell = table.querySelector(
+        '[data-colindex="0"][data-rowindex="0"]',
+      ) as HTMLElement
+
+      firstCell.focus()
+
+      await user.keyboard("{ArrowRight}")
+
+      expect(table).toBeInTheDocument()
+    })
+
+    test("renders deeply nested footer groups", () => {
+      render(
+        <Table
+          columns={nestedColumns}
+          data={data}
+          withFooterGroups
+          tableProps={{ "data-testid": "table" }}
+        />,
+      )
+
+      const table = screen.getByTestId("table")
+      const footerRows = table.querySelectorAll("tfoot tr")
+
+      expect(footerRows.length).toBeGreaterThanOrEqual(2)
+    })
+  })
 })

@@ -1,6 +1,7 @@
 ---
 title: Slider
 description: "`Slider`は、ユーザーが値の範囲から選択するために使用されるコンポーネントです。"
+tags: ["form-control", "slider"]
 storybook: components-slider--basic
 source: components/slider
 style: components/slider/slider.style.ts
@@ -260,14 +261,6 @@ const [value, setValue] = useState(50)
 return <Slider.Root value={value} onChange={setValue} />
 ```
 
-## 使用しているコンポーネント・フック
-
-<Uses name="slider" />
-
-## 使用されているコンポーネント・フック
-
-<UsedBy name="slider" />
-
 ## Props
 
 <PropsTable name="slider" />
@@ -314,3 +307,15 @@ return <Slider.Root value={value} onChange={setValue} />
 |                | `aria-disabled`       | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                                                        |
 |                | `aria-invalid`        | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                         |
 |                | `aria-required`       | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                        |
+
+## 類似のコンポーネント
+
+<Similar name="slider" />
+
+## 使用しているコンポーネント・フック
+
+<Uses name="slider" />
+
+## 使用されているコンポーネント・フック
+
+<UsedBy name="slider" />

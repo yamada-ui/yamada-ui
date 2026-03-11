@@ -1,6 +1,7 @@
 ---
 title: HueSlider
 description: "`HueSlider`は、ユーザーが色相を選択するために使用されるコンポーネントです。"
+tags: ["form-control", "slider", "color"]
 storybook: components-hueslider--basic
 source: components/hue-slider
 ---
@@ -154,14 +155,6 @@ const [value, setValue] = useState(180)
 return <HueSlider.Root value={value} onChange={setValue} />
 ```
 
-## 使用しているコンポーネント・フック
-
-<Uses name="hue-slider" />
-
-## 使用されているコンポーネント・フック
-
-<UsedBy name="hue-slider" />
-
 ## Props
 
 <PropsTable name="hue-slider" />
@@ -206,3 +199,15 @@ return <HueSlider.Root value={value} onChange={setValue} />
 |                   | `aria-disabled`    | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                                                            |
 |                   | `aria-invalid`     | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                             |
 |                   | `aria-required`    | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                            |
+
+## 類似のコンポーネント
+
+<Similar name="hue-slider" />
+
+## 使用しているコンポーネント・フック
+
+<Uses name="hue-slider" />
+
+## 使用されているコンポーネント・フック
+
+<UsedBy name="hue-slider" />

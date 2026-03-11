@@ -1,6 +1,7 @@
 ---
 title: DatePicker
 description: "`DatePicker` is a component used for users to select a date."
+tags: ["form-control", "date-time", "floating"]
 storybook: components-datepicker--basic
 source: components/date-picker
 ---
@@ -583,14 +584,6 @@ const [value, onChange] = useState<Date | null>(new Date())
 return <DatePicker value={value} onChange={onChange} />
 ```
 
-## Uses Components & Hooks
-
-<Uses name="date-picker" />
-
-## Used By Components & Hooks
-
-<UsedBy name="date-picker" />
-
 ## Props
 
 <PropsTable name="date-picker" />
@@ -664,3 +657,15 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Dat
 | `CalendarDay`          | `aria-label`             | Sets the date, like `"Thursday, February 5, 2026"`. If today, sets `"Today, Thursday, February 5, 2026"`.                                                                  |
 |                        | `aria-disabled`          | Sets `"true"` if the date is disabled.                                                                                                                                     |
 |                        | `aria-selected`          | Sets `"true"` if the date is selected.                                                                                                                                     |
+
+## Similar Components
+
+<Similar name="date-picker" />
+
+## Uses Components & Hooks
+
+<Uses name="date-picker" />
+
+## Used By Components & Hooks
+
+<UsedBy name="date-picker" />

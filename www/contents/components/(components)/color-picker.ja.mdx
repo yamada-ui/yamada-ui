@@ -1,6 +1,7 @@
 ---
 title: ColorPicker
 description: "`ColorPicker`は、ユーザーが色を選択したり任意の色の値を入力するために使用されるコンポーネントです。"
+tags: ["form-control", "color", "floating", "test-input"]
 storybook: components-colorpicker--basic
 source: components/color-picker
 ---
@@ -369,10 +370,6 @@ const [value, onChange] = useState<string>("#4387f4")
 return <ColorPicker value={value} onChange={onChange} />
 ```
 
-## 使用しているコンポーネント・フック
-
-<Uses name="color-picker" />
-
 ## Props
 
 <PropsTable name="color-picker" />
@@ -451,3 +448,11 @@ return <ColorPicker value={value} onChange={onChange} />
 |                          | `aria-valuemax`          | `max`の値を設定します。デフォルトは`1`です。                                                                                                                                                  |
 |                          | `aria-valuenow`          | 現在の値を設定します。                                                                                                                                                                        |
 |                          | `aria-valuetext`         | `"18%"`のように、現在の値を設定します。                                                                                                                                                       |
+
+## 類似のコンポーネント
+
+<Similar name="color-picker" />
+
+## 使用しているコンポーネント・フック
+
+<Uses name="color-picker" />

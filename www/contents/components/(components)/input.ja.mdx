@@ -1,6 +1,7 @@
 ---
 title: Input
 description: "`Input`は、ユーザーからのテキスト入力を取得するために使用されるコンポーネントです。"
+tags: ["form-control", "text-input"]
 storybook: components-input--basic
 source: components/input
 style: components/input/input.style.ts
@@ -254,14 +255,6 @@ const [value, setValue] = useState<string>("オッス！オラ悟空！")
 return <Input value={value} onChange={(ev) => setValue(ev.target.value)} />
 ```
 
-## 使用しているコンポーネント・フック
-
-<Uses name="input" />
-
-## 使用されているコンポーネント・フック
-
-<UsedBy name="input" />
-
 ## Props
 
 <PropsTable
@@ -297,3 +290,15 @@ return <Input value={value} onChange={(ev) => setValue(ev.target.value)} />
 |                | `aria-describedby` | `Input`が`Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
 |                | `aria-readonly`    | `readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                                  |
 |                | `aria-required`    | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                  |
+
+## 類似のコンポーネント
+
+<Similar name="input" />
+
+## 使用しているコンポーネント・フック
+
+<Uses name="input" />
+
+## 使用されているコンポーネント・フック
+
+<UsedBy name="input" />

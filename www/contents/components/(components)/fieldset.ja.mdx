@@ -1,6 +1,7 @@
 ---
 title: Fieldset
 description: "`Fieldset`は、フィールドセット要素に、レジェンド、ヘルパーメッセージ、エラーメッセージなどをグループ化するために使用されるコンポーネントです。"
+tags: ["form-control", "layout"]
 storybook: components-fieldset--basic
 source: components/fieldset
 style: components/fieldset/fieldset.style.ts
@@ -333,14 +334,6 @@ import { Fieldset } from "@workspaces/ui"
 </Fieldset.Root>
 ```
 
-## 使用しているコンポーネント・フック
-
-<Uses name="fieldset" />
-
-## 使用されているコンポーネント・フック
-
-<UsedBy name="fieldset" />
-
 ## Props
 
 <PropsTable name="fieldset" />
@@ -353,3 +346,15 @@ import { Fieldset } from "@workspaces/ui"
 | ------------------------ | -------------------- | ----------------------------------------------------------------------------------------------- |
 | `Fieldset.HelperMessage` | `aria-describedby`   | 関連した`Fieldset.Legend`の`id`を設定します。                                                   |
 | `Fieldset.ErrorMessage`  | `aria-live="polite"` | `invalid`が設定されている場合に設定し、フォーカスの外側で更新される可能性があることを示します。 |
+
+## 類似のコンポーネント
+
+<Similar name="fieldset" />
+
+## 使用しているコンポーネント・フック
+
+<Uses name="fieldset" />
+
+## 使用されているコンポーネント・フック
+
+<UsedBy name="fieldset" />

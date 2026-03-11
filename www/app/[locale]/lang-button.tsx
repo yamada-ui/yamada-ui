@@ -17,7 +17,7 @@ export function LangButton({ ...rest }: LangButtonProps) {
 
   const onSelect = useCallback(
     (locale?: string) => {
-      router.push(pathname, { locale })
+      router.replace(pathname, { locale, scroll: false })
     },
     [pathname, router],
   )

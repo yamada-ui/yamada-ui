@@ -1,28 +1,48 @@
 {
   "Field": {
-    "disabled": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the field will be disabled.",
-      "required": false
+    "ErrorMessage": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
     },
-    "invalid": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the field will be invalid.",
-      "required": false
-    },
-    "readOnly": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the field will be readonly.",
-      "required": false
-    },
-    "required": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the field will be required.",
-      "required": false
+    "HelperMessage": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
     },
     "Label": {
       "as": {

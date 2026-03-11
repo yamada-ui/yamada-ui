@@ -68,7 +68,7 @@ export const init = new Command("init")
   .option("-m, --monorepo", "enable monorepo mode.")
   .option("--no-monorepo", "disable monorepo mode.")
   .option("-p, --package-name <name>", "package name.")
-  .option("-s, --src", "use src/ directory.")
+  .option("-s, --src", "use `src/` directory when choice is monorepo.")
   .option("-i, --install", "install dependencies when choice is monorepo.")
   .option(
     "--no-install",

@@ -1,9 +1,46 @@
+"use client"
+
 import type { Relations } from "@/data"
-import { List, toCamelCase, toPascalCase, VStack } from "@yamada-ui/react"
+import { Text } from "@yamada-ui/react"
+import { getDocs } from "@/data"
 import data from "@/data/relations.json"
-import { NextLink } from "../next-link"
+import { useLocale } from "@/i18n"
+import { mdToHtml } from "../../utils/string"
+import { Card, CardGroup } from "./card"
 
 const relations = data as Relations
+
+export interface SimilarProps {
+  name: string
+}
+
+export function Similar({ name }: SimilarProps) {
+  const data = relations[name]
+  const { locale } = useLocale()
+  const docs = getDocs(locale)
+
+  if (!data?.resembles?.length) return null
+
+  return (
+    <CardGroup>
+      {data.resembles.map((name) => {
+        const doc = docs.find(
+          ({ pathname }) => pathname === `/docs/components/${name}`,
+        )
+
+        if (!doc) return null
+
+        return (
+          <Card key={name} href={doc.pathname} title={doc.title}>
+            <Text color="fg.emphasized" fontSize="sm" lineHeight="1.8">
+              {mdToHtml(doc.description)}
+            </Text>
+          </Card>
+        )
+      })}
+    </CardGroup>
+  )
+}
 
 interface LinkListProps {
   data:
@@ -12,40 +49,51 @@ interface LinkListProps {
 }
 
 function LinkList({ data }: LinkListProps) {
+  const { locale } = useLocale()
+  const docs = getDocs(locale)
+
   return (
-    <VStack>
+    <>
       {data.components.length ? (
-        <List.Root styleType="disc">
-          {data.components.map((name) => (
-            <List.Item key={name} color="fg.emphasized">
-              <NextLink
-                href={`/docs/components/${name}`}
-                color="fg.emphasized"
-                fontSize="sm"
-              >
-                {toPascalCase(name)}
-              </NextLink>
-            </List.Item>
-          ))}
-        </List.Root>
+        <CardGroup>
+          {data.components.map((name) => {
+            const doc = docs.find(
+              ({ pathname }) => pathname === `/docs/components/${name}`,
+            )
+
+            if (!doc) return null
+
+            return (
+              <Card key={name} href={doc.pathname} title={doc.title}>
+                <Text color="fg.emphasized" fontSize="sm" lineHeight="1.8">
+                  {mdToHtml(doc.description)}
+                </Text>
+              </Card>
+            )
+          })}
+        </CardGroup>
       ) : null}
 
       {data.hooks.length ? (
-        <List.Root styleType="disc">
-          {data.hooks.map((name) => (
-            <List.Item key={name} color="fg.emphasized">
-              <NextLink
-                href={`/docs/hooks/${name}`}
-                color="fg.emphasized"
-                fontSize="sm"
-              >
-                {toCamelCase(name)}
-              </NextLink>
-            </List.Item>
-          ))}
-        </List.Root>
+        <CardGroup>
+          {data.hooks.map((name) => {
+            const doc = docs.find(
+              ({ pathname }) => pathname === `/docs/hooks/${name}`,
+            )
+
+            if (!doc) return null
+
+            return (
+              <Card key={name} href={doc.pathname} title={doc.title}>
+                <Text color="fg.emphasized" fontSize="sm" lineHeight="1.8">
+                  {mdToHtml(doc.description)}
+                </Text>
+              </Card>
+            )
+          })}
+        </CardGroup>
       ) : null}
-    </VStack>
+    </>
   )
 }
 

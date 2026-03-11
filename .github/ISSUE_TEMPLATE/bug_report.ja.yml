@@ -97,6 +97,13 @@ body:
       options:
         - "はい"
         - "いいえ"
+  - type: checkboxes
+    id: ai-used
+    attributes:
+      label: "AIの使用について"
+      options:
+        - label: "この問題を作成するために、AIを使用しませんでした。"
+        - label: "（上記にチェックがない場合）提出する前に、生成された内容を確認しました。"
   - type: textarea
     id: additional-information
     attributes:
@@ -106,5 +113,5 @@ body:
   - type: markdown
     attributes:
       value: |
-        このイシューは、アサインされてから2週間経過すると自動的にアサインがクリアされます。
+        このイシューは、アサインされてから1週間経過すると自動的にアサインがクリアされます。
         アサインがクリアされると、他の方が作業する可能性があります。

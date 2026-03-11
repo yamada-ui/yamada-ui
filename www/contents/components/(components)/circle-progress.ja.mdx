@@ -1,6 +1,7 @@
 ---
 title: CircleProgress
 description: "`CircleProgress`は、進行状況を円形のプログレスバーで表示するコンポーネントです。"
+tags: ["feedback", "progress"]
 storybook: components-circleprogress--basic
 source: components/circle-progress
 style: components/circle-progress/circle-progress.style.ts
@@ -126,10 +127,6 @@ import { CircleProgress } from "@workspaces/ui"
 <CircleProgress.Root rangeColor="red.500" trackColor="blue.500" value={31} />
 ```
 
-## 使用しているコンポーネント・フック
-
-<Uses name="circle-progress" />
-
 ## Props
 
 <PropsTable name="circle-progress" />
@@ -164,3 +161,11 @@ import { CircleProgress } from "@workspaces/ui"
 |                        | `aria-valuemin`      | `min`の値を設定します。デフォルトは`0`です。                     |
 |                        | `aria-valuemax`      | `max`の値を設定します。デフォルトは`100`です。                   |
 |                        | `aria-valuenow`      | 現在の値を設定します。                                           |
+
+## 類似のコンポーネント
+
+<Similar name="circle-progress" />
+
+## 使用しているコンポーネント・フック
+
+<Uses name="circle-progress" />

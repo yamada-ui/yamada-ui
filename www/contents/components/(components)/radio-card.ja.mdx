@@ -1,6 +1,7 @@
 ---
 title: RadioCard
 description: "`RadioCard`は、ユーザーが複数の選択肢の中から1つを選択するために使用されるコンポーネントです。"
+tags: ["form-control", "selection", "card"]
 storybook: components-radiocard--basic
 source: components/radio-card
 ---
@@ -598,10 +599,6 @@ const items = useMemo<RadioCardGroup.ItemType[]>(
 return <RadioCardGroup.Root items={items} value={value} onChange={setValue} />
 ```
 
-## 使用しているコンポーネント・フック
-
-<Uses name="radio-card" />
-
 ## Props
 
 <PropsTable name="radio-card" />
@@ -670,3 +667,11 @@ return (
 |                                              | `aria-invalid`      | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                                                            |
 |                                              | `aria-required`     | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                                                           |
 | `RadioIndicator`                             | `aria-hidden`       | 要素をアクセシビリティツリーから除外します。                                                                                                                                                                                     |
+
+## 類似のコンポーネント
+
+<Similar name="radio-card" />
+
+## 使用しているコンポーネント・フック
+
+<Uses name="radio-card" />

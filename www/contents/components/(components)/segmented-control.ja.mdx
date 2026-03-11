@@ -1,6 +1,7 @@
 ---
 title: SegmentedControl
 description: "`SegmentedControl`は、ユーザーが複数の選択肢の中から1つを選択するために使用されるコンポーネントです。"
+tags: ["form-control", "selection"]
 storybook: components-segmentedcontrol--basic
 source: components/segmented-control
 style: components/segmented-control/segmented-control.style.ts
@@ -196,10 +197,6 @@ const items = useMemo<SegmentedControl.Item[]>(
 return <SegmentedControl.Root items={items} value={value} onChange={setValue} />
 ```
 
-## 使用しているコンポーネント・フック
-
-<Uses name="segmented-control" />
-
 ## Props
 
 <PropsTable name="segmented-control" />
@@ -238,3 +235,11 @@ return <SegmentedControl.Root items={items} value={value} onChange={setValue} />
 |                         | `aria-orientation`  | `orientation`の値に基づいて`"horizontal"`または`"vertical"`を設定します。デフォルトは`"horizontal"`です。 |
 | `SegmentedControl.Item` | `aria-disabled`     | `disabled`が設定されている場合は、`"true"`を設定します。                                                  |
 |                         | `aria-readonly`     | `readOnly`が設定されている場合は、`"true"`を設定します。                                                  |
+
+## 類似のコンポーネント
+
+<Similar name="segmented-control" />
+
+## 使用しているコンポーネント・フック
+
+<Uses name="segmented-control" />

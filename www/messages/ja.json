@@ -117,6 +117,10 @@
       "copied": "コピーしました",
       "copy": "クリップボードにコピーする"
     },
+    "copyUrlButton": {
+      "copied": "コピーしました",
+      "copy": "URLをコピーする"
+    },
     "codeBlock": {
       "clientOnly": "こちらのコードを使用する場合は、<tag>\"use client\"</tag>をファイルの上部に追加する必要があります。",
       "preview": "プレビュー",

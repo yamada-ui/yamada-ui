@@ -216,7 +216,7 @@ function CopyButton({ value }: CopyButtonProps) {
 
 function CopyUrlButton() {
   const t = useTranslations("component.copyUrlButton")
-  const { copied, onCopy } = useClipboard(window.location.href)
+  const { copied, onCopy } = useClipboard()
 
   return (
     <Tooltip content={copied ? t("copied") : t("copy")} placement="start">
@@ -224,7 +224,7 @@ function CopyUrlButton() {
         size="sm"
         variant="ghost"
         icon={copied ? <CheckIcon fontSize="xl" /> : <LinkIcon fontSize="xl" />}
-        onClick={onCopy}
+        onClick={() => onCopy(window.location.href)}
       />
     </Tooltip>
   )

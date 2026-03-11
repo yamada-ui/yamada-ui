@@ -40,6 +40,7 @@ import {
   useTransition,
 } from "react"
 import scrollIntoView from "scroll-into-view-if-needed"
+import { CONSTANTS } from "@/constants"
 import { getContents, getDefaultContents } from "@/data"
 import { Link, useLocale, usePathname } from "@/i18n"
 
@@ -291,6 +292,16 @@ function SearchContentHeader({
   )
 }
 
+const SEARCH_KEYS = [
+  "title",
+  "hierarchy.6",
+  "hierarchy.5",
+  "hierarchy.4",
+  "hierarchy.3",
+  "hierarchy.2",
+  "hierarchy.1",
+] as const
+
 interface SearchContentBodyProps extends Modal.BodyProps {
   onActive: (
     descendant?: Descendant<HTMLAnchorElement, { href: string }>,
@@ -329,18 +340,30 @@ function SearchContentBody({
     startTransition(() => {
       let hits: Hit[] = defaultContents
 
-      if (value.length)
-        hits = matchSorter(contents, value, {
-          keys: [
-            "title",
-            "hierarchy.6",
-            "hierarchy.5",
-            "hierarchy.4",
-            "hierarchy.3",
-            "hierarchy.2",
-            "hierarchy.1",
-          ],
-        })
+      if (value.length) {
+        const localeHits = matchSorter(contents, value, { keys: SEARCH_KEYS })
+
+        if (locale !== CONSTANTS.I18N.DEFAULT_LOCALE) {
+          const defaultLocaleContents = getContents(
+            CONSTANTS.I18N.DEFAULT_LOCALE,
+          )
+          const defaultLocaleHits = matchSorter(defaultLocaleContents, value, {
+            keys: SEARCH_KEYS,
+          })
+
+          const localePathnames = new Set(localeHits.map((h) => h.pathname))
+          const contentsByPathname = new Map(
+            contents.map((c) => [c.pathname, c]),
+          )
+          const additionalHits = defaultLocaleHits
+            .filter((h) => !localePathnames.has(h.pathname))
+            .map((h) => contentsByPathname.get(h.pathname) ?? h)
+
+          hits = [...localeHits, ...additionalHits]
+        } else {
+          hits = localeHits
+        }
+      }
 
       setHits(hits)
       setValue(value)

@@ -3,85 +3,159 @@
     "dependencies": {
       "components": ["native-accordion", "collapse", "motion", "icon"],
       "hooks": ["use-descendants"]
-    }
+    },
+    "resembles": [
+      "slide-fade",
+      "slide",
+      "fade",
+      "collapse",
+      "fade-scale",
+      "native-accordion",
+      "carousel",
+      "tabs"
+    ]
   },
   "airy": {
-    "dependencies": {
-      "components": ["motion"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["motion"], "hooks": [] },
+    "resembles": [
+      "rotate",
+      "ripple",
+      "flip",
+      "motion",
+      "slide-fade",
+      "slide",
+      "skeleton",
+      "fade"
+    ]
   },
   "alert": {
     "dependencies": {
       "components": ["icon", "loading", "status"],
       "hooks": []
     },
-    "dependents": {
-      "components": ["snacks"],
-      "hooks": []
-    }
+    "dependents": { "components": ["snacks"], "hooks": [] },
+    "resembles": [
+      "snacks",
+      "tip",
+      "empty-state",
+      "skeleton",
+      "status",
+      "progress",
+      "circle-progress"
+    ]
   },
   "alpha-slider": {
     "dependencies": {
       "components": ["color-swatch", "hue-slider"],
       "hooks": ["use-value"]
     },
-    "dependents": {
-      "components": ["color-selector"],
-      "hooks": []
-    }
+    "dependents": { "components": ["color-selector"], "hooks": [] },
+    "resembles": [
+      "saturation-slider",
+      "hue-slider",
+      "slider",
+      "color-selector",
+      "color-picker"
+    ]
   },
   "aspect-ratio": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "z-stack",
+      "v-stack",
+      "wrap",
+      "stack",
+      "spacer",
+      "simple-grid",
+      "separator",
+      "picture"
+    ]
   },
   "autocomplete": {
     "dependencies": {
       "components": ["select", "input", "popover", "group", "icon", "field"],
       "hooks": []
     },
-    "dependents": {
-      "components": ["date-picker"],
-      "hooks": []
-    }
+    "dependents": { "components": ["date-picker"], "hooks": [] },
+    "resembles": [
+      "select",
+      "menu",
+      "textarea",
+      "switch",
+      "segmented-control",
+      "radio",
+      "rating",
+      "pin-input"
+    ]
   },
   "avatar": {
-    "dependencies": {
-      "components": ["icon"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["icon"], "hooks": [] },
+    "resembles": ["icon", "picture", "image"]
   },
   "badge": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "tag",
+      "table",
+      "stat",
+      "native-table",
+      "pie-chart",
+      "radial-chart",
+      "radar-chart",
+      "donut-chart"
+    ]
   },
   "bleed": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "z-stack",
+      "v-stack",
+      "wrap",
+      "stack",
+      "spacer",
+      "simple-grid",
+      "separator",
+      "group"
+    ]
   },
   "blockquote": {
-    "dependencies": {
-      "components": ["icon"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["icon"], "hooks": [] },
+    "resembles": [
+      "text",
+      "mark",
+      "kbd",
+      "heading",
+      "highlight",
+      "em",
+      "code",
+      "link"
+    ]
   },
   "box": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "z-stack",
+      "v-stack",
+      "wrap",
+      "stack",
+      "spacer",
+      "simple-grid",
+      "separator",
+      "group"
+    ]
   },
   "breadcrumb": {
-    "dependencies": {
-      "components": ["icon"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["icon"], "hooks": [] },
+    "resembles": [
+      "steps",
+      "tabs",
+      "reorder",
+      "pagination",
+      "native-accordion",
+      "list",
+      "link-box",
+      "link"
+    ]
   },
   "button": {
     "dependencies": {
@@ -104,99 +178,143 @@
         "toggle"
       ],
       "hooks": []
-    }
+    },
+    "resembles": ["close-button", "icon-button", "toggle", "file-button"]
   },
   "calendar": {
     "dependencies": {
       "components": ["button", "field", "icon", "select", "format"],
       "hooks": ["use-descendants"]
     },
-    "dependents": {
-      "components": ["date-picker"],
-      "hooks": []
-    }
+    "dependents": { "components": ["date-picker"], "hooks": [] },
+    "resembles": ["table", "stat", "native-table"]
   },
   "card": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "table",
+      "stat",
+      "native-table",
+      "pie-chart",
+      "radial-chart",
+      "radar-chart",
+      "donut-chart",
+      "area-chart"
+    ]
   },
   "carousel": {
     "dependencies": {
       "components": ["button", "icon"],
       "hooks": ["use-boolean"]
-    }
+    },
+    "resembles": [
+      "infinite-scroll-area",
+      "accordion",
+      "rotate",
+      "ripple",
+      "flip",
+      "motion",
+      "airy",
+      "scroll-area"
+    ]
   },
   "center": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["loading"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["loading"], "hooks": [] },
+    "resembles": [
+      "z-stack",
+      "v-stack",
+      "wrap",
+      "stack",
+      "spacer",
+      "simple-grid",
+      "separator",
+      "group"
+    ]
   },
   "chart": {
-    "dependencies": {
-      "components": ["button", "tooltip"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["button", "tooltip"], "hooks": [] }
   },
   "checkbox-card": {
     "dependencies": {
       "components": ["checkbox", "group", "input", "icon"],
       "hooks": []
-    }
+    },
+    "resembles": [
+      "radio-card",
+      "switch",
+      "segmented-control",
+      "radio",
+      "rating",
+      "native-select",
+      "checkbox",
+      "toggle"
+    ]
   },
   "checkbox": {
     "dependencies": {
       "components": ["group", "input", "icon", "field"],
       "hooks": []
     },
-    "dependents": {
-      "components": ["checkbox-card", "table"],
-      "hooks": []
-    }
+    "dependents": { "components": ["checkbox-card", "table"], "hooks": [] },
+    "resembles": [
+      "switch",
+      "segmented-control",
+      "radio",
+      "rating",
+      "native-select",
+      "toggle",
+      "radio-card",
+      "checkbox-card"
+    ]
   },
   "circle-progress": {
-    "dependencies": {
-      "components": ["progress"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["progress"], "hooks": [] },
+    "resembles": [
+      "progress",
+      "loading",
+      "empty-state",
+      "skeleton",
+      "status",
+      "snacks",
+      "alert"
+    ]
   },
   "client-only": {
-    "dependencies": {
-      "components": ["show"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["show"], "hooks": [] },
+    "resembles": ["show", "portal", "slot", "for", "format"]
   },
   "close-button": {
-    "dependencies": {
-      "components": ["button", "icon"],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["drawer", "modal", "snacks"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["button", "icon"], "hooks": [] },
+    "dependents": { "components": ["drawer", "modal", "snacks"], "hooks": [] },
+    "resembles": ["button", "icon-button", "toggle", "file-button"]
   },
   "code": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "text",
+      "mark",
+      "kbd",
+      "heading",
+      "highlight",
+      "em",
+      "blockquote",
+      "link"
+    ]
   },
   "collapse": {
-    "dependencies": {
-      "components": ["motion"],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["accordion"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["motion"], "hooks": [] },
+    "dependents": { "components": ["accordion"], "hooks": [] },
+    "resembles": [
+      "slide-fade",
+      "slide",
+      "fade",
+      "fade-scale",
+      "accordion",
+      "rotate",
+      "ripple",
+      "flip"
+    ]
   },
   "color-picker": {
     "dependencies": {
@@ -212,7 +330,15 @@
         "field"
       ],
       "hooks": ["use-eye-dropper"]
-    }
+    },
+    "resembles": [
+      "color-selector",
+      "saturation-slider",
+      "hue-slider",
+      "date-picker",
+      "alpha-slider",
+      "select"
+    ]
   },
   "color-selector": {
     "dependencies": {
@@ -227,32 +353,51 @@
       ],
       "hooks": ["use-eye-dropper"]
     },
-    "dependents": {
-      "components": ["color-picker"],
-      "hooks": []
-    }
+    "dependents": { "components": ["color-picker"], "hooks": [] },
+    "resembles": [
+      "saturation-slider",
+      "hue-slider",
+      "alpha-slider",
+      "color-picker",
+      "textarea",
+      "switch",
+      "slider",
+      "segmented-control"
+    ]
   },
   "color-swatch": {
-    "dependencies": {
-      "components": ["grid"],
-      "hooks": []
-    },
+    "dependencies": { "components": ["grid"], "hooks": [] },
     "dependents": {
       "components": ["alpha-slider", "color-picker", "color-selector"],
       "hooks": []
-    }
+    },
+    "resembles": ["table", "stat", "native-table"]
   },
   "container": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "z-stack",
+      "v-stack",
+      "wrap",
+      "stack",
+      "spacer",
+      "simple-grid",
+      "separator",
+      "group"
+    ]
   },
   "data-list": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "list",
+      "timeline",
+      "table",
+      "stat",
+      "native-table",
+      "pie-chart",
+      "radial-chart",
+      "radar-chart"
+    ]
   },
   "date-picker": {
     "dependencies": {
@@ -269,10 +414,8 @@
       ],
       "hooks": []
     },
-    "dependents": {
-      "components": ["color-picker"],
-      "hooks": []
-    }
+    "dependents": { "components": ["color-picker"], "hooks": [] },
+    "resembles": ["select", "color-picker", "autocomplete"]
   },
   "drawer": {
     "dependencies": {
@@ -287,57 +430,105 @@
         "fade"
       ],
       "hooks": ["use-value"]
-    }
+    },
+    "resembles": [
+      "modal",
+      "tooltip",
+      "popover",
+      "slide-fade",
+      "slide",
+      "fade",
+      "collapse",
+      "fade-scale"
+    ]
   },
   "dropzone": {
     "dependencies": {
       "components": ["fade", "input", "loading", "portal", "field"],
       "hooks": []
-    }
+    },
+    "resembles": [
+      "file-input",
+      "file-button",
+      "textarea",
+      "switch",
+      "slider",
+      "segmented-control",
+      "radio",
+      "rating"
+    ]
   },
   "editable": {
-    "dependencies": {
-      "components": ["input", "field"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["input", "field"], "hooks": [] },
+    "resembles": [
+      "textarea",
+      "pin-input",
+      "password-input",
+      "number-input",
+      "input",
+      "file-input",
+      "autocomplete",
+      "switch"
+    ]
   },
   "em": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "text",
+      "mark",
+      "kbd",
+      "heading",
+      "highlight",
+      "code",
+      "blockquote",
+      "link"
+    ]
   },
   "empty-state": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "skeleton",
+      "status",
+      "snacks",
+      "progress",
+      "circle-progress",
+      "alert",
+      "tip"
+    ]
   },
   "fade-scale": {
-    "dependencies": {
-      "components": ["motion"],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["popover"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["motion"], "hooks": [] },
+    "dependents": { "components": ["popover"], "hooks": [] },
+    "resembles": [
+      "slide-fade",
+      "slide",
+      "fade",
+      "collapse",
+      "accordion",
+      "rotate",
+      "ripple",
+      "flip"
+    ]
   },
   "fade": {
-    "dependencies": {
-      "components": ["motion"],
-      "hooks": []
-    },
+    "dependencies": { "components": ["motion"], "hooks": [] },
     "dependents": {
       "components": ["drawer", "dropzone", "modal"],
       "hooks": []
-    }
+    },
+    "resembles": [
+      "slide-fade",
+      "slide",
+      "collapse",
+      "fade-scale",
+      "accordion",
+      "rotate",
+      "ripple",
+      "flip"
+    ]
   },
   "field": {
-    "dependencies": {
-      "components": ["fieldset", "form"],
-      "hooks": []
-    },
+    "dependencies": { "components": ["fieldset", "form"], "hooks": [] },
     "dependents": {
       "components": [
         "autocomplete",
@@ -366,111 +557,141 @@
         "toggle"
       ],
       "hooks": []
-    }
+    },
+    "resembles": [
+      "form",
+      "fieldset",
+      "z-stack",
+      "v-stack",
+      "wrap",
+      "stack",
+      "spacer",
+      "simple-grid"
+    ]
   },
   "fieldset": {
-    "dependencies": {
-      "components": ["field", "form"],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["field", "form"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["field", "form"], "hooks": [] },
+    "dependents": { "components": ["field", "form"], "hooks": [] },
+    "resembles": [
+      "form",
+      "field",
+      "z-stack",
+      "v-stack",
+      "wrap",
+      "stack",
+      "spacer",
+      "simple-grid"
+    ]
   },
   "file-button": {
     "dependencies": {
       "components": ["button", "input", "portal", "field", "file-input"],
       "hooks": []
-    }
+    },
+    "resembles": ["dropzone", "toggle", "file-input", "close-button", "button"]
   },
   "file-input": {
-    "dependencies": {
-      "components": ["input", "field", "portal"],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["file-button"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["input", "field", "portal"], "hooks": [] },
+    "dependents": { "components": ["file-button"], "hooks": [] },
+    "resembles": [
+      "textarea",
+      "pin-input",
+      "password-input",
+      "number-input",
+      "input",
+      "editable",
+      "dropzone",
+      "file-button"
+    ]
   },
   "flex": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["group", "wrap"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["group", "wrap"], "hooks": [] },
+    "resembles": [
+      "z-stack",
+      "v-stack",
+      "wrap",
+      "stack",
+      "spacer",
+      "simple-grid",
+      "separator",
+      "group"
+    ]
   },
   "flip": {
-    "dependencies": {
-      "components": ["motion"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["motion"], "hooks": [] },
+    "resembles": [
+      "rotate",
+      "ripple",
+      "motion",
+      "airy",
+      "slide-fade",
+      "slide",
+      "skeleton",
+      "fade"
+    ]
   },
   "float": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["indicator"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["indicator"], "hooks": [] },
+    "resembles": [
+      "z-stack",
+      "v-stack",
+      "wrap",
+      "stack",
+      "spacer",
+      "simple-grid",
+      "separator",
+      "group"
+    ]
   },
   "focus-lock": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["drawer", "modal"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["drawer", "modal"], "hooks": [] },
+    "resembles": ["visually-hidden"]
   },
   "for": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": ["portal", "slot", "format", "show", "client-only"]
   },
   "form": {
-    "dependencies": {
-      "components": ["fieldset", "button"],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["field", "fieldset"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["fieldset", "button"], "hooks": [] },
+    "dependents": { "components": ["field", "fieldset"], "hooks": [] },
+    "resembles": [
+      "field",
+      "fieldset",
+      "z-stack",
+      "v-stack",
+      "wrap",
+      "stack",
+      "spacer",
+      "simple-grid"
+    ]
   },
   "format": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["calendar", "date-picker"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["calendar", "date-picker"], "hooks": [] },
+    "resembles": ["portal", "slot", "for", "show", "client-only"]
   },
   "grid": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
+    "dependencies": { "components": [], "hooks": [] },
     "dependents": {
       "components": ["color-swatch", "simple-grid"],
       "hooks": []
-    }
+    },
+    "resembles": [
+      "z-stack",
+      "v-stack",
+      "wrap",
+      "stack",
+      "spacer",
+      "simple-grid",
+      "separator",
+      "group"
+    ]
   },
   "group": {
-    "dependencies": {
-      "components": ["flex"],
-      "hooks": ["use-value"]
-    },
+    "dependencies": { "components": ["flex"], "hooks": ["use-value"] },
     "dependents": {
       "components": [
         "autocomplete",
@@ -490,35 +711,60 @@
         "toggle"
       ],
       "hooks": []
-    }
+    },
+    "resembles": [
+      "z-stack",
+      "v-stack",
+      "wrap",
+      "stack",
+      "spacer",
+      "simple-grid",
+      "separator",
+      "h-stack"
+    ]
   },
   "heading": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "text",
+      "mark",
+      "kbd",
+      "highlight",
+      "em",
+      "code",
+      "blockquote",
+      "link"
+    ]
   },
   "highlight": {
-    "dependencies": {
-      "components": ["mark", "text"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["mark", "text"], "hooks": [] },
+    "resembles": [
+      "text",
+      "mark",
+      "kbd",
+      "heading",
+      "em",
+      "code",
+      "blockquote",
+      "link"
+    ]
   },
   "hue-slider": {
-    "dependencies": {
-      "components": ["slider"],
-      "hooks": ["use-value"]
-    },
+    "dependencies": { "components": ["slider"], "hooks": ["use-value"] },
     "dependents": {
       "components": ["alpha-slider", "color-selector", "saturation-slider"],
       "hooks": []
-    }
+    },
+    "resembles": [
+      "saturation-slider",
+      "alpha-slider",
+      "slider",
+      "color-selector",
+      "color-picker"
+    ]
   },
   "icon": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
+    "dependencies": { "components": [], "hooks": [] },
     "dependents": {
       "components": [
         "accordion",
@@ -552,35 +798,39 @@
         "tip"
       ],
       "hooks": []
-    }
+    },
+    "resembles": [
+      "avatar",
+      "picture",
+      "image",
+      "qr-code",
+      "icon-button",
+      "aspect-ratio"
+    ]
   },
   "image": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["picture"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["picture"], "hooks": [] },
+    "resembles": ["picture", "qr-code", "icon", "aspect-ratio", "avatar"]
   },
   "indicator": {
-    "dependencies": {
-      "components": ["float"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["float"], "hooks": [] },
+    "resembles": ["tag", "status", "native-popover", "badge"]
   },
   "infinite-scroll-area": {
-    "dependencies": {
-      "components": [],
-      "hooks": ["use-value"]
-    }
+    "dependencies": { "components": [], "hooks": ["use-value"] },
+    "resembles": [
+      "carousel",
+      "scroll-area",
+      "reorder",
+      "native-accordion",
+      "list",
+      "data-list",
+      "breadcrumb"
+    ]
   },
   "input": {
-    "dependencies": {
-      "components": ["field", "group"],
-      "hooks": []
-    },
+    "dependencies": { "components": ["field", "group"], "hooks": [] },
     "dependents": {
       "components": [
         "autocomplete",
@@ -603,31 +853,69 @@
         "toggle"
       ],
       "hooks": []
-    }
+    },
+    "resembles": [
+      "textarea",
+      "pin-input",
+      "password-input",
+      "number-input",
+      "editable",
+      "file-input",
+      "autocomplete",
+      "switch"
+    ]
   },
   "kbd": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "text",
+      "mark",
+      "heading",
+      "highlight",
+      "em",
+      "code",
+      "blockquote",
+      "link"
+    ]
   },
   "link-box": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "z-stack",
+      "v-stack",
+      "wrap",
+      "stack",
+      "spacer",
+      "simple-grid",
+      "separator",
+      "group"
+    ]
   },
   "link": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "text",
+      "mark",
+      "kbd",
+      "heading",
+      "highlight",
+      "em",
+      "code",
+      "blockquote"
+    ]
   },
   "list": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "data-list",
+      "timeline",
+      "table",
+      "stat",
+      "native-table",
+      "pie-chart",
+      "radial-chart",
+      "radar-chart"
+    ]
   },
   "loading": {
     "dependencies": {
@@ -637,27 +925,39 @@
     "dependents": {
       "components": ["alert", "button", "dropzone"],
       "hooks": ["use-async-callback"]
-    }
+    },
+    "resembles": ["skeleton", "progress", "circle-progress", "tip"]
   },
   "mark": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["highlight"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["highlight"], "hooks": [] },
+    "resembles": [
+      "text",
+      "kbd",
+      "heading",
+      "highlight",
+      "em",
+      "code",
+      "blockquote",
+      "link"
+    ]
   },
   "menu": {
     "dependencies": {
       "components": ["popover", "icon"],
       "hooks": ["use-descendants", "use-disclosure"]
     },
-    "dependents": {
-      "components": ["select"],
-      "hooks": []
-    }
+    "dependents": { "components": ["select"], "hooks": [] },
+    "resembles": [
+      "select",
+      "native-popover",
+      "autocomplete",
+      "tooltip",
+      "popover",
+      "tabs",
+      "modal",
+      "drawer"
+    ]
   },
   "modal": {
     "dependencies": {
@@ -672,16 +972,20 @@
       ],
       "hooks": ["use-disclosure"]
     },
-    "dependents": {
-      "components": ["drawer"],
-      "hooks": []
-    }
+    "dependents": { "components": ["drawer"], "hooks": [] },
+    "resembles": [
+      "drawer",
+      "tooltip",
+      "popover",
+      "slide-fade",
+      "slide",
+      "fade",
+      "collapse",
+      "fade-scale"
+    ]
   },
   "motion": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
+    "dependencies": { "components": [], "hooks": [] },
     "dependents": {
       "components": [
         "accordion",
@@ -704,27 +1008,36 @@
         "tooltip"
       ],
       "hooks": []
-    }
+    },
+    "resembles": [
+      "rotate",
+      "ripple",
+      "flip",
+      "airy",
+      "slide-fade",
+      "slide",
+      "skeleton",
+      "fade"
+    ]
   },
   "native-accordion": {
-    "dependencies": {
-      "components": ["icon"],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["accordion"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["icon"], "hooks": [] },
+    "dependents": { "components": ["accordion"], "hooks": [] },
+    "resembles": [
+      "accordion",
+      "tabs",
+      "slide-fade",
+      "slide",
+      "fade",
+      "collapse",
+      "fade-scale",
+      "reorder"
+    ]
   },
   "native-popover": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["popover"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["popover"], "hooks": [] },
+    "resembles": ["tooltip", "popover", "modal", "menu", "drawer", "indicator"]
   },
   "native-select": {
     "dependencies": {
@@ -734,57 +1047,103 @@
     "dependents": {
       "components": ["color-picker", "color-selector", "date-picker", "select"],
       "hooks": []
-    }
+    },
+    "resembles": [
+      "switch",
+      "segmented-control",
+      "radio",
+      "rating",
+      "checkbox",
+      "toggle",
+      "radio-card",
+      "checkbox-card"
+    ]
   },
   "native-table": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["table"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["table"], "hooks": [] },
+    "resembles": [
+      "table",
+      "stat",
+      "pie-chart",
+      "radial-chart",
+      "radar-chart",
+      "donut-chart",
+      "area-chart",
+      "composed-chart"
+    ]
   },
   "notice": {
     "dependencies": {
       "components": ["portal", "close-button", "alert", "status"],
       "hooks": []
     },
-    "dependents": {
-      "components": [],
-      "hooks": []
-    }
+    "dependents": { "components": [], "hooks": [] }
   },
   "number-input": {
     "dependencies": {
       "components": ["button", "input", "group", "icon", "field"],
       "hooks": ["use-counter", "use-interval"]
-    }
+    },
+    "resembles": [
+      "textarea",
+      "pin-input",
+      "password-input",
+      "input",
+      "editable",
+      "file-input",
+      "autocomplete",
+      "switch"
+    ]
   },
   "pagination": {
-    "dependencies": {
-      "components": ["button", "icon"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["button", "icon"], "hooks": [] },
+    "resembles": [
+      "tabs",
+      "switch",
+      "segmented-control",
+      "radio",
+      "rating",
+      "native-select",
+      "link-box",
+      "link"
+    ]
   },
   "password-input": {
     "dependencies": {
       "components": ["button", "input", "group", "icon", "field"],
       "hooks": []
-    }
+    },
+    "resembles": [
+      "textarea",
+      "pin-input",
+      "number-input",
+      "input",
+      "editable",
+      "file-input",
+      "autocomplete",
+      "switch"
+    ]
   },
   "picture": {
-    "dependencies": {
-      "components": ["image"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["image"], "hooks": [] },
+    "resembles": ["image", "qr-code", "icon", "aspect-ratio", "avatar"]
   },
   "pin-input": {
     "dependencies": {
       "components": ["input", "group", "field"],
       "hooks": ["use-descendants"]
-    }
+    },
+    "resembles": [
+      "textarea",
+      "password-input",
+      "number-input",
+      "input",
+      "editable",
+      "file-input",
+      "autocomplete",
+      "switch"
+    ]
   },
   "popover": {
     "dependencies": {
@@ -808,13 +1167,11 @@
         "tooltip"
       ],
       "hooks": []
-    }
+    },
+    "resembles": ["tooltip", "modal", "drawer", "native-popover", "menu"]
   },
   "portal": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
+    "dependencies": { "components": [], "hooks": [] },
     "dependents": {
       "components": [
         "drawer",
@@ -828,95 +1185,162 @@
         "tooltip"
       ],
       "hooks": []
-    }
+    },
+    "resembles": ["slot", "for", "format", "show", "client-only"]
   },
   "progress": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["circle-progress"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["circle-progress"], "hooks": [] },
+    "resembles": [
+      "circle-progress",
+      "loading",
+      "empty-state",
+      "skeleton",
+      "status",
+      "snacks",
+      "alert"
+    ]
   },
   "qr-code": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "table",
+      "stat",
+      "picture",
+      "native-table",
+      "image",
+      "pie-chart",
+      "radial-chart",
+      "radar-chart"
+    ]
   },
   "radio-card": {
-    "dependencies": {
-      "components": ["group", "input", "radio"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["group", "input", "radio"], "hooks": [] },
+    "resembles": [
+      "checkbox-card",
+      "switch",
+      "segmented-control",
+      "radio",
+      "rating",
+      "native-select",
+      "checkbox",
+      "toggle"
+    ]
   },
   "radio": {
-    "dependencies": {
-      "components": ["group", "input", "field"],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["radio-card"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["group", "input", "field"], "hooks": [] },
+    "dependents": { "components": ["radio-card"], "hooks": [] },
+    "resembles": [
+      "switch",
+      "segmented-control",
+      "rating",
+      "native-select",
+      "checkbox",
+      "toggle",
+      "radio-card",
+      "checkbox-card"
+    ]
   },
   "rating": {
-    "dependencies": {
-      "components": ["icon", "field"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["icon", "field"], "hooks": [] },
+    "resembles": [
+      "switch",
+      "segmented-control",
+      "radio",
+      "native-select",
+      "checkbox",
+      "toggle",
+      "radio-card",
+      "checkbox-card"
+    ]
   },
   "reorder": {
     "dependencies": {
       "components": ["motion", "icon"],
       "hooks": ["use-value"]
-    }
+    },
+    "resembles": [
+      "resizable",
+      "native-accordion",
+      "list",
+      "infinite-scroll-area",
+      "data-list",
+      "breadcrumb"
+    ]
   },
   "resizable": {
-    "dependencies": {
-      "components": [],
-      "hooks": ["use-value"]
-    }
+    "dependencies": { "components": [], "hooks": ["use-value"] },
+    "resembles": [
+      "z-stack",
+      "v-stack",
+      "wrap",
+      "stack",
+      "spacer",
+      "simple-grid",
+      "separator",
+      "group"
+    ]
   },
   "ripple": {
-    "dependencies": {
-      "components": ["motion"],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["button"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["motion"], "hooks": [] },
+    "dependents": { "components": ["button"], "hooks": [] },
+    "resembles": [
+      "rotate",
+      "flip",
+      "motion",
+      "airy",
+      "slide-fade",
+      "slide",
+      "skeleton",
+      "fade"
+    ]
   },
   "rotate": {
-    "dependencies": {
-      "components": ["motion"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["motion"], "hooks": [] },
+    "resembles": [
+      "ripple",
+      "flip",
+      "motion",
+      "airy",
+      "slide-fade",
+      "slide",
+      "skeleton",
+      "fade"
+    ]
   },
   "saturation-slider": {
     "dependencies": {
       "components": ["hue-slider", "slider", "field"],
       "hooks": []
     },
-    "dependents": {
-      "components": ["color-selector"],
-      "hooks": []
-    }
+    "dependents": { "components": ["color-selector"], "hooks": [] },
+    "resembles": [
+      "hue-slider",
+      "alpha-slider",
+      "slider",
+      "color-selector",
+      "color-picker"
+    ]
   },
   "scroll-area": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": ["infinite-scroll-area", "carousel"]
   },
   "segmented-control": {
     "dependencies": {
       "components": ["motion", "field"],
       "hooks": ["use-value", "use-descendants"]
-    }
+    },
+    "resembles": [
+      "switch",
+      "radio",
+      "rating",
+      "native-select",
+      "checkbox",
+      "toggle",
+      "radio-card",
+      "checkbox-card"
+    ]
   },
   "select": {
     "dependencies": {
@@ -931,243 +1355,327 @@
       ],
       "hooks": []
     },
-    "dependents": {
-      "components": ["autocomplete", "calendar"],
-      "hooks": []
-    }
+    "dependents": { "components": ["autocomplete", "calendar"], "hooks": [] },
+    "resembles": [
+      "autocomplete",
+      "menu",
+      "switch",
+      "segmented-control",
+      "radio",
+      "rating",
+      "native-select",
+      "checkbox"
+    ]
   },
   "separator": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "z-stack",
+      "v-stack",
+      "wrap",
+      "stack",
+      "spacer",
+      "simple-grid",
+      "group",
+      "h-stack"
+    ]
   },
   "show": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["client-only"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["client-only"], "hooks": [] },
+    "resembles": ["client-only", "portal", "slot", "for", "format"]
   },
   "simple-grid": {
-    "dependencies": {
-      "components": ["grid"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["grid"], "hooks": [] },
+    "resembles": [
+      "z-stack",
+      "v-stack",
+      "wrap",
+      "stack",
+      "spacer",
+      "separator",
+      "group",
+      "h-stack"
+    ]
   },
   "skeleton": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "rotate",
+      "ripple",
+      "loading",
+      "flip",
+      "motion",
+      "airy",
+      "empty-state",
+      "slide-fade"
+    ]
   },
   "slide-fade": {
-    "dependencies": {
-      "components": ["motion"],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["popover"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["motion"], "hooks": [] },
+    "dependents": { "components": ["popover"], "hooks": [] },
+    "resembles": [
+      "slide",
+      "fade",
+      "collapse",
+      "fade-scale",
+      "accordion",
+      "rotate",
+      "ripple",
+      "flip"
+    ]
   },
   "slide": {
-    "dependencies": {
-      "components": ["motion"],
-      "hooks": ["use-value"]
-    },
-    "dependents": {
-      "components": ["drawer"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["motion"], "hooks": ["use-value"] },
+    "dependents": { "components": ["drawer"], "hooks": [] },
+    "resembles": [
+      "slide-fade",
+      "fade",
+      "collapse",
+      "fade-scale",
+      "accordion",
+      "rotate",
+      "ripple",
+      "flip"
+    ]
   },
   "slider": {
-    "dependencies": {
-      "components": ["field"],
-      "hooks": ["use-value"]
-    },
+    "dependencies": { "components": ["field"], "hooks": ["use-value"] },
     "dependents": {
       "components": ["color-selector", "hue-slider", "saturation-slider"],
       "hooks": []
-    }
+    },
+    "resembles": [
+      "saturation-slider",
+      "hue-slider",
+      "alpha-slider",
+      "textarea",
+      "switch",
+      "segmented-control",
+      "radio",
+      "rating"
+    ]
   },
   "slot": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": ["portal", "for", "format", "show", "client-only"]
   },
   "snacks": {
     "dependencies": {
       "components": ["close-button", "motion", "alert"],
       "hooks": ["use-timeout"]
-    }
+    },
+    "resembles": [
+      "alert",
+      "tip",
+      "empty-state",
+      "skeleton",
+      "status",
+      "progress",
+      "circle-progress"
+    ]
   },
   "stack": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "z-stack",
+      "v-stack",
+      "wrap",
+      "spacer",
+      "simple-grid",
+      "separator",
+      "group",
+      "h-stack"
+    ]
   },
   "stat": {
-    "dependencies": {
-      "components": ["icon"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["icon"], "hooks": [] },
+    "resembles": [
+      "table",
+      "native-table",
+      "pie-chart",
+      "radial-chart",
+      "radar-chart",
+      "donut-chart",
+      "area-chart",
+      "composed-chart"
+    ]
   },
   "status": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["alert", "tip"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["alert", "tip"], "hooks": [] },
+    "resembles": [
+      "empty-state",
+      "skeleton",
+      "tag",
+      "snacks",
+      "progress",
+      "indicator",
+      "circle-progress",
+      "badge"
+    ]
   },
   "steps": {
     "dependencies": {
       "components": ["icon"],
       "hooks": ["use-value", "use-descendants"]
-    }
+    },
+    "resembles": ["breadcrumb", "timeline", "tabs"]
   },
   "switch": {
-    "dependencies": {
-      "components": ["field"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["field"], "hooks": [] },
+    "resembles": [
+      "segmented-control",
+      "radio",
+      "rating",
+      "native-select",
+      "checkbox",
+      "toggle",
+      "radio-card",
+      "checkbox-card"
+    ]
   },
   "table": {
     "dependencies": {
       "components": ["checkbox", "icon", "native-table"],
       "hooks": []
-    }
+    },
+    "resembles": [
+      "stat",
+      "native-table",
+      "pie-chart",
+      "radial-chart",
+      "radar-chart",
+      "donut-chart",
+      "area-chart",
+      "composed-chart"
+    ]
   },
   "tabs": {
     "dependencies": {
       "components": [],
       "hooks": ["use-value", "use-descendants"]
-    }
+    },
+    "resembles": [
+      "pagination",
+      "native-accordion",
+      "breadcrumb",
+      "steps",
+      "accordion",
+      "select",
+      "menu"
+    ]
   },
   "tag": {
-    "dependencies": {
-      "components": ["icon"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["icon"], "hooks": [] },
+    "resembles": [
+      "badge",
+      "table",
+      "stat",
+      "native-table",
+      "pie-chart",
+      "radial-chart",
+      "radar-chart",
+      "donut-chart"
+    ]
   },
   "text": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["highlight", "loading"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["highlight", "loading"], "hooks": [] },
+    "resembles": [
+      "mark",
+      "kbd",
+      "heading",
+      "highlight",
+      "em",
+      "code",
+      "blockquote",
+      "link"
+    ]
   },
   "textarea": {
-    "dependencies": {
-      "components": ["input", "field"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["input", "field"], "hooks": [] },
+    "resembles": [
+      "pin-input",
+      "password-input",
+      "number-input",
+      "input",
+      "editable",
+      "file-input",
+      "autocomplete",
+      "switch"
+    ]
   },
   "timeline": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": ["list", "data-list", "steps", "table", "stat", "native-table"]
   },
   "tip": {
     "dependencies": {
       "components": ["button", "status", "tooltip", "icon"],
       "hooks": []
-    }
+    },
+    "resembles": ["snacks", "alert", "loading", "empty-state"]
   },
   "toggle": {
     "dependencies": {
       "components": ["group", "button", "input", "portal", "field"],
       "hooks": []
-    }
+    },
+    "resembles": [
+      "switch",
+      "segmented-control",
+      "radio",
+      "rating",
+      "native-select",
+      "checkbox",
+      "radio-card",
+      "file-button"
+    ]
   },
   "tooltip": {
     "dependencies": {
       "components": ["motion", "popover", "portal"],
       "hooks": ["use-disclosure", "use-outside-click"]
     },
-    "dependents": {
-      "components": ["tip"],
-      "hooks": []
-    }
+    "dependents": { "components": ["tip"], "hooks": [] },
+    "resembles": ["popover", "modal", "drawer", "native-popover", "menu"]
   },
   "visually-hidden": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": ["focus-lock"]
   },
   "wrap": {
-    "dependencies": {
-      "components": ["flex"],
-      "hooks": []
-    }
+    "dependencies": { "components": ["flex"], "hooks": [] },
+    "resembles": [
+      "z-stack",
+      "v-stack",
+      "stack",
+      "spacer",
+      "simple-grid",
+      "separator",
+      "group",
+      "h-stack"
+    ]
   },
-  "use-animation": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
-  },
+  "use-animation": { "dependencies": { "components": [], "hooks": [] } },
   "use-async-callback": {
-    "dependencies": {
-      "components": ["loading"],
-      "hooks": ["use-processing"]
-    }
+    "dependencies": { "components": ["loading"], "hooks": ["use-processing"] }
   },
-  "use-async": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
-  },
+  "use-async": { "dependencies": { "components": [], "hooks": [] } },
   "use-boolean": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["carousel"],
-      "hooks": ["use-processing"]
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["carousel"], "hooks": ["use-processing"] }
   },
   "use-breakpoint": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": [],
-      "hooks": ["use-value"]
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": [], "hooks": ["use-value"] }
   },
   "use-clickable": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["file-input", "tag"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["file-input", "tag"], "hooks": [] }
   },
-  "use-clipboard": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
-  },
+  "use-clipboard": { "dependencies": { "components": [], "hooks": [] } },
   "use-combobox": {
     "dependencies": {
       "components": ["popover"],
@@ -1179,10 +1687,7 @@
     }
   },
   "use-controllable-state": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
+    "dependencies": { "components": [], "hooks": [] },
     "dependents": {
       "components": [
         "accordion",
@@ -1218,20 +1723,11 @@
     }
   },
   "use-counter": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["number-input"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["number-input"], "hooks": [] }
   },
   "use-descendants": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
+    "dependencies": { "components": [], "hooks": [] },
     "dependents": {
       "components": [
         "accordion",
@@ -1246,188 +1742,81 @@
     }
   },
   "use-disclosure": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
+    "dependencies": { "components": [], "hooks": [] },
     "dependents": {
       "components": ["menu", "modal", "popover", "tooltip"],
       "hooks": []
     }
   },
   "use-event-listener": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
+    "dependencies": { "components": [], "hooks": [] },
     "dependents": {
       "components": ["number-input", "popover", "tooltip"],
       "hooks": []
     }
   },
   "use-eye-dropper": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
+    "dependencies": { "components": [], "hooks": [] },
     "dependents": {
       "components": ["color-picker", "color-selector"],
       "hooks": []
     }
   },
   "use-field-sizing": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["date-picker"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["date-picker"], "hooks": [] }
   },
   "use-focus": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["editable", "popover"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["editable", "popover"], "hooks": [] }
   },
-  "use-hover": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
-  },
-  "use-idle": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
-  },
+  "use-hover": { "dependencies": { "components": [], "hooks": [] } },
+  "use-idle": { "dependencies": { "components": [], "hooks": [] } },
   "use-interval": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["number-input"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["number-input"], "hooks": [] }
   },
   "use-lazy-mount": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["steps", "tabs"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["steps", "tabs"], "hooks": [] }
   },
   "use-local-storage": {
-    "dependencies": {
-      "components": [],
-      "hooks": ["use-window-event"]
-    }
+    "dependencies": { "components": [], "hooks": ["use-window-event"] }
   },
-  "use-media-query": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
-  },
+  "use-media-query": { "dependencies": { "components": [], "hooks": [] } },
   "use-mounted": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["client-only"],
-      "hooks": ["use-async"]
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["client-only"], "hooks": ["use-async"] }
   },
-  "use-online": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
-  },
-  "use-os": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
-  },
+  "use-online": { "dependencies": { "components": [], "hooks": [] } },
+  "use-os": { "dependencies": { "components": [], "hooks": [] } },
   "use-outside-click": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["popover", "tooltip"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["popover", "tooltip"], "hooks": [] }
   },
   "use-pan-event": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["saturation-slider", "slider"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["saturation-slider", "slider"], "hooks": [] }
   },
   "use-popper": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
+    "dependencies": { "components": [], "hooks": [] },
     "dependents": {
       "components": ["native-popover", "popover", "tooltip"],
       "hooks": []
     }
   },
-  "use-previous": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
-  },
+  "use-previous": { "dependencies": { "components": [], "hooks": [] } },
   "use-processing": {
-    "dependencies": {
-      "components": [],
-      "hooks": ["use-boolean"]
-    },
-    "dependents": {
-      "components": [],
-      "hooks": ["use-async-callback"]
-    }
+    "dependencies": { "components": [], "hooks": ["use-boolean"] },
+    "dependents": { "components": [], "hooks": ["use-async-callback"] }
   },
-  "use-resize-observer": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    }
-  },
+  "use-resize-observer": { "dependencies": { "components": [], "hooks": [] } },
   "use-timeout": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": ["loading", "snacks"],
-      "hooks": []
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": ["loading", "snacks"], "hooks": [] }
   },
   "use-value": {
-    "dependencies": {
-      "components": [],
-      "hooks": ["use-breakpoint"]
-    },
+    "dependencies": { "components": [], "hooks": ["use-breakpoint"] },
     "dependents": {
       "components": [
         "alpha-slider",
@@ -1447,13 +1836,7 @@
     }
   },
   "use-window-event": {
-    "dependencies": {
-      "components": [],
-      "hooks": []
-    },
-    "dependents": {
-      "components": [],
-      "hooks": ["use-local-storage"]
-    }
+    "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": [], "hooks": ["use-local-storage"] }
   }
 }

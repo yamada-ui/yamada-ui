@@ -13,7 +13,11 @@ interface Dependencies {
 interface Dependents extends Dependencies {}
 
 export interface Relations {
-  [key: string]: { dependencies?: Dependencies; dependents?: Dependents }
+  [key: string]: {
+    dependencies?: Dependencies
+    dependents?: Dependents
+    resembles?: string[]
+  }
 }
 
 interface Prop {

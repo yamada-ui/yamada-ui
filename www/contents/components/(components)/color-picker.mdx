@@ -1,6 +1,7 @@
 ---
 title: ColorPicker
 description: "`ColorPicker` is a component used by the user to select a color or enter an arbitrary color value."
+tags: ["form-control", "color", "floating", "test-input"]
 storybook: components-colorpicker--basic
 source: components/color-picker
 ---
@@ -369,10 +370,6 @@ const [value, onChange] = useState<string>("#4387f4")
 return <ColorPicker value={value} onChange={onChange} />
 ```
 
-## Uses Components & Hooks
-
-<Uses name="color-picker" />
-
 ## Props
 
 <PropsTable name="color-picker" />
@@ -451,3 +448,11 @@ If you do not use `Field.Root`, set `aria-label` or `aria-labelledby` on `ColorP
 |                          | `aria-valuemax`          | Sets the value of `max`. The default is `1`.                                                                                                                        |
 |                          | `aria-valuenow`          | Sets the current value.                                                                                                                                             |
 |                          | `aria-valuetext`         | Sets the current value like `"18%"`.                                                                                                                                |
+
+## Similar Components
+
+<Similar name="color-picker" />
+
+## Uses Components & Hooks
+
+<Uses name="color-picker" />

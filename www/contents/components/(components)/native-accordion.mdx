@@ -303,8 +303,6 @@ return <NativeAccordion.Root animate={false} items={items} />
 
 ## Accessibility
 
-`NativeAccordion` follows the [WAI-ARIA - Disclosure Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/) for accessibility. It uses the native HTML `<details>` and `<summary>` elements, which provide built-in disclosure behavior.
-
 ### Keyboard Navigation
 
 | Key              | Description                                                                                                      | State |
@@ -314,9 +312,9 @@ return <NativeAccordion.Root animate={false} items={items} />
 
 ### ARIA Roles and Attributes
 
-| Component                | Role and Attribute     | Usage                                                    |
-| ------------------------ | ---------------------- | -------------------------------------------------------- |
-| `NativeAccordion.Button` | `aria-disabled="true"` | Sets to `"true"` when the panel of the item is disabled. |
+| Component                | Role and Attribute | Usage                                                    |
+| ------------------------ | ------------------ | -------------------------------------------------------- |
+| `NativeAccordion.Button` | `aria-disabled`    | Sets to `"true"` when the panel of the item is disabled. |
 
 ## Props
 

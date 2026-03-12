@@ -16,7 +16,7 @@ env:
 jobs:
   chromium_coverage:
     name: Chromium ${{ matrix.shard_index }}/4
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       max-parallel: 4
       matrix:

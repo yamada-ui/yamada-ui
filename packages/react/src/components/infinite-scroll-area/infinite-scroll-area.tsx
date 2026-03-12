@@ -7,7 +7,7 @@ import type { UseInfiniteScrollProps } from "./use-infinite-scroll"
 import { useRef } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { useValue } from "../../hooks/use-value"
-import { mergeRefs } from "../../utils"
+import { isNull, mergeRefs } from "../../utils"
 import { infiniteScrollAreaStyle } from "./infinite-scroll-area.style"
 import { useInfiniteScroll } from "./use-infinite-scroll"
 
@@ -82,7 +82,7 @@ export const InfiniteScrollArea = withProvider<
       resetRef,
       reverse,
       rootMargin,
-      rootRef: rootRefProp ?? rootRef,
+      rootRef: isNull(rootRefProp) ? null : (rootRefProp ?? rootRef),
       startIndex,
       threshold,
       onLoad,

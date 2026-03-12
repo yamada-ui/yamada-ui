@@ -135,10 +135,11 @@ describe("<InfiniteScrollArea />", () => {
       expect(container.scrollTop).toBe(1000)
     })
 
+    const rootElement = container.firstElementChild
     expect(IntersectionObserverMock).toHaveBeenLastCalledWith(
       expect.any(Function),
       {
-        root: null,
+        root: rootElement,
         rootMargin: undefined,
         threshold: undefined,
       },

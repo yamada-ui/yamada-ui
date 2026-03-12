@@ -132,7 +132,7 @@ const [count, setCount] = useState<number>(50)
 
 return (
   <InfiniteScrollArea
-    rootMargin="300px 0px 0px 0px"
+    rootMargin="0px 0px 300px 0px"
     loading={<Loading.Oval fontSize="2xl" />}
     onLoad={({ finish, index }) => {
       console.log("load", index)

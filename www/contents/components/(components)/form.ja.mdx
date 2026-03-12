@@ -650,6 +650,19 @@ return (
 )
 ```
 
+## アクセシビリティ
+
+### ARIAロールと属性
+
+| コンポーネント      | ロールと属性       | 使い方                                                          |
+| ------------------- | ------------------ | --------------------------------------------------------------- |
+| `Form.Root`         | `id`               | `Form.SubmitButton`と関連付けるために使用する`id`。             |
+|                     | `aria-labelledby`  | 関連した`Form.Title`と`Form.Description`の`id`を設定します。    |
+| `Form.Title`        | `id`               | `Form.Root`や`Form.Description`と関連付けるために使用する`id`。 |
+| `Form.Description`  | `id`               | `Form.Root`と関連付けるために使用する`id`。                     |
+|                     | `aria-describedby` | 関連した`Form.Title`の`id`を設定します。                        |
+| `Form.SubmitButton` | `form`             | 関連した`Form.Root`の`id`を設定します。                         |
+
 ## Props
 
 <PropsTable name="form" />

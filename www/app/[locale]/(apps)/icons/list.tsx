@@ -4,7 +4,6 @@ import type { CenterProps, StackProps } from "@yamada-ui/react"
 import type { ElementType } from "react"
 import {
   BirdIcon,
-  Box,
   Button,
   Center,
   FishIcon,
@@ -13,6 +12,7 @@ import {
   InfiniteScrollArea,
   Input,
   InputGroup,
+  Loading,
   noop,
   IconButton as OriginalIconButton,
   RabbitIcon,
@@ -44,7 +44,7 @@ const CONTENTS: Data[] = Object.entries(icons).map(([name, Icon]) => ({
   ...data[name as keyof typeof data],
 }))
 
-const PER_PAGE = 200
+const PER_PAGE = 204
 
 export interface ListProps extends StackProps {}
 
@@ -121,9 +121,10 @@ export function List({ ...rest }: ListProps) {
         <InfiniteScrollArea
           disabled={list.length === hitsRef.current.length}
           flex="1"
-          loading={<Box h="px" w="full" />}
+          loading={<Loading.Oval fontSize="2xl" />}
           resetRef={resetRef}
           rootMargin="0px 0px 600px 0px"
+          rootRef={null}
           onLoad={({ finish, index }) => {
             setList(hitsRef.current.slice(0, PER_PAGE * (index + 1)))
 

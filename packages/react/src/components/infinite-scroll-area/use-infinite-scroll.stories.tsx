@@ -110,7 +110,7 @@ export const Root = () => {
 export const RootMargin = () => {
   const [count, setCount] = useState<number>(50)
   const { ref, finish } = useInfiniteScroll({
-    rootMargin: "300px 0px 0px 0px",
+    rootMargin: "0px 0px 600px 0px",
     onLoad: ({ finish, index }) => {
       setCount((prev) => prev + 50)
 

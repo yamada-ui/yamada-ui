@@ -117,7 +117,7 @@ export const RootMargin: Story = () => {
   return (
     <InfiniteScrollArea
       loading={<Loading.Oval fontSize="2xl" />}
-      rootMargin="300px 0px 0px 0px"
+      rootMargin="0px 0px 300px 0px"
       onLoad={({ finish, index }) => {
         setCount((prev) => prev + 50)
 

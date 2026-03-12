@@ -2,7 +2,7 @@
 
 import type { RefObject } from "react"
 import type { Orientation } from "../../core"
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { useEnvironment } from "../../core"
 import { assignRef, useCallbackRef } from "../../utils"
 
@@ -67,7 +67,7 @@ export interface UseInfiniteScrollProps extends Omit<
    * The element that is used as the viewport for checking visibility of the target.
    * Defaults to the browser viewport if not specified or if `null`.
    */
-  rootRef?: RefObject<HTMLElement | null>
+  rootRef?: null | RefObject<HTMLElement | null>
   /**
    * If set the `onLoad` function will start from the given index.
    * If `initialLoad` is `true`, index starts from `0`.
@@ -121,11 +121,6 @@ export const useInfiniteScroll = <Y extends HTMLElement = HTMLDivElement>({
   const onLoad = useCallbackRef(onLoadProp)
   const vertical = orientation === "vertical"
   const direction = vertical ? "top" : "left"
-  const options: IntersectionObserverInit = useMemo(() => {
-    const root = rootRef?.current
-
-    return { root, rootMargin, threshold }
-  }, [rootMargin, rootRef, threshold])
 
   const onReset = useCallback(
     (index = 1, runScroll = true) => {
@@ -181,45 +176,51 @@ export const useInfiniteScroll = <Y extends HTMLElement = HTMLDivElement>({
   }, [])
 
   const createObserver = useCallback(() => {
-    const observer = new IntersectionObserver(async ([entry]) => {
-      const root = rootRef?.current
-      const body = getDocument()?.body
-      const el = root && isScrollable(root, vertical) ? root : body
+    const root = rootRef?.current ?? null
 
-      if (!entry?.isIntersecting || processingRef.current || !el) return
+    const observer = new IntersectionObserver(
+      async ([entry]) => {
+        const root = rootRef?.current
+        const body = getDocument()?.body
+        const el = root && isScrollable(root, vertical) ? root : body
 
-      const props = { entry, finish: onFinish, index: indexRef.current }
+        if (!entry?.isIntersecting || processingRef.current || !el) return
 
-      processingRef.current = true
+        const props = { entry, finish: onFinish, index: indexRef.current }
 
-      if (root) root.ariaBusy = "true"
+        processingRef.current = true
 
-      let prevScrollPosition = 0
+        if (root) root.ariaBusy = "true"
 
-      if (reverse)
-        prevScrollPosition = vertical ? el.scrollHeight : el.scrollWidth
+        let prevScrollPosition = 0
 
-      await onLoad(props)
+        if (reverse)
+          prevScrollPosition = vertical ? el.scrollHeight : el.scrollWidth
 
-      if (reverse)
-        setTimeout(() => {
-          const target = el === body ? getWindow() : el
-          const position =
-            (vertical ? el.scrollHeight : el.scrollWidth) - prevScrollPosition
+        await onLoad(props)
 
-          target?.scrollTo({ [direction]: position })
-        })
+        if (reverse)
+          setTimeout(() => {
+            const target = el === body ? getWindow() : el
+            const position =
+              (vertical ? el.scrollHeight : el.scrollWidth) - prevScrollPosition
 
-      indexRef.current += 1
-      processingRef.current = false
+            target?.scrollTo({ [direction]: position })
+          })
 
-      if (root) root.ariaBusy = "false"
-    }, options)
+        indexRef.current += 1
+        processingRef.current = false
+
+        if (root) root.ariaBusy = "false"
+      },
+      { root, rootMargin, threshold },
+    )
 
     return observer
   }, [
-    options,
     rootRef,
+    rootMargin,
+    threshold,
     getDocument,
     vertical,
     onFinish,

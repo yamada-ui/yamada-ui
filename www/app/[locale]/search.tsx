@@ -12,10 +12,12 @@ import {
   HashIcon,
   HStack,
   IconButton,
+  InfiniteScrollArea,
   Input,
   InputGroup,
   isApple,
   Kbd,
+  Loading,
   mergeRefs,
   Modal,
   noop,
@@ -301,6 +303,8 @@ const SEARCH_KEYS = [
   "hierarchy.2",
   "hierarchy.1",
 ] as const
+const DEFAULT_LOCALE_CONTENTS = getContents(CONSTANTS.I18N.DEFAULT_LOCALE)
+const PER_PAGE = 50
 
 interface SearchContentBodyProps extends Modal.BodyProps {
   onActive: (
@@ -319,8 +323,16 @@ function SearchContentBody({
   const t = useTranslations("component.search")
   const { locale } = useLocale()
   const contents = useMemo(() => getContents(locale), [locale])
+  const contentMap = useMemo(
+    () => new Map(contents.map((content) => [content.pathname, content])),
+    [contents],
+  )
   const defaultContents = useMemo(() => getDefaultContents(locale), [locale])
   const [hits, setHits] = useState<Hit[]>(defaultContents)
+  const maxIndex = Math.ceil(hits.length / PER_PAGE) - 1
+  const [count, setCount] = useState(PER_PAGE)
+  const list = useMemo(() => hits.slice(0, count), [hits, count])
+  const resetRef = useRef<() => void>(noop)
   const [, startTransition] = useTransition()
   const descendants = useDescendantsContext()
   const [value, setValue] = useState("")
@@ -338,37 +350,34 @@ function SearchContentBody({
 
   assignRef(onSearchRef, (value) => {
     startTransition(() => {
+      resetRef.current()
+
       let hits: Hit[] = defaultContents
 
       if (value.length) {
         const localeHits = matchSorter(contents, value, { keys: SEARCH_KEYS })
 
         if (locale !== CONSTANTS.I18N.DEFAULT_LOCALE) {
-          const defaultLocaleContents = getContents(
-            CONSTANTS.I18N.DEFAULT_LOCALE,
+          const localePathnames = new Set(
+            localeHits.map(({ pathname }) => pathname),
           )
-          const defaultLocaleHits = matchSorter(defaultLocaleContents, value, {
-            keys: SEARCH_KEYS,
-          })
-
-          const localePathnames = new Set(localeHits.map((h) => h.pathname))
-          const contentsByPathname = new Map(
-            contents.map((c) => [c.pathname, c]),
+          const defaultLocaleHits = matchSorter(
+            DEFAULT_LOCALE_CONTENTS,
+            value,
+            { keys: SEARCH_KEYS },
           )
-          const additionalHits = defaultLocaleHits
-            .filter((h) => !localePathnames.has(h.pathname))
-            .map((h) => contentsByPathname.get(h.pathname) ?? h)
+            .filter(({ pathname }) => !localePathnames.has(pathname))
+            .map((hit) => contentMap.get(hit.pathname) ?? hit)
 
-          hits = [...localeHits, ...additionalHits]
+          hits = [...localeHits, ...defaultLocaleHits]
         } else {
           hits = localeHits
         }
       }
 
+      setCount(PER_PAGE)
       setHits(hits)
       setValue(value)
-
-      if (!hits.length) return
     })
   })
 
@@ -379,34 +388,42 @@ function SearchContentBody({
   }, [descendants, onActive, value])
 
   return (
-    <Modal.Body
-      as="nav"
-      gap="sm"
-      maxH={{ base: "4xl", sm: "full" }}
-      my="sm"
-      px="sm"
-      tabIndex={-1}
-      {...rest}
-    >
-      {hits.length ? (
-        hits.map((hit, index) => (
-          <Item
-            key={`${hit.pathname}-${index}`}
-            href={hit.pathname}
-            description={getDescription(hit)}
-            icon={hit.type === "fragment" ? HashIcon : TextAlignStartIcon}
-            title={hit.title}
-            onActive={onActive}
-            onClose={onClose}
-          />
-        ))
-      ) : (
-        <Center minH="16" w="full">
-          <Text color="fg.muted" fontSize="sm" lineClamp={1}>
-            {t("notFound", { value })}
-          </Text>
-        </Center>
-      )}
+    <Modal.Body asChild {...rest}>
+      <InfiniteScrollArea
+        gap="sm"
+        loading={<Loading.Oval fontSize="2xl" />}
+        maxH={{ base: "44.5rem", sm: "full" }}
+        my="sm"
+        px="sm"
+        resetRef={resetRef}
+        rootMargin="0px 0px 600px 0px"
+        tabIndex={-1}
+        onLoad={({ finish, index }) => {
+          setCount((prev) => prev + PER_PAGE)
+
+          if (index >= maxIndex) finish()
+        }}
+      >
+        {list.length ? (
+          list.map((hit, index) => (
+            <Item
+              key={`${hit.pathname}-${index}`}
+              href={hit.pathname}
+              description={getDescription(hit)}
+              icon={hit.type === "fragment" ? HashIcon : TextAlignStartIcon}
+              title={hit.title}
+              onActive={onActive}
+              onClose={onClose}
+            />
+          ))
+        ) : (
+          <Center minH="16" w="full">
+            <Text color="fg.muted" fontSize="sm" lineClamp={1}>
+              {t("notFound", { value })}
+            </Text>
+          </Center>
+        )}
+      </InfiniteScrollArea>
     </Modal.Body>
   )
 }

@@ -169,6 +169,75 @@ return <ColorSelector.Root maxW="md" value={value} onChange={setValue} />
 
 <PropsTable name="color-selector" />
 
+## Accessibility
+
+`ColorSelector` uses appropriate ARIA attributes to ensure accessibility for color selection.
+
+### Keyboard Navigation
+
+| Key                      | Description                                                                         | State |
+| ------------------------ | ----------------------------------------------------------------------------------- | ----- |
+| `ArrowRight`, `ArrowUp`  | If within a slider, increases the value based on `step`.                            | -     |
+| `ArrowLeft`, `ArrowDown` | If within a slider, decreases the value based on `step`.                            | -     |
+| `Home`                   | If within hue slider or alpha slider, sets the value to `min`.                      | -     |
+| `End`                    | If within hue slider or alpha slider, sets the value to `max`.                      | -     |
+| `PageUp`                 | If within hue slider or alpha slider, increases the value based on `min` and `max`. | -     |
+| `PageDown`               | If within hue slider or alpha slider, decreases the value based on `min` and `max`. | -     |
+
+### ARIA Roles and Attributes
+
+| Component and Element                    | Role and Attribute     | Usage                                                                                                                                                      |
+| ---------------------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ColorSelector.EyeDropper`               | `role="button"`        | Indicates that this is a button.                                                                                                                           |
+|                                          | `aria-disabled`        | Sets to `"true"` if `disabled` or `readOnly` is set.                                                                                                       |
+|                                          | `aria-label`           | Sets to `"Pick a color"`.                                                                                                                                  |
+|                                          | `aria-readonly`        | Set to `"true"` if `readOnly` is set.                                                                                                                      |
+|                                          | `aria-disabled`        | Set to `"true"` if `disabled` is set.                                                                                                                      |
+| `ColorSelector.SaturationSlider > input` | `aria-hidden`          | Excludes the element from the accessibility tree.                                                                                                          |
+|                                          | `aria-describedby`     | If this is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+| `ColorSelector.SaturationSlider > div`   | `role="slider"`        | Indicates that this is a slider.                                                                                                                           |
+|                                          | `aria-label`           | Sets to `"Saturation and brightness thumb"`.                                                                                                               |
+|                                          | `aria-describedby`     | If this is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|                                          | `aria-roledescription` | Sets to `"2D slider"`.                                                                                                                                     |
+|                                          | `aria-valuemin`        | Sets the value of `min`. The default is `0`.                                                                                                               |
+|                                          | `aria-valuemax`        | Sets the value of `max`. The default is `100`.                                                                                                             |
+|                                          | `aria-valuenow`        | Sets the current value.                                                                                                                                    |
+|                                          | `aria-valuetext`       | Sets the current value like `"Saturation 18%, Brightness 18%"`.                                                                                            |
+|                                          | `aria-readonly`        | Set to `"true"` if `readOnly` is set.                                                                                                                      |
+|                                          | `aria-disabled`        | Set to `"true"` if `disabled` is set.                                                                                                                      |
+| `ColorSelector.HueSlider > input`        | `aria-hidden`          | Excludes the element from the accessibility tree.                                                                                                          |
+|                                          | `aria-describedby`     | If this is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+| `ColorSelector.HueSlider > div`          | `role="slider"`        | Indicates that this is a slider.                                                                                                                           |
+|                                          | `aria-label`           | Sets to `"Slider thumb"`.                                                                                                                                  |
+|                                          | `aria-describedby`     | If this is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|                                          | `aria-orientation`     | Sets to `"horizontal"` or `"vertical"` based on `orientation`. The default is `"horizontal"`.                                                              |
+|                                          | `aria-valuemin`        | Sets the value of `min`. The default is `0`.                                                                                                               |
+|                                          | `aria-valuemax`        | Sets the value of `max`. The default is `360`.                                                                                                             |
+|                                          | `aria-valuenow`        | Sets the current value.                                                                                                                                    |
+|                                          | `aria-valuetext`       | Sets the current value like `"18°, Red"`.                                                                                                                  |
+|                                          | `aria-readonly`        | Set to `"true"` if `readOnly` is set.                                                                                                                      |
+|                                          | `aria-disabled`        | Set to `"true"` if `disabled` is set.                                                                                                                      |
+| `ColorSelector.AlphaSlider > input`      | `aria-hidden`          | Excludes the element from the accessibility tree.                                                                                                          |
+|                                          | `aria-describedby`     | If this is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+| `ColorSelector.AlphaSlider > div`        | `role="slider"`        | Indicates that this is a slider.                                                                                                                           |
+|                                          | `aria-label`           | Sets to `"Slider thumb"`.                                                                                                                                  |
+|                                          | `aria-describedby`     | If this is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|                                          | `aria-orientation`     | Sets to `"horizontal"` or `"vertical"` based on `orientation`. The default is `"horizontal"`.                                                              |
+|                                          | `aria-valuemin`        | Sets the value of `min`. The default is `0`.                                                                                                               |
+|                                          | `aria-valuemax`        | Sets the value of `max`. The default is `1`.                                                                                                               |
+|                                          | `aria-valuenow`        | Sets the current value.                                                                                                                                    |
+|                                          | `aria-valuetext`       | Sets the current value like `"18%"`.                                                                                                                       |
+|                                          | `aria-readonly`        | Set to `"true"` if `readOnly` is set.                                                                                                                      |
+|                                          | `aria-disabled`        | Set to `"true"` if `disabled` is set.                                                                                                                      |
+| `ColorSelector.ColorSwatchGroupLabel`    | `id`                   | Used to associate with `ColorSelector.ColorSwatchGroup`.                                                                                                   |
+| `ColorSelector.ColorSwatchGroup`         | `role="listbox"`       | Indicates that this is a listbox.                                                                                                                          |
+|                                          | `aria-labelledby`      | Sets the `id` of the associated `ColorSelector.ColorSwatchGroupLabel`.                                                                                     |
+| `ColorSelector.ColorSwatchItem`          | `role="option"`        | Indicates that this is an option.                                                                                                                          |
+|                                          | `aria-label`           | Sets the current value.                                                                                                                                    |
+|                                          | `aria-roledescription` | Sets to `"color swatch"`.                                                                                                                                  |
+|                                          | `aria-selected`        | Sets to `"true"` if `value` is the same as the current value.                                                                                              |
+|                                          | `aria-disabled`        | Sets to `"true"` if `disabled` or `readOnly` is set.                                                                                                       |
+
 ## Similar Components
 
 <Similar name="color-selector" />

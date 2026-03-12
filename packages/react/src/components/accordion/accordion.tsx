@@ -102,24 +102,13 @@ export const AccordionRoot = withProvider<"div", AccordionRootProps>(
     const context = useMemo(
       () => ({
         focusedIndex,
-        icon,
-        iconHidden,
         index,
         multiple,
         setFocusedIndex,
         setIndex,
         toggle,
       }),
-      [
-        focusedIndex,
-        icon,
-        iconHidden,
-        index,
-        multiple,
-        setFocusedIndex,
-        setIndex,
-        toggle,
-      ],
+      [focusedIndex, index, multiple, setFocusedIndex, setIndex, toggle],
     )
     const componentContext = useMemo(
       () => ({ icon, iconHidden }),

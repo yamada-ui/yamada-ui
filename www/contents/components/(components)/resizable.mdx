@@ -442,27 +442,30 @@ The `Resizable` follows the [WAI-ARIA - Window Splitter Pattern](https://www.w3.
 
 ### Keyboard Navigation
 
-| Key          | Description                                                            | State                      |
-| ------------ | ---------------------------------------------------------------------- | -------------------------- |
-| `ArrowRight` | Increases the value based on the `keyboardStep` value.                 | `orientation="horizontal"` |
-| `ArrowLeft`  | Decreases the value based on the `keyboardStep` value.                 | `orientation="horizontal"` |
-| `ArrowUp`    | Increases the value based on the `keyboardStep` value.                 | `orientation="vertical"`   |
-| `ArrowDown`  | Decreases the value based on the `keyboardStep` value.                 | `orientation="vertical"`   |
-| `Enter`      | If expanded, collapses the pane; if collapsed, restores it to minSize. | `collapsible="true"`       |
-| `Home`       | Sets the value to `minSize`.                                           | -                          |
-| `End`        | Sets the value to `maxSize`.                                           | -                          |
+| Key            | Description                                                            | State                      |
+| -------------- | ---------------------------------------------------------------------- | -------------------------- |
+| `ArrowRight`   | Increases the value.                                                   | `orientation="horizontal"` |
+| `ArrowLeft`    | Decreases the value.                                                   | `orientation="horizontal"` |
+| `ArrowUp`      | Increases the value.                                                   | `orientation="vertical"`   |
+| `ArrowDown`    | Decreases the value.                                                   | `orientation="vertical"`   |
+| `Enter`        | If expanded, collapses the pane; if collapsed, restores it to minSize. | `collapsible="true"`       |
+| `Home`         | Sets the value to `minSize`.                                           | -                          |
+| `End`          | Sets the value to `maxSize`.                                           | -                          |
+| `F6`           | Moves focus to the next separator.                                     | -                          |
+| `Shift` + `F6` | Moves focus to the previous separator.                                 | -                          |
 
 ### ARIA Roles and Attributes
 
-| Component           | Roles and Attributes | Usage                                                                                            |
-| ------------------- | -------------------- | ------------------------------------------------------------------------------------------------ |
-| `Resizable.Item`    | `id`                 | Used to associate with `Resizable.Trigger`.                                                      |
-| `Resizable.Trigger` | `role="separator"`   | Indicates that this is a separator.                                                              |
-|                     | `aria-controls`      | Sets the `id` of the associated `Resizable.Item`.                                                |
-|                     | `aria-orientation`   | Sets `"horizontal"` or `"vertical"` based on the `orientation` value. Default is `"horizontal"`. |
-|                     | `aria-valuemin`      | Sets the `minSize` value. Default is `0`.                                                        |
-|                     | `aria-valuemax`      | Sets the `maxSize` value. Default is `100`.                                                      |
-|                     | `aria-valuenow`      | Sets the current value.                                                                          |
+| Component           | Roles and Attributes | Usage                                                                                                        |
+| ------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `Resizable.Item`    | `id`                 | Used to associate with `Resizable.Trigger`.                                                                  |
+| `Resizable.Trigger` | `role="separator"`   | Indicates that this is a separator.                                                                          |
+|                     | `aria-controls`      | Sets the `id` of the associated `Resizable.Item`.                                                            |
+|                     | `aria-orientation`   | Sets the separator direction. If `orientation` is `"horizontal"`, it is set to `"vertical"`, and vice versa. |
+|                     | `aria-valuemin`      | Calculated from `0` to `100` based on the `minSize` value. Default is `0`.                                   |
+|                     | `aria-valuemax`      | Calculated from `0` to `100` based on the `maxSize` value. Default is `100`.                                 |
+|                     | `aria-valuenow`      | Sets the current value.                                                                                      |
+|                     | `aria-disabled`      | Sets to `true` when disabled.                                                                                |
 
 ## Similar Components
 

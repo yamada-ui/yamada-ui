@@ -252,6 +252,23 @@ return (
 )
 ```
 
+## Accessibility
+
+`Tip` follows the [WAI-ARIA - Tooltip Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/) for accessibility.
+
+### Keyboard Navigation
+
+| Key      | Description                                  | State |
+| -------- | -------------------------------------------- | ----- |
+| `Escape` | Hides the currently displayed popup element. | -     |
+
+### ARIA Roles and Attributes
+
+| Component | Role and Attribute | Usage                                          |
+| --------- | ------------------ | ---------------------------------------------- |
+| `Tip`     | `role="tooltip"`   | Indicates that it is a tooltip.                |
+| `svg`     | `aria-label`       | When `content` is a string, it sets the value. |
+
 ## Props
 
 <PropsTable name="tip" />

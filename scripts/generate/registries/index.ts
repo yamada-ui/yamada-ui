@@ -3,9 +3,8 @@ import type { SourceFile } from "typescript"
 import { toKebabCase } from "@yamada-ui/utils"
 import { format, writeFileWithFormat } from "@yamada-ui/workspace/prettier"
 import { Command } from "commander"
-import { existsSync } from "fs"
+import { existsSync, globSync } from "fs"
 import { mkdir, readdir, readFile } from "fs/promises"
-import { glob } from "glob"
 import ora from "ora"
 import path from "path"
 import c from "picocolors"
@@ -469,7 +468,7 @@ async function generateRegistries(
 
 async function generateThemeRegistry(publicPath: string, tag?: string) {
   const themePath = path.join(ENTRY_PATH, "theme")
-  const filePaths = await glob(path.join(themePath, "**", "*.{ts,tsx}"))
+  const filePaths = globSync(path.join(themePath, "**", "*.{ts,tsx}"))
 
   const sources: Source[] = []
 

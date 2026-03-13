@@ -1,7 +1,7 @@
 import type { Locale } from "../i18n"
 import type { Relations } from "@/data"
+import { globSync } from "fs"
 import { readFile } from "fs/promises"
-import { glob } from "glob"
 import matter from "gray-matter"
 import path from "path"
 import data from "@/data/relations.json"
@@ -15,7 +15,7 @@ function getContent(locale: Locale) {
   return async function (category: "components" | "hooks", data: string[]) {
     const results = await Promise.all(
       data.map(async (name) => {
-        const filePaths = await glob(
+        const filePaths = globSync(
           path.resolve("contents", category, "**", "*.mdx"),
         )
 

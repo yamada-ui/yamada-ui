@@ -7,11 +7,11 @@ import { Form } from "./form"
 
 export async function generateMetadata({
   params,
-}: PageProps<"/[locale]/icons">): Promise<Metadata> {
+}: PageProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "examples" })
 
-  return { description: t("description"), title: t("title") }
+  return { description: t("description"), title: t("menu.authentication") }
 }
 
 export default function Page() {

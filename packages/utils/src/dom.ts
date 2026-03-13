@@ -458,7 +458,7 @@ export function setAttribute(
 ) {
   const prev = el.getAttribute(qualifiedName)
 
-  el.setAttribute(qualifiedName, cx(prev, value))
+  el.setAttribute(qualifiedName, cx(prev, value) ?? "")
 
   return () => {
     if (!prev) {

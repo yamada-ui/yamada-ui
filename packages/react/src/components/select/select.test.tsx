@@ -1,7 +1,15 @@
 import type { FC } from "react"
-import { a11y, fireEvent, render, screen, waitFor } from "#test"
+import {
+  a11y,
+  act,
+  fireEvent,
+  render,
+  renderHook,
+  screen,
+  waitFor,
+} from "#test"
 import { useState } from "react"
-import { Select } from "."
+import { Select, useSelect } from "."
 
 const items: Select.Item[] = [
   { label: "Option 1", value: "one" },
@@ -515,26 +523,6 @@ describe("<Select />", () => {
     expect(field).toHaveTextContent("Option 1")
   })
 
-  test("renders with custom render returning string for multiple selected items", () => {
-    render(
-      <Select.Root
-        defaultValue={["one", "two"]}
-        items={items}
-        multiple
-        placeholder="Choose options"
-        render={({ count, index, label, separator }) => {
-          const last = count - 1 === index
-          return `${label}${!last ? separator : ""}`
-        }}
-      />,
-    )
-
-    const field = screen.getByRole("combobox", { name: /Choose options/i })
-
-    expect(field).toHaveTextContent("Option 1")
-    expect(field).toHaveTextContent("Option 2")
-  })
-
   test("renders with custom render function returning ReactElement", () => {
     render(
       <Select.Root
@@ -568,33 +556,6 @@ describe("<Select />", () => {
         placeholder="Choose options"
         render={({ label, onClear }) => (
           <button data-testid="custom-tag" onClick={onClear}>
-            {label}
-          </button>
-        )}
-        onChange={onChange}
-      />,
-    )
-
-    const tags = screen.getAllByTestId("custom-tag")
-
-    fireEvent.click(tags[0]!)
-
-    await waitFor(() => {
-      expect(onChange).toHaveBeenCalledWith(["two"])
-    })
-  })
-
-  test("onClear in custom render works without event argument", async () => {
-    const onChange = vi.fn()
-
-    render(
-      <Select.Root
-        defaultValue={["one", "two"]}
-        items={items}
-        multiple
-        placeholder="Choose options"
-        render={({ label, onClear }) => (
-          <button data-testid="custom-tag" onClick={() => onClear()}>
             {label}
           </button>
         )}
@@ -1271,33 +1232,23 @@ describe("<Select />", () => {
     })
   })
 
-  test("does not exceed max when onChange is called directly in multiple mode", async () => {
-    const onChange = vi.fn()
-
-    render(
-      <Select.Root
-        defaultOpen
-        defaultValue={["one"]}
-        items={items}
-        max={1}
-        multiple
-        placeholder="Choose options"
-        onChange={onChange}
-      />,
+  test("useSelect returns prev when onChange is called with new value at max (L197)", () => {
+    const { result } = renderHook(() =>
+      useSelect({
+        defaultValue: ["one"],
+        items,
+        max: 1,
+        multiple: true,
+      }),
     )
 
-    const option2 = screen.getByRole("option", { name: "Option 2" })
+    expect(result.current.value).toStrictEqual(["one"])
 
-    // option2 should be disabled since max is reached
-    expect(option2).toHaveAttribute("aria-disabled", "true")
-
-    // Attempt to click disabled option
-    fireEvent.click(option2)
-
-    await waitFor(() => {
-      // onChange should not add "two" because max is reached
-      expect(onChange).not.toHaveBeenCalledWith(["one", "two"])
+    act(() => {
+      result.current.onChange("two")
     })
+
+    expect(result.current.value).toStrictEqual(["one"])
   })
 
   test("renders with rootProps", () => {

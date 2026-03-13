@@ -1,7 +1,5 @@
-import { isUndefined } from "@yamada-ui/utils"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
-import { readdir, readFile } from "fs/promises"
-import { glob } from "glob"
+import { glob, readdir, readFile } from "fs/promises"
 import matter from "gray-matter"
 import ora from "ora"
 import path from "path"
@@ -86,8 +84,8 @@ function jaccard(a: string[], b: string[]): number {
 
 async function getResembles() {
   const tags: Tags = {}
-  const filePaths = await glob(
-    path.resolve("contents", "components", "*\(*\)*", "**", "*.mdx"),
+  const filePaths = await Array.fromAsync(
+    glob(path.resolve("contents", "components", "*\(*\)*", "**", "*.mdx")),
   )
   const omittedFilePaths = filePaths.filter((path) => !path.includes(".ja."))
 
@@ -130,8 +128,8 @@ async function filterRelations(
 ): Promise<string[]> {
   const results = await Promise.all(
     fileNames.map(async (fileName) => {
-      const files = await glob(
-        path.join(CONTENT_PATH, dirName, "**", `${fileName}.mdx`),
+      const files = await Array.fromAsync(
+        glob(path.join(CONTENT_PATH, dirName, "**", `${fileName}.mdx`)),
       )
 
       if (!files.length) console.log(name, fileName)
@@ -140,7 +138,7 @@ async function filterRelations(
     }),
   )
 
-  return results.filter((result) => !isUndefined(result))
+  return results.filter((result) => result !== undefined)
 }
 
 async function generateRelations(

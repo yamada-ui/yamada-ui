@@ -1,6 +1,7 @@
 ---
 title: NativePopover
 description: "`NativePopover` is a component that floats around an element to display information using the HTML Popover API."
+tags: ["overlay", "floating"]
 status: new
 storybook: components-native-popover--basic
 source: components/native-popover
@@ -315,10 +316,37 @@ To disable the popover, set `disabled` to `true`.
 </NativePopover.Root>
 ```
 
-## Used By Components & Hooks
-
-<UsedBy name="native-popover" />
-
 ## Props
 
 <PropsTable name="native-popover" />
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key      | Description         | State                              |
+| -------- | ------------------- | ---------------------------------- |
+| `Escape` | Closes the popover. | `popover="auto"`, `popover="hint"` |
+
+### ARIA Roles and Attributes
+
+| Component               | Role and Attribute       | Usage                                                    |
+| ----------------------- | ------------------------ | -------------------------------------------------------- |
+| `NativePopover.Content` | `role="dialog"`          | Indicates that it is a dialog.                           |
+|                         | `id`                     | Used to associate with `NativePopover.Trigger`.          |
+|                         | `aria-labelledby`        | Sets the `id` of the associated `NativePopover.Header`.  |
+|                         | `aria-describedby`       | Sets the `id` of the associated `NativePopover.Body`.    |
+| `NativePopover.Trigger` | `role="button"`          | Indicates that it is a button.                           |
+|                         | `aria-haspopup="dialog"` | Indicates that it triggers a dialog.                     |
+|                         | `aria-controls`          | Sets the `id` of the associated `NativePopover.Content`. |
+|                         | `aria-disabled`          | Sets to `"true"` when `disabled={true}`.                 |
+| `NativePopover.Header`  | `id`                     | Used to associate with `NativePopover.Content`.          |
+| `NativePopover.Body`    | `id`                     | Used to associate with `NativePopover.Content`.          |
+
+## Similar Components
+
+<Similar name="native-popover" />
+
+## Used By Components & Hooks
+
+<UsedBy name="native-popover" />

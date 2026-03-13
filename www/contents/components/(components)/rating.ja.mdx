@@ -1,6 +1,7 @@
 ---
 title: Rating
 description: "`Rating`は、ユーザーが評価を行うために使用させるコンポーネントです。"
+tags: ["form-control", "selection"]
 storybook: components-rating--basic
 source: components/rating
 ---
@@ -231,10 +232,6 @@ const [value, onChange] = useState(3)
 return <Rating value={value} onChange={onChange} />
 ```
 
-## 使用しているコンポーネント・フック
-
-<Uses name="rating" />
-
 ## Props
 
 <PropsTable name="rating" />
@@ -277,3 +274,11 @@ return <Rating value={value} onChange={onChange} />
 |                | `aria-disabled`      | `disabled`が設定されている場合は`"true"`を設定します。 |
 | `RatingItem`   | `aria-label`         | `value`を設定します。                                  |
 | `RatingIcon`   | `aria-hidden="true"` | `RatingIcon`をアクセシビリティツリーから除外します。   |
+
+## 類似のコンポーネント
+
+<Similar name="rating" />
+
+## 使用しているコンポーネント・フック
+
+<Uses name="rating" />

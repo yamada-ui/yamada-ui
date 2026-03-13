@@ -24,7 +24,7 @@ import { HookList } from "./hook-list"
 import { Link } from "./link"
 import { LinkList } from "./link-list"
 import { PropsTable } from "./props-table"
-import { UsedBy, Uses } from "./relations"
+import { Similar, UsedBy, Uses } from "./relations"
 import { SemanticTokensTable } from "./semantic-tokens-table"
 import { Sponsors } from "./sponsors"
 import { Steps } from "./steps"
@@ -45,10 +45,7 @@ const mdxComponents: MDXComponents = {
   code: (props) => (
     <Code
       css={{
-        [langConditions.ja]: {
-          mx: "1",
-          verticalAlign: "top",
-        },
+        [langConditions.ja]: { mx: "px", verticalAlign: "top" },
       }}
       variant="surface"
       verticalAlign="middle"
@@ -85,6 +82,7 @@ const mdxComponents: MDXComponents = {
     </Suspense>
   ),
   SemanticTokensTable,
+  Similar,
   Sponsors,
   steps: Steps,
   strong: (props) => (

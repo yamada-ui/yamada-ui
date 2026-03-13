@@ -1,6 +1,5 @@
 import type { FC } from "react"
-import { a11y, render, renderHook, screen } from "#test"
-import { act } from "@testing-library/react"
+import { a11y, act, render, renderHook, screen } from "#test"
 import { Button } from "../button"
 import { Drawer } from "./"
 import { useDrawer } from "./use-drawer"

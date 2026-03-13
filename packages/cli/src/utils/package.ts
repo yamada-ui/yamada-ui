@@ -5,7 +5,6 @@ import type {
   WantedVersion,
 } from "../index.type"
 import { isObject, merge } from "@yamada-ui/utils"
-import { execa } from "execa"
 import { existsSync } from "fs"
 import { readFile } from "fs/promises"
 import path from "path"
@@ -13,7 +12,7 @@ import c from "picocolors"
 import semver from "semver"
 import validateProjectName from "validate-npm-package-name"
 import YAML from "yamljs"
-import { writeFileSafe } from "./fs"
+import { execFileAsync, writeFileSafe } from "./fs"
 
 export type PackageManager = "bun" | "npm" | "pnpm" | "yarn"
 
@@ -182,12 +181,9 @@ export async function installDependencies(
   if (dependencies?.length) {
     const args = packageAddArgs(packageManager, { dev, exact })
 
-    await execa(packageManager, [...args, ...dependencies], {
-      cwd,
-      stdout: "ignore",
-    })
+    await execFileAsync(packageManager, [...args, ...dependencies], { cwd })
   } else {
-    await execa(packageManager, ["install"], { cwd, stdout: "ignore" })
+    await execFileAsync(packageManager, ["install"], { cwd })
   }
 }
 
@@ -205,10 +201,7 @@ export async function uninstallDependencies(
   if (dependencies.length) {
     const command = packageManager === "npm" ? "uninstall" : "remove"
 
-    await execa(packageManager, [command, ...dependencies], {
-      cwd,
-      stdout: "ignore",
-    })
+    await execFileAsync(packageManager, [command, ...dependencies], { cwd })
   }
 }
 

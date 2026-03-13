@@ -1,6 +1,7 @@
 ---
 title: NativeAccordion
 description: "`NativeAccordion`は、HTMLの`details`要素を使用して情報を展開または折りたたんで表示するリストのコンポーネントです。"
+tags: ["disclosure", "list"]
 status: new
 storybook: components-nativeaccordion--basic
 source: components/native-accordion
@@ -303,6 +304,29 @@ return <NativeAccordion.Root items={items} />
 </NativeAccordion.Root>
 ```
 
+## アクセシビリティ
+
+### キーボード操作
+
+| キー             | 説明                                                                                                                         | 状態 |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---- |
+| `Tab`            | フォーカスがアコーディオンに移動すると最初の項目をフォーカスします。アコーディオン内である場合は次の項目をフォーカスします。 | -    |
+| `Space`, `Enter` | フォーカスしている項目のパネルを展開し、展開されている場合は折りたたみます。                                                 | -    |
+
+### ARIAロールと属性
+
+| コンポーネント           | ロールと属性    | 使い方                                           |
+| ------------------------ | --------------- | ------------------------------------------------ |
+| `NativeAccordion.Button` | `aria-disabled` | 項目のパネルが無効な場合は`"true"`を設定します。 |
+
+## Props
+
+<PropsTable name="native-accordion" />
+
+## 類似のコンポーネント
+
+<Similar name="native-accordion" />
+
 ## 使用しているコンポーネント・フック
 
 <Uses name="native-accordion" />
@@ -310,7 +334,3 @@ return <NativeAccordion.Root items={items} />
 ## 使用されているコンポーネント・フック
 
 <UsedBy name="native-accordion" />
-
-## Props
-
-<PropsTable name="native-accordion" />

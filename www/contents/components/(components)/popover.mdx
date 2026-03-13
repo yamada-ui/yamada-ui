@@ -1,6 +1,7 @@
 ---
 title: Popover
 description: "`Popover` is a component that floats around an element to display information."
+tags: ["overlay", "disclosure", "floating"]
 storybook: components-popover--basic
 source: components/popover
 style: components/popover/popover.style.ts
@@ -416,14 +417,6 @@ return (
 )
 ```
 
-## Uses Components & Hooks
-
-<Uses name="popover" />
-
-## Used By Components & Hooks
-
-<UsedBy name="popover" />
-
 ## Props
 
 <PropsTable name="popover" />
@@ -433,8 +426,6 @@ return (
 The `Popover` follows the [WAI-ARIA - Dialog (Modal) Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) for accessibility.
 
 ### Keyboard Navigation
-
-When the `Popover` opens, focus is trapped within it. That is, you cannot focus on elements outside the popover unless the popper is closed.
 
 | Key             | Description                                                                                                             | State                               |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
@@ -447,13 +438,27 @@ When the `Popover` opens, focus is trapped within it. That is, you cannot focus 
 | Component         | Roles and Attributes     | Usage                                                                                    |
 | :---------------- | :----------------------- | :--------------------------------------------------------------------------------------- |
 | `Popover.Content` | `role="dialog"`          | Indicates that it is a dialog.                                                           |
+|                   | `id`                     | Used to associate with `Popover.Trigger`.                                                |
 |                   | `aria-labelledby`        | Sets the `id` of the associated `Popover.Header`.                                        |
 |                   | `aria-describedby`       | Sets the `id` of the associated `Popover.Body`.                                          |
 |                   | `aria-hidden`            | Sets to `"false"` when popover is opened, and `"true"` when it is closed.                |
 |                   | `aria-modal`             | Sets to `"true"` when `modal={true}`.                                                    |
 | `Popover.Trigger` | `role="button"`          | Indicates that it is a button.                                                           |
+|                   | `aria-disabled`          | Sets to `"true"` when `disabled={true}`.                                                 |
 |                   | `aria-expanded`          | Sets to `"true"` when popover is opened, and `"false"` when it is closed.                |
 |                   | `aria-controls`          | Set to `Popover.Content`'s id when popover is opened, and `undefined` when it is closed. |
 |                   | `aria-haspopup="dialog"` | Indicates that it triggers a dialog.                                                     |
 | `Popover.Header`  | `id`                     | Used to associate with `Popover.Content`.                                                |
 | `Popover.Body`    | `id`                     | Used to associate with `Popover.Content`.                                                |
+
+## Similar Components
+
+<Similar name="popover" />
+
+## Uses Components & Hooks
+
+<Uses name="popover" />
+
+## Used By Components & Hooks
+
+<UsedBy name="popover" />

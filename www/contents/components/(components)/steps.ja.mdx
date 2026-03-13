@@ -1,6 +1,7 @@
 ---
 title: Steps
 description: "`Steps`は、複数のステップのプロセスの進行状況を表示するコンポーネントです。"
+tags: ["navigation", "list", "progress"]
 storybook: components-steps--basic
 source: components/steps
 style: components/steps/steps.style.ts.
@@ -414,10 +415,6 @@ return (
 )
 ```
 
-## 使用しているコンポーネント・フック
-
-<Uses name="steps" />
-
 ## Props
 
 <PropsTable name="steps" />
@@ -438,3 +435,11 @@ return (
 | `Steps.Item`      | `aria-current="step"` | 現在のステップを示します。                  |
 |                   | `aria-labelledby`     | 関連する`Steps.Content`の`id`を設定します。 |
 | `Steps.Separator` | `role="separator"`    | セパレーターであることを示します。          |
+
+## 類似のコンポーネント
+
+<Similar name="steps" />
+
+## 使用しているコンポーネント・フック
+
+<Uses name="steps" />

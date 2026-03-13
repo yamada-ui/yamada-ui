@@ -1,6 +1,7 @@
 ---
 title: Pagination
 description: "`Pagination` is a component for managing the pagination and navigation of content."
+tags: ["navigation", "selection"]
 storybook: components-pagination--basic
 source: components/pagination
 style: components/pagination/pagination.style.ts
@@ -189,10 +190,6 @@ const [page, onChange] = useState<number>(1)
 return <Pagination.Root page={page} total={10} onChange={onChange} />
 ```
 
-## Uses Components & Hooks
-
-<Uses name="pagination" />
-
 ## Props
 
 <PropsTable name="pagination" />
@@ -220,3 +217,11 @@ return <Pagination.Root page={page} total={10} onChange={onChange} />
 | `Pagination.NextTrigger`  | `aria-label`          | Sets to `"Go to next page"`.                                   |
 | `Pagination.StartTrigger` | `aria-label`          | Sets to `"Go to first page"`.                                  |
 | `Pagination.EndTrigger`   | `aria-label`          | Sets to `"Go to last page"`.                                   |
+
+## Similar Components
+
+<Similar name="pagination" />
+
+## Uses Components & Hooks
+
+<Uses name="pagination" />

@@ -1,6 +1,7 @@
 ---
 title: LineChart
 description: "`LineChart` is a component for drawing line charts to compare multiple sets of data."
+tags: ["chart", "data-display"]
 storybook: components-chart-linechart--basic
 source: components/chart
 style: components/chart/line-chart.style.ts
@@ -1095,6 +1096,22 @@ return (
   />
 )
 ```
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key          | Description                                                      | State                |
+| ------------ | ---------------------------------------------------------------- | -------------------- |
+| `ArrowRight` | Moves focus to the next data point and displays the tooltip.     | `withTooltip={true}` |
+| `ArrowLeft`  | Moves focus to the previous data point and displays the tooltip. | `withTooltip={true}` |
+| `Enter`      | Toggles the tooltip display for the focused data point.          | `withTooltip={true}` |
+
+### ARIA Roles and Attributes
+
+| Component | Role and Attribute   | Usage                                  |
+| --------- | -------------------- | -------------------------------------- |
+| `svg`     | `role="application"` | Indicates that this is an application. |
 
 ## Props
 

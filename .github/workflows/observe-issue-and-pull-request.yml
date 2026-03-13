@@ -14,23 +14,8 @@ jobs:
       - name: Install
         uses: ./.github/composite-actions/install
 
-      - name: Generate signature
-        id: generate_signature
-        run: |
-          body='{"owner":"yamada-ui","repo":"yamada-ui"}'
-          echo "body=$body" >> "$GITHUB_OUTPUT"
-          signature=$(echo -n "$body" | openssl dgst -sha256 -hmac "${{ secrets.API_SECRET }}" | sed 's/^.* //')
-          echo "signature=$signature" >> "$GITHUB_OUTPUT"
-
-      - name: Update issues and pull requests
-        run: |
-          curl -X POST \
-          -H "Content-Type: application/json" \
-          -H "x-signature: sha256=${{ steps.generate_signature.outputs.signature }}" \
-          -d '${{ steps.generate_signature.outputs.body }}' \
-          ${{ vars.OBSERVE_API_URL }}
-
       - name: Create or update test issues
+        if: false
         run: pnpm issue:coverage
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}

@@ -1,6 +1,7 @@
 ---
 title: LineChart
 description: "`LineChart`は、複数のデータを比較するためのラインチャートを描画するコンポーネントです。"
+tags: ["chart", "data-display"]
 storybook: components-chart-linechart--basic
 source: components/chart
 style: components/chart/line-chart.style.ts
@@ -1095,6 +1096,22 @@ return (
   />
 )
 ```
+
+## アクセシビリティ
+
+### キーボード操作
+
+| キー         | 説明                                                                 | 状態                 |
+| ------------ | -------------------------------------------------------------------- | -------------------- |
+| `ArrowRight` | 次のデータポイントにフォーカスを移動し、ツールチップを表示します。   | `withTooltip={true}` |
+| `ArrowLeft`  | 前のデータポイントにフォーカスを移動し、ツールチップを表示します。   | `withTooltip={true}` |
+| `Enter`      | フォーカスしているデータポイントのツールチップの表示を切り替えます。 | `withTooltip={true}` |
+
+### ARIAロールと属性
+
+| コンポーネント | ロールと属性         | 使い方                                 |
+| -------------- | -------------------- | -------------------------------------- |
+| `svg`          | `role="application"` | アプリケーションであることを示します。 |
 
 ## Props
 

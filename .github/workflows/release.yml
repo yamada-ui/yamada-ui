@@ -74,7 +74,7 @@ jobs:
         if: steps.changesets.outputs.published != 'true'
         run: |
           pnpm gen:registries --tag dev
-          git add .
+          git add ./www/public/registry
           git diff --staged --exit-code || git commit -m 'ci(changesets): update dev registries'
           git push
 
@@ -82,13 +82,13 @@ jobs:
         if: steps.changesets.outputs.published == 'true'
         run: |
           pnpm gen:styles -p
-          git add .
+          git add ./www/data
           git diff --staged --exit-code || git commit -m 'ci(changesets): update styles'
           pnpm gen:props
-          git add .
+          git add ./www/data/props
           git diff --staged --exit-code || git commit -m 'ci(changesets): update props'
           pnpm gen:registries
-          git add .
+          git add ./www/public/registry
           git diff --staged --exit-code || git commit -m 'ci(changesets): update registries'
           pnpm www build:content
           pnpm www gen:icons
@@ -97,7 +97,7 @@ jobs:
           pnpm www gen:changelog
           pnpm www gen:contributors
           pnpm www gen:relations
-          git add .
+          git add ./www/data ./www/contents
           git diff --staged --exit-code || git commit -m 'ci(changesets): update www'
           git push
         env:

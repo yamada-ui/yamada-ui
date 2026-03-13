@@ -1,6 +1,7 @@
 ---
 title: Tip
 description: "`Tip`は、アイコンボタンをトリガーとして補足情報を表示するコンポーネントです。"
+tags: ["feedback", "notification", "icon"]
 status: new
 storybook: components-tip--basic
 source: components/tip
@@ -251,10 +252,31 @@ return (
 )
 ```
 
-## 使用しているコンポーネント・フック
+## アクセシビリティ
 
-<Uses name="tip" />
+`Tip`は、アクセシビリティに関して[WAI-ARIA - Tooltip Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/)に従います。
+
+### キーボード操作
+
+| キー     | 説明                                       | 状態 |
+| -------- | ------------------------------------------ | ---- |
+| `Escape` | 表示中のポップアップ要素を非表示にします。 | -    |
+
+### ARIAロールと属性
+
+| コンポーネント | ロールと属性     | 使い方                                          |
+| -------------- | ---------------- | ----------------------------------------------- |
+| `Tip`          | `role="tooltip"` | ツールチップであることを示します。              |
+| `button`       | `aria-label`     | `content`が文字列の場合は、その値を設定します。 |
 
 ## Props
 
 <PropsTable name="tip" />
+
+## 類似のコンポーネント
+
+<Similar name="tip" />
+
+## 使用しているコンポーネント・フック
+
+<Uses name="tip" />

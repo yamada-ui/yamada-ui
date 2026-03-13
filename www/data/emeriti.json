@@ -10,8 +10,7 @@
       "icon": "https://avatars.githubusercontent.com/u/63556889?v=4",
       "url": "https://github.com/nakayan5"
     },
-    "x": { "url": "https://x.com/nakachan_js" },
-    "discord": { "id": "770535018040655873" }
+    "x": { "url": "https://x.com/nakachan_js" }
   },
   {
     "name": { "en": "Kei Setoguchi", "ja": "Kei Setoguchi" },
@@ -24,8 +23,7 @@
       "icon": "https://avatars.githubusercontent.com/u/83833293?v=4",
       "url": "https://github.com/setodeve"
     },
-    "x": { "url": "https://x.com/hjuko00" },
-    "discord": { "id": "441961406980554772" }
+    "x": { "url": "https://x.com/hjuko00" }
   },
   {
     "name": { "en": "Ryota Suzuki", "ja": "Ryota Suzuki" },
@@ -38,7 +36,6 @@
       "icon": "https://avatars.githubusercontent.com/u/12987013?v=4",
       "url": "https://github.com/suzukisan22"
     },
-    "x": { "url": "https://x.com/itsmeryota" },
-    "discord": { "id": "611441723712864256" }
+    "x": { "url": "https://x.com/itsmeryota" }
   }
 ]

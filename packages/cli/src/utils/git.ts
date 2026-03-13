@@ -1,12 +1,10 @@
-import { execa } from "execa"
 import { rmSync } from "fs"
 import path from "path"
+import { execFileAsync } from "./fs"
 
 export async function isInGitRepo(): Promise<boolean> {
   try {
-    await execa("git", ["rev-parse", "--is-inside-work-tree"], {
-      stdout: "ignore",
-    })
+    await execFileAsync("git", ["rev-parse", "--is-inside-work-tree"])
 
     return true
   } catch {
@@ -20,26 +18,22 @@ export async function initGit(cwd: string): Promise<boolean> {
   let isInit = false
 
   try {
-    await execa("git", ["--version"], { stdout: "ignore" })
+    await execFileAsync("git", ["--version"])
 
     if (await isInGitRepo()) return false
 
-    await execa("git", ["init"], { stdout: "ignore" })
+    await execFileAsync("git", ["init"])
 
     isInit = true
 
     try {
-      await execa("git", ["config", "init.defaultBranch"], {
-        stdout: "ignore",
-      })
+      await execFileAsync("git", ["config", "init.defaultBranch"])
     } catch {
-      await execa("git", ["checkout", "-b", "main"], { stdout: "ignore" })
+      await execFileAsync("git", ["checkout", "-b", "main"])
     }
 
-    await execa("git", ["add", "-A"], { stdout: "ignore" })
-    await execa("git", ["commit", "-m", "Initial commit"], {
-      stdout: "ignore",
-    })
+    await execFileAsync("git", ["add", "-A"])
+    await execFileAsync("git", ["commit", "-m", "Initial commit"])
 
     return true
   } catch {

@@ -1,11 +1,14 @@
 import type { AnyString } from "./index.types"
 import { isString } from "./assertion"
 
-export function cx(...classNames: (null | string | undefined)[]) {
-  return classNames
-    .filter((className) => !!className)
-    .map((className) => className!.trim())
-    .join(" ")
+export function cx(
+  ...classNames: (null | string | undefined)[]
+): string | undefined {
+  const result = classNames.filter((className) => !!className)
+
+  if (!result.length) return undefined
+
+  return result.map((className) => className!.trim()).join(" ")
 }
 
 export function escape(value: string, replaceValue = ""): string {

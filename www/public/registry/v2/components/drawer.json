@@ -11,7 +11,7 @@
       "slide",
       "fade"
     ],
-    "externals": ["motion@12.18.1", "react-remove-scroll@^2.7.2"],
+    "externals": ["motion@^12.35.0", "react-remove-scroll@^2.7.2"],
     "hooks": ["use-value"],
     "providers": []
   },

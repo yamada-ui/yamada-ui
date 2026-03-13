@@ -2,7 +2,7 @@
 title: useInfiniteScroll
 description: "`useInfiniteScroll` is a custom hook that provides infinite scroll functionality."
 storybook: hooks-useinfinitescroll--basic
-source: hooks/use-infinite-scroll
+source: components/infinite-scroll-area
 ---
 
 ```tsx preview functional iframe client
@@ -131,7 +131,7 @@ To set [rootMargin](https://developer.mozilla.org/en-US/docs/Web/API/Intersectio
 ```tsx preview functional iframe client
 const [count, setCount] = useState<number>(50)
 const { ref, finish } = useInfiniteScroll({
-  rootMargin: "300px 0px 0px 0px",
+  rootMargin: "0px 0px 300px 0px",
   onLoad: ({ finish, index }) => {
     console.log("onLoad", index)
     setCount((prev) => prev + 50)

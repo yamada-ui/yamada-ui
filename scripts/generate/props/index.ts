@@ -70,7 +70,7 @@ const EXCLUDED_MODULES = [
   path.join(process.cwd(), "packages", "react", "src", "core"),
 ]
 
-const IGNORED_TYPES: string[] = ["^(?!.*Props$)", "^Use[A-Z]"]
+const IGNORED_TYPES: string[] = ["^(?!.*Props$)", "^Use[A-Z]", "^FieldProps$"]
 const INCLUDED_PROPS: string[] = [
   "as",
   "asChild",

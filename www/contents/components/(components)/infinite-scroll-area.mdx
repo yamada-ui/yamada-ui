@@ -1,6 +1,7 @@
 ---
 title: InfiniteScrollArea
 description: "`InfiniteScrollArea` is a component that provides infinite scrolling functionality. This component offers a smooth scrolling experience by automatically loading and displaying the next dataset when the end of the component is reached."
+tags: ["scrollable", "list"]
 storybook: components-infinitescrollarea--basic
 source: components/infinite-scroll-area
 style: components/infinite-scroll-area/infinite-scroll-area.style.ts
@@ -131,7 +132,7 @@ const [count, setCount] = useState<number>(50)
 
 return (
   <InfiniteScrollArea
-    rootMargin="300px 0px 0px 0px"
+    rootMargin="0px 0px 300px 0px"
     loading={<Loading.Oval fontSize="2xl" />}
     onLoad={({ finish, index }) => {
       console.log("load", index)
@@ -566,10 +567,14 @@ return (
 )
 ```
 
-## Uses Components & Hooks
-
-<Uses name="infinite-scroll-area" />
-
 ## Props
 
 <PropsTable name="infinite-scroll-area" />
+
+## Similar Components
+
+<Similar name="infinite-scroll-area" />
+
+## Uses Components & Hooks
+
+<Uses name="infinite-scroll-area" />

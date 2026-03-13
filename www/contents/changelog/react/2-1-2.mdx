@@ -1,0 +1,36 @@
+---
+title: v2.1.2
+description: "Explore the changelog for @yamada-ui/react version 2.1.2. Learn about the features, bug fixes, and improvements."
+---
+
+This version was released on March 10, 2026.
+
+## Patch changes
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - `SegmentedControl` now removes `aria-readonly` from the label and input element.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed `onBlur` incorrectly setting `focused` to `false` when clicking on the dropdown content in `Autocomplete` with `multiple` mode, which caused the separator to disappear during mousedown.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Remove `aria-checked` from native checkbox input and use the native `indeterminate` property instead to fix `aria-conditional-attr` a11y violation.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed unreachable dead code in `useDynamicAnimation`.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the `className` prop was not correctly applied to the `Table` component.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the fallback icon shown when the number of items in `AvatarGroup` exceeds the specified `max` incorrectly had a `role` of `"img"`.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed the return type of `createStore` to include the `queue` and `ref`.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed the `Calendar.Navigation` from `nav` to `div` for better accessibility.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where unnecessary spaces were inserted with `_media` and `_container`.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where values containing "grad", "turn", or "rad" in `rotate` were not handled correctly.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Allow custom `aria-label` to override default on Pagination nav element.
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `tabIndex="0"` to the scrollable root in `NativeTable` for keyboard focus (a11y).
+
+- [4f54a11](https://github.com/yamada-ui/yamada-ui/commit/4f54a11f3b927a1a81b3a6e836be9d084e9bcb87) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Applied `aria-labelledby` to the visible control in `FileInput` and `FileButton` for better accessibility.

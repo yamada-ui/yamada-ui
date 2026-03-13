@@ -2,7 +2,7 @@
   "$schema": "https://yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
     "components": ["close-button", "motion", "alert"],
-    "externals": ["motion@12.18.1"],
+    "externals": ["motion@^12.35.0"],
     "hooks": ["use-timeout"],
     "providers": []
   },

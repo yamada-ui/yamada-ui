@@ -1,6 +1,7 @@
 ---
 title: Calendar
 description: "`Calendar` is a component for displaying or selecting dates in a calendar."
+tags: ["date-time", "data-display", "selection"]
 storybook: components-calendar--basic
 source: components/calendar
 ---
@@ -284,14 +285,6 @@ const [value, setValue] = useState<Date | undefined>(new Date())
 return <Calendar.Root value={value} onChange={setValue} />
 ```
 
-## Uses Components & Hooks
-
-<Uses name="calendar" />
-
-## Used By Components & Hooks
-
-<UsedBy name="calendar" />
-
 ## Props
 
 <PropsTable name="calendar" />
@@ -330,3 +323,15 @@ return <Calendar.Root value={value} onChange={setValue} />
 | `CalendarDay`          | `aria-label`           | Sets the date, like `"Thursday, February 5, 2026"`. If today, sets `"Today, Thursday, February 5, 2026"`. |
 |                        | `aria-disabled`        | Sets `"true"` if the date is disabled.                                                                    |
 |                        | `aria-selected`        | Sets `"true"` if the date is selected.                                                                    |
+
+## Similar Components
+
+<Similar name="calendar" />
+
+## Uses Components & Hooks
+
+<Uses name="calendar" />
+
+## Used By Components & Hooks
+
+<UsedBy name="calendar" />

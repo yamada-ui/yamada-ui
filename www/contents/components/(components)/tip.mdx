@@ -1,6 +1,7 @@
 ---
 title: Tip
 description: "`Tip` is a component that displays supplementary information with a built-in icon trigger."
+tags: ["feedback", "notification", "icon"]
 status: new
 storybook: components-tip--basic
 source: components/tip
@@ -251,10 +252,31 @@ return (
 )
 ```
 
-## Uses Components & Hooks
+## Accessibility
 
-<Uses name="tip" />
+`Tip` follows the [WAI-ARIA - Tooltip Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/) for accessibility.
+
+### Keyboard Navigation
+
+| Key      | Description                                  | State |
+| -------- | -------------------------------------------- | ----- |
+| `Escape` | Hides the currently displayed popup element. | -     |
+
+### ARIA Roles and Attributes
+
+| Component | Role and Attribute | Usage                                          |
+| --------- | ------------------ | ---------------------------------------------- |
+| `Tip`     | `role="tooltip"`   | Indicates that it is a tooltip.                |
+| `button`  | `aria-label`       | When `content` is a string, it sets the value. |
 
 ## Props
 
 <PropsTable name="tip" />
+
+## Similar Components
+
+<Similar name="tip" />
+
+## Uses Components & Hooks
+
+<Uses name="tip" />

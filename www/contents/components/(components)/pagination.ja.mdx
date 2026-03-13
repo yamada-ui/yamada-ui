@@ -1,6 +1,7 @@
 ---
 title: Pagination
 description: "`Pagination`は、コンテンツのページ分割とナビゲーションを管理するためのコンポーネントです。"
+tags: ["navigation", "selection"]
 storybook: components-pagination--basic
 source: components/pagination
 style: components/pagination/pagination.style.ts
@@ -187,10 +188,6 @@ const [page, onChange] = useState<number>(1)
 return <Pagination.Root page={page} total={10} onChange={onChange} />
 ```
 
-## 使用しているコンポーネント・フック
-
-<Uses name="pagination" />
-
 ## Props
 
 <PropsTable name="pagination" />
@@ -218,3 +215,11 @@ return <Pagination.Root page={page} total={10} onChange={onChange} />
 | `Pagination.NextTrigger`  | `aria-label`          | `"次のページに移動する"`を設定します。                            |
 | `Pagination.StartTrigger` | `aria-label`          | `"最初のページに移動する"`を設定します。                          |
 | `Pagination.EndTrigger`   | `aria-label`          | `"最後のページに移動する"`を設定します。                          |
+
+## 類似のコンポーネント
+
+<Similar name="pagination" />
+
+## 使用しているコンポーネント・フック
+
+<Uses name="pagination" />

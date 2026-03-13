@@ -1,6 +1,7 @@
 ---
 title: DatePicker
 description: "`DatePicker`は、ユーザーが日付を選択するために使用されるコンポーネントです。"
+tags: ["form-control", "date-time", "floating"]
 storybook: components-datepicker--basic
 source: components/date-picker
 ---
@@ -583,14 +584,6 @@ const [value, onChange] = useState<Date | null>(new Date())
 return <DatePicker value={value} onChange={onChange} />
 ```
 
-## 使用しているコンポーネント・フック
-
-<Uses name="date-picker" />
-
-## 使用されているコンポーネント・フック
-
-<UsedBy name="date-picker" />
-
 ## Props
 
 <PropsTable name="date-picker" />
@@ -664,3 +657,15 @@ return <DatePicker value={value} onChange={onChange} />
 | `CalendarDay`          | `aria-label`             | `"2026年2月5日木曜日"`のように、日付を設定します。今日の場合は`"今日, 2026年2月5日木曜日"`を設定します。                                                                                     |
 |                        | `aria-disabled`          | 日付が無効の場合は`"true"`を設定します。                                                                                                                                                     |
 |                        | `aria-selected`          | 日付が選択されている場合は`"true"`を設定します。                                                                                                                                             |
+
+## 類似のコンポーネント
+
+<Similar name="date-picker" />
+
+## 使用しているコンポーネント・フック
+
+<Uses name="date-picker" />
+
+## 使用されているコンポーネント・フック
+
+<UsedBy name="date-picker" />

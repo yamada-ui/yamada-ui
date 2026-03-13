@@ -10,6 +10,11 @@ Please read the following before submitting:
 
 Closes # <!-- Github issue # here -->
 
+## AI used
+
+- [ ] I did not use AI to create this PR.
+- [ ] (If there is no check above) I checked the generated content before submitting.
+
 ## Description
 
 <!-- Add a brief description. -->

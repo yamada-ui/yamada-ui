@@ -2,8 +2,7 @@ import type { ListrTask } from "listr2"
 import type { Config } from "../../index.type"
 import type { ChangeMap, DependencyMap } from "../diff/get-diff"
 import type { RegistryMap } from "../diff/get-registries-and-files"
-import { merge } from "@yamada-ui/utils"
-import { execa, ExecaError } from "execa"
+import { isUndefined, merge } from "@yamada-ui/utils"
 import { mkdtemp } from "fs/promises"
 import { Listr } from "listr2"
 import { tmpdir } from "os"
@@ -13,6 +12,7 @@ import prompts from "prompts"
 import { rimraf } from "rimraf"
 import { REGISTRY_FILE_NAME } from "../../constant"
 import {
+  execFileAsync,
   getPackageName,
   getPackageNameWithVersion,
   installDependencies,
@@ -31,7 +31,7 @@ async function mergeContent(
   let conflict = false
 
   try {
-    const { stdout } = await execa("diff3", [
+    const { stdout } = await execFileAsync("diff3", [
       "-m",
       remotePath,
       localPath,
@@ -39,14 +39,12 @@ async function mergeContent(
     ])
 
     content = stdout
-  } catch (e) {
-    if (e instanceof ExecaError) {
-      if (e.stdout as string | undefined) {
-        conflict = true
-        content = e.stdout as unknown as string
-      } else {
-        content = fallback
-      }
+  } catch (e: any) {
+    if (e?.stdout) {
+      conflict = true
+      content = e.stdout
+    } else {
+      content = fallback
     }
   }
 
@@ -68,6 +66,7 @@ export interface UpdateFilesOptions {
   concurrent?: boolean
   force?: boolean
   install?: boolean
+  yes?: boolean
 }
 
 export async function updateFiles(
@@ -78,7 +77,8 @@ export async function updateFiles(
   {
     concurrent = true,
     force = false,
-    install = false,
+    install,
+    yes = false,
   }: UpdateFilesOptions = {},
 ) {
   const conflictMap: ConflictMap = {}
@@ -225,14 +225,16 @@ export async function updateFiles(
   await tasks.run()
 
   if (!install && (add.length || remove.length || update.length)) {
-    const { install } = await prompts({
-      type: "confirm",
+    const answer = await prompts({
+      type: !yes && isUndefined(install) ? "confirm" : null,
       name: "install",
       initial: true,
       message: c.reset(
         "There are dependency updates. Do you want to install them?",
       ),
     })
+
+    install ??= answer.install ?? true
 
     if (!install) return conflictMap
   }

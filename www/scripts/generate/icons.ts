@@ -1,15 +1,18 @@
 import { toKebabCase, toPascalCase } from "@yamada-ui/utils"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
-import { execa } from "execa"
+import { execFile } from "child_process"
 import { readdir, readFile } from "fs/promises"
 import ora from "ora"
 import path from "path"
 import c from "picocolors"
 import { rimraf } from "rimraf"
+import { promisify } from "util"
+
+const execFileAsync = promisify(execFile)
 
 const REPOSITORY_PATH = path.resolve(".lucide")
 const DIST_PATH = path.resolve("data", "icons.json")
-const MAX_RELATED_ICONS = 68
+const MAX_RELATED_COUNT = 68
 const NAME_WEIGHT = 5
 const KEYWORD_WEIGHT = 4
 const CATEGORY_WEIGHT = 3
@@ -58,7 +61,7 @@ function getRelatedData(data: { [key: string]: Data }) {
       .filter((a) => a[1] > 0)
       .sort((a, b) => b[1] - a[1])
       .map(([name]) => name)
-      .slice(0, MAX_RELATED_ICONS)
+      .slice(0, MAX_RELATED_COUNT)
   }
 }
 
@@ -75,7 +78,7 @@ async function main() {
 
   spinner.start(`Cloning .lucide`)
 
-  await execa("git", [
+  await execFileAsync("git", [
     "clone",
     "https://github.com/lucide-icons/lucide.git",
     REPOSITORY_PATH,

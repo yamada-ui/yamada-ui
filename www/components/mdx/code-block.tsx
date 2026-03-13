@@ -1,10 +1,11 @@
 import type { BoxProps, GridProps } from "@yamada-ui/react"
-import { Box, Code, Flex, Grid, Tabs, Text } from "@yamada-ui/react"
+import { Box, Code, Flex, Grid, Spacer, Tabs, Text } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import React from "react"
 import { codeToHtml } from "@/libs/shiki"
 import { langConditions } from "@/utils/i18n"
 import { CodePreview } from "../code-preview"
+import { StackBlitzButton } from "../stack-blitz-button"
 import { Callout } from "./callout"
 import { ClientOnly } from "./client-only"
 import { Iframe } from "./iframe"
@@ -44,6 +45,20 @@ export function CodeBlock({
           <Tabs.List gap="sm">
             <Tabs.Tab index={0}>{t("preview")}</Tabs.Tab>
             <Tabs.Tab index={1}>{t("code")}</Tabs.Tab>
+
+            <Spacer />
+
+            {lang === "tsx" ? (
+              <StackBlitzButton
+                size={{ base: "sm", md: "xs" }}
+                variant="ghost"
+                client={client}
+                code={children}
+                color={{ base: "fg.muted", _hover: "colorScheme.fg" }}
+                disableRipple
+                functional={functional}
+              />
+            ) : null}
           </Tabs.List>
 
           <Tabs.Panel index={0} rounded="l2">

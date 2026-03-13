@@ -2,8 +2,9 @@ import type { ObjectEncodingOptions } from "fs"
 import type { LintFilesOptions } from "./lint"
 import type { FormatOptions } from "./prettier"
 import { execFile } from "child_process"
-import fs, { existsSync, globSync, statSync } from "fs"
+import fs, { existsSync, statSync } from "fs"
 import {
+  glob,
   mkdir,
   writeFile as originalWriteFile,
   readdir,
@@ -98,7 +99,7 @@ export function timer() {
 
 export async function getFiles(pattern: string) {
   const files: { [key: string]: string } = {}
-  const [dirPath] = globSync(pattern)
+  const [dirPath] = await Array.fromAsync(glob(pattern))
 
   const dirents = await readdir(dirPath!, { withFileTypes: true })
 

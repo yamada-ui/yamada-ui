@@ -15,7 +15,7 @@ import {
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
 import { execFile } from "child_process"
 import { Command } from "commander"
-import { globSync } from "fs"
+import { glob } from "fs/promises"
 import ora from "ora"
 import path from "path"
 import c from "picocolors"
@@ -168,10 +168,12 @@ function getCSSCompatData(cssTypes: Awaited<ReturnType<typeof getCSSTypes>>) {
   }
 }
 
-function getCSSTypes() {
+async function getCSSTypes() {
   const data: { [key: string]: { deprecated: boolean; type: string } } = {}
 
-  const paths = globSync("node_modules/**/csstype/index.d.ts")
+  const paths = await Array.fromAsync(
+    glob("node_modules/**/csstype/index.d.ts"),
+  )
 
   const path = paths[0]
 
@@ -574,7 +576,7 @@ function main() {
 
       spinner.start(`Getting the "csstype" module`)
 
-      const cssTypes = getCSSTypes()
+      const cssTypes = await getCSSTypes()
 
       spinner.succeed(`Got the "csstype" module`)
 

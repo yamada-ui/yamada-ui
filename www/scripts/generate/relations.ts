@@ -1,6 +1,5 @@
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
-import { globSync } from "fs"
-import { readdir, readFile } from "fs/promises"
+import { glob, readdir, readFile } from "fs/promises"
 import matter from "gray-matter"
 import ora from "ora"
 import path from "path"
@@ -85,8 +84,8 @@ function jaccard(a: string[], b: string[]): number {
 
 async function getResembles() {
   const tags: Tags = {}
-  const filePaths = globSync(
-    path.resolve("contents", "components", "*\(*\)*", "**", "*.mdx"),
+  const filePaths = await Array.fromAsync(
+    glob(path.resolve("contents", "components", "*\(*\)*", "**", "*.mdx")),
   )
   const omittedFilePaths = filePaths.filter((path) => !path.includes(".ja."))
 
@@ -122,52 +121,66 @@ async function getResembles() {
   return resembles
 }
 
-function filterRelations(
+async function filterRelations(
   name: string,
   dirName: string,
   fileNames: string[],
-): string[] {
-  return fileNames.filter((fileName) => {
-    const files = globSync(
-      path.join(CONTENT_PATH, dirName, "**", `${fileName}.mdx`),
-    )
+): Promise<string[]> {
+  const results = await Promise.all(
+    fileNames.map(async (fileName) => {
+      const files = await Array.fromAsync(
+        glob(path.join(CONTENT_PATH, dirName, "**", `${fileName}.mdx`)),
+      )
 
-    if (!files.length) console.log(name, fileName)
+      if (!files.length) console.log(name, fileName)
 
-    return files.length > 0
-  })
+      return files.length > 0 ? fileName : undefined
+    }),
+  )
+
+  return results.filter((result) => result !== undefined)
 }
 
-function generateRelations(
+async function generateRelations(
   registries: Registries,
   similarComponents: Tags,
-): Relations {
+): Promise<Relations> {
   return Object.fromEntries(
-    Object.entries(registries).map(([name, registry]) => {
-      const dependencies = registry.dependencies
-        ? {
-            components: filterRelations(
-              name,
-              "components",
-              registry.dependencies.components,
-            ),
-            hooks: filterRelations(name, "hooks", registry.dependencies.hooks),
-          }
-        : undefined
-      const dependents = registry.dependents
-        ? {
-            components: filterRelations(
-              name,
-              "components",
-              registry.dependents.components,
-            ),
-            hooks: filterRelations(name, "hooks", registry.dependents.hooks),
-          }
-        : undefined
-      const resembles = similarComponents[name]
+    await Promise.all(
+      Object.entries(registries).map(async ([name, registry]) => {
+        const dependencies = registry.dependencies
+          ? {
+              components: await filterRelations(
+                name,
+                "components",
+                registry.dependencies.components,
+              ),
+              hooks: await filterRelations(
+                name,
+                "hooks",
+                registry.dependencies.hooks,
+              ),
+            }
+          : undefined
+        const dependents = registry.dependents
+          ? {
+              components: await filterRelations(
+                name,
+                "components",
+                registry.dependents.components,
+              ),
+              hooks: await filterRelations(
+                name,
+                "hooks",
+                registry.dependents.hooks,
+              ),
+            }
+          : undefined
+        const resembles = similarComponents[name]
 
-      return [name, { dependencies, dependents, resembles }]
-    }),
+        return [name, { dependencies, dependents, resembles }]
+      }),
+    ),
   )
 }
 
@@ -190,7 +203,7 @@ async function main() {
 
   spinner.start("Generating relations")
 
-  const relations = generateRelations(registries, resembles)
+  const relations = await generateRelations(registries, resembles)
 
   spinner.succeed("Generated relations")
 

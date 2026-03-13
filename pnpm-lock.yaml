@@ -129,9 +129,6 @@ importers:
       find-packages:
         specifier: ^10.0.4
         version: 10.0.4
-      glob:
-        specifier: ^13.0.6
-        version: 13.0.6
       jiti:
         specifier: ^2.6.1
         version: 2.6.1

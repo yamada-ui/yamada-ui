@@ -62,7 +62,7 @@ const Insertion: FC<InsertionProps> = ({ cache, htmlTag, serialized }) => {
     let next = serialized.next
 
     while (next !== undefined) {
-      className = cx(className, next.name)
+      className = cx(className, next.name) ?? ""
       next = next.next
     }
 

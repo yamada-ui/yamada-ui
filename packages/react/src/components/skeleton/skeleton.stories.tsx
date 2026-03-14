@@ -1,6 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "#storybook"
 import { useAsync } from "../../hooks/use-async"
+import { wait } from "../../utils"
 import { Avatar } from "../avatar"
 import { Badge } from "../badge"
 import { Heading } from "../heading"
@@ -16,11 +17,6 @@ const meta: Meta<typeof Skeleton> = {
 }
 
 export default meta
-
-const wait = async (ms: number) =>
-  new Promise((resolve) => {
-    setTimeout(resolve, ms)
-  })
 
 export const Basic: Story = () => {
   return (

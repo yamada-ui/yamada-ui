@@ -1,4 +1,5 @@
 import type { Meta } from "@storybook/react-vite"
+import { wait } from "../../utils"
 import { Button } from "../button"
 import { Text } from "../text"
 import { Wrap } from "../wrap"
@@ -10,11 +11,6 @@ const meta: Meta = {
 }
 
 export default meta
-
-const wait = async (ms: number) =>
-  new Promise((resolve) => {
-    setTimeout(resolve, ms)
-  })
 
 export const Basic = () => {
   const { background, page, screen } = useLoading()

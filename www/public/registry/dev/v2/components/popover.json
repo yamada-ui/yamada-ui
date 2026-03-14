@@ -8,7 +8,7 @@
       "fade-scale",
       "slide-fade"
     ],
-    "externals": ["motion@^12.35.0"],
+    "externals": ["motion@^12.36.0"],
     "hooks": [
       "use-disclosure",
       "use-popper",

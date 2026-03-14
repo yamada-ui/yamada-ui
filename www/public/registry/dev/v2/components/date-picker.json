@@ -12,7 +12,7 @@
       "field",
       "format"
     ],
-    "externals": ["dayjs@^1.11.19"],
+    "externals": ["dayjs@^1.11.20"],
     "hooks": ["use-field-sizing", "use-combobox", "use-controllable-state"],
     "providers": ["i18n-provider"]
   },

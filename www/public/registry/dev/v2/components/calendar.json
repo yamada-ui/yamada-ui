@@ -2,7 +2,7 @@
   "$schema": "https://yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
     "components": ["button", "field", "icon", "select", "format"],
-    "externals": ["dayjs@^1.11.19"],
+    "externals": ["dayjs@^1.11.20"],
     "hooks": ["use-descendants", "use-controllable-state"],
     "providers": ["i18n-provider"]
   },

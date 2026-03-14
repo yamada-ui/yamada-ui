@@ -1,0 +1,1 @@
+import{n as o,o as n,I as c}from"./iframe-BkSt7vyM.js";const s=[["path",{d:"m7 6 5 5 5-5",key:"1lc07p"}],["path",{d:"m7 13 5 5 5-5",key:"1d48rs"}]],e=o("chevrons-down",s),a=n(c)({as:e});export{a as C};

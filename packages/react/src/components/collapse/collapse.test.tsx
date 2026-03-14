@@ -1,4 +1,4 @@
-import { a11y, render, screen, wait, waitFor } from "#test"
+import { a11y, render, screen, waitFor, waitForAnimationFrame } from "#test"
 import { useState } from "react"
 import { Collapse } from "./collapse"
 
@@ -49,7 +49,7 @@ describe("<Collapse />", () => {
       })
     })
 
-    await wait(300)
+    await waitForAnimationFrame(300)
 
     await user.click(button)
     await waitFor(() => {

@@ -505,7 +505,7 @@ export const ChartXAxis = withContext<"svg", ChartXAxisProps>((props) => {
       return cloneElement<any>(tickProp, { className })
     } else if (isObject(tickProp)) {
       const [omittedProps, styleProps] = splitObject<
-        HTMLProps<"text">,
+        XAxisTickContentProps,
         CSSObject
       >(tickProp, shouldForwardProp)
 
@@ -631,7 +631,7 @@ export const ChartYAxis = withContext<"svg", ChartYAxisProps>((props) => {
       return cloneElement<any>(tickProp, { className })
     } else if (isObject(tickProp)) {
       const [omittedProps, styleProps] = splitObject<
-        HTMLProps<"text">,
+        YAxisTickContentProps,
         CSSObject
       >(tickProp, shouldForwardProp)
 

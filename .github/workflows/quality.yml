@@ -111,16 +111,30 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Run lint
-        if: steps.changed-files.outputs.packages_any_changed == 'true'
-        run: pnpm lint
+        if: steps.changed-files.outputs.changed_keys != ''
+        shell: bash
+        run: |
+          tasks=()
+          filters=()
 
-      - name: Run lint
-        if: steps.changed-files.outputs.scripts_any_changed == 'true'
-        run: pnpm turbo run lint:scripts
+          if [[ '${{ steps.changed-files.outputs.packages_any_changed }}' == 'true' || '${{ steps.changed-files.outputs.www_any_changed }}' == 'true' ]]; then
+            tasks+=(lint)
+          fi
 
-      - name: Run lint
-        if: steps.changed-files.outputs.www_any_changed == 'true'
-        run: pnpm turbo run lint --filter www
+          if [[ '${{ steps.changed-files.outputs.packages_any_changed }}' == 'true' ]]; then
+            filters+=('--filter=./packages/**')
+          fi
+
+          if [[ '${{ steps.changed-files.outputs.scripts_any_changed }}' == 'true' ]]; then
+            tasks+=(lint:scripts)
+            filters+=('--filter=.')
+          fi
+
+          if [[ '${{ steps.changed-files.outputs.www_any_changed }}' == 'true' ]]; then
+            filters+=('--filter=www')
+          fi
+
+          pnpm turbo run "${tasks[@]}" "${filters[@]}"
 
   typescript:
     name: TypeScript
@@ -171,16 +185,30 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Run typecheck
-        if: steps.changed-files.outputs.packages_any_changed == 'true'
-        run: pnpm typecheck
+        if: steps.changed-files.outputs.changed_keys != ''
+        shell: bash
+        run: |
+          tasks=()
+          filters=()
 
-      - name: Run typecheck
-        if: steps.changed-files.outputs.scripts_any_changed == 'true'
-        run: pnpm turbo run typecheck:scripts
+          if [[ '${{ steps.changed-files.outputs.packages_any_changed }}' == 'true' || '${{ steps.changed-files.outputs.www_any_changed }}' == 'true' ]]; then
+            tasks+=(typecheck)
+          fi
 
-      - name: Run typecheck
-        if: steps.changed-files.outputs.www_any_changed == 'true'
-        run: pnpm turbo run typecheck --filter www
+          if [[ '${{ steps.changed-files.outputs.packages_any_changed }}' == 'true' ]]; then
+            filters+=('--filter=./packages/**')
+          fi
+
+          if [[ '${{ steps.changed-files.outputs.scripts_any_changed }}' == 'true' ]]; then
+            tasks+=(typecheck:scripts)
+            filters+=('--filter=.')
+          fi
+
+          if [[ '${{ steps.changed-files.outputs.www_any_changed }}' == 'true' ]]; then
+            filters+=('--filter=www')
+          fi
+
+          pnpm turbo run "${tasks[@]}" "${filters[@]}"
 
   prettier:
     name: Prettier
@@ -231,16 +259,30 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Run format
-        if: steps.changed-files.outputs.packages_any_changed == 'true'
-        run: pnpm format
+        if: steps.changed-files.outputs.changed_keys != ''
+        shell: bash
+        run: |
+          tasks=()
+          filters=()
 
-      - name: Run format
-        if: steps.changed-files.outputs.scripts_any_changed == 'true'
-        run: pnpm turbo run format:scripts
+          if [[ '${{ steps.changed-files.outputs.packages_any_changed }}' == 'true' || '${{ steps.changed-files.outputs.www_any_changed }}' == 'true' ]]; then
+            tasks+=(format)
+          fi
 
-      - name: Run format
-        if: steps.changed-files.outputs.www_any_changed == 'true'
-        run: pnpm turbo run format --filter www
+          if [[ '${{ steps.changed-files.outputs.packages_any_changed }}' == 'true' ]]; then
+            filters+=('--filter=./packages/**')
+          fi
+
+          if [[ '${{ steps.changed-files.outputs.scripts_any_changed }}' == 'true' ]]; then
+            tasks+=(format:scripts)
+            filters+=('--filter=.')
+          fi
+
+          if [[ '${{ steps.changed-files.outputs.www_any_changed }}' == 'true' ]]; then
+            filters+=('--filter=www')
+          fi
+
+          pnpm turbo run "${tasks[@]}" "${filters[@]}"
 
   changeset:
     name: Changeset

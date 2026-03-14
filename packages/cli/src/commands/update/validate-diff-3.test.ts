@@ -43,6 +43,6 @@ describe("validateDiff3", () => {
       cb(new Error("not found"))
       return undefined as any
     })
-    await expect(validateDiff3()).rejects.toThrowError("diff3")
+    await expect(validateDiff3()).rejects.toThrow("diff3")
   })
 })

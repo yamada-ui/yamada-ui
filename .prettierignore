@@ -9,3 +9,4 @@ coverage
 !scripts/issue/coverage
 storybook-static
 routeTree.gen.ts
+CLAUDE.md

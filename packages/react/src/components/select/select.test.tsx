@@ -1,7 +1,15 @@
-import type { FC } from "react"
-import { a11y, fireEvent, render, screen, waitFor } from "#test"
+import type { FC, MouseEvent as ReactMouseEvent, ReactNode } from "react"
+import {
+  a11y,
+  act,
+  fireEvent,
+  render,
+  renderHook,
+  screen,
+  waitFor,
+} from "#test"
 import { useState } from "react"
-import { Select } from "."
+import { Select, useSelect } from "."
 
 const items: Select.Item[] = [
   { label: "Option 1", value: "one" },
@@ -279,6 +287,29 @@ describe("<Select />", () => {
     expect(document.activeElement).toBe(
       screen.getByRole("combobox", { name: /Choose a option/i }),
     )
+  })
+
+  test("does not focus field when hidden input is focused and disabled (L304 if)", () => {
+    render(
+      <Select.Root
+        name="disabled-select"
+        disabled
+        items={items}
+        placeholder="Choose a option"
+      />,
+    )
+
+    const input = document.querySelector(
+      "input[name='disabled-select']",
+    ) as HTMLInputElement
+
+    expect(input).toBeInTheDocument()
+
+    fireEvent.focus(input!)
+
+    const field = screen.getByRole("combobox", { name: /Choose a option/i })
+
+    expect(document.activeElement).not.toBe(field)
   })
 
   test("does not focus field when disabled", () => {
@@ -561,6 +592,32 @@ describe("<Select />", () => {
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["two"])
+    })
+  })
+
+  test("onClear does not call onChange when item value is empty (L284 else)", async () => {
+    const onChange = vi.fn()
+
+    render(
+      <Select.Root
+        items={items}
+        multiple
+        placeholder="Choose options"
+        render={({ value, onClear }) => (
+          <button data-testid={`tag-${value}`} onClick={() => onClear()}>
+            {value}
+          </button>
+        )}
+        onChange={onChange}
+      />,
+    )
+
+    const placeholderTag = screen.getByTestId("tag-")
+
+    fireEvent.click(placeholderTag)
+
+    await waitFor(() => {
+      expect(onChange).not.toHaveBeenCalled()
     })
   })
 
@@ -976,6 +1033,37 @@ describe("<Select />", () => {
     expect(option).toBeInTheDocument()
   })
 
+  test("handles items with non-string label so value stays undefined (L259 else)", () => {
+    const itemsWithNonStringLabel: Select.Item[] = [
+      { label: (<span key="x">Custom</span>) as ReactNode },
+    ]
+
+    render(
+      <Select.Root
+        defaultOpen
+        items={itemsWithNonStringLabel}
+        placeholder="Choose"
+      />,
+    )
+
+    expect(screen.getByRole("combobox")).toBeInTheDocument()
+  })
+
+  test("handles grouped items with non-string label so value stays undefined (L254 else)", () => {
+    const groupedItems: Select.Item[] = [
+      {
+        items: [{ label: (<span key="y">Group Item</span>) as ReactNode }],
+        label: "Group",
+      },
+    ]
+
+    render(
+      <Select.Root defaultOpen items={groupedItems} placeholder="Choose" />,
+    )
+
+    expect(screen.getByRole("group", { name: "Group" })).toBeInTheDocument()
+  })
+
   test("selects item where label is used as value", async () => {
     const onChange = vi.fn()
     const labelOnlyItems: Select.Item[] = [
@@ -1222,6 +1310,47 @@ describe("<Select />", () => {
     await waitFor(() => {
       expect(option2).toHaveAttribute("aria-disabled", "true")
     })
+  })
+
+  test("useSelect returns prev when onChange is called with new value at max (L197)", () => {
+    const { result } = renderHook(() =>
+      useSelect({
+        defaultValue: ["one"],
+        items,
+        max: 1,
+        multiple: true,
+      }),
+    )
+
+    expect(result.current.value).toStrictEqual(["one"])
+
+    act(() => {
+      result.current.onChange("two")
+    })
+
+    expect(result.current.value).toStrictEqual(["one"])
+  })
+
+  test("onClear does not focus field when fieldRef is null (L314 if)", () => {
+    const { result } = renderHook(() =>
+      useSelect({
+        defaultValue: "one",
+        items,
+        placeholder: "Choose",
+      }),
+    )
+
+    const clearProps = result.current.getClearIconProps()
+    const mockEv = new MouseEvent("click", {
+      bubbles: true,
+      cancelable: true,
+    })
+
+    act(() => {
+      clearProps.onClick?.(mockEv as unknown as ReactMouseEvent<HTMLDivElement>)
+    })
+
+    expect(result.current.value).toBe("")
   })
 
   test("renders with rootProps", () => {

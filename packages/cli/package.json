@@ -77,9 +77,9 @@
     "@types/update-notifier": "6.0.8",
     "@types/validate-npm-package-name": "^4.0.2",
     "@types/yamljs": "^0.2.34",
-    "clean-package": "2.2.0",
+    "clean-package": "catalog:",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3",
+    "typescript": "catalog:",
     "update-notifier": "^7.3.1"
   },
   "clean-package": "./clean-package.config.json"

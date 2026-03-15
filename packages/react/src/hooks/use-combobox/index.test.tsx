@@ -10,6 +10,10 @@ import {
   useComboboxItem,
 } from "./"
 
+function clickElement(el: HTMLElement | SVGElement) {
+  if (el instanceof HTMLElement) el.click()
+}
+
 const Option: FC<{ children: React.ReactNode; value?: string }> = ({
   children,
   value,
@@ -154,7 +158,7 @@ describe("useCombobox", () => {
 
     const trigger = page.getByTestId("trigger")
 
-    trigger.element().click()
+    clickElement(trigger.element())
 
     await expect.element(trigger).toHaveAttribute("aria-expanded", "false")
   })
@@ -696,7 +700,7 @@ describe("useCombobox", () => {
       .element(page.getByTestId("item-disabled-item"))
       .toBeInTheDocument()
 
-    page.getByTestId("item-disabled-item").element().click()
+    clickElement(page.getByTestId("item-disabled-item").element())
 
     expect(onChange).not.toHaveBeenCalled()
   })

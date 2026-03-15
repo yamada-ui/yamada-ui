@@ -1,37 +1,27 @@
-import { act, renderHook } from "#test"
+import { renderHook } from "#test/browser"
 import { useMounted } from "."
 
 describe("useMounted", () => {
-  test("should return true after component is mounted and false after unmount", () => {
-    const { result, unmount } = renderHook(() => useMounted())
+  test("should return true after component is mounted and false after unmount", async () => {
+    const { result, unmount } = await renderHook(() => useMounted())
     expect(result.current()).toBeTruthy()
     unmount()
     expect(result.current()).toBeFalsy()
   })
 
-  test("should return mounted state when state is true", () => {
-    const { result } = renderHook(() => useMounted({ state: true }))
+  test("should return mounted state when state is true", async () => {
+    const { result } = await renderHook(() => useMounted({ state: true }))
 
     expect(result.current).toBeTruthy()
   })
 
-  test("should return mounted state with delay when state is true and delay is set", () => {
-    vi.useFakeTimers()
+  test("should return mounted state with delay when state is true and delay is set", async () => {
+    const { result } = await renderHook(() =>
+      useMounted({ delay: 50, state: true }),
+    )
 
-    try {
-      const { result } = renderHook(() =>
-        useMounted({ delay: 100, state: true }),
-      )
+    expect(result.current).toBeFalsy()
 
-      expect(result.current).toBeFalsy()
-
-      act(() => {
-        vi.advanceTimersByTime(100)
-      })
-
-      expect(result.current).toBeTruthy()
-    } finally {
-      vi.useRealTimers()
-    }
+    await expect.poll(() => result.current).toBeTruthy()
   })
 })

@@ -46,7 +46,7 @@
     "./hooks/*": "./src/hooks/*/index.ts"
   },
   "scripts": {
-    "clean": "rimraf node_modules dist trace coverage storybook-static .turbo .eslintcache __screenshots__",
+    "clean": "rimraf node_modules dist trace coverage storybook-static .turbo .eslintcache .vitest-attachments __screenshots__",
     "build": "tsdown",
     "storybook": "storybook dev -p 6006 -c storybook",
     "storybook:serve": "npx http-server ./storybook-static",
@@ -114,6 +114,7 @@
     "@types/react-dom": "catalog:",
     "@vitest/browser": "^4.1.0",
     "@vitest/browser-playwright": "^4.1.0",
+    "axe-core": "^4.11.1",
     "clean-package": "catalog:",
     "playwright": "^1.58.2",
     "react-hook-form": "catalog:",

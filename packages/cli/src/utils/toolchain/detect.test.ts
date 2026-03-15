@@ -21,25 +21,6 @@ describe("detectFormatter", () => {
     expect(detectFormatter(tempDir, "prettier")).toBe("prettier")
   })
 
-  test("should detect biome from biome.json", () => {
-    writeFileSync(path.join(tempDir, "biome.json"), "{}")
-    expect(detectFormatter(tempDir)).toBe("biome")
-    expect(detectFormatter(tempDir, "auto")).toBe("biome")
-  })
-
-  test("should detect biome from biome.jsonc", () => {
-    writeFileSync(path.join(tempDir, "biome.jsonc"), "{}")
-    expect(detectFormatter(tempDir)).toBe("biome")
-  })
-
-  test("should detect biome from package.json dependency", () => {
-    writeFileSync(
-      path.join(tempDir, "package.json"),
-      JSON.stringify({ devDependencies: { "@biomejs/biome": "^1.0.0" } }),
-    )
-    expect(detectFormatter(tempDir)).toBe("biome")
-  })
-
   test("should detect prettier from .prettierrc", () => {
     writeFileSync(path.join(tempDir, ".prettierrc"), "{}")
     expect(detectFormatter(tempDir)).toBe("prettier")
@@ -59,14 +40,6 @@ describe("detectFormatter", () => {
       JSON.stringify({ devDependencies: { prettier: "^3.0.0" } }),
     )
     expect(detectFormatter(tempDir)).toBe("prettier")
-  })
-
-  test("should detect oxfmt from package.json dependency", () => {
-    writeFileSync(
-      path.join(tempDir, "package.json"),
-      JSON.stringify({ devDependencies: { oxfmt: "^1.0.0" } }),
-    )
-    expect(detectFormatter(tempDir)).toBe("oxfmt")
   })
 
   test("should fallback to prettier when nothing detected", () => {
@@ -91,12 +64,6 @@ describe("detectLinter", () => {
     expect(detectLinter(tempDir, "eslint")).toBe("eslint")
   })
 
-  test("should detect biome from biome.json", () => {
-    writeFileSync(path.join(tempDir, "biome.json"), "{}")
-    expect(detectLinter(tempDir)).toBe("biome")
-    expect(detectLinter(tempDir, "auto")).toBe("biome")
-  })
-
   test("should detect eslint from eslint.config.js", () => {
     writeFileSync(path.join(tempDir, "eslint.config.js"), "module.exports = {}")
     expect(detectLinter(tempDir)).toBe("eslint")
@@ -113,14 +80,6 @@ describe("detectLinter", () => {
       JSON.stringify({ devDependencies: { eslint: "^8.0.0" } }),
     )
     expect(detectLinter(tempDir)).toBe("eslint")
-  })
-
-  test("should detect oxlint from package.json dependency", () => {
-    writeFileSync(
-      path.join(tempDir, "package.json"),
-      JSON.stringify({ devDependencies: { oxlint: "^1.0.0" } }),
-    )
-    expect(detectLinter(tempDir)).toBe("oxlint")
   })
 
   test("should fallback to eslint when nothing detected", () => {

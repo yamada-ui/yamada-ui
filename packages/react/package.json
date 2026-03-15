@@ -46,7 +46,7 @@
     "./hooks/*": "./src/hooks/*/index.ts"
   },
   "scripts": {
-    "clean": "rimraf node_modules dist trace coverage storybook-static .turbo .eslintcache",
+    "clean": "rimraf node_modules dist trace coverage storybook-static .turbo .eslintcache __screenshots__",
     "build": "tsdown",
     "storybook": "storybook dev -p 6006 -c storybook",
     "storybook:serve": "npx http-server ./storybook-static",

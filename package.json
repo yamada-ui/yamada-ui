@@ -56,7 +56,6 @@
     "issue:create": "tsx scripts/issue/create",
     "issue:coverage": "tsx scripts/issue/coverage",
     "issue:a11y": "tsx scripts/issue/a11y",
-    "changelog": "tsx scripts/changelog",
     "release": "changeset publish",
     "release:dev": "changeset version --snapshot dev && changeset publish --tag dev",
     "release:next": "changeset version --snapshot next && changeset publish --tag next",

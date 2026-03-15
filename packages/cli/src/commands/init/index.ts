@@ -226,7 +226,7 @@ export const init = new Command("init")
       await writeFileSafe(
         configPath,
         JSON.stringify(config),
-        merge(config, { format: { parser: "json" } }),
+        merge(config, { format: { language: "json" } }),
       )
 
       spinner.succeed(`Generated ${c.cyan(configFileName)}`)
@@ -312,7 +312,7 @@ export const init = new Command("init")
                 await writeFileSafe(
                   targetPath,
                   content,
-                  merge(config, { format: { parser: "json" } }),
+                  merge(config, { format: { language: "json" } }),
                 )
 
                 task.title = `Generated ${c.cyan("package.json")}`
@@ -337,7 +337,7 @@ export const init = new Command("init")
                   writeFileSafe(
                     path.join(targetPath, REGISTRY_FILE_NAME),
                     JSON.stringify(registry),
-                    merge(config, { format: { parser: "json" } }),
+                    merge(config, { format: { language: "json" } }),
                   ),
                 ])
 
@@ -380,7 +380,7 @@ export const init = new Command("init")
               await writeFileSafe(
                 targetPath,
                 content,
-                merge(config, { format: { parser: "json" } }),
+                merge(config, { format: { language: "json" } }),
               )
 
               task.title = `Generated ${c.cyan("tsconfig.json")}`
@@ -456,7 +456,7 @@ export const init = new Command("init")
                   writeFileSafe(
                     path.resolve(outdirPath, REGISTRY_FILE_NAME),
                     JSON.stringify(registry),
-                    merge(config, { format: { parser: "json" } }),
+                    merge(config, { format: { language: "json" } }),
                   ),
                 ])
 

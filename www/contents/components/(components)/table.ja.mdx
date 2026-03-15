@@ -72,7 +72,7 @@ import { Table } from "@workspaces/ui"
 ### バリアントを変更する
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <VStack>
@@ -94,7 +94,7 @@ return (
 ### サイズを変更する
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <VStack>
@@ -116,7 +116,7 @@ return (
 ### カラースキームを変更する
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <VStack>
@@ -141,7 +141,7 @@ return (
 外枠の区切り線を追加する場合は、`withBorder`を`true`にします。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return <Table columns={columns} data={data} withBorder withScrollArea />
 ```
@@ -151,7 +151,7 @@ return <Table columns={columns} data={data} withBorder withScrollArea />
 列の区切り線を追加する場合は、`withColumnBorders`を`true`にします。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return <Table columns={columns} data={data} withColumnBorders withScrollArea />
 ```
@@ -161,7 +161,7 @@ return <Table columns={columns} data={data} withColumnBorders withScrollArea />
 行がホバーされたときにハイライトする場合は、`highlightOnHover`を`true`にします。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return <Table columns={columns} data={data} highlightOnHover withScrollArea />
 ```
@@ -171,7 +171,7 @@ return <Table columns={columns} data={data} highlightOnHover withScrollArea />
 ストライプを使う場合は、`striped`を`true`にします。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return <Table columns={columns} data={data} striped withScrollArea />
 ```
@@ -181,7 +181,7 @@ return <Table columns={columns} data={data} striped withScrollArea />
 スクロールエリアを使う場合は、`withScrollArea`を`true`にします。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return <Table columns={columnsFull} data={data} withScrollArea />
 ```
@@ -228,7 +228,7 @@ const columns = useMemo(
   ],
   [],
 )
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -283,7 +283,7 @@ const columns = useMemo(
   ],
   [],
 )
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -302,7 +302,7 @@ return (
 キーボードナビゲーションを無効にする場合は、`enableKeyboardNavigation`を`false`に設定します。デフォルトは、`true`です。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -319,7 +319,7 @@ return (
 初回のフォーカス可能なセルを設定する場合は、`initialFocusableCell`にセルの列と行を指定したオブジェクト(`{ colIndex: number, rowIndex: number }`)を設定します。デフォルトは、`{ colIndex: 0, rowIndex: 0 }`です。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -336,7 +336,7 @@ return (
 行のクリックイベントをハンドルする場合は、`onRowClick`を使用します。
 
 ```tsx preview functional client
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -353,7 +353,7 @@ return (
 行のダブルクリックイベントをハンドルする場合は、`onRowDoubleClick`を使用します。
 
 ```tsx preview functional client
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -370,7 +370,7 @@ return (
 デフォルトのソートを設定する場合は、`defaultSorting`に配列を設定します。配列のオブジェクトには、ソートをする列の`id`と方向を設定します。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -387,7 +387,7 @@ return (
 ソートを無効にする場合は、`enableSorting`を`false`に設定します。デフォルトは、`true`です。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <Table columns={columns} data={data} enableSorting={false} withScrollArea />
@@ -399,7 +399,7 @@ return (
 複数列のソートを無効にする場合は、`enableMultiSort`を`false`に設定します。デフォルトは、`true`です。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <Table columns={columns} data={data} enableMultiSort={false} withScrollArea />
@@ -411,7 +411,7 @@ return (
 最大のソート可能な列数を設定する場合は、`maxMultiSortColCount`に数値を設定します。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -428,8 +428,8 @@ return (
 手動のソートを使う場合は、`manualSorting`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx preview functional client
-const defaultData = useMemo<Data[]>(() => createTableData(), [])
-const [data, setData] = useState<Data[]>(defaultData)
+const defaultData = useMemo<TableData[]>(() => createTableData(), [])
+const [data, setData] = useState<TableData[]>(defaultData)
 
 return (
   <Table
@@ -469,7 +469,7 @@ return (
 デフォルトでは、ソートが有効になったとき、昇順から始まります。もし、降順から始めたい場合は、`sortDescFirst`を`true`に設定するか、特定の列だけ設定したい場合は、`columns`の列ごとに`sortDescFirst`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return <Table columns={columns} data={data} sortDescFirst withScrollArea />
 ```
@@ -477,10 +477,10 @@ return <Table columns={columns} data={data} sortDescFirst withScrollArea />
 ### ソートを制御する
 
 ```tsx preview functional client
-const [sorting, setSorting] = useState<SortingState<Data>>([
+const [sorting, setSorting] = useState<SortingState<TableData>>([
   { id: "age", desc: true },
 ])
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return <Table columns={columns} data={data} withScrollArea />
 ```
@@ -491,7 +491,7 @@ return <Table columns={columns} data={data} withScrollArea />
 
 ```tsx preview functional client
 const { t } = useI18n("table")
-const data = useMemo<Data[]>(() => createTableData(40), [])
+const data = useMemo<TableData[]>(() => createTableData(40), [])
 
 return (
   <VStack>
@@ -543,7 +543,7 @@ return (
 
 ```tsx preview functional client
 const { t } = useI18n("table")
-const data = useMemo<Data[]>(() => createTableData(20), [])
+const data = useMemo<TableData[]>(() => createTableData(20), [])
 
 return (
   <VStack>
@@ -601,8 +601,8 @@ const [pagination, setPagination] = useState<PaginationState>({
   pageSize: 20,
 })
 const rowCount = 40
-const defaultData = useMemo<Data[]>(() => createTableData(rowCount), [])
-const data = useMemo<Data[]>(
+const defaultData = useMemo<TableData[]>(() => createTableData(rowCount), [])
+const data = useMemo<TableData[]>(
   () =>
     defaultData.slice(
       pagination.pageIndex * pagination.pageSize,
@@ -667,7 +667,7 @@ const [pagination, setPagination] = useState<PaginationState>({
   pageSize: 20,
 })
 const { t } = useI18n("table")
-const data = useMemo<Data[]>(() => createTableData(40), [])
+const data = useMemo<TableData[]>(() => createTableData(40), [])
 
 return (
   <VStack>
@@ -720,7 +720,7 @@ return (
 行の選択を有効にする場合は、`enableRowSelection`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return <Table columns={columns} data={data} enableRowSelection withScrollArea />
 ```
@@ -730,7 +730,7 @@ return <Table columns={columns} data={data} enableRowSelection withScrollArea />
 デフォルトの選択された行を設定する場合は、`defaultRowSelection`に`data`のインデックスをキーとしたオブジェクトを設定します。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -748,7 +748,7 @@ return (
 行のクリックで選択を有効にする場合は、`selectOnClickRow`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -766,7 +766,7 @@ return (
 チェックボックスを非表示にする場合は、`withCheckbox`を`false`に設定します。デフォルトは、`true`です。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -785,7 +785,7 @@ return (
 行を無効にする場合は、`enableRowSelection`に条件の関数を設定します。
 
 ```tsx preview functional client
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -801,7 +801,7 @@ return (
 
 ```tsx preview functional client
 const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -820,7 +820,7 @@ return (
 フィルターを使う場合は、フィルターをコントロールするコンポーネントを`header`または`footer`に設定します。
 
 ```tsx preview functional client
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <VStack>
@@ -859,7 +859,7 @@ return (
 デフォルトのフィルターを設定する場合は、`defaultColumnFilters`に配列を設定します。配列のオブジェクトには、フィルターする列の`id`と値を設定します。
 
 ```tsx preview functional client
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <VStack>
@@ -900,7 +900,7 @@ return (
 const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([
   { id: "email", value: "" },
 ])
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <VStack>
@@ -941,7 +941,7 @@ return (
 列のサイズ変更を有効にする場合は、`enableColumnResizing`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -959,7 +959,7 @@ return (
 デフォルトでは、列のサイズ変更のタイミングは、ドラッグしている間に変更されます。ドラッグが終わったときに変更する場合は、`columnResizeMode`に`"onEnd"`を設定します。
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <Table
@@ -984,7 +984,7 @@ return (
 `tableProps`に`aria-label`を設定すると、スクリーンリーダーによって読み上げられます。
 
 ```tsx
-const data = useMemo<Data[]>(() => createTableData(), [])
+const data = useMemo<TableData[]>(() => createTableData(), [])
 
 return (
   <Table

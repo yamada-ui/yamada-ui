@@ -12,7 +12,7 @@ env:
 jobs:
   coverage:
     name: Coverage ${{ matrix.shard_index }}/4
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       max-parallel: 4
       matrix:
@@ -32,10 +32,11 @@ jobs:
         run: pnpm test:coverage -- --shard=${{ matrix.shard_index }}/4
 
       - name: Upload coverage
-        uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238 # v4.6.0
+        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
         with:
+          disable_search: true
           fail_ci_if_error: false
-          file: ./packages/react/coverage/coverage-final.json,./packages/utils/coverage/coverage-final.json
+          files: ./packages/react/coverage/coverage-final.json,./packages/utils/coverage/coverage-final.json,./packages/cli/coverage/coverage-final.json
           flags: unittests
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true

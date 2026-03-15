@@ -93,6 +93,7 @@ export interface UseChartXAxisProps extends Merge<
     | "minTickGap"
     | "mirror"
     | "name"
+    | "niceTicks"
     | "orientation"
     | "padding"
     | "range"
@@ -129,6 +130,7 @@ export const useChartXAxis = ({
   label: labelProp = false,
   minTickGap = 8,
   mirror,
+  niceTicks,
   orientation,
   padding,
   range,
@@ -196,6 +198,7 @@ export const useChartXAxis = ({
       label,
       minTickGap,
       mirror,
+      niceTicks,
       orientation,
       padding,
       range,
@@ -221,6 +224,7 @@ export const useChartXAxis = ({
       children,
       dataKey,
       domain,
+      niceTicks,
       height,
       hide,
       includeHidden,
@@ -270,6 +274,7 @@ export interface UseChartYAxisProps extends Merge<
     | "minTickGap"
     | "mirror"
     | "name"
+    | "niceTicks"
     | "padding"
     | "range"
     | "reversed"
@@ -312,6 +317,7 @@ export const useChartYAxis = ({
   label: labelProp = false,
   minTickGap,
   mirror,
+  niceTicks,
   orientation,
   padding,
   range,
@@ -382,6 +388,7 @@ export const useChartYAxis = ({
       label,
       minTickGap,
       mirror,
+      niceTicks,
       orientation:
         orientation === "end"
           ? "right"
@@ -419,6 +426,7 @@ export const useChartYAxis = ({
       label,
       minTickGap,
       mirror,
+      niceTicks,
       name,
       orientation,
       padding,
@@ -612,7 +620,7 @@ export type UseChartLineReturn = ReturnType<typeof useChartLine>
 export interface UseChartAreaProps extends Merge<
   HTMLProps<"line">,
   Pick<
-    AreaProps,
+    AreaProps<any, any>,
     | "activeDot"
     | "animationBegin"
     | "animationDuration"
@@ -707,9 +715,9 @@ export const useChartArea = ({
   )
 
   const getAreaProps: PropGetter<
-    Partial<AreaProps>,
+    Partial<AreaProps<any, any>>,
     undefined,
-    AreaProps
+    AreaProps<any, any>
   > = useCallback(
     ({ dataKey = dataKeyProp, ...props } = {}) => ({
       type,

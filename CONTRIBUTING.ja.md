@@ -45,20 +45,7 @@ cd yamada-ui
 ```json
 {
   "typescript.tsdk": "node_modules/typescript/lib",
-  "prettier.requireConfig": true,
-  "eslint.workingDirectories": [
-    "www",
-    "packages/cli",
-    "packages/react",
-    "packages/utils",
-    "packages/workspace",
-    "playgrounds/next/app",
-    "playgrounds/next/pages",
-    "playgrounds/react-router/framework",
-    "playgrounds/tanstack/router",
-    "playgrounds/tanstack/start",
-    "playgrounds/vite"
-  ]
+  "eslint.workingDirectories": [{ "mode": "auto" }]
 }
 ```
 

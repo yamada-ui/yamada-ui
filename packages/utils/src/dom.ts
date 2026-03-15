@@ -3,11 +3,8 @@ import { noop } from "./function"
 import { cx } from "./string"
 
 export function createdDom(): boolean {
-  return !!(
-    typeof window !== "undefined" &&
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    window.document?.createElement
-  )
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  return !!(typeof window !== "undefined" && window.document?.createElement)
 }
 
 export function getPlatform(): string {
@@ -388,7 +385,7 @@ export function ariaAttr(condition: any): Booleanish | undefined {
   if (condition === "true") return "true"
   if (condition === "false") return "false"
 
-  return !!condition ? true : undefined
+  return condition ? true : undefined
 }
 
 export function uuid() {
@@ -458,7 +455,7 @@ export function setAttribute(
 ) {
   const prev = el.getAttribute(qualifiedName)
 
-  el.setAttribute(qualifiedName, cx(prev, value))
+  el.setAttribute(qualifiedName, cx(prev, value) ?? "")
 
   return () => {
     if (!prev) {

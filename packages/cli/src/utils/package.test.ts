@@ -88,7 +88,7 @@ describe("getPackageJson", () => {
   })
 
   test("should throw when not found", async () => {
-    await expect(getPackageJson(tempDir)).rejects.toThrowError("package.json")
+    await expect(getPackageJson(tempDir)).rejects.toThrow("package.json")
   })
 })
 

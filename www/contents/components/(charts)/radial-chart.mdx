@@ -107,7 +107,7 @@ return (
 ### Change Size
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -127,7 +127,7 @@ return (
 ### Change Color
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -142,11 +142,11 @@ return <RadialChart.Root data={data} series={series} />
 ### Change Sector Colors
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () =>
     createPolarChartData().map((item, index) => ({
       ...item,
@@ -163,11 +163,11 @@ return <RadialChart.Root data={data} series={series} />
 To add the legend, set `withLegend` to `true`. To change placement, set `legendProps.placement` to `"start-start"`, `"end-end"`, etc. The default is `"start-end"`.
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () =>
     createPolarChartData().map((item, index) => ({
       ...item,
@@ -184,7 +184,7 @@ return <RadialChart.Root data={data} series={series} withLegend />
 To display labels, set `label` or `radialProps.label` to `true`. The default is `false`.
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -203,7 +203,7 @@ return (
 To display label list, set `labelList` or `radialProps.labelList` to `true`. The default is `false`.
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -221,7 +221,7 @@ return (
 ### Add Center Label
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -286,7 +286,7 @@ return (
 To change the start angle, set `startAngle` to a number. The default is `90`.
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -300,7 +300,7 @@ return <RadialChart.Root data={data} series={series} startAngle={0} />
 To change the end angle, set `endAngle` to a number. The default is `-270`.
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -314,7 +314,7 @@ return <RadialChart.Root data={data} endAngle={-180} series={series} />
 To change the inner radius, set `innerRadius` to a number or string. The default is `"20%"`.
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -328,7 +328,7 @@ return <RadialChart.Root data={data} innerRadius="40%" series={series} />
 To change the outer radius, set `outerRadius` to a number or string. The default is `"90%"`.
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -342,7 +342,7 @@ return <RadialChart.Root data={data} outerRadius="70%" series={series} />
 To round sector corners, set `cornerRadius` to a number.
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ cornerRadius: 9999, dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -356,7 +356,7 @@ return <RadialChart.Root data={data} outerRadius="70%" series={series} />
 To change the gap between bars, set `barCategoryGap` to a number or string. The default is `"10%"`.
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -448,7 +448,7 @@ return (
 To sync charts, set `syncId` to a string.
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -467,7 +467,7 @@ return (
 To format the chart, use `formatter`.
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -503,7 +503,7 @@ return (
 To hide the tooltip, set `withTooltip` to `false`. The default is `true`.
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )

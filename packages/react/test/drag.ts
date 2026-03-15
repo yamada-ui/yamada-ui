@@ -1,6 +1,6 @@
 import type { UserEvent } from "@testing-library/user-event"
 import { runIfFn } from "@yamada-ui/utils"
-import { wait } from "./utils"
+import { waitForAnimationFrame } from "./utils"
 
 const DEFAULT_COUNT = 11
 
@@ -72,7 +72,7 @@ export function drag(user: UserEvent) {
 
       await user.pointer(input)
 
-      await wait(options.interval ?? 50)
+      await waitForAnimationFrame(options.interval ?? 50)
     }
   }
 }

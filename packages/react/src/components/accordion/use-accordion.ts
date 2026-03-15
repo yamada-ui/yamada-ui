@@ -34,9 +34,7 @@ interface AccordionContext extends Omit<
 > {}
 
 const [AccordionContext, useAccordionContext] = createContext<AccordionContext>(
-  {
-    name: "AccordionContext",
-  },
+  { name: "AccordionContext" },
 )
 
 export { AccordionContext, useAccordionContext }

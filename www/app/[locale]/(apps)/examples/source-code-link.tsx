@@ -1,4 +1,4 @@
-import type { Example } from "../example-menu"
+import type { Example } from "@/app/[locale]/(apps)/example-menu"
 import { useTranslations } from "next-intl"
 import { NextLink } from "@/components"
 import { CONSTANTS } from "@/constants"

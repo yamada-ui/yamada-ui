@@ -427,8 +427,6 @@ The `Popover` follows the [WAI-ARIA - Dialog (Modal) Pattern](https://www.w3.org
 
 ### Keyboard Navigation
 
-When the `Popover` opens, focus is trapped within it. That is, you cannot focus on elements outside the popover unless the popper is closed.
-
 | Key             | Description                                                                                                             | State                               |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
 | `Tab`           | Focuses the next element within the popover that is not disabled. If it's the last element, the popover is closed.      | `open={true}`                       |
@@ -440,11 +438,13 @@ When the `Popover` opens, focus is trapped within it. That is, you cannot focus 
 | Component         | Roles and Attributes     | Usage                                                                                    |
 | :---------------- | :----------------------- | :--------------------------------------------------------------------------------------- |
 | `Popover.Content` | `role="dialog"`          | Indicates that it is a dialog.                                                           |
+|                   | `id`                     | Used to associate with `Popover.Trigger`.                                                |
 |                   | `aria-labelledby`        | Sets the `id` of the associated `Popover.Header`.                                        |
 |                   | `aria-describedby`       | Sets the `id` of the associated `Popover.Body`.                                          |
 |                   | `aria-hidden`            | Sets to `"false"` when popover is opened, and `"true"` when it is closed.                |
 |                   | `aria-modal`             | Sets to `"true"` when `modal={true}`.                                                    |
 | `Popover.Trigger` | `role="button"`          | Indicates that it is a button.                                                           |
+|                   | `aria-disabled`          | Sets to `"true"` when `disabled={true}`.                                                 |
 |                   | `aria-expanded`          | Sets to `"true"` when popover is opened, and `"false"` when it is closed.                |
 |                   | `aria-controls`          | Set to `Popover.Content`'s id when popover is opened, and `undefined` when it is closed. |
 |                   | `aria-haspopup="dialog"` | Indicates that it triggers a dialog.                                                     |

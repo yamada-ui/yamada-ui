@@ -17,6 +17,7 @@ import type {
   RenderableText,
   ResponsiveContainerProps,
   TooltipContentProps,
+  TooltipProps,
 } from "recharts"
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { Dict, Merge } from "../../utils"
@@ -38,6 +39,7 @@ import {
 } from "recharts"
 import { createSlotComponent, styled, varAttr } from "../../core"
 import {
+  cast,
   createContext,
   isArray,
   isNull,
@@ -468,7 +470,7 @@ export const ChartTooltip = <
     ...tooltipProps,
     ...props,
   } as ChartTooltipProps<Y, M>
-  const { getContentProps, getRootProps } = useChartTooltip({
+  const { getContentProps, getRootProps } = useChartTooltip<Y, M>({
     content: ({ formatter, label, labelFormatter, payload }) => (
       <ChartTooltipContent
         formatter={formatter}
@@ -487,7 +489,7 @@ export const ChartTooltip = <
     ...rest,
   })
 
-  return <Tooltip {...getRootProps()} />
+  return <Tooltip {...cast<TooltipProps>(getRootProps())} />
 }
 
 interface ChartTooltipCursorProps extends Omit<
@@ -524,7 +526,7 @@ const ChartTooltipCursor = withContext<"path", ChartTooltipCursorProps>(
     y,
     ...rest
   }) => {
-    const d = !!points
+    const d = points
       ? `M${points[0]?.x},${points[0]?.y}L${points[1]?.x},${points[1]?.y}`
       : `M ${x},${y} h ${width} v ${height} h -${width} Z`
     return {

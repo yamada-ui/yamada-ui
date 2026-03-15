@@ -117,7 +117,7 @@ import { AreaChart } from "@workspaces/ui"
 ### コンポジション
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createCartesianChartData(), [])
+const data = useMemo<CartesianChartData[]>(() => createCartesianChartData(), [])
 
 return (
   <AreaChart.Root data={data} chartProps={{ margin: { right: 16 } }}>
@@ -140,7 +140,7 @@ return (
 ### サイズを変更する
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
       { dataKey: "desktop" },
@@ -177,7 +177,7 @@ return (
 ### カラースキームを変更する
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries(
       [{ dataKey: "desktop" }, { dataKey: "tablet" }, { dataKey: "mobile" }],
@@ -205,7 +205,7 @@ return (
 ### 色を変更する
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () => [
     { dataKey: "desktop", color: "blue" },
     { dataKey: "tablet", color: "green" },
@@ -235,7 +235,7 @@ return (
 グラデーションを表示する場合は、`series`の`withGradient`または`areaProps.withGradient`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries(
       [{ dataKey: "desktop" }, { dataKey: "tablet" }, { dataKey: "mobile" }],
@@ -266,7 +266,7 @@ return (
 タイプを変更する場合は、`series`の`type`または`areaProps.type`に`"monotone"`や`"linear"`などを設定します。デフォルトは、`"monotone"`です。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
       { dataKey: "desktop" },
@@ -315,7 +315,7 @@ return (
 積み上げる場合は、`series`の`stackId`または`areaProps.stackId`に文字列を設定します。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () => [
     { dataKey: "desktop", color: "blue" },
     { dataKey: "tablet", color: "green" },
@@ -346,7 +346,7 @@ return (
 割合にする場合は、`series`の`stackId`または`areaProps.stackId`に文字列を設定し、`chartProps.stackOffset`に`"expand"`を設定します。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () => [
     { dataKey: "desktop", color: "blue" },
     { dataKey: "tablet", color: "green" },
@@ -378,7 +378,7 @@ return (
 Y軸を表示する場合は、`withYAxis`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
       { dataKey: "desktop" },
@@ -409,7 +409,7 @@ return (
 また、`yAxisProps.orientation`に`"start"`や`"end"`を設定することで、Y軸の配置を変更することができます。デフォルトは、`"start"`です。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
       { dataKey: "desktop" },
@@ -443,7 +443,7 @@ return (
 凡例を表示する場合は、`withLegend`を`true`に設定します。デフォルトは、`false`です。また、凡例の配置を変更する場合は、`legendProps.placement`に`"start-start"`や`"end-end"`などを設定します。デフォルトは、`"start-end"`です。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () => [
     { dataKey: "desktop", color: "blue" },
     { dataKey: "tablet", color: "green" },
@@ -474,7 +474,7 @@ return (
 ツールチップや凡例の項目名を変更する場合は、`series`の`name`に文字列を設定します。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () => [
     { dataKey: "desktop", name: "Desktop", color: "blue" },
     { dataKey: "tablet", name: "Tablet", color: "green" },
@@ -505,7 +505,7 @@ return (
 グリッドを変更する場合は、`gridProps.horizontal`と`gridProps.vertical`に真偽値を設定します。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
       { dataKey: "desktop" },
@@ -547,7 +547,7 @@ return (
 ドットを表示する場合は、`series`の`dot`または`areaProps.dot`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
   [],
 )
@@ -574,7 +574,7 @@ return (
 ラベルを表示する場合は、`series`の`label`または`areaProps.label`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
   [],
 )
@@ -601,7 +601,7 @@ return (
 単位を表示する場合は、`formatter`や`tickFormatter`を使用するか、`unit`に文字列を設定します。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
   [],
 )
@@ -642,7 +642,7 @@ return (
 同期させる場合は、`syncId`に文字列を設定します。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
       { dataKey: "desktop" },
@@ -688,7 +688,7 @@ return (
 フォーマットする場合は、`formatter`や`tickFormatter`などを使用します。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
       { dataKey: "desktop" },
@@ -726,7 +726,7 @@ return (
 ### 基準線を表示する
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
       { dataKey: "desktop" },
@@ -770,7 +770,7 @@ return (
 目盛線を表示する場合は、`xAxisProps.tickLine`または`yAxisProps.tickLine`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
       { dataKey: "desktop" },
@@ -808,7 +808,7 @@ return (
 軸のラベルを表示する場合は、`xAxisProps.label`または`yAxisProps.label`に文字列を設定します。デフォルトは、`false`です。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
       { dataKey: "desktop" },
@@ -843,7 +843,7 @@ return (
 範囲を設定する場合は、`yAxisProps.domain`に`[最小, 最大]`を設定します。また、間隔を設定する場合は、`yAxisProps.ticks`に配列を設定します。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
       { dataKey: "desktop" },
@@ -880,7 +880,7 @@ return (
 ツールチップのカーソルを表示する場合は、`tooltipProps.cursor`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
       { dataKey: "desktop" },
@@ -909,7 +909,7 @@ return (
 X軸を非表示にする場合は、`withXAxis`を`false`に設定します。デフォルトは、`true`です。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
       { dataKey: "desktop" },
@@ -936,7 +936,7 @@ return (
 アクティブドットを非表示にする場合は、`series`の`activeDot`または`areaProps.activeDot`を`false`に設定します。デフォルトは、`true`です。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
       { dataKey: "desktop" },
@@ -968,7 +968,7 @@ return (
 ツールチップを非表示にする場合は、`withTooltip`を`false`に設定します。デフォルトは、`true`です。
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
       { dataKey: "desktop" },
@@ -995,7 +995,7 @@ return (
 ### 軸をカスタマイズする
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
       { dataKey: "desktop" },
@@ -1034,7 +1034,7 @@ return (
 ### ドットをカスタマイズする
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
       { dataKey: "desktop" },
@@ -1068,7 +1068,7 @@ return (
 ### アクティブドットをカスタマイズする
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
       { dataKey: "desktop" },
@@ -1099,7 +1099,7 @@ return (
 ### ラベルをカスタマイズする
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () => [{ color: "blue", dataKey: "desktop" }],
   [],
 )
@@ -1133,7 +1133,7 @@ return (
 ### グリッドをカスタマイズする
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
       { dataKey: "desktop" },
@@ -1164,7 +1164,7 @@ return (
 ### ツールチップのカーソルをカスタマイズする
 
 ```tsx preview functional
-const series = useMemo<AreaChart.AreaProps<Data>[]>(
+const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
       { dataKey: "desktop" },

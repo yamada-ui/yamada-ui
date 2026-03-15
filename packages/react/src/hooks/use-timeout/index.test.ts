@@ -1,81 +1,51 @@
-import { act, renderHook } from "#test"
+import { renderHook } from "#test/browser"
 import { useTimeout } from "."
 
 describe("useTimeout", () => {
-  beforeEach(() => {
-    vi.useFakeTimers()
-  })
-
-  afterEach(() => {
-    vi.useRealTimers()
-  })
-
-  test("should call the callback after the specified delay", () => {
+  test("should call the callback after the specified delay", async () => {
     const callback = vi.fn()
 
-    renderHook(() => useTimeout(callback, 1000))
+    await renderHook(() => useTimeout(callback, 50))
 
     expect(callback).not.toHaveBeenCalled()
 
-    act(() => {
-      vi.advanceTimersByTime(1000)
-    })
-
-    expect(callback).toHaveBeenCalledTimes(1)
+    await expect.poll(() => callback).toHaveBeenCalledTimes(1)
   })
 
-  test("should not call the callback when delay is null", () => {
+  test("should not call the callback when delay is null", async () => {
     const callback = vi.fn()
 
-    renderHook(() => useTimeout(callback, null))
+    await renderHook(() => useTimeout(callback, null))
 
-    act(() => {
-      vi.advanceTimersByTime(5000)
-    })
+    await new Promise((resolve) => setTimeout(resolve, 100))
 
     expect(callback).not.toHaveBeenCalled()
   })
 
-  test("should clear timeout on unmount", () => {
+  test("should clear timeout on unmount", async () => {
     const callback = vi.fn()
 
-    const { unmount } = renderHook(() => useTimeout(callback, 1000))
+    const { unmount } = await renderHook(() => useTimeout(callback, 50))
 
     unmount()
 
-    act(() => {
-      vi.advanceTimersByTime(1000)
-    })
+    await new Promise((resolve) => setTimeout(resolve, 100))
 
     expect(callback).not.toHaveBeenCalled()
   })
 
-  test("should restart timeout when delay changes", () => {
+  test("should restart timeout when delay changes", async () => {
     const callback = vi.fn()
 
-    const { rerender } = renderHook(
-      ({ delay }) => useTimeout(callback, delay),
-      { initialProps: { delay: 1000 as null | number } },
+    const { rerender } = await renderHook(
+      (props) => useTimeout(callback, props?.delay ?? null),
+      { initialProps: { delay: 5000 } },
     )
 
-    act(() => {
-      vi.advanceTimersByTime(500)
-    })
-
     expect(callback).not.toHaveBeenCalled()
 
-    rerender({ delay: 2000 })
+    await rerender({ delay: 50 })
 
-    act(() => {
-      vi.advanceTimersByTime(1500)
-    })
-
-    expect(callback).not.toHaveBeenCalled()
-
-    act(() => {
-      vi.advanceTimersByTime(500)
-    })
-
-    expect(callback).toHaveBeenCalledTimes(1)
+    await expect.poll(() => callback).toHaveBeenCalledTimes(1)
   })
 })

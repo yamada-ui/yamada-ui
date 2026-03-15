@@ -11,5 +11,6 @@ describe("useBreakpointEffect", () => {
     const callback = vi.fn()
     await renderHook(() => useBreakpointEffect(callback, []))
     await expect.poll(() => callback).toHaveBeenCalledWith("md")
+    await expect.poll(() => callback).toHaveBeenCalledTimes(1)
   })
 })

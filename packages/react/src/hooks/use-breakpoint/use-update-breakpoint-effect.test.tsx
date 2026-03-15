@@ -22,5 +22,6 @@ describe("useUpdateBreakpointEffect", () => {
     })
 
     await expect.poll(() => callback).toHaveBeenCalledWith("lg")
+    await expect.poll(() => callback).toHaveBeenCalledTimes(1)
   })
 })

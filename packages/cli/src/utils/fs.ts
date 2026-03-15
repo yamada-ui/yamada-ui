@@ -36,6 +36,7 @@ export async function isWriteable(directory: string) {
 
 export interface WriteFileOptions extends ObjectEncodingOptions {
   cwd?: string
+  dryRun?: boolean
   format?: FormatOptions
   lint?: LintFilesOptions
 }
@@ -55,6 +56,11 @@ export async function writeFileSafe(
   content: string,
   options?: WriteFileOptions,
 ) {
+  if (options?.dryRun) {
+    console.log(c.cyan(`(dry run) Would write: ${targetPath}`))
+    return
+  }
+
   const dirPath = path.dirname(targetPath)
 
   if (!existsSync(dirPath)) await mkdir(dirPath, { recursive: true })

@@ -43,6 +43,7 @@ import {
 interface Options {
   config: string
   cwd: string
+  dryRun: boolean
   overwrite: boolean
   yes: boolean
   format?: boolean
@@ -62,6 +63,7 @@ export const theme = new Command("theme")
   .option("-o, --overwrite", "overwrite existing directory.", false)
   .option("-j, --js", "use js instead of ts.")
   .option("-y, --yes", "skip all confirmation prompts.", false)
+  .option("-n, --dry-run", "preview changes without applying them.", false)
   .option("-p, --package-name <name>", "package name (for monorepo).")
   .option("-s, --src", "use src/ directory.")
   .option("--no-src", "do not use src/ directory.")
@@ -81,6 +83,7 @@ export const theme = new Command("theme")
       src,
       config: configPath,
       cwd,
+      dryRun,
       format,
       install,
       js,
@@ -207,20 +210,19 @@ export const theme = new Command("theme")
                       ? transformTsxToJsx(content)
                       : transformTsToJs(content)
 
-                  await writeFileSafe(
-                    path.resolve(targetPath, name),
-                    content,
-                    config,
-                  )
+                  await writeFileSafe(path.resolve(targetPath, name), content, {
+                    ...config,
+                    dryRun,
+                  })
                 }),
                 writeFileSafe(
                   path.resolve(targetPath, REGISTRY_FILE_NAME),
                   JSON.stringify(registry),
-                  merge(config, { format: { parser: "json" } }),
+                  merge(config, { dryRun, format: { parser: "json" } }),
                 ),
               ])
 
-              task.title = `Generated theme`
+              task.title = dryRun ? "Would generate theme" : "Generated theme"
             },
             title: `Generating theme`,
           },
@@ -236,10 +238,10 @@ export const theme = new Command("theme")
               await writeFileSafe(
                 targetPath,
                 JSON.stringify(userConfig),
-                merge(config, { format: { parser: "json" } }),
+                merge(config, { dryRun, format: { parser: "json" } }),
               )
 
-              task.title = `Updated config`
+              task.title = dryRun ? "Would update config" : "Updated config"
             },
             title: `Updating config`,
           },
@@ -281,10 +283,10 @@ export const theme = new Command("theme")
             await writeFileSafe(
               targetPath,
               content,
-              merge(config, { format: { parser: "json" } }),
+              merge(config, { dryRun, format: { parser: "json" } }),
             )
 
-            task.title = `Generated ${c.cyan("package.json")}`
+            task.title = `${dryRun ? "Would generate" : "Generated"} ${c.cyan("package.json")}`
           },
           title: `Generating ${c.cyan("package.json")}`,
         })
@@ -307,10 +309,10 @@ export const theme = new Command("theme")
             await writeFileSafe(
               targetPath,
               content,
-              merge(config, { format: { parser: "json" } }),
+              merge(config, { dryRun, format: { parser: "json" } }),
             )
 
-            task.title = `Generated ${c.cyan("tsconfig.json")}`
+            task.title = `${dryRun ? "Would generate" : "Generated"} ${c.cyan("tsconfig.json")}`
           },
           title: `Generating ${c.cyan("tsconfig.json")}`,
         })
@@ -333,9 +335,11 @@ export const theme = new Command("theme")
         if (install) {
           spinner.start("Installing dependencies")
 
-          await installDependencies([], { cwd })
+          await installDependencies([], { cwd, dryRun })
 
-          spinner.succeed("Installed dependencies")
+          spinner.succeed(
+            dryRun ? "Would install dependencies" : "Installed dependencies",
+          )
         }
 
         const packageManager = getPackageManager()

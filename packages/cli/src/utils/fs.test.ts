@@ -1,4 +1,11 @@
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "fs"
+import {
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from "fs"
 import { tmpdir } from "os"
 import path from "path"
 import { afterEach, beforeEach, describe, expect, test } from "vitest"
@@ -81,6 +88,15 @@ describe("writeFileSafe", () => {
       lint: { enabled: false },
     })
     expect(readFileSync(filePath, "utf-8")).toBe("hello")
+  })
+
+  test("should skip writing and log when dryRun is true", async () => {
+    const filePath = path.join(tempDir, "a", "b", "file.txt")
+    await writeFileSafe(filePath, "hello", { dryRun: true })
+    expect(existsSync(filePath)).toBeFalsy()
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would write:"),
+    )
   })
 })
 

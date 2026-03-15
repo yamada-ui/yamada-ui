@@ -593,6 +593,25 @@ describe("generateSource", () => {
     const content = readFileSync(path.join(dirPath, "index.js"), "utf-8")
     expect(content).not.toContain(": number")
   })
+
+  test("should not create file and log when dryRun is true", async () => {
+    const config = createMockConfig()
+    const dirPath = path.join(tempDir, "button")
+
+    await generateSource(
+      dirPath,
+      "components",
+      { name: "index.ts", content: "export {}" },
+      config,
+      [],
+      { dryRun: true },
+    )
+
+    expect(existsSync(path.join(dirPath, "index.ts"))).toBeFalsy()
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would write:"),
+    )
+  })
 })
 
 describe("transformContentWithFormatAndLint", () => {
@@ -674,5 +693,22 @@ describe("generateSources", () => {
 
     expect(existsSync(path.join(dirPath, "index.ts"))).toBeTruthy()
     expect(existsSync(path.join(dirPath, "registry.json"))).toBeTruthy()
+  })
+
+  test("should not create files and log when dryRun is true", async () => {
+    const config = createMockConfig()
+    const dirPath = path.join(tempDir, "button")
+    const registry: Registry = {
+      section: "components",
+      sources: [{ name: "index.ts", content: "export {}" }],
+    }
+
+    await generateSources(dirPath, registry, config, [], { dryRun: true })
+
+    expect(existsSync(path.join(dirPath, "index.ts"))).toBeFalsy()
+    expect(existsSync(path.join(dirPath, "registry.json"))).toBeFalsy()
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would write:"),
+    )
   })
 })

@@ -352,4 +352,27 @@ describe("theme", () => {
       expect.stringContaining("unknown error"),
     )
   })
+
+  test("should not create theme files when --dry-run", async () => {
+    setupProject(tempDir)
+
+    await theme.parseAsync(
+      [
+        "./workspaces/theme",
+        "--cwd",
+        tempDir,
+        "--yes",
+        "--dry-run",
+        "--no-install",
+        "--no-format",
+        "--no-lint",
+      ],
+      { from: "user" },
+    )
+
+    expect(existsSync(path.join(tempDir, "workspaces", "theme"))).toBeFalsy()
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would write:"),
+    )
+  })
 })

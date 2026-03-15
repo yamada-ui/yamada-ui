@@ -273,6 +273,7 @@ async function getTheme(path: string, cwd: string) {
 interface Options {
   config: string
   cwd: string
+  dryRun: boolean
   internal: boolean
   format?: boolean
   lint?: boolean
@@ -289,10 +290,19 @@ export const tokens = new Command("tokens")
   .option("--no-format", "do not format the output file.")
   .option("-l, --lint", "lint the output file.")
   .option("--no-lint", "do not lint the output file.")
+  .option("-n, --dry-run", "preview changes without applying them.", false)
   .option("--internal", "generate internal tokens.", false)
   .action(async function (
     inputPath: string | undefined,
-    { config: configPath, cwd, format, internal, lint, out: outPath }: Options,
+    {
+      config: configPath,
+      cwd,
+      dryRun,
+      format,
+      internal,
+      lint,
+      out: outPath,
+    }: Options,
   ) {
     const spinner = ora()
 
@@ -349,15 +359,18 @@ export const tokens = new Command("tokens")
         outPath,
         content,
         config
-          ? merge(config, { lint: { filePath: inputPath } })
+          ? merge(config, { dryRun, lint: { filePath: inputPath } })
           : {
               cwd,
+              dryRun,
               format: { enabled: format },
               lint: { enabled: lint, filePath: inputPath },
             },
       )
 
-      spinner.succeed(`Generated theme typings`)
+      spinner.succeed(
+        dryRun ? "Would generate theme typings" : "Generated theme typings",
+      )
 
       end()
     } catch (e) {

@@ -44,6 +44,7 @@ import {
 interface Options {
   config: string
   cwd: string
+  dryRun: boolean
   jsx: boolean
   overwrite: boolean
   yes: boolean
@@ -65,6 +66,7 @@ export const init = new Command("init")
   .option("-t, --tag <name>", "tag for the registries (e.g. dev, next).")
   .option("-j, --jsx", "use jsx instead of tsx.", false)
   .option("-y, --yes", "skip all confirmation prompts.", false)
+  .option("-n, --dry-run", "preview changes without applying them.", false)
   .option("-m, --monorepo", "enable monorepo mode.")
   .option("--no-monorepo", "disable monorepo mode.")
   .option("-p, --package-name <name>", "package name.")
@@ -83,6 +85,7 @@ export const init = new Command("init")
     src,
     config: configPath,
     cwd,
+    dryRun,
     format,
     install,
     jsx,
@@ -226,10 +229,12 @@ export const init = new Command("init")
       await writeFileSafe(
         configPath,
         JSON.stringify(config),
-        merge(config, { format: { parser: "json" } }),
+        merge(config, { dryRun, format: { parser: "json" } }),
       )
 
-      spinner.succeed(`Generated ${c.cyan(configFileName)}`)
+      spinner.succeed(
+        `${dryRun ? "Would generate" : "Generated"} ${c.cyan(configFileName)}`,
+      )
 
       const outdirPath = path.resolve(cwd, outdir)
 
@@ -312,10 +317,10 @@ export const init = new Command("init")
                 await writeFileSafe(
                   targetPath,
                   content,
-                  merge(config, { format: { parser: "json" } }),
+                  merge(config, { dryRun, format: { parser: "json" } }),
                 )
 
-                task.title = `Generated ${c.cyan("package.json")}`
+                task.title = `${dryRun ? "Would generate" : "Generated"} ${c.cyan("package.json")}`
               },
               title: `Generating ${c.cyan("package.json")}`,
             },
@@ -332,16 +337,16 @@ export const init = new Command("init")
                   writeFileSafe(
                     path.join(targetPath, indexFileName),
                     content,
-                    config,
+                    merge(config, { dryRun }),
                   ),
                   writeFileSafe(
                     path.join(targetPath, REGISTRY_FILE_NAME),
                     JSON.stringify(registry),
-                    merge(config, { format: { parser: "json" } }),
+                    merge(config, { dryRun, format: { parser: "json" } }),
                   ),
                 ])
 
-                task.title = `Generated ${c.cyan(indexFileName)}`
+                task.title = `${dryRun ? "Would generate" : "Generated"} ${c.cyan(indexFileName)}`
               },
               title: `Generating ${c.cyan(indexFileName)}`,
             },
@@ -350,12 +355,12 @@ export const init = new Command("init")
                 if (outdir.includes("/")) {
                   const path = `${outdir.replace(/^\.\//, "").split("/")[0]}/**`
 
-                  await addWorkspace(cwd, path, config)
+                  await addWorkspace(cwd, path, config, { dryRun })
                 } else {
-                  await addWorkspace(cwd, outdir, config)
+                  await addWorkspace(cwd, outdir, config, { dryRun })
                 }
 
-                task.title = "Added workspace"
+                task.title = dryRun ? "Would add workspace" : "Added workspace"
               },
               title: "Adding workspace",
             },
@@ -380,10 +385,10 @@ export const init = new Command("init")
               await writeFileSafe(
                 targetPath,
                 content,
-                merge(config, { format: { parser: "json" } }),
+                merge(config, { dryRun, format: { parser: "json" } }),
               )
 
-              task.title = `Generated ${c.cyan("tsconfig.json")}`
+              task.title = `${dryRun ? "Would generate" : "Generated"} ${c.cyan("tsconfig.json")}`
             },
             title: `Generating ${c.cyan("tsconfig.json")}`,
           })
@@ -451,16 +456,16 @@ export const init = new Command("init")
                   writeFileSafe(
                     path.resolve(outdirPath, indexFileName),
                     content,
-                    config,
+                    merge(config, { dryRun }),
                   ),
                   writeFileSafe(
                     path.resolve(outdirPath, REGISTRY_FILE_NAME),
                     JSON.stringify(registry),
-                    merge(config, { format: { parser: "json" } }),
+                    merge(config, { dryRun, format: { parser: "json" } }),
                   ),
                 ])
 
-                task.title = `Generated ${c.cyan(indexFileName)}`
+                task.title = `${dryRun ? "Would generate" : "Generated"} ${c.cyan(indexFileName)}`
               },
               title: `Generating ${c.cyan(indexFileName)}`,
             },
@@ -517,11 +522,14 @@ export const init = new Command("init")
       if (install && (dependencies || devDependencies)) {
         spinner.start("Installing dependencies")
 
-        if (dependencies) await installDependencies(dependencies, { cwd })
+        if (dependencies)
+          await installDependencies(dependencies, { cwd, dryRun })
         if (devDependencies)
-          await installDependencies(devDependencies, { cwd, dev: true })
+          await installDependencies(devDependencies, { cwd, dev: true, dryRun })
 
-        spinner.succeed("Installed dependencies")
+        spinner.succeed(
+          dryRun ? "Would install dependencies" : "Installed dependencies",
+        )
       }
 
       if (monorepo) {

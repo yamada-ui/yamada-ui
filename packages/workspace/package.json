@@ -10,7 +10,8 @@
     "typetrace": "tsc --noEmit --generateTrace ./trace --incremental false",
     "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
     "lint": "eslint . --max-warnings=0 --cache",
-    "format": "prettier . --ignore-path ../../.prettierignore --check --cache"
+    "format": "prettier . --ignore-path ../../.prettierignore --check --cache",
+    "quality": "pnpm format && pnpm lint && pnpm typecheck"
   },
   "exports": {
     "./eslint": "./src/eslint/index.ts",
@@ -26,6 +27,7 @@
     "@cspell/eslint-plugin": "^9.7.0",
     "@eslint/compat": "^2.0.3",
     "@limegrass/eslint-plugin-import-alias": "^1.6.0",
+    "@next/eslint-plugin-next": "^16.1.6",
     "@octokit/request-error": "^7.1.0",
     "@octokit/rest": "^22.0.1",
     "@octokit/webhooks": "^14.2.0",
@@ -33,6 +35,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@typescript-eslint/parser": "^8.57.0",
+    "@typescript-eslint/utils": "^8.57.0",
     "@vitest/eslint-plugin": "^1.6.12",
     "@yamada-ui/utils": "workspace:",
     "dotenv": "^17.3.1",

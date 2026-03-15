@@ -46,7 +46,7 @@
     "./hooks/*": "./src/hooks/*/index.ts"
   },
   "scripts": {
-    "clean": "rimraf node_modules dist trace coverage storybook-static .turbo .eslintcache",
+    "clean": "rimraf node_modules dist trace coverage storybook-static .turbo .eslintcache __screenshots__",
     "build": "tsdown",
     "storybook": "storybook dev -p 6006 -c storybook",
     "storybook:serve": "npx http-server ./storybook-static",
@@ -70,6 +70,7 @@
     "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
     "lint": "eslint . --max-warnings=0 --cache",
     "format": "prettier . --ignore-path ../../.prettierignore --check --cache",
+    "quality": "pnpm format && pnpm lint && pnpm typecheck && pnpm test",
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },

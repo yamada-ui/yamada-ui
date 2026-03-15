@@ -1,13 +1,18 @@
-import type { TSESLint } from "@typescript-eslint/utils"
-import reactHooksPlugin from "eslint-plugin-react-hooks"
+import type { ConfigWithExtends } from "@eslint/config-helpers"
+import reactHooks from "eslint-plugin-react-hooks"
 import { sharedFiles } from "./shared"
 
 export const reactHooksConfig = {
-  name: "eslint/react-hooks",
+  name: "react-hooks",
+  extends: [reactHooks.configs.flat.recommended],
   files: sharedFiles,
-  plugins: { "react-hooks": reactHooksPlugin },
   rules: {
     "react-hooks/exhaustive-deps": "error",
-    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/immutability": "off",
+    "react-hooks/preserve-manual-memoization": "off",
+    "react-hooks/purity": "off",
+    "react-hooks/refs": "off",
+    "react-hooks/set-state-in-effect": "off",
+    "react-hooks/static-components": "off",
   },
-} satisfies TSESLint.FlatConfig.Config
+} satisfies ConfigWithExtends

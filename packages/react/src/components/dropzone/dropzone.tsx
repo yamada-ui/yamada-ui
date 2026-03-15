@@ -131,8 +131,6 @@ export const DropzoneDescription = withContext<"p", DropzoneDescriptionProps>(
   "description",
 )()
 
-export interface DropzoneDescriptionProps extends HTMLStyledProps<"p"> {}
-
 interface DropzoneOverlayProps extends FadeProps {
   loadingProps?: DropzoneLoadingProps
 }

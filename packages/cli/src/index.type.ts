@@ -13,11 +13,13 @@ export interface ThemeConfig {
 
 export interface LintConfig {
   enabled?: boolean
+  tool?: "auto" | "biome" | "eslint" | "oxlint"
 }
 
 export interface FormatConfig {
   configPath?: null | string
   enabled?: boolean
+  tool?: "auto" | "biome" | "oxfmt" | "prettier"
 }
 
 export interface UserConfig {

@@ -1,5 +1,24 @@
 # @yamada-ui/react
 
+## 2.1.3
+
+### Patch Changes
+
+- [#6098](https://github.com/yamada-ui/yamada-ui/pull/6098) [`0726312`](https://github.com/yamada-ui/yamada-ui/commit/0726312c56452f71a2ff6232abb9a790de22cd45) Thanks [@taroj1205](https://github.com/taroj1205)! - Added a shared `wait` utility and updated internal consumers to use the same implementation.
+
+- [#6063](https://github.com/yamada-ui/yamada-ui/pull/6063) [`1b22cb1`](https://github.com/yamada-ui/yamada-ui/commit/1b22cb1c4f9da862d4a4a4c3931410a639d7b208) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted the source code of `Accordion`.
+
+- [#6057](https://github.com/yamada-ui/yamada-ui/pull/6057) [`66fef30`](https://github.com/yamada-ui/yamada-ui/commit/66fef30fec99241018af93e7a67537494f69722e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where `rootRef` was not correctly set in `InfiniteScrollArea`.
+
+- [#6057](https://github.com/yamada-ui/yamada-ui/pull/6057) [`66fef30`](https://github.com/yamada-ui/yamada-ui/commit/66fef30fec99241018af93e7a67537494f69722e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added support for using the browser viewport as the scroll container in `InfiniteScrollArea`. To enable this, set `rootRef` to `null`.
+
+- [#6095](https://github.com/yamada-ui/yamada-ui/pull/6095) [`be2245e`](https://github.com/yamada-ui/yamada-ui/commit/be2245e27eba53149f2a945a17f58d378d9b6662) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#6064](https://github.com/yamada-ui/yamada-ui/pull/6064) [`c8b1360`](https://github.com/yamada-ui/yamada-ui/commit/c8b13602c8f9851921d2ff85c13e5311919c3889) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where an unnecessary `role="group"` was assigned to `NativeAccordion.Item`.
+
+- Updated dependencies [[`0726312`](https://github.com/yamada-ui/yamada-ui/commit/0726312c56452f71a2ff6232abb9a790de22cd45), [`8d54c60`](https://github.com/yamada-ui/yamada-ui/commit/8d54c60d3139db0149ed07f37d3d4cb951c7a2e7)]:
+  - @yamada-ui/utils@2.1.1
+
 ## 2.1.2
 
 ### Patch Changes

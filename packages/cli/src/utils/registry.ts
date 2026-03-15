@@ -21,8 +21,7 @@ import {
   SECTION_NAMES,
 } from "../constant"
 import { writeFileSafe } from "./fs"
-import { lintText } from "./lint"
-import { formatText } from "./prettier"
+import { resolveFormatter, resolveLinter } from "./toolchain"
 import {
   isJsx,
   transformExtension,
@@ -319,12 +318,14 @@ export async function transformContentWithFormatAndLint(
       ? transformTsxToJsx(content)
       : transformTsToJs(content)
 
-  content = await lintText(content, {
-    ...lint,
-    cwd,
-    filePath,
-  })
-  content = await formatText(content, format)
+  if (lint?.enabled !== false) {
+    const linter = await resolveLinter(cwd, lint?.tool)
+    content = await linter.lintText(content, { cwd, filePath })
+  }
+  if (format?.enabled !== false) {
+    const formatter = await resolveFormatter(cwd, format?.tool)
+    content = await formatter.formatText(content, format)
+  }
 
   return content
 }
@@ -391,12 +392,17 @@ export async function transformIndexWithFormatAndLint(
 
   if (config.jsx) content = transformTsToJs(content)
 
-  content = await lintText(content, {
-    ...config.lint,
-    cwd: config.cwd,
-    filePath: config.paths.ui.index,
-  })
-  content = await formatText(content, config.format)
+  if (config.lint?.enabled !== false) {
+    const linter = await resolveLinter(config.cwd, config.lint?.tool)
+    content = await linter.lintText(content, {
+      cwd: config.cwd,
+      filePath: config.paths.ui.index,
+    })
+  }
+  if (config.format?.enabled !== false) {
+    const formatter = await resolveFormatter(config.cwd, config.format?.tool)
+    content = await formatter.formatText(content, config.format)
+  }
 
   return content
 }
@@ -454,7 +460,7 @@ export async function generateSources(
     writeFileSafe(
       path.resolve(dirPath, REGISTRY_FILE_NAME),
       JSON.stringify(registry),
-      merge(config, { format: { parser: "json" } }),
+      merge(config, { format: { language: "json" } }),
     ),
   ])
 }

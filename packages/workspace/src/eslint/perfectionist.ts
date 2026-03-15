@@ -1,4 +1,4 @@
-import type { TSESLint } from "@typescript-eslint/utils"
+import type { ConfigWithExtends } from "@eslint/config-helpers"
 import perfectionistPlugin from "eslint-plugin-perfectionist"
 import { sharedFiles } from "./shared"
 
@@ -141,11 +141,9 @@ const sortObjectTypeGroups = {
 }
 
 export const perfectionistConfig = {
-  name: "eslint/perfectionist",
+  name: "perfectionist",
   files: sharedFiles,
-  plugins: {
-    perfectionist: perfectionistPlugin as unknown as TSESLint.FlatConfig.Plugin,
-  },
+  plugins: { perfectionist: perfectionistPlugin },
   rules: {
     "perfectionist/sort-exports": [
       "error",
@@ -202,4 +200,4 @@ export const perfectionistConfig = {
     "perfectionist/sort-sets": ["warn", { type }],
     "perfectionist/sort-union-types": ["warn", { type }],
   },
-} satisfies TSESLint.FlatConfig.Config
+} satisfies ConfigWithExtends

@@ -526,7 +526,7 @@ const ChartTooltipCursor = withContext<"path", ChartTooltipCursorProps>(
     y,
     ...rest
   }) => {
-    const d = !!points
+    const d = points
       ? `M${points[0]?.x},${points[0]?.y}L${points[1]?.x},${points[1]?.y}`
       : `M ${x},${y} h ${width} v ${height} h -${width} Z`
     return {

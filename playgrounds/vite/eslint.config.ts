@@ -1,51 +1,29 @@
-import type { TSESLint } from "@typescript-eslint/utils"
+import type { ConfigWithExtends } from "@eslint/config-helpers"
 import {
-  createLanguageConfig,
   cspellConfig,
   jsxA11yConfig,
   reactConfig,
   reactHooksConfig,
   sharedConfigArray,
 } from "@yamada-ui/workspace/eslint"
-import { dirname, resolve } from "node:path"
-import { fileURLToPath } from "node:url"
-import tseslint from "typescript-eslint"
+import { defineConfig } from "eslint/config"
 
-const tsConfigAppPath = resolve(
-  dirname(fileURLToPath(import.meta.url)),
-  "tsconfig.app.json",
-)
-
-const tsConfigNodePath = resolve(
-  dirname(fileURLToPath(import.meta.url)),
-  "tsconfig.node.json",
-)
-
-const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
-  createLanguageConfig(tsConfigAppPath, {
-    files: ["src/**/*.ts", "src/**/*.tsx"],
-    languageOptions: {
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-        ecmaVersion: "latest",
-      },
+const languageOptionsConfig: ConfigWithExtends = {
+  languageOptions: {
+    parserOptions: {
+      project: ["./tsconfig.app.json", "./tsconfig.node.json"],
+      tsconfigRootDir: import.meta.dirname,
     },
-  }),
-  createLanguageConfig(tsConfigNodePath, {
-    files: ["eslint.config.ts", "vite.config.ts"],
-    languageOptions: {
-      parserOptions: {
-        ecmaVersion: "latest",
-      },
-    },
-  }),
+  },
+}
+
+const config = defineConfig(
   ...sharedConfigArray,
+  languageOptionsConfig,
   cspellConfig,
+  jsxA11yConfig,
   reactConfig,
   reactHooksConfig,
-  jsxA11yConfig,
 )
 
 export default config

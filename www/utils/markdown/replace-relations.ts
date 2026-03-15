@@ -1,11 +1,11 @@
-import type { Locale } from "../i18n"
 import type { Relations } from "@/data"
+import type { Locale } from "@/utils/i18n"
 import { readFile } from "fs/promises"
 import { glob } from "glob"
 import matter from "gray-matter"
 import path from "path"
 import data from "@/data/relations.json"
-import { getLang } from "../i18n"
+import { getLang } from "@/utils/i18n"
 
 const relations = data as Relations
 

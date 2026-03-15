@@ -170,12 +170,22 @@ export function packageExecuteCommands(packageManager: PackageManager) {
 
 export interface InstallDependenciesOptions extends PackageAddCommandOptions {
   cwd?: string
+  dryRun?: boolean
 }
 
 export async function installDependencies(
   dependencies?: string[],
-  { cwd, dev, exact = true }: InstallDependenciesOptions = {},
+  { cwd, dev, dryRun, exact = true }: InstallDependenciesOptions = {},
 ) {
+  if (dryRun) {
+    if (dependencies?.length) {
+      console.log(c.cyan(`(dry run) Would install: ${dependencies.join(", ")}`))
+    } else {
+      console.log(c.cyan(`(dry run) Would install dependencies`))
+    }
+    return
+  }
+
   const packageManager = getPackageManager()
 
   if (dependencies?.length) {
@@ -189,13 +199,22 @@ export async function installDependencies(
 
 export interface UninstallDependenciesOptions extends Pick<
   InstallDependenciesOptions,
-  "cwd"
+  "cwd" | "dryRun"
 > {}
 
 export async function uninstallDependencies(
   dependencies: string[],
-  { cwd }: InstallDependenciesOptions = {},
+  { cwd, dryRun }: UninstallDependenciesOptions = {},
 ) {
+  if (dryRun) {
+    if (dependencies.length) {
+      console.log(
+        c.cyan(`(dry run) Would uninstall: ${dependencies.join(", ")}`),
+      )
+    }
+    return
+  }
+
   const packageManager = getPackageManager()
 
   if (dependencies.length) {
@@ -205,10 +224,15 @@ export async function uninstallDependencies(
   }
 }
 
+export interface AddWorkspaceOptions {
+  dryRun?: boolean
+}
+
 export async function addWorkspace(
   cwd: string,
   workspacePath: string,
   config: UserConfig,
+  { dryRun }: AddWorkspaceOptions = {},
 ) {
   const packageManager = getPackageManager()
 
@@ -228,7 +252,7 @@ export async function addWorkspace(
           await writeFileSafe(
             targetPath,
             YAML.stringify(json),
-            merge(config, { format: { parser: "yaml" } }),
+            merge(config, { dryRun, format: { parser: "yaml" } }),
           )
         }
       } else {
@@ -237,7 +261,7 @@ export async function addWorkspace(
         await writeFileSafe(
           targetPath,
           content,
-          merge(config, { format: { parser: "yaml" } }),
+          merge(config, { dryRun, format: { parser: "yaml" } }),
         )
       }
 
@@ -257,7 +281,7 @@ export async function addWorkspace(
         await writeFileSafe(
           targetPath,
           content,
-          merge(config, { format: { parser: "json" } }),
+          merge(config, { dryRun, format: { parser: "json" } }),
         )
       }
 

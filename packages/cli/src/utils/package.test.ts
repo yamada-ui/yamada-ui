@@ -288,6 +288,24 @@ describe("installDependencies", () => {
       { cwd: "/tmp" },
     )
   })
+
+  test("should skip and log package names when dryRun is true", async () => {
+    const { execFileAsync } = vi.mocked(await import("./fs"))
+    await installDependencies(["react", "lodash"], { dryRun: true })
+    expect(execFileAsync).not.toHaveBeenCalled()
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would install: react, lodash"),
+    )
+  })
+
+  test("should skip and log without package names when dryRun is true", async () => {
+    const { execFileAsync } = vi.mocked(await import("./fs"))
+    await installDependencies([], { dryRun: true })
+    expect(execFileAsync).not.toHaveBeenCalled()
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would install dependencies"),
+    )
+  })
 })
 
 describe("uninstallDependencies", () => {
@@ -306,6 +324,20 @@ describe("uninstallDependencies", () => {
     execFileAsync.mockClear()
     await uninstallDependencies([], { cwd: "/tmp" })
     expect(execFileAsync).not.toHaveBeenCalled()
+  })
+
+  test("should skip and log when dryRun is true", async () => {
+    const { execFileAsync } = vi.mocked(await import("./fs"))
+    await uninstallDependencies(["react"], { dryRun: true })
+    expect(execFileAsync).not.toHaveBeenCalled()
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would uninstall: react"),
+    )
+  })
+
+  test("should not log when empty and dryRun is true", async () => {
+    await uninstallDependencies([], { dryRun: true })
+    expect(console.log).not.toHaveBeenCalled()
   })
 })
 
@@ -404,6 +436,49 @@ describe("addWorkspace", () => {
       ),
     )
     expect(pkg.workspaces).toHaveLength(1)
+    process.env.npm_config_user_agent = original
+  })
+
+  test("should not create pnpm-workspace.yaml when dryRun is true", async () => {
+    const original = process.env.npm_config_user_agent
+    process.env.npm_config_user_agent = "pnpm/8.0.0"
+    await addWorkspace(tempDir, "packages/**", {}, { dryRun: true })
+    const { existsSync } = await import("fs")
+    expect(existsSync(path.join(tempDir, "pnpm-workspace.yaml"))).toBeFalsy()
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would write:"),
+    )
+    process.env.npm_config_user_agent = original
+  })
+
+  test("should not update existing pnpm-workspace.yaml when dryRun is true", async () => {
+    const original = process.env.npm_config_user_agent
+    process.env.npm_config_user_agent = "pnpm/8.0.0"
+    const { readFileSync } = await import("fs")
+    const YAML = (await import("yamljs")).default
+    const yamlPath = path.join(tempDir, "pnpm-workspace.yaml")
+    const originalContent = YAML.stringify({ packages: ["existing/**"] })
+    writeFileSync(yamlPath, originalContent)
+    await addWorkspace(tempDir, "packages/**", {}, { dryRun: true })
+    expect(readFileSync(yamlPath, "utf-8")).toBe(originalContent)
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would write:"),
+    )
+    process.env.npm_config_user_agent = original
+  })
+
+  test("should not update package.json workspaces when dryRun is true", async () => {
+    const original = process.env.npm_config_user_agent
+    process.env.npm_config_user_agent = ""
+    const pkgPath = path.join(tempDir, "package.json")
+    writeFileSync(pkgPath, JSON.stringify({ name: "test" }))
+    await addWorkspace(tempDir, "packages/**", {}, { dryRun: true })
+    const { readFileSync } = await import("fs")
+    const pkg = JSON.parse(readFileSync(pkgPath, "utf-8"))
+    expect(pkg.workspaces).toBeUndefined()
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would write:"),
+    )
     process.env.npm_config_user_agent = original
   })
 })

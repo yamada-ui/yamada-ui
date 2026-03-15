@@ -34,6 +34,7 @@ import {
 interface Options {
   config: string
   cwd: string
+  dryRun: boolean
   install: boolean
   overwrite: boolean
   sequential: boolean
@@ -51,6 +52,7 @@ export const add = new Command("add")
   .option("-o, --overwrite", "overwrite existing files.", false)
   .option("-s, --sequential", "run tasks sequentially.", false)
   .option("-y, --yes", "skip all confirmation prompts.", false)
+  .option("-n, --dry-run", "preview changes without applying them.", false)
   .option("-i, --install", "install dependencies.")
   .option("--no-install", "do not install dependencies.")
   .option("-f, --format", "format the output files.")
@@ -63,6 +65,7 @@ export const add = new Command("add")
     {
       config: configPath,
       cwd,
+      dryRun,
       format,
       install,
       lint,
@@ -233,9 +236,11 @@ export const add = new Command("add")
 
             return {
               task: async (_, task) => {
-                await generateSources(dirPath, registry, config, targetNames)
+                await generateSources(dirPath, registry, config, targetNames, {
+                  dryRun,
+                })
 
-                task.title = `Generated ${c.cyan(name)}`
+                task.title = `${dryRun ? "Would generate" : "Generated"} ${c.cyan(name)}`
               },
               title: `Generating ${c.cyan(name)}`,
             }
@@ -311,7 +316,10 @@ export const add = new Command("add")
                               targetNames,
                             )
 
-                            await writeFileSafe(targetPath, content, config)
+                            await writeFileSafe(targetPath, content, {
+                              ...config,
+                              dryRun,
+                            })
                           }),
                         )
                       } else if (dirent.name !== REGISTRY_FILE_NAME) {
@@ -329,12 +337,15 @@ export const add = new Command("add")
                           targetNames,
                         )
 
-                        await writeFileSafe(targetPath, content, config)
+                        await writeFileSafe(targetPath, content, {
+                          ...config,
+                          dryRun,
+                        })
                       }
                     }),
                   )
 
-                  task.title = `Updated ${c.cyan(name)}`
+                  task.title = `${dryRun ? "Would update" : "Updated"} ${c.cyan(name)}`
                 },
                 title: `Updating ${c.cyan(name)}`,
               })
@@ -352,9 +363,12 @@ export const add = new Command("add")
 
             content = transformIndex(targetNames, content, config)
 
-            await writeFileSafe(config.paths.ui.index, content, config)
+            await writeFileSafe(config.paths.ui.index, content, {
+              ...config,
+              dryRun,
+            })
 
-            task.title = `Updated ${c.cyan(indexFileName)}`
+            task.title = `${dryRun ? "Would update" : "Updated"} ${c.cyan(indexFileName)}`
           },
           title: `Updating ${c.cyan(indexFileName)}`,
         })
@@ -368,9 +382,12 @@ export const add = new Command("add")
 
             if (config.jsx) content = transformTsToJs(content)
 
-            await writeFileSafe(config.paths.ui.index, content, config)
+            await writeFileSafe(config.paths.ui.index, content, {
+              ...config,
+              dryRun,
+            })
 
-            task.title = `Generated ${c.cyan(indexFileName)}`
+            task.title = `${dryRun ? "Would generate" : "Generated"} ${c.cyan(indexFileName)}`
           },
           title: `Generating ${c.cyan(indexFileName)}`,
         })
@@ -424,10 +441,12 @@ export const add = new Command("add")
             task: async (_, task) => {
               await installDependencies(
                 notInstalledDependencies.map(getPackageNameWithVersion),
-                { cwd: targetPath },
+                { cwd: targetPath, dryRun },
               )
 
-              task.title = "Installed dependencies"
+              task.title = dryRun
+                ? "Would install dependencies"
+                : "Installed dependencies"
             },
             title: "Installing dependencies",
           })

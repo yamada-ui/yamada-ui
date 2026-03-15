@@ -510,4 +510,64 @@ describe("updateFiles", () => {
     expect(installDependencies).not.toHaveBeenCalled()
     expect(result).toStrictEqual({})
   })
+
+  test("should skip file writes and log when dryRun is true", async () => {
+    const config = createConfig(tempDir)
+    const changeMap: ChangeMap = {
+      button: {
+        "index.ts": {
+          diff: [{ added: true, count: 1, removed: false, value: "new" }],
+          local: "old",
+          remote: "new",
+        },
+      },
+    }
+    const dependencyMap: DependencyMap = { add: [], remove: [], update: [] }
+    const registryMap: RegistryMap = {
+      local: {},
+      remote: {
+        button: {
+          section: "components",
+          sources: [{ name: "index.ts", content: "new" }],
+        },
+      },
+    }
+
+    await updateFiles(changeMap, dependencyMap, registryMap, config, {
+      dryRun: true,
+      yes: true,
+    })
+
+    expect(mockWriteFileSafe).not.toHaveBeenCalled()
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would update:"),
+    )
+  })
+
+  test("should log install and uninstall when dryRun is true", async () => {
+    const { installDependencies, uninstallDependencies } =
+      await import("../../utils")
+    const config = createConfig(tempDir)
+    const changeMap: ChangeMap = {}
+    const dependencyMap: DependencyMap = {
+      add: ["new-pkg"],
+      remove: ["old-pkg"],
+      update: [],
+    }
+    const registryMap: RegistryMap = { local: {}, remote: {} }
+
+    await updateFiles(changeMap, dependencyMap, registryMap, config, {
+      dryRun: true,
+      yes: true,
+    })
+
+    expect(installDependencies).not.toHaveBeenCalled()
+    expect(uninstallDependencies).not.toHaveBeenCalled()
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would install: new-pkg"),
+    )
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would uninstall: old-pkg"),
+    )
+  })
 })

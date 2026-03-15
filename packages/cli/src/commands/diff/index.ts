@@ -32,6 +32,7 @@ interface Options {
   config: string
   cwd: string
   detail: boolean
+  dryRun: boolean
   sequential: boolean
   yes: boolean
   install?: boolean
@@ -47,6 +48,7 @@ export const diff = new Command("diff")
   .option("-s, --sequential", "run tasks sequentially.", false)
   .option("-d, --detail", "show detailed changes.", false)
   .option("-y, --yes", "skip all confirmation prompts.", false)
+  .option("-n, --dry-run", "preview changes without applying them.", false)
   .option("-u, --update", "update files when there are file diff.")
   .option("--no-update", "do not update files when there are file diff.")
   .option("-i, --install", "install dependencies when updating files.")
@@ -58,6 +60,7 @@ export const diff = new Command("diff")
       config: configPath,
       cwd,
       detail,
+      dryRun,
       install,
       sequential,
       tag,
@@ -206,7 +209,7 @@ export const diff = new Command("diff")
             dependencyMap,
             registryMap,
             config,
-            { concurrent: !sequential, install, yes },
+            { concurrent: !sequential, dryRun, install, yes },
           )
 
           if (Object.keys(conflictMap).length) {

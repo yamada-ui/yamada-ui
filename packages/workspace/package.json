@@ -10,7 +10,8 @@
     "typetrace": "tsc --noEmit --generateTrace ./trace --incremental false",
     "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
     "lint": "eslint . --max-warnings=0 --cache",
-    "format": "prettier . --ignore-path ../../.prettierignore --check --cache"
+    "format": "prettier . --ignore-path ../../.prettierignore --check --cache",
+    "quality": "pnpm format && pnpm lint && pnpm typecheck"
   },
   "exports": {
     "./eslint": "./src/eslint/index.ts",

@@ -1,8 +1,8 @@
 import type { PropsWithChildren } from "react"
 import { HStack, VStack } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
+import { ExampleMenu } from "@/app/[locale]/(apps)/example-menu"
 import { Hero } from "@/components"
-import { ExampleMenu } from "../example-menu"
 
 interface LayoutProps extends PropsWithChildren {}
 

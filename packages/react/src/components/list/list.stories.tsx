@@ -18,7 +18,7 @@ export const Basic: Story = () => {
   const items = useMemo<List.Item[]>(
     () => [
       { children: "よろしければわたしが喜びのダンスを踊りましょうか！" },
-      { children: "お命頂だい!!!　とうっ!!!" },
+      { children: "お命頂だい!!! とうっ!!!" },
       { children: "う…宇宙一のスピードを誇るオ…オレさまのうしろに……" },
       { children: "オ…オレたちが勝てるわけはなかったはずだ………" },
       { children: "オレは試合場のゴミ拾いみたいなもんかよ…" },
@@ -33,7 +33,7 @@ export const Children: Story = () => {
   return (
     <List.Root>
       <List.Item>よろしければわたしが喜びのダンスを踊りましょうか！</List.Item>
-      <List.Item>お命頂だい!!!　とうっ!!!</List.Item>
+      <List.Item>お命頂だい!!! とうっ!!!</List.Item>
       <List.Item>う…宇宙一のスピードを誇るオ…オレさまのうしろに……</List.Item>
       <List.Item>オ…オレたちが勝てるわけはなかったはずだ………</List.Item>
       <List.Item>オレは試合場のゴミ拾いみたいなもんかよ…</List.Item>
@@ -45,7 +45,7 @@ export const StyleType: Story = () => {
   const items = useMemo<List.Item[]>(
     () => [
       { children: "よろしければわたしが喜びのダンスを踊りましょうか！" },
-      { children: "お命頂だい!!!　とうっ!!!" },
+      { children: "お命頂だい!!! とうっ!!!" },
       { children: "う…宇宙一のスピードを誇るオ…オレさまのうしろに……" },
       { children: "オ…オレたちが勝てるわけはなかったはずだ………" },
       { children: "オレは試合場のゴミ拾いみたいなもんかよ…" },
@@ -68,7 +68,7 @@ export const Gap: Story = () => {
   const items = useMemo<List.Item[]>(
     () => [
       { children: "よろしければわたしが喜びのダンスを踊りましょうか！" },
-      { children: "お命頂だい!!!　とうっ!!!" },
+      { children: "お命頂だい!!! とうっ!!!" },
       { children: "う…宇宙一のスピードを誇るオ…オレさまのうしろに……" },
       { children: "オ…オレたちが勝てるわけはなかったはずだ………" },
       { children: "オレは試合場のゴミ拾いみたいなもんかよ…" },
@@ -87,7 +87,7 @@ export const Icon: Story = () => {
         icon: <CircleCheckIcon color="success" />,
       },
       {
-        children: "お命頂だい!!!　とうっ!!!",
+        children: "お命頂だい!!! とうっ!!!",
         icon: <CircleCheckIcon color="success" />,
       },
       {
@@ -115,7 +115,7 @@ export const Icon: Story = () => {
           よろしければわたしが喜びのダンスを踊りましょうか！
         </List.Item>
         <List.Item icon={<CircleCheckIcon color="success" />}>
-          お命頂だい!!!　とうっ!!!
+          お命頂だい!!! とうっ!!!
         </List.Item>
         <List.Item icon={<CircleCheckIcon color="success" />}>
           う…宇宙一のスピードを誇るオ…オレさまのうしろに……

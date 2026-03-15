@@ -1,6 +1,7 @@
 import * as React from "react"
 
-export const useSafeLayoutEffect = Boolean(globalThis.document)
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+export const useSafeLayoutEffect = globalThis.document
   ? React.useLayoutEffect
   : React.useEffect
 

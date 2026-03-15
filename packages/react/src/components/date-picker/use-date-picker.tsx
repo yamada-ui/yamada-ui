@@ -553,7 +553,7 @@ export const useDatePicker = <
         {
           Backspace: (ev) => {
             if (!value || isDate(value)) return
-            if (!!inputValue.length) return
+            if (inputValue.length) return
 
             if (isArray(value)) {
               ev.preventDefault()

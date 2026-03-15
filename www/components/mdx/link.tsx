@@ -1,5 +1,5 @@
-import type { NextLinkProps } from "../next-link"
-import { NextLink } from "../next-link"
+import type { NextLinkProps } from "@/components/next-link"
+import { NextLink } from "@/components/next-link"
 
 export interface LinkProps extends NextLinkProps {}
 

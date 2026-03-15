@@ -94,8 +94,7 @@ pre-commit:
 
     - name: prettier
       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css}"
-      run: |
-        files=""; for f in {staged_files}; do [ ! -L "$f" ] && files="$files $f"; done; if [ -n "$files" ]; then pnpm prettier $files --write; fi
+      run: pnpm prettier {staged_files} --write
       stage_fixed: true
 
 commit-msg:

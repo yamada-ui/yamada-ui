@@ -16,7 +16,6 @@ catalog:
   "@types/react": ^19.2.14
   "@types/react-dom": ^19.2.3
   "@types/node": ^25.5.0
-  "@next/eslint-plugin-next": ^16.1.6
   "@vitejs/plugin-react": ^4.7.0
   "@faker-js/faker": ^10.3.0
   "@lucide/lab": ^0.1.2

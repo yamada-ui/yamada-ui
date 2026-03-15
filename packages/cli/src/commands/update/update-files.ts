@@ -207,7 +207,7 @@ export async function updateFiles(
               await writeFileSafe(
                 path.resolve(dirPath, REGISTRY_FILE_NAME),
                 JSON.stringify(registry),
-                merge(config, { format: { parser: "json" } }),
+                merge(config, { format: { language: "json" } }),
               )
             } catch {
             } finally {

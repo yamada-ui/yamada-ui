@@ -216,7 +216,7 @@ export const theme = new Command("theme")
                 writeFileSafe(
                   path.resolve(targetPath, REGISTRY_FILE_NAME),
                   JSON.stringify(registry),
-                  merge(config, { format: { parser: "json" } }),
+                  merge(config, { format: { language: "json" } }),
                 ),
               ])
 
@@ -236,7 +236,7 @@ export const theme = new Command("theme")
               await writeFileSafe(
                 targetPath,
                 JSON.stringify(userConfig),
-                merge(config, { format: { parser: "json" } }),
+                merge(config, { format: { language: "json" } }),
               )
 
               task.title = `Updated config`
@@ -281,7 +281,7 @@ export const theme = new Command("theme")
             await writeFileSafe(
               targetPath,
               content,
-              merge(config, { format: { parser: "json" } }),
+              merge(config, { format: { language: "json" } }),
             )
 
             task.title = `Generated ${c.cyan("package.json")}`
@@ -307,7 +307,7 @@ export const theme = new Command("theme")
             await writeFileSafe(
               targetPath,
               content,
-              merge(config, { format: { parser: "json" } }),
+              merge(config, { format: { language: "json" } }),
             )
 
             task.title = `Generated ${c.cyan("tsconfig.json")}`

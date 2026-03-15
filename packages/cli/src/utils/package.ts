@@ -228,7 +228,7 @@ export async function addWorkspace(
           await writeFileSafe(
             targetPath,
             YAML.stringify(json),
-            merge(config, { format: { parser: "yaml" } }),
+            merge(config, { format: { language: "yaml" } }),
           )
         }
       } else {
@@ -237,7 +237,7 @@ export async function addWorkspace(
         await writeFileSafe(
           targetPath,
           content,
-          merge(config, { format: { parser: "yaml" } }),
+          merge(config, { format: { language: "yaml" } }),
         )
       }
 
@@ -257,7 +257,7 @@ export async function addWorkspace(
         await writeFileSafe(
           targetPath,
           content,
-          merge(config, { format: { parser: "json" } }),
+          merge(config, { format: { language: "json" } }),
         )
       }
 

@@ -165,4 +165,157 @@ function App() {
 
 ## スクリプト
 
-###
+### ColorModeScript
+
+[カラーモード](/docs/theming/color-mode)を使用する場合は、正常に動作させるために`body`に`ColorModeScript`を追加する必要があります。
+
+理由は、カラーモードが`localStorage`や`cookies`を用いて実装されており、ページの読み込み時に同期を正しく機能させるためです。
+
+Tanstack StartはSSRをサポートしているため、ストレージには`cookie`を使用することを推奨します。
+
+```tsx title="__root.tsx" {6-8,10-12,15-17,42,43,49-52}
+import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
+import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
+import { TanStackDevtools } from "@tanstack/react-devtools"
+
+import appCss from "../styles.css?url"
+import { ColorModeScript, UIProvider } from "workspaces/ui"
+import { createServerFn } from "@tanstack/react-start"
+import { getRequestHeader } from "@tanstack/react-start/server"
+
+const getCookie = createServerFn({ method: "GET" }).handler(async () => {
+  return getRequestHeader("cookie") ?? ""
+})
+
+export const Route = createRootRoute({
+  loader: async () => ({
+    cookie: await getCookie(),
+  }),
+  head: () => ({
+    meta: [
+      {
+        charSet: "utf-8",
+      },
+      {
+        name: "viewport",
+        content: "width=device-width, initial-scale=1",
+      },
+      {
+        title: "TanStack Start Starter",
+      },
+    ],
+    links: [
+      {
+        rel: "stylesheet",
+        href: appCss,
+      },
+    ],
+  }),
+  shellComponent: RootDocument,
+})
+
+function RootDocument({ children }: { children: React.ReactNode }) {
+  const { cookie } = Route.useLoaderData()
+
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <HeadContent />
+      </head>
+      <body suppressHydrationWarning>
+        <ColorModeScript type="cookie" />
+
+        <UIProvider cookie={cookie}>{children}</UIProvider>
+        <TanStackDevtools
+          config={{
+            position: "bottom-right",
+          }}
+          plugins={[
+            {
+              name: "Tanstack Router",
+              render: <TanStackRouterDevtoolsPanel />,
+            },
+          ]}
+        />
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+```
+
+もし、[コンフィグ](/docs/theming/configuration/overview)の`defaultColorMode`を変更した場合は、`ColorModeScript`に`defaultValue`を設定します。
+
+```tsx title="__roo.tsx" {51}
+import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
+import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
+import { TanStackDevtools } from "@tanstack/react-devtools"
+
+import appCss from "../styles.css?url"
+import { ColorModeScript, UIProvider } from "workspaces/ui"
+import { createServerFn } from "@tanstack/react-start"
+import { getRequestHeader } from "@tanstack/react-start/server"
+import { config } from "@workspace/theme"
+
+const getCookie = createServerFn({ method: "GET" }).handler(async () => {
+  return getRequestHeader("cookie") ?? ""
+})
+
+export const Route = createRootRoute({
+  loader: async () => ({
+    cookie: await getCookie(),
+  }),
+  head: () => ({
+    meta: [
+      {
+        charSet: "utf-8",
+      },
+      {
+        name: "viewport",
+        content: "width=device-width, initial-scale=1",
+      },
+      {
+        title: "TanStack Start Starter",
+      },
+    ],
+    links: [
+      {
+        rel: "stylesheet",
+        href: appCss,
+      },
+    ],
+  }),
+  shellComponent: RootDocument,
+})
+
+function RootDocument({ children }: { children: React.ReactNode }) {
+  const { cookie } = Route.useLoaderData()
+
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <HeadContent />
+      </head>
+      <body suppressHydrationWarning>
+        <ColorModeScript type="cookie" defaultValue={config.defaultColorMode} />
+
+        <UIProvider config={config} cookie={cookie}>
+          {children}
+        </UIProvider>
+        <TanStackDevtools
+          config={{
+            position: "bottom-right",
+          }}
+          plugins={[
+            {
+              name: "Tanstack Router",
+              render: <TanStackRouterDevtoolsPanel />,
+            },
+          ]}
+        />
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+```

@@ -20,8 +20,6 @@ function hasConfigFile(cwd: string, patterns: string[]): boolean {
   return patterns.some((pattern) => existsSync(join(cwd, pattern)))
 }
 
-const BIOME_CONFIGS = ["biome.json", "biome.jsonc"]
-
 const PRETTIER_CONFIGS = [
   ".prettierrc",
   ".prettierrc.json",
@@ -56,13 +54,8 @@ export function detectFormatter(
 ): Exclude<FormatterTool, "auto"> {
   if (tool && tool !== "auto") return tool
 
-  if (hasConfigFile(cwd, BIOME_CONFIGS) || hasDependency(cwd, "@biomejs/biome"))
-    return "biome"
-
   if (hasConfigFile(cwd, PRETTIER_CONFIGS) || hasDependency(cwd, "prettier"))
     return "prettier"
-
-  if (hasDependency(cwd, "oxfmt")) return "oxfmt"
 
   return "prettier"
 }
@@ -73,13 +66,8 @@ export function detectLinter(
 ): Exclude<LinterTool, "auto"> {
   if (tool && tool !== "auto") return tool
 
-  if (hasConfigFile(cwd, BIOME_CONFIGS) || hasDependency(cwd, "@biomejs/biome"))
-    return "biome"
-
   if (hasConfigFile(cwd, ESLINT_CONFIGS) || hasDependency(cwd, "eslint"))
     return "eslint"
-
-  if (hasDependency(cwd, "oxlint")) return "oxlint"
 
   return "eslint"
 }

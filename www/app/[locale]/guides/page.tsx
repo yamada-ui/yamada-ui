@@ -1,8 +1,14 @@
 import type { Metadata } from "next"
-import { Badge, Card, Heading, HStack, Text, VStack } from "@yamada-ui/react"
+import {
+  Badge,
+  Heading,
+  HStack,
+  SimpleGrid,
+  Text,
+  VStack,
+} from "@yamada-ui/react"
 import { getTranslations } from "next-intl/server"
-import { NextLink } from "@/components"
-import { CardGroup } from "@/components/mdx/card"
+import { NextLinkButton } from "@/components"
 import { getGuideCollections } from "@/data/guide"
 import { generateOg } from "@/utils/next"
 
@@ -34,42 +40,38 @@ export default async function Page({ params }: PageProps<"/[locale]/guides">) {
           {t("description")}
         </Text>
       </VStack>
-      <VStack gap="md" w="full">
-        {collections.map(({ collection, guides, title }) => (
-          <VStack key={collection} gap="md" w="full">
-            <Text key={collection} as="h2" fontSize="2xl" fontWeight="bold">
-              {title}
+
+      {collections.map(({ collection, description, guides, title }) => (
+        <VStack key={collection} as="section" gap="md" w="full">
+          <VStack gap="xs">
+            <HStack>
+              <Heading as="h2" size="lg">
+                {title}
+              </Heading>
+              <Badge colorScheme="gray" variant="subtle">
+                {t("guides", { count: guides.length })}
+              </Badge>
+            </HStack>
+            <Text color="fg.muted" fontSize="sm">
+              {description}
             </Text>
-            <CardGroup columns={{ base: 2, md: 1 }} gap="md">
-              <Card.Root key={collection} as="article" variant="outline">
-                <Card.Header>
-                  <HStack>
-                    <Heading as="h2" size="lg" flex="1">
-                      {title}
-                    </Heading>
-                    <Badge colorScheme="primary" variant="subtle">
-                      {t("guides", { count: guides.length })}
-                    </Badge>
-                  </HStack>
-                </Card.Header>
-                <Card.Body as="ul" gap="sm" listStyleType="none" pt="0">
-                  {guides.map((guide) => (
-                    <Text key={guide.slug.join("/")} as="li">
-                      <NextLink
-                        href={`/guides/${guide.slug.slice(1).join("/")}`}
-                        color="fg.emphasized"
-                        fontSize="sm"
-                      >
-                        {guide.title}
-                      </NextLink>
-                    </Text>
-                  ))}
-                </Card.Body>
-              </Card.Root>
-            </CardGroup>
           </VStack>
-        ))}
-      </VStack>
+          <SimpleGrid as="nav" columns={{ base: 2, md: 1 }} gap="md">
+            {guides.map((guide) => (
+              <NextLinkButton
+                key={guide.slug.join("/")}
+                href={`/guides/${guide.slug.slice(1).join("/")}`}
+                variant="outline"
+                color="fg.emphasized"
+                fontWeight="normal"
+                justifyContent="flex-start"
+              >
+                {guide.title}
+              </NextLinkButton>
+            ))}
+          </SimpleGrid>
+        </VStack>
+      ))}
     </VStack>
   )
 }

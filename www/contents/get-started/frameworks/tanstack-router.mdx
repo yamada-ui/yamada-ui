@@ -87,7 +87,7 @@ After installing, add `UIProvider` to the root of your application.
 import ReactDOM from "react-dom/client"
 import { RouterProvider, createRouter } from "@tanstack/react-router"
 import { routeTree } from "./routeTree.gen"
-import { UIProvider } from "workspaces/ui"
+import { UIProvider } from "@workspaces/ui"
 
 const router = createRouter({
   routeTree,
@@ -119,7 +119,7 @@ After adding `UIProvider`, you can use the components in your application.
 
 ```tsx title="index.tsx" {2,7}
 import { createFileRoute } from "@tanstack/react-router"
-import { Button } from "workspaces/ui"
+import { Button } from "@workspaces/ui"
 
 export const Route = createFileRoute("/")({ component: App })
 

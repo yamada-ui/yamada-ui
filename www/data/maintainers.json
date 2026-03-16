@@ -180,18 +180,6 @@
     "x": { "url": "https://x.com/nano2_aloerina" }
   },
   {
-    "name": { "en": "daichi09167", "ja": "daichi09167" },
-    "description": {
-      "en": "Fourth-year Undergraduate Student, frontend Engineer.",
-      "ja": "学部4年生、フロントエンドエンジニア。"
-    },
-    "github": {
-      "id": "daichi09167",
-      "icon": "https://avatars.githubusercontent.com/u/192768429?v=4",
-      "url": "https://github.com/daichi09167"
-    }
-  },
-  {
     "name": { "en": "akazdayo", "ja": "あかず" },
     "description": {
       "en": "Nostr and Nix enthusiast.",

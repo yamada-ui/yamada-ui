@@ -3,9 +3,7 @@ import { useEyeDropper } from "./"
 
 describe("useEyeDropper", () => {
   const defaultEyeDropper =
-    "EyeDropper" in window
-      ? (window as { [key: string]: unknown }).EyeDropper
-      : undefined
+    "EyeDropper" in window ? Reflect.get(window, "EyeDropper") : undefined
   const hasDefaultEyeDropper = "EyeDropper" in window
 
   beforeEach(() => {

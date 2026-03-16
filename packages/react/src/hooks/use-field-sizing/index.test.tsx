@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { render } from "#test"
+import { page, render } from "#test/browser"
 import { useFieldSizing } from "./"
 
 const Component: FC<{ value?: string }> = ({ value }) => {
@@ -14,85 +14,53 @@ const Component: FC<{ value?: string }> = ({ value }) => {
 }
 
 describe("useFieldSizing", () => {
-  beforeEach(() => {
-    vi.spyOn(
-      HTMLSpanElement.prototype,
-      "getBoundingClientRect",
-    ).mockReturnValue({
-      bottom: 0,
-      height: 0,
-      left: 0,
-      right: 0,
-      toJSON: () => ({}),
-      top: 0,
-      width: 100,
-      x: 0,
-      y: 0,
-    })
-  })
-
-  afterEach(() => {
-    vi.restoreAllMocks()
-  })
-
-  test("renders hidden text element with value", () => {
-    const { container } = render(<Component value="hello" />)
+  test("renders hidden text element with value", async () => {
+    const { container } = await render(<Component value="hello" />)
     const span = container.querySelector("span[aria-hidden]")
 
-    expect(span).toBeInTheDocument()
-    expect(span).toHaveTextContent("hello")
-    expect(span).toHaveStyle({
-      opacity: "0",
-      overflow: "hidden",
-      position: "absolute",
-      whiteSpace: "nowrap",
-      zIndex: "-1",
-    })
+    expect(span).toBeInstanceOf(HTMLSpanElement)
+    expect(span!.textContent).toBe("hello")
+    expect(span!.style.opacity).toBe("0")
+    expect(span!.style.overflow).toBe("hidden")
+    expect(span!.style.position).toBe("absolute")
+    expect(span!.style.whiteSpace).toBe("nowrap")
+    expect(span!.style.zIndex).toBe("-1")
   })
 
-  test("uses empty string as default value", () => {
-    const { container } = render(<Component />)
+  test("uses empty string as default value", async () => {
+    const { container } = await render(<Component />)
     const span = container.querySelector("span[aria-hidden]")
 
-    expect(span).toBeInTheDocument()
-    expect(span).toHaveTextContent("")
+    expect(span).toBeInstanceOf(HTMLSpanElement)
+    expect(span!.textContent).toBe("")
   })
 
-  test("sets input width from text bounding rect", () => {
-    const { getByTestId } = render(<Component value="hello" />)
-    const input = getByTestId("input")
+  test("sets input width from text bounding rect", async () => {
+    await render(<Component value="hello" />)
 
-    expect(input.style.width).toBe("100px")
+    const input = page.getByTestId("input")
+    await expect.poll(() => input.element().style.width).not.toBe("")
   })
 
-  test("updates width when value changes", () => {
-    const { getByTestId, rerender } = render(<Component value="hi" />)
+  test("updates width when value changes", async () => {
+    const { rerender } = await render(<Component value="hi" />)
 
-    vi.spyOn(
-      HTMLSpanElement.prototype,
-      "getBoundingClientRect",
-    ).mockReturnValue({
-      bottom: 0,
-      height: 0,
-      left: 0,
-      right: 0,
-      toJSON: () => ({}),
-      top: 0,
-      width: 200,
-      x: 0,
-      y: 0,
-    })
+    const input = page.getByTestId("input")
+    await expect.poll(() => input.element().style.width).not.toBe("")
 
-    rerender(<Component value="hello world" />)
+    const initialWidth = input.element().style.width
 
-    const input = getByTestId("input")
-    expect(input.style.width).toBe("200px")
+    await rerender(<Component value="hello world, this is a longer text" />)
+
+    await expect.poll(() => input.element().style.width).not.toBe(initialWidth)
   })
 
-  test("returns ref and text", () => {
-    const { container, getByTestId } = render(<Component value="test" />)
+  test("returns ref and text", async () => {
+    const { container } = await render(<Component value="test" />)
 
-    expect(getByTestId("input")).toBeInTheDocument()
-    expect(container.querySelector("span[aria-hidden]")).toBeInTheDocument()
+    await expect.element(page.getByTestId("input")).toBeInTheDocument()
+    expect(container.querySelector("span[aria-hidden]")).toBeInstanceOf(
+      HTMLSpanElement,
+    )
   })
 })

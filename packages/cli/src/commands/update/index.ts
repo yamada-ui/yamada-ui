@@ -29,6 +29,7 @@ interface Options {
   install?: boolean
   lint?: boolean
   tag?: string
+  dryRun?: boolean
 }
 
 export const update = new Command("update")
@@ -58,13 +59,17 @@ export const update = new Command("update")
       sequential,
       tag,
       yes,
+      dryRun
     }: Options,
   ) {
     const spinner = ora()
-
+  if (dryRun) {
+          spinner.start(" Running in dry-run mode - no files will be modified");
+          spinner.info("This simulates all file writes, dir operations, and installs");
+        }
     try {
       const { end } = timer()
-
+      
       const packageManager = getPackageManager()
       const { args, command } = packageExecuteCommands(packageManager)
       const prefix = `${command}${args.length ? ` ${args.join(" ")}` : ""}`
@@ -164,7 +169,7 @@ export const update = new Command("update")
           dependencyMap,
           registryMap,
           config,
-          { concurrent: !sequential, force, install, yes },
+          { concurrent: !sequential, force, install, yes, dryRun },
         )
 
         if (Object.keys(conflictMap).length) {

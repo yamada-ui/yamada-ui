@@ -27,6 +27,7 @@ import {
   printDiffFile,
   printDiffFiles,
 } from "./print-diff"
+import { createContext } from "../../context"
 
 interface Options {
   config: string
@@ -37,6 +38,7 @@ interface Options {
   install?: boolean
   tag?: string
   update?: boolean
+  dryRun?: boolean
 }
 
 export const diff = new Command("diff")
@@ -63,10 +65,14 @@ export const diff = new Command("diff")
       tag,
       update,
       yes,
+      dryRun = false,
     }: Options,
   ) {
     const spinner = ora()
-
+  if (dryRun) {
+          spinner.start(" Running in dry-run mode - no files will be modified");
+          spinner.info("This simulates all file writes, dir operations, and installs");
+        }
     try {
       const { end } = timer()
 
@@ -185,12 +191,12 @@ export const diff = new Command("diff")
 
         console.log("---------------------------------")
 
-        const answer = await prompts({
+        const answer = !dryRun ? await prompts({
           type: !yes && isUndefined(update) ? "confirm" : null,
           name: "update",
           initial: true,
           message: c.reset("Do you want to update the files?"),
-        })
+        }) : { update: true }
 
         update ??= answer.update ?? true
 

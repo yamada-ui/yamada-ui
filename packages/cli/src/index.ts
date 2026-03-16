@@ -27,6 +27,7 @@ export function run() {
   const program = new Command("Yamada UI CLI")
     .version(packageJson.version, "-v, --version", "display the version number")
     .usage(`${c.green("<command>")} [options]`)
+    .option("--dry-run", "Simulate the command without making any changes");
 
   program.addCommand(init)
   program.addCommand(add)

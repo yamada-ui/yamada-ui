@@ -21,6 +21,7 @@ import {
   writeFileSafe,
 } from "../../utils"
 import { config } from "./config"
+import { createContext } from "../../context"
 
 const TONES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
 
@@ -277,6 +278,7 @@ interface Options {
   format?: boolean
   lint?: boolean
   out?: string
+  dryRun?: boolean
 }
 
 export const tokens = new Command("tokens")
@@ -292,12 +294,16 @@ export const tokens = new Command("tokens")
   .option("--internal", "generate internal tokens.", false)
   .action(async function (
     inputPath: string | undefined,
-    { config: configPath, cwd, format, internal, lint, out: outPath }: Options,
+    { config: configPath, cwd, format, internal, lint, out: outPath, dryRun }: Options,
   ) {
     const spinner = ora()
-
+if (dryRun) {
+          spinner.start(" Running in dry-run mode - no files will be modified");
+          spinner.info("This simulates all file writes, dir operations, and installs");
+        }
     try {
       const { end } = timer()
+      const ctx = createContext(!!dryRun, spinner);
 
       spinner.start("Validating directory")
 
@@ -345,7 +351,7 @@ export const tokens = new Command("tokens")
         internal,
       })
 
-      await writeFileSafe(
+      await ctx.fs.writeFileSafe(
         outPath,
         content,
         config

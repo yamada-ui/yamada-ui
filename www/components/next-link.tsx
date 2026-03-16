@@ -17,10 +17,10 @@ export interface NextLinkProps extends Omit<
   "as"
 > {}
 
-export const NextLink: FC<NextLinkProps> = ({ href, ...rest }) => {
+export const NextLink: FC<NextLinkProps> = ({ href, children, ...rest }) => {
   return (
     <Link colorScheme="mono" asChild {...rest}>
-      <OriginalLink href={href} />
+      <OriginalLink href={href}>{children}</OriginalLink>
     </Link>
   )
 }

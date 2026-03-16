@@ -1,13 +1,19 @@
-import { renderHook } from "#test"
+import { renderHook } from "#test/browser"
+import { useOS } from "./"
+
+const mockGetWindow =
+  vi.fn<() => undefined | { navigator: { userAgent: string } }>()
+
+vi.mock("../../core", async (importOriginal) => ({
+  ...(await importOriginal<object>()),
+  useEnvironment: () => ({
+    getWindow: mockGetWindow,
+  }),
+}))
 
 describe("useOS", () => {
-  beforeEach(() => {
-    vi.unstubAllGlobals()
-  })
-
   afterEach(() => {
-    vi.doUnmock("../../core")
-    vi.resetModules()
+    mockGetWindow.mockReset()
   })
 
   test.each([
@@ -64,25 +70,17 @@ describe("useOS", () => {
         "Mozilla/5.0 (PlayStation; PlayStation 5/2.26) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15",
     },
   ])("should return $expected", async ({ expected, userAgent }) => {
-    vi.stubGlobal("navigator", { userAgent })
+    mockGetWindow.mockReturnValue({ navigator: { userAgent } })
 
-    const { useOS } = await import("./")
-    const { result } = renderHook(() => useOS())
+    const { result } = await renderHook(() => useOS())
 
     expect(result.current).toBe(expected)
   })
 
   test("returns undetermined when window is undefined", async () => {
-    vi.resetModules()
+    mockGetWindow.mockReturnValue(undefined)
 
-    vi.doMock("../../core", () => ({
-      useEnvironment: () => ({
-        getWindow: () => undefined,
-      }),
-    }))
-
-    const { useOS } = await import("./")
-    const { result } = renderHook(() => useOS())
+    const { result } = await renderHook(() => useOS())
 
     expect(result.current).toBe("undetermined")
   })

@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { render } from "#test"
+import { page, render } from "#test/browser"
 import { useFieldSizing } from "./"
 
 const Component: FC<{ value?: string }> = ({ value }) => {
@@ -35,9 +35,9 @@ describe("useFieldSizing", () => {
     vi.restoreAllMocks()
   })
 
-  test("renders hidden text element with value", () => {
-    const { container } = render(<Component value="hello" />)
-    const span = container.querySelector("span[aria-hidden]")
+  test("renders hidden text element with value", async () => {
+    await render(<Component value="hello" />)
+    const span = document.querySelector("span[aria-hidden]")
 
     expect(span).toBeInTheDocument()
     expect(span).toHaveTextContent("hello")
@@ -50,23 +50,25 @@ describe("useFieldSizing", () => {
     })
   })
 
-  test("uses empty string as default value", () => {
-    const { container } = render(<Component />)
-    const span = container.querySelector("span[aria-hidden]")
+  test("uses empty string as default value", async () => {
+    await render(<Component />)
+    const span = document.querySelector("span[aria-hidden]")
 
     expect(span).toBeInTheDocument()
     expect(span).toHaveTextContent("")
   })
 
-  test("sets input width from text bounding rect", () => {
-    const { getByTestId } = render(<Component value="hello" />)
-    const input = getByTestId("input")
+  test("sets input width from text bounding rect", async () => {
+    await render(<Component value="hello" />)
+    const inputEl = document.querySelector<HTMLInputElement>(
+      "[data-testid='input']",
+    )
 
-    expect(input.style.width).toBe("100px")
+    expect(inputEl?.style.width).toBe("100px")
   })
 
-  test("updates width when value changes", () => {
-    const { getByTestId, rerender } = render(<Component value="hi" />)
+  test("updates width when value changes", async () => {
+    const { rerender } = await render(<Component value="hi" />)
 
     vi.spyOn(
       HTMLSpanElement.prototype,
@@ -83,16 +85,19 @@ describe("useFieldSizing", () => {
       y: 0,
     })
 
-    rerender(<Component value="hello world" />)
+    await rerender(<Component value="hello world" />)
 
-    const input = getByTestId("input")
-    expect(input.style.width).toBe("200px")
+    const inputEl = document.querySelector<HTMLInputElement>(
+      "[data-testid='input']",
+    )
+
+    expect(inputEl?.style.width).toBe("200px")
   })
 
-  test("returns ref and text", () => {
-    const { container, getByTestId } = render(<Component value="test" />)
+  test("returns ref and text", async () => {
+    await render(<Component value="test" />)
 
-    expect(getByTestId("input")).toBeInTheDocument()
-    expect(container.querySelector("span[aria-hidden]")).toBeInTheDocument()
+    await expect.element(page.getByTestId("input")).toBeInTheDocument()
+    expect(document.querySelector("span[aria-hidden]")).toBeInTheDocument()
   })
 })

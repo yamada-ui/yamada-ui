@@ -1,4 +1,4 @@
-import { act, renderHook } from "#test"
+import { renderHook } from "#test/browser"
 import { useLocalStorage } from "./"
 
 describe("useLocalStorage", () => {
@@ -15,24 +15,24 @@ describe("useLocalStorage", () => {
     localStorage.clear()
   })
 
-  test("returns the default value", () => {
-    const { result } = renderHook(() => useLocalStorage({ key }))
+  test("returns the default value", async () => {
+    const { result } = await renderHook(() => useLocalStorage({ key }))
     expect(result.current[0]).toBe("")
   })
 
-  test("returns the default value in the initial state", () => {
-    const { result } = renderHook(() =>
+  test("returns the default value in the initial state", async () => {
+    const { result } = await renderHook(() =>
       useLocalStorage({ key, defaultValue: initialValue }),
     )
     expect(result.current[0]).toBe(initialValue)
   })
 
-  test("sets a value and saves it to localStorage", () => {
-    const { result } = renderHook(() =>
+  test("sets a value and saves it to localStorage", async () => {
+    const { act, result } = await renderHook(() =>
       useLocalStorage({ key, defaultValue: initialValue }),
     )
 
-    act(() => {
+    await act(() => {
       result.current[1]("newValue")
     })
 
@@ -40,12 +40,12 @@ describe("useLocalStorage", () => {
     expect(result.current[0]).toBe("newValue")
   })
 
-  test("sets a value and callback function", () => {
-    const { result } = renderHook(() =>
+  test("sets a value and callback function", async () => {
+    const { act, result } = await renderHook(() =>
       useLocalStorage({ key, defaultValue: initialValue }),
     )
 
-    act(() => {
+    await act(() => {
       result.current[1]((prev) => "prev-" + prev)
     })
 
@@ -53,12 +53,12 @@ describe("useLocalStorage", () => {
     expect(result.current[0]).toBe("prev-initialValue")
   })
 
-  test("removes a value from localStorage", () => {
-    const { result } = renderHook(() =>
+  test("removes a value from localStorage", async () => {
+    const { act, result } = await renderHook(() =>
       useLocalStorage({ key, defaultValue: initialValue }),
     )
 
-    act(() => {
+    await act(() => {
       result.current[2]()
     })
 
@@ -66,12 +66,12 @@ describe("useLocalStorage", () => {
     expect(result.current[0]).toBe(initialValue)
   })
 
-  test("updates the value when a storage event occurs", () => {
-    const { result } = renderHook(() =>
+  test("updates the value when a storage event occurs", async () => {
+    const { act, result } = await renderHook(() =>
       useLocalStorage({ key, defaultValue: initialValue }),
     )
 
-    act(() => {
+    await act(() => {
       window.dispatchEvent(
         new StorageEvent("storage", {
           key,
@@ -84,10 +84,10 @@ describe("useLocalStorage", () => {
     expect(result.current[0]).toBe("updatedValue")
   })
 
-  test("uses a custom serialize function", () => {
+  test("uses a custom serialize function", async () => {
     const serialize = (value: any) => `serialized-${value}`
 
-    const { result } = renderHook(() =>
+    const { act, result } = await renderHook(() =>
       useLocalStorage({
         key,
         defaultValue: initialValue,
@@ -95,21 +95,21 @@ describe("useLocalStorage", () => {
       }),
     )
 
-    act(() => {
+    await act(() => {
       result.current[1]("testValue")
     })
 
     expect(localStorage.getItem(key)).toBe("serialized-testValue")
   })
 
-  test("uses a custom deserialize function", () => {
+  test("uses a custom deserialize function", async () => {
     const deserialize = (value: string | undefined) => {
       return `deserialized-${value}`
     }
 
     localStorage.setItem(key, initialValue)
 
-    const { result } = renderHook(() => {
+    const { result } = await renderHook(() => {
       return useLocalStorage({
         key,
         deserialize,
@@ -119,35 +119,35 @@ describe("useLocalStorage", () => {
     expect(result.current[0]).toBe("deserialized-initialValue")
   })
 
-  test("serializeJSON throws an error when serialization fails", () => {
-    const { result } = renderHook(() =>
+  test("serializeJSON throws an error when serialization fails", async () => {
+    const { act, result } = await renderHook(() =>
       useLocalStorage({
         key,
         defaultValue: problematicValue,
       }),
     )
 
-    expect(() => {
+    await expect(
       act(() => {
         result.current[1](problematicValue)
-      })
-    }).toThrow(
+      }),
+    ).rejects.toThrow(
       "useLocalStorage use-local-storage: Failed to serialize the value",
     )
   })
 
-  test("deserializeJSON returns input if JSON parsing fails", () => {
+  test("deserializeJSON returns input if JSON parsing fails", async () => {
     localStorage.setItem(key, corruptedJSON)
 
-    const { result } = renderHook(() => useLocalStorage({ key }))
+    const { result } = await renderHook(() => useLocalStorage({ key }))
 
     expect(result.current[0]).toBe(corruptedJSON)
   })
 
-  test("deserializeJSON returns input if empty", () => {
+  test("deserializeJSON returns input if empty", async () => {
     localStorage.setItem(key, "")
 
-    const { result } = renderHook(() => useLocalStorage({ key }))
+    const { result } = await renderHook(() => useLocalStorage({ key }))
 
     expect(result.current[0]).toBe("")
   })

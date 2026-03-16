@@ -1,4 +1,4 @@
-import { render, screen } from "#test"
+import { page, render } from "#test/browser"
 import { useHover } from "./"
 
 describe("useHover", () => {
@@ -12,20 +12,23 @@ describe("useHover", () => {
       return <span ref={ref}>{hovered ? hoveredText : notHoveredText}</span>
     }
 
-    const { user } = render(<Text />)
+    const { user } = await render(<Text />)
 
-    const initialTextComponent = await screen.findByText(notHoveredText)
-    expect(initialTextComponent).toBeInTheDocument()
-    expect(screen.queryByText(hoveredText)).toBeNull()
+    await expect.element(page.getByText(notHoveredText)).toBeInTheDocument()
+    await expect
+      .element(page.getByText(/^Hovered$/).query())
+      .not.toBeInTheDocument()
 
-    await user.hover(initialTextComponent)
-    const hoveredTextComponent = await screen.findByText(hoveredText)
-    expect(hoveredTextComponent).toBeInTheDocument()
-    expect(screen.queryByText(notHoveredText)).toBeNull()
+    await user.hover(page.getByText(notHoveredText))
+    await expect.element(page.getByText(/^Hovered$/)).toBeInTheDocument()
+    await expect
+      .element(page.getByText(/^Not hovered$/).query())
+      .not.toBeInTheDocument()
 
-    await user.unhover(hoveredTextComponent)
-    const unHoveredTextComponent = await screen.findByText(notHoveredText)
-    expect(unHoveredTextComponent).toBeInTheDocument()
-    expect(screen.queryByText(hoveredText)).toBeNull()
+    await user.unhover(page.getByText(/^Hovered$/))
+    await expect.element(page.getByText(notHoveredText)).toBeInTheDocument()
+    await expect
+      .element(page.getByText(/^Hovered$/).query())
+      .not.toBeInTheDocument()
   })
 })

@@ -4,12 +4,12 @@ import type { FormatOptions } from "./prettier"
 import { execFile } from "child_process"
 import fs, { existsSync, statSync } from "fs"
 import {
+  glob,
   mkdir,
   writeFile as originalWriteFile,
   readdir,
   readFile,
 } from "fs/promises"
-import { glob } from "glob"
 import path from "path"
 import c from "picocolors"
 import { promisify } from "util"
@@ -99,7 +99,7 @@ export function timer() {
 
 export async function getFiles(pattern: string) {
   const files: { [key: string]: string } = {}
-  const [dirPath] = await glob(pattern)
+  const [dirPath] = await Array.fromAsync(glob(pattern))
 
   const dirents = await readdir(dirPath!, { withFileTypes: true })
 

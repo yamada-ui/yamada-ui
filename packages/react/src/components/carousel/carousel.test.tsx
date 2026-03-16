@@ -296,47 +296,4 @@ describe("<Carousel />", () => {
     await expect.element(page.getByText("dot-0")).toBeInTheDocument()
     await expect.element(page.getByText("dot-1")).toBeInTheDocument()
   })
-
-  describe.todo("use Timers", () => {
-    beforeEach(() => {
-      vi.useFakeTimers()
-    })
-
-    afterEach(() => {
-      vi.useRealTimers()
-    })
-
-    test("should render correctly when using autoplay", async () => {
-      const delay = 500
-      const node = <TestComponent autoplay delay={delay} />
-      const { rerender } = await render(node)
-      await expect
-        .element(page.getByText("Slide 1"))
-        .toHaveAttribute("data-selected")
-      await vi.advanceTimersByTimeAsync(delay)
-      await rerender(node)
-      await expect
-        .element(page.getByText("Slide 2"))
-        .toHaveAttribute("data-selected")
-      await vi.advanceTimersByTimeAsync(delay)
-      await rerender(node)
-      await expect
-        .element(page.getByText("Slide 3"))
-        .toHaveAttribute("data-selected")
-    })
-
-    test("should stop autoplay on mouse hover", async () => {
-      const node = <TestComponent autoplay delay={500} />
-      const { rerender, user } = await render(node)
-      await expect
-        .element(page.getByText("Slide 1"))
-        .toHaveAttribute("data-selected")
-      await user.hover(page.getByTestId("carousel"))
-      await vi.advanceTimersByTimeAsync(2000)
-      await rerender(node)
-      await expect
-        .element(page.getByText("Slide 1"))
-        .toHaveAttribute("data-selected")
-    })
-  })
 })

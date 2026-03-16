@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useRef, useState } from "react"
-import { noop } from "../../utils"
+import { noop, wait } from "../../utils"
 import { Button } from "../button"
 import { Card } from "../card"
 import { Heading } from "../heading"
@@ -17,11 +17,6 @@ const meta: Meta<typeof InfiniteScrollArea> = {
 }
 
 export default meta
-
-const wait = async (ms: number) =>
-  new Promise((resolve) => {
-    setTimeout(resolve, ms)
-  })
 
 export const Basic: Story = () => {
   const [count, setCount] = useState<number>(50)

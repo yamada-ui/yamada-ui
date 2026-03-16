@@ -10,8 +10,8 @@ import {
 } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import { useMemo } from "react"
+import { NextLink } from "@/components/next-link"
 import styles from "@/data/styles.json"
-import { NextLink } from "../next-link"
 
 function createRow(prop: string, { as, docs, properties, token }: StyleConfig) {
   let value: ReactNode

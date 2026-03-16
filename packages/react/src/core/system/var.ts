@@ -124,11 +124,11 @@ export function createVars(
       ): [ParsedValue, Exclude<ParsedValue, undefined>] {
         const relatedToken = [token.split(".")[0], value].join(".")
 
-        if (token === relatedToken) return [, value]
+        if (token === relatedToken) return [undefined, value]
 
         const targetToken = tokens[relatedToken] ?? prevTokens?.[relatedToken]
 
-        if (!targetToken) return [, value]
+        if (!targetToken) return [undefined, value]
 
         const { reference, variable } = tokenToVar(relatedToken)
 

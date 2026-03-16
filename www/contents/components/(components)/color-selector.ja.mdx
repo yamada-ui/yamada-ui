@@ -169,6 +169,74 @@ return <ColorSelector.Root maxW="md" value={value} onChange={setValue} />
 
 <PropsTable name="color-selector" />
 
+## アクセシビリティ
+
+`ColorSelector`は、色選択のアクセシビリティを確保するために適切なARIA属性を使用しています。
+
+### キーボード操作
+
+| キー                     | 説明                                                                                       | 状態 |
+| ------------------------ | ------------------------------------------------------------------------------------------ | ---- |
+| `ArrowRight`, `ArrowUp`  | スライダー内である場合は`step`の値に基づいて値を増加します。                               | -    |
+| `ArrowLeft`, `ArrowDown` | スライダー内である場合は`step`の値に基づいて値を減少します。                               | -    |
+| `Home`                   | 色相スライダーまたは透明スライダー内である場合は`min`の値を設定します。                    | -    |
+| `End`                    | 色相スライダーまたは透明スライダー内である場合は`max`の値を設定します。                    | -    |
+| `PageUp`                 | 色相スライダーまたは透明スライダー内である場合は`min`と`max`の値に基づいて値を増加します。 | -    |
+| `PageDown`               | 色相スライダーまたは透明スライダー内である場合は`min`と`max`の値に基づいて値を減少します。 | -    |
+
+### ARIAロールと属性
+
+| コンポーネントと要素                     | ロールと属性           | 使い方                                                                                                                                                                         |
+| ---------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ColorSelector.EyeDropper`               | `role="button"`        | ボタンであることを示します。                                                                                                                                                   |
+|                                          | `aria-disabled`        | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                                                                         |
+|                                          | `aria-label`           | `"色を選択する"`を設定します。                                                                                                                                                 |
+|                                          | `aria-disabled`        | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                                         |
+| `ColorSelector.SaturationSlider > input` | `aria-hidden`          | 要素をアクセシビリティツリーから除外します。                                                                                                                                   |
+|                                          | `aria-describedby`     | `Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
+| `ColorSelector.SaturationSlider > div`   | `role="slider"`        | スライダーであることを示します。                                                                                                                                               |
+|                                          | `aria-label`           | `"彩度と明度のつまみ"`を設定します。                                                                                                                                           |
+|                                          | `aria-describedby`     | `Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
+|                                          | `aria-roledescription` | `"2D slider"`を設定します。                                                                                                                                                    |
+|                                          | `aria-valuemin`        | `min`の値を設定します。デフォルトは`0`です。                                                                                                                                   |
+|                                          | `aria-valuemax`        | `max`の値を設定します。デフォルトは`100`です。                                                                                                                                 |
+|                                          | `aria-valuenow`        | 現在の値を設定します。                                                                                                                                                         |
+|                                          | `aria-valuetext`       | `"彩度 18%, 明度 18%"`のように、現在の値を設定します。                                                                                                                         |
+|                                          | `aria-readonly`        | `readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                         |
+|                                          | `aria-disabled`        | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                                         |
+| `ColorSelector.HueSlider > input`        | `aria-hidden`          | 要素をアクセシビリティツリーから除外します。                                                                                                                                   |
+|                                          | `aria-describedby`     | `Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
+| `ColorSelector.HueSlider > div`          | `role="slider"`        | スライダーであることを示します。                                                                                                                                               |
+|                                          | `aria-label`           | `"スライダーのつまみ"`を設定します。                                                                                                                                           |
+|                                          | `aria-describedby`     | `Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
+|                                          | `aria-orientation`     | `orientation`の値に基づいて`"horizontal"`または`"vertical"`を設定します。デフォルトは`"horizontal"`です。                                                                      |
+|                                          | `aria-valuemin`        | `min`の値を設定します。デフォルトは`0`です。                                                                                                                                   |
+|                                          | `aria-valuemax`        | `max`の値を設定します。デフォルトは`360`です。                                                                                                                                 |
+|                                          | `aria-valuenow`        | 現在の値を設定します。                                                                                                                                                         |
+|                                          | `aria-valuetext`       | `"18°, 赤"`のように、現在の値を設定します。                                                                                                                                    |
+|                                          | `aria-readonly`        | `readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                         |
+|                                          | `aria-disabled`        | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                                         |
+| `ColorSelector.AlphaSlider > input`      | `aria-hidden`          | 要素をアクセシビリティツリーから除外します。                                                                                                                                   |
+|                                          | `aria-describedby`     | `Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
+| `ColorSelector.AlphaSlider > div`        | `role="slider"`        | スライダーであることを示します。                                                                                                                                               |
+|                                          | `aria-label`           | `"スライダーのつまみ"`を設定します。                                                                                                                                           |
+|                                          | `aria-describedby`     | `Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
+|                                          | `aria-orientation`     | `orientation`の値に基づいて`"horizontal"`または`"vertical"`を設定します。デフォルトは`"horizontal"`です。                                                                      |
+|                                          | `aria-valuemin`        | `min`の値を設定します。デフォルトは`0`です。                                                                                                                                   |
+|                                          | `aria-valuemax`        | `max`の値を設定します。デフォルトは`1`です。                                                                                                                                   |
+|                                          | `aria-valuenow`        | 現在の値を設定します。                                                                                                                                                         |
+|                                          | `aria-valuetext`       | `"18%"`のように、現在の値を設定します。                                                                                                                                        |
+|                                          | `aria-readonly`        | `readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                         |
+|                                          | `aria-disabled`        | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                                         |
+| `ColorSelector.ColorSwatchGroupLabel`    | `id`                   | `ColorSelector.ColorSwatchGroup`に関連付けられます。                                                                                                                           |
+| `ColorSelector.ColorSwatchGroup`         | `role="listbox"`       | リストボックスであることを示します。                                                                                                                                           |
+|                                          | `aria-labelledby`      | `ColorSelector.ColorSwatchGroupLabel`に関連付けられます。                                                                                                                      |
+| `ColorSelector.ColorSwatchItem`          | `role="option"`        | オプションであることを示します。                                                                                                                                               |
+|                                          | `aria-label`           | 現在の値を設定します。                                                                                                                                                         |
+|                                          | `aria-roledescription` | `"color swatch"`を設定します。                                                                                                                                                 |
+|                                          | `aria-selected`        | `value`と同じ値の場合は、`"true"`が設定されます。                                                                                                                              |
+|                                          | `aria-disabled`        | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                                                                         |
+
 ## 類似のコンポーネント
 
 <Similar name="color-selector" />

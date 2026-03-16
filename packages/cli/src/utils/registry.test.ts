@@ -202,28 +202,22 @@ describe("fetchRegistry", () => {
 
   test("should throw on 404", async () => {
     mockFetch.mockResolvedValueOnce({ ok: false, status: 404 })
-    await expect(fetchRegistry("nonexistent")).rejects.toThrowError("not found")
+    await expect(fetchRegistry("nonexistent")).rejects.toThrow("not found")
   })
 
   test("should throw on 403", async () => {
     mockFetch.mockResolvedValueOnce({ ok: false, status: 403 })
-    await expect(fetchRegistry("secret")).rejects.toThrowError(
-      "do not have access",
-    )
+    await expect(fetchRegistry("secret")).rejects.toThrow("do not have access")
   })
 
   test("should throw on 500", async () => {
     mockFetch.mockResolvedValueOnce({ ok: false, status: 500 })
-    await expect(fetchRegistry("broken")).rejects.toThrowError(
-      "Service unavailable",
-    )
+    await expect(fetchRegistry("broken")).rejects.toThrow("Service unavailable")
   })
 
   test("should throw on unknown error", async () => {
     mockFetch.mockResolvedValueOnce({ ok: false, status: 418 })
-    await expect(fetchRegistry("teapot")).rejects.toThrowError(
-      "An error occurred",
-    )
+    await expect(fetchRegistry("teapot")).rejects.toThrow("An error occurred")
   })
 
   test("should handle hooks URL pattern", async () => {

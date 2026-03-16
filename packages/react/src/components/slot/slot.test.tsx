@@ -38,7 +38,7 @@ describe("<Slot />", () => {
           <span>B</span>
         </Slot>,
       ),
-    ).toThrowError(/React.Children.only/)
+    ).toThrow(/React.Children.only/)
 
     spy.mockRestore()
   })
@@ -130,7 +130,7 @@ describe("<Slot />", () => {
           <span>B</span>
         </Button>,
       ),
-    ).toThrowError(/React.Children.only/)
+    ).toThrow(/React.Children.only/)
 
     spy.mockRestore()
   })

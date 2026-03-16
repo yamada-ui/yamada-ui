@@ -135,9 +135,10 @@ export const useNativePopover = ({
     [refs.setReference],
   )
 
-  const getPositionerProps: PropGetter = useCallback(getPopperProps, [
-    getPopperProps,
-  ])
+  const getPositionerProps: PropGetter = useCallback(
+    (props) => getPopperProps(props),
+    [getPopperProps],
+  )
 
   const getContentProps: PropGetter = useCallback(
     ({

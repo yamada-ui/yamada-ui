@@ -9,6 +9,7 @@ describe("index", () => {
     expect(typeof utils.createdDom).toBe("function")
     expect(typeof utils.isMouseEvent).toBe("function")
     expect(typeof utils.noop).toBe("function")
+    expect(typeof utils.wait).toBe("function")
     expect(typeof utils.isRtl).toBe("function")
     expect(typeof utils.omitObject).toBe("function")
     expect(typeof utils.isNumber).toBe("function")

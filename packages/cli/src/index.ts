@@ -9,7 +9,7 @@ import { init } from "./commands/init"
 import { theme } from "./commands/theme"
 import { tokens } from "./commands/tokens"
 import { update } from "./commands/update"
-
+import { view } from "./commands/view"
 export function run() {
   checkNode("22")
 
@@ -34,7 +34,7 @@ export function run() {
   program.addCommand(diff)
   program.addCommand(theme)
   program.addCommand(tokens)
-
+  program.addCommand(view)
   program.parse()
 }
 

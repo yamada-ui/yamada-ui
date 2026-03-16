@@ -1,0 +1,66 @@
+---
+title: "テーマカラーのカスタマイズ"
+description: "Yamada UIのテーマにカスタムカラートークンを追加・上書きする方法"
+publishedAt: "2026-03-14"
+collection: "theming"
+---
+
+## カラーの拡張
+
+`extendTheme` を使って、Yamada UIのカラーシステムに統合されるカスタムカラートークンを追加できます。
+
+```tsx title="theme/index.ts"
+import { extendTheme } from "@yamada-ui/react"
+
+const theme = extendTheme({
+  colors: {
+    brand: {
+      50: "#e6f2ff",
+      100: "#b3d9ff",
+      200: "#80bfff",
+      300: "#4da6ff",
+      400: "#1a8cff",
+      500: "#0073e6",
+      600: "#005bb4",
+      700: "#004282",
+      800: "#002a50",
+      900: "#00121f",
+    },
+  },
+})
+
+export default theme
+```
+
+## カスタムカラーの使用
+
+定義したカスタムカラーは、カラートークンを受け付けるすべての場所で参照できます。
+
+```tsx
+import { Button, Text } from "@yamada-ui/react"
+
+function Example() {
+  return (
+    <>
+      <Button colorScheme="brand">ブランドボタン</Button>
+      <Text color="brand.500">ブランドカラーのテキスト</Text>
+    </>
+  )
+}
+```
+
+## デフォルトカラーの上書き
+
+`primary` などの既存カラートークンを上書きすることで、全コンポーネントのデフォルトアクセントカラーを変更できます。
+
+```tsx title="theme/index.ts"
+import { extendTheme } from "@yamada-ui/react"
+
+const theme = extendTheme({
+  colors: {
+    primary: "#0073e6",
+  },
+})
+
+export default theme
+```

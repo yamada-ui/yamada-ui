@@ -1,0 +1,79 @@
+---
+title: "外部ライブラリのスタイリング"
+description: "Yamada UIのスタイルシステムを使ってサードパーティコンポーネントをスタイリングする方法"
+publishedAt: "2026-03-14"
+collection: "styling"
+---
+
+## `sx` Propの使用
+
+外部コンポーネントをラップする際、`Box` コンポーネントと `sx` propを使ってYamada UIのスタイルをサードパーティの要素に適用できます。
+
+```tsx
+import { Box } from "@yamada-ui/react"
+import { SomeExternalComponent } from "some-library"
+
+function Example() {
+  return (
+    <Box
+      sx={{
+        ".external-class": {
+          color: "primary",
+          fontSize: "md",
+          padding: "md",
+        },
+      }}
+    >
+      <SomeExternalComponent />
+    </Box>
+  )
+}
+```
+
+## CSS変数によるテーマトークンの活用
+
+CSS変数を通じて、Yamada UIのテーマトークンを外部ライブラリに渡すことができます。
+
+```tsx title="layout.tsx"
+import { Box } from "@yamada-ui/react"
+
+function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <Box
+      css={{
+        "--external-bg": "{colors.bg}",
+        "--external-text": "{colors.fg}",
+        "--external-radius": "{radii.md}",
+      }}
+    >
+      {children}
+    </Box>
+  )
+}
+```
+
+外部ライブラリ側でこれらの変数を参照できます:
+
+```css
+.external-component {
+  background: var(--external-bg);
+  color: var(--external-text);
+  border-radius: var(--external-radius);
+}
+```
+
+## スタイルのリセット
+
+外部ライブラリのスタイルがYamada UIと競合する場合、スタイルを分離できます。
+
+```tsx
+import { Box } from "@yamada-ui/react"
+
+function IsolatedSection() {
+  return (
+    <Box all="unset">
+      {/* 外部コンポーネントのスタイルがYamada UIのリセットに影響されません */}
+    </Box>
+  )
+}
+```

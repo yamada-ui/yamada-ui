@@ -1,0 +1,79 @@
+---
+title: "Styling External Libraries"
+description: "How to style third-party components using Yamada UI's style system"
+publishedAt: "2026-03-14"
+collection: "styling"
+---
+
+## Using the `sx` Prop
+
+When wrapping external components, use the `Box` component with the `sx` prop to apply Yamada UI styles to third-party elements.
+
+```tsx
+import { Box } from "@yamada-ui/react"
+import { SomeExternalComponent } from "some-library"
+
+function Example() {
+  return (
+    <Box
+      sx={{
+        ".external-class": {
+          color: "primary",
+          fontSize: "md",
+          padding: "md",
+        },
+      }}
+    >
+      <SomeExternalComponent />
+    </Box>
+  )
+}
+```
+
+## Using Theme Tokens in CSS Variables
+
+You can pass Yamada UI's theme tokens to external libraries via CSS variables.
+
+```tsx title="layout.tsx"
+import { Box } from "@yamada-ui/react"
+
+function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <Box
+      css={{
+        "--external-bg": "{colors.bg}",
+        "--external-text": "{colors.fg}",
+        "--external-radius": "{radii.md}",
+      }}
+    >
+      {children}
+    </Box>
+  )
+}
+```
+
+The external library can then reference these variables:
+
+```css
+.external-component {
+  background: var(--external-bg);
+  color: var(--external-text);
+  border-radius: var(--external-radius);
+}
+```
+
+## Resetting Styles
+
+If an external library's styles conflict with Yamada UI, you can isolate them using `StyleResetProvider`.
+
+```tsx
+import { Box } from "@yamada-ui/react"
+
+function IsolatedSection() {
+  return (
+    <Box all="unset">
+      {/* External component styles won't be affected by Yamada UI resets */}
+    </Box>
+  )
+}
+```

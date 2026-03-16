@@ -1,0 +1,66 @@
+---
+title: "Customizing Theme Colors"
+description: "How to add and override color tokens in your Yamada UI theme"
+publishedAt: "2026-03-14"
+collection: "theming"
+---
+
+## Extending Colors
+
+Use `extendTheme` to add custom color tokens that integrate with Yamada UI's color system.
+
+```tsx title="theme/index.ts"
+import { extendTheme } from "@yamada-ui/react"
+
+const theme = extendTheme({
+  colors: {
+    brand: {
+      50: "#e6f2ff",
+      100: "#b3d9ff",
+      200: "#80bfff",
+      300: "#4da6ff",
+      400: "#1a8cff",
+      500: "#0073e6",
+      600: "#005bb4",
+      700: "#004282",
+      800: "#002a50",
+      900: "#00121f",
+    },
+  },
+})
+
+export default theme
+```
+
+## Using Custom Colors
+
+Once defined, you can reference your custom colors anywhere that accepts a color token.
+
+```tsx
+import { Button, Text } from "@yamada-ui/react"
+
+function Example() {
+  return (
+    <>
+      <Button colorScheme="brand">Brand Button</Button>
+      <Text color="brand.500">Branded text</Text>
+    </>
+  )
+}
+```
+
+## Overriding Default Colors
+
+You can also override existing color tokens like `primary` to change the default accent across all components.
+
+```tsx title="theme/index.ts"
+import { extendTheme } from "@yamada-ui/react"
+
+const theme = extendTheme({
+  colors: {
+    primary: "#0073e6",
+  },
+})
+
+export default theme
+```

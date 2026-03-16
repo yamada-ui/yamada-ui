@@ -2,6 +2,7 @@ import type { FC } from "react"
 import type { UseFocusOnMouseDownProps } from "./"
 import { page, render } from "#test/browser"
 import { useRef, useState } from "react"
+import { isSafari } from "../../utils"
 import { useFocusOnPointerDown, useFocusOnShow } from "./"
 
 vi.mock("../../utils", async (importOriginal) => {

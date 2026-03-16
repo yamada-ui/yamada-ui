@@ -5,12 +5,14 @@ import ja from "./guide-map.ja.json"
 
 export interface GuideCollection {
   collection: string
+  description: string
   guides: Guide[]
   title: string
 }
 
 interface GuideMap {
   collection: string
+  description: string
   title: string
 }
 

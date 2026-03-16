@@ -1,34 +1,34 @@
-import { act, renderHook, waitFor } from "#test"
+import { renderHook } from "#test/browser"
 import { usePopper, usePopperProps } from "."
 
 describe("usePopper", () => {
-  test("should return default refs and props getters", () => {
-    const { result } = renderHook(() => usePopper())
+  test("should return default refs and props getters", async () => {
+    const { result } = await renderHook(() => usePopper())
 
     expect(result.current.refs).toBeDefined()
     expect(typeof result.current.getReferenceProps).toBe("function")
     expect(typeof result.current.getPopperProps).toBe("function")
   })
 
-  test("should handle offset as an array [mainAxis, crossAxis]", () => {
+  test("should handle offset as an array [mainAxis, crossAxis]", async () => {
     const offset: [number, number] = [10, 20]
-    const { result } = renderHook(() => usePopper({ offset }))
+    const { result } = await renderHook(() => usePopper({ offset }))
 
     expect(result.current.refs).toBeDefined()
   })
 
-  test("should handle gutter as a number when offset is not provided", () => {
-    const { result } = renderHook(() => usePopper({ gutter: 16 }))
+  test("should handle gutter as a number when offset is not provided", async () => {
+    const { result } = await renderHook(() => usePopper({ gutter: 16 }))
 
     expect(result.current.refs).toBeDefined()
   })
 
-  test("should use custom whileElementsMounted function", () => {
+  test("should use custom whileElementsMounted function", async () => {
     const customWhileMounted = vi.fn(() => () => {
       /* noop */
     })
 
-    renderHook(() =>
+    await renderHook(() =>
       usePopper({
         whileElementsMounted: customWhileMounted,
       }),
@@ -37,16 +37,16 @@ describe("usePopper", () => {
     expect(customWhileMounted).toBeDefined()
   })
 
-  test("should fallback to autoUpdate when whileElementsMounted is not provided", () => {
-    const { result } = renderHook(() =>
+  test("should fallback to autoUpdate when whileElementsMounted is not provided", async () => {
+    const { result } = await renderHook(() =>
       usePopper({ autoUpdate: true, whileElementsMounted: undefined }),
     )
 
     expect(result.current.refs).toBeDefined()
   })
 
-  test("should handle all feature flags being false", () => {
-    const { result } = renderHook(() =>
+  test("should handle all feature flags being false", async () => {
+    const { result } = await renderHook(() =>
       usePopper({
         autoUpdate: false,
         flip: false,
@@ -59,8 +59,8 @@ describe("usePopper", () => {
     expect(result.current.refs).toBeDefined()
   })
 
-  test("should handle undefined props in getters", () => {
-    const { result } = renderHook(() => usePopper())
+  test("should handle undefined props in getters", async () => {
+    const { result } = await renderHook(() => usePopper())
 
     const popperProps = result.current.getPopperProps()
     const refProps = result.current.getReferenceProps()
@@ -70,7 +70,9 @@ describe("usePopper", () => {
   })
 
   test("should execute matchWidth apply function", async () => {
-    const { result } = renderHook(() => usePopper({ matchWidth: true }))
+    const { act, result } = await renderHook(() =>
+      usePopper({ matchWidth: true }),
+    )
     const referenceEl = document.createElement("div")
     const floatingEl = document.createElement("div")
 
@@ -85,23 +87,21 @@ describe("usePopper", () => {
       width: 200,
     } as DOMRect)
 
-    act(() => {
+    await act(() => {
       result.current.refs.setReference(referenceEl)
       result.current.refs.setFloating(floatingEl)
     })
 
-    await waitFor(() => {
-      expect(floatingEl.style.minWidth).toBe("200px")
-    })
+    await expect.poll(() => floatingEl.style.minWidth).toBe("200px")
   })
 
-  test("should include custom middleware when provided", () => {
+  test("should include custom middleware when provided", async () => {
     const customMiddleware = {
       name: "custom",
       fn: ({ x, y }: { x: number; y: number }) => ({ x, y }),
     }
 
-    const { result } = renderHook(() =>
+    const { result } = await renderHook(() =>
       usePopper({
         middleware: [customMiddleware],
       }),
@@ -110,21 +110,21 @@ describe("usePopper", () => {
     expect(result.current.refs).toBeDefined()
   })
 
-  test("should return autoUpdate when autoUpdateProp is true", () => {
-    const { result } = renderHook(() => usePopper({ autoUpdate: true }))
+  test("should return autoUpdate when autoUpdateProp is true", async () => {
+    const { result } = await renderHook(() => usePopper({ autoUpdate: true }))
 
     expect(result.current.refs).toBeDefined()
   })
 
-  test("should handle matchWidth: true and set style to undefined", () => {
-    const { result } = renderHook(() => usePopper({ matchWidth: true }))
+  test("should handle matchWidth: true and set style to undefined", async () => {
+    const { result } = await renderHook(() => usePopper({ matchWidth: true }))
     const popperProps = result.current.getPopperProps()
 
     expect(popperProps.style?.minWidth).toBeUndefined()
   })
 
-  test("should merge external ref in getReferenceProps", () => {
-    const { result } = renderHook(() => usePopper())
+  test("should merge external ref in getReferenceProps", async () => {
+    const { result } = await renderHook(() => usePopper())
     const externalRef = { current: null }
 
     const props = result.current.getReferenceProps({
@@ -134,8 +134,8 @@ describe("usePopper", () => {
     expect(props.ref).toBeDefined()
   })
 
-  test("should merge custom styles and refs in getPopperProps", () => {
-    const { result } = renderHook(() => usePopper())
+  test("should merge custom styles and refs in getPopperProps", async () => {
+    const { result } = await renderHook(() => usePopper())
     const customStyle = { backgroundColor: "red" }
     const externalRef = { current: null }
 
@@ -149,7 +149,7 @@ describe("usePopper", () => {
     expect(props.ref).toBeDefined()
   })
 
-  test("should correctly split popper props using usePopperProps", () => {
+  test("should correctly split popper props using usePopperProps", async () => {
     const props = {
       children: "test",
       color: "red",
@@ -157,7 +157,7 @@ describe("usePopper", () => {
       placement: "bottom" as const,
     }
 
-    const { result } = renderHook(() => usePopperProps(props))
+    const { result } = await renderHook(() => usePopperProps(props))
     const [popper, rest] = result.current
 
     expect(popper).toHaveProperty("placement", "bottom")
@@ -166,13 +166,15 @@ describe("usePopper", () => {
     expect(rest).toHaveProperty("children", "test")
   })
 
-  test("should omit specified keys in usePopperProps", () => {
+  test("should omit specified keys in usePopperProps", async () => {
     const props = {
       gutter: 8,
       placement: "top" as const,
     }
 
-    const { result } = renderHook(() => usePopperProps(props, ["placement"]))
+    const { result } = await renderHook(() =>
+      usePopperProps(props, ["placement"]),
+    )
     const [popper] = result.current
 
     expect(popper).not.toHaveProperty("placement")

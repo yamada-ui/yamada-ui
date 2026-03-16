@@ -1,14 +1,17 @@
 import type { PackageNameWithVersion, UserConfig } from "../../index.type"
 import { isObject, isUndefined, merge } from "@yamada-ui/utils"
 import boxen from "boxen"
+import { exec } from "child_process"
 import { Command } from "commander"
 import { existsSync } from "fs"
+import { readdir, readFile } from "fs/promises"
 import { Listr } from "listr2"
 import ora from "ora"
 import path from "path"
 import c from "picocolors"
 import prompts from "prompts"
 import { rimraf } from "rimraf"
+import { promisify } from "util"
 import {
   CONFIG_FILE_NAME,
   DEFAULT_CONFIG,
@@ -41,6 +44,8 @@ import {
   writeFileSafe,
 } from "../../utils"
 
+const execAsync = promisify(exec)
+
 interface Options {
   config: string
   cwd: string
@@ -55,6 +60,59 @@ interface Options {
   packageName?: string
   src?: boolean
   tag?: string
+}
+
+async function getWorkspaces(cwd: string): Promise<string[]> {
+  let workspacePatterns: string[] = []
+
+  const pnpmWorkspacePath = path.join(cwd, "pnpm-workspace.yaml")
+  if (existsSync(pnpmWorkspacePath)) {
+    const content = await readFile(pnpmWorkspacePath, "utf-8")
+    const matches = Array.from(content.matchAll(/^\s*- ['"]?([^'"]+)['"]?/gm))
+    if (matches.length > 0) {
+      workspacePatterns = matches.map((m) => m[1]!.trim())
+    }
+  } else {
+    const packageJsonPath = path.join(cwd, "package.json")
+    if (existsSync(packageJsonPath)) {
+      const pkg = JSON.parse(await readFile(packageJsonPath, "utf-8"))
+      if (Array.isArray(pkg.workspaces)) {
+        workspacePatterns = pkg.workspaces
+      } else if (
+        pkg.workspaces?.packages &&
+        Array.isArray(pkg.workspaces.packages)
+      ) {
+        workspacePatterns = pkg.workspaces.packages
+      }
+    }
+  }
+
+  if (workspacePatterns.length === 0) return []
+
+  const actualWorkspaces: string[] = []
+  for (const pattern of workspacePatterns) {
+    if (pattern.endsWith("/*")) {
+      const baseDir = pattern.replace("/*", "")
+      const fullBaseDir = path.join(cwd, baseDir)
+      if (existsSync(fullBaseDir)) {
+        const dirents = await readdir(fullBaseDir, { withFileTypes: true })
+        for (const dirent of dirents) {
+          if (dirent.isDirectory()) {
+            const workspacePath = path.join(baseDir, dirent.name)
+            if (existsSync(path.join(cwd, workspacePath, "package.json"))) {
+              actualWorkspaces.push(workspacePath)
+            }
+          }
+        }
+      }
+    } else {
+      if (existsSync(path.join(cwd, pattern, "package.json"))) {
+        actualWorkspaces.push(pattern)
+      }
+    }
+  }
+
+  return actualWorkspaces
 }
 
 export const init = new Command("init")
@@ -177,13 +235,14 @@ export const init = new Command("init")
       src ??= answer.src ?? true
       lint ??= answer.lint ?? true
       format ??= answer.format ?? true
+
       // eslint-disable-next-line no-control-regex
       outdir = (answer.outdir ?? "").replace(/\x17/g, "").trim()
       outdir ||= monorepo ? DEFAULT_PATH.ui.monorepo : DEFAULT_PATH.ui.polyrepo
+
       // eslint-disable-next-line no-control-regex
       packageName = (answer.packageName ?? "").replace(/\x17/g, "").trim()
       packageName ||= DEFAULT_PACKAGE_NAME.ui
-
       if (monorepo) config.monorepo = monorepo
       if (jsx) config.jsx = jsx
 
@@ -527,25 +586,69 @@ export const init = new Command("init")
       if (monorepo) {
         const packageManager = getPackageManager()
         const args = packageAddArgs(packageManager)
+        const installCommand = `${packageManager} ${args.join(" ")} "${packageName}@workspace:*"`
 
-        console.log("")
-        console.log(
-          boxen(
-            [
-              "Run",
-              c.cyan(
-                `${packageManager} ${args.join(" ")} "${packageName}@workspace:*"`,
-              ),
-              "in your application.",
-            ].join(" "),
-            {
-              borderColor: "yellow",
-              borderStyle: "round",
-              padding: 1,
-              textAlignment: "center",
-            },
-          ),
-        )
+        const workspaces = await getWorkspaces(cwd)
+
+        if (workspaces.length === 0) {
+          console.log("")
+          console.log(
+            boxen(
+              ["Run", c.cyan(installCommand), "in your application."].join(" "),
+              {
+                borderColor: "yellow",
+                borderStyle: "round",
+                padding: 1,
+                textAlignment: "center",
+              },
+            ),
+          )
+        } else {
+          if (yes) {
+            console.log(`\nRun the following commands in your applications:\n`)
+            workspaces.forEach((ws) => {
+              console.log(c.cyan(`cd ${ws} && ${installCommand}`))
+            })
+            console.log("")
+          } else {
+            console.log("")
+            const { selectedWorkspaces } = await prompts({
+              type: "multiselect",
+              name: "selectedWorkspaces",
+              choices: workspaces.map((ws) => ({ title: ws, value: ws })),
+              instructions: false,
+              message: `Which workspaces would you like to add "${packageName}" to? (Press <space> to toggle)`,
+            })
+
+            if (selectedWorkspaces && selectedWorkspaces.length > 0) {
+              spinner.start("Installing UI package in selected workspaces")
+
+              try {
+                for (const ws of selectedWorkspaces) {
+                  await execAsync(installCommand, { cwd: path.join(cwd, ws) })
+                }
+                spinner.succeed("Installation complete")
+
+                console.log(
+                  `\nAdded "${packageName}@workspace:*" to the following workspaces:\n`,
+                )
+                selectedWorkspaces.forEach((ws: string) => {
+                  console.log(c.cyan(`cd ${ws} && ${installCommand}`))
+                })
+                console.log("")
+              } catch (error) {
+                spinner.fail("Failed to install packages in workspaces.")
+                console.error(c.red(String(error)))
+              }
+            } else {
+              console.log(
+                c.yellow(
+                  "\nNo workspaces selected. Skipping automatic installation.\n",
+                ),
+              )
+            }
+          }
+        }
       }
 
       end()

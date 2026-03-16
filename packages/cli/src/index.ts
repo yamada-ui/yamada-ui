@@ -35,6 +35,7 @@ export function run() {
   program.addCommand(theme)
   program.addCommand(tokens)
   program.addCommand(view)
+
   program.parse()
 }
 

@@ -84,12 +84,11 @@ bun add "@workspaces/ui@workspace:*"
 インストール後、アプリケーションのルートに`UIProvider`を追加します。
 ハイドレーションエラーを抑制するために、`html`と`body`に`suppressHydrationWarning`を`true`に設定します。
 
-```tsx title="__root.tsx" {6,38,39}
+```tsx title="__root.tsx" {5,27,31,32}
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
 import { TanStackDevtools } from "@tanstack/react-devtools"
 
-import appCss from "../styles.css?url"
 import { UIProvider } from "@workspaces/ui"
 
 export const Route = createRootRoute({
@@ -104,12 +103,6 @@ export const Route = createRootRoute({
       },
       {
         title: "TanStack Start Starter",
-      },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
       },
     ],
   }),
@@ -171,12 +164,11 @@ function App() {
 
 Tanstack StartはSSRをサポートしているため、ストレージには`cookie`を使用することを推奨します。
 
-```tsx title="__root.tsx" {6-8,10-12,15-17,42,50,52}
+```tsx title="__root.tsx" {5-7,9-11,14-16,35,43,45}
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
 import { TanStackDevtools } from "@tanstack/react-devtools"
 
-import appCss from "../styles.css?url"
 import { ColorModeScript, UIProvider } from "@workspaces/ui"
 import { createServerFn } from "@tanstack/react-start"
 import { getRequestHeader } from "@tanstack/react-start/server"
@@ -200,12 +192,6 @@ export const Route = createRootRoute({
       },
       {
         title: "TanStack Start Starter",
-      },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
       },
     ],
   }),
@@ -244,12 +230,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 もし、[コンフィグ](/docs/theming/configuration/overview)の`defaultColorMode`を変更した場合は、`ColorModeScript`に`defaultValue`を設定します。
 
-```tsx title="__root.tsx" {51}
+```tsx title="__root.tsx" {44}
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
 import { TanStackDevtools } from "@tanstack/react-devtools"
 
-import appCss from "../styles.css?url"
 import { ColorModeScript, UIProvider } from "@workspaces/ui"
 import { createServerFn } from "@tanstack/react-start"
 import { getRequestHeader } from "@tanstack/react-start/server"
@@ -274,12 +259,6 @@ export const Route = createRootRoute({
       },
       {
         title: "TanStack Start Starter",
-      },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
       },
     ],
   }),
@@ -324,12 +303,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 テーマスキームは`localStorage`や`cookies`を用いて実装されており、`ThemeSchemeScript`を追加することでページの読み込み時に同期を正しく機能させることができます。
 
-```tsx title="__root.tsx" {6-8,10-12,15-17,42,50,52}
+```tsx title="__root.tsx" {5-7,9-11,14-16,35,43,45}
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
 import { TanStackDevtools } from "@tanstack/react-devtools"
 
-import appCss from "../styles.css?url"
 import { ThemeSchemeScript, UIProvider } from "@workspaces/ui"
 import { createServerFn } from "@tanstack/react-start"
 import { getRequestHeader } from "@tanstack/react-start/server"
@@ -353,12 +331,6 @@ export const Route = createRootRoute({
       },
       {
         title: "TanStack Start Starter",
-      },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
       },
     ],
   }),
@@ -397,12 +369,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 もし、[コンフィグ](/docs/theming/configuration/overview)の`defaultThemeScheme`を変更した場合は、`ThemeSchemeScript`に`defaultValue`を設定します。
 
-```tsx title="__root.tsx" {51}
+```tsx title="__root.tsx" {44}
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
 import { TanStackDevtools } from "@tanstack/react-devtools"
 
-import appCss from "../styles.css?url"
 import { ThemeSchemeScript, UIProvider } from "@workspaces/ui"
 import { createServerFn } from "@tanstack/react-start"
 import { getRequestHeader } from "@tanstack/react-start/server"
@@ -427,12 +398,6 @@ export const Route = createRootRoute({
       },
       {
         title: "TanStack Start Starter",
-      },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
       },
     ],
   }),

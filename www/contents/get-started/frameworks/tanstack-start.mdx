@@ -84,12 +84,11 @@ bun add "@workspaces/ui@workspace:*"
 After installing, add `UIProvider` to the root of your application.
 To suppress hydration errors, add `suppressHydrationWarning` to the `html` and `body` tags.
 
-```tsx title="__root.tsx" {6,38,39}
+```tsx title="__root.tsx" {5,27,31,32}
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
 import { TanStackDevtools } from "@tanstack/react-devtools"
 
-import appCss from "../styles.css?url"
 import { UIProvider } from "@workspaces/ui"
 
 export const Route = createRootRoute({
@@ -104,12 +103,6 @@ export const Route = createRootRoute({
       },
       {
         title: "TanStack Start Starter",
-      },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
       },
     ],
   }),
@@ -171,12 +164,11 @@ This is because color mode is implemented using `localStorage` or `cookies`, and
 
 TanStack Start supports SSR, so we recommend using `cookie` for storage.
 
-```tsx title="__root.tsx" {6-8,10-12,15-17,42,50,52}
+```tsx title="__root.tsx" {5-7,9-11,14-16,35,43,45}
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
 import { TanStackDevtools } from "@tanstack/react-devtools"
 
-import appCss from "../styles.css?url"
 import { ColorModeScript, UIProvider } from "@workspaces/ui"
 import { createServerFn } from "@tanstack/react-start"
 import { getRequestHeader } from "@tanstack/react-start/server"
@@ -200,12 +192,6 @@ export const Route = createRootRoute({
       },
       {
         title: "TanStack Start Starter",
-      },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
       },
     ],
   }),
@@ -244,12 +230,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 If you change the `defaultColorMode` in your [config](/docs/theming/configuration/overview), set the `defaultValue` prop on `ColorModeScript`.
 
-```tsx title="__root.tsx" {51}
+```tsx title="__root.tsx" {44}
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
 import { TanStackDevtools } from "@tanstack/react-devtools"
 
-import appCss from "../styles.css?url"
 import { ColorModeScript, UIProvider } from "@workspaces/ui"
 import { createServerFn } from "@tanstack/react-start"
 import { getRequestHeader } from "@tanstack/react-start/server"
@@ -274,12 +259,6 @@ export const Route = createRootRoute({
       },
       {
         title: "TanStack Start Starter",
-      },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
       },
     ],
   }),
@@ -324,12 +303,11 @@ To use [theme switching](/docs/theming/switching-themes), you need to add `Theme
 
 This is because theme switching is implemented using `localStorage` or `cookies`, and adding the script ensures proper synchronization when the page loads.
 
-```tsx title="__root.tsx" {6-8,10-12,15-17,42,50,52}
+```tsx title="__root.tsx" {5-7,9-11,14-16,35,43,45}
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
 import { TanStackDevtools } from "@tanstack/react-devtools"
 
-import appCss from "../styles.css?url"
 import { ThemeSchemeScript, UIProvider } from "@workspaces/ui"
 import { createServerFn } from "@tanstack/react-start"
 import { getRequestHeader } from "@tanstack/react-start/server"
@@ -353,12 +331,6 @@ export const Route = createRootRoute({
       },
       {
         title: "TanStack Start Starter",
-      },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
       },
     ],
   }),
@@ -397,12 +369,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 If you change the `defaultThemeScheme` in your [config](/docs/theming/configuration/overview), set the `defaultValue` prop on `ThemeSchemeScript`.
 
-```tsx title="__root.tsx" {51}
+```tsx title="__root.tsx" {44}
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
 import { TanStackDevtools } from "@tanstack/react-devtools"
 
-import appCss from "../styles.css?url"
 import { ThemeSchemeScript, UIProvider } from "@workspaces/ui"
 import { createServerFn } from "@tanstack/react-start"
 import { getRequestHeader } from "@tanstack/react-start/server"
@@ -427,12 +398,6 @@ export const Route = createRootRoute({
       },
       {
         title: "TanStack Start Starter",
-      },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
       },
     ],
   }),

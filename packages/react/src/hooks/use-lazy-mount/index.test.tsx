@@ -1,6 +1,6 @@
 import type { FC } from "react"
 import type { UseLazyMountProps } from "./"
-import { render } from "#test"
+import { page, render } from "#test/browser"
 import { useState } from "react"
 import { useLazyMount } from "./"
 
@@ -25,69 +25,79 @@ const ToggleComponent: FC<Omit<UseLazyMountProps, "mounted">> = (props) => {
 }
 
 describe("useLazyMount", () => {
-  test("renders children when lazy is false", () => {
-    const { getByTestId } = render(
+  test("renders children when lazy is false", async () => {
+    await render(
       <Component lazy={false} mounted={false}>
         <span>content</span>
       </Component>,
     )
 
-    expect(getByTestId("container")).toHaveTextContent("content")
+    await expect
+      .element(page.getByTestId("container"))
+      .toHaveTextContent("content")
   })
 
-  test("renders children when mounted is true", () => {
-    const { getByTestId } = render(
+  test("renders children when mounted is true", async () => {
+    await render(
       <Component lazy mounted>
         <span>content</span>
       </Component>,
     )
 
-    expect(getByTestId("container")).toHaveTextContent("content")
+    await expect
+      .element(page.getByTestId("container"))
+      .toHaveTextContent("content")
   })
 
-  test("returns null when lazy is true and mounted is false", () => {
-    const { getByTestId } = render(
+  test("returns null when lazy is true and mounted is false", async () => {
+    await render(
       <Component lazy mounted={false}>
         <span>content</span>
       </Component>,
     )
 
-    expect(getByTestId("container")).toBeEmptyDOMElement()
+    await expect.element(page.getByTestId("container")).toBeEmptyDOMElement()
   })
 
   test("keeps mounted content with keepMounted behavior", async () => {
-    const { getByTestId, user } = render(
+    const { user } = await render(
       <ToggleComponent lazy lazyBehavior="keepMounted">
         <span>content</span>
       </ToggleComponent>,
     )
 
-    expect(getByTestId("container")).toBeEmptyDOMElement()
+    await expect.element(page.getByTestId("container")).toBeEmptyDOMElement()
 
-    await user.click(getByTestId("toggle"))
+    await user.click(page.getByTestId("toggle"))
 
-    expect(getByTestId("container")).toHaveTextContent("content")
+    await expect
+      .element(page.getByTestId("container"))
+      .toHaveTextContent("content")
 
-    await user.click(getByTestId("toggle"))
+    await user.click(page.getByTestId("toggle"))
 
-    expect(getByTestId("container")).toHaveTextContent("content")
+    await expect
+      .element(page.getByTestId("container"))
+      .toHaveTextContent("content")
   })
 
   test("unmounts content with unmount behavior", async () => {
-    const { getByTestId, user } = render(
+    const { user } = await render(
       <ToggleComponent lazy lazyBehavior="unmount">
         <span>content</span>
       </ToggleComponent>,
     )
 
-    expect(getByTestId("container")).toBeEmptyDOMElement()
+    await expect.element(page.getByTestId("container")).toBeEmptyDOMElement()
 
-    await user.click(getByTestId("toggle"))
+    await user.click(page.getByTestId("toggle"))
 
-    expect(getByTestId("container")).toHaveTextContent("content")
+    await expect
+      .element(page.getByTestId("container"))
+      .toHaveTextContent("content")
 
-    await user.click(getByTestId("toggle"))
+    await user.click(page.getByTestId("toggle"))
 
-    expect(getByTestId("container")).toBeEmptyDOMElement()
+    await expect.element(page.getByTestId("container")).toBeEmptyDOMElement()
   })
 })

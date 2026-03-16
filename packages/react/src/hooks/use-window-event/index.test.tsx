@@ -1,4 +1,4 @@
-import { a11y, renderHook } from "#test"
+import { a11y, renderHook } from "#test/browser"
 import { useWindowEvent } from "./"
 import { Basic } from "./index.stories"
 
@@ -7,11 +7,13 @@ describe("useWindowEvent", () => {
     await a11y(<Basic />)
   })
 
-  test("adds and removes an event listener to the window", () => {
+  test("adds and removes an event listener to the window", async () => {
     const eventType = "resize"
     const handler = vi.fn()
 
-    const { unmount } = renderHook(() => useWindowEvent(eventType, handler))
+    const { unmount } = await renderHook(() =>
+      useWindowEvent(eventType, handler),
+    )
     window.dispatchEvent(new Event(eventType))
     expect(handler).toHaveBeenCalledTimes(1)
 

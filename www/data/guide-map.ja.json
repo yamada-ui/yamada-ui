@@ -1,0 +1,22 @@
+[
+  {
+    "collection": "overview",
+    "title": "概要"
+  },
+  {
+    "collection": "get-started",
+    "title": "はじめる"
+  },
+  {
+    "collection": "styling",
+    "title": "スタイリング"
+  },
+  {
+    "collection": "theming",
+    "title": "テーマ"
+  },
+  {
+    "collection": "components",
+    "title": "コンポーネント"
+  }
+]

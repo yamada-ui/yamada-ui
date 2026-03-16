@@ -1,0 +1,22 @@
+[
+  {
+    "collection": "overview",
+    "title": "Overview"
+  },
+  {
+    "collection": "get-started",
+    "title": "Getting Started"
+  },
+  {
+    "collection": "styling",
+    "title": "Styling"
+  },
+  {
+    "collection": "theming",
+    "title": "Theming"
+  },
+  {
+    "collection": "components",
+    "title": "Components"
+  }
+]

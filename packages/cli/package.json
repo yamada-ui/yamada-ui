@@ -55,7 +55,7 @@
     "commander": "^14.0.3",
     "diff": "^8.0.3",
     "esbuild": "^0.27.4",
-    "eslint": "^9.39.4",
+    "eslint": "^10.0.3",
     "glob": "^13.0.6",
     "https-proxy-agent": "^8.0.0",
     "listr2": "^10.2.1",

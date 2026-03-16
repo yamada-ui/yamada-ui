@@ -1,5 +1,10 @@
 import type { ObjectEncodingOptions } from "fs"
-import type { FormatterTool, LinterTool } from "./toolchain"
+import type {
+  FormatterOptions,
+  FormatterTool,
+  LinterOptions,
+  LinterTool,
+} from "./toolchain"
 import { execFile } from "child_process"
 import fs, { existsSync, statSync } from "fs"
 import {
@@ -34,13 +39,11 @@ export async function isWriteable(directory: string) {
 
 export interface WriteFileOptions extends ObjectEncodingOptions {
   cwd?: string
-  format?: {
-    configPath?: null | string
+  format?: FormatterOptions & {
     enabled?: boolean
-    language?: string
     tool?: FormatterTool
   }
-  lint?: {
+  lint?: LinterOptions & {
     enabled?: boolean
     tool?: LinterTool
   }

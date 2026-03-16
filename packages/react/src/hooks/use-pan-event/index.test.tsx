@@ -1,161 +1,124 @@
 import type { FC } from "react"
 import type { PanEventProps } from "./"
-import { act, fireEvent, render } from "#test"
+import { page, render } from "#test/browser"
 import { vi } from "vitest"
 import { usePanEvent } from "./"
 
-const setup = (props: PanEventProps = {}) => {
+const setup = async (props: PanEventProps = {}) => {
   const Component: FC = () => {
     const [ref, getProps] = usePanEvent<HTMLDivElement>(props)
 
     return <div data-testid="target" {...getProps({ ref })} />
   }
 
-  const utils = render(<Component />)
-  const target = utils.getByTestId("target")
+  await render(<Component />)
+  const target = page.getByTestId("target")
 
-  return { ...utils, target }
+  return { target }
 }
 
-const createPointerEvent = (
+const dispatchPointerEvent = (
   type: string,
   options: PointerEventInit & { clientX?: number; clientY?: number } = {},
 ) => {
-  return new PointerEvent(type, {
-    bubbles: true,
-    cancelable: true,
-    clientX: options.clientX ?? 0,
-    clientY: options.clientY ?? 0,
-    ...options,
-  })
+  window.dispatchEvent(
+    new PointerEvent(type, {
+      bubbles: true,
+      cancelable: true,
+      clientX: options.clientX ?? 0,
+      clientY: options.clientY ?? 0,
+      ...options,
+    }),
+  )
+}
+
+const pointerDown = (
+  locator: ReturnType<typeof page.getByTestId>,
+  options: { clientX?: number; clientY?: number; isPrimary?: boolean } = {},
+) => {
+  const el = locator.element()
+  if (el instanceof HTMLElement) {
+    el.dispatchEvent(
+      new PointerEvent("pointerdown", {
+        bubbles: true,
+        cancelable: true,
+        clientX: options.clientX ?? 0,
+        clientY: options.clientY ?? 0,
+        isPrimary: options.isPrimary,
+      }),
+    )
+  }
 }
 
 describe("usePanEvent", () => {
-  test("calls onStart when pointer down occurs", () => {
+  test("calls onStart when pointer down occurs", async () => {
     const onStart = vi.fn()
-    const { target } = setup({ onStart })
+    const { target } = await setup({ onStart })
 
-    act(() => {
-      fireEvent.pointerDown(target, {
-        clientX: 10,
-        clientY: 20,
-      })
-    })
+    pointerDown(target, { clientX: 10, clientY: 20 })
 
     expect(onStart).toHaveBeenCalledTimes(1)
   })
 
-  test("calls onMove when pointer moves beyond threshold", () => {
+  test("calls onMove when pointer moves beyond threshold", async () => {
     const onMove = vi.fn()
-    const { target } = setup({ onMove })
+    const { target } = await setup({ onMove })
 
-    act(() => {
-      fireEvent.pointerDown(target, {
-        clientX: 0,
-        clientY: 0,
-      })
-    })
-
-    act(() => {
-      window.dispatchEvent(
-        createPointerEvent("pointermove", { clientX: 10, clientY: 10 }),
-      )
-    })
+    pointerDown(target, { clientX: 0, clientY: 0 })
+    dispatchPointerEvent("pointermove", { clientX: 10, clientY: 10 })
 
     expect(onMove).toHaveBeenCalledTimes(1)
   })
 
-  test("does not call onMove when pointer moves within threshold", () => {
+  test("does not call onMove when pointer moves within threshold", async () => {
     const onMove = vi.fn()
-    const { target } = setup({ threshold: 10, onMove })
+    const { target } = await setup({ threshold: 10, onMove })
 
-    act(() => {
-      fireEvent.pointerDown(target, {
-        clientX: 0,
-        clientY: 0,
-      })
-    })
-
-    act(() => {
-      window.dispatchEvent(
-        createPointerEvent("pointermove", { clientX: 1, clientY: 1 }),
-      )
-    })
+    pointerDown(target, { clientX: 0, clientY: 0 })
+    dispatchPointerEvent("pointermove", { clientX: 1, clientY: 1 })
 
     expect(onMove).not.toHaveBeenCalled()
   })
 
-  test("calls onEnd when pointer up occurs", () => {
+  test("calls onEnd when pointer up occurs", async () => {
     const onEnd = vi.fn()
-    const { target } = setup({ onEnd })
+    const { target } = await setup({ onEnd })
 
-    act(() => {
-      fireEvent.pointerDown(target, {
-        clientX: 0,
-        clientY: 0,
-      })
-    })
-
-    act(() => {
-      window.dispatchEvent(
-        createPointerEvent("pointerup", { clientX: 5, clientY: 5 }),
-      )
-    })
+    pointerDown(target, { clientX: 0, clientY: 0 })
+    dispatchPointerEvent("pointerup", { clientX: 5, clientY: 5 })
 
     expect(onEnd).toHaveBeenCalledTimes(1)
   })
 
-  test("calls onEnd when pointer cancel occurs", () => {
+  test("calls onEnd when pointer cancel occurs", async () => {
     const onEnd = vi.fn()
-    const { target } = setup({ onEnd })
+    const { target } = await setup({ onEnd })
 
-    act(() => {
-      fireEvent.pointerDown(target, {
-        clientX: 0,
-        clientY: 0,
-      })
-    })
-
-    act(() => {
-      window.dispatchEvent(
-        createPointerEvent("pointercancel", { clientX: 5, clientY: 5 }),
-      )
-    })
+    pointerDown(target, { clientX: 0, clientY: 0 })
+    dispatchPointerEvent("pointercancel", { clientX: 5, clientY: 5 })
 
     expect(onEnd).toHaveBeenCalledTimes(1)
   })
 
-  test("always moves when threshold is 0", () => {
+  test("always moves when threshold is 0", async () => {
     const onMove = vi.fn()
-    const { target } = setup({ threshold: 0, onMove })
+    const { target } = await setup({ threshold: 0, onMove })
 
-    act(() => {
-      fireEvent.pointerDown(target, {
-        clientX: 0,
-        clientY: 0,
-      })
-    })
-
-    act(() => {
-      window.dispatchEvent(
-        createPointerEvent("pointermove", { clientX: 0, clientY: 0 }),
-      )
-    })
+    pointerDown(target, { clientX: 0, clientY: 0 })
+    dispatchPointerEvent("pointermove", { clientX: 0, clientY: 0 })
 
     expect(onMove).toHaveBeenCalledTimes(1)
   })
 
-  test("does not trigger onStart for multi-touch events", () => {
+  test("does not trigger onStart for multi-touch events", async () => {
     const onStart = vi.fn()
-    const { target } = setup({ onStart })
+    const { target } = await setup({ onStart })
 
-    act(() => {
-      fireEvent.pointerDown(target, {
-        clientX: 0,
-        clientY: 0,
-        // Simulate multi-touch by setting touches length > 1
-        isPrimary: false,
-      })
+    pointerDown(target, {
+      clientX: 0,
+      clientY: 0,
+      // Simulate multi-touch by setting isPrimary to false
+      isPrimary: false,
     })
 
     // The hook checks isMultiTouchEvent which looks at touches.length
@@ -164,117 +127,67 @@ describe("usePanEvent", () => {
     expect(onStart).toHaveBeenCalledTimes(1)
   })
 
-  test("cleans up listeners after pointer up", () => {
+  test("cleans up listeners after pointer up", async () => {
     const onMove = vi.fn()
     const onEnd = vi.fn()
-    const { target } = setup({ onEnd, onMove })
+    const { target } = await setup({ onEnd, onMove })
 
-    act(() => {
-      fireEvent.pointerDown(target, {
-        clientX: 0,
-        clientY: 0,
-      })
-    })
-
-    act(() => {
-      window.dispatchEvent(
-        createPointerEvent("pointerup", { clientX: 5, clientY: 5 }),
-      )
-    })
+    pointerDown(target, { clientX: 0, clientY: 0 })
+    dispatchPointerEvent("pointerup", { clientX: 5, clientY: 5 })
 
     expect(onEnd).toHaveBeenCalledTimes(1)
 
     // After cleanup, further pointermove should not trigger onMove
-    act(() => {
-      window.dispatchEvent(
-        createPointerEvent("pointermove", { clientX: 20, clientY: 20 }),
-      )
-    })
+    dispatchPointerEvent("pointermove", { clientX: 20, clientY: 20 })
 
     expect(onMove).not.toHaveBeenCalled()
   })
 
-  test("cleans up listeners after pointer cancel", () => {
+  test("cleans up listeners after pointer cancel", async () => {
     const onMove = vi.fn()
     const onEnd = vi.fn()
-    const { target } = setup({ onEnd, onMove })
+    const { target } = await setup({ onEnd, onMove })
 
-    act(() => {
-      fireEvent.pointerDown(target, {
-        clientX: 0,
-        clientY: 0,
-      })
-    })
-
-    act(() => {
-      window.dispatchEvent(
-        createPointerEvent("pointercancel", { clientX: 5, clientY: 5 }),
-      )
-    })
+    pointerDown(target, { clientX: 0, clientY: 0 })
+    dispatchPointerEvent("pointercancel", { clientX: 5, clientY: 5 })
 
     expect(onEnd).toHaveBeenCalledTimes(1)
 
     // After cleanup, further pointermove should not trigger onMove
-    act(() => {
-      window.dispatchEvent(
-        createPointerEvent("pointermove", { clientX: 20, clientY: 20 }),
-      )
-    })
+    dispatchPointerEvent("pointermove", { clientX: 20, clientY: 20 })
 
     expect(onMove).not.toHaveBeenCalled()
   })
 
-  test("updates latestPoint after move and uses it for subsequent threshold checks", () => {
+  test("updates latestPoint after move and uses it for subsequent threshold checks", async () => {
     const onMove = vi.fn()
-    const { target } = setup({ threshold: 3, onMove })
+    const { target } = await setup({ threshold: 3, onMove })
 
-    act(() => {
-      fireEvent.pointerDown(target, {
-        clientX: 0,
-        clientY: 0,
-      })
-    })
+    pointerDown(target, { clientX: 0, clientY: 0 })
 
     // First move: distance = sqrt(16+16) = ~5.66, exceeds threshold of 3
-    act(() => {
-      window.dispatchEvent(
-        createPointerEvent("pointermove", { clientX: 4, clientY: 4 }),
-      )
-    })
+    dispatchPointerEvent("pointermove", { clientX: 4, clientY: 4 })
 
     expect(onMove).toHaveBeenCalledTimes(1)
 
     // Second move: distance from (4,4) to (5,5) = sqrt(1+1) = ~1.41, below threshold
-    act(() => {
-      window.dispatchEvent(
-        createPointerEvent("pointermove", { clientX: 5, clientY: 5 }),
-      )
-    })
+    dispatchPointerEvent("pointermove", { clientX: 5, clientY: 5 })
 
     expect(onMove).toHaveBeenCalledTimes(1)
 
     // Third move: distance from (4,4) to (8,8) = sqrt(16+16) = ~5.66, exceeds threshold
-    act(() => {
-      window.dispatchEvent(
-        createPointerEvent("pointermove", { clientX: 8, clientY: 8 }),
-      )
-    })
+    dispatchPointerEvent("pointermove", { clientX: 8, clientY: 8 })
 
     expect(onMove).toHaveBeenCalledTimes(2)
   })
 
-  test("calls all callbacks with event, point, and rect arguments", () => {
+  test("calls all callbacks with event, point, and rect arguments", async () => {
     const onStart = vi.fn()
     const onMove = vi.fn()
     const onEnd = vi.fn()
-    const { target } = setup({ threshold: 0, onEnd, onMove, onStart })
+    const { target } = await setup({ threshold: 0, onEnd, onMove, onStart })
 
-    act(() => {
-      fireEvent.pointerDown(target, {
-        clientX: 10,
-        clientY: 20,
-      })
-    })
+    pointerDown(target, { clientX: 10, clientY: 20 })
 
     expect(onStart).toHaveBeenCalledTimes(1)
     const [startEv, startPoint, startRect] = onStart.mock.calls[0]!
@@ -287,11 +200,7 @@ describe("usePanEvent", () => {
       }),
     )
 
-    act(() => {
-      window.dispatchEvent(
-        createPointerEvent("pointermove", { clientX: 30, clientY: 40 }),
-      )
-    })
+    dispatchPointerEvent("pointermove", { clientX: 30, clientY: 40 })
 
     expect(onMove).toHaveBeenCalledTimes(1)
     const [moveEv, movePoint, moveRect] = onMove.mock.calls[0]!
@@ -304,11 +213,7 @@ describe("usePanEvent", () => {
       }),
     )
 
-    act(() => {
-      window.dispatchEvent(
-        createPointerEvent("pointerup", { clientX: 50, clientY: 60 }),
-      )
-    })
+    dispatchPointerEvent("pointerup", { clientX: 50, clientY: 60 })
 
     expect(onEnd).toHaveBeenCalledTimes(1)
     const [endEv, endPoint, endRect] = onEnd.mock.calls[0]!
@@ -322,7 +227,7 @@ describe("usePanEvent", () => {
     )
   })
 
-  test("getProps merges with provided props", () => {
+  test("getProps merges with provided props", async () => {
     const onPointerDown = vi.fn()
 
     const Component: FC = () => {
@@ -331,15 +236,10 @@ describe("usePanEvent", () => {
       return <div data-testid="target" {...getProps({ ref, onPointerDown })} />
     }
 
-    const { getByTestId } = render(<Component />)
-    const target = getByTestId("target")
+    await render(<Component />)
+    const target = page.getByTestId("target")
 
-    act(() => {
-      fireEvent.pointerDown(target, {
-        clientX: 0,
-        clientY: 0,
-      })
-    })
+    pointerDown(target, { clientX: 0, clientY: 0 })
 
     expect(onPointerDown).toHaveBeenCalledTimes(1)
   })

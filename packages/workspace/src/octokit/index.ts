@@ -5,6 +5,7 @@ import type {
   EmitterWebhookEventName,
 } from "@octokit/webhooks"
 import { Octokit } from "@octokit/rest"
+import { wait } from "@yamada-ui/utils"
 import { config } from "dotenv"
 
 export type * from "@octokit/request-error"
@@ -17,12 +18,6 @@ export type WebhookEvent<T extends EmitterWebhookEventName> =
   EmitterWebhookEvent<T>["payload"]
 
 export const octokit: Octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
-
-async function wait(ms: number) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms)
-  })
-}
 
 export async function retryOnRateLimit<Y = void>(
   callback: () => Promise<Y>,

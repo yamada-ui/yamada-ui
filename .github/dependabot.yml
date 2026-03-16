@@ -32,4 +32,21 @@ updates:
       changesets:
         patterns:
           - "@changesets/*"
-    open-pull-request-limit: 10
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+      timezone: "Asia/Tokyo"
+    cooldown:
+      default-days: 7
+      include:
+        - "*"
+    assignees:
+      - "hirotomoyamada"
+    labels:
+      - "github-actions"
+    open-pull-requests-limit: 10

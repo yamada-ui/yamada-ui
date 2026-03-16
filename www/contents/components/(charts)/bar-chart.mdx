@@ -117,7 +117,7 @@ import { BarChart } from "@workspaces/ui"
 ### Composition
 
 ```tsx preview functional
-const data = useMemo<Data[]>(() => createCartesianChartData(), [])
+const data = useMemo<CartesianChartData[]>(() => createCartesianChartData(), [])
 
 return (
   <BarChart.Root data={data}>
@@ -138,7 +138,7 @@ return (
 ### Change Size
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () =>
     BarChart.mergeSeries([
       { dataKey: "desktop" },
@@ -175,7 +175,7 @@ return (
 ### Change Color Scheme
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () =>
     BarChart.mergeSeries([
       { dataKey: "desktop" },
@@ -205,7 +205,7 @@ return (
 ### Change Color
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () => [
     { dataKey: "desktop", color: "red" },
     { dataKey: "tablet", color: "blue" },
@@ -235,11 +235,11 @@ return (
 To display a range, set the values of the `data` items as `[min, max]` arrays.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () => [{ dataKey: "desktop" }, { dataKey: "tablet" }, { dataKey: "mobile" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<CartesianChartData[]>(
   () =>
     Array.from({ length: 6 }, (_, index) => ({
       date: dayjs().add(index, "month").format("YYYY-MM-DD"),
@@ -279,7 +279,7 @@ return (
 To stack the series, set `stackId` in `series` or `barProps.stackId` to a string.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () => [
     { dataKey: "desktop", color: "red" },
     {
@@ -319,7 +319,7 @@ return (
 To make the series a percentage, set `stackId` or `barProps.stackId` to a string and set `chartProps.stackOffset` to `"expand"`.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () => [
     { dataKey: "desktop", color: "red" },
     { dataKey: "tablet", color: "blue" },
@@ -355,7 +355,7 @@ return (
 To add the Y axis, set `withYAxis` to `true`. The default is `false`.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () =>
     BarChart.mergeSeries([
       { dataKey: "desktop" },
@@ -386,7 +386,7 @@ return (
 To change the orientation of the Y axis, set `yAxisProps.orientation` to `"start"` or `"end"`. The default is `"start"`.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () =>
     BarChart.mergeSeries([
       { dataKey: "desktop" },
@@ -420,7 +420,7 @@ return (
 To add the legend, set `withLegend` to `true`. The default is `false`. To change the placement of the legend, set `legendProps.placement` to `"start-start"`, `"end-end"`, etc. The default is `"start-end"`.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () => [
     { dataKey: "desktop", color: "red" },
     { dataKey: "tablet", color: "blue" },
@@ -451,7 +451,7 @@ return (
 To change the name of the tooltip or legend, set `name` to a string in `series`.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () => [
     { dataKey: "desktop", name: "Desktop", color: "red" },
     { dataKey: "tablet", name: "Tablet", color: "blue" },
@@ -482,7 +482,7 @@ return (
 To change the grid, set `horizontal` and `vertical` to a boolean in `gridProps`.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () =>
     BarChart.mergeSeries([
       { dataKey: "desktop" },
@@ -524,7 +524,7 @@ return (
 To add a label, set `label` of `series` or `barProps.label` to `true`. The default is `false`.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () => BarChart.mergeSeries([{ dataKey: "desktop" }]),
   [],
 )
@@ -551,7 +551,7 @@ return (
 To add a unit, use `formatter` or `tickFormatter` or set `unit` to a string.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () => BarChart.mergeSeries([{ dataKey: "desktop" }]),
   [],
 )
@@ -591,7 +591,7 @@ return (
 To make the chart vertical, set `layout` to `"vertical"` in `chartProps` and adjust the type of the axes.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () =>
     BarChart.mergeSeries([
       { dataKey: "desktop" },
@@ -626,7 +626,7 @@ return (
 To sync the chart, set `syncId` to a string.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () =>
     BarChart.mergeSeries([
       { dataKey: "desktop" },
@@ -672,7 +672,7 @@ return (
 To format the chart, use `formatter` or `tickFormatter` etc.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () =>
     BarChart.mergeSeries([
       { dataKey: "desktop" },
@@ -708,7 +708,7 @@ return (
 ### Add Reference Line
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () =>
     BarChart.mergeSeries([
       { dataKey: "desktop" },
@@ -752,7 +752,7 @@ return (
 To add a reference line, set `tickLine` to `true` in `xAxisProps` or `yAxisProps`. The default is `false`.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () =>
     BarChart.mergeSeries([
       { dataKey: "desktop" },
@@ -787,7 +787,7 @@ return (
 To add an axis label, set `label` to a string in `xAxisProps` or `yAxisProps`. The default is `false`.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () =>
     BarChart.mergeSeries([
       { dataKey: "desktop" },
@@ -822,7 +822,7 @@ return (
 To set the domain, set `domain` to an array in `yAxisProps`. To set the ticks, set `ticks` to an array in `yAxisProps`.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () =>
     BarChart.mergeSeries([
       { dataKey: "desktop" },
@@ -859,7 +859,7 @@ return (
 To change the gap, set `barCategoryGap` and `barGap` in `chartProps` to a number or string.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () =>
     BarChart.mergeSeries([
       { dataKey: "desktop" },
@@ -891,7 +891,7 @@ return (
 To change the radius, set `radius` in `series` or `barProps.radius` to a number or an array.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () => [
     { color: "red", dataKey: "desktop", radius: 8 },
     {
@@ -931,7 +931,7 @@ return (
 To add a tooltip cursor, set `cursor` to `true` in `tooltipProps`. The default is `false`.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () =>
     BarChart.mergeSeries([
       { dataKey: "desktop" },
@@ -963,7 +963,7 @@ return (
 To hide the X axis, set `withXAxis` to `false`. The default is `true`.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () =>
     BarChart.mergeSeries([
       { dataKey: "desktop" },
@@ -990,7 +990,7 @@ return (
 To hide the tooltip, set `withTooltip` to `false`. The default is `true`.
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () =>
     BarChart.mergeSeries([
       { dataKey: "desktop" },
@@ -1017,7 +1017,7 @@ return (
 ### Customize Axis
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () =>
     BarChart.mergeSeries([
       { dataKey: "desktop" },
@@ -1056,7 +1056,7 @@ return (
 ### Customize Label
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () => [{ color: "blue", dataKey: "desktop" }],
   [],
 )
@@ -1088,7 +1088,7 @@ return (
 ### Customize Grid
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () =>
     BarChart.mergeSeries([
       { dataKey: "desktop" },
@@ -1119,7 +1119,7 @@ return (
 ### Customize Tooltip Cursor
 
 ```tsx preview functional
-const series = useMemo<BarChart.BarProps<Data>[]>(
+const series = useMemo<BarChart.BarProps<CartesianChartData>[]>(
   () =>
     BarChart.mergeSeries([
       { dataKey: "desktop" },

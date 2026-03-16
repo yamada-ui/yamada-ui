@@ -1,83 +1,61 @@
-import type { TSESLint } from "@typescript-eslint/utils"
+import type {
+  ConfigWithExtends,
+  ConfigWithExtendsArray,
+} from "@eslint/config-helpers"
+import { globalIgnores } from "@eslint/config-helpers"
+import eslint from "@eslint/js"
+import globals from "globals"
 import { sharedFiles } from "./shared"
 
-export const baseConfigArray = [
-  {
-    name: "eslint/base",
-    files: sharedFiles,
-    rules: {
-      "constructor-super": "error",
-      "for-direction": "error",
-      "getter-return": "error",
-      "no-async-promise-executor": "error",
-      "no-case-declarations": "error",
-      "no-class-assign": "error",
-      "no-compare-neg-zero": "error",
-      "no-cond-assign": "error",
-      "no-const-assign": "error",
-      "no-constant-binary-expression": "error",
-      "no-constant-condition": "error",
-      "no-control-regex": "error",
-      "no-debugger": "error",
-      "no-delete-var": "error",
-      "no-dupe-args": "error",
-      "no-dupe-class-members": "error",
-      "no-dupe-else-if": "error",
-      "no-dupe-keys": "error",
-      "no-duplicate-case": "error",
-      "no-empty-character-class": "error",
-      "no-empty-pattern": "error",
-      "no-empty-static-block": "error",
-      "no-ex-assign": "error",
-      "no-fallthrough": "error",
-      "no-func-assign": "error",
-      "no-global-assign": "error",
-      "no-import-assign": "error",
-      "no-invalid-regexp": "error",
-      "no-loss-of-precision": "error",
-      "no-misleading-character-class": "error",
-      "no-new-native-nonconstructor": "error",
-      "no-nonoctal-decimal-escape": "error",
-      "no-obj-calls": "error",
-      "no-octal": "error",
-      "no-redeclare": "error",
-      "no-regex-spaces": "error",
-      "no-self-assign": "error",
-      "no-setter-return": "error",
-      "no-this-before-super": "error",
-      "no-undef": "error",
-      "no-unexpected-multiline": "error",
-      "no-unreachable": "error",
-      "no-unsafe-finally": "error",
-      "no-unsafe-negation": "error",
-      "no-unsafe-optional-chaining": "error",
-      "no-unused-labels": "error",
-      "no-unused-private-class-members": "error",
-      "no-useless-backreference": "error",
-      "no-useless-catch": "error",
-      "no-var": "error",
-      "no-with": "error",
-      "require-yield": "error",
-      "use-isnan": "error",
-      "valid-typeof": "error",
-
-      "no-console": ["warn", { allow: ["warn", "error"] }],
-    },
-  } satisfies TSESLint.FlatConfig.Config,
-  {
-    name: "eslint/ignores",
-    ignores: [
-      "**/node_modules/**",
+export const baseConfigArray: ConfigWithExtendsArray = [
+  globalIgnores(
+    [
       "**/.turbo/**",
       "**/.next/**",
+      "**/.react-router/**",
       "**/.velite/**",
       "**/dist/**",
       "**/bin/**",
       "**/coverage/**",
-      "!scripts/issue/coverage/**",
       "**/storybook-static/**",
-      "pnpm-lock.yaml",
       "next-env.d.ts",
     ],
-  } satisfies TSESLint.FlatConfig.Config,
+    "ignores",
+  ),
+  {
+    name: "base",
+    extends: [eslint.configs.recommended],
+    files: sharedFiles,
+    rules: {
+      "no-console": ["warn", { allow: ["warn", "error"] }],
+      "no-empty": "off",
+      "no-prototype-builtins": "off",
+      "no-useless-escape": "off",
+      "no-var": "error",
+    },
+  },
+  {
+    name: "language-options",
+    files: sharedFiles,
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+      parserOptions: {
+        ecmaVersion: 10,
+        project: true,
+        sourceType: "module",
+        tsconfigRootDir: process.cwd(),
+      },
+    },
+  },
 ]
+
+export const noConsoleConfig = {
+  name: "no-console",
+  files: sharedFiles,
+  rules: {
+    "no-console": "off",
+  },
+} satisfies ConfigWithExtends

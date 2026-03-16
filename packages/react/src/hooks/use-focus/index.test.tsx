@@ -212,9 +212,7 @@ describe("useFocusOnShow", () => {
     }
 
     const { rerender } = render(<ComponentWithNullTarget visible={false} />)
-    expect(() =>
-      rerender(<ComponentWithNullTarget visible />),
-    ).not.toThrowError()
+    expect(() => rerender(<ComponentWithNullTarget visible />)).not.toThrow()
     await waitFor(() => {
       expect(getFirstFocusableElement).not.toHaveBeenCalled()
     })

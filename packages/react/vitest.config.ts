@@ -58,6 +58,7 @@ export default mergeConfig(sharedConfig, {
         },
       }),
       defineProject({
+        optimizeDeps: { include: ["axe-core"] },
         resolve: {
           alias: {
             "#test/browser": resolve(__dirname, "./test/browser"),

@@ -921,7 +921,7 @@ export const ChartAngleAxis = withContext<"text", ChartAngleAxisProps>(
         return cloneElement<any>(tickProp, { className })
       } else if (isObject(tickProp)) {
         const [omittedProps, styleProps] = splitObject<
-          HTMLProps<"text">,
+          BaseTickContentProps,
           CSSObject
         >(tickProp, shouldForwardProp)
 
@@ -1082,7 +1082,7 @@ export const ChartRadiusAxis = withContext<"text", ChartRadiusAxisProps>(
         return cloneElement<any>(tickProp, { className })
       } else if (isObject(tickProp)) {
         const [omittedProps, styleProps] = splitObject<
-          HTMLProps<"text">,
+          BaseTickContentProps,
           CSSObject
         >(tickProp, shouldForwardProp)
 

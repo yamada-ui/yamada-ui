@@ -84,7 +84,7 @@ import { PieChart } from "@workspaces/ui"
 ### Composition
 
 ```tsx preview functional
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () =>
     createPolarChartData().map((item, index) => ({
       ...item,
@@ -107,11 +107,11 @@ return (
 ### Change Size
 
 ```tsx preview functional
-const series = useMemo<PieChart.PieProps<Data>[]>(
+const series = useMemo<PieChart.PieProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () => PieChart.mergeData(createPolarChartData()),
   [],
 )
@@ -130,11 +130,11 @@ return (
 ### Change Color
 
 ```tsx preview functional
-const series = useMemo<PieChart.PieProps<Data>[]>(
+const series = useMemo<PieChart.PieProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () => PieChart.mergeData(createPolarChartData(), "blue"),
   [],
 )
@@ -145,11 +145,11 @@ return <PieChart.Root data={data} series={series} />
 ### Change Sector Colors
 
 ```tsx preview functional
-const series = useMemo<PieChart.PieProps<Data>[]>(
+const series = useMemo<PieChart.PieProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () =>
     createPolarChartData().map((item, index) => ({
       ...item,
@@ -166,11 +166,11 @@ return <PieChart.Root data={data} series={series} />
 To hide sector stroke lines, set `sectorStroke` to `"none"`.
 
 ```tsx preview functional
-const series = useMemo<PieChart.PieProps<Data>[]>(
+const series = useMemo<PieChart.PieProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () =>
     createPolarChartData().map((item, index) => ({
       ...item,
@@ -187,11 +187,11 @@ return <PieChart.Root data={data} sectorStroke="none" series={series} />
 To add the legend, set `withLegend` to `true`. The default is `false`.
 
 ```tsx preview functional
-const series = useMemo<PieChart.PieProps<Data>[]>(
+const series = useMemo<PieChart.PieProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () =>
     createPolarChartData().map((item, index) => ({
       ...item,
@@ -206,11 +206,11 @@ return <PieChart.Root data={data} series={series} withLegend />
 To change the placement of the legend, set `legendProps.placement` to `"start-start"`, `"end-end"`, etc. The default is `"start-end"`.
 
 ```tsx preview functional
-const series = useMemo<PieChart.PieProps<Data>[]>(
+const series = useMemo<PieChart.PieProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () =>
     createPolarChartData().map((item, index) => ({
       ...item,
@@ -225,7 +225,7 @@ return <PieChart.Root data={data} series={series} withLegend />
 ### Display Multiple Pies
 
 ```tsx preview functional
-const series = useMemo<PieChart.PieProps<Data>[]>(
+const series = useMemo<PieChart.PieProps<PolarChartData>[]>(
   () => [
     {
       dataKey: "visits",
@@ -240,7 +240,7 @@ const series = useMemo<PieChart.PieProps<Data>[]>(
   ],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () => PieChart.mergeData(createPolarChartData()),
   [],
 )
@@ -253,11 +253,11 @@ return <PieChart.Root data={data} series={series} />
 To display labels, set `label` or `pieProps.label` to `true`. The default is `false`.
 
 ```tsx preview functional
-const series = useMemo<PieChart.PieProps<Data>[]>(
+const series = useMemo<PieChart.PieProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () =>
     createPolarChartData().map((item, index) => ({
       ...item,
@@ -274,11 +274,11 @@ return <PieChart.Root data={data} pieProps={{ label: true }} series={series} />
 To display label lines, set `labelLine` of `series` or `pieProps.labelLine` to `true`. The default is `false`.
 
 ```tsx preview functional
-const series = useMemo<PieChart.PieProps<Data>[]>(
+const series = useMemo<PieChart.PieProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () =>
     createPolarChartData().map((item, index) => ({
       ...item,
@@ -301,11 +301,11 @@ return (
 To change the label offset, set `label.offset` of `series` or `pieProps.label.offset` to a number. The default is `0`.
 
 ```tsx preview functional
-const series = useMemo<PieChart.PieProps<Data>[]>(
+const series = useMemo<PieChart.PieProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () =>
     createPolarChartData().map((item, index) => ({
       ...item,
@@ -328,11 +328,11 @@ return (
 To display values with label list, set `labelList` of `series` or `pieProps.labelList` to `true`. The default is `false`.
 
 ```tsx preview functional
-const series = useMemo<PieChart.PieProps<Data>[]>(
+const series = useMemo<PieChart.PieProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () =>
     createPolarChartData().map((item, index) => ({
       ...item,
@@ -355,11 +355,11 @@ return (
 To change the padding angle, set `paddingAngle` of `series` or `pieProps.paddingAngle` to a number. The default is `0`.
 
 ```tsx preview functional
-const series = useMemo<PieChart.PieProps<Data>[]>(
+const series = useMemo<PieChart.PieProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () => PieChart.mergeData(createPolarChartData()),
   [],
 )
@@ -374,11 +374,11 @@ return (
 To change the start angle, set `startAngle` of `series` or `pieProps.startAngle` to a number. The default is `90`.
 
 ```tsx preview functional
-const series = useMemo<PieChart.PieProps<Data>[]>(
+const series = useMemo<PieChart.PieProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () => PieChart.mergeData(createPolarChartData()),
   [],
 )
@@ -393,11 +393,11 @@ return (
 To change the end angle, set `endAngle` of `series` or `pieProps.endAngle` to a number. The default is `-270`.
 
 ```tsx preview functional
-const series = useMemo<PieChart.PieProps<Data>[]>(
+const series = useMemo<PieChart.PieProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () => PieChart.mergeData(createPolarChartData()),
   [],
 )
@@ -412,11 +412,11 @@ return (
 To change the inner radius, set `innerRadius` of `series` or `pieProps.innerRadius` to a number or string. The default is `"0%"`.
 
 ```tsx preview functional
-const series = useMemo<PieChart.PieProps<Data>[]>(
+const series = useMemo<PieChart.PieProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () => PieChart.mergeData(createPolarChartData()),
   [],
 )
@@ -435,11 +435,11 @@ return (
 To change the outer radius, set `outerRadius` of `series` or `pieProps.outerRadius` to a number or string. The default is `"100%"`.
 
 ```tsx preview functional
-const series = useMemo<PieChart.PieProps<Data>[]>(
+const series = useMemo<PieChart.PieProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () => PieChart.mergeData(createPolarChartData()),
   [],
 )
@@ -458,11 +458,11 @@ return (
 To sync charts, set `syncId` to a string.
 
 ```tsx preview functional
-const series = useMemo<PieChart.PieProps<Data>[]>(
+const series = useMemo<PieChart.PieProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () => PieChart.mergeData(createPolarChartData()),
   [],
 )
@@ -480,11 +480,11 @@ return (
 To format values and labels, use `formatter`.
 
 ```tsx preview functional
-const series = useMemo<PieChart.PieProps<Data>[]>(
+const series = useMemo<PieChart.PieProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () =>
     createPolarChartData().map((item, index) => ({
       ...item,
@@ -522,11 +522,11 @@ return (
 To hide the tooltip, set `withTooltip` to `false`. The default is `true`.
 
 ```tsx preview functional
-const series = useMemo<PieChart.PieProps<Data>[]>(
+const series = useMemo<PieChart.PieProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () => PieChart.mergeData(createPolarChartData()),
   [],
 )

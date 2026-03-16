@@ -83,7 +83,7 @@ bun add "@workspaces/ui@workspace:*"
 
 インストール後、アプリケーションのルートに`UIProvider`を追加します。
 
-```tsx title="__route.tsx" {6,41-44}
+```tsx title="__root.tsx" {6,41-44}
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
 import { TanStackDevtools } from "@tanstack/react-devtools"
@@ -246,7 +246,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 もし、[コンフィグ](/docs/theming/configuration/overview)の`defaultColorMode`を変更した場合は、`ColorModeScript`に`defaultValue`を設定します。
 
-```tsx title="__roo.tsx" {51}
+```tsx title="__root.tsx" {51}
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
 import { TanStackDevtools } from "@tanstack/react-devtools"
@@ -452,7 +452,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <body suppressHydrationWarning>
         <ThemeSchemeScript
           type="cookie"
-          defaultValue={config.defaultColorMode}
+          defaultValue={config.defaultThemeScheme}
         />
 
         <UIProvider config={config} cookie={cookie}>

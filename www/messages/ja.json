@@ -77,6 +77,12 @@
       "pink": "ピンク"
     }
   },
+  "guides": {
+    "title": "ガイド",
+    "description": "Yamada UIに関するよくある質問の答えを見つけましょう。",
+    "guides": "{count, plural, other {#件のガイド}}",
+    "backToGuides": "ガイド一覧に戻る"
+  },
   "changelog": {
     "title": "変更履歴",
     "latest": "Yamada UIの最新バージョンの変更履歴をご覧ください。機能・バグ修正・改善点についてご確認ください。",

@@ -32,7 +32,7 @@ updates:
       changesets:
         patterns:
           - "@changesets/*"
-    open-pull-request-limit: 10
+    open-pull-requests-limit: 10
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -51,4 +51,4 @@ updates:
       - "hirotomoyamada"
     labels:
       - "github-actions"
-    open-pull-request-limit: 10
+    open-pull-requests-limit: 10

@@ -1,22 +1,27 @@
 [
   {
     "collection": "overview",
-    "title": "概要"
+    "title": "概要",
+    "description": "Yamada UIに関する全般的な質問"
   },
   {
     "collection": "get-started",
-    "title": "はじめる"
+    "title": "はじめる",
+    "description": "セットアップ、インストール、最初のステップ"
   },
   {
     "collection": "styling",
-    "title": "スタイリング"
+    "title": "スタイリング",
+    "description": "スタイリングのテクニックとベストプラクティス"
   },
   {
     "collection": "theming",
-    "title": "テーマ"
+    "title": "テーマ",
+    "description": "カラー、フォント、ブレークポイントなどの設定"
   },
   {
     "collection": "components",
-    "title": "コンポーネント"
+    "title": "コンポーネント",
+    "description": "コンポーネントのヒントと推奨事項"
   }
 ]

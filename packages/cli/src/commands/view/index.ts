@@ -1,6 +1,5 @@
+import type { Source } from "../../index.type"
 import { Command } from "commander"
-import fs from "fs"
-import path from "path"
 import c from "picocolors"
 import { fetchRegistry } from "../../utils"
 
@@ -14,22 +13,21 @@ export const view = new Command()
     "inspect component source files before or without installing them",
   )
   .argument("<component>", "the name of the component to view (e.g., button)")
-  .argument("[file]", "specific file to view or download (optional)")
+  .argument("[file]", "specific file to view (optional)")
   .option("-t, --tag <name>", "tag for the registries (e.g. dev, next).")
   .action(
     async (component: string, file: string | undefined, { tag }: Options) => {
       try {
-        const registryData = (await fetchRegistry(component, { tag })) as any
-        const sources = registryData.sources
-
-        if (!sources || !Array.isArray(sources) || sources.length === 0) {
+        const registryData = await fetchRegistry(component, { tag })
+        const sources = registryData.sources as Source[]
+        if (sources.length === 0) {
           throw new Error(
             `Component '${component}' not found or has no source files.`,
           )
         }
 
         if (file) {
-          const targetFile = sources.find((f: any) => f.name === file)
+          const targetFile = sources.find((f: Source) => f.name === file)
 
           if (!targetFile) {
             console.error(
@@ -38,17 +36,23 @@ export const view = new Command()
               ),
             )
             console.log(
-              `Available files are: ${sources.map((f: any) => f.name).join(", ")}\n`,
+              `Available files are: ${sources.map((f: Source) => f.name).join(", ")}\n`,
             )
-            process.exit(1)
+            return process.exit(1)
           }
 
-          const targetPath = path.join(process.cwd(), file)
-          fs.writeFileSync(targetPath, targetFile.content, "utf-8")
+          if (!targetFile.content) {
+            console.error(
+              c.red(`\nError: No readable content found for file '${file}'.`),
+            )
+            return process.exit(1)
+          }
 
           console.log(
-            `${c.green("✔")} Successfully downloaded ${c.bold(file)} from ${c.bold(component)} to your current directory.\n`,
+            `\n${c.dim("---")} ${c.bold(c.green(file))} ${c.dim("---")}\n`,
           )
+          console.log(targetFile.content)
+          console.log(`\n${c.dim("--- End of file ---")}\n`)
         } else {
           console.log(
             `\n${c.blue("Directory listing for:")} ${c.bold(component)}\n`,
@@ -59,11 +63,12 @@ export const view = new Command()
           }
           const tree: Tree = {}
 
-          sources.forEach((f: any) => {
+          sources.forEach((f: Source) => {
             const parts = f.name.split("/")
             let current = tree
             for (let i = 0; i < parts.length; i++) {
               const part = parts[i]
+              if (!part) continue
               if (i === parts.length - 1) {
                 current[part] = null
               } else {
@@ -96,7 +101,7 @@ export const view = new Command()
         }
       } catch (error) {
         console.error(c.red(`\nFailed to view component: ${error}`))
-        process.exit(1)
+        return process.exit(1)
       }
     },
   )

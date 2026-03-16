@@ -1,7 +1,4 @@
-import { existsSync, mkdtempSync, readFileSync, rmSync } from "fs"
-import { tmpdir } from "os"
-import path from "path"
-import { afterEach, beforeEach, describe, expect, test, vi } from "vitest"
+import { afterEach, describe, expect, test, vi } from "vitest"
 
 vi.mock("node-fetch", () => ({
   default: vi.fn().mockImplementation((url: string) => {
@@ -28,15 +25,7 @@ vi.mock("node-fetch", () => ({
 import { view } from "."
 
 describe("view", () => {
-  let tempDir: string
-
-  beforeEach(() => {
-    tempDir = mkdtempSync(path.join(tmpdir(), "yamada-cli-"))
-    vi.spyOn(process, "cwd").mockReturnValue(tempDir)
-  })
-
   afterEach(() => {
-    rmSync(tempDir, { force: true, recursive: true })
     vi.restoreAllMocks()
   })
 
@@ -58,21 +47,19 @@ describe("view", () => {
     )
   })
 
-  test("should download the file when a specific file is specified", async () => {
+  test("should display the file content when a specific file is specified", async () => {
     const consoleLogSpy = vi
       .spyOn(console, "log")
       .mockImplementation(() => undefined)
 
     await view.parseAsync(["node", "test", "button", "button.tsx"])
 
-    const downloadedFilePath = path.join(tempDir, "button.tsx")
-    expect(existsSync(downloadedFilePath)).toBeTruthy()
-    expect(readFileSync(downloadedFilePath, "utf-8")).toBe(
-      "export const Button = () => <button />",
+    expect(consoleLogSpy).toHaveBeenCalledWith(
+      expect.stringContaining("export const Button = () => <button />"),
     )
 
     expect(consoleLogSpy).toHaveBeenCalledWith(
-      expect.stringContaining("Successfully downloaded"),
+      expect.stringContaining("button.tsx"),
     )
   })
 

@@ -3,7 +3,7 @@ import type * as Utils from "../../utils"
 import type { UseFocusOnMouseDownProps, UseFocusOnShowProps } from "./"
 import { page, render } from "#test/browser"
 import { useRef } from "react"
-import { getFirstFocusableElement } from "../../utils"
+import { getFirstFocusableElement, isSafari } from "../../utils"
 import { useFocusOnPointerDown, useFocusOnShow } from "./"
 
 function getHTMLElement(testId: string): HTMLElement {
@@ -26,6 +26,7 @@ vi.mock("../../utils", async (importOriginal) => {
   return {
     ...actual,
     getFirstFocusableElement: vi.fn(actual.getFirstFocusableElement),
+    isSafari: vi.fn(actual.isSafari),
   }
 })
 
@@ -222,34 +223,13 @@ describe("useFocusOnShow", () => {
 })
 
 describe("useFocusOnPointerDown", () => {
-  const defaultPlatform = window.navigator.platform
-
-  const defaultVendor = window.navigator.vendor
-
-  beforeAll(() => {
-    Object.defineProperty(window.navigator, "platform", {
-      value: "MacOS",
-      writable: true,
-    })
-    Object.defineProperty(window.navigator, "vendor", {
-      value: "Apple Computer, Inc.",
-      writable: true,
-    })
+  beforeEach(() => {
+    vi.mocked(isSafari).mockReturnValue(true)
   })
 
   afterEach(() => {
+    vi.mocked(isSafari).mockRestore()
     vi.restoreAllMocks()
-  })
-
-  afterAll(() => {
-    Object.defineProperty(window.navigator, "platform", {
-      value: defaultPlatform,
-      writable: false,
-    })
-    Object.defineProperty(window.navigator, "vendor", {
-      value: defaultVendor,
-      writable: false,
-    })
   })
 
   const Component: FC<Omit<UseFocusOnMouseDownProps, "ref">> = (props) => {
@@ -323,33 +303,12 @@ describe("useFocusOnPointerDown", () => {
   })
 
   test("does not focus on non-safari browsers", async () => {
-    const previousPlatform = window.navigator.platform
-    const previousVendor = window.navigator.vendor
+    vi.mocked(isSafari).mockReturnValue(false)
 
-    try {
-      Object.defineProperty(window.navigator, "platform", {
-        value: "Win32",
-        writable: true,
-      })
-      Object.defineProperty(window.navigator, "vendor", {
-        value: "Google Inc.",
-        writable: true,
-      })
+    await render(<Component />)
+    const el = getHTMLElement("button")
+    el.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true }))
 
-      await render(<Component />)
-      const el = getHTMLElement("button")
-      el.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true }))
-
-      await expect.element(page.getByTestId("button")).not.toHaveFocus()
-    } finally {
-      Object.defineProperty(window.navigator, "platform", {
-        value: previousPlatform,
-        writable: true,
-      })
-      Object.defineProperty(window.navigator, "vendor", {
-        value: previousVendor,
-        writable: true,
-      })
-    }
+    await expect.element(page.getByTestId("button")).not.toHaveFocus()
   })
 })

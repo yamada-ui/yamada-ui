@@ -16,7 +16,7 @@ const Component: FC<{ value?: string }> = ({ value }) => {
 describe("useFieldSizing", () => {
   test("renders hidden text element with value", async () => {
     const { container } = await render(<Component value="hello" />)
-    const span = container.querySelector("span[aria-hidden]")
+    const span = container.querySelector<HTMLSpanElement>("span[aria-hidden]")
 
     expect(span).toBeInstanceOf(HTMLSpanElement)
     expect(span!.textContent).toBe("hello")
@@ -29,7 +29,7 @@ describe("useFieldSizing", () => {
 
   test("uses empty string as default value", async () => {
     const { container } = await render(<Component />)
-    const span = container.querySelector("span[aria-hidden]")
+    const span = container.querySelector<HTMLSpanElement>("span[aria-hidden]")
 
     expect(span).toBeInstanceOf(HTMLSpanElement)
     expect(span!.textContent).toBe("")
@@ -39,28 +39,37 @@ describe("useFieldSizing", () => {
     await render(<Component value="hello" />)
 
     const input = page.getByTestId("input")
-    await expect.poll(() => input.element().style.width).not.toBe("")
+    await expect
+      .poll(() => input.element().style.width)
+      .toMatch(/^\d+(\.\d+)?px$/)
   })
 
   test("updates width when value changes", async () => {
     const { rerender } = await render(<Component value="hi" />)
 
     const input = page.getByTestId("input")
-    await expect.poll(() => input.element().style.width).not.toBe("")
+    await expect
+      .poll(() => input.element().style.width)
+      .toMatch(/^\d+(\.\d+)?px$/)
 
     const initialWidth = input.element().style.width
 
     await rerender(<Component value="hello world, this is a longer text" />)
 
-    await expect.poll(() => input.element().style.width).not.toBe(initialWidth)
+    await expect
+      .poll(() => {
+        const w = input.element().style.width
+        return /^\d+(\.\d+)?px$/.test(w) && w !== initialWidth ? w : ""
+      })
+      .not.toBe("")
   })
 
   test("returns ref and text", async () => {
     const { container } = await render(<Component value="test" />)
 
     await expect.element(page.getByTestId("input")).toBeInTheDocument()
-    expect(container.querySelector("span[aria-hidden]")).toBeInstanceOf(
-      HTMLSpanElement,
-    )
+    expect(
+      container.querySelector<HTMLSpanElement>("span[aria-hidden]"),
+    ).toBeInstanceOf(HTMLSpanElement)
   })
 })

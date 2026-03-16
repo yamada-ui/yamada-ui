@@ -255,7 +255,7 @@ import appCss from "../styles.css?url"
 import { ColorModeScript, UIProvider } from "@workspaces/ui"
 import { createServerFn } from "@tanstack/react-start"
 import { getRequestHeader } from "@tanstack/react-start/server"
-import { config } from "@workspace/theme"
+import { config } from "@workspaces/theme"
 
 const getCookie = createServerFn({ method: "GET" }).handler(async () => {
   return getRequestHeader("cookie") ?? ""

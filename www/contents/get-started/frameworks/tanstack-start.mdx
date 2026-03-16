@@ -1,0 +1,454 @@
+---
+title: TanStack Start
+description: A guide for installing and using Yamada UI with TanStack Start projects.
+---
+
+## Installation
+
+::::steps
+
+### Create application
+
+Create TanStack Start application.
+
+:::code-group
+
+```bash [pnpm]
+pnpm create @tanstack/start my-app
+```
+
+```bash [npm]
+npx create @tanstack/start my-app
+```
+
+```bash [yarn]
+yarn create @tanstack/start my-app
+```
+
+```bash [bun]
+bun create @tanstack/start my-app
+```
+
+:::
+
+### Setup
+
+Running the command will create the necessary files and folders in your project.
+
+:::code-group
+
+```bash [pnpm]
+pnpm dlx @yamada-ui/cli init
+```
+
+```bash [npm]
+npx @yamada-ui/cli init
+```
+
+```bash [yarn]
+yarn dlx @yamada-ui/cli init
+```
+
+```bash [bun]
+bunx @yamada-ui/cli init
+```
+
+:::
+
+### Install the package
+
+Install `@workspaces/ui` to your application.
+
+:::code-group
+
+```bash [pnpm]
+pnpm add "@workspaces/ui@workspace:*"
+```
+
+```bash [npm]
+npm install "@workspaces/ui@workspace:*"
+```
+
+```bash [yarn]
+yarn add "@workspaces/ui@workspace:*"
+```
+
+```bash [bun]
+bun add "@workspaces/ui@workspace:*"
+```
+
+:::
+
+### Add provider
+
+After installing, add `UIProvider` to the root of your application.
+To suppress hydration errors, add `suppressHydrationWarning` to the `html` and `body` tags.
+
+```tsx title="__root.tsx" {4,19,23,24}
+import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
+import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
+import { TanStackDevtools } from "@tanstack/react-devtools"
+import { UIProvider } from "@workspaces/ui"
+
+export const Route = createRootRoute({
+  head: () => ({
+    meta: [
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { title: "TanStack Start Starter" },
+    ],
+  }),
+  shellComponent: RootDocument,
+})
+
+function RootDocument({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <HeadContent />
+      </head>
+      <body suppressHydrationWarning>
+        <UIProvider>{children}</UIProvider>
+        <TanStackDevtools
+          config={{ position: "bottom-right" }}
+          plugins={[
+            {
+              name: "Tanstack Router",
+              render: <TanStackRouterDevtoolsPanel />,
+            },
+          ]}
+        />
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+```
+
+### Use components
+
+After adding `UIProvider`, you can use the components in your application.
+
+```tsx title="index.tsx" {2,7}
+import { createFileRoute } from "@tanstack/react-router"
+import { Button } from "@workspaces/ui"
+
+export const Route = createFileRoute("/")({ component: App })
+
+function App() {
+  return <Button>Click me!</Button>
+}
+```
+
+That's it! You've successfully set up Yamada UI.
+
+::::
+
+## Scripts
+
+### ColorModeScript
+
+To use [Color Mode](/docs/theming/color-mode), you need to add `ColorModeScript` to the `body` to ensure it works correctly.
+
+This is because color mode is implemented using `localStorage` or `cookies`, and adding the script ensures proper synchronization when the page loads.
+
+```tsx title="__root.tsx" {4-7,8-11,13-15,30,34,35}
+import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
+import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
+import { TanStackDevtools } from "@tanstack/react-devtools"
+import { ColorModeScript, UIProvider } from "@workspaces/ui"
+import { createServerFn } from "@tanstack/react-start"
+import { getRequestHeader } from "@tanstack/react-start/server"
+
+const getCookie = createServerFn({ method: "GET" }).handler(async () => {
+  return getRequestHeader("cookie") ?? ""
+})
+
+export const Route = createRootRoute({
+  loader: async () => ({
+    cookie: await getCookie(),
+  }),
+  head: () => ({
+    meta: [
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { title: "TanStack Start Starter" },
+    ],
+  }),
+  shellComponent: RootDocument,
+})
+
+function RootDocument({ children }: { children: React.ReactNode }) {
+  const { cookie } = Route.useLoaderData()
+
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <HeadContent />
+      </head>
+      <body suppressHydrationWarning>
+        <ColorModeScript type="cookie" />
+
+        <UIProvider cookie={cookie}>{children}</UIProvider>
+        <TanStackDevtools
+          config={{ position: "bottom-right" }}
+          plugins={[
+            {
+              name: "Tanstack Router",
+              render: <TanStackRouterDevtoolsPanel />,
+            },
+          ]}
+        />
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+```
+
+If you change the `defaultColorMode` in your [config](/docs/theming/configuration/overview), set the `defaultValue` prop on `ColorModeScript`.
+
+```tsx title="__root.tsx" {7,36}
+import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
+import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
+import { TanStackDevtools } from "@tanstack/react-devtools"
+import { ColorModeScript, UIProvider } from "@workspaces/ui"
+import { createServerFn } from "@tanstack/react-start"
+import { getRequestHeader } from "@tanstack/react-start/server"
+import { config } from "@workspaces/theme"
+
+const getCookie = createServerFn({ method: "GET" }).handler(async () => {
+  return getRequestHeader("cookie") ?? ""
+})
+
+export const Route = createRootRoute({
+  loader: async () => ({
+    cookie: await getCookie(),
+  }),
+  head: () => ({
+    meta: [
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { title: "TanStack Start Starter" },
+    ],
+  }),
+  shellComponent: RootDocument,
+})
+
+function RootDocument({ children }: { children: React.ReactNode }) {
+  const { cookie } = Route.useLoaderData()
+
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <HeadContent />
+      </head>
+      <body suppressHydrationWarning>
+        <ColorModeScript type="cookie" defaultValue={config.defaultColorMode} />
+
+        <UIProvider config={config} cookie={cookie}>
+          {children}
+        </UIProvider>
+        <TanStackDevtools
+          config={{ position: "bottom-right" }}
+          plugins={[
+            {
+              name: "Tanstack Router",
+              render: <TanStackRouterDevtoolsPanel />,
+            },
+          ]}
+        />
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+```
+
+### ThemeSchemeScript
+
+To use [theme switching](/docs/theming/switching-themes), you need to add `ThemeSchemeScript` to the `body` to ensure it works correctly.
+
+This is because theme switching is implemented using `localStorage` or `cookies`, and adding the script ensures proper synchronization when the page loads.
+
+```tsx title="__root.tsx" {4-7,8-11,13-15,30,34,35}
+import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
+import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
+import { TanStackDevtools } from "@tanstack/react-devtools"
+import { ThemeSchemeScript, UIProvider } from "@workspaces/ui"
+import { createServerFn } from "@tanstack/react-start"
+import { getRequestHeader } from "@tanstack/react-start/server"
+
+const getCookie = createServerFn({ method: "GET" }).handler(async () => {
+  return getRequestHeader("cookie") ?? ""
+})
+
+export const Route = createRootRoute({
+  loader: async () => ({
+    cookie: await getCookie(),
+  }),
+  head: () => ({
+    meta: [
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { title: "TanStack Start Starter" },
+    ],
+  }),
+  shellComponent: RootDocument,
+})
+
+function RootDocument({ children }: { children: React.ReactNode }) {
+  const { cookie } = Route.useLoaderData()
+
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <HeadContent />
+      </head>
+      <body suppressHydrationWarning>
+        <ThemeSchemeScript type="cookie" />
+
+        <UIProvider cookie={cookie}>{children}</UIProvider>
+        <TanStackDevtools
+          config={{ position: "bottom-right" }}
+          plugins={[
+            {
+              name: "Tanstack Router",
+              render: <TanStackRouterDevtoolsPanel />,
+            },
+          ]}
+        />
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+```
+
+If you change the `defaultThemeScheme` in your [config](/docs/theming/configuration/overview), set the `defaultValue` prop on `ThemeSchemeScript`.
+
+```tsx title="__root.tsx" {7,38}
+import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
+import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
+import { TanStackDevtools } from "@tanstack/react-devtools"
+import { ThemeSchemeScript, UIProvider } from "@workspaces/ui"
+import { createServerFn } from "@tanstack/react-start"
+import { getRequestHeader } from "@tanstack/react-start/server"
+import { config } from "@workspaces/theme"
+
+const getCookie = createServerFn({ method: "GET" }).handler(async () => {
+  return getRequestHeader("cookie") ?? ""
+})
+
+export const Route = createRootRoute({
+  loader: async () => ({
+    cookie: await getCookie(),
+  }),
+  head: () => ({
+    meta: [
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { title: "TanStack Start Starter" },
+    ],
+  }),
+  shellComponent: RootDocument,
+})
+
+function RootDocument({ children }: { children: React.ReactNode }) {
+  const { cookie } = Route.useLoaderData()
+
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <HeadContent />
+      </head>
+      <body suppressHydrationWarning>
+        <ThemeSchemeScript
+          type="cookie"
+          defaultValue={config.defaultThemeScheme}
+        />
+
+        <UIProvider config={config} cookie={cookie}>
+          {children}
+        </UIProvider>
+        <TanStackDevtools
+          config={{ position: "bottom-right" }}
+          plugins={[
+            {
+              name: "Tanstack Router",
+              render: <TanStackRouterDevtoolsPanel />,
+            },
+          ]}
+        />
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+```
+
+## Component Integration
+
+You can integrate TanStack Start components such as [Link](https://tanstack.com/router/latest/docs/guide/navigation#link-component) with Yamada UI components.
+
+### Link
+
+```tsx
+import type { LinkProps as OriginalLinkProps } from "@tanstack/react-router"
+import type {
+  ButtonProps,
+  HTMLRefAttributes,
+  IconButtonProps,
+  LinkProps,
+  Merge,
+} from "@workspaces/ui"
+import type { FC } from "react"
+import { Link as OriginalLink } from "@tanstack/react-router"
+import { Button, IconButton, Link } from "@workspaces/ui"
+
+export interface RouterLinkProps extends Merge<LinkProps, OriginalLinkProps> {}
+
+export const RouterLink: FC<RouterLinkProps> = ({ mask, to, ...rest }) => {
+  return (
+    <Link colorScheme="mono" asChild {...rest}>
+      <OriginalLink mask={mask} to={to} />
+    </Link>
+  )
+}
+
+export interface RouterLinkButtonProps
+  extends
+    Merge<OriginalLinkProps, Omit<ButtonProps, "mask" | "ref">>,
+    HTMLRefAttributes<"a"> {}
+
+export const RouterLinkButton: FC<RouterLinkButtonProps> = ({
+  ref,
+  to,
+  mask,
+  ...rest
+}) => {
+  return (
+    <Button asChild {...rest}>
+      <OriginalLink ref={ref} mask={mask} to={to} />
+    </Button>
+  )
+}
+
+export interface RouterLinkIconButtonProps
+  extends
+    Merge<OriginalLinkProps, Omit<IconButtonProps, "mask" | "ref">>,
+    HTMLRefAttributes<"a"> {}
+
+export const RouterLinkIconButton: FC<RouterLinkIconButtonProps> = ({
+  ref,
+  to,
+  mask,
+  ...rest
+}) => {
+  return (
+    <IconButton asChild {...rest}>
+      <OriginalLink ref={ref} mask={mask} to={to} />
+    </IconButton>
+  )
+}
+```

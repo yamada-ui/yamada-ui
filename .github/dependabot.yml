@@ -18,20 +18,42 @@ updates:
     labels:
       - "dependencies"
     groups:
+      awesome-dependencies:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "@changesets/*"
+          - "*eslint*"
+          - "react"
+          - "react-dom"
+          - "storybook"
+          - "@storybook/*"
+          - "vitest"
+          - "@vitest/*"
+      changesets:
+        patterns:
+          - "@changesets/*"
+      eslint:
+        patterns:
+          - "*eslint*"
       react:
         patterns:
           - "react"
           - "react-dom"
-      eslint:
-        patterns:
-          - "*eslint*"
       storybook:
         patterns:
           - "storybook"
           - "@storybook/*"
-      changesets:
+      vitest:
         patterns:
-          - "@changesets/*"
+          - "vitest"
+          - "@vitest/*"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "tsdown"
+        update-types:
+          ["version-update:semver-major", "version-update:semver-minor"]
     open-pull-requests-limit: 10
 
   - package-ecosystem: "github-actions"
@@ -43,12 +65,18 @@ updates:
       timezone: "Asia/Tokyo"
     cooldown:
       default-days: 7
-      semver-minor-days: 7
-      semver-patch-days: 7
       include:
         - "*"
     assignees:
       - "hirotomoyamada"
+      - "koralle"
     labels:
       - "github-actions"
+    groups:
+      awesome-actions:
+        patterns:
+          - "*"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     open-pull-requests-limit: 10

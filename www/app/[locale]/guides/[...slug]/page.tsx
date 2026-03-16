@@ -61,15 +61,14 @@ export default async function Page({
 
   return (
     <VStack as="article" maxW="5xl" mx="auto" py="lg" w="full">
-      <Breadcrumb.Root
-        items={[
-          { href: "/guides", label: t("title") },
-          ...(collectionTitle
-            ? [{ currentPage: true, label: collectionTitle }]
-            : []),
-        ]}
-        link={<NextLink href="" />}
-      />
+      <Breadcrumb.Root>
+        <Breadcrumb.Link as={NextLink} href="/guides">
+          {t("title")}
+        </Breadcrumb.Link>
+        {collectionTitle ? (
+          <Breadcrumb.Link currentPage>{collectionTitle}</Breadcrumb.Link>
+        ) : null}
+      </Breadcrumb.Root>
 
       <VStack as="header" gap="sm">
         <Heading as="h1" size="5xl">

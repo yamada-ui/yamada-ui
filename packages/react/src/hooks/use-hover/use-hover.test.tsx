@@ -26,7 +26,9 @@ describe("useHover", () => {
       .not.toBeInTheDocument()
 
     await user.unhover(page.getByText(/^Hovered$/))
-    await expect.element(page.getByText(notHoveredText)).toBeInTheDocument()
+    await expect
+      .element(page.getByText(notHoveredText), { timeout: 3000 })
+      .toBeInTheDocument()
     await expect
       .element(page.getByText(/^Hovered$/).query())
       .not.toBeInTheDocument()

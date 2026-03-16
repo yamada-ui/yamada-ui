@@ -445,7 +445,6 @@ export const standardStyles = {
     properties: ["borderRightWidth"],
     transform: transforms.px,
   },
-  borderShape: true,
   borderSpacing: true,
   borderStartEndRadius: {
     properties: ["borderStartEndRadius"],
@@ -1750,12 +1749,6 @@ export const standardStyles = {
   textWrapStyle: true,
   timelineScope: true,
   timelineTrigger: true,
-  timelineTriggerActivationRange: true,
-  timelineTriggerActivationRangeEnd: true,
-  timelineTriggerActivationRangeStart: true,
-  timelineTriggerActiveRange: true,
-  timelineTriggerActiveRangeEnd: true,
-  timelineTriggerActiveRangeStart: true,
   timelineTriggerName: true,
   timelineTriggerSource: true,
   top: {
@@ -1825,7 +1818,6 @@ export const standardStyles = {
   viewTransitionClass: true,
   viewTransitionGroup: true,
   viewTransitionName: true,
-  viewTransitionScope: true,
   visibility: true,
   whiteSpace: true,
   whiteSpaceCollapse: true,
@@ -2733,7 +2725,7 @@ export interface StyleProps {
    *
    * The CSS `animation-trigger` property.
    *
-   * @see https://drafts.csswg.org/animation-triggers-1/#propdef-animation-trigger
+   * @see https://drafts.csswg.org/css-animations-2/#animation-trigger-prop
    *
    * @experimental
    */
@@ -2972,7 +2964,7 @@ export interface StyleProps {
    *
    * The CSS `background-repeat-x` property.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-repeat-x
+   * @see https://drafts.csswg.org/css-backgrounds-4/#background-repeat-longhands
    *
    * @experimental
    */
@@ -2982,7 +2974,7 @@ export interface StyleProps {
    *
    * The CSS `background-repeat-y` property.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-repeat-y
+   * @see https://drafts.csswg.org/css-backgrounds-4/#background-repeat-longhands
    *
    * @experimental
    */
@@ -4196,16 +4188,6 @@ export interface StyleProps {
     CSS.Property.BorderRightWidth | number
   >
   /**
-   * ### border-shape
-   *
-   * The CSS `border-shape` property.
-   *
-   * @see https://drafts.csswg.org/css-borders-4/#border-shape
-   *
-   * @experimental
-   */
-  borderShape?: StyleValueWithCondition<AnyString>
-  /**
    * ### border-spacing
    *
    * The <code>&#x3C;table></code> HTML element, with several related elements, represents tabular data in rows and columns of cells.
@@ -4969,7 +4951,7 @@ export interface StyleProps {
    *
    * The CSS `column-height` property.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-height
+   * @see https://drafts.csswg.org/css-multicol-2/#propdef-column-height
    *
    * @experimental
    */
@@ -5071,7 +5053,7 @@ export interface StyleProps {
    *
    * The CSS `column-wrap` property.
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-wrap
+   * @see https://drafts.csswg.org/css-multicol-2/#propdef-column-wrap
    *
    * @experimental
    */
@@ -6099,7 +6081,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-width
+   * @see https://drafts.csswg.org/css-fonts/#propdef-font-width
    *
    * @experimental
    */
@@ -9420,7 +9402,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-initial-target
+   * @see https://drafts.csswg.org/css-scroll-snap-2/#propdef-scroll-initial-target
    *
    * @experimental
    */
@@ -10355,17 +10337,17 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-skip
    *
-   * @deprecated
+   * @experimental
    */
   textDecorationSkip?: StyleValueWithCondition<CSS.Property.TextDecorationSkip>
   /**
    * ### text-decoration-skip-ink
    *
-   * The <code>text-decoration-skip-ink</code> CSS property sets whether underlines and overlines may be interrupted where the line would cross a glyph.
+   * The <code>text-decoration</code> CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.
    *
    * @baseline `Widely available`
-   * @widely_available_date 2024-09-14
-   * @newly_available_date 2022-03-14
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-skip-ink
    */
@@ -10627,77 +10609,17 @@ export interface StyleProps {
    *
    * The CSS `timeline-trigger` property.
    *
-   * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger
+   * @see https://drafts.csswg.org/css-animations-2/#timeline-trigger-shorthand
    *
    * @experimental
    */
   timelineTrigger?: StyleValueWithCondition<AnyString>
   /**
-   * ### timeline-trigger-activation-range
-   *
-   * The CSS `timeline-trigger-activation-range` property.
-   *
-   * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-activation-range
-   *
-   * @experimental
-   */
-  timelineTriggerActivationRange?: StyleValueWithCondition<AnyString>
-  /**
-   * ### timeline-trigger-activation-range-end
-   *
-   * The CSS `timeline-trigger-activation-range-end` property.
-   *
-   * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-activation-range-end
-   *
-   * @experimental
-   */
-  timelineTriggerActivationRangeEnd?: StyleValueWithCondition<AnyString>
-  /**
-   * ### timeline-trigger-activation-range-start
-   *
-   * The CSS `timeline-trigger-activation-range-start` property.
-   *
-   * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-activation-range-start
-   *
-   * @experimental
-   */
-  timelineTriggerActivationRangeStart?: StyleValueWithCondition<AnyString>
-  /**
-   * ### timeline-trigger-active-range
-   *
-   * The CSS `timeline-trigger-active-range` property.
-   *
-   * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-active-range
-   *
-   * @experimental
-   */
-  timelineTriggerActiveRange?: StyleValueWithCondition<AnyString>
-  /**
-   * ### timeline-trigger-active-range-end
-   *
-   * The CSS `timeline-trigger-active-range-end` property.
-   *
-   * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-active-range-end
-   *
-   * @experimental
-   */
-  timelineTriggerActiveRangeEnd?: StyleValueWithCondition<AnyString>
-  /**
-   * ### timeline-trigger-active-range-start
-   *
-   * The CSS `timeline-trigger-active-range-start` property.
-   *
-   * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-active-range-start
-   *
-   * @experimental
-   */
-  timelineTriggerActiveRangeStart?: StyleValueWithCondition<AnyString>
-  /**
    * ### timeline-trigger-name
    *
    * The CSS `timeline-trigger-name` property.
    *
-   * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-name
+   * @see https://drafts.csswg.org/css-animations-2/#timeline-trigger-name
    *
    * @experimental
    */
@@ -10707,7 +10629,7 @@ export interface StyleProps {
    *
    * The CSS `timeline-trigger-source` property.
    *
-   * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-source
+   * @see https://drafts.csswg.org/css-animations-2/#timeline-trigger-source
    *
    * @experimental
    */
@@ -10912,7 +10834,7 @@ export interface StyleProps {
    *
    * The CSS `trigger-scope` property.
    *
-   * @see https://drafts.csswg.org/animation-triggers-1/#propdef-trigger-scope
+   * @see https://drafts.csswg.org/css-animations-2/#trigger-scope
    *
    * @experimental
    */
@@ -11049,16 +10971,6 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-transition-name
    */
   viewTransitionName?: StyleValueWithCondition<CSS.Property.ViewTransitionName>
-  /**
-   * ### view-transition-scope
-   *
-   * The CSS `view-transition-scope` property.
-   *
-   * @see https://drafts.csswg.org/css-view-transitions-2/#view-transition-scope-prop
-   *
-   * @experimental
-   */
-  viewTransitionScope?: StyleValueWithCondition<AnyString>
   /**
    * ### visibility
    *

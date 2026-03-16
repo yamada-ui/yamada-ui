@@ -55,7 +55,7 @@ function getSlug(value: string) {
 
 const docs = defineCollection({
   name: "Doc",
-  pattern: "**/*.mdx",
+  pattern: ["**/*.mdx", "!guides/**/*.mdx"],
   schema: s
     .object({
       style: s.string().optional(),
@@ -124,8 +124,37 @@ const docs = defineCollection({
     }),
 })
 
+const guides = defineCollection({
+  name: "Guide",
+  pattern: "guides/**/*.mdx",
+  schema: s
+    .object({
+      code: s.mdx(),
+      collection: s.string(),
+      description: s.string(),
+      publishedAt: s.string(),
+      title: s.string(),
+      toc: s.custom().transform(async (_, { meta }) => {
+        const content = await replaceProps(meta.content as string)
+
+        return extractToc(content)
+      }),
+    })
+    .transform(async (data, { meta }) => {
+      const { locale, slug } = getSlug(meta.path as string)
+      const toc = await transformToc(data.toc, meta.path as string)
+
+      return {
+        ...data,
+        locale,
+        slug,
+        toc,
+      }
+    }),
+})
+
 export default defineConfig({
-  collections: { docs },
+  collections: { docs, guides },
   complete: function ({ docs }) {
     generateDocMap(docs)
   },

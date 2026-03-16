@@ -175,8 +175,6 @@ async function getCSSTypes() {
     glob(path.resolve("node_modules", "csstype", "index.d.ts")),
   )
 
-  console.log(targetPath)
-
   if (!targetPath) return data
 
   const { getSourceFile, getTypeChecker } = createProgram([targetPath], {})

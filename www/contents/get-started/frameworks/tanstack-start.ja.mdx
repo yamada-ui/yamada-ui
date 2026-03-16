@@ -82,6 +82,7 @@ bun add "@workspaces/ui@workspace:*"
 ### プロバイダーを追加する
 
 インストール後、アプリケーションのルートに`UIProvider`を追加します。
+ハイドレーションエラーを抑制するために、`html`と`body`に`suppressHydrationWarning`を`true`に設定します。
 
 ```tsx title="__root.tsx" {6,41-44}
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"

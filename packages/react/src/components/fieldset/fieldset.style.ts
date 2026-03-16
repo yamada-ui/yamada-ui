@@ -1,4 +1,6 @@
+import type { ComponentCompound, CSSSlotObject } from "../../core"
 import { defineComponentSlotStyle } from "../../core"
+import { formStyle } from "../form"
 
 export const fieldsetStyle = defineComponentSlotStyle({
   base: {
@@ -36,10 +38,10 @@ export const fieldsetStyle = defineComponentSlotStyle({
   },
 
   variants: {
-    elevated: { root: { bg: "bg.panel", boxShadow: "md" } },
-    outline: { root: { borderWidth: "1px" } },
-    panel: { root: { layerStyle: "panel" } },
-    plain: { root: {} },
+    elevated: { root: formStyle.variants?.elevated.group },
+    outline: { root: formStyle.variants?.outline.group },
+    panel: { root: formStyle.variants?.panel.group },
+    plain: { root: formStyle.variants?.plain.group },
   },
 
   sizes: {
@@ -49,7 +51,7 @@ export const fieldsetStyle = defineComponentSlotStyle({
       header: { gap: "1" },
       helperMessage: { fontSize: "sm" },
       legend: { fontSize: "md" },
-      root: { gap: "3" },
+      root: { gap: formStyle.sizes?.sm.root.gap },
     },
     md: {
       content: { gap: "4" },
@@ -57,7 +59,7 @@ export const fieldsetStyle = defineComponentSlotStyle({
       header: { gap: "1" },
       helperMessage: { fontSize: "sm" },
       legend: { fontSize: "md" },
-      root: { gap: "4" },
+      root: { gap: formStyle.sizes?.md.root.gap },
     },
     lg: {
       content: { gap: "6" },
@@ -65,27 +67,16 @@ export const fieldsetStyle = defineComponentSlotStyle({
       header: { gap: "1" },
       helperMessage: { fontSize: "md" },
       legend: { fontSize: "lg" },
-      root: { gap: "6" },
+      root: { gap: formStyle.sizes?.lg.root.gap },
     },
   },
 
-  compounds: [
-    {
-      css: { root: { p: "3", rounded: "l2" } },
-      size: "sm",
-      variant: ["elevated", "outline", "panel"],
-    },
-    {
-      css: { root: { p: "4", rounded: "l2" } },
-      size: "md",
-      variant: ["elevated", "outline", "panel"],
-    },
-    {
-      css: { root: { p: "6", rounded: "l2" } },
-      size: "lg",
-      variant: ["elevated", "outline", "panel"],
-    },
-  ],
+  compounds: (
+    formStyle.compounds as ComponentCompound<CSSSlotObject>[] | undefined
+  )?.map(({ css, ...rest }) => ({
+    css: { root: css.group },
+    ...rest,
+  })),
 
   defaultProps: {
     size: "md",

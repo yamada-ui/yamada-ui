@@ -328,19 +328,23 @@ import type {
   IconButtonProps,
   LinkProps,
   Merge,
-} from "@yamada-ui/react"
-import type { LinkProps as OriginalLinkProps } from "next/link"
+} from "@workspaces/ui"
 import type { FC } from "react"
-import { Button, IconButton, Link } from "@yamada-ui/react"
+import type { LinkProps as OriginalLinkProps } from "next/link"
+import { Button, IconButton, Link } from "@workspaces/ui"
 import OriginalLink from "next/link"
 
 export interface NextLinkProps extends Omit<
-  Merge<OriginalLinkProps, LinkProps>,
-  "as" | "ref"
+  Merge<OriginalLinkProps, Omit<LinkProps, "href">>,
+  "as"
 > {}
 
-export const NextLink: FC<NextLinkProps> = (props) => {
-  return <Link as={OriginalLink} {...props} />
+export const NextLink: FC<NextLinkProps> = ({ href, ...rest }) => {
+  return (
+    <Link asChild {...rest}>
+      <OriginalLink href={href} />
+    </Link>
+  )
 }
 
 export interface NextLinkButtonProps
@@ -365,7 +369,7 @@ export const NextLinkIconButton: FC<NextLinkIconButtonProps> = (props) => {
 ### Image
 
 ```tsx
-import { styled } from "@yamada-ui/react"
+import { styled } from "@workspaces/ui"
 import Image from "next/image"
 
 export const AppImage = styled(Image, {

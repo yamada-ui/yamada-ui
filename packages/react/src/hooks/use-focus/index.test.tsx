@@ -171,6 +171,7 @@ describe("useFocusOnShow", () => {
 
 describe("useFocusOnPointerDown", () => {
   afterEach(() => {
+    vi.mocked(isSafari).mockRestore()
     vi.restoreAllMocks()
   })
 

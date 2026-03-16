@@ -394,61 +394,29 @@ You can integrate TanStack Start components such as [Link](https://tanstack.com/
 ### Link
 
 ```tsx
-import type { LinkProps as OriginalLinkProps } from "@tanstack/react-router"
-import type {
-  ButtonProps,
-  HTMLRefAttributes,
-  IconButtonProps,
-  LinkProps,
-  Merge,
-} from "@workspaces/ui"
-import type { FC } from "react"
-import { Link as OriginalLink } from "@tanstack/react-router"
+import type { LinkComponent } from "@tanstack/react-router"
+import { createLink } from "@tanstack/react-router"
 import { Button, IconButton, Link } from "@workspaces/ui"
 
-export interface RouterLinkProps extends Merge<LinkProps, OriginalLinkProps> {}
+const CreatedLink = createLink(Link)
 
-export const RouterLink: FC<RouterLinkProps> = ({ mask, to, ...rest }) => {
-  return (
-    <Link colorScheme="mono" asChild {...rest}>
-      <OriginalLink mask={mask} to={to} />
-    </Link>
-  )
+export const RouterLink: LinkComponent<typeof CreatedLink> = (props) => {
+  return <CreatedLink {...props} />
 }
 
-export interface RouterLinkButtonProps
-  extends
-    Merge<OriginalLinkProps, Omit<ButtonProps, "mask" | "ref">>,
-    HTMLRefAttributes<"a"> {}
+const CreatedLinkButton = createLink(Button)
 
-export const RouterLinkButton: FC<RouterLinkButtonProps> = ({
-  ref,
-  to,
-  mask,
-  ...rest
-}) => {
-  return (
-    <Button asChild {...rest}>
-      <OriginalLink ref={ref} mask={mask} to={to} />
-    </Button>
-  )
+export const RouterLinkButton: LinkComponent<typeof CreatedLinkButton> = (
+  props,
+) => {
+  return <CreatedLinkButton {...props} />
 }
 
-export interface RouterLinkIconButtonProps
-  extends
-    Merge<OriginalLinkProps, Omit<IconButtonProps, "mask" | "ref">>,
-    HTMLRefAttributes<"a"> {}
+const CreatedLinkIconButton = createLink(IconButton)
 
-export const RouterLinkIconButton: FC<RouterLinkIconButtonProps> = ({
-  ref,
-  to,
-  mask,
-  ...rest
-}) => {
-  return (
-    <IconButton asChild {...rest}>
-      <OriginalLink ref={ref} mask={mask} to={to} />
-    </IconButton>
-  )
+export const RouterLinkIconButton: LinkComponent<
+  typeof CreatedLinkIconButton
+> = (props) => {
+  return <CreatedLinkIconButton {...props} />
 }
 ```

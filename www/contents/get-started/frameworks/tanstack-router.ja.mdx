@@ -131,3 +131,155 @@ function App() {
 これで、Yamada UIのセットアップは完了です！
 
 ::::
+
+## スクリプト
+
+### ColorModeScript
+
+[カラーモード](/docs/theming/color-mode)を使用する場合は、正常に動作させるために`body`に`ColorModeScript`を追加する必要があります。
+
+理由は、カラーモードが`localStorage`や`cookies`を用いて実装されており、ページの読み込み時に同期を正しく機能させるためです。
+
+```tsx title="main.tsx" {4,23-28}
+import ReactDOM from "react-dom/client"
+import { RouterProvider, createRouter } from "@tanstack/react-router"
+import { routeTree } from "./routeTree.gen"
+import { ColorModeScript, UIProvider } from "@workspaces/ui"
+
+const router = createRouter({
+  routeTree,
+  defaultPreload: "intent",
+  scrollRestoration: true,
+})
+
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: typeof router
+  }
+}
+
+const rootElement = document.getElementById("app")!
+
+if (!rootElement.innerHTML) {
+  const root = ReactDOM.createRoot(rootElement)
+  root.render(
+    <>
+      <ColorModeScript />
+      <UIProvider>
+        <RouterProvider router={router} />
+      </UIProvider>
+    </>,
+  )
+}
+```
+
+もし、[コンフィグ](/docs/theming/configuration/overview)の`defaultColorMode`を変更した場合は、`ColorModeScript`に`defaultValue`を設定します。
+
+```tsx title="main.tsx" {5,25}
+import ReactDOM from "react-dom/client"
+import { RouterProvider, createRouter } from "@tanstack/react-router"
+import { routeTree } from "./routeTree.gen"
+import { ColorModeScript, UIProvider } from "@workspaces/ui"
+import { config } from "@workspaces/theme"
+
+const router = createRouter({
+  routeTree,
+  defaultPreload: "intent",
+  scrollRestoration: true,
+})
+
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: typeof router
+  }
+}
+
+const rootElement = document.getElementById("app")!
+
+if (!rootElement.innerHTML) {
+  const root = ReactDOM.createRoot(rootElement)
+  root.render(
+    <>
+      <ColorModeScript defaultValue={config.defaultColorMode} />
+      <UIProvider>
+        <RouterProvider router={router} />
+      </UIProvider>
+    </>,
+  )
+}
+```
+
+### ThemeSchemeScript
+
+テーマスキームによる画面のフラッシュを抑制したい場合は、`body`内に`ThemeSchemeScript`を追加します。
+
+テーマスキームは`localStorage`や`cookies`を用いて実装されており、`ThemeSchemeScript`を追加することでページの読み込み時に同期を正しく機能させることができます。
+
+```tsx title="main.tsx" {4,23-28}
+import ReactDOM from "react-dom/client"
+import { RouterProvider, createRouter } from "@tanstack/react-router"
+import { routeTree } from "./routeTree.gen"
+import { ThemeSchemeScript, UIProvider } from "@workspaces/ui"
+
+const router = createRouter({
+  routeTree,
+  defaultPreload: "intent",
+  scrollRestoration: true,
+})
+
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: typeof router
+  }
+}
+
+const rootElement = document.getElementById("app")!
+
+if (!rootElement.innerHTML) {
+  const root = ReactDOM.createRoot(rootElement)
+  root.render(
+    <>
+      <ThemeSchemeScript />
+      <UIProvider>
+        <RouterProvider router={router} />
+      </UIProvider>
+    </>,
+  )
+}
+```
+
+もし、[コンフィグ](/docs/theming/configuration/overview)の`defaultThemeScheme`を変更した場合は、`ThemeSchemeScript`に`defaultValue`を設定します。
+
+```tsx title="main.tsx" {5,25}
+import ReactDOM from "react-dom/client"
+import { RouterProvider, createRouter } from "@tanstack/react-router"
+import { routeTree } from "./routeTree.gen"
+import { ThemeSchemeScript, UIProvider } from "@workspaces/ui"
+import { config } from "@workspaces/theme"
+
+const router = createRouter({
+  routeTree,
+  defaultPreload: "intent",
+  scrollRestoration: true,
+})
+
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: typeof router
+  }
+}
+
+const rootElement = document.getElementById("app")!
+
+if (!rootElement.innerHTML) {
+  const root = ReactDOM.createRoot(rootElement)
+  root.render(
+    <>
+      <ThemeSchemeScript defaultValue={config.defaultThemeScheme} />
+      <UIProvider>
+        <RouterProvider router={router} />
+      </UIProvider>
+    </>,
+  )
+}
+```

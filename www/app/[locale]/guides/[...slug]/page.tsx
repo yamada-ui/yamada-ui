@@ -57,7 +57,7 @@ export default async function Page({
   if (!guide) return notFound()
 
   const t = await getTranslations({ locale, namespace: "guides" })
-  const collectionTitle = getCollectionTitle(locale, guide.collection)
+  const collectionTitle = getCollectionTitle(locale, guide.collection) ?? null
 
   return (
     <VStack as="article" maxW="5xl" mx="auto" py="lg" w="full">
@@ -65,9 +65,7 @@ export default async function Page({
         <Breadcrumb.Link as={NextLink} href="/guides">
           {t("title")}
         </Breadcrumb.Link>
-        {collectionTitle ? (
-          <Breadcrumb.Link currentPage>{collectionTitle}</Breadcrumb.Link>
-        ) : null}
+        <Breadcrumb.Link currentPage>{collectionTitle}</Breadcrumb.Link>
       </Breadcrumb.Root>
 
       <VStack as="header" gap="sm">

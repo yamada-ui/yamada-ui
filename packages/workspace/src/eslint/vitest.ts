@@ -1,25 +1,19 @@
-import type { TSESLint } from "@typescript-eslint/utils"
-import vitestPlugin from "@vitest/eslint-plugin"
+import type { ConfigWithExtends } from "@eslint/config-helpers"
+import vitest from "@vitest/eslint-plugin"
 import { sharedTestFiles } from "./shared"
 
 export const vitestConfig = {
-  name: "eslint/vitest",
+  name: "vitest",
+  extends: [vitest.configs.recommended],
   files: sharedTestFiles,
-  plugins: { vitest: vitestPlugin as unknown as TSESLint.FlatConfig.Plugin },
   rules: {
-    ...vitestPlugin.configs.recommended.rules,
-    "vitest/expect-expect": "off",
-    "vitest/no-commented-out-tests": "off",
-
     "vitest/consistent-test-it": ["error", { fn: "test" }],
+    "vitest/expect-expect": "off",
     "vitest/no-alias-methods": "error",
-    "vitest/no-conditional-expect": "error",
+    "vitest/no-commented-out-tests": "off",
     "vitest/no-conditional-in-test": "error",
     "vitest/no-conditional-tests": "error",
     "vitest/no-duplicate-hooks": "error",
-    "vitest/no-focused-tests": "error",
-    "vitest/no-import-node-test": "error",
-    "vitest/no-standalone-expect": "error",
     "vitest/no-test-return-statement": "error",
     "vitest/prefer-called-with": "error",
     "vitest/prefer-comparison-matcher": "error",
@@ -42,4 +36,4 @@ export const vitestConfig = {
     "vitest/require-top-level-describe": "error",
     "vitest/valid-expect": ["error", { alwaysAwait: true }],
   },
-} satisfies TSESLint.FlatConfig.Config
+} satisfies ConfigWithExtends

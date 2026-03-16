@@ -1,3 +1,4 @@
+// eslint-disable-next-line import-alias/import-alias
 import { CONSTANTS } from "../constants"
 
 export type Locale = (typeof CONSTANTS.I18N.LOCALES)[number]

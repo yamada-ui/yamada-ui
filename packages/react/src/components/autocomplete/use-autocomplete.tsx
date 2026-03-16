@@ -477,7 +477,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
         {
           Backspace: (ev) => {
             if (!isArray(value)) return
-            if (!!inputValue.length) return
+            if (inputValue.length) return
 
             ev.preventDefault()
 

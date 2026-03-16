@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { VStack } from "@yamada-ui/react"
 import { getTranslations } from "next-intl/server"
-import { SourceCodeLink } from "../source-code-link"
+import { SourceCodeLink } from "@/app/[locale]/(apps)/examples/source-code-link"
 import { Body } from "./body"
 import { Header } from "./header"
 

@@ -178,27 +178,26 @@ The `HueSlider` follows the [WAI-ARIA - Slider Pattern](https://www.w3.org/WAI/A
 
 ### ARIA Roles and Attributes
 
-| Component         | Role and Attributes | Usage                                                                                                                                                                   |
-| ----------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `HueSlider.Thumb` | `role="slider"`     | Indicates that this is a slider.                                                                                                                                        |
-|                   | `aria-label`        | Sets `"Slider thumb"`.                                                                                                                                                  |
-|                   | `aria-labelledby`   | Sets the `id` of the associated `HueSlider.Root`.                                                                                                                       |
-|                   | `aria-orientation`  | Sets `"horizontal"` or `"vertical"` based on the `orientation` value. Default is `"horizontal"`.                                                                        |
-|                   | `aria-valuemin`     | Sets the `min` value. Default is `0`.                                                                                                                                   |
-|                   | `aria-valuemax`     | Sets the `max` value. Default is `360`.                                                                                                                                 |
-|                   | `aria-valuenow`     | Sets the current value.                                                                                                                                                 |
-|                   | `aria-valuetext`    | Sets the current value, such as `"18°, Red"`.                                                                                                                           |
-|                   | `aria-describedby`  | If `HueSlider.Thumb` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
-|                   | `aria-readonly`     | Set to `"true"` if `readOnly` is set.                                                                                                                                   |
-|                   | `aria-disabled`     | Set to `"true"` if `disabled` is set.                                                                                                                                   |
-|                   | `aria-invalid`      | Set to `"true"` if `invalid` is set.                                                                                                                                    |
-|                   | `aria-required`     | Set to `"true"` if `required` is set.                                                                                                                                   |
-| `SliderInput`     | `type="hidden"`     | Excludes the element from the accessibility tree.                                                                                                                       |
-|                   | `aria-describedby`  | If `HueSlider.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`.  |
-|                   | `aria-readonly`     | Set to `"true"` if `readOnly` is set.                                                                                                                                   |
-|                   | `aria-disabled`     | Set to `"true"` if `disabled` is set.                                                                                                                                   |
-|                   | `aria-invalid`      | Set to `"true"` if `invalid` is set.                                                                                                                                    |
-|                   | `aria-required`     | Set to `"true"` if `required` is set.                                                                                                                                   |
+| Component and Element | Role and Attributes | Usage                                                                                                                                                      |
+| --------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `HueSlider.Thumb`     | `role="slider"`     | Indicates that this is a slider.                                                                                                                           |
+|                       | `aria-label`        | Sets `"Slider thumb"`.                                                                                                                                     |
+|                       | `aria-orientation`  | Sets `"horizontal"` or `"vertical"` based on the `orientation` value. Default is `"horizontal"`.                                                           |
+|                       | `aria-valuemin`     | Sets the `min` value. Default is `0`.                                                                                                                      |
+|                       | `aria-valuemax`     | Sets the `max` value. Default is `360`.                                                                                                                    |
+|                       | `aria-valuenow`     | Sets the current value.                                                                                                                                    |
+|                       | `aria-valuetext`    | Sets the current value, such as `"18°, Red"`.                                                                                                              |
+|                       | `aria-describedby`  | If this is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|                       | `aria-readonly`     | Set to `"true"` if `readOnly` is set.                                                                                                                      |
+|                       | `aria-disabled`     | Set to `"true"` if `disabled` is set.                                                                                                                      |
+|                       | `aria-invalid`      | Set to `"true"` if `invalid` is set.                                                                                                                       |
+|                       | `aria-required`     | Set to `"true"` if `required` is set.                                                                                                                      |
+| `input`               | `aria-hidden`       | Excludes the element from the accessibility tree.                                                                                                          |
+|                       | `aria-describedby`  | If this is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|                       | `aria-readonly`     | Set to `"true"` if `readOnly` is set.                                                                                                                      |
+|                       | `aria-disabled`     | Set to `"true"` if `disabled` is set.                                                                                                                      |
+|                       | `aria-invalid`      | Set to `"true"` if `invalid` is set.                                                                                                                       |
+|                       | `aria-required`     | Set to `"true"` if `required` is set.                                                                                                                      |
 
 ## Similar Components
 

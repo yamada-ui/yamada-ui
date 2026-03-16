@@ -337,9 +337,9 @@ function ContentCarouselItem({
       >
         <NextImage
           alt={title}
-          // @ts-ignore
+          // @ts-expect-error
           fill
-          // @ts-ignore
+          // @ts-expect-error
           objectFit="cover"
           priority
           sizes="100%"

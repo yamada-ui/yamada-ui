@@ -46,7 +46,7 @@
     "./hooks/*": "./src/hooks/*/index.ts"
   },
   "scripts": {
-    "clean": "rimraf node_modules dist trace coverage storybook-static .turbo .eslintcache __screenshots__",
+    "clean": "rimraf node_modules dist trace coverage storybook-static .turbo .eslintcache .vitest-attachments __screenshots__",
     "build": "tsdown",
     "storybook": "storybook dev -p 6006 -c storybook",
     "storybook:serve": "npx http-server ./storybook-static",
@@ -85,7 +85,6 @@
     "@floating-ui/react-dom": "^2.1.8",
     "@tanstack/react-table": "^8.21.3",
     "@yamada-ui/utils": "workspace:*",
-    "color2k": "^2.0.3",
     "copy-to-clipboard": "3.3.3",
     "csstype": "^3.2.3",
     "dayjs": "^1.11.20",
@@ -109,16 +108,17 @@
     "uqr": "^0.1.2"
   },
   "devDependencies": {
-    "@faker-js/faker": "^10.3.0",
-    "@lucide/lab": "^0.1.2",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
+    "@faker-js/faker": "catalog:",
+    "@lucide/lab": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "@vitest/browser": "^4.1.0",
     "@vitest/browser-playwright": "^4.1.0",
-    "clean-package": "2.2.0",
+    "axe-core": "^4.11.1",
+    "clean-package": "catalog:",
     "playwright": "^1.58.2",
-    "react-hook-form": "^7.71.2",
-    "react-icons": "^5.6.0",
+    "react-hook-form": "catalog:",
+    "react-icons": "catalog:",
     "use-mask-input": "^3.7.4",
     "vitest-browser-react": "2.0.5"
   },

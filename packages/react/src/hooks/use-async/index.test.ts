@@ -1,30 +1,28 @@
-import { act, renderHook, waitFor } from "#test"
+import { renderHook } from "#test/browser"
 import { useAsync, useAsyncFunc, useAsyncRetry } from "."
 
 describe("useAsync", () => {
   test("should handle async function execution", async () => {
     const asyncFunction = async () => Promise.resolve("test")
-    const { result } = renderHook(() => useAsync(asyncFunction, []))
-    await waitFor(() => {
-      expect(result.current.value).toBe("test")
-    })
+    const { result } = await renderHook(() => useAsync(asyncFunction, []))
+    await expect.poll(() => result.current.value).toBe("test")
   })
 })
 
 describe("useAsyncFunc", () => {
   test("should return a function that handles async execution", async () => {
     const asyncFunction = async () => Promise.resolve("test")
-    const { result } = renderHook(() => useAsyncFunc(asyncFunction, []))
+    const { act, result } = await renderHook(() =>
+      useAsyncFunc(asyncFunction, []),
+    )
 
-    let asyncResult: Promise<string>
+    let asyncResult: string | undefined
 
-    act(() => {
-      asyncResult = result.current[1]()
+    await act(async () => {
+      asyncResult = await result.current[1]()
     })
 
-    await waitFor(async () => {
-      await expect(asyncResult).resolves.toBe("test")
-    })
+    expect(asyncResult).toBe("test")
   })
 })
 
@@ -40,15 +38,15 @@ describe("useAsyncRetry", () => {
           reject("fail")
         }
       })
-    const { result } = renderHook(() => useAsyncRetry(asyncFunction, []))
+    const { act, result } = await renderHook(() =>
+      useAsyncRetry(asyncFunction, []),
+    )
 
-    expect(result.current.loading).toBeTruthy()
-
-    await waitFor(() => expect(result.current.loading).toBeFalsy())
-    await waitFor(() => {
+    await expect.poll(() => result.current.loading).toBeFalsy()
+    await act(() => {
       result.current.retry()
     })
-    await waitFor(() => expect(result.current.loading).toBeFalsy())
-    await waitFor(() => expect(result.current.value).toBe("success"))
+    await expect.poll(() => result.current.loading).toBeFalsy()
+    await expect.poll(() => result.current.value).toBe("success")
   })
 })

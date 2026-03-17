@@ -12,10 +12,17 @@ import type { LinkProps as OriginalLinkProps } from "@/i18n"
 import { Button, IconButton, Link } from "@yamada-ui/react"
 import { Link as OriginalLink } from "@/i18n"
 
-export interface NextLinkProps extends LinkProps {}
+export interface NextLinkProps extends Omit<
+  Merge<OriginalLinkProps, Omit<LinkProps, "href">>,
+  "as"
+> {}
 
-export const NextLink: FC<NextLinkProps> = ({ ...rest }) => {
-  return <Link as={OriginalLink} colorScheme="mono" {...rest} />
+export const NextLink: FC<NextLinkProps> = ({ href, children, ...rest }) => {
+  return (
+    <Link colorScheme="mono" asChild {...rest}>
+      <OriginalLink href={href}>{children}</OriginalLink>
+    </Link>
+  )
 }
 
 export interface NextLinkButtonProps
@@ -31,6 +38,7 @@ export const NextLinkButton: FC<NextLinkButtonProps> = ({
 }) => {
   return (
     <Button
+      ref={null}
       as={OriginalLink}
       rel={external ? "noopener" : undefined}
       target={external ? "_blank" : undefined}

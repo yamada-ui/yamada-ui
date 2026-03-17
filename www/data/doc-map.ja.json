@@ -65,6 +65,11 @@
               "title": "React Router",
               "segment": "react-router",
               "pathname": "/docs/get-started/frameworks/react-router"
+            },
+            {
+              "title": "TanStack Start",
+              "segment": "tanstack-start",
+              "pathname": "/docs/get-started/frameworks/tanstack-start"
             }
           ]
         }
@@ -1309,6 +1314,11 @@
           "title": "貢献する",
           "segment": "contributing",
           "pathname": "/docs/community/contributing"
+        },
+        {
+          "title": "AI利用ポリシー",
+          "segment": "ai-policy",
+          "pathname": "/docs/community/ai-policy"
         }
       ]
     },
@@ -1321,6 +1331,11 @@
           "title": "@yamada-ui/react",
           "segment": "react",
           "items": [
+            {
+              "title": "v2.1.3",
+              "segment": "2-1-3",
+              "pathname": "/docs/changelog/react/2-1-3"
+            },
             {
               "title": "v2.1.2",
               "segment": "2-1-2",
@@ -1388,6 +1403,11 @@
           "segment": "cli",
           "items": [
             {
+              "title": "v2.1.1",
+              "segment": "2-1-1",
+              "pathname": "/docs/changelog/cli/2-1-1"
+            },
+            {
               "title": "v2.1.0",
               "segment": "2-1-0",
               "pathname": "/docs/changelog/cli/2-1-0"
@@ -1443,6 +1463,11 @@
           "title": "@yamada-ui/utils",
           "segment": "utils",
           "items": [
+            {
+              "title": "v2.1.1",
+              "segment": "2-1-1",
+              "pathname": "/docs/changelog/utils/2-1-1"
+            },
             {
               "title": "v2.1.0",
               "segment": "2-1-0",

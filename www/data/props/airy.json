@@ -29,7 +29,7 @@
     "delay": {
       "type": "number",
       "defaultValue": "0",
-      "description": "　The animation delay.",
+      "description": "The animation delay.",
       "required": false
     },
     "disabled": {

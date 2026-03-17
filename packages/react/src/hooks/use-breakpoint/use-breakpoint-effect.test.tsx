@@ -1,26 +1,16 @@
-import { renderHook } from "#test"
-import MatchMediaMock from "vitest-matchmedia-mock"
+import { page, renderHook } from "#test/browser"
 import { useBreakpointEffect } from "./use-breakpoint-effect"
 
 describe("useBreakpointEffect", () => {
-  let matchMediaMock: MatchMediaMock
-
-  beforeAll(() => {
-    matchMediaMock = new MatchMediaMock()
+  afterEach(async () => {
+    await page.viewport(1280, 720)
   })
 
-  afterEach(() => {
-    matchMediaMock.clear()
-  })
-
-  afterAll(() => {
-    matchMediaMock.destroy()
-  })
-
-  test("Executes callback when breakpoint changes", () => {
-    matchMediaMock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
+  test("Executes callback when breakpoint changes", async () => {
+    await page.viewport(600, 800)
     const callback = vi.fn()
-    renderHook(() => useBreakpointEffect(callback, []))
-    expect(callback).toHaveBeenCalledExactlyOnceWith("md")
+    await renderHook(() => useBreakpointEffect(callback, []))
+    await expect.poll(() => callback).toHaveBeenCalledWith("md")
+    await expect.poll(() => callback).toHaveBeenCalledTimes(1)
   })
 })

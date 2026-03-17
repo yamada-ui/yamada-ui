@@ -6,6 +6,7 @@ import {
   BirdIcon,
   Button,
   Center,
+  filterUndefined,
   FishIcon,
   Grid,
   icons,
@@ -20,11 +21,13 @@ import {
   SnailIcon,
   SquirrelIcon,
   Text,
+  toKebabCase,
   Tooltip,
   VStack,
 } from "@yamada-ui/react"
 import { matchSorter } from "match-sorter"
 import { useTranslations } from "next-intl"
+import { useSearchParams } from "next/navigation"
 import { memo, useCallback, useRef, useState, useTransition } from "react"
 import data from "@/data/icons.json"
 import { useRouter } from "@/i18n"
@@ -35,49 +38,88 @@ export interface Data {
   Icon: ElementType
   keywords: string[]
   name: string
+  query: string
   related: string[]
 }
 
 const CONTENTS: Data[] = Object.entries(icons).map(([name, Icon]) => ({
   name,
   Icon,
+  query: toKebabCase(name)
+    .replace(/-icon$/, "")
+    .replace(/-/g, " "),
   ...data[name as keyof typeof data],
 }))
 
 const PER_PAGE = 204
 
+function getContents(value: string) {
+  let hits = CONTENTS
+
+  if (value.length)
+    hits = matchSorter(CONTENTS, value, {
+      keys: ["query", "keywords"],
+    })
+
+  return { list: hits.slice(0, PER_PAGE), total: hits }
+}
+
 export interface ListProps extends StackProps {}
 
 export function List({ ...rest }: ListProps) {
   const t = useTranslations("icons")
-  const [value, setValue] = useState("")
+  const searchParams = useSearchParams()
+  const query = searchParams.get("query") ?? ""
+  const [value, setValue] = useState(query)
   const total = CONTENTS.length
   const hitsRef = useRef(CONTENTS)
-  const [list, setList] = useState(CONTENTS.slice(0, PER_PAGE))
+  const [list, setList] = useState(() => {
+    const { list, total } = getContents(query)
+
+    hitsRef.current = total
+
+    return list
+  })
   const resetRef = useRef<() => void>(noop)
   const openRef = useRef<(data: Data) => void>(noop)
   const router = useRouter()
   const totalIndex = Math.ceil(total / PER_PAGE) - 1
   const [, startTransition] = useTransition()
 
-  const onSearch = useCallback((value: string) => {
-    setValue(value)
+  const replaceQuery = useCallback(
+    ({ name, query = value }: { name?: string; query?: string } = {}) => {
+      router.replace(
+        {
+          pathname: "/icons",
+          query: filterUndefined({
+            name,
+            query: query.length ? query : undefined,
+          }),
+        },
+        { scroll: false },
+      )
+    },
+    [router, value],
+  )
 
-    startTransition(() => {
-      resetRef.current()
+  const onSearch = useCallback(
+    (value: string) => {
+      setValue(value)
 
-      let hits = CONTENTS
+      replaceQuery({ query: value })
 
-      if (value.length)
-        hits = matchSorter(CONTENTS, value, {
-          keys: ["title", "keywords"],
-        })
+      startTransition(() => {
+        resetRef.current()
 
-      hitsRef.current = hits
+        const { list, total } = getContents(value)
 
-      setList(hits.slice(0, PER_PAGE))
-    })
-  }, [])
+        hitsRef.current = total
+
+        setList(list)
+      })
+    },
+    [replaceQuery],
+  )
 
   const onReset = useCallback(() => {
     setValue("")
@@ -88,13 +130,10 @@ export function List({ ...rest }: ListProps) {
 
   const onOpen = useCallback(
     (data: Data) => {
-      router.replace(
-        { pathname: "/icons", query: { name: data.name } },
-        { scroll: false },
-      )
+      replaceQuery({ name: data.name })
       openRef.current(data)
     },
-    [router],
+    [replaceQuery],
   )
 
   return (
@@ -146,7 +185,7 @@ export function List({ ...rest }: ListProps) {
         </InfiniteScrollArea>
       </VStack>
 
-      <PreviewDrawer onOpenRef={openRef} />
+      <PreviewDrawer replaceQuery={replaceQuery} onOpenRef={openRef} />
     </>
   )
 }

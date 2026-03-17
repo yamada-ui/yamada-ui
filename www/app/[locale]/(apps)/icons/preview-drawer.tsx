@@ -28,20 +28,24 @@ import { useSearchParams } from "next/navigation"
 import { Fragment, memo, useState } from "react"
 import { CodePreview } from "@/components"
 import data from "@/data/icons.json"
-import { useRouter } from "@/i18n"
+
+export interface Item extends Omit<Data, "query"> {}
 
 export interface PreviewDrawerProps extends Drawer.RootProps {
   onOpenRef: RefObject<(data: Data) => void>
+  replaceQuery: (query?: { name?: string; query?: string }) => void
 }
 
 export const PreviewDrawer = memo(function PreviewDrawer({
+  replaceQuery,
   onOpenRef,
   ...rest
 }: PreviewDrawerProps) {
   const searchParams = useSearchParams()
   const defaultName = searchParams.get("name")
-  const [item, setItem] = useState<Data | null>(() => {
-    if (!defaultName || !(defaultName in icons)) return null
+  const defaultOpen = !!defaultName && defaultName in icons
+  const [item, setItem] = useState<Item | null>(() => {
+    if (!defaultOpen) return null
 
     return {
       name: defaultName,
@@ -50,13 +54,12 @@ export const PreviewDrawer = memo(function PreviewDrawer({
     }
   })
   const { name, Icon: PreviewIcon = Fragment, related } = item ?? {}
-  const router = useRouter()
   const t = useTranslations("icons")
   const { open, onClose, onOpen } = useDisclosure({
-    defaultOpen: !!item,
+    defaultOpen,
     onClose: () => {
       setItem(null)
-      router.replace({ pathname: "/icons" }, { scroll: false })
+      replaceQuery()
     },
   })
 
@@ -175,10 +178,7 @@ export const PreviewDrawer = memo(function PreviewDrawer({
                       icon={<Icon fontSize="2xl" />}
                       onClick={() => {
                         setItem({ name, Icon, ...rest })
-                        router.replace(
-                          { pathname: "/icons", query: { name } },
-                          { scroll: false },
-                        )
+                        replaceQuery({ name })
                       }}
                     />
                   </Tooltip>

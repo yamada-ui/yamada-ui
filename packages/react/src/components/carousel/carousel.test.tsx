@@ -93,22 +93,18 @@ describe("<Carousel />", () => {
     const { user } = await render(<TestComponent />)
 
     await user.click(page.getByRole("button", { name: "Go to next slide" }))
-    vi.waitFor(async () => {
-      await expect
-        .element(page.getByText("Slide 2"))
-        .toHaveAttribute("data-selected")
-    })
+    await expect
+      .element(page.getByText("Slide 2"))
+      .toHaveAttribute("data-selected")
 
     await user.click(
       page.getByRole("button", {
         name: "Go to previous slide",
       }),
     )
-    vi.waitFor(async () => {
-      await expect
-        .element(page.getByText("Slide 1"))
-        .toHaveAttribute("data-selected")
-    })
+    await expect
+      .element(page.getByText("Slide 1"))
+      .toHaveAttribute("data-selected")
   })
 
   test("should switch to correctly slide when click on indicator", async () => {

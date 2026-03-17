@@ -1,74 +1,57 @@
-import { renderHook, system } from "#test"
-import MatchMediaMock from "vitest-matchmedia-mock"
+import { page, renderHook, system } from "#test/browser"
 import { getValue, useValue } from "./"
 
 describe("useValue", () => {
-  let matchMediaMock: MatchMediaMock
-
-  beforeAll(() => {
-    matchMediaMock = new MatchMediaMock()
+  afterEach(async () => {
+    await page.viewport(1280, 720)
   })
 
-  afterEach(() => {
-    matchMediaMock.clear()
-  })
-
-  afterAll(() => {
-    matchMediaMock.destroy()
-  })
-
-  test("Returns the base value when passing a responsive object", () => {
-    const { result } = renderHook(() => useValue({ base: "base", md: "md" }))
+  test("Returns the base value when passing a responsive object", async () => {
+    await page.viewport(1600, 800)
+    const { result } = await renderHook(() =>
+      useValue({ base: "base", md: "md" }),
+    )
     expect(result.current).toBe("base")
   })
 
-  test("Returns the correct breakpoint value based on the current screen width", () => {
-    matchMediaMock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
-    const { result } = renderHook(() => useValue({ base: "base", md: "md" }))
+  test("Returns the correct breakpoint value based on the current screen width", async () => {
+    await page.viewport(600, 800)
+    const { result } = await renderHook(() =>
+      useValue({ base: "base", md: "md" }),
+    )
     expect(result.current).toBe("md")
   })
 
-  test("Returns the correct value based on the current light mode", () => {
-    const { result } = renderHook(() => useValue(["lightValue", "darkValue"]))
+  test("Returns the correct value based on the current light mode", async () => {
+    const { result } = await renderHook(() =>
+      useValue(["lightValue", "darkValue"]),
+    )
     expect(result.current).toBe("lightValue")
   })
 
-  test("Returns the correct value based on the current dark mode", () => {
-    const { result } = renderHook(() => useValue(["lightValue", "darkValue"]), {
-      providerProps: { colorMode: "dark" },
-    })
+  test("Returns the correct value based on the current dark mode", async () => {
+    const { result } = await renderHook(
+      () => useValue(["lightValue", "darkValue"]),
+      {
+        providerProps: { colorMode: "dark" },
+      },
+    )
     expect(result.current).toBe("darkValue")
   })
 
-  test("Returns the same value when passing a normal value", () => {
-    const { result } = renderHook(() => useValue("normalValue"))
+  test("Returns the same value when passing a normal value", async () => {
+    const { result } = await renderHook(() => useValue("normalValue"))
     expect(result.current).toBe("normalValue")
   })
 })
 
 describe("getValue", () => {
-  let matchMediaMock: MatchMediaMock
-
-  beforeAll(() => {
-    matchMediaMock = new MatchMediaMock()
-  })
-
-  afterEach(() => {
-    matchMediaMock.clear()
-  })
-
-  afterAll(() => {
-    matchMediaMock.destroy()
-  })
-
   test("Returns the base value when passed a responsive object", () => {
     const value = getValue({ base: "base", md: "md" })(system, "light", "base")
     expect(value).toBe("base")
   })
 
   test("Returns the correct breakpoint value based on the current screen width", () => {
-    matchMediaMock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
-
     const value = getValue({ base: "base", md: "md" })(system, "light", "md")
     expect(value).toBe("md")
   })

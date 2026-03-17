@@ -1,43 +1,43 @@
-import { act, renderHook } from "#test"
+import { renderHook } from "#test/browser"
 import { usePrevious } from "."
 
 describe("usePrevious", () => {
-  test("returns undefined on first render", () => {
-    const { result } = renderHook(() => usePrevious("initial"))
+  test("returns undefined on first render", async () => {
+    const { result } = await renderHook(() => usePrevious("initial"))
 
     expect(result.current).toBeUndefined()
   })
 
-  test("returns previous value after re-render", () => {
-    const { rerender, result } = renderHook(({ value }) => usePrevious(value), {
-      initialProps: { value: "first" },
-    })
+  test("returns previous value after re-render", async () => {
+    const { rerender, result } = await renderHook(
+      (props) => usePrevious(props?.value ?? "first"),
+      {
+        initialProps: { value: "first" },
+      },
+    )
 
     expect(result.current).toBeUndefined()
 
-    act(() => {
-      rerender({ value: "second" })
-    })
+    await rerender({ value: "second" })
 
     expect(result.current).toBe("first")
 
-    act(() => {
-      rerender({ value: "third" })
-    })
+    await rerender({ value: "third" })
 
     expect(result.current).toBe("second")
   })
 
-  test("returns previous value when re-rendered with same value", () => {
-    const { rerender, result } = renderHook(({ value }) => usePrevious(value), {
-      initialProps: { value: "same" },
-    })
+  test("returns previous value when re-rendered with same value", async () => {
+    const { rerender, result } = await renderHook(
+      (props) => usePrevious(props?.value ?? "same"),
+      {
+        initialProps: { value: "same" },
+      },
+    )
 
     expect(result.current).toBeUndefined()
 
-    act(() => {
-      rerender({ value: "same" })
-    })
+    await rerender({ value: "same" })
 
     expect(result.current).toBe("same")
   })

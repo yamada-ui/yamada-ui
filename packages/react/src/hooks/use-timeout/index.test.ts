@@ -2,6 +2,14 @@ import { renderHook } from "#test/browser"
 import { useTimeout } from "."
 
 describe("useTimeout", () => {
+  beforeEach(() => {
+    vi.useFakeTimers()
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
   test("should call the callback after the specified delay", async () => {
     const callback = vi.fn()
 
@@ -9,7 +17,19 @@ describe("useTimeout", () => {
 
     expect(callback).not.toHaveBeenCalled()
 
-    await expect.poll(() => callback).toHaveBeenCalledTimes(1)
+    vi.advanceTimersByTime(50)
+
+    expect(callback).toHaveBeenCalledTimes(1)
+  })
+
+  test("should not call the callback before the specified delay", async () => {
+    const callback = vi.fn()
+
+    await renderHook(() => useTimeout(callback, 50))
+
+    vi.advanceTimersByTime(49)
+
+    expect(callback).not.toHaveBeenCalled()
   })
 
   test("should not call the callback when delay is null", async () => {
@@ -17,7 +37,7 @@ describe("useTimeout", () => {
 
     await renderHook(() => useTimeout(callback, null))
 
-    await new Promise((resolve) => setTimeout(resolve, 100))
+    vi.advanceTimersByTime(500)
 
     expect(callback).not.toHaveBeenCalled()
   })
@@ -29,7 +49,7 @@ describe("useTimeout", () => {
 
     unmount()
 
-    await new Promise((resolve) => setTimeout(resolve, 100))
+    vi.advanceTimersByTime(100)
 
     expect(callback).not.toHaveBeenCalled()
   })
@@ -42,10 +62,24 @@ describe("useTimeout", () => {
       { initialProps: { delay: 5000 } },
     )
 
+    vi.advanceTimersByTime(500)
+
     expect(callback).not.toHaveBeenCalled()
 
     await rerender({ delay: 50 })
 
-    await expect.poll(() => callback).toHaveBeenCalledTimes(1)
+    vi.advanceTimersByTime(50)
+
+    expect(callback).toHaveBeenCalledTimes(1)
+  })
+
+  test("should only call the callback once", async () => {
+    const callback = vi.fn()
+
+    await renderHook(() => useTimeout(callback, 50))
+
+    vi.advanceTimersByTime(500)
+
+    expect(callback).toHaveBeenCalledTimes(1)
   })
 })

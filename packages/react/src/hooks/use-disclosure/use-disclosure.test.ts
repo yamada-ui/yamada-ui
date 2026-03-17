@@ -110,33 +110,46 @@ describe("useDisclosure", () => {
     expect(onClose).toHaveBeenCalledTimes(1)
   })
 
-  test("should call callback with timing before", async () => {
-    const onOpen = vi.fn()
+  test("should call callback before state change with timing before", async () => {
+    let openDuringCallback: boolean | undefined
 
     const { act, result } = await renderHook(() =>
-      useDisclosure({ timing: "before", onOpen }),
+      useDisclosure({
+        timing: "before",
+        onOpen: () => {
+          openDuringCallback = result.current.open
+        },
+      }),
     )
 
     await act(() => {
       result.current.onOpen()
     })
 
-    expect(onOpen).toHaveBeenCalledTimes(1)
+    expect(openDuringCallback).toBeFalsy()
     expect(result.current.open).toBeTruthy()
   })
 
-  test("should call callback with timing after", async () => {
-    const onOpen = vi.fn()
+  test("should call callback after state change with timing after", async () => {
+    let closedDuringCallback: boolean | undefined
 
     const { act, result } = await renderHook(() =>
-      useDisclosure({ timing: "after", onOpen }),
+      useDisclosure({
+        defaultOpen: true,
+        timing: "after",
+        onClose: () => {
+          closedDuringCallback = result.current.open
+        },
+      }),
     )
 
+    expect(result.current.open).toBeTruthy()
+
     await act(() => {
-      result.current.onOpen()
+      result.current.onClose()
     })
 
-    expect(onOpen).toHaveBeenCalledTimes(1)
-    expect(result.current.open).toBeTruthy()
+    expect(closedDuringCallback).toBeFalsy()
+    expect(result.current.open).toBeFalsy()
   })
 })

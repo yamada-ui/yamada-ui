@@ -70,6 +70,11 @@
               "title": "TanStack Start",
               "segment": "tanstack-start",
               "pathname": "/docs/get-started/frameworks/tanstack-start"
+            },
+            {
+              "title": "TanStack Router",
+              "segment": "tanstack-router",
+              "pathname": "/docs/get-started/frameworks/tanstack-router"
             }
           ]
         }
@@ -1314,6 +1319,11 @@
           "title": "貢献する",
           "segment": "contributing",
           "pathname": "/docs/community/contributing"
+        },
+        {
+          "title": "AI利用ポリシー",
+          "segment": "ai-policy",
+          "pathname": "/docs/community/ai-policy"
         }
       ]
     },

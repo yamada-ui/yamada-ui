@@ -1,37 +1,76 @@
 import type { FC } from "react"
-import { page, render } from "#test/browser"
+import { act, render } from "#test"
+import { renderToString } from "react-dom/server"
 import { useOnline } from "./"
 
-const Component: FC = () => {
-  const online = useOnline()
+const Component: FC<{ getServerSnapshot?: () => boolean }> = ({
+  getServerSnapshot,
+}) => {
+  const online = useOnline(getServerSnapshot)
 
   return <p data-testid="status">{String(online)}</p>
 }
 
 describe("useOnline", () => {
-  test("returns the current online status", async () => {
-    await render(<Component />)
+  const onLineSpy = vi.spyOn(window.navigator, "onLine", "get")
 
-    const status = page.getByTestId("status")
-    await expect.element(status).toHaveTextContent(String(navigator.onLine))
+  afterEach(() => {
+    onLineSpy.mockReset()
   })
 
-  test("subscribes to online and offline events on mount", async () => {
-    const addSpy = vi.spyOn(window, "addEventListener")
+  test("returns true when the browser is online", () => {
+    onLineSpy.mockReturnValue(true)
 
-    await render(<Component />)
+    const { getByTestId } = render(<Component />)
 
-    expect(addSpy).toHaveBeenCalledWith("online", expect.any(Function))
-    expect(addSpy).toHaveBeenCalledWith("offline", expect.any(Function))
-
-    addSpy.mockRestore()
+    expect(getByTestId("status").textContent).toBe("true")
   })
 
-  test("removes event listeners on unmount", async () => {
+  test("returns false when the browser is offline", () => {
+    onLineSpy.mockReturnValue(false)
+
+    const { getByTestId } = render(<Component />)
+
+    expect(getByTestId("status").textContent).toBe("false")
+  })
+
+  test("updates when the browser goes offline", () => {
+    onLineSpy.mockReturnValue(true)
+
+    const { getByTestId } = render(<Component />)
+
+    expect(getByTestId("status").textContent).toBe("true")
+
+    act(() => {
+      onLineSpy.mockReturnValue(false)
+      window.dispatchEvent(new Event("offline"))
+    })
+
+    expect(getByTestId("status").textContent).toBe("false")
+  })
+
+  test("updates when the browser goes online", () => {
+    onLineSpy.mockReturnValue(false)
+
+    const { getByTestId } = render(<Component />)
+
+    expect(getByTestId("status").textContent).toBe("false")
+
+    act(() => {
+      onLineSpy.mockReturnValue(true)
+      window.dispatchEvent(new Event("online"))
+    })
+
+    expect(getByTestId("status").textContent).toBe("true")
+  })
+
+  test("removes event listeners on unmount", () => {
     const addSpy = vi.spyOn(window, "addEventListener")
     const removeSpy = vi.spyOn(window, "removeEventListener")
 
-    const { unmount } = await render(<Component />)
+    onLineSpy.mockReturnValue(true)
+
+    const { unmount } = render(<Component />)
 
     expect(addSpy).toHaveBeenCalledWith("online", expect.any(Function))
     expect(addSpy).toHaveBeenCalledWith("offline", expect.any(Function))
@@ -45,25 +84,15 @@ describe("useOnline", () => {
     removeSpy.mockRestore()
   })
 
-  test("calls getSnapshot when online event is dispatched", async () => {
-    await render(<Component />)
+  test("uses default getServerSnapshot during SSR", () => {
+    const html = renderToString(<Component />)
 
-    const status = page.getByTestId("status")
-    await expect.element(status).toHaveTextContent("true")
-
-    window.dispatchEvent(new Event("online"))
-
-    await expect.element(status).toHaveTextContent(String(navigator.onLine))
+    expect(html).toContain("true")
   })
 
-  test("calls getSnapshot when offline event is dispatched", async () => {
-    await render(<Component />)
+  test("uses custom getServerSnapshot during SSR", () => {
+    const html = renderToString(<Component getServerSnapshot={() => false} />)
 
-    const status = page.getByTestId("status")
-    await expect.element(status).toHaveTextContent("true")
-
-    window.dispatchEvent(new Event("offline"))
-
-    await expect.element(status).toHaveTextContent(String(navigator.onLine))
+    expect(html).toContain("false")
   })
 })

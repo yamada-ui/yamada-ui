@@ -1314,6 +1314,11 @@
           "title": "Contributing",
           "segment": "contributing",
           "pathname": "/docs/community/contributing"
+        },
+        {
+          "title": "AI Usage Policy",
+          "segment": "ai-policy",
+          "pathname": "/docs/community/ai-policy"
         }
       ]
     },

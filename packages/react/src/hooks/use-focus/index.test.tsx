@@ -1,179 +1,253 @@
 import type { FC } from "react"
-import type { UseFocusOnMouseDownProps } from "./"
-import { page, render } from "#test/browser"
-import { useRef, useState } from "react"
-import { isSafari } from "../../utils"
+import type * as Utils from "../../utils"
+import type { UseFocusOnMouseDownProps, UseFocusOnShowProps } from "./"
+import { act, fireEvent, render, waitFor } from "#test"
+import { useRef } from "react"
+import { getFirstFocusableElement } from "../../utils"
 import { useFocusOnPointerDown, useFocusOnShow } from "./"
 
+const mockState = vi.hoisted(() => {
+  return {
+    defaultGetFirstFocusableElement:
+      undefined as unknown as typeof getFirstFocusableElement,
+  }
+})
+
 vi.mock("../../utils", async (importOriginal) => {
-  const actual = await importOriginal<{ [key: string]: unknown }>()
+  const actual = await importOriginal<typeof Utils>()
+  mockState.defaultGetFirstFocusableElement = actual.getFirstFocusableElement
 
   return {
     ...actual,
-    isSafari: vi.fn(() => true),
+    getFirstFocusableElement: vi.fn(actual.getFirstFocusableElement),
   }
 })
 
 describe("useFocusOnShow", () => {
+  afterEach(() => {
+    const firstFocusableMock = vi.mocked(getFirstFocusableElement)
+    vi.restoreAllMocks()
+    firstFocusableMock.mockReset()
+    firstFocusableMock.mockImplementation(
+      mockState.defaultGetFirstFocusableElement,
+    )
+  })
+
+  const Component: FC<Omit<UseFocusOnShowProps, "focusTarget">> = (props) => {
+    const ref = useRef<HTMLDivElement>(null)
+    const focusRef = useRef<HTMLButtonElement>(null)
+    useFocusOnShow(ref, {
+      focusTarget: focusRef,
+      shouldFocus: true,
+      ...props,
+    })
+
+    return (
+      <div ref={ref}>
+        <button ref={focusRef} data-testid="button">
+          Button
+        </button>
+      </div>
+    )
+  }
+
+  const ComponentWithoutFocusTarget: FC<
+    Omit<UseFocusOnShowProps, "focusTarget">
+  > = (props) => {
+    const ref = useRef<HTMLDivElement>(null)
+    useFocusOnShow(ref, { shouldFocus: true, ...props })
+
+    return (
+      <div ref={ref}>
+        <button data-testid="button">Button</button>
+      </div>
+    )
+  }
+
+  const ComponentWithoutFocusableChild: FC<
+    Omit<UseFocusOnShowProps, "focusTarget">
+  > = (props) => {
+    const ref = useRef<HTMLDivElement>(null)
+    useFocusOnShow(ref, { shouldFocus: true, ...props })
+
+    return (
+      <div ref={ref} data-testid="target" tabIndex={-1}>
+        <span>Label</span>
+      </div>
+    )
+  }
+
   test("focuses on the element when it becomes visible", async () => {
-    const Component: FC = () => {
-      const [visible, setVisible] = useState(false)
-      const ref = useRef<HTMLDivElement>(null)
-      const focusRef = useRef<HTMLButtonElement>(null)
-      useFocusOnShow(ref, {
-        focusTarget: focusRef,
-        shouldFocus: true,
-        visible,
-      })
+    const { getByTestId, rerender } = render(<Component visible={false} />)
+    const button = getByTestId("button")
 
-      return (
-        <div>
-          <button data-testid="toggle" onClick={() => setVisible(true)}>
-            Toggle
-          </button>
-          <div ref={ref}>
-            <button ref={focusRef} data-testid="button">
-              Button
-            </button>
-          </div>
-        </div>
-      )
-    }
+    expect(button).not.toHaveFocus()
 
-    const { user } = await render(<Component />)
+    rerender(<Component visible />)
 
-    const button = page.getByTestId("button")
-    await expect.element(button).not.toHaveFocus()
-
-    await user.click(page.getByTestId("toggle"))
-
-    await expect.element(button).toHaveFocus()
+    await waitFor(() => {
+      expect(button).toHaveFocus()
+    })
   })
 
   test("focuses on the first tabbable element when focusTarget is not provided", async () => {
-    const Component: FC = () => {
-      const [visible, setVisible] = useState(false)
-      const ref = useRef<HTMLDivElement>(null)
-      useFocusOnShow(ref, { shouldFocus: true, visible })
+    const { getByTestId, rerender } = render(
+      <ComponentWithoutFocusTarget visible={false} />,
+    )
+    const button = getByTestId("button")
+    vi.mocked(getFirstFocusableElement).mockReturnValue(button)
 
-      return (
-        <div>
-          <button data-testid="toggle" onClick={() => setVisible(true)}>
-            Toggle
-          </button>
-          <div ref={ref}>
-            <button data-testid="button">Button</button>
-          </div>
-        </div>
-      )
-    }
+    expect(button).not.toHaveFocus()
 
-    const { user } = await render(<Component />)
+    rerender(<ComponentWithoutFocusTarget visible />)
 
-    const button = page.getByTestId("button")
-    await expect.element(button).not.toHaveFocus()
-
-    await user.click(page.getByTestId("toggle"))
-
-    await expect.element(button).toHaveFocus()
+    await waitFor(() => {
+      expect(button).toHaveFocus()
+    })
   })
 
   test("focuses on the target when there are no focusable descendants", async () => {
-    const Component: FC = () => {
-      const [visible, setVisible] = useState(false)
-      const ref = useRef<HTMLDivElement>(null)
-      useFocusOnShow(ref, { shouldFocus: true, visible })
+    const { getByTestId, rerender } = render(
+      <ComponentWithoutFocusableChild visible={false} />,
+    )
+    const target = getByTestId("target")
+    vi.mocked(getFirstFocusableElement).mockReturnValue(null)
 
-      return (
-        <div>
-          <button data-testid="toggle" onClick={() => setVisible(true)}>
-            Toggle
-          </button>
-          <div ref={ref} data-testid="target" tabIndex={-1}>
-            <span>Label</span>
-          </div>
-        </div>
-      )
+    rerender(<ComponentWithoutFocusableChild visible />)
+
+    await waitFor(() => {
+      expect(target).toHaveFocus()
+    })
+  })
+
+  test("supports passing element directly as refOrEl", async () => {
+    const target = document.createElement("div")
+    target.tabIndex = -1
+    const button = document.createElement("button")
+    target.appendChild(button)
+    vi.mocked(getFirstFocusableElement).mockReturnValue(button)
+
+    const ComponentWithElementTarget: FC<
+      Omit<UseFocusOnShowProps, "focusTarget">
+    > = (props) => {
+      useFocusOnShow(target, { shouldFocus: true, ...props })
+
+      return null
     }
 
-    const { user } = await render(<Component />)
+    document.body.append(target)
+    const { rerender } = render(<ComponentWithElementTarget visible={false} />)
 
-    await user.click(page.getByTestId("toggle"))
+    rerender(<ComponentWithElementTarget visible />)
 
-    await expect.element(page.getByTestId("target")).toHaveFocus()
+    try {
+      await waitFor(() => {
+        expect(button).toHaveFocus()
+      })
+    } finally {
+      target.remove()
+    }
   })
 
   test("does nothing when shouldFocus is false", async () => {
-    const Component: FC = () => {
-      const [visible, setVisible] = useState(false)
-      const ref = useRef<HTMLDivElement>(null)
-      useFocusOnShow(ref, { shouldFocus: false, visible })
+    const target = document.createElement("div")
+    target.tabIndex = -1
+    target.appendChild(document.createElement("button"))
 
-      return (
-        <div>
-          <button data-testid="toggle" onClick={() => setVisible(true)}>
-            Toggle
-          </button>
-          <div ref={ref}>
-            <button data-testid="button">Button</button>
-          </div>
-        </div>
-      )
+    const ComponentWithDisabledFocus: FC<{ visible: boolean }> = ({
+      visible,
+    }) => {
+      useFocusOnShow(target, { shouldFocus: false, visible })
+
+      return null
     }
 
-    const { user } = await render(<Component />)
+    const { rerender } = render(<ComponentWithDisabledFocus visible={false} />)
+    rerender(<ComponentWithDisabledFocus visible />)
 
-    await user.click(page.getByTestId("toggle"))
-
-    await expect.element(page.getByTestId("button")).not.toHaveFocus()
+    await waitFor(() => {
+      expect(getFirstFocusableElement).not.toHaveBeenCalled()
+    })
   })
 
   test("does nothing when target already contains active element", async () => {
-    const Component: FC = () => {
-      const [visible, setVisible] = useState(false)
+    const ComponentWithActiveElement: FC<{ visible: boolean }> = ({
+      visible,
+    }) => {
       const ref = useRef<HTMLDivElement>(null)
+      const buttonRef = useRef<HTMLButtonElement>(null)
       useFocusOnShow(ref, { shouldFocus: true, visible })
 
       return (
         <div ref={ref}>
-          <button data-testid="inner-button" onClick={() => setVisible(true)}>
-            Inner Button
+          <button ref={buttonRef} data-testid="active-button">
+            Active Button
           </button>
         </div>
       )
     }
 
-    const { user } = await render(<Component />)
+    const { getByTestId, rerender } = render(
+      <ComponentWithActiveElement visible={false} />,
+    )
+    const button = getByTestId("active-button")
 
-    const innerButton = page.getByTestId("inner-button")
-    await user.click(innerButton)
+    button.focus()
+    const focusSpy = vi.spyOn(button, "focus")
+    rerender(<ComponentWithActiveElement visible />)
 
-    await expect.element(innerButton).toHaveFocus()
+    await waitFor(() => {
+      expect(getFirstFocusableElement).not.toHaveBeenCalled()
+      expect(focusSpy).not.toHaveBeenCalled()
+      expect(button).toHaveFocus()
+    })
   })
 
   test("does not throw when ref.current is null", async () => {
-    const Component: FC = () => {
-      const [visible, setVisible] = useState(false)
+    const ComponentWithNullTarget: FC<{ visible: boolean }> = ({ visible }) => {
       const ref = useRef<HTMLDivElement>(null)
       useFocusOnShow(ref, { shouldFocus: true, visible })
 
-      return (
-        <button data-testid="toggle" onClick={() => setVisible(true)}>
-          Toggle
-        </button>
-      )
+      return null
     }
 
-    const { user } = await render(<Component />)
-
-    await expect(user.click(page.getByTestId("toggle"))).resolves.not.toThrow()
+    const { rerender } = render(<ComponentWithNullTarget visible={false} />)
+    expect(() => rerender(<ComponentWithNullTarget visible />)).not.toThrow()
+    await waitFor(() => {
+      expect(getFirstFocusableElement).not.toHaveBeenCalled()
+    })
   })
 })
 
 describe("useFocusOnPointerDown", () => {
+  const defaultPlatform = window.navigator.platform
+
+  const defaultVendor = window.navigator.vendor
+
+  beforeAll(() => {
+    Object.defineProperty(window.navigator, "platform", {
+      value: "MacOS",
+      writable: true,
+    })
+    Object.defineProperty(window.navigator, "vendor", {
+      value: "Apple Computer, Inc.",
+      writable: true,
+    })
+  })
+
   afterEach(() => {
-    vi.mocked(isSafari).mockRestore()
     vi.restoreAllMocks()
+  })
+
+  afterAll(() => {
+    Object.defineProperty(window.navigator, "platform", {
+      value: defaultPlatform,
+      writable: false,
+    })
+    Object.defineProperty(window.navigator, "vendor", {
+      value: defaultVendor,
+      writable: false,
+    })
   })
 
   const Component: FC<Omit<UseFocusOnMouseDownProps, "ref">> = (props) => {
@@ -196,77 +270,103 @@ describe("useFocusOnPointerDown", () => {
   }
 
   test("prevents default behavior and focuses on the target element", async () => {
-    const { user } = await render(<Component />)
+    const { getByTestId } = render(<Component />)
+    const button = getByTestId("button")
 
-    const button = page.getByTestId("button")
-    await user.click(button)
+    act(() => fireEvent.pointerDown(button))
 
-    await expect.element(button).toHaveFocus()
+    await waitFor(() => {
+      expect(button).toHaveFocus()
+    })
   })
 
   test("does not focus when disabled", async () => {
-    await render(<Component enabled={false} />)
+    const { getByTestId } = render(<Component enabled={false} />)
+    const button = getByTestId("button")
 
-    const button = page.getByTestId("button")
+    act(() => fireEvent.pointerDown(button))
 
-    await expect.element(button).not.toHaveFocus()
+    await waitFor(() => {
+      expect(button).not.toHaveFocus()
+    })
   })
 
-  test("keeps focus when target is already active", async () => {
-    const { user } = await render(<Component />)
+  test("does not focus when target is already active", async () => {
+    const { getByTestId } = render(<Component />)
+    const button = getByTestId("button")
+    button.focus()
+    const focusSpy = vi.spyOn(button, "focus")
 
-    const button = page.getByTestId("button")
-    await user.click(button)
+    act(() => fireEvent.pointerDown(button))
 
-    await expect.element(button).toHaveFocus()
+    await waitFor(() => {
+      expect(focusSpy).not.toHaveBeenCalled()
+    })
   })
 
   test("uses ref as fallback when elements is not provided", async () => {
-    const { user } = await render(<Component elements={undefined} />)
+    const { getByTestId } = render(<Component elements={undefined} />)
+    const button = getByTestId("button")
 
-    const button = page.getByTestId("button")
-    await user.click(button)
+    act(() => fireEvent.pointerDown(button))
 
-    await expect.element(button).toHaveFocus()
+    await waitFor(() => {
+      expect(button).toHaveFocus()
+    })
   })
 
-  test("supports raw HTMLElement in elements", async () => {
-    const ComponentWithRawElement: FC = () => {
-      const ref = useRef<HTMLDivElement>(null)
-      const buttonRef = useRef<HTMLButtonElement>(null)
-      useFocusOnPointerDown({
-        ref,
-        elements: [buttonRef],
-        enabled: true,
-      })
+  test("supports raw HTMLElement in elements and ignores null entries", async () => {
+    const { getByTestId, rerender } = render(<Component />)
+    const button = getByTestId("button")
 
-      return (
-        <div ref={ref} data-testid="container">
-          <button ref={buttonRef} data-testid="button">
-            Button
-          </button>
-        </div>
-      )
-    }
+    rerender(<Component elements={[button]} />)
+    act(() => fireEvent.pointerDown(button))
 
-    const { user } = await render(<ComponentWithRawElement />)
+    await waitFor(() => {
+      expect(button).toHaveFocus()
+    })
 
-    const button = page.getByTestId("button")
-    await user.click(button)
+    // Move focus away so the second assertion checks null-elements handling only.
+    button.blur()
+    rerender(<Component elements={[null]} />)
+    act(() => fireEvent.pointerDown(button))
 
-    await expect.element(button).toHaveFocus()
+    await waitFor(() => {
+      expect(button).not.toHaveFocus()
+    })
   })
 
   test("does not focus on non-safari browsers", async () => {
-    const { isSafari } = await import("../../utils")
-    vi.mocked(isSafari).mockReturnValue(false)
+    const previousPlatform = window.navigator.platform
+    const previousVendor = window.navigator.vendor
 
-    await render(<Component />)
+    try {
+      Object.defineProperty(window.navigator, "platform", {
+        value: "Win32",
+        writable: true,
+      })
+      Object.defineProperty(window.navigator, "vendor", {
+        value: "Google Inc.",
+        writable: true,
+      })
 
-    const button = page.getByTestId("button")
+      const { getByTestId } = render(<Component />)
+      const button = getByTestId("button")
 
-    await expect.element(button).not.toHaveFocus()
+      act(() => fireEvent.pointerDown(button))
 
-    vi.mocked(isSafari).mockReturnValue(true)
+      await waitFor(() => {
+        expect(button).not.toHaveFocus()
+      })
+    } finally {
+      Object.defineProperty(window.navigator, "platform", {
+        value: previousPlatform,
+        writable: true,
+      })
+      Object.defineProperty(window.navigator, "vendor", {
+        value: previousVendor,
+        writable: true,
+      })
+    }
   })
 })

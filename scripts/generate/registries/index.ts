@@ -135,6 +135,24 @@ function replaceImportDeclarations(data: string, importDeclarations: string[]) {
 }
 
 async function formatSource(data: string) {
+  data = data
+    .replace(
+      /^[ \t]*\/\/\s*@ts-(?:ignore|expect-error|nocheck)\b[^\n]*\n/gm,
+      "",
+    )
+    .replace(
+      /^[ \t]*\/\*\*?\s*@ts-(?:ignore|expect-error|nocheck)\b[^\n]*\*\/\n/gm,
+      "",
+    )
+    .replace(
+      /^[ \t]*\/\/\s*eslint-(?:disable|disable-next-line)\b[^\n]*\n/gm,
+      "",
+    )
+    .replace(
+      /^[ \t]*\/\*\*?\s*eslint-(?:disable|disable-next-line)\b[^\n]*\*\/\n/gm,
+      "",
+    )
+
   const regexp =
     /import\s+(?:type\s+)?(?:{[\s\S]*?}|\*\s+as\s+\w+|\w+)\s+from\s+["'][^"']+["']/g
 

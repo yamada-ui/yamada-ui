@@ -34,7 +34,7 @@ export const i18nCache = <Y extends abstract new (...args: any) => any>(
     if (formatterCache.has(key))
       return formatterCache.get(key) as InstanceType<Y>
 
-    // @ts-ignore
+    // @ts-expect-error
     const formatter = new Instance(locale, options)
 
     formatterCache.set(key, formatter)

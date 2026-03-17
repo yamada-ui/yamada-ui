@@ -30,6 +30,7 @@ describe("useLazyMount", () => {
       <Component lazy={false} mounted={false}>
         <span>content</span>
       </Component>,
+      { withProvider: false },
     )
 
     await expect
@@ -42,6 +43,7 @@ describe("useLazyMount", () => {
       <Component lazy mounted>
         <span>content</span>
       </Component>,
+      { withProvider: false },
     )
 
     await expect
@@ -54,6 +56,7 @@ describe("useLazyMount", () => {
       <Component lazy mounted={false}>
         <span>content</span>
       </Component>,
+      { withProvider: false },
     )
 
     await expect.element(page.getByTestId("container")).toBeEmptyDOMElement()
@@ -64,6 +67,7 @@ describe("useLazyMount", () => {
       <ToggleComponent lazy lazyBehavior="keepMounted">
         <span>content</span>
       </ToggleComponent>,
+      { withProvider: false },
     )
 
     await expect.element(page.getByTestId("container")).toBeEmptyDOMElement()
@@ -86,6 +90,7 @@ describe("useLazyMount", () => {
       <ToggleComponent lazy lazyBehavior="unmount">
         <span>content</span>
       </ToggleComponent>,
+      { withProvider: false },
     )
 
     await expect.element(page.getByTestId("container")).toBeEmptyDOMElement()

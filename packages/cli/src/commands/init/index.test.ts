@@ -40,7 +40,9 @@ describe("init", () => {
       .mockResolvedValueOnce({
         src: true,
         format: true,
+        formatTool: "prettier",
         lint: true,
+        lintTool: "eslint",
         monorepo: true,
         outdir: undefined,
         packageName: undefined,
@@ -71,7 +73,9 @@ describe("init", () => {
     mockPrompts
       .mockResolvedValueOnce({
         format: true,
+        formatTool: "prettier",
         lint: true,
+        lintTool: "eslint",
         monorepo: false,
         outdir: undefined,
         packageName: undefined,
@@ -126,7 +130,9 @@ describe("init", () => {
       .mockResolvedValueOnce({
         src: false,
         format: true,
+        formatTool: "prettier",
         lint: true,
+        lintTool: "eslint",
         monorepo: true,
         outdir: undefined,
         packageName: undefined,
@@ -188,7 +194,9 @@ describe("init", () => {
       .mockResolvedValueOnce({
         src: true,
         format: true,
+        formatTool: "prettier",
         lint: true,
+        lintTool: "eslint",
         monorepo: true,
         outdir: "./packages/ui-lib",
         packageName: undefined,
@@ -256,7 +264,9 @@ describe("init", () => {
       .mockResolvedValueOnce({
         src: true,
         format: true,
+        formatTool: "prettier",
         lint: true,
+        lintTool: "eslint",
         monorepo: true,
       })
       .mockResolvedValueOnce({ generate: true })
@@ -280,7 +290,9 @@ describe("init", () => {
       .mockResolvedValueOnce({
         src: true,
         format: true,
+        formatTool: "prettier",
         lint: true,
+        lintTool: "eslint",
         monorepo: true,
         outdir: "ui",
         packageName: undefined,
@@ -304,7 +316,9 @@ describe("init", () => {
     vi.mocked(prompts.default)
       .mockResolvedValueOnce({
         format: true,
+        formatTool: "prettier",
         lint: true,
+        lintTool: "eslint",
         monorepo: false,
         outdir: undefined,
         packageName: undefined,
@@ -324,6 +338,69 @@ describe("init", () => {
     const outdirPath = path.join(tempDir, "components", "ui")
     // jsx → index.js instead of index.ts
     expect(existsSync(path.join(outdirPath, "index.js"))).toBeTruthy()
+  })
+
+  test("should save tool property when selected via prompt", async () => {
+    const prompts = await import("prompts")
+    vi.mocked(prompts.default)
+      .mockResolvedValueOnce({
+        src: true,
+        format: true,
+        formatTool: "prettier",
+        lint: true,
+        lintTool: "eslint",
+        monorepo: true,
+        outdir: undefined,
+        packageName: undefined,
+      })
+      .mockResolvedValueOnce({ generate: true })
+      .mockResolvedValueOnce({ generate: true })
+      .mockResolvedValueOnce({ install: false })
+
+    await init.parseAsync(["--cwd", tempDir], { from: "user" })
+
+    const configPath = path.join(tempDir, "ui.json")
+    const config = JSON.parse(readFileSync(configPath, "utf-8"))
+    expect(config.format.enabled).toBeTruthy()
+    expect(config.format.tool).toBe("prettier")
+    expect(config.lint.enabled).toBeTruthy()
+    expect(config.lint.tool).toBe("eslint")
+  })
+
+  test("should not save tool property with --yes (backward compat)", async () => {
+    await init.parseAsync(
+      ["--cwd", tempDir, "--yes", "--monorepo", "--no-install"],
+      { from: "user" },
+    )
+
+    const configPath = path.join(tempDir, "ui.json")
+    const config = JSON.parse(readFileSync(configPath, "utf-8"))
+    expect(config.format.enabled).toBeTruthy()
+    expect(config.format.tool).toBeUndefined()
+    expect(config.lint.enabled).toBeTruthy()
+    expect(config.lint.tool).toBeUndefined()
+  })
+
+  test("should not save tool when format is disabled", async () => {
+    await init.parseAsync(
+      [
+        "--cwd",
+        tempDir,
+        "--yes",
+        "--monorepo",
+        "--no-install",
+        "--no-format",
+        "--no-lint",
+      ],
+      { from: "user" },
+    )
+
+    const configPath = path.join(tempDir, "ui.json")
+    const config = JSON.parse(readFileSync(configPath, "utf-8"))
+    expect(config.format.enabled).toBeFalsy()
+    expect(config.format.tool).toBeUndefined()
+    expect(config.lint.enabled).toBeFalsy()
+    expect(config.lint.tool).toBeUndefined()
   })
 
   test("should overwrite existing outdir when prompted", async () => {

@@ -48,7 +48,7 @@ export function isRegExp(value: any): value is RegExp {
 
 export function isObject<Y extends Dict>(value: any): value is Y {
   return (
-    value !== null &&
+    value != null &&
     (typeof value === "object" || typeof value === "function") &&
     !isArray(value)
   )

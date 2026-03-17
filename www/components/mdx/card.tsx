@@ -65,11 +65,11 @@ export function Card({ href, children, title }: CardProps) {
 
         <ChevronRightIcon
           fontSize="lg"
-          opacity={{ base: 0, _groupFocusVisible: 1, _groupHover: 1 }}
+          opacity={{ base: 0, _groupHover: 1, _groupFocusVisible: 1 }}
           transform={{
             base: "translateX(-4px)",
-            _groupFocusVisible: "translateX(0)",
             _groupHover: "translateX(0)",
+            _groupFocusVisible: "translateX(0)",
           }}
           transitionDuration="moderate"
         />

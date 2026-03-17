@@ -7,6 +7,7 @@ import { CONSTANTS } from "@/constants"
 import { generateDocMap } from "@/scripts/generate/docs/map"
 import { getLocale, langs } from "@/utils/i18n"
 import {
+  createFrontMatter,
   extractToc,
   replaceCardGroup,
   replaceCodeBlock,
@@ -70,6 +71,7 @@ const docs = defineCollection({
 
         let content = meta.content as string
 
+        content = createFrontMatter(meta.data.data) + content
         content = await replaceProps(content)
         content = await replaceRelations(content, locale)
         content = replaceCodeGroup(content)

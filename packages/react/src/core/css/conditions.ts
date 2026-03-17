@@ -557,10 +557,6 @@ export const groupAttributes = {
    */
   _groupAccept: toGroup(attributes._accept),
   /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is active.
-   */
-  _groupActive: toGroup(pseudoClasses._active),
-  /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is activedescendant.
    */
   _groupActivedescendant: toGroup(pseudoClasses._activedescendant),
@@ -581,10 +577,6 @@ export const groupAttributes = {
    */
   _groupCurrent: toGroup(attributes._current),
   /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is disabled.
-   */
-  _groupDisabled: toGroup(pseudoClasses._disabled),
-  /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is enabled.
    */
   _groupEnabled: toGroup(pseudoClasses._enabled),
@@ -592,14 +584,6 @@ export const groupAttributes = {
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is expanded.
    */
   _groupExpanded: toGroup(attributes._expanded),
-  /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is focused.
-   */
-  _groupFocus: toGroup(pseudoClasses._focus),
-  /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is focused-visible.
-   */
-  _groupFocusVisible: toGroup(pseudoClasses._focusVisible),
   /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is focus-within.
    */
@@ -613,10 +597,6 @@ export const groupAttributes = {
    */
   _groupHorizontal: toGroup(pseudoClasses._horizontal),
   /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is hovered.
-   */
-  _groupHover: toGroup(pseudoClasses._hover),
-  /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is idle.
    */
   _groupIdle: toGroup(attributes._idle),
@@ -624,10 +604,6 @@ export const groupAttributes = {
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is incomplete.
    */
   _groupIncomplete: toGroup(attributes._incomplete),
-  /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is invalid.
-   */
-  _groupInvalid: toGroup(pseudoClasses._invalid),
   /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is loaded.
    */
@@ -657,10 +633,6 @@ export const groupAttributes = {
    */
   _groupRange: toGroup(attributes._range),
   /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is read-only.
-   */
-  _groupReadOnly: toGroup(pseudoClasses._readOnly),
-  /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is read-write.
    */
   _groupReadWrite: toGroup(pseudoClasses._readWrite),
@@ -673,10 +645,6 @@ export const groupAttributes = {
    */
   _groupRequired: toGroup(pseudoClasses._required),
   /**
-   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is selected.
-   */
-  _groupSelected: toGroup(attributes._selected),
-  /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is user-invalid.
    */
   _groupUserInvalid: toGroup(pseudoClasses._userInvalid),
@@ -688,6 +656,38 @@ export const groupAttributes = {
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is vertical.
    */
   _groupVertical: toGroup(pseudoClasses._vertical),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is hovered.
+   */
+  _groupHover: toGroup(pseudoClasses._hover),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is active.
+   */
+  _groupActive: toGroup(pseudoClasses._active),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is focused.
+   */
+  _groupFocus: toGroup(pseudoClasses._focus),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is focused-visible.
+   */
+  _groupFocusVisible: toGroup(pseudoClasses._focusVisible),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is selected.
+   */
+  _groupSelected: toGroup(attributes._selected),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is invalid.
+   */
+  _groupInvalid: toGroup(pseudoClasses._invalid),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is read-only.
+   */
+  _groupReadOnly: toGroup(pseudoClasses._readOnly),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is disabled.
+   */
+  _groupDisabled: toGroup(pseudoClasses._disabled),
 } as const
 
 export type GroupAttributes = typeof groupAttributes
@@ -707,10 +707,6 @@ export const peerAttributes = {
    */
   _peerAccept: toPeer(attributes._accept),
   /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is active.
-   */
-  _peerActive: toPeer(pseudoClasses._active),
-  /**
    * Styles to apply when a parent element with `data-peer` or `.peer` is blank.
    */
   _peerBlank: toPeer(pseudoClasses._blank),
@@ -727,10 +723,6 @@ export const peerAttributes = {
    */
   _peerCurrent: toPeer(attributes._current),
   /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is disabled.
-   */
-  _peerDisabled: toPeer(pseudoClasses._disabled),
-  /**
    * Styles to apply when a parent element with `data-peer` or `.peer` is enabled.
    */
   _peerEnabled: toPeer(pseudoClasses._enabled),
@@ -738,14 +730,6 @@ export const peerAttributes = {
    * Styles to apply when a parent element with `data-peer` or `.peer` is expanded.
    */
   _peerExpanded: toPeer(attributes._expanded),
-  /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is focused.
-   */
-  _peerFocus: toPeer(pseudoClasses._focus),
-  /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is focused-visible.
-   */
-  _peerFocusVisible: toPeer(pseudoClasses._focusVisible),
   /**
    * Styles to apply when a parent element with `data-peer` or `.peer` is focus-within.
    */
@@ -759,10 +743,6 @@ export const peerAttributes = {
    */
   _peerHorizontal: toPeer(pseudoClasses._horizontal),
   /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is hovered.
-   */
-  _peerHover: toPeer(pseudoClasses._hover),
-  /**
    * Styles to apply when a parent element with `data-peer` or `.peer` is idle.
    */
   _peerIdle: toPeer(attributes._idle),
@@ -770,10 +750,6 @@ export const peerAttributes = {
    * Styles to apply when a parent element with `data-peer` or `.peer` is incomplete.
    */
   _peerIncomplete: toPeer(attributes._incomplete),
-  /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is invalid.
-   */
-  _peerInvalid: toPeer(pseudoClasses._invalid),
   /**
    * Styles to apply when a parent element with `data-peer` or `.peer` is loaded.
    */
@@ -799,10 +775,6 @@ export const peerAttributes = {
    */
   _peerRange: toPeer(attributes._range),
   /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is read-only.
-   */
-  _peerReadOnly: toPeer(pseudoClasses._readOnly),
-  /**
    * Styles to apply when a parent element with `data-peer` or `.peer` is read-write.
    */
   _peerReadWrite: toPeer(pseudoClasses._readWrite),
@@ -815,10 +787,6 @@ export const peerAttributes = {
    */
   _peerRequired: toPeer(pseudoClasses._required),
   /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is selected.
-   */
-  _peerSelected: toPeer(attributes._selected),
-  /**
    * Styles to apply when a parent element with `data-peer` or `.peer` is user-invalid.
    */
   _peerUserInvalid: toPeer(pseudoClasses._userInvalid),
@@ -830,6 +798,38 @@ export const peerAttributes = {
    * Styles to apply when a parent element with `data-peer` or `.peer` is vertical.
    */
   _peerVertical: toPeer(pseudoClasses._vertical),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is hovered.
+   */
+  _peerHover: toPeer(pseudoClasses._hover),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is active.
+   */
+  _peerActive: toPeer(pseudoClasses._active),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is focused.
+   */
+  _peerFocus: toPeer(pseudoClasses._focus),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is focused-visible.
+   */
+  _peerFocusVisible: toPeer(pseudoClasses._focusVisible),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is selected.
+   */
+  _peerSelected: toPeer(attributes._selected),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is invalid.
+   */
+  _peerInvalid: toPeer(pseudoClasses._invalid),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is read-only.
+   */
+  _peerReadOnly: toPeer(pseudoClasses._readOnly),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is disabled.
+   */
+  _peerDisabled: toPeer(pseudoClasses._disabled),
 } as const
 
 export type PeerAttributes = typeof peerAttributes

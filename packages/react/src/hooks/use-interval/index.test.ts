@@ -2,14 +2,32 @@ import { renderHook } from "#test/browser"
 import { useInterval } from "."
 
 describe("useInterval", () => {
+  beforeEach(() => {
+    vi.useFakeTimers()
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
   test("should call the callback repeatedly at the specified interval", async () => {
     const callback = vi.fn()
 
     await renderHook(() => useInterval(callback, 50))
 
-    await expect
-      .poll(() => callback.mock.calls.length)
-      .toBeGreaterThanOrEqual(2)
+    vi.advanceTimersByTime(500)
+
+    expect(callback).toHaveBeenCalledTimes(10)
+  })
+
+  test("should not call the callback before the specified delay", async () => {
+    const callback = vi.fn()
+
+    await renderHook(() => useInterval(callback, 50))
+
+    vi.advanceTimersByTime(49)
+
+    expect(callback).not.toHaveBeenCalled()
   })
 
   test("should not call the callback when delay is null", async () => {
@@ -17,7 +35,7 @@ describe("useInterval", () => {
 
     await renderHook(() => useInterval(callback, null))
 
-    await new Promise((resolve) => setTimeout(resolve, 100))
+    vi.advanceTimersByTime(500)
 
     expect(callback).not.toHaveBeenCalled()
   })
@@ -31,15 +49,16 @@ describe("useInterval", () => {
       { initialProps: { callback: firstCallback } },
     )
 
-    await expect
-      .poll(() => firstCallback.mock.calls.length)
-      .toBeGreaterThanOrEqual(1)
+    vi.advanceTimersByTime(500)
+
+    expect(firstCallback).toHaveBeenCalledTimes(10)
 
     await rerender({ callback: secondCallback })
 
-    await expect
-      .poll(() => secondCallback.mock.calls.length)
-      .toBeGreaterThanOrEqual(1)
+    vi.advanceTimersByTime(500)
+
+    expect(firstCallback).toHaveBeenCalledTimes(10)
+    expect(secondCallback).toHaveBeenCalledTimes(10)
   })
 
   test("should reset interval when delay changes", async () => {
@@ -50,15 +69,15 @@ describe("useInterval", () => {
       { initialProps: { delay: 5000 } },
     )
 
-    await new Promise((resolve) => setTimeout(resolve, 100))
+    vi.advanceTimersByTime(500)
 
     expect(callback).not.toHaveBeenCalled()
 
     await rerender({ delay: 50 })
 
-    await expect
-      .poll(() => callback.mock.calls.length)
-      .toBeGreaterThanOrEqual(1)
+    vi.advanceTimersByTime(500)
+
+    expect(callback).toHaveBeenCalledTimes(10)
   })
 
   test("should clear interval on unmount", async () => {
@@ -66,16 +85,14 @@ describe("useInterval", () => {
 
     const { unmount } = await renderHook(() => useInterval(callback, 50))
 
-    await expect
-      .poll(() => callback.mock.calls.length)
-      .toBeGreaterThanOrEqual(1)
+    vi.advanceTimersByTime(500)
 
-    const callCount = callback.mock.calls.length
+    expect(callback).toHaveBeenCalledTimes(10)
 
     unmount()
 
-    await new Promise((resolve) => setTimeout(resolve, 100))
+    vi.advanceTimersByTime(500)
 
-    expect(callback).toHaveBeenCalledTimes(callCount)
+    expect(callback).toHaveBeenCalledTimes(10)
   })
 })

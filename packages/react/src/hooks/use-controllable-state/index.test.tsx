@@ -1,11 +1,11 @@
-import type { FC } from "react"
-import { page, render } from "#test/browser"
+import type { ChangeEvent, FC } from "react"
+import { act, fireEvent, render, screen } from "#test"
 import { useState } from "react"
 import { vi } from "vitest"
 import { useControllableEventState, useControllableState } from "./"
 
 describe("useControllableEventState", () => {
-  test("reads ev.target.value for non-boolean inputs", async () => {
+  test("reads ev.target.value for non-boolean inputs", () => {
     const onChange = vi.fn()
 
     const Component: FC = () => {
@@ -27,17 +27,20 @@ describe("useControllableEventState", () => {
       )
     }
 
-    const { user } = await render(<Component />)
+    render(<Component />)
 
-    const input = page.getByTestId("input")
-    await user.fill(input, "hello")
+    act(() => {
+      fireEvent.change(screen.getByTestId("input"), {
+        target: { value: "hello" },
+      })
+    })
 
     expect(onChange).toHaveBeenCalledTimes(1)
-    const ev = onChange.mock.calls[0]![0]
+    const ev = onChange.mock.calls[0]![0] as ChangeEvent<HTMLInputElement>
     expect(ev.target.value).toBe("hello")
   })
 
-  test("updates defaultValue in uncontrolled mode", async () => {
+  test("updates defaultValue in uncontrolled mode", () => {
     const Component: FC = () => {
       const [value, setValue] = useControllableEventState<
         string,
@@ -56,17 +59,20 @@ describe("useControllableEventState", () => {
       )
     }
 
-    const { user } = await render(<Component />)
+    render(<Component />)
 
-    const input = page.getByTestId("input")
-    await user.fill(input, "updated")
+    act(() => {
+      fireEvent.change(screen.getByTestId("input"), {
+        target: { value: "updated" },
+      })
+    })
 
-    await expect.element(input).toHaveValue("updated")
+    expect(screen.getByTestId("input")).toHaveValue("updated")
   })
 })
 
 describe("useControllableState", () => {
-  test("works in uncontrolled mode with defaultValue", async () => {
+  test("works in uncontrolled mode with defaultValue", () => {
     const Component: FC = () => {
       const [value, setValue] = useControllableState<string>({
         defaultValue: "initial",
@@ -79,16 +85,17 @@ describe("useControllableState", () => {
       )
     }
 
-    const { user } = await render(<Component />)
-    const btn = page.getByTestId("btn")
-    await expect.element(btn).toHaveTextContent("initial")
+    render(<Component />)
+    expect(screen.getByTestId("btn")).toHaveTextContent("initial")
 
-    await user.click(btn)
+    act(() => {
+      fireEvent.click(screen.getByTestId("btn"))
+    })
 
-    await expect.element(btn).toHaveTextContent("updated")
+    expect(screen.getByTestId("btn")).toHaveTextContent("updated")
   })
 
-  test("works in controlled mode", async () => {
+  test("works in controlled mode", () => {
     const onChange = vi.fn()
 
     const Component: FC = () => {
@@ -108,13 +115,14 @@ describe("useControllableState", () => {
       )
     }
 
-    const { user } = await render(<Component />)
-    const btn = page.getByTestId("btn")
-    await expect.element(btn).toHaveTextContent("controlled")
+    render(<Component />)
+    expect(screen.getByTestId("btn")).toHaveTextContent("controlled")
 
-    await user.click(btn)
+    act(() => {
+      fireEvent.click(screen.getByTestId("btn"))
+    })
 
     expect(onChange).toHaveBeenCalledWith("new")
-    await expect.element(btn).toHaveTextContent("new")
+    expect(screen.getByTestId("btn")).toHaveTextContent("new")
   })
 })

@@ -1314,6 +1314,11 @@
           "title": "貢献する",
           "segment": "contributing",
           "pathname": "/docs/community/contributing"
+        },
+        {
+          "title": "AI利用ポリシー",
+          "segment": "ai-policy",
+          "pathname": "/docs/community/ai-policy"
         }
       ]
     },

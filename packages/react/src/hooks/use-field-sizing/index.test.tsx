@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { page, render } from "#test/browser"
+import { render } from "#test"
 import { useFieldSizing } from "./"
 
 const Component: FC<{ value?: string }> = ({ value }) => {
@@ -14,62 +14,85 @@ const Component: FC<{ value?: string }> = ({ value }) => {
 }
 
 describe("useFieldSizing", () => {
-  test("renders hidden text element with value", async () => {
-    const { container } = await render(<Component value="hello" />)
-    const span = container.querySelector<HTMLSpanElement>("span[aria-hidden]")
-
-    expect(span).toBeInstanceOf(HTMLSpanElement)
-    expect(span!.textContent).toBe("hello")
-    expect(span!.style.opacity).toBe("0")
-    expect(span!.style.overflow).toBe("hidden")
-    expect(span!.style.position).toBe("absolute")
-    expect(span!.style.whiteSpace).toBe("nowrap")
-    expect(span!.style.zIndex).toBe("-1")
+  beforeEach(() => {
+    vi.spyOn(
+      HTMLSpanElement.prototype,
+      "getBoundingClientRect",
+    ).mockReturnValue({
+      bottom: 0,
+      height: 0,
+      left: 0,
+      right: 0,
+      toJSON: () => ({}),
+      top: 0,
+      width: 100,
+      x: 0,
+      y: 0,
+    })
   })
 
-  test("uses empty string as default value", async () => {
-    const { container } = await render(<Component />)
-    const span = container.querySelector<HTMLSpanElement>("span[aria-hidden]")
-
-    expect(span).toBeInstanceOf(HTMLSpanElement)
-    expect(span!.textContent).toBe("")
+  afterEach(() => {
+    vi.restoreAllMocks()
   })
 
-  test("sets input width from text bounding rect", async () => {
-    await render(<Component value="hello" />)
+  test("renders hidden text element with value", () => {
+    const { container } = render(<Component value="hello" />)
+    const span = container.querySelector("span[aria-hidden]")
 
-    const input = page.getByTestId("input")
-    await expect
-      .poll(() => input.element().style.width)
-      .toMatch(/^\d+(\.\d+)?px$/)
+    expect(span).toBeInTheDocument()
+    expect(span).toHaveTextContent("hello")
+    expect(span).toHaveStyle({
+      opacity: "0",
+      overflow: "hidden",
+      position: "absolute",
+      whiteSpace: "nowrap",
+      zIndex: "-1",
+    })
   })
 
-  test("updates width when value changes", async () => {
-    const { rerender } = await render(<Component value="hi" />)
+  test("uses empty string as default value", () => {
+    const { container } = render(<Component />)
+    const span = container.querySelector("span[aria-hidden]")
 
-    const input = page.getByTestId("input")
-    await expect
-      .poll(() => input.element().style.width)
-      .toMatch(/^\d+(\.\d+)?px$/)
-
-    const initialWidth = input.element().style.width
-
-    await rerender(<Component value="hello world, this is a longer text" />)
-
-    await expect
-      .poll(() => {
-        const w = input.element().style.width
-        return /^\d+(\.\d+)?px$/.test(w) && w !== initialWidth ? w : ""
-      })
-      .not.toBe("")
+    expect(span).toBeInTheDocument()
+    expect(span).toHaveTextContent("")
   })
 
-  test("returns ref and text", async () => {
-    const { container } = await render(<Component value="test" />)
+  test("sets input width from text bounding rect", () => {
+    const { getByTestId } = render(<Component value="hello" />)
+    const input = getByTestId("input")
 
-    await expect.element(page.getByTestId("input")).toBeInTheDocument()
-    expect(
-      container.querySelector<HTMLSpanElement>("span[aria-hidden]"),
-    ).toBeInstanceOf(HTMLSpanElement)
+    expect(input.style.width).toBe("100px")
+  })
+
+  test("updates width when value changes", () => {
+    const { getByTestId, rerender } = render(<Component value="hi" />)
+
+    vi.spyOn(
+      HTMLSpanElement.prototype,
+      "getBoundingClientRect",
+    ).mockReturnValue({
+      bottom: 0,
+      height: 0,
+      left: 0,
+      right: 0,
+      toJSON: () => ({}),
+      top: 0,
+      width: 200,
+      x: 0,
+      y: 0,
+    })
+
+    rerender(<Component value="hello world" />)
+
+    const input = getByTestId("input")
+    expect(input.style.width).toBe("200px")
+  })
+
+  test("returns ref and text", () => {
+    const { container, getByTestId } = render(<Component value="test" />)
+
+    expect(getByTestId("input")).toBeInTheDocument()
+    expect(container.querySelector("span[aria-hidden]")).toBeInTheDocument()
   })
 })

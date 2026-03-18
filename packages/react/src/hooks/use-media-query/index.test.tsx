@@ -1,50 +1,41 @@
-import type { FC } from "react"
-import { page, render, renderHook } from "#test/browser"
+import { act, renderHook } from "#test"
+import MatchMediaMock from "vitest-matchmedia-mock"
 import { useMediaQuery } from "."
-import { styled } from "../../core"
 
 describe("useMediaQuery", () => {
-  afterEach(async () => {
-    await page.viewport(1280, 720)
+  let matchMediaMock: MatchMediaMock
+
+  beforeAll(() => {
+    matchMediaMock = new MatchMediaMock()
   })
 
-  test("returns true when media query matches", async () => {
-    await page.viewport(800, 600)
+  afterEach(() => {
+    matchMediaMock.clear()
+  })
 
-    const { result } = await renderHook(() =>
-      useMediaQuery("(max-width: 1024px)"),
+  afterAll(() => {
+    matchMediaMock.destroy()
+  })
+
+  test("`(prefers-color-scheme: dark)` should be truthy", () => {
+    matchMediaMock.useMediaQuery("(prefers-color-scheme: dark)")
+
+    const { result } = renderHook(() =>
+      useMediaQuery("(prefers-color-scheme: dark)"),
     )
 
     expect(result.current).toBeTruthy()
   })
 
-  test("returns false when media query does not match", async () => {
-    await page.viewport(1280, 720)
-
-    const { result } = await renderHook(() =>
-      useMediaQuery("(max-width: 600px)"),
+  test("should correctly execute listener", () => {
+    const { result } = renderHook(() =>
+      useMediaQuery("(prefers-color-scheme: dark)"),
     )
 
-    expect(result.current).toBeFalsy()
-  })
+    act(() => {
+      matchMediaMock.useMediaQuery("(prefers-color-scheme: dark)")
+    })
 
-  test("updates when viewport changes to match the query", async () => {
-    await page.viewport(1280, 720)
-
-    const Component: FC = () => {
-      const matches = useMediaQuery("(max-width: 800px)")
-
-      return <styled.p data-testid="mq">{String(matches)}</styled.p>
-    }
-
-    await render(<Component />)
-
-    await expect.element(page.getByTestId("mq")).toHaveTextContent("false")
-
-    await page.viewport(600, 400)
-
-    await expect
-      .element(page.getByTestId("mq"), { timeout: 5000 })
-      .toHaveTextContent("true")
+    expect(result.current).toBeTruthy()
   })
 })

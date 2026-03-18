@@ -37,7 +37,11 @@ export function Pagination() {
     >
       <Flex justifyContent="flex-start" minW="0">
         {prev?.pathname ? (
-          <NextLinkButton href={prev.pathname} startIcon={<ArrowLeftIcon />}>
+          <NextLinkButton
+            href={prev.pathname}
+            startIcon={<ArrowLeftIcon />}
+            onClick={() => window.scrollTo({ behavior: "instant", top: 0 })}
+          >
             <Text as="span" truncated>
               {prev.title}
             </Text>
@@ -47,7 +51,11 @@ export function Pagination() {
 
       <Flex justifyContent="flex-end" minW="0">
         {next?.pathname ? (
-          <NextLinkButton href={next.pathname} endIcon={<ArrowRightIcon />}>
+          <NextLinkButton
+            href={next.pathname}
+            endIcon={<ArrowRightIcon />}
+            onClick={() => window.scrollTo({ behavior: "instant", top: 0 })}
+          >
             <Text as="span" truncated>
               {next.title}
             </Text>

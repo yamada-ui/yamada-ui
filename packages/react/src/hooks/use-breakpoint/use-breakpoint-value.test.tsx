@@ -1,25 +1,48 @@
-import { page, renderHook, system } from "#test/browser"
+import { renderHook, system } from "#test"
+import MatchMediaMock from "vitest-matchmedia-mock"
 import { noop } from "../../utils"
 import { getBreakpointValue, useBreakpointValue } from "./use-breakpoint-value"
 
 describe("useBreakpointValue", () => {
-  afterEach(async () => {
-    await page.viewport(1280, 720)
+  let matchMediaMock: MatchMediaMock
+
+  beforeAll(() => {
+    matchMediaMock = new MatchMediaMock()
   })
 
-  test("Returns the value of the current breakpoint when base is md", async () => {
-    const { result } = await renderHook(() =>
-      useBreakpointValue({ base: "md" }),
-    )
+  afterEach(() => {
+    matchMediaMock.clear()
+  })
+
+  afterAll(() => {
+    matchMediaMock.destroy()
+  })
+
+  test("Returns the value of the current breakpoint when base is md", () => {
+    const { result } = renderHook(() => useBreakpointValue({ base: "md" }))
+
     expect(result.current).toBe("md")
   })
 })
 
 describe("getBreakpointValue", () => {
-  test("Returns the value of base", async () => {
-    const { result } = await renderHook(() =>
-      getBreakpointValue({ base: "md" }),
-    )
+  let matchMediaMock: MatchMediaMock
+
+  beforeAll(() => {
+    matchMediaMock = new MatchMediaMock()
+  })
+
+  afterEach(() => {
+    matchMediaMock.clear()
+  })
+
+  afterAll(() => {
+    matchMediaMock.destroy()
+  })
+
+  test("Returns the value of base", () => {
+    const { result } = renderHook(() => getBreakpointValue({ base: "md" }))
+
     expect(result.current(system, "md")).toBe("md")
   })
 

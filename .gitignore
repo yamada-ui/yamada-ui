@@ -16,6 +16,8 @@ dist
 build
 .vercel
 .velite
+.vitest-reports
+.vitest-attachments
 
 # misc
 .DS_Store

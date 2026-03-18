@@ -1,26 +1,26 @@
-import { renderHook } from "#test/browser"
+import { act, renderHook } from "#test"
 import { useProcessing } from "./"
 
 describe("useProcessing", () => {
-  test("should initialize with the given initial state", async () => {
-    const { result } = await renderHook(() => useProcessing(true))
+  test("should initialize with the given initial state", () => {
+    const { result } = renderHook(() => useProcessing(true))
     expect(result.current.loading).toBeTruthy()
   })
 
-  test("should start processing", async () => {
-    const { act, result } = await renderHook(() => useProcessing())
+  test("should start processing", () => {
+    const { result } = renderHook(() => useProcessing())
 
-    await act(() => {
+    act(() => {
       result.current.start()
     })
 
     expect(result.current.loading).toBeTruthy()
   })
 
-  test("should finish processing", async () => {
-    const { act, result } = await renderHook(() => useProcessing(true))
+  test("should finish processing", () => {
+    const { result } = renderHook(() => useProcessing(true))
 
-    await act(() => {
+    act(() => {
       result.current.start()
       result.current.finish()
     })
@@ -28,10 +28,10 @@ describe("useProcessing", () => {
     expect(result.current.loading).toBeFalsy()
   })
 
-  test("should handle multiple starts and finishes correctly", async () => {
-    const { act, result } = await renderHook(() => useProcessing(false))
+  test("should handle multiple starts and finishes correctly", () => {
+    const { result } = renderHook(() => useProcessing(false))
 
-    await act(() => {
+    act(() => {
       result.current.start()
       result.current.start()
       result.current.finish()
@@ -39,7 +39,7 @@ describe("useProcessing", () => {
 
     expect(result.current.loading).toBeTruthy()
 
-    await act(() => {
+    act(() => {
       result.current.finish()
     })
 

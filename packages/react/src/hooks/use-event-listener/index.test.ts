@@ -1,12 +1,12 @@
-import { renderHook } from "#test/browser"
+import { renderHook } from "#test"
 import { useEventListener, useEventListeners } from "./"
 
 describe("useEventListener", () => {
-  test("Adds event listener to target element", async () => {
+  test("Adds event listener to target element", () => {
     const target = document.createElement("div")
     const handler = vi.fn()
 
-    await renderHook(() => useEventListener(target, "click", handler))
+    renderHook(() => useEventListener(target, "click", handler))
 
     const clickEvent = new MouseEvent("click")
     target.dispatchEvent(clickEvent)
@@ -14,11 +14,11 @@ describe("useEventListener", () => {
     expect(handler).toHaveBeenCalledTimes(1)
   })
 
-  test("Removes event listener when unmounted", async () => {
+  test("Removes event listener when unmounted", () => {
     const target = document.createElement("div")
     const handler = vi.fn()
 
-    const { unmount } = await renderHook(() =>
+    const { unmount } = renderHook(() =>
       useEventListener(target, "click", handler),
     )
     unmount()
@@ -29,11 +29,11 @@ describe("useEventListener", () => {
     expect(handler).not.toHaveBeenCalled()
   })
 
-  test("Removes event listener using returned cleanup function", async () => {
+  test("Removes event listener using returned cleanup function", () => {
     const target = document.createElement("div")
     const handler = vi.fn()
 
-    const { result } = await renderHook(() =>
+    const { result } = renderHook(() =>
       useEventListener(target, "click", handler),
     )
     const cleanup = result.current
@@ -48,8 +48,8 @@ describe("useEventListener", () => {
 })
 
 describe("useEventListeners", () => {
-  test("Adds and removes event listeners to multiple elements", async () => {
-    const { result } = await renderHook(() => useEventListeners())
+  test("Adds and removes event listeners to multiple elements", () => {
+    const { result } = renderHook(() => useEventListeners())
     const { add, remove } = result.current
 
     const target1 = document.createElement("button")

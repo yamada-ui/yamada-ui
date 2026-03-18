@@ -136,7 +136,7 @@
     },
     {
       "name": "tokens/z-indices.ts",
-      "content": "/* eslint-disable perfectionist/sort-objects */\nimport { defineTokens } from \"@yamada-ui/react\"\n\nexport const zIndices = defineTokens.zIndices({\n  yamcha: 1,\n  kurillin: 9,\n  nappa: 99,\n\n  guldo: 100,\n  jeice: 110,\n  burter: 120,\n  recoome: 130,\n  ginyu: 140,\n  dodoria: 150,\n  zarbon: 160,\n\n  freeza: 9996,\n  vegeta: 9997,\n  sonGoku: 9998,\n  beerus: 9999,\n})\n"
+      "content": "import { defineTokens } from \"@yamada-ui/react\"\n\nexport const zIndices = defineTokens.zIndices({\n  yamcha: 1,\n  kurillin: 9,\n  nappa: 99,\n\n  guldo: 100,\n  jeice: 110,\n  burter: 120,\n  recoome: 130,\n  ginyu: 140,\n  dodoria: 150,\n  zarbon: 160,\n\n  freeza: 9996,\n  vegeta: 9997,\n  sonGoku: 9998,\n  beerus: 9999,\n})\n"
     }
   ]
 }

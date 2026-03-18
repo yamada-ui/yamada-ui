@@ -123,10 +123,11 @@ export function List({ ...rest }: ListProps) {
 
   const onReset = useCallback(() => {
     setValue("")
+    replaceQuery({ query: "" })
     setList(CONTENTS.slice(0, PER_PAGE))
     resetRef.current()
     hitsRef.current = CONTENTS
-  }, [])
+  }, [replaceQuery])
 
   const onOpen = useCallback(
     (data: Data) => {

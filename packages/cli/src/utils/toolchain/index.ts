@@ -3,9 +3,11 @@ import { detectFormatter, detectLinter } from "./detect"
 
 export type {
   Formatter,
+  FormatterConfig,
   FormatterOptions,
   FormatterTool,
   Linter,
+  LinterConfig,
   LinterOptions,
   LinterTool,
 } from "./types"

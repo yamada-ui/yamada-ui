@@ -8,6 +8,13 @@ Yamada UI is a React UI component library built with CSS-in-JS (Emotion).
 - **Accessibility is required**: All components must support ARIA attributes, keyboard navigation, and screen readers. Report any concerns.
 - **Do not bundle multiple fixes**: If you encounter a separate issue while working on a fix, do not fix it in the same PR. Create a separate issue and submit a separate PR.
 
+## Git Commit Policy
+
+- Never use `git commit --no-verify`.
+- Never bypass local hooks (`pre-commit`, `commit-msg`) during commits.
+- If hooks fail, fix the underlying issues and commit again without bypass options.
+- If a bypass seems absolutely necessary, stop and ask the user for explicit approval before proceeding.
+
 ## Codebase structure
 
 ### Monorepo Overview

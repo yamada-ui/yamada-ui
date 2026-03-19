@@ -331,6 +331,7 @@ function SearchContentBody({
   const [hits, setHits] = useState<Hit[]>(defaultContents)
   const maxIndex = Math.ceil(hits.length / PER_PAGE) - 1
   const [count, setCount] = useState(PER_PAGE)
+  const hasNext = count < hits.length
   const list = useMemo(() => hits.slice(0, count), [hits, count])
   const resetRef = useRef<() => void>(noop)
   const [, startTransition] = useTransition()
@@ -390,6 +391,7 @@ function SearchContentBody({
   return (
     <Modal.Body asChild {...rest}>
       <InfiniteScrollArea
+        disabled={!hasNext}
         gap="sm"
         loading={<Loading.Oval fontSize="2xl" />}
         maxH={{ base: "44.5rem", sm: "full" }}

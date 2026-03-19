@@ -2,6 +2,14 @@ import { renderHook } from "#test/browser"
 import { useMounted } from "."
 
 describe("useMounted", () => {
+  beforeEach(() => {
+    vi.useFakeTimers()
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
   test("should return true after component is mounted and false after unmount", async () => {
     const { result, unmount } = await renderHook(() => useMounted())
     expect(result.current()).toBeTruthy()
@@ -16,12 +24,14 @@ describe("useMounted", () => {
   })
 
   test("should return mounted state with delay when state is true and delay is set", async () => {
-    const { result } = await renderHook(() =>
+    const { act, result } = await renderHook(() =>
       useMounted({ delay: 50, state: true }),
     )
 
     expect(result.current).toBeFalsy()
 
-    await expect.poll(() => result.current).toBeTruthy()
+    await act(() => vi.advanceTimersByTime(50))
+
+    expect(result.current).toBeTruthy()
   })
 })

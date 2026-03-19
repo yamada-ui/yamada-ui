@@ -22,5 +22,5 @@ export interface Linter {
   lintText(content: string, options?: LinterOptions): Promise<string>
 }
 
-export type FormatterTool = "auto" | "biome" | "oxfmt" | "prettier"
-export type LinterTool = "auto" | "biome" | "eslint" | "oxlint"
+export type FormatterTool = "auto" | "prettier"
+export type LinterTool = "auto" | "eslint"

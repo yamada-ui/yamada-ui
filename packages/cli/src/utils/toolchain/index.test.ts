@@ -27,18 +27,6 @@ describe("resolveFormatter", () => {
     expect(formatter).toBeDefined()
     expect(formatter.formatText).toBeTypeOf("function")
   })
-
-  test("should throw for biome", async () => {
-    await expect(resolveFormatter(tempDir, "biome")).rejects.toThrow(
-      "not yet implemented",
-    )
-  })
-
-  test("should throw for oxfmt", async () => {
-    await expect(resolveFormatter(tempDir, "oxfmt")).rejects.toThrow(
-      "not yet implemented",
-    )
-  })
 })
 
 describe("resolveLinter", () => {
@@ -63,17 +51,5 @@ describe("resolveLinter", () => {
     const linter = await resolveLinter(tempDir)
     expect(linter).toBeDefined()
     expect(linter.lintText).toBeTypeOf("function")
-  })
-
-  test("should throw for biome", async () => {
-    await expect(resolveLinter(tempDir, "biome")).rejects.toThrow(
-      "not yet implemented",
-    )
-  })
-
-  test("should throw for oxlint", async () => {
-    await expect(resolveLinter(tempDir, "oxlint")).rejects.toThrow(
-      "not yet implemented",
-    )
   })
 })

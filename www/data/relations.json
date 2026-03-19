@@ -5,11 +5,11 @@
       "hooks": ["use-descendants"]
     },
     "resembles": [
-      "slide-fade",
       "slide",
+      "slide-fade",
       "fade",
-      "collapse",
       "fade-scale",
+      "collapse",
       "native-accordion",
       "carousel",
       "tabs"
@@ -20,11 +20,11 @@
     "resembles": [
       "rotate",
       "ripple",
-      "flip",
       "motion",
-      "slide-fade",
+      "flip",
       "slide",
       "skeleton",
+      "slide-fade",
       "fade"
     ]
   },
@@ -62,8 +62,8 @@
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
       "z-stack",
-      "v-stack",
       "wrap",
+      "v-stack",
       "stack",
       "spacer",
       "simple-grid",
@@ -83,8 +83,8 @@
       "textarea",
       "switch",
       "segmented-control",
-      "radio",
       "rating",
+      "radio",
       "pin-input"
     ]
   },
@@ -99,9 +99,9 @@
       "table",
       "stat",
       "native-table",
-      "pie-chart",
       "radial-chart",
       "radar-chart",
+      "pie-chart",
       "donut-chart"
     ]
   },
@@ -109,13 +109,13 @@
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
       "z-stack",
-      "v-stack",
       "wrap",
+      "v-stack",
       "stack",
       "spacer",
       "simple-grid",
       "separator",
-      "group"
+      "h-stack"
     ]
   },
   "blockquote": {
@@ -124,8 +124,8 @@
       "text",
       "mark",
       "kbd",
-      "heading",
       "highlight",
+      "heading",
       "em",
       "code",
       "link"
@@ -135,13 +135,13 @@
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
       "z-stack",
-      "v-stack",
       "wrap",
+      "v-stack",
       "stack",
       "spacer",
       "simple-grid",
       "separator",
-      "group"
+      "h-stack"
     ]
   },
   "breadcrumb": {
@@ -153,8 +153,8 @@
       "pagination",
       "native-accordion",
       "list",
-      "link-box",
-      "link"
+      "link",
+      "link-box"
     ]
   },
   "button": {
@@ -195,11 +195,11 @@
       "table",
       "stat",
       "native-table",
-      "pie-chart",
       "radial-chart",
       "radar-chart",
+      "pie-chart",
       "donut-chart",
-      "area-chart"
+      "line-chart"
     ]
   },
   "carousel": {
@@ -212,8 +212,8 @@
       "accordion",
       "rotate",
       "ripple",
-      "flip",
       "motion",
+      "flip",
       "airy",
       "scroll-area"
     ]
@@ -223,13 +223,13 @@
     "dependents": { "components": ["loading"], "hooks": [] },
     "resembles": [
       "z-stack",
-      "v-stack",
       "wrap",
+      "v-stack",
       "stack",
       "spacer",
       "simple-grid",
       "separator",
-      "group"
+      "h-stack"
     ]
   },
   "chart": {
@@ -244,8 +244,8 @@
       "radio-card",
       "switch",
       "segmented-control",
-      "radio",
       "rating",
+      "radio",
       "native-select",
       "checkbox",
       "toggle"
@@ -260,8 +260,8 @@
     "resembles": [
       "switch",
       "segmented-control",
-      "radio",
       "rating",
+      "radio",
       "native-select",
       "toggle",
       "radio-card",
@@ -282,7 +282,7 @@
   },
   "client-only": {
     "dependencies": { "components": ["show"], "hooks": [] },
-    "resembles": ["show", "portal", "slot", "for", "format"]
+    "resembles": ["show", "slot", "portal", "for", "format"]
   },
   "close-button": {
     "dependencies": { "components": ["button", "icon"], "hooks": [] },
@@ -295,8 +295,8 @@
       "text",
       "mark",
       "kbd",
-      "heading",
       "highlight",
+      "heading",
       "em",
       "blockquote",
       "link"
@@ -306,14 +306,14 @@
     "dependencies": { "components": ["motion"], "hooks": [] },
     "dependents": { "components": ["accordion"], "hooks": [] },
     "resembles": [
-      "slide-fade",
       "slide",
+      "slide-fade",
       "fade",
       "fade-scale",
       "accordion",
       "rotate",
       "ripple",
-      "flip"
+      "motion"
     ]
   },
   "color-picker": {
@@ -377,13 +377,13 @@
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
       "z-stack",
-      "v-stack",
       "wrap",
+      "v-stack",
       "stack",
       "spacer",
       "simple-grid",
       "separator",
-      "group"
+      "h-stack"
     ]
   },
   "data-list": {
@@ -394,9 +394,9 @@
       "table",
       "stat",
       "native-table",
-      "pie-chart",
       "radial-chart",
-      "radar-chart"
+      "radar-chart",
+      "pie-chart"
     ]
   },
   "date-picker": {
@@ -435,11 +435,11 @@
       "modal",
       "tooltip",
       "popover",
-      "slide-fade",
       "slide",
+      "slide-fade",
       "fade",
-      "collapse",
-      "fade-scale"
+      "fade-scale",
+      "collapse"
     ]
   },
   "dropzone": {
@@ -454,8 +454,8 @@
       "switch",
       "slider",
       "segmented-control",
-      "radio",
-      "rating"
+      "rating",
+      "radio"
     ]
   },
   "editable": {
@@ -477,8 +477,8 @@
       "text",
       "mark",
       "kbd",
-      "heading",
       "highlight",
+      "heading",
       "code",
       "blockquote",
       "link"
@@ -500,14 +500,14 @@
     "dependencies": { "components": ["motion"], "hooks": [] },
     "dependents": { "components": ["popover"], "hooks": [] },
     "resembles": [
-      "slide-fade",
       "slide",
+      "slide-fade",
       "fade",
       "collapse",
       "accordion",
       "rotate",
       "ripple",
-      "flip"
+      "motion"
     ]
   },
   "fade": {
@@ -517,14 +517,14 @@
       "hooks": []
     },
     "resembles": [
-      "slide-fade",
       "slide",
-      "collapse",
+      "slide-fade",
       "fade-scale",
+      "collapse",
       "accordion",
       "rotate",
       "ripple",
-      "flip"
+      "motion"
     ]
   },
   "field": {
@@ -562,22 +562,22 @@
       "form",
       "fieldset",
       "z-stack",
-      "v-stack",
       "wrap",
+      "v-stack",
       "stack",
       "spacer",
       "simple-grid"
     ]
   },
   "fieldset": {
-    "dependencies": { "components": ["field", "form"], "hooks": [] },
-    "dependents": { "components": ["field", "form"], "hooks": [] },
+    "dependencies": { "components": ["form", "field"], "hooks": [] },
+    "dependents": { "components": ["field"], "hooks": [] },
     "resembles": [
       "form",
       "field",
       "z-stack",
-      "v-stack",
       "wrap",
+      "v-stack",
       "stack",
       "spacer",
       "simple-grid"
@@ -609,13 +609,13 @@
     "dependents": { "components": ["group", "wrap"], "hooks": [] },
     "resembles": [
       "z-stack",
-      "v-stack",
       "wrap",
+      "v-stack",
       "stack",
       "spacer",
       "simple-grid",
       "separator",
-      "group"
+      "h-stack"
     ]
   },
   "flip": {
@@ -625,9 +625,9 @@
       "ripple",
       "motion",
       "airy",
-      "slide-fade",
       "slide",
       "skeleton",
+      "slide-fade",
       "fade"
     ]
   },
@@ -636,13 +636,13 @@
     "dependents": { "components": ["indicator"], "hooks": [] },
     "resembles": [
       "z-stack",
-      "v-stack",
       "wrap",
+      "v-stack",
       "stack",
       "spacer",
       "simple-grid",
       "separator",
-      "group"
+      "h-stack"
     ]
   },
   "focus-lock": {
@@ -652,17 +652,17 @@
   },
   "for": {
     "dependencies": { "components": [], "hooks": [] },
-    "resembles": ["portal", "slot", "format", "show", "client-only"]
+    "resembles": ["slot", "portal", "format", "show", "client-only"]
   },
   "form": {
-    "dependencies": { "components": ["fieldset", "button"], "hooks": [] },
+    "dependencies": { "components": ["button"], "hooks": [] },
     "dependents": { "components": ["field", "fieldset"], "hooks": [] },
     "resembles": [
-      "field",
       "fieldset",
+      "field",
       "z-stack",
-      "v-stack",
       "wrap",
+      "v-stack",
       "stack",
       "spacer",
       "simple-grid"
@@ -671,7 +671,7 @@
   "format": {
     "dependencies": { "components": [], "hooks": [] },
     "dependents": { "components": ["calendar", "date-picker"], "hooks": [] },
-    "resembles": ["portal", "slot", "for", "show", "client-only"]
+    "resembles": ["slot", "portal", "for", "show", "client-only"]
   },
   "grid": {
     "dependencies": { "components": [], "hooks": [] },
@@ -681,13 +681,13 @@
     },
     "resembles": [
       "z-stack",
-      "v-stack",
       "wrap",
+      "v-stack",
       "stack",
       "spacer",
       "simple-grid",
       "separator",
-      "group"
+      "h-stack"
     ]
   },
   "group": {
@@ -714,8 +714,8 @@
     },
     "resembles": [
       "z-stack",
-      "v-stack",
       "wrap",
+      "v-stack",
       "stack",
       "spacer",
       "simple-grid",
@@ -870,8 +870,8 @@
     "resembles": [
       "text",
       "mark",
-      "heading",
       "highlight",
+      "heading",
       "em",
       "code",
       "blockquote",
@@ -882,13 +882,13 @@
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
       "z-stack",
-      "v-stack",
       "wrap",
+      "v-stack",
       "stack",
       "spacer",
       "simple-grid",
       "separator",
-      "group"
+      "h-stack"
     ]
   },
   "link": {
@@ -897,8 +897,8 @@
       "text",
       "mark",
       "kbd",
-      "heading",
       "highlight",
+      "heading",
       "em",
       "code",
       "blockquote"
@@ -912,9 +912,9 @@
       "table",
       "stat",
       "native-table",
-      "pie-chart",
       "radial-chart",
-      "radar-chart"
+      "radar-chart",
+      "pie-chart"
     ]
   },
   "loading": {
@@ -934,8 +934,8 @@
     "resembles": [
       "text",
       "kbd",
-      "heading",
       "highlight",
+      "heading",
       "em",
       "code",
       "blockquote",
@@ -977,11 +977,11 @@
       "drawer",
       "tooltip",
       "popover",
-      "slide-fade",
       "slide",
+      "slide-fade",
       "fade",
-      "collapse",
-      "fade-scale"
+      "fade-scale",
+      "collapse"
     ]
   },
   "motion": {
@@ -1014,9 +1014,9 @@
       "ripple",
       "flip",
       "airy",
-      "slide-fade",
       "slide",
       "skeleton",
+      "slide-fade",
       "fade"
     ]
   },
@@ -1026,11 +1026,11 @@
     "resembles": [
       "accordion",
       "tabs",
-      "slide-fade",
       "slide",
+      "slide-fade",
       "fade",
-      "collapse",
       "fade-scale",
+      "collapse",
       "reorder"
     ]
   },
@@ -1051,8 +1051,8 @@
     "resembles": [
       "switch",
       "segmented-control",
-      "radio",
       "rating",
+      "radio",
       "checkbox",
       "toggle",
       "radio-card",
@@ -1065,11 +1065,11 @@
     "resembles": [
       "table",
       "stat",
-      "pie-chart",
       "radial-chart",
       "radar-chart",
+      "pie-chart",
       "donut-chart",
-      "area-chart",
+      "line-chart",
       "composed-chart"
     ]
   },
@@ -1102,11 +1102,11 @@
       "tabs",
       "switch",
       "segmented-control",
-      "radio",
       "rating",
+      "radio",
       "native-select",
-      "link-box",
-      "link"
+      "link",
+      "link-box"
     ]
   },
   "password-input": {
@@ -1209,9 +1209,9 @@
       "picture",
       "native-table",
       "image",
-      "pie-chart",
       "radial-chart",
-      "radar-chart"
+      "radar-chart",
+      "pie-chart"
     ]
   },
   "radio-card": {
@@ -1220,8 +1220,8 @@
       "checkbox-card",
       "switch",
       "segmented-control",
-      "radio",
       "rating",
+      "radio",
       "native-select",
       "checkbox",
       "toggle"
@@ -1272,13 +1272,13 @@
     "dependencies": { "components": [], "hooks": ["use-value"] },
     "resembles": [
       "z-stack",
-      "v-stack",
       "wrap",
+      "v-stack",
       "stack",
       "spacer",
       "simple-grid",
       "separator",
-      "group"
+      "h-stack"
     ]
   },
   "ripple": {
@@ -1286,12 +1286,12 @@
     "dependents": { "components": ["button"], "hooks": [] },
     "resembles": [
       "rotate",
-      "flip",
       "motion",
+      "flip",
       "airy",
-      "slide-fade",
       "slide",
       "skeleton",
+      "slide-fade",
       "fade"
     ]
   },
@@ -1299,12 +1299,12 @@
     "dependencies": { "components": ["motion"], "hooks": [] },
     "resembles": [
       "ripple",
-      "flip",
       "motion",
+      "flip",
       "airy",
-      "slide-fade",
       "slide",
       "skeleton",
+      "slide-fade",
       "fade"
     ]
   },
@@ -1333,8 +1333,8 @@
     },
     "resembles": [
       "switch",
-      "radio",
       "rating",
+      "radio",
       "native-select",
       "checkbox",
       "toggle",
@@ -1361,8 +1361,8 @@
       "menu",
       "switch",
       "segmented-control",
-      "radio",
       "rating",
+      "radio",
       "native-select",
       "checkbox"
     ]
@@ -1371,31 +1371,31 @@
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
       "z-stack",
-      "v-stack",
       "wrap",
+      "v-stack",
       "stack",
       "spacer",
       "simple-grid",
-      "group",
-      "h-stack"
+      "h-stack",
+      "group"
     ]
   },
   "show": {
     "dependencies": { "components": [], "hooks": [] },
     "dependents": { "components": ["client-only"], "hooks": [] },
-    "resembles": ["client-only", "portal", "slot", "for", "format"]
+    "resembles": ["client-only", "slot", "portal", "for", "format"]
   },
   "simple-grid": {
     "dependencies": { "components": ["grid"], "hooks": [] },
     "resembles": [
       "z-stack",
-      "v-stack",
       "wrap",
+      "v-stack",
       "stack",
       "spacer",
       "separator",
-      "group",
-      "h-stack"
+      "h-stack",
+      "group"
     ]
   },
   "skeleton": {
@@ -1403,12 +1403,12 @@
     "resembles": [
       "rotate",
       "ripple",
+      "motion",
       "loading",
       "flip",
-      "motion",
       "airy",
       "empty-state",
-      "slide-fade"
+      "slide"
     ]
   },
   "slide-fade": {
@@ -1417,12 +1417,12 @@
     "resembles": [
       "slide",
       "fade",
-      "collapse",
       "fade-scale",
+      "collapse",
       "accordion",
       "rotate",
       "ripple",
-      "flip"
+      "motion"
     ]
   },
   "slide": {
@@ -1431,12 +1431,12 @@
     "resembles": [
       "slide-fade",
       "fade",
-      "collapse",
       "fade-scale",
+      "collapse",
       "accordion",
       "rotate",
       "ripple",
-      "flip"
+      "motion"
     ]
   },
   "slider": {
@@ -1452,8 +1452,8 @@
       "textarea",
       "switch",
       "segmented-control",
-      "radio",
-      "rating"
+      "rating",
+      "radio"
     ]
   },
   "slot": {
@@ -1479,13 +1479,13 @@
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
       "z-stack",
-      "v-stack",
       "wrap",
+      "v-stack",
       "spacer",
       "simple-grid",
       "separator",
-      "group",
-      "h-stack"
+      "h-stack",
+      "group"
     ]
   },
   "stat": {
@@ -1493,11 +1493,11 @@
     "resembles": [
       "table",
       "native-table",
-      "pie-chart",
       "radial-chart",
       "radar-chart",
+      "pie-chart",
       "donut-chart",
-      "area-chart",
+      "line-chart",
       "composed-chart"
     ]
   },
@@ -1526,8 +1526,8 @@
     "dependencies": { "components": ["field"], "hooks": [] },
     "resembles": [
       "segmented-control",
-      "radio",
       "rating",
+      "radio",
       "native-select",
       "checkbox",
       "toggle",
@@ -1543,11 +1543,11 @@
     "resembles": [
       "stat",
       "native-table",
-      "pie-chart",
       "radial-chart",
       "radar-chart",
+      "pie-chart",
       "donut-chart",
-      "area-chart",
+      "line-chart",
       "composed-chart"
     ]
   },
@@ -1573,9 +1573,9 @@
       "table",
       "stat",
       "native-table",
-      "pie-chart",
       "radial-chart",
       "radar-chart",
+      "pie-chart",
       "donut-chart"
     ]
   },
@@ -1585,8 +1585,8 @@
     "resembles": [
       "mark",
       "kbd",
-      "heading",
       "highlight",
+      "heading",
       "em",
       "code",
       "blockquote",
@@ -1625,8 +1625,8 @@
     "resembles": [
       "switch",
       "segmented-control",
-      "radio",
       "rating",
+      "radio",
       "native-select",
       "checkbox",
       "radio-card",
@@ -1654,8 +1654,8 @@
       "spacer",
       "simple-grid",
       "separator",
-      "group",
-      "h-stack"
+      "h-stack",
+      "group"
     ]
   },
   "use-animation": { "dependencies": { "components": [], "hooks": [] } },

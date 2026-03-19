@@ -1,10 +1,12 @@
 import type { NextLinkProps } from "@/components/next-link"
+import { isString } from "@yamada-ui/utils"
 import { NextLink } from "@/components/next-link"
 
 export interface LinkProps extends NextLinkProps {}
 
 export function Link({ href, ...rest }: LinkProps) {
-  const external = !(href?.startsWith("/") || href?.startsWith("#"))
+  const external =
+    isString(href) && !(href.startsWith("/") || href.startsWith("#"))
 
   return (
     <NextLink

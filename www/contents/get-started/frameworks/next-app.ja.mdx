@@ -148,7 +148,7 @@ export default function RootLayout({
 
 もし、[コンフィグ](/docs/theming/configuration/overview)の`defaultColorMode`を変更した場合は、`ColorModeScript`に`defaultValue`を設定します。
 
-```tsx title="layout.tsx" {12}
+```tsx title="layout.tsx" {2,12}
 import { UIProvider, ColorModeScript } from "@workspaces/ui"
 import { config } from "@workspace/theme"
 
@@ -197,7 +197,7 @@ export default function RootLayout({
 
 もし、[コンフィグ](/docs/theming/configuration/overview)の`defaultThemeScheme`を変更した場合は、`ThemeSchemeScript`に`defaultValue`を設定します。
 
-```tsx title="layout.tsx" {12}
+```tsx title="layout.tsx" {2,12}
 import { UIProvider, ThemeSchemeScript } from "@workspaces/ui"
 import { config } from "@workspace/theme"
 
@@ -265,19 +265,23 @@ import type {
   IconButtonProps,
   LinkProps,
   Merge,
-} from "@yamada-ui/react"
-import type { LinkProps as OriginalLinkProps } from "next/link"
+} from "@workspaces/ui"
 import type { FC } from "react"
-import { Button, IconButton, Link } from "@yamada-ui/react"
+import type { LinkProps as OriginalLinkProps } from "next/link"
+import { Button, IconButton, Link } from "@workspaces/ui"
 import OriginalLink from "next/link"
 
 export interface NextLinkProps extends Omit<
-  Merge<OriginalLinkProps, LinkProps>,
-  "as" | "ref"
+  Merge<OriginalLinkProps, Omit<LinkProps, "href">>,
+  "as"
 > {}
 
-export const NextLink: FC<NextLinkProps> = (props) => {
-  return <Link as={OriginalLink} {...props} />
+export const NextLink: FC<NextLinkProps> = ({ href, children, ...rest }) => {
+  return (
+    <Link asChild {...rest}>
+      <OriginalLink href={href}>{children}</OriginalLink>
+    </Link>
+  )
 }
 
 export interface NextLinkButtonProps
@@ -304,7 +308,7 @@ export const NextLinkIconButton: FC<NextLinkIconButtonProps> = (props) => {
 ```tsx
 "use client"
 
-import { styled } from "@yamada-ui/react"
+import { styled } from "@workspaces/ui"
 import Image from "next/image"
 
 export const AppImage = styled(Image, {

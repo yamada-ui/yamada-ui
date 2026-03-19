@@ -49,6 +49,10 @@ cd yamada-ui
 }
 ```
 
+## AI利用ポリシー
+
+Yamada UIは、人工知能（AI）ツールの支援を活用した貢献を含め、すべての方からの貢献を歓迎します。AIを用いて貢献を行う場合は、以下の[AI利用ポリシー](./AI_POLICY.ja.md)に従ってください。
+
 ## バグを見つけたと思いますか？
 
 [テンプレート](https://github.com/yamada-ui/yamada-ui/issues/new/choose)に従って、提供してください。

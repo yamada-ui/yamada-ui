@@ -54,7 +54,7 @@ describe("<NumberInput />", () => {
     await expect.element(numberInput).toHaveValue("35")
 
     await user.click(numberInput)
-    numberInput.element().blur()
+    await user.tab()
     await expect.element(numberInput).toHaveValue("30")
   })
 
@@ -65,7 +65,7 @@ describe("<NumberInput />", () => {
     await expect.element(numberInput).toHaveValue("-5")
 
     await user.click(numberInput)
-    numberInput.element().blur()
+    await user.tab()
     await expect.element(numberInput).toHaveValue("0")
   })
 
@@ -76,7 +76,8 @@ describe("<NumberInput />", () => {
 
     await user.click(numberInput)
     await user.keyboard("e5")
-    numberInput.element().blur()
+    await expect.element(numberInput).toHaveValue("e5")
+    await user.tab()
 
     await expect.element(numberInput).toHaveValue("")
   })
@@ -90,7 +91,7 @@ describe("<NumberInput />", () => {
 
     await user.click(numberInput)
     await user.keyboard("50")
-    numberInput.element().blur()
+    await user.tab()
 
     await expect.element(numberInput).toHaveValue("50")
   })

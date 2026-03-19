@@ -1,13 +1,14 @@
 import react from "@vitejs/plugin-react-swc"
 import { playwright } from "@vitest/browser-playwright"
 import sharedConfig from "@yamada-ui/workspace/vitest/config"
-import { readFile } from "fs/promises"
-import { glob } from "glob"
+import { glob, readFile } from "fs/promises"
 import { resolve } from "node:path"
 import { defineProject, mergeConfig } from "vitest/config"
 
 async function getBrowserTestFiles() {
-  const paths = await glob(resolve(__dirname, "src", "**", "*.test.{ts,tsx}"))
+  const paths = await Array.fromAsync(
+    glob(resolve(__dirname, "src", "**", "*.test.{ts,tsx}")),
+  )
   const targetPaths: string[] = []
 
   await Promise.all(
@@ -55,6 +56,7 @@ export default mergeConfig(sharedConfig, {
           globals: true,
           include: ["src/**/*.test.{ts,tsx}"],
           setupFiles: ["@yamada-ui/workspace/vitest/setup"],
+          testTimeout: 10000,
         },
       }),
       defineProject({
@@ -85,6 +87,7 @@ export default mergeConfig(sharedConfig, {
           },
           globals: true,
           include: browserTestFiles,
+          testTimeout: 10000,
         },
       }),
     ],

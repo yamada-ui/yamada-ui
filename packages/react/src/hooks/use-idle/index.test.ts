@@ -2,6 +2,14 @@ import { renderHook } from "#test/browser"
 import { useIdle } from "./"
 
 describe("useIdle", () => {
+  beforeEach(() => {
+    vi.useFakeTimers()
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
   test("initial state is true", async () => {
     const { result } = await renderHook(() => useIdle(50))
     expect(result.current).toBeTruthy()
@@ -15,7 +23,9 @@ describe("useIdle", () => {
     })
     expect(result.current).toBeFalsy()
 
-    await expect.poll(() => result.current).toBeTruthy()
+    await act(() => vi.advanceTimersByTime(100))
+
+    expect(result.current).toBeTruthy()
   })
 
   test("is false while events are occurring", async () => {
@@ -42,12 +52,16 @@ describe("useIdle", () => {
       document.dispatchEvent(new Event("mousedown"))
     })
 
-    await expect.poll(() => result.current).toBeTruthy()
+    await act(() => vi.advanceTimersByTime(50))
+
+    expect(result.current).toBeTruthy()
 
     await act(() => {
       document.dispatchEvent(new Event("wheel"))
     })
 
-    await expect.poll(() => result.current).toBeTruthy()
+    await act(() => vi.advanceTimersByTime(50))
+
+    expect(result.current).toBeTruthy()
   })
 })

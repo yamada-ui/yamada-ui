@@ -1,9 +1,9 @@
 import type { CSSAnimationObject } from "../../core"
-import { renderHook } from "#test/browser"
+import { renderHook, waitFor } from "#test"
 import { useAnimation, useDynamicAnimation } from "."
 
 describe("useAnimation", () => {
-  test("should generate a single animation string", async () => {
+  test("should generate a single animation string", () => {
     const style: CSSAnimationObject = {
       duration: "10s",
       iterationCount: "infinite",
@@ -30,14 +30,14 @@ describe("useAnimation", () => {
       timingFunction: "linear",
     }
 
-    const { result } = await renderHook(() => useAnimation(style))
+    const { result } = renderHook(() => useAnimation(style))
 
     expect(result.current).toMatch(
       /animation-.* 10s linear 0s infinite normal none running/,
     )
   })
 
-  test("should generate a multi animation string", async () => {
+  test("should generate a multi animation string", () => {
     const style: CSSAnimationObject[] = [
       {
         duration: "10s",
@@ -98,7 +98,7 @@ describe("useAnimation", () => {
       },
     ]
 
-    const { result } = await renderHook(() => useAnimation(style))
+    const { result } = renderHook(() => useAnimation(style))
 
     expect(result.current).toMatch(
       /animation-.* 10s linear 0s infinite normal none running, animation-.* 10s linear 0s infinite normal none running, animation-.* 10s linear 0s infinite normal none running/,
@@ -137,23 +137,19 @@ describe("useDynamicAnimation", () => {
       },
     }
 
-    const { act, result } = await renderHook(() =>
-      useDynamicAnimation(style, "moveLeft"),
-    )
+    const { result } = renderHook(() => useDynamicAnimation(style, "moveLeft"))
 
     expect(result.current[0]).toMatch(
       /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running/,
     )
 
-    await act(() => {
-      result.current[1]("moveRight")
-    })
+    result.current[1]("moveRight")
 
-    await expect
-      .poll(() => result.current[0])
-      .toMatch(
+    await waitFor(() => {
+      expect(result.current[0]).toMatch(
         /animation-.* var\(--ui-durations-slow\) var\(--ui-easings-ease-out\) 0s 1 normal forwards running/,
       )
+    })
   })
 
   test("Multi animation should be changed dynamically", async () => {
@@ -216,23 +212,19 @@ describe("useDynamicAnimation", () => {
       ],
     }
 
-    const { act, result } = await renderHook(() =>
-      useDynamicAnimation(style, "moveLeft"),
-    )
+    const { result } = renderHook(() => useDynamicAnimation(style, "moveLeft"))
 
     expect(result.current[0]).toMatch(
       /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running/,
     )
 
-    await act(() => {
-      result.current[1]("moveRight")
-    })
+    result.current[1]("moveRight")
 
-    await expect
-      .poll(() => result.current[0])
-      .toMatch(
+    await waitFor(() => {
+      expect(result.current[0]).toMatch(
         /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running/,
       )
+    })
   })
 
   test("Should accept multiple keys", async () => {
@@ -290,7 +282,7 @@ describe("useDynamicAnimation", () => {
       },
     }
 
-    const { act, result } = await renderHook(() =>
+    const { result } = renderHook(() =>
       useDynamicAnimation(style, ["moveLeft", "gradients"]),
     )
 
@@ -298,18 +290,16 @@ describe("useDynamicAnimation", () => {
       /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* 10s linear 0s infinite normal none running/,
     )
 
-    await act(() => {
-      result.current[1](["moveRight", "gradients"])
-    })
+    result.current[1](["moveRight", "gradients"])
 
-    await expect
-      .poll(() => result.current[0])
-      .toMatch(
+    await waitFor(() => {
+      expect(result.current[0]).toMatch(
         /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* 10s linear 0s infinite normal none running/,
       )
+    })
   })
 
-  test("Should be undefined if no default key is set", async () => {
+  test("Should be undefined if no default key is set", () => {
     const style: { [key: string]: CSSAnimationObject } = {
       moveLeft: {
         keyframes: {},
@@ -319,7 +309,7 @@ describe("useDynamicAnimation", () => {
       },
     }
 
-    const { result } = await renderHook(() => useDynamicAnimation(style))
+    const { result } = renderHook(() => useDynamicAnimation(style))
 
     expect(result.current[0]).toBeUndefined()
   })
@@ -346,23 +336,19 @@ describe("useDynamicAnimation", () => {
       },
     ]
 
-    const { act, result } = await renderHook(() =>
-      useDynamicAnimation(styles, 0),
-    )
+    const { result } = renderHook(() => useDynamicAnimation(styles, 0))
 
     expect(result.current[0]).toMatch(
       /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running/,
     )
 
-    await act(() => {
-      result.current[1](1)
-    })
+    result.current[1](1)
 
-    await expect
-      .poll(() => result.current[0])
-      .toMatch(
+    await waitFor(() => {
+      expect(result.current[0]).toMatch(
         /animation-.* var\(--ui-durations-slow\) var\(--ui-easings-ease-out\) 0s 1 normal forwards running/,
       )
+    })
   })
 
   test("Should work with array input and multiple init keys", async () => {
@@ -387,23 +373,19 @@ describe("useDynamicAnimation", () => {
       },
     ]
 
-    const { act, result } = await renderHook(() =>
-      useDynamicAnimation(styles, [0, 1]),
-    )
+    const { result } = renderHook(() => useDynamicAnimation(styles, [0, 1]))
 
     expect(result.current[0]).toMatch(
       /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* var\(--ui-durations-slow\) var\(--ui-easings-ease-out\) 0s 1 normal forwards running/,
     )
 
-    await act(() => {
-      result.current[1]([1, 0])
-    })
+    result.current[1]([1, 0])
 
-    await expect
-      .poll(() => result.current[0])
-      .toMatch(
+    await waitFor(() => {
+      expect(result.current[0]).toMatch(
         /animation-.* var\(--ui-durations-slow\) var\(--ui-easings-ease-out\) 0s 1 normal forwards running, animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running/,
       )
+    })
   })
 
   test("Should accept a function to update animation key", async () => {
@@ -428,25 +410,21 @@ describe("useDynamicAnimation", () => {
       },
     }
 
-    const { act, result } = await renderHook(() =>
-      useDynamicAnimation(style, "moveLeft"),
-    )
+    const { result } = renderHook(() => useDynamicAnimation(style, "moveLeft"))
 
     expect(result.current[0]).toMatch(
       /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running/,
     )
 
-    await act(() => {
-      result.current[1]((prev) => {
-        expect(prev).toBe("moveLeft")
-        return "moveRight"
-      })
+    result.current[1]((prev) => {
+      expect(prev).toBe("moveLeft")
+      return "moveRight"
     })
 
-    await expect
-      .poll(() => result.current[0])
-      .toMatch(
+    await waitFor(() => {
+      expect(result.current[0]).toMatch(
         /animation-.* var\(--ui-durations-slow\) var\(--ui-easings-ease-out\) 0s 1 normal forwards running/,
       )
+    })
   })
 })

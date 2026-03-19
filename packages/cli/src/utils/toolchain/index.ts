@@ -17,21 +17,12 @@ export async function resolveFormatter(
   const resolved = detectFormatter(cwd, tool)
 
   switch (resolved) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- exhaustive switch for future tool additions
     case "prettier": {
       const { createPrettierFormatter } = await import("./formatters/prettier")
 
       return createPrettierFormatter()
     }
-
-    case "biome":
-      throw new Error(
-        `Formatter adapter for "biome" is not yet implemented. Please use "prettier" or contribute an adapter.`,
-      )
-
-    case "oxfmt":
-      throw new Error(
-        `Formatter adapter for "oxfmt" is not yet implemented. Please use "prettier" or contribute an adapter.`,
-      )
 
     default: {
       const _exhaustive: never = resolved
@@ -47,21 +38,12 @@ export async function resolveLinter(
   const resolved = detectLinter(cwd, tool)
 
   switch (resolved) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- exhaustive switch for future tool additions
     case "eslint": {
       const { createESLintLinter } = await import("./linters/eslint")
 
       return createESLintLinter()
     }
-
-    case "biome":
-      throw new Error(
-        `Linter adapter for "biome" is not yet implemented. Please use "eslint" or contribute an adapter.`,
-      )
-
-    case "oxlint":
-      throw new Error(
-        `Linter adapter for "oxlint" is not yet implemented. Please use "eslint" or contribute an adapter.`,
-      )
 
     default: {
       const _exhaustive: never = resolved

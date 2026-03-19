@@ -4,6 +4,15 @@ vi.mock("node-fetch", () => ({
   default: vi.fn(),
 }))
 
+vi.mock("ora", () => {
+  const spinner = {
+    fail: vi.fn().mockReturnThis(),
+    start: vi.fn().mockReturnThis(),
+    succeed: vi.fn().mockReturnThis(),
+  }
+  return { default: vi.fn(() => spinner) }
+})
+
 import fetch from "node-fetch"
 import { docs } from "."
 
@@ -19,18 +28,24 @@ function makeResponse(body: string, status = 200) {
 
 describe("docs", () => {
   let logSpy: ReturnType<typeof vi.spyOn>
-  let errorSpy: ReturnType<typeof vi.spyOn>
-  let exitSpy: ReturnType<typeof vi.spyOn>
 
   beforeEach(() => {
+    Object.defineProperty(process.stdin, "isTTY", {
+      configurable: true,
+      value: true,
+      writable: true,
+    })
+
+    mockFetch.mockReset()
     logSpy = vi.spyOn(console, "log").mockImplementation(vi.fn())
-    errorSpy = vi.spyOn(console, "error").mockImplementation(vi.fn())
-    exitSpy = vi
-      .spyOn(process, "exit")
-      .mockImplementation(() => undefined as never)
   })
 
   afterEach(() => {
+    Object.defineProperty(process.stdin, "isTTY", {
+      configurable: true,
+      value: undefined,
+      writable: true,
+    })
     vi.restoreAllMocks()
   })
 
@@ -88,21 +103,31 @@ describe("docs", () => {
     )
   })
 
-  test("should call process.exit(1) when fetch returns non-ok", async () => {
+  test("should call spinner.fail when fetch returns non-ok", async () => {
+    const ora = await import("ora")
+    const spinner = ora.default()
+    vi.mocked(spinner.fail).mockClear()
+
     mockFetch.mockResolvedValueOnce(makeResponse("", 404))
 
     await docs.parseAsync(["/docs/components/button"], { from: "user" })
 
-    expect(errorSpy).toHaveBeenCalledWith(expect.stringContaining("Failed"))
-    expect(exitSpy).toHaveBeenCalledWith(1)
+    expect(spinner.fail).toHaveBeenCalledWith(
+      expect.stringContaining("Failed to fetch docs: 404"),
+    )
   })
 
-  test("should call process.exit(1) when fetch throws", async () => {
+  test("should call spinner.fail when fetch throws", async () => {
+    const ora = await import("ora")
+    const spinner = ora.default()
+    vi.mocked(spinner.fail).mockClear()
+
     mockFetch.mockRejectedValueOnce(new Error("network error"))
 
     await docs.parseAsync(["/docs/components/button"], { from: "user" })
 
-    expect(errorSpy).toHaveBeenCalledWith(expect.stringContaining("Failed"))
-    expect(exitSpy).toHaveBeenCalledWith(1)
+    expect(spinner.fail).toHaveBeenCalledWith(
+      expect.stringContaining("network error"),
+    )
   })
 })

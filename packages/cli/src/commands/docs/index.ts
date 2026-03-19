@@ -1,5 +1,6 @@
 import { Command } from "commander"
 import fetch from "node-fetch"
+import ora from "ora"
 
 const BASE_URL = "https://yamada-ui.com"
 
@@ -24,7 +25,6 @@ function parseInput(input?: string) {
 
   let value = input.trim()
 
-  // URL → pathに変換
   if (value.startsWith("http")) {
     const url = new URL(value)
     value = url.pathname + url.hash
@@ -65,10 +65,11 @@ export const docs = new Command("docs")
   .option("--lang <lang>", "language", "en")
   .description("fetch yamada ui docs markdown")
   .action(async (input, options) => {
+    const spinner = ora()
+
     try {
       let pathInput = input
 
-      // stdin対応
       if (!pathInput && !process.stdin.isTTY) {
         pathInput = await readStdin()
       }
@@ -87,8 +88,7 @@ export const docs = new Command("docs")
       const res = await fetch(url)
 
       if (!res.ok) {
-        console.error(`Failed to fetch docs: ${res.status}`)
-        process.exit(1)
+        throw new Error(`Failed to fetch docs: ${res.status}`)
       }
 
       const markdown = await res.text()
@@ -96,8 +96,11 @@ export const docs = new Command("docs")
       const output = trimByHash(markdown, hash)
 
       console.log(output)
-    } catch (_error) {
-      console.error("Failed to fetch documentation")
-      process.exit(1)
+    } catch (e) {
+      if (e instanceof Error) {
+        spinner.fail(e.message)
+      } else {
+        spinner.fail("An unknown error occurred")
+      }
     }
   })

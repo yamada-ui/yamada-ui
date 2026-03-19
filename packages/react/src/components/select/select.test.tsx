@@ -598,7 +598,7 @@ describe("<Select />", () => {
   test("onClear does not call onChange when item value is empty (L284 else)", async () => {
     const onChange = vi.fn()
 
-    render(
+    const { user } = render(
       <Select.Root
         items={items}
         multiple
@@ -614,11 +614,8 @@ describe("<Select />", () => {
 
     const placeholderTag = screen.getByTestId("tag-")
 
-    fireEvent.click(placeholderTag)
-
-    await waitFor(() => {
-      expect(onChange).not.toHaveBeenCalled()
-    })
+    await user.click(placeholderTag)
+    expect(onChange).not.toHaveBeenCalled()
   })
 
   test("renders with readOnly", () => {

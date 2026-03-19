@@ -1,12 +1,13 @@
 "use client"
 
 import type { Descendant, HTMLProps } from "@yamada-ui/react"
-import type { ElementType, KeyboardEvent, ReactNode, RefObject } from "react"
+import type { KeyboardEvent, RefObject } from "react"
 import type { FragmentContent, PageContent } from "@/data"
 import {
   assignRef,
   Box,
   Center,
+  CloseButton,
   createDescendants,
   handlerAll,
   HashIcon,
@@ -45,6 +46,7 @@ import scrollIntoView from "scroll-into-view-if-needed"
 import { CONSTANTS } from "@/constants"
 import { getContents, getDefaultContents } from "@/data"
 import { Link, useLocale, usePathname } from "@/i18n"
+import { createLocalStorage } from "@/utils/storage"
 
 const ACTION_DEFAULT_KEY = "Ctrl"
 const ACTION_APPLE_KEY = "⌘"
@@ -54,7 +56,7 @@ const {
   useDescendant,
   useDescendants,
   useDescendantsContext,
-} = createDescendants<HTMLAnchorElement, { href: string }>()
+} = createDescendants<HTMLAnchorElement, { hit: Hit }>()
 
 export function Search() {
   const { open, onClose, onOpen } = useDisclosure()
@@ -136,6 +138,7 @@ export function Search() {
 }
 
 type Hit = FragmentContent | PageContent
+type LocalStorageHit = Hit & { storage: "recent" }
 
 interface SearchContentProps {
   onClose: () => void
@@ -147,11 +150,11 @@ function SearchContent({ onClose }: SearchContentProps) {
   const onSearchRef = useRef<(value: string) => void>(noop)
   const activeDescendant = useRef<Descendant<
     HTMLAnchorElement,
-    { href: string }
+    { hit: Hit }
   > | null>(null)
 
   const onActive = useCallback(
-    (descendant?: Descendant<HTMLAnchorElement, { href: string }>) => {
+    (descendant?: Descendant<HTMLAnchorElement, { hit: Hit }>) => {
       if (!descendant) return
 
       activeDescendant.current = descendant
@@ -196,11 +199,9 @@ function SearchContent({ onClose }: SearchContentProps) {
 interface SearchContentHeaderProps {
   activeDescendant: RefObject<Descendant<
     HTMLAnchorElement,
-    { href: string }
+    { hit: Hit }
   > | null>
-  onActive: (
-    descendant?: Descendant<HTMLAnchorElement, { href: string }>,
-  ) => void
+  onActive: (descendant?: Descendant<HTMLAnchorElement, { hit: Hit }>) => void
   onClose: () => void
   onSearchRef: RefObject<(value: string) => void>
 }
@@ -217,59 +218,142 @@ function SearchContentHeader({
   const pathname = usePathname()
   const router = useRouter()
 
+  const onSetFocusVisible = useCallback((node: HTMLElement) => {
+    const el = node.querySelector("button")
+
+    if (el) el.setAttribute("data-focus-visible", "")
+  }, [])
+
+  const onRemoveFocusVisible = useCallback((node: HTMLElement) => {
+    const el = node.querySelector("button")
+
+    if (el) el.removeAttribute("data-focus-visible")
+  }, [])
+
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLInputElement>) => {
       if (compositionRef.current) return
 
-      runKeyAction(ev, {
-        ArrowDown: () => {
-          if (activeDescendant.current) {
-            const descendant = descendants.enabledNextValue(
-              activeDescendant.current,
-            )
+      runKeyAction(
+        ev,
+        {
+          ArrowDown: (ev) => {
+            ev.preventDefault()
 
-            onActive(descendant)
-          } else {
-            const descendant = descendants.enabledFirstValue()
+            if (activeDescendant.current) {
+              onRemoveFocusVisible(activeDescendant.current.node)
 
-            onActive(descendant)
-          }
-        },
-        ArrowUp: () => {
-          if (activeDescendant.current) {
-            const descendant = descendants.enabledPrevValue(
-              activeDescendant.current,
-            )
+              const descendant = descendants.enabledNextValue(
+                activeDescendant.current,
+              )
 
-            onActive(descendant)
-          } else {
+              onActive(descendant)
+            } else {
+              const descendant = descendants.enabledFirstValue()
+
+              onActive(descendant)
+            }
+          },
+          ArrowLeft: (ev) => {
+            if (ev.target instanceof HTMLInputElement && ev.target.value.length)
+              return
+
+            if (activeDescendant.current)
+              onRemoveFocusVisible(activeDescendant.current.node)
+          },
+          ArrowRight: (ev) => {
+            if (ev.target instanceof HTMLInputElement && ev.target.value.length)
+              return
+
+            const descendant =
+              activeDescendant.current ?? descendants.enabledFirstValue()
+
+            if (descendant) onSetFocusVisible(descendant.node)
+          },
+          ArrowUp: (ev) => {
+            ev.preventDefault()
+
+            if (activeDescendant.current) {
+              onRemoveFocusVisible(activeDescendant.current.node)
+
+              const descendant = descendants.enabledPrevValue(
+                activeDescendant.current,
+              )
+
+              onActive(descendant)
+            } else {
+              const descendant = descendants.enabledLastValue()
+
+              onActive(descendant)
+            }
+          },
+          End: (ev) => {
+            ev.preventDefault()
+
+            if (activeDescendant.current)
+              onRemoveFocusVisible(activeDescendant.current.node)
+
             const descendant = descendants.enabledLastValue()
 
             onActive(descendant)
-          }
+          },
+          Enter: (ev) => {
+            ev.preventDefault()
+
+            if (!activeDescendant.current) return
+
+            const { hit, index, node } = activeDescendant.current
+            const el = node.querySelector("button")
+
+            if (el?.hasAttribute("data-focus-visible")) {
+              el.click()
+
+              setTimeout(() => {
+                const descendant = descendants.enabledValue(index)
+
+                if (descendant) {
+                  onActive(descendant)
+
+                  onSetFocusVisible(descendant.node)
+                } else {
+                  const descendant = descendants.enabledValue(index - 1)
+
+                  onActive(descendant)
+
+                  if (descendant) onSetFocusVisible(descendant.node)
+                }
+              })
+            } else {
+              router.push(hit.pathname)
+              addRecentSearch(hit)
+
+              if (hit.pathname.split("#")[0] === pathname) onClose()
+            }
+          },
+          Home: (ev) => {
+            ev.preventDefault()
+
+            if (activeDescendant.current)
+              onRemoveFocusVisible(activeDescendant.current.node)
+
+            const descendant = descendants.enabledFirstValue()
+
+            onActive(descendant)
+          },
         },
-        End: () => {
-          const descendant = descendants.enabledLastValue()
-
-          onActive(descendant)
-        },
-        Enter: () => {
-          const { href } = activeDescendant.current ?? {}
-
-          if (!href) return
-
-          router.push(href)
-
-          if (href.split("#")[0] === pathname) onClose()
-        },
-        Home: () => {
-          const descendant = descendants.enabledFirstValue()
-
-          onActive(descendant)
-        },
-      })
+        { preventDefault: false },
+      )
     },
-    [activeDescendant, descendants, onActive, onClose, pathname, router],
+    [
+      activeDescendant,
+      descendants,
+      onActive,
+      onSetFocusVisible,
+      onClose,
+      onRemoveFocusVisible,
+      pathname,
+      router,
+    ],
   )
 
   return (
@@ -306,10 +390,27 @@ const SEARCH_KEYS = [
 const DEFAULT_LOCALE_CONTENTS = getContents(CONSTANTS.I18N.DEFAULT_LOCALE)
 const PER_PAGE = 50
 
+const [getRecentSearches, setRecentSearches] = createLocalStorage<
+  LocalStorageHit[]
+>(CONSTANTS.STORAGE.SEARCH.RECENT, [])
+
+function addRecentSearch(hit: Hit) {
+  setRecentSearches((prev) =>
+    [
+      { ...hit, storage: "recent" as const },
+      ...prev.filter(({ pathname }) => pathname !== hit.pathname),
+    ].slice(0, PER_PAGE),
+  )
+}
+
+function removeRecentSearch(hit: Hit | LocalStorageHit) {
+  setRecentSearches((prev) =>
+    prev.filter(({ pathname }) => pathname !== hit.pathname),
+  )
+}
+
 interface SearchContentBodyProps extends Modal.BodyProps {
-  onActive: (
-    descendant?: Descendant<HTMLAnchorElement, { href: string }>,
-  ) => void
+  onActive: (descendant?: Descendant<HTMLAnchorElement, { hit: Hit }>) => void
   onClose: () => void
   onSearchRef: RefObject<(value: string) => void>
 }
@@ -328,32 +429,41 @@ function SearchContentBody({
     [contents],
   )
   const defaultContents = useMemo(() => getDefaultContents(locale), [locale])
-  const [hits, setHits] = useState<Hit[]>(defaultContents)
+  const [hits, setHits] = useState<(Hit | LocalStorageHit)[]>(() => {
+    const recentContents = getRecentSearches()
+
+    return recentContents.length ? recentContents : defaultContents
+  })
   const maxIndex = Math.ceil(hits.length / PER_PAGE) - 1
   const [count, setCount] = useState(PER_PAGE)
-  const hasNext = count < hits.length
+  const disabled = hits.length <= count
   const list = useMemo(() => hits.slice(0, count), [hits, count])
   const resetRef = useRef<() => void>(noop)
   const [, startTransition] = useTransition()
   const descendants = useDescendantsContext()
   const [value, setValue] = useState("")
 
-  const getDescription = useCallback((hit: Hit) => {
-    if (hit.type === "fragment") {
-      return (
-        (hit.group ? `${hit.group} / ` : "") +
-        Object.values(hit.hierarchy).slice(0, -1).join(" / ")
-      )
-    } else {
-      return hit.group
-    }
-  }, [])
+  const onRemoveRecent = useCallback(
+    (hit: LocalStorageHit) => {
+      setHits((prev) => {
+        const next = prev.filter(({ pathname }) => pathname !== hit.pathname)
+
+        return next.length ? next : defaultContents
+      })
+      removeRecentSearch(hit)
+    },
+    [defaultContents],
+  )
 
   assignRef(onSearchRef, (value) => {
     startTransition(() => {
       resetRef.current()
 
-      let hits: Hit[] = defaultContents
+      const recentContents = getRecentSearches()
+
+      let hits: (Hit | LocalStorageHit)[] = recentContents.length
+        ? recentContents
+        : defaultContents
 
       if (value.length) {
         const localeHits = matchSorter(contents, value, { keys: SEARCH_KEYS })
@@ -391,7 +501,7 @@ function SearchContentBody({
   return (
     <Modal.Body asChild {...rest}>
       <InfiniteScrollArea
-        disabled={!hasNext}
+        disabled={disabled}
         gap="sm"
         loading={<Loading.Oval fontSize="2xl" />}
         maxH={{ base: "44.5rem", sm: "full" }}
@@ -410,12 +520,12 @@ function SearchContentBody({
           list.map((hit, index) => (
             <Item
               key={`${hit.pathname}-${index}`}
-              href={hit.pathname}
-              description={getDescription(hit)}
-              icon={hit.type === "fragment" ? HashIcon : TextAlignStartIcon}
-              title={hit.title}
+              hit={hit}
               onActive={onActive}
               onClose={onClose}
+              onRemove={
+                "storage" in hit ? () => onRemoveRecent(hit) : undefined
+              }
             />
           ))
         ) : (
@@ -430,30 +540,38 @@ function SearchContentBody({
   )
 }
 
-interface ItemProps extends Omit<HTMLProps<"a">, "href" | "popover" | "title"> {
-  href: string
-  icon: ElementType
-  title: ReactNode
-  onActive: (
-    descendant?: Descendant<HTMLAnchorElement, { href: string }>,
-  ) => void
+interface ItemProps extends HTMLProps<"a"> {
+  hit: Hit
+  onActive: (descendant?: Descendant<HTMLAnchorElement, { hit: Hit }>) => void
   onClose: () => void
-  description?: ReactNode
+  onRemove?: () => void
 }
 
 const Item = function Item({
   ref,
-  href,
-  description,
-  icon: Icon,
-  title,
+  hit,
   onActive,
   onClose,
+  onRemove,
   ...rest
 }: ItemProps) {
   const itemRef = useRef<HTMLAnchorElement>(null)
-  const { descendants, register } = useDescendant({ href })
+  const { descendants, register } = useDescendant({ hit })
   const pathname = usePathname()
+  const Icon = useMemo(
+    () => (hit.type === "fragment" ? HashIcon : TextAlignStartIcon),
+    [hit],
+  )
+  const description = useMemo(() => {
+    if (hit.type === "fragment") {
+      return (
+        (hit.group ? `${hit.group} / ` : "") +
+        Object.values(hit.hierarchy).slice(0, -1).join(" / ")
+      )
+    } else {
+      return hit.group
+    }
+  }, [hit])
 
   const onMouseMove = useCallback(() => {
     const descendant = descendants.value(itemRef.current)
@@ -462,18 +580,20 @@ const Item = function Item({
   }, [descendants, onActive])
 
   const onClick = useCallback(() => {
-    if (href.split("#")[0] === pathname) onClose()
-  }, [href, onClose, pathname])
+    addRecentSearch(hit)
+
+    if (hit.pathname.split("#")[0] === pathname) onClose()
+  }, [hit, onClose, pathname])
 
   return (
     <Box
       ref={mergeRefs(ref, itemRef, register)}
       as={Link}
-      href={href}
+      href={hit.pathname}
       alignItems="center"
       bg={{
         base: "transparent",
-        _activedescendant: ["bg.muted/70", "bg.muted/70"],
+        _activedescendant: ["bg.muted/40", "bg.muted/70"],
       }}
       display="flex"
       focusVisibleRing="none"
@@ -492,13 +612,28 @@ const Item = function Item({
       <Icon fontSize="2xl" />
 
       <VStack alignItems="flex-start" fontSize="sm" gap="0">
-        <Text lineClamp={1}>{title}</Text>
+        <Text lineClamp={1}>{hit.title}</Text>
         {description ? (
           <Text color="fg.muted" lineClamp={1}>
             {description}
           </Text>
         ) : null}
       </VStack>
+
+      {onRemove ? (
+        <CloseButton
+          key={hit.pathname}
+          disableRipple
+          tabIndex={-1}
+          _hover={{ bg: "colorScheme.muted" }}
+          onClick={(ev) => {
+            ev.preventDefault()
+            ev.stopPropagation()
+
+            onRemove()
+          }}
+        />
+      ) : null}
     </Box>
   )
 }

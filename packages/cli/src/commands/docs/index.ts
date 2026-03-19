@@ -1,6 +1,7 @@
 import { Command } from "commander"
 import fetch from "node-fetch"
 import ora from "ora"
+import { SUPPORTED_LANGS } from "../../constant"
 
 const BASE_URL = "https://yamada-ui.com"
 
@@ -81,7 +82,9 @@ export const docs = new Command("docs")
       if (!path) {
         url = `${BASE_URL}/llms.txt`
       } else {
-        const prefix = options.lang === "ja" ? "/ja" : ""
+        const prefix = SUPPORTED_LANGS.includes(options.lang)
+          ? `/${options.lang}`
+          : ""
         url = `${BASE_URL}${prefix}${path}.md`
       }
 

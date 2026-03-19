@@ -5,6 +5,7 @@ import updateNotifier from "update-notifier"
 import packageJson from "../package.json"
 import { add } from "./commands/add"
 import { diff } from "./commands/diff"
+import { docs } from "./commands/docs"
 import { init } from "./commands/init"
 import { theme } from "./commands/theme"
 import { tokens } from "./commands/tokens"
@@ -34,6 +35,7 @@ export function run() {
   program.addCommand(diff)
   program.addCommand(theme)
   program.addCommand(tokens)
+  program.addCommand(docs)
 
   program.parse()
 }

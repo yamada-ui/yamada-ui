@@ -22,8 +22,7 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Run coverage
-        working-directory: packages/utils
-        run: pnpm test:coverage
+        run: pnpm turbo run test:coverage --filter=./packages/utils
 
       - name: Upload coverage to GitHub Actions Artifacts
         if: ${{ !cancelled() }}
@@ -47,8 +46,7 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Run coverage
-        working-directory: packages/cli
-        run: pnpm test:coverage
+        run: pnpm turbo run test:coverage --filter=./packages/cli
 
       - name: Upload coverage to GitHub Actions Artifacts
         if: ${{ !cancelled() }}

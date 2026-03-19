@@ -52,8 +52,7 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Run coverage
-        working-directory: packages/utils
-        run: pnpm test:coverage
+        run: pnpm turbo run test:coverage --filter=./packages/utils
 
       - name: Upload coverage to GitHub Actions Artifacts
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
@@ -78,8 +77,7 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Run coverage
-        working-directory: packages/cli
-        run: pnpm test:coverage
+        run: pnpm turbo run test:coverage --filter=./packages/cli
 
       - name: Upload coverage to GitHub Actions Artifacts
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0

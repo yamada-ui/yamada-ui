@@ -1,7 +1,9 @@
-import { runIfFn } from "@yamada-ui/utils"
+import { createdDom, runIfFn } from "@yamada-ui/utils"
 
 export function createLocalStorage<Y>(key: string, defaultValue: Y) {
   function get() {
+    if (!createdDom()) return defaultValue
+
     const value = localStorage.getItem(key)
 
     if (!value) return defaultValue

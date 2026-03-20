@@ -1,5 +1,16 @@
 # @yamada-ui/react
 
+## 2.1.4
+
+### Patch Changes
+
+- [#6194](https://github.com/yamada-ui/yamada-ui/pull/6194) [`20694a1`](https://github.com/yamada-ui/yamada-ui/commit/20694a10c7878bca2cc8b590dd09ac9d4a9c4050) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- [#6225](https://github.com/yamada-ui/yamada-ui/pull/6225) [`1aa1e86`](https://github.com/yamada-ui/yamada-ui/commit/1aa1e8643340d01e9c4bcb2290a66e0f41aa8b1e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Exported `Accordion.ItemType` type.
+
+- Updated dependencies [[`eaddd11`](https://github.com/yamada-ui/yamada-ui/commit/eaddd1185085d2eaa11e8a12416b0e4e8acbef5c)]:
+  - @yamada-ui/utils@2.1.2
+
 ## 2.1.3
 
 ### Patch Changes

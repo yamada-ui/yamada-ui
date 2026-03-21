@@ -16,8 +16,6 @@ describe("detectFormatter", () => {
   })
 
   test("should return explicit tool when not auto", () => {
-    expect(detectFormatter(tempDir, "biome")).toBe("biome")
-    expect(detectFormatter(tempDir, "oxfmt")).toBe("oxfmt")
     expect(detectFormatter(tempDir, "prettier")).toBe("prettier")
   })
 
@@ -59,8 +57,6 @@ describe("detectLinter", () => {
   })
 
   test("should return explicit tool when not auto", () => {
-    expect(detectLinter(tempDir, "biome")).toBe("biome")
-    expect(detectLinter(tempDir, "oxlint")).toBe("oxlint")
     expect(detectLinter(tempDir, "eslint")).toBe("eslint")
   })
 

@@ -1,6 +1,23 @@
-import type { Formatter, FormatterOptions } from "../types"
+import type { Formatter, FormatterOptions, ToolDetectEntry } from "../types"
 import { toArray } from "@yamada-ui/utils"
 import { readFile, writeFile } from "fs/promises"
+
+export const prettierDetect: ToolDetectEntry = {
+  configs: [
+    ".prettierrc",
+    ".prettierrc.json",
+    ".prettierrc.yaml",
+    ".prettierrc.yml",
+    ".prettierrc.js",
+    ".prettierrc.cjs",
+    ".prettierrc.mjs",
+    ".prettierrc.toml",
+    "prettier.config.js",
+    "prettier.config.cjs",
+    "prettier.config.mjs",
+  ],
+  dependency: "prettier",
+}
 
 export function createPrettierFormatter(): Formatter {
   const formatText = async (

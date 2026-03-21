@@ -1,6 +1,16 @@
-import type { FormatterTool, LinterTool } from "./types"
+import type { FormatterTool, LinterTool, ToolDetectEntry } from "./types"
 import { existsSync, readFileSync } from "fs"
 import { join } from "path"
+import { prettierDetect } from "./formatters/prettier"
+import { eslintDetect } from "./linters/eslint"
+
+const FORMATTERS: { [K in Exclude<FormatterTool, "auto">]: ToolDetectEntry } = {
+  prettier: prettierDetect,
+}
+
+const LINTERS: { [K in Exclude<LinterTool, "auto">]: ToolDetectEntry } = {
+  eslint: eslintDetect,
+}
 
 function hasDependency(cwd: string, name: string): boolean {
   try {
@@ -20,33 +30,17 @@ function hasConfigFile(cwd: string, patterns: string[]): boolean {
   return patterns.some((pattern) => existsSync(join(cwd, pattern)))
 }
 
-const PRETTIER_CONFIGS = [
-  ".prettierrc",
-  ".prettierrc.json",
-  ".prettierrc.yaml",
-  ".prettierrc.yml",
-  ".prettierrc.js",
-  ".prettierrc.cjs",
-  ".prettierrc.mjs",
-  ".prettierrc.toml",
-  "prettier.config.js",
-  "prettier.config.cjs",
-  "prettier.config.mjs",
-]
+function detectTool<T extends string>(
+  cwd: string,
+  registry: { [K in T]: ToolDetectEntry },
+): T | undefined {
+  const found = Object.entries<ToolDetectEntry>(registry).find(
+    ([, entry]) =>
+      hasConfigFile(cwd, entry.configs) || hasDependency(cwd, entry.dependency),
+  )
 
-const ESLINT_CONFIGS = [
-  ".eslintrc",
-  ".eslintrc.json",
-  ".eslintrc.yaml",
-  ".eslintrc.yml",
-  ".eslintrc.js",
-  ".eslintrc.cjs",
-  ".eslintrc.mjs",
-  "eslint.config.js",
-  "eslint.config.cjs",
-  "eslint.config.mjs",
-  "eslint.config.ts",
-]
+  return found?.[0] as T | undefined
+}
 
 export function detectFormatter(
   cwd: string,
@@ -54,10 +48,7 @@ export function detectFormatter(
 ): Exclude<FormatterTool, "auto"> {
   if (tool && tool !== "auto") return tool
 
-  if (hasConfigFile(cwd, PRETTIER_CONFIGS) || hasDependency(cwd, "prettier"))
-    return "prettier"
-
-  return "prettier"
+  return detectTool(cwd, FORMATTERS) ?? "prettier"
 }
 
 export function detectLinter(
@@ -66,8 +57,5 @@ export function detectLinter(
 ): Exclude<LinterTool, "auto"> {
   if (tool && tool !== "auto") return tool
 
-  if (hasConfigFile(cwd, ESLINT_CONFIGS) || hasDependency(cwd, "eslint"))
-    return "eslint"
-
-  return "eslint"
+  return detectTool(cwd, LINTERS) ?? "eslint"
 }

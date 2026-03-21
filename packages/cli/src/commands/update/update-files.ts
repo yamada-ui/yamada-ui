@@ -64,6 +64,7 @@ export interface ConflictMap {
 
 export interface UpdateFilesOptions {
   concurrent?: boolean
+  dryRun?: boolean
   force?: boolean
   install?: boolean
   yes?: boolean
@@ -76,6 +77,7 @@ export async function updateFiles(
   config: Config,
   {
     concurrent = true,
+    dryRun = false,
     force = false,
     install,
     yes = false,
@@ -92,11 +94,22 @@ export async function updateFiles(
       ([componentName, changes]) =>
         ({
           task: async (_, task) => {
+            const registry = remote[componentName]!
+            const dirPath = getDirPath(registry.section, componentName, config)
+
+            if (dryRun) {
+              Object.keys(changes).forEach((name) => {
+                console.log(
+                  c.cyan(`(dry run) Would update: ${path.join(dirPath, name)}`),
+                )
+              })
+              task.title = `Would change ${c.cyan(componentName)}`
+              return
+            }
+
             const tempDirPath = await mkdtemp(
               path.join(tmpdir(), `yamada-ui-${componentName}-`),
             )
-            const registry = remote[componentName]!
-            const dirPath = getDirPath(registry.section, componentName, config)
 
             try {
               if (componentName === "index") {
@@ -223,6 +236,22 @@ export async function updateFiles(
   )
 
   await tasks.run()
+
+  if (dryRun) {
+    if (add.length || update.length)
+      console.log(
+        c.cyan(
+          `(dry run) Would install: ${[...add, ...update.map(getPackageNameWithVersion)].join(", ")}`,
+        ),
+      )
+    if (remove.length)
+      console.log(
+        c.cyan(
+          `(dry run) Would uninstall: ${remove.map(getPackageName).join(", ")}`,
+        ),
+      )
+    return conflictMap
+  }
 
   if (!install && (add.length || remove.length || update.length)) {
     const answer = await prompts({

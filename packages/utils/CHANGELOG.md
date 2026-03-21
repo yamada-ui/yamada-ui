@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 2.1.2
+
+### Patch Changes
+
+- [#6201](https://github.com/yamada-ui/yamada-ui/pull/6201) [`eaddd11`](https://github.com/yamada-ui/yamada-ui/commit/eaddd1185085d2eaa11e8a12416b0e4e8acbef5c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated `isObject` to use loose equality for nullish check.
+
 ## 2.1.1
 
 ### Patch Changes

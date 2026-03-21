@@ -1,4 +1,21 @@
-import type { Linter, LinterOptions } from "../types"
+import type { Linter, LinterOptions, ToolDetectEntry } from "../types"
+
+export const eslintDetect: ToolDetectEntry = {
+  configs: [
+    ".eslintrc",
+    ".eslintrc.json",
+    ".eslintrc.yaml",
+    ".eslintrc.yml",
+    ".eslintrc.js",
+    ".eslintrc.cjs",
+    ".eslintrc.mjs",
+    "eslint.config.js",
+    "eslint.config.cjs",
+    "eslint.config.mjs",
+    "eslint.config.ts",
+  ],
+  dependency: "eslint",
+}
 
 export function createESLintLinter(): Linter {
   const lintText = async (

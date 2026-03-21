@@ -1,4 +1,5 @@
-import { renderHook, system } from "#test"
+import { renderHook } from "#test"
+import { system } from "#test/system"
 import MatchMediaMock from "vitest-matchmedia-mock"
 import { noop } from "../../utils"
 import { getBreakpointValue, useBreakpointValue } from "./use-breakpoint-value"

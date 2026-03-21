@@ -1,9 +1,14 @@
 import { act, renderHook, screen, waitFor } from "#test"
 import { useNotice } from "./use-notice"
 
+const renderNoticeHook = () =>
+  renderHook(() => useNotice(), {
+    providerProps: { withNoticeProvider: true },
+  })
+
 describe("useNotice", () => {
   test("creates a notice with default options", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = renderNoticeHook()
 
     act(() => {
       result.current({
@@ -19,7 +24,7 @@ describe("useNotice", () => {
   })
 
   test("creates a notice with a specific status", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = renderNoticeHook()
 
     act(() => {
       result.current({
@@ -34,7 +39,7 @@ describe("useNotice", () => {
   })
 
   test("creates a notice with a loading scheme", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = renderNoticeHook()
 
     act(() => {
       result.current({
@@ -49,7 +54,7 @@ describe("useNotice", () => {
   })
 
   test("closes a specific notice by id", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = renderNoticeHook()
     let noticeId: number | string | undefined
 
     act(() => {
@@ -73,7 +78,7 @@ describe("useNotice", () => {
   })
 
   test("closes all notices", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = renderNoticeHook()
 
     act(() => {
       result.current({
@@ -102,7 +107,7 @@ describe("useNotice", () => {
   })
 
   test("updates an existing notice", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = renderNoticeHook()
     let noticeId: number | string | undefined
 
     act(() => {
@@ -129,7 +134,7 @@ describe("useNotice", () => {
   })
 
   test("creates a notice with custom placement", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = renderNoticeHook()
 
     act(() => {
       result.current({
@@ -144,7 +149,7 @@ describe("useNotice", () => {
   })
 
   test("creates a notice with custom limit", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = renderNoticeHook()
 
     act(() => {
       result.current({
@@ -159,7 +164,7 @@ describe("useNotice", () => {
   })
 
   test("updates limit and retrieves the updated limit", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = renderNoticeHook()
 
     act(() => {
       result.current({
@@ -187,7 +192,7 @@ describe("useNotice", () => {
   })
 
   test("creates a notice with closeStrategy as a string", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = renderNoticeHook()
 
     act(() => {
       result.current({
@@ -202,7 +207,7 @@ describe("useNotice", () => {
   })
 
   test("creates a notice with duration", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = renderNoticeHook()
 
     act(() => {
       result.current({
@@ -217,7 +222,7 @@ describe("useNotice", () => {
   })
 
   test("creates a notice without icon", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = renderNoticeHook()
 
     act(() => {
       result.current({
@@ -232,7 +237,7 @@ describe("useNotice", () => {
   })
 
   test("creates a notice with closable and button close strategy", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = renderNoticeHook()
 
     act(() => {
       result.current({
@@ -260,7 +265,7 @@ describe("useNotice", () => {
   })
 
   test("creates a notice with click close strategy", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = renderNoticeHook()
 
     act(() => {
       result.current({
@@ -285,11 +290,15 @@ describe("useNotice", () => {
   })
 
   test("uses default options from hook arguments", async () => {
-    const { result } = renderHook(() =>
-      useNotice({
-        placement: "end-start",
-        status: "warning",
-      }),
+    const { result } = renderHook(
+      () =>
+        useNotice({
+          placement: "end-start",
+          status: "warning",
+        }),
+      {
+        providerProps: { withNoticeProvider: true },
+      },
     )
 
     act(() => {
@@ -304,7 +313,7 @@ describe("useNotice", () => {
   })
 
   test("creates a notice with closable false", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = renderNoticeHook()
 
     act(() => {
       result.current({

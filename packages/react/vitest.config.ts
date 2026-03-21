@@ -46,6 +46,7 @@ export default mergeConfig(sharedConfig, {
         resolve: {
           alias: {
             "#test": resolve(__dirname, "./test"),
+            "#test/system": resolve(__dirname, "./test/system"),
             "@": resolve(__dirname, "./src"),
           },
         },
@@ -64,6 +65,7 @@ export default mergeConfig(sharedConfig, {
         resolve: {
           alias: {
             "#test/browser": resolve(__dirname, "./test/browser"),
+            "#test/system": resolve(__dirname, "./test/system"),
             "@": resolve(__dirname, "./src"),
           },
         },

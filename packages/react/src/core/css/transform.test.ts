@@ -1,4 +1,4 @@
-import { system } from "#test"
+import { system } from "#test/system"
 import { transform } from "./transform"
 
 describe("transform", () => {

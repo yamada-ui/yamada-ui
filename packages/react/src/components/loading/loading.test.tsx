@@ -11,6 +11,34 @@ function clickElement(testId: string) {
   if (el instanceof HTMLElement) el.click()
 }
 
+const renderWithLoading = (
+  ...args: Parameters<typeof render>
+): ReturnType<typeof render> => {
+  const [ui, options] = args
+
+  return render(ui, {
+    ...options,
+    providerProps: {
+      ...options?.providerProps,
+      withLoadingProvider: true,
+    },
+  })
+}
+
+const renderHookWithLoading = (
+  ...args: Parameters<typeof renderHook>
+): ReturnType<typeof renderHook> => {
+  const [renderCallback, options] = args
+
+  return renderHook(renderCallback, {
+    ...options,
+    providerProps: {
+      ...options?.providerProps,
+      withLoadingProvider: true,
+    },
+  })
+}
+
 const TargetComponent = () => (
   <>
     <Loading.Oval data-testid="oval" />
@@ -70,7 +98,7 @@ describe("<Loading />", () => {
 
 describe("useLoading", () => {
   test("returns background, page, screen methods", async () => {
-    const { result } = await renderHook(() => useLoading())
+    const { result } = await renderHookWithLoading(() => useLoading())
 
     expect(result.current.background).toBeDefined()
     expect(result.current.background.start).toBeInstanceOf(Function)
@@ -105,7 +133,7 @@ describe("useLoading", () => {
       )
     }
 
-    const { user } = await render(<TestComponent />)
+    const { user } = await renderWithLoading(<TestComponent />)
 
     await user.click(page.getByTestId("start"))
 
@@ -131,7 +159,7 @@ describe("useLoading", () => {
       )
     }
 
-    const { user } = await render(<TestComponent />)
+    const { user } = await renderWithLoading(<TestComponent />)
     await user.click(page.getByTestId("start"))
 
     await expect
@@ -163,7 +191,7 @@ describe("useLoading", () => {
       )
     }
 
-    const { user } = await render(<TestComponent />)
+    const { user } = await renderWithLoading(<TestComponent />)
 
     await user.click(page.getByTestId("start"))
 
@@ -194,7 +222,7 @@ describe("useLoading", () => {
       )
     }
 
-    const { user } = await render(<TestComponent />)
+    const { user } = await renderWithLoading(<TestComponent />)
 
     await user.click(page.getByTestId("start"))
 
@@ -221,7 +249,7 @@ describe("useLoading", () => {
       )
     }
 
-    const { user } = await render(<TestComponent />)
+    const { user } = await renderWithLoading(<TestComponent />)
 
     await user.click(page.getByTestId("start"))
 
@@ -252,7 +280,7 @@ describe("useLoading", () => {
       )
     }
 
-    const { user } = await render(<TestComponent />)
+    const { user } = await renderWithLoading(<TestComponent />)
 
     await user.click(page.getByTestId("start"))
 
@@ -276,7 +304,7 @@ describe("useLoading", () => {
       )
     }
 
-    const { user } = await render(<TestComponent />)
+    const { user } = await renderWithLoading(<TestComponent />)
 
     await user.click(page.getByTestId("start"))
 
@@ -305,7 +333,7 @@ describe("useLoading", () => {
       )
     }
 
-    const { user } = await render(<TestComponent />)
+    const { user } = await renderWithLoading(<TestComponent />)
 
     await user.click(page.getByTestId("start"))
 
@@ -336,7 +364,7 @@ describe("useLoading", () => {
       )
     }
 
-    const { user } = await render(<TestComponent />)
+    const { user } = await renderWithLoading(<TestComponent />)
 
     await user.click(page.getByTestId("start"))
 
@@ -366,7 +394,7 @@ describe("useLoading", () => {
       )
     }
 
-    const { user } = await render(<TestComponent />)
+    const { user } = await renderWithLoading(<TestComponent />)
 
     await user.click(page.getByTestId("start"))
 
@@ -400,7 +428,7 @@ describe("useLoading", () => {
       )
     }
 
-    const { user } = await render(<TestComponent />)
+    const { user } = await renderWithLoading(<TestComponent />)
 
     await user.click(page.getByTestId("force"))
 
@@ -431,7 +459,7 @@ describe("useLoading", () => {
       )
     }
 
-    const { user } = await render(<TestComponent />)
+    const { user } = await renderWithLoading(<TestComponent />)
 
     await user.click(page.getByTestId("start"))
 
@@ -455,7 +483,7 @@ describe("useLoading", () => {
       )
     }
 
-    const { user } = await render(<TestComponent />)
+    const { user } = await renderWithLoading(<TestComponent />)
     await user.click(page.getByTestId("start"))
 
     await expect
@@ -487,7 +515,7 @@ describe("<Loading.Suspense />", () => {
       return <div data-testid="child">{cache.value}</div>
     }
 
-    await render(
+    await renderWithLoading(
       <Suspense>
         <SuspendingChild />
       </Suspense>,
@@ -520,7 +548,7 @@ describe("<Loading.Suspense />", () => {
       return <div data-testid="child">{cache.value}</div>
     }
 
-    await render(
+    await renderWithLoading(
       <Suspense fallback={<div data-testid="custom-fallback">Wait...</div>}>
         <SuspendingChild />
       </Suspense>,
@@ -553,7 +581,7 @@ describe("<Loading.Suspense />", () => {
       return <div>{cache.value}</div>
     }
 
-    await render(
+    await renderWithLoading(
       <Suspense loadingScheme="dots">
         <SuspendingChild />
       </Suspense>,
@@ -583,7 +611,7 @@ describe("<Loading.Suspense />", () => {
           )
         }
 
-        const { user } = await render(<TestComponent />)
+        const { user } = await renderWithLoading(<TestComponent />)
         await user.click(page.getByTestId("start"))
         await expect.element(page.getByText(text)).toBeInTheDocument()
         await expect
@@ -606,7 +634,7 @@ describe("<Loading.Suspense />", () => {
           )
         }
 
-        const { user } = await render(<TestComponent />)
+        const { user } = await renderWithLoading(<TestComponent />)
         await user.click(page.getByTestId("start"))
         await expect
           .element(page.getByTestId("screen-node").query())
@@ -633,7 +661,7 @@ describe("<Loading.Suspense />", () => {
           )
         }
 
-        const { user } = await render(<TestComponent />)
+        const { user } = await renderWithLoading(<TestComponent />)
         await user.click(page.getByTestId("start"))
         await expect.element(page.getByText(text)).toBeInTheDocument()
         await expect
@@ -656,7 +684,7 @@ describe("<Loading.Suspense />", () => {
           )
         }
 
-        const { user } = await render(<TestComponent />)
+        const { user } = await renderWithLoading(<TestComponent />)
         await user.click(page.getByTestId("start"))
         await expect
           .element(page.getByTestId("screen-node").query())
@@ -683,7 +711,7 @@ describe("<Loading.Suspense />", () => {
           )
         }
 
-        const { user } = await render(<TestComponent />)
+        const { user } = await renderWithLoading(<TestComponent />)
         await user.click(page.getByTestId("start"))
         await expect.element(page.getByText(text)).toBeInTheDocument()
         await expect
@@ -706,7 +734,7 @@ describe("<Loading.Suspense />", () => {
           )
         }
 
-        const { user } = await render(<TestComponent />)
+        const { user } = await renderWithLoading(<TestComponent />)
         await user.click(page.getByTestId("start"))
         await expect
           .element(page.getByTestId("screen-node").query())

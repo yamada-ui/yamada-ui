@@ -1,5 +1,5 @@
 import type { UsageTheme } from "../system"
-import { system } from "#test"
+import { system } from "#test/system"
 import { animation, keyframes } from "./animation"
 
 const createMockOptions = () => ({

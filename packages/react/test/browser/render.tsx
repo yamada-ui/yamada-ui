@@ -1,28 +1,28 @@
+import type { TestProviderProps } from "#test/provider"
 import type { PropsWithChildren, ReactNode } from "react"
 import type {
   ComponentRenderOptions as OriginalComponentRenderOptions,
   RenderHookOptions as OriginalRenderHookOptions,
   RenderHookResult as OriginalRenderHookResult,
 } from "vitest-browser-react"
-import type { UIProviderProps } from "../../src"
+import { TestProvider } from "#test/provider"
 import axe from "axe-core"
 import {
   render as originalRender,
   renderHook as originalRenderHook,
 } from "vitest-browser-react"
 import { userEvent } from "vitest/browser"
-import { UIProvider } from "../../src"
 
 export interface ComponentRenderOptions extends OriginalComponentRenderOptions {
   withProvider?: boolean
-  providerProps?: Omit<UIProviderProps, "children">
+  providerProps?: Omit<TestProviderProps, "children">
 }
 
 export interface BrowserRenderHookOptions<
   Y,
 > extends OriginalRenderHookOptions<Y> {
   withProvider?: boolean
-  providerProps?: Omit<UIProviderProps, "children">
+  providerProps?: Omit<TestProviderProps, "children">
 }
 
 export interface A11yOptions extends ComponentRenderOptions {
@@ -51,7 +51,7 @@ export async function render(
 
   if (withProvider) {
     options.wrapper ??= (props: PropsWithChildren) => (
-      <UIProvider {...props} {...providerProps} />
+      <TestProvider {...props} {...providerProps} />
     )
   }
 
@@ -70,7 +70,7 @@ export function renderHook<Y, M>(
 ): Promise<OriginalRenderHookResult<Y, M>> {
   if (withProvider) {
     options.wrapper ??= (props: PropsWithChildren) => (
-      <UIProvider {...props} {...providerProps} />
+      <TestProvider {...props} {...providerProps} />
     )
   }
 

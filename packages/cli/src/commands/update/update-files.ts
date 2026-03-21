@@ -6,6 +6,7 @@ import { isUndefined, merge } from "@yamada-ui/utils"
 import { mkdtemp } from "fs/promises"
 import { Listr } from "listr2"
 import { tmpdir } from "os"
+import ora from "ora"
 import path from "path"
 import c from "picocolors"
 import prompts from "prompts"
@@ -20,6 +21,7 @@ import {
   writeFileSafe,
 } from "../../utils"
 import { getDirPath } from "../diff/get-diff"
+import { createContext } from "../../context"
 
 async function mergeContent(
   remotePath: string,
@@ -67,6 +69,7 @@ export interface UpdateFilesOptions {
   force?: boolean
   install?: boolean
   yes?: boolean
+  dryRun?: boolean
 }
 
 export async function updateFiles(
@@ -79,8 +82,10 @@ export async function updateFiles(
     force = false,
     install,
     yes = false,
+    dryRun = false,
   }: UpdateFilesOptions = {},
 ) {
+  const ctx = createContext(dryRun, ora()) // Create context with dry-run support
   const conflictMap: ConflictMap = {}
   const disabledFormatAndLint = {
     format: { enabled: false },
@@ -106,7 +111,7 @@ export async function updateFiles(
                 if (!("local" in data && "remote" in data)) return
 
                 if (force) {
-                  await writeFileSafe(
+                  await ctx.fs.writeFileSafe(
                     config.paths.ui.index,
                     data.remote,
                     config,
@@ -116,12 +121,12 @@ export async function updateFiles(
                   const localPath = path.join(tempDirPath, `local-${name}`)
 
                   await Promise.all([
-                    writeFileSafe(
+                    ctx.fs.writeFileSafe(
                       remotePath,
                       data.remote,
                       disabledFormatAndLint,
                     ),
-                    writeFileSafe(localPath, data.local, disabledFormatAndLint),
+                    ctx.fs.writeFileSafe(localPath, data.local, disabledFormatAndLint),
                   ])
 
                   const { conflict, content: mergedContent } =
@@ -132,7 +137,7 @@ export async function updateFiles(
                       data.remote,
                     )
 
-                  await writeFileSafe(
+                  await ctx.fs.writeFileSafe(
                     config.paths.ui.index,
                     mergedContent,
                     conflict ? merge(config, disabledFormatAndLint) : config,
@@ -150,7 +155,7 @@ export async function updateFiles(
 
                     if ("local" in data && "remote" in data) {
                       if (force) {
-                        await writeFileSafe(currentPath, data.remote, config)
+                        await ctx.fs.writeFileSafe(currentPath, data.remote, config)
                       } else {
                         const remotePath = path.join(
                           tempDirPath,
@@ -162,12 +167,12 @@ export async function updateFiles(
                         )
 
                         await Promise.all([
-                          writeFileSafe(
+                          ctx.fs.writeFileSafe(
                             remotePath,
                             data.remote,
                             disabledFormatAndLint,
                           ),
-                          writeFileSafe(
+                          ctx.fs.writeFileSafe(
                             localPath,
                             data.local,
                             disabledFormatAndLint,
@@ -182,7 +187,7 @@ export async function updateFiles(
                             data.remote,
                           )
 
-                        await writeFileSafe(
+                        await ctx.fs.writeFileSafe(
                           currentPath,
                           mergedContent,
                           conflict
@@ -196,22 +201,22 @@ export async function updateFiles(
                         }
                       }
                     } else if ("remote" in data) {
-                      await writeFileSafe(currentPath, data.remote, config)
+                      await ctx.fs.writeFileSafe(currentPath, data.remote, config)
                     } else {
-                      await rimraf(currentPath)
+                      await ctx.fs.rmrf(currentPath)
                     }
                   }),
                 )
               }
 
-              await writeFileSafe(
+              await ctx.fs.writeFileSafe(
                 path.resolve(dirPath, REGISTRY_FILE_NAME),
                 JSON.stringify(registry),
                 merge(config, { format: { parser: "json" } }),
               )
             } catch {
             } finally {
-              await rimraf(tempDirPath)
+              await ctx.fs.rmrf(tempDirPath)
             }
 
             task.title = `Changed ${c.cyan(componentName)}`
@@ -224,15 +229,15 @@ export async function updateFiles(
 
   await tasks.run()
 
-  if (!install && (add.length || remove.length || update.length)) {
-    const answer = await prompts({
+  if (!install && (add.length || remove.length || update.length) && !dryRun) {
+    const answer = !dryRun ? await prompts({
       type: !yes && isUndefined(install) ? "confirm" : null,
       name: "install",
       initial: true,
       message: c.reset(
         "There are dependency updates. Do you want to install them?",
       ),
-    })
+    }) : { install: true }
 
     install ??= answer.install ?? true
 
@@ -247,7 +252,7 @@ export async function updateFiles(
   if (remove.length)
     await uninstallDependencies(remove.map(getPackageName), { cwd })
 
-  if (add.length) await installDependencies(add, { cwd })
+  if (add.length) await ctx.install.dependencies(add, { cwd })
 
   return conflictMap
 }

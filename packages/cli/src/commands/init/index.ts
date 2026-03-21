@@ -40,6 +40,7 @@ import {
   validateDir,
   writeFileSafe,
 } from "../../utils"
+import { createContext } from "../../context"
 
 interface Options {
   config: string
@@ -55,6 +56,7 @@ interface Options {
   packageName?: string
   src?: boolean
   tag?: string
+  dryRun?: boolean
 }
 
 export const init = new Command("init")
@@ -93,11 +95,18 @@ export const init = new Command("init")
     packageName = "",
     tag,
     yes,
+    dryRun
   }: Options) {
     const spinner = ora()
-
+  if (dryRun) {
+          spinner.start(" Running in dry-run mode - no files will be modified");
+          spinner.info("This simulates all file writes, dir operations, and installs");
+        }
     try {
       const { end } = timer()
+
+      const ctx = createContext(!!dryRun, spinner); // Creates dry-run aware context
+      
 
       await validateDir(cwd)
 
@@ -191,13 +200,13 @@ export const init = new Command("init")
       config.format = { enabled: format }
       config.lint = { enabled: lint }
 
-      if (!yes) {
-        const { generate } = await prompts({
+      if (!yes && !dryRun) {
+        const { generate } = !dryRun ? await prompts({
           type: "confirm",
           name: "generate",
           initial: true,
           message: c.reset(`Generate ${c.cyan(configFileName)}. Proceed?`),
-        })
+        }) : { generate: true };
 
         if (!generate) process.exit(0)
       }
@@ -223,7 +232,7 @@ export const init = new Command("init")
 
       spinner.start(`Generating ${c.cyan(configFileName)}`)
 
-      await writeFileSafe(
+      await ctx.fs.writeFileSafe(
         configPath,
         JSON.stringify(config),
         merge(config, { format: { parser: "json" } }),
@@ -256,19 +265,19 @@ export const init = new Command("init")
 
         spinner.start("Clearing directory")
 
-        await rimraf(outdirPath)
+        await ctx.fs.rmrf(outdirPath)
 
         spinner.succeed("Cleared directory")
       }
 
       if (monorepo) {
-        if (!yes) {
-          const { generate } = await prompts({
+        if (!yes && !dryRun) {
+          const { generate } = !dryRun ? await prompts({
             type: "confirm",
             name: "generate",
             initial: true,
             message: c.reset(`Generate ${c.cyan(packageName)}. Proceed?`),
-          })
+          }) : { generate: true };
 
           if (!generate) process.exit(0)
         }
@@ -309,7 +318,7 @@ export const init = new Command("init")
                   exports,
                 })
 
-                await writeFileSafe(
+                await ctx.fs.writeFileSafe(
                   targetPath,
                   content,
                   merge(config, { format: { parser: "json" } }),
@@ -329,12 +338,12 @@ export const init = new Command("init")
                 if (jsx) content = transformTsToJs(content)
 
                 await Promise.all([
-                  writeFileSafe(
+                  ctx.fs.writeFileSafe(
                     path.join(targetPath, indexFileName),
                     content,
                     config,
                   ),
-                  writeFileSafe(
+                  ctx.fs.writeFileSafe(
                     path.join(targetPath, REGISTRY_FILE_NAME),
                     JSON.stringify(registry),
                     merge(config, { format: { parser: "json" } }),
@@ -377,7 +386,7 @@ export const init = new Command("init")
 
               const content = JSON.stringify(tsconfig)
 
-              await writeFileSafe(
+              await ctx.fs.writeFileSafe(
                 targetPath,
                 content,
                 merge(config, { format: { parser: "json" } }),
@@ -448,12 +457,12 @@ export const init = new Command("init")
                 if (jsx) content = transformTsToJs(content)
 
                 await Promise.all([
-                  writeFileSafe(
+                  ctx.fs.writeFileSafe(
                     path.resolve(outdirPath, indexFileName),
                     content,
                     config,
                   ),
-                  writeFileSafe(
+                  ctx.fs.writeFileSafe(
                     path.resolve(outdirPath, REGISTRY_FILE_NAME),
                     JSON.stringify(registry),
                     merge(config, { format: { parser: "json" } }),
@@ -517,9 +526,9 @@ export const init = new Command("init")
       if (install && (dependencies || devDependencies)) {
         spinner.start("Installing dependencies")
 
-        if (dependencies) await installDependencies(dependencies, { cwd })
+        if (dependencies) await ctx.install.dependencies(dependencies, { cwd })
         if (devDependencies)
-          await installDependencies(devDependencies, { cwd, dev: true })
+          await ctx.install.dependencies(devDependencies, { cwd, dev: true })
 
         spinner.succeed("Installed dependencies")
       }

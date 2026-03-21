@@ -39,6 +39,7 @@ import {
   validateDir,
   writeFileSafe,
 } from "../../utils"
+import { createContext } from "../../context"
 
 interface Options {
   config: string
@@ -52,6 +53,7 @@ interface Options {
   packageName?: string
   src?: boolean
   tag?: string
+  dryRun?: boolean
 }
 
 export const theme = new Command("theme")
@@ -89,14 +91,19 @@ export const theme = new Command("theme")
       packageName,
       tag,
       yes,
+      dryRun
     }: Options,
   ) {
     const spinner = ora()
-
+  if (dryRun) {
+          spinner.start(" Running in dry-run mode - no files will be modified");
+          spinner.info("This simulates all file writes, dir operations, and installs");
+        }
     try {
       const { end } = timer()
 
       spinner.start("Validating directory")
+      const ctx = createContext(!!dryRun, spinner); // Creates dry-run aware context
 
       await validateDir(cwd)
 
@@ -157,26 +164,26 @@ export const theme = new Command("theme")
       const outdirPath = path.resolve(cwd, themePath)
 
       if (!overwrite && existsSync(outdirPath)) {
-        if (yes) {
+        if (yes && !dryRun) {
           throw new Error(
             `The directory already exists. Use ${c.cyan("--overwrite")} to overwrite it.`,
           )
         }
 
-        const { overwrite } = await prompts({
+        const { overwrite } = !dryRun ? await prompts({
           type: "confirm",
           name: "overwrite",
           initial: false,
           message: c.reset(
             `The directory already exists. Do you want to overwrite it?`,
           ),
-        })
+        }) : { overwrite: true }
 
         if (!overwrite) process.exit(0)
 
         spinner.start("Clearing directory")
 
-        await rimraf(outdirPath)
+        await ctx.fs.rmrf(outdirPath)
 
         spinner.succeed("Cleared directory")
       }
@@ -207,13 +214,13 @@ export const theme = new Command("theme")
                       ? transformTsxToJsx(content)
                       : transformTsToJs(content)
 
-                  await writeFileSafe(
+                  await ctx.fs.writeFileSafe(
                     path.resolve(targetPath, name),
                     content,
                     config,
                   )
                 }),
-                writeFileSafe(
+                ctx.fs.writeFileSafe(
                   path.resolve(targetPath, REGISTRY_FILE_NAME),
                   JSON.stringify(registry),
                   merge(config, { format: { parser: "json" } }),
@@ -233,7 +240,7 @@ export const theme = new Command("theme")
               userConfig.theme ??= {}
               userConfig.theme.path ??= themePath
 
-              await writeFileSafe(
+              await ctx.fs.writeFileSafe(
                 targetPath,
                 JSON.stringify(userConfig),
                 merge(config, { format: { parser: "json" } }),
@@ -278,7 +285,7 @@ export const theme = new Command("theme")
               exports,
             })
 
-            await writeFileSafe(
+            await ctx.fs.writeFileSafe(
               targetPath,
               content,
               merge(config, { format: { parser: "json" } }),
@@ -304,7 +311,7 @@ export const theme = new Command("theme")
 
             const content = JSON.stringify(tsconfig)
 
-            await writeFileSafe(
+            await ctx.fs.writeFileSafe(
               targetPath,
               content,
               merge(config, { format: { parser: "json" } }),
@@ -333,7 +340,7 @@ export const theme = new Command("theme")
         if (install) {
           spinner.start("Installing dependencies")
 
-          await installDependencies([], { cwd })
+          await ctx.install.dependencies([], { cwd })
 
           spinner.succeed("Installed dependencies")
         }

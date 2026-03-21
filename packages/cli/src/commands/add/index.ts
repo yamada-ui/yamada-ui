@@ -30,6 +30,7 @@ import {
   validateDir,
   writeFileSafe,
 } from "../../utils"
+import { createContext } from "../../context"
 
 interface Options {
   config: string
@@ -41,6 +42,7 @@ interface Options {
   format?: boolean
   lint?: boolean
   tag?: string
+  dryRun?: boolean
 }
 
 export const add = new Command("add")
@@ -70,14 +72,19 @@ export const add = new Command("add")
       sequential,
       tag,
       yes,
+      dryRun
     }: Options,
   ) {
     const spinner = ora()
-
+    if (dryRun) {
+        spinner.start(" Running in dry-run mode - no files will be modified");
+        spinner.info("This simulates all file writes, dir operations, and installs");
+      }
     try {
       const { end } = timer()
 
-      spinner.start("Validating directory")
+      // spinner.start("Validating directory")
+      const ctx = createContext(!!dryRun, spinner); // Creates dry-run aware context
 
       await validateDir(cwd)
 
@@ -94,32 +101,33 @@ export const add = new Command("add")
       const omittedGeneratedNames: string[] = []
 
       if (!componentNames.length) {
-        if (!yes) {
-          const { proceed } = await prompts({
+        if (!yes && !dryRun) {
+          const { proceed } = !dryRun ?  await prompts({
             type: "confirm",
             name: "proceed",
             initial: true,
             message: c.reset(`Add all available components?`),
-          })
+          }) : { proceed: true };
 
           if (!proceed) process.exit(0)
         }
 
         if (!overwrite && existsSync(config.paths.ui.src)) {
-          if (yes) {
+          if (yes && !dryRun) {
             throw new Error(
               `The directory already exists. Use ${c.cyan("--overwrite")} to overwrite it.`,
             )
           }
 
-          const { overwrite } = await prompts({
+          const { overwrite } = !dryRun ? await prompts({
             type: "confirm",
             name: "overwrite",
             initial: false,
             message: c.reset(
               `The directory already exists. Do you want to overwrite it?`,
             ),
-          })
+          }) : { overwrite: true };
+
 
           if (!overwrite) process.exit(0)
         }
@@ -142,7 +150,7 @@ export const add = new Command("add")
         spinner.succeed("Got generated components")
 
         if (!overwrite && existsNames.length) {
-          if (yes) {
+          if (yes && !dryRun) {
             throw new Error(
               `The ${existsNames.map((name) => c.yellow(name)).join(", ")} components already exist. Use ${c.cyan("--overwrite")} to overwrite them.`,
             )
@@ -150,7 +158,7 @@ export const add = new Command("add")
 
           const colorizedNames = existsNames.map((name) => c.yellow(name))
 
-          const { overwrite } = await prompts({
+          const { overwrite } = !dryRun ? await prompts({
             type: "confirm",
             name: "overwrite",
             initial: false,
@@ -160,7 +168,7 @@ export const add = new Command("add")
                 "Do you want to overwrite them?",
               ].join(" "),
             ),
-          })
+          }) : { overwrite: true };
 
           if (!overwrite) process.exit(0)
         }
@@ -203,17 +211,18 @@ export const add = new Command("add")
       spinner.succeed("Fetched registries")
 
       if (componentNames.length !== registryNames.length) {
-        if (!yes) {
+        if (!yes && !dryRun) {
           const colorizedNames = registryNames.map((name) => c.yellow(name))
 
-          const { proceed } = await prompts({
+          const { proceed } = !dryRun ? await prompts({
             type: "confirm",
             name: "proceed",
             initial: true,
             message: c.reset(
               `The following components will be added: ${colorizedNames.join(", ")}. Do you want to add them?`,
             ),
-          })
+          }) : { proceed: true };
+
 
           if (!proceed) process.exit(0)
         }
@@ -246,10 +255,10 @@ export const add = new Command("add")
 
       if (affectedNames.length && generatedNameMap) {
         if (!overwrite) {
-          if (!yes) {
+          if (!yes && !dryRun) {
             const colorizedNames = affectedNames.map((name) => c.yellow(name))
 
-            const { update } = await prompts({
+            const { update } = !dryRun ? await prompts({
               type: "confirm",
               name: "update",
               initial: true,
@@ -259,7 +268,7 @@ export const add = new Command("add")
                   "Do you want to update them?",
                 ].join(" "),
               ),
-            })
+            }) : { update: true };
 
             overwrite = update
           } else {
@@ -311,7 +320,7 @@ export const add = new Command("add")
                               targetNames,
                             )
 
-                            await writeFileSafe(targetPath, content, config)
+                            await ctx.fs.writeFileSafe(targetPath, content, config)
                           }),
                         )
                       } else if (dirent.name !== REGISTRY_FILE_NAME) {
@@ -329,7 +338,7 @@ export const add = new Command("add")
                           targetNames,
                         )
 
-                        await writeFileSafe(targetPath, content, config)
+                        await ctx.fs.writeFileSafe(targetPath, content, config)
                       }
                     }),
                   )
@@ -352,7 +361,7 @@ export const add = new Command("add")
 
             content = transformIndex(targetNames, content, config)
 
-            await writeFileSafe(config.paths.ui.index, content, config)
+            await ctx.fs.writeFileSafe(config.paths.ui.index, content, config)
 
             task.title = `Updated ${c.cyan(indexFileName)}`
           },
@@ -368,7 +377,7 @@ export const add = new Command("add")
 
             if (config.jsx) content = transformTsToJs(content)
 
-            await writeFileSafe(config.paths.ui.index, content, config)
+            await ctx.fs.writeFileSafe(config.paths.ui.index, content, config)
 
             task.title = `Generated ${c.cyan(indexFileName)}`
           },
@@ -390,7 +399,7 @@ export const add = new Command("add")
         spinner.succeed(`Checked ${c.cyan("package.json")} dependencies`)
 
         if (!install && notInstalledDependencies.length) {
-          if (!yes) {
+          if (!yes && !dryRun) {
             const colorizedNames = notInstalledDependencies.map((value) =>
               c.yellow(
                 isObject(value)
@@ -401,7 +410,7 @@ export const add = new Command("add")
               ),
             )
 
-            const { proceed } = await prompts({
+            const { proceed } = !dryRun ? await prompts({
               type: "confirm",
               name: "proceed",
               initial: true,
@@ -411,7 +420,7 @@ export const add = new Command("add")
                   "Do you want to install them?",
                 ].join(" "),
               ),
-            })
+            }) : { proceed: true };
 
             install = proceed
           } else {
@@ -422,7 +431,7 @@ export const add = new Command("add")
         if (install) {
           tasks.add({
             task: async (_, task) => {
-              await installDependencies(
+              await ctx.install.dependencies(
                 notInstalledDependencies.map(getPackageNameWithVersion),
                 { cwd: targetPath },
               )

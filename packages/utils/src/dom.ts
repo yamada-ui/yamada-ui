@@ -451,7 +451,7 @@ export function getFirstFocusableElement(
 export function setAttribute(
   el: Element,
   qualifiedName: string,
-  value: string,
+  value?: string,
 ) {
   const prev = el.getAttribute(qualifiedName)
 

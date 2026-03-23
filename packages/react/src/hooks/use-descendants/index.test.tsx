@@ -541,6 +541,156 @@ describe("useDescendant", () => {
     ).toBeTruthy()
   })
 
+  test("enabledNextValue with props filters by AND-search", () => {
+    interface Meta {
+      group?: string
+    }
+    const { DescendantsContext, useDescendant, useDescendants } = renderHook(
+      () => createDescendants<HTMLElement, Meta>(),
+    ).result.current
+
+    const { result } = renderHook(() => useDescendants())
+    const descendants = result.current
+
+    const Wrapper: FC<PropsWithChildren> = ({ children }) => (
+      <DescendantsContext value={descendants}>{children}</DescendantsContext>
+    )
+
+    const Item: FC<DescendantProps<HTMLElement, Meta>> = ({ ...props }) => {
+      const { register } = useDescendant(props)
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(
+      <Wrapper>
+        <Item group="a" />
+        <Item group="b" />
+        <Item group="a" />
+        <Item group="b" />
+      </Wrapper>,
+    )
+
+    // group="a" の次は group="a" の3番目
+    expect(descendants.enabledNextValue(0, true, { group: "a" })?.node).toBe(
+      descendants.values()[2]?.node,
+    )
+    // group="a" の最後から次はループして最初の group="a"
+    const looped = descendants.enabledNextValue(2, true, { group: "a" })
+    expect(looped?.node).toBe(descendants.values()[0]?.node)
+    expect(looped?.recurred).toBeTruthy()
+  })
+
+  test("enabledPrevValue with props filters by AND-search", () => {
+    interface Meta {
+      group?: string
+    }
+    const { DescendantsContext, useDescendant, useDescendants } = renderHook(
+      () => createDescendants<HTMLElement, Meta>(),
+    ).result.current
+
+    const { result } = renderHook(() => useDescendants())
+    const descendants = result.current
+
+    const Wrapper: FC<PropsWithChildren> = ({ children }) => (
+      <DescendantsContext value={descendants}>{children}</DescendantsContext>
+    )
+
+    const Item: FC<DescendantProps<HTMLElement, Meta>> = ({ ...props }) => {
+      const { register } = useDescendant(props)
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(
+      <Wrapper>
+        <Item group="a" />
+        <Item group="b" />
+        <Item group="a" />
+        <Item group="b" />
+      </Wrapper>,
+    )
+
+    // group="a" の3番目の前は最初の group="a"
+    expect(descendants.enabledPrevValue(2, true, { group: "a" })?.node).toBe(
+      descendants.values()[0]?.node,
+    )
+    // group="a" の最初から前はループして最後の group="a"
+    const looped = descendants.enabledPrevValue(0, true, { group: "a" })
+    expect(looped?.node).toBe(descendants.values()[2]?.node)
+    expect(looped?.recurred).toBeTruthy()
+  })
+
+  test("enabledNextValue with props skips disabled items", () => {
+    interface Meta {
+      group?: string
+    }
+    const { DescendantsContext, useDescendant, useDescendants } = renderHook(
+      () => createDescendants<HTMLElement, Meta>(),
+    ).result.current
+
+    const { result } = renderHook(() => useDescendants())
+    const descendants = result.current
+
+    const Wrapper: FC<PropsWithChildren> = ({ children }) => (
+      <DescendantsContext value={descendants}>{children}</DescendantsContext>
+    )
+
+    const Item: FC<DescendantProps<HTMLElement, Meta>> = ({ ...props }) => {
+      const { register } = useDescendant(props)
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(
+      <Wrapper>
+        <Item group="a" />
+        <Item disabled group="a" />
+        <Item group="b" />
+        <Item group="a" />
+      </Wrapper>,
+    )
+
+    // group="a" かつ enabled の次は idx=3
+    expect(descendants.enabledNextValue(0, true, { group: "a" })?.node).toBe(
+      descendants.values()[3]?.node,
+    )
+  })
+
+  test("enabledNextValue with props returns undefined when no enabled match", () => {
+    interface Meta {
+      group?: string
+    }
+    const { DescendantsContext, useDescendant, useDescendants } = renderHook(
+      () => createDescendants<HTMLElement, Meta>(),
+    ).result.current
+
+    const { result } = renderHook(() => useDescendants())
+    const descendants = result.current
+
+    const Wrapper: FC<PropsWithChildren> = ({ children }) => (
+      <DescendantsContext value={descendants}>{children}</DescendantsContext>
+    )
+
+    const Item: FC<DescendantProps<HTMLElement, Meta>> = ({ ...props }) => {
+      const { register } = useDescendant(props)
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(
+      <Wrapper>
+        <Item group="a" />
+        <Item disabled group="b" />
+      </Wrapper>,
+    )
+
+    // group="b" で enabled なものはないので undefined
+    expect(
+      descendants.enabledNextValue(0, true, { group: "b" }),
+    ).toBeUndefined()
+  })
+
   test("sortNodes warns and returns 0 for disconnected nodes", () => {
     const { descendants, useDescendant, Wrapper } = setup()
 

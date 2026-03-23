@@ -22,7 +22,7 @@
     },
     {
       "name": "namespace.ts",
-      "content": "export {\n  AccordionButton as Button,\n  AccordionItem as Item,\n  AccordionPanel as Panel,\n  AccordionPropsContext as PropsContext,\n  AccordionRoot as Root,\n  useAccordionPropsContext as usePropsContext,\n} from \"./accordion\"\nexport type {\n  AccordionButtonProps as ButtonProps,\n  AccordionItemProps as ItemProps,\n  AccordionPanelProps as PanelProps,\n  AccordionRootProps as RootProps,\n} from \"./accordion\"\nexport {\n  AccordionContext as Context,\n  AccordionDescendantsContext as DescendantsContext,\n  AccordionItemContext as ItemContext,\n  useAccordionContext as useContext,\n  useAccordionDescendant as useDescendant,\n  useAccordionDescendants as useDescendants,\n  useAccordionItemContext as useItemContext,\n} from \"./use-accordion\"\n"
+      "content": "export {\n  AccordionButton as Button,\n  AccordionItem as Item,\n  AccordionPanel as Panel,\n  AccordionPropsContext as PropsContext,\n  AccordionRoot as Root,\n  useAccordionPropsContext as usePropsContext,\n} from \"./accordion\"\nexport type {\n  AccordionButtonProps as ButtonProps,\n  AccordionItemProps as ItemProps,\n  AccordionItem as ItemType,\n  AccordionPanelProps as PanelProps,\n  AccordionRootProps as RootProps,\n} from \"./accordion\"\nexport {\n  AccordionContext as Context,\n  AccordionDescendantsContext as DescendantsContext,\n  AccordionItemContext as ItemContext,\n  useAccordionContext as useContext,\n  useAccordionDescendant as useDescendant,\n  useAccordionDescendants as useDescendants,\n  useAccordionItemContext as useItemContext,\n} from \"./use-accordion\"\n"
     },
     {
       "name": "use-accordion.ts",

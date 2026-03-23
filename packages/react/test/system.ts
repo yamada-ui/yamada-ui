@@ -1,4 +1,5 @@
 import type { StyledTheme } from "../src"
+import { vi } from "vitest"
 import {
   createSystem,
   config as defaultConfig,

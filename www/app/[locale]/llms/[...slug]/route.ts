@@ -26,22 +26,7 @@ export async function GET(
 
   if (!doc?.md) return new Response(null, { status: 404 })
 
-  const { style, md, description, source, storybook, title } = doc
-  const frontMatter = [
-    "---",
-    `title: ${title}`,
-    `description: "${description}"`,
-    style || source || storybook ? `links:` : null,
-    style ? `  - style: ${style}` : null,
-    source ? `  - source: ${source}` : null,
-    storybook ? `  - storybook: ${storybook}` : null,
-    "---",
-  ]
-    .filter(Boolean)
-    .join("\n")
-  const content = frontMatter + "\n\n" + md
-
-  return new Response(content, {
+  return new Response(doc.md, {
     headers: {
       "Cache-Control": "public, max-age=3600",
       "Content-Type": "text/plain; charset=utf-8",

@@ -199,17 +199,23 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
     loop = true,
     props?: Partial<M>,
   ) => {
-    if (!count(props)) return undefined
+    const filtered = values(props)
+
+    if (!filtered.length || indexOrNode == null) return undefined
 
     const currentIndex = isNumber(indexOrNode)
-      ? indexOrNode
-      : indexOf(indexOrNode)
+      ? filtered.findIndex((d) => d.index === indexOrNode)
+      : filtered.findIndex((d) =>
+          d.node.isSameNode(
+            indexOrNode instanceof Node ? indexOrNode : indexOrNode.node,
+          ),
+        )
 
     if (currentIndex === -1) return undefined
 
-    const prevIndex = getPrevIndex(currentIndex, count(props) - 1, loop)
+    const prevIndex = getPrevIndex(currentIndex, filtered.length - 1, loop)
 
-    return value(prevIndex)
+    return filtered[prevIndex]
   }
 
   const enabledPrevValue = (
@@ -253,17 +259,23 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
     loop = true,
     props?: Partial<M>,
   ) => {
-    if (!count(props)) return undefined
+    const filtered = values(props)
+
+    if (!filtered.length || indexOrNode == null) return undefined
 
     const currentIndex = isNumber(indexOrNode)
-      ? indexOrNode
-      : indexOf(indexOrNode)
+      ? filtered.findIndex((d) => d.index === indexOrNode)
+      : filtered.findIndex((d) =>
+          d.node.isSameNode(
+            indexOrNode instanceof Node ? indexOrNode : indexOrNode.node,
+          ),
+        )
 
     if (currentIndex === -1) return undefined
 
-    const nextIndex = getNextIndex(currentIndex, count(props), loop)
+    const nextIndex = getNextIndex(currentIndex, filtered.length, loop)
 
-    return value(nextIndex)
+    return filtered[nextIndex]
   }
 
   const enabledNextValue = (

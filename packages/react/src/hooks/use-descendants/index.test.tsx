@@ -541,6 +541,84 @@ describe("useDescendant", () => {
     ).toBeTruthy()
   })
 
+  test("prevValue with props filters by AND-search", () => {
+    interface Meta {
+      group?: string
+    }
+    const { DescendantsContext, useDescendant, useDescendants } = renderHook(
+      () => createDescendants<HTMLElement, Meta>(),
+    ).result.current
+
+    const { result } = renderHook(() => useDescendants())
+    const descendants = result.current
+
+    const Wrapper: FC<PropsWithChildren> = ({ children }) => (
+      <DescendantsContext value={descendants}>{children}</DescendantsContext>
+    )
+
+    const Item: FC<DescendantProps<HTMLElement, Meta>> = ({ ...props }) => {
+      const { register } = useDescendant(props)
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(
+      <Wrapper>
+        <Item group="a" />
+        <Item group="b" />
+        <Item group="a" />
+      </Wrapper>,
+    )
+
+    // group="a" の idx=2 の前は idx=0
+    expect(descendants.prevValue(2, true, { group: "a" })?.node).toBe(
+      descendants.values()[0]?.node,
+    )
+    // group="a" の idx=0 の前はループして idx=2
+    expect(descendants.prevValue(0, true, { group: "a" })?.node).toBe(
+      descendants.values()[2]?.node,
+    )
+  })
+
+  test("nextValue with props filters by AND-search", () => {
+    interface Meta {
+      group?: string
+    }
+    const { DescendantsContext, useDescendant, useDescendants } = renderHook(
+      () => createDescendants<HTMLElement, Meta>(),
+    ).result.current
+
+    const { result } = renderHook(() => useDescendants())
+    const descendants = result.current
+
+    const Wrapper: FC<PropsWithChildren> = ({ children }) => (
+      <DescendantsContext value={descendants}>{children}</DescendantsContext>
+    )
+
+    const Item: FC<DescendantProps<HTMLElement, Meta>> = ({ ...props }) => {
+      const { register } = useDescendant(props)
+
+      return <div ref={register}>Item</div>
+    }
+
+    render(
+      <Wrapper>
+        <Item group="a" />
+        <Item group="b" />
+        <Item group="a" />
+      </Wrapper>,
+    )
+
+    // group="a" の idx=0 の次は idx=2
+    expect(descendants.nextValue(0, true, { group: "a" })?.node).toBe(
+      descendants.values()[2]?.node,
+    )
+    // group="a" の idx=2 の次はループして idx=0
+    expect(descendants.nextValue(2, true, { group: "a" })?.node).toBe(
+      descendants.values()[0]?.node,
+    )
+  })
+
   test("enabledNextValue with props filters by AND-search", () => {
     interface Meta {
       group?: string

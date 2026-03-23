@@ -108,7 +108,7 @@ export const Snacks = withProvider<"div", SnacksProps>(
     }, [count, direction])
 
     useUpdateEffect(() => {
-      if (!!count) setExist(true)
+      if (count) setExist(true)
     }, [count])
 
     return (

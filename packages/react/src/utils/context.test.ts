@@ -19,7 +19,7 @@ describe("createContext", () => {
 
     expect(() => {
       renderHook(() => useContext())
-    }).toThrowError(
+    }).toThrow(
       "useStrictContext returned `undefined`. Seems you forgot to wrap component within StrictContext",
     )
   })

@@ -3,9 +3,9 @@
 import type { GridProps } from "@yamada-ui/react"
 import { Grid } from "@yamada-ui/react"
 import { useMemo } from "react"
+import { NextLink } from "@/components/next-link"
 import { getDocMap } from "@/data"
 import { useLocale } from "@/i18n"
-import { NextLink } from "../next-link"
 
 export interface ComponentListProps extends GridProps {}
 
@@ -37,7 +37,7 @@ export function ComponentList(props: ComponentListProps) {
       {...props}
     >
       {components.map(({ pathname, segment, title }) => (
-        <NextLink key={segment} href={pathname} justifySelf="flex-start">
+        <NextLink key={segment} href={pathname!} justifySelf="flex-start">
           {title}
         </NextLink>
       ))}

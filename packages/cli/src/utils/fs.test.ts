@@ -44,15 +44,13 @@ describe("validateDir", () => {
   test("should throw for non-existent path", async () => {
     await expect(
       validateDir(path.join(tempDir, "nonexistent")),
-    ).rejects.toThrowError("does not writeable")
+    ).rejects.toThrow("does not writeable")
   })
 
   test("should throw for file path", async () => {
     const filePath = path.join(tempDir, "file.txt")
     writeFileSync(filePath, "test")
-    await expect(validateDir(filePath)).rejects.toThrowError(
-      "is not a directory",
-    )
+    await expect(validateDir(filePath)).rejects.toThrow("is not a directory")
   })
 })
 

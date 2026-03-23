@@ -205,7 +205,7 @@ export function createStyled<
 
     className = cx(
       className,
-      !!serialized.styles ? `${cache.key}-${serialized.name}` : undefined,
+      serialized.styles ? `${cache.key}-${serialized.name}` : undefined,
     )
     className = cx(className, options.target)
 

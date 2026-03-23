@@ -1,5 +1,6 @@
 import type { Meta } from "@storybook/react-vite"
 import { Button } from "../../components/button"
+import { wait } from "../../utils"
 import { useAsyncCallback } from "./"
 
 const meta: Meta = {
@@ -7,11 +8,6 @@ const meta: Meta = {
 }
 
 export default meta
-
-const wait = async (ms: number) =>
-  new Promise((resolve) => {
-    setTimeout(resolve, ms)
-  })
 
 export const Basic = () => {
   const [loading, onClick] = useAsyncCallback(async () => {

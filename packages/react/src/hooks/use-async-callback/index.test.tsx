@@ -2,11 +2,7 @@ import type { FC } from "react"
 import { render, renderHook, screen, waitFor } from "#test"
 import { vi } from "vitest"
 import { useAsyncCallback } from "."
-
-const wait = async (ms: number) =>
-  new Promise((resolve) => {
-    setTimeout(resolve, ms)
-  })
+import { wait } from "../../utils"
 
 describe("useAsyncCallback", () => {
   test("should handle callback correctly", async () => {

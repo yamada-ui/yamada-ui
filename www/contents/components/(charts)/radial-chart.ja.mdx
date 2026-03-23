@@ -107,7 +107,7 @@ return (
 ### サイズを変更する
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -127,7 +127,7 @@ return (
 ### 色を変更する
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -142,11 +142,11 @@ return <RadialChart.Root data={data} series={series} />
 ### セクターの色を変更する
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () =>
     createPolarChartData().map((item, index) => ({
       ...item,
@@ -163,11 +163,11 @@ return <RadialChart.Root data={data} series={series} />
 凡例を表示する場合は、`withLegend`を`true`に設定します。配置を変更する場合は、`legendProps.placement`に`"start-start"`や`"end-end"`などを設定します。デフォルトは、`"start-end"`です。
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
-const data = useMemo<Data[]>(
+const data = useMemo<PolarChartData[]>(
   () =>
     createPolarChartData().map((item, index) => ({
       ...item,
@@ -184,7 +184,7 @@ return <RadialChart.Root data={data} series={series} withLegend />
 ラベルを表示する場合は、`series`の`label`または`radialProps.label`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -203,7 +203,7 @@ return (
 ラベルリストを表示する場合は、`series`の`labelList`または`radialProps.labelList`に`true`を設定します。デフォルトは、`false`です。
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -221,7 +221,7 @@ return (
 ### ラベルを中央に表示する
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -286,7 +286,7 @@ return (
 開始角度を変更する場合は、`startAngle`に数値を設定します。デフォルトは、`90`です。
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -300,7 +300,7 @@ return <RadialChart.Root data={data} series={series} startAngle={0} />
 終了角度を変更する場合は、`endAngle`に数値を設定します。デフォルトは、`-270`です。
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -314,7 +314,7 @@ return <RadialChart.Root data={data} endAngle={-180} series={series} />
 内側の半径を変更する場合は、`innerRadius`に数値または文字列を設定します。デフォルトは、`"20%"`です。
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -328,7 +328,7 @@ return <RadialChart.Root data={data} innerRadius="40%" series={series} />
 外側の半径を変更する場合は、`outerRadius`に数値または文字列を設定します。デフォルトは、`"90%"`です。
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -342,7 +342,7 @@ return <RadialChart.Root data={data} outerRadius="70%" series={series} />
 角丸を変更する場合は、`cornerRadius`に数値を設定します。
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ cornerRadius: 9999, dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -356,7 +356,7 @@ return <RadialChart.Root data={data} outerRadius="70%" series={series} />
 間隔を変更する場合は、`barCategoryGap`に数値または文字列を設定します。デフォルトは、`"10%"`です。
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -451,7 +451,7 @@ return (
 同期させる場合は、`syncId`に文字列を設定します。
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -470,7 +470,7 @@ return (
 フォーマットする場合は、`formatter`を使用します。
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )
@@ -506,7 +506,7 @@ return (
 ツールチップを非表示にする場合は、`withTooltip`を`false`に設定します。デフォルトは、`true`です。
 
 ```tsx preview functional
-const series = useMemo<RadialChart.RadialProps<Data>[]>(
+const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
   () => [{ dataKey: "visits", nameKey: "browser" }],
   [],
 )

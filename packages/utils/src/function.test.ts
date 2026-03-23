@@ -1,4 +1,4 @@
-import { fnAll, handlerAll, noop, runIfFn } from "./function"
+import { fnAll, handlerAll, noop, runIfFn, wait } from "./function"
 
 describe("Function", () => {
   describe("noop", () => {
@@ -16,6 +16,20 @@ describe("Function", () => {
     test("should return value if passed a non-function", () => {
       const result = runIfFn("test")
       expect(result).toBe("test")
+    })
+  })
+
+  describe("wait", () => {
+    test("should resolve after the provided time", async () => {
+      vi.useFakeTimers()
+
+      const promise = wait(100)
+
+      await vi.advanceTimersByTimeAsync(100)
+
+      await expect(promise).resolves.toBeUndefined()
+
+      vi.useRealTimers()
     })
   })
 

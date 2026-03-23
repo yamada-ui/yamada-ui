@@ -1,11 +1,10 @@
-import type { Locale } from "../i18n"
 import type { Relations } from "@/data"
-import { readFile } from "fs/promises"
-import { glob } from "glob"
+import type { Locale } from "@/utils/i18n"
+import { glob, readFile } from "fs/promises"
 import matter from "gray-matter"
 import path from "path"
 import data from "@/data/relations.json"
-import { getLang } from "../i18n"
+import { getLang } from "@/utils/i18n"
 
 const relations = data as Relations
 
@@ -15,8 +14,8 @@ function getContent(locale: Locale) {
   return async function (category: "components" | "hooks", data: string[]) {
     const results = await Promise.all(
       data.map(async (name) => {
-        const filePaths = await glob(
-          path.resolve("contents", category, "**", "*.mdx"),
+        const filePaths = await Array.fromAsync(
+          glob(path.resolve("contents", category, "**", "*.mdx")),
         )
 
         const targetFilePath = filePaths.find((filePath) => {

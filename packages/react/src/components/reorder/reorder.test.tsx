@@ -307,7 +307,7 @@ describe("<Reorder />", () => {
 
     expect(() =>
       act(() => rootProps.onReorder(["Item 2", "Item 1"])),
-    ).not.toThrowError()
+    ).not.toThrow()
   })
 
   test("calls onCompleteChange on mouseUp after onReorder changes values", () => {
@@ -409,6 +409,6 @@ describe("<Reorder />", () => {
 
     expect(() =>
       act(() => rootProps.onMouseUp?.({ type: "mouseup" } as any)),
-    ).not.toThrowError()
+    ).not.toThrow()
   })
 })

@@ -400,7 +400,7 @@ describe("createStore", () => {
       const { unmount } = render(<A />)
       methods.queue.delete("default")
 
-      expect(() => unmount()).not.toThrowError()
+      expect(() => unmount()).not.toThrow()
     })
 
     test("should handle getSnapshot for primitive with path", () => {

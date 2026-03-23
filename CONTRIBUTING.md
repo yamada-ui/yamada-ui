@@ -55,22 +55,13 @@ To improve our development process, we have set up tools and systems. Yamada UI 
 ```json
 {
   "typescript.tsdk": "node_modules/typescript/lib",
-  "prettier.requireConfig": true,
-  "eslint.workingDirectories": [
-    "www",
-    "packages/cli",
-    "packages/react",
-    "packages/utils",
-    "packages/workspace",
-    "playgrounds/next/app",
-    "playgrounds/next/pages",
-    "playgrounds/react-router/framework",
-    "playgrounds/tanstack/router",
-    "playgrounds/tanstack/start",
-    "playgrounds/vite"
-  ]
+  "eslint.workingDirectories": [{ "mode": "auto" }]
 }
 ```
+
+## AI Usage Policy
+
+Yamada UI welcomes contributions from everyone, including those created with the assistance of Artificial Intelligence (AI) tools. If you contribute using AI, please follow the [AI Usage Policy](./AI_POLICY.md).
 
 ## Think you found a bug?
 

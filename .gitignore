@@ -39,6 +39,7 @@ next-env.d.ts
 .eslintcache
 .turbo
 .next
+.vitest-attachments
 .react-router
 .tanstack
 

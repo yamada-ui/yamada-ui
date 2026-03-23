@@ -1,4 +1,4 @@
-import type { TSESLint } from "@typescript-eslint/utils"
+import type { ConfigWithExtends } from "@eslint/config-helpers"
 import cspellPlugin from "@cspell/eslint-plugin"
 import cspellJson from "../../../../cspell.json"
 import { sharedFiles } from "./shared"
@@ -7,9 +7,9 @@ export const cspellConfig = {
   name: "eslint/cspell",
   files: sharedFiles,
   ignores: cspellJson.ignorePaths,
-  plugins: { "@cspell": cspellPlugin },
+  plugins: { cspell: cspellPlugin },
   rules: {
-    "@cspell/spellchecker": [
+    "cspell/spellchecker": [
       "warn",
       {
         configFile: new URL(
@@ -20,4 +20,4 @@ export const cspellConfig = {
       },
     ],
   },
-} satisfies TSESLint.FlatConfig.Config
+} satisfies ConfigWithExtends

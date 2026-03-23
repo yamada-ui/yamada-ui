@@ -10,7 +10,8 @@
     "typetrace": "tsc --noEmit --generateTrace ./trace --incremental false",
     "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
     "lint": "eslint . --max-warnings=0 --cache",
-    "format": "prettier . --ignore-path ../../.prettierignore --check --cache"
+    "format": "prettier . --ignore-path ../../.prettierignore --check --cache",
+    "quality": "pnpm format && pnpm lint && pnpm typecheck"
   },
   "exports": {
     "./eslint": "./src/eslint/index.ts",
@@ -24,18 +25,21 @@
   },
   "dependencies": {
     "@cspell/eslint-plugin": "^9.7.0",
-    "@eslint/compat": "^2.0.2",
+    "@eslint/compat": "^2.0.3",
     "@limegrass/eslint-plugin-import-alias": "^1.6.0",
+    "@next/eslint-plugin-next": "^16.1.6",
     "@octokit/request-error": "^7.1.0",
     "@octokit/rest": "^22.0.1",
     "@octokit/webhooks": "^14.2.0",
     "@types/eslint-plugin-jsx-a11y": "^6.10.1",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "@typescript-eslint/parser": "^8.56.1",
-    "@vitest/eslint-plugin": "^1.6.9",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@typescript-eslint/parser": "^8.57.0",
+    "@typescript-eslint/utils": "^8.57.0",
+    "@vitest/eslint-plugin": "^1.6.12",
+    "@yamada-ui/utils": "workspace:",
     "dotenv": "^17.3.1",
-    "eslint": "^9.39.3",
+    "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-node": "^0.3.9",
     "eslint-import-resolver-typescript": "^4.4.4",
@@ -49,10 +53,10 @@
     "eslint-plugin-unused-imports": "^4.4.1",
     "globals": "^17.4.0",
     "prettier": "^3.8.1",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "typescript-eslint": "^8.56.1",
-    "vitest": "^4.0.18",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "typescript-eslint": "^8.57.0",
+    "vitest": "^4.1.0",
     "vitest-axe": "^0.1.0"
   }
 }

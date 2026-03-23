@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og"
-import message from "../../../messages/en.json"
+import message from "@/messages/en.json"
 
 async function loadGoogleFont(
   name: string,

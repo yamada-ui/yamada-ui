@@ -1,8 +1,8 @@
 import { act } from "@testing-library/react"
-import { isArray, isString } from "@yamada-ui/utils"
+import { isArray, isString, wait } from "@yamada-ui/utils"
 
-export async function wait(ms = 16) {
-  await act(async () => new Promise((resolve) => setTimeout(resolve, ms)))
+export async function waitForAnimationFrame(ms = 16) {
+  await act(async () => wait(ms))
 
   await act(
     async () =>

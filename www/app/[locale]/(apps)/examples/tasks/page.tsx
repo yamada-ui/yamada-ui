@@ -3,11 +3,11 @@ import { getTranslations } from "next-intl/server"
 
 export async function generateMetadata({
   params,
-}: PageProps<"/[locale]/icons">): Promise<Metadata> {
+}: PageProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "examples" })
 
-  return { description: t("description"), title: t("title") }
+  return { description: t("description"), title: t("menu.tasks") }
 }
 
 export default function Page() {

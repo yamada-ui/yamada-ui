@@ -45,22 +45,13 @@ cd yamada-ui
 ```json
 {
   "typescript.tsdk": "node_modules/typescript/lib",
-  "prettier.requireConfig": true,
-  "eslint.workingDirectories": [
-    "www",
-    "packages/cli",
-    "packages/react",
-    "packages/utils",
-    "packages/workspace",
-    "playgrounds/next/app",
-    "playgrounds/next/pages",
-    "playgrounds/react-router/framework",
-    "playgrounds/tanstack/router",
-    "playgrounds/tanstack/start",
-    "playgrounds/vite"
-  ]
+  "eslint.workingDirectories": [{ "mode": "auto" }]
 }
 ```
+
+## AI利用ポリシー
+
+Yamada UIは、人工知能（AI）ツールの支援を活用した貢献を含め、すべての方からの貢献を歓迎します。AIを用いて貢献を行う場合は、以下の[AI利用ポリシー](./AI_POLICY.ja.md)に従ってください。
 
 ## バグを見つけたと思いますか？
 

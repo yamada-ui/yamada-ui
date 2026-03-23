@@ -86,6 +86,6 @@ describe("getTsconfig", () => {
   })
 
   test("should throw when tsconfig.json does not exist", async () => {
-    await expect(getTsconfig(tempDir)).rejects.toThrowError("tsconfig.json")
+    await expect(getTsconfig(tempDir)).rejects.toThrow("tsconfig.json")
   })
 })

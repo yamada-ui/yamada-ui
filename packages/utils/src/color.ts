@@ -202,7 +202,6 @@ export function parseToHsv(color: string, fallback?: string) {
   return [h, s, v, a]
 }
 
-// @ts-ignore
 export function rgbaTo(
   [r, g, b, a]: [number, number, number, number],
   fallback: string,
@@ -218,13 +217,12 @@ export function rgbaTo(
 export function rgbaTo(
   [r, g, b, a]: [number, number, number, number],
   fallback?: string,
-) {
+): (format: ColorFormat) => string | undefined {
   return function (format: ColorFormat = "hex") {
     return convertColor(c.rgba(r, g, b, a), fallback)(format)
   }
 }
 
-// @ts-ignore
 export function hslaTo(
   [r, g, b, a]: [number, number, number, number],
   fallback: string,
@@ -240,13 +238,12 @@ export function hslaTo(
 export function hslaTo(
   [h, s, l, a]: [number, number, number, number],
   fallback?: string,
-) {
+): (format: ColorFormat) => string | undefined {
   return function (format: ColorFormat = "hex") {
     return convertColor(c.hsla(h, s, l, a), fallback)(format)
   }
 }
 
-// @ts-ignore
 export function hsvTo(
   [h, s, v, a]: [number, number, number, number?],
   fallback: string,
@@ -262,7 +259,7 @@ export function hsvTo(
 export function hsvTo(
   [h, s, v, a]: [number, number, number, number?],
   fallback?: string,
-) {
+): (format: ColorFormat) => string | undefined {
   return function (format: ColorFormat = "hex") {
     h = h / 60
 

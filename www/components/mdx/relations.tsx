@@ -5,7 +5,7 @@ import { Text } from "@yamada-ui/react"
 import { getDocs } from "@/data"
 import data from "@/data/relations.json"
 import { useLocale } from "@/i18n"
-import { mdToHtml } from "../../utils/string"
+import { mdToHtml } from "@/utils/string"
 import { Card, CardGroup } from "./card"
 
 const relations = data as Relations

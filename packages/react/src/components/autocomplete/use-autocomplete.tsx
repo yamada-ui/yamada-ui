@@ -39,6 +39,7 @@ import {
   isNumber,
   isString,
   isUndefined,
+  match,
   mergeRefs,
   runIfFn,
   runKeyAction,
@@ -89,7 +90,7 @@ export interface AutocompleteFilter {
   ): ComboboxItem[]
 }
 
-const defaultFilter: AutocompleteFilter = (inputValue, items, matcher) => {
+const defaultFilter: AutocompleteFilter = (inputValue, items, match) => {
   if (!inputValue.length) return items
 
   return items
@@ -97,28 +98,23 @@ const defaultFilter: AutocompleteFilter = (inputValue, items, matcher) => {
       if ("items" in item) {
         const items = item.items.filter((item) => {
           if ("query" in item) {
-            return matcher(inputValue, item.query)
+            return isString(item.query) && match(item.query, inputValue)
           } else if (isString(item.label)) {
-            return matcher(inputValue, item.label)
+            return isString(item.label) && match(item.label, inputValue)
           }
         })
 
         if (items.length) return { ...item, items }
       } else if ("query" in item) {
-        if (matcher(inputValue, item.query)) return item
+        if (isString(item.query) && match(item.query, inputValue)) return item
       } else if (isString(item.label)) {
-        if (matcher(inputValue, item.label)) return item
+        if (isString(item.label) && match(item.label, inputValue)) return item
       }
     })
     .filter(Boolean) as ComboboxItem[]
 }
 
-export interface AutocompleteMatcher {
-  (input: string, target?: string): boolean
-}
-
-const defaultMatcher: AutocompleteMatcher = (input, target) =>
-  target?.toLowerCase().includes(input.toLowerCase()) ?? false
+export type AutocompleteMatcher = typeof match
 
 interface AutocompleteContext extends Pick<
   UseAutocompleteReturn,
@@ -272,7 +268,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
       focusOnClear = true,
       inputValue: inputValueProp,
       items = [],
-      matcher = defaultMatcher,
+      matcher = match,
       max,
       openOnChange = true,
       openOnClick = true,
@@ -477,7 +473,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
         {
           Backspace: (ev) => {
             if (!isArray(value)) return
-            if (!!inputValue.length) return
+            if (inputValue.length) return
 
             ev.preventDefault()
 

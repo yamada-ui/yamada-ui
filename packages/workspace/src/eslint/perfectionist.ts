@@ -1,4 +1,4 @@
-import type { TSESLint } from "@typescript-eslint/utils"
+import type { ConfigWithExtends } from "@eslint/config-helpers"
 import perfectionistPlugin from "eslint-plugin-perfectionist"
 import { sharedFiles } from "./shared"
 
@@ -30,10 +30,33 @@ const semanticSizes = {
 }
 
 const sortPseudos = [
-  ["^_hover$"],
-  ["^_selected$", "^_active$", "^_focus$", "^_focusVisible$"],
-  ["^_invalid$", "^_readOnly$", "^_hidden$"],
-  ["^_disabled$", "^_never$"],
+  ["^_hover$", "^_peerHover$", "^_groupHover$"],
+  [
+    "^_selected$",
+    "^_peerSelected$",
+    "^_groupSelected$",
+    "^_active$",
+    "^_peerActive$",
+    "^_groupActive$",
+    "^_focus$",
+    "^_peerFocus$",
+    "^_groupFocus$",
+    "^_focusVisible$",
+    "^_peerFocusVisible$",
+    "^_groupFocusVisible$",
+  ],
+  [
+    "^_invalid$",
+    "^_peerInvalid$",
+    "^_groupInvalid$",
+    "^_readOnly$",
+    "^_peerReadOnly$",
+    "^_groupReadOnly$",
+    "^_hidden$",
+    "^_peerHidden$",
+    "^_groupHidden$",
+  ],
+  ["^_disabled$", "^_peerDisabled$", "^_groupDisabled$", "^_never$"],
 ]
 
 const otherPseudos = sortPseudos
@@ -141,11 +164,9 @@ const sortObjectTypeGroups = {
 }
 
 export const perfectionistConfig = {
-  name: "eslint/perfectionist",
+  name: "perfectionist",
   files: sharedFiles,
-  plugins: {
-    perfectionist: perfectionistPlugin as unknown as TSESLint.FlatConfig.Plugin,
-  },
+  plugins: { perfectionist: perfectionistPlugin },
   rules: {
     "perfectionist/sort-exports": [
       "error",
@@ -202,4 +223,4 @@ export const perfectionistConfig = {
     "perfectionist/sort-sets": ["warn", { type }],
     "perfectionist/sort-union-types": ["warn", { type }],
   },
-} satisfies TSESLint.FlatConfig.Config
+} satisfies ConfigWithExtends

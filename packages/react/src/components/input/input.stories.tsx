@@ -361,7 +361,6 @@ export const FloatingLabel: Story = () => {
             insetStart: "2",
             top: "8px",
           },
-          // eslint-disable-next-line perfectionist/sort-objects
           _peerFocusVisible: {
             color: "fg",
             fontSize: "sm",

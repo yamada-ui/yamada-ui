@@ -89,6 +89,7 @@ export const useSnacks = (options: UseSnacksOptions = {}) => {
   const snack = useMemo(() => {
     const methods = (options: SnackMethodsOptions = {}) => {
       options = getOptions(options)
+      // eslint-disable-next-line react-hooks/globals
       counter += 1
 
       const { id = counter.toString(), ...rest } = options

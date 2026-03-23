@@ -1,22 +1,29 @@
-import type { TSESLint } from "@typescript-eslint/utils"
+import type {
+  ConfigWithExtends,
+  ConfigWithExtendsArray,
+} from "@eslint/config-helpers"
 import {
-  createImportAliasConfig,
-  createLanguageConfig,
   jsxA11yConfig,
   reactConfig,
   reactHooksConfig,
   sharedConfigArray,
   cspellConfig as sharedCspellConfig,
   sharedFiles,
-  restrictedImportsConfigArray as sharedRestrictedImportsConfigArray,
+  restrictedImportConfigArray as sharedRestrictedImportConfigArray,
   vitestConfig,
 } from "@yamada-ui/workspace/eslint"
-import { dirname, resolve } from "node:path"
-import { fileURLToPath } from "node:url"
-import tseslint from "typescript-eslint"
+import { defineConfig } from "eslint/config"
 
-const restrictedImportsConfigArray: TSESLint.FlatConfig.ConfigArray = [
-  ...sharedRestrictedImportsConfigArray,
+const noConsoleConfig: ConfigWithExtends = {
+  name: "no-console",
+  files: ["**/*.stories.tsx"],
+  rules: {
+    "no-console": "off",
+  },
+}
+
+const restrictedImportConfigArray: ConfigWithExtendsArray = [
+  ...sharedRestrictedImportConfigArray,
   {
     name: "eslint/restricted-imports/utils",
     files: sharedFiles.map((file) => `src/!(utils)/${file}`),
@@ -35,7 +42,7 @@ const restrictedImportsConfigArray: TSESLint.FlatConfig.ConfigArray = [
   },
 ]
 
-const cspellConfig: TSESLint.FlatConfig.Config = {
+const cspellConfig: ConfigWithExtends = {
   ...sharedCspellConfig,
   ignores: [
     ...sharedCspellConfig.ignores,
@@ -44,33 +51,15 @@ const cspellConfig: TSESLint.FlatConfig.Config = {
   ],
 }
 
-const noConsoleConfig: TSESLint.FlatConfig.Config = {
-  name: "eslint/no-console",
-  files: ["**/*.stories.tsx"],
-  rules: {
-    "no-console": "off",
-  },
-}
-
-const tsConfigPath = resolve(
-  dirname(fileURLToPath(import.meta.url)),
-  "tsconfig.json",
-)
-
-const languageConfig = createLanguageConfig(tsConfigPath)
-const importAliasConfig = createImportAliasConfig(tsConfigPath)
-
-const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
-  languageConfig,
+const config = defineConfig(
   ...sharedConfigArray,
-  ...restrictedImportsConfigArray,
-  importAliasConfig,
-  noConsoleConfig,
+  ...restrictedImportConfigArray,
   cspellConfig,
   jsxA11yConfig,
   reactConfig,
   reactHooksConfig,
   vitestConfig,
+  noConsoleConfig,
 )
 
 export default config

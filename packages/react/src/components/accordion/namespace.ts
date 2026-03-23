@@ -9,6 +9,7 @@ export {
 export type {
   AccordionButtonProps as ButtonProps,
   AccordionItemProps as ItemProps,
+  AccordionItem as ItemType,
   AccordionPanelProps as PanelProps,
   AccordionRootProps as RootProps,
 } from "./accordion"

@@ -153,19 +153,19 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )
@@ -199,20 +199,20 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>(
+    ComposedChart.mergeSeries<CartesianChartData>(
       [
         [
           "bar",
           { dataKey: "desktop" },
-        ] satisfies ComposedChart.ComposedProps<Data>,
+        ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
         [
           "area",
           { dataKey: "tablet" },
-        ] satisfies ComposedChart.ComposedProps<Data>,
+        ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
         [
           "line",
           { dataKey: "mobile" },
-        ] satisfies ComposedChart.ComposedProps<Data>,
+        ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       ],
       "blue",
     ),
@@ -237,20 +237,20 @@ return (
 ### 色を変更する
 
 ```tsx preview functional
-const series = useMemo<ComposedChart.ComposedProps<Data>[]>(
+const series = useMemo<ComposedChart.ComposedProps<CartesianChartData>[]>(
   () => [
     [
       "bar",
       { color: "blue", dataKey: "desktop" },
-    ] satisfies ComposedChart.ComposedProps<Data>,
+    ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     [
       "area",
       { color: "green", dataKey: "tablet" },
-    ] satisfies ComposedChart.ComposedProps<Data>,
+    ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     [
       "line",
       { color: "red", dataKey: "mobile" },
-    ] satisfies ComposedChart.ComposedProps<Data>,
+    ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
   ],
   [],
 )
@@ -276,19 +276,19 @@ Y軸を表示する場合は、`withYAxis`を`true`に設定します。デフ�
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )
@@ -314,19 +314,19 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )
@@ -353,7 +353,7 @@ return (
 凡例を表示する場合は、`withLegend`を`true`に設定します。デフォルトは、`false`です。また、凡例の配置を変更する場合は、`legendProps.placement`に`"start-start"`や`"end-end"`などを設定します。デフォルトは、`"start-end"`です。
 
 ```tsx preview functional
-const series = useMemo<ComposedChart.ComposedProps<Data>[]>(
+const series = useMemo<ComposedChart.ComposedProps<CartesianChartData>[]>(
   () => [
     ["bar", { color: "blue", dataKey: "desktop" }],
     ["area", { color: "green", dataKey: "tablet" }],
@@ -382,7 +382,7 @@ return (
 ツールチップや凡例の項目名を変更する場合は、`series`の`name`に文字列を設定します。
 
 ```tsx preview functional
-const series = useMemo<ComposedChart.ComposedProps<Data>[]>(
+const series = useMemo<ComposedChart.ComposedProps<CartesianChartData>[]>(
   () => [
     ["bar", { name: "Desktop", color: "blue", dataKey: "desktop" }],
     ["area", { name: "Tablet", color: "green", dataKey: "tablet" }],
@@ -413,19 +413,19 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )
@@ -461,19 +461,19 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )
@@ -520,19 +520,19 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )
@@ -560,19 +560,19 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )
@@ -610,7 +610,7 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       ["bar", { dataKey: "desktop", radius: [0, 0, 4, 4] }],
       ["bar", { dataKey: "tablet", radius: [4, 4, 0, 0] }],
       ["line", { dataKey: "mobile" }],
@@ -640,19 +640,19 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )
@@ -679,19 +679,19 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )
@@ -718,7 +718,7 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       ["bar", { dataKey: "desktop" }],
       ["bar", { dataKey: "tablet" }],
       ["line", { dataKey: "mobile" }],
@@ -749,19 +749,19 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )
@@ -789,19 +789,19 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )
@@ -842,19 +842,19 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )
@@ -893,19 +893,19 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )
@@ -938,19 +938,19 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )
@@ -989,19 +989,19 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )
@@ -1031,19 +1031,19 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )
@@ -1073,19 +1073,19 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )
@@ -1114,19 +1114,19 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )
@@ -1155,19 +1155,19 @@ X軸を非表示にする場合は、`withXAxis`を`false`に設定します。�
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )
@@ -1191,19 +1191,19 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )
@@ -1231,19 +1231,19 @@ return (
 ```tsx preview functional
 const series = useMemo(
   () =>
-    ComposedChart.mergeSeries<Data>([
+    ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
         { dataKey: "desktop" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
         { dataKey: "tablet" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
         { dataKey: "mobile" },
-      ] satisfies ComposedChart.ComposedProps<Data>,
+      ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
 )

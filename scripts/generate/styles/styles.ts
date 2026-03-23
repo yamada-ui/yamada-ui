@@ -38,7 +38,7 @@ function generateDoc(docs?: Docs | string) {
         [name, { baseline, deprecated, description, experimental, see }],
         index,
       ) => {
-        if (!!index) rows.push("", "------------------------------------", "")
+        if (index) rows.push("", "------------------------------------", "")
 
         rows.push(`### ${name}`, "", description)
 

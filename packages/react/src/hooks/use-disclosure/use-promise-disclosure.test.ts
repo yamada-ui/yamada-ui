@@ -48,7 +48,7 @@ describe("usePromiseDisclosure", () => {
       result.current.onClose()
     })
 
-    await expect(promise!).rejects.toThrowError("closed")
+    await expect(promise!).rejects.toThrow("closed")
     expect(result.current.open).toBeFalsy()
   })
 

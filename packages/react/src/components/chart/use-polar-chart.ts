@@ -663,7 +663,6 @@ export interface UseChartRadarProps extends Merge<
     | "onAnimationStart"
     | "onMouseEnter"
     | "onMouseLeave"
-    | "points"
     | "radiusAxisId"
     | "shape"
     | "stroke"

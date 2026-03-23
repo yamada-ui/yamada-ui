@@ -62,7 +62,7 @@ describe("getConfig", () => {
   })
 
   test("should throw when config file does not exist", async () => {
-    await expect(getConfig(tempDir, "ui.json")).rejects.toThrowError("config")
+    await expect(getConfig(tempDir, "ui.json")).rejects.toThrow("config")
   })
 
   test("getSection should return section by name", async () => {

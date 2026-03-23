@@ -1,7 +1,8 @@
 "use client"
 
-import type { ImageProps, StackProps } from "@yamada-ui/react"
+import type { StackProps } from "@yamada-ui/react"
 import type { Dispatch, ReactNode, SetStateAction } from "react"
+import type { NextImageProps } from "@/components"
 import {
   Box,
   Button,
@@ -22,7 +23,7 @@ import {
 import { useState } from "react"
 import { NextImage } from "@/components"
 
-interface CarouselItem extends Omit<ImageProps, "alt" | "size"> {
+interface CarouselItem extends Omit<NextImageProps, "alt"> {
   description: string
   title: string
 }
@@ -337,11 +338,9 @@ function ContentCarouselItem({
       >
         <NextImage
           alt={title}
-          // @ts-ignore
           fill
-          // @ts-ignore
           objectFit="cover"
-          priority
+          preload
           sizes="100%"
           transitionDuration="moderate"
           transitionProperty="transform"

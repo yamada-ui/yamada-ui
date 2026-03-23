@@ -94,7 +94,7 @@ export const PropsTable = <Y extends string, M extends string>({
         </For>
       </Grid>
     )
-  } else if (!!columns.length) {
+  } else if (columns.length) {
     return (
       <For each={columns}>
         {(column, colIndex) => (
@@ -117,7 +117,7 @@ export const PropsTable = <Y extends string, M extends string>({
                       alignItems="center"
                       borderColor="purple.ghost"
                       borderRightWidth="1px"
-                      borderTopWidth={!!rowIndex ? "1px" : undefined}
+                      borderTopWidth={rowIndex ? "1px" : undefined}
                       color="fg.emphasized"
                       display="flex"
                       fontWeight="medium"
@@ -128,7 +128,7 @@ export const PropsTable = <Y extends string, M extends string>({
 
                     <GridItem
                       borderColor="purple.ghost"
-                      borderTopWidth={!!rowIndex ? "1px" : undefined}
+                      borderTopWidth={rowIndex ? "1px" : undefined}
                       p="md"
                     >
                       {children(
@@ -163,7 +163,7 @@ export const PropsTable = <Y extends string, M extends string>({
                 alignItems="center"
                 borderColor="purple.ghost"
                 borderRightWidth="1px"
-                borderTopWidth={!!rowIndex ? "1px" : undefined}
+                borderTopWidth={rowIndex ? "1px" : undefined}
                 color="fg.emphasized"
                 display="flex"
                 fontWeight="medium"
@@ -174,7 +174,7 @@ export const PropsTable = <Y extends string, M extends string>({
 
               <GridItem
                 borderColor="purple.ghost"
-                borderTopWidth={!!rowIndex ? "1px" : undefined}
+                borderTopWidth={rowIndex ? "1px" : undefined}
                 p="md"
               >
                 {children(

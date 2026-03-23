@@ -85,7 +85,7 @@ After installing, add `UIProvider` to the root of your application.
 To suppress hydration errors, add `suppressHydrationWarning` to the `html` and `body` tags.
 
 ```tsx title="layout.tsx" {1,9-11}
-import { UIProvider } from "@yamada-ui/react"
+import { UIProvider } from "@workspaces/ui"
 
 export default function RootLayout({
   children,
@@ -148,7 +148,7 @@ export default function RootLayout({
 
 If you change the `defaultColorMode` in your [config](/docs/theming/configuration/overview), set the `defaultValue` prop on `ColorModeScript`.
 
-```tsx title="layout.tsx" {12}
+```tsx title="layout.tsx" {2,12}
 import { UIProvider, ColorModeScript } from "@workspaces/ui"
 import { config } from "@workspaces/theme"
 
@@ -197,7 +197,7 @@ export default function RootLayout({
 
 If you change the `defaultThemeScheme` in your [config](/docs/theming/configuration/overview), set the `defaultValue` prop on `ThemeSchemeScript`.
 
-```tsx title="layout.tsx" {12}
+```tsx title="layout.tsx" {2,12}
 import { UIProvider, ThemeSchemeScript } from "@workspaces/ui"
 import { config } from "@workspaces/theme"
 
@@ -265,19 +265,23 @@ import type {
   IconButtonProps,
   LinkProps,
   Merge,
-} from "@yamada-ui/react"
-import type { LinkProps as OriginalLinkProps } from "next/link"
+} from "@workspaces/ui"
 import type { FC } from "react"
-import { Button, IconButton, Link } from "@yamada-ui/react"
+import type { LinkProps as OriginalLinkProps } from "next/link"
+import { Button, IconButton, Link } from "@workspaces/ui"
 import OriginalLink from "next/link"
 
 export interface NextLinkProps extends Omit<
-  Merge<OriginalLinkProps, LinkProps>,
-  "as" | "ref"
+  Merge<OriginalLinkProps, Omit<LinkProps, "href">>,
+  "as"
 > {}
 
-export const NextLink: FC<NextLinkProps> = (props) => {
-  return <Link as={OriginalLink} {...props} />
+export const NextLink: FC<NextLinkProps> = ({ href, children, ...rest }) => {
+  return (
+    <Link asChild {...rest}>
+      <OriginalLink href={href}>{children}</OriginalLink>
+    </Link>
+  )
 }
 
 export interface NextLinkButtonProps
@@ -304,7 +308,7 @@ export const NextLinkIconButton: FC<NextLinkIconButtonProps> = (props) => {
 ```tsx
 "use client"
 
-import { styled } from "@yamada-ui/react"
+import { styled } from "@workspaces/ui"
 import Image from "next/image"
 
 export const AppImage = styled(Image, {

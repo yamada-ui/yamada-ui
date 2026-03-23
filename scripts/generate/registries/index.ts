@@ -4,8 +4,7 @@ import { toKebabCase } from "@yamada-ui/utils"
 import { format, writeFileWithFormat } from "@yamada-ui/workspace/prettier"
 import { Command } from "commander"
 import { existsSync } from "fs"
-import { mkdir, readdir, readFile } from "fs/promises"
-import { glob } from "glob"
+import { glob, mkdir, readdir, readFile } from "fs/promises"
 import ora from "ora"
 import path from "path"
 import c from "picocolors"
@@ -136,6 +135,24 @@ function replaceImportDeclarations(data: string, importDeclarations: string[]) {
 }
 
 async function formatSource(data: string) {
+  data = data
+    .replace(
+      /^[ \t]*\/\/\s*@ts-(?:ignore|expect-error|nocheck)\b[^\n]*\n/gm,
+      "",
+    )
+    .replace(
+      /^[ \t]*\/\*\*?\s*@ts-(?:ignore|expect-error|nocheck)\b[^\n]*\*\/\n/gm,
+      "",
+    )
+    .replace(
+      /^[ \t]*\/\/\s*eslint-(?:disable|disable-next-line)\b[^\n]*\n/gm,
+      "",
+    )
+    .replace(
+      /^[ \t]*\/\*\*?\s*eslint-(?:disable|disable-next-line)\b[^\n]*\*\/\n/gm,
+      "",
+    )
+
   const regexp =
     /import\s+(?:type\s+)?(?:{[\s\S]*?}|\*\s+as\s+\w+|\w+)\s+from\s+["'][^"']+["']/g
 
@@ -469,7 +486,9 @@ async function generateRegistries(
 
 async function generateThemeRegistry(publicPath: string, tag?: string) {
   const themePath = path.join(ENTRY_PATH, "theme")
-  const filePaths = await glob(path.join(themePath, "**", "*.{ts,tsx}"))
+  const filePaths = await Array.fromAsync(
+    glob(path.join(themePath, "**", "*.{ts,tsx}")),
+  )
 
   const sources: Source[] = []
 

@@ -15,7 +15,6 @@ export function assignRef<Y = any>(ref: React.Ref<Y> | undefined, value: Y) {
   }
 
   try {
-    // @ts-ignore
     ref.current = value
   } catch {
     throw new Error(`Cannot assign value '${value}' to ref '${ref}'`)

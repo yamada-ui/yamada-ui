@@ -1,5 +1,10 @@
 import { afterEach, describe, expect, test, vi } from "vitest"
 
+vi.mock("./print-view", () => ({
+  printSource: vi.fn(),
+  printTree: vi.fn(),
+}))
+
 vi.mock("node-fetch", () => ({
   default: vi.fn().mockImplementation((url: string) => {
     if (url.includes("button.json")) {
@@ -18,86 +23,131 @@ vi.mock("node-fetch", () => ({
         ok: true,
       })
     }
+    if (url.includes("no-content-component.json")) {
+      return Promise.resolve({
+        json: () =>
+          Promise.resolve({
+            section: "components",
+            sources: [
+              {
+                name: "no-content.tsx",
+              },
+            ],
+          }),
+        ok: true,
+      })
+    }
+    if (url.includes("missing-component.json")) {
+      return Promise.resolve({
+        json: () =>
+          Promise.resolve({
+            section: "components",
+            sources: [],
+          }),
+        ok: true,
+      })
+    }
     return Promise.resolve({ ok: false, status: 404 })
   }),
 }))
 
 import { view } from "."
+import { printSource, printTree } from "./print-view"
 
 describe("view", () => {
   afterEach(() => {
-    vi.restoreAllMocks()
+    vi.clearAllMocks()
   })
 
-  test("should display directory listing when no file is specified", async () => {
-    const consoleLogSpy = vi
-      .spyOn(console, "log")
-      .mockImplementation(() => undefined)
-
+  test("should call printTree when no file is specified", async () => {
     await view.parseAsync(["node", "test", "button"])
 
-    expect(consoleLogSpy).toHaveBeenCalledWith(
-      expect.stringContaining("Directory listing for:"),
-    )
-    expect(consoleLogSpy).toHaveBeenCalledWith(
-      expect.stringContaining("button.tsx"),
-    )
-    expect(consoleLogSpy).toHaveBeenCalledWith(
-      expect.stringContaining("button.style.ts"),
+    expect(printTree).toHaveBeenCalledWith(
+      "button",
+      expect.arrayContaining([
+        expect.objectContaining({ name: "button.tsx" }),
+        expect.objectContaining({ name: "button.style.ts" }),
+      ]),
     )
   })
 
-  test("should display the file content when a specific file is specified", async () => {
-    const consoleLogSpy = vi
-      .spyOn(console, "log")
-      .mockImplementation(() => undefined)
-
+  test("should call printSource when a specific file is specified", async () => {
     await view.parseAsync(["node", "test", "button", "button.tsx"])
 
-    expect(consoleLogSpy).toHaveBeenCalledWith(
-      expect.stringContaining("export const Button = () => <button />"),
+    expect(printSource).toHaveBeenCalledWith(
+      "button.tsx",
+      "export const Button = () => <button />",
     )
+  })
 
-    expect(consoleLogSpy).toHaveBeenCalledWith(
-      expect.stringContaining("button.tsx"),
+  test("should pass --tag option to the registry URL", async () => {
+    const nodeFetch = await import("node-fetch")
+
+    await view.parseAsync(["node", "test", "button", "--tag", "next"])
+
+    expect(nodeFetch.default).toHaveBeenCalledWith(
+      expect.stringContaining("/next/"),
+      expect.anything(),
     )
   })
 
   test("should show error for non-existent component", async () => {
-    const consoleErrorSpy = vi
-      .spyOn(console, "error")
-      .mockImplementation(() => undefined)
-    const processExitSpy = vi
-      .spyOn(process, "exit")
-      .mockImplementation(() => undefined as never)
+    const ora = await import("ora")
+    const spinner = ora.default()
+    vi.mocked(spinner.fail).mockClear()
 
     await view.parseAsync(["node", "test", "missing-component"])
 
-    expect(consoleErrorSpy).toHaveBeenCalledWith(
+    expect(spinner.fail).toHaveBeenCalledWith(
       expect.stringContaining("not found or has no source files"),
     )
-    expect(processExitSpy).toHaveBeenCalledWith(1)
   })
 
   test("should show error if specific file is not found in component", async () => {
-    const consoleLogSpy = vi
-      .spyOn(console, "log")
-      .mockImplementation(() => undefined)
-    const consoleErrorSpy = vi
-      .spyOn(console, "error")
-      .mockImplementation(() => undefined)
-    const processExitSpy = vi
-      .spyOn(process, "exit")
-      .mockImplementation(() => undefined as never)
+    const ora = await import("ora")
+    const spinner = ora.default()
+    vi.mocked(spinner.fail).mockClear()
 
     await view.parseAsync(["node", "test", "button", "missing.tsx"])
 
-    expect(consoleErrorSpy).toHaveBeenCalledWith(
-      expect.stringContaining("not found in component"),
+    expect(spinner.fail).toHaveBeenCalledWith(
+      expect.stringContaining("not found in registry item"),
     )
-    expect(consoleLogSpy).toHaveBeenCalledWith(
+    expect(spinner.fail).toHaveBeenCalledWith(
       expect.stringContaining("Available files are:"),
     )
-    expect(processExitSpy).toHaveBeenCalledWith(1)
+  })
+
+  test("should show error when file content is missing", async () => {
+    const ora = await import("ora")
+    const spinner = ora.default()
+    vi.mocked(spinner.fail).mockClear()
+
+    await view.parseAsync([
+      "node",
+      "test",
+      "no-content-component",
+      "no-content.tsx",
+    ])
+
+    expect(spinner.fail).toHaveBeenCalledWith(
+      "No readable content found for file 'no-content.tsx'.",
+    )
+  })
+
+  test("should show fallback message when non-error is thrown", async () => {
+    const utils = await import("../../utils")
+    const fetchRegistrySpy = vi.spyOn(utils, "fetchRegistry")
+    fetchRegistrySpy.mockRejectedValueOnce("fatal")
+
+    const ora = await import("ora")
+    const spinner = ora.default()
+    vi.mocked(spinner.fail).mockClear()
+
+    await view.parseAsync(["node", "test", "button"])
+
+    expect(spinner.fail).toHaveBeenCalledWith("An unknown error occurred")
+
+    fetchRegistrySpy.mockRestore()
   })
 })

@@ -451,14 +451,14 @@ export function getFirstFocusableElement(
 export function setAttribute(
   el: Element,
   qualifiedName: string,
-  value: string,
+  value?: string,
 ) {
   const prev = el.getAttribute(qualifiedName)
 
   el.setAttribute(qualifiedName, cx(prev, value) ?? "")
 
   return () => {
-    if (!prev) {
+    if (prev === null) {
       el.removeAttribute(qualifiedName)
     } else {
       el.setAttribute(qualifiedName, prev)

@@ -54,6 +54,13 @@ const getPrevIndex = (current: number, max: number, loop: boolean) => {
   return next
 }
 
+const isMatch =
+  <Y extends HTMLElement = HTMLElement, M = {}>(props?: Partial<M>) =>
+  (descendant: Descendant<Y, M>) =>
+    Object.entries(props ?? {}).every(
+      ([key, value]) => descendant[key as keyof Descendant<Y, M>] === value,
+    )
+
 export type DescendantProps<Y extends HTMLElement = HTMLElement, M = {}> = M & {
   disabled?: ((node: Y) => boolean) | boolean
 }
@@ -155,11 +162,17 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
     }
   }
 
-  const values = () =>
-    Array.from(descendants.values()).sort((a, b) => a.index - b.index)
+  const values = (props?: Partial<M>) =>
+    Array.from(descendants.values())
+      .filter(isMatch(props))
+      .sort((a, b) => a.index - b.index)
 
-  const enabledValues = () =>
-    values().filter(({ disabled, node }) => !runIfFn(disabled, node))
+  const enabledValues = (props?: Partial<M>) =>
+    values().filter(
+      (descendant) =>
+        !runIfFn(descendant.disabled, descendant.node) &&
+        isMatch<Y, M>(props)(descendant),
+    )
 
   const value = (indexOrNode: null | number | Y) => {
     if (!count() || indexOrNode == null) return undefined
@@ -169,10 +182,12 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
       : descendants.get(indexOrNode)
   }
 
-  const enabledValue = (index: number) => {
+  const enabledValue = (indexOrNode: number) => {
     if (!enabledCount()) return undefined
 
-    return enabledValues()[index]
+    return enabledValues()[
+      isNumber(indexOrNode) ? indexOrNode : enabledIndexOf(indexOrNode)
+    ]
   }
 
   const firstValue = () => value(0)
@@ -203,6 +218,7 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
   const enabledPrevValue = (
     indexOrNode: Descendant<Y, M> | null | number | Y,
     loop = true,
+    props?: Partial<M>,
   ) => {
     if (!enabledCount()) return undefined
 
@@ -223,7 +239,9 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
       const descendant = value(index)
 
       enabledValue =
-        descendant && !runIfFn(descendant.disabled, descendant.node)
+        descendant &&
+        !runIfFn(descendant.disabled, descendant.node) &&
+        isMatch<Y, M>(props)(descendant)
           ? descendant
           : null
     }
@@ -253,6 +271,7 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
   const enabledNextValue = (
     indexOrNode: Descendant<Y, M> | null | number | Y,
     loop = true,
+    props?: Partial<M>,
   ) => {
     if (!enabledCount()) return undefined
 
@@ -273,7 +292,9 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
       const descendant = value(index)
 
       enabledValue =
-        descendant && !runIfFn(descendant.disabled, descendant.node)
+        descendant &&
+        !runIfFn(descendant.disabled, descendant.node) &&
+        isMatch<Y, M>(props)(descendant)
           ? descendant
           : null
     }

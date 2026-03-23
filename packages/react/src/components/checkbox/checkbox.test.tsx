@@ -22,6 +22,30 @@ describe("<Checkbox />", () => {
     expect((input as HTMLInputElement).indeterminate).toBeTruthy()
   })
 
+  test("forwards `aria-controls` to the input element", () => {
+    render(<Checkbox aria-controls="panel1">checkbox</Checkbox>)
+
+    const input = screen.getByRole("checkbox")
+
+    expect(input).toHaveAttribute("aria-controls", "panel1")
+  })
+
+  test("forwards `aria-labelledby` to the input element", () => {
+    render(<Checkbox aria-labelledby="label1">checkbox</Checkbox>)
+
+    const input = screen.getByRole("checkbox")
+
+    expect(input).toHaveAttribute("aria-labelledby", "label1")
+  })
+
+  test("forwards `tabIndex` to the input element", () => {
+    render(<Checkbox tabIndex={-1}>checkbox</Checkbox>)
+
+    const input = screen.getByRole("checkbox")
+
+    expect(input).toHaveAttribute("tabindex", "-1")
+  })
+
   test("sets `displayName` correctly", () => {
     expect(Checkbox.displayName).toBe("CheckboxRoot")
     expect(CheckboxGroup.Root.displayName).toBe("CheckboxGroup")

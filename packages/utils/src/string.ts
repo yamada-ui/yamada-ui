@@ -151,3 +151,20 @@ export function bem(block: string, element?: string, modifier?: string) {
 
   return className
 }
+
+export function match(
+  value: string,
+  query: string,
+  strategy: "contains" | "endsWith" | "equals" | "startsWith" = "contains",
+) {
+  switch (strategy) {
+    case "contains":
+      return value.toLowerCase().includes(query.toLowerCase())
+    case "endsWith":
+      return value.toLowerCase().endsWith(query.toLowerCase())
+    case "equals":
+      return value.toLowerCase() === query.toLowerCase()
+    case "startsWith":
+      return value.toLowerCase().startsWith(query.toLowerCase())
+  }
+}

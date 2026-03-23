@@ -458,7 +458,7 @@ export function setAttribute(
   el.setAttribute(qualifiedName, cx(prev, value) ?? "")
 
   return () => {
-    if (!prev) {
+    if (prev === null) {
       el.removeAttribute(qualifiedName)
     } else {
       el.setAttribute(qualifiedName, prev)

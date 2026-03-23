@@ -88,7 +88,7 @@ export const PreviewDrawer = memo(function PreviewDrawer({
         p="{space}"
       >
         <Center
-          bg="bg.subtle"
+          bg="bg.panel"
           boxSize={{ base: "auto", md: "xs" }}
           gridRow={{ base: "1 / 3", md: "2 / 3" }}
           mx="auto"
@@ -173,7 +173,7 @@ export const PreviewDrawer = memo(function PreviewDrawer({
                       aria-label={t("openPreview", { name })}
                       bg={{
                         base: "bg.panel",
-                        _hover: ["bg.subtle", "bg.muted"],
+                        _hover: "bg.subtle",
                       }}
                       icon={<Icon fontSize="2xl" />}
                       onClick={() => {

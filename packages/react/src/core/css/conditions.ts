@@ -45,6 +45,10 @@ export const attributes = {
    */
   _accept: "&[data-accept]",
   /**
+   * The CSS `&[data-animated]` attribute selector.
+   */
+  _animated: "&[data-animated]",
+  /**
    * The CSS `&[data-between]` attribute selector.
    */
   _between: "&[data-between]",
@@ -90,6 +94,10 @@ export const attributes = {
    */
   _grid: "&:is([role=grid], [data-grid])",
   /**
+   * The CSS `&:is(:has(> [role=group]), :has(> [data-group]), :has(> .group))` attribute selector.
+   */
+  _hasGroup: "&:is(:has(> [role=group]), :has(> [data-group]), :has(> .group))",
+  /**
    * The CSS `&:has(> [data-icon])` attribute selector.
    */
   _hasIcon: "&:has(> [data-icon])",
@@ -134,6 +142,11 @@ export const attributes = {
    * The CSS `&:not([data-fallback])` attribute selector.
    */
   _notFallback: "&:not([data-fallback])",
+  /**
+   * The CSS `&:not(:has(> [role=group]), :has(> [data-group]), :has(> .group))` attribute selector.
+   */
+  _notHasGroup:
+    "&:not(:has(> [role=group]), :has(> [data-group]), :has(> .group))",
   /**
    * The CSS `&:not([data-selected]):not([aria-selected=true])` attribute selector.
    */
@@ -352,6 +365,10 @@ export const pseudoClasses = {
    */
   _indeterminate:
     "&:is(:indeterminate, [data-indeterminate], [aria-checked=mixed])",
+  /**
+   * The CSS `& > [data-indicator]` pseudo-class.
+   */
+  _indicator: "& > [data-indicator]",
   /**
    * The CSS `&:is(:in-range, [data-in-range])` pseudo-class.
    */

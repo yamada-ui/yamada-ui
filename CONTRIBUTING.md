@@ -59,6 +59,10 @@ To improve our development process, we have set up tools and systems. Yamada UI 
 }
 ```
 
+## AI Usage Policy
+
+Yamada UI welcomes contributions from everyone, including those created with the assistance of Artificial Intelligence (AI) tools. If you contribute using AI, please follow the [AI Usage Policy](./AI_POLICY.md).
+
 ## Think you found a bug?
 
 Please conform to the [issue template](https://github.com/yamada-ui/yamada-ui/issues/new/choose) and provide a clear path to reproduction.

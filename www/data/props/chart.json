@@ -284,7 +284,7 @@
         "required": false
       },
       "chartProps": {
-        "type": "Omit<CartesianChartProps, \"data\">",
+        "type": "Omit<CartesianChartProps<unknown>, \"data\">",
         "description": "Props for the line chart component.",
         "required": false
       },
@@ -885,7 +885,7 @@
         "required": false
       },
       "chartProps": {
-        "type": "Omit<CartesianChartProps, \"data\">",
+        "type": "Omit<CartesianChartProps<unknown>, \"data\">",
         "description": "Props for the line chart component.",
         "required": false
       },
@@ -2752,7 +2752,7 @@
         "required": false
       },
       "chartProps": {
-        "type": "Omit<CartesianChartProps, \"data\">",
+        "type": "Omit<CartesianChartProps<unknown>, \"data\">",
         "description": "Props for the line chart component.",
         "required": false
       },
@@ -3309,7 +3309,7 @@
         "required": false
       },
       "chartProps": {
-        "type": "Omit<PolarChartProps, \"data\">",
+        "type": "Omit<PolarChartProps<unknown>, \"data\">",
         "description": "Props for the polar chart component.",
         "required": false
       },
@@ -3882,7 +3882,7 @@
         "required": false
       },
       "chartProps": {
-        "type": "Omit<CartesianChartProps, \"data\">",
+        "type": "Omit<CartesianChartProps<unknown>, \"data\">",
         "description": "Props for the line chart component.",
         "required": false
       },
@@ -4439,7 +4439,7 @@
         "required": false
       },
       "chartProps": {
-        "type": "Omit<PolarChartProps, \"data\">",
+        "type": "Omit<PolarChartProps<unknown>, \"data\">",
         "description": "Props for the polar chart component.",
         "required": false
       },
@@ -6040,7 +6040,7 @@
         "required": false
       },
       "chartProps": {
-        "type": "Omit<PolarChartProps, \"data\">",
+        "type": "Omit<PolarChartProps<unknown>, \"data\">",
         "description": "Props for the polar chart component.",
         "required": false
       },

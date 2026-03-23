@@ -120,7 +120,7 @@
     "react-hook-form": "catalog:",
     "react-icons": "catalog:",
     "use-mask-input": "^3.7.4",
-    "vitest-browser-react": "2.0.5"
+    "vitest-browser-react": "2.1.0"
   },
   "peerDependencies": {
     "@emotion/react": ">=11",

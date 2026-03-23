@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { Button } from "../button"
+import { IconButton } from "../button"
 import { CheckIcon } from "../icon"
 import { VisuallyHidden } from "./visually-hidden"
 
@@ -14,9 +14,9 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <Button>
+    <IconButton>
       <VisuallyHidden>Checkmark</VisuallyHidden>
       <CheckIcon fontSize="2xl" />
-    </Button>
+    </IconButton>
   )
 }

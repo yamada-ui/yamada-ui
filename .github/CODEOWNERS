@@ -1,7 +1,8 @@
-* @yamada-ui/yamada-ui
+* @yamada-ui/prime @yamada-ui/standard
 
-.github/ @hirotomoyamada
-CHANGELOG.md @hirotomoyamada
-CODE_OF_CONDUCT.md @hirotomoyamada
+*.md @hirotomoyamada
+.changeset/*.md @yamada-ui/prime @yamada-ui/standard
 package.json @hirotomoyamada
 LICENSE @hirotomoyamada
+.github/ @hirotomoyamada
+.gitignore @hirotomoyamada

@@ -14,7 +14,7 @@ describe("useSafeLayoutEffect", () => {
     vi.resetModules()
 
     const originalDocument = globalThis.document
-    // @ts-ignore
+    // @ts-expect-error
     delete globalThis.document
 
     try {

@@ -1,56 +1,60 @@
 import type { FC } from "react"
 import type { ThemeConfig } from "../../core"
-import { page, render, renderHook } from "#test/browser"
+import { render, renderHook, screen, waitFor } from "#test"
+import MatchMediaMock from "vitest-matchmedia-mock"
 import { styled } from "../../core"
 import { UIProvider } from "../../providers/ui-provider"
 import { config as defaultConfig } from "../../theme"
 import { useBreakpoint } from "./use-breakpoint"
 
 describe("useBreakpoint", () => {
-  afterEach(async () => {
-    await page.viewport(1280, 720)
+  let matchMediaMock: MatchMediaMock
+
+  beforeAll(() => {
+    matchMediaMock = new MatchMediaMock()
   })
 
-  test("Returns the correct breakpoint based on the current screen width", async () => {
-    await page.viewport(600, 800)
-    const { result } = await renderHook(() => useBreakpoint())
+  afterEach(() => {
+    matchMediaMock.clear()
+  })
+
+  afterAll(() => {
+    matchMediaMock.destroy()
+  })
+
+  test("Returns the correct breakpoint based on the current screen width", () => {
+    matchMediaMock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
+    const { result } = renderHook(() => useBreakpoint())
     expect(result.current).toBe("md")
   })
 
-  test("returns base when viewport is wider than largest breakpoint", async () => {
-    await page.viewport(1600, 800)
-    const { result } = await renderHook(() => useBreakpoint())
+  test("returns base when no queries match", () => {
+    const { result } = renderHook(() => useBreakpoint())
     expect(result.current).toBe("base")
   })
 
-  test(
-    "updates breakpoint when viewport changes",
-    { timeout: 60000 },
-    async () => {
-      await page.viewport(1600, 800)
+  test("updates breakpoint when media query changes", async () => {
+    const Component: FC = () => {
+      const breakpoint = useBreakpoint()
 
-      const Component: FC = () => {
-        const breakpoint = useBreakpoint()
+      return <styled.p data-testid="bp">{breakpoint}</styled.p>
+    }
 
-        return <styled.p data-testid="bp">{breakpoint}</styled.p>
-      }
+    render(<Component />)
 
-      await render(<Component />)
+    expect(screen.getByTestId("bp").textContent).toBe("base")
 
-      await expect.element(page.getByTestId("bp")).toHaveTextContent("base")
+    matchMediaMock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
 
-      await page.viewport(600, 800)
-
-      await expect
-        .element(page.getByTestId("bp"), { timeout: 30000 })
-        .toHaveTextContent("md")
-    },
-  )
+    await waitFor(() => {
+      expect(screen.getByTestId("bp").textContent).toBe("md")
+    })
+  })
 
   test("renders correctly with direction up", async () => {
-    const defaultResizeObserver = window.ResizeObserver
+    const defaultResizeObserver = global.ResizeObserver
 
-    window.ResizeObserver = class ResizeObserver {
+    global.ResizeObserver = class ResizeObserver {
       constructor(cb: ResizeObserverCallback) {
         ;(() => {
           cb(
@@ -87,22 +91,24 @@ describe("useBreakpoint", () => {
       return <styled.p data-testid="bp">{breakpoint}</styled.p>
     }
 
-    await render(
+    render(
       <UIProvider config={config}>
         <Component />
       </UIProvider>,
       { withProvider: false },
     )
 
-    await expect.element(page.getByTestId("bp")).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByTestId("bp")).toBeInTheDocument()
+    })
 
-    window.ResizeObserver = defaultResizeObserver
+    global.ResizeObserver = defaultResizeObserver
   })
 
   test("renders correctly and updates breakpoint", async () => {
-    const defaultResizeObserver = window.ResizeObserver
+    const defaultResizeObserver = global.ResizeObserver
 
-    window.ResizeObserver = class ResizeObserver {
+    global.ResizeObserver = class ResizeObserver {
       constructor(cb: ResizeObserverCallback) {
         ;(() => {
           cb(
@@ -138,24 +144,26 @@ describe("useBreakpoint", () => {
       return <styled.p>{breakpoint}</styled.p>
     }
 
-    await render(
+    render(
       <UIProvider config={config}>
         <Component />
       </UIProvider>,
       { withProvider: false },
     )
 
-    await expect.element(page.getByText(/xl/)).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText(/xl/)).toBeInTheDocument()
+    })
 
-    window.ResizeObserver = defaultResizeObserver
+    global.ResizeObserver = defaultResizeObserver
   })
 
   test("observes container and calls disconnect on cleanup", async () => {
-    const defaultResizeObserver = window.ResizeObserver
+    const defaultResizeObserver = global.ResizeObserver
     const disconnectMock = vi.fn()
     const observeMock = vi.fn()
 
-    window.ResizeObserver = class MockResizeObserver {
+    global.ResizeObserver = class MockResizeObserver {
       disconnect = disconnectMock
       observe = observeMock
       unobserve = vi.fn()
@@ -191,27 +199,29 @@ describe("useBreakpoint", () => {
       return <styled.p data-testid="bp">{breakpoint}</styled.p>
     }
 
-    const { unmount } = await render(
+    const { unmount } = render(
       <UIProvider config={config}>
         <Component />
       </UIProvider>,
       { withProvider: false },
     )
 
-    await expect.poll(() => observeMock).toHaveBeenCalledWith(container)
+    await waitFor(() => {
+      expect(observeMock).toHaveBeenCalledWith(container)
+    })
 
     unmount()
 
     expect(disconnectMock).toHaveBeenCalledWith()
 
-    window.ResizeObserver = defaultResizeObserver
+    global.ResizeObserver = defaultResizeObserver
   })
 
-  test("ResizeObserver callback skips when entry is empty", async () => {
-    const defaultResizeObserver = window.ResizeObserver
+  test("ResizeObserver callback skips when entry is empty", () => {
+    const defaultResizeObserver = global.ResizeObserver
     let capturedCb: ResizeObserverCallback | undefined
 
-    window.ResizeObserver = class MockResizeObserver {
+    global.ResizeObserver = class MockResizeObserver {
       observe = vi.fn()
       unobserve = vi.fn()
       disconnect = vi.fn()
@@ -236,7 +246,7 @@ describe("useBreakpoint", () => {
       return <styled.p data-testid="bp">{breakpoint}</styled.p>
     }
 
-    await render(
+    render(
       <UIProvider config={config}>
         <Component />
       </UIProvider>,
@@ -250,6 +260,6 @@ describe("useBreakpoint", () => {
     expect(rafSpy).not.toHaveBeenCalled()
 
     rafSpy.mockRestore()
-    window.ResizeObserver = defaultResizeObserver
+    global.ResizeObserver = defaultResizeObserver
   })
 })

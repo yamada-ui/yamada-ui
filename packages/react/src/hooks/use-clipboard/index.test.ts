@@ -35,6 +35,14 @@ describe("useClipboard", () => {
     })
   })
 
+  beforeEach(() => {
+    vi.useFakeTimers()
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
   afterAll(() => {
     Object.defineProperty(window, "clipboardData", {
       value: defaultClipboardData,
@@ -69,7 +77,9 @@ describe("useClipboard", () => {
     })
     expect(result.current.copied).toBeTruthy()
 
-    await expect.poll(() => result.current.copied).toBeFalsy()
+    await act(() => vi.advanceTimersByTime(100))
+
+    expect(result.current.copied).toBeFalsy()
   })
 
   test("copied returns to false after the specified timeout", async () => {
@@ -81,7 +91,9 @@ describe("useClipboard", () => {
     })
     expect(result.current.copied).toBeTruthy()
 
-    await expect.poll(() => result.current.copied).toBeFalsy()
+    await act(() => vi.advanceTimersByTime(100))
+
+    expect(result.current.copied).toBeFalsy()
   })
 
   test("copied returns to false after the specified timeout with number", async () => {
@@ -91,7 +103,9 @@ describe("useClipboard", () => {
     })
     expect(result.current.copied).toBeTruthy()
 
-    await expect.poll(() => result.current.copied).toBeFalsy()
+    await act(() => vi.advanceTimersByTime(100))
+
+    expect(result.current.copied).toBeFalsy()
   })
 
   test("value is updated when new value is copied", async () => {

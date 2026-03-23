@@ -54,7 +54,7 @@ export async function a11y(
   const container = isValidElement(ui) ? render(ui, options).container : ui
   const results = await axe(container as HTMLElement, axeOptions)
 
-  // @ts-ignore
+  // @ts-expect-error
   expect(results).toHaveNoViolations()
 }
 

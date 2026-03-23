@@ -209,7 +209,7 @@ const IconButton = memo(function IconButton({ data, onOpen }: IconButtonProps) {
         aspectRatio={1}
         bg={{
           base: "bg.panel",
-          _hover: ["bg.subtle", "bg.muted"],
+          _hover: "bg.subtle",
         }}
         icon={<Icon fontSize="2xl" />}
         onClick={() => onOpen(data)}

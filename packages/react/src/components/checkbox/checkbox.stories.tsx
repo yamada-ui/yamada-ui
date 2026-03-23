@@ -6,7 +6,7 @@ import { PropsTable } from "#storybook"
 import { useMemo, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { Checkbox, CheckboxGroup, useCheckboxGroup } from "."
-import { COLOR_SCHEMES, toTitleCase, useIds } from "../../utils"
+import { COLOR_SCHEMES, cx, toTitleCase, useIds } from "../../utils"
 import { Box } from "../box"
 import { Button } from "../button"
 import { Field } from "../field"
@@ -133,9 +133,9 @@ export const Indeterminate: Story = () => {
   return (
     <VStack gap="sm">
       <Checkbox
+        aria-controls={cx(id0, id1, id2)}
         checked={allChecked}
         indeterminate={indeterminate}
-        inputProps={{ "aria-controls": `${id0} ${id1} ${id2}` }}
         onChange={(ev) =>
           setValues([ev.target.checked, ev.target.checked, ev.target.checked])
         }

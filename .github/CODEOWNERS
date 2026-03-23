@@ -1,7 +1,7 @@
 * @yamada-ui/prime @yamada-ui/standard
 
 *.md @hirotomoyamada
-!.changeset/*.md @yamada-ui/prime @yamada-ui/standard
+.changeset/*.md @yamada-ui/prime @yamada-ui/standard
 package.json @hirotomoyamada
 LICENSE @hirotomoyamada
 .github/ @hirotomoyamada

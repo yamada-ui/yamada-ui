@@ -2,7 +2,7 @@
   "name": "yamada-ui",
   "type": "module",
   "version": "2.0.0",
-  "private": true,
+  "private": false,
   "engines": {
     "node": ">=24.14"
   },

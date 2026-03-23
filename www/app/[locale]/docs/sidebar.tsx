@@ -1,18 +1,42 @@
 "use client"
 
 import type { NextLinkButtonProps } from "@/components"
-import { Box, handlerAll, Text } from "@yamada-ui/react"
+import { Box, handlerAll, Text, useSafeLayoutEffect } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
-import { useMemo } from "react"
+import { useMemo, useRef } from "react"
+import scrollIntoView from "scroll-into-view-if-needed"
 import { NextLinkButton, Status } from "@/components"
 import { getDocMap } from "@/data"
 import { useLocale, usePathname } from "@/i18n"
 
 export function Sidebar() {
+  const ref = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
   const { locale } = useLocale()
   const t = useTranslations("docs")
   const changelog = pathname.startsWith("/docs/changelog")
+
+  useSafeLayoutEffect(() => {
+    const sidebar = ref.current
+
+    if (!sidebar) return
+
+    const item = sidebar.querySelector<HTMLElement>('[aria-current="page"]')
+
+    if (!item) return
+
+    const { bottom: sidebarBottom, top: sidebarTop } =
+      sidebar.getBoundingClientRect()
+    const { bottom: itemBottom, top: itemTop } = item.getBoundingClientRect()
+
+    if (itemTop >= sidebarTop && itemBottom <= sidebarBottom) return
+
+    scrollIntoView(item, {
+      block: "start",
+      boundary: sidebar,
+      scrollMode: "if-needed",
+    })
+  }, [pathname])
 
   const items = useMemo(() => {
     const docMap = getDocMap(locale)
@@ -31,6 +55,7 @@ export function Sidebar() {
 
   return (
     <Box
+      ref={ref}
       as="aside"
       display={{ base: "block", md: "none" }}
       gridColumn="1 / 2"

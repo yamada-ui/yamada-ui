@@ -100,7 +100,7 @@ export { ModalPropsContext, useModalPropsContext }
 /**
  * `Modal` is a component that is displayed over the main content to focus the user's attention solely on the information.
  *
- * @see https://yamada-ui.com/docs/components/overlay/modal
+ * @see https://yamada-ui.com/docs/components/modal
  */
 export const ModalRoot = withProvider<"div", ModalRootProps>(
   ({
@@ -141,7 +141,6 @@ export const ModalRoot = withProvider<"div", ModalRootProps>(
     const customOpenTrigger = trigger ? (
       <ModalOpenTrigger>{trigger}</ModalOpenTrigger>
     ) : null
-
     const context = useMemo(
       () => ({
         animationScheme,

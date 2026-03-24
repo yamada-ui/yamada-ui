@@ -769,6 +769,53 @@ describe("useDescendant", () => {
     ).toBeUndefined()
   })
 
+  test("updates descendant props on re-render", () => {
+    interface Meta {
+      expanded?: boolean
+    }
+    const { DescendantsContext, useDescendant, useDescendants } = renderHook(
+      () => createDescendants<HTMLElement, Meta>(),
+    ).result.current
+
+    const { result } = renderHook(() => useDescendants())
+    const descendants = result.current
+
+    const Wrapper: FC<PropsWithChildren> = ({ children }) => (
+      <DescendantsContext value={descendants}>{children}</DescendantsContext>
+    )
+
+    const Item: FC<DescendantProps<HTMLElement, Meta>> = ({ ...props }) => {
+      const { register } = useDescendant(props)
+
+      return <div ref={register}>Item</div>
+    }
+
+    const { rerender } = render(
+      <Wrapper>
+        <Item expanded={false} />
+        <Item expanded={false} />
+      </Wrapper>,
+    )
+
+    expect(descendants.values()[0]!.expanded).toBeFalsy()
+    expect(descendants.values()[1]!.expanded).toBeFalsy()
+
+    const nodeBefore = descendants.values()[0]!.node
+    const indexBefore = descendants.values()[0]!.index
+
+    rerender(
+      <Wrapper>
+        <Item expanded />
+        <Item expanded={false} />
+      </Wrapper>,
+    )
+
+    expect(descendants.values()[0]!.expanded).toBeTruthy()
+    expect(descendants.values()[1]!.expanded).toBeFalsy()
+    expect(descendants.values()[0]!.node).toBe(nodeBefore)
+    expect(descendants.values()[0]!.index).toBe(indexBefore)
+  })
+
   test("sortNodes warns and returns 0 for disconnected nodes", () => {
     const { descendants, useDescendant, Wrapper } = setup()
 

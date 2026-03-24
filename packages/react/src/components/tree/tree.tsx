@@ -628,14 +628,14 @@ const TreeCheckbox = withContext<"input", TreeCheckboxProps>(
 interface TreeStartElementProps extends HTMLStyledProps {}
 
 const TreeStartElement = withContext<"div", TreeStartElementProps>("div", {
-  name: "TreeStartElement",
+  name: "StartElement",
   slot: ["element", "start"],
 })()
 
 interface TreeEndElementProps extends HTMLStyledProps {}
 
 const TreeEndElement = withContext<"div", TreeEndElementProps>("div", {
-  name: "TreeEndElement",
+  name: "EndElement",
   slot: ["element", "end"],
 })()
 

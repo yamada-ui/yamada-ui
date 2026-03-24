@@ -6,26 +6,40 @@
     },
     "resembles": [
       "native-accordion",
+      "collapse",
       "fade-scale",
       "fade",
-      "collapse",
-      "slide",
       "slide-fade",
+      "slide",
       "carousel",
       "tree"
+    ]
+  },
+  "action-bar": {
+    "dependencies": {
+      "components": ["motion", "popover", "portal"],
+      "hooks": ["use-value", "use-disclosure"]
+    },
+    "resembles": [
+      "native-popover",
+      "popover",
+      "tooltip",
+      "drawer",
+      "modal",
+      "menu"
     ]
   },
   "airy": {
     "dependencies": { "components": ["motion"], "hooks": [] },
     "resembles": [
+      "flip",
       "motion",
       "ripple",
-      "flip",
       "rotate",
+      "collapse",
       "fade-scale",
       "fade",
-      "collapse",
-      "slide"
+      "skeleton"
     ]
   },
   "alert": {
@@ -62,13 +76,13 @@
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
       "bleed",
-      "center",
       "box",
+      "center",
       "container",
+      "float",
       "flex",
-      "group",
       "grid",
-      "float"
+      "group"
     ]
   },
   "autocomplete": {
@@ -108,13 +122,13 @@
   "bleed": {
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
-      "center",
       "box",
+      "center",
       "container",
-      "flex",
-      "group",
-      "grid",
       "float",
+      "flex",
+      "grid",
+      "group",
       "h-stack"
     ]
   },
@@ -123,8 +137,8 @@
     "resembles": [
       "code",
       "em",
-      "highlight",
       "heading",
+      "highlight",
       "kbd",
       "mark",
       "text",
@@ -137,10 +151,10 @@
       "bleed",
       "center",
       "container",
-      "flex",
-      "group",
-      "grid",
       "float",
+      "flex",
+      "grid",
+      "group",
       "h-stack"
     ]
   },
@@ -151,10 +165,10 @@
       "tabs",
       "data-list",
       "infinite-scroll-area",
-      "native-accordion",
       "list",
-      "pagination",
-      "link-box"
+      "link-box",
+      "link",
+      "native-accordion"
     ]
   },
   "button": {
@@ -212,9 +226,9 @@
       "accordion",
       "scroll-area",
       "airy",
+      "flip",
       "motion",
       "ripple",
-      "flip",
       "rotate"
     ]
   },
@@ -225,10 +239,10 @@
       "bleed",
       "box",
       "container",
-      "flex",
-      "group",
-      "grid",
       "float",
+      "flex",
+      "grid",
+      "group",
       "h-stack"
     ]
   },
@@ -282,7 +296,7 @@
   },
   "client-only": {
     "dependencies": { "components": ["show"], "hooks": [] },
-    "resembles": ["show", "format", "portal", "slot", "for"]
+    "resembles": ["show", "for", "format", "portal", "slot"]
   },
   "close-button": {
     "dependencies": { "components": ["button", "icon"], "hooks": [] },
@@ -294,8 +308,8 @@
     "resembles": [
       "blockquote",
       "em",
-      "highlight",
       "heading",
+      "highlight",
       "kbd",
       "mark",
       "text",
@@ -308,8 +322,8 @@
     "resembles": [
       "fade-scale",
       "fade",
-      "slide",
       "slide-fade",
+      "slide",
       "accordion",
       "drawer",
       "modal",
@@ -377,12 +391,12 @@
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
       "bleed",
-      "center",
       "box",
-      "flex",
-      "group",
-      "grid",
+      "center",
       "float",
+      "flex",
+      "grid",
+      "group",
       "h-stack"
     ]
   },
@@ -390,8 +404,8 @@
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
       "list",
-      "timeline",
       "tree",
+      "timeline",
       "native-table",
       "stat",
       "table",
@@ -436,10 +450,10 @@
       "popover",
       "tooltip",
       "native-popover",
+      "collapse",
       "fade-scale",
       "fade",
-      "collapse",
-      "slide"
+      "slide-fade"
     ]
   },
   "dropzone": {
@@ -476,8 +490,8 @@
     "resembles": [
       "blockquote",
       "code",
-      "highlight",
       "heading",
+      "highlight",
       "kbd",
       "mark",
       "text",
@@ -500,10 +514,10 @@
     "dependencies": { "components": ["motion"], "hooks": [] },
     "dependents": { "components": ["popover"], "hooks": [] },
     "resembles": [
-      "fade",
       "collapse",
-      "slide",
+      "fade",
       "slide-fade",
+      "slide",
       "accordion",
       "drawer",
       "modal",
@@ -517,10 +531,10 @@
       "hooks": []
     },
     "resembles": [
-      "fade-scale",
       "collapse",
-      "slide",
+      "fade-scale",
       "slide-fade",
+      "slide",
       "accordion",
       "drawer",
       "modal",
@@ -562,11 +576,11 @@
       "fieldset",
       "form",
       "bleed",
-      "center",
       "box",
+      "center",
       "container",
-      "flex",
-      "group"
+      "float",
+      "flex"
     ]
   },
   "fieldset": {
@@ -576,11 +590,11 @@
       "field",
       "form",
       "bleed",
-      "center",
       "box",
+      "center",
       "container",
-      "flex",
-      "group"
+      "float",
+      "flex"
     ]
   },
   "file-button": {
@@ -609,12 +623,12 @@
     "dependents": { "components": ["group", "wrap"], "hooks": [] },
     "resembles": [
       "bleed",
-      "center",
       "box",
+      "center",
       "container",
-      "group",
-      "grid",
       "float",
+      "grid",
+      "group",
       "h-stack"
     ]
   },
@@ -625,10 +639,10 @@
       "motion",
       "ripple",
       "rotate",
+      "collapse",
       "fade-scale",
       "fade",
-      "collapse",
-      "slide"
+      "skeleton"
     ]
   },
   "float": {
@@ -636,12 +650,12 @@
     "dependents": { "components": ["indicator"], "hooks": [] },
     "resembles": [
       "bleed",
-      "center",
       "box",
+      "center",
       "container",
       "flex",
-      "group",
       "grid",
+      "group",
       "h-stack"
     ]
   },
@@ -652,7 +666,7 @@
   },
   "for": {
     "dependencies": { "components": [], "hooks": [] },
-    "resembles": ["format", "portal", "slot", "client-only", "show"]
+    "resembles": ["format", "portal", "slot", "show", "client-only"]
   },
   "form": {
     "dependencies": { "components": ["button"], "hooks": [] },
@@ -661,17 +675,17 @@
       "field",
       "fieldset",
       "bleed",
-      "center",
       "box",
+      "center",
       "container",
-      "flex",
-      "group"
+      "float",
+      "flex"
     ]
   },
   "format": {
     "dependencies": { "components": [], "hooks": [] },
     "dependents": { "components": ["calendar", "date-picker"], "hooks": [] },
-    "resembles": ["portal", "slot", "for", "client-only", "show"]
+    "resembles": ["for", "portal", "slot", "show", "client-only"]
   },
   "grid": {
     "dependencies": { "components": [], "hooks": [] },
@@ -681,12 +695,12 @@
     },
     "resembles": [
       "bleed",
-      "center",
       "box",
+      "center",
       "container",
+      "float",
       "flex",
       "group",
-      "float",
       "h-stack"
     ]
   },
@@ -714,12 +728,12 @@
     },
     "resembles": [
       "bleed",
-      "center",
       "box",
+      "center",
       "container",
+      "float",
       "flex",
       "grid",
-      "float",
       "h-stack"
     ]
   },
@@ -824,8 +838,8 @@
       "scroll-area",
       "breadcrumb",
       "data-list",
-      "native-accordion",
       "list",
+      "native-accordion",
       "reorder"
     ]
   },
@@ -871,8 +885,8 @@
       "blockquote",
       "code",
       "em",
-      "highlight",
       "heading",
+      "highlight",
       "mark",
       "text",
       "link"
@@ -882,13 +896,13 @@
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
       "bleed",
-      "center",
       "box",
+      "center",
       "container",
+      "float",
       "flex",
-      "group",
       "grid",
-      "float"
+      "group"
     ]
   },
   "link": {
@@ -897,8 +911,8 @@
       "blockquote",
       "code",
       "em",
-      "highlight",
       "heading",
+      "highlight",
       "kbd",
       "mark",
       "text"
@@ -908,8 +922,8 @@
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
       "data-list",
-      "timeline",
       "tree",
+      "timeline",
       "native-table",
       "stat",
       "table",
@@ -935,8 +949,8 @@
       "blockquote",
       "code",
       "em",
-      "highlight",
       "heading",
+      "highlight",
       "kbd",
       "text",
       "link"
@@ -952,11 +966,11 @@
       "select",
       "autocomplete",
       "native-popover",
+      "action-bar",
       "popover",
       "tooltip",
       "drawer",
-      "modal",
-      "tabs"
+      "modal"
     ]
   },
   "modal": {
@@ -978,10 +992,10 @@
       "popover",
       "tooltip",
       "native-popover",
+      "collapse",
       "fade-scale",
       "fade",
-      "collapse",
-      "slide"
+      "slide-fade"
     ]
   },
   "motion": {
@@ -1011,13 +1025,13 @@
     },
     "resembles": [
       "airy",
-      "ripple",
       "flip",
+      "ripple",
       "rotate",
+      "collapse",
       "fade-scale",
       "fade",
-      "collapse",
-      "slide"
+      "skeleton"
     ]
   },
   "native-accordion": {
@@ -1037,7 +1051,15 @@
   "native-popover": {
     "dependencies": { "components": [], "hooks": [] },
     "dependents": { "components": ["popover"], "hooks": [] },
-    "resembles": ["popover", "tooltip", "drawer", "menu", "modal", "indicator"]
+    "resembles": [
+      "action-bar",
+      "popover",
+      "tooltip",
+      "drawer",
+      "modal",
+      "menu",
+      "indicator"
+    ]
   },
   "native-select": {
     "dependencies": {
@@ -1102,11 +1124,11 @@
       "tabs",
       "breadcrumb",
       "checkbox",
-      "native-select",
       "link-box",
+      "link",
+      "native-select",
       "radio",
-      "rating",
-      "link"
+      "rating"
     ]
   },
   "password-input": {
@@ -1168,7 +1190,14 @@
       ],
       "hooks": []
     },
-    "resembles": ["tooltip", "drawer", "modal", "native-popover", "menu"]
+    "resembles": [
+      "tooltip",
+      "drawer",
+      "modal",
+      "native-popover",
+      "action-bar",
+      "menu"
+    ]
   },
   "portal": {
     "dependencies": { "components": [], "hooks": [] },
@@ -1186,7 +1215,7 @@
       ],
       "hooks": []
     },
-    "resembles": ["format", "slot", "for", "client-only", "show"]
+    "resembles": ["for", "format", "slot", "show", "client-only"]
   },
   "progress": {
     "dependencies": { "components": [], "hooks": [] },
@@ -1263,8 +1292,8 @@
       "breadcrumb",
       "data-list",
       "infinite-scroll-area",
-      "native-accordion",
       "list",
+      "native-accordion",
       "resizable"
     ]
   },
@@ -1272,13 +1301,13 @@
     "dependencies": { "components": [], "hooks": ["use-value"] },
     "resembles": [
       "bleed",
-      "center",
       "box",
+      "center",
       "container",
+      "float",
       "flex",
-      "group",
       "grid",
-      "float"
+      "group"
     ]
   },
   "ripple": {
@@ -1286,26 +1315,26 @@
     "dependents": { "components": ["button"], "hooks": [] },
     "resembles": [
       "airy",
-      "motion",
       "flip",
+      "motion",
       "rotate",
+      "collapse",
       "fade-scale",
       "fade",
-      "collapse",
-      "slide"
+      "skeleton"
     ]
   },
   "rotate": {
     "dependencies": { "components": ["motion"], "hooks": [] },
     "resembles": [
       "airy",
+      "flip",
       "motion",
       "ripple",
-      "flip",
+      "collapse",
       "fade-scale",
       "fade",
-      "collapse",
-      "slide"
+      "skeleton"
     ]
   },
   "saturation-slider": {
@@ -1371,31 +1400,31 @@
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
       "bleed",
-      "center",
       "box",
+      "center",
       "container",
+      "float",
       "flex",
-      "group",
       "grid",
-      "float"
+      "group"
     ]
   },
   "show": {
     "dependencies": { "components": [], "hooks": [] },
     "dependents": { "components": ["client-only"], "hooks": [] },
-    "resembles": ["client-only", "format", "portal", "slot", "for"]
+    "resembles": ["client-only", "for", "format", "portal", "slot"]
   },
   "simple-grid": {
     "dependencies": { "components": ["grid"], "hooks": [] },
     "resembles": [
       "bleed",
-      "center",
       "box",
+      "center",
       "container",
+      "float",
       "flex",
-      "group",
       "grid",
-      "float"
+      "group"
     ]
   },
   "skeleton": {
@@ -1403,11 +1432,11 @@
     "resembles": [
       "empty-state",
       "airy",
+      "flip",
       "motion",
       "ripple",
-      "loading",
-      "flip",
       "rotate",
+      "loading",
       "alert"
     ]
   },
@@ -1415,9 +1444,9 @@
     "dependencies": { "components": ["motion"], "hooks": [] },
     "dependents": { "components": ["popover"], "hooks": [] },
     "resembles": [
+      "collapse",
       "fade-scale",
       "fade",
-      "collapse",
       "slide",
       "accordion",
       "drawer",
@@ -1429,9 +1458,9 @@
     "dependencies": { "components": ["motion"], "hooks": ["use-value"] },
     "dependents": { "components": ["drawer"], "hooks": [] },
     "resembles": [
+      "collapse",
       "fade-scale",
       "fade",
-      "collapse",
       "slide-fade",
       "accordion",
       "drawer",
@@ -1458,7 +1487,7 @@
   },
   "slot": {
     "dependencies": { "components": [], "hooks": [] },
-    "resembles": ["format", "portal", "for", "client-only", "show"]
+    "resembles": ["for", "format", "portal", "show", "client-only"]
   },
   "snacks": {
     "dependencies": {
@@ -1479,13 +1508,13 @@
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
       "bleed",
-      "center",
       "box",
+      "center",
       "container",
+      "float",
       "flex",
-      "group",
       "grid",
-      "float"
+      "group"
     ]
   },
   "stat": {
@@ -1587,8 +1616,8 @@
       "blockquote",
       "code",
       "em",
-      "highlight",
       "heading",
+      "highlight",
       "kbd",
       "mark",
       "link"
@@ -1648,7 +1677,14 @@
       "hooks": ["use-disclosure", "use-outside-click"]
     },
     "dependents": { "components": ["tip"], "hooks": [] },
-    "resembles": ["popover", "drawer", "modal", "native-popover", "menu"]
+    "resembles": [
+      "popover",
+      "drawer",
+      "modal",
+      "native-popover",
+      "action-bar",
+      "menu"
+    ]
   },
   "tree": {
     "dependencies": {
@@ -1657,8 +1693,8 @@
     },
     "resembles": [
       "data-list",
-      "native-accordion",
       "list",
+      "native-accordion",
       "accordion",
       "timeline",
       "tabs",
@@ -1674,13 +1710,13 @@
     "dependencies": { "components": ["flex"], "hooks": [] },
     "resembles": [
       "bleed",
-      "center",
       "box",
+      "center",
       "container",
+      "float",
       "flex",
-      "group",
       "grid",
-      "float"
+      "group"
     ]
   },
   "use-animation": { "dependencies": { "components": [], "hooks": [] } },

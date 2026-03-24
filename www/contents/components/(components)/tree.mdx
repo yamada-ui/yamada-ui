@@ -1287,6 +1287,12 @@ return (
 
 `Tree` follows the [WAI-ARIA - TreeView Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/treeview/) for accessibility.
 
+When `aria-label` is set, it will be read aloud by screen readers.
+
+```tsx
+<Tree.Root aria-label="File tree" />
+```
+
 ### Keyboard Navigation
 
 | Key                               | Description                                                                              | State             |

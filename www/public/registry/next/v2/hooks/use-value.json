@@ -8,6 +8,7 @@
   },
   "dependents": {
     "components": [
+      "action-bar",
       "alpha-slider",
       "drawer",
       "group",

@@ -20,6 +20,7 @@
   },
   "dependents": {
     "components": [
+      "action-bar",
       "autocomplete",
       "color-picker",
       "date-picker",

@@ -1,6 +1,10 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
+  actionBar: {
+    "Close action bar": "Zavřít panel akcí",
+    "Open action bar": "Otevřít panel akcí",
+  },
   autocomplete: {
     "Clear value": "Vymazat hodnotu",
     "No results found": "Nebyly nalezeny žádné výsledky",

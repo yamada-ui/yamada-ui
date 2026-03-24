@@ -715,13 +715,13 @@ export const useTreeItem = ({
 
   const onTriggerClick = useCallback(
     (ev: MouseEvent<HTMLDivElement>) => {
-      if (disabled || !group || !value) return
+      if (disabled || !group || !value || groupLoading) return
 
       if (!ev.ctrlKey && !ev.metaKey && !ev.shiftKey) onGroupToggle()
 
       onSelect(ev)
     },
-    [disabled, group, value, onSelect, onGroupToggle],
+    [disabled, group, value, groupLoading, onGroupToggle, onSelect],
   )
 
   const onCheckboxChange = useCallback(

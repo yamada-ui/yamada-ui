@@ -1,4 +1,5 @@
 export * from "./tree.style"
+export * as Tree from "./namespace"
 export {
   TreeItem,
   TreePropsContext,
@@ -6,5 +7,4 @@ export {
   useTreePropsContext,
 } from "./tree"
 export type { TreeItemProps, TreeRootProps } from "./tree"
-export * as Tree from "./tree.namespace"
 export * from "./use-tree"

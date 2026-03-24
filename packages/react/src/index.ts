@@ -3,6 +3,7 @@ export * from "./theme"
 export * from "./utils"
 
 export * from "./components/accordion"
+export * from "./components/action-bar"
 export * from "./components/airy"
 export * from "./components/alert"
 export * from "./components/alpha-slider"

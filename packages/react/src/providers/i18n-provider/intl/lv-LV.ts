@@ -1,6 +1,10 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
+  actionBar: {
+    "Close action bar": "Aizvērt darbību joslu",
+    "Open action bar": "Atvērt darbību joslu",
+  },
   autocomplete: {
     "Clear value": "Notīrīt vērtību",
     "No results found": "Rezultāti netika atrasti",

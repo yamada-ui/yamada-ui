@@ -1,6 +1,10 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
+  actionBar: {
+    "Close action bar": "Luk handlingslinjen",
+    "Open action bar": "Åbn handlingslinjen",
+  },
   autocomplete: {
     "Clear value": "Ryd værdi",
     "No results found": "Ingen resultater fundet",

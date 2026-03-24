@@ -1,6 +1,10 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
+  actionBar: {
+    "Close action bar": "アクションバーを閉じる",
+    "Open action bar": "アクションバーを開く",
+  },
   autocomplete: {
     "Clear value": "値を消去する",
     "No results found": "結果が見つかりません",

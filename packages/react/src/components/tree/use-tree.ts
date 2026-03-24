@@ -601,8 +601,8 @@ export const useTreeItem = ({
 
             onActiveDescendant(descendant)
 
-            if (ev.shiftKey && multiple)
-              onSelect({ ctrlKey: true, value: descendant?.value })
+            if (descendant && ev.shiftKey && multiple)
+              onSelect({ ctrlKey: true, value: descendant.value })
           }
         },
         ArrowLeft: () => {
@@ -647,8 +647,8 @@ export const useTreeItem = ({
 
             onActiveDescendant(descendant)
 
-            if (ev.shiftKey && multiple)
-              onSelect({ ctrlKey: true, value: descendant?.value })
+            if (descendant && ev.shiftKey && multiple)
+              onSelect({ ctrlKey: true, value: descendant.value })
           }
         },
         End: () => {

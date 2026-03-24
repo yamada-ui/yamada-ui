@@ -2,14 +2,14 @@
 
 import type { Component } from "../../../core"
 import type { IconProps } from "../icon"
-import { Gitlab as OriginalGitlabIcon } from "lucide-react"
+import { SportShoe as OriginalSportShoeIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
- * `GitlabIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ * `SportShoeIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const GitlabIcon = component(Icon)({
-  as: OriginalGitlabIcon,
+export const SportShoeIcon = component(Icon)({
+  as: OriginalSportShoeIcon,
 }) as Component<"svg", IconProps>

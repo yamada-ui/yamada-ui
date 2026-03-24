@@ -5,12 +5,12 @@
       "hooks": ["use-descendants"]
     },
     "resembles": [
-      "native-accordion",
       "collapse",
-      "fade-scale",
       "fade",
-      "slide-fade",
+      "fade-scale",
+      "native-accordion",
       "slide",
+      "slide-fade",
       "carousel",
       "drawer"
     ]
@@ -23,8 +23,8 @@
       "ripple",
       "rotate",
       "collapse",
-      "fade-scale",
       "fade",
+      "fade-scale",
       "skeleton"
     ]
   },
@@ -40,8 +40,8 @@
       "empty-state",
       "circle-progress",
       "progress",
-      "status",
-      "skeleton"
+      "skeleton",
+      "status"
     ]
   },
   "alpha-slider": {
@@ -67,8 +67,8 @@
       "container",
       "flex",
       "float",
-      "group",
-      "grid"
+      "grid",
+      "group"
     ]
   },
   "autocomplete": {
@@ -99,10 +99,10 @@
       "native-table",
       "stat",
       "table",
+      "area-chart",
+      "bar-chart",
       "card",
-      "data-list",
-      "indicator",
-      "list"
+      "composed-chart"
     ]
   },
   "bleed": {
@@ -113,8 +113,8 @@
       "container",
       "flex",
       "float",
-      "group",
       "grid",
+      "group",
       "h-stack"
     ]
   },
@@ -123,8 +123,8 @@
     "resembles": [
       "code",
       "em",
-      "highlight",
       "heading",
+      "highlight",
       "kbd",
       "mark",
       "text",
@@ -139,8 +139,8 @@
       "container",
       "flex",
       "float",
-      "group",
       "grid",
+      "group",
       "h-stack"
     ]
   },
@@ -151,8 +151,8 @@
       "tabs",
       "data-list",
       "infinite-scroll-area",
-      "link-box",
       "link",
+      "link-box",
       "list",
       "native-accordion"
     ]
@@ -195,11 +195,11 @@
       "native-table",
       "stat",
       "table",
+      "area-chart",
       "badge",
-      "data-list",
-      "list",
-      "qr-code",
-      "tag"
+      "bar-chart",
+      "composed-chart",
+      "data-list"
     ]
   },
   "carousel": {
@@ -210,12 +210,12 @@
     "resembles": [
       "infinite-scroll-area",
       "accordion",
-      "scroll-area",
       "airy",
       "flip",
       "motion",
       "ripple",
-      "rotate"
+      "rotate",
+      "scroll-area"
     ]
   },
   "center": {
@@ -227,8 +227,8 @@
       "container",
       "flex",
       "float",
-      "group",
       "grid",
+      "group",
       "h-stack"
     ]
   },
@@ -275,9 +275,9 @@
       "empty-state",
       "loading",
       "alert",
+      "skeleton",
       "snacks",
-      "status",
-      "skeleton"
+      "status"
     ]
   },
   "client-only": {
@@ -294,8 +294,8 @@
     "resembles": [
       "blockquote",
       "em",
-      "highlight",
       "heading",
+      "highlight",
       "kbd",
       "mark",
       "text",
@@ -306,14 +306,14 @@
     "dependencies": { "components": ["motion"], "hooks": [] },
     "dependents": { "components": ["accordion"], "hooks": [] },
     "resembles": [
-      "fade-scale",
       "fade",
-      "slide-fade",
+      "fade-scale",
       "slide",
+      "slide-fade",
       "accordion",
+      "airy",
       "drawer",
-      "modal",
-      "airy"
+      "flip"
     ]
   },
   "color-picker": {
@@ -381,8 +381,8 @@
       "center",
       "flex",
       "float",
-      "group",
       "grid",
+      "group",
       "h-stack"
     ]
   },
@@ -394,9 +394,9 @@
       "native-table",
       "stat",
       "table",
+      "area-chart",
       "badge",
-      "breadcrumb",
-      "card"
+      "bar-chart"
     ]
   },
   "date-picker": {
@@ -435,11 +435,11 @@
       "modal",
       "popover",
       "tooltip",
-      "native-popover",
       "collapse",
-      "fade-scale",
       "fade",
-      "slide-fade"
+      "fade-scale",
+      "native-popover",
+      "slide"
     ]
   },
   "dropzone": {
@@ -476,8 +476,8 @@
     "resembles": [
       "blockquote",
       "code",
-      "highlight",
       "heading",
+      "highlight",
       "kbd",
       "mark",
       "text",
@@ -490,9 +490,9 @@
       "alert",
       "circle-progress",
       "progress",
+      "skeleton",
       "snacks",
       "status",
-      "skeleton",
       "tip"
     ]
   },
@@ -502,12 +502,12 @@
     "resembles": [
       "collapse",
       "fade",
-      "slide-fade",
       "slide",
+      "slide-fade",
       "accordion",
+      "airy",
       "drawer",
-      "modal",
-      "airy"
+      "flip"
     ]
   },
   "fade": {
@@ -519,12 +519,12 @@
     "resembles": [
       "collapse",
       "fade-scale",
-      "slide-fade",
       "slide",
+      "slide-fade",
       "accordion",
+      "airy",
       "drawer",
-      "modal",
-      "airy"
+      "flip"
     ]
   },
   "field": {
@@ -613,8 +613,8 @@
       "center",
       "container",
       "float",
-      "group",
       "grid",
+      "group",
       "h-stack"
     ]
   },
@@ -626,8 +626,8 @@
       "ripple",
       "rotate",
       "collapse",
-      "fade-scale",
       "fade",
+      "fade-scale",
       "skeleton"
     ]
   },
@@ -640,8 +640,8 @@
       "center",
       "container",
       "flex",
-      "group",
       "grid",
+      "group",
       "h-stack"
     ]
   },
@@ -871,8 +871,8 @@
       "blockquote",
       "code",
       "em",
-      "highlight",
       "heading",
+      "highlight",
       "mark",
       "text",
       "link"
@@ -887,8 +887,8 @@
       "container",
       "flex",
       "float",
-      "group",
-      "grid"
+      "grid",
+      "group"
     ]
   },
   "link": {
@@ -897,8 +897,8 @@
       "blockquote",
       "code",
       "em",
-      "highlight",
       "heading",
+      "highlight",
       "kbd",
       "mark",
       "text"
@@ -912,9 +912,9 @@
       "native-table",
       "stat",
       "table",
+      "area-chart",
       "badge",
-      "breadcrumb",
-      "card"
+      "bar-chart"
     ]
   },
   "loading": {
@@ -935,8 +935,8 @@
       "blockquote",
       "code",
       "em",
-      "highlight",
       "heading",
+      "highlight",
       "kbd",
       "text",
       "link"
@@ -977,11 +977,11 @@
       "drawer",
       "popover",
       "tooltip",
-      "native-popover",
       "collapse",
-      "fade-scale",
       "fade",
-      "slide-fade"
+      "fade-scale",
+      "native-popover",
+      "slide"
     ]
   },
   "motion": {
@@ -1015,8 +1015,8 @@
       "ripple",
       "rotate",
       "collapse",
-      "fade-scale",
       "fade",
+      "fade-scale",
       "skeleton"
     ]
   },
@@ -1027,11 +1027,11 @@
       "accordion",
       "tabs",
       "breadcrumb",
+      "collapse",
       "data-list",
-      "infinite-scroll-area",
-      "list",
-      "reorder",
-      "collapse"
+      "fade",
+      "fade-scale",
+      "infinite-scroll-area"
     ]
   },
   "native-popover": {
@@ -1065,12 +1065,12 @@
     "resembles": [
       "stat",
       "table",
+      "area-chart",
       "badge",
+      "bar-chart",
       "card",
-      "data-list",
-      "list",
-      "qr-code",
-      "tag"
+      "composed-chart",
+      "data-list"
     ]
   },
   "notice": {
@@ -1102,8 +1102,8 @@
       "tabs",
       "breadcrumb",
       "checkbox",
-      "link-box",
       "link",
+      "link-box",
       "native-select",
       "radio",
       "rating"
@@ -1196,9 +1196,9 @@
       "empty-state",
       "loading",
       "alert",
+      "skeleton",
       "snacks",
-      "status",
-      "skeleton"
+      "status"
     ]
   },
   "qr-code": {
@@ -1209,9 +1209,9 @@
       "picture",
       "stat",
       "table",
+      "area-chart",
       "aspect-ratio",
-      "badge",
-      "card"
+      "badge"
     ]
   },
   "radio-card": {
@@ -1277,8 +1277,8 @@
       "container",
       "flex",
       "float",
-      "group",
-      "grid"
+      "grid",
+      "group"
     ]
   },
   "ripple": {
@@ -1290,8 +1290,8 @@
       "motion",
       "rotate",
       "collapse",
-      "fade-scale",
       "fade",
+      "fade-scale",
       "skeleton"
     ]
   },
@@ -1303,8 +1303,8 @@
       "motion",
       "ripple",
       "collapse",
-      "fade-scale",
       "fade",
+      "fade-scale",
       "skeleton"
     ]
   },
@@ -1376,8 +1376,8 @@
       "container",
       "flex",
       "float",
-      "group",
-      "grid"
+      "grid",
+      "group"
     ]
   },
   "show": {
@@ -1394,15 +1394,15 @@
       "container",
       "flex",
       "float",
-      "group",
-      "grid"
+      "grid",
+      "group"
     ]
   },
   "skeleton": {
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
-      "empty-state",
       "airy",
+      "empty-state",
       "flip",
       "loading",
       "motion",
@@ -1416,13 +1416,13 @@
     "dependents": { "components": ["popover"], "hooks": [] },
     "resembles": [
       "collapse",
-      "fade-scale",
       "fade",
+      "fade-scale",
       "slide",
       "accordion",
+      "airy",
       "drawer",
-      "modal",
-      "airy"
+      "flip"
     ]
   },
   "slide": {
@@ -1430,13 +1430,13 @@
     "dependents": { "components": ["drawer"], "hooks": [] },
     "resembles": [
       "collapse",
-      "fade-scale",
       "fade",
+      "fade-scale",
       "slide-fade",
       "accordion",
+      "airy",
       "drawer",
-      "modal",
-      "airy"
+      "flip"
     ]
   },
   "slider": {
@@ -1471,8 +1471,8 @@
       "empty-state",
       "circle-progress",
       "progress",
-      "status",
-      "skeleton"
+      "skeleton",
+      "status"
     ]
   },
   "stack": {
@@ -1484,8 +1484,8 @@
       "container",
       "flex",
       "float",
-      "group",
-      "grid"
+      "grid",
+      "group"
     ]
   },
   "stat": {
@@ -1493,12 +1493,12 @@
     "resembles": [
       "native-table",
       "table",
+      "area-chart",
       "badge",
+      "bar-chart",
       "card",
-      "data-list",
-      "list",
-      "qr-code",
-      "tag"
+      "composed-chart",
+      "data-list"
     ]
   },
   "status": {
@@ -1511,8 +1511,8 @@
       "circle-progress",
       "indicator",
       "progress",
-      "snacks",
-      "tag"
+      "skeleton",
+      "snacks"
     ]
   },
   "steps": {
@@ -1543,12 +1543,12 @@
     "resembles": [
       "native-table",
       "stat",
+      "area-chart",
       "badge",
+      "bar-chart",
       "card",
-      "data-list",
-      "list",
-      "qr-code",
-      "tag"
+      "composed-chart",
+      "data-list"
     ]
   },
   "tabs": {
@@ -1573,10 +1573,10 @@
       "native-table",
       "stat",
       "table",
+      "area-chart",
+      "bar-chart",
       "card",
-      "data-list",
-      "indicator",
-      "list"
+      "composed-chart"
     ]
   },
   "text": {
@@ -1586,8 +1586,8 @@
       "blockquote",
       "code",
       "em",
-      "highlight",
       "heading",
+      "highlight",
       "kbd",
       "mark",
       "link"
@@ -1654,8 +1654,8 @@
       "container",
       "flex",
       "float",
-      "group",
-      "grid"
+      "grid",
+      "group"
     ]
   },
   "use-animation": { "dependencies": { "components": [], "hooks": [] } },

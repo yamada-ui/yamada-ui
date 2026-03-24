@@ -9,6 +9,7 @@
   "dependents": {
     "components": [
       "accordion",
+      "action-bar",
       "airy",
       "collapse",
       "drawer",

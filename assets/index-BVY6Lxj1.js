@@ -1,1 +1,0 @@
-import{r as o}from"./iframe-ImmY0b3G.js";const f=({children:r,lazy:t,lazyBehavior:u="unmount",mounted:n})=>{const e=o.useRef(!1);return t?n?(e.current=!0,r):u==="keepMounted"&&e.current?r:null:(e.current=!1,r)};export{f as u};

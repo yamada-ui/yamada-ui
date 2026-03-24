@@ -117,8 +117,7 @@
             {
               "title": "ActionBar",
               "segment": "action-bar",
-              "pathname": "/docs/components/action-bar",
-              "status": "planned"
+              "pathname": "/docs/components/action-bar"
             },
             {
               "title": "Alert",

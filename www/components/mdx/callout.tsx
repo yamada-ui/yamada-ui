@@ -2,6 +2,7 @@ import type { ColorScheme } from "@yamada-ui/react"
 import type { ElementType, PropsWithChildren } from "react"
 import {
   Alert,
+  Center,
   CircleCheckBigIcon,
   InfoIcon,
   LightbulbIcon,
@@ -46,7 +47,9 @@ export function Callout({
 
   return (
     <Alert.Root colorScheme={colorScheme} border="none" my="lg" {...rest}>
-      <Alert.Icon as={ICON_MAP[type]} />
+      <Center h="calc({fontSizes.sm} * 1.8)">
+        <Alert.Icon as={ICON_MAP[type]} />
+      </Center>
       <Alert.Description
         colorScheme="mono"
         color="fg"

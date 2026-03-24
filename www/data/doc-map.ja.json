@@ -649,8 +649,7 @@
             {
               "title": "Tree",
               "segment": "tree",
-              "pathname": "/docs/components/tree",
-              "status": "planned"
+              "pathname": "/docs/components/tree"
             },
             {
               "title": "VStack",

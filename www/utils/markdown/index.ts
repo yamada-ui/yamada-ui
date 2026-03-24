@@ -1,3 +1,4 @@
+export * from "./create-front-matter"
 export * from "./extract-toc"
 export * from "./replace-card-group"
 export * from "./replace-code-block"

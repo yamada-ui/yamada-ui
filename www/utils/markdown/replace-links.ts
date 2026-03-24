@@ -1,5 +1,5 @@
 import type { AnyString } from "@yamada-ui/utils"
-import { globSync } from "glob"
+import { globSync } from "fs"
 import path from "path"
 import { CONSTANTS } from "@/constants"
 

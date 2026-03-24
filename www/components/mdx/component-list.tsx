@@ -37,7 +37,7 @@ export function ComponentList(props: ComponentListProps) {
       {...props}
     >
       {components.map(({ pathname, segment, title }) => (
-        <NextLink key={segment} href={pathname} justifySelf="flex-start">
+        <NextLink key={segment} href={pathname!} justifySelf="flex-start">
           {title}
         </NextLink>
       ))}

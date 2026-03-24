@@ -1446,7 +1446,7 @@
           "deprecated": false,
           "description": "The <code>font-width</code> CSS property selects a font face from a font family based on width, either by a keyword such as <code>condensed</code> or a percentage.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-fonts/#propdef-font-width"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-width"
         }
       }
     },
@@ -2399,7 +2399,7 @@
           "deprecated": false,
           "description": "The CSS `animation-trigger` property.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-animations-2/#animation-trigger-prop"
+          "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-animation-trigger"
         }
       }
     },
@@ -2677,7 +2677,7 @@
           "deprecated": false,
           "description": "The CSS `background-repeat-x` property.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-backgrounds-4/#background-repeat-longhands"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-repeat-x"
         }
       }
     },
@@ -2689,7 +2689,7 @@
           "deprecated": false,
           "description": "The CSS `background-repeat-y` property.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-backgrounds-4/#background-repeat-longhands"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-repeat-y"
         }
       }
     },
@@ -3632,6 +3632,18 @@
         }
       }
     },
+    "borderShape": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "border-shape": {
+          "deprecated": false,
+          "description": "The CSS `border-shape` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-borders-4/#border-shape"
+        }
+      }
+    },
     "borderSpacing": {
       "as": true,
       "type": "StyleValueWithCondition<CSS.Property.BorderSpacing>",
@@ -4216,7 +4228,7 @@
           "deprecated": false,
           "description": "The CSS `column-height` property.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-multicol-2/#propdef-column-height"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-height"
         }
       }
     },
@@ -4332,7 +4344,7 @@
           "deprecated": false,
           "description": "The CSS `column-wrap` property.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-multicol-2/#propdef-column-wrap"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-wrap"
         }
       }
     },
@@ -8040,7 +8052,7 @@
           "deprecated": false,
           "description": "The <code>scroll-initial-target: nearest</code> CSS declaration sets the initial scroll position of its scroll container to the top of the element, much like scrolling to a URL fragment.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-scroll-snap-2/#propdef-scroll-initial-target"
+          "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-initial-target"
         }
       }
     },
@@ -8882,9 +8894,9 @@
             "widely_available_date": "2018-01-29",
             "newly_available_date": "2015-07-29"
           },
-          "deprecated": false,
+          "deprecated": true,
           "description": "The <code>text-decoration</code> CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.",
-          "experimental": true,
+          "experimental": false,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-skip"
         }
       }
@@ -8896,11 +8908,11 @@
         "text-decoration-skip-ink": {
           "baseline": {
             "status": "Widely available",
-            "widely_available_date": "2018-01-29",
-            "newly_available_date": "2015-07-29"
+            "widely_available_date": "2024-09-14",
+            "newly_available_date": "2022-03-14"
           },
           "deprecated": false,
-          "description": "The <code>text-decoration</code> CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.",
+          "description": "The <code>text-decoration-skip-ink</code> CSS property sets whether underlines and overlines may be interrupted where the line would cross a glyph.",
           "experimental": false,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-skip-ink"
         }
@@ -9220,7 +9232,79 @@
           "deprecated": false,
           "description": "The CSS `timeline-trigger` property.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-animations-2/#timeline-trigger-shorthand"
+          "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger"
+        }
+      }
+    },
+    "timelineTriggerActivationRange": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "timeline-trigger-activation-range": {
+          "deprecated": false,
+          "description": "The CSS `timeline-trigger-activation-range` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-activation-range"
+        }
+      }
+    },
+    "timelineTriggerActivationRangeEnd": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "timeline-trigger-activation-range-end": {
+          "deprecated": false,
+          "description": "The CSS `timeline-trigger-activation-range-end` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-activation-range-end"
+        }
+      }
+    },
+    "timelineTriggerActivationRangeStart": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "timeline-trigger-activation-range-start": {
+          "deprecated": false,
+          "description": "The CSS `timeline-trigger-activation-range-start` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-activation-range-start"
+        }
+      }
+    },
+    "timelineTriggerActiveRange": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "timeline-trigger-active-range": {
+          "deprecated": false,
+          "description": "The CSS `timeline-trigger-active-range` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-active-range"
+        }
+      }
+    },
+    "timelineTriggerActiveRangeEnd": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "timeline-trigger-active-range-end": {
+          "deprecated": false,
+          "description": "The CSS `timeline-trigger-active-range-end` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-active-range-end"
+        }
+      }
+    },
+    "timelineTriggerActiveRangeStart": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "timeline-trigger-active-range-start": {
+          "deprecated": false,
+          "description": "The CSS `timeline-trigger-active-range-start` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-active-range-start"
         }
       }
     },
@@ -9232,7 +9316,7 @@
           "deprecated": false,
           "description": "The CSS `timeline-trigger-name` property.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-animations-2/#timeline-trigger-name"
+          "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-name"
         }
       }
     },
@@ -9244,7 +9328,7 @@
           "deprecated": false,
           "description": "The CSS `timeline-trigger-source` property.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-animations-2/#timeline-trigger-source"
+          "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-source"
         }
       }
     },
@@ -9393,7 +9477,7 @@
           "deprecated": false,
           "description": "The CSS `trigger-scope` property.",
           "experimental": true,
-          "see": "https://drafts.csswg.org/css-animations-2/#trigger-scope"
+          "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-trigger-scope"
         }
       }
     },
@@ -9532,6 +9616,18 @@
           "description": "View transitions allow you to create animated visual transitions between different states of a document.",
           "experimental": false,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-transition-name"
+        }
+      }
+    },
+    "viewTransitionScope": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "view-transition-scope": {
+          "deprecated": false,
+          "description": "The CSS `view-transition-scope` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-view-transitions-2/#view-transition-scope-prop"
         }
       }
     },

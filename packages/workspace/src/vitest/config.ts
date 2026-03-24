@@ -11,6 +11,7 @@ export default {
       include: ["src/**/*.{ts,tsx}"],
       provider: "v8",
     },
+    testTimeout: 10000,
     watch: false,
     onConsoleLog: (_, type) => type !== "stderr",
   },

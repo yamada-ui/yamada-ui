@@ -25,17 +25,17 @@
       "popover",
       "tooltip",
       "drawer",
-      "modal",
-      "menu"
+      "menu",
+      "modal"
     ]
   },
   "airy": {
     "dependencies": { "components": ["motion"], "hooks": [] },
     "resembles": [
-      "flip",
       "motion",
-      "ripple",
+      "flip",
       "rotate",
+      "ripple",
       "collapse",
       "fade-scale",
       "fade",
@@ -75,8 +75,8 @@
   "aspect-ratio": {
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
-      "bleed",
       "box",
+      "bleed",
       "center",
       "container",
       "float",
@@ -98,8 +98,8 @@
       "editable",
       "input",
       "native-select",
-      "number-input",
-      "password-input"
+      "password-input",
+      "number-input"
     ]
   },
   "avatar": {
@@ -165,8 +165,8 @@
       "tabs",
       "data-list",
       "infinite-scroll-area",
-      "list",
       "link-box",
+      "list",
       "link",
       "native-accordion"
     ]
@@ -226,18 +226,18 @@
       "accordion",
       "scroll-area",
       "airy",
-      "flip",
       "motion",
-      "ripple",
-      "rotate"
+      "flip",
+      "rotate",
+      "ripple"
     ]
   },
   "center": {
     "dependencies": { "components": [], "hooks": [] },
     "dependents": { "components": ["loading"], "hooks": [] },
     "resembles": [
-      "bleed",
       "box",
+      "bleed",
       "container",
       "float",
       "flex",
@@ -258,8 +258,8 @@
       "radio-card",
       "checkbox",
       "native-select",
-      "radio",
       "rating",
+      "radio",
       "segmented-control",
       "switch",
       "toggle"
@@ -273,8 +273,8 @@
     "dependents": { "components": ["checkbox-card", "table"], "hooks": [] },
     "resembles": [
       "native-select",
-      "radio",
       "rating",
+      "radio",
       "segmented-control",
       "switch",
       "checkbox-card",
@@ -296,7 +296,7 @@
   },
   "client-only": {
     "dependencies": { "components": ["show"], "hooks": [] },
-    "resembles": ["show", "for", "format", "portal", "slot"]
+    "resembles": ["show", "for", "format", "slot", "portal"]
   },
   "close-button": {
     "dependencies": { "components": ["button", "icon"], "hooks": [] },
@@ -390,8 +390,8 @@
   "container": {
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
-      "bleed",
       "box",
+      "bleed",
       "center",
       "float",
       "flex",
@@ -404,8 +404,8 @@
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
       "list",
-      "tree",
       "timeline",
+      "tree",
       "native-table",
       "stat",
       "table",
@@ -462,8 +462,8 @@
       "hooks": []
     },
     "resembles": [
-      "file-button",
       "file-input",
+      "file-button",
       "checkbox",
       "color-selector",
       "editable",
@@ -476,8 +476,8 @@
     "dependencies": { "components": ["input", "field"], "hooks": [] },
     "resembles": [
       "input",
-      "number-input",
       "password-input",
+      "number-input",
       "pin-input",
       "textarea",
       "file-input",
@@ -575,8 +575,8 @@
     "resembles": [
       "fieldset",
       "form",
-      "bleed",
       "box",
+      "bleed",
       "center",
       "container",
       "float",
@@ -589,8 +589,8 @@
     "resembles": [
       "field",
       "form",
-      "bleed",
       "box",
+      "bleed",
       "center",
       "container",
       "float",
@@ -611,8 +611,8 @@
       "dropzone",
       "editable",
       "input",
-      "number-input",
       "password-input",
+      "number-input",
       "pin-input",
       "textarea",
       "file-button"
@@ -622,8 +622,8 @@
     "dependencies": { "components": [], "hooks": [] },
     "dependents": { "components": ["group", "wrap"], "hooks": [] },
     "resembles": [
-      "bleed",
       "box",
+      "bleed",
       "center",
       "container",
       "float",
@@ -637,8 +637,8 @@
     "resembles": [
       "airy",
       "motion",
-      "ripple",
       "rotate",
+      "ripple",
       "collapse",
       "fade-scale",
       "fade",
@@ -649,8 +649,8 @@
     "dependencies": { "components": [], "hooks": [] },
     "dependents": { "components": ["indicator"], "hooks": [] },
     "resembles": [
-      "bleed",
       "box",
+      "bleed",
       "center",
       "container",
       "flex",
@@ -666,7 +666,7 @@
   },
   "for": {
     "dependencies": { "components": [], "hooks": [] },
-    "resembles": ["format", "portal", "slot", "show", "client-only"]
+    "resembles": ["format", "slot", "portal", "client-only", "show"]
   },
   "form": {
     "dependencies": { "components": ["button"], "hooks": [] },
@@ -674,8 +674,8 @@
     "resembles": [
       "field",
       "fieldset",
-      "bleed",
       "box",
+      "bleed",
       "center",
       "container",
       "float",
@@ -685,7 +685,7 @@
   "format": {
     "dependencies": { "components": [], "hooks": [] },
     "dependents": { "components": ["calendar", "date-picker"], "hooks": [] },
-    "resembles": ["for", "portal", "slot", "show", "client-only"]
+    "resembles": ["for", "slot", "portal", "client-only", "show"]
   },
   "grid": {
     "dependencies": { "components": [], "hooks": [] },
@@ -694,8 +694,8 @@
       "hooks": []
     },
     "resembles": [
-      "bleed",
       "box",
+      "bleed",
       "center",
       "container",
       "float",
@@ -727,8 +727,8 @@
       "hooks": []
     },
     "resembles": [
-      "bleed",
       "box",
+      "bleed",
       "center",
       "container",
       "float",
@@ -870,8 +870,8 @@
     },
     "resembles": [
       "editable",
-      "number-input",
       "password-input",
+      "number-input",
       "pin-input",
       "textarea",
       "file-input",
@@ -895,8 +895,8 @@
   "link-box": {
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
-      "bleed",
       "box",
+      "bleed",
       "center",
       "container",
       "float",
@@ -922,8 +922,8 @@
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
       "data-list",
-      "tree",
       "timeline",
+      "tree",
       "native-table",
       "stat",
       "table",
@@ -1026,8 +1026,8 @@
     "resembles": [
       "airy",
       "flip",
-      "ripple",
       "rotate",
+      "ripple",
       "collapse",
       "fade-scale",
       "fade",
@@ -1056,8 +1056,8 @@
       "popover",
       "tooltip",
       "drawer",
-      "modal",
       "menu",
+      "modal",
       "indicator"
     ]
   },
@@ -1072,8 +1072,8 @@
     },
     "resembles": [
       "checkbox",
-      "radio",
       "rating",
+      "radio",
       "segmented-control",
       "switch",
       "checkbox-card",
@@ -1127,8 +1127,8 @@
       "link-box",
       "link",
       "native-select",
-      "radio",
-      "rating"
+      "rating",
+      "radio"
     ]
   },
   "password-input": {
@@ -1159,8 +1159,8 @@
     "resembles": [
       "editable",
       "input",
-      "number-input",
       "password-input",
+      "number-input",
       "textarea",
       "file-input",
       "autocomplete",
@@ -1215,7 +1215,7 @@
       ],
       "hooks": []
     },
-    "resembles": ["for", "format", "slot", "show", "client-only"]
+    "resembles": ["for", "format", "slot", "client-only", "show"]
   },
   "progress": {
     "dependencies": { "components": [], "hooks": [] },
@@ -1249,8 +1249,8 @@
       "checkbox-card",
       "checkbox",
       "native-select",
-      "radio",
       "rating",
+      "radio",
       "segmented-control",
       "switch",
       "toggle"
@@ -1300,8 +1300,8 @@
   "resizable": {
     "dependencies": { "components": [], "hooks": ["use-value"] },
     "resembles": [
-      "bleed",
       "box",
+      "bleed",
       "center",
       "container",
       "float",
@@ -1315,8 +1315,8 @@
     "dependents": { "components": ["button"], "hooks": [] },
     "resembles": [
       "airy",
-      "flip",
       "motion",
+      "flip",
       "rotate",
       "collapse",
       "fade-scale",
@@ -1328,8 +1328,8 @@
     "dependencies": { "components": ["motion"], "hooks": [] },
     "resembles": [
       "airy",
-      "flip",
       "motion",
+      "flip",
       "ripple",
       "collapse",
       "fade-scale",
@@ -1363,8 +1363,8 @@
     "resembles": [
       "checkbox",
       "native-select",
-      "radio",
       "rating",
+      "radio",
       "switch",
       "checkbox-card",
       "radio-card",
@@ -1390,8 +1390,8 @@
       "menu",
       "checkbox",
       "native-select",
-      "radio",
       "rating",
+      "radio",
       "segmented-control",
       "switch"
     ]
@@ -1399,8 +1399,8 @@
   "separator": {
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
-      "bleed",
       "box",
+      "bleed",
       "center",
       "container",
       "float",
@@ -1412,13 +1412,13 @@
   "show": {
     "dependencies": { "components": [], "hooks": [] },
     "dependents": { "components": ["client-only"], "hooks": [] },
-    "resembles": ["client-only", "for", "format", "portal", "slot"]
+    "resembles": ["client-only", "for", "format", "slot", "portal"]
   },
   "simple-grid": {
     "dependencies": { "components": ["grid"], "hooks": [] },
     "resembles": [
-      "bleed",
       "box",
+      "bleed",
       "center",
       "container",
       "float",
@@ -1432,11 +1432,11 @@
     "resembles": [
       "empty-state",
       "airy",
-      "flip",
-      "motion",
-      "ripple",
-      "rotate",
       "loading",
+      "motion",
+      "flip",
+      "rotate",
+      "ripple",
       "alert"
     ]
   },
@@ -1487,7 +1487,7 @@
   },
   "slot": {
     "dependencies": { "components": [], "hooks": [] },
-    "resembles": ["for", "format", "portal", "show", "client-only"]
+    "resembles": ["for", "format", "portal", "client-only", "show"]
   },
   "snacks": {
     "dependencies": {
@@ -1507,8 +1507,8 @@
   "stack": {
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
-      "bleed",
       "box",
+      "bleed",
       "center",
       "container",
       "float",
@@ -1556,8 +1556,8 @@
     "resembles": [
       "checkbox",
       "native-select",
-      "radio",
       "rating",
+      "radio",
       "segmented-control",
       "checkbox-card",
       "radio-card",
@@ -1628,8 +1628,8 @@
     "resembles": [
       "editable",
       "input",
-      "number-input",
       "password-input",
+      "number-input",
       "pin-input",
       "file-input",
       "autocomplete",
@@ -1663,8 +1663,8 @@
     "resembles": [
       "checkbox",
       "native-select",
-      "radio",
       "rating",
+      "radio",
       "segmented-control",
       "switch",
       "checkbox-card",
@@ -1709,8 +1709,8 @@
   "wrap": {
     "dependencies": { "components": ["flex"], "hooks": [] },
     "resembles": [
-      "bleed",
       "box",
+      "bleed",
       "center",
       "container",
       "float",

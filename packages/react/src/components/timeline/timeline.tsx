@@ -5,6 +5,7 @@ import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { TimelineStyle } from "./timeline.style"
 import { useMemo } from "react"
 import { createSlotComponent, styled, varAttr } from "../../core"
+import { useValue } from "../../hooks/use-value"
 import { dataAttr, isUndefined } from "../../utils"
 import { timelineStyle } from "./timeline.style"
 
@@ -86,8 +87,9 @@ export { TimelinePropsContext, useTimelinePropsContext }
  * @see https://yamada-ui.com/docs/components/timeline
  */
 export const TimelineRoot = withProvider(
-  ({ children, index = -1, items = [], ...rest }) => {
+  ({ variant: variantProp, children, index = -1, items = [], ...rest }) => {
     const context = useMemo(() => ({ index }), [index])
+    const variant = useValue(variantProp)
     const computedChildren = useMemo(() => {
       if (children) return children
 
@@ -112,7 +114,7 @@ export const TimelineRoot = withProvider(
             connector: (
               <TimelineConnector {...connectorProps}>
                 <TimelineIndicator {...indicatorProps}>
-                  {indicator}
+                  {indicator ?? (variant === "number" ? index + 1 : undefined)}
                 </TimelineIndicator>
               </TimelineConnector>
             ),
@@ -138,7 +140,7 @@ export const TimelineRoot = withProvider(
           )
         },
       )
-    }, [items, children])
+    }, [children, items, variant])
 
     return (
       <ComponentContext value={context}>
@@ -147,6 +149,7 @@ export const TimelineRoot = withProvider(
     )
   },
   "root",
+  { transferProps: ["variant"] },
 )(
   undefined,
   ({

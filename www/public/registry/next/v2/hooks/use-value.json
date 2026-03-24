@@ -20,7 +20,8 @@
       "slide",
       "slider",
       "steps",
-      "tabs"
+      "tabs",
+      "timeline"
     ],
     "hooks": [],
     "providers": []

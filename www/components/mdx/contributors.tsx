@@ -1,16 +1,8 @@
 "use client"
 
-import {
-  Avatar,
-  Box,
-  GithubIcon,
-  Grid,
-  HStack,
-  Text,
-  VStack,
-  Wrap,
-} from "@yamada-ui/react"
+import { Avatar, Box, Grid, HStack, Text, VStack, Wrap } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
+import { GithubIcon } from "@/components/github-icon"
 import { XIcon } from "@/components/x-icon"
 import contributors from "@/data/contributors.json"
 import emeriti from "@/data/emeriti.json"

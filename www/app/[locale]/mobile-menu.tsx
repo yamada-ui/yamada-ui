@@ -9,7 +9,6 @@ import {
   CloseButton,
   Collapse,
   Drawer,
-  GithubIcon,
   handlerAll,
   IconButton,
   MenuIcon,
@@ -24,6 +23,7 @@ import { useTranslations } from "next-intl"
 import { useMemo, useState } from "react"
 import {
   DiscordIcon,
+  GithubIcon,
   NextLinkButton,
   NextLinkIconButton,
   Status,

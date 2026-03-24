@@ -93,7 +93,7 @@
     "file-selector": "^2.1.2",
     "framesync": "6.1.2",
     "intl-messageformat": "^11.1.2",
-    "lucide-react": "0.577.0",
+    "lucide-react": "1.6.0",
     "motion": "^12.36.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

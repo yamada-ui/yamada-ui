@@ -2,14 +2,14 @@
 
 import type { Component } from "../../../core"
 import type { IconProps } from "../icon"
-import { Slack as OriginalSlackIcon } from "lucide-react"
+import { ShieldCog as OriginalShieldCogIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
- * `SlackIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ * `ShieldCogIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const SlackIcon = component(Icon)({
-  as: OriginalSlackIcon,
+export const ShieldCogIcon = component(Icon)({
+  as: OriginalShieldCogIcon,
 }) as Component<"svg", IconProps>

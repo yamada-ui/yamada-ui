@@ -15,10 +15,10 @@
   "sources": [
     {
       "name": "index.ts",
-      "content": "export * from \"./tree.style\"\nexport {\n  TreeItem,\n  TreePropsContext,\n  TreeRoot,\n  useTreePropsContext,\n} from \"./tree\"\nexport type { TreeItemProps, TreeRootProps } from \"./tree\"\nexport * as Tree from \"./tree.namespace\"\nexport * from \"./use-tree\"\n"
+      "content": "export * from \"./tree.style\"\nexport * as Tree from \"./namespace\"\nexport {\n  TreeItem,\n  TreePropsContext,\n  TreeRoot,\n  useTreePropsContext,\n} from \"./tree\"\nexport type { TreeItemProps, TreeRootProps } from \"./tree\"\nexport * from \"./use-tree\"\n"
     },
     {
-      "name": "tree.namespace.ts",
+      "name": "namespace.ts",
       "content": "export {\n  TreeItem as Item,\n  TreePropsContext as PropsContext,\n  TreeRoot as Root,\n  useTreePropsContext as usePropsContext,\n} from \"./tree\"\nexport type {\n  TreeItemProps as ItemProps,\n  TreeItem as ItemType,\n  TreeRootProps as RootProps,\n} from \"./tree\"\nexport {\n  TreeContext as Context,\n  TreeDescendantsContext as DescendantsContext,\n  useTreeContext as useContext,\n  useTreeDescendant as useDescendant,\n  useTreeDescendants as useDescendants,\n  useTreeItemContext as useItemContext,\n} from \"./use-tree\"\nexport type { TreeControl as Control } from \"./use-tree\"\n"
     },
     {

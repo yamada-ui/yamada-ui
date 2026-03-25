@@ -16,6 +16,7 @@
   "_horizontal": "&:is([data-orientation=horizontal], [aria-orientation=horizontal])",
   "_icon": "&:where(svg:not([data-loading])), & > [data-icon]",
   "_indeterminate": "&:is(:indeterminate, [data-indeterminate], [aria-checked=mixed])",
+  "_indicator": "& > [data-indicator]",
   "_inRange": "&:is(:in-range, [data-in-range])",
   "_last": "&:last-of-type",
   "_lastChild": "& > *:last-child",

@@ -1,5 +1,15 @@
 # @yamada-ui/utils
 
+## 2.1.2
+
+### Patch Changes
+
+- [#6201](https://github.com/yamada-ui/yamada-ui/pull/6201) [`eaddd11`](https://github.com/yamada-ui/yamada-ui/commit/eaddd1185085d2eaa11e8a12416b0e4e8acbef5c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated `isObject` to use loose equality for nullish check.
+
+- [#6239](https://github.com/yamada-ui/yamada-ui/pull/6239) [`d28fc6e`](https://github.com/yamada-ui/yamada-ui/commit/d28fc6e2105a859e133b0f6290f2ae73c461e875) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `match` function.
+
+- [#6244](https://github.com/yamada-ui/yamada-ui/pull/6244) [`8abe31f`](https://github.com/yamada-ui/yamada-ui/commit/8abe31fead60b0928d59e0adc4e30cb3b83e22b3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Made the `value` parameter of `setAttribute` optional.
+
 ## 2.1.1
 
 ### Patch Changes

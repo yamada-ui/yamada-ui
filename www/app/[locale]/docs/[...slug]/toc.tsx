@@ -8,7 +8,7 @@ import {
   Separator,
   Text,
   useEventListener,
-  useUpdateEffect,
+  useSafeLayoutEffect,
   VStack,
 } from "@yamada-ui/react"
 import { useMotionValueEvent, useScroll } from "motion/react"
@@ -45,6 +45,14 @@ export function Toc({ md, locale, path, pathname, toc }: TocProps) {
   const flattenedToc = useMemo(() => flattenToc(toc), [toc])
   const { chatgptUrl, claudeUrl, markdownUrl } = useLlmsUrls(locale, pathname)
 
+  useSafeLayoutEffect(() => {
+    const hash = window.location.hash.replace("#", "")
+
+    if (!hash) return
+
+    setCurrentId(hash)
+  }, [])
+
   useMotionValueEvent(scrollY, "change", (value) => {
     directionRef.current = prevValue.current < value ? "down" : "up"
 
@@ -71,7 +79,7 @@ export function Toc({ md, locale, path, pathname, toc }: TocProps) {
     { passive: true },
   )
 
-  useUpdateEffect(() => {
+  useSafeLayoutEffect(() => {
     if (!containerRef.current) return
 
     const itemRef = itemRefs.current.get(currentId)
@@ -96,6 +104,7 @@ export function Toc({ md, locale, path, pathname, toc }: TocProps) {
 
   return (
     <VStack
+      ref={containerRef}
       as="aside"
       alignItems="flex-start"
       gap="md"

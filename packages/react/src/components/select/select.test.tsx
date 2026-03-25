@@ -111,7 +111,7 @@ describe("<Select />", () => {
   test("selects and deselects values in multiple mode", async () => {
     const onChange = vi.fn()
 
-    render(
+    const { user } = render(
       <Select.Root
         defaultOpen
         items={items}
@@ -125,19 +125,19 @@ describe("<Select />", () => {
     const option2 = screen.getByRole("option", { name: "Option 2" })
 
     // Select first option
-    fireEvent.click(option1)
+    await user.click(option1)
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one"])
     })
 
     // Select second option
-    fireEvent.click(option2)
+    await user.click(option2)
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
 
     // Deselect first option
-    fireEvent.click(option1)
+    await user.click(option1)
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["two"])
     })
@@ -146,7 +146,7 @@ describe("<Select />", () => {
   test("respects max selection limit in multiple mode", async () => {
     const onChange = vi.fn()
 
-    render(
+    const { user } = render(
       <Select.Root
         defaultOpen
         items={items}
@@ -162,15 +162,15 @@ describe("<Select />", () => {
     const option3 = screen.getByRole("option", { name: "Option 3" })
 
     // Select two options (reaching max)
-    fireEvent.click(option1)
-    fireEvent.click(option2)
+    await user.click(option1)
+    await user.click(option2)
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
 
     // Attempt to select a third option - should be disabled
-    fireEvent.click(option3)
+    await user.click(option3)
 
     await waitFor(() => {
       expect(option3).toHaveAttribute("aria-disabled", "true")
@@ -203,7 +203,7 @@ describe("<Select />", () => {
   })
 
   test("renders clear icon and clears value when clicked", async () => {
-    render(
+    const { user } = render(
       <Select.Root
         clearable
         defaultValue="one"
@@ -216,7 +216,7 @@ describe("<Select />", () => {
 
     expect(clearButton).toBeInTheDocument()
 
-    fireEvent.click(clearButton)
+    await user.click(clearButton)
 
     await waitFor(() => {
       const field = screen.getByRole("combobox", { name: /Choose a option/i })
@@ -249,7 +249,7 @@ describe("<Select />", () => {
   test("clears multiple values when clear icon is clicked", async () => {
     const onChange = vi.fn()
 
-    render(
+    const { user } = render(
       <Select.Root
         clearable
         defaultValue={["one", "two"]}
@@ -262,7 +262,7 @@ describe("<Select />", () => {
 
     const clearButton = screen.getByRole("button", { name: /Clear value/i })
 
-    fireEvent.click(clearButton)
+    await user.click(clearButton)
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith([])
@@ -395,7 +395,7 @@ describe("<Select />", () => {
   })
 
   test("focuses field on clear when focusOnClear is true", async () => {
-    render(
+    const { user } = render(
       <Select.Root
         clearable
         defaultValue="one"
@@ -407,7 +407,7 @@ describe("<Select />", () => {
 
     const clearButton = screen.getByRole("button", { name: /Clear value/i })
 
-    fireEvent.click(clearButton)
+    await user.click(clearButton)
 
     await waitFor(() => {
       expect(document.activeElement).toBe(
@@ -417,7 +417,7 @@ describe("<Select />", () => {
   })
 
   test("does not focus field on clear when focusOnClear is false", async () => {
-    render(
+    const { user } = render(
       <Select.Root
         clearable
         defaultValue="one"
@@ -429,7 +429,7 @@ describe("<Select />", () => {
 
     const clearButton = screen.getByRole("button", { name: /Clear value/i })
 
-    fireEvent.click(clearButton)
+    await user.click(clearButton)
 
     await waitFor(() => {
       const field = screen.getByRole("combobox", { name: /Choose a option/i })
@@ -458,13 +458,13 @@ describe("<Select />", () => {
       )
     }
 
-    render(<ControlledSelect />)
+    const { user } = render(<ControlledSelect />)
 
     const field = screen.getByRole("combobox", { name: /Choose a option/i })
 
     expect(field).toHaveTextContent("Option 1")
 
-    fireEvent.click(screen.getByTestId("change-value"))
+    await user.click(screen.getByTestId("change-value"))
 
     await waitFor(() => {
       expect(field).toHaveTextContent("Option 2")
@@ -494,13 +494,13 @@ describe("<Select />", () => {
       )
     }
 
-    render(<ControlledMultiSelect />)
+    const { user } = render(<ControlledMultiSelect />)
 
     const field = screen.getByRole("combobox", { name: /Choose options/i })
 
     expect(field).toHaveTextContent("Option 1")
 
-    fireEvent.click(screen.getByTestId("change-value"))
+    await user.click(screen.getByTestId("change-value"))
 
     await waitFor(() => {
       expect(field).toHaveTextContent("Option 2")
@@ -571,7 +571,7 @@ describe("<Select />", () => {
   test("removes selected value via custom render's onClear", async () => {
     const onChange = vi.fn()
 
-    render(
+    const { user } = render(
       <Select.Root
         defaultValue={["one", "two"]}
         items={items}
@@ -588,7 +588,7 @@ describe("<Select />", () => {
 
     const tags = screen.getAllByTestId("custom-tag")
 
-    fireEvent.click(tags[0]!)
+    await user.click(tags[0]!)
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["two"])
@@ -691,7 +691,7 @@ describe("<Select />", () => {
   test("selects a value in single mode", async () => {
     const onChange = vi.fn()
 
-    render(
+    const { user } = render(
       <Select.Root
         defaultOpen
         items={items}
@@ -702,7 +702,7 @@ describe("<Select />", () => {
 
     const option = screen.getByRole("option", { name: "Option 1" })
 
-    fireEvent.click(option)
+    await user.click(option)
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith("one")
@@ -729,7 +729,7 @@ describe("<Select />", () => {
 
     const onChange = vi.fn()
 
-    render(
+    const { user } = render(
       <Select.Root
         defaultOpen
         items={groupedItems}
@@ -740,7 +740,7 @@ describe("<Select />", () => {
 
     const option = screen.getByRole("option", { name: "Apple" })
 
-    fireEvent.click(option)
+    await user.click(option)
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith("apple")
@@ -774,7 +774,7 @@ describe("<Select />", () => {
   test("does not clear when disabled and clear icon is clicked", async () => {
     const onChange = vi.fn()
 
-    render(
+    const { user } = render(
       <Select.Root
         clearable
         defaultValue="one"
@@ -789,7 +789,7 @@ describe("<Select />", () => {
 
     expect(clearButton).toHaveAttribute("aria-disabled", "true")
 
-    fireEvent.click(clearButton)
+    await user.click(clearButton)
 
     await waitFor(() => {
       expect(onChange).not.toHaveBeenCalled()
@@ -907,7 +907,7 @@ describe("<Select />", () => {
   test("selects value when option uses children as value", async () => {
     const onChange = vi.fn()
 
-    render(
+    const { user } = render(
       <Select.Root
         defaultOpen
         placeholder="Choose a option"
@@ -920,7 +920,7 @@ describe("<Select />", () => {
 
     const option = screen.getByRole("option", { name: "Option 1" })
 
-    fireEvent.click(option)
+    await user.click(option)
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith("opt1")
@@ -1046,6 +1046,20 @@ describe("<Select />", () => {
     expect(screen.getByRole("combobox")).toBeInTheDocument()
   })
 
+  test("renders non-ReactElement from custom render", () => {
+    render(
+      <Select.Root
+        defaultValue={["one"]}
+        items={items}
+        multiple
+        placeholder="Choose"
+        render={({ label, value }) => (value ? `${label}` : null)}
+      />,
+    )
+
+    expect(screen.getByRole("combobox")).toHaveTextContent("Option 1")
+  })
+
   test("handles grouped items with non-string label so value stays undefined", () => {
     const groupedItems: Select.Item[] = [
       {
@@ -1068,7 +1082,7 @@ describe("<Select />", () => {
       { label: "Banana" },
     ]
 
-    render(
+    const { user } = render(
       <Select.Root
         defaultOpen
         items={labelOnlyItems}
@@ -1079,7 +1093,7 @@ describe("<Select />", () => {
 
     const option = screen.getByRole("option", { name: "Apple" })
 
-    fireEvent.click(option)
+    await user.click(option)
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith("Apple")
@@ -1240,7 +1254,7 @@ describe("<Select />", () => {
   test("handles selecting placeholder option (empty value)", async () => {
     const onChange = vi.fn()
 
-    render(
+    const { user } = render(
       <Select.Root
         defaultOpen
         defaultValue="one"
@@ -1257,7 +1271,7 @@ describe("<Select />", () => {
 
     expect(placeholderOption).toBeDefined()
 
-    fireEvent.click(placeholderOption!)
+    await user.click(placeholderOption!)
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith("")
@@ -1282,7 +1296,7 @@ describe("<Select />", () => {
   test("does not add value beyond max in multiple mode", async () => {
     const onChange = vi.fn()
 
-    render(
+    const { user } = render(
       <Select.Root
         defaultOpen
         items={items}
@@ -1297,7 +1311,7 @@ describe("<Select />", () => {
     const option2 = screen.getByRole("option", { name: "Option 2" })
 
     // Select first option (reaching max of 1)
-    fireEvent.click(option1)
+    await user.click(option1)
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one"])

@@ -289,7 +289,7 @@ describe("<Select />", () => {
     )
   })
 
-  test("does not focus field when hidden input is focused and disabled (L304 if)", () => {
+  test("does not focus field when hidden input is focused and disabled", () => {
     render(
       <Select.Root
         name="disabled-select"
@@ -595,7 +595,7 @@ describe("<Select />", () => {
     })
   })
 
-  test("onClear does not call onChange when item value is empty (L284 else)", async () => {
+  test("onClear does not call onChange when item value is empty", async () => {
     const onChange = vi.fn()
 
     const { user } = render(
@@ -1030,7 +1030,7 @@ describe("<Select />", () => {
     expect(option).toBeInTheDocument()
   })
 
-  test("handles items with non-string label so value stays undefined (L259 else)", () => {
+  test("handles items with non-string label so value stays undefined", () => {
     const itemsWithNonStringLabel: Select.Item[] = [
       { label: (<span key="x">Custom</span>) as ReactNode },
     ]
@@ -1046,7 +1046,7 @@ describe("<Select />", () => {
     expect(screen.getByRole("combobox")).toBeInTheDocument()
   })
 
-  test("handles grouped items with non-string label so value stays undefined (L254 else)", () => {
+  test("handles grouped items with non-string label so value stays undefined", () => {
     const groupedItems: Select.Item[] = [
       {
         items: [{ label: (<span key="y">Group Item</span>) as ReactNode }],
@@ -1309,7 +1309,7 @@ describe("<Select />", () => {
     })
   })
 
-  test("useSelect returns prev when onChange is called with new value at max (L197)", () => {
+  test("useSelect returns prev when onChange is called with new value at max", () => {
     const { result } = renderHook(() =>
       useSelect({
         defaultValue: ["one"],
@@ -1328,7 +1328,7 @@ describe("<Select />", () => {
     expect(result.current.value).toStrictEqual(["one"])
   })
 
-  test("onClear does not focus field when fieldRef is null (L314 if)", () => {
+  test("onClear does not focus field when fieldRef is null", () => {
     const { result } = renderHook(() =>
       useSelect({
         defaultValue: "one",

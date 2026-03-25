@@ -56,14 +56,27 @@ bun yamada-cli init
 ```bash
 Usage: pnpm yamada-cli init [options]
 
-initialize your project and install dependencies
+initialize your project and install dependencies.
 
 Options:
-  --cwd <path>         current working directory
-  -c, --config <path>  path to the config file (default: "ui.json")
-  -o, --overwrite      overwrite existing files. (default: false)
-  -j, --jsx            use jsx instead of tsx (default: false)
-  -h, --help           display help for command
+  --cwd <path>               current working directory.
+  -c, --config <path>        path to the config file. (default: "ui.json")
+  -o, --overwrite            overwrite existing files. (default: false)
+  -t, --tag <name>           tag for the registries (e.g. dev, next).
+  -j, --jsx                  use jsx instead of tsx. (default: false)
+  -y, --yes                  skip all confirmation prompts. (default: false)
+  -m, --monorepo             enable monorepo mode.
+  --no-monorepo              disable monorepo mode.
+  -p, --package-name <name>  package name.
+  -s, --src                  use `src/` directory when choice is monorepo.
+  -i, --install              install dependencies when choice is monorepo.
+  --no-install               do not install dependencies when choice is monorepo.
+  -f, --format               use Prettier.
+  --no-format                do not use Prettier.
+  -l, --lint                 use ESLint.
+  --no-lint                  do not use ESLint.
+  --outdir <path>            output directory path.
+  -h, --help                 display help for command
 ```
 
 After running the `init` command, you will see the following prompts.
@@ -132,19 +145,24 @@ bun yamada-cli add
 ```bash
 Usage: pnpm yamada-cli add [options] [components...]
 
-add a component to your project
+add a component to your project.
 
 Arguments:
-  components           components to add
+  components           components to add.
 
 Options:
-  --cwd <path>         current working directory
-  -c, --config <path>  path to the config file (default: "ui.json")
+  --cwd <path>         current working directory.
+  -c, --config <path>  path to the config file. (default: "ui.json")
   -o, --overwrite      overwrite existing files. (default: false)
-  -i, --install        install dependencies (default: false)
   -s, --sequential     run tasks sequentially. (default: false)
+  -y, --yes            skip all confirmation prompts. (default: false)
+  -i, --install        install dependencies.
+  --no-install         do not install dependencies.
   -f, --format         format the output files.
+  --no-format          do not format the output files.
   -l, --lint           lint the output files.
+  --no-lint            do not lint the output files.
+  -t, --tag <name>     tag for the registries (e.g. dev, next).
   -h, --help           display help for command
 ```
 
@@ -197,16 +215,22 @@ bun yamada-cli diff
 ```bash
 Usage: pnpm yamada-cli diff [options] [component]
 
-check for updates against the registry
+check for updates against the registry.
 
 Arguments:
-  component            component to check
+  component            component to check.
 
 Options:
-  --cwd <path>         current working directory
-  -c, --config <path>  path to the config file (default: "ui.json")
+  --cwd <path>         current working directory.
+  -c, --config <path>  path to the config file. (default: "ui.json")
   -s, --sequential     run tasks sequentially. (default: false)
-  -d, --detail         show detailed changes (default: false)
+  -d, --detail         show detailed changes. (default: false)
+  -y, --yes            skip all confirmation prompts. (default: false)
+  -u, --update         update files when there are file diff.
+  --no-update          do not update files when there are file diff.
+  -i, --install        install dependencies when updating files.
+  --no-install         do not install dependencies when updating files.
+  -t, --tag <name>     tag for the registries (e.g. dev, next).
   -h, --help           display help for command
 ```
 
@@ -259,18 +283,24 @@ bun yamada-cli update
 ```bash
 Usage: pnpm yamada-cli update [options] [components...]
 
-update components in your project
+update components in your project.
 
 Arguments:
-  components           components to update
+  components           components to update.
 
 Options:
-  --cwd <path>         current working directory
-  -c, --config <path>  path to the config file (default: "ui.json")
-  -i, --install        install dependencies (default: false)
+  --cwd <path>         current working directory.
+  -c, --config <path>  path to the config file. (default: "ui.json")
   -s, --sequential     run tasks sequentially. (default: false)
+  -F, --force          force update, overwriting local changes. (default: false)
+  -y, --yes            skip all confirmation prompts. (default: false)
+  -i, --install        install dependencies.
+  --no-install         do not install dependencies.
   -f, --format         format the output files.
+  --no-format          do not format the output files.
   -l, --lint           lint the output files.
+  --no-lint            do not lint the output files.
+  -t, --tag <name>     tag for the registries (e.g. dev, next).
   -h, --help           display help for command
 ```
 
@@ -305,19 +335,28 @@ If you don't specify a path, the theme will be generated in `./theme`.
 ```bash
 Usage: pnpm yamada-cli theme [options] [path]
 
-generate theme to your project
+generate theme to your project.
 
 Arguments:
-  path                 path to the theme directory
+  path                       path to the theme directory.
 
 Options:
-  --cwd <path>         current working directory
-  -c, --config <path>  path to the config file (default: "ui.json")
-  -o, --overwrite      overwrite existing directory. (default: false)
-  -j, --js             use js instead of ts
-  -f, --format         format the output files.
-  -l, --lint           lint the output files.
-  -h, --help           display help for command
+  --cwd <path>               current working directory.
+  -c, --config <path>        path to the config file. (default: "ui.json")
+  -o, --overwrite            overwrite existing directory. (default: false)
+  -j, --js                   use js instead of ts.
+  -y, --yes                  skip all confirmation prompts. (default: false)
+  -p, --package-name <name>  package name (for monorepo).
+  -s, --src                  use src/ directory.
+  --no-src                   do not use src/ directory.
+  -i, --install              install dependencies when choice is monorepo.
+  --no-install               do not install dependencies when choice is monorepo.
+  -f, --format               format the output files.
+  --no-format                do not format the output files.
+  -l, --lint                 lint the output files.
+  --no-lint                  do not lint the output files.
+  -t, --tag <name>           tag for the registries (e.g. dev, next).
+  -h, --help                 display help for command
 ```
 
 ### tokens
@@ -352,18 +391,20 @@ If you don't specify a path, the `theme.path` will be used.
 ```bash
 Usage: pnpm yamada-cli tokens [options] [path]
 
-generate theme typings
+generate theme typings.
 
 Arguments:
-  path                 path to the theme file
+  path                 path to the theme file.
 
 Options:
-  --cwd <path>         current working directory
-  -c, --config <path>  path to the config file (default: "ui.json")
-  -o, --out <path>     output path
-  -f, --format         format the output file
-  -l, --lint           lint the output file
-  --internal           generate internal tokens (default: false)
+  --cwd <path>         current working directory.
+  -c, --config <path>  path to the config file. (default: "ui.json")
+  -o, --out <path>     output path.
+  -f, --format         format the output file.
+  --no-format          do not format the output file.
+  -l, --lint           lint the output file.
+  --no-lint            do not lint the output file.
+  --internal           generate internal tokens. (default: false)
   -h, --help           display help for command
 ```
 

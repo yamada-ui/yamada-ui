@@ -15,12 +15,10 @@ describe("<NumberInput />", () => {
       <NumberInput size="md" variant="outline" placeholder="Enter a number" />,
     )
 
-    const numberInput = page.getByRole("spinbutton")
-    await expect.element(numberInput).toBeInTheDocument()
-    expect(numberInput.element()).toHaveProperty(
-      "placeholder",
-      "Enter a number",
-    )
+    const numberInput = page
+      .getByRole("spinbutton")
+      .and(page.getByPlaceholder("Enter a number"))
+    await expect.element(numberInput).toBeVisible()
   })
 
   test("should render input with default value", async () => {
@@ -28,9 +26,9 @@ describe("<NumberInput />", () => {
 
     const numberInput = page.getByRole("spinbutton")
     await expect.element(numberInput).toHaveValue("20")
-    expect(numberInput.element()).toHaveProperty("step", "5")
-    expect(numberInput.element()).toHaveProperty("min", "5")
-    expect(numberInput.element()).toHaveProperty("max", "30")
+    await expect.element(numberInput).toHaveProperty("step", "5")
+    await expect.element(numberInput).toHaveProperty("min", "5")
+    await expect.element(numberInput).toHaveProperty("max", "30")
   })
 
   test("should disable the input", async () => {
@@ -54,7 +52,8 @@ describe("<NumberInput />", () => {
     await expect.element(numberInput).toHaveValue("35")
 
     await user.click(numberInput)
-    await user.tab()
+    numberInput.element().blur()
+
     await expect.element(numberInput).toHaveValue("30")
   })
 
@@ -65,7 +64,8 @@ describe("<NumberInput />", () => {
     await expect.element(numberInput).toHaveValue("-5")
 
     await user.click(numberInput)
-    await user.tab()
+    numberInput.element().blur()
+
     await expect.element(numberInput).toHaveValue("0")
   })
 
@@ -74,10 +74,8 @@ describe("<NumberInput />", () => {
 
     const numberInput = page.getByRole("spinbutton")
 
-    await user.click(numberInput)
-    await user.keyboard("e5")
-    await expect.element(numberInput).toHaveValue("e5")
-    await user.tab()
+    await user.type(numberInput, "e5")
+    numberInput.element().blur()
 
     await expect.element(numberInput).toHaveValue("")
   })
@@ -89,9 +87,8 @@ describe("<NumberInput />", () => {
 
     const numberInput = page.getByRole("spinbutton")
 
-    await user.click(numberInput)
-    await user.keyboard("50")
-    await user.tab()
+    await user.type(numberInput, "50")
+    numberInput.element().blur()
 
     await expect.element(numberInput).toHaveValue("50")
   })
@@ -104,7 +101,7 @@ describe("<NumberInput />", () => {
     const numberInput = page.getByRole("spinbutton")
 
     await user.clear(numberInput)
-    await user.keyboard("35")
+    await user.type(numberInput, "35")
 
     await expect.element(numberInput).toHaveValue("35")
   })
@@ -113,7 +110,7 @@ describe("<NumberInput />", () => {
     await render(<NumberInput invalid />)
 
     const numberInput = page.getByRole("spinbutton")
-    await expect.element(numberInput).toHaveAttribute("aria-invalid", "true")
+    await expect.element(numberInput).toBeInvalid()
   })
 
   test("should render a custom stepper input", async () => {
@@ -126,8 +123,8 @@ describe("<NumberInput />", () => {
 
     const plusButton = page.getByText(/\+/i)
     const minusButton = page.getByText(/-/i)
-    await expect.element(plusButton).toBeInTheDocument()
-    await expect.element(minusButton).toBeInTheDocument()
+    await expect.element(plusButton).toBeVisible()
+    await expect.element(minusButton).toBeVisible()
   })
 
   test("should correctly reflect value changes with keyboard operations", async () => {
@@ -276,7 +273,7 @@ describe("<NumberInput />", () => {
 
     const numberInput = page.getByRole("spinbutton")
     await expect.element(numberInput).toHaveValue("10")
-    expect(numberInput.element()).toHaveProperty("readOnly", true)
+    await expect.element(numberInput).toHaveProperty("readOnly", true)
 
     await user.tab()
 
@@ -569,19 +566,19 @@ describe("<NumberInput />", () => {
 
     const numberInput = page.getByRole("spinbutton")
     await expect.element(numberInput).toHaveValue("15")
-    expect(numberInput.element()).toHaveProperty("step", "5")
-    expect(numberInput.element()).toHaveProperty("min", "0")
-    expect(numberInput.element()).toHaveProperty("max", "100")
+    await expect.element(numberInput).toHaveProperty("step", "5")
+    await expect.element(numberInput).toHaveProperty("min", "0")
+    await expect.element(numberInput).toHaveProperty("max", "100")
     await expect
       .element(numberInput)
       .toHaveAttribute("aria-label", "Custom label")
     await expect
       .element(numberInput)
       .toHaveAttribute("aria-describedby", "helper-text")
-    await expect.element(page.getByTestId("root")).toBeInTheDocument()
-    await expect.element(page.getByTestId("element")).toBeInTheDocument()
-    await expect.element(page.getByTestId("control")).toBeInTheDocument()
-    await expect.element(page.getByTestId("increment")).toBeInTheDocument()
-    await expect.element(page.getByTestId("decrement")).toBeInTheDocument()
+    await expect.element(page.getByTestId("root")).toBeVisible()
+    await expect.element(page.getByTestId("element")).toBeVisible()
+    await expect.element(page.getByTestId("control")).toBeVisible()
+    await expect.element(page.getByTestId("increment")).toBeVisible()
+    await expect.element(page.getByTestId("decrement")).toBeVisible()
   })
 })

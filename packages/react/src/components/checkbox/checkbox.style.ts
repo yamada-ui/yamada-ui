@@ -5,6 +5,7 @@ export const checkboxStyle = defineComponentSlotStyle({
     group: {},
     indicator: {
       alignItems: "center",
+      bg: "{indicator-bg}",
       borderColor: "{indicator-border-color}",
       borderWidth: "2px",
       boxSize: "{indicator-size}",
@@ -27,6 +28,7 @@ export const checkboxStyle = defineComponentSlotStyle({
     root: {
       "--error-border-color": "colors.border.error",
       "--focus-border-color": "colorScheme.outline",
+      "--indicator-bg": "transparent",
       "--indicator-border-color": "colors.border.emphasized",
       alignItems: "center",
       display: "flex",

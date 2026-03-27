@@ -1,5 +1,5 @@
 import { a11y, act, fireEvent, render, screen } from "#test"
-import { ImageIcon } from "../icon"
+import { ImageIcon } from "../icon/icons/image-icon"
 import { Text } from "../text"
 import { Dropzone } from "./"
 import { IMAGE_ACCEPT_TYPE } from "./accept-types"

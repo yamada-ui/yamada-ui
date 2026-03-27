@@ -3,7 +3,7 @@
 import type { LoadingProps } from "./loading"
 import { styled, varAttr } from "../../core"
 import { isString } from "../../utils"
-import { Icon } from "../icon"
+import { Icon } from "../icon/icon"
 import { initialProps, superProps, withContext } from "./loading"
 
 export interface OvalProps extends LoadingProps {}

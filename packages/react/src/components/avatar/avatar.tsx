@@ -5,7 +5,7 @@ import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { AvatarStyle } from "./avatar.style"
 import type { UseAvatarProps } from "./use-avatar"
 import { createSlotComponent, styled } from "../../core"
-import { UserRoundIcon } from "../icon"
+import { UserRoundIcon } from "../icon/icons/user-round-icon"
 import { avatarStyle } from "./avatar.style"
 import { useAvatar } from "./use-avatar"
 

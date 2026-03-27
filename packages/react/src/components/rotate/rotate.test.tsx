@@ -1,7 +1,7 @@
 import type { KeyframeIdent } from "../../core"
 import { a11y, render, screen, waitFor } from "#test"
 import { useState } from "react"
-import { BoxIcon } from "../icon"
+import { BoxIcon } from "../icon/icons/box-icon"
 import { Rotate } from "./"
 
 describe("<Rotate />", () => {

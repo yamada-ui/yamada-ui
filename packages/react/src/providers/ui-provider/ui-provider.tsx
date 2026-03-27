@@ -1,23 +1,19 @@
 import type { FC } from "react"
-import type {
-  ColorModeProviderProps,
-  ThemeConfig,
-  ThemeProviderProps,
-  UsageTheme,
-} from "../../core"
+import type { ColorModeProviderProps } from "../../core/system/color-mode-provider"
+import type { ThemeConfig, UsageTheme } from "../../core/system/index.types"
+import type { ThemeProviderProps } from "../../core/system/theme-provider"
 import type { DeepMerge } from "../../utils"
-import type { I18nProviderProps } from "../i18n-provider"
-import { LoadingProvider } from "../../components/loading"
-import { NoticeProvider } from "../../components/notice"
-import {
-  ColorModeProvider,
-  EnvironmentProvider,
-  SystemProvider,
-  ThemeProvider,
-} from "../../core"
-import { config as defaultConfig, theme as defaultTheme } from "../../theme"
+import type { I18nProviderProps } from "../i18n-provider/i18n-provider"
+import { LoadingProvider } from "../../components/loading/loading-provider"
+import { NoticeProvider } from "../../components/notice/notice-provider"
+import { ColorModeProvider } from "../../core/system/color-mode-provider"
+import { EnvironmentProvider } from "../../core/system/environment-provider"
+import { SystemProvider } from "../../core/system/system-provider"
+import { ThemeProvider } from "../../core/system/theme-provider"
+import { theme as defaultTheme } from "../../theme"
+import { config as defaultConfig } from "../../theme/config"
 import { merge } from "../../utils"
-import { I18nProvider } from "../i18n-provider"
+import { I18nProvider } from "../i18n-provider/i18n-provider"
 
 export interface UIProviderProps
   extends

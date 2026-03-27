@@ -6,7 +6,7 @@ import type {
   ThemeProps,
   WithoutThemeProps,
 } from "../../core"
-import type { IconProps } from "../icon"
+import type { IconProps } from "../icon/icon"
 import type { LoadingStyle } from "./loading.style"
 import { createComponent } from "../../core"
 import { loadingStyle } from "./loading.style"

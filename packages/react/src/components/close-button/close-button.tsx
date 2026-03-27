@@ -6,7 +6,7 @@ import type { CloseButtonStyle } from "./close-button.style"
 import { createComponent } from "../../core"
 import { useI18n } from "../../providers/i18n-provider"
 import { IconButton } from "../button"
-import { XIcon } from "../icon"
+import { XIcon } from "../icon/icons/x-icon"
 import { closeButtonStyle } from "./close-button.style"
 
 export interface CloseButtonProps

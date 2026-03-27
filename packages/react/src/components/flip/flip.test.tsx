@@ -2,7 +2,7 @@ import type { KeyframeIdent } from "../../core"
 import { a11y, render, screen, waitFor } from "#test"
 import { useState } from "react"
 import { noop } from "../../utils"
-import { BoxIcon } from "../icon"
+import { BoxIcon } from "../icon/icons/box-icon"
 import { Flip } from "./"
 
 describe("<Flip />", () => {

@@ -54,7 +54,8 @@ import {
   useUpdateEffect,
 } from "../../utils"
 import { Checkbox } from "../checkbox"
-import { ChevronsUpDownIcon, ChevronUpIcon } from "../icon"
+import { ChevronUpIcon } from "../icon/icons/chevron-up-icon"
+import { ChevronsUpDownIcon } from "../icon/icons/chevrons-up-down-icon"
 import { NativeTable } from "../native-table"
 
 declare module "@tanstack/react-table" {

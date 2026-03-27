@@ -1,5 +1,5 @@
 import { a11y, render, screen } from "#test"
-import { ShoppingCartIcon } from "../icon"
+import { ShoppingCartIcon } from "../icon/icons/shopping-cart-icon"
 import { EmptyState } from "./"
 
 describe("<EmptyState />", () => {

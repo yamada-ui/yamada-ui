@@ -20,7 +20,8 @@ import { cloneElement, isValidElement, useMemo } from "react"
 import { createSlotComponent, styled, varAttr } from "../../core"
 import { dataAttr } from "../../utils"
 import { IconButton } from "../button"
-import { ChevronLeftIcon, ChevronRightIcon } from "../icon"
+import { ChevronLeftIcon } from "../icon/icons/chevron-left-icon"
+import { ChevronRightIcon } from "../icon/icons/chevron-right-icon"
 import { carouselStyle } from "./carousel.style"
 import {
   CarouselContext,

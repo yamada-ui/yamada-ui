@@ -1,6 +1,6 @@
 import { a11y, render, screen } from "#test"
 import { noop } from "../../utils"
-import { BoxIcon } from "../icon"
+import { BoxIcon } from "../icon/icons/box-icon"
 import { Accordion } from "./"
 
 const items = [

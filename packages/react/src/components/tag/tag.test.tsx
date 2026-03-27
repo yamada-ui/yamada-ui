@@ -1,6 +1,6 @@
 import { a11y, render, screen } from "#test"
 import { noop } from "../../utils"
-import { CheckIcon } from "../icon"
+import { CheckIcon } from "../icon/icons/check-icon"
 import { Tag } from "./"
 
 describe("<Tag />", () => {

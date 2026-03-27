@@ -1,7 +1,7 @@
 import type { ResizableRootControl } from "./"
 import { a11y, fireEvent, render, screen } from "#test"
 import { useRef } from "react"
-import { GripVerticalIcon } from "../icon"
+import { GripVerticalIcon } from "../icon/icons/grip-vertical-icon"
 import { Resizable } from "./"
 
 describe("<Resizable />", () => {

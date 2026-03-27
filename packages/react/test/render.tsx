@@ -7,14 +7,14 @@ import type {
 import type { PropsWithChildren, ReactNode } from "react"
 import type { Container } from "react-dom/client"
 import type { AxeCore } from "vitest-axe"
-import type { UIProviderProps } from "../src"
+import type { UIProviderProps } from "../src/providers/ui-provider/ui-provider"
 import {
   render as originalRender,
   renderHook as originalRenderHook,
 } from "@testing-library/react"
 import { userEvent } from "@testing-library/user-event"
 import { isValidElement } from "react"
-import { UIProvider } from "../src"
+import { UIProvider } from "../src/providers/ui-provider/ui-provider"
 import "@testing-library/jest-dom/vitest"
 
 export interface RenderOptions extends OriginalRenderOptions {

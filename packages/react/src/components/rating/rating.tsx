@@ -7,7 +7,7 @@ import type { UseRatingItemProps, UseRatingProps } from "./use-rating"
 import { useMemo } from "react"
 import { createSlotComponent, styled, varAttr } from "../../core"
 import { runIfFn } from "../../utils"
-import { StarIcon } from "../icon"
+import { StarIcon } from "../icon/icons/star-icon"
 import { ratingStyle } from "./rating.style"
 import {
   RatingContext,

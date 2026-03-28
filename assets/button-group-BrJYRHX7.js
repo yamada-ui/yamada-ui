@@ -1,1 +1,0 @@
-import{r as x,j as s,aQ as p,aR as i}from"./iframe-AnrJ8TER.js";import{G as c}from"./group-BDrgJT8A.js";const a=(({size:t,variant:r,attached:o,disabled:n,...u})=>{const e=x.useMemo(()=>({size:t,variant:r,disabled:n,focusVisibleRing:o?"inside":void 0}),[t,r,n,o]);return s.jsx(p,{value:e,children:s.jsx(i,{value:e,children:s.jsx(c,{attached:o,...u})})})});export{a as B};

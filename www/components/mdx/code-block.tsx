@@ -3,7 +3,7 @@ import { Box, Code, Flex, Grid, Spacer, Tabs, Text } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import React from "react"
 import { CodePreview } from "@/components/code-preview"
-import { StackBlitzButton } from "@/components/stack-blitz-button"
+import { PlaygroundButton } from "@/components/playground-button"
 import { codeToHtml } from "@/libs/shiki"
 import { langConditions } from "@/utils/i18n"
 import { Callout } from "./callout"
@@ -49,7 +49,7 @@ export function CodeBlock({
             <Spacer />
 
             {lang === "tsx" ? (
-              <StackBlitzButton
+              <PlaygroundButton
                 size={{ base: "sm", md: "xs" }}
                 variant="ghost"
                 client={client}

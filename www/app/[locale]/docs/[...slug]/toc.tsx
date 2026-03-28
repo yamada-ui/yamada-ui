@@ -13,7 +13,7 @@ import {
 } from "@yamada-ui/react"
 import { useMotionValueEvent, useScroll } from "motion/react"
 import { useTranslations } from "next-intl"
-import { createRef, useMemo, useRef, useState } from "react"
+import { createRef, useCallback, useMemo, useRef, useState } from "react"
 import scrollIntoView from "scroll-into-view-if-needed"
 import { useLlmsUrls } from "@/components"
 import { CONSTANTS } from "@/constants"
@@ -36,7 +36,7 @@ export function Toc({ md, locale, path, pathname, toc }: TocProps) {
   const t = useTranslations("component.toc")
   const [currentId, setCurrentId] = useState<string>("")
   const containerRef = useRef<HTMLDivElement>(null)
-  const itemRefs = useRef<Map<string, RefObject<HTMLAnchorElement | null>>>(
+  const refMap = useRef<Map<string, RefObject<HTMLAnchorElement | null>>>(
     new Map(),
   )
   const { scrollY } = useScroll()
@@ -45,12 +45,29 @@ export function Toc({ md, locale, path, pathname, toc }: TocProps) {
   const flattenedToc = useMemo(() => flattenToc(toc), [toc])
   const { chatgptUrl, claudeUrl, markdownUrl } = useLlmsUrls(locale, pathname)
 
-  useSafeLayoutEffect(() => {
-    const hash = window.location.hash.replace("#", "")
+  const onChangeCurrent = useCallback((id: string) => {
+    if (!id) return
 
-    if (!hash) return
+    setCurrentId(id)
 
-    setCurrentId(hash)
+    const ref = refMap.current.get(id)
+
+    if (!ref?.current) return
+
+    scrollIntoView(ref.current, {
+      behavior: (actions) =>
+        actions.forEach(({ el, top }) => {
+          if (directionRef.current === "down") {
+            el.scrollTop = top + 16
+          } else {
+            el.scrollTop = top - 16
+          }
+        }),
+      block: "nearest",
+      boundary: containerRef.current,
+      inline: "nearest",
+      scrollMode: "if-needed",
+    })
   }, [])
 
   useMotionValueEvent(scrollY, "change", (value) => {
@@ -58,6 +75,12 @@ export function Toc({ md, locale, path, pathname, toc }: TocProps) {
 
     prevValue.current = value
   })
+
+  useSafeLayoutEffect(() => {
+    const currentId = window.location.hash.replace("#", "")
+
+    onChangeCurrent(currentId)
+  }, [])
 
   useEventListener(
     () => document,
@@ -74,33 +97,10 @@ export function Toc({ md, locale, path, pathname, toc }: TocProps) {
         if (el.getBoundingClientRect().top < 140) currentId = id
       }
 
-      setCurrentId(currentId)
+      onChangeCurrent(currentId)
     },
     { passive: true },
   )
-
-  useSafeLayoutEffect(() => {
-    if (!containerRef.current) return
-
-    const itemRef = itemRefs.current.get(currentId)
-
-    if (!itemRef?.current) return
-
-    scrollIntoView(itemRef.current, {
-      behavior: (actions) =>
-        actions.forEach(({ el, top }) => {
-          if (directionRef.current === "down") {
-            el.scrollTop = top + 16
-          } else {
-            el.scrollTop = top - 16
-          }
-        }),
-      block: "nearest",
-      boundary: containerRef.current,
-      inline: "nearest",
-      scrollMode: "if-needed",
-    })
-  }, [currentId])
 
   return (
     <VStack
@@ -131,7 +131,7 @@ export function Toc({ md, locale, path, pathname, toc }: TocProps) {
               const current = currentId == id
               const ref = createRef<HTMLAnchorElement>()
 
-              itemRefs.current.set(id, ref)
+              refMap.current.set(id, ref)
 
               return (
                 <Link

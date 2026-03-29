@@ -117,8 +117,7 @@
             {
               "title": "ActionBar",
               "segment": "action-bar",
-              "pathname": "/docs/components/action-bar",
-              "status": "planned"
+              "pathname": "/docs/components/action-bar"
             },
             {
               "title": "Alert",
@@ -649,8 +648,7 @@
             {
               "title": "Tree",
               "segment": "tree",
-              "pathname": "/docs/components/tree",
-              "status": "planned"
+              "pathname": "/docs/components/tree"
             },
             {
               "title": "VStack",

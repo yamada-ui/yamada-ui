@@ -1,8 +1,218 @@
 ---
 title: ActionBar
-description: "`ActionBar`は、現在作成を検討しています。"
+description: "`ActionBar`は、下部に表示されるアクションバーを表示するコンポーネントです。"
 tags: ["overlay", "floating", "notification"]
-status: planned
+storybook: components-action-bar--basic
+source: components/action-bar
+style: components/action-bar/action-bar.style.ts
 ---
 
-このGitHubの[イシュー](https://github.com/yamada-ui/yamada-ui/issues/3212)であなたの意見を投稿してください。作成の優先順位を決めるのに役立ちます。
+```tsx preview
+<ActionBar.Root>
+  <ActionBar.OpenTrigger>
+    <Button>Open ActionBar</Button>
+  </ActionBar.OpenTrigger>
+
+  <ActionBar.Content>
+    <Button variant="outline" borderStyle="dashed">
+      2 Selected
+    </Button>
+    <ActionBar.Separator />
+    <Button startIcon={<TrashIcon />}>Delete</Button>
+    <Button startIcon={<ShareIcon />}>Share</Button>
+    <ActionBar.Separator />
+    <ActionBar.CloseTrigger>
+      <CloseButton size="md" />
+    </ActionBar.CloseTrigger>
+  </ActionBar.Content>
+</ActionBar.Root>
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { ActionBar } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { ActionBar } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { ActionBar } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<ActionBar.Root>
+  <ActionBar.OpenTrigger />
+  <ActionBar.Content>
+    <ActionBar.Separator />
+    <ActionBar.CloseTrigger />
+  </ActionBar.Content>
+</ActionBar.Root>
+```
+
+### propsを使う
+
+```tsx preview
+<ActionBar.Root
+  content={
+    <>
+      <Button variant="outline" borderStyle="dashed">
+        2 Selected
+      </Button>
+      <ActionBar.Separator />
+      <Button startIcon={<TrashIcon />}>Delete</Button>
+      <Button startIcon={<ShareIcon />}>Share</Button>
+      <ActionBar.Separator />
+      <ActionBar.CloseTrigger>
+        <CloseButton size="md" />
+      </ActionBar.CloseTrigger>
+    </>
+  }
+  trigger={<Button>Open ActionBar</Button>}
+/>
+```
+
+### 所要時間を変更する
+
+所要時間を変更する場合は、`duration`に数値(秒)を設定します。
+
+```tsx preview
+<ActionBar.Root duration={0.4}>
+  <ActionBar.OpenTrigger>
+    <Button>Open ActionBar</Button>
+  </ActionBar.OpenTrigger>
+
+  <ActionBar.Content>
+    <Button variant="outline" borderStyle="dashed">
+      2 Selected
+    </Button>
+    <ActionBar.Separator />
+    <Button startIcon={<TrashIcon />}>Delete</Button>
+    <Button startIcon={<ShareIcon />}>Share</Button>
+    <ActionBar.Separator />
+    <ActionBar.CloseTrigger>
+      <CloseButton size="md" />
+    </ActionBar.CloseTrigger>
+  </ActionBar.Content>
+</ActionBar.Root>
+```
+
+### 配置を変更する
+
+配置を変更する場合は、`placement`に`"start-center"`や`"end-start"`などを設定します。デフォルトでは、`"end-center"`が設定されています。
+
+```tsx preview
+<ActionBar.Root placement="start-center">
+  <ActionBar.OpenTrigger>
+    <Button>Open ActionBar</Button>
+  </ActionBar.OpenTrigger>
+
+  <ActionBar.Content>
+    <Button variant="outline" borderStyle="dashed">
+      2 Selected
+    </Button>
+    <ActionBar.Separator />
+    <Button startIcon={<TrashIcon />}>Delete</Button>
+    <Button startIcon={<ShareIcon />}>Share</Button>
+    <ActionBar.Separator />
+    <ActionBar.CloseTrigger>
+      <CloseButton size="md" />
+    </ActionBar.CloseTrigger>
+  </ActionBar.Content>
+</ActionBar.Root>
+```
+
+### アニメーションを変更する
+
+表示または非表示のアニメーションを変更する場合は、`animationScheme`に`"block-start"`や`"inline-end"`などを設定します。デフォルトでは、`placement`に基づいて設定されています。
+
+```tsx preview
+<ActionBar.Root animationScheme="inline-end" placement="start-end">
+  <ActionBar.OpenTrigger>
+    <Button>Open ActionBar</Button>
+  </ActionBar.OpenTrigger>
+
+  <ActionBar.Content>
+    <Button variant="outline" borderStyle="dashed">
+      2 Selected
+    </Button>
+    <ActionBar.Separator />
+    <Button startIcon={<TrashIcon />}>Delete</Button>
+    <Button startIcon={<ShareIcon />}>Share</Button>
+    <ActionBar.Separator />
+    <ActionBar.CloseTrigger>
+      <CloseButton size="md" />
+    </ActionBar.CloseTrigger>
+  </ActionBar.Content>
+</ActionBar.Root>
+```
+
+### 制御する
+
+```tsx client preview functional
+const { open, onClose, onOpen } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open ActionBar</Button>
+
+    <ActionBar.Root
+      content={
+        <>
+          <Button variant="outline" borderStyle="dashed">
+            2 Selected
+          </Button>
+          <ActionBar.Separator />
+          <Button startIcon={<TrashIcon />}>Delete</Button>
+          <Button startIcon={<ShareIcon />}>Share</Button>
+          <ActionBar.Separator />
+          <ActionBar.CloseTrigger>
+            <CloseButton size="md" />
+          </ActionBar.CloseTrigger>
+        </>
+      }
+      open={open}
+      onClose={onClose}
+    />
+  </>
+)
+```
+
+## Props
+
+<PropsTable name="action-bar" />
+
+## アクセシビリティ
+
+`ActionBar`は、アクセシビリティに関して[WAI-ARIA - Dialog (Modal) Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)に従います。
+
+### キーボード操作
+
+| キー     | 説明                       | 状態                                |
+| -------- | -------------------------- | ----------------------------------- |
+| `Escape` | アクションバーを閉じます。 | `open={true}` + `closeOnEsc={true}` |
+
+### ARIAロールと属性
+
+| コンポーネント           | ロールと属性             | 使い方                                                                                    |
+| ------------------------ | ------------------------ | ----------------------------------------------------------------------------------------- |
+| `ActionBar.Content`      | `role="dialog"`          | ダイアログであることを示します。                                                          |
+| `ActionBar.OpenTrigger`  | `aria-haspopup="dialog"` | ダイアログが存在することを示します。                                                      |
+|                          | `aria-expanded`          | アクションバーが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。 |
+|                          | `aria-controls`          | アクションバーが開いている場合は、`ActionBar.Content`の`id`を設定します。                 |
+|                          | `aria-label`             | `"アクションバーを開く"`を設定します。                                                    |
+| `ActionBar.CloseTrigger` | `aria-label`             | `"アクションバーを閉じる"`を設定します。                                                  |
+
+## 類似のコンポーネント
+
+<Similar name="action-bar" />
+
+## 使用しているコンポーネント・フック
+
+<Uses name="action-bar" />

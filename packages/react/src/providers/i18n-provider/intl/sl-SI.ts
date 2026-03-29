@@ -1,6 +1,10 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
+  actionBar: {
+    "Close action bar": "Zapri akcijsko vrstico",
+    "Open action bar": "Odpri akcijsko vrstico",
+  },
   autocomplete: {
     "Clear value": "Počisti vrednost",
     "No results found": "Ni najdenih rezultatov",

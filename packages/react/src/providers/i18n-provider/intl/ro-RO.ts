@@ -1,6 +1,10 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
+  actionBar: {
+    "Close action bar": "Închide bara de acțiuni",
+    "Open action bar": "Deschide bara de acțiuni",
+  },
   autocomplete: {
     "Clear value": "Șterge valoarea",
     "No results found": "Nu s-au găsit rezultate",

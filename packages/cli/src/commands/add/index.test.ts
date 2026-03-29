@@ -608,6 +608,37 @@ describe("add", () => {
     )
   })
 
+  test("should not create component files when --dry-run", async () => {
+    setupProject(tempDir)
+
+    await add.parseAsync(
+      [
+        "button",
+        "--cwd",
+        tempDir,
+        "--yes",
+        "--dry-run",
+        "--no-install",
+        "--no-format",
+        "--no-lint",
+      ],
+      { from: "user" },
+    )
+
+    const buttonDir = path.join(
+      tempDir,
+      "workspaces",
+      "ui",
+      "src",
+      "components",
+      "button",
+    )
+    expect(existsSync(buttonDir)).toBeFalsy()
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would write:"),
+    )
+  })
+
   test("should show error when all components add without overwrite and dir exists with --yes", async () => {
     setupProject(tempDir)
 

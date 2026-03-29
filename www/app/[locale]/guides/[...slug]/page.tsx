@@ -4,9 +4,7 @@ import { Breadcrumb, Heading, Text, VStack } from "@yamada-ui/react"
 import { getTranslations } from "next-intl/server"
 import { notFound } from "next/navigation"
 import { MDXContent, NextLink } from "@/components"
-import { getGuides } from "@/data/guide"
-import en from "@/data/guide-map.en.json"
-import ja from "@/data/guide-map.ja.json"
+import { getCollectionTitle, getGuides } from "@/data/guide"
 import { generateOg } from "@/utils/next"
 
 function getGuide(locale: string, slug: string[]) {
@@ -15,12 +13,6 @@ function getGuide(locale: string, slug: string[]) {
   return guides.find(
     (guide) => guide.locale === locale && guide.slug.join("/") === fullSlug,
   )
-}
-
-function getCollectionTitle(locale: string, collection: string) {
-  const map = locale === "ja-JP" ? ja : en
-
-  return map.find((entry) => entry.collection === collection)?.title
 }
 
 export function generateStaticParams({

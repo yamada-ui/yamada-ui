@@ -29,6 +29,15 @@ function getGuideMap(locale: string): GuideMap[] {
   }
 }
 
+export function getCollectionTitle(
+  locale: string,
+  collection: string,
+): string | undefined {
+  const guideMap = getGuideMap(locale)
+
+  return guideMap.find((entry) => entry.collection === collection)?.title
+}
+
 export function getGuideCollections(locale: string): GuideCollection[] {
   const localeGuides = getGuides(locale)
   const guideMap = getGuideMap(locale)

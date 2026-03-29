@@ -28,8 +28,8 @@ body:
     id: version
     attributes:
       label: "Package Version"
-      description: "The version of the package you are using."
-      placeholder: "2.0.0"
+      description: "The version of the package you are using. Latest: @yamada-ui/react 2.1.4 / @yamada-ui/cli 2.1.2."
+      placeholder: "e.g. 2.1.4"
     validations:
       required: true
   - type: textarea

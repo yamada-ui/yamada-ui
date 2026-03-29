@@ -1,16 +1,9 @@
 import type { Metadata } from "next"
-import {
-  Badge,
-  Heading,
-  HStack,
-  SimpleGrid,
-  Text,
-  VStack,
-} from "@yamada-ui/react"
+import { Badge, Heading, HStack, Text, VStack } from "@yamada-ui/react"
 import { getTranslations } from "next-intl/server"
-import { NextLinkButton } from "@/components"
 import { getGuideCollections } from "@/data/guide"
 import { generateOg } from "@/utils/next"
+import { Card, CardGroup } from "../../../components/mdx/card"
 
 export async function generateMetadata({
   params,
@@ -56,20 +49,19 @@ export default async function Page({ params }: PageProps<"/[locale]/guides">) {
               {description}
             </Text>
           </VStack>
-          <SimpleGrid as="nav" columns={{ base: 2, md: 1 }} gap="md">
+          <CardGroup>
             {guides.map((guide) => (
-              <NextLinkButton
+              <Card
                 key={guide.slug.join("/")}
                 href={`/guides/${guide.slug.slice(1).join("/")}`}
-                variant="outline"
-                color="fg.emphasized"
-                fontWeight="normal"
-                justifyContent="flex-start"
+                title={guide.title}
               >
-                {guide.title}
-              </NextLinkButton>
+                <Text color="fg.emphasized" fontSize="sm" lineHeight="1.8">
+                  {guide.description}
+                </Text>
+              </Card>
             ))}
-          </SimpleGrid>
+          </CardGroup>
         </VStack>
       ))}
     </VStack>

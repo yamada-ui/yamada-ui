@@ -67,7 +67,7 @@ export default async function Page({
         <Text color="fg.emphasized" fontSize="sm" lineHeight="1.8">
           {guide.description}
         </Text>
-        <Text as="time" color="fg.muted" fontSize="xs">
+        <Text as="time" color="fg.muted" fontSize="sm">
           {guide.publishedAt}
         </Text>
       </VStack>

@@ -1,5 +1,15 @@
 # @yamada-ui/react
 
+## 2.1.5
+
+### Patch Changes
+
+- [#6261](https://github.com/yamada-ui/yamada-ui/pull/6261) [`aa494e0`](https://github.com/yamada-ui/yamada-ui/commit/aa494e09649baec0bffdca1f6da1bf1ee388c0d8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- [#6309](https://github.com/yamada-ui/yamada-ui/pull/6309) [`b4ca385`](https://github.com/yamada-ui/yamada-ui/commit/b4ca38563004851771ec3582a0c5b5ac28b6cdfb) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactored the styles of the `Button` component. There are no changes to the styles.
+
+- [#6277](https://github.com/yamada-ui/yamada-ui/pull/6277) [`01125a4`](https://github.com/yamada-ui/yamada-ui/commit/01125a4d1c652e85b377d1efe58578bbeeec2adc) Thanks [@bmthd](https://github.com/bmthd)! - Fixed an issue where the opening animation in NativeAccordion did not run on the first open in SSR environments.
+
 ## 2.1.4
 
 ### Patch Changes

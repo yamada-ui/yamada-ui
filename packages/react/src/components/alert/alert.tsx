@@ -1,18 +1,16 @@
 "use client"
 
 import type { HTMLStyledProps, ThemeProps } from "../../core"
-import type { IconProps } from "../icon"
+import type { IconProps } from "../icon/icon"
 import type { Loading } from "../loading"
 import type { StatusScheme } from "../status"
 import type { AlertStyle } from "./alert.style"
 import { useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
-import {
-  CircleCheckBigIcon,
-  InfoIcon,
-  OctagonAlertIcon,
-  TriangleAlertIcon,
-} from "../icon"
+import { CircleCheckBigIcon } from "../icon/icons/circle-check-big-icon"
+import { InfoIcon } from "../icon/icons/info-icon"
+import { OctagonAlertIcon } from "../icon/icons/octagon-alert-icon"
+import { TriangleAlertIcon } from "../icon/icons/triangle-alert-icon"
 import { useLoadingComponent } from "../loading"
 import { alertStyle } from "./alert.style"
 

@@ -23,7 +23,9 @@ import type {
 import { Fragment, useMemo, useState } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { cast, handlerAll } from "../../utils"
-import { CheckIcon, ChevronRightIcon, CircleSmallIcon } from "../icon"
+import { CheckIcon } from "../icon/icons/check-icon"
+import { ChevronRightIcon } from "../icon/icons/chevron-right-icon"
+import { CircleSmallIcon } from "../icon/icons/circle-small-icon"
 import { Popover, usePopoverProps } from "../popover"
 import { menuStyle } from "./menu.style"
 import {

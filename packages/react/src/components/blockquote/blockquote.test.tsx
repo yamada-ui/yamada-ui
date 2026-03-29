@@ -1,5 +1,5 @@
 import { a11y, render, screen } from "#test"
-import { QuoteIcon } from "../icon"
+import { QuoteIcon } from "../icon/icons/quote-icon"
 import { Blockquote } from "./"
 
 describe("<Blockquote />", () => {

@@ -1,5 +1,5 @@
 import { a11y, render, screen } from "#test"
-import { LoaderIcon } from "../icon"
+import { LoaderIcon } from "../icon/icons/loader-icon"
 import { Button } from "./button"
 
 describe("<Button />", () => {

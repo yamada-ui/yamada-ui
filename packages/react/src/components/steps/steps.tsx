@@ -15,7 +15,7 @@ import {
   useFindChild,
   useValidChildren,
 } from "../../utils"
-import { CheckIcon } from "../icon"
+import { CheckIcon } from "../icon/icons/check-icon"
 import { stepsStyle } from "./steps.style"
 import {
   StepsContext,

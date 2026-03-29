@@ -1,4 +1,4 @@
-import type { Component } from "../../core"
+import type { Component } from "../../core/components/index.types"
 import { useMemo } from "react"
 import { isString, toPascalCase } from "../../utils"
 import { Loading } from "./"

@@ -1,5 +1,5 @@
 import { page, render } from "#test/browser"
-import { BoxIcon } from "../icon"
+import { BoxIcon } from "../icon/icons/box-icon"
 import { List } from "./"
 
 describe("<List />", () => {

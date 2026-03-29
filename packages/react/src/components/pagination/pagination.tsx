@@ -15,13 +15,11 @@ import { createSlotComponent, styled } from "../../core"
 import { useI18n } from "../../providers/i18n-provider"
 import { isNumber, runIfFn } from "../../utils"
 import { ButtonGroup } from "../button"
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  ChevronsLeftIcon,
-  ChevronsRightIcon,
-  EllipsisIcon,
-} from "../icon"
+import { ChevronLeftIcon } from "../icon/icons/chevron-left-icon"
+import { ChevronRightIcon } from "../icon/icons/chevron-right-icon"
+import { ChevronsLeftIcon } from "../icon/icons/chevrons-left-icon"
+import { ChevronsRightIcon } from "../icon/icons/chevrons-right-icon"
+import { EllipsisIcon } from "../icon/icons/ellipsis-icon"
 import { paginationStyle } from "./pagination.style"
 import {
   PaginationContext,

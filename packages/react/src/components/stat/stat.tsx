@@ -6,7 +6,7 @@ import type { StatStyle } from "./stat.style"
 import { createSlotComponent, styled } from "../../core"
 import { useI18n } from "../../providers/i18n-provider"
 import { useSplitChildren } from "../../utils"
-import { TriangleIcon } from "../icon"
+import { TriangleIcon } from "../icon/icons/triangle-icon"
 import { statStyle } from "./stat.style"
 
 export interface StatRootProps

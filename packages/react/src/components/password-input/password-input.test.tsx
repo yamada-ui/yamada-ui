@@ -1,6 +1,7 @@
 import { a11y, render, screen, waitFor } from "#test"
 import { useState } from "react"
-import { EyeIcon, EyeOffIcon } from "../icon"
+import { EyeIcon } from "../icon/icons/eye-icon"
+import { EyeOffIcon } from "../icon/icons/eye-off-icon"
 import { PasswordInput, StrengthMeter } from "./"
 
 describe("<PasswordInput />", () => {

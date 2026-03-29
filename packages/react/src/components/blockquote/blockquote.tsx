@@ -6,7 +6,7 @@ import type { BlockquoteStyle } from "./blockquote.style"
 import { useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { useFindChild, useValidChildren } from "../../utils"
-import { QuoteIcon } from "../icon"
+import { QuoteIcon } from "../icon/icons/quote-icon"
 import { blockquoteStyle } from "./blockquote.style"
 
 interface ComponentContext

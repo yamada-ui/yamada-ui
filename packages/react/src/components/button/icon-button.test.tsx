@@ -1,5 +1,5 @@
 import { a11y, render } from "#test"
-import { BoxIcon } from "../icon"
+import { BoxIcon } from "../icon/icons/box-icon"
 import { IconButton } from "./icon-button"
 
 describe("<IconButton />", () => {

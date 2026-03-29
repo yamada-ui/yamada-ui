@@ -1,10 +1,10 @@
-import type { StyledTheme } from "../src"
+import type { StyledTheme } from "../src/core/system/index.types"
 import { vi } from "vitest"
-import {
-  createSystem,
-  config as defaultConfig,
-  theme as defaultTheme,
-} from "../src"
+
+import { theme as defaultTheme } from "../src/theme"
+import { config as defaultConfig } from "../src/theme/config"
+
+import { createSystem } from "../src/core/system/create-system"
 
 export const system = createSystem(defaultTheme, defaultConfig)
 

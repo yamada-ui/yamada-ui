@@ -8,7 +8,7 @@ import { createSlotComponent, styled } from "../../core"
 import { useClickable } from "../../hooks/use-clickable"
 import { useI18n } from "../../providers/i18n-provider"
 import { dataAttr } from "../../utils"
-import { XIcon } from "../icon"
+import { XIcon } from "../icon/icons/x-icon"
 import { tagStyle } from "./tag.style"
 
 interface ComponentContext extends Pick<TagProps, "disabled"> {}

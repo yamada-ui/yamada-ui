@@ -9,7 +9,7 @@ import type { UseReorderItemProps, UseReorderProps } from "./use-reorder"
 import { Reorder as OriginalReorder } from "motion/react"
 import { createSlotComponent, styled } from "../../core"
 import { useValue } from "../../hooks/use-value"
-import { GripVerticalIcon } from "../icon"
+import { GripVerticalIcon } from "../icon/icons/grip-vertical-icon"
 import { reorderStyle } from "./reorder.style"
 import {
   ReorderContext,

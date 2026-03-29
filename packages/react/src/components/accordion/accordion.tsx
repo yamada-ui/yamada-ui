@@ -10,7 +10,7 @@ import { Children, cloneElement, isValidElement, useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { createContext, isString, runIfFn, useSplitChildren } from "../../utils"
 import { Collapse } from "../collapse"
-import { ChevronDownIcon } from "../icon"
+import { ChevronDownIcon } from "../icon/icons/chevron-down-icon"
 import { accordionStyle } from "./accordion.style"
 import {
   AccordionContext,

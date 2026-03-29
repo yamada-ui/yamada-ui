@@ -1,5 +1,5 @@
 import { a11y, render, screen } from "#test"
-import { BoxIcon } from "../icon"
+import { BoxIcon } from "../icon/icons/box-icon"
 import { Switch } from "./"
 
 describe("<Switch />", () => {

@@ -1,6 +1,6 @@
 import { a11y, render, screen } from "#test"
 import { NativeSelect } from "."
-import { BoxIcon } from "../icon"
+import { BoxIcon } from "../icon/icons/box-icon"
 
 describe("<NativeSelect />", () => {
   test("renders component correctly", async () => {

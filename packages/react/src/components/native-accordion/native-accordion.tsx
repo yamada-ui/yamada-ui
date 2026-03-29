@@ -11,7 +11,7 @@ import type {
 import { Children, cloneElement, isValidElement, useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { createContext, useSplitChildren } from "../../utils"
-import { ChevronDownIcon } from "../icon"
+import { ChevronDownIcon } from "../icon/icons/chevron-down-icon"
 import { nativeAccordionStyle } from "./native-accordion.style"
 import {
   NativeAccordionContext,

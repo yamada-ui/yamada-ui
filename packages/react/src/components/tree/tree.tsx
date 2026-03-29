@@ -48,7 +48,7 @@ interface TreeCallBackProps {
   expanded?: boolean
 }
 
-export type TreeItemReactNode =
+type TreeItemReactNode =
   | ReactNodeOrFunction<TreeCallBackProps>
   | {
       group: ReactNodeOrFunction<TreeCallBackProps>
@@ -61,7 +61,7 @@ export type TreeItemReactNode =
 
 interface TreeItemWithValue extends Omit<TreeItemProps, "children"> {}
 
-export interface TreeItemWithChildren extends TreeItemWithValue {
+interface TreeItemWithChildren extends TreeItemWithValue {
   children: TreeItem[]
 }
 
@@ -153,7 +153,7 @@ export interface TreeRootProps<Multiple extends boolean = false>
   /**
    * Props for the item component.
    */
-  itemProps?: Omit<TreeItemProps, "label" | "open" | "value">
+  itemProps?: Omit<TreeItemProps, "children" | "label" | "open" | "value">
 }
 
 const {

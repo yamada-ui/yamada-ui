@@ -28,8 +28,8 @@ body:
     id: version
     attributes:
       label: "パッケージのバージョン"
-      description: "使用しているパッケージのバージョン。"
-      placeholder: "2.0.0"
+      description: "使用しているパッケージのバージョン。最新: @yamada-ui/react 2.1.4 / @yamada-ui/cli 2.1.2。"
+      placeholder: "例: 2.1.4"
     validations:
       required: true
   - type: textarea

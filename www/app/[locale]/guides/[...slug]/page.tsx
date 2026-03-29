@@ -49,7 +49,8 @@ export default async function Page({
   if (!guide) return notFound()
 
   const t = await getTranslations({ locale, namespace: "guides" })
-  const collectionTitle = getCollectionTitle(locale, guide.collection) ?? null
+  const collectionTitle =
+    getCollectionTitle(locale, guide.collection) ?? guide.collection
 
   return (
     <VStack as="article" maxW="5xl" mx="auto" py="lg" w="full">

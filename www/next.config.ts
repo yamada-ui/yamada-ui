@@ -5,24 +5,17 @@ import { getLang } from "./utils/i18n"
 
 const withNextIntl = createNextIntlPlugin()
 
-function getRedirects(source: string, destination: string) {
-  return CONSTANTS.I18N.LOCALES.map((locale) => {
-    if (locale === CONSTANTS.I18N.DEFAULT_LOCALE) {
-      return {
-        destination,
-        permanent: true,
-        source,
-      }
-    } else {
-      const lang = getLang(locale)
+function getRedirects(source: string | string[], destination: string) {
+  const sources = Array.isArray(source) ? source : [source]
 
-      return {
-        destination: `/${lang}${destination}`,
-        permanent: true,
-        source: `/${lang}${source}`,
-      }
-    }
-  })
+  return sources.flatMap((source) => [
+    { destination, permanent: true, source },
+    {
+      destination: `/:locale/${destination}`,
+      permanent: true,
+      source: `/:locale/${source}`,
+    },
+  ])
 }
 
 const nextConfig: NextConfig = {
@@ -41,22 +34,124 @@ const nextConfig: NextConfig = {
   reactStrictMode: false,
   async redirects() {
     return Promise.resolve([
-      ...getRedirects("/docs", "/docs/get-started"),
-      ...CONSTANTS.I18N.LOCALES.map((locale) => {
-        const lang = getLang(locale)
+      {
+        destination: "https://v1.yamada-ui.com",
+        permanent: true,
+        source: "/docs/get-started/legacy",
+      },
+      {
+        destination: "https://v1.yamada-ui.com/:locale",
+        permanent: true,
+        source: "/:locale/docs/get-started/legacy",
+      },
+      {
+        destination: "https://v1.yamada-ui.com/changelog/:version",
+        permanent: true,
+        source: "/changelog/:version",
+      },
+      {
+        destination: "https://v1.yamada-ui.com/:locale/changelog/:version",
+        permanent: true,
+        source: "/:locale/changelog/:version",
+      },
 
-        return {
-          destination:
-            lang !== "ja"
-              ? "https://v1.yamada-ui.com"
-              : "https://v1.yamada-ui.com/ja",
-          permanent: true,
-          source:
-            locale === CONSTANTS.I18N.DEFAULT_LOCALE
-              ? "/docs/get-started/legacy"
-              : `/${lang}/docs/get-started/legacy`,
-        }
-      }),
+      ...getRedirects(["/docs", "/getting-started"], "/docs/get-started"),
+      ...getRedirects(
+        [
+          "/getting-started/installation",
+          "/getting-started/installation/:type",
+        ],
+        "/docs/get-started#installation",
+      ),
+      ...getRedirects("/getting-started/basics", "/docs/get-started/basics"),
+      ...getRedirects(
+        "/getting-started/advanced",
+        "/docs/get-started/advanced",
+      ),
+      ...getRedirects(
+        "/getting-started/frameworks/nextjs",
+        "/docs/get-started/frameworks/next-app",
+      ),
+      ...getRedirects(
+        "/getting-started/frameworks/vite",
+        "/docs/get-started/frameworks/vite",
+      ),
+      ...getRedirects(
+        [
+          "/getting-started/frameworks",
+          "/getting-started/frameworks/:framework",
+        ],
+        "/docs/get-started#pick-your-framework",
+      ),
+
+      ...getRedirects("/styled-system", "/docs/styling"),
+      ...getRedirects("/styled-system/ui", "/docs/components/styled"),
+      ...getRedirects("/styled-system/loading", "/docs/hooks/use-loading"),
+      ...getRedirects("/styled-system/notification", "/docs/hooks/use-notice"),
+      ...getRedirects(
+        [
+          "/styled-system/theming",
+          "/styled-system/theming/default-theme",
+          "/styled-system/semantic-tokens",
+        ],
+        "/docs/theming",
+      ),
+      ...getRedirects("/styled-system/cli", "/docs/theming/cli"),
+      ...getRedirects(
+        "/styled-system/theming/customize-theme",
+        "/docs/theming/customization",
+      ),
+      ...getRedirects(
+        "/styled-system/theming/switch-themes",
+        "/docs/theming/switching-themes",
+      ),
+      ...getRedirects(
+        "/styled-system/responsive-styles",
+        "/docs/styling/responsive-design",
+      ),
+      ...getRedirects(
+        "/styled-system/text-and-layer-styles",
+        "/docs/styling/layer-styles",
+      ),
+      ...getRedirects(
+        ["/styled-system/configure", "/styled-system/configure/default-config"],
+        "/docs/theming/configuration/overview",
+      ),
+      ...getRedirects(
+        "/styled-system/configure/customize-config",
+        "/docs/theming/configuration/customization",
+      ),
+      ...getRedirects(
+        "/styled-system/theming/component-styles",
+        "/docs/components/create-component",
+      ),
+      ...getRedirects("/styled-system/:segment", "/docs/styling/:segment"),
+
+      ...getRedirects(
+        ["/components", "/components/:category"],
+        "/docs/components",
+      ),
+      ...getRedirects(
+        "/components/:category/:component",
+        "/docs/components/:component",
+      ),
+      ...getRedirects(
+        "/components/:category/:component/:anchor",
+        "/docs/components/:component#:anchor",
+      ),
+
+      ...getRedirects("/hooks", "/docs/hooks"),
+      ...getRedirects("/hooks/:hook", "/docs/hooks/:hook"),
+
+      ...getRedirects(["/community", "/community/team"], "/docs/community"),
+      ...getRedirects(
+        "/community/contributing",
+        "/docs/community/contributing",
+      ),
+
+      ...getRedirects("/changelog", "/docs/changelog"),
+
+      ...getRedirects("/examples/cards", "/examples"),
     ])
   },
   async rewrites() {
@@ -67,11 +162,11 @@ const nextConfig: NextConfig = {
       },
       {
         destination: `/${getLang(CONSTANTS.I18N.DEFAULT_LOCALE)}/llms/:path*.md`,
-        source: `/docs/:path*.md`,
+        source: "/docs/:path*.md",
       },
       {
         destination: `/${getLang(CONSTANTS.I18N.DEFAULT_LOCALE)}/llms/:path*.md`,
-        source: `/llms/:path*.md`,
+        source: "/llms/:path*.md",
       },
     ])
   },

@@ -12,13 +12,13 @@
     "yamada-cli": "pnpm -C ../../../packages/cli dev"
   },
   "dependencies": {
-    "@tanstack/react-router": "^1.167.1",
+    "@tanstack/react-router": "^1.168.2",
     "@yamada-ui/react": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@tanstack/router-plugin": "^1.166.10",
+    "@tanstack/router-plugin": "^1.167.3",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",

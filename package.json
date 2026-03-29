@@ -62,7 +62,7 @@
     "notification:release": "tsx scripts/notification/release"
   },
   "dependencies": {
-    "@babel/parser": "^7.29.0",
+    "@babel/parser": "^7.29.2",
     "@babel/traverse": "^7.29.0",
     "@changesets/changelog-github": "^0.6.0",
     "@changesets/cli": "^2.30.0",
@@ -72,7 +72,7 @@
     "@commitlint/config-conventional": "^20.5.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@mdn/browser-compat-data": "7.3.7",
+    "@mdn/browser-compat-data": "7.3.8",
     "@storybook/addon-a11y": "^10.3.1",
     "@storybook/addon-docs": "^10.3.1",
     "@storybook/cli": "^10.3.1",
@@ -111,13 +111,13 @@
     "strip-ansi": "^7.2.0",
     "tsdown": "^0.18.4",
     "tsx": "^4.21.0",
-    "turbo": "^2.8.17",
+    "turbo": "^2.8.20",
     "typescript": "^5.9.3",
     "vitest": "^4.1.0",
     "vitest-axe": "^0.1.0",
     "vitest-matchmedia-mock": "^1.0.6",
     "wait-on": "^9.0.4",
-    "web-features": "3.20.0"
+    "web-features": "3.21.0"
   },
   "pnpm": {
     "overrides": {

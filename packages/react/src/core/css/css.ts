@@ -300,5 +300,3 @@ export function css(system: System, theme: UsageTheme = {}) {
     return createCSS(cssOrFn)
   }
 }
-
-export type CSSFunction = typeof css

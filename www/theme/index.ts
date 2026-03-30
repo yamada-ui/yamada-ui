@@ -52,9 +52,6 @@ export const theme = extendTheme({
         "--root-header-height": "sizes.14",
         "--space": { base: "spaces.lg", md: "spaces.md" },
       },
-      html: {
-        scrollBehavior: "smooth",
-      },
     },
     layerStyles: {
       card: {

@@ -39,6 +39,18 @@ import { Button, ButtonGroup } from "@workspaces/ui"
 </ButtonGroup.Root>
 ```
 
+:::tip
+To make it function as a link, set `as="a"`. If your framework provides a link component, set `as={FrameworkLink}`. For integration with each framework's link component, see the documentation for your framework [here](/docs/get-started#pick-your-framework).
+:::
+
+:::tip
+If the only child of `Button` is an icon, use [IconButton](/docs/components/icon-button).
+:::
+
+:::tip
+If there are multiple `Button` components that can be grouped together, use [ButtonGroup](#grouping).
+:::
+
 ### Change Variant
 
 ```tsx preview

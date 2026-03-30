@@ -281,6 +281,7 @@ interface Options {
 
 export const tokens = new Command("tokens")
   .description("generate theme typings.")
+  .helpOption("-h, --help", "display help for command.")
   .argument("[path]", "path to the theme file.")
   .option("--cwd <path>", "current working directory.", cwd)
   .option("-c, --config <path>", "path to the config file.", CONFIG_FILE_NAME)

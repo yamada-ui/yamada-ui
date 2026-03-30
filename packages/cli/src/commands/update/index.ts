@@ -33,6 +33,7 @@ interface Options {
 
 export const update = new Command("update")
   .description("update components in your project.")
+  .helpOption("-h, --help", "display help for command.")
   .argument("[components...]", "components to update.")
   .option("--cwd <path>", "current working directory.", cwd)
   .option("-c, --config <path>", "path to the config file.", CONFIG_FILE_NAME)

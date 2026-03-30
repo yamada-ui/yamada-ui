@@ -41,6 +41,7 @@ interface Options {
 
 export const diff = new Command("diff")
   .description("check for updates against the registry.")
+  .helpOption("-h, --help", "display help for command.")
   .argument("[component]", "component to check.")
   .option("--cwd <path>", "current working directory.", cwd)
   .option("-c, --config <path>", "path to the config file.", CONFIG_FILE_NAME)

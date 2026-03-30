@@ -20,7 +20,6 @@ export function ColorModeButton({ ...rest }: ColorModeButtonProps) {
           <MoonIcon display={["none", "inline"]} />
         </>
       }
-      suppressHydrationWarning
       onClick={toggleColorMode}
       {...rest}
     />

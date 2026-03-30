@@ -37,7 +37,7 @@ export async function generateMetadata({
     ...(await generateSharedMetadata("home")({ params })),
     description: t("description"),
     icons: "/favicon.svg",
-    metadataBase: new URL("https://yamada-ui.com"),
+    metadataBase: new URL(CONSTANTS.SNS.HOMEPAGE),
     title: { default: t("title"), template: `%s - ${t("title")}` },
   }
 }

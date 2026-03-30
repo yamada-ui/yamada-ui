@@ -1,1 +1,0 @@
-import{r as f,s as o}from"./iframe-Bly_QBCH.js";function a({delay:t=0,state:e=!1}={}){const u=f.useRef(!1),[n,r]=f.useState(!1);return o(()=>{u.current=!0;let s=null;return e&&(t>0?s=setTimeout(()=>r(!0),t):r(!0)),()=>{u.current=!1,e&&r(!1),s&&clearTimeout(s)}},[t,e]),e?n:f.useCallback(()=>u.current,[])}export{a as u};

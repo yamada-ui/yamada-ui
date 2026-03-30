@@ -1,1 +1,0 @@
-import{bb as o,bc as n,bd as c}from"./iframe-Bly_QBCH.js";const s=[["path",{d:"m7 6 5 5 5-5",key:"1lc07p"}],["path",{d:"m7 13 5 5 5-5",key:"1d48rs"}]],e=o("chevrons-down",s),a=n(c)({as:e});export{a as C};

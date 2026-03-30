@@ -1,0 +1,1 @@
+import{y as r,r as m,aj as i,j as c,a2 as x,F as p}from"./iframe-Bly_QBCH.js";const u=["transition"],d=p("div",{forwardProps:u}),l=(({ref:t,as:s="div",className:o,...a})=>{const e=r(),n=m.useMemo(()=>i.create(s),[s]);return c.jsx(d,{ref:t,as:n,className:x(e.utils.getClassName("motion"),o),...a})});export{l as M};

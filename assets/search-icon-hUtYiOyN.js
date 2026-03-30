@@ -1,1 +1,0 @@
-import{bb as c,bc as e,bd as o}from"./iframe-D2MBOeiZ.js";const a=[["path",{d:"m21 21-4.34-4.34",key:"14j7rj"}],["circle",{cx:"11",cy:"11",r:"8",key:"4ej97u"}]],r=c("search",a),s=e(o)({as:r});export{s as S};

@@ -2,6 +2,7 @@ import type { DependencyList } from "react"
 import type { Loading } from "../../components/loading"
 import { useCallback, useMemo } from "react"
 import { useLoading } from "../../components/loading"
+import { useCallbackRef } from "../../utils/ref"
 import { useProcessing } from "../use-processing"
 
 type Callback = (...args: any[]) => any
@@ -41,6 +42,7 @@ export const useAsyncCallback = <Y extends Callback>(
   const context = useLoading()
   const { finish, loading, start } = useProcessing()
   const shouldLoading = !!method
+  const callbackRef = useCallbackRef(callback, deps)
 
   const asyncCallback = useCallback(
     async (...args: Parameters<Y>) => {
@@ -48,21 +50,19 @@ export const useAsyncCallback = <Y extends Callback>(
         if (shouldProcessing) start()
         if (shouldLoading) context[method].start(loadingOptions)
 
-        return await callback(...args)
+        return await callbackRef(...args)
       } finally {
         if (shouldProcessing) finish()
         if (shouldLoading) context[method].finish()
       }
     },
     [
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      ...deps,
+      callbackRef,
       shouldProcessing,
       shouldLoading,
       context,
       method,
       loadingOptions,
-      callback,
       start,
       finish,
     ],

@@ -39,6 +39,18 @@ import { Button, ButtonGroup } from "@workspaces/ui"
 </ButtonGroup.Root>
 ```
 
+:::tip
+リンクとして機能させたい場合は、`as="a"`を設定します。フレームワークがリンクコンポーネントを提供している場合は、`as={FrameworkLink}`を設定します。各フレームワークのリンクコンポーネントとの統合は、[こちら](/docs/get-started#pick-your-framework)から使用しているフレームワークのドキュメントをご覧ください。
+:::
+
+:::tip
+`Button`の子要素がアイコンのみの場合は、[IconButton](/docs/components/icon-button)を使用します。
+:::
+
+:::tip
+`Button`が複数存在し、それらの`Button`がグルーピングが可能な場合は、[ButtonGroup](#grouping)を使用します。
+:::
+
 ### バリアントを変更する
 
 ```tsx preview

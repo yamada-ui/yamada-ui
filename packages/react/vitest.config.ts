@@ -45,7 +45,6 @@ export default mergeConfig(sharedConfig, {
       defineProject({
         resolve: {
           alias: {
-            "#test": resolve(__dirname, "./test"),
             "@": resolve(__dirname, "./src"),
           },
         },
@@ -63,7 +62,6 @@ export default mergeConfig(sharedConfig, {
         optimizeDeps: { include: ["axe-core"] },
         resolve: {
           alias: {
-            "#test/browser": resolve(__dirname, "./test/browser"),
             "@": resolve(__dirname, "./src"),
           },
         },

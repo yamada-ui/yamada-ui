@@ -177,11 +177,15 @@ export const theme = new Command("theme")
 
         if (!overwrite) process.exit(0)
 
-        spinner.start("Clearing directory")
+        if (dryRun) {
+          console.log(c.cyan(`(dry run) Would clear: ${outdirPath}`))
+        } else {
+          spinner.start("Clearing directory")
 
-        await rimraf(outdirPath)
+          await rimraf(outdirPath)
 
-        spinner.succeed("Cleared directory")
+          spinner.succeed("Cleared directory")
+        }
       }
 
       spinner.start("Fetching registry")

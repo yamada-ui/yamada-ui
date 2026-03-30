@@ -339,7 +339,6 @@ describe("init", () => {
       .mockResolvedValueOnce({ generate: true })
       .mockResolvedValueOnce({ overwrite: true })
       .mockResolvedValueOnce({ generate: true })
-      .mockResolvedValueOnce({ install: false })
 
     await init.parseAsync(["--cwd", tempDir, "--monorepo", "--no-install"], {
       from: "user",
@@ -362,6 +361,33 @@ describe("init", () => {
     expect(existsSync(path.join(tempDir, "pnpm-workspace.yaml"))).toBeFalsy()
     expect(console.log).toHaveBeenCalledWith(
       expect.stringContaining("(dry run) Would write:"),
+    )
+  })
+
+  test("should not clear existing directory when --dry-run with overwrite", async () => {
+    const outdirPath = path.join(tempDir, "workspaces", "ui")
+    mkdirSync(outdirPath, { recursive: true })
+    writeFileSync(path.join(outdirPath, "old-file.txt"), "old content")
+
+    const prompts = await import("prompts")
+    vi.mocked(prompts.default)
+      .mockResolvedValueOnce({
+        src: true,
+        format: true,
+        lint: true,
+        monorepo: true,
+      })
+      .mockResolvedValueOnce({ generate: true })
+      .mockResolvedValueOnce({ overwrite: true })
+      .mockResolvedValueOnce({ generate: true })
+
+    await init.parseAsync(["--cwd", tempDir, "--dry-run", "--no-install"], {
+      from: "user",
+    })
+
+    expect(existsSync(path.join(outdirPath, "old-file.txt"))).toBeTruthy()
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would clear:"),
     )
   })
 })

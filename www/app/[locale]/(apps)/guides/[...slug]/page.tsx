@@ -53,7 +53,7 @@ export default async function Page({
     getCollectionTitle(locale, guide.collection) ?? guide.collection
 
   return (
-    <VStack as="article" maxW="5xl" mx="auto" py="lg" w="full">
+    <VStack as="article" mx="auto" py="lg" w="full">
       <Breadcrumb.Root>
         <Breadcrumb.Link as={NextLink} href="/guides">
           {t("title")}

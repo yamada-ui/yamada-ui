@@ -3,7 +3,7 @@ import { Badge, Heading, HStack, Text, VStack } from "@yamada-ui/react"
 import { getTranslations } from "next-intl/server"
 import { getGuideCollections } from "@/data/guide"
 import { generateOg } from "@/utils/next"
-import { Card, CardGroup } from "../../../components/mdx/card"
+import { Card, CardGroup } from "../../../../components/mdx/card"
 
 export async function generateMetadata({
   params,
@@ -35,7 +35,7 @@ export default async function Page({ params }: PageProps<"/[locale]/guides">) {
       </VStack>
 
       {collections.map(({ collection, description, guides, title }) => (
-        <VStack key={collection} as="section" gap="md" w="full">
+        <VStack key={collection} as="section" gap="sm" w="full">
           <VStack gap="xs">
             <HStack>
               <Heading as="h2" size="lg">

@@ -64,7 +64,7 @@ function trimByHash(markdown: string, hash?: string) {
 export const docs = new Command("docs")
   .argument("[path]")
   .option("--lang <lang>", "language", "en")
-  .description("fetch yamada ui docs markdown")
+  .description("fetch yamada ui docs markdown.")
   .action(async (input, options) => {
     const spinner = ora()
 
@@ -88,16 +88,19 @@ export const docs = new Command("docs")
         url = `${BASE_URL}${prefix}${path}.md`
       }
 
+      spinner.start("Fetching docs")
+
       const res = await fetch(url)
 
       if (!res.ok) {
-        throw new Error(`Failed to fetch docs: ${res.status}`)
+        spinner.fail(`Failed to fetch docs: ${res.status}`)
+        return
       }
 
       const markdown = await res.text()
-
       const output = trimByHash(markdown, hash)
 
+      spinner.stop()
       console.log(output)
     } catch (e) {
       if (e instanceof Error) {

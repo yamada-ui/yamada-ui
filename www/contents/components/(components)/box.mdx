@@ -36,6 +36,18 @@ import { Box } from "@workspaces/ui"
 <Box />
 ```
 
+:::tip
+`Box` is a general-purpose container. It has no specific semantics or layout, so use it when styling is needed that cannot be achieved with other components.
+:::
+
+:::tip
+Yamada UI provides many semantic components. First consider whether those components can meet your needs, and use `Box` only as a last resort when they cannot.
+:::
+
+:::tip
+Because `Box` is a general-purpose container, it can make the intent of your code harder to understand. We recommend using semantic components whenever possible.
+:::
+
 ### Render a different element
 
 By passing `as`, you can render it as a different element.

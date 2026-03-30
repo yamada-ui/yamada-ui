@@ -1,41 +1,30 @@
-import { act, renderHook } from "#test"
-import MatchMediaMock from "vitest-matchmedia-mock"
+import { page, renderHook } from "#test/browser"
 import { useMediaQuery } from "."
 
 describe("useMediaQuery", () => {
-  let matchMediaMock: MatchMediaMock
+  test("should return true when media query matches", async () => {
+    await page.viewport(600, 800)
 
-  beforeAll(() => {
-    matchMediaMock = new MatchMediaMock()
-  })
-
-  afterEach(() => {
-    matchMediaMock.clear()
-  })
-
-  afterAll(() => {
-    matchMediaMock.destroy()
-  })
-
-  test("`(prefers-color-scheme: dark)` should be truthy", () => {
-    matchMediaMock.useMediaQuery("(prefers-color-scheme: dark)")
-
-    const { result } = renderHook(() =>
-      useMediaQuery("(prefers-color-scheme: dark)"),
+    const { result } = await renderHook(() =>
+      useMediaQuery("(min-width: 500px)"),
     )
 
     expect(result.current).toBeTruthy()
   })
 
-  test("should correctly execute listener", () => {
-    const { result } = renderHook(() =>
-      useMediaQuery("(prefers-color-scheme: dark)"),
+  test("should update when media query match status changes", async () => {
+    await page.viewport(400, 800)
+
+    const { result } = await renderHook(() =>
+      useMediaQuery("(min-width: 500px)"),
     )
 
-    act(() => {
-      matchMediaMock.useMediaQuery("(prefers-color-scheme: dark)")
+    expect(result.current).toBeFalsy()
+
+    await page.viewport(600, 800)
+
+    await vi.waitFor(() => {
+      expect(result.current).toBeTruthy()
     })
-
-    expect(result.current).toBeTruthy()
   })
 })

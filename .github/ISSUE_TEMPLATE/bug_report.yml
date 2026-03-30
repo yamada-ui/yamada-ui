@@ -29,7 +29,7 @@ body:
     attributes:
       label: "Package Version"
       description: "The version of the package you are using."
-      placeholder: "2.0.0"
+      placeholder: "2.1.4"
     validations:
       required: true
   - type: textarea

@@ -5,6 +5,9 @@
   "engines": {
     "node": ">=24.14"
   },
+  "imports": {
+    "#velite": "./.velite"
+  },
   "scripts": {
     "clean": "rimraf .next .velite .eslintcache tsconfig.tsbuildinfo node_modules",
     "dev:content": "velite --watch",
@@ -37,12 +40,12 @@
     "@vercel/speed-insights": "^2.0.0",
     "@yamada-ui/react": "workspace:*",
     "match-sorter": "^8.2.0",
-    "motion": "^12.36.0",
+    "motion": "^12.38.0",
     "next": "catalog:",
     "next-intl": "^4.8.3",
     "prism-react-renderer": "^2.4.1",
-    "react": "catalog:",
-    "react-dom": "catalog:",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "react-hook-form": "catalog:",
     "react-icons": "catalog:",
     "scroll-into-view-if-needed": "^3.1.0",
@@ -60,7 +63,7 @@
     "@yamada-ui/cli": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/workspace": "workspace:*",
-    "baseline-browser-mapping": "^2.10.7",
+    "baseline-browser-mapping": "^2.10.12",
     "commander": "^14.0.3",
     "dotenv": "^17.3.1",
     "github-slugger": "^2.0.0",

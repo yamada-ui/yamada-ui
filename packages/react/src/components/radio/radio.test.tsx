@@ -15,6 +15,30 @@ describe("<Radio />", () => {
     await a11y(<Radio defaultChecked>radio</Radio>)
   })
 
+  test("forwards `aria-controls` to the input element", () => {
+    render(<Radio aria-controls="panel1">radio</Radio>)
+
+    const input = screen.getByRole("radio")
+
+    expect(input).toHaveAttribute("aria-controls", "panel1")
+  })
+
+  test("forwards `aria-labelledby` to the input element", () => {
+    render(<Radio aria-labelledby="label1">radio</Radio>)
+
+    const input = screen.getByRole("radio")
+
+    expect(input).toHaveAttribute("aria-labelledby", "label1")
+  })
+
+  test("forwards `tabIndex` to the input element", () => {
+    render(<Radio tabIndex={-1}>radio</Radio>)
+
+    const input = screen.getByRole("radio")
+
+    expect(input).toHaveAttribute("tabindex", "-1")
+  })
+
   test("sets `displayName` correctly", () => {
     expect(Radio.displayName).toBe("RadioRoot")
     expect(RadioGroup.Root.displayName).toBe("RadioGroup")

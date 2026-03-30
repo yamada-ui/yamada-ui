@@ -103,7 +103,7 @@ async function getResembles() {
     }),
   )
 
-  const names = Object.keys(tags)
+  const names = Object.keys(tags).sort()
   const resembles: Resembles = Object.fromEntries(
     names.map((name) => [name, []]),
   )
@@ -142,7 +142,7 @@ async function filterRelations(
 
 async function generateRelations(
   registries: Registries,
-  similarComponents: Tags,
+  resembles: Tags,
 ): Promise<Relations> {
   return Object.fromEntries(
     await Promise.all(
@@ -175,9 +175,8 @@ async function generateRelations(
               ),
             }
           : undefined
-        const resembles = similarComponents[name]
 
-        return [name, { dependencies, dependents, resembles }]
+        return [name, { dependencies, dependents, resembles: resembles[name] }]
       }),
     ),
   )

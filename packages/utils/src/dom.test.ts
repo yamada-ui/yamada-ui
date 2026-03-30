@@ -1211,6 +1211,25 @@ describe("DOM", () => {
       restore()
       expect(el.getAttribute("class")).toBe("existing")
     })
+
+    test("should set presence-only attribute when value is omitted", () => {
+      const el = document.createElement("div")
+      const restore = setAttribute(el, "inert")
+      expect(el.hasAttribute("inert")).toBeTruthy()
+
+      restore()
+      expect(el.hasAttribute("inert")).toBeFalsy()
+    })
+
+    test("should restore empty-string attribute that was already present", () => {
+      const el = document.createElement("div")
+      el.setAttribute("inert", "")
+      const restore = setAttribute(el, "inert")
+      expect(el.hasAttribute("inert")).toBeTruthy()
+
+      restore()
+      expect(el.getAttribute("inert")).toBe("")
+    })
   })
 
   describe("setStyle", () => {

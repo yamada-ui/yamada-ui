@@ -126,7 +126,7 @@ interface CheckboxIndicatorProps extends HTMLStyledProps {}
 const CheckboxIndicator = withContext<"div", CheckboxIndicatorProps>(
   "div",
   "indicator",
-)()
+)({ "data-indicator": "" })
 
 interface CheckboxLabelProps extends HTMLStyledProps<"span"> {}
 

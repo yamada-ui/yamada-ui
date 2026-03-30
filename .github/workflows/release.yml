@@ -109,3 +109,11 @@ jobs:
           pnpm notification:release
         env:
           DISCORD_RELEASE_WEBHOOK_URL: ${{ secrets.DISCORD_RELEASE_WEBHOOK_URL }}
+
+      - name: Update issue templates
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          pnpm issue:template
+          git add ./.github/ISSUE_TEMPLATE
+          git diff --staged --exit-code || git commit -m 'ci(changesets): update issue templates'
+          git push

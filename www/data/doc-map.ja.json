@@ -976,6 +976,11 @@
           "pathname": "/docs/hooks/use-notice"
         },
         {
+          "title": "useOnline",
+          "segment": "use-online",
+          "pathname": "/docs/hooks/use-online"
+        },
+        {
           "title": "useOS",
           "segment": "use-os",
           "pathname": "/docs/hooks/use-os"
@@ -1016,14 +1021,14 @@
           "pathname": "/docs/hooks/use-timeout"
         },
         {
-          "title": "useUpdateEffect",
-          "segment": "use-update-effect",
-          "pathname": "/docs/hooks/use-update-effect"
-        },
-        {
           "title": "useUpdateBreakpointEffect",
           "segment": "use-update-breakpoint-effect",
           "pathname": "/docs/hooks/use-update-breakpoint-effect"
+        },
+        {
+          "title": "useUpdateEffect",
+          "segment": "use-update-effect",
+          "pathname": "/docs/hooks/use-update-effect"
         },
         {
           "title": "useValue",

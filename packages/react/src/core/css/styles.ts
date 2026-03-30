@@ -5129,7 +5129,8 @@ export interface StyleProps {
    *
    * The <code>contain-intrinsic-size</code> CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-03-18
    * @newly_available_date 2023-09-18
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-block-size
@@ -5140,7 +5141,8 @@ export interface StyleProps {
    *
    * The <code>contain-intrinsic-size</code> CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-03-18
    * @newly_available_date 2023-09-18
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-height
@@ -5151,7 +5153,8 @@ export interface StyleProps {
    *
    * The <code>contain-intrinsic-size</code> CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-03-18
    * @newly_available_date 2023-09-18
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-inline-size
@@ -5162,7 +5165,8 @@ export interface StyleProps {
    *
    * The <code>contain-intrinsic-size</code> CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-03-18
    * @newly_available_date 2023-09-18
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-size
@@ -5173,7 +5177,8 @@ export interface StyleProps {
    *
    * The <code>contain-intrinsic-size</code> CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-03-18
    * @newly_available_date 2023-09-18
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-width
@@ -6447,7 +6452,8 @@ export interface StyleProps {
    *
    * The <code>hyphenate-character</code> CSS property sets the character or string to use at the end of a line before a line break.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-03-18
    * @newly_available_date 2023-09-18
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hyphenate-character
@@ -6468,7 +6474,8 @@ export interface StyleProps {
    *
    * The <code>hyphens</code> CSS property controls when long words are broken by line wrapping. Although called <code>hyphens</code>, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-03-18
    * @newly_available_date 2023-09-18
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hyphens
@@ -10347,11 +10354,7 @@ export interface StyleProps {
   /**
    * ### text-decoration-skip
    *
-   * The <code>text-decoration</code> CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-01-29
-   * @newly_available_date 2015-07-29
+   * The CSS `text-decoration-skip` property.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-skip
    *

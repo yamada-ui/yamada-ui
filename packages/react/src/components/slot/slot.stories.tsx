@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { FC, HTMLAttributes, ReactNode } from "react"
-import { Slot, Slottable } from "./"
+import { Slot, Slottable } from "./slot"
 
 type Story = StoryFn<typeof Slot>
 

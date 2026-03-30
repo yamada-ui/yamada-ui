@@ -42,8 +42,7 @@ export const useAsyncCallback = <Y extends Callback>(
   const context = useLoading()
   const { finish, loading, start } = useProcessing()
   const shouldLoading = !!method
-
-  const stableCallback = useCallbackRef(callback, deps)
+  const callbackRef = useCallbackRef(callback, deps)
 
   const asyncCallback = useCallback(
     async (...args: Parameters<Y>) => {
@@ -51,14 +50,14 @@ export const useAsyncCallback = <Y extends Callback>(
         if (shouldProcessing) start()
         if (shouldLoading) context[method].start(loadingOptions)
 
-        return await stableCallback(...args)
+        return await callbackRef(...args)
       } finally {
         if (shouldProcessing) finish()
         if (shouldLoading) context[method].finish()
       }
     },
     [
-      stableCallback,
+      callbackRef,
       shouldProcessing,
       shouldLoading,
       context,

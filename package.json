@@ -115,7 +115,6 @@
     "typescript": "catalog:",
     "vitest": "^4.1.2",
     "vitest-axe": "^0.1.0",
-    "vitest-matchmedia-mock": "^1.0.6",
     "wait-on": "^9.0.4",
     "web-features": "3.22.0"
   },

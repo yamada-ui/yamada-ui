@@ -1,11 +1,12 @@
 import type * as CSS from "csstype"
-import type { AnyString } from "../../utils"
+import type { AnyString, Dict } from "../../utils"
 import type {
   Breakpoint,
   KeyframeIdent,
   System,
   ThemePath,
   ThemeTokens,
+  UsageTheme,
 } from "../system"
 import type {
   AnySelector,
@@ -226,3 +227,8 @@ export interface FunctionCSSInterpolation {
 }
 
 export type CSSObjectOrFunction = CSSObject | FunctionCSSInterpolation
+
+export type CSSFunction = (
+  system: System,
+  theme?: UsageTheme,
+) => (cssOrFn: CSSObjectOrFunction) => Dict

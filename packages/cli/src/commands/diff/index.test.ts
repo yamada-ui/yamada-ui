@@ -517,4 +517,49 @@ describe("diff", () => {
       expect.stringContaining("---------------------------------"),
     )
   })
+
+  test("should call updateFiles with dryRun when --dry-run", async () => {
+    setupProjectWithComponent(tempDir)
+
+    const buttonDir = path.join(
+      tempDir,
+      "workspaces",
+      "ui",
+      "src",
+      "components",
+      "button",
+    )
+    writeFileSync(
+      path.join(buttonDir, "registry.json"),
+      JSON.stringify({
+        dependencies: {
+          components: [],
+          externals: [],
+          hooks: [],
+          providers: [],
+        },
+        section: "components",
+        sources: [
+          {
+            name: "index.ts",
+            content: `export const Button = () => { return "old" }\n`,
+          },
+        ],
+      }),
+    )
+
+    await diff.parseAsync(
+      ["--cwd", tempDir, "--yes", "--dry-run", "--update", "--no-install"],
+      { from: "user" },
+    )
+
+    const { updateFiles } = await import("../update/update-files")
+    expect(vi.mocked(updateFiles)).toHaveBeenCalledWith(
+      expect.anything(),
+      expect.anything(),
+      expect.anything(),
+      expect.anything(),
+      expect.objectContaining({ dryRun: true }),
+    )
+  })
 })

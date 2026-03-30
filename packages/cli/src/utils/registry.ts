@@ -401,12 +401,17 @@ export async function transformIndexWithFormatAndLint(
   return content
 }
 
+export interface GenerateSourceOptions {
+  dryRun?: boolean
+}
+
 export async function generateSource(
   dirPath: string,
   section: RegistrySection,
   { name: fileName, content, data, template }: Source,
   config: Config,
   generatedNames: string[] = [],
+  { dryRun }: GenerateSourceOptions = {},
 ) {
   fileName = transformExtension(fileName, config.jsx)
 
@@ -420,7 +425,7 @@ export async function generateSource(
         ? transformTsxToJsx(content)
         : transformTsToJs(content)
 
-    await writeFileSafe(targetPath, content, config)
+    await writeFileSafe(targetPath, content, { ...config, dryRun })
   } else if (template && data) {
     await Promise.all(
       data.map(async ({ name: fileName, ...rest }) => {
@@ -435,7 +440,10 @@ export async function generateSource(
             ? transformTsxToJsx(content)
             : transformTsToJs(content)
 
-        await writeFileSafe(path.resolve(targetPath, fileName), content, config)
+        await writeFileSafe(path.resolve(targetPath, fileName), content, {
+          ...config,
+          dryRun,
+        })
       }),
     )
   }
@@ -446,15 +454,23 @@ export async function generateSources(
   registry: Registry,
   config: Config,
   generatedNames: string[] = [],
+  { dryRun }: GenerateSourceOptions = {},
 ) {
   await Promise.all([
     ...registry.sources.map((source) =>
-      generateSource(dirPath, registry.section, source, config, generatedNames),
+      generateSource(
+        dirPath,
+        registry.section,
+        source,
+        config,
+        generatedNames,
+        { dryRun },
+      ),
     ),
     writeFileSafe(
       path.resolve(dirPath, REGISTRY_FILE_NAME),
       JSON.stringify(registry),
-      merge(config, { format: { parser: "json" } }),
+      merge(config, { dryRun, format: { parser: "json" } }),
     ),
   ])
 }

@@ -350,4 +350,18 @@ describe("init", () => {
     // New files should exist
     expect(existsSync(path.join(outdirPath, "src", "index.ts"))).toBeTruthy()
   })
+
+  test("should not create any files when --dry-run", async () => {
+    await init.parseAsync(
+      ["--cwd", tempDir, "--yes", "--dry-run", "--no-install", "--monorepo"],
+      { from: "user" },
+    )
+
+    expect(existsSync(path.join(tempDir, "ui.json"))).toBeFalsy()
+    expect(existsSync(path.join(tempDir, "workspaces", "ui"))).toBeFalsy()
+    expect(existsSync(path.join(tempDir, "pnpm-workspace.yaml"))).toBeFalsy()
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would write:"),
+    )
+  })
 })

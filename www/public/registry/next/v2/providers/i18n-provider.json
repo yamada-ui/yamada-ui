@@ -2,7 +2,7 @@
   "$schema": "https://yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
     "components": [],
-    "externals": ["intl-messageformat@^11.1.2"],
+    "externals": ["intl-messageformat@^11.2.0"],
     "hooks": [],
     "providers": []
   },

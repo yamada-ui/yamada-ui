@@ -375,7 +375,7 @@ export interface PaginationStartTriggerProps extends HTMLStyledProps<"button"> {
 export const PaginationStartTrigger = withContext<
   "button",
   PaginationStartTriggerProps
->("button", { name: "startTrigger", slot: ["trigger", "start"] })(
+>("button", { name: "StartTrigger", slot: ["trigger", "start"] })(
   undefined,
   (props) => {
     const { getStartTriggerProps } = usePaginationContext()
@@ -389,7 +389,7 @@ export interface PaginationEndTriggerProps extends HTMLStyledProps<"button"> {}
 export const PaginationEndTrigger = withContext<
   "button",
   PaginationEndTriggerProps
->("button", { name: "endTrigger", slot: ["trigger", "end"] })(
+>("button", { name: "EndTrigger", slot: ["trigger", "end"] })(
   undefined,
   (props) => {
     const { getEndTriggerProps } = usePaginationContext()
@@ -403,7 +403,7 @@ export interface PaginationPrevTriggerProps extends HTMLStyledProps<"button"> {}
 export const PaginationPrevTrigger = withContext<
   "button",
   PaginationPrevTriggerProps
->("button", { name: "prevTrigger", slot: ["trigger", "prev"] })(
+>("button", { name: "PrevTrigger", slot: ["trigger", "prev"] })(
   undefined,
   (props) => {
     const { getPrevTriggerProps } = usePaginationContext()
@@ -417,7 +417,7 @@ export interface PaginationNextTriggerProps extends HTMLStyledProps<"button"> {}
 export const PaginationNextTrigger = withContext<
   "button",
   PaginationNextTriggerProps
->("button", { name: "nextTrigger", slot: ["trigger", "next"] })(
+>("button", { name: "NextTrigger", slot: ["trigger", "next"] })(
   undefined,
   (props) => {
     const { getNextTriggerProps } = usePaginationContext()

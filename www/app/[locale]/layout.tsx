@@ -19,6 +19,7 @@ import { routing } from "@/i18n"
 import { theme } from "@/theme"
 import { getLang } from "@/utils/i18n"
 import { generateSharedMetadata } from "@/utils/next"
+import { ScrollBehaviorActivator } from "./scroll-behavior-activator"
 
 export function generateStaticParams() {
   return CONSTANTS.I18N.LOCALES.map((locale) => ({ locale }))
@@ -36,7 +37,7 @@ export async function generateMetadata({
     ...(await generateSharedMetadata("home")({ params })),
     description: t("description"),
     icons: "/favicon.svg",
-    metadataBase: new URL("https://yamada-ui.com"),
+    metadataBase: new URL(CONSTANTS.SNS.HOMEPAGE),
     title: { default: t("title"), template: `%s - ${t("title")}` },
   }
 }
@@ -76,14 +77,11 @@ export default async function Layout({ children, params }: LayoutProps) {
   const lang = getLang(locale)
 
   return (
-    <html
-      lang={lang}
-      style={{ scrollBehavior: "smooth" }}
-      suppressHydrationWarning
-    >
+    <html lang={lang} suppressHydrationWarning>
       <body suppressHydrationWarning>
         <ColorModeScript />
         <ThemeSchemeScript />
+        <ScrollBehaviorActivator />
 
         <NextIntlClientProvider>
           <UIProvider locale={locale} theme={theme}>

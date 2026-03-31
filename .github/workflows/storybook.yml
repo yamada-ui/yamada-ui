@@ -3,6 +3,7 @@ name: Storybook
 on:
   push:
     paths:
+      - ".github/workflows/storybook.yml"
       - "packages/**/*.html"
       - "packages/**/*.ts"
       - "packages/**/*.tsx"

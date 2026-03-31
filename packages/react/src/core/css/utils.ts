@@ -79,6 +79,10 @@ export function isCSSVar(value: string) {
   return /^var\(--.+\)$/.test(value)
 }
 
+export function isInterpolation(value: string) {
+  return /\{.+\}/.test(value)
+}
+
 export function isCSSToken({ cssMap }: System) {
   return function (value: any) {
     return isObject(cssMap) && value in cssMap && !!cssMap[value]?.ref

@@ -2,6 +2,13 @@ name: Codecov
 
 on:
   push:
+    paths:
+      - ".github/workflows/codecov.yml"
+      - "codecov.yml"
+      - "packages/**"
+      - "!packages/**/storybook/**"
+      - "!packages/**/*.stories.ts"
+      - "!packages/**/*.stories.tsx"
     branches:
       - main
 

@@ -9,12 +9,16 @@ on:
       - "!packages/**/test/**"
       - "!packages/**/*.stories.ts"
       - "!packages/**/*.stories.tsx"
-      - "!packages/**/*.stories.mdx"
       - "!packages/**/*.test.ts"
       - "!packages/**/*.test.tsx"
-      - "!packages/**/*.test.mdx"
     branches:
       - main
+      - v*
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -49,6 +53,7 @@ jobs:
         run: pnpm build
 
       - name: Create release PR or publish to NPM
+        if: github.ref_name == 'main'
         id: changesets
         uses: changesets/action@6a0a831ff30acef54f2c6aa1cbbc1096b066edaf # v1.7.0
         with:
@@ -57,29 +62,48 @@ jobs:
           commit: "ci(changesets): updated packages"
           setupGitUser: false
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create @dev release
-        if: steps.changesets.outputs.published != 'true'
+        if: github.ref_name == 'main' && steps.changesets.outputs.published != 'true'
         run: |
           git checkout main
           pnpm release:dev
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Create @next release
+        if: github.ref_name != 'main'
+        run: pnpm release:next
+        env:
+          NPM_CONFIG_PROVENANCE: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate registries
+        if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
+        run: |
+          pnpm gen:registries
+          git add ./www/public/registry
+          git diff --staged --exit-code || git commit -m 'ci(changesets): update registries'
+
       - name: Generate @dev registries
-        if: steps.changesets.outputs.published != 'true'
+        if: github.ref_name == 'main' && steps.changesets.outputs.published != 'true'
         run: |
           pnpm gen:registries --tag dev
           git add ./www/public/registry
           git diff --staged --exit-code || git commit -m 'ci(changesets): update dev registries'
-          git push
+
+      - name: Generate @next registries
+        if: github.ref_name != 'main'
+        run: |
+          pnpm gen:registries --tag next
+          git add ./www/public/registry
+          git diff --staged --exit-code || git commit -m 'ci(changesets): update next registries'
 
       - name: Update www
-        if: steps.changesets.outputs.published == 'true'
+        if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
         run: |
           pnpm gen:styles -p
           git add ./www/data
@@ -87,9 +111,6 @@ jobs:
           pnpm gen:props
           git add ./www/data/props
           git diff --staged --exit-code || git commit -m 'ci(changesets): update props'
-          pnpm gen:registries
-          git add ./www/public/registry
-          git diff --staged --exit-code || git commit -m 'ci(changesets): update registries'
           pnpm www build:content
           pnpm www gen:icons
           pnpm www gen:conditions
@@ -99,21 +120,52 @@ jobs:
           pnpm www gen:relations
           git add ./www/data ./www/contents
           git diff --staged --exit-code || git commit -m 'ci(changesets): update www'
-          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Notification release
-        if: steps.changesets.outputs.published == 'true'
-        run: |
-          pnpm notification:release
-        env:
-          DISCORD_RELEASE_WEBHOOK_URL: ${{ secrets.DISCORD_RELEASE_WEBHOOK_URL }}
-
       - name: Update issue templates
-        if: steps.changesets.outputs.published == 'true'
+        if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
         run: |
           pnpm issue:template
           git add ./.github/ISSUE_TEMPLATE
           git diff --staged --exit-code || git commit -m 'ci(changesets): update issue templates'
-          git push
+
+      - name: Update branch
+        run: git push
+
+      - name: Update next branch
+        if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
+        run: |
+          PUBLISHED_VERSION=$(echo '${{ steps.changesets.outputs.publishedPackages }}' | jq -r '.[] | select(.name == "@yamada-ui/react") | .version')
+
+          if [ -z "$PUBLISHED_VERSION" ]; then
+            exit 0
+          fi
+
+          CURRENT_MAJOR_VERSION=$(echo "$PUBLISHED_VERSION" | cut -d. -f1)
+          CURRENT_MINOR_VERSION=$(echo "$PUBLISHED_VERSION" | cut -d. -f2)
+
+          git fetch origin
+
+          for BRANCH in $(git branch -r --list 'origin/v*' | sed 's|origin/||' | xargs); do
+            BRANCH_VERSION="${BRANCH#v}"
+            BRANCH_MAJOR_VERSION=$(echo "$BRANCH_VERSION" | cut -d. -f1)
+            BRANCH_MINOR_VERSION=$(echo "$BRANCH_VERSION" | cut -d. -f2)
+
+            if [ "$BRANCH_MAJOR_VERSION" -gt "$CURRENT_MAJOR_VERSION" ] 2>/dev/null || ([ "$BRANCH_MAJOR_VERSION" -eq "$CURRENT_MAJOR_VERSION" ] && [ "$BRANCH_MINOR_VERSION" -gt "$CURRENT_MINOR_VERSION" ]) 2>/dev/null; then
+              git checkout -B "$BRANCH" "origin/$BRANCH"
+
+              if git merge origin/main --no-edit; then
+                git push origin "$BRANCH"
+              else
+                git merge --abort
+              fi
+            fi
+          done
+
+      - name: Notification release
+        if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
+        run: |
+          pnpm notification:release
+        env:
+          DISCORD_RELEASE_WEBHOOK_URL: ${{ secrets.DISCORD_RELEASE_WEBHOOK_URL }}

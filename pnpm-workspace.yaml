@@ -22,3 +22,14 @@ catalog:
 
 minimumReleaseAge: 10080 # = 60 [minutes/h] * 24 [h/day] * 7 [day]
 
+onlyBuiltDependencies:
+  - "@parcel/watcher"
+  - "@swc/core"
+  - "esbuild"
+  - "lefthook"
+  - "sharp"
+  - "unrs-resolver"
+
+blockExoticSubdeps: true
+
+strictDepBuilds: true

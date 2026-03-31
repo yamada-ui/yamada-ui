@@ -9,10 +9,8 @@ on:
       - "!packages/**/test/**"
       - "!packages/**/*.stories.ts"
       - "!packages/**/*.stories.tsx"
-      - "!packages/**/*.stories.mdx"
       - "!packages/**/*.test.ts"
       - "!packages/**/*.test.tsx"
-      - "!packages/**/*.test.mdx"
     branches:
       - main
       - v*
@@ -38,7 +36,7 @@ jobs:
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
 
       - name: Cache turbo build setup
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0

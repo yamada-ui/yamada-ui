@@ -43,3 +43,6 @@ next-env.d.ts
 # velite
 .velite
 public/static
+
+# generated assets
+/public/esbuild.wasm

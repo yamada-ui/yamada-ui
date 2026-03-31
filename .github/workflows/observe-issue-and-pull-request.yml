@@ -18,7 +18,7 @@ jobs:
         if: false
         run: pnpm issue:coverage
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CODECOV_API_TOKEN: ${{ secrets.CODECOV_API_TOKEN }}
 
       - name: Setup Browser
@@ -30,4 +30,4 @@ jobs:
           pnpm react test:a11y || true
           pnpm issue:a11y --no-report
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

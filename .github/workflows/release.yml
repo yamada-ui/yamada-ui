@@ -17,6 +17,11 @@ on:
       - main
       - v*
 
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
@@ -59,8 +64,7 @@ jobs:
           commit: "ci(changesets): updated packages"
           setupGitUser: false
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create @dev release
@@ -69,14 +73,14 @@ jobs:
           git checkout main
           pnpm release:dev
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create @next release
         if: github.ref_name != 'main'
         run: pnpm release:next
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Generate registries
@@ -124,20 +128,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Notification release
-        if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
-        run: |
-          pnpm notification:release
-        env:
-          DISCORD_RELEASE_WEBHOOK_URL: ${{ secrets.DISCORD_RELEASE_WEBHOOK_URL }}
-
-      - name: Update issue templates
-        if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
-        run: |
-          pnpm issue:template
-          git add ./.github/ISSUE_TEMPLATE
-          git diff --staged --exit-code || git commit -m 'ci(changesets): update issue templates'
-
       - name: Update branch
         run: git push
 
@@ -170,3 +160,17 @@ jobs:
               fi
             fi
           done
+
+      - name: Update issue templates
+        if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
+        run: |
+          pnpm issue:template
+          git add ./.github/ISSUE_TEMPLATE
+          git diff --staged --exit-code || git commit -m 'ci(changesets): update issue templates'
+
+      - name: Notification release
+        if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
+        run: |
+          pnpm notification:release
+        env:
+          DISCORD_RELEASE_WEBHOOK_URL: ${{ secrets.DISCORD_RELEASE_WEBHOOK_URL }}

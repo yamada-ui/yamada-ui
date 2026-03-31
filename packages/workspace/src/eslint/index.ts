@@ -1,4 +1,7 @@
-import type { ConfigWithExtendsArray } from "@eslint/config-helpers"
+import type {
+  ConfigWithExtends,
+  ConfigWithExtendsArray,
+} from "@eslint/config-helpers"
 import { baseConfigArray, noConsoleConfig } from "./base"
 import { cspellConfig } from "./cspell"
 import { importConfigArray, restrictedImportConfigArray } from "./import"
@@ -12,6 +15,10 @@ import { sharedFiles } from "./shared"
 import { testingLibraryConfig } from "./testing-library"
 import { typescriptConfig } from "./typescript"
 import { vitestConfig } from "./vitest"
+
+export { defineConfig } from "eslint/config"
+
+export type { ConfigWithExtends, ConfigWithExtendsArray }
 
 export {
   baseConfigArray,

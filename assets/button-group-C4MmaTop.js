@@ -1,0 +1,1 @@
+import{r as x,j as s,_ as p,$ as i}from"./iframe-zzHt-Ltj.js";import{G as c}from"./group-Bbv2QXhz.js";const l=(({size:t,variant:r,attached:o,disabled:n,...u})=>{const e=x.useMemo(()=>({size:t,variant:r,disabled:n,focusVisibleRing:o?"inside":void 0}),[t,r,n,o]);return s.jsx(p,{value:e,children:s.jsx(i,{value:e,children:s.jsx(c,{attached:o,...u})})})});export{l as B};

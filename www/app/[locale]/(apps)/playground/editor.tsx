@@ -6,6 +6,7 @@ import { Box, useColorMode, useSafeLayoutEffect } from "@yamada-ui/react"
 import { toPng } from "html-to-image"
 import { useTranslations } from "next-intl"
 import { use, useCallback, useImperativeHandle, useMemo, useRef } from "react"
+import { deferScreenshotWork } from "./screenshot"
 import { highlightCode, highlighterPromise } from "./shiki-highlighter"
 
 export interface EditorHandle {
@@ -57,6 +58,8 @@ export function Editor({ ref, code, onChange, onFormat }: EditorProps) {
       async captureScreenshot() {
         const el = preRef.current
         if (!el) throw new Error("Editor not ready")
+
+        await deferScreenshotWork()
 
         return await toPng(el, {
           style: {

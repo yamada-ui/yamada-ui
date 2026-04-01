@@ -12,6 +12,7 @@ import {
 } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import { useCallback, useEffect, useRef, useState } from "react"
+import { deferScreenshotWork } from "./screenshot"
 import {
   HTML_TO_IMAGE_VERSION,
   REACT_VERSION,
@@ -76,6 +77,18 @@ function createIframeTemplate() {
       window.parent.postMessage({ type: "runtime-error", message: String(message) }, "*")
     }
 
+    function deferScreenshotWork(timeout = 120) {
+      return new Promise((resolve) => {
+        requestAnimationFrame(() => {
+          if (typeof requestIdleCallback === "function") {
+            requestIdleCallback(() => resolve(), { timeout })
+          } else {
+            setTimeout(resolve, 0)
+          }
+        })
+      })
+    }
+
     window.onerror = function(_msg, _src, _line, _col, err) {
       postError(err ? err.message : _msg)
       return true
@@ -121,6 +134,7 @@ function createIframeTemplate() {
             window.Image.prototype = HTMLImageElement.prototype
           }
           const { toPng } = await import("https://esm.sh/html-to-image@${HTML_TO_IMAGE_VERSION}")
+          await deferScreenshotWork()
           const dataUrl = await toPng(document.getElementById("root"))
           window.parent.postMessage({ type: "screenshot-data", dataUrl }, "*")
         } catch (e) {
@@ -191,9 +205,17 @@ export function Preview({ ref, compiledCode, compiling, error }: PreviewProps) {
         reject(new Error("Preview not initialized"))
         return
       }
-      screenshotResolveRef.current = resolve
-      screenshotRejectRef.current = reject
-      iframeRef.current.contentWindow.postMessage({ type: "screenshot" }, "*")
+      void (async () => {
+        await deferScreenshotWork()
+        screenshotResolveRef.current = resolve
+        screenshotRejectRef.current = reject
+        iframeRef.current?.contentWindow?.postMessage(
+          { type: "screenshot" },
+          "*",
+        )
+      })().catch((error) => {
+        reject(error instanceof Error ? error : new Error(String(error)))
+      })
     })
   }, [])
 

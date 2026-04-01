@@ -1,0 +1,6 @@
+export const FAKER_VERSION = "10.4.0"
+export const DAYJS_VERSION = "1.11.20"
+export const LUCIDE_LAB_VERSION = "0.1.2"
+export const MOTION_VERSION = "12.38.0"
+export const REACT_VERSION = "19.2.4"
+export const REACT_HOOK_FORM_VERSION = "7.72.0"

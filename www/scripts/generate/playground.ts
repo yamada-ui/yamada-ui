@@ -2,7 +2,7 @@ import fs from "fs"
 import path from "path"
 import { pathToFileURL } from "url"
 
-export function copyEsbuildWasm(cwd = process.cwd()) {
+function copyEsbuildWasm(cwd = process.cwd()) {
   fs.copyFileSync(
     path.join(cwd, "node_modules/esbuild-wasm/esbuild.wasm"),
     path.join(cwd, "public/esbuild.wasm"),
@@ -24,7 +24,7 @@ function normalizeVersion(version: string) {
   return version.replace(/\(.*/, "")
 }
 
-export function parseImporterVersions(
+function parseImporterVersions(
   lockfile: string,
   importerName: string,
   sectionName: "dependencies" | "devDependencies",
@@ -70,7 +70,7 @@ export function parseImporterVersions(
   return dependencies
 }
 
-export function resolvePlaygroundVersions(lockfile: string) {
+function resolvePlaygroundVersions(lockfile: string) {
   const runtimeDependencies = parseImporterVersions(
     lockfile,
     "packages/react",
@@ -98,7 +98,7 @@ export function resolvePlaygroundVersions(lockfile: string) {
   ) as { [key in PlaygroundDependency]: string }
 }
 
-export function buildPlaygroundVersionsModule(lockfile: string) {
+function buildPlaygroundVersionsModule(lockfile: string) {
   const versions = resolvePlaygroundVersions(lockfile)
 
   return `export const FAKER_VERSION = ${JSON.stringify(versions["@faker-js/faker"])}
@@ -110,7 +110,7 @@ export const REACT_HOOK_FORM_VERSION = ${JSON.stringify(versions["react-hook-for
 `
 }
 
-export function generatePlaygroundVersionsFile(cwd = process.cwd()) {
+function generatePlaygroundVersionsFile(cwd = process.cwd()) {
   const lockfilePath = path.join(cwd, "..", "pnpm-lock.yaml")
   const outputPath = path.join(
     cwd,

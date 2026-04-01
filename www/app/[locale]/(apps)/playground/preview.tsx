@@ -2,7 +2,6 @@
 
 import type { Ref } from "react"
 import {
-  assignRef,
   Box,
   HStack,
   Loading,
@@ -10,8 +9,14 @@ import {
   useColorMode,
   useWindowEvent,
 } from "@yamada-ui/react"
-import { useTranslations } from "next-intl"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useLocale, useTranslations } from "next-intl"
+import {
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react"
 import { deferScreenshotWork } from "./screenshot"
 import {
   HTML_TO_IMAGE_VERSION,
@@ -27,8 +32,19 @@ type IframeMessage =
   | { type: "iframe-ready" }
   | { type: "ready" }
 
-function createIframeTemplate() {
-  return `<!DOCTYPE html>
+type ParentToIframeMessage =
+  | { code: string; type: "update" }
+  | { colorMode: string; locale: string; type: "preferences" }
+  | { type: "screenshot" }
+
+function postToIframe(
+  target: Pick<Window, "postMessage">,
+  message: ParentToIframeMessage,
+) {
+  target.postMessage(message, "*")
+}
+
+const IFRAME_TEMPLATE = `<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
@@ -62,6 +78,7 @@ function createIframeTemplate() {
 
     let _App = null
     let _changeColorMode = null
+    let _locale = null
 
     function AppContainer() {
       const { changeColorMode } = useColorMode()
@@ -70,7 +87,7 @@ function createIframeTemplate() {
     }
 
     function renderApp() {
-      root.render(createElement(UIProvider, null, createElement(AppContainer)))
+      root.render(createElement(UIProvider, { locale: _locale }, createElement(AppContainer)))
     }
 
     function postError(message) {
@@ -116,12 +133,14 @@ function createIframeTemplate() {
         } catch (e) {
           postError(e.message)
         }
-      } else if (data.type === "color-mode") {
+      } else if (data.type === "preferences") {
+        _locale = data.locale
         if (_changeColorMode) {
           _changeColorMode(data.colorMode)
         } else {
           localStorage.setItem("color-mode", data.colorMode)
         }
+        if (_App) renderApp()
       } else if (data.type === "screenshot") {
         try {
           try { new Image() } catch (_) {
@@ -146,9 +165,30 @@ function createIframeTemplate() {
   </script>
 </body>
 </html>`
+
+interface PreviewPreferences {
+  colorMode: string
+  locale: string
 }
 
-const IFRAME_TEMPLATE = createIframeTemplate()
+interface PreviewUpdate extends PreviewPreferences {
+  code: string
+}
+
+function postPreviewPreferences(
+  target: Pick<Window, "postMessage">,
+  { colorMode, locale }: PreviewPreferences,
+) {
+  postToIframe(target, { type: "preferences", colorMode, locale })
+}
+
+function postPreviewUpdate(
+  target: Pick<Window, "postMessage">,
+  { code, colorMode, locale }: PreviewUpdate,
+) {
+  postPreviewPreferences(target, { colorMode, locale })
+  postToIframe(target, { type: "update", code })
+}
 
 export interface PreviewHandle {
   requestScreenshot: () => Promise<string>
@@ -163,6 +203,7 @@ interface PreviewProps {
 
 export function Preview({ ref, compiledCode, compiling, error }: PreviewProps) {
   const t = useTranslations("playground")
+  const locale = useLocale()
   const { colorMode } = useColorMode()
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const [iframeReady, setIframeReady] = useState(false)
@@ -185,15 +226,12 @@ export function Preview({ ref, compiledCode, compiling, error }: PreviewProps) {
     setPreviewUpdating(true)
     setRuntimeError(null)
     setConsoleErrors([])
-    iframeRef.current.contentWindow.postMessage(
-      { type: "color-mode", colorMode },
-      "*",
-    )
-    iframeRef.current.contentWindow.postMessage(
-      { type: "update", code: compiledCode },
-      "*",
-    )
-  }, [compiledCode, colorMode])
+    postPreviewUpdate(iframeRef.current.contentWindow, {
+      code: compiledCode,
+      colorMode,
+      locale,
+    })
+  }, [compiledCode, colorMode, locale])
 
   useEffect(() => {
     postUpdate()
@@ -209,32 +247,30 @@ export function Preview({ ref, compiledCode, compiling, error }: PreviewProps) {
         await deferScreenshotWork()
         screenshotResolveRef.current = resolve
         screenshotRejectRef.current = reject
-        iframeRef.current?.contentWindow?.postMessage(
-          { type: "screenshot" },
-          "*",
-        )
+        const contentWindow = iframeRef.current?.contentWindow
+        if (contentWindow) postToIframe(contentWindow, { type: "screenshot" })
       })().catch((error) => {
         reject(error instanceof Error ? error : new Error(String(error)))
       })
     })
   }, [])
 
-  assignRef(ref, { requestScreenshot })
+  useImperativeHandle(ref, () => ({ requestScreenshot }), [requestScreenshot])
 
   useWindowEvent("message", (event: MessageEvent<IframeMessage>) => {
     if (event.source !== iframeRef.current?.contentWindow) return
-    const msg = event.data
-    switch (msg.type) {
+    const eventData = event.data
+    switch (eventData.type) {
       case "iframe-ready":
         iframeInitializedRef.current = true
         postUpdate()
         break
       case "runtime-error":
         setPreviewUpdating(false)
-        setRuntimeError(msg.message)
+        setRuntimeError(eventData.message)
         break
       case "console-error":
-        setConsoleErrors((prev) => [...prev, msg.message])
+        setConsoleErrors((prev) => [...prev, eventData.message])
         break
       case "ready":
         setIframeReady(true)
@@ -242,12 +278,12 @@ export function Preview({ ref, compiledCode, compiling, error }: PreviewProps) {
         setRuntimeError(null)
         break
       case "screenshot-data":
-        screenshotResolveRef.current?.(msg.dataUrl)
+        screenshotResolveRef.current?.(eventData.dataUrl)
         screenshotResolveRef.current = null
         screenshotRejectRef.current = null
         break
       case "screenshot-error":
-        screenshotRejectRef.current?.(new Error(msg.message))
+        screenshotRejectRef.current?.(new Error(eventData.message))
         screenshotResolveRef.current = null
         screenshotRejectRef.current = null
         break
@@ -256,11 +292,10 @@ export function Preview({ ref, compiledCode, compiling, error }: PreviewProps) {
 
   useEffect(() => {
     if (!iframeReady) return
-    iframeRef.current?.contentWindow?.postMessage(
-      { type: "color-mode", colorMode },
-      "*",
-    )
-  }, [colorMode, iframeReady])
+    const contentWindow = iframeRef.current?.contentWindow
+    if (!contentWindow) return
+    postPreviewPreferences(contentWindow, { colorMode, locale })
+  }, [colorMode, iframeReady, locale])
 
   const loadingLabel =
     compiling || previewUpdating ? t("compiling") : t("initializingCompiler")

@@ -1,8 +1,8 @@
 "use client"
 
+import type { EditorHandle } from "./editor"
 import type { PreviewHandle } from "./preview"
 import { Flex, Resizable, useAsyncCallback } from "@yamada-ui/react"
-import { toPng } from "html-to-image"
 import { debounce, useQueryState } from "nuqs"
 import {
   startTransition,
@@ -37,7 +37,7 @@ export default function PlaygroundClient() {
   )
   const [compiledCode, setCompiledCode] = useState<null | string>(null)
   const [error, setError] = useState<null | string>(null)
-  const editorRef = useRef<HTMLDivElement>(null)
+  const editorRef = useRef<EditorHandle>(null)
   const previewRef = useRef<PreviewHandle>(null)
   const abortControllerRef = useRef<AbortController | null>(null)
 
@@ -84,7 +84,7 @@ export default function PlaygroundClient() {
 
   const handleScreenshotCode = useCallback(async () => {
     if (!editorRef.current) throw new Error("Editor not ready")
-    const dataUrl = await toPng(editorRef.current)
+    const dataUrl = await editorRef.current.captureScreenshot()
     await writeDataUrlToClipboard(dataUrl)
   }, [])
 

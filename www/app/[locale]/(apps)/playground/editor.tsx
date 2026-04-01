@@ -1,14 +1,18 @@
 "use client"
 
-import type { Language, PrismTheme } from "prism-react-renderer"
 import type { Ref } from "react"
 import type React from "react"
-import { Box, Text, useColorMode } from "@yamada-ui/react"
+import { Box, useColorMode, useSafeLayoutEffect } from "@yamada-ui/react"
+import { toPng } from "html-to-image"
 import { useTranslations } from "next-intl"
-import { Highlight, themes } from "prism-react-renderer"
-import { useCallback, useEffect, useLayoutEffect, useRef } from "react"
+import { use, useCallback, useImperativeHandle, useMemo, useRef } from "react"
+import { highlightCode, highlighterPromise } from "./shiki-highlighter"
 
-const LANGUAGE: Language = "tsx"
+export interface EditorHandle {
+  captureScreenshot(): Promise<string>
+}
+
+const LANGUAGE = "tsx"
 
 const AUTO_CLOSE = {
   '"': '"',
@@ -22,26 +26,53 @@ const AUTO_CLOSE = {
 interface EditorProps {
   code: string
   onChange: (code: string) => void
-  ref?: Ref<HTMLDivElement>
+  ref?: Ref<EditorHandle>
   onFormat?: () => Promise<void>
 }
 
 export function Editor({ ref, code, onChange, onFormat }: EditorProps) {
   const t = useTranslations("playground")
-  const { colorMode } = useColorMode()
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const preRef = useRef<HTMLDivElement>(null)
   const pendingCursorRef = useRef<null | { end: number; start: number }>(null)
-  const theme: PrismTheme =
-    colorMode === "dark" ? themes.oneDark : themes.oneLight
 
-  useLayoutEffect(() => {
+  const highlighter = use(highlighterPromise)
+  const { colorMode } = useColorMode()
+  const highlightedHtml = useMemo(
+    () => highlightCode(highlighter, code, colorMode),
+    [code, highlighter, colorMode],
+  )
+
+  useSafeLayoutEffect(() => {
     if (!pendingCursorRef.current || !textareaRef.current) return
     const { end, start } = pendingCursorRef.current
     textareaRef.current.selectionStart = start
     textareaRef.current.selectionEnd = end
     pendingCursorRef.current = null
   })
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      async captureScreenshot() {
+        const el = preRef.current
+        if (!el) throw new Error("Editor not ready")
+
+        return await toPng(el, {
+          style: {
+            height: el.scrollHeight + "px",
+            inset: "unset",
+            overflow: "visible",
+            position: "static",
+            width: el.scrollWidth + "px",
+          },
+          height: el.scrollHeight,
+          width: el.scrollWidth,
+        })
+      },
+    }),
+    [],
+  )
 
   const handleChange = useCallback<
     React.ChangeEventHandler<HTMLTextAreaElement>
@@ -59,7 +90,7 @@ export function Editor({ ref, code, onChange, onFormat }: EditorProps) {
     }
   }, [])
 
-  useEffect(() => {
+  useSafeLayoutEffect(() => {
     syncScroll()
   }, [code, syncScroll])
 
@@ -108,7 +139,7 @@ export function Editor({ ref, code, onChange, onFormat }: EditorProps) {
           const lines = code.slice(lineStart, end).split("\n")
 
           if (!ev.shiftKey) {
-            const newLines = lines.map((l) => INDENT + l)
+            const newLines = lines.map((line) => INDENT + line)
             const newCode =
               code.slice(0, lineStart) + newLines.join("\n") + code.slice(end)
             onChange(newCode)
@@ -117,11 +148,11 @@ export function Editor({ ref, code, onChange, onFormat }: EditorProps) {
               start: start + INDENT.length,
             }
           } else {
-            const newLines = lines.map((l) => l.replace(/^ {1,2}/, ""))
+            const newLines = lines.map((line) => line.replace(/^ {1,2}/, ""))
             const firstDelta =
               (lines[0] ?? "").match(/^ {1,2}/)?.[0]?.length ?? 0
             const totalDelta = lines.reduce(
-              (acc, l) => acc + (l.match(/^ {1,2}/)?.[0]?.length ?? 0),
+              (acc, line) => acc + (line.match(/^ {1,2}/)?.[0]?.length ?? 0),
               0,
             )
             const newCode =
@@ -207,10 +238,10 @@ export function Editor({ ref, code, onChange, onFormat }: EditorProps) {
 
   return (
     <Box
-      ref={ref}
       borderBottomWidth={{ base: "0", md: "1px" }}
       borderRightWidth={{ base: "1px", md: "0" }}
       fontFamily="mono"
+      fontSize="sm"
       h="full"
       overflow="hidden"
       position="relative"
@@ -225,42 +256,15 @@ export function Editor({ ref, code, onChange, onFormat }: EditorProps) {
         pointerEvents="none"
         position="absolute"
       >
-        <Highlight code={code} language={LANGUAGE} theme={theme}>
-          {({ className, style, tokens, getLineProps, getTokenProps }) => (
-            <Box
-              data-language={LANGUAGE}
-              fontSize="sm"
-              minH="full"
-              minW="fit-content"
-            >
-              <Box
-                as="pre"
-                className={className}
-                style={style}
-                lineHeight="1.5"
-                m={0}
-                minH="full"
-                minW="fit-content"
-              >
-                {tokens.map((line, index) => (
-                  <Box
-                    key={index}
-                    minW="fit-content"
-                    {...getLineProps({ line })}
-                  >
-                    {line.map((token, index) => (
-                      <Text
-                        key={index}
-                        as="span"
-                        {...getTokenProps({ token })}
-                      />
-                    ))}
-                  </Box>
-                ))}
-              </Box>
-            </Box>
-          )}
-        </Highlight>
+        <Box
+          as="pre"
+          data-language={LANGUAGE}
+          dangerouslySetInnerHTML={{ __html: highlightedHtml }}
+          lineHeight="1.5"
+          m={0}
+          minH="full"
+          minW="fit-content"
+        />
       </Box>
       <Box
         ref={textareaRef}
@@ -273,7 +277,6 @@ export function Editor({ ref, code, onChange, onFormat }: EditorProps) {
         border="none"
         caretColor="primary"
         color="transparent"
-        fontSize="sm"
         h="full"
         lineHeight="1.5"
         outline="none"
@@ -285,6 +288,10 @@ export function Editor({ ref, code, onChange, onFormat }: EditorProps) {
         value={code}
         w="full"
         whiteSpace="pre"
+        _selection={{
+          base: { bg: "rgba(100, 170, 255, 0.4)" },
+          _dark: { bg: "rgba(120, 180, 255, 0.35)" },
+        }}
         _focus={{ border: "none", outline: "none" }}
         onChange={handleChange}
         onKeyDown={handleKeyDown}

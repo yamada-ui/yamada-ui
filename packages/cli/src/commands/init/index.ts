@@ -1,17 +1,17 @@
 import type { PackageNameWithVersion, UserConfig } from "../../index.type"
 import { isObject, isUndefined, merge } from "@yamada-ui/utils"
 import boxen from "boxen"
-import { exec } from "child_process"
 import { Command } from "commander"
 import { Listr } from "listr2"
+import { exec } from "node:child_process"
 import { existsSync } from "node:fs"
 import { readdir, readFile } from "node:fs/promises"
 import path from "node:path"
+import { promisify } from "node:util"
 import ora from "ora"
 import c from "picocolors"
 import prompts from "prompts"
 import { rimraf } from "rimraf"
-import { promisify } from "util"
 import {
   CONFIG_FILE_NAME,
   DEFAULT_CONFIG,

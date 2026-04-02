@@ -33,7 +33,7 @@ type IframeMessage =
   | { type: "ready" }
 
 type ParentToIframeMessage =
-  | { code: string; type: "update" }
+  | { code: string; revision: number; type: "update" }
   | { colorMode: string; locale: string; type: "preferences" }
   | { type: "screenshot" }
 
@@ -79,6 +79,7 @@ const IFRAME_TEMPLATE = `<!DOCTYPE html>
     let _App = null
     let _changeColorMode = null
     let _locale = null
+    let _latestRevision = 0
 
     function AppContainer() {
       const { changeColorMode } = useColorMode()
@@ -124,13 +125,17 @@ const IFRAME_TEMPLATE = `<!DOCTYPE html>
 
     window.addEventListener("message", async ({ data }) => {
       if (data.type === "update") {
+        const revision = data.revision ?? 0
+        _latestRevision = revision
         try {
           const url = "data:text/javascript;charset=utf-8," + encodeURIComponent(data.code)
           const { default: App } = await import(url)
+          if (revision !== _latestRevision) return
           _App = App
           renderApp()
           window.parent.postMessage({ type: "ready" }, "*")
         } catch (e) {
+          if (revision !== _latestRevision) return
           postError(e.message)
         }
       } else if (data.type === "preferences") {
@@ -173,6 +178,7 @@ interface PreviewPreferences {
 
 interface PreviewUpdate extends PreviewPreferences {
   code: string
+  revision: number
 }
 
 function postPreviewPreferences(
@@ -184,10 +190,10 @@ function postPreviewPreferences(
 
 function postPreviewUpdate(
   target: Pick<Window, "postMessage">,
-  { code, colorMode, locale }: PreviewUpdate,
+  { code, colorMode, locale, revision }: PreviewUpdate,
 ) {
   postPreviewPreferences(target, { colorMode, locale })
-  postToIframe(target, { type: "update", code })
+  postToIframe(target, { type: "update", code, revision })
 }
 
 export interface PreviewHandle {
@@ -213,6 +219,7 @@ export function Preview({ ref, compiledCode, compiling, error }: PreviewProps) {
   const screenshotResolveRef = useRef<((dataUrl: string) => void) | null>(null)
   const screenshotRejectRef = useRef<((err: Error) => void) | null>(null)
   const iframeInitializedRef = useRef(false)
+  const updateRevisionRef = useRef(0)
 
   const handleIframeLoad = useCallback(() => {
     setIframeReady(false)
@@ -222,6 +229,9 @@ export function Preview({ ref, compiledCode, compiling, error }: PreviewProps) {
     if (!compiledCode || !iframeRef.current?.contentWindow) return
     if (!iframeInitializedRef.current) return
 
+    updateRevisionRef.current += 1
+    const revision = updateRevisionRef.current
+
     setIframeReady(false)
     setPreviewUpdating(true)
     setRuntimeError(null)
@@ -230,6 +240,7 @@ export function Preview({ ref, compiledCode, compiling, error }: PreviewProps) {
       code: compiledCode,
       colorMode,
       locale,
+      revision,
     })
   }, [compiledCode, colorMode, locale])
 

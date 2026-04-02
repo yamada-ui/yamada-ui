@@ -1,4 +1,4 @@
-import { existsSync } from "fs"
+import { existsSync } from "node:fs"
 import { glob, readFile } from "node:fs/promises"
 import path from "node:path"
 import YAML from "yamljs"

@@ -2,7 +2,6 @@ packages:
   - "packages/**"
   - "playgrounds/**"
   - "www/**"
-
 catalog:
   "@faker-js/faker": ^10.4.0
   "@lucide/lab": ^0.1.2
@@ -24,9 +23,6 @@ catalog:
   vitest: ^4.1.2
   vitest-axe: ^0.1.0
   vite-tsconfig-paths: ^6.1.1
-
-minimumReleaseAge: 10080 # = 60 [minutes/h] * 24 [h/day] * 7 [day]
-
 onlyBuiltDependencies:
   - "@parcel/watcher"
   - "@swc/core"
@@ -34,9 +30,7 @@ onlyBuiltDependencies:
   - "lefthook"
   - "sharp"
   - "unrs-resolver"
-
+minimumReleaseAge: 10080
 blockExoticSubdeps: true
-
 strictDepBuilds: true
-
 dedupeDirectDeps: true

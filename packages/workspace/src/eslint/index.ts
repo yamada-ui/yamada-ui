@@ -2,6 +2,7 @@ import type {
   ConfigWithExtends,
   ConfigWithExtendsArray,
 } from "@eslint/config-helpers"
+import { defineConfig } from "eslint/config"
 import { baseConfigArray, noConsoleConfig } from "./base"
 import { cspellConfig } from "./cspell"
 import { importConfigArray, restrictedImportConfigArray } from "./import"
@@ -16,13 +17,12 @@ import { testingLibraryConfig } from "./testing-library"
 import { typescriptConfig } from "./typescript"
 import { vitestConfig } from "./vitest"
 
-export { defineConfig } from "eslint/config"
-
 export type { ConfigWithExtends, ConfigWithExtendsArray }
 
 export {
   baseConfigArray,
   cspellConfig,
+  defineConfig,
   importConfigArray,
   jsxA11yConfig,
   nextConfig,

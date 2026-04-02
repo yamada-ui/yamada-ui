@@ -569,26 +569,53 @@ export const init = new Command("init")
             if (selectedWorkspaces && selectedWorkspaces.length > 0) {
               spinner.start("Installing UI package in selected workspaces")
 
-              try {
-                for (const workspace of selectedWorkspaces) {
+              const succeededWorkspaces: string[] = []
+              const failedWorkspaces: {
+                error: unknown
+                workspace: string
+              }[] = []
+
+              for (const workspace of selectedWorkspaces) {
+                try {
                   await execFileAsync(
                     packageManager,
                     [...args, `${packageName}@workspace:*`],
                     { cwd: path.join(cwd, workspace) },
                   )
+                  succeededWorkspaces.push(workspace)
+                } catch (error) {
+                  failedWorkspaces.push({ error, workspace })
                 }
-                spinner.succeed("Installation complete")
+              }
 
+              if (failedWorkspaces.length === 0) {
+                spinner.succeed("Installation complete")
+              } else if (succeededWorkspaces.length === 0) {
+                spinner.fail("Failed to install packages in workspaces.")
+              } else {
+                spinner.warn("Installation completed with some errors.")
+              }
+
+              if (succeededWorkspaces.length > 0) {
                 console.log(
                   `\nAdded "${packageName}@workspace:*" to the following workspaces:\n`,
                 )
-                selectedWorkspaces.forEach((workspace: string) => {
+                succeededWorkspaces.forEach((workspace) => {
                   console.log(`  ${c.green("✔")} ${c.cyan(workspace)}`)
                 })
                 console.log("")
-              } catch (error) {
-                spinner.fail("Failed to install packages in workspaces.")
-                console.error(c.red(String(error)))
+              }
+
+              if (failedWorkspaces.length > 0) {
+                console.log(
+                  `\nFailed to install "${packageName}@workspace:*" in the following workspaces:\n`,
+                )
+                failedWorkspaces.forEach(({ error, workspace }) => {
+                  console.error(
+                    `  ${c.red("✘")} ${c.cyan(workspace)}: ${c.red(String(error))}`,
+                  )
+                })
+                console.log("")
               }
             } else {
               console.log(

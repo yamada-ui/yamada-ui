@@ -140,13 +140,7 @@ export default function PlaygroundClient() {
       />
       <Resizable.Root
         flex={1}
-        left="50%"
-        maxW="100dvw"
         orientation={{ base: "horizontal", md: "vertical" }}
-        overflow="hidden"
-        position="relative"
-        transform="translateX(-50%)"
-        w="100dvw"
       >
         <Resizable.Item defaultSize="50%" minSize="25%">
           {previewFirst ? previewPaneContent : editorPaneContent}

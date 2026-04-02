@@ -3,9 +3,7 @@ import { isObject, isUndefined, merge } from "@yamada-ui/utils"
 import boxen from "boxen"
 import { Command } from "commander"
 import { Listr } from "listr2"
-import { exec } from "node:child_process"
 import path from "node:path"
-import { promisify } from "node:util"
 import ora from "ora"
 import c from "picocolors"
 import prompts from "prompts"
@@ -26,6 +24,7 @@ import {
 import {
   addWorkspace,
   cwd,
+  execFileAsync,
   fetchRegistry,
   getNotInstalledDependencies,
   getPackageJson,
@@ -42,8 +41,6 @@ import {
   writeFileSafe,
 } from "../../utils"
 import { getWorkspaces } from "./workspace"
-
-const execAsync = promisify(exec)
 
 interface Options {
   config: string
@@ -570,7 +567,11 @@ export const init = new Command("init")
 
               try {
                 for (const ws of selectedWorkspaces) {
-                  await execAsync(installCommand, { cwd: path.join(cwd, ws) })
+                  await execFileAsync(
+                    packageManager,
+                    [...args, `${packageName}@workspace:*`],
+                    { cwd: path.join(cwd, ws) },
+                  )
                 }
                 spinner.succeed("Installation complete")
 

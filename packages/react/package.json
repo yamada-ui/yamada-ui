@@ -48,7 +48,8 @@
     "./theme": "./src/theme/index.ts",
     "./providers/*": "./src/providers/*/index.ts",
     "./components/*": "./src/components/*/index.ts",
-    "./hooks/*": "./src/hooks/*/index.ts"
+    "./hooks/*": "./src/hooks/*/index.ts",
+    "./package.json": "./package.json"
   },
   "scripts": {
     "clean": "rimraf node_modules dist trace coverage storybook-static .turbo .eslintcache .vitest-attachments __screenshots__",

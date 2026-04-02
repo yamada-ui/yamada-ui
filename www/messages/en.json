@@ -123,7 +123,7 @@
       "clientOnly": "If you use this code, you need to add <tag>\"use client\"</tag> to the top of the file.",
       "preview": "Preview",
       "code": "Code",
-      "stackBlitz": "StackBlitz"
+      "playground": "Playground"
     },
     "propsTable": {
       "prop": "Prop",
@@ -147,5 +147,28 @@
       "claude": "Open in Claude",
       "query": "Use web browsing to access links and information: {url}.\n\nI want to ask some questions.\n"
     }
+  },
+  "playground": {
+    "title": "Playground",
+    "description": "Try Yamada UI components in your browser.",
+    "resetCode": "Reset Code",
+    "share": "Share",
+    "format": "Format",
+    "swapHorizontal": "Swap Left/Right",
+    "swapVertical": "Swap Top/Bottom",
+    "copied": "Copied",
+    "copyMenu": "Copy / Screenshot",
+    "openCopyMenu": "Open copy menu",
+    "copyUrl": "Copy URL",
+    "copyCode": "Copy Code",
+    "screenshotCode": "Screenshot (Code)",
+    "screenshotUi": "Screenshot (UI)",
+    "screenshotCopied": "Screenshot copied",
+    "screenshotFailed": "Screenshot failed",
+    "initializingCompiler": "Initializing compiler...",
+    "compiling": "Compiling...",
+    "initializing": "Initializing...",
+    "codeEditor": "Code Editor",
+    "componentPreview": "Component preview"
   }
 }

@@ -16,7 +16,7 @@ import { testingLibraryConfig } from "./testing-library"
 import { typescriptConfig } from "./typescript"
 import { vitestConfig } from "./vitest"
 
-export { defineConfig } from "eslint/config"
+export { defineConfig, globalIgnores } from "eslint/config"
 
 export type { ConfigWithExtends, ConfigWithExtendsArray }
 

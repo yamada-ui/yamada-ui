@@ -21,7 +21,8 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@vitejs/plugin-react-swc": "^4.3.0",
+    "@vitejs/plugin-react-swc": "catalog:",
+    "@yamada-ui/workspace": "workspace:*",
     "vite": "catalog:"
   }
 }

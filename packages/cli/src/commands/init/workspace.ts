@@ -1,5 +1,5 @@
 import { existsSync } from "fs"
-import { readdir, readFile } from "node:fs/promises"
+import { glob, readFile } from "node:fs/promises"
 import path from "node:path"
 import YAML from "yamljs"
 import { getPackageManager } from "../../utils"
@@ -42,25 +42,15 @@ export async function getWorkspaces(cwd: string): Promise<string[]> {
   if (workspacePatterns.length === 0) return []
 
   const actualWorkspaces: string[] = []
+
   for (const pattern of workspacePatterns) {
-    if (pattern.endsWith("/*")) {
-      const baseDir = pattern.replace("/*", "")
-      const fullBaseDir = path.join(cwd, baseDir)
-      if (existsSync(fullBaseDir)) {
-        const dirents = await readdir(fullBaseDir, { withFileTypes: true })
-        for (const dirent of dirents) {
-          if (dirent.isDirectory()) {
-            const workspacePath = path.join(baseDir, dirent.name)
-            if (existsSync(path.join(cwd, workspacePath, "package.json"))) {
-              actualWorkspaces.push(workspacePath)
-            }
-          }
-        }
-      }
-    } else {
-      if (existsSync(path.join(cwd, pattern, "package.json"))) {
-        actualWorkspaces.push(pattern)
-      }
+    const normalizedPattern = pattern.replace(/\/$/, "")
+    const packageJsonPattern = `${normalizedPattern}/package.json`
+
+    const matches = await Array.fromAsync(glob(packageJsonPattern, { cwd }))
+
+    for (const match of matches) {
+      actualWorkspaces.push(path.dirname(match))
     }
   }
 

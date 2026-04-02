@@ -33,6 +33,16 @@ describe("getWorkspaces", () => {
     )
   }
 
+  function createPackage(relPath: string, name: string) {
+    const pkgDir = path.join(tempDir, relPath)
+    mkdirSync(pkgDir, { recursive: true })
+    writeFileSync(
+      path.join(pkgDir, "package.json"),
+      JSON.stringify({ name }),
+      "utf-8",
+    )
+  }
+
   test("should parse block-sequence entries with inline comments", async () => {
     writeFileSync(
       path.join(tempDir, "pnpm-workspace.yaml"),
@@ -133,5 +143,49 @@ describe("getWorkspaces", () => {
 
     const result = await getWorkspaces(tempDir)
     expect(result).toStrictEqual([])
+  })
+
+  test("should resolve nested directories with ** glob pattern", async () => {
+    writeFileSync(
+      path.join(tempDir, "pnpm-workspace.yaml"),
+      "packages:\n  - apps/**\n",
+      "utf-8",
+    )
+    createPackage("apps/web", "web")
+    createPackage("apps/mobile/app", "mobile-app")
+
+    const result = await getWorkspaces(tempDir)
+    expect(result).toContain(path.join("apps", "web"))
+    expect(result).toContain(path.join("apps", "mobile", "app"))
+  })
+
+  test("should resolve prefix wildcard pattern like packages/ui-*", async () => {
+    writeFileSync(
+      path.join(tempDir, "pnpm-workspace.yaml"),
+      "packages:\n  - packages/ui-*\n",
+      "utf-8",
+    )
+    createPackage("packages/ui-button", "ui-button")
+    createPackage("packages/ui-input", "ui-input")
+    createPackage("packages/core", "core")
+
+    const result = await getWorkspaces(tempDir)
+    expect(result).toContain(path.join("packages", "ui-button"))
+    expect(result).toContain(path.join("packages", "ui-input"))
+    expect(result).not.toContain(path.join("packages", "core"))
+  })
+
+  test("should resolve pattern with trailing slash", async () => {
+    writeFileSync(
+      path.join(tempDir, "pnpm-workspace.yaml"),
+      "packages:\n  - packages/*/\n",
+      "utf-8",
+    )
+    createPackage("packages/alpha", "alpha")
+    createPackage("packages/beta", "beta")
+
+    const result = await getWorkspaces(tempDir)
+    expect(result).toContain(path.join("packages", "alpha"))
+    expect(result).toContain(path.join("packages", "beta"))
   })
 })

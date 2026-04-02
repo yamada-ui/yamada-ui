@@ -181,14 +181,13 @@ export const init = new Command("init")
       src ??= answer.src ?? true
       lint ??= answer.lint ?? true
       format ??= answer.format ?? true
-
       // eslint-disable-next-line no-control-regex
       outdir = (answer.outdir ?? "").replace(/\x17/g, "").trim()
       outdir ||= monorepo ? DEFAULT_PATH.ui.monorepo : DEFAULT_PATH.ui.polyrepo
-
       // eslint-disable-next-line no-control-regex
       packageName = (answer.packageName ?? "").replace(/\x17/g, "").trim()
       packageName ||= DEFAULT_PACKAGE_NAME.ui
+
       if (monorepo) config.monorepo = monorepo
       if (jsx) config.jsx = jsx
 

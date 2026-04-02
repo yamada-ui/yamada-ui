@@ -1,6 +1,6 @@
 import type { Options } from "prettier"
-import { writeFile } from "fs/promises"
-import path from "path"
+import { writeFile } from "node:fs/promises"
+import path from "node:path"
 import { format as OriginalFormat, resolveConfig } from "prettier"
 
 export async function format(content: string, options?: Options) {

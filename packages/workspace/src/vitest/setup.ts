@@ -29,7 +29,7 @@ if (typeof window.matchMedia !== "function") {
   })
 }
 
-global.TextEncoder = (await import("util")).TextEncoder
+global.TextEncoder = (await import("node:util")).TextEncoder
 
 global.ResizeObserver = class ResizeObserverMock {
   disconnect = vi.fn()

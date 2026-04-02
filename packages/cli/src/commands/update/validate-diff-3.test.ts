@@ -21,7 +21,7 @@ vi.mock("util", async (importOriginal) => {
   }
 })
 
-import { execFile } from "child_process"
+import { execFile } from "node:child_process"
 import { validateDiff3 } from "./validate-diff-3"
 
 const mockExecFile = vi.mocked(execFile)

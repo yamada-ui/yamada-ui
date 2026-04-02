@@ -4,14 +4,14 @@ import {
   retryOnRateLimit,
   retryOnRateLimitWithPaging,
 } from "@yamada-ui/workspace/octokit"
-import { execFile } from "child_process"
 import { Command } from "commander"
-import { readFile } from "fs/promises"
+import { execFile } from "node:child_process"
+import { readFile } from "node:fs/promises"
+import path from "node:path"
+import { promisify } from "node:util"
 import ora from "ora"
-import path from "path"
 import c from "picocolors"
 import stripAnsi from "strip-ansi"
-import { promisify } from "util"
 
 const execFileAsync = promisify(execFile)
 

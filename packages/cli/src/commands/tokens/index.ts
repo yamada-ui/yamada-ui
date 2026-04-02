@@ -9,8 +9,8 @@ import {
   omitObject,
 } from "@yamada-ui/utils"
 import { Command } from "commander"
+import path from "node:path"
 import ora from "ora"
-import path from "path"
 import { CONFIG_FILE_NAME, PACKAGE_NAME } from "../../constant"
 import {
   cwd,

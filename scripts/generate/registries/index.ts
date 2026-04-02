@@ -3,10 +3,10 @@ import type { SourceFile } from "typescript"
 import { toKebabCase } from "@yamada-ui/utils"
 import { format, writeFileWithFormat } from "@yamada-ui/workspace/prettier"
 import { Command } from "commander"
-import { existsSync } from "fs"
-import { glob, mkdir, readdir, readFile } from "fs/promises"
+import { existsSync } from "node:fs"
+import { glob, mkdir, readdir, readFile } from "node:fs/promises"
+import path from "node:path"
 import ora from "ora"
-import path from "path"
 import c from "picocolors"
 import {
   createProgram,

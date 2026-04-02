@@ -10,6 +10,7 @@ export const importConfigArray: ConfigWithExtendsArray = [
     extends: [importPlugin.flatConfigs.recommended],
     files: sharedFiles,
     rules: {
+      "import/enforce-node-protocol-usage": ["error", "always"],
       "import/no-named-as-default": "off",
       "import/no-unresolved": "off",
     },

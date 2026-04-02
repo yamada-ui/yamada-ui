@@ -548,8 +548,8 @@ export const init = new Command("init")
         } else {
           if (yes) {
             console.log(`\nRun the following commands in your applications:\n`)
-            workspaces.forEach((ws) => {
-              console.log(c.cyan(`cd ${ws} && ${installCommand}`))
+            workspaces.forEach((workspace) => {
+              console.log(c.cyan(`cd ${workspace} && ${installCommand}`))
             })
             console.log("")
           } else {
@@ -557,7 +557,10 @@ export const init = new Command("init")
             const { selectedWorkspaces } = await prompts({
               type: "multiselect",
               name: "selectedWorkspaces",
-              choices: workspaces.map((ws) => ({ title: ws, value: ws })),
+              choices: workspaces.map((workspace) => ({
+                title: workspace,
+                value: workspace,
+              })),
               instructions: false,
               message: `Which workspaces would you like to add "${packageName}" to? (Press <space> to toggle)`,
             })
@@ -566,11 +569,11 @@ export const init = new Command("init")
               spinner.start("Installing UI package in selected workspaces")
 
               try {
-                for (const ws of selectedWorkspaces) {
+                for (const workspace of selectedWorkspaces) {
                   await execFileAsync(
                     packageManager,
                     [...args, `${packageName}@workspace:*`],
-                    { cwd: path.join(cwd, ws) },
+                    { cwd: path.join(cwd, workspace) },
                   )
                 }
                 spinner.succeed("Installation complete")
@@ -578,8 +581,8 @@ export const init = new Command("init")
                 console.log(
                   `\nAdded "${packageName}@workspace:*" to the following workspaces:\n`,
                 )
-                selectedWorkspaces.forEach((ws: string) => {
-                  console.log(c.cyan(`cd ${ws} && ${installCommand}`))
+                selectedWorkspaces.forEach((workspace: string) => {
+                  console.log(`  ${c.green("✔")} ${c.cyan(workspace)}`)
                 })
                 console.log("")
               } catch (error) {

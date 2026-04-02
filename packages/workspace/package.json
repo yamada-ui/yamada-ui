@@ -41,7 +41,6 @@
     "@typescript-eslint/parser": "^8.57.2",
     "@typescript-eslint/utils": "^8.57.2",
     "@vitest/eslint-plugin": "^1.6.13",
-    "@yamada-ui/utils": "workspace:",
     "dotenv": "catalog:",
     "eslint": "catalog:",
     "eslint-config-prettier": "^10.1.8",

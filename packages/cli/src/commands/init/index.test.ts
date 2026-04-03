@@ -369,18 +369,6 @@ describe("init", () => {
     mkdirSync(outdirPath, { recursive: true })
     writeFileSync(path.join(outdirPath, "old-file.txt"), "old content")
 
-    const prompts = await import("prompts")
-    vi.mocked(prompts.default)
-      .mockResolvedValueOnce({
-        src: true,
-        format: true,
-        lint: true,
-        monorepo: true,
-      })
-      .mockResolvedValueOnce({ generate: true })
-      .mockResolvedValueOnce({ overwrite: true })
-      .mockResolvedValueOnce({ generate: true })
-
     await init.parseAsync(["--cwd", tempDir, "--dry-run", "--no-install"], {
       from: "user",
     })
@@ -389,5 +377,18 @@ describe("init", () => {
     expect(console.log).toHaveBeenCalledWith(
       expect.stringContaining("(dry run) Would clear:"),
     )
+  })
+
+  test("should not prompt when --dry-run without --yes", async () => {
+    const prompts = await import("prompts")
+    const mockPrompts = vi.mocked(prompts.default)
+    mockPrompts.mockClear()
+
+    await init.parseAsync(
+      ["--cwd", tempDir, "--dry-run", "--no-install", "--monorepo"],
+      { from: "user" },
+    )
+
+    expect(mockPrompts).not.toHaveBeenCalled()
   })
 })

@@ -562,4 +562,46 @@ describe("diff", () => {
       expect.objectContaining({ dryRun: true }),
     )
   })
+
+  test("should not prompt when --dry-run without --yes", async () => {
+    setupProjectWithComponent(tempDir)
+
+    const buttonDir = path.join(
+      tempDir,
+      "workspaces",
+      "ui",
+      "src",
+      "components",
+      "button",
+    )
+    writeFileSync(
+      path.join(buttonDir, "registry.json"),
+      JSON.stringify({
+        dependencies: {
+          components: [],
+          externals: [],
+          hooks: [],
+          providers: [],
+        },
+        section: "components",
+        sources: [
+          {
+            name: "index.ts",
+            content: `export const Button = () => { return "old" }\n`,
+          },
+        ],
+      }),
+    )
+
+    const prompts = await import("prompts")
+    const mockPrompts = vi.mocked(prompts.default)
+    mockPrompts.mockClear()
+
+    await diff.parseAsync(
+      ["--cwd", tempDir, "--dry-run", "--update", "--no-install"],
+      { from: "user" },
+    )
+
+    expect(mockPrompts).not.toHaveBeenCalled()
+  })
 })

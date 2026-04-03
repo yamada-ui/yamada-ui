@@ -639,6 +639,28 @@ describe("add", () => {
     )
   })
 
+  test("should not prompt when --dry-run without --yes", async () => {
+    setupProject(tempDir)
+    const prompts = await import("prompts")
+    const mockPrompts = vi.mocked(prompts.default)
+    mockPrompts.mockClear()
+
+    await add.parseAsync(
+      [
+        "button",
+        "--cwd",
+        tempDir,
+        "--dry-run",
+        "--no-install",
+        "--no-format",
+        "--no-lint",
+      ],
+      { from: "user" },
+    )
+
+    expect(mockPrompts).not.toHaveBeenCalled()
+  })
+
   test("should show error when all components add without overwrite and dir exists with --yes", async () => {
     setupProject(tempDir)
 

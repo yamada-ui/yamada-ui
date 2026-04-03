@@ -383,12 +383,6 @@ describe("theme", () => {
     mkdirSync(themeDir, { recursive: true })
     writeFileSync(path.join(themeDir, "old-file.txt"), "old content")
 
-    const prompts = await import("prompts")
-    vi.mocked(prompts.default)
-      .mockResolvedValueOnce({})
-      .mockResolvedValueOnce({ src: true, packageName: "@workspaces/theme" })
-      .mockResolvedValueOnce({ overwrite: true })
-
     await theme.parseAsync(
       [
         "./workspaces/theme",
@@ -406,5 +400,27 @@ describe("theme", () => {
     expect(console.log).toHaveBeenCalledWith(
       expect.stringContaining("(dry run) Would clear:"),
     )
+  })
+
+  test("should not prompt when --dry-run without --yes", async () => {
+    setupProject(tempDir)
+    const prompts = await import("prompts")
+    const mockPrompts = vi.mocked(prompts.default)
+    mockPrompts.mockClear()
+
+    await theme.parseAsync(
+      [
+        "./workspaces/theme",
+        "--cwd",
+        tempDir,
+        "--dry-run",
+        "--no-install",
+        "--no-format",
+        "--no-lint",
+      ],
+      { from: "user" },
+    )
+
+    expect(mockPrompts).not.toHaveBeenCalled()
   })
 })

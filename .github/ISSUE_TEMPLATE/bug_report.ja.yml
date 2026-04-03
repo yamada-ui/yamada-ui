@@ -29,7 +29,7 @@ body:
     attributes:
       label: "パッケージのバージョン"
       description: "使用しているパッケージのバージョン。"
-      placeholder: "2.0.0"
+      placeholder: "2.1.5"
     validations:
       required: true
   - type: textarea

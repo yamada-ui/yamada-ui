@@ -48,7 +48,11 @@ export const diff = new Command("diff")
   .option("-s, --sequential", "run tasks sequentially.", false)
   .option("-d, --detail", "show detailed changes.", false)
   .option("-y, --yes", "skip all confirmation prompts.", false)
-  .option("-n, --dry-run", "preview changes without applying them.", false)
+  .option(
+    "-n, --dry-run",
+    "preview changes without applying them (skips confirmation prompts).",
+    false,
+  )
   .option("-u, --update", "update files when there are file diff.")
   .option("--no-update", "do not update files when there are file diff.")
   .option("-i, --install", "install dependencies when updating files.")
@@ -69,6 +73,7 @@ export const diff = new Command("diff")
     }: Options,
   ) {
     const spinner = ora()
+    const skipPrompts = yes || dryRun
 
     try {
       const { end } = timer()
@@ -188,14 +193,20 @@ export const diff = new Command("diff")
 
         console.log("---------------------------------")
 
-        const answer = await prompts({
-          type: !yes && isUndefined(update) ? "confirm" : null,
-          name: "update",
-          initial: true,
-          message: c.reset("Do you want to update the files?"),
-        })
+        if (isUndefined(update)) {
+          if (skipPrompts) {
+            update = true
+          } else {
+            const answer = await prompts({
+              type: "confirm",
+              name: "update",
+              initial: true,
+              message: c.reset("Do you want to update the files?"),
+            })
 
-        update ??= answer.update ?? true
+            update = answer.update ?? true
+          }
+        }
 
         if (update) {
           spinner.start("Validating methods")

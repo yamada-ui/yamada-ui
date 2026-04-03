@@ -40,7 +40,11 @@ export const update = new Command("update")
   .option("-s, --sequential", "run tasks sequentially.", false)
   .option("-F, --force", "force update, overwriting local changes.", false)
   .option("-y, --yes", "skip all confirmation prompts.", false)
-  .option("-n, --dry-run", "preview changes without applying them.", false)
+  .option(
+    "-n, --dry-run",
+    "preview changes without applying them (skips confirmation prompts).",
+    false,
+  )
   .option("-i, --install", "install dependencies.")
   .option("--no-install", "do not install dependencies.")
   .option("-f, --format", "format the output files.")

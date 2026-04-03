@@ -63,7 +63,11 @@ export const theme = new Command("theme")
   .option("-o, --overwrite", "overwrite existing directory.", false)
   .option("-j, --js", "use js instead of ts.")
   .option("-y, --yes", "skip all confirmation prompts.", false)
-  .option("-n, --dry-run", "preview changes without applying them.", false)
+  .option(
+    "-n, --dry-run",
+    "preview changes without applying them (skips confirmation prompts).",
+    false,
+  )
   .option("-p, --package-name <name>", "package name (for monorepo).")
   .option("-s, --src", "use src/ directory.")
   .option("--no-src", "do not use src/ directory.")
@@ -95,6 +99,7 @@ export const theme = new Command("theme")
     }: Options,
   ) {
     const spinner = ora()
+    const skipPrompts = yes || dryRun
 
     try {
       const { end } = timer()
@@ -117,12 +122,14 @@ export const theme = new Command("theme")
         ? DEFAULT_PATH.theme.monorepo
         : DEFAULT_PATH.theme.polyrepo
 
-      const answer = await prompts({
-        type: !yes && !themePath ? "text" : null,
-        name: "themePath",
-        initial: defaultThemePath,
-        message: "What is the path to the theme directory?",
-      })
+      const answer: Awaited<ReturnType<typeof prompts>> = skipPrompts
+        ? {}
+        : await prompts({
+            type: !themePath ? "text" : null,
+            name: "themePath",
+            initial: defaultThemePath,
+            message: "What is the path to the theme directory?",
+          })
 
       // eslint-disable-next-line no-control-regex
       themePath ??= (answer.themePath ?? "").replace(/\x17/g, "").trim()
@@ -131,24 +138,26 @@ export const theme = new Command("theme")
       const monorepoConfig = { src: false, packageName: "" }
 
       if (config.monorepo) {
-        const answer = await prompts([
-          {
-            type: !yes && !packageName ? "text" : null,
-            name: "packageName",
-            initial: DEFAULT_PACKAGE_NAME.theme,
-            message: c.reset("What is the package name?"),
-          },
-          {
-            type: !yes && isUndefined(src) ? "toggle" : null,
-            name: "src",
-            active: "Yes",
-            inactive: "No",
-            initial: true,
-            message: c.reset(
-              "Would you like your code inside a `src/` directory?",
-            ),
-          },
-        ])
+        const answer: Awaited<ReturnType<typeof prompts>> = skipPrompts
+          ? {}
+          : await prompts([
+              {
+                type: !packageName ? "text" : null,
+                name: "packageName",
+                initial: DEFAULT_PACKAGE_NAME.theme,
+                message: c.reset("What is the package name?"),
+              },
+              {
+                type: isUndefined(src) ? "toggle" : null,
+                name: "src",
+                active: "Yes",
+                inactive: "No",
+                initial: true,
+                message: c.reset(
+                  "Would you like your code inside a `src/` directory?",
+                ),
+              },
+            ])
 
         // eslint-disable-next-line no-control-regex
         packageName = (answer.packageName ?? "").replace(/\x17/g, "").trim()
@@ -166,16 +175,18 @@ export const theme = new Command("theme")
           )
         }
 
-        const { overwrite } = await prompts({
-          type: "confirm",
-          name: "overwrite",
-          initial: false,
-          message: c.reset(
-            `The directory already exists. Do you want to overwrite it?`,
-          ),
-        })
+        if (!skipPrompts) {
+          const { overwrite } = await prompts({
+            type: "confirm",
+            name: "overwrite",
+            initial: false,
+            message: c.reset(
+              `The directory already exists. Do you want to overwrite it?`,
+            ),
+          })
 
-        if (!overwrite) process.exit(0)
+          if (!overwrite) process.exit(0)
+        }
 
         if (dryRun) {
           console.log(c.cyan(`(dry run) Would clear: ${outdirPath}`))
@@ -325,16 +336,22 @@ export const theme = new Command("theme")
       await tasks.run()
 
       if (config.monorepo) {
-        const answer = await prompts({
-          type: !yes && isUndefined(install) ? "confirm" : null,
-          name: "install",
-          initial: true,
-          message: c.reset(
-            `The theme is generated. Do you want to install dependencies?`,
-          ),
-        })
+        if (isUndefined(install)) {
+          if (skipPrompts) {
+            install = true
+          } else {
+            const answer = await prompts({
+              type: "confirm",
+              name: "install",
+              initial: true,
+              message: c.reset(
+                `The theme is generated. Do you want to install dependencies?`,
+              ),
+            })
 
-        install ??= answer.install ?? true
+            install = answer.install ?? true
+          }
+        }
 
         if (install) {
           spinner.start("Installing dependencies")

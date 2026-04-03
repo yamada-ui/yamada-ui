@@ -34,12 +34,7 @@ export async function retryOnRateLimit<Y = void>(
       const resetTime = parseInt(ratelimitReset) * 1000
       const waitTime = resetTime - Date.now() + 1000
 
-      const wait = async (ms = 0) =>
-        new Promise<void>((resolve) => {
-          setTimeout(resolve, ms)
-        })
-
-      await wait(waitTime)
+      await new Promise((resolve) => setTimeout(resolve, waitTime))
 
       return await retryOnRateLimit<Y>(callback)
     } else {

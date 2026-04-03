@@ -24,7 +24,7 @@ export default async function Page({ params }: PageProps<"/[locale]/guides">) {
   const t = await getTranslations({ locale, namespace: "guides" })
 
   return (
-    <VStack maxW="5xl" mx="auto" py="lg" w="full">
+    <VStack mx="auto" py="lg" w="full">
       <VStack as="header" gap="sm" mb="md">
         <Heading as="h1" size="5xl">
           {t("title")}
@@ -53,7 +53,7 @@ export default async function Page({ params }: PageProps<"/[locale]/guides">) {
             {guides.map((guide) => (
               <Card
                 key={guide.slug.join("/")}
-                href={`/guides/${guide.slug.slice(1).join("/")}`}
+                href={guide.pathname}
                 title={guide.title}
               >
                 <Text color="fg.emphasized" fontSize="sm" lineHeight="1.8">

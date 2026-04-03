@@ -626,6 +626,15 @@ function main() {
 
       if (!publish) {
         await writeFileWithFormat(STYLES_PATH, content)
+
+        spinner.succeed(`Wrote file`)
+
+        spinner.start(`Fixing eslint and prettier`)
+
+        await execFileAsync("npx", ["eslint", STYLES_PATH, "--fix"])
+        await execFileAsync("npx", ["prettier", STYLES_PATH, "--write"])
+
+        spinner.succeed(`Fixed eslint and prettier`)
       } else {
         const omittedData = Object.fromEntries(
           Object.entries(data).map(([key, value]) => {
@@ -645,15 +654,9 @@ function main() {
         await writeFileWithFormat(STYLES_PUBLISH_PATH, omittedData, {
           parser: "json",
         })
+
+        spinner.succeed(`Wrote file`)
       }
-
-      spinner.succeed(`Wrote file`)
-
-      spinner.start(`Fixing eslint`)
-
-      if (!publish) await execFileAsync("npx", ["eslint", STYLES_PATH, "--fix"])
-
-      spinner.succeed(`Fixed eslint`)
 
       const end = process.hrtime.bigint()
       const duration = (Number(end - start) / 1e9).toFixed(2)

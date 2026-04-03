@@ -352,4 +352,75 @@ describe("theme", () => {
       expect.stringContaining("unknown error"),
     )
   })
+
+  test("should not create theme files when --dry-run", async () => {
+    setupProject(tempDir)
+
+    await theme.parseAsync(
+      [
+        "./workspaces/theme",
+        "--cwd",
+        tempDir,
+        "--yes",
+        "--dry-run",
+        "--no-install",
+        "--no-format",
+        "--no-lint",
+      ],
+      { from: "user" },
+    )
+
+    expect(existsSync(path.join(tempDir, "workspaces", "theme"))).toBeFalsy()
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would write:"),
+    )
+  })
+
+  test("should not clear existing directory when --dry-run with overwrite", async () => {
+    setupProject(tempDir)
+    const { mkdirSync } = await import("fs")
+    const themeDir = path.join(tempDir, "workspaces", "theme")
+    mkdirSync(themeDir, { recursive: true })
+    writeFileSync(path.join(themeDir, "old-file.txt"), "old content")
+
+    await theme.parseAsync(
+      [
+        "./workspaces/theme",
+        "--cwd",
+        tempDir,
+        "--dry-run",
+        "--no-install",
+        "--no-format",
+        "--no-lint",
+      ],
+      { from: "user" },
+    )
+
+    expect(existsSync(path.join(themeDir, "old-file.txt"))).toBeTruthy()
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would clear:"),
+    )
+  })
+
+  test("should not prompt when --dry-run without --yes", async () => {
+    setupProject(tempDir)
+    const prompts = await import("prompts")
+    const mockPrompts = vi.mocked(prompts.default)
+    mockPrompts.mockClear()
+
+    await theme.parseAsync(
+      [
+        "./workspaces/theme",
+        "--cwd",
+        tempDir,
+        "--dry-run",
+        "--no-install",
+        "--no-format",
+        "--no-lint",
+      ],
+      { from: "user" },
+    )
+
+    expect(mockPrompts).not.toHaveBeenCalled()
+  })
 })

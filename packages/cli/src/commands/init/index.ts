@@ -44,6 +44,7 @@ import {
 interface Options {
   config: string
   cwd: string
+  dryRun: boolean
   jsx: boolean
   overwrite: boolean
   yes: boolean
@@ -65,6 +66,11 @@ export const init = new Command("init")
   .option("-t, --tag <name>", "tag for the registries (e.g. dev, next).")
   .option("-j, --jsx", "use jsx instead of tsx.", false)
   .option("-y, --yes", "skip all confirmation prompts.", false)
+  .option(
+    "-n, --dry-run",
+    "preview changes without applying them (skips confirmation prompts).",
+    false,
+  )
   .option("-m, --monorepo", "enable monorepo mode.")
   .option("--no-monorepo", "disable monorepo mode.")
   .option("-p, --package-name <name>", "package name.")
@@ -83,6 +89,7 @@ export const init = new Command("init")
     src,
     config: configPath,
     cwd,
+    dryRun,
     format,
     install,
     jsx,
@@ -95,6 +102,7 @@ export const init = new Command("init")
     yes,
   }: Options) {
     const spinner = ora()
+    const skipPrompts = yes || dryRun
 
     try {
       const { end } = timer()
@@ -112,66 +120,67 @@ export const init = new Command("init")
       let dependencies: string[] | undefined
       let devDependencies: string[] | undefined
 
-      const answer = await prompts([
-        {
-          type: !yes && isUndefined(monorepo) ? "toggle" : null,
-          name: "monorepo",
-          active: "Yes",
-          inactive: "No",
-          initial: true,
-          message: c.reset(`Would you like to use monorepo? (recommended)`),
-        },
-        {
-          type: !yes && !outdir ? "text" : null,
-          name: "outdir",
-          initial: (_, answer) =>
-            (answer.monorepo ?? monorepo)
-              ? DEFAULT_PATH.ui.monorepo
-              : DEFAULT_PATH.ui.polyrepo,
-          message: (_, answer) =>
-            (answer.monorepo ?? monorepo)
-              ? c.reset(`What is the path to the monorepo?`)
-              : c.reset(`What is the path to the directory?`),
-        },
-        {
-          type:
-            !yes && !packageName
-              ? (_, answer) => ((answer.monorepo ?? monorepo) ? "text" : null)
-              : null,
-          name: "packageName",
-          initial: DEFAULT_PACKAGE_NAME.ui,
-          message: c.reset("What is the package name?"),
-        },
-        {
-          type:
-            !yes && isUndefined(src)
-              ? (_, answer) => ((answer.monorepo ?? monorepo) ? "toggle" : null)
-              : null,
-          name: "src",
-          active: "Yes",
-          inactive: "No",
-          initial: true,
-          message: c.reset(
-            "Would you like your code inside a `src/` directory?",
-          ),
-        },
-        {
-          type: !yes && isUndefined(format) ? "toggle" : null,
-          name: "format",
-          active: "Yes",
-          inactive: "No",
-          initial: true,
-          message: c.reset(`Would you like to use Prettier?`),
-        },
-        {
-          type: !yes && isUndefined(lint) ? "toggle" : null,
-          name: "lint",
-          active: "Yes",
-          inactive: "No",
-          initial: true,
-          message: c.reset(`Would you like to use ESLint?`),
-        },
-      ])
+      const answer: Awaited<ReturnType<typeof prompts>> = skipPrompts
+        ? {}
+        : await prompts([
+            {
+              type: isUndefined(monorepo) ? "toggle" : null,
+              name: "monorepo",
+              active: "Yes",
+              inactive: "No",
+              initial: true,
+              message: c.reset(`Would you like to use monorepo? (recommended)`),
+            },
+            {
+              type: !outdir ? "text" : null,
+              name: "outdir",
+              initial: (_, answer) =>
+                (answer.monorepo ?? monorepo)
+                  ? DEFAULT_PATH.ui.monorepo
+                  : DEFAULT_PATH.ui.polyrepo,
+              message: (_, answer) =>
+                (answer.monorepo ?? monorepo)
+                  ? c.reset(`What is the path to the monorepo?`)
+                  : c.reset(`What is the path to the directory?`),
+            },
+            {
+              type: !packageName
+                ? (_, answer) => ((answer.monorepo ?? monorepo) ? "text" : null)
+                : null,
+              name: "packageName",
+              initial: DEFAULT_PACKAGE_NAME.ui,
+              message: c.reset("What is the package name?"),
+            },
+            {
+              type: isUndefined(src)
+                ? (_, answer) =>
+                    (answer.monorepo ?? monorepo) ? "toggle" : null
+                : null,
+              name: "src",
+              active: "Yes",
+              inactive: "No",
+              initial: true,
+              message: c.reset(
+                "Would you like your code inside a `src/` directory?",
+              ),
+            },
+            {
+              type: isUndefined(format) ? "toggle" : null,
+              name: "format",
+              active: "Yes",
+              inactive: "No",
+              initial: true,
+              message: c.reset(`Would you like to use Prettier?`),
+            },
+            {
+              type: isUndefined(lint) ? "toggle" : null,
+              name: "lint",
+              active: "Yes",
+              inactive: "No",
+              initial: true,
+              message: c.reset(`Would you like to use ESLint?`),
+            },
+          ])
 
       monorepo ??= answer.monorepo ?? true
       src ??= answer.src ?? true
@@ -191,7 +200,7 @@ export const init = new Command("init")
       config.format = { enabled: format }
       config.lint = { enabled: lint }
 
-      if (!yes) {
+      if (!skipPrompts) {
         const { generate } = await prompts({
           type: "confirm",
           name: "generate",
@@ -209,16 +218,18 @@ export const init = new Command("init")
           )
         }
 
-        const { overwrite } = await prompts({
-          type: "confirm",
-          name: "overwrite",
-          initial: false,
-          message: c.reset(
-            `The config file already exists. Do you want to overwrite it?`,
-          ),
-        })
+        if (!skipPrompts) {
+          const { overwrite } = await prompts({
+            type: "confirm",
+            name: "overwrite",
+            initial: false,
+            message: c.reset(
+              `The config file already exists. Do you want to overwrite it?`,
+            ),
+          })
 
-        if (!overwrite) process.exit(0)
+          if (!overwrite) process.exit(0)
+        }
       }
 
       spinner.start(`Generating ${c.cyan(configFileName)}`)
@@ -226,10 +237,12 @@ export const init = new Command("init")
       await writeFileSafe(
         configPath,
         JSON.stringify(config),
-        merge(config, { format: { parser: "json" } }),
+        merge(config, { dryRun, format: { parser: "json" } }),
       )
 
-      spinner.succeed(`Generated ${c.cyan(configFileName)}`)
+      spinner.succeed(
+        `${dryRun ? "Would generate" : "Generated"} ${c.cyan(configFileName)}`,
+      )
 
       const outdirPath = path.resolve(cwd, outdir)
 
@@ -240,29 +253,35 @@ export const init = new Command("init")
           )
         }
 
-        const { overwrite } = await prompts({
-          type: "confirm",
-          name: "overwrite",
-          initial: false,
-          message: c.reset(
-            [
-              `The ${c.yellow(outdir)} directory already exists.`,
-              "Do you want to overwrite it?",
-            ].join(" "),
-          ),
-        })
+        if (!skipPrompts) {
+          const { overwrite } = await prompts({
+            type: "confirm",
+            name: "overwrite",
+            initial: false,
+            message: c.reset(
+              [
+                `The ${c.yellow(outdir)} directory already exists.`,
+                "Do you want to overwrite it?",
+              ].join(" "),
+            ),
+          })
 
-        if (!overwrite) process.exit(0)
+          if (!overwrite) process.exit(0)
+        }
 
-        spinner.start("Clearing directory")
+        if (dryRun) {
+          console.log(c.cyan(`(dry run) Would clear: ${outdirPath}`))
+        } else {
+          spinner.start("Clearing directory")
 
-        await rimraf(outdirPath)
+          await rimraf(outdirPath)
 
-        spinner.succeed("Cleared directory")
+          spinner.succeed("Cleared directory")
+        }
       }
 
       if (monorepo) {
-        if (!yes) {
+        if (!skipPrompts) {
           const { generate } = await prompts({
             type: "confirm",
             name: "generate",
@@ -312,10 +331,10 @@ export const init = new Command("init")
                 await writeFileSafe(
                   targetPath,
                   content,
-                  merge(config, { format: { parser: "json" } }),
+                  merge(config, { dryRun, format: { parser: "json" } }),
                 )
 
-                task.title = `Generated ${c.cyan("package.json")}`
+                task.title = `${dryRun ? "Would generate" : "Generated"} ${c.cyan("package.json")}`
               },
               title: `Generating ${c.cyan("package.json")}`,
             },
@@ -332,16 +351,16 @@ export const init = new Command("init")
                   writeFileSafe(
                     path.join(targetPath, indexFileName),
                     content,
-                    config,
+                    merge(config, { dryRun }),
                   ),
                   writeFileSafe(
                     path.join(targetPath, REGISTRY_FILE_NAME),
                     JSON.stringify(registry),
-                    merge(config, { format: { parser: "json" } }),
+                    merge(config, { dryRun, format: { parser: "json" } }),
                   ),
                 ])
 
-                task.title = `Generated ${c.cyan(indexFileName)}`
+                task.title = `${dryRun ? "Would generate" : "Generated"} ${c.cyan(indexFileName)}`
               },
               title: `Generating ${c.cyan(indexFileName)}`,
             },
@@ -350,12 +369,12 @@ export const init = new Command("init")
                 if (outdir.includes("/")) {
                   const path = `${outdir.replace(/^\.\//, "").split("/")[0]}/**`
 
-                  await addWorkspace(cwd, path, config)
+                  await addWorkspace(cwd, path, config, { dryRun })
                 } else {
-                  await addWorkspace(cwd, outdir, config)
+                  await addWorkspace(cwd, outdir, config, { dryRun })
                 }
 
-                task.title = "Added workspace"
+                task.title = dryRun ? "Would add workspace" : "Added workspace"
               },
               title: "Adding workspace",
             },
@@ -380,10 +399,10 @@ export const init = new Command("init")
               await writeFileSafe(
                 targetPath,
                 content,
-                merge(config, { format: { parser: "json" } }),
+                merge(config, { dryRun, format: { parser: "json" } }),
               )
 
-              task.title = `Generated ${c.cyan("tsconfig.json")}`
+              task.title = `${dryRun ? "Would generate" : "Generated"} ${c.cyan("tsconfig.json")}`
             },
             title: `Generating ${c.cyan("tsconfig.json")}`,
           })
@@ -392,16 +411,20 @@ export const init = new Command("init")
         await tasks.run()
 
         if (isUndefined(install)) {
-          const answer = await prompts({
-            type: !yes ? "confirm" : null,
-            name: "install",
-            initial: true,
-            message: c.reset(
-              `The workspace is generated. Do you want to install dependencies?`,
-            ),
-          })
+          if (skipPrompts) {
+            install = true
+          } else {
+            const answer = await prompts({
+              type: "confirm",
+              name: "install",
+              initial: true,
+              message: c.reset(
+                `The workspace is generated. Do you want to install dependencies?`,
+              ),
+            })
 
-          install = answer.install ?? true
+            install = answer.install ?? true
+          }
 
           if (install) dependencies = []
         } else {
@@ -451,16 +474,16 @@ export const init = new Command("init")
                   writeFileSafe(
                     path.resolve(outdirPath, indexFileName),
                     content,
-                    config,
+                    merge(config, { dryRun }),
                   ),
                   writeFileSafe(
                     path.resolve(outdirPath, REGISTRY_FILE_NAME),
                     JSON.stringify(registry),
-                    merge(config, { format: { parser: "json" } }),
+                    merge(config, { dryRun, format: { parser: "json" } }),
                   ),
                 ])
 
-                task.title = `Generated ${c.cyan(indexFileName)}`
+                task.title = `${dryRun ? "Would generate" : "Generated"} ${c.cyan(indexFileName)}`
               },
               title: `Generating ${c.cyan(indexFileName)}`,
             },
@@ -488,19 +511,23 @@ export const init = new Command("init")
           )
 
           if (isUndefined(install)) {
-            const answer = await prompts({
-              type: !yes ? "confirm" : null,
-              name: "install",
-              initial: true,
-              message: c.reset(
-                [
-                  `The following dependencies are not installed: ${colorizedNames.join(", ")}.`,
-                  "Do you want to install them?",
-                ].join(" "),
-              ),
-            })
+            if (skipPrompts) {
+              install = true
+            } else {
+              const answer = await prompts({
+                type: "confirm",
+                name: "install",
+                initial: true,
+                message: c.reset(
+                  [
+                    `The following dependencies are not installed: ${colorizedNames.join(", ")}.`,
+                    "Do you want to install them?",
+                  ].join(" "),
+                ),
+              })
 
-            install = answer.install ?? true
+              install = answer.install ?? true
+            }
           }
 
           if (install) {
@@ -517,11 +544,14 @@ export const init = new Command("init")
       if (install && (dependencies || devDependencies)) {
         spinner.start("Installing dependencies")
 
-        if (dependencies) await installDependencies(dependencies, { cwd })
+        if (dependencies)
+          await installDependencies(dependencies, { cwd, dryRun })
         if (devDependencies)
-          await installDependencies(devDependencies, { cwd, dev: true })
+          await installDependencies(devDependencies, { cwd, dev: true, dryRun })
 
-        spinner.succeed("Installed dependencies")
+        spinner.succeed(
+          dryRun ? "Would install dependencies" : "Installed dependencies",
+        )
       }
 
       if (monorepo) {

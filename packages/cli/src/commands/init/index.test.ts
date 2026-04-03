@@ -339,7 +339,6 @@ describe("init", () => {
       .mockResolvedValueOnce({ generate: true })
       .mockResolvedValueOnce({ overwrite: true })
       .mockResolvedValueOnce({ generate: true })
-      .mockResolvedValueOnce({ install: false })
 
     await init.parseAsync(["--cwd", tempDir, "--monorepo", "--no-install"], {
       from: "user",
@@ -349,5 +348,47 @@ describe("init", () => {
     expect(existsSync(path.join(outdirPath, "old-file.txt"))).toBeFalsy()
     // New files should exist
     expect(existsSync(path.join(outdirPath, "src", "index.ts"))).toBeTruthy()
+  })
+
+  test("should not create any files when --dry-run", async () => {
+    await init.parseAsync(
+      ["--cwd", tempDir, "--yes", "--dry-run", "--no-install", "--monorepo"],
+      { from: "user" },
+    )
+
+    expect(existsSync(path.join(tempDir, "ui.json"))).toBeFalsy()
+    expect(existsSync(path.join(tempDir, "workspaces", "ui"))).toBeFalsy()
+    expect(existsSync(path.join(tempDir, "pnpm-workspace.yaml"))).toBeFalsy()
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would write:"),
+    )
+  })
+
+  test("should not clear existing directory when --dry-run with overwrite", async () => {
+    const outdirPath = path.join(tempDir, "workspaces", "ui")
+    mkdirSync(outdirPath, { recursive: true })
+    writeFileSync(path.join(outdirPath, "old-file.txt"), "old content")
+
+    await init.parseAsync(["--cwd", tempDir, "--dry-run", "--no-install"], {
+      from: "user",
+    })
+
+    expect(existsSync(path.join(outdirPath, "old-file.txt"))).toBeTruthy()
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would clear:"),
+    )
+  })
+
+  test("should not prompt when --dry-run without --yes", async () => {
+    const prompts = await import("prompts")
+    const mockPrompts = vi.mocked(prompts.default)
+    mockPrompts.mockClear()
+
+    await init.parseAsync(
+      ["--cwd", tempDir, "--dry-run", "--no-install", "--monorepo"],
+      { from: "user" },
+    )
+
+    expect(mockPrompts).not.toHaveBeenCalled()
   })
 })

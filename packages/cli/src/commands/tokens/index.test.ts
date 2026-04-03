@@ -262,6 +262,32 @@ describe("tokens", () => {
     expect(existsSync(outPath)).toBeTruthy()
   })
 
+  test("should not create typings file when --dry-run", async () => {
+    mockGetModule.mockResolvedValue(createBasicTheme())
+
+    const themeFile = path.join(tempDir, "theme.ts")
+    writeFileSync(themeFile, "export default {}")
+
+    await tokens.parseAsync(
+      [
+        themeFile,
+        "--cwd",
+        tempDir,
+        "--internal",
+        "--dry-run",
+        "--no-format",
+        "--no-lint",
+      ],
+      { from: "user" },
+    )
+
+    const outPath = path.join(tempDir, "index.types.ts")
+    expect(existsSync(outPath)).toBeFalsy()
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run) Would write:"),
+    )
+  })
+
   test("should handle non-Error throw", async () => {
     mockGetModule.mockRejectedValue("string error")
 

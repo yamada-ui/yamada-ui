@@ -13,18 +13,18 @@ import {
   toCamelCase,
 } from "@yamada-ui/utils"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
-import { execFile } from "child_process"
 import { Command } from "commander"
-import { glob } from "fs/promises"
+import { execFile } from "node:child_process"
+import { glob } from "node:fs/promises"
+import path from "node:path"
+import { promisify } from "node:util"
 import ora from "ora"
-import path from "path"
 import c from "picocolors"
 import {
   createProgram,
   isInterfaceDeclaration,
   isTypeAliasDeclaration,
 } from "typescript"
-import { promisify } from "util"
 import { features } from "web-features"
 import { checkProps } from "./check"
 import { excludeProps } from "./exclude-props"

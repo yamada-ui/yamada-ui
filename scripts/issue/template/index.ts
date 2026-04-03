@@ -1,8 +1,8 @@
 import type { Dict } from "@yamada-ui/utils"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
-import { readFile } from "fs/promises"
+import { readFile } from "node:fs/promises"
+import path from "node:path"
 import ora from "ora"
-import path from "path"
 import c from "picocolors"
 
 type Package = "cli" | "react"

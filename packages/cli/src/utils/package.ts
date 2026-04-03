@@ -5,9 +5,9 @@ import type {
   WantedVersion,
 } from "../index.type"
 import { isObject, merge } from "@yamada-ui/utils"
-import { existsSync } from "fs"
-import { readFile } from "fs/promises"
-import path from "path"
+import { existsSync } from "node:fs"
+import { readFile } from "node:fs/promises"
+import path from "node:path"
 import c from "picocolors"
 import semver from "semver"
 import validateProjectName from "validate-npm-package-name"

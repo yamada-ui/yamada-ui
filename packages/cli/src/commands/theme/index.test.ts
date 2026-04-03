@@ -4,9 +4,9 @@ import {
   readFileSync,
   rmSync,
   writeFileSync,
-} from "fs"
-import { tmpdir } from "os"
-import path from "path"
+} from "node:fs"
+import { tmpdir } from "node:os"
+import path from "node:path"
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest"
 
 vi.mock("../../utils", async (importOriginal) => {
@@ -127,7 +127,7 @@ describe("theme", () => {
 
   test("should error when dir exists with --yes and no --overwrite", async () => {
     setupProject(tempDir)
-    const { mkdirSync } = await import("fs")
+    const { mkdirSync } = await import("node:fs")
     mkdirSync(path.join(tempDir, "workspaces", "theme"), { recursive: true })
 
     const ora = await import("ora")
@@ -192,7 +192,7 @@ describe("theme", () => {
 
   test("should overwrite existing directory with --overwrite", async () => {
     setupProject(tempDir)
-    const { mkdirSync } = await import("fs")
+    const { mkdirSync } = await import("node:fs")
     mkdirSync(path.join(tempDir, "workspaces", "theme"), { recursive: true })
 
     await theme.parseAsync(
@@ -310,7 +310,7 @@ describe("theme", () => {
 
   test("should overwrite existing directory when prompted (without --yes)", async () => {
     setupProject(tempDir)
-    const { mkdirSync } = await import("fs")
+    const { mkdirSync } = await import("node:fs")
     const themeDir = path.join(tempDir, "workspaces", "theme")
     mkdirSync(themeDir, { recursive: true })
     writeFileSync(path.join(themeDir, "old-file.txt"), "old content")

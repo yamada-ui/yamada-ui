@@ -6,8 +6,8 @@ import {
   pseudoElements,
 } from "@yamada-ui/react/core"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import path from "node:path"
 import ora from "ora"
-import path from "path"
 import c from "picocolors"
 
 async function main() {

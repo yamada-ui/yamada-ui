@@ -1,9 +1,9 @@
 import { isUndefined } from "@yamada-ui/utils"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
-import { glob, readdir, readFile } from "fs/promises"
 import matter from "gray-matter"
+import { glob, readdir, readFile } from "node:fs/promises"
+import path from "node:path"
 import ora from "ora"
-import path from "path"
 import c from "picocolors"
 
 const MIN_RESEMBLE_SCORE = 0.3

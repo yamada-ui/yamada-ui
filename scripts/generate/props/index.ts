@@ -19,9 +19,9 @@ import {
 } from "@yamada-ui/utils"
 import { format, writeFileWithFormat } from "@yamada-ui/workspace/prettier"
 import { Command } from "commander"
-import { mkdir, readdir, readFile } from "fs/promises"
+import { mkdir, readdir, readFile } from "node:fs/promises"
+import path from "node:path"
 import ora from "ora"
-import path from "path"
 import c from "picocolors"
 import {
   createProgram,

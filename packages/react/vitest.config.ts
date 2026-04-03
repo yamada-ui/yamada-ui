@@ -2,7 +2,7 @@ import react from "@vitejs/plugin-react-swc"
 import { playwright } from "@vitest/browser-playwright"
 import { defineProject, mergeConfig } from "@yamada-ui/workspace/vitest"
 import sharedConfig from "@yamada-ui/workspace/vitest/config"
-import { glob, readFile } from "fs/promises"
+import { glob, readFile } from "node:fs/promises"
 import { resolve } from "node:path"
 
 async function getBrowserTestFiles() {

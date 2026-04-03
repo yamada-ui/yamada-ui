@@ -70,6 +70,11 @@ export interface UpdateFilesOptions {
   yes?: boolean
 }
 
+/**
+ * Applies registry updates to local files. When `dryRun` is true, skips writes
+ * and dependency installs and only logs intended paths; merge/conflict detection
+ * (diff3) is not run.
+ */
 export async function updateFiles(
   changeMap: ChangeMap,
   { add, remove, update }: DependencyMap,

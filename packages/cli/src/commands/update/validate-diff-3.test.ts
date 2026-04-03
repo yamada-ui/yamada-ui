@@ -1,10 +1,10 @@
 import { describe, expect, test, vi } from "vitest"
 
-vi.mock("child_process", () => ({
+vi.mock("node:child_process", () => ({
   execFile: vi.fn(),
 }))
 
-vi.mock("util", async (importOriginal) => {
+vi.mock("node:util", async (importOriginal) => {
   const actual: any = await importOriginal()
   return {
     ...actual,

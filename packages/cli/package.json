@@ -77,7 +77,6 @@
     "@types/validate-npm-package-name": "^4.0.2",
     "@types/yamljs": "^0.2.34",
     "@yamada-ui/workspace": "workspace:*",
-    "clean-package": "catalog:",
     "update-notifier": "^7.3.1"
   },
   "clean-package": "./clean-package.config.json"

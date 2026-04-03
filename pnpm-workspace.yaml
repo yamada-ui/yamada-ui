@@ -5,16 +5,15 @@ packages:
 catalog:
   "@emotion/react": ^11.14.0
   "@emotion/styled": ^11.14.1
+  "eslint-plugin-unused-imports": ^4.4.1
   "@faker-js/faker": ^10.4.0
   "@lucide/lab": ^0.1.2
   "@testing-library/jest-dom": ^6.9.1
-  "@types/react": ^19.2.14
-  "@types/react-dom": ^19.2.3
-  "@types/node": ^25.5.0
+  "@tanstack/react-router": ^1.168.7
+  "@typescript-eslint/parser": ^8.57.2
   "@vitejs/plugin-react": ^6.0.1
   "@vitejs/plugin-react-swc": ^4.3.0
   "@vitest/ui": ^4.1.2
-  clean-package: 2.2.0
   commander: ^14.0.3
   csstype: ^3.2.3
   dayjs: ^1.11.20

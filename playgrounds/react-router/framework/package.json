@@ -23,9 +23,6 @@
   },
   "devDependencies": {
     "@react-router/dev": "^7.13.2",
-    "@types/node": "catalog:",
-    "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
     "@yamada-ui/workspace": "workspace:*",
     "vite": "catalog:",
     "vite-tsconfig-paths": "catalog:"

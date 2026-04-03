@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server"
 import { getGuideCollections } from "@/data/guide"
 import { generateOg } from "@/utils/next"
 import { Card, CardGroup } from "../../../../components/mdx/card"
+import { GuideSearch } from "./search"
 
 export async function generateMetadata({
   params,
@@ -33,6 +34,8 @@ export default async function Page({ params }: PageProps<"/[locale]/guides">) {
           {t("description")}
         </Text>
       </VStack>
+
+      <GuideSearch />
 
       {collections.map(({ collection, description, guides, title }) => (
         <VStack key={collection} as="section" gap="sm" w="full">

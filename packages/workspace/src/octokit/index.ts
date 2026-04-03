@@ -5,7 +5,6 @@ import type {
   EmitterWebhookEventName,
 } from "@octokit/webhooks"
 import { Octokit } from "@octokit/rest"
-import { wait } from "@yamada-ui/utils"
 import { config } from "dotenv"
 
 export type * from "@octokit/request-error"
@@ -35,7 +34,7 @@ export async function retryOnRateLimit<Y = void>(
       const resetTime = parseInt(ratelimitReset) * 1000
       const waitTime = resetTime - Date.now() + 1000
 
-      await wait(waitTime)
+      await new Promise((resolve) => setTimeout(resolve, waitTime))
 
       return await retryOnRateLimit<Y>(callback)
     } else {

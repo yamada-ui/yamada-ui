@@ -2,23 +2,49 @@ packages:
   - "packages/**"
   - "playgrounds/**"
   - "www/**"
-
 catalog:
-  react: ^19.2.4
-  react-dom: ^19.2.4
-  typescript: ^5.9.3
-  next: ^16.2.1
-  vite: ^8.0.3
-  clean-package: 2.2.0
-  vite-tsconfig-paths: ^6.1.1
-  react-hook-form: ^7.72.0
-  react-icons: ^5.6.0
-  "@types/react": ^19.2.14
-  "@types/react-dom": ^19.2.3
-  "@types/node": ^25.5.0
-  "@vitejs/plugin-react": ^6.0.1
+  "@emotion/react": ^11.14.0
+  "@emotion/styled": ^11.14.1
+  "eslint-plugin-unused-imports": ^4.4.1
   "@faker-js/faker": ^10.4.0
   "@lucide/lab": ^0.1.2
-
-minimumReleaseAge: 10080 # = 60 [minutes/h] * 24 [h/day] * 7 [day]
-
+  "@testing-library/jest-dom": ^6.9.1
+  "@tanstack/react-router": ^1.168.7
+  "@typescript-eslint/parser": ^8.57.2
+  "@vitejs/plugin-react": ^6.0.1
+  "@vitejs/plugin-react-swc": ^4.3.0
+  "@vitest/ui": ^4.1.2
+  commander: ^14.0.3
+  csstype: ^3.2.3
+  dayjs: ^1.11.20
+  dotenv: ^17.3.1
+  eslint: ^9.39.4
+  motion: ^12.38.0
+  next: ^16.2.1
+  ora: ^9.3.0
+  picocolors: ^1.1.1
+  prettier: ^3.8.1
+  react: ^19.2.4
+  react-dom: ^19.2.4
+  react-hook-form: ^7.72.0
+  react-icons: ^5.6.0
+  rimraf: ^6.1.3
+  scroll-into-view-if-needed: ^3.1.0
+  sucrase: ^3.35.1
+  tsx: ^4.21.0
+  typescript: ^5.9.3
+  vite: ^8.0.3
+  vitest: ^4.1.2
+  vitest-axe: ^0.1.0
+  vite-tsconfig-paths: ^6.1.1
+onlyBuiltDependencies:
+  - "@parcel/watcher"
+  - "@swc/core"
+  - "esbuild"
+  - "lefthook"
+  - "sharp"
+  - "unrs-resolver"
+minimumReleaseAge: 10080
+blockExoticSubdeps: true
+strictDepBuilds: true
+dedupeDirectDeps: true

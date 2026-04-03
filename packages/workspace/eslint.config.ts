@@ -1,9 +1,9 @@
 import {
   cspellConfig,
+  defineConfig,
   restrictedImportConfigArray,
   sharedConfigArray,
-} from "@yamada-ui/workspace/eslint"
-import { defineConfig } from "eslint/config"
+} from "./src/eslint"
 
 const config = defineConfig(
   ...sharedConfigArray,

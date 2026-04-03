@@ -89,6 +89,7 @@
     "@yamada-ui/react": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/workspace": "workspace:*",
+    "clean-package": "^2.2.0",
     "commander": "catalog:",
     "csstype": "catalog:",
     "dayjs": "catalog:",

@@ -143,10 +143,11 @@ const guides = defineCollection({
     .transform(async (data, { meta }) => {
       const { locale, slug } = getSlug(meta.path as string)
       const toc = await transformToc(data.toc, meta.path as string)
-
+      const pathname = getPathname(...slug)
       return {
         ...data,
         locale,
+        pathname,
         slug,
         toc,
       }

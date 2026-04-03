@@ -11,9 +11,10 @@ export interface GuideCollection {
 }
 
 interface GuideMap {
-  collection: string
-  description: string
-  title: string
+  collection: Guide["collection"]
+  description: Guide["description"]
+  pathname: string
+  title: Guide["title"]
 }
 
 export function getGuides(locale: string): Guide[] {

@@ -2,7 +2,7 @@ import type {
   ConfigWithExtends,
   ConfigWithExtendsArray,
 } from "@eslint/config-helpers"
-import { defineConfig } from "eslint/config"
+import { defineConfig, globalIgnores } from "eslint/config"
 import { baseConfigArray, noConsoleConfig } from "./base"
 import { cspellConfig } from "./cspell"
 import { importConfigArray, restrictedImportConfigArray } from "./import"
@@ -23,6 +23,7 @@ export {
   baseConfigArray,
   cspellConfig,
   defineConfig,
+  globalIgnores,
   importConfigArray,
   jsxA11yConfig,
   nextConfig,

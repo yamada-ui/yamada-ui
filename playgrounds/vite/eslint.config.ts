@@ -1,12 +1,12 @@
-import type { ConfigWithExtends } from "@eslint/config-helpers"
+import type { ConfigWithExtends } from "@yamada-ui/workspace/eslint"
 import {
   cspellConfig,
+  defineConfig,
   jsxA11yConfig,
   reactConfig,
   reactHooksConfig,
   sharedConfigArray,
 } from "@yamada-ui/workspace/eslint"
-import { defineConfig } from "eslint/config"
 
 const languageOptionsConfig: ConfigWithExtends = {
   languageOptions: {

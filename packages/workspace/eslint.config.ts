@@ -3,7 +3,7 @@ import {
   defineConfig,
   restrictedImportConfigArray,
   sharedConfigArray,
-} from "./src/eslint/"
+} from "./src/eslint"
 
 const config = defineConfig(
   ...sharedConfigArray,

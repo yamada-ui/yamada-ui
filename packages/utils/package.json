@@ -48,7 +48,8 @@
     "color2k": "^2.0.3"
   },
   "devDependencies": {
-    "clean-package": "2.2.0",
+    "@yamada-ui/workspace": "workspace:*",
+    "clean-package": "catalog:",
     "react": "catalog:"
   },
   "peerDependencies": {

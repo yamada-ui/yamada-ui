@@ -6,51 +6,27 @@ settings:
 
 catalogs:
   default:
-    '@faker-js/faker':
-      specifier: ^10.4.0
-      version: 10.4.0
-    '@lucide/lab':
-      specifier: ^0.1.2
-      version: 0.1.2
     '@testing-library/jest-dom':
       specifier: ^6.9.1
       version: 6.9.1
-    '@types/node':
-      specifier: ^25.5.0
-      version: 25.5.0
     '@types/react':
       specifier: ^19.2.14
       version: 19.2.14
     '@types/react-dom':
       specifier: ^19.2.3
       version: 19.2.3
-    '@vitejs/plugin-react':
-      specifier: ^6.0.1
-      version: 6.0.1
-    '@vitest/ui':
-      specifier: ^4.1.2
-      version: 4.1.2
-    clean-package:
-      specifier: 2.2.0
-      version: 2.2.0
+    dotenv:
+      specifier: ^17.3.1
+      version: 17.3.1
     eslint:
       specifier: ^9.39.4
       version: 9.39.4
-    next:
-      specifier: ^16.2.1
-      version: 16.2.2
-    react-hook-form:
-      specifier: ^7.72.0
-      version: 7.72.0
-    react-icons:
-      specifier: ^5.6.0
-      version: 5.6.0
+    prettier:
+      specifier: ^3.8.1
+      version: 3.8.1
     typescript:
       specifier: ^5.9.3
       version: 5.9.3
-    vite-tsconfig-paths:
-      specifier: ^6.1.1
-      version: 6.1.1
     vitest:
       specifier: ^4.1.2
       version: 4.1.2
@@ -92,10 +68,10 @@ importers:
         specifier: ^20.5.0
         version: 20.5.0
       '@emotion/react':
-        specifier: ^11.14.0
+        specifier: 'catalog:'
         version: 11.14.0(@types/react@19.2.14)(react@19.2.4)
       '@emotion/styled':
-        specifier: ^11.14.1
+        specifier: 'catalog:'
         version: 11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4)
       '@mdn/browser-compat-data':
         specifier: 7.3.9
@@ -130,9 +106,6 @@ importers:
       '@typescript/analyze-trace':
         specifier: ^0.10.1
         version: 0.10.1
-      '@vitejs/plugin-react-swc':
-        specifier: ^4.3.0
-        version: 4.3.0(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
       '@vitest/coverage-v8':
         specifier: ^4.1.2
         version: 4.1.2(@vitest/browser@4.1.2(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vitest@4.1.2))(vitest@4.1.2)
@@ -149,13 +122,13 @@ importers:
         specifier: workspace:*
         version: link:packages/workspace
       commander:
-        specifier: ^14.0.3
+        specifier: 'catalog:'
         version: 14.0.3
       csstype:
-        specifier: ^3.2.3
+        specifier: 'catalog:'
         version: 3.2.3
       dayjs:
-        specifier: ^1.11.20
+        specifier: 'catalog:'
         version: 1.11.20
       eslint:
         specifier: 'catalog:'
@@ -170,13 +143,13 @@ importers:
         specifier: ^2.1.4
         version: 2.1.4
       ora:
-        specifier: ^9.3.0
+        specifier: 'catalog:'
         version: 9.3.0
       picocolors:
-        specifier: ^1.1.1
+        specifier: 'catalog:'
         version: 1.1.1
       prettier:
-        specifier: ^3.8.1
+        specifier: 'catalog:'
         version: 3.8.1
       react:
         specifier: ^19.0.0
@@ -185,7 +158,7 @@ importers:
         specifier: ^19.0.0
         version: 19.2.4(react@19.2.4)
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       storybook:
         specifier: ^10.3.3
@@ -197,7 +170,7 @@ importers:
         specifier: ^0.18.4
         version: 0.18.4(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(synckit@0.11.12)(typescript@5.9.3)
       tsx:
-        specifier: ^4.21.0
+        specifier: 'catalog:'
         version: 4.21.0
       turbo:
         specifier: ^2.8.21
@@ -227,7 +200,7 @@ importers:
         specifier: ^1.3.4
         version: 1.3.4
       commander:
-        specifier: ^14.0.3
+        specifier: 'catalog:'
         version: 14.0.3
       diff:
         specifier: ^8.0.4
@@ -251,19 +224,19 @@ importers:
         specifier: ^3.3.2
         version: 3.3.2
       ora:
-        specifier: ^9.3.0
+        specifier: 'catalog:'
         version: 9.3.0
       picocolors:
-        specifier: ^1.1.1
+        specifier: 'catalog:'
         version: 1.1.1
       prettier:
-        specifier: ^3.8.1
+        specifier: 'catalog:'
         version: 3.8.1
       prompts:
         specifier: ^2.4.2
         version: 2.4.2
       rimraf:
-        specifier: ^6.1.3
+        specifier: 'catalog:'
         version: 6.1.3
       semver:
         specifier: ^7.7.4
@@ -293,12 +266,12 @@ importers:
       '@types/yamljs':
         specifier: ^0.2.34
         version: 0.2.34
+      '@yamada-ui/workspace':
+        specifier: workspace:*
+        version: link:../workspace
       clean-package:
         specifier: 'catalog:'
         version: 2.2.0
-      tsx:
-        specifier: ^4.21.0
-        version: 4.21.0
       update-notifier:
         specifier: ^7.3.1
         version: 7.3.1
@@ -309,7 +282,7 @@ importers:
         specifier: ^11.13.5
         version: 11.13.5
       '@emotion/react':
-        specifier: ^11.14.0
+        specifier: 'catalog:'
         version: 11.14.0(@types/react@19.2.14)(react@19.2.4)
       '@emotion/serialize':
         specifier: ^1.3.3
@@ -318,7 +291,7 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0
       '@emotion/styled':
-        specifier: ^11.14.1
+        specifier: 'catalog:'
         version: 11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4)
       '@emotion/use-insertion-effect-with-fallbacks':
         specifier: ^1.2.0
@@ -339,10 +312,10 @@ importers:
         specifier: 3.3.3
         version: 3.3.3
       csstype:
-        specifier: ^3.2.3
+        specifier: 'catalog:'
         version: 3.2.3
       dayjs:
-        specifier: ^1.11.20
+        specifier: 'catalog:'
         version: 1.11.20
       embla-carousel:
         specifier: ^8.6.0
@@ -363,7 +336,7 @@ importers:
         specifier: 0.577.0
         version: 0.577.0(react@19.2.4)
       motion:
-        specifier: ^12.38.0
+        specifier: 'catalog:'
         version: 12.38.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react:
         specifier: ^19.0.0
@@ -390,7 +363,7 @@ importers:
         specifier: ^3.8.1
         version: 3.8.1(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)(redux@5.0.1)
       scroll-into-view-if-needed:
-        specifier: ^3.1.0
+        specifier: 'catalog:'
         version: 3.1.0
       sonner:
         specifier: ^2.0.7
@@ -423,6 +396,9 @@ importers:
       '@types/react-dom':
         specifier: 'catalog:'
         version: 19.2.3(@types/react@19.2.14)
+      '@vitejs/plugin-react-swc':
+        specifier: 'catalog:'
+        version: 4.3.0(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
       '@vitest/browser':
         specifier: ^4.1.2
         version: 4.1.2(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vitest@4.1.2)
@@ -469,8 +445,11 @@ importers:
         specifier: ^2.0.3
         version: 2.0.3
     devDependencies:
+      '@yamada-ui/workspace':
+        specifier: workspace:*
+        version: link:../workspace
       clean-package:
-        specifier: 2.2.0
+        specifier: 'catalog:'
         version: 2.2.0
       react:
         specifier: ^19.0.0
@@ -526,11 +505,8 @@ importers:
       '@vitest/eslint-plugin':
         specifier: ^1.6.13
         version: 1.6.14(@typescript-eslint/eslint-plugin@8.58.0(@typescript-eslint/parser@8.58.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)(vitest@4.1.2)
-      '@yamada-ui/utils':
-        specifier: 'workspace:'
-        version: link:../utils
       dotenv:
-        specifier: ^17.3.1
+        specifier: 'catalog:'
         version: 17.3.1
       eslint:
         specifier: 'catalog:'
@@ -572,7 +548,7 @@ importers:
         specifier: ^17.4.0
         version: 17.4.0
       prettier:
-        specifier: ^3.8.1
+        specifier: 'catalog:'
         version: 3.8.1
       react:
         specifier: ^19.0.0
@@ -617,9 +593,9 @@ importers:
       '@types/react-dom':
         specifier: 'catalog:'
         version: 19.2.3(@types/react@19.2.14)
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.3
+      '@yamada-ui/workspace':
+        specifier: workspace:*
+        version: link:../../../packages/workspace
 
   playgrounds/next/pages:
     dependencies:
@@ -645,9 +621,9 @@ importers:
       '@types/react-dom':
         specifier: 'catalog:'
         version: 19.2.3(@types/react@19.2.14)
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.3
+      '@yamada-ui/workspace':
+        specifier: workspace:*
+        version: link:../../../packages/workspace
 
   playgrounds/react-router/framework:
     dependencies:
@@ -685,9 +661,9 @@ importers:
       '@types/react-dom':
         specifier: 'catalog:'
         version: 19.2.3(@types/react@19.2.14)
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.3
+      '@yamada-ui/workspace':
+        specifier: workspace:*
+        version: link:../../../packages/workspace
       vite:
         specifier: ^7.0.0
         version: 7.3.1(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)
@@ -725,9 +701,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: 'catalog:'
         version: 6.0.1(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.3
+      '@yamada-ui/workspace':
+        specifier: workspace:*
+        version: link:../../../packages/workspace
       vite:
         specifier: ^7.0.0
         version: 7.3.1(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)
@@ -765,6 +741,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: 'catalog:'
         version: 6.0.1(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
+      '@yamada-ui/workspace':
+        specifier: workspace:*
+        version: link:../../../packages/workspace
       vite:
         specifier: ^7.0.0
         version: 7.3.1(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)
@@ -794,8 +773,11 @@ importers:
         specifier: 'catalog:'
         version: 19.2.3(@types/react@19.2.14)
       '@vitejs/plugin-react-swc':
-        specifier: ^4.3.0
+        specifier: 'catalog:'
         version: 4.3.0(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
+      '@yamada-ui/workspace':
+        specifier: workspace:*
+        version: link:../../packages/workspace
       vite:
         specifier: ^7.0.0
         version: 7.3.1(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)
@@ -806,7 +788,7 @@ importers:
         specifier: ^11.14.0
         version: 11.14.0
       '@emotion/react':
-        specifier: ^11.14.0
+        specifier: 'catalog:'
         version: 11.14.0(@types/react@19.2.14)(react@19.2.4)
       '@emotion/weak-memoize':
         specifier: ^0.4.0
@@ -833,7 +815,7 @@ importers:
         specifier: ^8.2.0
         version: 8.2.0
       motion:
-        specifier: ^12.38.0
+        specifier: 'catalog:'
         version: 12.38.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       next:
         specifier: 'catalog:'
@@ -857,7 +839,7 @@ importers:
         specifier: 'catalog:'
         version: 5.6.0(react@19.2.4)
       scroll-into-view-if-needed:
-        specifier: ^3.1.0
+        specifier: 'catalog:'
         version: 3.1.0
       shiki:
         specifier: ^4.0.2
@@ -903,10 +885,10 @@ importers:
         specifier: ^2.10.12
         version: 2.10.13
       commander:
-        specifier: ^14.0.3
+        specifier: 'catalog:'
         version: 14.0.3
       dotenv:
-        specifier: ^17.3.1
+        specifier: 'catalog:'
         version: 17.3.1
       eslint-plugin-unused-imports:
         specifier: ^4.4.1
@@ -930,10 +912,10 @@ importers:
         specifier: ^4.1.5
         version: 4.1.5
       ora:
-        specifier: ^9.3.0
+        specifier: 'catalog:'
         version: 9.3.0
       picocolors:
-        specifier: ^1.1.1
+        specifier: 'catalog:'
         version: 1.1.1
       rehype-autolink-headings:
         specifier: ^7.1.0
@@ -947,18 +929,9 @@ importers:
       remark-gfm:
         specifier: ^4.0.1
         version: 4.0.1
-      rimraf:
-        specifier: ^6.1.3
-        version: 6.1.3
       sucrase:
-        specifier: ^3.35.1
-        version: 3.35.1
-      tsx:
-        specifier: ^4.21.0
-        version: 4.21.0
-      typescript:
         specifier: 'catalog:'
-        version: 5.9.3
+        version: 3.35.1
       unified:
         specifier: ^11.0.5
         version: 11.0.5

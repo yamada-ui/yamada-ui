@@ -2,7 +2,7 @@ import { existsSync } from "node:fs"
 import { glob, readFile } from "node:fs/promises"
 import path from "node:path"
 import YAML from "yamljs"
-import { getPackageManager } from "../../utils"
+import { getPackageManager } from "../../../utils"
 
 export async function getWorkspaces(cwd: string): Promise<string[]> {
   let workspacePatterns: string[] = []

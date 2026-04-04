@@ -3,13 +3,13 @@ import { tmpdir } from "node:os"
 import path from "node:path"
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest"
 
-vi.mock("../../utils", async (importOriginal) => {
+vi.mock("../../../utils", async (importOriginal) => {
   const actual: any = await importOriginal()
   return { ...actual, getPackageManager: vi.fn().mockReturnValue("pnpm") }
 })
 
-import { getPackageManager } from "../../utils"
-import { getWorkspaces } from "./workspace"
+import { getPackageManager } from "../../../utils"
+import { getWorkspaces } from "./get-workspaces"
 
 describe("getWorkspaces", () => {
   let tempDir: string

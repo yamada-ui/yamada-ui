@@ -1,6 +1,5 @@
 import type { PackageNameWithVersion, UserConfig } from "../../index.type"
 import { isObject, isUndefined, merge } from "@yamada-ui/utils"
-import boxen from "boxen"
 import { Command } from "commander"
 import { Listr } from "listr2"
 import { existsSync } from "node:fs"
@@ -25,14 +24,11 @@ import {
 import {
   addWorkspace,
   cwd,
-  execFileAsync,
   fetchRegistry,
   getNotInstalledDependencies,
   getPackageJson,
-  getPackageManager,
   getPackageNameWithVersion,
   installDependencies,
-  packageAddArgs,
   replaceVersion,
   splitVersion,
   timer,
@@ -41,7 +37,7 @@ import {
   validateDir,
   writeFileSafe,
 } from "../../utils"
-import { getWorkspaces } from "./workspace"
+import { addWorkspacePackage } from "./workspace"
 
 interface Options {
   config: string
@@ -527,105 +523,7 @@ export const init = new Command("init")
       }
 
       if (monorepo) {
-        const packageManager = getPackageManager()
-        const args = packageAddArgs(packageManager)
-        const installCommand = `${packageManager} ${args.join(" ")} "${packageName}@workspace:*"`
-
-        const workspaces = await getWorkspaces(cwd)
-
-        if (workspaces.length === 0) {
-          console.log("")
-          console.log(
-            boxen(
-              ["Run", c.cyan(installCommand), "in your application."].join(" "),
-              {
-                borderColor: "yellow",
-                borderStyle: "round",
-                padding: 1,
-                textAlignment: "center",
-              },
-            ),
-          )
-        } else {
-          if (yes) {
-            console.log(`\nRun the following commands in your applications:\n`)
-            workspaces.forEach((workspace) => {
-              console.log(c.cyan(`cd ${workspace} && ${installCommand}`))
-            })
-            console.log("")
-          } else {
-            console.log("")
-            const { selectedWorkspaces } = await prompts({
-              type: "multiselect",
-              name: "selectedWorkspaces",
-              choices: workspaces.map((workspace) => ({
-                title: workspace,
-                value: workspace,
-              })),
-              instructions: false,
-              message: `Which workspaces would you like to add "${packageName}" to? (Press <space> to toggle)`,
-            })
-
-            if (selectedWorkspaces && selectedWorkspaces.length > 0) {
-              spinner.start("Installing UI package in selected workspaces")
-
-              const succeededWorkspaces: string[] = []
-              const failedWorkspaces: {
-                error: unknown
-                workspace: string
-              }[] = []
-
-              for (const workspace of selectedWorkspaces) {
-                try {
-                  await execFileAsync(
-                    packageManager,
-                    [...args, `${packageName}@workspace:*`],
-                    { cwd: path.join(cwd, workspace) },
-                  )
-                  succeededWorkspaces.push(workspace)
-                } catch (error) {
-                  failedWorkspaces.push({ error, workspace })
-                }
-              }
-
-              if (failedWorkspaces.length === 0) {
-                spinner.succeed("Installation complete")
-              } else if (succeededWorkspaces.length === 0) {
-                spinner.fail("Failed to install packages in workspaces.")
-              } else {
-                spinner.warn("Installation completed with some errors.")
-              }
-
-              if (succeededWorkspaces.length > 0) {
-                console.log(
-                  `\nAdded "${packageName}@workspace:*" to the following workspaces:\n`,
-                )
-                succeededWorkspaces.forEach((workspace) => {
-                  console.log(`  ${c.green("✔")} ${c.cyan(workspace)}`)
-                })
-                console.log("")
-              }
-
-              if (failedWorkspaces.length > 0) {
-                console.log(
-                  `\nFailed to install "${packageName}@workspace:*" in the following workspaces:\n`,
-                )
-                failedWorkspaces.forEach(({ error, workspace }) => {
-                  console.error(
-                    `  ${c.red("✘")} ${c.cyan(workspace)}: ${c.red(String(error))}`,
-                  )
-                })
-                console.log("")
-              }
-            } else {
-              console.log(
-                c.yellow(
-                  "\nNo workspaces selected. Skipping automatic installation.\n",
-                ),
-              )
-            }
-          }
-        }
+        await addWorkspacePackage({ cwd, packageName, spinner, yes })
       }
 
       end()

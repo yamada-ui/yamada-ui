@@ -1,2 +1,1 @@
-export * from "./get-workspaces"
-export * from "./install"
+export * from "./add-package"

@@ -10,19 +10,19 @@ import {
 } from "../../../utils"
 import { getWorkspaces } from "./get-workspaces"
 
-interface AddWorkspacePackageOptions {
+interface AddPackageOptions {
   cwd: string
   packageName: string
   spinner: Ora
   yes: boolean
 }
 
-export async function addWorkspacePackage({
+export async function addPackage({
   cwd,
   packageName,
   spinner,
   yes,
-}: AddWorkspacePackageOptions) {
+}: AddPackageOptions) {
   const packageManager = getPackageManager()
   const command = `${packageManager} ${packageAddArgs(packageManager).join(" ")} "${packageName}@workspace:*"`
   const workspaces = await getWorkspaces(cwd, packageManager)

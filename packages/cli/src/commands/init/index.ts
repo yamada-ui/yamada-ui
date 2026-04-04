@@ -37,7 +37,7 @@ import {
   validateDir,
   writeFileSafe,
 } from "../../utils"
-import { addWorkspacePackage } from "./workspace"
+import { addPackage } from "./workspace"
 
 interface Options {
   config: string
@@ -523,7 +523,7 @@ export const init = new Command("init")
       }
 
       if (monorepo) {
-        await addWorkspacePackage({ cwd, packageName, spinner, yes })
+        await addPackage({ cwd, packageName, spinner, yes })
       }
 
       end()

@@ -21,10 +21,10 @@ import {
   installDependencies,
   packageAddArgs,
 } from "../../../utils"
+import { addPackage } from "./add-package"
 import { getWorkspaces } from "./get-workspaces"
-import { addWorkspacePackage } from "./install"
 
-describe("workspace-install", () => {
+describe("workspace > add-package", () => {
   const spinner = {
     fail: vi.fn(),
     start: vi.fn(),
@@ -41,7 +41,7 @@ describe("workspace-install", () => {
   test("should print manual command when no workspaces are found", async () => {
     vi.mocked(getWorkspaces).mockResolvedValue([])
 
-    await addWorkspacePackage({
+    await addPackage({
       cwd: "/repo",
       packageName: "@scope/ui",
       spinner: spinner as any,
@@ -59,7 +59,7 @@ describe("workspace-install", () => {
   test("should print commands for each workspace in yes mode", async () => {
     vi.mocked(getWorkspaces).mockResolvedValue(["apps/web", "apps/docs"])
 
-    await addWorkspacePackage({
+    await addPackage({
       cwd: "/repo",
       packageName: "@scope/ui",
       spinner: spinner as any,
@@ -87,7 +87,7 @@ describe("workspace-install", () => {
     vi.mocked(prompts).mockResolvedValue({ selectedWorkspaces: ["apps/docs"] })
     vi.mocked(installDependencies).mockResolvedValue(undefined)
 
-    await addWorkspacePackage({
+    await addPackage({
       cwd: "/repo",
       packageName: "@scope/ui",
       spinner: spinner as any,
@@ -112,7 +112,7 @@ describe("workspace-install", () => {
     vi.mocked(prompts).mockResolvedValue({ selectedWorkspaces: ["apps/web"] })
     vi.mocked(installDependencies).mockRejectedValue(new Error("boom"))
 
-    await addWorkspacePackage({
+    await addPackage({
       cwd: "/repo",
       packageName: "@scope/ui",
       spinner: spinner as any,

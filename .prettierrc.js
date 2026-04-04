@@ -1,3 +1,3 @@
-import config from "@yamada-ui/workspace/prettier/config"
+import config from "./packages/workspace/src/prettier/config.js"
 
 export default config

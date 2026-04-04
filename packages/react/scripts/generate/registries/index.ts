@@ -15,6 +15,7 @@ import {
   readConfigFile,
   sys,
 } from "typescript"
+import YAML from "yamljs"
 import { ICON_TEMPLATE } from "../icons/template"
 
 type RegistrySection = "components" | "hooks" | "providers" | "root" | "theme"
@@ -55,11 +56,11 @@ interface ExternalsMap {
   [key: string]: string
 }
 
-const CONFIG_PATH = path.join(process.cwd(), "tsconfig.json")
-const PUBLIC_PATH = path.join(process.cwd(), "www", "public", "registry")
-const PACKAGE_PATH = path.join(process.cwd(), "packages", "react")
-const PACKAGE_JSON_PATH = path.join(PACKAGE_PATH, "package.json")
-const ENTRY_PATH = path.join(PACKAGE_PATH, "src")
+const CONFIG_PATH = path.resolve("tsconfig.json")
+const PUBLIC_PATH = path.resolve("..", "..", "www", "public", "registry")
+const PACKAGE_JSON_PATH = path.resolve("package.json")
+const WORKSPACE_PATH = path.resolve("..", "..", "pnpm-workspace.yaml")
+const ENTRY_PATH = path.resolve("src")
 const TARGET_SECTIONS = ["components", "hooks", "providers"]
 const PROVIDE_SECTIONS = ["core", "utils", "theme"]
 const IGNORED_FILE_NAME = [
@@ -71,10 +72,22 @@ const IGNORED_MODULES = ["react", "react-dom"]
 const REGISTRY_SCHEMA_PATH = "https://yamada-ui.com/registry/v2/schema.json"
 
 async function getExternals(): Promise<ExternalsMap> {
-  const data = await readFile(PACKAGE_JSON_PATH, "utf-8")
-  const { dependencies, devDependencies } = JSON.parse(data)
+  const packageJson = await readFile(PACKAGE_JSON_PATH, "utf-8")
+  const workspaceYaml = await readFile(WORKSPACE_PATH, "utf-8")
+  const { dependencies, devDependencies } = JSON.parse(packageJson)
+  const { catalog } = YAML.parse(workspaceYaml)
 
-  return { ...dependencies, ...devDependencies }
+  return Object.fromEntries(
+    Object.entries<string>({ ...dependencies, ...devDependencies }).map(
+      ([key, value]) => {
+        if (value === "catalog:") {
+          return [key, catalog[key]]
+        } else {
+          return [key, value]
+        }
+      },
+    ),
+  )
 }
 
 async function getIconsSources() {

@@ -4,18 +4,17 @@ packages:
   - "www/**"
 catalog:
   "@emotion/react": ^11.14.0
-  "@emotion/styled": ^11.14.1
   "eslint-plugin-unused-imports": ^4.4.1
   "@faker-js/faker": ^10.4.0
   "@lucide/lab": ^0.1.2
   "@testing-library/jest-dom": ^6.9.1
   "@tanstack/react-router": ^1.168.7
   "@typescript-eslint/parser": ^8.57.2
+  "@types/yamljs": ^0.2.34
   "@vitejs/plugin-react": ^6.0.1
   "@vitejs/plugin-react-swc": ^4.3.0
   "@vitest/ui": ^4.1.2
   commander: ^14.0.3
-  csstype: ^3.2.3
   dayjs: ^1.11.20
   dotenv: ^17.3.1
   eslint: ^9.39.4
@@ -33,6 +32,7 @@ catalog:
   sucrase: ^3.35.1
   tsx: ^4.21.0
   typescript: ^5.9.3
+  yamljs: ^0.3.0
   vite: ^8.0.3
   vitest: ^4.1.2
   vitest-axe: ^0.1.0

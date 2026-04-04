@@ -112,12 +112,16 @@ async function getIssues() {
 }
 
 async function createReport() {
-  await execFileAsync("pnpm", ["react", "test:a11y"]).catch((e) => e)
+  await execFileAsync("pnpm", [
+    "-C",
+    path.resolve("..", "react"),
+    "test:a11y",
+  ]).catch((e) => e)
 }
 
 async function getReport() {
   const data = await readFile(
-    path.resolve("packages", "react", "report.json"),
+    path.resolve("..", "react", "report.json"),
     "utf-8",
   )
 

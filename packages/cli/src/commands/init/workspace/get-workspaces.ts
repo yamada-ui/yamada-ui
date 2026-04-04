@@ -53,6 +53,7 @@ export async function getWorkspaces(
         if (Array.isArray(pkg.workspaces)) {
           workspacePatterns = pkg.workspaces
         } else if (
+          // Yarn v1 legacy format: { "workspaces": { "packages": [...] } }
           pkg.workspaces?.packages &&
           Array.isArray(pkg.workspaces.packages)
         ) {

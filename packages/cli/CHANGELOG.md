@@ -1,5 +1,11 @@
 # @yamada-ui/cli
 
+## 2.1.4
+
+### Patch Changes
+
+- [#6336](https://github.com/yamada-ui/yamada-ui/pull/6336) [`f594776`](https://github.com/yamada-ui/yamada-ui/commit/f5947763426f4e8900928ab0716e34a895e55b8a) Thanks [@taroj1205](https://github.com/taroj1205)! - Standardize Node.js built-in imports to use `node:` specifiers.
+
 ## 2.1.3
 
 ### Patch Changes

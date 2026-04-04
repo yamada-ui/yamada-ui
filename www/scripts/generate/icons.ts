@@ -1,12 +1,12 @@
 import { toKebabCase, toPascalCase } from "@yamada-ui/utils"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
-import { execFile } from "child_process"
-import { readdir, readFile } from "fs/promises"
+import { execFile } from "node:child_process"
+import { readdir, readFile } from "node:fs/promises"
+import path from "node:path"
+import { promisify } from "node:util"
 import ora from "ora"
-import path from "path"
 import c from "picocolors"
 import { rimraf } from "rimraf"
-import { promisify } from "util"
 
 const execFileAsync = promisify(execFile)
 

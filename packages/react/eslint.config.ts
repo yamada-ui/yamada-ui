@@ -1,8 +1,9 @@
 import type {
   ConfigWithExtends,
   ConfigWithExtendsArray,
-} from "@eslint/config-helpers"
+} from "@yamada-ui/workspace/eslint"
 import {
+  defineConfig,
   jsxA11yConfig,
   reactConfig,
   reactHooksConfig,
@@ -12,11 +13,10 @@ import {
   restrictedImportConfigArray as sharedRestrictedImportConfigArray,
   vitestConfig,
 } from "@yamada-ui/workspace/eslint"
-import { defineConfig } from "eslint/config"
 
 const noConsoleConfig: ConfigWithExtends = {
   name: "no-console",
-  files: ["**/*.stories.tsx"],
+  files: ["**/*.stories.tsx", "scripts/**"],
   rules: {
     "no-console": "off",
   },

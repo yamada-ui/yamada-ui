@@ -4,14 +4,14 @@ import {
   retryOnRateLimit,
   retryOnRateLimitWithPaging,
 } from "@yamada-ui/workspace/octokit"
-import { execFile } from "child_process"
 import { Command } from "commander"
-import { readFile } from "fs/promises"
+import { execFile } from "node:child_process"
+import { readFile } from "node:fs/promises"
+import path from "node:path"
+import { promisify } from "node:util"
 import ora from "ora"
-import path from "path"
 import c from "picocolors"
 import stripAnsi from "strip-ansi"
-import { promisify } from "util"
 
 const execFileAsync = promisify(execFile)
 
@@ -112,12 +112,16 @@ async function getIssues() {
 }
 
 async function createReport() {
-  await execFileAsync("pnpm", ["react", "test:a11y"]).catch((e) => e)
+  await execFileAsync("pnpm", [
+    "-C",
+    path.resolve("..", "react"),
+    "test:a11y",
+  ]).catch((e) => e)
 }
 
 async function getReport() {
   const data = await readFile(
-    path.resolve("packages", "react", "report.json"),
+    path.resolve("..", "react", "report.json"),
     "utf-8",
   )
 

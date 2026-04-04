@@ -1,11 +1,11 @@
 import type { CSSObject } from "@emotion/react"
 import type { CompatData, CompatStatement } from "@mdn/browser-compat-data"
-import type { AnyString, ThemeToken, Transforms } from "@yamada-ui/react"
+import type { AnyString } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
+import type { ThemeToken, Transforms } from "../../../src"
 import type { StyleConfig } from "./styled-props"
 import type { TransformOptions } from "./transform-props"
 import bcd from "@mdn/browser-compat-data"
-import { conditionSelectors } from "@yamada-ui/react"
 import {
   getMemoizedObject as get,
   isUndefined,
@@ -13,19 +13,20 @@ import {
   toCamelCase,
 } from "@yamada-ui/utils"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
-import { execFile } from "child_process"
 import { Command } from "commander"
-import { glob } from "fs/promises"
+import { execFile } from "node:child_process"
+import { glob } from "node:fs/promises"
+import path from "node:path"
+import { promisify } from "node:util"
 import ora from "ora"
-import path from "path"
 import c from "picocolors"
 import {
   createProgram,
   isInterfaceDeclaration,
   isTypeAliasDeclaration,
 } from "typescript"
-import { promisify } from "util"
 import { features } from "web-features"
+import { conditionSelectors } from "../../../src"
 import { checkProps } from "./check"
 import { excludeProps } from "./exclude-props"
 import { overrideTypes } from "./override-types"
@@ -37,17 +38,10 @@ import { transformMap } from "./transform-props"
 
 const execFileAsync = promisify(execFile)
 
-export const STYLES_PATH = path.resolve(
-  process.cwd(),
-  "packages",
-  "react",
-  "src",
-  "core",
-  "css",
-  "styles.ts",
-)
+export const STYLES_PATH = path.resolve("src", "core", "css", "styles.ts")
 export const STYLES_PUBLISH_PATH = path.resolve(
-  process.cwd(),
+  "..",
+  "..",
   "www",
   "data",
   "styles.json",
@@ -626,6 +620,15 @@ function main() {
 
       if (!publish) {
         await writeFileWithFormat(STYLES_PATH, content)
+
+        spinner.succeed(`Wrote file`)
+
+        spinner.start(`Fixing eslint and prettier`)
+
+        await execFileAsync("npx", ["eslint", STYLES_PATH, "--fix"])
+        await execFileAsync("npx", ["prettier", STYLES_PATH, "--write"])
+
+        spinner.succeed(`Fixed eslint and prettier`)
       } else {
         const omittedData = Object.fromEntries(
           Object.entries(data).map(([key, value]) => {
@@ -645,15 +648,9 @@ function main() {
         await writeFileWithFormat(STYLES_PUBLISH_PATH, omittedData, {
           parser: "json",
         })
+
+        spinner.succeed(`Wrote file`)
       }
-
-      spinner.succeed(`Wrote file`)
-
-      spinner.start(`Fixing eslint`)
-
-      if (!publish) await execFileAsync("npx", ["eslint", STYLES_PATH, "--fix"])
-
-      spinner.succeed(`Fixed eslint`)
 
       const end = process.hrtime.bigint()
       const duration = (Number(end - start) / 1e9).toFixed(2)

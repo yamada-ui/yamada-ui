@@ -1,15 +1,20 @@
 import type { Dict } from "@yamada-ui/utils"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
-import { readFile } from "fs/promises"
+import { readFile } from "node:fs/promises"
+import path from "node:path"
 import ora from "ora"
-import path from "path"
 import c from "picocolors"
 
 type Package = "cli" | "react"
 
 const TARGET_PACKAGES: Package[] = ["cli", "react"]
-const PACKAGE_PATH = path.resolve("packages")
-const ISSUE_TEMPLATE_PATH = path.resolve(".github", "ISSUE_TEMPLATE")
+const PACKAGES_PATH = path.resolve("..", "..", "packages")
+const ISSUE_TEMPLATE_PATH = path.resolve(
+  "..",
+  "..",
+  ".github",
+  "ISSUE_TEMPLATE",
+)
 const DIST_PATHS = [
   path.join(ISSUE_TEMPLATE_PATH, "bug_report.yml"),
   path.join(ISSUE_TEMPLATE_PATH, "bug_report.ja.yml"),
@@ -20,7 +25,7 @@ async function getPackageJson(): Promise<Dict<Dict>> {
     await Promise.all(
       TARGET_PACKAGES.map(async (name) => {
         const content = await readFile(
-          path.join(PACKAGE_PATH, name, "package.json"),
+          path.join(PACKAGES_PATH, name, "package.json"),
           "utf-8",
         )
 

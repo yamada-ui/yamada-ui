@@ -1,5 +1,6 @@
-import type { ConfigWithExtends } from "@eslint/config-helpers"
+import type { ConfigWithExtends } from "@yamada-ui/workspace/eslint"
 import {
+  defineConfig,
   jsxA11yConfig,
   nextConfig,
   reactConfig,
@@ -8,7 +9,6 @@ import {
   cspellConfig as sharedCspellConfig,
   sharedFiles,
 } from "@yamada-ui/workspace/eslint"
-import { defineConfig } from "eslint/config"
 
 const noConsoleConfig: ConfigWithExtends = {
   name: "no-console",

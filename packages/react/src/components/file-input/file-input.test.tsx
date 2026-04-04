@@ -137,7 +137,7 @@ describe("<FileInput />", () => {
     })
     expect(onChange).toHaveBeenCalledTimes(1)
     expect(files).toHaveLength(3)
-    files!.forEach((file: File) => expect(file).toStrictEqual(file))
+    files.forEach((file: File) => expect(file).toStrictEqual(file))
   })
 
   test("should not show files in the onChange function if no files are present", () => {

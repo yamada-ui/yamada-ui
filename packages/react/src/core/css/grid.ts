@@ -27,7 +27,7 @@ export function grid(value: any, { system, ...rest }: TransformOptions) {
       const token = `sizes.${value}`
 
       if (isCSSToken(system)(token)) {
-        return system.cssMap![token]!.ref
+        return system.cssMap[token]!.ref
       } else {
         return value
       }

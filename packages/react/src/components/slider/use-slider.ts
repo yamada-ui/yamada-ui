@@ -151,7 +151,7 @@ export const useSlider = <Y extends [number, number] | number = number>(
       if (range) {
         const start = currentIndex.current === 0
         const oppositeIndex = currentIndex.current === 0 ? 1 : 0
-        const oppositeValue = value[oppositeIndex]!
+        const oppositeValue = value[oppositeIndex]
 
         onChangeEnd?.(
           (start ? [panValue, oppositeValue] : [oppositeValue, panValue]) as Y,
@@ -181,7 +181,7 @@ export const useSlider = <Y extends [number, number] | number = number>(
 
         const start = index === 0
         const oppositeIndex = index === 0 ? 1 : 0
-        const oppositeValue = value[oppositeIndex]!
+        const oppositeValue = value[oppositeIndex]
 
         onChangeStart?.(
           (start ? [panValue, oppositeValue] : [oppositeValue, panValue]) as Y,
@@ -210,7 +210,7 @@ export const useSlider = <Y extends [number, number] | number = number>(
     (index: number) => {
       const start = index === 0
       const oppositeIndex = index === 0 ? 1 : 0
-      const oppositeValue = range ? value[oppositeIndex]! : value
+      const oppositeValue = range ? value[oppositeIndex] : value
 
       return {
         max: range ? (start ? oppositeValue - betweenThumbs : max) : max,
@@ -373,7 +373,7 @@ export const useSlider = <Y extends [number, number] | number = number>(
     useCallback(
       ({ style, value: valueProp, ...props }) => {
         const between = range
-          ? value[0]! < valueProp && valueProp < value[1]!
+          ? value[0] < valueProp && valueProp < value[1]
           : valueProp < value
         const percent = valueToPercent(valueProp, min, max)
 

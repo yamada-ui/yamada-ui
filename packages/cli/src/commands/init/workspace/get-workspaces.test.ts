@@ -79,6 +79,16 @@ describe("getWorkspaces", () => {
       expect(result).toContain(path.join("workspaces", "app"))
     })
 
+    test.each([
+      ["empty file", ""],
+      ["empty packages array", "packages: []\n"],
+      ["no packages key", "catalog:\n  react: ^18.0.0\n"],
+    ])("should return empty array when yaml has %s", async (_, content) => {
+      writeFileSync(path.join(tempDir, "pnpm-workspace.yaml"), content, "utf-8")
+
+      await expect(getWorkspaces(tempDir, "pnpm")).resolves.toStrictEqual([])
+    })
+
     test("should return empty array when no workspaces directories exist", async () => {
       writeFileSync(
         path.join(tempDir, "pnpm-workspace.yaml"),
@@ -132,11 +142,13 @@ describe("getWorkspaces", () => {
       expect(result).not.toContain(path.join("packages", "legacy-old"))
     })
 
-    test("should throw with file path when YAML is malformed", async () => {
+    test("should throw with 'Failed to parse' prefix when YAML is malformed", async () => {
       const yamlPath = path.join(tempDir, "pnpm-workspace.yaml")
       writeFileSync(yamlPath, "packages:\n  - [\n", "utf-8")
 
-      await expect(getWorkspaces(tempDir, "pnpm")).rejects.toThrow(yamlPath)
+      await expect(getWorkspaces(tempDir, "pnpm")).rejects.toThrow(
+        `Failed to parse ${yamlPath}`,
+      )
     })
 
     test("should exclude nested packages matching negation pattern", async () => {
@@ -154,7 +166,7 @@ describe("getWorkspaces", () => {
     })
   })
 
-  describe("npm", () => {
+  describe.each(["npm", "yarn"] as const)("%s", (packageManager) => {
     test("should read workspaces from package.json", async () => {
       writeFileSync(
         path.join(tempDir, "package.json"),
@@ -163,7 +175,7 @@ describe("getWorkspaces", () => {
       )
       createPackage("workspaces/app", "app")
 
-      const result = await getWorkspaces(tempDir, "npm")
+      const result = await getWorkspaces(tempDir, packageManager)
       expect(result).toContain(path.join("workspaces", "app"))
     })
 
@@ -175,7 +187,7 @@ describe("getWorkspaces", () => {
       )
       createPackage("packages/alpha", "alpha")
 
-      const result = await getWorkspaces(tempDir, "npm")
+      const result = await getWorkspaces(tempDir, packageManager)
       expect(result).toContain(path.join("packages", "alpha"))
     })
 
@@ -188,9 +200,20 @@ describe("getWorkspaces", () => {
       createPackage("packages/ui-button", "ui-button")
       createPackage("packages/legacy-old", "legacy-old")
 
-      const result = await getWorkspaces(tempDir, "npm")
+      const result = await getWorkspaces(tempDir, packageManager)
       expect(result).toContain(path.join("packages", "ui-button"))
       expect(result).not.toContain(path.join("packages", "legacy-old"))
+    })
+
+    test("should return empty array when workspaces is empty array", async () => {
+      writeFileSync(
+        path.join(tempDir, "package.json"),
+        JSON.stringify({ workspaces: [] }),
+        "utf-8",
+      )
+
+      const result = await getWorkspaces(tempDir, packageManager)
+      expect(result).toStrictEqual([])
     })
 
     test("should return empty array when no workspaces directories exist", async () => {
@@ -200,16 +223,21 @@ describe("getWorkspaces", () => {
         "utf-8",
       )
 
-      const result = await getWorkspaces(tempDir, "npm")
+      const result = await getWorkspaces(tempDir, packageManager)
       expect(result).toStrictEqual([])
     })
 
-    test("should throw with file path when JSON is malformed", async () => {
+    test("should return empty array when package.json does not exist", async () => {
+      const result = await getWorkspaces(tempDir, packageManager)
+      expect(result).toStrictEqual([])
+    })
+
+    test("should throw with 'Failed to parse' prefix when JSON is malformed", async () => {
       const packageJsonPath = path.join(tempDir, "package.json")
       writeFileSync(packageJsonPath, '{ "workspaces": [', "utf-8")
 
-      await expect(getWorkspaces(tempDir, "npm")).rejects.toThrow(
-        packageJsonPath,
+      await expect(getWorkspaces(tempDir, packageManager)).rejects.toThrow(
+        `Failed to parse ${packageJsonPath}`,
       )
     })
   })

@@ -67,14 +67,18 @@ jobs:
 
       - name: Create @dev release
         if: github.ref_name == 'main' && steps.changesets.outputs.published != 'true'
-        run: pnpm release:dev
+        run: |
+          git checkout ${{ github.ref_name }}
+          pnpm release:dev
         env:
           NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create @next release
         if: github.ref_name != 'main'
-        run: pnpm release:next
+        run: |
+          git checkout ${{ github.ref_name }}
+          pnpm release:next
         env:
           NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

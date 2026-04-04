@@ -51,8 +51,8 @@ describe("workspace-install", () => {
     expect(prompts).not.toHaveBeenCalled()
     expect(spinner.start).not.toHaveBeenCalled()
     expect(console.log).toHaveBeenCalledWith("")
-    expect(vi.mocked(console.log).mock.calls[1]?.[0]).toContain(
-      'pnpm add "@scope/ui@workspace:*"',
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining('pnpm add "@scope/ui@workspace:*"'),
     )
   })
 

@@ -85,7 +85,7 @@ export async function generateDocMap(docs: Doc[]) {
       omittedPath.endsWith("/index")
         ? omittedPath.replace(/\/index$/, "")
         : omittedPath
-    )!.split("/")
+    ).split("/")
     const items = docMap[lang].items!
 
     slug.reduce((prev, segment, index) => {

@@ -16,6 +16,7 @@ import {
   Loading,
   mergeRefs,
   noop,
+  Popover,
   runKeyAction,
   SearchIcon,
   Text,
@@ -50,6 +51,13 @@ const {
 export function GuideSearch() {
   const { open, onClose, onOpen } = useDisclosure()
   const pathname = usePathname()
+  const bodyRef = useRef<HTMLDivElement>(null)
+  const descendants = useDescendants()
+  const onSearchRef = useRef<(value: string) => void>(noop)
+  const activeDescendant = useRef<Descendant<
+    HTMLAnchorElement,
+    { href: string }
+  > | null>(null)
 
   useUpdateEffect(() => {
     if (open) onClose()
@@ -67,24 +75,6 @@ export function GuideSearch() {
       onOpen()
     }
   })
-
-  return <SearchContent onClose={onClose} />
-}
-
-type Hit = Guide
-
-interface SearchContentProps {
-  onClose: () => void
-}
-
-function SearchContent({ onClose }: SearchContentProps) {
-  const bodyRef = useRef<HTMLDivElement>(null)
-  const descendants = useDescendants()
-  const onSearchRef = useRef<(value: string) => void>(noop)
-  const activeDescendant = useRef<Descendant<
-    HTMLAnchorElement,
-    { href: string }
-  > | null>(null)
 
   const onActive = useCallback(
     (descendant?: Descendant<HTMLAnchorElement, { href: string }>) => {
@@ -110,24 +100,47 @@ function SearchContent({ onClose }: SearchContentProps) {
 
   return (
     <DescendantsContext value={descendants}>
-      <SearchContentHeader
-        activeDescendant={activeDescendant}
-        onActive={onActive}
+      <Popover.Root
+        animationScheme="block-start"
+        autoFocus={false}
+        closeOnBlur
+        matchWidth
+        open={open}
         onClose={onClose}
-        onSearchRef={onSearchRef}
-      />
+        onOpen={onOpen}
+      >
+        <Popover.Anchor asChild>
+          <InputGroup.Root>
+            <InputGroup.Element>
+              <SearchIcon fontSize="xl" />
+            </InputGroup.Element>
 
-      <SearchContentBody
-        ref={bodyRef}
-        onActive={onActive}
-        onClose={onClose}
-        onSearchRef={onSearchRef}
-      />
+            <SearchInput
+              activeDescendant={activeDescendant}
+              onActive={onActive}
+              onClose={onClose}
+              onOpen={onOpen}
+              onSearchRef={onSearchRef}
+            />
+          </InputGroup.Root>
+        </Popover.Anchor>
+
+        <Popover.Content p="0" rounded="l2" shadow="lg">
+          <SearchContentBody
+            ref={bodyRef}
+            onActive={onActive}
+            onClose={onClose}
+            onSearchRef={onSearchRef}
+          />
+        </Popover.Content>
+      </Popover.Root>
     </DescendantsContext>
   )
 }
 
-interface SearchContentHeaderProps {
+type Hit = Guide
+
+interface SearchInputProps {
   activeDescendant: RefObject<Descendant<
     HTMLAnchorElement,
     { href: string }
@@ -136,15 +149,17 @@ interface SearchContentHeaderProps {
     descendant?: Descendant<HTMLAnchorElement, { href: string }>,
   ) => void
   onClose: () => void
+  onOpen: () => void
   onSearchRef: RefObject<(value: string) => void>
 }
 
-function SearchContentHeader({
+function SearchInput({
   activeDescendant,
   onActive,
   onClose,
+  onOpen,
   onSearchRef,
-}: SearchContentHeaderProps) {
+}: SearchInputProps) {
   const t = useTranslations("component.search")
   const descendants = useDescendantsContext()
   const compositionRef = useRef(false)
@@ -207,24 +222,25 @@ function SearchContentHeader({
   )
 
   return (
-    <Box pt="sm" px="sm">
-      <InputGroup.Root>
-        <InputGroup.Element>
-          <SearchIcon fontSize="xl" />
-        </InputGroup.Element>
-        <Input
-          placeholder={t("placeholder")}
-          onChange={(ev) => onSearchRef.current(ev.target.value)}
-          onCompositionEnd={() => {
-            compositionRef.current = false
-          }}
-          onCompositionStart={() => {
-            compositionRef.current = true
-          }}
-          onKeyDown={onKeyDown}
-        />
-      </InputGroup.Root>
-    </Box>
+    <Input
+      placeholder={t("placeholder")}
+      onChange={(ev) => {
+        const value = ev.target.value
+        onSearchRef.current(value)
+        if (value.length) {
+          onOpen()
+        } else {
+          onClose()
+        }
+      }}
+      onCompositionEnd={() => {
+        compositionRef.current = false
+      }}
+      onCompositionStart={() => {
+        compositionRef.current = true
+      }}
+      onKeyDown={onKeyDown}
+    />
   )
 }
 
@@ -240,7 +256,7 @@ const SEARCH_KEYS = [
 const DEFAULT_LOCALE_CONTENTS = getGuides(CONSTANTS.I18N.DEFAULT_LOCALE)
 const PER_PAGE = 50
 
-interface SearchContentBodyProps extends HTMLProps {
+interface SearchContentBodyProps {
   onActive: (
     descendant?: Descendant<HTMLAnchorElement, { href: string }>,
   ) => void
@@ -249,11 +265,11 @@ interface SearchContentBodyProps extends HTMLProps {
 }
 
 function SearchContentBody({
+  ref,
   onActive,
   onClose,
   onSearchRef,
-  ...rest
-}: SearchContentBodyProps) {
+}: SearchContentBodyProps & { ref?: RefObject<HTMLDivElement | null> }) {
   const t = useTranslations("component.search")
   const { locale } = useLocale()
   const contents = useMemo(() => getGuides(locale), [locale])
@@ -312,6 +328,7 @@ function SearchContentBody({
 
   return (
     <InfiniteScrollArea
+      ref={ref}
       gap="sm"
       loading={<Loading.Oval fontSize="2xl" />}
       maxH="44.5rem"
@@ -325,7 +342,6 @@ function SearchContentBody({
 
         if (index >= maxIndex) finish()
       }}
-      {...rest}
     >
       {list.length ? (
         list.map((hit, index) => (

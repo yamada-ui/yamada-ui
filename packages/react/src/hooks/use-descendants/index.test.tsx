@@ -50,7 +50,7 @@ describe("useDescendant", () => {
 
     const { node } = descendants.value(0) ?? {}
 
-    descendants.unregister(node!)
+    descendants.unregister(node)
 
     expect(descendants.count()).toBe(0)
   })

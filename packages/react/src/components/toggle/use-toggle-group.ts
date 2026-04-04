@@ -111,7 +111,7 @@ export const useToggleGroup = <Y extends string | string[] = string>({
             return nextValue as Value
           }
         } else {
-          if (value === (prev as string | undefined)) {
+          if (String(value) === prev) {
             onReset()
 
             return undefined as Value

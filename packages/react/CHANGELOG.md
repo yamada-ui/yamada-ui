@@ -1,5 +1,13 @@
 # @yamada-ui/react
 
+## 2.1.7
+
+### Patch Changes
+
+- [#6346](https://github.com/yamada-ui/yamada-ui/pull/6346) [`fc5f9a2`](https://github.com/yamada-ui/yamada-ui/commit/fc5f9a2ea5a2bf5bea2f28af8377dd95168181c7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- [#6346](https://github.com/yamada-ui/yamada-ui/pull/6346) [`fc5f9a2`](https://github.com/yamada-ui/yamada-ui/commit/fc5f9a2ea5a2bf5bea2f28af8377dd95168181c7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
 ## 2.1.6
 
 ### Patch Changes

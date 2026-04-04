@@ -305,7 +305,7 @@ describe("<Select />", () => {
 
     expect(input).toBeInTheDocument()
 
-    fireEvent.focus(input!)
+    fireEvent.focus(input)
 
     const field = screen.getByRole("combobox", { name: /Choose a option/i })
 

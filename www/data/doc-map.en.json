@@ -1340,6 +1340,11 @@
           "segment": "react",
           "items": [
             {
+              "title": "v2.1.7",
+              "segment": "2-1-7",
+              "pathname": "/docs/changelog/react/2-1-7"
+            },
+            {
               "title": "v2.1.6",
               "segment": "2-1-6",
               "pathname": "/docs/changelog/react/2-1-6"
@@ -1425,6 +1430,11 @@
           "title": "@yamada-ui/cli",
           "segment": "cli",
           "items": [
+            {
+              "title": "v2.1.5",
+              "segment": "2-1-5",
+              "pathname": "/docs/changelog/cli/2-1-5"
+            },
             {
               "title": "v2.1.4",
               "segment": "2-1-4",

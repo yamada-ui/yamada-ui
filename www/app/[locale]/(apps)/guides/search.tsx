@@ -160,7 +160,7 @@ function SearchInput({
   onOpen,
   onSearchRef,
 }: SearchInputProps) {
-  const t = useTranslations("component.search")
+  const t = useTranslations("guides")
   const descendants = useDescendantsContext()
   const compositionRef = useRef(false)
   const pathname = usePathname()
@@ -223,7 +223,7 @@ function SearchInput({
 
   return (
     <Input
-      placeholder={t("placeholder")}
+      placeholder={t("searchPlaceholder")}
       onChange={(ev) => {
         const value = ev.target.value
         onSearchRef.current(value)
@@ -270,7 +270,7 @@ function SearchContentBody({
   onClose,
   onSearchRef,
 }: SearchContentBodyProps & { ref?: RefObject<HTMLDivElement | null> }) {
-  const t = useTranslations("component.search")
+  const t = useTranslations("guides")
   const { locale } = useLocale()
   const contents = useMemo(() => getGuides(locale), [locale])
   const contentMap = useMemo(

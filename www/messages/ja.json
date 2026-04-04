@@ -81,7 +81,9 @@
     "title": "ガイド",
     "description": "Yamada UIに関するよくある質問の答えを見つけましょう。",
     "guides": "{count, plural, other {#件のガイド}}",
-    "backToGuides": "ガイド一覧に戻る"
+    "backToGuides": "ガイド一覧に戻る",
+    "searchPlaceholder": "ガイドを検索する...",
+    "notFound": "「{value}」に該当する結果が見つかりませんでした。"
   },
   "changelog": {
     "title": "変更履歴",

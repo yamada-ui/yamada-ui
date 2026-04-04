@@ -81,7 +81,9 @@
     "title": "Guides",
     "description": "Find answers to common questions related to Yamada UI.",
     "guides": "{count, plural, =1 {# guide} other {# guides}}",
-    "backToGuides": "Back to Guides"
+    "backToGuides": "Back to Guides",
+    "searchPlaceholder": "Search guides...",
+    "notFound": "No results found for \"{value}\"."
   },
   "changelog": {
     "title": "Changelog",

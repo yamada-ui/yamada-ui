@@ -1,4 +1,10 @@
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs"
+import {
+  chmodSync,
+  mkdirSync,
+  mkdtempSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs"
 import { tmpdir } from "node:os"
 import path from "node:path"
 import { afterEach, beforeEach, describe, expect, test } from "vitest"
@@ -151,6 +157,16 @@ describe("getWorkspaces", () => {
       )
     })
 
+    test("should throw with 'Failed to read' prefix when file is unreadable", async () => {
+      const yamlPath = path.join(tempDir, "pnpm-workspace.yaml")
+      writeFileSync(yamlPath, "packages:\n  - workspaces/*\n", "utf-8")
+      chmodSync(yamlPath, 0o000)
+
+      await expect(getWorkspaces(tempDir, "pnpm")).rejects.toThrow(
+        `Failed to read ${yamlPath}`,
+      )
+    })
+
     test("should exclude nested packages matching negation pattern", async () => {
       writeFileSync(
         path.join(tempDir, "pnpm-workspace.yaml"),
@@ -238,6 +254,20 @@ describe("getWorkspaces", () => {
 
       await expect(getWorkspaces(tempDir, packageManager)).rejects.toThrow(
         `Failed to parse ${packageJsonPath}`,
+      )
+    })
+
+    test("should throw with 'Failed to read' prefix when file is unreadable", async () => {
+      const packageJsonPath = path.join(tempDir, "package.json")
+      writeFileSync(
+        packageJsonPath,
+        JSON.stringify({ workspaces: ["workspaces/*"] }),
+        "utf-8",
+      )
+      chmodSync(packageJsonPath, 0o000)
+
+      await expect(getWorkspaces(tempDir, packageManager)).rejects.toThrow(
+        `Failed to read ${packageJsonPath}`,
       )
     })
   })

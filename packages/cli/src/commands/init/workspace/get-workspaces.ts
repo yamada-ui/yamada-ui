@@ -14,34 +14,51 @@ export async function getWorkspaces(
     const ymlPath = path.join(cwd, "pnpm-workspace.yml")
 
     for (const pnpmWorkspacePath of [yamlPath, ymlPath]) {
+      let content: string
       try {
-        const content = await readFile(pnpmWorkspacePath, "utf-8")
+        content = await readFile(pnpmWorkspacePath, "utf-8")
+      } catch (e) {
+        if ((e as NodeJS.ErrnoException).code === "ENOENT") continue
+        throw new Error(
+          `Failed to read ${pnpmWorkspacePath}: ${e instanceof Error ? e.message : String(e)}`,
+        )
+      }
+      try {
         const parsed = YAML.parse(content)
         if (Array.isArray(parsed?.packages)) {
           workspacePatterns = parsed.packages
         }
-        break
       } catch (e) {
-        if ((e as NodeJS.ErrnoException).code === "ENOENT") continue
         throw new Error(
           `Failed to parse ${pnpmWorkspacePath}: ${e instanceof Error ? e.message : String(e)}`,
         )
       }
+      break
     }
   } else {
     const packageJsonPath = path.join(cwd, "package.json")
+    let content: string | undefined
     try {
-      const pkg = JSON.parse(await readFile(packageJsonPath, "utf-8"))
-      if (Array.isArray(pkg.workspaces)) {
-        workspacePatterns = pkg.workspaces
-      } else if (
-        pkg.workspaces?.packages &&
-        Array.isArray(pkg.workspaces.packages)
-      ) {
-        workspacePatterns = pkg.workspaces.packages
-      }
+      content = await readFile(packageJsonPath, "utf-8")
     } catch (e) {
       if ((e as NodeJS.ErrnoException).code !== "ENOENT") {
+        throw new Error(
+          `Failed to read ${packageJsonPath}: ${e instanceof Error ? e.message : String(e)}`,
+        )
+      }
+    }
+    if (content !== undefined) {
+      try {
+        const pkg = JSON.parse(content)
+        if (Array.isArray(pkg.workspaces)) {
+          workspacePatterns = pkg.workspaces
+        } else if (
+          pkg.workspaces?.packages &&
+          Array.isArray(pkg.workspaces.packages)
+        ) {
+          workspacePatterns = pkg.workspaces.packages
+        }
+      } catch (e) {
         throw new Error(
           `Failed to parse ${packageJsonPath}: ${e instanceof Error ? e.message : String(e)}`,
         )

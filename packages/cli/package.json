@@ -68,15 +68,17 @@
     "semver": "^7.7.4",
     "sucrase": "^3.35.1",
     "validate-npm-package-name": "^7.0.2",
-    "yamljs": "catalog:"
+    "yaml": "^2.8.2"
   },
   "devDependencies": {
     "@types/prompts": "^2.4.9",
     "@types/semver": "^7.7.1",
     "@types/update-notifier": "6.0.8",
     "@types/validate-npm-package-name": "^4.0.2",
-    "@types/yamljs": "catalog:",
     "@yamada-ui/workspace": "workspace:*",
+    "clean-package": "catalog:",
+    "tsx": "^4.21.0",
+    "typescript": "catalog:",
     "update-notifier": "^7.3.1"
   },
   "clean-package": "./clean-package.config.json"

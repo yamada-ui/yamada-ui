@@ -336,8 +336,8 @@ describe("addWorkspace", () => {
   test("should update existing pnpm-workspace.yaml", async () => {
     const original = process.env.npm_config_user_agent
     process.env.npm_config_user_agent = "pnpm/8.0.0"
-    const { writeFileSync: wfs } = await import("node:fs")
-    const YAML = (await import("yamljs")).default
+    const { writeFileSync: wfs } = await import("fs")
+    const YAML = await import("yaml")
     wfs(
       path.join(tempDir, "pnpm-workspace.yaml"),
       YAML.stringify({ packages: ["existing/**"] }),
@@ -355,8 +355,8 @@ describe("addWorkspace", () => {
   test("should skip duplicate workspace in pnpm", async () => {
     const original = process.env.npm_config_user_agent
     process.env.npm_config_user_agent = "pnpm/8.0.0"
-    const { writeFileSync: wfs } = await import("node:fs")
-    const YAML = (await import("yamljs")).default
+    const { writeFileSync: wfs } = await import("fs")
+    const YAML = await import("yaml")
     wfs(
       path.join(tempDir, "pnpm-workspace.yaml"),
       YAML.stringify({ packages: ["packages/**"] }),
@@ -411,7 +411,7 @@ describe("addWorkspace", () => {
     const original = process.env.npm_config_user_agent
     process.env.npm_config_user_agent = "pnpm/8.0.0"
     const { writeFileSync: wfs } = await import("fs")
-    const YAML = (await import("yamljs")).default
+    const YAML = await import("yaml")
     wfs(
       path.join(tempDir, "pnpm-workspace.yml"),
       YAML.stringify({ packages: ["existing/**"] }),

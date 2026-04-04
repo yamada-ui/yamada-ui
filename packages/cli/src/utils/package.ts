@@ -11,7 +11,7 @@ import path from "node:path"
 import c from "picocolors"
 import semver from "semver"
 import validateProjectName from "validate-npm-package-name"
-import YAML from "yamljs"
+import * as YAML from "yaml"
 import { execFileAsync, writeFileSafe } from "./fs"
 
 export type PackageManager = "bun" | "npm" | "pnpm" | "yarn"

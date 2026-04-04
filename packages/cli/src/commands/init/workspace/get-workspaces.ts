@@ -2,7 +2,7 @@ import type { PackageManager } from "../../../utils"
 import { existsSync } from "node:fs"
 import { glob, readFile } from "node:fs/promises"
 import path from "node:path"
-import YAML from "yamljs"
+import * as YAML from "yaml"
 
 export async function getWorkspaces(
   cwd: string,

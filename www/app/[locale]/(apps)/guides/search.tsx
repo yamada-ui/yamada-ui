@@ -10,16 +10,11 @@ import {
   createDescendants,
   handlerAll,
   HashIcon,
-  HStack,
-  IconButton,
   InfiniteScrollArea,
   Input,
   InputGroup,
-  isApple,
-  Kbd,
   Loading,
   mergeRefs,
-  Modal,
   noop,
   runKeyAction,
   SearchIcon,
@@ -45,9 +40,6 @@ import { CONSTANTS } from "@/constants"
 import { getGuides } from "@/data/guide"
 import { Link, useLocale, usePathname } from "@/i18n"
 
-const ACTION_DEFAULT_KEY = "Ctrl"
-const ACTION_APPLE_KEY = "⌘"
-
 const {
   DescendantsContext,
   useDescendant,
@@ -57,13 +49,7 @@ const {
 
 export function GuideSearch() {
   const { open, onClose, onOpen } = useDisclosure()
-  const t = useTranslations("component.search")
   const pathname = usePathname()
-  const [actionKey, setActionKey] = useState(ACTION_APPLE_KEY)
-
-  useEffect(() => {
-    if (!isApple()) setActionKey(ACTION_DEFAULT_KEY)
-  }, [])
 
   useUpdateEffect(() => {
     if (open) onClose()
@@ -82,56 +68,7 @@ export function GuideSearch() {
     }
   })
 
-  return (
-    <>
-      <HStack
-        as="button"
-        type="button"
-        bg={["bg.muted/30", "bg.muted/30"]}
-        color={{ base: "fg.muted", _hover: "fg.emphasized" }}
-        cursor="pointer"
-        display={{ base: "flex", lg: "none" }}
-        h="8"
-        minW="fit-content"
-        px="sm"
-        rounded="l2"
-        transitionDuration="moderate"
-        transitionProperty="colors"
-        onClick={onOpen}
-      >
-        <Text flex="1" fontSize="sm" lineClamp={1}>
-          {t("placeholder")}
-        </Text>
-
-        <HStack gap="xs">
-          <Kbd size="sm" variant="surface" letterSpacing="tight">
-            {actionKey}
-          </Kbd>
-          <Kbd size="sm" variant="surface">
-            K
-          </Kbd>
-        </HStack>
-      </HStack>
-
-      <IconButton
-        aria-label={t("placeholder")}
-        color="fg.emphasized"
-        display={{ base: "none", lg: "flex" }}
-        icon={<SearchIcon />}
-        onClick={onOpen}
-      />
-
-      <Modal.Root
-        size="lg"
-        open={open}
-        placement={{ base: "center", sm: "start-center" }}
-        withCloseButton={false}
-        onClose={onClose}
-      >
-        <SearchContent onClose={onClose} />
-      </Modal.Root>
-    </>
-  )
+  return <SearchContent onClose={onClose} />
 }
 
 type Hit = Guide
@@ -173,21 +110,19 @@ function SearchContent({ onClose }: SearchContentProps) {
 
   return (
     <DescendantsContext value={descendants}>
-      <Modal.Content maxW="auto" w={{ base: "lg", sm: "full" }}>
-        <SearchContentHeader
-          activeDescendant={activeDescendant}
-          onActive={onActive}
-          onClose={onClose}
-          onSearchRef={onSearchRef}
-        />
+      <SearchContentHeader
+        activeDescendant={activeDescendant}
+        onActive={onActive}
+        onClose={onClose}
+        onSearchRef={onSearchRef}
+      />
 
-        <SearchContentBody
-          ref={bodyRef}
-          onActive={onActive}
-          onClose={onClose}
-          onSearchRef={onSearchRef}
-        />
-      </Modal.Content>
+      <SearchContentBody
+        ref={bodyRef}
+        onActive={onActive}
+        onClose={onClose}
+        onSearchRef={onSearchRef}
+      />
     </DescendantsContext>
   )
 }
@@ -272,7 +207,7 @@ function SearchContentHeader({
   )
 
   return (
-    <Modal.Header pt="sm" px="sm">
+    <Box pt="sm" px="sm">
       <InputGroup.Root>
         <InputGroup.Element>
           <SearchIcon fontSize="xl" />
@@ -289,7 +224,7 @@ function SearchContentHeader({
           onKeyDown={onKeyDown}
         />
       </InputGroup.Root>
-    </Modal.Header>
+    </Box>
   )
 }
 
@@ -305,7 +240,7 @@ const SEARCH_KEYS = [
 const DEFAULT_LOCALE_CONTENTS = getGuides(CONSTANTS.I18N.DEFAULT_LOCALE)
 const PER_PAGE = 50
 
-interface SearchContentBodyProps extends Modal.BodyProps {
+interface SearchContentBodyProps extends HTMLProps {
   onActive: (
     descendant?: Descendant<HTMLAnchorElement, { href: string }>,
   ) => void
@@ -376,43 +311,42 @@ function SearchContentBody({
   }, [descendants, onActive, value])
 
   return (
-    <Modal.Body asChild {...rest}>
-      <InfiniteScrollArea
-        gap="sm"
-        loading={<Loading.Oval fontSize="2xl" />}
-        maxH={{ base: "44.5rem", sm: "full" }}
-        my="sm"
-        px="sm"
-        resetRef={resetRef}
-        rootMargin="0px 0px 600px 0px"
-        tabIndex={-1}
-        onLoad={({ finish, index }) => {
-          setCount((prev) => prev + PER_PAGE)
+    <InfiniteScrollArea
+      gap="sm"
+      loading={<Loading.Oval fontSize="2xl" />}
+      maxH="44.5rem"
+      my="sm"
+      px="sm"
+      resetRef={resetRef}
+      rootMargin="0px 0px 600px 0px"
+      tabIndex={-1}
+      onLoad={({ finish, index }) => {
+        setCount((prev) => prev + PER_PAGE)
 
-          if (index >= maxIndex) finish()
-        }}
-      >
-        {list.length ? (
-          list.map((hit, index) => (
-            <Item
-              key={`${hit.pathname}-${index}`}
-              href={hit.pathname}
-              description={hit.description}
-              icon={HashIcon}
-              title={hit.title}
-              onActive={onActive}
-              onClose={onClose}
-            />
-          ))
-        ) : (
-          <Center minH="16" w="full">
-            <Text color="fg.muted" fontSize="sm" lineClamp={1}>
-              {t("notFound", { value })}
-            </Text>
-          </Center>
-        )}
-      </InfiniteScrollArea>
-    </Modal.Body>
+        if (index >= maxIndex) finish()
+      }}
+      {...rest}
+    >
+      {list.length ? (
+        list.map((hit, index) => (
+          <Item
+            key={`${hit.pathname}-${index}`}
+            href={hit.pathname}
+            description={hit.description}
+            icon={HashIcon}
+            title={hit.title}
+            onActive={onActive}
+            onClose={onClose}
+          />
+        ))
+      ) : (
+        <Center minH="16" w="full">
+          <Text color="fg.muted" fontSize="sm" lineClamp={1}>
+            {t("notFound", { value })}
+          </Text>
+        </Center>
+      )}
+    </InfiniteScrollArea>
   )
 }
 

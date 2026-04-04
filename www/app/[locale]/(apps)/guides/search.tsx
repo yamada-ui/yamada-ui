@@ -6,7 +6,6 @@ import type { Guide } from "@/.velite"
 import {
   assignRef,
   Box,
-  Center,
   createDescendants,
   handlerAll,
   HashIcon,
@@ -356,11 +355,11 @@ function SearchContentBody({
           />
         ))
       ) : (
-        <Center minH="16" w="full">
+        <VStack gap="0" justifyContent="center" minH="16" w="full">
           <Text color="fg.muted" fontSize="sm" lineClamp={1}>
             {t("notFound", { value })}
           </Text>
-        </Center>
+        </VStack>
       )}
     </InfiniteScrollArea>
   )

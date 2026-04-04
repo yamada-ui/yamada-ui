@@ -1,4 +1,8 @@
-import type { ConfigWithExtends, Plugin } from "@eslint/config-helpers"
+import type {
+  ConfigWithExtends,
+  ExtendsElement,
+  Plugin,
+} from "@eslint/config-helpers"
 import { AST_NODE_TYPES } from "@typescript-eslint/utils"
 import react from "eslint-plugin-react"
 import { sharedFiles } from "./shared"
@@ -45,7 +49,7 @@ const customReactPlugin: Plugin = {
 
 export const reactConfig = {
   name: "react",
-  extends: [react.configs.flat.recommended as ConfigWithExtends],
+  extends: [react.configs.flat.recommended as ExtendsElement],
   files: sharedFiles,
   plugins: { "custom-react": customReactPlugin },
   rules: {

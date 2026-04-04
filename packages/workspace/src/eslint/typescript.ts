@@ -26,6 +26,7 @@ export const typescriptConfig = {
     "@typescript-eslint/no-unnecessary-condition": "warn",
     "@typescript-eslint/no-unnecessary-template-expression": "warn",
     "@typescript-eslint/no-unnecessary-type-arguments": "off",
+    "@typescript-eslint/no-unnecessary-type-assertion": "error",
     "@typescript-eslint/no-unnecessary-type-constraint": "warn",
     "@typescript-eslint/no-unsafe-function-type": "off",
     "@typescript-eslint/no-unused-vars": [

@@ -108,7 +108,7 @@ export const Indicator = withProvider(
   }) => {
     const numeric = isNumber(label)
 
-    disabled ??= numeric && !showZero && (label as number) <= 0
+    disabled ??= numeric && !showZero && label <= 0
 
     const computedLabel = useMemo(() => {
       if (numeric && label > overflowCount) {

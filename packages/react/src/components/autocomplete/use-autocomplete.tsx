@@ -319,7 +319,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
   const [inputValue, setInputValue] = useControllableState({
     defaultValue:
       defaultInputValue ??
-      getInputValue(isArray(value) ? undefined : valueMap[value as string]),
+      getInputValue(isString(value) ? valueMap[value] : undefined),
     value: inputValueProp,
     onChange: onInputChangeProp,
   })
@@ -567,7 +567,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
           if (allowCustomValue) {
             if (inputValue) setValue(inputValue as MaybeValue)
           } else {
-            const item = valueMap[value as string]
+            const item = isString(value) ? valueMap[value] : undefined
 
             setInputValue(getInputValue(item))
           }
@@ -590,7 +590,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
     if (isArray(valueProp)) return
 
     setInputValue(
-      getInputValue(valueProp ? valueMap[valueProp as string] : undefined),
+      getInputValue(isString(valueProp) ? valueMap[valueProp] : undefined),
     )
   }, [valueProp])
 

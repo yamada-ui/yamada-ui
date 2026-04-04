@@ -18,7 +18,7 @@
     "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@tanstack/router-plugin": "^1.167.9",
+    "@tanstack/router-plugin": "^1.167.12",
     "@vitejs/plugin-react": "catalog:",
     "@yamada-ui/workspace": "workspace:*",
     "vite": "catalog:",

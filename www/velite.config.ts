@@ -61,8 +61,8 @@ const docs = defineCollection({
     .object({
       style: s.string().optional(),
       md: s.custom().transform(async (_, { meta }) => {
-        const path = getPath(meta.path as string)
-        const { locale } = getSlug(meta.path as string)
+        const path = getPath(meta.path)
+        const { locale } = getSlug(meta.path)
         const exclude = CONSTANTS.LLMS.EXCLUDE.some((exclude) =>
           path.startsWith(`${exclude}/`),
         )
@@ -103,8 +103,8 @@ const docs = defineCollection({
       }),
     })
     .transform(async (data, { meta }) => {
-      const { locale, slug } = getSlug(meta.path as string)
-      const toc = await transformToc(data.toc, meta.path as string)
+      const { locale, slug } = getSlug(meta.path)
+      const toc = await transformToc(data.toc, meta.path)
 
       return {
         ...data,
@@ -112,7 +112,7 @@ const docs = defineCollection({
           ? `${CONSTANTS.SNS.GITHUB.PACKAGE_EDIT_URL}/${data.style}`
           : undefined,
         locale,
-        path: getPath(meta.path as string),
+        path: getPath(meta.path),
         pathname: getPathname("docs", ...slug),
         slug,
         source: data.source

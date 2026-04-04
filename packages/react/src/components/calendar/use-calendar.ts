@@ -873,7 +873,7 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
       isArray(selectedValue) &&
       isNumber(max) &&
       selectedValue.length >= max &&
-      !isIncludeDates(value, selectedValue as Date[])
+      !isIncludeDates(value, selectedValue)
     )
       return true
 

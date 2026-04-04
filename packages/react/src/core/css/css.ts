@@ -174,10 +174,10 @@ function valueToVar(system: System) {
         } else if (value.includes("colors.")) {
           return colorMix(value, { fallback: fallbackValue, system })
         } else if (isCSSToken(system)(value)) {
-          return system.cssMap![value]!.ref
+          return system.cssMap[value]!.ref
         } else if (fallbackValue) {
           fallbackValue = isCSSToken(system)(fallbackValue)
-            ? system.cssMap![fallbackValue]!.ref
+            ? system.cssMap[fallbackValue]!.ref
             : fallbackValue
 
           return getVar(value, fallbackValue)
@@ -193,7 +193,7 @@ function valueToVar(system: System) {
       } else if (result.includes("colors.")) {
         return colorMix(result, { system })
       } else if (isCSSToken(system)(result)) {
-        return system.cssMap![result]!.ref
+        return system.cssMap[result]!.ref
       } else {
         return result
       }

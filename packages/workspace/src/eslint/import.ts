@@ -1,4 +1,4 @@
-import type { ConfigWithExtendsArray } from "@eslint/config-helpers"
+import type { ConfigWithExtendsArray, Plugin } from "@eslint/config-helpers"
 import importAliasPlugin from "@limegrass/eslint-plugin-import-alias"
 import importPlugin from "eslint-plugin-import"
 import unusedImportsPlugin from "eslint-plugin-unused-imports"
@@ -32,7 +32,7 @@ export const importConfigArray: ConfigWithExtendsArray = [
   {
     name: "import/alias",
     files: sharedFiles,
-    plugins: { "import-alias": importAliasPlugin },
+    plugins: { "import-alias": importAliasPlugin as Plugin },
     rules: {
       "import-alias/import-alias": [
         "error",

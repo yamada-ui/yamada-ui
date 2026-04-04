@@ -43,18 +43,33 @@ export async function getWorkspaces(
 
   if (workspacePatterns.length === 0) return []
 
-  const actualWorkspaces: string[] = []
+  const positivePatterns = workspacePatterns.filter((p) => !p.startsWith("!"))
+  const negativePatterns = workspacePatterns
+    .filter((p) => p.startsWith("!"))
+    .map((p) => p.slice(1))
 
-  for (const pattern of workspacePatterns) {
+  const excludedPaths = new Set<string>()
+  for (const pattern of negativePatterns) {
     const normalizedPattern = pattern.replace(/\/$/, "")
-    const packageJsonPattern = `${normalizedPattern}/package.json`
-
-    const matches = await Array.fromAsync(glob(packageJsonPattern, { cwd }))
-
+    const matches = await Array.fromAsync(
+      glob(`${normalizedPattern}/package.json`, { cwd }),
+    )
     for (const match of matches) {
-      actualWorkspaces.push(path.dirname(match))
+      excludedPaths.add(path.dirname(match))
     }
   }
 
-  return actualWorkspaces
+  const actualWorkspaces = new Set<string>()
+  for (const pattern of positivePatterns) {
+    const normalizedPattern = pattern.replace(/\/$/, "")
+    const matches = await Array.fromAsync(
+      glob(`${normalizedPattern}/package.json`, { cwd }),
+    )
+    for (const match of matches) {
+      const dir = path.dirname(match)
+      if (!excludedPaths.has(dir)) actualWorkspaces.add(dir)
+    }
+  }
+
+  return [...actualWorkspaces]
 }

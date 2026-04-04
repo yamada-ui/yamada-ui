@@ -1,11 +1,11 @@
 import type { CSSObject } from "@emotion/react"
 import type { CompatData, CompatStatement } from "@mdn/browser-compat-data"
-import type { AnyString, ThemeToken, Transforms } from "@yamada-ui/react"
+import type { AnyString } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
+import type { ThemeToken, Transforms } from "../../../src"
 import type { StyleConfig } from "./styled-props"
 import type { TransformOptions } from "./transform-props"
 import bcd from "@mdn/browser-compat-data"
-import { conditionSelectors } from "@yamada-ui/react"
 import {
   getMemoizedObject as get,
   isUndefined,
@@ -26,6 +26,7 @@ import {
   isTypeAliasDeclaration,
 } from "typescript"
 import { features } from "web-features"
+import { conditionSelectors } from "../../../src"
 import { checkProps } from "./check"
 import { excludeProps } from "./exclude-props"
 import { overrideTypes } from "./override-types"
@@ -37,17 +38,10 @@ import { transformMap } from "./transform-props"
 
 const execFileAsync = promisify(execFile)
 
-export const STYLES_PATH = path.resolve(
-  process.cwd(),
-  "packages",
-  "react",
-  "src",
-  "core",
-  "css",
-  "styles.ts",
-)
+export const STYLES_PATH = path.resolve("src", "core", "css", "styles.ts")
 export const STYLES_PUBLISH_PATH = path.resolve(
-  process.cwd(),
+  "..",
+  "..",
   "www",
   "data",
   "styles.json",

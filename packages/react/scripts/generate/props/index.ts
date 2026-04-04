@@ -1,4 +1,3 @@
-import type { ComponentStyle } from "@yamada-ui/react"
 import type {
   JSDocTagInfo,
   SourceFile,
@@ -8,6 +7,7 @@ import type {
   TypeChecker,
   UnionType,
 } from "typescript"
+import type { ComponentStyle } from "../../../src"
 import {
   isArray,
   isEmptyObject,
@@ -51,24 +51,10 @@ interface Props {
   [key: string]: Prop
 }
 
-const CONFIG_PATH = path.join(
-  process.cwd(),
-  "packages",
-  "react",
-  "tsconfig.json",
-)
-const ENTRY_PATH = path.join(
-  process.cwd(),
-  "packages",
-  "react",
-  "src",
-  "components",
-)
-const DATA_PATH = path.join(process.cwd(), "www", "data", "props")
-const EXCLUDED_MODULES = [
-  "node_modules",
-  path.join(process.cwd(), "packages", "react", "src", "core"),
-]
+const CONFIG_PATH = path.resolve("tsconfig.json")
+const ENTRY_PATH = path.resolve("src", "components")
+const DATA_PATH = path.resolve("..", "..", "www", "data", "props")
+const EXCLUDED_MODULES = ["node_modules", path.resolve("src", "core")]
 
 const IGNORED_TYPES: string[] = ["^(?!.*Props$)", "^Use[A-Z]", "^FieldProps$"]
 const INCLUDED_PROPS: string[] = [

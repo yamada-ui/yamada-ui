@@ -5,16 +5,6 @@ pre-commit:
       group:
         parallel: true
         jobs:
-          - name: root
-            glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-            exclude:
-              - packages/**
-              - playgrounds/**
-              - www/**
-            run: |
-              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
-            stage_fixed: true
-
           - name: cli
             root: packages/cli/
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
@@ -38,6 +28,13 @@ pre-commit:
 
           - name: workspace
             root: packages/workspace/
+            glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+            run: |
+              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+            stage_fixed: true
+
+          - name: forge
+            root: packages/forge/
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
             run: |
               pnpm eslint {staged_files} --max-warnings=0 --fix --cache

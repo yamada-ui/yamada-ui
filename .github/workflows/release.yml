@@ -67,9 +67,7 @@ jobs:
 
       - name: Create @dev release
         if: github.ref_name == 'main' && steps.changesets.outputs.published != 'true'
-        run: |
-          git checkout main
-          pnpm release:dev
+        run: pnpm release:dev
         env:
           NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -84,31 +82,31 @@ jobs:
       - name: Generate registries
         if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
         run: |
-          pnpm gen:registries
+          pnpm react gen:registries
           git add ./www/public/registry
           git diff --staged --exit-code || git commit -m 'ci(changesets): update registries'
 
       - name: Generate @dev registries
         if: github.ref_name == 'main' && steps.changesets.outputs.published != 'true'
         run: |
-          pnpm gen:registries --tag dev
+          pnpm react gen:registries --tag dev
           git add ./www/public/registry
           git diff --staged --exit-code || git commit -m 'ci(changesets): update dev registries'
 
       - name: Generate @next registries
         if: github.ref_name != 'main'
         run: |
-          pnpm gen:registries --tag next
+          pnpm react gen:registries --tag next
           git add ./www/public/registry
           git diff --staged --exit-code || git commit -m 'ci(changesets): update next registries'
 
       - name: Update www
         if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
         run: |
-          pnpm gen:styles -p
+          pnpm react gen:styles -p
           git add ./www/data
           git diff --staged --exit-code || git commit -m 'ci(changesets): update styles'
-          pnpm gen:props
+          pnpm react gen:props
           git add ./www/data/props
           git diff --staged --exit-code || git commit -m 'ci(changesets): update props'
           pnpm www build:content
@@ -126,7 +124,7 @@ jobs:
       - name: Update issue templates
         if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
         run: |
-          pnpm issue:template
+          pnpm forge issue:template
           git add ./.github/ISSUE_TEMPLATE
           git diff --staged --exit-code || git commit -m 'ci(changesets): update issue templates'
 
@@ -166,6 +164,6 @@ jobs:
       - name: Notification release
         if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
         run: |
-          pnpm notification:release
+          pnpm react notification:release
         env:
           DISCORD_RELEASE_WEBHOOK_URL: ${{ secrets.DISCORD_RELEASE_WEBHOOK_URL }}

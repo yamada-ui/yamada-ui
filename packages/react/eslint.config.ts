@@ -16,7 +16,7 @@ import {
 
 const noConsoleConfig: ConfigWithExtends = {
   name: "no-console",
-  files: ["**/*.stories.tsx"],
+  files: ["**/*.stories.tsx", "scripts/**"],
   rules: {
     "no-console": "off",
   },

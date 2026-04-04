@@ -1,5 +1,5 @@
-import type { ConditionSelector, Transforms } from "@yamada-ui/react"
 import type { Properties } from "."
+import type { ConditionSelector, Transforms } from "../../../src"
 import { tokens } from "./tokens"
 
 type TransformProperties = ConditionSelector | Properties

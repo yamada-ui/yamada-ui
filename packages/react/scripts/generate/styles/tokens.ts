@@ -1,5 +1,5 @@
-import type { ThemeToken } from "@yamada-ui/react"
 import type { CSSProperties, StyledProperties } from "."
+import type { ThemeToken } from "../../../src"
 
 type Tokens = { [key in ThemeToken]?: (CSSProperties | StyledProperties)[] }
 

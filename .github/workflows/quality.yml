@@ -78,15 +78,6 @@ jobs:
               - packages/**/(package.json|tsconfig.json)
               - packages/**/*.{ts,tsx,mts}
               - .github/workflows/quality.yml
-            scripts:
-              - turbo.json
-              - packages/workspace/src/eslint/**
-              - packages/workspace/package.json
-              - scripts/**
-              - package.json
-              - tsconfig.json
-              - eslint.config.ts
-              - .github/workflows/quality.yml
             www:
               - turbo.json
               - packages/workspace/src/eslint/**
@@ -115,10 +106,6 @@ jobs:
         run: pnpm lint
 
       - name: Run lint
-        if: steps.changed-files.outputs.scripts_any_changed == 'true'
-        run: pnpm turbo run lint:scripts
-
-      - name: Run lint
         if: steps.changed-files.outputs.www_any_changed == 'true'
         run: pnpm turbo run lint --filter www
 
@@ -138,14 +125,6 @@ jobs:
               - turbo.json
               - packages/**/(package.json|tsconfig.json)
               - packages/**/*.{ts,tsx,mts}
-              - .github/workflows/quality.yml
-            scripts:
-              - turbo.json
-              - packages/workspace/src/typescript/**
-              - packages/workspace/package.json
-              - scripts/**
-              - package.json
-              - tsconfig.json
               - .github/workflows/quality.yml
             www:
               - turbo.json
@@ -175,10 +154,6 @@ jobs:
         run: pnpm typecheck
 
       - name: Run typecheck
-        if: steps.changed-files.outputs.scripts_any_changed == 'true'
-        run: pnpm turbo run typecheck:scripts
-
-      - name: Run typecheck
         if: steps.changed-files.outputs.www_any_changed == 'true'
         run: pnpm turbo run typecheck --filter www
 
@@ -197,14 +172,6 @@ jobs:
             packages:
               - turbo.json
               - packages/**
-              - .prettierignore
-              - .prettierrc.js
-              - .github/workflows/quality.yml
-            scripts:
-              - turbo.json
-              - packages/workspace/src/prettier/**
-              - packages/workspace/package.json
-              - scripts/**
               - .prettierignore
               - .prettierrc.js
               - .github/workflows/quality.yml
@@ -233,10 +200,6 @@ jobs:
       - name: Run format
         if: steps.changed-files.outputs.packages_any_changed == 'true'
         run: pnpm format
-
-      - name: Run format
-        if: steps.changed-files.outputs.scripts_any_changed == 'true'
-        run: pnpm turbo run format:scripts
 
       - name: Run format
         if: steps.changed-files.outputs.www_any_changed == 'true'

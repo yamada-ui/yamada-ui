@@ -15,12 +15,9 @@ const resolvedTraverse = interopDefault(traverse)
 
 const ENTRY_PATH = path.join(
   process.cwd(),
-  "packages/react/node_modules/lucide-react/dist/esm/icons/index.js",
+  "node_modules/lucide-react/dist/esm/icons/index.js",
 )
-const DIST_PATH = path.join(
-  process.cwd(),
-  "packages/react/src/components/icon/icons",
-)
+const DIST_PATH = path.join(process.cwd(), "src/components/icon/icons")
 
 async function clearIcons() {
   const fileNames = await readdir(DIST_PATH)
@@ -114,8 +111,8 @@ async function main() {
 
   await execFileAsync("npx", [
     "eslint",
-    "packages/react/src/components/icon/icons/index.ts",
-    "packages/react/src/components/icon/icons/index.types.ts",
+    "src/components/icon/icons/index.ts",
+    "src/components/icon/icons/index.types.ts",
     "--fix",
   ])
 

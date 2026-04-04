@@ -20,23 +20,35 @@ export async function getWorkspaces(
         : null
 
     if (pnpmWorkspacePath) {
-      const content = await readFile(pnpmWorkspacePath, "utf-8")
-      const parsed = YAML.parse(content)
-      if (Array.isArray(parsed?.packages)) {
-        workspacePatterns = parsed.packages
+      try {
+        const content = await readFile(pnpmWorkspacePath, "utf-8")
+        const parsed = YAML.parse(content)
+        if (Array.isArray(parsed?.packages)) {
+          workspacePatterns = parsed.packages
+        }
+      } catch (e) {
+        throw new Error(
+          `Failed to parse ${pnpmWorkspacePath}: ${e instanceof Error ? e.message : String(e)}`,
+        )
       }
     }
   } else {
     const packageJsonPath = path.join(cwd, "package.json")
     if (existsSync(packageJsonPath)) {
-      const pkg = JSON.parse(await readFile(packageJsonPath, "utf-8"))
-      if (Array.isArray(pkg.workspaces)) {
-        workspacePatterns = pkg.workspaces
-      } else if (
-        pkg.workspaces?.packages &&
-        Array.isArray(pkg.workspaces.packages)
-      ) {
-        workspacePatterns = pkg.workspaces.packages
+      try {
+        const pkg = JSON.parse(await readFile(packageJsonPath, "utf-8"))
+        if (Array.isArray(pkg.workspaces)) {
+          workspacePatterns = pkg.workspaces
+        } else if (
+          pkg.workspaces?.packages &&
+          Array.isArray(pkg.workspaces.packages)
+        ) {
+          workspacePatterns = pkg.workspaces.packages
+        }
+      } catch (e) {
+        throw new Error(
+          `Failed to parse ${packageJsonPath}: ${e instanceof Error ? e.message : String(e)}`,
+        )
       }
     }
   }

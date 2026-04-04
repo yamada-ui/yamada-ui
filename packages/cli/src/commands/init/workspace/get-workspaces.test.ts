@@ -132,6 +132,13 @@ describe("getWorkspaces", () => {
       expect(result).not.toContain(path.join("packages", "legacy-old"))
     })
 
+    test("should throw with file path when YAML is malformed", async () => {
+      const yamlPath = path.join(tempDir, "pnpm-workspace.yaml")
+      writeFileSync(yamlPath, "packages:\n  - [\n", "utf-8")
+
+      await expect(getWorkspaces(tempDir, "pnpm")).rejects.toThrow(yamlPath)
+    })
+
     test("should exclude nested packages matching negation pattern", async () => {
       writeFileSync(
         path.join(tempDir, "pnpm-workspace.yaml"),
@@ -195,6 +202,15 @@ describe("getWorkspaces", () => {
 
       const result = await getWorkspaces(tempDir, "npm")
       expect(result).toStrictEqual([])
+    })
+
+    test("should throw with file path when JSON is malformed", async () => {
+      const packageJsonPath = path.join(tempDir, "package.json")
+      writeFileSync(packageJsonPath, '{ "workspaces": [', "utf-8")
+
+      await expect(getWorkspaces(tempDir, "npm")).rejects.toThrow(
+        packageJsonPath,
+      )
     })
   })
 

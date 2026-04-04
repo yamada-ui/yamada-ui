@@ -152,7 +152,17 @@ jobs:
               if git merge origin/main --no-edit; then
                 git push origin "$BRANCH"
               else
-                git merge --abort
+                CONFLICTED_FILES=$(git diff --name-only --diff-filter=U)
+
+                if [ "$CONFLICTED_FILES" = "pnpm-lock.yaml" ]; then
+                  git checkout HEAD -- pnpm-lock.yaml
+                  pnpm install --no-frozen-lockfile
+                  git add pnpm-lock.yaml
+                  git commit --no-edit
+                  git push origin "$BRANCH"
+                else
+                  git merge --abort
+                fi
               fi
             fi
           done

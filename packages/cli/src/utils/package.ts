@@ -216,7 +216,11 @@ export async function addWorkspace(
     case "pnpm": {
       const yamlPath = path.resolve(cwd, "pnpm-workspace.yaml")
       const ymlPath = path.resolve(cwd, "pnpm-workspace.yml")
-      const targetPath = existsSync(ymlPath) ? ymlPath : yamlPath
+      const targetPath = existsSync(yamlPath)
+        ? yamlPath
+        : existsSync(ymlPath)
+          ? ymlPath
+          : yamlPath
 
       if (existsSync(targetPath)) {
         const content = await readFile(targetPath, "utf8")

@@ -1,10 +1,32 @@
 import type { Metadata } from "next"
-import { Badge, Heading, HStack, Text, VStack } from "@yamada-ui/react"
+import type { ElementType } from "react"
+import {
+  Badge,
+  BlocksIcon,
+  BookOpenIcon,
+  Center,
+  Heading,
+  HStack,
+  Icon,
+  PaintbrushIcon,
+  PaletteIcon,
+  RocketIcon,
+  Text,
+  VStack,
+} from "@yamada-ui/react"
 import { getTranslations } from "next-intl/server"
 import { getGuideCollections } from "@/data/guide"
 import { generateOg } from "@/utils/next"
 import { Card, CardGroup } from "../../../../components/mdx/card"
 import { GuideSearch } from "./search"
+
+export const COLLECTION_ICONS: { [key: string]: ElementType } = {
+  components: BlocksIcon,
+  "get-started": RocketIcon,
+  overview: BookOpenIcon,
+  styling: PaintbrushIcon,
+  theming: PaletteIcon,
+}
 
 export async function generateMetadata({
   params,
@@ -25,7 +47,7 @@ export default async function Page({ params }: PageProps<"/[locale]/guides">) {
   const t = await getTranslations({ locale, namespace: "guides" })
 
   return (
-    <VStack mx="auto" py="lg" w="full">
+    <VStack gap="2xl" mx="auto" py="lg" w="full">
       <VStack as="header" gap="sm" mb="md">
         <Heading as="h1" size="5xl">
           {t("title")}
@@ -38,20 +60,35 @@ export default async function Page({ params }: PageProps<"/[locale]/guides">) {
       <GuideSearch />
 
       {collections.map(({ collection, description, guides, title }) => (
-        <VStack key={collection} as="section" gap="sm" w="full">
-          <VStack gap="xs">
-            <HStack>
-              <Heading as="h2" size="lg">
-                {title}
-              </Heading>
-              <Badge colorScheme="gray" variant="subtle">
-                {t("guides", { count: guides.length })}
-              </Badge>
-            </HStack>
-            <Text color="fg.muted" fontSize="sm">
-              {description}
-            </Text>
-          </VStack>
+        <VStack key={collection} as="section" gap="xs" w="full">
+          <HStack alignItems="center" gap="sm">
+            <Center
+              bg={{
+                base: "bg.contrast",
+              }}
+              boxSize="12"
+              rounded="sm"
+            >
+              <Icon
+                as={COLLECTION_ICONS[collection] || BlocksIcon}
+                fontSize="2xl"
+                textColor="fg.contrast"
+              />
+            </Center>
+            <VStack gap="xs">
+              <HStack>
+                <Heading as="h2" size="lg">
+                  {title}
+                </Heading>
+                <Badge colorScheme="gray" variant="subtle">
+                  {t("guides", { count: guides.length })}
+                </Badge>
+              </HStack>
+              <Text color="fg.muted" fontSize="sm">
+                {description}
+              </Text>
+            </VStack>
+          </HStack>
           <CardGroup>
             {guides.map((guide) => (
               <Card

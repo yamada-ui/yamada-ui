@@ -1,14 +1,7 @@
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import path from "node:path"
-import { afterEach, beforeEach, describe, expect, test, vi } from "vitest"
-
-vi.mock("../../../utils", async (importOriginal) => {
-  const actual: any = await importOriginal()
-  return { ...actual, getPackageManager: vi.fn().mockReturnValue("pnpm") }
-})
-
-import { getPackageManager } from "../../../utils"
+import { afterEach, beforeEach, describe, expect, test } from "vitest"
 import { getWorkspaces } from "./get-workspaces"
 
 describe("getWorkspaces", () => {
@@ -16,7 +9,6 @@ describe("getWorkspaces", () => {
 
   beforeEach(() => {
     tempDir = mkdtempSync(path.join(tmpdir(), "yamada-cli-ws-"))
-    vi.mocked(getPackageManager).mockReturnValue("pnpm")
   })
 
   afterEach(() => {
@@ -51,7 +43,7 @@ describe("getWorkspaces", () => {
     )
     createWorkspace("app")
 
-    const result = await getWorkspaces(tempDir)
+    const result = await getWorkspaces(tempDir, "pnpm")
     expect(result).toContain(path.join("workspaces", "app"))
   })
 
@@ -63,7 +55,7 @@ describe("getWorkspaces", () => {
     )
     createWorkspace("app")
 
-    const result = await getWorkspaces(tempDir)
+    const result = await getWorkspaces(tempDir, "pnpm")
     expect(result).toContain(path.join("workspaces", "app"))
   })
 
@@ -75,7 +67,7 @@ describe("getWorkspaces", () => {
     )
     createWorkspace("app")
 
-    const result = await getWorkspaces(tempDir)
+    const result = await getWorkspaces(tempDir, "pnpm")
     expect(result).toContain(path.join("workspaces", "app"))
   })
 
@@ -92,7 +84,7 @@ describe("getWorkspaces", () => {
     )
     createWorkspace("app")
 
-    const result = await getWorkspaces(tempDir)
+    const result = await getWorkspaces(tempDir, "pnpm")
     expect(result).toContain(path.join("workspaces", "app"))
   })
 
@@ -103,12 +95,11 @@ describe("getWorkspaces", () => {
       "utf-8",
     )
 
-    const result = await getWorkspaces(tempDir)
+    const result = await getWorkspaces(tempDir, "pnpm")
     expect(result).toStrictEqual([])
   })
 
   test("should read workspaces from package.json for npm", async () => {
-    vi.mocked(getPackageManager).mockReturnValue("npm")
     writeFileSync(
       path.join(tempDir, "package.json"),
       JSON.stringify({ workspaces: ["workspaces/*"] }),
@@ -116,12 +107,11 @@ describe("getWorkspaces", () => {
     )
     createWorkspace("app")
 
-    const result = await getWorkspaces(tempDir)
+    const result = await getWorkspaces(tempDir, "npm")
     expect(result).toContain(path.join("workspaces", "app"))
   })
 
   test("should read workspaces from package.json for bun", async () => {
-    vi.mocked(getPackageManager).mockReturnValue("bun")
     writeFileSync(
       path.join(tempDir, "package.json"),
       JSON.stringify({ workspaces: ["workspaces/*"] }),
@@ -129,19 +119,18 @@ describe("getWorkspaces", () => {
     )
     createWorkspace("app")
 
-    const result = await getWorkspaces(tempDir)
+    const result = await getWorkspaces(tempDir, "bun")
     expect(result).toContain(path.join("workspaces", "app"))
   })
 
   test("should ignore pnpm-workspace.yaml for bun", async () => {
-    vi.mocked(getPackageManager).mockReturnValue("bun")
     writeFileSync(
       path.join(tempDir, "pnpm-workspace.yaml"),
       "packages:\n  - workspaces/*\n",
       "utf-8",
     )
 
-    const result = await getWorkspaces(tempDir)
+    const result = await getWorkspaces(tempDir, "bun")
     expect(result).toStrictEqual([])
   })
 
@@ -154,7 +143,7 @@ describe("getWorkspaces", () => {
     createPackage("apps/web", "web")
     createPackage("apps/mobile/app", "mobile-app")
 
-    const result = await getWorkspaces(tempDir)
+    const result = await getWorkspaces(tempDir, "pnpm")
     expect(result).toContain(path.join("apps", "web"))
     expect(result).toContain(path.join("apps", "mobile", "app"))
   })
@@ -169,7 +158,7 @@ describe("getWorkspaces", () => {
     createPackage("packages/ui-input", "ui-input")
     createPackage("packages/core", "core")
 
-    const result = await getWorkspaces(tempDir)
+    const result = await getWorkspaces(tempDir, "pnpm")
     expect(result).toContain(path.join("packages", "ui-button"))
     expect(result).toContain(path.join("packages", "ui-input"))
     expect(result).not.toContain(path.join("packages", "core"))
@@ -184,7 +173,7 @@ describe("getWorkspaces", () => {
     createPackage("packages/alpha", "alpha")
     createPackage("packages/beta", "beta")
 
-    const result = await getWorkspaces(tempDir)
+    const result = await getWorkspaces(tempDir, "pnpm")
     expect(result).toContain(path.join("packages", "alpha"))
     expect(result).toContain(path.join("packages", "beta"))
   })

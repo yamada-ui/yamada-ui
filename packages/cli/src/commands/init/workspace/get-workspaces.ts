@@ -1,12 +1,14 @@
+import type { PackageManager } from "../../../utils"
 import { existsSync } from "node:fs"
 import { glob, readFile } from "node:fs/promises"
 import path from "node:path"
 import YAML from "yamljs"
-import { getPackageManager } from "../../../utils"
 
-export async function getWorkspaces(cwd: string): Promise<string[]> {
+export async function getWorkspaces(
+  cwd: string,
+  packageManager: PackageManager,
+): Promise<string[]> {
   let workspacePatterns: string[] = []
-  const packageManager = getPackageManager()
 
   if (packageManager === "pnpm") {
     const yamlPath = path.join(cwd, "pnpm-workspace.yaml")

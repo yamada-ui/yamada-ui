@@ -6,8 +6,8 @@ vi.mock("../../../utils", async (importOriginal) => {
 
   return {
     ...actual,
-    execFileAsync: vi.fn(),
     getPackageManager: vi.fn().mockReturnValue("pnpm"),
+    installDependencies: vi.fn(),
     packageAddArgs: vi.fn().mockReturnValue(["add"]),
   }
 })
@@ -17,16 +17,12 @@ vi.mock("./get-workspaces", () => ({
 
 import prompts from "prompts"
 import {
-  execFileAsync,
   getPackageManager,
+  installDependencies,
   packageAddArgs,
 } from "../../../utils"
 import { getWorkspaces } from "./get-workspaces"
-import {
-  addWorkspacePackage,
-  getWorkspaceInstallCommand,
-  installPackageInWorkspaces,
-} from "./install"
+import { addWorkspacePackage } from "./install"
 
 describe("workspace-install", () => {
   const spinner = {
@@ -40,45 +36,6 @@ describe("workspace-install", () => {
     vi.clearAllMocks()
     vi.mocked(getPackageManager).mockReturnValue("pnpm")
     vi.mocked(packageAddArgs).mockReturnValue(["add"])
-  })
-
-  test("should build workspace install command from package manager args", () => {
-    const result = getWorkspaceInstallCommand("@scope/ui")
-
-    expect(result).toStrictEqual({
-      args: ["add"],
-      command: 'pnpm add "@scope/ui@workspace:*"',
-      packageManager: "pnpm",
-    })
-  })
-
-  test("should collect succeeded and failed workspaces when installing", async () => {
-    vi.mocked(execFileAsync)
-      .mockResolvedValueOnce({ stderr: "", stdout: "" } as any)
-      .mockRejectedValueOnce(new Error("boom"))
-
-    const result = await installPackageInWorkspaces({
-      cwd: "/repo",
-      packageManager: "pnpm",
-      packageName: "@scope/ui",
-      workspaces: ["apps/web", "apps/docs"],
-    })
-
-    expect(execFileAsync).toHaveBeenNthCalledWith(
-      1,
-      "pnpm",
-      ["add", "@scope/ui@workspace:*"],
-      { cwd: "/repo/apps/web" },
-    )
-    expect(execFileAsync).toHaveBeenNthCalledWith(
-      2,
-      "pnpm",
-      ["add", "@scope/ui@workspace:*"],
-      { cwd: "/repo/apps/docs" },
-    )
-    expect(result.succeededWorkspaces).toStrictEqual(["apps/web"])
-    expect(result.failedWorkspaces).toHaveLength(1)
-    expect(result.failedWorkspaces[0]?.workspace).toBe("apps/docs")
   })
 
   test("should print manual command when no workspaces are found", async () => {
@@ -128,10 +85,7 @@ describe("workspace-install", () => {
   test("should install selected workspaces from prompt", async () => {
     vi.mocked(getWorkspaces).mockResolvedValue(["apps/web", "apps/docs"])
     vi.mocked(prompts).mockResolvedValue({ selectedWorkspaces: ["apps/docs"] })
-    vi.mocked(execFileAsync).mockResolvedValue({
-      stderr: "",
-      stdout: "",
-    } as any)
+    vi.mocked(installDependencies).mockResolvedValue(undefined)
 
     await addWorkspacePackage({
       cwd: "/repo",
@@ -143,21 +97,20 @@ describe("workspace-install", () => {
     expect(spinner.start).toHaveBeenCalledWith(
       "Installing UI package in selected workspaces",
     )
-    expect(spinner.succeed).toHaveBeenCalledWith("Installation complete")
-    expect(execFileAsync).toHaveBeenCalledWith(
-      "pnpm",
-      ["add", "@scope/ui@workspace:*"],
-      { cwd: "/repo/apps/docs" },
+    expect(installDependencies).toHaveBeenCalledWith(
+      ["@scope/ui@workspace:*"],
+      { cwd: "/repo/apps/docs", exact: false },
     )
+    expect(spinner.succeed).toHaveBeenCalledWith("Installation complete")
     expect(console.log).toHaveBeenCalledWith(
       '\nAdded "@scope/ui@workspace:*" to the following workspaces:\n',
     )
   })
 
-  test("should report failed workspaces through the shared console logger", async () => {
+  test("should report failed workspaces when installDependencies throws", async () => {
     vi.mocked(getWorkspaces).mockResolvedValue(["apps/web"])
     vi.mocked(prompts).mockResolvedValue({ selectedWorkspaces: ["apps/web"] })
-    vi.mocked(execFileAsync).mockRejectedValue(new Error("boom"))
+    vi.mocked(installDependencies).mockRejectedValue(new Error("boom"))
 
     await addWorkspacePackage({
       cwd: "/repo",

@@ -56,7 +56,7 @@ export async function addPackage({
     // where to install rather than managing that logic here.
     console.log(`\nRun the following commands in your applications:\n`)
     for (const workspace of workspaces) {
-      console.log(c.cyan(`cd ${workspace} && ${command}`))
+      console.log(c.cyan(`cd "${workspace}" && ${command}`))
     }
     console.log("")
     return

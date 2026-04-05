@@ -74,12 +74,12 @@ describe("workspace > add-package", () => {
     )
     expect(console.log).toHaveBeenCalledWith(
       expect.stringContaining(
-        'cd apps/web && pnpm add "@scope/ui@workspace:*"',
+        'cd "apps/web" && pnpm add "@scope/ui@workspace:*"',
       ),
     )
     expect(console.log).toHaveBeenCalledWith(
       expect.stringContaining(
-        'cd apps/docs && pnpm add "@scope/ui@workspace:*"',
+        'cd "apps/docs" && pnpm add "@scope/ui@workspace:*"',
       ),
     )
   })

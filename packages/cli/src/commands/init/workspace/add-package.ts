@@ -51,6 +51,9 @@ export async function addPackage({
   }
 
   if (yes) {
+    // With --yes, print commands instead of installing automatically.
+    // This CLI is designed to be run by LLMs, so we let the LLM decide
+    // where to install rather than managing that logic here.
     console.log(`\nRun the following commands in your applications:\n`)
     for (const workspace of workspaces) {
       console.log(c.cyan(`cd ${workspace} && ${command}`))

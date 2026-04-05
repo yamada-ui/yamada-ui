@@ -57,7 +57,7 @@ export async function addPackage({
       value: workspace,
     })),
     instructions: false,
-    message: `Which workspaces would you like to add "${packageName}" to? (Press <space> to toggle)`,
+    message: `Which workspaces would you like to add "${packageName}" to?`,
   })
 
   if (selectedWorkspaces.length === 0) {

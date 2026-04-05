@@ -21,7 +21,6 @@ import {
   Text,
   useDisclosure,
   useUpdateEffect,
-  useWindowEvent,
   VStack,
 } from "@yamada-ui/react"
 import { matchSorter } from "match-sorter"
@@ -61,19 +60,6 @@ export function GuideSearch() {
   useUpdateEffect(() => {
     if (open) onClose()
   }, [pathname])
-
-  useWindowEvent("keydown", (ev) => {
-    if (ev.key.toLowerCase() !== "k") return
-    if (!ev.metaKey && !ev.ctrlKey) return
-
-    ev.preventDefault()
-
-    if (open) {
-      onClose()
-    } else {
-      onOpen()
-    }
-  })
 
   const onActive = useCallback(
     (descendant?: Descendant<HTMLAnchorElement, { href: string }>) => {

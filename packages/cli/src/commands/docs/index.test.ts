@@ -59,7 +59,7 @@ describe("docs", () => {
     await docs.parseAsync(["/docs/components/button"], { from: "user" })
 
     expect(mockFetch).toHaveBeenCalledWith(
-      "https://yamada-ui.com/docs/components/button.md",
+      "https://yamada-ui.com/en/docs/components/button.md",
     )
     expect(console.log).toHaveBeenCalledWith(expect.stringContaining("Button"))
   })
@@ -98,7 +98,7 @@ describe("docs", () => {
     })
 
     expect(mockFetch).toHaveBeenCalledWith(
-      "https://yamada-ui.com/docs/components/button.md",
+      "https://yamada-ui.com/en/docs/components/button.md",
     )
   })
 

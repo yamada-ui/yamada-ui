@@ -100,7 +100,7 @@ export const docs = new Command("docs")
       const markdown = await res.text()
       const output = trimByHash(markdown, hash)
 
-      spinner.stop()
+      spinner.succeed()
       console.log(output)
     } catch (e) {
       if (e instanceof Error) {

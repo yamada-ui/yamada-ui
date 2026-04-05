@@ -7,7 +7,11 @@ export const REGISTRY_FILE_NAME = "registry.json"
 export const REGISTRY_VERSION = "v2"
 export const REGISTRY_URL = "https://yamada-ui.com/registry"
 export const SECTION_NAMES = ["components", "hooks", "providers"] as const
-export const SUPPORTED_LANGS = ["ja"] as const
+export const BASE_URL = "https://yamada-ui.com"
+export const DEFAULT_LANG = "en"
+export const LLMS_PATH = "/llms.txt"
+export const FETCH_SPINNER_MSG = "Fetching docs"
+export const SUPPORTED_LANGS = ["ja", "en"] as const
 export const DEFAULT_PACKAGE_NAME = {
   ui: "@workspaces/ui",
   theme: "@workspaces/theme",

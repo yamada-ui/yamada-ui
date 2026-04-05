@@ -1,9 +1,13 @@
 import { Command } from "commander"
 import fetch from "node-fetch"
 import ora from "ora"
-import { SUPPORTED_LANGS } from "../../constant"
-
-const BASE_URL = "https://yamada-ui.com"
+import {
+  BASE_URL,
+  DEFAULT_LANG,
+  FETCH_SPINNER_MSG,
+  LLMS_PATH,
+  SUPPORTED_LANGS,
+} from "../../constant"
 
 function readStdin(): Promise<string> {
   return new Promise((resolve) => {
@@ -63,7 +67,7 @@ function trimByHash(markdown: string, hash?: string) {
 
 export const docs = new Command("docs")
   .argument("[path]")
-  .option("--lang <lang>", "language", "en")
+  .option("--lang <lang>", "language", DEFAULT_LANG)
   .description("fetch yamada ui docs markdown.")
   .action(async (input, options) => {
     const spinner = ora()
@@ -80,7 +84,7 @@ export const docs = new Command("docs")
       let url: string
 
       if (!path) {
-        url = `${BASE_URL}/llms.txt`
+        url = `${BASE_URL}${LLMS_PATH}`
       } else {
         const prefix = SUPPORTED_LANGS.includes(options.lang)
           ? `/${options.lang}`
@@ -88,7 +92,7 @@ export const docs = new Command("docs")
         url = `${BASE_URL}${prefix}${path}.md`
       }
 
-      spinner.start("Fetching docs")
+      spinner.start(FETCH_SPINNER_MSG)
 
       const res = await fetch(url)
 

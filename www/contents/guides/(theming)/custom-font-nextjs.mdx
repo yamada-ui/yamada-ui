@@ -1,0 +1,32 @@
+---
+title: "Adding Custom Fonts in Next.js"
+description: "How to configure custom fonts with Yamada UI in a Next.js project"
+publishedAt: "2026-03-14"
+collection: "theming"
+---
+
+## Loading Fonts
+
+In Next.js, you can import fonts from `next/font/google`.
+
+```tsx title="layout.tsx"
+import { Noto_Sans_JP } from "next/font/google"
+
+const notoSansJP = Noto_Sans_JP({
+  variable: "--font-noto-sans-jp",
+  subsets: ["latin"],
+})
+```
+
+## Configuring the Theme
+
+```tsx title="theme/index.ts"
+import { extendTheme } from "@yamada-ui/react"
+
+const theme = extendTheme({
+  fonts: {
+    heading: "var(--font-noto-sans-jp)",
+    body: "var(--font-noto-sans-jp)",
+  },
+})
+```

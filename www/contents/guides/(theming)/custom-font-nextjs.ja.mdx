@@ -1,0 +1,32 @@
+---
+title: "カスタムフォントの追加方法"
+description: "Next.jsプロジェクトでYamada UIにカスタムフォントを設定する方法"
+publishedAt: "2026-03-14"
+collection: "theming"
+---
+
+## フォントの読み込み
+
+Next.js では `next/font/google` からフォントをインポートします。
+
+```tsx title="layout.tsx"
+import { Noto_Sans_JP } from "next/font/google"
+
+const notoSansJP = Noto_Sans_JP({
+  variable: "--font-noto-sans-jp",
+  subsets: ["latin"],
+})
+```
+
+## テーマへの設定
+
+```tsx title="theme/index.ts"
+import { extendTheme } from "@yamada-ui/react"
+
+const theme = extendTheme({
+  fonts: {
+    heading: "var(--font-noto-sans-jp)",
+    body: "var(--font-noto-sans-jp)",
+  },
+})
+```

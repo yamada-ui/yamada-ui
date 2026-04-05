@@ -61,6 +61,8 @@ export type StyleValue<Y, M = unknown> =
   | ColorModeValue<Y, M>
   | ResponsiveValue<Y, M>
 
+export type ExtractStyleValue<Y> = Y extends StyleValue<infer M> ? M : never
+
 export type StyleImportantValue<Y extends string> =
   | `${Y}!`
   | `${Y} !important`

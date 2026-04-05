@@ -1315,27 +1315,23 @@ When `aria-label` is set, it will be read aloud by screen readers.
 
 ### ARIA Roles and Attributes
 
-| Component           | Role and Attributes     | Usage                                                                     |
-| ------------------- | ----------------------- | ------------------------------------------------------------------------- |
-| `Tree.Root`         | `role="tree"`           | Indicates that the element is a tree.                                     |
-|                     | `aria-activedescendant` | Sets the `id` of the currently focused item.                              |
-|                     | `aria-multiselectable`  | Set to `"true"` when `multiple={true}` or `checkable={true}`.             |
-| `Tree.Item`         | `role="treeitem"`       | Indicates that the element is a tree item.                                |
-|                     | `id`                    | Used to associate with `Tree.Root`.                                       |
-|                     | `aria-expanded`         | Set to `"true"` when the item is expanded, `"false"` when collapsed.      |
-|                     | `aria-selected`         | Set to `"true"` when the item is selected.                                |
-|                     | `aria-disabled`         | Set to `"true"` when the item is disabled.                                |
-|                     | `aria-level`            | Sets the hierarchy level of the item.                                     |
-|                     | `aria-labelledby`       | Sets the `id` of the related `Tree.Item > span`.                          |
-| `Tree.Item > div`   | `aria-controls`         | Sets the `id` of the related `Tree.Item > ul`.                            |
-| `Tree.Item > ul`    | `role="group"`          | Indicates that the element is a group.                                    |
-|                     | `id`                    | Used to associate with `Tree.Item > div`.                                 |
-|                     | `aria-labelledby`       | Sets the `id` of the related `Tree.Item > span`.                          |
-|                     | `aria-busy`             | Set to `"true"` when the item's children are loading.                     |
-| `Tree.Item > input` | `id`                    | Used to associate with the parent `Tree.Item > input`.                    |
-|                     | `aria-controls`         | Sets the `id` of related child `Tree.Item > input` elements.              |
-|                     | `aria-labelledby`       | Sets the `id` of the related `Tree.Item > span`.                          |
-| `Tree.Item > span`  | `id`                    | Used to associate `Tree.Item`, `Tree.Item > ul`, and `Tree.Item > input`. |
+| Component                 | Role and Attributes    | Usage                                                                           |
+| ------------------------- | ---------------------- | ------------------------------------------------------------------------------- |
+| `Tree.Root`               | `role="tree"`          | Indicates that the element is a tree.                                           |
+|                           | `aria-multiselectable` | Set to `"true"` when `multiple={true}` or `checkable={true}`.                   |
+| `Tree.Item`               | `role="treeitem"`      | Indicates that the element is a tree item.                                      |
+|                           | `aria-expanded`        | Set to `"true"` when the item is expanded, `"false"` when collapsed.            |
+|                           | `aria-selected`        | Set to `"true"` when the item is selected.                                      |
+|                           | `aria-disabled`        | Set to `"true"` when the item is disabled.                                      |
+|                           | `aria-level`           | Sets the hierarchy level of the item.                                           |
+|                           | `aria-labelledby`      | Sets the `id` of the related `Tree.Item > div > span`.                          |
+| `Tree.Item > ul`          | `role="group"`         | Indicates that the element is a group.                                          |
+|                           | `aria-labelledby`      | Sets the `id` of the related `Tree.Item > div > span`.                          |
+|                           | `aria-busy`            | Set to `"true"` when the item's children are loading.                           |
+| `Tree.Item > div > input` | `id`                   | Used to associate with the parent `Tree.Item > div > input`.                    |
+|                           | `aria-controls`        | Sets the `id` of related child `Tree.Item > div > input` elements.              |
+|                           | `aria-labelledby`      | Sets the `id` of the related `Tree.Item > div > span`.                          |
+| `Tree.Item > div > span`  | `id`                   | Used to associate `Tree.Item`, `Tree.Item > ul`, and `Tree.Item > div > input`. |
 
 ## Similar Components
 

@@ -1315,27 +1315,23 @@ return (
 
 ### ARIAロールと属性
 
-| コンポーネント      | ロールと属性            | 使い方                                                                                      |
-| ------------------- | ----------------------- | ------------------------------------------------------------------------------------------- |
-| `Tree.Root`         | `role="tree"`           | ツリーであることを示します。                                                                |
-|                     | `aria-activedescendant` | フォーカスされた項目の`id`を設定します。                                                    |
-|                     | `aria-multiselectable`  | `multiple={true}`または`checkable={true}`が設定されている場合は`"true"`を設定します。       |
-| `Tree.Item`         | `role="treeitem"`       | ツリーの項目であることを示します。                                                          |
-|                     | `id`                    | `Tree.Root`と関連付けするために使用する`id`                                                 |
-|                     | `aria-expanded`         | 項目が展開されている場合は`"true"`を設定し、折りたたまれている場合は`"false"`を設定します。 |
-|                     | `aria-selected`         | 項目が選択されている場合は`"true"`を設定します。                                            |
-|                     | `aria-disabled`         | 項目が無効な場合は`"true"`を設定します。                                                    |
-|                     | `aria-level`            | 項目の階層を設定します。                                                                    |
-|                     | `aria-labelledby`       | 関連した`Tree.Item > span`の`id`を設定します。                                              |
-| `Tree.Item > div`   | `aria-controls`         | 関連した`Tree.Item > ul`の`id`を設定します。                                                |
-| `Tree.Item > ul`    | `role="group"`          | グループであることを示します。                                                              |
-|                     | `id`                    | `Tree.Item > div`と関連付けするために使用する`id`                                           |
-|                     | `aria-labelledby`       | 関連した`Tree.Item > span`の`id`を設定します。                                              |
-|                     | `aria-busy`             | 項目が読み込み中の場合は`"true"`を設定します。                                              |
-| `Tree.Item > input` | `id`                    | 親の`Tree.Item > input`と関連付けするために使用する`id`                                     |
-|                     | `aria-controls`         | 関連した子の`Tree.Item > input`の`id`を設定します。                                         |
-|                     | `aria-labelledby`       | 関連した`Tree.Item > span`の`id`を設定します。                                              |
-| `Tree.Item > span`  | `id`                    | `Tree.Item`と`Tree.Item > ul`と`Tree.Item > input`を関連付けするために使用する`id`          |
+| コンポーネント            | ロールと属性           | 使い方                                                                                      |
+| ------------------------- | ---------------------- | ------------------------------------------------------------------------------------------- |
+| `Tree.Root`               | `role="tree"`          | ツリーであることを示します。                                                                |
+|                           | `aria-multiselectable` | `multiple={true}`または`checkable={true}`が設定されている場合は`"true"`を設定します。       |
+| `Tree.Item`               | `role="treeitem"`      | ツリーの項目であることを示します。                                                          |
+|                           | `aria-expanded`        | 項目が展開されている場合は`"true"`を設定し、折りたたまれている場合は`"false"`を設定します。 |
+|                           | `aria-selected`        | 項目が選択されている場合は`"true"`を設定します。                                            |
+|                           | `aria-disabled`        | 項目が無効な場合は`"true"`を設定します。                                                    |
+|                           | `aria-level`           | 項目の階層を設定します。                                                                    |
+|                           | `aria-labelledby`      | 関連した`Tree.Item > div > span`の`id`を設定します。                                        |
+| `Tree.Item > ul`          | `role="group"`         | グループであることを示します。                                                              |
+|                           | `aria-labelledby`      | 関連した`Tree.Item > div > span`の`id`を設定します。                                        |
+|                           | `aria-busy`            | 項目が読み込み中の場合は`"true"`を設定します。                                              |
+| `Tree.Item > div > input` | `id`                   | 親の`Tree.Item > div > input`と関連付けするために使用する`id`                               |
+|                           | `aria-controls`        | 関連した子の`Tree.Item > div > input`の`id`を設定します。                                   |
+|                           | `aria-labelledby`      | 関連した`Tree.Item > div > span`の`id`を設定します。                                        |
+| `Tree.Item > div > span`  | `id`                   | `Tree.Item`と`Tree.Item > ul`と`Tree.Item > div > input`を関連付けするために使用する`id`    |
 
 ## 類似のコンポーネント
 

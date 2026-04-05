@@ -187,7 +187,6 @@ export const useTree = <Multiple extends boolean = false>({
     value: "",
   })
   const timeoutRef = useRef<any>(null)
-  const rootRef = useRef<HTMLUListElement>(null)
 
   const onExpandAll = useCallback(() => {
     const values = descendants.enabledValues()
@@ -206,9 +205,7 @@ export const useTree = <Multiple extends boolean = false>({
       descendant?: Descendant<HTMLElement, TreeDescendantProps>,
       shouldFocus = true,
     ) => {
-      if (!rootRef.current || !descendant) return
-
-      rootRef.current.setAttribute("aria-activedescendant", descendant.id)
+      if (!descendant) return
 
       descendants.values().forEach(({ node }) => {
         node.tabIndex = -1
@@ -292,8 +289,7 @@ export const useTree = <Multiple extends boolean = false>({
   assignRef(controlRef, { collapse: onCollapseAll, expand: onExpandAll })
 
   const getRootProps: PropGetter<"ul"> = useCallback(
-    ({ ref, ...props } = {}) => ({
-      ref: mergeRefs(ref, rootRef),
+    (props) => ({
       "aria-multiselectable": ariaAttr(multiple || checkable),
       children,
       role: "tree",
@@ -422,7 +418,7 @@ const getRangeValues =
   }
 
 export interface UseTreeItemProps
-  extends HTMLProps<"li">, Omit<UseDisclosureProps, "timing"> {
+  extends HTMLProps<"div">, Omit<UseDisclosureProps, "timing"> {
   /**
    * If `true`, the tree item will be disabled.
    *
@@ -468,7 +464,7 @@ export const useTreeItem = ({
   } = useTreeContext()
   const [children, setChildren] = useState<ReactNode>(childrenProp)
   const [indeterminate, setIndeterminate] = useState(false)
-  const [itemId, labelId, groupId, checkboxId] = useIds()
+  const [itemId, labelId, checkboxId] = useIds()
   const initialAsyncRef = useRef(false)
   const async = !!asyncChildren
   const group = async || Children.count(children) > 0
@@ -477,7 +473,7 @@ export const useTreeItem = ({
   const nested = !!context?.value
   const selected = isArray(selectedValue)
     ? !!value && selectedValue.includes(value)
-    : selectedValue === value
+    : !!value && selectedValue === value
   const checked = !!value && checkedValue.includes(value)
   const defaultExpanded = !!value && expandedValue.includes(value)
   const {
@@ -706,22 +702,16 @@ export const useTreeItem = ({
 
   const onItemClick = useCallback(
     (ev: MouseEvent<HTMLLIElement>) => {
-      if (disabled || group || !value) return
+      if (disabled || !value) return
+
+      if (group && !groupLoading)
+        if (!ev.ctrlKey && !ev.metaKey && !ev.shiftKey) onGroupToggle()
+
+      ev.stopPropagation()
 
       onSelect(ev)
     },
-    [disabled, group, onSelect, value],
-  )
-
-  const onTriggerClick = useCallback(
-    (ev: MouseEvent<HTMLDivElement>) => {
-      if (disabled || !group || !value || groupLoading) return
-
-      if (!ev.ctrlKey && !ev.metaKey && !ev.shiftKey) onGroupToggle()
-
-      onSelect(ev)
-    },
-    [disabled, group, value, groupLoading, onGroupToggle, onSelect],
+    [disabled, group, groupLoading, onGroupToggle, onSelect, value],
   )
 
   const onCheckboxChange = useCallback(
@@ -812,7 +802,7 @@ export const useTreeItem = ({
   const getItemProps: PropGetter<"li"> = useCallback(
     ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
       id: itemId,
-      ref: mergeRefs(props.ref, rest.ref, !group ? register : undefined),
+      ref: mergeRefs(props.ref, register),
       "aria-disabled": ariaAttr(disabled),
       "aria-labelledby": cx(ariaLabelledby, labelId),
       "aria-level": level,
@@ -820,15 +810,12 @@ export const useTreeItem = ({
       "data-disabled": dataAttr(disabled),
       role: "treeitem",
       tabIndex: -1,
-      ...rest,
       ...props,
-      onClick: handlerAll(props.onClick, rest.onClick, onItemClick),
-      onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
+      onClick: handlerAll(props.onClick, onItemClick),
+      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
     }),
     [
       itemId,
-      rest,
-      group,
       register,
       disabled,
       labelId,
@@ -872,31 +859,15 @@ export const useTreeItem = ({
     [checkboxId, labelId, selected, checked, indeterminate, onCheckboxChange],
   )
 
-  const getTriggerProps: PropGetter = useCallback(
-    (props = {}) => ({
-      ref: mergeRefs(props.ref, group ? register : undefined),
-      "aria-controls": groupId,
-      "aria-disabled": ariaAttr(disabled),
-      "data-disabled": dataAttr(disabled),
-      "data-expanded": dataAttr(groupOpen),
-      "data-selected": dataAttr(selected),
-      tabIndex: -1,
-      ...props,
-      onClick: handlerAll(props.onClick, onTriggerClick),
-    }),
-    [group, register, groupId, disabled, groupOpen, selected, onTriggerClick],
-  )
-
   const getGroupProps: PropGetter<"ul"> = useCallback(
     ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      id: groupId,
       "aria-busy": ariaAttr(groupLoading),
       "aria-labelledby": cx(ariaLabelledby, labelId),
       "data-disabled": dataAttr(disabled),
       role: "group",
       ...props,
     }),
-    [groupId, labelId, disabled, groupLoading],
+    [labelId, disabled, groupLoading],
   )
 
   const getLabelProps: PropGetter<"span"> = useCallback(
@@ -914,6 +885,7 @@ export const useTreeItem = ({
     groupOpen,
     indeterminate,
     level,
+    props: rest,
     selected,
     value,
     getCheckboxProps,
@@ -922,7 +894,6 @@ export const useTreeItem = ({
     getIndicatorProps,
     getItemProps,
     getLabelProps,
-    getTriggerProps,
     onGroupClose,
     onGroupOpen,
     onGroupToggle,

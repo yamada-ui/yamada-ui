@@ -5,24 +5,19 @@ import { Loading } from "./"
 import { useLoading } from "./loading-provider"
 import { Suspense } from "./suspense"
 
-function clickElement(testId: string) {
-  const el = page.getByTestId(testId).element()
-
-  if (el instanceof HTMLElement) el.click()
-}
-
-const TargetComponent = () => (
-  <>
-    <Loading.Oval data-testid="oval" />
-    <Loading.Audio data-testid="audio" />
-    <Loading.Circles data-testid="circles" />
-    <Loading.Dots data-testid="dots" />
-    <Loading.Grid data-testid="grid" />
-    <Loading.Puff data-testid="puff" />
-    <Loading.Rings data-testid="rings" />
-  </>
-)
 describe("<Loading />", () => {
+  const TargetComponent = () => (
+    <>
+      <Loading.Oval data-testid="oval" />
+      <Loading.Audio data-testid="audio" />
+      <Loading.Circles data-testid="circles" />
+      <Loading.Dots data-testid="dots" />
+      <Loading.Grid data-testid="grid" />
+      <Loading.Puff data-testid="puff" />
+      <Loading.Rings data-testid="rings" />
+    </>
+  )
+
   test("renders component correctly", async () => {
     await a11y(<TargetComponent />)
   })
@@ -64,7 +59,7 @@ describe("<Loading />", () => {
       <Loading.Oval data-testid="oval-secondary" secondaryColor="red" />,
     )
 
-    await expect.element(page.getByTestId("oval-secondary")).toBeInTheDocument()
+    await expect.element(page.getByTestId("oval-secondary")).toBeVisible()
   })
 })
 
@@ -90,381 +85,187 @@ describe("useLoading", () => {
   })
 
   test("screen.start renders screen loading", async () => {
-    const TestComponent: FC = () => {
-      const { screen: screenLoading } = useLoading()
+    const { act, result } = await renderHook(() => useLoading())
 
-      return (
-        <>
-          <button data-testid="start" onClick={() => screenLoading.start()}>
-            Start
-          </button>
-          <button data-testid="finish" onClick={() => screenLoading.finish()}>
-            Finish
-          </button>
-        </>
-      )
-    }
-
-    const { user } = await render(<TestComponent />)
-
-    await user.click(page.getByTestId("start"))
-
+    await act(() => {
+      result.current.screen.start()
+    })
     await expect
-      .poll(() => document.querySelector("div[data-loading]"))
-      .toBeTruthy()
-    clickElement("finish")
+      .element(page.getByQuerySelector("div[data-loading]"))
+      .toBeVisible()
   })
 
   test("screen.finish removes screen loading", async () => {
-    const TestComponent: FC = () => {
-      const { screen: screenLoading } = useLoading()
+    const { act, result } = await renderHook(() => useLoading())
 
-      return (
-        <>
-          <button data-testid="start" onClick={() => screenLoading.start()}>
-            Start
-          </button>
-          <button data-testid="finish" onClick={() => screenLoading.finish()}>
-            Finish
-          </button>
-        </>
-      )
-    }
-
-    const { user } = await render(<TestComponent />)
-    await user.click(page.getByTestId("start"))
-
+    await act(() => {
+      result.current.screen.start()
+    })
     await expect
-      .poll(() => document.querySelector("div[data-loading]"))
-      .toBeTruthy()
-    clickElement("finish")
+      .element(page.getByQuerySelector("div[data-loading]"))
+      .toBeVisible()
 
+    await act(() => {
+      result.current.screen.finish()
+    })
     await expect
-      .poll(() => document.querySelector("div[data-loading]"))
-      .toBeFalsy()
+      .element(page.getByQuerySelector("div[data-loading]"))
+      .not.toBeInTheDocument()
   })
 
   test("screen.start renders with string message", async () => {
-    const TestComponent: FC = () => {
-      const { screen: screenLoading } = useLoading()
+    const { act, result } = await renderHook(() => useLoading())
 
-      return (
-        <>
-          <button
-            data-testid="start"
-            onClick={() => screenLoading.start({ message: "Screen loading" })}
-          >
-            Start
-          </button>
-          <button data-testid="finish" onClick={() => screenLoading.finish()}>
-            Finish
-          </button>
-        </>
-      )
-    }
-
-    const { user } = await render(<TestComponent />)
-
-    await user.click(page.getByTestId("start"))
-
-    await expect.element(page.getByText("Screen loading")).toBeInTheDocument()
-    clickElement("finish")
+    await act(() => {
+      result.current.screen.start({ message: "Screen loading" })
+    })
+    await expect.element(page.getByText("Screen loading")).toBeVisible()
   })
 
   test("screen.start renders with ReactNode message", async () => {
-    const TestComponent: FC = () => {
-      const { screen: screenLoading } = useLoading()
+    const { act, result } = await renderHook(() => useLoading())
 
-      return (
-        <>
-          <button
-            data-testid="start"
-            onClick={() =>
-              screenLoading.start({
-                message: <Text data-testid="screen-msg">Custom Screen</Text>,
-              })
-            }
-          >
-            Start
-          </button>
-          <button data-testid="finish" onClick={() => screenLoading.finish()}>
-            Finish
-          </button>
-        </>
-      )
-    }
-
-    const { user } = await render(<TestComponent />)
-
-    await user.click(page.getByTestId("start"))
-
-    await expect.element(page.getByTestId("screen-msg")).toBeInTheDocument()
-    clickElement("finish")
+    await act(() => {
+      result.current.screen.start({
+        message: <Text>Custom Screen</Text>,
+      })
+    })
+    await expect.element(page.getByText("Custom Screen")).toBeVisible()
   })
 
   test("page.start renders page loading with string message", async () => {
-    const TestComponent: FC = () => {
-      const { page: pageLoading } = useLoading()
+    const { act, result } = await renderHook(() => useLoading())
 
-      return (
-        <>
-          <button
-            data-testid="start"
-            onClick={() => pageLoading.start({ message: "Loading data" })}
-          >
-            Start
-          </button>
-          <button data-testid="finish" onClick={() => pageLoading.finish()}>
-            Finish
-          </button>
-        </>
-      )
-    }
-
-    const { user } = await render(<TestComponent />)
-
-    await user.click(page.getByTestId("start"))
-
-    await expect.element(page.getByText("Loading data")).toBeInTheDocument()
-    clickElement("finish")
+    await act(() => {
+      result.current.page.start({ message: "Loading data" })
+    })
+    await expect.element(page.getByText("Loading data")).toBeVisible()
   })
 
   test("page.start renders page loading with ReactNode message", async () => {
-    const TestComponent: FC = () => {
-      const { page: pageLoading } = useLoading()
+    const { act, result } = await renderHook(() => useLoading())
 
-      return (
-        <>
-          <button
-            data-testid="start"
-            onClick={() =>
-              pageLoading.start({
-                message: <Text data-testid="custom-msg">Custom</Text>,
-              })
-            }
-          >
-            Start
-          </button>
-          <button data-testid="finish" onClick={() => pageLoading.finish()}>
-            Finish
-          </button>
-        </>
-      )
-    }
-
-    const { user } = await render(<TestComponent />)
-
-    await user.click(page.getByTestId("start"))
-
-    await expect.element(page.getByTestId("custom-msg")).toBeInTheDocument()
-    clickElement("finish")
+    await act(() => {
+      result.current.page.start({
+        message: <Text>Custom</Text>,
+      })
+    })
+    await expect.element(page.getByText("Custom")).toBeVisible()
   })
 
   test("background.start renders background loading", async () => {
-    const TestComponent: FC = () => {
-      const { background } = useLoading()
+    const { act, result } = await renderHook(() => useLoading())
 
-      return (
-        <>
-          <button data-testid="start" onClick={() => background.start()}>
-            Start
-          </button>
-          <button data-testid="finish" onClick={() => background.finish()}>
-            Finish
-          </button>
-        </>
-      )
-    }
-
-    const { user } = await render(<TestComponent />)
-
-    await user.click(page.getByTestId("start"))
-
+    await act(() => {
+      result.current.background.start()
+    })
     await expect
-      .poll(() => document.querySelector("div[data-loading]"))
-      .toBeTruthy()
-    clickElement("finish")
+      .element(page.getByQuerySelector("div[data-loading]"))
+      .toBeVisible()
+
+    await act(() => {
+      result.current.background.finish()
+    })
   })
 
   test("background.start renders with string message", async () => {
-    const TestComponent: FC = () => {
-      const { background } = useLoading()
+    const { act, result } = await renderHook(() => useLoading())
 
-      return (
-        <>
-          <button
-            data-testid="start"
-            onClick={() => background.start({ message: "Saving" })}
-          >
-            Start
-          </button>
-          <button data-testid="finish" onClick={() => background.finish()}>
-            Finish
-          </button>
-        </>
-      )
-    }
+    await act(() => {
+      result.current.background.start({ message: "Saving" })
+    })
+    await expect.element(page.getByText("Saving")).toBeVisible()
 
-    const { user } = await render(<TestComponent />)
-
-    await user.click(page.getByTestId("start"))
-
-    await expect.element(page.getByText("Saving")).toBeInTheDocument()
-    clickElement("finish")
+    await act(() => {
+      result.current.background.finish()
+    })
   })
 
   test("background.start renders with ReactNode message", async () => {
-    const TestComponent: FC = () => {
-      const { background } = useLoading()
+    const { act, result } = await renderHook(() => useLoading())
 
-      return (
-        <>
-          <button
-            data-testid="start"
-            onClick={() =>
-              background.start({
-                message: <Text data-testid="bg-msg">Custom BG</Text>,
-              })
-            }
-          >
-            Start
-          </button>
-          <button data-testid="finish" onClick={() => background.finish()}>
-            Finish
-          </button>
-        </>
-      )
-    }
+    await act(() => {
+      result.current.background.start({
+        message: <Text>Custom BG</Text>,
+      })
+    })
+    await expect.element(page.getByText("Custom BG")).toBeVisible()
 
-    const { user } = await render(<TestComponent />)
-
-    await user.click(page.getByTestId("start"))
-
-    await expect.element(page.getByTestId("bg-msg")).toBeInTheDocument()
-    clickElement("finish")
+    await act(() => {
+      result.current.background.finish()
+    })
   })
 
   test("update changes loading message", async () => {
-    const TestComponent: FC = () => {
-      const { page: pageLoading } = useLoading()
+    const { act, result } = await renderHook(() => useLoading())
 
-      return (
-        <>
-          <button
-            data-testid="start"
-            onClick={() => pageLoading.start({ message: "Initial" })}
-          >
-            Start
-          </button>
-          <button
-            data-testid="update"
-            onClick={() => pageLoading.update({ message: "Updated" })}
-          >
-            Update
-          </button>
-        </>
-      )
-    }
+    await act(() => {
+      result.current.page.start({ message: "Initial" })
+    })
+    await expect.element(page.getByText("Initial")).toBeVisible()
 
-    const { user } = await render(<TestComponent />)
-
-    await user.click(page.getByTestId("start"))
-
-    await expect.element(page.getByText("Initial")).toBeInTheDocument()
-    clickElement("update")
-
-    await expect.element(page.getByText("Updated")).toBeInTheDocument()
+    await act(() => {
+      result.current.page.update({ message: "Updated" })
+    })
+    await expect.element(page.getByText("Updated")).toBeVisible()
   })
 
   test("force sets loading state", async () => {
-    const TestComponent: FC = () => {
-      const { page: pageLoading } = useLoading()
+    const { act, result } = await renderHook(() => useLoading())
 
-      return (
-        <>
-          <button
-            data-testid="force"
-            onClick={() =>
-              pageLoading.force({ loadingCount: 1, message: "Forced loading" })
-            }
-          >
-            Force
-          </button>
-          <button
-            data-testid="force-off"
-            onClick={() => pageLoading.force({ loadingCount: 0 })}
-          >
-            Force Off
-          </button>
-        </>
-      )
-    }
+    await act(() => {
+      result.current.page.force({
+        loadingCount: 1,
+        message: "Forced loading",
+      })
+    })
+    await expect.element(page.getByText("Forced loading")).toBeVisible()
 
-    const { user } = await render(<TestComponent />)
-
-    await user.click(page.getByTestId("force"))
-
-    await expect.element(page.getByText("Forced loading")).toBeInTheDocument()
-    clickElement("force-off")
-
+    await act(() => {
+      result.current.page.force({ loadingCount: 0 })
+    })
     await expect
-      .element(page.getByText("Forced loading").query())
+      .element(page.getByText("Forced loading"))
       .not.toBeInTheDocument()
   })
 
   test("start with custom loadingScheme", async () => {
-    const TestComponent: FC = () => {
-      const { screen: screenLoading } = useLoading()
+    const { act, result } = await renderHook(() => useLoading())
 
-      return (
-        <>
-          <button
-            data-testid="start"
-            onClick={() => screenLoading.start({ loadingScheme: "dots" })}
-          >
-            Start
-          </button>
-          <button data-testid="finish" onClick={() => screenLoading.finish()}>
-            Finish
-          </button>
-        </>
-      )
-    }
-
-    const { user } = await render(<TestComponent />)
-
-    await user.click(page.getByTestId("start"))
-
+    await act(() => {
+      result.current.screen.start({ loadingScheme: "dots" })
+    })
     await expect
-      .poll(() => document.querySelector("div[data-loading]"))
-      .toBeTruthy()
-    clickElement("finish")
+      .element(page.getByQuerySelector("div[data-loading]"))
+      .toBeVisible()
   })
 
   test("start with duration auto-finishes", async () => {
-    const TestComponent: FC = () => {
-      const { background } = useLoading()
+    vi.useFakeTimers()
 
-      return (
-        <button
-          data-testid="start"
-          onClick={() => background.start({ duration: 100 })}
-        >
-          Start
-        </button>
-      )
+    try {
+      const { act, result } = await renderHook(() => useLoading())
+
+      await act(() => {
+        result.current.background.start({ duration: 100 })
+      })
+
+      await expect
+        .element(page.getByQuerySelector("div[data-loading]"))
+        .toBeVisible()
+
+      await act(() => {
+        vi.advanceTimersByTime(100)
+      })
+
+      vi.useRealTimers()
+
+      await expect
+        .element(page.getByQuerySelector("div[data-loading]"))
+        .not.toBeInTheDocument()
+    } finally {
+      vi.useRealTimers()
     }
-
-    const { user } = await render(<TestComponent />)
-    await user.click(page.getByTestId("start"))
-
-    await expect
-      .poll(() => document.querySelector("div[data-loading]"))
-      .toBeTruthy()
-
-    await expect
-      .poll(() => document.querySelector("div[data-loading]"))
-      .toBeFalsy()
   })
 })
 
@@ -494,12 +295,12 @@ describe("<Loading.Suspense />", () => {
     )
 
     await expect
-      .poll(() => document.querySelector("svg[data-loading]"))
-      .toBeTruthy()
+      .element(page.getByQuerySelector("svg[data-loading]"))
+      .toBeVisible()
 
     resolve!("loaded")
 
-    await expect.element(page.getByTestId("child")).toBeInTheDocument()
+    await expect.element(page.getByTestId("child")).toBeVisible()
   })
 
   test("renders custom fallback when provided", async () => {
@@ -526,13 +327,11 @@ describe("<Loading.Suspense />", () => {
       </Suspense>,
     )
 
-    await expect
-      .element(page.getByTestId("custom-fallback"))
-      .toBeInTheDocument()
+    await expect.element(page.getByTestId("custom-fallback")).toBeVisible()
 
     resolve!("loaded")
 
-    await expect.element(page.getByTestId("child")).toBeInTheDocument()
+    await expect.element(page.getByTestId("child")).toBeVisible()
   })
 
   test("renders with custom loadingScheme", async () => {
@@ -560,8 +359,8 @@ describe("<Loading.Suspense />", () => {
     )
 
     await expect
-      .poll(() => document.querySelector("svg[data-loading]"))
-      .toBeTruthy()
+      .element(page.getByQuerySelector("svg[data-loading]"))
+      .toBeVisible()
 
     resolve!("loaded")
   })
@@ -574,21 +373,24 @@ describe("<Loading.Suspense />", () => {
           const { background } = useLoading()
 
           return (
-            <button
-              data-testid="start"
-              onClick={() => background.start({ message: text })}
-            >
-              Start
-            </button>
+            <>
+              <button onClick={() => background.start({ message: text })}>
+                Start
+              </button>
+              <button onClick={() => background.finish()}>Finish</button>
+            </>
           )
         }
 
         const { user } = await render(<TestComponent />)
-        await user.click(page.getByTestId("start"))
-        await expect.element(page.getByText(text)).toBeInTheDocument()
+        await user.click(page.getByRole("button", { name: "Start" }))
+
+        await expect.element(page.getByText(text)).toBeVisible()
         await expect
-          .poll(() => document.querySelector("[data-loading]"))
-          .toBeTruthy()
+          .element(page.getByQuerySelector("div[data-loading]"))
+          .toBeVisible()
+
+        await user.click(page.getByRole("button", { name: "Finish" }))
       })
 
       test("renders without message with Text branch", async () => {
@@ -597,23 +399,27 @@ describe("<Loading.Suspense />", () => {
           const { background } = useLoading()
 
           return (
-            <button
-              data-testid="start"
-              onClick={() => background.start({ message: text })}
-            >
-              Start
-            </button>
+            <>
+              <button onClick={() => background.start({ message: text })}>
+                Start
+              </button>
+              <button onClick={() => background.finish()}>Finish</button>
+            </>
           )
         }
 
         const { user } = await render(<TestComponent />)
-        await user.click(page.getByTestId("start"))
+        await user.click(page.getByRole("button", { name: "Start" }))
+
         await expect
-          .element(page.getByTestId("screen-node").query())
+          .element(page.getByTestId("screen-node"))
           .not.toBeInTheDocument()
+
         await expect
-          .poll(() => document.querySelector("[data-loading]"))
-          .toBeTruthy()
+          .element(page.getByQuerySelector("div[data-loading]"))
+          .toBeVisible()
+
+        await user.click(page.getByRole("button", { name: "Finish" }))
       })
     })
 
@@ -624,21 +430,20 @@ describe("<Loading.Suspense />", () => {
           const { page: pageLoading } = useLoading()
 
           return (
-            <button
-              data-testid="start"
-              onClick={() => pageLoading.start({ message: text })}
-            >
+            <button onClick={() => pageLoading.start({ message: text })}>
               Start
             </button>
           )
         }
 
         const { user } = await render(<TestComponent />)
-        await user.click(page.getByTestId("start"))
-        await expect.element(page.getByText(text)).toBeInTheDocument()
+
+        await user.click(page.getByRole("button", { name: "Start" }))
+        await expect.element(page.getByText(text)).toBeVisible()
+
         await expect
-          .poll(() => document.querySelector("[data-loading]"))
-          .toBeTruthy()
+          .element(page.getByQuerySelector("div[data-loading]"))
+          .toBeVisible()
       })
 
       test("renders without message with Text branch", async () => {
@@ -647,23 +452,22 @@ describe("<Loading.Suspense />", () => {
           const { page: pageLoading } = useLoading()
 
           return (
-            <button
-              data-testid="start"
-              onClick={() => pageLoading.start({ message: text })}
-            >
+            <button onClick={() => pageLoading.start({ message: text })}>
               Start
             </button>
           )
         }
 
         const { user } = await render(<TestComponent />)
-        await user.click(page.getByTestId("start"))
+        await user.click(page.getByRole("button", { name: "Start" }))
+
         await expect
-          .element(page.getByTestId("screen-node").query())
+          .element(page.getByTestId("screen-node"))
           .not.toBeInTheDocument()
+
         await expect
-          .poll(() => document.querySelector("[data-loading]"))
-          .toBeTruthy()
+          .element(page.getByQuerySelector("div[data-loading]"))
+          .toBeVisible()
       })
     })
 
@@ -674,21 +478,19 @@ describe("<Loading.Suspense />", () => {
           const { screen: screenLoading } = useLoading()
 
           return (
-            <button
-              data-testid="start"
-              onClick={() => screenLoading.start({ message: text })}
-            >
+            <button onClick={() => screenLoading.start({ message: text })}>
               Start
             </button>
           )
         }
 
         const { user } = await render(<TestComponent />)
-        await user.click(page.getByTestId("start"))
-        await expect.element(page.getByText(text)).toBeInTheDocument()
+        await user.click(page.getByRole("button", { name: "Start" }))
+        await expect.element(page.getByText(text)).toBeVisible()
+
         await expect
-          .poll(() => document.querySelector("[data-loading]"))
-          .toBeTruthy()
+          .element(page.getByQuerySelector("div[data-loading]"))
+          .toBeVisible()
       })
 
       test("renders without message with Text branch", async () => {
@@ -697,23 +499,22 @@ describe("<Loading.Suspense />", () => {
           const { screen: screenLoading } = useLoading()
 
           return (
-            <button
-              data-testid="start"
-              onClick={() => screenLoading.start({ message: text })}
-            >
+            <button onClick={() => screenLoading.start({ message: text })}>
               Start
             </button>
           )
         }
 
         const { user } = await render(<TestComponent />)
-        await user.click(page.getByTestId("start"))
+        await user.click(page.getByRole("button", { name: "Start" }))
+
         await expect
-          .element(page.getByTestId("screen-node").query())
+          .element(page.getByTestId("screen-node"))
           .not.toBeInTheDocument()
+
         await expect
-          .poll(() => document.querySelector("[data-loading]"))
-          .toBeTruthy()
+          .element(page.getByQuerySelector("div[data-loading]"))
+          .toBeVisible()
       })
     })
   })

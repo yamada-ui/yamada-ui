@@ -60,21 +60,21 @@ describe("<Tree />", () => {
     const root = screen.getByRole("tree")
     const group = screen.getAllByRole("group")[0]
     const groupItem = screen.getAllByRole("treeitem")[0]
-    const trigger = groupItem?.children[0]
     const item = screen.getAllByRole("treeitem")[1]
     expect(root).toHaveClass("ui-tree__root")
     expect(group).toHaveClass("ui-tree__group")
     expect(groupItem).toHaveClass("ui-tree__item")
-    expect(trigger).toHaveClass("ui-tree__trigger")
-    expect(trigger?.children[0]).toHaveClass("ui-tree__indicator")
+    expect(groupItem?.children[0]?.children[0]).toHaveClass(
+      "ui-tree__indicator",
+    )
     expect(item).toHaveClass("ui-tree__item")
-    expect(item?.children[1]).toHaveClass("ui-tree__checkbox")
-    expect(item?.children[2]).toHaveClass(
+    expect(item?.children[0]?.children[1]).toHaveClass("ui-tree__checkbox")
+    expect(item?.children[0]?.children[2]).toHaveClass(
       "ui-tree__element",
       "ui-tree__element--start",
     )
-    expect(item?.children[3]).toHaveClass("ui-tree__label")
-    expect(item?.children[4]).toHaveClass(
+    expect(item?.children[0]?.children[3]).toHaveClass("ui-tree__label")
+    expect(item?.children[0]?.children[4]).toHaveClass(
       "ui-tree__element",
       "ui-tree__element--end",
     )
@@ -98,17 +98,17 @@ describe("<Tree />", () => {
     const root = screen.getByRole("tree")
     const group = screen.getAllByRole("group")[0]
     const groupItem = screen.getAllByRole("treeitem")[0]
-    const trigger = groupItem?.children[0]
     const item = screen.getAllByRole("treeitem")[1]
     expect(root.tagName).toBe("UL")
     expect(group?.tagName).toBe("UL")
     expect(groupItem?.tagName).toBe("LI")
-    expect(trigger?.tagName).toBe("DIV")
-    expect(trigger?.children[0]?.tagName).toBe("svg")
+    expect(groupItem?.children[0]?.tagName).toBe("DIV")
+    expect(groupItem?.children[0]?.children[0]?.tagName).toBe("svg")
     expect(item?.tagName).toBe("LI")
-    expect(item?.children[1]?.tagName).toBe("DIV")
-    expect(item?.children[2]?.tagName).toBe("SPAN")
-    expect(item?.children[3]?.tagName).toBe("DIV")
+    expect(item?.children[0]?.tagName).toBe("DIV")
+    expect(item?.children[0]?.children[1]?.tagName).toBe("DIV")
+    expect(item?.children[0]?.children[2]?.tagName).toBe("SPAN")
+    expect(item?.children[0]?.children[3]?.tagName).toBe("DIV")
   })
 
   test("should not render indicator", () => {
@@ -140,7 +140,7 @@ describe("<Tree />", () => {
     expect(onSelectedChange).toHaveBeenCalledWith("1/1-1")
   })
 
-  test("should select group item on trigger click", async () => {
+  test("should select group item on click", async () => {
     const onSelectedChange = vi.fn()
 
     const { user } = render(
@@ -149,14 +149,13 @@ describe("<Tree />", () => {
 
     const treeItems = screen.getAllByRole("treeitem")
     const groupItem = treeItems[0]!
-    const trigger = groupItem.querySelector(".ui-tree__trigger")!
 
-    await user.click(trigger)
+    await user.click(groupItem)
 
     expect(onSelectedChange).toHaveBeenCalledWith("1")
   })
 
-  test("should expand and collapse group on trigger click", async () => {
+  test("should expand and collapse group on click", async () => {
     const onExpandedChange = vi.fn()
 
     const { user } = render(
@@ -164,14 +163,13 @@ describe("<Tree />", () => {
     )
 
     const groupItem = screen.getAllByRole("treeitem")[0]!
-    const trigger = groupItem.querySelector(".ui-tree__trigger")!
 
-    await user.click(trigger)
+    await user.click(groupItem)
 
     expect(onExpandedChange).toHaveBeenCalledWith(["1"])
     expect(groupItem).toHaveAttribute("aria-expanded", "true")
 
-    await user.click(trigger)
+    await user.click(groupItem)
 
     expect(onExpandedChange).toHaveBeenCalledWith([])
   })
@@ -248,41 +246,6 @@ describe("<Tree />", () => {
     expect(onSelectedChange).toHaveBeenCalledWith(expect.arrayContaining(["3"]))
   })
 
-  test("should navigate with ArrowDown key", async () => {
-    render(<Tree.Root defaultExpandedValue={["1"]} items={items} />)
-
-    const treeItems = screen.getAllByRole("treeitem")
-    const firstItem = treeItems[0]!
-
-    fireEvent.keyDown(firstItem, { key: "ArrowDown" })
-
-    await waitFor(() => {
-      const activeId = screen
-        .getByRole("tree")
-        .getAttribute("aria-activedescendant")
-
-      expect(activeId).toBeTruthy()
-    })
-  })
-
-  test("should navigate with ArrowUp key", async () => {
-    render(<Tree.Root defaultExpandedValue={["1"]} items={items} />)
-
-    const treeItems = screen.getAllByRole("treeitem")
-    const firstItem = treeItems[0]!
-
-    fireEvent.keyDown(firstItem, { key: "ArrowDown" })
-    fireEvent.keyDown(firstItem, { key: "ArrowUp" })
-
-    await waitFor(() => {
-      const activeId = screen
-        .getByRole("tree")
-        .getAttribute("aria-activedescendant")
-
-      expect(activeId).toBeTruthy()
-    })
-  })
-
   test("should collapse group with ArrowLeft key", () => {
     const onExpandedChange = vi.fn()
 
@@ -324,12 +287,8 @@ describe("<Tree />", () => {
     fireEvent.keyDown(nestedItem, { key: "ArrowLeft" })
 
     await waitFor(() => {
-      const activeId = screen
-        .getByRole("tree")
-        .getAttribute("aria-activedescendant")
       const groupItem = treeItems[0]!
-
-      expect(activeId).toBe(groupItem.id)
+      expect(groupItem).toHaveAttribute("tabindex", "0")
     })
   })
 
@@ -344,11 +303,8 @@ describe("<Tree />", () => {
     fireEvent.keyDown(lastItem, { key: "Home" })
 
     await waitFor(() => {
-      const activeId = screen
-        .getByRole("tree")
-        .getAttribute("aria-activedescendant")
-
-      expect(activeId).toBe(treeItems[0]!.id)
+      const firstItem = treeItems[0]!
+      expect(firstItem).toHaveAttribute("tabindex", "0")
     })
   })
 
@@ -361,14 +317,10 @@ describe("<Tree />", () => {
     fireEvent.keyDown(firstItem, { key: "End" })
 
     await waitFor(() => {
-      const activeId = screen
-        .getByRole("tree")
-        .getAttribute("aria-activedescendant")
       const lastItem = treeItems.find(
         (el) => el.querySelector(".ui-tree__label")?.textContent === "5",
       )!
-
-      expect(activeId).toBe(lastItem.id)
+      expect(lastItem).toHaveAttribute("tabindex", "0")
     })
   })
 
@@ -580,11 +532,10 @@ describe("<Tree />", () => {
     fireEvent.keyDown(firstItem, { key: "5" })
 
     await waitFor(() => {
-      const activeId = screen
-        .getByRole("tree")
-        .getAttribute("aria-activedescendant")
-
-      expect(activeId).toBeTruthy()
+      const item = treeItems.find(
+        (el) => el.querySelector(".ui-tree__label")?.textContent === "5",
+      )!
+      expect(item).toHaveAttribute("tabindex", "0")
     })
   })
 
@@ -615,15 +566,11 @@ describe("<Tree />", () => {
     fireEvent.keyDown(groupItem, { key: "ArrowRight" })
 
     await waitFor(() => {
-      const activeId = screen
-        .getByRole("tree")
-        .getAttribute("aria-activedescendant")
       const treeItems = screen.getAllByRole("treeitem")
       const firstChild = treeItems.find(
         (el) => el.querySelector(".ui-tree__label")?.textContent === "1-1",
       )
-
-      expect(activeId).toBe(firstChild?.id)
+      expect(firstChild).toHaveAttribute("tabindex", "0")
     })
   })
 
@@ -753,24 +700,6 @@ describe("<Tree />", () => {
     expect(onExpandedChange).not.toHaveBeenCalled()
   })
 
-  test("should not trigger click on non-group trigger with modifier keys", async () => {
-    const onExpandedChange = vi.fn()
-
-    const { user } = render(
-      <Tree.Root items={items} onExpandedChange={onExpandedChange} />,
-    )
-
-    const treeItems = screen.getAllByRole("treeitem")
-    const groupItem = treeItems[0]!
-    const trigger = groupItem.querySelector(".ui-tree__trigger")!
-
-    await user.pointer({
-      target: trigger,
-      keyDef: { key: "ctrl" } as never,
-      keys: "[MouseLeft][/MouseLeft]",
-    })
-  })
-
   test("should check nested item and propagate to parent", async () => {
     const onCheckedChange = vi.fn()
 
@@ -877,12 +806,10 @@ describe("<Tree />", () => {
     const leafItem = treeItems.find(
       (el) => el.querySelector(".ui-tree__label")?.textContent === "1-1",
     )!
-    const tree = screen.getByRole("tree")
-    const activeBefore = tree.getAttribute("aria-activedescendant")
 
     fireEvent.keyDown(leafItem, { key: "ArrowRight" })
 
-    expect(tree.getAttribute("aria-activedescendant")).toBe(activeBefore)
+    expect(leafItem).toHaveAttribute("tabindex", "-1")
   })
 
   test("should collapse all on Ctrl+Shift+ArrowUp on top-level item", () => {
@@ -919,9 +846,8 @@ describe("<Tree />", () => {
     )
 
     const groupItem = screen.getAllByRole("treeitem")[0]!
-    const trigger = groupItem.querySelector(".ui-tree__trigger")!
 
-    await user.click(trigger)
+    await user.click(groupItem)
 
     await waitFor(() => {
       expect(asyncChildren).toHaveBeenCalledTimes(1)

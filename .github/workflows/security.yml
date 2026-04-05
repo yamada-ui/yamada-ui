@@ -18,7 +18,7 @@ on:
 jobs:
   pinact:
     name: Pinact
-    if: ${{ !github.event.pull_request.draft }}
+    if: ${{ !github.event.pull_request.draft && (github.event.action != 'edited' || github.event.changes.base.ref.from) }}
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout

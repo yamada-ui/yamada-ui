@@ -24,7 +24,7 @@ env:
 jobs:
   build:
     name: Build
-    if: ${{ !github.event.pull_request.draft }}
+    if: ${{ !github.event.pull_request.draft && (github.event.action != 'edited' || github.event.changes.base.ref.from) }}
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
@@ -54,7 +54,7 @@ jobs:
 
   test:
     name: Test
-    if: ${{ !github.event.pull_request.draft }}
+    if: ${{ !github.event.pull_request.draft && (github.event.action != 'edited' || github.event.changes.base.ref.from) }}
     uses: ./.github/workflows/test.yml
     secrets:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -62,7 +62,7 @@ jobs:
 
   eslint:
     name: ESLint
-    if: ${{ !github.event.pull_request.draft }}
+    if: ${{ !github.event.pull_request.draft && (github.event.action != 'edited' || github.event.changes.base.ref.from) }}
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
@@ -102,7 +102,7 @@ jobs:
 
   typescript:
     name: TypeScript
-    if: ${{ !github.event.pull_request.draft }}
+    if: ${{ !github.event.pull_request.draft && (github.event.action != 'edited' || github.event.changes.base.ref.from) }}
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
@@ -142,7 +142,7 @@ jobs:
 
   prettier:
     name: Prettier
-    if: ${{ !github.event.pull_request.draft }}
+    if: ${{ !github.event.pull_request.draft && (github.event.action != 'edited' || github.event.changes.base.ref.from) }}
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
@@ -182,7 +182,7 @@ jobs:
 
   changeset:
     name: Changeset
-    if: ${{ !github.event.pull_request.draft }}
+    if: ${{ !github.event.pull_request.draft && (github.event.action != 'edited' || github.event.changes.base.ref.from) }}
     runs-on: ubuntu-24.04
     steps:
       - name: Check modified files

@@ -97,5 +97,5 @@ export async function getWorkspaces(
     }
   }
 
-  return [...actualWorkspaces]
+  return [...actualWorkspaces].sort()
 }

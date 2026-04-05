@@ -15,7 +15,7 @@
     "cpus": 2,
     "memory": "8gb"
   },
-  "postCreateCommand": "CI=true pnpm install && pnpm --prefix packages/react exec playwright install",
+  "postCreateCommand": "CI=true pnpm install && pnpm react exec playwright install",
   "appPort": [3000, 6006],
   "forwardPorts": [3000, 6006],
   "portsAttributes": {

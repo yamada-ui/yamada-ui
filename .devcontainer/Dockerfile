@@ -4,15 +4,17 @@ USER root
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-COPY packages/react/package.json /tmp/react-package.json
+WORKDIR /tmp/yamada-ui
 
-RUN PLAYWRIGHT_VERSION=$(node -p "const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('/tmp/react-package.json','utf8')); const raw = pkg.devDependencies?.playwright ?? pkg.dependencies?.playwright; const match = raw?.match(/[0-9]+\\.[0-9]+\\.[0-9]+/); if (!match) throw new Error('Playwright version not found in packages/react/package.json'); match[0]") \
-  && npx -y "playwright@${PLAYWRIGHT_VERSION}" install-deps chromium firefox webkit \
-  && rm -f /tmp/react-package.json
+COPY . .
 
 ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 
 RUN corepack enable
+
+RUN pnpm install --frozen-lockfile --ignore-scripts \
+  && pnpm react exec playwright install-deps \
+  && rm -rf /tmp/yamada-ui
 
 RUN mkdir -p /workspaces && chown node:node /workspaces
 

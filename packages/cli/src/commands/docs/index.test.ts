@@ -27,8 +27,6 @@ function makeResponse(body: string, status = 200) {
 }
 
 describe("docs", () => {
-  let logSpy: ReturnType<typeof vi.spyOn>
-
   beforeEach(() => {
     Object.defineProperty(process.stdin, "isTTY", {
       configurable: true,
@@ -37,7 +35,6 @@ describe("docs", () => {
     })
 
     mockFetch.mockReset()
-    logSpy = vi.spyOn(console, "log").mockImplementation(vi.fn())
   })
 
   afterEach(() => {
@@ -46,7 +43,6 @@ describe("docs", () => {
       value: undefined,
       writable: true,
     })
-    vi.restoreAllMocks()
   })
 
   test("should fetch llms.txt when no path given", async () => {
@@ -65,7 +61,7 @@ describe("docs", () => {
     expect(mockFetch).toHaveBeenCalledWith(
       "https://yamada-ui.com/docs/components/button.md",
     )
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("Button"))
+    expect(console.log).toHaveBeenCalledWith(expect.stringContaining("Button"))
   })
 
   test("should add /ja prefix when --lang ja", async () => {
@@ -86,9 +82,12 @@ describe("docs", () => {
 
     await docs.parseAsync(["/docs/components/button#usage"], { from: "user" })
 
-    const output = logSpy.mock.calls[0][0] as string
-    expect(output).toContain("## Usage")
-    expect(output).not.toContain("# Button")
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("## Usage"),
+    )
+    expect(console.log).not.toHaveBeenCalledWith(
+      expect.stringContaining("# Button"),
+    )
   })
 
   test("should accept full URL as argument", async () => {

@@ -523,7 +523,7 @@ export const init = new Command("init")
       }
 
       if (monorepo) {
-        await addPackage({ cwd, packageName, spinner, yes })
+        await addPackage({ cwd, outdir, packageName, spinner, yes })
       }
 
       end()

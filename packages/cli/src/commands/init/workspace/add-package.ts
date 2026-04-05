@@ -12,6 +12,7 @@ import { getWorkspaces } from "./get-workspaces"
 
 interface AddPackageOptions {
   cwd: string
+  outdir: string
   packageName: string
   spinner: Ora
   yes: boolean
@@ -19,13 +20,22 @@ interface AddPackageOptions {
 
 export async function addPackage({
   cwd,
+  outdir,
   packageName,
   spinner,
   yes,
 }: AddPackageOptions) {
   const packageManager = getPackageManager()
   const command = `${packageManager} ${packageAddArgs(packageManager).join(" ")} "${packageName}@workspace:*"`
-  const workspaces = await getWorkspaces(cwd, packageManager)
+  const normalizedOutdir = path
+    .normalize(outdir.replace(/^\.\//, ""))
+    .replace(/\\/g, "/")
+  const workspaces = await getWorkspaces(cwd, packageManager).then(
+    (workspaces) =>
+      workspaces.filter(
+        (workspace) => workspace.replace(/\\/g, "/") !== normalizedOutdir,
+      ),
+  )
 
   if (workspaces.length === 0) {
     console.log("")

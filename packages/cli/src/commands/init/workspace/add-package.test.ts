@@ -43,6 +43,7 @@ describe("workspace > add-package", () => {
 
     await addPackage({
       cwd: "/repo",
+      outdir: "packages/ui",
       packageName: "@scope/ui",
       spinner: spinner as any,
       yes: false,
@@ -61,6 +62,7 @@ describe("workspace > add-package", () => {
 
     await addPackage({
       cwd: "/repo",
+      outdir: "packages/ui",
       packageName: "@scope/ui",
       spinner: spinner as any,
       yes: true,
@@ -82,6 +84,49 @@ describe("workspace > add-package", () => {
     )
   })
 
+  test("should exclude the newly created package from workspace choices", async () => {
+    vi.mocked(getWorkspaces).mockResolvedValue([
+      "apps/web",
+      "apps/docs",
+      "packages/ui",
+    ])
+    vi.mocked(prompts).mockResolvedValue({ selectedWorkspaces: [] })
+
+    await addPackage({
+      cwd: "/repo",
+      outdir: "packages/ui",
+      packageName: "@scope/ui",
+      spinner: spinner as any,
+      yes: false,
+    })
+
+    const promptsCall = vi.mocked(prompts).mock.calls[0]![0] as any
+    const choices = promptsCall.choices.map((c: any) => c.value)
+
+    expect(choices).not.toContain("packages/ui")
+    expect(choices).toContain("apps/web")
+    expect(choices).toContain("apps/docs")
+  })
+
+  test("should exclude the newly created package (with ./ prefix) from workspace choices", async () => {
+    vi.mocked(getWorkspaces).mockResolvedValue(["apps/web", "packages/ui"])
+    vi.mocked(prompts).mockResolvedValue({ selectedWorkspaces: [] })
+
+    await addPackage({
+      cwd: "/repo",
+      outdir: "./packages/ui",
+      packageName: "@scope/ui",
+      spinner: spinner as any,
+      yes: false,
+    })
+
+    const promptsCall = vi.mocked(prompts).mock.calls[0]![0] as any
+    const choices = promptsCall.choices.map((c: any) => c.value)
+
+    expect(choices).not.toContain("packages/ui")
+    expect(choices).toContain("apps/web")
+  })
+
   test("should install selected workspaces from prompt", async () => {
     vi.mocked(getWorkspaces).mockResolvedValue(["apps/web", "apps/docs"])
     vi.mocked(prompts).mockResolvedValue({ selectedWorkspaces: ["apps/docs"] })
@@ -89,6 +134,7 @@ describe("workspace > add-package", () => {
 
     await addPackage({
       cwd: "/repo",
+      outdir: "packages/ui",
       packageName: "@scope/ui",
       spinner: spinner as any,
       yes: false,
@@ -114,6 +160,7 @@ describe("workspace > add-package", () => {
 
     await addPackage({
       cwd: "/repo",
+      outdir: "packages/ui",
       packageName: "@scope/ui",
       spinner: spinner as any,
       yes: false,

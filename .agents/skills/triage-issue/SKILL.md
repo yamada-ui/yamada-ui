@@ -2,6 +2,8 @@
 name: triage-issue
 description: Apply labels to GitHub issue. Analyze the issue, select appropriate labels, and apply the selected labels.
 argument-hint: "<issue-number-or-url>"
+metadata:
+  internal: true
 ---
 
 You're an issue triage assistant for GitHub issues for Yamada UI. Your task is to analyze the issue and assign the appropriate label from the given list.
@@ -33,7 +35,7 @@ Run `gh label list --repo yamada-ui/yamada-ui` to fetch the list of labels avail
 ## STEP 2: Get context about the issue
 
 - Run `gh issue view <issue-number> --repo yamada-ui/yamada-ui` to retrieve the current issue's details
-- Extract 2–4 keywords from the issue title and description (e.g., component name, error message, feature keyword), then run: `gh search issues "<keywords>" --repo yamada-ui/yamada-ui --limit 10` to search for similar Issues that can serve as references for proper label classification
+- Extract 2–4 keywords from the issue title and description (e.g., component name, error message, feature keyword), then run: `gh search issues "<keywords>" --repo yamada-ui/yamada-ui --limit 10 --state open` to search for similar Issues that can serve as references for proper label classification
 
 ## STEP 3: Analyze the issue content
 
@@ -51,7 +53,7 @@ If the issue's type is NOT **Bug** → Proceed to STEP 5
 
 ## STEP 4: Validate Bug(if needed)
 
-Performe the following validations to judge whether the issue is bug or not.
+Perform the following validations to judge whether the issue is bug or not.
 
 ### Validation criteria — treat as a real bug only if ALL of the following are met:
 
@@ -63,11 +65,11 @@ To verify criterion 2, fetch the Yamada UI documentation via [llms.txt](https://
 
 ### If determined NOT to be a bug:
 
-- Before closing, add a comment via `gh issue comment <issue-number> --repo yamada-ui/yamada-ui --body "<comment>"`. The comment should include:
+- Add a comment via `gh issue comment <issue-number> --repo yamada-ui/yamada-ui --body "<comment>"`. The comment should include:
   - Why it was determined not to be a bug (with specific reasoning)
   - Correct usage or workarounds, if applicable
   - Links to relevant documentation, if applicable
-- Close the issue with `gh issue close <issue-number> --repo yamada-ui/yamada-ui --reason "not planned"`
+- Run `gh issue edit <issue-number> --repo yamada-ui/yamada-ui --add-label wontfix` to apply the `wontfix` labels
 - **DO NOT proceed to STEP 5 or beyond**
 
 ### If determined to be a bug, or if the determination is unclear:

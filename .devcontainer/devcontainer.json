@@ -8,12 +8,12 @@
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "remoteUser": "node",
   "containerEnv": {
-    "NODE_OPTIONS": "--max-old-space-size=4096"
+    "NODE_OPTIONS": "--max-old-space-size=8192"
   },
-  "runArgs": ["--init"],
+  "runArgs": ["--init", "--memory=8g"],
   "hostRequirements": {
     "cpus": 2,
-    "memory": "4gb"
+    "memory": "8gb"
   },
   "postCreateCommand": "CI=true pnpm install && pnpm --prefix packages/react exec playwright install",
   "appPort": [3000, 6006],

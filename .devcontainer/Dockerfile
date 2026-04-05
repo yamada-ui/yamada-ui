@@ -4,7 +4,11 @@ USER root
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN npx -y playwright@1.59.1 install-deps chromium firefox webkit
+COPY packages/react/package.json /tmp/react-package.json
+
+RUN PLAYWRIGHT_VERSION=$(node -p "const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('/tmp/react-package.json','utf8')); const raw = pkg.devDependencies?.playwright ?? pkg.dependencies?.playwright; const match = raw?.match(/[0-9]+\\.[0-9]+\\.[0-9]+/); if (!match) throw new Error('Playwright version not found in packages/react/package.json'); match[0]") \
+  && npx -y "playwright@${PLAYWRIGHT_VERSION}" install-deps chromium firefox webkit \
+  && rm -f /tmp/react-package.json
 
 ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 

@@ -1,8 +1,8 @@
 "use client"
 
+import type { Guide } from "#velite"
 import type { Descendant, HTMLProps } from "@yamada-ui/react"
 import type { ElementType, KeyboardEvent, ReactNode, RefObject } from "react"
-import type { Guide } from "@/.velite"
 import {
   assignRef,
   Box,

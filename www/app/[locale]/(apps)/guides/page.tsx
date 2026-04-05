@@ -15,9 +15,9 @@ import {
   VStack,
 } from "@yamada-ui/react"
 import { getTranslations } from "next-intl/server"
+import { Card, CardGroup } from "@/components/mdx/card"
 import { getGuideCollections } from "@/data/guide"
 import { generateOg } from "@/utils/next"
-import { Card, CardGroup } from "../../../../components/mdx/card"
 import { GuideSearch } from "./search"
 
 export const COLLECTION_ICONS: { [key: string]: ElementType } = {

@@ -1,4 +1,4 @@
-import { defineComponentSlotStyle } from "../../core"
+import { defineComponentSlotStyle, focusRingStyle } from "../../core"
 import { checkboxStyle } from "../checkbox"
 
 export const treeStyle = defineComponentSlotStyle({
@@ -25,25 +25,26 @@ export const treeStyle = defineComponentSlotStyle({
       "--element-color": "colors.fg.subtle",
       "--space": "spaces.1",
       "--space-start": "calc({depth-space} * ({level} - 1))",
-      alignItems: "center",
+      alignItems: "stretch",
       display: "flex",
-      _hasGroup: {
-        alignItems: "stretch",
-        flexDirection: "column",
-      },
-      _notHasGroup: {
+      flexDirection: "column",
+      focusVisibleRing: "none",
+      _content: {
+        alignItems: "center",
         border: "1px solid transparent",
         cursor: "pointer",
-        focusVisibleRing: "inside",
+        display: "flex",
         gap: "{gap}",
         pe: "{space}",
         ps: "calc({space-start} + {space})",
         rounded: "{rounded}",
         userSelect: "none",
         _hover: { bg: "bg.subtle" },
-        _focusVisible: { bg: "bg.subtle" },
-        _disabled: { layerStyle: "disabled" },
       },
+      _focusVisible: {
+        _content: { bg: "bg.subtle", ...focusRingStyle.inside },
+      },
+      _disabled: { _content: { layerStyle: "disabled" } },
     },
     label: { flex: "1", textAlign: "left", truncated: true },
     root: {
@@ -52,21 +53,6 @@ export const treeStyle = defineComponentSlotStyle({
       flexDirection: "column",
     },
     start: {},
-    trigger: {
-      alignItems: "center",
-      border: "1px solid transparent",
-      cursor: "pointer",
-      display: "flex",
-      focusVisibleRing: "inside",
-      gap: "{gap}",
-      pe: "{space}",
-      ps: "calc({space-start} + {space})",
-      rounded: "{rounded}",
-      userSelect: "none",
-      _hover: { bg: "bg.subtle" },
-      _focusVisible: { bg: "bg.subtle" },
-      _disabled: { layerStyle: "disabled" },
-    },
   },
 
   props: {
@@ -96,7 +82,7 @@ export const treeStyle = defineComponentSlotStyle({
         group: {
           position: "relative",
           _before: {
-            bg: "border",
+            bg: "{guide-line-color}",
             display: "block",
             h: "full",
             left: "calc({space-guide-line} + {depth-space})",
@@ -108,10 +94,9 @@ export const treeStyle = defineComponentSlotStyle({
         },
         item: {
           "--space-guide-line": "calc(({space-start} * 2) + {space})",
-          ps: "{space-guide-line}",
-          _hasGroup: { ps: "0" },
+          _content: { ps: "{space-guide-line}" },
         },
-        trigger: { ps: "{space-guide-line}" },
+        root: { "--guide-line-color": "colors.border" },
       },
     },
   },
@@ -131,17 +116,14 @@ export const treeStyle = defineComponentSlotStyle({
         },
       },
       item: {
-        _notHasGroup: {
-          _selected: {
+        _selected: {
+          _content: {
             layerStyle: "solid",
             "--element-color": "colorScheme.contrast",
           },
-        },
-      },
-      trigger: {
-        _selected: {
-          layerStyle: "solid",
-          "--element-color": "colorScheme.contrast",
+          _focusVisible: {
+            _content: { borderColor: "{focus-ring-color}" },
+          },
         },
       },
     },
@@ -151,17 +133,14 @@ export const treeStyle = defineComponentSlotStyle({
         _indicator: checkboxStyle.variants?.solid.indicator,
       },
       item: {
-        _notHasGroup: {
-          _selected: {
+        _selected: {
+          _content: {
             layerStyle: "subtle",
             "--element-color": "colorScheme.fg",
           },
-        },
-      },
-      trigger: {
-        _selected: {
-          layerStyle: "subtle",
-          "--element-color": "colorScheme.fg",
+          _focusVisible: {
+            _content: { borderColor: "{focus-ring-color}" },
+          },
         },
       },
     },

@@ -23,6 +23,7 @@ import {
 import { createSlotComponent, styled } from "../../core"
 import {
   cast,
+  createContext,
   dataAttr,
   isObject,
   isString,
@@ -117,8 +118,18 @@ interface ComponentContext extends Pick<
   | "size"
   | "startElement"
   | "startElementProps"
-  | "triggerProps"
 > {}
+
+interface ItemComponentContext {
+  checkboxProps: TreeCheckboxProps
+  endElementProps: TreeEndElementProps
+  indicatorProps: TreeIndicatorProps
+  labelProps: TreeLabelProps
+  startElementProps: TreeStartElementProps
+}
+
+const [ItemComponentContext, useItemComponentContext] =
+  createContext<ItemComponentContext>({ name: "ItemComponentContext" })
 
 export interface TreeRootProps<Multiple extends boolean = false>
   extends
@@ -138,7 +149,6 @@ export interface TreeRootProps<Multiple extends boolean = false>
       | "loadingScheme"
       | "startElement"
       | "startElementProps"
-      | "triggerProps"
     > {
   /**
    * If `true`, hide the tree indicator icon for all items.
@@ -193,7 +203,6 @@ export const TreeRoot = withProvider<"ul", TreeRootProps, "size">(
     itemProps,
     labelProps,
     startElementProps,
-    triggerProps,
     ...rest
   }: TreeRootProps<Multiple>) => {
     const computedChildren = useMemo(() => {
@@ -266,7 +275,6 @@ export const TreeRoot = withProvider<"ul", TreeRootProps, "size">(
         itemProps,
         labelProps,
         startElementProps,
-        triggerProps,
       }),
       [
         size,
@@ -281,7 +289,6 @@ export const TreeRoot = withProvider<"ul", TreeRootProps, "size">(
         itemProps,
         labelProps,
         startElementProps,
-        triggerProps,
         checkboxProps,
         loadingScheme,
       ],
@@ -306,9 +313,7 @@ export const TreeRoot = withProvider<"ul", TreeRootProps, "size">(
 }>
 
 export interface TreeItemProps
-  extends
-    Omit<HTMLStyledProps<"li">, "value">,
-    Omit<UseTreeItemProps, "asyncChildren"> {
+  extends HTMLStyledProps<"div">, Omit<UseTreeItemProps, "asyncChildren"> {
   /**
    * The label to display in the item.
    */
@@ -358,21 +363,24 @@ export interface TreeItemProps
    */
   labelProps?: TreeLabelProps
   /**
+   * Props for the root element.
+   */
+  rootProps?: HTMLStyledProps<"li">
+  /**
    * Props for the start component.
    */
   startElementProps?: TreeStartElementProps
-  /**
-   * Props for the trigger component.
-   */
-  triggerProps?: TreeTriggerProps
   /**
    * If provided, the tree item will be rendered as an async tree item.
    */
   asyncChildren?: () => Promise<TreeItem[]>
 }
 
-export const TreeItem = withContext<"li", TreeItemProps>(
+export const TreeItem = withContext<"div", TreeItemProps>(
   ({
+    className,
+    css,
+    colorScheme,
     animated: animatedProp,
     asyncChildren: asyncChildrenProp,
     endElement,
@@ -386,8 +394,8 @@ export const TreeItem = withContext<"li", TreeItemProps>(
     groupProps,
     indicatorProps,
     labelProps,
+    rootProps,
     startElementProps,
-    triggerProps,
     ...rest
   }) => {
     const { checkable } = useTreeContext()
@@ -430,6 +438,7 @@ export const TreeItem = withContext<"li", TreeItemProps>(
       groupLoading,
       groupOpen,
       level,
+      props,
       value,
       getCheckboxProps,
       getGroupItemProps,
@@ -437,7 +446,6 @@ export const TreeItem = withContext<"li", TreeItemProps>(
       getIndicatorProps,
       getItemProps,
       getLabelProps,
-      getTriggerProps,
       onGroupClose,
       onGroupOpen,
       onGroupToggle,
@@ -447,7 +455,14 @@ export const TreeItem = withContext<"li", TreeItemProps>(
       asyncChildren: asyncChildrenProp ? asyncChildren : undefined,
       value: valueProp,
     })
-    const props = { disabled, expanded: groupOpen }
+    const itemProps = {
+      className,
+      css,
+      colorScheme,
+      "--level": level.toString(),
+      ...rootProps,
+    }
+    const callbackProps = { disabled, expanded: groupOpen }
     const context = useMemo(
       () => ({
         branchOpen,
@@ -468,130 +483,117 @@ export const TreeItem = withContext<"li", TreeItemProps>(
         onGroupToggle,
       ],
     )
-    const varProps = useMemo(() => ({ "--level": level.toString() }), [level])
+    const itemComponentContext = useMemo(
+      () => ({
+        checkboxProps: {
+          size: componentContext.size,
+          ...getCheckboxProps({
+            ...componentContext.checkboxProps,
+            ...checkboxProps,
+          }),
+        },
+        endElementProps: {
+          ...componentContext.endElementProps,
+          ...endElementProps,
+        },
+        indicatorProps: {
+          ...getIndicatorProps({
+            ...componentContext.indicatorProps,
+            ...indicatorProps,
+          }),
+        },
+        labelProps: {
+          ...getLabelProps({
+            ...componentContext.labelProps,
+            ...labelProps,
+          }),
+        },
+        startElementProps: {
+          ...componentContext.startElementProps,
+          ...startElementProps,
+        },
+      }),
+      [
+        checkboxProps,
+        componentContext.checkboxProps,
+        componentContext.endElementProps,
+        componentContext.indicatorProps,
+        componentContext.labelProps,
+        componentContext.size,
+        componentContext.startElementProps,
+        endElementProps,
+        getCheckboxProps,
+        getIndicatorProps,
+        getLabelProps,
+        indicatorProps,
+        labelProps,
+        startElementProps,
+      ],
+    )
 
     return (
       <TreeItemContext value={context}>
-        {group ? (
-          <styled.li {...varProps} {...getGroupItemProps()}>
-            <TreeTrigger
-              {...getTriggerProps({
-                ...componentContext.triggerProps,
-                ...triggerProps,
-              })}
-            >
-              <TreeIndicator
-                {...getIndicatorProps({
-                  "data-animated": dataAttr(animated),
-                  ...componentContext.indicatorProps,
-                  ...indicatorProps,
-                })}
-              >
-                {groupLoading ? <Loading /> : runIfFn(indicator, props)}
-              </TreeIndicator>
-              {checkable ? (
-                <TreeCheckbox
-                  size={componentContext.size}
-                  {...getCheckboxProps({
-                    ...componentContext.checkboxProps,
-                    ...checkboxProps,
-                  })}
-                />
-              ) : null}
-              {groupStartElement ? (
-                <TreeStartElement
-                  {...componentContext.startElementProps}
-                  {...startElementProps}
-                >
-                  {runIfFn(groupStartElement, props)}
-                </TreeStartElement>
-              ) : null}
-              {label ? (
-                <TreeLabel
-                  {...getLabelProps({
-                    ...componentContext.labelProps,
-                    ...labelProps,
-                  })}
-                >
-                  {label}
-                </TreeLabel>
-              ) : null}
-              {groupEndElement ? (
-                <TreeEndElement
-                  {...componentContext.endElementProps}
-                  {...endElementProps}
-                >
-                  {runIfFn(groupEndElement, props)}
-                </TreeEndElement>
-              ) : null}
-            </TreeTrigger>
+        <ItemComponentContext value={itemComponentContext}>
+          {group ? (
+            <styled.li {...getGroupItemProps(itemProps)}>
+              <styled.div data-content {...props}>
+                <TreeIndicator data-animated={dataAttr(animated)}>
+                  {groupLoading ? (
+                    <Loading />
+                  ) : (
+                    runIfFn(indicator, callbackProps)
+                  )}
+                </TreeIndicator>
+                {checkable ? <TreeCheckbox /> : null}
+                {groupStartElement ? (
+                  <TreeStartElement>
+                    {runIfFn(groupStartElement, callbackProps)}
+                  </TreeStartElement>
+                ) : null}
+                {label ? <TreeLabel>{label}</TreeLabel> : null}
+                {groupEndElement ? (
+                  <TreeEndElement>
+                    {runIfFn(groupEndElement, callbackProps)}
+                  </TreeEndElement>
+                ) : null}
+              </styled.div>
 
-            <TreeGroup
-              duration={!animated ? 0 : undefined}
-              open={groupOpen}
-              {...getGroupProps({
-                ...componentContext.groupProps,
-                ...groupProps,
-              })}
-            >
-              {children}
-            </TreeGroup>
-          </styled.li>
-        ) : (
-          <styled.li {...varProps} {...getItemProps()}>
-            <TreeIndicator
-              {...getIndicatorProps({
-                "data-hidden": "",
-                ...componentContext.indicatorProps,
-                ...indicatorProps,
-              })}
-            />
-            {checkable ? (
-              <TreeCheckbox
-                size={componentContext.size}
-                {...getCheckboxProps({
-                  ...componentContext.checkboxProps,
-                  ...checkboxProps,
-                })}
-              />
-            ) : null}
-            {itemStartElement ? (
-              <TreeStartElement
-                {...componentContext.startElementProps}
-                {...startElementProps}
-              >
-                {runIfFn(itemStartElement, props)}
-              </TreeStartElement>
-            ) : null}
-            {label ? (
-              <TreeLabel
-                {...getLabelProps({
-                  ...componentContext.labelProps,
-                  ...labelProps,
+              <TreeGroup
+                duration={!animated ? 0 : undefined}
+                open={groupOpen}
+                {...getGroupProps({
+                  ...componentContext.groupProps,
+                  ...groupProps,
                 })}
               >
-                {label}
-              </TreeLabel>
-            ) : null}
-            {itemEndElement ? (
-              <TreeEndElement
-                {...componentContext.endElementProps}
-                {...endElementProps}
-              >
-                {runIfFn(itemEndElement, props)}
-              </TreeEndElement>
-            ) : null}
-          </styled.li>
-        )}
+                {children}
+              </TreeGroup>
+            </styled.li>
+          ) : (
+            <styled.li {...getItemProps(itemProps)}>
+              <styled.div data-content {...props}>
+                <TreeIndicator data-hidden />
+                {checkable ? <TreeCheckbox /> : null}
+                {itemStartElement ? (
+                  <TreeStartElement>
+                    {runIfFn(itemStartElement, callbackProps)}
+                  </TreeStartElement>
+                ) : null}
+                {label ? <TreeLabel>{label}</TreeLabel> : null}
+                {itemEndElement ? (
+                  <TreeEndElement>
+                    {runIfFn(itemEndElement, callbackProps)}
+                  </TreeEndElement>
+                ) : null}
+              </styled.div>
+            </styled.li>
+          )}
+        </ItemComponentContext>
       </TreeItemContext>
     )
   },
   "item",
 )()
-
-interface TreeTriggerProps extends HTMLStyledProps {}
-
-const TreeTrigger = withContext<"div", TreeTriggerProps>("div", "trigger")()
 
 interface TreeGroupProps
   extends
@@ -616,29 +618,52 @@ const TreeIndicator = withContext<"svg", TreeIndicatorProps>(
     return Children.count(children) > 1 ? Children.only(null) : null
   },
   "indicator",
-)()
+)(undefined, (props) => {
+  const { indicatorProps } = useItemComponentContext()
+
+  return { ...indicatorProps, ...props }
+})
 
 interface TreeCheckboxProps extends CheckboxProps {}
 
 const TreeCheckbox = withContext<"input", TreeCheckboxProps>(
   Checkbox,
   "checkbox",
-)()
+)(undefined, (props) => {
+  const { checkboxProps } = useItemComponentContext()
+
+  return { ...checkboxProps, ...props }
+})
 
 interface TreeStartElementProps extends HTMLStyledProps {}
 
 const TreeStartElement = withContext<"div", TreeStartElementProps>("div", {
   name: "StartElement",
   slot: ["element", "start"],
-})()
+})(undefined, (props) => {
+  const { startElementProps } = useItemComponentContext()
+
+  return { ...startElementProps, ...props }
+})
 
 interface TreeEndElementProps extends HTMLStyledProps {}
 
 const TreeEndElement = withContext<"div", TreeEndElementProps>("div", {
   name: "EndElement",
   slot: ["element", "end"],
-})()
+})(undefined, (props) => {
+  const { endElementProps } = useItemComponentContext()
+
+  return { ...endElementProps, ...props }
+})
 
 interface TreeLabelProps extends HTMLStyledProps<"span"> {}
 
-const TreeLabel = withContext<"span", TreeLabelProps>("span", "label")()
+const TreeLabel = withContext<"span", TreeLabelProps>("span", "label")(
+  undefined,
+  (props) => {
+    const { labelProps } = useItemComponentContext()
+
+    return { ...labelProps, ...props }
+  },
+)

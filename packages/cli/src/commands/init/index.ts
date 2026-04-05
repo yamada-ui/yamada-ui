@@ -1,6 +1,5 @@
 import type { PackageNameWithVersion, UserConfig } from "../../index.type"
 import { isObject, isUndefined, merge } from "@yamada-ui/utils"
-import boxen from "boxen"
 import { Command } from "commander"
 import { Listr } from "listr2"
 import { existsSync } from "node:fs"
@@ -28,10 +27,8 @@ import {
   fetchRegistry,
   getNotInstalledDependencies,
   getPackageJson,
-  getPackageManager,
   getPackageNameWithVersion,
   installDependencies,
-  packageAddArgs,
   replaceVersion,
   splitVersion,
   timer,
@@ -40,6 +37,7 @@ import {
   validateDir,
   writeFileSafe,
 } from "../../utils"
+import { addPackage } from "./workspace"
 
 interface Options {
   config: string
@@ -525,27 +523,7 @@ export const init = new Command("init")
       }
 
       if (monorepo) {
-        const packageManager = getPackageManager()
-        const args = packageAddArgs(packageManager)
-
-        console.log("")
-        console.log(
-          boxen(
-            [
-              "Run",
-              c.cyan(
-                `${packageManager} ${args.join(" ")} "${packageName}@workspace:*"`,
-              ),
-              "in your application.",
-            ].join(" "),
-            {
-              borderColor: "yellow",
-              borderStyle: "round",
-              padding: 1,
-              textAlignment: "center",
-            },
-          ),
-        )
+        await addPackage({ cwd, outdir, packageName, spinner, yes })
       }
 
       end()

@@ -336,8 +336,8 @@ describe("addWorkspace", () => {
   test("should update existing pnpm-workspace.yaml", async () => {
     const original = process.env.npm_config_user_agent
     process.env.npm_config_user_agent = "pnpm/8.0.0"
-    const { writeFileSync: wfs } = await import("node:fs")
-    const YAML = (await import("yamljs")).default
+    const { writeFileSync: wfs } = await import("fs")
+    const YAML = await import("yaml")
     wfs(
       path.join(tempDir, "pnpm-workspace.yaml"),
       YAML.stringify({ packages: ["existing/**"] }),
@@ -355,8 +355,8 @@ describe("addWorkspace", () => {
   test("should skip duplicate workspace in pnpm", async () => {
     const original = process.env.npm_config_user_agent
     process.env.npm_config_user_agent = "pnpm/8.0.0"
-    const { writeFileSync: wfs } = await import("node:fs")
-    const YAML = (await import("yamljs")).default
+    const { writeFileSync: wfs } = await import("fs")
+    const YAML = await import("yaml")
     wfs(
       path.join(tempDir, "pnpm-workspace.yaml"),
       YAML.stringify({ packages: ["packages/**"] }),
@@ -404,6 +404,32 @@ describe("addWorkspace", () => {
       ),
     )
     expect(pkg.workspaces).toHaveLength(1)
+    process.env.npm_config_user_agent = original
+  })
+
+  test("should update existing pnpm-workspace.yml (.yml extension)", async () => {
+    const original = process.env.npm_config_user_agent
+    process.env.npm_config_user_agent = "pnpm/8.0.0"
+    const { writeFileSync: wfs } = await import("fs")
+    const YAML = await import("yaml")
+    wfs(
+      path.join(tempDir, "pnpm-workspace.yml"),
+      YAML.stringify({ packages: ["existing/**"] }),
+    )
+    await addWorkspace(tempDir, "packages/**", {})
+    const { readFileSync } = await import("fs")
+    // Should update .yml, not create a new .yaml
+    expect(
+      (await import("fs")).existsSync(
+        path.join(tempDir, "pnpm-workspace.yaml"),
+      ),
+    ).toBeFalsy()
+    const content = readFileSync(
+      path.join(tempDir, "pnpm-workspace.yml"),
+      "utf-8",
+    )
+    expect(content).toContain("packages/**")
+    expect(content).toContain("existing/**")
     process.env.npm_config_user_agent = original
   })
 })

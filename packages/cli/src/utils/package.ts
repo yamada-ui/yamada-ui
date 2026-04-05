@@ -11,7 +11,7 @@ import path from "node:path"
 import c from "picocolors"
 import semver from "semver"
 import validateProjectName from "validate-npm-package-name"
-import YAML from "yamljs"
+import * as YAML from "yaml"
 import { execFileAsync, writeFileSafe } from "./fs"
 
 export type PackageManager = "bun" | "npm" | "pnpm" | "yarn"
@@ -214,7 +214,13 @@ export async function addWorkspace(
 
   switch (packageManager) {
     case "pnpm": {
-      const targetPath = path.resolve(cwd, "pnpm-workspace.yaml")
+      const yamlPath = path.resolve(cwd, "pnpm-workspace.yaml")
+      const ymlPath = path.resolve(cwd, "pnpm-workspace.yml")
+      const targetPath = existsSync(yamlPath)
+        ? yamlPath
+        : existsSync(ymlPath)
+          ? ymlPath
+          : yamlPath
 
       if (existsSync(targetPath)) {
         const content = await readFile(targetPath, "utf8")

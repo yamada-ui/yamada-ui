@@ -1,5 +1,32 @@
 # @yamada-ui/cli
 
+## 2.1.5
+
+### Patch Changes
+
+- [#6346](https://github.com/yamada-ui/yamada-ui/pull/6346) [`fc5f9a2`](https://github.com/yamada-ui/yamada-ui/commit/fc5f9a2ea5a2bf5bea2f28af8377dd95168181c7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+## 2.1.4
+
+### Patch Changes
+
+- [#6336](https://github.com/yamada-ui/yamada-ui/pull/6336) [`f594776`](https://github.com/yamada-ui/yamada-ui/commit/f5947763426f4e8900928ab0716e34a895e55b8a) Thanks [@taroj1205](https://github.com/taroj1205)! - Standardize Node.js built-in imports to use `node:` specifiers.
+
+## 2.1.3
+
+### Patch Changes
+
+- [#6317](https://github.com/yamada-ui/yamada-ui/pull/6317) [`4ca9145`](https://github.com/yamada-ui/yamada-ui/commit/4ca91459625bc21e919d56c53a0809c5ae9966ac) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+## 2.1.2
+
+### Patch Changes
+
+- [#6159](https://github.com/yamada-ui/yamada-ui/pull/6159) [`1f876a4`](https://github.com/yamada-ui/yamada-ui/commit/1f876a470a3bab9f55b42180712cf4aab513b988) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Replaced `glob` npm package with Node.js built-in `fs.glob`.
+
+- Updated dependencies [[`eaddd11`](https://github.com/yamada-ui/yamada-ui/commit/eaddd1185085d2eaa11e8a12416b0e4e8acbef5c), [`d28fc6e`](https://github.com/yamada-ui/yamada-ui/commit/d28fc6e2105a859e133b0f6290f2ae73c461e875), [`8abe31f`](https://github.com/yamada-ui/yamada-ui/commit/8abe31fead60b0928d59e0adc4e30cb3b83e22b3)]:
+  - @yamada-ui/utils@2.1.2
+
 ## 2.1.1
 
 ### Patch Changes

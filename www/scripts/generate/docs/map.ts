@@ -5,10 +5,10 @@ import type { Dict } from "@yamada-ui/react"
 import type { DocMap } from "@/data"
 import type { Lang } from "@/utils/i18n"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
-import { readFile } from "fs/promises"
 import { createTranslator } from "next-intl"
-import path from "path"
-import { pathToFileURL } from "url"
+import { readFile } from "node:fs/promises"
+import path from "node:path"
+import { pathToFileURL } from "node:url"
 import { getLang, langs } from "@/utils/i18n"
 import { getPathname } from "@/utils/route"
 
@@ -85,7 +85,7 @@ export async function generateDocMap(docs: Doc[]) {
       omittedPath.endsWith("/index")
         ? omittedPath.replace(/\/index$/, "")
         : omittedPath
-    )!.split("/")
+    ).split("/")
     const items = docMap[lang].items!
 
     slug.reduce((prev, segment, index) => {

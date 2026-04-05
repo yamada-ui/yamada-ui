@@ -5,8 +5,8 @@ import {
   retryOnRateLimit,
 } from "@yamada-ui/workspace/octokit"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import path from "node:path"
 import ora from "ora"
-import path from "path"
 import c from "picocolors"
 
 type Contributor = Awaited<

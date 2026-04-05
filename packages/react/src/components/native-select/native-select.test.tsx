@@ -66,13 +66,11 @@ describe("<NativeSelect />", () => {
       </NativeSelect.Root>,
     )
     await user.selectOptions(screen.getByTestId("select"), ["one"])
+    const option1 = screen.getByRole("option", { name: "Option 1" })
+    const option2 = screen.getByRole("option", { name: "Option 2" })
 
-    expect(
-      (screen.getByRole("option", { name: "Option 1" }) as any).selected,
-    ).toBeTruthy()
-    expect(
-      (screen.getByRole("option", { name: "Option 2" }) as any).selected,
-    ).toBeFalsy()
+    expect((option1 as HTMLOptionElement).selected).toBeTruthy()
+    expect((option2 as HTMLOptionElement).selected).toBeFalsy()
   })
 
   test("should render select without placeholder in options", () => {

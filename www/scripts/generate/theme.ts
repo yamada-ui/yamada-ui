@@ -1,7 +1,7 @@
 import { theme } from "@yamada-ui/react/theme"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import path from "node:path"
 import ora from "ora"
-import path from "path"
 import c from "picocolors"
 
 const DIST_PATH = path.resolve("data", "theme.json")

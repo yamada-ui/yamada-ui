@@ -1,9 +1,9 @@
 import react from "@vitejs/plugin-react-swc"
 import { playwright } from "@vitest/browser-playwright"
+import { defineProject, mergeConfig } from "@yamada-ui/workspace/vitest"
 import sharedConfig from "@yamada-ui/workspace/vitest/config"
-import { glob, readFile } from "fs/promises"
+import { glob, readFile } from "node:fs/promises"
 import { resolve } from "node:path"
-import { defineProject, mergeConfig } from "vitest/config"
 
 async function getBrowserTestFiles() {
   const paths = await Array.fromAsync(
@@ -45,7 +45,6 @@ export default mergeConfig(sharedConfig, {
       defineProject({
         resolve: {
           alias: {
-            "#test": resolve(__dirname, "./test"),
             "@": resolve(__dirname, "./src"),
           },
         },
@@ -63,7 +62,6 @@ export default mergeConfig(sharedConfig, {
         optimizeDeps: { include: ["axe-core"] },
         resolve: {
           alias: {
-            "#test/browser": resolve(__dirname, "./test/browser"),
             "@": resolve(__dirname, "./src"),
           },
         },

@@ -1,5 +1,66 @@
 # @yamada-ui/react
 
+## 2.1.7
+
+### Patch Changes
+
+- [#6346](https://github.com/yamada-ui/yamada-ui/pull/6346) [`fc5f9a2`](https://github.com/yamada-ui/yamada-ui/commit/fc5f9a2ea5a2bf5bea2f28af8377dd95168181c7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- [#6346](https://github.com/yamada-ui/yamada-ui/pull/6346) [`fc5f9a2`](https://github.com/yamada-ui/yamada-ui/commit/fc5f9a2ea5a2bf5bea2f28af8377dd95168181c7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+## 2.1.6
+
+### Patch Changes
+
+- [#6326](https://github.com/yamada-ui/yamada-ui/pull/6326) [`acc491e`](https://github.com/yamada-ui/yamada-ui/commit/acc491e773cff8ddf5e6ee87c68655e9bbffc22c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `isInterpolation`.
+
+- [#6326](https://github.com/yamada-ui/yamada-ui/pull/6326) [`acc491e`](https://github.com/yamada-ui/yamada-ui/commit/acc491e773cff8ddf5e6ee87c68655e9bbffc22c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where fallback values for CSS variables in interpolation did not work correctly in `useInjectVarsIntoProps` and `useInjectVarsIntoCss`.
+
+## 2.1.5
+
+### Patch Changes
+
+- [#6261](https://github.com/yamada-ui/yamada-ui/pull/6261) [`aa494e0`](https://github.com/yamada-ui/yamada-ui/commit/aa494e09649baec0bffdca1f6da1bf1ee388c0d8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- [#6309](https://github.com/yamada-ui/yamada-ui/pull/6309) [`b4ca385`](https://github.com/yamada-ui/yamada-ui/commit/b4ca38563004851771ec3582a0c5b5ac28b6cdfb) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactored the styles of the `Button` component. There are no changes to the styles.
+
+- [#6297](https://github.com/yamada-ui/yamada-ui/pull/6297) [`d58fcf3`](https://github.com/yamada-ui/yamada-ui/commit/d58fcf3d98903924f2c7b463ac76b3ac6b9d3675) Thanks [@bmthd](https://github.com/bmthd)! - Fix `useAsyncCallback` so that `deps` controls memoization like `useCallback`.
+
+- [#6317](https://github.com/yamada-ui/yamada-ui/pull/6317) [`4ca9145`](https://github.com/yamada-ui/yamada-ui/commit/4ca91459625bc21e919d56c53a0809c5ae9966ac) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#6277](https://github.com/yamada-ui/yamada-ui/pull/6277) [`01125a4`](https://github.com/yamada-ui/yamada-ui/commit/01125a4d1c652e85b377d1efe58578bbeeec2adc) Thanks [@bmthd](https://github.com/bmthd)! - Fixed an issue where the opening animation in NativeAccordion did not run on the first open in SSR environments.
+
+## 2.1.4
+
+### Patch Changes
+
+- [#6194](https://github.com/yamada-ui/yamada-ui/pull/6194) [`20694a1`](https://github.com/yamada-ui/yamada-ui/commit/20694a10c7878bca2cc8b590dd09ac9d4a9c4050) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- [#6249](https://github.com/yamada-ui/yamada-ui/pull/6249) [`1b421b9`](https://github.com/yamada-ui/yamada-ui/commit/1b421b9bc4f4e978242e0a8f577791cb51c8aa5a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enabled specifying the indicator background color using `--indicator-bg` on `Radio.Root`.
+
+- [#6225](https://github.com/yamada-ui/yamada-ui/pull/6225) [`1aa1e86`](https://github.com/yamada-ui/yamada-ui/commit/1aa1e8643340d01e9c4bcb2290a66e0f41aa8b1e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Exported `Accordion.ItemType` type.
+
+- [#6257](https://github.com/yamada-ui/yamada-ui/pull/6257) [`109a631`](https://github.com/yamada-ui/yamada-ui/commit/109a6318d73d43816e81bb9dccf23af6b3584d01) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed the JSDoc link for `Modal.Root`.
+
+- [#6249](https://github.com/yamada-ui/yamada-ui/pull/6249) [`1b421b9`](https://github.com/yamada-ui/yamada-ui/commit/1b421b9bc4f4e978242e0a8f577791cb51c8aa5a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enabled specifying the indicator background color using `--indicator-bg` on `Checkbox.Root`.
+
+- [#6259](https://github.com/yamada-ui/yamada-ui/pull/6259) [`d8d2ab4`](https://github.com/yamada-ui/yamada-ui/commit/d8d2ab4d70247160053366b479bcf28a8aacabd6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- [#6249](https://github.com/yamada-ui/yamada-ui/pull/6249) [`1b421b9`](https://github.com/yamada-ui/yamada-ui/commit/1b421b9bc4f4e978242e0a8f577791cb51c8aa5a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `aria-controls`, `aria-labelledby`, and `tabIndex` could not be set on the `input` element of `Checkbox`.
+
+- [#6247](https://github.com/yamada-ui/yamada-ui/pull/6247) [`6e35538`](https://github.com/yamada-ui/yamada-ui/commit/6e355381a36f04b338cd77322aa50e80d45fa2ac) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Allowed specifying a node as an argument to `enabledValue` in the return value of `useDescendants` generated by `createDescendants`.
+
+- [#6247](https://github.com/yamada-ui/yamada-ui/pull/6247) [`6e35538`](https://github.com/yamada-ui/yamada-ui/commit/6e355381a36f04b338cd77322aa50e80d45fa2ac) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enabled AND-search on `props` in the arguments of `values`, `enabledValues`, `enabledPrevValue`, and `enabledNextValue` returned by `useDescendants` generated by `createDescendants`.
+
+- [#6248](https://github.com/yamada-ui/yamada-ui/pull/6248) [`238db22`](https://github.com/yamada-ui/yamada-ui/commit/238db227334c4082344c97d1d6086ae2e4d3bf78) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `_indicator`, `_hasGroup`, `_notHasGroup` and `_animated` to condition props.
+
+- [#6246](https://github.com/yamada-ui/yamada-ui/pull/6246) [`e596cc0`](https://github.com/yamada-ui/yamada-ui/commit/e596cc0cdca67059931600360e304c2a72ea3442) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Adjusted the dark mode color for `colors.bg.subtle`.
+
+- [#6249](https://github.com/yamada-ui/yamada-ui/pull/6249) [`1b421b9`](https://github.com/yamada-ui/yamada-ui/commit/1b421b9bc4f4e978242e0a8f577791cb51c8aa5a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `aria-controls`, `aria-labelledby`, and `tabIndex` could not be set on the `input` element of `Radio`.
+
+- Updated dependencies [[`eaddd11`](https://github.com/yamada-ui/yamada-ui/commit/eaddd1185085d2eaa11e8a12416b0e4e8acbef5c), [`d28fc6e`](https://github.com/yamada-ui/yamada-ui/commit/d28fc6e2105a859e133b0f6290f2ae73c461e875), [`8abe31f`](https://github.com/yamada-ui/yamada-ui/commit/8abe31fead60b0928d59e0adc4e30cb3b83e22b3)]:
+  - @yamada-ui/utils@2.1.2
+
 ## 2.1.3
 
 ### Patch Changes

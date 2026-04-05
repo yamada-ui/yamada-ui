@@ -1,11 +1,12 @@
 import {
   cspellConfig,
+  defineConfig,
+  globalIgnores,
   jsxA11yConfig,
   reactConfig,
   reactHooksConfig,
   sharedConfigArray,
 } from "@yamada-ui/workspace/eslint"
-import { defineConfig, globalIgnores } from "eslint/config"
 
 const config = defineConfig(
   globalIgnores(["src/**/*.gen.ts"], "ignores"),

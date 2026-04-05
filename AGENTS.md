@@ -17,11 +17,11 @@ This is a monorepo managed by pnpm, which includes Yamada UI and related package
 ```
 packages/
 ├─ cli/　        # Published CLI package (@yamada-ui/cli)
-├─ react/　      # Published React components package (@yamada-ui/react)
+├─ react/　      # Published react components package (@yamada-ui/react)
 ├─ utils/　      # Published utility functions package (@yamada-ui/utils)
+├─ forge/　      # Internal forge package for (Creating github issues, ...etc.)
 └─ workspace/　  # Internal utilities packages (ESLint, Prettier, Vitest, TypeScript, ...etc.)
 www/　            # Documentation site (Next.js, Velite)
-scripts/　        # Code generation and CI scripts
 playgrounds/
 ├─ next/
 │ ├─ app/       # Next.js App Router playground
@@ -42,6 +42,8 @@ Shortcuts are defined in the root `package.json`.
 pnpm react ...                  # Forwards to packages/react
 pnpm utils ...                  # Forwards to packages/utils
 pnpm cli ...                    # Forwards to packages/cli
+pnpm forge ...                  # Forwards to packages/forge
+pnpm workspace ...              # Forwards to packages/workspace
 pnpm www ...                    # Forwards to www
 pnpm next:app ...               # Forwards to playgrounds/next/app
 pnpm next:pages ...             # Forwards to playgrounds/next/pages
@@ -66,33 +68,37 @@ pnpm www build   # Build www/
 ### Format / Lint / Typecheck
 
 ```bash
-pnpm quality           # Format, lint, and typecheck packages/
-pnpm quality:scripts   # Format, lint, and typecheck scripts/
-pnpm cli quality       # Format, lint, and typecheck cli/
-pnpm react quality     # Format, lint, and typecheck react/
-pnpm utils quality     # Format, lint, and typecheck utils/
-pnpm www quality       # Format, lint, and typecheck www/
+pnpm quality             # Format, lint, and typecheck packages/
+pnpm cli quality         # Format, lint, and typecheck cli/
+pnpm react quality       # Format, lint, and typecheck react/
+pnpm utils quality       # Format, lint, and typecheck utils/
+pnpm forge quality       # Format, lint, and typecheck forge/
+pnpm workspace quality   # Format, lint, and typecheck workspace/
+pnpm www quality         # Format, lint, and typecheck www/
 
-pnpm format            # Format packages/
-pnpm format:scripts    # Format scripts/
-pnpm cli format        # Format cli/
-pnpm react format      # Format react/
-pnpm utils format      # Format utils/
-pnpm www format        # Format www/
+pnpm format              # Format packages/
+pnpm cli format          # Format cli/
+pnpm react format        # Format react/
+pnpm utils format        # Format utils/
+pnpm forge format        # Format forge/
+pnpm workspace format    # Format workspace/
+pnpm www format          # Format www/
 
-pnpm lint              # Lint packages/
-pnpm lint:scripts      # Lint scripts/
-pnpm cli lint          # Lint cli/
-pnpm react lint        # Lint react/
-pnpm utils lint        # Lint utils/
-pnpm www lint          # Lint www/
+pnpm lint                # Lint packages/
+pnpm cli lint            # Lint cli/
+pnpm react lint          # Lint react/
+pnpm utils lint          # Lint utils/
+pnpm forge lint          # Lint forge/
+pnpm workspace lint      # Lint workspace/
+pnpm www lint            # Lint www/
 
-pnpm typecheck         # Typecheck packages/
-pnpm typecheck:scripts # Typecheck scripts/
-pnpm cli typecheck     # Typecheck cli/
-pnpm react typecheck   # Typecheck react/
-pnpm utils typecheck   # Typecheck utils/
-pnpm www typecheck     # Typecheck www/
+pnpm typecheck           # Typecheck packages/
+pnpm cli typecheck       # Typecheck cli/
+pnpm react typecheck     # Typecheck react/
+pnpm utils typecheck     # Typecheck utils/
+pnpm forge typecheck     # Typecheck forge/
+pnpm workspace typecheck # Typecheck workspace/
+pnpm www typecheck       # Typecheck www/
 ```
 
 ### Test
@@ -115,10 +121,11 @@ pnpm react storybook:build # Build Storybook
 ### Code Generation
 
 ```bash
-pnpm gen:tokens # Generate theme token types
-pnpm gen:styles # Generate Style Props
-pnpm gen:icons  # Generate icon components from Lucide React
-pnpm gen:props  # Generate prop documentation
+pnpm react gen:tokens     # Generate theme token types
+pnpm react gen:styles     # Generate style props
+pnpm react gen:icons      # Generate icon components from Lucide React
+pnpm react gen:props      # Generate prop documentation
+pnpm react gen:registries # Generate registries.
 ```
 
 ## Commit Convention

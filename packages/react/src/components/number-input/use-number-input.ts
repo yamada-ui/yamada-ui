@@ -220,7 +220,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   const onBlur = useCallback(() => {
     if (!clampValueOnBlur) return
 
-    let nextValue = value as number | string
+    let nextValue = value
 
     if (value === "") return
 

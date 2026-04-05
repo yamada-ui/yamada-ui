@@ -9,7 +9,6 @@ node_modules
 storybook-static
 coverage
 __screenshots__
-!scripts/issue/coverage
 report.json
 trace
 dist

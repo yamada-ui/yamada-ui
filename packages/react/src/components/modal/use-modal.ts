@@ -1,10 +1,10 @@
 import type { KeyboardEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
-import { useCallback, useId } from "react"
+import { useCallback } from "react"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { useI18n } from "../../providers/i18n-provider"
-import { cx, handlerAll } from "../../utils"
+import { cx, handlerAll, useIds } from "../../utils"
 
 export interface UseModalProps
   extends HTMLProps, Omit<UseDisclosureProps, "timing"> {
@@ -41,11 +41,8 @@ export const useModal = ({
     open: openProp,
     onClose: onCloseProp,
     onOpen: onOpenProp,
-    ...rest,
   })
-  const contentId = useId()
-  const titleId = useId()
-  const bodyId = useId()
+  const [contentId, titleId, bodyId] = useIds()
   const { t } = useI18n("modal")
 
   const onKeyDown = useCallback(

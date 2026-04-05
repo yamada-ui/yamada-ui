@@ -1,11 +1,11 @@
-import type { ConfigWithExtends } from "@eslint/config-helpers"
+import type { ConfigWithExtends, Plugin } from "@eslint/config-helpers"
 import testingLibraryPlugin from "eslint-plugin-testing-library"
 import { sharedTestFiles } from "./shared"
 
 export const testingLibraryConfig = {
   name: "testing-library",
   files: sharedTestFiles,
-  plugins: { "testing-library": testingLibraryPlugin },
+  plugins: { "testing-library": testingLibraryPlugin as Plugin },
   rules: {
     "testing-library/no-await-sync-queries": "error",
     "testing-library/no-debugging-utils": "error",

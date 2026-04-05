@@ -5,9 +5,9 @@ import {
   readFileSync,
   rmSync,
   writeFileSync,
-} from "fs"
-import { tmpdir } from "os"
-import path from "path"
+} from "node:fs"
+import { tmpdir } from "node:os"
+import path from "node:path"
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest"
 
 vi.mock("../../utils", async (importOriginal) => {
@@ -277,7 +277,7 @@ describe("add", () => {
     setupProject(tempDir)
 
     const indexPath = path.join(tempDir, "workspaces", "ui", "src", "index.ts")
-    const { unlinkSync } = await import("fs")
+    const { unlinkSync } = await import("node:fs")
     unlinkSync(indexPath)
 
     await add.parseAsync(

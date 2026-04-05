@@ -1,8 +1,8 @@
 import type { Relations } from "@/data"
 import type { Locale } from "@/utils/i18n"
-import { glob, readFile } from "fs/promises"
 import matter from "gray-matter"
-import path from "path"
+import { glob, readFile } from "node:fs/promises"
+import path from "node:path"
 import data from "@/data/relations.json"
 import { getLang } from "@/utils/i18n"
 

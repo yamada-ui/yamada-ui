@@ -1,6 +1,6 @@
 import type { Config } from "../../index.type"
 import type { RegistryMap } from "./get-registries-and-files"
-import path from "path"
+import path from "node:path"
 import { describe, expect, test } from "vitest"
 import { getDiff, getDirPath } from "./get-diff"
 

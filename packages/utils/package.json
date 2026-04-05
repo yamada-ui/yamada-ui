@@ -1,7 +1,7 @@
 {
   "name": "@yamada-ui/utils",
   "type": "module",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "The utilities for Yamada UI projects",
   "keywords": [
     "utils",
@@ -48,7 +48,7 @@
     "color2k": "^2.0.3"
   },
   "devDependencies": {
-    "clean-package": "2.2.0",
+    "@yamada-ui/workspace": "workspace:*",
     "react": "catalog:"
   },
   "peerDependencies": {

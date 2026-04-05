@@ -1,6 +1,6 @@
-import { execFile } from "child_process"
+import { execFile } from "node:child_process"
+import { promisify } from "node:util"
 import c from "picocolors"
-import { promisify } from "util"
 
 const execFileAsync = promisify(execFile)
 

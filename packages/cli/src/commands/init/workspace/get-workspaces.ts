@@ -1,6 +1,7 @@
 import type { PackageManager } from "../../../utils"
 import { glob, readFile } from "node:fs/promises"
 import path from "node:path"
+import c from "picocolors"
 import * as YAML from "yaml"
 
 export async function getWorkspaces(
@@ -85,6 +86,7 @@ export async function getWorkspaces(
     }
   }
 
+  const absCwd = path.resolve(cwd)
   const actualWorkspaces = new Set<string>()
   for (const pattern of positivePatterns) {
     const normalizedPattern = pattern.replace(/\/$/, "")
@@ -93,6 +95,15 @@ export async function getWorkspaces(
     )
     for (const match of matches) {
       const dir = path.dirname(match)
+      const absDir = path.resolve(cwd, dir)
+      if (!absDir.startsWith(absCwd + path.sep)) {
+        console.warn(
+          c.yellow(
+            `Warning: Skipping workspace outside of project root: ${dir}`,
+          ),
+        )
+        continue
+      }
       if (!excludedPaths.has(dir)) actualWorkspaces.add(dir)
     }
   }

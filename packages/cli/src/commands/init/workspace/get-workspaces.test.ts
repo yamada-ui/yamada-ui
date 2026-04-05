@@ -7,7 +7,7 @@ import {
 } from "node:fs"
 import { tmpdir } from "node:os"
 import path from "node:path"
-import { afterEach, beforeEach, describe, expect, test } from "vitest"
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest"
 import { getWorkspaces } from "./get-workspaces"
 
 describe("getWorkspaces", () => {
@@ -269,6 +269,68 @@ describe("getWorkspaces", () => {
       await expect(getWorkspaces(tempDir, packageManager)).rejects.toThrow(
         `Failed to read ${packageJsonPath}`,
       )
+    })
+  })
+
+  describe("path traversal protection", () => {
+    test("should skip workspaces resolved outside of project root (pnpm)", async () => {
+      const parentDir = mkdtempSync(path.join(tmpdir(), "yamada-cli-parent-"))
+      const cwdDir = path.join(parentDir, "project")
+      mkdirSync(cwdDir)
+      const siblingDir = path.join(parentDir, "sibling", "app")
+      mkdirSync(siblingDir, { recursive: true })
+      writeFileSync(
+        path.join(siblingDir, "package.json"),
+        JSON.stringify({ name: "sibling-app" }),
+        "utf-8",
+      )
+      writeFileSync(
+        path.join(cwdDir, "pnpm-workspace.yaml"),
+        "packages:\n  - ../sibling/*\n",
+        "utf-8",
+      )
+
+      const warnSpy = vi.spyOn(console, "warn").mockImplementation(vi.fn())
+      try {
+        const result = await getWorkspaces(cwdDir, "pnpm")
+        expect(result).toStrictEqual([])
+        expect(warnSpy).toHaveBeenCalledWith(
+          expect.stringContaining("Skipping workspace outside of project root"),
+        )
+      } finally {
+        warnSpy.mockRestore()
+        rmSync(parentDir, { force: true, recursive: true })
+      }
+    })
+
+    test("should skip workspaces resolved outside of project root (npm)", async () => {
+      const parentDir = mkdtempSync(path.join(tmpdir(), "yamada-cli-parent-"))
+      const cwdDir = path.join(parentDir, "project")
+      mkdirSync(cwdDir)
+      const siblingDir = path.join(parentDir, "sibling", "app")
+      mkdirSync(siblingDir, { recursive: true })
+      writeFileSync(
+        path.join(siblingDir, "package.json"),
+        JSON.stringify({ name: "sibling-app" }),
+        "utf-8",
+      )
+      writeFileSync(
+        path.join(cwdDir, "package.json"),
+        JSON.stringify({ workspaces: ["../sibling/*"] }),
+        "utf-8",
+      )
+
+      const warnSpy = vi.spyOn(console, "warn").mockImplementation(vi.fn())
+      try {
+        const result = await getWorkspaces(cwdDir, "npm")
+        expect(result).toStrictEqual([])
+        expect(warnSpy).toHaveBeenCalledWith(
+          expect.stringContaining("Skipping workspace outside of project root"),
+        )
+      } finally {
+        warnSpy.mockRestore()
+        rmSync(parentDir, { force: true, recursive: true })
+      }
     })
   })
 

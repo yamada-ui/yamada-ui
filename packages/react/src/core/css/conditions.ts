@@ -57,6 +57,11 @@ export const attributes = {
    */
   _center: "&:is([data-center], [data-group-center])",
   /**
+   * The CSS `&:is([data-collapsed], :not([data-expanded]), [aria-expanded=false])` attribute selector.
+   */
+  _collapsed:
+    "&:is([data-collapsed], :not([data-expanded]), [aria-expanded=false])",
+  /**
    * The CSS `&[data-complete]` attribute selector.
    */
   _complete: "&[data-complete]",
@@ -319,6 +324,10 @@ export const pseudoClasses = {
    * The CSS `& > *` child combinator selector.
    */
   _child: "& > *",
+  /**
+   * The CSS `& > [data-content]` child combinator attribute selector.
+   */
+  _content: "& > [data-content]",
   /**
    * The CSS `&:default` pseudo-class.
    */
@@ -586,6 +595,10 @@ export const groupAttributes = {
    */
   _groupChecked: toGroup(pseudoClasses._checked),
   /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is collapsed.
+   */
+  _groupCollapsed: toGroup(attributes._collapsed),
+  /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is complete.
    */
   _groupComplete: toGroup(attributes._complete),
@@ -731,6 +744,10 @@ export const peerAttributes = {
    * Styles to apply when a parent element with `data-peer` or `.peer` is checked.
    */
   _peerChecked: toPeer(pseudoClasses._checked),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is collapsed.
+   */
+  _peerCollapsed: toPeer(attributes._collapsed),
   /**
    * Styles to apply when a parent element with `data-peer` or `.peer` is complete.
    */

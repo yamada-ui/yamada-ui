@@ -1,8 +1,1342 @@
 ---
 title: Tree
-description: "We are currently considering the development of `Tree`."
+description: "`Tree` is a component used to display hierarchical data structures in an expandable tree format."
 tags: ["disclosure", "list", "data-display"]
-status: planned
+storybook: components-tree--basic
+source: components/tree
+style: components/tree/tree.style.ts
 ---
 
-Please post your thoughts on this GitHub [issue](https://github.com/yamada-ui/yamada-ui/issues/990) to help us prioritize its development.
+```tsx preview
+<Tree.Root maxW="2xs">
+  <Tree.Item label="node_modules">
+    <Tree.Item label="react" />
+    <Tree.Item label="react-dom" />
+    <Tree.Item label="@yamada-ui">
+      <Tree.Item label="react" />
+      <Tree.Item label="utils" />
+    </Tree.Item>
+  </Tree.Item>
+  <Tree.Item label="src">
+    <Tree.Item label="components">
+      <Tree.Item label="tree.tsx" />
+      <Tree.Item label="index.ts" />
+    </Tree.Item>
+    <Tree.Item label="app">
+      <Tree.Item label="about">
+        <Tree.Item label="layout.tsx" />
+        <Tree.Item label="page.tsx" />
+      </Tree.Item>
+      <Tree.Item label="layout.tsx" />
+      <Tree.Item label="page.tsx" />
+    </Tree.Item>
+  </Tree.Item>
+  <Tree.Item label="pnpm-lock.yaml" />
+  <Tree.Item label="package.json" />
+  <Tree.Item label="tsconfig.json" />
+  <Tree.Item label="README.md" />
+</Tree.Root>
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { Tree } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Tree } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Tree } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Tree.Root>
+  <Tree.Item>
+    <Tree.Item />
+  </Tree.Item>
+  <Tree.Item />
+</Tree.Root>
+```
+
+:::tip
+If the `label` of `Tree.Item` is a string, you can omit the `value`.
+:::
+
+### Use items
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return <Tree.Root maxW="2xs" items={items} />
+```
+
+### Change Variant
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["subtle", "solid"]}>
+      {(variant, index) => (
+        <Tree.Root
+          key={index}
+          maxW="2xs"
+          variant={variant}
+          defaultSelectedValue="node_modules"
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Size
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["sm", "md", "lg"]}>
+      {(size, index) => (
+        <Tree.Root
+          key={index}
+          maxW="2xs"
+          size={size}
+          defaultExpandedValue={["src"]}
+          defaultSelectedValue="node_modules"
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Shape
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["rounded", "square", "circle"]}>
+      {(shape, index) => (
+        <Tree.Root
+          key={index}
+          maxW="2xs"
+          defaultSelectedValue="node_modules"
+          items={items}
+          shape={shape}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Set Default Expanded Items
+
+To have specific items expanded by default, set the item values to `defaultExpandedValue`.
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return (
+  <Tree.Root
+    maxW="2xs"
+    defaultExpandedValue={["src", "src/components"]}
+    items={items}
+  />
+)
+```
+
+### Set Default Selected Item
+
+To have a specific item selected by default, set the item value to `defaultSelectedValue`.
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return (
+  <Tree.Root maxW="2xs" defaultSelectedValue="node_modules" items={items} />
+)
+```
+
+### Select Multiple Items
+
+To select multiple items, set `multiple` to `true`.
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return <Tree.Root maxW="2xs" items={items} multiple />
+```
+
+### Enable Checkboxes
+
+To enable checkboxes for items, set `checkable` to `true`.
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return <Tree.Root maxW="2xs" checkable items={items} />
+```
+
+### Set Default Checked Items
+
+To have specific items checked by default, set the item values to `defaultCheckedValue`.
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return (
+  <Tree.Root
+    maxW="2xs"
+    checkable
+    defaultCheckedValue={["package.json"]}
+    items={items}
+  />
+)
+```
+
+### Disable an Item
+
+To disable a specific item, set `disabled`.
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      disabled: true,
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { disabled: true, label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return <Tree.Root maxW="2xs" items={items} />
+```
+
+### Use as Link
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    {
+      as: "a",
+      href: "https://yamada-ui.com",
+      rel: "noopener",
+      target: "_blank",
+      endElement: <SquareArrowOutUpRightIcon />,
+      label: "README.md",
+    },
+  ],
+  [],
+)
+
+return <Tree.Root maxW="2xs" items={items} />
+```
+
+### Show Guide Line
+
+To show guide lines, set `withGuideLine` to `true`.
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return <Tree.Root maxW="2xs" items={items} withGuideLine />
+```
+
+### Hide Indicator
+
+To hide the indicator, set `indicatorHidden` to `true`.
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return <Tree.Root maxW="2xs" indicatorHidden items={items} />
+```
+
+### Add Animation
+
+To add animation when expanding and collapsing, set `animated` to `true`.
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return <Tree.Root maxW="2xs" animated items={items} />
+```
+
+### Filtering
+
+```tsx preview functional client
+const defaultItems = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+const [items, setItems] = useState<Tree.ItemType[]>(defaultItems)
+
+const searchItems = useCallback(
+  (value: string, items: Tree.ItemType[]): Tree.ItemType[] => {
+    if (!value.length) return items
+
+    return items
+      .map((item) => {
+        if ("children" in item) {
+          if (isString(item.label) && match(item.label, value)) {
+            return item
+          } else {
+            const children = searchItems(value, item.children)
+
+            if (children.length) return { ...item, children }
+          }
+        } else if (isString(item.label) && match(item.label, value)) {
+          return item
+        }
+      })
+      .filter((item) => !isUndefined(item))
+  },
+  [],
+)
+
+return (
+  <VStack gap="sm" maxW="2xs">
+    <Input
+      placeholder="Search"
+      onChange={(ev) => {
+        setItems(searchItems(ev.target.value, defaultItems))
+      }}
+    />
+    <Tree.Root items={items} />
+  </VStack>
+)
+```
+
+### Async Loading
+
+To load child items asynchronously, use `asyncChildren` instead of `children`.
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      asyncChildren: async () => {
+        await wait(1000)
+
+        return [
+          { label: "react" },
+          { label: "react-dom" },
+          {
+            children: [{ label: "react" }, { label: "utils" }],
+            label: "@yamada-ui",
+          },
+        ]
+      },
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return <Tree.Root maxW="2xs" items={items} />
+```
+
+### Change Loading Scheme
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      asyncChildren: async () => {
+        await wait(1000)
+
+        return [
+          { label: "react" },
+          { label: "react-dom" },
+          {
+            children: [{ label: "react" }, { label: "utils" }],
+            label: "@yamada-ui",
+          },
+        ]
+      },
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return <Tree.Root maxW="2xs" items={items} loadingScheme="dots" />
+```
+
+### Expand/Collapse All
+
+To expand or collapse all items, use `controlRef`.
+
+```tsx preview functional client
+const controlRef = useRef<Tree.Control>(null)
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return (
+  <VStack gap="md">
+    <ButtonGroup.Root>
+      <ButtonGroup.Item onClick={() => controlRef.current?.expand()}>
+        Expand All
+      </ButtonGroup.Item>
+      <ButtonGroup.Item onClick={() => controlRef.current?.collapse()}>
+        Collapse All
+      </ButtonGroup.Item>
+    </ButtonGroup.Root>
+
+    <Tree.Root maxW="2xs" controlRef={controlRef} items={items} />
+  </VStack>
+)
+```
+
+### Customize Element
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return (
+  <Tree.Root
+    maxW="2xs"
+    items={items}
+    startElement={{
+      group: ({ expanded }) =>
+        expanded ? <FolderOpenIcon /> : <FolderClosedIcon />,
+      item: <FileIcon />,
+    }}
+  />
+)
+```
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return <Tree.Root maxW="2xs" endElement={<LockKeyholeIcon />} items={items} />
+```
+
+### Customize Indicator
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return (
+  <Tree.Root
+    maxW="2xs"
+    indicator={({ expanded }) =>
+      expanded ? <SquareMinusIcon /> : <SquarePlusIcon />
+    }
+    items={items}
+    indicatorProps={{ _expanded: { transform: "rotate(0deg)" } }}
+  />
+)
+```
+
+### Control
+
+```tsx preview functional client
+const [selectedValue, setSelectedValue] = useState<string>("package.json")
+const [checkedValue, setCheckedValue] = useState<string[]>(["README.md"])
+const [expandedValue, setExpandedValue] = useState<string[]>(["node_modules"])
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return (
+  <Tree.Root
+    maxW="2xs"
+    checkable
+    checkedValue={checkedValue}
+    expandedValue={expandedValue}
+    items={items}
+    selectedValue={selectedValue}
+    onCheckedChange={setCheckedValue}
+    onExpandedChange={setExpandedValue}
+    onSelectedChange={setSelectedValue}
+  />
+)
+```
+
+## Props
+
+<PropsTable name="tree" />
+
+## Accessibility
+
+`Tree` follows the [WAI-ARIA - TreeView Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/treeview/) for accessibility.
+
+When `aria-label` is set, it will be read aloud by screen readers.
+
+```tsx
+<Tree.Root aria-label="File tree" />
+```
+
+### Keyboard Navigation
+
+| Key                               | Description                                                                              | State             |
+| --------------------------------- | ---------------------------------------------------------------------------------------- | ----------------- |
+| `Tab`                             | Focuses on the selected item or the first item.                                          | -                 |
+| `ArrowUp`                         | Focuses the previous enabled item.                                                       | -                 |
+| `Shift` + `ArrowUp`               | Focuses the previous enabled item and selects it.                                        | `multiple={true}` |
+| `Control` + `Shift` + `ArrowUp`   | Collapses all items.                                                                     | -                 |
+| `ArrowDown`                       | Focuses the next enabled item.                                                           | -                 |
+| `Shift` + `ArrowDown`             | Focuses the next enabled item and selects it.                                            | `multiple={true}` |
+| `Control` + `Shift` + `ArrowDown` | Expands all items.                                                                       | -                 |
+| `ArrowRight`                      | If the focused item is collapsed, expands it. If expanded, focuses the first child item. | -                 |
+| `ArrowLeft`                       | If the focused item is expanded, collapses it. If collapsed, focuses the parent item.    | -                 |
+| `Space`, `Enter`                  | Selects the focused item. If it's a group item, toggles its expansion/collapse.          | -                 |
+| `Shift` + `Space`, `Enter`        | Selects all items between the first selected item and the currently focused item.        | `multiple={true}` |
+| `Home`                            | Focuses the first enabled item.                                                          | -                 |
+| `End`                             | Focuses the last enabled item.                                                           | -                 |
+| `Control` + `A`                   | Selects all enabled items.                                                               | `multiple={true}` |
+| `a-z`, `A-Z`                      | Focuses expanded item whose label starts with the typed character(s).                    | -                 |
+
+### ARIA Roles and Attributes
+
+| Component                 | Role and Attributes    | Usage                                                                           |
+| ------------------------- | ---------------------- | ------------------------------------------------------------------------------- |
+| `Tree.Root`               | `role="tree"`          | Indicates that the element is a tree.                                           |
+|                           | `aria-multiselectable` | Set to `"true"` when `multiple={true}` or `checkable={true}`.                   |
+| `Tree.Item`               | `role="treeitem"`      | Indicates that the element is a tree item.                                      |
+|                           | `aria-expanded`        | Set to `"true"` when the item is expanded, `"false"` when collapsed.            |
+|                           | `aria-selected`        | Set to `"true"` when the item is selected.                                      |
+|                           | `aria-disabled`        | Set to `"true"` when the item is disabled.                                      |
+|                           | `aria-level`           | Sets the hierarchy level of the item.                                           |
+|                           | `aria-labelledby`      | Sets the `id` of the related `Tree.Item > div > span`.                          |
+| `Tree.Item > ul`          | `role="group"`         | Indicates that the element is a group.                                          |
+|                           | `aria-labelledby`      | Sets the `id` of the related `Tree.Item > div > span`.                          |
+|                           | `aria-busy`            | Set to `"true"` when the item's children are loading.                           |
+| `Tree.Item > div > input` | `id`                   | Used to associate with the parent `Tree.Item > div > input`.                    |
+|                           | `aria-controls`        | Sets the `id` of related child `Tree.Item > div > input` elements.              |
+|                           | `aria-labelledby`      | Sets the `id` of the related `Tree.Item > div > span`.                          |
+| `Tree.Item > div > span`  | `id`                   | Used to associate `Tree.Item`, `Tree.Item > ul`, and `Tree.Item > div > input`. |
+
+## Similar Components
+
+<Similar name="tree" />
+
+## Uses Components & Hooks
+
+<Uses name="tree" />

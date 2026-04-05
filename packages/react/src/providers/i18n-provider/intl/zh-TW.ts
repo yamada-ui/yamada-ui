@@ -1,6 +1,10 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
+  actionBar: {
+    "Close action bar": "關閉操作列",
+    "Open action bar": "打開操作列",
+  },
   autocomplete: {
     "Clear value": "清除值",
     "No results found": "未找到結果",

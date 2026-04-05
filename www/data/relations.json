@@ -12,7 +12,21 @@
       "slide",
       "slide-fade",
       "carousel",
-      "drawer"
+      "tree"
+    ]
+  },
+  "action-bar": {
+    "dependencies": {
+      "components": ["motion", "popover", "portal"],
+      "hooks": ["use-value", "use-disclosure"]
+    },
+    "resembles": [
+      "native-popover",
+      "popover",
+      "tooltip",
+      "drawer",
+      "menu",
+      "modal"
     ]
   },
   "airy": {
@@ -391,12 +405,12 @@
     "resembles": [
       "list",
       "timeline",
+      "tree",
       "native-table",
       "stat",
       "table",
       "area-chart",
-      "badge",
-      "bar-chart"
+      "badge"
     ]
   },
   "date-picker": {
@@ -909,12 +923,12 @@
     "resembles": [
       "data-list",
       "timeline",
+      "tree",
       "native-table",
       "stat",
       "table",
       "area-chart",
-      "badge",
-      "bar-chart"
+      "badge"
     ]
   },
   "loading": {
@@ -952,11 +966,11 @@
       "select",
       "autocomplete",
       "native-popover",
+      "action-bar",
       "popover",
       "tooltip",
       "drawer",
-      "modal",
-      "tabs"
+      "modal"
     ]
   },
   "modal": {
@@ -1025,19 +1039,27 @@
     "dependents": { "components": ["accordion"], "hooks": [] },
     "resembles": [
       "accordion",
+      "tree",
       "tabs",
       "breadcrumb",
       "collapse",
       "data-list",
       "fade",
-      "fade-scale",
-      "infinite-scroll-area"
+      "fade-scale"
     ]
   },
   "native-popover": {
     "dependencies": { "components": [], "hooks": [] },
     "dependents": { "components": ["popover"], "hooks": [] },
-    "resembles": ["popover", "tooltip", "drawer", "menu", "modal", "indicator"]
+    "resembles": [
+      "action-bar",
+      "popover",
+      "tooltip",
+      "drawer",
+      "menu",
+      "modal",
+      "indicator"
+    ]
   },
   "native-select": {
     "dependencies": {
@@ -1168,7 +1190,14 @@
       ],
       "hooks": []
     },
-    "resembles": ["tooltip", "drawer", "modal", "native-popover", "menu"]
+    "resembles": [
+      "tooltip",
+      "drawer",
+      "modal",
+      "native-popover",
+      "action-bar",
+      "menu"
+    ]
   },
   "portal": {
     "dependencies": { "components": [], "hooks": [] },
@@ -1562,6 +1591,7 @@
       "pagination",
       "accordion",
       "steps",
+      "tree",
       "menu",
       "select"
     ]
@@ -1608,7 +1638,15 @@
   },
   "timeline": {
     "dependencies": { "components": [], "hooks": [] },
-    "resembles": ["data-list", "list", "steps", "native-table", "stat", "table"]
+    "resembles": [
+      "data-list",
+      "list",
+      "steps",
+      "tree",
+      "native-table",
+      "stat",
+      "table"
+    ]
   },
   "tip": {
     "dependencies": {
@@ -1639,7 +1677,30 @@
       "hooks": ["use-disclosure", "use-outside-click"]
     },
     "dependents": { "components": ["tip"], "hooks": [] },
-    "resembles": ["popover", "drawer", "modal", "native-popover", "menu"]
+    "resembles": [
+      "popover",
+      "drawer",
+      "modal",
+      "native-popover",
+      "action-bar",
+      "menu"
+    ]
+  },
+  "tree": {
+    "dependencies": {
+      "components": ["checkbox", "collapse", "loading", "motion", "icon"],
+      "hooks": ["use-descendants", "use-disclosure", "use-async-callback"]
+    },
+    "resembles": [
+      "data-list",
+      "list",
+      "native-accordion",
+      "accordion",
+      "timeline",
+      "tabs",
+      "native-table",
+      "stat"
+    ]
   },
   "visually-hidden": {
     "dependencies": { "components": [], "hooks": [] },

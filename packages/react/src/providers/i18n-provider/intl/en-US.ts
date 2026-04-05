@@ -1,4 +1,8 @@
 const data = {
+  actionBar: {
+    "Close action bar": "Close action bar",
+    "Open action bar": "Open action bar",
+  },
   autocomplete: {
     "Clear value": "Clear value",
     "No results found": "No results found",

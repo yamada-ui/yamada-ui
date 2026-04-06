@@ -2,14 +2,13 @@
 
 import type { EditorHandle } from "./editor"
 import type { PreviewHandle } from "./preview"
-import { Flex, Resizable, useAsyncCallback } from "@yamada-ui/react"
+import { Resizable, useAsyncCallback, VStack } from "@yamada-ui/react"
 import { debounce, useQueryState } from "nuqs"
 import {
   startTransition,
   use,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from "react"
@@ -104,32 +103,8 @@ export default function PlaygroundClient() {
     })
   }, [previewFirst, setLayout])
 
-  const editorPaneContent = useMemo(
-    () => (
-      <Editor
-        ref={editorRef}
-        code={code}
-        onChange={handleCodeChange}
-        onFormat={handleFormat}
-      />
-    ),
-    [code, handleCodeChange, handleFormat],
-  )
-
-  const previewPaneContent = useMemo(
-    () => (
-      <Preview
-        ref={previewRef}
-        compiledCode={compiledCode}
-        compiling={compiling}
-        error={error}
-      />
-    ),
-    [compiledCode, error, compiling],
-  )
-
   return (
-    <Flex flexDirection="column" h="calc(100dvh - {header-height})">
+    <VStack h="calc(100dvh - {header-height})">
       <Toolbar
         code={code}
         previewFirst={previewFirst}
@@ -140,11 +115,17 @@ export default function PlaygroundClient() {
         onSwapPanes={handleSwapPanes}
       />
       <Resizable.Root
+        data-preview-first={previewFirst || undefined}
         flex={1}
         orientation={{ base: "horizontal", md: "vertical" }}
       >
         <Resizable.Item defaultSize="50%" minSize="25%">
-          {previewFirst ? previewPaneContent : editorPaneContent}
+          <Editor
+            ref={editorRef}
+            code={code}
+            onChange={handleCodeChange}
+            onFormat={handleFormat}
+          />
         </Resizable.Item>
 
         <Resizable.Trigger
@@ -154,10 +135,15 @@ export default function PlaygroundClient() {
         />
 
         <Resizable.Item minSize="25%">
-          {previewFirst ? editorPaneContent : previewPaneContent}
+          <Preview
+            ref={previewRef}
+            compiledCode={compiledCode}
+            compiling={compiling}
+            error={error}
+          />
         </Resizable.Item>
       </Resizable.Root>
-    </Flex>
+    </VStack>
   )
 }
 

@@ -352,7 +352,7 @@ export function Preview({ ref, compiledCode, compiling, error }: PreviewProps) {
             <LoadingOverlay label={loadingLabel} />
           ) : null}
           {runtimeError ? (
-            <Box inset={0} position="absolute">
+            <Box inset="0" position="absolute">
               <ErrorDisplay error={runtimeError} title="Runtime Error" />
             </Box>
           ) : null}
@@ -395,7 +395,7 @@ function LoadingOverlay({ label }: LoadingOverlayProps) {
     <HStack
       bg="bg"
       gap="sm"
-      inset={0}
+      inset="0"
       justifyContent="center"
       position="absolute"
       role="status"
@@ -419,15 +419,15 @@ function ConsoleErrorsPanel({ errors }: ConsoleErrorsPanelProps) {
       bg="bg.panel"
       borderTopColor="danger"
       borderTopWidth="1px"
-      bottom={0}
+      bottom="0"
       fontFamily="mono"
       fontSize="xs"
-      left={0}
+      left="0"
       maxH="40"
       overflow="auto"
       p="sm"
       position="absolute"
-      right={0}
+      right="0"
       role="log"
     >
       <Text color="danger" fontWeight="bold" mb="xs">

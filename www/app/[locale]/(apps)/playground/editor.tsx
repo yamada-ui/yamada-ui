@@ -253,7 +253,7 @@ export function Editor({ ref, code, onChange, onFormat }: EditorProps) {
         ref={preRef}
         aria-hidden
         bg="bg.panel"
-        inset={0}
+        inset="0"
         overflow="auto"
         p="md"
         pointerEvents="none"
@@ -264,7 +264,7 @@ export function Editor({ ref, code, onChange, onFormat }: EditorProps) {
           data-language={LANGUAGE}
           dangerouslySetInnerHTML={{ __html: highlightedHtml }}
           lineHeight="1.5"
-          m={0}
+          m="0"
           minH="full"
           minW="fit-content"
         />

@@ -75,7 +75,7 @@ export function Toolbar({
   }, [code, previewFirst])
 
   return (
-    <HStack borderBottomWidth="1px" flexShrink={0} gap="sm" px="md" py="sm">
+    <HStack flexShrink={0} gap="sm" px="md" py="sm">
       <ButtonGroup.Root size="sm" variant="ghost" gap="xs">
         <Tooltip content={t("resetCode")}>
           <ButtonGroup.IconItem

@@ -2,7 +2,12 @@
 
 import type { EditorHandle } from "./editor"
 import type { PreviewHandle } from "./preview"
-import { Resizable, useAsyncCallback, VStack } from "@yamada-ui/react"
+import {
+  Resizable,
+  Separator,
+  useAsyncCallback,
+  VStack,
+} from "@yamada-ui/react"
 import { debounce, useQueryState } from "nuqs"
 import {
   startTransition,
@@ -114,8 +119,10 @@ export default function PlaygroundClient() {
         onScreenshotUi={handleScreenshotUi}
         onSwapPanes={handleSwapPanes}
       />
+
+      <Separator />
+
       <Resizable.Root
-        data-preview-first={previewFirst || undefined}
         flex={1}
         orientation={{ base: "horizontal", md: "vertical" }}
       >

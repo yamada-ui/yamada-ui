@@ -19,6 +19,7 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -48,6 +49,7 @@ jobs:
   test:
     name: Test
     uses: ./.github/workflows/test.yml
+    timeout-minutes: 10
     secrets:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -55,6 +57,7 @@ jobs:
   eslint:
     name: ESLint
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -94,6 +97,7 @@ jobs:
   typescript:
     name: TypeScript
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -133,6 +137,7 @@ jobs:
   prettier:
     name: Prettier
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -172,6 +177,7 @@ jobs:
   changeset:
     name: Changeset
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - name: Check modified files
         id: changed-files

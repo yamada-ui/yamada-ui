@@ -10,7 +10,7 @@ import {
   YAMADA_UI_VERSION,
 } from "./versions"
 
-let initPromise: null | Promise<void> = null
+let esbuildPromise: null | Promise<void> = null
 
 const CDN_MODULES = {
   "@faker-js/faker": {
@@ -75,17 +75,8 @@ Object.assign(globalThis, {
 })
 `
 
-function initEsbuild(): Promise<void> {
-  if (!initPromise) {
-    initPromise = esbuild.initialize({ wasmURL: "/esbuild.wasm" })
-  }
-  return initPromise
-}
-
-export function useEsbuild(): void {
-  if (!initPromise) {
-    throw initEsbuild()
-  }
+export function initializeEsbuild(): Promise<void> {
+  return (esbuildPromise ??= esbuild.initialize({ wasmURL: "/esbuild.wasm" }))
 }
 
 function createCdnPlugin(): esbuild.Plugin {
@@ -130,7 +121,7 @@ function createCdnPlugin(): esbuild.Plugin {
           },
           () => ({
             external: true,
-            path: getCdnModuleUrl(moduleName as keyof typeof CDN_MODULES),
+            path: getCdnModuleUrl(moduleName),
           }),
         )
       }
@@ -142,7 +133,7 @@ export async function compile(
   code: string,
   signal?: AbortSignal,
 ): Promise<string> {
-  await initEsbuild()
+  await initializeEsbuild()
   signal?.throwIfAborted()
   const source = `${LEGACY_GLOBALS_PRELUDE}\n${code}`
   const result = await esbuild.build({

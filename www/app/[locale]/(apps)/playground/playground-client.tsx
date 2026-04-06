@@ -6,6 +6,7 @@ import { Flex, Resizable, useAsyncCallback } from "@yamada-ui/react"
 import { debounce, useQueryState } from "nuqs"
 import {
   startTransition,
+  use,
   useCallback,
   useEffect,
   useMemo,
@@ -14,14 +15,14 @@ import {
 } from "react"
 import { DEFAULT_CODE } from "./constants"
 import { Editor } from "./editor"
-import { compile, useEsbuild } from "./esbuild"
+import { compile, initializeEsbuild } from "./esbuild"
 import { format } from "./prettier"
 import { Preview } from "./preview"
 import { playgroundSearchParams } from "./search-params"
 import { Toolbar } from "./toolbar"
 
 export default function PlaygroundClient() {
-  useEsbuild()
+  use(initializeEsbuild())
 
   const [layout, setLayout] = useQueryState(
     "layout",

@@ -4,7 +4,8 @@
       "Bash(git commit *--no-verify*)",
       "Bash(git commit -n *)",
       "Bash(git commit * -n)",
-      "Bash(git commit -*n*)"
+      "Bash(git commit -*n*)",
+      "Bash(git commit *-[a-zA-Z]*n* *)"
     ]
   }
 }

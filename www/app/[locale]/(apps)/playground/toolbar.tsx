@@ -65,10 +65,15 @@ export function Toolbar({
   }, [code, onCodeChange])
 
   const onShare = useCallback(async () => {
-    await navigator.share({
-      title: document.title,
-      url: getShareUrl(code, previewFirst),
-    })
+    try {
+      await navigator.share({
+        title: document.title,
+        url: getShareUrl(code, previewFirst),
+      })
+    } catch (e) {
+      if (e instanceof Error && e.name === "AbortError") return
+      throw e
+    }
   }, [code, previewFirst])
 
   return (

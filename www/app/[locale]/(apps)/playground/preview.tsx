@@ -218,6 +218,9 @@ export function Preview({ ref, compiledCode, compiling, error }: PreviewProps) {
   const [consoleErrors, setConsoleErrors] = useState<string[]>([])
   const screenshotResolveRef = useRef<((dataUrl: string) => void) | null>(null)
   const screenshotRejectRef = useRef<((err: Error) => void) | null>(null)
+  const screenshotTimeoutRef = useRef<null | ReturnType<typeof setTimeout>>(
+    null,
+  )
   const iframeInitializedRef = useRef(false)
   const updateRevisionRef = useRef(0)
 
@@ -258,6 +261,12 @@ export function Preview({ ref, compiledCode, compiling, error }: PreviewProps) {
         await deferScreenshotWork()
         screenshotResolveRef.current = resolve
         screenshotRejectRef.current = reject
+        screenshotTimeoutRef.current = setTimeout(() => {
+          screenshotResolveRef.current = null
+          screenshotRejectRef.current = null
+          screenshotTimeoutRef.current = null
+          reject(new Error("Screenshot timed out"))
+        }, 10000)
         const contentWindow = iframeRef.current?.contentWindow
         if (contentWindow) postToIframe(contentWindow, { type: "screenshot" })
       })().catch((error) => {
@@ -289,11 +298,19 @@ export function Preview({ ref, compiledCode, compiling, error }: PreviewProps) {
         setRuntimeError(null)
         break
       case "screenshot-data":
+        if (screenshotTimeoutRef.current) {
+          clearTimeout(screenshotTimeoutRef.current)
+          screenshotTimeoutRef.current = null
+        }
         screenshotResolveRef.current?.(eventData.dataUrl)
         screenshotResolveRef.current = null
         screenshotRejectRef.current = null
         break
       case "screenshot-error":
+        if (screenshotTimeoutRef.current) {
+          clearTimeout(screenshotTimeoutRef.current)
+          screenshotTimeoutRef.current = null
+        }
         screenshotRejectRef.current?.(new Error(eventData.message))
         screenshotResolveRef.current = null
         screenshotRejectRef.current = null

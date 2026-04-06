@@ -1,6 +1,5 @@
 import fs from "fs"
 import path from "path"
-import { pathToFileURL } from "url"
 
 function copyEsbuildWasm(cwd = process.cwd()) {
   fs.copyFileSync(
@@ -126,9 +125,4 @@ function main() {
   generatePlaygroundVersionsFile()
 }
 
-if (
-  process.argv[1] &&
-  import.meta.url === pathToFileURL(process.argv[1]).href
-) {
-  main()
-}
+main()

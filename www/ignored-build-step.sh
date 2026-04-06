@@ -21,7 +21,7 @@ fi
 if [ "$VERCEL_GIT_COMMIT_REF" == "$TARGET_BRANCH" ]; then
   git_diff_result=$(git diff --name-only HEAD^ HEAD)
 else
-  git fetch https://github.com/yamada-ui/yamada-ui.git $TARGET_BRANCH:$TARGET_BRANCH
+  git fetch "https://github.com/${VERCEL_GIT_REPO_OWNER}/${VERCEL_GIT_REPO_SLUG}.git" $TARGET_BRANCH:$TARGET_BRANCH
 
   git_diff_result=$(git diff --name-only $(git merge-base HEAD $TARGET_BRANCH) HEAD)
 fi

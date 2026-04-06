@@ -59,9 +59,7 @@ export function Toolbar({
       if (formatTimerRef.current) clearTimeout(formatTimerRef.current)
       setFormatted(true)
       formatTimerRef.current = setTimeout(() => setFormatted(false), 4000)
-    } catch {
-      // ignore format errors
-    }
+    } catch {}
   }, [code, onCodeChange])
 
   const onShare = useCallback(async () => {

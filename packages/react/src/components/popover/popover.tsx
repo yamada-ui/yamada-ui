@@ -40,10 +40,9 @@ export interface UsePopupAnimationProps {
   duration?: StyleValue<MotionTransitionProps["duration"]>
 }
 
-export const usePopupAnimationProps = ({
-  animationScheme = "scale",
-  duration = 0.1,
-}: UsePopupAnimationProps = {}) => {
+export const usePopupAnimationProps = (props: UsePopupAnimationProps = {}) => {
+  const animationScheme = useValue(props.animationScheme ?? "scale")
+  const duration = useValue(props.duration ?? 0.1)
   const sharedProps = { animate: "enter", exit: "exit", initial: "exit" }
 
   switch (animationScheme) {

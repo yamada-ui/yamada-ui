@@ -2,6 +2,11 @@ name: Quality
 
 on:
   pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
     branches:
       - main
       - v*
@@ -18,7 +23,9 @@ env:
 jobs:
   build:
     name: Build
+    if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -47,6 +54,7 @@ jobs:
 
   test:
     name: Test
+    if: ${{ !github.event.pull_request.draft }}
     uses: ./.github/workflows/test.yml
     secrets:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -54,7 +62,9 @@ jobs:
 
   eslint:
     name: ESLint
+    if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -93,7 +103,9 @@ jobs:
 
   typescript:
     name: TypeScript
+    if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -132,7 +144,9 @@ jobs:
 
   prettier:
     name: Prettier
+    if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -171,7 +185,9 @@ jobs:
 
   changeset:
     name: Changeset
+    if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - name: Check modified files
         id: changed-files

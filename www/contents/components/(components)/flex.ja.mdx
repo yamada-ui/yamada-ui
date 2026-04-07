@@ -39,6 +39,14 @@ import { Flex } from "@workspaces/ui"
 <Flex />
 ```
 
+::::tip
+汎用的なフレックスレイアウトではなく、縦方向または横方向の積み重ねを既定のスタイル付きで使いたい場合は、[VStack](/docs/components/v-stack)または[HStack](/docs/components/h-stack)の使用を検討してください。`VStack`はデフォルトで縦方向に並び、子要素が伸長されて幅いっぱいに表示されます。`HStack`はデフォルトで横方向に並び、交差軸方向で中央揃えになります。
+::::
+
+::::tip
+子要素を複数行に折り返して配置したい場合は、[Wrap](/docs/components/wrap)の使用を検討してください。
+::::
+
 ### 方向
 
 ```tsx preview

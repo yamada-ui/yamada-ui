@@ -1,7 +1,7 @@
 import { a11y, render, screen, waitFor } from "#test"
 import { Popover } from "."
 import { Button } from "../button"
-import { getPopupAnimationProps } from "./popover"
+import { usePopupAnimationProps } from "./popover"
 
 describe("<Popover />", () => {
   const Component = (props: Popover.RootProps) => {
@@ -261,63 +261,66 @@ describe("<Popover />", () => {
   })
 })
 
-describe("getPopupAnimationProps", () => {
+describe("usePopupAnimationProps", () => {
   test("returns scale animation props by default", () => {
-    const props = getPopupAnimationProps()
+    const props = usePopupAnimationProps()
     expect(props).toHaveProperty("animate", "enter")
     expect(props).toHaveProperty("exit", "exit")
     expect(props).toHaveProperty("initial", "exit")
     expect("custom" in props && props.custom).toStrictEqual({
-      duration: undefined,
+      duration: 0.1,
       reverse: true,
       scale: 0.95,
     })
   })
 
   test("returns slide-fade props for `inline-end`", () => {
-    const props = getPopupAnimationProps("inline-end")
+    const props = usePopupAnimationProps({ animationScheme: "inline-end" })
     expect(props).toHaveProperty("animate", "enter")
     expect("custom" in props && props.custom).toStrictEqual({
-      duration: undefined,
+      duration: 0.1,
       offsetX: 16,
       reverse: true,
     })
   })
 
   test("returns slide-fade props for `inline-start`", () => {
-    const props = getPopupAnimationProps("inline-start")
+    const props = usePopupAnimationProps({ animationScheme: "inline-start" })
     expect("custom" in props && props.custom).toStrictEqual({
-      duration: undefined,
+      duration: 0.1,
       offsetX: -16,
       reverse: true,
     })
   })
 
   test("returns slide-fade props for `block-start`", () => {
-    const props = getPopupAnimationProps("block-start")
+    const props = usePopupAnimationProps({ animationScheme: "block-start" })
     expect("custom" in props && props.custom).toStrictEqual({
-      duration: undefined,
+      duration: 0.1,
       offsetY: -16,
       reverse: true,
     })
   })
 
   test("returns slide-fade props for `block-end`", () => {
-    const props = getPopupAnimationProps("block-end")
+    const props = usePopupAnimationProps({ animationScheme: "block-end" })
     expect("custom" in props && props.custom).toStrictEqual({
-      duration: undefined,
+      duration: 0.1,
       offsetY: 16,
       reverse: true,
     })
   })
 
   test("returns empty object for `none`", () => {
-    const props = getPopupAnimationProps("none")
+    const props = usePopupAnimationProps({ animationScheme: "none" })
     expect(props).toStrictEqual({})
   })
 
   test("passes custom duration", () => {
-    const props = getPopupAnimationProps("scale", 0.5)
+    const props = usePopupAnimationProps({
+      animationScheme: "scale",
+      duration: 0.5,
+    })
     expect("custom" in props && props.custom).toStrictEqual({
       duration: 0.5,
       reverse: true,

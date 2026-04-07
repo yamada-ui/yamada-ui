@@ -6,7 +6,7 @@ import type { ButtonProps } from "../button"
 import type { CloseButtonProps } from "../close-button"
 import type { FocusLockProps } from "../focus-lock"
 import type { HTMLMotionProps, HTMLMotionPropsWithoutAs } from "../motion"
-import type { PopupAnimationProps } from "../popover"
+import type { UsePopupAnimationProps } from "../popover"
 import type { PortalProps } from "../portal"
 import type { ModalStyle } from "./modal.style"
 import type { UseModalProps, UseModalReturn } from "./use-modal"
@@ -20,7 +20,7 @@ import { CloseButton } from "../close-button"
 import { fadeVariants } from "../fade"
 import { FocusLock } from "../focus-lock"
 import { motion } from "../motion"
-import { getPopupAnimationProps } from "../popover"
+import { usePopupAnimationProps } from "../popover"
 import { Portal } from "../portal"
 import { modalStyle } from "./modal.style"
 import { useModal } from "./use-modal"
@@ -28,7 +28,7 @@ import { useModal } from "./use-modal"
 interface ComponentContext
   extends
     Omit<UseModalReturn, "getRootProps">,
-    PopupAnimationProps,
+    UsePopupAnimationProps,
     Pick<ModalRootProps, "withCloseButton"> {}
 
 export interface ModalRootProps
@@ -43,7 +43,7 @@ export interface ModalRootProps
       | "lockFocusAcrossFrames"
       | "restoreFocus"
     >,
-    PopupAnimationProps,
+    UsePopupAnimationProps,
     ShorthandModalContentProps {
   /**
    * Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.
@@ -267,10 +267,14 @@ export const ModalContent = withContext<"section", ModalContentProps>(
       children,
       ModalCloseButton,
     )
+    const popupAnimationProps = usePopupAnimationProps({
+      animationScheme,
+      duration,
+    })
 
     return (
       <motion.section
-        {...getPopupAnimationProps(animationScheme, duration)}
+        {...popupAnimationProps}
         {...cast<HTMLMotionPropsWithoutAs<"section">>(
           getContentProps(cast<HTMLProps<"section">>(rest)),
         )}

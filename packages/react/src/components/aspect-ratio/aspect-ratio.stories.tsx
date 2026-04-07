@@ -15,7 +15,7 @@ export const Basic: Story = () => {
   return (
     <AspectRatio w="md">
       <Image
-        src="https://eiga.k-img.com/images/movie/100944/photo/14e876cfa5d3c633.jpg"
+        src="https://tohoentertainmentonline.com/img/godzillastore/top/bg.png"
         alt="シン・ゴジラ"
       />
     </AspectRatio>

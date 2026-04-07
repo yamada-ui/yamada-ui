@@ -1,15 +1,11 @@
 "use client"
 
 import type { ReactNode } from "react"
-import type {
-  Direction,
-  HTMLProps,
-  HTMLStyledProps,
-  ThemeProps,
-} from "../../core"
+import type { HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
+import type { Merge } from "../../utils"
 import type { ColorSwatchProps } from "../color-swatch"
 import type { UseInputBorderProps } from "../input"
-import type { PopupAnimationProps } from "../popover"
+import type { UsePopoverStyleProps, UsePopupAnimationProps } from "../popover"
 import type { ColorPickerStyle } from "./color-picker.style"
 import type {
   UseColorPickerProps,
@@ -23,7 +19,7 @@ import { ColorSwatch } from "../color-swatch"
 import { useGroupItemProps } from "../group"
 import { PipetteIcon } from "../icon"
 import { InputGroup, useInputBorder, useInputPropsContext } from "../input"
-import { Popover } from "../popover"
+import { Popover, usePopoverStyleProps } from "../popover"
 import { colorPickerStyle } from "./color-picker.style"
 import { useColorPicker } from "./use-color-picker"
 
@@ -38,8 +34,8 @@ interface ComponentContext
 export interface ColorPickerProps
   extends
     Omit<HTMLStyledProps, "defaultValue" | "offset" | "onChange" | "ref">,
-    UseColorPickerProps,
-    PopupAnimationProps,
+    Merge<UseColorPickerProps, UsePopoverStyleProps>,
+    UsePopupAnimationProps,
     Pick<
       ColorSelector.RootProps,
       | "alphaSliderProps"
@@ -59,7 +55,7 @@ export interface ColorPickerProps
    *
    * @default 'end-start'
    */
-  placement?: Direction
+  placement?: Popover.RootProps["placement"]
   /**
    * If `true`, the color swatch component will be displayed.
    *
@@ -170,6 +166,7 @@ export const ColorPicker = withProvider<"input", ColorPickerProps, "size">(
         ...rest
       },
     ] = useGroupItemProps(props)
+    const popoverStyleProps = usePopoverStyleProps(rest)
     const {
       value,
       getContentProps,
@@ -179,7 +176,7 @@ export const ColorPicker = withProvider<"input", ColorPickerProps, "size">(
       getRootProps,
       getSelectorProps,
       popoverProps,
-    } = useColorPicker(rest)
+    } = useColorPicker({ ...rest, ...popoverStyleProps })
     const mergedPopoverProps = useMemo<Popover.RootProps>(
       () => ({
         animationScheme,

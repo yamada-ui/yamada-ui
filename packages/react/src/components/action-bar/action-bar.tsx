@@ -3,6 +3,7 @@
 import type { PropsWithChildren, ReactNode } from "react"
 import type { HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { HTMLMotionPropsWithoutAs } from "../motion"
+import type { UsePopupAnimationProps } from "../popover"
 import type { ActionBarStyle } from "./action-bar.style"
 import type { UseActionBarProps, UseActionBarReturn } from "./use-action-bar"
 import { AnimatePresence } from "motion/react"
@@ -11,7 +12,7 @@ import { createSlotComponent, styled } from "../../core"
 import { useValue } from "../../hooks/use-value"
 import { cast, useSplitChildren } from "../../utils"
 import { motion } from "../motion"
-import { getPopupAnimationProps, type PopupAnimationProps } from "../popover"
+import { usePopupAnimationProps } from "../popover"
 import { Portal, type PortalProps } from "../portal"
 import { actionBarStyle } from "./action-bar.style"
 import { useActionBar } from "./use-action-bar"
@@ -29,7 +30,7 @@ export interface ActionBarRootProps
     Omit<HTMLStyledProps, "content">,
     ThemeProps<ActionBarStyle>,
     UseActionBarProps,
-    PopupAnimationProps {
+    UsePopupAnimationProps {
   /**
    * The action bar content to use.
    */
@@ -178,10 +179,14 @@ export interface ActionBarContentProps
 export const ActionBarContent = withContext<"section", ActionBarContentProps>(
   (props) => {
     const { animationScheme, duration, getContentProps } = useComponentContext()
+    const popupAnimationProps = usePopupAnimationProps({
+      animationScheme,
+      duration,
+    })
 
     return (
       <motion.section
-        {...getPopupAnimationProps(animationScheme, duration)}
+        {...popupAnimationProps}
         {...cast<HTMLMotionPropsWithoutAs<"section">>(
           getContentProps(cast<HTMLProps<"section">>(props)),
         )}

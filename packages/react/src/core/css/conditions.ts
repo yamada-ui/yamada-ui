@@ -737,7 +737,7 @@ export const groupAttributeSelectors = Object.values(groupAttributes)
 
 export const peerAttributes = {
   /**
-   * Styles to apply when a sibling element with `data-peer` or `.peer` is exist.
+   * Styles to apply when a sibling element with `data-peer` or `.peer` exists.
    */
   _peer: toPeer(),
   /**

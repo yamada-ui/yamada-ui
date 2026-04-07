@@ -124,7 +124,6 @@ export default function PlaygroundClient() {
 
       <Resizable.Root
         flex="1"
-        // @ts-expect-error
         flexDirection={previewFirst ? "row" : "row-reverse!"}
         orientation={{ base: "horizontal", md: "vertical" }}
       >

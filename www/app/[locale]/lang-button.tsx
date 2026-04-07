@@ -17,7 +17,14 @@ export function LangButton({ ...rest }: LangButtonProps) {
 
   const onSelect = useCallback(
     (locale?: string) => {
-      router.replace(pathname, { locale, scroll: false })
+      const query = Object.fromEntries(
+        new URLSearchParams(window.location.search),
+      )
+
+      router.replace(
+        Object.keys(query).length > 0 ? { pathname, query } : pathname,
+        { locale, scroll: false },
+      )
     },
     [pathname, router],
   )

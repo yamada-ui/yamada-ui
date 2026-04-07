@@ -4,21 +4,21 @@ import { wrapWithKey } from "../../utils"
 
 export const getInputPaddingStartResetStyle = (key?: string) =>
   ({
-    "&:not([data-input-element] + &)": wrapWithKey({ ps: "0px" }, key),
+    "&:not([data-input-element] ~ &)": wrapWithKey({ ps: "0px" }, key),
   }) satisfies CSSObject
 
 export const getInputPaddingEndResetStyle = (key?: string) =>
   ({
-    "&:not(:has(+ [data-input-element]))": wrapWithKey({ pe: "0px" }, key),
+    "&:not(:has(~ [data-input-element]))": wrapWithKey({ pe: "0px" }, key),
   }) satisfies CSSObject
 
 export const getInputHeightStyle = (height?: string, key?: string) =>
   ({
-    "&:has(+ [data-input-element])": wrapWithKey({ pe: height }, key),
+    "&:has(~ [data-input-element])": wrapWithKey({ pe: height }, key),
     "& ~ [data-input-element]": { minW: height },
     "--height": height,
-    "[data-input-element] + &": wrapWithKey({ ps: height }, key),
     "[data-input-element]:has(~ &)": { minW: height },
+    "[data-input-element] ~ &": wrapWithKey({ ps: height }, key),
     minH: height,
   }) satisfies CSSObject
 

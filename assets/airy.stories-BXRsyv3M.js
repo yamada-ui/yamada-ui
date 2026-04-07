@@ -1,0 +1,14 @@
+import{n as e,o as t}from"./chunk-zsgVPwQN.js";import{Fu as n,Pu as r,Xp as i,ad as a,kd as o,pp as s,rd as c}from"./iframe-DZGIdQv0.js";var l,u,d,f,p,m,h,g,_,v;e((()=>{l=t(i(),1),r(),c(),u=s(),d={component:n,title:`Components / Airy`},f=()=>(0,u.jsx)(n,{"aria-label":`Toggle navigation`,from:(0,u.jsx)(o,{fontSize:`2xl`}),to:(0,u.jsx)(a,{fontSize:`2xl`})}),p=()=>(0,u.jsx)(n,{"aria-label":`Toggle navigation`,duration:.6,from:(0,u.jsx)(o,{fontSize:`2xl`}),to:(0,u.jsx)(a,{fontSize:`2xl`})}),m=()=>(0,u.jsx)(n,{"aria-label":`Toggle navigation`,delay:1,from:(0,u.jsx)(o,{fontSize:`2xl`}),to:(0,u.jsx)(a,{fontSize:`2xl`})}),h=()=>(0,u.jsx)(n,{"aria-label":`Toggle navigation`,disabled:!0,from:(0,u.jsx)(o,{fontSize:`2xl`}),to:(0,u.jsx)(a,{fontSize:`2xl`})}),g=()=>(0,u.jsx)(n,{"aria-label":`Toggle navigation`,from:(0,u.jsx)(o,{fontSize:`2xl`}),readOnly:!0,to:(0,u.jsx)(a,{fontSize:`2xl`})}),_=()=>{let[e,t]=(0,l.useState)(`to`);return(0,u.jsx)(n,{"aria-label":`Toggle navigation`,from:(0,u.jsx)(o,{fontSize:`2xl`}),to:(0,u.jsx)(a,{fontSize:`2xl`}),value:e,onChange:t})},f.parameters={...f.parameters,docs:{...f.parameters?.docs,source:{originalSource:`() => {
+  return <Airy aria-label="Toggle navigation" from={<MenuIcon fontSize="2xl" />} to={<XIcon fontSize="2xl" />} />;
+}`,...f.parameters?.docs?.source}}},p.parameters={...p.parameters,docs:{...p.parameters?.docs,source:{originalSource:`() => {
+  return <Airy aria-label="Toggle navigation" duration={0.6} from={<MenuIcon fontSize="2xl" />} to={<XIcon fontSize="2xl" />} />;
+}`,...p.parameters?.docs?.source}}},m.parameters={...m.parameters,docs:{...m.parameters?.docs,source:{originalSource:`() => {
+  return <Airy aria-label="Toggle navigation" delay={1} from={<MenuIcon fontSize="2xl" />} to={<XIcon fontSize="2xl" />} />;
+}`,...m.parameters?.docs?.source}}},h.parameters={...h.parameters,docs:{...h.parameters?.docs,source:{originalSource:`() => {
+  return <Airy aria-label="Toggle navigation" disabled from={<MenuIcon fontSize="2xl" />} to={<XIcon fontSize="2xl" />} />;
+}`,...h.parameters?.docs?.source}}},g.parameters={...g.parameters,docs:{...g.parameters?.docs,source:{originalSource:`() => {
+  return <Airy aria-label="Toggle navigation" from={<MenuIcon fontSize="2xl" />} readOnly to={<XIcon fontSize="2xl" />} />;
+}`,...g.parameters?.docs?.source}}},_.parameters={..._.parameters,docs:{..._.parameters?.docs,source:{originalSource:`() => {
+  const [value, onChange] = useState<KeyframeIdent>("to");
+  return <Airy aria-label="Toggle navigation" from={<MenuIcon fontSize="2xl" />} to={<XIcon fontSize="2xl" />} value={value} onChange={onChange} />;
+}`,..._.parameters?.docs?.source}}},v=[`Basic`,`Duration`,`Delay`,`Disabled`,`ReadOnly`,`CustomControl`]}))();export{f as Basic,_ as CustomControl,m as Delay,h as Disabled,p as Duration,g as ReadOnly,v as __namedExportsOrder,d as default};

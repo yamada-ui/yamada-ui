@@ -596,7 +596,7 @@ const items = useMemo<Menu.Item[]>(
 )
 
 return (
-  <HStack>
+  <Wrap gap="md">
     <For
       each={[
         "start",
@@ -623,7 +623,7 @@ return (
         </Menu.Root>
       )}
     </For>
-  </HStack>
+  </Wrap>
 )
 ```
 
@@ -642,7 +642,7 @@ const items = useMemo<Menu.Item[]>(
 )
 
 return (
-  <HStack>
+  <Wrap gap="md">
     <For
       each={["scale", "block-end", "block-start", "inline-start", "inline-end"]}
     >
@@ -656,7 +656,7 @@ return (
         </Menu.Root>
       )}
     </For>
-  </HStack>
+  </Wrap>
 )
 ```
 

@@ -104,10 +104,6 @@ export interface UsePopoverStyleProps {
    */
   matchWidth?: StyleValue<UsePopoverProps["matchWidth"]>
   /**
-   * The main and cross-axis offset to displace popper element from its reference element.
-   */
-  offset?: StyleValue<UsePopoverProps["offset"]>
-  /**
    * The placement of the popper relative to its reference.
    *
    * @default 'end'
@@ -125,7 +121,6 @@ export const usePopoverStyleProps = (props: UsePopoverStyleProps = {}) => {
   const placement = useValue(props.placement)
   const gutter = useValue(props.gutter)
   const matchWidth = useValue(props.matchWidth)
-  const offset = useValue(props.offset)
   const strategy = useValue(props.strategy)
   const flip = useValue(props.flip)
 
@@ -133,7 +128,6 @@ export const usePopoverStyleProps = (props: UsePopoverStyleProps = {}) => {
     flip,
     gutter,
     matchWidth,
-    offset,
     placement,
     strategy,
   }

@@ -1,4 +1,4 @@
-import { a11y, render, screen, waitFor } from "#test"
+import { a11y, render, renderHook, screen, waitFor } from "#test"
 import { Popover } from "."
 import { Button } from "../button"
 import { usePopupAnimationProps } from "./popover"
@@ -263,11 +263,11 @@ describe("<Popover />", () => {
 
 describe("usePopupAnimationProps", () => {
   test("returns scale animation props by default", () => {
-    const props = usePopupAnimationProps()
-    expect(props).toHaveProperty("animate", "enter")
-    expect(props).toHaveProperty("exit", "exit")
-    expect(props).toHaveProperty("initial", "exit")
-    expect("custom" in props && props.custom).toStrictEqual({
+    const { result } = renderHook(() => usePopupAnimationProps())
+    expect(result.current).toHaveProperty("animate", "enter")
+    expect(result.current).toHaveProperty("exit", "exit")
+    expect(result.current).toHaveProperty("initial", "exit")
+    expect("custom" in result.current && result.current.custom).toStrictEqual({
       duration: 0.1,
       reverse: true,
       scale: 0.95,
@@ -275,9 +275,11 @@ describe("usePopupAnimationProps", () => {
   })
 
   test("returns slide-fade props for `inline-end`", () => {
-    const props = usePopupAnimationProps({ animationScheme: "inline-end" })
-    expect(props).toHaveProperty("animate", "enter")
-    expect("custom" in props && props.custom).toStrictEqual({
+    const { result } = renderHook(() =>
+      usePopupAnimationProps({ animationScheme: "inline-end" }),
+    )
+    expect(result.current).toHaveProperty("animate", "enter")
+    expect("custom" in result.current && result.current.custom).toStrictEqual({
       duration: 0.1,
       offsetX: 16,
       reverse: true,
@@ -285,8 +287,10 @@ describe("usePopupAnimationProps", () => {
   })
 
   test("returns slide-fade props for `inline-start`", () => {
-    const props = usePopupAnimationProps({ animationScheme: "inline-start" })
-    expect("custom" in props && props.custom).toStrictEqual({
+    const { result } = renderHook(() =>
+      usePopupAnimationProps({ animationScheme: "inline-start" }),
+    )
+    expect("custom" in result.current && result.current.custom).toStrictEqual({
       duration: 0.1,
       offsetX: -16,
       reverse: true,
@@ -294,8 +298,10 @@ describe("usePopupAnimationProps", () => {
   })
 
   test("returns slide-fade props for `block-start`", () => {
-    const props = usePopupAnimationProps({ animationScheme: "block-start" })
-    expect("custom" in props && props.custom).toStrictEqual({
+    const { result } = renderHook(() =>
+      usePopupAnimationProps({ animationScheme: "block-start" }),
+    )
+    expect("custom" in result.current && result.current.custom).toStrictEqual({
       duration: 0.1,
       offsetY: -16,
       reverse: true,
@@ -303,8 +309,10 @@ describe("usePopupAnimationProps", () => {
   })
 
   test("returns slide-fade props for `block-end`", () => {
-    const props = usePopupAnimationProps({ animationScheme: "block-end" })
-    expect("custom" in props && props.custom).toStrictEqual({
+    const { result } = renderHook(() =>
+      usePopupAnimationProps({ animationScheme: "block-end" }),
+    )
+    expect("custom" in result.current && result.current.custom).toStrictEqual({
       duration: 0.1,
       offsetY: 16,
       reverse: true,
@@ -312,16 +320,20 @@ describe("usePopupAnimationProps", () => {
   })
 
   test("returns empty object for `none`", () => {
-    const props = usePopupAnimationProps({ animationScheme: "none" })
-    expect(props).toStrictEqual({})
+    const { result } = renderHook(() =>
+      usePopupAnimationProps({ animationScheme: "none" }),
+    )
+    expect(result.current).toStrictEqual({})
   })
 
   test("passes custom duration", () => {
-    const props = usePopupAnimationProps({
-      animationScheme: "scale",
-      duration: 0.5,
-    })
-    expect("custom" in props && props.custom).toStrictEqual({
+    const { result } = renderHook(() =>
+      usePopupAnimationProps({
+        animationScheme: "scale",
+        duration: 0.5,
+      }),
+    )
+    expect("custom" in result.current && result.current.custom).toStrictEqual({
       duration: 0.5,
       reverse: true,
       scale: 0.95,

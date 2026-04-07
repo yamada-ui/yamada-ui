@@ -117,7 +117,10 @@ export default function PlaygroundClient() {
 
       <Resizable.Root
         flex="1"
-        flexDirection={previewFirst ? "row" : "row-reverse!"}
+        flexDirection={{
+          base: previewFirst ? "row-reverse!" : "row",
+          md: previewFirst ? "column-reverse!" : "column",
+        }}
         orientation={{ base: "horizontal", md: "vertical" }}
       >
         <Resizable.Item defaultSize="50%" minSize="25%">

@@ -69,13 +69,6 @@ export default function PlaygroundClient() {
     return () => clearTimeout(timeoutId)
   }, [code, compileCode])
 
-  const handleCodeChange = useCallback(
-    (nextCode: string) => {
-      void setCode(nextCode)
-    },
-    [setCode],
-  )
-
   const handleFormat = useCallback(async () => {
     try {
       const formatted = await format(code, { parser: "babel-ts" })
@@ -113,7 +106,7 @@ export default function PlaygroundClient() {
       <Toolbar
         code={code}
         previewFirst={previewFirst}
-        onCodeChange={handleCodeChange}
+        onCodeChange={setCode}
         onReset={handleReset}
         onScreenshotCode={handleScreenshotCode}
         onScreenshotUi={handleScreenshotUi}
@@ -131,7 +124,7 @@ export default function PlaygroundClient() {
           <Editor
             ref={editorRef}
             code={code}
-            onChange={handleCodeChange}
+            onChange={setCode}
             onFormat={handleFormat}
           />
         </Resizable.Item>

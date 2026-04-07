@@ -109,7 +109,7 @@ export default function PlaygroundClient() {
   }, [previewFirst, setLayout])
 
   return (
-    <VStack h="calc(100dvh - {header-height})">
+    <VStack gap="0" h="calc(100dvh - {header-height})">
       <Toolbar
         code={code}
         previewFirst={previewFirst}

@@ -17,6 +17,7 @@ jobs:
   chromium_coverage:
     name: Chromium ${{ matrix.shard_index }}/4
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     strategy:
       max-parallel: 4
       matrix:
@@ -54,7 +55,7 @@ jobs:
 
       - name: Upload coverage
         if: steps.check-modified.outputs.any_changed == 'true'
-        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
+        uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe # v5.5.4
         with:
           disable_search: true
           fail_ci_if_error: false
@@ -67,6 +68,7 @@ jobs:
   browser:
     name: ${{ matrix.name }}
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     strategy:
       matrix:
         include:

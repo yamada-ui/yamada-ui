@@ -258,7 +258,7 @@ export const Indicator: Story = () => {
 
   return (
     <>
-      <Timeline.Root items={itemsWithIcon} />
+      <Timeline.Root items={itemsWithIcon} shape="square" />
       <Timeline.Root indicatorSize="10" items={itemsWithAvatar} />
     </>
   )

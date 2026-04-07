@@ -49,7 +49,6 @@ jobs:
   test:
     name: Test
     uses: ./.github/workflows/test.yml
-    timeout-minutes: 10
     secrets:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

@@ -48,9 +48,7 @@ export const getPreventTransition = (environment: Environment) => {
     forceReflow()
 
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        document.head.removeChild(css)
-      })
+      document.head.removeChild(css)
     })
   }
 }

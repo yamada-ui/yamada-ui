@@ -578,6 +578,10 @@ export const groupAttributes = {
    */
   _groupActivedescendant: toGroup(pseudoClasses._activedescendant),
   /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is animated.
+   */
+  _groupAnimated: toGroup(attributes._animated),
+  /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is blank.
    */
   _groupBlank: toGroup(pseudoClasses._blank),
@@ -724,7 +728,11 @@ export const peerAttributes = {
    */
   _peerAccept: toPeer(attributes._accept),
   /**
-   * Styles to apply when a parent element with `data-peer` or `.peer` is blank.
+   * Styles to apply when a sibling element with `data-peer` or `.peer` is animated.
+   */
+  _peerAnimated: toPeer(attributes._animated),
+  /**
+   * Styles to apply when a sibling element with `data-peer` or `.peer` is blank.
    */
   _peerBlank: toPeer(pseudoClasses._blank),
   /**

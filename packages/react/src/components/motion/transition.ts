@@ -1,6 +1,6 @@
 import type { Transition } from "motion/react"
 import type { MotionTransitionProps } from "./index.types"
-import { isNumber } from "../../utils"
+import { isNumber, isUndefined } from "../../utils"
 
 export const createTransition = {
   enter: function (transition?: Transition) {
@@ -13,7 +13,7 @@ export const createTransition = {
           duration: 0.2,
           ease: [0, 0, 0.58, 1],
         }),
-        ...(duration
+        ...(!isUndefined(duration)
           ? { duration: isNumber(duration) ? duration : duration.enter }
           : {}),
         delay: isNumber(delay) ? delay : delay?.enter,
@@ -30,7 +30,7 @@ export const createTransition = {
           duration: 0.2,
           ease: [0.42, 0, 1, 1],
         }),
-        ...(duration
+        ...(!isUndefined(duration)
           ? { duration: isNumber(duration) ? duration : duration.exit }
           : {}),
         delay: isNumber(delay) ? delay : delay?.exit,

@@ -9,7 +9,7 @@
     "#velite": "./.velite"
   },
   "scripts": {
-    "clean": "rimraf .next .velite .eslintcache tsconfig.tsbuildinfo node_modules",
+    "clean": "rimraf node_modules .next .velite .eslintcache tsconfig.tsbuildinfo",
     "dev:content": "velite --watch",
     "dev:next": "next dev",
     "dev": "run-p dev:*",

@@ -16,12 +16,12 @@ import {
 } from "../../utils"
 import { conditionProperties, styleProperties } from "../css"
 
-type MergeAll<Y extends Dict[]> = Y extends [infer M]
-  ? M
+type MergeAll<Y extends (Dict | undefined)[]> = Y extends [infer M]
+  ? NonNullable<M>
   : Y extends [infer D, ...infer H]
     ? H extends any[]
-      ? Merge<D, MergeAll<H>>
-      : D
+      ? Merge<NonNullable<D>, MergeAll<H>>
+      : NonNullable<D>
     : never
 
 function isEvent(key: string) {
@@ -55,7 +55,7 @@ interface MergePropsOptions {
   mergeStyle?: boolean
 }
 
-export function mergeProps<Y extends Dict[]>(...args: Y) {
+export function mergeProps<Y extends (Dict | undefined)[]>(...args: Y) {
   return function ({
     mergeClassName = true,
     mergeCSS = true,
@@ -66,6 +66,8 @@ export function mergeProps<Y extends Dict[]>(...args: Y) {
     let result: Dict = {}
 
     for (const props of args) {
+      if (isUndefined(props)) continue
+
       for (const key in result) {
         if (mergeRef && key === "ref") {
           result[key] = mergeRefs(result[key], props[key])

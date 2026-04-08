@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "clean": "rimraf node_modules .tanstack .eslintcache",
     "dev": "vite dev",
     "build": "vite build",
     "typecheck": "tsc --noEmit",

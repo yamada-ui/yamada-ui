@@ -319,8 +319,7 @@
             {
               "title": "Form",
               "segment": "form",
-              "pathname": "/docs/components/form",
-              "status": "new"
+              "pathname": "/docs/components/form"
             },
             {
               "title": "Grid",
@@ -420,14 +419,12 @@
             {
               "title": "NativeAccordion",
               "segment": "native-accordion",
-              "pathname": "/docs/components/native-accordion",
-              "status": "new"
+              "pathname": "/docs/components/native-accordion"
             },
             {
               "title": "NativePopover",
               "segment": "native-popover",
-              "pathname": "/docs/components/native-popover",
-              "status": "new"
+              "pathname": "/docs/components/native-popover"
             },
             {
               "title": "NativeSelect",
@@ -483,8 +480,7 @@
             {
               "title": "QrCode",
               "segment": "qr-code",
-              "pathname": "/docs/components/qr-code",
-              "status": "new"
+              "pathname": "/docs/components/qr-code"
             },
             {
               "title": "Radio",
@@ -626,8 +622,7 @@
             {
               "title": "Tip",
               "segment": "tip",
-              "pathname": "/docs/components/tip",
-              "status": "new"
+              "pathname": "/docs/components/tip"
             },
             {
               "title": "Toggle",
@@ -684,8 +679,7 @@
             {
               "title": "ComposedChart",
               "segment": "composed-chart",
-              "pathname": "/docs/components/composed-chart",
-              "status": "new"
+              "pathname": "/docs/components/composed-chart"
             },
             {
               "title": "DonutChart",

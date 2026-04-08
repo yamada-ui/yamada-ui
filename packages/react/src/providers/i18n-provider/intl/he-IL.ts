@@ -87,6 +87,10 @@ const data: IntlData = {
   select: {
     "Clear value": "נקה ערך",
   },
+  sidebar: {
+    "Close sidebar": "סגור סרגל צד",
+    "Open sidebar": "פתח סרגל צד",
+  },
   slider: {
     "Slider thumb": "אגודל מחוון",
   },

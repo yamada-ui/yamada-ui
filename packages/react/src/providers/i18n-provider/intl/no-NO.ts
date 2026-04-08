@@ -87,6 +87,10 @@ const data: IntlData = {
   select: {
     "Clear value": "Tøm verdi",
   },
+  sidebar: {
+    "Close sidebar": "Lukk sidepanel",
+    "Open sidebar": "Åpne sidepanel",
+  },
   slider: {
     "Slider thumb": "Skyveknapp",
   },

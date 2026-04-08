@@ -87,6 +87,10 @@ const data: IntlData = {
   select: {
     "Clear value": "Limpar valor",
   },
+  sidebar: {
+    "Close sidebar": "Fechar barra lateral",
+    "Open sidebar": "Abrir barra lateral",
+  },
   slider: {
     "Slider thumb": "Polegar do controle deslizante",
   },

@@ -87,6 +87,10 @@ const data: IntlData = {
   select: {
     "Clear value": "مسح القيمة",
   },
+  sidebar: {
+    "Close sidebar": "إغلاق الشريط الجانبي",
+    "Open sidebar": "فتح الشريط الجانبي",
+  },
   slider: {
     "Slider thumb": "إبهام المنزلق",
   },

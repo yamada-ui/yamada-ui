@@ -87,6 +87,10 @@ const data: IntlData = {
   select: {
     "Clear value": "Tyhjennä arvo",
   },
+  sidebar: {
+    "Close sidebar": "Sulje sivupalkki",
+    "Open sidebar": "Avaa sivupalkki",
+  },
   slider: {
     "Slider thumb": "Liukusäädin",
   },

@@ -87,6 +87,10 @@ const data: IntlData = {
   select: {
     "Clear value": "Vymazať hodnotu",
   },
+  sidebar: {
+    "Close sidebar": "Zatvoriť bočný panel",
+    "Open sidebar": "Otvoriť bočný panel",
+  },
   slider: {
     "Slider thumb": "Palec posuvníka",
   },

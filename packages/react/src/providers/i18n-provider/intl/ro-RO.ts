@@ -87,6 +87,10 @@ const data: IntlData = {
   select: {
     "Clear value": "Șterge valoarea",
   },
+  sidebar: {
+    "Close sidebar": "Închide bara laterală",
+    "Open sidebar": "Deschide bara laterală",
+  },
   slider: {
     "Slider thumb": "Degetul glisorului",
   },

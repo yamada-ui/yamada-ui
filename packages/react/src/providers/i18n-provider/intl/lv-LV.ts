@@ -87,6 +87,10 @@ const data: IntlData = {
   select: {
     "Clear value": "Notīrīt vērtību",
   },
+  sidebar: {
+    "Close sidebar": "Aizvērt sānjoslu",
+    "Open sidebar": "Atvērt sānjoslu",
+  },
   slider: {
     "Slider thumb": "Slīdņa īkšķis",
   },

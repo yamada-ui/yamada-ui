@@ -87,6 +87,10 @@ const data: IntlData = {
   select: {
     "Clear value": "Érték törlése",
   },
+  sidebar: {
+    "Close sidebar": "Oldalsáv bezárása",
+    "Open sidebar": "Oldalsáv megnyitása",
+  },
   slider: {
     "Slider thumb": "Csúszka hüvelykujj",
   },

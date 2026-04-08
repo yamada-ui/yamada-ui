@@ -87,6 +87,10 @@ const data: IntlData = {
   select: {
     "Clear value": "값 지우기",
   },
+  sidebar: {
+    "Close sidebar": "사이드바 닫기",
+    "Open sidebar": "사이드바 열기",
+  },
   slider: {
     "Slider thumb": "슬라이더 핸들",
   },

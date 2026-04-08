@@ -16,12 +16,16 @@ import {
 } from "../../utils"
 import { conditionProperties, styleProperties } from "../css"
 
+type Optionalize<Y> = [Extract<Y, undefined>] extends [never]
+  ? Y
+  : Partial<Exclude<Y, undefined>>
+
 type MergeAll<Y extends (Dict | undefined)[]> = Y extends [infer M]
-  ? NonNullable<M>
+  ? Optionalize<M>
   : Y extends [infer D, ...infer H]
-    ? H extends any[]
-      ? Merge<NonNullable<D>, MergeAll<H>>
-      : NonNullable<D>
+    ? H extends (Dict | undefined)[]
+      ? Merge<Optionalize<D>, MergeAll<H>>
+      : Optionalize<D>
     : never
 
 function isEvent(key: string) {
@@ -55,14 +59,20 @@ interface MergePropsOptions {
   mergeStyle?: boolean
 }
 
-export function mergeProps<Y extends (Dict | undefined)[]>(...args: Y) {
+export function mergeProps<Y extends Dict>(
+  ...args: Y[]
+): (options?: MergePropsOptions) => Y
+export function mergeProps<Y extends (Dict | undefined)[]>(
+  ...args: Y
+): (options?: MergePropsOptions) => MergeAll<Y>
+export function mergeProps(...args: (Dict | undefined)[]) {
   return function ({
     mergeClassName = true,
     mergeCSS = true,
     mergeEvent = true,
     mergeRef = true,
     mergeStyle = true,
-  }: MergePropsOptions = {}): MergeAll<Y> {
+  }: MergePropsOptions = {}) {
     let result: Dict = {}
 
     for (const props of args) {

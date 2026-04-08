@@ -145,9 +145,12 @@ function getCSSCompatData(cssTypes: Awaited<ReturnType<typeof getCSSTypes>>) {
         }
       })
       .map(([name, data]) => {
-        const { type = "AnyString" } = cssTypes[name] ?? {}
+        const { type } = cssTypes[name] ?? {}
 
-        const computedData = { ...data, type }
+        const computedData = {
+          ...data,
+          type: type ? ` ${type} | AnyString` : "AnyString",
+        }
 
         return [name, computedData]
       }),
@@ -201,12 +204,14 @@ async function getCSSTypes() {
       const type = typeChecker.getTypeOfSymbolAtLocation(property, sourceFile)
       const nonNullableType = type.getNonNullableType()
       const value = typeChecker.typeToString(nonNullableType)
-      const resolvedValue =
-        name === "all"
-          ? `CSS.Globals`
-          : `CSS.Property.${value.replace(/<.*?>$/, "")}`
 
-      data[name] = { type: resolvedValue, deprecated }
+      data[name] = {
+        type:
+          name === "all"
+            ? `CSS.Globals`
+            : `CSS.Property.${value.replace(/<.*?>$/, "")}`,
+        deprecated,
+      }
     }
   }
 

@@ -128,7 +128,7 @@
       "clientOnly": "こちらのコードを使用する場合は、<tag>\"use client\"</tag>をファイルの上部に追加する必要があります。",
       "preview": "プレビュー",
       "code": "コード",
-      "stackBlitz": "StackBlitz"
+      "playground": "Playground"
     },
     "propsTable": {
       "prop": "Prop",
@@ -152,5 +152,28 @@
       "claude": "Claudeで開く",
       "query": "Webブラウザを使用してリンクと情報にアクセスします: {url}\n\nいくつかの質問があります。\n"
     }
+  },
+  "playground": {
+    "title": "Playground",
+    "description": "ブラウザでYamada UIコンポーネントを試してみましょう。",
+    "resetCode": "コードをリセット",
+    "share": "共有",
+    "format": "フォーマット",
+    "swapHorizontal": "左右入れ替え",
+    "swapVertical": "上下入れ替え",
+    "copied": "コピーしました",
+    "copyMenu": "コピー / スクリーンショット",
+    "openCopyMenu": "コピーメニューを開く",
+    "copyUrl": "URLをコピー",
+    "copyCode": "コードをコピー",
+    "screenshotCode": "スクリーンショット（コード）",
+    "screenshotUi": "スクリーンショット（UI）",
+    "screenshotCopied": "スクリーンショットをコピーしました",
+    "screenshotFailed": "スクリーンショットに失敗しました",
+    "initializingCompiler": "コンパイラを初期化中...",
+    "compiling": "コンパイル中...",
+    "initializing": "初期化中...",
+    "codeEditor": "コードエディター",
+    "componentPreview": "コンポーネントのプレビュー"
   }
 }

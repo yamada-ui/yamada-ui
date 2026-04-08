@@ -27,7 +27,8 @@
     "gen:conditions": "tsx scripts/generate/conditions",
     "gen:changelog": "tsx scripts/generate/changelog",
     "gen:contributors": "tsx scripts/generate/contributors",
-    "gen:relations": "tsx scripts/generate/relations"
+    "gen:relations": "tsx scripts/generate/relations",
+    "postinstall": "tsx scripts/generate/playground"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
@@ -35,14 +36,17 @@
     "@emotion/weak-memoize": "^0.4.0",
     "@faker-js/faker": "catalog:",
     "@lucide/lab": "catalog:",
-    "@stackblitz/sdk": "^1.11.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "@yamada-ui/react": "workspace:*",
+    "esbuild-wasm": "0.25.0",
+    "html-to-image": "^1.11.13",
+    "lz-string": "^1.5.0",
     "match-sorter": "^8.2.0",
     "motion": "catalog:",
     "next": "catalog:",
     "next-intl": "^4.9.0",
+    "nuqs": "^2.8.9",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

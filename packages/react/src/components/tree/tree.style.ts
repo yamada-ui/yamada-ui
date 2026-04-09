@@ -42,7 +42,11 @@ export const treeStyle = defineComponentSlotStyle({
         _hover: { bg: "bg.subtle" },
       },
       _focusVisible: {
-        _content: { bg: "bg.subtle", ...focusRingStyle.inside },
+        _content: {
+          bg: "bg.subtle",
+          ...focusRingStyle.inside,
+          boxShadow: "none",
+        },
       },
       _disabled: { _content: { layerStyle: "disabled" } },
     },

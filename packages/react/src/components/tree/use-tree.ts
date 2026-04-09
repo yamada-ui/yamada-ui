@@ -800,9 +800,9 @@ export const useTreeItem = ({
   }, [checkable, descendants])
 
   const getItemProps: PropGetter<"li"> = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
+    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
       id: itemId,
-      ref: mergeRefs(props.ref, register),
+      ref: mergeRefs(ref, register),
       "aria-disabled": ariaAttr(disabled),
       "aria-labelledby": cx(ariaLabelledby, labelId),
       "aria-level": level,

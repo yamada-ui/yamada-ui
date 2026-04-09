@@ -313,6 +313,9 @@ importers:
 
   packages/forge:
     dependencies:
+      '@changesets/types':
+        specifier: ^6.1.0
+        version: 6.1.0
       '@changesets/write':
         specifier: ^0.4.0
         version: 0.4.0

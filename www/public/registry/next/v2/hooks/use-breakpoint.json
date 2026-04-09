@@ -6,7 +6,11 @@
     "hooks": [],
     "providers": []
   },
-  "dependents": { "components": [], "hooks": ["use-value"], "providers": [] },
+  "dependents": {
+    "components": ["sidebar"],
+    "hooks": ["use-value"],
+    "providers": []
+  },
   "section": "hooks",
   "sources": [
     {

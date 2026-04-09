@@ -7,7 +7,7 @@
     "providers": []
   },
   "dependents": {
-    "components": ["accordion", "tree"],
+    "components": ["accordion", "sidebar", "tree"],
     "hooks": [],
     "providers": []
   },

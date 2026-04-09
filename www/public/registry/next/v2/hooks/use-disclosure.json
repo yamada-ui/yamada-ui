@@ -7,7 +7,15 @@
     "providers": []
   },
   "dependents": {
-    "components": ["action-bar", "menu", "modal", "popover", "tooltip", "tree"],
+    "components": [
+      "action-bar",
+      "menu",
+      "modal",
+      "popover",
+      "sidebar",
+      "tooltip",
+      "tree"
+    ],
     "hooks": ["use-combobox"],
     "providers": []
   },

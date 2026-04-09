@@ -12,7 +12,7 @@
     "providers": []
   },
   "dependents": {
-    "components": ["chart", "tip"],
+    "components": ["chart", "sidebar", "tip"],
     "hooks": [],
     "providers": []
   },

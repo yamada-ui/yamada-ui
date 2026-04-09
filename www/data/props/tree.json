@@ -104,6 +104,16 @@
         "description": "If `true`, the element will be opened.",
         "required": false
       },
+      "query": {
+        "type": "string",
+        "description": "The query to search for in the tree item.",
+        "required": false
+      },
+      "rootProps": {
+        "type": "HTMLStyledProps<\"li\">",
+        "description": "Props for the root element.",
+        "required": false
+      },
       "startElement": {
         "type": "TreeItemReactNode",
         "description": "The element to display at the start of the item.",
@@ -112,11 +122,6 @@
       "startElementProps": {
         "type": "TreeStartElementProps",
         "description": "Props for the start component.",
-        "required": false
-      },
-      "triggerProps": {
-        "type": "TreeTriggerProps",
-        "description": "Props for the trigger component.",
         "required": false
       },
       "value": {
@@ -237,7 +242,7 @@
         "required": false
       },
       "itemProps": {
-        "type": "Omit<TreeItemProps, \"label\" | \"open\" | \"value\">",
+        "type": "Omit<TreeItemProps, \"children\" | \"label\" | \"open\" | \"query\" | \"value\">",
         "description": "Props for the item component.",
         "required": false
       },
@@ -291,11 +296,6 @@
       "startElementProps": {
         "type": "TreeStartElementProps",
         "description": "Props for the start component.",
-        "required": false
-      },
-      "triggerProps": {
-        "type": "TreeTriggerProps",
-        "description": "Props for the trigger component.",
         "required": false
       }
     }
@@ -404,6 +404,16 @@
       "description": "If `true`, the element will be opened.",
       "required": false
     },
+    "query": {
+      "type": "string",
+      "description": "The query to search for in the tree item.",
+      "required": false
+    },
+    "rootProps": {
+      "type": "HTMLStyledProps<\"li\">",
+      "description": "Props for the root element.",
+      "required": false
+    },
     "startElement": {
       "type": "TreeItemReactNode",
       "description": "The element to display at the start of the item.",
@@ -412,11 +422,6 @@
     "startElementProps": {
       "type": "TreeStartElementProps",
       "description": "Props for the start component.",
-      "required": false
-    },
-    "triggerProps": {
-      "type": "TreeTriggerProps",
-      "description": "Props for the trigger component.",
       "required": false
     },
     "value": {
@@ -537,7 +542,7 @@
       "required": false
     },
     "itemProps": {
-      "type": "Omit<TreeItemProps, \"label\" | \"open\" | \"value\">",
+      "type": "Omit<TreeItemProps, \"children\" | \"label\" | \"open\" | \"query\" | \"value\">",
       "description": "Props for the item component.",
       "required": false
     },
@@ -591,11 +596,6 @@
     "startElementProps": {
       "type": "TreeStartElementProps",
       "description": "Props for the start component.",
-      "required": false
-    },
-    "triggerProps": {
-      "type": "TreeTriggerProps",
-      "description": "Props for the trigger component.",
       "required": false
     }
   }

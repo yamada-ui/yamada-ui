@@ -88,7 +88,7 @@
         "required": false
       },
       "animationScheme": {
-        "type": "\"none\" | \"scale\" | SimplePlacement",
+        "type": "\"block-end\" | \"block-start\" | \"inline-end\" | \"inline-start\" | \"none\" | \"scale\" ...",
         "defaultValue": "\"scale\"",
         "description": "The animation of the element.",
         "required": false
@@ -110,8 +110,8 @@
         "required": false
       },
       "duration": {
-        "type": "MotionTransitionProps[\"duration\"]",
-        "defaultValue": "0.2",
+        "type": "MotionLifecycleProps<number> | number",
+        "defaultValue": "0.1",
         "description": "The animation duration.",
         "required": false
       },
@@ -257,7 +257,7 @@
       "required": false
     },
     "animationScheme": {
-      "type": "\"none\" | \"scale\" | SimplePlacement",
+      "type": "\"block-end\" | \"block-start\" | \"inline-end\" | \"inline-start\" | \"none\" | \"scale\" ...",
       "defaultValue": "\"scale\"",
       "description": "The animation of the element.",
       "required": false
@@ -279,8 +279,8 @@
       "required": false
     },
     "duration": {
-      "type": "MotionTransitionProps[\"duration\"]",
-      "defaultValue": "0.2",
+      "type": "MotionLifecycleProps<number> | number",
+      "defaultValue": "0.1",
       "description": "The animation duration.",
       "required": false
     },

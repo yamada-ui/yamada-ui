@@ -322,6 +322,9 @@ importers:
       '@pnpm/lockfile.fs':
         specifier: ^1001.1.32
         version: 1001.1.32(@pnpm/logger@1001.0.1)
+      '@pnpm/workspace.workspace-manifest-reader':
+        specifier: ^1000.2.5
+        version: 1000.2.5
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../utils
@@ -2913,6 +2916,10 @@ packages:
     resolution: {integrity: sha512-PNImtV2SmNTDpLi4HdN86tJPmsOeIxm4VhmxgBVsMrJPEBfkNEWFcflR3wU6XVn/26g9qWdvlNHaawtCjeB93Q==}
     engines: {node: '>=18.12'}
 
+  '@pnpm/error@1000.0.5':
+    resolution: {integrity: sha512-GjH0TPjbVNrPnl/BAGoFuBLJ2sFfXNKbS33lll/Ehe9yw0fyc8Kdw7kO9if37yQqn6vaa4dAHKkPllum7f/IPQ==}
+    engines: {node: '>=18.12'}
+
   '@pnpm/error@1000.1.0':
     resolution: {integrity: sha512-Dqc2IJJPjUatwc9Letw+vG29rnaMrDGi5g6WCx1HiZYm0obXbTmLygeRafMbgf+sLKXrWE1shOeiayQuczBdoA==}
     engines: {node: '>=18.12'}
@@ -2974,6 +2981,10 @@ packages:
     resolution: {integrity: sha512-47zGgACkbZWLOmM61kaE0nkqxiYx63C6DJ4wzDsdj0iXDZJ9SJEl+T035pkhquHe8XEh3YxvwMg2BRyZSgmZ9Q==}
     engines: {node: '>=18.12'}
 
+  '@pnpm/types@1000.9.0':
+    resolution: {integrity: sha512-UvDTCxnbyqkTg2X0dBOuZ4IdFJ8g4UFu0Ybv/5/cZAxCWVhNl1hC/Xc9hR4tZrlBL0NRFePLRhO/iw9LmA1lbw==}
+    engines: {node: '>=18.12'}
+
   '@pnpm/types@1001.3.0':
     resolution: {integrity: sha512-NLTXheat/u7OEGg5M5vF6Z85zx8uKUZE0+whtX/sbFV2XL48RdnOWGPTKYuVVkv8M+launaLUTgGEXNs/ess2w==}
     engines: {node: '>=18.12'}
@@ -2981,6 +2992,10 @@ packages:
   '@pnpm/util.lex-comparator@3.0.2':
     resolution: {integrity: sha512-blFO4Ws97tWv/SNE6N39ZdGmZBrocXnBOfVp0ln4kELmns4pGPZizqyRtR8EjfOLMLstbmNCTReBoDvLz1isVg==}
     engines: {node: '>=18.12'}
+
+  '@pnpm/workspace.workspace-manifest-reader@1000.2.5':
+    resolution: {integrity: sha512-yiWR+WrxjTbPFTcnCfrU7F5tt+H68G3RIG9VtnhUXYjAJr04SFlIMpmStP7aGXRDPSVbfl7W6WC554ExHaPqow==}
+    engines: {node: '>=22.13'}
 
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
@@ -8081,6 +8096,10 @@ packages:
     resolution: {integrity: sha512-VIMnQi/Z4HT2Fxuwg5KrY174U1VdUIASQVWXXyqtNRtxSr9IYkn1rsI6Tb6HsrHCmB7gVpNwX6JxPTHcH6IoTA==}
     engines: {node: '>=6'}
 
+  read-yaml-file@3.0.0:
+    resolution: {integrity: sha512-7urDNDyx3oJt9NGkymzT3qudju76BoJhT6ICWclx6274zxMeSUOhyiceHscSBk4Lfbs0IYpjOjUwLkaOzrsJdQ==}
+    engines: {node: '>=22.13'}
+
   readable-stream@3.6.2:
     resolution: {integrity: sha512-9u/sniCrY3D5WdsERHzHE4G2YCXqoG5FTHUiCC4SIbr6XcLZBY05ya9EKjYek9O5xOAwjGq+1JdGBAS7Q9ScoA==}
     engines: {node: '>= 6'}
@@ -8673,6 +8692,10 @@ packages:
   strip-bom@4.0.0:
     resolution: {integrity: sha512-3xurFv5tEgii33Zi8Jtp55wEIILR9eh34FAW00PZf+JnSsTmV/ioewSgQl97JHvgjoRGwPShsWm+IdrxB35d0w==}
     engines: {node: '>=8'}
+
+  strip-bom@5.0.0:
+    resolution: {integrity: sha512-p+byADHF7SzEcVnLvc/r3uognM1hUhObuHXxJcgLCfD194XAkaLbjq3Wzb0N5G2tgIjH0dgT708Z51QxMeu60A==}
+    engines: {node: '>=12'}
 
   strip-final-newline@2.0.0:
     resolution: {integrity: sha512-BrpvfNAE3dcvq7ll3xVumzjKjZQ5tI1sEUIKr3Uoks0XUl45St3FlatVqef9prk4jRDzhW6WZg+3bk93y6pLjA==}
@@ -11562,6 +11585,10 @@ snapshots:
       '@pnpm/types': 1001.3.0
       semver: 7.7.4
 
+  '@pnpm/error@1000.0.5':
+    dependencies:
+      '@pnpm/constants': 1001.3.1
+
   '@pnpm/error@1000.1.0':
     dependencies:
       '@pnpm/constants': 1001.3.1
@@ -11649,9 +11676,18 @@ snapshots:
     dependencies:
       '@pnpm/types': 1001.3.0
 
+  '@pnpm/types@1000.9.0': {}
+
   '@pnpm/types@1001.3.0': {}
 
   '@pnpm/util.lex-comparator@3.0.2': {}
+
+  '@pnpm/workspace.workspace-manifest-reader@1000.2.5':
+    dependencies:
+      '@pnpm/constants': 1001.3.1
+      '@pnpm/error': 1000.0.5
+      '@pnpm/types': 1000.9.0
+      read-yaml-file: 3.0.0
 
   '@polka/url@1.0.0-next.29': {}
 
@@ -17563,6 +17599,11 @@ snapshots:
       pify: 4.0.1
       strip-bom: 3.0.0
 
+  read-yaml-file@3.0.0:
+    dependencies:
+      js-yaml: 4.1.1
+      strip-bom: 5.0.0
+
   readable-stream@3.6.2:
     dependencies:
       inherits: 2.0.4
@@ -18394,6 +18435,8 @@ snapshots:
   strip-bom@3.0.0: {}
 
   strip-bom@4.0.0: {}
+
+  strip-bom@5.0.0: {}
 
   strip-final-newline@2.0.0: {}
 

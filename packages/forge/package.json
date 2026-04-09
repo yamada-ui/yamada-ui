@@ -21,6 +21,7 @@
     "@changesets/types": "^6.1.0",
     "@changesets/write": "^0.4.0",
     "@pnpm/lockfile.fs": "^1001.1.32",
+    "@pnpm/workspace.workspace-manifest-reader": "^1000.2.5",
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/workspace": "workspace:*",
     "strip-ansi": "^7.2.0"

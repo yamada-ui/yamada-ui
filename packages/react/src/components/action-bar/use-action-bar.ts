@@ -43,9 +43,10 @@ export const useActionBar = ({
     (ev: KeyboardEvent) => {
       if (ev.key !== "Escape") return
 
-      ev.stopPropagation()
+      if (!closeOnEsc) return
 
-      if (closeOnEsc) onClose()
+      ev.stopPropagation()
+      onClose()
     },
     [closeOnEsc, onClose],
   )

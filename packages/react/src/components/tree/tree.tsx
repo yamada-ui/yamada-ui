@@ -70,7 +70,8 @@ export type TreeItem = TreeItemWithChildren | TreeItemWithValue
 
 const recursiveTreeItem = (items?: TreeItem[]) => {
   return items?.map((props, index) => {
-    const key = props.value || (isString(props.label) ? props.label : index)
+    const key =
+      props.value || (isString(props.label) ? `${props.label}-${index}` : index)
 
     if ("children" in props) {
       const { children, ...rest } = props
@@ -163,7 +164,10 @@ export interface TreeRootProps<Multiple extends boolean = false>
   /**
    * Props for the item component.
    */
-  itemProps?: Omit<TreeItemProps, "children" | "label" | "open" | "value">
+  itemProps?: Omit<
+    TreeItemProps,
+    "children" | "label" | "open" | "query" | "value"
+  >
 }
 
 const {
@@ -387,6 +391,7 @@ export const TreeItem = withContext<"div", TreeItemProps>(
     indicator: indicatorProp,
     label,
     loadingScheme,
+    query,
     startElement,
     value: valueProp = isString(label) ? label : undefined,
     checkboxProps,
@@ -453,6 +458,7 @@ export const TreeItem = withContext<"div", TreeItemProps>(
       ...componentContext.itemProps,
       ...rest,
       asyncChildren: asyncChildrenProp ? asyncChildren : undefined,
+      query: query ?? (isString(label) ? label : undefined),
       value: valueProp,
     })
     const itemProps = {

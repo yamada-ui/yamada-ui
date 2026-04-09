@@ -865,11 +865,13 @@ export const SidebarMenuButton = withContext<"button", SidebarMenuButtonProps>(
   const { mode } = useComponentContext()
   const { menuProps } = useSidePanelComponentContext()
   const offcanvas = mode === "offcanvas"
+  const { disabled, ...rest } = mergeProps(menuProps, props)()
 
   return {
     "data-menu": "",
-    ...mergeProps(menuProps, props)(),
-    tabIndex: !offcanvas || open ? 0 : -1,
+    disabled,
+    ...rest,
+    tabIndex: (!offcanvas || open) && !disabled ? 0 : -1,
   }
 })
 
@@ -1028,7 +1030,13 @@ export const SidebarItem = withContext<"li", SidebarItemProps>(
       children: computedChildren,
     })
     const animated = animatedProp ?? componentContext.animated ?? true
-    const tabIndex = offcanvas ? (open && expanded ? 0 : -1) : expanded ? 0 : -1
+    const tabIndex = offcanvas
+      ? open && expanded && !disabled
+        ? 0
+        : -1
+      : expanded && !disabled
+        ? 0
+        : -1
     const callbackProps = useMemo(
       () => ({ disabled, expanded: groupOpen }),
       [disabled, groupOpen],

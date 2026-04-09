@@ -3,7 +3,7 @@ import { checkboxStyle } from "../checkbox"
 
 export const treeStyle = defineComponentSlotStyle({
   base: {
-    checkbox: { "--indicator-bg": "colors.bg" },
+    checkbox: { "--indicator-bg": "colors.bg", _disabled: { opacity: "1" } },
     element: {
       color: "{element-color}",
       display: "inline-center",

@@ -14,6 +14,7 @@ import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { RemoveScroll } from "react-remove-scroll"
 import { createSlotComponent, styled } from "../../core"
+import { useValue } from "../../hooks/use-value"
 import { cast, isArray, useSplitChildren, wrapOrPassProps } from "../../utils"
 import { Button } from "../button"
 import { CloseButton } from "../close-button"
@@ -238,7 +239,12 @@ export const ModalCloseButton = withContext<"button", ModalCloseButtonProps>(
 export interface ModalOverlayProps extends HTMLMotionProps {}
 
 export const ModalOverlay = withContext<"div", ModalOverlayProps>((props) => {
-  const { animationScheme, duration, getOverlayProps } = useComponentContext()
+  const {
+    animationScheme,
+    duration: durationProp,
+    getOverlayProps,
+  } = useComponentContext()
+  const duration = useValue(durationProp)
 
   return (
     <motion.div

@@ -34,7 +34,6 @@ import {
   setAttribute,
   useIds,
   useSafeLayoutEffect,
-  useUpdateEffect,
 } from "../../utils"
 
 export interface TreeControl {
@@ -47,6 +46,7 @@ interface TreeDescendantProps {
   group: boolean
   id: string
   value: string
+  query?: string
 }
 
 const {
@@ -238,8 +238,8 @@ export const useTree = <Multiple extends boolean = false>({
             !isUndefined(descendant.value) &&
             descendant.value !== searchRef.current.omitValue,
         )
-      const descendant = values.find(({ value }) =>
-        match(value, searchRef.current.value, "startsWith"),
+      const descendant = values.find(({ query, value }) =>
+        match(query ?? value, searchRef.current.value, "startsWith"),
       )
 
       if (descendant) onActiveDescendant(descendant)
@@ -426,6 +426,10 @@ export interface UseTreeItemProps
    */
   disabled?: boolean
   /**
+   * The query to search for in the tree item.
+   */
+  query?: string
+  /**
    * The value of the item.
    */
   value?: string
@@ -441,6 +445,7 @@ export const useTreeItem = ({
   defaultOpen,
   disabled = false,
   open: openProp,
+  query,
   value: valueProp,
   onClose: onCloseProp,
   onOpen: onOpenProp,
@@ -494,6 +499,7 @@ export const useTreeItem = ({
     disabled,
     expanded: branchOpen.slice(0, -1).every(Boolean),
     group,
+    query,
     value,
   })
 
@@ -545,10 +551,14 @@ export const useTreeItem = ({
     if (async && !initialAsyncRef.current) {
       initialAsyncRef.current = true
 
-      onGroupChildren().then(() => {
-        onOpen()
-        onExpandedChange(value)
-      })
+      onGroupChildren()
+        .then(() => {
+          onOpen()
+          onExpandedChange(value)
+        })
+        .catch(() => {
+          initialAsyncRef.current = false
+        })
     } else {
       onOpen()
       onExpandedChange(value)
@@ -676,7 +686,7 @@ export const useTreeItem = ({
 
       ev.preventDefault()
 
-      onSearch(ev.key, value)
+      onSearch(ev.key, query ?? value)
     },
     [
       activeDescendant,
@@ -696,18 +706,19 @@ export const useTreeItem = ({
       onSearch,
       onSelect,
       onSelectedChange,
+      query,
       value,
     ],
   )
 
   const onItemClick = useCallback(
     (ev: MouseEvent<HTMLLIElement>) => {
+      ev.stopPropagation()
+
       if (disabled || !value) return
 
       if (group && !groupLoading)
         if (!ev.ctrlKey && !ev.metaKey && !ev.shiftKey) onGroupToggle()
-
-      ev.stopPropagation()
 
       onSelect(ev)
     },
@@ -761,21 +772,25 @@ export const useTreeItem = ({
     [disabled, group, onCheckedChange, value, nested, descendants, context],
   )
 
-  useUpdateEffect(() => {
+  useSafeLayoutEffect(() => {
     if (defaultExpanded) {
       if (async && !initialAsyncRef.current) {
         initialAsyncRef.current = true
 
-        onGroupChildren().then(() => {
-          onOpen()
-        })
+        onGroupChildren()
+          .then(() => {
+            onOpen()
+          })
+          .catch(() => {
+            initialAsyncRef.current = false
+          })
       } else {
         onOpen()
       }
     } else {
       onClose()
     }
-  }, [defaultExpanded])
+  }, [async, defaultExpanded, onClose, onGroupChildren, onOpen])
 
   useSafeLayoutEffect(() => {
     if (!group || !checkable) return
@@ -851,12 +866,21 @@ export const useTreeItem = ({
       "aria-labelledby": cx(ariaLabelledby, labelId),
       "data-selected": dataAttr(selected),
       checked,
+      disabled,
       indeterminate,
       tabIndex: -1,
       ...props,
       onChange: handlerAll(props.onChange, onCheckboxChange),
     }),
-    [checkboxId, labelId, selected, checked, indeterminate, onCheckboxChange],
+    [
+      checkboxId,
+      labelId,
+      selected,
+      checked,
+      disabled,
+      indeterminate,
+      onCheckboxChange,
+    ],
   )
 
   const getGroupProps: PropGetter<"ul"> = useCallback(

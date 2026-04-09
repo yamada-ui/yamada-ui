@@ -23,7 +23,6 @@ import {
   setAttribute,
   useIds,
   useSafeLayoutEffect,
-  useUpdateEffect,
 } from "../../utils"
 
 export interface SidebarControl {
@@ -405,10 +404,14 @@ export const useSidebarItem = ({
     if (async && !initialAsyncRef.current) {
       initialAsyncRef.current = true
 
-      onGroupChildren().then(() => {
-        onOpen()
-        onExpandedChange(value)
-      })
+      onGroupChildren()
+        .then(() => {
+          onOpen()
+          onExpandedChange(value)
+        })
+        .catch(() => {
+          initialAsyncRef.current = false
+        })
     } else {
       onOpen()
       onExpandedChange(value)
@@ -439,14 +442,18 @@ export const useSidebarItem = ({
     }
   }, [groupOpen, onGroupClose, onGroupOpen])
 
-  useUpdateEffect(() => {
+  useSafeLayoutEffect(() => {
     if (defaultExpanded) {
       if (async && !initialAsyncRef.current) {
         initialAsyncRef.current = true
 
-        onGroupChildren().then(() => {
-          onOpen()
-        })
+        onGroupChildren()
+          .then(() => {
+            onOpen()
+          })
+          .catch(() => {
+            initialAsyncRef.current = false
+          })
       } else {
         onOpen()
       }
@@ -502,10 +509,11 @@ export const useSidebarItem = ({
     (props = {}) => ({
       "aria-controls": contentId,
       "aria-disabled": ariaAttr(disabled),
+      "aria-expanded": groupOpen,
       "data-disabled": dataAttr(disabled),
       "data-expanded": dataAttr(groupOpen),
       "data-selected": dataAttr(selected),
-      tabIndex: open && expanded ? 0 : -1,
+      tabIndex: open && expanded && !disabled ? 0 : -1,
       ...props,
       onClick: handlerAll(props.onClick, onGroupToggle),
     }),
@@ -519,7 +527,7 @@ export const useSidebarItem = ({
       target: external ? "_blank" : undefined,
       "data-disabled": dataAttr(disabled),
       "data-selected": dataAttr(selected),
-      tabIndex: open && expanded ? 0 : -1,
+      tabIndex: open && expanded && !disabled ? 0 : -1,
       ...props,
       onClick: handlerAll(props.onClick, (ev) => {
         if (!disabled) return

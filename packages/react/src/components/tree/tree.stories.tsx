@@ -932,7 +932,7 @@ export const Async: Story = () => {
     [],
   )
 
-  return <Tree.Root items={items} />
+  return <Tree.Root defaultExpandedValue={["node_modules"]} items={items} />
 }
 
 export const LoadingScheme: Story = () => {

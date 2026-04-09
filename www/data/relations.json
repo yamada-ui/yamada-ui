@@ -163,12 +163,12 @@
     "resembles": [
       "steps",
       "tabs",
+      "sidebar",
       "data-list",
       "infinite-scroll-area",
       "link",
       "link-box",
-      "list",
-      "native-accordion"
+      "list"
     ]
   },
   "button": {
@@ -1041,11 +1041,11 @@
       "accordion",
       "tree",
       "tabs",
+      "sidebar",
       "breadcrumb",
       "collapse",
       "data-list",
-      "fade",
-      "fade-scale"
+      "fade"
     ]
   },
   "native-popover": {
@@ -1122,13 +1122,13 @@
     "dependencies": { "components": ["button", "icon"], "hooks": [] },
     "resembles": [
       "tabs",
+      "sidebar",
       "breadcrumb",
       "checkbox",
       "link",
       "link-box",
       "native-select",
-      "radio",
-      "rating"
+      "radio"
     ]
   },
   "password-input": {
@@ -1414,6 +1414,36 @@
     "dependents": { "components": ["client-only"], "hooks": [] },
     "resembles": ["client-only", "for", "format", "portal", "slot"]
   },
+  "sidebar": {
+    "dependencies": {
+      "components": [
+        "collapse",
+        "loading",
+        "motion",
+        "drawer",
+        "icon",
+        "tooltip"
+      ],
+      "hooks": [
+        "use-breakpoint",
+        "use-value",
+        "use-async-callback",
+        "use-descendants",
+        "use-disclosure",
+        "use-window-event"
+      ]
+    },
+    "resembles": [
+      "tabs",
+      "breadcrumb",
+      "link-box",
+      "native-accordion",
+      "pagination",
+      "accordion",
+      "steps",
+      "tree"
+    ]
+  },
   "simple-grid": {
     "dependencies": { "components": ["grid"], "hooks": [] },
     "resembles": [
@@ -1549,7 +1579,7 @@
       "components": ["icon"],
       "hooks": ["use-value", "use-descendants"]
     },
-    "resembles": ["breadcrumb", "timeline", "tabs"]
+    "resembles": ["breadcrumb", "timeline", "tabs", "sidebar"]
   },
   "switch": {
     "dependencies": { "components": ["field"], "hooks": [] },
@@ -1586,14 +1616,14 @@
       "hooks": ["use-value", "use-descendants"]
     },
     "resembles": [
+      "sidebar",
       "breadcrumb",
       "native-accordion",
       "pagination",
       "accordion",
       "steps",
       "tree",
-      "menu",
-      "select"
+      "menu"
     ]
   },
   "tag": {
@@ -1699,7 +1729,7 @@
       "timeline",
       "tabs",
       "native-table",
-      "stat"
+      "sidebar"
     ]
   },
   "visually-hidden": {

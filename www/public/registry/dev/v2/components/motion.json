@@ -9,6 +9,7 @@
   "dependents": {
     "components": [
       "accordion",
+      "action-bar",
       "airy",
       "collapse",
       "drawer",
@@ -22,10 +23,12 @@
       "ripple",
       "rotate",
       "segmented-control",
+      "sidebar",
       "slide",
       "slide-fade",
       "snacks",
-      "tooltip"
+      "tooltip",
+      "tree"
     ],
     "hooks": [],
     "providers": []

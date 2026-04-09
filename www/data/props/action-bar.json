@@ -1,0 +1,340 @@
+{
+  "ActionBar": {
+    "CloseTrigger": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Content": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "OpenTrigger": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "animationScheme": {
+        "type": "\"none\" | \"scale\" | SimplePlacement",
+        "defaultValue": "\"scale\"",
+        "description": "The animation of the element.",
+        "required": false
+      },
+      "closeOnEsc": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the action bar will close when the `Esc` key is pressed.",
+        "required": false
+      },
+      "content": {
+        "type": "ReactNode",
+        "description": "The action bar content to use.",
+        "required": false
+      },
+      "defaultOpen": {
+        "type": "boolean",
+        "description": "If `true`, the element will be initially opened.",
+        "required": false
+      },
+      "duration": {
+        "type": "MotionTransitionProps[\"duration\"]",
+        "defaultValue": "0.2",
+        "description": "The animation duration.",
+        "required": false
+      },
+      "onClose": {
+        "type": "() => void | Promise<void>",
+        "description": "Callback invoked to close the element.",
+        "required": false
+      },
+      "onCloseComplete": {
+        "type": "() => void",
+        "description": "Callback function to run side effects after the action bar has closed.",
+        "required": false
+      },
+      "onOpen": {
+        "type": "() => void | Promise<void>",
+        "description": "Callback invoked to open the element.",
+        "required": false
+      },
+      "open": {
+        "type": "boolean",
+        "description": "If `true`, the element will be opened.",
+        "required": false
+      },
+      "portalProps": {
+        "type": "Omit<PortalProps, \"children\">",
+        "description": "Props to be forwarded to the portal component.",
+        "required": false
+      },
+      "trigger": {
+        "type": "ReactNode",
+        "description": "The action bar trigger to use.",
+        "required": false
+      }
+    },
+    "Separator": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    }
+  },
+  "ActionBarCloseTrigger": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "ActionBarContent": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "ActionBarOpenTrigger": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "ActionBarRoot": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "animationScheme": {
+      "type": "\"none\" | \"scale\" | SimplePlacement",
+      "defaultValue": "\"scale\"",
+      "description": "The animation of the element.",
+      "required": false
+    },
+    "closeOnEsc": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the action bar will close when the `Esc` key is pressed.",
+      "required": false
+    },
+    "content": {
+      "type": "ReactNode",
+      "description": "The action bar content to use.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
+      "description": "If `true`, the element will be initially opened.",
+      "required": false
+    },
+    "duration": {
+      "type": "MotionTransitionProps[\"duration\"]",
+      "defaultValue": "0.2",
+      "description": "The animation duration.",
+      "required": false
+    },
+    "onClose": {
+      "type": "() => void | Promise<void>",
+      "description": "Callback invoked to close the element.",
+      "required": false
+    },
+    "onCloseComplete": {
+      "type": "() => void",
+      "description": "Callback function to run side effects after the action bar has closed.",
+      "required": false
+    },
+    "onOpen": {
+      "type": "() => void | Promise<void>",
+      "description": "Callback invoked to open the element.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the element will be opened.",
+      "required": false
+    },
+    "portalProps": {
+      "type": "Omit<PortalProps, \"children\">",
+      "description": "Props to be forwarded to the portal component.",
+      "required": false
+    },
+    "trigger": {
+      "type": "ReactNode",
+      "description": "The action bar trigger to use.",
+      "required": false
+    }
+  },
+  "ActionBarSeparator": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  }
+}

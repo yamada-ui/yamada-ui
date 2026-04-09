@@ -3,7 +3,7 @@
 import type { FC, PropsWithChildren, ReactNode } from "react"
 import type { HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { HTMLMotionProps } from "../motion"
-import type { PopupAnimationProps } from "../popover"
+import type { UsePopupAnimationProps } from "../popover"
 import type { PortalProps } from "../portal"
 import type { TooltipStyle } from "./tooltip.style"
 import type { UseTooltipProps } from "./use-tooltip"
@@ -11,7 +11,7 @@ import { AnimatePresence } from "motion/react"
 import { createSlotComponent } from "../../core"
 import { cast } from "../../utils"
 import { motion } from "../motion"
-import { getPopupAnimationProps } from "../popover"
+import { usePopupAnimationProps } from "../popover"
 import { Portal } from "../portal"
 import { tooltipStyle } from "./tooltip.style"
 import { useTooltip } from "./use-tooltip"
@@ -20,7 +20,7 @@ export interface TooltipProps
   extends
     UseTooltipProps,
     PropsWithChildren,
-    PopupAnimationProps,
+    UsePopupAnimationProps,
     ThemeProps<TooltipStyle> {
   /**
    * The content of the tooltip.
@@ -31,7 +31,7 @@ export interface TooltipProps
    *
    * @default 0.1
    */
-  duration?: PopupAnimationProps["duration"]
+  duration?: UsePopupAnimationProps["duration"]
   /**
    * Props for content element.
    */
@@ -72,6 +72,10 @@ export const Tooltip: FC<TooltipProps> = (props) => {
   ] = useRootComponentProps(props)
   const { open, getContentProps, getPositionerProps, getTriggerProps } =
     useTooltip(rest)
+  const popupAnimationProps = usePopupAnimationProps({
+    animationScheme,
+    duration,
+  })
 
   if (!content) return children
 
@@ -86,7 +90,7 @@ export const Tooltip: FC<TooltipProps> = (props) => {
           <Portal {...portalProps}>
             <TooltipPositioner {...getPositionerProps()}>
               <TooltipContent
-                {...getPopupAnimationProps(animationScheme, duration)}
+                {...popupAnimationProps}
                 {...cast<HTMLMotionProps>(
                   getContentProps(cast<HTMLProps>(contentProps)),
                 )}

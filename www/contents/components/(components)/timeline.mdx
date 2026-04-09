@@ -104,6 +104,44 @@ const items = useMemo<Timeline.Item[]>(
 return <Timeline.Root items={items} />
 ```
 
+### Use Variants
+
+```tsx preview functional
+const items = useMemo<Timeline.Item[]>(
+  () => [
+    {
+      description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+      title: "第1部 ファントムブラッド",
+    },
+    {
+      description:
+        "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+      title: "第2部 戦闘潮流",
+    },
+    {
+      description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+      title: "第3部 スターダストクルセイダース",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["plain", "number"]}>
+      {(variant) => (
+        <Timeline.Root
+          key={variant}
+          variant={variant}
+          items={items}
+          shape={variant === "number" ? "rounded" : undefined}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
 ### Change Size
 
 ```tsx preview functional

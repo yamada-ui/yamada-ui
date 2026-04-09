@@ -31,23 +31,32 @@ const preview: Preview = {
       const { colorMode: defaultColorMode, locale } = globals
       const dir = isRtl(globals.locale) ? "rtl" : "ltr"
       const config = extendConfig({ defaultColorMode })
+      const unstyled = layout === "unstyled"
       const centered = layout === "centered"
 
-      return (
-        <UIProvider config={config} dir={dir} locale={locale}>
-          <VStack
-            css={{ "--space": { base: "spaces.lg", md: "spaces.md" } }}
-            align="start"
-            gap="{space}"
-            justify={centered ? "center" : "start"}
-            m={centered ? "-md" : "0"}
-            minH="100dvh"
-            p="{space}"
-          >
+      if (unstyled) {
+        return (
+          <UIProvider config={config} dir={dir} locale={locale}>
             <Story />
-          </VStack>
-        </UIProvider>
-      )
+          </UIProvider>
+        )
+      } else {
+        return (
+          <UIProvider config={config} dir={dir} locale={locale}>
+            <VStack
+              css={{ "--space": { base: "spaces.lg", md: "spaces.md" } }}
+              align="start"
+              gap="{space}"
+              justify={centered ? "center" : "start"}
+              m={centered ? "-md" : "0"}
+              minH="100dvh"
+              p="{space}"
+            >
+              <Story />
+            </VStack>
+          </UIProvider>
+        )
+      }
     },
   ],
   globalTypes: {

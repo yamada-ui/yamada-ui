@@ -1,6 +1,10 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
+  actionBar: {
+    "Close action bar": "Actiebalk sluiten",
+    "Open action bar": "Actiebalk openen",
+  },
   autocomplete: {
     "Clear value": "Waarde wissen",
     "No results found": "Geen resultaten gevonden",
@@ -83,6 +87,10 @@ const data: IntlData = {
   },
   select: {
     "Clear value": "Waarde wissen",
+  },
+  sidebar: {
+    "Close sidebar": "Zijbalk sluiten",
+    "Open sidebar": "Zijbalk openen",
   },
   slider: {
     "Slider thumb": "Schuifregelaar duim",

@@ -1,8 +1,219 @@
 ---
 title: ActionBar
-description: "We are currently considering the development of `ActionBar`."
+description: "`ActionBar` is a component that is used to display a bottom action bar with a set of actions."
 tags: ["overlay", "floating", "notification"]
-status: planned
+status: new
+storybook: components-action-bar--basic
+source: components/action-bar
+style: components/action-bar/action-bar.style.ts
 ---
 
-Please post your thoughts on this GitHub [issue](https://github.com/yamada-ui/yamada-ui/issues/3212) to help us prioritize its development.
+```tsx preview
+<ActionBar.Root>
+  <ActionBar.OpenTrigger>
+    <Button>Open ActionBar</Button>
+  </ActionBar.OpenTrigger>
+
+  <ActionBar.Content>
+    <Button variant="outline" borderStyle="dashed">
+      2 Selected
+    </Button>
+    <ActionBar.Separator />
+    <Button startIcon={<TrashIcon />}>Delete</Button>
+    <Button startIcon={<ShareIcon />}>Share</Button>
+    <ActionBar.Separator />
+    <ActionBar.CloseTrigger>
+      <CloseButton size="md" />
+    </ActionBar.CloseTrigger>
+  </ActionBar.Content>
+</ActionBar.Root>
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { ActionBar } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { ActionBar } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { ActionBar } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<ActionBar.Root>
+  <ActionBar.OpenTrigger />
+  <ActionBar.Content>
+    <ActionBar.Separator />
+    <ActionBar.CloseTrigger />
+  </ActionBar.Content>
+</ActionBar.Root>
+```
+
+### Use props
+
+```tsx preview
+<ActionBar.Root
+  content={
+    <>
+      <Button variant="outline" borderStyle="dashed">
+        2 Selected
+      </Button>
+      <ActionBar.Separator />
+      <Button startIcon={<TrashIcon />}>Delete</Button>
+      <Button startIcon={<ShareIcon />}>Share</Button>
+      <ActionBar.Separator />
+      <ActionBar.CloseTrigger>
+        <CloseButton size="md" />
+      </ActionBar.CloseTrigger>
+    </>
+  }
+  trigger={<Button>Open ActionBar</Button>}
+/>
+```
+
+### Change Duration
+
+To change the duration, set `duration` to a numerical value (seconds).
+
+```tsx preview
+<ActionBar.Root duration={0.4}>
+  <ActionBar.OpenTrigger>
+    <Button>Open ActionBar</Button>
+  </ActionBar.OpenTrigger>
+
+  <ActionBar.Content>
+    <Button variant="outline" borderStyle="dashed">
+      2 Selected
+    </Button>
+    <ActionBar.Separator />
+    <Button startIcon={<TrashIcon />}>Delete</Button>
+    <Button startIcon={<ShareIcon />}>Share</Button>
+    <ActionBar.Separator />
+    <ActionBar.CloseTrigger>
+      <CloseButton size="md" />
+    </ActionBar.CloseTrigger>
+  </ActionBar.Content>
+</ActionBar.Root>
+```
+
+### Change Placement
+
+To change the display position, set `placement` to `"start-center"`, `"end-start"`, etc. By default, `"end-center"` is set.
+
+```tsx preview
+<ActionBar.Root placement="start-center">
+  <ActionBar.OpenTrigger>
+    <Button>Open ActionBar</Button>
+  </ActionBar.OpenTrigger>
+
+  <ActionBar.Content>
+    <Button variant="outline" borderStyle="dashed">
+      2 Selected
+    </Button>
+    <ActionBar.Separator />
+    <Button startIcon={<TrashIcon />}>Delete</Button>
+    <Button startIcon={<ShareIcon />}>Share</Button>
+    <ActionBar.Separator />
+    <ActionBar.CloseTrigger>
+      <CloseButton size="md" />
+    </ActionBar.CloseTrigger>
+  </ActionBar.Content>
+</ActionBar.Root>
+```
+
+### Change Animation
+
+To change the show or hide animation, set `animationScheme` to `"block-start"`, `"inline-end"`, etc. By default, the animation is determined based on the `placement`.
+
+```tsx preview
+<ActionBar.Root animationScheme="inline-end" placement="start-end">
+  <ActionBar.OpenTrigger>
+    <Button>Open ActionBar</Button>
+  </ActionBar.OpenTrigger>
+
+  <ActionBar.Content>
+    <Button variant="outline" borderStyle="dashed">
+      2 Selected
+    </Button>
+    <ActionBar.Separator />
+    <Button startIcon={<TrashIcon />}>Delete</Button>
+    <Button startIcon={<ShareIcon />}>Share</Button>
+    <ActionBar.Separator />
+    <ActionBar.CloseTrigger>
+      <CloseButton size="md" />
+    </ActionBar.CloseTrigger>
+  </ActionBar.Content>
+</ActionBar.Root>
+```
+
+### Custom Control
+
+```tsx client preview functional
+const { open, onClose, onOpen } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open ActionBar</Button>
+
+    <ActionBar.Root
+      content={
+        <>
+          <Button variant="outline" borderStyle="dashed">
+            2 Selected
+          </Button>
+          <ActionBar.Separator />
+          <Button startIcon={<TrashIcon />}>Delete</Button>
+          <Button startIcon={<ShareIcon />}>Share</Button>
+          <ActionBar.Separator />
+          <ActionBar.CloseTrigger>
+            <CloseButton size="md" />
+          </ActionBar.CloseTrigger>
+        </>
+      }
+      open={open}
+      onClose={onClose}
+    />
+  </>
+)
+```
+
+## Props
+
+<PropsTable name="action-bar" />
+
+## Accessibility
+
+The `ActionBar` follows the [WAI-ARIA - Dialog (Modal) Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) for accessibility.
+
+### Keyboard Navigation
+
+| Key      | Description            | State                               |
+| -------- | ---------------------- | ----------------------------------- |
+| `Escape` | Closes the action bar. | `open={true}` + `closeOnEsc={true}` |
+
+### ARIA Roles and Attributes
+
+| Component                | Roles and Attributes     | Usage                                                                      |
+| ------------------------ | ------------------------ | -------------------------------------------------------------------------- |
+| `ActionBar.Content`      | `role="dialog"`          | Indicates that this is a dialog.                                           |
+| `ActionBar.OpenTrigger`  | `aria-haspopup="dialog"` | Indicates that a dialog exists.                                            |
+|                          | `aria-expanded`          | Sets to `"true"` if the action bar is open, and `"false"` if it is closed. |
+|                          | `aria-controls`          | If the action bar is open, sets to the `id` of `ActionBar.Content`.        |
+|                          | `aria-label`             | Sets to `"Open action bar"`.                                               |
+| `ActionBar.CloseTrigger` | `aria-label`             | Sets to `"Close action bar"`.                                              |
+
+## Similar Components
+
+<Similar name="action-bar" />
+
+## Uses Components & Hooks
+
+<Uses name="action-bar" />

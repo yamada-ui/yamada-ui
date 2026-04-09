@@ -1,6 +1,10 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
+  actionBar: {
+    "Close action bar": "Κλείσιμο γραμμής ενεργειών",
+    "Open action bar": "Άνοιγμα γραμμής ενεργειών",
+  },
   autocomplete: {
     "Clear value": "Καθαρισμός τιμής",
     "No results found": "Δεν βρέθηκαν αποτελέσματα",
@@ -82,6 +86,10 @@ const data: IntlData = {
   },
   select: {
     "Clear value": "Καθαρισμός τιμής",
+  },
+  sidebar: {
+    "Close sidebar": "Κλείσιμο πλευρικής μπάρας",
+    "Open sidebar": "Άνοιγμα πλευρικής μπάρας",
   },
   slider: {
     "Slider thumb": "Αντίχειρας ολισθητήρα",

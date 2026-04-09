@@ -2,7 +2,6 @@
 title: Tip
 description: "`Tip`は、アイコンボタンをトリガーとして補足情報を表示するコンポーネントです。"
 tags: ["feedback", "notification", "icon"]
-status: new
 storybook: components-tip--basic
 source: components/tip
 ---
@@ -166,7 +165,7 @@ import { Tip } from "@workspaces/ui"
 配置を変更する場合は、`placement`に`"end"`や`"center-start"`などを設定します。デフォルトでは、`"start"`が設定されています。
 
 ```tsx preview
-<VStack>
+<Wrap gap="md">
   <For
     each={[
       "start",
@@ -178,7 +177,11 @@ import { Tip } from "@workspaces/ui"
       "end-end",
       "end-center",
       "center-start",
+      "center-start-start",
+      "center-start-end",
       "center-end",
+      "center-end-start",
+      "center-end-end",
     ]}
   >
     {(placement) => (
@@ -190,7 +193,7 @@ import { Tip } from "@workspaces/ui"
       </HStack>
     )}
   </For>
-</VStack>
+</Wrap>
 ```
 
 ### 無効にする

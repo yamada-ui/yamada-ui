@@ -11,8 +11,9 @@ import type {
   ComboboxItem,
   UseComboboxGroupProps,
 } from "../../hooks/use-combobox"
+import type { Merge } from "../../utils"
 import type { UseInputBorderProps } from "../input"
-import type { PopupAnimationProps } from "../popover"
+import type { UsePopoverStyleProps, UsePopupAnimationProps } from "../popover"
 import type { SelectStyle } from "./select.style"
 import type {
   UseSelectOptionProps,
@@ -34,7 +35,7 @@ import { cast, isArray } from "../../utils"
 import { useGroupItemProps } from "../group"
 import { CheckIcon, ChevronDownIcon, XIcon } from "../icon"
 import { InputGroup, useInputBorder, useInputPropsContext } from "../input"
-import { Popover } from "../popover"
+import { Popover, usePopoverStyleProps } from "../popover"
 import { selectStyle } from "./select.style"
 import { SelectContext, useSelect, useSelectOption } from "./use-select"
 
@@ -46,8 +47,8 @@ interface ComponentContext
 export interface SelectRootProps<Multiple extends boolean = false>
   extends
     Omit<HTMLStyledProps, "defaultValue" | "offset" | "onChange" | "value">,
-    UseSelectProps<Multiple>,
-    PopupAnimationProps,
+    Merge<UseSelectProps<Multiple>, UsePopoverStyleProps>,
+    UsePopupAnimationProps,
     ThemeProps<SelectStyle>,
     UseInputBorderProps {
   /**
@@ -140,6 +141,7 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
         ...rest
       },
     ] = useGroupItemProps(props)
+    const popoverStyleProps = usePopoverStyleProps(rest)
     const items = useMemo<ComboboxItem[]>(() => {
       if (itemsProp) return itemsProp
 
@@ -168,7 +170,7 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
       onChange,
       onClose,
       onSelect,
-    } = useSelect({ items, ...rest })
+    } = useSelect({ items, ...rest, ...popoverStyleProps })
     const mergedPopoverProps = useMemo<Popover.RootProps>(
       () => ({
         animationScheme,

@@ -61,6 +61,8 @@ export type StyleValue<Y, M = unknown> =
   | ColorModeValue<Y, M>
   | ResponsiveValue<Y, M>
 
+export type ExtractStyleValue<Y> = Y extends StyleValue<infer M> ? M : never
+
 export type StyleImportantValue<Y extends string> =
   | `${Y}!`
   | `${Y} !important`
@@ -97,14 +99,14 @@ export type CSSObject = CSSFlatObject & {
 }
 export type CSSProperties = AnyString | keyof CSSFlatObject
 
+export type CSSSlotObject<Y extends string = string> = {
+  [M in Y]?: CSSObject
+}
+
 export interface CSSPropObject<
   Y extends CSSObject | CSSSlotObject = CSSObject,
 > {
   [key: string]: { [key: string]: Y }
-}
-
-export type CSSSlotObject<Y extends string = string> = {
-  [M in Y]?: CSSObject
 }
 
 export type CSSModifierObject<Y extends CSSObject | CSSSlotObject = CSSObject> =

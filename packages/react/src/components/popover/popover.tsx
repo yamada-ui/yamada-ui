@@ -5,9 +5,10 @@ import type {
   HTMLProps,
   HTMLStyledProps,
   SimplePlacement,
+  StyleValue,
   ThemeProps,
 } from "../../core"
-import type { ReactNodeOrFunction } from "../../utils"
+import type { Merge, ReactNodeOrFunction } from "../../utils"
 import type { HTMLMotionProps, MotionTransitionProps } from "../motion"
 import type { PortalProps } from "../portal"
 import type { PopoverStyle } from "./popover.style"
@@ -15,6 +16,7 @@ import type { UsePopoverProps, UsePopoverReturn } from "./use-popover"
 import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { createSlotComponent } from "../../core"
+import { useValue } from "../../hooks/use-value"
 import { cast, runIfFn } from "../../utils"
 import { fadeScaleVariants } from "../fade-scale"
 import { motion } from "../motion"
@@ -23,25 +25,24 @@ import { slideFadeVariants } from "../slide-fade"
 import { popoverStyle } from "./popover.style"
 import { usePopover } from "./use-popover"
 
-export interface PopupAnimationProps {
+export interface UsePopupAnimationProps {
   /**
    * The animation of the element.
    *
    * @default 'scale'
    */
-  animationScheme?: "none" | "scale" | SimplePlacement
+  animationScheme?: StyleValue<"none" | "scale" | SimplePlacement>
   /**
    * The animation duration.
    *
-   * @default 0.2
+   * @default 0.1
    */
-  duration?: MotionTransitionProps["duration"]
+  duration?: StyleValue<MotionTransitionProps["duration"]>
 }
 
-export const getPopupAnimationProps = (
-  animationScheme: PopupAnimationProps["animationScheme"] = "scale",
-  duration?: PopupAnimationProps["duration"],
-) => {
+export const usePopupAnimationProps = (props: UsePopupAnimationProps = {}) => {
+  const animationScheme = useValue(props.animationScheme ?? "scale")
+  const duration = useValue(props.duration ?? 0.1)
   const sharedProps = { animate: "enter", exit: "exit", initial: "exit" }
 
   switch (animationScheme) {
@@ -80,6 +81,57 @@ export const getPopupAnimationProps = (
   }
 }
 
+export interface UsePopoverStyleProps {
+  /**
+   * If `true`, the popper will change its placement and flip when it's about to overflow its boundary area.
+   *
+   * @default true
+   */
+  flip?: StyleValue<UsePopoverProps["flip"]>
+  /**
+   * The distance or margin between the reference and popper.
+   * It is used internally to create an `offset` modifier.
+   *
+   * @default 8
+   */
+  gutter?: StyleValue<UsePopoverProps["gutter"]>
+  /**
+   * If `true`, the popper will match the width of the reference at all times.
+   * It's useful for `autocomplete`, `date-picker` and `select` patterns.
+   *
+   * @default false
+   */
+  matchWidth?: StyleValue<UsePopoverProps["matchWidth"]>
+  /**
+   * The placement of the popper relative to its reference.
+   *
+   * @default 'end'
+   */
+  placement?: StyleValue<UsePopoverProps["placement"]>
+  /**
+   * The CSS positioning strategy to use.
+   *
+   * @default 'absolute'
+   */
+  strategy?: StyleValue<UsePopoverProps["strategy"]>
+}
+
+export const usePopoverStyleProps = (props: UsePopoverStyleProps = {}) => {
+  const placement = useValue(props.placement)
+  const gutter = useValue(props.gutter)
+  const matchWidth = useValue(props.matchWidth)
+  const strategy = useValue(props.strategy)
+  const flip = useValue(props.flip)
+
+  return {
+    flip,
+    gutter,
+    matchWidth,
+    placement,
+    strategy,
+  }
+}
+
 interface ComponentContext
   extends
     Pick<
@@ -94,10 +146,13 @@ interface ComponentContext
       | "getTriggerProps"
       | "open"
     >,
-    PopupAnimationProps {}
+    UsePopupAnimationProps {}
 
 export interface PopoverRootProps
-  extends UsePopoverProps, PopupAnimationProps, ThemeProps<PopoverStyle> {
+  extends
+    Merge<UsePopoverProps, UsePopoverStyleProps>,
+    UsePopupAnimationProps,
+    ThemeProps<PopoverStyle> {
   /**
    * The children of the popover.
    */
@@ -105,12 +160,6 @@ export interface PopoverRootProps
     open: boolean
     onClose: () => void
   }>
-  /**
-   * The animation duration.
-   *
-   * @default 0.2
-   */
-  duration?: PopupAnimationProps["duration"]
 }
 
 const {
@@ -134,10 +183,9 @@ export { PopoverPropsContext, usePopoverPropsContext }
  * @see https://yamada-ui.com/docs/components/popover
  */
 export const PopoverRoot: FC<PopoverRootProps> = (props) => {
-  const [
-    styleContext,
-    { animationScheme = "scale", children, duration = 0.1, ...rest },
-  ] = useRootComponentProps(props)
+  const styleProps = usePopoverStyleProps(props)
+  const [styleContext, { animationScheme, children, duration, ...rest }] =
+    useRootComponentProps({ ...props, ...styleProps })
   const {
     open,
     getAnchorProps,
@@ -247,6 +295,10 @@ export const PopoverContent = withContext<"div", PopoverContentProps>(
   ({ portalProps, ...rest }) => {
     const { animationScheme, duration, open, getContentProps } =
       useComponentContext()
+    const popupAnimationProps = usePopupAnimationProps({
+      animationScheme,
+      duration,
+    })
 
     return (
       <AnimatePresence>
@@ -254,7 +306,7 @@ export const PopoverContent = withContext<"div", PopoverContentProps>(
           <Portal {...portalProps}>
             <PopoverPositioner>
               <motion.div
-                {...getPopupAnimationProps(animationScheme, duration)}
+                {...popupAnimationProps}
                 {...cast<HTMLMotionProps>(
                   getContentProps(cast<HTMLProps>(rest)),
                 )}

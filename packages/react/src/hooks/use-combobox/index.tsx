@@ -241,7 +241,7 @@ export interface UseComboboxProps
 
 export const useCombobox = (props: UseComboboxProps = {}) => {
   const [
-    popoverProps,
+    { matchWidth = true, ...popoverProps },
     {
       "aria-label": ariaLabelProp,
       "aria-labelledby": ariaLabelledbyProp,
@@ -285,7 +285,7 @@ export const useCombobox = (props: UseComboboxProps = {}) => {
   const mergedPopoverProps = useMemo<UsePopoverProps>(
     () => ({
       autoFocus: false,
-      matchWidth: true,
+      matchWidth,
       openOnClick: false,
       ...popoverProps,
       disabled: !interactive,
@@ -293,7 +293,7 @@ export const useCombobox = (props: UseComboboxProps = {}) => {
       onClose,
       onOpen,
     }),
-    [interactive, onClose, onOpen, open, popoverProps],
+    [interactive, matchWidth, onClose, onOpen, open, popoverProps],
   )
 
   const onSelect = useCallback(

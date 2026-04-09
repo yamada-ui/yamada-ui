@@ -1,9 +1,22 @@
+import type * as Utils from "../../utils"
 import { render } from "#test"
+import { renderToString } from "react-dom/server"
 import {
   ColorModeScript,
   getStorageScript,
   ThemeSchemeScript,
 } from "./storage-script"
+
+vi.mock("../../utils", async () => {
+  const actual = await vi.importActual<typeof Utils>("../../utils")
+  return {
+    ...actual,
+    createdDom: vi.fn(actual.createdDom),
+  }
+})
+
+const { createdDom } = await import("../../utils")
+const createdDomMock = vi.mocked(createdDom)
 
 describe("getStorageScript", () => {
   describe("colorMode", () => {
@@ -77,33 +90,71 @@ describe("getStorageScript", () => {
 })
 
 describe("ColorModeScript", () => {
-  test("renders a script tag", () => {
-    const { container } = render(<ColorModeScript />, { withProvider: false })
-    const script = container.querySelector("script")
-    expect(script).toBeTruthy()
+  beforeEach(() => {
+    createdDomMock.mockReset()
   })
 
-  test("renders with nonce", () => {
+  test("renders nothing on the client to avoid React script warnings", () => {
+    createdDomMock.mockReturnValue(true)
+    const { container } = render(<ColorModeScript />, { withProvider: false })
+    expect(container.querySelector("script")).toBeNull()
+    expect(container).toBeEmptyDOMElement()
+  })
+
+  test("renders nothing on the client even when nonce is provided", () => {
+    createdDomMock.mockReturnValue(true)
     const { container } = render(<ColorModeScript nonce="test-nonce" />, {
       withProvider: false,
     })
-    const script = container.querySelector("script")
-    expect(script?.getAttribute("nonce")).toBe("test-nonce")
+    expect(container.querySelector("script")).toBeNull()
+  })
+
+  test("renders a script tag during SSR", () => {
+    createdDomMock.mockReturnValue(false)
+    const html = renderToString(<ColorModeScript />)
+    expect(html).toContain("<script")
+    expect(html).toContain("localStorage")
+  })
+
+  test("renders a script tag with nonce during SSR", () => {
+    createdDomMock.mockReturnValue(false)
+    const html = renderToString(<ColorModeScript nonce="test-nonce" />)
+    expect(html).toContain("<script")
+    expect(html).toContain('nonce="test-nonce"')
   })
 })
 
 describe("ThemeSchemeScript", () => {
-  test("renders a script tag", () => {
-    const { container } = render(<ThemeSchemeScript />, { withProvider: false })
-    const script = container.querySelector("script")
-    expect(script).toBeTruthy()
+  beforeEach(() => {
+    createdDomMock.mockReset()
   })
 
-  test("renders with nonce", () => {
+  test("renders nothing on the client to avoid React script warnings", () => {
+    createdDomMock.mockReturnValue(true)
+    const { container } = render(<ThemeSchemeScript />, { withProvider: false })
+    expect(container.querySelector("script")).toBeNull()
+    expect(container).toBeEmptyDOMElement()
+  })
+
+  test("renders nothing on the client even when nonce is provided", () => {
+    createdDomMock.mockReturnValue(true)
     const { container } = render(<ThemeSchemeScript nonce="test-nonce" />, {
       withProvider: false,
     })
-    const script = container.querySelector("script")
-    expect(script?.getAttribute("nonce")).toBe("test-nonce")
+    expect(container.querySelector("script")).toBeNull()
+  })
+
+  test("renders a script tag during SSR", () => {
+    createdDomMock.mockReturnValue(false)
+    const html = renderToString(<ThemeSchemeScript />)
+    expect(html).toContain("<script")
+    expect(html).toContain("localStorage")
+  })
+
+  test("renders a script tag with nonce during SSR", () => {
+    createdDomMock.mockReturnValue(false)
+    const html = renderToString(<ThemeSchemeScript nonce="test-nonce" />)
+    expect(html).toContain("<script")
+    expect(html).toContain('nonce="test-nonce"')
   })
 })

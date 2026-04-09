@@ -92,7 +92,11 @@ export const sidebarStyle = defineComponentSlotStyle<
       gap: "{side-panel-gap}",
       p: "{side-panel-space}",
     },
-    gap: { _animated: getSidebarTransitionStyle("width") },
+    gap: {
+      w: "{side-panel-expanded-width}",
+      _animated: getSidebarTransitionStyle("width"),
+      _groupCollapsed: { w: "{side-panel-collapsed-width}" },
+    },
     group: {
       alignItems: "stretch",
       display: "flex",
@@ -177,7 +181,7 @@ export const sidebarStyle = defineComponentSlotStyle<
       "--height": "100dvh",
       "--side-panel-depth-space": "calc(({side-panel-space} * 2) - 1px)",
       "--side-panel-duration": "durations.moderate",
-      "--side-panel-expanded-width": "min({sizes.xs}, {sizes.1/3})",
+      "--side-panel-expanded-width": "sizes.xs",
       "--side-panel-gap": "calc({side-panel-space} / 2)",
       "--side-panel-group-font-size": "fontSizes.xs",
       "--side-panel-handle-width": "calc({side-panel-space} * 2)",
@@ -253,9 +257,7 @@ export const sidebarStyle = defineComponentSlotStyle<
           _groupAnimated: getSidebarTransitionStyle("opacity"),
           _groupCollapsed: { opacity: "0" },
         },
-        root: {
-          "--side-panel-collapsed-width": "sizes.7xs",
-        },
+        root: { "--side-panel-collapsed-width": "sizes.7xs" },
         sidePanel: {
           _groupCollapsed: { w: "{side-panel-collapsed-width}" },
         },
@@ -264,9 +266,7 @@ export const sidebarStyle = defineComponentSlotStyle<
         handle: {
           _groupCollapsed: { _hover: { bg: "colorScheme.ghost" } },
         },
-        root: {
-          "--side-panel-collapsed-width": "0",
-        },
+        root: { "--side-panel-collapsed-width": "0" },
       },
     },
     /**
@@ -276,11 +276,7 @@ export const sidebarStyle = defineComponentSlotStyle<
      */
     placement: {
       end: {
-        gap: {
-          order: "2",
-          w: "{side-panel-expanded-width}",
-          _groupCollapsed: { w: "{side-panel-collapsed-width}" },
-        },
+        gap: { order: "2" },
         handle: {
           cursor: "e-resize",
           left: "0",
@@ -295,11 +291,7 @@ export const sidebarStyle = defineComponentSlotStyle<
         sidePanel: { right: "0" },
       },
       start: {
-        gap: {
-          order: "1",
-          w: "{side-panel-expanded-width}",
-          _groupCollapsed: { w: "{side-panel-collapsed-width}" },
-        },
+        gap: { order: "1" },
         handle: {
           cursor: "w-resize",
           right: "0",
@@ -321,6 +313,8 @@ export const sidebarStyle = defineComponentSlotStyle<
      */
     shape: {
       circle: {
+        itemLink: { ps: "calc({side-panel-space} * 2)" },
+        itemTrigger: { ps: "calc({side-panel-space} * 2)" },
         root: { "--side-panel-item-rounded": "radii.full" },
       },
       rounded: {

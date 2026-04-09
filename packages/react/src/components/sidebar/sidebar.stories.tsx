@@ -735,6 +735,30 @@ export const Shape: Story = () => {
   )
 }
 
+export const Breakpoint: Story = () => {
+  return (
+    <Sidebar.Root breakpoint="lg">
+      <Sidebar.SidePanel
+        bg="bg.panel"
+        footer={<UserMenuButton />}
+        header={<DocumentMenuButton />}
+        items={navItemsWithGroup}
+      />
+
+      <Sidebar.MainPanel p="md">
+        <Sidebar.Trigger>
+          <IconButton
+            size="xs"
+            variant="ghost"
+            fontSize="md"
+            icon={<PanelLeftIcon />}
+          />
+        </Sidebar.Trigger>
+      </Sidebar.MainPanel>
+    </Sidebar.Root>
+  )
+}
+
 export const DefaultClosed: Story = () => {
   return (
     <Sidebar.Root disclosure={{ desktop: { defaultOpen: false } }}>
@@ -970,6 +994,30 @@ export const DisabledHandle: Story = () => {
         header={<DocumentMenuButton />}
         items={navItems}
         withHandle={false}
+      />
+
+      <Sidebar.MainPanel p="md">
+        <Sidebar.Trigger>
+          <IconButton
+            size="xs"
+            variant="ghost"
+            fontSize="md"
+            icon={<PanelLeftIcon />}
+          />
+        </Sidebar.Trigger>
+      </Sidebar.MainPanel>
+    </Sidebar.Root>
+  )
+}
+
+export const DisabledBreakpoint: Story = () => {
+  return (
+    <Sidebar.Root breakpoint={false}>
+      <Sidebar.SidePanel
+        bg="bg.panel"
+        footer={<UserMenuButton />}
+        header={<DocumentMenuButton />}
+        items={navItemsWithGroup}
       />
 
       <Sidebar.MainPanel p="md">

@@ -244,11 +244,11 @@ export interface SidebarRootProps
     ThemeProps<SidebarStyle>,
     Omit<UseSidebarProps, "mobile"> {
   /**
-   * The breakpoint to use for the sidebar.
+   * The breakpoint to use for the sidebar. If `false`, the sidebar will be always visible.
    *
    * @default 'md'
    */
-  breakpoint?: Exclude<Breakpoint, "base">
+  breakpoint?: Exclude<Breakpoint, "base"> | false
 }
 
 const {
@@ -282,7 +282,9 @@ export const SidebarRoot = withProvider<
     ...rest
   }) => {
     const mobile =
-      useBreakpointValue<boolean | undefined>({ [breakpoint]: true }) ?? false
+      useBreakpointValue<boolean | undefined>(
+        breakpoint ? { [breakpoint]: true } : { base: false },
+      ) ?? false
     const mode = useValue(modeProp)
     const placement = useValue(placementProp)
     const {
@@ -624,13 +626,21 @@ export const SidebarSidePanel = withContext<"aside", SidebarSidePanelProps>(
           <>
             <SidebarGap
               data-animated={dataAttr(animated)}
-              display={{ base: undefined, [breakpoint]: "none" }}
+              display={
+                breakpoint
+                  ? { base: undefined, [breakpoint]: "none" }
+                  : undefined
+              }
             />
 
             <styled.aside
               data-animated={dataAttr(animated)}
               data-group
-              display={{ base: undefined, [breakpoint]: "none" }}
+              display={
+                breakpoint
+                  ? { base: undefined, [breakpoint]: "none" }
+                  : undefined
+              }
               {...getSidePanelProps(rest)}
             >
               {customHeader ??

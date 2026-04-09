@@ -279,4 +279,29 @@ describe("tokens", () => {
 
     expect(spinner.fail).toHaveBeenCalledWith("An unknown error occurred")
   })
+
+  test("should not write output file when --dry-run is used", async () => {
+    mockGetModule.mockResolvedValueOnce(createBasicTheme())
+
+    const themePath = path.join(tempDir, "theme.ts")
+    writeFileSync(themePath, "export default {}")
+    const outPath = path.join(tempDir, "out.types.ts")
+
+    await tokens.parseAsync(
+      [
+        themePath,
+        "--cwd",
+        tempDir,
+        "--out",
+        outPath,
+        "--no-format",
+        "--no-lint",
+        "--internal",
+        "--dry-run",
+      ],
+      { from: "user" },
+    )
+
+    expect(existsSync(outPath)).toBeFalsy()
+  })
 })

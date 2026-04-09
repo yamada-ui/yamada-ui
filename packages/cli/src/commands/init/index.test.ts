@@ -350,4 +350,29 @@ describe("init", () => {
     // New files should exist
     expect(existsSync(path.join(outdirPath, "src", "index.ts"))).toBeTruthy()
   })
+
+  test("should not create files when --dry-run is used", async () => {
+    const consoleSpy = vi.spyOn(console, "log")
+
+    await init.parseAsync(
+      [
+        "--cwd",
+        tempDir,
+        "--yes",
+        "--no-install",
+        "--no-format",
+        "--no-lint",
+        "--dry-run",
+      ],
+      { from: "user" },
+    )
+
+    const configPath = path.join(tempDir, "ui.json")
+    expect(existsSync(configPath)).toBeFalsy()
+    expect(consoleSpy).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run)"),
+    )
+
+    consoleSpy.mockRestore()
+  })
 })

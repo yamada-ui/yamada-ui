@@ -22,6 +22,7 @@ import { validateDiff3 } from "./validate-diff-3"
 interface Options {
   config: string
   cwd: string
+  dryRun: boolean
   force: boolean
   sequential: boolean
   yes: boolean
@@ -36,6 +37,11 @@ export const update = new Command("update")
   .argument("[components...]", "components to update.")
   .option("--cwd <path>", "current working directory.", cwd)
   .option("-c, --config <path>", "path to the config file.", CONFIG_FILE_NAME)
+  .option(
+    "-n, --dry-run",
+    "simulate the command without making any changes.",
+    false,
+  )
   .option("-s, --sequential", "run tasks sequentially.", false)
   .option("-F, --force", "force update, overwriting local changes.", false)
   .option("-y, --yes", "skip all confirmation prompts.", false)
@@ -51,6 +57,7 @@ export const update = new Command("update")
     {
       config: configPath,
       cwd,
+      dryRun,
       force,
       format,
       install,
@@ -158,6 +165,33 @@ export const update = new Command("update")
 
       if (!hasChanges && !hasDependencyChanges) {
         console.log(c.cyan("No updates found."))
+      } else if (dryRun) {
+        console.log(c.cyan("(dry run) The following files would be updated:"))
+        console.log("")
+        Object.entries(changeMap).forEach(([_name, files]) => {
+          Object.keys(files).forEach((file) => {
+            console.log("  " + c.green("update") + " " + file)
+          })
+        })
+        if (dependencyMap.add.length) {
+          console.log("")
+          console.log(c.cyan("(dry run) Dependencies that would be added:"))
+          dependencyMap.add.forEach((dep) => console.log("  " + c.yellow(dep)))
+        }
+        if (dependencyMap.remove.length) {
+          console.log("")
+          console.log(c.cyan("(dry run) Dependencies that would be removed:"))
+          dependencyMap.remove.forEach((dep) =>
+            console.log("  " + c.yellow(dep)),
+          )
+        }
+        if (dependencyMap.update.length) {
+          console.log("")
+          console.log(c.cyan("(dry run) Dependencies that would be updated:"))
+          dependencyMap.update.forEach((dep) =>
+            console.log("  " + c.yellow(dep)),
+          )
+        }
       } else {
         const conflictMap = await updateFiles(
           changeMap,

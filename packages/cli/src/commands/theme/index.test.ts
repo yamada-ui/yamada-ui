@@ -352,4 +352,31 @@ describe("theme", () => {
       expect.stringContaining("unknown error"),
     )
   })
+
+  test("should not create files when --dry-run is used", async () => {
+    setupProject(tempDir)
+
+    const consoleSpy = vi.spyOn(console, "log")
+
+    await theme.parseAsync(
+      [
+        "--cwd",
+        tempDir,
+        "--yes",
+        "--no-install",
+        "--no-format",
+        "--no-lint",
+        "--dry-run",
+      ],
+      { from: "user" },
+    )
+
+    const themePath = path.join(tempDir, "workspaces", "theme")
+    expect(existsSync(path.join(themePath, "src", "index.ts"))).toBeFalsy()
+    expect(consoleSpy).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run)"),
+    )
+
+    consoleSpy.mockRestore()
+  })
 })

@@ -1,4 +1,10 @@
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs"
+import {
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs"
 import { tmpdir } from "node:os"
 import path from "node:path"
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest"
@@ -344,5 +350,42 @@ describe("update", () => {
     expect(console.log).toHaveBeenCalledWith(
       expect.stringContaining("---------------------------------"),
     )
+  })
+
+  test("should not modify files when --dry-run is used", async () => {
+    setupProjectWithComponent(tempDir)
+
+    const buttonDir = path.join(
+      tempDir,
+      "workspaces",
+      "ui",
+      "src",
+      "components",
+      "button",
+    )
+    const originalContent =
+      "export const Button = () => { return 'modified' }\n"
+    writeFileSync(path.join(buttonDir, "index.ts"), originalContent)
+
+    await update.parseAsync(
+      [
+        "button",
+        "--cwd",
+        tempDir,
+        "--yes",
+        "--no-install",
+        "--no-format",
+        "--no-lint",
+        "--force",
+        "--dry-run",
+      ],
+      { from: "user" },
+    )
+
+    const updatedContent = readFileSync(
+      path.join(buttonDir, "index.ts"),
+      "utf8",
+    )
+    expect(updatedContent).toBe(originalContent)
   })
 })

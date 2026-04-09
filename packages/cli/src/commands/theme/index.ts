@@ -43,6 +43,7 @@ import {
 interface Options {
   config: string
   cwd: string
+  dryRun: boolean
   overwrite: boolean
   yes: boolean
   format?: boolean
@@ -59,6 +60,11 @@ export const theme = new Command("theme")
   .argument("[path]", "path to the theme directory.")
   .option("--cwd <path>", "current working directory.", cwd)
   .option("-c, --config <path>", "path to the config file.", CONFIG_FILE_NAME)
+  .option(
+    "-n, --dry-run",
+    "simulate the command without making any changes.",
+    false,
+  )
   .option("-o, --overwrite", "overwrite existing directory.", false)
   .option("-j, --js", "use js instead of ts.")
   .option("-y, --yes", "skip all confirmation prompts.", false)
@@ -81,6 +87,7 @@ export const theme = new Command("theme")
       src,
       config: configPath,
       cwd,
+      dryRun,
       format,
       install,
       js,
@@ -174,11 +181,13 @@ export const theme = new Command("theme")
 
         if (!overwrite) process.exit(0)
 
-        spinner.start("Clearing directory")
+        if (!dryRun) {
+          spinner.start("Clearing directory")
 
-        await rimraf(outdirPath)
+          await rimraf(outdirPath)
 
-        spinner.succeed("Cleared directory")
+          spinner.succeed("Cleared directory")
+        }
       }
 
       spinner.start("Fetching registry")
@@ -316,7 +325,38 @@ export const theme = new Command("theme")
         })
       }
 
-      await tasks.run()
+      if (dryRun) {
+        console.log("")
+        console.log(c.cyan("(dry run) The following changes would be made:"))
+        console.log("")
+        const targetPath = path.resolve(
+          outdirPath,
+          monorepoConfig.src ? "src" : "",
+        )
+        registry.sources.forEach(({ name }) => {
+          console.log(
+            "  " + c.green("create") + " " + path.resolve(targetPath, name),
+          )
+        })
+        if (config.monorepo) {
+          console.log(
+            "  " +
+              c.green("create") +
+              " " +
+              path.resolve(outdirPath, "package.json"),
+          )
+        }
+        if (!config.jsx) {
+          console.log(
+            "  " +
+              c.green("create") +
+              " " +
+              path.resolve(outdirPath, "tsconfig.json"),
+          )
+        }
+      } else {
+        await tasks.run()
+      }
 
       if (config.monorepo) {
         const answer = await prompts({
@@ -331,11 +371,16 @@ export const theme = new Command("theme")
         install ??= answer.install ?? true
 
         if (install) {
-          spinner.start("Installing dependencies")
+          if (dryRun) {
+            console.log("")
+            console.log(c.cyan("(dry run) Would install dependencies"))
+          } else {
+            spinner.start("Installing dependencies")
 
-          await installDependencies([], { cwd })
+            await installDependencies([], { cwd })
 
-          spinner.succeed("Installed dependencies")
+            spinner.succeed("Installed dependencies")
+          }
         }
 
         const packageManager = getPackageManager()

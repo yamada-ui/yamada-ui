@@ -624,4 +624,39 @@ describe("add", () => {
       expect.stringContaining("already exists"),
     )
   })
+
+  test("should not write files when --dry-run is used", async () => {
+    setupProject(tempDir)
+
+    const consoleSpy = vi.spyOn(console, "log")
+
+    await add.parseAsync(
+      [
+        "button",
+        "--cwd",
+        tempDir,
+        "--yes",
+        "--no-install",
+        "--no-format",
+        "--no-lint",
+        "--dry-run",
+      ],
+      { from: "user" },
+    )
+
+    const buttonDir = path.join(
+      tempDir,
+      "workspaces",
+      "ui",
+      "src",
+      "components",
+      "button",
+    )
+    expect(existsSync(path.join(buttonDir, "index.ts"))).toBeFalsy()
+    expect(consoleSpy).toHaveBeenCalledWith(
+      expect.stringContaining("(dry run)"),
+    )
+
+    consoleSpy.mockRestore()
+  })
 })

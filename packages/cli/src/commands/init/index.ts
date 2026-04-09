@@ -44,6 +44,7 @@ import {
 interface Options {
   config: string
   cwd: string
+  dryRun: boolean
   jsx: boolean
   overwrite: boolean
   yes: boolean
@@ -63,6 +64,11 @@ export const init = new Command("init")
   .option("-c, --config <path>", "path to the config file.", CONFIG_FILE_NAME)
   .option("-o, --overwrite", "overwrite existing files.", false)
   .option("-t, --tag <name>", "tag for the registries (e.g. dev, next).")
+  .option(
+    "-n, --dry-run",
+    "simulate the command without making any changes.",
+    false,
+  )
   .option("-j, --jsx", "use jsx instead of tsx.", false)
   .option("-y, --yes", "skip all confirmation prompts.", false)
   .option("-m, --monorepo", "enable monorepo mode.")
@@ -83,6 +89,7 @@ export const init = new Command("init")
     src,
     config: configPath,
     cwd,
+    dryRun,
     format,
     install,
     jsx,
@@ -221,15 +228,19 @@ export const init = new Command("init")
         if (!overwrite) process.exit(0)
       }
 
-      spinner.start(`Generating ${c.cyan(configFileName)}`)
+      if (dryRun) {
+        console.log(`  ${c.green("create")} ${configPath}`)
+      } else {
+        spinner.start(`Generating ${c.cyan(configFileName)}`)
 
-      await writeFileSafe(
-        configPath,
-        JSON.stringify(config),
-        merge(config, { format: { parser: "json" } }),
-      )
+        await writeFileSafe(
+          configPath,
+          JSON.stringify(config),
+          merge(config, { format: { parser: "json" } }),
+        )
 
-      spinner.succeed(`Generated ${c.cyan(configFileName)}`)
+        spinner.succeed(`Generated ${c.cyan(configFileName)}`)
+      }
 
       const outdirPath = path.resolve(cwd, outdir)
 
@@ -254,11 +265,13 @@ export const init = new Command("init")
 
         if (!overwrite) process.exit(0)
 
-        spinner.start("Clearing directory")
+        if (!dryRun) {
+          spinner.start("Clearing directory")
 
-        await rimraf(outdirPath)
+          await rimraf(outdirPath)
 
-        spinner.succeed("Cleared directory")
+          spinner.succeed("Cleared directory")
+        }
       }
 
       if (monorepo) {
@@ -389,7 +402,22 @@ export const init = new Command("init")
           })
         }
 
-        await tasks.run()
+        if (dryRun) {
+          console.log("")
+          console.log(c.cyan("(dry run) The following changes would be made:"))
+          console.log(
+            `  ${c.green("create")} ${path.resolve(outdirPath, "package.json")}`,
+          )
+          console.log(
+            `  ${c.green("create")} ${path.resolve(outdirPath, src ? "src" : "", indexFileName)}`,
+          )
+          if (!jsx)
+            console.log(
+              `  ${c.green("create")} ${path.resolve(outdirPath, "tsconfig.json")}`,
+            )
+        } else {
+          await tasks.run()
+        }
 
         if (isUndefined(install)) {
           const answer = await prompts({
@@ -468,7 +496,15 @@ export const init = new Command("init")
           { concurrent: true },
         )
 
-        await tasks.run()
+        if (dryRun) {
+          console.log("")
+          console.log(c.cyan("(dry run) The following changes would be made:"))
+          console.log(
+            `  ${c.green("create")} ${path.resolve(outdirPath, indexFileName)}`,
+          )
+        } else {
+          await tasks.run()
+        }
 
         if (
           notInstalledDependencies.length ||
@@ -515,13 +551,26 @@ export const init = new Command("init")
       }
 
       if (install && (dependencies || devDependencies)) {
-        spinner.start("Installing dependencies")
+        if (dryRun) {
+          console.log("")
+          console.log(c.cyan("(dry run) Dependencies that would be installed:"))
+          if (dependencies)
+            dependencies.forEach((dep) => console.log(`  ${c.yellow(dep)}`))
+          if (devDependencies) {
+            console.log(
+              c.cyan("(dry run) Dev dependencies that would be installed:"),
+            )
+            devDependencies.forEach((dep) => console.log(`  ${c.yellow(dep)}`))
+          }
+        } else {
+          spinner.start("Installing dependencies")
 
-        if (dependencies) await installDependencies(dependencies, { cwd })
-        if (devDependencies)
-          await installDependencies(devDependencies, { cwd, dev: true })
+          if (dependencies) await installDependencies(dependencies, { cwd })
+          if (devDependencies)
+            await installDependencies(devDependencies, { cwd, dev: true })
 
-        spinner.succeed("Installed dependencies")
+          spinner.succeed("Installed dependencies")
+        }
       }
 
       if (monorepo) {

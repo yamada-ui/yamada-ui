@@ -34,6 +34,7 @@ import {
 interface Options {
   config: string
   cwd: string
+  dryRun: boolean
   install: boolean
   overwrite: boolean
   sequential: boolean
@@ -49,6 +50,11 @@ export const add = new Command("add")
   .option("--cwd <path>", "current working directory.", cwd)
   .option("-c, --config <path>", "path to the config file.", CONFIG_FILE_NAME)
   .option("-o, --overwrite", "overwrite existing files.", false)
+  .option(
+    "-n, --dry-run",
+    "simulate the command without making any changes.",
+    false,
+  )
   .option("-s, --sequential", "run tasks sequentially.", false)
   .option("-y, --yes", "skip all confirmation prompts.", false)
   .option("-i, --install", "install dependencies.")
@@ -63,6 +69,7 @@ export const add = new Command("add")
     {
       config: configPath,
       cwd,
+      dryRun,
       format,
       install,
       lint,
@@ -434,7 +441,33 @@ export const add = new Command("add")
         }
       }
 
-      await tasks.run()
+      if (dryRun) {
+        console.log("")
+        console.log(c.cyan("(dry run) The following changes would be made:"))
+        console.log("")
+        Object.entries(registries).forEach(([name, registry]) => {
+          if (!config.isSection(registry.section)) return
+          const sectionPath = config.getSectionResolvedPath(registry.section)
+          const dirPath = path.join(sectionPath, name)
+          registry.sources.forEach(({ name: fileName }) => {
+            console.log(`  ${c.green("write")} ${path.join(dirPath, fileName)}`)
+          })
+        })
+        if (existsSync(config.paths.ui.index)) {
+          console.log(`  ${c.green("update")} ${config.paths.ui.index}`)
+        } else {
+          console.log(`  ${c.green("create")} ${config.paths.ui.index}`)
+        }
+        if (dependencies.length) {
+          console.log("")
+          console.log(c.cyan("(dry run) Dependencies that would be installed:"))
+          dependencies.forEach((dep) => {
+            console.log(`  ${c.yellow(dep)}`)
+          })
+        }
+      } else {
+        await tasks.run()
+      }
 
       end()
     } catch (e) {

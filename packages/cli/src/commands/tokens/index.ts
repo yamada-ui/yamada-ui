@@ -273,6 +273,7 @@ async function getTheme(path: string, cwd: string) {
 interface Options {
   config: string
   cwd: string
+  dryRun: boolean
   internal: boolean
   format?: boolean
   lint?: boolean
@@ -284,6 +285,11 @@ export const tokens = new Command("tokens")
   .argument("[path]", "path to the theme file.")
   .option("--cwd <path>", "current working directory.", cwd)
   .option("-c, --config <path>", "path to the config file.", CONFIG_FILE_NAME)
+  .option(
+    "-n, --dry-run",
+    "simulate the command without making any changes.",
+    false,
+  )
   .option("-o, --out <path>", `output path.`)
   .option("-f, --format", "format the output file.")
   .option("--no-format", "do not format the output file.")
@@ -292,7 +298,15 @@ export const tokens = new Command("tokens")
   .option("--internal", "generate internal tokens.", false)
   .action(async function (
     inputPath: string | undefined,
-    { config: configPath, cwd, format, internal, lint, out: outPath }: Options,
+    {
+      config: configPath,
+      cwd,
+      dryRun,
+      format,
+      internal,
+      lint,
+      out: outPath,
+    }: Options,
   ) {
     const spinner = ora()
 
@@ -345,19 +359,25 @@ export const tokens = new Command("tokens")
         internal,
       })
 
-      await writeFileSafe(
-        outPath,
-        content,
-        config
-          ? merge(config, { lint: { filePath: inputPath } })
-          : {
-              cwd,
-              format: { enabled: format },
-              lint: { enabled: lint, filePath: inputPath },
-            },
-      )
+      if (dryRun) {
+        console.log("")
+        console.log(c.cyan("(dry run) The following changes would be made:"))
+        console.log("  " + c.green("create") + " " + outPath)
+      } else {
+        await writeFileSafe(
+          outPath,
+          content,
+          config
+            ? merge(config, { lint: { filePath: inputPath } })
+            : {
+                cwd,
+                format: { enabled: format },
+                lint: { enabled: lint, filePath: inputPath },
+              },
+        )
 
-      spinner.succeed(`Generated theme typings`)
+        spinner.succeed(`Generated theme typings`)
+      }
 
       end()
     } catch (e) {

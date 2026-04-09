@@ -1,0 +1,1701 @@
+---
+title: Sidebar
+description: "`Sidebar`は、サイドバーにアイテムのリストを表示するコンポーネントです。"
+tags: ["navigation", "layout", "selection", "disclosure", "list"]
+status: new
+storybook: components-sidebar--basic
+source: components/sidebar
+style: components/sidebar/sidebar.style.ts
+---
+
+```tsx preview iframe
+<Sidebar.Root>
+  <Sidebar.SidePanel bg="bg.panel">
+    <Sidebar.Header>
+      <Menu.Root
+        animationScheme={{ base: "inline-start", md: "block-start" }}
+        gutter={{ base: 16, md: 8 }}
+        matchWidth={{ base: false, md: true }}
+        placement={{ base: "center-end-start", md: "end" }}
+      >
+        <Menu.Trigger>
+          <Sidebar.MenuButton>
+            <Center
+              bg="colorScheme.solid"
+              color="colorScheme.contrast"
+              fontSize="{side-panel-item-icon-size}"
+              minBoxSize="{side-panel-item-size}"
+              rounded="l2"
+            >
+              <GalleryVerticalEndIcon />
+            </Center>
+
+            <Grid flex="1" gap="xs" lineHeight="1" textAlign="start">
+              <Text truncated>Documentation</Text>
+              <Text color="fg.muted" truncated>
+                v2.2.0
+              </Text>
+            </Grid>
+
+            <ChevronsUpDownIcon
+              color="fg.muted"
+              fontSize="{side-panel-item-icon-size}"
+            />
+          </Sidebar.MenuButton>
+        </Menu.Trigger>
+
+        <Menu.Content
+          items={[
+            { label: "v0.9.10", value: "v0.9.10" },
+            { label: "v1.7.8", value: "v1.7.8" },
+            { label: "v2.2.0", value: "v2.2.0" },
+          ]}
+        />
+      </Menu.Root>
+    </Sidebar.Header>
+
+    <Sidebar.Content>
+      <Sidebar.Group>
+        <Sidebar.GroupLabel>Get Started</Sidebar.GroupLabel>
+        <Sidebar.GroupContent>
+          <Sidebar.Item
+            label="Installation"
+            value="/get-started/installation"
+          />
+
+          <Sidebar.Item label="Frameworks" value="/get-started/frameworks">
+            <Sidebar.Item
+              label="Next.js (App)"
+              value="/get-started/frameworks/next-app"
+            />
+            <Sidebar.Item
+              label="Next.js (Pages)"
+              value="/get-started/frameworks/next-pages"
+            />
+            <Sidebar.Item label="Vite" value="/get-started/frameworks/vite" />
+            <Sidebar.Item
+              label="React Router"
+              value="/get-started/frameworks/react-router"
+            />
+            <Sidebar.Item
+              label="TanStack Start"
+              value="/get-started/frameworks/tanstack-start"
+            />
+            <Sidebar.Item
+              label="TanStack Router"
+              value="/get-started/frameworks/tanstack-router"
+            />
+          </Sidebar.Item>
+        </Sidebar.GroupContent>
+      </Sidebar.Group>
+
+      <Sidebar.Group>
+        <Sidebar.GroupLabel>Styling</Sidebar.GroupLabel>
+        <Sidebar.GroupContent>
+          <Sidebar.Item label="Overview" value="/styling/overview" />
+          <Sidebar.Item label="Style Props" value="/styling/style-props" />
+        </Sidebar.GroupContent>
+      </Sidebar.Group>
+
+      <Sidebar.Group>
+        <Sidebar.GroupLabel>Theming</Sidebar.GroupLabel>
+        <Sidebar.GroupContent>
+          <Sidebar.Item label="Overview" value="/theming/overview" />
+          <Sidebar.Item label="Customization" value="/theming/customization" />
+        </Sidebar.GroupContent>
+      </Sidebar.Group>
+    </Sidebar.Content>
+
+    <Sidebar.Footer>
+      <Menu.Root
+        animationScheme={{ base: "inline-start", md: "block-end" }}
+        gutter={{ base: 16, md: 8 }}
+        matchWidth={{ base: false, md: true }}
+        placement={{ base: "center-end-end", md: "start" }}
+      >
+        <Menu.Trigger>
+          <Sidebar.MenuButton>
+            <Avatar
+              name="Hirotomo Yamada"
+              src="https://avatars.githubusercontent.com/u/84060430?v=4"
+              size="xs"
+              shape="rounded"
+            />
+
+            <Grid flex="1" gap="xs" lineHeight="1" textAlign="start">
+              <Text truncated>Hirotomo Yamada</Text>
+              <Text color="fg.muted" truncated>
+                hirotomo.yamada@avap.co.jp
+              </Text>
+            </Grid>
+
+            <ChevronsUpDownIcon
+              color="fg.muted"
+              fontSize="{side-panel-item-icon-size}"
+            />
+          </Sidebar.MenuButton>
+        </Menu.Trigger>
+
+        <Menu.Content
+          items={[
+            { label: "Upgrade to Pro", value: "Upgrade to Pro" },
+            { type: "separator" },
+            { label: "Account", value: "Account" },
+            { label: "Billing", value: "Billing" },
+            { label: "Notification", value: "Notification" },
+            { type: "separator" },
+            { label: "Logout", value: "Logout" },
+          ]}
+        />
+      </Menu.Root>
+    </Sidebar.Footer>
+  </Sidebar.SidePanel>
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Sidebar } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Sidebar } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Sidebar } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Sidebar.Root>
+  <Sidebar.SidePanel>
+    <Sidebar.Header>
+      <Sidebar.Menu />
+      <Sidebar.MenuButton />
+    </Sidebar.Header>
+    <Sidebar.Content>
+      <Sidebar.Item>
+        <Sidebar.Item />
+      </Sidebar.Item>
+      <Sidebar.Item />
+      <Sidebar.Group>
+        <Sidebar.GroupLabel />
+        <Sidebar.GroupContent>
+          <Sidebar.Item>
+            <Sidebar.Item />
+          </Sidebar.Item>
+          <Sidebar.Item />
+        </Sidebar.GroupContent>
+      </Sidebar.Group>
+    </Sidebar.Content>
+    <Sidebar.Footer>
+      <Sidebar.Menu />
+      <Sidebar.MenuButton />
+    </Sidebar.Footer>
+    <Sidebar.Handle />
+  </Sidebar.SidePanel>
+  <Sidebar.MainPanel>
+    <Sidebar.Trigger />
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+### フレームワークと統合する
+
+[Next.js](https://nextjs.org/)などのフレームワークと統合する場合は、フレームワークから提供されているリンクのコンポーネントを`linkProps.as`に設定します。また、ルーティングと同期させる場合は、フレームワークから提供されている現在のパスを取得する関数またはフックの返り値を`selectedValue`に設定します。
+
+```tsx
+"use client"
+
+import { usePathname } from "next/navigation"
+import Link from "next/link"
+
+function Layout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname()
+
+  return (
+    <Sidebar.Root>
+      <Sidebar.SidePanel linkProps={{ as: Link }} selectedValue={pathname} />
+    </Sidebar.Root>
+  )
+}
+```
+
+### itemsを使う
+
+```tsx preview functional iframe
+const items = useMemo<Sidebar.Item[]>(
+  () => [
+    {
+      children: [
+        { label: "Overview", value: "/docs/get-started" },
+        { label: "CLI", value: "/docs/get-started/cli" },
+        {
+          children: [
+            {
+              label: "Next.js (App)",
+              value: "/get-started/frameworks/next-app",
+            },
+            {
+              label: "Next.js (Pages)",
+              value: "/get-started/frameworks/next-pages",
+            },
+            { label: "Vite", value: "/get-started/frameworks/vite" },
+            {
+              label: "React Router",
+              value: "/get-started/frameworks/react-router",
+            },
+            {
+              label: "TanStack Start",
+              value: "/get-started/frameworks/tanstack-start",
+            },
+            {
+              label: "TanStack Router",
+              value: "/get-started/frameworks/tanstack-router",
+            },
+          ],
+          label: "Frameworks",
+          value: "/get-started/frameworks",
+        },
+      ],
+      group: true,
+      label: "Get Started",
+    },
+    {
+      children: [
+        { label: "Overview", value: "/styling/overview" },
+        { label: "Style Props", value: "/styling/style-props" },
+      ],
+      group: true,
+      label: "Styling",
+    },
+    {
+      children: [
+        { label: "Overview", value: "/theming/overview" },
+        { label: "Customization", value: "/theming/customization" },
+      ],
+      group: true,
+      label: "Theming",
+    },
+  ],
+  [],
+)
+
+return (
+  <Sidebar.Root>
+    <Sidebar.SidePanel
+      bg="bg.panel"
+      footer={<SidebarUserMenuButton />}
+      header={<SidebarDocumentMenuButton />}
+      items={items}
+    />
+
+    <Sidebar.MainPanel p="md">
+      <Sidebar.Trigger>
+        <IconButton
+          size="xs"
+          variant="ghost"
+          fontSize="md"
+          icon={<PanelLeftIcon />}
+        />
+      </Sidebar.Trigger>
+    </Sidebar.MainPanel>
+  </Sidebar.Root>
+)
+```
+
+### バリアントを変更する
+
+```tsx preview iframe
+<Sidebar.Root variant="solid" defaultSelectedValue="/get-started/installation">
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+```tsx preview iframe
+<Sidebar.Root variant="subtle" defaultSelectedValue="/get-started/installation">
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+### カラースキームを変更する
+
+```tsx preview iframe
+<Sidebar.Root defaultSelectedValue="/get-started/installation">
+  <Sidebar.SidePanel
+    colorScheme="blue"
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+### モードを変更する
+
+モードを変更する場合は、`mode`に`"offcanvas"`または`"icon"`を設定します。デフォルトは、`"offcanvas"`です。
+
+```tsx preview iframe
+<Sidebar.Root mode="offcanvas">
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+```tsx preview functional iframe
+const items = useMemo<Sidebar.ItemType[]>(
+  () => [
+    {
+      children: [
+        {
+          label: "Installation",
+          startElement: <ImportIcon />,
+          value: "/get-started/installation",
+        },
+        {
+          label: "CLI",
+          startElement: <SquareTerminalIcon />,
+          value: "/get-started/cli",
+        },
+      ],
+      label: "Get Started",
+      startElement: <RocketIcon />,
+      value: "/get-started",
+    },
+    {
+      children: [
+        {
+          label: "Overview",
+          startElement: <TextAlignStartIcon />,
+          value: "/styling/overview",
+        },
+        {
+          label: "Style Props",
+          startElement: <SwatchBookIcon />,
+          value: "/styling/style-props",
+        },
+      ],
+      label: "Styling",
+      startElement: <PaintbrushIcon />,
+      value: "/styling",
+    },
+    {
+      children: [
+        {
+          label: "Overview",
+          startElement: <TextAlignStartIcon />,
+          value: "/theming/overview",
+        },
+        {
+          label: "Customization",
+          startElement: <WrenchIcon />,
+          value: "/theming/customization",
+        },
+      ],
+      label: "Theming",
+      startElement: <PaletteIcon />,
+      value: "/theming",
+    },
+  ],
+  [],
+)
+
+return (
+  <Sidebar.Root mode="icon">
+    <Sidebar.SidePanel
+      bg="bg.panel"
+      footer={<SidebarUserMenuButton />}
+      header={<SidebarDocumentMenuButton />}
+      items={items}
+    />
+
+    <Sidebar.MainPanel p="md">
+      <Sidebar.Trigger>
+        <IconButton
+          size="xs"
+          variant="ghost"
+          fontSize="md"
+          icon={<PanelLeftIcon />}
+        />
+      </Sidebar.Trigger>
+    </Sidebar.MainPanel>
+  </Sidebar.Root>
+)
+```
+
+### 形を変更する
+
+```tsx preview iframe
+<Sidebar.Root
+  defaultExpandedValue={["/get-started"]}
+  defaultSelectedValue="/get-started/installation"
+  shape="square"
+>
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+```tsx preview iframe
+<Sidebar.Root
+  defaultExpandedValue={["/get-started"]}
+  defaultSelectedValue="/get-started/installation"
+  shape="rounded"
+>
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+```tsx preview iframe
+<Sidebar.Root
+  defaultExpandedValue={["/get-started"]}
+  defaultSelectedValue="/get-started/installation"
+  shape="circle"
+>
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+### 配置を変更する
+
+配置を変更する場合は、`placement`に`"start"`または`"end"`を設定します。デフォルトは、`"start"`です。
+
+```tsx preview iframe
+<Sidebar.Root placement="end">
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <VStack alignItems="flex-start" gap="md">
+      <Sidebar.Trigger alignSelf="flex-end">
+        <IconButton
+          size="xs"
+          variant="ghost"
+          fontSize="md"
+          icon={<PanelLeftIcon />}
+        />
+      </Sidebar.Trigger>
+    </VStack>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+モバイル用の配置をオーバーライドする場合は、`drawerProps`に`placement`を設定します。
+
+```tsx preview iframe
+<Sidebar.Root>
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+    drawerProps={{ placement: "inline-end" }}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+### ブレイクポイントを変更する
+
+モバイル用に切り替えるブレイクポイントを変更する場合は、`breakpoint`に値を設定します。この値は、[ブレイクポイント](/docs/theming/tokens/breakpoints)を参照しています。
+
+```tsx preview iframe
+<Sidebar.Root breakpoint="lg">
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+### ブレイクポイントを無効にする
+
+モバイル用に切り替えるブレイクポイントを無効にする場合は、`breakpoint`に`false`を設定します。
+
+```tsx preview iframe
+<Sidebar.Root breakpoint={false}>
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+### デフォルトで閉じた状態にする
+
+デフォルトで閉じた状態にする場合は、`disclosure.desktop.defaultOpen`を`false`に設定します。
+
+```tsx preview iframe
+<Sidebar.Root disclosure={{ desktop: { defaultOpen: false } }}>
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+### 特定の項目を選択済みにする
+
+特定の項目を選択済みにする場合は、`defaultSelectedValue`に項目の値を設定します。
+
+```tsx preview iframe
+<Sidebar.Root
+  defaultExpandedValue={["/get-started"]}
+  defaultSelectedValue="/get-started/installation"
+>
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+### 特定の項目を展開済みにする
+
+最初から特定の項目を展開済みにする場合は、`defaultExpandedValue`に項目の値を設定します。
+
+```tsx preview iframe
+<Sidebar.Root defaultExpandedValue={["/get-started/frameworks"]}>
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+### 項目を無効にする
+
+項目を無効にする場合は、`disabled`を設定します。
+
+```tsx preview functional iframe
+const items = useMemo<Sidebar.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "Installation", value: "/get-started/installation" },
+        { label: "CLI", value: "/get-started/cli" },
+        {
+          children: [
+            {
+              label: "Next.js (App)",
+              value: "/get-started/frameworks/nextjs-app",
+            },
+            {
+              label: "Next.js (Pages)",
+              value: "/get-started/frameworks/nextjs-pages",
+            },
+            { label: "Vite", value: "/get-started/frameworks/vite" },
+            {
+              label: "React Router",
+              value: "/get-started/frameworks/react-router",
+            },
+            {
+              label: "TanStack Start",
+              value: "/get-started/frameworks/tanstack-start",
+            },
+            {
+              label: "TanStack Router",
+              value: "/get-started/frameworks/tanstack-router",
+            },
+          ],
+          label: "Frameworks",
+          value: "/get-started/frameworks",
+        },
+      ],
+      disabled: true,
+      label: "Get Started",
+      value: "/get-started",
+    },
+    {
+      children: [
+        { label: "Overview", value: "/styling/overview" },
+        { disabled: true, label: "Style Props", value: "/styling/style-props" },
+      ],
+      label: "Styling",
+      value: "/styling",
+    },
+    {
+      children: [
+        { label: "Overview", value: "/theming/overview" },
+        { label: "Customization", value: "/theming/customization" },
+      ],
+      label: "Theming",
+      value: "/theming",
+    },
+  ],
+  [],
+)
+
+return (
+  <Sidebar.Root defaultExpandedValue={["/styling"]}>
+    <Sidebar.SidePanel
+      bg="bg.panel"
+      footer={<SidebarUserMenuButton />}
+      header={<SidebarDocumentMenuButton />}
+      items={items}
+    />
+
+    <Sidebar.MainPanel p="md">
+      <Sidebar.Trigger>
+        <IconButton
+          size="xs"
+          variant="ghost"
+          fontSize="md"
+          icon={<PanelLeftIcon />}
+        />
+      </Sidebar.Trigger>
+    </Sidebar.MainPanel>
+  </Sidebar.Root>
+)
+```
+
+### ローカルストレージに値を保存する
+
+```tsx preview functional iframe client
+const [defaultOpen, setDefaultOpen] = useLocalStorage({
+  key: "sidebar-expanded",
+  defaultValue: true,
+  getInitialValueInEffect: false,
+})
+
+const disclosure = useDisclosure({
+  defaultOpen,
+  onClose: () => setDefaultOpen(false),
+  onOpen: () => setDefaultOpen(true),
+})
+
+return (
+  <Sidebar.Root disclosure={{ desktop: disclosure }}>
+    <Sidebar.SidePanel
+      bg="bg.panel"
+      footer={<SidebarUserMenuButton />}
+      header={<SidebarDocumentMenuButton />}
+      items={sidebarItems}
+    />
+
+    <Sidebar.MainPanel p="md">
+      <Sidebar.Trigger>
+        <IconButton
+          size="xs"
+          variant="ghost"
+          fontSize="md"
+          icon={<PanelLeftIcon />}
+        />
+      </Sidebar.Trigger>
+    </Sidebar.MainPanel>
+  </Sidebar.Root>
+)
+```
+
+### Cookieに値を保存する
+
+```tsx preview functional iframe client
+const key = "sidebar-expanded"
+const getStorage = useCallback(() => {
+  const match = document.cookie.match(new RegExp(`(^| )${key}=([^;]+)`))
+
+  return match ? match[2] === "true" : true
+}, [])
+const setStorage = useCallback((value: boolean) => {
+  document.cookie = `${key}=${value}; max-age=31536000; path=/`
+}, [])
+const disclosure = useDisclosure({
+  defaultOpen: getStorage(),
+  onClose: () => setStorage(false),
+  onOpen: () => setStorage(true),
+})
+
+return (
+  <Sidebar.Root disclosure={{ desktop: disclosure }}>
+    <Sidebar.SidePanel
+      bg="bg.panel"
+      footer={<SidebarUserMenuButton />}
+      header={<SidebarDocumentMenuButton />}
+      items={sidebarItems}
+    />
+
+    <Sidebar.MainPanel p="md">
+      <Sidebar.Trigger>
+        <IconButton
+          size="xs"
+          variant="ghost"
+          fontSize="md"
+          icon={<PanelLeftIcon />}
+        />
+      </Sidebar.Trigger>
+    </Sidebar.MainPanel>
+  </Sidebar.Root>
+)
+```
+
+### グループガイドラインを表示する
+
+グループガイドラインを表示する場合は、`withGroupGuideLine`を`true`に設定します。
+
+```tsx preview iframe
+<Sidebar.Root withGroupGuideLine>
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+### ガイドラインを表示する
+
+ガイドラインを表示する場合は、`withGuideLine`を`true`に設定します。
+
+```tsx preview iframe
+<Sidebar.Root withGuideLine>
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+### セパレーターを追加する
+
+```tsx preview functional iframe
+const items = useMemo<Sidebar.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "Installation", value: "/get-started/installation" },
+        { label: "CLI", value: "/get-started/cli" },
+        {
+          children: [
+            {
+              label: "Next.js (App)",
+              value: "/get-started/frameworks/nextjs-app",
+            },
+            {
+              label: "Next.js (Pages)",
+              value: "/get-started/frameworks/nextjs-pages",
+            },
+            { label: "Vite", value: "/get-started/frameworks/vite" },
+            {
+              label: "React Router",
+              value: "/get-started/frameworks/react-router",
+            },
+            {
+              label: "TanStack Start",
+              value: "/get-started/frameworks/tanstack-start",
+            },
+            {
+              label: "TanStack Router",
+              value: "/get-started/frameworks/tanstack-router",
+            },
+          ],
+          label: "Frameworks",
+          value: "/get-started/frameworks",
+        },
+      ],
+      label: "Get Started",
+      value: "/get-started",
+    },
+    {
+      children: [
+        { label: "Overview", value: "/styling/overview" },
+        { label: "Style Props", value: "/styling/style-props" },
+      ],
+      label: "Styling",
+      value: "/styling",
+    },
+    {
+      children: [
+        { label: "Overview", value: "/theming/overview" },
+        { label: "Customization", value: "/theming/customization" },
+      ],
+      label: "Theming",
+      value: "/theming",
+    },
+  ],
+  [],
+)
+
+return (
+  <Sidebar.Root>
+    <Sidebar.SidePanel
+      bg="bg.panel"
+      footer={<SidebarUserMenuButton />}
+      header={<SidebarDocumentMenuButton />}
+      items={items}
+      withHandle={false}
+      contentProps={{
+        css: {
+          "& > li": {
+            _after: {
+              borderBottomWidth: "1px",
+              mt: "{side-panel-space}",
+              mx: "calc({side-panel-space} * -1)",
+            },
+          },
+        },
+        gap: "{side-panel-space}",
+        py: "{side-panel-space}",
+      }}
+      footerProps={{ borderTopWidth: "1px" }}
+      headerProps={{ borderBottomWidth: "1px" }}
+    />
+
+    <Sidebar.MainPanel p="md">
+      <Sidebar.Trigger>
+        <IconButton
+          size="xs"
+          variant="ghost"
+          fontSize="md"
+          icon={<PanelLeftIcon />}
+        />
+      </Sidebar.Trigger>
+    </Sidebar.MainPanel>
+  </Sidebar.Root>
+)
+```
+
+### インジケーターを非表示にする
+
+インジケーターを非表示にする場合は、`indicatorHidden`を`true`に設定します。
+
+```tsx preview iframe
+<Sidebar.Root>
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    indicatorHidden
+    items={sidebarItems}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+### アニメーションを無効にする
+
+展開・折りたたみ時のアニメーションを無効にする場合は、`animated`を`false`に設定します。
+
+```tsx preview iframe
+<Sidebar.Root>
+  <Sidebar.SidePanel
+    animated={false}
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+### リサイズハンドルを無効にする
+
+リサイズハンドルを無効にする場合は、`withHandle`を`false`に設定します。デフォルトは、`true`です。
+
+```tsx preview iframe
+<Sidebar.Root>
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+    withHandle={false}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+### 非同期で読み込む
+
+項目の子要素を非同期で読み込む場合は、`children`の代わりに`asyncChildren`を使用します。
+
+```tsx preview functional iframe client
+const items = useMemo<Sidebar.ItemType[]>(
+  () => [
+    {
+      asyncChildren: async () => {
+        await wait(1000)
+
+        return [
+          { label: "Installation", value: "/get-started/installation" },
+          { label: "CLI", value: "/get-started/cli" },
+          {
+            asyncChildren: async () => {
+              await wait(1000)
+
+              return [
+                {
+                  label: "Next.js (App)",
+                  value: "/get-started/frameworks/nextjs-app",
+                },
+                {
+                  label: "Next.js (Pages)",
+                  value: "/get-started/frameworks/nextjs-pages",
+                },
+                { label: "Vite", value: "/get-started/frameworks/vite" },
+                {
+                  label: "React Router",
+                  value: "/get-started/frameworks/react-router",
+                },
+                {
+                  label: "TanStack Start",
+                  value: "/get-started/frameworks/tanstack-start",
+                },
+                {
+                  label: "TanStack Router",
+                  value: "/get-started/frameworks/tanstack-router",
+                },
+              ]
+            },
+            label: "Frameworks",
+            value: "/get-started/frameworks",
+          },
+        ]
+      },
+      label: "Get Started",
+      value: "/get-started",
+    },
+    {
+      asyncChildren: async () => {
+        await wait(1000)
+
+        return [
+          { label: "Overview", value: "/styling/overview" },
+          { label: "Style Props", value: "/styling/style-props" },
+        ]
+      },
+      label: "Styling",
+      value: "/styling",
+    },
+    {
+      asyncChildren: async () => {
+        await wait(1000)
+
+        return [
+          { label: "Overview", value: "/theming/overview" },
+          { label: "Customization", value: "/theming/customization" },
+        ]
+      },
+      label: "Theming",
+      value: "/theming",
+    },
+  ],
+  [],
+)
+
+return (
+  <Sidebar.Root>
+    <Sidebar.SidePanel
+      bg="bg.panel"
+      footer={<SidebarUserMenuButton />}
+      header={<SidebarDocumentMenuButton />}
+      items={items}
+    />
+
+    <Sidebar.MainPanel p="md">
+      <Sidebar.Trigger>
+        <IconButton
+          size="xs"
+          variant="ghost"
+          fontSize="md"
+          icon={<PanelLeftIcon />}
+        />
+      </Sidebar.Trigger>
+    </Sidebar.MainPanel>
+  </Sidebar.Root>
+)
+```
+
+### ローディングスキームを変更する
+
+```tsx preview functional iframe client
+const items = useMemo<Sidebar.ItemType[]>(
+  () => [
+    {
+      asyncChildren: async () => {
+        await wait(1000)
+
+        return [
+          { label: "Installation", value: "/get-started/installation" },
+          { label: "CLI", value: "/get-started/cli" },
+        ]
+      },
+      label: "Get Started",
+      value: "/get-started",
+    },
+    {
+      asyncChildren: async () => {
+        await wait(1000)
+
+        return [
+          { label: "Overview", value: "/styling/overview" },
+          { label: "Style Props", value: "/styling/style-props" },
+        ]
+      },
+      label: "Styling",
+      value: "/styling",
+    },
+    {
+      asyncChildren: async () => {
+        await wait(1000)
+
+        return [
+          { label: "Overview", value: "/theming/overview" },
+          { label: "Customization", value: "/theming/customization" },
+        ]
+      },
+      label: "Theming",
+      value: "/theming",
+    },
+  ],
+  [],
+)
+
+return (
+  <Sidebar.Root>
+    <Sidebar.SidePanel
+      bg="bg.panel"
+      footer={<SidebarUserMenuButton />}
+      header={<SidebarDocumentMenuButton />}
+      items={items}
+      loadingScheme="dots"
+    />
+
+    <Sidebar.MainPanel p="md">
+      <Sidebar.Trigger>
+        <IconButton
+          size="xs"
+          variant="ghost"
+          fontSize="md"
+          icon={<PanelLeftIcon />}
+        />
+      </Sidebar.Trigger>
+    </Sidebar.MainPanel>
+  </Sidebar.Root>
+)
+```
+
+### 項目をすべて展開・折りたたむ
+
+項目をすべて展開または折りたたむ場合は、`controlRef`を使用します。
+
+```tsx preview functional iframe
+const controlRef = useRef<Sidebar.Control>(null)
+const items = useMemo<Sidebar.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "Installation", value: "/get-started/installation" },
+        { label: "CLI", value: "/get-started/cli" },
+        {
+          children: [
+            {
+              label: "Next.js (App)",
+              value: "/get-started/frameworks/nextjs-app",
+            },
+            {
+              label: "Next.js (Pages)",
+              value: "/get-started/frameworks/nextjs-pages",
+            },
+            { label: "Vite", value: "/get-started/frameworks/vite" },
+            {
+              label: "React Router",
+              value: "/get-started/frameworks/react-router",
+            },
+            {
+              label: "TanStack Start",
+              value: "/get-started/frameworks/tanstack-start",
+            },
+            {
+              label: "TanStack Router",
+              value: "/get-started/frameworks/tanstack-router",
+            },
+          ],
+          label: "Frameworks",
+          value: "/get-started/frameworks",
+        },
+      ],
+      label: "Get Started",
+      value: "/get-started",
+    },
+    {
+      children: [
+        { label: "Overview", value: "/styling/overview" },
+        { label: "Style Props", value: "/styling/style-props" },
+      ],
+      label: "Styling",
+      value: "/styling",
+    },
+    {
+      children: [
+        { label: "Overview", value: "/theming/overview" },
+        { label: "Customization", value: "/theming/customization" },
+      ],
+      label: "Theming",
+      value: "/theming",
+    },
+  ],
+  [],
+)
+
+return (
+  <Sidebar.Root controlRef={controlRef}>
+    <Sidebar.SidePanel
+      bg="bg.panel"
+      footer={<SidebarUserMenuButton />}
+      header={<SidebarDocumentMenuButton />}
+      items={items}
+    />
+
+    <Sidebar.MainPanel p="md">
+      <VStack alignItems="flex-start" gap="md">
+        <Sidebar.Trigger>
+          <IconButton
+            size="xs"
+            variant="ghost"
+            fontSize="md"
+            icon={<PanelLeftIcon />}
+          />
+        </Sidebar.Trigger>
+
+        <ButtonGroup.Root px="sm">
+          <ButtonGroup.Item onClick={() => controlRef.current?.expand()}>
+            Expand All
+          </ButtonGroup.Item>
+          <ButtonGroup.Item onClick={() => controlRef.current?.collapse()}>
+            Collapse All
+          </ButtonGroup.Item>
+        </ButtonGroup.Root>
+      </VStack>
+    </Sidebar.MainPanel>
+  </Sidebar.Root>
+)
+```
+
+### 要素をカスタマイズする
+
+```tsx preview iframe client
+<Sidebar.Root>
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+    startElement={{
+      group: ({ expanded }) =>
+        expanded ? <FolderOpenIcon /> : <FolderClosedIcon />,
+      item: <FileIcon />,
+    }}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+```tsx preview iframe
+<Sidebar.Root>
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    endElement={{ item: <SquareArrowOutUpRightIcon /> }}
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+```tsx preview iframe client
+<Sidebar.Root>
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    endElement={{ item: <EllipsisIcon /> }}
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    items={sidebarItems}
+    render={{
+      item: ({
+        children,
+        endElement,
+        group,
+        label,
+        selected,
+        value,
+        itemProps,
+        linkProps,
+        triggerProps,
+        onSelectedChange,
+      }) => {
+        return (
+          <styled.li as="li" {...itemProps}>
+            {group ? (
+              <>
+                <Sidebar.ItemTrigger
+                  as="a"
+                  href={value}
+                  data-selected={dataAttr(selected)}
+                  pe="calc(({side-panel-space} * 2) + {side-panel-item-icon-size})"
+                  onClick={() => onSelectedChange(value)}
+                >
+                  <Sidebar.ItemLabel>{label}</Sidebar.ItemLabel>
+                </Sidebar.ItemTrigger>
+
+                <styled.button
+                  type="button"
+                  cursor="pointer"
+                  display="center"
+                  p="{side-panel-space}"
+                  position="absolute"
+                  right="0"
+                  rounded="{side-panel-item-rounded}"
+                  top="0"
+                  _hover={{ bg: "bg.subtle" }}
+                  {...triggerProps}
+                  onClick={handlerAll(triggerProps.onClick, (ev) => {
+                    ev.preventDefault()
+                    ev.stopPropagation()
+                  })}
+                >
+                  <Sidebar.ItemIndicator color="currentColor" />
+                </styled.button>
+
+                <Sidebar.ItemContent>{children}</Sidebar.ItemContent>
+              </>
+            ) : (
+              <>
+                <Sidebar.ItemLink
+                  pe="calc(({side-panel-space} * 2) + {side-panel-item-icon-size})"
+                  {...linkProps}
+                >
+                  <Sidebar.ItemLabel>{label}</Sidebar.ItemLabel>
+                </Sidebar.ItemLink>
+
+                <Menu.Root
+                  animationScheme={{
+                    base: "inline-start",
+                    md: "block-start",
+                  }}
+                  gutter={{ base: 16, md: 8 }}
+                  matchWidth={{ base: false, md: true }}
+                  placement={{ base: "center-end-start", md: "end-end" }}
+                >
+                  <Menu.Trigger>
+                    <Sidebar.ItemEndElement
+                      as="button"
+                      type="button"
+                      cursor="pointer"
+                      p="{side-panel-space}"
+                      position="absolute"
+                      right="0"
+                      rounded="{side-panel-item-rounded}"
+                      top="0"
+                      _hover={{ bg: "bg.subtle" }}
+                      onClick={(ev) => {
+                        ev.preventDefault()
+                        ev.stopPropagation()
+                      }}
+                    >
+                      {endElement.item}
+                    </Sidebar.ItemEndElement>
+                  </Menu.Trigger>
+
+                  <Menu.Content
+                    items={[
+                      {
+                        label: "View as Markdown",
+                        value: "View as Markdown",
+                      },
+                      { type: "separator" },
+                      {
+                        label: "Open in ChatGPT",
+                        value: "Open in ChatGPT",
+                      },
+                      { label: "Open in Claude", value: "Open in Claude" },
+                    ]}
+                    onClick={(ev) => {
+                      ev.preventDefault()
+                      ev.stopPropagation()
+                    }}
+                  />
+                </Menu.Root>
+              </>
+            )}
+          </styled.li>
+        )
+      },
+    }}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+### インジケーターをカスタマイズする
+
+```tsx preview iframe client
+<Sidebar.Root>
+  <Sidebar.SidePanel
+    bg="bg.panel"
+    footer={<SidebarUserMenuButton />}
+    header={<SidebarDocumentMenuButton />}
+    indicator={({ expanded }) => (expanded ? <MinusIcon /> : <PlusIcon />)}
+    items={sidebarItems}
+    indicatorProps={{ _expanded: { transform: "rotate(0deg)" } }}
+  />
+
+  <Sidebar.MainPanel p="md">
+    <Sidebar.Trigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        fontSize="md"
+        icon={<PanelLeftIcon />}
+      />
+    </Sidebar.Trigger>
+  </Sidebar.MainPanel>
+</Sidebar.Root>
+```
+
+### 制御する
+
+```tsx preview functional iframe client
+const [selectedValue, setSelectedValue] = useState<string>(
+  "/get-started/installation",
+)
+const [expandedValue, setExpandedValue] = useState<string[]>(["/get-started"])
+const desktopDisclosure = useDisclosure({ defaultOpen: true })
+const mobileDisclosure = useDisclosure()
+
+return (
+  <Sidebar.Root
+    disclosure={{ desktop: desktopDisclosure, mobile: mobileDisclosure }}
+    expandedValue={expandedValue}
+    selectedValue={selectedValue}
+    onExpandedChange={setExpandedValue}
+    onSelectedChange={setSelectedValue}
+  >
+    <Sidebar.SidePanel
+      bg="bg.panel"
+      footer={<SidebarUserMenuButton />}
+      header={<SidebarDocumentMenuButton />}
+      items={sidebarItems}
+    />
+
+    <Sidebar.MainPanel p="md">
+      <VStack alignItems="flex-start" gap="md">
+        <Sidebar.Trigger>
+          <IconButton
+            size="xs"
+            variant="ghost"
+            fontSize="md"
+            icon={<PanelLeftIcon />}
+          />
+        </Sidebar.Trigger>
+
+        <VStack gap="0" px="sm">
+          <Text>Selected Value: {selectedValue}</Text>
+          <Text>Expanded Value: {expandedValue.join(", ")}</Text>
+          <Text>Desktop Open: {desktopDisclosure.open.toString()}</Text>
+          <Text>Mobile Open: {mobileDisclosure.open.toString()}</Text>
+        </VStack>
+      </VStack>
+    </Sidebar.MainPanel>
+  </Sidebar.Root>
+)
+```
+
+## Props
+
+<PropsTable name="sidebar" />
+
+## 類似のコンポーネント
+
+<Similar name="sidebar" />
+
+## 使用しているコンポーネント・フック
+
+<Uses name="sidebar" />

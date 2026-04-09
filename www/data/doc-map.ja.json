@@ -534,6 +534,12 @@
               "pathname": "/docs/components/separator"
             },
             {
+              "title": "Sidebar",
+              "segment": "sidebar",
+              "pathname": "/docs/components/sidebar",
+              "status": "new"
+            },
+            {
               "title": "SimpleGrid",
               "segment": "simple-grid",
               "pathname": "/docs/components/simple-grid"

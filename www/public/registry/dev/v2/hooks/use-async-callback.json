@@ -6,6 +6,11 @@
     "hooks": ["use-processing"],
     "providers": []
   },
+  "dependents": {
+    "components": ["sidebar", "tree"],
+    "hooks": [],
+    "providers": []
+  },
   "section": "hooks",
   "sources": [
     {

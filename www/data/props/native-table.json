@@ -178,7 +178,7 @@
         "required": false
       },
       "layout": {
-        "type": "\"-moz-initial\" | \"auto\" | \"fixed\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" ...",
+        "type": "\"-moz-initial\" | \"auto\" | \"fixed\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString ...",
         "description": "The CSS `table-layout` property.",
         "required": false
       },
@@ -373,7 +373,7 @@
       "required": false
     },
     "layout": {
-      "type": "\"-moz-initial\" | \"auto\" | \"fixed\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" ...",
+      "type": "\"-moz-initial\" | \"auto\" | \"fixed\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString ...",
       "description": "The CSS `table-layout` property.",
       "required": false
     },

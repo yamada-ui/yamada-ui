@@ -2,14 +2,14 @@
 
 import type { Component } from "../../../core"
 import type { IconProps } from "../icon"
-import { Trello as OriginalTrelloIcon } from "lucide-react"
+import { BeefOff as OriginalBeefOffIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
- * `TrelloIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ * `BeefOffIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const TrelloIcon = component(Icon)({
-  as: OriginalTrelloIcon,
+export const BeefOffIcon = component(Icon)({
+  as: OriginalBeefOffIcon,
 }) as Component<"svg", IconProps>

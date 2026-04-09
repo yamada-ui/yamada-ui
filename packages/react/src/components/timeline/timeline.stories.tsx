@@ -40,6 +40,43 @@ export const Basic: Story = () => {
   return <Timeline.Root items={items} />
 }
 
+export const Variant: Story = () => {
+  const items = useMemo<Timeline.Item[]>(
+    () => [
+      {
+        description:
+          "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+        title: "第1部 ファントムブラッド",
+      },
+      {
+        description:
+          "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+        title: "第2部 戦闘潮流",
+      },
+      {
+        description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+        title: "第3部 スターダストクルセイダース",
+      },
+    ],
+    [],
+  )
+
+  return (
+    <PropsTable variant="stack" rows={["plain", "number"]}>
+      {(_, row, key) => {
+        return (
+          <Timeline.Root
+            key={key}
+            variant={row}
+            items={items}
+            shape={row === "number" ? "rounded" : undefined}
+          />
+        )
+      }}
+    </PropsTable>
+  )
+}
+
 export const Size: Story = () => {
   const items = useMemo<Timeline.Item[]>(
     () => [
@@ -258,7 +295,7 @@ export const Indicator: Story = () => {
 
   return (
     <>
-      <Timeline.Root items={itemsWithIcon} />
+      <Timeline.Root items={itemsWithIcon} shape="square" />
       <Timeline.Root indicatorSize="10" items={itemsWithAvatar} />
     </>
   )

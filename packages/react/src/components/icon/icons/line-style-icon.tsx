@@ -2,14 +2,14 @@
 
 import type { Component } from "../../../core"
 import type { IconProps } from "../icon"
-import { Codesandbox as OriginalCodesandboxIcon } from "lucide-react"
+import { LineStyle as OriginalLineStyleIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
- * `CodesandboxIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ * `LineStyleIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const CodesandboxIcon = component(Icon)({
-  as: OriginalCodesandboxIcon,
+export const LineStyleIcon = component(Icon)({
+  as: OriginalLineStyleIcon,
 }) as Component<"svg", IconProps>

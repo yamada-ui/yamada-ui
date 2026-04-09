@@ -1,0 +1,602 @@
+{
+  "Tree": {
+    "Item": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "animated": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the tree item will be animated.",
+        "required": false
+      },
+      "asyncChildren": {
+        "type": "() => Promise<TreeItem[]>",
+        "description": "If provided, the tree item will be rendered as an async tree item.",
+        "required": false
+      },
+      "checkboxProps": {
+        "type": "Omit<CheckboxProps, \"checked\" | \"defaultChecked\" | \"value\">",
+        "description": "Props for the checkbox component.",
+        "required": false
+      },
+      "defaultOpen": {
+        "type": "boolean",
+        "description": "If `true`, the element will be initially opened.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the tree item will be disabled.",
+        "required": false
+      },
+      "endElement": {
+        "type": "TreeItemReactNode",
+        "description": "The element to display at the end of the item.",
+        "required": false
+      },
+      "endElementProps": {
+        "type": "TreeEndElementProps",
+        "description": "Props for the end component.",
+        "required": false
+      },
+      "groupProps": {
+        "type": "Omit<TreeGroupProps, \"children\">",
+        "description": "Props for the group component.",
+        "required": false
+      },
+      "indicator": {
+        "type": "ReactNodeOrFunction<TreeCallBackProps>",
+        "description": "The tree indicator icon to use.",
+        "required": false
+      },
+      "indicatorProps": {
+        "type": "TreeIndicatorProps",
+        "description": "Props for the indicator component.",
+        "required": false
+      },
+      "label": {
+        "type": "ReactNode",
+        "description": "The label to display in the item.",
+        "required": false
+      },
+      "labelProps": {
+        "type": "TreeLabelProps",
+        "description": "Props for the label component.",
+        "required": false
+      },
+      "loadingScheme": {
+        "type": "Loading.Scheme",
+        "defaultValue": "\"oval\"",
+        "description": "The loading scheme.",
+        "required": false
+      },
+      "onClose": {
+        "type": "() => void | Promise<void>",
+        "description": "Callback invoked to close the element.",
+        "required": false
+      },
+      "onOpen": {
+        "type": "() => void | Promise<void>",
+        "description": "Callback invoked to open the element.",
+        "required": false
+      },
+      "open": {
+        "type": "boolean",
+        "description": "If `true`, the element will be opened.",
+        "required": false
+      },
+      "query": {
+        "type": "string",
+        "description": "The query to search for in the tree item.",
+        "required": false
+      },
+      "rootProps": {
+        "type": "HTMLStyledProps<\"li\">",
+        "description": "Props for the root element.",
+        "required": false
+      },
+      "startElement": {
+        "type": "TreeItemReactNode",
+        "description": "The element to display at the start of the item.",
+        "required": false
+      },
+      "startElementProps": {
+        "type": "TreeStartElementProps",
+        "description": "Props for the start component.",
+        "required": false
+      },
+      "value": {
+        "type": "string",
+        "description": "The value of the item.",
+        "required": false
+      }
+    },
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"lg\" | \"md\" | \"sm\"",
+        "defaultValue": "\"md\"",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"solid\" | \"subtle\"",
+        "defaultValue": "\"subtle\"",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "animated": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the tree item will be animated.",
+        "required": false
+      },
+      "checkable": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the tree will allow checkable items.",
+        "required": false
+      },
+      "checkboxProps": {
+        "type": "Omit<CheckboxProps<string>, \"value\" | \"defaultChecked\" | \"checked\">",
+        "description": "Props for the checkbox component.",
+        "required": false
+      },
+      "checkedValue": {
+        "type": "string[]",
+        "description": "The checked value of the tree.",
+        "required": false
+      },
+      "controlRef": {
+        "type": "RefObject<null | TreeControl>",
+        "description": "Ref of the tree callbacks.",
+        "required": false
+      },
+      "defaultCheckedValue": {
+        "type": "string[]",
+        "description": "The initial checked value of the tree.",
+        "required": false
+      },
+      "defaultExpandedValue": {
+        "type": "string[]",
+        "description": "The initial expanded value of the tree.",
+        "required": false
+      },
+      "defaultSelectedValue": {
+        "type": "Multiple extends true ? string[] : string",
+        "description": "The initial selected value of the tree.",
+        "required": false
+      },
+      "endElement": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ... 4 more ... | { ...; }",
+        "description": "The element to display at the end of the item.",
+        "required": false
+      },
+      "endElementProps": {
+        "type": "TreeEndElementProps",
+        "description": "Props for the end component.",
+        "required": false
+      },
+      "expandedValue": {
+        "type": "string[]",
+        "description": "The expanded value of the tree.",
+        "required": false
+      },
+      "groupProps": {
+        "type": "Omit<TreeGroupProps, \"children\">",
+        "description": "Props for the group component.",
+        "required": false
+      },
+      "indicator": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: TreeCallBackProps) => ReactNode)",
+        "description": "The tree indicator icon to use.",
+        "required": false
+      },
+      "indicatorHidden": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, hide the tree indicator icon for all items.",
+        "required": false
+      },
+      "indicatorProps": {
+        "type": "TreeIndicatorProps",
+        "description": "Props for the indicator component.",
+        "required": false
+      },
+      "itemProps": {
+        "type": "Omit<TreeItemProps, \"children\" | \"label\" | \"open\" | \"query\" | \"value\">",
+        "description": "Props for the item component.",
+        "required": false
+      },
+      "items": {
+        "type": "TreeItem[]",
+        "description": "If provided, generate elements based on items.",
+        "required": false
+      },
+      "labelProps": {
+        "type": "TreeLabelProps",
+        "description": "Props for the label component.",
+        "required": false
+      },
+      "loadingScheme": {
+        "type": "LoadingScheme",
+        "defaultValue": "\"oval\"",
+        "description": "The loading scheme.",
+        "required": false
+      },
+      "multiple": {
+        "type": "Multiple",
+        "defaultValue": "false",
+        "description": "If `true`, the tree will allow multiple selection.",
+        "required": false
+      },
+      "onCheckedChange": {
+        "type": "(value: string[]) => void",
+        "description": "The callback invoked when checked value changes.",
+        "required": false
+      },
+      "onExpandedChange": {
+        "type": "(value: string[]) => void",
+        "description": "The callback invoked when expanded value changes.",
+        "required": false
+      },
+      "onSelectedChange": {
+        "type": "(value: Multiple extends true ? string[] : string) => void",
+        "description": "The callback invoked when selected value changes.",
+        "required": false
+      },
+      "selectedValue": {
+        "type": "Multiple extends true ? string[] : string",
+        "description": "The selected value of the tree.",
+        "required": false
+      },
+      "startElement": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ... 4 more ... | { ...; }",
+        "description": "The element to display at the start of the item.",
+        "required": false
+      },
+      "startElementProps": {
+        "type": "TreeStartElementProps",
+        "description": "Props for the start component.",
+        "required": false
+      }
+    }
+  },
+  "TreeItem": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "animated": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the tree item will be animated.",
+      "required": false
+    },
+    "asyncChildren": {
+      "type": "() => Promise<TreeItem[]>",
+      "description": "If provided, the tree item will be rendered as an async tree item.",
+      "required": false
+    },
+    "checkboxProps": {
+      "type": "Omit<CheckboxProps, \"checked\" | \"defaultChecked\" | \"value\">",
+      "description": "Props for the checkbox component.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
+      "description": "If `true`, the element will be initially opened.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the tree item will be disabled.",
+      "required": false
+    },
+    "endElement": {
+      "type": "TreeItemReactNode",
+      "description": "The element to display at the end of the item.",
+      "required": false
+    },
+    "endElementProps": {
+      "type": "TreeEndElementProps",
+      "description": "Props for the end component.",
+      "required": false
+    },
+    "groupProps": {
+      "type": "Omit<TreeGroupProps, \"children\">",
+      "description": "Props for the group component.",
+      "required": false
+    },
+    "indicator": {
+      "type": "ReactNodeOrFunction<TreeCallBackProps>",
+      "description": "The tree indicator icon to use.",
+      "required": false
+    },
+    "indicatorProps": {
+      "type": "TreeIndicatorProps",
+      "description": "Props for the indicator component.",
+      "required": false
+    },
+    "label": {
+      "type": "ReactNode",
+      "description": "The label to display in the item.",
+      "required": false
+    },
+    "labelProps": {
+      "type": "TreeLabelProps",
+      "description": "Props for the label component.",
+      "required": false
+    },
+    "loadingScheme": {
+      "type": "Loading.Scheme",
+      "defaultValue": "\"oval\"",
+      "description": "The loading scheme.",
+      "required": false
+    },
+    "onClose": {
+      "type": "() => void | Promise<void>",
+      "description": "Callback invoked to close the element.",
+      "required": false
+    },
+    "onOpen": {
+      "type": "() => void | Promise<void>",
+      "description": "Callback invoked to open the element.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the element will be opened.",
+      "required": false
+    },
+    "query": {
+      "type": "string",
+      "description": "The query to search for in the tree item.",
+      "required": false
+    },
+    "rootProps": {
+      "type": "HTMLStyledProps<\"li\">",
+      "description": "Props for the root element.",
+      "required": false
+    },
+    "startElement": {
+      "type": "TreeItemReactNode",
+      "description": "The element to display at the start of the item.",
+      "required": false
+    },
+    "startElementProps": {
+      "type": "TreeStartElementProps",
+      "description": "Props for the start component.",
+      "required": false
+    },
+    "value": {
+      "type": "string",
+      "description": "The value of the item.",
+      "required": false
+    }
+  },
+  "TreeRoot": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\"",
+      "defaultValue": "\"md\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"solid\" | \"subtle\"",
+      "defaultValue": "\"subtle\"",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "animated": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the tree item will be animated.",
+      "required": false
+    },
+    "checkable": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the tree will allow checkable items.",
+      "required": false
+    },
+    "checkboxProps": {
+      "type": "Omit<CheckboxProps<string>, \"value\" | \"defaultChecked\" | \"checked\">",
+      "description": "Props for the checkbox component.",
+      "required": false
+    },
+    "checkedValue": {
+      "type": "string[]",
+      "description": "The checked value of the tree.",
+      "required": false
+    },
+    "controlRef": {
+      "type": "RefObject<null | TreeControl>",
+      "description": "Ref of the tree callbacks.",
+      "required": false
+    },
+    "defaultCheckedValue": {
+      "type": "string[]",
+      "description": "The initial checked value of the tree.",
+      "required": false
+    },
+    "defaultExpandedValue": {
+      "type": "string[]",
+      "description": "The initial expanded value of the tree.",
+      "required": false
+    },
+    "defaultSelectedValue": {
+      "type": "Multiple extends true ? string[] : string",
+      "description": "The initial selected value of the tree.",
+      "required": false
+    },
+    "endElement": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ... 4 more ... | { ...; }",
+      "description": "The element to display at the end of the item.",
+      "required": false
+    },
+    "endElementProps": {
+      "type": "TreeEndElementProps",
+      "description": "Props for the end component.",
+      "required": false
+    },
+    "expandedValue": {
+      "type": "string[]",
+      "description": "The expanded value of the tree.",
+      "required": false
+    },
+    "groupProps": {
+      "type": "Omit<TreeGroupProps, \"children\">",
+      "description": "Props for the group component.",
+      "required": false
+    },
+    "indicator": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: TreeCallBackProps) => ReactNode)",
+      "description": "The tree indicator icon to use.",
+      "required": false
+    },
+    "indicatorHidden": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, hide the tree indicator icon for all items.",
+      "required": false
+    },
+    "indicatorProps": {
+      "type": "TreeIndicatorProps",
+      "description": "Props for the indicator component.",
+      "required": false
+    },
+    "itemProps": {
+      "type": "Omit<TreeItemProps, \"children\" | \"label\" | \"open\" | \"query\" | \"value\">",
+      "description": "Props for the item component.",
+      "required": false
+    },
+    "items": {
+      "type": "TreeItem[]",
+      "description": "If provided, generate elements based on items.",
+      "required": false
+    },
+    "labelProps": {
+      "type": "TreeLabelProps",
+      "description": "Props for the label component.",
+      "required": false
+    },
+    "loadingScheme": {
+      "type": "LoadingScheme",
+      "defaultValue": "\"oval\"",
+      "description": "The loading scheme.",
+      "required": false
+    },
+    "multiple": {
+      "type": "Multiple",
+      "defaultValue": "false",
+      "description": "If `true`, the tree will allow multiple selection.",
+      "required": false
+    },
+    "onCheckedChange": {
+      "type": "(value: string[]) => void",
+      "description": "The callback invoked when checked value changes.",
+      "required": false
+    },
+    "onExpandedChange": {
+      "type": "(value: string[]) => void",
+      "description": "The callback invoked when expanded value changes.",
+      "required": false
+    },
+    "onSelectedChange": {
+      "type": "(value: Multiple extends true ? string[] : string) => void",
+      "description": "The callback invoked when selected value changes.",
+      "required": false
+    },
+    "selectedValue": {
+      "type": "Multiple extends true ? string[] : string",
+      "description": "The selected value of the tree.",
+      "required": false
+    },
+    "startElement": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ... 4 more ... | { ...; }",
+      "description": "The element to display at the start of the item.",
+      "required": false
+    },
+    "startElementProps": {
+      "type": "TreeStartElementProps",
+      "description": "Props for the start component.",
+      "required": false
+    }
+  }
+}

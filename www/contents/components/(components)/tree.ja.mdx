@@ -1,8 +1,633 @@
 ---
 title: Tree
-description: "`Tree`は、現在作成を検討しています。"
+description: "`Tree`は、階層データを展開可能なツリー形式で表示するコンポーネントです。"
 tags: ["disclosure", "list", "data-display"]
-status: planned
+status: new
+storybook: components-tree--basic
+source: components/tree
+style: components/tree/tree.style.ts
 ---
 
-このGitHubの[イシュー](https://github.com/yamada-ui/yamada-ui/issues/990)であなたの意見を投稿してください。作成の優先順位を決めるのに役立ちます。
+```tsx preview
+<Tree.Root maxW="2xs">
+  <Tree.Item label="node_modules">
+    <Tree.Item label="react" />
+    <Tree.Item label="react-dom" />
+    <Tree.Item label="@yamada-ui">
+      <Tree.Item label="react" />
+      <Tree.Item label="utils" />
+    </Tree.Item>
+  </Tree.Item>
+  <Tree.Item label="src">
+    <Tree.Item label="components">
+      <Tree.Item label="tree.tsx" />
+      <Tree.Item label="index.ts" />
+    </Tree.Item>
+    <Tree.Item label="app">
+      <Tree.Item label="about">
+        <Tree.Item label="layout.tsx" />
+        <Tree.Item label="page.tsx" />
+      </Tree.Item>
+      <Tree.Item label="layout.tsx" />
+      <Tree.Item label="page.tsx" />
+    </Tree.Item>
+  </Tree.Item>
+  <Tree.Item label="pnpm-lock.yaml" />
+  <Tree.Item label="package.json" />
+  <Tree.Item label="tsconfig.json" />
+  <Tree.Item label="README.md" />
+</Tree.Root>
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Tree } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Tree } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Tree } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Tree.Root>
+  <Tree.Item>
+    <Tree.Item />
+  </Tree.Item>
+  <Tree.Item />
+</Tree.Root>
+```
+
+:::tip
+`Tree.Item`の`label`が文字列の場合は、`value`を省略することができます。
+:::
+
+### itemsを使う
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return <Tree.Root maxW="2xs" items={items} />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<VStack>
+  <For each={["subtle", "solid"]}>
+    {(variant, index) => (
+      <Tree.Root
+        key={index}
+        maxW="2xs"
+        variant={variant}
+        defaultSelectedValue="node_modules"
+        items={treeItems}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### サイズを変更する
+
+```tsx preview
+<VStack>
+  <For each={["sm", "md", "lg"]}>
+    {(size, index) => (
+      <Tree.Root
+        key={index}
+        maxW="2xs"
+        size={size}
+        defaultExpandedValue={["src"]}
+        defaultSelectedValue="node_modules"
+        items={treeItems}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### 形を変更する
+
+```tsx preview
+<VStack>
+  <For each={["rounded", "square", "circle"]}>
+    {(shape, index) => (
+      <Tree.Root
+        key={index}
+        maxW="2xs"
+        defaultSelectedValue="node_modules"
+        items={treeItems}
+        shape={shape}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### 特定の項目を展開済みにする
+
+最初から特定の項目を展開済みにする場合は、`defaultExpandedValue`に項目の値を設定します。
+
+```tsx preview
+<Tree.Root
+  maxW="2xs"
+  defaultExpandedValue={["src", "src/components"]}
+  items={treeItems}
+/>
+```
+
+### 特定の項目を選択済みにする
+
+特定の項目を選択済みにする場合は、`defaultSelectedValue`に項目の値を設定します。
+
+```tsx preview
+<Tree.Root maxW="2xs" defaultSelectedValue="node_modules" items={treeItems} />
+```
+
+### 複数の項目を選択する
+
+複数の項目を選択する場合は、`multiple`を`true`に設定します。
+
+```tsx preview
+<Tree.Root maxW="2xs" items={treeItems} multiple />
+```
+
+### チェックボックスを有効にする
+
+項目にチェックボックスを有効にする場合は、`checkable`を`true`に設定します。
+
+```tsx preview
+<Tree.Root maxW="2xs" checkable items={treeItems} />
+```
+
+### 特定の項目をチェック済みにする
+
+特定の項目をチェック済みにする場合は、`defaultCheckedValue`に項目の値を設定します。
+
+```tsx preview
+<Tree.Root
+  maxW="2xs"
+  checkable
+  defaultCheckedValue={["package.json"]}
+  items={treeItems}
+/>
+```
+
+### 項目を無効にする
+
+項目を無効にする場合は、`disabled`を設定します。
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      disabled: true,
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { disabled: true, label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return <Tree.Root maxW="2xs" items={items} />
+```
+
+### リンクとして使う
+
+```tsx preview functional
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      children: [
+        { label: "react" },
+        { label: "react-dom" },
+        {
+          children: [{ label: "react" }, { label: "utils" }],
+          label: "@yamada-ui",
+        },
+      ],
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    {
+      as: "a",
+      href: "https://yamada-ui.com",
+      rel: "noopener",
+      target: "_blank",
+      endElement: <SquareArrowOutUpRightIcon />,
+      label: "README.md",
+    },
+  ],
+  [],
+)
+
+return <Tree.Root maxW="2xs" items={items} />
+```
+
+### ガイドラインを表示する
+
+ガイドラインを表示する場合は、`withGuideLine`を`true`に設定します。
+
+```tsx preview
+<Tree.Root maxW="2xs" items={treeItems} withGuideLine />
+```
+
+### インジケーターを非表示にする
+
+インジケーターを非表示にする場合は、`indicatorHidden`を`true`に設定します。
+
+```tsx preview
+<Tree.Root maxW="2xs" indicatorHidden items={treeItems} />
+```
+
+### アニメーションを追加する
+
+展開・折りたたみ時にアニメーションを追加する場合は、`animated`を`true`に設定します。
+
+```tsx preview
+<Tree.Root maxW="2xs" animated items={treeItems} />
+```
+
+### フィルタリング
+
+```tsx preview functional client
+const [items, setItems] = useState<Tree.ItemType[]>(treeItems)
+
+const searchItems = useCallback(
+  (value: string, items: Tree.ItemType[]): Tree.ItemType[] => {
+    if (!value.length) return items
+
+    return items
+      .map((item) => {
+        if ("children" in item) {
+          if (isString(item.label) && match(item.label, value)) {
+            return item
+          } else {
+            const children = searchItems(value, item.children)
+
+            if (children.length) return { ...item, children }
+          }
+        } else if (isString(item.label) && match(item.label, value)) {
+          return item
+        }
+      })
+      .filter((item) => !isUndefined(item))
+  },
+  [],
+)
+
+return (
+  <VStack gap="sm" maxW="2xs">
+    <Input
+      placeholder="Search"
+      onChange={(ev) => {
+        setItems(searchItems(ev.target.value, treeItems))
+      }}
+    />
+    <Tree.Root items={items} />
+  </VStack>
+)
+```
+
+### 非同期で読み込む
+
+項目の子要素を非同期で読み込む場合は、`children`の代わりに`asyncChildren`を使用します。
+
+```tsx preview functional client
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      asyncChildren: async () => {
+        await wait(1000)
+
+        return [
+          { label: "react" },
+          { label: "react-dom" },
+          {
+            children: [{ label: "react" }, { label: "utils" }],
+            label: "@yamada-ui",
+          },
+        ]
+      },
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return <Tree.Root maxW="2xs" items={items} />
+```
+
+### ローディングスキームを変更する
+
+```tsx preview functional client
+const items = useMemo<Tree.ItemType[]>(
+  () => [
+    {
+      asyncChildren: async () => {
+        await wait(1000)
+
+        return [
+          { label: "react" },
+          { label: "react-dom" },
+          {
+            children: [{ label: "react" }, { label: "utils" }],
+            label: "@yamada-ui",
+          },
+        ]
+      },
+      label: "node_modules",
+    },
+    {
+      children: [
+        {
+          children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+          label: "components",
+        },
+        {
+          children: [
+            {
+              children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+              label: "about",
+            },
+            { label: "layout.tsx" },
+            { label: "page.tsx" },
+          ],
+          label: "app",
+        },
+      ],
+      label: "src",
+    },
+    { label: "pnpm-lock.yaml" },
+    { label: "package.json" },
+    { label: "tsconfig.json" },
+    { label: "README.md" },
+  ],
+  [],
+)
+
+return <Tree.Root maxW="2xs" items={items} loadingScheme="dots" />
+```
+
+### 項目をすべて展開・折りたたむ
+
+項目をすべて展開または折りたたむ場合は、`controlRef`を使用します。
+
+```tsx preview functional client
+const controlRef = useRef<Tree.Control>(null)
+
+return (
+  <VStack gap="md">
+    <ButtonGroup.Root>
+      <ButtonGroup.Item onClick={() => controlRef.current?.expand()}>
+        Expand All
+      </ButtonGroup.Item>
+      <ButtonGroup.Item onClick={() => controlRef.current?.collapse()}>
+        Collapse All
+      </ButtonGroup.Item>
+    </ButtonGroup.Root>
+
+    <Tree.Root maxW="2xs" controlRef={controlRef} items={treeItems} />
+  </VStack>
+)
+```
+
+### 要素をカスタマイズする
+
+```tsx preview client
+<Tree.Root
+  maxW="2xs"
+  items={treeItems}
+  startElement={{
+    group: ({ expanded }) =>
+      expanded ? <FolderOpenIcon /> : <FolderClosedIcon />,
+    item: <FileIcon />,
+  }}
+/>
+```
+
+```tsx preview
+<Tree.Root maxW="2xs" endElement={<LockKeyholeIcon />} items={treeItems} />
+```
+
+### インジケーターをカスタマイズする
+
+```tsx preview client
+<Tree.Root
+  maxW="2xs"
+  indicator={({ expanded }) =>
+    expanded ? <SquareMinusIcon /> : <SquarePlusIcon />
+  }
+  items={treeItems}
+  indicatorProps={{ _expanded: { transform: "rotate(0deg)" } }}
+/>
+```
+
+### 制御する
+
+```tsx preview functional client
+const [selectedValue, setSelectedValue] = useState<string>("package.json")
+const [checkedValue, setCheckedValue] = useState<string[]>(["README.md"])
+const [expandedValue, setExpandedValue] = useState<string[]>(["node_modules"])
+
+return (
+  <Tree.Root
+    maxW="2xs"
+    checkable
+    checkedValue={checkedValue}
+    expandedValue={expandedValue}
+    items={treeItems}
+    selectedValue={selectedValue}
+    onCheckedChange={setCheckedValue}
+    onExpandedChange={setExpandedValue}
+    onSelectedChange={setSelectedValue}
+  />
+)
+```
+
+## Props
+
+<PropsTable name="tree" />
+
+## アクセシビリティ
+
+`Tree`は、アクセシビリティに関して[WAI-ARIA - TreeView Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/treeview/)に従います。
+
+`aria-label`を設定すると、スクリーンリーダーによって読み上げられます。
+
+```tsx
+<Tree.Root aria-label="My Documents" />
+```
+
+### キーボード操作
+
+| キー                              | 説明                                                                                                             | 状態              |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ----------------- |
+| `Tab`                             | 選択されている項目または最初の項目にフォーカスします。                                                           | -                 |
+| `ArrowUp`                         | 無効ではない前の項目をフォーカスします。                                                                         | -                 |
+| `Shift` + `ArrowUp`               | 無効ではない前の項目をフォーカスし、その項目を選択します。                                                       | `multiple={true}` |
+| `Control` + `Shift` + `ArrowUp`   | すべての項目を折りたたみます。                                                                                   | -                 |
+| `ArrowDown`                       | 無効ではない次の項目をフォーカスします。                                                                         | -                 |
+| `Shift` + `ArrowDown`             | 無効ではない次の項目をフォーカスし、その項目を選択します。                                                       | `multiple={true}` |
+| `Control` + `Shift` + `ArrowDown` | すべての項目を展開します。                                                                                       | -                 |
+| `ArrowRight`                      | フォーカスしている項目が折りたたまれている場合は展開します。展開されている場合は最初の子項目をフォーカスします。 | -                 |
+| `ArrowLeft`                       | フォーカスしている項目が展開されている場合は折りたたみます。折りたたまれている場合は親項目をフォーカスします。   | -                 |
+| `Space`, `Enter`                  | フォーカスしている項目を選択します。グループの場合は展開・折りたたみを切り替えます。                             | -                 |
+| `Shift` + `Space`, `Enter`        | 最初に選択した項目からフォーカスしている項目までの項目をすべて選択します。                                       | `multiple={true}` |
+| `Home`                            | 無効ではない最初の項目をフォーカスします。                                                                       | -                 |
+| `End`                             | 無効ではない最後の項目をフォーカスします。                                                                       | -                 |
+| `Control` + `A`                   | 無効ではないすべての項目を選択します。                                                                           | `multiple={true}` |
+| `a-z`, `A-Z`                      | 入力した文字から始まる値の展開されている項目をフォーカスします。                                                 | -                 |
+
+### ARIAロールと属性
+
+| コンポーネント            | ロールと属性           | 使い方                                                                                      |
+| ------------------------- | ---------------------- | ------------------------------------------------------------------------------------------- |
+| `Tree.Root`               | `role="tree"`          | ツリーであることを示します。                                                                |
+|                           | `aria-multiselectable` | `multiple={true}`または`checkable={true}`が設定されている場合は`"true"`を設定します。       |
+| `Tree.Item`               | `role="treeitem"`      | ツリーの項目であることを示します。                                                          |
+|                           | `aria-expanded`        | 項目が展開されている場合は`"true"`を設定し、折りたたまれている場合は`"false"`を設定します。 |
+|                           | `aria-selected`        | 項目が選択されている場合は`"true"`を設定します。                                            |
+|                           | `aria-disabled`        | 項目が無効な場合は`"true"`を設定します。                                                    |
+|                           | `aria-level`           | 項目の階層を設定します。                                                                    |
+|                           | `aria-labelledby`      | 関連した`Tree.Item > div > span`の`id`を設定します。                                        |
+| `Tree.Item > ul`          | `role="group"`         | グループであることを示します。                                                              |
+|                           | `aria-labelledby`      | 関連した`Tree.Item > div > span`の`id`を設定します。                                        |
+|                           | `aria-busy`            | 項目が読み込み中の場合は`"true"`を設定します。                                              |
+| `Tree.Item > div > input` | `id`                   | 親の`Tree.Item > div > input`と関連付けするために使用する`id`                               |
+|                           | `aria-controls`        | 関連した子の`Tree.Item > div > input`の`id`を設定します。                                   |
+|                           | `aria-labelledby`      | 関連した`Tree.Item > div > span`の`id`を設定します。                                        |
+| `Tree.Item > div > span`  | `id`                   | `Tree.Item`と`Tree.Item > ul`と`Tree.Item > div > input`を関連付けするために使用する`id`    |
+
+## 類似のコンポーネント
+
+<Similar name="tree" />
+
+## 使用しているコンポーネント・フック
+
+<Uses name="tree" />

@@ -30,7 +30,11 @@ const PLACEMENT_MAP: {
   [key in Direction]: FloatingPlacement
 } = {
   "center-end": "right",
+  "center-end-end": "right-end",
+  "center-end-start": "right-start",
   "center-start": "left",
+  "center-start-end": "left-end",
+  "center-start-start": "left-start",
   end: "bottom",
   "end-center": "bottom",
   "end-end": "bottom-end",

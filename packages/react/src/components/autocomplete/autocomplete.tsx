@@ -11,8 +11,9 @@ import type {
   ComboboxItem,
   UseComboboxGroupProps,
 } from "../../hooks/use-combobox"
+import type { Merge } from "../../utils"
 import type { UseInputBorderProps } from "../input"
-import type { PopupAnimationProps } from "../popover"
+import type { UsePopoverStyleProps, UsePopupAnimationProps } from "../popover"
 import type { AutocompleteStyle } from "./autocomplete.style"
 import type {
   UseAutocompleteOptionProps,
@@ -34,7 +35,7 @@ import { cast, isArray } from "../../utils"
 import { useGroupItemProps } from "../group"
 import { CheckIcon, ChevronDownIcon, MinusIcon, XIcon } from "../icon"
 import { InputGroup, useInputBorder, useInputPropsContext } from "../input"
-import { Popover } from "../popover"
+import { Popover, usePopoverStyleProps } from "../popover"
 import { autocompleteStyle } from "./autocomplete.style"
 import {
   AutocompleteContext,
@@ -56,8 +57,8 @@ export interface AutocompleteRootProps<Multiple extends boolean = false>
       HTMLStyledProps,
       "defaultValue" | "filter" | "offset" | "onChange" | "ref" | "value"
     >,
-    UseAutocompleteProps<Multiple>,
-    PopupAnimationProps,
+    Merge<UseAutocompleteProps<Multiple>, UsePopoverStyleProps>,
+    UsePopupAnimationProps,
     ThemeProps<AutocompleteStyle>,
     UseInputBorderProps {
   /**
@@ -163,6 +164,7 @@ export const AutocompleteRoot = withProvider(
         ...rest
       },
     ] = useGroupItemProps(props)
+    const popoverStyleProps = usePopoverStyleProps(rest)
     const items = useMemo<ComboboxItem[]>(() => {
       if (itemsProp) return itemsProp
 
@@ -189,7 +191,7 @@ export const AutocompleteRoot = withProvider(
       onActiveDescendant,
       onClose,
       onSelect,
-    } = useAutocomplete({ items, ...rest })
+    } = useAutocomplete({ items, ...rest, ...popoverStyleProps })
     const mergedPopoverProps = useMemo<Popover.RootProps>(
       () => ({
         animationScheme,

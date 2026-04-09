@@ -15,6 +15,7 @@
     "hooks": ["use-value"],
     "providers": []
   },
+  "dependents": { "components": ["sidebar"], "hooks": [], "providers": [] },
   "section": "components",
   "sources": [
     {

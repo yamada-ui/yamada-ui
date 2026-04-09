@@ -2,14 +2,14 @@
 
 import type { Component } from "../../../core"
 import type { IconProps } from "../icon"
-import { Chromium as OriginalChromiumIcon } from "lucide-react"
+import { CctvOff as OriginalCctvOffIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
- * `ChromiumIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ * `CctvOffIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const ChromiumIcon = component(Icon)({
-  as: OriginalChromiumIcon,
+export const CctvOffIcon = component(Icon)({
+  as: OriginalCctvOffIcon,
 }) as Component<"svg", IconProps>

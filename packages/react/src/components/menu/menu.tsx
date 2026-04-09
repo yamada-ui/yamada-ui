@@ -2,7 +2,6 @@
 
 import type { FC, ReactElement, ReactNode } from "react"
 import type {
-  Direction,
   GenericsComponent,
   HTMLProps,
   HTMLStyledProps,
@@ -105,7 +104,7 @@ export interface MenuRootProps
    *
    * @default 'end-start'
    */
-  placement?: Direction
+  placement?: Popover.RootProps["placement"]
 }
 
 const {

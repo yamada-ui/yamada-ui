@@ -44,7 +44,7 @@
       "required": false
     },
     "animationScheme": {
-      "type": "\"none\" | \"scale\" | SimplePlacement",
+      "type": "\"block-end\" | \"block-start\" | \"inline-end\" | \"inline-start\" | \"none\" | \"scale\" ...",
       "defaultValue": "\"scale\"",
       "description": "The animation of the element.",
       "required": false
@@ -68,7 +68,7 @@
       "required": false
     },
     "closeOnChange": {
-      "type": "((ev: ChangeEvent<HTMLInputElement>) => boolean) | boolean",
+      "type": "boolean | ((ev: ChangeEvent<HTMLInputElement, Element>) => boolean)",
       "defaultValue": "false",
       "description": "If `true`, the color picker will be closed when the input value changes.",
       "required": false
@@ -143,8 +143,8 @@
       "required": false
     },
     "duration": {
-      "type": "MotionTransitionProps[\"duration\"]",
-      "defaultValue": "0.2",
+      "type": "MotionLifecycleProps<number> | number",
+      "defaultValue": "0.1",
       "description": "The animation duration.",
       "required": false
     },
@@ -260,7 +260,7 @@
       "required": false
     },
     "onInputChange": {
-      "type": "(ev: ChangeEvent<HTMLInputElement>) => void",
+      "type": "(ev: ChangeEvent<HTMLInputElement, Element>) => void",
       "description": "The callback invoked when input value state changes.",
       "required": false
     },
@@ -275,7 +275,7 @@
       "required": false
     },
     "openOnChange": {
-      "type": "((ev: ChangeEvent<HTMLInputElement>) => boolean) | boolean",
+      "type": "boolean | ((ev: ChangeEvent<HTMLInputElement, Element>) => boolean)",
       "defaultValue": "true",
       "description": "If `true`, the color picker will be opened when the input value changes.",
       "required": false
@@ -315,7 +315,7 @@
       "required": false
     },
     "placement": {
-      "type": "Direction",
+      "type": "\"center-end-end\" | \"center-end-start\" | \"center-end\" | \"center-start-end\" | \"center-start-start\" | \"center-start\" | \"end-center\" | \"end-end\" | \"end-start\" | \"end\" ...",
       "defaultValue": "\"end-start\"",
       "description": "The placement of the popper relative to its reference.",
       "required": false
@@ -364,7 +364,7 @@
       "required": false
     },
     "strategy": {
-      "type": "Strategy",
+      "type": "\"absolute\" | \"fixed\"",
       "defaultValue": "\"absolute\"",
       "description": "The CSS positioning strategy to use.",
       "required": false

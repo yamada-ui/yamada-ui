@@ -7,7 +7,7 @@
     "providers": []
   },
   "dependents": {
-    "components": [],
+    "components": ["sidebar"],
     "hooks": ["use-local-storage"],
     "providers": []
   },

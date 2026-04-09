@@ -1,6 +1,10 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
+  actionBar: {
+    "Close action bar": "Lukk handlingslinje",
+    "Open action bar": "Åpne handlingslinje",
+  },
   autocomplete: {
     "Clear value": "Tøm verdi",
     "No results found": "Ingen resultater funnet",
@@ -82,6 +86,10 @@ const data: IntlData = {
   },
   select: {
     "Clear value": "Tøm verdi",
+  },
+  sidebar: {
+    "Close sidebar": "Lukk sidepanel",
+    "Open sidebar": "Åpne sidepanel",
   },
   slider: {
     "Slider thumb": "Skyveknapp",

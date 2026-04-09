@@ -185,7 +185,9 @@ export function createComponent<
     className ??= getClassName(name)(system)
 
     const contextProps = usePropsContext() ?? {}
-    const mergedProps = withContext ? mergeProps(contextProps, props)() : props
+    const mergedProps = withContext
+      ? (mergeProps(contextProps, props)() as H)
+      : props
     const [, rest] = useComponentStyle(mergedProps, {
       name,
       className,
@@ -329,7 +331,7 @@ export function createSlotComponent<
   }
 
   function useRootComponentProps<
-    Y extends Dict = Dict,
+    Y extends Dict = {},
     R extends keyof Y = keyof Y,
   >(
     props: Y,
@@ -346,7 +348,9 @@ export function createSlotComponent<
     className = useClassName(slot, className)
 
     const contextProps = usePropsContext() ?? {}
-    const mergedProps = withContext ? mergeProps(contextProps, props)() : props
+    const mergedProps = withContext
+      ? (mergeProps(contextProps, props)() as Y)
+      : props
     const [css, rest] = useComponentSlotStyle(mergedProps, {
       name: rootName,
       className,
@@ -358,7 +362,7 @@ export function createSlotComponent<
     return [css, rest]
   }
 
-  function useSlotComponentProps<Y extends Dict = Dict>(
+  function useSlotComponentProps<Y extends Dict = {}>(
     props: Y,
     slot?: ComponentSlot<ComponentSlotName<M>>,
     { className }: Omit<UseComponentPropsOptions, "transferProps"> = {},

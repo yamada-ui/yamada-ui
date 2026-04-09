@@ -6,7 +6,11 @@
     "hooks": [],
     "providers": []
   },
-  "dependents": { "components": ["accordion"], "hooks": [], "providers": [] },
+  "dependents": {
+    "components": ["accordion", "sidebar", "tree"],
+    "hooks": [],
+    "providers": []
+  },
   "section": "components",
   "sources": [
     {

@@ -16,7 +16,7 @@ const { ref, finish } = useInfiniteScroll({
 })
 
 return (
-  <VStack>
+  <VStack p="lg">
     {Array(count)
       .fill(0)
       .map((_, index) => (
@@ -87,7 +87,7 @@ const { ref, finish } = useInfiniteScroll({
 })
 
 return (
-  <VStack h="full" alignItems="flex-start">
+  <VStack p="lg" h="full" alignItems="flex-start">
     <VStack
       ref={rootRef}
       borderWidth="1px"
@@ -140,7 +140,7 @@ const { ref, finish } = useInfiniteScroll({
 })
 
 return (
-  <VStack>
+  <VStack p="lg">
     {Array(count)
       .fill(0)
       .map((_, index) => (
@@ -182,7 +182,7 @@ const { ref, finish } = useInfiniteScroll({
 })
 
 return (
-  <VStack>
+  <VStack p="lg">
     {Array(count)
       .fill(0)
       .map((_, index) => (
@@ -227,7 +227,7 @@ const { ref, finish } = useInfiniteScroll({
 })
 
 return (
-  <VStack>
+  <VStack p="lg">
     {Array(count)
       .fill(0)
       .map((_, index) => (
@@ -269,7 +269,7 @@ const { ref, finish } = useInfiniteScroll({
 })
 
 return (
-  <VStack>
+  <VStack p="lg">
     {Array(count)
       .fill(0)
       .map((_, index) => (
@@ -313,7 +313,7 @@ const { ref, finish } = useInfiniteScroll({
 })
 
 return (
-  <VStack ref={rootRef} gap="md" h="full" overflow="auto">
+  <VStack ref={rootRef} p="lg" gap="md" h="full" overflow="auto">
     {!finish ? (
       <Center ref={ref} w="full">
         <Loading.Oval fontSize="2xl" />

@@ -144,7 +144,20 @@ To change the placement, set `placement` to `"start"`, `"end-end"`, etc. By defa
 ```tsx preview
 <Wrap gap="md">
   <For
-    each={["start", "start-start", "start-end", "end", "end-start", "end-end"]}
+    each={[
+      "start",
+      "start-start",
+      "start-end",
+      "end",
+      "end-start",
+      "end-end",
+      "center-start",
+      "center-start-start",
+      "center-start-end",
+      "center-end",
+      "center-end-start",
+      "center-end-end",
+    ]}
   >
     {(placement) => (
       <Popover.Root key={placement} placement={placement}>

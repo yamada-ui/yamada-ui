@@ -1,5 +1,31 @@
-import type { CSSObject } from "../../core"
+import type {
+  CSSObject,
+  DefineComponentStyleSlotModifiers,
+  DefineComponentStyleSlotProps,
+} from "../../core"
 import { defineComponentSlotStyle } from "../../core"
+
+type Slot =
+  | "button"
+  | "content"
+  | "footer"
+  | "gap"
+  | "group"
+  | "groupContent"
+  | "groupLabel"
+  | "handle"
+  | "header"
+  | "item"
+  | "itemContent"
+  | "itemElement"
+  | "itemIndicator"
+  | "itemLabel"
+  | "itemLink"
+  | "itemTrigger"
+  | "mainPanel"
+  | "menu"
+  | "root"
+  | "sidePanel"
 
 const sidebarMenuStyle: CSSObject = {
   alignItems: "center",
@@ -29,7 +55,24 @@ const getSidebarTransitionStyle = (
   transitionTimingFunction: "{side-panel-timing-function}",
 })
 
-export const sidebarStyle = defineComponentSlotStyle({
+export const sidebarStyle = defineComponentSlotStyle<
+  Slot,
+  DefineComponentStyleSlotProps<
+    Slot,
+    {
+      mode: "icon" | "offcanvas"
+      placement: "end" | "start"
+      shape: "circle" | "rounded" | "square"
+      withGroupGuideLine: "true"
+      withGuideLine: "false" | "true"
+    }
+  >,
+  DefineComponentStyleSlotModifiers<Slot>,
+  DefineComponentStyleSlotModifiers<
+    Slot,
+    "outline" | "solid" | "subtle" | "surface"
+  >
+>({
   base: {
     button: {},
     content: {

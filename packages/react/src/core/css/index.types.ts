@@ -99,14 +99,14 @@ export type CSSObject = CSSFlatObject & {
 }
 export type CSSProperties = AnyString | keyof CSSFlatObject
 
+export type CSSSlotObject<Y extends string = string> = {
+  [M in Y]?: CSSObject
+}
+
 export interface CSSPropObject<
   Y extends CSSObject | CSSSlotObject = CSSObject,
 > {
   [key: string]: { [key: string]: Y }
-}
-
-export type CSSSlotObject<Y extends string = string> = {
-  [M in Y]?: CSSObject
 }
 
 export type CSSModifierObject<Y extends CSSObject | CSSSlotObject = CSSObject> =

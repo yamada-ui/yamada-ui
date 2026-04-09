@@ -36,12 +36,13 @@ const preview: Preview = {
       return (
         <UIProvider config={config} dir={dir} locale={locale}>
           <VStack
+            css={{ "--space": { base: "spaces.lg", md: "spaces.md" } }}
             align="start"
-            gap={{ base: "lg", md: "md" }}
+            gap="{space}"
             justify={centered ? "center" : "start"}
             m={centered ? "-md" : "0"}
             minH="100dvh"
-            p={{ base: "lg", md: "md" }}
+            p="{space}"
           >
             <Story />
           </VStack>

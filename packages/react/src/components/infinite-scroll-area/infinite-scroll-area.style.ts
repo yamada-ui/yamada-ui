@@ -24,10 +24,15 @@ export const infiniteScrollAreaStyle = defineComponentSlotStyle({
      */
     orientation: {
       horizontal: {
-        root: { flexDirection: "row", gap: "md" },
+        root: { flexDirection: "row", gap: "md", overflowX: "auto" },
       },
       vertical: {
-        root: { flexDirection: "column", gap: "lg" },
+        root: {
+          flexDirection: "column",
+          gap: "lg",
+          h: "full",
+          overflowY: "auto",
+        },
       },
     },
   },

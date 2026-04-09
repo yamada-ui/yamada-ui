@@ -313,6 +313,9 @@ importers:
 
   packages/forge:
     dependencies:
+      '@changesets/write':
+        specifier: ^0.4.0
+        version: 0.4.0
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../utils

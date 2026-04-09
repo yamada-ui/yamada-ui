@@ -87,6 +87,10 @@ const data: IntlData = {
   select: {
     "Clear value": "Καθαρισμός τιμής",
   },
+  sidebar: {
+    "Close sidebar": "Κλείσιμο πλευρικής μπάρας",
+    "Open sidebar": "Άνοιγμα πλευρικής μπάρας",
+  },
   slider: {
     "Slider thumb": "Αντίχειρας ολισθητήρα",
   },

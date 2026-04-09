@@ -25,6 +25,14 @@ interface DefineConfig {
 
 export const defineConfig: DefineConfig = (value) => value
 
+export type DefineComponentStyleProps<Y extends { [key: string]: string }> = {
+  [K in keyof Y]: { [V in Y[K]]: CSSObject }
+}
+
+export type DefineComponentStyleModifiers<Y extends string> = {
+  [K in Y]: CSSObject
+}
+
 export interface DefineComponentStyle {
   <
     Y extends CSSPropObject = CSSPropObject,
@@ -36,6 +44,20 @@ export interface DefineComponentStyle {
 }
 
 export const defineComponentStyle: DefineComponentStyle = (value) => value
+
+export type DefineComponentStyleSlotProps<
+  Y extends string = string,
+  M extends { [key: string]: string } = {},
+> = {
+  [D in keyof M]: { [H in M[D]]: CSSSlotObject<Y> }
+}
+
+export type DefineComponentStyleSlotModifiers<
+  Y extends string = string,
+  M extends string = string,
+> = {
+  [D in M]: CSSSlotObject<Y>
+}
 
 export interface DefineComponentSlotStyle {
   <

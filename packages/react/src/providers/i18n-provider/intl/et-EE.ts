@@ -87,6 +87,10 @@ const data: IntlData = {
   select: {
     "Clear value": "Tühjenda väärtus",
   },
+  sidebar: {
+    "Close sidebar": "Sulge külgriba",
+    "Open sidebar": "Ava külgriba",
+  },
   slider: {
     "Slider thumb": "Liuguri pöial",
   },

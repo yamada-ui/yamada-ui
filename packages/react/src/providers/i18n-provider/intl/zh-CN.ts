@@ -87,6 +87,10 @@ const data: IntlData = {
   select: {
     "Clear value": "清除值",
   },
+  sidebar: {
+    "Close sidebar": "关闭侧边栏",
+    "Open sidebar": "打开侧边栏",
+  },
   slider: {
     "Slider thumb": "滑块拇指",
   },

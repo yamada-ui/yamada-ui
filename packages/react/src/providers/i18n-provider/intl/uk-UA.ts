@@ -87,6 +87,10 @@ const data: IntlData = {
   select: {
     "Clear value": "Очистити значення",
   },
+  sidebar: {
+    "Close sidebar": "Закрити бічну панель",
+    "Open sidebar": "Відкрити бічну панель",
+  },
   slider: {
     "Slider thumb": "Повзунок",
   },

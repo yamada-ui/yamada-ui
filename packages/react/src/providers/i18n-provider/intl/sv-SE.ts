@@ -87,6 +87,10 @@ const data: IntlData = {
   select: {
     "Clear value": "Rensa värde",
   },
+  sidebar: {
+    "Close sidebar": "Stäng sidofält",
+    "Open sidebar": "Öppna sidofält",
+  },
   slider: {
     "Slider thumb": "Skjutreglage tumme",
   },

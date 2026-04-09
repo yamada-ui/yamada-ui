@@ -87,6 +87,10 @@ const data: IntlData = {
   select: {
     "Clear value": "Ryd værdi",
   },
+  sidebar: {
+    "Close sidebar": "Luk sidepanel",
+    "Open sidebar": "Åbn sidepanel",
+  },
   slider: {
     "Slider thumb": "Skyder tommelfinger",
   },

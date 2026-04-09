@@ -87,6 +87,10 @@ const data: IntlData = {
   select: {
     "Clear value": "Değeri temizle",
   },
+  sidebar: {
+    "Close sidebar": "Kenar çubuğunu kapat",
+    "Open sidebar": "Kenar çubuğunu aç",
+  },
   slider: {
     "Slider thumb": "Kaydırıcı başparmak",
   },

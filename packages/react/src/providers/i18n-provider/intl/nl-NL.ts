@@ -88,6 +88,10 @@ const data: IntlData = {
   select: {
     "Clear value": "Waarde wissen",
   },
+  sidebar: {
+    "Close sidebar": "Zijbalk sluiten",
+    "Open sidebar": "Zijbalk openen",
+  },
   slider: {
     "Slider thumb": "Schuifregelaar duim",
   },

@@ -87,6 +87,10 @@ const data: IntlData = {
   select: {
     "Clear value": "値を消去する",
   },
+  sidebar: {
+    "Close sidebar": "サイドバーを閉じる",
+    "Open sidebar": "サイドバーを開く",
+  },
   slider: {
     "Slider thumb": "スライダーのつまみ",
   },

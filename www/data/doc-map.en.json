@@ -1342,6 +1342,11 @@
           "segment": "react",
           "items": [
             {
+              "title": "v2.2.0",
+              "segment": "2-2-0",
+              "pathname": "/docs/changelog/react/2-2-0"
+            },
+            {
               "title": "v2.1.7",
               "segment": "2-1-7",
               "pathname": "/docs/changelog/react/2-1-7"

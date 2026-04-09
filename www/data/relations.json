@@ -270,7 +270,10 @@
       "components": ["group", "input", "icon", "field"],
       "hooks": []
     },
-    "dependents": { "components": ["checkbox-card", "table"], "hooks": [] },
+    "dependents": {
+      "components": ["checkbox-card", "table", "tree"],
+      "hooks": []
+    },
     "resembles": [
       "native-select",
       "radio",
@@ -318,7 +321,10 @@
   },
   "collapse": {
     "dependencies": { "components": ["motion"], "hooks": [] },
-    "dependents": { "components": ["accordion"], "hooks": [] },
+    "dependents": {
+      "components": ["accordion", "sidebar", "tree"],
+      "hooks": []
+    },
     "resembles": [
       "fade",
       "fade-scale",
@@ -445,6 +451,7 @@
       ],
       "hooks": ["use-value"]
     },
+    "dependents": { "components": ["sidebar"], "hooks": [] },
     "resembles": [
       "modal",
       "popover",
@@ -805,11 +812,13 @@
         "rating",
         "reorder",
         "select",
+        "sidebar",
         "stat",
         "steps",
         "table",
         "tag",
-        "tip"
+        "tip",
+        "tree"
       ],
       "hooks": []
     },
@@ -937,7 +946,7 @@
       "hooks": ["use-timeout"]
     },
     "dependents": {
-      "components": ["alert", "button", "dropzone"],
+      "components": ["alert", "button", "dropzone", "sidebar", "tree"],
       "hooks": ["use-async-callback"]
     },
     "resembles": ["circle-progress", "progress", "skeleton", "tip"]
@@ -984,7 +993,7 @@
         "portal",
         "fade"
       ],
-      "hooks": ["use-disclosure"]
+      "hooks": ["use-value", "use-disclosure"]
     },
     "dependents": { "components": ["drawer"], "hooks": [] },
     "resembles": [
@@ -1003,6 +1012,7 @@
     "dependents": {
       "components": [
         "accordion",
+        "action-bar",
         "airy",
         "collapse",
         "drawer",
@@ -1016,10 +1026,12 @@
         "ripple",
         "rotate",
         "segmented-control",
+        "sidebar",
         "slide",
         "slide-fade",
         "snacks",
-        "tooltip"
+        "tooltip",
+        "tree"
       ],
       "hooks": []
     },
@@ -1176,10 +1188,11 @@
         "fade-scale",
         "slide-fade"
       ],
-      "hooks": ["use-disclosure", "use-outside-click"]
+      "hooks": ["use-value", "use-disclosure", "use-outside-click"]
     },
     "dependents": {
       "components": [
+        "action-bar",
         "autocomplete",
         "color-picker",
         "date-picker",
@@ -1203,6 +1216,7 @@
     "dependencies": { "components": [], "hooks": [] },
     "dependents": {
       "components": [
+        "action-bar",
         "drawer",
         "dropzone",
         "file-button",
@@ -1667,7 +1681,7 @@
     ]
   },
   "timeline": {
-    "dependencies": { "components": [], "hooks": [] },
+    "dependencies": { "components": [], "hooks": ["use-value"] },
     "resembles": [
       "data-list",
       "list",
@@ -1706,7 +1720,7 @@
       "components": ["motion", "popover", "portal"],
       "hooks": ["use-disclosure", "use-outside-click"]
     },
-    "dependents": { "components": ["tip"], "hooks": [] },
+    "dependents": { "components": ["sidebar", "tip"], "hooks": [] },
     "resembles": [
       "popover",
       "drawer",
@@ -1751,7 +1765,8 @@
   },
   "use-animation": { "dependencies": { "components": [], "hooks": [] } },
   "use-async-callback": {
-    "dependencies": { "components": ["loading"], "hooks": ["use-processing"] }
+    "dependencies": { "components": ["loading"], "hooks": ["use-processing"] },
+    "dependents": { "components": ["sidebar", "tree"], "hooks": [] }
   },
   "use-async": { "dependencies": { "components": [], "hooks": [] } },
   "use-boolean": {
@@ -1760,7 +1775,7 @@
   },
   "use-breakpoint": {
     "dependencies": { "components": [], "hooks": [] },
-    "dependents": { "components": [], "hooks": ["use-value"] }
+    "dependents": { "components": ["sidebar"], "hooks": ["use-value"] }
   },
   "use-clickable": {
     "dependencies": { "components": [], "hooks": [] },
@@ -1803,12 +1818,14 @@
         "saturation-slider",
         "segmented-control",
         "select",
+        "sidebar",
         "slider",
         "steps",
         "switch",
         "table",
         "tabs",
-        "toggle"
+        "toggle",
+        "tree"
       ],
       "hooks": []
     }
@@ -1826,8 +1843,10 @@
         "menu",
         "pin-input",
         "segmented-control",
+        "sidebar",
         "steps",
-        "tabs"
+        "tabs",
+        "tree"
       ],
       "hooks": []
     }
@@ -1835,14 +1854,22 @@
   "use-disclosure": {
     "dependencies": { "components": [], "hooks": [] },
     "dependents": {
-      "components": ["menu", "modal", "popover", "tooltip"],
+      "components": [
+        "action-bar",
+        "menu",
+        "modal",
+        "popover",
+        "sidebar",
+        "tooltip",
+        "tree"
+      ],
       "hooks": []
     }
   },
   "use-event-listener": {
     "dependencies": { "components": [], "hooks": [] },
     "dependents": {
-      "components": ["number-input", "popover", "tooltip"],
+      "components": ["action-bar", "number-input", "popover", "tooltip"],
       "hooks": []
     }
   },
@@ -1910,24 +1937,29 @@
     "dependencies": { "components": [], "hooks": ["use-breakpoint"] },
     "dependents": {
       "components": [
+        "action-bar",
         "alpha-slider",
         "drawer",
         "group",
         "hue-slider",
         "infinite-scroll-area",
+        "modal",
+        "popover",
         "reorder",
         "resizable",
         "segmented-control",
+        "sidebar",
         "slide",
         "slider",
         "steps",
-        "tabs"
+        "tabs",
+        "timeline"
       ],
       "hooks": []
     }
   },
   "use-window-event": {
     "dependencies": { "components": [], "hooks": [] },
-    "dependents": { "components": [], "hooks": ["use-local-storage"] }
+    "dependents": { "components": ["sidebar"], "hooks": ["use-local-storage"] }
   }
 }

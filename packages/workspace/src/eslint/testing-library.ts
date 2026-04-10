@@ -1,11 +1,11 @@
-import type { TSESLint } from "@typescript-eslint/utils"
+import type { ConfigWithExtends, Plugin } from "@eslint/config-helpers"
 import testingLibraryPlugin from "eslint-plugin-testing-library"
 import { sharedTestFiles } from "./shared"
 
 export const testingLibraryConfig = {
-  name: "eslint/testing-library",
+  name: "testing-library",
   files: sharedTestFiles,
-  plugins: { "testing-library": testingLibraryPlugin },
+  plugins: { "testing-library": testingLibraryPlugin as Plugin },
   rules: {
     "testing-library/no-await-sync-queries": "error",
     "testing-library/no-debugging-utils": "error",
@@ -16,4 +16,4 @@ export const testingLibraryConfig = {
     "testing-library/prefer-find-by": "error",
     "testing-library/prefer-query-by-disappearance": "error",
   },
-} satisfies TSESLint.FlatConfig.Config
+} satisfies ConfigWithExtends

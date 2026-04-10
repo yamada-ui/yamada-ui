@@ -1,6 +1,7 @@
 import type { FC } from "react"
 import { useCallback, useEffect } from "react"
 import { extendConfig, UIProvider } from "../../providers/ui-provider"
+import { wait } from "../../utils"
 import { Button } from "../button"
 import { Wrap } from "../wrap"
 import { useLoading } from "./loading-provider"
@@ -9,11 +10,6 @@ export default {
   parameters: { layout: "centered" },
   title: "Theme / Loading",
 }
-
-const wait = async (ms: number) =>
-  new Promise((resolve) => {
-    setTimeout(resolve, ms)
-  })
 
 const AsyncApp: FC = () => {
   const { background, page, screen } = useLoading()

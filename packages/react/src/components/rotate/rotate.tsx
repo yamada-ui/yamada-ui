@@ -35,7 +35,7 @@ export interface RotateProps
    */
   defaultValue?: KeyframeIdent
   /**
-   *　The animation delay.
+   * The animation delay.
    *
    * @default 0
    */

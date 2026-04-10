@@ -1,9 +1,14 @@
 import { render } from "#test"
+import * as utils from "../../utils"
 import {
   ColorModeScript,
   getStorageScript,
   ThemeSchemeScript,
 } from "./storage-script"
+
+function mockSsr() {
+  return vi.spyOn(utils, "createdDom").mockReturnValue(false)
+}
 
 describe("getStorageScript", () => {
   describe("colorMode", () => {
@@ -77,33 +82,57 @@ describe("getStorageScript", () => {
 })
 
 describe("ColorModeScript", () => {
-  test("renders a script tag", () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
+  test("renders a script tag during SSR", () => {
+    mockSsr()
     const { container } = render(<ColorModeScript />, { withProvider: false })
     const script = container.querySelector("script")
     expect(script).toBeTruthy()
   })
 
-  test("renders with nonce", () => {
+  test("renders with nonce during SSR", () => {
+    mockSsr()
     const { container } = render(<ColorModeScript nonce="test-nonce" />, {
       withProvider: false,
     })
     const script = container.querySelector("script")
     expect(script?.getAttribute("nonce")).toBe("test-nonce")
   })
+
+  test("returns null when DOM is available", () => {
+    const { container } = render(<ColorModeScript />, { withProvider: false })
+    const script = container.querySelector("script")
+    expect(script).toBeNull()
+  })
 })
 
 describe("ThemeSchemeScript", () => {
-  test("renders a script tag", () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
+  test("renders a script tag during SSR", () => {
+    mockSsr()
     const { container } = render(<ThemeSchemeScript />, { withProvider: false })
     const script = container.querySelector("script")
     expect(script).toBeTruthy()
   })
 
-  test("renders with nonce", () => {
+  test("renders with nonce during SSR", () => {
+    mockSsr()
     const { container } = render(<ThemeSchemeScript nonce="test-nonce" />, {
       withProvider: false,
     })
     const script = container.querySelector("script")
     expect(script?.getAttribute("nonce")).toBe("test-nonce")
+  })
+
+  test("returns null when DOM is available", () => {
+    const { container } = render(<ThemeSchemeScript />, { withProvider: false })
+    const script = container.querySelector("script")
+    expect(script).toBeNull()
   })
 })

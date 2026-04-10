@@ -2,13 +2,14 @@
   "$schema": "https://yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
     "components": [],
-    "externals": ["motion@^12.35.0"],
+    "externals": ["motion@^12.38.0"],
     "hooks": [],
     "providers": []
   },
   "dependents": {
     "components": [
       "accordion",
+      "action-bar",
       "airy",
       "collapse",
       "drawer",
@@ -22,10 +23,12 @@
       "ripple",
       "rotate",
       "segmented-control",
+      "sidebar",
       "slide",
       "slide-fade",
       "snacks",
-      "tooltip"
+      "tooltip",
+      "tree"
     ],
     "hooks": [],
     "providers": []
@@ -50,7 +53,7 @@
     },
     {
       "name": "transition.ts",
-      "content": "import type { Transition } from \"motion/react\"\nimport type { MotionTransitionProps } from \"./index.types\"\nimport { isNumber } from \"@yamada-ui/react\"\n\nexport const createTransition = {\n  enter: function (transition?: Transition) {\n    return function (\n      delay?: MotionTransitionProps[\"delay\"],\n      duration?: MotionTransitionProps[\"duration\"],\n    ): Transition {\n      return {\n        ...(transition ?? {\n          duration: 0.2,\n          ease: [0, 0, 0.58, 1],\n        }),\n        ...(duration\n          ? { duration: isNumber(duration) ? duration : duration.enter }\n          : {}),\n        delay: isNumber(delay) ? delay : delay?.enter,\n      }\n    }\n  },\n  exit: function (transition?: Transition) {\n    return function (\n      delay?: MotionTransitionProps[\"delay\"],\n      duration?: MotionTransitionProps[\"duration\"],\n    ): Transition {\n      return {\n        ...(transition ?? {\n          duration: 0.2,\n          ease: [0.42, 0, 1, 1],\n        }),\n        ...(duration\n          ? { duration: isNumber(duration) ? duration : duration.exit }\n          : {}),\n        delay: isNumber(delay) ? delay : delay?.exit,\n      }\n    }\n  },\n}\n"
+      "content": "import type { Transition } from \"motion/react\"\nimport type { MotionTransitionProps } from \"./index.types\"\nimport { isNumber, isUndefined } from \"@yamada-ui/react\"\n\nexport const createTransition = {\n  enter: function (transition?: Transition) {\n    return function (\n      delay?: MotionTransitionProps[\"delay\"],\n      duration?: MotionTransitionProps[\"duration\"],\n    ): Transition {\n      return {\n        ...(transition ?? {\n          duration: 0.2,\n          ease: [0, 0, 0.58, 1],\n        }),\n        ...(!isUndefined(duration)\n          ? { duration: isNumber(duration) ? duration : duration.enter }\n          : {}),\n        delay: isNumber(delay) ? delay : delay?.enter,\n      }\n    }\n  },\n  exit: function (transition?: Transition) {\n    return function (\n      delay?: MotionTransitionProps[\"delay\"],\n      duration?: MotionTransitionProps[\"duration\"],\n    ): Transition {\n      return {\n        ...(transition ?? {\n          duration: 0.2,\n          ease: [0.42, 0, 1, 1],\n        }),\n        ...(!isUndefined(duration)\n          ? { duration: isNumber(duration) ? duration : duration.exit }\n          : {}),\n        delay: isNumber(delay) ? delay : delay?.exit,\n      }\n    }\n  },\n}\n"
     }
   ]
 }

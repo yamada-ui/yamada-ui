@@ -1,5 +1,167 @@
 # @yamada-ui/react
 
+## 2.2.0
+
+### Minor Changes
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `ExtractStyleValue` type.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - New icons have been added. Brand icons have been removed. If you were using brand icons, you need to replace them with alternative icons.
+  - ChromiumIcon
+  - CodepenIcon
+  - CodesandboxIcon
+  - DribbbleIcon
+  - FacebookIcon
+  - FigmaIcon
+  - FramerIcon
+  - GithubIcon
+  - GitlabIcon
+  - InstagramIcon
+  - LinkedInIcon
+  - PocketIcon
+  - RailSymbolIcon
+  - SlackIcon
+  - TwitterIcon
+  - TwitchIcon
+  - TrelloIcon
+  - YouTubeIcon
+
+  We recommend to use the official SVG icons provided by the respective brands, most of them can be found on their websites or in their brand guidelines.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `"number"` variant to `Timeline` component.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Properties such as `placement` and `gutter` for components like `Popover` and `Select` now support responsive design and color mode.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Tree` component.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - `usePopper` now supports the `"center-start-start"`, `"center-start-end"`, `"center-end-start"`, and `"center-end-end"` placements. Accordingly, `Popover` and `Tooltip` now also support these placements.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `ActionBar` component.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed from `getPopupAnimationProps` to `usePopupAnimationProps` to enable responsive design and color mode support for the `animationScheme` and `duration` properties of `Popover`.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `_peer` to condition props.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `rootNode` to `UIProvider` component.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - The `animationScheme` and `duration` properties for components such as `Popover`, `Tooltip`, and `Modal` now support responsive design and color mode.
+
+### Patch Changes
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `DefineComponentStyleProps`, `DefineComponentStyleModifiers`, `DefineComponentStyleSlotProps` and `DefineComponentStyleSlotModifiers` types.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the border style and thickness were being overwritten for `solid`, `subtle`, and `surface` in `layerStyle`.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Sidebar` component.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `_collapsed` and `_content` to condition props.
+
+- [#6394](https://github.com/yamada-ui/yamada-ui/pull/6394) [`11b2933`](https://github.com/yamada-ui/yamada-ui/commit/11b2933f1a3f667d885de0f133c21352e0f57632) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Allowed `undefined` as an argument for `mergeProps`.
+
+- [#6407](https://github.com/yamada-ui/yamada-ui/pull/6407) [`18cdb67`](https://github.com/yamada-ui/yamada-ui/commit/18cdb675ce76b95ebea588abd27bc42ce823ce96) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - `InfiniteScrollArea` now sets the `overflow` style by default.
+
+- [#6405](https://github.com/yamada-ui/yamada-ui/pull/6405) [`0b551af`](https://github.com/yamada-ui/yamada-ui/commit/0b551af4f184cd2d4a0dfd842e4cf0a3c200ae29) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where React warnings appeared during rendering of `ColorModeScript` and `ThemeSchemeScript`.
+
+- [#6377](https://github.com/yamada-ui/yamada-ui/pull/6377) [`9de8d1d`](https://github.com/yamada-ui/yamada-ui/commit/9de8d1d18a3cffc0d82f12fe8149e1e5baf54823) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enabled setting arbitrary string values for each property in Style Props.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Adjusted the color of `colors.black.bg`.
+
+- [#6386](https://github.com/yamada-ui/yamada-ui/pull/6386) [`df19405`](https://github.com/yamada-ui/yamada-ui/commit/df19405c30bd5de7d2bf3cc8a9594915fd87ce9a) Thanks [@taroj1205](https://github.com/taroj1205)! - Fixed `Input` and `Select` so padding is applied correctly.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed the `register` function in `useDescendant` generated by `createDescendants` to update the store on element re-render.
+
+- [#6395](https://github.com/yamada-ui/yamada-ui/pull/6395) [`a766407`](https://github.com/yamada-ui/yamada-ui/commit/a7664077f1f8c40f8facfe7f8623515a630332f4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where setting `duration` to `0` in components like `Drawer` was not handled correctly.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed incorrect descriptions in the `_peer*` props.
+
+- [#6396](https://github.com/yamada-ui/yamada-ui/pull/6396) [`69746af`](https://github.com/yamada-ui/yamada-ui/commit/69746afd70d62d03d2f6e90dedde797c86a51223) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `_groupAnimated` and `_peerAnimated` to condition props.
+
+## 2.1.7
+
+### Patch Changes
+
+- [#6346](https://github.com/yamada-ui/yamada-ui/pull/6346) [`fc5f9a2`](https://github.com/yamada-ui/yamada-ui/commit/fc5f9a2ea5a2bf5bea2f28af8377dd95168181c7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- [#6346](https://github.com/yamada-ui/yamada-ui/pull/6346) [`fc5f9a2`](https://github.com/yamada-ui/yamada-ui/commit/fc5f9a2ea5a2bf5bea2f28af8377dd95168181c7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+## 2.1.6
+
+### Patch Changes
+
+- [#6326](https://github.com/yamada-ui/yamada-ui/pull/6326) [`acc491e`](https://github.com/yamada-ui/yamada-ui/commit/acc491e773cff8ddf5e6ee87c68655e9bbffc22c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `isInterpolation`.
+
+- [#6326](https://github.com/yamada-ui/yamada-ui/pull/6326) [`acc491e`](https://github.com/yamada-ui/yamada-ui/commit/acc491e773cff8ddf5e6ee87c68655e9bbffc22c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where fallback values for CSS variables in interpolation did not work correctly in `useInjectVarsIntoProps` and `useInjectVarsIntoCss`.
+
+## 2.1.5
+
+### Patch Changes
+
+- [#6261](https://github.com/yamada-ui/yamada-ui/pull/6261) [`aa494e0`](https://github.com/yamada-ui/yamada-ui/commit/aa494e09649baec0bffdca1f6da1bf1ee388c0d8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- [#6309](https://github.com/yamada-ui/yamada-ui/pull/6309) [`b4ca385`](https://github.com/yamada-ui/yamada-ui/commit/b4ca38563004851771ec3582a0c5b5ac28b6cdfb) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactored the styles of the `Button` component. There are no changes to the styles.
+
+- [#6297](https://github.com/yamada-ui/yamada-ui/pull/6297) [`d58fcf3`](https://github.com/yamada-ui/yamada-ui/commit/d58fcf3d98903924f2c7b463ac76b3ac6b9d3675) Thanks [@bmthd](https://github.com/bmthd)! - Fix `useAsyncCallback` so that `deps` controls memoization like `useCallback`.
+
+- [#6317](https://github.com/yamada-ui/yamada-ui/pull/6317) [`4ca9145`](https://github.com/yamada-ui/yamada-ui/commit/4ca91459625bc21e919d56c53a0809c5ae9966ac) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#6277](https://github.com/yamada-ui/yamada-ui/pull/6277) [`01125a4`](https://github.com/yamada-ui/yamada-ui/commit/01125a4d1c652e85b377d1efe58578bbeeec2adc) Thanks [@bmthd](https://github.com/bmthd)! - Fixed an issue where the opening animation in NativeAccordion did not run on the first open in SSR environments.
+
+## 2.1.4
+
+### Patch Changes
+
+- [#6194](https://github.com/yamada-ui/yamada-ui/pull/6194) [`20694a1`](https://github.com/yamada-ui/yamada-ui/commit/20694a10c7878bca2cc8b590dd09ac9d4a9c4050) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- [#6249](https://github.com/yamada-ui/yamada-ui/pull/6249) [`1b421b9`](https://github.com/yamada-ui/yamada-ui/commit/1b421b9bc4f4e978242e0a8f577791cb51c8aa5a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enabled specifying the indicator background color using `--indicator-bg` on `Radio.Root`.
+
+- [#6225](https://github.com/yamada-ui/yamada-ui/pull/6225) [`1aa1e86`](https://github.com/yamada-ui/yamada-ui/commit/1aa1e8643340d01e9c4bcb2290a66e0f41aa8b1e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Exported `Accordion.ItemType` type.
+
+- [#6257](https://github.com/yamada-ui/yamada-ui/pull/6257) [`109a631`](https://github.com/yamada-ui/yamada-ui/commit/109a6318d73d43816e81bb9dccf23af6b3584d01) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed the JSDoc link for `Modal.Root`.
+
+- [#6249](https://github.com/yamada-ui/yamada-ui/pull/6249) [`1b421b9`](https://github.com/yamada-ui/yamada-ui/commit/1b421b9bc4f4e978242e0a8f577791cb51c8aa5a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enabled specifying the indicator background color using `--indicator-bg` on `Checkbox.Root`.
+
+- [#6259](https://github.com/yamada-ui/yamada-ui/pull/6259) [`d8d2ab4`](https://github.com/yamada-ui/yamada-ui/commit/d8d2ab4d70247160053366b479bcf28a8aacabd6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- [#6249](https://github.com/yamada-ui/yamada-ui/pull/6249) [`1b421b9`](https://github.com/yamada-ui/yamada-ui/commit/1b421b9bc4f4e978242e0a8f577791cb51c8aa5a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `aria-controls`, `aria-labelledby`, and `tabIndex` could not be set on the `input` element of `Checkbox`.
+
+- [#6247](https://github.com/yamada-ui/yamada-ui/pull/6247) [`6e35538`](https://github.com/yamada-ui/yamada-ui/commit/6e355381a36f04b338cd77322aa50e80d45fa2ac) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Allowed specifying a node as an argument to `enabledValue` in the return value of `useDescendants` generated by `createDescendants`.
+
+- [#6247](https://github.com/yamada-ui/yamada-ui/pull/6247) [`6e35538`](https://github.com/yamada-ui/yamada-ui/commit/6e355381a36f04b338cd77322aa50e80d45fa2ac) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enabled AND-search on `props` in the arguments of `values`, `enabledValues`, `enabledPrevValue`, and `enabledNextValue` returned by `useDescendants` generated by `createDescendants`.
+
+- [#6248](https://github.com/yamada-ui/yamada-ui/pull/6248) [`238db22`](https://github.com/yamada-ui/yamada-ui/commit/238db227334c4082344c97d1d6086ae2e4d3bf78) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `_indicator`, `_hasGroup`, `_notHasGroup` and `_animated` to condition props.
+
+- [#6246](https://github.com/yamada-ui/yamada-ui/pull/6246) [`e596cc0`](https://github.com/yamada-ui/yamada-ui/commit/e596cc0cdca67059931600360e304c2a72ea3442) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Adjusted the dark mode color for `colors.bg.subtle`.
+
+- [#6249](https://github.com/yamada-ui/yamada-ui/pull/6249) [`1b421b9`](https://github.com/yamada-ui/yamada-ui/commit/1b421b9bc4f4e978242e0a8f577791cb51c8aa5a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `aria-controls`, `aria-labelledby`, and `tabIndex` could not be set on the `input` element of `Radio`.
+
+- Updated dependencies [[`eaddd11`](https://github.com/yamada-ui/yamada-ui/commit/eaddd1185085d2eaa11e8a12416b0e4e8acbef5c), [`d28fc6e`](https://github.com/yamada-ui/yamada-ui/commit/d28fc6e2105a859e133b0f6290f2ae73c461e875), [`8abe31f`](https://github.com/yamada-ui/yamada-ui/commit/8abe31fead60b0928d59e0adc4e30cb3b83e22b3)]:
+  - @yamada-ui/utils@2.1.2
+
+## 2.1.3
+
+### Patch Changes
+
+- [#6107](https://github.com/yamada-ui/yamada-ui/pull/6107) [`4810a66`](https://github.com/yamada-ui/yamada-ui/commit/4810a66dc37e070688d6b2cdacf11663d06edbd5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- [#6153](https://github.com/yamada-ui/yamada-ui/pull/6153) [`78ce712`](https://github.com/yamada-ui/yamada-ui/commit/78ce71226cec29ed528e813a62c707bd6152af9e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a circular dependency issue between `Form` and `Fieldset`.
+
+- [#6098](https://github.com/yamada-ui/yamada-ui/pull/6098) [`0726312`](https://github.com/yamada-ui/yamada-ui/commit/0726312c56452f71a2ff6232abb9a790de22cd45) Thanks [@taroj1205](https://github.com/taroj1205)! - Added a shared `wait` utility and updated internal consumers to use the same implementation.
+
+- [#6063](https://github.com/yamada-ui/yamada-ui/pull/6063) [`1b22cb1`](https://github.com/yamada-ui/yamada-ui/commit/1b22cb1c4f9da862d4a4a4c3931410a639d7b208) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted the source code of `Accordion`.
+
+- [#6057](https://github.com/yamada-ui/yamada-ui/pull/6057) [`66fef30`](https://github.com/yamada-ui/yamada-ui/commit/66fef30fec99241018af93e7a67537494f69722e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where `rootRef` was not correctly set in `InfiniteScrollArea`.
+
+- [#6111](https://github.com/yamada-ui/yamada-ui/pull/6111) [`f1308df`](https://github.com/yamada-ui/yamada-ui/commit/f1308df90c8557ca6aebe575d0716e2dfaa7095f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#6057](https://github.com/yamada-ui/yamada-ui/pull/6057) [`66fef30`](https://github.com/yamada-ui/yamada-ui/commit/66fef30fec99241018af93e7a67537494f69722e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added support for using the browser viewport as the scroll container in `InfiniteScrollArea`. To enable this, set `rootRef` to `null`.
+
+- [#6095](https://github.com/yamada-ui/yamada-ui/pull/6095) [`be2245e`](https://github.com/yamada-ui/yamada-ui/commit/be2245e27eba53149f2a945a17f58d378d9b6662) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#6064](https://github.com/yamada-ui/yamada-ui/pull/6064) [`c8b1360`](https://github.com/yamada-ui/yamada-ui/commit/c8b13602c8f9851921d2ff85c13e5311919c3889) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where an unnecessary `role="group"` was assigned to `NativeAccordion.Item`.
+
+- Updated dependencies [[`4810a66`](https://github.com/yamada-ui/yamada-ui/commit/4810a66dc37e070688d6b2cdacf11663d06edbd5), [`0726312`](https://github.com/yamada-ui/yamada-ui/commit/0726312c56452f71a2ff6232abb9a790de22cd45), [`f1308df`](https://github.com/yamada-ui/yamada-ui/commit/f1308df90c8557ca6aebe575d0716e2dfaa7095f), [`8d54c60`](https://github.com/yamada-ui/yamada-ui/commit/8d54c60d3139db0149ed07f37d3d4cb951c7a2e7)]:
+  - @yamada-ui/utils@2.1.1
+
 ## 2.1.2
 
 ### Patch Changes

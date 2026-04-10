@@ -15,7 +15,7 @@ export const colors = defineSemanticTokens.colors({
     muted: ["black.100", "white.200"],
     overlay: "blackAlpha.600",
     panel: ["black.bg", "white.bg"],
-    subtle: ["black.50", "white.100"],
+    subtle: ["black.50", "white.200/50"],
     success: ["success.50", "success.950"],
     warning: ["warning.50", "warning.950"],
   },
@@ -44,7 +44,7 @@ export const colors = defineSemanticTokens.colors({
 
   black: {
     base: "#0a0b0b",
-    bg: "#f8f8f8",
+    bg: "#fbfbfb",
     contrast: "white",
     emphasized: "black.200",
     fg: "black.800",

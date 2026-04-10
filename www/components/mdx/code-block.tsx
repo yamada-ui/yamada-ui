@@ -1,10 +1,11 @@
 import type { BoxProps, GridProps } from "@yamada-ui/react"
-import { Box, Code, Flex, Grid, Tabs, Text } from "@yamada-ui/react"
+import { Box, Code, Flex, Grid, Spacer, Tabs, Text } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import React from "react"
+import { CodePreview } from "@/components/code-preview"
+import { StackBlitzButton } from "@/components/stack-blitz-button"
 import { codeToHtml } from "@/libs/shiki"
 import { langConditions } from "@/utils/i18n"
-import { CodePreview } from "../code-preview"
 import { Callout } from "./callout"
 import { ClientOnly } from "./client-only"
 import { Iframe } from "./iframe"
@@ -44,18 +45,30 @@ export function CodeBlock({
           <Tabs.List gap="sm">
             <Tabs.Tab index={0}>{t("preview")}</Tabs.Tab>
             <Tabs.Tab index={1}>{t("code")}</Tabs.Tab>
+
+            <Spacer />
+
+            {lang === "tsx" ? (
+              <StackBlitzButton
+                size={{ base: "sm", md: "xs" }}
+                variant="ghost"
+                client={client}
+                code={children}
+                color={{ base: "fg.muted", _hover: "colorScheme.fg" }}
+                disableRipple
+                functional={functional}
+              />
+            ) : null}
           </Tabs.List>
 
           <Tabs.Panel index={0} rounded="l2">
             {iframe ? (
-              <Iframe borderWidth="1px" h="lg" rounded="l2">
-                <Box boxSize="full" overflowX="hidden" overflowY="auto" p="lg">
-                  <ClientOnly
-                    lang={lang}
-                    code={children}
-                    functional={functional}
-                  />
-                </Box>
+              <Iframe borderWidth="1px" h="lg" overflow="hidden" rounded="l2">
+                <ClientOnly
+                  lang={lang}
+                  code={children}
+                  functional={functional}
+                />
               </Iframe>
             ) : (
               <Box borderWidth="1px" overflow="hidden" p="{space}" rounded="l2">

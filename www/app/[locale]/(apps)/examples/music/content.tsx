@@ -1,7 +1,8 @@
 "use client"
 
-import type { ImageProps, StackProps } from "@yamada-ui/react"
+import type { StackProps } from "@yamada-ui/react"
 import type { Dispatch, ReactNode, SetStateAction } from "react"
+import type { NextImageProps } from "@/components"
 import {
   Box,
   Button,
@@ -21,8 +22,9 @@ import {
 } from "@yamada-ui/react"
 import { useState } from "react"
 import { NextImage } from "@/components"
+import { CONSTANTS } from "@/constants"
 
-interface CarouselItem extends Omit<ImageProps, "alt" | "size"> {
+interface CarouselItem extends Omit<NextImageProps, "alt"> {
   description: string
   title: string
 }
@@ -264,7 +266,7 @@ function ContentPodcasts({ ...rest }: ContentPodcastsProps) {
                 Copy and paste the podcast feed URL to import.
               </Text>
 
-              <Input placeholder="https://yamada-ui.com/feed.xml" />
+              <Input placeholder={`${CONSTANTS.SNS.HOMEPAGE}/feed.xml`} />
             </>
           }
           cancel="Cancel"
@@ -337,11 +339,9 @@ function ContentCarouselItem({
       >
         <NextImage
           alt={title}
-          // @ts-ignore
           fill
-          // @ts-ignore
           objectFit="cover"
-          priority
+          preload
           sizes="100%"
           transitionDuration="moderate"
           transitionProperty="transform"

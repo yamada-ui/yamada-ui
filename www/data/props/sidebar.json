@@ -1,0 +1,1736 @@
+{
+  "Sidebar": {
+    "Content": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "items": {
+        "type": "SidebarItem[]",
+        "description": "If provided, generate elements based on items.",
+        "required": false
+      }
+    },
+    "Footer": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Group": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "contentProps": {
+        "type": "Omit<SidebarGroupContentProps, \"children\">",
+        "description": "Props for the content component.",
+        "required": false
+      },
+      "items": {
+        "type": "SidebarItemWithValue[]",
+        "description": "If provided, generate elements based on items.",
+        "required": false
+      },
+      "label": {
+        "type": "ReactNode",
+        "description": "The label of the group.",
+        "required": false
+      },
+      "labelProps": {
+        "type": "HTMLStyledProps<\"span\">",
+        "description": "Props for the label component.",
+        "required": false
+      }
+    },
+    "GroupContent": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "GroupLabel": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Handle": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Header": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Item": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "value": {
+        "type": "string",
+        "description": "The value of the item.",
+        "required": true
+      },
+      "animated": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the sidebar item will be animated.",
+        "required": false
+      },
+      "asyncChildren": {
+        "type": "() => Promise<SidebarItemWithValue[]>",
+        "description": "If provided, the sidebar item will be rendered as an async sidebar item.",
+        "required": false
+      },
+      "contentProps": {
+        "type": "Omit<SidebarItemContentProps, \"children\">",
+        "description": "Props for the content component.",
+        "required": false
+      },
+      "defaultOpen": {
+        "type": "boolean",
+        "description": "If `true`, the element will be initially opened.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the tree item will be disabled.",
+        "required": false
+      },
+      "endElement": {
+        "type": "SidebarItemReactNode",
+        "description": "The element to display at the end of the item.",
+        "required": false
+      },
+      "endElementProps": {
+        "type": "SidebarItemEndElementProps",
+        "description": "Props for the end component.",
+        "required": false
+      },
+      "external": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the link will open in new tab.",
+        "required": false
+      },
+      "indicator": {
+        "type": "ReactNodeOrFunction<SidebarItemCallBackProps>",
+        "description": "The sidebar item indicator icon to use.",
+        "required": false
+      },
+      "indicatorProps": {
+        "type": "SidebarItemIndicatorProps",
+        "description": "Props for the indicator component.",
+        "required": false
+      },
+      "items": {
+        "type": "SidebarItemWithValue[]",
+        "description": "If provided, generate elements based on items.",
+        "required": false
+      },
+      "label": {
+        "type": "ReactNode",
+        "description": "The label to display in the item.",
+        "required": false
+      },
+      "labelProps": {
+        "type": "SidebarItemLabelProps",
+        "description": "Props for the label component.",
+        "required": false
+      },
+      "linkProps": {
+        "type": "SidebarItemLinkProps",
+        "description": "Props for the link component.",
+        "required": false
+      },
+      "loadingScheme": {
+        "type": "Loading.Scheme",
+        "defaultValue": "\"oval\"",
+        "description": "The loading scheme.",
+        "required": false
+      },
+      "onClose": {
+        "type": "() => void | Promise<void>",
+        "description": "Callback invoked to close the element.",
+        "required": false
+      },
+      "onOpen": {
+        "type": "() => void | Promise<void>",
+        "description": "Callback invoked to open the element.",
+        "required": false
+      },
+      "open": {
+        "type": "boolean",
+        "description": "If `true`, the element will be opened.",
+        "required": false
+      },
+      "render": {
+        "type": "SidebarItemRender",
+        "description": "If provided, the sidebar item will be rendered with custom components.",
+        "required": false
+      },
+      "startElement": {
+        "type": "SidebarItemReactNode",
+        "description": "The element to display at the start of the item.",
+        "required": false
+      },
+      "startElementProps": {
+        "type": "SidebarItemStartElementProps",
+        "description": "Props for the start component.",
+        "required": false
+      },
+      "tooltipProps": {
+        "type": "Omit<SidebarItemTooltipProps, \"children\" | \"content\">",
+        "description": "Props for the tooltip component.",
+        "required": false
+      },
+      "triggerProps": {
+        "type": "SidebarItemTriggerProps",
+        "description": "Props for the trigger component.",
+        "required": false
+      }
+    },
+    "ItemContent": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "enter": {
+        "type": "any",
+        "description": "Custom `enter`.",
+        "required": true
+      },
+      "exit": {
+        "type": "any",
+        "description": "Custom `exit`.\n\nA target to animate to when this component is removed from the tree.\n\nThis component **must** be the first animatable child of an `AnimatePresence` to enable this exit animation.\n\nThis limitation exists because React doesn't allow components to defer unmounting until after\nan animation is complete. Once this limitation is fixed, the `AnimatePresence` component will be unnecessary.\n\n```jsx\nimport { AnimatePresence, motion } from \"framer-motion\"\n\nexport const MyComponent = ({ isVisible }) => {\n  return (\n    <AnimatePresence>\n      {isVisible && (\n        <motion.div\n          initial={{ opacity: 0 }}\n          animate={{ opacity: 1 }}\n          exit={{ opacity: 0 }}\n        />\n      )}\n    </AnimatePresence>\n  )\n}\n```",
+        "required": true
+      },
+      "initial": {
+        "type": "any",
+        "description": "Custom `initial`.\n\nProperties, variant label or array of variant labels to start in.\n\nSet to `false` to initialise with the values in `animate` (disabling the mount animation)\n\n```jsx\n// As values\n<motion.div initial={{ opacity: 1 }} />\n\n// As variant\n<motion.div initial=\"visible\" variants={variants} />\n\n// Multiple variants\n<motion.div initial={[\"visible\", \"active\"]} variants={variants} />\n\n// As false (disable mount animation)\n<motion.div initial={false} animate={{ opacity: 0 }} />\n```",
+        "required": true
+      },
+      "animationOpacity": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the opacity of the content will be animated.",
+        "required": false
+      },
+      "delay": {
+        "type": "number | MotionLifecycleProps<number>",
+        "defaultValue": "0",
+        "description": "Custom `delay` definition for `enter` and `exit`.",
+        "required": false
+      },
+      "duration": {
+        "type": "number | MotionLifecycleProps<number>",
+        "defaultValue": "0.2",
+        "description": "Custom `duration` definition for `enter` and `exit`.",
+        "required": false
+      },
+      "open": {
+        "type": "boolean",
+        "description": "Show the component. triggers when enter or exit states.",
+        "required": false
+      },
+      "transition": {
+        "type": "MotionLifecycleProps<Transition>",
+        "description": "Custom `transition` definition for `enter` and `exit`.",
+        "required": false
+      },
+      "transitionEnd": {
+        "type": "MotionLifecycleProps<ResolvedValues$1>",
+        "description": "Custom `transitionEnd` definition for `enter` and `exit`.",
+        "required": false
+      },
+      "unmountOnExit": {
+        "type": "boolean",
+        "description": "If `true`, the element will unmount when `open={false}` and animation is done.",
+        "required": false
+      }
+    },
+    "ItemEndElement": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "ItemIndicator": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "ItemLabel": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "ItemLink": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "ItemStartElement": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "ItemTrigger": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "MainPanel": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Menu": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "MenuButton": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\"",
+        "defaultValue": "\"subtle\"",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "breakpoint": {
+        "type": "Exclude<Breakpoint, \"base\"> | false",
+        "defaultValue": "\"md\"",
+        "description": "The breakpoint to use for the sidebar. If `false`, the sidebar will be always visible.",
+        "required": false
+      },
+      "controlRef": {
+        "type": "RefObject<SidebarControl | null>",
+        "description": "Ref of the sidebar callbacks.",
+        "required": false
+      },
+      "defaultExpandedValue": {
+        "type": "string[]",
+        "description": "The initial expanded value of the sidebar.",
+        "required": false
+      },
+      "defaultSelectedValue": {
+        "type": "string",
+        "description": "The initial selected value of the sidebar.",
+        "required": false
+      },
+      "disclosure": {
+        "type": "{ desktop?: Omit<UseDisclosureProps<never, never, void | Promise<void>, void | Promise<void>>, \"timing\"> | undefined; mobile?: Omit<...> | undefined; }",
+        "description": "The disclosure props for the desktop and mobile.",
+        "required": false
+      },
+      "expandedValue": {
+        "type": "string[]",
+        "description": "The expanded value of the sidebar.",
+        "required": false
+      },
+      "onExpandedChange": {
+        "type": "(value: string[]) => void",
+        "description": "The callback invoked when expanded value changes.",
+        "required": false
+      },
+      "onSelectedChange": {
+        "type": "(value: string) => void",
+        "description": "The callback invoked when selected value changes.",
+        "required": false
+      },
+      "selectedValue": {
+        "type": "string",
+        "description": "The selected value of the sidebar.",
+        "required": false
+      }
+    },
+    "SidePanel": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "animated": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the sidebar item will be animated.",
+        "required": false
+      },
+      "content": {
+        "type": "ReactNode",
+        "description": "The content of the sidebar.",
+        "required": false
+      },
+      "contentProps": {
+        "type": "SidebarContentProps",
+        "description": "Props for the content component.",
+        "required": false
+      },
+      "drawerProps": {
+        "type": "Omit<Drawer.RootProps, \"body\" | \"cancel\" | \"children\" | \"footer\" | \"header\" | \"middle\" | \"onCancel\" | \"onClose\" | \"onMiddle\" | \"onOpen\" | \"onSuccess\" | \"open\" | \"success\" | \"title\" | \"trigger\">",
+        "description": "Props for the drawer component.",
+        "required": false
+      },
+      "endElement": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ... 4 more ... | { ...; }",
+        "description": "The element to display at the end of the item.",
+        "required": false
+      },
+      "endElementProps": {
+        "type": "SidebarItemEndElementProps",
+        "description": "Props for the end component.",
+        "required": false
+      },
+      "footer": {
+        "type": "ReactNode",
+        "description": "The footer of the sidebar.",
+        "required": false
+      },
+      "footerProps": {
+        "type": "SidebarFooterProps",
+        "description": "Props for the footer component.",
+        "required": false
+      },
+      "groupContentProps": {
+        "type": "Omit<SidebarGroupContentProps, \"children\">",
+        "description": "Props for the group content component.",
+        "required": false
+      },
+      "groupProps": {
+        "type": "Omit<SidebarGroupProps, \"children\" | \"label\" | \"value\">",
+        "description": "Props for the group component.",
+        "required": false
+      },
+      "handleProps": {
+        "type": "SidebarHandleProps",
+        "description": "Props for the handle component.",
+        "required": false
+      },
+      "header": {
+        "type": "ReactNode",
+        "description": "The header of the sidebar.",
+        "required": false
+      },
+      "headerProps": {
+        "type": "SidebarHeaderProps",
+        "description": "Props for the header component.",
+        "required": false
+      },
+      "indicator": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: SidebarItemCallBackProps) => ReactNode)",
+        "description": "The sidebar item indicator icon to use.",
+        "required": false
+      },
+      "indicatorHidden": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, hide the tree indicator icon for all items.",
+        "required": false
+      },
+      "indicatorProps": {
+        "type": "SidebarItemIndicatorProps",
+        "description": "Props for the indicator component.",
+        "required": false
+      },
+      "itemContentProps": {
+        "type": "SidebarItemContentProps",
+        "description": "Props for the item content component.",
+        "required": false
+      },
+      "itemProps": {
+        "type": "Omit<SidebarItemProps, \"children\" | \"items\" | \"label\" | \"open\" | \"value\">",
+        "description": "Props for the item component.",
+        "required": false
+      },
+      "items": {
+        "type": "SidebarItem[]",
+        "description": "If provided, generate elements based on items.",
+        "required": false
+      },
+      "labelProps": {
+        "type": "SidebarItemLabelProps",
+        "description": "Props for the label component.",
+        "required": false
+      },
+      "linkProps": {
+        "type": "SidebarItemLinkProps",
+        "description": "Props for the link component.",
+        "required": false
+      },
+      "loadingScheme": {
+        "type": "LoadingScheme",
+        "defaultValue": "\"oval\"",
+        "description": "The loading scheme.",
+        "required": false
+      },
+      "menuProps": {
+        "type": "SidebarMenuProps",
+        "defaultValue": "\"md\"",
+        "description": "Props for the menu component.",
+        "required": false
+      },
+      "render": {
+        "type": "SidebarItemRender",
+        "description": "If provided, the sidebar item will be rendered with custom components.",
+        "required": false
+      },
+      "startElement": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ... 4 more ... | { ...; }",
+        "description": "The element to display at the start of the item.",
+        "required": false
+      },
+      "startElementProps": {
+        "type": "SidebarItemStartElementProps",
+        "description": "Props for the start component.",
+        "required": false
+      },
+      "tooltipProps": {
+        "type": "Omit<SidebarItemTooltipProps, \"content\" | \"children\">",
+        "description": "Props for the tooltip component.",
+        "required": false
+      },
+      "triggerProps": {
+        "type": "SidebarItemTriggerProps",
+        "description": "Props for the trigger component.",
+        "required": false
+      },
+      "withHandle": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the sidebar will be rendered with a handle.",
+        "required": false
+      }
+    },
+    "Trigger": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    }
+  },
+  "SidebarContent": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "items": {
+      "type": "SidebarItem[]",
+      "description": "If provided, generate elements based on items.",
+      "required": false
+    }
+  },
+  "SidebarFooter": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "SidebarGroup": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "contentProps": {
+      "type": "Omit<SidebarGroupContentProps, \"children\">",
+      "description": "Props for the content component.",
+      "required": false
+    },
+    "items": {
+      "type": "SidebarItemWithValue[]",
+      "description": "If provided, generate elements based on items.",
+      "required": false
+    },
+    "label": {
+      "type": "ReactNode",
+      "description": "The label of the group.",
+      "required": false
+    },
+    "labelProps": {
+      "type": "HTMLStyledProps<\"span\">",
+      "description": "Props for the label component.",
+      "required": false
+    }
+  },
+  "SidebarGroupContent": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "SidebarGroupLabel": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "SidebarHandle": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "SidebarHeader": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "SidebarItem": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "value": {
+      "type": "string",
+      "description": "The value of the item.",
+      "required": true
+    },
+    "animated": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the sidebar item will be animated.",
+      "required": false
+    },
+    "asyncChildren": {
+      "type": "() => Promise<SidebarItemWithValue[]>",
+      "description": "If provided, the sidebar item will be rendered as an async sidebar item.",
+      "required": false
+    },
+    "contentProps": {
+      "type": "Omit<SidebarItemContentProps, \"children\">",
+      "description": "Props for the content component.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
+      "description": "If `true`, the element will be initially opened.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the tree item will be disabled.",
+      "required": false
+    },
+    "endElement": {
+      "type": "SidebarItemReactNode",
+      "description": "The element to display at the end of the item.",
+      "required": false
+    },
+    "endElementProps": {
+      "type": "SidebarItemEndElementProps",
+      "description": "Props for the end component.",
+      "required": false
+    },
+    "external": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the link will open in new tab.",
+      "required": false
+    },
+    "indicator": {
+      "type": "ReactNodeOrFunction<SidebarItemCallBackProps>",
+      "description": "The sidebar item indicator icon to use.",
+      "required": false
+    },
+    "indicatorProps": {
+      "type": "SidebarItemIndicatorProps",
+      "description": "Props for the indicator component.",
+      "required": false
+    },
+    "items": {
+      "type": "SidebarItemWithValue[]",
+      "description": "If provided, generate elements based on items.",
+      "required": false
+    },
+    "label": {
+      "type": "ReactNode",
+      "description": "The label to display in the item.",
+      "required": false
+    },
+    "labelProps": {
+      "type": "SidebarItemLabelProps",
+      "description": "Props for the label component.",
+      "required": false
+    },
+    "linkProps": {
+      "type": "SidebarItemLinkProps",
+      "description": "Props for the link component.",
+      "required": false
+    },
+    "loadingScheme": {
+      "type": "Loading.Scheme",
+      "defaultValue": "\"oval\"",
+      "description": "The loading scheme.",
+      "required": false
+    },
+    "onClose": {
+      "type": "() => void | Promise<void>",
+      "description": "Callback invoked to close the element.",
+      "required": false
+    },
+    "onOpen": {
+      "type": "() => void | Promise<void>",
+      "description": "Callback invoked to open the element.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the element will be opened.",
+      "required": false
+    },
+    "render": {
+      "type": "SidebarItemRender",
+      "description": "If provided, the sidebar item will be rendered with custom components.",
+      "required": false
+    },
+    "startElement": {
+      "type": "SidebarItemReactNode",
+      "description": "The element to display at the start of the item.",
+      "required": false
+    },
+    "startElementProps": {
+      "type": "SidebarItemStartElementProps",
+      "description": "Props for the start component.",
+      "required": false
+    },
+    "tooltipProps": {
+      "type": "Omit<SidebarItemTooltipProps, \"children\" | \"content\">",
+      "description": "Props for the tooltip component.",
+      "required": false
+    },
+    "triggerProps": {
+      "type": "SidebarItemTriggerProps",
+      "description": "Props for the trigger component.",
+      "required": false
+    }
+  },
+  "SidebarItemContent": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "enter": {
+      "type": "any",
+      "description": "Custom `enter`.",
+      "required": true
+    },
+    "exit": {
+      "type": "any",
+      "description": "Custom `exit`.\n\nA target to animate to when this component is removed from the tree.\n\nThis component **must** be the first animatable child of an `AnimatePresence` to enable this exit animation.\n\nThis limitation exists because React doesn't allow components to defer unmounting until after\nan animation is complete. Once this limitation is fixed, the `AnimatePresence` component will be unnecessary.\n\n```jsx\nimport { AnimatePresence, motion } from \"framer-motion\"\n\nexport const MyComponent = ({ isVisible }) => {\n  return (\n    <AnimatePresence>\n      {isVisible && (\n        <motion.div\n          initial={{ opacity: 0 }}\n          animate={{ opacity: 1 }}\n          exit={{ opacity: 0 }}\n        />\n      )}\n    </AnimatePresence>\n  )\n}\n```",
+      "required": true
+    },
+    "initial": {
+      "type": "any",
+      "description": "Custom `initial`.\n\nProperties, variant label or array of variant labels to start in.\n\nSet to `false` to initialise with the values in `animate` (disabling the mount animation)\n\n```jsx\n// As values\n<motion.div initial={{ opacity: 1 }} />\n\n// As variant\n<motion.div initial=\"visible\" variants={variants} />\n\n// Multiple variants\n<motion.div initial={[\"visible\", \"active\"]} variants={variants} />\n\n// As false (disable mount animation)\n<motion.div initial={false} animate={{ opacity: 0 }} />\n```",
+      "required": true
+    },
+    "animationOpacity": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the opacity of the content will be animated.",
+      "required": false
+    },
+    "delay": {
+      "type": "number | MotionLifecycleProps<number>",
+      "defaultValue": "0",
+      "description": "Custom `delay` definition for `enter` and `exit`.",
+      "required": false
+    },
+    "duration": {
+      "type": "number | MotionLifecycleProps<number>",
+      "defaultValue": "0.2",
+      "description": "Custom `duration` definition for `enter` and `exit`.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "Show the component. triggers when enter or exit states.",
+      "required": false
+    },
+    "transition": {
+      "type": "MotionLifecycleProps<Transition>",
+      "description": "Custom `transition` definition for `enter` and `exit`.",
+      "required": false
+    },
+    "transitionEnd": {
+      "type": "MotionLifecycleProps<ResolvedValues$1>",
+      "description": "Custom `transitionEnd` definition for `enter` and `exit`.",
+      "required": false
+    },
+    "unmountOnExit": {
+      "type": "boolean",
+      "description": "If `true`, the element will unmount when `open={false}` and animation is done.",
+      "required": false
+    }
+  },
+  "SidebarItemEndElement": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "SidebarItemIndicator": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "SidebarItemLabel": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "SidebarItemLink": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "SidebarItemStartElement": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "SidebarItemTrigger": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "SidebarMainPanel": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "SidebarMenu": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "SidebarMenuButton": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "SidebarRoot": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\"",
+      "defaultValue": "\"subtle\"",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "breakpoint": {
+      "type": "Exclude<Breakpoint, \"base\"> | false",
+      "defaultValue": "\"md\"",
+      "description": "The breakpoint to use for the sidebar. If `false`, the sidebar will be always visible.",
+      "required": false
+    },
+    "controlRef": {
+      "type": "RefObject<SidebarControl | null>",
+      "description": "Ref of the sidebar callbacks.",
+      "required": false
+    },
+    "defaultExpandedValue": {
+      "type": "string[]",
+      "description": "The initial expanded value of the sidebar.",
+      "required": false
+    },
+    "defaultSelectedValue": {
+      "type": "string",
+      "description": "The initial selected value of the sidebar.",
+      "required": false
+    },
+    "disclosure": {
+      "type": "{ desktop?: Omit<UseDisclosureProps<never, never, void | Promise<void>, void | Promise<void>>, \"timing\"> | undefined; mobile?: Omit<...> | undefined; }",
+      "description": "The disclosure props for the desktop and mobile.",
+      "required": false
+    },
+    "expandedValue": {
+      "type": "string[]",
+      "description": "The expanded value of the sidebar.",
+      "required": false
+    },
+    "onExpandedChange": {
+      "type": "(value: string[]) => void",
+      "description": "The callback invoked when expanded value changes.",
+      "required": false
+    },
+    "onSelectedChange": {
+      "type": "(value: string) => void",
+      "description": "The callback invoked when selected value changes.",
+      "required": false
+    },
+    "selectedValue": {
+      "type": "string",
+      "description": "The selected value of the sidebar.",
+      "required": false
+    }
+  },
+  "SidebarSidePanel": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "animated": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the sidebar item will be animated.",
+      "required": false
+    },
+    "content": {
+      "type": "ReactNode",
+      "description": "The content of the sidebar.",
+      "required": false
+    },
+    "contentProps": {
+      "type": "SidebarContentProps",
+      "description": "Props for the content component.",
+      "required": false
+    },
+    "drawerProps": {
+      "type": "Omit<Drawer.RootProps, \"body\" | \"cancel\" | \"children\" | \"footer\" | \"header\" | \"middle\" | \"onCancel\" | \"onClose\" | \"onMiddle\" | \"onOpen\" | \"onSuccess\" | \"open\" | \"success\" | \"title\" | \"trigger\">",
+      "description": "Props for the drawer component.",
+      "required": false
+    },
+    "endElement": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ... 4 more ... | { ...; }",
+      "description": "The element to display at the end of the item.",
+      "required": false
+    },
+    "endElementProps": {
+      "type": "SidebarItemEndElementProps",
+      "description": "Props for the end component.",
+      "required": false
+    },
+    "footer": {
+      "type": "ReactNode",
+      "description": "The footer of the sidebar.",
+      "required": false
+    },
+    "footerProps": {
+      "type": "SidebarFooterProps",
+      "description": "Props for the footer component.",
+      "required": false
+    },
+    "groupContentProps": {
+      "type": "Omit<SidebarGroupContentProps, \"children\">",
+      "description": "Props for the group content component.",
+      "required": false
+    },
+    "groupProps": {
+      "type": "Omit<SidebarGroupProps, \"children\" | \"label\" | \"value\">",
+      "description": "Props for the group component.",
+      "required": false
+    },
+    "handleProps": {
+      "type": "SidebarHandleProps",
+      "description": "Props for the handle component.",
+      "required": false
+    },
+    "header": {
+      "type": "ReactNode",
+      "description": "The header of the sidebar.",
+      "required": false
+    },
+    "headerProps": {
+      "type": "SidebarHeaderProps",
+      "description": "Props for the header component.",
+      "required": false
+    },
+    "indicator": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: SidebarItemCallBackProps) => ReactNode)",
+      "description": "The sidebar item indicator icon to use.",
+      "required": false
+    },
+    "indicatorHidden": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, hide the tree indicator icon for all items.",
+      "required": false
+    },
+    "indicatorProps": {
+      "type": "SidebarItemIndicatorProps",
+      "description": "Props for the indicator component.",
+      "required": false
+    },
+    "itemContentProps": {
+      "type": "SidebarItemContentProps",
+      "description": "Props for the item content component.",
+      "required": false
+    },
+    "itemProps": {
+      "type": "Omit<SidebarItemProps, \"children\" | \"items\" | \"label\" | \"open\" | \"value\">",
+      "description": "Props for the item component.",
+      "required": false
+    },
+    "items": {
+      "type": "SidebarItem[]",
+      "description": "If provided, generate elements based on items.",
+      "required": false
+    },
+    "labelProps": {
+      "type": "SidebarItemLabelProps",
+      "description": "Props for the label component.",
+      "required": false
+    },
+    "linkProps": {
+      "type": "SidebarItemLinkProps",
+      "description": "Props for the link component.",
+      "required": false
+    },
+    "loadingScheme": {
+      "type": "LoadingScheme",
+      "defaultValue": "\"oval\"",
+      "description": "The loading scheme.",
+      "required": false
+    },
+    "menuProps": {
+      "type": "SidebarMenuProps",
+      "defaultValue": "\"md\"",
+      "description": "Props for the menu component.",
+      "required": false
+    },
+    "render": {
+      "type": "SidebarItemRender",
+      "description": "If provided, the sidebar item will be rendered with custom components.",
+      "required": false
+    },
+    "startElement": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ... 4 more ... | { ...; }",
+      "description": "The element to display at the start of the item.",
+      "required": false
+    },
+    "startElementProps": {
+      "type": "SidebarItemStartElementProps",
+      "description": "Props for the start component.",
+      "required": false
+    },
+    "tooltipProps": {
+      "type": "Omit<SidebarItemTooltipProps, \"content\" | \"children\">",
+      "description": "Props for the tooltip component.",
+      "required": false
+    },
+    "triggerProps": {
+      "type": "SidebarItemTriggerProps",
+      "description": "Props for the trigger component.",
+      "required": false
+    },
+    "withHandle": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the sidebar will be rendered with a handle.",
+      "required": false
+    }
+  },
+  "SidebarTrigger": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  }
+}

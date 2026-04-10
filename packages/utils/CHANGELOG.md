@@ -1,5 +1,27 @@
 # @yamada-ui/utils
 
+## 2.1.2
+
+### Patch Changes
+
+- [#6201](https://github.com/yamada-ui/yamada-ui/pull/6201) [`eaddd11`](https://github.com/yamada-ui/yamada-ui/commit/eaddd1185085d2eaa11e8a12416b0e4e8acbef5c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated `isObject` to use loose equality for nullish check.
+
+- [#6239](https://github.com/yamada-ui/yamada-ui/pull/6239) [`d28fc6e`](https://github.com/yamada-ui/yamada-ui/commit/d28fc6e2105a859e133b0f6290f2ae73c461e875) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `match` function.
+
+- [#6244](https://github.com/yamada-ui/yamada-ui/pull/6244) [`8abe31f`](https://github.com/yamada-ui/yamada-ui/commit/8abe31fead60b0928d59e0adc4e30cb3b83e22b3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Made the `value` parameter of `setAttribute` optional.
+
+## 2.1.1
+
+### Patch Changes
+
+- [#6107](https://github.com/yamada-ui/yamada-ui/pull/6107) [`4810a66`](https://github.com/yamada-ui/yamada-ui/commit/4810a66dc37e070688d6b2cdacf11663d06edbd5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
+- [#6098](https://github.com/yamada-ui/yamada-ui/pull/6098) [`0726312`](https://github.com/yamada-ui/yamada-ui/commit/0726312c56452f71a2ff6232abb9a790de22cd45) Thanks [@taroj1205](https://github.com/taroj1205)! - Added a shared `wait` utility and updated internal consumers to use the same implementation.
+
+- [#6111](https://github.com/yamada-ui/yamada-ui/pull/6111) [`f1308df`](https://github.com/yamada-ui/yamada-ui/commit/f1308df90c8557ca6aebe575d0716e2dfaa7095f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#6086](https://github.com/yamada-ui/yamada-ui/pull/6086) [`8d54c60`](https://github.com/yamada-ui/yamada-ui/commit/8d54c60d3139db0149ed07f37d3d4cb951c7a2e7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Modified the `cx` function to return `undefined` when the return value would otherwise be an empty string. This is necessary to remove unnecessary attributes from elements.
+
 ## 2.1.0
 
 ### Minor Changes

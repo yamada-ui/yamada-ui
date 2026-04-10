@@ -5,12 +5,13 @@ import {
   Code,
   List,
   NativeTable,
+  Sidebar,
   Text,
 } from "@yamada-ui/react"
 import { Suspense, useMemo } from "react"
 import * as runtime from "react/jsx-runtime"
+import { NextLink } from "@/components/next-link"
 import { langConditions } from "@/utils/i18n"
-import { NextLink } from "../next-link"
 import { AtRulePropsTable } from "./at-rule-props-table"
 import { Callout } from "./callout"
 import { Card, CardGroup } from "./card"
@@ -147,13 +148,15 @@ export function MDXContent({ code, components }: MDXContentProps) {
   const Content = useMemo(() => getContent(code), [code])
 
   return Content ? (
-    <Box
-      lineHeight="1.8"
-      position="relative"
-      zIndex="0"
-      _lastChild={{ mb: "0" }}
-    >
-      <Content components={{ ...mdxComponents, ...components }} />
-    </Box>
+    <Sidebar.PropsContext value={{ breakpoint: false }}>
+      <Box
+        lineHeight="1.8"
+        position="relative"
+        zIndex="0"
+        _lastChild={{ mb: "0" }}
+      >
+        <Content components={{ ...mdxComponents, ...components }} />
+      </Box>
+    </Sidebar.PropsContext>
   ) : null
 }

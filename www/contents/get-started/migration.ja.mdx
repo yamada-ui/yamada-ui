@@ -67,7 +67,7 @@ bun yamada-cli add button
 :::
 
 :::note
-ソースコードをダウンロードしてカスタマイズしても、[CLI](/docs/components/cli)の[差分を確認する](/docs/components/cli#差分を確認する)や[コンポーネントを更新する](/docs/components/cli#コンポーネントを更新する)を行うことで、ソースコードを簡単に更新することができます。もし、あなたの修正と競合しても[Git](https://git-scm.com)の[競合の提示方法](https://git-scm.com/docs/git-merge#_how_conflicts_are_presented)と同じように表示され、簡単に解決することができます。
+ソースコードをダウンロードしてカスタマイズしても、[CLI](/docs/components/cli)の[差分を確認する](/docs/components/cli#check-differences)や[コンポーネントを更新する](/docs/components/cli#update-components)を行うことで、ソースコードを簡単に更新することができます。もし、あなたの修正と競合しても[Git](https://git-scm.com)の[競合の提示方法](https://git-scm.com/docs/git-merge#_how_conflicts_are_presented)と同じように表示され、簡単に解決することができます。
 :::
 
 ### 名前空間インポート
@@ -467,7 +467,7 @@ return <Box animation={animation} />
 - 各トークンを定義する場合は、`defineTokens`を使用してください。
 - 各セマンティックトークンを定義する場合は、`defineSemanticTokens`を使用してください。
 - 各スタイルを定義する場合は、`defineStyles`を使用してください。
-- コンフィグを定義する場合は、`defineConfig`を使用してください。
+- [コンフィグ](/docs/theming/configuration/overview)を定義する場合は、`defineConfig`を使用してください。
 - コンポーネントのスロット名を調整・変更しました。
 - グローバルスタイルを調整しました。
 - リセットスタイルを調整しました。
@@ -529,7 +529,7 @@ return <Box animation={animation} />
 
 ### Format.Datetime
 
-[Format.Datetime](/docs/components/format#日付)を追加しました。
+[Format.Datetime](/docs/components/format#dates)を追加しました。
 
 ### Show
 
@@ -563,11 +563,11 @@ return <Box animation={animation} />
 
 ### Dialog
 
-[Dialog](https://v1.yamada-ui.com/ja/components/overlay/dialog)を削除しました。代わりに、[Modal](/docs/components/modal#propsを使う)を使用してください。
+[Dialog](https://v1.yamada-ui.com/ja/components/overlay/dialog)を削除しました。代わりに、[Modal](/docs/components/modal#use-props)を使用してください。
 
 ### ContextMenu
 
-[ContextMenu](https://v1.yamada-ui.com/ja/components/navigation/context-menu)を削除しました。代わりに、[Menu.ContextTrigger](/docs/components/menu#コンテキストメニューを使用する)を使用してください。
+[ContextMenu](https://v1.yamada-ui.com/ja/components/navigation/context-menu)を削除しました。代わりに、[Menu.ContextTrigger](/docs/components/menu#use-context-menu)を使用してください。
 
 ### FormControl
 
@@ -575,19 +575,19 @@ return <Box animation={animation} />
 
 ### MultiAutocomplete
 
-[MultiAutocomplete](https://v1.yamada-ui.com/ja/components/forms/multi-autocomplete)を削除しました。代わりに、[Autocomplete](/docs/components/autocomplete#複数選択を有効する)の`multiple`を使用してください。
+[MultiAutocomplete](https://v1.yamada-ui.com/ja/components/forms/multi-autocomplete)を削除しました。代わりに、[Autocomplete](/docs/components/autocomplete#enable-multiple-selection)の`multiple`を使用してください。
 
 ### MultiDatePicker
 
-[MultiDatePicker](https://v1.yamada-ui.com/ja/components/forms/multi-date-picker)を削除しました。代わりに、[DatePicker](/docs/components/date-picker#複数選択を有効する)の`multiple`を使用してください。
+[MultiDatePicker](https://v1.yamada-ui.com/ja/components/forms/multi-date-picker)を削除しました。代わりに、[DatePicker](/docs/components/date-picker#enable-multiple-selection)の`multiple`を使用してください。
 
 ### RangeDatePicker
 
-[RangeDatePicker](https://v1.yamada-ui.com/ja/components/forms/range-date-picker)を削除しました。代わりに、[DatePicker](/docs/components/date-picker#期間選択を有効にする)の`range`を使用してください。
+[RangeDatePicker](https://v1.yamada-ui.com/ja/components/forms/range-date-picker)を削除しました。代わりに、[DatePicker](/docs/components/date-picker#enable-range-selection)の`range`を使用してください。
 
 ### MultiSelect
 
-[MultiSelect](https://v1.yamada-ui.com/ja/components/forms/multi-select)を削除しました。代わりに、[Select](/docs/components/select#複数選択を有効する)の`multiple`を使用してください。
+[MultiSelect](https://v1.yamada-ui.com/ja/components/forms/multi-select)を削除しました。代わりに、[Select](/docs/components/select#enable-multiple-selection)の`multiple`を使用してください。
 
 ### YearPicker
 
@@ -599,7 +599,7 @@ return <Box animation={animation} />
 
 ### RangeSlider
 
-[RangeSlider](https://v1.yamada-ui.com/ja/components/forms/range-slider)を削除しました。代わりに、[Slider](/docs/components/slider#範囲選択を有効にする)の`value`または`defaultValue`に配列を設定してください。
+[RangeSlider](https://v1.yamada-ui.com/ja/components/forms/range-slider)を削除しました。代わりに、[Slider](/docs/components/slider#enable-range-selection)の`value`または`defaultValue`に配列を設定してください。
 
 ### Markdown
 
@@ -615,7 +615,7 @@ return <Box animation={animation} />
 
 ### PagingTable
 
-[PagingTable](https://v1.yamada-ui.com/ja/components/data-display/paging-table)を削除しました。代わりに、[Table](/docs/components/table#ページネーションを有効にする)の`enablePagination`を使用してください。
+[PagingTable](https://v1.yamada-ui.com/ja/components/data-display/paging-table)を削除しました。代わりに、[Table](/docs/components/table#enable-pagination)の`enablePagination`を使用してください。
 
 ## 追加されたフック
 

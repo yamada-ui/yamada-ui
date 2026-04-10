@@ -1,4 +1,8 @@
 const data = {
+  actionBar: {
+    "Close action bar": "Close action bar",
+    "Open action bar": "Open action bar",
+  },
   autocomplete: {
     "Clear value": "Clear value",
     "No results found": "No results found",
@@ -80,6 +84,10 @@ const data = {
   },
   select: {
     "Clear value": "Clear value",
+  },
+  sidebar: {
+    "Close sidebar": "Close sidebar",
+    "Open sidebar": "Open sidebar",
   },
   slider: {
     "Slider thumb": "Slider thumb",

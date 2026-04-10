@@ -1,6 +1,10 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
+  actionBar: {
+    "Close action bar": "Затвори лентата с действия",
+    "Open action bar": "Отвори лентата с действия",
+  },
   autocomplete: {
     "Clear value": "Изчисти стойността",
     "No results found": "Няма намерени резултати",
@@ -82,6 +86,10 @@ const data: IntlData = {
   },
   select: {
     "Clear value": "Изчисти стойността",
+  },
+  sidebar: {
+    "Close sidebar": "Затвори страничната лента",
+    "Open sidebar": "Отвори страничната лента",
   },
   slider: {
     "Slider thumb": "Палец на плъзгача",

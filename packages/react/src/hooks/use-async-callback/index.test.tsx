@@ -2,11 +2,7 @@ import type { FC } from "react"
 import { render, renderHook, screen, waitFor } from "#test"
 import { vi } from "vitest"
 import { useAsyncCallback } from "."
-
-const wait = async (ms: number) =>
-  new Promise((resolve) => {
-    setTimeout(resolve, ms)
-  })
+import { wait } from "../../utils"
 
 describe("useAsyncCallback", () => {
   test("should handle callback correctly", async () => {
@@ -78,6 +74,38 @@ describe("useAsyncCallback", () => {
     expect(result.current[0]).toBeFalsy()
     expect(el).not.toBeDisabled()
     expect(mockCallback).toHaveBeenLastCalledWith()
+  })
+
+  test("should return stable callback reference when inline function is passed with empty deps", () => {
+    const { rerender, result } = renderHook(() =>
+      useAsyncCallback(() => "result", []),
+    )
+    const first = result.current[1]
+    rerender()
+    expect(result.current[1]).toBe(first)
+  })
+
+  test("should update callback reference when deps change", () => {
+    let dep = 1
+    const { rerender, result } = renderHook(() =>
+      useAsyncCallback(() => dep, [dep]),
+    )
+    const first = result.current[1]
+    dep = 2
+    rerender()
+    expect(result.current[1]).not.toBe(first)
+  })
+
+  test("should call the latest callback even when reference is stable", async () => {
+    let value = 1
+    const { rerender, result } = renderHook(() =>
+      useAsyncCallback(() => value, []),
+    )
+    const stableCallback = result.current[1]
+    value = 42
+    rerender()
+    const returned = await stableCallback()
+    expect(returned).toBe(42)
   })
 
   test.todo("should handle callback with loading", async () => {

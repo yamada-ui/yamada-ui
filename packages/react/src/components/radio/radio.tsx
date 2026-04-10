@@ -94,7 +94,7 @@ interface RadioIndicatorProps extends HTMLStyledProps {}
 const RadioIndicator = withContext<"div", RadioIndicatorProps>(
   "div",
   "indicator",
-)()
+)({ "data-indicator": "" })
 
 interface RadioLabelProps extends HTMLStyledProps<"span"> {}
 

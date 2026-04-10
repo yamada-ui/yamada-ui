@@ -18,12 +18,6 @@ export type WebhookEvent<T extends EmitterWebhookEventName> =
 
 export const octokit: Octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
-async function wait(ms: number) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms)
-  })
-}
-
 export async function retryOnRateLimit<Y = void>(
   callback: () => Promise<Y>,
 ): Promise<Y> {
@@ -40,7 +34,7 @@ export async function retryOnRateLimit<Y = void>(
       const resetTime = parseInt(ratelimitReset) * 1000
       const waitTime = resetTime - Date.now() + 1000
 
-      await wait(waitTime)
+      await new Promise((resolve) => setTimeout(resolve, waitTime))
 
       return await retryOnRateLimit<Y>(callback)
     } else {

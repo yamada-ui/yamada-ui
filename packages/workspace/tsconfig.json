@@ -1,5 +1,5 @@
 {
   "extends": "./src/typescript/tsconfig.json",
   "include": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
-  "exclude": ["node_modules", "coverage", "trace"]
+  "exclude": ["node_modules", "trace"]
 }

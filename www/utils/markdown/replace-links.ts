@@ -1,6 +1,6 @@
 import type { AnyString } from "@yamada-ui/utils"
-import { globSync } from "glob"
-import path from "path"
+import { globSync } from "node:fs"
+import path from "node:path"
 import { CONSTANTS } from "@/constants"
 
 function toCamelCase(value: AnyString): string {

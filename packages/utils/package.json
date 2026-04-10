@@ -1,7 +1,7 @@
 {
   "name": "@yamada-ui/utils",
   "type": "module",
-  "version": "2.1.0",
+  "version": "2.1.2",
   "description": "The utilities for Yamada UI projects",
   "keywords": [
     "utils",
@@ -40,6 +40,7 @@
     "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
     "lint": "eslint . --max-warnings=0 --cache",
     "format": "prettier . --ignore-path ../../.prettierignore --check --cache",
+    "quality": "pnpm format && pnpm lint && pnpm typecheck && pnpm test",
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },
@@ -47,8 +48,8 @@
     "color2k": "^2.0.3"
   },
   "devDependencies": {
-    "clean-package": "2.2.0",
-    "react": "^19.2.4"
+    "@yamada-ui/workspace": "workspace:*",
+    "react": "catalog:"
   },
   "peerDependencies": {
     "react": ">=19"

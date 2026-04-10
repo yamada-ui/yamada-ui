@@ -31,7 +31,9 @@ import {
   gradient,
   injectKeyframes,
   isCSSFunction,
+  isCSSVar,
 } from "../css"
+import { isInterpolation } from "../css/utils"
 import { defaultSystem } from "../system"
 
 type ParsedValue = number | string | undefined
@@ -124,11 +126,11 @@ export function createVars(
       ): [ParsedValue, Exclude<ParsedValue, undefined>] {
         const relatedToken = [token.split(".")[0], value].join(".")
 
-        if (token === relatedToken) return [, value]
+        if (token === relatedToken) return [undefined, value]
 
         const targetToken = tokens[relatedToken] ?? prevTokens?.[relatedToken]
 
-        if (!targetToken) return [, value]
+        if (!targetToken) return [undefined, value]
 
         const { reference, variable } = tokenToVar(relatedToken)
 
@@ -362,10 +364,14 @@ export function injectVars<Y extends Dict | Dict[] | undefined>(
         if (target) {
           const { token } = getStyle(prop) ?? {}
 
-          result.push([
-            `--${target}`,
-            token ? `{${token}.${value}, ${value}}` : value,
-          ])
+          if (isCSSVar(value) || isInterpolation(value)) {
+            result.push([`--${target}`, value])
+          } else {
+            result.push([
+              `--${target}`,
+              token ? `{${token}.${value}, ${value}}` : value,
+            ])
+          }
         } else if (isObject(value)) {
           result.push([prop, injectVars(value, targets)])
         } else {

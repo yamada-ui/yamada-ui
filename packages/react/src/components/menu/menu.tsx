@@ -2,7 +2,6 @@
 
 import type { FC, ReactElement, ReactNode } from "react"
 import type {
-  Direction,
   GenericsComponent,
   HTMLProps,
   HTMLStyledProps,
@@ -105,7 +104,7 @@ export interface MenuRootProps
    *
    * @default 'end-start'
    */
-  placement?: Direction
+  placement?: Popover.RootProps["placement"]
 }
 
 const {
@@ -542,7 +541,7 @@ export const MenuOptionGroup = withContext<"div", MenuOptionGroupProps>(
       </MenuOptionGroupContext>
     )
   },
-  { name: "optionGroup", slot: ["group", "option"] },
+  { name: "OptionGroup", slot: ["group", "option"] },
 )() as GenericsComponent<{
   <
     Y extends MenuOptionGroupType = "checkbox",
@@ -598,7 +597,7 @@ export const MenuOptionItem = withContext<"div", MenuOptionItemProps>(
       </styled.div>
     )
   },
-  { name: "optionItem", slot: ["item", "option"] },
+  { name: "OptionItem", slot: ["item", "option"] },
 )()
 
 export interface MenuIndicatorProps extends HTMLStyledProps {}

@@ -1,7 +1,7 @@
 "use client"
 
 import type { MouseEvent, RefObject } from "react"
-import type { Direction, PropGetter } from "../../core"
+import type { PropGetter } from "../../core"
 import type { UsePopperProps } from "../../hooks/use-popper"
 import { useCallback, useId, useRef } from "react"
 import { useEnvironment } from "../../core"
@@ -27,7 +27,7 @@ export interface UseNativePopoverProps extends UsePopperProps<"button"> {
    *
    * @default 'end'
    */
-  placement?: Direction
+  placement?: UsePopperProps["placement"]
   /**
    * The mode of the popover.
    *
@@ -135,9 +135,10 @@ export const useNativePopover = ({
     [refs.setReference],
   )
 
-  const getPositionerProps: PropGetter = useCallback(getPopperProps, [
-    getPopperProps,
-  ])
+  const getPositionerProps: PropGetter = useCallback(
+    (props) => getPopperProps(props),
+    [getPopperProps],
+  )
 
   const getContentProps: PropGetter = useCallback(
     ({

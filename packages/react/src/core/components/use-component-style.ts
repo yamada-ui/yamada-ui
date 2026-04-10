@@ -328,7 +328,7 @@ export function mergeSlotCSS<Y extends string>(
 
   const result = filterEmpty(temp)
 
-  return !!result.length ? result : undefined
+  return result.length ? result : undefined
 }
 
 function omitThemeProps<

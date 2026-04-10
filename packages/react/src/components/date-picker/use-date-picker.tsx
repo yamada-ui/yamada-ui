@@ -242,6 +242,7 @@ export const useDatePicker = <
       parseDate,
       pattern,
       placeholder: placeholderProp,
+      placement = "end-start",
       readOnly,
       render = defaultRender,
       required,
@@ -383,7 +384,7 @@ export const useDatePicker = <
     openOnClick: false,
     openOnEnter: !allowInput,
     openOnSpace: !allowInput,
-    placement: "end-start",
+    placement,
     readOnly,
     transferFocus: false,
     ...ariaProps,
@@ -508,16 +509,11 @@ export const useDatePicker = <
 
         setInputValue((prev) =>
           isObject(prev)
-            ? ({
-                ...(prev as MaybeInputValue<true>),
-                [align]: inputValue,
-              } as MaybeInputValue<Range>)
+            ? Object.assign({}, prev, { [align]: inputValue })
             : prev,
         )
         setValue((prev) =>
-          isObject(prev) && !isDate(prev)
-            ? ({ ...prev, [align]: date } as MaybeDateValue<Multiple, Range>)
-            : prev,
+          isObject(prev) && !isDate(prev) ? { ...prev, [align]: date } : prev,
         )
       } else {
         const date = stringToDate(inputValue)
@@ -553,7 +549,7 @@ export const useDatePicker = <
         {
           Backspace: (ev) => {
             if (!value || isDate(value)) return
-            if (!!inputValue.length) return
+            if (inputValue.length) return
 
             if (isArray(value)) {
               ev.preventDefault()
@@ -618,18 +614,12 @@ export const useDatePicker = <
 
               setInputValue((prev) =>
                 isObject(prev)
-                  ? ({
-                      ...(prev as MaybeInputValue<true>),
-                      [align]: dateToString(date),
-                    } as MaybeInputValue<Range>)
+                  ? Object.assign({}, prev, { [align]: dateToString(date) })
                   : prev,
               )
               setValue((prev) =>
                 isObject(prev) && !isDate(prev)
-                  ? ({ ...prev, [align]: date } as MaybeDateValue<
-                      Multiple,
-                      Range
-                    >)
+                  ? { ...prev, [align]: date }
                   : prev,
               )
 

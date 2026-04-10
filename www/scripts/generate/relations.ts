@@ -1,10 +1,9 @@
 import { isUndefined } from "@yamada-ui/utils"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
-import { readdir, readFile } from "fs/promises"
-import { glob } from "glob"
 import matter from "gray-matter"
+import { glob, readdir, readFile } from "node:fs/promises"
+import path from "node:path"
 import ora from "ora"
-import path from "path"
 import c from "picocolors"
 
 const MIN_RESEMBLE_SCORE = 0.3
@@ -86,8 +85,8 @@ function jaccard(a: string[], b: string[]): number {
 
 async function getResembles() {
   const tags: Tags = {}
-  const filePaths = await glob(
-    path.resolve("contents", "components", "*\(*\)*", "**", "*.mdx"),
+  const filePaths = await Array.fromAsync(
+    glob(path.resolve("contents", "components", "*\(*\)*", "**", "*.mdx")),
   )
   const omittedFilePaths = filePaths.filter((path) => !path.includes(".ja."))
 
@@ -104,7 +103,7 @@ async function getResembles() {
     }),
   )
 
-  const names = Object.keys(tags)
+  const names = Object.keys(tags).sort()
   const resembles: Resembles = Object.fromEntries(
     names.map((name) => [name, []]),
   )
@@ -130,11 +129,9 @@ async function filterRelations(
 ): Promise<string[]> {
   const results = await Promise.all(
     fileNames.map(async (fileName) => {
-      const files = await glob(
-        path.join(CONTENT_PATH, dirName, "**", `${fileName}.mdx`),
+      const files = await Array.fromAsync(
+        glob(path.join(CONTENT_PATH, dirName, "**", `${fileName}.mdx`)),
       )
-
-      if (!files.length) console.log(name, fileName)
 
       return files.length > 0 ? fileName : undefined
     }),
@@ -145,7 +142,7 @@ async function filterRelations(
 
 async function generateRelations(
   registries: Registries,
-  similarComponents: Tags,
+  resembles: Tags,
 ): Promise<Relations> {
   return Object.fromEntries(
     await Promise.all(
@@ -178,9 +175,8 @@ async function generateRelations(
               ),
             }
           : undefined
-        const resembles = similarComponents[name]
 
-        return [name, { dependencies, dependents, resembles }]
+        return [name, { dependencies, dependents, resembles: resembles[name] }]
       }),
     ),
   )

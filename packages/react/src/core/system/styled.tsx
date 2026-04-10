@@ -62,7 +62,7 @@ const Insertion: FC<InsertionProps> = ({ cache, htmlTag, serialized }) => {
     let next = serialized.next
 
     while (next !== undefined) {
-      className = cx(className, next.name)
+      className = cx(className, next.name) ?? ""
       next = next.next
     }
 
@@ -205,7 +205,7 @@ export function createStyled<
 
     className = cx(
       className,
-      !!serialized.styles ? `${cache.key}-${serialized.name}` : undefined,
+      serialized.styles ? `${cache.key}-${serialized.name}` : undefined,
     )
     className = cx(className, options.target)
 

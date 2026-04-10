@@ -1,6 +1,7 @@
-import { a11y, fireEvent, render, screen } from "#test"
+import { a11y, act, fireEvent, render, renderHook, screen } from "#test"
 import { CheckboxGroup } from "."
 import { Checkbox } from "./checkbox"
+import { useCheckboxGroup } from "./use-checkbox-group"
 
 const items = [
   { label: "Item 1", value: "1" },
@@ -20,6 +21,30 @@ describe("<Checkbox />", () => {
 
     expect(input).toHaveAttribute("aria-checked", "mixed")
     expect((input as HTMLInputElement).indeterminate).toBeTruthy()
+  })
+
+  test("forwards `aria-controls` to the input element", () => {
+    render(<Checkbox aria-controls="panel1">checkbox</Checkbox>)
+
+    const input = screen.getByRole("checkbox")
+
+    expect(input).toHaveAttribute("aria-controls", "panel1")
+  })
+
+  test("forwards `aria-labelledby` to the input element", () => {
+    render(<Checkbox aria-labelledby="label1">checkbox</Checkbox>)
+
+    const input = screen.getByRole("checkbox")
+
+    expect(input).toHaveAttribute("aria-labelledby", "label1")
+  })
+
+  test("forwards `tabIndex` to the input element", () => {
+    render(<Checkbox tabIndex={-1}>checkbox</Checkbox>)
+
+    const input = screen.getByRole("checkbox")
+
+    expect(input).toHaveAttribute("tabindex", "-1")
   })
 
   test("sets `displayName` correctly", () => {
@@ -200,5 +225,19 @@ describe("<CheckboxGroup />", () => {
 
     expect(group).toBeInTheDocument()
     expect(checkboxes).toHaveLength(items.length)
+  })
+
+  test("should not add value when max is reached via onChange", () => {
+    const { result } = renderHook(() => useCheckboxGroup({ max: 1 }))
+
+    act(() => {
+      result.current.onChange("1")
+    })
+    expect(result.current.value).toStrictEqual(["1"])
+
+    act(() => {
+      result.current.onChange("2")
+    })
+    expect(result.current.value).toStrictEqual(["1"])
   })
 })

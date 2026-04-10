@@ -16,7 +16,7 @@ jobs:
 
       - name: Create or update test issues
         if: false
-        run: pnpm issue:coverage
+        run: pnpm forge issue:codecov
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
           CODECOV_API_TOKEN: ${{ secrets.CODECOV_API_TOKEN }}
@@ -28,6 +28,6 @@ jobs:
       - name: Create or update a11y issues
         run: |
           pnpm react test:a11y || true
-          pnpm issue:a11y --no-report
+          pnpm forge issue:a11y --no-report
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}

@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "clean": "rimraf node_modules .eslintcache",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
@@ -14,14 +15,12 @@
   },
   "dependencies": {
     "@yamada-ui/react": "workspace:*",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@types/node": "^25.3.3",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react-swc": "^4.2.3",
-    "vite": "^7.3.1"
+    "@vitejs/plugin-react-swc": "catalog:",
+    "@yamada-ui/workspace": "workspace:*",
+    "vite": "catalog:"
   }
 }

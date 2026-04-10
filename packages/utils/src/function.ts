@@ -3,6 +3,11 @@ import { isFunction } from "./assertion"
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 export const noop = () => {}
 
+export const wait = async (ms = 0) =>
+  new Promise<void>((resolve) => {
+    setTimeout(resolve, ms)
+  })
+
 export function runIfFn<Y, U extends any[]>(
   valOrFn: ((...args: U) => Y) | Y,
   ...args: U

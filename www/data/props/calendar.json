@@ -86,7 +86,7 @@
         "required": false
       },
       "animationScheme": {
-        "type": "\"none\" | \"scale\" | SimplePlacement",
+        "type": "\"block-end\" | \"block-start\" | \"inline-end\" | \"inline-start\" | \"none\" | \"scale\" ...",
         "defaultValue": "\"scale\"",
         "description": "The animation of the element.",
         "required": false
@@ -149,7 +149,7 @@
         "required": false
       },
       "defaultValue": {
-        "type": "Multiple extends true ? string[] : string",
+        "type": "string",
         "description": "The initial value of the select.",
         "required": false
       },
@@ -160,8 +160,8 @@
         "required": false
       },
       "duration": {
-        "type": "MotionTransitionProps[\"duration\"]",
-        "defaultValue": "0.2",
+        "type": "MotionLifecycleProps<number> | number",
+        "defaultValue": "0.1",
         "description": "The animation duration.",
         "required": false
       },
@@ -253,7 +253,7 @@
         "required": false
       },
       "multiple": {
-        "type": "Multiple",
+        "type": "false",
         "defaultValue": "false",
         "description": "If `true`, the select will be multiple.",
         "required": false
@@ -269,7 +269,7 @@
         "required": false
       },
       "onChange": {
-        "type": "(value: Multiple extends true ? string[] : string) => void",
+        "type": "(value: string) => void",
         "description": "The callback invoked when value state changes.",
         "required": false
       },
@@ -322,7 +322,7 @@
         "required": false
       },
       "placement": {
-        "type": "Direction",
+        "type": "\"center-end-end\" | \"center-end-start\" | \"center-end\" | \"center-start-end\" | \"center-start-start\" | \"center-start\" | \"end-center\" | \"end-end\" | \"end-start\" | \"end\" ...",
         "defaultValue": "\"end\"",
         "description": "The placement of the popper relative to its reference.",
         "required": false
@@ -378,7 +378,7 @@
         "required": false
       },
       "strategy": {
-        "type": "Strategy",
+        "type": "\"absolute\" | \"fixed\"",
         "defaultValue": "\"absolute\"",
         "description": "The CSS positioning strategy to use.",
         "required": false
@@ -390,7 +390,7 @@
         "required": false
       },
       "value": {
-        "type": "Multiple extends true ? string[] : string",
+        "type": "string",
         "description": "The value of the select.",
         "required": false
       },
@@ -707,7 +707,7 @@
         "required": false
       },
       "animationScheme": {
-        "type": "\"none\" | \"scale\" | SimplePlacement",
+        "type": "\"block-end\" | \"block-start\" | \"inline-end\" | \"inline-start\" | \"none\" | \"scale\" ...",
         "defaultValue": "\"scale\"",
         "description": "The animation of the element.",
         "required": false
@@ -770,7 +770,7 @@
         "required": false
       },
       "defaultValue": {
-        "type": "Multiple extends true ? string[] : string",
+        "type": "string",
         "description": "The initial value of the select.",
         "required": false
       },
@@ -781,8 +781,8 @@
         "required": false
       },
       "duration": {
-        "type": "MotionTransitionProps[\"duration\"]",
-        "defaultValue": "0.2",
+        "type": "MotionLifecycleProps<number> | number",
+        "defaultValue": "0.1",
         "description": "The animation duration.",
         "required": false
       },
@@ -874,7 +874,7 @@
         "required": false
       },
       "multiple": {
-        "type": "Multiple",
+        "type": "false",
         "defaultValue": "false",
         "description": "If `true`, the select will be multiple.",
         "required": false
@@ -890,7 +890,7 @@
         "required": false
       },
       "onChange": {
-        "type": "(value: Multiple extends true ? string[] : string) => void",
+        "type": "(value: string) => void",
         "description": "The callback invoked when value state changes.",
         "required": false
       },
@@ -943,7 +943,7 @@
         "required": false
       },
       "placement": {
-        "type": "Direction",
+        "type": "\"center-end-end\" | \"center-end-start\" | \"center-end\" | \"center-start-end\" | \"center-start-start\" | \"center-start\" | \"end-center\" | \"end-end\" | \"end-start\" | \"end\" ...",
         "defaultValue": "\"end\"",
         "description": "The placement of the popper relative to its reference.",
         "required": false
@@ -999,7 +999,7 @@
         "required": false
       },
       "strategy": {
-        "type": "Strategy",
+        "type": "\"absolute\" | \"fixed\"",
         "defaultValue": "\"absolute\"",
         "description": "The CSS positioning strategy to use.",
         "required": false
@@ -1011,7 +1011,7 @@
         "required": false
       },
       "value": {
-        "type": "Multiple extends true ? string[] : string",
+        "type": "string",
         "description": "The value of the select.",
         "required": false
       },
@@ -1108,7 +1108,7 @@
       "required": false
     },
     "animationScheme": {
-      "type": "\"none\" | \"scale\" | SimplePlacement",
+      "type": "\"block-end\" | \"block-start\" | \"inline-end\" | \"inline-start\" | \"none\" | \"scale\" ...",
       "defaultValue": "\"scale\"",
       "description": "The animation of the element.",
       "required": false
@@ -1171,7 +1171,7 @@
       "required": false
     },
     "defaultValue": {
-      "type": "Multiple extends true ? string[] : string",
+      "type": "string",
       "description": "The initial value of the select.",
       "required": false
     },
@@ -1182,8 +1182,8 @@
       "required": false
     },
     "duration": {
-      "type": "MotionTransitionProps[\"duration\"]",
-      "defaultValue": "0.2",
+      "type": "MotionLifecycleProps<number> | number",
+      "defaultValue": "0.1",
       "description": "The animation duration.",
       "required": false
     },
@@ -1275,7 +1275,7 @@
       "required": false
     },
     "multiple": {
-      "type": "Multiple",
+      "type": "false",
       "defaultValue": "false",
       "description": "If `true`, the select will be multiple.",
       "required": false
@@ -1291,7 +1291,7 @@
       "required": false
     },
     "onChange": {
-      "type": "(value: Multiple extends true ? string[] : string) => void",
+      "type": "(value: string) => void",
       "description": "The callback invoked when value state changes.",
       "required": false
     },
@@ -1344,7 +1344,7 @@
       "required": false
     },
     "placement": {
-      "type": "Direction",
+      "type": "\"center-end-end\" | \"center-end-start\" | \"center-end\" | \"center-start-end\" | \"center-start-start\" | \"center-start\" | \"end-center\" | \"end-end\" | \"end-start\" | \"end\" ...",
       "defaultValue": "\"end\"",
       "description": "The placement of the popper relative to its reference.",
       "required": false
@@ -1400,7 +1400,7 @@
       "required": false
     },
     "strategy": {
-      "type": "Strategy",
+      "type": "\"absolute\" | \"fixed\"",
       "defaultValue": "\"absolute\"",
       "description": "The CSS positioning strategy to use.",
       "required": false
@@ -1412,7 +1412,7 @@
       "required": false
     },
     "value": {
-      "type": "Multiple extends true ? string[] : string",
+      "type": "string",
       "description": "The value of the select.",
       "required": false
     },
@@ -1729,7 +1729,7 @@
       "required": false
     },
     "animationScheme": {
-      "type": "\"none\" | \"scale\" | SimplePlacement",
+      "type": "\"block-end\" | \"block-start\" | \"inline-end\" | \"inline-start\" | \"none\" | \"scale\" ...",
       "defaultValue": "\"scale\"",
       "description": "The animation of the element.",
       "required": false
@@ -1792,7 +1792,7 @@
       "required": false
     },
     "defaultValue": {
-      "type": "Multiple extends true ? string[] : string",
+      "type": "string",
       "description": "The initial value of the select.",
       "required": false
     },
@@ -1803,8 +1803,8 @@
       "required": false
     },
     "duration": {
-      "type": "MotionTransitionProps[\"duration\"]",
-      "defaultValue": "0.2",
+      "type": "MotionLifecycleProps<number> | number",
+      "defaultValue": "0.1",
       "description": "The animation duration.",
       "required": false
     },
@@ -1896,7 +1896,7 @@
       "required": false
     },
     "multiple": {
-      "type": "Multiple",
+      "type": "false",
       "defaultValue": "false",
       "description": "If `true`, the select will be multiple.",
       "required": false
@@ -1912,7 +1912,7 @@
       "required": false
     },
     "onChange": {
-      "type": "(value: Multiple extends true ? string[] : string) => void",
+      "type": "(value: string) => void",
       "description": "The callback invoked when value state changes.",
       "required": false
     },
@@ -1965,7 +1965,7 @@
       "required": false
     },
     "placement": {
-      "type": "Direction",
+      "type": "\"center-end-end\" | \"center-end-start\" | \"center-end\" | \"center-start-end\" | \"center-start-start\" | \"center-start\" | \"end-center\" | \"end-end\" | \"end-start\" | \"end\" ...",
       "defaultValue": "\"end\"",
       "description": "The placement of the popper relative to its reference.",
       "required": false
@@ -2021,7 +2021,7 @@
       "required": false
     },
     "strategy": {
-      "type": "Strategy",
+      "type": "\"absolute\" | \"fixed\"",
       "defaultValue": "\"absolute\"",
       "description": "The CSS positioning strategy to use.",
       "required": false
@@ -2033,7 +2033,7 @@
       "required": false
     },
     "value": {
-      "type": "Multiple extends true ? string[] : string",
+      "type": "string",
       "description": "The value of the select.",
       "required": false
     },

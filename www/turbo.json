@@ -2,6 +2,24 @@
   "$schema": "https://turborepo.dev/schema.v2.json",
   "extends": ["//"],
   "tasks": {
+    "build:content": {
+      "inputs": [
+        "velite.config.ts",
+        "contents/**",
+        "constants/**/*.ts",
+        "utils/**/*.ts",
+        "scripts/generate/docs/**/*.ts",
+        "data/**/*.json",
+        "!data/doc-map.*.json",
+        "data/index.ts",
+        "messages/**/*.json",
+        "package.json",
+        "tsconfig.json",
+        "../pnpm-lock.yaml",
+        "../pnpm-workspace.yaml",
+        "../packages/workspace/src/prettier/**"
+      ]
+    },
     "format": {
       "dependsOn": ["build:content"]
     },

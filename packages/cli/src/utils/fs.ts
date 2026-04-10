@@ -1,18 +1,18 @@
-import type { ObjectEncodingOptions } from "fs"
+import type { ObjectEncodingOptions } from "node:fs"
 import type { LintFilesOptions } from "./lint"
 import type { FormatOptions } from "./prettier"
-import { execFile } from "child_process"
-import fs, { existsSync, statSync } from "fs"
+import { execFile } from "node:child_process"
+import fs, { existsSync, statSync } from "node:fs"
 import {
+  glob,
   mkdir,
   writeFile as originalWriteFile,
   readdir,
   readFile,
-} from "fs/promises"
-import { glob } from "glob"
-import path from "path"
+} from "node:fs/promises"
+import path from "node:path"
+import { promisify } from "node:util"
 import c from "picocolors"
-import { promisify } from "util"
 import { REGISTRY_FILE_NAME } from "../constant"
 import { lintFiles } from "./lint"
 import { formatFiles } from "./prettier"
@@ -99,7 +99,7 @@ export function timer() {
 
 export async function getFiles(pattern: string) {
   const files: { [key: string]: string } = {}
-  const [dirPath] = await glob(pattern)
+  const [dirPath] = await Array.fromAsync(glob(pattern))
 
   const dirents = await readdir(dirPath!, { withFileTypes: true })
 

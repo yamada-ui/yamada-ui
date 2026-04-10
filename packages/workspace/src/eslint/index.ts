@@ -1,15 +1,15 @@
-import type { TSESLint } from "@typescript-eslint/utils"
-import prettierConfig from "eslint-config-prettier"
-import { baseConfigArray } from "./base"
+import type {
+  ConfigWithExtends,
+  ConfigWithExtendsArray,
+} from "@eslint/config-helpers"
+import { defineConfig, globalIgnores } from "eslint/config"
+import { baseConfigArray, noConsoleConfig } from "./base"
 import { cspellConfig } from "./cspell"
-import {
-  createImportAliasConfig,
-  importConfigArray,
-  restrictedImportsConfigArray,
-} from "./import"
+import { importConfigArray, restrictedImportConfigArray } from "./import"
 import { jsxA11yConfig } from "./jsx-a11y"
-import { createLanguageConfig } from "./language"
+import { nextConfig } from "./next"
 import { perfectionistConfig } from "./perfectionist"
+import { prettierConfig } from "./prettier"
 import { reactConfig } from "./react"
 import { reactHooksConfig } from "./react-hooks"
 import { sharedFiles } from "./shared"
@@ -17,25 +17,29 @@ import { testingLibraryConfig } from "./testing-library"
 import { typescriptConfig } from "./typescript"
 import { vitestConfig } from "./vitest"
 
+export type { ConfigWithExtends, ConfigWithExtendsArray }
+
 export {
   baseConfigArray,
-  createImportAliasConfig,
-  createLanguageConfig,
   cspellConfig,
+  defineConfig,
+  globalIgnores,
   importConfigArray,
   jsxA11yConfig,
+  nextConfig,
+  noConsoleConfig,
   perfectionistConfig,
   prettierConfig,
   reactConfig,
   reactHooksConfig,
-  restrictedImportsConfigArray,
+  restrictedImportConfigArray,
   sharedFiles,
   testingLibraryConfig,
   typescriptConfig,
   vitestConfig,
 }
 
-export const sharedConfigArray: TSESLint.FlatConfig.ConfigArray = [
+export const sharedConfigArray: ConfigWithExtendsArray = [
   ...baseConfigArray,
   typescriptConfig,
   ...importConfigArray,

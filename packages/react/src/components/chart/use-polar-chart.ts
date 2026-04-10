@@ -14,7 +14,7 @@ import type {
   SectorProps,
   TextProps,
 } from "recharts"
-import type { PolarChartProps, TickItem } from "recharts/types/util/types"
+import type { PolarChartProps } from "recharts/types/util/types"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { Dict, Merge } from "../../utils"
 import { isValidElement, useCallback, useMemo } from "react"
@@ -663,7 +663,6 @@ export interface UseChartRadarProps extends Merge<
     | "onAnimationStart"
     | "onMouseEnter"
     | "onMouseLeave"
-    | "points"
     | "radiusAxisId"
     | "shape"
     | "stroke"
@@ -1158,7 +1157,7 @@ export const useRadiusAxis = ({
       tickCount,
       tickFormatter,
       tickLine,
-      ticks: ticks as unknown as TickItem[],
+      ticks,
       unit,
       zIndex,
       onClick,

@@ -93,31 +93,27 @@ describe("<Carousel />", () => {
     const { user } = await render(<TestComponent />)
 
     await user.click(page.getByRole("button", { name: "Go to next slide" }))
-    vi.waitFor(async () => {
-      await expect
-        .element(page.getByText("Slide 2"))
-        .toHaveAttribute("data-selected")
-    })
+
+    const slide2 = page.getByText("Slide 2")
+    await expect.element(slide2).toHaveAttribute("data-selected")
 
     await user.click(
       page.getByRole("button", {
         name: "Go to previous slide",
       }),
     )
-    vi.waitFor(async () => {
-      await expect
-        .element(page.getByText("Slide 1"))
-        .toHaveAttribute("data-selected")
-    })
+
+    const slide1 = page.getByText("Slide 1")
+    await expect.element(slide1).toHaveAttribute("data-selected")
   })
 
   test("should switch to correctly slide when click on indicator", async () => {
     const { user } = await render(<TestComponent />)
 
     await user.click(page.getByRole("tab", { name: "Go to 2 slide" }))
-    await expect
-      .element(page.getByText("Slide 2"))
-      .toHaveAttribute("data-selected")
+
+    const slide2 = page.getByText("Slide 2")
+    await expect.element(slide2).toHaveAttribute("data-selected")
   })
 
   test("should disabled next and prev button when looping is disabled", async () => {
@@ -241,9 +237,8 @@ describe("<Carousel />", () => {
       </Carousel.Root>,
     )
 
-    await expect
-      .element(page.getByTestId("custom-indicator"))
-      .toBeInTheDocument()
+    const customIndicator = page.getByRole("button", { name: "Custom" })
+    await expect.element(customIndicator).toBeVisible()
   })
 
   test("renders CarouselIndicators with render prop returning a valid element", async () => {
@@ -267,15 +262,9 @@ describe("<Carousel />", () => {
       </Carousel.Root>,
     )
 
-    await expect
-      .element(page.getByTestId("render-indicator-0"))
-      .toBeInTheDocument()
-    await expect
-      .element(page.getByTestId("render-indicator-1"))
-      .toBeInTheDocument()
-    await expect
-      .element(page.getByTestId("render-indicator-2"))
-      .toBeInTheDocument()
+    await expect.element(page.getByTestId("render-indicator-0")).toBeVisible()
+    await expect.element(page.getByTestId("render-indicator-1")).toBeVisible()
+    await expect.element(page.getByTestId("render-indicator-2")).toBeVisible()
   })
 
   test("renders CarouselIndicators with render prop returning a non-element", async () => {
@@ -293,50 +282,7 @@ describe("<Carousel />", () => {
       </Carousel.Root>,
     )
 
-    await expect.element(page.getByText("dot-0")).toBeInTheDocument()
-    await expect.element(page.getByText("dot-1")).toBeInTheDocument()
-  })
-
-  describe.todo("use Timers", () => {
-    beforeEach(() => {
-      vi.useFakeTimers()
-    })
-
-    afterEach(() => {
-      vi.useRealTimers()
-    })
-
-    test("should render correctly when using autoplay", async () => {
-      const delay = 500
-      const node = <TestComponent autoplay delay={delay} />
-      const { rerender } = await render(node)
-      await expect
-        .element(page.getByText("Slide 1"))
-        .toHaveAttribute("data-selected")
-      await vi.advanceTimersByTimeAsync(delay)
-      await rerender(node)
-      await expect
-        .element(page.getByText("Slide 2"))
-        .toHaveAttribute("data-selected")
-      await vi.advanceTimersByTimeAsync(delay)
-      await rerender(node)
-      await expect
-        .element(page.getByText("Slide 3"))
-        .toHaveAttribute("data-selected")
-    })
-
-    test("should stop autoplay on mouse hover", async () => {
-      const node = <TestComponent autoplay delay={500} />
-      const { rerender, user } = await render(node)
-      await expect
-        .element(page.getByText("Slide 1"))
-        .toHaveAttribute("data-selected")
-      await user.hover(page.getByTestId("carousel"))
-      await vi.advanceTimersByTimeAsync(2000)
-      await rerender(node)
-      await expect
-        .element(page.getByText("Slide 1"))
-        .toHaveAttribute("data-selected")
-    })
+    await expect.element(page.getByText("dot-0")).toBeVisible()
+    await expect.element(page.getByText("dot-1")).toBeVisible()
   })
 })

@@ -122,6 +122,7 @@ describe("Assertion", () => {
 
     test("Returns false for non-objects", () => {
       expect(isObject(null)).toBeFalsy()
+      expect(isObject(undefined)).toBeFalsy()
     })
   })
 

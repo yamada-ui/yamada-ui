@@ -1,7 +1,7 @@
-import type fs from "fs"
-import { mkdtempSync, rmSync } from "fs"
-import { tmpdir } from "os"
-import path from "path"
+import type fs from "node:fs"
+import { mkdtempSync, rmSync } from "node:fs"
+import { tmpdir } from "node:os"
+import path from "node:path"
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest"
 
 vi.mock("./fs", async (importOriginal) => {

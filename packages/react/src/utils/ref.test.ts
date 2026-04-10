@@ -76,16 +76,16 @@ describe("assignRef", () => {
   })
 
   test("should return early when ref is null", () => {
-    expect(() => assignRef(null, 123)).not.toThrowError()
+    expect(() => assignRef(null, 123)).not.toThrow()
   })
 
   test("should return early when ref is undefined", () => {
-    expect(() => assignRef(undefined, 123)).not.toThrowError()
+    expect(() => assignRef(undefined, 123)).not.toThrow()
   })
 
   test("should throw when ref.current cannot be assigned", () => {
     const ref = Object.freeze({ current: null })
-    expect(() => assignRef(ref, "test")).toThrowError(
+    expect(() => assignRef(ref, "test")).toThrow(
       "Cannot assign value 'test' to ref",
     )
   })

@@ -1,7 +1,7 @@
-import type fs from "fs"
-import { mkdtempSync, rmSync, writeFileSync } from "fs"
-import { tmpdir } from "os"
-import path from "path"
+import type fs from "node:fs"
+import { mkdtempSync, rmSync, writeFileSync } from "node:fs"
+import { tmpdir } from "node:os"
+import path from "node:path"
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest"
 import {
   addWorkspace,
@@ -88,7 +88,7 @@ describe("getPackageJson", () => {
   })
 
   test("should throw when not found", async () => {
-    await expect(getPackageJson(tempDir)).rejects.toThrowError("package.json")
+    await expect(getPackageJson(tempDir)).rejects.toThrow("package.json")
   })
 })
 
@@ -324,7 +324,7 @@ describe("addWorkspace", () => {
     const original = process.env.npm_config_user_agent
     process.env.npm_config_user_agent = "pnpm/8.0.0"
     await addWorkspace(tempDir, "packages/**", {})
-    const { readFileSync } = await import("fs")
+    const { readFileSync } = await import("node:fs")
     const content = readFileSync(
       path.join(tempDir, "pnpm-workspace.yaml"),
       "utf-8",
@@ -336,14 +336,14 @@ describe("addWorkspace", () => {
   test("should update existing pnpm-workspace.yaml", async () => {
     const original = process.env.npm_config_user_agent
     process.env.npm_config_user_agent = "pnpm/8.0.0"
-    const { writeFileSync: wfs } = await import("fs")
+    const { writeFileSync: wfs } = await import("node:fs")
     const YAML = (await import("yamljs")).default
     wfs(
       path.join(tempDir, "pnpm-workspace.yaml"),
       YAML.stringify({ packages: ["existing/**"] }),
     )
     await addWorkspace(tempDir, "packages/**", {})
-    const content = (await import("fs")).readFileSync(
+    const content = (await import("node:fs")).readFileSync(
       path.join(tempDir, "pnpm-workspace.yaml"),
       "utf-8",
     )
@@ -355,14 +355,14 @@ describe("addWorkspace", () => {
   test("should skip duplicate workspace in pnpm", async () => {
     const original = process.env.npm_config_user_agent
     process.env.npm_config_user_agent = "pnpm/8.0.0"
-    const { writeFileSync: wfs } = await import("fs")
+    const { writeFileSync: wfs } = await import("node:fs")
     const YAML = (await import("yamljs")).default
     wfs(
       path.join(tempDir, "pnpm-workspace.yaml"),
       YAML.stringify({ packages: ["packages/**"] }),
     )
     await addWorkspace(tempDir, "packages/**", {})
-    const content = (await import("fs")).readFileSync(
+    const content = (await import("node:fs")).readFileSync(
       path.join(tempDir, "pnpm-workspace.yaml"),
       "utf-8",
     )
@@ -380,7 +380,7 @@ describe("addWorkspace", () => {
     )
     await addWorkspace(tempDir, "packages/**", {})
     const pkg = JSON.parse(
-      (await import("fs")).readFileSync(
+      (await import("node:fs")).readFileSync(
         path.join(tempDir, "package.json"),
         "utf-8",
       ),
@@ -398,7 +398,7 @@ describe("addWorkspace", () => {
     )
     await addWorkspace(tempDir, "packages/**", {})
     const pkg = JSON.parse(
-      (await import("fs")).readFileSync(
+      (await import("node:fs")).readFileSync(
         path.join(tempDir, "package.json"),
         "utf-8",
       ),

@@ -74,7 +74,7 @@ export const useNativeAccordionItem = ({
   const getItemProps: PropGetter<"details"> = ({ ref, ...props } = {}) => ({
     ref: mergeRefs(ref, rest.ref),
     name: props.name ?? rest.name ?? name,
-    role: "group",
+    "data-group": "",
     ...rest,
     ...props,
   })

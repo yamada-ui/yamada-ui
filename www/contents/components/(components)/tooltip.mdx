@@ -40,7 +40,7 @@ import { Tooltip } from "@workspaces/ui"
 To change the display position, set `placement` to values like `"end"` or `"center-start"`. By default, `"start"` is set.
 
 ```tsx preview
-<VStack>
+<Wrap gap="md">
   <For
     each={[
       "start",
@@ -52,7 +52,11 @@ To change the display position, set `placement` to values like `"end"` or `"cent
       "end-end",
       "end-center",
       "center-start",
+      "center-start-start",
+      "center-start-end",
       "center-end",
+      "center-end-start",
+      "center-end-end",
     ]}
   >
     {(placement, index) => (
@@ -169,9 +173,9 @@ To always display the tooltip, set `open` to `true`.
 
 ### ARIA Roles and Attributes
 
-| Component | Role and Attribute | Usage                             |
-| --------- | ------------------ | --------------------------------- |
-| `Tooltip` | `role="tooltip"`   | Indicates that it is a `Tooltip`. |
+| Component | Role and Attribute | Usage                           |
+| --------- | ------------------ | ------------------------------- |
+| `Tooltip` | `role="tooltip"`   | Indicates that it is a tooltip. |
 
 ## Similar Components
 

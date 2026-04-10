@@ -2,7 +2,6 @@
 title: NativeAccordion
 description: "`NativeAccordion` is a component for a list that displays information in an expandable or collapsible manner using the HTML `details` element."
 tags: ["disclosure", "list"]
-status: new
 storybook: components-nativeaccordion--basic
 source: components/native-accordion
 style: components/native-accordion/native-accordion.style.ts
@@ -300,6 +299,21 @@ const items = useMemo<NativeAccordion.Item[]>(
 
 return <NativeAccordion.Root animate={false} items={items} />
 ```
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key              | Description                                                                                                      | State |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------- | ----- |
+| `Tab`            | Focuses the first item when focus moves to the accordion. Focuses the next item if already within the accordion. | -     |
+| `Space`, `Enter` | Expands the panel of the focused item and collapses it if it is already expanded.                                | -     |
+
+### ARIA Roles and Attributes
+
+| Component                | Role and Attribute | Usage                                                    |
+| ------------------------ | ------------------ | -------------------------------------------------------- |
+| `NativeAccordion.Button` | `aria-disabled`    | Sets to `"true"` when the panel of the item is disabled. |
 
 ## Props
 

@@ -28,7 +28,7 @@ export const Basic = () => {
 
   return (
     <>
-      <Text>だ…大地よ海よ　そして生きているすべての　みんな…</Text>
+      <Text>だ…大地よ海よ そして生きているすべての みんな…</Text>
       <Text>このオラにほんのちょっとずつだけ元気をわけてくれ…！！！</Text>
 
       <Button onClick={onClick}>わけない</Button>

@@ -28,20 +28,24 @@ import { useSearchParams } from "next/navigation"
 import { Fragment, memo, useState } from "react"
 import { CodePreview } from "@/components"
 import data from "@/data/icons.json"
-import { useRouter } from "@/i18n"
+
+export interface Item extends Omit<Data, "query"> {}
 
 export interface PreviewDrawerProps extends Drawer.RootProps {
   onOpenRef: RefObject<(data: Data) => void>
+  replaceQuery: (query?: { name?: string; query?: string }) => void
 }
 
 export const PreviewDrawer = memo(function PreviewDrawer({
+  replaceQuery,
   onOpenRef,
   ...rest
 }: PreviewDrawerProps) {
   const searchParams = useSearchParams()
   const defaultName = searchParams.get("name")
-  const [item, setItem] = useState<Data | null>(() => {
-    if (!defaultName || !(defaultName in icons)) return null
+  const defaultOpen = !!defaultName && defaultName in icons
+  const [item, setItem] = useState<Item | null>(() => {
+    if (!defaultOpen) return null
 
     return {
       name: defaultName,
@@ -50,13 +54,12 @@ export const PreviewDrawer = memo(function PreviewDrawer({
     }
   })
   const { name, Icon: PreviewIcon = Fragment, related } = item ?? {}
-  const router = useRouter()
   const t = useTranslations("icons")
   const { open, onClose, onOpen } = useDisclosure({
-    defaultOpen: !!item,
+    defaultOpen,
     onClose: () => {
       setItem(null)
-      router.replace({ pathname: "/icons" }, { scroll: false })
+      replaceQuery()
     },
   })
 
@@ -85,7 +88,7 @@ export const PreviewDrawer = memo(function PreviewDrawer({
         p="{space}"
       >
         <Center
-          bg="bg.subtle"
+          bg="bg.panel"
           boxSize={{ base: "auto", md: "xs" }}
           gridRow={{ base: "1 / 3", md: "2 / 3" }}
           mx="auto"
@@ -170,15 +173,12 @@ export const PreviewDrawer = memo(function PreviewDrawer({
                       aria-label={t("openPreview", { name })}
                       bg={{
                         base: "bg.panel",
-                        _hover: ["bg.subtle", "bg.muted"],
+                        _hover: "bg.subtle",
                       }}
                       icon={<Icon fontSize="2xl" />}
                       onClick={() => {
                         setItem({ name, Icon, ...rest })
-                        router.replace(
-                          { pathname: "/icons", query: { name } },
-                          { scroll: false },
-                        )
+                        replaceQuery({ name })
                       }}
                     />
                   </Tooltip>
@@ -201,7 +201,11 @@ function CopyButton({ value }: CopyButtonProps) {
   const { copied, onCopy } = useClipboard(value)
 
   return (
-    <Tooltip content={copied ? t("copied") : t("copy")} placement="start">
+    <Tooltip
+      closeOnClick={false}
+      content={copied ? t("copied") : t("copy")}
+      placement="start"
+    >
       <IconButton
         size="sm"
         variant="ghost"
@@ -219,7 +223,11 @@ function CopyUrlButton() {
   const { copied, onCopy } = useClipboard()
 
   return (
-    <Tooltip content={copied ? t("copied") : t("copy")} placement="start">
+    <Tooltip
+      closeOnClick={false}
+      content={copied ? t("copied") : t("copy")}
+      placement="start"
+    >
       <IconButton
         size="sm"
         variant="ghost"

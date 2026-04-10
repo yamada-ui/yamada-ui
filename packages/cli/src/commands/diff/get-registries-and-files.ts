@@ -1,8 +1,8 @@
 import type { ListrTask } from "listr2"
 import type { Config, Registries } from "../../index.type"
-import { readFile } from "fs/promises"
 import { Listr } from "listr2"
-import path from "path"
+import { readFile } from "node:fs/promises"
+import path from "node:path"
 import c from "picocolors"
 import { REGISTRY_FILE_NAME } from "../../constant"
 import {

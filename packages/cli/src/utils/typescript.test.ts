@@ -1,6 +1,6 @@
-import { mkdtempSync, rmSync, writeFileSync } from "fs"
-import { tmpdir } from "os"
-import path from "path"
+import { mkdtempSync, rmSync, writeFileSync } from "node:fs"
+import { tmpdir } from "node:os"
+import path from "node:path"
 import { afterEach, beforeEach, describe, expect, test } from "vitest"
 import {
   getTsconfig,
@@ -86,6 +86,6 @@ describe("getTsconfig", () => {
   })
 
   test("should throw when tsconfig.json does not exist", async () => {
-    await expect(getTsconfig(tempDir)).rejects.toThrowError("tsconfig.json")
+    await expect(getTsconfig(tempDir)).rejects.toThrow("tsconfig.json")
   })
 })

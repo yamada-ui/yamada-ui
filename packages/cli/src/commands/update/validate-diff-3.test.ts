@@ -1,10 +1,10 @@
 import { describe, expect, test, vi } from "vitest"
 
-vi.mock("child_process", () => ({
+vi.mock("node:child_process", () => ({
   execFile: vi.fn(),
 }))
 
-vi.mock("util", async (importOriginal) => {
+vi.mock("node:util", async (importOriginal) => {
   const actual: any = await importOriginal()
   return {
     ...actual,
@@ -21,7 +21,7 @@ vi.mock("util", async (importOriginal) => {
   }
 })
 
-import { execFile } from "child_process"
+import { execFile } from "node:child_process"
 import { validateDiff3 } from "./validate-diff-3"
 
 const mockExecFile = vi.mocked(execFile)
@@ -43,6 +43,6 @@ describe("validateDiff3", () => {
       cb(new Error("not found"))
       return undefined as any
     })
-    await expect(validateDiff3()).rejects.toThrowError("diff3")
+    await expect(validateDiff3()).rejects.toThrow("diff3")
   })
 })

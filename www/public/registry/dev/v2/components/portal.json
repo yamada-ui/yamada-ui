@@ -8,6 +8,7 @@
   },
   "dependents": {
     "components": [
+      "action-bar",
       "drawer",
       "dropzone",
       "file-button",

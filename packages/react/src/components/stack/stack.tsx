@@ -78,7 +78,7 @@ export const Stack = withContext<"div", StackProps>(
 
               return (
                 <Fragment key={key}>
-                  {!!index ? cloneSeparator : null}
+                  {index ? cloneSeparator : null}
                   {child}
                 </Fragment>
               )

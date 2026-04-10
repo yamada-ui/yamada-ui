@@ -11,10 +11,11 @@
       "slide",
       "fade"
     ],
-    "externals": ["motion@^12.35.0", "react-remove-scroll@^2.7.2"],
+    "externals": ["motion@^12.38.0", "react-remove-scroll@^2.7.2"],
     "hooks": ["use-value"],
     "providers": []
   },
+  "dependents": { "components": ["sidebar"], "hooks": [], "providers": [] },
   "section": "components",
   "sources": [
     {

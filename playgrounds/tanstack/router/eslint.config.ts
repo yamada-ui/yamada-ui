@@ -1,38 +1,20 @@
-import type { TSESLint } from "@typescript-eslint/utils"
 import {
-  createLanguageConfig,
   cspellConfig,
+  defineConfig,
+  globalIgnores,
   jsxA11yConfig,
   reactConfig,
   reactHooksConfig,
   sharedConfigArray,
 } from "@yamada-ui/workspace/eslint"
-import tseslint from "typescript-eslint"
 
-const ignoresConfig: TSESLint.FlatConfig.Config = {
-  name: "eslint/ignores",
-  ignores: ["src/**/*.gen.ts"],
-}
-
-const languageConfig = createLanguageConfig(true, {
-  languageOptions: {
-    parserOptions: {
-      ecmaFeatures: {
-        jsx: true,
-      },
-      ecmaVersion: "latest",
-    },
-  },
-})
-
-const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
-  languageConfig,
+const config = defineConfig(
+  globalIgnores(["src/**/*.gen.ts"], "ignores"),
   ...sharedConfigArray,
-  ignoresConfig,
   cspellConfig,
+  jsxA11yConfig,
   reactConfig,
   reactHooksConfig,
-  jsxA11yConfig,
 )
 
 export default config

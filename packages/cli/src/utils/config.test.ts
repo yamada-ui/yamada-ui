@@ -1,6 +1,6 @@
-import { mkdtempSync, rmSync, writeFileSync } from "fs"
-import { tmpdir } from "os"
-import path from "path"
+import { mkdtempSync, rmSync, writeFileSync } from "node:fs"
+import { tmpdir } from "node:os"
+import path from "node:path"
 import { afterEach, beforeEach, describe, expect, test } from "vitest"
 import { getConfig } from "./config"
 
@@ -62,7 +62,7 @@ describe("getConfig", () => {
   })
 
   test("should throw when config file does not exist", async () => {
-    await expect(getConfig(tempDir, "ui.json")).rejects.toThrowError("config")
+    await expect(getConfig(tempDir, "ui.json")).rejects.toThrow("config")
   })
 
   test("getSection should return section by name", async () => {

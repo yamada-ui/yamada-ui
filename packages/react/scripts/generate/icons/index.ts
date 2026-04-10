@@ -1,0 +1,127 @@
+import { parse } from "@babel/parser"
+import traverse from "@babel/traverse"
+import { interopDefault, toKebabCase } from "@yamada-ui/utils"
+import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { execFile } from "node:child_process"
+import { readdir, readFile, unlink } from "node:fs/promises"
+import path from "node:path"
+import { promisify } from "node:util"
+import ora from "ora"
+import c from "picocolors"
+import { ICON_TEMPLATE } from "./template"
+
+const execFileAsync = promisify(execFile)
+const resolvedTraverse = interopDefault(traverse)
+
+const ENTRY_PATH = path.join(
+  process.cwd(),
+  "node_modules/lucide-react/dist/esm/icons/index.js",
+)
+const DIST_PATH = path.join(process.cwd(), "src/components/icon/icons")
+
+async function clearIcons() {
+  const fileNames = await readdir(DIST_PATH)
+
+  await Promise.all(
+    fileNames.map(async (fileName) =>
+      unlink(path.resolve(DIST_PATH, fileName)),
+    ),
+  )
+}
+
+async function getIconNames() {
+  const data = await readFile(path.resolve(ENTRY_PATH), "utf-8")
+
+  const ast = parse(data, {
+    plugins: ["jsx"],
+    sourceType: "module",
+  })
+
+  const iconNames: string[] = []
+
+  resolvedTraverse(ast, {
+    ExportNamedDeclaration: ({ node }) => {
+      node.specifiers.forEach(({ exported }) => {
+        if ("name" in exported) iconNames.push(exported.name)
+      })
+    },
+  })
+
+  return iconNames
+}
+
+async function createIcons(iconNames: string[]) {
+  return Promise.all(
+    iconNames.map(async (iconName) => {
+      const fileName = toKebabCase(iconName)
+      const content = ICON_TEMPLATE.replace(/{{iconName}}/g, iconName)
+
+      await writeFileWithFormat(
+        path.resolve(DIST_PATH, `${fileName}-icon.tsx`),
+        content,
+      )
+    }),
+  )
+}
+
+async function createTypes(iconNames: string[]) {
+  const fileName = "index.types.ts"
+  let data = [
+    `export type IconNames = ${iconNames.map((iconName) => `\"${iconName}Icon\"`).join(" | ")}`,
+  ].join("\n")
+
+  await writeFileWithFormat(path.resolve(DIST_PATH, fileName), data)
+}
+
+async function main() {
+  const spinner = ora()
+
+  const start = process.hrtime.bigint()
+
+  spinner.start(`Clearing icons`)
+
+  await clearIcons()
+
+  spinner.succeed(`Cleared icons`)
+
+  spinner.start(`Getting icon names`)
+
+  const iconNames = await getIconNames()
+
+  spinner.succeed(`Got icon names`)
+
+  spinner.start(`Creating icons`)
+
+  await createIcons(iconNames)
+  await createTypes(iconNames)
+
+  let chunks = iconNames.map((iconName) => {
+    const fileName = toKebabCase(iconName)
+
+    return `export { ${iconName}Icon } from "./${fileName}-icon"`
+  })
+
+  let data = [`export type * from "./index.types"`, ...chunks].join("\n")
+
+  await writeFileWithFormat(path.resolve(DIST_PATH, "index.ts"), data)
+
+  spinner.succeed(`Created icons`)
+
+  spinner.start(`Fixing eslint`)
+
+  await execFileAsync("npx", [
+    "eslint",
+    "src/components/icon/icons/index.ts",
+    "src/components/icon/icons/index.types.ts",
+    "--fix",
+  ])
+
+  spinner.succeed(`Fixed eslint`)
+
+  const end = process.hrtime.bigint()
+  const duration = (Number(end - start) / 1e9).toFixed(2)
+
+  console.log("\n", c.green(`Done in ${duration}s`))
+}
+
+main()

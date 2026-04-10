@@ -127,7 +127,7 @@ describe("<Dropzone />", () => {
     render(<Dropzone.Root data-testid="root" onDrop={onDrop} />)
 
     await act(() =>
-      fireEvent.drop(screen.getByTestId("root")!, {
+      fireEvent.drop(screen.getByTestId("root"), {
         dataTransfer: { files: [file], types: ["Files"] },
       }),
     )
@@ -150,7 +150,7 @@ describe("<Dropzone />", () => {
     )
 
     await act(() =>
-      fireEvent.dragEnter(screen.getByTestId("root")!, {
+      fireEvent.dragEnter(screen.getByTestId("root"), {
         dataTransfer: { files: [file], types: ["Files"] },
       }),
     )
@@ -169,7 +169,7 @@ describe("<Dropzone />", () => {
     )
 
     await act(() =>
-      fireEvent.dragEnter(screen.getByTestId("root")!, {
+      fireEvent.dragEnter(screen.getByTestId("root"), {
         dataTransfer: {
           files: [file],
           types: ["Files"],

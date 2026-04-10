@@ -1,7 +1,7 @@
 import type * as utils from "../../utils"
-import { mkdtempSync, rmSync, writeFileSync } from "fs"
-import { tmpdir } from "os"
-import path from "path"
+import { mkdtempSync, rmSync, writeFileSync } from "node:fs"
+import { tmpdir } from "node:os"
+import path from "node:path"
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest"
 
 const { mockExecFileAsync, mockWriteFileSafe } = vi.hoisted(() => ({
@@ -131,7 +131,7 @@ describe("updateFiles", () => {
       "button",
       "index.ts",
     )
-    const { mkdirSync } = await import("fs")
+    const { mkdirSync } = await import("node:fs")
     mkdirSync(path.dirname(currentPath), { recursive: true })
     writeFileSync(currentPath, "current content")
 
@@ -187,7 +187,7 @@ describe("updateFiles", () => {
       "button",
       "index.ts",
     )
-    const { mkdirSync } = await import("fs")
+    const { mkdirSync } = await import("node:fs")
     mkdirSync(path.dirname(currentPath), { recursive: true })
     writeFileSync(currentPath, "current content")
 
@@ -241,7 +241,7 @@ describe("updateFiles", () => {
       "button",
       "index.ts",
     )
-    const { mkdirSync } = await import("fs")
+    const { mkdirSync } = await import("node:fs")
     mkdirSync(path.dirname(currentPath), { recursive: true })
     writeFileSync(currentPath, "current content")
 
@@ -380,7 +380,7 @@ describe("updateFiles", () => {
 
   test("should handle index component without force (merge)", async () => {
     const config = createConfig(tempDir)
-    const { mkdirSync } = await import("fs")
+    const { mkdirSync } = await import("node:fs")
     mkdirSync(path.dirname(config.paths.ui.index), { recursive: true })
     writeFileSync(config.paths.ui.index, "current index content")
 
@@ -419,7 +419,7 @@ describe("updateFiles", () => {
 
   test("should handle index component conflict", async () => {
     const config = createConfig(tempDir)
-    const { mkdirSync } = await import("fs")
+    const { mkdirSync } = await import("node:fs")
     mkdirSync(path.dirname(config.paths.ui.index), { recursive: true })
     writeFileSync(config.paths.ui.index, "current index content")
 

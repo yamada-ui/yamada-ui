@@ -6,7 +6,11 @@
     "hooks": [],
     "providers": []
   },
-  "dependents": { "components": [], "hooks": ["use-value"], "providers": [] },
+  "dependents": {
+    "components": ["sidebar"],
+    "hooks": ["use-value"],
+    "providers": []
+  },
   "section": "hooks",
   "sources": [
     {
@@ -15,7 +19,7 @@
     },
     {
       "name": "use-breakpoint-effect.ts",
-      "content": "\"use client\"\n\nimport type { DependencyList } from \"react\"\nimport type { Breakpoint } from \"@yamada-ui/react\"\nimport { useEffect } from \"react\"\nimport { useBreakpoint } from \"./use-breakpoint\"\n\n/**\n * `useBreakpointEffect` is a custom hook that executes a specific callback function when the breakpoint changes.\n *\n * @see https://yamada-ui.com/docs/hooks/use-breakpoint-effect\n */\nexport const useBreakpointEffect = (\n  callback: (breakpoint: Breakpoint) => void,\n  deps: DependencyList,\n) => {\n  const breakpoint = useBreakpoint()\n\n  useEffect(() => {\n    callback(breakpoint)\n    // eslint-disable-next-line react-hooks/exhaustive-deps\n  }, [breakpoint, ...deps])\n}\n"
+      "content": "\"use client\"\n\nimport type { DependencyList } from \"react\"\nimport type { Breakpoint } from \"@yamada-ui/react\"\nimport { useEffect } from \"react\"\nimport { useBreakpoint } from \"./use-breakpoint\"\n\n/**\n * `useBreakpointEffect` is a custom hook that executes a specific callback function when the breakpoint changes.\n *\n * @see https://yamada-ui.com/docs/hooks/use-breakpoint-effect\n */\nexport const useBreakpointEffect = (\n  callback: (breakpoint: Breakpoint) => void,\n  deps: DependencyList,\n) => {\n  const breakpoint = useBreakpoint()\n\n  useEffect(() => {\n    callback(breakpoint)\n  }, [breakpoint, ...deps])\n}\n"
     },
     {
       "name": "use-breakpoint-state.ts",

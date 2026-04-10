@@ -2,11 +2,15 @@
   "$schema": "https://yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
     "components": ["motion"],
-    "externals": ["motion@^12.35.0"],
+    "externals": ["motion@^12.38.0"],
     "hooks": [],
     "providers": []
   },
-  "dependents": { "components": ["accordion"], "hooks": [], "providers": [] },
+  "dependents": {
+    "components": ["accordion", "sidebar", "tree"],
+    "hooks": [],
+    "providers": []
+  },
   "section": "components",
   "sources": [
     {

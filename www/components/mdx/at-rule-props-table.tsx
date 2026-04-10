@@ -3,8 +3,8 @@ import type { StyleConfig } from "@/data"
 import { Box, Code, isObject, NativeTable, toKebabCase } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import { useMemo } from "react"
+import { NextLink } from "@/components/next-link"
 import styles from "@/data/styles.json"
-import { NextLink } from "../next-link"
 
 function createRow(prop: string, { docs, token }: StyleConfig) {
   let value: ReactNode

@@ -1,7 +1,7 @@
 import type { VStackProps } from "@yamada-ui/react"
-import type { NextLinkProps } from "../next-link"
+import type { NextLinkProps } from "@/components/next-link"
 import { VStack } from "@yamada-ui/react"
-import { NextLink } from "../next-link"
+import { NextLink } from "@/components/next-link"
 
 export interface LinkListProps extends VStackProps {
   items: (NextLinkProps & { label: string })[]

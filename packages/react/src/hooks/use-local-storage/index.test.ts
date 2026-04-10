@@ -131,7 +131,7 @@ describe("useLocalStorage", () => {
       act(() => {
         result.current[1](problematicValue)
       })
-    }).toThrowError(
+    }).toThrow(
       "useLocalStorage use-local-storage: Failed to serialize the value",
     )
   })

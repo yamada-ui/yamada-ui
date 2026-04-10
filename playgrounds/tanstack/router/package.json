@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "clean": "rimraf node_modules .tanstack .eslintcache",
     "dev": "vite dev",
     "build": "vite build",
     "typecheck": "tsc --noEmit",
@@ -12,19 +13,16 @@
     "yamada-cli": "pnpm -C ../../../packages/cli dev"
   },
   "dependencies": {
-    "@tanstack/react-router": "^1.120.3",
+    "@tanstack/react-router": "catalog:",
     "@yamada-ui/react": "workspace:*",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@tanstack/router-plugin": "^1.120.3",
-    "@types/node": "^22.10.2",
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0",
-    "@vitejs/plugin-react": "^4.3.4",
-    "typescript": "^5.7.2",
-    "vite": "^7.3.1",
-    "vite-tsconfig-paths": "^5.1.4"
+    "@tanstack/router-plugin": "^1.167.12",
+    "@vitejs/plugin-react": "catalog:",
+    "@yamada-ui/workspace": "workspace:*",
+    "vite": "catalog:",
+    "vite-tsconfig-paths": "catalog:"
   }
 }

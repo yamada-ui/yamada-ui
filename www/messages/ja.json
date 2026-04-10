@@ -28,6 +28,11 @@
       "utils": "@yamada-ui/utils"
     }
   },
+  "notFoundPage": {
+    "title": "ページが見つかりません",
+    "description": "存在しないページにぶち当たってしまった…悲しいですね。😢",
+    "action": "ホームに戻る"
+  },
   "home": {
     "title": "コンポーネントの力を解き放つ",
     "description": "美しく一貫性のある、アクセスしやすいコンポーネントと高度なスタイリングを実現するデザインシステムを提供し、あなたのアイデアを現実のものにします。",
@@ -43,8 +48,6 @@
     "menu": {
       "examples": "サンプル",
       "mail": "メール",
-      "dashboard": "ダッシュボード",
-      "tasks": "タスク",
       "playground": "プレイグラウンド",
       "forms": "フォーム",
       "music": "ミュージック",
@@ -133,7 +136,8 @@
     "codeBlock": {
       "clientOnly": "こちらのコードを使用する場合は、<tag>\"use client\"</tag>をファイルの上部に追加する必要があります。",
       "preview": "プレビュー",
-      "code": "コード"
+      "code": "コード",
+      "stackBlitz": "StackBlitz"
     },
     "propsTable": {
       "prop": "Prop",

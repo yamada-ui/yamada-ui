@@ -39,7 +39,7 @@ describe("usePromiseDisclosure", () => {
     let promise: Promise<void>
 
     act(() => {
-      promise = result.current.onOpen() as Promise<void>
+      promise = result.current.onOpen()
     })
 
     expect(result.current.open).toBeTruthy()
@@ -48,7 +48,7 @@ describe("usePromiseDisclosure", () => {
       result.current.onClose()
     })
 
-    await expect(promise!).rejects.toThrowError("closed")
+    await expect(promise!).rejects.toThrow("closed")
     expect(result.current.open).toBeFalsy()
   })
 

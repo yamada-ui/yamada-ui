@@ -1,12 +1,13 @@
+import { icons } from "@yamada-ui/react"
 import { toKebabCase, toPascalCase } from "@yamada-ui/utils"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
-import { execFile } from "child_process"
-import { readdir, readFile } from "fs/promises"
+import { execFile } from "node:child_process"
+import { readdir, readFile } from "node:fs/promises"
+import path from "node:path"
+import { promisify } from "node:util"
 import ora from "ora"
-import path from "path"
 import c from "picocolors"
 import { rimraf } from "rimraf"
-import { promisify } from "util"
 
 const execFileAsync = promisify(execFile)
 
@@ -101,8 +102,9 @@ async function main() {
       if (!fileName.endsWith(".json")) return
 
       const iconName = fileName.replace(".json", "")
+      const componentName = `${toPascalCase(iconName)}Icon`
 
-      data[`${toPascalCase(iconName)}Icon`] = await getData(fileName)
+      if (componentName in icons) data[componentName] = await getData(fileName)
     }),
   )
 

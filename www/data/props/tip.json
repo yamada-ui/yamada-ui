@@ -37,7 +37,7 @@
       "required": false
     },
     "animationScheme": {
-      "type": "\"scale\" | \"none\" | SimplePlacement",
+      "type": "\"block-end\" | \"block-start\" | \"inline-end\" | \"inline-start\" | \"none\" | \"scale\" ...",
       "defaultValue": "\"scale\"",
       "description": "The animation of the element.",
       "required": false
@@ -100,7 +100,7 @@
       "required": false
     },
     "duration": {
-      "type": "number | MotionLifecycleProps<number>",
+      "type": "MotionLifecycleProps<number> | number",
       "defaultValue": "0.1",
       "description": "The animation duration.",
       "required": false

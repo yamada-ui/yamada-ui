@@ -1,6 +1,12 @@
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "fs"
-import { tmpdir } from "os"
-import path from "path"
+import {
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs"
+import { tmpdir } from "node:os"
+import path from "node:path"
 import { afterEach, beforeEach, describe, expect, test } from "vitest"
 import { getFiles, isWriteable, timer, validateDir, writeFileSafe } from "./fs"
 
@@ -44,15 +50,13 @@ describe("validateDir", () => {
   test("should throw for non-existent path", async () => {
     await expect(
       validateDir(path.join(tempDir, "nonexistent")),
-    ).rejects.toThrowError("does not writeable")
+    ).rejects.toThrow("does not writeable")
   })
 
   test("should throw for file path", async () => {
     const filePath = path.join(tempDir, "file.txt")
     writeFileSync(filePath, "test")
-    await expect(validateDir(filePath)).rejects.toThrowError(
-      "is not a directory",
-    )
+    await expect(validateDir(filePath)).rejects.toThrow("is not a directory")
   })
 })
 

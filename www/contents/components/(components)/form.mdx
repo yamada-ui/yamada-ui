@@ -2,7 +2,6 @@
 title: Form
 description: "`Form` is a component used to group multiple form elements."
 tags: ["form-control", "layout"]
-status: new
 storybook: components-form--basic
 source: components/form
 style: components/form/form.style.ts
@@ -649,6 +648,19 @@ return (
   </Form.Root>
 )
 ```
+
+## Accessibility
+
+### ARIA Roles and Attributes
+
+| Component           | Roles and Attributes | Usage                                                                |
+| ------------------- | -------------------- | -------------------------------------------------------------------- |
+| `Form.Root`         | `id`                 | Used to associate with `Form.SubmitButton`.                          |
+|                     | `aria-labelledby`    | Sets the `id` of the associated `Form.Title` and `Form.Description`. |
+| `Form.Title`        | `id`                 | Used to associate with `Form.Root` and `Form.Description`.           |
+| `Form.Description`  | `id`                 | Used to associate with `Form.Root`.                                  |
+|                     | `aria-describedby`   | Sets the `id` of the associated `Form.Title`.                        |
+| `Form.SubmitButton` | `form`               | Sets the `id` of the associated `Form.Root`.                         |
 
 ## Props
 

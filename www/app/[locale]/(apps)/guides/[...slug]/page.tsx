@@ -53,7 +53,7 @@ export default async function Page({
     getCategoryTitle(locale, guide.category) ?? guide.category
 
   return (
-    <VStack as="article" mx="auto" py="lg" w="full">
+    <VStack as="article" py="lg" w="full">
       <Breadcrumb.Root>
         <Breadcrumb.Link as={NextLink} href="/guides">
           {t("title")}

@@ -3,15 +3,15 @@ import { guides } from "#velite"
 import en from "./guide-map.en.json"
 import ja from "./guide-map.ja.json"
 
-export interface GuideCollection {
-  collection: string
+export interface GuideCategory {
+  category: string
   description: string
   guides: Guide[]
   title: string
 }
 
 interface GuideMap {
-  collection: Guide["collection"]
+  category: Guide["category"]
   description: Guide["description"]
   pathname: string
   title: Guide["title"]
@@ -30,26 +30,26 @@ function getGuideMap(locale: string): GuideMap[] {
   }
 }
 
-export function getCollectionTitle(
+export function getCategoryTitle(
   locale: string,
-  collection: string,
+  category: string,
 ): string | undefined {
   const guideMap = getGuideMap(locale)
 
-  return guideMap.find((entry) => entry.collection === collection)?.title
+  return guideMap.find((entry) => entry.category === category)?.title
 }
 
-export function getGuideCollections(locale: string): GuideCollection[] {
+export function getGuideCategories(locale: string): GuideCategory[] {
   const localeGuides = getGuides(locale)
   const guideMap = getGuideMap(locale)
 
   return guideMap.flatMap((entry) => {
-    const collectionGuides = localeGuides.filter(
-      (guide) => guide.collection === entry.collection,
+    const categoryGuides = localeGuides.filter(
+      (guide) => guide.category === entry.category,
     )
 
-    if (!collectionGuides.length) return []
+    if (!categoryGuides.length) return []
 
-    return [{ ...entry, guides: collectionGuides }]
+    return [{ ...entry, guides: categoryGuides }]
   })
 }

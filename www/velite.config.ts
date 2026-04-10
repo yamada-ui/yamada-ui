@@ -129,8 +129,8 @@ const guides = defineCollection({
   pattern: "guides/**/*.mdx",
   schema: s
     .object({
+      category: s.string(),
       code: s.mdx(),
-      collection: s.string(),
       description: s.string(),
       publishedAt: s.string(),
       title: s.string(),

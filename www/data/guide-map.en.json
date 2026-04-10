@@ -1,26 +1,26 @@
 [
   {
-    "collection": "overview",
+    "category": "overview",
     "title": "Overview",
     "description": "High-level questions about Yamada UI"
   },
   {
-    "collection": "get-started",
+    "category": "get-started",
     "title": "Getting Started",
     "description": "Setup, installation, and first steps"
   },
   {
-    "collection": "styling",
+    "category": "styling",
     "title": "Styling",
     "description": "Styling techniques and best practices"
   },
   {
-    "collection": "theming",
+    "category": "theming",
     "title": "Theming",
     "description": "Configuring colors, fonts, breakpoints, and more"
   },
   {
-    "collection": "components",
+    "category": "components",
     "title": "Components",
     "description": "Tips and recommendations for components"
   }

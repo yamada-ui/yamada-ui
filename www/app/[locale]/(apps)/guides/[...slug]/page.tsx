@@ -4,7 +4,7 @@ import { Breadcrumb, Heading, Text, VStack } from "@yamada-ui/react"
 import { getTranslations } from "next-intl/server"
 import { notFound } from "next/navigation"
 import { MDXContent, NextLink } from "@/components"
-import { getCollectionTitle, getGuides } from "@/data/guide"
+import { getCategoryTitle, getGuides } from "@/data/guide"
 import { generateOg } from "@/utils/next"
 
 function getGuide(locale: string, slug: string[]) {
@@ -49,8 +49,8 @@ export default async function Page({
   if (!guide) return notFound()
 
   const t = await getTranslations({ locale, namespace: "guides" })
-  const collectionTitle =
-    getCollectionTitle(locale, guide.collection) ?? guide.collection
+  const categoryTitle =
+    getCategoryTitle(locale, guide.category) ?? guide.category
 
   return (
     <VStack as="article" mx="auto" py="lg" w="full">
@@ -58,7 +58,7 @@ export default async function Page({
         <Breadcrumb.Link as={NextLink} href="/guides">
           {t("title")}
         </Breadcrumb.Link>
-        <Breadcrumb.Link currentPage>{collectionTitle}</Breadcrumb.Link>
+        <Breadcrumb.Link currentPage>{categoryTitle}</Breadcrumb.Link>
       </Breadcrumb.Root>
 
       <VStack as="header" gap="sm">

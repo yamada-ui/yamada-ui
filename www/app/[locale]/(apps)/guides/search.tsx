@@ -113,6 +113,7 @@ export function GuideSearch() {
         <Popover.Content p="0" rounded="l2" shadow="lg">
           <SearchContentBody
             ref={bodyRef}
+            activeDescendant={activeDescendant}
             onActive={onActive}
             onClose={onClose}
             onSearchRef={onSearchRef}
@@ -242,6 +243,10 @@ const DEFAULT_LOCALE_CONTENTS = getGuides(CONSTANTS.I18N.DEFAULT_LOCALE)
 const PER_PAGE = 50
 
 interface SearchContentBodyProps {
+  activeDescendant: RefObject<Descendant<
+    HTMLAnchorElement,
+    { href: string }
+  > | null>
   onActive: (
     descendant?: Descendant<HTMLAnchorElement, { href: string }>,
   ) => void
@@ -251,6 +256,7 @@ interface SearchContentBodyProps {
 
 function SearchContentBody({
   ref,
+  activeDescendant,
   onActive,
   onClose,
   onSearchRef,
@@ -273,6 +279,8 @@ function SearchContentBody({
   const [value, setValue] = useState("")
 
   assignRef(onSearchRef, (value) => {
+    activeDescendant.current = null
+
     startTransition(() => {
       resetRef.current()
 

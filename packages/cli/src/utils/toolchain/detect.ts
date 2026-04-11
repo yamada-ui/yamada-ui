@@ -1,14 +1,23 @@
-import type { FormatterTool, LinterTool, ToolDetectEntry } from "./types"
-import { existsSync, readFileSync } from "fs"
-import { join } from "path"
+import type {
+  FormatterTool,
+  FormatterToolName,
+  LinterTool,
+  LinterToolName,
+  ToolDetectEntry,
+} from "./types"
+import { existsSync, readFileSync } from "node:fs"
+import { join } from "node:path"
 import { prettierDetect } from "./formatters/prettier"
 import { eslintDetect } from "./linters/eslint"
 
-const FORMATTERS: { [K in Exclude<FormatterTool, "auto">]: ToolDetectEntry } = {
+export const DEFAULT_FORMATTER: FormatterToolName = "prettier"
+export const DEFAULT_LINTER: LinterToolName = "eslint"
+
+const FORMATTERS: { [K in FormatterToolName]: ToolDetectEntry } = {
   prettier: prettierDetect,
 }
 
-const LINTERS: { [K in Exclude<LinterTool, "auto">]: ToolDetectEntry } = {
+const LINTERS: { [K in LinterToolName]: ToolDetectEntry } = {
   eslint: eslintDetect,
 }
 
@@ -45,17 +54,14 @@ function detectTool<T extends string>(
 export function detectFormatter(
   cwd: string,
   tool?: FormatterTool,
-): Exclude<FormatterTool, "auto"> {
+): FormatterToolName {
   if (tool && tool !== "auto") return tool
 
-  return detectTool(cwd, FORMATTERS) ?? "prettier"
+  return detectTool(cwd, FORMATTERS) ?? DEFAULT_FORMATTER
 }
 
-export function detectLinter(
-  cwd: string,
-  tool?: LinterTool,
-): Exclude<LinterTool, "auto"> {
+export function detectLinter(cwd: string, tool?: LinterTool): LinterToolName {
   if (tool && tool !== "auto") return tool
 
-  return detectTool(cwd, LINTERS) ?? "eslint"
+  return detectTool(cwd, LINTERS) ?? DEFAULT_LINTER
 }

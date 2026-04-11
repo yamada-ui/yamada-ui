@@ -22,8 +22,10 @@ export interface Linter {
   lintText(content: string, options?: LinterOptions): Promise<string>
 }
 
-export type FormatterTool = "auto" | "prettier"
-export type LinterTool = "auto" | "eslint"
+export type FormatterToolName = "prettier"
+export type LinterToolName = "eslint"
+export type FormatterTool = "auto" | FormatterToolName
+export type LinterTool = "auto" | LinterToolName
 export interface ToolDetectEntry {
   configs: string[]
   dependency: string

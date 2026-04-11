@@ -1,15 +1,24 @@
 import type { Formatter, FormatterTool, Linter, LinterTool } from "./types"
-import { detectFormatter, detectLinter } from "./detect"
+import {
+  DEFAULT_FORMATTER,
+  DEFAULT_LINTER,
+  detectFormatter,
+  detectLinter,
+} from "./detect"
+
+export { DEFAULT_FORMATTER, DEFAULT_LINTER }
 
 export type {
   Formatter,
   FormatterConfig,
   FormatterOptions,
   FormatterTool,
+  FormatterToolName,
   Linter,
   LinterConfig,
   LinterOptions,
   LinterTool,
+  LinterToolName,
 } from "./types"
 
 export async function resolveFormatter(

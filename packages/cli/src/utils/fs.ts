@@ -45,21 +45,19 @@ export async function writeFile(
 ) {
   await originalWriteFile(path, content, options.encoding ?? "utf-8")
 
-  const lintOpts = options.lint
-  if (lintOpts?.enabled !== false) {
-    const linter = await resolveLinter(options.cwd ?? cwd, lintOpts?.tool)
+  if (options.lint?.enabled !== false) {
+    const linter = await resolveLinter(options.cwd ?? cwd, options.lint?.tool)
     await linter.lintFiles(path, { cwd: options.cwd ?? cwd })
   }
 
-  const formatOpts = options.format
-  if (formatOpts?.enabled !== false) {
+  if (options.format?.enabled !== false) {
     const formatter = await resolveFormatter(
       options.cwd ?? cwd,
-      formatOpts?.tool,
+      options.format?.tool,
     )
     await formatter.formatFiles(path, {
-      configPath: formatOpts?.configPath,
-      language: formatOpts?.language,
+      configPath: options.format?.configPath,
+      language: options.format?.language,
     })
   }
 }

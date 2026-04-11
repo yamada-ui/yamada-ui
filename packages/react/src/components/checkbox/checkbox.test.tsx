@@ -240,4 +240,30 @@ describe("<CheckboxGroup />", () => {
     })
     expect(result.current.value).toStrictEqual(["1"])
   })
+
+  test("merges user-provided `rootProps` with internal props instead of overwriting", () => {
+    const onClick = vi.fn()
+
+    render(
+      <Checkbox
+        rootProps={{
+          className: "from-user",
+          style: { backgroundColor: "blue", color: "red" },
+          onClick,
+        }}
+      >
+        checkbox
+      </Checkbox>,
+    )
+
+    const root = screen.getByRole("checkbox").parentElement
+
+    expect(root).toHaveClass("ui-checkbox__root", "from-user")
+    expect(root).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(root).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(root!)
+
+    expect(onClick).toHaveBeenCalledWith(expect.anything())
+  })
 })

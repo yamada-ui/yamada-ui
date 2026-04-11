@@ -310,9 +310,11 @@ function DocsMenuItem({
       justifyContent="flex-start"
       mb="xs"
       onClick={handlerAll(onClick, () => {
-        if (pathname === href) onClose()
+        if (pathname !== href) return
 
-        window.scrollTo({ behavior: "instant", top: 0 })
+        onClose()
+
+        window.scrollTo({ behavior: "smooth", top: 0 })
       })}
       {...rest}
     />

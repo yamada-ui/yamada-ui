@@ -1,7 +1,7 @@
 "use client"
 
 import type { FC, PropsWithChildren } from "react"
-import type { HTMLStyledProps, ThemeProps } from "../../core"
+import type { HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { NativePopoverStyle } from "./native-popover.style"
 import type {
   UseNativePopoverProps,
@@ -29,10 +29,12 @@ export interface NativePopoverRootProps
   extends
     UseNativePopoverProps,
     ThemeProps<NativePopoverStyle>,
-    PropsWithChildren {}
+    PropsWithChildren,
+    Pick<HTMLProps, "suppressHydrationWarning"> {}
 
 const {
   ComponentContext,
+  HydrationContext,
   PropsContext: NativePopoverPropsContext,
   StyleContext,
   useComponentContext,
@@ -53,7 +55,8 @@ export { NativePopoverPropsContext, useNativePopoverPropsContext }
  * @see https://yamada-ui.com/docs/components/native-popover
  */
 export const NativePopoverRoot: FC<NativePopoverRootProps> = (props) => {
-  const [styleContext, { children, ...rest }] = useRootComponentProps(props)
+  const [styleContext, { children, suppressHydrationWarning, ...rest }] =
+    useRootComponentProps(props)
   const {
     getAnchorProps,
     getBodyProps,
@@ -64,6 +67,10 @@ export const NativePopoverRoot: FC<NativePopoverRootProps> = (props) => {
     getPositionerProps,
     getTriggerProps,
   } = useNativePopover(rest)
+  const hydrationContext = useMemo(
+    () => (suppressHydrationWarning ? { suppressHydrationWarning } : {}),
+    [suppressHydrationWarning],
+  )
   const componentContext = useMemo(
     () => ({
       getAnchorProps,
@@ -89,7 +96,9 @@ export const NativePopoverRoot: FC<NativePopoverRootProps> = (props) => {
 
   return (
     <StyleContext value={styleContext}>
-      <ComponentContext value={componentContext}>{children}</ComponentContext>
+      <HydrationContext value={hydrationContext}>
+        <ComponentContext value={componentContext}>{children}</ComponentContext>
+      </HydrationContext>
     </StyleContext>
   )
 }

@@ -64,6 +64,7 @@ export const RadioGroupRoot = component<"div", RadioGroupRootProps>((props) => {
       items = [],
       readOnly,
       shape,
+      suppressHydrationWarning,
       ...rest
     },
   ] = useRootComponentProps(props, "group", {
@@ -91,6 +92,7 @@ export const RadioGroupRoot = component<"div", RadioGroupRootProps>((props) => {
       invalid,
       readOnly,
       shape,
+      suppressHydrationWarning,
     }),
     [
       variant,
@@ -102,6 +104,7 @@ export const RadioGroupRoot = component<"div", RadioGroupRootProps>((props) => {
       readOnly,
       errorBorderColor,
       focusBorderColor,
+      suppressHydrationWarning,
     ],
   )
   const groupContext = useMemo(
@@ -112,7 +115,10 @@ export const RadioGroupRoot = component<"div", RadioGroupRootProps>((props) => {
   return (
     <RadioPropsContext value={context}>
       <RadioGroupContext value={groupContext}>
-        <Group orientation="vertical" {...getRootProps()}>
+        <Group
+          orientation="vertical"
+          {...getRootProps({ suppressHydrationWarning })}
+        >
           {computedChildren}
         </Group>
       </RadioGroupContext>

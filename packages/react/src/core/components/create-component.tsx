@@ -39,6 +39,10 @@ import {
 } from "./use-component-style"
 import { getClassName, getDisplayName } from "./utils"
 
+export interface HydrationContext {
+  suppressHydrationWarning?: boolean
+}
+
 type AsWithFragment = "fragment" | As
 type ClassName = ((system: System) => string) | string
 
@@ -147,7 +151,7 @@ function getSlotName<Y extends string>(slot?: ComponentSlot<Y>) {
 }
 
 export function createComponent<
-  Y extends object = {},
+  Y extends Dict = {},
   M extends ComponentStyle = Dict,
   D extends Dict = Dict,
 >(name: string, style?: M) {
@@ -160,6 +164,11 @@ export function createComponent<
     name: `${defaultDisplayName}PropsContext`,
     strict: false,
   })
+  const [HydrationContext, useHydrationContext] =
+    createContext<HydrationContext>({
+      name: `${defaultDisplayName}HydrationContext`,
+      strict: false,
+    })
 
   function useClassName(name?: string, className?: ClassName) {
     const system = useSystem()
@@ -212,6 +221,7 @@ export function createComponent<
       return withDisplayName<D, H>((props) => {
         className = useClassName(name, className)
 
+        const hydrationProps = useHydrationContext()
         const computedProps = isFunction(initialProps)
           ? initialProps(props)
           : mergeProps(initialProps ?? {}, props)()
@@ -219,6 +229,7 @@ export function createComponent<
 
         return (
           <ProxyComponent
+            {...hydrationProps}
             {...mergedProps}
             className={cx(className, mergedProps.className)}
           />
@@ -260,8 +271,15 @@ export function createComponent<
           transferProps,
         })
         const rest = chainProps<any>(...toArray(superProps))()(mergedProps)
+        const hydrationContext = rest.suppressHydrationWarning
+          ? { suppressHydrationWarning: true }
+          : {}
 
-        return <ProxyComponent {...rest} />
+        return (
+          <HydrationContext value={hydrationContext}>
+            <ProxyComponent {...rest} />
+          </HydrationContext>
+        )
       }, displayName)
     }
   }
@@ -269,8 +287,10 @@ export function createComponent<
   return {
     component,
     ComponentContext,
+    HydrationContext,
     PropsContext,
     useComponentContext,
+    useHydrationContext,
     usePropsContext,
     withContext,
     useComponentProps,
@@ -297,6 +317,11 @@ export function createSlotComponent<
     name: `${rootDisplayName}PropsContext`,
     strict: false,
   })
+  const [HydrationContext, useHydrationContext] =
+    createContext<HydrationContext>({
+      name: `${rootDisplayName}HydrationContext`,
+      strict: false,
+    })
 
   function useClassName(
     slot?: ComponentSlot<ComponentSlotName<M>>,
@@ -351,7 +376,7 @@ export function createSlotComponent<
     const mergedProps = withContext
       ? (mergeProps(contextProps, props)() as Y)
       : props
-    const [css, rest] = useComponentSlotStyle(mergedProps, {
+    const [styleContext, rest] = useComponentSlotStyle(mergedProps, {
       name: rootName,
       className,
       style,
@@ -359,7 +384,7 @@ export function createSlotComponent<
       transferProps,
     })
 
-    return [css, rest]
+    return [styleContext, rest]
   }
 
   function useSlotComponentProps<Y extends Dict = {}>(
@@ -370,8 +395,10 @@ export function createSlotComponent<
     className = useClassName(slot, className)
 
     const style = useStyleContext()
+    const hydrationProps = useHydrationContext()
 
     return {
+      ...hydrationProps,
       ...props,
       className: cx(className, props.className),
       css: mergeSlotCSS(slot, style, props.css),
@@ -397,6 +424,7 @@ export function createSlotComponent<
       return withDisplayName<H, R>((props) => {
         className = useClassName(slot, className)
 
+        const hydrationProps = useHydrationContext()
         const computedProps = isFunction(initialProps)
           ? initialProps(props)
           : mergeProps(initialProps ?? {}, props)()
@@ -404,6 +432,7 @@ export function createSlotComponent<
 
         return (
           <ProxyComponent
+            {...hydrationProps}
             {...mergedProps}
             className={cx(className, mergedProps.className)}
           />
@@ -444,7 +473,7 @@ export function createSlotComponent<
         const computedProps = isFunction(initialProps)
           ? initialProps(props)
           : mergeProps(initialProps ?? {}, props)()
-        const [context, mergedProps] = useRootComponentProps(
+        const [styleContext, mergedProps] = useRootComponentProps(
           computedProps,
           slot,
           {
@@ -454,10 +483,15 @@ export function createSlotComponent<
           },
         )
         const rest = chainProps<any>(...superProps)()(mergedProps)
+        const hydrationContext = rest.suppressHydrationWarning
+          ? { suppressHydrationWarning: true }
+          : {}
 
         return (
-          <StyleContext value={context}>
-            <ProxyComponent {...rest} />
+          <StyleContext value={styleContext}>
+            <HydrationContext value={hydrationContext}>
+              <ProxyComponent {...rest} />
+            </HydrationContext>
           </StyleContext>
         )
       }, displayName)
@@ -506,10 +540,12 @@ export function createSlotComponent<
   return {
     component,
     ComponentContext,
+    HydrationContext,
     PropsContext,
     StyleContext,
     useClassNames,
     useComponentContext,
+    useHydrationContext,
     usePropsContext,
     useStyleContext,
     withContext,

@@ -152,7 +152,8 @@ export interface PopoverRootProps
   extends
     Merge<UsePopoverProps, UsePopoverStyleProps>,
     UsePopupAnimationProps,
-    ThemeProps<PopoverStyle> {
+    ThemeProps<PopoverStyle>,
+    Pick<HTMLProps, "suppressHydrationWarning"> {
   /**
    * The children of the popover.
    */
@@ -164,6 +165,7 @@ export interface PopoverRootProps
 
 const {
   ComponentContext,
+  HydrationContext,
   PropsContext: PopoverPropsContext,
   StyleContext,
   useComponentContext,
@@ -184,8 +186,10 @@ export { PopoverPropsContext, usePopoverPropsContext }
  */
 export const PopoverRoot: FC<PopoverRootProps> = (props) => {
   const styleProps = usePopoverStyleProps(props)
-  const [styleContext, { animationScheme, children, duration, ...rest }] =
-    useRootComponentProps({ ...props, ...styleProps })
+  const [
+    styleContext,
+    { animationScheme, children, duration, suppressHydrationWarning, ...rest },
+  ] = useRootComponentProps({ ...props, ...styleProps })
   const {
     open,
     getAnchorProps,
@@ -198,6 +202,10 @@ export const PopoverRoot: FC<PopoverRootProps> = (props) => {
     getTriggerProps,
     onClose,
   } = usePopover(rest)
+  const hydrationContext = useMemo(
+    () => (suppressHydrationWarning ? { suppressHydrationWarning } : {}),
+    [suppressHydrationWarning],
+  )
   const componentContext = useMemo(
     () => ({
       animationScheme,
@@ -229,9 +237,11 @@ export const PopoverRoot: FC<PopoverRootProps> = (props) => {
 
   return (
     <StyleContext value={styleContext}>
-      <ComponentContext value={componentContext}>
-        {runIfFn(children, { open, onClose })}
-      </ComponentContext>
+      <HydrationContext value={hydrationContext}>
+        <ComponentContext value={componentContext}>
+          {runIfFn(children, { open, onClose })}
+        </ComponentContext>
+      </HydrationContext>
     </StyleContext>
   )
 }

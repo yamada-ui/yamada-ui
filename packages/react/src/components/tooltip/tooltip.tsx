@@ -1,6 +1,5 @@
 "use client"
 
-import type { FC, PropsWithChildren, ReactNode } from "react"
 import type { HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { HTMLMotionProps } from "../motion"
 import type { UsePopupAnimationProps } from "../popover"
@@ -8,6 +7,7 @@ import type { PortalProps } from "../portal"
 import type { TooltipStyle } from "./tooltip.style"
 import type { UseTooltipProps } from "./use-tooltip"
 import { AnimatePresence } from "motion/react"
+import { type FC, type PropsWithChildren, type ReactNode, useMemo } from "react"
 import { createSlotComponent } from "../../core"
 import { cast } from "../../utils"
 import { motion } from "../motion"
@@ -21,7 +21,8 @@ export interface TooltipProps
     UseTooltipProps,
     PropsWithChildren,
     UsePopupAnimationProps,
-    ThemeProps<TooltipStyle> {
+    ThemeProps<TooltipStyle>,
+    Pick<HTMLProps, "suppressHydrationWarning"> {
   /**
    * The content of the tooltip.
    */
@@ -43,6 +44,7 @@ export interface TooltipProps
 }
 
 const {
+  HydrationContext,
   PropsContext: TooltipPropsContext,
   StyleContext,
   usePropsContext: useTooltipPropsContext,
@@ -59,12 +61,13 @@ export { TooltipPropsContext, useTooltipPropsContext }
  */
 export const Tooltip: FC<TooltipProps> = (props) => {
   const [
-    context,
+    styleContext,
     {
       animationScheme = "scale",
       children,
       content,
       duration = 0.1,
+      suppressHydrationWarning,
       contentProps,
       portalProps,
       ...rest
@@ -76,31 +79,37 @@ export const Tooltip: FC<TooltipProps> = (props) => {
     animationScheme,
     duration,
   })
+  const hydrationContext = useMemo(
+    () => (suppressHydrationWarning ? { suppressHydrationWarning } : {}),
+    [suppressHydrationWarning],
+  )
 
   if (!content) return children
 
   return (
-    <StyleContext value={context}>
-      <TooltipTrigger asChild {...getTriggerProps()}>
-        {children}
-      </TooltipTrigger>
+    <StyleContext value={styleContext}>
+      <HydrationContext value={hydrationContext}>
+        <TooltipTrigger asChild {...getTriggerProps()}>
+          {children}
+        </TooltipTrigger>
 
-      <AnimatePresence>
-        {open ? (
-          <Portal {...portalProps}>
-            <TooltipPositioner {...getPositionerProps()}>
-              <TooltipContent
-                {...popupAnimationProps}
-                {...cast<HTMLMotionProps>(
-                  getContentProps(cast<HTMLProps>(contentProps)),
-                )}
-              >
-                {content}
-              </TooltipContent>
-            </TooltipPositioner>
-          </Portal>
-        ) : null}
-      </AnimatePresence>
+        <AnimatePresence>
+          {open ? (
+            <Portal {...portalProps}>
+              <TooltipPositioner {...getPositionerProps()}>
+                <TooltipContent
+                  {...popupAnimationProps}
+                  {...cast<HTMLMotionProps>(
+                    getContentProps(cast<HTMLProps>(contentProps)),
+                  )}
+                >
+                  {content}
+                </TooltipContent>
+              </TooltipPositioner>
+            </Portal>
+          ) : null}
+        </AnimatePresence>
+      </HydrationContext>
     </StyleContext>
   )
 }

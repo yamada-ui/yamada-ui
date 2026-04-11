@@ -64,8 +64,10 @@ export interface ComponentProps
 const {
   component,
   ComponentContext,
+  HydrationContext,
   PropsContext: ComponentPropsContext,
   useComponentContext,
+  useHydrationContext,
   usePropsContext: useComponentPropsContext,
   withContext,
   useComponentProps,
@@ -100,10 +102,24 @@ If you don't want to use the provided style and `PropsContext` props, or want to
 ```tsx
 export const Component = component((props) => {
   const computedProps = useComponentProps(props)
+  const hydrationContext = useMemo(
+    () => ({
+      suppressHydrationWarning: computedProps.suppressHydrationWarning,
+    }),
+    [computedProps.suppressHydrationWarning],
+  )
 
-  return <styled.div {...computedProps} />
+  return (
+    <HydrationContext value={hydrationContext}>
+      <styled.div {...computedProps} />
+    </HydrationContext>
+  )
 })()
 ```
+
+:::tip
+`HydrationContext` is optional. If the component has `suppressHydrationWarning` set, it is used to propagate the value to the child element.
+:::
 
 #### Calculate props
 
@@ -175,8 +191,10 @@ export interface AdditionalComponentProps
 
 const {
   ComponentContext,
+  HydrationContext,
   PropsContext: AdditionalComponentPropsContext,
   useComponentContext,
+  useHydrationContext,
   usePropsContext: useAdditionalComponentPropsContext,
   useComponentProps,
   withContext,
@@ -304,9 +322,11 @@ export interface ComponentRootProps
 
 const {
   ComponentContext,
+  HydrationContext,
   PropsContext: ComponentPropsContext,
   StyleContext,
   useComponentContext,
+  useHydrationContext,
   usePropsContext: useComponentPropsContext,
   useStyleContext,
   useClassNames,
@@ -354,11 +374,19 @@ If you don't want to use the provided style and `PropsContext` props, or want to
 
 ```tsx
 export const RootComponent = component((props) => {
-  const [context, computedProps] = useRootComponentProps(props, "root")
+  const [styleContext, computedProps] = useRootComponentProps(props, "root")
+  const hydrationContext = useMemo(
+    () => ({
+      suppressHydrationWarning: computedProps.suppressHydrationWarning,
+    }),
+    [computedProps.suppressHydrationWarning],
+  )
 
   return (
-    <StyleContext value={context}>
-      <styled.div {...computedProps} />
+    <StyleContext value={styleContext}>
+      <HydrationContext value={hydrationContext}>
+        <styled.div {...computedProps} />
+      </HydrationContext>
     </StyleContext>
   )
 }, "root")()
@@ -369,6 +397,10 @@ export const ItemComponent = component((props) => {
   return <styled.div {...computedProps} />
 }, "item")()
 ```
+
+:::tip
+`HydrationContext` is optional. If the root component has `suppressHydrationWarning` set, it is used to propagate the value to the slot components.
+:::
 
 #### Use modifiers
 

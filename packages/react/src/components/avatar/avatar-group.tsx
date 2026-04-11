@@ -23,19 +23,30 @@ export interface AvatarGroupRootProps
  */
 export const AvatarGroupRoot = component<"div", AvatarGroupRootProps>(
   (props) => {
-    const [, { colorScheme, size, variant, shape, ...rest }] =
-      useRootComponentProps(props, "group", {
-        transferProps: ["variant", "colorScheme", "size", "shape"],
-      })
+    const [
+      ,
+      { colorScheme, size, variant, shape, suppressHydrationWarning, ...rest },
+    ] = useRootComponentProps(props, "group", {
+      transferProps: ["variant", "colorScheme", "size", "shape"],
+    })
     const { children, excess, getRootProps } = useAvatarGroup(rest)
     const context = useMemo(
-      () => ({ colorScheme, size, variant, shape }),
-      [variant, size, colorScheme, shape],
+      () => ({
+        colorScheme,
+        size,
+        variant,
+        shape,
+        suppressHydrationWarning,
+      }),
+      [variant, size, colorScheme, shape, suppressHydrationWarning],
     )
 
     return (
       <AvatarPropsContext value={context}>
-        <styled.div {...getRootProps()}>
+        <styled.div
+          suppressHydrationWarning={suppressHydrationWarning}
+          {...getRootProps()}
+        >
           {excess > 0 ? <Avatar fallback={`+${excess}`} /> : null}
           {children}
         </styled.div>

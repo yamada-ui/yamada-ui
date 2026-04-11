@@ -65,6 +65,7 @@ export const RadioCardGroupRoot = component<"div", RadioCardGroupRootProps>(
         justify,
         readOnly,
         shape,
+        suppressHydrationWarning,
         withIndicator,
         ...rest
       },
@@ -105,6 +106,7 @@ export const RadioCardGroupRoot = component<"div", RadioCardGroupRootProps>(
         justify,
         readOnly,
         shape,
+        suppressHydrationWarning,
         withIndicator,
       }),
       [
@@ -119,6 +121,7 @@ export const RadioCardGroupRoot = component<"div", RadioCardGroupRootProps>(
         invalid,
         readOnly,
         shape,
+        suppressHydrationWarning,
       ],
     )
     const groupContext = useMemo(
@@ -129,7 +132,9 @@ export const RadioCardGroupRoot = component<"div", RadioCardGroupRootProps>(
     return (
       <RadioCardPropsContext value={context}>
         <RadioGroupContext value={groupContext}>
-          <Group {...getRootProps()}>{computedChildren}</Group>
+          <Group {...getRootProps({ suppressHydrationWarning })}>
+            {computedChildren}
+          </Group>
         </RadioGroupContext>
       </RadioCardPropsContext>
     )

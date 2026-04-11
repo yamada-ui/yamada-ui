@@ -31,10 +31,19 @@ export interface ToggleGroupRootProps<Y extends string | string[] = string>
 
 export const ToggleGroupRoot = component<"div", ToggleGroupRootProps>(
   (props: ToggleGroupRootProps) => {
-    const [, { colorScheme, size, variant, attached, ...rest }] =
-      useRootComponentProps(props, "group", {
-        transferProps: ["size", "variant", "colorScheme"],
-      })
+    const [
+      ,
+      {
+        colorScheme,
+        size,
+        variant,
+        attached,
+        suppressHydrationWarning,
+        ...rest
+      },
+    ] = useRootComponentProps(props, "group", {
+      transferProps: ["size", "variant", "colorScheme"],
+    })
     const {
       disabled,
       readOnly,
@@ -49,8 +58,9 @@ export const ToggleGroupRoot = component<"div", ToggleGroupRootProps>(
         size,
         variant,
         focusVisibleRing: attached ? "inside" : undefined,
+        suppressHydrationWarning,
       }),
-      [variant, size, colorScheme, attached],
+      [variant, size, colorScheme, attached, suppressHydrationWarning],
     )
     const groupContext = useMemo(
       () => ({
@@ -66,7 +76,10 @@ export const ToggleGroupRoot = component<"div", ToggleGroupRootProps>(
     return (
       <TogglePropsContext value={context}>
         <ToggleGroupContext value={groupContext}>
-          <Group attached={attached} {...getGroupProps()} />
+          <Group
+            attached={attached}
+            {...getGroupProps({ suppressHydrationWarning })}
+          />
         </ToggleGroupContext>
       </TogglePropsContext>
     )

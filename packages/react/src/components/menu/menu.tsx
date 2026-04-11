@@ -109,6 +109,7 @@ export interface MenuRootProps
 
 const {
   ComponentContext,
+  HydrationContext,
   PropsContext: MenuPropsContext,
   StyleContext,
   useComponentContext,
@@ -131,7 +132,7 @@ export const MenuRoot: FC<MenuRootProps> = (props) => {
   const [styleContext, mergedProps] = useRootComponentProps(props)
   const [
     { animationScheme, initialFocusRef, offset, placement, ...popoverProps },
-    { children, disabled, ...rest },
+    { children, disabled, suppressHydrationWarning, ...rest },
   ] = usePopoverProps(mergedProps, [
     "disabled",
     "open",
@@ -188,6 +189,10 @@ export const MenuRoot: FC<MenuRootProps> = (props) => {
       updateRef,
     ],
   )
+  const hydrationContext = useMemo(
+    () => (suppressHydrationWarning ? { suppressHydrationWarning } : {}),
+    [suppressHydrationWarning],
+  )
   const menuContext = useMemo(
     () => ({
       subMenu,
@@ -235,15 +240,17 @@ export const MenuRoot: FC<MenuRootProps> = (props) => {
 
   return (
     <StyleContext value={styleContext}>
-      <MenuDescendantsContext value={descendants}>
-        <MenuContext value={menuContext}>
-          <MainMenuContext value={mainMenuContext}>
-            <ComponentContext value={componentContext}>
-              <Popover.Root {...mergedPopoverProps}>{children}</Popover.Root>
-            </ComponentContext>
-          </MainMenuContext>
-        </MenuContext>
-      </MenuDescendantsContext>
+      <HydrationContext value={hydrationContext}>
+        <MenuDescendantsContext value={descendants}>
+          <MenuContext value={menuContext}>
+            <MainMenuContext value={mainMenuContext}>
+              <ComponentContext value={componentContext}>
+                <Popover.Root {...mergedPopoverProps}>{children}</Popover.Root>
+              </ComponentContext>
+            </MainMenuContext>
+          </MenuContext>
+        </MenuDescendantsContext>
+      </HydrationContext>
     </StyleContext>
   )
 }

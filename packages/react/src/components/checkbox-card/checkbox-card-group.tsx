@@ -68,6 +68,7 @@ export const CheckboxCardGroupRoot = component<
       justify,
       readOnly,
       shape,
+      suppressHydrationWarning,
       withIndicator,
       ...rest
     },
@@ -103,6 +104,7 @@ export const CheckboxCardGroupRoot = component<
       justify,
       readOnly,
       shape,
+      suppressHydrationWarning,
       withIndicator,
     }),
     [
@@ -118,6 +120,7 @@ export const CheckboxCardGroupRoot = component<
       invalid,
       readOnly,
       shape,
+      suppressHydrationWarning,
     ],
   )
   const groupContext = useMemo(
@@ -128,7 +131,9 @@ export const CheckboxCardGroupRoot = component<
   return (
     <CheckboxCardPropsContext value={context}>
       <CheckboxGroupContext value={groupContext}>
-        <Group {...getRootProps()}>{computedChildren}</Group>
+        <Group {...getRootProps({ suppressHydrationWarning })}>
+          {computedChildren}
+        </Group>
       </CheckboxGroupContext>
     </CheckboxCardPropsContext>
   )

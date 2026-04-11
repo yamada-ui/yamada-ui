@@ -67,6 +67,7 @@ export const CheckboxGroupRoot = component<"div", CheckboxGroupRootProps>(
         items = [],
         readOnly,
         shape,
+        suppressHydrationWarning,
         ...rest
       },
     ] = useRootComponentProps(props, "group", {
@@ -95,6 +96,7 @@ export const CheckboxGroupRoot = component<"div", CheckboxGroupRootProps>(
         invalid,
         readOnly,
         shape,
+        suppressHydrationWarning,
       }),
       [
         variant,
@@ -107,6 +109,7 @@ export const CheckboxGroupRoot = component<"div", CheckboxGroupRootProps>(
         errorBorderColor,
         focusBorderColor,
         checkedIcon,
+        suppressHydrationWarning,
       ],
     )
     const groupContext = useMemo(
@@ -117,7 +120,10 @@ export const CheckboxGroupRoot = component<"div", CheckboxGroupRootProps>(
     return (
       <CheckboxPropsContext value={context}>
         <CheckboxGroupContext value={groupContext}>
-          <Group orientation="vertical" {...getRootProps()}>
+          <Group
+            orientation="vertical"
+            {...getRootProps({ suppressHydrationWarning })}
+          >
             {computedChildren}
           </Group>
         </CheckboxGroupContext>

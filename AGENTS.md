@@ -208,3 +208,14 @@ Read the [template](./.github/pull_request_template.md) and use its structure fo
 - The template includes an "AI used" section. If AI generated the PR, uncheck "I did not use AI" and check "I checked the generated content before submitting."
 
 After creating a PR, the [Quality](./.github/workflows/quality.yml) GitHub Action runs automatically to validate format, lint, typecheck, and tests. Monitor it to ensure there are no issues. If problems are found, fix them and resubmit.
+
+## Reviewing PRs
+
+The following branch protection rules are enforced on GitHub. Keep them in mind when reviewing and merging PRs.
+
+- **Require status checks to pass**: All required status checks (including Quality) must be green before merging.
+- **Require branches to be up to date before merging**: The PR branch must be up to date with the base branch. If it is behind, update it before merging.
+- **Dismiss stale pull request approvals when new commits are pushed**: Any new commit dismisses previous approvals. A re-review is required after pushing new changes.
+- **Require review from specific teams**: At least one approval from each of the `prime` and `standard` teams is required. `hirotomoyamada` and `claude-for-yamada-ui` belong to both teams, so a single approval from either of them satisfies both team requirements.
+- **Require review from Code Owners**: At least one approval from a Code Owner listed in [CODEOWNERS](./.github/CODEOWNERS) is required for the files changed in the PR.
+- **Require conversation resolution before merging**: All review comments and conversations must be resolved before merging.

@@ -1,4 +1,5 @@
-import { a11y, render, screen } from "#test"
+import { a11y, fireEvent, render, screen } from "#test"
+import { vi } from "vitest"
 import { CheckboxCard, CheckboxCardGroup } from "."
 
 const items = [
@@ -96,5 +97,31 @@ describe("<CheckboxCard />", () => {
     const checkbox = screen.getByRole("checkbox")
     const indicator = checkbox.parentElement?.querySelector("[data-indicator]")
     expect(indicator).toBeNull()
+  })
+
+  test("merges user-provided `rootProps` with internal props instead of overwriting", () => {
+    const onClick = vi.fn()
+
+    render(
+      <CheckboxCard.Root
+        label="Checkbox Card"
+        value="1"
+        rootProps={{
+          className: "from-user",
+          style: { backgroundColor: "blue", color: "red" },
+          onClick,
+        }}
+      />,
+    )
+
+    const root = screen.getByRole("checkbox").parentElement
+
+    expect(root).toHaveClass("ui-checkbox-card__root", "from-user")
+    expect(root).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(root).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(root!)
+
+    expect(onClick).toHaveBeenCalledWith(expect.anything())
   })
 })

@@ -7,7 +7,7 @@ import type { UseCheckboxProps } from "../checkbox"
 import type { UseInputBorderProps } from "../input"
 import type { CheckboxCardStyle } from "./checkbox-card.style"
 import { useMemo } from "react"
-import { createSlotComponent, styled } from "../../core"
+import { createSlotComponent, mergeProps, styled } from "../../core"
 import { useCheckbox } from "../checkbox"
 import { CheckIcon, MinusIcon } from "../icon"
 import { useInputBorder } from "../input"
@@ -159,7 +159,7 @@ export const CheckboxCardRoot = withProvider<"label", CheckboxCardRootProps>(
     ])
 
     return (
-      <styled.label {...getRootProps({ ...varProps, ...rootProps })}>
+      <styled.label {...mergeProps(getRootProps(varProps), rootProps)()}>
         <styled.input {...getInputProps(inputProps)} />
         {withIndicator ? (
           <CheckboxCardIndicator {...getIndicatorProps(indicatorProps)}>

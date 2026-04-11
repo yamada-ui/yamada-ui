@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, hasSuppressHydrationWarning, render, screen } from "#test"
 import { Indicator } from "."
 
 describe("<Indicator />", () => {
@@ -221,5 +221,40 @@ describe("<Indicator />", () => {
     )
     const label = screen.getByTestId("indicator")
     expect(label).toHaveClass("custom-label")
+  })
+
+  test("propagates `suppressHydrationWarning` to the overflow span when `label > overflowCount`", () => {
+    render(
+      <Indicator
+        label={100}
+        overflowCount={99}
+        suppressHydrationWarning
+        labelProps={{ "data-testid": "indicator" }}
+      >
+        <div />
+      </Indicator>,
+    )
+
+    const label = screen.getByTestId("indicator")
+    const overflowSpan = label.querySelector("span")
+    expect(overflowSpan).toHaveTextContent("+")
+    expect(hasSuppressHydrationWarning(overflowSpan)).toBeTruthy()
+  })
+
+  test("does not set `suppressHydrationWarning` on the overflow span when omitted from the root", () => {
+    render(
+      <Indicator
+        label={100}
+        overflowCount={99}
+        labelProps={{ "data-testid": "indicator" }}
+      >
+        <div />
+      </Indicator>,
+    )
+
+    const label = screen.getByTestId("indicator")
+    const overflowSpan = label.querySelector("span")
+    expect(overflowSpan).toHaveTextContent("+")
+    expect(hasSuppressHydrationWarning(overflowSpan)).toBeFalsy()
   })
 })

@@ -102,6 +102,7 @@ export const Indicator = withProvider(
     overflowCount = 99,
     placement,
     showZero = true,
+    suppressHydrationWarning,
     floatProps,
     labelProps,
     ...rest
@@ -115,16 +116,18 @@ export const Indicator = withProvider(
         return (
           <>
             {overflowCount}
-            <styled.span>+</styled.span>
+            <styled.span suppressHydrationWarning={suppressHydrationWarning}>
+              +
+            </styled.span>
           </>
         )
       } else {
         return label
       }
-    }, [numeric, label, overflowCount])
+    }, [numeric, label, overflowCount, suppressHydrationWarning])
 
     return (
-      <styled.div {...rest}>
+      <styled.div suppressHydrationWarning={suppressHydrationWarning} {...rest}>
         {children}
 
         {!disabled ? (

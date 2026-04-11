@@ -1,9 +1,5 @@
-import type {
-  FormatConfig,
-  LintConfig,
-  PackageNameWithVersion,
-  UserConfig,
-} from "../../index.type"
+import type { PackageNameWithVersion, UserConfig } from "../../index.type"
+import type { FormatterToolName, LinterToolName } from "../../utils/toolchain"
 import { isObject, isUndefined, merge } from "@yamada-ui/utils"
 import boxen from "boxen"
 import { Command } from "commander"
@@ -45,6 +41,7 @@ import {
   validateDir,
   writeFileSafe,
 } from "../../utils"
+import { DEFAULT_FORMATTER, DEFAULT_LINTER } from "../../utils/toolchain"
 
 interface Options {
   config: string
@@ -52,9 +49,9 @@ interface Options {
   jsx: boolean
   overwrite: boolean
   yes: boolean
-  format?: boolean
+  formatter?: "none" | FormatterToolName
   install?: boolean
-  lint?: boolean
+  linter?: "none" | LinterToolName
   monorepo?: boolean
   outdir?: string
   packageName?: string
@@ -79,19 +76,17 @@ export const init = new Command("init")
     "--no-install",
     "do not install dependencies when choice is monorepo.",
   )
-  .option("-f, --format", "use a formatter.")
-  .option("--no-format", "do not use a formatter.")
-  .option("-l, --lint", "use a linter.")
-  .option("--no-lint", "do not use a linter.")
+  .option("--formatter <tool>", 'formatter to use (e.g. "prettier", "none").')
+  .option("--linter <tool>", 'linter to use (e.g. "eslint", "none").')
   .option("--outdir <path>", "output directory path.")
   .action(async function ({
     src,
     config: configPath,
     cwd,
-    format,
+    formatter,
     install,
     jsx,
-    lint,
+    linter,
     monorepo,
     outdir = "",
     overwrite,
@@ -161,40 +156,22 @@ export const init = new Command("init")
           ),
         },
         {
-          type: !yes && isUndefined(format) ? "toggle" : null,
-          name: "format",
-          active: "Yes",
-          inactive: "No",
-          initial: true,
-          message: c.reset("Would you like to use a formatter?"),
-        },
-        {
-          type: (_, answer) => {
-            const formatEnabled = answer.format ?? format
-
-            return !yes && formatEnabled !== false ? "select" : null
-          },
-          name: "formatTool",
-          choices: [{ title: "Prettier", value: "prettier" }],
+          type: !yes && isUndefined(formatter) ? "select" : null,
+          name: "formatter",
+          choices: [
+            { title: "Prettier", value: "prettier" },
+            { title: "None", value: "none" },
+          ],
           initial: 0,
           message: c.reset("Which formatter would you like to use?"),
         },
         {
-          type: !yes && isUndefined(lint) ? "toggle" : null,
-          name: "lint",
-          active: "Yes",
-          inactive: "No",
-          initial: true,
-          message: c.reset("Would you like to use a linter?"),
-        },
-        {
-          type: (_, answer) => {
-            const lintEnabled = answer.lint ?? lint
-
-            return !yes && lintEnabled !== false ? "select" : null
-          },
-          name: "lintTool",
-          choices: [{ title: "ESLint", value: "eslint" }],
+          type: !yes && isUndefined(linter) ? "select" : null,
+          name: "linter",
+          choices: [
+            { title: "ESLint", value: "eslint" },
+            { title: "None", value: "none" },
+          ],
           initial: 0,
           message: c.reset("Which linter would you like to use?"),
         },
@@ -202,8 +179,8 @@ export const init = new Command("init")
 
       monorepo ??= answer.monorepo ?? true
       src ??= answer.src ?? true
-      lint ??= answer.lint ?? true
-      format ??= answer.format ?? true
+      formatter ??= answer.formatter ?? DEFAULT_FORMATTER
+      linter ??= answer.linter ?? DEFAULT_LINTER
       // eslint-disable-next-line no-control-regex
       outdir = (answer.outdir ?? "").replace(/\x17/g, "").trim()
       outdir ||= monorepo ? DEFAULT_PATH.ui.monorepo : DEFAULT_PATH.ui.polyrepo
@@ -211,20 +188,17 @@ export const init = new Command("init")
       packageName = (answer.packageName ?? "").replace(/\x17/g, "").trim()
       packageName ||= DEFAULT_PACKAGE_NAME.ui
 
-      const resolvedFormatTool: FormatConfig["tool"] = answer.formatTool
-      const resolvedLintTool: LintConfig["tool"] = answer.lintTool
-
       if (monorepo) config.monorepo = monorepo
       if (jsx) config.jsx = jsx
 
       config.path = outdir
-      config.format = { enabled: format }
-      if (format && resolvedFormatTool) {
-        config.format.tool = resolvedFormatTool
+      config.format = {
+        enabled: formatter !== "none",
+        ...(formatter !== "none" && { tool: formatter }),
       }
-      config.lint = { enabled: lint }
-      if (lint && resolvedLintTool) {
-        config.lint.tool = resolvedLintTool
+      config.lint = {
+        enabled: linter !== "none",
+        ...(linter !== "none" && { tool: linter }),
       }
 
       if (!yes) {

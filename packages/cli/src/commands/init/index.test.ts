@@ -39,10 +39,8 @@ describe("init", () => {
     mockPrompts
       .mockResolvedValueOnce({
         src: true,
-        format: true,
-        formatTool: "prettier",
-        lint: true,
-        lintTool: "eslint",
+        formatter: "prettier",
+        linter: "eslint",
         monorepo: true,
         outdir: undefined,
         packageName: undefined,
@@ -72,10 +70,8 @@ describe("init", () => {
     const mockPrompts = vi.mocked(prompts.default)
     mockPrompts
       .mockResolvedValueOnce({
-        format: true,
-        formatTool: "prettier",
-        lint: true,
-        lintTool: "eslint",
+        formatter: "prettier",
+        linter: "eslint",
         monorepo: false,
         outdir: undefined,
         packageName: undefined,
@@ -129,10 +125,8 @@ describe("init", () => {
     vi.mocked(prompts.default)
       .mockResolvedValueOnce({
         src: false,
-        format: true,
-        formatTool: "prettier",
-        lint: true,
-        lintTool: "eslint",
+        formatter: "prettier",
+        linter: "eslint",
         monorepo: true,
         outdir: undefined,
         packageName: undefined,
@@ -193,10 +187,8 @@ describe("init", () => {
     vi.mocked(prompts.default)
       .mockResolvedValueOnce({
         src: true,
-        format: true,
-        formatTool: "prettier",
-        lint: true,
-        lintTool: "eslint",
+        formatter: "prettier",
+        linter: "eslint",
         monorepo: true,
         outdir: "./packages/ui-lib",
         packageName: undefined,
@@ -263,10 +255,8 @@ describe("init", () => {
     mockPrompts
       .mockResolvedValueOnce({
         src: true,
-        format: true,
-        formatTool: "prettier",
-        lint: true,
-        lintTool: "eslint",
+        formatter: "prettier",
+        linter: "eslint",
         monorepo: true,
       })
       .mockResolvedValueOnce({ generate: true })
@@ -289,10 +279,8 @@ describe("init", () => {
     vi.mocked(prompts.default)
       .mockResolvedValueOnce({
         src: true,
-        format: true,
-        formatTool: "prettier",
-        lint: true,
-        lintTool: "eslint",
+        formatter: "prettier",
+        linter: "eslint",
         monorepo: true,
         outdir: "ui",
         packageName: undefined,
@@ -315,10 +303,8 @@ describe("init", () => {
     const prompts = await import("prompts")
     vi.mocked(prompts.default)
       .mockResolvedValueOnce({
-        format: true,
-        formatTool: "prettier",
-        lint: true,
-        lintTool: "eslint",
+        formatter: "prettier",
+        linter: "eslint",
         monorepo: false,
         outdir: undefined,
         packageName: undefined,
@@ -345,10 +331,8 @@ describe("init", () => {
     vi.mocked(prompts.default)
       .mockResolvedValueOnce({
         src: true,
-        format: true,
-        formatTool: "prettier",
-        lint: true,
-        lintTool: "eslint",
+        formatter: "prettier",
+        linter: "eslint",
         monorepo: true,
         outdir: undefined,
         packageName: undefined,
@@ -367,7 +351,7 @@ describe("init", () => {
     expect(config.lint.tool).toBe("eslint")
   })
 
-  test("should not save tool property with --yes (backward compat)", async () => {
+  test("should use default tools with --yes", async () => {
     await init.parseAsync(
       ["--cwd", tempDir, "--yes", "--monorepo", "--no-install"],
       { from: "user" },
@@ -376,12 +360,12 @@ describe("init", () => {
     const configPath = path.join(tempDir, "ui.json")
     const config = JSON.parse(readFileSync(configPath, "utf-8"))
     expect(config.format.enabled).toBeTruthy()
-    expect(config.format.tool).toBeUndefined()
+    expect(config.format.tool).toBe("prettier")
     expect(config.lint.enabled).toBeTruthy()
-    expect(config.lint.tool).toBeUndefined()
+    expect(config.lint.tool).toBe("eslint")
   })
 
-  test("should not save tool when format is disabled", async () => {
+  test("should disable tools when --formatter none --linter none", async () => {
     await init.parseAsync(
       [
         "--cwd",
@@ -389,8 +373,10 @@ describe("init", () => {
         "--yes",
         "--monorepo",
         "--no-install",
-        "--no-format",
-        "--no-lint",
+        "--formatter",
+        "none",
+        "--linter",
+        "none",
       ],
       { from: "user" },
     )

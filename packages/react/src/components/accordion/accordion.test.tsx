@@ -1,4 +1,4 @@
-import { a11y, getReactProps, render, screen } from "#test"
+import { a11y, hasSuppressHydrationWarning, render, screen } from "#test"
 import { noop } from "../../utils"
 import { BoxIcon } from "../icon"
 import { Accordion } from "./"
@@ -361,7 +361,7 @@ describe("<Accordion />", () => {
     const button = screen.getByTestId("button")
     const heading = button.parentElement
     expect(heading?.tagName).toBe("H3")
-    expect(getReactProps(heading).suppressHydrationWarning).toBeTruthy()
+    expect(hasSuppressHydrationWarning(heading)).toBeTruthy()
   })
 
   test("propagates `suppressHydrationWarning` to the AccordionPanel inner `<p>` wrapping string children", async () => {
@@ -375,7 +375,7 @@ describe("<Accordion />", () => {
 
     const paragraph = await screen.findByRole("paragraph")
     expect(paragraph.tagName).toBe("P")
-    expect(getReactProps(paragraph).suppressHydrationWarning).toBeTruthy()
+    expect(hasSuppressHydrationWarning(paragraph)).toBeTruthy()
   })
 
   test("correct warnings should be issued when multiple and defaultIndex is not array", () => {

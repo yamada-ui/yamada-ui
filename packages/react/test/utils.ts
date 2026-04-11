@@ -1,20 +1,18 @@
 import { act } from "@testing-library/react"
 import { isArray, isString, wait } from "@yamada-ui/utils"
 
-interface ReactProps {
-  [key: string]: unknown
-}
-
-export function getReactProps(el: Element | null | undefined): ReactProps {
-  if (!el) return {}
+export function hasSuppressHydrationWarning(
+  el: Element | null | undefined,
+): boolean {
+  if (!el) return false
 
   const key = Object.keys(el).find((k) => k.startsWith("__reactProps$"))
-  if (!key) return {}
+  if (!key) return false
 
-  const value = Reflect.get(el, key)
-  if (typeof value !== "object" || value === null) return {}
+  const props = Reflect.get(el, key)
+  if (typeof props !== "object" || props === null) return false
 
-  return { ...value }
+  return Reflect.get(props, "suppressHydrationWarning") === true
 }
 
 export async function waitForAnimationFrame(ms = 16) {

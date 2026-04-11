@@ -1,6 +1,6 @@
 import type { Formatter, FormatterOptions, ToolDetectEntry } from "../types"
 import { toArray } from "@yamada-ui/utils"
-import { readFile, writeFile } from "fs/promises"
+import { readFile, writeFile } from "node:fs/promises"
 
 export const prettierDetect: ToolDetectEntry = {
   configs: [

@@ -889,4 +889,80 @@ describe("<Tree />", () => {
       expect(screen.getByText("lazy-1")).toBeInTheDocument()
     })
   })
+
+  test("should merge `endElementProps` from root and item without overwriting `className`, `style`, and event handlers", () => {
+    const onRootClick = vi.fn()
+    const onItemClick = vi.fn()
+
+    render(
+      <Tree.Root
+        endElementProps={{
+          className: "from-root",
+          style: { color: "red" },
+          onClick: onRootClick,
+        }}
+      >
+        <Tree.Item
+          endElement={<XIcon />}
+          label="item"
+          endElementProps={{
+            className: "from-item",
+            style: { backgroundColor: "blue" },
+            onClick: onItemClick,
+          }}
+        />
+      </Tree.Root>,
+    )
+
+    const endElement = screen
+      .getAllByRole("treeitem")[0]
+      ?.querySelector(".ui-tree__element--end")
+
+    expect(endElement).toHaveClass("from-root", "from-item")
+    expect(endElement).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(endElement).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(endElement!)
+
+    expect(onRootClick).toHaveBeenCalledTimes(1)
+    expect(onItemClick).toHaveBeenCalledTimes(1)
+  })
+
+  test("should merge `startElementProps` from root and item without overwriting `className`, `style`, and event handlers", () => {
+    const onRootClick = vi.fn()
+    const onItemClick = vi.fn()
+
+    render(
+      <Tree.Root
+        startElementProps={{
+          className: "from-root",
+          style: { color: "red" },
+          onClick: onRootClick,
+        }}
+      >
+        <Tree.Item
+          label="item"
+          startElement={<FileIcon />}
+          startElementProps={{
+            className: "from-item",
+            style: { backgroundColor: "blue" },
+            onClick: onItemClick,
+          }}
+        />
+      </Tree.Root>,
+    )
+
+    const startElement = screen
+      .getAllByRole("treeitem")[0]
+      ?.querySelector(".ui-tree__element--start")
+
+    expect(startElement).toHaveClass("from-root", "from-item")
+    expect(startElement).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(startElement).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(startElement!)
+
+    expect(onRootClick).toHaveBeenCalledTimes(1)
+    expect(onItemClick).toHaveBeenCalledTimes(1)
+  })
 })

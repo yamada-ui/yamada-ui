@@ -69,6 +69,7 @@ export const Picture: FC<PictureProps> = ({
   children,
   enableSorting = true,
   sources: sourcesProp = [],
+  suppressHydrationWarning,
   pictureProps,
   ...rest
 }) => {
@@ -131,18 +132,28 @@ export const Picture: FC<PictureProps> = ({
   const sourceElements = useMemo(
     () =>
       sources.map(({ maxW: _maxW, minW: _minW, ...rest }, index) => (
-        <styled.source key={index} {...rest} />
+        <styled.source
+          key={index}
+          suppressHydrationWarning={suppressHydrationWarning}
+          {...rest}
+        />
       )),
-    [sources],
+    [sources, suppressHydrationWarning],
   )
 
   return (
-    <styled.picture {...pictureProps}>
+    <styled.picture
+      suppressHydrationWarning={suppressHydrationWarning}
+      {...pictureProps}
+    >
       {children ?? (
         <>
           {sourceElements}
 
-          <Image {...rest} />
+          <Image
+            suppressHydrationWarning={suppressHydrationWarning}
+            {...rest}
+          />
         </>
       )}
     </styled.picture>

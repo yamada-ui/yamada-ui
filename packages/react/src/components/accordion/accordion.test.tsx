@@ -3,6 +3,22 @@ import { noop } from "../../utils"
 import { BoxIcon } from "../icon"
 import { Accordion } from "./"
 
+interface ReactProps {
+  [key: string]: unknown
+}
+
+function getReactProps(el: Element | null | undefined): ReactProps {
+  if (!el) return {}
+
+  const key = Object.keys(el).find((k) => k.startsWith("__reactProps$"))
+  if (!key) return {}
+
+  const value = Reflect.get(el, key)
+  if (typeof value !== "object" || value === null) return {}
+
+  return { ...value }
+}
+
 const items = [
   {
     button: "Accordion Label 1",
@@ -344,6 +360,38 @@ describe("<Accordion />", () => {
     )
 
     consoleWarnSpy.mockRestore()
+  })
+
+  test("propagates `suppressHydrationWarning` to the AccordionButton outer `<h3>`", () => {
+    render(
+      <Accordion.Root suppressHydrationWarning>
+        <Accordion.Item index={0}>
+          <Accordion.Button data-testid="button">
+            Accordion Label
+          </Accordion.Button>
+          <Accordion.Panel>This is an accordion item</Accordion.Panel>
+        </Accordion.Item>
+      </Accordion.Root>,
+    )
+
+    const button = screen.getByTestId("button")
+    const heading = button.parentElement
+    expect(heading?.tagName).toBe("H3")
+    expect(getReactProps(heading).suppressHydrationWarning).toBeTruthy()
+  })
+
+  test("propagates `suppressHydrationWarning` to the AccordionPanel inner `<p>` wrapping string children", async () => {
+    render(
+      <Accordion.Root defaultIndex={0} suppressHydrationWarning>
+        <Accordion.Item button="Accordion Label" index={0}>
+          <Accordion.Panel>This is an accordion item</Accordion.Panel>
+        </Accordion.Item>
+      </Accordion.Root>,
+    )
+
+    const paragraph = await screen.findByRole("paragraph")
+    expect(paragraph.tagName).toBe("P")
+    expect(getReactProps(paragraph).suppressHydrationWarning).toBeTruthy()
   })
 
   test("correct warnings should be issued when multiple and defaultIndex is not array", () => {

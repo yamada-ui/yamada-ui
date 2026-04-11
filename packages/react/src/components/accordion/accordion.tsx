@@ -65,6 +65,7 @@ const {
   ComponentContext,
   PropsContext: AccordionPropsContext,
   useComponentContext,
+  useHydrationContext,
   usePropsContext: useAccordionPropsContext,
   withContext,
   withProvider,
@@ -211,10 +212,11 @@ export const AccordionButton = withContext<"button", AccordionButtonProps>(
     const { icon: rootIcon } = useComponentContext()
     const { icon: itemIcon } = useItemComponentContext()
     const { disabled, open, getButtonProps } = useAccordionItemContext()
+    const hydrationProps = useHydrationContext()
     const props = { disabled, expanded: open }
 
     return (
-      <styled.h3 {...containerProps}>
+      <styled.h3 {...hydrationProps} {...containerProps}>
         <styled.button {...getButtonProps(rest)}>
           {children}
 
@@ -278,6 +280,7 @@ export const AccordionPanel = withContext<"div", AccordionPanelProps>(
     ...rest
   }) => {
     const { open, getPanelProps } = useAccordionItemContext()
+    const hydrationProps = useHydrationContext()
 
     return (
       <Collapse
@@ -294,7 +297,11 @@ export const AccordionPanel = withContext<"div", AccordionPanelProps>(
         }}
       >
         <styled.div {...getPanelProps(rest)}>
-          {isString(children) ? <styled.p>{children}</styled.p> : children}
+          {isString(children) ? (
+            <styled.p {...hydrationProps}>{children}</styled.p>
+          ) : (
+            children
+          )}
         </styled.div>
       </Collapse>
     )

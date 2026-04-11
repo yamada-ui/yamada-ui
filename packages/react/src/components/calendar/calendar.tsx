@@ -517,7 +517,7 @@ export interface CalendarMonthProps extends Omit<
 export const CalendarMonth = withContext<"table", CalendarMonthProps>(
   "table",
   "month",
-)(undefined, ({ day: dayProp, ...rest }) => {
+)(undefined, ({ day: dayProp, suppressHydrationWarning, ...rest }) => {
   const {
     day,
     monthDays,
@@ -536,7 +536,10 @@ export const CalendarMonth = withContext<"table", CalendarMonthProps>(
 
   const children = (
     <>
-      <styled.thead aria-hidden>
+      <styled.thead
+        aria-hidden
+        suppressHydrationWarning={suppressHydrationWarning}
+      >
         <CalendarWeekDays {...weekdaysProps}>
           {weekdays.map(({ label, value }, index) => (
             <CalendarWeekday
@@ -558,7 +561,11 @@ export const CalendarMonth = withContext<"table", CalendarMonthProps>(
                 {...{ ...dayProps, value }}
               >
                 {runIfFn(dayProp, { value }) ?? (
-                  <styled.span>{label}</styled.span>
+                  <styled.span
+                    suppressHydrationWarning={suppressHydrationWarning}
+                  >
+                    {label}
+                  </styled.span>
                 )}
               </CalendarDay>
             ))}
@@ -569,7 +576,7 @@ export const CalendarMonth = withContext<"table", CalendarMonthProps>(
   )
 
   return {
-    ...getMonthProps({ ...monthProps, ...rest }),
+    ...getMonthProps({ suppressHydrationWarning, ...monthProps, ...rest }),
     children,
   }
 })

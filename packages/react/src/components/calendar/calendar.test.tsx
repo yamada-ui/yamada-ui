@@ -1,4 +1,11 @@
-import { a11y, fireEvent, render, screen, waitFor } from "#test"
+import {
+  a11y,
+  fireEvent,
+  hasSuppressHydrationWarning,
+  render,
+  screen,
+  waitFor,
+} from "#test"
 import { Calendar } from "./"
 import {
   getAdjustedMonth,
@@ -1037,6 +1044,45 @@ describe("<Calendar />", () => {
       "aria-label",
       expect.stringContaining("September"),
     )
+  })
+
+  describe("suppressHydrationWarning propagation", () => {
+    test("propagates suppressHydrationWarning to the hidden thead", () => {
+      const { container } = render(
+        <Calendar.Root
+          defaultMonth={new Date(2024, 5, 1)}
+          suppressHydrationWarning
+        />,
+      )
+
+      const thead = container.querySelector("thead")
+      expect(thead).not.toBeNull()
+      expect(hasSuppressHydrationWarning(thead)).toBeTruthy()
+    })
+
+    test("propagates suppressHydrationWarning to the default day label span", () => {
+      const { container } = render(
+        <Calendar.Root
+          defaultMonth={new Date(2024, 5, 1)}
+          suppressHydrationWarning
+        />,
+      )
+
+      const daySpan = container.querySelector("tbody td span")
+      expect(daySpan).not.toBeNull()
+      expect(hasSuppressHydrationWarning(daySpan)).toBeTruthy()
+    })
+
+    test("does not set suppressHydrationWarning on hidden elements when root omits it", () => {
+      const { container } = render(
+        <Calendar.Root defaultMonth={new Date(2024, 5, 1)} />,
+      )
+
+      const thead = container.querySelector("thead")
+      const daySpan = container.querySelector("tbody td span")
+      expect(hasSuppressHydrationWarning(thead)).toBeFalsy()
+      expect(hasSuppressHydrationWarning(daySpan)).toBeFalsy()
+    })
   })
 })
 

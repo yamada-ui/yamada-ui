@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { a11y, render, screen } from "#test"
+import { a11y, hasSuppressHydrationWarning, render, screen } from "#test"
 import { useMemo } from "react"
 import { Steps } from "."
 import { ButtonGroup } from "../button"
@@ -111,5 +111,23 @@ describe("<Stepper />", () => {
     expect(screen.getByTestId("completedContent").tagName).toBe("DIV")
     expect(screen.getByRole("button", { name: /Prev/i }).tagName).toBe("BUTTON")
     expect(screen.getByRole("button", { name: /Next/i }).tagName).toBe("BUTTON")
+  })
+
+  test("propagates `suppressHydrationWarning` to the items-mode inner wrapper `<div>`", () => {
+    render(<TestComponent suppressHydrationWarning />)
+
+    const title = screen.getAllByRole("heading")[0]
+    const wrapper = title?.parentElement
+    expect(wrapper?.tagName).toBe("DIV")
+    expect(hasSuppressHydrationWarning(wrapper)).toBeTruthy()
+  })
+
+  test("does not set `suppressHydrationWarning` on the items-mode inner wrapper `<div>` when omitted", () => {
+    render(<TestComponent />)
+
+    const title = screen.getAllByRole("heading")[0]
+    const wrapper = title?.parentElement
+    expect(wrapper?.tagName).toBe("DIV")
+    expect(hasSuppressHydrationWarning(wrapper)).toBeFalsy()
   })
 })

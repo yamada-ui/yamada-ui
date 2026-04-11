@@ -39,16 +39,16 @@ function hasConfigFile(cwd: string, patterns: string[]): boolean {
   return patterns.some((pattern) => existsSync(join(cwd, pattern)))
 }
 
-function detectTool<T extends string>(
+function detectTool<Y extends string>(
   cwd: string,
-  registry: { [K in T]: ToolDetectEntry },
-): T | undefined {
+  registry: { [M in Y]: ToolDetectEntry },
+): undefined | Y {
   const found = Object.entries<ToolDetectEntry>(registry).find(
     ([, entry]) =>
       hasConfigFile(cwd, entry.configs) || hasDependency(cwd, entry.dependency),
   )
 
-  return found?.[0] as T | undefined
+  return found?.[0] as undefined | Y
 }
 
 export function detectFormatter(

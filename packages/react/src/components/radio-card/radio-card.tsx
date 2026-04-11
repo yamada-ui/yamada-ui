@@ -7,7 +7,7 @@ import type { UseInputBorderProps } from "../input"
 import type { UseRadioProps } from "../radio"
 import type { RadioCardStyle } from "./radio-card.style"
 import { useMemo } from "react"
-import { createSlotComponent, styled } from "../../core"
+import { createSlotComponent, mergeProps, styled } from "../../core"
 import { useInputBorder } from "../input"
 import { useRadio } from "../radio"
 import { radioCardStyle } from "./radio-card.style"
@@ -133,7 +133,7 @@ export const RadioCardRoot = withProvider<"label", RadioCardRootProps>(
     ])
 
     return (
-      <styled.label {...getRootProps({ ...varProps, ...rootProps })}>
+      <styled.label {...mergeProps(getRootProps(varProps), rootProps)()}>
         <styled.input {...getInputProps(inputProps)} />
         {withIndicator ? (
           <RadioCardIndicator {...getIndicatorProps(indicatorProps)} />

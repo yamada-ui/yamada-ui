@@ -1,4 +1,5 @@
-import { a11y, render, screen } from "#test"
+import { a11y, fireEvent, render, screen } from "#test"
+import { vi } from "vitest"
 import { RadioCard, RadioCardGroup } from "."
 
 const items = [
@@ -94,5 +95,31 @@ describe("<RadioCard />", () => {
     const radio = screen.getByRole("radio")
     const indicator = radio.parentElement?.querySelector("[data-indicator]")
     expect(indicator).toBeNull()
+  })
+
+  test("merges user-provided `rootProps` with internal props instead of overwriting", () => {
+    const onClick = vi.fn()
+
+    render(
+      <RadioCard.Root
+        label="Radio Card"
+        value="1"
+        rootProps={{
+          className: "from-user",
+          style: { backgroundColor: "blue", color: "red" },
+          onClick,
+        }}
+      />,
+    )
+
+    const root = screen.getByRole("radio").parentElement
+
+    expect(root).toHaveClass("ui-radio-card__root", "from-user")
+    expect(root).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(root).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(root!)
+
+    expect(onClick).toHaveBeenCalledWith(expect.anything())
   })
 })

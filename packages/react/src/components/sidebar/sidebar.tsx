@@ -732,12 +732,17 @@ export const SidebarContent = withContext<"ul", SidebarContentProps>(
 export interface SidebarHandleProps extends HTMLStyledProps<"button"> {}
 
 export const SidebarHandle = withContext<"button", SidebarHandleProps>(
-  (props) => {
+  ({ suppressHydrationWarning, ...rest }) => {
     const { handleProps } = useSidePanelComponentContext()
 
     return (
-      <SidebarTrigger {...mergeProps(handleProps, props)()}>
-        <styled.button tabIndex={-1} />
+      <SidebarTrigger
+        {...mergeProps(handleProps, { suppressHydrationWarning, ...rest })()}
+      >
+        <styled.button
+          suppressHydrationWarning={suppressHydrationWarning}
+          tabIndex={-1}
+        />
       </SidebarTrigger>
     )
   },

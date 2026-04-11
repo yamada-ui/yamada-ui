@@ -1,4 +1,11 @@
-import { a11y, fireEvent, render, screen, waitFor } from "#test"
+import {
+  a11y,
+  fireEvent,
+  hasSuppressHydrationWarning,
+  render,
+  screen,
+  waitFor,
+} from "#test"
 import { useRef } from "react"
 import { Sidebar } from "."
 import { Button } from "../button"
@@ -685,5 +692,33 @@ describe("<Sidebar />", () => {
     const link = screen.getByRole("link", { name: "1-1" })
 
     expect(link).toHaveAttribute("data-selected")
+  })
+
+  test("propagates `suppressHydrationWarning` to the `SidebarHandle` `<button>`", () => {
+    const { container } = render(
+      <Sidebar.Root suppressHydrationWarning>
+        <Sidebar.SidePanel>
+          <Sidebar.Handle />
+        </Sidebar.SidePanel>
+      </Sidebar.Root>,
+    )
+
+    const handle = container.querySelector(".ui-sidebar__handle")
+    expect(handle?.tagName).toBe("BUTTON")
+    expect(hasSuppressHydrationWarning(handle)).toBeTruthy()
+  })
+
+  test("does not set `suppressHydrationWarning` on the `SidebarHandle` `<button>` when the root omits it", () => {
+    const { container } = render(
+      <Sidebar.Root>
+        <Sidebar.SidePanel>
+          <Sidebar.Handle />
+        </Sidebar.SidePanel>
+      </Sidebar.Root>,
+    )
+
+    const handle = container.querySelector(".ui-sidebar__handle")
+    expect(handle?.tagName).toBe("BUTTON")
+    expect(hasSuppressHydrationWarning(handle)).toBeFalsy()
   })
 })

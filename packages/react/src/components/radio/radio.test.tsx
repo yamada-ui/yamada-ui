@@ -195,4 +195,33 @@ describe("<Radio />", () => {
     expect(onChangeMock).toHaveBeenCalledWith("2")
     expect(result.current.value).toBe("2")
   })
+
+  test("merges user-provided `rootProps` with internal props instead of overwriting", () => {
+    const onClick = vi.fn()
+
+    render(
+      <RadioGroup.Root>
+        <Radio
+          value="1"
+          rootProps={{
+            className: "from-user",
+            style: { backgroundColor: "blue", color: "red" },
+            onClick,
+          }}
+        >
+          radio
+        </Radio>
+      </RadioGroup.Root>,
+    )
+
+    const root = screen.getByRole("radio").parentElement
+
+    expect(root).toHaveClass("ui-radio__root", "from-user")
+    expect(root).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(root).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(root!)
+
+    expect(onClick).toHaveBeenCalledWith(expect.anything())
+  })
 })

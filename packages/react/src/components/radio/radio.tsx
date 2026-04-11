@@ -7,7 +7,7 @@ import type { UseInputBorderProps } from "../input"
 import type { RadioStyle } from "./radio.style"
 import type { UseRadioProps } from "./use-radio"
 import { useMemo } from "react"
-import { createSlotComponent, styled } from "../../core"
+import { createSlotComponent, mergeProps, styled } from "../../core"
 import { useInputBorder } from "../input"
 import { radioStyle } from "./radio.style"
 import { useRadio } from "./use-radio"
@@ -77,7 +77,7 @@ export const Radio = withProvider<"label", RadioProps>(
     }, [getIndicatorProps, indicatorProps])
 
     return (
-      <styled.label {...getRootProps({ ...varProps, ...rootProps })}>
+      <styled.label {...mergeProps(getRootProps(varProps), rootProps)()}>
         {input}
         {indicator}
         {children ? <RadioLabel {...labelProps}>{children}</RadioLabel> : null}

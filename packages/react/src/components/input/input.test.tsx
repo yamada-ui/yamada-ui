@@ -1,4 +1,5 @@
-import { a11y, render, screen } from "#test"
+import { a11y, fireEvent, render, screen } from "#test"
+import { vi } from "vitest"
 import { Input, InputGroup } from "./"
 
 describe("<Input />", () => {
@@ -123,5 +124,61 @@ describe("<Input />", () => {
     render(<Input focusBorderColor="blue.500" />)
 
     expect(screen.getByRole("textbox")).toBeInTheDocument()
+  })
+
+  test("merges user-provided props with internal props in `InputGroup.Element`", () => {
+    const onClick = vi.fn()
+
+    render(
+      <InputGroup.Root>
+        <InputGroup.Element
+          className="from-user"
+          style={{ backgroundColor: "blue", color: "red" }}
+          errorBorderColor="red.500"
+          onClick={onClick}
+        >
+          Hello
+        </InputGroup.Element>
+        <Input />
+      </InputGroup.Root>,
+    )
+
+    const element = screen.getByText("Hello")
+
+    expect(element).toHaveClass("ui-input-element", "from-user")
+    expect(element).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(element).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(element)
+
+    expect(onClick).toHaveBeenCalledWith(expect.anything())
+  })
+
+  test("merges user-provided props with internal props in `InputGroup.Addon`", () => {
+    const onClick = vi.fn()
+
+    render(
+      <InputGroup.Root>
+        <Input />
+        <InputGroup.Addon
+          className="from-user"
+          style={{ backgroundColor: "blue", color: "red" }}
+          errorBorderColor="red.500"
+          onClick={onClick}
+        >
+          World
+        </InputGroup.Addon>
+      </InputGroup.Root>,
+    )
+
+    const addon = screen.getByText("World")
+
+    expect(addon).toHaveClass("ui-input-addon", "from-user")
+    expect(addon).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(addon).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(addon)
+
+    expect(onClick).toHaveBeenCalledWith(expect.anything())
   })
 })

@@ -3,7 +3,7 @@
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { InputProps } from "./input"
 import type { InputAddonStyle } from "./input-addon.style"
-import { createComponent } from "../../core"
+import { createComponent, mergeProps } from "../../core"
 import { inputAddonStyle } from "./input-addon.style"
 import { useInputBorder } from "./use-input-border"
 
@@ -29,6 +29,6 @@ export const InputAddon = withContext("div")(
   ({ errorBorderColor, focusBorderColor, ...rest }) => {
     const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
 
-    return { ...varProps, ...rest }
+    return mergeProps(varProps, rest)()
   },
 )

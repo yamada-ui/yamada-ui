@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, hasSuppressHydrationWarning, render, screen } from "#test"
 import { BoxIcon } from "../icon"
 import { NativeAccordion } from "./"
 
@@ -160,6 +160,40 @@ describe("<NativeAccordion />", () => {
 
     await user.click(button)
     expect(item).not.toHaveAttribute("open")
+  })
+
+  test("propagates `suppressHydrationWarning` to the NativeAccordionPanel inner `<div>`", () => {
+    render(
+      <NativeAccordion.Root suppressHydrationWarning>
+        <NativeAccordion.Item button="Accordion Label">
+          <NativeAccordion.Panel data-testid="panel">
+            This is an accordion item
+          </NativeAccordion.Panel>
+        </NativeAccordion.Item>
+      </NativeAccordion.Root>,
+    )
+
+    const panel = screen.getByTestId("panel")
+    const inner = panel.firstElementChild
+    expect(inner?.tagName).toBe("DIV")
+    expect(hasSuppressHydrationWarning(inner)).toBeTruthy()
+  })
+
+  test("does not set `suppressHydrationWarning` on the NativeAccordionPanel inner `<div>` when omitted", () => {
+    render(
+      <NativeAccordion.Root>
+        <NativeAccordion.Item button="Accordion Label">
+          <NativeAccordion.Panel data-testid="panel">
+            This is an accordion item
+          </NativeAccordion.Panel>
+        </NativeAccordion.Item>
+      </NativeAccordion.Root>,
+    )
+
+    const panel = screen.getByTestId("panel")
+    const inner = panel.firstElementChild
+    expect(inner?.tagName).toBe("DIV")
+    expect(hasSuppressHydrationWarning(inner)).toBeFalsy()
   })
 
   test("renders item with custom icon", async () => {

@@ -207,12 +207,14 @@ export interface NativeAccordionPanelProps extends HTMLStyledProps {}
 export const NativeAccordionPanel = withContext<
   "div",
   NativeAccordionPanelProps
->(({ children, ...rest }) => {
+>(({ children, suppressHydrationWarning, ...rest }) => {
   const { getPanelProps } = useItemComponentContext()
 
   return (
-    <styled.div {...getPanelProps(rest)}>
-      <styled.div>{children}</styled.div>
+    <styled.div {...getPanelProps({ suppressHydrationWarning, ...rest })}>
+      <styled.div suppressHydrationWarning={suppressHydrationWarning}>
+        {children}
+      </styled.div>
     </styled.div>
   )
 }, "panel")()

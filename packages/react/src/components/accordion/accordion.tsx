@@ -207,15 +207,26 @@ export interface AccordionButtonProps extends HTMLStyledProps<"button"> {
 }
 
 export const AccordionButton = withContext<"button", AccordionButtonProps>(
-  ({ children, icon: customIcon, containerProps, ...rest }) => {
+  ({
+    children,
+    icon: customIcon,
+    suppressHydrationWarning,
+    containerProps,
+    ...rest
+  }) => {
     const { icon: rootIcon } = useComponentContext()
     const { icon: itemIcon } = useItemComponentContext()
     const { disabled, open, getButtonProps } = useAccordionItemContext()
     const props = { disabled, expanded: open }
 
     return (
-      <styled.h3 {...containerProps}>
-        <styled.button {...getButtonProps(rest)}>
+      <styled.h3
+        suppressHydrationWarning={suppressHydrationWarning}
+        {...containerProps}
+      >
+        <styled.button
+          {...getButtonProps({ suppressHydrationWarning, ...rest })}
+        >
           {children}
 
           <AccordionIcon>
@@ -272,6 +283,7 @@ export const AccordionPanel = withContext<"div", AccordionPanelProps>(
     duration,
     endingHeight,
     startingHeight,
+    suppressHydrationWarning,
     transition,
     transitionEnd,
     unmountOnExit,
@@ -293,8 +305,14 @@ export const AccordionPanel = withContext<"div", AccordionPanelProps>(
           unmountOnExit,
         }}
       >
-        <styled.div {...getPanelProps(rest)}>
-          {isString(children) ? <styled.p>{children}</styled.p> : children}
+        <styled.div {...getPanelProps({ suppressHydrationWarning, ...rest })}>
+          {isString(children) ? (
+            <styled.p suppressHydrationWarning={suppressHydrationWarning}>
+              {children}
+            </styled.p>
+          ) : (
+            children
+          )}
         </styled.div>
       </Collapse>
     )

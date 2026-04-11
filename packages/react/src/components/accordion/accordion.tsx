@@ -65,7 +65,6 @@ const {
   ComponentContext,
   PropsContext: AccordionPropsContext,
   useComponentContext,
-  useHydrationContext,
   usePropsContext: useAccordionPropsContext,
   withContext,
   withProvider,
@@ -208,16 +207,26 @@ export interface AccordionButtonProps extends HTMLStyledProps<"button"> {
 }
 
 export const AccordionButton = withContext<"button", AccordionButtonProps>(
-  ({ children, icon: customIcon, containerProps, ...rest }) => {
+  ({
+    children,
+    icon: customIcon,
+    suppressHydrationWarning,
+    containerProps,
+    ...rest
+  }) => {
     const { icon: rootIcon } = useComponentContext()
     const { icon: itemIcon } = useItemComponentContext()
     const { disabled, open, getButtonProps } = useAccordionItemContext()
-    const hydrationProps = useHydrationContext()
     const props = { disabled, expanded: open }
 
     return (
-      <styled.h3 {...hydrationProps} {...containerProps}>
-        <styled.button {...getButtonProps(rest)}>
+      <styled.h3
+        suppressHydrationWarning={suppressHydrationWarning}
+        {...containerProps}
+      >
+        <styled.button
+          {...getButtonProps({ suppressHydrationWarning, ...rest })}
+        >
           {children}
 
           <AccordionIcon>
@@ -274,13 +283,13 @@ export const AccordionPanel = withContext<"div", AccordionPanelProps>(
     duration,
     endingHeight,
     startingHeight,
+    suppressHydrationWarning,
     transition,
     transitionEnd,
     unmountOnExit,
     ...rest
   }) => {
     const { open, getPanelProps } = useAccordionItemContext()
-    const hydrationProps = useHydrationContext()
 
     return (
       <Collapse
@@ -296,9 +305,11 @@ export const AccordionPanel = withContext<"div", AccordionPanelProps>(
           unmountOnExit,
         }}
       >
-        <styled.div {...getPanelProps(rest)}>
+        <styled.div {...getPanelProps({ suppressHydrationWarning, ...rest })}>
           {isString(children) ? (
-            <styled.p {...hydrationProps}>{children}</styled.p>
+            <styled.p suppressHydrationWarning={suppressHydrationWarning}>
+              {children}
+            </styled.p>
           ) : (
             children
           )}

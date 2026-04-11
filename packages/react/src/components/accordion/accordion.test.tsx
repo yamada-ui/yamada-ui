@@ -1,23 +1,7 @@
-import { a11y, render, screen } from "#test"
+import { a11y, getReactProps, render, screen } from "#test"
 import { noop } from "../../utils"
 import { BoxIcon } from "../icon"
 import { Accordion } from "./"
-
-interface ReactProps {
-  [key: string]: unknown
-}
-
-function getReactProps(el: Element | null | undefined): ReactProps {
-  if (!el) return {}
-
-  const key = Object.keys(el).find((k) => k.startsWith("__reactProps$"))
-  if (!key) return {}
-
-  const value = Reflect.get(el, key)
-  if (typeof value !== "object" || value === null) return {}
-
-  return { ...value }
-}
 
 const items = [
   {

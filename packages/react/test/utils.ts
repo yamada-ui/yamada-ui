@@ -1,6 +1,22 @@
 import { act } from "@testing-library/react"
 import { isArray, isString, wait } from "@yamada-ui/utils"
 
+interface ReactProps {
+  [key: string]: unknown
+}
+
+export function getReactProps(el: Element | null | undefined): ReactProps {
+  if (!el) return {}
+
+  const key = Object.keys(el).find((k) => k.startsWith("__reactProps$"))
+  if (!key) return {}
+
+  const value = Reflect.get(el, key)
+  if (typeof value !== "object" || value === null) return {}
+
+  return { ...value }
+}
+
 export async function waitForAnimationFrame(ms = 16) {
   await act(async () => wait(ms))
 

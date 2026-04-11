@@ -141,15 +141,17 @@ export interface SegmentedControlItemProps<Y extends string = string>
 export const SegmentedControlItem = withContext<
   "label",
   SegmentedControlItemProps
->(({ children, indicatorProps, ...rest }) => {
+>(({ children, suppressHydrationWarning, indicatorProps, ...rest }) => {
   const { checked, getInputProps, getLabelProps } =
     useSegmentedControlItem(rest)
 
   return (
-    <styled.label {...getLabelProps()}>
-      <styled.input {...getInputProps()} />
+    <styled.label {...getLabelProps({ suppressHydrationWarning })}>
+      <styled.input {...getInputProps({ suppressHydrationWarning })} />
 
-      <styled.span>{children}</styled.span>
+      <styled.span suppressHydrationWarning={suppressHydrationWarning}>
+        {children}
+      </styled.span>
 
       {checked ? <SegmentedControlIndicator {...indicatorProps} /> : null}
     </styled.label>

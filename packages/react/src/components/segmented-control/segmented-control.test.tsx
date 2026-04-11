@@ -1,5 +1,11 @@
 import type { FC } from "react"
-import { a11y, fireEvent, render, screen } from "#test"
+import {
+  a11y,
+  fireEvent,
+  hasSuppressHydrationWarning,
+  render,
+  screen,
+} from "#test"
 import { SegmentedControl } from "./"
 
 const items: Required<SegmentedControl.RootProps>["items"] = [
@@ -79,6 +85,28 @@ describe("<SegmentedControl />", () => {
     const radios = screen.getAllByRole("radio")
     radios.forEach((radio) => {
       expect(radio).toHaveAttribute("data-readonly")
+    })
+  })
+
+  test("propagates `suppressHydrationWarning` to the hidden `<input>` and `<span>`", () => {
+    render(<TestComponent suppressHydrationWarning />)
+
+    const radios = screen.getAllByRole("radio")
+    radios.forEach((radio) => {
+      expect(hasSuppressHydrationWarning(radio)).toBeTruthy()
+      const span = radio.parentElement?.querySelector("span")
+      expect(hasSuppressHydrationWarning(span)).toBeTruthy()
+    })
+  })
+
+  test("does not set `suppressHydrationWarning` when the root omits it", () => {
+    render(<TestComponent />)
+
+    const radios = screen.getAllByRole("radio")
+    radios.forEach((radio) => {
+      expect(hasSuppressHydrationWarning(radio)).toBeFalsy()
+      const span = radio.parentElement?.querySelector("span")
+      expect(hasSuppressHydrationWarning(span)).toBeFalsy()
     })
   })
 })

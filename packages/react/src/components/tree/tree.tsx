@@ -20,7 +20,7 @@ import {
   useCallback,
   useMemo,
 } from "react"
-import { createSlotComponent, styled } from "../../core"
+import { createSlotComponent, mergeProps, styled } from "../../core"
 import {
   cast,
   createContext,
@@ -461,13 +461,19 @@ export const TreeItem = withContext<"div", TreeItemProps>(
       query: query ?? (isString(label) ? label : undefined),
       value: valueProp,
     })
-    const itemProps = {
-      className,
-      css,
-      colorScheme,
-      "--level": level.toString(),
-      ...rootProps,
-    }
+    const itemProps = useMemo(
+      () =>
+        mergeProps(
+          {
+            className,
+            css,
+            colorScheme,
+            "--level": level.toString(),
+          },
+          rootProps,
+        )(),
+      [className, css, colorScheme, level, rootProps],
+    )
     const callbackProps = { disabled, expanded: groupOpen }
     const context = useMemo(
       () => ({
@@ -493,31 +499,28 @@ export const TreeItem = withContext<"div", TreeItemProps>(
       () => ({
         checkboxProps: {
           size: componentContext.size,
-          ...getCheckboxProps({
-            ...componentContext.checkboxProps,
-            ...checkboxProps,
-          }),
+          ...getCheckboxProps(
+            mergeProps(componentContext.checkboxProps, checkboxProps)(),
+          ),
         },
-        endElementProps: {
-          ...componentContext.endElementProps,
-          ...endElementProps,
-        },
+        endElementProps: mergeProps(
+          componentContext.endElementProps,
+          endElementProps,
+        )(),
         indicatorProps: {
-          ...getIndicatorProps({
-            ...componentContext.indicatorProps,
-            ...indicatorProps,
-          }),
+          ...getIndicatorProps(
+            mergeProps(componentContext.indicatorProps, indicatorProps)(),
+          ),
         },
         labelProps: {
-          ...getLabelProps({
-            ...componentContext.labelProps,
-            ...labelProps,
-          }),
+          ...getLabelProps(
+            mergeProps(componentContext.labelProps, labelProps)(),
+          ),
         },
-        startElementProps: {
-          ...componentContext.startElementProps,
-          ...startElementProps,
-        },
+        startElementProps: mergeProps(
+          componentContext.startElementProps,
+          startElementProps,
+        )(),
       }),
       [
         checkboxProps,
@@ -567,10 +570,9 @@ export const TreeItem = withContext<"div", TreeItemProps>(
               <TreeGroup
                 duration={!animated ? 0 : undefined}
                 open={groupOpen}
-                {...getGroupProps({
-                  ...componentContext.groupProps,
-                  ...groupProps,
-                })}
+                {...getGroupProps(
+                  mergeProps(componentContext.groupProps, groupProps)(),
+                )}
               >
                 {children}
               </TreeGroup>
@@ -627,7 +629,7 @@ const TreeIndicator = withContext<"svg", TreeIndicatorProps>(
 )(undefined, (props) => {
   const { indicatorProps } = useItemComponentContext()
 
-  return { ...indicatorProps, ...props }
+  return mergeProps(indicatorProps, props)()
 })
 
 interface TreeCheckboxProps extends CheckboxProps {}
@@ -638,7 +640,7 @@ const TreeCheckbox = withContext<"input", TreeCheckboxProps>(
 )(undefined, (props) => {
   const { checkboxProps } = useItemComponentContext()
 
-  return { ...checkboxProps, ...props }
+  return mergeProps(checkboxProps, props)()
 })
 
 interface TreeStartElementProps extends HTMLStyledProps {}
@@ -649,7 +651,7 @@ const TreeStartElement = withContext<"div", TreeStartElementProps>("div", {
 })(undefined, (props) => {
   const { startElementProps } = useItemComponentContext()
 
-  return { ...startElementProps, ...props }
+  return mergeProps(startElementProps, props)()
 })
 
 interface TreeEndElementProps extends HTMLStyledProps {}
@@ -660,7 +662,7 @@ const TreeEndElement = withContext<"div", TreeEndElementProps>("div", {
 })(undefined, (props) => {
   const { endElementProps } = useItemComponentContext()
 
-  return { ...endElementProps, ...props }
+  return mergeProps(endElementProps, props)()
 })
 
 interface TreeLabelProps extends HTMLStyledProps<"span"> {}
@@ -670,6 +672,6 @@ const TreeLabel = withContext<"span", TreeLabelProps>("span", "label")(
   (props) => {
     const { labelProps } = useItemComponentContext()
 
-    return { ...labelProps, ...props }
+    return mergeProps(labelProps, props)()
   },
 )

@@ -1,5 +1,11 @@
 import type { FC } from "react"
-import { a11y, page, render, renderHook } from "#test/browser"
+import {
+  a11y,
+  hasSuppressHydrationWarning,
+  page,
+  render,
+  renderHook,
+} from "#test/browser"
 import { Text } from "../text"
 import { Loading } from "./"
 import { useLoading } from "./loading-provider"
@@ -65,6 +71,118 @@ describe("<Loading />", () => {
     )
 
     await expect.element(page.getByTestId("oval-secondary")).toBeInTheDocument()
+  })
+
+  describe("suppressHydrationWarning", () => {
+    test("Audio: forwards to the root svg, not to inner rect shapes", async () => {
+      const { container } = await render(
+        <Loading.Audio suppressHydrationWarning />,
+      )
+
+      const svg = container.querySelector("svg")
+      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
+
+      const rects = container.querySelectorAll("rect")
+      expect(rects.length).toBeTruthy()
+      rects.forEach((rect) => {
+        expect(hasSuppressHydrationWarning(rect)).toBeFalsy()
+      })
+    })
+
+    test("Circles: forwards to the root svg, not to inner circle shapes", async () => {
+      const { container } = await render(
+        <Loading.Circles suppressHydrationWarning />,
+      )
+
+      const svg = container.querySelector("svg")
+      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
+
+      const circles = container.querySelectorAll("circle")
+      expect(circles.length).toBeTruthy()
+      circles.forEach((circle) => {
+        expect(hasSuppressHydrationWarning(circle)).toBeFalsy()
+      })
+    })
+
+    test("Dots: forwards to the root svg, not to inner circle shapes", async () => {
+      const { container } = await render(
+        <Loading.Dots suppressHydrationWarning />,
+      )
+
+      const svg = container.querySelector("svg")
+      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
+
+      const circles = container.querySelectorAll("circle")
+      expect(circles.length).toBeTruthy()
+      circles.forEach((circle) => {
+        expect(hasSuppressHydrationWarning(circle)).toBeFalsy()
+      })
+    })
+
+    test("Grid: forwards to the root svg, not to inner circle shapes", async () => {
+      const { container } = await render(
+        <Loading.Grid suppressHydrationWarning />,
+      )
+
+      const svg = container.querySelector("svg")
+      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
+
+      const circles = container.querySelectorAll("circle")
+      expect(circles.length).toBeTruthy()
+      circles.forEach((circle) => {
+        expect(hasSuppressHydrationWarning(circle)).toBeFalsy()
+      })
+    })
+
+    test("Oval: forwards to the root svg, not to inner circle and path shapes", async () => {
+      const { container } = await render(
+        <Loading.Oval suppressHydrationWarning />,
+      )
+
+      const svg = container.querySelector("svg")
+      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
+
+      const circles = container.querySelectorAll("circle")
+      const paths = container.querySelectorAll("path")
+      expect(circles.length).toBeTruthy()
+      expect(paths.length).toBeTruthy()
+      circles.forEach((circle) => {
+        expect(hasSuppressHydrationWarning(circle)).toBeFalsy()
+      })
+      paths.forEach((path) => {
+        expect(hasSuppressHydrationWarning(path)).toBeFalsy()
+      })
+    })
+
+    test("Puff: forwards to the root svg, not to inner circle shapes", async () => {
+      const { container } = await render(
+        <Loading.Puff suppressHydrationWarning />,
+      )
+
+      const svg = container.querySelector("svg")
+      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
+
+      const circles = container.querySelectorAll("circle")
+      expect(circles.length).toBeTruthy()
+      circles.forEach((circle) => {
+        expect(hasSuppressHydrationWarning(circle)).toBeFalsy()
+      })
+    })
+
+    test("Rings: forwards to the root svg, not to inner circle shapes", async () => {
+      const { container } = await render(
+        <Loading.Rings suppressHydrationWarning />,
+      )
+
+      const svg = container.querySelector("svg")
+      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
+
+      const circles = container.querySelectorAll("circle")
+      expect(circles.length).toBeTruthy()
+      circles.forEach((circle) => {
+        expect(hasSuppressHydrationWarning(circle)).toBeFalsy()
+      })
+    })
   })
 })
 

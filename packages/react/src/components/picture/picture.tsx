@@ -130,10 +130,14 @@ export const Picture: FC<PictureProps> = ({
 
   const sourceElements = useMemo(
     () =>
-      sources.map(({ maxW: _maxW, minW: _minW, ...rest }, index) => (
-        <styled.source key={index} {...rest} />
+      sources.map(({ maxW: _maxW, minW: _minW, ...sourceRest }, index) => (
+        <styled.source
+          key={index}
+          suppressHydrationWarning={rest.suppressHydrationWarning}
+          {...sourceRest}
+        />
       )),
-    [sources],
+    [sources, rest.suppressHydrationWarning],
   )
 
   return (

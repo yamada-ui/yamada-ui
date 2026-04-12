@@ -1,4 +1,10 @@
-import { a11y, fireEvent, render, screen } from "#test"
+import {
+  a11y,
+  fireEvent,
+  hasSuppressHydrationWarning,
+  render,
+  screen,
+} from "#test"
 import { Rating } from "."
 
 describe("<Rating />", () => {
@@ -209,6 +215,28 @@ describe("<Rating />", () => {
 
     const activeInput = container.querySelector("input[data-active='true']")
     expect(activeInput).toBeNull()
+  })
+
+  test("propagates `suppressHydrationWarning` to the hidden `<input>` when the root sets it", () => {
+    const { container } = render(<Rating suppressHydrationWarning />)
+
+    const inputs = container.querySelectorAll("input[type='radio']")
+    expect(inputs.length).toBeGreaterThan(0)
+
+    for (const input of inputs) {
+      expect(hasSuppressHydrationWarning(input)).toBeTruthy()
+    }
+  })
+
+  test("does not set `suppressHydrationWarning` on the hidden `<input>` when the root omits it", () => {
+    const { container } = render(<Rating />)
+
+    const inputs = container.querySelectorAll("input[type='radio']")
+    expect(inputs.length).toBeGreaterThan(0)
+
+    for (const input of inputs) {
+      expect(hasSuppressHydrationWarning(input)).toBeFalsy()
+    }
   })
 
   test("should update value on KeyboardEvent", async () => {

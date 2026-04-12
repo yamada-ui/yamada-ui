@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { a11y, render, screen } from "#test"
+import { a11y, hasSuppressHydrationWarning, render, screen } from "#test"
 import { useMemo } from "react"
 import { Steps } from "."
 import { ButtonGroup } from "../button"
@@ -111,5 +111,21 @@ describe("<Stepper />", () => {
     expect(screen.getByTestId("completedContent").tagName).toBe("DIV")
     expect(screen.getByRole("button", { name: /Prev/i }).tagName).toBe("BUTTON")
     expect(screen.getByRole("button", { name: /Next/i }).tagName).toBe("BUTTON")
+  })
+
+  test("propagates `suppressHydrationWarning` to the `<ol>` list element", () => {
+    render(<TestComponent suppressHydrationWarning />)
+
+    const list = screen.getByRole("list")
+    expect(list.tagName).toBe("OL")
+    expect(hasSuppressHydrationWarning(list)).toBeTruthy()
+  })
+
+  test("does not set `suppressHydrationWarning` on the `<ol>` list element when omitted", () => {
+    render(<TestComponent />)
+
+    const list = screen.getByRole("list")
+    expect(list.tagName).toBe("OL")
+    expect(hasSuppressHydrationWarning(list)).toBeFalsy()
   })
 })

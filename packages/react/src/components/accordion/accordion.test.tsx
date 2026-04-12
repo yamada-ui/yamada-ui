@@ -270,12 +270,14 @@ describe("<Accordion />", () => {
       </Accordion.Root>,
     )
 
-    await expect.element(page.getByText("Not expanded")).toBeVisible()
+    const button = page.getByRole("button", { name: /Not expanded/i })
+    await expect.element(button).toBeVisible()
 
-    const button = page.getByRole("button")
     await user.click(button)
 
-    await expect.element(page.getByText("Is expanded")).toBeVisible()
+    await expect
+      .element(page.getByRole("button", { name: /Is expanded/i }))
+      .toBeVisible()
   })
 
   test("focus moves correctly on ArrowDown", async () => {
@@ -353,7 +355,7 @@ describe("<Accordion />", () => {
     )
 
     await vi.waitFor(() =>
-      expect(consoleWarnSpy).toHaveBeenCalledWith(
+      expect(consoleWarnSpy).toHaveBeenLastCalledWith(
         "Accordion: If 'multiple' is passed, 'toggle' will be ignored. Either remove 'toggle' or 'multiple' depending on whether you want multiple accordions visible or not",
       ),
     )
@@ -373,7 +375,7 @@ describe("<Accordion />", () => {
     )
 
     await vi.waitFor(() =>
-      expect(consoleWarnSpy).toHaveBeenCalledWith(
+      expect(consoleWarnSpy).toHaveBeenLastCalledWith(
         "Accordion: If 'multiple' is passed, then 'index' or 'defaultIndex' must be an array.",
       ),
     )

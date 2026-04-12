@@ -1,5 +1,7 @@
 import { a11y, fireEvent, render, screen, waitFor } from "#test"
+import { vi } from "vitest"
 import { ColorPicker } from "."
+import { InputPropsContext } from "../input"
 
 describe("<ColorPicker />", () => {
   const defaultEyeDropper = (window as any).EyeDropper
@@ -37,6 +39,48 @@ describe("<ColorPicker />", () => {
     expect(screen.getByTestId("root")).toHaveClass("ui-color-picker__root")
     expect(screen.getAllByRole("combobox")[0]).toHaveClass(
       "ui-color-picker__field",
+    )
+  })
+
+  test("merges top-level className with `rootProps` className on the root element", () => {
+    const onRootClick = vi.fn()
+
+    render(
+      <ColorPicker
+        className="from-top"
+        placeholder="Choose a color"
+        rootProps={{
+          className: "from-root",
+          "data-testid": "root",
+          onClick: onRootClick,
+        }}
+      />,
+    )
+
+    const root = screen.getByTestId("root")
+
+    expect(root).toHaveClass("ui-color-picker__root", "from-top", "from-root")
+
+    fireEvent.click(root)
+
+    expect(onRootClick).toHaveBeenCalledTimes(1)
+  })
+
+  test("merges `InputPropsContext` className with user-provided className", () => {
+    render(
+      <InputPropsContext value={{ className: "from-context" }}>
+        <ColorPicker
+          className="from-user"
+          placeholder="Choose a color"
+          rootProps={{ "data-testid": "root" }}
+        />
+      </InputPropsContext>,
+    )
+
+    expect(screen.getByTestId("root")).toHaveClass(
+      "ui-color-picker__root",
+      "from-context",
+      "from-user",
     )
   })
 

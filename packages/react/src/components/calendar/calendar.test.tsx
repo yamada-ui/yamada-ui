@@ -1047,19 +1047,6 @@ describe("<Calendar />", () => {
   })
 
   describe("suppressHydrationWarning propagation", () => {
-    test("propagates suppressHydrationWarning to the hidden thead", () => {
-      const { container } = render(
-        <Calendar.Root
-          defaultMonth={new Date(2024, 5, 1)}
-          suppressHydrationWarning
-        />,
-      )
-
-      const thead = container.querySelector("thead")
-      expect(thead).not.toBeNull()
-      expect(hasSuppressHydrationWarning(thead)).toBeTruthy()
-    })
-
     test("propagates suppressHydrationWarning to the default day label span", () => {
       const { container } = render(
         <Calendar.Root
@@ -1073,14 +1060,12 @@ describe("<Calendar />", () => {
       expect(hasSuppressHydrationWarning(daySpan)).toBeTruthy()
     })
 
-    test("does not set suppressHydrationWarning on hidden elements when root omits it", () => {
+    test("does not set suppressHydrationWarning on day label span when root omits it", () => {
       const { container } = render(
         <Calendar.Root defaultMonth={new Date(2024, 5, 1)} />,
       )
 
-      const thead = container.querySelector("thead")
       const daySpan = container.querySelector("tbody td span")
-      expect(hasSuppressHydrationWarning(thead)).toBeFalsy()
       expect(hasSuppressHydrationWarning(daySpan)).toBeFalsy()
     })
   })

@@ -6,7 +6,7 @@ import type { FieldProps } from "../field"
 import type { UseInputBorderProps } from "../input"
 import type { NativeSelectStyle } from "./native-select.style"
 import type { UseNativeSelectProps } from "./use-native-select"
-import { createSlotComponent } from "../../core"
+import { createSlotComponent, mergeProps } from "../../core"
 import { useGroupItemProps } from "../group"
 import { ChevronDownIcon } from "../icon"
 import { InputGroup, useInputBorder, useInputPropsContext } from "../input"
@@ -81,10 +81,11 @@ export const NativeSelectRoot = withProvider<"select", NativeSelectRootProps>(
 
     return (
       <InputGroup.Root
-        className={className}
-        css={css}
-        colorScheme={colorScheme}
-        {...getRootProps({ ...groupItemProps, ...rootProps })}
+        {...mergeProps(
+          { className, css, colorScheme },
+          getRootProps(groupItemProps),
+          rootProps,
+        )()}
       >
         <NativeSelectField {...getFieldProps(varProps)} />
 
@@ -98,7 +99,7 @@ export const NativeSelectRoot = withProvider<"select", NativeSelectRootProps>(
 )((props) => {
   const context = useInputPropsContext()
 
-  return { ...context, ...props }
+  return mergeProps(context, props)()
 })
 
 interface NativeSelectFieldProps extends HTMLStyledProps<"select"> {}

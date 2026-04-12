@@ -13,7 +13,7 @@ import type { UsePopoverStyleProps, UsePopupAnimationProps } from "../popover"
 import type { DatePickerStyle } from "./date-picker.style"
 import type { UseDatePickerProps, UseDatePickerReturn } from "./use-date-picker"
 import { useMemo } from "react"
-import { createSlotComponent, styled } from "../../core"
+import { createSlotComponent, mergeProps, styled } from "../../core"
 import { useFieldSizing } from "../../hooks/use-field-sizing"
 import { cast, isArray, isDate, isObject, mergeRefs } from "../../utils"
 import { Calendar } from "../calendar"
@@ -177,10 +177,11 @@ export const DatePicker = withProvider(
       <ComponentContext value={componentContext}>
         <Popover.Root {...mergedPopoverProps}>
           <InputGroup.Root
-            className={className}
-            css={css}
-            colorScheme={colorScheme}
-            {...getRootProps({ ...groupItemProps, ...rootProps })}
+            {...mergeProps(
+              { className, css, colorScheme },
+              getRootProps(groupItemProps),
+              rootProps,
+            )()}
           >
             <Popover.Trigger>
               <DatePickerField {...getFieldProps(varProps)}>
@@ -226,7 +227,7 @@ export const DatePicker = withProvider(
 )((props) => {
   const context = useInputPropsContext()
 
-  return { ...context, ...props }
+  return mergeProps(context, props)()
 }) as GenericsComponent<{
   <Multiple extends boolean = false, Range extends boolean = false>(
     props: DatePickerProps<Multiple, Range>,

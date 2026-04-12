@@ -5,7 +5,7 @@ import type { FieldProps } from "../field"
 import type { UseInputBorderProps } from "../input"
 import type { TextareaStyle } from "./textarea.style"
 import type { UseTextareaProps } from "./use-textarea"
-import { createComponent } from "../../core"
+import { createComponent, mergeProps } from "../../core"
 import { useFieldProps } from "../field"
 import { useInputBorder, useInputPropsContext } from "../input"
 import { textareaStyle } from "./textarea.style"
@@ -36,7 +36,7 @@ export const Textarea = withContext("textarea")(
   (props) => {
     const context = useInputPropsContext()
 
-    return { rows: 2, ...context, ...props }
+    return mergeProps({ rows: 2 }, context, props)()
   },
   (props) => {
     const {

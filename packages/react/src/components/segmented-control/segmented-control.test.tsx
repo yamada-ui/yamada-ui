@@ -88,14 +88,12 @@ describe("<SegmentedControl />", () => {
     })
   })
 
-  test("propagates `suppressHydrationWarning` to the hidden `<input>` and `<span>`", () => {
+  test("propagates `suppressHydrationWarning` to the hidden `<input>`", () => {
     render(<TestComponent suppressHydrationWarning />)
 
     const radios = screen.getAllByRole("radio")
     radios.forEach((radio) => {
       expect(hasSuppressHydrationWarning(radio)).toBeTruthy()
-      const span = radio.parentElement?.querySelector("span")
-      expect(hasSuppressHydrationWarning(span)).toBeTruthy()
     })
   })
 
@@ -105,8 +103,21 @@ describe("<SegmentedControl />", () => {
     const radios = screen.getAllByRole("radio")
     radios.forEach((radio) => {
       expect(hasSuppressHydrationWarning(radio)).toBeFalsy()
-      const span = radio.parentElement?.querySelector("span")
-      expect(hasSuppressHydrationWarning(span)).toBeFalsy()
     })
+  })
+
+  test("propagates `suppressHydrationWarning` to item-level `<input>` when using explicit children", () => {
+    render(
+      <SegmentedControl.Root defaultValue="one">
+        <SegmentedControl.Item suppressHydrationWarning value="one">
+          One
+        </SegmentedControl.Item>
+        <SegmentedControl.Item value="two">Two</SegmentedControl.Item>
+      </SegmentedControl.Root>,
+    )
+
+    const radios = screen.getAllByRole("radio")
+    expect(hasSuppressHydrationWarning(radios[0])).toBeTruthy()
+    expect(hasSuppressHydrationWarning(radios[1])).toBeFalsy()
   })
 })

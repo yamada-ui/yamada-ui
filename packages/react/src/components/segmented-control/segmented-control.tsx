@@ -149,9 +149,7 @@ export const SegmentedControlItem = withContext<
     <styled.label {...getLabelProps({ suppressHydrationWarning })}>
       <styled.input {...getInputProps({ suppressHydrationWarning })} />
 
-      <styled.span suppressHydrationWarning={suppressHydrationWarning}>
-        {children}
-      </styled.span>
+      <styled.span>{children}</styled.span>
 
       {checked ? <SegmentedControlIndicator {...indicatorProps} /> : null}
     </styled.label>

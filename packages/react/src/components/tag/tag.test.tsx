@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { noop } from "../../utils"
 import { CheckIcon } from "../icon"
 import { Tag } from "./"
@@ -12,60 +12,63 @@ describe("<Tag />", () => {
     expect(Tag.displayName).toBe("TagRoot")
   })
 
-  test("sets `className` correctly", () => {
-    render(
+  test("sets `className` correctly", async () => {
+    await render(
       <Tag data-testid="tag" endIcon={<CheckIcon />} startIcon={<CheckIcon />}>
         Tag
       </Tag>,
     )
-    const el = screen.getByTestId("tag")
-    expect(el).toHaveClass("ui-tag__root")
-    expect(el.children[0]).toHaveClass("ui-tag__icon")
-    expect(el.children[0]).toHaveClass("ui-tag__icon--start")
-    expect(el.children[1]).toHaveClass("ui-tag__content")
-    expect(el.children[2]).toHaveClass("ui-tag__icon")
-    expect(el.children[2]).toHaveClass("ui-tag__icon--end")
-    render(
+    const tag = page.getByTestId("tag")
+    await expect.element(tag).toHaveClass("ui-tag__root")
+    const tagEl = tag.element()
+    expect(tagEl.children[0]).toHaveClass("ui-tag__icon")
+    expect(tagEl.children[0]).toHaveClass("ui-tag__icon--start")
+    expect(tagEl.children[1]).toHaveClass("ui-tag__content")
+    expect(tagEl.children[2]).toHaveClass("ui-tag__icon")
+    expect(tagEl.children[2]).toHaveClass("ui-tag__icon--end")
+    await render(
       <Tag data-testid="tagWithCloseButton" onClose={noop}>
         Tag
       </Tag>,
     )
-    const ElWithCloseButton = screen.getByTestId("tagWithCloseButton")
-    expect(ElWithCloseButton.lastElementChild).toHaveClass("ui-tag__icon")
-    expect(ElWithCloseButton.lastElementChild).toHaveClass(
+    const tagWithCloseButton = page.getByTestId("tagWithCloseButton").element()
+    expect(tagWithCloseButton.lastElementChild).toHaveClass("ui-tag__icon")
+    expect(tagWithCloseButton.lastElementChild).toHaveClass(
       "ui-tag__icon--close-button",
     )
   })
 
-  test("renders HTML tag correctly", () => {
-    render(
+  test("renders HTML tag correctly", async () => {
+    await render(
       <Tag data-testid="tag" endIcon={<CheckIcon />} startIcon={<CheckIcon />}>
         Tag
       </Tag>,
     )
-    const el = screen.getByTestId("tag")
-    expect(el.tagName).toBe("SPAN")
-    expect(el.children[0]?.tagName).toBe("SPAN")
-    expect(el.children[1]?.tagName).toBe("SPAN")
-    expect(el.children[2]?.tagName).toBe("SPAN")
-    render(
+    const tagEl = page.getByTestId("tag").element()
+    expect(tagEl.tagName).toBe("SPAN")
+    expect(tagEl.children[0]?.tagName).toBe("SPAN")
+    expect(tagEl.children[1]?.tagName).toBe("SPAN")
+    expect(tagEl.children[2]?.tagName).toBe("SPAN")
+    await render(
       <Tag data-testid="tagWithCloseButton" onClose={noop}>
         Tag
       </Tag>,
     )
-    const ElWithCloseButton = screen.getByTestId("tagWithCloseButton")
-    expect(ElWithCloseButton.lastElementChild?.tagName).toBe("SPAN")
+    const tagWithCloseButton = page.getByTestId("tagWithCloseButton").element()
+    expect(tagWithCloseButton.lastElementChild?.tagName).toBe("SPAN")
   })
 
-  test("Tag with icon renders correctly", () => {
-    render(<Tag startIcon={<CheckIcon data-testid="startIcon" />}>Tag</Tag>)
-    expect(screen.getByTestId("startIcon")).toBeInTheDocument()
-    render(<Tag endIcon={<CheckIcon data-testid="endIcon" />}>Tag</Tag>)
-    expect(screen.getByTestId("endIcon")).toBeInTheDocument()
+  test("Tag with icon renders correctly", async () => {
+    await render(
+      <Tag startIcon={<CheckIcon data-testid="startIcon" />}>Tag</Tag>,
+    )
+    await expect.element(page.getByTestId("startIcon")).toBeInTheDocument()
+    await render(<Tag endIcon={<CheckIcon data-testid="endIcon" />}>Tag</Tag>)
+    await expect.element(page.getByTestId("endIcon")).toBeInTheDocument()
   })
 
-  test("should be disabled", () => {
-    render(
+  test("should be disabled", async () => {
+    await render(
       <Tag
         data-testid="tag"
         disabled
@@ -75,17 +78,18 @@ describe("<Tag />", () => {
         Tag
       </Tag>,
     )
-    const el = screen.getByTestId("tag")
-    expect(el).toHaveAttribute("data-disabled")
-    expect(el.children[0]).toHaveAttribute("data-disabled")
-    expect(el.children[1]).toHaveAttribute("data-disabled")
-    expect(el.children[2]).toHaveAttribute("data-disabled")
-    render(
+    const tag = page.getByTestId("tag")
+    await expect.element(tag).toHaveAttribute("data-disabled")
+    const tagEl = tag.element()
+    expect(tagEl.children[0]).toHaveAttribute("data-disabled")
+    expect(tagEl.children[1]).toHaveAttribute("data-disabled")
+    expect(tagEl.children[2]).toHaveAttribute("data-disabled")
+    await render(
       <Tag data-testid="tagWithCloseButton" disabled onClose={noop}>
         Tag
       </Tag>,
     )
-    const ElWithCloseButton = screen.getByTestId("tagWithCloseButton")
-    expect(ElWithCloseButton.lastElementChild).toHaveAttribute("data-disabled")
+    const tagWithCloseButton = page.getByTestId("tagWithCloseButton").element()
+    expect(tagWithCloseButton.lastElementChild).toHaveAttribute("data-disabled")
   })
 })

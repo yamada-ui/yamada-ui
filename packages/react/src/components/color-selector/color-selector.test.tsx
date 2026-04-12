@@ -122,6 +122,42 @@ describe("<ColorSelector />", () => {
     )
   })
 
+  test("merges saturation slider props from root and user", () => {
+    const onRootClick = vi.fn()
+    const onUserClick = vi.fn()
+
+    render(
+      <ColorSelector.Root
+        defaultValue="#ff0000"
+        saturationSliderProps={{
+          className: "from-root",
+          style: { backgroundColor: "rgb(255, 0, 0)" },
+          "data-testid": "saturation-slider",
+          onClick: onRootClick,
+        }}
+      >
+        <ColorSelector.SaturationSlider
+          className="from-user"
+          style={{ color: "rgb(0, 0, 255)" }}
+          onClick={onUserClick}
+        />
+      </ColorSelector.Root>,
+    )
+
+    const saturationSlider = screen.getByTestId("saturation-slider")
+
+    expect(saturationSlider).toHaveClass("from-root", "from-user")
+    expect(saturationSlider).toHaveStyle({
+      backgroundColor: "rgb(255, 0, 0)",
+      color: "rgb(0, 0, 255)",
+    })
+
+    fireEvent.click(saturationSlider)
+
+    expect(onRootClick).toHaveBeenCalledTimes(1)
+    expect(onUserClick).toHaveBeenCalledTimes(1)
+  })
+
   test("renders HTML tag correctly", () => {
     render(
       <ColorSelector.Root

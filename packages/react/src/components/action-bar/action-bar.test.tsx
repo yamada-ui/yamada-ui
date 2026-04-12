@@ -106,10 +106,7 @@ describe("<ActionBar />", () => {
     await user.click(page.getByTestId("closeTrigger"))
 
     await vi.waitFor(() => {
-      expect(page.getByTestId("openTrigger").element()).toHaveAttribute(
-        "aria-expanded",
-        "false",
-      )
+      expect(document.querySelector('[data-testid="content"]')).toBeNull()
     })
   })
 

@@ -631,6 +631,57 @@ describe("<Sidebar />", () => {
     expect(screen.getByRole("link", { name: "3" })).toBeInTheDocument()
   })
 
+  test("should merge `tooltipProps` from side panel and item without overwriting user props", async () => {
+    const onSidePanelClick = vi.fn()
+    const onItemClick = vi.fn()
+
+    render(
+      <Sidebar.Root
+        disclosure={{ desktop: { defaultOpen: false } }}
+        mode="icon"
+      >
+        <Sidebar.SidePanel
+          tooltipProps={{
+            className: "from-side-panel",
+            style: { color: "red" },
+            onClick: onSidePanelClick,
+          }}
+        >
+          <Sidebar.Content>
+            <Sidebar.Item
+              label="tooltip-item"
+              value="/tooltip-item"
+              tooltipProps={{
+                className: "from-item",
+                style: { backgroundColor: "blue" },
+                onClick: onItemClick,
+              }}
+            />
+          </Sidebar.Content>
+        </Sidebar.SidePanel>
+      </Sidebar.Root>,
+    )
+
+    fireEvent.pointerEnter(screen.getByRole("link", { name: "tooltip-item" }), {
+      pointerType: "mouse",
+    })
+
+    await waitFor(() => {
+      expect(screen.getByRole("tooltip")).toBeInTheDocument()
+    })
+
+    const tooltip = screen.getByRole("tooltip")
+
+    expect(tooltip).toHaveClass("from-side-panel", "from-item")
+    expect(tooltip).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(tooltip).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(tooltip)
+
+    expect(onSidePanelClick).toHaveBeenCalledTimes(1)
+    expect(onItemClick).toHaveBeenCalledTimes(1)
+  })
+
   test("should load async children when defaultExpandedValue triggers later", async () => {
     const asyncChildren = vi.fn(() =>
       Promise.resolve([{ label: "lazy-1", value: "/lazy/1" }]),

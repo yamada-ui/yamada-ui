@@ -4,7 +4,7 @@ import type { HTMLStyledProps, ThemeProps, WithoutThemeProps } from "../../core"
 import type { InputProps } from "../input"
 import type { NumberInputStyle } from "./number-input.style"
 import type { UseNumberInputProps } from "./use-number-input"
-import { createSlotComponent } from "../../core"
+import { createSlotComponent, mergeProps } from "../../core"
 import { useGroupItemProps } from "../group"
 import { ChevronDownIcon, ChevronUpIcon } from "../icon"
 import { Input, InputGroup, useInputPropsContext } from "../input"
@@ -79,8 +79,7 @@ export const NumberInput = withProvider<"input", NumberInputProps>(
         className={className}
         css={css}
         colorScheme={colorScheme}
-        {...groupItemProps}
-        {...rootProps}
+        {...mergeProps(groupItemProps, rootProps)()}
       >
         <NumberInputField {...getInputProps()} />
 
@@ -101,7 +100,7 @@ export const NumberInput = withProvider<"input", NumberInputProps>(
 )((props) => {
   const context = useInputPropsContext()
 
-  return { ...context, ...props }
+  return mergeProps(context, props)()
 })
 
 interface NumberInputFieldProps extends InputProps {}

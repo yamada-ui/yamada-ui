@@ -1,5 +1,7 @@
 import { a11y, page, render } from "#test/browser"
 import { NumberInput } from "."
+import { Group } from "../group"
+import { InputPropsContext } from "../input"
 
 describe("<NumberInput />", () => {
   test("renders component correctly", async () => {
@@ -8,6 +10,53 @@ describe("<NumberInput />", () => {
 
   test("sets `displayName` correctly", () => {
     expect(NumberInput.displayName).toBe("NumberInputRoot")
+  })
+
+  test("should merge root props from context and user props without overwriting className, style, and event handlers", async () => {
+    const onContextClick = vi.fn()
+    const onUserClick = vi.fn()
+
+    await render(
+      <InputPropsContext
+        value={{
+          className: "from-context",
+          style: { marginTop: "1px" },
+          onClick: onContextClick,
+        }}
+      >
+        <Group>
+          <NumberInput
+            className="from-user"
+            style={{ marginLeft: "2px" }}
+            aria-label="Input number"
+            rootProps={{ style: { marginRight: "3px" } }}
+            onClick={onUserClick}
+          />
+        </Group>
+      </InputPropsContext>,
+    )
+
+    const input = page.getByRole("spinbutton")
+    const root = input.element().closest(".ui-group")
+
+    expect(root).not.toBeNull()
+    expect(root).toHaveClass("from-context", "from-user")
+    expect(root).toHaveStyle({ marginRight: "3px" })
+    expect(root).toHaveAttribute(
+      "style",
+      expect.stringContaining("--group-count: 1"),
+    )
+    expect(root).toHaveAttribute(
+      "style",
+      expect.stringContaining("--group-index: 0"),
+    )
+    await expect.element(input).toHaveStyle({ marginTop: "1px" })
+    await expect.element(input).toHaveStyle({ marginLeft: "2px" })
+
+    await input.click()
+
+    expect(onContextClick).toHaveBeenCalledTimes(1)
+    expect(onUserClick).toHaveBeenCalledTimes(1)
   })
 
   test("render input with props", async () => {

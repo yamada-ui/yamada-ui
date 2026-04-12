@@ -328,6 +328,43 @@ describe("<Accordion />", () => {
     expect(item3).toHaveFocus()
   })
 
+  test("forwards `suppressHydrationWarning` to the AccordionButton `<button>` via getButtonProps", () => {
+    render(
+      <Accordion.Root suppressHydrationWarning>
+        <Accordion.Item index={0}>
+          <Accordion.Button data-testid="button">
+            Accordion Label
+          </Accordion.Button>
+          <Accordion.Panel>This is an accordion item</Accordion.Panel>
+        </Accordion.Item>
+      </Accordion.Root>,
+    )
+
+    const button = screen.getByTestId("button")
+    const key = Object.keys(button).find((k) => k.startsWith("__reactProps$"))
+    expect(key).toBeDefined()
+    const props = Reflect.get(button, key!)
+    expect(props.suppressHydrationWarning).toBeTruthy()
+  })
+
+  test("forwards `suppressHydrationWarning` to the AccordionPanel `<div>` via getPanelProps", () => {
+    render(
+      <Accordion.Root defaultIndex={0} suppressHydrationWarning>
+        <Accordion.Item button="Accordion Label" index={0}>
+          <Accordion.Panel data-testid="panel">
+            This is an accordion item
+          </Accordion.Panel>
+        </Accordion.Item>
+      </Accordion.Root>,
+    )
+
+    const panel = screen.getByTestId("panel")
+    const key = Object.keys(panel).find((k) => k.startsWith("__reactProps$"))
+    expect(key).toBeDefined()
+    const props = Reflect.get(panel, key!)
+    expect(props.suppressHydrationWarning).toBeTruthy()
+  })
+
   test("correct warnings should be issued when multiple and toggle", () => {
     const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
 

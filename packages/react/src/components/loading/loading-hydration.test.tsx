@@ -3,18 +3,16 @@ import { Loading } from "./"
 
 describe("<Loading /> suppressHydrationWarning propagation", () => {
   describe("Audio", () => {
-    test("propagates `suppressHydrationWarning` to every rect shape child", () => {
+    test("forwards `suppressHydrationWarning` to the root svg element", () => {
       const { container } = render(<Loading.Audio suppressHydrationWarning />)
 
-      const rects = container.querySelectorAll("rect")
-      expect(rects.length).toBeTruthy()
-      rects.forEach((rect) => {
-        expect(hasSuppressHydrationWarning(rect)).toBeTruthy()
-      })
+      const svg = container.querySelector("svg")
+      expect(svg).toBeTruthy()
+      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
     })
 
-    test("does not set `suppressHydrationWarning` when the root omits it", () => {
-      const { container } = render(<Loading.Audio />)
+    test("does not set `suppressHydrationWarning` on inner rect shapes", () => {
+      const { container } = render(<Loading.Audio suppressHydrationWarning />)
 
       const rects = container.querySelectorAll("rect")
       expect(rects.length).toBeTruthy()
@@ -25,18 +23,16 @@ describe("<Loading /> suppressHydrationWarning propagation", () => {
   })
 
   describe("Circles", () => {
-    test("propagates `suppressHydrationWarning` to every circle shape child", () => {
+    test("forwards `suppressHydrationWarning` to the root svg element", () => {
       const { container } = render(<Loading.Circles suppressHydrationWarning />)
 
-      const circles = container.querySelectorAll("circle")
-      expect(circles.length).toBeTruthy()
-      circles.forEach((circle) => {
-        expect(hasSuppressHydrationWarning(circle)).toBeTruthy()
-      })
+      const svg = container.querySelector("svg")
+      expect(svg).toBeTruthy()
+      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
     })
 
-    test("does not set `suppressHydrationWarning` when the root omits it", () => {
-      const { container } = render(<Loading.Circles />)
+    test("does not set `suppressHydrationWarning` on inner circle shapes", () => {
+      const { container } = render(<Loading.Circles suppressHydrationWarning />)
 
       const circles = container.querySelectorAll("circle")
       expect(circles.length).toBeTruthy()
@@ -47,18 +43,16 @@ describe("<Loading /> suppressHydrationWarning propagation", () => {
   })
 
   describe("Dots", () => {
-    test("propagates `suppressHydrationWarning` to every circle shape child", () => {
+    test("forwards `suppressHydrationWarning` to the root svg element", () => {
       const { container } = render(<Loading.Dots suppressHydrationWarning />)
 
-      const circles = container.querySelectorAll("circle")
-      expect(circles.length).toBeTruthy()
-      circles.forEach((circle) => {
-        expect(hasSuppressHydrationWarning(circle)).toBeTruthy()
-      })
+      const svg = container.querySelector("svg")
+      expect(svg).toBeTruthy()
+      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
     })
 
-    test("does not set `suppressHydrationWarning` when the root omits it", () => {
-      const { container } = render(<Loading.Dots />)
+    test("does not set `suppressHydrationWarning` on inner circle shapes", () => {
+      const { container } = render(<Loading.Dots suppressHydrationWarning />)
 
       const circles = container.querySelectorAll("circle")
       expect(circles.length).toBeTruthy()
@@ -69,18 +63,16 @@ describe("<Loading /> suppressHydrationWarning propagation", () => {
   })
 
   describe("Grid", () => {
-    test("propagates `suppressHydrationWarning` to every circle shape child", () => {
+    test("forwards `suppressHydrationWarning` to the root svg element", () => {
       const { container } = render(<Loading.Grid suppressHydrationWarning />)
 
-      const circles = container.querySelectorAll("circle")
-      expect(circles.length).toBeTruthy()
-      circles.forEach((circle) => {
-        expect(hasSuppressHydrationWarning(circle)).toBeTruthy()
-      })
+      const svg = container.querySelector("svg")
+      expect(svg).toBeTruthy()
+      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
     })
 
-    test("does not set `suppressHydrationWarning` when the root omits it", () => {
-      const { container } = render(<Loading.Grid />)
+    test("does not set `suppressHydrationWarning` on inner circle shapes", () => {
+      const { container } = render(<Loading.Grid suppressHydrationWarning />)
 
       const circles = container.querySelectorAll("circle")
       expect(circles.length).toBeTruthy()
@@ -91,23 +83,16 @@ describe("<Loading /> suppressHydrationWarning propagation", () => {
   })
 
   describe("Oval", () => {
-    test("propagates `suppressHydrationWarning` to every circle and path shape child", () => {
+    test("forwards `suppressHydrationWarning` to the root svg element", () => {
       const { container } = render(<Loading.Oval suppressHydrationWarning />)
 
-      const circles = container.querySelectorAll("circle")
-      const paths = container.querySelectorAll("path")
-      expect(circles.length).toBeTruthy()
-      expect(paths.length).toBeTruthy()
-      circles.forEach((circle) => {
-        expect(hasSuppressHydrationWarning(circle)).toBeTruthy()
-      })
-      paths.forEach((path) => {
-        expect(hasSuppressHydrationWarning(path)).toBeTruthy()
-      })
+      const svg = container.querySelector("svg")
+      expect(svg).toBeTruthy()
+      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
     })
 
-    test("does not set `suppressHydrationWarning` when the root omits it", () => {
-      const { container } = render(<Loading.Oval />)
+    test("does not set `suppressHydrationWarning` on inner circle and path shapes", () => {
+      const { container } = render(<Loading.Oval suppressHydrationWarning />)
 
       const circles = container.querySelectorAll("circle")
       const paths = container.querySelectorAll("path")
@@ -123,18 +108,16 @@ describe("<Loading /> suppressHydrationWarning propagation", () => {
   })
 
   describe("Puff", () => {
-    test("propagates `suppressHydrationWarning` to every circle shape child", () => {
+    test("forwards `suppressHydrationWarning` to the root svg element", () => {
       const { container } = render(<Loading.Puff suppressHydrationWarning />)
 
-      const circles = container.querySelectorAll("circle")
-      expect(circles.length).toBeTruthy()
-      circles.forEach((circle) => {
-        expect(hasSuppressHydrationWarning(circle)).toBeTruthy()
-      })
+      const svg = container.querySelector("svg")
+      expect(svg).toBeTruthy()
+      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
     })
 
-    test("does not set `suppressHydrationWarning` when the root omits it", () => {
-      const { container } = render(<Loading.Puff />)
+    test("does not set `suppressHydrationWarning` on inner circle shapes", () => {
+      const { container } = render(<Loading.Puff suppressHydrationWarning />)
 
       const circles = container.querySelectorAll("circle")
       expect(circles.length).toBeTruthy()
@@ -145,18 +128,16 @@ describe("<Loading /> suppressHydrationWarning propagation", () => {
   })
 
   describe("Rings", () => {
-    test("propagates `suppressHydrationWarning` to every circle shape child", () => {
+    test("forwards `suppressHydrationWarning` to the root svg element", () => {
       const { container } = render(<Loading.Rings suppressHydrationWarning />)
 
-      const circles = container.querySelectorAll("circle")
-      expect(circles.length).toBeTruthy()
-      circles.forEach((circle) => {
-        expect(hasSuppressHydrationWarning(circle)).toBeTruthy()
-      })
+      const svg = container.querySelector("svg")
+      expect(svg).toBeTruthy()
+      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
     })
 
-    test("does not set `suppressHydrationWarning` when the root omits it", () => {
-      const { container } = render(<Loading.Rings />)
+    test("does not set `suppressHydrationWarning` on inner circle shapes", () => {
+      const { container } = render(<Loading.Rings suppressHydrationWarning />)
 
       const circles = container.querySelectorAll("circle")
       expect(circles.length).toBeTruthy()

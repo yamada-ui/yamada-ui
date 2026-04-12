@@ -14,16 +14,11 @@ export interface PuffProps extends LoadingProps {}
  * @see https://yamada-ui.com/docs/components/feedback/loading
  */
 export const Puff = withContext<"svg", PuffProps>(
-  ({ dur = "1.8s", suppressHydrationWarning, ...rest }) => {
+  ({ dur = "1.8s", ...rest }) => {
     dur = isString(dur) ? parseFloat(dur) : dur
 
     return (
-      <Icon
-        stroke="currentColor"
-        suppressHydrationWarning={suppressHydrationWarning}
-        viewBox="0 0 44 44"
-        {...rest}
-      >
+      <Icon stroke="currentColor" viewBox="0 0 44 44" {...rest}>
         <g fill="none" fillRule="evenodd" strokeWidth="2">
           <styled.circle
             animationDuration={`${dur}s`}
@@ -32,7 +27,6 @@ export const Puff = withContext<"svg", PuffProps>(
             cx="22px"
             cy="22px"
             r="1px"
-            suppressHydrationWarning={suppressHydrationWarning}
             transformBox="fill-box"
             transformOrigin="center"
             vectorEffect="non-scaling-stroke"
@@ -49,7 +43,6 @@ export const Puff = withContext<"svg", PuffProps>(
             cx="22px"
             cy="22px"
             r="1px"
-            suppressHydrationWarning={suppressHydrationWarning}
             transformBox="fill-box"
             transformOrigin="center"
             vectorEffect="non-scaling-stroke"

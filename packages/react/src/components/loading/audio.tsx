@@ -15,16 +15,11 @@ export interface AudioProps extends LoadingProps {}
  * @see https://yamada-ui.com/docs/components/feedback/loading
  */
 export const Audio = withContext<"svg", AudioProps>(
-  ({ dur = "1.4s", suppressHydrationWarning, ...rest }) => {
+  ({ dur = "1.4s", ...rest }) => {
     dur = isString(dur) ? parseFloat(dur) : dur
 
     return (
-      <Icon
-        fill="currentColor"
-        suppressHydrationWarning={suppressHydrationWarning}
-        viewBox="0 0 55 80"
-        {...rest}
-      >
+      <Icon fill="currentColor" viewBox="0 0 55 80" {...rest}>
         <g transform="matrix(1 0 0 -1 0 80)">
           {[
             {
@@ -70,7 +65,6 @@ export const Audio = withContext<"svg", AudioProps>(
                 animationTimingFunction="linear"
                 h="80px"
                 rx="3px"
-                suppressHydrationWarning={suppressHydrationWarning}
                 w="10px"
                 _keyframes={keyframes}
               />

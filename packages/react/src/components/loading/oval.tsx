@@ -14,16 +14,11 @@ export interface OvalProps extends LoadingProps {}
  * @see https://yamada-ui.com/docs/components/feedback/loading
  */
 export const Oval = withContext<"svg", OvalProps>(
-  ({ dur = "1s", secondaryColor, suppressHydrationWarning, ...rest }) => {
+  ({ dur = "1s", secondaryColor, ...rest }) => {
     dur = isString(dur) ? parseFloat(dur) : dur
 
     return (
-      <Icon
-        stroke="currentColor"
-        suppressHydrationWarning={suppressHydrationWarning}
-        viewBox="0 0 38 38"
-        {...rest}
-      >
+      <Icon stroke="currentColor" viewBox="0 0 38 38" {...rest}>
         <g fill="none" fillRule="evenodd">
           <g strokeWidth="2" transform="translate(1 1)">
             <styled.circle
@@ -33,7 +28,6 @@ export const Oval = withContext<"svg", OvalProps>(
               cx="18px"
               cy="18px"
               r="18px"
-              suppressHydrationWarning={suppressHydrationWarning}
             />
             <styled.path
               animationDuration={`${dur}s`}
@@ -41,7 +35,6 @@ export const Oval = withContext<"svg", OvalProps>(
               animationName="spin"
               animationTimingFunction="linear"
               d="M36 18c0-9.94-8.06-18-18-18"
-              suppressHydrationWarning={suppressHydrationWarning}
               transformOrigin="18px 18px"
             />
           </g>

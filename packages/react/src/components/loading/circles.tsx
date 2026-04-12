@@ -14,16 +14,11 @@ export interface CirclesProps extends LoadingProps {}
  * @see https://yamada-ui.com/docs/components/feedback/loading
  */
 export const Circles = withContext<"svg", CirclesProps>(
-  ({ dur = "3s", suppressHydrationWarning, ...rest }) => {
+  ({ dur = "3s", ...rest }) => {
     dur = isString(dur) ? parseFloat(dur) : dur
 
     return (
-      <Icon
-        stroke="currentColor"
-        suppressHydrationWarning={suppressHydrationWarning}
-        viewBox="0 0 58 58"
-        {...rest}
-      >
+      <Icon stroke="currentColor" viewBox="0 0 58 58" {...rest}>
         <g fill="none" fillRule="evenodd">
           <g stroke="currentColor" strokeWidth="1.5" transform="translate(2 1)">
             {[
@@ -45,7 +40,6 @@ export const Circles = withContext<"svg", CirclesProps>(
                 fill="currentColor"
                 fillOpacity={!index ? "1" : "0"}
                 r="5px"
-                suppressHydrationWarning={suppressHydrationWarning}
                 _keyframes={{
                   "0%, 25%, 100%": { fillOpacity: 0 },
                   "12.5%": { fillOpacity: 1 },

@@ -158,6 +158,176 @@ describe("<ColorSelector />", () => {
     expect(onUserClick).toHaveBeenCalledTimes(1)
   })
 
+  test("merges hue slider props from root and user", () => {
+    const onRootClick = vi.fn()
+    const onUserClick = vi.fn()
+
+    render(
+      <ColorSelector.Root
+        defaultValue="#ff0000"
+        hueSliderProps={{
+          className: "from-root",
+          style: { backgroundColor: "rgb(255, 0, 0)" },
+          "data-testid": "hue-slider",
+          onClick: onRootClick,
+        }}
+      >
+        <ColorSelector.HueSlider
+          className="from-user"
+          style={{ color: "rgb(0, 0, 255)" }}
+          onClick={onUserClick}
+        />
+      </ColorSelector.Root>,
+    )
+
+    const hueSlider = screen.getByTestId("hue-slider")
+
+    expect(hueSlider).toHaveClass("from-root", "from-user")
+    expect(hueSlider).toHaveStyle({
+      backgroundColor: "rgb(255, 0, 0)",
+      color: "rgb(0, 0, 255)",
+    })
+
+    fireEvent.click(hueSlider)
+
+    expect(onRootClick).toHaveBeenCalledTimes(1)
+    expect(onUserClick).toHaveBeenCalledTimes(1)
+  })
+
+  test("merges alpha slider props from root and user", () => {
+    const onRootClick = vi.fn()
+    const onUserClick = vi.fn()
+
+    render(
+      <ColorSelector.Root
+        defaultValue="hsla(0, 100%, 50%, 0.5)"
+        format="hsla"
+        alphaSliderProps={{
+          className: "from-root",
+          style: { backgroundColor: "rgb(255, 0, 0)" },
+          "data-testid": "alpha-slider",
+          onClick: onRootClick,
+        }}
+      >
+        <ColorSelector.AlphaSlider
+          className="from-user"
+          style={{ color: "rgb(0, 0, 255)" }}
+          onClick={onUserClick}
+        />
+      </ColorSelector.Root>,
+    )
+
+    const alphaSlider = screen.getByTestId("alpha-slider")
+
+    expect(alphaSlider).toHaveClass("from-root", "from-user")
+    expect(alphaSlider).toHaveStyle({
+      backgroundColor: "rgb(255, 0, 0)",
+      color: "rgb(0, 0, 255)",
+    })
+
+    fireEvent.click(alphaSlider)
+
+    expect(onRootClick).toHaveBeenCalledTimes(1)
+    expect(onUserClick).toHaveBeenCalledTimes(1)
+  })
+
+  test("merges color swatch group label props from root and user", () => {
+    const onRootClick = vi.fn()
+    const onUserClick = vi.fn()
+
+    render(
+      <ColorSelector.Root
+        colorSwatches={["#ff0000"]}
+        defaultValue="#ffffff"
+        colorSwatchGroupLabelProps={{
+          className: "from-root",
+          "data-testid": "group-label",
+          onClick: onRootClick,
+        }}
+      >
+        <ColorSelector.ColorSwatchGroupLabel
+          className="from-user"
+          onClick={onUserClick}
+        >
+          Swatches
+        </ColorSelector.ColorSwatchGroupLabel>
+        <ColorSelector.ColorSwatchGroup />
+      </ColorSelector.Root>,
+    )
+
+    const groupLabel = screen.getByTestId("group-label")
+
+    expect(groupLabel).toHaveClass("from-root", "from-user")
+
+    fireEvent.click(groupLabel)
+
+    expect(onRootClick).toHaveBeenCalledTimes(1)
+    expect(onUserClick).toHaveBeenCalledTimes(1)
+  })
+
+  test("merges color swatch item props from root and user", () => {
+    const onRootClick = vi.fn()
+    const onUserClick = vi.fn()
+
+    render(
+      <ColorSelector.Root
+        defaultValue="#ffffff"
+        colorSwatchItemProps={{
+          className: "from-root",
+          onClick: onRootClick,
+        }}
+      >
+        <ColorSelector.ColorSwatchGroup>
+          <ColorSelector.ColorSwatchItem
+            className="from-user"
+            value="#ff0000"
+            onClick={onUserClick}
+          />
+        </ColorSelector.ColorSwatchGroup>
+      </ColorSelector.Root>,
+    )
+
+    const option = screen.getByRole("option")
+
+    expect(option).toHaveClass("from-root", "from-user")
+
+    fireEvent.click(option)
+
+    expect(onRootClick).toHaveBeenCalledTimes(1)
+    expect(onUserClick).toHaveBeenCalledTimes(1)
+  })
+
+  test("merges color swatch group props from root and user", () => {
+    const onRootClick = vi.fn()
+    const onUserClick = vi.fn()
+
+    render(
+      <ColorSelector.Root
+        colorSwatches={["#ff0000"]}
+        defaultValue="#ffffff"
+        colorSwatchGroupProps={{
+          className: "from-root",
+          "data-testid": "swatch-group",
+          onClick: onRootClick,
+        }}
+      >
+        <ColorSelector.ColorSwatchGroup
+          className="from-user"
+          onClick={onUserClick}
+        />
+      </ColorSelector.Root>,
+    )
+
+    const swatchGroup = screen.getByTestId("swatch-group")
+
+    expect(swatchGroup).toHaveClass("from-root", "from-user")
+
+    fireEvent.click(swatchGroup)
+
+    expect(onRootClick).toHaveBeenCalledTimes(1)
+    expect(onUserClick).toHaveBeenCalledTimes(1)
+  })
+
   test("renders HTML tag correctly", () => {
     render(
       <ColorSelector.Root

@@ -67,6 +67,7 @@ import {
   createShouldForwardProp,
   createSlotComponent,
   getCSS,
+  mergeProps,
   styled,
   useSystem,
   useTheme,
@@ -404,7 +405,9 @@ export const PolarChart = withProvider(
       <ComponentContext value={componentContext}>
         <Chart
           components={components}
-          render={(props) => render(getChartProps({ ...props, ...chartProps }))}
+          render={(props) =>
+            render(getChartProps(mergeProps(props, chartProps)()))
+          }
           {...getRootProps()}
         />
       </ComponentContext>
@@ -563,12 +566,16 @@ export const ChartPie = withContext<"svg", ChartPieProps>((props) => {
     nameKey,
     sectorProps,
     ...rest
-  } = { ...pieProps, ...props }
+  } = mergeProps(pieProps, props)()
   const shape = useCallback(
     (props: any, index: number) => {
       if (isNumber(activeIndex)) props.isActive = index === activeIndex
 
-      return <ChartSector {...props} {...runIfFn(sectorProps, props, index)} />
+      return (
+        <ChartSector
+          {...mergeProps(props, runIfFn(sectorProps, props, index))()}
+        />
+      )
     },
     [activeIndex, sectorProps],
   )
@@ -577,8 +584,10 @@ export const ChartPie = withContext<"svg", ChartPieProps>((props) => {
 
     const Component = (props: any) => (
       <ChartPieLabel
-        {...props}
-        {...(labelProp !== true ? runIfFn(labelProp, props) : {})}
+        {...mergeProps(
+          props,
+          labelProp !== true ? runIfFn(labelProp, props) : {},
+        )()}
       />
     )
 
@@ -589,8 +598,10 @@ export const ChartPie = withContext<"svg", ChartPieProps>((props) => {
 
     const Component = ({ key: _, ...rest }: any) => (
       <ChartPieLabelLine
-        {...rest}
-        {...(labelLineProp !== true ? runIfFn(labelLineProp, rest) : {})}
+        {...mergeProps(
+          rest,
+          labelLineProp !== true ? runIfFn(labelLineProp, rest) : {},
+        )()}
       />
     )
 
@@ -683,7 +694,7 @@ export const ChartDonut = component<"svg", ChartDonutProps>(ChartPie, "donut")(
   (props) => {
     const { pieProps } = useComponentContext()
 
-    return { ...pieProps, ...props }
+    return mergeProps(pieProps, props)()
   },
   ({ label, ...rest }) => ({ innerRadius: !label ? "70%" : "50%", ...rest }),
 ) as GenericsComponent<{
@@ -728,7 +739,7 @@ export const ChartRadar = withContext<"path", ChartRadarProps>((props) => {
     label: labelProp = false,
     stroke: strokeProp,
     ...rest
-  } = { ...radarProps, ...props }
+  } = mergeProps(radarProps, props)()
   const id = useId()
   const system = useSystem()
   const { theme } = useTheme()
@@ -901,7 +912,7 @@ export const ChartAngleAxis = withContext<"text", ChartAngleAxisProps>(
       tick: tickProp = true,
       tickLine: tickLineProp = false,
       ...rest
-    } = { ...angleAxisProps, ...props }
+    } = mergeProps(angleAxisProps, props)()
     const system = useSystem()
     const { theme } = useTheme()
     const tickProps = useSlotComponentProps({}, "angleAxisTick")
@@ -1062,7 +1073,7 @@ export const ChartRadiusAxis = withContext<"text", ChartRadiusAxisProps>(
       tick: tickProp = true,
       tickLine: tickLineProp = false,
       ...rest
-    } = { ...radiusAxisProps, ...props }
+    } = mergeProps(radiusAxisProps, props)()
     const system = useSystem()
     const { theme } = useTheme()
     const tickProps = useSlotComponentProps({}, "radiusAxisTick")
@@ -1247,7 +1258,7 @@ export const ChartRadial = withContext<"svg", ChartRadialProps>(
       nameKey,
       sectorProps,
       ...rest
-    } = { ...radialProps, ...props }
+    } = mergeProps(radialProps, props)()
     const system = useSystem()
     const { theme } = useTheme()
     const { nameKeyRef } = useChartComponentContext()
@@ -1261,8 +1272,7 @@ export const ChartRadial = withContext<"svg", ChartRadialProps>(
         return (
           <ChartSector
             color={color}
-            {...props}
-            {...runIfFn(sectorProps, props)}
+            {...mergeProps(props, runIfFn(sectorProps, props))()}
           />
         )
       },

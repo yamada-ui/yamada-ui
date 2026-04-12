@@ -54,6 +54,7 @@ import {
   createShouldForwardProp,
   createSlotComponent,
   getCSS,
+  mergeProps,
   styled,
   useSystem,
   useTheme,
@@ -360,7 +361,9 @@ export const CartesianChart = withProvider(
       <ComponentContext value={componentContext}>
         <Chart
           components={components}
-          render={(props) => render(getChartProps({ ...props, ...chartProps }))}
+          render={(props) =>
+            render(getChartProps(mergeProps(props, chartProps)()))
+          }
           {...getRootProps()}
         />
       </ComponentContext>
@@ -486,7 +489,7 @@ export const ChartXAxis = withContext<"svg", ChartXAxisProps>((props) => {
     tick: tickProp = true,
     tickLine: tickLineProp = false,
     ...rest
-  } = { ...xAxisProps, ...props }
+  } = mergeProps(xAxisProps, props)()
   const system = useSystem()
   const { theme } = useTheme()
   const tickProps = useSlotComponentProps({}, "xAxisTick")
@@ -612,7 +615,7 @@ export const ChartYAxis = withContext<"svg", ChartYAxisProps>((props) => {
     tick: tickProp = true,
     tickLine: tickLineProp = false,
     ...rest
-  } = { ...yAxisProps, ...props }
+  } = mergeProps(yAxisProps, props)()
   const system = useSystem()
   const { theme } = useTheme()
   const tickProps = useSlotComponentProps({}, "yAxisTick")
@@ -764,7 +767,7 @@ export const ChartLine = withContext<"line", ChartLineProps>((props) => {
     label: labelProp = false,
     stroke: strokeProp,
     ...rest
-  } = { ...lineProps, ...props }
+  } = mergeProps(lineProps, props)()
   const system = useSystem()
   const { theme } = useTheme()
   const color = strokeProp ?? rest.color
@@ -931,7 +934,7 @@ export const ChartArea = withContext<"line", ChartAreaProps>((props) => {
     stroke: strokeProp,
     withGradient,
     ...rest
-  } = { ...areaProps, ...props }
+  } = mergeProps(areaProps, props)()
   const id = useId()
   const system = useSystem()
   const { theme } = useTheme()
@@ -1099,7 +1102,7 @@ export const ChartBar = withContext<"path", ChartBarProps>((props) => {
     fill: fillProp,
     label: labelProp = false,
     ...rest
-  } = { ...barProps, ...props }
+  } = mergeProps(barProps, props)()
   const system = useSystem()
   const { theme } = useTheme()
   const color = fillProp ?? rest.color

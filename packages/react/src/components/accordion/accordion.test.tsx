@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, hasSuppressHydrationWarning, render, screen } from "#test"
 import { noop } from "../../utils"
 import { BoxIcon } from "../icon"
 import { Accordion } from "./"
@@ -341,10 +341,7 @@ describe("<Accordion />", () => {
     )
 
     const button = screen.getByTestId("button")
-    const key = Object.keys(button).find((k) => k.startsWith("__reactProps$"))
-    expect(key).toBeDefined()
-    const props = Reflect.get(button, key!)
-    expect(props.suppressHydrationWarning).toBeTruthy()
+    expect(hasSuppressHydrationWarning(button)).toBeTruthy()
   })
 
   test("forwards `suppressHydrationWarning` to the AccordionPanel `<div>` via getPanelProps", () => {
@@ -359,10 +356,7 @@ describe("<Accordion />", () => {
     )
 
     const panel = screen.getByTestId("panel")
-    const key = Object.keys(panel).find((k) => k.startsWith("__reactProps$"))
-    expect(key).toBeDefined()
-    const props = Reflect.get(panel, key!)
-    expect(props.suppressHydrationWarning).toBeTruthy()
+    expect(hasSuppressHydrationWarning(panel)).toBeTruthy()
   })
 
   test("correct warnings should be issued when multiple and toggle", () => {

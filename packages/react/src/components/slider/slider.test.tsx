@@ -1,4 +1,10 @@
-import { a11y, fireEvent, render, screen } from "#test"
+import {
+  a11y,
+  fireEvent,
+  hasSuppressHydrationWarning,
+  render,
+  screen,
+} from "#test"
 import { vi } from "vitest"
 import { Slider } from "."
 import { noop } from "../../utils"
@@ -124,6 +130,46 @@ describe("<Slider />", () => {
     const inputs = container.querySelectorAll('input[type="hidden"]')
     expect(inputs).toHaveLength(1)
     expect(inputs[0]).toHaveAttribute("value", "50")
+  })
+
+  test("propagates `suppressHydrationWarning` to the hidden `<input>`", () => {
+    const { container } = render(
+      <Slider.Root defaultValue={50} suppressHydrationWarning />,
+    )
+
+    const input = container.querySelector('input[type="hidden"]')
+    expect(hasSuppressHydrationWarning(input)).toBeTruthy()
+  })
+
+  test("propagates `suppressHydrationWarning` to hidden `<input>`s in range mode", () => {
+    const { container } = render(
+      <Slider.Root defaultValue={[25, 75]} suppressHydrationWarning />,
+    )
+
+    const inputs = container.querySelectorAll('input[type="hidden"]')
+    expect(inputs).toHaveLength(2)
+    expect(hasSuppressHydrationWarning(inputs[0])).toBeTruthy()
+    expect(hasSuppressHydrationWarning(inputs[1])).toBeTruthy()
+  })
+
+  test("does not set `suppressHydrationWarning` on the hidden `<input>` when omitted", () => {
+    const { container } = render(<Slider.Root defaultValue={50} />)
+
+    const input = container.querySelector('input[type="hidden"]')
+    expect(hasSuppressHydrationWarning(input)).toBeFalsy()
+  })
+
+  test("allows `inputProps` to override `suppressHydrationWarning` on the hidden `<input>`", () => {
+    const { container } = render(
+      <Slider.Root
+        defaultValue={50}
+        suppressHydrationWarning
+        inputProps={{ suppressHydrationWarning: false }}
+      />,
+    )
+
+    const input = container.querySelector('input[type="hidden"]')
+    expect(hasSuppressHydrationWarning(input)).toBeFalsy()
   })
 
   test("renders marks with object format including labels", () => {

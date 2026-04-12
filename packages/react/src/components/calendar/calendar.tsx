@@ -534,6 +534,8 @@ export const CalendarMonth = withContext<"table", CalendarMonthProps>(
 
   dayProp ??= day
 
+  const { suppressHydrationWarning } = rest
+
   const children = (
     <>
       <styled.thead aria-hidden>
@@ -558,7 +560,11 @@ export const CalendarMonth = withContext<"table", CalendarMonthProps>(
                 {...{ ...dayProps, value }}
               >
                 {runIfFn(dayProp, { value }) ?? (
-                  <styled.span>{label}</styled.span>
+                  <styled.span
+                    suppressHydrationWarning={suppressHydrationWarning}
+                  >
+                    {label}
+                  </styled.span>
                 )}
               </CalendarDay>
             ))}

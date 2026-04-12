@@ -93,7 +93,7 @@ describe("<NativeSelect />", () => {
     const userRef = createRef<HTMLSelectElement>()
 
     render(
-      <InputPropsContext value={{ ref: contextRef }}>
+      <InputPropsContext value={{ ref: contextRef as any }}>
         <NativeSelect.Root ref={userRef} data-testid="native-select-field" />
       </InputPropsContext>,
     )

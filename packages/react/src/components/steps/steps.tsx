@@ -225,7 +225,7 @@ export const StepsList = withContext<"ol", StepsListProps>(
                 {...indicatorProps}
               />
 
-              <styled.div suppressHydrationWarning={suppressHydrationWarning}>
+              <styled.div>
                 {title ? (
                   <StepsTitle {...titleProps}>{title}</StepsTitle>
                 ) : null}
@@ -241,7 +241,7 @@ export const StepsList = withContext<"ol", StepsListProps>(
           ),
         )
       }
-    }, [children, items, suppressHydrationWarning])
+    }, [children, items])
 
     return (
       <styled.ol {...getListProps({ suppressHydrationWarning, ...rest })}>

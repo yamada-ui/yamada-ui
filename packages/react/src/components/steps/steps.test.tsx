@@ -113,21 +113,19 @@ describe("<Stepper />", () => {
     expect(screen.getByRole("button", { name: /Next/i }).tagName).toBe("BUTTON")
   })
 
-  test("propagates `suppressHydrationWarning` to the items-mode inner wrapper `<div>`", () => {
+  test("propagates `suppressHydrationWarning` to the `<ol>` list element", () => {
     render(<TestComponent suppressHydrationWarning />)
 
-    const title = screen.getAllByRole("heading")[0]
-    const wrapper = title?.parentElement
-    expect(wrapper?.tagName).toBe("DIV")
-    expect(hasSuppressHydrationWarning(wrapper)).toBeTruthy()
+    const list = screen.getByRole("list")
+    expect(list.tagName).toBe("OL")
+    expect(hasSuppressHydrationWarning(list)).toBeTruthy()
   })
 
-  test("does not set `suppressHydrationWarning` on the items-mode inner wrapper `<div>` when omitted", () => {
+  test("does not set `suppressHydrationWarning` on the `<ol>` list element when omitted", () => {
     render(<TestComponent />)
 
-    const title = screen.getAllByRole("heading")[0]
-    const wrapper = title?.parentElement
-    expect(wrapper?.tagName).toBe("DIV")
-    expect(hasSuppressHydrationWarning(wrapper)).toBeFalsy()
+    const list = screen.getByRole("list")
+    expect(list.tagName).toBe("OL")
+    expect(hasSuppressHydrationWarning(list)).toBeFalsy()
   })
 })

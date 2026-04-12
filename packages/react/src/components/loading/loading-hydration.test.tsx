@@ -1,5 +1,11 @@
-import { hasSuppressHydrationWarning, render } from "#test"
+import { render } from "#test"
 import { Loading } from "./"
+
+function getReactProps(el: Element): undefined | { [key: string]: unknown } {
+  const key = Object.keys(el).find((k) => k.startsWith("__reactProps$"))
+  if (!key) return undefined
+  return Reflect.get(el, key) as { [key: string]: unknown }
+}
 
 describe("<Loading /> suppressHydrationWarning propagation", () => {
   describe("Audio", () => {
@@ -8,7 +14,7 @@ describe("<Loading /> suppressHydrationWarning propagation", () => {
 
       const svg = container.querySelector("svg")
       expect(svg).toBeTruthy()
-      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
+      expect(getReactProps(svg!)?.suppressHydrationWarning).toBeTruthy()
     })
 
     test("does not set `suppressHydrationWarning` on inner rect shapes", () => {
@@ -17,7 +23,7 @@ describe("<Loading /> suppressHydrationWarning propagation", () => {
       const rects = container.querySelectorAll("rect")
       expect(rects.length).toBeTruthy()
       rects.forEach((rect) => {
-        expect(hasSuppressHydrationWarning(rect)).toBeFalsy()
+        expect(getReactProps(rect)?.suppressHydrationWarning).toBeFalsy()
       })
     })
   })
@@ -28,7 +34,7 @@ describe("<Loading /> suppressHydrationWarning propagation", () => {
 
       const svg = container.querySelector("svg")
       expect(svg).toBeTruthy()
-      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
+      expect(getReactProps(svg!)?.suppressHydrationWarning).toBeTruthy()
     })
 
     test("does not set `suppressHydrationWarning` on inner circle shapes", () => {
@@ -37,7 +43,7 @@ describe("<Loading /> suppressHydrationWarning propagation", () => {
       const circles = container.querySelectorAll("circle")
       expect(circles.length).toBeTruthy()
       circles.forEach((circle) => {
-        expect(hasSuppressHydrationWarning(circle)).toBeFalsy()
+        expect(getReactProps(circle)?.suppressHydrationWarning).toBeFalsy()
       })
     })
   })
@@ -48,7 +54,7 @@ describe("<Loading /> suppressHydrationWarning propagation", () => {
 
       const svg = container.querySelector("svg")
       expect(svg).toBeTruthy()
-      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
+      expect(getReactProps(svg!)?.suppressHydrationWarning).toBeTruthy()
     })
 
     test("does not set `suppressHydrationWarning` on inner circle shapes", () => {
@@ -57,7 +63,7 @@ describe("<Loading /> suppressHydrationWarning propagation", () => {
       const circles = container.querySelectorAll("circle")
       expect(circles.length).toBeTruthy()
       circles.forEach((circle) => {
-        expect(hasSuppressHydrationWarning(circle)).toBeFalsy()
+        expect(getReactProps(circle)?.suppressHydrationWarning).toBeFalsy()
       })
     })
   })
@@ -68,7 +74,7 @@ describe("<Loading /> suppressHydrationWarning propagation", () => {
 
       const svg = container.querySelector("svg")
       expect(svg).toBeTruthy()
-      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
+      expect(getReactProps(svg!)?.suppressHydrationWarning).toBeTruthy()
     })
 
     test("does not set `suppressHydrationWarning` on inner circle shapes", () => {
@@ -77,7 +83,7 @@ describe("<Loading /> suppressHydrationWarning propagation", () => {
       const circles = container.querySelectorAll("circle")
       expect(circles.length).toBeTruthy()
       circles.forEach((circle) => {
-        expect(hasSuppressHydrationWarning(circle)).toBeFalsy()
+        expect(getReactProps(circle)?.suppressHydrationWarning).toBeFalsy()
       })
     })
   })
@@ -88,7 +94,7 @@ describe("<Loading /> suppressHydrationWarning propagation", () => {
 
       const svg = container.querySelector("svg")
       expect(svg).toBeTruthy()
-      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
+      expect(getReactProps(svg!)?.suppressHydrationWarning).toBeTruthy()
     })
 
     test("does not set `suppressHydrationWarning` on inner circle and path shapes", () => {
@@ -99,10 +105,10 @@ describe("<Loading /> suppressHydrationWarning propagation", () => {
       expect(circles.length).toBeTruthy()
       expect(paths.length).toBeTruthy()
       circles.forEach((circle) => {
-        expect(hasSuppressHydrationWarning(circle)).toBeFalsy()
+        expect(getReactProps(circle)?.suppressHydrationWarning).toBeFalsy()
       })
       paths.forEach((path) => {
-        expect(hasSuppressHydrationWarning(path)).toBeFalsy()
+        expect(getReactProps(path)?.suppressHydrationWarning).toBeFalsy()
       })
     })
   })
@@ -113,7 +119,7 @@ describe("<Loading /> suppressHydrationWarning propagation", () => {
 
       const svg = container.querySelector("svg")
       expect(svg).toBeTruthy()
-      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
+      expect(getReactProps(svg!)?.suppressHydrationWarning).toBeTruthy()
     })
 
     test("does not set `suppressHydrationWarning` on inner circle shapes", () => {
@@ -122,7 +128,7 @@ describe("<Loading /> suppressHydrationWarning propagation", () => {
       const circles = container.querySelectorAll("circle")
       expect(circles.length).toBeTruthy()
       circles.forEach((circle) => {
-        expect(hasSuppressHydrationWarning(circle)).toBeFalsy()
+        expect(getReactProps(circle)?.suppressHydrationWarning).toBeFalsy()
       })
     })
   })
@@ -133,7 +139,7 @@ describe("<Loading /> suppressHydrationWarning propagation", () => {
 
       const svg = container.querySelector("svg")
       expect(svg).toBeTruthy()
-      expect(hasSuppressHydrationWarning(svg)).toBeTruthy()
+      expect(getReactProps(svg!)?.suppressHydrationWarning).toBeTruthy()
     })
 
     test("does not set `suppressHydrationWarning` on inner circle shapes", () => {
@@ -142,7 +148,7 @@ describe("<Loading /> suppressHydrationWarning propagation", () => {
       const circles = container.querySelectorAll("circle")
       expect(circles.length).toBeTruthy()
       circles.forEach((circle) => {
-        expect(hasSuppressHydrationWarning(circle)).toBeFalsy()
+        expect(getReactProps(circle)?.suppressHydrationWarning).toBeFalsy()
       })
     })
   })

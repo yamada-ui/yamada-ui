@@ -405,9 +405,7 @@ export const PolarChart = withProvider(
       <ComponentContext value={componentContext}>
         <Chart
           components={components}
-          render={(props) =>
-            render(getChartProps(mergeProps(props, chartProps)()))
-          }
+          render={(props) => render(getChartProps({ ...props, ...chartProps }))}
           {...getRootProps()}
         />
       </ComponentContext>

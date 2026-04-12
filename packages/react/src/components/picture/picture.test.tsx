@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, hasSuppressHydrationWarning, render, screen } from "#test"
 import { extendConfig, UIProvider } from "../../providers/ui-provider"
 import { Image } from "../image"
 import { Picture, Source } from "./picture"
@@ -141,6 +141,47 @@ describe("<Picture />", () => {
     expect(sources[0]?.getAttribute("media")).toContain("(max-width: 768px)")
     expect(sources[1]?.getAttribute("media")).toContain("(max-width: 976px)")
     expect(sources[2]?.getAttribute("media")).toContain("(max-width: 1280px)")
+  })
+
+  test("propagates `suppressHydrationWarning` to the hidden source elements", () => {
+    const { container } = render(
+      <Picture
+        src={src}
+        alt="img"
+        sources={[
+          { srcSet: src, media: "xl" },
+          { srcSet: src, media: "lg" },
+          { srcSet: src, media: "md" },
+        ]}
+        suppressHydrationWarning
+      />,
+    )
+
+    const sources = container.querySelectorAll("source")
+    expect(sources).toHaveLength(3)
+    sources.forEach((source) => {
+      expect(hasSuppressHydrationWarning(source)).toBeTruthy()
+    })
+  })
+
+  test("does not set `suppressHydrationWarning` on source elements when omitted", () => {
+    const { container } = render(
+      <Picture
+        src={src}
+        alt="img"
+        sources={[
+          { srcSet: src, media: "xl" },
+          { srcSet: src, media: "lg" },
+          { srcSet: src, media: "md" },
+        ]}
+      />,
+    )
+
+    const sources = container.querySelectorAll("source")
+    expect(sources).toHaveLength(3)
+    sources.forEach((source) => {
+      expect(hasSuppressHydrationWarning(source)).toBeFalsy()
+    })
   })
 
   test("should sorting sources with custom direction", () => {

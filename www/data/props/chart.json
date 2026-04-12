@@ -219,7 +219,7 @@
         "required": false
       },
       "activeDotRadius": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 | AnyString ...",
         "description": "The radius of the active dots.",
         "required": false
       },
@@ -229,17 +229,17 @@
         "required": false
       },
       "activeDotStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the active dots.",
         "required": false
       },
       "areaEndFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the area end.",
         "required": false
       },
       "areaFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the area.",
         "required": false
       },
@@ -249,7 +249,7 @@
         "required": false
       },
       "areaStartFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the area start.",
         "required": false
       },
@@ -264,7 +264,7 @@
         "required": false
       },
       "barFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the bars.",
         "required": false
       },
@@ -279,7 +279,7 @@
         "required": false
       },
       "barStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the bars.",
         "required": false
       },
@@ -299,7 +299,7 @@
         "required": false
       },
       "dotRadius": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 | AnyString ...",
         "description": "The radius of the dots.",
         "required": false
       },
@@ -309,7 +309,7 @@
         "required": false
       },
       "dotStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the dots.",
         "required": false
       },
@@ -324,12 +324,12 @@
         "required": false
       },
       "inactiveBarOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive bars.",
         "required": false
       },
       "inactiveLineOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive lines.",
         "required": false
       },
@@ -364,7 +364,7 @@
         "required": false
       },
       "lineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the lines.",
         "required": false
       },
@@ -384,7 +384,7 @@
         "required": false
       },
       "referenceLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the reference lines.",
         "required": false
       },
@@ -414,7 +414,7 @@
         "required": false
       },
       "tooltipCursorFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the tooltip cursor.",
         "required": false
       },
@@ -464,7 +464,7 @@
         "required": false
       },
       "xAxisLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the x-axis lines.",
         "required": false
       },
@@ -489,7 +489,7 @@
         "required": false
       },
       "yAxisLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the y-axis lines.",
         "required": false
       },
@@ -820,7 +820,7 @@
         "required": false
       },
       "activeDotRadius": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 | AnyString ...",
         "description": "The radius of the active dots.",
         "required": false
       },
@@ -830,17 +830,17 @@
         "required": false
       },
       "activeDotStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the active dots.",
         "required": false
       },
       "areaEndFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the area end.",
         "required": false
       },
       "areaFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the area.",
         "required": false
       },
@@ -850,7 +850,7 @@
         "required": false
       },
       "areaStartFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the area start.",
         "required": false
       },
@@ -865,7 +865,7 @@
         "required": false
       },
       "barFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the bars.",
         "required": false
       },
@@ -880,7 +880,7 @@
         "required": false
       },
       "barStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the bars.",
         "required": false
       },
@@ -900,7 +900,7 @@
         "required": false
       },
       "dotRadius": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 | AnyString ...",
         "description": "The radius of the dots.",
         "required": false
       },
@@ -910,7 +910,7 @@
         "required": false
       },
       "dotStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the dots.",
         "required": false
       },
@@ -925,12 +925,12 @@
         "required": false
       },
       "inactiveBarOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive bars.",
         "required": false
       },
       "inactiveLineOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive lines.",
         "required": false
       },
@@ -965,7 +965,7 @@
         "required": false
       },
       "lineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the lines.",
         "required": false
       },
@@ -985,7 +985,7 @@
         "required": false
       },
       "referenceLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the reference lines.",
         "required": false
       },
@@ -1015,7 +1015,7 @@
         "required": false
       },
       "tooltipCursorFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the tooltip cursor.",
         "required": false
       },
@@ -1065,7 +1065,7 @@
         "required": false
       },
       "xAxisLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the x-axis lines.",
         "required": false
       },
@@ -1090,7 +1090,7 @@
         "required": false
       },
       "yAxisLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the y-axis lines.",
         "required": false
       },
@@ -1270,7 +1270,7 @@
       "required": false
     },
     "activeDotRadius": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 | AnyString ...",
       "description": "The radius of the active dots.",
       "required": false
     },
@@ -1280,17 +1280,17 @@
       "required": false
     },
     "activeDotStrokeWidth": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
       "description": "The stroke width of the active dots.",
       "required": false
     },
     "areaEndFillOpacity": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The fill opacity of the area end.",
       "required": false
     },
     "areaFillOpacity": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The fill opacity of the area.",
       "required": false
     },
@@ -1300,7 +1300,7 @@
       "required": false
     },
     "areaStartFillOpacity": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The fill opacity of the area start.",
       "required": false
     },
@@ -1315,7 +1315,7 @@
       "required": false
     },
     "barFillOpacity": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The fill opacity of the bars.",
       "required": false
     },
@@ -1330,7 +1330,7 @@
       "required": false
     },
     "barStrokeWidth": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
       "description": "The stroke width of the bars.",
       "required": false
     },
@@ -1346,7 +1346,7 @@
       "required": false
     },
     "dotRadius": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 | AnyString ...",
       "description": "The radius of the dots.",
       "required": false
     },
@@ -1356,7 +1356,7 @@
       "required": false
     },
     "dotStrokeWidth": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
       "description": "The stroke width of the dots.",
       "required": false
     },
@@ -1371,12 +1371,12 @@
       "required": false
     },
     "inactiveBarOpacity": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The opacity of the inactive bars.",
       "required": false
     },
     "inactiveLineOpacity": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The opacity of the inactive lines.",
       "required": false
     },
@@ -1411,7 +1411,7 @@
       "required": false
     },
     "lineStrokeWidth": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
       "description": "The stroke width of the lines.",
       "required": false
     },
@@ -1431,7 +1431,7 @@
       "required": false
     },
     "referenceLineStrokeWidth": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
       "description": "The stroke width of the reference lines.",
       "required": false
     },
@@ -1456,7 +1456,7 @@
       "required": false
     },
     "tooltipCursorFillOpacity": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The fill opacity of the tooltip cursor.",
       "required": false
     },
@@ -1506,7 +1506,7 @@
       "required": false
     },
     "xAxisLineStrokeWidth": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
       "description": "The stroke width of the x-axis lines.",
       "required": false
     },
@@ -1531,7 +1531,7 @@
       "required": false
     },
     "yAxisLineStrokeWidth": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
       "description": "The stroke width of the y-axis lines.",
       "required": false
     },
@@ -1614,7 +1614,7 @@
       "required": false
     },
     "tooltipCursorFillOpacity": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The fill opacity of the tooltip cursor.",
       "required": false
     },
@@ -2687,7 +2687,7 @@
         "required": false
       },
       "activeDotRadius": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 | AnyString ...",
         "description": "The radius of the active dots.",
         "required": false
       },
@@ -2697,17 +2697,17 @@
         "required": false
       },
       "activeDotStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the active dots.",
         "required": false
       },
       "areaEndFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the area end.",
         "required": false
       },
       "areaFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the area.",
         "required": false
       },
@@ -2717,7 +2717,7 @@
         "required": false
       },
       "areaStartFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the area start.",
         "required": false
       },
@@ -2732,7 +2732,7 @@
         "required": false
       },
       "barFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the bars.",
         "required": false
       },
@@ -2747,7 +2747,7 @@
         "required": false
       },
       "barStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the bars.",
         "required": false
       },
@@ -2767,7 +2767,7 @@
         "required": false
       },
       "dotRadius": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 | AnyString ...",
         "description": "The radius of the dots.",
         "required": false
       },
@@ -2777,7 +2777,7 @@
         "required": false
       },
       "dotStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the dots.",
         "required": false
       },
@@ -2792,12 +2792,12 @@
         "required": false
       },
       "inactiveBarOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive bars.",
         "required": false
       },
       "inactiveLineOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive lines.",
         "required": false
       },
@@ -2832,7 +2832,7 @@
         "required": false
       },
       "lineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the lines.",
         "required": false
       },
@@ -2852,7 +2852,7 @@
         "required": false
       },
       "referenceLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the reference lines.",
         "required": false
       },
@@ -2882,7 +2882,7 @@
         "required": false
       },
       "tooltipCursorFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the tooltip cursor.",
         "required": false
       },
@@ -2932,7 +2932,7 @@
         "required": false
       },
       "xAxisLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the x-axis lines.",
         "required": false
       },
@@ -2957,7 +2957,7 @@
         "required": false
       },
       "yAxisLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the y-axis lines.",
         "required": false
       },
@@ -3269,7 +3269,7 @@
         "required": false
       },
       "activeDotRadius": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 | AnyString ...",
         "description": "The radius of the active dot.",
         "required": false
       },
@@ -3279,7 +3279,7 @@
         "required": false
       },
       "activeDotStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the active dot stroke.",
         "required": false
       },
@@ -3289,7 +3289,7 @@
         "required": false
       },
       "angleAxisLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the angle axis line stroke.",
         "required": false
       },
@@ -3329,7 +3329,7 @@
         "required": false
       },
       "dotRadius": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 | AnyString ...",
         "description": "The radius of the dot.",
         "required": false
       },
@@ -3339,7 +3339,7 @@
         "required": false
       },
       "dotStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the dot stroke.",
         "required": false
       },
@@ -3354,22 +3354,22 @@
         "required": false
       },
       "inactiveLabelLineOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive label line.",
         "required": false
       },
       "inactiveLabelOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive label.",
         "required": false
       },
       "inactiveRadarOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive radar.",
         "required": false
       },
       "inactiveSectorOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive sector.",
         "required": false
       },
@@ -3389,7 +3389,7 @@
         "required": false
       },
       "labelLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the label line stroke.",
         "required": false
       },
@@ -3419,7 +3419,7 @@
         "required": false
       },
       "radarFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the radar.",
         "required": false
       },
@@ -3434,7 +3434,7 @@
         "required": false
       },
       "radarStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the radar stroke.",
         "required": false
       },
@@ -3454,7 +3454,7 @@
         "required": false
       },
       "radialBackgroundStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the radial background stroke.",
         "required": false
       },
@@ -3469,7 +3469,7 @@
         "required": false
       },
       "radiusAxisLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the radius axis line stroke.",
         "required": false
       },
@@ -3514,7 +3514,7 @@
         "required": false
       },
       "sectorStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the sector stroke.",
         "required": false
       },
@@ -3529,7 +3529,7 @@
         "required": false
       },
       "tooltipCursorFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the tooltip cursor.",
         "required": false
       },
@@ -3817,7 +3817,7 @@
         "required": false
       },
       "activeDotRadius": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 | AnyString ...",
         "description": "The radius of the active dots.",
         "required": false
       },
@@ -3827,17 +3827,17 @@
         "required": false
       },
       "activeDotStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the active dots.",
         "required": false
       },
       "areaEndFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the area end.",
         "required": false
       },
       "areaFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the area.",
         "required": false
       },
@@ -3847,7 +3847,7 @@
         "required": false
       },
       "areaStartFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the area start.",
         "required": false
       },
@@ -3862,7 +3862,7 @@
         "required": false
       },
       "barFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the bars.",
         "required": false
       },
@@ -3877,7 +3877,7 @@
         "required": false
       },
       "barStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the bars.",
         "required": false
       },
@@ -3897,7 +3897,7 @@
         "required": false
       },
       "dotRadius": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 | AnyString ...",
         "description": "The radius of the dots.",
         "required": false
       },
@@ -3907,7 +3907,7 @@
         "required": false
       },
       "dotStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the dots.",
         "required": false
       },
@@ -3922,12 +3922,12 @@
         "required": false
       },
       "inactiveBarOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive bars.",
         "required": false
       },
       "inactiveLineOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive lines.",
         "required": false
       },
@@ -3962,7 +3962,7 @@
         "required": false
       },
       "lineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the lines.",
         "required": false
       },
@@ -3982,7 +3982,7 @@
         "required": false
       },
       "referenceLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the reference lines.",
         "required": false
       },
@@ -4012,7 +4012,7 @@
         "required": false
       },
       "tooltipCursorFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the tooltip cursor.",
         "required": false
       },
@@ -4062,7 +4062,7 @@
         "required": false
       },
       "xAxisLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the x-axis lines.",
         "required": false
       },
@@ -4087,7 +4087,7 @@
         "required": false
       },
       "yAxisLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The stroke width of the y-axis lines.",
         "required": false
       },
@@ -4399,7 +4399,7 @@
         "required": false
       },
       "activeDotRadius": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 | AnyString ...",
         "description": "The radius of the active dot.",
         "required": false
       },
@@ -4409,7 +4409,7 @@
         "required": false
       },
       "activeDotStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the active dot stroke.",
         "required": false
       },
@@ -4419,7 +4419,7 @@
         "required": false
       },
       "angleAxisLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the angle axis line stroke.",
         "required": false
       },
@@ -4459,7 +4459,7 @@
         "required": false
       },
       "dotRadius": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 | AnyString ...",
         "description": "The radius of the dot.",
         "required": false
       },
@@ -4469,7 +4469,7 @@
         "required": false
       },
       "dotStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the dot stroke.",
         "required": false
       },
@@ -4484,22 +4484,22 @@
         "required": false
       },
       "inactiveLabelLineOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive label line.",
         "required": false
       },
       "inactiveLabelOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive label.",
         "required": false
       },
       "inactiveRadarOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive radar.",
         "required": false
       },
       "inactiveSectorOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive sector.",
         "required": false
       },
@@ -4519,7 +4519,7 @@
         "required": false
       },
       "labelLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the label line stroke.",
         "required": false
       },
@@ -4549,7 +4549,7 @@
         "required": false
       },
       "radarFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the radar.",
         "required": false
       },
@@ -4564,7 +4564,7 @@
         "required": false
       },
       "radarStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the radar stroke.",
         "required": false
       },
@@ -4584,7 +4584,7 @@
         "required": false
       },
       "radialBackgroundStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the radial background stroke.",
         "required": false
       },
@@ -4599,7 +4599,7 @@
         "required": false
       },
       "radiusAxisLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the radius axis line stroke.",
         "required": false
       },
@@ -4644,7 +4644,7 @@
         "required": false
       },
       "sectorStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the sector stroke.",
         "required": false
       },
@@ -4659,7 +4659,7 @@
         "required": false
       },
       "tooltipCursorFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the tooltip cursor.",
         "required": false
       },
@@ -4779,7 +4779,7 @@
       "required": false
     },
     "activeDotRadius": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 | AnyString ...",
       "description": "The radius of the active dot.",
       "required": false
     },
@@ -4789,7 +4789,7 @@
       "required": false
     },
     "activeDotStrokeWidth": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
       "description": "The width of the active dot stroke.",
       "required": false
     },
@@ -4799,7 +4799,7 @@
       "required": false
     },
     "angleAxisLineStrokeWidth": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
       "description": "The width of the angle axis line stroke.",
       "required": false
     },
@@ -4835,7 +4835,7 @@
       "required": false
     },
     "dotRadius": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 | AnyString ...",
       "description": "The radius of the dot.",
       "required": false
     },
@@ -4845,7 +4845,7 @@
       "required": false
     },
     "dotStrokeWidth": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
       "description": "The width of the dot stroke.",
       "required": false
     },
@@ -4860,22 +4860,22 @@
       "required": false
     },
     "inactiveLabelLineOpacity": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The opacity of the inactive label line.",
       "required": false
     },
     "inactiveLabelOpacity": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The opacity of the inactive label.",
       "required": false
     },
     "inactiveRadarOpacity": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The opacity of the inactive radar.",
       "required": false
     },
     "inactiveSectorOpacity": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The opacity of the inactive sector.",
       "required": false
     },
@@ -4895,7 +4895,7 @@
       "required": false
     },
     "labelLineStrokeWidth": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
       "description": "The width of the label line stroke.",
       "required": false
     },
@@ -4930,7 +4930,7 @@
       "required": false
     },
     "radarFillOpacity": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The fill opacity of the radar.",
       "required": false
     },
@@ -4945,7 +4945,7 @@
       "required": false
     },
     "radarStrokeWidth": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
       "description": "The width of the radar stroke.",
       "required": false
     },
@@ -4965,7 +4965,7 @@
       "required": false
     },
     "radialBackgroundStrokeWidth": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
       "description": "The width of the radial background stroke.",
       "required": false
     },
@@ -4980,7 +4980,7 @@
       "required": false
     },
     "radiusAxisLineStrokeWidth": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
       "description": "The width of the radius axis line stroke.",
       "required": false
     },
@@ -5025,7 +5025,7 @@
       "required": false
     },
     "sectorStrokeWidth": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
       "description": "The width of the sector stroke.",
       "required": false
     },
@@ -5035,7 +5035,7 @@
       "required": false
     },
     "tooltipCursorFillOpacity": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The fill opacity of the tooltip cursor.",
       "required": false
     },
@@ -5364,7 +5364,7 @@
         "required": false
       },
       "activeDotRadius": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 | AnyString ...",
         "description": "The radius of the active dot.",
         "required": false
       },
@@ -5374,7 +5374,7 @@
         "required": false
       },
       "activeDotStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the active dot stroke.",
         "required": false
       },
@@ -5384,7 +5384,7 @@
         "required": false
       },
       "angleAxisLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the angle axis line stroke.",
         "required": false
       },
@@ -5424,7 +5424,7 @@
         "required": false
       },
       "dotRadius": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 | AnyString ...",
         "description": "The radius of the dot.",
         "required": false
       },
@@ -5434,7 +5434,7 @@
         "required": false
       },
       "dotStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the dot stroke.",
         "required": false
       },
@@ -5449,22 +5449,22 @@
         "required": false
       },
       "inactiveLabelLineOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive label line.",
         "required": false
       },
       "inactiveLabelOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive label.",
         "required": false
       },
       "inactiveRadarOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive radar.",
         "required": false
       },
       "inactiveSectorOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive sector.",
         "required": false
       },
@@ -5484,7 +5484,7 @@
         "required": false
       },
       "labelLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the label line stroke.",
         "required": false
       },
@@ -5519,7 +5519,7 @@
         "required": false
       },
       "radarFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the radar.",
         "required": false
       },
@@ -5534,7 +5534,7 @@
         "required": false
       },
       "radarStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the radar stroke.",
         "required": false
       },
@@ -5554,7 +5554,7 @@
         "required": false
       },
       "radialBackgroundStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the radial background stroke.",
         "required": false
       },
@@ -5569,7 +5569,7 @@
         "required": false
       },
       "radiusAxisLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the radius axis line stroke.",
         "required": false
       },
@@ -5614,7 +5614,7 @@
         "required": false
       },
       "sectorStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the sector stroke.",
         "required": false
       },
@@ -5629,7 +5629,7 @@
         "required": false
       },
       "tooltipCursorFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the tooltip cursor.",
         "required": false
       },
@@ -6000,7 +6000,7 @@
         "required": false
       },
       "activeDotRadius": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 | AnyString ...",
         "description": "The radius of the active dot.",
         "required": false
       },
@@ -6010,7 +6010,7 @@
         "required": false
       },
       "activeDotStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the active dot stroke.",
         "required": false
       },
@@ -6020,7 +6020,7 @@
         "required": false
       },
       "angleAxisLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the angle axis line stroke.",
         "required": false
       },
@@ -6060,7 +6060,7 @@
         "required": false
       },
       "dotRadius": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | 0 | AnyString ...",
         "description": "The radius of the dot.",
         "required": false
       },
@@ -6070,7 +6070,7 @@
         "required": false
       },
       "dotStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the dot stroke.",
         "required": false
       },
@@ -6085,22 +6085,22 @@
         "required": false
       },
       "inactiveLabelLineOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive label line.",
         "required": false
       },
       "inactiveLabelOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive label.",
         "required": false
       },
       "inactiveRadarOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive radar.",
         "required": false
       },
       "inactiveSectorOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The opacity of the inactive sector.",
         "required": false
       },
@@ -6120,7 +6120,7 @@
         "required": false
       },
       "labelLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the label line stroke.",
         "required": false
       },
@@ -6150,7 +6150,7 @@
         "required": false
       },
       "radarFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the radar.",
         "required": false
       },
@@ -6165,7 +6165,7 @@
         "required": false
       },
       "radarStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the radar stroke.",
         "required": false
       },
@@ -6185,7 +6185,7 @@
         "required": false
       },
       "radialBackgroundStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the radial background stroke.",
         "required": false
       },
@@ -6200,7 +6200,7 @@
         "required": false
       },
       "radiusAxisLineStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the radius axis line stroke.",
         "required": false
       },
@@ -6245,7 +6245,7 @@
         "required": false
       },
       "sectorStrokeWidth": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number | number & {} ...",
         "description": "The width of the sector stroke.",
         "required": false
       },
@@ -6260,7 +6260,7 @@
         "required": false
       },
       "tooltipCursorFillOpacity": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The fill opacity of the tooltip cursor.",
         "required": false
       },

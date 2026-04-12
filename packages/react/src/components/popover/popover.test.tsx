@@ -1,7 +1,7 @@
-import { a11y, render, screen, waitFor } from "#test"
+import { a11y, render, renderHook, screen, waitFor } from "#test"
 import { Popover } from "."
 import { Button } from "../button"
-import { getPopupAnimationProps } from "./popover"
+import { usePopupAnimationProps } from "./popover"
 
 describe("<Popover />", () => {
   const Component = (props: Popover.RootProps) => {
@@ -261,64 +261,79 @@ describe("<Popover />", () => {
   })
 })
 
-describe("getPopupAnimationProps", () => {
+describe("usePopupAnimationProps", () => {
   test("returns scale animation props by default", () => {
-    const props = getPopupAnimationProps()
-    expect(props).toHaveProperty("animate", "enter")
-    expect(props).toHaveProperty("exit", "exit")
-    expect(props).toHaveProperty("initial", "exit")
-    expect("custom" in props && props.custom).toStrictEqual({
-      duration: undefined,
+    const { result } = renderHook(() => usePopupAnimationProps())
+    expect(result.current).toHaveProperty("animate", "enter")
+    expect(result.current).toHaveProperty("exit", "exit")
+    expect(result.current).toHaveProperty("initial", "exit")
+    expect("custom" in result.current && result.current.custom).toStrictEqual({
+      duration: 0.1,
       reverse: true,
       scale: 0.95,
     })
   })
 
   test("returns slide-fade props for `inline-end`", () => {
-    const props = getPopupAnimationProps("inline-end")
-    expect(props).toHaveProperty("animate", "enter")
-    expect("custom" in props && props.custom).toStrictEqual({
-      duration: undefined,
+    const { result } = renderHook(() =>
+      usePopupAnimationProps({ animationScheme: "inline-end" }),
+    )
+    expect(result.current).toHaveProperty("animate", "enter")
+    expect("custom" in result.current && result.current.custom).toStrictEqual({
+      duration: 0.1,
       offsetX: 16,
       reverse: true,
     })
   })
 
   test("returns slide-fade props for `inline-start`", () => {
-    const props = getPopupAnimationProps("inline-start")
-    expect("custom" in props && props.custom).toStrictEqual({
-      duration: undefined,
+    const { result } = renderHook(() =>
+      usePopupAnimationProps({ animationScheme: "inline-start" }),
+    )
+    expect("custom" in result.current && result.current.custom).toStrictEqual({
+      duration: 0.1,
       offsetX: -16,
       reverse: true,
     })
   })
 
   test("returns slide-fade props for `block-start`", () => {
-    const props = getPopupAnimationProps("block-start")
-    expect("custom" in props && props.custom).toStrictEqual({
-      duration: undefined,
+    const { result } = renderHook(() =>
+      usePopupAnimationProps({ animationScheme: "block-start" }),
+    )
+    expect("custom" in result.current && result.current.custom).toStrictEqual({
+      duration: 0.1,
       offsetY: -16,
       reverse: true,
     })
   })
 
   test("returns slide-fade props for `block-end`", () => {
-    const props = getPopupAnimationProps("block-end")
-    expect("custom" in props && props.custom).toStrictEqual({
-      duration: undefined,
+    const { result } = renderHook(() =>
+      usePopupAnimationProps({ animationScheme: "block-end" }),
+    )
+    expect("custom" in result.current && result.current.custom).toStrictEqual({
+      duration: 0.1,
       offsetY: 16,
       reverse: true,
     })
   })
 
   test("returns empty object for `none`", () => {
-    const props = getPopupAnimationProps("none")
-    expect(props).toStrictEqual({})
+    const { result } = renderHook(() =>
+      usePopupAnimationProps({ animationScheme: "none" }),
+    )
+    expect(result.current).toStrictEqual({})
   })
 
   test("passes custom duration", () => {
-    const props = getPopupAnimationProps("scale", 0.5)
-    expect("custom" in props && props.custom).toStrictEqual({
+    const { result } = renderHook(() =>
+      usePopupAnimationProps({
+        animationScheme: "scale",
+        duration: 0.5,
+      }),
+    )
+    expect("custom" in result.current && result.current.custom).toStrictEqual({
       duration: 0.5,
       reverse: true,
       scale: 0.95,

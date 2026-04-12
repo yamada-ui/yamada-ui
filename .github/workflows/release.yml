@@ -75,6 +75,13 @@ jobs:
           NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Update issue templates
+        if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
+        run: |
+          pnpm forge issue:template
+          git add ./.github/ISSUE_TEMPLATE
+          git diff --staged --exit-code || git commit -m 'ci(changesets): update issue templates'
+
       - name: Generate registries
         if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
         run: |
@@ -116,13 +123,6 @@ jobs:
           git diff --staged --exit-code || git commit -m 'ci(changesets): update www'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Update issue templates
-        if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
-        run: |
-          pnpm forge issue:template
-          git add ./.github/ISSUE_TEMPLATE
-          git diff --staged --exit-code || git commit -m 'ci(changesets): update issue templates'
 
       - name: Update branch
         run: git push

@@ -56,4 +56,39 @@ describe("<Timeline />", () => {
     expect(screen.getByText("Step 1").tagName).toBe("H3")
     expect(screen.getByText("Step 1 description").tagName).toBe("P")
   })
+
+  test("renders numbers in indicators with `number` variant", () => {
+    render(<Timeline.Root variant="number" items={items} />)
+    const listItems = screen.getAllByRole("listitem")
+
+    listItems.forEach((item, index) => {
+      const indicator = item.children[0]?.children[0]
+      expect(indicator).toHaveTextContent(String(index + 1))
+    })
+  })
+
+  test("does not render numbers in indicators without `number` variant", () => {
+    render(<Timeline.Root items={items} />)
+    const listItems = screen.getAllByRole("listitem")
+
+    listItems.forEach((item) => {
+      const indicator = item.children[0]?.children[0]
+      expect(indicator).not.toHaveTextContent(/\d/)
+    })
+  })
+
+  test("custom indicator takes precedence over number variant", () => {
+    const itemsWithIndicator: Timeline.Item[] = [
+      { indicator: "A", title: "Step 1" },
+      { title: "Step 2" },
+    ]
+
+    render(<Timeline.Root variant="number" items={itemsWithIndicator} />)
+    const listItems = screen.getAllByRole("listitem")
+    const firstIndicator = listItems[0]?.children[0]?.children[0]
+    const secondIndicator = listItems[1]?.children[0]?.children[0]
+
+    expect(firstIndicator).toHaveTextContent("A")
+    expect(secondIndicator).toHaveTextContent("2")
+  })
 })

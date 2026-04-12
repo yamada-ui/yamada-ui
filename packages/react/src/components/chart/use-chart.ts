@@ -23,7 +23,11 @@ const PLACEMENT_MAP: {
   }
 } = {
   "center-end": { align: "right", verticalAlign: "middle" },
+  "center-end-end": { align: "right", verticalAlign: "bottom" },
+  "center-end-start": { align: "right", verticalAlign: "top" },
   "center-start": { align: "left", verticalAlign: "middle" },
+  "center-start-end": { align: "left", verticalAlign: "bottom" },
+  "center-start-start": { align: "left", verticalAlign: "top" },
   end: { align: "center", verticalAlign: "bottom" },
   "end-center": { align: "center", verticalAlign: "bottom" },
   "end-end": { align: "right", verticalAlign: "bottom" },

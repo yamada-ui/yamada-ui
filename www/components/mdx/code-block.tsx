@@ -63,14 +63,12 @@ export function CodeBlock({
 
           <Tabs.Panel index={0} rounded="l2">
             {iframe ? (
-              <Iframe borderWidth="1px" h="lg" rounded="l2">
-                <Box boxSize="full" overflowX="hidden" overflowY="auto" p="lg">
-                  <ClientOnly
-                    lang={lang}
-                    code={children}
-                    functional={functional}
-                  />
-                </Box>
+              <Iframe borderWidth="1px" h="lg" overflow="hidden" rounded="l2">
+                <ClientOnly
+                  lang={lang}
+                  code={children}
+                  functional={functional}
+                />
               </Iframe>
             ) : (
               <Box borderWidth="1px" overflow="hidden" p="{space}" rounded="l2">

@@ -2,7 +2,6 @@
 title: Tip
 description: "`Tip` is a component that displays supplementary information with a built-in icon trigger."
 tags: ["feedback", "notification", "icon"]
-status: new
 storybook: components-tip--basic
 source: components/tip
 ---
@@ -166,7 +165,7 @@ To change the show or hide animation, set `animationScheme` to `"scale"`, `"bloc
 To change the placement, set `placement` to `"end"`, `"center-start"`, etc. The default is `"start"`.
 
 ```tsx preview
-<VStack>
+<Wrap gap="md">
   <For
     each={[
       "start",
@@ -178,7 +177,11 @@ To change the placement, set `placement` to `"end"`, `"center-start"`, etc. The 
       "end-end",
       "end-center",
       "center-start",
+      "center-start-start",
+      "center-start-end",
       "center-end",
+      "center-end-start",
+      "center-end-end",
     ]}
   >
     {(placement) => (
@@ -190,7 +193,7 @@ To change the placement, set `placement` to `"end"`, `"center-start"`, etc. The 
       </HStack>
     )}
   </For>
-</VStack>
+</Wrap>
 ```
 
 ### Disable

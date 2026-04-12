@@ -1,6 +1,6 @@
-import { Center, GithubIcon, HStack, Text } from "@yamada-ui/react"
+import { Center, HStack, Text } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
-import { DiscordIcon, NextLink, XIcon } from "@/components"
+import { DiscordIcon, GithubIcon, NextLink, XIcon } from "@/components"
 import { CONSTANTS } from "@/constants"
 
 export function Footer() {

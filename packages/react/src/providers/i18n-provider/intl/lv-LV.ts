@@ -1,6 +1,10 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
+  actionBar: {
+    "Close action bar": "Aizvērt darbību joslu",
+    "Open action bar": "Atvērt darbību joslu",
+  },
   autocomplete: {
     "Clear value": "Notīrīt vērtību",
     "No results found": "Rezultāti netika atrasti",
@@ -82,6 +86,10 @@ const data: IntlData = {
   },
   select: {
     "Clear value": "Notīrīt vērtību",
+  },
+  sidebar: {
+    "Close sidebar": "Aizvērt sānjoslu",
+    "Open sidebar": "Atvērt sānjoslu",
   },
   slider: {
     "Slider thumb": "Slīdņa īkšķis",

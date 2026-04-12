@@ -1,3 +1,4 @@
+import { icons } from "@yamada-ui/react"
 import { toKebabCase, toPascalCase } from "@yamada-ui/utils"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
 import { execFile } from "node:child_process"
@@ -101,8 +102,9 @@ async function main() {
       if (!fileName.endsWith(".json")) return
 
       const iconName = fileName.replace(".json", "")
+      const componentName = `${toPascalCase(iconName)}Icon`
 
-      data[`${toPascalCase(iconName)}Icon`] = await getData(fileName)
+      if (componentName in icons) data[componentName] = await getData(fileName)
     }),
   )
 

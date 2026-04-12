@@ -54,8 +54,18 @@ createRoot(document.getElementById("root")!).render(
     </UIProvider>
   </StrictMode>,
 )`
-const MISC = `import type { CSSProps } from "@yamada-ui/react"
-import { createColumnHelper } from "@yamada-ui/react"
+const MISC = `import type { CSSProps, Tree } from "@yamada-ui/react"
+import {
+  Avatar,
+  Center,
+  ChevronsUpDownIcon,
+  createColumnHelper,
+  GalleryVerticalEndIcon,
+  Grid,
+  Menu,
+  Sidebar,
+  Text,
+} from "@yamada-ui/react"
 import dayjs from "dayjs"
 import { faker } from "@faker-js/faker"
 
@@ -196,6 +206,189 @@ export function createPolarChartData(min = 1000, max = 5000): PolarChartData[] {
     },
   ]
 }
+
+export const treeItems: Tree.ItemType[] = [
+  {
+    children: [
+      { label: "react" },
+      { label: "react-dom" },
+      {
+        children: [{ label: "react" }, { label: "utils" }],
+        label: "@yamada-ui",
+      },
+    ],
+    label: "node_modules",
+  },
+  {
+    children: [
+      {
+        children: [{ label: "tree.tsx" }, { label: "index.ts" }],
+        label: "components",
+      },
+      {
+        children: [
+          {
+            children: [{ label: "layout.tsx" }, { label: "page.tsx" }],
+            label: "about",
+          },
+          { label: "layout.tsx" },
+          { label: "page.tsx" },
+        ],
+        label: "app",
+      },
+    ],
+    label: "src",
+  },
+  { label: "pnpm-lock.yaml" },
+  { label: "package.json" },
+  { label: "tsconfig.json" },
+  { label: "README.md" },
+]
+
+export const sidebarItems: Sidebar.ItemType[] = [
+  {
+    children: [
+      { label: "Installation", value: "/get-started/installation" },
+      { label: "CLI", value: "/get-started/cli" },
+      {
+        children: [
+          {
+            label: "Next.js (App)",
+            value: "/get-started/frameworks/next-app",
+          },
+          {
+            label: "Next.js (Pages)",
+            value: "/get-started/frameworks/next-pages",
+          },
+          { label: "Vite", value: "/get-started/frameworks/vite" },
+          {
+            label: "React Router",
+            value: "/get-started/frameworks/react-router",
+          },
+          {
+            label: "TanStack Start",
+            value: "/get-started/frameworks/tanstack-start",
+          },
+          {
+            label: "TanStack Router",
+            value: "/get-started/frameworks/tanstack-router",
+          },
+        ],
+        label: "Frameworks",
+        value: "/get-started/frameworks",
+      },
+    ],
+    group: true,
+    label: "Get Started",
+  },
+  {
+    children: [
+      { label: "Overview", value: "/styling/overview" },
+      { label: "Style Props", value: "/styling/style-props" },
+    ],
+    group: true,
+    label: "Styling",
+  },
+  {
+    children: [
+      { label: "Overview", value: "/theming/overview" },
+      { label: "Customization", value: "/theming/customization" },
+    ],
+    group: true,
+    label: "Theming",
+  },
+]
+
+export function SidebarDocumentMenuButton() {
+  return (
+    <Menu.Root
+      animationScheme={{ base: "inline-start", md: "block-start" }}
+      gutter={{ base: 16, md: 8 }}
+      matchWidth={{ base: false, md: true }}
+      placement={{ base: "center-end-start", md: "end" }}
+    >
+      <Menu.Trigger>
+        <Sidebar.MenuButton>
+          <Center
+            bg="colorScheme.solid"
+            color="colorScheme.contrast"
+            fontSize="{side-panel-item-icon-size}"
+            minBoxSize="{side-panel-item-size}"
+            rounded="{side-panel-item-rounded}"
+          >
+            <GalleryVerticalEndIcon />
+          </Center>
+
+          <Grid flex="1" gap="xs" lineHeight="1" textAlign="start">
+            <Text truncated>Documentation</Text>
+            <Text color="fg.muted" truncated>
+              v2.2.0
+            </Text>
+          </Grid>
+
+          <ChevronsUpDownIcon
+            color="fg.muted"
+            fontSize="{side-panel-item-icon-size}"
+          />
+        </Sidebar.MenuButton>
+      </Menu.Trigger>
+
+      <Menu.Content
+        items={[
+          { label: "v0.9.10", value: "v0.9.10" },
+          { label: "v1.7.8", value: "v1.7.8" },
+          { label: "v2.2.0", value: "v2.2.0" },
+        ]}
+      />
+    </Menu.Root>
+  )
+}
+
+export function SidebarUserMenuButton() {
+  return (
+    <Menu.Root
+      animationScheme={{ base: "inline-start", md: "block-end" }}
+      gutter={{ base: 16, md: 8 }}
+      matchWidth={{ base: false, md: true }}
+      placement={{ base: "center-end-end", md: "start" }}
+    >
+      <Menu.Trigger>
+        <Sidebar.MenuButton>
+          <Avatar
+            name="Hirotomo Yamada"
+            src="https://avatars.githubusercontent.com/u/84060430?v=4"
+            size="xs"
+            rounded="{side-panel-item-rounded}"
+          />
+
+          <Grid flex="1" gap="xs" lineHeight="1" textAlign="start">
+            <Text truncated>Hirotomo Yamada</Text>
+            <Text color="fg.muted" truncated>
+              hirotomo.yamada@avap.co.jp
+            </Text>
+          </Grid>
+
+          <ChevronsUpDownIcon
+            color="fg.muted"
+            fontSize="{side-panel-item-icon-size}"
+          />
+        </Sidebar.MenuButton>
+      </Menu.Trigger>
+
+      <Menu.Content
+        items={[
+          { label: "Upgrade to Pro", value: "Upgrade to Pro" },
+          { type: "separator" },
+          { label: "Account", value: "Account" },
+          { label: "Billing", value: "Billing" },
+          { label: "Notification", value: "Notification" },
+          { type: "separator" },
+          { label: "Logout", value: "Logout" },
+        ]}
+      />
+    </Menu.Root>
+  )
+}
 `
 
 const STACKBLITZRC = {
@@ -327,6 +520,10 @@ const IMPORTS = [
     "createCartesianChartData",
     "PolarChartData",
     "createPolarChartData",
+    "treeItems",
+    "sidebarItems",
+    "SidebarDocumentMenuButton",
+    "SidebarUserMenuButton",
   ].join(", ")} } from "@/misc"`,
   ...Object.entries(EXTERNAL_MODULES).map(([source, value]) => {
     if (Array.isArray(value)) {
@@ -415,7 +612,7 @@ export async function stackblitz({
     "package.json": JSON.stringify(generatePackage(dependencies), null, 2),
     "src/app.tsx": APP,
     "src/main.tsx": MAIN,
-    "src/misc.ts": MISC,
+    "src/misc.tsx": MISC,
     "src/vite-env.d.ts": VITE_ENV,
     "tsconfig.app.json": JSON.stringify(TSCONFIG_APP, null, 2),
     "tsconfig.json": JSON.stringify(TSCONFIG, null, 2),

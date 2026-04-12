@@ -191,7 +191,7 @@
         "required": false
       },
       "placement": {
-        "type": "Direction",
+        "type": "UsePopperProps[\"placement\"]",
         "defaultValue": "\"end\"",
         "description": "The placement of the popper relative to its reference.",
         "required": false
@@ -461,7 +461,7 @@
       "required": false
     },
     "placement": {
-      "type": "Direction",
+      "type": "UsePopperProps[\"placement\"]",
       "defaultValue": "\"end\"",
       "description": "The placement of the popper relative to its reference.",
       "required": false

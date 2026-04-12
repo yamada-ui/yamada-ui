@@ -2,7 +2,6 @@
 title: NativePopover
 description: "`NativePopover` is a component that floats around an element to display information using the HTML Popover API."
 tags: ["overlay", "floating"]
-status: new
 storybook: components-native-popover--basic
 source: components/native-popover
 style: components/native-popover/native-popover.style.ts
@@ -166,7 +165,11 @@ To change the placement, set `placement` to `"start"`, `"end-end"`, etc. By defa
       "end-end",
       "end-center",
       "center-start",
+      "center-start-start",
+      "center-start-end",
       "center-end",
+      "center-end-start",
+      "center-end-end",
     ]}
   >
     {(placement) => (

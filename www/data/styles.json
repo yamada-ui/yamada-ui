@@ -3,7 +3,7 @@
     "borderBottomRadius": {
       "properties": ["borderBottomLeftRadius", "borderBottomRightRadius"],
       "token": "radii",
-      "type": "StyleValueWithCondition<CSS.Property.BorderBottomLeftRadius | CSS.Property.BorderBottomRightRadius | number, \"radii\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBottomLeftRadius | AnyString |  CSS.Property.BorderBottomRightRadius | AnyString | number, \"radii\">",
       "docs": {
         "border-bottom-left-radius": {
           "baseline": {
@@ -33,7 +33,7 @@
     "borderInlineEndRadius": {
       "properties": ["borderEndStartRadius", "borderEndEndRadius"],
       "token": "radii",
-      "type": "StyleValueWithCondition<CSS.Property.BorderEndEndRadius | CSS.Property.BorderEndStartRadius | number, \"radii\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderEndEndRadius | AnyString |  CSS.Property.BorderEndStartRadius | AnyString | number, \"radii\">",
       "docs": {
         "border-end-end-radius": {
           "baseline": {
@@ -63,7 +63,7 @@
     "borderInlineStartRadius": {
       "properties": ["borderStartStartRadius", "borderStartEndRadius"],
       "token": "radii",
-      "type": "StyleValueWithCondition<CSS.Property.BorderStartEndRadius | CSS.Property.BorderStartStartRadius | number, \"radii\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderStartEndRadius | AnyString |  CSS.Property.BorderStartStartRadius | AnyString | number, \"radii\">",
       "docs": {
         "border-start-end-radius": {
           "baseline": {
@@ -93,7 +93,7 @@
     "borderLeftRadius": {
       "properties": ["borderTopLeftRadius", "borderBottomLeftRadius"],
       "token": "radii",
-      "type": "StyleValueWithCondition<CSS.Property.BorderBottomLeftRadius | CSS.Property.BorderTopLeftRadius | number, \"radii\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBottomLeftRadius | AnyString |  CSS.Property.BorderTopLeftRadius | AnyString | number, \"radii\">",
       "docs": {
         "border-bottom-left-radius": {
           "baseline": {
@@ -123,7 +123,7 @@
     "borderRightRadius": {
       "properties": ["borderTopRightRadius", "borderBottomRightRadius"],
       "token": "radii",
-      "type": "StyleValueWithCondition<CSS.Property.BorderBottomRightRadius | CSS.Property.BorderTopRightRadius | number, \"radii\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBottomRightRadius | AnyString |  CSS.Property.BorderTopRightRadius | AnyString | number, \"radii\">",
       "docs": {
         "border-bottom-right-radius": {
           "baseline": {
@@ -153,7 +153,7 @@
     "borderTopRadius": {
       "properties": ["borderTopLeftRadius", "borderTopRightRadius"],
       "token": "radii",
-      "type": "StyleValueWithCondition<CSS.Property.BorderTopLeftRadius | CSS.Property.BorderTopRightRadius | number, \"radii\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderTopLeftRadius | AnyString |  CSS.Property.BorderTopRightRadius | AnyString | number, \"radii\">",
       "docs": {
         "border-top-left-radius": {
           "baseline": {
@@ -183,7 +183,7 @@
     "borderX": {
       "properties": ["borderLeft", "borderRight"],
       "token": "borders",
-      "type": "StyleValueWithCondition<CSS.Property.BorderLeft | CSS.Property.BorderRight | number, \"borders\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderLeft | AnyString |  CSS.Property.BorderRight | AnyString | number, \"borders\">",
       "docs": {
         "border-left": {
           "baseline": {
@@ -212,7 +212,7 @@
     "borderY": {
       "properties": ["borderTop", "borderBottom"],
       "token": "borders",
-      "type": "StyleValueWithCondition<CSS.Property.BorderBottom | CSS.Property.BorderTop | number, \"borders\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBottom | AnyString |  CSS.Property.BorderTop | AnyString | number, \"borders\">",
       "docs": {
         "border-bottom": {
           "baseline": {
@@ -241,7 +241,7 @@
     "boxSize": {
       "properties": ["width", "height"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.Height | CSS.Property.Width | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.Height | AnyString |  CSS.Property.Width | AnyString | number, \"sizes\">",
       "docs": {
         "height": {
           "baseline": {
@@ -303,7 +303,7 @@
     "insetX": {
       "properties": ["left", "right"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.Left | CSS.Property.Right | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.Left | AnyString |  CSS.Property.Right | AnyString | number, \"spaces\">",
       "docs": {
         "left": {
           "baseline": {
@@ -332,7 +332,7 @@
     "insetY": {
       "properties": ["top", "bottom"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.Bottom | CSS.Property.Top | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.Bottom | AnyString |  CSS.Property.Top | AnyString | number, \"spaces\">",
       "docs": {
         "bottom": {
           "baseline": {
@@ -361,7 +361,7 @@
     "marginX": {
       "properties": ["marginInlineStart", "marginInlineEnd"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.MarginInlineEnd | AnyString |  CSS.Property.MarginInlineStart | AnyString | number, \"spaces\">",
       "docs": {
         "margin-inline-end": {
           "baseline": {
@@ -391,7 +391,7 @@
     "marginY": {
       "properties": ["marginTop", "marginBottom"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.MarginBottom | CSS.Property.MarginTop | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.MarginBottom | AnyString |  CSS.Property.MarginTop | AnyString | number, \"spaces\">",
       "docs": {
         "margin-bottom": {
           "baseline": {
@@ -421,7 +421,7 @@
     "maxBoxSize": {
       "properties": ["maxWidth", "maxHeight"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.MaxHeight | CSS.Property.MaxWidth | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.MaxHeight | AnyString |  CSS.Property.MaxWidth | AnyString | number, \"sizes\">",
       "docs": {
         "max-height": {
           "baseline": {
@@ -450,7 +450,7 @@
     "minBoxSize": {
       "properties": ["minWidth", "minHeight"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.MinHeight | CSS.Property.MinWidth | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.MinHeight | AnyString |  CSS.Property.MinWidth | AnyString | number, \"sizes\">",
       "docs": {
         "min-height": {
           "baseline": {
@@ -479,7 +479,7 @@
     "paddingX": {
       "properties": ["paddingInlineStart", "paddingInlineEnd"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.PaddingInlineEnd | AnyString |  CSS.Property.PaddingInlineStart | AnyString | number, \"spaces\">",
       "docs": {
         "padding-inline-end": {
           "baseline": {
@@ -509,7 +509,7 @@
     "paddingY": {
       "properties": ["paddingTop", "paddingBottom"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.PaddingBottom | AnyString |  CSS.Property.PaddingTop | AnyString | number, \"spaces\">",
       "docs": {
         "padding-bottom": {
           "baseline": {
@@ -539,7 +539,7 @@
     "scrollMarginX": {
       "properties": ["scrollMarginLeft", "scrollMarginRight"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.ScrollMarginLeft | CSS.Property.ScrollMarginRight | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollMarginLeft | AnyString |  CSS.Property.ScrollMarginRight | AnyString | number, \"spaces\">",
       "docs": {
         "scroll-margin-left": {
           "baseline": {
@@ -568,7 +568,7 @@
     "scrollMarginY": {
       "properties": ["scrollMarginTop", "scrollMarginBottom"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.ScrollMarginBottom | CSS.Property.ScrollMarginTop | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollMarginBottom | AnyString |  CSS.Property.ScrollMarginTop | AnyString | number, \"spaces\">",
       "docs": {
         "scroll-margin-bottom": {
           "baseline": {
@@ -597,7 +597,7 @@
     "scrollPaddingX": {
       "properties": ["scrollPaddingLeft", "scrollPaddingRight"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.ScrollPaddingLeft | CSS.Property.ScrollPaddingRight | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollPaddingLeft | AnyString |  CSS.Property.ScrollPaddingRight | AnyString | number, \"spaces\">",
       "docs": {
         "scroll-padding-left": {
           "baseline": {
@@ -626,7 +626,7 @@
     "scrollPaddingY": {
       "properties": ["scrollPaddingTop", "scrollPaddingBottom"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.ScrollPaddingBottom | CSS.Property.ScrollPaddingTop | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollPaddingBottom | AnyString |  CSS.Property.ScrollPaddingTop | AnyString | number, \"spaces\">",
       "docs": {
         "scroll-padding-bottom": {
           "baseline": {
@@ -1059,7 +1059,7 @@
   "standard": {
     "alignmentBaseline": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.AlignmentBaseline>",
+      "type": "StyleValueWithCondition< CSS.Property.AlignmentBaseline | AnyString>",
       "docs": {
         "alignment-baseline": {
           "baseline": { "status": "Limited available" },
@@ -1072,7 +1072,7 @@
     },
     "baselineShift": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BaselineShift>",
+      "type": "StyleValueWithCondition< CSS.Property.BaselineShift | AnyString>",
       "docs": {
         "baseline-shift": {
           "baseline": { "status": "Limited available" },
@@ -1085,7 +1085,7 @@
     },
     "clip": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Clip>",
+      "type": "StyleValueWithCondition< CSS.Property.Clip | AnyString>",
       "docs": {
         "clip": {
           "deprecated": true,
@@ -1097,7 +1097,7 @@
     },
     "clipPath": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ClipPath>",
+      "type": "StyleValueWithCondition< CSS.Property.ClipPath | AnyString>",
       "docs": {
         "clip-path": {
           "baseline": {
@@ -1114,7 +1114,7 @@
     },
     "clipRule": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ClipRule>",
+      "type": "StyleValueWithCondition< CSS.Property.ClipRule | AnyString>",
       "docs": {
         "clip-rule": {
           "baseline": {
@@ -1132,7 +1132,7 @@
     "color": {
       "properties": ["color"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.Color, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.Color | AnyString, \"colors\">",
       "docs": {
         "color": {
           "baseline": {
@@ -1150,7 +1150,7 @@
     },
     "colorInterpolation": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ColorInterpolation>",
+      "type": "StyleValueWithCondition< CSS.Property.ColorInterpolation | AnyString>",
       "docs": {
         "color-interpolation": {
           "baseline": {
@@ -1167,7 +1167,7 @@
     },
     "colorInterpolationFilters": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ColorInterpolationFilters>",
+      "type": "StyleValueWithCondition< CSS.Property.ColorInterpolationFilters | AnyString>",
       "docs": {
         "color-interpolation-filters": {
           "baseline": {
@@ -1184,7 +1184,7 @@
     },
     "cursor": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Cursor>",
+      "type": "StyleValueWithCondition< CSS.Property.Cursor | AnyString>",
       "docs": {
         "cursor": {
           "baseline": { "status": "Limited available" },
@@ -1197,7 +1197,7 @@
     },
     "direction": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Direction>",
+      "type": "StyleValueWithCondition< CSS.Property.Direction | AnyString>",
       "docs": {
         "direction": {
           "baseline": {
@@ -1214,7 +1214,7 @@
     },
     "dominantBaseline": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.DominantBaseline>",
+      "type": "StyleValueWithCondition< CSS.Property.DominantBaseline | AnyString>",
       "docs": {
         "dominant-baseline": {
           "baseline": {
@@ -1231,7 +1231,7 @@
     },
     "fillOpacity": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FillOpacity>",
+      "type": "StyleValueWithCondition< CSS.Property.FillOpacity | AnyString>",
       "docs": {
         "fill-opacity": {
           "baseline": {
@@ -1248,7 +1248,7 @@
     },
     "fillRule": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FillRule>",
+      "type": "StyleValueWithCondition< CSS.Property.FillRule | AnyString>",
       "docs": {
         "fill-rule": {
           "baseline": {
@@ -1265,7 +1265,7 @@
     },
     "filter": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Filter>",
+      "type": "StyleValueWithCondition< CSS.Property.Filter | AnyString>",
       "docs": {
         "filter": {
           "baseline": {
@@ -1283,7 +1283,7 @@
     "floodColor": {
       "properties": ["floodColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.FloodColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.FloodColor | AnyString, \"colors\">",
       "docs": {
         "flood-color": {
           "baseline": {
@@ -1300,7 +1300,7 @@
     },
     "floodOpacity": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FloodOpacity>",
+      "type": "StyleValueWithCondition< CSS.Property.FloodOpacity | AnyString>",
       "docs": {
         "flood-opacity": {
           "baseline": {
@@ -1318,7 +1318,7 @@
     "fontFamily": {
       "properties": ["fontFamily"],
       "token": "fonts",
-      "type": "StyleValueWithCondition<CSS.Property.FontFamily, \"fonts\">",
+      "type": "StyleValueWithCondition< CSS.Property.FontFamily | AnyString, \"fonts\">",
       "docs": {
         "font-family": {
           "baseline": {
@@ -1336,7 +1336,7 @@
     "fontSize": {
       "properties": ["fontSize"],
       "token": "fontSizes",
-      "type": "StyleValueWithCondition<CSS.Property.FontSize | number, \"fontSizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.FontSize | AnyString | number, \"fontSizes\">",
       "docs": {
         "font-size": {
           "baseline": {
@@ -1354,7 +1354,7 @@
     },
     "fontSizeAdjust": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontSizeAdjust>",
+      "type": "StyleValueWithCondition< CSS.Property.FontSizeAdjust | AnyString>",
       "docs": {
         "font-size-adjust": {
           "baseline": {
@@ -1370,7 +1370,7 @@
     },
     "fontStretch": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontStretch>",
+      "type": "StyleValueWithCondition< CSS.Property.FontStretch | AnyString>",
       "docs": {
         "font-stretch": {
           "baseline": {
@@ -1387,7 +1387,7 @@
     },
     "fontStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontStyle>",
+      "type": "StyleValueWithCondition< CSS.Property.FontStyle | AnyString>",
       "docs": {
         "font-style": {
           "baseline": {
@@ -1404,7 +1404,7 @@
     },
     "fontVariant": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontVariant>",
+      "type": "StyleValueWithCondition< CSS.Property.FontVariant | AnyString>",
       "docs": {
         "font-variant": {
           "baseline": {
@@ -1422,7 +1422,7 @@
     "fontWeight": {
       "properties": ["fontWeight"],
       "token": "fontWeights",
-      "type": "StyleValueWithCondition<CSS.Property.FontWeight, \"fontWeights\">",
+      "type": "StyleValueWithCondition< CSS.Property.FontWeight | AnyString, \"fontWeights\">",
       "docs": {
         "font-weight": {
           "baseline": {
@@ -1439,7 +1439,7 @@
     },
     "fontWidth": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontWidth>",
+      "type": "StyleValueWithCondition< CSS.Property.FontWidth | AnyString>",
       "docs": {
         "font-width": {
           "baseline": { "status": "Limited available" },
@@ -1464,7 +1464,7 @@
     },
     "glyphOrientationVertical": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.GlyphOrientationVertical>",
+      "type": "StyleValueWithCondition< CSS.Property.GlyphOrientationVertical | AnyString>",
       "docs": {
         "glyph-orientation-vertical": {
           "deprecated": true,
@@ -1476,7 +1476,7 @@
     },
     "imageRendering": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ImageRendering>",
+      "type": "StyleValueWithCondition< CSS.Property.ImageRendering | AnyString>",
       "docs": {
         "image-rendering": {
           "baseline": {
@@ -1494,7 +1494,7 @@
     "letterSpacing": {
       "properties": ["letterSpacing"],
       "token": "letterSpacings",
-      "type": "StyleValueWithCondition<CSS.Property.LetterSpacing, \"letterSpacings\">",
+      "type": "StyleValueWithCondition< CSS.Property.LetterSpacing | AnyString, \"letterSpacings\">",
       "docs": {
         "letter-spacing": {
           "baseline": {
@@ -1513,7 +1513,7 @@
     "lightingColor": {
       "properties": ["lightingColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.LightingColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.LightingColor | AnyString, \"colors\">",
       "docs": {
         "lighting-color": {
           "baseline": {
@@ -1530,7 +1530,7 @@
     },
     "markerEnd": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MarkerEnd>",
+      "type": "StyleValueWithCondition< CSS.Property.MarkerEnd | AnyString>",
       "docs": {
         "marker-end": {
           "baseline": {
@@ -1547,7 +1547,7 @@
     },
     "markerMid": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MarkerMid>",
+      "type": "StyleValueWithCondition< CSS.Property.MarkerMid | AnyString>",
       "docs": {
         "marker-mid": {
           "baseline": {
@@ -1564,7 +1564,7 @@
     },
     "markerStart": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MarkerStart>",
+      "type": "StyleValueWithCondition< CSS.Property.MarkerStart | AnyString>",
       "docs": {
         "marker-start": {
           "baseline": {
@@ -1581,7 +1581,7 @@
     },
     "mask": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Mask>",
+      "type": "StyleValueWithCondition< CSS.Property.Mask | AnyString>",
       "docs": {
         "mask": {
           "baseline": {
@@ -1597,7 +1597,7 @@
     },
     "opacity": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Opacity>",
+      "type": "StyleValueWithCondition< CSS.Property.Opacity | AnyString>",
       "docs": {
         "opacity": {
           "baseline": {
@@ -1614,7 +1614,7 @@
     },
     "overflow": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Overflow>",
+      "type": "StyleValueWithCondition< CSS.Property.Overflow | AnyString>",
       "docs": {
         "overflow": {
           "baseline": {
@@ -1631,7 +1631,7 @@
     },
     "paintOrder": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.PaintOrder>",
+      "type": "StyleValueWithCondition< CSS.Property.PaintOrder | AnyString>",
       "docs": {
         "paint-order": {
           "baseline": {
@@ -1647,7 +1647,7 @@
     },
     "pointerEvents": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.PointerEvents>",
+      "type": "StyleValueWithCondition< CSS.Property.PointerEvents | AnyString>",
       "docs": {
         "pointer-events": {
           "baseline": {
@@ -1664,7 +1664,7 @@
     },
     "shapeRendering": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ShapeRendering>",
+      "type": "StyleValueWithCondition< CSS.Property.ShapeRendering | AnyString>",
       "docs": {
         "shape-rendering": {
           "baseline": {
@@ -1682,7 +1682,7 @@
     "stopColor": {
       "properties": ["stopColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.StopColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.StopColor | AnyString, \"colors\">",
       "docs": {
         "stop-color": {
           "baseline": {
@@ -1699,7 +1699,7 @@
     },
     "stopOpacity": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.StopOpacity>",
+      "type": "StyleValueWithCondition< CSS.Property.StopOpacity | AnyString>",
       "docs": {
         "stop-opacity": {
           "baseline": {
@@ -1717,7 +1717,7 @@
     "stroke": {
       "properties": ["stroke"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.Stroke, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.Stroke | AnyString, \"colors\">",
       "docs": {
         "stroke": {
           "baseline": {
@@ -1734,7 +1734,7 @@
     },
     "strokeDasharray": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.StrokeDasharray>",
+      "type": "StyleValueWithCondition< CSS.Property.StrokeDasharray | AnyString>",
       "docs": {
         "stroke-dasharray": {
           "baseline": {
@@ -1751,7 +1751,7 @@
     },
     "strokeDashoffset": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.StrokeDashoffset | number>",
+      "type": "StyleValueWithCondition< CSS.Property.StrokeDashoffset | AnyString>",
       "docs": {
         "stroke-dashoffset": {
           "baseline": {
@@ -1768,7 +1768,7 @@
     },
     "strokeLinecap": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.StrokeLinecap>",
+      "type": "StyleValueWithCondition< CSS.Property.StrokeLinecap | AnyString>",
       "docs": {
         "stroke-linecap": {
           "baseline": {
@@ -1785,7 +1785,7 @@
     },
     "strokeLinejoin": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.StrokeLinejoin>",
+      "type": "StyleValueWithCondition< CSS.Property.StrokeLinejoin | AnyString>",
       "docs": {
         "stroke-linejoin": {
           "baseline": {
@@ -1802,7 +1802,7 @@
     },
     "strokeMiterlimit": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.StrokeMiterlimit>",
+      "type": "StyleValueWithCondition< CSS.Property.StrokeMiterlimit | AnyString>",
       "docs": {
         "stroke-miterlimit": {
           "baseline": {
@@ -1819,7 +1819,7 @@
     },
     "strokeOpacity": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.StrokeOpacity>",
+      "type": "StyleValueWithCondition< CSS.Property.StrokeOpacity | AnyString>",
       "docs": {
         "stroke-opacity": {
           "baseline": {
@@ -1836,7 +1836,7 @@
     },
     "strokeWidth": {
       "properties": ["strokeWidth"],
-      "type": "StyleValueWithCondition<CSS.Property.StrokeWidth | number>",
+      "type": "StyleValueWithCondition< CSS.Property.StrokeWidth | AnyString | number>",
       "docs": {
         "stroke-width": {
           "baseline": {
@@ -1853,7 +1853,7 @@
     },
     "textAnchor": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextAnchor>",
+      "type": "StyleValueWithCondition< CSS.Property.TextAnchor | AnyString>",
       "docs": {
         "text-anchor": {
           "baseline": {
@@ -1870,7 +1870,7 @@
     },
     "textDecoration": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextDecoration>",
+      "type": "StyleValueWithCondition< CSS.Property.TextDecoration | AnyString>",
       "docs": {
         "text-decoration": {
           "baseline": {
@@ -1888,7 +1888,7 @@
     },
     "textOverflow": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextOverflow>",
+      "type": "StyleValueWithCondition< CSS.Property.TextOverflow | AnyString>",
       "docs": {
         "text-overflow": {
           "baseline": {
@@ -1905,7 +1905,7 @@
     },
     "textRendering": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextRendering>",
+      "type": "StyleValueWithCondition< CSS.Property.TextRendering | AnyString>",
       "docs": {
         "text-rendering": {
           "baseline": {
@@ -1922,7 +1922,7 @@
     },
     "transform": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Transform>",
+      "type": "StyleValueWithCondition< CSS.Property.Transform | AnyString>",
       "docs": {
         "transform": {
           "baseline": {
@@ -1939,7 +1939,7 @@
     },
     "transformOrigin": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TransformOrigin>",
+      "type": "StyleValueWithCondition< CSS.Property.TransformOrigin | AnyString>",
       "docs": {
         "transform-origin": {
           "baseline": {
@@ -1956,7 +1956,7 @@
     },
     "unicodeBidi": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.UnicodeBidi>",
+      "type": "StyleValueWithCondition< CSS.Property.UnicodeBidi | AnyString>",
       "docs": {
         "unicode-bidi": {
           "baseline": {
@@ -1973,7 +1973,7 @@
     },
     "vectorEffect": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.VectorEffect>",
+      "type": "StyleValueWithCondition< CSS.Property.VectorEffect | AnyString>",
       "docs": {
         "vector-effect": {
           "baseline": {
@@ -1990,7 +1990,7 @@
     },
     "visibility": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Visibility>",
+      "type": "StyleValueWithCondition< CSS.Property.Visibility | AnyString>",
       "docs": {
         "visibility": {
           "baseline": {
@@ -2007,7 +2007,7 @@
     },
     "whiteSpace": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.WhiteSpace>",
+      "type": "StyleValueWithCondition< CSS.Property.WhiteSpace | AnyString>",
       "docs": {
         "white-space": {
           "baseline": {
@@ -2024,7 +2024,7 @@
     },
     "wordSpacing": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.WordSpacing>",
+      "type": "StyleValueWithCondition< CSS.Property.WordSpacing | AnyString>",
       "docs": {
         "word-spacing": {
           "baseline": {
@@ -2041,7 +2041,7 @@
     },
     "writingMode": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.WritingMode>",
+      "type": "StyleValueWithCondition< CSS.Property.WritingMode | AnyString>",
       "docs": {
         "writing-mode": {
           "baseline": {
@@ -2059,7 +2059,7 @@
     "accentColor": {
       "properties": ["accentColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.AccentColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.AccentColor | AnyString, \"colors\">",
       "docs": {
         "accent-color": {
           "baseline": { "status": "Limited available" },
@@ -2073,7 +2073,7 @@
     },
     "alignContent": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.AlignContent>",
+      "type": "StyleValueWithCondition< CSS.Property.AlignContent | AnyString>",
       "docs": {
         "align-content": {
           "baseline": {
@@ -2090,7 +2090,7 @@
     },
     "alignItems": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.AlignItems>",
+      "type": "StyleValueWithCondition< CSS.Property.AlignItems | AnyString>",
       "docs": {
         "align-items": {
           "baseline": {
@@ -2107,7 +2107,7 @@
     },
     "alignSelf": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.AlignSelf>",
+      "type": "StyleValueWithCondition< CSS.Property.AlignSelf | AnyString>",
       "docs": {
         "align-self": {
           "baseline": {
@@ -2124,7 +2124,7 @@
     },
     "all": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Globals>",
+      "type": "StyleValueWithCondition< CSS.Globals | AnyString>",
       "docs": {
         "all": {
           "baseline": {
@@ -2141,7 +2141,7 @@
     },
     "anchorName": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.AnchorName>",
+      "type": "StyleValueWithCondition< CSS.Property.AnchorName | AnyString>",
       "docs": {
         "anchor-name": {
           "baseline": { "status": "Limited available" },
@@ -2154,7 +2154,7 @@
     },
     "anchorScope": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.AnchorScope>",
+      "type": "StyleValueWithCondition< CSS.Property.AnchorScope | AnyString>",
       "docs": {
         "anchor-scope": {
           "baseline": { "status": "Limited available" },
@@ -2168,7 +2168,7 @@
     "animation": {
       "properties": ["animation"],
       "token": "animations",
-      "type": "StyleValueWithCondition<CSS.Property.Animation, \"animations\">",
+      "type": "StyleValueWithCondition< CSS.Property.Animation | AnyString, \"animations\">",
       "docs": {
         "animation": {
           "baseline": {
@@ -2185,7 +2185,7 @@
     },
     "animationComposition": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.AnimationComposition>",
+      "type": "StyleValueWithCondition< CSS.Property.AnimationComposition | AnyString>",
       "docs": {
         "animation-composition": {
           "baseline": {
@@ -2202,7 +2202,7 @@
     },
     "animationDelay": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.AnimationDelay>",
+      "type": "StyleValueWithCondition< CSS.Property.AnimationDelay | AnyString>",
       "docs": {
         "animation-delay": {
           "baseline": {
@@ -2219,7 +2219,7 @@
     },
     "animationDirection": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.AnimationDirection>",
+      "type": "StyleValueWithCondition< CSS.Property.AnimationDirection | AnyString>",
       "docs": {
         "animation-direction": {
           "baseline": {
@@ -2237,7 +2237,7 @@
     "animationDuration": {
       "properties": ["animationDuration"],
       "token": "durations",
-      "type": "StyleValueWithCondition<CSS.Property.AnimationDuration, \"durations\">",
+      "type": "StyleValueWithCondition< CSS.Property.AnimationDuration | AnyString, \"durations\">",
       "docs": {
         "animation-duration": {
           "baseline": {
@@ -2254,7 +2254,7 @@
     },
     "animationFillMode": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.AnimationFillMode>",
+      "type": "StyleValueWithCondition< CSS.Property.AnimationFillMode | AnyString>",
       "docs": {
         "animation-fill-mode": {
           "baseline": {
@@ -2271,7 +2271,7 @@
     },
     "animationIterationCount": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.AnimationIterationCount>",
+      "type": "StyleValueWithCondition< CSS.Property.AnimationIterationCount | AnyString>",
       "docs": {
         "animation-iteration-count": {
           "baseline": {
@@ -2289,7 +2289,7 @@
     "animationName": {
       "properties": ["animationName"],
       "token": "keyframes",
-      "type": "StyleValueWithCondition<CSS.Property.AnimationName, \"keyframes\">",
+      "type": "StyleValueWithCondition< CSS.Property.AnimationName | AnyString, \"keyframes\">",
       "docs": {
         "animation-name": {
           "baseline": {
@@ -2306,7 +2306,7 @@
     },
     "animationPlayState": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.AnimationPlayState>",
+      "type": "StyleValueWithCondition< CSS.Property.AnimationPlayState | AnyString>",
       "docs": {
         "animation-play-state": {
           "baseline": {
@@ -2323,7 +2323,7 @@
     },
     "animationRange": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.AnimationRange>",
+      "type": "StyleValueWithCondition< CSS.Property.AnimationRange | AnyString>",
       "docs": {
         "animation-range": {
           "baseline": { "status": "Limited available" },
@@ -2336,7 +2336,7 @@
     },
     "animationRangeEnd": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.AnimationRangeEnd>",
+      "type": "StyleValueWithCondition< CSS.Property.AnimationRangeEnd | AnyString>",
       "docs": {
         "animation-range-end": {
           "baseline": { "status": "Limited available" },
@@ -2349,7 +2349,7 @@
     },
     "animationRangeStart": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.AnimationRangeStart>",
+      "type": "StyleValueWithCondition< CSS.Property.AnimationRangeStart | AnyString>",
       "docs": {
         "animation-range-start": {
           "baseline": { "status": "Limited available" },
@@ -2362,7 +2362,7 @@
     },
     "animationTimeline": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.AnimationTimeline>",
+      "type": "StyleValueWithCondition< CSS.Property.AnimationTimeline | AnyString>",
       "docs": {
         "animation-timeline": {
           "baseline": { "status": "Limited available" },
@@ -2376,7 +2376,7 @@
     "animationTimingFunction": {
       "properties": ["animationTimingFunction"],
       "token": "easings",
-      "type": "StyleValueWithCondition<CSS.Property.AnimationTimingFunction, \"easings\">",
+      "type": "StyleValueWithCondition< CSS.Property.AnimationTimingFunction | AnyString, \"easings\">",
       "docs": {
         "animation-timing-function": {
           "baseline": {
@@ -2405,7 +2405,7 @@
     },
     "appearance": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Appearance>",
+      "type": "StyleValueWithCondition< CSS.Property.Appearance | AnyString>",
       "docs": {
         "appearance": {
           "baseline": {
@@ -2423,7 +2423,7 @@
     "aspectRatio": {
       "properties": ["aspectRatio"],
       "token": "aspectRatios",
-      "type": "StyleValueWithCondition<CSS.Property.AspectRatio, \"aspectRatios\">",
+      "type": "StyleValueWithCondition< CSS.Property.AspectRatio | AnyString, \"aspectRatios\">",
       "docs": {
         "aspect-ratio": {
           "baseline": {
@@ -2440,7 +2440,7 @@
     },
     "backdropFilter": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BackdropFilter>",
+      "type": "StyleValueWithCondition< CSS.Property.BackdropFilter | AnyString>",
       "docs": {
         "backdrop-filter": {
           "baseline": {
@@ -2457,7 +2457,7 @@
     "backfaceVisibility": {
       "properties": ["backfaceVisibility"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.BackfaceVisibility | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.BackfaceVisibility | AnyString | number, \"sizes\">",
       "docs": {
         "backface-visibility": {
           "baseline": {
@@ -2475,7 +2475,7 @@
     "background": {
       "properties": ["background"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.Background, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.Background | AnyString, \"colors\">",
       "docs": {
         "background": {
           "baseline": {
@@ -2493,7 +2493,7 @@
     },
     "backgroundAttachment": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BackgroundAttachment>",
+      "type": "StyleValueWithCondition< CSS.Property.BackgroundAttachment | AnyString>",
       "docs": {
         "background-attachment": {
           "baseline": { "status": "Limited available" },
@@ -2507,7 +2507,7 @@
     },
     "backgroundBlendMode": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BackgroundBlendMode>",
+      "type": "StyleValueWithCondition< CSS.Property.BackgroundBlendMode | AnyString>",
       "docs": {
         "background-blend-mode": {
           "baseline": {
@@ -2525,7 +2525,7 @@
     },
     "backgroundClip": {
       "properties": ["backgroundClip"],
-      "type": "StyleValueWithCondition<CSS.Property.BackgroundClip>",
+      "type": "StyleValueWithCondition< CSS.Property.BackgroundClip | AnyString>",
       "docs": {
         "background-clip": {
           "baseline": {
@@ -2544,7 +2544,7 @@
     "backgroundColor": {
       "properties": ["backgroundColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.BackgroundColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.BackgroundColor | AnyString, \"colors\">",
       "docs": {
         "background-color": {
           "baseline": {
@@ -2563,7 +2563,7 @@
     "backgroundImage": {
       "properties": ["backgroundImage"],
       "token": "gradients",
-      "type": "StyleValueWithCondition<CSS.Property.BackgroundImage, \"gradients\">",
+      "type": "StyleValueWithCondition< CSS.Property.BackgroundImage | AnyString, \"gradients\">",
       "docs": {
         "background-image": {
           "baseline": {
@@ -2581,7 +2581,7 @@
     },
     "backgroundOrigin": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BackgroundOrigin>",
+      "type": "StyleValueWithCondition< CSS.Property.BackgroundOrigin | AnyString>",
       "docs": {
         "background-origin": {
           "baseline": {
@@ -2599,7 +2599,7 @@
     },
     "backgroundPosition": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BackgroundPosition>",
+      "type": "StyleValueWithCondition< CSS.Property.BackgroundPosition | AnyString>",
       "docs": {
         "background-position": {
           "baseline": {
@@ -2617,7 +2617,7 @@
     },
     "backgroundPositionX": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BackgroundPositionX>",
+      "type": "StyleValueWithCondition< CSS.Property.BackgroundPositionX | AnyString>",
       "docs": {
         "background-position-x": {
           "baseline": {
@@ -2635,7 +2635,7 @@
     },
     "backgroundPositionY": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BackgroundPositionY>",
+      "type": "StyleValueWithCondition< CSS.Property.BackgroundPositionY | AnyString>",
       "docs": {
         "background-position-y": {
           "baseline": {
@@ -2653,7 +2653,7 @@
     },
     "backgroundRepeat": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BackgroundRepeat>",
+      "type": "StyleValueWithCondition< CSS.Property.BackgroundRepeat | AnyString>",
       "docs": {
         "background-repeat": {
           "baseline": {
@@ -2695,7 +2695,7 @@
     },
     "backgroundSize": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BackgroundSize>",
+      "type": "StyleValueWithCondition< CSS.Property.BackgroundSize | AnyString>",
       "docs": {
         "background-size": {
           "baseline": {
@@ -2727,7 +2727,7 @@
     "blockSize": {
       "properties": ["blockSize"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.BlockSize | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.BlockSize | AnyString | number, \"sizes\">",
       "docs": {
         "block-size": {
           "baseline": {
@@ -2745,7 +2745,7 @@
     "border": {
       "properties": ["border"],
       "token": "borders",
-      "type": "StyleValueWithCondition<CSS.Property.Border | number, \"borders\">",
+      "type": "StyleValueWithCondition< CSS.Property.Border | AnyString | number, \"borders\">",
       "docs": {
         "border": {
           "baseline": {
@@ -2763,7 +2763,7 @@
     "borderBlock": {
       "properties": ["borderBlock"],
       "token": "borders",
-      "type": "StyleValueWithCondition<CSS.Property.BorderBlock | number, \"borders\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBlock | AnyString | number, \"borders\">",
       "docs": {
         "border-block": {
           "baseline": {
@@ -2781,7 +2781,7 @@
     "borderBlockColor": {
       "properties": ["borderBlockColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.BorderBlockColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBlockColor | AnyString, \"colors\">",
       "docs": {
         "border-block-color": {
           "baseline": {
@@ -2799,7 +2799,7 @@
     "borderBlockEnd": {
       "properties": ["borderBlockEnd"],
       "token": "borders",
-      "type": "StyleValueWithCondition<CSS.Property.BorderBlockEnd | number, \"borders\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBlockEnd | AnyString | number, \"borders\">",
       "docs": {
         "border-block-end": {
           "baseline": {
@@ -2817,7 +2817,7 @@
     "borderBlockEndColor": {
       "properties": ["borderBlockEndColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.BorderBlockEndColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBlockEndColor | AnyString, \"colors\">",
       "docs": {
         "border-block-end-color": {
           "baseline": {
@@ -2834,7 +2834,7 @@
     },
     "borderBlockEndStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BorderBlockEndStyle>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBlockEndStyle | AnyString>",
       "docs": {
         "border-block-end-style": {
           "baseline": {
@@ -2851,7 +2851,7 @@
     },
     "borderBlockEndWidth": {
       "properties": ["borderBlockEndWidth"],
-      "type": "StyleValueWithCondition<CSS.Property.BorderBlockEndWidth | number>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBlockEndWidth | AnyString | number>",
       "docs": {
         "border-block-end-width": {
           "baseline": {
@@ -2869,7 +2869,7 @@
     "borderBlockStart": {
       "properties": ["borderBlockStart"],
       "token": "borders",
-      "type": "StyleValueWithCondition<CSS.Property.BorderBlockStart | number, \"borders\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBlockStart | AnyString | number, \"borders\">",
       "docs": {
         "border-block-start": {
           "baseline": {
@@ -2887,7 +2887,7 @@
     "borderBlockStartColor": {
       "properties": ["borderBlockStartColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.BorderBlockStartColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBlockStartColor | AnyString, \"colors\">",
       "docs": {
         "border-block-start-color": {
           "baseline": {
@@ -2904,7 +2904,7 @@
     },
     "borderBlockStartStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BorderBlockStartStyle>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBlockStartStyle | AnyString>",
       "docs": {
         "border-block-start-style": {
           "baseline": {
@@ -2921,7 +2921,7 @@
     },
     "borderBlockStartWidth": {
       "properties": ["borderBlockStartWidth"],
-      "type": "StyleValueWithCondition<CSS.Property.BorderBlockStartWidth | number>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBlockStartWidth | AnyString | number>",
       "docs": {
         "border-block-start-width": {
           "baseline": {
@@ -2938,7 +2938,7 @@
     },
     "borderBlockStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BorderBlockStyle>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBlockStyle | AnyString>",
       "docs": {
         "border-block-style": {
           "baseline": {
@@ -2955,7 +2955,7 @@
     },
     "borderBlockWidth": {
       "properties": ["borderBlockWidth"],
-      "type": "StyleValueWithCondition<CSS.Property.BorderBlockWidth | number>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBlockWidth | AnyString | number>",
       "docs": {
         "border-block-width": {
           "baseline": {
@@ -2973,7 +2973,7 @@
     "borderBottom": {
       "properties": ["borderBottom"],
       "token": "borders",
-      "type": "StyleValueWithCondition<CSS.Property.BorderBottom | number, \"borders\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBottom | AnyString | number, \"borders\">",
       "docs": {
         "border-bottom": {
           "baseline": {
@@ -2991,7 +2991,7 @@
     "borderBottomColor": {
       "properties": ["borderBottomColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.BorderBottomColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBottomColor | AnyString, \"colors\">",
       "docs": {
         "border-bottom-color": {
           "baseline": {
@@ -3009,7 +3009,7 @@
     "borderBottomLeftRadius": {
       "properties": ["borderBottomLeftRadius"],
       "token": "radii",
-      "type": "StyleValueWithCondition<CSS.Property.BorderBottomLeftRadius | number, \"radii\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBottomLeftRadius | AnyString | number, \"radii\">",
       "docs": {
         "border-bottom-left-radius": {
           "baseline": {
@@ -3028,7 +3028,7 @@
     "borderBottomRightRadius": {
       "properties": ["borderBottomRightRadius"],
       "token": "radii",
-      "type": "StyleValueWithCondition<CSS.Property.BorderBottomRightRadius | number, \"radii\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBottomRightRadius | AnyString | number, \"radii\">",
       "docs": {
         "border-bottom-right-radius": {
           "baseline": {
@@ -3046,7 +3046,7 @@
     },
     "borderBottomStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BorderBottomStyle>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBottomStyle | AnyString>",
       "docs": {
         "border-bottom-style": {
           "baseline": {
@@ -3063,7 +3063,7 @@
     },
     "borderBottomWidth": {
       "properties": ["borderBottomWidth"],
-      "type": "StyleValueWithCondition<CSS.Property.BorderBottomWidth | number>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderBottomWidth | AnyString | number>",
       "docs": {
         "border-bottom-width": {
           "baseline": {
@@ -3080,7 +3080,7 @@
     },
     "borderCollapse": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BorderCollapse>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderCollapse | AnyString>",
       "docs": {
         "border-collapse": {
           "baseline": {
@@ -3098,7 +3098,7 @@
     "borderColor": {
       "properties": ["borderColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.BorderColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderColor | AnyString, \"colors\">",
       "docs": {
         "border-color": {
           "baseline": {
@@ -3116,7 +3116,7 @@
     "borderEndEndRadius": {
       "properties": ["borderEndEndRadius"],
       "token": "radii",
-      "type": "StyleValueWithCondition<CSS.Property.BorderEndEndRadius | number, \"radii\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderEndEndRadius | AnyString | number, \"radii\">",
       "docs": {
         "border-end-end-radius": {
           "baseline": {
@@ -3135,7 +3135,7 @@
     "borderEndStartRadius": {
       "properties": ["borderEndStartRadius"],
       "token": "radii",
-      "type": "StyleValueWithCondition<CSS.Property.BorderEndStartRadius | number, \"radii\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderEndStartRadius | AnyString | number, \"radii\">",
       "docs": {
         "border-end-start-radius": {
           "baseline": {
@@ -3154,7 +3154,7 @@
     "borderImage": {
       "properties": ["borderImage"],
       "token": "borders",
-      "type": "StyleValueWithCondition<CSS.Property.BorderImage | number, \"borders\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderImage | AnyString | number, \"borders\">",
       "docs": {
         "border-image": {
           "baseline": {
@@ -3171,7 +3171,7 @@
     },
     "borderImageOutset": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BorderImageOutset>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderImageOutset | AnyString>",
       "docs": {
         "border-image-outset": {
           "baseline": {
@@ -3188,7 +3188,7 @@
     },
     "borderImageRepeat": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BorderImageRepeat>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderImageRepeat | AnyString>",
       "docs": {
         "border-image-repeat": {
           "baseline": {
@@ -3205,7 +3205,7 @@
     },
     "borderImageSlice": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BorderImageSlice>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderImageSlice | AnyString>",
       "docs": {
         "border-image-slice": {
           "baseline": {
@@ -3223,7 +3223,7 @@
     "borderImageSource": {
       "properties": ["borderImageSource"],
       "token": "gradients",
-      "type": "StyleValueWithCondition<CSS.Property.BorderImageSource, \"gradients\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderImageSource | AnyString, \"gradients\">",
       "docs": {
         "border-image-source": {
           "baseline": {
@@ -3240,7 +3240,7 @@
     },
     "borderImageWidth": {
       "properties": ["borderImageWidth"],
-      "type": "StyleValueWithCondition<CSS.Property.BorderImageWidth | number>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderImageWidth | AnyString | number>",
       "docs": {
         "border-image-width": {
           "baseline": {
@@ -3258,7 +3258,7 @@
     "borderInline": {
       "properties": ["borderInline"],
       "token": "borders",
-      "type": "StyleValueWithCondition<CSS.Property.BorderInline | number, \"borders\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderInline | AnyString | number, \"borders\">",
       "docs": {
         "border-inline": {
           "baseline": {
@@ -3276,7 +3276,7 @@
     "borderInlineColor": {
       "properties": ["borderInlineColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.BorderInlineColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderInlineColor | AnyString, \"colors\">",
       "docs": {
         "border-inline-color": {
           "baseline": {
@@ -3294,7 +3294,7 @@
     "borderInlineEnd": {
       "properties": ["borderInlineEnd"],
       "token": "borders",
-      "type": "StyleValueWithCondition<CSS.Property.BorderInlineEnd | number, \"borders\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderInlineEnd | AnyString | number, \"borders\">",
       "docs": {
         "border-inline-end": {
           "baseline": {
@@ -3313,7 +3313,7 @@
     "borderInlineEndColor": {
       "properties": ["borderInlineEndColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.BorderInlineEndColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderInlineEndColor | AnyString, \"colors\">",
       "docs": {
         "border-inline-end-color": {
           "baseline": {
@@ -3331,7 +3331,7 @@
     },
     "borderInlineEndStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BorderInlineEndStyle>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderInlineEndStyle | AnyString>",
       "docs": {
         "border-inline-end-style": {
           "baseline": {
@@ -3349,7 +3349,7 @@
     },
     "borderInlineEndWidth": {
       "properties": ["borderInlineEndWidth"],
-      "type": "StyleValueWithCondition<CSS.Property.BorderInlineEndWidth | number>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderInlineEndWidth | AnyString | number>",
       "docs": {
         "border-inline-end-width": {
           "baseline": {
@@ -3368,7 +3368,7 @@
     "borderInlineStart": {
       "properties": ["borderInlineStart"],
       "token": "borders",
-      "type": "StyleValueWithCondition<CSS.Property.BorderInlineStart | number, \"borders\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderInlineStart | AnyString | number, \"borders\">",
       "docs": {
         "border-inline-start": {
           "baseline": {
@@ -3387,7 +3387,7 @@
     "borderInlineStartColor": {
       "properties": ["borderInlineStartColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.BorderInlineStartColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderInlineStartColor | AnyString, \"colors\">",
       "docs": {
         "border-inline-start-color": {
           "baseline": {
@@ -3405,7 +3405,7 @@
     },
     "borderInlineStartStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BorderInlineStartStyle>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderInlineStartStyle | AnyString>",
       "docs": {
         "border-inline-start-style": {
           "baseline": {
@@ -3423,7 +3423,7 @@
     },
     "borderInlineStartWidth": {
       "properties": ["borderInlineStartWidth"],
-      "type": "StyleValueWithCondition<CSS.Property.BorderInlineStartWidth | number>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderInlineStartWidth | AnyString | number>",
       "docs": {
         "border-inline-start-width": {
           "baseline": {
@@ -3441,7 +3441,7 @@
     },
     "borderInlineStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BorderInlineStyle>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderInlineStyle | AnyString>",
       "docs": {
         "border-inline-style": {
           "baseline": {
@@ -3458,7 +3458,7 @@
     },
     "borderInlineWidth": {
       "properties": ["borderInlineWidth"],
-      "type": "StyleValueWithCondition<CSS.Property.BorderInlineWidth | number>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderInlineWidth | AnyString | number>",
       "docs": {
         "border-inline-width": {
           "baseline": {
@@ -3476,7 +3476,7 @@
     "borderLeft": {
       "properties": ["borderLeft"],
       "token": "borders",
-      "type": "StyleValueWithCondition<CSS.Property.BorderLeft | number, \"borders\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderLeft | AnyString | number, \"borders\">",
       "docs": {
         "border-left": {
           "baseline": {
@@ -3494,7 +3494,7 @@
     "borderLeftColor": {
       "properties": ["borderLeftColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.BorderLeftColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderLeftColor | AnyString, \"colors\">",
       "docs": {
         "border-left-color": {
           "baseline": {
@@ -3511,7 +3511,7 @@
     },
     "borderLeftStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BorderLeftStyle>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderLeftStyle | AnyString>",
       "docs": {
         "border-left-style": {
           "baseline": {
@@ -3528,7 +3528,7 @@
     },
     "borderLeftWidth": {
       "properties": ["borderLeftWidth"],
-      "type": "StyleValueWithCondition<CSS.Property.BorderLeftWidth | number>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderLeftWidth | AnyString | number>",
       "docs": {
         "border-left-width": {
           "baseline": {
@@ -3546,7 +3546,7 @@
     "borderRadius": {
       "properties": ["borderRadius"],
       "token": "radii",
-      "type": "StyleValueWithCondition<CSS.Property.BorderRadius | number, \"radii\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderRadius | AnyString | number, \"radii\">",
       "docs": {
         "border-radius": {
           "baseline": {
@@ -3565,7 +3565,7 @@
     "borderRight": {
       "properties": ["borderRight"],
       "token": "borders",
-      "type": "StyleValueWithCondition<CSS.Property.BorderRight | number, \"borders\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderRight | AnyString | number, \"borders\">",
       "docs": {
         "border-right": {
           "baseline": {
@@ -3583,7 +3583,7 @@
     "borderRightColor": {
       "properties": ["borderRightColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.BorderRightColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderRightColor | AnyString, \"colors\">",
       "docs": {
         "border-right-color": {
           "baseline": {
@@ -3600,7 +3600,7 @@
     },
     "borderRightStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BorderRightStyle>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderRightStyle | AnyString>",
       "docs": {
         "border-right-style": {
           "baseline": {
@@ -3617,7 +3617,7 @@
     },
     "borderRightWidth": {
       "properties": ["borderRightWidth"],
-      "type": "StyleValueWithCondition<CSS.Property.BorderRightWidth | number>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderRightWidth | AnyString | number>",
       "docs": {
         "border-right-width": {
           "baseline": {
@@ -3646,7 +3646,7 @@
     },
     "borderSpacing": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BorderSpacing>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderSpacing | AnyString>",
       "docs": {
         "border-spacing": {
           "baseline": {
@@ -3664,7 +3664,7 @@
     "borderStartEndRadius": {
       "properties": ["borderStartEndRadius"],
       "token": "radii",
-      "type": "StyleValueWithCondition<CSS.Property.BorderStartEndRadius | number, \"radii\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderStartEndRadius | AnyString | number, \"radii\">",
       "docs": {
         "border-start-end-radius": {
           "baseline": {
@@ -3683,7 +3683,7 @@
     "borderStartStartRadius": {
       "properties": ["borderStartStartRadius"],
       "token": "radii",
-      "type": "StyleValueWithCondition<CSS.Property.BorderStartStartRadius | number, \"radii\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderStartStartRadius | AnyString | number, \"radii\">",
       "docs": {
         "border-start-start-radius": {
           "baseline": {
@@ -3701,7 +3701,7 @@
     },
     "borderStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BorderStyle>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderStyle | AnyString>",
       "docs": {
         "border-style": {
           "baseline": {
@@ -3719,7 +3719,7 @@
     "borderTop": {
       "properties": ["borderTop"],
       "token": "borders",
-      "type": "StyleValueWithCondition<CSS.Property.BorderTop | number, \"borders\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderTop | AnyString | number, \"borders\">",
       "docs": {
         "border-top": {
           "baseline": {
@@ -3737,7 +3737,7 @@
     "borderTopColor": {
       "properties": ["borderTopColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.BorderTopColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderTopColor | AnyString, \"colors\">",
       "docs": {
         "border-top-color": {
           "baseline": {
@@ -3755,7 +3755,7 @@
     "borderTopLeftRadius": {
       "properties": ["borderTopLeftRadius"],
       "token": "radii",
-      "type": "StyleValueWithCondition<CSS.Property.BorderTopLeftRadius | number, \"radii\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderTopLeftRadius | AnyString | number, \"radii\">",
       "docs": {
         "border-top-left-radius": {
           "baseline": {
@@ -3774,7 +3774,7 @@
     "borderTopRightRadius": {
       "properties": ["borderTopRightRadius"],
       "token": "radii",
-      "type": "StyleValueWithCondition<CSS.Property.BorderTopRightRadius | number, \"radii\">",
+      "type": "StyleValueWithCondition< CSS.Property.BorderTopRightRadius | AnyString | number, \"radii\">",
       "docs": {
         "border-top-right-radius": {
           "baseline": {
@@ -3792,7 +3792,7 @@
     },
     "borderTopStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BorderTopStyle>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderTopStyle | AnyString>",
       "docs": {
         "border-top-style": {
           "baseline": {
@@ -3809,7 +3809,7 @@
     },
     "borderTopWidth": {
       "properties": ["borderTopWidth"],
-      "type": "StyleValueWithCondition<CSS.Property.BorderTopWidth | number>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderTopWidth | AnyString | number>",
       "docs": {
         "border-top-width": {
           "baseline": {
@@ -3826,7 +3826,7 @@
     },
     "borderWidth": {
       "properties": ["borderWidth"],
-      "type": "StyleValueWithCondition<CSS.Property.BorderWidth | number>",
+      "type": "StyleValueWithCondition< CSS.Property.BorderWidth | AnyString | number>",
       "docs": {
         "border-width": {
           "baseline": {
@@ -3844,7 +3844,7 @@
     "bottom": {
       "properties": ["bottom"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.Bottom | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.Bottom | AnyString | number, \"spaces\">",
       "docs": {
         "bottom": {
           "baseline": {
@@ -3861,7 +3861,7 @@
     },
     "boxAlign": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BoxAlign>",
+      "type": "StyleValueWithCondition< CSS.Property.BoxAlign | AnyString>",
       "docs": {
         "box-align": {
           "deprecated": true,
@@ -3873,7 +3873,7 @@
     },
     "boxDecorationBreak": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BoxDecorationBreak>",
+      "type": "StyleValueWithCondition< CSS.Property.BoxDecorationBreak | AnyString>",
       "docs": {
         "box-decoration-break": {
           "baseline": { "status": "Limited available" },
@@ -3886,7 +3886,7 @@
     },
     "boxDirection": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BoxDirection>",
+      "type": "StyleValueWithCondition< CSS.Property.BoxDirection | AnyString>",
       "docs": {
         "box-direction": {
           "deprecated": true,
@@ -3898,7 +3898,7 @@
     },
     "boxFlex": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BoxFlex>",
+      "type": "StyleValueWithCondition< CSS.Property.BoxFlex | AnyString>",
       "docs": {
         "box-flex": {
           "deprecated": true,
@@ -3910,7 +3910,7 @@
     },
     "boxFlexGroup": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BoxFlexGroup>",
+      "type": "StyleValueWithCondition< CSS.Property.BoxFlexGroup | AnyString>",
       "docs": {
         "box-flex-group": {
           "deprecated": true,
@@ -3922,7 +3922,7 @@
     },
     "boxLines": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BoxLines>",
+      "type": "StyleValueWithCondition< CSS.Property.BoxLines | AnyString>",
       "docs": {
         "box-lines": {
           "deprecated": true,
@@ -3934,7 +3934,7 @@
     },
     "boxOrdinalGroup": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BoxOrdinalGroup>",
+      "type": "StyleValueWithCondition< CSS.Property.BoxOrdinalGroup | AnyString>",
       "docs": {
         "box-ordinal-group": {
           "deprecated": true,
@@ -3946,7 +3946,7 @@
     },
     "boxOrient": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BoxOrient>",
+      "type": "StyleValueWithCondition< CSS.Property.BoxOrient | AnyString>",
       "docs": {
         "box-orient": {
           "deprecated": true,
@@ -3958,7 +3958,7 @@
     },
     "boxPack": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BoxPack>",
+      "type": "StyleValueWithCondition< CSS.Property.BoxPack | AnyString>",
       "docs": {
         "box-pack": {
           "deprecated": true,
@@ -3971,7 +3971,7 @@
     "boxShadow": {
       "properties": ["boxShadow"],
       "token": "shadows",
-      "type": "StyleValueWithCondition<CSS.Property.BoxShadow, \"shadows\">",
+      "type": "StyleValueWithCondition< CSS.Property.BoxShadow | AnyString, \"shadows\">",
       "docs": {
         "box-shadow": {
           "baseline": {
@@ -3989,7 +3989,7 @@
     },
     "boxSizing": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BoxSizing>",
+      "type": "StyleValueWithCondition< CSS.Property.BoxSizing | AnyString>",
       "docs": {
         "box-sizing": {
           "baseline": {
@@ -4006,7 +4006,7 @@
     },
     "breakAfter": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BreakAfter>",
+      "type": "StyleValueWithCondition< CSS.Property.BreakAfter | AnyString>",
       "docs": {
         "break-after": {
           "baseline": {
@@ -4023,7 +4023,7 @@
     },
     "breakBefore": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BreakBefore>",
+      "type": "StyleValueWithCondition< CSS.Property.BreakBefore | AnyString>",
       "docs": {
         "break-before": {
           "baseline": {
@@ -4040,7 +4040,7 @@
     },
     "breakInside": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.BreakInside>",
+      "type": "StyleValueWithCondition< CSS.Property.BreakInside | AnyString>",
       "docs": {
         "break-inside": {
           "baseline": {
@@ -4068,7 +4068,7 @@
     },
     "captionSide": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.CaptionSide>",
+      "type": "StyleValueWithCondition< CSS.Property.CaptionSide | AnyString>",
       "docs": {
         "caption-side": {
           "baseline": {
@@ -4098,7 +4098,7 @@
     "caretColor": {
       "properties": ["caretColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.CaretColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.CaretColor | AnyString, \"colors\">",
       "docs": {
         "caret-color": {
           "baseline": {
@@ -4116,7 +4116,7 @@
     },
     "caretShape": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.CaretShape>",
+      "type": "StyleValueWithCondition< CSS.Property.CaretShape | AnyString>",
       "docs": {
         "caret-shape": {
           "baseline": { "status": "Limited available" },
@@ -4129,7 +4129,7 @@
     },
     "clear": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Clear>",
+      "type": "StyleValueWithCondition< CSS.Property.Clear | AnyString>",
       "docs": {
         "clear": {
           "baseline": {
@@ -4146,7 +4146,7 @@
     },
     "colorAdjust": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.PrintColorAdjust>",
+      "type": "StyleValueWithCondition< CSS.Property.PrintColorAdjust | AnyString>",
       "docs": {
         "color-adjust": {
           "deprecated": true,
@@ -4158,7 +4158,7 @@
     },
     "colorRendering": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ColorRendering>",
+      "type": "StyleValueWithCondition< CSS.Property.ColorRendering | AnyString>",
       "docs": {
         "color-rendering": {
           "deprecated": true,
@@ -4169,7 +4169,7 @@
     },
     "columnCount": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ColumnCount>",
+      "type": "StyleValueWithCondition< CSS.Property.ColumnCount | AnyString>",
       "docs": {
         "column-count": {
           "baseline": {
@@ -4186,7 +4186,7 @@
     },
     "columnFill": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ColumnFill>",
+      "type": "StyleValueWithCondition< CSS.Property.ColumnFill | AnyString>",
       "docs": {
         "column-fill": {
           "baseline": {
@@ -4204,7 +4204,7 @@
     "columnGap": {
       "properties": ["columnGap"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.ColumnGap | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.ColumnGap | AnyString | number, \"spaces\">",
       "docs": {
         "column-gap": {
           "baseline": {
@@ -4234,7 +4234,7 @@
     },
     "columnRule": {
       "properties": ["columnRule"],
-      "type": "StyleValueWithCondition<CSS.Property.ColumnRule | number>",
+      "type": "StyleValueWithCondition< CSS.Property.ColumnRule | AnyString | number>",
       "docs": {
         "column-rule": {
           "baseline": {
@@ -4252,7 +4252,7 @@
     "columnRuleColor": {
       "properties": ["columnRuleColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.ColumnRuleColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.ColumnRuleColor | AnyString, \"colors\">",
       "docs": {
         "column-rule-color": {
           "baseline": {
@@ -4269,7 +4269,7 @@
     },
     "columnRuleStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ColumnRuleStyle>",
+      "type": "StyleValueWithCondition< CSS.Property.ColumnRuleStyle | AnyString>",
       "docs": {
         "column-rule-style": {
           "baseline": {
@@ -4286,7 +4286,7 @@
     },
     "columnRuleWidth": {
       "properties": ["columnRuleWidth"],
-      "type": "StyleValueWithCondition<CSS.Property.ColumnRuleWidth | number>",
+      "type": "StyleValueWithCondition< CSS.Property.ColumnRuleWidth | AnyString | number>",
       "docs": {
         "column-rule-width": {
           "baseline": {
@@ -4303,7 +4303,7 @@
     },
     "columnSpan": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ColumnSpan>",
+      "type": "StyleValueWithCondition< CSS.Property.ColumnSpan | AnyString>",
       "docs": {
         "column-span": {
           "baseline": {
@@ -4321,7 +4321,7 @@
     "columnWidth": {
       "properties": ["columnWidth"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.ColumnWidth | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.ColumnWidth | AnyString | number, \"sizes\">",
       "docs": {
         "column-width": {
           "baseline": {
@@ -4350,7 +4350,7 @@
     },
     "columns": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Columns>",
+      "type": "StyleValueWithCondition< CSS.Property.Columns | AnyString>",
       "docs": {
         "columns": {
           "baseline": {
@@ -4367,7 +4367,7 @@
     },
     "contain": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Contain>",
+      "type": "StyleValueWithCondition< CSS.Property.Contain | AnyString>",
       "docs": {
         "contain": {
           "baseline": {
@@ -4384,7 +4384,7 @@
     },
     "containIntrinsicBlockSize": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ContainIntrinsicBlockSize>",
+      "type": "StyleValueWithCondition< CSS.Property.ContainIntrinsicBlockSize | AnyString>",
       "docs": {
         "contain-intrinsic-block-size": {
           "baseline": {
@@ -4401,7 +4401,7 @@
     },
     "containIntrinsicHeight": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ContainIntrinsicHeight>",
+      "type": "StyleValueWithCondition< CSS.Property.ContainIntrinsicHeight | AnyString>",
       "docs": {
         "contain-intrinsic-height": {
           "baseline": {
@@ -4418,7 +4418,7 @@
     },
     "containIntrinsicInlineSize": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ContainIntrinsicInlineSize>",
+      "type": "StyleValueWithCondition< CSS.Property.ContainIntrinsicInlineSize | AnyString>",
       "docs": {
         "contain-intrinsic-inline-size": {
           "baseline": {
@@ -4435,7 +4435,7 @@
     },
     "containIntrinsicSize": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ContainIntrinsicSize>",
+      "type": "StyleValueWithCondition< CSS.Property.ContainIntrinsicSize | AnyString>",
       "docs": {
         "contain-intrinsic-size": {
           "baseline": {
@@ -4453,7 +4453,7 @@
     "containIntrinsicWidth": {
       "properties": ["containIntrinsicWidth"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.ContainIntrinsicWidth | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.ContainIntrinsicWidth | AnyString | number, \"sizes\">",
       "docs": {
         "contain-intrinsic-width": {
           "baseline": {
@@ -4470,7 +4470,7 @@
     },
     "container": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Container>",
+      "type": "StyleValueWithCondition< CSS.Property.Container | AnyString>",
       "docs": {
         "container": {
           "baseline": {
@@ -4487,7 +4487,7 @@
     },
     "containerName": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ContainerName>",
+      "type": "StyleValueWithCondition< CSS.Property.ContainerName | AnyString>",
       "docs": {
         "container-name": {
           "baseline": {
@@ -4504,7 +4504,7 @@
     },
     "containerType": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ContainerType>",
+      "type": "StyleValueWithCondition< CSS.Property.ContainerType | AnyString>",
       "docs": {
         "container-type": {
           "baseline": {
@@ -4521,7 +4521,7 @@
     },
     "content": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Content>",
+      "type": "StyleValueWithCondition< CSS.Property.Content | AnyString>",
       "docs": {
         "content": {
           "baseline": {
@@ -4538,7 +4538,7 @@
     },
     "contentVisibility": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ContentVisibility>",
+      "type": "StyleValueWithCondition< CSS.Property.ContentVisibility | AnyString>",
       "docs": {
         "content-visibility": {
           "baseline": {
@@ -4775,7 +4775,7 @@
     },
     "counterIncrement": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.CounterIncrement>",
+      "type": "StyleValueWithCondition< CSS.Property.CounterIncrement | AnyString>",
       "docs": {
         "counter-increment": {
           "baseline": {
@@ -4792,7 +4792,7 @@
     },
     "counterReset": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.CounterReset>",
+      "type": "StyleValueWithCondition< CSS.Property.CounterReset | AnyString>",
       "docs": {
         "counter-reset": {
           "baseline": {
@@ -4809,7 +4809,7 @@
     },
     "counterSet": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.CounterSet>",
+      "type": "StyleValueWithCondition< CSS.Property.CounterSet | AnyString>",
       "docs": {
         "counter-set": {
           "baseline": {
@@ -4825,7 +4825,7 @@
     },
     "cx": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Cx>",
+      "type": "StyleValueWithCondition< CSS.Property.Cx | AnyString>",
       "docs": {
         "cx": {
           "baseline": {
@@ -4842,7 +4842,7 @@
     },
     "cy": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Cy>",
+      "type": "StyleValueWithCondition< CSS.Property.Cy | AnyString>",
       "docs": {
         "cy": {
           "baseline": {
@@ -4871,7 +4871,7 @@
     },
     "emptyCells": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.EmptyCells>",
+      "type": "StyleValueWithCondition< CSS.Property.EmptyCells | AnyString>",
       "docs": {
         "empty-cells": {
           "baseline": {
@@ -4888,7 +4888,7 @@
     },
     "fieldSizing": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FieldSizing>",
+      "type": "StyleValueWithCondition< CSS.Property.FieldSizing | AnyString>",
       "docs": {
         "field-sizing": {
           "baseline": { "status": "Limited available" },
@@ -4902,7 +4902,7 @@
     "fill": {
       "properties": ["fill"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.Fill, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.Fill | AnyString, \"colors\">",
       "docs": {
         "fill": {
           "baseline": {
@@ -4919,7 +4919,7 @@
     },
     "flex": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Flex>",
+      "type": "StyleValueWithCondition< CSS.Property.Flex | AnyString>",
       "docs": {
         "flex": {
           "baseline": {
@@ -4937,7 +4937,7 @@
     "flexBasis": {
       "properties": ["flexBasis"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.FlexBasis | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.FlexBasis | AnyString | number, \"sizes\">",
       "docs": {
         "flex-basis": {
           "baseline": {
@@ -4954,7 +4954,7 @@
     },
     "flexDirection": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FlexDirection>",
+      "type": "StyleValueWithCondition< CSS.Property.FlexDirection | AnyString>",
       "docs": {
         "flex-direction": {
           "baseline": {
@@ -4972,7 +4972,7 @@
     },
     "flexFlow": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FlexFlow>",
+      "type": "StyleValueWithCondition< CSS.Property.FlexFlow | AnyString>",
       "docs": {
         "flex-flow": {
           "baseline": {
@@ -4989,7 +4989,7 @@
     },
     "flexGrow": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FlexGrow>",
+      "type": "StyleValueWithCondition< CSS.Property.FlexGrow | AnyString>",
       "docs": {
         "flex-grow": {
           "baseline": {
@@ -5006,7 +5006,7 @@
     },
     "flexShrink": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FlexShrink>",
+      "type": "StyleValueWithCondition< CSS.Property.FlexShrink | AnyString>",
       "docs": {
         "flex-shrink": {
           "baseline": {
@@ -5023,7 +5023,7 @@
     },
     "flexWrap": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FlexWrap>",
+      "type": "StyleValueWithCondition< CSS.Property.FlexWrap | AnyString>",
       "docs": {
         "flex-wrap": {
           "baseline": {
@@ -5040,7 +5040,7 @@
     },
     "float": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Float>",
+      "type": "StyleValueWithCondition< CSS.Property.Float | AnyString>",
       "docs": {
         "float": {
           "baseline": {
@@ -5069,7 +5069,7 @@
     },
     "font": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Font>",
+      "type": "StyleValueWithCondition< CSS.Property.Font | AnyString>",
       "docs": {
         "font": {
           "baseline": {
@@ -5086,7 +5086,7 @@
     },
     "fontFeatureSettings": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontFeatureSettings>",
+      "type": "StyleValueWithCondition< CSS.Property.FontFeatureSettings | AnyString>",
       "docs": {
         "font-feature-settings": {
           "baseline": {
@@ -5103,7 +5103,7 @@
     },
     "fontKerning": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontKerning>",
+      "type": "StyleValueWithCondition< CSS.Property.FontKerning | AnyString>",
       "docs": {
         "font-kerning": {
           "baseline": {
@@ -5120,7 +5120,7 @@
     },
     "fontLanguageOverride": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontLanguageOverride>",
+      "type": "StyleValueWithCondition< CSS.Property.FontLanguageOverride | AnyString>",
       "docs": {
         "font-language-override": {
           "baseline": { "status": "Limited available" },
@@ -5133,7 +5133,7 @@
     },
     "fontOpticalSizing": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontOpticalSizing>",
+      "type": "StyleValueWithCondition< CSS.Property.FontOpticalSizing | AnyString>",
       "docs": {
         "font-optical-sizing": {
           "baseline": {
@@ -5150,7 +5150,7 @@
     },
     "fontPalette": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontPalette>",
+      "type": "StyleValueWithCondition< CSS.Property.FontPalette | AnyString>",
       "docs": {
         "font-palette": {
           "baseline": {
@@ -5167,7 +5167,7 @@
     },
     "fontSmooth": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontSmooth>",
+      "type": "StyleValueWithCondition< CSS.Property.FontSmooth | AnyString>",
       "docs": {
         "font-smooth": {
           "deprecated": false,
@@ -5179,7 +5179,7 @@
     },
     "fontSynthesis": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontSynthesis>",
+      "type": "StyleValueWithCondition< CSS.Property.FontSynthesis | AnyString>",
       "docs": {
         "font-synthesis": {
           "baseline": {
@@ -5196,7 +5196,7 @@
     },
     "fontSynthesisPosition": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontSynthesisPosition>",
+      "type": "StyleValueWithCondition< CSS.Property.FontSynthesisPosition | AnyString>",
       "docs": {
         "font-synthesis-position": {
           "baseline": { "status": "Limited available" },
@@ -5209,7 +5209,7 @@
     },
     "fontSynthesisSmallCaps": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontSynthesisSmallCaps>",
+      "type": "StyleValueWithCondition< CSS.Property.FontSynthesisSmallCaps | AnyString>",
       "docs": {
         "font-synthesis-small-caps": {
           "baseline": {
@@ -5226,7 +5226,7 @@
     },
     "fontSynthesisStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontSynthesisStyle>",
+      "type": "StyleValueWithCondition< CSS.Property.FontSynthesisStyle | AnyString>",
       "docs": {
         "font-synthesis-style": {
           "baseline": {
@@ -5243,7 +5243,7 @@
     },
     "fontSynthesisWeight": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontSynthesisWeight>",
+      "type": "StyleValueWithCondition< CSS.Property.FontSynthesisWeight | AnyString>",
       "docs": {
         "font-synthesis-weight": {
           "baseline": {
@@ -5260,7 +5260,7 @@
     },
     "fontVariantAlternates": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontVariantAlternates>",
+      "type": "StyleValueWithCondition< CSS.Property.FontVariantAlternates | AnyString>",
       "docs": {
         "font-variant-alternates": {
           "baseline": {
@@ -5277,7 +5277,7 @@
     },
     "fontVariantCaps": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontVariantCaps>",
+      "type": "StyleValueWithCondition< CSS.Property.FontVariantCaps | AnyString>",
       "docs": {
         "font-variant-caps": {
           "baseline": {
@@ -5294,7 +5294,7 @@
     },
     "fontVariantEastAsian": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontVariantEastAsian>",
+      "type": "StyleValueWithCondition< CSS.Property.FontVariantEastAsian | AnyString>",
       "docs": {
         "font-variant-east-asian": {
           "baseline": {
@@ -5311,7 +5311,7 @@
     },
     "fontVariantEmoji": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontVariantEmoji>",
+      "type": "StyleValueWithCondition< CSS.Property.FontVariantEmoji | AnyString>",
       "docs": {
         "font-variant-emoji": {
           "baseline": { "status": "Limited available" },
@@ -5324,7 +5324,7 @@
     },
     "fontVariantLigatures": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontVariantLigatures>",
+      "type": "StyleValueWithCondition< CSS.Property.FontVariantLigatures | AnyString>",
       "docs": {
         "font-variant-ligatures": {
           "baseline": {
@@ -5341,7 +5341,7 @@
     },
     "fontVariantNumeric": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontVariantNumeric>",
+      "type": "StyleValueWithCondition< CSS.Property.FontVariantNumeric | AnyString>",
       "docs": {
         "font-variant-numeric": {
           "baseline": {
@@ -5358,7 +5358,7 @@
     },
     "fontVariantPosition": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontVariantPosition>",
+      "type": "StyleValueWithCondition< CSS.Property.FontVariantPosition | AnyString>",
       "docs": {
         "font-variant-position": {
           "baseline": { "status": "Limited available" },
@@ -5371,7 +5371,7 @@
     },
     "fontVariationSettings": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.FontVariationSettings>",
+      "type": "StyleValueWithCondition< CSS.Property.FontVariationSettings | AnyString>",
       "docs": {
         "font-variation-settings": {
           "baseline": {
@@ -5388,7 +5388,7 @@
     },
     "forcedColorAdjust": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ForcedColorAdjust>",
+      "type": "StyleValueWithCondition< CSS.Property.ForcedColorAdjust | AnyString>",
       "docs": {
         "forced-color-adjust": {
           "baseline": {
@@ -5406,7 +5406,7 @@
     "gap": {
       "properties": ["gap"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.Gap | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.Gap | AnyString | number, \"spaces\">",
       "docs": {
         "gap": {
           "baseline": {
@@ -5424,7 +5424,7 @@
     },
     "grid": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Grid>",
+      "type": "StyleValueWithCondition< CSS.Property.Grid | AnyString>",
       "docs": {
         "grid": {
           "baseline": {
@@ -5441,7 +5441,7 @@
     },
     "gridArea": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.GridArea>",
+      "type": "StyleValueWithCondition< CSS.Property.GridArea | AnyString>",
       "docs": {
         "grid-area": {
           "baseline": {
@@ -5459,7 +5459,7 @@
     "gridAutoColumns": {
       "properties": ["gridAutoColumns"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.GridAutoColumns | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.GridAutoColumns | AnyString | number, \"sizes\">",
       "docs": {
         "grid-auto-columns": {
           "baseline": {
@@ -5476,7 +5476,7 @@
     },
     "gridAutoFlow": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.GridAutoFlow>",
+      "type": "StyleValueWithCondition< CSS.Property.GridAutoFlow | AnyString>",
       "docs": {
         "grid-auto-flow": {
           "baseline": {
@@ -5494,7 +5494,7 @@
     "gridAutoRows": {
       "properties": ["gridAutoRows"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.GridAutoRows | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.GridAutoRows | AnyString | number, \"sizes\">",
       "docs": {
         "grid-auto-rows": {
           "baseline": {
@@ -5511,7 +5511,7 @@
     },
     "gridColumn": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.GridColumn>",
+      "type": "StyleValueWithCondition< CSS.Property.GridColumn | AnyString>",
       "docs": {
         "grid-column": {
           "baseline": {
@@ -5528,7 +5528,7 @@
     },
     "gridColumnEnd": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.GridColumnEnd>",
+      "type": "StyleValueWithCondition< CSS.Property.GridColumnEnd | AnyString>",
       "docs": {
         "grid-column-end": {
           "baseline": {
@@ -5545,7 +5545,7 @@
     },
     "gridColumnStart": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.GridColumnStart>",
+      "type": "StyleValueWithCondition< CSS.Property.GridColumnStart | AnyString>",
       "docs": {
         "grid-column-start": {
           "baseline": {
@@ -5562,7 +5562,7 @@
     },
     "gridRow": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.GridRow>",
+      "type": "StyleValueWithCondition< CSS.Property.GridRow | AnyString>",
       "docs": {
         "grid-row": {
           "baseline": {
@@ -5579,7 +5579,7 @@
     },
     "gridRowEnd": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.GridRowEnd>",
+      "type": "StyleValueWithCondition< CSS.Property.GridRowEnd | AnyString>",
       "docs": {
         "grid-row-end": {
           "baseline": {
@@ -5596,7 +5596,7 @@
     },
     "gridRowStart": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.GridRowStart>",
+      "type": "StyleValueWithCondition< CSS.Property.GridRowStart | AnyString>",
       "docs": {
         "grid-row-start": {
           "baseline": {
@@ -5613,7 +5613,7 @@
     },
     "gridTemplate": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.GridTemplate>",
+      "type": "StyleValueWithCondition< CSS.Property.GridTemplate | AnyString>",
       "docs": {
         "grid-template": {
           "baseline": {
@@ -5630,7 +5630,7 @@
     },
     "gridTemplateAreas": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.GridTemplateAreas>",
+      "type": "StyleValueWithCondition< CSS.Property.GridTemplateAreas | AnyString>",
       "docs": {
         "grid-template-areas": {
           "baseline": {
@@ -5648,7 +5648,7 @@
     "gridTemplateColumns": {
       "properties": ["gridTemplateColumns"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.GridTemplateColumns | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.GridTemplateColumns | AnyString | number, \"sizes\">",
       "docs": {
         "grid-template-columns": {
           "baseline": {
@@ -5666,7 +5666,7 @@
     "gridTemplateRows": {
       "properties": ["gridTemplateRows"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.GridTemplateRows | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.GridTemplateRows | AnyString | number, \"sizes\">",
       "docs": {
         "grid-template-rows": {
           "baseline": {
@@ -5683,7 +5683,7 @@
     },
     "hangingPunctuation": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.HangingPunctuation>",
+      "type": "StyleValueWithCondition< CSS.Property.HangingPunctuation | AnyString>",
       "docs": {
         "hanging-punctuation": {
           "baseline": { "status": "Limited available" },
@@ -5697,7 +5697,7 @@
     "height": {
       "properties": ["height"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.Height | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.Height | AnyString | number, \"sizes\">",
       "docs": {
         "height": {
           "baseline": {
@@ -5715,7 +5715,7 @@
     },
     "hyphenateCharacter": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.HyphenateCharacter>",
+      "type": "StyleValueWithCondition< CSS.Property.HyphenateCharacter | AnyString>",
       "docs": {
         "hyphenate-character": {
           "baseline": {
@@ -5732,7 +5732,7 @@
     },
     "hyphenateLimitChars": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.HyphenateLimitChars>",
+      "type": "StyleValueWithCondition< CSS.Property.HyphenateLimitChars | AnyString>",
       "docs": {
         "hyphenate-limit-chars": {
           "baseline": { "status": "Limited available" },
@@ -5745,7 +5745,7 @@
     },
     "hyphens": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Hyphens>",
+      "type": "StyleValueWithCondition< CSS.Property.Hyphens | AnyString>",
       "docs": {
         "hyphens": {
           "baseline": {
@@ -5762,7 +5762,7 @@
     },
     "imageOrientation": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ImageOrientation>",
+      "type": "StyleValueWithCondition< CSS.Property.ImageOrientation | AnyString>",
       "docs": {
         "image-orientation": {
           "baseline": {
@@ -5779,7 +5779,7 @@
     },
     "imeMode": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ImeMode>",
+      "type": "StyleValueWithCondition< CSS.Property.ImeMode | AnyString>",
       "docs": {
         "ime-mode": {
           "deprecated": true,
@@ -5791,7 +5791,7 @@
     },
     "initialLetter": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.InitialLetter>",
+      "type": "StyleValueWithCondition< CSS.Property.InitialLetter | AnyString>",
       "docs": {
         "initial-letter": {
           "baseline": { "status": "Limited available" },
@@ -5805,7 +5805,7 @@
     "inlineSize": {
       "properties": ["inlineSize"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.InlineSize | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.InlineSize | AnyString | number, \"sizes\">",
       "docs": {
         "inline-size": {
           "baseline": {
@@ -5823,7 +5823,7 @@
     "inset": {
       "properties": ["inset"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.Inset | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.Inset | AnyString | number, \"spaces\">",
       "docs": {
         "inset": {
           "baseline": {
@@ -5841,7 +5841,7 @@
     "insetBlock": {
       "properties": ["insetBlock"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.InsetBlock | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.InsetBlock | AnyString | number, \"spaces\">",
       "docs": {
         "inset-block": {
           "baseline": {
@@ -5859,7 +5859,7 @@
     "insetBlockEnd": {
       "properties": ["insetBlockEnd"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.InsetBlockEnd | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.InsetBlockEnd | AnyString | number, \"spaces\">",
       "docs": {
         "inset-block-end": {
           "baseline": {
@@ -5877,7 +5877,7 @@
     "insetBlockStart": {
       "properties": ["insetBlockStart"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.InsetBlockStart | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.InsetBlockStart | AnyString | number, \"spaces\">",
       "docs": {
         "inset-block-start": {
           "baseline": {
@@ -5895,7 +5895,7 @@
     "insetInline": {
       "properties": ["insetInline"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.InsetInline | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.InsetInline | AnyString | number, \"spaces\">",
       "docs": {
         "inset-inline": {
           "baseline": {
@@ -5913,7 +5913,7 @@
     "insetInlineEnd": {
       "properties": ["insetInlineEnd"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.InsetInlineEnd | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.InsetInlineEnd | AnyString | number, \"spaces\">",
       "docs": {
         "inset-inline-end": {
           "baseline": {
@@ -5932,7 +5932,7 @@
     "insetInlineStart": {
       "properties": ["insetInlineStart"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.InsetInlineStart | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.InsetInlineStart | AnyString | number, \"spaces\">",
       "docs": {
         "inset-inline-start": {
           "baseline": {
@@ -5999,7 +5999,7 @@
     },
     "interpolateSize": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.InterpolateSize>",
+      "type": "StyleValueWithCondition< CSS.Property.InterpolateSize | AnyString>",
       "docs": {
         "interpolate-size": {
           "baseline": { "status": "Limited available" },
@@ -6012,7 +6012,7 @@
     },
     "isolation": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Isolation>",
+      "type": "StyleValueWithCondition< CSS.Property.Isolation | AnyString>",
       "docs": {
         "isolation": {
           "baseline": {
@@ -6029,7 +6029,7 @@
     },
     "justifyContent": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.JustifyContent>",
+      "type": "StyleValueWithCondition< CSS.Property.JustifyContent | AnyString>",
       "docs": {
         "justify-content": {
           "baseline": {
@@ -6046,7 +6046,7 @@
     },
     "justifyItems": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.JustifyItems>",
+      "type": "StyleValueWithCondition< CSS.Property.JustifyItems | AnyString>",
       "docs": {
         "justify-items": {
           "baseline": {
@@ -6063,7 +6063,7 @@
     },
     "justifySelf": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.JustifySelf>",
+      "type": "StyleValueWithCondition< CSS.Property.JustifySelf | AnyString>",
       "docs": {
         "justify-self": {
           "baseline": {
@@ -6081,7 +6081,7 @@
     "left": {
       "properties": ["left"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.Left | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.Left | AnyString | number, \"spaces\">",
       "docs": {
         "left": {
           "baseline": {
@@ -6098,7 +6098,7 @@
     },
     "lineBreak": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.LineBreak>",
+      "type": "StyleValueWithCondition< CSS.Property.LineBreak | AnyString>",
       "docs": {
         "line-break": {
           "baseline": {
@@ -6116,7 +6116,7 @@
     "lineHeight": {
       "properties": ["lineHeight"],
       "token": "lineHeights",
-      "type": "StyleValueWithCondition<CSS.Property.LineHeight, \"lineHeights\">",
+      "type": "StyleValueWithCondition< CSS.Property.LineHeight | AnyString, \"lineHeights\">",
       "docs": {
         "line-height": {
           "baseline": {
@@ -6134,7 +6134,7 @@
     },
     "listStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ListStyle>",
+      "type": "StyleValueWithCondition< CSS.Property.ListStyle | AnyString>",
       "docs": {
         "list-style": {
           "baseline": {
@@ -6152,7 +6152,7 @@
     "listStyleImage": {
       "properties": ["listStyleImage"],
       "token": "gradients",
-      "type": "StyleValueWithCondition<CSS.Property.ListStyleImage, \"gradients\">",
+      "type": "StyleValueWithCondition< CSS.Property.ListStyleImage | AnyString, \"gradients\">",
       "docs": {
         "list-style-image": {
           "baseline": {
@@ -6170,7 +6170,7 @@
     },
     "listStylePosition": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ListStylePosition>",
+      "type": "StyleValueWithCondition< CSS.Property.ListStylePosition | AnyString>",
       "docs": {
         "list-style-position": {
           "baseline": {
@@ -6188,7 +6188,7 @@
     },
     "listStyleType": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ListStyleType>",
+      "type": "StyleValueWithCondition< CSS.Property.ListStyleType | AnyString>",
       "docs": {
         "list-style-type": {
           "baseline": {
@@ -6206,7 +6206,7 @@
     "margin": {
       "properties": ["margin"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.Margin | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.Margin | AnyString | number, \"spaces\">",
       "docs": {
         "margin": {
           "baseline": {
@@ -6225,7 +6225,7 @@
     "marginBlock": {
       "properties": ["marginBlock"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.MarginBlock | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.MarginBlock | AnyString | number, \"spaces\">",
       "docs": {
         "margin-block": {
           "baseline": {
@@ -6243,7 +6243,7 @@
     "marginBlockEnd": {
       "properties": ["marginBlockEnd"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.MarginBlockEnd | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.MarginBlockEnd | AnyString | number, \"spaces\">",
       "docs": {
         "margin-block-end": {
           "baseline": {
@@ -6261,7 +6261,7 @@
     "marginBlockStart": {
       "properties": ["marginBlockStart"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.MarginBlockStart | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.MarginBlockStart | AnyString | number, \"spaces\">",
       "docs": {
         "margin-block-start": {
           "baseline": {
@@ -6279,7 +6279,7 @@
     "marginBottom": {
       "properties": ["marginBottom"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.MarginBottom | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.MarginBottom | AnyString | number, \"spaces\">",
       "docs": {
         "margin-bottom": {
           "baseline": {
@@ -6298,7 +6298,7 @@
     "marginInline": {
       "properties": ["marginInline"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.MarginInline | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.MarginInline | AnyString | number, \"spaces\">",
       "docs": {
         "margin-inline": {
           "baseline": {
@@ -6316,7 +6316,7 @@
     "marginInlineEnd": {
       "properties": ["marginInlineEnd"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.MarginInlineEnd | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.MarginInlineEnd | AnyString | number, \"spaces\">",
       "docs": {
         "margin-inline-end": {
           "baseline": {
@@ -6335,7 +6335,7 @@
     "marginInlineStart": {
       "properties": ["marginInlineStart"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.MarginInlineStart | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.MarginInlineStart | AnyString | number, \"spaces\">",
       "docs": {
         "margin-inline-start": {
           "baseline": {
@@ -6354,7 +6354,7 @@
     "marginLeft": {
       "properties": ["marginLeft"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.MarginLeft | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.MarginLeft | AnyString | number, \"spaces\">",
       "docs": {
         "margin-left": {
           "baseline": {
@@ -6373,7 +6373,7 @@
     "marginRight": {
       "properties": ["marginRight"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.MarginRight | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.MarginRight | AnyString | number, \"spaces\">",
       "docs": {
         "margin-right": {
           "baseline": {
@@ -6392,7 +6392,7 @@
     "marginTop": {
       "properties": ["marginTop"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.MarginTop | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.MarginTop | AnyString | number, \"spaces\">",
       "docs": {
         "margin-top": {
           "baseline": {
@@ -6410,7 +6410,7 @@
     },
     "marginTrim": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MarginTrim>",
+      "type": "StyleValueWithCondition< CSS.Property.MarginTrim | AnyString>",
       "docs": {
         "margin-trim": {
           "baseline": { "status": "Limited available" },
@@ -6423,7 +6423,7 @@
     },
     "marker": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Marker>",
+      "type": "StyleValueWithCondition< CSS.Property.Marker | AnyString>",
       "docs": {
         "marker": {
           "baseline": {
@@ -6440,7 +6440,7 @@
     },
     "maskBorder": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MaskBorder>",
+      "type": "StyleValueWithCondition< CSS.Property.MaskBorder | AnyString>",
       "docs": {
         "mask-border": {
           "baseline": { "status": "Limited available" },
@@ -6453,7 +6453,7 @@
     },
     "maskBorderOutset": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MaskBorderOutset>",
+      "type": "StyleValueWithCondition< CSS.Property.MaskBorderOutset | AnyString>",
       "docs": {
         "mask-border-outset": {
           "baseline": { "status": "Limited available" },
@@ -6466,7 +6466,7 @@
     },
     "maskBorderRepeat": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MaskBorderRepeat>",
+      "type": "StyleValueWithCondition< CSS.Property.MaskBorderRepeat | AnyString>",
       "docs": {
         "mask-border-repeat": {
           "baseline": { "status": "Limited available" },
@@ -6479,7 +6479,7 @@
     },
     "maskBorderSlice": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MaskBorderSlice>",
+      "type": "StyleValueWithCondition< CSS.Property.MaskBorderSlice | AnyString>",
       "docs": {
         "mask-border-slice": {
           "baseline": { "status": "Limited available" },
@@ -6492,7 +6492,7 @@
     },
     "maskBorderSource": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MaskBorderSource>",
+      "type": "StyleValueWithCondition< CSS.Property.MaskBorderSource | AnyString>",
       "docs": {
         "mask-border-source": {
           "baseline": { "status": "Limited available" },
@@ -6505,7 +6505,7 @@
     },
     "maskBorderWidth": {
       "properties": ["maskBorderWidth"],
-      "type": "StyleValueWithCondition<CSS.Property.MaskBorderWidth | number>",
+      "type": "StyleValueWithCondition< CSS.Property.MaskBorderWidth | AnyString | number>",
       "docs": {
         "mask-border-width": {
           "baseline": { "status": "Limited available" },
@@ -6518,7 +6518,7 @@
     },
     "maskClip": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MaskClip>",
+      "type": "StyleValueWithCondition< CSS.Property.MaskClip | AnyString>",
       "docs": {
         "mask-clip": {
           "baseline": {
@@ -6534,7 +6534,7 @@
     },
     "maskComposite": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MaskComposite>",
+      "type": "StyleValueWithCondition< CSS.Property.MaskComposite | AnyString>",
       "docs": {
         "mask-composite": {
           "baseline": {
@@ -6551,7 +6551,7 @@
     "maskImage": {
       "properties": ["maskImage"],
       "token": "gradients",
-      "type": "StyleValueWithCondition<CSS.Property.MaskImage, \"gradients\">",
+      "type": "StyleValueWithCondition< CSS.Property.MaskImage | AnyString, \"gradients\">",
       "docs": {
         "mask-image": {
           "baseline": {
@@ -6567,7 +6567,7 @@
     },
     "maskMode": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MaskMode>",
+      "type": "StyleValueWithCondition< CSS.Property.MaskMode | AnyString>",
       "docs": {
         "mask-mode": {
           "baseline": {
@@ -6583,7 +6583,7 @@
     },
     "maskOrigin": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MaskOrigin>",
+      "type": "StyleValueWithCondition< CSS.Property.MaskOrigin | AnyString>",
       "docs": {
         "mask-origin": {
           "baseline": {
@@ -6599,7 +6599,7 @@
     },
     "maskPosition": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MaskPosition>",
+      "type": "StyleValueWithCondition< CSS.Property.MaskPosition | AnyString>",
       "docs": {
         "mask-position": {
           "baseline": {
@@ -6615,7 +6615,7 @@
     },
     "maskRepeat": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MaskRepeat>",
+      "type": "StyleValueWithCondition< CSS.Property.MaskRepeat | AnyString>",
       "docs": {
         "mask-repeat": {
           "baseline": {
@@ -6631,7 +6631,7 @@
     },
     "maskSize": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MaskSize>",
+      "type": "StyleValueWithCondition< CSS.Property.MaskSize | AnyString>",
       "docs": {
         "mask-size": {
           "baseline": {
@@ -6647,7 +6647,7 @@
     },
     "maskType": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MaskType>",
+      "type": "StyleValueWithCondition< CSS.Property.MaskType | AnyString>",
       "docs": {
         "mask-type": {
           "baseline": {
@@ -6664,7 +6664,7 @@
     },
     "mathDepth": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MathDepth>",
+      "type": "StyleValueWithCondition< CSS.Property.MathDepth | AnyString>",
       "docs": {
         "math-depth": {
           "baseline": {
@@ -6681,7 +6681,7 @@
     },
     "mathShift": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MathShift>",
+      "type": "StyleValueWithCondition< CSS.Property.MathShift | AnyString>",
       "docs": {
         "math-shift": {
           "baseline": {
@@ -6698,7 +6698,7 @@
     },
     "mathStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MathStyle>",
+      "type": "StyleValueWithCondition< CSS.Property.MathStyle | AnyString>",
       "docs": {
         "math-style": {
           "baseline": {
@@ -6716,7 +6716,7 @@
     "maxBlockSize": {
       "properties": ["maxBlockSize"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.MaxBlockSize | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.MaxBlockSize | AnyString | number, \"sizes\">",
       "docs": {
         "max-block-size": {
           "baseline": {
@@ -6734,7 +6734,7 @@
     "maxHeight": {
       "properties": ["maxHeight"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.MaxHeight | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.MaxHeight | AnyString | number, \"sizes\">",
       "docs": {
         "max-height": {
           "baseline": {
@@ -6753,7 +6753,7 @@
     "maxInlineSize": {
       "properties": ["maxInlineSize"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.MaxInlineSize | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.MaxInlineSize | AnyString | number, \"sizes\">",
       "docs": {
         "max-inline-size": {
           "baseline": {
@@ -6771,7 +6771,7 @@
     "maxWidth": {
       "properties": ["maxWidth"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.MaxWidth | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.MaxWidth | AnyString | number, \"sizes\">",
       "docs": {
         "max-width": {
           "baseline": {
@@ -6790,7 +6790,7 @@
     "minBlockSize": {
       "properties": ["minBlockSize"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.MinBlockSize | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.MinBlockSize | AnyString | number, \"sizes\">",
       "docs": {
         "min-block-size": {
           "baseline": {
@@ -6808,7 +6808,7 @@
     "minHeight": {
       "properties": ["minHeight"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.MinHeight | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.MinHeight | AnyString | number, \"sizes\">",
       "docs": {
         "min-height": {
           "baseline": {
@@ -6827,7 +6827,7 @@
     "minInlineSize": {
       "properties": ["minInlineSize"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.MinInlineSize | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.MinInlineSize | AnyString | number, \"sizes\">",
       "docs": {
         "min-inline-size": {
           "baseline": {
@@ -6845,7 +6845,7 @@
     "minWidth": {
       "properties": ["minWidth"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.MinWidth | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.MinWidth | AnyString | number, \"sizes\">",
       "docs": {
         "min-width": {
           "baseline": {
@@ -6863,7 +6863,7 @@
     },
     "mixBlendMode": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.MixBlendMode>",
+      "type": "StyleValueWithCondition< CSS.Property.MixBlendMode | AnyString>",
       "docs": {
         "mix-blend-mode": {
           "baseline": {
@@ -6881,7 +6881,7 @@
     },
     "objectFit": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ObjectFit>",
+      "type": "StyleValueWithCondition< CSS.Property.ObjectFit | AnyString>",
       "docs": {
         "object-fit": {
           "baseline": {
@@ -6898,7 +6898,7 @@
     },
     "objectPosition": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ObjectPosition>",
+      "type": "StyleValueWithCondition< CSS.Property.ObjectPosition | AnyString>",
       "docs": {
         "object-position": {
           "baseline": {
@@ -6915,7 +6915,7 @@
     },
     "objectViewBox": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ObjectViewBox>",
+      "type": "StyleValueWithCondition< CSS.Property.ObjectViewBox | AnyString>",
       "docs": {
         "object-view-box": {
           "baseline": { "status": "Limited available" },
@@ -6928,7 +6928,7 @@
     },
     "offset": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Offset>",
+      "type": "StyleValueWithCondition< CSS.Property.Offset | AnyString>",
       "docs": {
         "offset": {
           "baseline": {
@@ -6945,7 +6945,7 @@
     },
     "offsetAnchor": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.OffsetAnchor>",
+      "type": "StyleValueWithCondition< CSS.Property.OffsetAnchor | AnyString>",
       "docs": {
         "offset-anchor": {
           "baseline": {
@@ -6962,7 +6962,7 @@
     },
     "offsetDistance": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.OffsetDistance>",
+      "type": "StyleValueWithCondition< CSS.Property.OffsetDistance | AnyString>",
       "docs": {
         "offset-distance": {
           "baseline": {
@@ -6979,7 +6979,7 @@
     },
     "offsetPath": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.OffsetPath>",
+      "type": "StyleValueWithCondition< CSS.Property.OffsetPath | AnyString>",
       "docs": {
         "offset-path": {
           "baseline": {
@@ -6996,7 +6996,7 @@
     },
     "offsetPosition": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.OffsetPosition>",
+      "type": "StyleValueWithCondition< CSS.Property.OffsetPosition | AnyString>",
       "docs": {
         "offset-position": {
           "baseline": {
@@ -7013,7 +7013,7 @@
     },
     "offsetRotate": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.OffsetRotate>",
+      "type": "StyleValueWithCondition< CSS.Property.OffsetRotate | AnyString>",
       "docs": {
         "offset-rotate": {
           "baseline": {
@@ -7030,7 +7030,7 @@
     },
     "order": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Order>",
+      "type": "StyleValueWithCondition< CSS.Property.Order | AnyString>",
       "docs": {
         "order": {
           "baseline": {
@@ -7047,7 +7047,7 @@
     },
     "orphans": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Orphans>",
+      "type": "StyleValueWithCondition< CSS.Property.Orphans | AnyString>",
       "docs": {
         "orphans": {
           "baseline": { "status": "Limited available" },
@@ -7060,7 +7060,7 @@
     },
     "outline": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Outline>",
+      "type": "StyleValueWithCondition< CSS.Property.Outline | AnyString>",
       "docs": {
         "outline": {
           "baseline": {
@@ -7078,7 +7078,7 @@
     "outlineColor": {
       "properties": ["outlineColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.OutlineColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.OutlineColor | AnyString, \"colors\">",
       "docs": {
         "outline-color": {
           "baseline": {
@@ -7095,7 +7095,7 @@
     },
     "outlineOffset": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.OutlineOffset>",
+      "type": "StyleValueWithCondition< CSS.Property.OutlineOffset | AnyString>",
       "docs": {
         "outline-offset": {
           "baseline": {
@@ -7112,7 +7112,7 @@
     },
     "outlineStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.OutlineStyle | AnyString>",
+      "type": "StyleValueWithCondition< CSS.Property.OutlineStyle | AnyString>",
       "docs": {
         "outline-style": {
           "baseline": {
@@ -7129,7 +7129,7 @@
     },
     "outlineWidth": {
       "properties": ["outlineWidth"],
-      "type": "StyleValueWithCondition<CSS.Property.OutlineWidth | number>",
+      "type": "StyleValueWithCondition< CSS.Property.OutlineWidth | AnyString | number>",
       "docs": {
         "outline-width": {
           "baseline": {
@@ -7146,7 +7146,7 @@
     },
     "overflowAnchor": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.OverflowAnchor>",
+      "type": "StyleValueWithCondition< CSS.Property.OverflowAnchor | AnyString>",
       "docs": {
         "overflow-anchor": {
           "baseline": { "status": "Limited available" },
@@ -7159,7 +7159,7 @@
     },
     "overflowBlock": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.OverflowBlock>",
+      "type": "StyleValueWithCondition< CSS.Property.OverflowBlock | AnyString>",
       "docs": {
         "overflow-block": {
           "baseline": {
@@ -7176,7 +7176,7 @@
     },
     "overflowClipMargin": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.OverflowClipMargin>",
+      "type": "StyleValueWithCondition< CSS.Property.OverflowClipMargin | AnyString>",
       "docs": {
         "overflow-clip-margin": {
           "baseline": { "status": "Limited available" },
@@ -7189,7 +7189,7 @@
     },
     "overflowInline": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.OverflowInline>",
+      "type": "StyleValueWithCondition< CSS.Property.OverflowInline | AnyString>",
       "docs": {
         "overflow-inline": {
           "baseline": {
@@ -7206,7 +7206,7 @@
     },
     "overflowWrap": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.OverflowWrap>",
+      "type": "StyleValueWithCondition< CSS.Property.OverflowWrap | AnyString>",
       "docs": {
         "overflow-wrap": {
           "baseline": {
@@ -7223,7 +7223,7 @@
     },
     "overflowX": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.OverflowX>",
+      "type": "StyleValueWithCondition< CSS.Property.OverflowX | AnyString>",
       "docs": {
         "overflow-x": {
           "baseline": {
@@ -7240,7 +7240,7 @@
     },
     "overflowY": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.OverflowY>",
+      "type": "StyleValueWithCondition< CSS.Property.OverflowY | AnyString>",
       "docs": {
         "overflow-y": {
           "baseline": {
@@ -7257,7 +7257,7 @@
     },
     "overlay": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Overlay>",
+      "type": "StyleValueWithCondition< CSS.Property.Overlay | AnyString>",
       "docs": {
         "overlay": {
           "baseline": { "status": "Limited available" },
@@ -7270,7 +7270,7 @@
     },
     "overscrollBehavior": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.OverscrollBehavior>",
+      "type": "StyleValueWithCondition< CSS.Property.OverscrollBehavior | AnyString>",
       "docs": {
         "overscroll-behavior": {
           "baseline": {
@@ -7288,7 +7288,7 @@
     },
     "overscrollBehaviorBlock": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.OverscrollBehaviorBlock>",
+      "type": "StyleValueWithCondition< CSS.Property.OverscrollBehaviorBlock | AnyString>",
       "docs": {
         "overscroll-behavior-block": {
           "baseline": {
@@ -7305,7 +7305,7 @@
     },
     "overscrollBehaviorInline": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.OverscrollBehaviorInline>",
+      "type": "StyleValueWithCondition< CSS.Property.OverscrollBehaviorInline | AnyString>",
       "docs": {
         "overscroll-behavior-inline": {
           "baseline": {
@@ -7322,7 +7322,7 @@
     },
     "overscrollBehaviorX": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.OverscrollBehaviorX>",
+      "type": "StyleValueWithCondition< CSS.Property.OverscrollBehaviorX | AnyString>",
       "docs": {
         "overscroll-behavior-x": {
           "baseline": {
@@ -7340,7 +7340,7 @@
     },
     "overscrollBehaviorY": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.OverscrollBehaviorY>",
+      "type": "StyleValueWithCondition< CSS.Property.OverscrollBehaviorY | AnyString>",
       "docs": {
         "overscroll-behavior-y": {
           "baseline": {
@@ -7359,7 +7359,7 @@
     "padding": {
       "properties": ["padding"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.Padding | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.Padding | AnyString | number, \"spaces\">",
       "docs": {
         "padding": {
           "baseline": {
@@ -7378,7 +7378,7 @@
     "paddingBlock": {
       "properties": ["paddingBlock"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.PaddingBlock | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.PaddingBlock | AnyString | number, \"spaces\">",
       "docs": {
         "padding-block": {
           "baseline": {
@@ -7396,7 +7396,7 @@
     "paddingBlockEnd": {
       "properties": ["paddingBlockEnd"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.PaddingBlockEnd | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.PaddingBlockEnd | AnyString | number, \"spaces\">",
       "docs": {
         "padding-block-end": {
           "baseline": {
@@ -7414,7 +7414,7 @@
     "paddingBlockStart": {
       "properties": ["paddingBlockStart"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.PaddingBlockStart | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.PaddingBlockStart | AnyString | number, \"spaces\">",
       "docs": {
         "padding-block-start": {
           "baseline": {
@@ -7432,7 +7432,7 @@
     "paddingBottom": {
       "properties": ["paddingBottom"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.PaddingBottom | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.PaddingBottom | AnyString | number, \"spaces\">",
       "docs": {
         "padding-bottom": {
           "baseline": {
@@ -7451,7 +7451,7 @@
     "paddingInline": {
       "properties": ["paddingInline"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.PaddingInline | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.PaddingInline | AnyString | number, \"spaces\">",
       "docs": {
         "padding-inline": {
           "baseline": {
@@ -7469,7 +7469,7 @@
     "paddingInlineEnd": {
       "properties": ["paddingInlineEnd"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.PaddingInlineEnd | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.PaddingInlineEnd | AnyString | number, \"spaces\">",
       "docs": {
         "padding-inline-end": {
           "baseline": {
@@ -7488,7 +7488,7 @@
     "paddingInlineStart": {
       "properties": ["paddingInlineStart"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.PaddingInlineStart | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.PaddingInlineStart | AnyString | number, \"spaces\">",
       "docs": {
         "padding-inline-start": {
           "baseline": {
@@ -7507,7 +7507,7 @@
     "paddingLeft": {
       "properties": ["paddingLeft"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.PaddingLeft | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.PaddingLeft | AnyString | number, \"spaces\">",
       "docs": {
         "padding-left": {
           "baseline": {
@@ -7526,7 +7526,7 @@
     "paddingRight": {
       "properties": ["paddingRight"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.PaddingRight | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.PaddingRight | AnyString | number, \"spaces\">",
       "docs": {
         "padding-right": {
           "baseline": {
@@ -7545,7 +7545,7 @@
     "paddingTop": {
       "properties": ["paddingTop"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.PaddingTop | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.PaddingTop | AnyString | number, \"spaces\">",
       "docs": {
         "padding-top": {
           "baseline": {
@@ -7563,7 +7563,7 @@
     },
     "page": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Page>",
+      "type": "StyleValueWithCondition< CSS.Property.Page | AnyString>",
       "docs": {
         "page": {
           "baseline": {
@@ -7579,7 +7579,7 @@
     },
     "pageBreakAfter": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.PageBreakAfter>",
+      "type": "StyleValueWithCondition< CSS.Property.PageBreakAfter | AnyString>",
       "docs": {
         "page-break-after": {
           "deprecated": true,
@@ -7591,7 +7591,7 @@
     },
     "pageBreakBefore": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.PageBreakBefore>",
+      "type": "StyleValueWithCondition< CSS.Property.PageBreakBefore | AnyString>",
       "docs": {
         "page-break-before": {
           "deprecated": true,
@@ -7603,7 +7603,7 @@
     },
     "pageBreakInside": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.PageBreakInside>",
+      "type": "StyleValueWithCondition< CSS.Property.PageBreakInside | AnyString>",
       "docs": {
         "page-break-inside": {
           "deprecated": true,
@@ -7615,7 +7615,7 @@
     },
     "perspective": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Perspective>",
+      "type": "StyleValueWithCondition< CSS.Property.Perspective | AnyString>",
       "docs": {
         "perspective": {
           "baseline": {
@@ -7632,7 +7632,7 @@
     },
     "perspectiveOrigin": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.PerspectiveOrigin>",
+      "type": "StyleValueWithCondition< CSS.Property.PerspectiveOrigin | AnyString>",
       "docs": {
         "perspective-origin": {
           "baseline": {
@@ -7649,7 +7649,7 @@
     },
     "placeContent": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.PlaceContent>",
+      "type": "StyleValueWithCondition< CSS.Property.PlaceContent | AnyString>",
       "docs": {
         "place-content": {
           "baseline": {
@@ -7666,7 +7666,7 @@
     },
     "placeItems": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.PlaceItems>",
+      "type": "StyleValueWithCondition< CSS.Property.PlaceItems | AnyString>",
       "docs": {
         "place-items": {
           "baseline": {
@@ -7683,7 +7683,7 @@
     },
     "placeSelf": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.PlaceSelf>",
+      "type": "StyleValueWithCondition< CSS.Property.PlaceSelf | AnyString>",
       "docs": {
         "place-self": {
           "baseline": {
@@ -7700,7 +7700,7 @@
     },
     "position": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Position>",
+      "type": "StyleValueWithCondition< CSS.Property.Position | AnyString>",
       "docs": {
         "position": {
           "baseline": {
@@ -7718,7 +7718,7 @@
     },
     "positionAnchor": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.PositionAnchor>",
+      "type": "StyleValueWithCondition< CSS.Property.PositionAnchor | AnyString>",
       "docs": {
         "position-anchor": {
           "baseline": { "status": "Limited available" },
@@ -7731,7 +7731,7 @@
     },
     "positionArea": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.PositionArea>",
+      "type": "StyleValueWithCondition< CSS.Property.PositionArea | AnyString>",
       "docs": {
         "position-area": {
           "baseline": { "status": "Limited available" },
@@ -7744,7 +7744,7 @@
     },
     "positionTry": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.PositionTry>",
+      "type": "StyleValueWithCondition< CSS.Property.PositionTry | AnyString>",
       "docs": {
         "position-try": {
           "baseline": { "status": "Limited available" },
@@ -7757,7 +7757,7 @@
     },
     "positionTryFallbacks": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.PositionTryFallbacks>",
+      "type": "StyleValueWithCondition< CSS.Property.PositionTryFallbacks | AnyString>",
       "docs": {
         "position-try-fallbacks": {
           "baseline": { "status": "Limited available" },
@@ -7770,7 +7770,7 @@
     },
     "positionTryOrder": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.PositionTryOrder>",
+      "type": "StyleValueWithCondition< CSS.Property.PositionTryOrder | AnyString>",
       "docs": {
         "position-try-order": {
           "baseline": { "status": "Limited available" },
@@ -7783,7 +7783,7 @@
     },
     "positionVisibility": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.PositionVisibility>",
+      "type": "StyleValueWithCondition< CSS.Property.PositionVisibility | AnyString>",
       "docs": {
         "position-visibility": {
           "baseline": { "status": "Limited available" },
@@ -7796,7 +7796,7 @@
     },
     "printColorAdjust": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.PrintColorAdjust>",
+      "type": "StyleValueWithCondition< CSS.Property.PrintColorAdjust | AnyString>",
       "docs": {
         "print-color-adjust": {
           "baseline": {
@@ -7812,7 +7812,7 @@
     },
     "quotes": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Quotes>",
+      "type": "StyleValueWithCondition< CSS.Property.Quotes | AnyString>",
       "docs": {
         "quotes": {
           "baseline": {
@@ -7829,7 +7829,7 @@
     },
     "r": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.R>",
+      "type": "StyleValueWithCondition< CSS.Property.R | AnyString>",
       "docs": {
         "r": {
           "baseline": {
@@ -7872,7 +7872,7 @@
     },
     "resize": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Resize>",
+      "type": "StyleValueWithCondition< CSS.Property.Resize | AnyString>",
       "docs": {
         "resize": {
           "baseline": { "status": "Limited available" },
@@ -7886,7 +7886,7 @@
     "right": {
       "properties": ["right"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.Right | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.Right | AnyString | number, \"spaces\">",
       "docs": {
         "right": {
           "baseline": {
@@ -7903,7 +7903,7 @@
     },
     "rotate": {
       "properties": ["rotate"],
-      "type": "StyleValueWithCondition<CSS.Property.Rotate>",
+      "type": "StyleValueWithCondition< CSS.Property.Rotate | AnyString>",
       "docs": {
         "rotate": {
           "baseline": {
@@ -7921,7 +7921,7 @@
     "rowGap": {
       "properties": ["rowGap"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.RowGap | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.RowGap | AnyString | number, \"spaces\">",
       "docs": {
         "row-gap": {
           "baseline": {
@@ -7939,7 +7939,7 @@
     },
     "rubyAlign": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.RubyAlign>",
+      "type": "StyleValueWithCondition< CSS.Property.RubyAlign | AnyString>",
       "docs": {
         "ruby-align": {
           "baseline": {
@@ -7955,7 +7955,7 @@
     },
     "rubyOverhang": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.RubyOverhang>",
+      "type": "StyleValueWithCondition< CSS.Property.RubyOverhang | AnyString>",
       "docs": {
         "ruby-overhang": {
           "baseline": { "status": "Limited available" },
@@ -7968,7 +7968,7 @@
     },
     "rubyPosition": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.RubyPosition>",
+      "type": "StyleValueWithCondition< CSS.Property.RubyPosition | AnyString>",
       "docs": {
         "ruby-position": {
           "baseline": {
@@ -7984,7 +7984,7 @@
     },
     "rx": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Rx>",
+      "type": "StyleValueWithCondition< CSS.Property.Rx | AnyString>",
       "docs": {
         "rx": {
           "baseline": {
@@ -8001,7 +8001,7 @@
     },
     "ry": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Ry>",
+      "type": "StyleValueWithCondition< CSS.Property.Ry | AnyString>",
       "docs": {
         "ry": {
           "baseline": {
@@ -8018,7 +8018,7 @@
     },
     "scale": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Scale>",
+      "type": "StyleValueWithCondition< CSS.Property.Scale | AnyString>",
       "docs": {
         "scale": {
           "baseline": {
@@ -8035,7 +8035,7 @@
     },
     "scrollBehavior": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollBehavior>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollBehavior | AnyString>",
       "docs": {
         "scroll-behavior": {
           "baseline": {
@@ -8052,7 +8052,7 @@
     },
     "scrollInitialTarget": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollInitialTarget>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollInitialTarget | AnyString>",
       "docs": {
         "scroll-initial-target": {
           "baseline": { "status": "Limited available" },
@@ -8066,7 +8066,7 @@
     "scrollMargin": {
       "properties": ["scrollMargin"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.ScrollMargin | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollMargin | AnyString | number, \"spaces\">",
       "docs": {
         "scroll-margin": {
           "baseline": {
@@ -8083,7 +8083,7 @@
     },
     "scrollMarginBlock": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollMarginBlock>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollMarginBlock | AnyString>",
       "docs": {
         "scroll-margin-block": {
           "baseline": {
@@ -8100,7 +8100,7 @@
     },
     "scrollMarginBlockEnd": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollMarginBlockEnd>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollMarginBlockEnd | AnyString>",
       "docs": {
         "scroll-margin-block-end": {
           "baseline": {
@@ -8117,7 +8117,7 @@
     },
     "scrollMarginBlockStart": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollMarginBlockStart>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollMarginBlockStart | AnyString>",
       "docs": {
         "scroll-margin-block-start": {
           "baseline": {
@@ -8135,7 +8135,7 @@
     "scrollMarginBottom": {
       "properties": ["scrollMarginBottom"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.ScrollMarginBottom | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollMarginBottom | AnyString | number, \"spaces\">",
       "docs": {
         "scroll-margin-bottom": {
           "baseline": {
@@ -8152,7 +8152,7 @@
     },
     "scrollMarginInline": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollMarginInline>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollMarginInline | AnyString>",
       "docs": {
         "scroll-margin-inline": {
           "baseline": {
@@ -8169,7 +8169,7 @@
     },
     "scrollMarginInlineEnd": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollMarginInlineEnd>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollMarginInlineEnd | AnyString>",
       "docs": {
         "scroll-margin-inline-end": {
           "baseline": {
@@ -8186,7 +8186,7 @@
     },
     "scrollMarginInlineStart": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollMarginInlineStart>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollMarginInlineStart | AnyString>",
       "docs": {
         "scroll-margin-inline-start": {
           "baseline": {
@@ -8204,7 +8204,7 @@
     "scrollMarginLeft": {
       "properties": ["scrollMarginLeft"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.ScrollMarginLeft | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollMarginLeft | AnyString | number, \"spaces\">",
       "docs": {
         "scroll-margin-left": {
           "baseline": {
@@ -8222,7 +8222,7 @@
     "scrollMarginRight": {
       "properties": ["scrollMarginRight"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.ScrollMarginRight | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollMarginRight | AnyString | number, \"spaces\">",
       "docs": {
         "scroll-margin-right": {
           "baseline": {
@@ -8240,7 +8240,7 @@
     "scrollMarginTop": {
       "properties": ["scrollMarginTop"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.ScrollMarginTop | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollMarginTop | AnyString | number, \"spaces\">",
       "docs": {
         "scroll-margin-top": {
           "baseline": {
@@ -8271,7 +8271,7 @@
     "scrollPadding": {
       "properties": ["scrollPadding"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.ScrollPadding | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollPadding | AnyString | number, \"spaces\">",
       "docs": {
         "scroll-padding": {
           "baseline": {
@@ -8288,7 +8288,7 @@
     },
     "scrollPaddingBlock": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollPaddingBlock>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollPaddingBlock | AnyString>",
       "docs": {
         "scroll-padding-block": {
           "baseline": {
@@ -8305,7 +8305,7 @@
     },
     "scrollPaddingBlockEnd": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollPaddingBlockEnd>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollPaddingBlockEnd | AnyString>",
       "docs": {
         "scroll-padding-block-end": {
           "baseline": {
@@ -8322,7 +8322,7 @@
     },
     "scrollPaddingBlockStart": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollPaddingBlockStart>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollPaddingBlockStart | AnyString>",
       "docs": {
         "scroll-padding-block-start": {
           "baseline": {
@@ -8340,7 +8340,7 @@
     "scrollPaddingBottom": {
       "properties": ["scrollPaddingBottom"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.ScrollPaddingBottom | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollPaddingBottom | AnyString | number, \"spaces\">",
       "docs": {
         "scroll-padding-bottom": {
           "baseline": {
@@ -8357,7 +8357,7 @@
     },
     "scrollPaddingInline": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollPaddingInline>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollPaddingInline | AnyString>",
       "docs": {
         "scroll-padding-inline": {
           "baseline": {
@@ -8374,7 +8374,7 @@
     },
     "scrollPaddingInlineEnd": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollPaddingInlineEnd>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollPaddingInlineEnd | AnyString>",
       "docs": {
         "scroll-padding-inline-end": {
           "baseline": {
@@ -8391,7 +8391,7 @@
     },
     "scrollPaddingInlineStart": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollPaddingInlineStart>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollPaddingInlineStart | AnyString>",
       "docs": {
         "scroll-padding-inline-start": {
           "baseline": {
@@ -8409,7 +8409,7 @@
     "scrollPaddingLeft": {
       "properties": ["scrollPaddingLeft"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.ScrollPaddingLeft | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollPaddingLeft | AnyString | number, \"spaces\">",
       "docs": {
         "scroll-padding-left": {
           "baseline": {
@@ -8427,7 +8427,7 @@
     "scrollPaddingRight": {
       "properties": ["scrollPaddingRight"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.ScrollPaddingRight | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollPaddingRight | AnyString | number, \"spaces\">",
       "docs": {
         "scroll-padding-right": {
           "baseline": {
@@ -8445,7 +8445,7 @@
     "scrollPaddingTop": {
       "properties": ["scrollPaddingTop"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.ScrollPaddingTop | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollPaddingTop | AnyString | number, \"spaces\">",
       "docs": {
         "scroll-padding-top": {
           "baseline": {
@@ -8462,7 +8462,7 @@
     },
     "scrollSnapAlign": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollSnapAlign>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollSnapAlign | AnyString>",
       "docs": {
         "scroll-snap-align": {
           "baseline": {
@@ -8479,7 +8479,7 @@
     },
     "scrollSnapStop": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollSnapStop>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollSnapStop | AnyString>",
       "docs": {
         "scroll-snap-stop": {
           "baseline": {
@@ -8496,7 +8496,7 @@
     },
     "scrollSnapType": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollSnapType>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollSnapType | AnyString>",
       "docs": {
         "scroll-snap-type": {
           "baseline": {
@@ -8526,7 +8526,7 @@
     },
     "scrollTimeline": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollTimeline>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollTimeline | AnyString>",
       "docs": {
         "scroll-timeline": {
           "baseline": { "status": "Limited available" },
@@ -8539,7 +8539,7 @@
     },
     "scrollTimelineAxis": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollTimelineAxis>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollTimelineAxis | AnyString>",
       "docs": {
         "scroll-timeline-axis": {
           "baseline": { "status": "Limited available" },
@@ -8552,7 +8552,7 @@
     },
     "scrollTimelineName": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollTimelineName>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollTimelineName | AnyString>",
       "docs": {
         "scroll-timeline-name": {
           "baseline": { "status": "Limited available" },
@@ -8566,7 +8566,7 @@
     "scrollbarColor": {
       "properties": ["scrollbarColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.ScrollbarColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollbarColor | AnyString, \"colors\">",
       "docs": {
         "scrollbar-color": {
           "baseline": {
@@ -8582,7 +8582,7 @@
     },
     "scrollbarGutter": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ScrollbarGutter>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollbarGutter | AnyString>",
       "docs": {
         "scrollbar-gutter": {
           "baseline": {
@@ -8598,7 +8598,7 @@
     },
     "scrollbarWidth": {
       "properties": ["scrollbarWidth"],
-      "type": "StyleValueWithCondition<CSS.Property.ScrollbarWidth | number>",
+      "type": "StyleValueWithCondition< CSS.Property.ScrollbarWidth | AnyString | number>",
       "docs": {
         "scrollbar-width": {
           "baseline": {
@@ -8614,7 +8614,7 @@
     },
     "shapeImageThreshold": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ShapeImageThreshold>",
+      "type": "StyleValueWithCondition< CSS.Property.ShapeImageThreshold | AnyString>",
       "docs": {
         "shape-image-threshold": {
           "baseline": {
@@ -8631,7 +8631,7 @@
     },
     "shapeMargin": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ShapeMargin>",
+      "type": "StyleValueWithCondition< CSS.Property.ShapeMargin | AnyString>",
       "docs": {
         "shape-margin": {
           "baseline": {
@@ -8648,7 +8648,7 @@
     },
     "shapeOutside": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ShapeOutside>",
+      "type": "StyleValueWithCondition< CSS.Property.ShapeOutside | AnyString>",
       "docs": {
         "shape-outside": {
           "baseline": {
@@ -8678,7 +8678,7 @@
     },
     "speakAs": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.SpeakAs>",
+      "type": "StyleValueWithCondition< CSS.Property.SpeakAs | AnyString>",
       "docs": {
         "speak-as": {
           "baseline": { "status": "Limited available" },
@@ -8692,7 +8692,7 @@
     "strokeColor": {
       "properties": ["strokeColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.StrokeColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.StrokeColor | AnyString, \"colors\">",
       "docs": {
         "stroke-color": {
           "baseline": {
@@ -8709,7 +8709,7 @@
     },
     "tabSize": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TabSize>",
+      "type": "StyleValueWithCondition< CSS.Property.TabSize | AnyString>",
       "docs": {
         "tab-size": {
           "baseline": {
@@ -8726,7 +8726,7 @@
     },
     "tableLayout": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TableLayout>",
+      "type": "StyleValueWithCondition< CSS.Property.TableLayout | AnyString>",
       "docs": {
         "table-layout": {
           "baseline": {
@@ -8743,7 +8743,7 @@
     },
     "textAlign": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextAlign>",
+      "type": "StyleValueWithCondition< CSS.Property.TextAlign | AnyString>",
       "docs": {
         "text-align": {
           "baseline": {
@@ -8760,7 +8760,7 @@
     },
     "textAlignLast": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextAlignLast>",
+      "type": "StyleValueWithCondition< CSS.Property.TextAlignLast | AnyString>",
       "docs": {
         "text-align-last": {
           "baseline": {
@@ -8777,7 +8777,7 @@
     },
     "textAutospace": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextAutospace>",
+      "type": "StyleValueWithCondition< CSS.Property.TextAutospace | AnyString>",
       "docs": {
         "text-autospace": {
           "baseline": { "status": "Limited available" },
@@ -8790,7 +8790,7 @@
     },
     "textBox": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextBox>",
+      "type": "StyleValueWithCondition< CSS.Property.TextBox | AnyString>",
       "docs": {
         "text-box": {
           "baseline": { "status": "Limited available" },
@@ -8803,7 +8803,7 @@
     },
     "textBoxEdge": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextBoxEdge>",
+      "type": "StyleValueWithCondition< CSS.Property.TextBoxEdge | AnyString>",
       "docs": {
         "text-box-edge": {
           "baseline": { "status": "Limited available" },
@@ -8816,7 +8816,7 @@
     },
     "textBoxTrim": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextBoxTrim>",
+      "type": "StyleValueWithCondition< CSS.Property.TextBoxTrim | AnyString>",
       "docs": {
         "text-box-trim": {
           "baseline": { "status": "Limited available" },
@@ -8829,7 +8829,7 @@
     },
     "textCombineUpright": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextCombineUpright>",
+      "type": "StyleValueWithCondition< CSS.Property.TextCombineUpright | AnyString>",
       "docs": {
         "text-combine-upright": {
           "baseline": {
@@ -8847,7 +8847,7 @@
     "textDecorationColor": {
       "properties": ["textDecorationColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.TextDecorationColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.TextDecorationColor | AnyString, \"colors\">",
       "docs": {
         "text-decoration-color": {
           "baseline": {
@@ -8876,7 +8876,7 @@
     },
     "textDecorationLine": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextDecorationLine>",
+      "type": "StyleValueWithCondition< CSS.Property.TextDecorationLine | AnyString>",
       "docs": {
         "text-decoration-line": {
           "baseline": {
@@ -8893,7 +8893,7 @@
     },
     "textDecorationSkip": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextDecorationSkip>",
+      "type": "StyleValueWithCondition< CSS.Property.TextDecorationSkip | AnyString>",
       "docs": {
         "text-decoration-skip": {
           "deprecated": true,
@@ -8905,7 +8905,7 @@
     },
     "textDecorationSkipInk": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextDecorationSkipInk>",
+      "type": "StyleValueWithCondition< CSS.Property.TextDecorationSkipInk | AnyString>",
       "docs": {
         "text-decoration-skip-ink": {
           "baseline": {
@@ -8922,7 +8922,7 @@
     },
     "textDecorationStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextDecorationStyle>",
+      "type": "StyleValueWithCondition< CSS.Property.TextDecorationStyle | AnyString>",
       "docs": {
         "text-decoration-style": {
           "baseline": {
@@ -8939,7 +8939,7 @@
     },
     "textDecorationThickness": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextDecorationThickness>",
+      "type": "StyleValueWithCondition< CSS.Property.TextDecorationThickness | AnyString>",
       "docs": {
         "text-decoration-thickness": {
           "baseline": {
@@ -8956,7 +8956,7 @@
     },
     "textEmphasis": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextEmphasis>",
+      "type": "StyleValueWithCondition< CSS.Property.TextEmphasis | AnyString>",
       "docs": {
         "text-emphasis": {
           "baseline": {
@@ -8974,7 +8974,7 @@
     "textEmphasisColor": {
       "properties": ["textEmphasisColor"],
       "token": "colors",
-      "type": "StyleValueWithCondition<CSS.Property.TextEmphasisColor, \"colors\">",
+      "type": "StyleValueWithCondition< CSS.Property.TextEmphasisColor | AnyString, \"colors\">",
       "docs": {
         "text-emphasis-color": {
           "baseline": {
@@ -8991,7 +8991,7 @@
     },
     "textEmphasisPosition": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextEmphasisPosition>",
+      "type": "StyleValueWithCondition< CSS.Property.TextEmphasisPosition | AnyString>",
       "docs": {
         "text-emphasis-position": {
           "baseline": {
@@ -9008,7 +9008,7 @@
     },
     "textEmphasisStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextEmphasisStyle>",
+      "type": "StyleValueWithCondition< CSS.Property.TextEmphasisStyle | AnyString>",
       "docs": {
         "text-emphasis-style": {
           "baseline": {
@@ -9025,7 +9025,7 @@
     },
     "textIndent": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextIndent>",
+      "type": "StyleValueWithCondition< CSS.Property.TextIndent | AnyString>",
       "docs": {
         "text-indent": {
           "baseline": {
@@ -9042,7 +9042,7 @@
     },
     "textJustify": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextJustify>",
+      "type": "StyleValueWithCondition< CSS.Property.TextJustify | AnyString>",
       "docs": {
         "text-justify": {
           "baseline": { "status": "Limited available" },
@@ -9055,7 +9055,7 @@
     },
     "textOrientation": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextOrientation>",
+      "type": "StyleValueWithCondition< CSS.Property.TextOrientation | AnyString>",
       "docs": {
         "text-orientation": {
           "baseline": {
@@ -9073,7 +9073,7 @@
     "textShadow": {
       "properties": ["textShadow"],
       "token": "shadows",
-      "type": "StyleValueWithCondition<CSS.Property.TextShadow, \"shadows\">",
+      "type": "StyleValueWithCondition< CSS.Property.TextShadow | AnyString, \"shadows\">",
       "docs": {
         "text-shadow": {
           "baseline": {
@@ -9090,7 +9090,7 @@
     },
     "textSizeAdjust": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextSizeAdjust>",
+      "type": "StyleValueWithCondition< CSS.Property.TextSizeAdjust | AnyString>",
       "docs": {
         "text-size-adjust": {
           "baseline": { "status": "Limited available" },
@@ -9103,7 +9103,7 @@
     },
     "textSpacingTrim": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextSpacingTrim>",
+      "type": "StyleValueWithCondition< CSS.Property.TextSpacingTrim | AnyString>",
       "docs": {
         "text-spacing-trim": {
           "baseline": { "status": "Limited available" },
@@ -9116,7 +9116,7 @@
     },
     "textTransform": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextTransform>",
+      "type": "StyleValueWithCondition< CSS.Property.TextTransform | AnyString>",
       "docs": {
         "text-transform": {
           "baseline": {
@@ -9133,7 +9133,7 @@
     },
     "textUnderlineOffset": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextUnderlineOffset>",
+      "type": "StyleValueWithCondition< CSS.Property.TextUnderlineOffset | AnyString>",
       "docs": {
         "text-underline-offset": {
           "baseline": {
@@ -9150,7 +9150,7 @@
     },
     "textUnderlinePosition": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextUnderlinePosition>",
+      "type": "StyleValueWithCondition< CSS.Property.TextUnderlinePosition | AnyString>",
       "docs": {
         "text-underline-position": {
           "baseline": {
@@ -9167,7 +9167,7 @@
     },
     "textWrap": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextWrap>",
+      "type": "StyleValueWithCondition< CSS.Property.TextWrap | AnyString>",
       "docs": {
         "text-wrap": {
           "baseline": {
@@ -9183,7 +9183,7 @@
     },
     "textWrapMode": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextWrapMode>",
+      "type": "StyleValueWithCondition< CSS.Property.TextWrapMode | AnyString>",
       "docs": {
         "text-wrap-mode": {
           "baseline": {
@@ -9199,7 +9199,7 @@
     },
     "textWrapStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TextWrapStyle>",
+      "type": "StyleValueWithCondition< CSS.Property.TextWrapStyle | AnyString>",
       "docs": {
         "text-wrap-style": {
           "baseline": {
@@ -9215,7 +9215,7 @@
     },
     "timelineScope": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TimelineScope>",
+      "type": "StyleValueWithCondition< CSS.Property.TimelineScope | AnyString>",
       "docs": {
         "timeline-scope": {
           "baseline": { "status": "Limited available" },
@@ -9337,7 +9337,7 @@
     "top": {
       "properties": ["top"],
       "token": "spaces",
-      "type": "StyleValueWithCondition<CSS.Property.Top | number, \"spaces\">",
+      "type": "StyleValueWithCondition< CSS.Property.Top | AnyString | number, \"spaces\">",
       "docs": {
         "top": {
           "baseline": {
@@ -9354,7 +9354,7 @@
     },
     "touchAction": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TouchAction>",
+      "type": "StyleValueWithCondition< CSS.Property.TouchAction | AnyString>",
       "docs": {
         "touch-action": {
           "baseline": {
@@ -9371,7 +9371,7 @@
     },
     "transformBox": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TransformBox>",
+      "type": "StyleValueWithCondition< CSS.Property.TransformBox | AnyString>",
       "docs": {
         "transform-box": {
           "baseline": {
@@ -9387,7 +9387,7 @@
     },
     "transformStyle": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TransformStyle>",
+      "type": "StyleValueWithCondition< CSS.Property.TransformStyle | AnyString>",
       "docs": {
         "transform-style": {
           "baseline": {
@@ -9404,7 +9404,7 @@
     },
     "transitionBehavior": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TransitionBehavior>",
+      "type": "StyleValueWithCondition< CSS.Property.TransitionBehavior | AnyString>",
       "docs": {
         "transition-behavior": {
           "baseline": {
@@ -9420,7 +9420,7 @@
     },
     "transitionDelay": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.TransitionDelay>",
+      "type": "StyleValueWithCondition< CSS.Property.TransitionDelay | AnyString>",
       "docs": {
         "transition-delay": {
           "baseline": {
@@ -9438,7 +9438,7 @@
     "transitionDuration": {
       "properties": ["transitionDuration"],
       "token": "durations",
-      "type": "StyleValueWithCondition<CSS.Property.TransitionDuration, \"durations\">",
+      "type": "StyleValueWithCondition< CSS.Property.TransitionDuration | AnyString, \"durations\">",
       "docs": {
         "transition-duration": {
           "baseline": {
@@ -9456,7 +9456,7 @@
     "transitionTimingFunction": {
       "properties": ["transitionTimingFunction"],
       "token": "easings",
-      "type": "StyleValueWithCondition<CSS.Property.TransitionTimingFunction, \"easings\">",
+      "type": "StyleValueWithCondition< CSS.Property.TransitionTimingFunction | AnyString, \"easings\">",
       "docs": {
         "transition-timing-function": {
           "baseline": {
@@ -9497,7 +9497,7 @@
     },
     "userSelect": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.UserSelect>",
+      "type": "StyleValueWithCondition< CSS.Property.UserSelect | AnyString>",
       "docs": {
         "user-select": {
           "baseline": { "status": "Limited available" },
@@ -9510,7 +9510,7 @@
     },
     "verticalAlign": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.VerticalAlign>",
+      "type": "StyleValueWithCondition< CSS.Property.VerticalAlign | AnyString>",
       "docs": {
         "vertical-align": {
           "baseline": {
@@ -9527,7 +9527,7 @@
     },
     "viewTimeline": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ViewTimeline>",
+      "type": "StyleValueWithCondition< CSS.Property.ViewTimeline | AnyString>",
       "docs": {
         "view-timeline": {
           "baseline": { "status": "Limited available" },
@@ -9540,7 +9540,7 @@
     },
     "viewTimelineAxis": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ViewTimelineAxis>",
+      "type": "StyleValueWithCondition< CSS.Property.ViewTimelineAxis | AnyString>",
       "docs": {
         "view-timeline-axis": {
           "baseline": { "status": "Limited available" },
@@ -9553,7 +9553,7 @@
     },
     "viewTimelineInset": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ViewTimelineInset>",
+      "type": "StyleValueWithCondition< CSS.Property.ViewTimelineInset | AnyString>",
       "docs": {
         "view-timeline-inset": {
           "baseline": { "status": "Limited available" },
@@ -9566,7 +9566,7 @@
     },
     "viewTimelineName": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ViewTimelineName>",
+      "type": "StyleValueWithCondition< CSS.Property.ViewTimelineName | AnyString>",
       "docs": {
         "view-timeline-name": {
           "baseline": { "status": "Limited available" },
@@ -9579,7 +9579,7 @@
     },
     "viewTransitionClass": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ViewTransitionClass>",
+      "type": "StyleValueWithCondition< CSS.Property.ViewTransitionClass | AnyString>",
       "docs": {
         "view-transition-class": {
           "baseline": {
@@ -9607,7 +9607,7 @@
     },
     "viewTransitionName": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.ViewTransitionName>",
+      "type": "StyleValueWithCondition< CSS.Property.ViewTransitionName | AnyString>",
       "docs": {
         "view-transition-name": {
           "baseline": {
@@ -9635,7 +9635,7 @@
     },
     "whiteSpaceCollapse": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.WhiteSpaceCollapse>",
+      "type": "StyleValueWithCondition< CSS.Property.WhiteSpaceCollapse | AnyString>",
       "docs": {
         "white-space-collapse": {
           "baseline": {
@@ -9651,7 +9651,7 @@
     },
     "widows": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Widows>",
+      "type": "StyleValueWithCondition< CSS.Property.Widows | AnyString>",
       "docs": {
         "widows": {
           "baseline": { "status": "Limited available" },
@@ -9665,7 +9665,7 @@
     "width": {
       "properties": ["width"],
       "token": "sizes",
-      "type": "StyleValueWithCondition<CSS.Property.Width | number, \"sizes\">",
+      "type": "StyleValueWithCondition< CSS.Property.Width | AnyString | number, \"sizes\">",
       "docs": {
         "width": {
           "baseline": {
@@ -9683,7 +9683,7 @@
     },
     "willChange": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.WillChange>",
+      "type": "StyleValueWithCondition< CSS.Property.WillChange | AnyString>",
       "docs": {
         "will-change": {
           "baseline": {
@@ -9700,7 +9700,7 @@
     },
     "wordBreak": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.WordBreak>",
+      "type": "StyleValueWithCondition< CSS.Property.WordBreak | AnyString>",
       "docs": {
         "word-break": {
           "baseline": {
@@ -9717,7 +9717,7 @@
     },
     "x": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.X>",
+      "type": "StyleValueWithCondition< CSS.Property.X | AnyString>",
       "docs": {
         "x": {
           "baseline": {
@@ -9734,7 +9734,7 @@
     },
     "y": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Y>",
+      "type": "StyleValueWithCondition< CSS.Property.Y | AnyString>",
       "docs": {
         "y": {
           "baseline": {
@@ -9752,7 +9752,7 @@
     "zIndex": {
       "properties": ["zIndex"],
       "token": "zIndices",
-      "type": "StyleValueWithCondition<CSS.Property.ZIndex, \"zIndices\">",
+      "type": "StyleValueWithCondition< CSS.Property.ZIndex | AnyString, \"zIndices\">",
       "docs": {
         "z-index": {
           "baseline": {
@@ -9770,7 +9770,7 @@
     },
     "zoom": {
       "as": true,
-      "type": "StyleValueWithCondition<CSS.Property.Zoom>",
+      "type": "StyleValueWithCondition< CSS.Property.Zoom | AnyString>",
       "docs": {
         "zoom": {
           "baseline": {

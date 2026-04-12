@@ -30,12 +30,14 @@
       "saturation-slider",
       "segmented-control",
       "select",
+      "sidebar",
       "slider",
       "steps",
       "switch",
       "table",
       "tabs",
-      "toggle"
+      "toggle",
+      "tree"
     ],
     "hooks": [],
     "providers": []

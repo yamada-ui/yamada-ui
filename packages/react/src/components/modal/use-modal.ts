@@ -49,9 +49,10 @@ export const useModal = ({
     (ev: KeyboardEvent) => {
       if (ev.key !== "Escape") return
 
-      ev.stopPropagation()
-
-      if (closeOnEsc) onClose()
+      if (closeOnEsc) {
+        ev.stopPropagation()
+        onClose()
+      }
 
       onEsc?.()
     },

@@ -223,42 +223,55 @@ const RatingGroup = withContext<"div", RatingGroupProps>(
 interface RatingItemProps
   extends HTMLStyledProps<"label">, UseRatingItemProps {}
 
-const RatingItem = withContext<"label", RatingItemProps>((props) => {
-  const {
-    active,
-    filled,
-    fractionValue,
-    groupValue,
-    getInputProps,
-    getLabelProps,
-  } = useRatingItem(props)
-  const {
-    emptyIcon = <StarIcon fill="currentColor" strokeColor="currentColor" />,
-    filledIcon = <StarIcon fill="currentColor" strokeColor="currentColor" />,
-    iconProps,
-    inputProps,
-    itemProps,
-  } = useComponentContext()
-  const clipPath =
-    fractionValue !== 1
-      ? `inset(0 ${active ? 100 - fractionValue * 100 : 100}% 0 0)`
-      : undefined
+const RatingItem = withContext<"label", RatingItemProps>(
+  ({ suppressHydrationWarning, ...props }) => {
+    const {
+      active,
+      filled,
+      fractionValue,
+      groupValue,
+      getInputProps,
+      getLabelProps,
+    } = useRatingItem(props)
+    const {
+      emptyIcon = <StarIcon fill="currentColor" strokeColor="currentColor" />,
+      filledIcon = <StarIcon fill="currentColor" strokeColor="currentColor" />,
+      iconProps,
+      inputProps,
+      itemProps,
+    } = useComponentContext()
+    const clipPath =
+      fractionValue !== 1
+        ? `inset(0 ${active ? 100 - fractionValue * 100 : 100}% 0 0)`
+        : undefined
 
-  return (
-    <styled.label {...getLabelProps(runIfFn(itemProps, groupValue))}>
-      <styled.input {...getInputProps(runIfFn(inputProps, groupValue))} />
-
-      <RatingIcon
-        {...{ "--clip-path": clipPath }}
-        {...runIfFn(iconProps, groupValue)}
+    return (
+      <styled.label
+        {...getLabelProps({
+          suppressHydrationWarning,
+          ...runIfFn(itemProps, groupValue),
+        })}
       >
-        {filled
-          ? runIfFn(filledIcon, groupValue)
-          : runIfFn(emptyIcon, groupValue)}
-      </RatingIcon>
-    </styled.label>
-  )
-}, "item")(undefined, ({ groupValue, ...rest }) => {
+        <styled.input
+          {...getInputProps({
+            suppressHydrationWarning,
+            ...runIfFn(inputProps, groupValue),
+          })}
+        />
+
+        <RatingIcon
+          {...{ "--clip-path": clipPath }}
+          {...runIfFn(iconProps, groupValue)}
+        >
+          {filled
+            ? runIfFn(filledIcon, groupValue)
+            : runIfFn(emptyIcon, groupValue)}
+        </RatingIcon>
+      </styled.label>
+    )
+  },
+  "item",
+)(undefined, ({ groupValue, ...rest }) => {
   const { color } = useComponentContext()
 
   return {

@@ -191,7 +191,7 @@ export const StepsRoot = withProvider<"div", StepsRootProps, "orientation">(
 export interface StepsListProps extends HTMLStyledProps<"ol"> {}
 
 export const StepsList = withContext<"ol", StepsListProps>(
-  ({ children, ...rest }) => {
+  ({ children, suppressHydrationWarning, ...rest }) => {
     const { items } = useComponentContext()
     const { getListProps } = useStepsContext()
     const computedChildren = useMemo(() => {
@@ -243,7 +243,11 @@ export const StepsList = withContext<"ol", StepsListProps>(
       }
     }, [children, items])
 
-    return <styled.ol {...getListProps(rest)}>{computedChildren}</styled.ol>
+    return (
+      <styled.ol {...getListProps({ suppressHydrationWarning, ...rest })}>
+        {computedChildren}
+      </styled.ol>
+    )
   },
   "list",
 )()

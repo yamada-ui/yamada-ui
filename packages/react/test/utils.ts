@@ -1,20 +1,6 @@
 import { act } from "@testing-library/react"
 import { isArray, isString, wait } from "@yamada-ui/utils"
 
-export function hasSuppressHydrationWarning(
-  el: Element | null | undefined,
-): boolean {
-  if (!el) return false
-
-  const key = Object.keys(el).find((k) => k.startsWith("__reactProps$"))
-  if (!key) return false
-
-  const props = Reflect.get(el, key)
-  if (typeof props !== "object" || props === null) return false
-
-  return Reflect.get(props, "suppressHydrationWarning") === true
-}
-
 export async function waitForAnimationFrame(ms = 16) {
   await act(async () => wait(ms))
 

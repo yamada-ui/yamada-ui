@@ -220,10 +220,7 @@ export const AccordionButton = withContext<"button", AccordionButtonProps>(
     const props = { disabled, expanded: open }
 
     return (
-      <styled.h3
-        suppressHydrationWarning={suppressHydrationWarning}
-        {...containerProps}
-      >
+      <styled.h3 {...containerProps}>
         <styled.button
           {...getButtonProps({ suppressHydrationWarning, ...rest })}
         >
@@ -306,13 +303,7 @@ export const AccordionPanel = withContext<"div", AccordionPanelProps>(
         }}
       >
         <styled.div {...getPanelProps({ suppressHydrationWarning, ...rest })}>
-          {isString(children) ? (
-            <styled.p suppressHydrationWarning={suppressHydrationWarning}>
-              {children}
-            </styled.p>
-          ) : (
-            children
-          )}
+          {isString(children) ? <styled.p>{children}</styled.p> : children}
         </styled.div>
       </Collapse>
     )

@@ -259,8 +259,35 @@ describe("<Popover />", () => {
     )
     expect(screen.getByTestId("fn-child")).toHaveTextContent("open")
   })
-})
 
+  test("should merge `onOpen` and `onClose` from props context and root props", async () => {
+    const onContextOpen = vi.fn()
+    const onContextClose = vi.fn()
+    const onRootOpen = vi.fn()
+    const onRootClose = vi.fn()
+    const { user } = render(
+      <Popover.PropsContext
+        value={{ onClose: onContextClose, onOpen: onContextOpen }}
+      >
+        <Component onClose={onRootClose} onOpen={onRootOpen} />
+      </Popover.PropsContext>,
+    )
+
+    const triggerButton = await screen.findByRole("button", {
+      name: "Popover Trigger",
+    })
+
+    await user.click(triggerButton)
+
+    expect(onContextOpen).toHaveBeenCalledTimes(1)
+    expect(onRootOpen).toHaveBeenCalledTimes(1)
+
+    await user.keyboard("{escape}")
+
+    expect(onContextClose).toHaveBeenCalledTimes(1)
+    expect(onRootClose).toHaveBeenCalledTimes(1)
+  })
+})
 describe("usePopupAnimationProps", () => {
   test("returns scale animation props by default", () => {
     const { result } = renderHook(() => usePopupAnimationProps())

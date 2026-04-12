@@ -15,7 +15,7 @@ import type { PopoverStyle } from "./popover.style"
 import type { UsePopoverProps, UsePopoverReturn } from "./use-popover"
 import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
-import { createSlotComponent } from "../../core"
+import { createSlotComponent, mergeProps } from "../../core"
 import { useValue } from "../../hooks/use-value"
 import { cast, runIfFn } from "../../utils"
 import { fadeScaleVariants } from "../fade-scale"
@@ -185,7 +185,7 @@ export { PopoverPropsContext, usePopoverPropsContext }
 export const PopoverRoot: FC<PopoverRootProps> = (props) => {
   const styleProps = usePopoverStyleProps(props)
   const [styleContext, { animationScheme, children, duration, ...rest }] =
-    useRootComponentProps({ ...props, ...styleProps })
+    useRootComponentProps(mergeProps(props, styleProps)())
   const {
     open,
     getAnchorProps,

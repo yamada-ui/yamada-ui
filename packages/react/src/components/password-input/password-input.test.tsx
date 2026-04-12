@@ -1,6 +1,8 @@
-import { a11y, render, screen, waitFor } from "#test"
+import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { useState } from "react"
+import { Group } from "../group"
 import { EyeIcon, EyeOffIcon } from "../icon"
+import { InputPropsContext } from "../input"
 import { PasswordInput, StrengthMeter } from "./"
 
 describe("<PasswordInput />", () => {
@@ -51,6 +53,70 @@ describe("<PasswordInput />", () => {
     await user.click(button)
 
     expect(input).toHaveAttribute("type", "text")
+  })
+
+  test("merges `rootProps` and group item props without overwriting style and data attributes", async () => {
+    const onRootClick = vi.fn()
+
+    render(
+      <Group attached>
+        <PasswordInput
+          placeholder="password-1"
+          rootProps={{
+            className: "from-user",
+            style: { backgroundColor: "blue" },
+            onClick: onRootClick,
+          }}
+        />
+        <PasswordInput placeholder="password-2" />
+      </Group>,
+    )
+
+    const input = await screen.findByPlaceholderText("password-1")
+    const root = input.parentElement as HTMLElement
+
+    expect(root).toHaveClass("from-user")
+    expect(root).toHaveAttribute("data-group-start")
+    expect(root.style.getPropertyValue("--group-count")).toBe("2")
+    expect(root.style.getPropertyValue("--group-index")).toBe("0")
+    expect(root).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(root)
+    expect(onRootClick).toHaveBeenCalledTimes(1)
+  })
+
+  test("merges input context props and user props without overwriting className, style, and click handlers", async () => {
+    const onContextClick = vi.fn()
+    const onUserClick = vi.fn()
+
+    render(
+      <InputPropsContext
+        value={{
+          className: "from-context",
+          style: { color: "red" },
+          onClick: onContextClick,
+        }}
+      >
+        <PasswordInput
+          className="from-user"
+          style={{ backgroundColor: "blue" }}
+          placeholder="password"
+          onClick={onUserClick}
+        />
+      </InputPropsContext>,
+    )
+
+    const input = await screen.findByPlaceholderText("password")
+    const root = input.parentElement as HTMLElement
+
+    expect(root).toHaveClass("from-context", "from-user")
+    expect(input).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(input).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(input)
+
+    expect(onContextClick).toHaveBeenCalledTimes(1)
+    expect(onUserClick).toHaveBeenCalledTimes(1)
   })
 })
 

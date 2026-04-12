@@ -179,6 +179,7 @@ interface PickedNativeTableProps extends Pick<
   | "stickyFooter"
   | "stickyHeader"
   | "striped"
+  | "suppressHydrationWarning"
   | "variant"
   | "withBorder"
   | "withColumnBorders"
@@ -423,6 +424,7 @@ export const Table = withContext(
     stickyFooter,
     stickyHeader,
     striped,
+    suppressHydrationWarning,
     truncated,
     withBorder,
     withCheckbox = true,
@@ -836,6 +838,7 @@ export const Table = withContext(
               stickyFooter,
               stickyHeader,
               striped,
+              suppressHydrationWarning,
               withBorder,
               withColumnBorders,
               withScrollArea,
@@ -915,6 +918,7 @@ export const Table = withContext(
                       >
                         <TruncatedText
                           lineClamp={columnDef.lineClamp ?? lineClamp}
+                          suppressHydrationWarning={suppressHydrationWarning}
                           truncated={columnDef.truncated ?? truncated}
                         >
                           {children}
@@ -923,6 +927,7 @@ export const Table = withContext(
                         {canSort ? (
                           <SortingIcon
                             sorted={sorted}
+                            suppressHydrationWarning={suppressHydrationWarning}
                             onClick={header.column.getToggleSortingHandler()}
                           />
                         ) : null}
@@ -930,6 +935,7 @@ export const Table = withContext(
                         {canResize ? (
                           <ResizableTrigger
                             resizing={resizing}
+                            suppressHydrationWarning={suppressHydrationWarning}
                             onDoubleClick={header.column.resetSize}
                             onMouseDown={header.getResizeHandler()}
                             onTouchStart={header.getResizeHandler()}
@@ -1009,6 +1015,7 @@ export const Table = withContext(
                       >
                         <TruncatedText
                           lineClamp={columnDef.lineClamp ?? lineClamp}
+                          suppressHydrationWarning={suppressHydrationWarning}
                           truncated={columnDef.truncated ?? truncated}
                         >
                           {children}
@@ -1073,6 +1080,7 @@ export const Table = withContext(
                         >
                           <TruncatedText
                             lineClamp={columnDef.lineClamp ?? lineClamp}
+                            suppressHydrationWarning={suppressHydrationWarning}
                             truncated={columnDef.truncated ?? truncated}
                           >
                             {children}
@@ -1099,7 +1107,11 @@ interface SortingIconProps extends HTMLStyledProps<"button"> {
   sorted: false | SortDirection
 }
 
-const SortingIcon: FC<SortingIconProps> = ({ sorted, ...rest }) => {
+const SortingIcon: FC<SortingIconProps> = ({
+  sorted,
+  suppressHydrationWarning,
+  ...rest
+}) => {
   const { t } = useI18n("table")
   const { sortingIcon, sortingIconProps = {} } = useComponentContext()
   const Icon = sorted ? ChevronUpIcon : ChevronsUpDownIcon
@@ -1125,6 +1137,7 @@ const SortingIcon: FC<SortingIconProps> = ({ sorted, ...rest }) => {
       position="absolute"
       right="{space-x}"
       rounded="l1"
+      suppressHydrationWarning={suppressHydrationWarning}
       tabIndex={-1}
       top="50%"
       transform="translateY(-50%)"
@@ -1144,7 +1157,11 @@ interface ResizableTriggerProps extends HTMLStyledProps {
   resizing: boolean
 }
 
-const ResizableTrigger: FC<ResizableTriggerProps> = ({ resizing, ...rest }) => {
+const ResizableTrigger: FC<ResizableTriggerProps> = ({
+  resizing,
+  suppressHydrationWarning,
+  ...rest
+}) => {
   const {
     columnResizeMode,
     table,
@@ -1161,6 +1178,7 @@ const ResizableTrigger: FC<ResizableTriggerProps> = ({ resizing, ...rest }) => {
       opacity={{ base: "0", _hover: "1", _active: "1" }}
       position="absolute"
       right="0"
+      suppressHydrationWarning={suppressHydrationWarning}
       touchAction="none"
       transform={`translateX(${columnResizeMode === "onEnd" && resizing && offset ? `${offset}px` : "50%"})`}
       userSelect="none"
@@ -1175,6 +1193,7 @@ interface TruncatedTextProps extends HTMLStyledProps<"span"> {}
 const TruncatedText: FC<TruncatedTextProps> = ({
   children,
   lineClamp,
+  suppressHydrationWarning,
   truncated,
   ...rest
 }) => {
@@ -1182,6 +1201,7 @@ const TruncatedText: FC<TruncatedTextProps> = ({
     return (
       <styled.span
         lineClamp={lineClamp}
+        suppressHydrationWarning={suppressHydrationWarning}
         truncated={truncated}
         wordBreak="break-all"
         {...rest}

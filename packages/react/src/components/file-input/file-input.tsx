@@ -114,7 +114,7 @@ export const FileInput = withProvider<"input", FileInputProps>(
           <styled.input {...getInputProps()} />
         </Portal>
 
-        <styled.div {...mergeProps(varProps, getFieldProps())()}>
+        <styled.div {...varProps} {...getFieldProps()}>
           {cloneChildren}
         </styled.div>
       </>

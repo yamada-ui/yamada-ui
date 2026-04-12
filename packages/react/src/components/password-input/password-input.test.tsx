@@ -208,34 +208,4 @@ describe("<PassWordInputStrengthMeter />", () => {
       expect(strengthMeter).toHaveAttribute("aria-valuenow", "4"),
     )
   })
-
-  test("merges indicator props with getter props without overwriting selected state", () => {
-    const onIndicatorClick = vi.fn()
-    const onRootClick = vi.fn()
-
-    const { getByTestId } = render(
-      <StrengthMeter
-        data-testid="strengthMeter"
-        value={3}
-        getIndicatorProps={() => ({
-          className: "from-user",
-          style: { backgroundColor: "blue" },
-          onClick: onIndicatorClick,
-        })}
-        onClick={onRootClick}
-      />,
-    )
-
-    const indicator = getByTestId("strengthMeter").children[0]
-      ?.children[0] as HTMLElement
-
-    expect(indicator).toHaveClass("from-user")
-    expect(indicator).toHaveAttribute("data-selected")
-    expect(indicator).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
-
-    fireEvent.click(indicator)
-
-    expect(onIndicatorClick).toHaveBeenCalledTimes(1)
-    expect(onRootClick).toHaveBeenCalledTimes(1)
-  })
 })

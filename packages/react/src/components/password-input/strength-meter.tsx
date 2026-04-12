@@ -4,7 +4,7 @@ import type { ReactNode } from "react"
 import type { HTMLStyledProps } from "../../core"
 import type { StrengthMeterStyle } from "./strength-meter.style"
 import type { UseStrengthMeterProps } from "./use-strength-meter"
-import { createSlotComponent, mergeProps, styled } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { strengthMeterStyle } from "./strength-meter.style"
 import { useStrengthMeter } from "./use-strength-meter"
 
@@ -75,7 +75,7 @@ export const StrengthMeter = withProvider<"div", StrengthMeterProps>(
           {Array.from({ length: max }).map((_, index) => (
             <StrengthMeterIndicator
               key={index}
-              {...getIndicatorProps(mergeProps({ index }, indicatorProps)())}
+              {...getIndicatorProps({ index, ...indicatorProps })}
             />
           ))}
         </StrengthMeterIndicators>

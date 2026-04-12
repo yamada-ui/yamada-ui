@@ -159,6 +159,19 @@ describe("<Slider />", () => {
     expect(hasSuppressHydrationWarning(input)).toBeFalsy()
   })
 
+  test("allows `inputProps` to override `suppressHydrationWarning` on the hidden `<input>`", () => {
+    const { container } = render(
+      <Slider.Root
+        defaultValue={50}
+        suppressHydrationWarning
+        inputProps={{ suppressHydrationWarning: false }}
+      />,
+    )
+
+    const input = container.querySelector('input[type="hidden"]')
+    expect(hasSuppressHydrationWarning(input)).toBeFalsy()
+  })
+
   test("renders marks with object format including labels", () => {
     render(
       <Slider.Root

@@ -1,5 +1,11 @@
 import type { ColumnDef } from "@tanstack/react-table"
-import { a11y, fireEvent, render, screen } from "#test"
+import {
+  a11y,
+  fireEvent,
+  hasSuppressHydrationWarning,
+  render,
+  screen,
+} from "#test"
 import { useState } from "react"
 import { vi } from "vitest"
 import { createColumnHelper, Table } from "./"
@@ -3018,6 +3024,112 @@ describe("<Table />", () => {
       const footerRows = table.querySelectorAll("tfoot tr")
 
       expect(footerRows.length).toBeGreaterThanOrEqual(2)
+    })
+  })
+
+  describe("suppressHydrationWarning", () => {
+    test("propagates to SortingIcon button when set on the root", () => {
+      const sortableColumns = [
+        columnHelper.accessor("firstName", {
+          enableSorting: true,
+          header: "First Name",
+        }),
+      ]
+
+      render(
+        <Table
+          columns={sortableColumns}
+          data={data}
+          enableSorting
+          suppressHydrationWarning
+          tableProps={{ "data-testid": "table" }}
+        />,
+      )
+
+      const table = screen.getByTestId("table")
+      const sortButton = table.querySelector("button[data-focusable]")
+
+      expect(hasSuppressHydrationWarning(sortButton)).toBeTruthy()
+    })
+
+    test("propagates to ResizableTrigger div when set on the root", () => {
+      const resizableColumns = [
+        columnHelper.accessor("firstName", {
+          enableResizing: true,
+          header: "First Name",
+        }),
+      ]
+
+      render(
+        <Table
+          columnResizeMode="onChange"
+          columns={resizableColumns}
+          data={data}
+          enableColumnResizing
+          suppressHydrationWarning
+          resizableTriggerProps={{ "data-testid": "resize-trigger" }}
+          tableProps={{ "data-testid": "table" }}
+        />,
+      )
+
+      const trigger = screen.getAllByTestId("resize-trigger")[0]
+
+      expect(hasSuppressHydrationWarning(trigger)).toBeTruthy()
+    })
+
+    test("propagates to TruncatedText span when set on the root", () => {
+      const truncatedColumns = [
+        columnHelper.accessor("firstName", {
+          header: "First Name",
+          truncated: true,
+        }),
+      ]
+
+      render(
+        <Table
+          columns={truncatedColumns}
+          data={data}
+          suppressHydrationWarning
+          tableProps={{ "data-testid": "table" }}
+        />,
+      )
+
+      const table = screen.getByTestId("table")
+      const span = table.querySelector("span")
+
+      expect(hasSuppressHydrationWarning(span)).toBeTruthy()
+    })
+
+    test("does not set suppressHydrationWarning on hidden elements when omitted on the root", () => {
+      const mixedColumns = [
+        columnHelper.accessor("firstName", {
+          enableResizing: true,
+          enableSorting: true,
+          header: "First Name",
+          truncated: true,
+        }),
+      ]
+
+      render(
+        <Table
+          columnResizeMode="onChange"
+          columns={mixedColumns}
+          data={data}
+          enableColumnResizing
+          enableSorting
+          resizableTriggerProps={{ "data-testid": "resize-trigger" }}
+          tableProps={{ "data-testid": "table" }}
+        />,
+      )
+
+      const table = screen.getByTestId("table")
+      const sortButton = table.querySelector("button[data-focusable]")
+      const trigger = screen.getAllByTestId("resize-trigger")[0]
+      const span = table.querySelector("span")
+
+      expect(hasSuppressHydrationWarning(sortButton)).toBeFalsy()
+      expect(hasSuppressHydrationWarning(trigger)).toBeFalsy()
+      expect(hasSuppressHydrationWarning(span)).toBeFalsy()
     })
   })
 })

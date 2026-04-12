@@ -121,6 +121,7 @@ export const SliderRoot = withProvider<"input", SliderRootProps, "orientation">(
     children,
     marks,
     orientation: orientationProp,
+    suppressHydrationWarning,
     inputProps,
     marksProps,
     rangeProps,
@@ -178,8 +179,11 @@ export const SliderRoot = withProvider<"input", SliderRootProps, "orientation">(
 
     return (
       <ComponentContext value={context}>
-        <styled.div {...getRootProps()}>
-          <SliderInput {...inputProps} />
+        <styled.div {...getRootProps({ suppressHydrationWarning })}>
+          <SliderInput
+            suppressHydrationWarning={suppressHydrationWarning}
+            {...inputProps}
+          />
 
           {computedChildren}
         </styled.div>
@@ -223,15 +227,18 @@ export const SliderRoot = withProvider<"input", SliderRootProps, "orientation">(
 
 interface SliderInputProps extends HTMLStyledProps<"input"> {}
 
-const SliderInput: FC<SliderInputProps> = () => {
+const SliderInput: FC<SliderInputProps> = ({ suppressHydrationWarning }) => {
   const { range, getInputProps } = useComponentContext()
 
   return range ? (
     Array.from({ length: 2 }).map((_, index) => (
-      <styled.input key={index} {...getInputProps({ index })} />
+      <styled.input
+        key={index}
+        {...getInputProps({ index, suppressHydrationWarning })}
+      />
     ))
   ) : (
-    <styled.input {...getInputProps()} />
+    <styled.input {...getInputProps({ suppressHydrationWarning })} />
   )
 }
 

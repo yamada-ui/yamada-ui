@@ -11,7 +11,7 @@ import type { ReactNodeOrFunction } from "../../utils"
 import type { PaginationStyle } from "./pagination.style"
 import type { Page, UsePaginationProps } from "./use-pagination"
 import { cloneElement, isValidElement, useMemo } from "react"
-import { createSlotComponent, styled } from "../../core"
+import { createSlotComponent, mergeProps, styled } from "../../core"
 import { useI18n } from "../../providers/i18n-provider"
 import { isNumber, runIfFn } from "../../utils"
 import { ButtonGroup } from "../button"
@@ -194,8 +194,7 @@ export const PaginationRoot = withProvider<
             <PaginationStartTrigger>
               <PaginationItem
                 icon={<ChevronsLeftIcon />}
-                {...edgeProps}
-                {...edgeStartProps}
+                {...mergeProps(edgeProps, edgeStartProps)()}
               />
             </PaginationStartTrigger>,
           )
@@ -204,8 +203,7 @@ export const PaginationRoot = withProvider<
             <PaginationPrevTrigger>
               <PaginationItem
                 icon={<ChevronLeftIcon />}
-                {...controlProps}
-                {...controlPrevProps}
+                {...mergeProps(controlProps, controlPrevProps)()}
               />
             </PaginationPrevTrigger>,
           )
@@ -233,8 +231,7 @@ export const PaginationRoot = withProvider<
             <PaginationNextTrigger>
               <PaginationItem
                 icon={<ChevronRightIcon />}
-                {...controlProps}
-                {...controlNextProps}
+                {...mergeProps(controlProps, controlNextProps)()}
               />
             </PaginationNextTrigger>,
           )
@@ -243,8 +240,7 @@ export const PaginationRoot = withProvider<
             <PaginationEndTrigger>
               <PaginationItem
                 icon={<ChevronsRightIcon />}
-                {...edgeProps}
-                {...edgeEndProps}
+                {...mergeProps(edgeProps, edgeEndProps)()}
               />
             </PaginationEndTrigger>,
           )

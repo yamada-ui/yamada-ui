@@ -258,10 +258,7 @@ export const AutocompleteRoot = withProvider(
                   </Popover.Trigger>
 
                   <InputGroup.Element
-                    {...mergeProps(
-                      { clickable: clearable && hasValue },
-                      elementProps,
-                    )()}
+                    {...{ clickable: clearable && hasValue, ...elementProps }}
                   >
                     {clearable && hasValue ? (
                       <AutocompleteIcon

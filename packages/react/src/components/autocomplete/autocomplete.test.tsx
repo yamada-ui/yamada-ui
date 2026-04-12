@@ -1135,6 +1135,56 @@ describe("<Autocomplete />", () => {
     expect(onClick).toHaveBeenCalledWith(expect.anything())
   })
 
+  test("merges user-provided `groupProps` with component props without overwriting event handlers", () => {
+    const onClick = vi.fn()
+
+    render(
+      <Autocomplete.Root
+        defaultOpen
+        items={[
+          {
+            items: [{ label: "Option 1", value: "one" }],
+            label: "Group",
+          },
+        ]}
+        groupProps={{
+          "data-testid": "group",
+          onClick,
+        }}
+      />,
+    )
+
+    const group = screen.getByTestId("group")
+
+    fireEvent.click(group)
+
+    expect(onClick).toHaveBeenCalledWith(expect.anything())
+  })
+
+  test("merges user-provided `optionProps` with component props without overwriting event handlers", () => {
+    const onClick = vi.fn()
+
+    render(
+      <Autocomplete.Root
+        defaultOpen
+        optionProps={{
+          "data-custom": "from-context",
+          onClick,
+        }}
+      >
+        <Autocomplete.Option value="one">Option 1</Autocomplete.Option>
+      </Autocomplete.Root>,
+    )
+
+    const option = screen.getByRole("option", { name: "Option 1" })
+
+    expect(option).toHaveAttribute("data-custom", "from-context")
+
+    fireEvent.click(option)
+
+    expect(onClick).toHaveBeenCalledWith(expect.anything())
+  })
+
   test("merges user-provided `emptyProps` with internal props without overwriting `className`, `style`, and event handlers", () => {
     const onClick = vi.fn()
 

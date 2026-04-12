@@ -1,4 +1,5 @@
 import { a11y, fireEvent, render, screen } from "#test"
+import { createRef } from "react"
 import { vi } from "vitest"
 import { NativeSelect } from "."
 import { BoxIcon } from "../icon"
@@ -85,6 +86,22 @@ describe("<NativeSelect />", () => {
 
     expect(onClickFromRoot).toHaveBeenCalledTimes(1)
     expect(onClickFromUser).toHaveBeenCalledTimes(1)
+  })
+
+  test("merges ref from input props context with user ref", () => {
+    const contextRef = createRef<HTMLSelectElement>()
+    const userRef = createRef<HTMLSelectElement>()
+
+    render(
+      <InputPropsContext value={{ ref: contextRef }}>
+        <NativeSelect.Root ref={userRef} data-testid="native-select-field" />
+      </InputPropsContext>,
+    )
+
+    const field = screen.getByTestId("native-select-field")
+
+    expect(contextRef.current).toBe(field)
+    expect(userRef.current).toBe(field)
   })
 
   test("merges input props context with user props", () => {

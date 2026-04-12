@@ -37,7 +37,7 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts"
-import { createSlotComponent, styled, varAttr } from "../../core"
+import { createSlotComponent, mergeProps, styled, varAttr } from "../../core"
 import {
   cast,
   createContext,
@@ -347,7 +347,7 @@ export interface ChartLegendProps extends Merge<
 
 export const ChartLegend = withContext<"div", ChartLegendProps>((props) => {
   const { legendProps } = useChartComponentContext()
-  const { contentProps, ...rest } = { ...legendProps, ...props }
+  const { contentProps, ...rest } = mergeProps(legendProps, props)()
   const {
     getLegendContentProps,
     getLegendItemProps,

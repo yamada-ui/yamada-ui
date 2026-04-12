@@ -1,5 +1,6 @@
 import { a11y, page, render } from "#test/browser"
 import { NumberInput } from "."
+import { Group } from "../group"
 
 describe("<NumberInput />", () => {
   test("renders component correctly", async () => {
@@ -8,6 +9,31 @@ describe("<NumberInput />", () => {
 
   test("sets `displayName` correctly", () => {
     expect(NumberInput.displayName).toBe("NumberInputRoot")
+  })
+
+  test("should merge groupItemProps and rootProps without overwriting style", async () => {
+    await render(
+      <Group>
+        <NumberInput
+          aria-label="Input number"
+          rootProps={{ style: { marginRight: "3px" } }}
+        />
+      </Group>,
+    )
+
+    const input = page.getByRole("spinbutton")
+    const root = input.element().closest(".ui-group")
+
+    expect(root).not.toBeNull()
+    expect(root).toHaveStyle({ marginRight: "3px" })
+    expect(root).toHaveAttribute(
+      "style",
+      expect.stringContaining("--group-count: 1"),
+    )
+    expect(root).toHaveAttribute(
+      "style",
+      expect.stringContaining("--group-index: 0"),
+    )
   })
 
   test("render input with props", async () => {

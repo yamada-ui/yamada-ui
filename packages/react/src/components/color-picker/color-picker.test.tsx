@@ -84,6 +84,64 @@ describe("<ColorPicker />", () => {
     )
   })
 
+  test("merges `elementProps` with `startElementProps` on start element", () => {
+    const onClickElement = vi.fn()
+    const onClickStart = vi.fn()
+
+    render(
+      <ColorPicker
+        placeholder="Choose a color"
+        elementProps={{
+          className: "from-element",
+          onClick: onClickElement,
+        }}
+        startElementProps={{
+          className: "from-start",
+          "data-testid": "start-el",
+          onClick: onClickStart,
+        }}
+      />,
+    )
+
+    const startEl = screen.getByTestId("start-el")
+
+    expect(startEl).toHaveClass("from-element", "from-start")
+
+    fireEvent.click(startEl)
+
+    expect(onClickElement).toHaveBeenCalledTimes(1)
+    expect(onClickStart).toHaveBeenCalledTimes(1)
+  })
+
+  test("merges `elementProps` with `endElementProps` on end element", () => {
+    const onClickElement = vi.fn()
+    const onClickEnd = vi.fn()
+
+    render(
+      <ColorPicker
+        placeholder="Choose a color"
+        elementProps={{
+          className: "from-element",
+          onClick: onClickElement,
+        }}
+        endElementProps={{
+          className: "from-end",
+          "data-testid": "end-el",
+          onClick: onClickEnd,
+        }}
+      />,
+    )
+
+    const endEl = screen.getByTestId("end-el")
+
+    expect(endEl).toHaveClass("from-element", "from-end")
+
+    fireEvent.click(endEl)
+
+    expect(onClickElement).toHaveBeenCalledTimes(1)
+    expect(onClickEnd).toHaveBeenCalledTimes(1)
+  })
+
   test("renders HTML tag correctly", () => {
     render(
       <ColorPicker

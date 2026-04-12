@@ -1079,4 +1079,135 @@ describe("<Autocomplete />", () => {
       expect(screen.getByRole("option", { name: "Option 1" })).toBeVisible()
     })
   })
+
+  test("merges user-provided `rootProps` with context props without overwriting `className`, `style`, and event handlers", () => {
+    const onClick = vi.fn()
+
+    render(
+      <Autocomplete.Root
+        className="from-root"
+        rootProps={{
+          className: "from-user",
+          style: { backgroundColor: "blue", color: "red" },
+          "data-testid": "root",
+          onClick,
+        }}
+      >
+        <Autocomplete.Option value="one">Option 1</Autocomplete.Option>
+      </Autocomplete.Root>,
+    )
+
+    const root = screen.getByTestId("root")
+
+    expect(root).toHaveClass("from-root", "from-user")
+    expect(root).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(root).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(root)
+
+    expect(onClick).toHaveBeenCalledWith(expect.anything())
+  })
+
+  test("merges user-provided `elementProps` with internal props without overwriting `className`, `style`, and event handlers", () => {
+    const onClick = vi.fn()
+
+    render(
+      <Autocomplete.Root
+        elementProps={{
+          className: "from-user",
+          style: { backgroundColor: "blue", color: "red" },
+          "data-testid": "element",
+          onClick,
+        }}
+      >
+        <Autocomplete.Option value="one">Option 1</Autocomplete.Option>
+      </Autocomplete.Root>,
+    )
+
+    const element = screen.getByTestId("element")
+
+    expect(element).toHaveClass("from-user")
+    expect(element).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(element).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(element)
+
+    expect(onClick).toHaveBeenCalledWith(expect.anything())
+  })
+
+  test("merges user-provided `groupProps` with component props without overwriting event handlers", () => {
+    const onClick = vi.fn()
+
+    render(
+      <Autocomplete.Root
+        defaultOpen
+        items={[
+          {
+            items: [{ label: "Option 1", value: "one" }],
+            label: "Group",
+          },
+        ]}
+        groupProps={{
+          "data-testid": "group",
+          onClick,
+        }}
+      />,
+    )
+
+    const group = screen.getByTestId("group")
+
+    fireEvent.click(group)
+
+    expect(onClick).toHaveBeenCalledWith(expect.anything())
+  })
+
+  test("merges user-provided `optionProps` with component props without overwriting event handlers", () => {
+    const onClick = vi.fn()
+
+    render(
+      <Autocomplete.Root
+        defaultOpen
+        optionProps={{
+          "data-custom": "from-context",
+          onClick,
+        }}
+      >
+        <Autocomplete.Option value="one">Option 1</Autocomplete.Option>
+      </Autocomplete.Root>,
+    )
+
+    const option = screen.getByRole("option", { name: "Option 1" })
+
+    expect(option).toHaveAttribute("data-custom", "from-context")
+
+    fireEvent.click(option)
+
+    expect(onClick).toHaveBeenCalledWith(expect.anything())
+  })
+
+  test("merges user-provided `emptyProps` with internal props without overwriting `className`, `style`, and event handlers", () => {
+    const onClick = vi.fn()
+
+    render(
+      <Autocomplete.Root
+        defaultOpen
+        items={[]}
+        emptyProps={{
+          className: "from-user",
+          style: { backgroundColor: "blue", color: "red" },
+          onClick,
+        }}
+      />,
+    )
+
+    const empty = document.querySelector(".ui-autocomplete__empty")
+
+    expect(empty).toHaveClass("ui-autocomplete__empty", "from-user")
+    expect(empty).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(empty).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(empty!)
+
+    expect(onClick).toHaveBeenCalledWith(expect.anything())
+  })
 })

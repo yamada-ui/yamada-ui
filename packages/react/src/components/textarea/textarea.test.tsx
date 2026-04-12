@@ -1,4 +1,5 @@
-import { a11y, render, screen } from "#test"
+import { a11y, fireEvent, render, screen } from "#test"
+import { InputPropsContext } from "../input"
 import { Textarea } from "./"
 
 describe("<Textarea />", () => {
@@ -71,5 +72,37 @@ describe("<Textarea />", () => {
       value: fontsData,
       writable: true,
     })
+  })
+
+  test("merges `className`, `style`, and event handlers from context and props", () => {
+    const onContextClick = vi.fn()
+    const onPropsClick = vi.fn()
+
+    render(
+      <InputPropsContext
+        value={{
+          className: "from-context",
+          style: { color: "red" },
+          onClick: onContextClick,
+        }}
+      >
+        <Textarea
+          className="from-props"
+          style={{ backgroundColor: "blue" }}
+          onClick={onPropsClick}
+        />
+      </InputPropsContext>,
+    )
+
+    const textarea = screen.getByRole("textbox")
+
+    expect(textarea).toHaveClass("from-context", "from-props")
+    expect(textarea).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(textarea).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(textarea)
+
+    expect(onContextClick).toHaveBeenCalledTimes(1)
+    expect(onPropsClick).toHaveBeenCalledTimes(1)
   })
 })

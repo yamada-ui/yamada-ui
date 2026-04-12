@@ -20,9 +20,7 @@ describe("<PasswordInput />", () => {
 
     await expect.element(input).toHaveClass("ui-password-input__field")
     await expect.element(button).toHaveClass("ui-password-input__button")
-    await expect
-      .element(input.locator("xpath=.."))
-      .toHaveClass("ui-password-input__root")
+    expect(input.element().parentElement).toHaveClass("ui-password-input__root")
   })
 
   test("renders HTML tag correctly", async () => {

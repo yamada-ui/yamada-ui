@@ -1,6 +1,8 @@
-import { a11y, render, screen } from "#test"
+import { a11y, fireEvent, render, screen } from "#test"
+import { vi } from "vitest"
 import { NativeSelect } from "."
 import { BoxIcon } from "../icon"
+import { InputPropsContext } from "../input"
 
 describe("<NativeSelect />", () => {
   test("renders component correctly", async () => {
@@ -51,6 +53,73 @@ describe("<NativeSelect />", () => {
     expect(screen.getByRole("group", { name: "地球人" })).toHaveClass(
       "ui-native-select__group",
     )
+  })
+
+  test("merges root props with user props in NativeSelect.Root", () => {
+    const onClickFromRoot = vi.fn()
+    const onClickFromUser = vi.fn()
+
+    render(
+      <NativeSelect.Root
+        className="from-user"
+        css={{ color: "rgb(255, 0, 0)" }}
+        data-testid="native-select-field"
+        rootProps={{
+          className: "from-root",
+          css: { backgroundColor: "rgb(0, 0, 255)" },
+          "data-testid": "native-select-root",
+          onClick: onClickFromRoot,
+        }}
+        onClick={onClickFromUser}
+      />,
+    )
+
+    const root = screen.getByTestId("native-select-root")
+    const field = screen.getByTestId("native-select-field")
+
+    expect(root).toHaveClass("from-root", "from-user")
+    expect(root).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(root).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(field)
+
+    expect(onClickFromRoot).toHaveBeenCalledTimes(1)
+    expect(onClickFromUser).toHaveBeenCalledTimes(1)
+  })
+
+  test("merges input props context with user props", () => {
+    const onClickFromRoot = vi.fn()
+    const onClickFromUser = vi.fn()
+
+    render(
+      <InputPropsContext
+        value={{
+          className: "from-root",
+          style: { color: "rgb(255, 0, 0)" },
+          onClick: onClickFromRoot,
+        }}
+      >
+        <NativeSelect.Root
+          className="from-user"
+          style={{ backgroundColor: "rgb(0, 0, 255)" }}
+          data-testid="native-select-field"
+          rootProps={{ "data-testid": "native-select-root" }}
+          onClick={onClickFromUser}
+        />
+      </InputPropsContext>,
+    )
+
+    const root = screen.getByTestId("native-select-root")
+    const field = screen.getByTestId("native-select-field")
+
+    expect(root).toHaveClass("from-root", "from-user")
+    expect(field).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(field).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(field)
+
+    expect(onClickFromRoot).toHaveBeenCalledTimes(1)
+    expect(onClickFromUser).toHaveBeenCalledTimes(1)
   })
 
   test("should render select with props", async () => {

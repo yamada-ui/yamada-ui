@@ -1,7 +1,9 @@
 import type { DatePickerProps } from "."
 import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { useState } from "react"
+import { vi } from "vitest"
 import { DatePicker } from "."
+import { InputPropsContext } from "../input"
 
 const ControlledDatePicker = ({ defaultValue, ...props }: DatePickerProps) => {
   const [value, setValue] = useState<Date | undefined>(defaultValue as Date)
@@ -33,6 +35,71 @@ describe("<DatePicker />", () => {
     expect(screen.getAllByRole("combobox")[0]!).toHaveClass(
       "ui-date-picker__field",
     )
+  })
+
+  test("merges root props without overwriting user props", () => {
+    const onRootClick = vi.fn()
+    const onUserClick = vi.fn()
+
+    render(
+      <DatePicker
+        className="from-root"
+        defaultOpen
+        rootProps={{
+          className: "from-user",
+          style: {
+            backgroundColor: "rgb(0, 0, 255)",
+            color: "rgb(255, 0, 0)",
+          },
+          "data-testid": "root",
+          onClick: onUserClick,
+        }}
+        onClick={onRootClick}
+      />,
+    )
+
+    const el = screen.getByTestId("root")
+    fireEvent.click(screen.getAllByRole("combobox")[0]!)
+
+    expect(el).toHaveClass("from-root", "from-user")
+    expect(el).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(el).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+    expect(onRootClick).toHaveBeenCalledTimes(1)
+    expect(onUserClick).toHaveBeenCalledTimes(1)
+  })
+
+  test("merges input context props without overwriting user props", () => {
+    const onRootClick = vi.fn()
+    const onUserClick = vi.fn()
+
+    render(
+      <InputPropsContext
+        value={{
+          className: "from-root",
+          style: { color: "rgb(255, 0, 0)" },
+          onClick: onRootClick,
+        }}
+      >
+        <DatePicker
+          className="from-user"
+          style={{ backgroundColor: "rgb(0, 0, 255)" }}
+          defaultOpen
+          rootProps={{ "data-testid": "root" }}
+          onClick={onUserClick}
+        />
+      </InputPropsContext>,
+    )
+
+    const root = screen.getByTestId("root")
+    const el = screen.getAllByRole("combobox")[0]!
+
+    fireEvent.click(el)
+
+    expect(root).toHaveClass("from-root", "from-user")
+    expect(el).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(el).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+    expect(onRootClick).toHaveBeenCalledTimes(1)
+    expect(onUserClick).toHaveBeenCalledTimes(1)
   })
 
   test("renders HTML tag correctly", () => {

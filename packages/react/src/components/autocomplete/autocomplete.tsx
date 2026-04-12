@@ -21,7 +21,7 @@ import type {
   UseAutocompleteReturn,
 } from "./use-autocomplete"
 import { useMemo } from "react"
-import { createSlotComponent, styled } from "../../core"
+import { createSlotComponent, mergeProps, styled } from "../../core"
 import {
   ComboboxContext,
   ComboboxDescendantsContext,
@@ -244,10 +244,12 @@ export const AutocompleteRoot = withProvider(
             <ComponentContext value={componentContext}>
               <Popover.Root {...mergedPopoverProps}>
                 <InputGroup.Root
-                  className={className}
-                  css={css}
                   colorScheme={colorScheme}
-                  {...getRootProps({ ...groupItemProps, ...rootProps })}
+                  {...mergeProps(
+                    { className, css },
+                    getRootProps(groupItemProps),
+                    rootProps,
+                  )()}
                 >
                   <Popover.Trigger>
                     <AutocompleteField {...getFieldProps(varProps)}>
@@ -290,7 +292,7 @@ export const AutocompleteRoot = withProvider(
 )((props) => {
   const context = useInputPropsContext()
 
-  return { ...context, ...props }
+  return mergeProps(context, props)()
 }) as GenericsComponent<{
   <Multiple extends boolean = false>(
     props: AutocompleteRootProps<Multiple>,
@@ -368,10 +370,9 @@ export interface AutocompleteGroupProps
 export const AutocompleteGroup = withContext<"div", AutocompleteGroupProps>(
   ({ children, label, labelProps, ...rest }) => {
     const { groupProps } = useComponentContext()
-    const { getGroupProps, getLabelProps } = useComboboxGroup({
-      ...groupProps,
-      ...rest,
-    })
+    const { getGroupProps, getLabelProps } = useComboboxGroup(
+      mergeProps(groupProps, rest)(),
+    )
     const context = useMemo(() => ({ getLabelProps }), [getLabelProps])
 
     return (
@@ -399,10 +400,9 @@ export interface AutocompleteOptionProps
 export const AutocompleteOption = withContext<"div", AutocompleteOptionProps>(
   ({ children, icon: iconProp, ...rest }) => {
     const { optionProps: { icon, ...optionProps } = {} } = useComponentContext()
-    const { getIndicatorProps, getOptionProps } = useAutocompleteOption({
-      ...optionProps,
-      ...rest,
-    })
+    const { getIndicatorProps, getOptionProps } = useAutocompleteOption(
+      mergeProps(optionProps, rest)(),
+    )
 
     return (
       <styled.div {...getOptionProps()}>
@@ -428,7 +428,7 @@ const AutocompleteEmpty = withContext<"div", AutocompleteEmptyProps>(
     const { emptyIcon, emptyProps } = useComponentContext()
 
     return (
-      <styled.div {...emptyProps} {...rest}>
+      <styled.div {...mergeProps(emptyProps, rest)()}>
         <AutocompleteIndicator>
           {icon ?? emptyIcon ?? <MinusIcon />}
         </AutocompleteIndicator>

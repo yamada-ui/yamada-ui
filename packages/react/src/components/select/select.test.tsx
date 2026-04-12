@@ -8,7 +8,7 @@ import {
   screen,
   waitFor,
 } from "#test"
-import { useState } from "react"
+import { createRef, useState } from "react"
 import { Select, useSelect } from "."
 
 const items: Select.Item[] = [
@@ -1374,5 +1374,128 @@ describe("<Select />", () => {
     )
 
     expect(screen.getByTestId("root-wrapper")).toBeInTheDocument()
+  })
+
+  test("merges `className`, `style`, and event handlers on root with `rootProps`", () => {
+    const onClick = vi.fn()
+
+    render(
+      <Select.Root
+        className="from-root"
+        items={items}
+        placeholder="Choose a option"
+        rootProps={{
+          className: "from-user",
+          style: { backgroundColor: "blue", color: "red" },
+          "data-testid": "root",
+          onClick,
+        }}
+      />,
+    )
+
+    const root = screen.getByTestId("root")
+
+    expect(root).toHaveClass("ui-select__root", "from-root", "from-user")
+    expect(root).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(root).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(root)
+
+    expect(onClick).toHaveBeenCalledWith(expect.anything())
+  })
+
+  test("merges `groupProps` on root with user props on `Select.Group`", () => {
+    const onRootClick = vi.fn()
+    const onGroupClick = vi.fn()
+
+    render(
+      <Select.Root
+        defaultOpen
+        placeholder="Choose a option"
+        groupProps={{
+          className: "from-root",
+          style: { color: "red" },
+          onClick: onRootClick,
+        }}
+      >
+        <Select.Group
+          className="from-user"
+          style={{ backgroundColor: "blue" }}
+          data-testid="group"
+          label="Group"
+          onClick={onGroupClick}
+        >
+          <Select.Option value="one">Option 1</Select.Option>
+        </Select.Group>
+      </Select.Root>,
+    )
+
+    const group = screen.getByTestId("group")
+
+    expect(group).toHaveClass("ui-select__group", "from-root", "from-user")
+    expect(group).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(group).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(group)
+
+    expect(onRootClick).toHaveBeenCalledWith(expect.anything())
+    expect(onGroupClick).toHaveBeenCalledWith(expect.anything())
+  })
+
+  test("merges `optionProps` on root with user props on `Select.Option`", () => {
+    const onRootClick = vi.fn()
+    const onOptionClick = vi.fn()
+
+    render(
+      <Select.Root
+        defaultOpen
+        placeholder="Choose a option"
+        optionProps={{
+          className: "from-root",
+          style: { color: "red" },
+          onClick: onRootClick,
+        }}
+      >
+        <Select.Option
+          className="from-user"
+          style={{ backgroundColor: "blue" }}
+          data-testid="option"
+          value="one"
+          onClick={onOptionClick}
+        >
+          Option 1
+        </Select.Option>
+      </Select.Root>,
+    )
+
+    const option = screen.getByTestId("option")
+
+    expect(option).toHaveClass("ui-select__option", "from-root", "from-user")
+    expect(option).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(option).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(option)
+
+    expect(onRootClick).toHaveBeenCalledWith(expect.anything())
+    expect(onOptionClick).toHaveBeenCalledWith(expect.anything())
+  })
+
+  test("merges `ref` on `rootProps` with internal ref", () => {
+    const userRef = createRef<HTMLDivElement>()
+
+    render(
+      <Select.Root
+        items={items}
+        placeholder="Choose a option"
+        rootProps={{
+          ref: userRef,
+          "data-testid": "root",
+        }}
+      />,
+    )
+
+    const root = screen.getByTestId("root")
+
+    expect(userRef.current).toBe(root)
   })
 })

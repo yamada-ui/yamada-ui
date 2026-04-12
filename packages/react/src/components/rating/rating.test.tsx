@@ -43,6 +43,7 @@ describe("<Rating />", () => {
         groupProps={(value) => ({
           className: `group-${value}`,
           style: { outlineColor: "red" },
+          value,
           onClick,
         })}
       />,

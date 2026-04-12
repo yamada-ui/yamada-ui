@@ -210,7 +210,7 @@ const RatingGroup = withContext<"div", RatingGroupProps>(
     )
 
     return (
-      <styled.div {...mergeProps(runIfFn(groupProps, value), rest)()}>
+      <styled.div {...mergeProps(rest, runIfFn(groupProps, value))()}>
         {Array.from({ length: count }).map((_, index) => (
           <RatingItem key={index} groupValue={value} index={index} />
         ))}
@@ -249,10 +249,8 @@ const RatingItem = withContext<"label", RatingItemProps>((props) => {
       <styled.input {...getInputProps(runIfFn(inputProps, groupValue))} />
 
       <RatingIcon
-        {...mergeProps(
-          { "--clip-path": clipPath },
-          runIfFn(iconProps, groupValue),
-        )()}
+        {...{ "--clip-path": clipPath }}
+        {...runIfFn(iconProps, groupValue)}
       >
         {filled
           ? runIfFn(filledIcon, groupValue)

@@ -60,7 +60,7 @@
     "@storybook/react-vite": "^10.3.4",
     "@storybook/test-runner": "^0.24.3",
     "@types/babel__traverse": "^7.28.0",
-    "@types/node": "^25.5.0",
+    "@types/node": "^25.5.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@typescript/analyze-trace": "^0.10.1",

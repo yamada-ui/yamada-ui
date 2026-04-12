@@ -1,4 +1,10 @@
-import { a11y, fireEvent, render, screen } from "#test"
+import {
+  a11y,
+  fireEvent,
+  hasSuppressHydrationWarning,
+  render,
+  screen,
+} from "#test"
 import { vi } from "vitest"
 import { Slider } from "."
 import { noop } from "../../utils"
@@ -132,10 +138,7 @@ describe("<Slider />", () => {
     )
 
     const input = container.querySelector('input[type="hidden"]')
-    const key = Object.keys(input!).find((k) => k.startsWith("__reactProps$"))
-    expect(key).toBeDefined()
-    const props = Reflect.get(input!, key!)
-    expect(props.suppressHydrationWarning).toBeTruthy()
+    expect(hasSuppressHydrationWarning(input)).toBeTruthy()
   })
 
   test("propagates `suppressHydrationWarning` to hidden `<input>`s in range mode", () => {
@@ -145,23 +148,15 @@ describe("<Slider />", () => {
 
     const inputs = container.querySelectorAll('input[type="hidden"]')
     expect(inputs).toHaveLength(2)
-
-    for (const input of inputs) {
-      const key = Object.keys(input).find((k) => k.startsWith("__reactProps$"))
-      expect(key).toBeDefined()
-      const props = Reflect.get(input, key!)
-      expect(props.suppressHydrationWarning).toBeTruthy()
-    }
+    expect(hasSuppressHydrationWarning(inputs[0])).toBeTruthy()
+    expect(hasSuppressHydrationWarning(inputs[1])).toBeTruthy()
   })
 
   test("does not set `suppressHydrationWarning` on the hidden `<input>` when omitted", () => {
     const { container } = render(<Slider.Root defaultValue={50} />)
 
     const input = container.querySelector('input[type="hidden"]')
-    const key = Object.keys(input!).find((k) => k.startsWith("__reactProps$"))
-    expect(key).toBeDefined()
-    const props = Reflect.get(input!, key!)
-    expect(props.suppressHydrationWarning).toBeFalsy()
+    expect(hasSuppressHydrationWarning(input)).toBeFalsy()
   })
 
   test("allows `inputProps` to override `suppressHydrationWarning` on the hidden `<input>`", () => {
@@ -174,10 +169,7 @@ describe("<Slider />", () => {
     )
 
     const input = container.querySelector('input[type="hidden"]')
-    const key = Object.keys(input!).find((k) => k.startsWith("__reactProps$"))
-    expect(key).toBeDefined()
-    const props = Reflect.get(input!, key!)
-    expect(props.suppressHydrationWarning).toBeFalsy()
+    expect(hasSuppressHydrationWarning(input)).toBeFalsy()
   })
 
   test("renders marks with object format including labels", () => {

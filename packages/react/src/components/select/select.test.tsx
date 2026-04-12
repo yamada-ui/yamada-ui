@@ -8,7 +8,7 @@ import {
   screen,
   waitFor,
 } from "#test"
-import { useState } from "react"
+import { createRef, useState } from "react"
 import { Select, useSelect } from "."
 
 const items: Select.Item[] = [
@@ -1478,5 +1478,24 @@ describe("<Select />", () => {
 
     expect(onRootClick).toHaveBeenCalledWith(expect.anything())
     expect(onOptionClick).toHaveBeenCalledWith(expect.anything())
+  })
+
+  test("merges `ref` on `rootProps` with internal ref", () => {
+    const userRef = createRef<HTMLDivElement>()
+
+    render(
+      <Select.Root
+        items={items}
+        placeholder="Choose a option"
+        rootProps={{
+          ref: userRef,
+          "data-testid": "root",
+        }}
+      />,
+    )
+
+    const root = screen.getByTestId("root")
+
+    expect(userRef.current).toBe(root)
   })
 })

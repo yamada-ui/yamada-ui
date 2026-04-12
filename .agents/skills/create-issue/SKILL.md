@@ -111,7 +111,7 @@ Use tools to interact with the user throughout the process.
      [--assignee @me]  # Only if PR intent is Yes
    ```
 
-   **For the `ai-used` checkboxes field in the template:** because this skill is AI-driven by definition, render "I checked the generated content before submitting." as `[x]` (checked) and "I did not use AI to create this issue." as `[ ]` (unchecked) in `--body`.
+   **For the `ai-used` checkboxes field in the template:** because this skill is AI-driven by definition, copy the options exactly as written in the template into `--body`, with the "checked the generated content" option set to `[x]` and the "did not use AI" option set to `[ ]`.
    - Wait for user approval
    - Apply any requested changes and re-present before proceeding
 

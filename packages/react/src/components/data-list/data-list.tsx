@@ -4,7 +4,7 @@ import type { ReactNode } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { DataListStyle } from "./data-list.style"
 import { useMemo } from "react"
-import { createSlotComponent, styled } from "../../core"
+import { createSlotComponent, mergeProps, styled } from "../../core"
 import {
   getValidChildren,
   isArray,
@@ -169,12 +169,15 @@ export const DataListItem = withContext<"div", DataListItemProps>(
           customTerms
         ) : isArray(term) ? (
           term.map((item, index) => (
-            <DataListTerm key={index} {...termProps} {...customTermProps}>
+            <DataListTerm
+              key={index}
+              {...mergeProps(termProps, customTermProps)()}
+            >
               {item}
             </DataListTerm>
           ))
         ) : (
-          <DataListTerm {...termProps} {...customTermProps}>
+          <DataListTerm {...mergeProps(termProps, customTermProps)()}>
             {term}
           </DataListTerm>
         )}
@@ -185,16 +188,14 @@ export const DataListItem = withContext<"div", DataListItemProps>(
           description.map((item, index) => (
             <DataListDescription
               key={index}
-              {...descriptionProps}
-              {...customDescriptionProps}
+              {...mergeProps(descriptionProps, customDescriptionProps)()}
             >
               {item}
             </DataListDescription>
           ))
         ) : (
           <DataListDescription
-            {...descriptionProps}
-            {...customDescriptionProps}
+            {...mergeProps(descriptionProps, customDescriptionProps)()}
           >
             {description}
           </DataListDescription>

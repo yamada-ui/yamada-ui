@@ -14,11 +14,16 @@ export interface RingsProps extends LoadingProps {}
  * @see https://yamada-ui.com/docs/components/feedback/loading
  */
 export const Rings = withContext<"svg", RingsProps>(
-  ({ dur = "3s", ...rest }) => {
+  ({ dur = "3s", suppressHydrationWarning, ...rest }) => {
     dur = isString(dur) ? parseFloat(dur) : dur
 
     return (
-      <Icon stroke="currentColor" viewBox="0 0 45 45" {...rest}>
+      <Icon
+        stroke="currentColor"
+        suppressHydrationWarning={suppressHydrationWarning}
+        viewBox="0 0 45 45"
+        {...rest}
+      >
         <g
           fill="none"
           fillRule="evenodd"
@@ -34,6 +39,7 @@ export const Rings = withContext<"svg", RingsProps>(
             cy="22px"
             r="6px"
             strokeOpacity="0"
+            suppressHydrationWarning={suppressHydrationWarning}
             transformBox="fill-box"
             transformOrigin="center"
             _keyframes={{
@@ -58,6 +64,7 @@ export const Rings = withContext<"svg", RingsProps>(
             cy="22px"
             r="6px"
             strokeOpacity="0"
+            suppressHydrationWarning={suppressHydrationWarning}
             transformBox="fill-box"
             transformOrigin="center"
             _keyframes={{
@@ -80,6 +87,7 @@ export const Rings = withContext<"svg", RingsProps>(
             cx="22px"
             cy="22px"
             r="8px"
+            suppressHydrationWarning={suppressHydrationWarning}
             transformBox="fill-box"
             transformOrigin="center"
             _keyframes={{

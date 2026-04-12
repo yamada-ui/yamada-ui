@@ -446,6 +446,87 @@ describe("<DataList />", () => {
     expect(terms[1]).toHaveTextContent("山田竜")
   })
 
+  test("DataListItem merges event and className for array term props", () => {
+    const onContextTermClick = vi.fn()
+    const onItemTermClick = vi.fn()
+
+    render(
+      <DataList.Root
+        termProps={
+          {
+            className: "context-term",
+            onClick: onContextTermClick,
+          } as any
+        }
+      >
+        <DataList.Item
+          description="入れ替わりの魔女"
+          term={["白石うらら", "山田竜"]}
+          termProps={
+            {
+              className: "item-term",
+              onClick: onItemTermClick,
+            } as any
+          }
+        />
+      </DataList.Root>,
+    )
+
+    const terms = screen.getAllByText(/白石うらら|山田竜/)
+    expect(terms).toHaveLength(2)
+
+    for (const term of terms) {
+      expect(term).toHaveClass("context-term")
+      expect(term).toHaveClass("item-term")
+    }
+
+    fireEvent.click(terms[0]!)
+
+    expect(onContextTermClick).toHaveBeenCalledTimes(1)
+    expect(onItemTermClick).toHaveBeenCalledTimes(1)
+  })
+
+  test("DataListItem merges event and className for array description props", () => {
+    const onContextDescriptionClick = vi.fn()
+    const onItemDescriptionClick = vi.fn()
+
+    render(
+      <DataList.Root
+        descriptionProps={
+          {
+            className: "context-description",
+            onClick: onContextDescriptionClick,
+          } as any
+        }
+      >
+        <DataList.Item
+          description={["入れ替わりの魔女", "テレポーテーション"]}
+          term="白石うらら"
+          descriptionProps={
+            {
+              className: "item-description",
+              onClick: onItemDescriptionClick,
+            } as any
+          }
+        />
+      </DataList.Root>,
+    )
+
+    const descriptions =
+      screen.getAllByText(/入れ替わりの魔女|テレポーテーション/)
+    expect(descriptions).toHaveLength(2)
+
+    for (const desc of descriptions) {
+      expect(desc).toHaveClass("context-description")
+      expect(desc).toHaveClass("item-description")
+    }
+
+    fireEvent.click(descriptions[0]!)
+
+    expect(onContextDescriptionClick).toHaveBeenCalledTimes(1)
+    expect(onItemDescriptionClick).toHaveBeenCalledTimes(1)
+  })
+
   test("DataList with context descriptionProps applies to items generated from items prop", () => {
     render(
       <DataList.Root

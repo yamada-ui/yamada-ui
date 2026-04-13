@@ -1,5 +1,5 @@
 import type { UseAutosizeProps } from "./use-autosize"
-import { fireEvent, render, renderHook, screen } from "#test"
+import { page, render, renderHook } from "#test/browser"
 import { useAutosize } from "./use-autosize"
 
 const mockComputedStyle: Partial<CSSStyleDeclaration> = {
@@ -96,6 +96,32 @@ const AutoSizeTextarea = ({
   )
 }
 
+const getTextarea = () =>
+  page.getByTestId("autosize-textarea").element() as HTMLTextAreaElement
+
+const setNativeValue = (textarea: HTMLTextAreaElement, value: string) => {
+  const valueSetter = Object.getOwnPropertyDescriptor(textarea, "value")?.set
+  const prototype = Object.getPrototypeOf(textarea) as HTMLTextAreaElement
+  const prototypeValueSetter = Object.getOwnPropertyDescriptor(
+    prototype,
+    "value",
+  )?.set
+
+  if (prototypeValueSetter && valueSetter !== prototypeValueSetter) {
+    prototypeValueSetter.call(textarea, value)
+  } else if (valueSetter) {
+    valueSetter.call(textarea, value)
+  } else {
+    textarea.value = value
+  }
+}
+
+const changeTextareaValue = (textarea: HTMLTextAreaElement, value: string) => {
+  setNativeValue(textarea, value)
+  textarea.dispatchEvent(new Event("input", { bubbles: true }))
+  textarea.dispatchEvent(new Event("change", { bubbles: true }))
+}
+
 describe("useAutosize", () => {
   let cleanupComputedStyle: () => void
   let cleanupScrollHeight: () => void
@@ -114,51 +140,49 @@ describe("useAutosize", () => {
     vi.restoreAllMocks()
   })
 
-  test("adjusts the rows of the textarea based on content", () => {
-    render(<AutoSizeTextarea />)
+  test("adjusts the rows of the textarea based on content", async () => {
+    await render(<AutoSizeTextarea />)
+    const textarea = getTextarea()
 
-    const textarea = screen.getByTestId("autosize-textarea")
+    changeTextareaValue(textarea, "Line 1\nLine 2\nLine 3\nLine 4\nLine 5")
 
-    fireEvent.change(textarea, {
-      target: { value: "Line 1\nLine 2\nLine 3\nLine 4\nLine 5" },
+    await vi.waitFor(() => {
+      expect(textarea.rows).toBe(5)
     })
-
-    expect((textarea as HTMLTextAreaElement).rows).toBe(5)
   })
 
-  test("does not exceed maxRows", () => {
-    render(<AutoSizeTextarea maxRows={3} />)
+  test("does not exceed maxRows", async () => {
+    await render(<AutoSizeTextarea maxRows={3} />)
+    const textarea = getTextarea()
 
-    const textarea = screen.getByTestId("autosize-textarea")
+    changeTextareaValue(textarea, "Line 1\nLine 2\nLine 3\nLine 4\nLine 5")
 
-    fireEvent.change(textarea, {
-      target: { value: "Line 1\nLine 2\nLine 3\nLine 4\nLine 5" },
+    await vi.waitFor(() => {
+      expect(textarea.rows).toBe(3)
     })
-
-    expect((textarea as HTMLTextAreaElement).rows).toBe(3)
   })
 
-  test("does not go below minRows", () => {
-    render(<AutoSizeTextarea minRows={4} />)
+  test("does not go below minRows", async () => {
+    await render(<AutoSizeTextarea minRows={4} />)
+    const textarea = getTextarea()
 
-    const textarea = screen.getByTestId("autosize-textarea")
+    changeTextareaValue(textarea, "short")
 
-    fireEvent.change(textarea, {
-      target: { value: "short" },
+    await vi.waitFor(() => {
+      expect(textarea.rows).toBe(4)
     })
-
-    expect((textarea as HTMLTextAreaElement).rows).toBe(4)
   })
 
-  test("uses placeholder when value is empty", () => {
-    render(<AutoSizeTextarea placeholder="Enter text here" />)
+  test("uses placeholder when value is empty", async () => {
+    await render(<AutoSizeTextarea placeholder="Enter text here" />)
+    const textarea = getTextarea()
 
-    const textarea = screen.getByTestId("autosize-textarea")
-
-    expect((textarea as HTMLTextAreaElement).rows).toBe(2)
+    await vi.waitFor(() => {
+      expect(textarea.rows).toBe(2)
+    })
   })
 
-  test("falls back to lineBreaks when scrollHeight is 0", () => {
+  test("falls back to lineBreaks when scrollHeight is 0", async () => {
     cleanupScrollHeight()
 
     const originalCloneNode = HTMLElement.prototype.cloneNode
@@ -172,101 +196,83 @@ describe("useAutosize", () => {
       return cloned
     }
 
-    render(<AutoSizeTextarea maxRows={10} minRows={1} />)
+    await render(<AutoSizeTextarea maxRows={10} minRows={1} />)
+    const textarea = getTextarea()
 
-    const textarea = screen.getByTestId("autosize-textarea")
+    changeTextareaValue(textarea, "Line 1\nLine 2\nLine 3")
 
-    fireEvent.change(textarea, {
-      target: { value: "Line 1\nLine 2\nLine 3" },
+    await vi.waitFor(() => {
+      expect(textarea.rows).toBe(3)
     })
-
-    expect((textarea as HTMLTextAreaElement).rows).toBe(3)
 
     HTMLElement.prototype.cloneNode = originalCloneNode
   })
 
-  test("sets resize to none when autosize is not disabled", () => {
-    render(<AutoSizeTextarea />)
+  test("sets resize to none when autosize is not disabled", async () => {
+    await render(<AutoSizeTextarea />)
 
-    const textarea = screen.getByTestId("autosize-textarea")
-
-    expect(textarea.style.resize).toBe("none")
+    expect(getTextarea().style.resize).toBe("none")
   })
 
-  test("does not set resize when disabled", () => {
-    render(<AutoSizeTextarea disabled />)
+  test("does not set resize when disabled", async () => {
+    await render(<AutoSizeTextarea disabled />)
 
-    const textarea = screen.getByTestId("autosize-textarea")
-
-    expect(textarea.style.resize).toBe("")
+    expect(getTextarea().style.resize).toBe("")
   })
 
-  test("does not resize when disabled", () => {
-    render(<AutoSizeTextarea disabled />)
+  test("does not resize when disabled", async () => {
+    await render(<AutoSizeTextarea disabled />)
+    const textarea = getTextarea()
 
-    const textarea = screen.getByTestId("autosize-textarea")
+    changeTextareaValue(textarea, "Line 1\nLine 2\nLine 3\nLine 4\nLine 5")
 
-    fireEvent.change(textarea, {
-      target: { value: "Line 1\nLine 2\nLine 3\nLine 4\nLine 5" },
+    expect(textarea.rows).not.toBe(5)
+  })
+
+  test("resizes when value changes via rerender", async () => {
+    const { rerender } = await render(<AutoSizeTextarea minRows={1} />)
+    const textarea = getTextarea()
+
+    changeTextareaValue(textarea, "Line 1\nLine 2\nLine 3")
+
+    await vi.waitFor(() => {
+      expect(textarea.rows).toBe(3)
     })
-
-    expect((textarea as HTMLTextAreaElement).rows).not.toBe(5)
-  })
-
-  test("resizes when value changes via rerender", () => {
-    const { rerender } = render(<AutoSizeTextarea minRows={1} />)
-
-    const textarea = screen.getByTestId("autosize-textarea")
-
-    fireEvent.change(textarea, {
-      target: { value: "Line 1\nLine 2\nLine 3" },
-    })
-
-    expect((textarea as HTMLTextAreaElement).rows).toBe(3)
 
     rerender(<AutoSizeTextarea minRows={1} />)
   })
 
-  test("returns ref and onResizeTextarea from hook", () => {
-    const { result } = renderHook(() => useAutosize())
+  test("returns ref and onResizeTextarea from hook", async () => {
+    const { result } = await renderHook(() => useAutosize())
 
     expect(result.current.ref).toBeDefined()
     expect(result.current.getTextareaProps).toBeDefined()
     expect(result.current.onResizeTextarea).toBeDefined()
   })
 
-  test("skips resize when getSizingStyle returns null", () => {
+  test("skips resize when getSizingStyle returns null", async () => {
     cleanupComputedStyle()
     vi.spyOn(window, "getComputedStyle").mockImplementation(
       () => ({ boxSizing: "" }) as CSSStyleDeclaration,
     )
 
-    render(<AutoSizeTextarea />)
+    await render(<AutoSizeTextarea />)
+    const textarea = getTextarea()
 
-    const textarea = screen.getByTestId("autosize-textarea")
+    changeTextareaValue(textarea, "Line 1\nLine 2\nLine 3")
 
-    fireEvent.change(textarea, {
-      target: { value: "Line 1\nLine 2\nLine 3" },
-    })
-
-    expect((textarea as HTMLTextAreaElement).rows).not.toBe(3)
+    expect(textarea.rows).not.toBe(3)
   })
 
-  test("does not resize when value has not changed", () => {
-    render(<AutoSizeTextarea />)
+  test("does not resize when value has not changed", async () => {
+    await render(<AutoSizeTextarea />)
+    const textarea = getTextarea()
 
-    const textarea = screen.getByTestId("autosize-textarea")
+    changeTextareaValue(textarea, "test")
+    const rowsAfterFirst = textarea.rows
 
-    fireEvent.change(textarea, {
-      target: { value: "test" },
-    })
+    changeTextareaValue(textarea, "test")
 
-    const rowsAfterFirst = (textarea as HTMLTextAreaElement).rows
-
-    fireEvent.change(textarea, {
-      target: { value: "test" },
-    })
-
-    expect((textarea as HTMLTextAreaElement).rows).toBe(rowsAfterFirst)
+    expect(textarea.rows).toBe(rowsAfterFirst)
   })
 })

@@ -16,11 +16,20 @@ Use tools to interact with the user throughout the process.
    - Autonomously locate the `.github/ISSUE_TEMPLATE/` directory in the repository and list English templates (excluding `.ja.yml` files)
    - Read each template file to understand its `name` and required fields
 
-3. **Confirm issue type**
-   - Present the available templates to the user and ask which type fits their need
-   - Suggest the appropriate type if unclear
+3. **Assess available context**
+   - Evaluate whether the current conversation (arguments, prior messages) already contains enough information to draft the issue without asking the user:
+     - Issue type can be determined (e.g., bug, feature, docs)
+     - A clear title and description can be constructed
+     - PR intent can be inferred (e.g., the user said "I'll fix it" → `Yes`; no mention → default to `No`)
+   - **If sufficient context exists:** skip steps 3a and 4, proceed directly to step 5 using the inferred values. Do not ask the user for information that is already present.
+   - **If context is insufficient:** follow steps 3a and 4 to collect the missing information interactively.
 
-4. **Collect information**
+3a. **Confirm issue type** _(skip if context is sufficient)_
+
+- Present the available templates to the user and ask which type fits their need
+- Suggest the appropriate type if unclear
+
+4. **Collect information** _(skip fields already known from context)_
    - Ask for all required fields from the selected template
    - Ask follow-up questions to gather concrete details, code snippets, and URLs
    - **For the "PR intent" field, offer three options (separate from the template's Yes/No):**

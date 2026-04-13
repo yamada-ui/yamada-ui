@@ -1,6 +1,8 @@
 ---
 name: create-issue
 description: "Create a GitHub Issue for yamada-ui. Use when the user says they want to create an issue, report a bug, request a feature, report a documentation problem, or file an issue against yamada-ui."
+metadata:
+  internal: true
 ---
 
 Create a GitHub Issue for yamada-ui.

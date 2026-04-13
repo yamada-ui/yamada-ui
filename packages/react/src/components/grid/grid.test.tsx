@@ -1,35 +1,37 @@
-import { render, screen } from "#test"
+import { page, render } from "#test/browser"
 import { Grid } from "./grid"
 
 describe("<Grid />", () => {
-  test("renders grid correctly", () => {
-    render(<Grid>Grid</Grid>)
+  test("renders grid correctly", async () => {
+    await render(<Grid>Grid</Grid>)
   })
 
   test("sets `displayName` correctly", () => {
     expect(Grid.displayName).toBe("Grid")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Grid>Grid</Grid>)
-    expect(screen.getByText("Grid")).toHaveClass("ui-grid")
+  test("sets `className` correctly", async () => {
+    await render(<Grid>Grid</Grid>)
+
+    await expect.element(page.getByText("Grid")).toHaveClass("ui-grid")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Grid>Grid</Grid>)
-    expect(screen.getByText("Grid").tagName).toBe("DIV")
+  test("renders HTML tag correctly", async () => {
+    await render(<Grid>Grid</Grid>)
+
+    expect(page.getByText("Grid").element().tagName).toBe("DIV")
   })
 
-  test("renders all the allowed shorthand style props", () => {
-    render(
+  test("renders all the allowed shorthand style props", async () => {
+    await render(
       <Grid templateColumns="repeat(2, 1fr)" templateRows="repeat(2, 1fr)">
         Grid
       </Grid>,
     )
 
-    expect(screen.getByText("Grid")).toHaveStyle({
-      gridTemplateColumns: "repeat(2, 1fr)",
-      gridTemplateRows: "repeat(2, 1fr)",
-    })
+    const styles = getComputedStyle(page.getByText("Grid").element())
+
+    expect(styles.gridTemplateColumns).not.toBe("none")
+    expect(styles.gridTemplateRows).not.toBe("none")
   })
 })

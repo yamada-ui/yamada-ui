@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { RadioCard, RadioCardGroup } from "."
 
 const items = [
@@ -35,39 +35,35 @@ describe("<RadioCard />", () => {
     expect(RadioCardGroup.Root.displayName).toBe("RadioCardGroup")
   })
 
-  test("sets `className` correctly", () => {
-    render(<RadioCardGroup.Root items={items} />)
-    const radio = screen.getAllByRole("radio")[0]
-    expect(screen.getByRole("radiogroup")).toHaveClass("ui-radio-card__group")
-    expect(radio?.parentElement).toHaveClass("ui-radio-card__root")
-    expect(radio?.parentElement?.children[1]).toHaveClass(
-      "ui-radio-card__indicator",
-    )
-    expect(radio?.parentElement?.children[2]).toHaveClass(
-      "ui-radio-card__label",
-    )
-    expect(radio?.parentElement?.children[3]).toHaveClass(
-      "ui-radio-card__description",
-    )
-    expect(radio?.parentElement?.children[4]).toHaveClass(
-      "ui-radio-card__addon",
-    )
+  test("sets `className` correctly", async () => {
+    await render(<RadioCardGroup.Root items={items} />)
+    const radio = page.getByRole("radio", { name: "Item 1" }).element()
+    const root = radio.parentElement as HTMLElement
+    await expect
+      .element(page.getByRole("radiogroup"))
+      .toHaveClass("ui-radio-card__group")
+    expect(root).toHaveClass("ui-radio-card__root")
+    expect(root.children[1]).toHaveClass("ui-radio-card__indicator")
+    expect(root.children[2]).toHaveClass("ui-radio-card__label")
+    expect(root.children[3]).toHaveClass("ui-radio-card__description")
+    expect(root.children[4]).toHaveClass("ui-radio-card__addon")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<RadioCardGroup.Root items={items} />)
-    const radio = screen.getAllByRole("radio")[0]
-    expect(screen.getByRole("radiogroup").tagName).toBe("DIV")
-    expect(radio?.parentElement?.tagName).toBe("LABEL")
-    expect(radio?.tagName).toBe("INPUT")
-    expect(radio?.parentElement?.children[1]?.tagName).toBe("DIV")
-    expect(radio?.parentElement?.children[2]?.tagName).toBe("SPAN")
-    expect(radio?.parentElement?.children[3]?.tagName).toBe("SPAN")
-    expect(radio?.parentElement?.children[4]?.tagName).toBe("SPAN")
+  test("renders HTML tag correctly", async () => {
+    await render(<RadioCardGroup.Root items={items} />)
+    const radio = page.getByRole("radio", { name: "Item 1" }).element()
+    const root = radio.parentElement as HTMLElement
+    expect(page.getByRole("radiogroup").element().tagName).toBe("DIV")
+    expect(root.tagName).toBe("LABEL")
+    expect(radio.tagName).toBe("INPUT")
+    expect(root.children[1]?.tagName).toBe("DIV")
+    expect(root.children[2]?.tagName).toBe("SPAN")
+    expect(root.children[3]?.tagName).toBe("SPAN")
+    expect(root.children[4]?.tagName).toBe("SPAN")
   })
 
-  test("renders label, description, and addon via props", () => {
-    render(
+  test("renders label, description, and addon via props", async () => {
+    await render(
       <RadioCard.Root
         addon="Test Addon"
         description="Test Description"
@@ -76,13 +72,13 @@ describe("<RadioCard />", () => {
       />,
     )
 
-    expect(screen.getByText("Test Label")).toBeInTheDocument()
-    expect(screen.getByText("Test Description")).toBeInTheDocument()
-    expect(screen.getByText("Test Addon")).toBeInTheDocument()
+    await expect.element(page.getByText("Test Label")).toBeInTheDocument()
+    await expect.element(page.getByText("Test Description")).toBeInTheDocument()
+    await expect.element(page.getByText("Test Addon")).toBeInTheDocument()
   })
 
-  test("renders without indicator when withIndicator is false", () => {
-    render(
+  test("renders without indicator when withIndicator is false", async () => {
+    await render(
       <RadioCard.Root
         label="No Indicator"
         value="test"
@@ -90,8 +86,8 @@ describe("<RadioCard />", () => {
       />,
     )
 
-    expect(screen.getByText("No Indicator")).toBeInTheDocument()
-    const radio = screen.getByRole("radio")
+    await expect.element(page.getByText("No Indicator")).toBeInTheDocument()
+    const radio = page.getByRole("radio").element()
     const indicator = radio.parentElement?.querySelector("[data-indicator]")
     expect(indicator).toBeNull()
   })

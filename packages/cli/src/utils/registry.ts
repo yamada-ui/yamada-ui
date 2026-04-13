@@ -21,7 +21,12 @@ import {
   SECTION_NAMES,
 } from "../constant"
 import { writeFileSafe } from "./fs"
-import { resolveFormatter, resolveLinter } from "./toolchain"
+import {
+  resolveFormatter,
+  resolveLinter,
+  selectFormatter,
+  selectLinter,
+} from "./toolchain"
 import {
   isJsx,
   transformExtension,
@@ -309,7 +314,7 @@ export async function transformContentWithFormatAndLint(
   config: Config,
   generatedNames: string[],
 ) {
-  const { cwd, format, jsx, lint } = config
+  const { cwd, format, formatter, jsx, lint, linter } = config
 
   content = transformContent(section, content, config, generatedNames)
 
@@ -318,13 +323,16 @@ export async function transformContentWithFormatAndLint(
       ? transformTsxToJsx(content)
       : transformTsToJs(content)
 
-  if (lint?.enabled !== false) {
-    const linter = await resolveLinter(cwd, lint?.tool)
-    content = await linter.lintText(content, { cwd, filePath })
+  const linterTool = selectLinter({ lint, linter })
+  if (linterTool) {
+    const linterInstance = await resolveLinter(cwd, linterTool)
+    content = await linterInstance.lintText(content, { cwd, filePath })
   }
-  if (format?.enabled !== false) {
-    const formatter = await resolveFormatter(cwd, format?.tool)
-    content = await formatter.formatText(content, format)
+
+  const formatterTool = selectFormatter({ format, formatter })
+  if (formatterTool) {
+    const formatterInstance = await resolveFormatter(cwd, formatterTool)
+    content = await formatterInstance.formatText(content, format)
   }
 
   return content
@@ -392,15 +400,18 @@ export async function transformIndexWithFormatAndLint(
 
   if (config.jsx) content = transformTsToJs(content)
 
-  if (config.lint?.enabled !== false) {
-    const linter = await resolveLinter(config.cwd, config.lint?.tool)
+  const linterTool = selectLinter(config)
+  if (linterTool) {
+    const linter = await resolveLinter(config.cwd, linterTool)
     content = await linter.lintText(content, {
       cwd: config.cwd,
       filePath: config.paths.ui.index,
     })
   }
-  if (config.format?.enabled !== false) {
-    const formatter = await resolveFormatter(config.cwd, config.format?.tool)
+
+  const formatterTool = selectFormatter(config)
+  if (formatterTool) {
+    const formatter = await resolveFormatter(config.cwd, formatterTool)
     content = await formatter.formatText(content, config.format)
   }
 

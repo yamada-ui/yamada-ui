@@ -2,14 +2,14 @@
 
 import type { Component } from "../../../core"
 import type { IconProps } from "../icon"
-import { TextSelect as OriginalTextSelectIcon } from "lucide-react"
+import { BookmarkOff as OriginalBookmarkOffIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
- * `TextSelectIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ * `BookmarkOffIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const TextSelectIcon = component(Icon)({
-  as: OriginalTextSelectIcon,
+export const BookmarkOffIcon = component(Icon)({
+  as: OriginalBookmarkOffIcon,
 }) as Component<"svg", IconProps>

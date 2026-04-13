@@ -4322,7 +4322,9 @@ export interface StyleProps {
   /**
    * ### border-shape
    *
-   * The CSS `border-shape` property.
+   * The <code>border-shape</code> CSS property sets the geometry of the border box, changing the shape of any applicable border, border image, focus outline, or shadow.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-borders-4/#border-shape
    *
@@ -5728,7 +5730,9 @@ export interface StyleProps {
   /**
    * ### dynamic-range-limit
    *
-   * The CSS `dynamic-range-limit` property.
+   * The <code>dynamic-range-limit</code> CSS property controls the peak luminance of high dynamic range content. You can use this to coordinate the apparent brightness of HDR and SDR content.
+   *
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/dynamic-range-limit
    */

@@ -7,23 +7,23 @@ catalog:
   "@emotion/react": ^11.14.0
   "@faker-js/faker": ^10.4.0
   "@lucide/lab": ^0.1.2
-  "@tanstack/react-router": ^1.168.10
+  "@tanstack/react-router": ^1.168.18
   "@testing-library/jest-dom": ^6.9.1
   "@types/yamljs": ^0.2.34
-  "@typescript-eslint/parser": ^8.58.0
+  "@typescript-eslint/parser": ^8.58.1
   "@vitejs/plugin-react": ^6.0.1
   "@vitejs/plugin-react-swc": ^4.3.0
-  "@vitest/ui": ^4.1.2
+  "@vitest/ui": ^4.1.4
   commander: ^14.0.3
   dayjs: ^1.11.20
-  dotenv: ^17.4.0
+  dotenv: ^17.4.1
   eslint: ^9.39.4
   "eslint-plugin-unused-imports": ^4.4.1
   motion: ^12.38.0
-  next: ^16.2.2
+  next: ^16.2.3
   ora: ^9.3.0
   picocolors: ^1.1.1
-  prettier: ^3.8.1
+  prettier: ^3.8.2
   react: ^19.2.4
   react-dom: ^19.2.4
   react-hook-form: ^7.72.1
@@ -33,9 +33,9 @@ catalog:
   sucrase: ^3.35.1
   tsx: ^4.21.0
   typescript: ^5.9.3
-  vite: ^8.0.3
+  vite: ^8.0.8
   vite-tsconfig-paths: ^6.1.1
-  vitest: ^4.1.2
+  vitest: ^4.1.4
   vitest-axe: ^0.1.0
   yamljs: ^0.3.0
 dedupeDirectDeps: true

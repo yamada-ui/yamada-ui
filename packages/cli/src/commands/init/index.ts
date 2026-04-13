@@ -76,8 +76,8 @@ export const init = new Command("init")
     "--no-install",
     "do not install dependencies when choice is monorepo.",
   )
-  .option("--formatter <tool>", 'formatter to use (e.g. "prettier", "none").')
-  .option("--linter <tool>", 'linter to use (e.g. "eslint", "none").')
+  .option("--formatter <tool>", 'formatter to use (e.g. "prettier").')
+  .option("--linter <tool>", 'linter to use (e.g. "eslint").')
   .option("--outdir <path>", "output directory path.")
   .action(async function ({
     src,
@@ -192,14 +192,8 @@ export const init = new Command("init")
       if (jsx) config.jsx = jsx
 
       config.path = outdir
-      config.format = {
-        enabled: formatter !== "none",
-        ...(formatter !== "none" && { tool: formatter }),
-      }
-      config.lint = {
-        enabled: linter !== "none",
-        ...(linter !== "none" && { tool: linter }),
-      }
+      if (formatter === "prettier") config.formatter = formatter
+      if (linter === "eslint") config.linter = linter
 
       if (!yes) {
         const { generate } = await prompts({

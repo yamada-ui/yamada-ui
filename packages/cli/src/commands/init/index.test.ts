@@ -345,10 +345,10 @@ describe("init", () => {
 
     const configPath = path.join(tempDir, "ui.json")
     const config = JSON.parse(readFileSync(configPath, "utf-8"))
-    expect(config.format.enabled).toBeTruthy()
-    expect(config.format.tool).toBe("prettier")
-    expect(config.lint.enabled).toBeTruthy()
-    expect(config.lint.tool).toBe("eslint")
+    expect(config.formatter).toBe("prettier")
+    expect(config.linter).toBe("eslint")
+    expect(config.format).toBeUndefined()
+    expect(config.lint).toBeUndefined()
   })
 
   test("should use default tools with --yes", async () => {
@@ -359,13 +359,13 @@ describe("init", () => {
 
     const configPath = path.join(tempDir, "ui.json")
     const config = JSON.parse(readFileSync(configPath, "utf-8"))
-    expect(config.format.enabled).toBeTruthy()
-    expect(config.format.tool).toBe("prettier")
-    expect(config.lint.enabled).toBeTruthy()
-    expect(config.lint.tool).toBe("eslint")
+    expect(config.formatter).toBe("prettier")
+    expect(config.linter).toBe("eslint")
+    expect(config.format).toBeUndefined()
+    expect(config.lint).toBeUndefined()
   })
 
-  test("should disable tools when --formatter none --linter none", async () => {
+  test("should not write formatter / linter when --formatter none --linter none", async () => {
     await init.parseAsync(
       [
         "--cwd",
@@ -383,10 +383,10 @@ describe("init", () => {
 
     const configPath = path.join(tempDir, "ui.json")
     const config = JSON.parse(readFileSync(configPath, "utf-8"))
-    expect(config.format.enabled).toBeFalsy()
-    expect(config.format.tool).toBeUndefined()
-    expect(config.lint.enabled).toBeFalsy()
-    expect(config.lint.tool).toBeUndefined()
+    expect(config.formatter).toBeUndefined()
+    expect(config.linter).toBeUndefined()
+    expect(config.format).toBeUndefined()
+    expect(config.lint).toBeUndefined()
   })
 
   test("should overwrite existing outdir when prompted", async () => {

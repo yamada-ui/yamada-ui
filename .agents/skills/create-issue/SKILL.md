@@ -5,6 +5,8 @@ description: "Create a GitHub Issue for yamada-ui. Use when the user says they w
 
 Create a GitHub Issue for yamada-ui.
 
+Follow all conventions in AGENTS.md, especially the "Creating Issues" section.
+
 ## Workflow
 
 Use tools to interact with the user throughout the process.

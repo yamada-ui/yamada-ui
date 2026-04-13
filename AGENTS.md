@@ -194,6 +194,10 @@ For changes across multiple packages:
 
 Templates are provided for each type. Always follow the appropriate template.
 
+- Write issue titles in English. Do not use commit message format. Use natural, descriptive titles. Wrap component names and code identifiers in backticks.
+  - Good: "Add \`Marquee\` component", "\`Accordion\` throws error when all items are disabled"
+  - Bad: "feat(marquee): add Marquee component", "fix(accordion): throw error when all items are disabled"
+
 - [Bug Report](./.github/ISSUE_TEMPLATE/bug_report.yml): Create a bug report.
 - [Feature Request](./.github/ISSUE_TEMPLATE/feature_request.yml): Request for features or enhancements.
 - [Documentation Report](./.github/ISSUE_TEMPLATE/documentation_report.yml): Create a report for errors or inappropriate expressions in the documentation site.

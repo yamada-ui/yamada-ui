@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { useMemo } from "react"
 import { Steps } from "."
 import { ButtonGroup } from "../button"
@@ -73,43 +73,53 @@ describe("<Stepper />", () => {
     expect(Steps.CompletedContent.displayName).toBe("StepsCompletedContent")
   })
 
-  test("sets `className` correctly", () => {
-    render(<TestComponent />)
-    const root = screen.getByTestId("root")
-    expect(root).toHaveClass("ui-steps__root")
-    expect(screen.getByRole("list")).toHaveClass("ui-steps__list")
-    expect(screen.getAllByRole("listitem")[0]).toHaveClass("ui-steps__item")
-    expect(screen.getAllByRole("heading")[0]).toHaveClass("ui-steps__title")
-    expect(screen.getAllByRole("paragraph")[0]).toHaveClass(
-      "ui-steps__description",
-    )
-    expect(screen.getAllByRole("separator")[0]).toHaveClass(
-      "ui-steps__separator",
-    )
-    expect(root.children[1]).toHaveClass("ui-steps__content")
-    expect(screen.getByTestId("completedContent")).toHaveClass(
-      "ui-steps__content--completed",
-    )
-    expect(screen.getByRole("button", { name: /Prev/i })).toHaveClass(
-      "ui-steps__trigger--prev",
-    )
-    expect(screen.getByRole("button", { name: /Next/i })).toHaveClass(
-      "ui-steps__trigger--next",
-    )
+  test("sets `className` correctly", async () => {
+    await render(<TestComponent />)
+    const root = page.getByTestId("root")
+    const rootElement = root.element()
+
+    await expect.element(root).toHaveClass("ui-steps__root")
+    await expect.element(page.getByRole("list")).toHaveClass("ui-steps__list")
+    await expect
+      .element(page.getByRole("listitem").first())
+      .toHaveClass("ui-steps__item")
+    await expect
+      .element(page.getByRole("heading").first())
+      .toHaveClass("ui-steps__title")
+    await expect
+      .element(page.getByRole("paragraph").first())
+      .toHaveClass("ui-steps__description")
+    await expect
+      .element(page.getByRole("separator").first())
+      .toHaveClass("ui-steps__separator")
+    expect(rootElement.children[1]).toHaveClass("ui-steps__content")
+    await expect
+      .element(page.getByTestId("completedContent"))
+      .toHaveClass("ui-steps__content--completed")
+    await expect
+      .element(page.getByRole("button", { name: /Prev/i }))
+      .toHaveClass("ui-steps__trigger--prev")
+    await expect
+      .element(page.getByRole("button", { name: /Next/i }))
+      .toHaveClass("ui-steps__trigger--next")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<TestComponent />)
-    const root = screen.getByTestId("root")
+  test("renders HTML tag correctly", async () => {
+    await render(<TestComponent />)
+    const root = page.getByTestId("root").element()
     expect(root.tagName).toBe("DIV")
-    expect(screen.getByRole("list").tagName).toBe("OL")
-    expect(screen.getAllByRole("listitem")[0]?.tagName).toBe("LI")
-    expect(screen.getAllByRole("heading")[0]?.tagName).toBe("H3")
-    expect(screen.getAllByRole("paragraph")[0]?.tagName).toBe("P")
-    expect(screen.getAllByRole("separator")[0]?.tagName).toBe("DIV")
+    expect(page.getByRole("list").element().tagName).toBe("OL")
+    expect(page.getByRole("listitem").first().element().tagName).toBe("LI")
+    expect(page.getByRole("heading").first().element().tagName).toBe("H3")
+    expect(page.getByRole("paragraph").first().element().tagName).toBe("P")
+    expect(page.getByRole("separator").first().element().tagName).toBe("DIV")
     expect(root.children[1]?.tagName).toBe("DIV")
-    expect(screen.getByTestId("completedContent").tagName).toBe("DIV")
-    expect(screen.getByRole("button", { name: /Prev/i }).tagName).toBe("BUTTON")
-    expect(screen.getByRole("button", { name: /Next/i }).tagName).toBe("BUTTON")
+    expect(page.getByTestId("completedContent").element().tagName).toBe("DIV")
+    expect(page.getByRole("button", { name: /Prev/i }).element().tagName).toBe(
+      "BUTTON",
+    )
+    expect(page.getByRole("button", { name: /Next/i }).element().tagName).toBe(
+      "BUTTON",
+    )
   })
 })

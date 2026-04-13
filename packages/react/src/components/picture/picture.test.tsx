@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { extendConfig, UIProvider } from "../../providers/ui-provider"
 import { Image } from "../image"
 import { Picture, Source } from "./picture"
@@ -25,19 +25,19 @@ describe("<Picture />", () => {
     expect(Source.name).toBe("Source")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(
+  test("renders HTML tag correctly", async () => {
+    await render(
       <Picture src={src} alt="img" pictureProps={{ "data-testid": "picture" }}>
         <Source srcSet={src} data-testid="src" media="md" />
       </Picture>,
     )
 
-    expect(screen.getByTestId("picture").tagName).toBe("PICTURE")
-    expect(screen.getByTestId("src").tagName).toBe("SOURCE")
+    expect(page.getByTestId("picture").element().tagName).toBe("PICTURE")
+    expect(page.getByTestId("src").element().tagName).toBe("SOURCE")
   })
 
-  test("should render source elements", () => {
-    const { container } = render(
+  test("should render source elements", async () => {
+    const { container } = await render(
       <Picture
         src={src}
         alt="img"
@@ -52,8 +52,8 @@ describe("<Picture />", () => {
     expect(sources).toHaveLength(3)
   })
 
-  test("should render custom source elements", () => {
-    const { container } = render(
+  test("should render custom source elements", async () => {
+    const { container } = await render(
       <Picture>
         <Source srcSet={src} media="md" />
         <Source srcSet={src} media="lg" />
@@ -68,8 +68,8 @@ describe("<Picture />", () => {
     expect(sources[2]?.getAttribute("media")).toContain("(max-width: 1280px)")
   })
 
-  test("should apply correct media queries from theme breakpoints", () => {
-    const { container } = render(
+  test("should apply correct media queries from theme breakpoints", async () => {
+    const { container } = await render(
       <Picture
         src={src}
         alt="img"
@@ -86,8 +86,8 @@ describe("<Picture />", () => {
     expect(sources[2]?.getAttribute("media")).toContain("(max-width: 1280px)")
   })
 
-  test("should apply correct media queries from maxW or minW", () => {
-    const { container } = render(
+  test("should apply correct media queries from maxW or minW", async () => {
+    const { container } = await render(
       <Picture
         src={src}
         alt="img"
@@ -106,8 +106,8 @@ describe("<Picture />", () => {
     expect(sources[2]?.getAttribute("media")).toContain("(max-width: 1280px)")
   })
 
-  test("should sort sources", () => {
-    const { container } = render(
+  test("should sort sources", async () => {
+    const { container } = await render(
       <Picture
         src={src}
         alt="img"
@@ -124,8 +124,8 @@ describe("<Picture />", () => {
     expect(sources[2]?.getAttribute("media")).toContain("(max-width: 1280px)")
   })
 
-  test("should not sort sources when enableSorting is false", () => {
-    const { container } = render(
+  test("should not sort sources when enableSorting is false", async () => {
+    const { container } = await render(
       <Picture
         src={src}
         alt="img"
@@ -143,9 +143,9 @@ describe("<Picture />", () => {
     expect(sources[2]?.getAttribute("media")).toContain("(max-width: 1280px)")
   })
 
-  test("should sorting sources with custom direction", () => {
+  test("should sorting sources with custom direction", async () => {
     const config = extendConfig({ breakpoint: { direction: "up" } })
-    const { container } = render(
+    const { container } = await render(
       <Picture
         src={src}
         alt="img"

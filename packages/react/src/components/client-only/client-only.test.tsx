@@ -1,22 +1,26 @@
-import { render, screen } from "#test"
+import { page, render } from "#test/browser"
 import { ClientOnly } from "."
 
 describe("<ClientOnly />", () => {
-  test("renders children after mount", () => {
-    render(<ClientOnly>Hello</ClientOnly>)
+  test("renders children after mount", async () => {
+    await render(<ClientOnly>Hello</ClientOnly>)
 
-    expect(screen.getByText("Hello")).toBeInTheDocument()
+    await expect.element(page.getByText("Hello")).toBeInTheDocument()
   })
 
-  test("renders fallback when provided", () => {
-    render(<ClientOnly fallback={<span>Loading...</span>}>Hello</ClientOnly>)
+  test("renders fallback when provided", async () => {
+    await render(
+      <ClientOnly fallback={<span>Loading...</span>}>Hello</ClientOnly>,
+    )
 
-    expect(screen.getByText("Hello")).toBeInTheDocument()
+    await expect.element(page.getByText("Hello")).toBeInTheDocument()
   })
 
-  test("supports function children", () => {
-    render(<ClientOnly>{() => "Hello from function"}</ClientOnly>)
+  test("supports function children", async () => {
+    await render(<ClientOnly>{() => "Hello from function"}</ClientOnly>)
 
-    expect(screen.getByText("Hello from function")).toBeInTheDocument()
+    await expect
+      .element(page.getByText("Hello from function"))
+      .toBeInTheDocument()
   })
 })

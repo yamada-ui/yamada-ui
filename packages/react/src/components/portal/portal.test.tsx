@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { useRef } from "react"
 import { Portal } from "./portal"
 
@@ -11,7 +11,7 @@ describe("<Portal />", () => {
     expect(Portal.name).toBe("Portal")
   })
 
-  test("Portal with containerRef renders correctly", () => {
+  test("Portal with containerRef renders correctly", async () => {
     const TestContainer = () => {
       const ref = useRef<HTMLDivElement>(null)
 
@@ -24,12 +24,12 @@ describe("<Portal />", () => {
       )
     }
 
-    render(<TestContainer />)
+    await render(<TestContainer />)
 
-    expect(screen.getByText("order2order3")).toBeInTheDocument()
+    await expect.element(page.getByText("order2order3")).toBeInTheDocument()
   })
 
-  test("Nested Portal with containerRef renders correctly", () => {
+  test("Nested Portal with containerRef renders correctly", async () => {
     const TestContainer = () => {
       const ref = useRef<HTMLDivElement>(null)
 
@@ -44,13 +44,13 @@ describe("<Portal />", () => {
       )
     }
 
-    render(<TestContainer />)
+    await render(<TestContainer />)
 
-    expect(screen.getByText("order1order2")).toBeInTheDocument()
-    expect(screen.getByText("order3")).toBeInTheDocument()
+    await expect.element(page.getByText("order1order2")).toBeInTheDocument()
+    await expect.element(page.getByText("order3")).toBeInTheDocument()
   })
 
-  test("Portal with disabled renders correctly", () => {
+  test("Portal with disabled renders correctly", async () => {
     const TestContainer = () => {
       const ref = useRef<HTMLDivElement>(null)
 
@@ -64,8 +64,10 @@ describe("<Portal />", () => {
       )
     }
 
-    render(<TestContainer />)
+    await render(<TestContainer />)
 
-    expect(screen.getByText("order1")).not.toHaveTextContent("order1order2")
+    await expect
+      .element(page.getByText("order1"))
+      .not.toHaveTextContent("order1order2")
   })
 })

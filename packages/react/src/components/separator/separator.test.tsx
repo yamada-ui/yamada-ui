@@ -1,22 +1,26 @@
-import { render, screen } from "#test"
+import { page, render } from "#test/browser"
 import { Separator } from "./separator"
 
 describe("<Separator />", () => {
-  test("renders component correctly", () => {
-    render(<Separator />)
+  test("renders component correctly", async () => {
+    await render(<Separator />)
   })
 
   test("sets `displayName` correctly", () => {
     expect(Separator.displayName).toBe("Separator")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Separator />)
-    expect(screen.getByRole("separator")).toHaveClass("ui-separator")
+  test("sets `className` correctly", async () => {
+    await render(<Separator />)
+
+    await expect
+      .element(page.getByRole("separator"))
+      .toHaveClass("ui-separator")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Separator />)
-    expect(screen.getByRole("separator").tagName).toBe("HR")
+  test("renders HTML tag correctly", async () => {
+    await render(<Separator />)
+
+    expect(page.getByRole("separator").element().tagName).toBe("HR")
   })
 })

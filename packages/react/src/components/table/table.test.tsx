@@ -1,5 +1,6 @@
 import type { ColumnDef } from "@tanstack/react-table"
-import { a11y, fireEvent, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
+import { fireEvent } from "@testing-library/react"
 import { useState } from "react"
 import { vi } from "vitest"
 import { createColumnHelper, Table } from "./"
@@ -101,8 +102,8 @@ describe("<Table />", () => {
     expect(Table.displayName).toBe("Table")
   })
 
-  test("sets `className` correctly", () => {
-    render(
+  test("sets `className` correctly", async () => {
+    await render(
       <Table
         columns={columns}
         data={data}
@@ -110,11 +111,13 @@ describe("<Table />", () => {
       />,
     )
 
-    expect(screen.getByTestId("table")).toHaveClass("ui-table")
+    expect(
+      document.querySelector('[data-testid="table"]') as HTMLElement,
+    ).toHaveClass("ui-table")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(
+  test("renders HTML tag correctly", async () => {
+    await render(
       <Table
         columns={columns}
         data={data}
@@ -122,11 +125,13 @@ describe("<Table />", () => {
       />,
     )
 
-    expect(screen.getByTestId("table").tagName).toBe("TABLE")
+    expect(
+      (document.querySelector('[data-testid="table"]') as HTMLElement).tagName,
+    ).toBe("TABLE")
   })
 
-  test("renders header and footer with render functions", () => {
-    render(
+  test("renders header and footer with render functions", async () => {
+    await render(
       <Table
         columns={columns}
         data={data}
@@ -143,12 +148,16 @@ describe("<Table />", () => {
       />,
     )
 
-    expect(screen.getByTestId("custom-header")).toHaveTextContent("5 rows")
-    expect(screen.getByTestId("custom-footer")).toHaveTextContent("5 rows")
+    expect(
+      document.querySelector('[data-testid="custom-header"]') as HTMLElement,
+    ).toHaveTextContent("5 rows")
+    expect(
+      document.querySelector('[data-testid="custom-footer"]') as HTMLElement,
+    ).toHaveTextContent("5 rows")
   })
 
-  test("renders header and footer as ReactNode", () => {
-    render(
+  test("renders header and footer as ReactNode", async () => {
+    await render(
       <Table
         columns={columns}
         data={data}
@@ -157,12 +166,16 @@ describe("<Table />", () => {
       />,
     )
 
-    expect(screen.getByTestId("header-node")).toBeInTheDocument()
-    expect(screen.getByTestId("footer-node")).toBeInTheDocument()
+    expect(
+      document.querySelector('[data-testid="header-node"]') as HTMLElement,
+    ).toBeInTheDocument()
+    expect(
+      document.querySelector('[data-testid="footer-node"]') as HTMLElement,
+    ).toBeInTheDocument()
   })
 
-  test("renders with truncated text", () => {
-    render(
+  test("renders with truncated text", async () => {
+    await render(
       <Table
         columns={columns}
         data={data}
@@ -171,15 +184,15 @@ describe("<Table />", () => {
       />,
     )
 
-    const table = screen.getByTestId("table")
+    const table = document.querySelector('[data-testid="table"]') as HTMLElement
     const spans = table.querySelectorAll("td span")
 
     expect(spans.length).toBeGreaterThan(0)
   })
 
   describe("grouped columns", () => {
-    test("renders merged header groups correctly", () => {
-      render(
+    test("renders merged header groups correctly", async () => {
+      await render(
         <Table
           columns={groupedColumns}
           data={data}
@@ -187,14 +200,16 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getByText("Name")).toBeInTheDocument()
-      expect(screen.getByText("Info")).toBeInTheDocument()
-      expect(screen.getByText("First Name")).toBeInTheDocument()
-      expect(screen.getByText("Last Name")).toBeInTheDocument()
+      await expect
+        .element(page.getByText("Name", { exact: true }))
+        .toBeInTheDocument()
+      await expect.element(page.getByText("Info")).toBeInTheDocument()
+      await expect.element(page.getByText("First Name")).toBeInTheDocument()
+      await expect.element(page.getByText("Last Name")).toBeInTheDocument()
     })
 
-    test("renders merged footer groups correctly", () => {
-      render(
+    test("renders merged footer groups correctly", async () => {
+      await render(
         <Table
           columns={groupedColumns}
           data={data}
@@ -203,7 +218,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const tfoot = table.querySelector("tfoot")
 
       expect(tfoot).toBeInTheDocument()
@@ -211,8 +228,8 @@ describe("<Table />", () => {
   })
 
   describe("row selection", () => {
-    test("renders checkbox column when enableRowSelection is true", () => {
-      render(
+    test("renders checkbox column when enableRowSelection is true", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -221,13 +238,15 @@ describe("<Table />", () => {
         />,
       )
 
-      const checkboxes = screen.getAllByRole("checkbox")
+      const checkboxes = [
+        ...document.querySelectorAll('input[type="checkbox"]'),
+      ] as HTMLElement[]
 
       expect(checkboxes.length).toBeGreaterThan(0)
     })
 
-    test("does not render checkbox when withCheckbox is false", () => {
-      render(
+    test("does not render checkbox when withCheckbox is false", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -237,13 +256,15 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.queryAllByRole("checkbox")).toHaveLength(0)
+      expect(document.querySelectorAll('input[type="checkbox"]')).toHaveLength(
+        0,
+      )
     })
 
     test("selects all rows when header checkbox is clicked", async () => {
       const onRowSelectionChange = vi.fn()
 
-      const { user } = render(
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -253,10 +274,12 @@ describe("<Table />", () => {
         />,
       )
 
-      const checkboxes = screen.getAllByRole("checkbox")
+      const checkboxes = [
+        ...document.querySelectorAll('input[type="checkbox"]'),
+      ] as HTMLElement[]
       const headerCheckbox = checkboxes[0]!
 
-      await user.click(headerCheckbox)
+      fireEvent.click(headerCheckbox)
 
       expect(onRowSelectionChange).toHaveBeenCalledWith(expect.any(Object))
     })
@@ -264,7 +287,7 @@ describe("<Table />", () => {
     test("selects individual row when row checkbox is clicked", async () => {
       const onRowSelectionChange = vi.fn()
 
-      const { user } = render(
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -274,10 +297,12 @@ describe("<Table />", () => {
         />,
       )
 
-      const checkboxes = screen.getAllByRole("checkbox")
+      const checkboxes = [
+        ...document.querySelectorAll('input[type="checkbox"]'),
+      ] as HTMLElement[]
       const firstRowCheckbox = checkboxes[1]!
 
-      await user.click(firstRowCheckbox)
+      fireEvent.click(firstRowCheckbox)
 
       expect(onRowSelectionChange).toHaveBeenCalledWith(expect.any(Object))
     })
@@ -285,7 +310,7 @@ describe("<Table />", () => {
     test("selects row on click when selectOnClickRow is true", async () => {
       const onRowSelectionChange = vi.fn()
 
-      const { user } = render(
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -296,16 +321,18 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = screen.getAllByRole("row")
+      const rows = [
+        ...document.querySelectorAll('[role="row"]'),
+      ] as HTMLElement[]
       const firstDataRow = rows[1]!
 
-      await user.click(firstDataRow)
+      fireEvent.click(firstDataRow)
 
       expect(onRowSelectionChange).toHaveBeenCalledWith(expect.any(Object))
     })
 
-    test("renders footer checkbox when withFooterCheckbox is true", () => {
-      render(
+    test("renders footer checkbox when withFooterCheckbox is true", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -316,7 +343,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const tfoot = table.querySelector("tfoot")
 
       expect(tfoot).toBeInTheDocument()
@@ -325,8 +354,8 @@ describe("<Table />", () => {
       expect(footerCheckboxes?.length).toBeGreaterThan(0)
     })
 
-    test("applies headerCheckboxProps", () => {
-      render(
+    test("applies headerCheckboxProps", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -338,11 +367,15 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getByTestId("header-checkbox-custom")).toBeInTheDocument()
+      expect(
+        document.querySelector(
+          '[data-testid="header-checkbox-custom"]',
+        ) as HTMLElement,
+      ).toBeInTheDocument()
     })
 
-    test("applies rowCheckboxProps", () => {
-      render(
+    test("applies rowCheckboxProps", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -355,12 +388,16 @@ describe("<Table />", () => {
       )
 
       expect(
-        screen.getAllByTestId("row-checkbox-custom").length,
+        (
+          [
+            ...document.querySelectorAll('[data-testid="row-checkbox-custom"]'),
+          ] as HTMLElement[]
+        ).length,
       ).toBeGreaterThan(0)
     })
 
     test("handles disabled row selection via function", async () => {
-      const { user } = render(
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -370,10 +407,12 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = screen.getAllByRole("row")
+      const rows = [
+        ...document.querySelectorAll('[role="row"]'),
+      ] as HTMLElement[]
       const firstDataRow = rows[1]!
 
-      await user.click(firstDataRow)
+      fireEvent.click(firstDataRow)
 
       expect(firstDataRow).toHaveAttribute("data-disabled")
     })
@@ -381,7 +420,7 @@ describe("<Table />", () => {
     test("invokes onRowClick callback", async () => {
       const onRowClick = vi.fn()
 
-      const { user } = render(
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -390,10 +429,12 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = screen.getAllByRole("row")
+      const rows = [
+        ...document.querySelectorAll('[role="row"]'),
+      ] as HTMLElement[]
       const firstDataRow = rows[1]!
 
-      await user.click(firstDataRow)
+      fireEvent.click(firstDataRow)
 
       expect(onRowClick).toHaveBeenCalledWith(
         expect.objectContaining({ id: "0" }),
@@ -403,7 +444,7 @@ describe("<Table />", () => {
     test("invokes onRowDoubleClick callback", async () => {
       const onRowDoubleClick = vi.fn()
 
-      const { user } = render(
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -412,10 +453,12 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = screen.getAllByRole("row")
+      const rows = [
+        ...document.querySelectorAll('[role="row"]'),
+      ] as HTMLElement[]
       const firstDataRow = rows[1]!
 
-      await user.dblClick(firstDataRow)
+      fireEvent.doubleClick(firstDataRow)
 
       expect(onRowDoubleClick).toHaveBeenCalledWith(
         expect.objectContaining({ id: "0" }),
@@ -424,7 +467,7 @@ describe("<Table />", () => {
   })
 
   describe("sorting", () => {
-    test("renders sorting icons when sorting is enabled", () => {
+    test("renders sorting icons when sorting is enabled", async () => {
       const sortableColumns = [
         columnHelper.accessor("firstName", {
           enableSorting: true,
@@ -436,7 +479,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columns={sortableColumns}
           data={data}
@@ -445,9 +488,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const buttons = screen
-        .getByTestId("table")
-        .querySelectorAll("button[data-focusable]")
+      const buttons = (
+        document.querySelector('[data-testid="table"]') as HTMLElement
+      ).querySelectorAll("button[data-focusable]")
 
       expect(buttons.length).toBeGreaterThan(0)
     })
@@ -461,7 +504,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      const { user } = render(
+      await render(
         <Table
           columns={sortableColumns}
           data={data}
@@ -471,16 +514,16 @@ describe("<Table />", () => {
         />,
       )
 
-      const sortButton = screen
-        .getByTestId("table")
-        .querySelector("button[data-focusable]")!
+      const sortButton = (
+        document.querySelector('[data-testid="table"]') as HTMLElement
+      ).querySelector("button[data-focusable]")!
 
-      await user.click(sortButton)
+      fireEvent.click(sortButton)
 
       expect(onSortingChange).toHaveBeenCalledWith(expect.any(Array))
     })
 
-    test("renders custom sorting icon", () => {
+    test("renders custom sorting icon", async () => {
       const sortableColumns = [
         columnHelper.accessor("firstName", {
           enableSorting: true,
@@ -488,7 +531,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columns={sortableColumns}
           data={data}
@@ -503,10 +546,14 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getByTestId("custom-sort-icon")).toBeInTheDocument()
+      expect(
+        document.querySelector(
+          '[data-testid="custom-sort-icon"]',
+        ) as HTMLElement,
+      ).toBeInTheDocument()
     })
 
-    test("applies sortingIconProps", () => {
+    test("applies sortingIconProps", async () => {
       const sortableColumns = [
         columnHelper.accessor("firstName", {
           enableSorting: true,
@@ -514,7 +561,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columns={sortableColumns}
           data={data}
@@ -524,14 +571,14 @@ describe("<Table />", () => {
         />,
       )
 
-      const icons = screen
-        .getByTestId("table")
-        .querySelectorAll(".custom-sorting-icon")
+      const icons = (
+        document.querySelector('[data-testid="table"]') as HTMLElement
+      ).querySelectorAll(".custom-sorting-icon")
 
       expect(icons.length).toBeGreaterThan(0)
     })
 
-    test("renders descending sort icon correctly", () => {
+    test("renders descending sort icon correctly", async () => {
       const sortableColumns = [
         columnHelper.accessor("firstName", {
           enableSorting: true,
@@ -539,7 +586,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columns={sortableColumns}
           data={data}
@@ -549,12 +596,14 @@ describe("<Table />", () => {
         />,
       )
 
-      const th = screen.getByTestId("table").querySelector("th")
+      const th = (
+        document.querySelector('[data-testid="table"]') as HTMLElement
+      ).querySelector("th")
 
       expect(th).toHaveAttribute("aria-sort", "descending")
     })
 
-    test("renders ascending sort correctly", () => {
+    test("renders ascending sort correctly", async () => {
       const sortableColumns = [
         columnHelper.accessor("firstName", {
           enableSorting: true,
@@ -562,7 +611,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columns={sortableColumns}
           data={data}
@@ -572,14 +621,16 @@ describe("<Table />", () => {
         />,
       )
 
-      const th = screen.getByTestId("table").querySelector("th")
+      const th = (
+        document.querySelector('[data-testid="table"]') as HTMLElement
+      ).querySelector("th")
 
       expect(th).toHaveAttribute("aria-sort", "ascending")
     })
   })
 
   describe("column resizing", () => {
-    test("renders resizable trigger when enableColumnResizing is true", () => {
+    test("renders resizable trigger when enableColumnResizing is true", async () => {
       const resizableColumns = [
         columnHelper.accessor("firstName", {
           enableResizing: true,
@@ -591,7 +642,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columnResizeMode="onChange"
           columns={resizableColumns}
@@ -602,10 +653,16 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getAllByTestId("resize-handle").length).toBeGreaterThan(0)
+      expect(
+        (
+          [
+            ...document.querySelectorAll('[data-testid="resize-handle"]'),
+          ] as HTMLElement[]
+        ).length,
+      ).toBeGreaterThan(0)
     })
 
-    test("applies resizableTriggerProps", () => {
+    test("applies resizableTriggerProps", async () => {
       const resizableColumns = [
         columnHelper.accessor("firstName", {
           enableResizing: true,
@@ -617,7 +674,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columnResizeMode="onChange"
           columns={resizableColumns}
@@ -628,14 +685,14 @@ describe("<Table />", () => {
         />,
       )
 
-      const triggers = screen
-        .getByTestId("table")
-        .querySelectorAll(".custom-resize-trigger")
+      const triggers = (
+        document.querySelector('[data-testid="table"]') as HTMLElement
+      ).querySelectorAll(".custom-resize-trigger")
 
       expect(triggers.length).toBeGreaterThan(0)
     })
 
-    test("applies enableAutoResizeTableWidth", () => {
+    test("applies enableAutoResizeTableWidth", async () => {
       const resizableColumns = [
         columnHelper.accessor("firstName", {
           enableResizing: true,
@@ -643,7 +700,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columnResizeMode="onChange"
           columns={resizableColumns}
@@ -654,7 +711,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
 
       expect(table).toBeInTheDocument()
       expect(table.style.width).not.toBe("")
@@ -662,8 +721,8 @@ describe("<Table />", () => {
   })
 
   describe("pagination", () => {
-    test("paginates data when enablePagination is true", () => {
-      render(
+    test("paginates data when enablePagination is true", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -673,13 +732,15 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = screen.getAllByRole("row")
+      const rows = [
+        ...document.querySelectorAll('[role="row"]'),
+      ] as HTMLElement[]
       // 1 header row + 2 data rows
       expect(rows).toHaveLength(3)
     })
 
-    test("handles PageDown keyboard navigation", () => {
-      render(
+    test("handles PageDown keyboard navigation", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -690,7 +751,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstCell = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
@@ -701,8 +764,8 @@ describe("<Table />", () => {
       expect(table).toBeInTheDocument()
     })
 
-    test("does not paginate when cannot go to next page", () => {
-      render(
+    test("does not paginate when cannot go to next page", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -713,7 +776,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstCell = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
@@ -724,8 +789,8 @@ describe("<Table />", () => {
       expect(table).toBeInTheDocument()
     })
 
-    test("does not go to previous page when on first page", () => {
-      render(
+    test("does not go to previous page when on first page", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -736,7 +801,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstCell = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
@@ -747,8 +814,8 @@ describe("<Table />", () => {
       expect(table).toBeInTheDocument()
     })
 
-    test("handles PageUp keyboard navigation", () => {
-      render(
+    test("handles PageUp keyboard navigation", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -759,7 +826,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstCell = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
@@ -772,8 +841,8 @@ describe("<Table />", () => {
   })
 
   describe("keyboard navigation", () => {
-    test("navigates cells with arrow keys", () => {
-      render(
+    test("navigates cells with arrow keys", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -782,7 +851,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
@@ -796,8 +867,8 @@ describe("<Table />", () => {
       expect(table).toBeInTheDocument()
     })
 
-    test("navigates to first and last cell with Home and End", () => {
-      render(
+    test("navigates to first and last cell with Home and End", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -806,7 +877,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
@@ -817,8 +890,8 @@ describe("<Table />", () => {
       expect(table).toBeInTheDocument()
     })
 
-    test("does not enable keyboard navigation when disabled", () => {
-      render(
+    test("does not enable keyboard navigation when disabled", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -827,7 +900,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstTh = table.querySelector("th")!
 
       fireEvent.focus(table, { target: firstTh })
@@ -836,8 +911,8 @@ describe("<Table />", () => {
       expect(table).toBeInTheDocument()
     })
 
-    test("sets initial tabIndex based on initialFocusableCell", () => {
-      render(
+    test("sets initial tabIndex based on initialFocusableCell", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -847,14 +922,16 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const cell = table.querySelector('[data-colindex="1"][data-rowindex="1"]')
 
       expect(cell).toHaveAttribute("tabindex", "0")
     })
 
-    test("focuses on cell focus event", () => {
-      render(
+    test("focuses on cell focus event", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -863,7 +940,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
@@ -875,10 +954,10 @@ describe("<Table />", () => {
   })
 
   describe("column filters", () => {
-    test("calls onColumnFiltersChange when filter changes", () => {
+    test("calls onColumnFiltersChange when filter changes", async () => {
       const onColumnFiltersChange = vi.fn()
 
-      render(
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -888,13 +967,15 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getByTestId("table")).toBeInTheDocument()
+      expect(
+        document.querySelector('[data-testid="table"]') as HTMLElement,
+      ).toBeInTheDocument()
     })
   })
 
   describe("props passing", () => {
-    test("applies headerGroupProps", () => {
-      render(
+    test("applies headerGroupProps", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -905,11 +986,13 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getByTestId("header-group")).toBeInTheDocument()
+      expect(
+        document.querySelector('[data-testid="header-group"]') as HTMLElement,
+      ).toBeInTheDocument()
     })
 
-    test("applies headerProps", () => {
-      render(
+    test("applies headerProps", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -920,15 +1003,15 @@ describe("<Table />", () => {
         />,
       )
 
-      const headers = screen
-        .getByTestId("table")
-        .querySelectorAll("th.custom-header")
+      const headers = (
+        document.querySelector('[data-testid="table"]') as HTMLElement
+      ).querySelectorAll("th.custom-header")
 
       expect(headers.length).toBeGreaterThan(0)
     })
 
-    test("applies rowProps", () => {
-      render(
+    test("applies rowProps", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -939,11 +1022,17 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getAllByTestId("custom-row").length).toBeGreaterThan(0)
+      expect(
+        (
+          [
+            ...document.querySelectorAll('[data-testid="custom-row"]'),
+          ] as HTMLElement[]
+        ).length,
+      ).toBeGreaterThan(0)
     })
 
-    test("applies cellProps", () => {
-      render(
+    test("applies cellProps", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -954,15 +1043,15 @@ describe("<Table />", () => {
         />,
       )
 
-      const cells = screen
-        .getByTestId("table")
-        .querySelectorAll("td.custom-cell")
+      const cells = (
+        document.querySelector('[data-testid="table"]') as HTMLElement
+      ).querySelectorAll("td.custom-cell")
 
       expect(cells.length).toBeGreaterThan(0)
     })
 
-    test("applies footerGroupProps", () => {
-      render(
+    test("applies footerGroupProps", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -974,11 +1063,17 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getAllByTestId("footer-group").length).toBeGreaterThan(0)
+      expect(
+        (
+          [
+            ...document.querySelectorAll('[data-testid="footer-group"]'),
+          ] as HTMLElement[]
+        ).length,
+      ).toBeGreaterThan(0)
     })
 
-    test("applies footerProps", () => {
-      render(
+    test("applies footerProps", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -990,14 +1085,16 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const footerCells = table.querySelectorAll("tfoot .custom-footer")
 
       expect(footerCells.length).toBeGreaterThan(0)
     })
 
-    test("applies theadProps", () => {
-      render(
+    test("applies theadProps", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1006,11 +1103,13 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getByTestId("thead")).toBeInTheDocument()
+      expect(
+        document.querySelector('[data-testid="thead"]') as HTMLElement,
+      ).toBeInTheDocument()
     })
 
-    test("applies tbodyProps", () => {
-      render(
+    test("applies tbodyProps", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1019,11 +1118,13 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getByTestId("tbody")).toBeInTheDocument()
+      expect(
+        document.querySelector('[data-testid="tbody"]') as HTMLElement,
+      ).toBeInTheDocument()
     })
 
-    test("applies tfootProps", () => {
-      render(
+    test("applies tfootProps", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1033,13 +1134,15 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getByTestId("tfoot")).toBeInTheDocument()
+      expect(
+        document.querySelector('[data-testid="tfoot"]') as HTMLElement,
+      ).toBeInTheDocument()
     })
   })
 
   describe("footer groups", () => {
-    test("renders footer groups when withFooterGroups is true", () => {
-      render(
+    test("renders footer groups when withFooterGroups is true", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1048,14 +1151,16 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const tfoot = table.querySelector("tfoot")
 
       expect(tfoot).toBeInTheDocument()
     })
 
-    test("does not render footer groups when withFooterGroups is false", () => {
-      render(
+    test("does not render footer groups when withFooterGroups is false", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1063,14 +1168,16 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const tfoot = table.querySelector("tfoot")
 
       expect(tfoot).not.toBeInTheDocument()
     })
 
-    test("renders grouped footer correctly", () => {
-      render(
+    test("renders grouped footer correctly", async () => {
+      await render(
         <Table
           columns={groupedColumns}
           data={data}
@@ -1079,7 +1186,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const tfoot = table.querySelector("tfoot")
 
       expect(tfoot).toBeInTheDocument()
@@ -1087,10 +1196,10 @@ describe("<Table />", () => {
   })
 
   describe("controlled state", () => {
-    test("uses controlled sorting state", () => {
+    test("uses controlled sorting state", async () => {
       const onSortingChange = vi.fn()
 
-      render(
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1100,13 +1209,15 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getByTestId("table")).toBeInTheDocument()
+      expect(
+        document.querySelector('[data-testid="table"]') as HTMLElement,
+      ).toBeInTheDocument()
     })
 
-    test("uses controlled pagination state", () => {
+    test("uses controlled pagination state", async () => {
       const onPaginationChange = vi.fn()
 
-      render(
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1117,13 +1228,15 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = screen.getAllByRole("row")
+      const rows = [
+        ...document.querySelectorAll('[role="row"]'),
+      ] as HTMLElement[]
 
       expect(rows).toHaveLength(3)
     })
 
-    test("uses controlled row selection state", () => {
-      render(
+    test("uses controlled row selection state", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1133,16 +1246,18 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = screen.getAllByRole("row")
+      const rows = [
+        ...document.querySelectorAll('[role="row"]'),
+      ] as HTMLElement[]
       const firstDataRow = rows[1]!
 
       expect(firstDataRow).toHaveAttribute("aria-selected", "true")
     })
 
-    test("uses controlled column filters state", () => {
+    test("uses controlled column filters state", async () => {
       const onColumnFiltersChange = vi.fn()
 
-      render(
+      await render(
         <Table
           columnFilters={[{ id: "firstName", value: "John" }]}
           columns={columns}
@@ -1152,12 +1267,14 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getByTestId("table")).toBeInTheDocument()
+      expect(
+        document.querySelector('[data-testid="table"]') as HTMLElement,
+      ).toBeInTheDocument()
     })
   })
 
   describe("columnResizeMode onEnd", () => {
-    test("renders with columnResizeMode onEnd", () => {
+    test("renders with columnResizeMode onEnd", async () => {
       const resizableColumns = [
         columnHelper.accessor("firstName", {
           enableResizing: true,
@@ -1165,7 +1282,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columnResizeMode="onEnd"
           columns={resizableColumns}
@@ -1176,14 +1293,18 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getByTestId("table")).toBeInTheDocument()
-      expect(screen.getByTestId("resize-trigger")).toBeInTheDocument()
+      expect(
+        document.querySelector('[data-testid="table"]') as HTMLElement,
+      ).toBeInTheDocument()
+      expect(
+        document.querySelector('[data-testid="resize-trigger"]') as HTMLElement,
+      ).toBeInTheDocument()
     })
   })
 
   describe("keyboard navigation with footer groups", () => {
-    test("navigates through footer cells", () => {
-      render(
+    test("navigates through footer cells", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1193,15 +1314,17 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
 
       expect(
         table.querySelectorAll("tfoot [data-colindex]").length,
       ).toBeGreaterThan(0)
     })
 
-    test("navigates with grouped header columns", () => {
-      render(
+    test("navigates with grouped header columns", async () => {
+      await render(
         <Table
           columns={groupedColumns}
           data={data}
@@ -1210,7 +1333,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstTh = table.querySelector("[data-colindex][data-rowindex]")!
 
       fireEvent.focus(table, { target: firstTh })
@@ -1222,8 +1347,8 @@ describe("<Table />", () => {
   })
 
   describe("manual pagination", () => {
-    test("handles manual pagination with rowCount", () => {
-      render(
+    test("handles manual pagination with rowCount", async () => {
+      await render(
         <Table
           columns={columns}
           data={data.slice(0, 2)}
@@ -1235,15 +1360,17 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
 
       expect(table).toHaveAttribute("aria-rowcount", "100")
     })
   })
 
   describe("aria attributes", () => {
-    test("sets aria-colcount correctly", () => {
-      render(
+    test("sets aria-colcount correctly", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1251,13 +1378,15 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
 
       expect(table).toHaveAttribute("aria-colcount", "4")
     })
 
-    test("sets aria-multiselectable when row selection is enabled", () => {
-      render(
+    test("sets aria-multiselectable when row selection is enabled", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1266,13 +1395,15 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
 
       expect(table).toHaveAttribute("aria-multiselectable", "true")
     })
 
-    test("sets role=grid on table", () => {
-      render(
+    test("sets role=grid on table", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1280,13 +1411,15 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
 
       expect(table).toHaveAttribute("role", "grid")
     })
 
-    test("sets aria-rowcount to data length when rowCount is not provided", () => {
-      render(
+    test("sets aria-rowcount to data length when rowCount is not provided", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1294,13 +1427,15 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
 
       expect(table).toHaveAttribute("aria-rowcount", String(data.length))
     })
 
-    test("sets aria-rowindex on header rows", () => {
-      render(
+    test("sets aria-rowindex on header rows", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1308,14 +1443,16 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const headerRows = table.querySelectorAll("thead tr")
 
       expect(headerRows[0]).toHaveAttribute("aria-rowindex", "1")
     })
 
-    test("sets aria-colindex on header cells", () => {
-      render(
+    test("sets aria-colindex on header cells", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1323,15 +1460,17 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const ths = table.querySelectorAll("thead th")
 
       expect(ths[0]).toHaveAttribute("aria-colindex", "1")
       expect(ths[1]).toHaveAttribute("aria-colindex", "2")
     })
 
-    test("sets aria-colindex on body cells", () => {
-      render(
+    test("sets aria-colindex on body cells", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1339,15 +1478,17 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstRowCells = table.querySelectorAll("tbody tr:first-child td")
 
       expect(firstRowCells[0]).toHaveAttribute("aria-colindex", "1")
       expect(firstRowCells[1]).toHaveAttribute("aria-colindex", "2")
     })
 
-    test("sets role=columnheader on th elements", () => {
-      render(
+    test("sets role=columnheader on th elements", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1355,7 +1496,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const ths = table.querySelectorAll("thead th")
 
       ths.forEach((th) => {
@@ -1363,8 +1506,8 @@ describe("<Table />", () => {
       })
     })
 
-    test("sets role=gridcell on td elements", () => {
-      render(
+    test("sets role=gridcell on td elements", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1372,7 +1515,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const tds = table.querySelectorAll("tbody td")
 
       tds.forEach((td) => {
@@ -1380,8 +1525,8 @@ describe("<Table />", () => {
       })
     })
 
-    test("sets role=rowgroup on thead and tbody", () => {
-      render(
+    test("sets role=rowgroup on thead and tbody", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1389,7 +1534,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const thead = table.querySelector("thead")
       const tbody = table.querySelector("tbody")
 
@@ -1397,8 +1544,8 @@ describe("<Table />", () => {
       expect(tbody).toHaveAttribute("role", "rowgroup")
     })
 
-    test("sets role=rowgroup on tfoot when footer groups enabled", () => {
-      render(
+    test("sets role=rowgroup on tfoot when footer groups enabled", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1407,14 +1554,16 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const tfoot = table.querySelector("tfoot")
 
       expect(tfoot).toHaveAttribute("role", "rowgroup")
     })
 
-    test("does not set aria-multiselectable when row selection is disabled", () => {
-      render(
+    test("does not set aria-multiselectable when row selection is disabled", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1422,12 +1571,14 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
 
       expect(table).not.toHaveAttribute("aria-multiselectable")
     })
 
-    test("sets aria-sort to none when column is sortable but not sorted", () => {
+    test("sets aria-sort to none when column is sortable but not sorted", async () => {
       const sortableColumns = [
         columnHelper.accessor("firstName", {
           enableSorting: true,
@@ -1435,7 +1586,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columns={sortableColumns}
           data={data}
@@ -1444,15 +1595,17 @@ describe("<Table />", () => {
         />,
       )
 
-      const th = screen.getByTestId("table").querySelector("th")
+      const th = (
+        document.querySelector('[data-testid="table"]') as HTMLElement
+      ).querySelector("th")
 
       expect(th).toHaveAttribute("aria-sort", "none")
     })
   })
 
   describe("row selection with disabled rows", () => {
-    test("renders disabled row with correct attributes", () => {
-      render(
+    test("renders disabled row with correct attributes", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1462,7 +1615,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = screen.getAllByRole("row")
+      const rows = [
+        ...document.querySelectorAll('[role="row"]'),
+      ] as HTMLElement[]
       const firstDataRow = rows[1]!
 
       expect(firstDataRow).toHaveAttribute("data-disabled")
@@ -1472,7 +1627,7 @@ describe("<Table />", () => {
     test("enabled rows invoke onRowClick", async () => {
       const onRowClick = vi.fn()
 
-      const { user } = render(
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1483,10 +1638,12 @@ describe("<Table />", () => {
       )
 
       // Click the second data row (id "2"), which is enabled
-      const rows = screen.getAllByRole("row")
+      const rows = [
+        ...document.querySelectorAll('[role="row"]'),
+      ] as HTMLElement[]
       const secondDataRow = rows[2]!
 
-      await user.click(secondDataRow)
+      fireEvent.click(secondDataRow)
 
       expect(onRowClick).toHaveBeenCalledTimes(1)
     })
@@ -1494,7 +1651,7 @@ describe("<Table />", () => {
     test("enabled rows invoke onRowDoubleClick", async () => {
       const onRowDoubleClick = vi.fn()
 
-      const { user } = render(
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1504,16 +1661,18 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = screen.getAllByRole("row")
+      const rows = [
+        ...document.querySelectorAll('[role="row"]'),
+      ] as HTMLElement[]
       const secondDataRow = rows[2]!
 
-      await user.dblClick(secondDataRow)
+      fireEvent.doubleClick(secondDataRow)
 
       expect(onRowDoubleClick).toHaveBeenCalledTimes(1)
     })
 
-    test("sets aria-disabled on disabled rows", () => {
-      render(
+    test("sets aria-disabled on disabled rows", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1522,7 +1681,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = screen.getAllByRole("row")
+      const rows = [
+        ...document.querySelectorAll('[role="row"]'),
+      ] as HTMLElement[]
       const firstDataRow = rows[1]!
 
       expect(firstDataRow).toHaveAttribute("aria-disabled", "true")
@@ -1530,8 +1691,8 @@ describe("<Table />", () => {
   })
 
   describe("grouped columns header and footer merging", () => {
-    test("renders correct number of header rows for grouped columns", () => {
-      render(
+    test("renders correct number of header rows for grouped columns", async () => {
+      await render(
         <Table
           columns={groupedColumns}
           data={data}
@@ -1539,14 +1700,16 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const headerRows = table.querySelectorAll("thead tr")
 
       expect(headerRows).toHaveLength(2)
     })
 
-    test("renders headers with colSpan for grouped columns", () => {
-      render(
+    test("renders headers with colSpan for grouped columns", async () => {
+      await render(
         <Table
           columns={groupedColumns}
           data={data}
@@ -1554,7 +1717,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstRowHeaders = table.querySelectorAll("thead tr:first-child th")
 
       const nameHeader = Array.from(firstRowHeaders).find(
@@ -1564,8 +1729,8 @@ describe("<Table />", () => {
       expect(nameHeader).toBeDefined()
     })
 
-    test("renders footer cells with correct data-colindex for grouped columns", () => {
-      render(
+    test("renders footer cells with correct data-colindex for grouped columns", async () => {
+      await render(
         <Table
           columns={groupedColumns}
           data={data}
@@ -1574,14 +1739,16 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const footerCells = table.querySelectorAll("tfoot td[data-colindex]")
 
       expect(footerCells.length).toBeGreaterThan(0)
     })
 
-    test("renders footer with aria-colindex and aria-rowindex for grouped columns", () => {
-      render(
+    test("renders footer with aria-colindex and aria-rowindex for grouped columns", async () => {
+      await render(
         <Table
           columns={groupedColumns}
           data={data}
@@ -1590,7 +1757,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const footerCells = table.querySelectorAll("tfoot td[aria-colindex]")
 
       footerCells.forEach((cell) => {
@@ -1601,8 +1770,8 @@ describe("<Table />", () => {
   })
 
   describe("keyboard navigation with focusable elements", () => {
-    test("focuses on checkbox inside cell when navigating with keyboard", () => {
-      render(
+    test("focuses on checkbox inside cell when navigating with keyboard", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1612,7 +1781,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
@@ -1624,8 +1795,8 @@ describe("<Table />", () => {
       expect(focusable).toBeInTheDocument()
     })
 
-    test("moves focus to the next row when pressing ArrowDown", () => {
-      render(
+    test("moves focus to the next row when pressing ArrowDown", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1634,7 +1805,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
@@ -1649,8 +1822,8 @@ describe("<Table />", () => {
       expect(nextCell).toBeInTheDocument()
     })
 
-    test("handles focus event on non-initial cell", () => {
-      render(
+    test("handles focus event on non-initial cell", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1659,7 +1832,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const secondTh = table.querySelector(
         '[data-colindex="1"][data-rowindex="0"]',
       )!
@@ -1669,8 +1844,8 @@ describe("<Table />", () => {
       expect(table).toBeInTheDocument()
     })
 
-    test("does not navigate when keyboard navigation is disabled and keydown fires", () => {
-      render(
+    test("does not navigate when keyboard navigation is disabled and keydown fires", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1679,7 +1854,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const td = table.querySelector("td")!
 
       fireEvent.keyDown(td, { key: "ArrowRight" })
@@ -1687,8 +1864,8 @@ describe("<Table />", () => {
       expect(table).toBeInTheDocument()
     })
 
-    test("tabIndex is undefined when keyboard navigation is disabled", () => {
-      render(
+    test("tabIndex is undefined when keyboard navigation is disabled", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -1697,7 +1874,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const cell = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
@@ -1707,7 +1886,7 @@ describe("<Table />", () => {
   })
 
   describe("column definition props", () => {
-    test("applies headerProps from column definition", () => {
+    test("applies headerProps from column definition", async () => {
       const columnsWithHeaderProps = [
         columnHelper.accessor("firstName", {
           header: "First Name",
@@ -1715,7 +1894,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columns={columnsWithHeaderProps}
           data={data}
@@ -1723,13 +1902,15 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const headers = table.querySelectorAll("th.column-header-props")
 
       expect(headers.length).toBeGreaterThan(0)
     })
 
-    test("applies cellProps from column definition", () => {
+    test("applies cellProps from column definition", async () => {
       const columnsWithCellProps = [
         columnHelper.accessor("firstName", {
           header: "First Name",
@@ -1737,7 +1918,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columns={columnsWithCellProps}
           data={data}
@@ -1745,13 +1926,15 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const cells = table.querySelectorAll("td.column-cell-props")
 
       expect(cells.length).toBeGreaterThan(0)
     })
 
-    test("applies footerProps from column definition", () => {
+    test("applies footerProps from column definition", async () => {
       const columnsWithFooterProps = [
         columnHelper.accessor("firstName", {
           footer: "Footer",
@@ -1760,7 +1943,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columns={columnsWithFooterProps}
           data={data}
@@ -1769,13 +1952,15 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const footerCells = table.querySelectorAll("tfoot td.column-footer-props")
 
       expect(footerCells.length).toBeGreaterThan(0)
     })
 
-    test("applies truncated prop from column definition", () => {
+    test("applies truncated prop from column definition", async () => {
       const columnsWithTruncated = [
         columnHelper.accessor("firstName", {
           header: "First Name",
@@ -1783,7 +1968,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columns={columnsWithTruncated}
           data={data}
@@ -1791,12 +1976,14 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
 
       expect(table).toBeInTheDocument()
     })
 
-    test("applies lineClamp prop from column definition", () => {
+    test("applies lineClamp prop from column definition", async () => {
       const columnsWithLineClamp = [
         columnHelper.accessor("firstName", {
           header: "First Name",
@@ -1804,7 +1991,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columns={columnsWithLineClamp}
           data={data}
@@ -1812,14 +1999,16 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
 
       expect(table).toBeInTheDocument()
     })
   })
 
   describe("column resizing interactions", () => {
-    test("sets width style on header cells when column resizing is enabled", () => {
+    test("sets width style on header cells when column resizing is enabled", async () => {
       const resizableColumns = [
         columnHelper.accessor("firstName", {
           size: 200,
@@ -1828,7 +2017,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columnResizeMode="onChange"
           columns={resizableColumns}
@@ -1838,7 +2027,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const th = table.querySelector("th")
 
       expect(th?.style.width).toBeDefined()
@@ -1852,7 +2043,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      const { user } = render(
+      await render(
         <Table
           columnResizeMode="onChange"
           columns={resizableColumns}
@@ -1863,20 +2054,28 @@ describe("<Table />", () => {
         />,
       )
 
-      const resizeTrigger = screen.getByTestId("resize-trigger")
+      const resizeTrigger = document.querySelector(
+        '[data-testid="resize-trigger"]',
+      ) as HTMLElement
 
-      await user.dblClick(resizeTrigger)
+      fireEvent.doubleClick(resizeTrigger)
 
       // After double-click, the table still renders and resize trigger is still present
-      expect(screen.getByTestId("table")).toBeInTheDocument()
-      expect(screen.getByTestId("resize-trigger")).toBeInTheDocument()
+      expect(
+        document.querySelector('[data-testid="table"]') as HTMLElement,
+      ).toBeInTheDocument()
+      expect(
+        document.querySelector('[data-testid="resize-trigger"]') as HTMLElement,
+      ).toBeInTheDocument()
 
-      const th = screen.getByTestId("table").querySelector("th")
+      const th = (
+        document.querySelector('[data-testid="table"]') as HTMLElement
+      ).querySelector("th")
 
       expect(th?.style.width).toBeDefined()
     })
 
-    test("renders resizable trigger with custom class", () => {
+    test("renders resizable trigger with custom class", async () => {
       const resizableColumns = [
         columnHelper.accessor("firstName", {
           enableResizing: true,
@@ -1884,7 +2083,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columnResizeMode="onChange"
           columns={resizableColumns}
@@ -1895,12 +2094,14 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getByTestId("resize-cursor")).toBeInTheDocument()
+      expect(
+        document.querySelector('[data-testid="resize-cursor"]') as HTMLElement,
+      ).toBeInTheDocument()
     })
   })
 
   describe("sorting icon interactions", () => {
-    test("renders default sort icon (unsorted)", () => {
+    test("renders default sort icon (unsorted)", async () => {
       const sortableColumns = [
         columnHelper.accessor("firstName", {
           enableSorting: true,
@@ -1908,7 +2109,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columns={sortableColumns}
           data={data}
@@ -1917,14 +2118,16 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const sortButton = table.querySelector("button[data-focusable]")
 
       expect(sortButton).toBeInTheDocument()
       expect(sortButton).toHaveAttribute("type", "button")
     })
 
-    test("applies sortingIconProps with data attribute", () => {
+    test("applies sortingIconProps with data attribute", async () => {
       const sortableColumns = [
         columnHelper.accessor("firstName", {
           enableSorting: true,
@@ -1932,7 +2135,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columns={sortableColumns}
           data={data}
@@ -1944,10 +2147,14 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getByTestId("sort-icon-custom")).toBeInTheDocument()
+      expect(
+        document.querySelector(
+          '[data-testid="sort-icon-custom"]',
+        ) as HTMLElement,
+      ).toBeInTheDocument()
     })
 
-    test("renders custom sorting icon for unsorted state", () => {
+    test("renders custom sorting icon for unsorted state", async () => {
       const sortableColumns = [
         columnHelper.accessor("firstName", {
           enableSorting: true,
@@ -1955,7 +2162,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columns={sortableColumns}
           data={data}
@@ -1969,10 +2176,12 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getByTestId("custom-icon")).toHaveTextContent("unsorted")
+      expect(
+        document.querySelector('[data-testid="custom-icon"]') as HTMLElement,
+      ).toHaveTextContent("unsorted")
     })
 
-    test("renders descending sort icon", () => {
+    test("renders descending sort icon", async () => {
       const sortableColumns = [
         columnHelper.accessor("firstName", {
           enableSorting: true,
@@ -1980,7 +2189,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columns={sortableColumns}
           data={data}
@@ -1990,13 +2199,15 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const sortButton = table.querySelector("button[data-focusable]")
 
       expect(sortButton).toBeInTheDocument()
     })
 
-    test("renders ascending sort icon", () => {
+    test("renders ascending sort icon", async () => {
       const sortableColumns = [
         columnHelper.accessor("firstName", {
           enableSorting: true,
@@ -2004,7 +2215,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columns={sortableColumns}
           data={data}
@@ -2014,7 +2225,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const sortButton = table.querySelector("button[data-focusable]")
 
       expect(sortButton).toBeInTheDocument()
@@ -2022,7 +2235,7 @@ describe("<Table />", () => {
   })
 
   describe("pagination with keyboard navigation", () => {
-    test("updates tabIndex after page change", () => {
+    test("updates tabIndex after page change", async () => {
       const PaginatedTable = () => {
         const [pagination, setPagination] = useState({
           pageIndex: 0,
@@ -2055,15 +2268,17 @@ describe("<Table />", () => {
         )
       }
 
-      render(<PaginatedTable />)
+      await render(<PaginatedTable />)
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
 
       expect(table).toBeInTheDocument()
     })
 
-    test("handles PageDown keyboard event on paginated table", () => {
-      render(
+    test("handles PageDown keyboard event on paginated table", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2074,7 +2289,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstCell = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
@@ -2086,8 +2303,8 @@ describe("<Table />", () => {
       expect(table).toBeInTheDocument()
     })
 
-    test("handles PageUp keyboard event on paginated table", () => {
-      render(
+    test("handles PageUp keyboard event on paginated table", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2098,7 +2315,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstCell = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
@@ -2112,8 +2331,8 @@ describe("<Table />", () => {
   })
 
   describe("keyboard navigation with row selection checkboxes", () => {
-    test("keyboard navigation works with checkbox columns", () => {
-      render(
+    test("keyboard navigation works with checkbox columns", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2123,7 +2342,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const selectHeader = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
@@ -2137,8 +2358,8 @@ describe("<Table />", () => {
   })
 
   describe("keyboard navigation edge cases", () => {
-    test("ArrowLeft at left boundary does not crash", () => {
-      render(
+    test("ArrowLeft at left boundary does not crash", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2147,7 +2368,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
@@ -2158,8 +2381,8 @@ describe("<Table />", () => {
       expect(table).toBeInTheDocument()
     })
 
-    test("ArrowUp at top boundary does not crash", () => {
-      render(
+    test("ArrowUp at top boundary does not crash", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2168,7 +2391,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
@@ -2179,8 +2404,8 @@ describe("<Table />", () => {
       expect(table).toBeInTheDocument()
     })
 
-    test("ArrowDown at bottom boundary does not crash", () => {
-      render(
+    test("ArrowDown at bottom boundary does not crash", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2189,7 +2414,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const lastRow = data.length
       const lastCell = table.querySelector(
         `[data-colindex="0"][data-rowindex="${lastRow}"]`,
@@ -2201,8 +2428,8 @@ describe("<Table />", () => {
       expect(table).toBeInTheDocument()
     })
 
-    test("ArrowRight at right boundary does not crash", () => {
-      render(
+    test("ArrowRight at right boundary does not crash", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2211,7 +2438,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const lastColIndex = columns.length - 1
       const lastTh = table.querySelector(
         `[data-colindex="${lastColIndex}"][data-rowindex="0"]`,
@@ -2223,8 +2452,8 @@ describe("<Table />", () => {
       expect(table).toBeInTheDocument()
     })
 
-    test("End key navigates to last column", () => {
-      render(
+    test("End key navigates to last column", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2233,7 +2462,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
@@ -2249,8 +2480,8 @@ describe("<Table />", () => {
       expect(lastTh).toBeInTheDocument()
     })
 
-    test("Home key navigates to first column", () => {
-      render(
+    test("Home key navigates to first column", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2259,7 +2490,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const lastColIndex = columns.length - 1
       const lastTh = table.querySelector(
         `[data-colindex="${lastColIndex}"][data-rowindex="0"]`,
@@ -2275,8 +2508,8 @@ describe("<Table />", () => {
       expect(firstTh).toBeInTheDocument()
     })
 
-    test("ignores unknown keys", () => {
-      render(
+    test("ignores unknown keys", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2285,7 +2518,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
@@ -2298,8 +2533,8 @@ describe("<Table />", () => {
   })
 
   describe("keyboard navigation with grouped columns", () => {
-    test("cellMap correctly handles colSpan in grouped headers", () => {
-      render(
+    test("cellMap correctly handles colSpan in grouped headers", async () => {
+      await render(
         <Table
           columns={groupedColumns}
           data={data}
@@ -2308,7 +2543,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const headerCell = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
@@ -2319,8 +2556,8 @@ describe("<Table />", () => {
       expect(table).toBeInTheDocument()
     })
 
-    test("keyboard navigation works with grouped footer cells", () => {
-      render(
+    test("keyboard navigation works with grouped footer cells", async () => {
+      await render(
         <Table
           columns={groupedColumns}
           data={data}
@@ -2330,7 +2567,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const footerCells = table.querySelectorAll("tfoot td[data-colindex]")
 
       expect(footerCells.length).toBeGreaterThan(0)
@@ -2346,7 +2585,7 @@ describe("<Table />", () => {
     test("toggles row selection on click", async () => {
       const onRowSelectionChange = vi.fn()
 
-      const { user } = render(
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2357,16 +2596,18 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = screen.getAllByRole("row")
+      const rows = [
+        ...document.querySelectorAll('[role="row"]'),
+      ] as HTMLElement[]
       const secondDataRow = rows[2]!
 
-      await user.click(secondDataRow)
+      fireEvent.click(secondDataRow)
 
       expect(onRowSelectionChange).toHaveBeenCalledTimes(1)
     })
 
-    test("does not select disabled row on click", () => {
-      render(
+    test("does not select disabled row on click", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2376,7 +2617,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = screen.getAllByRole("row")
+      const rows = [
+        ...document.querySelectorAll('[role="row"]'),
+      ] as HTMLElement[]
       const firstDataRow = rows[1]!
 
       expect(firstDataRow).toHaveAttribute("data-disabled")
@@ -2384,8 +2627,8 @@ describe("<Table />", () => {
   })
 
   describe("footer groups with row selection", () => {
-    test("renders footer with aria-hidden on select column when no footer checkbox", () => {
-      render(
+    test("renders footer with aria-hidden on select column when no footer checkbox", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2395,7 +2638,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const tfoot = table.querySelector("tfoot")
 
       expect(tfoot).toBeInTheDocument()
@@ -2403,8 +2648,8 @@ describe("<Table />", () => {
   })
 
   describe("checkboxProps", () => {
-    test("applies checkboxProps to both header and row checkboxes", () => {
-      render(
+    test("applies checkboxProps to both header and row checkboxes", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2414,15 +2659,17 @@ describe("<Table />", () => {
         />,
       )
 
-      const checkboxes = screen.getAllByRole("checkbox")
+      const checkboxes = [
+        ...document.querySelectorAll('input[type="checkbox"]'),
+      ] as HTMLElement[]
 
       expect(checkboxes.length).toBeGreaterThan(0)
     })
   })
 
   describe("highlightOnHover and highlightOnSelected defaults", () => {
-    test("sets highlightOnHover and highlightOnSelected when enableRowSelection is true", () => {
-      render(
+    test("sets highlightOnHover and highlightOnSelected when enableRowSelection is true", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2431,15 +2678,17 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
 
       expect(table).toBeInTheDocument()
     })
   })
 
   describe("truncated text rendering", () => {
-    test("wraps text in span when truncated is set globally", () => {
-      render(
+    test("wraps text in span when truncated is set globally", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2448,20 +2697,22 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const spans = table.querySelectorAll("span")
 
       expect(spans.length).toBeGreaterThan(0)
     })
 
-    test("does not wrap text in span when neither lineClamp nor truncated", () => {
+    test("does not wrap text in span when neither lineClamp nor truncated", async () => {
       const simpleColumns = [
         columnHelper.accessor("firstName", {
           header: "First Name",
         }),
       ]
 
-      render(
+      await render(
         <Table
           columns={simpleColumns}
           data={data}
@@ -2469,13 +2720,15 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
 
       expect(table).toBeInTheDocument()
     })
 
-    test("wraps text in span when lineClamp is set globally", () => {
-      render(
+    test("wraps text in span when lineClamp is set globally", async () => {
+      await render(
         <Table
           columns={[
             columnHelper.accessor("firstName", { header: "First Name" }),
@@ -2486,12 +2739,14 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
 
       expect(table).toBeInTheDocument()
     })
 
-    test("lineClamp in footer groups wraps text in span", () => {
+    test("lineClamp in footer groups wraps text in span", async () => {
       const columnsWithLineClamp = [
         columnHelper.accessor("firstName", {
           footer: "Footer",
@@ -2500,7 +2755,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columns={columnsWithLineClamp}
           data={data}
@@ -2509,7 +2764,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const tfoot = table.querySelector("tfoot")
 
       expect(tfoot).toBeInTheDocument()
@@ -2517,7 +2774,7 @@ describe("<Table />", () => {
   })
 
   describe("sortDescFirst option", () => {
-    test("renders with sortDescFirst set to true", () => {
+    test("renders with sortDescFirst set to true", async () => {
       const sortableColumns = [
         columnHelper.accessor("firstName", {
           enableSorting: true,
@@ -2525,7 +2782,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columns={sortableColumns}
           data={data}
@@ -2535,7 +2792,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
 
       expect(table).toBeInTheDocument()
 
@@ -2552,8 +2811,8 @@ describe("<Table />", () => {
   })
 
   describe("default state values", () => {
-    test("uses default pagination when not provided", () => {
-      render(
+    test("uses default pagination when not provided", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2562,14 +2821,16 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = screen.getAllByRole("row")
+      const rows = [
+        ...document.querySelectorAll('[role="row"]'),
+      ] as HTMLElement[]
 
       // Default is pageSize: 20, so all 5 data rows + 1 header row
       expect(rows).toHaveLength(6)
     })
 
-    test("uses default row selection when not provided", () => {
-      render(
+    test("uses default row selection when not provided", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2578,7 +2839,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = screen.getAllByRole("row")
+      const rows = [
+        ...document.querySelectorAll('[role="row"]'),
+      ] as HTMLElement[]
       const dataRows = rows.slice(1)
 
       dataRows.forEach((row) => {
@@ -2588,8 +2851,8 @@ describe("<Table />", () => {
   })
 
   describe("state override", () => {
-    test("passes state prop to useReactTable", () => {
-      render(
+    test("passes state prop to useReactTable", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2600,12 +2863,14 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getByTestId("table")).toBeInTheDocument()
+      expect(
+        document.querySelector('[data-testid="table"]') as HTMLElement,
+      ).toBeInTheDocument()
     })
   })
 
   describe("footer rendering details", () => {
-    test("renders footer cell content with flexRender", () => {
+    test("renders footer cell content with flexRender", async () => {
       const columnsWithFooter = [
         columnHelper.accessor("firstName", {
           footer: () => "Total",
@@ -2613,7 +2878,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columns={columnsWithFooter}
           data={data}
@@ -2622,11 +2887,11 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(screen.getByText("Total")).toBeInTheDocument()
+      await expect.element(page.getByText("Total")).toBeInTheDocument()
     })
 
-    test("renders footer with tabIndex when keyboard navigation enabled", () => {
-      render(
+    test("renders footer with tabIndex when keyboard navigation enabled", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2636,7 +2901,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const footerCells = table.querySelectorAll("tfoot td[data-colindex]")
 
       expect(footerCells.length).toBeGreaterThan(0)
@@ -2644,8 +2911,8 @@ describe("<Table />", () => {
   })
 
   describe("keyboard navigation through all sections", () => {
-    test("navigates from header to body to footer", () => {
-      render(
+    test("navigates from header to body to footer", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2655,7 +2922,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
@@ -2672,7 +2941,7 @@ describe("<Table />", () => {
   })
 
   describe("enableAutoResizeTableWidth", () => {
-    test("sets table width based on center total size", () => {
+    test("sets table width based on center total size", async () => {
       const resizableColumns = [
         columnHelper.accessor("firstName", {
           size: 150,
@@ -2686,7 +2955,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columnResizeMode="onChange"
           columns={resizableColumns}
@@ -2697,13 +2966,15 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
 
       // Width should be set to a non-empty value based on column sizes
       expect(table.style.width).not.toBe("")
     })
 
-    test("does not set width when enableAutoResizeTableWidth is false", () => {
+    test("does not set width when enableAutoResizeTableWidth is false", async () => {
       const resizableColumns = [
         columnHelper.accessor("firstName", {
           enableResizing: true,
@@ -2711,7 +2982,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      render(
+      await render(
         <Table
           columnResizeMode="onChange"
           columns={resizableColumns}
@@ -2721,7 +2992,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
 
       expect(table.style.width).toBe("")
     })
@@ -2729,7 +3002,7 @@ describe("<Table />", () => {
 
   describe("keyboard navigation with user.keyboard", () => {
     test("navigates cells with arrow keys", async () => {
-      const { user } = render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -2739,7 +3012,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       ) as HTMLElement
@@ -2772,7 +3047,7 @@ describe("<Table />", () => {
     })
 
     test("navigates to first and last cell with Home and End", async () => {
-      const { user } = render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -2782,7 +3057,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       ) as HTMLElement
@@ -2803,7 +3080,7 @@ describe("<Table />", () => {
     })
 
     test("handles PageDown and PageUp with pagination", async () => {
-      const { user } = render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -2815,7 +3092,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       ) as HTMLElement
@@ -2834,7 +3113,7 @@ describe("<Table />", () => {
     })
 
     test("does not go past last page with PageDown", async () => {
-      const { user } = render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -2846,7 +3125,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       ) as HTMLElement
@@ -2859,7 +3140,7 @@ describe("<Table />", () => {
     })
 
     test("does not go before first page with PageUp", async () => {
-      const { user } = render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -2871,7 +3152,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       ) as HTMLElement
@@ -2884,7 +3167,7 @@ describe("<Table />", () => {
     })
 
     test("updates tabIndex after page change", async () => {
-      const { user } = render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -2896,7 +3179,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       ) as HTMLElement
@@ -2910,7 +3195,7 @@ describe("<Table />", () => {
     })
 
     test("handles focus event on table", async () => {
-      const { user } = render(
+      await render(
         <Table
           columns={columns}
           data={data}
@@ -2920,12 +3205,14 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       ) as HTMLElement
 
-      await user.click(firstTh)
+      fireEvent.click(firstTh)
 
       expect(firstTh).toHaveAttribute("tabindex", "0")
     })
@@ -2966,8 +3253,8 @@ describe("<Table />", () => {
       },
     ]
 
-    test("renders deeply nested header groups with placeholders", () => {
-      render(
+    test("renders deeply nested header groups with placeholders", async () => {
+      await render(
         <Table
           columns={nestedColumns}
           data={data}
@@ -2975,14 +3262,16 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const headerRows = table.querySelectorAll("thead tr")
 
       expect(headerRows.length).toBeGreaterThanOrEqual(2)
     })
 
     test("keyboard navigation works with deeply nested grouped columns", async () => {
-      const { user } = render(
+      const { user } = await render(
         <Table
           columns={nestedColumns}
           data={data}
@@ -2992,7 +3281,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const firstCell = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       ) as HTMLElement
@@ -3004,8 +3295,8 @@ describe("<Table />", () => {
       expect(table).toBeInTheDocument()
     })
 
-    test("renders deeply nested footer groups", () => {
-      render(
+    test("renders deeply nested footer groups", async () => {
+      await render(
         <Table
           columns={nestedColumns}
           data={data}
@@ -3014,7 +3305,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = screen.getByTestId("table")
+      const table = document.querySelector(
+        '[data-testid="table"]',
+      ) as HTMLElement
       const footerRows = table.querySelectorAll("tfoot tr")
 
       expect(footerRows.length).toBeGreaterThanOrEqual(2)

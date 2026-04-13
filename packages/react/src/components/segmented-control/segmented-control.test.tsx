@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { a11y, fireEvent, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { SegmentedControl } from "./"
 
 const items: Required<SegmentedControl.RootProps>["items"] = [
@@ -24,61 +24,75 @@ describe("<SegmentedControl />", () => {
     expect(SegmentedControl.Item.displayName).toBe("SegmentedControlItem")
   })
 
-  test("sets `className` correctly", () => {
-    render(<TestComponent />)
-    expect(screen.getByRole("radiogroup")).toHaveClass(
-      "ui-segmented-control__root",
-    )
-    expect(screen.getAllByRole("radio")[0]?.parentElement).toHaveClass(
-      "ui-segmented-control__item",
-    )
+  test("sets `className` correctly", async () => {
+    await render(<TestComponent />)
+
+    await expect
+      .element(page.getByRole("radiogroup"))
+      .toHaveClass("ui-segmented-control__root")
+    expect(
+      page.getByRole("radio", { name: "One" }).element().parentElement,
+    ).toHaveClass("ui-segmented-control__item")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<TestComponent />)
-    expect(screen.getByRole("radiogroup").tagName).toBe("DIV")
-    expect(screen.getAllByRole("radio")[0]?.parentElement?.tagName).toBe(
-      "LABEL",
-    )
+  test("renders HTML tag correctly", async () => {
+    await render(<TestComponent />)
+
+    expect(page.getByRole("radiogroup").element().tagName).toBe("DIV")
+    expect(
+      page.getByRole("radio", { name: "One" }).element().parentElement?.tagName,
+    ).toBe("LABEL")
   })
 
-  test("should disable segmented control", () => {
-    render(<TestComponent disabled />)
-    Array.from(
-      screen.getByRole("radiogroup").getElementsByTagName("input"),
-    ).forEach((input) => {
-      expect(input).toBeDisabled()
-    })
+  test("should disable segmented control", async () => {
+    await render(<TestComponent disabled />)
+
+    await expect
+      .element(page.getByRole("radio", { name: "One" }))
+      .toBeDisabled()
+    await expect
+      .element(page.getByRole("radio", { name: "Two" }))
+      .toBeDisabled()
+    await expect
+      .element(page.getByRole("radio", { name: "Three" }))
+      .toBeDisabled()
   })
 
-  test("should call onChange when a different item is selected", () => {
+  test("should call onChange when a different item is selected", async () => {
     const onChange = vi.fn()
-    render(<TestComponent onChange={onChange} />)
+    await render(<TestComponent onChange={onChange} />)
 
-    const radios = screen.getAllByRole("radio")
-    fireEvent.click(radios[1]!)
+    page.getByRole("radio", { name: "Two" }).element().click()
     expect(onChange).toHaveBeenCalledWith("two")
   })
 
-  test("should update selected item when clicked", () => {
-    render(<TestComponent />)
+  test("should update selected item when clicked", async () => {
+    await render(<TestComponent />)
 
-    const radios = screen.getAllByRole("radio")
-    expect(radios[0]).toBeChecked()
+    const one = page.getByRole("radio", { name: "One" })
+    const two = page.getByRole("radio", { name: "Two" })
 
-    fireEvent.click(radios[1]!)
-    expect(radios[1]).toBeChecked()
+    await expect.element(one).toBeChecked()
+
+    two.element().click()
+    await expect.element(two).toBeChecked()
   })
 
-  test("should apply readOnly attributes", () => {
-    render(<TestComponent readOnly />)
+  test("should apply readOnly attributes", async () => {
+    await render(<TestComponent readOnly />)
 
-    const root = screen.getByRole("radiogroup")
-    expect(root).toHaveAttribute("data-readonly")
+    await expect
+      .element(page.getByRole("radiogroup"))
+      .toHaveAttribute("data-readonly")
 
-    const radios = screen.getAllByRole("radio")
-    radios.forEach((radio) => {
-      expect(radio).toHaveAttribute("data-readonly")
-    })
+    await expect
+      .element(page.getByRole("radio", { name: "One" }))
+      .toHaveAttribute("data-readonly")
+    await expect
+      .element(page.getByRole("radio", { name: "Two" }))
+      .toHaveAttribute("data-readonly")
+    await expect
+      .element(page.getByRole("radio", { name: "Three" }))
+      .toHaveAttribute("data-readonly")
   })
 })

@@ -33,10 +33,8 @@ export interface ToolDetectEntry {
 
 export interface FormatterConfig extends FormatterOptions {
   enabled?: boolean
-  tool?: FormatterTool
 }
 
 export interface LinterConfig extends LinterOptions {
   enabled?: boolean
-  tool?: LinterTool
 }

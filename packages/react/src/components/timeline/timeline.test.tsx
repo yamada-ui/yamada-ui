@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Timeline } from "."
 
 const items: Timeline.Item[] = [
@@ -31,62 +31,73 @@ describe("<Timeline />", () => {
     expect(Timeline.Indicator.displayName).toBe("TimelineIndicator")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Timeline.Root items={items} />)
-    const item = screen.getAllByRole("listitem")[0]
-    expect(screen.getByRole("list")).toHaveClass("ui-timeline__root")
-    expect(item).toHaveClass("ui-timeline__item")
-    expect(item?.children[0]).toHaveClass("ui-timeline__connector")
-    expect(item?.children[0]?.children[0]).toHaveClass("ui-timeline__indicator")
-    expect(item?.children[1]).toHaveClass("ui-timeline__content")
-    expect(screen.getByText("Step 1")).toHaveClass("ui-timeline__title")
-    expect(screen.getByText("Step 1 description")).toHaveClass(
-      "ui-timeline__description",
+  test("sets `className` correctly", async () => {
+    await render(<Timeline.Root items={items} />)
+    const item = page.getByRole("listitem").first()
+    await expect
+      .element(page.getByRole("list"))
+      .toHaveClass("ui-timeline__root")
+    await expect.element(item).toHaveClass("ui-timeline__item")
+    const itemEl = item.element()
+    expect(itemEl.children[0]).toHaveClass("ui-timeline__connector")
+    expect(itemEl.children[0]?.children[0]).toHaveClass(
+      "ui-timeline__indicator",
     )
+    expect(itemEl.children[1]).toHaveClass("ui-timeline__content")
+    await expect
+      .element(page.getByRole("heading", { name: "Step 1" }))
+      .toHaveClass("ui-timeline__title")
+    await expect
+      .element(page.getByText("Step 1 description"))
+      .toHaveClass("ui-timeline__description")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Timeline.Root items={items} />)
-    const item = screen.getAllByRole("listitem")[0]
-    expect(screen.getByRole("list").tagName).toBe("UL")
-    expect(item?.tagName).toBe("LI")
-    expect(item?.children[0]?.tagName).toBe("DIV")
-    expect(item?.children[0]?.children[0]?.tagName).toBe("DIV")
-    expect(item?.children[1]?.tagName).toBe("DIV")
-    expect(screen.getByText("Step 1").tagName).toBe("H3")
-    expect(screen.getByText("Step 1 description").tagName).toBe("P")
+  test("renders HTML tag correctly", async () => {
+    await render(<Timeline.Root items={items} />)
+    const item = page.getByRole("listitem").first()
+    const itemEl = item.element()
+    expect(page.getByRole("list").element().tagName).toBe("UL")
+    expect(itemEl.tagName).toBe("LI")
+    expect(itemEl.children[0]?.tagName).toBe("DIV")
+    expect(itemEl.children[0]?.children[0]?.tagName).toBe("DIV")
+    expect(itemEl.children[1]?.tagName).toBe("DIV")
+    expect(
+      page.getByRole("heading", { name: "Step 1" }).element().tagName,
+    ).toBe("H3")
+    expect(page.getByText("Step 1 description").element().tagName).toBe("P")
   })
 
-  test("renders numbers in indicators with `number` variant", () => {
-    render(<Timeline.Root variant="number" items={items} />)
-    const listItems = screen.getAllByRole("listitem")
+  test("renders numbers in indicators with `number` variant", async () => {
+    await render(<Timeline.Root variant="number" items={items} />)
+    const listItems = document.querySelectorAll('[role="listitem"]')
 
-    listItems.forEach((item, index) => {
-      const indicator = item.children[0]?.children[0]
+    listItems.forEach((itemEl, index) => {
+      const indicator = itemEl.children[0]?.children[0]
       expect(indicator).toHaveTextContent(String(index + 1))
     })
   })
 
-  test("does not render numbers in indicators without `number` variant", () => {
-    render(<Timeline.Root items={items} />)
-    const listItems = screen.getAllByRole("listitem")
+  test("does not render numbers in indicators without `number` variant", async () => {
+    await render(<Timeline.Root items={items} />)
+    const listItems = document.querySelectorAll('[role="listitem"]')
 
-    listItems.forEach((item) => {
-      const indicator = item.children[0]?.children[0]
-      expect(indicator).not.toHaveTextContent(/\d/)
+    listItems.forEach((itemEl) => {
+      const indicator = itemEl.children[0]?.children[0]
+      expect(indicator?.textContent ?? "").not.toMatch(/\d/)
     })
   })
 
-  test("custom indicator takes precedence over number variant", () => {
+  test("custom indicator takes precedence over number variant", async () => {
     const itemsWithIndicator: Timeline.Item[] = [
       { indicator: "A", title: "Step 1" },
       { title: "Step 2" },
     ]
 
-    render(<Timeline.Root variant="number" items={itemsWithIndicator} />)
-    const listItems = screen.getAllByRole("listitem")
-    const firstIndicator = listItems[0]?.children[0]?.children[0]
-    const secondIndicator = listItems[1]?.children[0]?.children[0]
+    await render(<Timeline.Root variant="number" items={itemsWithIndicator} />)
+    const firstIndicator = page.getByRole("listitem").nth(0).element()
+      .children[0]?.children[0]
+    const secondIndicator = page.getByRole("listitem").nth(1).element()
+      .children[0]?.children[0]
 
     expect(firstIndicator).toHaveTextContent("A")
     expect(secondIndicator).toHaveTextContent("2")

@@ -4,55 +4,13 @@ import { GLOBALS_UPDATED } from "storybook/internal/core-events"
 import { addons } from "storybook/preview-api"
 import { extendConfig, isRtl, UIProvider, useColorMode, VStack } from "../src"
 import { themes } from "./themes"
+import { setupFixedDateForVisualTest } from "./visual-test"
 
 const channel = addons.getChannel()
 
-type VisualTestGlobal = typeof globalThis & {
-  __YAMADA_UI_FIXED_DATE_APPLIED__?: boolean
-  __YAMADA_UI_VISUAL_TEST__?: boolean
-  IS_CHROMATIC?: boolean
-}
-
-const globalForVisualTest = globalThis as VisualTestGlobal
-
-const isVisualTest = () => {
-  if (globalForVisualTest.__YAMADA_UI_VISUAL_TEST__) return true
-  if (globalForVisualTest.IS_CHROMATIC) return true
-
-  const params = new URLSearchParams(globalForVisualTest.location.search)
-
-  return params.get("visual-test") === "true"
-}
-
-const setupFixedDateForVisualTest = () => {
-  if (!isVisualTest() || globalForVisualTest.__YAMADA_UI_FIXED_DATE_APPLIED__) {
-    return
-  }
-
-  const fixedNow = Date.UTC(2025, 3, 15, 13, 24, 36)
-  const RealDate = Date
-
-  class MockDate extends RealDate {
-    constructor(...args: unknown[]) {
-      if (!args.length) {
-        super(fixedNow)
-
-        return
-      }
-
-      super(...(args as ConstructorParameters<typeof Date>))
-    }
-
-    static now() {
-      return fixedNow
-    }
-  }
-
-  globalForVisualTest.Date = MockDate as DateConstructor
-  globalForVisualTest.__YAMADA_UI_FIXED_DATE_APPLIED__ = true
-}
-
-setupFixedDateForVisualTest()
+setupFixedDateForVisualTest({
+  envValue: import.meta.env.STORYBOOK_VISUAL_TEST,
+})
 
 const preview: Preview = {
   decorators: [

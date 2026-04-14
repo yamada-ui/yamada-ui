@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { ShoppingCartIcon } from "../icon"
 import { EmptyState } from "./"
 
@@ -19,8 +19,8 @@ describe("<EmptyState />", () => {
     expect(EmptyState.Indicator.displayName).toBe("EmptyStateIndicator")
   })
 
-  test("sets `className` correctly", () => {
-    render(
+  test("sets `className` correctly", async () => {
+    await render(
       <EmptyState.Root data-testid="root">
         <EmptyState.Indicator data-testid="indicator">
           <ShoppingCartIcon />
@@ -33,18 +33,22 @@ describe("<EmptyState />", () => {
         </EmptyState.Description>
       </EmptyState.Root>,
     )
-    expect(screen.getByTestId("root")).toHaveClass("ui-empty-state__root")
-    expect(screen.getByTestId("indicator")).toHaveClass(
-      "ui-empty-state__indicator",
-    )
-    expect(screen.getByTestId("title")).toHaveClass("ui-empty-state__title")
-    expect(screen.getByTestId("description")).toHaveClass(
-      "ui-empty-state__description",
-    )
+    await expect
+      .element(page.getByTestId("root"))
+      .toHaveClass("ui-empty-state__root")
+    await expect
+      .element(page.getByTestId("indicator"))
+      .toHaveClass("ui-empty-state__indicator")
+    await expect
+      .element(page.getByTestId("title"))
+      .toHaveClass("ui-empty-state__title")
+    await expect
+      .element(page.getByTestId("description"))
+      .toHaveClass("ui-empty-state__description")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(
+  test("renders HTML tag correctly", async () => {
+    await render(
       <EmptyState.Root data-testid="root">
         <EmptyState.Indicator data-testid="indicator">
           <ShoppingCartIcon />
@@ -57,16 +61,16 @@ describe("<EmptyState />", () => {
         </EmptyState.Description>
       </EmptyState.Root>,
     )
-    expect(screen.getByTestId("root").tagName).toBe("DIV")
-    expect(screen.getByTestId("indicator").tagName).toBe("DIV")
-    expect(screen.getByTestId("title").tagName).toBe("H3")
-    expect(screen.getByTestId("description").tagName).toBe("P")
+    expect(page.getByTestId("root").element().tagName).toBe("DIV")
+    expect(page.getByTestId("indicator").element().tagName).toBe("DIV")
+    expect(page.getByTestId("title").element().tagName).toBe("H3")
+    expect(page.getByTestId("description").element().tagName).toBe("P")
   })
 
   test("EmptyState renders correctly with a given title", async () => {
     const title = "Cart is empty"
     const description = "Please add items to the cart"
-    render(
+    await render(
       <EmptyState.Root
         data-testid="empty-state"
         description={description}
@@ -74,20 +78,20 @@ describe("<EmptyState />", () => {
       />,
     )
 
-    const EmptyStateComponent = await screen.findByTestId("empty-state")
-    expect(EmptyStateComponent).toBeInTheDocument()
+    const emptyStateComponent = page.getByTestId("empty-state").element()
+    expect(emptyStateComponent).toBeInTheDocument()
 
-    const H3Component = screen.getByRole("heading", { level: 3 })
-    expect(H3Component).toHaveTextContent(title)
+    const h3Component = page.getByRole("heading", { level: 3 }).element()
+    expect(h3Component).toHaveTextContent(title)
 
-    expect(EmptyStateComponent).toContainElement(H3Component)
+    expect(emptyStateComponent).toContainElement(h3Component)
   })
 
   test("EmptyState renders correctly with a given title and description", async () => {
     const title = "Cart is empty"
     const description = "Please add items to the cart"
 
-    render(
+    await render(
       <EmptyState.Root
         data-testid="empty-state"
         description={description}
@@ -95,24 +99,24 @@ describe("<EmptyState />", () => {
       />,
     )
 
-    const EmptyStateComponent = await screen.findByTestId("empty-state")
-    expect(EmptyStateComponent).toBeInTheDocument()
+    const emptyStateComponent = page.getByTestId("empty-state").element()
+    expect(emptyStateComponent).toBeInTheDocument()
 
-    const H3Component = screen.getByRole("heading", { level: 3 })
-    expect(H3Component).toHaveTextContent(title)
+    const h3Component = page.getByRole("heading", { level: 3 }).element()
+    expect(h3Component).toHaveTextContent(title)
 
-    const ParagraphComponent = screen.getByText(description)
-    expect(ParagraphComponent).toBeInTheDocument()
+    const paragraphComponent = page.getByText(description).element()
+    expect(paragraphComponent).toBeInTheDocument()
 
-    expect(EmptyStateComponent).toContainElement(H3Component)
-    expect(EmptyStateComponent).toContainElement(ParagraphComponent)
+    expect(emptyStateComponent).toContainElement(h3Component)
+    expect(emptyStateComponent).toContainElement(paragraphComponent)
   })
 
   test("EmptyState renders correctly with a given title, description and indicator", async () => {
     const title = "Cart is empty"
     const description = "Please add items to the cart"
     const SvgIcon = <ShoppingCartIcon />
-    render(
+    await render(
       <EmptyState.Root
         data-testid="empty-state"
         description={description}
@@ -121,28 +125,28 @@ describe("<EmptyState />", () => {
       />,
     )
 
-    const EmptyStateComponent = await screen.findByTestId("empty-state")
-    expect(EmptyStateComponent).toBeInTheDocument()
+    const emptyStateComponent = page.getByTestId("empty-state").element()
+    expect(emptyStateComponent).toBeInTheDocument()
 
-    const H3Component = screen.getByRole("heading", { level: 3 })
-    expect(H3Component).toHaveTextContent(title)
+    const h3Component = page.getByRole("heading", { level: 3 }).element()
+    expect(h3Component).toHaveTextContent(title)
 
-    const ParagraphComponent = screen.getByText(description)
-    expect(ParagraphComponent).toBeInTheDocument()
+    const paragraphComponent = page.getByText(description).element()
+    expect(paragraphComponent).toBeInTheDocument()
 
-    const svgIcon = EmptyStateComponent.querySelector("svg")
+    const svgIcon = emptyStateComponent.querySelector("svg")
     expect(svgIcon).toBeInTheDocument()
 
-    expect(EmptyStateComponent).toContainElement(H3Component)
-    expect(EmptyStateComponent).toContainElement(ParagraphComponent)
-    expect(EmptyStateComponent).toContainElement(svgIcon)
+    expect(emptyStateComponent).toContainElement(h3Component)
+    expect(emptyStateComponent).toContainElement(paragraphComponent)
+    expect(emptyStateComponent).toContainElement(svgIcon)
   })
 
   test("EmptyState renders correctly with a given title, description, indicator and children", async () => {
     const title = "Cart is empty"
     const description = "Please add items to the cart"
     const buttonCaption = "Back to home"
-    render(
+    await render(
       <EmptyState.Root
         data-testid="empty-state"
         description={description}
@@ -153,51 +157,55 @@ describe("<EmptyState />", () => {
       </EmptyState.Root>,
     )
 
-    const EmptyStateComponent = await screen.findByTestId("empty-state")
-    expect(EmptyStateComponent).toBeInTheDocument()
+    const emptyStateComponent = page.getByTestId("empty-state").element()
+    expect(emptyStateComponent).toBeInTheDocument()
 
-    const H3Component = screen.getByRole("heading", { level: 3 })
-    expect(H3Component).toHaveTextContent(title)
+    const h3Component = page.getByRole("heading", { level: 3 }).element()
+    expect(h3Component).toHaveTextContent(title)
 
-    const ParagraphComponent = screen.getByText(description)
-    expect(ParagraphComponent).toBeInTheDocument()
+    const paragraphComponent = page.getByText(description).element()
+    expect(paragraphComponent).toBeInTheDocument()
 
-    const svgIcon = EmptyStateComponent.querySelector("svg")
+    const svgIcon = emptyStateComponent.querySelector("svg")
     expect(svgIcon).toBeInTheDocument()
 
-    const ButtonElement = screen.getByRole("button", { name: buttonCaption })
-    expect(ButtonElement).toBeInTheDocument()
+    const buttonElement = page
+      .getByRole("button", { name: buttonCaption })
+      .element()
+    expect(buttonElement).toBeInTheDocument()
 
-    expect(EmptyStateComponent).toContainElement(H3Component)
-    expect(EmptyStateComponent).toContainElement(ParagraphComponent)
-    expect(EmptyStateComponent).toContainElement(svgIcon)
-    expect(EmptyStateComponent).toContainElement(ButtonElement)
+    expect(emptyStateComponent).toContainElement(h3Component)
+    expect(emptyStateComponent).toContainElement(paragraphComponent)
+    expect(emptyStateComponent).toContainElement(svgIcon)
+    expect(emptyStateComponent).toContainElement(buttonElement)
   })
 
-  test("EmptyState does not render title when title prop is not provided", () => {
+  test("EmptyState does not render title when title prop is not provided", async () => {
     const description = "Please add items to the cart"
-    render(
+    const { container } = await render(
       <EmptyState.Root data-testid="empty-state" description={description} />,
     )
 
-    const EmptyStateComponent = screen.getByTestId("empty-state")
-    expect(EmptyStateComponent).toBeInTheDocument()
+    const emptyStateComponent = page.getByTestId("empty-state").element()
+    expect(emptyStateComponent).toBeInTheDocument()
 
-    const headingElements = screen.queryAllByRole("heading", { level: 3 })
+    const headingElements = container.querySelectorAll("h3")
     expect(headingElements).toHaveLength(0)
 
-    const ParagraphComponent = screen.getByText(description)
-    expect(ParagraphComponent).toBeInTheDocument()
+    const paragraphComponent = page.getByText(description).element()
+    expect(paragraphComponent).toBeInTheDocument()
   })
 
-  test("EmptyState does not render description when description prop is not provided", () => {
+  test("EmptyState does not render description when description prop is not provided", async () => {
     const title = "Cart is empty"
-    render(<EmptyState.Root data-testid="empty-state" title={title} />)
+    const { container } = await render(
+      <EmptyState.Root data-testid="empty-state" title={title} />,
+    )
 
-    const EmptyStateComponent = screen.getByTestId("empty-state")
-    expect(EmptyStateComponent).toBeInTheDocument()
+    const emptyStateComponent = page.getByTestId("empty-state").element()
+    expect(emptyStateComponent).toBeInTheDocument()
 
-    const ParagraphComponent = screen.queryAllByRole("paragraph")
-    expect(ParagraphComponent).toHaveLength(0)
+    const paragraphComponents = container.querySelectorAll("p")
+    expect(paragraphComponents).toHaveLength(0)
   })
 })

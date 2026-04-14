@@ -1,4 +1,6 @@
-import { a11y, filterVisuallyHidden, fireEvent, render, screen } from "#test"
+import { filterVisuallyHidden } from "#test"
+import { a11y, render } from "#test/browser"
+import { fireEvent, screen } from "@testing-library/react"
 import { Field } from "."
 import { Form } from "../form"
 import { Input } from "../input"
@@ -15,8 +17,8 @@ describe("<Field />", () => {
     expect(Field.ErrorMessage.displayName).toBe("FieldErrorMessage")
   })
 
-  test("Field sets `className` correctly", () => {
-    const { rerender } = render(
+  test("Field sets `className` correctly", async () => {
+    const { rerender } = await render(
       <Field.Root data-testid="root">
         <Field.Label data-testid="label">Label</Field.Label>
         <Field.HelperMessage data-testid="helper">Helper</Field.HelperMessage>
@@ -28,7 +30,7 @@ describe("<Field />", () => {
     expect(screen.getByTestId("label")).toHaveClass("ui-field__label")
     expect(screen.getByTestId("helper")).toHaveClass("ui-field__helper-message")
 
-    rerender(
+    await rerender(
       <Field.Root data-testid="root" invalid>
         <Field.Label data-testid="label">Label</Field.Label>
         <Field.HelperMessage data-testid="helper">Helper</Field.HelperMessage>
@@ -38,8 +40,8 @@ describe("<Field />", () => {
     expect(screen.getByTestId("error")).toHaveClass("ui-field__error-message")
   })
 
-  test("Field renders HTML tag correctly", () => {
-    const { rerender } = render(
+  test("Field renders HTML tag correctly", async () => {
+    const { rerender } = await render(
       <Field.Root data-testid="root">
         <Field.Label>Label</Field.Label>
         <Field.HelperMessage>Helper</Field.HelperMessage>
@@ -51,7 +53,7 @@ describe("<Field />", () => {
     expect(screen.getByText("Label").tagName).toBe("LABEL")
     expect(screen.getByText("Helper").tagName).toBe("SPAN")
 
-    rerender(
+    await rerender(
       <Field.Root data-testid="root" invalid>
         <Field.Label>Label</Field.Label>
         <Field.HelperMessage>Helper</Field.HelperMessage>
@@ -61,8 +63,8 @@ describe("<Field />", () => {
     expect(screen.getByText("Error").tagName).toBe("SPAN")
   })
 
-  test("should render form control", () => {
-    render(
+  test("should render form control", async () => {
+    await render(
       <Field.Root helperMessage="Please enter your email" label="Email">
         <Input type="email" />
       </Field.Root>,
@@ -74,8 +76,8 @@ describe("<Field />", () => {
     expect(screen.getByRole("textbox")).toBeInTheDocument()
   })
 
-  test("should render invalid form control", () => {
-    render(
+  test("should render invalid form control", async () => {
+    await render(
       <Field.Root errorMessage="Email is required." invalid label="Email">
         <Input type="email" />
       </Field.Root>,
@@ -87,8 +89,8 @@ describe("<Field />", () => {
     ).toBeInTheDocument()
   })
 
-  test("should be hidden helperMessage", () => {
-    render(
+  test("should be hidden helperMessage", async () => {
+    await render(
       <Field.Root
         errorMessage="Email is required."
         helperMessage="Please enter your email"
@@ -107,8 +109,8 @@ describe("<Field />", () => {
     ).not.toBeVisible()
   })
 
-  test("should be appeared helperMessage", () => {
-    render(
+  test("should be appeared helperMessage", async () => {
+    await render(
       <Field.Root
         errorMessage="Email is required."
         helperMessage="Please enter your email"
@@ -127,8 +129,8 @@ describe("<Field />", () => {
     ).toBeInTheDocument()
   })
 
-  test("should be required", () => {
-    render(
+  test("should be required", async () => {
+    await render(
       <Field.Root label="Email" required>
         <Input type="email" />
       </Field.Root>,
@@ -136,8 +138,8 @@ describe("<Field />", () => {
     expect(screen.getByRole("textbox")).toBeRequired()
   })
 
-  test("should be disabled", () => {
-    render(
+  test("should be disabled", async () => {
+    await render(
       <Field.Root disabled label="Email">
         <Input type="email" />
       </Field.Root>,
@@ -145,8 +147,8 @@ describe("<Field />", () => {
     expect(screen.getByRole("textbox")).toBeDisabled()
   })
 
-  test("should be readonly", () => {
-    render(
+  test("should be readonly", async () => {
+    await render(
       <Field.Root label="Email" readOnly>
         <Input type="email" />
       </Field.Root>,
@@ -154,8 +156,8 @@ describe("<Field />", () => {
     expect(screen.getByRole("textbox")).toHaveAttribute("aria-readonly", "true")
   })
 
-  test("should render custom indicator *", () => {
-    render(
+  test("should render custom indicator *", async () => {
+    await render(
       <Field.Root label="Email" required>
         <Input type="email" />
       </Field.Root>,
@@ -163,8 +165,8 @@ describe("<Field />", () => {
     expect(screen.getByText("*")).toBeInTheDocument()
   })
 
-  test("should render custom indicator text", () => {
-    render(
+  test("should render custom indicator text", async () => {
+    await render(
       <Field.Root label="Email" required requiredIndicator="required">
         <Input type="email" />
       </Field.Root>,
@@ -172,8 +174,8 @@ describe("<Field />", () => {
     expect(screen.getByText("required")).toBeInTheDocument()
   })
 
-  test("should render custom indicator jsx", () => {
-    render(
+  test("should render custom indicator jsx", async () => {
+    await render(
       <Field.Root
         label="Email"
         required
@@ -185,8 +187,8 @@ describe("<Field />", () => {
     expect(screen.getByTestId("required")).toHaveTextContent("required")
   })
 
-  test("should render custom optional indicator", () => {
-    render(
+  test("should render custom optional indicator", async () => {
+    await render(
       <Field.Root
         label="Email"
         optionalIndicator={<div data-testid="optional">optional</div>}
@@ -197,8 +199,8 @@ describe("<Field />", () => {
     expect(screen.getByTestId("optional")).toHaveTextContent("optional")
   })
 
-  test("should render aria-describedby with HelperMessage", () => {
-    render(
+  test("should render aria-describedby with HelperMessage", async () => {
+    await render(
       <Field.Root
         helperMessage="We'll never share your email."
         label="Email address"
@@ -216,8 +218,8 @@ describe("<Field />", () => {
     ).toBeInTheDocument()
   })
 
-  test("should inherit object-based disabled from Form context", () => {
-    render(
+  test("should inherit object-based disabled from Form context", async () => {
+    await render(
       <Form.Root disabled={{ email: true }}>
         <Field.Root name="email" label="Email">
           <Input type="email" />
@@ -227,8 +229,8 @@ describe("<Field />", () => {
     expect(screen.getByRole("textbox")).toBeDisabled()
   })
 
-  test("should inherit object-based invalid from Form context", () => {
-    render(
+  test("should inherit object-based invalid from Form context", async () => {
+    await render(
       <Form.Root invalid={{ email: true }}>
         <Field.Root name="email" label="Email">
           <Input type="email" />
@@ -238,8 +240,8 @@ describe("<Field />", () => {
     expect(screen.getByRole("textbox")).toBeInvalid()
   })
 
-  test("should inherit object-based readOnly from Form context", () => {
-    render(
+  test("should inherit object-based readOnly from Form context", async () => {
+    await render(
       <Form.Root readOnly={{ email: true }}>
         <Field.Root name="email" label="Email">
           <Input type="email" />
@@ -249,8 +251,8 @@ describe("<Field />", () => {
     expect(screen.getByRole("textbox")).toHaveAttribute("aria-readonly", "true")
   })
 
-  test("should inherit object-based required from Form context", () => {
-    render(
+  test("should inherit object-based required from Form context", async () => {
+    await render(
       <Form.Root required={{ email: true }}>
         <Field.Root name="email" label="Email">
           <Input type="email" />
@@ -260,8 +262,8 @@ describe("<Field />", () => {
     expect(screen.getByRole("textbox")).toBeRequired()
   })
 
-  test("should inherit object-based replace from Form context", () => {
-    render(
+  test("should inherit object-based replace from Form context", async () => {
+    await render(
       <Form.Root
         errorMessage={{ email: "Email is required." }}
         helperMessage={{ email: "Please enter your email" }}
@@ -281,8 +283,8 @@ describe("<Field />", () => {
     ).not.toBeVisible()
   })
 
-  test("should inherit object-based form flags via input name", () => {
-    render(
+  test("should inherit object-based form flags via input name", async () => {
+    await render(
       <Form.Root
         disabled={{ email: true }}
         invalid={{ email: true }}
@@ -302,8 +304,8 @@ describe("<Field />", () => {
     expect(input).toBeRequired()
   })
 
-  test("should inherit scalar form flags via input name", () => {
-    render(
+  test("should inherit scalar form flags via input name", async () => {
+    await render(
       <Form.Root disabled invalid readOnly required>
         <Field.Root label="Email">
           <Input type="email" name="email" />
@@ -318,8 +320,8 @@ describe("<Field />", () => {
     expect(input).toBeRequired()
   })
 
-  test("should set focused state on focus and blur", () => {
-    render(
+  test("should set focused state on focus and blur", async () => {
+    await render(
       <Field.Root data-testid="root" label="Email">
         <Input type="email" />
       </Field.Root>,

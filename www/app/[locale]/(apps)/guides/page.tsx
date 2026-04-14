@@ -48,7 +48,7 @@ export default async function Page({ params }: PageProps<"/[locale]/guides">) {
 
   return (
     <VStack gap="2xl" py="lg" w="full">
-      <VStack as="header" gap="sm">
+      <VStack as="header" gap="3">
         <Heading as="h1" size="5xl">
           {t("title")}
         </Heading>

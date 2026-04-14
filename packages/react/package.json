@@ -38,6 +38,7 @@
   },
   "imports": {
     "#storybook": "./storybook/index.ts",
+    "#storybook/visual-test": "./storybook/visual-test.ts",
     "#test": "./test/index.ts",
     "#test/browser": "./test/browser/index.ts"
   },

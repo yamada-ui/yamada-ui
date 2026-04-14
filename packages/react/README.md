@@ -18,6 +18,21 @@ Yamada UI has drawn a lot of inspiration from [Chakra UI](https://github.com/cha
 
 Visit https://yamada-ui.com to view the documentation.
 
+## Local Visual Test Workflow
+
+For maintainers validating deterministic visual-test behavior locally:
+
+```bash
+pnpm react storybook
+pnpm react visual-test:storybook
+pnpm react visual-test:build
+export CHROMATIC_PROJECT_TOKEN=<your-project-token>
+pnpm react visual-test:chromatic
+```
+
+`pnpm react storybook` keeps normal dynamic docs behavior.
+`STORYBOOK_VISUAL_TEST=true` is applied only by visual-test scripts.
+
 ## Support
 
 Please support this project with you or your organization. Your logo will appear here with a link to your website. We'll appreciate some support. [[Contribute](https://opencollective.com/yamada-ui/contribute)]

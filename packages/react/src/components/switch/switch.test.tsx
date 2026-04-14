@@ -35,7 +35,7 @@ describe("<Switch />", () => {
 
     const switchElement = page.getByRole("switch", { name: /Switch/i })
 
-    switchElement.element().click()
+    ;(switchElement.element() as HTMLElement).click()
 
     await expect.element(switchElement).toBeChecked()
   })
@@ -90,7 +90,7 @@ describe("<Switch />", () => {
 
     const switchElement = page.getByRole("switch", { name: /Switch/i })
 
-    switchElement.element().click()
+    ;(switchElement.element() as HTMLElement).click()
 
     expect(
       container.querySelector('[data-testid="icon-on"]'),

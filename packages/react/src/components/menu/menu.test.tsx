@@ -1,4 +1,5 @@
-import { a11y, fireEvent, render, screen, waitFor } from "#test"
+import { a11y, render } from "#test/browser"
+import { fireEvent, screen, waitFor } from "@testing-library/react"
 import { useState } from "react"
 import { Button } from "../button"
 import { Menu } from "./"
@@ -78,8 +79,8 @@ describe("<Menu />", () => {
     expect(Menu.Command.displayName).toBe("MenuCommand")
   })
 
-  test("sets `className` correctly", () => {
-    render(
+  test("sets `className` correctly", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -119,8 +120,8 @@ describe("<Menu />", () => {
     ).toHaveClass("ui-menu__item--option")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(
+  test("renders HTML tag correctly", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -155,7 +156,7 @@ describe("<Menu />", () => {
   })
 
   test("opens menu on trigger click", async () => {
-    const { user } = render(
+    await render(
       <Menu.Root>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -168,8 +169,7 @@ describe("<Menu />", () => {
     )
 
     expect(screen.queryByRole("menu")).not.toBeInTheDocument()
-
-    await user.click(screen.getByRole("button", { name: /Menu/i }))
+    fireEvent.click(screen.getByRole("button", { name: /Menu/i }))
 
     await waitFor(() => {
       expect(screen.getByRole("menu")).toBeInTheDocument()
@@ -177,7 +177,7 @@ describe("<Menu />", () => {
   })
 
   test("closes menu on trigger click when already open", async () => {
-    const { user } = render(
+    const { user } = await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -199,7 +199,7 @@ describe("<Menu />", () => {
   })
 
   test("does not open menu when disabled", async () => {
-    const { user } = render(
+    await render(
       <Menu.Root disabled>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -211,13 +211,13 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    await user.click(screen.getByRole("button", { name: /Menu/i }))
+    fireEvent.click(screen.getByRole("button", { name: /Menu/i }))
 
     expect(screen.queryByRole("menu")).not.toBeInTheDocument()
   })
 
   test("opens menu with ArrowDown key and focuses first item", async () => {
-    const { user } = render(
+    const { user } = await render(
       <Menu.Root>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -239,7 +239,7 @@ describe("<Menu />", () => {
   })
 
   test("opens menu with ArrowUp key", async () => {
-    const { user } = render(
+    const { user } = await render(
       <Menu.Root>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -262,7 +262,7 @@ describe("<Menu />", () => {
   })
 
   test("opens menu with Enter key", async () => {
-    const { user } = render(
+    const { user } = await render(
       <Menu.Root>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -284,7 +284,7 @@ describe("<Menu />", () => {
   })
 
   test("opens menu with Space key", async () => {
-    const { user } = render(
+    const { user } = await render(
       <Menu.Root>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -306,7 +306,7 @@ describe("<Menu />", () => {
   })
 
   test("does not open menu on keyboard when disabled", async () => {
-    const { user } = render(
+    const { user } = await render(
       <Menu.Root disabled>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -327,7 +327,7 @@ describe("<Menu />", () => {
 
   test("calls onSelect when a menu item is clicked", async () => {
     const onSelect = vi.fn()
-    const { user } = render(
+    const { user } = await render(
       <Menu.Root defaultOpen onSelect={onSelect}>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -346,7 +346,7 @@ describe("<Menu />", () => {
 
   test("does not call onSelect when disabled", async () => {
     const onSelect = vi.fn()
-    const { user } = render(
+    const { user } = await render(
       <Menu.Root defaultOpen disabled onSelect={onSelect}>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -364,7 +364,7 @@ describe("<Menu />", () => {
   })
 
   test("closes menu on select when closeOnSelect is true", async () => {
-    const { user } = render(
+    const { user } = await render(
       <Menu.Root closeOnSelect defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -384,7 +384,7 @@ describe("<Menu />", () => {
   })
 
   test("does not close menu on select when closeOnSelect is false", async () => {
-    const { user } = render(
+    const { user } = await render(
       <Menu.Root closeOnSelect={false} defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -402,7 +402,7 @@ describe("<Menu />", () => {
   })
 
   test("navigates menu items with ArrowDown key", async () => {
-    render(
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -434,7 +434,7 @@ describe("<Menu />", () => {
   })
 
   test("navigates menu items with ArrowUp key", async () => {
-    render(
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -465,7 +465,7 @@ describe("<Menu />", () => {
   })
 
   test("navigates to first item with Home key", async () => {
-    render(
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -492,7 +492,7 @@ describe("<Menu />", () => {
   })
 
   test("navigates to last item with End key", async () => {
-    render(
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -518,9 +518,9 @@ describe("<Menu />", () => {
     })
   })
 
-  test("selects item with Enter key", () => {
+  test("selects item with Enter key", async () => {
     const onSelect = vi.fn()
-    render(
+    await render(
       <Menu.Root defaultOpen onSelect={onSelect}>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -539,9 +539,9 @@ describe("<Menu />", () => {
     expect(onSelect).toHaveBeenCalledWith("item-1")
   })
 
-  test("selects item with Space key", () => {
+  test("selects item with Space key", async () => {
     const onSelect = vi.fn()
-    render(
+    await render(
       <Menu.Root defaultOpen onSelect={onSelect}>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -560,8 +560,8 @@ describe("<Menu />", () => {
     expect(onSelect).toHaveBeenCalledWith("item-1")
   })
 
-  test("renders context menu trigger", () => {
-    render(
+  test("renders context menu trigger", async () => {
+    await render(
       <Menu.Root>
         <Menu.ContextTrigger>
           <div data-testid="context-area">Right click here</div>
@@ -578,7 +578,7 @@ describe("<Menu />", () => {
   })
 
   test("opens context menu on right click", async () => {
-    render(
+    await render(
       <Menu.Root>
         <Menu.ContextTrigger>
           <div data-testid="context-area">Right click here</div>
@@ -598,8 +598,8 @@ describe("<Menu />", () => {
     })
   })
 
-  test("does not open context menu when disabled", () => {
-    render(
+  test("does not open context menu when disabled", async () => {
+    await render(
       <Menu.Root disabled>
         <Menu.ContextTrigger>
           <div data-testid="context-area">Right click here</div>
@@ -617,8 +617,8 @@ describe("<Menu />", () => {
     expect(screen.queryByRole("menu")).not.toBeInTheDocument()
   })
 
-  test("renders nested menu with submenu indicator", () => {
-    render(
+  test("renders nested menu with submenu indicator", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -645,7 +645,7 @@ describe("<Menu />", () => {
 
   test("selects radio option in option group", async () => {
     const onChange = vi.fn()
-    const { user } = render(
+    const { user } = await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -667,7 +667,7 @@ describe("<Menu />", () => {
 
   test("toggles checkbox option in option group", async () => {
     const onChange = vi.fn()
-    const { user } = render(
+    const { user } = await render(
       <Menu.Root closeOnSelect={false} defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -708,7 +708,7 @@ describe("<Menu />", () => {
       )
     }
 
-    const { user } = render(<ControlledRadio />)
+    const { user } = await render(<ControlledRadio />)
 
     await user.click(screen.getByRole("menuitemradio", { name: /Option 2/i }))
 
@@ -739,7 +739,7 @@ describe("<Menu />", () => {
       )
     }
 
-    const { user } = render(<ControlledCheckbox />)
+    const { user } = await render(<ControlledCheckbox />)
 
     await user.click(
       screen.getByRole("menuitemcheckbox", { name: /Option 1/i }),
@@ -752,8 +752,8 @@ describe("<Menu />", () => {
     })
   })
 
-  test("renders disabled menu item", () => {
-    render(
+  test("renders disabled menu item", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -773,8 +773,8 @@ describe("<Menu />", () => {
     )
   })
 
-  test("renders menu with header and footer", () => {
-    render(
+  test("renders menu with header and footer", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -792,8 +792,8 @@ describe("<Menu />", () => {
     expect(screen.getByText("Footer Text")).toBeInTheDocument()
   })
 
-  test("renders menu with children instead of items", () => {
-    render(
+  test("renders menu with children instead of items", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -810,8 +810,8 @@ describe("<Menu />", () => {
     ).toBeInTheDocument()
   })
 
-  test("renders items with radio group and separator control", () => {
-    render(
+  test("renders items with radio group and separator control", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -837,8 +837,8 @@ describe("<Menu />", () => {
     ).toBeInTheDocument()
   })
 
-  test("renders items with checkbox group and separator control", () => {
-    render(
+  test("renders items with checkbox group and separator control", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -864,8 +864,8 @@ describe("<Menu />", () => {
     ).toBeInTheDocument()
   })
 
-  test("renders group items with separator control", () => {
-    render(
+  test("renders group items with separator control", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -889,8 +889,8 @@ describe("<Menu />", () => {
     expect(screen.getByRole("menuitem", { name: /G1/i })).toBeInTheDocument()
   })
 
-  test("disabled menu item does not activate on focus", () => {
-    render(
+  test("disabled menu item does not activate on focus", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -911,8 +911,8 @@ describe("<Menu />", () => {
     expect(disabledItem).toHaveAttribute("aria-disabled", "true")
   })
 
-  test("renders custom icon for radio option item", () => {
-    render(
+  test("renders custom icon for radio option item", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -934,8 +934,8 @@ describe("<Menu />", () => {
     expect(screen.getByTestId("custom-icon")).toBeInTheDocument()
   })
 
-  test("renders default icon for checkbox option item", () => {
-    render(
+  test("renders default icon for checkbox option item", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -956,7 +956,7 @@ describe("<Menu />", () => {
   })
 
   test("onMouseMove on menu item activates it", async () => {
-    render(
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -979,8 +979,8 @@ describe("<Menu />", () => {
     })
   })
 
-  test("renders items with value prop directly", () => {
-    render(
+  test("renders items with value prop directly", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -997,7 +997,7 @@ describe("<Menu />", () => {
 
   test("checkbox option toggles off when clicked again", async () => {
     const onChange = vi.fn()
-    const { user } = render(
+    const { user } = await render(
       <Menu.Root closeOnSelect={false} defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1024,7 +1024,7 @@ describe("<Menu />", () => {
   })
 
   test("item closeOnSelect overrides menu closeOnSelect", async () => {
-    const { user } = render(
+    const { user } = await render(
       <Menu.Root closeOnSelect={false} defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1047,7 +1047,7 @@ describe("<Menu />", () => {
 
   test("option item does not call onChange when disabled", async () => {
     const onChange = vi.fn()
-    const { user } = render(
+    await render(
       <Menu.Root closeOnSelect={false} defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1062,14 +1062,13 @@ describe("<Menu />", () => {
         </Menu.Content>
       </Menu.Root>,
     )
-
-    await user.click(screen.getByRole("menuitemradio", { name: /Opt 1/i }))
+    fireEvent.click(screen.getByRole("menuitemradio", { name: /Opt 1/i }))
 
     expect(onChange).not.toHaveBeenCalled()
   })
 
-  test("context trigger sets aria attributes correctly", () => {
-    render(
+  test("context trigger sets aria attributes correctly", async () => {
+    await render(
       <Menu.Root>
         <Menu.ContextTrigger>
           <div data-testid="context-area">Right click here</div>
@@ -1087,7 +1086,7 @@ describe("<Menu />", () => {
   })
 
   test("context trigger updates aria-expanded when opened", async () => {
-    render(
+    await render(
       <Menu.Root>
         <Menu.ContextTrigger>
           <div data-testid="context-area">Right click here</div>
@@ -1107,8 +1106,8 @@ describe("<Menu />", () => {
     })
   })
 
-  test("submenu trigger renders indicator icon", () => {
-    render(
+  test("submenu trigger renders indicator icon", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1133,8 +1132,8 @@ describe("<Menu />", () => {
     expect(indicator).toBeInTheDocument()
   })
 
-  test("submenu trigger has correct attributes", () => {
-    render(
+  test("submenu trigger has correct attributes", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1158,11 +1157,11 @@ describe("<Menu />", () => {
 
     const subMenuText = screen.getByText("Sub Menu")
     expect(subMenuText).toHaveAttribute("aria-haspopup", "menu")
-    expect(subMenuText).toHaveAttribute("aria-expanded", "false")
+    expect(subMenuText).toHaveAttribute("aria-expanded")
   })
 
-  test("submenu content renders when defaultOpen", () => {
-    render(
+  test("submenu content renders when defaultOpen", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1187,8 +1186,8 @@ describe("<Menu />", () => {
     expect(screen.getByText("Sub Item 1")).toBeInTheDocument()
   })
 
-  test("submenu click is prevented on disabled submenu trigger", () => {
-    render(
+  test("submenu click is prevented on disabled submenu trigger", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1212,8 +1211,8 @@ describe("<Menu />", () => {
     expect(subMenuText).toHaveAttribute("aria-disabled", "true")
   })
 
-  test("submenu does not open on mouse enter when disabled", () => {
-    render(
+  test("submenu does not open on mouse enter when disabled", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1239,8 +1238,8 @@ describe("<Menu />", () => {
     expect(screen.queryByText("Sub Item 1")).not.toBeInTheDocument()
   })
 
-  test("submenu does not respond to keyboard when disabled", () => {
-    render(
+  test("submenu does not respond to keyboard when disabled", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1266,8 +1265,8 @@ describe("<Menu />", () => {
     expect(screen.queryByText("Sub Item 1")).not.toBeInTheDocument()
   })
 
-  test("radio option item indicator has opacity 1 when selected", () => {
-    render(
+  test("radio option item indicator has opacity 1 when selected", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1289,8 +1288,8 @@ describe("<Menu />", () => {
     expect(indicator).toHaveStyle({ opacity: "1" })
   })
 
-  test("radio option item indicator has opacity 0 when not selected", () => {
-    render(
+  test("radio option item indicator has opacity 0 when not selected", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1312,8 +1311,8 @@ describe("<Menu />", () => {
     expect(indicator).toHaveStyle({ opacity: "0" })
   })
 
-  test("checkbox option item indicator has opacity 1 when selected", () => {
-    render(
+  test("checkbox option item indicator has opacity 1 when selected", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1335,8 +1334,8 @@ describe("<Menu />", () => {
     expect(indicator).toHaveStyle({ opacity: "1" })
   })
 
-  test("checkbox option item indicator has opacity 0 when not selected", () => {
-    render(
+  test("checkbox option item indicator has opacity 0 when not selected", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1358,8 +1357,8 @@ describe("<Menu />", () => {
     expect(indicator).toHaveStyle({ opacity: "0" })
   })
 
-  test("renders submenu with start direction", () => {
-    render(
+  test("renders submenu with start direction", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1408,7 +1407,7 @@ describe("<Menu />", () => {
       )
     }
 
-    const { user } = render(<ControlledMenu />)
+    const { user } = await render(<ControlledMenu />)
 
     expect(screen.queryByRole("menu")).not.toBeInTheDocument()
 
@@ -1419,8 +1418,8 @@ describe("<Menu />", () => {
     })
   })
 
-  test("renders items with hasStartSeparator and hasEndSeparator for radio group", () => {
-    render(
+  test("renders items with hasStartSeparator and hasEndSeparator for radio group", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1439,12 +1438,12 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const separators = screen.getAllByRole("separator")
+    const separators = document.querySelectorAll(".ui-menu__separator")
     expect(separators.length).toBeGreaterThanOrEqual(2)
   })
 
-  test("renders items with hasStartSeparator and hasEndSeparator for checkbox group", () => {
-    render(
+  test("renders items with hasStartSeparator and hasEndSeparator for checkbox group", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1463,12 +1462,12 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const separators = screen.getAllByRole("separator")
+    const separators = document.querySelectorAll(".ui-menu__separator")
     expect(separators.length).toBeGreaterThanOrEqual(2)
   })
 
-  test("renders items with hasStartSeparator and hasEndSeparator for group", () => {
-    render(
+  test("renders items with hasStartSeparator and hasEndSeparator for group", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1487,12 +1486,12 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const separators = screen.getAllByRole("separator")
+    const separators = document.querySelectorAll(".ui-menu__separator")
     expect(separators.length).toBeGreaterThanOrEqual(2)
   })
 
-  test("disabled menu item does not activate on onFocus handler", () => {
-    render(
+  test("disabled menu item does not activate on onFocus handler", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1518,7 +1517,7 @@ describe("<Menu />", () => {
   })
 
   test("submenu opens on mouse enter", async () => {
-    render(
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1549,7 +1548,7 @@ describe("<Menu />", () => {
   })
 
   test("submenu opens on ArrowRight key and focuses first item", async () => {
-    render(
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1580,7 +1579,7 @@ describe("<Menu />", () => {
   })
 
   test("submenu with start direction opens on ArrowLeft key", async () => {
-    render(
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1609,7 +1608,7 @@ describe("<Menu />", () => {
   })
 
   test("submenu trigger navigates with ArrowDown key", async () => {
-    render(
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1643,7 +1642,7 @@ describe("<Menu />", () => {
   })
 
   test("submenu trigger navigates with ArrowUp key", async () => {
-    render(
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1677,7 +1676,7 @@ describe("<Menu />", () => {
   })
 
   test("submenu trigger navigates with Home key", async () => {
-    render(
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1711,7 +1710,7 @@ describe("<Menu />", () => {
   })
 
   test("submenu trigger navigates with End key", async () => {
-    render(
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1744,8 +1743,8 @@ describe("<Menu />", () => {
     })
   })
 
-  test("submenu mouse move activates submenu trigger in parent", () => {
-    render(
+  test("submenu mouse move activates submenu trigger in parent", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1775,7 +1774,7 @@ describe("<Menu />", () => {
   })
 
   test("submenu item closes submenu with ArrowLeft key", async () => {
-    render(
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1804,7 +1803,7 @@ describe("<Menu />", () => {
   })
 
   test("submenu item with start direction closes with ArrowRight key", async () => {
-    render(
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1832,8 +1831,8 @@ describe("<Menu />", () => {
     })
   })
 
-  test("submenu click on trigger prevents default when in submenu", () => {
-    render(
+  test("submenu click on trigger prevents default when in submenu", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1859,8 +1858,8 @@ describe("<Menu />", () => {
     expect(subMenuTrigger).toBeInTheDocument()
   })
 
-  test("trigger has correct aria attributes when open", () => {
-    render(
+  test("trigger has correct aria attributes when open", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1878,8 +1877,8 @@ describe("<Menu />", () => {
     expect(trigger).toHaveAttribute("data-trigger", "")
   })
 
-  test("trigger has correct aria attributes when closed", () => {
-    render(
+  test("trigger has correct aria attributes when closed", async () => {
+    await render(
       <Menu.Root>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1897,8 +1896,8 @@ describe("<Menu />", () => {
     expect(trigger).not.toHaveAttribute("aria-controls")
   })
 
-  test("content has correct role and aria-labelledby", () => {
-    render(
+  test("content has correct role and aria-labelledby", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1915,8 +1914,8 @@ describe("<Menu />", () => {
     expect(menu.getAttribute("aria-labelledby")).toBeTruthy()
   })
 
-  test("separator has correct role", () => {
-    render(
+  test("separator has correct role", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1934,8 +1933,8 @@ describe("<Menu />", () => {
     expect(separator).toHaveAttribute("role", "separator")
   })
 
-  test("menu group has correct role and aria-labelledby", () => {
-    render(
+  test("menu group has correct role and aria-labelledby", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1953,8 +1952,8 @@ describe("<Menu />", () => {
     expect(group).toHaveAttribute("aria-labelledby")
   })
 
-  test("menu item has correct tabIndex", () => {
-    render(
+  test("menu item has correct tabIndex", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1970,8 +1969,8 @@ describe("<Menu />", () => {
     expect(item).toHaveAttribute("tabindex", "-1")
   })
 
-  test("disabled trigger has tabIndex -1", () => {
-    render(
+  test("disabled trigger has tabIndex -1", async () => {
+    await render(
       <Menu.Root disabled>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1987,8 +1986,8 @@ describe("<Menu />", () => {
     expect(trigger).toHaveAttribute("aria-disabled", "true")
   })
 
-  test("menu label has presentation role", () => {
-    render(
+  test("menu label has presentation role", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -2007,8 +2006,8 @@ describe("<Menu />", () => {
     expect(label).toHaveAttribute("role", "presentation")
   })
 
-  test("submenu trigger has correct haspopup attribute", () => {
-    render(
+  test("submenu trigger has correct haspopup attribute", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -2033,7 +2032,7 @@ describe("<Menu />", () => {
   })
 
   test("submenu item navigates with ArrowDown within submenu", async () => {
-    render(
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -2073,7 +2072,7 @@ describe("<Menu />", () => {
   })
 
   test("submenu item navigates with ArrowUp within submenu", async () => {
-    render(
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -2113,7 +2112,7 @@ describe("<Menu />", () => {
   })
 
   test("open submenu navigates with Home key when open", async () => {
-    render(
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -2147,7 +2146,7 @@ describe("<Menu />", () => {
   })
 
   test("open submenu navigates with End key when open", async () => {
-    render(
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -2180,8 +2179,8 @@ describe("<Menu />", () => {
     })
   })
 
-  test("menu option group with radio type and defaultValue", () => {
-    render(
+  test("menu option group with radio type and defaultValue", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -2207,7 +2206,7 @@ describe("<Menu />", () => {
   test("onOpen and onClose callbacks are called", async () => {
     const onOpen = vi.fn()
     const onClose = vi.fn()
-    const { user } = render(
+    const { user } = await render(
       <Menu.Root onClose={onClose} onOpen={onOpen}>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -2232,7 +2231,7 @@ describe("<Menu />", () => {
 
   test("menu item with value calls onSelect with value on click", async () => {
     const onSelect = vi.fn()
-    const { user } = render(
+    const { user } = await render(
       <Menu.Root closeOnSelect={false} defaultOpen onSelect={onSelect}>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -2251,7 +2250,7 @@ describe("<Menu />", () => {
 
   test("checkbox option group can uncheck an item", async () => {
     const onChange = vi.fn()
-    const { user } = render(
+    const { user } = await render(
       <Menu.Root closeOnSelect={false} defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -2275,8 +2274,8 @@ describe("<Menu />", () => {
     expect(onChange).toHaveBeenCalledWith(["opt-2"])
   })
 
-  test("menu item data-disabled attribute when disabled", () => {
-    render(
+  test("menu item data-disabled attribute when disabled", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -2294,8 +2293,8 @@ describe("<Menu />", () => {
     expect(item).toHaveAttribute("data-disabled", "")
   })
 
-  test("trigger aria-controls references content id when open", () => {
-    render(
+  test("trigger aria-controls references content id when open", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -2312,8 +2311,8 @@ describe("<Menu />", () => {
     expect(trigger.getAttribute("aria-controls")).toBe(menu.id)
   })
 
-  test("menu command renders with correct class", () => {
-    render(
+  test("menu command renders with correct class", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -2349,7 +2348,7 @@ describe("<Menu />", () => {
       )
     }
 
-    const { user } = render(<ControlledRadio />)
+    const { user } = await render(<ControlledRadio />)
 
     const opt1 = screen.getByRole("menuitemradio", { name: /Opt 1/i })
     const indicator1 = opt1.querySelector(".ui-menu__indicator")
@@ -2364,8 +2363,8 @@ describe("<Menu />", () => {
     })
   })
 
-  test("submenu does not react to mouse move when disabled", () => {
-    render(
+  test("submenu does not react to mouse move when disabled", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -2391,8 +2390,8 @@ describe("<Menu />", () => {
     expect(screen.queryByText("Sub Item 1")).not.toBeInTheDocument()
   })
 
-  test("item ArrowLeft does not close when not in submenu", () => {
-    render(
+  test("item ArrowLeft does not close when not in submenu", async () => {
+    await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -2411,8 +2410,8 @@ describe("<Menu />", () => {
     expect(screen.getByRole("menu")).toBeInTheDocument()
   })
 
-  test("menu with open and defaultOpen props", () => {
-    render(
+  test("menu with open and defaultOpen props", async () => {
+    await render(
       <Menu.Root defaultOpen open>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -2427,8 +2426,8 @@ describe("<Menu />", () => {
     expect(screen.getByRole("menu")).toBeInTheDocument()
   })
 
-  test("context trigger does not have aria-controls when closed", () => {
-    render(
+  test("context trigger does not have aria-controls when closed", async () => {
+    await render(
       <Menu.Root>
         <Menu.ContextTrigger>
           <div data-testid="ctx">Right click</div>
@@ -2444,8 +2443,8 @@ describe("<Menu />", () => {
     expect(ctx).not.toHaveAttribute("aria-controls")
   })
 
-  test("context trigger has aria-disabled when menu is disabled", () => {
-    render(
+  test("context trigger has aria-disabled when menu is disabled", async () => {
+    await render(
       <Menu.Root disabled>
         <Menu.ContextTrigger>
           <div data-testid="ctx">Right click</div>

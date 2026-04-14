@@ -1,4 +1,5 @@
-import { a11y, act, fireEvent, render, renderHook, screen } from "#test"
+import { a11y, render, renderHook } from "#test/browser"
+import { act, fireEvent, screen } from "@testing-library/react"
 import { useState } from "react"
 import { Reorder, useReorder } from "./"
 
@@ -12,8 +13,8 @@ describe("<Reorder />", () => {
     )
   })
 
-  test("render items correctly", () => {
-    render(
+  test("render items correctly", async () => {
+    await render(
       <Reorder.Root>
         <Reorder.Item value="Item 1">Item 1</Reorder.Item>
         <Reorder.Item value="Item 2">Item 2</Reorder.Item>
@@ -24,20 +25,20 @@ describe("<Reorder />", () => {
     expect(screen.getByText("Item 2")).toBeInTheDocument()
   })
 
-  test("render items of props correctly", () => {
+  test("render items of props correctly", async () => {
     const items: Reorder.Item[] = [
       { label: "Item 1", value: "Item 1" },
       { label: "Item 2", value: "Item 2" },
     ]
 
-    render(<Reorder.Root items={items} />)
+    await render(<Reorder.Root items={items} />)
 
     expect(screen.getByText("Item 1")).toBeInTheDocument()
     expect(screen.getByText("Item 2")).toBeInTheDocument()
   })
 
-  test("renders trigger correctly inside of an item", () => {
-    render(
+  test("renders trigger correctly inside of an item", async () => {
+    await render(
       <Reorder.Root orientation="vertical">
         <Reorder.Item value="Item 1">
           <Reorder.Trigger data-testid="ReorderTrigger" />
@@ -48,10 +49,10 @@ describe("<Reorder />", () => {
     expect(screen.getByTestId("ReorderTrigger")).toBeInTheDocument()
   })
 
-  test("warns about duplicate", () => {
-    const warnSpy = vi.spyOn(global.console, "warn")
+  test("warns about duplicate", async () => {
+    const warnSpy = vi.spyOn(globalThis.console, "warn")
 
-    render(
+    await render(
       <Reorder.Root orientation="vertical">
         <Reorder.Item value="Item 1">Item 1</Reorder.Item>
         <Reorder.Item value="Item 1">Item 1</Reorder.Item>
@@ -87,7 +88,7 @@ describe("<Reorder />", () => {
       )
     }
 
-    const { user } = render(<Component />)
+    const { user } = await render(<Component />)
 
     expect(screen.getByText("Item 1")).toBeInTheDocument()
     expect(screen.getByText("Item 2")).toBeInTheDocument()
@@ -143,7 +144,7 @@ describe("<Reorder />", () => {
       )
     }
 
-    const { user } = render(<TestComponent />)
+    const { user } = await render(<TestComponent />)
 
     expect(screen.getByText("Item 1")).toBeInTheDocument()
     expect(screen.getByText("Item 2")).toBeInTheDocument()
@@ -161,8 +162,8 @@ describe("<Reorder />", () => {
     expect(onCompleteChange).toHaveBeenCalledTimes(1)
   })
 
-  test("renders children without explicit value using label fallback", () => {
-    render(
+  test("renders children without explicit value using label fallback", async () => {
+    await render(
       <Reorder.Root>
         <Reorder.Item label="Label A">Label A</Reorder.Item>
         <Reorder.Item label="Label B">Label B</Reorder.Item>
@@ -173,23 +174,23 @@ describe("<Reorder />", () => {
     expect(screen.getByText("Label B")).toBeInTheDocument()
   })
 
-  test("renders items without explicit value using label fallback", () => {
+  test("renders items without explicit value using label fallback", async () => {
     const items: Reorder.Item[] = [
       { label: "Fallback A" },
       { label: "Fallback B" },
     ]
 
-    render(<Reorder.Root items={items} />)
+    await render(<Reorder.Root items={items} />)
 
     expect(screen.getByText("Fallback A")).toBeInTheDocument()
     expect(screen.getByText("Fallback B")).toBeInTheDocument()
   })
 
-  test("calls onCompleteChange on mouseUp when values have changed", () => {
+  test("calls onCompleteChange on mouseUp when values have changed", async () => {
     const onCompleteChange = vi.fn()
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Reorder.Root onChange={onChange} onCompleteChange={onCompleteChange}>
         <Reorder.Item value="Item 1">Item 1</Reorder.Item>
         <Reorder.Item value="Item 2">Item 2</Reorder.Item>
@@ -203,10 +204,10 @@ describe("<Reorder />", () => {
     expect(onCompleteChange).not.toHaveBeenCalled()
   })
 
-  test("calls onCompleteChange on touchEnd", () => {
+  test("calls onCompleteChange on touchEnd", async () => {
     const onCompleteChange = vi.fn()
 
-    render(
+    await render(
       <Reorder.Root onCompleteChange={onCompleteChange}>
         <Reorder.Item value="Item 1">Item 1</Reorder.Item>
         <Reorder.Item value="Item 2">Item 2</Reorder.Item>
@@ -220,8 +221,8 @@ describe("<Reorder />", () => {
     expect(onCompleteChange).not.toHaveBeenCalled()
   })
 
-  test("trigger fires pointerDown event", () => {
-    render(
+  test("trigger fires pointerDown event", async () => {
+    await render(
       <Reorder.Root>
         <Reorder.Item data-testid="item" value="Item 1">
           <Reorder.Trigger data-testid="trigger" />
@@ -238,8 +239,8 @@ describe("<Reorder />", () => {
     expect(item).toHaveAttribute("data-has-trigger", "")
   })
 
-  test("renders with horizontal orientation", () => {
-    render(
+  test("renders with horizontal orientation", async () => {
+    await render(
       <Reorder.Root orientation="horizontal">
         <Reorder.Item value="Item 1">Item 1</Reorder.Item>
         <Reorder.Item value="Item 2">Item 2</Reorder.Item>
@@ -268,7 +269,7 @@ describe("<Reorder />", () => {
       )
     }
 
-    const { user } = render(<Component />)
+    const { user } = await render(<Component />)
 
     expect(screen.getByText("Item 1")).toBeInTheDocument()
     expect(screen.getByText("Item 2")).toBeInTheDocument()
@@ -279,8 +280,8 @@ describe("<Reorder />", () => {
     expect(screen.getByText("Item 2")).toBeInTheDocument()
   })
 
-  test("item has data-has-trigger attribute when trigger is present", () => {
-    render(
+  test("item has data-has-trigger attribute when trigger is present", async () => {
+    await render(
       <Reorder.Root>
         <Reorder.Item data-testid="item" value="Item 1">
           <Reorder.Trigger data-testid="trigger" />
@@ -293,8 +294,8 @@ describe("<Reorder />", () => {
     expect(item).toHaveAttribute("data-has-trigger", "")
   })
 
-  test("calls onReorder without onChange without errors", () => {
-    const { result } = renderHook(() =>
+  test("calls onReorder without onChange without errors", async () => {
+    const { result } = await renderHook(() =>
       useReorder({
         items: [
           { label: "Item 1", value: "Item 1" },
@@ -310,10 +311,10 @@ describe("<Reorder />", () => {
     ).not.toThrow()
   })
 
-  test("calls onCompleteChange on mouseUp after onReorder changes values", () => {
+  test("calls onCompleteChange on mouseUp after onReorder changes values", async () => {
     const onCompleteChange = vi.fn()
 
-    const { result } = renderHook(() =>
+    const { result } = await renderHook(() =>
       useReorder({
         items: [
           { label: "Item 1", value: "Item 1" },
@@ -337,10 +338,10 @@ describe("<Reorder />", () => {
     ])
   })
 
-  test("calls onCompleteChange on touchEnd after onReorder changes values", () => {
+  test("calls onCompleteChange on touchEnd after onReorder changes values", async () => {
     const onCompleteChange = vi.fn()
 
-    const { result } = renderHook(() =>
+    const { result } = await renderHook(() =>
       useReorder({
         items: [
           { label: "Item 1", value: "Item 1" },
@@ -364,10 +365,10 @@ describe("<Reorder />", () => {
     ])
   })
 
-  test("does not call onCompleteChange again on consecutive mouseUp without reorder", () => {
+  test("does not call onCompleteChange again on consecutive mouseUp without reorder", async () => {
     const onCompleteChange = vi.fn()
 
-    const { result } = renderHook(() =>
+    const { result } = await renderHook(() =>
       useReorder({
         items: [
           { label: "Item 1", value: "Item 1" },
@@ -393,8 +394,8 @@ describe("<Reorder />", () => {
     expect(onCompleteChange).toHaveBeenCalledTimes(1)
   })
 
-  test("does not throw on mouseUp after onReorder when onCompleteChange is not provided", () => {
-    const { result } = renderHook(() =>
+  test("does not throw on mouseUp after onReorder when onCompleteChange is not provided", async () => {
+    const { result } = await renderHook(() =>
       useReorder({
         items: [
           { label: "Item 1", value: "Item 1" },

@@ -134,7 +134,6 @@ const guides = defineCollection({
       category: s.string(),
       code: s.mdx(),
       description: s.string(),
-      publishedAt: s.string(),
       title: s.string(),
       toc: s.custom().transform(async (_, { meta }) => {
         const content = await replaceProps(meta.content as string)

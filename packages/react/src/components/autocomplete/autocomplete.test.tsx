@@ -1,4 +1,5 @@
-import { a11y, fireEvent, render, screen, waitFor } from "#test"
+import { a11y, render } from "#test/browser"
+import { fireEvent, screen, waitFor } from "@testing-library/react"
 import { Autocomplete } from "."
 
 describe("<Autocomplete />", () => {
@@ -19,8 +20,8 @@ describe("<Autocomplete />", () => {
     expect(Autocomplete.Label.displayName).toBe("AutocompleteLabel")
   })
 
-  test("sets `className` correctly", () => {
-    render(
+  test("sets `className` correctly", async () => {
+    await render(
       <Autocomplete.Root
         defaultOpen
         defaultValue="one"
@@ -49,8 +50,8 @@ describe("<Autocomplete />", () => {
     expect(group.firstChild).toHaveClass("ui-autocomplete__label")
   })
 
-  test("does not hide separator when blurring to content in multiple mode", () => {
-    render(
+  test("does not hide separator when blurring to content in multiple mode", async () => {
+    await render(
       <Autocomplete.Root
         defaultOpen
         defaultValue={["one", "two"]}
@@ -78,8 +79,8 @@ describe("<Autocomplete />", () => {
     expect(lastSpan?.textContent).toContain(",")
   })
 
-  test("hides separator when blurring outside the component in multiple mode", () => {
-    render(
+  test("hides separator when blurring outside the component in multiple mode", async () => {
+    await render(
       <>
         <button data-testid="outside">outside</button>
         <Autocomplete.Root
@@ -108,8 +109,8 @@ describe("<Autocomplete />", () => {
     expect(lastSpan?.textContent).not.toContain(",")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(
+  test("renders HTML tag correctly", async () => {
+    await render(
       <Autocomplete.Root
         defaultOpen
         defaultValue="one"
@@ -138,8 +139,8 @@ describe("<Autocomplete />", () => {
     expect(group.children[0]?.tagName).toBe("SPAN")
   })
 
-  test("renders group without label", () => {
-    render(
+  test("renders group without label", async () => {
+    await render(
       <Autocomplete.Root defaultOpen placeholder="Choose a option">
         <Autocomplete.Group>
           <Autocomplete.Option value="one">Option 1</Autocomplete.Option>
@@ -152,8 +153,8 @@ describe("<Autocomplete />", () => {
     expect(option).toBeInTheDocument()
   })
 
-  test("renders empty message when no items match filter", () => {
-    render(
+  test("renders empty message when no items match filter", async () => {
+    await render(
       <Autocomplete.Root
         defaultOpen
         items={[
@@ -172,8 +173,8 @@ describe("<Autocomplete />", () => {
     expect(screen.getByText("No results found")).toBeInTheDocument()
   })
 
-  test("renders custom empty message", () => {
-    render(
+  test("renders custom empty message", async () => {
+    await render(
       <Autocomplete.Root
         defaultOpen
         emptyMessage="Nothing here"
@@ -191,7 +192,7 @@ describe("<Autocomplete />", () => {
   })
 
   test("filters items using `query` property", async () => {
-    render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         items={[
@@ -220,7 +221,7 @@ describe("<Autocomplete />", () => {
   })
 
   test("filters grouped items using `query` property", async () => {
-    render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         items={[
@@ -253,10 +254,10 @@ describe("<Autocomplete />", () => {
     })
   })
 
-  test("selects and deselects values in multiple mode", () => {
+  test("selects and deselects values in multiple mode", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         items={[
@@ -280,10 +281,10 @@ describe("<Autocomplete />", () => {
     expect(onChange).toHaveBeenCalledWith([])
   })
 
-  test("respects `max` limit in multiple mode", () => {
+  test("respects `max` limit in multiple mode", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         defaultValue={["one"]}
@@ -303,8 +304,8 @@ describe("<Autocomplete />", () => {
     expect(option2).toHaveAttribute("aria-disabled", "true")
   })
 
-  test("does not allow input change when `max` is reached in multiple mode", () => {
-    render(
+  test("does not allow input change when `max` is reached in multiple mode", async () => {
+    await render(
       <Autocomplete.Root
         defaultOpen
         defaultValue={["one"]}
@@ -326,10 +327,10 @@ describe("<Autocomplete />", () => {
     expect(input).toHaveValue("")
   })
 
-  test("clears value when clear icon is clicked", () => {
+  test("clears value when clear icon is clicked", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Autocomplete.Root
         defaultValue="one"
         items={[
@@ -348,10 +349,10 @@ describe("<Autocomplete />", () => {
     expect(onChange).toHaveBeenCalledWith("")
   })
 
-  test("clears value when clear icon receives Enter key", () => {
+  test("clears value when clear icon receives Enter key", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Autocomplete.Root
         defaultValue="one"
         items={[
@@ -370,10 +371,10 @@ describe("<Autocomplete />", () => {
     expect(onChange).toHaveBeenCalledWith("")
   })
 
-  test("clears value when clear icon receives Space key", () => {
+  test("clears value when clear icon receives Space key", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Autocomplete.Root
         defaultValue="one"
         items={[
@@ -392,10 +393,10 @@ describe("<Autocomplete />", () => {
     expect(onChange).toHaveBeenCalledWith("")
   })
 
-  test("clears multiple values when clear icon is clicked", () => {
+  test("clears multiple values when clear icon is clicked", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Autocomplete.Root
         defaultValue={["one", "two"]}
         items={[
@@ -415,10 +416,10 @@ describe("<Autocomplete />", () => {
     expect(onChange).toHaveBeenCalledWith([])
   })
 
-  test("removes last value with Backspace in multiple mode", () => {
+  test("removes last value with Backspace in multiple mode", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         defaultValue={["one", "two"]}
@@ -441,10 +442,10 @@ describe("<Autocomplete />", () => {
     expect(onChange).toHaveBeenCalledWith(["one"])
   })
 
-  test("does not remove value with Backspace when input has value", () => {
+  test("does not remove value with Backspace when input has value", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         defaultValue={["one"]}
@@ -468,10 +469,10 @@ describe("<Autocomplete />", () => {
     expect(onChange).not.toHaveBeenCalledWith([])
   })
 
-  test("selects first filtered item with Enter key", () => {
+  test("selects first filtered item with Enter key", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         items={[
@@ -491,10 +492,10 @@ describe("<Autocomplete />", () => {
     expect(onChange).toHaveBeenCalledWith("one")
   })
 
-  test("selects first item in group with Enter key", () => {
+  test("selects first item in group with Enter key", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         items={[
@@ -519,10 +520,10 @@ describe("<Autocomplete />", () => {
     expect(onChange).toHaveBeenCalledWith("apple")
   })
 
-  test("allows custom value with Enter key when `allowCustomValue` is true in multiple mode", () => {
+  test("allows custom value with Enter key when `allowCustomValue` is true in multiple mode", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Autocomplete.Root
         allowCustomValue
         defaultOpen
@@ -546,7 +547,7 @@ describe("<Autocomplete />", () => {
   })
 
   test("closes dropdown when `closeOnChange` is true", async () => {
-    render(
+    await render(
       <Autocomplete.Root
         closeOnChange
         defaultOpen
@@ -569,12 +570,12 @@ describe("<Autocomplete />", () => {
     await waitFor(() => {
       expect(
         screen.queryByRole("option", { name: "Option 1" }),
-      ).not.toBeVisible()
+      ).not.toBeInTheDocument()
     })
   })
 
   test("opens dropdown on input change when `openOnChange` is true", async () => {
-    render(
+    await render(
       <Autocomplete.Root
         items={[
           { label: "Option 1", value: "one" },
@@ -595,10 +596,10 @@ describe("<Autocomplete />", () => {
     })
   })
 
-  test("clears value when input is emptied in single mode", () => {
+  test("clears value when input is emptied in single mode", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         defaultValue="one"
@@ -618,10 +619,10 @@ describe("<Autocomplete />", () => {
     expect(onChange).toHaveBeenCalledWith("")
   })
 
-  test("sets input value on blur with `allowCustomValue` in single mode", () => {
+  test("sets input value on blur with `allowCustomValue` in single mode", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <>
         <button data-testid="outside">outside</button>
         <Autocomplete.Root
@@ -647,8 +648,8 @@ describe("<Autocomplete />", () => {
     expect(onChange).toHaveBeenCalledWith("custom value")
   })
 
-  test("restores input value on blur without `allowCustomValue` in single mode", () => {
-    render(
+  test("restores input value on blur without `allowCustomValue` in single mode", async () => {
+    await render(
       <>
         <button data-testid="outside">outside</button>
         <Autocomplete.Root
@@ -673,8 +674,8 @@ describe("<Autocomplete />", () => {
     expect(input).toHaveValue("Option 1")
   })
 
-  test("clears input value on blur in multiple mode", () => {
-    render(
+  test("clears input value on blur in multiple mode", async () => {
+    await render(
       <>
         <button data-testid="outside">outside</button>
         <Autocomplete.Root
@@ -700,8 +701,8 @@ describe("<Autocomplete />", () => {
     expect(input).toHaveValue("")
   })
 
-  test("focuses input when clear icon is clicked with `focusOnClear`", () => {
-    render(
+  test("focuses input when clear icon is clicked with `focusOnClear`", async () => {
+    await render(
       <Autocomplete.Root
         defaultValue="one"
         focusOnClear
@@ -723,7 +724,7 @@ describe("<Autocomplete />", () => {
   })
 
   test("opens dropdown on focus when `openOnFocus` is true", async () => {
-    render(
+    await render(
       <Autocomplete.Root
         items={[
           { label: "Option 1", value: "one" },
@@ -743,8 +744,8 @@ describe("<Autocomplete />", () => {
     })
   })
 
-  test("prevents default on mousedown when `openOnFocus` is true", () => {
-    render(
+  test("prevents default on mousedown when `openOnFocus` is true", async () => {
+    await render(
       <Autocomplete.Root
         items={[
           { label: "Option 1", value: "one" },
@@ -769,7 +770,7 @@ describe("<Autocomplete />", () => {
   })
 
   test("opens dropdown on click when `openOnClick` is true", async () => {
-    render(
+    await render(
       <Autocomplete.Root
         items={[
           { label: "Option 1", value: "one" },
@@ -789,8 +790,8 @@ describe("<Autocomplete />", () => {
     })
   })
 
-  test("does not respond to interactions when disabled", () => {
-    render(
+  test("does not respond to interactions when disabled", async () => {
+    await render(
       <Autocomplete.Root
         disabled
         items={[
@@ -811,7 +812,7 @@ describe("<Autocomplete />", () => {
   })
 
   test("updates input when controlled `value` prop changes", async () => {
-    const { rerender } = render(
+    const { rerender } = await render(
       <Autocomplete.Root
         items={[
           { label: "Option 1", value: "one" },
@@ -826,7 +827,7 @@ describe("<Autocomplete />", () => {
 
     expect(input).toHaveValue("Option 1")
 
-    rerender(
+    await rerender(
       <Autocomplete.Root
         items={[
           { label: "Option 1", value: "one" },
@@ -841,8 +842,8 @@ describe("<Autocomplete />", () => {
     })
   })
 
-  test("renders children for selected values in multiple mode with custom render", () => {
-    render(
+  test("renders children for selected values in multiple mode with custom render", async () => {
+    await render(
       <Autocomplete.Root
         defaultOpen
         defaultValue={["one", "two"]}
@@ -866,10 +867,10 @@ describe("<Autocomplete />", () => {
     expect(tags[0]).toHaveTextContent("Option 1")
   })
 
-  test("removes selected value via custom render's `onClear`", () => {
+  test("removes selected value via custom render's `onClear`", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         defaultValue={["one", "two"]}
@@ -895,8 +896,8 @@ describe("<Autocomplete />", () => {
     expect(onChange).toHaveBeenCalledWith(["two"])
   })
 
-  test("does not open on change when `openOnChange` is false", () => {
-    render(
+  test("does not open on change when `openOnChange` is false", async () => {
+    await render(
       <Autocomplete.Root
         items={[
           { label: "Option 1", value: "one" },
@@ -918,7 +919,7 @@ describe("<Autocomplete />", () => {
   })
 
   test("uses items with `query` property matching in grouped filter", async () => {
-    render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         items={[
@@ -951,10 +952,10 @@ describe("<Autocomplete />", () => {
     })
   })
 
-  test("does not allow custom value with Enter when not in multiple mode", () => {
+  test("does not allow custom value with Enter when not in multiple mode", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Autocomplete.Root
         allowCustomValue
         defaultOpen
@@ -975,10 +976,10 @@ describe("<Autocomplete />", () => {
     expect(onChange).not.toHaveBeenCalledWith("nonexistent")
   })
 
-  test("does not clear when disabled and clear icon is clicked", () => {
+  test("does not clear when disabled and clear icon is clicked", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Autocomplete.Root
         defaultValue="one"
         disabled
@@ -998,10 +999,10 @@ describe("<Autocomplete />", () => {
     expect(onChange).not.toHaveBeenCalledWith("")
   })
 
-  test("sets `allowCustomValue` input value on blur when input is empty", () => {
+  test("sets `allowCustomValue` input value on blur when input is empty", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <>
         <button data-testid="outside">outside</button>
         <Autocomplete.Root
@@ -1031,7 +1032,7 @@ describe("<Autocomplete />", () => {
   })
 
   test("handles `closeOnChange` as function", async () => {
-    render(
+    await render(
       <Autocomplete.Root
         closeOnChange={() => true}
         defaultOpen
@@ -1054,12 +1055,12 @@ describe("<Autocomplete />", () => {
     await waitFor(() => {
       expect(
         screen.queryByRole("option", { name: "Option 1" }),
-      ).not.toBeVisible()
+      ).not.toBeInTheDocument()
     })
   })
 
   test("handles `openOnChange` as function", async () => {
-    render(
+    await render(
       <Autocomplete.Root
         items={[
           { label: "Option 1", value: "one" },
@@ -1080,10 +1081,10 @@ describe("<Autocomplete />", () => {
     })
   })
 
-  test("merges user-provided `rootProps` with context props without overwriting `className`, `style`, and event handlers", () => {
+  test("merges user-provided `rootProps` with context props without overwriting `className`, `style`, and event handlers", async () => {
     const onClick = vi.fn()
 
-    render(
+    await render(
       <Autocomplete.Root
         className="from-root"
         rootProps={{
@@ -1108,10 +1109,10 @@ describe("<Autocomplete />", () => {
     expect(onClick).toHaveBeenCalledWith(expect.anything())
   })
 
-  test("merges user-provided `elementProps` with internal props without overwriting `className`, `style`, and event handlers", () => {
+  test("merges user-provided `elementProps` with internal props without overwriting `className`, `style`, and event handlers", async () => {
     const onClick = vi.fn()
 
-    render(
+    await render(
       <Autocomplete.Root
         elementProps={{
           className: "from-user",
@@ -1135,10 +1136,10 @@ describe("<Autocomplete />", () => {
     expect(onClick).toHaveBeenCalledWith(expect.anything())
   })
 
-  test("merges user-provided `groupProps` with component props without overwriting event handlers", () => {
+  test("merges user-provided `groupProps` with component props without overwriting event handlers", async () => {
     const onClick = vi.fn()
 
-    render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         items={[
@@ -1161,10 +1162,10 @@ describe("<Autocomplete />", () => {
     expect(onClick).toHaveBeenCalledWith(expect.anything())
   })
 
-  test("merges user-provided `optionProps` with component props without overwriting event handlers", () => {
+  test("merges user-provided `optionProps` with component props without overwriting event handlers", async () => {
     const onClick = vi.fn()
 
-    render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         optionProps={{
@@ -1185,10 +1186,10 @@ describe("<Autocomplete />", () => {
     expect(onClick).toHaveBeenCalledWith(expect.anything())
   })
 
-  test("merges user-provided `emptyProps` with internal props without overwriting `className`, `style`, and event handlers", () => {
+  test("merges user-provided `emptyProps` with internal props without overwriting `className`, `style`, and event handlers", async () => {
     const onClick = vi.fn()
 
-    render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         items={[]}

@@ -7,6 +7,53 @@ import { themes } from "./themes"
 
 const channel = addons.getChannel()
 
+type VisualTestGlobal = typeof globalThis & {
+  __YAMADA_UI_FIXED_DATE_APPLIED__?: boolean
+  __YAMADA_UI_VISUAL_TEST__?: boolean
+  IS_CHROMATIC?: boolean
+}
+
+const globalForVisualTest = globalThis as VisualTestGlobal
+
+const isVisualTest = () => {
+  if (globalForVisualTest.__YAMADA_UI_VISUAL_TEST__) return true
+  if (globalForVisualTest.IS_CHROMATIC) return true
+
+  const params = new URLSearchParams(globalForVisualTest.location.search)
+
+  return params.get("visual-test") === "true"
+}
+
+const setupFixedDateForVisualTest = () => {
+  if (!isVisualTest() || globalForVisualTest.__YAMADA_UI_FIXED_DATE_APPLIED__) {
+    return
+  }
+
+  const fixedNow = Date.UTC(2025, 3, 15, 13, 24, 36)
+  const RealDate = Date
+
+  class MockDate extends RealDate {
+    constructor(...args: unknown[]) {
+      if (!args.length) {
+        super(fixedNow)
+
+        return
+      }
+
+      super(...(args as ConstructorParameters<typeof Date>))
+    }
+
+    static now() {
+      return fixedNow
+    }
+  }
+
+  globalForVisualTest.Date = MockDate as DateConstructor
+  globalForVisualTest.__YAMADA_UI_FIXED_DATE_APPLIED__ = true
+}
+
+setupFixedDateForVisualTest()
+
 const preview: Preview = {
   decorators: [
     function (Story) {

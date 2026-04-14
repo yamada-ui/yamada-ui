@@ -1,4 +1,5 @@
-import { a11y, fireEvent, render, screen, waitFor } from "#test"
+import { a11y, render } from "#test/browser"
+import { fireEvent, screen, waitFor } from "@testing-library/react"
 import { useRef } from "react"
 import { Sidebar } from "."
 import { Button } from "../button"
@@ -6,7 +7,7 @@ import { Button } from "../button"
 const navItems: Sidebar.ItemType[] = [
   {
     children: [
-      { label: "1-1", value: "/1/1" },
+      { label: "1-1", value: "#/1/1" },
       { disabled: true, label: "1-2", value: "/1/2" },
     ],
     label: "1",
@@ -62,7 +63,10 @@ const navItemsWithGroup: Sidebar.ItemType[] = [
 describe("<Sidebar />", () => {
   test("renders component correctly", async () => {
     await a11y(
-      <Sidebar.Root defaultExpandedValue={["/get-started/frameworks"]}>
+      <Sidebar.Root
+        breakpoint={false}
+        defaultExpandedValue={["/get-started/frameworks"]}
+      >
         <Sidebar.SidePanel
           footer={<Sidebar.MenuButton>Footer</Sidebar.MenuButton>}
           header={<Sidebar.MenuButton>Header</Sidebar.MenuButton>}
@@ -102,9 +106,9 @@ describe("<Sidebar />", () => {
     expect(Sidebar.Handle.displayName).toBe("SidebarHandle")
   })
 
-  test("sets `className` correctly", () => {
-    const { container } = render(
-      <Sidebar.Root defaultExpandedValue={["/1"]}>
+  test("sets `className` correctly", async () => {
+    const { container } = await render(
+      <Sidebar.Root breakpoint={false} defaultExpandedValue={["/1"]}>
         <Sidebar.SidePanel
           footer={<Sidebar.MenuButton>Footer</Sidebar.MenuButton>}
           header={<Sidebar.MenuButton>Header</Sidebar.MenuButton>}
@@ -133,9 +137,9 @@ describe("<Sidebar />", () => {
     expect(container.querySelector(".ui-sidebar__handle")).toBeInTheDocument()
   })
 
-  test("renders HTML tag correctly", () => {
-    const { container } = render(
-      <Sidebar.Root defaultExpandedValue={["/1"]}>
+  test("renders HTML tag correctly", async () => {
+    const { container } = await render(
+      <Sidebar.Root breakpoint={false} defaultExpandedValue={["/1"]}>
         <Sidebar.SidePanel
           footer={<Sidebar.MenuButton>Footer</Sidebar.MenuButton>}
           header={<Sidebar.MenuButton>Header</Sidebar.MenuButton>}
@@ -176,8 +180,9 @@ describe("<Sidebar />", () => {
   test("should select leaf item on click", async () => {
     const onSelectedChange = vi.fn()
 
-    const { user } = render(
+    await render(
       <Sidebar.Root
+        breakpoint={false}
         defaultExpandedValue={["/1"]}
         onSelectedChange={onSelectedChange}
       >
@@ -187,23 +192,23 @@ describe("<Sidebar />", () => {
 
     const link = screen.getByRole("link", { name: "1-1" })
 
-    await user.click(link)
+    fireEvent.click(link)
 
-    expect(onSelectedChange).toHaveBeenCalledWith("/1/1")
+    expect(onSelectedChange).toHaveBeenCalledWith("#/1/1")
   })
 
   test("should expand and collapse group on trigger click", async () => {
     const onExpandedChange = vi.fn()
 
-    const { user } = render(
-      <Sidebar.Root onExpandedChange={onExpandedChange}>
+    const { user } = await render(
+      <Sidebar.Root breakpoint={false} onExpandedChange={onExpandedChange}>
         <Sidebar.SidePanel items={navItems} />
       </Sidebar.Root>,
     )
 
     const trigger = screen.getByRole("button", { name: /1/ })
 
-    await user.click(trigger)
+    fireEvent.click(trigger)
 
     expect(onExpandedChange).toHaveBeenCalledWith(["/1"])
     expect(trigger).toHaveAttribute("data-expanded")
@@ -216,15 +221,15 @@ describe("<Sidebar />", () => {
   test("should not expand disabled group on click", async () => {
     const onExpandedChange = vi.fn()
 
-    const { user } = render(
-      <Sidebar.Root onExpandedChange={onExpandedChange}>
+    await render(
+      <Sidebar.Root breakpoint={false} onExpandedChange={onExpandedChange}>
         <Sidebar.SidePanel items={navItems} />
       </Sidebar.Root>,
     )
 
     const trigger = screen.getByRole("button", { name: /2/ })
 
-    await user.click(trigger)
+    fireEvent.click(trigger)
 
     expect(onExpandedChange).not.toHaveBeenCalled()
   })
@@ -232,22 +237,22 @@ describe("<Sidebar />", () => {
   test("should not select disabled leaf item", async () => {
     const onSelectedChange = vi.fn()
 
-    const { user } = render(
-      <Sidebar.Root onSelectedChange={onSelectedChange}>
+    await render(
+      <Sidebar.Root breakpoint={false} onSelectedChange={onSelectedChange}>
         <Sidebar.SidePanel items={navItems} />
       </Sidebar.Root>,
     )
 
     const link = screen.getByRole("link", { name: "4" })
 
-    await user.click(link)
+    fireEvent.click(link)
 
     expect(onSelectedChange).not.toHaveBeenCalled()
   })
 
   test("should toggle sidebar via Trigger", async () => {
-    const { user } = render(
-      <Sidebar.Root>
+    const { user } = await render(
+      <Sidebar.Root breakpoint={false}>
         <Sidebar.SidePanel items={navItems} />
         <Sidebar.MainPanel>
           <Sidebar.Trigger>
@@ -270,9 +275,9 @@ describe("<Sidebar />", () => {
     expect(trigger).toHaveAttribute("aria-expanded", "true")
   })
 
-  test("should toggle sidebar with Cmd/Ctrl+B", () => {
-    render(
-      <Sidebar.Root>
+  test("should toggle sidebar with Cmd/Ctrl+B", async () => {
+    await render(
+      <Sidebar.Root breakpoint={false}>
         <Sidebar.SidePanel items={navItems} />
         <Sidebar.MainPanel>
           <Sidebar.Trigger>
@@ -295,9 +300,9 @@ describe("<Sidebar />", () => {
     expect(trigger).toHaveAttribute("aria-expanded", "true")
   })
 
-  test("should ignore keydown when key is not `b` or modifier is missing", () => {
-    render(
-      <Sidebar.Root>
+  test("should ignore keydown when key is not `b` or modifier is missing", async () => {
+    await render(
+      <Sidebar.Root breakpoint={false}>
         <Sidebar.SidePanel items={navItems} />
         <Sidebar.MainPanel>
           <Sidebar.Trigger>
@@ -316,9 +321,13 @@ describe("<Sidebar />", () => {
     expect(trigger).toHaveAttribute("aria-expanded", "true")
   })
 
-  test("should support controlled selectedValue", () => {
-    render(
-      <Sidebar.Root defaultExpandedValue={["/1"]} selectedValue="/1/1">
+  test("should support controlled selectedValue", async () => {
+    await render(
+      <Sidebar.Root
+        breakpoint={false}
+        defaultExpandedValue={["/1"]}
+        selectedValue="#/1/1"
+      >
         <Sidebar.SidePanel items={navItems} />
       </Sidebar.Root>,
     )
@@ -329,9 +338,9 @@ describe("<Sidebar />", () => {
     expect(link.closest("li")).toHaveAttribute("aria-current", "page")
   })
 
-  test("should support controlled expandedValue", () => {
-    render(
-      <Sidebar.Root expandedValue={["/1"]}>
+  test("should support controlled expandedValue", async () => {
+    await render(
+      <Sidebar.Root breakpoint={false} expandedValue={["/1"]}>
         <Sidebar.SidePanel items={navItems} />
       </Sidebar.Root>,
     )
@@ -359,14 +368,14 @@ describe("<Sidebar />", () => {
           >
             Collapse
           </button>
-          <Sidebar.Root controlRef={controlRef}>
+          <Sidebar.Root breakpoint={false} controlRef={controlRef}>
             <Sidebar.SidePanel items={navItemsWithGroup} />
           </Sidebar.Root>
         </>
       )
     }
 
-    const { user } = render(<Controlled />)
+    const { user } = await render(<Controlled />)
 
     await user.click(screen.getByTestId("expand-all"))
 
@@ -382,9 +391,9 @@ describe("<Sidebar />", () => {
     })
   })
 
-  test("should render with header, footer, content, and handle", () => {
-    render(
-      <Sidebar.Root>
+  test("should render with header, footer, content, and handle", async () => {
+    await render(
+      <Sidebar.Root breakpoint={false}>
         <Sidebar.SidePanel
           footer={<Sidebar.MenuButton>Footer</Sidebar.MenuButton>}
           header={<Sidebar.MenuButton>Header</Sidebar.MenuButton>}
@@ -397,9 +406,9 @@ describe("<Sidebar />", () => {
     expect(screen.getByText("Footer")).toBeInTheDocument()
   })
 
-  test("should render with custom children for header/content/footer/handle", () => {
-    render(
-      <Sidebar.Root>
+  test("should render with custom children for header/content/footer/handle", async () => {
+    await render(
+      <Sidebar.Root breakpoint={false}>
         <Sidebar.SidePanel>
           <Sidebar.Header>Custom Header</Sidebar.Header>
           <Sidebar.Content items={navItems} />
@@ -414,9 +423,9 @@ describe("<Sidebar />", () => {
     expect(screen.getByRole("link", { name: "3" })).toBeInTheDocument()
   })
 
-  test("should hide indicator when `indicatorHidden` is true", () => {
-    const { container } = render(
-      <Sidebar.Root>
+  test("should hide indicator when `indicatorHidden` is true", async () => {
+    const { container } = await render(
+      <Sidebar.Root breakpoint={false}>
         <Sidebar.SidePanel indicatorHidden items={navItems} />
       </Sidebar.Root>,
     )
@@ -426,9 +435,9 @@ describe("<Sidebar />", () => {
     ).not.toBeInTheDocument()
   })
 
-  test("should render group items with labels", () => {
-    render(
-      <Sidebar.Root>
+  test("should render group items with labels", async () => {
+    await render(
+      <Sidebar.Root breakpoint={false}>
         <Sidebar.SidePanel items={navItemsWithGroup} />
       </Sidebar.Root>,
     )
@@ -442,8 +451,11 @@ describe("<Sidebar />", () => {
     const onOpen = vi.fn()
     const onClose = vi.fn()
 
-    const { user } = render(
-      <Sidebar.Root disclosure={{ desktop: { onClose, onOpen } }}>
+    const { user } = await render(
+      <Sidebar.Root
+        breakpoint={false}
+        disclosure={{ desktop: { onClose, onOpen } }}
+      >
         <Sidebar.SidePanel items={navItems} />
         <Sidebar.MainPanel>
           <Sidebar.Trigger>
@@ -470,8 +482,8 @@ describe("<Sidebar />", () => {
       ]),
     )
 
-    const { user } = render(
-      <Sidebar.Root>
+    const { user } = await render(
+      <Sidebar.Root breakpoint={false}>
         <Sidebar.SidePanel>
           <Sidebar.Content>
             <Sidebar.Item
@@ -499,8 +511,8 @@ describe("<Sidebar />", () => {
   })
 
   test("should prevent navigation when clicking disabled link", async () => {
-    const { user } = render(
-      <Sidebar.Root>
+    await render(
+      <Sidebar.Root breakpoint={false}>
         <Sidebar.SidePanel items={navItems} />
       </Sidebar.Root>,
     )
@@ -512,15 +524,15 @@ describe("<Sidebar />", () => {
     })
     const preventDefaultSpy = vi.spyOn(clickEvent, "preventDefault")
 
-    await user.click(link)
+    fireEvent.click(link)
     link.dispatchEvent(clickEvent)
 
     expect(preventDefaultSpy).toHaveBeenCalledTimes(1)
   })
 
-  test("should render with start and end elements per item/group", () => {
-    render(
-      <Sidebar.Root>
+  test("should render with start and end elements per item/group", async () => {
+    await render(
+      <Sidebar.Root breakpoint={false}>
         <Sidebar.SidePanel
           endElement={<span data-testid="end" />}
           items={navItems}
@@ -537,9 +549,9 @@ describe("<Sidebar />", () => {
     expect(screen.getAllByTestId("end").length).toBeGreaterThan(0)
   })
 
-  test("should render with custom item render function", () => {
-    render(
-      <Sidebar.Root>
+  test("should render with custom item render function", async () => {
+    await render(
+      <Sidebar.Root breakpoint={false}>
         <Sidebar.SidePanel
           items={[{ label: "custom", value: "/custom" }]}
           render={{
@@ -558,9 +570,9 @@ describe("<Sidebar />", () => {
     )
   })
 
-  test("should render with custom link and trigger render functions", () => {
-    render(
-      <Sidebar.Root defaultExpandedValue={["/1"]}>
+  test("should render with custom link and trigger render functions", async () => {
+    await render(
+      <Sidebar.Root breakpoint={false} defaultExpandedValue={["/1"]}>
         <Sidebar.SidePanel
           items={navItems}
           render={{
@@ -581,9 +593,9 @@ describe("<Sidebar />", () => {
     expect(screen.getAllByTestId("custom-trigger").length).toBeGreaterThan(0)
   })
 
-  test("should support `external` prop for links", () => {
-    render(
-      <Sidebar.Root>
+  test("should support `external` prop for links", async () => {
+    await render(
+      <Sidebar.Root breakpoint={false}>
         <Sidebar.SidePanel>
           <Sidebar.Content>
             <Sidebar.Item
@@ -602,9 +614,9 @@ describe("<Sidebar />", () => {
     expect(link).toHaveAttribute("rel", "noopener")
   })
 
-  test("should render Sidebar.Menu and Sidebar.MenuButton", () => {
-    render(
-      <Sidebar.Root>
+  test("should render Sidebar.Menu and Sidebar.MenuButton", async () => {
+    await render(
+      <Sidebar.Root breakpoint={false}>
         <Sidebar.SidePanel>
           <Sidebar.Menu>
             <Sidebar.MenuButton>Menu Item</Sidebar.MenuButton>
@@ -618,9 +630,10 @@ describe("<Sidebar />", () => {
     ).toBeInTheDocument()
   })
 
-  test("should render Tooltip wrapper in non-offcanvas mode when collapsed", () => {
-    render(
+  test("should render Tooltip wrapper in non-offcanvas mode when collapsed", async () => {
+    await render(
       <Sidebar.Root
+        breakpoint={false}
         disclosure={{ desktop: { defaultOpen: false } }}
         mode="icon"
       >
@@ -647,7 +660,7 @@ describe("<Sidebar />", () => {
           >
             Expand
           </button>
-          <Sidebar.Root controlRef={controlRef}>
+          <Sidebar.Root breakpoint={false} controlRef={controlRef}>
             <Sidebar.SidePanel>
               <Sidebar.Content>
                 <Sidebar.Item
@@ -662,7 +675,7 @@ describe("<Sidebar />", () => {
       )
     }
 
-    const { user } = render(<Controlled />)
+    const { user } = await render(<Controlled />)
 
     await user.click(screen.getByTestId("expand-all"))
 
@@ -675,9 +688,13 @@ describe("<Sidebar />", () => {
     })
   })
 
-  test("should support default selectedValue", () => {
-    render(
-      <Sidebar.Root defaultExpandedValue={["/1"]} defaultSelectedValue="/1/1">
+  test("should support default selectedValue", async () => {
+    await render(
+      <Sidebar.Root
+        breakpoint={false}
+        defaultExpandedValue={["/1"]}
+        defaultSelectedValue="#/1/1"
+      >
         <Sidebar.SidePanel items={navItems} />
       </Sidebar.Root>,
     )

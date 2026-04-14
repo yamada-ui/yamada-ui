@@ -92,7 +92,7 @@ Use tools to interact with the user throughout the process.
    - Include the full structure (parent/child, related, depends-on) in the plan presentation
 
 8. **Present plan for user review**
-   - **Title format** — use natural, descriptive English. Do not use commit message format (e.g., `feat(x): ...`). Wrap component names and code identifiers in backticks.
+   - **Title format** — use natural, descriptive English. Do not use commit message format (e.g., `feat(x): ...`). Wrap component names and code identifiers in backticks, and escape those backticks when presenting shell commands.
      - Good: "Add \`Marquee\` component", "\`Accordion\` throws error when all items are disabled"
      - Bad: "feat(marquee): add Marquee component", "fix(accordion): throw error when all items are disabled"
    - Present the following for user review:

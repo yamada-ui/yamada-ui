@@ -36,7 +36,9 @@ describe("<Resizable />", () => {
       .element(page.getByTestId("root"))
       .toHaveClass("ui-resizable__root")
     await expect
-      .element(page.getByTestId("item").element().firstChild)
+      .element(
+        page.getByTestId("item").element().firstElementChild as HTMLElement,
+      )
       .toHaveClass("ui-resizable__item")
     await expect
       .element(page.getByTestId("trigger"))
@@ -121,8 +123,7 @@ describe("<ResizableTrigger />", () => {
     }
 
     await render(<Wrapper />)
-
-    page.getByTestId("mock-set-layout").element().click()
+    ;(page.getByTestId("mock-set-layout").element() as HTMLElement).click()
 
     const trigger = page.getByTestId("trigger").element()
 

@@ -62,13 +62,7 @@ export default async function Page({ params }: PageProps<"/[locale]/guides">) {
       {categories.map(({ category, description, guides, title }) => (
         <VStack key={category} as="section" gap="xs" w="full">
           <HStack alignItems="center" gap="sm">
-            <Center
-              bg={{
-                base: "bg.contrast",
-              }}
-              boxSize="12"
-              rounded="sm"
-            >
+            <Center bg="bg.contrast" boxSize="12" rounded="sm">
               <Icon
                 as={CATEGORY_ICONS[category] || BlocksIcon}
                 fontSize="2xl"

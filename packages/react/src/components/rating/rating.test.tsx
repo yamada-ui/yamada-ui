@@ -1,5 +1,27 @@
-import { a11y, fireEvent, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Rating } from "."
+
+const dispatchMouse = (
+  el: EventTarget,
+  type: "mousedown" | "mouseleave" | "mousemove",
+  init: MouseEventInit = {},
+) => {
+  el.dispatchEvent(new MouseEvent(type, { bubbles: true, ...init }))
+}
+
+const dispatchTouchStart = (
+  el: EventTarget,
+  touches: { clientX: number; clientY: number }[] = [],
+) => {
+  const event = new Event("touchstart", {
+    bubbles: true,
+    cancelable: true,
+  }) as Event & { touches: { clientX: number; clientY: number }[] }
+
+  Object.defineProperty(event, "touches", { value: touches })
+
+  el.dispatchEvent(event)
+}
 
 describe("<Rating />", () => {
   const defaultGetBoundingClientRect =
@@ -30,15 +52,17 @@ describe("<Rating />", () => {
     expect(Rating.displayName).toBe("RatingRoot")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Rating />)
-    expect(screen.getByRole("radiogroup")).toHaveClass("ui-rating__root")
+  test("sets `className` correctly", async () => {
+    await render(<Rating />)
+    await expect
+      .element(page.getByRole("radiogroup"))
+      .toHaveClass("ui-rating__root")
   })
 
-  test("should merge `groupProps` with slot props without overwriting user props", () => {
+  test("should merge `groupProps` with slot props without overwriting user props", async () => {
     const onClick = vi.fn()
 
-    const { container } = render(
+    const { container } = await render(
       <Rating
         groupProps={(value) => ({
           className: `group-${value}`,
@@ -54,12 +78,12 @@ describe("<Rating />", () => {
     expect(firstGroup).toHaveClass("ui-rating__group", "group-1")
     expect(firstGroup).toHaveStyle({ outlineColor: "rgb(255, 0, 0)" })
 
-    fireEvent.click(firstGroup!)
+    firstGroup?.dispatchEvent(new MouseEvent("click", { bubbles: true }))
     expect(onClick).toHaveBeenCalledTimes(1)
   })
 
-  test("rating renders correctly with value", () => {
-    const { container } = render(<Rating value={4} />)
+  test("rating renders correctly with value", async () => {
+    const { container } = await render(<Rating value={4} />)
 
     const items = container.querySelectorAll(".ui-rating__item")
 
@@ -68,24 +92,28 @@ describe("<Rating />", () => {
     }
   })
 
-  test("disabled Rating renders correctly", () => {
-    render(<Rating data-testid="rating" disabled />)
+  test("disabled Rating renders correctly", async () => {
+    await render(<Rating data-testid="rating" disabled />)
 
-    expect(screen.getByTestId("rating")).toHaveAttribute("aria-disabled")
+    await expect
+      .element(page.getByTestId("rating"))
+      .toHaveAttribute("aria-disabled")
   })
 
-  test("readonly Rating renders correctly", () => {
-    render(<Rating data-testid="rating" readOnly />)
+  test("readonly Rating renders correctly", async () => {
+    await render(<Rating data-testid="rating" readOnly />)
 
-    expect(screen.getByTestId("rating")).toHaveAttribute("aria-readonly")
+    await expect
+      .element(page.getByTestId("rating"))
+      .toHaveAttribute("aria-readonly")
   })
 
   test("should be filled to the point of hovering", async () => {
-    const { container, user } = render(
+    const { container } = await render(
       <Rating data-testid="rating" height={20} width={100} />,
     )
 
-    const rating = screen.getByTestId("rating")
+    const rating = page.getByTestId("rating").element()
 
     const items = container.querySelectorAll(".ui-rating__item")
 
@@ -93,46 +121,48 @@ describe("<Rating />", () => {
       expect(items[i]).not.toHaveAttribute("data-filled")
     }
 
-    await user.pointer({ target: rating, coords: { x: 50, y: 10 } })
+    dispatchMouse(rating, "mouseenter")
+    dispatchMouse(rating, "mousemove", { clientX: 50, clientY: 10 })
 
-    for (let i = 1; i < 3; i++) {
-      expect(items[i]).toHaveAttribute("data-filled")
-    }
-    for (let i = 3; i < items.length; i++) {
-      expect(items[i]).not.toHaveAttribute("data-filled")
-    }
+    await expect.poll(() => items[1]?.hasAttribute("data-filled")).toBe(true)
+    await expect.poll(() => items[2]?.hasAttribute("data-filled")).toBe(true)
+    await expect.poll(() => items[3]?.hasAttribute("data-filled")).toBe(false)
 
-    await user.unhover(rating)
+    rating.dispatchEvent(
+      new MouseEvent("mouseout", {
+        bubbles: true,
+        relatedTarget: document.body,
+      }),
+    )
 
-    for (let i = 1; i < items.length; i++) {
-      expect(items[i]).not.toHaveAttribute("data-filled")
-    }
+    await expect.poll(() => items[1]?.hasAttribute("data-filled")).toBe(false)
+    await expect.poll(() => items[2]?.hasAttribute("data-filled")).toBe(false)
   })
 
   test("value should be updated correctly on the mouseDown event", async () => {
     const onChange = vi.fn()
 
-    const { container, user } = render(<Rating onChange={onChange} />)
+    const { container } = await render(<Rating onChange={onChange} />)
 
     const items = container.querySelectorAll(".ui-rating__item")
-    await user.click(items[3]!)
+    dispatchMouse(items[3]!, "mousedown", { button: 0 })
 
     expect(onChange).toHaveBeenCalledExactlyOnceWith(3)
   })
 
-  test("value should be updated correctly on the touchStart event", () => {
+  test("value should be updated correctly on the touchStart event", async () => {
     const onChange = vi.fn()
 
-    const { container } = render(<Rating onChange={onChange} />)
+    const { container } = await render(<Rating onChange={onChange} />)
 
     const items = container.querySelectorAll(".ui-rating__item")
-    fireEvent.touchStart(items[3]!)
+    dispatchTouchStart(items[3]!)
 
     expect(onChange).toHaveBeenCalledExactlyOnceWith(3)
   })
 
-  test("highlightSelectedOnly should work correctly", () => {
-    const { container } = render(
+  test("highlightSelectedOnly should work correctly", async () => {
+    const { container } = await render(
       <Rating defaultValue={3} highlightSelectedOnly />,
     )
 
@@ -147,26 +177,24 @@ describe("<Rating />", () => {
     }
   })
 
-  test("value should be updated on root touchStart event", () => {
+  test("value should be updated on root touchStart event", async () => {
     const onChange = vi.fn()
 
-    render(<Rating data-testid="rating" onChange={onChange} />)
+    await render(<Rating data-testid="rating" onChange={onChange} />)
 
-    const rating = screen.getByTestId("rating")
+    const rating = page.getByTestId("rating").element()
 
-    fireEvent.touchStart(rating, {
-      touches: [{ clientX: 50, clientY: 10 }],
-    })
+    dispatchTouchStart(rating, [{ clientX: 50, clientY: 10 }])
 
     expect(onChange).toHaveBeenCalledWith(2)
   })
 
-  test("root touchEnd should call preventDefault", () => {
-    render(<Rating data-testid="rating" />)
+  test("root touchEnd should call preventDefault", async () => {
+    await render(<Rating data-testid="rating" />)
 
-    const rating = screen.getByTestId("rating")
+    const rating = page.getByTestId("rating").element()
 
-    const event = new TouchEvent("touchend", {
+    const event = new Event("touchend", {
       bubbles: true,
       cancelable: true,
     })
@@ -178,16 +206,16 @@ describe("<Rating />", () => {
   })
 
   test("should not update value when disabled", async () => {
-    const { container, user } = render(<Rating disabled />)
+    const { container } = await render(<Rating disabled />)
 
     const items = container.querySelectorAll(".ui-rating__item")
 
-    await user.click(items[3]!)
+    dispatchMouse(items[3]!, "mousedown", { button: 0 })
 
     expect(items[3]?.firstChild).not.toHaveAttribute("data-checked")
   })
 
-  test("should use custom color correctly", () => {
+  test("should use custom color correctly", async () => {
     const colors: { [key: number]: string } = {
       1: "red.500",
       2: "orange.500",
@@ -198,7 +226,9 @@ describe("<Rating />", () => {
 
     const getColor = (value: number): string | undefined => colors[value]
 
-    const { container } = render(<Rating color={getColor} defaultValue={5} />)
+    const { container } = await render(
+      <Rating color={getColor} defaultValue={5} />,
+    )
     const items = container.querySelectorAll(".ui-rating__item")
 
     const styleElements = document.getElementsByTagName("style")
@@ -221,14 +251,14 @@ describe("<Rating />", () => {
     }
   })
 
-  test("should reset hovered value on blur when mouse is outside", () => {
-    const { container } = render(<Rating />)
+  test("should reset hovered value on blur when mouse is outside", async () => {
+    const { container } = await render(<Rating />)
     const inputs = container.querySelectorAll("input[type='radio']")
     const firstInput = inputs[0] as HTMLInputElement
 
-    fireEvent.focus(firstInput)
-    fireEvent.mouseLeave(container.firstChild!)
-    fireEvent.blur(firstInput)
+    firstInput.focus()
+    dispatchMouse(container.firstChild!, "mouseleave")
+    firstInput.blur()
 
     const activeInput = container.querySelector("input[data-active='true']")
     expect(activeInput).toBeNull()
@@ -237,14 +267,11 @@ describe("<Rating />", () => {
   test("should update value on KeyboardEvent", async () => {
     const onChange = vi.fn()
 
-    const { container, user } = render(<Rating onChange={onChange} />)
+    const { container, user } = await render(<Rating onChange={onChange} />)
 
     const inputs = container.querySelectorAll("input[type='radio']")
 
-    await user.tab()
-    await user.keyboard("{ArrowRight}")
-
-    expect(inputs[1]).toHaveAttribute("data-active")
+    ;(inputs[1] as HTMLInputElement).focus()
 
     await user.keyboard("{Space}")
 

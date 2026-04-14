@@ -83,8 +83,7 @@ describe("<NativeSelect />", () => {
     expect(root).toHaveClass("from-root", "from-user")
     expect(root).toHaveStyle({ color: "rgb(255, 0, 0)" })
     expect(root).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
-
-    field.click()
+    ;(field as HTMLElement).click()
 
     expect(onClickFromRoot).toHaveBeenCalledTimes(1)
     expect(onClickFromUser).toHaveBeenCalledTimes(1)
@@ -134,8 +133,7 @@ describe("<NativeSelect />", () => {
     expect(root).toHaveClass("from-root", "from-user")
     expect(field).toHaveStyle({ color: "rgb(255, 0, 0)" })
     expect(field).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
-
-    field.click()
+    ;(field as HTMLElement).click()
 
     expect(onClickFromRoot).toHaveBeenCalledTimes(1)
     expect(onClickFromUser).toHaveBeenCalledTimes(1)
@@ -253,7 +251,7 @@ describe("<NativeSelect />", () => {
       .getByTestId("select")
       .element()
       .querySelector('optgroup[label="地球人"]')
-    expect(optgroup).toBeInTheDocument()
-    expect(optgroup.children).toHaveLength(3)
+    expect(optgroup).not.toBeNull()
+    expect(optgroup!.children).toHaveLength(3)
   })
 })

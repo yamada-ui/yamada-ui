@@ -187,8 +187,7 @@ describe("useNotice", () => {
     await expect
       .poll(() => !!document.querySelector("[data-close-button]"))
       .toBe(true)
-
-    page.getByRole("button").element().click()
+    ;(page.getByRole("button").element() as HTMLElement).click()
 
     await expectNoticeHidden("Closeable Button Notice")
   })
@@ -204,8 +203,7 @@ describe("useNotice", () => {
     })
 
     await expectNoticeVisible("Click Close Notice")
-
-    page.getByText("Click Close Notice").element().click()
+    ;(page.getByText("Click Close Notice").element() as HTMLElement).click()
 
     await expectNoticeHidden("Click Close Notice")
   })

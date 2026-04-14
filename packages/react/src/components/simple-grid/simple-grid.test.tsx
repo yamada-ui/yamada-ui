@@ -55,8 +55,8 @@ describe("<SimpleGrid />", () => {
   })
 
   test("returns undefined for null value in `minChildWidth` responsive array", async () => {
-    // @ts-expect-error - testing null handling in responsive array
     await render(
+      // @ts-expect-error testing null handling in responsive array
       <SimpleGrid minChildWidth={[null, "200px"]}>SimpleGrid</SimpleGrid>,
     )
     await expect.element(page.getByText("SimpleGrid")).toBeInTheDocument()

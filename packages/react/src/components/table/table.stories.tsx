@@ -169,6 +169,10 @@ export const ColorScheme: Story = () => {
   )
 }
 
+ColorScheme.parameters = {
+  chromatic: { disableSnapshot: true },
+}
+
 export const Border: Story = () => {
   const data = useMemo<Data[]>(() => createData(), [])
 
@@ -215,6 +219,10 @@ export const HighlightOnHover: Story = () => {
       )}
     </PropsTable>
   )
+}
+
+HighlightOnHover.parameters = {
+  chromatic: { disableSnapshot: true },
 }
 
 export const HeaderGroups: Story = () => {

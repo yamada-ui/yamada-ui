@@ -10,54 +10,11 @@ import {
   VISUAL_TEST_ONLINE,
   VISUAL_TEST_TIME_ZONE,
   VISUAL_TEST_USER_AGENT,
-  type VisualTestGlobal,
 } from "#storybook/visual-test"
 import { describe, expect, test } from "vitest"
+import { createVisualTestGlobal } from "./test-utils"
 
-interface VisualTestStorage {
-  cleared: boolean
-  clear: () => void
-}
-
-const createStorage = (): VisualTestStorage => {
-  return {
-    clear() {
-      this.cleared = true
-    },
-    cleared: false,
-  }
-}
-
-const createVisualTestGlobal = (search = "") => {
-  const localStorage = createStorage()
-  const sessionStorage = createStorage()
-  const intl = {
-    DateTimeFormat: Intl.DateTimeFormat,
-    NumberFormat: Intl.NumberFormat,
-  } as typeof Intl
-
-  const target = {
-    Date,
-    document: {
-      cookie: "session=123;theme=light",
-      documentElement: { lang: "" },
-    },
-    Intl: intl,
-    localStorage,
-    location: { search },
-    navigator: {
-      language: "ja-JP",
-      languages: ["ja-JP"],
-      userAgent: "test-agent",
-      onLine: false,
-    },
-    sessionStorage,
-  } satisfies VisualTestGlobal
-
-  return { target, localStorage, sessionStorage }
-}
-
-describe("storybook visual-test helpers", () => {
+describe("storybook visual-test runtime", () => {
   test("keeps default mode dynamic without visual-test signal", () => {
     const { target, localStorage, sessionStorage } = createVisualTestGlobal()
 

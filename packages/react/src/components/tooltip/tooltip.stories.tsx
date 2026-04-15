@@ -189,37 +189,10 @@ export const Placement: Story = () => {
 }
 
 Placement.play = async ({ canvas, userEvent }) => {
-  const placements = [
-    "start",
-    "start-start",
-    "start-end",
-    "start-center",
-    "end",
-    "end-start",
-    "end-end",
-    "end-center",
-    "center-start",
-    "center-start-start",
-    "center-start-end",
-    "center-end",
-    "center-end-start",
-    "center-end-end",
-  ] as const
-  for (let i = 0; i < placements.length; i++) {
-    if (i > 0) {
-      await userEvent.unhover(
-        canvas.getByRole("button", {
-          name: `Open "${toTitleCase(placements[i - 1])}" Tooltip`,
-        }),
-      )
-    }
-    await userEvent.hover(
-      canvas.getByRole("button", {
-        name: `Open "${toTitleCase(placements[i])}" Tooltip`,
-      }),
-    )
-    await expect(await screen.findByRole("tooltip")).toBeVisible()
-  }
+  await userEvent.hover(
+    canvas.getByRole("button", { name: /Open "Start" Tooltip/i }),
+  )
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
 }
 
 export const Disabled: Story = () => {

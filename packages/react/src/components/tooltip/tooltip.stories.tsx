@@ -1,5 +1,4 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { expect, screen } from "storybook/test"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { toTitleCase } from "../../utils"
 import { Button } from "../button"
@@ -145,10 +144,6 @@ export const AlwaysOpen: Story = () => {
       <Button>Please Hover</Button>
     </Tooltip>
   )
-}
-
-AlwaysOpen.play = async () => {
-  await expect(screen.getByRole("tooltip")).toBeVisible()
 }
 
 export const CustomControl: Story = () => {

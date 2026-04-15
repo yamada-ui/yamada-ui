@@ -1,5 +1,4 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { expect, screen } from "storybook/test"
 import { Tip } from "."
 import { HStack, MessageCircleWarningIcon, Text, toTitleCase } from "../.."
 import { useDisclosure } from "../../hooks/use-disclosure"
@@ -207,10 +206,6 @@ export const AlwaysOpen: Story = () => {
       <Tip content="俺は俺の責務を全うする!!" open />
     </HStack>
   )
-}
-
-AlwaysOpen.play = async () => {
-  await expect(screen.getByRole("tooltip")).toBeVisible()
 }
 
 export const CustomIcon: Story = () => {

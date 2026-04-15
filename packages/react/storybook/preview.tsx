@@ -4,11 +4,21 @@ import { GLOBALS_UPDATED } from "storybook/internal/core-events"
 import { addons } from "storybook/preview-api"
 import { extendConfig, isRtl, UIProvider, useColorMode, VStack } from "../src"
 import { themes } from "./themes"
-import { setupFixedDateForVisualTest } from "./visual-test"
+import {
+  getVisualTestLocale,
+  isVisualTest,
+  setupVisualTestRuntimeContract,
+  VISUAL_TEST_VIEWPORT_WIDTH,
+  type VisualTestGlobal,
+} from "./visual-test"
 
 const channel = addons.getChannel()
+const visualTestEnabled = isVisualTest(
+  globalThis as unknown as VisualTestGlobal,
+  import.meta.env.STORYBOOK_VISUAL_TEST,
+)
 
-setupFixedDateForVisualTest({
+setupVisualTestRuntimeContract({
   envValue: import.meta.env.STORYBOOK_VISUAL_TEST,
 })
 
@@ -34,20 +44,21 @@ const preview: Preview = {
     function (Story, { globals, parameters }) {
       const { layout } = parameters
       const { colorMode: defaultColorMode, locale } = globals
-      const dir = isRtl(globals.locale) ? "rtl" : "ltr"
+      const runtimeLocale = visualTestEnabled ? getVisualTestLocale() : locale
+      const dir = isRtl(runtimeLocale) ? "rtl" : "ltr"
       const config = extendConfig({ defaultColorMode })
       const unstyled = layout === "unstyled"
       const centered = layout === "centered"
 
       if (unstyled) {
         return (
-          <UIProvider config={config} dir={dir} locale={locale}>
+          <UIProvider config={config} dir={dir} locale={runtimeLocale}>
             <Story />
           </UIProvider>
         )
       } else {
         return (
-          <UIProvider config={config} dir={dir} locale={locale}>
+          <UIProvider config={config} dir={dir} locale={runtimeLocale}>
             <VStack
               css={{ "--space": { base: "spaces.lg", md: "spaces.md" } }}
               align="start"
@@ -126,6 +137,9 @@ const preview: Preview = {
     a11y: {
       config: { rules: [{ id: "color-contrast", enabled: false }] },
       test: "error",
+    },
+    chromatic: {
+      viewports: [VISUAL_TEST_VIEWPORT_WIDTH],
     },
     docs: { codePanel: true },
     layout: "fullscreen",

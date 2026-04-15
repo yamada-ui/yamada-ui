@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
+import { expect, screen } from "storybook/test"
 import { Tip } from "."
 import { HStack, MessageCircleWarningIcon, Text, toTitleCase } from "../.."
 import { useDisclosure } from "../../hooks/use-disclosure"
@@ -25,6 +26,13 @@ export const Basic: Story = () => {
   )
 }
 
+Basic.play = async ({ canvas, userEvent }) => {
+  await userEvent.hover(
+    canvas.getByRole("button", { name: /俺は俺の責務を全うする/ }),
+  )
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
+}
+
 export const Status: Story = () => {
   return (
     <For each={["help", "info", "success", "warning", "error"] as const}>
@@ -38,6 +46,13 @@ export const Status: Story = () => {
       )}
     </For>
   )
+}
+
+Status.play = async ({ canvas, userEvent }) => {
+  await userEvent.hover(
+    canvas.getAllByRole("button", { name: /俺は俺の責務を全うする/ })[0],
+  )
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
 }
 
 export const ColorScheme: Story = () => {
@@ -59,6 +74,13 @@ export const ColorScheme: Story = () => {
   )
 }
 
+ColorScheme.play = async ({ canvas, userEvent }) => {
+  await userEvent.hover(
+    canvas.getAllByRole("button", { name: /俺は俺の責務を全うする/ })[0],
+  )
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
+}
+
 export const Duration: Story = () => {
   return (
     <HStack gap="xs">
@@ -68,6 +90,13 @@ export const Duration: Story = () => {
       <Tip content="俺は俺の責務を全うする!!" duration={0.7} />
     </HStack>
   )
+}
+
+Duration.play = async ({ canvas, userEvent }) => {
+  await userEvent.hover(
+    canvas.getByRole("button", { name: /俺は俺の責務を全うする/ }),
+  )
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
 }
 
 export const Delay: Story = () => {
@@ -98,6 +127,22 @@ export const Delay: Story = () => {
   )
 }
 
+Delay.play = async ({ canvas, userEvent }) => {
+  await userEvent.hover(
+    canvas.getAllByRole("button", { name: /俺は俺の責務を全うする/ })[0],
+  )
+  await expect(
+    await screen.findByRole("tooltip", {}, { timeout: 2000 }),
+  ).toBeVisible()
+  await userEvent.unhover(
+    canvas.getAllByRole("button", { name: /俺は俺の責務を全うする/ })[0],
+  )
+  await userEvent.hover(
+    canvas.getAllByRole("button", { name: /俺は俺の責務を全うする/ })[1],
+  )
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
+}
+
 export const Offset: Story = () => {
   return (
     <HStack gap="xs">
@@ -109,6 +154,13 @@ export const Offset: Story = () => {
   )
 }
 
+Offset.play = async ({ canvas, userEvent }) => {
+  await userEvent.hover(
+    canvas.getByRole("button", { name: /俺は俺の責務を全うする/ }),
+  )
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
+}
+
 export const Gutter: Story = () => {
   return (
     <HStack gap="xs">
@@ -118,6 +170,13 @@ export const Gutter: Story = () => {
       <Tip content="俺は俺の責務を全うする!!" gutter={32} />
     </HStack>
   )
+}
+
+Gutter.play = async ({ canvas, userEvent }) => {
+  await userEvent.hover(
+    canvas.getByRole("button", { name: /俺は俺の責務を全うする/ }),
+  )
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
 }
 
 export const AnimationScheme: Story = () => {
@@ -146,6 +205,29 @@ export const AnimationScheme: Story = () => {
       )}
     </For>
   )
+}
+
+AnimationScheme.play = async ({ canvas, userEvent }) => {
+  const animationSchemes = [
+    "scale",
+    "block-end",
+    "inline-start",
+    "inline-end",
+    "block-start",
+  ] as const
+  for (let i = 0; i < animationSchemes.length; i++) {
+    if (i > 0) {
+      await userEvent.unhover(
+        canvas.getAllByRole("button", { name: /俺は俺の責務を全うする/ })[
+          i - 1
+        ],
+      )
+    }
+    await userEvent.hover(
+      canvas.getAllByRole("button", { name: /俺は俺の責務を全うする/ })[i],
+    )
+    await expect(await screen.findByRole("tooltip")).toBeVisible()
+  }
 }
 
 export const Placement: Story = () => {
@@ -182,6 +264,38 @@ export const Placement: Story = () => {
   )
 }
 
+Placement.play = async ({ canvas, userEvent }) => {
+  const placements = [
+    "start",
+    "start-start",
+    "start-end",
+    "start-center",
+    "end",
+    "end-start",
+    "end-end",
+    "end-center",
+    "center-start",
+    "center-start-start",
+    "center-start-end",
+    "center-end",
+    "center-end-start",
+    "center-end-end",
+  ] as const
+  for (let i = 0; i < placements.length; i++) {
+    if (i > 0) {
+      await userEvent.unhover(
+        canvas.getAllByRole("button", { name: /俺は俺の責務を全うする/ })[
+          i - 1
+        ],
+      )
+    }
+    await userEvent.hover(
+      canvas.getAllByRole("button", { name: /俺は俺の責務を全うする/ })[i],
+    )
+    await expect(await screen.findByRole("tooltip")).toBeVisible()
+  }
+}
+
 export const Disabled: Story = () => {
   return (
     <HStack gap="xs">
@@ -193,6 +307,10 @@ export const Disabled: Story = () => {
   )
 }
 
+Disabled.parameters = {
+  chromatic: { disableSnapshot: true },
+}
+
 export const AlwaysOpen: Story = () => {
   return (
     <HStack gap="xs">
@@ -202,6 +320,10 @@ export const AlwaysOpen: Story = () => {
       <Tip content="俺は俺の責務を全うする!!" open />
     </HStack>
   )
+}
+
+AlwaysOpen.play = async () => {
+  await expect(screen.getByRole("tooltip")).toBeVisible()
 }
 
 export const CustomIcon: Story = () => {
@@ -216,6 +338,13 @@ export const CustomIcon: Story = () => {
       />
     </HStack>
   )
+}
+
+CustomIcon.play = async ({ canvas, userEvent }) => {
+  await userEvent.hover(
+    canvas.getByRole("button", { name: /俺は俺の責務を全うする/ }),
+  )
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
 }
 
 export const CustomControl: Story = () => {
@@ -234,4 +363,11 @@ export const CustomControl: Story = () => {
       />
     </HStack>
   )
+}
+
+CustomControl.play = async ({ canvas, userEvent }) => {
+  await userEvent.hover(
+    canvas.getByRole("button", { name: /俺は俺の責務を全うする/ }),
+  )
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
 }

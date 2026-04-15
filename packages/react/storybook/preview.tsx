@@ -1,4 +1,5 @@
 import type { Preview, StoryContext } from "@storybook/react-vite"
+import { MotionGlobalConfig } from "motion/react"
 import { useEffect } from "react"
 import { GLOBALS_UPDATED } from "storybook/internal/core-events"
 import { addons } from "storybook/preview-api"
@@ -21,6 +22,15 @@ const visualTestEnabled = isVisualTest(
 setupVisualTestRuntimeContract({
   envValue: import.meta.env.STORYBOOK_VISUAL_TEST,
 })
+
+const skipMotionAnimations = isVisualTest(
+  globalThis as unknown as VisualTestGlobal,
+  import.meta.env.STORYBOOK_VISUAL_TEST,
+)
+
+if (skipMotionAnimations) {
+  MotionGlobalConfig.skipAnimations = true
+}
 
 const preview: Preview = {
   decorators: [
@@ -139,6 +149,7 @@ const preview: Preview = {
       test: "error",
     },
     chromatic: {
+      pauseAnimationAtEnd: true,
       viewports: [VISUAL_TEST_VIEWPORT_WIDTH],
     },
     docs: { codePanel: true },

@@ -1,6 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "#storybook"
 import { useRef } from "react"
+import { expect, screen, within } from "storybook/test"
 import { Popover } from "."
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { toTitleCase } from "../../utils"
@@ -38,6 +39,13 @@ export const Basic: Story = () => {
   )
 }
 
+Basic.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(
+    canvas.getAllByRole("button", { name: /^click me$/i })[0],
+  )
+  await expect(await screen.findByRole("dialog")).toBeVisible()
+}
+
 export const Size: Story = () => {
   return (
     <PropsTable variant="stack" rows={["xs", "sm", "md", "lg"]}>
@@ -59,6 +67,15 @@ export const Size: Story = () => {
   )
 }
 
+Size.play = async ({ canvas, userEvent }) => {
+  const buttons = canvas.getAllByRole("button", { name: /^click me$/i })
+  for (const button of buttons) {
+    await userEvent.click(button)
+    await expect(await screen.findByRole("dialog")).toBeVisible()
+    await userEvent.click(button)
+  }
+}
+
 export const Footer: Story = () => {
   return (
     <Popover.Root>
@@ -73,6 +90,11 @@ export const Footer: Story = () => {
       </Popover.Content>
     </Popover.Root>
   )
+}
+
+Footer.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /^click me$/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
 }
 
 export const Anchor: Story = () => {
@@ -102,6 +124,11 @@ export const Anchor: Story = () => {
       </Popover.Content>
     </Popover.Root>
   )
+}
+
+Anchor.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /^click me$/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
 }
 
 export const NestedPopover: Story = () => {
@@ -134,6 +161,20 @@ export const NestedPopover: Story = () => {
   )
 }
 
+NestedPopover.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(
+    canvas.getAllByRole("button", { name: /^click me$/i })[0],
+  )
+  await expect(await screen.findByRole("dialog")).toBeVisible()
+  const outer = screen.getByRole("dialog")
+  await userEvent.click(
+    within(outer).getAllByRole("button", { name: /^click me$/i })[0],
+  )
+  await expect(
+    (await screen.findAllByRole("dialog")).length,
+  ).toBeGreaterThanOrEqual(2)
+}
+
 export const Duration: Story = () => {
   return (
     <Popover.Root duration={0.7}>
@@ -147,6 +188,11 @@ export const Duration: Story = () => {
       </Popover.Content>
     </Popover.Root>
   )
+}
+
+Duration.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /^click me$/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
 }
 
 export const Offset: Story = () => {
@@ -164,6 +210,11 @@ export const Offset: Story = () => {
   )
 }
 
+Offset.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /^click me$/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
+}
+
 export const Gutter: Story = () => {
   return (
     <Popover.Root gutter={32}>
@@ -177,6 +228,11 @@ export const Gutter: Story = () => {
       </Popover.Content>
     </Popover.Root>
   )
+}
+
+Gutter.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /^click me$/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
 }
 
 export const AnimationScheme: Story = () => {
@@ -208,6 +264,27 @@ export const AnimationScheme: Story = () => {
       )}
     </For>
   )
+}
+
+AnimationScheme.play = async ({ canvas, userEvent }) => {
+  const animationSchemes = [
+    "scale",
+    "block-start",
+    "inline-start",
+    "inline-end",
+    "block-end",
+  ] as const
+  for (let i = 0; i < animationSchemes.length; i++) {
+    if (i > 0) {
+      await userEvent.keyboard("{Escape}")
+    }
+    await userEvent.click(
+      canvas.getByRole("button", {
+        name: `Open "${toTitleCase(animationSchemes[i])}" Popover`,
+      }),
+    )
+    await expect(await screen.findByRole("dialog")).toBeVisible()
+  }
 }
 
 export const Placement: Story = () => {
@@ -250,6 +327,36 @@ export const Placement: Story = () => {
   )
 }
 
+Placement.play = async ({ canvas, userEvent }) => {
+  const placements = [
+    "start",
+    "start-start",
+    "start-end",
+    "start-center",
+    "end",
+    "end-start",
+    "end-end",
+    "end-center",
+    "center-start",
+    "center-start-start",
+    "center-start-end",
+    "center-end",
+    "center-end-start",
+    "center-end-end",
+  ] as const
+  for (let i = 0; i < placements.length; i++) {
+    if (i > 0) {
+      await userEvent.keyboard("{Escape}")
+    }
+    await userEvent.click(
+      canvas.getByRole("button", {
+        name: `Open "${toTitleCase(placements[i])}" Popover`,
+      }),
+    )
+    await expect(await screen.findByRole("dialog")).toBeVisible()
+  }
+}
+
 export const Modal: Story = () => {
   return (
     <Popover.Root modal>
@@ -273,6 +380,11 @@ export const Modal: Story = () => {
   )
 }
 
+Modal.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /open profile/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
+}
+
 export const BlockScrollOnMount: Story = () => {
   return (
     <Box minH="200dvh">
@@ -292,6 +404,13 @@ export const BlockScrollOnMount: Story = () => {
   )
 }
 
+BlockScrollOnMount.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(
+    canvas.getByRole("button", { name: /click me and scroll/i }),
+  )
+  await expect(await screen.findByRole("dialog")).toBeVisible()
+}
+
 export const CloseOnScroll: Story = () => {
   return (
     <Box minH="200dvh">
@@ -309,6 +428,13 @@ export const CloseOnScroll: Story = () => {
       </Popover.Root>
     </Box>
   )
+}
+
+CloseOnScroll.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(
+    canvas.getByRole("button", { name: /click me and scroll/i }),
+  )
+  await expect(await screen.findByRole("dialog")).toBeVisible()
 }
 
 export const InitialFocusRef: Story = () => {
@@ -336,6 +462,11 @@ export const InitialFocusRef: Story = () => {
   )
 }
 
+InitialFocusRef.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /open profile/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
+}
+
 export const Disabled: Story = () => {
   return (
     <Popover.Root disabled>
@@ -349,6 +480,10 @@ export const Disabled: Story = () => {
       </Popover.Content>
     </Popover.Root>
   )
+}
+
+Disabled.parameters = {
+  chromatic: { disableSnapshot: true },
 }
 
 export const DisabledCloseOnBlur: Story = () => {
@@ -366,6 +501,13 @@ export const DisabledCloseOnBlur: Story = () => {
   )
 }
 
+DisabledCloseOnBlur.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /^click me$/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
+  await userEvent.click(document.body)
+  await expect(screen.getByRole("dialog")).toBeVisible()
+}
+
 export const DisabledCloseOnEsc: Story = () => {
   return (
     <Popover.Root closeOnEsc={false}>
@@ -379,6 +521,13 @@ export const DisabledCloseOnEsc: Story = () => {
       </Popover.Content>
     </Popover.Root>
   )
+}
+
+DisabledCloseOnEsc.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /^click me$/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
+  await userEvent.keyboard("{Escape}")
+  await expect(screen.getByRole("dialog")).toBeVisible()
 }
 
 export const CloseTrigger: Story = () => {
@@ -399,6 +548,12 @@ export const CloseTrigger: Story = () => {
       </Popover.Content>
     </Popover.Root>
   )
+}
+
+CloseTrigger.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /^click me$/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
+  await userEvent.click(screen.getByRole("button", { name: /^close$/i }))
 }
 
 export const DisabledAutoFocus: Story = () => {
@@ -424,6 +579,11 @@ export const DisabledAutoFocus: Story = () => {
   )
 }
 
+DisabledAutoFocus.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /open profile/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
+}
+
 export const CustomControl: Story = () => {
   const { open, onClose, onOpen } = useDisclosure()
 
@@ -445,4 +605,11 @@ export const CustomControl: Story = () => {
       <Button onClick={onOpen}>Click me from here</Button>
     </>
   )
+}
+
+CustomControl.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(
+    canvas.getAllByRole("button", { name: /^click me$/i })[0],
+  )
+  await expect(await screen.findByRole("dialog")).toBeVisible()
 }

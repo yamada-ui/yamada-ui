@@ -1,6 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "#storybook"
 import { useMemo } from "react"
+import { expect, screen, within } from "storybook/test"
 import { ChevronsDownIcon } from "../icon"
 import { NativeAccordion } from "./index"
 
@@ -46,6 +47,23 @@ export const Basic: Story = () => {
   )
 }
 
+Basic.play = async ({ canvas, userEvent }) => {
+  const trigger = canvas.getByText(/孫悟空少年編/).closest("summary")
+  if (!trigger) {
+    throw new Error("Expected accordion summary")
+  }
+  await userEvent.click(trigger)
+  const details = trigger.closest("details")
+  if (!details || !(details instanceof HTMLElement)) {
+    throw new Error("Expected details")
+  }
+  await expect(
+    await within(details).findByText(
+      /地球の人里離れた山奥に住む尻尾の生えた少年/,
+    ),
+  ).toBeVisible()
+}
+
 export const Items: Story = () => {
   const items = useMemo<NativeAccordion.Item[]>(
     () => [
@@ -69,6 +87,23 @@ export const Items: Story = () => {
   )
 
   return <NativeAccordion.Root items={items} />
+}
+
+Items.play = async ({ canvas, userEvent }) => {
+  const trigger = canvas.getByText(/孫悟空少年編/).closest("summary")
+  if (!trigger) {
+    throw new Error("Expected accordion summary")
+  }
+  await userEvent.click(trigger)
+  const details = trigger.closest("details")
+  if (!details || !(details instanceof HTMLElement)) {
+    throw new Error("Expected details")
+  }
+  await expect(
+    await within(details).findByText(
+      /地球の人里離れた山奥に住む尻尾の生えた少年/,
+    ),
+  ).toBeVisible()
 }
 
 export const Variant: Story = () => {
@@ -102,6 +137,23 @@ export const Variant: Story = () => {
   )
 }
 
+Variant.play = async ({ canvas, userEvent }) => {
+  const trigger = canvas.getAllByText(/孫悟空少年編/)[0]!.closest("summary")
+  if (!trigger) {
+    throw new Error("Expected accordion summary")
+  }
+  await userEvent.click(trigger)
+  const details = trigger.closest("details")
+  if (!details || !(details instanceof HTMLElement)) {
+    throw new Error("Expected details")
+  }
+  await expect(
+    await within(details).findByText(
+      /地球の人里離れた山奥に住む尻尾の生えた少年/,
+    ),
+  ).toBeVisible()
+}
+
 export const DefaultOpen: Story = () => {
   const items = useMemo<NativeAccordion.Item[]>(
     () => [
@@ -126,6 +178,22 @@ export const DefaultOpen: Story = () => {
   )
 
   return <NativeAccordion.Root items={items} />
+}
+
+DefaultOpen.play = async () => {
+  const trigger = screen.getByText(/ピッコロ大魔王編/).closest("summary")
+  if (!trigger) {
+    throw new Error("Expected accordion summary")
+  }
+  const details = trigger.closest("details")
+  if (!details || !(details instanceof HTMLElement)) {
+    throw new Error("Expected details")
+  }
+  await expect(
+    await within(details).findByText(
+      /天下一武道会終了後、ピラフ一味によって復活した/,
+    ),
+  ).toBeVisible()
 }
 
 export const Multiple: Story = () => {
@@ -153,6 +221,38 @@ export const Multiple: Story = () => {
   return <NativeAccordion.Root items={items} multiple />
 }
 
+Multiple.play = async ({ canvas, userEvent }) => {
+  const trigger1 = canvas.getByText(/孫悟空少年編/).closest("summary")
+  if (!trigger1) {
+    throw new Error("Expected accordion summary")
+  }
+  await userEvent.click(trigger1)
+  const details1 = trigger1.closest("details")
+  if (!details1 || !(details1 instanceof HTMLElement)) {
+    throw new Error("Expected details")
+  }
+  await expect(
+    await within(details1).findByText(
+      /地球の人里離れた山奥に住む尻尾の生えた少年/,
+    ),
+  ).toBeVisible()
+
+  const trigger2 = canvas.getByText(/ピッコロ大魔王編/).closest("summary")
+  if (!trigger2) {
+    throw new Error("Expected accordion summary")
+  }
+  await userEvent.click(trigger2)
+  const details2 = trigger2.closest("details")
+  if (!details2 || !(details2 instanceof HTMLElement)) {
+    throw new Error("Expected details")
+  }
+  await expect(
+    await within(details2).findByText(
+      /天下一武道会終了後、ピラフ一味によって復活した/,
+    ),
+  ).toBeVisible()
+}
+
 export const IconHidden: Story = () => {
   const items = useMemo<NativeAccordion.Item[]>(
     () => [
@@ -176,6 +276,23 @@ export const IconHidden: Story = () => {
   )
 
   return <NativeAccordion.Root iconHidden items={items} />
+}
+
+IconHidden.play = async ({ canvas, userEvent }) => {
+  const trigger = canvas.getByText(/孫悟空少年編/).closest("summary")
+  if (!trigger) {
+    throw new Error("Expected accordion summary")
+  }
+  await userEvent.click(trigger)
+  const details = trigger.closest("details")
+  if (!details || !(details instanceof HTMLElement)) {
+    throw new Error("Expected details")
+  }
+  await expect(
+    await within(details).findByText(
+      /地球の人里離れた山奥に住む尻尾の生えた少年/,
+    ),
+  ).toBeVisible()
 }
 
 export const Disabled: Story = () => {
@@ -202,6 +319,23 @@ export const Disabled: Story = () => {
   )
 
   return <NativeAccordion.Root items={items} />
+}
+
+Disabled.play = async ({ canvas, userEvent }) => {
+  const trigger = canvas.getByText(/孫悟空少年編/).closest("summary")
+  if (!trigger) {
+    throw new Error("Expected accordion summary")
+  }
+  await userEvent.click(trigger)
+  const details = trigger.closest("details")
+  if (!details || !(details instanceof HTMLElement)) {
+    throw new Error("Expected details")
+  }
+  await expect(
+    await within(details).findByText(
+      /地球の人里離れた山奥に住む尻尾の生えた少年/,
+    ),
+  ).toBeVisible()
 }
 
 export const CustomLabel: Story = () => {
@@ -240,6 +374,23 @@ export const CustomLabel: Story = () => {
   )
 }
 
+CustomLabel.play = async ({ canvas, userEvent }) => {
+  const trigger = canvas.getByText(/孫悟空少年編/).closest("summary")
+  if (!trigger) {
+    throw new Error("Expected accordion summary")
+  }
+  await userEvent.click(trigger)
+  const details = trigger.closest("details")
+  if (!details || !(details instanceof HTMLElement)) {
+    throw new Error("Expected details")
+  }
+  await expect(
+    await within(details).findByText(
+      /地球の人里離れた山奥に住む尻尾の生えた少年/,
+    ),
+  ).toBeVisible()
+}
+
 export const CustomPanel: Story = () => {
   const items = useMemo(
     () => [
@@ -275,6 +426,23 @@ export const CustomPanel: Story = () => {
   )
 }
 
+CustomPanel.play = async ({ canvas, userEvent }) => {
+  const trigger = canvas.getByText(/孫悟空少年編/).closest("summary")
+  if (!trigger) {
+    throw new Error("Expected accordion summary")
+  }
+  await userEvent.click(trigger)
+  const details = trigger.closest("details")
+  if (!details || !(details instanceof HTMLElement)) {
+    throw new Error("Expected details")
+  }
+  await expect(
+    await within(details).findByText(
+      /地球の人里離れた山奥に住む尻尾の生えた少年/,
+    ),
+  ).toBeVisible()
+}
+
 export const CustomIcon: Story = () => {
   const items = useMemo<NativeAccordion.Item[]>(
     () => [
@@ -298,4 +466,21 @@ export const CustomIcon: Story = () => {
   )
 
   return <NativeAccordion.Root icon={<ChevronsDownIcon />} items={items} />
+}
+
+CustomIcon.play = async ({ canvas, userEvent }) => {
+  const trigger = canvas.getByText(/孫悟空少年編/).closest("summary")
+  if (!trigger) {
+    throw new Error("Expected accordion summary")
+  }
+  await userEvent.click(trigger)
+  const details = trigger.closest("details")
+  if (!details || !(details instanceof HTMLElement)) {
+    throw new Error("Expected details")
+  }
+  await expect(
+    await within(details).findByText(
+      /地球の人里離れた山奥に住む尻尾の生えた少年/,
+    ),
+  ).toBeVisible()
 }

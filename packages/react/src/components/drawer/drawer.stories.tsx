@@ -1,5 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useState } from "react"
+import { expect, screen } from "storybook/test"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { noop } from "../../utils"
 import { Button } from "../button"
@@ -48,6 +49,11 @@ export const Basic: Story = () => {
   )
 }
 
+Basic.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /open modal/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
+}
+
 export const PropsPattern: Story = () => {
   return (
     <Drawer.Root
@@ -60,6 +66,11 @@ export const PropsPattern: Story = () => {
       onSuccess={noop}
     />
   )
+}
+
+PropsPattern.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /open modal/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
 }
 
 export const Size: Story = () => {
@@ -107,6 +118,21 @@ export const Size: Story = () => {
   )
 }
 
+Size.play = async ({ canvas, userEvent }) => {
+  const sizes = ["xs", "sm", "md", "lg", "xl", "full"] as const
+  for (let i = 0; i < sizes.length; i++) {
+    if (i > 0) {
+      await userEvent.keyboard("{Escape}")
+    }
+    await userEvent.click(
+      canvas.getByRole("button", { name: `Open "${sizes[i]}" Drawer` }),
+    )
+    await expect(
+      await screen.findByRole("dialog", { name: /ドラゴンボール/ }),
+    ).toBeVisible()
+  }
+}
+
 export const Duration: Story = () => {
   return (
     <Drawer.Root duration={0.7}>
@@ -133,6 +159,11 @@ export const Duration: Story = () => {
       </Drawer.Content>
     </Drawer.Root>
   )
+}
+
+Duration.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /open modal/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
 }
 
 export const Placement: Story = () => {
@@ -183,6 +214,28 @@ export const Placement: Story = () => {
       </Drawer.Root>
     </>
   )
+}
+
+Placement.play = async ({ canvas, userEvent }) => {
+  const placements = [
+    "block-start",
+    "block-end",
+    "inline-start",
+    "inline-end",
+  ] as const
+  for (let i = 0; i < placements.length; i++) {
+    if (i > 0) {
+      await userEvent.keyboard("{Escape}")
+    }
+    await userEvent.click(
+      canvas.getByRole("button", {
+        name: `Open "${placements[i]}" Drawer`,
+      }),
+    )
+    await expect(
+      await screen.findByRole("dialog", { name: /ドラゴンボール/ }),
+    ).toBeVisible()
+  }
 }
 
 export const CloseOnDrag: Story = () => {
@@ -240,6 +293,28 @@ export const CloseOnDrag: Story = () => {
   )
 }
 
+CloseOnDrag.play = async ({ canvas, userEvent }) => {
+  const placements = [
+    "block-start",
+    "block-end",
+    "inline-start",
+    "inline-end",
+  ] as const
+  for (let i = 0; i < placements.length; i++) {
+    if (i > 0) {
+      await userEvent.keyboard("{Escape}")
+    }
+    await userEvent.click(
+      canvas.getByRole("button", {
+        name: `Open "${placements[i]}" Drawer`,
+      }),
+    )
+    await expect(
+      await screen.findByRole("dialog", { name: /ドラゴンボール/ }),
+    ).toBeVisible()
+  }
+}
+
 export const HiddenDragBar: Story = () => {
   return (
     <Drawer.Root closeOnDrag withCloseButton withDragBar={false}>
@@ -268,6 +343,11 @@ export const HiddenDragBar: Story = () => {
   )
 }
 
+HiddenDragBar.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /open modal/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
+}
+
 export const HiddenCloseButton: Story = () => {
   return (
     <Drawer.Root withCloseButton={false}>
@@ -294,6 +374,11 @@ export const HiddenCloseButton: Story = () => {
       </Drawer.Content>
     </Drawer.Root>
   )
+}
+
+HiddenCloseButton.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /open modal/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
 }
 
 export const CustomCloseButton: Story = () => {
@@ -326,6 +411,11 @@ export const CustomCloseButton: Story = () => {
   )
 }
 
+CustomCloseButton.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /open modal/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
+}
+
 export const HiddenOverlay: Story = () => {
   return (
     <Drawer.Root withOverlay={false}>
@@ -352,6 +442,11 @@ export const HiddenOverlay: Story = () => {
       </Drawer.Content>
     </Drawer.Root>
   )
+}
+
+HiddenOverlay.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /open modal/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
 }
 
 export const CustomOverlay: Story = () => {
@@ -384,6 +479,11 @@ export const CustomOverlay: Story = () => {
   )
 }
 
+CustomOverlay.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /open modal/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
+}
+
 export const CustomButton: Story = () => {
   return (
     <Drawer.Root
@@ -396,6 +496,11 @@ export const CustomButton: Story = () => {
       trigger={<Button>Open Drawer</Button>}
     />
   )
+}
+
+CustomButton.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /open modal/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
 }
 
 export const ScrollOnMount: Story = () => {
@@ -475,4 +580,9 @@ export const ScrollOnMount: Story = () => {
       </Container.Root>
     </>
   )
+}
+
+ScrollOnMount.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /open modal/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
 }

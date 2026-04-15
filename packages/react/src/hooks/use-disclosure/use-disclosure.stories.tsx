@@ -1,4 +1,5 @@
 import type { Meta } from "@storybook/react-vite"
+import { expect, screen } from "storybook/test"
 import { Button } from "../../components/button"
 import { Modal } from "../../components/modal"
 // import { Dialog } from "../../components/modal"
@@ -33,6 +34,11 @@ export const Basic = () => {
   )
 }
 
+Basic.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /open dialog/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
+}
+
 export const Toggle = () => {
   const { open, onToggle } = useDisclosure()
 
@@ -43,6 +49,11 @@ export const Toggle = () => {
       {open ? <Text>Hey!</Text> : null}
     </>
   )
+}
+
+Toggle.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /please click/i }))
+  await expect(await screen.findByText("Hey!")).toBeVisible()
 }
 
 export const Chain = () => {
@@ -72,4 +83,9 @@ export const Chain = () => {
       />
     </>
   )
+}
+
+Chain.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /open dialog/i }))
+  await expect(await screen.findByRole("dialog")).toBeVisible()
 }

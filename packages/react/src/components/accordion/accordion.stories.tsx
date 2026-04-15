@@ -1,6 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "#storybook"
 import { useMemo, useState } from "react"
+import { expect, screen, within } from "storybook/test"
 import { MinusIcon, PlusIcon } from "../icon"
 import { Accordion } from "./"
 
@@ -46,6 +47,21 @@ export const Basic: Story = () => {
   )
 }
 
+Basic.play = async ({ canvas, userEvent }) => {
+  const trigger = canvas.getByRole("button", { name: /孫悟空少年編/ })
+  await userEvent.click(trigger)
+  const panelId = trigger.getAttribute("aria-controls")
+  const panel = panelId ? document.getElementById(panelId) : null
+  if (!panel) {
+    throw new Error("Expected accordion panel")
+  }
+  await expect(
+    await within(panel).findByText(
+      /地球の人里離れた山奥に住む尻尾の生えた少年/,
+    ),
+  ).toBeVisible()
+}
+
 export const Items: Story = () => {
   const items = useMemo<Accordion.Item[]>(
     () => [
@@ -69,6 +85,21 @@ export const Items: Story = () => {
   )
 
   return <Accordion.Root items={items} />
+}
+
+Items.play = async ({ canvas, userEvent }) => {
+  const trigger = canvas.getByRole("button", { name: /孫悟空少年編/ })
+  await userEvent.click(trigger)
+  const panelId = trigger.getAttribute("aria-controls")
+  const panel = panelId ? document.getElementById(panelId) : null
+  if (!panel) {
+    throw new Error("Expected accordion panel")
+  }
+  await expect(
+    await within(panel).findByText(
+      /地球の人里離れた山奥に住む尻尾の生えた少年/,
+    ),
+  ).toBeVisible()
 }
 
 export const Variant: Story = () => {
@@ -107,6 +138,23 @@ export const Variant: Story = () => {
   )
 }
 
+Variant.play = async ({ canvas, userEvent }) => {
+  const trigger = canvas.getAllByRole("button", {
+    name: /孫悟空少年編/,
+  })[0]
+  await userEvent.click(trigger)
+  const panelId = trigger.getAttribute("aria-controls")
+  const panel = panelId ? document.getElementById(panelId) : null
+  if (!panel) {
+    throw new Error("Expected accordion panel")
+  }
+  await expect(
+    await within(panel).findByText(
+      /地球の人里離れた山奥に住む尻尾の生えた少年/,
+    ),
+  ).toBeVisible()
+}
+
 export const DefaultIndex: Story = () => {
   const items = useMemo<Accordion.Item[]>(
     () => [
@@ -130,6 +178,20 @@ export const DefaultIndex: Story = () => {
   )
 
   return <Accordion.Root defaultIndex={1} items={items} />
+}
+
+DefaultIndex.play = async () => {
+  const trigger = screen.getByRole("button", { name: /ピッコロ大魔王編/ })
+  const panelId = trigger.getAttribute("aria-controls")
+  const panel = panelId ? document.getElementById(panelId) : null
+  if (!panel) {
+    throw new Error("Expected accordion panel")
+  }
+  await expect(
+    await within(panel).findByText(
+      /天下一武道会終了後、ピラフ一味によって復活した/,
+    ),
+  ).toBeVisible()
 }
 
 export const Toggle: Story = () => {
@@ -157,6 +219,21 @@ export const Toggle: Story = () => {
   return <Accordion.Root items={items} toggle />
 }
 
+Toggle.play = async ({ canvas, userEvent }) => {
+  const trigger = canvas.getByRole("button", { name: /孫悟空少年編/ })
+  await userEvent.click(trigger)
+  const panelId = trigger.getAttribute("aria-controls")
+  const panel = panelId ? document.getElementById(panelId) : null
+  if (!panel) {
+    throw new Error("Expected accordion panel")
+  }
+  await expect(
+    await within(panel).findByText(
+      /地球の人里離れた山奥に住む尻尾の生えた少年/,
+    ),
+  ).toBeVisible()
+}
+
 export const Multiple: Story = () => {
   const items = useMemo<Accordion.Item[]>(
     () => [
@@ -180,6 +257,32 @@ export const Multiple: Story = () => {
   )
 
   return <Accordion.Root defaultIndex={[1, 2]} items={items} multiple />
+}
+
+Multiple.play = async () => {
+  const trigger1 = screen.getByRole("button", { name: /ピッコロ大魔王編/ })
+  const panelId1 = trigger1.getAttribute("aria-controls")
+  const panel1 = panelId1 ? document.getElementById(panelId1) : null
+  if (!panel1) {
+    throw new Error("Expected accordion panel")
+  }
+  await expect(
+    await within(panel1).findByText(
+      /天下一武道会終了後、ピラフ一味によって復活した/,
+    ),
+  ).toBeVisible()
+
+  const trigger2 = screen.getByRole("button", { name: /サイヤ人編/ })
+  const panelId2 = trigger2.getAttribute("aria-controls")
+  const panel2 = panelId2 ? document.getElementById(panelId2) : null
+  if (!panel2) {
+    throw new Error("Expected accordion panel")
+  }
+  await expect(
+    await within(panel2).findByText(
+      /ピッコロ（マジュニア）との闘いから約5年後/,
+    ),
+  ).toBeVisible()
 }
 
 export const IconHidden: Story = () => {
@@ -207,6 +310,21 @@ export const IconHidden: Story = () => {
   return <Accordion.Root iconHidden items={items} />
 }
 
+IconHidden.play = async ({ canvas, userEvent }) => {
+  const trigger = canvas.getByRole("button", { name: /孫悟空少年編/ })
+  await userEvent.click(trigger)
+  const panelId = trigger.getAttribute("aria-controls")
+  const panel = panelId ? document.getElementById(panelId) : null
+  if (!panel) {
+    throw new Error("Expected accordion panel")
+  }
+  await expect(
+    await within(panel).findByText(
+      /地球の人里離れた山奥に住む尻尾の生えた少年/,
+    ),
+  ).toBeVisible()
+}
+
 export const Disabled: Story = () => {
   const items = useMemo<Accordion.Item[]>(
     () => [
@@ -231,6 +349,21 @@ export const Disabled: Story = () => {
   )
 
   return <Accordion.Root items={items} />
+}
+
+Disabled.play = async ({ canvas, userEvent }) => {
+  const trigger = canvas.getByRole("button", { name: /孫悟空少年編/ })
+  await userEvent.click(trigger)
+  const panelId = trigger.getAttribute("aria-controls")
+  const panel = panelId ? document.getElementById(panelId) : null
+  if (!panel) {
+    throw new Error("Expected accordion panel")
+  }
+  await expect(
+    await within(panel).findByText(
+      /地球の人里離れた山奥に住む尻尾の生えた少年/,
+    ),
+  ).toBeVisible()
 }
 
 export const CustomLabel: Story = () => {
@@ -269,6 +402,21 @@ export const CustomLabel: Story = () => {
   )
 }
 
+CustomLabel.play = async ({ canvas, userEvent }) => {
+  const trigger = canvas.getByRole("button", { name: /孫悟空少年編/ })
+  await userEvent.click(trigger)
+  const panelId = trigger.getAttribute("aria-controls")
+  const panel = panelId ? document.getElementById(panelId) : null
+  if (!panel) {
+    throw new Error("Expected accordion panel")
+  }
+  await expect(
+    await within(panel).findByText(
+      /地球の人里離れた山奥に住む尻尾の生えた少年/,
+    ),
+  ).toBeVisible()
+}
+
 export const CustomPanel: Story = () => {
   const items = useMemo(
     () => [
@@ -304,6 +452,21 @@ export const CustomPanel: Story = () => {
   )
 }
 
+CustomPanel.play = async ({ canvas, userEvent }) => {
+  const trigger = canvas.getByRole("button", { name: /孫悟空少年編/ })
+  await userEvent.click(trigger)
+  const panelId = trigger.getAttribute("aria-controls")
+  const panel = panelId ? document.getElementById(panelId) : null
+  if (!panel) {
+    throw new Error("Expected accordion panel")
+  }
+  await expect(
+    await within(panel).findByText(
+      /地球の人里離れた山奥に住む尻尾の生えた少年/,
+    ),
+  ).toBeVisible()
+}
+
 export const CustomIcon: Story = () => {
   const items = useMemo<Accordion.Item[]>(
     () => [
@@ -334,6 +497,21 @@ export const CustomIcon: Story = () => {
   )
 }
 
+CustomIcon.play = async ({ canvas, userEvent }) => {
+  const trigger = canvas.getByRole("button", { name: /孫悟空少年編/ })
+  await userEvent.click(trigger)
+  const panelId = trigger.getAttribute("aria-controls")
+  const panel = panelId ? document.getElementById(panelId) : null
+  if (!panel) {
+    throw new Error("Expected accordion panel")
+  }
+  await expect(
+    await within(panel).findByText(
+      /地球の人里離れた山奥に住む尻尾の生えた少年/,
+    ),
+  ).toBeVisible()
+}
+
 export const CustomControl: Story = () => {
   const items = useMemo<Accordion.Item[]>(
     () => [
@@ -360,4 +538,19 @@ export const CustomControl: Story = () => {
   )
 
   return <Accordion.Root index={index} items={items} onChange={onChange} />
+}
+
+CustomControl.play = async ({ canvas, userEvent }) => {
+  const trigger = canvas.getByRole("button", { name: /孫悟空少年編/ })
+  await userEvent.click(trigger)
+  const panelId = trigger.getAttribute("aria-controls")
+  const panel = panelId ? document.getElementById(panelId) : null
+  if (!panel) {
+    throw new Error("Expected accordion panel")
+  }
+  await expect(
+    await within(panel).findByText(
+      /地球の人里離れた山奥に住む尻尾の生えた少年/,
+    ),
+  ).toBeVisible()
 }

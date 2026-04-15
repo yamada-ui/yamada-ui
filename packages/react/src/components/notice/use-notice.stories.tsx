@@ -1,6 +1,7 @@
 import type { Meta } from "@storybook/react-vite"
 import type { NoticeCloseStrategy } from "../../core"
 import { useRef } from "react"
+import { expect, screen } from "storybook/test"
 import { toTitleCase } from "../../utils"
 import { Button } from "../button"
 import { For } from "../for"
@@ -31,6 +32,11 @@ export const Basic = () => {
   )
 }
 
+Basic.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /show notice/i }))
+  await expect(await screen.findByText("シェリル・ノーム")).toBeVisible()
+}
+
 export const Variant = () => {
   const notice = useNotice()
 
@@ -57,6 +63,13 @@ export const Variant = () => {
   )
 }
 
+Variant.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(
+    canvas.getByRole("button", { name: /add "plain" snack/i }),
+  )
+  await expect(await screen.findByText("シェリル・ノーム")).toBeVisible()
+}
+
 export const Status = () => {
   const notice = useNotice()
 
@@ -80,6 +93,13 @@ export const Status = () => {
       </For>
     </Wrap>
   )
+}
+
+Status.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(
+    canvas.getByRole("button", { name: /add "info" snack/i }),
+  )
+  await expect(await screen.findByText("ランカ・リー")).toBeVisible()
 }
 
 export const ColorScheme = () => {
@@ -108,6 +128,13 @@ export const ColorScheme = () => {
   )
 }
 
+ColorScheme.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(
+    canvas.getByRole("button", { name: /add "info" snack/i }),
+  )
+  await expect(await screen.findByText("早乙女アルト")).toBeVisible()
+}
+
 export const Loading = () => {
   const notice = useNotice()
 
@@ -131,6 +158,13 @@ export const Loading = () => {
       </For>
     </Wrap>
   )
+}
+
+Loading.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(
+    canvas.getByRole("button", { name: /add "oval" snack/i }),
+  )
+  await expect(await screen.findByText("ミハエル・ブラン")).toBeVisible()
 }
 
 export const Limit = () => {
@@ -164,6 +198,13 @@ export const Limit = () => {
   )
 }
 
+Limit.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(
+    canvas.getAllByRole("button", { name: /^show notice$/i })[0],
+  )
+  await expect(await screen.findByText("クラン・クラン")).toBeVisible()
+}
+
 export const Duration = () => {
   const notice = useNotice({ duration: 10000 })
 
@@ -195,6 +236,13 @@ export const Duration = () => {
   )
 }
 
+Duration.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(
+    canvas.getAllByRole("button", { name: /^show notice$/i })[0],
+  )
+  await expect(await screen.findByText("オズマ・リー")).toBeVisible()
+}
+
 export const KeepStay = () => {
   const notice = useNotice({ duration: null })
 
@@ -211,6 +259,11 @@ export const KeepStay = () => {
       Show Notice
     </Button>
   )
+}
+
+KeepStay.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /show notice/i }))
+  await expect(await screen.findByText("シェリル・ノーム")).toBeVisible()
 }
 
 export const Placement = () => {
@@ -247,6 +300,13 @@ export const Placement = () => {
       </For>
     </Wrap>
   )
+}
+
+Placement.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(
+    canvas.getByRole("button", { name: /open "start-start" notice/i }),
+  )
+  await expect(await screen.findByText("早乙女アルト")).toBeVisible()
 }
 
 export const CloseStrategy = () => {
@@ -298,6 +358,11 @@ export const CloseStrategy = () => {
   )
 }
 
+CloseStrategy.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /^click only$/i }))
+  await expect(await screen.findByText("早乙女アルト")).toBeVisible()
+}
+
 export const UseClose = () => {
   const notice = useNotice()
   const ref = useRef<number | string | undefined>(undefined)
@@ -330,6 +395,13 @@ export const UseClose = () => {
   )
 }
 
+UseClose.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(
+    canvas.getAllByRole("button", { name: /show notice/i })[0],
+  )
+  await expect(await screen.findByText("クラン・クラン")).toBeVisible()
+}
+
 export const UseUpdate = () => {
   const notice = useNotice()
   const ref = useRef<number | string | undefined>(undefined)
@@ -360,4 +432,9 @@ export const UseUpdate = () => {
       <Button onClick={onUpdate}>Update last Notice</Button>
     </Wrap>
   )
+}
+
+UseUpdate.play = async ({ canvas, userEvent }) => {
+  await userEvent.click(canvas.getByRole("button", { name: /show notice/i }))
+  await expect(await screen.findByText("シェリル・ノーム")).toBeVisible()
 }

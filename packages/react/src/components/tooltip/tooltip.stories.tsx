@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
+import { expect, screen } from "storybook/test"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { toTitleCase } from "../../utils"
 import { Button } from "../button"
@@ -23,12 +24,22 @@ export const Basic: Story = () => {
   )
 }
 
+Basic.play = async ({ canvas, userEvent }) => {
+  await userEvent.hover(canvas.getByRole("button", { name: /please hover/i }))
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
+}
+
 export const Duration: Story = () => {
   return (
     <Tooltip content="へっ！きたねぇ花火だ" duration={0.7}>
       <Button>Please Hover</Button>
     </Tooltip>
   )
+}
+
+Duration.play = async ({ canvas, userEvent }) => {
+  await userEvent.hover(canvas.getByRole("button", { name: /please hover/i }))
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
 }
 
 export const Delay: Story = () => {
@@ -49,6 +60,22 @@ export const Delay: Story = () => {
   )
 }
 
+Delay.play = async ({ canvas, userEvent }) => {
+  await userEvent.hover(
+    canvas.getByRole("button", { name: /delay open 1000ms/i }),
+  )
+  await expect(
+    await screen.findByRole("tooltip", {}, { timeout: 2000 }),
+  ).toBeVisible()
+  await userEvent.unhover(
+    canvas.getByRole("button", { name: /delay open 1000ms/i }),
+  )
+  await userEvent.hover(
+    canvas.getByRole("button", { name: /delay close 1000ms/i }),
+  )
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
+}
+
 export const Offset: Story = () => {
   return (
     <Tooltip content="へっ！きたねぇ花火だ" offset={[16, 16]}>
@@ -57,12 +84,22 @@ export const Offset: Story = () => {
   )
 }
 
+Offset.play = async ({ canvas, userEvent }) => {
+  await userEvent.hover(canvas.getByRole("button", { name: /please hover/i }))
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
+}
+
 export const Gutter: Story = () => {
   return (
     <Tooltip content="へっ！きたねぇ花火だ" gutter={32}>
       <Button>Please Hover</Button>
     </Tooltip>
   )
+}
+
+Gutter.play = async ({ canvas, userEvent }) => {
+  await userEvent.hover(canvas.getByRole("button", { name: /please hover/i }))
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
 }
 
 export const AnimationScheme: Story = () => {
@@ -89,6 +126,31 @@ export const AnimationScheme: Story = () => {
       )}
     </For>
   )
+}
+
+AnimationScheme.play = async ({ canvas, userEvent }) => {
+  const animationSchemes = [
+    "scale",
+    "block-end",
+    "inline-start",
+    "inline-end",
+    "block-start",
+  ] as const
+  for (let i = 0; i < animationSchemes.length; i++) {
+    if (i > 0) {
+      await userEvent.unhover(
+        canvas.getByRole("button", {
+          name: `Open "${animationSchemes[i - 1]}" Tooltip`,
+        }),
+      )
+    }
+    await userEvent.hover(
+      canvas.getByRole("button", {
+        name: `Open "${animationSchemes[i]}" Tooltip`,
+      }),
+    )
+    await expect(await screen.findByRole("tooltip")).toBeVisible()
+  }
 }
 
 export const Placement: Story = () => {
@@ -126,6 +188,40 @@ export const Placement: Story = () => {
   )
 }
 
+Placement.play = async ({ canvas, userEvent }) => {
+  const placements = [
+    "start",
+    "start-start",
+    "start-end",
+    "start-center",
+    "end",
+    "end-start",
+    "end-end",
+    "end-center",
+    "center-start",
+    "center-start-start",
+    "center-start-end",
+    "center-end",
+    "center-end-start",
+    "center-end-end",
+  ] as const
+  for (let i = 0; i < placements.length; i++) {
+    if (i > 0) {
+      await userEvent.unhover(
+        canvas.getByRole("button", {
+          name: `Open "${toTitleCase(placements[i - 1])}" Tooltip`,
+        }),
+      )
+    }
+    await userEvent.hover(
+      canvas.getByRole("button", {
+        name: `Open "${toTitleCase(placements[i])}" Tooltip`,
+      }),
+    )
+    await expect(await screen.findByRole("tooltip")).toBeVisible()
+  }
+}
+
 export const Disabled: Story = () => {
   return (
     <Tooltip content="へっ！きたねぇ花火だ" disabled>
@@ -134,12 +230,20 @@ export const Disabled: Story = () => {
   )
 }
 
+Disabled.parameters = {
+  chromatic: { disableSnapshot: true },
+}
+
 export const AlwaysOpen: Story = () => {
   return (
     <Tooltip content="へっ！きたねぇ花火だ" open>
       <Button>Please Hover</Button>
     </Tooltip>
   )
+}
+
+AlwaysOpen.play = async () => {
+  await expect(screen.getByRole("tooltip")).toBeVisible()
 }
 
 export const CustomControl: Story = () => {
@@ -155,4 +259,9 @@ export const CustomControl: Story = () => {
       <Button>Please Hover</Button>
     </Tooltip>
   )
+}
+
+CustomControl.play = async ({ canvas, userEvent }) => {
+  await userEvent.hover(canvas.getByRole("button", { name: /please hover/i }))
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
 }

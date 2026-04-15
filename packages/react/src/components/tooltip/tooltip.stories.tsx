@@ -61,19 +61,20 @@ export const Delay: Story = () => {
 }
 
 Delay.play = async ({ canvas, userEvent }) => {
-  await userEvent.hover(
-    canvas.getByRole("button", { name: /delay open 1000ms/i }),
-  )
-  await expect(
-    await screen.findByRole("tooltip", {}, { timeout: 2000 }),
-  ).toBeVisible()
-  await userEvent.unhover(
-    canvas.getByRole("button", { name: /delay open 1000ms/i }),
-  )
-  await userEvent.hover(
-    canvas.getByRole("button", { name: /delay close 1000ms/i }),
-  )
+  const openButton = canvas.getByRole("button", { name: /delay open 1000ms/i })
+  const closeButton = canvas.getByRole("button", {
+    name: /delay close 1000ms/i,
+  })
+
+  await userEvent.hover(openButton)
   await expect(await screen.findByRole("tooltip")).toBeVisible()
+
+  await userEvent.unhover(openButton)
+  await userEvent.hover(closeButton)
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
+
+  await userEvent.unhover(closeButton)
+  await expect(screen.queryByRole("tooltip")).not.toBeVisible()
 }
 
 export const Offset: Story = () => {
@@ -189,10 +190,11 @@ export const Placement: Story = () => {
 }
 
 Placement.play = async ({ canvas, userEvent }) => {
-  await userEvent.hover(
-    canvas.getByRole("button", { name: /Open "Start" Tooltip/i }),
-  )
-  await expect(await screen.findByRole("tooltip")).toBeVisible()
+  const buttons = canvas.getAllByRole("button")
+  for (const button of buttons) {
+    await userEvent.hover(button)
+    await expect(await screen.findByRole("tooltip")).toBeVisible()
+  }
 }
 
 export const Disabled: Story = () => {
@@ -205,6 +207,12 @@ export const Disabled: Story = () => {
 
 Disabled.parameters = {
   chromatic: { disableSnapshot: true },
+}
+
+Disabled.play = async ({ canvas, userEvent }) => {
+  await userEvent.hover(canvas.getByRole("button", { name: /please hover/i }))
+  const tooltip = screen.queryByRole("tooltip")
+  expect(tooltip).toBeNull()
 }
 
 export const AlwaysOpen: Story = () => {

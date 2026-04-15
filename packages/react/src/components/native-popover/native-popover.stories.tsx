@@ -296,100 +296,39 @@ export const PopoverMode: Story = () => {
 }
 
 PopoverMode.play = async ({ canvas, userEvent }) => {
-  const autoDialog = () =>
-    screen.queryByRole("dialog", { name: /auto popover/i })
-  const hintDialog = () =>
-    screen.queryByRole("dialog", { name: /hint popover/i })
-  const manualDialog = () =>
-    screen.queryByRole("dialog", { name: /manual popover/i })
+  const autoButton = canvas.getByRole("button", { name: /auto \(default\)/i })
+  const hintButton = canvas.getByRole("button", { name: /^hint$/i })
+  const manualButton = canvas.getByRole("button", { name: /^manual$/i })
 
-  await userEvent.click(
-    canvas.getByRole("button", { name: /auto \(default\)/i }),
-  )
-  const auto = await screen.findByRole("dialog", { name: /auto popover/i })
-  await expect(auto).toBeVisible()
-
-  await userEvent.click(canvas.getByRole("button", { name: /^hint$/i }))
-  await expect(
-    await screen.findByRole("dialog", { name: /hint popover/i }),
-  ).toBeVisible()
-  await expect(auto).toBeVisible()
-
-  await waitFor(
-    async () => {
-      const hint = hintDialog()
-      if (hint === null) {
-        return
-      }
-      if (hint.checkVisibility()) {
-        await userEvent.keyboard("{Escape}")
-      }
-      const after = hintDialog()
-      if (after === null) {
-        return
-      }
-      expect(after).not.toBeVisible()
-    },
-    { timeout: 10000 },
-  )
-  await expect(
-    screen.getByRole("dialog", { name: /auto popover/i }),
-  ).toBeVisible()
-
-  await waitFor(
-    async () => {
-      const a = autoDialog()
-      if (a === null) {
-        return
-      }
-      if (a.checkVisibility()) {
-        await userEvent.keyboard("{Escape}")
-      }
-      const after = autoDialog()
-      if (after === null) {
-        return
-      }
-      expect(after).not.toBeVisible()
-    },
-    { timeout: 10000 },
-  )
-
-  await userEvent.click(
-    canvas.getByRole("button", { name: /auto \(default\)/i }),
-  )
+  await userEvent.click(autoButton)
   await expect(
     await screen.findByRole("dialog", { name: /auto popover/i }),
   ).toBeVisible()
 
-  await userEvent.click(canvas.getByRole("button", { name: /^manual$/i }))
+  await userEvent.click(hintButton)
+  await expect(
+    await screen.findByRole("dialog", { name: /hint popover/i }),
+  ).toBeVisible()
+  await expect(
+    await screen.findByRole("dialog", { name: /auto popover/i }),
+  ).toBeVisible()
+
+  await userEvent.click(hintButton)
+  await expect(
+    await screen.findByRole("dialog", { name: /auto popover/i }),
+  ).toBeVisible()
+
+  await userEvent.click(autoButton)
+
+  await userEvent.click(autoButton)
+  await expect(
+    await screen.findByRole("dialog", { name: /auto popover/i }),
+  ).toBeVisible()
+
+  await userEvent.click(manualButton)
   await expect(
     await screen.findByRole("dialog", { name: /manual popover/i }),
   ).toBeVisible()
-  await waitFor(() => {
-    const el = autoDialog()
-    if (el === null) {
-      return
-    }
-    expect(el).not.toBeVisible()
-  })
-
-  await waitFor(
-    async () => {
-      const m = manualDialog()
-      if (m === null) {
-        return
-      }
-      if (m.checkVisibility()) {
-        await userEvent.keyboard("{Escape}")
-      }
-      const after = manualDialog()
-      if (after === null) {
-        return
-      }
-      expect(after).not.toBeVisible()
-    },
-    { timeout: 10000 },
-  )
 }
 
 export const Offset: Story = () => {

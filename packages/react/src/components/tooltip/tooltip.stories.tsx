@@ -73,6 +73,7 @@ Delay.play = async ({ canvas, userEvent }) => {
   })
 
   await userEvent.hover(openButton)
+  await new Promise((resolve) => setTimeout(resolve, 1500))
   await expect(await screen.findByRole("tooltip")).toBeVisible()
 
   await userEvent.unhover(openButton)

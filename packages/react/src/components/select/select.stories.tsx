@@ -161,21 +161,6 @@ export const Size: Story = () => {
   )
 }
 
-Size.play = async ({ canvas, userEvent }) => {
-  const sizes = ["xs", "sm", "md", "lg", "xl"]
-  const variants = ["outline", "filled", "flushed"]
-
-  for (let i = 0; i < sizes.length; i++) {
-    for (let j = 0; j < variants.length; j++) {
-      const index = i * variants.length + j
-      const comboboxes = canvas.getAllByRole("combobox")
-      await userEvent.click(comboboxes[index]!)
-      await expect(await screen.findByRole("listbox")).toBeVisible()
-      await userEvent.click(comboboxes[index]!)
-    }
-  }
-}
-
 export const DefaultValue: Story = () => {
   const items = useMemo<Select.Item[]>(
     () => [

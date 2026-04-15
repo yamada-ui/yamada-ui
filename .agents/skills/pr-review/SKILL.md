@@ -5,10 +5,10 @@ description: >
   Checks component patterns, styling, test coverage,
   accessibility, naming conventions, and export conventions.
   Pass a PR URL, file path, or diff to generate review comments.
-compatibility: Designed for Claude Code (or similar products). Requires git and gh CLI.
+argument-hint: "<PR URL | file path>"
+compatibility: Requires git. gh CLI recommended (falls back to fetching <PR URL>.diff if unavailable).
 metadata:
-  author: yamada-ui
-  version: "1.0"
+  internal: "true"
 ---
 
 # pr-review
@@ -21,7 +21,7 @@ Review PRs against yamada-ui coding conventions and generate feedback.
 
 Parse `$ARGUMENTS` to get the diff.
 
-- **PR URL** (`https://github.com/yamada-ui/yamada-ui/pull/123`): Get diff with `gh pr diff <number>`
+- **PR URL** (`https://github.com/yamada-ui/yamada-ui/pull/123`): Get diff with `gh pr diff <number>`. If `gh` is unavailable, fetch `<PR URL>.diff` with the agent's HTTP fetch tool (e.g., WebFetch or equivalent).
 - **File path**: Read the file with the Read tool
 - **No arguments**: Get current diff with `git diff`
 
@@ -41,19 +41,29 @@ Classify changed files:
 
 Load the relevant references/ files based on file classification. **Only load the ones that apply, not all at once.**
 
-| Category                            | Load references/                                                                                     |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| Component (`.tsx`)                  | `${CLAUDE_SKILL_DIR}/references/components.md` and `${CLAUDE_SKILL_DIR}/references/accessibility.md` |
-| Style (`.style.ts`)                 | `${CLAUDE_SKILL_DIR}/references/styling.md`                                                          |
-| Test (`.test.tsx`)                  | `${CLAUDE_SKILL_DIR}/references/testing.md`                                                          |
-| Export (`index.ts`, `namespace.ts`) | `${CLAUDE_SKILL_DIR}/references/file-conventions.md`                                                 |
-| Hook (`use-*.ts`)                   | `${CLAUDE_SKILL_DIR}/references/components.md` and `${CLAUDE_SKILL_DIR}/references/accessibility.md` |
+All reference paths are relative to this `SKILL.md` file. Always load `references/file-conventions.md` in addition to the category-specific files below, since naming, barrel exports, and JSDoc rules apply to every file type.
+
+| Category                            | Load references/                                             |
+| ----------------------------------- | ------------------------------------------------------------ |
+| Component (`.tsx`)                  | `references/components.md` and `references/accessibility.md` |
+| Style (`.style.ts`)                 | `references/styling.md`                                      |
+| Test (`.test.tsx`)                  | `references/testing.md`                                      |
+| Export (`index.ts`, `namespace.ts`) | (file-conventions.md only)                                   |
+| Hook (`use-*.ts`)                   | `references/components.md` and `references/accessibility.md` |
 
 ### Step 4: Check conventions
 
-Compare against Incorrect/Correct code pairs from the loaded references/ and detect violations.
+For each changed hunk in the diff:
+
+1. Match against the Incorrect/Correct code pairs in the loaded references/ files.
+2. Detect convention violations and flag them with `[MUST]`, `[SHOULD]`, or `[NITS]` using the classification below.
+3. Prioritize reporting `[MUST]` findings before `[SHOULD]` and `[NITS]`.
+4. When a finding applies, quote the relevant Incorrect/Correct pair from the reference file so the reviewer can see the expected form.
+5. Skip patterns that are not covered by the loaded references rather than guessing.
 
 ### Step 5: Output
+
+Emit findings using the [Output Format](#output-format) section below.
 
 ## Critical Rules
 

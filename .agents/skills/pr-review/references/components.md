@@ -65,6 +65,7 @@ export const Button = withContext<"button", ButtonProps>(
 - Second argument is the style object
 - Generics: `<Props, Style, ComponentContext?>` (max 3). The 3rd `ComponentContext` is only needed when sharing data between internal subcomponents (e.g. Button passes `endIcon`, `loadingIcon` to children). Omit if no shared data is needed (e.g. `Separator`)
 - Components returned by `withContext` must be invoked with `()` at the end
+- The destructured values above are the **commonly used** return values — not exhaustive. `createComponent` also returns `useComponentProps`, and `createSlotComponent` additionally returns `StyleContext`, `useClassNames`, `useStyleContext`, `useRootComponentProps`, and `useSlotComponentProps`. Destructure only what the component needs.
 
 ---
 

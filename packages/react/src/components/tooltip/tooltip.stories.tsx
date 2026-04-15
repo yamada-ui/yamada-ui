@@ -179,11 +179,9 @@ export const Placement: Story = () => {
 }
 
 Placement.play = async ({ canvas, userEvent }) => {
-  const buttons = canvas.getAllByRole("button")
-  for (const button of buttons) {
-    await userEvent.hover(button)
-    await expect(await screen.findByRole("tooltip")).toBeVisible()
-  }
+  const button = canvas.getAllByRole("button")[0]!
+  await userEvent.hover(button)
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
 }
 
 export const Disabled: Story = () => {

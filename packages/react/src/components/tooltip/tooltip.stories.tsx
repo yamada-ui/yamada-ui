@@ -25,11 +25,8 @@ export const Basic: Story = () => {
 }
 
 Basic.play = async ({ canvas, userEvent }) => {
-  const button = canvas.getByRole("button", { name: /please hover/i })
-  await userEvent.hover(button)
-  await new Promise((resolve) => setTimeout(resolve, 100))
-  const tooltip = await screen.findByRole("tooltip")
-  await expect(tooltip).toBeVisible()
+  await userEvent.hover(canvas.getByRole("button", { name: /please hover/i }))
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
 }
 
 export const Duration: Story = () => {
@@ -41,11 +38,8 @@ export const Duration: Story = () => {
 }
 
 Duration.play = async ({ canvas, userEvent }) => {
-  const button = canvas.getByRole("button", { name: /please hover/i })
-  await userEvent.hover(button)
-  await new Promise((resolve) => setTimeout(resolve, 100))
-  const tooltip = await screen.findByRole("tooltip")
-  await expect(tooltip).toBeVisible()
+  await userEvent.hover(canvas.getByRole("button", { name: /please hover/i }))
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
 }
 
 export const Delay: Story = () => {
@@ -90,11 +84,8 @@ export const Offset: Story = () => {
 }
 
 Offset.play = async ({ canvas, userEvent }) => {
-  const button = canvas.getByRole("button", { name: /please hover/i })
-  await userEvent.hover(button)
-  await new Promise((resolve) => setTimeout(resolve, 100))
-  const tooltip = await screen.findByRole("tooltip")
-  await expect(tooltip).toBeVisible()
+  await userEvent.hover(canvas.getByRole("button", { name: /please hover/i }))
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
 }
 
 export const Gutter: Story = () => {
@@ -106,11 +97,8 @@ export const Gutter: Story = () => {
 }
 
 Gutter.play = async ({ canvas, userEvent }) => {
-  const button = canvas.getByRole("button", { name: /please hover/i })
-  await userEvent.hover(button)
-  await new Promise((resolve) => setTimeout(resolve, 100))
-  const tooltip = await screen.findByRole("tooltip")
-  await expect(tooltip).toBeVisible()
+  await userEvent.hover(canvas.getByRole("button", { name: /please hover/i }))
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
 }
 
 export const AnimationScheme: Story = () => {
@@ -147,22 +135,11 @@ AnimationScheme.play = async ({ canvas, userEvent }) => {
     "inline-end",
     "block-start",
   ] as const
-  for (let i = 0; i < animationSchemes.length; i++) {
-    if (i > 0) {
-      await userEvent.unhover(
-        canvas.getByRole("button", {
-          name: `Open "${animationSchemes[i - 1]}" Tooltip`,
-        }),
-      )
-    }
+  for (const scheme of animationSchemes) {
     await userEvent.hover(
-      canvas.getByRole("button", {
-        name: `Open "${animationSchemes[i]}" Tooltip`,
-      }),
+      canvas.getByRole("button", { name: `Open "${scheme}" Tooltip` }),
     )
-    await new Promise((resolve) => setTimeout(resolve, 100))
-    const tooltip = await screen.findByRole("tooltip")
-    await expect(tooltip).toBeVisible()
+    await expect(await screen.findByRole("tooltip")).toBeVisible()
   }
 }
 
@@ -205,9 +182,7 @@ Placement.play = async ({ canvas, userEvent }) => {
   const buttons = canvas.getAllByRole("button")
   for (const button of buttons) {
     await userEvent.hover(button)
-    await new Promise((resolve) => setTimeout(resolve, 100))
-    const tooltip = await screen.findByRole("tooltip")
-    await expect(tooltip).toBeVisible()
+    await expect(await screen.findByRole("tooltip")).toBeVisible()
   }
 }
 

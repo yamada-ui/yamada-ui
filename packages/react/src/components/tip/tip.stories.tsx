@@ -27,11 +27,10 @@ export const Basic: Story = () => {
 }
 
 Basic.play = async ({ canvas, userEvent }) => {
-  const button = canvas.getByRole("button", { name: /俺は俺の責務を全うする/ })
-  await userEvent.hover(button)
-  await new Promise((resolve) => setTimeout(resolve, 100))
-  const tooltip = await screen.findByRole("tooltip")
-  await expect(tooltip).toBeVisible()
+  await userEvent.hover(
+    canvas.getByRole("button", { name: /俺は俺の責務を全うする/ }),
+  )
+  await expect(await screen.findByRole("tooltip")).toBeVisible()
 }
 
 export const Status: Story = () => {

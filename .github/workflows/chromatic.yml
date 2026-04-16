@@ -59,8 +59,8 @@ jobs:
         uses: chromaui/action@23e7955cfd3530c57b3971904eed80a8dc54cf01 # v16.3.0
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          workingDir: packages/react
-          buildScriptName: visual-test:build
+          buildCommand: pnpm turbo run visual-test:build --filter=@yamada-ui/react
+          outputDir: packages/react/storybook-static
           autoAcceptChanges: main
 
       - name: Summarize build

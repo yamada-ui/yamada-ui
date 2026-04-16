@@ -60,7 +60,7 @@
     "storybook:build": "storybook build -c storybook",
     "visual-test:storybook": "STORYBOOK_VISUAL_TEST=true storybook dev -p 6006 -c storybook",
     "visual-test:build": "STORYBOOK_VISUAL_TEST=true storybook build -c storybook",
-    "visual-test:chromatic": "STORYBOOK_VISUAL_TEST=true chromatic --project-token $CHROMATIC_PROJECT_TOKEN --build-script-name=visual-test:build",
+    "visual-test:chromatic": "STORYBOOK_VISUAL_TEST=true chromatic --project-token $CHROMATIC_PROJECT_TOKEN --build-command=\"pnpm turbo run visual-test:build --filter=@yamada-ui/react\" --output-dir storybook-static",
     "test": "vitest",
     "test:jsdom": "vitest --project=jsdom",
     "test:browser": "vitest --project=browser",

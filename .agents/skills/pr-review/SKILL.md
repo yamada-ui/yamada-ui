@@ -114,7 +114,7 @@ Rule summaries by category. See references/ for detailed Incorrect/Correct code 
 
 Output each finding in the following format:
 
-```
+```md
 ### [MUST] / [SHOULD] / [NITS]
 
 **File**: `path/to/file.tsx:L42`

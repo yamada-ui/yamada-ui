@@ -334,5 +334,7 @@ import { ariaAttr } from "../../utils"
 
 **Key points**:
 
-- `ariaAttr(true)` → `true` (boolean), `ariaAttr(false)` → `undefined`. React serializes the `true` boolean to the string `"true"` in the DOM.
+- `ariaAttr(true)` → `true` (boolean), `ariaAttr(false)` → `undefined`.
+- `ariaAttr("true")` → `"true"`, `ariaAttr("false")` → `"false"` (strings are preserved as-is).
+- React serializes boolean `true` ARIA values to `"true"` in the DOM.
 - Use for `aria-disabled`, `aria-required`, `aria-readonly`, etc.

@@ -9,7 +9,7 @@ Follow [Conventional Commits](https://www.conventionalcommits.org) for the commi
 
 **Examples:**
 
-```
+```text
 fix(accordion): remove redundant dependencies from memo
 feat(number-input): improve number input test coverage
 refactor(apps/icons): update loading indicator and constants

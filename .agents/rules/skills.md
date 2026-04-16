@@ -8,7 +8,7 @@ Conform to the [Agent Skills Specification](https://agentskills.io/specification
 
 ### Directory Structure
 
-```
+```text
 skill-name/
 ├── SKILL.md          # Required: metadata + instructions
 ├── scripts/          # Optional: executable code

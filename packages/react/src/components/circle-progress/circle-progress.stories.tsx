@@ -58,8 +58,16 @@ export const Indeterminate: Story = () => {
   return <CircleProgress.Root value={null} />
 }
 
+Indeterminate.parameters = {
+  chromatic: { disableSnapshot: true },
+}
+
 export const Duration: Story = () => {
   return <CircleProgress.Root duration={2} value={null} />
+}
+
+Duration.parameters = {
+  chromatic: { disableSnapshot: true },
 }
 
 export const Thickness: Story = () => {

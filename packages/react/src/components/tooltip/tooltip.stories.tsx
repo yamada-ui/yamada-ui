@@ -9,7 +9,10 @@ type Story = StoryFn<typeof Tooltip>
 
 const meta: Meta<typeof Tooltip> = {
   component: Tooltip,
-  parameters: { layout: "centered" },
+  parameters: {
+    chromatic: { disableSnapshot: true },
+    layout: "centered",
+  },
   title: "Components / Tooltip",
 }
 

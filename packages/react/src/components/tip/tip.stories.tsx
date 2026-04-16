@@ -8,7 +8,10 @@ type Story = StoryFn<typeof Tip>
 
 const meta: Meta<typeof Tip> = {
   component: Tip,
-  parameters: { layout: "centered" },
+  parameters: {
+    chromatic: { disableSnapshot: true },
+    layout: "centered",
+  },
   title: "Components / Tip",
 }
 

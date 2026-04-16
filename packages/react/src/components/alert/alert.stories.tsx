@@ -146,6 +146,10 @@ export const Loading: Story = () => {
   )
 }
 
+Loading.parameters = {
+  chromatic: { disableSnapshot: true },
+}
+
 export const CustomLayout: Story = () => {
   return (
     <>

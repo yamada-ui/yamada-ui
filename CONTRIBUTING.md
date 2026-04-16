@@ -43,12 +43,24 @@ To improve our development process, we have set up tools and systems. Yamada UI 
 - **`pnpm install`**: bootstraps the entire project, symlinks all dependencies for cross-component development.
 - **`pnpm clean`**: clean build and test cache.
 - **`pnpm react storybook`**: starts storybook server.
+- **`pnpm react visual-test:build`**: builds Storybook with deterministic visual-test runtime enabled.
+- **`pnpm react visual-test:chromatic`**: publishes the visual-test build to Chromatic locally (requires `CHROMATIC_PROJECT_TOKEN`).
 - **`pnpm www dev`**: starts documentation site server.
 - **`pnpm build`**: run build for all packages.
 - **`pnpm format`**: run format for all packages.
 - **`pnpm lint`**: run lint for all packages.
 - **`pnpm typecheck`**: run typecheck for all packages.
 - **`pnpm test`**: run test for all packages.
+
+### Visual Regression
+
+Chromatic is the current visual regression path for `packages/react`.
+
+- internal PRs to `main` / `v*` publish a Chromatic build for review
+- keep normal Storybook docs/demo behavior intact; prefer visual-test runtime pinning over broad story rewrites
+- use narrow `chromatic.disableSnapshot` metadata only for unstable stories that still need to stay out of the first-wave rollout
+
+See [`packages/react/README.md`](./packages/react/README.md) for the local commands.
 
 ### Visual Studio Code
 

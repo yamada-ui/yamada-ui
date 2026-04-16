@@ -31,12 +31,24 @@ cd yamada-ui
 - **`pnpm install`**: すべての依存関係とパッケージをセットアップし、モノレポ開発のためにすべての依存関係をシンボリックリンクします。
 - **`pnpm clean`**: ビルドやテストのキャッシュを削除します。
 - **`pnpm react storybook`**: ストーリーブックを起動します。
+- **`pnpm react visual-test:build`**: 決定論的なvisual-testランタイムを有効にしてStorybookをビルドします。
+- **`pnpm react visual-test:chromatic`**: visual-testビルドをローカルからChromaticへ公開します（`CHROMATIC_PROJECT_TOKEN`が必要です）。
 - **`pnpm www dev`**: ドキュメントサイトを起動します。
 - **`pnpm build`**: すべてのパッケージに対してビルドを実行します。
 - **`pnpm format`**: すべてのパッケージに対してフォーマットを実行します。
 - **`pnpm lint`**: すべてのパッケージに対してlintを実行します。
 - **`pnpm typecheck`**: すべてのパッケージに対して型チェックを実行します。
 - **`pnpm test`**: すべてのパッケージに対してテストを実行します。
+
+### Visual Regression
+
+`packages/react` のビジュアルリグレッションは現在Chromaticを使います。
+
+- `main` / `v*` 向けの内部PRでは、レビュー用のChromaticビルドを公開します
+- 通常のStorybook docs/demoの挙動は変えず、広いstory書き換えよりvisual-testランタイムの固定を優先します
+- 初回ロールアウトから外す必要がある場合だけ、狭い範囲の `chromatic.disableSnapshot` メタデータを使います
+
+ローカルコマンドは [`packages/react/README.md`](./packages/react/README.md) を参照してください。
 
 ### Visual Studio Code
 

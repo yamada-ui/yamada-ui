@@ -18,9 +18,7 @@ Yamada UI has drawn a lot of inspiration from [Chakra UI](https://github.com/cha
 
 Visit https://yamada-ui.com to view the documentation.
 
-## Local Visual Test Workflow
-
-For maintainers validating deterministic visual-test behavior locally:
+## Visual Regression Workflow
 
 ```bash
 pnpm react storybook
@@ -30,8 +28,11 @@ export CHROMATIC_PROJECT_TOKEN=<your-project-token>
 pnpm react visual-test:chromatic
 ```
 
-`pnpm react storybook` keeps normal dynamic docs behavior.
-`STORYBOOK_VISUAL_TEST=true` is applied only by visual-test scripts.
+- `pnpm react storybook` keeps normal dynamic docs behavior
+- visual-test scripts apply `STORYBOOK_VISUAL_TEST=true`
+- `visual-test:chromatic` builds through Turbo and uploads the `storybook-static` output to Chromatic
+- keep normal Storybook docs/demo behavior unchanged and prefer visual-test runtime pinning over broad story rewrites
+- use narrow `chromatic.disableSnapshot` metadata only for stories that are still too unstable for the current rollout
 
 ## Support
 

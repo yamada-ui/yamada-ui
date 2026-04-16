@@ -59,7 +59,7 @@ export function CodePreview({
               bg: "transparent",
               border: "none",
               color: "inherit",
-              display: "inline",
+              display: "inline-block",
               fontSize: "inherit",
               lineHeight: "inherit",
               minH: "inherit",
@@ -69,9 +69,9 @@ export function CodePreview({
             "& code .diff, & code .highlighted": {
               "--space": { base: "{spaces.lg}", md: "{spaces.md}" },
               display: "inline-block",
-              mx: "calc({space} * -1)",
+              ms: "calc({space} * -1)",
               position: "relative",
-              px: "{space}",
+              ps: "{space}",
               w: "calc(full + ({space} * 4))",
             },
             "& code .diff.add": {
@@ -117,9 +117,7 @@ export function CodePreview({
           fontSize="sm"
           lineHeight="1.1"
           overflowX="auto"
-          pe={{ base: "16", sm: "12", md: "14" }}
-          ps="{space}"
-          py="{space}"
+          p="{space}"
           rounded="l2"
           tabIndex={tabIndex}
         />

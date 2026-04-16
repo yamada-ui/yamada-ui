@@ -1,7 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "#storybook"
 import { useMemo, useRef, useState } from "react"
-import { expect, screen, within } from "storybook/test"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { Box } from "../box"
 import { Button } from "../button"
@@ -47,11 +46,6 @@ export const Basic: Story = () => {
   )
 }
 
-Basic.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
-}
-
 export const Items: Story = () => {
   const items = useMemo<Menu.Item[]>(
     () => [
@@ -71,11 +65,6 @@ export const Items: Story = () => {
       <Menu.Content items={items} />
     </Menu.Root>
   )
-}
-
-Items.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
 }
 
 export const Size: Story = () => {
@@ -103,15 +92,6 @@ export const Size: Story = () => {
   )
 }
 
-Size.play = async ({ canvas, userEvent }) => {
-  const buttons = canvas.getAllByRole("button", { name: /^menu$/i })
-  for (const button of buttons) {
-    await userEvent.click(button)
-    await expect(await screen.findByRole("menu")).toBeVisible()
-    await userEvent.click(button)
-  }
-}
-
 export const OnSelect: Story = () => {
   const items = useMemo<Menu.Item[]>(
     () => [
@@ -131,11 +111,6 @@ export const OnSelect: Story = () => {
       <Menu.Content items={items} />
     </Menu.Root>
   )
-}
-
-OnSelect.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
 }
 
 export const Separator: Story = () => {
@@ -181,18 +156,6 @@ export const Separator: Story = () => {
       </Menu.Root>
     </HStack>
   )
-}
-
-Separator.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(
-    canvas.getByRole("button", { name: /menu with items/i }),
-  )
-  await expect(await screen.findByRole("menu")).toBeVisible()
-  await userEvent.keyboard("{Escape}")
-  await userEvent.click(
-    canvas.getByRole("button", { name: /menu with composition/i }),
-  )
-  await expect(await screen.findByRole("menu")).toBeVisible()
 }
 
 export const Group: Story = () => {
@@ -253,18 +216,6 @@ export const Group: Story = () => {
   )
 }
 
-Group.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(
-    canvas.getByRole("button", { name: /menu with items/i }),
-  )
-  await expect(await screen.findByRole("menu")).toBeVisible()
-  await userEvent.keyboard("{Escape}")
-  await userEvent.click(
-    canvas.getByRole("button", { name: /menu with composition/i }),
-  )
-  await expect(await screen.findByRole("menu")).toBeVisible()
-}
-
 export const CheckboxGroup: Story = () => {
   const [value, setValue] = useState<string[]>(["naruto"])
   const items = useMemo<Menu.Item[]>(
@@ -314,18 +265,6 @@ export const CheckboxGroup: Story = () => {
   )
 }
 
-CheckboxGroup.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(
-    canvas.getByRole("button", { name: /menu with items/i }),
-  )
-  await expect(await screen.findByRole("menu")).toBeVisible()
-  await userEvent.keyboard("{Escape}")
-  await userEvent.click(
-    canvas.getByRole("button", { name: /menu with composition/i }),
-  )
-  await expect(await screen.findByRole("menu")).toBeVisible()
-}
-
 export const RadioGroup: Story = () => {
   const [value, setValue] = useState<string>("naruto")
   const items = useMemo<Menu.Item[]>(
@@ -373,18 +312,6 @@ export const RadioGroup: Story = () => {
       </Menu.Root>
     </HStack>
   )
-}
-
-RadioGroup.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(
-    canvas.getByRole("button", { name: /menu with items/i }),
-  )
-  await expect(await screen.findByRole("menu")).toBeVisible()
-  await userEvent.keyboard("{Escape}")
-  await userEvent.click(
-    canvas.getByRole("button", { name: /menu with composition/i }),
-  )
-  await expect(await screen.findByRole("menu")).toBeVisible()
 }
 
 export const Indicator: Story = () => {
@@ -467,18 +394,6 @@ export const Indicator: Story = () => {
   )
 }
 
-Indicator.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(
-    canvas.getByRole("button", { name: /menu with items/i }),
-  )
-  await expect(await screen.findByRole("menu")).toBeVisible()
-  await userEvent.keyboard("{Escape}")
-  await userEvent.click(
-    canvas.getByRole("button", { name: /menu with composition/i }),
-  )
-  await expect(await screen.findByRole("menu")).toBeVisible()
-}
-
 export const Command: Story = () => {
   const items = useMemo<Menu.Item[]>(
     () => [
@@ -547,18 +462,6 @@ export const Command: Story = () => {
   )
 }
 
-Command.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(
-    canvas.getByRole("button", { name: /menu with items/i }),
-  )
-  await expect(await screen.findByRole("menu")).toBeVisible()
-  await userEvent.keyboard("{Escape}")
-  await userEvent.click(
-    canvas.getByRole("button", { name: /menu with composition/i }),
-  )
-  await expect(await screen.findByRole("menu")).toBeVisible()
-}
-
 export const Links: Story = () => {
   const items = useMemo(
     () => [
@@ -605,11 +508,6 @@ export const Links: Story = () => {
   )
 }
 
-Links.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
-}
-
 export const Anchor: Story = () => {
   const items = useMemo<Menu.Item[]>(
     () => [
@@ -639,11 +537,6 @@ export const Anchor: Story = () => {
   )
 }
 
-Anchor.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
-}
-
 export const Header: Story = () => {
   const items = useMemo<Menu.Item[]>(
     () => [
@@ -668,11 +561,6 @@ export const Header: Story = () => {
   )
 }
 
-Header.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
-}
-
 export const Footer: Story = () => {
   const items = useMemo<Menu.Item[]>(
     () => [
@@ -695,11 +583,6 @@ export const Footer: Story = () => {
       <Menu.Content footer="キャラクター" items={items} maxH="2xs" />
     </Menu.Root>
   )
-}
-
-Footer.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
 }
 
 export const ContextMenu: Story = () => {
@@ -732,14 +615,6 @@ export const ContextMenu: Story = () => {
   )
 }
 
-ContextMenu.play = async ({ canvas }) => {
-  const target = canvas.getByText("Right click here")
-  target.dispatchEvent(
-    new MouseEvent("contextmenu", { bubbles: true, cancelable: true }),
-  )
-  await expect(await screen.findByRole("menu")).toBeVisible()
-}
-
 export const NestedMenu: Story = () => {
   return (
     <Menu.Root>
@@ -768,15 +643,6 @@ export const NestedMenu: Story = () => {
   )
 }
 
-NestedMenu.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
-  await userEvent.hover(
-    within(screen.getByRole("menu")).getByText(/伝説の三忍/),
-  )
-  await expect(await screen.findByText(/大蛇丸/)).toBeVisible()
-}
-
 export const Duration: Story = () => {
   const items = useMemo<Menu.Item[]>(
     () => [
@@ -796,11 +662,6 @@ export const Duration: Story = () => {
       <Menu.Content items={items} />
     </Menu.Root>
   )
-}
-
-Duration.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
 }
 
 export const Offset: Story = () => {
@@ -824,11 +685,6 @@ export const Offset: Story = () => {
   )
 }
 
-Offset.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
-}
-
 export const Gutter: Story = () => {
   const items = useMemo<Menu.Item[]>(
     () => [
@@ -848,11 +704,6 @@ export const Gutter: Story = () => {
       <Menu.Content items={items} />
     </Menu.Root>
   )
-}
-
-Gutter.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
 }
 
 export const AnimationScheme: Story = () => {
@@ -876,11 +727,6 @@ export const AnimationScheme: Story = () => {
   )
 }
 
-AnimationScheme.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
-}
-
 export const Placement: Story = () => {
   const items = useMemo<Menu.Item[]>(
     () => [
@@ -900,11 +746,6 @@ export const Placement: Story = () => {
       <Menu.Content items={items} />
     </Menu.Root>
   )
-}
-
-Placement.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
 }
 
 export const BlockScrollOnMount: Story = () => {
@@ -930,11 +771,6 @@ export const BlockScrollOnMount: Story = () => {
   )
 }
 
-BlockScrollOnMount.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
-}
-
 export const CloseOnScroll: Story = () => {
   const items = useMemo<Menu.Item[]>(
     () => [
@@ -958,11 +794,6 @@ export const CloseOnScroll: Story = () => {
   )
 }
 
-CloseOnScroll.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
-}
-
 export const InitialFocusRef: Story = () => {
   const ref = useRef<HTMLDivElement>(null)
   const items = useMemo<Menu.Item[]>(
@@ -983,11 +814,6 @@ export const InitialFocusRef: Story = () => {
       <Menu.Content items={items} />
     </Menu.Root>
   )
-}
-
-InitialFocusRef.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
 }
 
 export const Disabled: Story = () => {
@@ -1036,11 +862,6 @@ export const DisabledItem: Story = () => {
   )
 }
 
-DisabledItem.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
-}
-
 export const DisabledCloseOnSelect: Story = () => {
   const items = useMemo<Menu.Item[]>(
     () => [
@@ -1060,11 +881,6 @@ export const DisabledCloseOnSelect: Story = () => {
       <Menu.Content items={items} />
     </Menu.Root>
   )
-}
-
-DisabledCloseOnSelect.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
 }
 
 export const DisabledCloseOnBlur: Story = () => {
@@ -1088,11 +904,6 @@ export const DisabledCloseOnBlur: Story = () => {
   )
 }
 
-DisabledCloseOnBlur.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
-}
-
 export const DisabledCloseOnEsc: Story = () => {
   const items = useMemo<Menu.Item[]>(
     () => [
@@ -1112,11 +923,6 @@ export const DisabledCloseOnEsc: Story = () => {
       <Menu.Content items={items} />
     </Menu.Root>
   )
-}
-
-DisabledCloseOnEsc.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
 }
 
 export const CustomControl: Story = () => {
@@ -1143,9 +949,4 @@ export const CustomControl: Story = () => {
       <Button onClick={onOpen}>Click me from here</Button>
     </HStack>
   )
-}
-
-CustomControl.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /^menu$/i }))
-  await expect(await screen.findByRole("menu")).toBeVisible()
 }

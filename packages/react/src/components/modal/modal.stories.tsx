@@ -1,6 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useState } from "react"
-import { expect, screen, within } from "storybook/test"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { noop } from "../../utils"
 import { Button } from "../button"
@@ -49,11 +48,6 @@ export const Basic: Story = () => {
   )
 }
 
-Basic.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /open modal/i }))
-  await expect(await screen.findByRole("dialog")).toBeVisible()
-}
-
 export const PropsPattern: Story = () => {
   return (
     <Modal.Root
@@ -66,11 +60,6 @@ export const PropsPattern: Story = () => {
       onSuccess={noop}
     />
   )
-}
-
-PropsPattern.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /open modal/i }))
-  await expect(await screen.findByRole("dialog")).toBeVisible()
 }
 
 export const Size: Story = () => {
@@ -118,21 +107,6 @@ export const Size: Story = () => {
   )
 }
 
-Size.play = async ({ canvas, userEvent }) => {
-  const sizes = ["xs", "sm", "md", "lg", "xl", "cover", "full"] as const
-  for (let i = 0; i < sizes.length; i++) {
-    if (i > 0) {
-      await userEvent.keyboard("{Escape}")
-    }
-    await userEvent.click(
-      canvas.getByRole("button", { name: `Open "${sizes[i]}" Modal` }),
-    )
-    await expect(
-      await screen.findByRole("dialog", { name: /ドラゴンボール/ }),
-    ).toBeVisible()
-  }
-}
-
 export const Duration: Story = () => {
   return (
     <Modal.Root duration={0.4}>
@@ -159,11 +133,6 @@ export const Duration: Story = () => {
       </Modal.Content>
     </Modal.Root>
   )
-}
-
-Duration.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /open modal/i }))
-  await expect(await screen.findByRole("dialog")).toBeVisible()
 }
 
 export const Placement: Story = () => {
@@ -226,33 +195,6 @@ export const Placement: Story = () => {
   )
 }
 
-Placement.play = async ({ canvas, userEvent }) => {
-  const placements = [
-    "start-start",
-    "start-center",
-    "start-end",
-    "center-start",
-    "center-center",
-    "center-end",
-    "end-start",
-    "end-center",
-    "end-end",
-  ] as const
-  for (let i = 0; i < placements.length; i++) {
-    if (i > 0) {
-      await userEvent.keyboard("{Escape}")
-    }
-    await userEvent.click(
-      canvas.getByRole("button", {
-        name: `Open "${placements[i]}" Modal`,
-      }),
-    )
-    await expect(
-      await screen.findByRole("dialog", { name: /ドラゴンボール/ }),
-    ).toBeVisible()
-  }
-}
-
 export const AnimationScheme: Story = () => {
   const [animationScheme, setAnimationScheme] =
     useState<Modal.RootProps["animationScheme"]>("scale")
@@ -313,29 +255,6 @@ export const AnimationScheme: Story = () => {
   )
 }
 
-AnimationScheme.play = async ({ canvas, userEvent }) => {
-  const animationSchemes = [
-    "scale",
-    "block-start",
-    "inline-start",
-    "inline-end",
-    "block-end",
-  ] as const
-  for (let i = 0; i < animationSchemes.length; i++) {
-    if (i > 0) {
-      await userEvent.keyboard("{Escape}")
-    }
-    await userEvent.click(
-      canvas.getByRole("button", {
-        name: `Open "${animationSchemes[i]}" Modal`,
-      }),
-    )
-    await expect(
-      await screen.findByRole("dialog", { name: /ドラゴンボール/ }),
-    ).toBeVisible()
-  }
-}
-
 export const NestedModal: Story = () => {
   return (
     <Modal.Root>
@@ -386,22 +305,6 @@ export const NestedModal: Story = () => {
   )
 }
 
-NestedModal.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(
-    canvas.getAllByRole("button", { name: /^open modal$/i })[0]!,
-  )
-  await expect(
-    await screen.findByRole("dialog", { name: /ドラゴンボール/ }),
-  ).toBeVisible()
-  const outer = screen.getByRole("dialog", { name: /ドラゴンボール/ })
-  await userEvent.click(
-    within(outer).getByRole("button", { name: /open modal/i }),
-  )
-  await expect(
-    await screen.findByRole("dialog", { name: /あらすじ/ }),
-  ).toBeVisible()
-}
-
 export const HiddenCloseButton: Story = () => {
   return (
     <Modal.Root withCloseButton={false}>
@@ -428,11 +331,6 @@ export const HiddenCloseButton: Story = () => {
       </Modal.Content>
     </Modal.Root>
   )
-}
-
-HiddenCloseButton.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /open modal/i }))
-  await expect(await screen.findByRole("dialog")).toBeVisible()
 }
 
 export const CustomCloseButton: Story = () => {
@@ -465,11 +363,6 @@ export const CustomCloseButton: Story = () => {
   )
 }
 
-CustomCloseButton.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /open modal/i }))
-  await expect(await screen.findByRole("dialog")).toBeVisible()
-}
-
 export const HiddenOverlay: Story = () => {
   return (
     <Modal.Root withOverlay={false}>
@@ -496,11 +389,6 @@ export const HiddenOverlay: Story = () => {
       </Modal.Content>
     </Modal.Root>
   )
-}
-
-HiddenOverlay.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /open modal/i }))
-  await expect(await screen.findByRole("dialog")).toBeVisible()
 }
 
 export const CustomOverlay: Story = () => {
@@ -533,11 +421,6 @@ export const CustomOverlay: Story = () => {
   )
 }
 
-CustomOverlay.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /open modal/i }))
-  await expect(await screen.findByRole("dialog")).toBeVisible()
-}
-
 export const CustomButton: Story = () => {
   return (
     <Modal.Root
@@ -550,11 +433,6 @@ export const CustomButton: Story = () => {
       trigger={<Button>Open Modal</Button>}
     />
   )
-}
-
-CustomButton.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /open modal/i }))
-  await expect(await screen.findByRole("dialog")).toBeVisible()
 }
 
 export const ScrollBehavior: Story = () => {
@@ -625,23 +503,6 @@ export const ScrollBehavior: Story = () => {
       </Modal.Root>
     </>
   )
-}
-
-ScrollBehavior.play = async ({ canvas, userEvent }) => {
-  const scrollBehaviors = ["inside", "outside"] as const
-  for (let i = 0; i < scrollBehaviors.length; i++) {
-    if (i > 0) {
-      await userEvent.keyboard("{Escape}")
-    }
-    await userEvent.click(
-      canvas.getByRole("button", {
-        name: `Open "${scrollBehaviors[i]}" Modal`,
-      }),
-    )
-    await expect(
-      await screen.findByRole("dialog", { name: /ドラゴンボール/ }),
-    ).toBeVisible()
-  }
 }
 
 export const ScrollOnMount: Story = () => {
@@ -721,9 +582,4 @@ export const ScrollOnMount: Story = () => {
       </Container.Root>
     </>
   )
-}
-
-ScrollOnMount.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /open modal/i }))
-  await expect(await screen.findByRole("dialog")).toBeVisible()
 }

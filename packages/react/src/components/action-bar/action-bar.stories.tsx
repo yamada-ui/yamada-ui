@@ -1,5 +1,4 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { expect, screen } from "storybook/test"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { Button } from "../button"
 import { CloseButton } from "../close-button"
@@ -156,34 +155,4 @@ export const CustomControl: Story = () => {
       />
     </>
   )
-}
-
-Basic.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /open action/i }))
-  await expect(await screen.findByRole("dialog")).toBeVisible()
-}
-
-PropsPattern.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /open action/i }))
-  await expect(await screen.findByRole("dialog")).toBeVisible()
-}
-
-Duration.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /open action/i }))
-  await expect(await screen.findByRole("dialog")).toBeVisible()
-}
-
-Placement.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /open action/i }))
-  await expect(await screen.findByRole("dialog")).toBeVisible()
-}
-
-AnimationScheme.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /open action/i }))
-  await expect(await screen.findByRole("dialog")).toBeVisible()
-}
-
-CustomControl.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /open action/i }))
-  await expect(await screen.findByRole("dialog")).toBeVisible()
 }

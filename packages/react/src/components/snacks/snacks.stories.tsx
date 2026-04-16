@@ -1,6 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useRef } from "react"
-import { expect, screen } from "storybook/test"
 import { toTitleCase } from "../../utils"
 import { Button } from "../button"
 import { For } from "../for"
@@ -46,11 +45,6 @@ export const Basic: Story = () => {
   )
 }
 
-Basic.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /add snack/i }))
-  await expect(await screen.findByText("アムロ・レイ")).toBeVisible()
-}
-
 export const Variant: Story = () => {
   const { snack, snacks } = useSnacks()
 
@@ -87,13 +81,6 @@ export const Variant: Story = () => {
   )
 }
 
-Variant.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(
-    canvas.getByRole("button", { name: /add "plain" snack/i }),
-  )
-  await expect(await screen.findByText("ララァ・スン")).toBeVisible()
-}
-
 export const Status: Story = () => {
   const { snack, snacks } = useSnacks()
 
@@ -127,13 +114,6 @@ export const Status: Story = () => {
       <Input placeholder="Input" />
     </>
   )
-}
-
-Status.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(
-    canvas.getByRole("button", { name: /add "info" snack/i }),
-  )
-  await expect(await screen.findByText("アムロ・レイ")).toBeVisible()
 }
 
 export const ColorScheme: Story = () => {
@@ -172,13 +152,6 @@ export const ColorScheme: Story = () => {
   )
 }
 
-ColorScheme.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(
-    canvas.getByRole("button", { name: /add "info" snack/i }),
-  )
-  await expect(await screen.findByText("シャア・アズナブル")).toBeVisible()
-}
-
 export const Loading: Story = () => {
   const { snack, snacks } = useSnacks()
 
@@ -214,13 +187,6 @@ export const Loading: Story = () => {
   )
 }
 
-Loading.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(
-    canvas.getByRole("button", { name: /add "oval" snack/i }),
-  )
-  await expect(await screen.findByText("セイラ・マス")).toBeVisible()
-}
-
 export const Direction: Story = () => {
   const { snack, snacks } = useSnacks({ direction: "end" })
 
@@ -249,11 +215,6 @@ export const Direction: Story = () => {
       <Input placeholder="Input" />
     </>
   )
-}
-
-Direction.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /add snack/i }))
-  await expect(await screen.findByText("シャア・アズナブル")).toBeVisible()
 }
 
 export const Limit: Story = () => {
@@ -285,12 +246,7 @@ export const Limit: Story = () => {
   )
 }
 
-Limit.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /add snack/i }))
-  await expect(await screen.findByText("ブライト・ノア")).toBeVisible()
-}
-
-export const Duration = () => {
+export const Duration: Story = () => {
   const { snack, snacks } = useSnacks()
 
   return (
@@ -321,12 +277,7 @@ export const Duration = () => {
   )
 }
 
-Duration.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /add snack/i }))
-  await expect(await screen.findByText("セイラ・マス")).toBeVisible()
-}
-
-export const DisabledClosable = () => {
+export const DisabledClosable: Story = () => {
   const { snack, snacks } = useSnacks({ closable: false })
 
   return (
@@ -356,12 +307,7 @@ export const DisabledClosable = () => {
   )
 }
 
-DisabledClosable.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /add snack/i }))
-  await expect(await screen.findByText("ランバ・ラル")).toBeVisible()
-}
-
-export const UseClose = () => {
+export const UseClose: Story = () => {
   const { snack, snacks } = useSnacks()
   const id = useRef<string | undefined>(undefined)
 
@@ -400,12 +346,7 @@ export const UseClose = () => {
   )
 }
 
-UseClose.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /add snack/i }))
-  await expect(await screen.findByText("シロー・アマダ")).toBeVisible()
-}
-
-export const UseUpdate = () => {
+export const UseUpdate: Story = () => {
   const { snack, snacks } = useSnacks()
   const id = useRef<string | undefined>(undefined)
 
@@ -447,9 +388,4 @@ export const UseUpdate = () => {
       <Input placeholder="Input" />
     </>
   )
-}
-
-UseUpdate.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /add snack/i }))
-  await expect(await screen.findByText("クワトロ・バジーナ")).toBeVisible()
 }

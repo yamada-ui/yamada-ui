@@ -14,18 +14,21 @@ import {
 } from "./visual-test"
 
 const channel = addons.getChannel()
+const visualTestEnv = (
+  import.meta as { env?: { STORYBOOK_VISUAL_TEST?: string } }
+).env?.STORYBOOK_VISUAL_TEST
 const visualTestEnabled = isVisualTest(
   globalThis as unknown as VisualTestGlobal,
-  import.meta.env.STORYBOOK_VISUAL_TEST,
+  visualTestEnv,
 )
 
 setupVisualTestRuntimeContract({
-  envValue: import.meta.env.STORYBOOK_VISUAL_TEST,
+  envValue: visualTestEnv,
 })
 
 const skipMotionAnimations = isVisualTest(
   globalThis as unknown as VisualTestGlobal,
-  import.meta.env.STORYBOOK_VISUAL_TEST,
+  visualTestEnv,
 )
 
 if (skipMotionAnimations) {

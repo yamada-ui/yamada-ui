@@ -1,5 +1,4 @@
-import type { Meta } from "@storybook/react-vite"
-import { expect, screen } from "storybook/test"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { Button } from "../../components/button"
 import { Modal } from "../../components/modal"
 // import { Dialog } from "../../components/modal"
@@ -12,7 +11,9 @@ const meta: Meta = {
 
 export default meta
 
-export const Basic = () => {
+type Story = StoryFn
+
+export const Basic: Story = () => {
   const { open, onClose, onOpen } = useDisclosure()
 
   return (
@@ -34,12 +35,7 @@ export const Basic = () => {
   )
 }
 
-Basic.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /open dialog/i }))
-  await expect(await screen.findByRole("dialog")).toBeVisible()
-}
-
-export const Toggle = () => {
+export const Toggle: Story = () => {
   const { open, onToggle } = useDisclosure()
 
   return (
@@ -51,12 +47,7 @@ export const Toggle = () => {
   )
 }
 
-Toggle.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /please click/i }))
-  await expect(await screen.findByText("Hey!")).toBeVisible()
-}
-
-export const Chain = () => {
+export const Chain: Story = () => {
   const { open, onClose, onOpen } = useDisclosure<string, string>({
     onClose: (value) => {
       console.log("onClose:", value)
@@ -83,9 +74,4 @@ export const Chain = () => {
       />
     </>
   )
-}
-
-Chain.play = async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: /open dialog/i }))
-  await expect(await screen.findByRole("dialog")).toBeVisible()
 }

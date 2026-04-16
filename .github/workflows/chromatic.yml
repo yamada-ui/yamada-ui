@@ -12,9 +12,21 @@ on:
       - "package.json"
       - "pnpm-lock.yaml"
       - "turbo.json"
-      - "packages/react/**"
-      - "packages/utils/**"
-      - "packages/workspace/**"
+      - "packages/react/package.json"
+      - "packages/react/tsconfig.json"
+      - "packages/react/turbo.json"
+      - "packages/react/storybook/**"
+      - "packages/react/src/**/*.ts"
+      - "packages/react/src/**/*.tsx"
+      - "!packages/react/src/**/*.test.ts"
+      - "!packages/react/src/**/*.test.tsx"
+      - "!packages/react/src/**/test/**"
+      - "packages/utils/package.json"
+      - "packages/utils/tsconfig.json"
+      - "packages/utils/src/**/*.ts"
+      - "packages/utils/src/**/*.tsx"
+      - "!packages/utils/src/**/*.test.ts"
+      - "!packages/utils/src/**/*.test.tsx"
   pull_request:
     types:
       - opened
@@ -31,9 +43,21 @@ on:
       - "package.json"
       - "pnpm-lock.yaml"
       - "turbo.json"
-      - "packages/react/**"
-      - "packages/utils/**"
-      - "packages/workspace/**"
+      - "packages/react/package.json"
+      - "packages/react/tsconfig.json"
+      - "packages/react/turbo.json"
+      - "packages/react/storybook/**"
+      - "packages/react/src/**/*.ts"
+      - "packages/react/src/**/*.tsx"
+      - "!packages/react/src/**/*.test.ts"
+      - "!packages/react/src/**/*.test.tsx"
+      - "!packages/react/src/**/test/**"
+      - "packages/utils/package.json"
+      - "packages/utils/tsconfig.json"
+      - "packages/utils/src/**/*.ts"
+      - "packages/utils/src/**/*.tsx"
+      - "!packages/utils/src/**/*.test.ts"
+      - "!packages/utils/src/**/*.test.tsx"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.head.ref || github.ref }}
@@ -42,7 +66,7 @@ concurrency:
 jobs:
   visual:
     name: Visual
-    if: ${{ github.event_name == 'push' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository) }}
+    if: ${{ github.event_name == 'push' || !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:

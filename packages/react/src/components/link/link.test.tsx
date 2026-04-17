@@ -3,9 +3,7 @@ import { Link } from "."
 
 describe("<Link />", () => {
   test("renders component correctly", async () => {
-    await a11y(<Link href="https://yamada-ui.com">Link</Link>, {
-      axeOptions: { rules: { "color-contrast": { enabled: false } } },
-    })
+    await a11y(<Link href="https://yamada-ui.com">Link</Link>)
   })
 
   test("sets `displayName` correctly", () => {
@@ -21,7 +19,9 @@ describe("<Link />", () => {
   test("renders HTML tag correctly", async () => {
     await render(<Link href="https://yamada-ui.com">Link</Link>)
 
-    expect(page.getByRole("link").element().tagName).toBe("A")
+    const link = page.getByRole("link").element()
+
+    expect(link).toBeInstanceOf(HTMLAnchorElement)
   })
 
   test("should open link in a new tab", async () => {

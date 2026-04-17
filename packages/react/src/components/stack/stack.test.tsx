@@ -92,8 +92,9 @@ describe("<Stack />", () => {
       </Stack>,
     )
 
-    const items = page.getByTestId("character").elements()
-    expect(items).toHaveLength(6)
+    await expect
+      .poll(() => page.getByTestId("character").elements().length)
+      .toBe(6)
   })
 
   test("renders list of items with provided keys when cloning children", async () => {
@@ -122,15 +123,13 @@ describe("<Stack />", () => {
 
     const { user } = await render(<Wrapper data={data} />)
 
-    const items = page.getByTestId("character").elements()
-
-    expect(items).toHaveLength(6)
+    await expect
+      .poll(() => page.getByTestId("character").elements().length)
+      .toBe(6)
     expect(unMountMock).not.toHaveBeenCalled()
 
     await user.click(page.getByTestId("delete-button"))
     await expect.poll(() => unMountMock.mock.calls.length).toBe(1)
     expect(unMountMock).toHaveBeenCalledExactlyOnceWith("孫悟空")
-
-    expect(unMountMock).toHaveBeenCalledTimes(1)
   })
 })

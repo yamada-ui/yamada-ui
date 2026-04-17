@@ -1,7 +1,7 @@
-* @yamada-ui/prime @yamada-ui/standard
+* @yamada-ui/prime @yamada-ui/standard @yamada-ui/growth
 
 *.md @hirotomoyamada
-.changeset/*.md @yamada-ui/prime @yamada-ui/standard
+.changeset/*.md @yamada-ui/prime @yamada-ui/standard @yamada-ui/growth
 package.json @hirotomoyamada
 LICENSE @hirotomoyamada
 .github/ @hirotomoyamada

@@ -1,9 +1,9 @@
-import { page, render } from "#test/browser"
+import { a11y, page, render } from "#test/browser"
 import { Separator } from "./separator"
 
 describe("<Separator />", () => {
   test("renders component correctly", async () => {
-    await render(<Separator />)
+    await a11y(<Separator />)
   })
 
   test("sets `displayName` correctly", () => {

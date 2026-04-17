@@ -15,7 +15,13 @@ const getDeclaredGridTemplateColumns = () => {
 
     for (const rule of Array.from(rules).reverse()) {
       if (!(rule instanceof CSSStyleRule)) continue
-      if (!element.matches(rule.selectorText)) continue
+
+      try {
+        if (!element.matches(rule.selectorText)) continue
+      } catch {
+        continue
+      }
+
       if (rule.style.gridTemplateColumns) return rule.style.gridTemplateColumns
     }
   }

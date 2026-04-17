@@ -1,8 +1,5 @@
-import type {
-  ConfigWithExtends,
-  ExtendsElement,
-  Plugin,
-} from "@eslint/config-helpers"
+import type { ConfigWithExtends, Plugin } from "@eslint/config-helpers"
+import { fixupPluginRules } from "@eslint/compat"
 import { AST_NODE_TYPES } from "@typescript-eslint/utils"
 import react from "eslint-plugin-react"
 import { sharedFiles } from "./shared"
@@ -47,12 +44,26 @@ const customReactPlugin: Plugin = {
   },
 }
 
+const recommendedRules = react.configs.flat.recommended?.rules
+
+if (!recommendedRules)
+  throw new Error("eslint-plugin-react recommended config not found")
+
 export const reactConfig = {
   name: "react",
-  extends: [react.configs.flat.recommended as ExtendsElement],
   files: sharedFiles,
-  plugins: { "custom-react": customReactPlugin },
+  languageOptions: {
+    parserOptions: {
+      ecmaFeatures: { jsx: true },
+    },
+  },
+  plugins: {
+    "custom-react": customReactPlugin,
+    react: fixupPluginRules(react),
+  },
   rules: {
+    ...recommendedRules,
+
     "react/no-unescaped-entities": "off",
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",

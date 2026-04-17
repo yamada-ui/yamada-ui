@@ -11,7 +11,7 @@ const createQuery = (
   minW: number | string | undefined,
   maxW: number | string | undefined,
 ) => {
-  let media = ""
+  let media: string
 
   if (minW) {
     media = `(min-width: ${minW}px)`

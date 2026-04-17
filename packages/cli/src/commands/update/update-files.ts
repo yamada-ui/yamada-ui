@@ -27,7 +27,7 @@ async function mergeContent(
   currentPath: string,
   fallback: string,
 ) {
-  let content = ""
+  let content: string
   let conflict = false
 
   try {

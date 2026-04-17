@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { a11y, fireEvent, render, screen, waitFor } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { useEffect, useState } from "react"
 import { Box } from "../box"
 import { Flex } from "../flex"
@@ -19,26 +19,26 @@ describe("<Stack />", () => {
     expect(Stack.displayName).toBe("Stack")
   })
 
-  test("sets `className` correctly", () => {
-    render(
+  test("sets `className` correctly", async () => {
+    await render(
       <Stack data-testid="stack">
         <Box>Stack Item</Box>
       </Stack>,
     )
-    expect(screen.getByTestId("stack")).toHaveClass("ui-stack")
+    await expect.element(page.getByTestId("stack")).toHaveClass("ui-stack")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(
+  test("renders HTML tag correctly", async () => {
+    await render(
       <Stack data-testid="stack">
         <Box>Stack Item</Box>
       </Stack>,
     )
-    expect(screen.getByTestId("stack").tagName).toBe("DIV")
+    expect(page.getByTestId("stack").element().tagName).toBe("DIV")
   })
 
-  test("renders all the allowed shorthand style props", () => {
-    render(
+  test("renders all the allowed shorthand style props", async () => {
+    await render(
       <Stack
         data-testid="stack"
         align="stretch"
@@ -50,7 +50,7 @@ describe("<Stack />", () => {
       </Stack>,
     )
 
-    expect(screen.getByTestId("stack")).toHaveStyle({
+    await expect.element(page.getByTestId("stack")).toHaveStyle({
       alignItems: "stretch",
       flexDirection: "row",
       flexWrap: "nowrap",
@@ -84,7 +84,7 @@ describe("<Stack />", () => {
   }
 
   test("renders list of items correctly", async () => {
-    render(
+    await render(
       <Stack>
         {data.map(({ name }) => (
           <Component key={name} name={name} />
@@ -92,9 +92,9 @@ describe("<Stack />", () => {
       </Stack>,
     )
 
-    const items = await screen.findAllByTestId("character")
-
-    expect(items).toHaveLength(6)
+    await expect
+      .poll(() => page.getByTestId("character").elements().length)
+      .toBe(6)
   })
 
   test("renders list of items with provided keys when cloning children", async () => {
@@ -121,21 +121,15 @@ describe("<Stack />", () => {
       )
     }
 
-    render(<Wrapper data={data} />)
+    const { user } = await render(<Wrapper data={data} />)
 
-    const items = await screen.findAllByTestId("character")
-
-    expect(items).toHaveLength(6)
+    await expect
+      .poll(() => page.getByTestId("character").elements().length)
+      .toBe(6)
     expect(unMountMock).not.toHaveBeenCalled()
 
-    const onClick = await screen.findByTestId("delete-button")
-
-    fireEvent.click(onClick)
-
-    await waitFor(() => {
-      expect(unMountMock).toHaveBeenCalledExactlyOnceWith("孫悟空")
-    })
-
-    expect(unMountMock).toHaveBeenCalledTimes(1)
+    await user.click(page.getByTestId("delete-button"))
+    await expect.poll(() => unMountMock.mock.calls.length).toBe(1)
+    expect(unMountMock).toHaveBeenCalledExactlyOnceWith("孫悟空")
   })
 })

@@ -1,10 +1,18 @@
-import { act, render, renderHook, screen, waitFor } from "#test"
+import { a11y, act, render, renderHook, screen, waitFor } from "#test"
 import { useRef, useState } from "react"
 import { FocusLock } from "./focus-lock"
 
 describe("<FocusLock />", () => {
   test("sets `displayName` correctly", () => {
     expect(FocusLock.name).toBe("FocusLock")
+  })
+
+  test("renders with no a11y violations", async () => {
+    await a11y(
+      <FocusLock>
+        <button>Focused Button</button>
+      </FocusLock>,
+    )
   })
 
   test("correctly focuses on elements within the lock", () => {

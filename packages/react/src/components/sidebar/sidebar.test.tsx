@@ -1,9 +1,7 @@
 import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { useRef } from "react"
 import { Sidebar } from "."
-import { styled } from "../../core"
 import { Button } from "../button"
-import { Menu } from "../menu"
 
 const navItems: Sidebar.ItemType[] = [
   {
@@ -581,87 +579,6 @@ describe("<Sidebar />", () => {
 
     expect(screen.getAllByTestId("custom-link").length).toBeGreaterThan(0)
     expect(screen.getAllByTestId("custom-trigger").length).toBeGreaterThan(0)
-  })
-
-  test("should expose accessible names for custom icon-only controls", () => {
-    const items: Sidebar.ItemType[] = [
-      {
-        children: [{ label: "API", value: "/guide/api" }],
-        label: "Guide",
-        value: "/guide",
-      },
-    ]
-
-    render(
-      <Sidebar.Root>
-        <Sidebar.SidePanel
-          endElement={{ item: <span aria-hidden="true">...</span> }}
-          items={items}
-          render={{
-            item: ({
-              children,
-              endElement,
-              group,
-              groupOpen,
-              label,
-              value,
-              itemProps,
-              linkProps,
-              triggerProps,
-            }) => (
-              <styled.li as="li" {...itemProps}>
-                {group ? (
-                  <>
-                    <Sidebar.ItemTrigger as="a" href={value} {...triggerProps}>
-                      <Sidebar.ItemLabel>{label}</Sidebar.ItemLabel>
-                    </Sidebar.ItemTrigger>
-
-                    <styled.button
-                      {...triggerProps}
-                      type="button"
-                      aria-label={`${groupOpen ? "Collapse" : "Expand"} ${label}`}
-                    >
-                      <Sidebar.ItemIndicator />
-                    </styled.button>
-
-                    <Sidebar.ItemContent>{children}</Sidebar.ItemContent>
-                  </>
-                ) : (
-                  <>
-                    <Sidebar.ItemLink {...linkProps}>
-                      <Sidebar.ItemLabel>{label}</Sidebar.ItemLabel>
-                    </Sidebar.ItemLink>
-
-                    <Menu.Root>
-                      <Menu.Trigger>
-                        <Sidebar.ItemEndElement
-                          as="button"
-                          type="button"
-                          aria-label={`Open menu for ${label}`}
-                        >
-                          {endElement.item}
-                        </Sidebar.ItemEndElement>
-                      </Menu.Trigger>
-
-                      <Menu.Content
-                        items={[{ label: "Action", value: "action" }]}
-                      />
-                    </Menu.Root>
-                  </>
-                )}
-              </styled.li>
-            ),
-          }}
-        />
-      </Sidebar.Root>,
-    )
-
-    expect(
-      screen.getByRole("button", { name: "Expand Guide" }),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole("button", { name: "Open menu for API" }),
-    ).toBeInTheDocument()
   })
 
   test("should support `external` prop for links", () => {

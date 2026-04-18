@@ -231,15 +231,7 @@ function SearchInput({
   )
 }
 
-const SEARCH_KEYS = [
-  "title",
-  "hierarchy.6",
-  "hierarchy.5",
-  "hierarchy.4",
-  "hierarchy.3",
-  "hierarchy.2",
-  "hierarchy.1",
-] as const
+const SEARCH_KEYS = ["title", "description"] as const
 const DEFAULT_LOCALE_CONTENTS = getGuides(CONSTANTS.I18N.DEFAULT_LOCALE)
 const PER_PAGE = 50
 

@@ -42,10 +42,11 @@ describe("<Editable />", () => {
     const input = page.getByTestId("EditableInput")
 
     await user.click(preview)
+    await expect.element(input).toBeVisible()
     await user.clear(input)
     await user.type(input, "Updated text")
 
-    expect(preview.element()).toHaveTextContent("Updated text")
+    await expect.element(preview).toHaveTextContent("Updated text")
     await expect.element(input).toHaveValue("Updated text")
   })
 
@@ -99,9 +100,13 @@ describe("<Editable />", () => {
       </Editable.Root>,
     )
 
-    await user.click(page.getByTestId("EditableInput"))
+    const input = page.getByTestId("EditableInput")
+
+    await expect.element(input).toBeVisible()
+    await user.click(input)
     await user.keyboard("{Escape}")
 
+    await expect.poll(() => onCancel.mock.calls.length).toBe(1)
     expect(onCancel).toHaveBeenCalledExactlyOnceWith("Some text")
   })
 
@@ -118,7 +123,10 @@ describe("<Editable />", () => {
       </Editable.Root>,
     )
 
-    await user.click(page.getByTestId("EditableInput"))
+    const input = page.getByTestId("EditableInput")
+
+    await expect.element(input).toBeVisible()
+    await user.click(input)
     await user.keyboard("{Enter}")
 
     expect(onSubmit).toHaveBeenCalledExactlyOnceWith("Some text")
@@ -137,7 +145,10 @@ describe("<Editable />", () => {
       </Editable.Root>,
     )
 
-    await user.click(page.getByTestId("EditableInput"))
+    const input = page.getByTestId("EditableInput")
+
+    await expect.element(input).toBeVisible()
+    await user.click(input)
     await user.keyboard("{Shift>}")
     await user.keyboard("{Enter}")
     await user.keyboard("{/Shift}")
@@ -163,10 +174,12 @@ describe("<Editable />", () => {
 
     const input = page.getByTestId("EditableInput")
 
+    await expect.element(input).toBeVisible()
     await user.click(input)
     await user.clear(input)
     await user.type(input, "New text")
 
+    await expect.poll(() => onChange.mock.calls.at(-1)?.[0]).toBe("New text")
     expect(onChange).toHaveBeenLastCalledWith("New text")
   })
 
@@ -184,6 +197,7 @@ describe("<Editable />", () => {
 
     const input = page.getByTestId("EditableInput")
 
+    await expect.element(input).toBeVisible()
     await user.click(input)
     await user.keyboard("{Enter}")
 
@@ -213,7 +227,11 @@ describe("<Editable />", () => {
       </Editable.Root>,
     )
 
-    await user.click(page.getByTestId("EditablePreview"))
+    const preview = page.getByTestId("EditablePreview")
+    const input = page.getByTestId("EditableInput")
+
+    await user.click(preview)
+    await expect.element(input).toBeVisible()
     await user.keyboard("{Escape}")
 
     expect(onCancel).toHaveBeenCalledExactlyOnceWith("Some text")
@@ -234,7 +252,11 @@ describe("<Editable />", () => {
       </Editable.Root>,
     )
 
-    await user.click(page.getByTestId("EditablePreview"))
+    const preview = page.getByTestId("EditablePreview")
+    const input = page.getByTestId("EditableInput")
+
+    await user.click(preview)
+    await expect.element(input).toBeVisible()
     await user.keyboard("{Enter}")
 
     expect(onSubmit).toHaveBeenCalledExactlyOnceWith("Some text")
@@ -261,7 +283,11 @@ describe("<Editable />", () => {
       </>,
     )
 
-    await user.click(page.getByTestId("EditablePreview"))
+    const preview = page.getByTestId("EditablePreview")
+    const input = page.getByTestId("EditableInput")
+
+    await user.click(preview)
+    await expect.element(input).toBeVisible()
     await user.click(page.getByTestId("Outside"))
 
     expect(onSubmit).toHaveBeenCalledExactlyOnceWith("Some text")
@@ -288,7 +314,11 @@ describe("<Editable />", () => {
       </>,
     )
 
-    await user.click(page.getByTestId("EditablePreview"))
+    const preview = page.getByTestId("EditablePreview")
+    const input = page.getByTestId("EditableInput")
+
+    await user.click(preview)
+    await expect.element(input).toBeVisible()
     await user.click(page.getByTestId("Outside"))
 
     expect(onSubmit).not.toHaveBeenCalled()
@@ -307,9 +337,7 @@ describe("<Editable />", () => {
       </Editable.Root>,
     )
 
-    expect(page.getByTestId("EditableInput").element()).not.toHaveAttribute(
-      "hidden",
-    )
+    await expect.element(page.getByTestId("EditableInput")).toBeVisible()
   })
 
   test("supports children as a function", async () => {
@@ -332,15 +360,13 @@ describe("<Editable />", () => {
         onSubmit: expect.any(Function),
       }),
     )
-    expect(
-      document.querySelector("[data-testid='editing-indicator']"),
-    ).toBeNull()
+    expect(page.getByTestId("editing-indicator").query()).toBeNull()
 
     await user.click(page.getByTestId("EditablePreview"))
 
-    expect(
-      document.querySelector("[data-testid='editing-indicator']"),
-    ).not.toBeNull()
+    await expect
+      .element(page.getByTestId("editing-indicator"))
+      .toBeInTheDocument()
   })
 })
 
@@ -385,7 +411,10 @@ describe("<EditableTextarea />", () => {
       </Editable.Root>,
     )
 
-    await user.click(page.getByTestId("EditableTextarea"))
+    const textarea = page.getByTestId("EditableTextarea")
+
+    await expect.element(textarea).toBeVisible()
+    await user.click(textarea)
     await user.keyboard("{Escape}")
 
     expect(onCancel).toHaveBeenCalledExactlyOnceWith("Some text")
@@ -404,7 +433,10 @@ describe("<EditableTextarea />", () => {
       </Editable.Root>,
     )
 
-    await user.click(page.getByTestId("EditableTextarea"))
+    const textarea = page.getByTestId("EditableTextarea")
+
+    await expect.element(textarea).toBeVisible()
+    await user.click(textarea)
     await user.keyboard("{Enter}")
 
     expect(onSubmit).not.toHaveBeenCalled()

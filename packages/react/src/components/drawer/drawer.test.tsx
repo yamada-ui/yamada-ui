@@ -139,7 +139,7 @@ describe("<Drawer />", () => {
     await expect.element(body).toHaveAttribute("id")
   })
 
-  test("renders shorthand content with title, body, and footer", async () => {
+  test("renders shorthand content with title and body", async () => {
     await render(
       <Drawer.Root body="Shorthand Body" open title="Shorthand Title" />,
     )
@@ -204,8 +204,9 @@ describe("<Drawer />", () => {
       </Drawer.Root>,
     )
 
-    const content = page.getByTestId("content").element()
-    await expect.element(page.getByTestId("content")).toBeInTheDocument()
+    const contentLocator = page.getByTestId("content")
+    await expect.element(contentLocator).toBeInTheDocument()
+    const content = contentLocator.element()
     expect(content.querySelector(".ui-drawer__drag-bar")).toBeInTheDocument()
   })
 
@@ -218,7 +219,9 @@ describe("<Drawer />", () => {
       </Drawer.Root>,
     )
 
-    const content = page.getByTestId("content").element()
+    const contentLocator = page.getByTestId("content")
+    await expect.element(contentLocator).toBeInTheDocument()
+    const content = contentLocator.element()
     expect(
       content.querySelector(".ui-drawer__drag-bar"),
     ).not.toBeInTheDocument()

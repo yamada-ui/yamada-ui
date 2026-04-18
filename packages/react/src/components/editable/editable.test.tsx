@@ -87,20 +87,26 @@ describe("<Editable />", () => {
 
   test("calls onCancel when Escape is pressed", async () => {
     const onCancel = vi.fn()
-    const { getByTestId, user } = await render(
+    const { locator, user } = await render(
       <Editable.Root defaultValue="Some text" onCancel={onCancel}>
         <Editable.Preview data-testid="EditablePreview" />
         <Editable.Input data-testid="EditableInput" />
       </Editable.Root>,
     )
 
-    const preview = getByTestId("EditablePreview")
-    const input = getByTestId("EditableInput")
+    const preview = locator.getByTestId("EditablePreview")
+    const input = locator.getByTestId("EditableInput")
 
     await user.click(preview)
     await expect.element(input).toBeVisible()
     await expect.element(input).toHaveFocus()
-    await user.keyboard("{Escape}")
+    input.element().dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "Escape",
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
 
     await expect.poll(() => onCancel.mock.calls.length).toBe(1)
     expect(onCancel).toHaveBeenCalledExactlyOnceWith("Some text")
@@ -128,21 +134,35 @@ describe("<Editable />", () => {
 
   test("does not call onSubmit when Enter is pressed with Shift or Meta", async () => {
     const onSubmit = vi.fn()
-    const { getByTestId, user } = await render(
+    const { locator, user } = await render(
       <Editable.Root defaultValue="Some text" onSubmit={onSubmit}>
         <Editable.Preview data-testid="EditablePreview" />
         <Editable.Input data-testid="EditableInput" />
       </Editable.Root>,
     )
 
-    const preview = getByTestId("EditablePreview")
-    const input = getByTestId("EditableInput")
+    const preview = locator.getByTestId("EditablePreview")
+    const input = locator.getByTestId("EditableInput")
 
     await user.click(preview)
     await expect.element(input).toBeVisible()
     await expect.element(input).toHaveFocus()
-    await user.keyboard("{Shift>}{Enter}{/Shift}")
-    await user.keyboard("{Meta>}{Enter}{/Meta}")
+    input.element().dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "Enter",
+        bubbles: true,
+        cancelable: true,
+        shiftKey: true,
+      }),
+    )
+    input.element().dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "Enter",
+        bubbles: true,
+        cancelable: true,
+        metaKey: true,
+      }),
+    )
 
     expect(onSubmit).not.toHaveBeenCalled()
   })
@@ -172,7 +192,7 @@ describe("<Editable />", () => {
   })
 
   test("focuses out of the input when editing ends", async () => {
-    const { getByTestId, user } = await render(
+    const { locator, user } = await render(
       <Editable.Root
         defaultValue="Some text"
         selectAllOnFocus
@@ -183,7 +203,7 @@ describe("<Editable />", () => {
       </Editable.Root>,
     )
 
-    const input = getByTestId("EditableInput")
+    const input = locator.getByTestId("EditableInput")
 
     await expect.element(input).toBeVisible()
     await user.click(input)
@@ -254,7 +274,7 @@ describe("<Editable />", () => {
   test("calls onSubmit when onBlur is triggered with submitOnBlur", async () => {
     const onCancel = vi.fn()
     const onSubmit = vi.fn()
-    const { getByTestId, user } = await render(
+    const { locator, user } = await render(
       <>
         <Editable.Root
           defaultValue="Some text"
@@ -271,12 +291,14 @@ describe("<Editable />", () => {
       </>,
     )
 
-    const preview = getByTestId("EditablePreview")
-    const input = getByTestId("EditableInput")
+    const preview = locator.getByTestId("EditablePreview")
+    const input = locator.getByTestId("EditableInput")
+    const outside = locator.getByTestId("Outside")
 
     await user.click(preview)
     await expect.element(input).toBeVisible()
-    await user.click(getByTestId("Outside"))
+    await expect.element(input).toHaveFocus()
+    await user.click(outside)
 
     expect(onSubmit).toHaveBeenCalledExactlyOnceWith("Some text")
     expect(onCancel).not.toHaveBeenCalled()
@@ -285,7 +307,7 @@ describe("<Editable />", () => {
   test("calls onCancel when onBlur", async () => {
     const onCancel = vi.fn()
     const onSubmit = vi.fn()
-    const { getByTestId, user } = await render(
+    const { locator, user } = await render(
       <>
         <Editable.Root
           defaultValue="Some text"
@@ -302,12 +324,14 @@ describe("<Editable />", () => {
       </>,
     )
 
-    const preview = getByTestId("EditablePreview")
-    const input = getByTestId("EditableInput")
+    const preview = locator.getByTestId("EditablePreview")
+    const input = locator.getByTestId("EditableInput")
+    const outside = locator.getByTestId("Outside")
 
     await user.click(preview)
     await expect.element(input).toBeVisible()
-    await user.click(getByTestId("Outside"))
+    await expect.element(input).toHaveFocus()
+    await user.click(outside)
 
     expect(onSubmit).not.toHaveBeenCalled()
     expect(onCancel).toHaveBeenCalledExactlyOnceWith("Some text")
@@ -386,7 +410,7 @@ describe("<EditableTextarea />", () => {
 
   test("calls onCancel when Escape is pressed in textarea", async () => {
     const onCancel = vi.fn()
-    const { getByTestId, user } = await render(
+    const { locator, user } = await render(
       <Editable.Root
         defaultValue="Some text"
         startWithEditView
@@ -397,12 +421,20 @@ describe("<EditableTextarea />", () => {
       </Editable.Root>,
     )
 
-    const textarea = getByTestId("EditableTextarea")
+    const textarea = locator.getByTestId("EditableTextarea")
 
     await expect.element(textarea).toBeVisible()
     await user.click(textarea)
-    await user.keyboard("{Escape}")
+    await expect.element(textarea).toHaveFocus()
+    textarea.element().dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "Escape",
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
 
+    await expect.poll(() => onCancel.mock.calls.length).toBe(1)
     expect(onCancel).toHaveBeenCalledExactlyOnceWith("Some text")
   })
 

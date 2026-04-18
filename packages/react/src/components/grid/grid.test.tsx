@@ -31,7 +31,7 @@ describe("<Grid />", () => {
 
     const styles = getComputedStyle(page.getByText("Grid").element())
 
-    expect(styles.gridTemplateColumns).not.toBe("none")
-    expect(styles.gridTemplateRows).not.toBe("none")
+    expect(styles.gridTemplateColumns.trim().split(/\s+/)).toHaveLength(2)
+    expect(styles.gridTemplateRows.trim().split(/\s+/)).toHaveLength(2)
   })
 })

@@ -37,15 +37,25 @@ describe("<Card />", () => {
   test("renders HTML tag correctly", async () => {
     await render(
       <Card.Root data-testid="root">
-        <Card.Header>Card Header</Card.Header>
-        <Card.Body>Card Body</Card.Body>
-        <Card.Footer>Card Footer</Card.Footer>
+        <Card.Header data-testid="header">Card Header</Card.Header>
+        <Card.Body data-testid="body">Card Body</Card.Body>
+        <Card.Footer data-testid="footer">Card Footer</Card.Footer>
       </Card.Root>,
     )
 
-    expect(page.getByTestId("root").element().tagName).toBe("ARTICLE")
-    expect(page.getByText("Card Header").element().tagName).toBe("HEADER")
-    expect(page.getByText("Card Body").element().tagName).toBe("DIV")
-    expect(page.getByText("Card Footer").element().tagName).toBe("FOOTER")
+    await expect
+      .poll(() => page.getByTestId("root").element().tagName)
+      .toBe("ARTICLE")
+    await expect.element(page.getByRole("banner")).toBeInTheDocument()
+    await expect
+      .poll(() => page.getByTestId("header").element().tagName)
+      .toBe("HEADER")
+    await expect
+      .poll(() => page.getByTestId("body").element().tagName)
+      .toBe("DIV")
+    await expect.element(page.getByRole("contentinfo")).toBeInTheDocument()
+    await expect
+      .poll(() => page.getByTestId("footer").element().tagName)
+      .toBe("FOOTER")
   })
 })

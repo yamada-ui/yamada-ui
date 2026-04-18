@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Box } from "../box"
 import { VStack } from "./v-stack"
 
@@ -17,20 +17,22 @@ describe("<VStack />", () => {
     expect(VStack.displayName).toBe("StackVertical")
   })
 
-  test("sets `className` correctly", () => {
-    render(<TestComponent />)
-    expect(screen.getByTestId("v-stack")).toHaveClass("ui-stack--vertical")
+  test("sets `className` correctly", async () => {
+    await render(<TestComponent />)
+    await expect
+      .element(page.getByTestId("v-stack"))
+      .toHaveClass("ui-stack--vertical")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<TestComponent />)
-    expect(screen.getByTestId("v-stack").tagName).toBe("DIV")
+  test("renders HTML tag correctly", async () => {
+    await render(<TestComponent />)
+    expect(page.getByTestId("v-stack").element().tagName).toBe("DIV")
   })
 
-  test("renders v-stack correctly", () => {
-    render(<TestComponent />)
+  test("renders v-stack correctly", async () => {
+    await render(<TestComponent />)
 
-    expect(screen.getByTestId("v-stack")).toHaveStyle({
+    await expect.element(page.getByTestId("v-stack")).toHaveStyle({
       flexDirection: "column",
     })
   })

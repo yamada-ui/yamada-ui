@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Center } from "./center"
 
 describe("<Center />", () => {
@@ -10,13 +10,15 @@ describe("<Center />", () => {
     expect(Center.displayName).toBe("Center")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Center>Center</Center>)
-    expect(screen.getByText("Center")).toHaveClass("ui-center")
+  test("sets `className` correctly", async () => {
+    await render(<Center>Center</Center>)
+
+    await expect.element(page.getByText("Center")).toHaveClass("ui-center")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Center>Center</Center>)
-    expect(screen.getByText("Center").tagName).toBe("DIV")
+  test("renders HTML tag correctly", async () => {
+    await render(<Center>Center</Center>)
+
+    expect(page.getByText("Center").element().tagName).toBe("DIV")
   })
 })

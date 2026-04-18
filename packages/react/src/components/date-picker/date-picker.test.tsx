@@ -637,7 +637,9 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    expect(page.getByText(/;/).element()).toBeInTheDocument()
+    expect(
+      (page.getByRole("combobox").elements()[0] as HTMLElement).textContent,
+    ).toContain(";")
   })
 
   test("handles max for multiple mode", async () => {
@@ -1368,7 +1370,9 @@ describe("<DatePicker />", () => {
     )
 
     // Range uses separator between inputs
-    expect(page.getByText("~").element()).toBeInTheDocument()
+    expect(
+      (page.getByRole("combobox").elements()[0] as HTMLElement).textContent,
+    ).toContain("~")
   })
 
   test("handles Enter key on range end input with existing start value", async () => {

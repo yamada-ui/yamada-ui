@@ -537,11 +537,11 @@ describe("<DatePicker />", () => {
     )
 
     const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
+    fireEvent.focus(input)
     fireEvent.change(input, { target: { value: "2024-01-15" } })
+    fireEvent.keyDown(input, { key: "Enter" })
 
-    await vi.waitFor(() => {
-      expect(document.querySelector('[role="dialog"]')).not.toBeInTheDocument()
-    })
+    await expect.element(page.getByRole("dialog")).not.toBeInTheDocument()
   })
 
   test("handles closeOnChange as function", async () => {
@@ -555,11 +555,11 @@ describe("<DatePicker />", () => {
     )
 
     const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
+    fireEvent.focus(input)
     fireEvent.change(input, { target: { value: "2024-01-15" } })
+    fireEvent.keyDown(input, { key: "Enter" })
 
-    await vi.waitFor(() => {
-      expect(document.querySelector('[role="dialog"]')).not.toBeInTheDocument()
-    })
+    await expect.element(page.getByRole("dialog")).not.toBeInTheDocument()
   })
 
   test("handles openOnChange as function", async () => {
@@ -782,9 +782,7 @@ describe("<DatePicker />", () => {
 
     // After clear, no tags should remain
     await vi.waitFor(() => {
-      expect(
-        page.getByText(/January 15, 2024/).elements()[0],
-      ).not.toBeInTheDocument()
+      expect(page.getByText(/January 15, 2024/).elements()).toHaveLength(0)
     })
   })
 
@@ -900,13 +898,21 @@ describe("<DatePicker />", () => {
   })
 
   test("handles onMouseDown when openOnFocus is true", async () => {
-    await render(<DatePicker placeholder="Select date" />)
+    const onMouseDown = vi.fn()
 
-    const field = page.getByRole("combobox").elements()[0] as HTMLElement
-    fireEvent.mouseDown(field)
+    document.addEventListener("mousedown", onMouseDown)
 
-    // mouseDown should be prevented and stopped
-    expect(field).toBeInTheDocument()
+    try {
+      await render(<DatePicker placeholder="Select date" />)
+
+      const field = page.getByRole("combobox").elements()[0] as HTMLElement
+      expect(fireEvent.mouseDown(field)).toBeFalsy()
+
+      // mouseDown should be prevented and stopped
+      expect(onMouseDown).not.toHaveBeenCalled()
+    } finally {
+      document.removeEventListener("mousedown", onMouseDown)
+    }
   })
 
   test("handles clear icon keyboard events", async () => {
@@ -1145,9 +1151,9 @@ describe("<DatePicker />", () => {
     fireEvent.click(tag)
 
     await vi.waitFor(() => {
-      expect(
-        page.getByTestId("tag-January 15, 2024").elements()[0],
-      ).not.toBeInTheDocument()
+      expect(page.getByTestId("tag-January 15, 2024").elements()).toHaveLength(
+        0,
+      )
       expect(
         page.getByTestId("tag-January 16, 2024").element(),
       ).toBeInTheDocument()

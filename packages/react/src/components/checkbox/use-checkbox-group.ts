@@ -4,6 +4,7 @@ import type { ChangeEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { useCallback } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import {
   ariaAttr,
@@ -106,15 +107,20 @@ export const useCheckboxGroup = <Y extends string = string>(
       "aria-describedby": ariaDescribedby,
       "aria-labelledby": ariaLabelledby,
       ...props
-    } = {}) => ({
-      ...dataProps,
-      "aria-describedby": cx(ariaDescribedbyProp, ariaDescribedby),
-      "aria-labelledby": cx(labelId, ariaLabelledby),
-      role: "group",
-      ...rest,
-      ...props,
-      ref: mergeRefs(ref, rest.ref),
-    }),
+    } = {}) =>
+      mergeProps(
+        dataProps,
+        {
+          "aria-describedby": cx(ariaDescribedbyProp, ariaDescribedby),
+          "aria-labelledby": cx(labelId, ariaLabelledby),
+          role: "group",
+        },
+        rest,
+        props,
+        {
+          ref: mergeRefs(ref, rest.ref),
+        },
+      )(),
     [ariaDescribedbyProp, dataProps, labelId, rest],
   )
 

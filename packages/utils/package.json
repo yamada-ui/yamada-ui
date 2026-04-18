@@ -39,8 +39,8 @@
     "typetrace": "tsc --noEmit --generateTrace ./trace --incremental false",
     "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
     "lint": "eslint . --max-warnings=0 --cache",
-    "format": "prettier . --ignore-path ../../.prettierignore --check --cache",
-    "quality": "pnpm format && pnpm lint && pnpm typecheck && pnpm test",
+    "format": "pnpm -w format packages/utils",
+    "quality": "pnpm -w format packages/utils && pnpm lint && pnpm typecheck && pnpm test",
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },

@@ -20,9 +20,6 @@
         "../packages/workspace/src/prettier/**"
       ]
     },
-    "format": {
-      "dependsOn": ["build:content"]
-    },
     "lint": {
       "dependsOn": ["build:content"]
     },

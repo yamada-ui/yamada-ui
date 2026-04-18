@@ -1,0 +1,23 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "bracketSpacing": true,
+  "jsxSingleQuote": false,
+  "printWidth": 80,
+  "semi": false,
+  "singleQuote": false,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "sortPackageJson": false,
+  "ignorePatterns": [
+    ".turbo",
+    ".next",
+    ".velite",
+    "dist",
+    "trace",
+    "node_modules",
+    "pnpm-lock.yaml",
+    "coverage",
+    "storybook-static",
+    "routeTree.gen.ts"
+  ]
+}

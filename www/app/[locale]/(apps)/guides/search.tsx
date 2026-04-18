@@ -269,8 +269,7 @@ function SearchContentBody({
     () => new Map(contents.map((content) => [content.pathname, content])),
     [contents],
   )
-
-  const [hits, setHits] = useState<Hit[]>(getGuides(locale))
+  const [hits, setHits] = useState<Hit[]>(() => getGuides(locale))
   const maxIndex = Math.ceil(hits.length / PER_PAGE) - 1
   const [count, setCount] = useState(PER_PAGE)
   const list = useMemo(() => hits.slice(0, count), [hits, count])
@@ -285,7 +284,7 @@ function SearchContentBody({
     startTransition(() => {
       resetRef.current()
 
-      let hits: Hit[] = []
+      let hits: Hit[] = contents
 
       if (value.length) {
         const localeHits = matchSorter(contents, value, { keys: SEARCH_KEYS })

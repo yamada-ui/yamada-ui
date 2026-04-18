@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Image } from "./image"
 
 const src = "https://image.xyz/source"
@@ -12,19 +12,23 @@ describe("<Image />", () => {
     expect(Image.displayName).toBe("Image")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Image src={src} />)
-    expect(screen.getByRole("img")).toHaveClass("ui-image")
+  test("sets `className` correctly", async () => {
+    await render(<Image src={src} />)
+
+    await expect.element(page.getByRole("img")).toHaveClass("ui-image")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Image src={src} />)
-    expect(screen.getByRole("img").tagName).toBe("IMG")
+  test("renders HTML tag correctly", async () => {
+    await render(<Image src={src} />)
+
+    const img = page.getByRole("img").element()
+
+    expect(img).toBeInstanceOf(HTMLImageElement)
   })
 
-  test("renders image if there is no fallback behavior defined", () => {
-    render(<Image src={src} />)
+  test("renders image if there is no fallback behavior defined", async () => {
+    await render(<Image src={src} />)
 
-    expect(screen.getByRole("img")).toHaveAttribute("src", src)
+    await expect.element(page.getByRole("img")).toHaveAttribute("src", src)
   })
 })

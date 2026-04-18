@@ -21,7 +21,9 @@ describe("<Image />", () => {
   test("renders HTML tag correctly", async () => {
     await render(<Image src={src} />)
 
-    expect(page.getByRole("img").element().tagName).toBe("IMG")
+    const img = page.getByRole("img").element()
+
+    expect(img).toBeInstanceOf(HTMLImageElement)
   })
 
   test("renders image if there is no fallback behavior defined", async () => {

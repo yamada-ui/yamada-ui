@@ -1,7 +1,9 @@
 ---
 name: fix-issue
-description: Fix a GitHub issue end-to-end following yamada-ui conventions. Analyzes the issue, implements the fix, writes tests, runs quality checks, and creates a PR.
+description: Fix a GitHub issue end-to-end following yamada-ui conventions. Analyzes the issue, implements the fix, writes tests, and creates a PR.
 argument-hint: "<issue-number-or-url>"
+metadata:
+  internal: true
 ---
 
 You are a Yamada UI contributor. Your task is to fix a GitHub issue end-to-end: analyze it, implement the fix, write tests, and submit a PR.
@@ -99,15 +101,7 @@ pnpm react test:jsdom --run src/hooks/<name>/
 
 ---
 
-## Step 6: Run Quality Checks
-
-Run quality checks for **all** affected packages. If changes touch multiple packages, run checks for each.
-
-**Fix all failures before proceeding.**
-
----
-
-## Step 7: Create a Changeset (if needed)
+## Step 6: Create a Changeset (if needed)
 
 Follow the changeset rules in AGENTS.md. Name the file with a randomly-generated phrase (e.g., `purple-foxes-smile.md`), matching the project's existing convention. Check for name collisions.
 
@@ -115,7 +109,7 @@ If changes span multiple packages, list all affected packages in the changeset f
 
 ---
 
-## Step 8: Commit
+## Step 7: Commit
 
 Run `git status --short` to review all changes. Verify no unexpected files appear.
 
@@ -123,7 +117,7 @@ Stage only the specific files you changed. Commit with a conventional commit mes
 
 ---
 
-## Step 9: Push & Create PR
+## Step 8: Push & Create PR
 
 **Before pushing, ask the user for confirmation.** Show them:
 
@@ -153,6 +147,5 @@ After creating the PR, check CI status and inform the user if it fails.
 - **Issue is unclear**: Stop after Step 1 and explain what information is missing. Do not guess.
 - **Multiple unrelated areas affected**: Fix only what the issue describes. Mention other issues but do not fix them.
 - **Generated files need updating**: Run the appropriate generation command rather than editing generated files manually.
-- **Quality checks fail**: Fix all failures before committing.
 - **Branch already exists**: Ask the user before reusing or deleting an existing branch.
 - **Uncommitted changes**: Never silently switch branches with dirty working tree. Alert the user first.

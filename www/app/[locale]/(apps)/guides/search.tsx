@@ -225,6 +225,7 @@ function SearchInput({
       onCompositionStart={() => {
         compositionRef.current = true
       }}
+      onFocus={onOpen}
       onKeyDown={onKeyDown}
     />
   )

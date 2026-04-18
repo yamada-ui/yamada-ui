@@ -42,7 +42,12 @@ describe("<CloseButton />", () => {
   test("should not call onClick", async () => {
     const onClickMock = vi.fn()
     await render(<CloseButton disabled onClick={onClickMock} />)
-    ;(page.getByRole("button").element() as HTMLElement).click()
+
+    const button = page.getByRole("button").element()
+    if (!(button instanceof HTMLElement))
+      throw new Error("expected HTMLElement")
+
+    button.click()
 
     expect(onClickMock).toHaveBeenCalledTimes(0)
   })

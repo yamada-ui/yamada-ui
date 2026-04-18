@@ -270,7 +270,7 @@ function SearchContentBody({
     [contents],
   )
 
-  const [hits, setHits] = useState<Hit[]>([])
+  const [hits, setHits] = useState<Hit[]>(getGuides(locale))
   const maxIndex = Math.ceil(hits.length / PER_PAGE) - 1
   const [count, setCount] = useState(PER_PAGE)
   const list = useMemo(() => hits.slice(0, count), [hits, count])

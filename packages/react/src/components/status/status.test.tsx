@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Status } from "."
 
 const TestComponent = () => (
@@ -20,22 +20,31 @@ describe("<Status />", () => {
     expect(Status.displayName).toBe("StatusRoot")
   })
 
-  test("sets `className` correctly", () => {
-    render(<TestComponent />)
-    expect(screen.getByTestId("root")).toHaveClass("ui-status__root")
-    expect(screen.getByTestId("label")).toHaveClass("ui-status__label")
-    expect(screen.getByTestId("indicator")).toHaveClass("ui-status__indicator")
+  test("sets `className` correctly", async () => {
+    await render(<TestComponent />)
+
+    await expect
+      .element(page.getByTestId("root"))
+      .toHaveClass("ui-status__root")
+    await expect
+      .element(page.getByTestId("label"))
+      .toHaveClass("ui-status__label")
+    await expect
+      .element(page.getByTestId("indicator"))
+      .toHaveClass("ui-status__indicator")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<TestComponent />)
-    expect(screen.getByTestId("root").tagName).toBe("DIV")
-    expect(screen.getByTestId("label").tagName).toBe("P")
-    expect(screen.getByTestId("indicator").tagName).toBe("DIV")
+  test("renders HTML tag correctly", async () => {
+    await render(<TestComponent />)
+
+    expect(page.getByTestId("root").element().tagName).toBe("DIV")
+    expect(page.getByTestId("label").element().tagName).toBe("P")
+    expect(page.getByTestId("indicator").element().tagName).toBe("DIV")
   })
 
-  test("Status with Label renders correctly", () => {
-    render(<Status>Info</Status>)
-    expect(screen.getByText("Info")).toBeInTheDocument()
+  test("Status with Label renders correctly", async () => {
+    await render(<Status>Info</Status>)
+
+    await expect.element(page.getByText("Info")).toBeInTheDocument()
   })
 })

@@ -1,5 +1,6 @@
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useMemo } from "react"
+import { mergeProps } from "../../core"
 import { isUndefined, useValidChildren } from "../../utils"
 
 export interface UseAvatarGroupProps extends HTMLProps {
@@ -23,7 +24,7 @@ export const useAvatarGroup = ({
   const excess = !isUndefined(max) ? validChildren.length - max : 0
 
   const getRootProps: PropGetter = useCallback(
-    (props) => ({ ...rest, ...props, role: "group" }),
+    (props) => mergeProps({ role: "group" }, rest, props)(),
     [rest],
   )
 

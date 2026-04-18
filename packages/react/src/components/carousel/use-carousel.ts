@@ -14,6 +14,7 @@ import type {
 } from "../../core"
 import useEmblaCarousel from "embla-carousel-react"
 import { useCallback, useEffect, useRef, useState } from "react"
+import { mergeProps } from "../../core"
 import { useBoolean } from "../../hooks/use-boolean"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"
@@ -410,16 +411,21 @@ export const useCarousel = ({
   ])
 
   const getRootProps: PropGetter<"section"> = useCallback(
-    ({ ref, ...props } = {}) => ({
-      id,
-      "aria-roledescription": "carousel",
-      "data-orientation": orientation,
-      ...rest,
-      ...props,
-      ref: mergeRefs(ref, rest.ref),
-      onMouseEnter: handlerAll(props.onMouseEnter, onMouseEnter),
-      onMouseLeave: handlerAll(props.onMouseLeave, onMouseLeave),
-    }),
+    ({ ref, ...props } = {}) =>
+      mergeProps(
+        {
+          id,
+          "aria-roledescription": "carousel",
+          "data-orientation": orientation,
+        },
+        rest,
+        props,
+        {
+          ref: mergeRefs(ref, rest.ref),
+          onMouseEnter,
+          onMouseLeave,
+        },
+      )(),
     [id, onMouseEnter, onMouseLeave, rest, orientation],
   )
 

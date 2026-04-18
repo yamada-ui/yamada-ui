@@ -39,7 +39,7 @@ describe("<Editable />", () => {
     const preview = getByTestId("EditablePreview")
     const input = getByTestId("EditableInput")
 
-    await user.tab()
+    await user.click(preview)
     await expect.element(input).toBeVisible()
     await expect.element(input).toHaveFocus()
     await input.fill("Updated text")
@@ -88,20 +88,17 @@ describe("<Editable />", () => {
   test("calls onCancel when Escape is pressed", async () => {
     const onCancel = vi.fn()
     const { getByTestId, user } = await render(
-      <Editable.Root
-        defaultValue="Some text"
-        startWithEditView
-        onCancel={onCancel}
-      >
-        <Editable.Preview />
+      <Editable.Root defaultValue="Some text" onCancel={onCancel}>
+        <Editable.Preview data-testid="EditablePreview" />
         <Editable.Input data-testid="EditableInput" />
       </Editable.Root>,
     )
 
+    const preview = getByTestId("EditablePreview")
     const input = getByTestId("EditableInput")
 
+    await user.click(preview)
     await expect.element(input).toBeVisible()
-    await user.click(input)
     await expect.element(input).toHaveFocus()
     await user.keyboard("{Escape}")
 
@@ -112,20 +109,18 @@ describe("<Editable />", () => {
   test("calls onSubmit when Enter is pressed", async () => {
     const onSubmit = vi.fn()
     const { getByTestId, user } = await render(
-      <Editable.Root
-        defaultValue="Some text"
-        startWithEditView
-        onSubmit={onSubmit}
-      >
+      <Editable.Root defaultValue="Some text" onSubmit={onSubmit}>
         <Editable.Preview data-testid="EditablePreview" />
         <Editable.Input data-testid="EditableInput" />
       </Editable.Root>,
     )
 
+    const preview = getByTestId("EditablePreview")
     const input = getByTestId("EditableInput")
 
+    await user.click(preview)
     await expect.element(input).toBeVisible()
-    await user.click(input)
+    await expect.element(input).toHaveFocus()
     await user.keyboard("{Enter}")
 
     expect(onSubmit).toHaveBeenCalledExactlyOnceWith("Some text")
@@ -134,20 +129,17 @@ describe("<Editable />", () => {
   test("does not call onSubmit when Enter is pressed with Shift or Meta", async () => {
     const onSubmit = vi.fn()
     const { getByTestId, user } = await render(
-      <Editable.Root
-        defaultValue="Some text"
-        startWithEditView
-        onSubmit={onSubmit}
-      >
-        <Editable.Preview />
+      <Editable.Root defaultValue="Some text" onSubmit={onSubmit}>
+        <Editable.Preview data-testid="EditablePreview" />
         <Editable.Input data-testid="EditableInput" />
       </Editable.Root>,
     )
 
+    const preview = getByTestId("EditablePreview")
     const input = getByTestId("EditableInput")
 
+    await user.click(preview)
     await expect.element(input).toBeVisible()
-    await user.click(input)
     await expect.element(input).toHaveFocus()
     await user.keyboard("{Shift>}{Enter}{/Shift}")
     await user.keyboard("{Meta>}{Enter}{/Meta}")

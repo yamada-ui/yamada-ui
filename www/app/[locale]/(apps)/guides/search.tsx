@@ -322,6 +322,7 @@ function SearchContentBody({
   return (
     <InfiniteScrollArea
       ref={ref}
+      disabled={hits.length <= count}
       gap="sm"
       loading={<Loading.Oval fontSize="2xl" />}
       maxH="44.5rem"

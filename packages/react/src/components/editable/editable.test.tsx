@@ -1,4 +1,4 @@
-import { a11y, page, render } from "#test/browser"
+import { a11y, render } from "#test/browser"
 import { Editable } from "./"
 
 describe("<Editable />", () => {
@@ -12,22 +12,20 @@ describe("<Editable />", () => {
   })
 
   test("should render editable component", async () => {
-    await render(
+    const { getByTestId } = await render(
       <Editable.Root data-testid="Editable" defaultValue="Some text">
         <Editable.Preview data-testid="EditablePreview" />
         <Editable.Input data-testid="EditableInput" />
       </Editable.Root>,
     )
 
-    await expect.element(page.getByTestId("Editable")).toBeVisible()
-    await expect.element(page.getByTestId("EditablePreview")).toBeVisible()
-    await expect
-      .element(page.getByTestId("EditableInput"))
-      .toHaveValue("Some text")
+    await expect.element(getByTestId("Editable")).toBeVisible()
+    await expect.element(getByTestId("EditablePreview")).toBeVisible()
+    await expect.element(getByTestId("EditableInput")).toHaveValue("Some text")
   })
 
   test("should render with preview focusable", async () => {
-    const { user } = await render(
+    const { getByTestId, user } = await render(
       <Editable.Root
         data-testid="Editable"
         defaultValue="Some text"
@@ -38,20 +36,20 @@ describe("<Editable />", () => {
       </Editable.Root>,
     )
 
-    const preview = page.getByTestId("EditablePreview")
-    const input = page.getByTestId("EditableInput")
+    const preview = getByTestId("EditablePreview")
+    const input = getByTestId("EditableInput")
 
-    await user.click(preview)
+    await user.tab()
     await expect.element(input).toBeVisible()
-    await user.clear(input)
-    await user.type(input, "Updated text")
+    await expect.element(input).toHaveFocus()
+    await input.fill("Updated text")
 
     await expect.element(preview).toHaveTextContent("Updated text")
     await expect.element(input).toHaveValue("Updated text")
   })
 
   test("should render with placeholder", async () => {
-    await render(
+    const { getByTestId } = await render(
       <Editable.Root placeholder="Enter some text">
         <Editable.Preview />
         <Editable.Input data-testid="EditableInput" />
@@ -59,23 +57,23 @@ describe("<Editable />", () => {
     )
 
     await expect
-      .element(page.getByTestId("EditableInput"))
+      .element(getByTestId("EditableInput"))
       .toHaveAttribute("placeholder", "Enter some text")
   })
 
   test("should disable the input", async () => {
-    await render(
+    const { getByTestId } = await render(
       <Editable.Root defaultValue="Some text" disabled>
         <Editable.Preview />
         <Editable.Input data-testid="EditableInput" />
       </Editable.Root>,
     )
 
-    await expect.element(page.getByTestId("EditableInput")).toBeDisabled()
+    await expect.element(getByTestId("EditableInput")).toBeDisabled()
   })
 
   test("should make the input readOnly", async () => {
-    await render(
+    const { getByTestId } = await render(
       <Editable.Root defaultValue="Some text" readOnly>
         <Editable.Preview />
         <Editable.Input data-testid="EditableInput" />
@@ -83,13 +81,13 @@ describe("<Editable />", () => {
     )
 
     await expect
-      .element(page.getByTestId("EditableInput"))
+      .element(getByTestId("EditableInput"))
       .toHaveProperty("readOnly", true)
   })
 
   test("calls onCancel when Escape is pressed", async () => {
     const onCancel = vi.fn()
-    const { user } = await render(
+    const { getByTestId, user } = await render(
       <Editable.Root
         defaultValue="Some text"
         startWithEditView
@@ -100,10 +98,11 @@ describe("<Editable />", () => {
       </Editable.Root>,
     )
 
-    const input = page.getByTestId("EditableInput")
+    const input = getByTestId("EditableInput")
 
     await expect.element(input).toBeVisible()
     await user.click(input)
+    await expect.element(input).toHaveFocus()
     await user.keyboard("{Escape}")
 
     await expect.poll(() => onCancel.mock.calls.length).toBe(1)
@@ -112,7 +111,7 @@ describe("<Editable />", () => {
 
   test("calls onSubmit when Enter is pressed", async () => {
     const onSubmit = vi.fn()
-    const { user } = await render(
+    const { getByTestId, user } = await render(
       <Editable.Root
         defaultValue="Some text"
         startWithEditView
@@ -123,7 +122,7 @@ describe("<Editable />", () => {
       </Editable.Root>,
     )
 
-    const input = page.getByTestId("EditableInput")
+    const input = getByTestId("EditableInput")
 
     await expect.element(input).toBeVisible()
     await user.click(input)
@@ -134,7 +133,7 @@ describe("<Editable />", () => {
 
   test("does not call onSubmit when Enter is pressed with Shift or Meta", async () => {
     const onSubmit = vi.fn()
-    const { user } = await render(
+    const { getByTestId, user } = await render(
       <Editable.Root
         defaultValue="Some text"
         startWithEditView
@@ -145,23 +144,20 @@ describe("<Editable />", () => {
       </Editable.Root>,
     )
 
-    const input = page.getByTestId("EditableInput")
+    const input = getByTestId("EditableInput")
 
     await expect.element(input).toBeVisible()
     await user.click(input)
-    await user.keyboard("{Shift>}")
-    await user.keyboard("{Enter}")
-    await user.keyboard("{/Shift}")
-    await user.keyboard("{Meta>}")
-    await user.keyboard("{Enter}")
-    await user.keyboard("{/Meta}")
+    await expect.element(input).toHaveFocus()
+    await user.keyboard("{Shift>}{Enter}{/Shift}")
+    await user.keyboard("{Meta>}{Enter}{/Meta}")
 
     expect(onSubmit).not.toHaveBeenCalled()
   })
 
   test("calls onChange when input value changes", async () => {
     const onChange = vi.fn()
-    const { user } = await render(
+    const { getByTestId, user } = await render(
       <Editable.Root
         defaultValue="Some text"
         startWithEditView
@@ -172,19 +168,19 @@ describe("<Editable />", () => {
       </Editable.Root>,
     )
 
-    const input = page.getByTestId("EditableInput")
+    const input = getByTestId("EditableInput")
 
     await expect.element(input).toBeVisible()
     await user.click(input)
-    await user.clear(input)
-    await user.type(input, "New text")
+    await expect.element(input).toHaveFocus()
+    await input.fill("New text")
 
     await expect.poll(() => onChange.mock.calls.at(-1)?.[0]).toBe("New text")
     expect(onChange).toHaveBeenLastCalledWith("New text")
   })
 
   test("focuses out of the input when editing ends", async () => {
-    const { user } = await render(
+    const { getByTestId, user } = await render(
       <Editable.Root
         defaultValue="Some text"
         selectAllOnFocus
@@ -195,7 +191,7 @@ describe("<Editable />", () => {
       </Editable.Root>,
     )
 
-    const input = page.getByTestId("EditableInput")
+    const input = getByTestId("EditableInput")
 
     await expect.element(input).toBeVisible()
     await user.click(input)
@@ -206,29 +202,29 @@ describe("<Editable />", () => {
 
   test("calls onEdit when editing starts", async () => {
     const onEdit = vi.fn()
-    const { user } = await render(
+    const { getByTestId, user } = await render(
       <Editable.Root defaultValue="Some text" onEdit={onEdit}>
         <Editable.Preview data-testid="EditablePreview" />
         <Editable.Input />
       </Editable.Root>,
     )
 
-    await user.click(page.getByTestId("EditablePreview"))
+    await user.click(getByTestId("EditablePreview"))
 
     expect(onEdit).toHaveBeenCalledExactlyOnceWith()
   })
 
   test("focus and calls onCancel when Escape is pressed", async () => {
     const onCancel = vi.fn()
-    const { user } = await render(
+    const { getByTestId, user } = await render(
       <Editable.Root defaultValue="Some text" onCancel={onCancel}>
         <Editable.Preview data-testid="EditablePreview" />
         <Editable.Input data-testid="EditableInput" />
       </Editable.Root>,
     )
 
-    const preview = page.getByTestId("EditablePreview")
-    const input = page.getByTestId("EditableInput")
+    const preview = getByTestId("EditablePreview")
+    const input = getByTestId("EditableInput")
 
     await user.click(preview)
     await expect.element(input).toBeVisible()
@@ -240,7 +236,7 @@ describe("<Editable />", () => {
   test("focus and calls onSubmit when Enter is pressed", async () => {
     const onCancel = vi.fn()
     const onSubmit = vi.fn()
-    const { user } = await render(
+    const { getByTestId, user } = await render(
       <Editable.Root
         defaultValue="Some text"
         submitOnBlur
@@ -252,8 +248,8 @@ describe("<Editable />", () => {
       </Editable.Root>,
     )
 
-    const preview = page.getByTestId("EditablePreview")
-    const input = page.getByTestId("EditableInput")
+    const preview = getByTestId("EditablePreview")
+    const input = getByTestId("EditableInput")
 
     await user.click(preview)
     await expect.element(input).toBeVisible()
@@ -266,7 +262,7 @@ describe("<Editable />", () => {
   test("calls onSubmit when onBlur is triggered with submitOnBlur", async () => {
     const onCancel = vi.fn()
     const onSubmit = vi.fn()
-    const { user } = await render(
+    const { getByTestId, user } = await render(
       <>
         <Editable.Root
           defaultValue="Some text"
@@ -283,12 +279,12 @@ describe("<Editable />", () => {
       </>,
     )
 
-    const preview = page.getByTestId("EditablePreview")
-    const input = page.getByTestId("EditableInput")
+    const preview = getByTestId("EditablePreview")
+    const input = getByTestId("EditableInput")
 
     await user.click(preview)
     await expect.element(input).toBeVisible()
-    await user.click(page.getByTestId("Outside"))
+    await user.click(getByTestId("Outside"))
 
     expect(onSubmit).toHaveBeenCalledExactlyOnceWith("Some text")
     expect(onCancel).not.toHaveBeenCalled()
@@ -297,7 +293,7 @@ describe("<Editable />", () => {
   test("calls onCancel when onBlur", async () => {
     const onCancel = vi.fn()
     const onSubmit = vi.fn()
-    const { user } = await render(
+    const { getByTestId, user } = await render(
       <>
         <Editable.Root
           defaultValue="Some text"
@@ -314,19 +310,19 @@ describe("<Editable />", () => {
       </>,
     )
 
-    const preview = page.getByTestId("EditablePreview")
-    const input = page.getByTestId("EditableInput")
+    const preview = getByTestId("EditablePreview")
+    const input = getByTestId("EditableInput")
 
     await user.click(preview)
     await expect.element(input).toBeVisible()
-    await user.click(page.getByTestId("Outside"))
+    await user.click(getByTestId("Outside"))
 
     expect(onSubmit).not.toHaveBeenCalled()
     expect(onCancel).toHaveBeenCalledExactlyOnceWith("Some text")
   })
 
   test("initially in correct edit mode", async () => {
-    await render(
+    const { getByTestId } = await render(
       <Editable.Root
         data-testid="Editable"
         defaultValue="Some text"
@@ -337,7 +333,7 @@ describe("<Editable />", () => {
       </Editable.Root>,
     )
 
-    await expect.element(page.getByTestId("EditableInput")).toBeVisible()
+    await expect.element(getByTestId("EditableInput")).toBeVisible()
   })
 
   test("supports children as a function", async () => {
@@ -348,7 +344,7 @@ describe("<Editable />", () => {
         {editing ? <span data-testid="editing-indicator" /> : null}
       </>
     ))
-    const { user } = await render(
+    const { getByTestId, user } = await render(
       <Editable.Root defaultValue="Some text">{childrenFn}</Editable.Root>,
     )
 
@@ -360,31 +356,29 @@ describe("<Editable />", () => {
         onSubmit: expect.any(Function),
       }),
     )
-    expect(page.getByTestId("editing-indicator").query()).toBeNull()
+    expect(getByTestId("editing-indicator").query()).toBeNull()
 
-    await user.click(page.getByTestId("EditablePreview"))
+    await user.click(getByTestId("EditablePreview"))
 
-    await expect
-      .element(page.getByTestId("editing-indicator"))
-      .toBeInTheDocument()
+    await expect.element(getByTestId("editing-indicator")).toBeInTheDocument()
   })
 })
 
 describe("<EditableTextarea />", () => {
   test("renders correctly", async () => {
-    await render(
+    const { getByTestId } = await render(
       <Editable.Root defaultValue="Some text">
         <Editable.Textarea data-testid="EditableTextarea" />
       </Editable.Root>,
     )
 
-    const textarea = page.getByTestId("EditableTextarea")
+    const textarea = getByTestId("EditableTextarea")
 
     await expect.element(textarea).toHaveValue("Some text")
   })
 
   test("applies custom className", async () => {
-    await render(
+    const { getByTestId } = await render(
       <Editable.Root defaultValue="Some text">
         <Editable.Textarea
           className="custom-class"
@@ -394,13 +388,13 @@ describe("<EditableTextarea />", () => {
     )
 
     await expect
-      .element(page.getByTestId("EditableTextarea"))
+      .element(getByTestId("EditableTextarea"))
       .toHaveClass("custom-class")
   })
 
   test("calls onCancel when Escape is pressed in textarea", async () => {
     const onCancel = vi.fn()
-    const { user } = await render(
+    const { getByTestId, user } = await render(
       <Editable.Root
         defaultValue="Some text"
         startWithEditView
@@ -411,7 +405,7 @@ describe("<EditableTextarea />", () => {
       </Editable.Root>,
     )
 
-    const textarea = page.getByTestId("EditableTextarea")
+    const textarea = getByTestId("EditableTextarea")
 
     await expect.element(textarea).toBeVisible()
     await user.click(textarea)
@@ -422,7 +416,7 @@ describe("<EditableTextarea />", () => {
 
   test("does not submit when Enter is pressed in textarea", async () => {
     const onSubmit = vi.fn()
-    const { user } = await render(
+    const { getByTestId, user } = await render(
       <Editable.Root
         defaultValue="Some text"
         startWithEditView
@@ -433,7 +427,7 @@ describe("<EditableTextarea />", () => {
       </Editable.Root>,
     )
 
-    const textarea = page.getByTestId("EditableTextarea")
+    const textarea = getByTestId("EditableTextarea")
 
     await expect.element(textarea).toBeVisible()
     await user.click(textarea)
@@ -445,7 +439,7 @@ describe("<EditableTextarea />", () => {
 
 describe("<EditableControl />", () => {
   test("renders correctly with role group", async () => {
-    await render(
+    const { getByTestId } = await render(
       <Editable.Root defaultValue="Some text">
         <Editable.Control data-testid="EditableControl">
           <Editable.Preview />
@@ -455,7 +449,7 @@ describe("<EditableControl />", () => {
     )
 
     await expect
-      .element(page.getByTestId("EditableControl"))
+      .element(getByTestId("EditableControl"))
       .toHaveAttribute("role", "group")
   })
 })
@@ -463,7 +457,7 @@ describe("<EditableControl />", () => {
 describe("<EditableEditTrigger />", () => {
   test("renders and triggers edit mode on click", async () => {
     const onEdit = vi.fn()
-    const { user } = await render(
+    const { getByRole, getByTestId, user } = await render(
       <Editable.Root defaultValue="Some text" onEdit={onEdit}>
         <Editable.Preview />
         <Editable.Input data-testid="EditableInput" />
@@ -473,19 +467,17 @@ describe("<EditableEditTrigger />", () => {
       </Editable.Root>,
     )
 
-    await user.click(page.getByRole("button", { name: "Edit" }))
+    await user.click(getByRole("button", { name: "Edit" }))
 
     expect(onEdit).toHaveBeenCalledExactlyOnceWith()
-    expect(page.getByTestId("EditableInput").element()).not.toHaveAttribute(
-      "hidden",
-    )
+    expect(getByTestId("EditableInput").element()).not.toHaveAttribute("hidden")
   })
 })
 
 describe("<EditableCancelTrigger />", () => {
   test("renders and triggers cancel on click", async () => {
     const onCancel = vi.fn()
-    const { user } = await render(
+    const { getByTestId, user } = await render(
       <Editable.Root
         defaultValue="Some text"
         startWithEditView
@@ -499,7 +491,7 @@ describe("<EditableCancelTrigger />", () => {
       </Editable.Root>,
     )
 
-    await user.click(page.getByRole("button", { name: "Cancel" }))
+    await user.click(getByTestId("CancelTrigger"))
 
     expect(onCancel).toHaveBeenCalledExactlyOnceWith("Some text")
   })
@@ -508,7 +500,7 @@ describe("<EditableCancelTrigger />", () => {
 describe("<EditableSubmitTrigger />", () => {
   test("renders and triggers submit on click", async () => {
     const onSubmit = vi.fn()
-    const { user } = await render(
+    const { getByRole, user } = await render(
       <Editable.Root
         defaultValue="Some text"
         startWithEditView
@@ -522,7 +514,7 @@ describe("<EditableSubmitTrigger />", () => {
       </Editable.Root>,
     )
 
-    await user.click(page.getByRole("button", { name: "Submit" }))
+    await user.click(getByRole("button", { name: "Submit" }))
 
     expect(onSubmit).toHaveBeenCalledExactlyOnceWith("Some text")
   })

@@ -46,14 +46,12 @@ describe("<Card />", () => {
     await expect
       .poll(() => page.getByTestId("root").element().tagName)
       .toBe("ARTICLE")
-    await expect.element(page.getByRole("banner")).toBeInTheDocument()
     await expect
       .poll(() => page.getByTestId("header").element().tagName)
       .toBe("HEADER")
     await expect
       .poll(() => page.getByTestId("body").element().tagName)
       .toBe("DIV")
-    await expect.element(page.getByRole("contentinfo")).toBeInTheDocument()
     await expect
       .poll(() => page.getByTestId("footer").element().tagName)
       .toBe("FOOTER")

@@ -83,9 +83,17 @@ describe("<Container />", () => {
       </Container.Root>,
     )
 
-    expect(page.getByTestId("root").element().tagName).toBe("SECTION")
-    expect(page.getByTestId("header").element().tagName).toBe("HEADER")
-    expect(page.getByTestId("body").element().tagName).toBe("DIV")
-    expect(page.getByTestId("footer").element().tagName).toBe("FOOTER")
+    await expect
+      .poll(() => page.getByTestId("root").element().tagName)
+      .toBe("SECTION")
+    await expect
+      .poll(() => page.getByTestId("header").element().tagName)
+      .toBe("HEADER")
+    await expect
+      .poll(() => page.getByTestId("body").element().tagName)
+      .toBe("DIV")
+    await expect
+      .poll(() => page.getByTestId("footer").element().tagName)
+      .toBe("FOOTER")
   })
 })

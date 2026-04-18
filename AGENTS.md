@@ -7,6 +7,31 @@ Yamada UI is a React UI component library built with CSS-in-JS (Emotion).
 - **Tests are required**: Always write tests when fixing bugs or adding new features.
 - **Accessibility is required**: All components must support ARIA attributes, keyboard navigation, and screen readers. Report any concerns.
 - **Do not bundle multiple fixes**: If you encounter a separate issue while working on a fix, do not fix it in the same PR. Create a separate issue and submit a separate PR.
+- **Do not run format, lint, or typecheck unless explicitly asked**: Format and lint are handled by lefthook on commit, and all three are validated by the Quality GitHub Action on PR. Only run tests locally to verify the changes work correctly.
+
+## Rules
+
+When performing one of the actions below, read the linked rule first.
+
+- Creating commits:
+  - [Commit Rules](.agents/rules/commit.md)
+  - [Pre-commit Hooks](.agents/references/pre-commit-hooks.md)
+- Creating issues:
+  - [Issue Rules](.agents/rules/issue.md)
+- Creating PRs:
+  - [PR Rules](.agents/rules/pr.md)
+- Reviewing PRs:
+  - [PR Merge Guide](.agents/references/pr-merge-guide.md)
+  - [Review Anti-Patterns](.agents/references/review-anti-patterns/index.md)
+
+When editing or reviewing files that match a pattern below, read the linked rule first.
+
+- [Skills](.agents/rules/skills.md):
+  - `.agents/skills/**/*.md`
+  - `.claude/skills/**/*.md`
+- [Changesets](.agents/rules/changesets.md):
+  - `packages/{cli,react,utils}/src/**/*.{ts,tsx}`
+  - `.changeset/*.md`
 
 ## Codebase structure
 
@@ -127,84 +152,3 @@ pnpm react gen:icons      # Generate icon components from Lucide React
 pnpm react gen:props      # Generate prop documentation
 pnpm react gen:registries # Generate registries.
 ```
-
-## Commit Convention
-
-Follow [Conventional Commits](https://www.conventionalcommits.org) for the commit message. Write commit messages in English.
-
-**Format:** `<type>(<scope>): <description>`
-
-- `scope` is the package name, component name, or area of change (e.g., `button`, `utils`, `docs`, `deps`, `changesets`).
-- `description` starts with a lowercase verb.
-
-**Examples:**
-
-```
-fix(accordion): remove redundant dependencies from memo
-feat(number-input): improve number input test coverage
-refactor(apps/icons): update loading indicator and constants
-docs(native-popover): add accessibility section
-test(table): enhance test coverage for Table component
-ci(changesets): update dev registries
-chore(deps): update codecov-action to v5
-build: add stackblitz integration and dependencies
-```
-
-## Pre-commit Hooks (lefthook)
-
-The following hooks run automatically on commit.
-
-| Hook       | Description                                                                       |
-| ---------- | --------------------------------------------------------------------------------- |
-| ESLint     | Runs with `--fix --max-warnings=0` and `stage_fixed: true` to auto-restage fixes. |
-| Prettier   | Runs with `--write` and `stage_fixed: true` to auto-restage fixes.                |
-| commitlint | Validates Conventional Commits format.                                            |
-
-`pnpm install` runs automatically on post-merge/post-checkout when `package.json` or `pnpm-lock.yaml` changes.
-
-## Changesets
-
-Required when modifying `packages/{cli,react,utils}/src/**/*.{ts,tsx}` (excluding test and story files). Create a file in `.changeset/`.
-
-```md
----
-"@yamada-ui/react": patch
----
-
-One-sentence summary of the fix in English.
-```
-
-**Bump type**
-
-- `patch`: bug fix, internal change
-- `minor`: new feature with backward compatibility
-- `major`: breaking change (alters existing API)
-
-For changes across multiple packages:
-
-```md
----
-"@yamada-ui/react": patch
-"@yamada-ui/utils": patch
----
-```
-
-## Creating Issues
-
-Templates are provided for each type. Always follow the appropriate template.
-
-- [Bug Report](./.github/ISSUE_TEMPLATE/bug_report.yml): Create a bug report.
-- [Feature Request](./.github/ISSUE_TEMPLATE/feature_request.yml): Request for features or enhancements.
-- [Documentation Report](./.github/ISSUE_TEMPLATE/documentation_report.yml): Create a report for errors or inappropriate expressions in the documentation site.
-- [Documentation Request](./.github/ISSUE_TEMPLATE/documentation_request.yml): Propose new documentation requests or improvements.
-
-## Creating PRs
-
-Read the [template](./.github/pull_request_template.md) and use its structure for the PR body. Replace the HTML comments with actual content.
-
-- Use the same format as the commit message for the title.
-- Always include `Closes #<issue-number>`.
-- Clearly state whether this is a breaking change.
-- The template includes an "AI used" section. If AI generated the PR, uncheck "I did not use AI" and check "I checked the generated content before submitting."
-
-After creating a PR, the [Quality](./.github/workflows/quality.yml) GitHub Action runs automatically to validate format, lint, typecheck, and tests. Monitor it to ensure there are no issues. If problems are found, fix them and resubmit.

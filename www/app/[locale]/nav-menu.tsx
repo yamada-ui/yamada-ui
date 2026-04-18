@@ -25,9 +25,11 @@ export function NavMenu({ items, itemProps, onClose, ...rest }: NavMenuProps) {
           fontWeight="normal"
           {...itemProps}
           onClick={handlerAll(itemProps?.onClick, () => {
-            window.scrollTo({ behavior: "instant", top: 0 })
+            if (pathname !== href) return
 
-            if (pathname === href) onClose?.()
+            onClose?.()
+
+            window.scrollTo({ behavior: "smooth", top: 0 })
           })}
         >
           {label}

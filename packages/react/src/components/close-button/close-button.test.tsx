@@ -1,3 +1,4 @@
+import { assert } from "vitest"
 import { a11y, page, render } from "#test/browser"
 import { CloseButton } from "./close-button"
 
@@ -44,8 +45,7 @@ describe("<CloseButton />", () => {
     await render(<CloseButton disabled onClick={onClickMock} />)
 
     const button = page.getByRole("button").element()
-    if (!(button instanceof HTMLElement))
-      throw new Error("expected HTMLElement")
+    assert(button instanceof HTMLElement)
 
     button.click()
 

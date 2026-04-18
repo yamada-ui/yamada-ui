@@ -46,7 +46,7 @@ jobs:
 
       - name: Setup Browser
         if: steps.check-modified.outputs.any_changed == 'true'
-        run: pnpm react exec playwright install chromium --with-deps --only-shell
+        run: pnpm react exec playwright install chromium --only-shell
 
       - name: Run chromium coverage shard
         if: steps.check-modified.outputs.any_changed == 'true'
@@ -99,7 +99,7 @@ jobs:
 
       - name: Setup Browser
         if: steps.check-modified.outputs.any_changed == 'true'
-        run: pnpm react exec playwright install ${{ matrix.id }} --with-deps
+        run: pnpm react exec playwright install ${{ matrix.id }}
 
       - name: Run Browser Test on ${{ matrix.id }}
         if: steps.check-modified.outputs.any_changed == 'true'

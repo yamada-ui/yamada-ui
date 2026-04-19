@@ -1,44 +1,43 @@
 import type { KeyframeIdent } from "../../core"
-import { a11y, render, screen, waitFor } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { useState } from "react"
 import { noop } from "../../utils"
 import { BoxIcon } from "../icon"
 import { Flip } from "./"
 
 describe("<Flip />", () => {
-  test("renders component correctly", () => {
-    a11y(<Flip from="ON" to="OFF" />)
+  test("renders component correctly", async () => {
+    await a11y(<Flip from="ON" to="OFF" />)
   })
 
-  test("applies custom `aria-label`", () => {
-    render(<Flip aria-label="Toggle icon" from="ON" to="OFF" />)
+  test("applies custom `aria-label`", async () => {
+    await render(<Flip aria-label="Toggle icon" from="ON" to="OFF" />)
 
-    expect(screen.getByRole("button")).toHaveAttribute(
-      "aria-label",
-      "Toggle icon",
-    )
+    await expect
+      .element(page.getByRole("button"))
+      .toHaveAttribute("aria-label", "Toggle icon")
   })
 
   test("sets `displayName` correctly", () => {
     expect(Flip.displayName).toBe("FlipRoot")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Flip from="ON" to="OFF" />)
-    expect(screen.getByText("ON").parentElement).toHaveClass("ui-flip__root")
-    expect(screen.getByText("ON")).toHaveClass(
-      "ui-flip__item",
-      "ui-flip__item--from",
-    )
-    expect(screen.getByText("OFF")).toHaveClass(
-      "ui-flip__item",
-      "ui-flip__item--to",
-    )
+  test("sets `className` correctly", async () => {
+    await render(<Flip from="ON" to="OFF" />)
+    await expect
+      .element(page.getByText("ON").element().parentElement)
+      .toHaveClass("ui-flip__root")
+    await expect
+      .element(page.getByText("ON"))
+      .toHaveClass("ui-flip__item", "ui-flip__item--from")
+    await expect
+      .element(page.getByText("OFF"))
+      .toHaveClass("ui-flip__item", "ui-flip__item--to")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Flip from="ON" to="OFF" />)
-    expect(screen.getByText("ON").parentElement?.tagName).toBe("BUTTON")
+  test("renders HTML tag correctly", async () => {
+    await render(<Flip from="ON" to="OFF" />)
+    expect(page.getByText("ON").element().parentElement?.tagName).toBe("BUTTON")
   })
 
   test("should render Flip with value and onChange", async () => {
@@ -55,46 +54,44 @@ describe("<Flip />", () => {
       )
     }
 
-    const { container, user } = render(<TestComponent />)
+    const { user } = await render(<TestComponent />)
 
-    const button = container.querySelector("button") as HTMLButtonElement
+    const button = page.getByRole("button").element() as HTMLButtonElement
     expect(button).toHaveAttribute("data-value", "to")
 
     await user.click(button)
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(button).toHaveAttribute("data-value", "from")
     })
   })
 
-  test("should be read only", () => {
-    const { container, user } = render(
+  test("should be read only", async () => {
+    const { user } = await render(
       <Flip from={<BoxIcon />} readOnly to={<BoxIcon />} />,
     )
 
-    const button = container.querySelector("button") as HTMLButtonElement
+    const button = page.getByRole("button").element() as HTMLButtonElement
     expect(button).toHaveAttribute("data-value", "from")
 
-    user.click(button)
+    await user.click(button)
     expect(button).toHaveAttribute("data-value", "from")
   })
 
-  test("should be disabled", () => {
-    const { container, user } = render(
-      <Flip disabled from={<BoxIcon />} to={<BoxIcon />} />,
-    )
+  test("should be disabled", async () => {
+    await render(<Flip disabled from={<BoxIcon />} to={<BoxIcon />} />)
 
-    const button = container.querySelector("button") as HTMLButtonElement
+    const button = page.getByRole("button").element() as HTMLButtonElement
     expect(button).toHaveAttribute("data-disabled")
     expect(button).toHaveAttribute("data-value", "from")
 
-    user.click(button)
+    button.dispatchEvent(new MouseEvent("click", { bubbles: true }))
 
     expect(button).toHaveAttribute("data-value", "from")
   })
 
-  test("should be render Flip with orientation", () => {
-    const { container } = render(
+  test("should be render Flip with orientation", async () => {
+    await render(
       <Flip
         disabled
         from={<BoxIcon />}
@@ -103,11 +100,11 @@ describe("<Flip />", () => {
       />,
     )
 
-    const button = container.querySelector("button") as HTMLButtonElement
+    const button = page.getByRole("button").element() as HTMLButtonElement
     expect(button).toHaveAttribute("data-orientation", "vertical")
   })
 
-  test("should warn when dimensions of from element and to element don't match", () => {
+  test("should warn when dimensions of from element and to element don't match", async () => {
     const mockElementDimensions = (
       height: { from: number; to: number },
       width: { from: number; to: number },
@@ -135,7 +132,7 @@ describe("<Flip />", () => {
 
     mockElementDimensions({ from: 16, to: 32 }, { from: 16, to: 32 })
 
-    render(
+    await render(
       <Flip
         from={<BoxIcon data-testid="test-icon" />}
         to={<BoxIcon data-testid="test-icon" />}

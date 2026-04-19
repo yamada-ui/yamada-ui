@@ -1,5 +1,6 @@
 import type { FC } from "react"
-import { act, fireEvent, render, renderHook, screen, waitFor } from "#test"
+import { render, renderHook } from "#test/browser"
+import { act, fireEvent, screen, waitFor } from "@testing-library/react"
 import { Snacks } from "./snacks"
 import { useSnacks } from "./use-snacks"
 
@@ -30,16 +31,16 @@ const TestComponent: FC<{
 }
 
 describe("<Snacks />", () => {
-  test("renders without snacks", () => {
-    const { snacks } = renderHook(() => useSnacks()).result.current
+  test("renders without snacks", async () => {
+    const { result } = await renderHook(() => useSnacks())
 
-    render(<Snacks data-testid="snacks" snacks={snacks} />)
+    await render(<Snacks data-testid="snacks" snacks={result.current.snacks} />)
 
     expect(screen.queryByRole("list")).not.toBeInTheDocument()
   })
 
   test("renders snack items when added", async () => {
-    render(<TestComponent />)
+    await render(<TestComponent />)
 
     act(() => {
       fireEvent.click(screen.getByTestId("add"))
@@ -54,7 +55,7 @@ describe("<Snacks />", () => {
   })
 
   test("renders with direction end", async () => {
-    render(<TestComponent options={{ direction: "end" }} />)
+    await render(<TestComponent options={{ direction: "end" }} />)
 
     act(() => {
       fireEvent.click(screen.getByTestId("add"))
@@ -66,7 +67,7 @@ describe("<Snacks />", () => {
   })
 
   test("renders with startIndex", async () => {
-    render(<TestComponent options={{ startIndex: 5 }} />)
+    await render(<TestComponent options={{ startIndex: 5 }} />)
 
     act(() => {
       fireEvent.click(screen.getByTestId("add"))
@@ -78,7 +79,7 @@ describe("<Snacks />", () => {
   })
 
   test("closes all snacks", async () => {
-    render(<TestComponent />)
+    await render(<TestComponent />)
 
     act(() => {
       fireEvent.click(screen.getByTestId("add"))
@@ -101,7 +102,7 @@ describe("<Snacks />", () => {
   })
 
   test("respects limit option", async () => {
-    render(<TestComponent options={{ limit: 2 }} />)
+    await render(<TestComponent options={{ limit: 2 }} />)
 
     act(() => {
       fireEvent.click(screen.getByTestId("add"))
@@ -134,7 +135,7 @@ describe("<Snacks />", () => {
       )
     }
 
-    render(<TestClosable />)
+    await render(<TestClosable />)
 
     act(() => {
       fireEvent.click(screen.getByTestId("add"))
@@ -164,7 +165,7 @@ describe("<Snacks />", () => {
       )
     }
 
-    render(<TestVariant />)
+    await render(<TestVariant />)
 
     act(() => {
       fireEvent.click(screen.getByTestId("add"))
@@ -198,7 +199,7 @@ describe("<Snacks />", () => {
       )
     }
 
-    render(<TestLoading />)
+    await render(<TestLoading />)
 
     act(() => {
       fireEvent.click(screen.getByTestId("add"))
@@ -228,7 +229,7 @@ describe("<Snacks />", () => {
       )
     }
 
-    render(<TestNoIcon />)
+    await render(<TestNoIcon />)
 
     act(() => {
       fireEvent.click(screen.getByTestId("add"))
@@ -262,7 +263,7 @@ describe("<Snacks />", () => {
       )
     }
 
-    render(<TestHover />)
+    await render(<TestHover />)
 
     act(() => {
       fireEvent.click(screen.getByTestId("add"))
@@ -287,8 +288,8 @@ describe("<Snacks />", () => {
 })
 
 describe("useSnacks", () => {
-  test("snack method returns id", () => {
-    const { result } = renderHook(() => useSnacks())
+  test("snack method returns id", async () => {
+    const { result } = await renderHook(() => useSnacks())
 
     let id: string | undefined
 
@@ -303,8 +304,8 @@ describe("useSnacks", () => {
     expect(typeof id).toBe("string")
   })
 
-  test("snack.update updates an existing snack", () => {
-    const { result } = renderHook(() => useSnacks())
+  test("snack.update updates an existing snack", async () => {
+    const { result } = await renderHook(() => useSnacks())
 
     let id: string | undefined
 
@@ -326,8 +327,8 @@ describe("useSnacks", () => {
     expect(updated?.title).toBe("Updated")
   })
 
-  test("snack.close removes a snack by id", () => {
-    const { result } = renderHook(() => useSnacks())
+  test("snack.close removes a snack by id", async () => {
+    const { result } = await renderHook(() => useSnacks())
 
     let id: string | undefined
 
@@ -347,8 +348,8 @@ describe("useSnacks", () => {
     expect(result.current.snacks.items).toHaveLength(0)
   })
 
-  test("snack.closeAll removes all snacks", () => {
-    const { result } = renderHook(() => useSnacks())
+  test("snack.closeAll removes all snacks", async () => {
+    const { result } = await renderHook(() => useSnacks())
 
     act(() => {
       result.current.snack({ description: "1", title: "1" })
@@ -364,8 +365,8 @@ describe("useSnacks", () => {
     expect(result.current.snacks.items).toHaveLength(0)
   })
 
-  test("snack.isActive returns true for active snack", () => {
-    const { result } = renderHook(() => useSnacks())
+  test("snack.isActive returns true for active snack", async () => {
+    const { result } = await renderHook(() => useSnacks())
 
     let id: string | undefined
 
@@ -379,14 +380,14 @@ describe("useSnacks", () => {
     expect(result.current.snack.isActive(id!)).toBeTruthy()
   })
 
-  test("snack.isActive returns false for non-existent snack", () => {
-    const { result } = renderHook(() => useSnacks())
+  test("snack.isActive returns false for non-existent snack", async () => {
+    const { result } = await renderHook(() => useSnacks())
 
     expect(result.current.snack.isActive("non-existent")).toBeFalsy()
   })
 
-  test("snack with custom id", () => {
-    const { result } = renderHook(() => useSnacks())
+  test("snack with custom id", async () => {
+    const { result } = await renderHook(() => useSnacks())
 
     act(() => {
       result.current.snack({
@@ -399,8 +400,8 @@ describe("useSnacks", () => {
     expect(result.current.snacks.items[0]?.id).toBe("custom-id")
   })
 
-  test("snacks returns direction and startIndex", () => {
-    const { result } = renderHook(() =>
+  test("snacks returns direction and startIndex", async () => {
+    const { result } = await renderHook(() =>
       useSnacks({ direction: "end", startIndex: 10 }),
     )
 

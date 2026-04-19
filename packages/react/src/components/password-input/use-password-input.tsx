@@ -4,6 +4,7 @@ import type { MouseEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { useCallback } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"
 import { handlerAll, mergeRefs } from "../../utils"
@@ -60,17 +61,21 @@ export const usePasswordInput = (props: UsePasswordInputProps = {}) => {
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    ({ ref, ...props } = {}) => ({
-      type: visible ? "text" : "password",
-      disabled,
-      ...ariaProps,
-      ...dataProps,
-      ...rest,
-      ...props,
-      ref: mergeRefs(ref, rest.ref),
-      onBlur: handlerAll(eventProps.onBlur, props.onBlur),
-      onFocus: handlerAll(eventProps.onFocus, props.onFocus),
-    }),
+    ({ ref, ...props } = {}) =>
+      mergeProps(
+        {
+          type: visible ? "text" : "password",
+          disabled,
+          ...ariaProps,
+          ...dataProps,
+        },
+        rest,
+        props,
+        eventProps,
+        {
+          ref: mergeRefs(ref, rest.ref),
+        },
+      )(),
     [visible, rest, disabled, dataProps, eventProps, ariaProps],
   )
 

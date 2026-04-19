@@ -4,7 +4,8 @@ import type { ReactNode } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { cloneElement, useCallback, useMemo } from "react"
-import { ariaAttr, handlerAll, mergeRefs } from "../../utils"
+import { mergeProps } from "../../core"
+import { ariaAttr, mergeRefs } from "../../utils"
 import { useFieldProps } from "../field"
 
 interface NativeSelectSharedItem extends Omit<
@@ -115,21 +116,26 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
   )
 
   const getFieldProps: PropGetter<"select"> = useCallback(
-    ({ ref, ...props } = {}) => ({
-      disabled,
-      readOnly,
-      tabIndex: interactive ? undefined : -1,
-      ...ariaProps,
-      ...dataProps,
-      "aria-disabled": ariaAttr(!interactive),
-      "aria-label": placeholder,
-      ...rest,
-      ...props,
-      ref: mergeRefs(ref, rest.ref),
-      children: props.children ?? computedChildren,
-      onBlur: handlerAll(eventProps.onBlur, props.onBlur),
-      onFocus: handlerAll(eventProps.onFocus, props.onFocus),
-    }),
+    ({ ref, ...props } = {}) =>
+      mergeProps(
+        {
+          disabled,
+          readOnly,
+          tabIndex: interactive ? undefined : -1,
+          ...ariaProps,
+          ...dataProps,
+          "aria-disabled": ariaAttr(!interactive),
+          "aria-label": placeholder,
+        },
+        rest,
+        props,
+        {
+          ref: mergeRefs(ref, rest.ref),
+          children: props.children ?? computedChildren,
+          onBlur: eventProps.onBlur,
+          onFocus: eventProps.onFocus,
+        },
+      )(),
     [
       interactive,
       ariaProps,

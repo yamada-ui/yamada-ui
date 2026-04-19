@@ -1,4 +1,4 @@
-import { a11y, act, fireEvent, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { ImageIcon } from "../icon"
 import { Text } from "../text"
 import { Dropzone } from "./"
@@ -10,6 +10,13 @@ describe("<Dropzone />", () => {
       <Dropzone.Root>
         <Text>Drag file here or click to select file</Text>
       </Dropzone.Root>,
+      {
+        axeOptions: {
+          rules: {
+            "color-contrast": { enabled: false },
+          },
+        },
+      },
     )
   })
 
@@ -23,8 +30,8 @@ describe("<Dropzone />", () => {
     expect(Dropzone.Description.displayName).toBe("DropzoneDescription")
   })
 
-  test("sets `className` correctly", () => {
-    render(
+  test("sets `className` correctly", async () => {
+    await render(
       <Dropzone.Root data-testid="root">
         <Dropzone.Idle>
           <Dropzone.Icon as={ImageIcon} data-testid="icon" />
@@ -38,16 +45,22 @@ describe("<Dropzone />", () => {
         </Dropzone.Description>
       </Dropzone.Root>,
     )
-    expect(screen.getByTestId("root")).toHaveClass("ui-dropzone__root")
-    expect(screen.getByTestId("title")).toHaveClass("ui-dropzone__title")
-    expect(screen.getByTestId("description")).toHaveClass(
-      "ui-dropzone__description",
-    )
-    expect(screen.getByTestId("icon")).toHaveClass("ui-dropzone__icon")
+    await expect
+      .element(page.getByTestId("root"))
+      .toHaveClass("ui-dropzone__root")
+    await expect
+      .element(page.getByTestId("title"))
+      .toHaveClass("ui-dropzone__title")
+    await expect
+      .element(page.getByTestId("description"))
+      .toHaveClass("ui-dropzone__description")
+    await expect
+      .element(page.getByTestId("icon"))
+      .toHaveClass("ui-dropzone__icon")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(
+  test("renders HTML tag correctly", async () => {
+    await render(
       <Dropzone.Root data-testid="root">
         <Dropzone.Title data-testid="title">
           Drag images here or click to select files
@@ -57,22 +70,22 @@ describe("<Dropzone />", () => {
         </Dropzone.Description>
       </Dropzone.Root>,
     )
-    expect(screen.getByTestId("root").tagName).toBe("DIV")
-    expect(screen.getByTestId("title").tagName).toBe("P")
-    expect(screen.getByTestId("description").tagName).toBe("P")
+    expect(page.getByTestId("root").element().tagName).toBe("DIV")
+    expect(page.getByTestId("title").element().tagName).toBe("P")
+    expect(page.getByTestId("description").element().tagName).toBe("P")
   })
 
-  test("Is the multiple property being reflected correctly", () => {
-    render(
+  test("Is the multiple property being reflected correctly", async () => {
+    await render(
       <Dropzone.Root multiple inputProps={{ "data-testid": "input" }}>
         <Text>Drag file here or click to select file</Text>
       </Dropzone.Root>,
     )
-    expect(screen.getByTestId("input")).toHaveAttribute("multiple")
+    await expect.element(page.getByTestId("input")).toHaveAttribute("multiple")
   })
 
-  test("Is the accept property being reflected correctly", () => {
-    render(
+  test("Is the accept property being reflected correctly", async () => {
+    await render(
       <Dropzone.Root
         accept={{ "image/*": [] }}
         inputProps={{ "data-testid": "input" }}
@@ -80,11 +93,13 @@ describe("<Dropzone />", () => {
         <Text>Drag image here or click to select image</Text>
       </Dropzone.Root>,
     )
-    expect(screen.getByTestId("input")).toHaveAttribute("accept", "image/*")
+    await expect
+      .element(page.getByTestId("input"))
+      .toHaveAttribute("accept", "image/*")
   })
 
-  test("Is the disabled property being reflected correctly", () => {
-    render(
+  test("Is the disabled property being reflected correctly", async () => {
+    await render(
       <Dropzone.Root
         variant="dashed"
         disabled
@@ -93,12 +108,14 @@ describe("<Dropzone />", () => {
         <Text>Drag file here or click to select file</Text>
       </Dropzone.Root>,
     )
-    expect(screen.getByTestId("input")).toHaveAttribute("disabled")
-    expect(screen.getByTestId("input")).toHaveAttribute("aria-disabled", "true")
+    await expect.element(page.getByTestId("input")).toHaveAttribute("disabled")
+    await expect
+      .element(page.getByTestId("input"))
+      .toHaveAttribute("aria-disabled", "true")
   })
 
-  test("Is the readOnly property being reflected correctly", () => {
-    render(
+  test("Is the readOnly property being reflected correctly", async () => {
+    await render(
       <Dropzone.Root
         variant="dashed"
         readOnly
@@ -107,41 +124,48 @@ describe("<Dropzone />", () => {
         <Text>Drag file here or click to select file</Text>
       </Dropzone.Root>,
     )
-    expect(screen.getByTestId("input")).toHaveAttribute("readonly")
-    expect(screen.getByTestId("input")).toHaveAttribute("aria-readonly", "true")
+    await expect.element(page.getByTestId("input")).toHaveAttribute("readonly")
+    await expect
+      .element(page.getByTestId("input"))
+      .toHaveAttribute("aria-readonly", "true")
   })
 
-  test("Is the loading property being reflected correctly", () => {
-    render(
+  test("Is the loading property being reflected correctly", async () => {
+    await render(
       <Dropzone.Root variant="dashed" data-testid="root" loading>
         <Text>Drag file here or click to select file</Text>
       </Dropzone.Root>,
     )
 
-    expect(screen.getByTestId("root")).toHaveAttribute("data-loading")
+    await expect
+      .element(page.getByTestId("root"))
+      .toHaveAttribute("data-loading")
   })
 
   test("Is the onDrop return files correctly", async () => {
     const file = new File(["test"], "test.png", { type: "image/png" })
     const onDrop = vi.fn()
-    render(<Dropzone.Root data-testid="root" onDrop={onDrop} />)
+    await render(<Dropzone.Root data-testid="root" onDrop={onDrop} />)
 
-    await act(() =>
-      fireEvent.drop(screen.getByTestId("root"), {
-        dataTransfer: { files: [file], types: ["Files"] },
-      }),
-    )
+    const dataTransfer = new DataTransfer()
+    dataTransfer.items.add(file)
+    page
+      .getByTestId("root")
+      .element()
+      .dispatchEvent(new DragEvent("drop", { bubbles: true, dataTransfer }))
 
-    expect(onDrop).toHaveBeenCalledExactlyOnceWith(
-      [file],
-      [],
-      expect.anything(),
-    )
+    await vi.waitFor(() => {
+      expect(onDrop).toHaveBeenCalledExactlyOnceWith(
+        [file],
+        [],
+        expect.anything(),
+      )
+    })
   })
 
   test("DropzoneAccept renders correctly when dragging accepted files", async () => {
     const file = new File(["test"], "test.png", { type: "image/png" })
-    render(
+    await render(
       <Dropzone.Root data-testid="root" accept={IMAGE_ACCEPT_TYPE}>
         <Dropzone.Accept>
           <Text>Accepted</Text>
@@ -149,18 +173,21 @@ describe("<Dropzone />", () => {
       </Dropzone.Root>,
     )
 
-    await act(() =>
-      fireEvent.dragEnter(screen.getByTestId("root"), {
-        dataTransfer: { files: [file], types: ["Files"] },
-      }),
-    )
+    const dataTransfer = new DataTransfer()
+    dataTransfer.items.add(file)
+    page
+      .getByTestId("root")
+      .element()
+      .dispatchEvent(
+        new DragEvent("dragenter", { bubbles: true, dataTransfer }),
+      )
 
-    expect(screen.getByText("Accepted")).toBeInTheDocument()
+    await expect.element(page.getByText("Accepted")).toBeInTheDocument()
   })
 
   test("DropzoneReject renders correctly when dragging rejected files", async () => {
     const file = new File(["test"], "test.txt", { type: "text/plain" })
-    render(
+    await render(
       <Dropzone.Root data-testid="root" accept={IMAGE_ACCEPT_TYPE}>
         <Dropzone.Reject>
           <Text>Rejected</Text>
@@ -168,20 +195,20 @@ describe("<Dropzone />", () => {
       </Dropzone.Root>,
     )
 
-    await act(() =>
-      fireEvent.dragEnter(screen.getByTestId("root"), {
-        dataTransfer: {
-          files: [file],
-          types: ["Files"],
-        },
-      }),
-    )
+    const dataTransfer = new DataTransfer()
+    dataTransfer.items.add(file)
+    page
+      .getByTestId("root")
+      .element()
+      .dispatchEvent(
+        new DragEvent("dragenter", { bubbles: true, dataTransfer }),
+      )
 
-    expect(screen.getByText("Rejected")).toBeInTheDocument()
+    await expect.element(page.getByText("Rejected")).toBeInTheDocument()
   })
 
-  test("DropzoneIdle renders correctly when not dragging files", () => {
-    render(
+  test("DropzoneIdle renders correctly when not dragging files", async () => {
+    await render(
       <Dropzone.Root>
         <Dropzone.Idle>
           <Text>Idle</Text>
@@ -189,6 +216,6 @@ describe("<Dropzone />", () => {
       </Dropzone.Root>,
     )
 
-    expect(screen.getByText("Idle")).toBeInTheDocument()
+    await expect.element(page.getByText("Idle")).toBeInTheDocument()
   })
 })

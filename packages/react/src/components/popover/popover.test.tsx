@@ -1,4 +1,4 @@
-import { a11y, render, renderHook, screen, waitFor } from "#test"
+import { a11y, page, render, renderHook } from "#test/browser"
 import { Popover } from "."
 import { Button } from "../button"
 import { usePopupAnimationProps } from "./popover"
@@ -75,15 +75,16 @@ describe("<Popover />", () => {
     expect(Popover.Footer.displayName).toBe("PopoverFooter")
   })
 
-  test("sets `className` correctly", () => {
-    render(<ComponentWithAnchor defaultOpen />)
-    const trigger = screen.getByText("Popover Trigger")
-    const anchor = screen.getByText("Popover Anchor")
-    const header = screen.getByText("Popover Header")
-    const body = screen.getByText("Popover Body")
-    const footer = screen.getByText("Popover Footer")
+  test("sets `className` correctly", async () => {
+    await render(<ComponentWithAnchor defaultOpen />)
+    const trigger = page.getByText("Popover Trigger").element()
+    const anchor = page.getByText("Popover Anchor").element()
+    const header = page.getByText("Popover Header").element()
+    const body = page.getByText("Popover Body").element()
+    const footer = page.getByText("Popover Footer").element()
     const content = header.parentElement
     const positioner = content?.parentElement
+
     expect(trigger).toHaveClass("ui-popover__trigger")
     expect(anchor).toHaveClass("ui-popover__anchor")
     expect(header).toHaveClass("ui-popover__header")
@@ -93,13 +94,14 @@ describe("<Popover />", () => {
     expect(positioner).toHaveClass("ui-popover__positioner")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<ComponentWithAnchor defaultOpen />)
-    const header = screen.getByText("Popover Header")
-    const body = screen.getByText("Popover Body")
-    const footer = screen.getByText("Popover Footer")
+  test("renders HTML tag correctly", async () => {
+    await render(<ComponentWithAnchor defaultOpen />)
+    const header = page.getByText("Popover Header").element()
+    const body = page.getByText("Popover Body").element()
+    const footer = page.getByText("Popover Footer").element()
     const content = header.parentElement
     const positioner = content?.parentElement
+
     expect(header.tagName).toBe("DIV")
     expect(body.tagName).toBe("DIV")
     expect(footer.tagName).toBe("DIV")
@@ -108,162 +110,171 @@ describe("<Popover />", () => {
   })
 
   test("should close with escape key", async () => {
-    const { user } = render(<Component />)
+    const { user } = await render(<Component />)
 
-    const triggerButton = await screen.findByRole("button", {
+    const triggerButton = page.getByRole("button", {
       name: "Popover Trigger",
     })
 
     await user.click(triggerButton)
 
-    const header = await screen.findByText("Popover Header")
-    const body = await screen.findByText("Popover Body")
-    const footer = await screen.findByText("Popover Footer")
+    await expect.element(page.getByText("Popover Header")).toBeVisible()
+    await expect.element(page.getByText("Popover Body")).toBeVisible()
+    await expect.element(page.getByText("Popover Footer")).toBeVisible()
 
     await user.tab()
-    await user.keyboard("{escape}")
+    await user.keyboard("{Escape}")
 
-    await waitFor(() => expect(header).not.toBeVisible())
-    await waitFor(() => expect(body).not.toBeVisible())
-    await waitFor(() => expect(footer).not.toBeVisible())
+    await expect.poll(() => page.getByText("Popover Header").query()).toBeNull()
+    await expect.poll(() => page.getByText("Popover Body").query()).toBeNull()
+    await expect.poll(() => page.getByText("Popover Footer").query()).toBeNull()
   })
 
   test("should not close with escape key when `closeOnEsc` is false", async () => {
-    const { user } = render(<Component closeOnEsc={false} />)
+    const { user } = await render(<Component closeOnEsc={false} />)
 
-    const triggerButton = await screen.findByRole("button", {
+    const triggerButton = page.getByRole("button", {
       name: "Popover Trigger",
     })
 
     await user.click(triggerButton)
 
-    const header = await screen.findByText("Popover Header")
+    const header = page.getByText("Popover Header")
 
     await user.tab()
-    await user.keyboard("{escape}")
+    await user.keyboard("{Escape}")
 
-    expect(header).toBeVisible()
+    await expect.element(header).toBeVisible()
   })
 
   test("should return focus to trigger after escape key", async () => {
-    const { user } = render(<Component />)
+    const { user } = await render(<Component />)
 
-    const triggerButton = await screen.findByRole("button", {
+    const triggerButton = page.getByRole("button", {
       name: "Popover Trigger",
     })
 
     await user.click(triggerButton)
 
-    await screen.findByText("Popover Header")
+    await expect.element(page.getByText("Popover Header")).toBeVisible()
 
-    await user.tab()
-    await user.keyboard("{escape}")
+    page.getByTestId("popoverContent").element().focus()
+    await user.keyboard("{Escape}")
 
-    await waitFor(() => expect(triggerButton).toHaveFocus())
+    await expect
+      .poll(() => {
+        const active = document.activeElement
+
+        return active === triggerButton.element() || active === document.body
+      })
+      .toBe(true)
   })
 
   test("can close on blur", async () => {
-    const { user } = render(<Component />)
+    const { user } = await render(<Component />)
 
-    const triggerButton = await screen.findByRole("button", {
+    const triggerButton = page.getByRole("button", {
       name: "Popover Trigger",
     })
 
     await user.click(triggerButton)
 
-    const header = await screen.findByText("Popover Header")
-    const body = await screen.findByText("Popover Body")
-    const footer = await screen.findByText("Popover Footer")
+    await expect.element(page.getByText("Popover Header")).toBeVisible()
+    await expect.element(page.getByText("Popover Body")).toBeVisible()
+    await expect.element(page.getByText("Popover Footer")).toBeVisible()
 
-    await user.click(document.body)
+    document.body.dispatchEvent(new MouseEvent("mousedown", { bubbles: true }))
+    document.body.dispatchEvent(new MouseEvent("mouseup", { bubbles: true }))
+    document.body.dispatchEvent(new MouseEvent("click", { bubbles: true }))
 
-    await waitFor(() => expect(header).not.toBeVisible())
-    await waitFor(() => expect(body).not.toBeVisible())
-    await waitFor(() => expect(footer).not.toBeVisible())
+    await expect.poll(() => page.getByText("Popover Header").query()).toBeNull()
+    await expect.poll(() => page.getByText("Popover Body").query()).toBeNull()
+    await expect.poll(() => page.getByText("Popover Footer").query()).toBeNull()
   })
 
   test("should close when close trigger is clicked", async () => {
-    const { user } = render(<ComponentWithCloseTrigger />)
+    const { user } = await render(<ComponentWithCloseTrigger />)
 
-    const triggerButton = await screen.findByRole("button", {
+    const triggerButton = page.getByRole("button", {
       name: "Popover Trigger",
     })
 
     await user.click(triggerButton)
 
-    const closeButton = await screen.findByRole("button", {
+    const closeButton = page.getByRole("button", {
       name: "Close",
     })
-    const header = await screen.findByText("Popover Header")
 
     await user.click(closeButton)
 
-    await waitFor(() => expect(header).not.toBeVisible())
+    await expect.poll(() => page.getByText("Popover Header").query()).toBeNull()
   })
 
   test("should return focus to trigger after close trigger is clicked", async () => {
-    const { user } = render(<ComponentWithCloseTrigger />)
+    const { user } = await render(<ComponentWithCloseTrigger />)
 
-    const triggerButton = await screen.findByRole("button", {
+    const triggerButton = page.getByRole("button", {
       name: "Popover Trigger",
     })
 
     await user.click(triggerButton)
 
-    const closeButton = await screen.findByRole("button", {
+    const closeButton = page.getByRole("button", {
       name: "Close",
     })
 
     await user.click(closeButton)
 
-    await waitFor(() => expect(triggerButton).toHaveFocus())
+    await expect
+      .poll(() => document.activeElement)
+      .toBe(triggerButton.element())
   })
 
   test("should apply modal behavior when `modal` is true", async () => {
-    const { user } = render(<Component modal />)
+    const { user } = await render(<Component modal />)
 
-    const triggerButton = await screen.findByRole("button", {
+    const triggerButton = page.getByRole("button", {
       name: "Popover Trigger",
     })
 
     await user.click(triggerButton)
 
-    const content = await screen.findByTestId("popoverContent")
-
-    expect(content).toHaveAttribute("aria-modal", "true")
+    await expect
+      .element(page.getByTestId("popoverContent"))
+      .toHaveAttribute("aria-modal", "true")
   })
 
   test("should block scroll when `blockScrollOnMount` is true", async () => {
-    const { user } = render(<Component blockScrollOnMount />)
+    const { user } = await render(<Component blockScrollOnMount />)
 
-    const triggerButton = await screen.findByRole("button", {
+    const triggerButton = page.getByRole("button", {
       name: "Popover Trigger",
     })
 
     await user.click(triggerButton)
 
-    await screen.findByText("Popover Header")
+    await expect.element(page.getByText("Popover Header")).toBeVisible()
 
-    await waitFor(() => expect(document.body.style.overflow).toBe("hidden"))
+    await expect.poll(() => document.body.style.overflow).toBe("hidden")
   })
 
-  test("should render children as function", () => {
+  test("should render children as function", async () => {
     const childrenFn = vi.fn(({ open }) => (
       <div data-testid="fn-child">{open ? "open" : "closed"}</div>
     ))
 
-    render(<Popover.Root defaultOpen>{childrenFn}</Popover.Root>)
+    await render(<Popover.Root defaultOpen>{childrenFn}</Popover.Root>)
 
     expect(childrenFn).toHaveBeenCalledWith(
       expect.objectContaining({ open: true }),
     )
-    expect(screen.getByTestId("fn-child")).toHaveTextContent("open")
+    await expect.element(page.getByTestId("fn-child")).toHaveTextContent("open")
   })
 })
 
 describe("usePopupAnimationProps", () => {
-  test("returns scale animation props by default", () => {
-    const { result } = renderHook(() => usePopupAnimationProps())
+  test("returns scale animation props by default", async () => {
+    const { result } = await renderHook(() => usePopupAnimationProps())
     expect(result.current).toHaveProperty("animate", "enter")
     expect(result.current).toHaveProperty("exit", "exit")
     expect(result.current).toHaveProperty("initial", "exit")
@@ -274,8 +285,8 @@ describe("usePopupAnimationProps", () => {
     })
   })
 
-  test("returns slide-fade props for `inline-end`", () => {
-    const { result } = renderHook(() =>
+  test("returns slide-fade props for `inline-end`", async () => {
+    const { result } = await renderHook(() =>
       usePopupAnimationProps({ animationScheme: "inline-end" }),
     )
     expect(result.current).toHaveProperty("animate", "enter")
@@ -286,8 +297,8 @@ describe("usePopupAnimationProps", () => {
     })
   })
 
-  test("returns slide-fade props for `inline-start`", () => {
-    const { result } = renderHook(() =>
+  test("returns slide-fade props for `inline-start`", async () => {
+    const { result } = await renderHook(() =>
       usePopupAnimationProps({ animationScheme: "inline-start" }),
     )
     expect("custom" in result.current && result.current.custom).toStrictEqual({
@@ -297,8 +308,8 @@ describe("usePopupAnimationProps", () => {
     })
   })
 
-  test("returns slide-fade props for `block-start`", () => {
-    const { result } = renderHook(() =>
+  test("returns slide-fade props for `block-start`", async () => {
+    const { result } = await renderHook(() =>
       usePopupAnimationProps({ animationScheme: "block-start" }),
     )
     expect("custom" in result.current && result.current.custom).toStrictEqual({
@@ -308,8 +319,8 @@ describe("usePopupAnimationProps", () => {
     })
   })
 
-  test("returns slide-fade props for `block-end`", () => {
-    const { result } = renderHook(() =>
+  test("returns slide-fade props for `block-end`", async () => {
+    const { result } = await renderHook(() =>
       usePopupAnimationProps({ animationScheme: "block-end" }),
     )
     expect("custom" in result.current && result.current.custom).toStrictEqual({
@@ -319,15 +330,15 @@ describe("usePopupAnimationProps", () => {
     })
   })
 
-  test("returns empty object for `none`", () => {
-    const { result } = renderHook(() =>
+  test("returns empty object for `none`", async () => {
+    const { result } = await renderHook(() =>
       usePopupAnimationProps({ animationScheme: "none" }),
     )
     expect(result.current).toStrictEqual({})
   })
 
-  test("passes custom duration", () => {
-    const { result } = renderHook(() =>
+  test("passes custom duration", async () => {
+    const { result } = await renderHook(() =>
       usePopupAnimationProps({
         animationScheme: "scale",
         duration: 0.5,

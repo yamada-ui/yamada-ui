@@ -1,5 +1,6 @@
-import { a11y, render, screen, waitFor } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { useState } from "react"
+import { vi } from "vitest"
 import { FadeScale } from "./fade-scale"
 
 describe("<FadeScale />", () => {
@@ -11,14 +12,16 @@ describe("<FadeScale />", () => {
     expect(FadeScale.displayName).toBe("FadeScale")
   })
 
-  test("sets `className` correctly", () => {
-    render(<FadeScale>FadeScale</FadeScale>)
-    expect(screen.getByText("FadeScale")).toHaveClass("ui-fade-scale")
+  test("sets `className` correctly", async () => {
+    await render(<FadeScale>FadeScale</FadeScale>)
+    await expect
+      .element(page.getByText("FadeScale"))
+      .toHaveClass("ui-fade-scale")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<FadeScale>FadeScale</FadeScale>)
-    expect(screen.getByText("FadeScale").tagName).toBe("DIV")
+  test("renders HTML tag correctly", async () => {
+    await render(<FadeScale>FadeScale</FadeScale>)
+    expect(page.getByText("FadeScale").element().tagName).toBe("DIV")
   })
 
   test("toggles visibility on open change", async () => {
@@ -33,17 +36,22 @@ describe("<FadeScale />", () => {
       )
     }
 
-    const { user } = render(<TestComponent />)
+    const { user } = await render(<TestComponent />)
 
-    const button = await screen.findByRole("button", { name: /button/i })
-    const collapse = await screen.findByText("FadeScale")
-    expect(collapse).not.toBeVisible()
-
-    await user.click(button)
-    await waitFor(() => expect(collapse).toBeVisible())
+    const button = page.getByRole("button", { name: /button/i })
+    const collapse = page.getByText("FadeScale")
+    const getOpacity = () => getComputedStyle(collapse.element()).opacity
+    expect(getOpacity()).toBe("0")
 
     await user.click(button)
-    await waitFor(() => expect(collapse).not.toBeVisible())
+    await vi.waitFor(() => {
+      expect(getOpacity()).toBe("1")
+    })
+
+    await user.click(button)
+    await vi.waitFor(() => {
+      expect(getOpacity()).toBe("0")
+    })
   })
 
   test("applies reverse={false} exit correctly", async () => {
@@ -60,17 +68,22 @@ describe("<FadeScale />", () => {
       )
     }
 
-    const { user } = render(<TestComponent />)
+    const { user } = await render(<TestComponent />)
 
-    const button = await screen.findByRole("button", { name: /button/i })
-    const fadeScale = await screen.findByText("FadeScale")
-    expect(fadeScale).not.toBeVisible()
-
-    await user.click(button)
-    await waitFor(() => expect(fadeScale).toBeVisible())
+    const button = page.getByRole("button", { name: /button/i })
+    const fadeScale = page.getByText("FadeScale")
+    const getOpacity = () => getComputedStyle(fadeScale.element()).opacity
+    expect(getOpacity()).toBe("0")
 
     await user.click(button)
-    await waitFor(() => expect(fadeScale).not.toBeVisible())
+    await vi.waitFor(() => {
+      expect(getOpacity()).toBe("1")
+    })
+
+    await user.click(button)
+    await vi.waitFor(() => {
+      expect(getOpacity()).toBe("0")
+    })
   })
 
   test("unmountOnExit works correctly", async () => {
@@ -87,16 +100,18 @@ describe("<FadeScale />", () => {
       )
     }
 
-    const { user } = render(<TestComponent />)
+    const { container, user } = await render(<TestComponent />)
 
-    expect(screen.queryByText("FadeScale")).toBeNull()
+    expect(container.textContent).not.toContain("FadeScale")
 
-    const button = await screen.findByRole("button", { name: /button/i })
-
-    await user.click(button)
-    await waitFor(() => expect(screen.getByText("FadeScale")).toBeVisible())
+    const button = page.getByRole("button", { name: /button/i })
 
     await user.click(button)
-    await waitFor(() => expect(screen.queryByText("FadeScale")).toBeNull())
+    await expect.element(page.getByText("FadeScale")).toBeVisible()
+
+    await user.click(button)
+    await vi.waitFor(() => {
+      expect(container.textContent).not.toContain("FadeScale")
+    })
   })
 })

@@ -1,4 +1,5 @@
-import { a11y, fireEvent, render, screen } from "#test"
+import { a11y, render } from "#test/browser"
+import { fireEvent, screen } from "@testing-library/react"
 import { NativePopover } from "."
 import { Button } from "../button"
 
@@ -39,8 +40,8 @@ describe("<NativePopover />", () => {
     expect(NativePopover.CloseTrigger.name).toBe("NativePopoverCloseTrigger")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Component />)
+  test("sets `className` correctly", async () => {
+    await render(<Component />)
 
     expect(screen.getByTestId("trigger")).toHaveClass(
       "ui-native-popover__trigger",
@@ -57,8 +58,8 @@ describe("<NativePopover />", () => {
     )
   })
 
-  test("should render popover with proper ARIA attributes", () => {
-    render(<Component />)
+  test("should render popover with proper ARIA attributes", async () => {
+    await render(<Component />)
 
     const trigger = screen.getByTestId("trigger")
     const content = screen.getByTestId("content")
@@ -76,8 +77,8 @@ describe("<NativePopover />", () => {
     expect(content).toHaveAttribute("popover", "auto")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Component />)
+  test("renders HTML tag correctly", async () => {
+    await render(<Component />)
     const header = screen.getByTestId("header")
     const body = screen.getByTestId("body")
     const footer = screen.getByTestId("footer")
@@ -115,8 +116,8 @@ describe("<NativePopover />", () => {
     )
   }
 
-  test("renders with anchor component", () => {
-    render(<ComponentWithAnchor />)
+  test("renders with anchor component", async () => {
+    await render(<ComponentWithAnchor />)
 
     const anchor = screen.getByTestId("anchor")
     const trigger = screen.getByTestId("trigger")
@@ -127,8 +128,8 @@ describe("<NativePopover />", () => {
     expect(content).toHaveClass("ui-native-popover__content")
   })
 
-  test("should render with custom popover props", () => {
-    render(<Component popover="manual" popoverTargetAction="show" />)
+  test("should render with custom popover props", async () => {
+    await render(<Component popover="manual" popoverTargetAction="show" />)
 
     const trigger = screen.getByTestId("trigger")
     const content = screen.getByTestId("content")
@@ -137,34 +138,35 @@ describe("<NativePopover />", () => {
     expect(content).toHaveAttribute("popover", "manual")
   })
 
-  test("should render with different popover modes", () => {
-    const { rerender } = render(<Component popover="hint" />)
+  test("should render with different popover modes", async () => {
+    await render(<Component popover="hint" />)
 
     expect(screen.getByTestId("content")).toHaveAttribute("popover", "hint")
 
-    rerender(<Component popover="" />)
+    await render(<Component popover="" />)
 
-    expect(screen.getByTestId("content")).toHaveAttribute("popover", "")
+    const contents = screen.getAllByTestId("content")
+
+    expect(contents.at(-1)).toHaveAttribute("popover", "")
   })
 
-  test("should render with different popover target actions", () => {
-    const { rerender } = render(<Component popoverTargetAction="show" />)
+  test("should render with different popover target actions", async () => {
+    await render(<Component popoverTargetAction="show" />)
 
     expect(screen.getByTestId("trigger")).toHaveAttribute(
       "popoverTargetAction",
       "show",
     )
 
-    rerender(<Component popoverTargetAction="hide" />)
+    await render(<Component popoverTargetAction="hide" />)
 
-    expect(screen.getByTestId("trigger")).toHaveAttribute(
-      "popoverTargetAction",
-      "hide",
-    )
+    const triggers = screen.getAllByTestId("trigger")
+
+    expect(triggers.at(-1)).toHaveAttribute("popoverTargetAction", "hide")
   })
 
-  test("should render custom close button when trigger is provided", () => {
-    render(
+  test("should render custom close button when trigger is provided", async () => {
+    await render(
       <NativePopover.Root>
         <NativePopover.Trigger>
           <Button>Open Popover</Button>
@@ -183,8 +185,8 @@ describe("<NativePopover />", () => {
     expect(closeTrigger).toHaveAttribute("popovertarget")
   })
 
-  test("should prevent default and stop propagation when disabled", () => {
-    render(<Component disabled />)
+  test("should prevent default and stop propagation when disabled", async () => {
+    await render(<Component disabled />)
 
     const trigger = screen.getByTestId("trigger")
 

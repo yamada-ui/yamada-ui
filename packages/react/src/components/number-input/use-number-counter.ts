@@ -4,6 +4,7 @@ import type { HTMLProps, PropGetter } from "../../core"
 import type { UseCounterProps, UseCounterReturn } from "../../hooks/use-counter"
 import type { UseSpinnerProps } from "./use-spinner"
 import { useCallback, useRef } from "react"
+import { mergeProps } from "../../core"
 import { useI18n } from "../../providers/i18n-provider"
 import { handlerAll, mergeRefs, useAttributeObserver } from "../../utils"
 import { useSpinner } from "./use-spinner"
@@ -33,15 +34,20 @@ export const useNumberCounter = ({
   useAttributeObserver(decrementRef, ["disabled"], spinning, stop)
 
   const getButtonProps: PropGetter<"button"> = useCallback(
-    (props = {}) => ({
-      type: "button",
-      disabled,
-      tabIndex: -1,
-      ...rest,
-      ...props,
-      onPointerLeave: handlerAll(props.onPointerLeave, stop),
-      onPointerUp: handlerAll(props.onPointerUp, stop),
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          type: "button",
+          disabled,
+          tabIndex: -1,
+        },
+        rest,
+        props,
+        {
+          onPointerLeave: stop,
+          onPointerUp: stop,
+        },
+      )(),
     [rest, disabled, stop],
   )
 

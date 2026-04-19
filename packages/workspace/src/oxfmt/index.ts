@@ -27,13 +27,14 @@ export async function writeFileWithFormat(
   content: any,
   options?: FormatConfig,
 ) {
-  const { code } = await originalFormat(
-    path.split("/").at(-1)!,
-    typeof content === "string" ? content : JSON.stringify(content),
-    { ...config, ...options },
-  )
-
-  await writeFile(path, code)
+  try {
+    const { code } = await originalFormat(
+      path.split("/").at(-1)!,
+      typeof content === "string" ? content : JSON.stringify(content),
+      { ...config, ...options },
+    )
+    await writeFile(path, code)
+  } catch {
+    await writeFile(path, content)
+  }
 }
-
-export default config

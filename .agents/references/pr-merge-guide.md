@@ -19,7 +19,7 @@ The following branch protection rules are enabled on the `main` and `v*` branche
 ### Status Checks
 
 - **Require status checks to pass**: All of the following required status checks must be green.
-  - OxFmt
+  - Format
   - TypeScript
   - ESLint
   - Changeset

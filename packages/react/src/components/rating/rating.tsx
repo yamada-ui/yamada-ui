@@ -5,7 +5,7 @@ import type { FunctionOrValue, Merge, ReactNodeOrFunction } from "../../utils"
 import type { RatingStyle } from "./rating.style"
 import type { UseRatingItemProps, UseRatingProps } from "./use-rating"
 import { useMemo } from "react"
-import { createSlotComponent, styled, varAttr } from "../../core"
+import { createSlotComponent, mergeProps, styled, varAttr } from "../../core"
 import { runIfFn } from "../../utils"
 import { StarIcon } from "../icon"
 import { ratingStyle } from "./rating.style"
@@ -210,7 +210,7 @@ const RatingGroup = withContext<"div", RatingGroupProps>(
     )
 
     return (
-      <styled.div {...runIfFn(groupProps, value)} {...rest}>
+      <styled.div {...mergeProps(rest, runIfFn(groupProps, value))()}>
         {Array.from({ length: count }).map((_, index) => (
           <RatingItem key={index} groupValue={value} index={index} />
         ))}

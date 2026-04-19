@@ -41,6 +41,29 @@ describe("<Rating />", () => {
     expect(screen.getByRole("radiogroup")).toHaveClass("ui-rating__root")
   })
 
+  test("should merge `groupProps` with slot props without overwriting user props", () => {
+    const onClick = vi.fn()
+
+    const { container } = render(
+      <Rating
+        groupProps={(value) => ({
+          className: `group-${value}`,
+          style: { outlineColor: "red" },
+          value,
+          onClick,
+        })}
+      />,
+    )
+
+    const firstGroup = container.querySelector(".ui-rating__group")
+
+    expect(firstGroup).toHaveClass("ui-rating__group", "group-1")
+    expect(firstGroup).toHaveStyle({ outlineColor: "rgb(255, 0, 0)" })
+
+    fireEvent.click(firstGroup!)
+    expect(onClick).toHaveBeenCalledTimes(1)
+  })
+
   test("rating renders correctly with value", () => {
     const { container } = render(<Rating value={4} />)
 

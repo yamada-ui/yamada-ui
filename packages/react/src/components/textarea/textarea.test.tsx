@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Textarea } from "./"
 
 describe("<Textarea />", () => {
@@ -10,64 +10,69 @@ describe("<Textarea />", () => {
     expect(Textarea.displayName).toBe("Textarea")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Textarea />)
-    expect(screen.getByRole("textbox")).toHaveClass("ui-textarea")
+  test("sets `className` correctly", async () => {
+    await render(<Textarea />)
+    await expect.element(page.getByRole("textbox")).toHaveClass("ui-textarea")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Textarea />)
-    expect(screen.getByRole("textbox").tagName).toBe("TEXTAREA")
+  test("renders HTML tag correctly", async () => {
+    await render(<Textarea />)
+    expect(page.getByRole("textbox").element().tagName).toBe("TEXTAREA")
   })
 
-  test("Disabled Textarea renders correctly", () => {
-    render(<Textarea disabled />)
-
-    expect(screen.getByRole("textbox")).toHaveAttribute("disabled")
+  test("Disabled Textarea renders correctly", async () => {
+    await render(<Textarea disabled />)
+    await expect.element(page.getByRole("textbox")).toHaveAttribute("disabled")
   })
 
-  test("Read-Only Textarea renders correctly", () => {
-    render(<Textarea readOnly />)
-
-    expect(screen.getByRole("textbox")).toHaveAttribute("aria-readonly", "true")
+  test("Read-Only Textarea renders correctly", async () => {
+    await render(<Textarea readOnly />)
+    await expect
+      .element(page.getByRole("textbox"))
+      .toHaveAttribute("aria-readonly", "true")
   })
 
-  test("Invalid Textarea renders correctly", () => {
-    render(<Textarea invalid />)
-
-    expect(screen.getByRole("textbox")).toHaveAttribute("aria-invalid", "true")
+  test("Invalid Textarea renders correctly", async () => {
+    await render(<Textarea invalid />)
+    await expect
+      .element(page.getByRole("textbox"))
+      .toHaveAttribute("aria-invalid", "true")
   })
 
-  test("Resize Textarea renders correctly", () => {
-    render(<Textarea resize="none" />)
-
-    expect(screen.getByRole("textbox")).toHaveStyle({ resize: "none" })
+  test("Resize Textarea renders correctly", async () => {
+    await render(<Textarea resize="none" />)
+    await expect.element(page.getByRole("textbox")).toHaveStyle({
+      resize: "none",
+    })
   })
 
-  test("Placeholder Textarea renders correctly", () => {
-    render(<Textarea placeholder="text" />)
-
-    expect(screen.getByRole("textbox")).toHaveAttribute("placeholder", "text")
+  test("Placeholder Textarea renders correctly", async () => {
+    await render(<Textarea placeholder="text" />)
+    await expect
+      .element(page.getByRole("textbox"))
+      .toHaveAttribute("placeholder", "text")
   })
-  test("Rows Textarea renders correctly", () => {
-    render(<Textarea rows={1} />)
-    expect(screen.getByRole("textbox")).toHaveProperty("rows", 1)
+  test("Rows Textarea renders correctly", async () => {
+    await render(<Textarea rows={1} />)
+    const textarea = page.getByRole("textbox").element() as HTMLTextAreaElement
+    expect(textarea.rows).toBe(1)
   })
 
-  test("Autosize Textarea renders correctly", () => {
-    let fontsData =
-      "fonts" in global.document ? global.document.fonts : undefined
+  test("Autosize Textarea renders correctly", async () => {
+    let fontsData = "fonts" in document ? document.fonts : undefined
 
-    Object.defineProperty(global.document, "fonts", {
+    Object.defineProperty(document, "fonts", {
       value: {
         addEventListener: vi.fn(),
         removeEventListener: vi.fn(),
       },
       writable: true,
     })
-    render(<Textarea autosize />)
-    expect(screen.getByRole("textbox")).toHaveProperty("rows", 2)
-    Object.defineProperty(global.document, "fonts", {
+    await render(<Textarea autosize />)
+    const textarea = page.getByRole("textbox").element() as HTMLTextAreaElement
+
+    await expect.poll(() => textarea.rows).toBe(2)
+    Object.defineProperty(document, "fonts", {
       value: fontsData,
       writable: true,
     })

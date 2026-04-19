@@ -1,4 +1,4 @@
-import { a11y, hasSuppressHydrationWarning, render, screen } from "#test"
+import { a11y, hasSuppressHydrationWarning, page, render } from "#test/browser"
 import { noop } from "../../utils"
 import { BoxIcon } from "../icon"
 import { Accordion } from "./"
@@ -36,8 +36,8 @@ describe("<Accordion />", () => {
     expect(Accordion.Panel.displayName).toBe("AccordionPanel")
   })
 
-  test("sets `className` correctly", () => {
-    render(
+  test("sets `className` correctly", async () => {
+    await render(
       <Accordion.Root data-testid="root">
         <Accordion.Item data-testid="item" button="Accordion Label" index={0}>
           <Accordion.Panel data-testid="panel">
@@ -46,16 +46,23 @@ describe("<Accordion />", () => {
         </Accordion.Item>
       </Accordion.Root>,
     )
-    expect(screen.getByTestId("root")).toHaveClass("ui-accordion__root")
-    expect(screen.getByTestId("item")).toHaveClass("ui-accordion__item")
-    expect(screen.getByTestId("panel")).toHaveClass("ui-accordion__panel")
-    expect(
-      screen.getByRole("button", { name: /Accordion Label/i }),
-    ).toHaveClass("ui-accordion__button")
+
+    await expect
+      .element(page.getByTestId("root"))
+      .toHaveClass("ui-accordion__root")
+    await expect
+      .element(page.getByTestId("item"))
+      .toHaveClass("ui-accordion__item")
+    await expect
+      .element(page.getByTestId("panel"))
+      .toHaveClass("ui-accordion__panel")
+    await expect
+      .element(page.getByRole("button", { name: /Accordion Label/i }))
+      .toHaveClass("ui-accordion__button")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(
+  test("renders HTML tag correctly", async () => {
+    await render(
       <Accordion.Root data-testid="root">
         <Accordion.Item data-testid="item" button="Accordion Label" index={0}>
           <Accordion.Panel data-testid="panel">
@@ -64,58 +71,62 @@ describe("<Accordion />", () => {
         </Accordion.Item>
       </Accordion.Root>,
     )
-    expect(screen.getByTestId("root").tagName).toBe("DIV")
-    const item = screen.getByTestId("item")
+
+    expect(page.getByTestId("root").element().tagName).toBe("DIV")
+
+    const item = page.getByTestId("item").element()
     expect(item.tagName).toBe("DIV")
     expect(item.children[0]?.tagName).toBe("H3")
-    expect(screen.getByTestId("panel").tagName).toBe("DIV")
+
+    expect(page.getByTestId("panel").element().tagName).toBe("DIV")
     expect(
-      screen.getByRole("button", { name: /Accordion Label/i }).tagName,
+      page.getByRole("button", { name: /Accordion Label/i }).element().tagName,
     ).toBe("BUTTON")
   })
 
   test("should render correctly with defaultIndex item expanded", async () => {
-    render(<Accordion.Root defaultIndex={0} items={items} />)
+    await render(<Accordion.Root defaultIndex={0} items={items} />)
 
-    const button = await screen.findByRole("button", {
+    const button = page.getByRole("button", {
       name: /Accordion Label 1/i,
     })
-    expect(button).toHaveAttribute("aria-expanded", "true")
-    const paragraphs = await screen.findAllByRole("paragraph")
-    expect(paragraphs[0]).toHaveTextContent("This is an accordion item 1")
+    await expect.element(button).toHaveAttribute("aria-expanded", "true")
+    await expect
+      .element(page.getByText("This is an accordion item 1"))
+      .toBeVisible()
   })
 
   test("should work correctly with toggle", async () => {
-    const { user } = render(<Accordion.Root items={items} toggle />)
+    const { user } = await render(<Accordion.Root items={items} toggle />)
 
-    const button = screen.getByRole("button", { name: /Accordion Label 1/i })
-
-    await user.click(button)
-    expect(button).toHaveAttribute("aria-expanded", "true")
+    const button = page.getByRole("button", { name: /Accordion Label 1/i })
 
     await user.click(button)
-    expect(button).toHaveAttribute("aria-expanded", "false")
+    await expect.element(button).toHaveAttribute("aria-expanded", "true")
+
+    await user.click(button)
+    await expect.element(button).toHaveAttribute("aria-expanded", "false")
   })
 
   test("should show multiple items", async () => {
-    const { user } = render(
+    const { user } = await render(
       <Accordion.Root defaultIndex={[0, 1]} items={items} multiple />,
     )
 
-    const item1 = screen.getByRole("button", { name: /Accordion Label 1/i })
-    const item2 = screen.getByRole("button", { name: /Accordion Label 2/i })
-    const item3 = screen.getByRole("button", { name: /Accordion Label 3/i })
+    const item1 = page.getByRole("button", { name: /Accordion Label 1/i })
+    const item2 = page.getByRole("button", { name: /Accordion Label 2/i })
+    const item3 = page.getByRole("button", { name: /Accordion Label 3/i })
 
-    expect(item1).toHaveAttribute("aria-expanded", "true")
-    expect(item2).toHaveAttribute("aria-expanded", "true")
-    expect(item3).toHaveAttribute("aria-expanded", "false")
+    await expect.element(item1).toHaveAttribute("aria-expanded", "true")
+    await expect.element(item2).toHaveAttribute("aria-expanded", "true")
+    await expect.element(item3).toHaveAttribute("aria-expanded", "false")
 
     await user.click(item3)
-    expect(item3).toHaveAttribute("aria-expanded", "true")
+    await expect.element(item3).toHaveAttribute("aria-expanded", "true")
   })
 
-  test("should render a disabled item", () => {
-    render(
+  test("should render a disabled item", async () => {
+    await render(
       <Accordion.Root>
         <Accordion.Item button="Accordion Label" disabled index={0}>
           This is an accordion item
@@ -123,12 +134,12 @@ describe("<Accordion />", () => {
       </Accordion.Root>,
     )
 
-    const button = screen.getByRole("button", { name: /Accordion Label/i })
-    expect(button).toBeDisabled()
+    const button = page.getByRole("button", { name: /Accordion Label/i })
+    await expect.element(button).toBeDisabled()
   })
 
   test("should render item with panel", async () => {
-    render(
+    await render(
       <Accordion.Root defaultIndex={0}>
         <Accordion.Item button="Accordion Label" index={0}>
           <Accordion.Panel>This is an accordion item</Accordion.Panel>
@@ -136,13 +147,13 @@ describe("<Accordion />", () => {
       </Accordion.Root>,
     )
 
-    const paragraph = await screen.findByRole("paragraph")
-
-    expect(paragraph).toHaveTextContent("This is an accordion item")
+    await expect
+      .element(page.getByText("This is an accordion item"))
+      .toBeVisible()
   })
 
   test("should render item with custom icon", async () => {
-    const { user } = render(
+    const { user } = await render(
       <Accordion.Root
         icon={({ expanded }) => (
           <BoxIcon
@@ -156,20 +167,20 @@ describe("<Accordion />", () => {
         </Accordion.Item>
       </Accordion.Root>,
     )
-    expect(screen.getByTestId("custom-icon")).toHaveAttribute(
-      "data-icon",
-      "plus",
-    )
 
-    await user.click(screen.getByRole("button", { name: /Accordion Label/i }))
-    expect(screen.getByTestId("custom-icon")).toHaveAttribute(
-      "data-icon",
-      "minus",
-    )
+    await expect
+      .element(page.getByTestId("custom-icon"))
+      .toHaveAttribute("data-icon", "plus")
+
+    await user.click(page.getByRole("button", { name: /Accordion Label/i }))
+
+    await expect
+      .element(page.getByTestId("custom-icon"))
+      .toHaveAttribute("data-icon", "minus")
   })
 
   test("should render item with custom icon in AccordionItem", async () => {
-    const { user } = render(
+    const { user } = await render(
       <Accordion.Root>
         <Accordion.Item
           button="Accordion Label"
@@ -185,20 +196,20 @@ describe("<Accordion />", () => {
         </Accordion.Item>
       </Accordion.Root>,
     )
-    expect(screen.getByTestId("custom-icon")).toHaveAttribute(
-      "data-icon",
-      "plus",
-    )
 
-    await user.click(screen.getByRole("button", { name: /Accordion Label/i }))
-    expect(screen.getByTestId("custom-icon")).toHaveAttribute(
-      "data-icon",
-      "minus",
-    )
+    await expect
+      .element(page.getByTestId("custom-icon"))
+      .toHaveAttribute("data-icon", "plus")
+
+    await user.click(page.getByRole("button", { name: /Accordion Label/i }))
+
+    await expect
+      .element(page.getByTestId("custom-icon"))
+      .toHaveAttribute("data-icon", "minus")
   })
 
   test("should render item with custom icon in AccordionButton", async () => {
-    const { user } = render(
+    const { user } = await render(
       <Accordion.Root>
         <Accordion.Item index={0}>
           <Accordion.Button
@@ -215,20 +226,20 @@ describe("<Accordion />", () => {
         </Accordion.Item>
       </Accordion.Root>,
     )
-    expect(screen.getByTestId("custom-icon")).toHaveAttribute(
-      "data-icon",
-      "plus",
-    )
 
-    await user.click(screen.getByRole("button", { name: /Accordion Label/i }))
-    expect(screen.getByTestId("custom-icon")).toHaveAttribute(
-      "data-icon",
-      "minus",
-    )
+    await expect
+      .element(page.getByTestId("custom-icon"))
+      .toHaveAttribute("data-icon", "plus")
+
+    await user.click(page.getByRole("button", { name: /Accordion Label/i }))
+
+    await expect
+      .element(page.getByTestId("custom-icon"))
+      .toHaveAttribute("data-icon", "minus")
   })
 
-  test("should render item with custom label", () => {
-    render(
+  test("should render item with custom label", async () => {
+    await render(
       <Accordion.Root>
         <Accordion.Item index={0}>
           <Accordion.Button>Accordion Label</Accordion.Button>
@@ -236,13 +247,14 @@ describe("<Accordion />", () => {
         </Accordion.Item>
       </Accordion.Root>,
     )
-    expect(
-      screen.getByRole("button", { name: /Accordion Label/i }),
-    ).toBeInTheDocument()
+
+    await expect
+      .element(page.getByRole("button", { name: /Accordion Label/i }))
+      .toBeVisible()
   })
 
   test("should render label with function label", async () => {
-    const { user } = render(
+    const { user } = await render(
       <Accordion.Root>
         <Accordion.Item
           button={({ disabled, expanded }) => {
@@ -258,78 +270,81 @@ describe("<Accordion />", () => {
       </Accordion.Root>,
     )
 
-    const button = screen.getByRole("button", { name: /Not expanded/i })
-    expect(button).toBeInTheDocument()
+    const button = page.getByRole("button", { name: /Not expanded/i })
+    await expect.element(button).toBeVisible()
 
     await user.click(button)
-    expect(button).toHaveTextContent("Is expanded")
+
+    await expect
+      .element(page.getByRole("button", { name: /Is expanded/i }))
+      .toBeVisible()
   })
 
   test("focus moves correctly on ArrowDown", async () => {
-    const { user } = render(<Accordion.Root items={items} />)
+    const { user } = await render(<Accordion.Root items={items} />)
 
-    const item1 = screen.getByRole("button", { name: /Accordion Label 1/i })
-    const item2 = screen.getByRole("button", { name: /Accordion Label 2/i })
-    const item3 = screen.getByRole("button", { name: /Accordion Label 3/i })
+    const item1 = page.getByRole("button", { name: /Accordion Label 1/i })
+    const item2 = page.getByRole("button", { name: /Accordion Label 2/i })
+    const item3 = page.getByRole("button", { name: /Accordion Label 3/i })
 
     await user.click(item1)
-    expect(item1).toHaveFocus()
+    await expect.element(item1).toHaveFocus()
 
     await user.keyboard("{ArrowDown>}")
-    expect(item2).toHaveFocus()
+    await expect.element(item2).toHaveFocus()
 
     await user.keyboard("{ArrowDown>}")
-    expect(item3).toHaveFocus()
+    await expect.element(item3).toHaveFocus()
 
     await user.keyboard("{ArrowDown>}")
-    expect(item1).toHaveFocus()
+    await expect.element(item1).toHaveFocus()
   })
 
   test("focus moves correctly on ArrowUp", async () => {
-    const { user } = render(<Accordion.Root items={items} />)
+    const { user } = await render(<Accordion.Root items={items} />)
 
-    const item1 = screen.getByRole("button", { name: /Accordion Label 1/i })
-    const item2 = screen.getByRole("button", { name: /Accordion Label 2/i })
-    const item3 = screen.getByRole("button", { name: /Accordion Label 3/i })
+    const item1 = page.getByRole("button", { name: /Accordion Label 1/i })
+    const item2 = page.getByRole("button", { name: /Accordion Label 2/i })
+    const item3 = page.getByRole("button", { name: /Accordion Label 3/i })
 
     await user.click(item1)
-    expect(item1).toHaveFocus()
+    await expect.element(item1).toHaveFocus()
 
     await user.keyboard("{ArrowUp>}")
-    expect(item3).toHaveFocus()
+    await expect.element(item3).toHaveFocus()
 
     await user.keyboard("{ArrowUp>}")
-    expect(item2).toHaveFocus()
+    await expect.element(item2).toHaveFocus()
   })
 
   test("focus moves correctly on Home", async () => {
-    const { user } = render(<Accordion.Root items={items} />)
+    const { user } = await render(<Accordion.Root items={items} />)
 
-    const item1 = screen.getByRole("button", { name: /Accordion Label 1/i })
-    const item3 = screen.getByRole("button", { name: /Accordion Label 3/i })
+    const item1 = page.getByRole("button", { name: /Accordion Label 1/i })
+    const item3 = page.getByRole("button", { name: /Accordion Label 3/i })
 
     await user.click(item3)
-    expect(item3).toHaveFocus()
+    await expect.element(item3).toHaveFocus()
 
     await user.keyboard("{Home>}")
-    expect(item1).toHaveFocus()
+    await expect.element(item1).toHaveFocus()
   })
 
   test("focus moves correctly on End", async () => {
-    const { user } = render(<Accordion.Root items={items} />)
+    const { user } = await render(<Accordion.Root items={items} />)
 
-    const item1 = screen.getByRole("button", { name: /Accordion Label 1/i })
-    const item3 = screen.getByRole("button", { name: /Accordion Label 3/i })
+    const item1 = page.getByRole("button", { name: /Accordion Label 1/i })
+    const item3 = page.getByRole("button", { name: /Accordion Label 3/i })
 
     await user.click(item1)
-    expect(item1).toHaveFocus()
+    await expect.element(item1).toHaveFocus()
 
     await user.keyboard("{End>}")
-    expect(item3).toHaveFocus()
+    await expect.element(item3).toHaveFocus()
   })
 
-  test("forwards `suppressHydrationWarning` to the AccordionButton `<button>` via getButtonProps", () => {
-    render(
+  test("forwards `suppressHydrationWarning` to the AccordionButton `<button>` via getButtonProps", async () => {
+    const { container } = await render(
       <Accordion.Root suppressHydrationWarning>
         <Accordion.Item index={0}>
           <Accordion.Button data-testid="button">
@@ -340,12 +355,12 @@ describe("<Accordion />", () => {
       </Accordion.Root>,
     )
 
-    const button = screen.getByTestId("button")
+    const button = container.querySelector("button")
     expect(hasSuppressHydrationWarning(button)).toBeTruthy()
   })
 
-  test("forwards `suppressHydrationWarning` to the AccordionPanel `<div>` via getPanelProps", () => {
-    render(
+  test("forwards `suppressHydrationWarning` to the AccordionPanel `<div>` via getPanelProps", async () => {
+    const { container } = await render(
       <Accordion.Root defaultIndex={0} suppressHydrationWarning>
         <Accordion.Item button="Accordion Label" index={0}>
           <Accordion.Panel data-testid="panel">
@@ -355,14 +370,14 @@ describe("<Accordion />", () => {
       </Accordion.Root>,
     )
 
-    const panel = screen.getByTestId("panel")
+    const panel = container.querySelector("div")
     expect(hasSuppressHydrationWarning(panel)).toBeTruthy()
   })
 
-  test("correct warnings should be issued when multiple and toggle", () => {
+  test("correct warnings should be issued when multiple and toggle", async () => {
     const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
 
-    render(
+    await render(
       <Accordion.Root multiple toggle>
         <Accordion.Item button="Accordion Label" index={0}>
           This is an accordion item
@@ -370,17 +385,19 @@ describe("<Accordion />", () => {
       </Accordion.Root>,
     )
 
-    expect(consoleWarnSpy).toHaveBeenLastCalledWith(
-      "Accordion: If 'multiple' is passed, 'toggle' will be ignored. Either remove 'toggle' or 'multiple' depending on whether you want multiple accordions visible or not",
+    await vi.waitFor(() =>
+      expect(consoleWarnSpy).toHaveBeenLastCalledWith(
+        "Accordion: If 'multiple' is passed, 'toggle' will be ignored. Either remove 'toggle' or 'multiple' depending on whether you want multiple accordions visible or not",
+      ),
     )
 
     consoleWarnSpy.mockRestore()
   })
 
-  test("correct warnings should be issued when multiple and defaultIndex is not array", () => {
+  test("correct warnings should be issued when multiple and defaultIndex is not array", async () => {
     const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
 
-    render(
+    await render(
       <Accordion.Root defaultIndex={1} multiple>
         <Accordion.Item button="Accordion Label" index={0}>
           This is an accordion item
@@ -388,8 +405,10 @@ describe("<Accordion />", () => {
       </Accordion.Root>,
     )
 
-    expect(consoleWarnSpy).toHaveBeenLastCalledWith(
-      "Accordion: If 'multiple' is passed, then 'index' or 'defaultIndex' must be an array.",
+    await vi.waitFor(() =>
+      expect(consoleWarnSpy).toHaveBeenLastCalledWith(
+        "Accordion: If 'multiple' is passed, then 'index' or 'defaultIndex' must be an array.",
+      ),
     )
 
     consoleWarnSpy.mockRestore()

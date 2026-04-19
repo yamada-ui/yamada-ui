@@ -1,5 +1,6 @@
-import { a11y, render, screen, waitFor } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { useState } from "react"
+import { vi } from "vitest"
 import { SlideFade } from "./slide-fade"
 
 describe("<SlideFade />", () => {
@@ -11,14 +12,16 @@ describe("<SlideFade />", () => {
     expect(SlideFade.displayName).toBe("SlideFade")
   })
 
-  test("sets `className` correctly", () => {
-    render(<SlideFade>SlideFade</SlideFade>)
-    expect(screen.getByText("SlideFade")).toHaveClass("ui-slide-fade")
+  test("sets `className` correctly", async () => {
+    await render(<SlideFade>SlideFade</SlideFade>)
+    await expect
+      .element(page.getByText("SlideFade"))
+      .toHaveClass("ui-slide-fade")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<SlideFade>SlideFade</SlideFade>)
-    expect(screen.getByText("SlideFade").tagName).toBe("DIV")
+  test("renders HTML tag correctly", async () => {
+    await render(<SlideFade>SlideFade</SlideFade>)
+    expect(page.getByText("SlideFade").element().tagName).toBe("DIV")
   })
 
   test("fade-in and fade-out work correctly", async () => {
@@ -33,17 +36,18 @@ describe("<SlideFade />", () => {
       )
     }
 
-    const { user } = render(<TestComponent />)
+    const { user } = await render(<TestComponent />)
 
-    const button = await screen.findByRole("button", { name: /button/i })
-    const slideFade = await screen.findByText("SlideFade")
-    expect(slideFade).not.toBeVisible()
-
-    await user.click(button)
-    await waitFor(() => expect(slideFade).toBeVisible())
+    const button = page.getByRole("button", { name: /button/i })
+    const slideFade = page.getByText("SlideFade")
+    const getOpacity = () => getComputedStyle(slideFade.element()).opacity
+    expect(getOpacity()).toBe("0")
 
     await user.click(button)
-    await waitFor(() => expect(slideFade).not.toBeVisible())
+    await vi.waitFor(() => expect(getOpacity()).toBe("1"))
+
+    await user.click(button)
+    await vi.waitFor(() => expect(getOpacity()).toBe("0"))
   })
 
   test("fade-in and fade-out work correctly when `initial` is passed to an `initial` property", async () => {
@@ -60,47 +64,43 @@ describe("<SlideFade />", () => {
       )
     }
 
-    const { user } = render(<TestComponent />)
+    const { user } = await render(<TestComponent />)
 
-    const button = await screen.findByRole("button", { name: /button/i })
-    const slideFade = await screen.findByText("SlideFade")
-    expect(slideFade).not.toBeVisible()
-
-    await user.click(button)
-    await waitFor(() => expect(slideFade).toBeVisible())
+    const button = page.getByRole("button", { name: /button/i })
+    const slideFade = page.getByText("SlideFade")
+    const getOpacity = () => getComputedStyle(slideFade.element()).opacity
+    expect(getOpacity()).toBe("0")
 
     await user.click(button)
-    await waitFor(() => expect(slideFade).not.toBeVisible())
+    await vi.waitFor(() => expect(getOpacity()).toBe("1"))
+
+    await user.click(button)
+    await vi.waitFor(() => expect(getOpacity()).toBe("0"))
   })
 
   test("default offset is set correctly", async () => {
-    render(<SlideFade>SlideFade</SlideFade>)
+    await render(<SlideFade>SlideFade</SlideFade>)
 
-    const slideFade = await screen.findByText("SlideFade")
+    const slideFade = page.getByText("SlideFade").element()
 
-    expect(slideFade).toHaveStyle({
-      transform: "translateY(8px)",
-    })
+    expect(slideFade.getAttribute("style")).toContain("translateY(8px)")
   })
 
   test("applies offsetX correctly", async () => {
-    render(<SlideFade offsetX={10}>SlideFade</SlideFade>)
+    await render(<SlideFade offsetX={10}>SlideFade</SlideFade>)
 
-    const slideFade = await screen.findByText("SlideFade")
+    const slideFade = page.getByText("SlideFade").element()
 
-    expect(slideFade).toHaveStyle({
-      transform: "translateX(10px) translateY(8px)",
-    })
+    expect(slideFade.getAttribute("style")).toContain("translateX(10px)")
+    expect(slideFade.getAttribute("style")).toContain("translateY(8px)")
   })
 
   test("applies offsetY correctly", async () => {
-    render(<SlideFade offsetY={10}>SlideFade</SlideFade>)
+    await render(<SlideFade offsetY={10}>SlideFade</SlideFade>)
 
-    const slideFade = await screen.findByText("SlideFade")
+    const slideFade = page.getByText("SlideFade").element()
 
-    expect(slideFade).toHaveStyle({
-      transform: "translateY(10px)",
-    })
+    expect(slideFade.getAttribute("style")).toContain("translateY(10px)")
   })
 
   test("unmountOnExit works correctly", async () => {
@@ -117,16 +117,17 @@ describe("<SlideFade />", () => {
       )
     }
 
-    const { user } = render(<TestComponent />)
+    const { container, user } = await render(<TestComponent />)
 
-    const button = await screen.findByRole("button", { name: /button/i })
-
-    expect(screen.queryByText("SlideFade")).toBeNull()
-
-    await user.click(button)
-    await waitFor(() => expect(screen.getByText("SlideFade")).toBeVisible())
+    const button = page.getByRole("button", { name: /button/i })
+    expect(container.textContent).not.toContain("SlideFade")
 
     await user.click(button)
-    await waitFor(() => expect(screen.queryByText("SlideFade")).toBeNull())
+    await expect.element(page.getByText("SlideFade")).toBeVisible()
+
+    await user.click(button)
+    await vi.waitFor(() => {
+      expect(container.textContent).not.toContain("SlideFade")
+    })
   })
 })

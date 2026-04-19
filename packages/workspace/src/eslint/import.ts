@@ -13,7 +13,7 @@ export const importConfigArray: ConfigWithExtendsArray = [
       "import/enforce-node-protocol-usage": ["error", "always"],
       "import/extensions": [
         "error",
-        "always",
+        "ignorePackages",
         { cts: "never", mts: "never", ts: "never", tsx: "never" },
       ],
       "import/no-named-as-default": "off",

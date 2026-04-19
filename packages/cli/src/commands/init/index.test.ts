@@ -39,8 +39,8 @@ describe("init", () => {
     mockPrompts
       .mockResolvedValueOnce({
         src: true,
-        format: true,
-        lint: true,
+        formatter: "prettier",
+        linter: "eslint",
         monorepo: true,
         outdir: undefined,
         packageName: undefined,
@@ -70,8 +70,8 @@ describe("init", () => {
     const mockPrompts = vi.mocked(prompts.default)
     mockPrompts
       .mockResolvedValueOnce({
-        format: true,
-        lint: true,
+        formatter: "prettier",
+        linter: "eslint",
         monorepo: false,
         outdir: undefined,
         packageName: undefined,
@@ -125,8 +125,8 @@ describe("init", () => {
     vi.mocked(prompts.default)
       .mockResolvedValueOnce({
         src: false,
-        format: true,
-        lint: true,
+        formatter: "prettier",
+        linter: "eslint",
         monorepo: true,
         outdir: undefined,
         packageName: undefined,
@@ -187,8 +187,8 @@ describe("init", () => {
     vi.mocked(prompts.default)
       .mockResolvedValueOnce({
         src: true,
-        format: true,
-        lint: true,
+        formatter: "prettier",
+        linter: "eslint",
         monorepo: true,
         outdir: "./packages/ui-lib",
         packageName: undefined,
@@ -255,8 +255,8 @@ describe("init", () => {
     mockPrompts
       .mockResolvedValueOnce({
         src: true,
-        format: true,
-        lint: true,
+        formatter: "prettier",
+        linter: "eslint",
         monorepo: true,
       })
       .mockResolvedValueOnce({ generate: true })
@@ -279,8 +279,8 @@ describe("init", () => {
     vi.mocked(prompts.default)
       .mockResolvedValueOnce({
         src: true,
-        format: true,
-        lint: true,
+        formatter: "prettier",
+        linter: "eslint",
         monorepo: true,
         outdir: "ui",
         packageName: undefined,
@@ -303,8 +303,8 @@ describe("init", () => {
     const prompts = await import("prompts")
     vi.mocked(prompts.default)
       .mockResolvedValueOnce({
-        format: true,
-        lint: true,
+        formatter: "prettier",
+        linter: "eslint",
         monorepo: false,
         outdir: undefined,
         packageName: undefined,
@@ -324,6 +324,69 @@ describe("init", () => {
     const outdirPath = path.join(tempDir, "components", "ui")
     // jsx → index.js instead of index.ts
     expect(existsSync(path.join(outdirPath, "index.js"))).toBeTruthy()
+  })
+
+  test("should save tool property when selected via prompt", async () => {
+    const prompts = await import("prompts")
+    vi.mocked(prompts.default)
+      .mockResolvedValueOnce({
+        src: true,
+        formatter: "prettier",
+        linter: "eslint",
+        monorepo: true,
+        outdir: undefined,
+        packageName: undefined,
+      })
+      .mockResolvedValueOnce({ generate: true })
+      .mockResolvedValueOnce({ generate: true })
+      .mockResolvedValueOnce({ install: false })
+
+    await init.parseAsync(["--cwd", tempDir], { from: "user" })
+
+    const configPath = path.join(tempDir, "ui.json")
+    const config = JSON.parse(readFileSync(configPath, "utf-8"))
+    expect(config.formatter).toBe("prettier")
+    expect(config.linter).toBe("eslint")
+    expect(config.format).toBeUndefined()
+    expect(config.lint).toBeUndefined()
+  })
+
+  test("should use default tools with --yes", async () => {
+    await init.parseAsync(
+      ["--cwd", tempDir, "--yes", "--monorepo", "--no-install"],
+      { from: "user" },
+    )
+
+    const configPath = path.join(tempDir, "ui.json")
+    const config = JSON.parse(readFileSync(configPath, "utf-8"))
+    expect(config.formatter).toBe("prettier")
+    expect(config.linter).toBe("eslint")
+    expect(config.format).toBeUndefined()
+    expect(config.lint).toBeUndefined()
+  })
+
+  test("should not write formatter / linter when --formatter none --linter none", async () => {
+    await init.parseAsync(
+      [
+        "--cwd",
+        tempDir,
+        "--yes",
+        "--monorepo",
+        "--no-install",
+        "--formatter",
+        "none",
+        "--linter",
+        "none",
+      ],
+      { from: "user" },
+    )
+
+    const configPath = path.join(tempDir, "ui.json")
+    const config = JSON.parse(readFileSync(configPath, "utf-8"))
+    expect(config.formatter).toBeUndefined()
+    expect(config.linter).toBeUndefined()
+    expect(config.format).toBeUndefined()
+    expect(config.lint).toBeUndefined()
   })
 
   test("should overwrite existing outdir when prompted", async () => {

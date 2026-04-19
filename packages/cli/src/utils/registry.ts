@@ -21,8 +21,12 @@ import {
   SECTION_NAMES,
 } from "../constant"
 import { writeFileSafe } from "./fs"
-import { lintText } from "./lint"
-import { formatText } from "./prettier"
+import {
+  resolveFormatter,
+  resolveLinter,
+  selectFormatter,
+  selectLinter,
+} from "./toolchain"
 import {
   isJsx,
   transformExtension,
@@ -310,7 +314,7 @@ export async function transformContentWithFormatAndLint(
   config: Config,
   generatedNames: string[],
 ) {
-  const { cwd, format, jsx, lint } = config
+  const { cwd, format, formatter, jsx, lint, linter } = config
 
   content = transformContent(section, content, config, generatedNames)
 
@@ -319,12 +323,17 @@ export async function transformContentWithFormatAndLint(
       ? transformTsxToJsx(content)
       : transformTsToJs(content)
 
-  content = await lintText(content, {
-    ...lint,
-    cwd,
-    filePath,
-  })
-  content = await formatText(content, format)
+  const linterTool = selectLinter({ lint, linter })
+  if (linterTool) {
+    const linterInstance = await resolveLinter(cwd, linterTool)
+    content = await linterInstance.lintText(content, { cwd, filePath })
+  }
+
+  const formatterTool = selectFormatter({ format, formatter })
+  if (formatterTool) {
+    const formatterInstance = await resolveFormatter(cwd, formatterTool)
+    content = await formatterInstance.formatText(content, format)
+  }
 
   return content
 }
@@ -391,12 +400,20 @@ export async function transformIndexWithFormatAndLint(
 
   if (config.jsx) content = transformTsToJs(content)
 
-  content = await lintText(content, {
-    ...config.lint,
-    cwd: config.cwd,
-    filePath: config.paths.ui.index,
-  })
-  content = await formatText(content, config.format)
+  const linterTool = selectLinter(config)
+  if (linterTool) {
+    const linter = await resolveLinter(config.cwd, linterTool)
+    content = await linter.lintText(content, {
+      cwd: config.cwd,
+      filePath: config.paths.ui.index,
+    })
+  }
+
+  const formatterTool = selectFormatter(config)
+  if (formatterTool) {
+    const formatter = await resolveFormatter(config.cwd, formatterTool)
+    content = await formatter.formatText(content, config.format)
+  }
 
   return content
 }
@@ -454,7 +471,7 @@ export async function generateSources(
     writeFileSafe(
       path.resolve(dirPath, REGISTRY_FILE_NAME),
       JSON.stringify(registry),
-      merge(config, { format: { parser: "json" } }),
+      merge(config, { format: { language: "json" } }),
     ),
   ])
 }

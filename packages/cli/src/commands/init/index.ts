@@ -1,4 +1,5 @@
 import type { PackageNameWithVersion, UserConfig } from "../../index.type"
+import type { FormatterToolName, LinterToolName } from "../../utils/toolchain"
 import { isObject, isUndefined, merge } from "@yamada-ui/utils"
 import boxen from "boxen"
 import { Command } from "commander"
@@ -40,6 +41,7 @@ import {
   validateDir,
   writeFileSafe,
 } from "../../utils"
+import { DEFAULT_FORMATTER, DEFAULT_LINTER } from "../../utils/toolchain"
 
 interface Options {
   config: string
@@ -47,9 +49,9 @@ interface Options {
   jsx: boolean
   overwrite: boolean
   yes: boolean
-  format?: boolean
+  formatter?: "none" | FormatterToolName
   install?: boolean
-  lint?: boolean
+  linter?: "none" | LinterToolName
   monorepo?: boolean
   outdir?: string
   packageName?: string
@@ -74,19 +76,17 @@ export const init = new Command("init")
     "--no-install",
     "do not install dependencies when choice is monorepo.",
   )
-  .option("-f, --format", "use Prettier.")
-  .option("--no-format", "do not use Prettier.")
-  .option("-l, --lint", "use ESLint.")
-  .option("--no-lint", "do not use ESLint.")
+  .option("--formatter <tool>", 'formatter to use (e.g. "prettier").')
+  .option("--linter <tool>", 'linter to use (e.g. "eslint").')
   .option("--outdir <path>", "output directory path.")
   .action(async function ({
     src,
     config: configPath,
     cwd,
-    format,
+    formatter,
     install,
     jsx,
-    lint,
+    linter,
     monorepo,
     outdir = "",
     overwrite,
@@ -156,27 +156,31 @@ export const init = new Command("init")
           ),
         },
         {
-          type: !yes && isUndefined(format) ? "toggle" : null,
-          name: "format",
-          active: "Yes",
-          inactive: "No",
-          initial: true,
-          message: c.reset(`Would you like to use Prettier?`),
+          type: !yes && isUndefined(formatter) ? "select" : null,
+          name: "formatter",
+          choices: [
+            { title: "Prettier", value: "prettier" },
+            { title: "None", value: "none" },
+          ],
+          initial: 0,
+          message: c.reset("Which formatter would you like to use?"),
         },
         {
-          type: !yes && isUndefined(lint) ? "toggle" : null,
-          name: "lint",
-          active: "Yes",
-          inactive: "No",
-          initial: true,
-          message: c.reset(`Would you like to use ESLint?`),
+          type: !yes && isUndefined(linter) ? "select" : null,
+          name: "linter",
+          choices: [
+            { title: "ESLint", value: "eslint" },
+            { title: "None", value: "none" },
+          ],
+          initial: 0,
+          message: c.reset("Which linter would you like to use?"),
         },
       ])
 
       monorepo ??= answer.monorepo ?? true
       src ??= answer.src ?? true
-      lint ??= answer.lint ?? true
-      format ??= answer.format ?? true
+      formatter ??= answer.formatter ?? DEFAULT_FORMATTER
+      linter ??= answer.linter ?? DEFAULT_LINTER
       // eslint-disable-next-line no-control-regex
       outdir = (answer.outdir ?? "").replace(/\x17/g, "").trim()
       outdir ||= monorepo ? DEFAULT_PATH.ui.monorepo : DEFAULT_PATH.ui.polyrepo
@@ -188,8 +192,8 @@ export const init = new Command("init")
       if (jsx) config.jsx = jsx
 
       config.path = outdir
-      config.format = { enabled: format }
-      config.lint = { enabled: lint }
+      if (formatter === "prettier") config.formatter = formatter
+      if (linter === "eslint") config.linter = linter
 
       if (!yes) {
         const { generate } = await prompts({
@@ -226,7 +230,7 @@ export const init = new Command("init")
       await writeFileSafe(
         configPath,
         JSON.stringify(config),
-        merge(config, { format: { parser: "json" } }),
+        merge(config, { format: { language: "json" } }),
       )
 
       spinner.succeed(`Generated ${c.cyan(configFileName)}`)
@@ -312,7 +316,7 @@ export const init = new Command("init")
                 await writeFileSafe(
                   targetPath,
                   content,
-                  merge(config, { format: { parser: "json" } }),
+                  merge(config, { format: { language: "json" } }),
                 )
 
                 task.title = `Generated ${c.cyan("package.json")}`
@@ -337,7 +341,7 @@ export const init = new Command("init")
                   writeFileSafe(
                     path.join(targetPath, REGISTRY_FILE_NAME),
                     JSON.stringify(registry),
-                    merge(config, { format: { parser: "json" } }),
+                    merge(config, { format: { language: "json" } }),
                   ),
                 ])
 
@@ -380,7 +384,7 @@ export const init = new Command("init")
               await writeFileSafe(
                 targetPath,
                 content,
-                merge(config, { format: { parser: "json" } }),
+                merge(config, { format: { language: "json" } }),
               )
 
               task.title = `Generated ${c.cyan("tsconfig.json")}`
@@ -456,7 +460,7 @@ export const init = new Command("init")
                   writeFileSafe(
                     path.resolve(outdirPath, REGISTRY_FILE_NAME),
                     JSON.stringify(registry),
-                    merge(config, { format: { parser: "json" } }),
+                    merge(config, { format: { language: "json" } }),
                   ),
                 ])
 

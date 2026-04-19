@@ -1,4 +1,5 @@
 import type { Dict } from "@yamada-ui/utils"
+import type { FormatterToolName, LinterToolName } from "./utils/toolchain"
 
 export interface SectionConfig {
   dependencies?: boolean
@@ -24,9 +25,11 @@ export interface UserConfig {
   $schema?: string
   components?: SectionConfig
   format?: FormatConfig
+  formatter?: FormatterToolName
   hooks?: SectionConfig
   jsx?: boolean
   lint?: LintConfig
+  linter?: LinterToolName
   monorepo?: boolean
   path?: string
   providers?: SectionConfig

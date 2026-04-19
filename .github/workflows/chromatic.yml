@@ -1,0 +1,109 @@
+name: Chromatic
+
+on:
+  push:
+    branches:
+      - main
+      - v*
+    paths:
+      - ".github/workflows/chromatic.yml"
+      - ".github/composite-actions/install/action.yml"
+      - ".nvmrc"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "turbo.json"
+      - "packages/react/package.json"
+      - "packages/react/tsconfig.json"
+      - "packages/react/turbo.json"
+      - "packages/react/storybook/**"
+      - "packages/react/src/**/*.ts"
+      - "packages/react/src/**/*.tsx"
+      - "!packages/react/src/**/*.test.ts"
+      - "!packages/react/src/**/*.test.tsx"
+      - "!packages/react/src/**/test/**"
+      - "packages/utils/package.json"
+      - "packages/utils/tsconfig.json"
+      - "packages/utils/src/**/*.ts"
+      - "packages/utils/src/**/*.tsx"
+      - "!packages/utils/src/**/*.test.ts"
+      - "!packages/utils/src/**/*.test.tsx"
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+    branches:
+      - main
+      - v*
+    paths:
+      - ".github/workflows/chromatic.yml"
+      - ".github/composite-actions/install/action.yml"
+      - ".nvmrc"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "turbo.json"
+      - "packages/react/package.json"
+      - "packages/react/tsconfig.json"
+      - "packages/react/turbo.json"
+      - "packages/react/storybook/**"
+      - "packages/react/src/**/*.ts"
+      - "packages/react/src/**/*.tsx"
+      - "!packages/react/src/**/*.test.ts"
+      - "!packages/react/src/**/*.test.tsx"
+      - "!packages/react/src/**/test/**"
+      - "packages/utils/package.json"
+      - "packages/utils/tsconfig.json"
+      - "packages/utils/src/**/*.ts"
+      - "packages/utils/src/**/*.tsx"
+      - "!packages/utils/src/**/*.test.ts"
+      - "!packages/utils/src/**/*.test.tsx"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.head.ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  visual:
+    name: Visual
+    if: ${{ github.event_name == 'push' || !github.event.pull_request.draft }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Install
+        uses: ./.github/composite-actions/install
+
+      - name: Run Chromatic
+        id: chromatic
+        uses: chromaui/action@23e7955cfd3530c57b3971904eed80a8dc54cf01 # v16.3.0
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          buildCommand: pnpm turbo run visual-test:build --filter=@yamada-ui/react
+          outputDir: packages/react/storybook-static
+          autoAcceptChanges: main
+
+      - name: Summarize build
+        if: ${{ always() }}
+        env:
+          BUILD_URL: ${{ steps.chromatic.outputs.buildUrl }}
+          STORYBOOK_URL: ${{ steps.chromatic.outputs.storybookUrl }}
+          CAPTURES: ${{ steps.chromatic.outputs.actualCaptureCount }}
+          CHANGES: ${{ steps.chromatic.outputs.changeCount }}
+          ERRORS: ${{ steps.chromatic.outputs.errorCount }}
+          TESTS: ${{ steps.chromatic.outputs.testCount }}
+        run: |
+          {
+            echo "### Chromatic"
+            echo ""
+            echo "- Build URL: ${BUILD_URL:-n/a}"
+            echo "- Storybook URL: ${STORYBOOK_URL:-n/a}"
+            echo "- Captures: ${CAPTURES:-0}"
+            echo "- Changes: ${CHANGES:-0}"
+            echo "- Errors: ${ERRORS:-0}"
+            echo "- Tests: ${TESTS:-0}"
+          } >> "$GITHUB_STEP_SUMMARY"

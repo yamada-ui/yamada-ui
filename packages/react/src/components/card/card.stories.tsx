@@ -140,3 +140,7 @@ export const Horizontal: Story = () => {
     </Card.Root>
   )
 }
+
+Horizontal.parameters = {
+  chromatic: { disableSnapshot: true },
+}

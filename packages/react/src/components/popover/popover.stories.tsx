@@ -351,6 +351,10 @@ export const Disabled: Story = () => {
   )
 }
 
+Disabled.parameters = {
+  chromatic: { disableSnapshot: true },
+}
+
 export const DisabledCloseOnBlur: Story = () => {
   return (
     <Popover.Root closeOnBlur={false}>

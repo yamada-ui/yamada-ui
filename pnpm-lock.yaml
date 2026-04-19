@@ -466,6 +466,9 @@ importers:
       axe-playwright:
         specifier: ^2.2.2
         version: 2.2.2(playwright@1.59.1)
+      chromatic:
+        specifier: ^16.2.0
+        version: 16.2.0
       jsdom:
         specifier: ^29.0.1
         version: 29.0.1
@@ -4779,6 +4782,18 @@ packages:
   chokidar@4.0.3:
     resolution: {integrity: sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==}
     engines: {node: '>= 14.16.0'}
+
+  chromatic@16.2.0:
+    resolution: {integrity: sha512-yFUC0iCumsw5JDQPmrNAgYuln25HRh79iGdJgm+dj87lv7kFatlRBgRcw8Kmzdw1si3qzGlzu36aCABS7Wg5aQ==}
+    hasBin: true
+    peerDependencies:
+      '@chromatic-com/cypress': ^0.*.* || ^1.0.0
+      '@chromatic-com/playwright': ^0.*.* || ^1.0.0
+    peerDependenciesMeta:
+      '@chromatic-com/cypress':
+        optional: true
+      '@chromatic-com/playwright':
+        optional: true
 
   ci-info@4.4.0:
     resolution: {integrity: sha512-77PSwercCZU2Fc4sX94eF8k8Pxte6JAwL4/ICZLFjJLqegs7kCuAsqqj/70NQF6TvDpgFjkubQB2FW2ZZddvQg==}
@@ -13451,6 +13466,8 @@ snapshots:
   chokidar@4.0.3:
     dependencies:
       readdirp: 4.1.2
+
+  chromatic@16.2.0: {}
 
   ci-info@4.4.0: {}
 

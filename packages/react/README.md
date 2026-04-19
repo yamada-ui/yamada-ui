@@ -18,6 +18,22 @@ Yamada UI has drawn a lot of inspiration from [Chakra UI](https://github.com/cha
 
 Visit https://yamada-ui.com to view the documentation.
 
+## Visual Regression Workflow
+
+```bash
+pnpm react storybook
+pnpm react visual-test:storybook
+pnpm react visual-test:build
+export CHROMATIC_PROJECT_TOKEN=<your-project-token>
+pnpm react visual-test:chromatic
+```
+
+- `pnpm react storybook` keeps normal dynamic docs behavior
+- visual-test scripts apply `STORYBOOK_VISUAL_TEST=true`
+- `visual-test:chromatic` builds through Turbo and uploads the `storybook-static` output to Chromatic
+- keep normal Storybook docs/demo behavior unchanged and prefer visual-test runtime pinning over broad story rewrites
+- use narrow `chromatic.disableSnapshot` metadata only for stories that are still too unstable for the current rollout
+
 ## Support
 
 Please support this project with you or your organization. Your logo will appear here with a link to your website. We'll appreciate some support. [[Contribute](https://opencollective.com/yamada-ui/contribute)]

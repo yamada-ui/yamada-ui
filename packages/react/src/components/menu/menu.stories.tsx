@@ -837,6 +837,10 @@ export const Disabled: Story = () => {
   )
 }
 
+Disabled.parameters = {
+  chromatic: { disableSnapshot: true },
+}
+
 export const DisabledItem: Story = () => {
   const items = useMemo<Menu.Item[]>(
     () => [

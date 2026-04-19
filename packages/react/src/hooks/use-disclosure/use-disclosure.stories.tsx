@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react-vite"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { Button } from "../../components/button"
 import { Modal } from "../../components/modal"
 // import { Dialog } from "../../components/modal"
@@ -11,7 +11,9 @@ const meta: Meta = {
 
 export default meta
 
-export const Basic = () => {
+type Story = StoryFn
+
+export const Basic: Story = () => {
   const { open, onClose, onOpen } = useDisclosure()
 
   return (
@@ -33,7 +35,7 @@ export const Basic = () => {
   )
 }
 
-export const Toggle = () => {
+export const Toggle: Story = () => {
   const { open, onToggle } = useDisclosure()
 
   return (
@@ -45,7 +47,7 @@ export const Toggle = () => {
   )
 }
 
-export const Chain = () => {
+export const Chain: Story = () => {
   const { open, onClose, onOpen } = useDisclosure<string, string>({
     onClose: (value) => {
       console.log("onClose:", value)

@@ -11,7 +11,7 @@ export const config: StorybookConfig = {
     actions: false,
     backgrounds: false,
     controls: false,
-    interactions: false,
+    interactions: true,
   },
   framework: "@storybook/react-vite",
   stories: ["../src/**/*.@(mdx|stories.@(tsx))"],

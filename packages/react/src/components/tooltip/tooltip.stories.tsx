@@ -9,7 +9,10 @@ type Story = StoryFn<typeof Tooltip>
 
 const meta: Meta<typeof Tooltip> = {
   component: Tooltip,
-  parameters: { layout: "centered" },
+  parameters: {
+    chromatic: { disableSnapshot: true },
+    layout: "centered",
+  },
   title: "Components / Tooltip",
 }
 
@@ -132,6 +135,10 @@ export const Disabled: Story = () => {
       <Button>Please Hover</Button>
     </Tooltip>
   )
+}
+
+Disabled.parameters = {
+  chromatic: { disableSnapshot: true },
 }
 
 export const AlwaysOpen: Story = () => {

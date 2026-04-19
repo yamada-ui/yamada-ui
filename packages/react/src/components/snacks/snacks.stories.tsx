@@ -246,7 +246,7 @@ export const Limit: Story = () => {
   )
 }
 
-export const Duration = () => {
+export const Duration: Story = () => {
   const { snack, snacks } = useSnacks()
 
   return (
@@ -277,7 +277,7 @@ export const Duration = () => {
   )
 }
 
-export const DisabledClosable = () => {
+export const DisabledClosable: Story = () => {
   const { snack, snacks } = useSnacks({ closable: false })
 
   return (
@@ -307,7 +307,7 @@ export const DisabledClosable = () => {
   )
 }
 
-export const UseClose = () => {
+export const UseClose: Story = () => {
   const { snack, snacks } = useSnacks()
   const id = useRef<string | undefined>(undefined)
 
@@ -346,7 +346,7 @@ export const UseClose = () => {
   )
 }
 
-export const UseUpdate = () => {
+export const UseUpdate: Story = () => {
   const { snack, snacks } = useSnacks()
   const id = useRef<string | undefined>(undefined)
 

@@ -50,6 +50,10 @@ export const Indeterminate: Story = () => {
   return <Progress value={null} />
 }
 
+Indeterminate.parameters = {
+  chromatic: { disableSnapshot: true },
+}
+
 export const Striped: Story = () => {
   return <Progress striped value={50} />
 }
@@ -58,8 +62,16 @@ export const Animated: Story = () => {
   return <Progress animated striped value={50} />
 }
 
+Animated.parameters = {
+  chromatic: { disableSnapshot: true },
+}
+
 export const Duration: Story = () => {
   return <Progress animated duration={2} striped value={50} />
+}
+
+Duration.parameters = {
+  chromatic: { disableSnapshot: true },
 }
 
 export const CustomColor: Story = () => {

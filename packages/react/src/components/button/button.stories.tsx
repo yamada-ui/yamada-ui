@@ -177,3 +177,7 @@ export const LoadingIcon: Story = () => {
     </Wrap>
   )
 }
+
+LoadingIcon.parameters = {
+  chromatic: { disableSnapshot: true },
+}

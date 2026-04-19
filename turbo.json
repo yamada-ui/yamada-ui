@@ -18,6 +18,11 @@
       "dependsOn": ["transit"],
       "outputs": ["coverage/**"]
     },
+    "test:a11y": {
+      "cache": false,
+      "dependsOn": ["transit"],
+      "with": ["@yamada-ui/react#storybook"]
+    },
     "test:chromium": {
       "dependsOn": ["transit"]
     },
@@ -35,6 +40,10 @@
     },
     "format": {
       "dependsOn": ["transit"]
+    },
+    "storybook": {
+      "cache": false,
+      "persistent": true
     }
   },
   "globalDependencies": ["tsconfig.json"]

@@ -1,11 +1,39 @@
 import type { Preview, StoryContext } from "@storybook/react-vite"
+import { MotionGlobalConfig } from "motion/react"
 import { useEffect } from "react"
 import { GLOBALS_UPDATED } from "storybook/internal/core-events"
 import { addons } from "storybook/preview-api"
 import { extendConfig, isRtl, UIProvider, useColorMode, VStack } from "../src"
 import { themes } from "./themes"
+import {
+  getVisualTestLocale,
+  isVisualTest,
+  setupVisualTestRuntimeContract,
+  VISUAL_TEST_VIEWPORT_WIDTH,
+  type VisualTestGlobal,
+} from "./visual-test"
 
 const channel = addons.getChannel()
+const visualTestEnv = (
+  import.meta as { env?: { STORYBOOK_VISUAL_TEST?: string } }
+).env?.STORYBOOK_VISUAL_TEST
+const visualTestEnabled = isVisualTest(
+  globalThis as unknown as VisualTestGlobal,
+  visualTestEnv,
+)
+
+setupVisualTestRuntimeContract({
+  envValue: visualTestEnv,
+})
+
+const skipMotionAnimations = isVisualTest(
+  globalThis as unknown as VisualTestGlobal,
+  visualTestEnv,
+)
+
+if (skipMotionAnimations) {
+  MotionGlobalConfig.skipAnimations = true
+}
 
 const preview: Preview = {
   decorators: [
@@ -29,20 +57,21 @@ const preview: Preview = {
     function (Story, { globals, parameters }) {
       const { layout } = parameters
       const { colorMode: defaultColorMode, locale } = globals
-      const dir = isRtl(globals.locale) ? "rtl" : "ltr"
+      const runtimeLocale = visualTestEnabled ? getVisualTestLocale() : locale
+      const dir = isRtl(runtimeLocale) ? "rtl" : "ltr"
       const config = extendConfig({ defaultColorMode })
       const unstyled = layout === "unstyled"
       const centered = layout === "centered"
 
       if (unstyled) {
         return (
-          <UIProvider config={config} dir={dir} locale={locale}>
+          <UIProvider config={config} dir={dir} locale={runtimeLocale}>
             <Story />
           </UIProvider>
         )
       } else {
         return (
-          <UIProvider config={config} dir={dir} locale={locale}>
+          <UIProvider config={config} dir={dir} locale={runtimeLocale}>
             <VStack
               css={{ "--space": { base: "spaces.lg", md: "spaces.md" } }}
               align="start"
@@ -121,6 +150,10 @@ const preview: Preview = {
     a11y: {
       config: { rules: [{ id: "color-contrast", enabled: false }] },
       test: "error",
+    },
+    chromatic: {
+      pauseAnimationAtEnd: true,
+      viewports: [VISUAL_TEST_VIEWPORT_WIDTH],
     },
     docs: { codePanel: true },
     layout: "fullscreen",

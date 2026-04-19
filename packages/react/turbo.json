@@ -1,0 +1,9 @@
+{
+  "extends": ["//"],
+  "tasks": {
+    "visual-test:build": {
+      "dependsOn": ["transit"],
+      "outputs": ["storybook-static/**", "build-storybook.log"]
+    }
+  }
+}

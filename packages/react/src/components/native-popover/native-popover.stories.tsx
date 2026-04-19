@@ -273,6 +273,10 @@ export const Disabled: Story = () => {
   )
 }
 
+Disabled.parameters = {
+  chromatic: { disableSnapshot: true },
+}
+
 export const CloseTrigger: Story = () => {
   return (
     <NativePopover.Root>

@@ -1,4 +1,5 @@
-import { a11y, fireEvent, render, screen } from "#test"
+import { a11y, render } from "#test/browser"
+import { fireEvent, screen } from "@testing-library/react"
 import { vi } from "vitest"
 import { Slider } from "."
 import { noop } from "../../utils"
@@ -38,8 +39,8 @@ describe("<Slider />", () => {
     expect(Slider.Mark.displayName).toBe("SliderMark")
   })
 
-  test("sets `className` correctly", () => {
-    render(
+  test("sets `className` correctly", async () => {
+    await render(
       <Slider.Root
         data-testid="slider"
         defaultValue={50}
@@ -59,8 +60,8 @@ describe("<Slider />", () => {
     expect(marks[0]).toHaveClass("ui-slider__mark")
   })
 
-  test("sets aria attributes correctly", () => {
-    render(<Slider.Root defaultValue={50} />)
+  test("sets aria attributes correctly", async () => {
+    await render(<Slider.Root defaultValue={50} />)
 
     expect(screen.getByRole("slider")).toHaveAttribute("aria-valuenow", "50")
     expect(screen.getByRole("slider")).toHaveAttribute("aria-valuetext", "50")
@@ -72,20 +73,20 @@ describe("<Slider />", () => {
     )
   })
 
-  test("disabled Slider renders correctly", () => {
-    render(<Slider.Root disabled />)
+  test("disabled Slider renders correctly", async () => {
+    await render(<Slider.Root disabled />)
 
     expect(screen.getByRole("slider")).toHaveAttribute("aria-disabled")
   })
 
-  test("readonly Slider renders correctly", () => {
-    render(<Slider.Root readOnly />)
+  test("readonly Slider renders correctly", async () => {
+    await render(<Slider.Root readOnly />)
 
     expect(screen.getByRole("slider")).toHaveAttribute("aria-readonly")
   })
 
-  test("renders range slider with two thumbs", () => {
-    render(<Slider.Root defaultValue={[25, 75]} />)
+  test("renders range slider with two thumbs", async () => {
+    await render(<Slider.Root defaultValue={[25, 75]} />)
 
     const sliders = screen.getAllByRole("slider")
     expect(sliders).toHaveLength(2)
@@ -93,8 +94,8 @@ describe("<Slider />", () => {
     expect(sliders[1]).toHaveAttribute("aria-valuenow", "75")
   })
 
-  test("range slider sets correct aria attributes on thumbs", () => {
-    render(<Slider.Root defaultValue={[20, 80]} />)
+  test("range slider sets correct aria attributes on thumbs", async () => {
+    await render(<Slider.Root defaultValue={[20, 80]} />)
 
     const sliders = screen.getAllByRole("slider")
     expect(sliders[0]).toHaveAttribute("data-start")
@@ -105,8 +106,8 @@ describe("<Slider />", () => {
     expect(sliders[1]).toHaveAttribute("aria-valuemax", "100")
   })
 
-  test("range slider renders two hidden inputs", () => {
-    const { container } = render(
+  test("range slider renders two hidden inputs", async () => {
+    const { container } = await render(
       <Slider.Root name="range-slider" defaultValue={[25, 75]} />,
     )
 
@@ -116,8 +117,8 @@ describe("<Slider />", () => {
     expect(inputs[1]).toHaveAttribute("value", "75")
   })
 
-  test("single slider renders one hidden input", () => {
-    const { container } = render(
+  test("single slider renders one hidden input", async () => {
+    const { container } = await render(
       <Slider.Root name="slider" defaultValue={50} />,
     )
 
@@ -126,8 +127,8 @@ describe("<Slider />", () => {
     expect(inputs[0]).toHaveAttribute("value", "50")
   })
 
-  test("renders marks with object format including labels", () => {
-    render(
+  test("renders marks with object format including labels", async () => {
+    await render(
       <Slider.Root
         defaultValue={50}
         marks={[
@@ -141,8 +142,8 @@ describe("<Slider />", () => {
     expect(screen.getByText("High")).toBeInTheDocument()
   })
 
-  test("renders marks with number format", () => {
-    render(
+  test("renders marks with number format", async () => {
+    await render(
       <Slider.Root
         data-testid="slider"
         defaultValue={50}
@@ -155,10 +156,10 @@ describe("<Slider />", () => {
     expect(marks).toHaveLength(3)
   })
 
-  test("keyboard ArrowRight increases value", () => {
+  test("keyboard ArrowRight increases value", async () => {
     const onChange = vi.fn()
 
-    render(<Slider.Root defaultValue={50} onChange={onChange} />)
+    await render(<Slider.Root defaultValue={50} onChange={onChange} />)
 
     const thumb = screen.getByRole("slider")
     fireEvent.keyDown(thumb, { key: "ArrowRight" })
@@ -166,10 +167,10 @@ describe("<Slider />", () => {
     expect(onChange).toHaveBeenCalledWith(51)
   })
 
-  test("keyboard ArrowLeft decreases value", () => {
+  test("keyboard ArrowLeft decreases value", async () => {
     const onChange = vi.fn()
 
-    render(<Slider.Root defaultValue={50} onChange={onChange} />)
+    await render(<Slider.Root defaultValue={50} onChange={onChange} />)
 
     const thumb = screen.getByRole("slider")
     fireEvent.keyDown(thumb, { key: "ArrowLeft" })
@@ -177,10 +178,10 @@ describe("<Slider />", () => {
     expect(onChange).toHaveBeenCalledWith(49)
   })
 
-  test("keyboard ArrowUp increases value", () => {
+  test("keyboard ArrowUp increases value", async () => {
     const onChange = vi.fn()
 
-    render(<Slider.Root defaultValue={50} onChange={onChange} />)
+    await render(<Slider.Root defaultValue={50} onChange={onChange} />)
 
     const thumb = screen.getByRole("slider")
     fireEvent.keyDown(thumb, { key: "ArrowUp" })
@@ -188,10 +189,10 @@ describe("<Slider />", () => {
     expect(onChange).toHaveBeenCalledWith(51)
   })
 
-  test("keyboard ArrowDown decreases value", () => {
+  test("keyboard ArrowDown decreases value", async () => {
     const onChange = vi.fn()
 
-    render(<Slider.Root defaultValue={50} onChange={onChange} />)
+    await render(<Slider.Root defaultValue={50} onChange={onChange} />)
 
     const thumb = screen.getByRole("slider")
     fireEvent.keyDown(thumb, { key: "ArrowDown" })
@@ -199,10 +200,10 @@ describe("<Slider />", () => {
     expect(onChange).toHaveBeenCalledWith(49)
   })
 
-  test("keyboard Home sets value to min", () => {
+  test("keyboard Home sets value to min", async () => {
     const onChange = vi.fn()
 
-    render(<Slider.Root defaultValue={50} onChange={onChange} />)
+    await render(<Slider.Root defaultValue={50} onChange={onChange} />)
 
     const thumb = screen.getByRole("slider")
     fireEvent.keyDown(thumb, { key: "Home" })
@@ -210,10 +211,10 @@ describe("<Slider />", () => {
     expect(onChange).toHaveBeenCalledWith(0)
   })
 
-  test("keyboard End sets value to max", () => {
+  test("keyboard End sets value to max", async () => {
     const onChange = vi.fn()
 
-    render(<Slider.Root defaultValue={50} onChange={onChange} />)
+    await render(<Slider.Root defaultValue={50} onChange={onChange} />)
 
     const thumb = screen.getByRole("slider")
     fireEvent.keyDown(thumb, { key: "End" })
@@ -221,10 +222,10 @@ describe("<Slider />", () => {
     expect(onChange).toHaveBeenCalledWith(100)
   })
 
-  test("keyboard PageUp increases value by ten step", () => {
+  test("keyboard PageUp increases value by ten step", async () => {
     const onChange = vi.fn()
 
-    render(<Slider.Root defaultValue={50} onChange={onChange} />)
+    await render(<Slider.Root defaultValue={50} onChange={onChange} />)
 
     const thumb = screen.getByRole("slider")
     fireEvent.keyDown(thumb, { key: "PageUp" })
@@ -232,10 +233,10 @@ describe("<Slider />", () => {
     expect(onChange).toHaveBeenCalledWith(60)
   })
 
-  test("keyboard PageDown decreases value by ten step", () => {
+  test("keyboard PageDown decreases value by ten step", async () => {
     const onChange = vi.fn()
 
-    render(<Slider.Root defaultValue={50} onChange={onChange} />)
+    await render(<Slider.Root defaultValue={50} onChange={onChange} />)
 
     const thumb = screen.getByRole("slider")
     fireEvent.keyDown(thumb, { key: "PageDown" })
@@ -243,10 +244,10 @@ describe("<Slider />", () => {
     expect(onChange).toHaveBeenCalledWith(40)
   })
 
-  test("keyboard does not change value when disabled", () => {
+  test("keyboard does not change value when disabled", async () => {
     const onChange = vi.fn()
 
-    render(<Slider.Root defaultValue={50} disabled onChange={onChange} />)
+    await render(<Slider.Root defaultValue={50} disabled onChange={onChange} />)
 
     const thumb = screen.getByRole("slider")
     fireEvent.keyDown(thumb, { key: "ArrowRight" })
@@ -254,10 +255,10 @@ describe("<Slider />", () => {
     expect(onChange).not.toHaveBeenCalled()
   })
 
-  test("keyboard does not change value when readOnly", () => {
+  test("keyboard does not change value when readOnly", async () => {
     const onChange = vi.fn()
 
-    render(<Slider.Root defaultValue={50} readOnly onChange={onChange} />)
+    await render(<Slider.Root defaultValue={50} readOnly onChange={onChange} />)
 
     const thumb = screen.getByRole("slider")
     fireEvent.keyDown(thumb, { key: "ArrowRight" })
@@ -265,10 +266,10 @@ describe("<Slider />", () => {
     expect(onChange).not.toHaveBeenCalled()
   })
 
-  test("range slider keyboard ArrowRight on first thumb", () => {
+  test("range slider keyboard ArrowRight on first thumb", async () => {
     const onChange = vi.fn()
 
-    render(<Slider.Root defaultValue={[25, 75]} onChange={onChange} />)
+    await render(<Slider.Root defaultValue={[25, 75]} onChange={onChange} />)
 
     const sliders = screen.getAllByRole("slider")
     fireEvent.keyDown(sliders[0]!, { key: "ArrowRight" })
@@ -276,10 +277,10 @@ describe("<Slider />", () => {
     expect(onChange).toHaveBeenCalledWith([26, 75])
   })
 
-  test("range slider keyboard ArrowLeft on second thumb", () => {
+  test("range slider keyboard ArrowLeft on second thumb", async () => {
     const onChange = vi.fn()
 
-    render(<Slider.Root defaultValue={[25, 75]} onChange={onChange} />)
+    await render(<Slider.Root defaultValue={[25, 75]} onChange={onChange} />)
 
     const sliders = screen.getAllByRole("slider")
     fireEvent.keyDown(sliders[1]!, { key: "ArrowLeft" })
@@ -287,10 +288,10 @@ describe("<Slider />", () => {
     expect(onChange).toHaveBeenCalledWith([25, 74])
   })
 
-  test("range slider keyboard Home on second thumb", () => {
+  test("range slider keyboard Home on second thumb", async () => {
     const onChange = vi.fn()
 
-    render(<Slider.Root defaultValue={[25, 75]} onChange={onChange} />)
+    await render(<Slider.Root defaultValue={[25, 75]} onChange={onChange} />)
 
     const sliders = screen.getAllByRole("slider")
     fireEvent.keyDown(sliders[1]!, { key: "Home" })
@@ -298,10 +299,10 @@ describe("<Slider />", () => {
     expect(onChange).toHaveBeenCalledWith([25, 25])
   })
 
-  test("range slider keyboard End on first thumb", () => {
+  test("range slider keyboard End on first thumb", async () => {
     const onChange = vi.fn()
 
-    render(<Slider.Root defaultValue={[25, 75]} onChange={onChange} />)
+    await render(<Slider.Root defaultValue={[25, 75]} onChange={onChange} />)
 
     const sliders = screen.getAllByRole("slider")
     fireEvent.keyDown(sliders[0]!, { key: "End" })
@@ -309,21 +310,21 @@ describe("<Slider />", () => {
     expect(onChange).toHaveBeenCalledWith([75, 75])
   })
 
-  test("getAriaValueText is used for aria-valuetext", () => {
+  test("getAriaValueText is used for aria-valuetext", async () => {
     const getAriaValueText = (value: number) => `${value}%`
 
-    render(
+    await render(
       <Slider.Root defaultValue={50} getAriaValueText={getAriaValueText} />,
     )
 
     expect(screen.getByRole("slider")).toHaveAttribute("aria-valuetext", "50%")
   })
 
-  test("getAriaValueText is used for range slider", () => {
+  test("getAriaValueText is used for range slider", async () => {
     const getAriaValueText = (value: number, index: number) =>
       `Thumb ${index}: ${value}`
 
-    render(
+    await render(
       <Slider.Root
         defaultValue={[25, 75]}
         getAriaValueText={getAriaValueText}
@@ -335,10 +336,10 @@ describe("<Slider />", () => {
     expect(sliders[1]).toHaveAttribute("aria-valuetext", "Thumb 1: 75")
   })
 
-  test("aria-valuetext prop overrides getAriaValueText", () => {
+  test("aria-valuetext prop overrides getAriaValueText", async () => {
     const getAriaValueText = (value: number) => `${value}%`
 
-    render(
+    await render(
       <Slider.Root
         aria-valuetext="custom"
         defaultValue={50}
@@ -352,18 +353,18 @@ describe("<Slider />", () => {
     )
   })
 
-  test("respects custom min and max", () => {
-    render(<Slider.Root defaultValue={50} max={200} min={10} />)
+  test("respects custom min and max", async () => {
+    await render(<Slider.Root defaultValue={50} max={200} min={10} />)
 
     const thumb = screen.getByRole("slider")
     expect(thumb).toHaveAttribute("aria-valuemin", "10")
     expect(thumb).toHaveAttribute("aria-valuemax", "200")
   })
 
-  test("respects custom step", () => {
+  test("respects custom step", async () => {
     const onChange = vi.fn()
 
-    render(<Slider.Root defaultValue={50} step={5} onChange={onChange} />)
+    await render(<Slider.Root defaultValue={50} step={5} onChange={onChange} />)
 
     const thumb = screen.getByRole("slider")
     fireEvent.keyDown(thumb, { key: "ArrowRight" })
@@ -371,19 +372,19 @@ describe("<Slider />", () => {
     expect(onChange).toHaveBeenCalledWith(55)
   })
 
-  test("range slider with betweenThumbs prevents overlap", () => {
-    render(<Slider.Root betweenThumbs={10} defaultValue={[45, 55]} />)
+  test("range slider with betweenThumbs prevents overlap", async () => {
+    await render(<Slider.Root betweenThumbs={10} defaultValue={[45, 55]} />)
 
     const sliders = screen.getAllByRole("slider")
     expect(sliders[0]).toHaveAttribute("aria-valuemax", "45")
     expect(sliders[1]).toHaveAttribute("aria-valuemin", "55")
   })
 
-  test("warns when max is less than min", () => {
+  test("warns when max is less than min", async () => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {})
 
-    render(<Slider.Root defaultValue={50} max={0} min={100} />)
+    await render(<Slider.Root defaultValue={50} max={0} min={100} />)
 
     expect(warnSpy).toHaveBeenCalledWith(
       "Do not assign a number less than 'min' to 'max'",
@@ -392,24 +393,24 @@ describe("<Slider />", () => {
     warnSpy.mockRestore()
   })
 
-  test("sets range CSS variables on root element", () => {
-    render(<Slider.Root data-testid="slider" defaultValue={50} />)
+  test("sets range CSS variables on root element", async () => {
+    await render(<Slider.Root data-testid="slider" defaultValue={50} />)
 
     const root = screen.getByTestId("slider")
     expect(root.style.getPropertyValue("--range-start")).toBe("0%")
     expect(root.style.getPropertyValue("--range-end")).toBe("50%")
   })
 
-  test("sets range CSS variables for range slider", () => {
-    render(<Slider.Root data-testid="slider" defaultValue={[25, 75]} />)
+  test("sets range CSS variables for range slider", async () => {
+    await render(<Slider.Root data-testid="slider" defaultValue={[25, 75]} />)
 
     const root = screen.getByTestId("slider")
     expect(root.style.getPropertyValue("--range-start")).toBe("25%")
     expect(root.style.getPropertyValue("--range-end")).toBe("75%")
   })
 
-  test("mark has correct data-between attribute for single slider", () => {
-    render(
+  test("mark has correct data-between attribute for single slider", async () => {
+    await render(
       <Slider.Root defaultValue={50}>
         <Slider.Track>
           <Slider.Range />
@@ -427,8 +428,8 @@ describe("<Slider />", () => {
     expect(mark75).not.toHaveAttribute("data-between")
   })
 
-  test("mark has correct data-between attribute for range slider", () => {
-    render(
+  test("mark has correct data-between attribute for range slider", async () => {
+    await render(
       <Slider.Root defaultValue={[20, 80]}>
         <Slider.Track>
           <Slider.Range />
@@ -449,8 +450,8 @@ describe("<Slider />", () => {
     expect(mark90).not.toHaveAttribute("data-between")
   })
 
-  test("renders with custom children", () => {
-    render(
+  test("renders with custom children", async () => {
+    await render(
       <Slider.Root data-testid="slider" defaultValue={50}>
         <Slider.Track data-testid="custom-track">
           <Slider.Range />
@@ -462,8 +463,8 @@ describe("<Slider />", () => {
     expect(screen.getByTestId("custom-track")).toBeInTheDocument()
   })
 
-  test("renders range slider with custom children using SliderThumbs", () => {
-    render(
+  test("renders range slider with custom children using SliderThumbs", async () => {
+    await render(
       <Slider.Root data-testid="slider" defaultValue={[25, 75]}>
         <Slider.Track>
           <Slider.Range />
@@ -476,8 +477,8 @@ describe("<Slider />", () => {
     expect(sliders).toHaveLength(2)
   })
 
-  test("range slider data-range attribute on range element", () => {
-    render(
+  test("range slider data-range attribute on range element", async () => {
+    await render(
       <Slider.Root defaultValue={[25, 75]}>
         <Slider.Track>
           <Slider.Range data-testid="range" />
@@ -490,29 +491,29 @@ describe("<Slider />", () => {
     expect(range).toHaveAttribute("data-range")
   })
 
-  test("disabled thumb has tabIndex -1", () => {
-    render(<Slider.Root defaultValue={50} disabled />)
+  test("disabled thumb has tabIndex -1", async () => {
+    await render(<Slider.Root defaultValue={50} disabled />)
 
     const thumb = screen.getByRole("slider")
     expect(thumb).toHaveAttribute("tabindex", "-1")
   })
 
-  test("interactive thumb has tabIndex 0", () => {
-    render(<Slider.Root defaultValue={50} />)
+  test("interactive thumb has tabIndex 0", async () => {
+    await render(<Slider.Root defaultValue={50} />)
 
     const thumb = screen.getByRole("slider")
     expect(thumb).toHaveAttribute("tabindex", "0")
   })
 
-  test("renders with orientation data attribute", () => {
-    render(<Slider.Root data-testid="slider" defaultValue={50} />)
+  test("renders with orientation data attribute", async () => {
+    await render(<Slider.Root data-testid="slider" defaultValue={50} />)
 
     const root = screen.getByTestId("slider")
     expect(root).toHaveAttribute("data-orientation", "horizontal")
   })
 
-  test("passes inputProps to hidden input", () => {
-    const { container } = render(
+  test("passes inputProps to hidden input", async () => {
+    const { container } = await render(
       <Slider.Root
         id="test-id"
         name="test-slider"
@@ -526,32 +527,32 @@ describe("<Slider />", () => {
     expect(input).toHaveAttribute("id", "test-id")
   })
 
-  test("controlled slider value updates correctly", () => {
-    const { rerender } = render(<Slider.Root value={30} />)
+  test("controlled slider value updates correctly", async () => {
+    const { rerender } = await render(<Slider.Root value={30} />)
 
     expect(screen.getByRole("slider")).toHaveAttribute("aria-valuenow", "30")
 
-    rerender(<Slider.Root value={70} />)
+    await rerender(<Slider.Root value={70} />)
 
     expect(screen.getByRole("slider")).toHaveAttribute("aria-valuenow", "70")
   })
 
-  test("controlled range slider value updates correctly", () => {
-    const { rerender } = render(<Slider.Root value={[20, 80]} />)
+  test("controlled range slider value updates correctly", async () => {
+    const { rerender } = await render(<Slider.Root value={[20, 80]} />)
 
     const sliders = screen.getAllByRole("slider")
     expect(sliders[0]).toHaveAttribute("aria-valuenow", "20")
     expect(sliders[1]).toHaveAttribute("aria-valuenow", "80")
 
-    rerender(<Slider.Root value={[30, 60]} />)
+    await rerender(<Slider.Root value={[30, 60]} />)
 
     const updatedSliders = screen.getAllByRole("slider")
     expect(updatedSliders[0]).toHaveAttribute("aria-valuenow", "30")
     expect(updatedSliders[1]).toHaveAttribute("aria-valuenow", "60")
   })
 
-  test("mark has correct style with --mark-position", () => {
-    render(
+  test("mark has correct style with --mark-position", async () => {
+    await render(
       <Slider.Root defaultValue={50}>
         <Slider.Track>
           <Slider.Range />
@@ -565,8 +566,8 @@ describe("<Slider />", () => {
     expect(mark.style.getPropertyValue("--mark-position")).toBe("30%")
   })
 
-  test("mark has aria-hidden and role presentation", () => {
-    render(
+  test("mark has aria-hidden and role presentation", async () => {
+    await render(
       <Slider.Root defaultValue={50}>
         <Slider.Track>
           <Slider.Range />
@@ -581,8 +582,8 @@ describe("<Slider />", () => {
     expect(mark).toHaveAttribute("role", "presentation")
   })
 
-  test("mark indicator is true by default", () => {
-    render(
+  test("mark indicator is true by default", async () => {
+    await render(
       <Slider.Root defaultValue={50}>
         <Slider.Track>
           <Slider.Range />
@@ -596,8 +597,8 @@ describe("<Slider />", () => {
     expect(mark).toHaveAttribute("data-indicator")
   })
 
-  test("mark indicator can be set to false", () => {
-    render(
+  test("mark indicator can be set to false", async () => {
+    await render(
       <Slider.Root defaultValue={50}>
         <Slider.Track>
           <Slider.Range />
@@ -611,8 +612,8 @@ describe("<Slider />", () => {
     expect(mark).not.toHaveAttribute("data-indicator")
   })
 
-  test("renders with custom thumbProps, trackProps, rangeProps", () => {
-    render(
+  test("renders with custom thumbProps, trackProps, rangeProps", async () => {
+    await render(
       <Slider.Root
         defaultValue={50}
         rangeProps={{ "data-testid": "range" }}
@@ -626,8 +627,8 @@ describe("<Slider />", () => {
     expect(screen.getByTestId("thumb")).toBeInTheDocument()
   })
 
-  test("range slider default children renders SliderThumbs", () => {
-    render(
+  test("range slider default children renders SliderThumbs", async () => {
+    await render(
       <Slider.Root
         defaultValue={[25, 75]}
         thumbProps={{ "data-testid": "thumb" }}
@@ -638,11 +639,11 @@ describe("<Slider />", () => {
     expect(thumbs).toHaveLength(2)
   })
 
-  test("pointer interaction triggers onChangeStart and onChangeEnd for single slider", () => {
+  test("pointer interaction triggers onChangeStart and onChangeEnd for single slider", async () => {
     const onChangeStart = vi.fn()
     const onChangeEnd = vi.fn()
 
-    render(
+    await render(
       <Slider.Root
         defaultValue={50}
         trackProps={{ "data-testid": "track" }}
@@ -663,10 +664,10 @@ describe("<Slider />", () => {
     cleanup()
   })
 
-  test("pointer interaction triggers onChange during move for single slider", () => {
+  test("pointer interaction triggers onChange during move for single slider", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Slider.Root
         defaultValue={50}
         trackProps={{ "data-testid": "track" }}
@@ -686,12 +687,12 @@ describe("<Slider />", () => {
     cleanup()
   })
 
-  test("pointer interaction triggers callbacks for range slider", () => {
+  test("pointer interaction triggers callbacks for range slider", async () => {
     const onChangeStart = vi.fn()
     const onChangeEnd = vi.fn()
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Slider.Root
         defaultValue={[25, 75]}
         trackProps={{ "data-testid": "track" }}
@@ -717,11 +718,11 @@ describe("<Slider />", () => {
     cleanup()
   })
 
-  test("pointer interaction selects closest thumb for range slider (second thumb)", () => {
+  test("pointer interaction selects closest thumb for range slider (second thumb)", async () => {
     const onChangeStart = vi.fn()
     const onChangeEnd = vi.fn()
 
-    render(
+    await render(
       <Slider.Root
         defaultValue={[25, 75]}
         trackProps={{ "data-testid": "track" }}
@@ -743,12 +744,12 @@ describe("<Slider />", () => {
     cleanup()
   })
 
-  test("pointer interaction does not trigger callbacks when disabled", () => {
+  test("pointer interaction does not trigger callbacks when disabled", async () => {
     const onChangeStart = vi.fn()
     const onChangeEnd = vi.fn()
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Slider.Root
         defaultValue={50}
         disabled
@@ -773,10 +774,10 @@ describe("<Slider />", () => {
     cleanup()
   })
 
-  test("vertical slider pointer interaction uses y-axis", () => {
+  test("vertical slider pointer interaction uses y-axis", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <Slider.Root
         defaultValue={50}
         orientation="vertical"
@@ -797,10 +798,10 @@ describe("<Slider />", () => {
     cleanup()
   })
 
-  test("range slider keyboard PageUp on first thumb", () => {
+  test("range slider keyboard PageUp on first thumb", async () => {
     const onChange = vi.fn()
 
-    render(<Slider.Root defaultValue={[25, 75]} onChange={onChange} />)
+    await render(<Slider.Root defaultValue={[25, 75]} onChange={onChange} />)
 
     const sliders = screen.getAllByRole("slider")
     fireEvent.keyDown(sliders[0]!, { key: "PageUp" })
@@ -808,10 +809,10 @@ describe("<Slider />", () => {
     expect(onChange).toHaveBeenCalledWith([35, 75])
   })
 
-  test("range slider keyboard PageDown on second thumb", () => {
+  test("range slider keyboard PageDown on second thumb", async () => {
     const onChange = vi.fn()
 
-    render(<Slider.Root defaultValue={[25, 75]} onChange={onChange} />)
+    await render(<Slider.Root defaultValue={[25, 75]} onChange={onChange} />)
 
     const sliders = screen.getAllByRole("slider")
     fireEvent.keyDown(sliders[1]!, { key: "PageDown" })

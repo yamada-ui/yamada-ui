@@ -2,6 +2,7 @@
 
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useId } from "react"
+import { mergeProps } from "../../core"
 import {
   ariaAttr,
   createContext,
@@ -42,11 +43,10 @@ export const useNativeAccordion = ({
 }: UseNativeAccordionProps = {}) => {
   const generatedName = useId()
 
-  const getRootProps: PropGetter = ({ ref, ...props } = {}) => ({
-    ...props,
-    ...rest,
-    ref: mergeRefs(ref, rest.ref),
-  })
+  const getRootProps: PropGetter = ({ ref, ...props } = {}) =>
+    mergeProps(rest, props, {
+      ref: mergeRefs(ref, rest.ref),
+    })()
 
   return {
     name: multiple ? undefined : (name ?? generatedName),
@@ -71,13 +71,12 @@ export const useNativeAccordionItem = ({
 }: UseNativeAccordionItemProps) => {
   const { name } = useNativeAccordionContext()
 
-  const getItemProps: PropGetter<"details"> = ({ ref, ...props } = {}) => ({
-    ref: mergeRefs(ref, rest.ref),
-    name: props.name ?? rest.name ?? name,
-    "data-group": "",
-    ...rest,
-    ...props,
-  })
+  const getItemProps: PropGetter<"details"> = ({ ref, ...props } = {}) =>
+    mergeProps(rest, props, {
+      ref: mergeRefs(ref, rest.ref),
+      name: props.name ?? rest.name ?? name,
+      "data-group": "",
+    })()
 
   const getButtonProps: PropGetter<"summary"> = useCallback(
     (props = {}) => ({

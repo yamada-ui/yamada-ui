@@ -1,325 +1,241 @@
-import { act, renderHook, screen, waitFor } from "#test"
+import { page, renderHook } from "#test/browser"
 import { useNotice } from "./use-notice"
+
+async function expectNoticeVisible(text: string) {
+  await expect.poll(() => document.body.textContent.includes(text)).toBe(true)
+}
+
+async function expectNoticeHidden(text: string) {
+  await expect.poll(() => document.body.textContent.includes(text)).toBe(false)
+}
 
 describe("useNotice", () => {
   test("creates a notice with default options", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = await renderHook(() => useNotice())
 
-    act(() => {
-      result.current({
-        description: "Test Description",
-        title: "Test Notice",
-      })
+    result.current({
+      description: "Test Description",
+      title: "Test Notice",
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Test Notice")).toBeInTheDocument()
-      expect(screen.getByText("Test Description")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Test Notice")
+    await expectNoticeVisible("Test Description")
   })
 
   test("creates a notice with a specific status", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = await renderHook(() => useNotice())
 
-    act(() => {
-      result.current({
-        status: "success",
-        title: "Success Notice",
-      })
+    result.current({
+      status: "success",
+      title: "Success Notice",
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Success Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Success Notice")
   })
 
   test("creates a notice with a loading scheme", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = await renderHook(() => useNotice())
 
-    act(() => {
-      result.current({
-        loadingScheme: "oval",
-        title: "Loading Notice",
-      })
+    result.current({
+      loadingScheme: "oval",
+      title: "Loading Notice",
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Loading Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Loading Notice")
   })
 
   test("closes a specific notice by id", async () => {
-    const { result } = renderHook(() => useNotice())
-    let noticeId: number | string | undefined
+    const { result } = await renderHook(() => useNotice())
 
-    act(() => {
-      noticeId = result.current({
-        duration: null,
-        title: "Closeable Notice",
-      })
+    const noticeId = result.current({
+      duration: null,
+      title: "Closeable Notice",
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Closeable Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Closeable Notice")
 
-    act(() => {
-      result.current.close(noticeId!)
-    })
+    result.current.close(noticeId)
 
-    await waitFor(() => {
-      expect(screen.queryByText("Closeable Notice")).not.toBeInTheDocument()
-    })
+    await expectNoticeHidden("Closeable Notice")
   })
 
   test("closes all notices", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = await renderHook(() => useNotice())
 
-    act(() => {
-      result.current({
-        duration: null,
-        title: "Notice 1",
-      })
-      result.current({
-        duration: null,
-        title: "Notice 2",
-      })
+    result.current({
+      duration: null,
+      title: "Notice 1",
+    })
+    result.current({
+      duration: null,
+      title: "Notice 2",
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Notice 1")).toBeInTheDocument()
-      expect(screen.getByText("Notice 2")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Notice 1")
+    await expectNoticeVisible("Notice 2")
 
-    act(() => {
-      result.current.closeAll()
-    })
+    result.current.closeAll()
 
-    await waitFor(() => {
-      expect(screen.queryByText("Notice 1")).not.toBeInTheDocument()
-      expect(screen.queryByText("Notice 2")).not.toBeInTheDocument()
-    })
+    await expectNoticeHidden("Notice 1")
+    await expectNoticeHidden("Notice 2")
   })
 
   test("updates an existing notice", async () => {
-    const { result } = renderHook(() => useNotice())
-    let noticeId: number | string | undefined
+    const { result } = await renderHook(() => useNotice())
 
-    act(() => {
-      noticeId = result.current({
-        duration: null,
-        title: "Original Notice",
-      })
+    const noticeId = result.current({
+      duration: null,
+      title: "Original Notice",
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Original Notice")).toBeInTheDocument()
+    await expectNoticeVisible("Original Notice")
+
+    result.current.update(noticeId, {
+      duration: null,
+      title: "Updated Notice",
     })
 
-    act(() => {
-      result.current.update(noticeId!, {
-        duration: null,
-        title: "Updated Notice",
-      })
-    })
-
-    await waitFor(() => {
-      expect(screen.getByText("Updated Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Updated Notice")
   })
 
   test("creates a notice with custom placement", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = await renderHook(() => useNotice())
 
-    act(() => {
-      result.current({
-        placement: "end-end",
-        title: "Bottom Right Notice",
-      })
+    result.current({
+      placement: "end-end",
+      title: "Bottom Right Notice",
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Bottom Right Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Bottom Right Notice")
   })
 
   test("creates a notice with custom limit", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = await renderHook(() => useNotice())
 
-    act(() => {
-      result.current({
-        limit: 5,
-        title: "Limited Notice",
-      })
+    result.current({
+      limit: 5,
+      title: "Limited Notice",
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Limited Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Limited Notice")
   })
 
   test("updates limit and retrieves the updated limit", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = await renderHook(() => useNotice())
 
-    act(() => {
-      result.current({
-        limit: 10,
-        placement: "end-end",
-        title: "First Limit Notice",
-      })
+    result.current({
+      limit: 10,
+      placement: "end-end",
+      title: "First Limit Notice",
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("First Limit Notice")).toBeInTheDocument()
+    await expectNoticeVisible("First Limit Notice")
+
+    result.current({
+      limit: 10,
+      placement: "end-end",
+      title: "Second Limit Notice",
     })
 
-    act(() => {
-      result.current({
-        limit: 10,
-        placement: "end-end",
-        title: "Second Limit Notice",
-      })
-    })
-
-    await waitFor(() => {
-      expect(screen.getByText("Second Limit Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Second Limit Notice")
   })
 
   test("creates a notice with closeStrategy as a string", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = await renderHook(() => useNotice())
 
-    act(() => {
-      result.current({
-        closeStrategy: "button",
-        title: "Button Close Notice",
-      })
+    result.current({
+      closeStrategy: "button",
+      title: "Button Close Notice",
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Button Close Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Button Close Notice")
   })
 
   test("creates a notice with duration", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = await renderHook(() => useNotice())
 
-    act(() => {
-      result.current({
-        duration: 5000,
-        title: "Timed Notice",
-      })
+    result.current({
+      duration: 5000,
+      title: "Timed Notice",
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Timed Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Timed Notice")
   })
 
   test("creates a notice without icon", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = await renderHook(() => useNotice())
 
-    act(() => {
-      result.current({
-        title: "No Icon Notice",
-        withIcon: false,
-      })
+    result.current({
+      title: "No Icon Notice",
+      withIcon: false,
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("No Icon Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("No Icon Notice")
   })
 
   test("creates a notice with closable and button close strategy", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = await renderHook(() => useNotice())
 
-    act(() => {
-      result.current({
-        closable: true,
-        closeStrategy: "button",
-        duration: null,
-        title: "Closeable Button Notice",
-      })
+    result.current({
+      closable: true,
+      closeStrategy: "button",
+      duration: null,
+      title: "Closeable Button Notice",
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Closeable Button Notice")).toBeInTheDocument()
-      expect(screen.getByRole("button", { name: /close/i })).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Closeable Button Notice")
+    await expect
+      .poll(() => !!document.querySelector("[data-close-button]"))
+      .toBe(true)
+    ;(page.getByRole("button").element() as HTMLElement).click()
 
-    act(() => {
-      screen.getByRole("button", { name: /close/i }).click()
-    })
-
-    await waitFor(() => {
-      expect(
-        screen.queryByText("Closeable Button Notice"),
-      ).not.toBeInTheDocument()
-    })
+    await expectNoticeHidden("Closeable Button Notice")
   })
 
   test("creates a notice with click close strategy", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = await renderHook(() => useNotice())
 
-    act(() => {
-      result.current({
-        closable: true,
-        closeStrategy: "click",
-        duration: null,
-        title: "Click Close Notice",
-      })
+    result.current({
+      closable: true,
+      closeStrategy: "click",
+      duration: null,
+      title: "Click Close Notice",
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Click Close Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Click Close Notice")
+    ;(page.getByText("Click Close Notice").element() as HTMLElement).click()
 
-    act(() => {
-      screen.getByText("Click Close Notice").click()
-    })
-
-    await waitFor(() => {
-      expect(screen.queryByText("Click Close Notice")).not.toBeInTheDocument()
-    })
+    await expectNoticeHidden("Click Close Notice")
   })
 
   test("uses default options from hook arguments", async () => {
-    const { result } = renderHook(() =>
+    const { result } = await renderHook(() =>
       useNotice({
         placement: "end-start",
         status: "warning",
       }),
     )
 
-    act(() => {
-      result.current({
-        title: "Default Options Notice",
-      })
+    result.current({
+      title: "Default Options Notice",
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Default Options Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Default Options Notice")
   })
 
   test("creates a notice with closable false", async () => {
-    const { result } = renderHook(() => useNotice())
+    const { result } = await renderHook(() => useNotice())
 
-    act(() => {
-      result.current({
-        closable: false,
-        closeStrategy: "button",
-        duration: null,
-        title: "Non-closable Notice",
-      })
+    result.current({
+      closable: false,
+      closeStrategy: "button",
+      duration: null,
+      title: "Non-closable Notice",
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Non-closable Notice")).toBeInTheDocument()
-      expect(
-        screen.queryByRole("button", { name: /close/i }),
-      ).not.toBeInTheDocument()
-    })
+    await expectNoticeVisible("Non-closable Notice")
+    await expect
+      .poll(() => !!document.querySelector("[data-close-button]"))
+      .toBe(false)
   })
 })

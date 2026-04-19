@@ -84,10 +84,12 @@
     "turbo": "^2.9.3",
     "typescript": "catalog:",
     "vitest": "catalog:",
-    "wait-on": "^9.0.4"
+    "wait-on": "^9.0.5"
   },
   "pnpm": {
     "overrides": {
+      "axios": "^1.15.0",
+      "follow-redirects": "^1.16.0",
       "react": "^19.0.0",
       "react-dom": "^19.0.0"
     }

@@ -1,4 +1,4 @@
-import { a11y, render, renderHook, screen } from "#test"
+import { a11y, page, render, renderHook } from "#test/browser"
 import { Highlight, useHighlight } from "."
 
 describe("<Highlight />", () => {
@@ -10,21 +10,21 @@ describe("<Highlight />", () => {
     expect(Highlight.name).toBe("Highlight")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(
+  test("renders HTML tag correctly", async () => {
+    await render(
       <Highlight data-testid="highlight" query="highlight">
         Highlight
       </Highlight>,
     )
-    expect(screen.getByTestId("highlight").tagName).toBe("P")
+    expect(page.getByTestId("highlight").element().tagName).toBe("P")
   })
 
   test.each([[], ""])(
     "useHighlight returns no matches if queries is empty but returns original value",
-    (query) => {
+    async (query) => {
       const text = "this is an ordinary text which should not have any matches"
 
-      const { result } = renderHook(() =>
+      const { result } = await renderHook(() =>
         useHighlight({
           query,
           text,
@@ -37,8 +37,8 @@ describe("<Highlight />", () => {
     },
   )
 
-  test("fragment prop works correctly", () => {
-    const { container } = render(
+  test("fragment prop works correctly", async () => {
+    const { container } = await render(
       <Highlight fragment query="">
         Highlight
       </Highlight>,
@@ -46,45 +46,46 @@ describe("<Highlight />", () => {
     expect(container.firstChild?.nodeName).toBe("#text")
   })
 
-  test("fragment prop renders Mark for matched text", () => {
-    const { container } = render(
+  test("fragment prop renders Mark for matched text", async () => {
+    const { container } = await render(
       <Highlight fragment query="High">
         Highlight
       </Highlight>,
     )
 
-    const mark = screen.getByText("High")
-    expect(mark.tagName).toBe("MARK")
+    const mark = page.getByText("High")
+    expect(mark.element().tagName).toBe("MARK")
     expect(container.querySelector("p")).toBeNull()
   })
 
-  test("renders non-matching chunks as plain text alongside matches", () => {
-    render(
+  test("renders non-matching chunks as plain text alongside matches", async () => {
+    await render(
       <Highlight data-testid="highlight" query="world">
         Hello world
       </Highlight>,
     )
 
-    const container = screen.getByTestId("highlight")
-    const mark = screen.getByText("world")
-    expect(mark.tagName).toBe("MARK")
-    expect(container.tagName).toBe("P")
-    expect(container).toHaveTextContent("Hello world")
+    const container = page.getByTestId("highlight")
+    const mark = page.getByText("world")
+    expect(mark.element().tagName).toBe("MARK")
+    expect(container.element().tagName).toBe("P")
+    await expect.element(container).toHaveTextContent("Hello world")
   })
 
-  test("markProps prop works correctly", () => {
-    const { getByText } = render(
+  test("markProps prop works correctly", async () => {
+    await render(
       <Highlight query="Highlight" markProps={{ borderRadius: "12px" }}>
         Highlight
       </Highlight>,
     )
-    expect(getByText("Highlight")).toHaveStyle("border-radius: 12px")
+    const styles = getComputedStyle(page.getByText("Highlight").element())
+    expect(styles.borderRadius).toBe("12px")
   })
 
-  test("useHighlight matches correctly", () => {
+  test("useHighlight matches correctly", async () => {
     const query = ["", "text"]
 
-    const { result } = renderHook(() =>
+    const { result } = await renderHook(() =>
       useHighlight({
         query: query,
         text: "this is an ordinary text which should have one match ",

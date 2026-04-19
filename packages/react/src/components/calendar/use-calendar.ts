@@ -7,7 +7,7 @@ import type { Locale } from "../../providers/i18n-provider"
 import type { AnyString, Dict } from "../../utils"
 import dayjs from "dayjs"
 import { useCallback, useMemo, useRef } from "react"
-import { useSplitProps } from "../../core"
+import { mergeProps, useSplitProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
 import { useI18n } from "../../providers/i18n-provider"
@@ -648,11 +648,8 @@ export const useCalendar = <
   }, [value])
 
   const getRootProps: PropGetter = useCallback(
-    (props = {}) => ({
-      "data-disabled": dataAttr(disabled),
-      ...rest,
-      ...props,
-    }),
+    (props = {}) =>
+      mergeProps({ "data-disabled": dataAttr(disabled) }, rest, props)(),
     [disabled, rest],
   )
 
@@ -1030,40 +1027,45 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
 
   const getDayProps: PropGetter<"td"> = useCallback(
     ({ ref, "aria-label": ariaLabel, ...props } = {}) => {
-      if (!ariaLabel) {
-        ariaLabel = dateTimeFormat(dayjs(value).toDate(), {
+      let resolvedAriaLabel = ariaLabel
+      if (!resolvedAriaLabel) {
+        resolvedAriaLabel = dateTimeFormat(dayjs(value).toDate(), {
           day: "numeric",
           month: "long",
           weekday: "long",
           year: "numeric",
         })
 
-        if (today) ariaLabel = `${t("Today")}, ${ariaLabel}`
+        if (today) resolvedAriaLabel = `${t("Today")}, ${resolvedAriaLabel}`
       }
 
-      return {
-        "aria-disabled": ariaAttr(disabled),
-        "aria-label": ariaLabel,
-        "aria-selected": ariaAttr(selected),
-        "data-between": dataAttr(between),
-        "data-disabled": dataAttr(disabled),
-        "data-end": dataAttr(endValue),
-        "data-holiday": dataAttr(holiday),
-        "data-outside": dataAttr(outside),
-        "data-selected": dataAttr(selected),
-        "data-start": dataAttr(startValue),
-        "data-today": dataAttr(today),
-        "data-value": dayjs(value).format("YYYY-MM-DD"),
-        "data-weekend": dataAttr(weekend),
-        tabIndex: -1,
-        ...rest,
-        ...props,
-        ref: mergeRefs(ref, cellRef, outside ? null : register),
-        onBlur: handlerAll(props.onBlur, onBlur),
-        onClick: handlerAll(props.onClick, onClick),
-        onFocus: handlerAll(props.onFocus, (ev) => ev.preventDefault()),
-        onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
-      }
+      return mergeProps(
+        {
+          "aria-disabled": ariaAttr(disabled),
+          "aria-label": resolvedAriaLabel,
+          "aria-selected": ariaAttr(selected),
+          "data-between": dataAttr(between),
+          "data-disabled": dataAttr(disabled),
+          "data-end": dataAttr(endValue),
+          "data-holiday": dataAttr(holiday),
+          "data-outside": dataAttr(outside),
+          "data-selected": dataAttr(selected),
+          "data-start": dataAttr(startValue),
+          "data-today": dataAttr(today),
+          "data-value": dayjs(value).format("YYYY-MM-DD"),
+          "data-weekend": dataAttr(weekend),
+          tabIndex: -1,
+        },
+        rest,
+        props,
+        {
+          ref: mergeRefs(ref, cellRef, outside ? null : register),
+          onBlur,
+          onClick,
+          onFocus: (ev) => ev.preventDefault(),
+          onKeyDown,
+        },
+      )()
     },
     [
       between,

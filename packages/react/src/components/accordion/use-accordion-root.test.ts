@@ -7,6 +7,10 @@ function invokeCallbackRef<T>(ref: Ref<T> | undefined, node: null | T) {
   if (typeof ref === "function") ref(node)
 }
 
+function invokeHandler<E>(handler: ((event: E) => void) | undefined, event: E) {
+  handler?.(event)
+}
+
 describe("useAccordion getRootProps", () => {
   test("merges hook rest with user props via mergeProps", () => {
     const hookRef = createRef<HTMLDivElement>()
@@ -36,7 +40,7 @@ describe("useAccordion getRootProps", () => {
 
     expect(typeof merged.ref).toBe("function")
     invokeCallbackRef(merged.ref, node)
-    merged.onClick(event as never)
+    invokeHandler(merged.onClick, event as never)
 
     expect(merged.id).toBe("user-id")
     expect(String(merged.className)).toContain("hook")

@@ -3,6 +3,7 @@
 import type { RefObject } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useRef } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import {
   createContext,
@@ -133,13 +134,16 @@ export const useToggleGroup = <Y extends string | string[] = string>({
   }, [valueProp])
 
   const getGroupProps: PropGetter = useCallback(
-    (props) => ({
-      "data-disabled": dataAttr(disabled),
-      "data-readonly": dataAttr(readOnly),
-      role: "group",
-      ...rest,
-      ...props,
-    }),
+    (props) =>
+      mergeProps(
+        {
+          "data-disabled": dataAttr(disabled),
+          "data-readonly": dataAttr(readOnly),
+          role: "group",
+        },
+        rest,
+        props,
+      )(),
     [disabled, readOnly, rest],
   )
 

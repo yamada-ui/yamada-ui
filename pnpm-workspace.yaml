@@ -13,7 +13,7 @@ catalog:
   "@typescript-eslint/parser": ^8.58.0
   "@vitejs/plugin-react": ^6.0.1
   "@vitejs/plugin-react-swc": ^4.3.0
-  "@vitest/ui": ^4.1.2
+  "@vitest/ui": ^4.1.4
   commander: ^14.0.3
   dayjs: ^1.11.20
   dotenv: ^17.4.0
@@ -36,7 +36,7 @@ catalog:
   typescript: ^5.9.3
   vite: ^8.0.3
   vite-tsconfig-paths: ^6.1.1
-  vitest: ^4.1.2
+  vitest: ^4.1.4
   vitest-axe: ^0.1.0
   yamljs: ^0.3.0
 dedupeDirectDeps: true

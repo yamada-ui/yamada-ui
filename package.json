@@ -64,7 +64,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@typescript/analyze-trace": "^0.10.1",
-    "@vitest/coverage-v8": "^4.1.2",
+    "@vitest/coverage-v8": "^4.1.4",
     "@vitest/ui": "catalog:",
     "clean-package": "^2.2.0",
     "commander": "catalog:",

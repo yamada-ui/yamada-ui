@@ -1,4 +1,5 @@
-import { a11y, act, fireEvent, render, renderHook, screen } from "#test"
+import { a11y, render, renderHook } from "#test/browser"
+import { fireEvent, screen, waitFor } from "@testing-library/react"
 import { CheckboxGroup } from "."
 import { Checkbox } from "./checkbox"
 import { useCheckboxGroup } from "./use-checkbox-group"
@@ -14,8 +15,8 @@ describe("<Checkbox />", () => {
     await a11y(<Checkbox defaultChecked>checkbox</Checkbox>)
   })
 
-  test("sets `aria-checked` to mixed and native `indeterminate` when indeterminate", () => {
-    render(<Checkbox indeterminate>checkbox</Checkbox>)
+  test("sets `aria-checked` to mixed and native `indeterminate` when indeterminate", async () => {
+    await render(<Checkbox indeterminate>checkbox</Checkbox>)
 
     const input = screen.getByRole("checkbox")
 
@@ -23,24 +24,24 @@ describe("<Checkbox />", () => {
     expect((input as HTMLInputElement).indeterminate).toBeTruthy()
   })
 
-  test("forwards `aria-controls` to the input element", () => {
-    render(<Checkbox aria-controls="panel1">checkbox</Checkbox>)
+  test("forwards `aria-controls` to the input element", async () => {
+    await render(<Checkbox aria-controls="panel1">checkbox</Checkbox>)
 
     const input = screen.getByRole("checkbox")
 
     expect(input).toHaveAttribute("aria-controls", "panel1")
   })
 
-  test("forwards `aria-labelledby` to the input element", () => {
-    render(<Checkbox aria-labelledby="label1">checkbox</Checkbox>)
+  test("forwards `aria-labelledby` to the input element", async () => {
+    await render(<Checkbox aria-labelledby="label1">checkbox</Checkbox>)
 
     const input = screen.getByRole("checkbox")
 
     expect(input).toHaveAttribute("aria-labelledby", "label1")
   })
 
-  test("forwards `tabIndex` to the input element", () => {
-    render(<Checkbox tabIndex={-1}>checkbox</Checkbox>)
+  test("forwards `tabIndex` to the input element", async () => {
+    await render(<Checkbox tabIndex={-1}>checkbox</Checkbox>)
 
     const input = screen.getByRole("checkbox")
 
@@ -52,8 +53,8 @@ describe("<Checkbox />", () => {
     expect(CheckboxGroup.Root.displayName).toBe("CheckboxGroup")
   })
 
-  test("sets `className` correctly", () => {
-    render(<CheckboxGroup.Root items={items} />)
+  test("sets `className` correctly", async () => {
+    await render(<CheckboxGroup.Root items={items} />)
     const checkbox = screen.getAllByRole("checkbox")[0]
     expect(screen.getByRole("group")).toHaveClass("ui-checkbox__group")
     expect(checkbox?.parentElement).toHaveClass("ui-checkbox__root")
@@ -65,8 +66,8 @@ describe("<Checkbox />", () => {
     )
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<CheckboxGroup.Root items={items} />)
+  test("renders HTML tag correctly", async () => {
+    await render(<CheckboxGroup.Root items={items} />)
     const checkbox = screen.getAllByRole("checkbox")[0]
     expect(screen.getByRole("group").tagName).toBe("DIV")
     expect(checkbox?.parentElement?.tagName).toBe("LABEL")
@@ -77,9 +78,9 @@ describe("<Checkbox />", () => {
 })
 
 describe("<CheckboxGroup />", () => {
-  test("should handle onChange callback when checking checkboxes", () => {
+  test("should handle onChange callback when checking checkboxes", async () => {
     const onChange = vi.fn()
-    render(<CheckboxGroup.Root items={items} onChange={onChange} />)
+    await render(<CheckboxGroup.Root items={items} onChange={onChange} />)
 
     const checkboxes = screen.getAllByRole("checkbox")
 
@@ -92,9 +93,9 @@ describe("<CheckboxGroup />", () => {
     expect(onChange).toHaveBeenLastCalledWith(["1", "2"])
   })
 
-  test("should remove value when unchecking checkbox", () => {
+  test("should remove value when unchecking checkbox", async () => {
     const onChange = vi.fn()
-    render(
+    await render(
       <CheckboxGroup.Root
         defaultValue={["1", "2"]}
         items={items}
@@ -116,9 +117,11 @@ describe("<CheckboxGroup />", () => {
     expect(onChange).toHaveBeenLastCalledWith([])
   })
 
-  test("should respect max limit when checking checkboxes", () => {
+  test("should respect max limit when checking checkboxes", async () => {
     const onChange = vi.fn()
-    render(<CheckboxGroup.Root items={items} max={2} onChange={onChange} />)
+    await render(
+      <CheckboxGroup.Root items={items} max={2} onChange={onChange} />,
+    )
 
     const checkboxes = screen.getAllByRole("checkbox")
 
@@ -133,8 +136,8 @@ describe("<CheckboxGroup />", () => {
     expect(onChange).not.toHaveBeenLastCalledWith(["1", "2", "3"])
   })
 
-  test("should disable unchecked checkboxes when max limit is reached", () => {
-    render(
+  test("should disable unchecked checkboxes when max limit is reached", async () => {
+    await render(
       <CheckboxGroup.Root defaultValue={["1", "2"]} items={items} max={2} />,
     )
 
@@ -146,8 +149,8 @@ describe("<CheckboxGroup />", () => {
     expect(checkboxes[2]).toHaveAttribute("aria-disabled", "true")
   })
 
-  test("should enable disabled checkbox when value is removed", () => {
-    const { rerender } = render(
+  test("should enable disabled checkbox when value is removed", async () => {
+    const { rerender } = await render(
       <CheckboxGroup.Root items={items} max={2} value={["1", "2"]} />,
     )
 
@@ -155,14 +158,14 @@ describe("<CheckboxGroup />", () => {
 
     expect(checkboxes[2]).toHaveAttribute("aria-disabled", "true")
 
-    rerender(<CheckboxGroup.Root items={items} max={2} value={["1"]} />)
+    await rerender(<CheckboxGroup.Root items={items} max={2} value={["1"]} />)
 
     expect(checkboxes[2]).not.toHaveAttribute("aria-disabled", "true")
   })
 
-  test("should prevent clicks when disabled checkboxes due to max limit", () => {
+  test("should prevent clicks when disabled checkboxes due to max limit", async () => {
     const onChange = vi.fn()
-    render(
+    await render(
       <CheckboxGroup.Root
         defaultValue={["1", "2"]}
         items={items}
@@ -173,13 +176,16 @@ describe("<CheckboxGroup />", () => {
 
     const checkboxes = screen.getAllByRole("checkbox")
 
-    fireEvent.click(checkboxes[2]!)
+    expect(checkboxes[2]).toBeDisabled()
+    checkboxes[2]!.click()
     expect(onChange).not.toHaveBeenCalled()
   })
 
-  test("should not change value when readOnly", () => {
+  test("should not change value when readOnly", async () => {
     const onChange = vi.fn()
-    render(<CheckboxGroup.Root items={items} readOnly onChange={onChange} />)
+    await render(
+      <CheckboxGroup.Root items={items} readOnly onChange={onChange} />,
+    )
 
     const checkboxes = screen.getAllByRole("checkbox")
 
@@ -187,8 +193,8 @@ describe("<CheckboxGroup />", () => {
     expect(onChange).not.toHaveBeenCalled()
   })
 
-  test("should handle defaultValue correctly", () => {
-    render(<CheckboxGroup.Root defaultValue={["1", "3"]} items={items} />)
+  test("should handle defaultValue correctly", async () => {
+    await render(<CheckboxGroup.Root defaultValue={["1", "3"]} items={items} />)
 
     const checkboxes = screen.getAllByRole("checkbox")
 
@@ -197,8 +203,8 @@ describe("<CheckboxGroup />", () => {
     expect(checkboxes[2]).toBeChecked()
   })
 
-  test("should handle controlled value correctly", () => {
-    const { rerender } = render(
+  test("should handle controlled value correctly", async () => {
+    const { rerender } = await render(
       <CheckboxGroup.Root items={items} value={["1"]} />,
     )
 
@@ -207,18 +213,20 @@ describe("<CheckboxGroup />", () => {
     expect(checkboxes[0]).toBeChecked()
     expect(checkboxes[1]).not.toBeChecked()
 
-    rerender(<CheckboxGroup.Root items={items} value={["1", "2"]} />)
+    await rerender(<CheckboxGroup.Root items={items} value={["1", "2"]} />)
 
     expect(checkboxes[0]).toBeChecked()
     expect(checkboxes[1]).toBeChecked()
   })
 
-  test("should accept required prop", () => {
+  test("should accept required prop", async () => {
     // Note: Currently, the required prop on CheckboxGroup doesn't propagate
     // as observable attributes (required/aria-required/data-required) on checkbox inputs.
     // This test verifies the component accepts the prop without error.
     // Ideally, we would assert: checkboxes have required/aria-required attributes.
-    const { container } = render(<CheckboxGroup.Root items={items} required />)
+    const { container } = await render(
+      <CheckboxGroup.Root items={items} required />,
+    )
 
     const group = container.querySelector('[role="group"]')
     const checkboxes = screen.getAllByRole("checkbox")
@@ -227,17 +235,17 @@ describe("<CheckboxGroup />", () => {
     expect(checkboxes).toHaveLength(items.length)
   })
 
-  test("should not add value when max is reached via onChange", () => {
-    const { result } = renderHook(() => useCheckboxGroup({ max: 1 }))
+  test("should not add value when max is reached via onChange", async () => {
+    const { result } = await renderHook(() => useCheckboxGroup({ max: 1 }))
 
-    act(() => {
-      result.current.onChange("1")
+    result.current.onChange("1")
+    await waitFor(() => {
+      expect(result.current.value).toStrictEqual(["1"])
     })
-    expect(result.current.value).toStrictEqual(["1"])
 
-    act(() => {
-      result.current.onChange("2")
+    result.current.onChange("2")
+    await waitFor(() => {
+      expect(result.current.value).toStrictEqual(["1"])
     })
-    expect(result.current.value).toStrictEqual(["1"])
   })
 })

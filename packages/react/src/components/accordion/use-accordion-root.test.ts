@@ -1,6 +1,11 @@
+import type { Ref } from "react"
 import { renderHook } from "#test"
 import { createRef } from "react"
 import { useAccordion } from "./use-accordion"
+
+function invokeCallbackRef<T>(ref: Ref<T> | undefined, node: null | T) {
+  if (typeof ref === "function") ref(node)
+}
 
 describe("useAccordion getRootProps", () => {
   test("merges hook rest with user props via mergeProps", () => {
@@ -27,11 +32,11 @@ describe("useAccordion getRootProps", () => {
       onClick: userOnClick,
     })
     const node = document.createElement("div")
-    const event = { type: "click" } as any
+    const event = new MouseEvent("click")
 
     expect(typeof merged.ref).toBe("function")
-    ;(merged.ref as (node: HTMLDivElement | null) => void)(node)
-    merged.onClick?.(event)
+    invokeCallbackRef(merged.ref, node)
+    merged.onClick(event as never)
 
     expect(merged.id).toBe("user-id")
     expect(String(merged.className)).toContain("hook")

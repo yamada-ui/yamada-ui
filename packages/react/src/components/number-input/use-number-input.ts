@@ -5,11 +5,11 @@ import type { HTMLProps, PropGetter } from "../../core"
 import type { UseCounterProps } from "../../hooks/use-counter"
 import type { FieldProps } from "../field"
 import { useCallback, useMemo, useRef } from "react"
+import { mergeProps } from "../../core"
 import { useCounter } from "../../hooks/use-counter"
 import { useEventListener } from "../../hooks/use-event-listener"
 import {
   ariaAttr,
-  handlerAll,
   isComposing,
   mergeRefs,
   runKeyAction,
@@ -309,34 +309,42 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    ({ ref, ...props } = {}) => ({
-      ...ariaProps,
-      ...dataProps,
-      type: "text",
-      "aria-invalid": ariaAttr(ariaProps["aria-invalid"] ?? out),
-      "aria-valuemax": maxValue,
-      "aria-valuemin": minValue,
-      "aria-valuenow": Number.isNaN(valueAsNumber) ? undefined : valueAsNumber,
-      "aria-valuetext": valueText,
-      autoComplete: "off",
-      autoCorrect: "off",
-      disabled,
-      inputMode: "decimal",
-      max: maxValue,
-      min: minValue,
-      pattern: "[0-9]*(.[0-9]+)?",
-      readOnly,
-      role: "spinbutton",
-      step,
-      value: format(value),
-      ...rest,
-      ...props,
-      ref: mergeRefs(ref, rest.ref, inputRef),
-      onBlur: handlerAll(eventProps.onBlur, props.onBlur, onBlur),
-      onChange: handlerAll(props.onChange, onChange),
-      onFocus: handlerAll(eventProps.onFocus, props.onFocus, onFocus),
-      onKeyDown: handlerAll(rest.onKeyDown, props.onKeyDown, onKeyDown),
-    }),
+    ({ ref, ...props } = {}) =>
+      mergeProps(
+        {
+          ...ariaProps,
+          ...dataProps,
+          type: "text",
+          "aria-invalid": ariaAttr(ariaProps["aria-invalid"] ?? out),
+          "aria-valuemax": maxValue,
+          "aria-valuemin": minValue,
+          "aria-valuenow": Number.isNaN(valueAsNumber)
+            ? undefined
+            : valueAsNumber,
+          "aria-valuetext": valueText,
+          autoComplete: "off",
+          autoCorrect: "off",
+          disabled,
+          inputMode: "decimal",
+          max: maxValue,
+          min: minValue,
+          pattern: "[0-9]*(.[0-9]+)?",
+          readOnly,
+          role: "spinbutton",
+          step,
+          value: format(value),
+        },
+        rest,
+        props,
+        eventProps,
+        {
+          ref: mergeRefs(ref, rest.ref, inputRef),
+          onBlur,
+          onChange,
+          onFocus,
+          onKeyDown,
+        },
+      )(),
     [
       format,
       out,

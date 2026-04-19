@@ -2,19 +2,12 @@
 
 import type { RefObject } from "react"
 import type { Accept, DropzoneOptions } from "react-dropzone"
-import type { HTMLProps, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { fromEvent } from "file-selector"
 import { useCallback, useId } from "react"
 import { useDropzone as useOriginalDropzone } from "react-dropzone"
-import {
-  ariaAttr,
-  assignRef,
-  cx,
-  dataAttr,
-  isArray,
-  mergeRefs,
-} from "../../utils"
+import { type HTMLProps, mergeProps, type PropGetter } from "../../core"
+import { ariaAttr, assignRef, cx, dataAttr, isArray } from "../../utils"
 import { useFieldProps } from "../field"
 
 export interface UseDropzoneProps
@@ -238,25 +231,24 @@ export const useDropzone = (props: UseDropzoneProps = {}) => {
   assignRef(openRef, open)
 
   const getRootProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => {
-      const { ref: rootRef, ...rootProps } = getOriginalRootProps({
-        id: labelledbyId,
-        ...dataProps,
-        ...eventProps,
-        "aria-disabled": ariaAttr(!interactive),
-        "data-accept": dataAttr(dragAccept),
-        "data-idle": dataAttr(dragIdle),
-        "data-loading": dataAttr(loading),
-        "data-reject": dataAttr(dragReject),
-        ...rest,
-        ...props,
-      })
+    (props) =>
+      getOriginalRootProps(
+        mergeProps(
+          {
+            id: labelledbyId,
+            ...dataProps,
+            ...eventProps,
+            "aria-disabled": ariaAttr(!interactive),
+            "data-accept": dataAttr(dragAccept),
+            "data-idle": dataAttr(dragIdle),
+            "data-loading": dataAttr(loading),
+            "data-reject": dataAttr(dragReject),
+          },
+          rest,
+          props,
+        )(),
+      ),
 
-      return {
-        ...rootProps,
-        ref: mergeRefs(ref, rest.ref, rootRef),
-      }
-    },
     [
       getOriginalRootProps,
       labelledbyId,

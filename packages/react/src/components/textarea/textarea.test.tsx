@@ -69,9 +69,9 @@ describe("<Textarea />", () => {
       writable: true,
     })
     await render(<Textarea autosize />)
-    await expect
-      .poll(() => (page.getByRole("textbox").element() as HTMLTextAreaElement).rows)
-      .toBe(2)
+    const textarea = page.getByRole("textbox").element() as HTMLTextAreaElement
+
+    await expect.poll(() => textarea.rows).toBe(2)
     Object.defineProperty(document, "fonts", {
       value: fontsData,
       writable: true,

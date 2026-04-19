@@ -19,8 +19,8 @@ const TARGET_LABELS = ["documentation"]
 async function getIssues() {
   let issues: Issue[] = []
   let page = 1
-  let count = 0
   const perPage = 100
+  let count: number
 
   do {
     const { data } = await retryOnRateLimit(async () =>

@@ -92,6 +92,15 @@
       "follow-redirects": "^1.16.0",
       "react": "^19.0.0",
       "react-dom": "^19.0.0"
+    },
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "eslint-plugin-react>eslint": "10",
+        "eslint-plugin-react-hooks>eslint": "10",
+        "eslint-plugin-import>eslint": "10",
+        "eslint-plugin-jsx-a11y>eslint": "10",
+        "@next/eslint-plugin-next>eslint": "10"
+      }
     }
   }
 }

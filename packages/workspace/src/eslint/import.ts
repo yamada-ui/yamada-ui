@@ -1,4 +1,5 @@
 import type { ConfigWithExtendsArray, Plugin } from "@eslint/config-helpers"
+import { fixupPluginRules } from "@eslint/compat"
 import importAliasPlugin from "@limegrass/eslint-plugin-import-alias"
 import importPlugin from "eslint-plugin-import"
 import unusedImportsPlugin from "eslint-plugin-unused-imports"
@@ -7,9 +8,10 @@ import { sharedFiles } from "./shared"
 export const importConfigArray: ConfigWithExtendsArray = [
   {
     name: "import",
-    extends: [importPlugin.flatConfigs.recommended],
     files: sharedFiles,
+    plugins: { import: fixupPluginRules(importPlugin) },
     rules: {
+      ...importPlugin.flatConfigs.recommended.rules,
       "import/enforce-node-protocol-usage": ["error", "always"],
       "import/extensions": [
         "error",

@@ -3,6 +3,7 @@
 import type { KeyboardEvent } from "react"
 import type { HTMLProps, Orientation, PropGetter } from "../../core"
 import { useCallback, useId, useState } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
 import {
@@ -149,12 +150,8 @@ export const useTabs = ({
   }, [indexProp])
 
   const getRootProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
-      "data-orientation": orientation,
-      ...rest,
-      ...props,
-      ref: mergeRefs(ref, rest.ref),
-    }),
+    ({ ref, ...props } = {}) =>
+      mergeProps({ "data-orientation": orientation }, rest, props, { ref })(),
     [orientation, rest],
   )
 
@@ -220,21 +217,23 @@ export const useTab = ({ id, disabled, index, ...rest }: UseTabProps) => {
   }, [setFocusedIndex, index, manual, disabled, setIndex])
 
   const getRootProps: PropGetter<"button"> = useCallback(
-    ({ ref, ...props } = {}) => ({
-      id,
-      type: "button",
-      "aria-controls": tabPanelId,
-      "aria-selected": selected,
-      "data-orientation": orientation,
-      disabled,
-      role: "tab",
-      tabIndex: selected ? 0 : -1,
-      ...rest,
-      ...props,
-      ref: mergeRefs(ref, register),
-      onClick: handlerAll(props.onClick, rest.onClick, onClick),
-      onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
-    }),
+    ({ ref, ...props } = {}) =>
+      mergeProps(
+        {
+          id,
+          type: "button",
+          "aria-controls": tabPanelId,
+          "aria-selected": selected,
+          "data-orientation": orientation,
+          disabled,
+          role: "tab",
+          tabIndex: selected ? 0 : -1,
+        },
+        props,
+        rest,
+        { ref: mergeRefs(ref, register) },
+        { onClick, onFocus },
+      )(),
     [
       disabled,
       id,
@@ -274,17 +273,20 @@ export const useTabPanel = ({
   id ??= `${rootId}-panel-${index}`
 
   const getRootProps: PropGetter = useCallback(
-    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      id,
-      "aria-labelledby": cx(ariaLabelledbyProp, ariaLabelledby, tabId),
-      "data-orientation": orientation,
-      hidden: !selected,
-      role: "tabpanel",
-      tabIndex: selected ? 0 : -1,
-      ...rest,
-      ...props,
-      ref: mergeRefs(ref, register),
-    }),
+    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) =>
+      mergeProps(
+        {
+          id,
+          "aria-labelledby": cx(ariaLabelledbyProp, ariaLabelledby, tabId),
+          "data-orientation": orientation,
+          hidden: !selected,
+          role: "tabpanel",
+          tabIndex: selected ? 0 : -1,
+        },
+        rest,
+        props,
+        { ref: mergeRefs(ref, register) },
+      )(),
     [id, ariaLabelledbyProp, orientation, register, rest, selected, tabId],
   )
 

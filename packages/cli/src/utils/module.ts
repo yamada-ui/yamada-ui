@@ -1,6 +1,5 @@
 import { isObject } from "@yamada-ui/utils"
 import { build } from "esbuild"
-import nodeEval from "node-eval"
 import { realpathSync } from "node:fs"
 import { Script } from "node:vm"
 
@@ -22,22 +21,16 @@ export async function getModule(file: string, cwd: string) {
     ? Object.keys(result.metafile.inputs)
     : []
 
-  try {
-    const realFileName = realpathSync.native(file)
+  const realFileName = realpathSync.native(file)
 
-    if (!code) throw new Error("code is undefined")
+  if (!code) throw new Error("code is undefined")
 
-    const script = new Script(code, { filename: realFileName })
-    const mod = { exports: {} }
-    const require = (id: string): any =>
-      id === realFileName ? mod.exports : require(id)
+  const script = new Script(code, { filename: realFileName })
+  const mod = { exports: {} }
+  const require = (id: string): any =>
+    id === realFileName ? mod.exports : require(id)
 
-    script.runInThisContext()(mod.exports, require, mod)
+  script.runInThisContext()(mod.exports, require, mod)
 
-    return { code, dependencies, mod }
-  } catch {
-    const mod = nodeEval(code)
-
-    return { code, dependencies, mod }
-  }
+  return { code, dependencies, mod }
 }

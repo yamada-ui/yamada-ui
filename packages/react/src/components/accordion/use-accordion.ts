@@ -1,8 +1,8 @@
 "use client"
 
 import type { KeyboardEvent } from "react"
-import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useEffect, useId, useState } from "react"
+import { type HTMLProps, mergeProps, type PropGetter } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
 import {
@@ -235,12 +235,7 @@ export const useAccordionItem = ({
   )
 
   const getItemProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
-      "data-expanded": dataAttr(open),
-      ...props,
-      ...rest,
-      ref: mergeRefs(ref, rest.ref),
-    }),
+    (props) => mergeProps({ "data-expanded": dataAttr(open) }, rest, props)(),
     [open, rest],
   )
 

@@ -4,6 +4,7 @@ import type { ReactElement, ReactNode } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import { cloneElement, useCallback, useMemo } from "react"
+import { mergeProps } from "../../core"
 import { useI18n } from "../../providers/i18n-provider"
 import { runIfFn, useValidChildren } from "../../utils"
 
@@ -114,11 +115,7 @@ export const useBreadcrumb = ({
   ])
 
   const getRootProps: PropGetter<"nav"> = useCallback(
-    (props) => ({
-      "aria-label": t("Breadcrumb"),
-      ...rest,
-      ...props,
-    }),
+    (props) => mergeProps({ "aria-label": t("Breadcrumb") }, rest, props)(),
     [rest, t],
   )
 

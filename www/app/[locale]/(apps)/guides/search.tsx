@@ -222,8 +222,6 @@ function SearchInput({
         onSearchRef.current(value)
         if (value.length) {
           onOpen()
-        } else {
-          onClose()
         }
       }}
       onCompositionEnd={() => {

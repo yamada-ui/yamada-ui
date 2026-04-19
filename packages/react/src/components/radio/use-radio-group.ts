@@ -4,6 +4,7 @@ import type { ChangeEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { useCallback, useId } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import {
   createContext,
@@ -12,7 +13,6 @@ import {
   handlerAll,
   isObject,
   isUndefined,
-  mergeRefs,
   visuallyHiddenAttributes,
 } from "../../utils"
 import { useFieldProps } from "../field"
@@ -89,16 +89,19 @@ export const useRadioGroup = <Y extends string = string>(
       "aria-describedby": ariaDescribedby,
       "aria-labelledby": ariaLabelledby,
       ...props
-    } = {}) => ({
-      ...dataProps,
-      id,
-      "aria-describedby": cx(ariaDescribedbyProp, ariaDescribedby),
-      "aria-labelledby": cx(labelId, ariaLabelledby),
-      role: "radiogroup",
-      ...rest,
-      ...props,
-      ref: mergeRefs(ref, rest.ref),
-    }),
+    } = {}) =>
+      mergeProps(
+        dataProps,
+        {
+          id,
+          "aria-describedby": cx(ariaDescribedbyProp, ariaDescribedby),
+          "aria-labelledby": cx(labelId, ariaLabelledby),
+          role: "radiogroup",
+        },
+        { ref },
+        rest,
+        props,
+      )(),
     [ariaDescribedbyProp, dataProps, id, labelId, rest],
   )
 

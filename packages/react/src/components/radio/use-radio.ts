@@ -4,6 +4,7 @@ import type { ChangeEvent, ChangeEventHandler, FocusEventHandler } from "react"
 import type { HTMLProps, HTMLRefAttributes, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { useCallback, useId } from "react"
+import { mergeProps } from "../../core"
 import { useControllableEventState } from "../../hooks/use-controllable-state"
 import {
   cx,
@@ -117,12 +118,12 @@ export const useRadio = <Y extends string = string>({
 
   const getRootProps: PropGetter<"label"> = useCallback(
     (props = {}) => {
-      const sharedProps = {
-        ...dataProps,
-        "data-checked": dataAttr(checked),
-        ...rest,
-        ...props,
-      }
+      const sharedProps = mergeProps(
+        dataProps,
+        { "data-checked": dataAttr(checked) },
+        rest,
+        props,
+      )()
 
       return getLabelProps?.(sharedProps) ?? sharedProps
     },

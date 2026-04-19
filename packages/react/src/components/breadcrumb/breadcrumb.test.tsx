@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Breadcrumb } from "./"
 
 describe("<Breadcrumb />", () => {
@@ -22,36 +22,40 @@ describe("<Breadcrumb />", () => {
     expect(Breadcrumb.Ellipsis.displayName).toBe("BreadcrumbEllipsis")
   })
 
-  test("sets `className` correctly", () => {
-    render(
+  test("sets `className` correctly", async () => {
+    await render(
       <Breadcrumb.Root data-testid="root">
         <Breadcrumb.Link href="/">Link 1</Breadcrumb.Link>
         <Breadcrumb.Ellipsis data-testid="ellipsis" />
       </Breadcrumb.Root>,
     )
 
-    expect(screen.getByTestId("root")).toHaveClass("ui-breadcrumb__root")
-    expect(screen.getByText("Link 1")).toHaveClass("ui-breadcrumb__link")
-    expect(screen.getByTestId("ellipsis")).toHaveClass(
-      "ui-breadcrumb__ellipsis",
-    )
+    await expect
+      .element(page.getByTestId("root"))
+      .toHaveClass("ui-breadcrumb__root")
+    await expect
+      .element(page.getByText("Link 1"))
+      .toHaveClass("ui-breadcrumb__link")
+    await expect
+      .element(page.getByTestId("ellipsis"))
+      .toHaveClass("ui-breadcrumb__ellipsis")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(
+  test("renders HTML tag correctly", async () => {
+    await render(
       <Breadcrumb.Root data-testid="root">
         <Breadcrumb.Link href="/">Link 1</Breadcrumb.Link>
         <Breadcrumb.Ellipsis data-testid="ellipsis" />
       </Breadcrumb.Root>,
     )
 
-    expect(screen.getByTestId("root").tagName).toBe("NAV")
-    expect(screen.getByText("Link 1").tagName).toBe("A")
-    expect(screen.getByTestId("ellipsis").tagName).toBe("svg")
+    expect(page.getByTestId("root").element().tagName).toBe("NAV")
+    expect(page.getByText("Link 1").element().tagName).toBe("A")
+    expect(page.getByTestId("ellipsis").element().tagName).toBe("svg")
   })
 
-  test("separator property is being passed accurately", () => {
-    render(
+  test("separator property is being passed accurately", async () => {
+    await render(
       <Breadcrumb.Root separator="-">
         <Breadcrumb.Link href="/">1</Breadcrumb.Link>
         <Breadcrumb.Link href="/" currentPage>
@@ -60,12 +64,12 @@ describe("<Breadcrumb />", () => {
       </Breadcrumb.Root>,
     )
 
-    const separatorEle = screen.getByText("-")
+    const separatorEle = page.getByText("-").element()
     expect(separatorEle).toBeInTheDocument()
   })
 
-  test("currentPage property is being passed accurately", () => {
-    render(
+  test("currentPage property is being passed accurately", async () => {
+    await render(
       <Breadcrumb.Root separator="-">
         <Breadcrumb.Link href="/">1</Breadcrumb.Link>
         <Breadcrumb.Link href="/" currentPage>
@@ -73,13 +77,13 @@ describe("<Breadcrumb />", () => {
         </Breadcrumb.Link>
       </Breadcrumb.Root>,
     )
-    const spanElement = screen.getByText("2")
+    const spanElement = page.getByText("2").element()
     expect(spanElement).toBeInTheDocument()
     expect(spanElement.nodeName.toLowerCase()).toBe("span")
   })
 
-  test("breadcrumb link has its href attribute correctly set", () => {
-    render(
+  test("breadcrumb link has its href attribute correctly set", async () => {
+    await render(
       <Breadcrumb.Root>
         <Breadcrumb.Link href="#">Link 1</Breadcrumb.Link>
         <Breadcrumb.Link href="#" currentPage>
@@ -87,12 +91,12 @@ describe("<Breadcrumb />", () => {
         </Breadcrumb.Link>
       </Breadcrumb.Root>,
     )
-    const breadcrumbLink = screen.getByRole("link", { name: /Link 1/i })
+    const breadcrumbLink = page.getByRole("link", { name: /Link 1/i }).element()
     expect(breadcrumbLink).toHaveAttribute("href", "#")
   })
 
-  test("current page link doesn't have href attribute set", () => {
-    render(
+  test("current page link doesn't have href attribute set", async () => {
+    await render(
       <Breadcrumb.Root>
         <Breadcrumb.Link href="#">Link 1</Breadcrumb.Link>
         <Breadcrumb.Link href="#" currentPage>
@@ -100,12 +104,12 @@ describe("<Breadcrumb />", () => {
         </Breadcrumb.Link>
       </Breadcrumb.Root>,
     )
-    const currentPageLink = screen.getByText("Link 2")
+    const currentPageLink = page.getByText("Link 2").element()
     expect(currentPageLink).not.toHaveAttribute("href")
   })
 
-  test("renders breadcrumbEllipsis correctly", () => {
-    render(
+  test("renders breadcrumbEllipsis correctly", async () => {
+    await render(
       <Breadcrumb.Root>
         <Breadcrumb.Link href="#">Link 1</Breadcrumb.Link>
         <Breadcrumb.Ellipsis />
@@ -114,10 +118,10 @@ describe("<Breadcrumb />", () => {
         </Breadcrumb.Link>
       </Breadcrumb.Root>,
     )
-    expect(screen.getByLabelText("Ellipsis")).toBeInTheDocument()
+    await expect.element(page.getByLabelText("Ellipsis")).toBeInTheDocument()
   })
 
-  test("renders breadcrumb correctly with items", () => {
+  test("renders breadcrumb correctly with items", async () => {
     const items: Breadcrumb.Item[] = [
       { href: "/", label: "サイヤ人編" },
       { href: "/", label: "ナメック星編" },
@@ -125,12 +129,12 @@ describe("<Breadcrumb />", () => {
       { href: "/", currentPage: true, label: "魔人ブウ編" },
     ]
 
-    render(<Breadcrumb.Root items={items} />)
+    const { container } = await render(<Breadcrumb.Root items={items} />)
 
-    expect(screen.getAllByRole("listitem")).toHaveLength(7)
+    expect(container.querySelectorAll("li")).toHaveLength(7)
   })
 
-  test("is correctly truncated", () => {
+  test("is correctly truncated", async () => {
     const items: Breadcrumb.Item[] = [
       { href: "/1", label: "サイヤ人編" },
       { href: "/2", label: "ナメック星編" },
@@ -138,11 +142,11 @@ describe("<Breadcrumb />", () => {
       { href: "/4", currentPage: true, label: "魔人ブウ編" },
     ]
 
-    render(
+    const { container } = await render(
       <Breadcrumb.Root endBoundaries={1} items={items} startBoundaries={1} />,
     )
 
-    const listItems = screen.getAllByRole("listitem")
+    const listItems = container.querySelectorAll("li")
 
     expect(listItems).toHaveLength(5)
     expect(listItems[0]?.querySelector("a")).toHaveAttribute("href", "/1")
@@ -151,7 +155,7 @@ describe("<Breadcrumb />", () => {
     ).toHaveAttribute("aria-current", "page")
   })
 
-  test("if boundaries is 0 or undefined, 1 is correctly reflected.", () => {
+  test("if boundaries is 0 or undefined, 1 is correctly reflected.", async () => {
     const items: Breadcrumb.Item[] = [
       { href: "/1", label: "サイヤ人編" },
       { href: "/2", label: "ナメック星編" },
@@ -159,7 +163,7 @@ describe("<Breadcrumb />", () => {
       { href: "/4", currentPage: true, label: "魔人ブウ編" },
     ]
 
-    render(
+    const { container: container1 } = await render(
       <Breadcrumb.Root
         data-testid="breadCrumb1"
         items={items}
@@ -167,7 +171,7 @@ describe("<Breadcrumb />", () => {
       />,
     )
 
-    render(
+    const { container: container2 } = await render(
       <Breadcrumb.Root
         data-testid="breadCrumb2"
         endBoundaries={1}
@@ -175,7 +179,7 @@ describe("<Breadcrumb />", () => {
       />,
     )
 
-    render(
+    const { container: container3 } = await render(
       <Breadcrumb.Root
         data-testid="breadCrumb3"
         endBoundaries={0}
@@ -185,18 +189,24 @@ describe("<Breadcrumb />", () => {
     )
 
     expect(
-      screen.getByTestId("breadCrumb1").querySelectorAll("li"),
+      container1
+        .querySelector('[data-testid="breadCrumb1"]')
+        ?.querySelectorAll("li"),
     ).toHaveLength(3)
     expect(
-      screen.getByTestId("breadCrumb2").querySelectorAll("li"),
+      container2
+        .querySelector('[data-testid="breadCrumb2"]')
+        ?.querySelectorAll("li"),
     ).toHaveLength(3)
     expect(
-      screen.getByTestId("breadCrumb3").querySelectorAll("li"),
+      container3
+        .querySelector('[data-testid="breadCrumb3"]')
+        ?.querySelectorAll("li"),
     ).toHaveLength(7)
   })
 
-  test("applies custom `aria-label` to the nav element", () => {
-    render(
+  test("applies custom `aria-label` to the nav element", async () => {
+    await render(
       <Breadcrumb.Root aria-label="Custom Breadcrumb" data-testid="root">
         <Breadcrumb.Link href="/">Link 1</Breadcrumb.Link>
         <Breadcrumb.Link href="/" currentPage>
@@ -205,14 +215,13 @@ describe("<Breadcrumb />", () => {
       </Breadcrumb.Root>,
     )
 
-    expect(screen.getByTestId("root")).toHaveAttribute(
-      "aria-label",
-      "Custom Breadcrumb",
-    )
+    await expect
+      .element(page.getByTestId("root"))
+      .toHaveAttribute("aria-label", "Custom Breadcrumb")
   })
 
-  test("ellipsis respects `aria-hidden` override", () => {
-    render(
+  test("ellipsis respects `aria-hidden` override", async () => {
+    await render(
       <Breadcrumb.Root>
         <Breadcrumb.Link href="/">Link 1</Breadcrumb.Link>
         <Breadcrumb.Ellipsis aria-hidden={false} data-testid="ellipsis" />
@@ -222,14 +231,13 @@ describe("<Breadcrumb />", () => {
       </Breadcrumb.Root>,
     )
 
-    expect(screen.getByTestId("ellipsis")).toHaveAttribute(
-      "aria-hidden",
-      "false",
-    )
+    await expect
+      .element(page.getByTestId("ellipsis"))
+      .toHaveAttribute("aria-hidden", "false")
   })
 
-  test("ellipsis respects `tabIndex` override", () => {
-    render(
+  test("ellipsis respects `tabIndex` override", async () => {
+    await render(
       <Breadcrumb.Root>
         <Breadcrumb.Link href="/">Link 1</Breadcrumb.Link>
         <Breadcrumb.Ellipsis data-testid="ellipsis" tabIndex={-1} />
@@ -239,10 +247,12 @@ describe("<Breadcrumb />", () => {
       </Breadcrumb.Root>,
     )
 
-    expect(screen.getByTestId("ellipsis")).toHaveAttribute("tabindex", "-1")
+    await expect
+      .element(page.getByTestId("ellipsis"))
+      .toHaveAttribute("tabindex", "-1")
   })
 
-  test("retrieve omitted items correctly", () => {
+  test("retrieve omitted items correctly", async () => {
     const ellipsis = vi.fn()
 
     const items: Breadcrumb.Item[] = [
@@ -252,7 +262,7 @@ describe("<Breadcrumb />", () => {
       { href: "/", currentPage: true, label: "魔人ブウ編" },
     ]
 
-    render(
+    await render(
       <Breadcrumb.Root
         ellipsis={ellipsis}
         endBoundaries={1}

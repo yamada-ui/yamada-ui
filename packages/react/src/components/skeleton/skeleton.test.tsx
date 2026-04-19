@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Skeleton, SkeletonCircle, SkeletonText } from "./"
 
 describe("<Skeleton />", () => {
@@ -18,68 +18,80 @@ describe("<Skeleton />", () => {
     expect(SkeletonText.name).toBe("SkeletonText")
   })
 
-  test("sets `className` correctly", () => {
-    render(
+  test("sets `className` correctly", async () => {
+    await render(
       <>
         <Skeleton data-testid="skeleton" />
         <SkeletonCircle data-testid="skeletonCircle" />
         <SkeletonText rootProps={{ "data-testid": "skeletonText" }} />
       </>,
     )
-    expect(screen.getByTestId("skeleton")).toHaveClass("ui-skeleton")
-    expect(screen.getByTestId("skeletonCircle")).toHaveClass("ui-skeleton")
-    expect(screen.getByTestId("skeletonText").children[0]).toHaveClass(
+    await expect
+      .element(page.getByTestId("skeleton"))
+      .toHaveClass("ui-skeleton")
+    await expect
+      .element(page.getByTestId("skeletonCircle"))
+      .toHaveClass("ui-skeleton")
+    expect(page.getByTestId("skeletonText").element().children[0]).toHaveClass(
       "ui-skeleton",
     )
   })
 
-  test("renders HTML tag correctly", () => {
-    render(
+  test("renders HTML tag correctly", async () => {
+    await render(
       <>
         <Skeleton data-testid="skeleton" />
         <SkeletonCircle data-testid="skeletonCircle" />
         <SkeletonText rootProps={{ "data-testid": "skeletonText" }} />
       </>,
     )
-    expect(screen.getByTestId("skeleton").tagName).toBe("DIV")
-    expect(screen.getByTestId("skeletonCircle").tagName).toBe("DIV")
-    expect(screen.getByTestId("skeletonText").children[0]?.tagName).toBe("DIV")
+    expect(page.getByTestId("skeleton").element().tagName).toBe("DIV")
+    expect(page.getByTestId("skeletonCircle").element().tagName).toBe("DIV")
+    expect(
+      page.getByTestId("skeletonText").element().children[0]?.tagName,
+    ).toBe("DIV")
   })
 
-  test("sets loading state attributes correctly", () => {
-    const { rerender } = render(<Skeleton data-testid="skeleton" loading />)
-    const el = screen.getByTestId("skeleton")
-    expect(el).toHaveAttribute("aria-busy", "true")
-    expect(el).toHaveAttribute("data-loading")
+  test("sets loading state attributes correctly", async () => {
+    const { rerender } = await render(
+      <Skeleton data-testid="skeleton" loading />,
+    )
+    const el = page.getByTestId("skeleton")
+    await expect.element(el).toHaveAttribute("aria-busy", "true")
+    await expect.element(el).toHaveAttribute("data-loading")
 
-    rerender(<Skeleton data-testid="skeleton" loading={false} />)
-    const el2 = screen.getByTestId("skeleton")
-    expect(el2).toHaveAttribute("aria-busy", "false")
-    expect(el2).toHaveAttribute("data-loaded")
+    await rerender(<Skeleton data-testid="skeleton" loading={false} />)
+    const el2 = page.getByTestId("skeleton")
+    await expect.element(el2).toHaveAttribute("aria-busy", "false")
+    await expect.element(el2).toHaveAttribute("data-loaded")
   })
 
-  test("sets duration as number (appends 's')", () => {
-    render(<Skeleton data-testid="skeleton" duration={2} />)
-    expect(screen.getByTestId("skeleton")).toHaveStyle("--duration: 2s")
+  test("sets duration as number (appends 's')", async () => {
+    await render(<Skeleton data-testid="skeleton" duration={2} />)
+    const styles = getComputedStyle(page.getByTestId("skeleton").element())
+    expect(styles.getPropertyValue("--duration").trim()).toBe("2s")
   })
 
-  test("sets duration as string (passes through)", () => {
-    render(<Skeleton data-testid="skeleton" duration="0.5s" />)
-    expect(screen.getByTestId("skeleton")).toHaveStyle("--duration: 0.5s")
+  test("sets duration as string (passes through)", async () => {
+    await render(<Skeleton data-testid="skeleton" duration="0.5s" />)
+    const styles = getComputedStyle(page.getByTestId("skeleton").element())
+    expect(styles.getPropertyValue("--duration").trim()).toBe("0.5s")
   })
 
-  test("sets fadeDuration as number (appends 's')", () => {
-    render(<Skeleton data-testid="skeleton" fadeDuration={0.4} />)
-    expect(screen.getByTestId("skeleton")).toHaveStyle("--fade-duration: 0.4s")
+  test("sets fadeDuration as number (appends 's')", async () => {
+    await render(<Skeleton data-testid="skeleton" fadeDuration={0.4} />)
+    const styles = getComputedStyle(page.getByTestId("skeleton").element())
+    expect(styles.getPropertyValue("--fade-duration").trim()).toBe("0.4s")
   })
 
-  test("sets fadeDuration as string (passes through)", () => {
-    render(<Skeleton data-testid="skeleton" fadeDuration="0.8s" />)
-    expect(screen.getByTestId("skeleton")).toHaveStyle("--fade-duration: 0.8s")
+  test("sets fadeDuration as string (passes through)", async () => {
+    await render(<Skeleton data-testid="skeleton" fadeDuration="0.8s" />)
+    const styles = getComputedStyle(page.getByTestId("skeleton").element())
+    expect(styles.getPropertyValue("--fade-duration").trim()).toBe("0.8s")
   })
 
-  test("sets startColor and endColor", () => {
-    render(
+  test("sets startColor and endColor", async () => {
+    await render(
       <Skeleton
         data-testid="skeleton"
         endColor="blue.500"
@@ -87,42 +99,42 @@ describe("<Skeleton />", () => {
       />,
     )
     // Just ensure it renders without error with color props
-    expect(screen.getByTestId("skeleton")).toBeInTheDocument()
+    await expect.element(page.getByTestId("skeleton")).toBeInTheDocument()
   })
 
-  test("sets fitContent when explicitly true (no children)", () => {
-    render(<Skeleton data-testid="skeleton" fitContent />)
-    expect(screen.getByTestId("skeleton")).toHaveStyle(
-      "--height: fit-content; --width: fit-content",
-    )
+  test("sets fitContent when explicitly true (no children)", async () => {
+    await render(<Skeleton data-testid="skeleton" fitContent />)
+    const styles = getComputedStyle(page.getByTestId("skeleton").element())
+    expect(styles.getPropertyValue("--height").trim()).toBe("fit-content")
+    expect(styles.getPropertyValue("--width").trim()).toBe("fit-content")
   })
 
-  test("sets fitContent automatically when children are present", () => {
-    render(
+  test("sets fitContent automatically when children are present", async () => {
+    await render(
       <Skeleton data-testid="skeleton">
         <span>Content</span>
       </Skeleton>,
     )
-    expect(screen.getByTestId("skeleton")).toHaveStyle(
-      "--height: fit-content; --width: fit-content",
-    )
+    const styles = getComputedStyle(page.getByTestId("skeleton").element())
+    expect(styles.getPropertyValue("--height").trim()).toBe("fit-content")
+    expect(styles.getPropertyValue("--width").trim()).toBe("fit-content")
   })
 
-  test("does not set fitContent when false and no children", () => {
-    render(<Skeleton data-testid="skeleton" />)
-    const el = screen.getByTestId("skeleton")
-    expect(el.style.getPropertyValue("--width")).toBe("")
-    expect(el.style.getPropertyValue("--height")).toBe("")
+  test("does not set fitContent when false and no children", async () => {
+    await render(<Skeleton data-testid="skeleton" />)
+    const styles = getComputedStyle(page.getByTestId("skeleton").element())
+    expect(styles.getPropertyValue("--width").trim()).not.toBe("fit-content")
+    expect(styles.getPropertyValue("--height").trim()).not.toBe("fit-content")
   })
 
-  test("fitContent false overrides children default", () => {
-    render(
+  test("fitContent false overrides children default", async () => {
+    await render(
       <Skeleton data-testid="skeleton" fitContent={false}>
         <span>Content</span>
       </Skeleton>,
     )
-    const el = screen.getByTestId("skeleton")
-    expect(el.style.getPropertyValue("--width")).toBe("")
-    expect(el.style.getPropertyValue("--height")).toBe("")
+    const styles = getComputedStyle(page.getByTestId("skeleton").element())
+    expect(styles.getPropertyValue("--width").trim()).not.toBe("fit-content")
+    expect(styles.getPropertyValue("--height").trim()).not.toBe("fit-content")
   })
 })

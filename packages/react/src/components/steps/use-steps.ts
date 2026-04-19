@@ -2,7 +2,7 @@
 
 import type { HTMLProps, Orientation, PropGetter } from "../../core"
 import { useCallback, useId } from "react"
-import { useEnvironment } from "../../core"
+import { mergeProps, useEnvironment } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
 import {
@@ -112,11 +112,7 @@ export const useSteps = ({
   }, [count, setIndex])
 
   const getRootProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
-      ...rest,
-      ...props,
-      ref: mergeRefs(ref, rest.ref),
-    }),
+    (props = {}) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -209,17 +205,18 @@ export const useStepsItem = ({
   }, [descendants, getDocument, id, index])
 
   const getRootProps: PropGetter<"li"> = useCallback(
-    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) => {
-      return {
-        "aria-current": current ? "step" : undefined,
-        "aria-labelledby": cx(ariaLabelledbyProp, ariaLabelledby),
-        "data-orientation": orientation,
-        [statusDataAttr]: dataAttr(true),
-        ...rest,
-        ...props,
-        ref: mergeRefs(ref, register),
-      }
-    },
+    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) =>
+      mergeProps(
+        {
+          "aria-current": current ? "step" : undefined,
+          "aria-labelledby": cx(ariaLabelledbyProp, ariaLabelledby),
+          "data-orientation": orientation,
+          [statusDataAttr]: dataAttr(true),
+        },
+        rest,
+        props,
+        { ref: mergeRefs(ref, register) },
+      )(),
     [ariaLabelledbyProp, current, orientation, statusDataAttr, rest, register],
   )
 

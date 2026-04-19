@@ -7,7 +7,7 @@ catalog:
   "@emotion/react": ^11.14.0
   "@faker-js/faker": ^10.4.0
   "@lucide/lab": ^0.1.2
-  "@tanstack/react-router": ^1.168.10
+  "@tanstack/react-router": ^1.168.18
   "@testing-library/jest-dom": ^6.9.1
   "@types/yamljs": ^0.2.34
   "@typescript-eslint/parser": ^8.58.0
@@ -20,21 +20,21 @@ catalog:
   eslint: ^9.39.4
   "eslint-plugin-unused-imports": ^4.4.1
   motion: ^12.38.0
-  next: ^16.2.2
+  next: ^16.2.3
   ora: ^9.3.0
   oxfmt: ^0.45.0
   picocolors: ^1.1.1
   prettier: ^3.8.1
   react: ^19.2.4
   react-dom: ^19.2.4
-  react-hook-form: ^7.72.0
+  react-hook-form: ^7.72.1
   react-icons: ^5.6.0
   rimraf: ^6.1.3
   scroll-into-view-if-needed: ^3.1.0
   sucrase: ^3.35.1
   tsx: ^4.21.0
   typescript: ^5.9.3
-  vite: ^8.0.3
+  vite: ^7.3.2
   vite-tsconfig-paths: ^6.1.1
   vitest: ^4.1.2
   vitest-axe: ^0.1.0

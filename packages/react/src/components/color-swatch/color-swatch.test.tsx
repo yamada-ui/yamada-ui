@@ -1,30 +1,36 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { vi } from "vitest"
 import { ColorSwatch, ColorSwatchGroup } from "."
 
 describe("<ColorSwatchGroup />", () => {
-  test("renders empty swatch when no items are provided", () => {
-    render(<ColorSwatchGroup />)
+  test("renders empty swatch when no items are provided", async () => {
+    await render(<ColorSwatchGroup />)
 
-    expect(screen.getByLabelText("Color swatch group")).toBeInTheDocument()
+    await expect
+      .element(page.getByLabelText("Color swatch group"))
+      .toBeInTheDocument()
   })
 
-  test("renders empty swatch when items is an empty array", () => {
-    render(<ColorSwatchGroup items={[]} />)
+  test("renders empty swatch when items is an empty array", async () => {
+    await render(<ColorSwatchGroup items={[]} />)
 
-    expect(screen.getByLabelText("Color swatch group")).toBeInTheDocument()
+    await expect
+      .element(page.getByLabelText("Color swatch group"))
+      .toBeInTheDocument()
   })
 
-  test("renders color swatches for provided items", () => {
-    render(<ColorSwatchGroup items={["#ff0000", "#00ff00"]} />)
+  test("renders color swatches for provided items", async () => {
+    await render(<ColorSwatchGroup items={["#ff0000", "#00ff00"]} />)
 
-    expect(screen.getByLabelText("Color swatch group")).toBeInTheDocument()
+    await expect
+      .element(page.getByLabelText("Color swatch group"))
+      .toBeInTheDocument()
   })
 
-  test("warns when more than 4 items are provided", () => {
+  test("warns when more than 4 items are provided", async () => {
     const warnSpy = vi.spyOn(console, "warn").mockImplementation(vi.fn())
 
-    render(
+    await render(
       <ColorSwatchGroup
         items={["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff"]}
       />,
@@ -37,10 +43,12 @@ describe("<ColorSwatchGroup />", () => {
     warnSpy.mockRestore()
   })
 
-  test("renders correctly with 3 items", () => {
-    render(<ColorSwatchGroup items={["#ff0000", "#00ff00", "#0000ff"]} />)
+  test("renders correctly with 3 items", async () => {
+    await render(<ColorSwatchGroup items={["#ff0000", "#00ff00", "#0000ff"]} />)
 
-    expect(screen.getByLabelText("Color swatch group")).toBeInTheDocument()
+    await expect
+      .element(page.getByLabelText("Color swatch group"))
+      .toBeInTheDocument()
   })
 })
 

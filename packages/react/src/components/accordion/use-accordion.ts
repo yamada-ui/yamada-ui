@@ -114,6 +114,8 @@ export const useAccordion = ({
     onChange,
   })
 
+  // Getter props intentionally win on scalar conflicts while mergeable fields
+  // still compose with hook defaults.
   const getRootProps: PropGetter = useCallback(
     (props = {}) => mergeProps(rest, props)(),
     [rest],

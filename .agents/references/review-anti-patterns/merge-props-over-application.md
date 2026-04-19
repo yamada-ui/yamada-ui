@@ -1,4 +1,4 @@
-# Utility over-application
+# `mergeProps` over-application
 
 **Example**: [PR #6580](https://github.com/yamada-ui/yamada-ui/pull/6580) — "use mergeProps for Radio root"
 

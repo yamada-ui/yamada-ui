@@ -58,7 +58,7 @@ async function updateIssueTemplate(
         `$1${packageJson.react!.version}$2`,
       )
 
-      return writeFileWithFormat(path, template, { parser: "yaml" })
+      return writeFileWithFormat(path, template)
     }),
   )
 }

@@ -207,7 +207,7 @@ async function main() {
 
   spinner.start("Writing relations")
 
-  await writeFileWithFormat(DIST_PATH, relations, { parser: "json" })
+  await writeFileWithFormat(DIST_PATH, relations)
 
   spinner.succeed("Wrote relations")
 

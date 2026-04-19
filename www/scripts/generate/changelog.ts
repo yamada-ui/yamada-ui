@@ -213,9 +213,6 @@ function main() {
           await writeFileWithFormat(
             path.join(DOC_MAP_PATH, `doc-map.${lang}.json`),
             docMap,
-            {
-              parser: "json",
-            },
           )
         }),
       )

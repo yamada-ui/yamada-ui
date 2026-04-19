@@ -86,19 +86,11 @@ async function main() {
   await writeFileWithFormat(
     path.resolve("data", "maintainers.json"),
     maintainers,
-    {
-      parser: "json",
-    },
   )
-  await writeFileWithFormat(path.resolve("data", "emeriti.json"), emeriti, {
-    parser: "json",
-  })
+  await writeFileWithFormat(path.resolve("data", "emeriti.json"), emeriti)
   await writeFileWithFormat(
     path.resolve("data", "contributors.json"),
     omittedContributors,
-    {
-      parser: "json",
-    },
   )
 
   spinner.succeed("Wrote data")

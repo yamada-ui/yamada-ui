@@ -13,9 +13,7 @@ async function main() {
 
   spinner.start(`Writing theme`)
 
-  await writeFileWithFormat(DIST_PATH, JSON.stringify(theme, null, 2), {
-    parser: "json",
-  })
+  await writeFileWithFormat(DIST_PATH, JSON.stringify(theme, null, 2))
 
   spinner.succeed(`Wrote theme`)
 

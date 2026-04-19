@@ -32,7 +32,7 @@ async function getDocMap(): Promise<{ [key in Lang]: DocMap }> {
           items: [],
         }
 
-        await writeFileWithFormat(filePath, data, { parser: "json" })
+        await writeFileWithFormat(filePath, data)
 
         return [lang, data]
       }
@@ -47,7 +47,7 @@ async function setDocMap(docMap: { [key in Lang]: DocMap }) {
     Object.entries(docMap).map(async ([lang, data]) => {
       const filePath = path.join(DATA_PATH, `doc-map.${lang}.json`)
 
-      await writeFileWithFormat(filePath, data, { parser: "json" })
+      await writeFileWithFormat(filePath, data)
     }),
   )
 }

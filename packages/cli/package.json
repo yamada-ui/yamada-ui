@@ -44,7 +44,7 @@
     "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
     "lint": "eslint . --max-warnings=0 --cache",
     "format": "pnpm -w format packages/cli",
-    "quality": "pnpm -w format packages/cli && pnpm lint && pnpm typecheck && pnpm test",
+    "quality": "pnpm format && pnpm lint && pnpm typecheck && pnpm test",
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },

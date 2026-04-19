@@ -89,7 +89,7 @@ pre-commit:
               pnpm eslint {staged_files} --max-warnings=0 --fix --cache
             stage_fixed: true
 
-    - name: oxfmt
+    - name: format
       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css}"
       run: pnpm exec oxfmt {staged_files} --write
       stage_fixed: true

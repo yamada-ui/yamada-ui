@@ -1,3 +1,3 @@
-import config from "./packages/workspace/src/oxfmt/config.js"
+import config from "./packages/workspace/src/oxfmt/config.ts"
 
 export default config

@@ -20,9 +20,6 @@ async function main() {
   await writeFileWithFormat(
     path.resolve("data", "pseudo-elements.json"),
     JSON.stringify(pseudoElements, null, 2),
-    {
-      parser: "json",
-    },
   )
 
   spinner.succeed(`Wrote pseudo elements`)
@@ -32,9 +29,6 @@ async function main() {
   await writeFileWithFormat(
     path.resolve("data", "pseudo-classes.json"),
     JSON.stringify(pseudoClasses, null, 2),
-    {
-      parser: "json",
-    },
   )
 
   spinner.succeed(`Wrote pseudo classes`)
@@ -48,9 +42,6 @@ async function main() {
       null,
       2,
     ),
-    {
-      parser: "json",
-    },
   )
 
   spinner.succeed(`Wrote selectors`)

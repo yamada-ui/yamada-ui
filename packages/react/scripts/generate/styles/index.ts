@@ -630,8 +630,8 @@ function main() {
 
         spinner.start(`Fixing eslint and oxfmt`)
 
-        await execFileAsync("npx", ["eslint", STYLES_PATH, "--fix"])
-        await execFileAsync("npx", ["prettier", STYLES_PATH, "--write"])
+        await execFileAsync("pnpm", ["exec", "eslint", STYLES_PATH, "--fix"])
+        await execFileAsync("pnpm", ["exec", "oxfmt", STYLES_PATH, "--write"])
 
         spinner.succeed(`Fixed eslint and oxfmt`)
       } else {

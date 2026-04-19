@@ -83,9 +83,7 @@ export async function sort(inputPath: string, { desc }: Options) {
         await writeFileWithFormat(
           path.join(DATA_PATH, `doc-map.${lang}.json`),
           docMap,
-          {
-            parser: "json",
-          },
+          { parser: "json" },
         )
       } else {
         throw new Error(`No items found for ${inputPath}`)

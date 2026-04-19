@@ -11,7 +11,7 @@
     "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
     "lint": "eslint . --max-warnings=0 --cache",
     "format": "pnpm -w format packages/forge",
-    "quality": "pnpm -w format packages/forge && pnpm lint && pnpm typecheck",
+    "quality": "pnpm format && pnpm lint && pnpm typecheck",
     "issue:create": "tsx src/issue/create",
     "issue:codecov": "tsx src/issue/codecov",
     "issue:a11y": "tsx src/issue/a11y",

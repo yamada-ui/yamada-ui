@@ -120,7 +120,7 @@ async function main() {
 
   spinner.start(`Writing data`)
 
-  await writeFileWithFormat(DIST_PATH, data, { parser: "json" })
+  await writeFileWithFormat(DIST_PATH, data)
 
   spinner.succeed(`Wrote data`)
 

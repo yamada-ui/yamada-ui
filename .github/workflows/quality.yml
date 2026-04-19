@@ -156,9 +156,9 @@ jobs:
         uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
           files: |
-            .oxfmtrc.json
+            oxfmt.config.ts
             .github/workflows/quality.yml
-            **/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts,json,md,mdx,yaml,yml,html,css}
+            **/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css}
 
       - name: Install
         if: steps.changed-files.outputs.any_changed == 'true'

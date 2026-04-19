@@ -526,9 +526,6 @@ function main() {
             await writeFileWithFormat(
               path.join(DATA_PATH, `${dirent.name}.json`),
               sortedData,
-              {
-                parser: "json",
-              },
             )
           }
         }),

@@ -1,58 +1,20 @@
 import type { FormatConfig } from "oxfmt"
 import { writeFile } from "node:fs/promises"
 import { format as originalFormat } from "oxfmt"
-import config from "../oxfmt/config.js"
+import config from "./config"
 
-type CompatibleFormatConfig = FormatConfig & {
-  filePath?: string
-  filepath?: string
+export interface FormatConfigWithParser extends FormatConfig {
   parser?: string
-}
-
-function getFileNameFromParser(parser: string): string {
-  switch (parser) {
-    case "json":
-      return "file.json"
-    case "markdown":
-      return "file.md"
-    case "mdx":
-      return "file.mdx"
-    case "yaml":
-    case "yml":
-      return "file.yml"
-    default:
-      return "file.ts"
-  }
-}
-
-function getFileName(options?: CompatibleFormatConfig): string {
-  const filePath = options?.filePath ?? options?.filepath
-
-  if (filePath) return filePath
-
-  if (options?.parser) return getFileNameFromParser(options.parser)
-
-  return "file.ts"
-}
-
-function getFormatOptions(
-  options?: CompatibleFormatConfig,
-): Omit<CompatibleFormatConfig, "filePath" | "filepath" | "parser"> {
-  if (!options) return {}
-
-  const { filePath: _, filepath: __, parser: ___, ...formatOptions } = options
-
-  return formatOptions
 }
 
 export async function format(
   content: string,
-  options?: CompatibleFormatConfig,
+  { parser = "ts", ...rest }: FormatConfigWithParser = {},
 ) {
   try {
-    const { code } = await originalFormat(getFileName(options), content, {
+    const { code } = await originalFormat(`tmp.${parser}`, content, {
       ...config,
-      ...getFormatOptions(options),
+      ...rest,
     })
     return code
   } catch {
@@ -63,15 +25,12 @@ export async function format(
 export async function writeFileWithFormat(
   path: string,
   content: any,
-  options?: CompatibleFormatConfig,
+  options?: FormatConfig,
 ) {
   const { code } = await originalFormat(
-    path,
+    path.split("/").at(-1)!,
     typeof content === "string" ? content : JSON.stringify(content),
-    {
-      ...config,
-      ...getFormatOptions(options),
-    },
+    { ...config, ...options },
   )
 
   await writeFile(path, code)

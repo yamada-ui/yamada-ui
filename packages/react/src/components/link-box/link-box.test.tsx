@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { LinkBox } from "."
 import { Heading } from "../heading"
 import { Text } from "../text"
@@ -32,24 +32,30 @@ describe("<LinkBox />", () => {
     expect(LinkBox.Overlay.displayName).toBe("LinkBoxOverlay")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Component />)
-    expect(screen.getByTestId("linkBox")).toHaveClass("ui-link-box__root")
-    expect(screen.getByTestId("linkBoxOverlay")).toHaveClass(
-      "ui-link-box__overlay",
-    )
+  test("sets `className` correctly", async () => {
+    await render(<Component />)
+
+    await expect
+      .element(page.getByTestId("linkBox"))
+      .toHaveClass("ui-link-box__root")
+    await expect
+      .element(page.getByTestId("linkBoxOverlay"))
+      .toHaveClass("ui-link-box__overlay")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Component />)
-    expect(screen.getByTestId("linkBox").tagName).toBe("DIV")
-    expect(screen.getByTestId("linkBoxOverlay").tagName).toBe("A")
+  test("renders HTML tag correctly", async () => {
+    await render(<Component />)
+
+    expect(page.getByTestId("linkBox").element().tagName).toBe("DIV")
+    expect(page.getByTestId("linkBoxOverlay").element().tagName).toBe("A")
   })
 
-  test("opens link in a new tab when external is true", () => {
-    render(<Component />)
-    const link = screen.getByRole("link")
-    expect(link).toHaveAttribute("target", "_blank")
-    expect(link).toHaveAttribute("rel", "noopener")
+  test("opens link in a new tab when external is true", async () => {
+    await render(<Component />)
+
+    const link = page.getByRole("link")
+
+    await expect.element(link).toHaveAttribute("target", "_blank")
+    await expect.element(link).toHaveAttribute("rel", "noopener")
   })
 })

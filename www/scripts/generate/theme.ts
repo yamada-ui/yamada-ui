@@ -1,5 +1,5 @@
 import { theme } from "@yamada-ui/react/theme"
-import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
 import path from "node:path"
 import ora from "ora"
 import c from "picocolors"
@@ -13,9 +13,7 @@ async function main() {
 
   spinner.start(`Writing theme`)
 
-  await writeFileWithFormat(DIST_PATH, JSON.stringify(theme, null, 2), {
-    parser: "json",
-  })
+  await writeFileWithFormat(DIST_PATH, JSON.stringify(theme, null, 2))
 
   spinner.succeed(`Wrote theme`)
 

@@ -22,6 +22,7 @@ catalog:
   motion: ^12.38.0
   next: ^16.2.2
   ora: ^9.3.0
+  oxfmt: ^0.45.0
   picocolors: ^1.1.1
   prettier: ^3.8.1
   react: ^19.2.4

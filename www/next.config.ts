@@ -170,6 +170,7 @@ const nextConfig: NextConfig = {
       },
     ])
   },
+  serverExternalPackages: ["oxfmt"],
 }
 
 export default withNextIntl(nextConfig)

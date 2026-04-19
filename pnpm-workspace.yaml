@@ -10,7 +10,7 @@ catalog:
   "@tanstack/react-router": ^1.168.10
   "@testing-library/jest-dom": ^6.9.1
   "@types/yamljs": ^0.2.34
-  "@typescript-eslint/parser": ^8.58.0
+  "@typescript-eslint/parser": ^8.58.1
   "@vitejs/plugin-react": ^6.0.1
   "@vitejs/plugin-react-swc": ^4.3.0
   "@vitest/ui": ^4.1.2

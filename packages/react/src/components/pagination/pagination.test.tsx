@@ -1,4 +1,4 @@
-import { a11y, fireEvent, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Pagination } from "./"
 
 describe("<Pagination />", () => {
@@ -16,33 +16,35 @@ describe("<Pagination />", () => {
     expect(Pagination.NextTrigger.displayName).toBe("PaginationNextTrigger")
   })
 
-  test("renders with edge buttons when withEdges is true", () => {
-    render(<Pagination.Root total={10} withEdges />)
+  test("renders with edge buttons when withEdges is true", async () => {
+    await render(<Pagination.Root total={10} withEdges />)
 
-    expect(
-      screen.getByRole("button", { name: /Go to first page/i }),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole("button", { name: /Go to last page/i }),
-    ).toBeInTheDocument()
+    await expect
+      .element(page.getByRole("button", { name: /Go to first page/i }))
+      .toBeInTheDocument()
+    await expect
+      .element(page.getByRole("button", { name: /Go to last page/i }))
+      .toBeInTheDocument()
   })
 
-  test("renders without control buttons when withControls is false", () => {
-    render(<Pagination.Root total={10} withControls={false} />)
+  test("renders without control buttons when withControls is false", async () => {
+    await render(<Pagination.Root total={10} withControls={false} />)
 
-    expect(
-      screen.queryByRole("button", { name: /Go to previous page/i }),
-    ).toBeNull()
-    expect(
-      screen.queryByRole("button", { name: /Go to next page/i }),
-    ).toBeNull()
+    await expect
+      .element(
+        page.getByRole("button", { name: /Go to previous page/i }).query(),
+      )
+      .not.toBeInTheDocument()
+    await expect
+      .element(page.getByRole("button", { name: /Go to next page/i }).query())
+      .not.toBeInTheDocument()
   })
 
-  test("merges `controlProps` with `controlPrevProps` without overwriting props", () => {
+  test("merges `controlProps` with `controlPrevProps` without overwriting props", async () => {
     const onControlClick = vi.fn()
     const onControlPrevClick = vi.fn()
 
-    render(
+    const { user } = await render(
       <Pagination.Root
         defaultPage={2}
         total={10}
@@ -59,25 +61,29 @@ describe("<Pagination />", () => {
       />,
     )
 
-    const prevButton = screen.getByRole("button", {
+    const prevButton = page.getByRole("button", {
       name: /Go to previous page/i,
     })
 
-    expect(prevButton).toHaveClass("from-control", "from-control-prev")
-    expect(prevButton).toHaveStyle({ color: "rgb(255, 0, 0)" })
-    expect(prevButton).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+    await expect
+      .element(prevButton)
+      .toHaveClass("from-control", "from-control-prev")
+    await expect.element(prevButton).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    await expect
+      .element(prevButton)
+      .toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
 
-    fireEvent.click(prevButton)
+    await user.click(prevButton)
 
     expect(onControlClick).toHaveBeenCalledTimes(1)
     expect(onControlPrevClick).toHaveBeenCalledTimes(1)
   })
 
-  test("merges `edgeProps` with `edgeStartProps` without overwriting props", () => {
+  test("merges `edgeProps` with `edgeStartProps` without overwriting props", async () => {
     const onEdgeClick = vi.fn()
     const onEdgeStartClick = vi.fn()
 
-    render(
+    const { user } = await render(
       <Pagination.Root
         defaultPage={2}
         total={10}
@@ -95,47 +101,55 @@ describe("<Pagination />", () => {
       />,
     )
 
-    const startButton = screen.getByRole("button", {
+    const startButton = page.getByRole("button", {
       name: /Go to first page/i,
     })
 
-    expect(startButton).toHaveClass("from-edge", "from-edge-start")
-    expect(startButton).toHaveStyle({ color: "rgb(255, 0, 0)" })
-    expect(startButton).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+    await expect
+      .element(startButton)
+      .toHaveClass("from-edge", "from-edge-start")
+    await expect.element(startButton).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    await expect
+      .element(startButton)
+      .toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
 
-    fireEvent.click(startButton)
+    await user.click(startButton)
 
     expect(onEdgeClick).toHaveBeenCalledTimes(1)
     expect(onEdgeStartClick).toHaveBeenCalledTimes(1)
   })
 
-  test("navigates to next page when next trigger is clicked", () => {
+  test("navigates to next page when next trigger is clicked", async () => {
     const onChange = vi.fn()
-    render(<Pagination.Root defaultPage={1} total={10} onChange={onChange} />)
+    const { user } = await render(
+      <Pagination.Root defaultPage={1} total={10} onChange={onChange} />,
+    )
 
-    const nextButton = screen.getByRole("button", {
+    const nextButton = page.getByRole("button", {
       name: /Go to next page/i,
     })
-    fireEvent.click(nextButton)
+    await user.click(nextButton)
 
     expect(onChange).toHaveBeenCalledWith(2)
   })
 
-  test("navigates to previous page when prev trigger is clicked", () => {
+  test("navigates to previous page when prev trigger is clicked", async () => {
     const onChange = vi.fn()
-    render(<Pagination.Root defaultPage={3} total={10} onChange={onChange} />)
+    const { user } = await render(
+      <Pagination.Root defaultPage={3} total={10} onChange={onChange} />,
+    )
 
-    const prevButton = screen.getByRole("button", {
+    const prevButton = page.getByRole("button", {
       name: /Go to previous page/i,
     })
-    fireEvent.click(prevButton)
+    await user.click(prevButton)
 
     expect(onChange).toHaveBeenCalledWith(2)
   })
 
-  test("navigates to last page when end trigger is clicked", () => {
+  test("navigates to last page when end trigger is clicked", async () => {
     const onChange = vi.fn()
-    render(
+    const { user } = await render(
       <Pagination.Root
         defaultPage={1}
         total={10}
@@ -144,17 +158,17 @@ describe("<Pagination />", () => {
       />,
     )
 
-    const endButton = screen.getByRole("button", {
+    const endButton = page.getByRole("button", {
       name: /Go to last page/i,
     })
-    fireEvent.click(endButton)
+    await user.click(endButton)
 
     expect(onChange).toHaveBeenCalledWith(10)
   })
 
-  test("navigates to first page when start trigger is clicked", () => {
+  test("navigates to first page when start trigger is clicked", async () => {
     const onChange = vi.fn()
-    render(
+    const { user } = await render(
       <Pagination.Root
         defaultPage={5}
         total={10}
@@ -163,75 +177,79 @@ describe("<Pagination />", () => {
       />,
     )
 
-    const startButton = screen.getByRole("button", {
+    const startButton = page.getByRole("button", {
       name: /Go to first page/i,
     })
-    fireEvent.click(startButton)
+    await user.click(startButton)
 
     expect(onChange).toHaveBeenCalledWith(1)
   })
 
-  test("navigates to specific page when page button is clicked", () => {
+  test("navigates to specific page when page button is clicked", async () => {
     const onChange = vi.fn()
-    render(<Pagination.Root defaultPage={1} total={10} onChange={onChange} />)
+    const { user } = await render(
+      <Pagination.Root defaultPage={1} total={10} onChange={onChange} />,
+    )
 
-    const page3 = screen.getByRole("button", { name: /Go to page 3/i })
-    fireEvent.click(page3)
+    const page3 = page.getByRole("button", { name: /Go to page 3/i })
+    await user.click(page3)
 
     expect(onChange).toHaveBeenCalledWith(3)
   })
 
-  test("prev trigger is disabled on first page", () => {
-    render(<Pagination.Root defaultPage={1} total={10} />)
+  test("prev trigger is disabled on first page", async () => {
+    await render(<Pagination.Root defaultPage={1} total={10} />)
 
-    const prevButton = screen.getByRole("button", {
+    const prevButton = page.getByRole("button", {
       name: /Go to previous page/i,
     })
-    expect(prevButton).toBeDisabled()
+    await expect.element(prevButton).toBeDisabled()
   })
 
-  test("next trigger is disabled on last page", () => {
-    render(<Pagination.Root defaultPage={10} total={10} />)
+  test("next trigger is disabled on last page", async () => {
+    await render(<Pagination.Root defaultPage={10} total={10} />)
 
-    const nextButton = screen.getByRole("button", {
+    const nextButton = page.getByRole("button", {
       name: /Go to next page/i,
     })
-    expect(nextButton).toBeDisabled()
+    await expect.element(nextButton).toBeDisabled()
   })
 
-  test("all items are disabled when disabled prop is true", () => {
-    render(<Pagination.Root disabled total={10} />)
+  test("all items are disabled when disabled prop is true", async () => {
+    await render(<Pagination.Root disabled total={10} />)
 
-    const buttons = screen.getAllByRole("button")
+    const buttons = page.getByRole("button").elements()
     buttons.forEach((button) => {
       expect(button).toBeDisabled()
     })
   })
 
-  test("renders PaginationText with default compact format", () => {
-    render(
+  test("renders PaginationText with default compact format", async () => {
+    await render(
       <Pagination.Root total={20}>
         <Pagination.Text data-testid="pagination-text" />
       </Pagination.Root>,
     )
 
-    const text = screen.getByTestId("pagination-text")
-    expect(text).toHaveTextContent("1 of 20")
+    await expect
+      .element(page.getByTestId("pagination-text"))
+      .toHaveTextContent("1 of 20")
   })
 
-  test("renders PaginationText with short format", () => {
-    render(
+  test("renders PaginationText with short format", async () => {
+    await render(
       <Pagination.Root total={20}>
         <Pagination.Text data-testid="pagination-text" format="short" />
       </Pagination.Root>,
     )
 
-    const text = screen.getByTestId("pagination-text")
-    expect(text).toHaveTextContent("1 / 20")
+    await expect
+      .element(page.getByTestId("pagination-text"))
+      .toHaveTextContent("1 / 20")
   })
 
-  test("renders PaginationText with children function", () => {
-    render(
+  test("renders PaginationText with children function", async () => {
+    await render(
       <Pagination.Root total={20}>
         <Pagination.Text data-testid="pagination-text">
           {({ page, total }) => `Page ${page} out of ${total}`}
@@ -239,12 +257,13 @@ describe("<Pagination />", () => {
       </Pagination.Root>,
     )
 
-    const text = screen.getByTestId("pagination-text")
-    expect(text).toHaveTextContent("Page 1 out of 20")
+    await expect
+      .element(page.getByTestId("pagination-text"))
+      .toHaveTextContent("Page 1 out of 20")
   })
 
-  test("PaginationItems renders non-element children directly", () => {
-    render(
+  test("PaginationItems renders non-element children directly", async () => {
+    await render(
       <Pagination.Root total={10}>
         <Pagination.Items
           render={(page) => (typeof page === "number" ? String(page) : "...")}
@@ -252,38 +271,39 @@ describe("<Pagination />", () => {
       </Pagination.Root>,
     )
 
-    expect(screen.getByRole("navigation")).toBeInTheDocument()
+    await expect.element(page.getByRole("navigation")).toBeInTheDocument()
   })
 
-  test("renders with controlled page", () => {
-    const { rerender } = render(<Pagination.Root page={3} total={10} />)
+  test("renders with controlled page", async () => {
+    const { rerender } = await render(<Pagination.Root page={3} total={10} />)
 
-    const page3Button = screen.getByRole("button", { name: /Go to page 3/i })
-    expect(page3Button).toHaveAttribute("aria-current", "page")
+    const page3Button = page.getByRole("button", { name: /Go to page 3/i })
+    await expect.element(page3Button).toHaveAttribute("aria-current", "page")
 
-    rerender(<Pagination.Root page={5} total={10} />)
+    await rerender(<Pagination.Root page={5} total={10} />)
 
-    const page5Button = screen.getByRole("button", { name: /Go to page 5/i })
-    expect(page5Button).toHaveAttribute("aria-current", "page")
+    const page5Button = page.getByRole("button", { name: /Go to page 5/i })
+    await expect.element(page5Button).toHaveAttribute("aria-current", "page")
   })
 
-  test("edge triggers are disabled at boundaries", () => {
-    render(<Pagination.Root defaultPage={1} total={10} withEdges />)
+  test("edge triggers are disabled at boundaries", async () => {
+    await render(<Pagination.Root defaultPage={1} total={10} withEdges />)
 
-    expect(
-      screen.getByRole("button", { name: /Go to first page/i }),
-    ).toBeDisabled()
+    await expect
+      .element(page.getByRole("button", { name: /Go to first page/i }))
+      .toBeDisabled()
 
-    expect(
-      screen.getByRole("button", { name: /Go to last page/i }),
-    ).not.toBeDisabled()
+    await expect
+      .element(page.getByRole("button", { name: /Go to last page/i }))
+      .not.toBeDisabled()
   })
 
-  test("renders ellipsis for large page counts", () => {
-    render(<Pagination.Root defaultPage={5} total={20} />)
+  test("renders ellipsis for large page counts", async () => {
+    await render(<Pagination.Root defaultPage={5} total={20} />)
 
-    const ellipsisElements = screen
+    const ellipsisElements = page
       .getByRole("navigation")
+      .element()
       .querySelectorAll("[data-ellipsis]")
     expect(ellipsisElements.length).toBeGreaterThan(0)
   })

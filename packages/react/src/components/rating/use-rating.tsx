@@ -4,6 +4,7 @@ import type { ChangeEvent, KeyboardEvent, MouseEvent, TouchEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { useCallback, useId, useMemo, useRef, useState } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import {
   ariaAttr,
@@ -11,7 +12,6 @@ import {
   createContext,
   dataAttr,
   handlerAll,
-  mergeRefs,
   runKeyAction,
   visuallyHiddenAttributes,
 } from "../../utils"
@@ -187,35 +187,29 @@ export const useRating = (props: UseRatingProps = {}) => {
   }, [])
 
   const getRootProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
-      ...dataProps,
-      ...eventProps,
-      ...ariaProps,
-      id,
-      "aria-label": `${value} Stars`,
-      "aria-readonly": ariaAttr(readOnly),
-      role: "radiogroup",
-      ...rest,
-      ...props,
-      ref: mergeRefs(ref, rest.ref, rootRef),
-      onMouseEnter: handlerAll(
-        props.onMouseEnter,
-        rest.onMouseEnter,
-        onMouseEnter,
-      ),
-      onMouseLeave: handlerAll(
-        props.onMouseLeave,
-        rest.onMouseLeave,
-        onMouseLeave,
-      ),
-      onMouseMove: handlerAll(props.onMouseMove, rest.onMouseMove, onMouseMove),
-      onTouchEnd: handlerAll(props.onTouchEnd, rest.onTouchEnd, onTouchEnd),
-      onTouchStart: handlerAll(
-        props.onTouchStart,
-        rest.onTouchStart,
-        onTouchStart,
-      ),
-    }),
+    ({ ref, ...props } = {}) =>
+      mergeProps(
+        dataProps,
+        eventProps,
+        ariaProps,
+        {
+          id,
+          "aria-label": `${value} Stars`,
+          "aria-readonly": ariaAttr(readOnly),
+          role: "radiogroup",
+        },
+        props,
+        rest,
+        { ref },
+        { ref: rootRef },
+        {
+          onMouseEnter,
+          onMouseLeave,
+          onMouseMove,
+          onTouchEnd,
+          onTouchStart,
+        },
+      )(),
     [
       ariaProps,
       dataProps,
@@ -341,21 +335,31 @@ export const useRatingItem = ({
   )
 
   const getLabelProps: PropGetter<"label"> = useCallback(
-    ({ style, ...props } = {}) => ({
-      ...dataProps,
-      ...ariaProps,
-      htmlFor: id,
-      "data-active": dataAttr(active),
-      "data-filled": dataAttr(filled),
-      ...rest,
-      ...props,
-      style: {
-        ...style,
-        zIndex: fractionValue !== 1 ? (active ? 1 : -1) : undefined,
-      },
-      onMouseDown: handlerAll(props.onMouseDown, onMouseDown),
-      onTouchStart: handlerAll(props.onTouchStart, onTouchStart),
-    }),
+    ({ style, ...props } = {}) => {
+      const merged = mergeProps(
+        dataProps,
+        ariaProps,
+        {
+          htmlFor: id,
+          "data-active": dataAttr(active),
+          "data-filled": dataAttr(filled),
+        },
+        rest,
+        props,
+        { style },
+        {
+          style: {
+            zIndex: fractionValue !== 1 ? (active ? 1 : -1) : undefined,
+          },
+        },
+      )()
+
+      return {
+        ...merged,
+        onMouseDown: handlerAll(props.onMouseDown, onMouseDown),
+        onTouchStart: handlerAll(props.onTouchStart, onTouchStart),
+      }
+    },
     [
       active,
       ariaProps,

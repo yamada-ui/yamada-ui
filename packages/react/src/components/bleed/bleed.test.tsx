@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Bleed } from "./bleed"
 
 describe("<Bleed />", () => {
@@ -10,34 +10,54 @@ describe("<Bleed />", () => {
     expect(Bleed.displayName).toBe("Bleed")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Bleed>Box</Bleed>)
-    expect(screen.getByText("Box")).toHaveClass("ui-bleed")
+  test("sets `className` correctly", async () => {
+    await render(<Bleed>Box</Bleed>)
+
+    await expect.element(page.getByText("Box")).toHaveClass("ui-bleed")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Bleed>Box</Bleed>)
-    expect(screen.getByText("Box").tagName).toBe("DIV")
+  test("renders HTML tag correctly", async () => {
+    await render(<Bleed>Box</Bleed>)
+
+    expect(page.getByText("Box").element().tagName).toBe("DIV")
   })
 
-  test("applies `calc(50% - 50vw)` to both inline sides when `inline='full'`", () => {
-    render(<Bleed inline="full">Box</Bleed>)
-    const el = screen.getByText("Box")
-    expect(el).toHaveStyle({
-      marginInlineEnd: "calc(50% - 50vw)",
-      marginInlineStart: "calc(50% - 50vw)",
-    })
+  test("applies non-zero bleed to both inline sides when `inline='full'`", async () => {
+    await render(
+      <div style={{ width: "200px" }}>
+        <Bleed inline="full">Box</Bleed>
+      </div>,
+    )
+
+    const style = getComputedStyle(page.getByText("Box").element())
+
+    expect(style.marginInlineEnd).not.toBe("0px")
+    expect(style.marginInlineStart).not.toBe("0px")
   })
 
-  test("applies `calc(50% - 50vw)` to inline start when `inlineStart='full'`", () => {
-    render(<Bleed inlineStart="full">Box</Bleed>)
-    const el = screen.getByText("Box")
-    expect(el).toHaveStyle({ marginInlineStart: "calc(50% - 50vw)" })
+  test("applies non-zero bleed to inline start when `inlineStart='full'`", async () => {
+    await render(
+      <div style={{ width: "200px" }}>
+        <Bleed inlineStart="full">Box</Bleed>
+      </div>,
+    )
+
+    const style = getComputedStyle(page.getByText("Box").element())
+
+    expect(style.marginInlineStart).not.toBe("0px")
+    expect(style.marginInlineEnd).toBe("0px")
   })
 
-  test("applies `calc(50% - 50vw)` to inline end when `inlineEnd='full'`", () => {
-    render(<Bleed inlineEnd="full">Box</Bleed>)
-    const el = screen.getByText("Box")
-    expect(el).toHaveStyle({ marginInlineEnd: "calc(50% - 50vw)" })
+  test("applies non-zero bleed to inline end when `inlineEnd='full'`", async () => {
+    await render(
+      <div style={{ width: "200px" }}>
+        <Bleed inlineEnd="full">Box</Bleed>
+      </div>,
+    )
+
+    const style = getComputedStyle(page.getByText("Box").element())
+
+    expect(style.marginInlineEnd).not.toBe("0px")
+    expect(style.marginInlineStart).toBe("0px")
   })
 })

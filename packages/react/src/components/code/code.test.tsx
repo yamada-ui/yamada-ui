@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Code } from "./code"
 
 describe("<Code />", () => {
@@ -10,17 +10,19 @@ describe("<Code />", () => {
     expect(Code.displayName).toBe("Code")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Code>console.log("Hello, Yamada!")</Code>)
-    expect(screen.getByText('console.log("Hello, Yamada!")')).toHaveClass(
-      "ui-code",
-    )
+  test("sets `className` correctly", async () => {
+    await render(<Code>console.log("Hello, Yamada!")</Code>)
+
+    await expect
+      .element(page.getByText('console.log("Hello, Yamada!")'))
+      .toHaveClass("ui-code")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Code>console.log("Hello, Yamada!")</Code>)
-    expect(screen.getByText('console.log("Hello, Yamada!")').tagName).toBe(
-      "CODE",
-    )
+  test("renders HTML tag correctly", async () => {
+    await render(<Code>console.log("Hello, Yamada!")</Code>)
+
+    expect(
+      page.getByText('console.log("Hello, Yamada!")').element().tagName,
+    ).toBe("CODE")
   })
 })

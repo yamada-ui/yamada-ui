@@ -17,7 +17,7 @@ import {
   toCamelCase,
   toKebabCase,
 } from "@yamada-ui/utils"
-import { format, writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { format, writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
 import { Command } from "commander"
 import { mkdir, readdir, readFile } from "node:fs/promises"
 import path from "node:path"
@@ -526,9 +526,6 @@ function main() {
             await writeFileWithFormat(
               path.join(DATA_PATH, `${dirent.name}.json`),
               sortedData,
-              {
-                parser: "json",
-              },
             )
           }
         }),

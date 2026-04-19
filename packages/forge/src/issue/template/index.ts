@@ -1,5 +1,5 @@
 import type { Dict } from "@yamada-ui/utils"
-import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
 import { readFile } from "node:fs/promises"
 import path from "node:path"
 import ora from "ora"
@@ -58,7 +58,7 @@ async function updateIssueTemplate(
         `$1${packageJson.react!.version}$2`,
       )
 
-      return writeFileWithFormat(path, template, { parser: "yaml" })
+      return writeFileWithFormat(path, template)
     }),
   )
 }

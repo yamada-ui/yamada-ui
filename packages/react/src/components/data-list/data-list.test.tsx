@@ -371,8 +371,9 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    const descriptions =
-      screen.getAllByText(/入れ替わりの魔女|テレポーテーション/)
+    const descriptions = screen.getAllByText(
+      /入れ替わりの魔女|テレポーテーション/,
+    )
     expect(descriptions).toHaveLength(2)
   })
 
@@ -512,8 +513,9 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    const descriptions =
-      screen.getAllByText(/入れ替わりの魔女|テレポーテーション/)
+    const descriptions = screen.getAllByText(
+      /入れ替わりの魔女|テレポーテーション/,
+    )
     expect(descriptions).toHaveLength(2)
 
     for (const desc of descriptions) {

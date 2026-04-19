@@ -12,7 +12,7 @@ import {
   toArray,
   toCamelCase,
 } from "@yamada-ui/utils"
-import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
 import { Command } from "commander"
 import { execFile } from "node:child_process"
 import { glob } from "node:fs/promises"
@@ -628,12 +628,12 @@ function main() {
 
         spinner.succeed(`Wrote file`)
 
-        spinner.start(`Fixing eslint and prettier`)
+        spinner.start(`Fixing eslint and oxfmt`)
 
-        await execFileAsync("npx", ["eslint", STYLES_PATH, "--fix"])
-        await execFileAsync("npx", ["prettier", STYLES_PATH, "--write"])
+        await execFileAsync("pnpm", ["exec", "eslint", STYLES_PATH, "--fix"])
+        await execFileAsync("pnpm", ["exec", "oxfmt", STYLES_PATH, "--write"])
 
-        spinner.succeed(`Fixed eslint and prettier`)
+        spinner.succeed(`Fixed eslint and oxfmt`)
       } else {
         const omittedData = Object.fromEntries(
           Object.entries(data).map(([key, value]) => {
@@ -650,9 +650,7 @@ function main() {
           }),
         )
 
-        await writeFileWithFormat(STYLES_PUBLISH_PATH, omittedData, {
-          parser: "json",
-        })
+        await writeFileWithFormat(STYLES_PUBLISH_PATH, omittedData)
 
         spinner.succeed(`Wrote file`)
       }

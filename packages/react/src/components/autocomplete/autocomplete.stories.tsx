@@ -196,7 +196,7 @@ export const ItemsWithQuery: Story = () => {
             <HeartIcon fontSize="lg" />
           </>
         ),
-        query: "アグモン",
+        query: "agumon アグモン",
         value: "アグモン",
       },
       { label: "ガブモン", value: "ガブモン" },

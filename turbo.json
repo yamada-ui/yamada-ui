@@ -32,9 +32,6 @@
     },
     "lint": {
       "dependsOn": ["transit"]
-    },
-    "format": {
-      "dependsOn": ["transit"]
     }
   },
   "globalDependencies": ["tsconfig.json"]

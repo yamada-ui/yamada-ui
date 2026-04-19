@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { motion } from "./factory"
 import { Motion } from "./motion"
 
@@ -7,36 +7,37 @@ describe("<Motion />", () => {
     await a11y(<Motion />)
   })
 
-  test("applies custom `aria-label`", () => {
-    render(
+  test("applies custom `aria-label`", async () => {
+    await render(
       <Motion as="button" aria-label="Toggle layout" data-testid="motion" />,
     )
 
-    expect(screen.getByTestId("motion")).toHaveAttribute(
-      "aria-label",
-      "Toggle layout",
-    )
+    await expect
+      .element(page.getByTestId("motion"))
+      .toHaveAttribute("aria-label", "Toggle layout")
   })
 
   test("sets `displayName` correctly", () => {
     expect(Motion.name).toBe("Motion")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Motion data-testid="motion" />)
-    expect(screen.getByTestId("motion")).toHaveClass("ui-motion")
+  test("sets `className` correctly", async () => {
+    await render(<Motion data-testid="motion" />)
+
+    await expect.element(page.getByTestId("motion")).toHaveClass("ui-motion")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Motion data-testid="motion" />)
-    expect(screen.getByTestId("motion").tagName).toBe("DIV")
+  test("renders HTML tag correctly", async () => {
+    await render(<Motion data-testid="motion" />)
+
+    expect(page.getByTestId("motion").element().tagName).toBe("DIV")
   })
 
-  test("renders motion component created via factory function call", () => {
+  test("renders motion component created via factory function call", async () => {
     const MotionSpan = motion("span")
 
-    render(<MotionSpan data-testid="factory-motion">test</MotionSpan>)
+    await render(<MotionSpan data-testid="factory-motion">test</MotionSpan>)
 
-    expect(screen.getByTestId("factory-motion").tagName).toBe("SPAN")
+    expect(page.getByTestId("factory-motion").element().tagName).toBe("SPAN")
   })
 })

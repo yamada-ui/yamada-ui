@@ -1,5 +1,35 @@
 # @yamada-ui/react
 
+## 2.2.1
+
+### Patch Changes
+
+- [#6586](https://github.com/yamada-ui/yamada-ui/pull/6586) [`9200ad4`](https://github.com/yamada-ui/yamada-ui/commit/9200ad437f288e5a5905fdff2b51110c6633c23d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Use `mergeProps` in `Autocomplete` so that user-provided `className`, `style`, `css`, `ref`, and `on*` event handlers are merged with context/getter props instead of being silently overwritten.
+
+- [#6614](https://github.com/yamada-ui/yamada-ui/pull/6614) [`d2dcc4c`](https://github.com/yamada-ui/yamada-ui/commit/d2dcc4cb12839e3db9c6460be28dbba767959121) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Use `mergeProps` in Chart polar/cartesian/legend sub-components so user props merge with context/getter props without overwriting class names, styles, refs, and event handlers.
+
+- [#6596](https://github.com/yamada-ui/yamada-ui/pull/6596) [`b535880`](https://github.com/yamada-ui/yamada-ui/commit/b535880a6ee27460049c01fe2754dd4df5a555c7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Use `mergeProps` in `ColorPicker` so that user-provided `className`, `style`, `css`, `ref`, and `on*` event handlers are merged with context/getter props instead of being silently overwritten.
+
+- [#6597](https://github.com/yamada-ui/yamada-ui/pull/6597) [`8c1b7c0`](https://github.com/yamada-ui/yamada-ui/commit/8c1b7c06f92f7d3bc016aca201c2d152067d709b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Use `mergeProps` in `ColorSelector` slider and color swatch sub-components so that user-provided `className`, `style`, `css`, `ref`, and `on*` event handlers are merged with context/getter props instead of being silently overwritten.
+
+- [#6590](https://github.com/yamada-ui/yamada-ui/pull/6590) [`23d008b`](https://github.com/yamada-ui/yamada-ui/commit/23d008bc50926e5c6b12e53a265de10998182399) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Use `mergeProps` in `DatePicker` so that user-provided `className`, `style`, `css`, `ref`, and `on*` event handlers are merged with context/getter props instead of being silently overwritten.
+
+- [#6611](https://github.com/yamada-ui/yamada-ui/pull/6611) [`3a46156`](https://github.com/yamada-ui/yamada-ui/commit/3a46156e33fc88dc764f96bb7803e66f938dccf6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Use `mergeProps` in `FileInput` so that user-provided `className`, `style`, `css`, `ref`, and `on*` event handlers are merged with context/getter props instead of being silently overwritten.
+
+- [#6588](https://github.com/yamada-ui/yamada-ui/pull/6588) [`7d51f73`](https://github.com/yamada-ui/yamada-ui/commit/7d51f732a10a28e8f2cbd8f2dd52ae47268333f1) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Use `mergeProps` in `NativeSelect` so that user-provided `className`, `style`, `css`, `ref`, and `on*` event handlers are merged with context/getter props instead of being silently overwritten.
+
+- [#6612](https://github.com/yamada-ui/yamada-ui/pull/6612) [`f32febe`](https://github.com/yamada-ui/yamada-ui/commit/f32febec0db688e3e2e70e0ad0e2d64b73e4fcd6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Use `mergeProps` in `NumberInputRoot` so that user-provided `className`, `style`, `css`, `ref`, and `on*` event handlers are merged with context/getter props instead of being silently overwritten.
+
+- [#6618](https://github.com/yamada-ui/yamada-ui/pull/6618) [`bcfc8a9`](https://github.com/yamada-ui/yamada-ui/commit/bcfc8a9ed8037635021fd824bf87e8239b3c4eb3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix DataList term and description prop merging to preserve both context and user-provided props.
+
+- [#6617](https://github.com/yamada-ui/yamada-ui/pull/6617) [`1ae2d09`](https://github.com/yamada-ui/yamada-ui/commit/1ae2d0919b83576385b13c2b06b9e551780e1a9b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix Pagination item triggers overwrite user props by merging props via mergeProps.
+
+- [#6587](https://github.com/yamada-ui/yamada-ui/pull/6587) [`0eb231a`](https://github.com/yamada-ui/yamada-ui/commit/0eb231a15dbd7d64e19dacb9a6db2b192a161655) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Use `mergeProps` in `Select` so that user-provided `className`, `style`, `css`, `ref`, and `on*` event handlers are merged with context/getter props instead of being silently overwritten.
+
+- [#6619](https://github.com/yamada-ui/yamada-ui/pull/6619) [`1213843`](https://github.com/yamada-ui/yamada-ui/commit/1213843a7986f56a4b5f78322e56f122f7a03ad8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - fix(rating): merge user props with context props via mergeProps
+
+- [#6608](https://github.com/yamada-ui/yamada-ui/pull/6608) [`8377076`](https://github.com/yamada-ui/yamada-ui/commit/83770762a927f30bc4bd25986586ad595f5b8ca6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Use `mergeProps` in `PasswordInput` and `StrengthMeter` so that user-provided `className`, `style`, `css`, `ref`, and `on*` event handlers are merged with context/getter props instead of being silently overwritten.
+
 ## 2.2.0
 
 ### Minor Changes
@@ -7,6 +37,7 @@
 - [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `ExtractStyleValue` type.
 
 - [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - New icons have been added. Brand icons have been removed. If you were using brand icons, you need to replace them with alternative icons.
+
   - ChromiumIcon
   - CodepenIcon
   - CodesandboxIcon
@@ -237,6 +268,7 @@
 - [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [`4cddce4`](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `BarChart` component.
 
 - [#5761](https://github.com/yamada-ui/yamada-ui/pull/5761) [`4cddce4`](https://github.com/yamada-ui/yamada-ui/commit/4cddce463ac97ebc6e9d5bb835e1a19bd008f14d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Upgraded [react-resizable-panels](https://github.com/bvaughn/react-resizable-panels) from version 3 to 4. This update introduces several major changes:
+
   - `keyboardStep` prop of `Resizable.Root` has been removed.
   - `storageKey` and `storage` props of `Resizable.Root` have been removed. Please use `Resizable.useLayout` instead.
   - `onLayout` prop of `Resizable.Root` has been removed. Please use `Resizable.useLayoutChange` and `Resizable.useLayoutChanged` instead.

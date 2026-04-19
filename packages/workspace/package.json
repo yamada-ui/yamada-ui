@@ -38,7 +38,7 @@
     "@types/eslint-plugin-jsx-a11y": "^6.10.1",
     "@typescript-eslint/parser": "catalog:",
     "@typescript-eslint/utils": "^8.58.0",
-    "@vitest/eslint-plugin": "^1.6.14",
+    "@vitest/eslint-plugin": "^1.6.15",
     "dotenv": "catalog:",
     "eslint": "catalog:",
     "eslint-import-resolver-node": "^0.3.10",

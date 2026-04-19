@@ -1,4 +1,6 @@
-import { a11y, render } from "#test"
+import { screen } from "@testing-library/react"
+
+import { a11y, render } from "#test/browser"
 import { ButtonGroup } from "./"
 
 describe("<Button />", () => {
@@ -16,8 +18,8 @@ describe("<Button />", () => {
     expect(ButtonGroup.Root.name).toBe("ButtonGroupRoot")
   })
 
-  test("sets `className` correctly", () => {
-    const { getByRole } = render(
+  test("sets `className` correctly", async () => {
+    await render(
       <ButtonGroup.Root>
         <ButtonGroup.Item>Button</ButtonGroup.Item>
         <ButtonGroup.Item>Button</ButtonGroup.Item>
@@ -25,11 +27,11 @@ describe("<Button />", () => {
       </ButtonGroup.Root>,
     )
 
-    expect(getByRole("group")).toHaveClass("ui-group")
+    expect(screen.getByRole("group")).toHaveClass("ui-group")
   })
 
-  test("renders HTML tag correctly", () => {
-    const { getByRole } = render(
+  test("renders HTML tag correctly", async () => {
+    await render(
       <ButtonGroup.Root>
         <ButtonGroup.Item>Button</ButtonGroup.Item>
         <ButtonGroup.Item>Button</ButtonGroup.Item>
@@ -37,11 +39,11 @@ describe("<Button />", () => {
       </ButtonGroup.Root>,
     )
 
-    expect(getByRole("group").tagName).toBe("DIV")
+    expect(screen.getByRole("group").tagName).toBe("DIV")
   })
 
-  test("`attached` column style is applied correctly", () => {
-    const { getByRole } = render(
+  test("`attached` column style is applied correctly", async () => {
+    await render(
       <ButtonGroup.Root variant="outline" attached flexDirection="column">
         <ButtonGroup.Item>Button</ButtonGroup.Item>
         <ButtonGroup.Item>Button</ButtonGroup.Item>
@@ -49,7 +51,7 @@ describe("<Button />", () => {
       </ButtonGroup.Root>,
     )
 
-    const buttonGroup = getByRole("group")
+    const buttonGroup = screen.getByRole("group")
     const style = getComputedStyle(buttonGroup)
 
     expect(style.flexDirection).toBe("column")

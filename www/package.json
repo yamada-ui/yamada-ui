@@ -17,7 +17,7 @@
     "build:next": "next build",
     "build": "run-s build:*",
     "start": "next start",
-    "typecheck": "next typegen && tsc --noEmit",
+    "typecheck": "next typegen && tsc",
     "lint": "eslint . --max-warnings=0 --cache",
     "format": "pnpm -w format www",
     "quality": "pnpm format && pnpm lint && pnpm typecheck",

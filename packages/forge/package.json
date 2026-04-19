@@ -6,8 +6,8 @@
   "description": "The forge for Yamada UI projects",
   "scripts": {
     "clean": "rimraf node_modules trace .eslintcache",
-    "typecheck": "tsc --noEmit",
-    "typetrace": "tsc --noEmit --generateTrace ./trace --incremental false",
+    "typecheck": "tsc",
+    "typetrace": "tsc --generateTrace ./trace --incremental false",
     "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
     "lint": "eslint . --max-warnings=0 --cache",
     "format": "pnpm -w format packages/forge",

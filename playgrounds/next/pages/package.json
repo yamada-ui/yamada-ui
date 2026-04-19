@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc",
     "lint": "eslint . --max-warnings=0 --cache",
     "format": "pnpm -w format playgrounds/next/pages",
     "yamada-cli": "pnpm -C ../../../packages/cli dev"

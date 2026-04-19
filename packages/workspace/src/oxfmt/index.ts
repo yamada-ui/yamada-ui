@@ -1,7 +1,7 @@
 import type { FormatConfig } from "oxfmt"
 import { writeFile } from "node:fs/promises"
 import { format as originalFormat } from "oxfmt"
-import config from "./config"
+import config from "./config.ts"
 
 export interface FormatConfigWithParser extends FormatConfig {
   parser?: string

@@ -11,6 +11,11 @@ export const importConfigArray: ConfigWithExtendsArray = [
     files: sharedFiles,
     rules: {
       "import/enforce-node-protocol-usage": ["error", "always"],
+      "import/extensions": [
+        "error",
+        "never",
+        { cts: "never", mts: "never", ts: "never", tsx: "never" },
+      ],
       "import/no-named-as-default": "off",
       "import/no-unresolved": "off",
     },

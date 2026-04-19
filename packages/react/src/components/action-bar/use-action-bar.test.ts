@@ -1,5 +1,10 @@
+import type { Ref } from "react"
 import { renderHook } from "#test"
 import { useActionBar } from "./use-action-bar"
+
+function invokeCallbackRef<T>(ref: Ref<T> | undefined, node: null | T) {
+  if (typeof ref === "function") ref(node)
+}
 
 describe("useActionBar getRootProps", () => {
   test("merges hook rest with user props via mergeProps", () => {
@@ -41,14 +46,14 @@ describe("useActionBar getRootProps", () => {
     })
 
     const element = document.createElement("div")
-    expect(merged.ref).toBeTypeOf("function")
-    merged.ref?.(element)
+    expect(typeof merged.ref).toBe("function")
+    invokeCallbackRef(merged.ref, element)
 
     expect(hookRef).toHaveBeenCalledWith(element)
     expect(userRef).toHaveBeenCalledWith(element)
 
     const event = new MouseEvent("click")
-    merged.onClick?.(event as never)
+    merged.onClick(event as never)
 
     expect(hookOnClick).toHaveBeenCalledWith(event)
     expect(userOnClick).toHaveBeenCalledWith(event)

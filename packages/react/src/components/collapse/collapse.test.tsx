@@ -1,5 +1,6 @@
-import { a11y, render, screen, waitFor, waitForAnimationFrame } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { useState } from "react"
+import { vi } from "vitest"
 import { Collapse } from "./collapse"
 
 describe("<Collapse />", () => {
@@ -11,14 +12,16 @@ describe("<Collapse />", () => {
     expect(Collapse.displayName).toBe("Collapse")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Collapse data-testid="collapse" />)
-    expect(screen.getByTestId("collapse")).toHaveClass("ui-collapse")
+  test("sets `className` correctly", async () => {
+    await render(<Collapse data-testid="collapse" />)
+    await expect
+      .element(page.getByTestId("collapse"))
+      .toHaveClass("ui-collapse")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Collapse data-testid="collapse" />)
-    expect(screen.getByTestId("collapse").tagName).toBe("DIV")
+  test("renders HTML tag correctly", async () => {
+    await render(<Collapse data-testid="collapse" />)
+    expect(page.getByTestId("collapse").element().tagName).toBe("DIV")
   })
 
   test("toggles visibility on open change", async () => {
@@ -33,50 +36,43 @@ describe("<Collapse />", () => {
       )
     }
 
-    const { user } = render(<TestComponent />)
+    const { user } = await render(<TestComponent />)
 
-    const button = screen.getByRole("button", { name: /button/i })
-    const collapse = screen.getByText("Collapse")
+    const button = page.getByRole("button", { name: /button/i })
+    const collapse = page.getByText("Collapse")
 
-    expect(collapse).toHaveStyle({
-      height: "0px",
+    expect(collapse.element().style.height).toBe("0px")
+
+    await user.click(button)
+    await vi.waitFor(() => {
+      expect(collapse.element().style.height).toBe("auto")
     })
 
     await user.click(button)
-    await waitFor(() => {
-      expect(collapse).toHaveStyle({
-        height: "auto",
-      })
-    })
-
-    await waitForAnimationFrame(300)
-
-    await user.click(button)
-    await waitFor(() => {
-      expect(collapse).toHaveStyle({
-        height: "0px",
-      })
+    await vi.waitFor(() => {
+      expect(collapse.element().style.height).toBe("0px")
     })
   })
 
   test("animationOpacity set to true by default", async () => {
-    render(<Collapse open>Collapse</Collapse>)
+    await render(<Collapse open>Collapse</Collapse>)
 
-    const collapse = await screen.findByText("Collapse")
+    const collapse = page.getByText("Collapse")
 
-    await waitFor(() => expect(collapse).toHaveStyle({ opacity: "1" }))
+    await vi.waitFor(() => {
+      expect(getComputedStyle(collapse.element()).opacity).toBe("1")
+    })
   })
 
   test("no opacity when animationOpacity set to false", async () => {
-    render(
+    await render(
       <Collapse animationOpacity={false} open>
         Collapse
       </Collapse>,
     )
 
-    const collapse = await screen.findByText("Collapse")
-
-    await waitFor(() => expect(collapse).not.toHaveStyle({ opacity: "1" }))
+    const collapse = page.getByText("Collapse")
+    expect(collapse.element().style.opacity).toBe("")
   })
 
   test("height changes correctly after open set to true", async () => {
@@ -93,14 +89,16 @@ describe("<Collapse />", () => {
       )
     }
 
-    const { user } = render(<TestComponent />)
+    const { user } = await render(<TestComponent />)
 
-    const button = await screen.findByRole("button", { name: /button/i })
-    const collapse = await screen.findByText("Collapse")
-    await waitFor(() => expect(collapse).toHaveStyle({ height: "50px" }))
+    const button = page.getByRole("button", { name: /button/i })
+    const collapse = page.getByText("Collapse")
+    await vi.waitFor(() => expect(collapse.element().style.height).toBe("50px"))
 
     await user.click(button)
-    await waitFor(() => expect(collapse).toHaveStyle({ height: "200px" }))
+    await vi.waitFor(() =>
+      expect(collapse.element().style.height).toBe("200px"),
+    )
   })
 
   test("unmountOnExit works correctly", async () => {
@@ -117,16 +115,18 @@ describe("<Collapse />", () => {
       )
     }
 
-    const { user } = render(<TestComponent />)
+    const { container, user } = await render(<TestComponent />)
 
-    expect(screen.queryByText("Collapse")).toBeNull()
+    expect(container.textContent).not.toContain("Collapse")
 
-    const button = await screen.findByRole("button", { name: /button/i })
-
-    await user.click(button)
-    await waitFor(() => expect(screen.getByText("Collapse")).toBeVisible())
+    const button = page.getByRole("button", { name: /button/i })
 
     await user.click(button)
-    await waitFor(() => expect(screen.queryByText("Collapse")).toBeNull())
+    await expect.element(page.getByText("Collapse")).toBeVisible()
+
+    await user.click(button)
+    await vi.waitFor(() => {
+      expect(container.textContent).not.toContain("Collapse")
+    })
   })
 })

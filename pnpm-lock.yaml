@@ -597,6 +597,9 @@ importers:
       globals:
         specifier: ^17.4.0
         version: 17.4.0
+      oxfmt:
+        specifier: 'catalog:'
+        version: 0.45.0
       prettier:
         specifier: 'catalog:'
         version: 3.8.1

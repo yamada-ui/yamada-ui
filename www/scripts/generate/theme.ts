@@ -1,5 +1,5 @@
 import { theme } from "@yamada-ui/react/theme"
-import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
 import path from "node:path"
 import ora from "ora"
 import c from "picocolors"

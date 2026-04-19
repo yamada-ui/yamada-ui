@@ -1,6 +1,6 @@
 import { icons } from "@yamada-ui/react"
 import { toKebabCase, toPascalCase } from "@yamada-ui/utils"
-import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
 import { execFile } from "node:child_process"
 import { readdir, readFile } from "node:fs/promises"
 import path from "node:path"

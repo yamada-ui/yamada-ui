@@ -17,7 +17,8 @@
         "tsconfig.json",
         "../pnpm-lock.yaml",
         "../pnpm-workspace.yaml",
-        "../packages/workspace/src/prettier/**"
+        "../packages/workspace/src/oxfmt/**",
+        "../packages/workspace/package.json"
       ]
     },
     "lint": {

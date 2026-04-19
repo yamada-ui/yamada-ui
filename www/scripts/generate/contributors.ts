@@ -4,7 +4,7 @@ import {
   octokit,
   retryOnRateLimit,
 } from "@yamada-ui/workspace/octokit"
-import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
 import path from "node:path"
 import ora from "ora"
 import c from "picocolors"
@@ -86,7 +86,9 @@ async function main() {
   await writeFileWithFormat(
     path.resolve("data", "maintainers.json"),
     maintainers,
-    { parser: "json" },
+    {
+      parser: "json",
+    },
   )
   await writeFileWithFormat(path.resolve("data", "emeriti.json"), emeriti, {
     parser: "json",
@@ -94,7 +96,9 @@ async function main() {
   await writeFileWithFormat(
     path.resolve("data", "contributors.json"),
     omittedContributors,
-    { parser: "json" },
+    {
+      parser: "json",
+    },
   )
 
   spinner.succeed("Wrote data")

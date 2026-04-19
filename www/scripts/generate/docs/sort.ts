@@ -1,5 +1,5 @@
 import type { DocMap } from "@/data"
-import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
 import { readFile } from "node:fs/promises"
 import path from "node:path"
 import ora from "ora"
@@ -83,7 +83,9 @@ export async function sort(inputPath: string, { desc }: Options) {
         await writeFileWithFormat(
           path.join(DATA_PATH, `doc-map.${lang}.json`),
           docMap,
-          { parser: "json" },
+          {
+            parser: "json",
+          },
         )
       } else {
         throw new Error(`No items found for ${inputPath}`)

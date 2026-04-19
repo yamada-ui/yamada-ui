@@ -1,20 +1,13 @@
 {
   "name": "@yamada-ui/workspace",
-  "private": true,
-  "type": "module",
   "version": "1.0.0",
+  "private": true,
   "description": "The workspace for Yamada UI projects",
-  "scripts": {
-    "clean": "rimraf node_modules trace .eslintcache",
-    "typecheck": "tsc --noEmit",
-    "typetrace": "tsc --noEmit --generateTrace ./trace --incremental false",
-    "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
-    "lint": "eslint . --max-warnings=0 --cache",
-    "format": "pnpm -w format packages/workspace",
-    "quality": "pnpm -w format packages/workspace && pnpm lint && pnpm typecheck"
-  },
+  "type": "module",
   "exports": {
     "./eslint": "./src/eslint/index.ts",
+    "./oxfmt": "./src/oxfmt/index.ts",
+    "./oxfmt/*": "./src/oxfmt/*.js",
     "./prettier": "./src/prettier/index.ts",
     "./prettier/*": "./src/prettier/*.js",
     "./typescript/*": "./src/typescript/*",
@@ -23,6 +16,15 @@
     "./octokit": "./src/octokit/index.ts",
     "./codecov": "./src/codecov/index.ts",
     "./discord": "./src/discord/index.ts"
+  },
+  "scripts": {
+    "clean": "rimraf node_modules trace .eslintcache",
+    "typecheck": "tsc --noEmit",
+    "typetrace": "tsc --noEmit --generateTrace ./trace --incremental false",
+    "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
+    "lint": "eslint . --max-warnings=0 --cache",
+    "format": "pnpm -w format packages/workspace",
+    "quality": "pnpm -w format packages/workspace && pnpm lint && pnpm typecheck"
   },
   "dependencies": {
     "@cspell/eslint-plugin": "^9.8.0",
@@ -53,6 +55,7 @@
     "eslint-plugin-testing-library": "^7.16.2",
     "eslint-plugin-unused-imports": "catalog:",
     "globals": "^17.4.0",
+    "oxfmt": "catalog:",
     "prettier": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",

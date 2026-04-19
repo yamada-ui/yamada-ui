@@ -5,7 +5,7 @@ import {
   pseudoClasses,
   pseudoElements,
 } from "@yamada-ui/react/core"
-import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
 import path from "node:path"
 import ora from "ora"
 import c from "picocolors"

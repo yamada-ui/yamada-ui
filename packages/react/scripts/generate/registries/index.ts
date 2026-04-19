@@ -1,7 +1,7 @@
 import type { Dict } from "@yamada-ui/utils"
 import type { SourceFile } from "typescript"
 import { toKebabCase } from "@yamada-ui/utils"
-import { format, writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { format, writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
 import { Command } from "commander"
 import { existsSync } from "node:fs"
 import { glob, mkdir, readdir, readFile } from "node:fs/promises"

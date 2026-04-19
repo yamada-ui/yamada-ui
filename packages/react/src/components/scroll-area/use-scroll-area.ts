@@ -3,6 +3,7 @@
 import type { UIEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
+import { mergeProps } from "../../core"
 import {
   dataAttr,
   handlerAll,
@@ -119,29 +120,36 @@ export const useScrollArea = ({
   )
 
   const getRootProps: PropGetter = useCallback(
-    ({ style, ...props } = {}) => ({
-      ref,
-      style: { overflow: "auto", ...style },
-      ...rest,
-      ...(isSafari ? safariProps : {}),
-      ...props,
-      "data-hidden": dataAttr(isHidden),
-      "data-hover": dataAttr(isHovered),
-      "data-never": dataAttr(isNever),
-      "data-scroll": dataAttr(isScrolling),
-      tabIndex: 0,
-      onMouseEnter: handlerAll(
-        props.onMouseEnter,
-        rest.onMouseEnter,
-        onMouseEnter,
-      ),
-      onMouseLeave: handlerAll(
-        props.onMouseLeave,
-        rest.onMouseLeave,
-        onMouseLeave,
-      ),
-      onScroll: handlerAll(props.onScroll, rest.onScroll, onScroll),
-    }),
+    ({ style, ...props } = {}) => {
+      const merged = mergeProps(
+        { ref, style: { overflow: "auto", ...style } },
+        rest,
+        isSafari ? safariProps : {},
+        props,
+        {
+          "data-hidden": dataAttr(isHidden),
+          "data-hover": dataAttr(isHovered),
+          "data-never": dataAttr(isNever),
+          "data-scroll": dataAttr(isScrolling),
+          tabIndex: 0,
+        },
+      )()
+
+      return {
+        ...merged,
+        onMouseEnter: handlerAll(
+          props.onMouseEnter,
+          rest.onMouseEnter,
+          onMouseEnter,
+        ),
+        onMouseLeave: handlerAll(
+          props.onMouseLeave,
+          rest.onMouseLeave,
+          onMouseLeave,
+        ),
+        onScroll: handlerAll(props.onScroll, rest.onScroll, onScroll),
+      }
+    },
     [
       isNever,
       ref,

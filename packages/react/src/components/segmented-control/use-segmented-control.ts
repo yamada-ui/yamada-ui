@@ -4,6 +4,7 @@ import type { ChangeEvent } from "react"
 import type { HTMLProps, Orientation, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { useCallback, useId } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
 import {
@@ -101,17 +102,20 @@ export const useSegmentedControl = <Y extends string = string>({
   name ??= uuid
 
   const getRootProps: PropGetter = useCallback(
-    (props) => ({
-      id,
-      "aria-disabled": ariaAttr(disabled),
-      "aria-orientation": orientation,
-      "data-disabled": dataAttr(disabled),
-      "data-orientation": orientation,
-      "data-readonly": dataAttr(readOnly),
-      role: "radiogroup",
-      ...rest,
-      ...props,
-    }),
+    (props) =>
+      mergeProps(
+        {
+          id,
+          "aria-disabled": ariaAttr(disabled),
+          "aria-orientation": orientation,
+          "data-disabled": dataAttr(disabled),
+          "data-orientation": orientation,
+          "data-readonly": dataAttr(readOnly),
+          role: "radiogroup",
+        },
+        rest,
+        props,
+      )(),
     [disabled, id, orientation, readOnly, rest],
   )
 
@@ -173,17 +177,20 @@ export const useSegmentedControlItem = <Y extends string = string>({
   )
 
   const getLabelProps: PropGetter<"label"> = useCallback(
-    (props) => ({
-      "aria-disabled": ariaAttr(trulyDisabled),
-      "data-checked": dataAttr(checked),
-      "data-disabled": dataAttr(trulyDisabled),
-      "data-orientation": orientation,
-      "data-readonly": dataAttr(trulyReadOnly),
-      "data-root-disabled": dataAttr(rootDisabled),
-      "data-root-readonly": dataAttr(rootReadOnly),
-      ...props,
-      ...rest,
-    }),
+    (props) =>
+      mergeProps(
+        {
+          "aria-disabled": ariaAttr(trulyDisabled),
+          "data-checked": dataAttr(checked),
+          "data-disabled": dataAttr(trulyDisabled),
+          "data-orientation": orientation,
+          "data-readonly": dataAttr(trulyReadOnly),
+          "data-root-disabled": dataAttr(rootDisabled),
+          "data-root-readonly": dataAttr(rootReadOnly),
+        },
+        rest,
+        props,
+      )(),
     [
       orientation,
       trulyDisabled,

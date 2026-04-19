@@ -54,12 +54,14 @@ describe("<Airy />", () => {
 
     const button = page.getByRole("button")
     await expect.element(button).toHaveAttribute("data-readonly")
-
-    const onText = page.getByText("ON")
-    await expect.element(onText).toBeVisible()
+    await expect.element(button).toHaveAttribute("data-value", "from")
+    expect(button.element()).toHaveTextContent("ON")
 
     await user.click(button)
-    await expect.element(onText).toBeVisible()
+    await new Promise((resolve) => setTimeout(resolve, 300))
+
+    await expect.element(button).toHaveAttribute("data-value", "from")
+    expect(button.element()).toHaveTextContent("ON")
   })
 
   test("should be disabled", async () => {

@@ -1,5 +1,6 @@
-import { a11y, render, screen, waitFor } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { useState } from "react"
+import { vi } from "vitest"
 import { Slide, slideVariants } from "./slide"
 
 describe("<Slide />", () => {
@@ -11,62 +12,49 @@ describe("<Slide />", () => {
     expect(Slide.displayName).toBe("Slide")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Slide>Slide</Slide>)
-    expect(screen.getByText("Slide")).toHaveClass("ui-slide")
+  test("sets `className` correctly", async () => {
+    await render(<Slide>Slide</Slide>)
+    await expect.element(page.getByText("Slide")).toHaveClass("ui-slide")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Slide>Slide</Slide>)
-    expect(screen.getByText("Slide").tagName).toBe("DIV")
+  test("renders HTML tag correctly", async () => {
+    await render(<Slide>Slide</Slide>)
+    expect(page.getByText("Slide").element().tagName).toBe("DIV")
   })
 
   test("applies default styles correctly", async () => {
-    render(<Slide>Slide</Slide>)
+    await render(<Slide>Slide</Slide>)
 
-    const slide = await screen.findByText("Slide")
-
-    expect(slide).toHaveStyle({
-      transform: "translateX(100%)",
-    })
+    const slide = page.getByText("Slide").element()
+    expect(slide.getAttribute("style")).toContain("translateX(100%)")
   })
 
   test("applies styles correctly for block-start placement", async () => {
-    render(<Slide placement="block-start">Slide</Slide>)
+    await render(<Slide placement="block-start">Slide</Slide>)
 
-    const slide = await screen.findByText("Slide")
-
-    expect(slide).toHaveStyle({
-      transform: "translateY(-100%)",
-    })
+    const slide = page.getByText("Slide").element()
+    expect(slide.getAttribute("style")).toContain("translateY(-100%)")
   })
 
   test("applies styles correctly for inline-start placement", async () => {
-    render(<Slide placement="inline-start">Slide</Slide>)
+    await render(<Slide placement="inline-start">Slide</Slide>)
 
-    const slide = await screen.findByText("Slide")
-
-    expect(slide).toHaveStyle({
-      transform: "translateX(-100%)",
-    })
+    const slide = page.getByText("Slide").element()
+    expect(slide.getAttribute("style")).toContain("translateX(-100%)")
   })
 
   test("applies styles correctly for inline-end placement", async () => {
-    render(<Slide placement="inline-end">Slide</Slide>)
+    await render(<Slide placement="inline-end">Slide</Slide>)
 
-    const slide = await screen.findByText("Slide")
-
-    expect(slide).toHaveStyle({
-      transform: "translateX(100%)",
-    })
+    const slide = page.getByText("Slide").element()
+    expect(slide.getAttribute("style")).toContain("translateX(100%)")
   })
 
   test("applies styles correctly for block-end placement", async () => {
-    render(<Slide placement="block-end">Slide</Slide>)
+    await render(<Slide placement="block-end">Slide</Slide>)
 
-    const slide = await screen.findByText("Slide")
-
-    expect(slide).toHaveStyle({ transform: "translateY(100%)" })
+    const slide = page.getByText("Slide").element()
+    expect(slide.getAttribute("style")).toContain("translateY(100%)")
   })
 
   describe("slideVariants", () => {
@@ -102,15 +90,17 @@ describe("<Slide />", () => {
       )
     }
 
-    const { user } = render(<TestComponent />)
+    const { container, user } = await render(<TestComponent />)
 
-    const button = await screen.findByRole("button", { name: /button/i })
-    expect(screen.queryByText("Slide")).toBeNull()
-
-    await user.click(button)
-    await waitFor(() => expect(screen.getByText("Slide")).toBeVisible())
+    const button = page.getByRole("button", { name: /button/i })
+    expect(container.textContent).not.toContain("Slide")
 
     await user.click(button)
-    await waitFor(() => expect(screen.queryByText("Slide")).toBeNull())
+    await expect.element(page.getByText("Slide")).toBeVisible()
+
+    await user.click(button)
+    await vi.waitFor(() => {
+      expect(container.textContent).not.toContain("Slide")
+    })
   })
 })

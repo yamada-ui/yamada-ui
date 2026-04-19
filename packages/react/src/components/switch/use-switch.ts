@@ -9,13 +9,9 @@ import type {
 import type { HTMLProps, HTMLRefAttributes, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { useCallback, useId, useRef } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
-import {
-  dataAttr,
-  handlerAll,
-  mergeRefs,
-  visuallyHiddenAttributes,
-} from "../../utils"
+import { dataAttr, mergeRefs, visuallyHiddenAttributes } from "../../utils"
 import { useFieldProps } from "../field"
 
 export interface UseSwitchProps<Y extends number | string = string>
@@ -120,13 +116,13 @@ export const useSwitch = <Y extends number | string = string>(
   )
 
   const getRootProps: PropGetter<"label"> = useCallback(
-    (props = {}) => ({
-      ...dataProps,
-      htmlFor: id,
-      "data-checked": dataAttr(checked),
-      ...rest,
-      ...props,
-    }),
+    (props = {}) =>
+      mergeProps(
+        dataProps,
+        { htmlFor: id, "data-checked": dataAttr(checked) },
+        rest,
+        props,
+      )(),
     [checked, rest, id, dataProps],
   )
 
@@ -149,27 +145,28 @@ export const useSwitch = <Y extends number | string = string>(
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    (props = {}) => ({
-      ...ariaProps,
-      ...dataProps,
-      id,
-      type: "checkbox",
-      name,
-      style: visuallyHiddenAttributes.style,
-      checked,
-      disabled,
-      readOnly,
-      required,
-      role: "switch",
-      tabIndex: interactive ? 0 : -1,
-      value,
-      ...props,
-      ref: mergeRefs(inputRef, props.ref, ref),
-      onBlur: handlerAll(eventProps.onBlur, props.onBlur),
-      onChange: handlerAll(props.onChange, onChange),
-      onFocus: handlerAll(eventProps.onFocus, props.onFocus),
-      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
-    }),
+    (props = {}) =>
+      mergeProps(
+        ariaProps,
+        dataProps,
+        {
+          id,
+          type: "checkbox",
+          name,
+          style: visuallyHiddenAttributes.style,
+          checked,
+          disabled,
+          readOnly,
+          required,
+          role: "switch",
+          tabIndex: interactive ? 0 : -1,
+          value,
+        },
+        { onBlur: eventProps.onBlur, onFocus: eventProps.onFocus },
+        props,
+        { ref: mergeRefs(inputRef, ref) },
+        { onChange, onKeyDown },
+      )(),
     [
       ariaProps,
       dataProps,

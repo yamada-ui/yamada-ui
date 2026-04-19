@@ -2,7 +2,12 @@
 
 import type { ReactNode, RefObject } from "react"
 import { Children, useCallback, useId, useRef, useState } from "react"
-import { type HTMLProps, type PropGetter, useEnvironment } from "../../core"
+import {
+  type HTMLProps,
+  mergeProps,
+  type PropGetter,
+  useEnvironment,
+} from "../../core"
 import { useAsyncCallback } from "../../hooks/use-async-callback"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
@@ -212,11 +217,8 @@ export const useSidebar = ({
   })
 
   const getRootProps: PropGetter<"div"> = useCallback(
-    (props = {}) => ({
-      "data-expanded": dataAttr(open),
-      ...rest,
-      ...props,
-    }),
+    (props = {}) =>
+      mergeProps({ "data-expanded": dataAttr(open) }, rest, props)(),
     [open, rest],
   )
 
@@ -292,12 +294,9 @@ export const useSidebarGroup = ({ ...rest }: UseSidebarGroupProps = {}) => {
   }, [])
 
   const getRootProps: PropGetter<"li"> = useCallback(
-    ({ ref, ...props } = {}) => ({
-      ref: mergeRefs(ref, rootRef),
-      ...rest,
-      ...props,
-    }),
-    [rest],
+    ({ ref, ...props } = {}) =>
+      mergeProps({ ref }, rest, props, { ref: rootRef })(),
+    [rest, rootRef],
   )
 
   const getLabelProps: PropGetter<"span"> = useCallback(
@@ -463,21 +462,30 @@ export const useSidebarItem = ({
   }, [defaultExpanded])
 
   const getItemProps: PropGetter<"li"> = useCallback(
-    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      id: itemId,
-      ref: mergeRefs(ref, register),
-      "aria-current": selected ? "page" : undefined,
-      "aria-disabled": ariaAttr(disabled),
-      "aria-labelledby": cx(ariaLabelledby, labelId),
-      "data-disabled": dataAttr(disabled),
-      "data-selected": dataAttr(selected),
-      ...rest,
-      ...props,
-      onClick: handlerAll(
-        props.onClick,
-        !group ? () => onSelectedChange(value) : undefined,
-      ),
-    }),
+    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) => {
+      const merged = mergeProps(
+        {
+          id: itemId,
+          "aria-current": selected ? "page" : undefined,
+          "aria-disabled": ariaAttr(disabled),
+          "aria-labelledby": cx(ariaLabelledby, labelId),
+          "data-disabled": dataAttr(disabled),
+          "data-selected": dataAttr(selected),
+        },
+        rest,
+        props,
+        { ref },
+        { ref: register },
+      )()
+
+      return {
+        ...merged,
+        onClick: handlerAll(
+          props.onClick,
+          !group ? () => onSelectedChange(value) : undefined,
+        ),
+      }
+    },
     [
       itemId,
       register,

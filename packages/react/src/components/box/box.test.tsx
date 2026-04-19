@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Box } from "./box"
 
 describe("<Box />", () => {
@@ -6,8 +6,9 @@ describe("<Box />", () => {
     await a11y(<Box>Box</Box>)
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Box>Box</Box>)
-    expect(screen.getByText("Box").tagName).toBe("DIV")
+  test("renders HTML tag correctly", async () => {
+    await render(<Box>Box</Box>)
+
+    expect(page.getByText("Box").element().tagName).toBe("DIV")
   })
 })

@@ -8,9 +8,9 @@
     "dev": "vite dev",
     "build": "vite build",
     "start": "node dist/server/server.js",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc",
     "lint": "eslint . --max-warnings=0 --cache",
-    "format": "prettier . --ignore-path ../../../.prettierignore --check --cache",
+    "format": "pnpm -w format playgrounds/tanstack/start",
     "yamada-cli": "pnpm -C ../../../packages/cli dev"
   },
   "dependencies": {

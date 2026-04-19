@@ -9,7 +9,6 @@ import { importConfigArray, restrictedImportConfigArray } from "./import"
 import { jsxA11yConfig } from "./jsx-a11y"
 import { nextConfig } from "./next"
 import { perfectionistConfig } from "./perfectionist"
-import { prettierConfig } from "./prettier"
 import { reactConfig } from "./react"
 import { reactHooksConfig } from "./react-hooks"
 import { sharedFiles } from "./shared"
@@ -29,7 +28,6 @@ export {
   nextConfig,
   noConsoleConfig,
   perfectionistConfig,
-  prettierConfig,
   reactConfig,
   reactHooksConfig,
   restrictedImportConfigArray,
@@ -46,5 +44,4 @@ export const sharedConfigArray: ConfigWithExtendsArray = [
   perfectionistConfig,
   vitestConfig,
   testingLibraryConfig,
-  prettierConfig,
 ]

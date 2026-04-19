@@ -13,6 +13,11 @@ export const importConfigArray: ConfigWithExtendsArray = [
     rules: {
       ...importPlugin.flatConfigs.recommended.rules,
       "import/enforce-node-protocol-usage": ["error", "always"],
+      "import/extensions": [
+        "error",
+        "ignorePackages",
+        { cts: "never", mts: "never", ts: "never", tsx: "never" },
+      ],
       "import/no-named-as-default": "off",
       "import/no-unresolved": "off",
     },

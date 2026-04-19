@@ -4,6 +4,7 @@ import type { ChangeEvent, KeyboardEvent } from "react"
 import type { HTMLProps, PropGetter, RequiredPropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { useCallback, useEffect, useId, useState } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
 import { cx, filterUndefined, handlerAll, runKeyAction } from "../../utils"
@@ -290,11 +291,7 @@ export const usePinInput = (props: UsePinInputProps = {}) => {
   }, [autoFocus, descendants])
 
   const getRootProps: PropGetter = useCallback(
-    (props) => ({
-      role: "group",
-      ...rest,
-      ...props,
-    }),
+    (props) => mergeProps({ role: "group" }, rest, props)(),
     [rest],
   )
 

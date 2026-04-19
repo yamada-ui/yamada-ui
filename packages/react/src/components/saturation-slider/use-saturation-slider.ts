@@ -5,6 +5,7 @@ import type { HTMLProps, HTMLRefAttributes, PropGetter } from "../../core"
 import type { Point } from "../../utils"
 import type { FieldProps } from "../field"
 import { useCallback } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { usePanEvent } from "../../hooks/use-pan-event"
 import { useI18n } from "../../providers/i18n-provider"
@@ -179,22 +180,24 @@ export const useSaturationSlider = (props: UseSaturationSliderProps = {}) => {
   )
 
   const getRootProps: PropGetter = useCallback(
-    (props = {}) => ({
-      ...dataProps,
-      ...rest,
-      ...props,
-      style: {
-        ...rest.style,
-        ...props.style,
-        "--x": `${Math.abs(s * 100)}%`,
-        "--y": `${Math.abs(100 - v * 100)}%`,
-        backgroundColor: `hsl(${h}, 100%, 50%)`,
-        backgroundImage:
-          "linear-gradient(0deg, #000, transparent), linear-gradient(90deg, #fff, transparent)",
-      },
-      onBlur: handlerAll(props.onBlur, eventProps.onBlur),
-      onFocus: handlerAll(props.onFocus, eventProps.onFocus),
-    }),
+    (props = {}) => {
+      const merged = mergeProps(dataProps, rest, props)()
+
+      return {
+        ...merged,
+        style: {
+          ...rest.style,
+          ...props.style,
+          "--x": `${Math.abs(s * 100)}%`,
+          "--y": `${Math.abs(100 - v * 100)}%`,
+          backgroundColor: `hsl(${h}, 100%, 50%)`,
+          backgroundImage:
+            "linear-gradient(0deg, #000, transparent), linear-gradient(90deg, #fff, transparent)",
+        },
+        onBlur: handlerAll(props.onBlur, eventProps.onBlur),
+        onFocus: handlerAll(props.onFocus, eventProps.onFocus),
+      }
+    },
     [dataProps, eventProps, h, rest, s, v],
   )
 

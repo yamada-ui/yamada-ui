@@ -13,6 +13,7 @@ import {
   useRef,
   useState,
 } from "react"
+import { mergeProps } from "../../core"
 import {
   createContext,
   dataAttr,
@@ -195,20 +196,19 @@ export const useReorder = <Y = string>({
     undefined,
     ReorderGroupProps<Y>
   > = useCallback(
-    (props = {}) => ({
-      axis,
-      values,
-      ...rest,
-      ...props,
-      ref: mergeRefs(props.ref, ref),
-      onMouseUp: handlerAll(props.onMouseUp, rest.onMouseUp, onCompleteReorder),
-      onReorder: handlerAll(props.onReorder, rest.onReorder, onReorder),
-      onTouchEnd: handlerAll(
-        props.onTouchEnd,
-        rest.onTouchEnd,
-        onCompleteReorder,
-      ),
-    }),
+    (props = {}) =>
+      mergeProps(
+        { axis, values },
+        props,
+        rest,
+        { ref: props.ref },
+        { ref },
+        {
+          onMouseUp: onCompleteReorder,
+          onReorder,
+          onTouchEnd: onCompleteReorder,
+        },
+      )(),
     [rest, ref, onCompleteReorder, onReorder, axis, values],
   )
 
@@ -269,15 +269,22 @@ export const useReorderItem = <Y = string>({
     (props = {}) => {
       const children = props.children ?? rest.children ?? label
 
+      const merged = mergeProps(
+        {
+          "data-has-trigger": dataAttr(hasTrigger),
+          "data-selected": dataAttr(drag),
+          dragControls,
+          dragListener: !hasTrigger,
+          value: value ?? getAlternativeValue({ children }),
+        },
+        props,
+        rest,
+        { ref: props.ref },
+        { ref },
+      )()
+
       return {
-        "data-has-trigger": dataAttr(hasTrigger),
-        "data-selected": dataAttr(drag),
-        dragControls,
-        dragListener: !hasTrigger,
-        value: value ?? getAlternativeValue({ children }),
-        ...props,
-        ...rest,
-        ref: mergeRefs(props.ref, ref),
+        ...merged,
         style: { x, y, ...props.style, ...rest.style },
         children,
       }

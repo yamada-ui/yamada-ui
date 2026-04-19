@@ -4,19 +4,9 @@
 
 **Diff**:
 
-```tsx
-// Before
-{
-  {
-    before_snippet
-  }
-}
-// After
-{
-  {
-    after_snippet
-  }
-}
+```diff
+- {{before_snippet}}
++ {{after_snippet}}
 ```
 
 **What was missed**: {{what_was_missed}}

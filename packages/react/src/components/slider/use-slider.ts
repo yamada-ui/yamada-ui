@@ -11,6 +11,7 @@ import type {
 import type { Point } from "../../utils"
 import type { FieldProps } from "../field"
 import { useCallback, useRef } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { usePanEvent } from "../../hooks/use-pan-event"
 import { useI18n } from "../../providers/i18n-provider"
@@ -296,14 +297,13 @@ export const useSlider = <Y extends [number, number] | number = number>(
 
   const getRootProps: PropGetter = useCallback(
     (props = {}) => {
-      const computedProps: HTMLProps = {
-        ...dataProps,
-        "data-orientation": orientation,
-        ...rest,
-        ...props,
-        onBlur: handlerAll(props.onBlur, eventProps.onBlur),
-        onFocus: handlerAll(props.onFocus, eventProps.onFocus),
-      }
+      const computedProps = mergeProps(
+        dataProps,
+        { "data-orientation": orientation },
+        rest,
+        props,
+        { onBlur: eventProps.onBlur, onFocus: eventProps.onFocus },
+      )() as HTMLProps
 
       computedProps.style ??= {}
 

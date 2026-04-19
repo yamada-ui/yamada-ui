@@ -2,6 +2,7 @@ import type { QrCodeGenerateResult } from "uqr"
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useMemo } from "react"
 import { encode } from "uqr"
+import { mergeProps } from "../../core"
 
 export interface UseQrCodeProps extends HTMLProps {
   /**
@@ -123,7 +124,7 @@ export const useQrCode = ({
   }, [encoded.data, encoded.size, pixelSize])
 
   const getRootProps: PropGetter = useCallback(
-    (props = {}) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 

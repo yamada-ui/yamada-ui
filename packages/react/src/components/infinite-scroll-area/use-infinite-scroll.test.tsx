@@ -1,10 +1,10 @@
-import { render, renderHook, waitFor } from "#test"
+import { page, render, renderHook } from "#test/browser"
 import { useRef } from "react"
 import { noop } from "../../utils"
 import { useInfiniteScroll } from "./use-infinite-scroll"
 
 describe("useInfiniteScroll", () => {
-  const defaultIntersectionObserver = global.IntersectionObserver
+  const defaultIntersectionObserver = globalThis.IntersectionObserver
   const IntersectionObserverMock = vi.fn(function IntersectionObserverMock(
     this: {
       disconnect: () => void
@@ -29,9 +29,10 @@ describe("useInfiniteScroll", () => {
   afterEach(() => {
     vi.stubGlobal("IntersectionObserver", defaultIntersectionObserver)
   })
-  test("should not be finish and not called onLoad", () => {
+
+  test("should not be finish and not called onLoad", async () => {
     const mockOnLoad = vi.fn()
-    const { result } = renderHook(() =>
+    const { result } = await renderHook(() =>
       useInfiniteScroll({
         onLoad: mockOnLoad,
       }),
@@ -41,11 +42,11 @@ describe("useInfiniteScroll", () => {
     expect(result.current.finish).toBeFalsy()
   })
 
-  test("should be called onLoad when initial loaded", () => {
+  test("should be called onLoad when initial loaded", async () => {
     const mockOnLoad = vi.fn().mockImplementation(({ finish }) => {
       finish()
     })
-    const { result } = renderHook(() =>
+    const { result } = await renderHook(() =>
       useInfiniteScroll({
         initialLoad: true,
         onLoad: mockOnLoad,
@@ -84,17 +85,12 @@ describe("useInfiniteScroll", () => {
       )
     }
 
-    const { container, getByTestId, user } = render(<MyComponent />)
+    const { container, user } = await render(<MyComponent />)
     const root = container.firstChild as HTMLDivElement
-    vi.spyOn(root, "scrollTo").mockImplementation(() => {
-      root.scrollTop = 100
-    })
-    const reset = getByTestId("reset")
-    await user.click(reset)
+    const scrollTo = vi.spyOn(root, "scrollTo")
 
-    await waitFor(() => {
-      expect(root.scrollTop).toBe(100)
-    })
+    await user.click(page.getByTestId("reset"))
+    expect(scrollTo).toHaveBeenCalledWith({ behavior: undefined, top: 0 })
   })
 
   test("should be called onReset scroll to body", async () => {
@@ -120,16 +116,11 @@ describe("useInfiniteScroll", () => {
       )
     }
 
-    const { getByTestId, user } = render(<MyComponent />)
-    vi.spyOn(window, "scrollTo").mockImplementation(() => {
-      document.body.scrollTop = 100
-    })
-    const reset = getByTestId("reset")
-    await user.click(reset)
+    const { user } = await render(<MyComponent />)
+    const scrollTo = vi.spyOn(window, "scrollTo")
 
-    await waitFor(() => {
-      expect(document.body.scrollTop).toBe(100)
-    })
+    await user.click(page.getByTestId("reset"))
+    expect(scrollTo).toHaveBeenCalledWith({ behavior: undefined, top: 0 })
   })
 
   test("should be called onReset reverse scroll to root", async () => {
@@ -148,8 +139,14 @@ describe("useInfiniteScroll", () => {
 
       return (
         <>
-          <div ref={rootRef} style={{ overflow: "auto" }}>
-            {!finish ? <div ref={ref} data-testid="trigger" /> : null}
+          <div ref={rootRef} style={{ maxHeight: "100px", overflow: "auto" }}>
+            {!finish ? (
+              <div
+                ref={ref}
+                style={{ height: "200px" }}
+                data-testid="trigger"
+              />
+            ) : null}
           </div>
           <button data-testid="reset" onClick={() => resetRef.current()}>
             Reset
@@ -158,16 +155,14 @@ describe("useInfiniteScroll", () => {
       )
     }
 
-    const { container, getByTestId, user } = render(<MyComponent />)
+    const { container, user } = await render(<MyComponent />)
     const root = container.firstChild as HTMLDivElement
-    vi.spyOn(root, "scrollTo").mockImplementation(() => {
-      root.scrollTop = 100
-    })
-    const reset = getByTestId("reset")
-    await user.click(reset)
+    const scrollTo = vi.spyOn(root, "scrollTo")
 
-    await waitFor(() => {
-      expect(root.scrollTop).toBe(100)
+    await user.click(page.getByTestId("reset"))
+    expect(scrollTo).toHaveBeenCalledWith({
+      behavior: undefined,
+      top: root.scrollHeight,
     })
   })
 
@@ -188,8 +183,10 @@ describe("useInfiniteScroll", () => {
 
       return (
         <>
-          <div ref={rootRef} style={{ overflowX: "auto" }}>
-            {!finish ? <div ref={ref} data-testid="trigger" /> : null}
+          <div ref={rootRef} style={{ maxWidth: "100px", overflowX: "auto" }}>
+            {!finish ? (
+              <div ref={ref} style={{ width: "200px" }} data-testid="trigger" />
+            ) : null}
           </div>
           <button data-testid="reset" onClick={() => resetRef.current()}>
             Reset
@@ -198,16 +195,14 @@ describe("useInfiniteScroll", () => {
       )
     }
 
-    const { container, getByTestId, user } = render(<MyComponent />)
+    const { container, user } = await render(<MyComponent />)
     const root = container.firstChild as HTMLDivElement
-    vi.spyOn(root, "scrollTo").mockImplementation(() => {
-      root.scrollLeft = 100
-    })
-    const reset = getByTestId("reset")
-    await user.click(reset)
+    const scrollTo = vi.spyOn(root, "scrollTo")
 
-    await waitFor(() => {
-      expect(root.scrollLeft).toBe(100)
+    await user.click(page.getByTestId("reset"))
+    expect(scrollTo).toHaveBeenCalledWith({
+      behavior: undefined,
+      left: root.scrollWidth,
     })
   })
 
@@ -235,16 +230,11 @@ describe("useInfiniteScroll", () => {
       )
     }
 
-    const { getByTestId, user } = render(<MyComponent />)
-    vi.spyOn(window, "scrollTo").mockImplementation(() => {
-      document.body.scrollLeft = 100
-    })
-    const reset = getByTestId("reset")
-    await user.click(reset)
+    const { user } = await render(<MyComponent />)
+    const scrollTo = vi.spyOn(window, "scrollTo")
 
-    await waitFor(() => {
-      expect(document.body.scrollLeft).toBe(100)
-    })
+    await user.click(page.getByTestId("reset"))
+    expect(scrollTo).toHaveBeenCalledWith({ behavior: undefined, left: 0 })
   })
 
   test("should be cannot infinite-scroll is disabled", async () => {
@@ -284,9 +274,8 @@ describe("useInfiniteScroll", () => {
       )
     }
 
-    const { getByTestId, user } = render(<MyComponent />)
-    const reset = getByTestId("reset")
-    await user.click(reset)
+    const { user } = await render(<MyComponent />)
+    await user.click(page.getByTestId("reset"))
     expect(mockObserve).not.toHaveBeenCalled()
   })
 
@@ -308,12 +297,10 @@ describe("useInfiniteScroll", () => {
       )
     }
 
-    const { container } = render(<MyComponent />)
+    const { container } = await render(<MyComponent />)
     const root = container.firstChild as HTMLDivElement
 
-    await waitFor(() => {
-      expect(root.tabIndex).toBe(0)
-    })
+    await expect.poll(() => root.tabIndex).toBe(0)
   })
 
   test("should not override existing tabindex on root", async () => {
@@ -334,11 +321,9 @@ describe("useInfiniteScroll", () => {
       )
     }
 
-    const { container } = render(<MyComponent />)
+    const { container } = await render(<MyComponent />)
     const root = container.firstChild as HTMLDivElement
 
-    await waitFor(() => {
-      expect(root.tabIndex).toBe(-1)
-    })
+    await expect.poll(() => root.tabIndex).toBe(-1)
   })
 })

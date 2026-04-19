@@ -2,6 +2,7 @@
 
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useMemo } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"
 import { createContext, handlerAll, isNumber, mergeRefs } from "../../utils"
@@ -138,13 +139,18 @@ export const usePagination = ({
   )
 
   const getRootProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
-      "aria-label": t("Pagination"),
-      role: "navigation",
-      ...rest,
-      ...props,
-      ref: mergeRefs(ref, rest.ref),
-    }),
+    ({ ref, ...props } = {}) =>
+      mergeProps(
+        {
+          "aria-label": t("Pagination"),
+          role: "navigation",
+        },
+        rest,
+        props,
+        {
+          ref: mergeRefs(ref, rest.ref),
+        },
+      )(),
     [rest, t],
   )
 

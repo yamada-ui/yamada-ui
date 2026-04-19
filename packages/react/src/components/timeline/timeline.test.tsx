@@ -69,22 +69,21 @@ describe("<Timeline />", () => {
 
   test("renders numbers in indicators with `number` variant", async () => {
     await render(<Timeline.Root variant="number" items={items} />)
-    const listItems = document.querySelectorAll('[role="listitem"]')
-
-    listItems.forEach((itemEl, index) => {
+    for (const [index] of items.entries()) {
+      const itemEl = page.getByRole("listitem").nth(index).element()
       const indicator = itemEl.children[0]?.children[0]
       expect(indicator).toHaveTextContent(String(index + 1))
-    })
+    }
   })
 
   test("does not render numbers in indicators without `number` variant", async () => {
     await render(<Timeline.Root items={items} />)
-    const listItems = document.querySelectorAll('[role="listitem"]')
-
-    listItems.forEach((itemEl) => {
+    for (const [index] of items.entries()) {
+      const itemEl = page.getByRole("listitem").nth(index).element()
       const indicator = itemEl.children[0]?.children[0]
-      expect(indicator?.textContent ?? "").not.toMatch(/\d/)
-    })
+      expect(indicator).toBeDefined()
+      expect(indicator).not.toHaveTextContent(/\d/)
+    }
   })
 
   test("custom indicator takes precedence over number variant", async () => {
@@ -94,10 +93,10 @@ describe("<Timeline />", () => {
     ]
 
     await render(<Timeline.Root variant="number" items={itemsWithIndicator} />)
-    const firstIndicator = page.getByRole("listitem").nth(0).element()
-      .children[0]?.children[0]
-    const secondIndicator = page.getByRole("listitem").nth(1).element()
-      .children[0]?.children[0]
+    const firstItem = page.getByRole("listitem").first().element()
+    const secondItem = page.getByRole("listitem").nth(1).element()
+    const firstIndicator = firstItem.children[0]?.children[0]
+    const secondIndicator = secondItem.children[0]?.children[0]
 
     expect(firstIndicator).toHaveTextContent("A")
     expect(secondIndicator).toHaveTextContent("2")

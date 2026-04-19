@@ -1038,6 +1038,218 @@ describe("<Calendar />", () => {
       expect.stringContaining("September"),
     )
   })
+
+  test("should merge `prevButtonProps` from root with user props on `Calendar.PrevButton` without overwriting `className`, `style`, and event handlers", () => {
+    const onRootClick = vi.fn()
+    const onUserClick = vi.fn()
+
+    render(
+      <Calendar.Root
+        prevButtonProps={{
+          className: "from-root",
+          style: { backgroundColor: "blue", color: "red" },
+          onClick: onRootClick,
+        }}
+      >
+        <Calendar.Navigation>
+          <Calendar.PrevButton
+            className="from-user"
+            style={{ borderColor: "green" }}
+            onClick={onUserClick}
+          />
+          <Calendar.NextButton />
+        </Calendar.Navigation>
+        <Calendar.Month />
+      </Calendar.Root>,
+    )
+
+    const prevButton = screen.getByRole("button", {
+      name: /previous month/i,
+    })
+
+    expect(prevButton).toHaveClass("from-root", "from-user")
+    expect(prevButton).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(prevButton).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+    expect(prevButton).toHaveStyle({ borderColor: "rgb(0, 128, 0)" })
+
+    fireEvent.click(prevButton)
+
+    expect(onRootClick).toHaveBeenCalledTimes(1)
+    expect(onUserClick).toHaveBeenCalledTimes(1)
+  })
+
+  test("should merge `nextButtonProps` from root with user props on `Calendar.NextButton` without overwriting `className`, `style`, and event handlers", () => {
+    const onRootClick = vi.fn()
+    const onUserClick = vi.fn()
+
+    render(
+      <Calendar.Root
+        nextButtonProps={{
+          className: "from-root",
+          style: { backgroundColor: "blue", color: "red" },
+          onClick: onRootClick,
+        }}
+      >
+        <Calendar.Navigation>
+          <Calendar.PrevButton />
+          <Calendar.NextButton
+            className="from-user"
+            style={{ borderColor: "green" }}
+            onClick={onUserClick}
+          />
+        </Calendar.Navigation>
+        <Calendar.Month />
+      </Calendar.Root>,
+    )
+
+    const nextButton = screen.getByRole("button", { name: /next month/i })
+
+    expect(nextButton).toHaveClass("from-root", "from-user")
+    expect(nextButton).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(nextButton).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+    expect(nextButton).toHaveStyle({ borderColor: "rgb(0, 128, 0)" })
+
+    fireEvent.click(nextButton)
+
+    expect(onRootClick).toHaveBeenCalledTimes(1)
+    expect(onUserClick).toHaveBeenCalledTimes(1)
+  })
+
+  test("should merge `buttonProps` from root with `prevButtonProps` and user props on `Calendar.PrevButton`", () => {
+    const onButtonClick = vi.fn()
+    const onPrevClick = vi.fn()
+    const onUserClick = vi.fn()
+
+    render(
+      <Calendar.Root
+        buttonProps={{
+          className: "from-button",
+          onClick: onButtonClick,
+        }}
+        prevButtonProps={{
+          className: "from-prev",
+          onClick: onPrevClick,
+        }}
+      >
+        <Calendar.Navigation>
+          <Calendar.PrevButton className="from-user" onClick={onUserClick} />
+          <Calendar.NextButton />
+        </Calendar.Navigation>
+        <Calendar.Month />
+      </Calendar.Root>,
+    )
+
+    const prevButton = screen.getByRole("button", {
+      name: /previous month/i,
+    })
+
+    expect(prevButton).toHaveClass("from-button", "from-prev", "from-user")
+
+    fireEvent.click(prevButton)
+
+    expect(onButtonClick).toHaveBeenCalledTimes(1)
+    expect(onPrevClick).toHaveBeenCalledTimes(1)
+    expect(onUserClick).toHaveBeenCalledTimes(1)
+  })
+
+  test("should merge `navigationProps` from root with user props on `Calendar.Navigation` without overwriting `className`, `style`, and event handlers", () => {
+    const onRootClick = vi.fn()
+    const onUserClick = vi.fn()
+
+    render(
+      <Calendar.Root
+        navigationProps={{
+          className: "from-root",
+          style: { backgroundColor: "blue", color: "red" },
+          onClick: onRootClick,
+        }}
+      >
+        <Calendar.Navigation
+          className="from-user"
+          data-testid="navigation"
+          onClick={onUserClick}
+        />
+        <Calendar.Month />
+      </Calendar.Root>,
+    )
+
+    const navigation = screen.getByTestId("navigation")
+
+    expect(navigation).toHaveClass("from-root", "from-user")
+    expect(navigation).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(navigation).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(navigation)
+
+    expect(onRootClick).toHaveBeenCalledTimes(1)
+    expect(onUserClick).toHaveBeenCalledTimes(1)
+  })
+
+  test("should merge `monthProps` from root with user props on `Calendar.Month` without overwriting `className`, `style`, and event handlers", () => {
+    const onRootClick = vi.fn()
+    const onUserClick = vi.fn()
+
+    render(
+      <Calendar.Root
+        monthProps={{
+          className: "from-root",
+          style: { backgroundColor: "blue", color: "red" },
+          onClick: onRootClick,
+        }}
+      >
+        <Calendar.Navigation />
+        <Calendar.Month className="from-user" onClick={onUserClick} />
+      </Calendar.Root>,
+    )
+
+    const grid = screen.getByRole("grid")
+
+    expect(grid).toHaveClass("from-root", "from-user")
+    expect(grid).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(grid).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(grid)
+
+    expect(onRootClick).toHaveBeenCalledTimes(1)
+    expect(onUserClick).toHaveBeenCalledTimes(1)
+  })
+
+  test("should merge `controlProps` from root with user props on `Calendar.Control` without overwriting `className`, `style`, and event handlers", () => {
+    const onRootClick = vi.fn()
+    const onUserClick = vi.fn()
+
+    render(
+      <Calendar.Root
+        controlProps={{
+          className: "from-root",
+          style: { backgroundColor: "blue", color: "red" },
+          onClick: onRootClick,
+        }}
+      >
+        <Calendar.Navigation>
+          <Calendar.PrevButton />
+          <Calendar.Control
+            className="from-user"
+            data-testid="control"
+            onClick={onUserClick}
+          />
+          <Calendar.NextButton />
+        </Calendar.Navigation>
+        <Calendar.Month />
+      </Calendar.Root>,
+    )
+
+    const control = screen.getByTestId("control")
+
+    expect(control).toHaveClass("from-root", "from-user")
+    expect(control).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(control).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(control)
+
+    expect(onRootClick).toHaveBeenCalledTimes(1)
+    expect(onUserClick).toHaveBeenCalledTimes(1)
+  })
 })
 
 describe("isSameYear", () => {

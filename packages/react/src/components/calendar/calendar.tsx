@@ -10,7 +10,7 @@ import type {
   UseCalendarReturn,
 } from "./use-calendar"
 import { useMemo } from "react"
-import { createSlotComponent, styled } from "../../core"
+import { createSlotComponent, mergeProps, styled } from "../../core"
 import { runIfFn } from "../../utils"
 import { resetFieldProps } from "../field"
 import { ChevronLeftIcon, ChevronRightIcon } from "../icon"
@@ -354,7 +354,7 @@ export const CalendarNavigation = withContext<"div", CalendarNavigationProps>(
   }, [children])
 
   return {
-    ...getNavigationProps({ ...navigationProps, ...rest }),
+    ...getNavigationProps(mergeProps(navigationProps, rest)()),
     children: computedChildren,
   }
 })
@@ -388,8 +388,7 @@ export const CalendarControl = withContext<"div", CalendarControlProps>(
   }, [children, month])
 
   return {
-    ...controlProps,
-    ...rest,
+    ...mergeProps(controlProps, rest)(),
     children: (
       <>
         {computedChildren}
@@ -412,7 +411,7 @@ export const CalendarPrevButton = withContext<
 
     return {
       children,
-      ...getPrevButtonProps({ ...buttonProps, ...prevButtonProps, ...rest }),
+      ...getPrevButtonProps(mergeProps(buttonProps, prevButtonProps, rest)()),
     }
   },
 )
@@ -430,7 +429,7 @@ export const CalendarNextButton = withContext<
 
     return {
       children,
-      ...getNextButtonProps({ ...buttonProps, ...nextButtonProps, ...rest }),
+      ...getNextButtonProps(mergeProps(buttonProps, nextButtonProps, rest)()),
     }
   },
 )
@@ -448,11 +447,11 @@ export const CalendarYearSelect = withContext<"div", CalendarYearSelectProps>(
   (props) => {
     const { yearItems, getYearSelectProps, selectProps, yearSelectProps } =
       useComponentContext()
-    const { contentProps, rootProps, ...rest } = {
-      ...selectProps,
-      ...yearSelectProps,
-      ...props,
-    }
+    const { contentProps, rootProps, ...rest } = mergeProps(
+      selectProps,
+      yearSelectProps,
+      props,
+    )()
 
     return (
       <Select.Root
@@ -479,11 +478,11 @@ export const CalendarMonthSelect = withContext<"div", CalendarMonthSelectProps>(
   (props) => {
     const { monthItems, getMonthSelectProps, monthSelectProps, selectProps } =
       useComponentContext()
-    const { contentProps, rootProps, ...rest } = {
-      ...selectProps,
-      ...monthSelectProps,
-      ...props,
-    }
+    const { contentProps, rootProps, ...rest } = mergeProps(
+      selectProps,
+      monthSelectProps,
+      props,
+    )()
 
     return (
       <Select.Root
@@ -569,7 +568,7 @@ export const CalendarMonth = withContext<"table", CalendarMonthProps>(
   )
 
   return {
-    ...getMonthProps({ ...monthProps, ...rest }),
+    ...getMonthProps(mergeProps(monthProps, rest)()),
     children,
   }
 })

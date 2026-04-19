@@ -6,6 +6,10 @@ function invokeCallbackRef<T>(ref: Ref<T> | undefined, node: null | T) {
   if (typeof ref === "function") ref(node)
 }
 
+function invokeHandler<E>(handler: ((event: E) => void) | undefined, event: E) {
+  handler?.(event)
+}
+
 describe("useActionBar getRootProps", () => {
   test("merges hook rest with user props via mergeProps", () => {
     const hookRef = vi.fn()
@@ -53,7 +57,7 @@ describe("useActionBar getRootProps", () => {
     expect(userRef).toHaveBeenCalledWith(element)
 
     const event = new MouseEvent("click")
-    merged.onClick(event as never)
+    invokeHandler(merged.onClick, event as never)
 
     expect(hookOnClick).toHaveBeenCalledWith(event)
     expect(userOnClick).toHaveBeenCalledWith(event)

@@ -3,6 +3,7 @@
 import type { KeyboardEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useEffect, useId, useState } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
 import {
@@ -113,12 +114,15 @@ export const useAccordion = ({
     onChange,
   })
 
+  /**
+   * Root props follow the root-only migration path: caller props win on scalar
+   * conflicts via `mergeProps(rest, props)()`, while mergeable fields still
+   * compose. This intentionally differs from sibling getters like
+   * `getItemProps`, which keep `{ ...props, ...rest }` so item internals retain
+   * precedence.
+   */
   const getRootProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
-      ...props,
-      ...rest,
-      ref: mergeRefs(ref, rest.ref),
-    }),
+    (props = {}) => mergeProps(rest, props)(),
     [rest],
   )
 

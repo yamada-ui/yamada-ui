@@ -2,6 +2,7 @@ import type { KeyboardEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import { useCallback } from "react"
+import { mergeProps } from "../../core"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { useI18n } from "../../providers/i18n-provider"
 import { cx, handlerAll, useIds } from "../../utils"
@@ -60,10 +61,7 @@ export const useModal = ({
   )
 
   const getRootProps: PropGetter = useCallback(
-    (props) => ({
-      ...rest,
-      ...props,
-    }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 

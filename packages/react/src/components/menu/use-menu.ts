@@ -5,6 +5,7 @@ import type { HTMLProps, PropGetter } from "../../core"
 import type { Descendant, Descendants } from "../../hooks/use-descendants"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import { useCallback, useId, useRef } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
 import { useDisclosure } from "../../hooks/use-disclosure"
@@ -530,12 +531,15 @@ export const useMenuGroup = ({
   const labelId = useId()
 
   const getGroupProps: PropGetter = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      "aria-labelledby": cx(ariaLabelledbyProp, ariaLabelledby, labelId),
-      role: "group",
-      ...rest,
-      ...props,
-    }),
+    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) =>
+      mergeProps(
+        {
+          "aria-labelledby": cx(ariaLabelledbyProp, ariaLabelledby, labelId),
+          role: "group",
+        },
+        rest,
+        props,
+      )(),
     [ariaLabelledbyProp, labelId, rest],
   )
 
@@ -653,25 +657,28 @@ export const useMenuItem = ({
   )
 
   const getItemProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
-      id,
-      "aria-disabled": ariaDisabled ?? ariaAttr(disabled),
-      "data-disabled": dataDisabled ?? dataAttr(disabled),
-      role: "menuitem",
-      tabIndex: -1,
-      ...rest,
-      ...props,
-      ref: mergeRefs(ref, rest.ref, itemRef, register),
-      onClick: handlerAll(props.onClick, rest.onClick, () =>
-        onSelect(value, closeOnSelect),
-      ),
-      onFocus: handlerAll(props.onFocus, rest.onFocus, onActive),
-      onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
-      onMouseMove: handlerAll(props.onMouseMove, rest.onMouseMove, () => {
-        onCloseSubMenu()
-        onActive()
-      }),
-    }),
+    ({ ref, ...props } = {}) =>
+      mergeProps(
+        {
+          id,
+          "aria-disabled": ariaDisabled ?? ariaAttr(disabled),
+          "data-disabled": dataDisabled ?? dataAttr(disabled),
+          role: "menuitem",
+          tabIndex: -1,
+        },
+        rest,
+        props,
+        {
+          ref: mergeRefs(ref, rest.ref, itemRef, register),
+          onClick: () => onSelect(value, closeOnSelect),
+          onFocus: onActive,
+          onKeyDown,
+          onMouseMove: () => {
+            onCloseSubMenu()
+            onActive()
+          },
+        },
+      )(),
     [
       id,
       ariaDisabled,

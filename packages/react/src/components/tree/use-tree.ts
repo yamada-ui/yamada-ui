@@ -13,6 +13,7 @@ import type { Descendant, Descendants } from "../../hooks/use-descendants"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import type { UseCheckboxProps } from "../checkbox"
 import { Children, useCallback, useRef, useState } from "react"
+import { mergeProps } from "../../core"
 import { useAsyncCallback } from "../../hooks/use-async-callback"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
@@ -289,13 +290,16 @@ export const useTree = <Multiple extends boolean = false>({
   assignRef(controlRef, { collapse: onCollapseAll, expand: onExpandAll })
 
   const getRootProps: PropGetter<"ul"> = useCallback(
-    (props) => ({
-      "aria-multiselectable": ariaAttr(multiple || checkable),
-      children,
-      role: "tree",
-      ...rest,
-      ...props,
-    }),
+    (props) =>
+      mergeProps(
+        {
+          "aria-multiselectable": ariaAttr(multiple || checkable),
+          children,
+          role: "tree",
+        },
+        rest,
+        props,
+      )(),
     [multiple, checkable, rest, children],
   )
 

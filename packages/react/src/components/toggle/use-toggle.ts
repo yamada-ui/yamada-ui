@@ -5,6 +5,7 @@ import type { HTMLProps, HTMLRefAttributes, PropGetter } from "../../core"
 import type { Merge } from "../../utils"
 import type { FieldProps } from "../field"
 import { useCallback, useMemo, useRef } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"
 import {
@@ -164,20 +165,23 @@ export const useToggle = <Y extends string = string>(
     undefined,
     Merge<HTMLProps<"button">, { "aria-label": string }>
   > = useCallback(
-    (props = {}) => ({
-      ...dataProps,
-      type: "button",
-      "aria-disabled": ariaAttr(!interactive),
-      "aria-label": value?.toString() ?? t("Toggle button"),
-      "aria-pressed": trulyChecked,
-      "data-active": dataAttr(active),
-      "data-checked": dataAttr(trulyChecked),
-      disabled,
-      tabIndex: interactive ? undefined : -1,
-      ...rest,
-      ...props,
-      onClick: handlerAll(rest.onClick, props.onClick, onClick),
-    }),
+    (props = {}) =>
+      mergeProps(
+        dataProps,
+        {
+          type: "button",
+          "aria-disabled": ariaAttr(!interactive),
+          "aria-label": value?.toString() ?? t("Toggle button"),
+          "aria-pressed": trulyChecked,
+          "data-active": dataAttr(active),
+          "data-checked": dataAttr(trulyChecked),
+          disabled,
+          tabIndex: interactive ? undefined : -1,
+        },
+        rest,
+        props,
+        { onClick },
+      )(),
     [
       dataProps,
       value,

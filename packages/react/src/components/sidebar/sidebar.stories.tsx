@@ -1252,6 +1252,7 @@ export const CustomRender: Story = () => {
             children,
             endElement,
             group,
+            groupOpen,
             label,
             selected,
             value,
@@ -1276,6 +1277,7 @@ export const CustomRender: Story = () => {
 
                     <styled.button
                       type="button"
+                      aria-label={`${groupOpen ? "Collapse" : "Expand"} ${label}`}
                       cursor="pointer"
                       display="center"
                       p="{side-panel-space}"
@@ -1317,6 +1319,7 @@ export const CustomRender: Story = () => {
                         <Sidebar.ItemEndElement
                           as="button"
                           type="button"
+                          aria-label={`Open menu for ${label}`}
                           cursor="pointer"
                           p="{side-panel-space}"
                           position="absolute"

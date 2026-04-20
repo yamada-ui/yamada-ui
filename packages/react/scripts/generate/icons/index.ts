@@ -1,7 +1,7 @@
 import { parse } from "@babel/parser"
 import traverse from "@babel/traverse"
 import { interopDefault, toKebabCase } from "@yamada-ui/utils"
-import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
 import { execFile } from "node:child_process"
 import { readdir, readFile, unlink } from "node:fs/promises"
 import path from "node:path"

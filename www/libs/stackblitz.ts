@@ -5,7 +5,7 @@ import sdk from "@stackblitz/sdk"
 import * as Components from "@yamada-ui/react"
 import React from "react"
 import { fixUnusedImports } from "./eslint-plugin-unused-imports"
-import { format } from "./prettier"
+import { format } from "./oxfmt"
 
 export interface ExternalModules {
   [key: string]: [string, ...string[]] | string

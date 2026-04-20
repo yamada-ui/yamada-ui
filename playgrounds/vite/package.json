@@ -8,9 +8,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc",
     "lint": "eslint . --max-warnings=0 --cache",
-    "format": "prettier . --ignore-path ../../.prettierignore --check --cache",
+    "format": "pnpm -w format playgrounds/vite",
     "yamada-cli": "pnpm -C ../../packages/cli dev"
   },
   "dependencies": {

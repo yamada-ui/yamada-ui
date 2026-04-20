@@ -112,10 +112,6 @@ the following types:
    will be used to generate a changelog when we publish an update.
    [Learn more about Changeset](https://github.com/atlassian/changesets/tree/master/packages/cli).
 
-> If you made minor changes like CI config, prettier, etc, you can run
-> `pnpm changeset add --empty` to generate an empty changeset file to document
-> your changes.
-
 5. Next, commit your changes following the [commit convention](#commit-convention).
 
 6. Once you have completed all of the above tasks, please push your changes.

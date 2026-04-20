@@ -22,7 +22,7 @@ When performing one of the actions below, read the linked rule first.
   - [PR Rules](.agents/rules/pr.md)
 - Reviewing PRs:
   - [PR Merge Guide](.agents/references/pr-merge-guide.md)
-  - [Review Anti-Patterns](.agents/references/review-anti-patterns.md)
+  - [Review Anti-Patterns](.agents/references/review-anti-patterns/index.md)
 
 When editing or reviewing files that match a pattern below, read the linked rule first.
 
@@ -45,7 +45,7 @@ packages/
 ├─ react/　      # Published react components package (@yamada-ui/react)
 ├─ utils/　      # Published utility functions package (@yamada-ui/utils)
 ├─ forge/　      # Internal forge package for (Creating github issues, ...etc.)
-└─ workspace/　  # Internal utilities packages (ESLint, Prettier, Vitest, TypeScript, ...etc.)
+└─ workspace/　  # Internal utilities packages (ESLint, Oxfmt, Vitest, TypeScript, ...etc.)
 www/　            # Documentation site (Next.js, Velite)
 playgrounds/
 ├─ next/

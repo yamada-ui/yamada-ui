@@ -1,5 +1,5 @@
 import type { KeyframeIdent } from "../../core"
-import { a11y, render, screen, waitFor } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { useState } from "react"
 import { Airy } from "."
 
@@ -8,27 +8,26 @@ describe("<Airy />", () => {
     await a11y(<Airy from="ON" to="OFF" />)
   })
 
-  test("applies custom `aria-label`", () => {
-    render(<Airy aria-label="Toggle navigation" from="ON" to="OFF" />)
+  test("applies custom `aria-label`", async () => {
+    await render(<Airy aria-label="Toggle navigation" from="ON" to="OFF" />)
 
-    expect(screen.getByRole("button")).toHaveAttribute(
-      "aria-label",
-      "Toggle navigation",
-    )
+    await expect
+      .element(page.getByRole("button"))
+      .toHaveAttribute("aria-label", "Toggle navigation")
   })
 
   test("sets `displayName` correctly", () => {
     expect(Airy.displayName).toBe("Airy")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Airy from="ON" to="OFF" />)
-    expect(screen.getByText("ON")).toHaveClass("ui-airy")
+  test("sets `className` correctly", async () => {
+    await render(<Airy from="ON" to="OFF" />)
+    await expect.element(page.getByText("ON")).toHaveClass("ui-airy")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Airy from="ON" to="OFF" />)
-    expect(screen.getByText("ON").tagName).toBe("BUTTON")
+  test("renders HTML tag correctly", async () => {
+    await render(<Airy from="ON" to="OFF" />)
+    expect(page.getByText("ON").element().tagName).toBe("BUTTON")
   })
 
   test("should render Airy with value and onChange", async () => {
@@ -38,41 +37,40 @@ describe("<Airy />", () => {
       return <Airy from="ON" to="OFF" value={value} onChange={onChange} />
     }
 
-    const { container, user } = render(<TestComponent />)
+    const { user } = await render(<TestComponent />)
 
-    const button = container.querySelector("button") as HTMLButtonElement
-    expect(button).toHaveAttribute("data-value", "to")
+    const button = page.getByRole("button")
+    await expect.element(button).toHaveAttribute("data-value", "to")
 
     await user.click(button)
 
-    await waitFor(() => {
-      expect(button).toHaveAttribute("data-value", "from")
+    await vi.waitFor(() => {
+      expect(button.element()).toHaveAttribute("data-value", "from")
     })
   })
 
-  test("should be read only", () => {
-    const { container, user } = render(<Airy from="ON" readOnly to="OFF" />)
+  test("should be read only", async () => {
+    const { user } = await render(<Airy from="ON" readOnly to="OFF" />)
 
-    const button = container.querySelector("button") as HTMLButtonElement
-    expect(button).toHaveAttribute("data-readonly")
+    const button = page.getByRole("button")
+    await expect.element(button).toHaveAttribute("data-readonly")
+    await expect.element(button).toHaveAttribute("data-value", "from")
+    expect(button.element()).toHaveTextContent("ON")
 
-    const onText = screen.getByText("ON")
-    expect(onText).toBeInTheDocument()
+    await user.click(button)
+    await new Promise((resolve) => setTimeout(resolve, 300))
 
-    user.click(button)
-    expect(onText).toBeInTheDocument()
+    await expect.element(button).toHaveAttribute("data-value", "from")
+    expect(button.element()).toHaveTextContent("ON")
   })
 
-  test("should be disabled", () => {
-    const { container, user } = render(<Airy disabled from="ON" to="OFF" />)
+  test("should be disabled", async () => {
+    await render(<Airy disabled from="ON" to="OFF" />)
 
-    const button = container.querySelector("button") as HTMLButtonElement
-    expect(button).toHaveAttribute("data-disabled")
+    const button = page.getByRole("button")
+    await expect.element(button).toHaveAttribute("data-disabled")
+    await expect.element(button).toBeDisabled()
 
-    const onText = screen.getByText("ON")
-    expect(onText).toBeInTheDocument()
-
-    user.click(button)
-    expect(onText).toBeInTheDocument()
+    await expect.element(page.getByText("ON")).toBeVisible()
   })
 })

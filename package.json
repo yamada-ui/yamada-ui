@@ -31,8 +31,8 @@
     "build": "turbo run build --filter=./packages/**",
     "lint": "turbo run lint --filter=./packages/**",
     "lint:playgrounds": "turbo run lint --filter=./playgrounds/**",
-    "format": "turbo run format --filter=./packages/**",
-    "format:playgrounds": "turbo run format --filter=./playgrounds/**",
+    "format": "oxfmt --check",
+    "format:playgrounds": "pnpm -w format playgrounds",
     "typecheck": "turbo run typecheck --filter=./packages/**",
     "typecheck:playgrounds": "turbo run typecheck --filter=./playgrounds/**",
     "test": "turbo run test --filter=./packages/**",
@@ -73,8 +73,8 @@
     "jiti": "^2.6.1",
     "lefthook": "^2.1.4",
     "ora": "catalog:",
+    "oxfmt": "catalog:",
     "picocolors": "catalog:",
-    "prettier": "catalog:",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "rimraf": "catalog:",
@@ -84,10 +84,12 @@
     "turbo": "^2.9.3",
     "typescript": "catalog:",
     "vitest": "catalog:",
-    "wait-on": "^9.0.4"
+    "wait-on": "^9.0.5"
   },
   "pnpm": {
     "overrides": {
+      "axios": "^1.15.0",
+      "follow-redirects": "^1.16.0",
       "react": "^19.0.0",
       "react-dom": "^19.0.0"
     }

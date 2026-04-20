@@ -10,7 +10,7 @@
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
     "lint": "eslint . --max-warnings=0 --cache",
-    "format": "prettier . --ignore-path ../../../.prettierignore --check --cache",
+    "format": "pnpm -w format playgrounds/react-router/framework",
     "yamada-cli": "pnpm -C ../../../packages/cli dev"
   },
   "dependencies": {

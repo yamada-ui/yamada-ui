@@ -5,7 +5,6 @@ import {
   isArray,
   isObject,
   isString,
-  merge,
   omitObject,
 } from "@yamada-ui/utils"
 import { Command } from "commander"
@@ -348,13 +347,11 @@ export const tokens = new Command("tokens")
       await writeFileSafe(
         outPath,
         content,
-        config
-          ? merge(config, { lint: { filePath: inputPath } })
-          : {
-              cwd,
-              format: { enabled: format },
-              lint: { enabled: lint, filePath: inputPath },
-            },
+        config ?? {
+          cwd,
+          format: { enabled: format },
+          lint: { enabled: lint },
+        },
       )
 
       spinner.succeed(`Generated theme typings`)

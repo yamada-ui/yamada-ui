@@ -1,8 +1,8 @@
 "use client"
 
-import type { Doc } from "#velite"
 import type { TextProps } from "@yamada-ui/react"
 import type { RefObject } from "react"
+import type { Doc } from "#velite"
 import {
   Link,
   Separator,
@@ -24,7 +24,7 @@ interface FlattenTocEntry extends Omit<Doc["toc"][number], "items"> {
 }
 
 function flattenToc(toc: Doc["toc"], depth = 0): FlattenTocEntry[] {
-  return toc.flatMap(({ items = [], ...rest }) => [
+  return toc.flatMap(({ items, ...rest }) => [
     { ...rest, depth },
     ...flattenToc(items, depth + 1),
   ])

@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { PropsTable } from "#storybook"
 import dayjs from "dayjs"
 import { useMemo } from "react"
+import { PropsTable } from "#storybook"
 import { ComposedChart } from "."
 import { COLOR_SCHEMES, toTitleCase } from "../../utils"
 

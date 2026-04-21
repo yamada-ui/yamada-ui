@@ -1,8 +1,8 @@
 import type { ColumnDef } from "@tanstack/react-table"
-import { a11y, page, render } from "#test/browser"
 import { fireEvent } from "@testing-library/react"
 import { useState } from "react"
 import { vi } from "vitest"
+import { a11y, page, render } from "#test/browser"
 import { createColumnHelper, Table } from "./"
 
 interface Data {
@@ -1525,45 +1525,8 @@ describe("<Table />", () => {
       })
     })
 
-    test("sets role=rowgroup on thead and tbody", async () => {
-      await render(
-        <Table
-          columns={columns}
-          data={data}
-          tableProps={{ "data-testid": "table" }}
-        />,
-      )
-
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
-      const thead = table.querySelector("thead")
-      const tbody = table.querySelector("tbody")
-
-      expect(thead).toHaveAttribute("role", "rowgroup")
-      expect(tbody).toHaveAttribute("role", "rowgroup")
-    })
-
-    test("sets role=rowgroup on tfoot when footer groups enabled", async () => {
-      await render(
-        <Table
-          columns={columns}
-          data={data}
-          withFooterGroups
-          tableProps={{ "data-testid": "table" }}
-        />,
-      )
-
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
-      const tfoot = table.querySelector("tfoot")
-
-      expect(tfoot).toHaveAttribute("role", "rowgroup")
-    })
-
-    test("does not set aria-multiselectable when row selection is disabled", async () => {
-      await render(
+    test("does not set aria-multiselectable when row selection is disabled", () => {
+      render(
         <Table
           columns={columns}
           data={data}

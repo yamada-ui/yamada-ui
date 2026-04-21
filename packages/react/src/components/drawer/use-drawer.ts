@@ -143,7 +143,10 @@ export const useDrawer = ({
       ...cast<HTMLMotionProps<"section">>(
         getModalContentProps(cast<HTMLProps<"section">>(props)),
       ),
-      onDragEnd: handlerAll(props.onDragEnd, onDragEnd),
+      onDragEnd: handlerAll(
+        (ev, info) => props.onDragEnd?.(ev, info),
+        onDragEnd,
+      ),
     }),
     [
       drag,

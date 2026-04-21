@@ -5,7 +5,7 @@ import { getVarName } from "../system"
 import { conditions } from "./conditions"
 import { tokenToVar } from "./utils"
 
-function createColorSchemeVariables(value: ColorScheme) {
+function createColorSchemeVariables(value: Exclude<ColorScheme, Array<any>>) {
   return function ({ system }: TransformOptions) {
     return {
       ...Object.fromEntries(

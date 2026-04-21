@@ -25,7 +25,7 @@ export function handlerAll<Y extends (ev: any, ...args: any[]) => void>(
     fns.some((fn) => {
       fn?.(ev, ...args)
 
-      return ev?.defaultPrevented
+      return ev.defaultPrevented
     })
   }
 }

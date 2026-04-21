@@ -1,7 +1,7 @@
 /* eslint-disable perfectionist/sort-objects */
 
-import type { Doc } from "#velite"
 import type { Dict } from "@yamada-ui/react"
+import type { Doc } from "#velite"
 import type { DocMap } from "@/data"
 import type { Lang } from "@/utils/i18n"
 import { writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"

@@ -242,7 +242,7 @@
         "required": false
       },
       "itemProps": {
-        "type": "Omit<TreeItemProps, \"children\" | \"label\" | \"open\" | \"query\" | \"value\">",
+        "type": "Omit<\n    TreeItemProps,\n    \"children\" | \"label\" | \"open\" | \"query\" | \"value\"\n  >",
         "description": "Props for the item component.",
         "required": false
       },
@@ -542,7 +542,7 @@
       "required": false
     },
     "itemProps": {
-      "type": "Omit<TreeItemProps, \"children\" | \"label\" | \"open\" | \"query\" | \"value\">",
+      "type": "Omit<\n    TreeItemProps,\n    \"children\" | \"label\" | \"open\" | \"query\" | \"value\"\n  >",
       "description": "Props for the item component.",
       "required": false
     },

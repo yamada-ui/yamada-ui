@@ -38,17 +38,6 @@ cd yamada-ui
 - **`pnpm typecheck`**: すべてのパッケージに対して型チェックを実行します。
 - **`pnpm test`**: すべてのパッケージに対してテストを実行します。
 
-### Visual Studio Code
-
-拡張機能を正しく動作させるために、`.vscode/setting.json`に以下の設定を追加してください。
-
-```json
-{
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "eslint.workingDirectories": [{ "mode": "auto" }]
-}
-```
-
 ## AI利用ポリシー
 
 Yamada UIは、人工知能（AI）ツールの支援を活用した貢献を含め、すべての方からの貢献を歓迎します。AIを用いて貢献を行う場合は、以下の[AI利用ポリシー](./AI_POLICY.ja.md)に従ってください。

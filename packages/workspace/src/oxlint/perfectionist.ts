@@ -1,6 +1,5 @@
-import type { ConfigWithExtends } from "@eslint/config-helpers"
-import perfectionistPlugin from "eslint-plugin-perfectionist"
-import { sharedFiles } from "./shared"
+import { defineConfig } from "oxlint"
+import { sharedFiles } from "./shared.ts"
 
 const type = "natural"
 
@@ -163,64 +162,69 @@ const sortObjectTypeGroups = {
   ],
 }
 
-export const perfectionistConfig = {
-  name: "perfectionist",
-  files: sharedFiles,
-  plugins: { perfectionist: perfectionistPlugin },
-  rules: {
-    "perfectionist/sort-exports": [
-      "error",
-      {
-        type,
-        customGroups: [
+export const perfectionistConfig = defineConfig({
+  overrides: [
+    {
+      files: sharedFiles,
+      jsPlugins: [import.meta.resolve("eslint-plugin-perfectionist")],
+      rules: {
+        "perfectionist/sort-exports": [
+          "error",
           {
-            anyOf: [{ elementNamePattern: [".style(.js|.jsx|.ts|.tsx)?$"] }],
-            groupName: "style",
+            type,
+            customGroups: [
+              {
+                anyOf: [
+                  { elementNamePattern: [".style(.js|.jsx|.ts|.tsx)?$"] },
+                ],
+                groupName: "style",
+              },
+            ],
+            groups: ["style"],
+            partitionByNewLine: true,
           },
         ],
-        groups: ["style"],
-        partitionByNewLine: true,
-      },
-    ],
-    "perfectionist/sort-imports": [
-      "error",
-      {
-        type,
-        groups: [
-          "type-import",
-          ["type-parent", "type-sibling", "type-index"],
-          "type-internal",
-          ["value-builtin", "value-external"],
-          "value-internal",
-          ["value-parent", "value-sibling", "value-index"],
-          "ts-equals-import",
-          "unknown",
+        "perfectionist/sort-imports": [
+          "error",
+          {
+            type,
+            groups: [
+              "type-import",
+              ["type-parent", "type-sibling", "type-index"],
+              "type-internal",
+              ["value-builtin", "value-external"],
+              "value-internal",
+              ["value-parent", "value-sibling", "value-index"],
+              "ts-equals-import",
+              "unknown",
+            ],
+            newlinesBetween: "ignore",
+            newlinesInside: "ignore",
+            partitionByNewLine: true,
+          },
         ],
-        newlinesBetween: "ignore",
-        newlinesInside: "ignore",
-        partitionByNewLine: true,
-      },
-    ],
 
-    "perfectionist/sort-array-includes": ["warn", { type }],
-    "perfectionist/sort-interfaces": [
-      "warn",
-      { type, partitionByNewLine: true, ...sortObjectTypeGroups },
-    ],
-    "perfectionist/sort-intersection-types": ["warn", { type }],
-    "perfectionist/sort-jsx-props": ["warn", { type, ...sortObjectGroups }],
-    "perfectionist/sort-maps": ["warn", { type }],
-    "perfectionist/sort-named-exports": ["warn", { type }],
-    "perfectionist/sort-named-imports": ["warn", { type }],
-    "perfectionist/sort-object-types": [
-      "warn",
-      { type, partitionByNewLine: true, ...sortObjectTypeGroups },
-    ],
-    "perfectionist/sort-objects": [
-      "warn",
-      { type, partitionByNewLine: true, ...sortObjectGroups },
-    ],
-    "perfectionist/sort-sets": ["warn", { type }],
-    "perfectionist/sort-union-types": ["warn", { type }],
-  },
-} satisfies ConfigWithExtends
+        "perfectionist/sort-array-includes": ["warn", { type }],
+        "perfectionist/sort-interfaces": [
+          "warn",
+          { type, partitionByNewLine: true, ...sortObjectTypeGroups },
+        ],
+        "perfectionist/sort-intersection-types": ["warn", { type }],
+        "perfectionist/sort-jsx-props": ["warn", { type, ...sortObjectGroups }],
+        "perfectionist/sort-maps": ["warn", { type }],
+        "perfectionist/sort-named-exports": ["warn", { type }],
+        "perfectionist/sort-named-imports": ["warn", { type }],
+        "perfectionist/sort-object-types": [
+          "warn",
+          { type, partitionByNewLine: true, ...sortObjectTypeGroups },
+        ],
+        "perfectionist/sort-objects": [
+          "warn",
+          { type, partitionByNewLine: true, ...sortObjectGroups },
+        ],
+        "perfectionist/sort-sets": ["warn", { type }],
+        "perfectionist/sort-union-types": ["warn", { type }],
+      },
+    },
+  ],
+})

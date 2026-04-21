@@ -33,11 +33,11 @@ const INDEX = `<!doctype html>
 `
 const VITE_CONFIG = `import react from "@vitejs/plugin-react-swc"
 import { defineConfig } from "vite"
-import tsconfigPaths from "vite-tsconfig-paths"
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tsconfigPaths()],
+  plugins: [react()],
+  resolve: { tsconfigPaths: true },
 })
 `
 const MAIN = `import { Box, UIProvider } from "@yamada-ui/react"
@@ -421,7 +421,6 @@ const PACKAGE = {
     "@vitejs/plugin-react-swc": "^4",
     typescript: "^5",
     vite: "^7",
-    "vite-tsconfig-paths": "^6",
   },
 }
 const TSCONFIG = {

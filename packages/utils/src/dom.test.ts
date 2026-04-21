@@ -63,7 +63,7 @@ describe("DOM", () => {
     })
 
     test("should return false when document.createElement is unavailable", () => {
-      const origCreateElement = document.createElement
+      const origCreateElement = document.createElement.bind(document)
       Object.defineProperty(document, "createElement", {
         configurable: true,
         value: undefined,
@@ -95,6 +95,8 @@ describe("DOM", () => {
 
     test("should return fallback when DOM is not created", () => {
       const origCreateElement = document.createElement
+        .bind(document)
+        .bind(document)
       Object.defineProperty(document, "createElement", {
         configurable: true,
         value: undefined,
@@ -120,7 +122,7 @@ describe("DOM", () => {
     })
 
     test("should return fallback when DOM is not created", () => {
-      const origCreateElement = document.createElement
+      const origCreateElement = document.createElement.bind(document)
       Object.defineProperty(document, "createElement", {
         configurable: true,
         value: undefined,
@@ -515,7 +517,7 @@ describe("DOM", () => {
     })
 
     test("should return fallback when DOM is not created", () => {
-      const origCreateElement = document.createElement
+      const origCreateElement = document.createElement.bind(document)
       Object.defineProperty(document, "createElement", {
         configurable: true,
         value: undefined,
@@ -788,7 +790,7 @@ describe("DOM", () => {
     })
 
     test("should use default font size when DOM is not created", () => {
-      const origCreateElement = document.createElement
+      const origCreateElement = document.createElement.bind(document)
       Object.defineProperty(document, "createElement", {
         configurable: true,
         value: undefined,

@@ -1,7 +1,7 @@
 import type { ColumnDef } from "@tanstack/react-table"
-import { a11y, fireEvent, render, screen } from "#test"
 import { useState } from "react"
 import { vi } from "vitest"
+import { a11y, fireEvent, render, screen } from "#test"
 import { createColumnHelper, Table } from "./"
 
 interface Data {

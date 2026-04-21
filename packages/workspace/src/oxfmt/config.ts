@@ -5,6 +5,7 @@ export default defineConfig({
   ignorePatterns: [
     ".turbo",
     ".next",
+    ".react-router",
     ".velite",
     "dist",
     "trace",
@@ -12,6 +13,7 @@ export default defineConfig({
     "coverage",
     "storybook-static",
     "routeTree.gen.ts",
+    "next-env.d.ts",
   ],
   jsxSingleQuote: false,
   printWidth: 80,

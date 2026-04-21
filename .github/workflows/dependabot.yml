@@ -1,0 +1,133 @@
+name: Dependabot
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+    paths:
+      - "packages/*/package.json"
+      - "pnpm-workspace.yaml"
+
+permissions:
+  contents: write
+  pull-requests: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  changeset:
+    name: Changeset
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      PR: ${{ github.event.pull_request.number }}
+      BASE: ${{ github.event.pull_request.base.ref }}
+      HEAD_REF: ${{ github.head_ref }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PAT_TOKEN }}
+          ref: ${{ github.head_ref }}
+
+      - name: Install
+        uses: ./.github/composite-actions/install
+
+      - name: Fetch
+        run: git fetch origin "$BASE" --depth=1
+
+      - name: Generate icons changeset
+        run: |
+          set -euo pipefail
+
+          react_diff=$(git diff "origin/$BASE"...HEAD -- packages/react/package.json || true)
+
+          if ! echo "$react_diff" | grep -qE '^\+[^+].*"lucide-react"'; then
+            echo "lucide-react not bumped, skipping."
+            exit 0
+          fi
+
+          pnpm react gen:icons
+          cat > ".changeset/dependabot-icons-$PR.md" <<'EOF'
+          ---
+          "@yamada-ui/react": patch
+          ---
+
+          Updated icons.
+          EOF
+
+      - name: Generate styles changeset
+        run: |
+          set -euo pipefail
+
+          react_diff=$(git diff "origin/$BASE"...HEAD -- packages/react/package.json || true)
+
+          if ! echo "$react_diff" | grep -qE '^\+[^+].*"(web-features|@mdn/browser-compat-data)"'; then
+            echo "web-features / @mdn/browser-compat-data not bumped, skipping."
+            exit 0
+          fi
+
+          pnpm react gen:styles
+          cat > ".changeset/dependabot-styles-$PR.md" <<'EOF'
+          ---
+          "@yamada-ui/react": patch
+          ---
+
+          Updated style props.
+          EOF
+
+      - name: Generate dependencies changeset
+        run: |
+          set -euo pipefail
+
+          changed_catalog=$(git diff "origin/$BASE"...HEAD -- pnpm-workspace.yaml \
+            | grep -E '^\+[^+]' \
+            | grep -oE '"[^"]+":|[A-Za-z@][A-Za-z0-9_./@-]*:' \
+            | tr -d '":' \
+            | sort -u || true)
+
+          for pkg in cli react utils; do
+            pkg_json="packages/$pkg/package.json"
+
+            if [ "$pkg" = "react" ]; then
+              exclude_pattern='"(lucide-react|web-features|@mdn/browser-compat-data)":'
+            else
+              exclude_pattern='^$'
+            fi
+            direct_change=$(git diff "origin/$BASE"...HEAD -- "$pkg_json" \
+              | grep -E '^\+[^+].*":' \
+              | grep -v '"catalog:"' \
+              | grep -vE "$exclude_pattern" \
+              || true)
+
+            catalog_hit=""
+            for dep in $changed_catalog; do
+              [ -z "$dep" ] && continue
+              if grep -qE "\"$dep\": *\"catalog:\"" "$pkg_json"; then
+                catalog_hit=1
+                break
+              fi
+            done
+
+            if [ -n "$direct_change" ] || [ -n "$catalog_hit" ]; then
+              cat > ".changeset/dependabot-deps-$pkg-$PR.md" <<EOF
+          ---
+          "@yamada-ui/$pkg": patch
+          ---
+
+          Updated dependencies.
+          EOF
+            fi
+          done
+
+      - name: Update branch
+        run: |
+          set -euo pipefail
+          git add .changeset packages/react/src/components/icon/icons packages/react/src/core/css/styles.ts
+          git diff --staged --exit-code || git commit -m "ci(dependabot): update dependabot changeset"
+          git push origin "HEAD:$HEAD_REF"

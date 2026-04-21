@@ -51,7 +51,7 @@
     "./hooks/*": "./src/hooks/*/index.ts"
   },
   "scripts": {
-    "clean": "rimraf node_modules dist trace coverage storybook-static .turbo .eslintcache .vitest-attachments __screenshots__",
+    "clean": "rimraf node_modules dist trace coverage storybook-static .turbo .vitest-attachments __screenshots__",
     "prebuild": "pnpm gen:tokens",
     "build": "tsdown",
     "storybook": "storybook dev -p 6006 -c storybook",
@@ -74,7 +74,7 @@
     "typecheck": "tsc",
     "typetrace": "tsc --generateTrace ./trace --incremental false",
     "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
-    "lint": "eslint . --max-warnings=0 --cache",
+    "lint": "oxlint . --max-warnings=0",
     "format": "pnpm -w format packages/react",
     "quality": "pnpm format && pnpm lint && pnpm typecheck && pnpm test",
     "gen:styles": "tsx scripts/generate/styles",
@@ -130,7 +130,7 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/jsdom": "^28.0.1",
     "@types/yamljs": "catalog:",
-    "@vitejs/plugin-react-swc": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
     "@vitest/browser": "^4.1.2",
     "@vitest/browser-playwright": "^4.1.2",
     "@yamada-ui/workspace": "workspace:*",

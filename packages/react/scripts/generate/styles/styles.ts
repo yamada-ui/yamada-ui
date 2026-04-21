@@ -113,24 +113,21 @@ export function generateStyles(
   tokenProps: { [key in ThemeToken]?: string[] },
   variableLengthProps: string[],
 ) {
-  const shorthandStyles: string[] = []
-  const styleProps: string[] = []
+  const shorthandStyles: [string, string][] = []
+  const styleProps: [string, string, string?][] = []
 
   function generateStyles([prop, config]: [string, Config]) {
     const doc = generateDoc(config.docs)
 
-    if (doc) styleProps.push(doc)
-
-    styleProps.push(`${prop}?: ${config.type}`)
+    styleProps.push([prop, `${config.type}`, doc])
 
     config.shorthands?.forEach((shorthandProp) => {
-      shorthandStyles.push(
-        `${shorthandProp}: ${config.as ? `{ properties: ["${prop}"] }` : `standardStyles.${prop}`}`,
-      )
+      shorthandStyles.push([
+        shorthandProp,
+        config.as ? `{ properties: ["${prop}"] }` : `standardStyles.${prop}`,
+      ])
 
-      if (doc) styleProps.push(doc)
-
-      styleProps.push(`${shorthandProp}?: ${config.type}`)
+      styleProps.push([shorthandProp, `${config.type}`, doc])
     })
 
     return `${prop}: ${generateConfig(config)}`
@@ -139,9 +136,9 @@ export function generateStyles(
   const pseudoStyles = Object.entries(pseudo).map(
     ([prop, config]) => `"${prop}": ${generateConfig(config)}`,
   )
-  const standardStyles = Object.entries({ ...standard, ...additional }).map(
-    generateStyles,
-  )
+  const standardStyles = Object.entries({ ...standard, ...additional })
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .map(generateStyles)
   const styledStyles = Object.entries(styled).map(generateStyles)
   const atRuleStyles = Object.entries(atRule).map(generateStyles)
 
@@ -152,6 +149,7 @@ export function generateStyles(
     ([name, tokens]) => {
       const properties = tokens
         .flatMap((token) => tokenProps[token] ?? [])
+        .sort((a, b) => a.localeCompare(b))
         .map((property) => `"${property}"`)
       const typeName = name.charAt(0).toUpperCase() + name.slice(1)
 
@@ -180,7 +178,10 @@ export function generateStyles(
     `export type ShorthandStyleProperty = keyof typeof shorthandStyles`,
     ``,
     `export const shorthandStyles = {`,
-    shorthandStyles.join(",\n"),
+    shorthandStyles
+      .sort((a, b) => a[0].localeCompare(b[0]))
+      .map(([name, value]) => `${name}: ${value}`)
+      .join(",\n"),
     `} as const satisfies StyleConfigs`,
     ``,
     `export type PseudoStyleProperty = keyof typeof pseudoStyles`,
@@ -222,7 +223,12 @@ export function generateStyles(
     tokenProperties.join("\n\n"),
     ``,
     `export interface StyleProps {`,
-    styleProps.join("\n"),
+    styleProps
+      .sort((a, b) => a[0].localeCompare(b[0]))
+      .map(([name, value, doc]) =>
+        doc ? `${doc}\n${name}?: ${value}` : `${name}?: ${value}`,
+      )
+      .join("\n"),
     `}`,
   ].join("\n")
 }

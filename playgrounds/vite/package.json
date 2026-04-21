@@ -4,12 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "clean": "rimraf node_modules .eslintcache",
+    "clean": "rimraf node_modules",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "typecheck": "tsc",
-    "lint": "eslint . --max-warnings=0 --cache",
+    "lint": "oxlint . --max-warnings=0",
     "format": "pnpm -w format playgrounds/vite",
     "yamada-cli": "pnpm -C ../../packages/cli dev"
   },
@@ -19,7 +19,7 @@
     "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@vitejs/plugin-react-swc": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
     "@yamada-ui/workspace": "workspace:*",
     "vite": "catalog:"
   }

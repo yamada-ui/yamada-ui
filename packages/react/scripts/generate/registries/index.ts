@@ -561,13 +561,15 @@ function main() {
 
       spinner.start("Getting tsconfig")
 
-      const { config } = readConfigFile(CONFIG_PATH, sys.readFile)
+      const { config } = readConfigFile(CONFIG_PATH, (path) =>
+        sys.readFile(path),
+      )
       const { fileNames, options } = parseJsonConfigFileContent(
         config,
         sys,
         path.dirname(CONFIG_PATH),
       )
-      const { getSourceFile } = createProgram(fileNames, options)
+      const program = createProgram(fileNames, options)
 
       spinner.succeed("Got tsconfig")
 
@@ -585,7 +587,10 @@ function main() {
 
       spinner.start("Getting dependencies")
 
-      const dependencyMap = await getDependencies(getSourceFile, externalMap)
+      const dependencyMap = await getDependencies(
+        (fileName) => program.getSourceFile(fileName),
+        externalMap,
+      )
 
       spinner.succeed("Got dependencies")
 

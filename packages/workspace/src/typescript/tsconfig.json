@@ -9,8 +9,6 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "downlevelIteration": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "noEmit": true,

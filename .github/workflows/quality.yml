@@ -60,8 +60,8 @@ jobs:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-  eslint:
-    name: ESLint
+  lint:
+    name: Lint
     if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -81,13 +81,13 @@ jobs:
               - .github/workflows/quality.yml
             www:
               - turbo.json
-              - packages/workspace/src/eslint/**
+              - packages/workspace/src/oxlint/**
               - packages/workspace/package.json
               - www/**/*.{ts,tsx,mts,mdx}
               - www/package.json
               - www/tsconfig.json
               - www/turbo.json
-              - www/eslint.config.ts
+              - .github/workflows/quality.yml
 
       - name: Install
         if: steps.changed-files.outputs.changed_keys != ''

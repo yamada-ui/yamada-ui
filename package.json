@@ -27,12 +27,12 @@
     "vite": "pnpm -C playgrounds/vite",
     "tanstack:router": "pnpm -C playgrounds/tanstack/router",
     "tanstack:start": "pnpm -C playgrounds/tanstack/start",
-    "clean": "pnpm -r --parallel run clean && pnpm rimraf .turbo *.log .eslintcache node_modules",
+    "clean": "pnpm -r --parallel run clean && pnpm rimraf .turbo *.log node_modules",
     "build": "turbo run build --filter=./packages/**",
     "lint": "turbo run lint --filter=./packages/**",
     "lint:playgrounds": "turbo run lint --filter=./playgrounds/**",
-    "format": "turbo run format --filter=./packages/**",
-    "format:playgrounds": "turbo run format --filter=./playgrounds/**",
+    "format": "oxfmt --check",
+    "format:playgrounds": "pnpm -w format playgrounds",
     "typecheck": "turbo run typecheck --filter=./packages/**",
     "typecheck:playgrounds": "turbo run typecheck --filter=./playgrounds/**",
     "test": "turbo run test --filter=./packages/**",
@@ -69,12 +69,12 @@
     "clean-package": "^2.2.0",
     "commander": "catalog:",
     "dayjs": "catalog:",
-    "eslint": "catalog:",
-    "jiti": "^2.6.1",
     "lefthook": "^2.1.4",
     "ora": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
+    "oxlint-tsgolint": "catalog:",
     "picocolors": "catalog:",
-    "prettier": "catalog:",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "rimraf": "catalog:",
@@ -84,12 +84,15 @@
     "turbo": "^2.9.3",
     "typescript": "catalog:",
     "vitest": "catalog:",
-    "wait-on": "^9.0.4"
+    "wait-on": "^9.0.5"
   },
   "pnpm": {
     "overrides": {
+      "axios": "^1.15.0",
+      "follow-redirects": "^1.16.0",
       "react": "^19.0.0",
-      "react-dom": "^19.0.0"
+      "react-dom": "^19.0.0",
+      "jsdom": "29.0.1"
     }
   }
 }

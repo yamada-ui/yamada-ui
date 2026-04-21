@@ -231,6 +231,7 @@
     "tsbuildinfo",
     "tsdown",
     "tsgolint",
+    "tsrouter",
     "tsunade",
     "tsup",
     "turbopack",

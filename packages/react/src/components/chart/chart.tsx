@@ -131,10 +131,6 @@ export function mergeData<Y>(
   return data.map((item, index) => ({ ...item, fill: colors[index] }))
 }
 
-export const a: ExtractStyleValueWithCondition<CSSProps["color"]> = {
-  base: "mono",
-}
-
 export function gradients(
   length: number,
   color: ExtractStyleValueWithCondition<CSSProps["color"]> = "mono",

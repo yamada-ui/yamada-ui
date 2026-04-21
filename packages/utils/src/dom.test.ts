@@ -94,9 +94,7 @@ describe("DOM", () => {
     })
 
     test("should return fallback when DOM is not created", () => {
-      const origCreateElement = document.createElement
-        .bind(document)
-        .bind(document)
+      const origCreateElement = document.createElement.bind(document)
       Object.defineProperty(document, "createElement", {
         configurable: true,
         value: undefined,

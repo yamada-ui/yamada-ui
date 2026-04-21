@@ -19,7 +19,7 @@
     "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@vitejs/plugin-react-swc": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
     "@yamada-ui/workspace": "workspace:*",
     "vite": "catalog:"
   }

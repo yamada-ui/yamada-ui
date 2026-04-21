@@ -31,7 +31,7 @@ const INDEX = `<!doctype html>
   </body>
 </html>
 `
-const VITE_CONFIG = `import react from "@vitejs/plugin-react-swc"
+const VITE_CONFIG = `import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
 
 // https://vite.dev/config/
@@ -418,7 +418,7 @@ const PACKAGE = {
     "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@vitejs/plugin-react-swc": "^4",
+    "@vitejs/plugin-react": "^4",
     typescript: "^5",
     vite: "^7",
   },

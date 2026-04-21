@@ -1053,7 +1053,7 @@ describe("<Select />", () => {
         items={items}
         multiple
         placeholder="Choose"
-        render={({ label, value }) => (value ? `${label}` : null)}
+        render={({ label, value }) => (value ? label : null)}
       />,
     )
 

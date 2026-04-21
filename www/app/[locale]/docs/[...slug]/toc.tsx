@@ -24,7 +24,7 @@ interface FlattenTocEntry extends Omit<Doc["toc"][number], "items"> {
 }
 
 function flattenToc(toc: Doc["toc"], depth = 0): FlattenTocEntry[] {
-  return toc.flatMap(({ items = [], ...rest }) => [
+  return toc.flatMap(({ items, ...rest }) => [
     { ...rest, depth },
     ...flattenToc(items, depth + 1),
   ])

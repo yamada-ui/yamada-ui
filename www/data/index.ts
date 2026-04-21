@@ -103,7 +103,7 @@ function getFragments(
   group?: string,
   lv = 2,
 ): FragmentContent[] {
-  return toc.flatMap(({ items = [], title, url }) => {
+  return toc.flatMap(({ items, title, url }) => {
     return [
       {
         type: "fragment",

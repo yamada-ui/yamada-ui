@@ -98,7 +98,7 @@ export const Variant: Story = () => {
       {(_, row, key) => {
         const variantItems = items.map((item) => ({
           ...item,
-          button: `${item.button} (${row})`,
+          button: `${item.button as string} (${row})`,
         }))
 
         return <Accordion.Root key={key} variant={row} items={variantItems} />

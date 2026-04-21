@@ -849,7 +849,7 @@ export const Table = withContext(
             tableProps ?? {},
           )()}
         >
-          <NativeTable.Thead role="rowgroup" {...theadProps}>
+          <NativeTable.Thead {...theadProps}>
             {mergedHeaderGroups.map((headerGroup, rowIndex) => {
               let placeholderCount = 0
 
@@ -949,7 +949,7 @@ export const Table = withContext(
             })}
           </NativeTable.Thead>
 
-          <NativeTable.Tbody role="rowgroup" {...tbodyProps}>
+          <NativeTable.Tbody {...tbodyProps}>
             {rows.map((row, rowIndex) => {
               rowIndex += headerGroupCount
 
@@ -1029,7 +1029,7 @@ export const Table = withContext(
           </NativeTable.Tbody>
 
           {withFooterGroups ? (
-            <NativeTable.Tfoot role="rowgroup" {...tfootProps}>
+            <NativeTable.Tfoot {...tfootProps}>
               {mergedFooterGroups.map((footerGroup, rowIndex) => {
                 rowIndex += headerGroupCount + rowCount
 

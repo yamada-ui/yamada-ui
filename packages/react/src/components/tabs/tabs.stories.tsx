@@ -500,7 +500,6 @@ export const Dynamic: Story = () => {
                   variant="ghost"
                   aria-label="Remove Tab"
                   icon={<XIcon />}
-                  role="button"
                   onClick={(ev) => {
                     ev.stopPropagation()
                     onRemoveTab(id!)
@@ -514,7 +513,6 @@ export const Dynamic: Story = () => {
         <Button
           size="xs"
           variant="ghost"
-          role="tab"
           startIcon={<PlusIcon />}
           onClick={onAddTab}
         >

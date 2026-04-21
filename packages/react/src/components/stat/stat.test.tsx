@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Stat } from "./"
 
 const TestComponent = () => (
@@ -25,31 +25,35 @@ describe("<Stat />", () => {
     expect(Stat.Icon.displayName).toBe("StatIcon")
   })
 
-  test("sets `className` correctly", () => {
-    render(<TestComponent />)
+  test("sets `className` correctly", async () => {
+    await render(<TestComponent />)
 
-    expect(screen.getByTestId("root")).toHaveClass("ui-stat__root")
-    expect(screen.getByTestId("label")).toHaveClass("ui-stat__label")
-    expect(screen.getByTestId("value")).toHaveClass("ui-stat__value")
-    expect(screen.getByTestId("helper-message")).toHaveClass(
-      "ui-stat__helper-message",
-    )
-    expect(screen.getByTestId("icon")).toHaveClass("ui-stat__icon")
+    await expect.element(page.getByTestId("root")).toHaveClass("ui-stat__root")
+    await expect
+      .element(page.getByTestId("label"))
+      .toHaveClass("ui-stat__label")
+    await expect
+      .element(page.getByTestId("value"))
+      .toHaveClass("ui-stat__value")
+    await expect
+      .element(page.getByTestId("helper-message"))
+      .toHaveClass("ui-stat__helper-message")
+    await expect.element(page.getByTestId("icon")).toHaveClass("ui-stat__icon")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<TestComponent />)
+  test("renders HTML tag correctly", async () => {
+    await render(<TestComponent />)
 
-    expect(screen.getByTestId("root").tagName).toBe("DL")
-    expect(screen.getByTestId("label").tagName).toBe("DT")
-    expect(screen.getByTestId("value").tagName).toBe("DD")
-    expect(screen.getByTestId("helper-message").tagName).toBe("DD")
-    expect(screen.getByTestId("icon").tagName).toBe("svg")
+    expect(page.getByTestId("root").element().tagName).toBe("DL")
+    expect(page.getByTestId("label").element().tagName).toBe("DT")
+    expect(page.getByTestId("value").element().tagName).toBe("DD")
+    expect(page.getByTestId("helper-message").element().tagName).toBe("DD")
+    expect(page.getByTestId("icon").element().tagName).toBe("svg")
   })
 
   //display decrease icon
-  test("should change to decrease symbol", () => {
-    render(
+  test("should change to decrease symbol", async () => {
+    await render(
       <Stat.Root
         data-testid="stat-icon"
         helperMessage="21% more than last month"
@@ -59,7 +63,7 @@ describe("<Stat />", () => {
       />,
     )
     expect(
-      screen.getByTestId("stat-icon").getElementsByTagName("svg")[0],
+      page.getByTestId("stat-icon").element().getElementsByTagName("svg")[0],
     ).toHaveAttribute("aria-label", "Decreased by")
   })
 })

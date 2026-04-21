@@ -23,6 +23,7 @@ updates:
           - "*"
         exclude-patterns:
           - "@changesets/*"
+          - "*oxlint*"
           - "*eslint*"
           - "react"
           - "react-dom"
@@ -33,8 +34,9 @@ updates:
       changesets:
         patterns:
           - "@changesets/*"
-      eslint:
+      lint:
         patterns:
+          - "*oxlint*"
           - "*eslint*"
       react:
         patterns:

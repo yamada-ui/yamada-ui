@@ -10,9 +10,7 @@ catalog:
   "@tanstack/react-router": ^1.168.10
   "@testing-library/jest-dom": ^6.9.1
   "@types/yamljs": ^0.2.34
-  "@typescript-eslint/parser": ^8.58.0
   "@vitejs/plugin-react": ^6.0.1
-  "@vitejs/plugin-react-swc": ^4.3.0
   "@vitest/ui": ^4.1.2
   commander: ^14.0.3
   dayjs: ^1.11.20
@@ -21,7 +19,10 @@ catalog:
   "eslint-plugin-unused-imports": ^4.4.1
   motion: ^12.38.0
   next: ^16.2.2
+  oxlint: ^1.60.0
+  oxlint-tsgolint: ^0.21.1
   ora: ^9.3.0
+  oxfmt: ^0.45.0
   picocolors: ^1.1.1
   prettier: ^3.8.1
   react: ^19.2.4
@@ -32,9 +33,8 @@ catalog:
   scroll-into-view-if-needed: ^3.1.0
   sucrase: ^3.35.1
   tsx: ^4.21.0
-  typescript: ^5.9.3
+  typescript: ^6.0.3
   vite: ^8.0.3
-  vite-tsconfig-paths: ^6.1.1
   vitest: ^4.1.2
   vitest-axe: ^0.1.0
   yamljs: ^0.3.0

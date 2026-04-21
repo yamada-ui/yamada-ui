@@ -35,7 +35,6 @@ yarn-error.log*
 next-env.d.ts
 
 # cache
-.eslintcache
 .turbo
 .next
 .vitest-attachments

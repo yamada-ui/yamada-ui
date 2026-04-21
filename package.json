@@ -91,7 +91,8 @@
       "axios": "^1.15.0",
       "follow-redirects": "^1.16.0",
       "react": "^19.0.0",
-      "react-dom": "^19.0.0"
+      "react-dom": "^19.0.0",
+      "jsdom": "29.0.1"
     }
   }
 }

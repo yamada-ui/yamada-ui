@@ -136,7 +136,7 @@
     "@yamada-ui/workspace": "workspace:*",
     "axe-core": "^4.11.2",
     "axe-playwright": "^2.2.2",
-    "jsdom": "29.0.1",
+    "jsdom": "^29.0.1",
     "playwright": "^1.59.1",
     "react-hook-form": "catalog:",
     "react-icons": "catalog:",

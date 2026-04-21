@@ -33,11 +33,11 @@ const INDEX = `<!doctype html>
 `
 const VITE_CONFIG = `import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
+import tsconfigPaths from "vite-tsconfig-paths"
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  resolve: { tsconfigPaths: true },
+  plugins: [react(), tsconfigPaths()],
 })
 `
 const MAIN = `import { Box, UIProvider } from "@yamada-ui/react"
@@ -415,12 +415,13 @@ const PACKAGE = {
     "@faker-js/faker": "^10",
   },
   devDependencies: {
-    "@types/node": "^24",
+    "@types/node": "^25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^4",
-    typescript: "^5",
-    vite: "^7",
+    typescript: "^6",
+    vite: "^8",
+    "vite-tsconfig-paths": "^6",
   },
 }
 const TSCONFIG = {

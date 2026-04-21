@@ -2,8 +2,8 @@
 
 The following hooks run automatically on commit.
 
-| Hook       | Description                                                                       |
-| ---------- | --------------------------------------------------------------------------------- |
-| lint       | Runs with `--fix --max-warnings=0` and `stage_fixed: true` to auto-restage fixes. |
-| format     | Runs with `--write` and `stage_fixed: true` to auto-restage fixes.                |
-| commitlint | Validates Conventional Commits format.                                            |
+| Hook             | Description                                                                                    |
+| ---------------- | ---------------------------------------------------------------------------------------------- |
+| lint & typecheck | Runs with `--fix --type-check --max-warnings=0` and `stage_fixed: true` to auto-restage fixes. |
+| format           | Runs with `--write` and `stage_fixed: true` to auto-restage fixes.                             |
+| commitlint       | Validates Conventional Commits format.                                                         |

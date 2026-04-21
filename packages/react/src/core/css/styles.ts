@@ -2032,6 +2032,7 @@ export type SizeProperty = (typeof sizeProperties)[number]
 export const sizeProperties = [
   "backfaceVisibility",
   "blockSize",
+  "boxSize",
   "columnWidth",
   "containIntrinsicWidth",
   "flexBasis",
@@ -2039,26 +2040,25 @@ export const sizeProperties = [
   "gridAutoRows",
   "gridTemplateColumns",
   "gridTemplateRows",
-  "height",
   "h",
+  "height",
   "inlineSize",
   "maxBlockSize",
-  "maxHeight",
-  "maxH",
-  "maxInlineSize",
-  "maxWidth",
-  "maxW",
-  "minBlockSize",
-  "minHeight",
-  "minH",
-  "minInlineSize",
-  "minWidth",
-  "minW",
-  "width",
-  "w",
-  "boxSize",
   "maxBoxSize",
+  "maxH",
+  "maxHeight",
+  "maxInlineSize",
+  "maxW",
+  "maxWidth",
+  "minBlockSize",
   "minBoxSize",
+  "minH",
+  "minHeight",
+  "minInlineSize",
+  "minW",
+  "minWidth",
+  "w",
+  "width",
 ] as const
 
 export type AnimationProperty = (typeof animationProperties)[number]
@@ -2071,7 +2071,7 @@ export const aspectRatioProperties = ["aspectRatio"] as const
 
 export type BlurProperty = (typeof blurProperties)[number]
 
-export const blurProperties = ["blur", "backdropBlur"] as const
+export const blurProperties = ["backdropBlur", "blur"] as const
 
 export type BorderProperty = (typeof borderProperties)[number]
 
@@ -2081,14 +2081,14 @@ export const borderProperties = [
   "borderBlockEnd",
   "borderBlockStart",
   "borderBottom",
+  "borderEnd",
   "borderImage",
   "borderInline",
   "borderInlineEnd",
-  "borderEnd",
   "borderInlineStart",
-  "borderStart",
   "borderLeft",
   "borderRight",
+  "borderStart",
   "borderTop",
   "borderX",
   "borderY",
@@ -2097,41 +2097,41 @@ export const borderProperties = [
 export type ColorProperty = (typeof colorProperties)[number]
 
 export const colorProperties = [
-  "color",
-  "textColor",
-  "floodColor",
-  "lightingColor",
-  "stopColor",
-  "stroke",
-  "accentColor",
   "accent",
+  "accentColor",
   "background",
-  "bg",
   "backgroundColor",
+  "bg",
   "bgColor",
   "borderBlockColor",
   "borderBlockEndColor",
   "borderBlockStartColor",
   "borderBottomColor",
   "borderColor",
+  "borderEndColor",
   "borderInlineColor",
   "borderInlineEndColor",
-  "borderEndColor",
   "borderInlineStartColor",
-  "borderStartColor",
   "borderLeftColor",
   "borderRightColor",
+  "borderStartColor",
   "borderTopColor",
-  "caretColor",
   "caret",
+  "caretColor",
+  "color",
   "columnRuleColor",
   "fill",
+  "floodColor",
+  "focusRingColor",
+  "lightingColor",
   "outlineColor",
   "scrollbarColor",
+  "stopColor",
+  "stroke",
   "strokeColor",
+  "textColor",
   "textDecorationColor",
   "textEmphasisColor",
-  "focusRingColor",
 ] as const
 
 export type DurationProperty = (typeof durationProperties)[number]
@@ -2153,11 +2153,11 @@ export type FontProperty = (typeof fontProperties)[number]
 export const fontProperties = [
   "fontFamily",
   "fontSize",
-  "text",
   "fontWeight",
-  "lineHeight",
   "leading",
   "letterSpacing",
+  "lineHeight",
+  "text",
   "tracking",
 ] as const
 
@@ -2165,9 +2165,9 @@ export type GradientProperty = (typeof gradientProperties)[number]
 
 export const gradientProperties = [
   "backgroundImage",
+  "bgGradient",
   "bgImage",
   "bgImg",
-  "bgGradient",
   "borderImageSource",
   "listStyleImage",
   "listStyleImg",
@@ -2176,57 +2176,57 @@ export const gradientProperties = [
 
 export type KeyframeProperty = (typeof keyframeProperties)[number]
 
-export const keyframeProperties = ["animationName", "_keyframes"] as const
+export const keyframeProperties = ["_keyframes", "animationName"] as const
 
 export type RadiusProperty = (typeof radiusProperties)[number]
 
 export const radiusProperties = [
-  "borderBottomLeftRadius",
-  "roundedBottomLeft",
-  "borderBottomRightRadius",
-  "roundedBottomRight",
-  "borderEndEndRadius",
   "borderBottomEndRadius",
-  "roundedBottomEnd",
-  "borderEndStartRadius",
-  "borderBottomStartRadius",
-  "roundedBottomStart",
-  "borderRadius",
-  "rounded",
-  "borderStartEndRadius",
-  "borderTopEndRadius",
-  "roundedTopEnd",
-  "borderStartStartRadius",
-  "borderTopStartRadius",
-  "roundedTopStart",
-  "borderTopLeftRadius",
-  "roundedTopLeft",
-  "borderTopRightRadius",
-  "roundedTopRight",
+  "borderBottomLeftRadius",
   "borderBottomRadius",
-  "roundedBottom",
-  "borderInlineEndRadius",
+  "borderBottomRightRadius",
+  "borderBottomStartRadius",
+  "borderEndEndRadius",
   "borderEndRadius",
-  "roundedEnd",
+  "borderEndStartRadius",
+  "borderInlineEndRadius",
   "borderInlineStartRadius",
-  "borderStartRadius",
-  "roundedStart",
   "borderLeftRadius",
-  "roundedLeft",
+  "borderRadius",
   "borderRightRadius",
-  "roundedRight",
+  "borderStartEndRadius",
+  "borderStartRadius",
+  "borderStartStartRadius",
+  "borderTopEndRadius",
+  "borderTopLeftRadius",
   "borderTopRadius",
+  "borderTopRightRadius",
+  "borderTopStartRadius",
+  "rounded",
+  "roundedBottom",
+  "roundedBottomEnd",
+  "roundedBottomLeft",
+  "roundedBottomRight",
+  "roundedBottomStart",
+  "roundedEnd",
+  "roundedLeft",
+  "roundedRight",
+  "roundedStart",
   "roundedTop",
+  "roundedTopEnd",
+  "roundedTopLeft",
+  "roundedTopRight",
+  "roundedTopStart",
 ] as const
 
 export type ShadowProperty = (typeof shadowProperties)[number]
 
 export const shadowProperties = [
+  "backdropDropShadow",
   "boxShadow",
+  "dropShadow",
   "shadow",
   "textShadow",
-  "dropShadow",
-  "backdropDropShadow",
 ] as const
 
 export type SpaceProperty = (typeof spaceProperties)[number]
@@ -2234,97 +2234,97 @@ export type SpaceProperty = (typeof spaceProperties)[number]
 export const spaceProperties = [
   "bottom",
   "columnGap",
-  "gx",
-  "gapX",
-  "gap",
+  "focusRingOffset",
   "g",
+  "gap",
+  "gapX",
+  "gapY",
+  "gx",
+  "gy",
   "inset",
   "insetBlock",
   "insetBlockEnd",
   "insetBlockStart",
+  "insetEnd",
   "insetInline",
   "insetInlineEnd",
-  "insetEnd",
   "insetInlineStart",
   "insetStart",
+  "insetX",
+  "insetY",
   "left",
-  "margin",
   "m",
+  "margin",
   "marginBlock",
   "marginBlockEnd",
   "marginBlockStart",
   "marginBottom",
-  "mb",
+  "marginEnd",
   "marginInline",
   "marginInlineEnd",
-  "me",
-  "marginEnd",
   "marginInlineStart",
-  "ms",
-  "marginStart",
   "marginLeft",
-  "ml",
   "marginRight",
-  "mr",
+  "marginStart",
   "marginTop",
+  "marginX",
+  "marginY",
+  "mb",
+  "me",
+  "ml",
+  "mr",
+  "ms",
   "mt",
-  "padding",
+  "mx",
+  "my",
   "p",
+  "padding",
   "paddingBlock",
   "paddingBlockEnd",
   "paddingBlockStart",
   "paddingBottom",
-  "pb",
+  "paddingEnd",
   "paddingInline",
   "paddingInlineEnd",
-  "pe",
-  "paddingEnd",
   "paddingInlineStart",
-  "ps",
-  "paddingStart",
   "paddingLeft",
-  "pl",
   "paddingRight",
-  "pr",
+  "paddingStart",
   "paddingTop",
+  "paddingX",
+  "paddingY",
+  "pb",
+  "pe",
+  "pl",
+  "pr",
+  "ps",
   "pt",
+  "px",
+  "py",
   "right",
   "rowGap",
-  "gy",
-  "gapY",
   "scrollMargin",
   "scrollMarginBottom",
   "scrollMarginLeft",
   "scrollMarginRight",
   "scrollMarginTop",
+  "scrollMarginX",
+  "scrollMarginY",
   "scrollPadding",
   "scrollPaddingBottom",
   "scrollPaddingLeft",
   "scrollPaddingRight",
   "scrollPaddingTop",
-  "top",
-  "insetX",
-  "insetY",
-  "marginX",
-  "mx",
-  "marginY",
-  "my",
-  "paddingX",
-  "px",
-  "paddingY",
-  "py",
-  "scrollMarginX",
-  "scrollMarginY",
   "scrollPaddingX",
   "scrollPaddingY",
-  "focusRingOffset",
+  "top",
   "translateX",
   "translateY",
 ] as const
 
 export type ZIndexProperty = (typeof zIndexProperties)[number]
 
-export const zIndexProperties = ["zIndex", "z"] as const
+export const zIndexProperties = ["z", "zIndex"] as const
 
 export interface StyleProps {
   /**
@@ -3592,7 +3592,6 @@ export interface StyleProps {
    */
   borderBottomRadius?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderBottomRightRadius
     | number,
@@ -3754,7 +3753,6 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-start-radius
    */
   borderEndRadius?: StyleValueWithCondition<
-    | AnyString
     | AnyString
     | CSS.Property.BorderEndEndRadius
     | CSS.Property.BorderEndStartRadius
@@ -3975,7 +3973,6 @@ export interface StyleProps {
    */
   borderInlineEndRadius?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.BorderEndEndRadius
     | CSS.Property.BorderEndStartRadius
     | number,
@@ -4063,7 +4060,6 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-start-radius
    */
   borderInlineStartRadius?: StyleValueWithCondition<
-    | AnyString
     | AnyString
     | CSS.Property.BorderStartEndRadius
     | CSS.Property.BorderStartStartRadius
@@ -4181,7 +4177,6 @@ export interface StyleProps {
    */
   borderLeftRadius?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderTopLeftRadius
     | number,
@@ -4284,7 +4279,6 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-right-radius
    */
   borderRightRadius?: StyleValueWithCondition<
-    | AnyString
     | AnyString
     | CSS.Property.BorderBottomRightRadius
     | CSS.Property.BorderTopRightRadius
@@ -4412,7 +4406,6 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-start-radius
    */
   borderStartRadius?: StyleValueWithCondition<
-    | AnyString
     | AnyString
     | CSS.Property.BorderStartEndRadius
     | CSS.Property.BorderStartStartRadius
@@ -4559,7 +4552,6 @@ export interface StyleProps {
    */
   borderTopRadius?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.BorderTopLeftRadius
     | CSS.Property.BorderTopRightRadius
     | number,
@@ -4661,11 +4653,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right
    */
   borderX?: StyleValueWithCondition<
-    | AnyString
-    | AnyString
-    | CSS.Property.BorderLeft
-    | CSS.Property.BorderRight
-    | number,
+    AnyString | CSS.Property.BorderLeft | CSS.Property.BorderRight | number,
     "borders"
   >
   /**
@@ -4692,11 +4680,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top
    */
   borderY?: StyleValueWithCondition<
-    | AnyString
-    | AnyString
-    | CSS.Property.BorderBottom
-    | CSS.Property.BorderTop
-    | number,
+    AnyString | CSS.Property.BorderBottom | CSS.Property.BorderTop | number,
     "borders"
   >
   /**
@@ -4847,7 +4831,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/width
    */
   boxSize?: StyleValueWithCondition<
-    AnyString | AnyString | CSS.Property.Height | CSS.Property.Width | number,
+    AnyString | CSS.Property.Height | CSS.Property.Width | number,
     "sizes"
   >
   /**
@@ -6976,7 +6960,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/right
    */
   insetX?: StyleValueWithCondition<
-    AnyString | AnyString | CSS.Property.Left | CSS.Property.Right | number,
+    AnyString | CSS.Property.Left | CSS.Property.Right | number,
     "spaces"
   >
   /**
@@ -7003,7 +6987,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/top
    */
   insetY?: StyleValueWithCondition<
-    AnyString | AnyString | CSS.Property.Bottom | CSS.Property.Top | number,
+    AnyString | CSS.Property.Bottom | CSS.Property.Top | number,
     "spaces"
   >
   /**
@@ -7542,7 +7526,6 @@ export interface StyleProps {
    */
   marginX?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.MarginInlineEnd
     | CSS.Property.MarginInlineStart
     | number,
@@ -7572,11 +7555,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-top
    */
   marginY?: StyleValueWithCondition<
-    | AnyString
-    | AnyString
-    | CSS.Property.MarginBottom
-    | CSS.Property.MarginTop
-    | number,
+    AnyString | CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
     "spaces"
   >
   /**
@@ -7888,11 +7867,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-width
    */
   maxBoxSize?: StyleValueWithCondition<
-    | AnyString
-    | AnyString
-    | CSS.Property.MaxHeight
-    | CSS.Property.MaxWidth
-    | number,
+    AnyString | CSS.Property.MaxHeight | CSS.Property.MaxWidth | number,
     "sizes"
   >
   /**
@@ -8039,11 +8014,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-width
    */
   minBoxSize?: StyleValueWithCondition<
-    | AnyString
-    | AnyString
-    | CSS.Property.MinHeight
-    | CSS.Property.MinWidth
-    | number,
+    AnyString | CSS.Property.MinHeight | CSS.Property.MinWidth | number,
     "sizes"
   >
   /**
@@ -8218,7 +8189,6 @@ export interface StyleProps {
    */
   mx?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.MarginInlineEnd
     | CSS.Property.MarginInlineStart
     | number,
@@ -8248,11 +8218,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-top
    */
   my?: StyleValueWithCondition<
-    | AnyString
-    | AnyString
-    | CSS.Property.MarginBottom
-    | CSS.Property.MarginTop
-    | number,
+    AnyString | CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
     "spaces"
   >
   /**
@@ -8931,7 +8897,6 @@ export interface StyleProps {
    */
   paddingX?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.PaddingInlineEnd
     | CSS.Property.PaddingInlineStart
     | number,
@@ -8961,11 +8926,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-top
    */
   paddingY?: StyleValueWithCondition<
-    | AnyString
-    | AnyString
-    | CSS.Property.PaddingBottom
-    | CSS.Property.PaddingTop
-    | number,
+    AnyString | CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
     "spaces"
   >
   /**
@@ -9322,7 +9283,6 @@ export interface StyleProps {
    */
   px?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.PaddingInlineEnd
     | CSS.Property.PaddingInlineStart
     | number,
@@ -9352,11 +9312,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-top
    */
   py?: StyleValueWithCondition<
-    | AnyString
-    | AnyString
-    | CSS.Property.PaddingBottom
-    | CSS.Property.PaddingTop
-    | number,
+    AnyString | CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
     "spaces"
   >
   /**
@@ -9496,7 +9452,6 @@ export interface StyleProps {
    */
   roundedBottom?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderBottomRightRadius
     | number,
@@ -9587,7 +9542,6 @@ export interface StyleProps {
    */
   roundedEnd?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.BorderEndEndRadius
     | CSS.Property.BorderEndStartRadius
     | number,
@@ -9617,7 +9571,6 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-left-radius
    */
   roundedLeft?: StyleValueWithCondition<
-    | AnyString
     | AnyString
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderTopLeftRadius
@@ -9649,7 +9602,6 @@ export interface StyleProps {
    */
   roundedRight?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.BorderBottomRightRadius
     | CSS.Property.BorderTopRightRadius
     | number,
@@ -9680,7 +9632,6 @@ export interface StyleProps {
    */
   roundedStart?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.BorderStartEndRadius
     | CSS.Property.BorderStartStartRadius
     | number,
@@ -9710,7 +9661,6 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-right-radius
    */
   roundedTop?: StyleValueWithCondition<
-    | AnyString
     | AnyString
     | CSS.Property.BorderTopLeftRadius
     | CSS.Property.BorderTopRightRadius
@@ -10128,7 +10078,6 @@ export interface StyleProps {
    */
   scrollMarginX?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.ScrollMarginLeft
     | CSS.Property.ScrollMarginRight
     | number,
@@ -10158,7 +10107,6 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-top
    */
   scrollMarginY?: StyleValueWithCondition<
-    | AnyString
     | AnyString
     | CSS.Property.ScrollMarginBottom
     | CSS.Property.ScrollMarginTop
@@ -10361,7 +10309,6 @@ export interface StyleProps {
    */
   scrollPaddingX?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.ScrollPaddingLeft
     | CSS.Property.ScrollPaddingRight
     | number,
@@ -10391,7 +10338,6 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-top
    */
   scrollPaddingY?: StyleValueWithCondition<
-    | AnyString
     | AnyString
     | CSS.Property.ScrollPaddingBottom
     | CSS.Property.ScrollPaddingTop

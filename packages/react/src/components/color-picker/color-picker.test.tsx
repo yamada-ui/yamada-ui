@@ -1,5 +1,5 @@
-import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { vi } from "vitest"
+import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { ColorPicker } from "."
 import { InputPropsContext } from "../input"
 

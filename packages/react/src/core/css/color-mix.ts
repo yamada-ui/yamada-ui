@@ -148,7 +148,7 @@ export function colorMix(
 
       let ratio = parseInt(tone) || 500
 
-      if (ratio < 50 && 950 < ratio) ratio = 500
+      if (ratio < 50 || 950 < ratio) ratio = 500
       if (ratio === 500) return color1
 
       const color2 = ratio < 500 ? "#fff" : "#000"

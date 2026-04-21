@@ -1,7 +1,7 @@
 import type { Dict } from "@yamada-ui/utils"
 import type { SourceFile } from "typescript"
 import { toKebabCase } from "@yamada-ui/utils"
-import { format, writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { format, writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
 import { Command } from "commander"
 import { existsSync } from "node:fs"
 import { glob, mkdir, readdir, readFile } from "node:fs/promises"
@@ -490,7 +490,7 @@ async function generateRegistries(
           }
           const content = JSON.stringify(registry)
 
-          await writeFileWithFormat(outputPath, content, { parser: "json" })
+          await writeFileWithFormat(outputPath, content)
         }),
       )
     }),
@@ -527,9 +527,7 @@ async function generateThemeRegistry(publicPath: string, tag?: string) {
 
   if (!existsSync(publicPath)) await mkdir(publicPath, { recursive: true })
 
-  await writeFileWithFormat(path.join(publicPath, "theme.json"), content, {
-    parser: "json",
-  })
+  await writeFileWithFormat(path.join(publicPath, "theme.json"), content)
 }
 
 async function generateIndexRegistry(publicPath: string, tag?: string) {
@@ -549,9 +547,7 @@ async function generateIndexRegistry(publicPath: string, tag?: string) {
 
   if (!existsSync(publicPath)) await mkdir(publicPath, { recursive: true })
 
-  await writeFileWithFormat(path.join(publicPath, "index.json"), content, {
-    parser: "json",
-  })
+  await writeFileWithFormat(path.join(publicPath, "index.json"), content)
 }
 
 function main() {
@@ -565,13 +561,15 @@ function main() {
 
       spinner.start("Getting tsconfig")
 
-      const { config } = readConfigFile(CONFIG_PATH, sys.readFile)
+      const { config } = readConfigFile(CONFIG_PATH, (path) =>
+        sys.readFile(path),
+      )
       const { fileNames, options } = parseJsonConfigFileContent(
         config,
         sys,
         path.dirname(CONFIG_PATH),
       )
-      const { getSourceFile } = createProgram(fileNames, options)
+      const program = createProgram(fileNames, options)
 
       spinner.succeed("Got tsconfig")
 
@@ -589,7 +587,10 @@ function main() {
 
       spinner.start("Getting dependencies")
 
-      const dependencyMap = await getDependencies(getSourceFile, externalMap)
+      const dependencyMap = await getDependencies(
+        (fileName) => program.getSourceFile(fileName),
+        externalMap,
+      )
 
       spinner.succeed("Got dependencies")
 

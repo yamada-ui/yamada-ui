@@ -419,7 +419,7 @@ export const useCalendar = <
       : undefined) as MaybeDateValue<Multiple, Range>,
   disabled = false,
   excludeDate,
-  format: format = {},
+  format = {},
   holidays = DEFAULT_HOLIDAYS,
   locale: localeProp,
   max,

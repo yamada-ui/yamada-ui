@@ -1,5 +1,5 @@
-import { a11y, page, render } from "#test/browser"
 import { useRef } from "react"
+import { a11y, page, render } from "#test/browser"
 import { Portal } from "./portal"
 
 describe("<Portal />", () => {

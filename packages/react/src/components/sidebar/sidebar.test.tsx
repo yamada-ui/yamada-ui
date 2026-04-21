@@ -1,13 +1,13 @@
-import { a11y, render } from "#test/browser"
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import { useRef } from "react"
+import { a11y, page, render } from "#test/browser"
 import { Sidebar } from "."
 import { Button } from "../button"
 
 const navItems: Sidebar.ItemType[] = [
   {
     children: [
-      { label: "1-1", value: "#/1/1" },
+      { label: "1-1", value: "/1/1" },
       { disabled: true, label: "1-2", value: "/1/2" },
     ],
     label: "1",
@@ -61,12 +61,13 @@ const navItemsWithGroup: Sidebar.ItemType[] = [
 ]
 
 describe("<Sidebar />", () => {
+  beforeEach(async () => {
+    await page.viewport(1500, 800)
+  })
+
   test("renders component correctly", async () => {
     await a11y(
-      <Sidebar.Root
-        breakpoint={false}
-        defaultExpandedValue={["/get-started/frameworks"]}
-      >
+      <Sidebar.Root defaultExpandedValue={["/get-started/frameworks"]}>
         <Sidebar.SidePanel
           footer={<Sidebar.MenuButton>Footer</Sidebar.MenuButton>}
           header={<Sidebar.MenuButton>Header</Sidebar.MenuButton>}
@@ -108,7 +109,7 @@ describe("<Sidebar />", () => {
 
   test("sets `className` correctly", async () => {
     const { container } = await render(
-      <Sidebar.Root breakpoint={false} defaultExpandedValue={["/1"]}>
+      <Sidebar.Root defaultExpandedValue={["/1"]}>
         <Sidebar.SidePanel
           footer={<Sidebar.MenuButton>Footer</Sidebar.MenuButton>}
           header={<Sidebar.MenuButton>Header</Sidebar.MenuButton>}
@@ -139,7 +140,7 @@ describe("<Sidebar />", () => {
 
   test("renders HTML tag correctly", async () => {
     const { container } = await render(
-      <Sidebar.Root breakpoint={false} defaultExpandedValue={["/1"]}>
+      <Sidebar.Root defaultExpandedValue={["/1"]}>
         <Sidebar.SidePanel
           footer={<Sidebar.MenuButton>Footer</Sidebar.MenuButton>}
           header={<Sidebar.MenuButton>Header</Sidebar.MenuButton>}
@@ -179,14 +180,24 @@ describe("<Sidebar />", () => {
 
   test("should select leaf item on click", async () => {
     const onSelectedChange = vi.fn()
+    const navigationSafeNavItems: Sidebar.ItemType[] = navItems.map(
+      (item, index) =>
+        index === 0 && item.children
+          ? {
+              ...item,
+              children: item.children.map((child, childIndex) =>
+                childIndex === 0 ? { ...child, value: "#/1/1" } : child,
+              ),
+            }
+          : item,
+    )
 
     await render(
       <Sidebar.Root
-        breakpoint={false}
         defaultExpandedValue={["/1"]}
         onSelectedChange={onSelectedChange}
       >
-        <Sidebar.SidePanel items={navItems} />
+        <Sidebar.SidePanel items={navigationSafeNavItems} />
       </Sidebar.Root>,
     )
 
@@ -201,7 +212,7 @@ describe("<Sidebar />", () => {
     const onExpandedChange = vi.fn()
 
     const { user } = await render(
-      <Sidebar.Root breakpoint={false} onExpandedChange={onExpandedChange}>
+      <Sidebar.Root onExpandedChange={onExpandedChange}>
         <Sidebar.SidePanel items={navItems} />
       </Sidebar.Root>,
     )
@@ -222,7 +233,7 @@ describe("<Sidebar />", () => {
     const onExpandedChange = vi.fn()
 
     await render(
-      <Sidebar.Root breakpoint={false} onExpandedChange={onExpandedChange}>
+      <Sidebar.Root onExpandedChange={onExpandedChange}>
         <Sidebar.SidePanel items={navItems} />
       </Sidebar.Root>,
     )
@@ -238,7 +249,7 @@ describe("<Sidebar />", () => {
     const onSelectedChange = vi.fn()
 
     await render(
-      <Sidebar.Root breakpoint={false} onSelectedChange={onSelectedChange}>
+      <Sidebar.Root onSelectedChange={onSelectedChange}>
         <Sidebar.SidePanel items={navItems} />
       </Sidebar.Root>,
     )
@@ -252,7 +263,7 @@ describe("<Sidebar />", () => {
 
   test("should toggle sidebar via Trigger", async () => {
     const { user } = await render(
-      <Sidebar.Root breakpoint={false}>
+      <Sidebar.Root>
         <Sidebar.SidePanel items={navItems} />
         <Sidebar.MainPanel>
           <Sidebar.Trigger>
@@ -277,7 +288,7 @@ describe("<Sidebar />", () => {
 
   test("should toggle sidebar with Cmd/Ctrl+B", async () => {
     await render(
-      <Sidebar.Root breakpoint={false}>
+      <Sidebar.Root>
         <Sidebar.SidePanel items={navItems} />
         <Sidebar.MainPanel>
           <Sidebar.Trigger>
@@ -302,7 +313,7 @@ describe("<Sidebar />", () => {
 
   test("should ignore keydown when key is not `b` or modifier is missing", async () => {
     await render(
-      <Sidebar.Root breakpoint={false}>
+      <Sidebar.Root>
         <Sidebar.SidePanel items={navItems} />
         <Sidebar.MainPanel>
           <Sidebar.Trigger>
@@ -323,11 +334,7 @@ describe("<Sidebar />", () => {
 
   test("should support controlled selectedValue", async () => {
     await render(
-      <Sidebar.Root
-        breakpoint={false}
-        defaultExpandedValue={["/1"]}
-        selectedValue="#/1/1"
-      >
+      <Sidebar.Root defaultExpandedValue={["/1"]} selectedValue="/1/1">
         <Sidebar.SidePanel items={navItems} />
       </Sidebar.Root>,
     )
@@ -340,7 +347,7 @@ describe("<Sidebar />", () => {
 
   test("should support controlled expandedValue", async () => {
     await render(
-      <Sidebar.Root breakpoint={false} expandedValue={["/1"]}>
+      <Sidebar.Root expandedValue={["/1"]}>
         <Sidebar.SidePanel items={navItems} />
       </Sidebar.Root>,
     )
@@ -368,7 +375,7 @@ describe("<Sidebar />", () => {
           >
             Collapse
           </button>
-          <Sidebar.Root breakpoint={false} controlRef={controlRef}>
+          <Sidebar.Root controlRef={controlRef}>
             <Sidebar.SidePanel items={navItemsWithGroup} />
           </Sidebar.Root>
         </>
@@ -393,7 +400,7 @@ describe("<Sidebar />", () => {
 
   test("should render with header, footer, content, and handle", async () => {
     await render(
-      <Sidebar.Root breakpoint={false}>
+      <Sidebar.Root>
         <Sidebar.SidePanel
           footer={<Sidebar.MenuButton>Footer</Sidebar.MenuButton>}
           header={<Sidebar.MenuButton>Header</Sidebar.MenuButton>}
@@ -408,7 +415,7 @@ describe("<Sidebar />", () => {
 
   test("should render with custom children for header/content/footer/handle", async () => {
     await render(
-      <Sidebar.Root breakpoint={false}>
+      <Sidebar.Root>
         <Sidebar.SidePanel>
           <Sidebar.Header>Custom Header</Sidebar.Header>
           <Sidebar.Content items={navItems} />
@@ -425,7 +432,7 @@ describe("<Sidebar />", () => {
 
   test("should hide indicator when `indicatorHidden` is true", async () => {
     const { container } = await render(
-      <Sidebar.Root breakpoint={false}>
+      <Sidebar.Root>
         <Sidebar.SidePanel indicatorHidden items={navItems} />
       </Sidebar.Root>,
     )
@@ -437,7 +444,7 @@ describe("<Sidebar />", () => {
 
   test("should render group items with labels", async () => {
     await render(
-      <Sidebar.Root breakpoint={false}>
+      <Sidebar.Root>
         <Sidebar.SidePanel items={navItemsWithGroup} />
       </Sidebar.Root>,
     )
@@ -452,10 +459,7 @@ describe("<Sidebar />", () => {
     const onClose = vi.fn()
 
     const { user } = await render(
-      <Sidebar.Root
-        breakpoint={false}
-        disclosure={{ desktop: { onClose, onOpen } }}
-      >
+      <Sidebar.Root disclosure={{ desktop: { onClose, onOpen } }}>
         <Sidebar.SidePanel items={navItems} />
         <Sidebar.MainPanel>
           <Sidebar.Trigger>
@@ -483,7 +487,7 @@ describe("<Sidebar />", () => {
     )
 
     const { user } = await render(
-      <Sidebar.Root breakpoint={false}>
+      <Sidebar.Root>
         <Sidebar.SidePanel>
           <Sidebar.Content>
             <Sidebar.Item
@@ -512,7 +516,7 @@ describe("<Sidebar />", () => {
 
   test("should prevent navigation when clicking disabled link", async () => {
     await render(
-      <Sidebar.Root breakpoint={false}>
+      <Sidebar.Root>
         <Sidebar.SidePanel items={navItems} />
       </Sidebar.Root>,
     )
@@ -532,7 +536,7 @@ describe("<Sidebar />", () => {
 
   test("should render with start and end elements per item/group", async () => {
     await render(
-      <Sidebar.Root breakpoint={false}>
+      <Sidebar.Root>
         <Sidebar.SidePanel
           endElement={<span data-testid="end" />}
           items={navItems}
@@ -551,7 +555,7 @@ describe("<Sidebar />", () => {
 
   test("should render with custom item render function", async () => {
     await render(
-      <Sidebar.Root breakpoint={false}>
+      <Sidebar.Root>
         <Sidebar.SidePanel
           items={[{ label: "custom", value: "/custom" }]}
           render={{
@@ -572,7 +576,7 @@ describe("<Sidebar />", () => {
 
   test("should render with custom link and trigger render functions", async () => {
     await render(
-      <Sidebar.Root breakpoint={false} defaultExpandedValue={["/1"]}>
+      <Sidebar.Root defaultExpandedValue={["/1"]}>
         <Sidebar.SidePanel
           items={navItems}
           render={{
@@ -595,7 +599,7 @@ describe("<Sidebar />", () => {
 
   test("should support `external` prop for links", async () => {
     await render(
-      <Sidebar.Root breakpoint={false}>
+      <Sidebar.Root>
         <Sidebar.SidePanel>
           <Sidebar.Content>
             <Sidebar.Item
@@ -616,7 +620,7 @@ describe("<Sidebar />", () => {
 
   test("should render Sidebar.Menu and Sidebar.MenuButton", async () => {
     await render(
-      <Sidebar.Root breakpoint={false}>
+      <Sidebar.Root>
         <Sidebar.SidePanel>
           <Sidebar.Menu>
             <Sidebar.MenuButton>Menu Item</Sidebar.MenuButton>
@@ -633,7 +637,6 @@ describe("<Sidebar />", () => {
   test("should render Tooltip wrapper in non-offcanvas mode when collapsed", async () => {
     await render(
       <Sidebar.Root
-        breakpoint={false}
         disclosure={{ desktop: { defaultOpen: false } }}
         mode="icon"
       >
@@ -660,7 +663,7 @@ describe("<Sidebar />", () => {
           >
             Expand
           </button>
-          <Sidebar.Root breakpoint={false} controlRef={controlRef}>
+          <Sidebar.Root controlRef={controlRef}>
             <Sidebar.SidePanel>
               <Sidebar.Content>
                 <Sidebar.Item
@@ -690,11 +693,7 @@ describe("<Sidebar />", () => {
 
   test("should support default selectedValue", async () => {
     await render(
-      <Sidebar.Root
-        breakpoint={false}
-        defaultExpandedValue={["/1"]}
-        defaultSelectedValue="#/1/1"
-      >
+      <Sidebar.Root defaultExpandedValue={["/1"]} defaultSelectedValue="/1/1">
         <Sidebar.SidePanel items={navItems} />
       </Sidebar.Root>,
     )

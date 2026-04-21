@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
-import { docs } from "#velite"
 import { Box } from "@yamada-ui/react"
 import { notFound } from "next/navigation"
+import { docs } from "#velite"
 import { MDXContent } from "@/components"
 import { getDocs } from "@/data"
 import { generateOg } from "@/utils/next"

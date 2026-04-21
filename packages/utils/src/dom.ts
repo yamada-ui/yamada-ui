@@ -122,7 +122,7 @@ export function isActiveElement(
 export function isHiddenElement(el: HTMLElement): boolean {
   if (el.parentElement && isHiddenElement(el.parentElement)) return true
 
-  return el.hidden
+  return Boolean(el.hidden)
 }
 
 export function isDisabledElement(el: HTMLElement): boolean {

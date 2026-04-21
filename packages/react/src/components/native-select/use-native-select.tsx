@@ -70,7 +70,7 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
     } else if (items.length) {
       computedChildren = items.map((item, index) => {
         if ("items" in item) {
-          const { items = [], label, ...rest } = item
+          const { items, label, ...rest } = item
 
           return cloneElement(<optgroup />, {
             key: index,

@@ -1,16 +1,16 @@
-import { renderHook } from "#test"
+import { renderHook } from "#test/browser"
 import { useFormatNumber } from "./use-format-number"
 
 describe("useFormatNumber", () => {
-  test("formats number correctly", () => {
-    const { result } = renderHook(() =>
+  test("formats number correctly", async () => {
+    const { result } = await renderHook(() =>
       useFormatNumber(1000, { locale: "en-US" }),
     )
     expect(result.current).toBe("1,000")
   })
 
-  test("formats number with options correctly", () => {
-    const { result } = renderHook(() =>
+  test("formats number with options correctly", async () => {
+    const { result } = await renderHook(() =>
       useFormatNumber(1000, {
         style: "currency",
         currency: "USD",
@@ -20,11 +20,11 @@ describe("useFormatNumber", () => {
     expect(result.current).toBe("$1,000.00")
   })
 
-  test("formats number with different locales correctly", () => {
-    const { result: resultDE } = renderHook(() =>
+  test("formats number with different locales correctly", async () => {
+    const { result: resultDE } = await renderHook(() =>
       useFormatNumber(1000, { locale: "de-DE" }),
     )
-    const { result: resultJP } = renderHook(() =>
+    const { result: resultJP } = await renderHook(() =>
       useFormatNumber(1000, { locale: "ja-JP" }),
     )
 
@@ -32,11 +32,11 @@ describe("useFormatNumber", () => {
     expect(resultJP.current).toBe("1,000")
   })
 
-  test("formats number with different styles correctly", () => {
-    const { result: resultPercent } = renderHook(() =>
+  test("formats number with different styles correctly", async () => {
+    const { result: resultPercent } = await renderHook(() =>
       useFormatNumber(0.25, { style: "percent", locale: "en-US" }),
     )
-    const { result: resultUnit } = renderHook(() =>
+    const { result: resultUnit } = await renderHook(() =>
       useFormatNumber(100, {
         style: "unit",
         locale: "en-US",

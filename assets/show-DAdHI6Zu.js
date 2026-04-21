@@ -1,0 +1,1 @@
+import{n as e,o as t}from"./chunk-jRWAZmH_.js";import{t as n}from"./react-mE7dFmCG.js";import{Z as r,wn as i}from"./core-C7NnSGLR.js";import{t as a}from"./jsx-runtime-D_578c1K.js";var o,s,c,l=e((()=>{o=t(n(),1),r(),s=a(),c=({children:e,fallback:t,when:n})=>{let r;return r=n?i(e,n):t,(0,o.isValidElement)(r)?r:(0,s.jsx)(s.Fragment,{children:r})}}));export{l as n,c as t};

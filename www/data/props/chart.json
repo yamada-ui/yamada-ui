@@ -531,7 +531,7 @@
         "required": false
       },
       "contentProps": {
-        "type": "Omit<ChartTooltipContentProps, \"formatter\" | \"label\" | \"labelFormatter\" | \"payload\">",
+        "type": "Omit<\n    ChartTooltipContentProps,\n    \"formatter\" | \"label\" | \"labelFormatter\" | \"payload\"\n  >",
         "description": "Props for the content component.",
         "required": false
       },
@@ -1132,7 +1132,7 @@
         "required": false
       },
       "contentProps": {
-        "type": "Omit<ChartTooltipContentProps, \"formatter\" | \"label\" | \"labelFormatter\" | \"payload\">",
+        "type": "Omit<\n    ChartTooltipContentProps,\n    \"formatter\" | \"label\" | \"labelFormatter\" | \"payload\"\n  >",
         "description": "Props for the content component.",
         "required": false
       },
@@ -1255,7 +1255,7 @@
       "required": false
     },
     "components": {
-      "type": "{\n  component: JSXElementConstructor<any>\n  fallback: ReactNode\n}[]",
+      "type": "{\n    component: JSXElementConstructor<any>\n    fallback: ReactNode\n  }[]",
       "description": "The components to render the chart components.",
       "required": true
     },
@@ -1579,7 +1579,7 @@
       "required": false
     },
     "components": {
-      "type": "{\n  component: JSXElementConstructor<any>\n  fallback: ReactNode\n}[]",
+      "type": "{\n    component: JSXElementConstructor<any>\n    fallback: ReactNode\n  }[]",
       "description": "The components to render the chart components.",
       "required": true
     },
@@ -1844,7 +1844,7 @@
       "required": false
     },
     "sectorProps": {
-      "type": "((props: PieSectorShapeProps, index: number) => ChartSectorProps) | ChartSectorProps",
+      "type": "| ((props: PieSectorShapeProps, index: number) => ChartSectorProps)\n    | ChartSectorProps",
       "description": "Props for the sector component.",
       "required": false
     }
@@ -2057,7 +2057,7 @@
       "required": false
     },
     "sectorProps": {
-      "type": "((props: PieSectorShapeProps, index: number) => ChartSectorProps) | ChartSectorProps",
+      "type": "| ((props: PieSectorShapeProps, index: number) => ChartSectorProps)\n    | ChartSectorProps",
       "description": "Props for the sector component.",
       "required": false
     }
@@ -2178,7 +2178,7 @@
       "required": false
     },
     "sectorProps": {
-      "type": "((props: PieSectorShapeProps) => ChartSectorProps) | ChartSectorProps",
+      "type": "| ((props: PieSectorShapeProps) => ChartSectorProps)\n    | ChartSectorProps",
       "description": "Props for the sector component.",
       "required": false
     }
@@ -2289,7 +2289,7 @@
       "required": false
     },
     "contentProps": {
-      "type": "Omit<ChartTooltipContentProps, \"formatter\" | \"label\" | \"labelFormatter\" | \"payload\">",
+      "type": "Omit<\n    ChartTooltipContentProps,\n    \"formatter\" | \"label\" | \"labelFormatter\" | \"payload\"\n  >",
       "description": "Props for the content component.",
       "required": false
     },
@@ -2999,7 +2999,7 @@
         "required": false
       },
       "contentProps": {
-        "type": "Omit<ChartTooltipContentProps, \"formatter\" | \"label\" | \"labelFormatter\" | \"payload\">",
+        "type": "Omit<\n    ChartTooltipContentProps,\n    \"formatter\" | \"label\" | \"labelFormatter\" | \"payload\"\n  >",
         "description": "Props for the content component.",
         "required": false
       },
@@ -3155,7 +3155,7 @@
         "required": false
       },
       "sectorProps": {
-        "type": "((props: PieSectorShapeProps, index: number) => ChartSectorProps) | ChartSectorProps",
+        "type": "| ((props: PieSectorShapeProps, index: number) => ChartSectorProps)\n    | ChartSectorProps",
         "description": "Props for the sector component.",
         "required": false
       }
@@ -3596,7 +3596,7 @@
         "required": false
       },
       "contentProps": {
-        "type": "Omit<ChartTooltipContentProps, \"formatter\" | \"label\" | \"labelFormatter\" | \"payload\">",
+        "type": "Omit<\n    ChartTooltipContentProps,\n    \"formatter\" | \"label\" | \"labelFormatter\" | \"payload\"\n  >",
         "description": "Props for the content component.",
         "required": false
       },
@@ -4129,7 +4129,7 @@
         "required": false
       },
       "contentProps": {
-        "type": "Omit<ChartTooltipContentProps, \"formatter\" | \"label\" | \"labelFormatter\" | \"payload\">",
+        "type": "Omit<\n    ChartTooltipContentProps,\n    \"formatter\" | \"label\" | \"labelFormatter\" | \"payload\"\n  >",
         "description": "Props for the content component.",
         "required": false
       },
@@ -4362,7 +4362,7 @@
         "required": false
       },
       "sectorProps": {
-        "type": "((props: PieSectorShapeProps, index: number) => ChartSectorProps) | ChartSectorProps",
+        "type": "| ((props: PieSectorShapeProps, index: number) => ChartSectorProps)\n    | ChartSectorProps",
         "description": "Props for the sector component.",
         "required": false
       }
@@ -4726,7 +4726,7 @@
         "required": false
       },
       "contentProps": {
-        "type": "Omit<ChartTooltipContentProps, \"formatter\" | \"label\" | \"labelFormatter\" | \"payload\">",
+        "type": "Omit<\n    ChartTooltipContentProps,\n    \"formatter\" | \"label\" | \"labelFormatter\" | \"payload\"\n  >",
         "description": "Props for the content component.",
         "required": false
       },
@@ -4764,12 +4764,12 @@
       "required": false
     },
     "components": {
-      "type": "{ component: JSXElementConstructor<any>; fallback: ReactNode }[]",
+      "type": "{ component: JSXElementConstructor<any>; fallback: ReactNode; }[]",
       "description": "The components to render the chart components.",
       "required": true
     },
     "render": {
-      "type": "(props: { children?: ReactNode }) => ReactNode",
+      "type": "(props: { children?: ReactNode; }) => ReactNode",
       "description": "The function to render the chart.",
       "required": true
     },
@@ -5696,7 +5696,7 @@
         "required": false
       },
       "contentProps": {
-        "type": "Omit<ChartTooltipContentProps, \"formatter\" | \"label\" | \"labelFormatter\" | \"payload\">",
+        "type": "Omit<\n    ChartTooltipContentProps,\n    \"formatter\" | \"label\" | \"labelFormatter\" | \"payload\"\n  >",
         "description": "Props for the content component.",
         "required": false
       },
@@ -5907,7 +5907,7 @@
         "required": false
       },
       "sectorProps": {
-        "type": "((props: PieSectorShapeProps) => ChartSectorProps) | ChartSectorProps",
+        "type": "| ((props: PieSectorShapeProps) => ChartSectorProps)\n    | ChartSectorProps",
         "description": "Props for the sector component.",
         "required": false
       }
@@ -6327,7 +6327,7 @@
         "required": false
       },
       "contentProps": {
-        "type": "Omit<ChartTooltipContentProps, \"formatter\" | \"label\" | \"labelFormatter\" | \"payload\">",
+        "type": "Omit<\n    ChartTooltipContentProps,\n    \"formatter\" | \"label\" | \"labelFormatter\" | \"payload\"\n  >",
         "description": "Props for the content component.",
         "required": false
       },

@@ -1,5 +1,5 @@
-import { act, renderHook } from "#test"
 import { createRef } from "react"
+import { act, renderHook } from "#test"
 import {
   assignRef,
   isRefObject,
@@ -85,9 +85,7 @@ describe("assignRef", () => {
 
   test("should throw when ref.current cannot be assigned", () => {
     const ref = Object.freeze({ current: null })
-    expect(() => assignRef(ref, "test")).toThrow(
-      "Cannot assign value 'test' to ref",
-    )
+    expect(() => assignRef(ref, "test")).toThrow("Cannot assign value to ref")
   })
 })
 

@@ -1,8 +1,8 @@
 import type { TreeControl } from "./use-tree"
-import { a11y, page, render } from "#test/browser"
 import { fireEvent } from "@testing-library/react"
 import { useRef, useState } from "react"
 import { vi } from "vitest"
+import { a11y, page, render } from "#test/browser"
 import { Tree } from "."
 import { BoxIcon, FileIcon, FolderIcon, XIcon } from "../icon"
 

@@ -1,5 +1,5 @@
-import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { useState } from "react"
+import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { Group } from "../group"
 import { EyeIcon, EyeOffIcon } from "../icon"
 import { InputPropsContext } from "../input"

@@ -96,7 +96,7 @@ describe("<PassWordInputStrengthMeter />", () => {
 
     const strengthMeter = page.getByTestId("strengthMeter")
 
-    expect(strengthMeter.element()).toHaveClass("ui-strength-meter__root")
+    await expect.element(strengthMeter).toHaveClass("ui-strength-meter__root")
     expect(strengthMeter.element().children[0]).toHaveClass(
       "ui-strength-meter__indicators",
     )

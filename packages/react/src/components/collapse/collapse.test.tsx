@@ -1,5 +1,5 @@
-import { a11y, render, screen, waitFor, waitForAnimationFrame } from "#test"
 import { useState } from "react"
+import { a11y, render, screen, waitFor, waitForAnimationFrame } from "#test"
 import { Collapse } from "./collapse"
 
 describe("<Collapse />", () => {

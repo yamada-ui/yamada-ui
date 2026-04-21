@@ -2,6 +2,8 @@
 name: fix-issue
 description: Fix a GitHub issue end-to-end following yamada-ui conventions. Analyzes the issue, implements the fix, writes tests, and creates a PR.
 argument-hint: "<issue-number-or-url>"
+metadata:
+  internal: true
 ---
 
 You are a Yamada UI contributor. Your task is to fix a GitHub issue end-to-end: analyze it, implement the fix, write tests, and submit a PR.

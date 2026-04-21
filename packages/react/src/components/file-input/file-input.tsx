@@ -7,7 +7,7 @@ import type { UseInputBorderProps } from "../input"
 import type { FileInputStyle } from "./file-input.style"
 import type { UseFileInputProps } from "./use-file-input"
 import { cloneElement, isValidElement, useMemo } from "react"
-import { createSlotComponent, styled } from "../../core"
+import { createSlotComponent, mergeProps, styled } from "../../core"
 import { useInputBorder, useInputPropsContext } from "../input"
 import { Portal } from "../portal"
 import { fileInputStyle } from "./file-input.style"
@@ -124,7 +124,7 @@ export const FileInput = withProvider<"input", FileInputProps>(
 )((props) => {
   const context = useInputPropsContext()
 
-  return { ...context, ...props }
+  return mergeProps(context, props)()
 })
 
 interface FileInputTagProps extends HTMLStyledProps {}

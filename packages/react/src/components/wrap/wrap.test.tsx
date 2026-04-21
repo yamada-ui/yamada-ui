@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Wrap } from "./wrap"
 
 describe("<Wrap />", () => {
@@ -10,13 +10,13 @@ describe("<Wrap />", () => {
     expect(Wrap.displayName).toBe("Wrap")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Wrap>Wrap</Wrap>)
-    expect(screen.getByText("Wrap")).toHaveClass("ui-wrap")
+  test("sets `className` correctly", async () => {
+    await render(<Wrap>Wrap</Wrap>)
+    await expect.element(page.getByText("Wrap")).toHaveClass("ui-wrap")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Wrap>Wrap</Wrap>)
-    expect(screen.getByText("Wrap").tagName).toBe("DIV")
+  test("renders HTML tag correctly", async () => {
+    await render(<Wrap>Wrap</Wrap>)
+    expect(page.getByText("Wrap").element().tagName).toBe("DIV")
   })
 })

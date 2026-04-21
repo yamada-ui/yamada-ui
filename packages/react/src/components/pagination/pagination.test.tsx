@@ -38,6 +38,77 @@ describe("<Pagination />", () => {
     ).toBeNull()
   })
 
+  test("merges `controlProps` with `controlPrevProps` without overwriting props", () => {
+    const onControlClick = vi.fn()
+    const onControlPrevClick = vi.fn()
+
+    render(
+      <Pagination.Root
+        defaultPage={2}
+        total={10}
+        controlPrevProps={{
+          className: "from-control-prev",
+          style: { backgroundColor: "blue" },
+          onClick: onControlPrevClick,
+        }}
+        controlProps={{
+          className: "from-control",
+          style: { color: "red" },
+          onClick: onControlClick,
+        }}
+      />,
+    )
+
+    const prevButton = screen.getByRole("button", {
+      name: /Go to previous page/i,
+    })
+
+    expect(prevButton).toHaveClass("from-control", "from-control-prev")
+    expect(prevButton).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(prevButton).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(prevButton)
+
+    expect(onControlClick).toHaveBeenCalledTimes(1)
+    expect(onControlPrevClick).toHaveBeenCalledTimes(1)
+  })
+
+  test("merges `edgeProps` with `edgeStartProps` without overwriting props", () => {
+    const onEdgeClick = vi.fn()
+    const onEdgeStartClick = vi.fn()
+
+    render(
+      <Pagination.Root
+        defaultPage={2}
+        total={10}
+        withEdges
+        edgeProps={{
+          className: "from-edge",
+          style: { color: "red" },
+          onClick: onEdgeClick,
+        }}
+        edgeStartProps={{
+          className: "from-edge-start",
+          style: { backgroundColor: "blue" },
+          onClick: onEdgeStartClick,
+        }}
+      />,
+    )
+
+    const startButton = screen.getByRole("button", {
+      name: /Go to first page/i,
+    })
+
+    expect(startButton).toHaveClass("from-edge", "from-edge-start")
+    expect(startButton).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(startButton).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(startButton)
+
+    expect(onEdgeClick).toHaveBeenCalledTimes(1)
+    expect(onEdgeStartClick).toHaveBeenCalledTimes(1)
+  })
+
   test("navigates to next page when next trigger is clicked", () => {
     const onChange = vi.fn()
     render(<Pagination.Root defaultPage={1} total={10} onChange={onChange} />)

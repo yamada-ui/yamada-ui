@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Box } from "../box"
 import { HStack } from "./h-stack"
 
@@ -17,19 +17,23 @@ describe("<HStack />", () => {
     expect(HStack.displayName).toBe("StackHorizontal")
   })
 
-  test("sets `className` correctly", () => {
-    render(<TestComponent />)
-    expect(screen.getByTestId("h-stack")).toHaveClass("ui-stack--horizontal")
+  test("sets `className` correctly", async () => {
+    await render(<TestComponent />)
+    await expect
+      .element(page.getByTestId("h-stack"))
+      .toHaveClass("ui-stack--horizontal")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<TestComponent />)
-    expect(screen.getByTestId("h-stack").tagName).toBe("DIV")
+  test("renders HTML tag correctly", async () => {
+    await render(<TestComponent />)
+    expect(page.getByTestId("h-stack").element().tagName).toBe("DIV")
   })
 
-  test("renders h-stack correctly", () => {
-    render(<TestComponent />)
+  test("renders h-stack correctly", async () => {
+    await render(<TestComponent />)
 
-    expect(screen.getByTestId("h-stack")).toHaveStyle({ flexDirection: "row" })
+    await expect
+      .element(page.getByTestId("h-stack"))
+      .toHaveStyle({ flexDirection: "row" })
   })
 })

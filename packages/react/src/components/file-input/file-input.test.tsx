@@ -1,5 +1,6 @@
 import { a11y, act, fireEvent, render, screen } from "#test"
 import { FileInput } from "."
+import { InputPropsContext } from "../input"
 
 describe("<FileInput />", () => {
   test("renders component correctly", async () => {
@@ -241,5 +242,39 @@ describe("<FileInput />", () => {
     el?.addEventListener("click", fn)
     screen.getByTestId("fileInput").click()
     expect(fn).toHaveBeenCalledTimes(1)
+  })
+
+  test("should merge context and user props without overwriting className, style, and event handlers", () => {
+    const onContextClick = vi.fn()
+    const onUserClick = vi.fn()
+
+    render(
+      <InputPropsContext
+        value={{
+          className: "from-context",
+          style: { color: "red" },
+          onClick: onContextClick,
+        }}
+      >
+        <FileInput
+          className="from-user"
+          style={{ backgroundColor: "blue" }}
+          data-testid="fileInput"
+          placeholder="placeholder"
+          onClick={onUserClick}
+        />
+      </InputPropsContext>,
+    )
+
+    const el = screen.getByTestId("fileInput")
+
+    expect(el).toHaveClass("from-context", "from-user")
+    expect(el).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(el).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    fireEvent.click(el)
+
+    expect(onContextClick).toHaveBeenCalledTimes(1)
+    expect(onUserClick).toHaveBeenCalledTimes(1)
   })
 })

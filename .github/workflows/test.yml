@@ -28,7 +28,7 @@ jobs:
 
       - name: Check modified files
         id: check-modified
-        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
+        uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
         with:
           files: |
             turbo.json
@@ -46,8 +46,7 @@ jobs:
 
       - name: Setup Browser
         if: steps.check-modified.outputs.any_changed == 'true'
-        working-directory: packages/react
-        run: pnpm playwright install chromium --with-deps
+        run: pnpm react exec playwright install chromium --with-deps --only-shell
 
       - name: Run chromium coverage shard
         if: steps.check-modified.outputs.any_changed == 'true'
@@ -82,7 +81,7 @@ jobs:
 
       - name: Check modified files
         id: check-modified
-        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
+        uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
         with:
           files: |
             turbo.json
@@ -100,8 +99,7 @@ jobs:
 
       - name: Setup Browser
         if: steps.check-modified.outputs.any_changed == 'true'
-        working-directory: packages/react
-        run: pnpm playwright install ${{ matrix.id }} --with-deps
+        run: pnpm react exec playwright install ${{ matrix.id }} --with-deps
 
       - name: Run Browser Test on ${{ matrix.id }}
         if: steps.check-modified.outputs.any_changed == 'true'

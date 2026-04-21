@@ -1,4 +1,4 @@
-import { a11y } from "#test"
+import { a11y } from "#test/browser"
 import { Tip } from "./tip"
 
 describe("<Tip />", () => {

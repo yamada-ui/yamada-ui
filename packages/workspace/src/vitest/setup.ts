@@ -5,7 +5,7 @@ import "@testing-library/jest-dom/vitest"
 
 expect.extend(matchers)
 
-const { getComputedStyle } = window
+const getComputedStyle = window.getComputedStyle.bind(window)
 
 window.getComputedStyle = (el) => getComputedStyle(el)
 window.Element.prototype.scrollTo = () => void 0

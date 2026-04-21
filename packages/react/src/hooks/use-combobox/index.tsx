@@ -102,7 +102,7 @@ export const createComboboxChildren = (
         </Empty>
       )
     } else if ("items" in item) {
-      const { items = [], label, ...rest } = item
+      const { items, label, ...rest } = item
 
       return (
         <Group key={index} label={label} {...rest}>

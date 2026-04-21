@@ -169,7 +169,7 @@
         "required": false
       },
       "children": {
-        "type": "ReactNodeOrFunction<{\n  open: boolean\n  onClose: () => void\n}>",
+        "type": "ReactNodeOrFunction<{\n    open: boolean\n    onClose: () => void\n  }>",
         "description": "The children of the popover.",
         "required": false
       },
@@ -209,7 +209,7 @@
         "required": false
       },
       "elements": {
-        "type": "{ floating?: HTMLElement | null | undefined; reference?: HTMLButtonElement | null | undefined }",
+        "type": "{ floating?: HTMLElement | null | undefined; reference?: HTMLButtonElement | null | undefined; }",
         "description": "Object containing the reference and floating elements.",
         "required": false
       },
@@ -511,7 +511,7 @@
       "required": false
     },
     "children": {
-      "type": "ReactNodeOrFunction<{\n  open: boolean\n  onClose: () => void\n}>",
+      "type": "ReactNodeOrFunction<{\n    open: boolean\n    onClose: () => void\n  }>",
       "description": "The children of the popover.",
       "required": false
     },
@@ -551,7 +551,7 @@
       "required": false
     },
     "elements": {
-      "type": "{ floating?: HTMLElement | null | undefined; reference?: HTMLButtonElement | null | undefined }",
+      "type": "{ floating?: HTMLElement | null | undefined; reference?: HTMLButtonElement | null | undefined; }",
       "description": "Object containing the reference and floating elements.",
       "required": false
     },

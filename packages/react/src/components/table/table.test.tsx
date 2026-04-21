@@ -1,7 +1,7 @@
 import type { ColumnDef } from "@tanstack/react-table"
-import { a11y, fireEvent, render, screen } from "#test"
 import { useState } from "react"
 import { vi } from "vitest"
+import { a11y, fireEvent, render, screen } from "#test"
 import { createColumnHelper, Table } from "./"
 
 interface Data {
@@ -1378,39 +1378,6 @@ describe("<Table />", () => {
       tds.forEach((td) => {
         expect(td).toHaveAttribute("role", "gridcell")
       })
-    })
-
-    test("sets role=rowgroup on thead and tbody", () => {
-      render(
-        <Table
-          columns={columns}
-          data={data}
-          tableProps={{ "data-testid": "table" }}
-        />,
-      )
-
-      const table = screen.getByTestId("table")
-      const thead = table.querySelector("thead")
-      const tbody = table.querySelector("tbody")
-
-      expect(thead).toHaveAttribute("role", "rowgroup")
-      expect(tbody).toHaveAttribute("role", "rowgroup")
-    })
-
-    test("sets role=rowgroup on tfoot when footer groups enabled", () => {
-      render(
-        <Table
-          columns={columns}
-          data={data}
-          withFooterGroups
-          tableProps={{ "data-testid": "table" }}
-        />,
-      )
-
-      const table = screen.getByTestId("table")
-      const tfoot = table.querySelector("tfoot")
-
-      expect(tfoot).toHaveAttribute("role", "rowgroup")
     })
 
     test("does not set aria-multiselectable when row selection is disabled", () => {

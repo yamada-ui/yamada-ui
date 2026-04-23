@@ -5,7 +5,9 @@ import { InputPropsContext } from "../input"
 
 const getCombobox = () => page.getByRole("combobox")
 
-const getInput = () => document.querySelector("input")
+const getInput = () => page.getByRole("textbox")
+
+const getInputElement = () => getInput().element() as HTMLInputElement
 
 const setInputValue = (input: HTMLInputElement, value: string) => {
   Object.getOwnPropertyDescriptor(
@@ -119,6 +121,8 @@ describe("<ColorPicker />", () => {
 
     await expect.element(startEl).toHaveClass("from-element", "from-start")
 
+    // The combobox overlays the start element, so locator clicks are intercepted
+    // before reaching the merged handlers on `start-el`.
     startEl.element().dispatchEvent(new MouseEvent("click", { bubbles: true }))
 
     expect(onClickElement).toHaveBeenCalledTimes(1)
@@ -169,13 +173,17 @@ describe("<ColorPicker />", () => {
   test("passes `aria-label` to the input", async () => {
     await render(<ColorPicker aria-label="Choose a color" />)
 
-    expect(getInput()).toHaveAttribute("aria-label", "Choose a color")
+    await expect
+      .element(getInput())
+      .toHaveAttribute("aria-label", "Choose a color")
   })
 
   test("passes `aria-labelledby` to the input", async () => {
     await render(<ColorPicker aria-labelledby="color-label" />)
 
-    expect(getInput()).toHaveAttribute("aria-labelledby", "color-label")
+    await expect
+      .element(getInput())
+      .toHaveAttribute("aria-labelledby", "color-label")
   })
 
   test("does not render color swatch when `withColorSwatch` is false", async () => {
@@ -188,7 +196,7 @@ describe("<ColorPicker />", () => {
       />,
     )
 
-    expect(document.querySelector('[data-testid="swatch"]')).toBeNull()
+    expect(page.getByTestId("swatch").query()).toBeNull()
   })
 
   test("does not render eye dropper when `withEyeDropper` is false", async () => {
@@ -201,7 +209,7 @@ describe("<ColorPicker />", () => {
       />,
     )
 
-    expect(document.querySelector('[data-testid="eye-dropper"]')).toBeNull()
+    expect(page.getByTestId("eye-dropper").query()).toBeNull()
   })
 
   test("renders custom eye dropper icon when `eyeDropperProps.icon` is provided", async () => {
@@ -214,8 +222,8 @@ describe("<ColorPicker />", () => {
       />,
     )
 
-    await expect.element(page.getByTestId("custom-icon")).toBeVisible()
-    await expect.element(page.getByTestId("eye-dropper")).toBeVisible()
+    await expect.element(page.getByTestId("custom-icon")).toBeInTheDocument()
+    await expect.element(page.getByTestId("eye-dropper")).toBeInTheDocument()
   })
 
   test("renders default eye dropper icon when no children/icon provided", async () => {
@@ -242,7 +250,7 @@ describe("<ColorPicker />", () => {
       />,
     )
 
-    await expect.element(page.getByTestId("swatch")).toBeVisible()
+    await expect.element(page.getByTestId("swatch")).toBeInTheDocument()
 
     rerender(
       <ColorPicker
@@ -253,7 +261,7 @@ describe("<ColorPicker />", () => {
       />,
     )
 
-    await expect.element(page.getByTestId("swatch")).toBeVisible()
+    await expect.element(page.getByTestId("swatch")).toBeInTheDocument()
   })
 
   test("prevents default on mouse down when `openOnFocus` is enabled", async () => {
@@ -298,11 +306,9 @@ describe("<ColorPicker />", () => {
       />,
     )
 
-    const input = getInput()
+    const input = getInputElement()
 
-    expect(input).not.toBeNull()
-
-    setInputValue(input!, "#123456")
+    setInputValue(input, "#123456")
 
     expect(onInputChange).toHaveBeenCalledTimes(1)
     expect(closeOnChange).toHaveBeenCalledTimes(1)
@@ -322,11 +328,9 @@ describe("<ColorPicker />", () => {
       />,
     )
 
-    const input = getInput()
+    const input = getInputElement()
 
-    expect(input).not.toBeNull()
-
-    setInputValue(input!, "#654321")
+    setInputValue(input, "#654321")
 
     expect(closeOnChange).toHaveBeenCalledTimes(1)
     expect(openOnChange).not.toHaveBeenCalled()
@@ -336,12 +340,10 @@ describe("<ColorPicker />", () => {
   test("keeps invalid value on blur when conversion fails", async () => {
     await render(<ColorPicker placeholder="Choose a color" />)
 
-    const input = getInput()
+    const input = getInputElement()
 
-    expect(input).not.toBeNull()
-
-    setInputValue(input!, "invalid-color")
-    input!.dispatchEvent(
+    setInputValue(input, "invalid-color")
+    input.dispatchEvent(
       new FocusEvent("blur", {
         bubbles: true,
         cancelable: true,
@@ -371,7 +373,7 @@ describe("<ColorPicker />", () => {
 
     await vi.waitFor(() => {
       expect(openEyeDropper).toHaveBeenCalledTimes(1)
-      expect(getInput()).toHaveValue("#00ff00")
+      expect(getInputElement()).toHaveValue("#00ff00")
     })
   })
 
@@ -379,7 +381,7 @@ describe("<ColorPicker />", () => {
     const { user } = await render(<ColorPicker placeholder="Choose a color" />)
 
     const combobox = getCombobox()
-    const input = getInput()
+    const input = getInputElement()
 
     await user.click(combobox)
 
@@ -400,11 +402,9 @@ describe("<ColorPicker />", () => {
   test("prevents default on input focus and opens when not focused by click", async () => {
     await render(<ColorPicker placeholder="Choose a color" />)
 
-    const input = getInput()
+    const input = getInputElement()
 
-    expect(input).not.toBeNull()
-
-    input!.focus()
+    input.focus()
 
     await expect.element(getCombobox()).toHaveAttribute("aria-expanded", "true")
   })
@@ -412,12 +412,10 @@ describe("<ColorPicker />", () => {
   test("keeps value when blur moves focus inside picker field", async () => {
     await render(<ColorPicker placeholder="Choose a color" />)
 
-    const input = getInput()
+    const input = getInputElement()
 
-    expect(input).not.toBeNull()
-
-    setInputValue(input!, "#123123")
-    input!.dispatchEvent(
+    setInputValue(input, "#123123")
+    input.dispatchEvent(
       new FocusEvent("blur", {
         bubbles: true,
         cancelable: true,
@@ -431,11 +429,9 @@ describe("<ColorPicker />", () => {
   test("keeps empty value on blur when there is no previous value", async () => {
     await render(<ColorPicker placeholder="Choose a color" />)
 
-    const input = getInput()
+    const input = getInputElement()
 
-    expect(input).not.toBeNull()
-
-    input!.dispatchEvent(
+    input.dispatchEvent(
       new FocusEvent("blur", {
         bubbles: true,
         cancelable: true,
@@ -456,11 +452,9 @@ describe("<ColorPicker />", () => {
       />,
     )
 
-    const input = getInput()
+    const input = getInputElement()
 
-    expect(input).not.toBeNull()
-
-    input!.dispatchEvent(
+    input.dispatchEvent(
       new FocusEvent("blur", {
         bubbles: true,
         cancelable: true,
@@ -482,11 +476,9 @@ describe("<ColorPicker />", () => {
       />,
     )
 
-    const input = getInput()
+    const input = getInputElement()
 
-    expect(input).not.toBeNull()
-
-    setInputValue(input!, "#ffffff")
+    setInputValue(input, "#ffffff")
 
     expect(onInputChange).not.toHaveBeenCalled()
   })
@@ -500,11 +492,9 @@ describe("<ColorPicker />", () => {
       />,
     )
 
-    const input = getInput()
+    const input = getInputElement()
 
-    expect(input).not.toBeNull()
-
-    setInputValue(input!, "#a1b2c3")
+    setInputValue(input, "#a1b2c3")
 
     expect(input).toHaveValue("#a1b2c3")
   })

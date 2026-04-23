@@ -34,7 +34,12 @@ describe("oxfmt config", () => {
 
     execFileSync(
       process.execPath,
-      [oxfmtBin, tempDir, "--config", "./packages/workspace/src/oxfmt/config.ts"],
+      [
+        oxfmtBin,
+        tempDir,
+        "--config",
+        "./packages/workspace/src/oxfmt/config.ts",
+      ],
       { cwd: repoRoot },
     )
 

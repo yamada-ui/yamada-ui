@@ -50,6 +50,22 @@ describe("<Breadcrumb />", () => {
     expect(screen.getByTestId("ellipsis").tagName).toBe("svg")
   })
 
+  test("preserves root `gap` when `listProps` has an undefined `gap`", () => {
+    render(
+      <Breadcrumb.Root
+        gap="10px"
+        listProps={{ "data-testid": "list", gap: undefined }}
+      >
+        <Breadcrumb.Link href="/">Link 1</Breadcrumb.Link>
+        <Breadcrumb.Link href="/" currentPage>
+          Link 2
+        </Breadcrumb.Link>
+      </Breadcrumb.Root>,
+    )
+
+    expect(screen.getByTestId("list")).toHaveStyle({ gap: "10px" })
+  })
+
   test("separator property is being passed accurately", () => {
     render(
       <Breadcrumb.Root separator="-">

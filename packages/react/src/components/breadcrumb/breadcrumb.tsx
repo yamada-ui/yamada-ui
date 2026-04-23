@@ -5,7 +5,7 @@ import type { HTMLStyledProps, PropGetter, ThemeProps } from "../../core"
 import type { BreadcrumbStyle } from "./breadcrumb.style"
 import type { UseBreadcrumbProps } from "./use-breadcrumb"
 import { Fragment, useMemo } from "react"
-import { createSlotComponent, styled } from "../../core"
+import { createSlotComponent, mergeProps, styled } from "../../core"
 import { ChevronRightIcon, EllipsisIcon } from "../icon"
 import { breadcrumbStyle } from "./breadcrumb.style"
 import { useBreadcrumb } from "./use-breadcrumb"
@@ -104,7 +104,7 @@ export const BreadcrumbRoot = withProvider<"nav", BreadcrumbRootProps>(
     return (
       <ComponentContext value={context}>
         <styled.nav {...getRootProps()}>
-          <BreadcrumbList {...getListProps({ gap, ...listProps })}>
+          <BreadcrumbList {...getListProps(mergeProps({ gap }, listProps)())}>
             {children.map((child, index) => {
               const last = index === children.length - 1
 

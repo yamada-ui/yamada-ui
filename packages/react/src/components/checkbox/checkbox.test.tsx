@@ -173,10 +173,10 @@ describe("<CheckboxGroup />", () => {
       />,
     )
 
-    const checkboxes = page.getByRole("checkbox").elements()
+    const checkboxes = page.getByRole("checkbox")
 
-    expect(checkboxes[2]).toBeDisabled()
-    checkboxes[2]!.click()
+    await expect.element(checkboxes.nth(2)).toBeDisabled()
+    await checkboxes.nth(2).click()
     expect(onChange).not.toHaveBeenCalled()
   })
 

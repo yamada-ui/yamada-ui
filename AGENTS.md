@@ -7,7 +7,7 @@ Yamada UI is a React UI component library built with CSS-in-JS (Emotion).
 - **Tests are required**: Always write tests when fixing bugs or adding new features.
 - **Accessibility is required**: All components must support ARIA attributes, keyboard navigation, and screen readers. Report any concerns.
 - **Do not bundle multiple fixes**: If you encounter a separate issue while working on a fix, do not fix it in the same PR. Create a separate issue and submit a separate PR.
-- **Do not run format, lint, or typecheck unless explicitly asked**: Format and lint are handled by lefthook on commit, and all three are validated by the Quality GitHub Action on PR. Only run tests locally to verify the changes work correctly.
+- **Do not run format, lint, or typecheck unless explicitly asked**: Format, lint and typecheck are handled by lefthook on commit. However, run tests for the changed files locally to verify that the implementation works correctly.
 
 ## Rules
 
@@ -45,7 +45,7 @@ packages/
 ├─ react/　      # Published react components package (@yamada-ui/react)
 ├─ utils/　      # Published utility functions package (@yamada-ui/utils)
 ├─ forge/　      # Internal forge package for (Creating github issues, ...etc.)
-└─ workspace/　  # Internal utilities packages (ESLint, Oxfmt, Vitest, TypeScript, ...etc.)
+└─ workspace/　  # Internal utilities packages (OxLint, Oxfmt, Vitest, TypeScript, ...etc.)
 www/　            # Documentation site (Next.js, Velite)
 playgrounds/
 ├─ next/

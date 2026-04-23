@@ -1,8 +1,8 @@
 import type { FC } from "react"
 import type * as Utils from "../../utils"
 import type { UseFocusOnMouseDownProps, UseFocusOnShowProps } from "./"
-import { act, fireEvent, render, waitFor } from "#test"
 import { useRef } from "react"
+import { act, fireEvent, render, waitFor } from "#test"
 import { getFirstFocusableElement } from "../../utils"
 import { useFocusOnPointerDown, useFocusOnShow } from "./"
 

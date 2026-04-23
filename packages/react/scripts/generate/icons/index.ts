@@ -47,7 +47,7 @@ async function getIconNames() {
     },
   })
 
-  return iconNames
+  return iconNames.sort((a, b) => a.localeCompare(b))
 }
 
 async function createIcons(iconNames: string[]) {
@@ -107,16 +107,19 @@ async function main() {
 
   spinner.succeed(`Created icons`)
 
-  spinner.start(`Fixing eslint`)
+  spinner.start(`Fixing lint`)
 
-  await execFileAsync("npx", [
-    "eslint",
-    "src/components/icon/icons/index.ts",
-    "src/components/icon/icons/index.types.ts",
-    "--fix",
-  ])
+  try {
+    await execFileAsync("pnpm", [
+      "exec",
+      "oxlint",
+      "src/components/icon/icons/index.ts",
+      "src/components/icon/icons/index.types.ts",
+      "--fix",
+    ])
+  } catch {}
 
-  spinner.succeed(`Fixed eslint`)
+  spinner.succeed(`Fixed lint`)
 
   const end = process.hrtime.bigint()
   const duration = (Number(end - start) / 1e9).toFixed(2)

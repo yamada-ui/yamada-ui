@@ -1,6 +1,41 @@
-import { fireEvent, render, screen, waitFor } from "#test"
+import { page, render } from "#test/browser"
 import { noop } from "../../utils"
 import { ColorSelector } from "./"
+
+const colorSwatches = [
+  "hsl(0, 100%, 50%)",
+  "hsl(45, 100%, 50%)",
+  "hsl(90, 100%, 50%)",
+  "hsl(135, 100%, 50%)",
+  "hsl(180, 100%, 50%)",
+  "hsl(225, 100%, 50%)",
+  "hsl(270, 100%, 50%)",
+  "hsl(315, 100%, 50%)",
+]
+
+const getTestElement = (testId: string) =>
+  page.getByTestId(testId).element() as HTMLElement
+
+const getOptionElements = () =>
+  Array.from(document.querySelectorAll('[role="option"]')) as HTMLElement[]
+
+const keyDown = (element: Element, init: KeyboardEventInit) => {
+  element.dispatchEvent(
+    new KeyboardEvent("keydown", { bubbles: true, ...init }),
+  )
+}
+
+const pointerDown = (element: Element, init: PointerEventInit) => {
+  element.dispatchEvent(
+    new PointerEvent("pointerdown", { bubbles: true, ...init }),
+  )
+}
+
+const pointerUp = (target: Element | Window, init: PointerEventInit) => {
+  target.dispatchEvent(
+    new PointerEvent("pointerup", { bubbles: true, ...init }),
+  )
+}
 
 const mockRect = (el: HTMLElement, rect: Partial<DOMRect>): (() => void) => {
   const original = el.getBoundingClientRect
@@ -17,6 +52,7 @@ const mockRect = (el: HTMLElement, rect: Partial<DOMRect>): (() => void) => {
       y: 0,
       ...rect,
     }) as DOMRect
+
   return () => {
     el.getBoundingClientRect = original
   }
@@ -25,6 +61,7 @@ const mockRect = (el: HTMLElement, rect: Partial<DOMRect>): (() => void) => {
 describe("<ColorSelector />", () => {
   const defaultEyeDropper = (window as any).EyeDropper
   const openEyeDropper = vi.fn()
+
   class EyeDropperMock {
     open = openEyeDropper
   }
@@ -38,19 +75,10 @@ describe("<ColorSelector />", () => {
     vi.stubGlobal("EyeDropper", defaultEyeDropper)
   })
 
-  test("renders component correctly", () => {
-    render(
+  test("renders component correctly", async () => {
+    await render(
       <ColorSelector.Root
-        colorSwatches={[
-          "hsl(0, 100%, 50%)",
-          "hsl(45, 100%, 50%)",
-          "hsl(90, 100%, 50%)",
-          "hsl(135, 100%, 50%)",
-          "hsl(180, 100%, 50%)",
-          "hsl(225, 100%, 50%)",
-          "hsl(270, 100%, 50%)",
-          "hsl(315, 100%, 50%)",
-        ]}
+        colorSwatches={colorSwatches}
         colorSwatchGroupLabel="Pick a color"
         format="hexa"
       />,
@@ -78,20 +106,11 @@ describe("<ColorSelector />", () => {
     )
   })
 
-  test("sets `className` correctly", () => {
-    render(
+  test("sets `className` correctly", async () => {
+    await render(
       <ColorSelector.Root
         data-testid="root"
-        colorSwatches={[
-          "hsl(0, 100%, 50%)",
-          "hsl(45, 100%, 50%)",
-          "hsl(90, 100%, 50%)",
-          "hsl(135, 100%, 50%)",
-          "hsl(180, 100%, 50%)",
-          "hsl(225, 100%, 50%)",
-          "hsl(270, 100%, 50%)",
-          "hsl(315, 100%, 50%)",
-        ]}
+        colorSwatches={colorSwatches}
         colorSwatchGroupLabel="Pick a color"
         format="hexa"
         alphaSliderProps={{ "data-testid": "alphaSlider" }}
@@ -101,32 +120,32 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    expect(screen.getByTestId("root")).toHaveClass("ui-color-selector__root")
-    expect(screen.getByTestId("alphaSlider")).toHaveClass(
+    expect(getTestElement("root")).toHaveClass("ui-color-selector__root")
+    expect(getTestElement("alphaSlider")).toHaveClass(
       "ui-color-selector__alpha-slider",
     )
-    expect(screen.getByTestId("hueSlider")).toHaveClass(
+    expect(getTestElement("hueSlider")).toHaveClass(
       "ui-color-selector__hue-slider",
     )
-    expect(screen.getByTestId("saturationSlider")).toHaveClass(
+    expect(getTestElement("saturationSlider")).toHaveClass(
       "ui-color-selector__saturation-slider",
     )
-    expect(screen.getByTestId("colorSwatchGroupLabel")).toHaveClass(
+    expect(getTestElement("colorSwatchGroupLabel")).toHaveClass(
       "ui-color-selector__color-swatch-group-label",
     )
-    expect(screen.getByRole("listbox")).toHaveClass(
+    expect(page.getByRole("listbox").element()).toHaveClass(
       "ui-color-selector__color-swatch-group",
     )
-    expect(screen.getAllByRole("option")[0]).toHaveClass(
+    expect(getOptionElements()[0]).toHaveClass(
       "ui-color-selector__color-swatch-item",
     )
   })
 
-  test("merges saturation slider props from root and user", () => {
+  test("merges saturation slider props from root and user", async () => {
     const onRootClick = vi.fn()
     const onUserClick = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         defaultValue="#ff0000"
         saturationSliderProps={{
@@ -144,7 +163,7 @@ describe("<ColorSelector />", () => {
       </ColorSelector.Root>,
     )
 
-    const saturationSlider = screen.getByTestId("saturation-slider")
+    const saturationSlider = getTestElement("saturation-slider")
 
     expect(saturationSlider).toHaveClass("from-root", "from-user")
     expect(saturationSlider).toHaveStyle({
@@ -152,17 +171,17 @@ describe("<ColorSelector />", () => {
       color: "rgb(0, 0, 255)",
     })
 
-    fireEvent.click(saturationSlider)
+    saturationSlider.click()
 
     expect(onRootClick).toHaveBeenCalledTimes(1)
     expect(onUserClick).toHaveBeenCalledTimes(1)
   })
 
-  test("merges hue slider props from root and user", () => {
+  test("merges hue slider props from root and user", async () => {
     const onRootClick = vi.fn()
     const onUserClick = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         defaultValue="#ff0000"
         hueSliderProps={{
@@ -180,7 +199,7 @@ describe("<ColorSelector />", () => {
       </ColorSelector.Root>,
     )
 
-    const hueSlider = screen.getByTestId("hue-slider")
+    const hueSlider = getTestElement("hue-slider")
 
     expect(hueSlider).toHaveClass("from-root", "from-user")
     expect(hueSlider).toHaveStyle({
@@ -188,17 +207,17 @@ describe("<ColorSelector />", () => {
       color: "rgb(0, 0, 255)",
     })
 
-    fireEvent.click(hueSlider)
+    hueSlider.click()
 
     expect(onRootClick).toHaveBeenCalledTimes(1)
     expect(onUserClick).toHaveBeenCalledTimes(1)
   })
 
-  test("merges alpha slider props from root and user", () => {
+  test("merges alpha slider props from root and user", async () => {
     const onRootClick = vi.fn()
     const onUserClick = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         defaultValue="hsla(0, 100%, 50%, 0.5)"
         format="hsla"
@@ -217,7 +236,7 @@ describe("<ColorSelector />", () => {
       </ColorSelector.Root>,
     )
 
-    const alphaSlider = screen.getByTestId("alpha-slider")
+    const alphaSlider = getTestElement("alpha-slider")
 
     expect(alphaSlider).toHaveClass("from-root", "from-user")
     expect(alphaSlider).toHaveStyle({
@@ -225,17 +244,17 @@ describe("<ColorSelector />", () => {
       color: "rgb(0, 0, 255)",
     })
 
-    fireEvent.click(alphaSlider)
+    alphaSlider.click()
 
     expect(onRootClick).toHaveBeenCalledTimes(1)
     expect(onUserClick).toHaveBeenCalledTimes(1)
   })
 
-  test("merges color swatch group label props from root and user", () => {
+  test("merges color swatch group label props from root and user", async () => {
     const onRootClick = vi.fn()
     const onUserClick = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         colorSwatches={["#ff0000"]}
         defaultValue="#ffffff"
@@ -255,21 +274,21 @@ describe("<ColorSelector />", () => {
       </ColorSelector.Root>,
     )
 
-    const groupLabel = screen.getByTestId("group-label")
+    const groupLabel = getTestElement("group-label")
 
     expect(groupLabel).toHaveClass("from-root", "from-user")
 
-    fireEvent.click(groupLabel)
+    groupLabel.click()
 
     expect(onRootClick).toHaveBeenCalledTimes(1)
     expect(onUserClick).toHaveBeenCalledTimes(1)
   })
 
-  test("merges color swatch item props from root and user", () => {
+  test("merges color swatch item props from root and user", async () => {
     const onRootClick = vi.fn()
     const onUserClick = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         defaultValue="#ffffff"
         colorSwatchItemProps={{
@@ -287,21 +306,21 @@ describe("<ColorSelector />", () => {
       </ColorSelector.Root>,
     )
 
-    const option = screen.getByRole("option")
+    const option = page.getByRole("option").element() as HTMLElement
 
     expect(option).toHaveClass("from-root", "from-user")
 
-    fireEvent.click(option)
+    option.click()
 
     expect(onRootClick).toHaveBeenCalledTimes(1)
     expect(onUserClick).toHaveBeenCalledTimes(1)
   })
 
-  test("merges color swatch group props from root and user", () => {
+  test("merges color swatch group props from root and user", async () => {
     const onRootClick = vi.fn()
     const onUserClick = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         colorSwatches={["#ff0000"]}
         defaultValue="#ffffff"
@@ -318,30 +337,21 @@ describe("<ColorSelector />", () => {
       </ColorSelector.Root>,
     )
 
-    const swatchGroup = screen.getByTestId("swatch-group")
+    const swatchGroup = getTestElement("swatch-group")
 
     expect(swatchGroup).toHaveClass("from-root", "from-user")
 
-    fireEvent.click(swatchGroup)
+    swatchGroup.click()
 
     expect(onRootClick).toHaveBeenCalledTimes(1)
     expect(onUserClick).toHaveBeenCalledTimes(1)
   })
 
-  test("renders HTML tag correctly", () => {
-    render(
+  test("renders HTML tag correctly", async () => {
+    await render(
       <ColorSelector.Root
         data-testid="root"
-        colorSwatches={[
-          "hsl(0, 100%, 50%)",
-          "hsl(45, 100%, 50%)",
-          "hsl(90, 100%, 50%)",
-          "hsl(135, 100%, 50%)",
-          "hsl(180, 100%, 50%)",
-          "hsl(225, 100%, 50%)",
-          "hsl(270, 100%, 50%)",
-          "hsl(315, 100%, 50%)",
-        ]}
+        colorSwatches={colorSwatches}
         colorSwatchGroupLabel="Pick a color"
         format="hexa"
         alphaSliderProps={{ "data-testid": "alphaSlider" }}
@@ -351,17 +361,17 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    expect(screen.getByTestId("root").tagName).toBe("DIV")
-    expect(screen.getByTestId("alphaSlider").tagName).toBe("DIV")
-    expect(screen.getByTestId("hueSlider").tagName).toBe("DIV")
-    expect(screen.getByTestId("saturationSlider").tagName).toBe("DIV")
-    expect(screen.getByTestId("colorSwatchGroupLabel").tagName).toBe("SPAN")
-    expect(screen.getByRole("listbox").tagName).toBe("DIV")
-    expect(screen.getAllByRole("option")[0]?.tagName).toBe("DIV")
+    expect(getTestElement("root").tagName).toBe("DIV")
+    expect(getTestElement("alphaSlider").tagName).toBe("DIV")
+    expect(getTestElement("hueSlider").tagName).toBe("DIV")
+    expect(getTestElement("saturationSlider").tagName).toBe("DIV")
+    expect(getTestElement("colorSwatchGroupLabel").tagName).toBe("SPAN")
+    expect(page.getByRole("listbox").element().tagName).toBe("DIV")
+    expect(getOptionElements()[0]?.tagName).toBe("DIV")
   })
 
-  test("does not show alpha slider when format is hex", () => {
-    render(
+  test("does not show alpha slider when format is hex", async () => {
+    await render(
       <ColorSelector.Root data-testid="root" defaultValue="#ff0000">
         <ColorSelector.SaturationSlider data-testid="saturation" />
         <ColorSelector.HueSlider data-testid="hue" />
@@ -369,12 +379,12 @@ describe("<ColorSelector />", () => {
       </ColorSelector.Root>,
     )
 
-    expect(screen.getByTestId("root")).toBeInTheDocument()
-    expect(screen.queryByTestId("alpha")).not.toBeInTheDocument()
+    expect(getTestElement("root")).toBeInTheDocument()
+    expect(document.querySelector('[data-testid="alpha"]')).toBeNull()
   })
 
-  test("shows alpha slider when withAlpha is true", () => {
-    render(
+  test("shows alpha slider when withAlpha is true", async () => {
+    await render(
       <ColorSelector.Root data-testid="root" defaultValue="#ff0000" withAlpha>
         <ColorSelector.SaturationSlider data-testid="saturation" />
         <ColorSelector.HueSlider data-testid="hue" />
@@ -382,24 +392,24 @@ describe("<ColorSelector />", () => {
       </ColorSelector.Root>,
     )
 
-    expect(screen.getByTestId("alpha")).toBeInTheDocument()
+    expect(getTestElement("alpha")).toBeInTheDocument()
   })
 
-  test("renders eye dropper with default icon", () => {
-    render(
+  test("renders eye dropper with default icon", async () => {
+    await render(
       <ColorSelector.Root defaultValue="#ff0000">
         <ColorSelector.EyeDropper data-testid="eye-dropper" />
       </ColorSelector.Root>,
     )
 
-    const eyeDropper = screen.getByTestId("eye-dropper")
+    const eyeDropper = getTestElement("eye-dropper")
 
     expect(eyeDropper).toBeInTheDocument()
     expect(eyeDropper.querySelector("svg")).not.toBeNull()
   })
 
-  test("renders eye dropper with custom icon", () => {
-    render(
+  test("renders eye dropper with custom icon", async () => {
+    await render(
       <ColorSelector.Root defaultValue="#ff0000">
         <ColorSelector.EyeDropper
           data-testid="eye-dropper"
@@ -408,7 +418,7 @@ describe("<ColorSelector />", () => {
       </ColorSelector.Root>,
     )
 
-    expect(screen.getByTestId("custom-icon")).toBeInTheDocument()
+    expect(getTestElement("custom-icon")).toBeInTheDocument()
   })
 
   test("eye dropper triggers color pick on click", async () => {
@@ -416,15 +426,15 @@ describe("<ColorSelector />", () => {
 
     const onChange = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root defaultValue="#ff0000" onChange={onChange}>
         <ColorSelector.EyeDropper data-testid="eye-dropper" />
       </ColorSelector.Root>,
     )
 
-    fireEvent.click(screen.getByTestId("eye-dropper"))
+    getTestElement("eye-dropper").click()
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(openEyeDropper).toHaveBeenCalledTimes(1)
       expect(onChange).toHaveBeenCalledWith("#00ff00")
     })
@@ -435,15 +445,15 @@ describe("<ColorSelector />", () => {
 
     const onChange = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root defaultValue="#ff0000" onChange={onChange}>
         <ColorSelector.EyeDropper data-testid="eye-dropper" />
       </ColorSelector.Root>,
     )
 
-    fireEvent.keyDown(screen.getByTestId("eye-dropper"), { key: "Enter" })
+    keyDown(getTestElement("eye-dropper"), { key: "Enter" })
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(openEyeDropper).toHaveBeenCalledTimes(1)
       expect(onChange).toHaveBeenCalledWith("#00ff00")
     })
@@ -454,18 +464,15 @@ describe("<ColorSelector />", () => {
 
     const onChange = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root defaultValue="#ff0000" onChange={onChange}>
         <ColorSelector.EyeDropper data-testid="eye-dropper" />
       </ColorSelector.Root>,
     )
 
-    fireEvent.keyDown(screen.getByTestId("eye-dropper"), {
-      key: " ",
-      code: "Space",
-    })
+    keyDown(getTestElement("eye-dropper"), { key: " ", code: "Space" })
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(openEyeDropper).toHaveBeenCalledTimes(1)
       expect(onChange).toHaveBeenCalledWith("#00ff00")
     })
@@ -474,20 +481,20 @@ describe("<ColorSelector />", () => {
   test("eye dropper does not trigger when disabled", async () => {
     openEyeDropper.mockResolvedValue({ sRGBHex: "#00ff00" })
 
-    render(
+    await render(
       <ColorSelector.Root defaultValue="#ff0000" disabled>
         <ColorSelector.EyeDropper data-testid="eye-dropper" />
       </ColorSelector.Root>,
     )
 
-    const eyeDropper = screen.getByTestId("eye-dropper")
+    const eyeDropper = getTestElement("eye-dropper")
 
     expect(eyeDropper).toHaveAttribute("aria-disabled", "true")
     expect(eyeDropper).toHaveAttribute("tabindex", "-1")
 
-    fireEvent.click(eyeDropper)
+    eyeDropper.click()
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(openEyeDropper).not.toHaveBeenCalled()
     })
   })
@@ -495,19 +502,19 @@ describe("<ColorSelector />", () => {
   test("eye dropper does not trigger when readOnly", async () => {
     openEyeDropper.mockResolvedValue({ sRGBHex: "#00ff00" })
 
-    render(
+    await render(
       <ColorSelector.Root defaultValue="#ff0000" readOnly>
         <ColorSelector.EyeDropper data-testid="eye-dropper" />
       </ColorSelector.Root>,
     )
 
-    const eyeDropper = screen.getByTestId("eye-dropper")
+    const eyeDropper = getTestElement("eye-dropper")
 
     expect(eyeDropper).toHaveAttribute("aria-disabled", "true")
 
-    fireEvent.click(eyeDropper)
+    eyeDropper.click()
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(openEyeDropper).not.toHaveBeenCalled()
     })
   })
@@ -517,25 +524,25 @@ describe("<ColorSelector />", () => {
 
     const onChange = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root defaultValue="#ff0000" onChange={onChange}>
         <ColorSelector.EyeDropper data-testid="eye-dropper" />
       </ColorSelector.Root>,
     )
 
-    fireEvent.click(screen.getByTestId("eye-dropper"))
+    getTestElement("eye-dropper").click()
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(openEyeDropper).toHaveBeenCalledTimes(1)
     })
 
     expect(onChange).not.toHaveBeenCalled()
   })
 
-  test("calls onChange when clicking a color swatch item", () => {
+  test("calls onChange when clicking a color swatch item", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         colorSwatches={["#ff0000", "#00ff00", "#0000ff"]}
         defaultValue="#ffffff"
@@ -543,17 +550,15 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    const options = screen.getAllByRole("option")
-
-    fireEvent.click(options[1]!)
+    getOptionElements()[1]!.click()
 
     expect(onChange).toHaveBeenCalledWith("#00ff00")
   })
 
-  test("calls onChange when pressing Enter on a color swatch item", () => {
+  test("calls onChange when pressing Enter on a color swatch item", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         colorSwatches={["#ff0000", "#00ff00", "#0000ff"]}
         defaultValue="#ffffff"
@@ -561,17 +566,15 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    const options = screen.getAllByRole("option")
-
-    fireEvent.keyDown(options[0]!, { key: "Enter" })
+    keyDown(getOptionElements()[0]!, { key: "Enter" })
 
     expect(onChange).toHaveBeenCalledWith("#ff0000")
   })
 
-  test("calls onChange when pressing Space on a color swatch item", () => {
+  test("calls onChange when pressing Space on a color swatch item", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         colorSwatches={["#ff0000", "#00ff00", "#0000ff"]}
         defaultValue="#ffffff"
@@ -579,17 +582,15 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    const options = screen.getAllByRole("option")
-
-    fireEvent.keyDown(options[0]!, { key: " ", code: "Space" })
+    keyDown(getOptionElements()[0]!, { key: " ", code: "Space" })
 
     expect(onChange).toHaveBeenCalledWith("#ff0000")
   })
 
-  test("does not call onChange on swatch click when disabled", () => {
+  test("does not call onChange on swatch click when disabled", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         colorSwatches={["#ff0000", "#00ff00"]}
         defaultValue="#ffffff"
@@ -598,17 +599,15 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    const options = screen.getAllByRole("option")
-
-    fireEvent.click(options[0]!)
+    getOptionElements()[0]!.click()
 
     expect(onChange).not.toHaveBeenCalled()
   })
 
-  test("does not call onChange on swatch click when readOnly", () => {
+  test("does not call onChange on swatch click when readOnly", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         colorSwatches={["#ff0000", "#00ff00"]}
         defaultValue="#ffffff"
@@ -617,15 +616,13 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    const options = screen.getAllByRole("option")
-
-    fireEvent.click(options[0]!)
+    getOptionElements()[0]!.click()
 
     expect(onChange).not.toHaveBeenCalled()
   })
 
-  test("swatch items have correct aria attributes when disabled", () => {
-    render(
+  test("swatch items have correct aria attributes when disabled", async () => {
+    await render(
       <ColorSelector.Root
         colorSwatches={["#ff0000"]}
         defaultValue="#ffffff"
@@ -633,16 +630,16 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    const option = screen.getAllByRole("option")[0]
+    const option = getOptionElements()[0]
 
     expect(option).toHaveAttribute("aria-disabled", "true")
     expect(option).toHaveAttribute("tabindex", "-1")
   })
 
-  test("renders with controlled value", () => {
+  test("renders with controlled value", async () => {
     const onChange = vi.fn()
 
-    const { rerender } = render(
+    const { rerender } = await render(
       <ColorSelector.Root
         data-testid="root"
         value="#ff0000"
@@ -650,7 +647,7 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    expect(screen.getByTestId("root")).toBeInTheDocument()
+    expect(getTestElement("root")).toBeInTheDocument()
 
     rerender(
       <ColorSelector.Root
@@ -660,11 +657,11 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    expect(screen.getByTestId("root")).toBeInTheDocument()
+    expect(getTestElement("root")).toBeInTheDocument()
   })
 
-  test("renders with custom children", () => {
-    render(
+  test("renders with custom children", async () => {
+    await render(
       <ColorSelector.Root defaultValue="#ff0000">
         <ColorSelector.SaturationSlider data-testid="saturation" />
         <ColorSelector.HueSlider data-testid="hue" />
@@ -672,15 +669,15 @@ describe("<ColorSelector />", () => {
       </ColorSelector.Root>,
     )
 
-    expect(screen.getByTestId("saturation")).toBeInTheDocument()
-    expect(screen.getByTestId("hue")).toBeInTheDocument()
-    expect(screen.getByTestId("eye-dropper")).toBeInTheDocument()
+    expect(getTestElement("saturation")).toBeInTheDocument()
+    expect(getTestElement("hue")).toBeInTheDocument()
+    expect(getTestElement("eye-dropper")).toBeInTheDocument()
   })
 
-  test("renders with hsla format and handles alpha slider", () => {
+  test("renders with hsla format and handles alpha slider", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         data-testid="root"
         defaultValue="hsla(0, 100%, 50%, 0.5)"
@@ -690,27 +687,27 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    expect(screen.getByTestId("alpha")).toBeInTheDocument()
+    expect(getTestElement("alpha")).toBeInTheDocument()
   })
 
-  test("sets data-disabled on root when disabled", () => {
-    render(
+  test("sets data-disabled on root when disabled", async () => {
+    await render(
       <ColorSelector.Root data-testid="root" defaultValue="#ff0000" disabled />,
     )
 
-    expect(screen.getByTestId("root")).toHaveAttribute("data-disabled")
+    expect(getTestElement("root")).toHaveAttribute("data-disabled")
   })
 
-  test("sets data-readonly on root when readOnly", () => {
-    render(
+  test("sets data-readonly on root when readOnly", async () => {
+    await render(
       <ColorSelector.Root data-testid="root" defaultValue="#ff0000" readOnly />,
     )
 
-    expect(screen.getByTestId("root")).toHaveAttribute("data-readonly")
+    expect(getTestElement("root")).toHaveAttribute("data-readonly")
   })
 
-  test("renders color swatch group with colorSwatchGroupProps", () => {
-    render(
+  test("renders color swatch group with colorSwatchGroupProps", async () => {
+    await render(
       <ColorSelector.Root
         colorSwatches={["#ff0000", "#00ff00"]}
         defaultValue="#ffffff"
@@ -718,11 +715,11 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    expect(screen.getByTestId("swatch-group")).toBeInTheDocument()
+    expect(getTestElement("swatch-group")).toBeInTheDocument()
   })
 
-  test("renders color swatch items with colorSwatchItemProps", () => {
-    render(
+  test("renders color swatch items with colorSwatchItemProps", async () => {
+    await render(
       <ColorSelector.Root
         colorSwatches={["#ff0000", "#00ff00"]}
         defaultValue="#ffffff"
@@ -730,15 +727,13 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    const options = screen.getAllByRole("option")
-
-    expect(options[0]).toHaveAttribute("data-custom", "true")
+    expect(getOptionElements()[0]).toHaveAttribute("data-custom", "true")
   })
 
-  test("handles onChangeStart callback", () => {
+  test("handles onChangeStart callback", async () => {
     const onChangeStart = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         colorSwatches={["#ff0000"]}
         defaultValue="#ffffff"
@@ -747,13 +742,13 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    expect(screen.getByTestId("saturation")).toBeInTheDocument()
+    expect(getTestElement("saturation")).toBeInTheDocument()
   })
 
-  test("handles onChangeEnd callback", () => {
+  test("handles onChangeEnd callback", async () => {
     const onChangeEnd = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         colorSwatches={["#ff0000"]}
         defaultValue="#ffffff"
@@ -762,15 +757,15 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    expect(screen.getByTestId("saturation")).toBeInTheDocument()
+    expect(getTestElement("saturation")).toBeInTheDocument()
   })
 
-  test("hue slider pointer interaction triggers onChange, onChangeStart and onChangeEnd", () => {
+  test("hue slider pointer interaction triggers onChange, onChangeStart and onChangeEnd", async () => {
     const onChange = vi.fn()
     const onChangeStart = vi.fn()
     const onChangeEnd = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         defaultValue="#ff0000"
         hueSliderProps={{ trackProps: { "data-testid": "hue-track" } }}
@@ -780,23 +775,23 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    const track = screen.getByTestId("hue-track")
+    const track = getTestElement("hue-track")
     const cleanup = mockRect(track, { left: 0, width: 360 })
 
-    fireEvent.pointerDown(track, { clientX: 180, clientY: 0 })
+    pointerDown(track, { clientX: 180, clientY: 0 })
     expect(onChangeStart).toHaveBeenCalledWith(expect.any(String))
 
-    fireEvent.pointerUp(window, { clientX: 180, clientY: 0 })
+    pointerUp(window, { clientX: 180, clientY: 0 })
     expect(onChangeEnd).toHaveBeenCalledWith(expect.any(String))
 
     cleanup()
   })
 
-  test("saturation slider pointer interaction triggers onChangeStart and onChangeEnd", () => {
+  test("saturation slider pointer interaction triggers onChangeStart and onChangeEnd", async () => {
     const onChangeStart = vi.fn()
     const onChangeEnd = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         defaultValue="#ff0000"
         saturationSliderProps={{
@@ -807,7 +802,7 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    const track = screen.getByTestId("saturation-track")
+    const track = getTestElement("saturation-track")
     const cleanup = mockRect(track, {
       height: 200,
       left: 0,
@@ -815,20 +810,20 @@ describe("<ColorSelector />", () => {
       width: 200,
     })
 
-    fireEvent.pointerDown(track, { clientX: 100, clientY: 100 })
+    pointerDown(track, { clientX: 100, clientY: 100 })
     expect(onChangeStart).toHaveBeenCalledWith(expect.any(String))
 
-    fireEvent.pointerUp(window, { clientX: 100, clientY: 100 })
+    pointerUp(window, { clientX: 100, clientY: 100 })
     expect(onChangeEnd).toHaveBeenCalledWith(expect.any(String))
 
     cleanup()
   })
 
-  test("alpha slider pointer interaction triggers onChangeStart and onChangeEnd", () => {
+  test("alpha slider pointer interaction triggers onChangeStart and onChangeEnd", async () => {
     const onChangeStart = vi.fn()
     const onChangeEnd = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         defaultValue="hsla(0, 100%, 50%, 0.5)"
         format="hsla"
@@ -838,23 +833,23 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    const track = screen.getByTestId("alpha-track")
+    const track = getTestElement("alpha-track")
     const cleanup = mockRect(track, { left: 0, width: 100 })
 
-    fireEvent.pointerDown(track, { clientX: 50, clientY: 0 })
+    pointerDown(track, { clientX: 50, clientY: 0 })
     expect(onChangeStart).toHaveBeenCalledWith(expect.any(String))
 
-    fireEvent.pointerUp(window, { clientX: 50, clientY: 0 })
+    pointerUp(window, { clientX: 50, clientY: 0 })
     expect(onChangeEnd).toHaveBeenCalledWith(expect.any(String))
 
     cleanup()
   })
 
-  test("does not trigger onChangeStart or onChangeEnd when disabled", () => {
+  test("does not trigger onChangeStart or onChangeEnd when disabled", async () => {
     const onChangeStart = vi.fn()
     const onChangeEnd = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         defaultValue="#ff0000"
         disabled
@@ -864,11 +859,11 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    const track = screen.getByTestId("hue-track")
+    const track = getTestElement("hue-track")
     const cleanup = mockRect(track, { left: 0, width: 360 })
 
-    fireEvent.pointerDown(track, { clientX: 180, clientY: 0 })
-    fireEvent.pointerUp(window, { clientX: 180, clientY: 0 })
+    pointerDown(track, { clientX: 180, clientY: 0 })
+    pointerUp(window, { clientX: 180, clientY: 0 })
 
     expect(onChangeStart).not.toHaveBeenCalled()
     expect(onChangeEnd).not.toHaveBeenCalled()
@@ -876,11 +871,11 @@ describe("<ColorSelector />", () => {
     cleanup()
   })
 
-  test("does not trigger onChangeStart or onChangeEnd when readOnly", () => {
+  test("does not trigger onChangeStart or onChangeEnd when readOnly", async () => {
     const onChangeStart = vi.fn()
     const onChangeEnd = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         defaultValue="#ff0000"
         readOnly
@@ -890,11 +885,11 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    const track = screen.getByTestId("hue-track")
+    const track = getTestElement("hue-track")
     const cleanup = mockRect(track, { left: 0, width: 360 })
 
-    fireEvent.pointerDown(track, { clientX: 180, clientY: 0 })
-    fireEvent.pointerUp(window, { clientX: 180, clientY: 0 })
+    pointerDown(track, { clientX: 180, clientY: 0 })
+    pointerUp(window, { clientX: 180, clientY: 0 })
 
     expect(onChangeStart).not.toHaveBeenCalled()
     expect(onChangeEnd).not.toHaveBeenCalled()
@@ -902,18 +897,18 @@ describe("<ColorSelector />", () => {
     cleanup()
   })
 
-  test("eye dropper has correct tabIndex when interactive", () => {
-    render(
+  test("eye dropper has correct tabIndex when interactive", async () => {
+    await render(
       <ColorSelector.Root defaultValue="#ff0000">
         <ColorSelector.EyeDropper data-testid="eye-dropper" />
       </ColorSelector.Root>,
     )
 
-    expect(screen.getByTestId("eye-dropper")).toHaveAttribute("tabindex", "0")
+    expect(getTestElement("eye-dropper")).toHaveAttribute("tabindex", "0")
   })
 
-  test("renders eye dropper with children when no icon prop", () => {
-    render(
+  test("renders eye dropper with children when no icon prop", async () => {
+    await render(
       <ColorSelector.Root defaultValue="#ff0000">
         <ColorSelector.EyeDropper data-testid="eye-dropper">
           <span data-testid="child-content">dropper</span>
@@ -921,13 +916,13 @@ describe("<ColorSelector />", () => {
       </ColorSelector.Root>,
     )
 
-    expect(screen.getByTestId("child-content")).toBeInTheDocument()
+    expect(getTestElement("child-content")).toBeInTheDocument()
   })
 
-  test("renders with rgba format", () => {
+  test("renders with rgba format", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         data-testid="root"
         defaultValue="rgba(255, 0, 0, 0.5)"
@@ -937,13 +932,13 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    expect(screen.getByTestId("alpha")).toBeInTheDocument()
+    expect(getTestElement("alpha")).toBeInTheDocument()
   })
 
-  test("color swatch item does not trigger onChange on keyDown when disabled", () => {
+  test("color swatch item does not trigger onChange on keyDown when disabled", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         colorSwatches={["#ff0000", "#00ff00"]}
         defaultValue="#ffffff"
@@ -952,17 +947,15 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    const options = screen.getAllByRole("option")
-
-    fireEvent.keyDown(options[0]!, { key: "Enter" })
+    keyDown(getOptionElements()[0]!, { key: "Enter" })
 
     expect(onChange).not.toHaveBeenCalled()
   })
 
-  test("color swatch item does not trigger onChange on keyDown when readOnly", () => {
+  test("color swatch item does not trigger onChange on keyDown when readOnly", async () => {
     const onChange = vi.fn()
 
-    render(
+    await render(
       <ColorSelector.Root
         colorSwatches={["#ff0000", "#00ff00"]}
         defaultValue="#ffffff"
@@ -971,9 +964,7 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    const options = screen.getAllByRole("option")
-
-    fireEvent.keyDown(options[0]!, { key: " ", code: "Space" })
+    keyDown(getOptionElements()[0]!, { key: " ", code: "Space" })
 
     expect(onChange).not.toHaveBeenCalled()
   })
@@ -981,15 +972,15 @@ describe("<ColorSelector />", () => {
   test("eye dropper does not trigger on Enter key when disabled", async () => {
     openEyeDropper.mockResolvedValue({ sRGBHex: "#00ff00" })
 
-    render(
+    await render(
       <ColorSelector.Root defaultValue="#ff0000" disabled>
         <ColorSelector.EyeDropper data-testid="eye-dropper" />
       </ColorSelector.Root>,
     )
 
-    fireEvent.keyDown(screen.getByTestId("eye-dropper"), { key: "Enter" })
+    keyDown(getTestElement("eye-dropper"), { key: "Enter" })
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(openEyeDropper).not.toHaveBeenCalled()
     })
   })

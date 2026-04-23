@@ -64,6 +64,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@typescript/analyze-trace": "^0.10.1",
+    "@typescript/native-preview": "catalog:",
     "@vitest/coverage-v8": "^4.1.2",
     "@vitest/ui": "catalog:",
     "clean-package": "^2.2.0",
@@ -83,7 +84,6 @@
     "tsx": "catalog:",
     "turbo": "^2.9.3",
     "typescript": "catalog:",
-    "@typescript/native-preview": "catalog:",
     "vitest": "catalog:",
     "wait-on": "^9.0.5"
   },

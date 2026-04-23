@@ -10,6 +10,7 @@ catalog:
   "@tanstack/react-router": ^1.168.10
   "@testing-library/jest-dom": ^6.9.1
   "@types/yamljs": ^0.2.34
+  "@typescript/native-preview": 7.0.0-dev.20260421.2
   "@vitejs/plugin-react": ^6.0.1
   "@vitest/ui": ^4.1.2
   commander: ^14.0.3
@@ -34,7 +35,6 @@ catalog:
   sucrase: ^3.35.1
   tsx: ^4.21.0
   typescript: ^6.0.3
-  "@typescript/native-preview": 7.0.0-dev.20260421.2
   vite: ^8.0.3
   vitest: ^4.1.2
   vitest-axe: ^0.1.0

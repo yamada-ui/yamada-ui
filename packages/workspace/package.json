@@ -31,6 +31,7 @@
     "@octokit/rest": "^22.0.1",
     "@octokit/webhooks": "^14.2.0",
     "@testing-library/jest-dom": "catalog:",
+    "@typescript/native-preview": "catalog:",
     "@vitest/eslint-plugin": "^1.6.14",
     "dotenv": "catalog:",
     "eslint-plugin-perfectionist": "^5.8.0",
@@ -43,7 +44,6 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "typescript": "catalog:",
-    "@typescript/native-preview": "catalog:",
     "vitest": "catalog:",
     "vitest-axe": "catalog:"
   }

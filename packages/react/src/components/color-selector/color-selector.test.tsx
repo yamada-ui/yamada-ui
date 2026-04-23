@@ -16,8 +16,8 @@ const colorSwatches = [
 const getTestElement = (testId: string) =>
   page.getByTestId(testId).element() as HTMLElement
 
-const getOptionElements = () =>
-  Array.from(document.querySelectorAll('[role="option"]')) as HTMLElement[]
+const getOptionElement = (index = 0) =>
+  page.getByRole("option").nth(index).element() as HTMLElement
 
 const keyDown = (element: Element, init: KeyboardEventInit) => {
   element.dispatchEvent(
@@ -136,7 +136,7 @@ describe("<ColorSelector />", () => {
     expect(page.getByRole("listbox").element()).toHaveClass(
       "ui-color-selector__color-swatch-group",
     )
-    expect(getOptionElements()[0]).toHaveClass(
+    expect(getOptionElement()).toHaveClass(
       "ui-color-selector__color-swatch-item",
     )
   })
@@ -367,7 +367,7 @@ describe("<ColorSelector />", () => {
     expect(getTestElement("saturationSlider").tagName).toBe("DIV")
     expect(getTestElement("colorSwatchGroupLabel").tagName).toBe("SPAN")
     expect(page.getByRole("listbox").element().tagName).toBe("DIV")
-    expect(getOptionElements()[0]?.tagName).toBe("DIV")
+    expect(getOptionElement().tagName).toBe("DIV")
   })
 
   test("does not show alpha slider when format is hex", async () => {
@@ -550,7 +550,7 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    getOptionElements()[1]!.click()
+    getOptionElement(1).click()
 
     expect(onChange).toHaveBeenCalledWith("#00ff00")
   })
@@ -566,7 +566,7 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    keyDown(getOptionElements()[0]!, { key: "Enter" })
+    keyDown(getOptionElement(), { key: "Enter" })
 
     expect(onChange).toHaveBeenCalledWith("#ff0000")
   })
@@ -582,7 +582,7 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    keyDown(getOptionElements()[0]!, { key: " ", code: "Space" })
+    keyDown(getOptionElement(), { key: " ", code: "Space" })
 
     expect(onChange).toHaveBeenCalledWith("#ff0000")
   })
@@ -599,7 +599,7 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    getOptionElements()[0]!.click()
+    getOptionElement().click()
 
     expect(onChange).not.toHaveBeenCalled()
   })
@@ -616,7 +616,7 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    getOptionElements()[0]!.click()
+    getOptionElement().click()
 
     expect(onChange).not.toHaveBeenCalled()
   })
@@ -630,7 +630,7 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    const option = getOptionElements()[0]
+    const option = getOptionElement()
 
     expect(option).toHaveAttribute("aria-disabled", "true")
     expect(option).toHaveAttribute("tabindex", "-1")
@@ -727,7 +727,7 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    expect(getOptionElements()[0]).toHaveAttribute("data-custom", "true")
+    expect(getOptionElement()).toHaveAttribute("data-custom", "true")
   })
 
   test("handles onChangeStart callback", async () => {
@@ -947,7 +947,7 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    keyDown(getOptionElements()[0]!, { key: "Enter" })
+    keyDown(getOptionElement(), { key: "Enter" })
 
     expect(onChange).not.toHaveBeenCalled()
   })
@@ -964,7 +964,7 @@ describe("<ColorSelector />", () => {
       />,
     )
 
-    keyDown(getOptionElements()[0]!, { key: " ", code: "Space" })
+    keyDown(getOptionElement(), { key: " ", code: "Space" })
 
     expect(onChange).not.toHaveBeenCalled()
   })

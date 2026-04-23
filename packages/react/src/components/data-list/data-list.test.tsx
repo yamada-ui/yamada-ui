@@ -2,13 +2,7 @@ import type { DataListItemProps } from "."
 import { a11y, page, render } from "#test/browser"
 import { DataList } from "./"
 
-const getTestElement = (testId: string) =>
-  page.getByTestId(testId).element() as HTMLElement
-
-const getAllTestElements = (testId: string) =>
-  Array.from(
-    document.querySelectorAll(`[data-testid="${testId}"]`),
-  ) as HTMLElement[]
+const getTestElement = (testId: string) => page.getByTestId(testId)
 
 describe("<DataList />", () => {
   test("renders component correctly", async () => {
@@ -44,12 +38,18 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    expect(getTestElement("root")).toHaveClass("ui-data-list__root")
-    expect(getTestElement("item")).toHaveClass("ui-data-list__item")
-    expect(getTestElement("term")).toHaveClass("ui-data-list__term")
-    expect(getTestElement("description")).toHaveClass(
-      "ui-data-list__description",
-    )
+    await expect
+      .element(getTestElement("root"))
+      .toHaveClass("ui-data-list__root")
+    await expect
+      .element(getTestElement("item"))
+      .toHaveClass("ui-data-list__item")
+    await expect
+      .element(getTestElement("term"))
+      .toHaveClass("ui-data-list__term")
+    await expect
+      .element(getTestElement("description"))
+      .toHaveClass("ui-data-list__description")
   })
 
   test("DataList renders HTML tag correctly", async () => {
@@ -62,8 +62,8 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    expect(getTestElement("root").tagName).toBe("DL")
-    expect(getTestElement("item").tagName).toBe("DIV")
+    expect(getTestElement("root").element().tagName).toBe("DL")
+    expect(getTestElement("item").element().tagName).toBe("DIV")
     expect(page.getByText("白石うらら").element().tagName).toBe("DT")
     expect(page.getByText("入れ替わりの魔女").element().tagName).toBe("DD")
   })
@@ -78,9 +78,12 @@ describe("<DataList />", () => {
 
     await render(<DataList.Root items={items} />)
 
-    expect(page.getByText("白石うらら").element()).toBeInTheDocument()
-    expect(page.getByText("山田竜").element()).toBeInTheDocument()
-    expect(page.getByText("入れ替わりの魔女").element()).toBeInTheDocument()
+    await expect
+      .poll(() => page.getByText(/白石うらら|山田竜/).elements().length)
+      .toBe(2)
+    await expect.element(page.getByText("白石うらら")).toBeInTheDocument()
+    await expect.element(page.getByText("山田竜")).toBeInTheDocument()
+    await expect.element(page.getByText("入れ替わりの魔女")).toBeInTheDocument()
   })
 
   test("DataList renders array descriptions correctly", async () => {
@@ -93,9 +96,18 @@ describe("<DataList />", () => {
 
     await render(<DataList.Root items={items} />)
 
-    expect(page.getByText("白石うらら").element()).toBeInTheDocument()
-    expect(page.getByText("入れ替わりの魔女").element()).toBeInTheDocument()
-    expect(page.getByText("テレポーテーション").element()).toBeInTheDocument()
+    await expect
+      .poll(
+        () =>
+          page.getByText(/入れ替わりの魔女|テレポーテーション/).elements()
+            .length,
+      )
+      .toBe(2)
+    await expect.element(page.getByText("白石うらら")).toBeInTheDocument()
+    await expect.element(page.getByText("入れ替わりの魔女")).toBeInTheDocument()
+    await expect
+      .element(page.getByText("テレポーテーション"))
+      .toBeInTheDocument()
   })
 
   test("DataList calculates columns when description is omitted", async () => {
@@ -106,7 +118,9 @@ describe("<DataList />", () => {
 
     await render(<DataList.Root data-testid="root" items={items} />)
 
-    expect(getTestElement("root").style.getPropertyValue("--col")).toBe("2")
+    expect(
+      getTestElement("root").element().style.getPropertyValue("--col"),
+    ).toBe("2")
   })
 
   test("DataList calculates columns when term is omitted", async () => {
@@ -117,7 +131,9 @@ describe("<DataList />", () => {
 
     await render(<DataList.Root data-testid="root" items={items} />)
 
-    expect(getTestElement("root").style.getPropertyValue("--col")).toBe("2")
+    expect(
+      getTestElement("root").element().style.getPropertyValue("--col"),
+    ).toBe("2")
   })
 
   test("DataListItem renders array term prop", async () => {
@@ -127,9 +143,12 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    expect(page.getByText("白石うらら").element()).toBeInTheDocument()
-    expect(page.getByText("山田竜").element()).toBeInTheDocument()
-    expect(page.getByText("魔女").element()).toBeInTheDocument()
+    await expect
+      .poll(() => page.getByText(/白石うらら|山田竜/).elements().length)
+      .toBe(2)
+    await expect.element(page.getByText("白石うらら")).toBeInTheDocument()
+    await expect.element(page.getByText("山田竜")).toBeInTheDocument()
+    await expect.element(page.getByText("魔女")).toBeInTheDocument()
   })
 
   test("DataListItem renders array description prop", async () => {
@@ -142,9 +161,18 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    expect(page.getByText("白石うらら").element()).toBeInTheDocument()
-    expect(page.getByText("入れ替わりの魔女").element()).toBeInTheDocument()
-    expect(page.getByText("テレポーテーション").element()).toBeInTheDocument()
+    await expect
+      .poll(
+        () =>
+          page.getByText(/入れ替わりの魔女|テレポーテーション/).elements()
+            .length,
+      )
+      .toBe(2)
+    await expect.element(page.getByText("白石うらら")).toBeInTheDocument()
+    await expect.element(page.getByText("入れ替わりの魔女")).toBeInTheDocument()
+    await expect
+      .element(page.getByText("テレポーテーション"))
+      .toBeInTheDocument()
   })
 
   test("DataList calculates columns from children with DataListItem", async () => {
@@ -162,7 +190,9 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    expect(getTestElement("root").style.getPropertyValue("--col")).toBe("3")
+    expect(
+      getTestElement("root").element().style.getPropertyValue("--col"),
+    ).toBe("3")
   })
 
   test("DataList passes termProps and descriptionProps through context", async () => {
@@ -174,8 +204,8 @@ describe("<DataList />", () => {
       />,
     )
 
-    expect(getTestElement("context-term")).toBeInTheDocument()
-    expect(getTestElement("context-desc")).toBeInTheDocument()
+    await expect.element(getTestElement("context-term")).toBeInTheDocument()
+    await expect.element(getTestElement("context-desc")).toBeInTheDocument()
   })
 
   test("DataListItem renders single term and description via props", async () => {
@@ -199,10 +229,14 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    expect(page.getByText("childTerm").element()).toBeInTheDocument()
-    expect(page.getByText("childDescription").element()).toBeInTheDocument()
-    expect(document.body).not.toHaveTextContent("propTerm")
-    expect(document.body).not.toHaveTextContent("propDescription")
+    await expect.element(page.getByText("childTerm")).toBeInTheDocument()
+    await expect.element(page.getByText("childDescription")).toBeInTheDocument()
+    await expect
+      .element(page.getByText("propTerm").query())
+      .not.toBeInTheDocument()
+    await expect
+      .element(page.getByText("propDescription").query())
+      .not.toBeInTheDocument()
   })
 
   test("DataListItem renders extra children alongside Term and Description", async () => {
@@ -216,9 +250,9 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    expect(page.getByText("白石うらら").element()).toBeInTheDocument()
-    expect(page.getByText("入れ替わりの魔女").element()).toBeInTheDocument()
-    expect(getTestElement("extra")).toBeInTheDocument()
+    await expect.element(page.getByText("白石うらら")).toBeInTheDocument()
+    await expect.element(page.getByText("入れ替わりの魔女")).toBeInTheDocument()
+    await expect.element(getTestElement("extra")).toBeInTheDocument()
   })
 
   test("DataListItem merges item-level termProps and descriptionProps", async () => {
@@ -233,8 +267,12 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    expect(getTestElement("item-term")).toHaveTextContent("白石うらら")
-    expect(getTestElement("item-desc")).toHaveTextContent("入れ替わりの魔女")
+    await expect
+      .element(getTestElement("item-term"))
+      .toHaveTextContent("白石うらら")
+    await expect
+      .element(getTestElement("item-desc"))
+      .toHaveTextContent("入れ替わりの魔女")
   })
 
   test("DataListItem merges context and item-level termProps/descriptionProps", async () => {
@@ -255,15 +293,15 @@ describe("<DataList />", () => {
     const term = getTestElement("merged-term")
     const desc = getTestElement("merged-desc")
 
-    expect(term).toHaveTextContent("白石うらら")
-    expect(desc).toHaveTextContent("入れ替わりの魔女")
+    await expect.element(term).toHaveTextContent("白石うらら")
+    await expect.element(desc).toHaveTextContent("入れ替わりの魔女")
   })
 
   test("DataListItem merges event and className for term props", async () => {
     const onContextTermClick = vi.fn()
     const onItemTermClick = vi.fn()
 
-    await render(
+    const { user } = await render(
       <DataList.Root
         termProps={
           {
@@ -285,12 +323,12 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    const term = page.getByText("白石うらら").element() as HTMLElement
+    const term = page.getByText("白石うらら")
 
-    term.click()
+    await user.click(term)
 
-    expect(term).toHaveClass("context-term")
-    expect(term).toHaveClass("item-term")
+    await expect.element(term).toHaveClass("context-term")
+    await expect.element(term).toHaveClass("item-term")
     expect(onContextTermClick).toHaveBeenCalledTimes(1)
     expect(onItemTermClick).toHaveBeenCalledTimes(1)
   })
@@ -299,7 +337,7 @@ describe("<DataList />", () => {
     const onContextDescriptionClick = vi.fn()
     const onItemDescriptionClick = vi.fn()
 
-    await render(
+    const { user } = await render(
       <DataList.Root
         descriptionProps={
           {
@@ -321,14 +359,12 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    const description = page
-      .getByText("入れ替わりの魔女")
-      .element() as HTMLElement
+    const description = page.getByText("入れ替わりの魔女")
 
-    description.click()
+    await user.click(description)
 
-    expect(description).toHaveClass("context-description")
-    expect(description).toHaveClass("item-description")
+    await expect.element(description).toHaveClass("context-description")
+    await expect.element(description).toHaveClass("item-description")
     expect(onContextDescriptionClick).toHaveBeenCalledTimes(1)
     expect(onItemDescriptionClick).toHaveBeenCalledTimes(1)
   })
@@ -343,14 +379,18 @@ describe("<DataList />", () => {
 
     await render(<DataList.Root data-testid="root" items={items} />)
 
-    expect(getTestElement("root").style.getPropertyValue("--col")).toBe("4")
+    expect(
+      getTestElement("root").element().style.getPropertyValue("--col"),
+    ).toBe("4")
   })
 
   test("DataList renders empty items array", async () => {
     await render(<DataList.Root data-testid="root" items={[]} />)
 
-    expect(getTestElement("root")).toBeInTheDocument()
-    expect(getTestElement("root").style.getPropertyValue("--col")).toBe("0")
+    await expect.element(getTestElement("root")).toBeInTheDocument()
+    expect(
+      getTestElement("root").element().style.getPropertyValue("--col"),
+    ).toBe("0")
   })
 
   test("DataListItem with array term applies termProps to each term", async () => {
@@ -364,14 +404,15 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    expect(page.getByText("白石うらら").element()).toHaveAttribute(
-      "data-custom",
-      "term-prop",
-    )
-    expect(page.getByText("山田竜").element()).toHaveAttribute(
-      "data-custom",
-      "term-prop",
-    )
+    await expect
+      .element(page.getByText("白石うらら"))
+      .toHaveAttribute("data-custom", "term-prop")
+    await expect
+      .poll(() => page.getByText(/白石うらら|山田竜/).elements().length)
+      .toBe(2)
+    await expect
+      .element(page.getByText("山田竜"))
+      .toHaveAttribute("data-custom", "term-prop")
   })
 
   test("DataListItem with array description applies descriptionProps to each description", async () => {
@@ -385,14 +426,19 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    expect(page.getByText("入れ替わりの魔女").element()).toHaveAttribute(
-      "data-custom",
-      "desc-prop",
-    )
-    expect(page.getByText("テレポーテーション").element()).toHaveAttribute(
-      "data-custom",
-      "desc-prop",
-    )
+    await expect
+      .poll(
+        () =>
+          page.getByText(/入れ替わりの魔女|テレポーテーション/).elements()
+            .length,
+      )
+      .toBe(2)
+    await expect
+      .element(page.getByText("入れ替わりの魔女"))
+      .toHaveAttribute("data-custom", "desc-prop")
+    await expect
+      .element(page.getByText("テレポーテーション"))
+      .toHaveAttribute("data-custom", "desc-prop")
   })
 
   test("DataList children take precedence over items prop", async () => {
@@ -405,8 +451,8 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    expect(page.getByText("子要素の用語").element()).toBeInTheDocument()
-    expect(page.getByText("子要素の説明").element()).toBeInTheDocument()
+    await expect.element(page.getByText("子要素の用語")).toBeInTheDocument()
+    await expect.element(page.getByText("子要素の説明")).toBeInTheDocument()
   })
 
   test("DataList items with both term and description omitted", async () => {
@@ -414,7 +460,9 @@ describe("<DataList />", () => {
 
     await render(<DataList.Root data-testid="root" items={items} />)
 
-    expect(getTestElement("root").style.getPropertyValue("--col")).toBe("0")
+    expect(
+      getTestElement("root").element().style.getPropertyValue("--col"),
+    ).toBe("0")
   })
 
   test("DataListItem renders with multiple custom Term children", async () => {
@@ -428,9 +476,9 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    expect(page.getByText("用語1").element()).toBeInTheDocument()
-    expect(page.getByText("用語2").element()).toBeInTheDocument()
-    expect(page.getByText("説明").element()).toBeInTheDocument()
+    await expect.element(page.getByText("用語1")).toBeInTheDocument()
+    await expect.element(page.getByText("用語2")).toBeInTheDocument()
+    await expect.element(page.getByText("説明")).toBeInTheDocument()
   })
 
   test("DataListItem renders with multiple custom Description children", async () => {
@@ -444,9 +492,9 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    expect(page.getByText("用語").element()).toBeInTheDocument()
-    expect(page.getByText("説明1").element()).toBeInTheDocument()
-    expect(page.getByText("説明2").element()).toBeInTheDocument()
+    await expect.element(page.getByText("用語")).toBeInTheDocument()
+    await expect.element(page.getByText("説明1")).toBeInTheDocument()
+    await expect.element(page.getByText("説明2")).toBeInTheDocument()
   })
 
   test("DataList with context termProps applies to items generated from items prop", async () => {
@@ -459,18 +507,22 @@ describe("<DataList />", () => {
       />,
     )
 
-    const terms = getAllTestElements("ctx-term")
-
-    expect(terms).toHaveLength(2)
-    expect(terms[0]).toHaveTextContent("白石うらら")
-    expect(terms[1]).toHaveTextContent("山田竜")
+    await expect
+      .poll(() => page.getByTestId("ctx-term").elements().length)
+      .toBe(2)
+    await expect
+      .element(page.getByText("白石うらら"))
+      .toHaveAttribute("data-testid", "ctx-term")
+    await expect
+      .element(page.getByText("山田竜"))
+      .toHaveAttribute("data-testid", "ctx-term")
   })
 
   test("DataListItem merges event and className for array term props", async () => {
     const onContextTermClick = vi.fn()
     const onItemTermClick = vi.fn()
 
-    await render(
+    const { user } = await render(
       <DataList.Root
         termProps={
           {
@@ -492,13 +544,16 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    const firstTerm = page.getByText("白石うらら").element() as HTMLElement
-    const secondTerm = page.getByText("山田竜").element() as HTMLElement
+    const firstTerm = page.getByText("白石うらら")
+    const secondTerm = page.getByText("山田竜")
 
-    expect(firstTerm).toHaveClass("context-term", "item-term")
-    expect(secondTerm).toHaveClass("context-term", "item-term")
+    await expect
+      .poll(() => page.getByText(/白石うらら|山田竜/).elements().length)
+      .toBe(2)
+    await expect.element(firstTerm).toHaveClass("context-term", "item-term")
+    await expect.element(secondTerm).toHaveClass("context-term", "item-term")
 
-    firstTerm.click()
+    await user.click(firstTerm)
 
     expect(onContextTermClick).toHaveBeenCalledTimes(1)
     expect(onItemTermClick).toHaveBeenCalledTimes(1)
@@ -508,7 +563,7 @@ describe("<DataList />", () => {
     const onContextDescriptionClick = vi.fn()
     const onItemDescriptionClick = vi.fn()
 
-    await render(
+    const { user } = await render(
       <DataList.Root
         descriptionProps={
           {
@@ -530,23 +585,24 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    const firstDescription = page
-      .getByText("入れ替わりの魔女")
-      .element() as HTMLElement
-    const secondDescription = page
-      .getByText("テレポーテーション")
-      .element() as HTMLElement
+    const firstDescription = page.getByText("入れ替わりの魔女")
+    const secondDescription = page.getByText("テレポーテーション")
 
-    expect(firstDescription).toHaveClass(
-      "context-description",
-      "item-description",
-    )
-    expect(secondDescription).toHaveClass(
-      "context-description",
-      "item-description",
-    )
+    await expect
+      .poll(
+        () =>
+          page.getByText(/入れ替わりの魔女|テレポーテーション/).elements()
+            .length,
+      )
+      .toBe(2)
+    await expect
+      .element(firstDescription)
+      .toHaveClass("context-description", "item-description")
+    await expect
+      .element(secondDescription)
+      .toHaveClass("context-description", "item-description")
 
-    firstDescription.click()
+    await user.click(firstDescription)
 
     expect(onContextDescriptionClick).toHaveBeenCalledTimes(1)
     expect(onItemDescriptionClick).toHaveBeenCalledTimes(1)
@@ -565,10 +621,14 @@ describe("<DataList />", () => {
       />,
     )
 
-    const descriptions = getAllTestElements("ctx-desc")
-
-    expect(descriptions).toHaveLength(2)
-    expect(descriptions[0]).toHaveTextContent("入れ替わりの魔女")
-    expect(descriptions[1]).toHaveTextContent("テレポーテーション")
+    await expect
+      .poll(() => page.getByTestId("ctx-desc").elements().length)
+      .toBe(2)
+    await expect
+      .element(page.getByText("入れ替わりの魔女"))
+      .toHaveAttribute("data-testid", "ctx-desc")
+    await expect
+      .element(page.getByText("テレポーテーション"))
+      .toHaveAttribute("data-testid", "ctx-desc")
   })
 })

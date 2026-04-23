@@ -34,6 +34,7 @@ catalog:
   sucrase: ^3.35.1
   tsx: ^4.21.0
   typescript: ^6.0.3
+  "@typescript/native-preview": 7.0.0-dev.20260421.2
   vite: ^8.0.3
   vitest: ^4.1.2
   vitest-axe: ^0.1.0

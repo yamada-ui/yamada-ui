@@ -83,6 +83,7 @@
     "tsx": "catalog:",
     "turbo": "^2.9.3",
     "typescript": "catalog:",
+    "@typescript/native-preview": "catalog:",
     "vitest": "catalog:",
     "wait-on": "^9.0.5"
   },

@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, fireEvent, render, screen } from "#test"
 import { HueSlider } from "."
 
 describe("<HueSlider />", () => {
@@ -75,6 +75,47 @@ describe("<HueSlider />", () => {
       "data-orientation",
       "vertical",
     )
+  })
+
+  test("merges overlay props with layer props", () => {
+    const onOverlayClick = vi.fn()
+    const onLayerClick = vi.fn()
+
+    render(
+      <HueSlider.Root
+        defaultValue={180}
+        overlayProps={{
+          className: "from-overlay",
+          style: { backgroundColor: "rgb(255, 0, 0)" },
+          layers: [
+            {
+              className: "from-layer",
+              style: { color: "rgb(0, 0, 255)" },
+              "data-testid": "overlay",
+              onClick: onLayerClick,
+            },
+          ],
+          onClick: onOverlayClick,
+        }}
+      />,
+    )
+
+    const overlay = screen.getByTestId("overlay")
+
+    expect(overlay).toHaveClass(
+      "ui-hue-slider__overlay",
+      "from-overlay",
+      "from-layer",
+    )
+    expect(overlay).toHaveStyle({
+      backgroundColor: "rgb(255, 0, 0)",
+      color: "rgb(0, 0, 255)",
+    })
+
+    fireEvent.click(overlay)
+
+    expect(onOverlayClick).toHaveBeenCalledTimes(1)
+    expect(onLayerClick).toHaveBeenCalledTimes(1)
   })
 
   test.each([

@@ -1,6 +1,4 @@
-import { screen } from "@testing-library/react"
-
-import { a11y, render } from "#test/browser"
+import { a11y, page, render } from "#test/browser"
 import { BoxIcon } from "../icon"
 import { IconButton } from "./icon-button"
 
@@ -22,13 +20,13 @@ describe("<IconButton />", () => {
   test("sets `className` correctly", async () => {
     await render(<IconButton colorScheme="primary" aria-label="Open menu" />)
 
-    expect(screen.getByRole("button")).toHaveClass("ui-icon-button")
+    await expect.element(page.getByRole("button")).toHaveClass("ui-icon-button")
   })
 
   test("renders HTML tag correctly", async () => {
     await render(<IconButton colorScheme="primary" aria-label="Open menu" />)
 
-    expect(screen.getByRole("button").tagName).toBe("BUTTON")
+    expect(page.getByRole("button").element().tagName).toBe("BUTTON")
   })
 
   test("renders children correctly", async () => {
@@ -38,6 +36,6 @@ describe("<IconButton />", () => {
       </IconButton>,
     )
 
-    expect(screen.getByTestId("icon")).toBeInTheDocument()
+    await expect.element(page.getByTestId("icon")).toBeInTheDocument()
   })
 })

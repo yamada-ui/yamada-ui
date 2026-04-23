@@ -1,6 +1,4 @@
-import { screen } from "@testing-library/react"
-
-import { a11y, render } from "#test/browser"
+import { a11y, page, render } from "#test/browser"
 import { ButtonGroup } from "./"
 
 describe("<Button />", () => {
@@ -27,7 +25,7 @@ describe("<Button />", () => {
       </ButtonGroup.Root>,
     )
 
-    expect(screen.getByRole("group")).toHaveClass("ui-group")
+    await expect.element(page.getByRole("group")).toHaveClass("ui-group")
   })
 
   test("renders HTML tag correctly", async () => {
@@ -39,7 +37,7 @@ describe("<Button />", () => {
       </ButtonGroup.Root>,
     )
 
-    expect(screen.getByRole("group").tagName).toBe("DIV")
+    expect(page.getByRole("group").element().tagName).toBe("DIV")
   })
 
   test("`attached` column style is applied correctly", async () => {
@@ -51,8 +49,7 @@ describe("<Button />", () => {
       </ButtonGroup.Root>,
     )
 
-    const buttonGroup = screen.getByRole("group")
-    const style = getComputedStyle(buttonGroup)
+    const style = getComputedStyle(page.getByRole("group").element())
 
     expect(style.flexDirection).toBe("column")
   })

@@ -93,7 +93,7 @@ export async function getConfig(
     function getSectionPath(section: Section) {
       let path = userConfig[section]?.path ?? DEFAULT_PATH[section]
 
-      if (path.startsWith("/")) path = `./${path}`
+      if (path.startsWith("/")) path = `.${path}`
       if (!path.startsWith("./")) path = `./${path}`
 
       return path

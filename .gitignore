@@ -1,6 +1,8 @@
+# worktree
+.worktrees
+
 # pnpm
 .pnpm-store
-node-jiti
 
 # dependencies
 node_modules

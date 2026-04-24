@@ -1194,17 +1194,20 @@ return (
 
 ### Keyboard Navigation
 
-| Key          | Description                                                      | State                |
-| ------------ | ---------------------------------------------------------------- | -------------------- |
-| `ArrowRight` | Moves focus to the next data point and displays the tooltip.     | `withTooltip={true}` |
-| `ArrowLeft`  | Moves focus to the previous data point and displays the tooltip. | `withTooltip={true}` |
-| `Enter`      | Toggles the tooltip display for the focused data point.          | `withTooltip={true}` |
+`AreaChart` enables Recharts' accessibility layer by default, so keyboard interaction is handled on the chart surface.
+
+| Key          | Description                                                                                  | State                |
+| ------------ | -------------------------------------------------------------------------------------------- | -------------------- |
+| `ArrowRight` | Moves the active data point to the next point and displays the tooltip. Focus stays on the chart. | `withTooltip={true}` |
+| `ArrowLeft`  | Moves the active data point to the previous point and displays the tooltip. Focus stays on the chart. | `withTooltip={true}` |
+| `Enter`      | Toggles the tooltip display for the active data point.                                       | `withTooltip={true}` |
 
 ### ARIA Roles and Attributes
 
-| Component | Role and Attribute   | Usage                                  |
-| --------- | -------------------- | -------------------------------------- |
-| `svg`     | `role="application"` | Indicates that this is an application. |
+| Component | Role and Attribute   | Usage                                      |
+| --------- | -------------------- | ------------------------------------------ |
+| `svg`     | `role="application"` | Indicates that this is an application.     |
+| `svg`     | `tabIndex={0}`       | Makes the chart surface keyboard focusable. |
 
 ## Props
 

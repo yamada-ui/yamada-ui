@@ -232,12 +232,8 @@ export const useAccordionItem = ({
   )
 
   const getItemProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
-      "data-expanded": dataAttr(open),
-      ...props,
-      ...rest,
-      ref: mergeRefs(ref, rest.ref),
-    }),
+    (props = {}) =>
+      mergeProps({ "data-expanded": dataAttr(open) }, rest, props)(),
     [open, rest],
   )
 

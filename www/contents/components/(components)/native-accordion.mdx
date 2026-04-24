@@ -311,9 +311,12 @@ return <NativeAccordion.Root animate={false} items={items} />
 
 ### ARIA Roles and Attributes
 
-| Component                | Role and Attribute | Usage                                                    |
-| ------------------------ | ------------------ | -------------------------------------------------------- |
-| `NativeAccordion.Button` | `aria-disabled`    | Sets to `"true"` when the panel of the item is disabled. |
+| Component                | Role and Attribute    | Usage                                                    |
+| ------------------------ | --------------------- | -------------------------------------------------------- |
+| `NativeAccordion.Button` | `aria-disabled`       | Sets to `"true"` when the panel of the item is disabled. |
+| `NativeAccordion.Icon`   | `aria-disabled`       | Sets to `"true"` when the panel of the item is disabled. |
+| `NativeAccordion.Icon`   | `aria-hidden`         | Hides the icon from assistive technologies.              |
+| `NativeAccordion.Icon`   | `role="presentation"` | Marks the icon as presentational.                        |
 
 ## Props
 

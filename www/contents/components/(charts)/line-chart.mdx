@@ -1103,16 +1103,16 @@ return (
 
 The chart surface receives focus, and keyboard navigation updates the active data point and tooltip while focus remains on the chart.
 
-| Key          | Description                                                                            | State                |
-| ------------ | -------------------------------------------------------------------------------------- | -------------------- |
-| `ArrowRight` | Moves the active data point to the next point and displays the tooltip.                | `withTooltip={true}` |
-| `ArrowLeft`  | Moves the active data point to the previous point and displays the tooltip.            | `withTooltip={true}` |
+| Key          | Description                                                                             | State                |
+| ------------ | --------------------------------------------------------------------------------------- | -------------------- |
+| `ArrowRight` | Moves the active data point to the next point and displays the tooltip.                 | `withTooltip={true}` |
+| `ArrowLeft`  | Moves the active data point to the previous point and displays the tooltip.             | `withTooltip={true}` |
 | `Enter`      | Toggles the tooltip display for the active data point while focus remains on the chart. | `withTooltip={true}` |
 
 ### ARIA Roles and Attributes
 
-| Component | Role and Attribute                   | Usage                                                                  |
-| --------- | ------------------------------------ | ---------------------------------------------------------------------- |
+| Component | Role and Attribute                   | Usage                                                                   |
+| --------- | ------------------------------------ | ----------------------------------------------------------------------- |
 | `svg`     | `role="application"`, `tabIndex={0}` | Makes the chart focusable and enables keyboard navigation on the chart. |
 
 ## Props

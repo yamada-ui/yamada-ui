@@ -612,7 +612,7 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Dat
 
 | Key                  | Description                                                                                                                                         | State               |
 | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
-| `Enter`              | When the input value is valid, applies it to the selection. Toggles the focused date if focus is in the calendar.                                   | -                   |
+| `Enter`              | When the input value is valid, applies it to the selection. Toggles the focused date if focus is in the calendar. Clears the value if focus is on the clear button. | -                   |
 | `Backspace`          | Clears the last selection.                                                                                                                          | -                   |
 | `Escape`             | Closes the calendar.                                                                                                                                | `closeOnEsc={true}` |
 | `ArrowUp`            | Moves focus to the date above if focus is in the calendar.                                                                                          | -                   |
@@ -625,7 +625,7 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Dat
 | `Shift` + `PageUp`   | Moves focus to the same date in the previous year if focus is in the calendar. If that date doesn't exist, moves to an enabled date in that month.  | -                   |
 | `PageDown`           | Moves focus to the same date in the next month if focus is in the calendar. If that date doesn't exist, moves to an enabled date in that month.     | -                   |
 | `Shift` + `PageDown` | Moves focus to the same date in the next year if focus is in the calendar. If that date doesn't exist, moves to an enabled date in that month.      | -                   |
-| `Space`              | Toggles the selection state of the focused date if focus is in the calendar.                                                                        | -                   |
+| `Space`              | Toggles the selection state of the focused date if focus is in the calendar. Clears the value if focus is on the clear button.                      | -                   |
 
 ### ARIA Roles and Attributes
 

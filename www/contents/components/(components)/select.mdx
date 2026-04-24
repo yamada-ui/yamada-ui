@@ -821,10 +821,10 @@ return (
 
 The `Select` follows the [WAI-ARIA - Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) for accessibility.
 
-If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Select`.
+If you are not using `Field.Root`, use a descriptive `placeholder`. The `placeholder` is set as the `aria-label` on the `SelectField` trigger.
 
 ```tsx
-<Select.Root placeholder="Select a character" aria-label="Character">
+<Select.Root placeholder="Character">
   <Select.Option value="木ノ下和也">木ノ下和也</Select.Option>
   <Select.Option value="一ノ瀬ちづる">一ノ瀬ちづる</Select.Option>
   <Select.Option value="七海麻美">七海麻美</Select.Option>
@@ -834,13 +834,11 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Sel
 </Select.Root>
 ```
 
-```tsx
-<VStack gap="sm">
-  <Heading as="h3" id="label">
-    Character
-  </Heading>
+If you are using `Field.Root`, the `Field.Root` label id is set as `aria-labelledby` on the `SelectField` trigger.
 
-  <Select.Root placeholder="Select a character" aria-labelledby="label">
+```tsx
+<Field.Root label="Character">
+  <Select.Root placeholder="Select a character">
     <Select.Option value="木ノ下和也">木ノ下和也</Select.Option>
     <Select.Option value="一ノ瀬ちづる">一ノ瀬ちづる</Select.Option>
     <Select.Option value="七海麻美">七海麻美</Select.Option>
@@ -848,7 +846,7 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Sel
     <Select.Option value="桜沢墨">桜沢墨</Select.Option>
     <Select.Option value="八重森みに">八重森みに</Select.Option>
   </Select.Root>
-</VStack>
+</Field.Root>
 ```
 
 ### Keyboard Navigation
@@ -874,8 +872,8 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Sel
 |                    | `aria-expanded`           | Sets to `"true"` when the listbox is open, `"false"` when closed.                                                                                                   |
 |                    | `aria-haspopup="listbox"` | Indicates that a listbox exists.                                                                                                                                    |
 |                    | `aria-invalid`            | Sets to `"true"` if `invalid` is set.                                                                                                                               |
-|                    | `aria-label`              | Sets the value of `placeholder`.                                                                                                                                    |
-|                    | `aria-labelledby`         | If `Select.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id`.                                                           |
+|                    | `aria-label`              | Sets the value of `placeholder` on the `SelectField` trigger.                                                                                                        |
+|                    | `aria-labelledby`         | If `Select.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id` on the `SelectField` trigger.                              |
 |                    | `aria-readonly`           | Sets to `"true"` if `readOnly` is set.                                                                                                                              |
 |                    | `aria-required`           | Sets to `"true"` if `required` is set.                                                                                                                              |
 | `SelectIcon`       | `role="button"`           | Indicates that this is a button when `clearable` is set and a value is present.                                                                                     |

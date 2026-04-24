@@ -821,10 +821,10 @@ return (
 
 `Select`は、アクセシビリティに関して[WAI-ARIA - Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)に従います。
 
-`Field.Root`を使用しない場合は、`Select`に`aria-label`または`aria-labelledby`を設定します。
+`Field.Root`を使用しない場合は、説明的な`placeholder`を設定します。`placeholder`は`SelectField`トリガーの`aria-label`に設定されます。
 
 ```tsx
-<Select.Root placeholder="Select a character" aria-label="Character">
+<Select.Root placeholder="Character">
   <Select.Option value="木ノ下和也">木ノ下和也</Select.Option>
   <Select.Option value="一ノ瀬ちづる">一ノ瀬ちづる</Select.Option>
   <Select.Option value="七海麻美">七海麻美</Select.Option>
@@ -834,13 +834,11 @@ return (
 </Select.Root>
 ```
 
-```tsx
-<VStack gap="sm">
-  <Heading as="h3" id="label">
-    Character
-  </Heading>
+`Field.Root`を使用する場合は、`Field.Root`のラベルの`id`が`SelectField`トリガーの`aria-labelledby`に設定されます。
 
-  <Select.Root placeholder="Select a character" aria-labelledby="label">
+```tsx
+<Field.Root label="Character">
+  <Select.Root placeholder="Select a character">
     <Select.Option value="木ノ下和也">木ノ下和也</Select.Option>
     <Select.Option value="一ノ瀬ちづる">一ノ瀬ちづる</Select.Option>
     <Select.Option value="七海麻美">七海麻美</Select.Option>
@@ -848,7 +846,7 @@ return (
     <Select.Option value="桜沢墨">桜沢墨</Select.Option>
     <Select.Option value="八重森みに">八重森みに</Select.Option>
   </Select.Root>
-</VStack>
+</Field.Root>
 ```
 
 ### キーボード操作
@@ -874,8 +872,8 @@ return (
 |                    | `aria-expanded`           | リストボックスが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。                                                                                                     |
 |                    | `aria-haspopup="listbox"` | リストボックスが存在することを示します。                                                                                                                                                      |
 |                    | `aria-invalid`            | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                         |
-|                    | `aria-label`              | `placeholder`の値を設定します。                                                                                                                                                               |
-|                    | `aria-labelledby`         | `Select.Root`が`Field.Root`内にあり、`Field.Root`に`label`、もしくは`Field.Label`が設定されている場合は、その`id`を設定します。                                                               |
+|                    | `aria-label`              | `SelectField`トリガーに`placeholder`の値を設定します。                                                                                                                                         |
+|                    | `aria-labelledby`         | `Select.Root`が`Field.Root`内にあり、`Field.Root`に`label`、もしくは`Field.Label`が設定されている場合は、その`id`を`SelectField`トリガーに設定します。                                         |
 |                    | `aria-readonly`           | `readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                                        |
 |                    | `aria-required`           | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                        |
 | `SelectIcon`       | `role="button"`           | `clearable`かつ値がある場合はボタンであることを示します。                                                                                                                                     |

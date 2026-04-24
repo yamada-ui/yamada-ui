@@ -32,7 +32,7 @@ describe("<Field />", () => {
       .element(page.getByTestId("helper"))
       .toHaveClass("ui-field__helper-message")
 
-    rerender(
+    await rerender(
       <Field.Root data-testid="root" invalid>
         <Field.Label data-testid="label">Label</Field.Label>
         <Field.HelperMessage data-testid="helper">Helper</Field.HelperMessage>
@@ -58,7 +58,7 @@ describe("<Field />", () => {
     expect(page.getByText("Label").element().tagName).toBe("LABEL")
     expect(page.getByText("Helper").element().tagName).toBe("SPAN")
 
-    rerender(
+    await rerender(
       <Field.Root data-testid="root" invalid>
         <Field.Label>Label</Field.Label>
         <Field.HelperMessage>Helper</Field.HelperMessage>

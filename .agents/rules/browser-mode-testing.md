@@ -137,10 +137,10 @@ document.querySelector('[data-testid="content"]')
 
 ```ts
 page.getByRole("group")
-page.getByTestId("content").filter({ hasText: "Undo" })
+page.getByTestId("content").getByRole("button", { name: "Undo" })
 ```
 
-Locators poll, auto-retry, and report which query failed. Scope with `locator.locator(...)` or `.filter({ hasText })` instead of reaching for the container.
+Locators poll, auto-retry, and report which query failed. Chain locators (`parent.getByRole(...)`) to scope a query without reaching into `container`. Use `.filter({ hasText })` when you need to narrow a set of sibling matches (e.g. `page.getByRole("listitem").filter({ hasText: "Undo" })`).
 
 ## Assertions
 

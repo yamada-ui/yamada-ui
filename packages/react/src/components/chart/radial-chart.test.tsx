@@ -17,14 +17,18 @@ describe("<RadialChart />", () => {
     expect(RadialChart.Root.displayName).toBe("RadialChart")
   })
 
-  test("renders generated radials from `series`", async () => {
+  test("renders generated radials from multiple `series` entries", async () => {
     await render(
       <RadialChart.Root
         data-testid="root"
         data={rootData}
-        series={[{ dataKey: "visits", nameKey: "browser" }]}
-        withLegend
-      />,
+        series={[
+          { dataKey: "visits", nameKey: "browser" },
+          { dataKey: "downloads", nameKey: "browser" },
+        ]}
+      >
+        <RadialChart.Tooltip active defaultIndex={0} />
+      </RadialChart.Root>,
     )
 
     const root = page.getByTestId("root")
@@ -34,8 +38,23 @@ describe("<RadialChart />", () => {
       .poll(
         () => root.element().querySelectorAll(".ui-polar-chart__radial").length,
       )
-      .toBe(1)
-    await expect.element(page.getByText("chrome")).toBeInTheDocument()
+      .toBe(2)
+    await expect
+      .poll(
+        () =>
+          root
+            .element()
+            .ownerDocument.querySelectorAll(".ui-chart__tooltip-item").length,
+      )
+      .toBe(2)
+    await expect
+      .poll(
+        () =>
+          root
+            .element()
+            .ownerDocument.querySelectorAll(".ui-chart__tooltip-label").length,
+      )
+      .toBe(0)
   })
 
   test("renders composition components instead of fallback `series`", async () => {
@@ -43,8 +62,10 @@ describe("<RadialChart />", () => {
       <RadialChart.Root
         data-testid="root"
         data={rootData}
-        series={[{ dataKey: "visits", nameKey: "browser" }]}
-        withLegend
+        series={[
+          { dataKey: "visits", nameKey: "browser" },
+          { dataKey: "downloads", nameKey: "browser" },
+        ]}
       >
         <RadialChart.Radial dataKey="downloads" nameKey="browser" />
       </RadialChart.Root>,

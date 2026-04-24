@@ -1,6 +1,6 @@
 import type { FC } from "react"
-import { render, renderHook } from "#test/browser"
-import { act, fireEvent, screen, waitFor } from "@testing-library/react"
+import "@testing-library/jest-dom/vitest"
+import { page, render, renderHook } from "#test/browser"
 import { Snacks } from "./snacks"
 import { useSnacks } from "./use-snacks"
 
@@ -36,84 +36,60 @@ describe("<Snacks />", () => {
 
     await render(<Snacks data-testid="snacks" snacks={result.current.snacks} />)
 
-    expect(screen.queryByRole("list")).not.toBeInTheDocument()
+    await expect.element(page.getByRole("list").query()).not.toBeInTheDocument()
   })
 
   test("renders snack items when added", async () => {
-    await render(<TestComponent />)
+    const { user } = await render(<TestComponent />)
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("add"))
-    })
+    await user.click(page.getByTestId("add"))
 
-    await waitFor(() => {
-      expect(screen.getByRole("list")).toBeInTheDocument()
-      expect(screen.getByRole("listitem")).toBeInTheDocument()
-      expect(screen.getByText("Test")).toBeInTheDocument()
-      expect(screen.getByText("Test description")).toBeInTheDocument()
-    })
+    await expect.element(page.getByRole("list")).toBeInTheDocument()
+    await expect.element(page.getByRole("listitem")).toBeInTheDocument()
+    await expect.element(page.getByText(/^Test$/)).toBeInTheDocument()
+    await expect.element(page.getByText("Test description")).toBeInTheDocument()
   })
 
   test("renders with direction end", async () => {
-    await render(<TestComponent options={{ direction: "end" }} />)
+    const { user } = await render(
+      <TestComponent options={{ direction: "end" }} />,
+    )
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("add"))
-    })
+    await user.click(page.getByTestId("add"))
 
-    await waitFor(() => {
-      expect(screen.getByRole("list")).toBeInTheDocument()
-    })
+    await expect.element(page.getByRole("list")).toBeInTheDocument()
   })
 
   test("renders with startIndex", async () => {
-    await render(<TestComponent options={{ startIndex: 5 }} />)
+    const { user } = await render(<TestComponent options={{ startIndex: 5 }} />)
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("add"))
-    })
+    await user.click(page.getByTestId("add"))
 
-    await waitFor(() => {
-      expect(screen.getByRole("listitem")).toBeInTheDocument()
-    })
+    await expect.element(page.getByRole("listitem")).toBeInTheDocument()
   })
 
   test("closes all snacks", async () => {
-    await render(<TestComponent />)
+    const { user } = await render(<TestComponent />)
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("add"))
-    })
+    await user.click(page.getByTestId("add"))
 
-    await waitFor(() => {
-      expect(screen.getByRole("list")).toBeInTheDocument()
-    })
+    await expect.element(page.getByRole("list")).toBeInTheDocument()
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("close-all"))
-    })
+    await user.click(page.getByTestId("close-all"))
 
-    await waitFor(
-      () => {
-        expect(screen.queryByRole("list")).not.toBeInTheDocument()
-      },
-      { timeout: 3000 },
-    )
+    await expect.element(page.getByRole("list").query()).not.toBeInTheDocument()
   })
 
   test("respects limit option", async () => {
-    await render(<TestComponent options={{ limit: 2 }} />)
+    const { user } = await render(<TestComponent options={{ limit: 2 }} />)
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("add"))
-      fireEvent.click(screen.getByTestId("add"))
-      fireEvent.click(screen.getByTestId("add"))
-    })
+    await user.click(page.getByTestId("add"))
+    await user.click(page.getByTestId("add"))
+    await user.click(page.getByTestId("add"))
 
-    await waitFor(() => {
-      const items = screen.getAllByRole("listitem")
-      expect(items).toHaveLength(2)
-    })
+    await expect
+      .poll(() => page.getByRole("listitem").elements().length)
+      .toBe(2)
   })
 
   test("renders with closable false", async () => {
@@ -135,15 +111,11 @@ describe("<Snacks />", () => {
       )
     }
 
-    await render(<TestClosable />)
+    const { user } = await render(<TestClosable />)
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("add"))
-    })
+    await user.click(page.getByTestId("add"))
 
-    await waitFor(() => {
-      expect(screen.getByText("No close")).toBeInTheDocument()
-    })
+    await expect.element(page.getByText(/^No close$/)).toBeInTheDocument()
   })
 
   test("renders snack with variant plain", async () => {
@@ -165,15 +137,11 @@ describe("<Snacks />", () => {
       )
     }
 
-    await render(<TestVariant />)
+    const { user } = await render(<TestVariant />)
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("add"))
-    })
+    await user.click(page.getByTestId("add"))
 
-    await waitFor(() => {
-      expect(screen.getByText("Plain")).toBeInTheDocument()
-    })
+    await expect.element(page.getByText("Plain")).toBeInTheDocument()
   })
 
   test("renders snack with loading scheme", async () => {
@@ -199,15 +167,11 @@ describe("<Snacks />", () => {
       )
     }
 
-    await render(<TestLoading />)
+    const { user } = await render(<TestLoading />)
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("add"))
-    })
+    await user.click(page.getByTestId("add"))
 
-    await waitFor(() => {
-      expect(screen.getByText("Loading")).toBeInTheDocument()
-    })
+    await expect.element(page.getByText(/^Loading$/)).toBeInTheDocument()
   })
 
   test("renders snack without icon", async () => {
@@ -229,15 +193,11 @@ describe("<Snacks />", () => {
       )
     }
 
-    await render(<TestNoIcon />)
+    const { user } = await render(<TestNoIcon />)
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("add"))
-    })
+    await user.click(page.getByTestId("add"))
 
-    await waitFor(() => {
-      expect(screen.getByText("No icon")).toBeInTheDocument()
-    })
+    await expect.element(page.getByText(/^No icon$/)).toBeInTheDocument()
   })
 
   test("pauses duration on mouse enter and resumes on mouse leave", async () => {
@@ -263,27 +223,19 @@ describe("<Snacks />", () => {
       )
     }
 
-    await render(<TestHover />)
+    const { user } = await render(<TestHover />)
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("add"))
-    })
+    await user.click(page.getByTestId("add"))
 
-    await waitFor(() => {
-      expect(screen.getByText("Hover test")).toBeInTheDocument()
-    })
+    await expect.element(page.getByText("Hover test")).toBeInTheDocument()
 
-    const snackEl = screen.getByRole("listitem")
+    const snackEl = page.getByRole("listitem")
 
-    act(() => {
-      fireEvent.mouseEnter(snackEl)
-    })
+    await user.hover(snackEl)
 
-    act(() => {
-      fireEvent.mouseLeave(snackEl)
-    })
+    await user.unhover(snackEl)
 
-    expect(screen.getByText("Hover test")).toBeInTheDocument()
+    await expect.element(page.getByText("Hover test")).toBeInTheDocument()
   })
 })
 
@@ -293,11 +245,9 @@ describe("useSnacks", () => {
 
     let id: string | undefined
 
-    act(() => {
-      id = result.current.snack({
-        description: "Test",
-        title: "Test",
-      })
+    id = result.current.snack({
+      description: "Test",
+      title: "Test",
     })
 
     expect(id).toBeDefined()
@@ -309,22 +259,21 @@ describe("useSnacks", () => {
 
     let id: string | undefined
 
-    act(() => {
-      id = result.current.snack({
-        description: "Original desc",
-        title: "Original",
-      })
+    id = result.current.snack({
+      description: "Original desc",
+      title: "Original",
     })
 
-    act(() => {
-      result.current.snack.update(id!, {
-        description: "Updated desc",
-        title: "Updated",
-      })
+    result.current.snack.update(id, {
+      description: "Updated desc",
+      title: "Updated",
     })
 
-    const updated = result.current.snacks.items.find((item) => item.id === id)
-    expect(updated?.title).toBe("Updated")
+    await expect
+      .poll(
+        () => result.current.snacks.items.find((item) => item.id === id)?.title,
+      )
+      .toBe("Updated")
   })
 
   test("snack.close removes a snack by id", async () => {
@@ -332,37 +281,31 @@ describe("useSnacks", () => {
 
     let id: string | undefined
 
-    act(() => {
-      id = result.current.snack({
-        description: "To be closed",
-        title: "Close me",
-      })
+    id = result.current.snack({
+      description: "To be closed",
+      title: "Close me",
     })
 
-    expect(result.current.snacks.items).toHaveLength(1)
+    await expect.poll(() => result.current.snacks.items.length).toBe(1)
 
-    act(() => {
-      result.current.snack.close(id!)
-    })
+    result.current.snack.close(id)
 
-    expect(result.current.snacks.items).toHaveLength(0)
+    await expect.poll(() => result.current.snacks.items.length).toBe(0)
   })
 
   test("snack.closeAll removes all snacks", async () => {
     const { result } = await renderHook(() => useSnacks())
 
-    act(() => {
-      result.current.snack({ description: "1", title: "1" })
-      result.current.snack({ description: "2", title: "2" })
-    })
+    result.current.snack({ description: "1", title: "1" })
+    result.current.snack({ description: "2", title: "2" })
 
-    expect(result.current.snacks.items.length).toBeGreaterThan(0)
+    await expect
+      .poll(() => result.current.snacks.items.length)
+      .toBeGreaterThan(0)
 
-    act(() => {
-      result.current.snack.closeAll()
-    })
+    result.current.snack.closeAll()
 
-    expect(result.current.snacks.items).toHaveLength(0)
+    await expect.poll(() => result.current.snacks.items.length).toBe(0)
   })
 
   test("snack.isActive returns true for active snack", async () => {
@@ -370,14 +313,12 @@ describe("useSnacks", () => {
 
     let id: string | undefined
 
-    act(() => {
-      id = result.current.snack({
-        description: "Active snack",
-        title: "Active",
-      })
+    id = result.current.snack({
+      description: "Active snack",
+      title: "Active",
     })
 
-    expect(result.current.snack.isActive(id!)).toBeTruthy()
+    await expect.poll(() => result.current.snack.isActive(id)).toBeTruthy()
   })
 
   test("snack.isActive returns false for non-existent snack", async () => {
@@ -389,15 +330,15 @@ describe("useSnacks", () => {
   test("snack with custom id", async () => {
     const { result } = await renderHook(() => useSnacks())
 
-    act(() => {
-      result.current.snack({
-        id: "custom-id",
-        description: "Custom ID",
-        title: "Custom",
-      })
+    result.current.snack({
+      id: "custom-id",
+      description: "Custom ID",
+      title: "Custom",
     })
 
-    expect(result.current.snacks.items[0]?.id).toBe("custom-id")
+    await expect
+      .poll(() => result.current.snacks.items[0]?.id)
+      .toBe("custom-id")
   })
 
   test("snacks returns direction and startIndex", async () => {

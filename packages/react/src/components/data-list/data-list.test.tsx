@@ -2,8 +2,6 @@ import type { DataListItemProps } from "."
 import { a11y, page, render } from "#test/browser"
 import { DataList } from "./"
 
-const getTestElement = (testId: string) => page.getByTestId(testId)
-
 describe("<DataList />", () => {
   test("renders component correctly", async () => {
     const items: DataListItemProps[] = [
@@ -39,16 +37,16 @@ describe("<DataList />", () => {
     )
 
     await expect
-      .element(getTestElement("root"))
+      .element(page.getByTestId("root"))
       .toHaveClass("ui-data-list__root")
     await expect
-      .element(getTestElement("item"))
+      .element(page.getByTestId("item"))
       .toHaveClass("ui-data-list__item")
     await expect
-      .element(getTestElement("term"))
+      .element(page.getByTestId("term"))
       .toHaveClass("ui-data-list__term")
     await expect
-      .element(getTestElement("description"))
+      .element(page.getByTestId("description"))
       .toHaveClass("ui-data-list__description")
   })
 
@@ -62,8 +60,8 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    expect(getTestElement("root").element().tagName).toBe("DL")
-    expect(getTestElement("item").element().tagName).toBe("DIV")
+    expect(page.getByTestId("root").element().tagName).toBe("DL")
+    expect(page.getByTestId("item").element().tagName).toBe("DIV")
     expect(page.getByText("白石うらら").element().tagName).toBe("DT")
     expect(page.getByText("入れ替わりの魔女").element().tagName).toBe("DD")
   })
@@ -119,7 +117,7 @@ describe("<DataList />", () => {
     await render(<DataList.Root data-testid="root" items={items} />)
 
     expect(
-      getTestElement("root").element().style.getPropertyValue("--col"),
+      page.getByTestId("root").element().style.getPropertyValue("--col"),
     ).toBe("2")
   })
 
@@ -132,7 +130,7 @@ describe("<DataList />", () => {
     await render(<DataList.Root data-testid="root" items={items} />)
 
     expect(
-      getTestElement("root").element().style.getPropertyValue("--col"),
+      page.getByTestId("root").element().style.getPropertyValue("--col"),
     ).toBe("2")
   })
 
@@ -191,7 +189,7 @@ describe("<DataList />", () => {
     )
 
     expect(
-      getTestElement("root").element().style.getPropertyValue("--col"),
+      page.getByTestId("root").element().style.getPropertyValue("--col"),
     ).toBe("3")
   })
 
@@ -204,8 +202,8 @@ describe("<DataList />", () => {
       />,
     )
 
-    await expect.element(getTestElement("context-term")).toBeInTheDocument()
-    await expect.element(getTestElement("context-desc")).toBeInTheDocument()
+    await expect.element(page.getByTestId("context-term")).toBeInTheDocument()
+    await expect.element(page.getByTestId("context-desc")).toBeInTheDocument()
   })
 
   test("DataListItem renders single term and description via props", async () => {
@@ -252,7 +250,7 @@ describe("<DataList />", () => {
 
     await expect.element(page.getByText("白石うらら")).toBeInTheDocument()
     await expect.element(page.getByText("入れ替わりの魔女")).toBeInTheDocument()
-    await expect.element(getTestElement("extra")).toBeInTheDocument()
+    await expect.element(page.getByTestId("extra")).toBeInTheDocument()
   })
 
   test("DataListItem merges item-level termProps and descriptionProps", async () => {
@@ -268,10 +266,10 @@ describe("<DataList />", () => {
     )
 
     await expect
-      .element(getTestElement("item-term"))
+      .element(page.getByTestId("item-term"))
       .toHaveTextContent("白石うらら")
     await expect
-      .element(getTestElement("item-desc"))
+      .element(page.getByTestId("item-desc"))
       .toHaveTextContent("入れ替わりの魔女")
   })
 
@@ -290,8 +288,8 @@ describe("<DataList />", () => {
       </DataList.Root>,
     )
 
-    const term = getTestElement("merged-term")
-    const desc = getTestElement("merged-desc")
+    const term = page.getByTestId("merged-term")
+    const desc = page.getByTestId("merged-desc")
 
     await expect.element(term).toHaveTextContent("白石うらら")
     await expect.element(desc).toHaveTextContent("入れ替わりの魔女")
@@ -380,16 +378,16 @@ describe("<DataList />", () => {
     await render(<DataList.Root data-testid="root" items={items} />)
 
     expect(
-      getTestElement("root").element().style.getPropertyValue("--col"),
+      page.getByTestId("root").element().style.getPropertyValue("--col"),
     ).toBe("4")
   })
 
   test("DataList renders empty items array", async () => {
     await render(<DataList.Root data-testid="root" items={[]} />)
 
-    await expect.element(getTestElement("root")).toBeInTheDocument()
+    await expect.element(page.getByTestId("root")).toBeInTheDocument()
     expect(
-      getTestElement("root").element().style.getPropertyValue("--col"),
+      page.getByTestId("root").element().style.getPropertyValue("--col"),
     ).toBe("0")
   })
 
@@ -405,11 +403,11 @@ describe("<DataList />", () => {
     )
 
     await expect
-      .element(page.getByText("白石うらら"))
-      .toHaveAttribute("data-custom", "term-prop")
-    await expect
       .poll(() => page.getByText(/白石うらら|山田竜/).elements().length)
       .toBe(2)
+    await expect
+      .element(page.getByText("白石うらら"))
+      .toHaveAttribute("data-custom", "term-prop")
     await expect
       .element(page.getByText("山田竜"))
       .toHaveAttribute("data-custom", "term-prop")
@@ -461,7 +459,7 @@ describe("<DataList />", () => {
     await render(<DataList.Root data-testid="root" items={items} />)
 
     expect(
-      getTestElement("root").element().style.getPropertyValue("--col"),
+      page.getByTestId("root").element().style.getPropertyValue("--col"),
     ).toBe("0")
   })
 
@@ -510,6 +508,14 @@ describe("<DataList />", () => {
     await expect
       .poll(() => page.getByTestId("ctx-term").elements().length)
       .toBe(2)
+    await expect
+      .poll(() =>
+        page
+          .getByTestId("ctx-term")
+          .elements()
+          .map((element) => element.textContent.trim()),
+      )
+      .toEqual(["白石うらら", "山田竜"])
     await expect
       .element(page.getByText("白石うらら"))
       .toHaveAttribute("data-testid", "ctx-term")
@@ -624,6 +630,14 @@ describe("<DataList />", () => {
     await expect
       .poll(() => page.getByTestId("ctx-desc").elements().length)
       .toBe(2)
+    await expect
+      .poll(() =>
+        page
+          .getByTestId("ctx-desc")
+          .elements()
+          .map((element) => element.textContent.trim()),
+      )
+      .toEqual(["入れ替わりの魔女", "テレポーテーション"])
     await expect
       .element(page.getByText("入れ替わりの魔女"))
       .toHaveAttribute("data-testid", "ctx-desc")

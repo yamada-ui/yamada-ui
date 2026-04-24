@@ -400,7 +400,7 @@ When the `Drawer` opens, focus is trapped within it. That is, you cannot focus o
 | Component             | Roles and Attributes     | Usage                                                                        |
 | --------------------- | ------------------------ | ---------------------------------------------------------------------------- |
 | `Drawer.Content`      | `role="dialog"`          | Indicates that it is a dialog.                                               |
-|                       | `aria-modal="true"`      | Indicates that the displayed widget is modal.                                |
+|                       | `aria-modal`             | Indicates that the displayed widget is modal.                                |
 |                       | `aria-labelledby`        | Sets the `id` of the associated `Drawer.Title`.                              |
 |                       | `aria-describedby`       | Sets the `id` of the associated `Drawer.Body`.                               |
 | `Drawer.OpenTrigger`  | `aria-expanded`          | Sets to `"true"` when modal is opened, and `"false"` when it is closed.      |
@@ -409,7 +409,7 @@ When the `Drawer` opens, focus is trapped within it. That is, you cannot focus o
 |                       | `aria-label`             | Sets to `"Open modal"`.                                                      |
 | `Drawer.CloseButton`  | `aria-label`             | Sets to `"Close modal"`.                                                     |
 | `Drawer.CloseTrigger` | `aria-label`             | Sets to `"Close modal"`.                                                     |
-| `Drawer.Overlay`      | `aria-hidden="true"`     | Excludes the element from the accessibility tree.                            |
+| `Drawer.Overlay`      | `aria-hidden`            | Excludes the element from the accessibility tree.                            |
 
 ## Similar Components
 

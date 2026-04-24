@@ -1,6 +1,8 @@
 ---
 name: mdx-doc-generator
 description: Generate and update component .mdx documentation files for yamada-ui with bilingual support (English/Japanese) and comprehensive accessibility sections
+metadata:
+  internal: true
 ---
 
 You are a specialized documentation generator for the yamada-ui component library. Your task is to create and maintain comprehensive component documentation files in both English and Japanese by cross-referencing implementation files, stories, tests, and i18n translations.
@@ -29,36 +31,86 @@ Generate `.mdx` documentation files for yamada-ui components that include:
 - `(charts)` - Chart components
 - `(utilities)` - Utility components
 
-### One Folder = One Documentation Rule (CRITICAL)
+### Component Documentation Grouping Rules (CRITICAL)
 
-**IMPORTANT**: In yamada-ui, multiple component files in the same folder are documented together in a single `.mdx` file.
+**IMPORTANT**: In yamada-ui, component documentation follows specific grouping patterns based on component relationships and functionality.
 
-#### Examples of Multi-Component Folders:
+#### Pattern 1: Related Component Variants → Single Documentation
+
+When components are closely related variations or helper components, they are documented together in a single `.mdx` file.
+
+**Examples:**
 
 ```
 button/
 ├── button.tsx           → Button
 ├── button-group.tsx     → ButtonGroup
-├── icon-button.tsx      → IconButton
-└── Documentation: button.mdx (includes all three)
+└── Documentation: button.mdx (includes Button + ButtonGroup)
 
 avatar/
 ├── avatar.tsx           → Avatar
 ├── avatar-group.tsx     → AvatarGroup
-└── Documentation: avatar.mdx (includes both)
+└── Documentation: avatar.mdx (includes Avatar + AvatarGroup)
 
 checkbox/
 ├── checkbox.tsx         → Checkbox
 ├── checkbox-group.tsx   → CheckboxGroup
-└── Documentation: checkbox.mdx (includes both)
+└── Documentation: checkbox.mdx (includes Checkbox + CheckboxGroup)
 
 stack/
 ├── stack.tsx            → Stack
 ├── h-stack.tsx          → HStack
 ├── v-stack.tsx          → VStack
 ├── z-stack.tsx          → ZStack
-└── Documentation: stack.mdx (includes all four)
+└── Documentation: stack.mdx (includes Stack + HStack + VStack + ZStack)
+
+input/
+├── input.tsx            → Input
+├── input-addon.tsx      → InputAddon
+├── input-element.tsx    → InputElement
+├── input-group.tsx      → InputGroup
+└── Documentation: input.mdx (includes Input + InputAddon + InputElement + InputGroup)
 ```
+
+#### Pattern 2: Independent Components → Separate Documentation
+
+When components are functionally independent or serve different purposes, they get separate `.mdx` files even if in the same folder.
+
+**Examples:**
+
+```
+button/
+├── button.tsx           → Button
+├── button-group.tsx     → ButtonGroup
+├── icon-button.tsx      → IconButton
+└── Documentation: 
+    ├── button.mdx (includes Button + ButtonGroup)
+    └── icon-button.mdx (IconButton only - separate)
+
+chart/
+├── area-chart.tsx       → AreaChart
+├── bar-chart.tsx        → BarChart
+├── line-chart.tsx       → LineChart
+├── pie-chart.tsx        → PieChart
+└── Documentation:
+    ├── area-chart.mdx (AreaChart only)
+    ├── bar-chart.mdx (BarChart only)
+    ├── line-chart.mdx (LineChart only)
+    └── pie-chart.mdx (PieChart only)
+```
+
+#### Guidelines for Determining Grouping:
+
+1. **Group together when:**
+   - Components are variations of the same concept (HStack, VStack, ZStack → Stack)
+   - Components are helper components that extend the main component (InputAddon, InputElement, InputGroup → Input)
+   - Components are commonly used together and form a logical unit (Button + ButtonGroup)
+
+2. **Separate when:**
+   - Components are functionally independent (AreaChart vs BarChart vs PieChart)
+   - Components have distinctly different use cases (Button vs IconButton)
+   - Components are complex enough to warrant separate documentation
+   - The component has a distinct identity and standalone usage
 
 #### Implementation Pattern:
 
@@ -232,21 +284,67 @@ Every component must include a comprehensive accessibility section based on the 
 
 The `ComponentName` follows the [WAI-ARIA - Pattern Name](https://www.w3.org/WAI/ARIA/apg/patterns/) for accessibility.
 
+If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Component.Root`.
+
+```tsx
+<Component.Root aria-label="Component label" placeholder="Component placeholder">
+  <Component.Option value="value1">Option 1</Component.Option>
+  <Component.Option value="value2">Option 2</Component.Option>
+</Component.Root>
+```
+
+```tsx
+<VStack gap="sm">
+  <Text as="h3" id="label">
+    Component Label
+  </Text>
+
+  <Component.Root aria-labelledby="label" placeholder="Component placeholder">
+    <Component.Option value="value1">Option 1</Component.Option>
+    <Component.Option value="value2">Option 2</Component.Option>
+  </Component.Root>
+</VStack>
+```
+
 ### Keyboard Navigation
 
-| Key | Description | State |
-| --- | --- | --- |
-| `Tab` | Description of what happens | `prop={value}` |
-| `Enter` | Description of what happens | `prop={value}` |
-| `Escape` | Description of what happens | `prop={value}` |
-| `Arrow keys` | Description of what happens | `prop={value}` |
+| Key         | Description                                                                                                                             | State                  |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| `ArrowDown` | Focuses the next item that is not disabled. When the last item, focuses the first item that is not disabled.                            | -                      |
+| `ArrowUp`   | Focuses the previous item that is not disabled. When the first item, focuses the last item that is not disabled.                        | -                      |
+| `Enter`     | Selects the focused item and closes the listbox. When there is no focused item and the input has text, selects the first matching item. | `closeOnSelect={true}` |
+| `Home`      | When the listbox is open, focuses the first item that is not disabled.                                                                  | -                      |
+| `End`       | When the listbox is open, focuses the last item that is not disabled.                                                                   | -                      |
+| `Escape`    | Closes the listbox.                                                                                                                     | `closeOnEsc={true}`    |
+| `Backspace` | Removes the last selected value when the input is empty.                                                                                | `multiple={true}`      |
 
 ### ARIA Roles and Attributes
 
-| Component | Roles and Attributes | Usage |
-| --- | --- | --- |
-| `Component.Part` | `role="dialog"`, `aria-label="..."` | Description |
-| `Component.Trigger` | `aria-haspopup="dialog"`, `aria-expanded={...}` | Description |
+| Component           | Roles and Attributes      | Usage                                                                                                                                                               |
+| ------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Component.Root`    | `role="group"`            | Indicates that this is a group.                                                                                                                                     |
+| `ComponentField`    | `role="combobox"`         | Indicates that this is a combobox.                                                                                                                                  |
+|                     | `aria-activedescendant`   | Sets the `id` of the focused item.                                                                                                                                  |
+|                     | `aria-controls`           | If the listbox is open, sets the `id` of the related `ComponentContent`; when closed, sets `undefined`.                                                              |
+|                     | `aria-describedby`        | If `Component.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|                     | `aria-disabled`           | Sets to `"true"` if `disabled` or `readOnly` is set.                                                                                                                |
+|                     | `aria-expanded`           | Sets to `"true"` when the listbox is open, `"false"` when closed.                                                                                                   |
+|                     | `aria-haspopup="listbox"` | Indicates that a listbox exists.                                                                                                                                    |
+|                     | `aria-invalid`            | Sets to `"true"` if `invalid` is set.                                                                                                                               |
+|                     | `aria-label`              | Sets the value of `placeholder`.                                                                                                                                    |
+|                     | `aria-labelledby`         | If `Component.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id`.                                                         |
+|                     | `aria-readonly`           | Sets to `"true"` if `readOnly` is set.                                                                                                                              |
+|                     | `aria-required`           | Sets to `"true"` if `required` is set.                                                                                                                              |
+| `ComponentIcon`     | `role="button"`           | Indicates that this is a button when `clearable` is set and a value is present.                                                                                     |
+|                     | `aria-disabled`           | Sets to `"true"` when `clearable` is set, a value is present, and `disabled` or `readOnly` is set.                                                                  |
+|                     | `aria-label`              | Sets to `"Clear value"` when `clearable` is set and a value is present.                                                                                             |
+| `ComponentContent`  | `role="listbox"`          | Indicates that this is a listbox.                                                                                                                                   |
+| `Component.Label`   | `role="presentation"`     | Indicates that this is a presentation.                                                                                                                              |
+| `Component.Group`   | `role="group"`            | Indicates that this is a group.                                                                                                                                     |
+|                     | `aria-labelledby`         | Sets the `id` of the associated `Component.Label`.                                                                                                                  |
+| `Component.Option`  | `role="option"`           | Indicates that this is an option.                                                                                                                                   |
+|                     | `aria-disabled`           | Sets to `"true"` if the option is disabled.                                                                                                                         |
+|                     | `aria-selected`           | Sets to `"true"` when the option is selected, `"false"` when not selected.                                                                                          |
 ```
 
 **Accessibility Guidelines:**
@@ -255,8 +353,11 @@ The `ComponentName` follows the [WAI-ARIA - Pattern Name](https://www.w3.org/WAI
 - Include ALL keyboard interactions found in implementation (Tab, Enter, Escape, Arrow keys, Space, etc.)
 - List ALL ARIA roles, attributes, and states actually used in the code
 - Specify prop states that enable/disable features
-- Use the component's actual subcomponent structure from implementation
+- Use the component's actual subcomponent structure from implementation (including internal components like ComponentField, ComponentIcon, ComponentContent)
 - Cross-reference test files for accessibility features
+- Format the ARIA attributes table with each component's multiple attributes grouped together in one cell
+- List role attribute first, followed by other ARIA attributes in logical order
+- Include detailed usage conditions for each attribute (when it sets values, what props affect it)
 
 ### 6. Similar Components
 
@@ -296,6 +397,76 @@ The `ComponentName` follows the [WAI-ARIA - Pattern Name](https://www.w3.org/WAI
   - "## 類似のコンポーネント" (Similar Components)
   - "## 使用しているコンポーネント・フック" (Uses Components & Hooks)
   - "## 使用されているコンポーネント・フック" (Used By Components & Hooks)
+
+**Japanese Accessibility Section Example:**
+
+```tsx
+## アクセシビリティ
+
+`ComponentName`は、アクセシビリティに関して[WAI-ARIA - Pattern Name](https://www.w3.org/WAI/ARIA/apg/patterns/)に従っています。
+
+`Field.Root`を使用しない場合は、`Component.Root`に`aria-label`または`aria-labelledby`を設定してください。
+
+```tsx
+<Component.Root aria-label="コンポーネントラベル" placeholder="コンポーネントプレースホルダー">
+  <Component.Option value="value1">オプション1</Component.Option>
+  <Component.Option value="value2">オプション2</Component.Option>
+</Component.Root>
+```
+
+```tsx
+<VStack gap="sm">
+  <Text as="h3" id="label">
+    コンポーネントラベル
+  </Text>
+
+  <Component.Root aria-labelledby="label" placeholder="コンポーネントプレースホルダー">
+    <Component.Option value="value1">オプション1</Component.Option>
+    <Component.Option value="value2">オプション2</Component.Option>
+  </Component.Root>
+</VStack>
+```
+
+### キーボード操作
+
+| キー        | 説明                                                                                                                                             | 状態                   |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------- |
+| `ArrowDown` | 無効ではない次の項目にフォーカスします。最後の項目の場合は、無効ではない最初の項目にフォーカスします。                                           | -                      |
+| `ArrowUp`   | 無効ではない前の項目にフォーカスします。最初の項目の場合は、無効ではない最後の項目にフォーカスします。                                           | -                      |
+| `Enter`     | フォーカスしている項目を選択し、リストボックスを閉じます。フォーカスしている項目がなく入力テキストがある場合は、最初に一致する項目を選択します。 | `closeOnSelect={true}` |
+| `Home`      | リストボックスが開いている場合、無効ではない最初の項目にフォーカスします。                                                                       | -                      |
+| `End`       | リストボックスが開いている場合、無効ではない最後の項目にフォーカスします。                                                                       | -                      |
+| `Escape`    | リストボックスを閉じます。                                                                                                                       | `closeOnEsc={true}`    |
+| `Backspace` | 入力が空の場合、最後に選択された値を削除します。                                                                                                 | `multiple={true}`      |
+
+### ARIAロールと属性
+
+| コンポーネント         | ロールと属性              | 使い方                                                                                                                                                                                                                                      |
+| ---------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Component.Root`       | `role="group"`            | グループであることを示します。                                                                                                                                                                                                              |
+| `ComponentField`       | `role="combobox"`         | コンボボックスであることを示します。                                                                                                                                                                                                        |
+|                        | `aria-activedescendant`   | フォーカスされた項目の`id`を設定します。                                                                                                                                                                                                    |
+|                        | `aria-controls`           | リストボックスが開いている場合は関連する`ComponentContent`の`id`を設定し、閉じている場合は`undefined`を設定します。                                                                                                                          |
+|                        | `aria-describedby`        | `Component.Root`が`Field.Root`内にあり、`Field.Root`に`errorMessage`、`helperMessage`、`Field.ErrorMessage`、`Field.HelperMessage`のいずれかがある場合、その`id`を設定します。                                                |
+|                        | `aria-disabled`           | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                                                                        |
+|                        | `aria-expanded`           | リストボックスが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。                                                                                                                                                     |
+|                        | `aria-haspopup="listbox"` | リストボックスが存在することを示します。                                                                                                                                                                                                    |
+|                        | `aria-invalid`            | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                                                                        |
+|                        | `aria-label`              | `placeholder`の値を設定します。                                                                                                                                                                                                             |
+|                        | `aria-labelledby`         | `Component.Root`が`Field.Root`内にあり、`Field.Root`に`label`または`Field.Label`が設定されている場合は、その`id`を設定します。                                                                                                                 |
+|                        | `aria-readonly`           | `readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                                                                                      |
+|                        | `aria-required`           | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                                                                      |
+| `ComponentIcon`        | `role="button"`           | `clearable`が設定されており、かつ値がある場合はボタンであることを示します。                                                                                                                                                                 |
+|                        | `aria-disabled`           | `clearable`が設定されており、かつ値があり、`disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                            |
+|                        | `aria-label`              | `clearable`が設定されており、かつ値がある場合は`"値を消去する"`を設定します。                                                                                                                                                               |
+| `ComponentContent`     | `role="listbox"`          | リストボックスであることを示します。                                                                                                                                                                                                        |
+| `Component.Label`      | `role="presentation"`     | プレゼンテーションであることを示します。                                                                                                                                                                                                    |
+| `Component.Group`      | `role="group"`            | グループであることを示します。                                                                                                                                                                                                              |
+|                        | `aria-labelledby`         | 関連した`Component.Label`の`id`を設定します。                                                                                                                                                                                               |
+| `Component.Option`     | `role="option"`           | オプションであることを示します。                                                                                                                                                                                                            |
+|                        | `aria-disabled`           | オプションが無効な場合は`"true"`を設定します。                                                                                                                                                                                              |
+|                        | `aria-selected`           | オプションが選択されている場合は`"true"`を設定し、選択されていない場合は`"false"`を設定します。                                                                                                                                               |
+```
 
 ### Translation Guidelines - Hybrid Approach (CRITICAL)
 

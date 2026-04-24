@@ -1,4 +1,4 @@
-import { page, render } from "#test/browser"
+import { a11y, page, render } from "#test/browser"
 import { DonutChart } from "."
 
 interface Data {
@@ -18,8 +18,14 @@ const childData: Data[] = [
 ]
 
 describe("<DonutChart />", () => {
-  test("sets `displayName` correctly", () => {
-    expect(DonutChart.Root.displayName).toBe("DonutChart")
+  test("renders component correctly", async () => {
+    await a11y(
+      <DonutChart.Root
+        data={rootData}
+        series={[{ dataKey: "visits", nameKey: "browser" }]}
+        withLegend
+      />,
+    )
   })
 
   test("renders generated donuts from `series`", async () => {
@@ -35,12 +41,10 @@ describe("<DonutChart />", () => {
     const root = page.getByTestId("root")
 
     await expect.element(root).toHaveClass("ui-donut-chart")
-    await expect
-      .poll(
-        () => root.element().querySelectorAll(".ui-polar-chart__donut").length,
-      )
-      .toBe(3)
-    await expect.element(page.getByText("chrome")).toBeInTheDocument()
+
+    for (const { browser } of rootData) {
+      await expect.element(page.getByText(browser)).toBeInTheDocument()
+    }
   })
 
   test("renders composition components instead of fallback `series`", async () => {
@@ -61,5 +65,9 @@ describe("<DonutChart />", () => {
 
     await expect.element(page.getByText("safari")).toBeInTheDocument()
     await expect.element(page.getByText("opera")).toBeInTheDocument()
+    await expect
+      .element(page.getByText("chrome").query())
+      .not.toBeInTheDocument()
+    await expect.element(page.getByText("edge").query()).not.toBeInTheDocument()
   })
 })

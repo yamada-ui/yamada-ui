@@ -6,6 +6,32 @@ import { a11y, page, render } from "#test/browser"
 import { Tree } from "."
 import { BoxIcon, FileIcon, FolderIcon, XIcon } from "../icon"
 
+const exactName = (name: string) =>
+  new RegExp(`^${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`)
+
+const getTreeItem = (name: string) =>
+  page.getByRole("treeitem", { name: exactName(name) })
+
+const getTreeItemLabel = (name: string) =>
+  page.getByText(exactName(name)).first()
+
+const firstTreeItem = () => page.getByRole("treeitem").first()
+
+const getCheckbox = (name: string) =>
+  page.getByRole("checkbox", { name: exactName(name) })
+
+const clickTreeItem = (name: string, init?: MouseEventInit) => {
+  getTreeItem(name)
+    .element()
+    .dispatchEvent(new MouseEvent("click", { bubbles: true, ...init }))
+}
+
+const clickElement = (element: Element) => {
+  if (!(element instanceof HTMLElement)) throw new Error("Element is not HTML")
+
+  element.click()
+}
+
 const items: Tree.ItemType[] = [
   {
     children: [
@@ -59,28 +85,22 @@ describe("<Tree />", () => {
         }}
       />,
     )
-    const root = document.querySelector('[role="tree"]') as HTMLElement
-    const group = [...document.querySelectorAll('[role="group"]')][0]
-    const groupItem = (
-      [...document.querySelectorAll('[role="treeitem"]')] as HTMLElement[]
-    )[0]
-    const item = (
-      [...document.querySelectorAll('[role="treeitem"]')] as HTMLElement[]
-    )[1]
-    expect(root).toHaveClass("ui-tree__root")
-    expect(group).toHaveClass("ui-tree__group")
+    const root = page.getByRole("tree")
+    const group = page.getByRole("group").first()
+    const groupItem = firstTreeItem().element()
+    const item = getTreeItem("1-1").element()
+    await expect.element(root).toHaveClass("ui-tree__root")
+    await expect.element(group).toHaveClass("ui-tree__group")
     expect(groupItem).toHaveClass("ui-tree__item")
-    expect(groupItem?.children[0]?.children[0]).toHaveClass(
-      "ui-tree__indicator",
-    )
+    expect(groupItem.children[0]?.children[0]).toHaveClass("ui-tree__indicator")
     expect(item).toHaveClass("ui-tree__item")
-    expect(item?.children[0]?.children[1]).toHaveClass("ui-tree__checkbox")
-    expect(item?.children[0]?.children[2]).toHaveClass(
+    expect(item.children[0]?.children[1]).toHaveClass("ui-tree__checkbox")
+    expect(item.children[0]?.children[2]).toHaveClass(
       "ui-tree__element",
       "ui-tree__element--start",
     )
-    expect(item?.children[0]?.children[3]).toHaveClass("ui-tree__label")
-    expect(item?.children[0]?.children[4]).toHaveClass(
+    expect(item.children[0]?.children[3]).toHaveClass("ui-tree__label")
+    expect(item.children[0]?.children[4]).toHaveClass(
       "ui-tree__element",
       "ui-tree__element--end",
     )
@@ -101,32 +121,25 @@ describe("<Tree />", () => {
         </Tree.Item>
       </Tree.Root>,
     )
-    const root = document.querySelector('[role="tree"]') as HTMLElement
-    const group = [...document.querySelectorAll('[role="group"]')][0]
-    const groupItem = (
-      [...document.querySelectorAll('[role="treeitem"]')] as HTMLElement[]
-    )[0]
-    const item = (
-      [...document.querySelectorAll('[role="treeitem"]')] as HTMLElement[]
-    )[1]
-    expect(root.tagName).toBe("UL")
-    expect(group?.tagName).toBe("UL")
-    expect(groupItem?.tagName).toBe("LI")
-    expect(groupItem?.children[0]?.tagName).toBe("DIV")
-    expect(groupItem?.children[0]?.children[0]?.tagName).toBe("svg")
-    expect(item?.tagName).toBe("LI")
-    expect(item?.children[0]?.tagName).toBe("DIV")
-    expect(item?.children[0]?.children[1]?.tagName).toBe("DIV")
-    expect(item?.children[0]?.children[2]?.tagName).toBe("SPAN")
-    expect(item?.children[0]?.children[3]?.tagName).toBe("DIV")
+    const group = page.getByRole("group").first().element()
+    const groupItem = firstTreeItem().element()
+    const item = getTreeItem("1-1").element()
+    expect(page.getByRole("tree").element().tagName).toBe("UL")
+    expect(group.tagName).toBe("UL")
+    expect(groupItem.tagName).toBe("LI")
+    expect(groupItem.children[0]?.tagName).toBe("DIV")
+    expect(groupItem.children[0]?.children[0]?.tagName).toBe("svg")
+    expect(item.tagName).toBe("LI")
+    expect(item.children[0]?.tagName).toBe("DIV")
+    expect(item.children[0]?.children[1]?.tagName).toBe("DIV")
+    expect(item.children[0]?.children[2]?.tagName).toBe("SPAN")
+    expect(item.children[0]?.children[3]?.tagName).toBe("DIV")
   })
 
   test("should not render indicator", async () => {
     await render(<Tree.Root indicatorHidden items={items} />)
-    const item = (
-      [...document.querySelectorAll('[role="treeitem"]')] as HTMLElement[]
-    )[0]
-    const trigger = item?.children[0]
+    const item = firstTreeItem().element()
+    const trigger = item.children[0]
 
     expect(trigger?.querySelector("ui-tree__indicator")).not.toBeInTheDocument()
   })
@@ -134,7 +147,7 @@ describe("<Tree />", () => {
   test("should select item on click", async () => {
     const onSelectedChange = vi.fn()
 
-    await render(
+    const { user } = await render(
       <Tree.Root
         defaultExpandedValue={["1"]}
         items={items}
@@ -142,14 +155,9 @@ describe("<Tree />", () => {
       />,
     )
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const leafItem = treeItems.find(
-      (el) => el.querySelector(".ui-tree__label")?.textContent === "1-1",
-    )!
+    const leafItem = getTreeItemLabel("1-1")
 
-    fireEvent.click(leafItem)
+    await user.click(leafItem)
 
     expect(onSelectedChange).toHaveBeenCalledWith("1/1-1")
   })
@@ -157,16 +165,13 @@ describe("<Tree />", () => {
   test("should select group item on click", async () => {
     const onSelectedChange = vi.fn()
 
-    await render(
+    const { user } = await render(
       <Tree.Root items={items} onSelectedChange={onSelectedChange} />,
     )
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const groupItem = treeItems[0]!
+    const groupItem = getTreeItemLabel("1")
 
-    fireEvent.click(groupItem)
+    await user.click(groupItem)
 
     expect(onSelectedChange).toHaveBeenCalledWith("1")
   })
@@ -174,20 +179,20 @@ describe("<Tree />", () => {
   test("should expand and collapse group on click", async () => {
     const onExpandedChange = vi.fn()
 
-    await render(
+    const { user } = await render(
       <Tree.Root items={items} onExpandedChange={onExpandedChange} />,
     )
 
-    const groupItem = (
-      [...document.querySelectorAll('[role="treeitem"]')] as HTMLElement[]
-    )[0]!
+    const groupItem = getTreeItemLabel("1")
 
-    fireEvent.click(groupItem)
+    await user.click(groupItem)
 
     expect(onExpandedChange).toHaveBeenCalledWith(["1"])
-    expect(groupItem).toHaveAttribute("aria-expanded", "true")
+    await expect
+      .element(firstTreeItem())
+      .toHaveAttribute("aria-expanded", "true")
 
-    fireEvent.click(groupItem)
+    await user.click(groupItem)
 
     expect(onExpandedChange).toHaveBeenCalledWith([])
   })
@@ -201,30 +206,23 @@ describe("<Tree />", () => {
       />,
     )
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const leafItem = treeItems.find(
-      (el) => el.querySelector(".ui-tree__label")?.textContent === "1-1",
-    )
-
-    expect(leafItem).toHaveAttribute("aria-selected", "true")
+    await expect
+      .element(getTreeItem("1-1"))
+      .toHaveAttribute("aria-selected", "true")
   })
 
   test("should support controlled expandedValue", async () => {
     await render(<Tree.Root expandedValue={["1"]} items={items} />)
 
-    const groupItem = (
-      [...document.querySelectorAll('[role="treeitem"]')] as HTMLElement[]
-    )[0]
-
-    expect(groupItem).toHaveAttribute("aria-expanded", "true")
+    await expect
+      .element(firstTreeItem())
+      .toHaveAttribute("aria-expanded", "true")
   })
 
   test("should support multiple selection", async () => {
     const onSelectedChange = vi.fn()
 
-    await render(
+    const { user } = await render(
       <Tree.Root
         defaultExpandedValue={["1"]}
         items={items}
@@ -233,14 +231,9 @@ describe("<Tree />", () => {
       />,
     )
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const leafItem = treeItems.find(
-      (el) => el.querySelector(".ui-tree__label")?.textContent === "1-1",
-    )!
+    const leafItem = getTreeItemLabel("1-1")
 
-    fireEvent.click(leafItem)
+    await user.click(leafItem)
 
     expect(onSelectedChange).toHaveBeenCalledWith(["1/1-1"])
   })
@@ -248,7 +241,7 @@ describe("<Tree />", () => {
   test("should support multiple selection with ctrl+click", async () => {
     const onSelectedChange = vi.fn()
 
-    await render(
+    const { user } = await render(
       <Tree.Root
         defaultExpandedValue={["1"]}
         defaultSelectedValue={["1/1-1"]}
@@ -258,14 +251,9 @@ describe("<Tree />", () => {
       />,
     )
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const secondLeaf = treeItems.find(
-      (el) => el.querySelector(".ui-tree__label")?.textContent === "3",
-    )!
-
-    fireEvent.click(secondLeaf, { ctrlKey: true })
+    await user.keyboard("{Control>}")
+    clickTreeItem("3", { ctrlKey: true })
+    await user.keyboard("{/Control}")
 
     expect(onSelectedChange).toHaveBeenCalledWith(expect.arrayContaining(["3"]))
   })
@@ -281,9 +269,7 @@ describe("<Tree />", () => {
       />,
     )
 
-    const groupItem = (
-      [...document.querySelectorAll('[role="treeitem"]')] as HTMLElement[]
-    )[0]!
+    const groupItem = firstTreeItem().element()
 
     fireEvent.keyDown(groupItem, { key: "ArrowLeft" })
 
@@ -297,9 +283,7 @@ describe("<Tree />", () => {
       <Tree.Root items={items} onExpandedChange={onExpandedChange} />,
     )
 
-    const groupItem = (
-      [...document.querySelectorAll('[role="treeitem"]')] as HTMLElement[]
-    )[0]!
+    const groupItem = firstTreeItem().element()
 
     fireEvent.keyDown(groupItem, { key: "ArrowRight" })
 
@@ -309,55 +293,39 @@ describe("<Tree />", () => {
   test("should navigate to parent with ArrowLeft on nested item", async () => {
     await render(<Tree.Root defaultExpandedValue={["1"]} items={items} />)
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const nestedItem = treeItems.find(
-      (el) => el.querySelector(".ui-tree__label")?.textContent === "1-1",
-    )!
+    const groupItem = firstTreeItem().element()
+    const nestedItem = getTreeItem("1-1").element()
+
+    fireEvent.keyDown(groupItem, { key: "ArrowDown" })
+    await expect.element(getTreeItem("1-1")).toHaveAttribute("tabindex", "0")
 
     fireEvent.keyDown(nestedItem, { key: "ArrowLeft" })
 
-    await vi.waitFor(() => {
-      const groupItem = treeItems[0]!
-      expect(groupItem).toHaveAttribute("tabindex", "0")
-    })
+    await expect.element(firstTreeItem()).toHaveAttribute("tabindex", "0")
   })
 
   test("should navigate to first item with Home key", async () => {
     await render(<Tree.Root defaultExpandedValue={["1"]} items={items} />)
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const lastItem = treeItems.find(
-      (el) => el.querySelector(".ui-tree__label")?.textContent === "5",
-    )!
+    const firstItem = firstTreeItem().element()
+    const lastItem = getTreeItem("5").element()
+
+    fireEvent.keyDown(firstItem, { key: "End" })
+    await expect.element(getTreeItem("5")).toHaveAttribute("tabindex", "0")
 
     fireEvent.keyDown(lastItem, { key: "Home" })
 
-    await vi.waitFor(() => {
-      const firstItem = treeItems[0]!
-      expect(firstItem).toHaveAttribute("tabindex", "0")
-    })
+    await expect.element(firstTreeItem()).toHaveAttribute("tabindex", "0")
   })
 
   test("should navigate to last item with End key", async () => {
     await render(<Tree.Root defaultExpandedValue={["1"]} items={items} />)
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const firstItem = treeItems[0]!
+    const firstItem = firstTreeItem().element()
 
     fireEvent.keyDown(firstItem, { key: "End" })
 
-    await vi.waitFor(() => {
-      const lastItem = treeItems.find(
-        (el) => el.querySelector(".ui-tree__label")?.textContent === "5",
-      )!
-      expect(lastItem).toHaveAttribute("tabindex", "0")
-    })
+    await expect.element(getTreeItem("5")).toHaveAttribute("tabindex", "0")
   })
 
   test("should toggle group with Enter key", async () => {
@@ -367,9 +335,7 @@ describe("<Tree />", () => {
       <Tree.Root items={items} onExpandedChange={onExpandedChange} />,
     )
 
-    const groupItem = (
-      [...document.querySelectorAll('[role="treeitem"]')] as HTMLElement[]
-    )[0]!
+    const groupItem = firstTreeItem().element()
 
     fireEvent.keyDown(groupItem, { key: "Enter" })
 
@@ -383,9 +349,7 @@ describe("<Tree />", () => {
       <Tree.Root items={items} onExpandedChange={onExpandedChange} />,
     )
 
-    const groupItem = (
-      [...document.querySelectorAll('[role="treeitem"]')] as HTMLElement[]
-    )[0]!
+    const groupItem = firstTreeItem().element()
 
     fireEvent.keyDown(groupItem, { key: " ", code: "Space" })
 
@@ -404,10 +368,7 @@ describe("<Tree />", () => {
       />,
     )
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const firstItem = treeItems[0]!
+    const firstItem = firstTreeItem().element()
 
     fireEvent.keyDown(firstItem, { key: "a", ctrlKey: true })
 
@@ -421,9 +382,7 @@ describe("<Tree />", () => {
       <Tree.Root items={items} onExpandedChange={onExpandedChange} />,
     )
 
-    const groupItem = (
-      [...document.querySelectorAll('[role="treeitem"]')] as HTMLElement[]
-    )[0]!
+    const groupItem = firstTreeItem().element()
 
     fireEvent.keyDown(groupItem, {
       key: "ArrowDown",
@@ -445,12 +404,7 @@ describe("<Tree />", () => {
       />,
     )
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const nestedItem = treeItems.find(
-      (el) => el.querySelector(".ui-tree__label")?.textContent === "1-1",
-    )!
+    const nestedItem = getTreeItem("1-1").element()
 
     fireEvent.keyDown(nestedItem, {
       key: "ArrowUp",
@@ -473,10 +427,7 @@ describe("<Tree />", () => {
       />,
     )
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const firstItem = treeItems[0]!
+    const firstItem = firstTreeItem().element()
 
     fireEvent.keyDown(firstItem, { key: "ArrowDown", shiftKey: true })
 
@@ -497,12 +448,7 @@ describe("<Tree />", () => {
       />,
     )
 
-    const checkboxes = [
-      ...document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]'),
-    ]
-    const leafCheckbox = checkboxes[1]!
-
-    fireEvent.click(leafCheckbox)
+    clickElement(getCheckbox("1-1").element())
 
     expect(onCheckedChange).toHaveBeenCalledWith(
       expect.arrayContaining(["1/1-1"]),
@@ -521,12 +467,7 @@ describe("<Tree />", () => {
       />,
     )
 
-    const checkboxes = [
-      ...document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]'),
-    ]
-    const parentCheckbox = checkboxes[0]!
-
-    fireEvent.click(parentCheckbox)
+    clickElement(getCheckbox("1").element())
 
     expect(onCheckedChange).toHaveBeenCalledWith(expect.arrayContaining(["1"]))
   })
@@ -554,72 +495,49 @@ describe("<Tree />", () => {
       )
     }
 
-    const { user } = await render(<ControlledTree />)
+    await render(<ControlledTree />)
 
-    await user.click(page.getByTestId("expand"))
+    clickElement(page.getByTestId("expand").element())
 
-    await vi.waitFor(() => {
-      const groupItem = (
-        [...document.querySelectorAll('[role="treeitem"]')] as HTMLElement[]
-      )[0]
+    await expect
+      .element(firstTreeItem())
+      .toHaveAttribute("aria-expanded", "true")
 
-      expect(groupItem).toHaveAttribute("aria-expanded", "true")
-    })
+    clickElement(page.getByTestId("collapse").element())
 
-    await user.click(page.getByTestId("collapse"))
-
-    await vi.waitFor(() => {
-      const groupItem = (
-        [...document.querySelectorAll('[role="treeitem"]')] as HTMLElement[]
-      )[0]
-
-      expect(groupItem).toHaveAttribute("aria-expanded", "false")
-    })
+    await expect
+      .element(firstTreeItem())
+      .toHaveAttribute("aria-expanded", "false")
   })
 
   test("should set aria-multiselectable on tree root", async () => {
     await render(<Tree.Root items={items} multiple />)
 
-    const tree = document.querySelector('[role="tree"]') as HTMLElement
-
-    expect(tree).toHaveAttribute("aria-multiselectable", "true")
+    await expect
+      .element(page.getByRole("tree"))
+      .toHaveAttribute("aria-multiselectable", "true")
   })
 
   test("should search items by typing characters", async () => {
     await render(<Tree.Root items={items} />)
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const firstItem = treeItems[0]!
+    const firstItem = firstTreeItem().element()
 
     fireEvent.keyDown(firstItem, { key: "5" })
 
-    await vi.waitFor(() => {
-      const item = treeItems.find(
-        (el) => el.querySelector(".ui-tree__label")?.textContent === "5",
-      )!
-      expect(item).toHaveAttribute("tabindex", "0")
-    })
+    await expect.element(getTreeItem("5")).toHaveAttribute("tabindex", "0")
   })
 
   test("should not respond to disabled item click", async () => {
     const onSelectedChange = vi.fn()
 
-    await render(
+    const { user } = await render(
       <Tree.Root items={items} onSelectedChange={onSelectedChange} />,
     )
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const disabledItem = treeItems.find(
-      (el) =>
-        el.querySelector(".ui-tree__label")?.textContent === "4" &&
-        el.getAttribute("aria-disabled") === "true",
-    )!
+    const disabledItem = getTreeItem("4")
 
-    fireEvent.click(disabledItem)
+    await user.click(disabledItem, { force: true })
 
     expect(onSelectedChange).not.toHaveBeenCalled()
   })
@@ -627,21 +545,11 @@ describe("<Tree />", () => {
   test("should navigate into expanded group with ArrowRight", async () => {
     await render(<Tree.Root defaultExpandedValue={["1"]} items={items} />)
 
-    const groupItem = (
-      [...document.querySelectorAll('[role="treeitem"]')] as HTMLElement[]
-    )[0]!
+    const groupItem = firstTreeItem().element()
 
     fireEvent.keyDown(groupItem, { key: "ArrowRight" })
 
-    await vi.waitFor(() => {
-      const treeItems = [
-        ...document.querySelectorAll('[role="treeitem"]'),
-      ] as HTMLElement[]
-      const firstChild = treeItems.find(
-        (el) => el.querySelector(".ui-tree__label")?.textContent === "1-1",
-      )
-      expect(firstChild).toHaveAttribute("tabindex", "0")
-    })
+    await expect.element(getTreeItem("1-1")).toHaveAttribute("tabindex", "0")
   })
 
   test("should uncheck item when clicking checked checkbox", async () => {
@@ -657,12 +565,7 @@ describe("<Tree />", () => {
       />,
     )
 
-    const checkboxes = [
-      ...document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]'),
-    ]
-    const leafCheckbox = checkboxes[1]!
-
-    fireEvent.click(leafCheckbox)
+    clickElement(getCheckbox("1-1").element())
 
     expect(onCheckedChange).toHaveBeenCalledWith(
       expect.not.arrayContaining(["1/1-1"]),
@@ -672,9 +575,9 @@ describe("<Tree />", () => {
   test("should set aria-multiselectable when checkable", async () => {
     await render(<Tree.Root checkable items={items} />)
 
-    const tree = document.querySelector('[role="tree"]') as HTMLElement
-
-    expect(tree).toHaveAttribute("aria-multiselectable", "true")
+    await expect
+      .element(page.getByRole("tree"))
+      .toHaveAttribute("aria-multiselectable", "true")
   })
 
   test("should select item with Enter key on leaf", async () => {
@@ -688,12 +591,7 @@ describe("<Tree />", () => {
       />,
     )
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const leafItem = treeItems.find(
-      (el) => el.querySelector(".ui-tree__label")?.textContent === "1-1",
-    )!
+    const leafItem = getTreeItem("1-1").element()
 
     fireEvent.keyDown(leafItem, { key: "Enter" })
 
@@ -711,12 +609,7 @@ describe("<Tree />", () => {
       />,
     )
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const leafItem = treeItems.find(
-      (el) => el.querySelector(".ui-tree__label")?.textContent === "1-1",
-    )!
+    const leafItem = getTreeItem("1-1").element()
 
     fireEvent.keyDown(leafItem, { key: " ", code: "Space" })
 
@@ -730,14 +623,7 @@ describe("<Tree />", () => {
       <Tree.Root items={items} onSelectedChange={onSelectedChange} />,
     )
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const disabledItem = treeItems.find(
-      (el) =>
-        el.querySelector(".ui-tree__label")?.textContent === "4" &&
-        el.getAttribute("aria-disabled") === "true",
-    )!
+    const disabledItem = getTreeItem("4").element()
 
     fireEvent.keyDown(disabledItem, { key: "Enter" })
 
@@ -755,10 +641,7 @@ describe("<Tree />", () => {
       />,
     )
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const firstItem = treeItems[0]!
+    const firstItem = firstTreeItem().element()
 
     fireEvent.keyDown(firstItem, { key: "a", ctrlKey: true })
 
@@ -772,14 +655,7 @@ describe("<Tree />", () => {
       <Tree.Root items={items} onExpandedChange={onExpandedChange} />,
     )
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const disabledGroup = treeItems.find(
-      (el) =>
-        el.querySelector(".ui-tree__label")?.textContent === "2" &&
-        el.getAttribute("aria-disabled") === "true",
-    )!
+    const disabledGroup = getTreeItem("2").element()
 
     fireEvent.keyDown(disabledGroup, { key: "ArrowRight" })
 
@@ -798,16 +674,7 @@ describe("<Tree />", () => {
       />,
     )
 
-    const checkboxes = [
-      ...document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]'),
-    ]
-    const nestedCheckbox = checkboxes.find((el) => {
-      const item = el.closest("[role='treeitem']")
-
-      return item?.querySelector(".ui-tree__label")?.textContent === "1-2-1"
-    })!
-
-    fireEvent.click(nestedCheckbox)
+    clickElement(getCheckbox("1-2-1").element())
 
     expect(onCheckedChange).toHaveBeenCalledWith(
       expect.arrayContaining(["1/1-2/1-2-1"]),
@@ -817,7 +684,7 @@ describe("<Tree />", () => {
   test("should deselect item with ctrl+click in multiple mode", async () => {
     const onSelectedChange = vi.fn()
 
-    await render(
+    const { user } = await render(
       <Tree.Root
         defaultExpandedValue={["1"]}
         defaultSelectedValue={["1/1-1"]}
@@ -827,14 +694,9 @@ describe("<Tree />", () => {
       />,
     )
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const leafItem = treeItems.find(
-      (el) => el.querySelector(".ui-tree__label")?.textContent === "1-1",
-    )!
-
-    fireEvent.click(leafItem, { ctrlKey: true })
+    await user.keyboard("{Control>}")
+    clickTreeItem("1-1", { ctrlKey: true })
+    await user.keyboard("{/Control}")
 
     expect(onSelectedChange).toHaveBeenCalledWith([])
   })
@@ -842,7 +704,7 @@ describe("<Tree />", () => {
   test("should select range with shift+click in multiple mode", async () => {
     const onSelectedChange = vi.fn()
 
-    await render(
+    const { user } = await render(
       <Tree.Root
         defaultExpandedValue={["1"]}
         defaultSelectedValue={["1/1-1"]}
@@ -852,14 +714,9 @@ describe("<Tree />", () => {
       />,
     )
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const targetItem = treeItems.find(
-      (el) => el.querySelector(".ui-tree__label")?.textContent === "3",
-    )!
-
-    fireEvent.click(targetItem, { shiftKey: true })
+    await user.keyboard("{Shift>}")
+    clickTreeItem("3", { shiftKey: true })
+    await user.keyboard("{/Shift}")
 
     expect(onSelectedChange).toHaveBeenCalledWith(
       expect.arrayContaining(["1/1-1"]),
@@ -878,10 +735,7 @@ describe("<Tree />", () => {
       />,
     )
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const groupItem = treeItems[0]!
+    const groupItem = firstTreeItem().element()
 
     fireEvent.keyDown(groupItem, { key: "ArrowDown" })
     fireEvent.keyDown(groupItem, { key: "ArrowUp", shiftKey: true })
@@ -892,16 +746,15 @@ describe("<Tree />", () => {
   test("should not navigate with ArrowRight on leaf item", async () => {
     await render(<Tree.Root defaultExpandedValue={["1"]} items={items} />)
 
-    const treeItems = [
-      ...document.querySelectorAll('[role="treeitem"]'),
-    ] as HTMLElement[]
-    const leafItem = treeItems.find(
-      (el) => el.querySelector(".ui-tree__label")?.textContent === "1-1",
-    )!
+    const groupItem = firstTreeItem().element()
+    const leafItem = getTreeItem("1-1").element()
+
+    fireEvent.keyDown(groupItem, { key: "ArrowDown" })
+    await expect.element(getTreeItem("1-1")).toHaveAttribute("tabindex", "0")
 
     fireEvent.keyDown(leafItem, { key: "ArrowRight" })
 
-    expect(leafItem).toHaveAttribute("tabindex", "-1")
+    await expect.element(getTreeItem("1-1")).toHaveAttribute("tabindex", "0")
   })
 
   test("should collapse all on Ctrl+Shift+ArrowUp on top-level item", async () => {
@@ -915,9 +768,7 @@ describe("<Tree />", () => {
       />,
     )
 
-    const groupItem = (
-      [...document.querySelectorAll('[role="treeitem"]')] as HTMLElement[]
-    )[0]!
+    const groupItem = firstTreeItem().element()
 
     fireEvent.keyDown(groupItem, {
       key: "ArrowUp",
@@ -939,11 +790,7 @@ describe("<Tree />", () => {
       </Tree.Root>,
     )
 
-    const groupItem = (
-      [...document.querySelectorAll('[role="treeitem"]')] as HTMLElement[]
-    )[0]!
-
-    fireEvent.click(groupItem)
+    clickElement(firstTreeItem().element())
 
     await vi.waitFor(() => {
       expect(asyncChildren).toHaveBeenCalledTimes(1)
@@ -973,9 +820,9 @@ describe("<Tree />", () => {
       )
     }
 
-    const { user } = await render(<AsyncTree />)
+    await render(<AsyncTree />)
 
-    await user.click(page.getByTestId("expand"))
+    clickElement(page.getByTestId("expand").element())
 
     await vi.waitFor(() => {
       expect(asyncChildren).toHaveBeenCalledTimes(1)

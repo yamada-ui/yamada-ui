@@ -236,7 +236,7 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
                   )()}
                 >
                   <Popover.Trigger>
-                    <SelectField {...getFieldProps(varProps)} />
+                    <SelectField {...getFieldProps({ ...varProps })} />
                   </Popover.Trigger>
 
                   <InputGroup.Element

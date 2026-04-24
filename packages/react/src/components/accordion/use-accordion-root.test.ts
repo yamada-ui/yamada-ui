@@ -1,6 +1,6 @@
 import type { Ref } from "react"
-import { renderHook } from "#test"
 import { createRef } from "react"
+import { renderHook } from "#test"
 import { useAccordion } from "./use-accordion"
 
 function invokeCallbackRef<T>(ref: Ref<T> | undefined, node: null | T) {

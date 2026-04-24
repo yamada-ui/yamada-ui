@@ -114,13 +114,6 @@ export const useAccordion = ({
     onChange,
   })
 
-  /**
-   * Root props follow the root-only migration path: caller props win on scalar
-   * conflicts via `mergeProps(rest, props)()`, while mergeable fields still
-   * compose. This intentionally differs from sibling getters like
-   * `getItemProps`, which keep `{ ...props, ...rest }` so item internals retain
-   * precedence.
-   */
   const getRootProps: PropGetter = useCallback(
     (props = {}) => mergeProps(rest, props)(),
     [rest],

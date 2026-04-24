@@ -82,48 +82,7 @@ jobs:
           EOF
 
       - name: Generate dependencies changeset
-        run: |
-          set -euo pipefail
-
-          changed_catalog=$(git diff "origin/$BASE"...HEAD -- pnpm-workspace.yaml \
-            | grep -E '^\+[^+]' \
-            | grep -oE '"[^"]+":|[A-Za-z@][A-Za-z0-9_./@-]*:' \
-            | tr -d '":' \
-            | sort -u || true)
-
-          for pkg in cli react utils; do
-            pkg_json="packages/$pkg/package.json"
-
-            if [ "$pkg" = "react" ]; then
-              exclude_pattern='"(lucide-react|web-features|@mdn/browser-compat-data)":'
-            else
-              exclude_pattern='^$'
-            fi
-            direct_change=$(git diff "origin/$BASE"...HEAD -- "$pkg_json" \
-              | grep -E '^\+[^+].*":' \
-              | grep -v '"catalog:"' \
-              | grep -vE "$exclude_pattern" \
-              || true)
-
-            catalog_hit=""
-            for dep in $changed_catalog; do
-              [ -z "$dep" ] && continue
-              if grep -qE "\"$dep\": *\"catalog:\"" "$pkg_json"; then
-                catalog_hit=1
-                break
-              fi
-            done
-
-            if [ -n "$direct_change" ] || [ -n "$catalog_hit" ]; then
-              cat > ".changeset/dependabot-deps-$pkg-$PR.md" <<EOF
-          ---
-          "@yamada-ui/$pkg": patch
-          ---
-
-          Updated dependencies.
-          EOF
-            fi
-          done
+        run: node .github/scripts/dependabot/generate-dependency-changesets.mjs
 
       - name: Update branch
         run: |

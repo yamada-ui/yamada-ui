@@ -14,6 +14,27 @@ env:
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
+  dependabot_script:
+    name: Dependabot script
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      - name: Check modified files
+        id: check-modified
+        uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
+        with:
+          files: |
+            .github/workflows/dependabot.yml
+            .github/workflows/test.yml
+            .github/scripts/dependabot/**
+
+      - name: Test dependabot script
+        if: steps.check-modified.outputs.any_changed == 'true'
+        run: node --test .github/scripts/dependabot/generate-dependency-changesets.test.mjs
+
   chromium_coverage:
     name: Chromium ${{ matrix.shard_index }}/4
     runs-on: ubuntu-24.04

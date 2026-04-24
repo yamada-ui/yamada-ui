@@ -1,4 +1,5 @@
 import type { FC, MouseEvent as ReactMouseEvent, ReactNode } from "react"
+import { createRef, useState } from "react"
 import {
   a11y,
   act,
@@ -8,7 +9,6 @@ import {
   screen,
   waitFor,
 } from "#test"
-import { createRef, useState } from "react"
 import { Select, useSelect } from "."
 
 const items: Select.Item[] = [
@@ -1053,7 +1053,7 @@ describe("<Select />", () => {
         items={items}
         multiple
         placeholder="Choose"
-        render={({ label, value }) => (value ? `${label}` : null)}
+        render={({ label, value }) => (value ? label : null)}
       />,
     )
 

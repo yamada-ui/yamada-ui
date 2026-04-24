@@ -1,5 +1,6 @@
 import { page, render } from "#test/browser"
 import { ComposedChart } from "."
+import { gradients } from "./chart"
 
 interface Data {
   date: string
@@ -67,6 +68,8 @@ describe("<ComposedChart />", () => {
     expect(series[0]?.[0]).toBe("bar")
     expect(series[1]?.[0]).toBe("area")
     expect(series[2]?.[0]).toBe("line")
-    expect(series.every(([, props]) => "color" in props)).toBeTruthy()
+    expect(series.map(([, props]) => props.color)).toStrictEqual(
+      gradients(series.length, "mono", "invert"),
+    )
   })
 })

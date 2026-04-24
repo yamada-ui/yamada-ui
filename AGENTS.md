@@ -33,6 +33,8 @@ When editing or reviewing files that match a pattern below, read the linked rule
 - [Changesets](.agents/rules/changesets.md):
   - `packages/{cli,react,utils}/src/**/*.{ts,tsx}`
   - `.changeset/*.md`
+- [Browser Mode Testing](.agents/rules/browser-mode-testing.md):
+  - `packages/react/src/**/*.test.{ts,tsx}`
 
 ## Codebase structure
 

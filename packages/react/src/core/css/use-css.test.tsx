@@ -15,7 +15,7 @@ describe("useCSS", () => {
 
     await render(<Component />)
 
-    expect(page.getByTestId("component").element()).toHaveStyle({
+    await expect.element(page.getByTestId("component")).toHaveStyle({
       fontSize: "var(--ui-fontSizes-md)",
     })
   })

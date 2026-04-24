@@ -1,3 +1,4 @@
+import type * as Utils from "../../utils"
 import { render } from "#test/browser"
 import {
   ColorModeScript,
@@ -10,7 +11,7 @@ const { mockCreatedDom } = vi.hoisted(() => ({
 }))
 
 vi.mock("../../utils", async (importOriginal) => {
-  const original = (await importOriginal()) as { [key: string]: unknown }
+  const original = await importOriginal<typeof Utils>()
 
   return {
     ...original,

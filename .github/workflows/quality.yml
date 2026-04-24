@@ -88,6 +88,13 @@ jobs:
               - www/tsconfig.json
               - www/turbo.json
               - .github/workflows/quality.yml
+            playgrounds:
+              - turbo.json
+              - packages/workspace/src/oxlint/**
+              - packages/workspace/package.json
+              - playgrounds/**/(package.json|tsconfig.json)
+              - playgrounds/**/*.{ts,tsx,mts}
+              - .github/workflows/quality.yml
 
       - name: Install
         if: steps.changed-files.outputs.changed_keys != ''
@@ -100,6 +107,10 @@ jobs:
       - name: Run lint
         if: steps.changed-files.outputs.www_any_changed == 'true'
         run: pnpm turbo run lint --filter www
+
+      - name: Run lint
+        if: steps.changed-files.outputs.playgrounds_any_changed == 'true'
+        run: pnpm lint:playgrounds
 
   typescript:
     name: TypeScript
@@ -129,6 +140,13 @@ jobs:
               - www/tsconfig.json
               - www/turbo.json
               - .github/workflows/quality.yml
+            playgrounds:
+              - turbo.json
+              - packages/workspace/src/typescript/**
+              - packages/workspace/package.json
+              - playgrounds/**/(package.json|tsconfig.json)
+              - playgrounds/**/*.{ts,tsx,mts}
+              - .github/workflows/quality.yml
 
       - name: Install
         if: steps.changed-files.outputs.changed_keys != ''
@@ -141,6 +159,10 @@ jobs:
       - name: Run typecheck
         if: steps.changed-files.outputs.www_any_changed == 'true'
         run: pnpm turbo run typecheck --filter www
+
+      - name: Run typecheck
+        if: steps.changed-files.outputs.playgrounds_any_changed == 'true'
+        run: pnpm typecheck:playgrounds
 
   format:
     name: Format

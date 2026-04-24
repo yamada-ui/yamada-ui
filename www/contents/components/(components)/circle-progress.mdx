@@ -133,12 +133,12 @@ To change the thickness of the progress bar, set a string or number to `thicknes
 
 ## Accessibility
 
-Setting `aria-label` or `aria-labelledby` on `CircleProgress.Root` will make it readable by screen readers.
+`CircleProgress.Root` renders the outer container. To provide a custom accessible name for the screen-reader progressbar, set `aria-label` or `aria-labelledby` on `CircleProgressCircle` through `circleProps`.
 
 ```tsx
 <CircleProgress.Root
   value={88}
-  aria-label="Central Processing Unit (CPU) Usage"
+  circleProps={{ "aria-label": "Central Processing Unit (CPU) Usage" }}
 />
 ```
 
@@ -148,7 +148,10 @@ Setting `aria-label` or `aria-labelledby` on `CircleProgress.Root` will make it 
     Central Processing Unit (CPU) Usage
   </Text>
 
-  <CircleProgress.Root value={88} aria-labelledby="label" />
+  <CircleProgress.Root
+    value={88}
+    circleProps={{ "aria-labelledby": "label" }}
+  />
 </VStack>
 ```
 

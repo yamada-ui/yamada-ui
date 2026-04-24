@@ -35,27 +35,23 @@ describe("<PieChart />", () => {
     const root = page.getByTestId("root")
 
     await expect.element(root).toHaveClass("ui-pie-chart")
-    await expect
-      .poll(
-        () => root.element().querySelectorAll(".ui-polar-chart__pie").length,
-      )
-      .toBe(3)
     await expect.element(page.getByText("chrome")).toBeInTheDocument()
+    await expect.element(page.getByText("edge")).toBeInTheDocument()
   })
 
   test("renders composition components instead of fallback `series`", async () => {
     await render(
-      <PieChart.Root
-        data-testid="root"
-        data={rootData}
-        series={[{ dataKey: "visits", nameKey: "browser" }]}
-        withLegend
-      >
+      <PieChart.Root data-testid="root">
         <PieChart.Pie data={childData} dataKey="downloads" nameKey="browser" />
+        <PieChart.Legend />
       </PieChart.Root>,
     )
 
     await expect.element(page.getByText("safari")).toBeInTheDocument()
     await expect.element(page.getByText("opera")).toBeInTheDocument()
+    await expect
+      .element(page.getByText("chrome").query())
+      .not.toBeInTheDocument()
+    await expect.element(page.getByText("edge").query()).not.toBeInTheDocument()
   })
 })

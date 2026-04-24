@@ -191,7 +191,7 @@ return (
 
 ## Accessibility
 
-The `ActionBar` follows the [WAI-ARIA - Dialog (Modal) Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) for accessibility.
+The `ActionBar` exposes its content as a non-modal dialog and sets the dialog-related ARIA attributes listed below. It does not set `aria-modal` or an accessible name by default, so pass `aria-label` or `aria-labelledby` to `ActionBar.Content` when a label is needed.
 
 ### Keyboard Navigation
 
@@ -203,7 +203,7 @@ The `ActionBar` follows the [WAI-ARIA - Dialog (Modal) Pattern](https://www.w3.o
 
 | Component                | Roles and Attributes     | Usage                                                                      |
 | ------------------------ | ------------------------ | -------------------------------------------------------------------------- |
-| `ActionBar.Content`      | `role="dialog"`          | Indicates that this is a dialog.                                           |
+| `ActionBar.Content`      | `role="dialog"`          | Indicates that this is a dialog. `aria-modal` and an accessible name are not set by default. |
 | `ActionBar.OpenTrigger`  | `aria-haspopup="dialog"` | Indicates that a dialog exists.                                            |
 |                          | `aria-expanded`          | Sets to `"true"` if the action bar is open, and `"false"` if it is closed. |
 |                          | `aria-controls`          | If the action bar is open, sets to the `id` of `ActionBar.Content`.        |

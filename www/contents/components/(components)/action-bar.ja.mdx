@@ -191,7 +191,7 @@ return (
 
 ## アクセシビリティ
 
-`ActionBar`は、アクセシビリティに関して[WAI-ARIA - Dialog (Modal) Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)に従います。
+`ActionBar`は、コンテンツを非モーダルのダイアログとして公開し、以下のダイアログ関連のARIA属性を設定します。`aria-modal`やアクセシブルネームはデフォルトでは設定されないため、ラベルが必要な場合は`aria-label`または`aria-labelledby`を`ActionBar.Content`に渡してください。
 
 ### キーボード操作
 
@@ -203,7 +203,7 @@ return (
 
 | コンポーネント           | ロールと属性             | 使い方                                                                                    |
 | ------------------------ | ------------------------ | ----------------------------------------------------------------------------------------- |
-| `ActionBar.Content`      | `role="dialog"`          | ダイアログであることを示します。                                                          |
+| `ActionBar.Content`      | `role="dialog"`          | ダイアログであることを示します。`aria-modal`とアクセシブルネームはデフォルトでは設定されません。 |
 | `ActionBar.OpenTrigger`  | `aria-haspopup="dialog"` | ダイアログが存在することを示します。                                                      |
 |                          | `aria-expanded`          | アクションバーが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。 |
 |                          | `aria-controls`          | アクションバーが開いている場合は、`ActionBar.Content`の`id`を設定します。                 |

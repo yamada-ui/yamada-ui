@@ -1,6 +1,5 @@
-import { a11y, page, render } from "#test/browser"
 import { useState } from "react"
-import { vi } from "vitest"
+import { a11y, page, render } from "#test/browser"
 import { Fade } from "./fade"
 
 describe("<Fade />", () => {
@@ -39,8 +38,8 @@ describe("<Fade />", () => {
     const { user } = await render(<TestComponent />)
 
     const button = page.getByRole("button", { name: /button/i })
-    const collapse = page.getByText("Fade")
-    const getOpacity = () => getComputedStyle(collapse.element()).opacity
+    const fade = page.getByText("Fade")
+    const getOpacity = () => getComputedStyle(fade.element()).opacity
     expect(getOpacity()).toBe("0")
 
     await user.click(button)
@@ -68,17 +67,17 @@ describe("<Fade />", () => {
       )
     }
 
-    const { container, user } = await render(<TestComponent />)
+    const { user } = await render(<TestComponent />)
 
     const button = page.getByRole("button", { name: /button/i })
-    expect(container.textContent).not.toContain("Fade")
+    expect(page.getByText("Fade").query()).toBeNull()
 
     await user.click(button)
     await expect.element(page.getByText("Fade")).toBeVisible()
 
     await user.click(button)
     await vi.waitFor(() => {
-      expect(container.textContent).not.toContain("Fade")
+      expect(page.getByText("Fade").query()).toBeNull()
     })
   })
 })

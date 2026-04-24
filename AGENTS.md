@@ -8,6 +8,7 @@ Yamada UI is a React UI component library built with CSS-in-JS (Emotion).
 - **Accessibility is required**: All components must support ARIA attributes, keyboard navigation, and screen readers. Report any concerns.
 - **Do not bundle multiple fixes**: If you encounter a separate issue while working on a fix, do not fix it in the same PR. Create a separate issue and submit a separate PR.
 - **Do not run format, lint, or typecheck unless explicitly asked**: Format, lint and typecheck are handled by lefthook on commit. However, run tests for the changed files locally to verify that the implementation works correctly.
+- **Do not write comments**: JSDoc and comments that suppress linter or formatter errors are allowed, but all other comments are not. Programs that require comments to be understood should have their structure questioned. Programs must be simple and immediately understandable by reading the code itself.
 
 ## Rules
 

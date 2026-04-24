@@ -14,6 +14,8 @@ Yamada UI is a React UI component library built with CSS-in-JS (Emotion).
 
 When performing one of the actions below, read the linked rule first.
 
+- Creating branches:
+  - [Branch Rules](.agents/rules/branch.md)
 - Creating commits:
   - [Commit Rules](.agents/rules/commit.md)
   - [Pre-commit Hooks](.agents/references/pre-commit-hooks.md)

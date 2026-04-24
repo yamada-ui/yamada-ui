@@ -32,7 +32,7 @@ describe("<LineChart />", () => {
     const root = page.getByTestId("root")
 
     await expect.element(root).toHaveClass("ui-line-chart")
-    await expect.poll(() => root.element().tagName).toBe("DIV")
+    expect(root.element().tagName).toBe("DIV")
     await expect
       .poll(
         () =>

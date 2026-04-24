@@ -13,18 +13,25 @@ const data: Data[] = [
   { browser: "firefox", downloads: 1000, visits: 2100 },
 ]
 
+const RADAR_DOM_NODES_PER_SERIES = 2
+
 describe("<RadarChart />", () => {
   test("sets `displayName` correctly", () => {
     expect(RadarChart.Root.displayName).toBe("RadarChart")
   })
 
   test("renders generated radars and default grid/angle axis", async () => {
+    const series: Array<{ dataKey: "downloads" | "visits" }> = [
+      { dataKey: "visits" },
+      { dataKey: "downloads" },
+    ]
+
     await render(
       <RadarChart.Root
         data-testid="root"
         data={data}
         nameKey="browser"
-        series={[{ dataKey: "visits" }, { dataKey: "downloads" }]}
+        series={series}
       />,
     )
 
@@ -35,23 +42,37 @@ describe("<RadarChart />", () => {
       .poll(
         () => root.element().querySelectorAll(".ui-polar-chart__radar").length,
       )
-      .toBe(4)
+      .toBe(series.length * RADAR_DOM_NODES_PER_SERIES)
     await expect
       .poll(
         () => root.element().querySelectorAll(".ui-polar-chart__grid").length,
       )
       .toBeGreaterThan(0)
+    await expect
+      .poll(
+        () =>
+          root.element().querySelectorAll(".ui-polar-chart__angle-axis").length,
+      )
+      .toBeGreaterThan(0)
   })
 
   test("renders composition components instead of fallback `series`", async () => {
+    const fallbackSeries: Array<{ dataKey: "downloads" | "visits" }> = [
+      { dataKey: "visits" },
+      { dataKey: "downloads" },
+    ]
+    const composedSeries: Array<{ dataKey: "visits" }> = [{ dataKey: "visits" }]
+
     await render(
       <RadarChart.Root
         data-testid="root"
         data={data}
         nameKey="browser"
-        series={[{ dataKey: "visits" }, { dataKey: "downloads" }]}
+        series={fallbackSeries}
       >
-        <RadarChart.Radar dataKey="visits" />
+        {composedSeries.map((series) => (
+          <RadarChart.Radar key={series.dataKey} dataKey={series.dataKey} />
+        ))}
       </RadarChart.Root>,
     )
 
@@ -61,6 +82,6 @@ describe("<RadarChart />", () => {
       .poll(
         () => root.element().querySelectorAll(".ui-polar-chart__radar").length,
       )
-      .toBe(2)
+      .toBe(composedSeries.length * RADAR_DOM_NODES_PER_SERIES)
   })
 })

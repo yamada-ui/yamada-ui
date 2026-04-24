@@ -183,6 +183,7 @@ return <ColorSelector.Root maxW="md" value={value} onChange={setValue} />
 | `End`                    | 色相スライダーまたは透明スライダー内である場合は`max`の値を設定します。                    | -    |
 | `PageUp`                 | 色相スライダーまたは透明スライダー内である場合は`min`と`max`の値に基づいて値を増加します。 | -    |
 | `PageDown`               | 色相スライダーまたは透明スライダー内である場合は`min`と`max`の値に基づいて値を減少します。 | -    |
+| `Enter`, `Space`         | スポイトボタンを起動するか、フォーカスされた色候補を選択します。                         | -    |
 
 ### ARIAロールと属性
 
@@ -191,7 +192,6 @@ return <ColorSelector.Root maxW="md" value={value} onChange={setValue} />
 | `ColorSelector.EyeDropper`               | `role="button"`        | ボタンであることを示します。                                                                                                                                                   |
 |                                          | `aria-disabled`        | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                                                                         |
 |                                          | `aria-label`           | `"色を選択する"`を設定します。                                                                                                                                                 |
-|                                          | `aria-disabled`        | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                                         |
 | `ColorSelector.SaturationSlider > input` | `aria-hidden`          | 要素をアクセシビリティツリーから除外します。                                                                                                                                   |
 |                                          | `aria-describedby`     | `Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
 | `ColorSelector.SaturationSlider > div`   | `role="slider"`        | スライダーであることを示します。                                                                                                                                               |

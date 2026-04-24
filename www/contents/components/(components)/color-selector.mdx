@@ -183,6 +183,7 @@ return <ColorSelector.Root maxW="md" value={value} onChange={setValue} />
 | `End`                    | If within hue slider or alpha slider, sets the value to `max`.                      | -     |
 | `PageUp`                 | If within hue slider or alpha slider, increases the value based on `min` and `max`. | -     |
 | `PageDown`               | If within hue slider or alpha slider, decreases the value based on `min` and `max`. | -     |
+| `Enter`, `Space`         | Activates the eyedropper button or selects the focused color swatch item.           | -     |
 
 ### ARIA Roles and Attributes
 
@@ -191,7 +192,6 @@ return <ColorSelector.Root maxW="md" value={value} onChange={setValue} />
 | `ColorSelector.EyeDropper`               | `role="button"`        | Indicates that this is a button.                                                                                                                           |
 |                                          | `aria-disabled`        | Sets to `"true"` if `disabled` or `readOnly` is set.                                                                                                       |
 |                                          | `aria-label`           | Sets to `"Pick a color"`.                                                                                                                                  |
-|                                          | `aria-disabled`        | Set to `"true"` if `disabled` is set.                                                                                                                      |
 | `ColorSelector.SaturationSlider > input` | `aria-hidden`          | Excludes the element from the accessibility tree.                                                                                                          |
 |                                          | `aria-describedby`     | If this is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
 | `ColorSelector.SaturationSlider > div`   | `role="slider"`        | Indicates that this is a slider.                                                                                                                           |

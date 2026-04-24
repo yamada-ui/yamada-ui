@@ -102,7 +102,7 @@ describe("<ColorPicker />", () => {
   test("merges `elementProps` with `startElementProps` on start element", async () => {
     const onClickElement = vi.fn()
     const onClickStart = vi.fn()
-    await render(
+    const { user } = await render(
       <ColorPicker
         placeholder="Choose a color"
         elementProps={{
@@ -112,6 +112,7 @@ describe("<ColorPicker />", () => {
         startElementProps={{
           className: "from-start",
           "data-testid": "start-el",
+          clickable: true,
           onClick: onClickStart,
         }}
       />,
@@ -121,9 +122,7 @@ describe("<ColorPicker />", () => {
 
     await expect.element(startEl).toHaveClass("from-element", "from-start")
 
-    // The combobox overlays the start element, so locator clicks are intercepted
-    // before reaching the merged handlers on `start-el`.
-    startEl.element().dispatchEvent(new MouseEvent("click", { bubbles: true }))
+    await user.click(startEl)
 
     expect(onClickElement).toHaveBeenCalledTimes(1)
     expect(onClickStart).toHaveBeenCalledTimes(1)
@@ -357,19 +356,17 @@ describe("<ColorPicker />", () => {
   test("supports keyboard eye dropper action and writes picked color", async () => {
     openEyeDropper.mockResolvedValue({ sRGBHex: "#00ff00" })
 
-    await render(
+    const { user } = await render(
       <ColorPicker
         placeholder="Choose a color"
         eyeDropperProps={{ "data-testid": "eye-dropper-button" }}
       />,
     )
 
-    page
-      .getByTestId("eye-dropper-button")
-      .element()
-      .dispatchEvent(
-        new KeyboardEvent("keydown", { key: "Enter", bubbles: true }),
-      )
+    const eyeDropper = page.getByTestId("eye-dropper-button")
+
+    eyeDropper.element().focus()
+    await user.keyboard("{Enter}")
 
     await vi.waitFor(() => {
       expect(openEyeDropper).toHaveBeenCalledTimes(1)
@@ -501,7 +498,7 @@ describe("<ColorPicker />", () => {
 
   test("does not react to click and eye dropper when interactive is disabled", async () => {
     openEyeDropper.mockResolvedValue({ sRGBHex: "#ffffff" })
-    await render(
+    const { user } = await render(
       <ColorPicker
         disabled
         placeholder="Choose a color"
@@ -512,10 +509,12 @@ describe("<ColorPicker />", () => {
     const combobox = getCombobox()
     const eyeDropper = page.getByTestId("eye-dropper-button")
 
-    combobox.element().dispatchEvent(new MouseEvent("click", { bubbles: true }))
-    eyeDropper
-      .element()
-      .dispatchEvent(new MouseEvent("click", { bubbles: true }))
+    await expect(user.click(combobox, { timeout: 200 })).rejects.toThrow(
+      /Timeout/,
+    )
+    await expect(user.click(eyeDropper, { timeout: 200 })).rejects.toThrow(
+      /Timeout/,
+    )
 
     await expect.element(combobox).toHaveAttribute("aria-expanded", "false")
     expect(openEyeDropper).not.toHaveBeenCalled()

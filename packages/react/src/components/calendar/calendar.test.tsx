@@ -1,5 +1,4 @@
-import { a11y, render } from "#test/browser"
-import { fireEvent, screen, waitFor } from "@testing-library/react"
+import { a11y, fireEvent, render, screen, waitFor } from "#test/browser"
 import { Calendar } from "./"
 import {
   getAdjustedMonth,
@@ -15,13 +14,7 @@ import {
 
 describe("<Calendar />", () => {
   test("renders component correctly", async () => {
-    await a11y(<Calendar.Root />, {
-      axeOptions: {
-        rules: {
-          "color-contrast": { enabled: false },
-        },
-      },
-    })
+    await a11y(<Calendar.Root />)
   })
 
   test("renders with a specific defaultMonth", async () => {

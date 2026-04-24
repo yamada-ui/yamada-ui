@@ -232,12 +232,8 @@ describe("<Field />", () => {
       .element(page.getByText("We'll never share your email."))
       .toBeVisible()
     await expect
-      .element(
-        page.getByRole("textbox", {
-          description: "We'll never share your email.",
-        }),
-      )
-      .toBeVisible()
+      .element(page.getByRole("textbox"))
+      .toHaveAccessibleDescription("We'll never share your email.")
   })
 
   test("should inherit object-based disabled from Form context", async () => {

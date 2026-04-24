@@ -19,7 +19,12 @@ import type {
   TooltipContentProps,
   TooltipProps,
 } from "recharts"
-import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
+import type {
+  CSSProps,
+  ExtractStyleValueWithCondition,
+  HTMLStyledProps,
+  ThemeProps,
+} from "../../core"
 import type { Dict, Merge } from "../../utils"
 import type { ChartStyle } from "./chart.style"
 import type {
@@ -118,7 +123,7 @@ export function mergeSeries<Y>(
 
 export function mergeData<Y>(
   data: Y[],
-  color: CSSProps["fill"] = "mono",
+  color: ExtractStyleValueWithCondition<CSSProps["fill"]> = "mono",
   strategy: GradientStrategy = "invert",
 ): (Y & { fill: CSSProps["fill"] })[] {
   const colors = gradients(data.length, color, strategy)
@@ -128,7 +133,7 @@ export function mergeData<Y>(
 
 export function gradients(
   length: number,
-  color: CSSProps["color"] = "mono",
+  color: ExtractStyleValueWithCondition<CSSProps["color"]> = "mono",
   strategy: GradientStrategy = "invert",
 ): CSSProps["color"][] {
   return Array.from({ length }, (_, index) => {
@@ -137,11 +142,11 @@ export function gradients(
 
     if (strategy === "invert") {
       return [
-        `tint(colors.${color}, ${percent})`,
-        `shade(colors.${color}, ${percent})`,
+        `tint(colors.${color as string}, ${percent})`,
+        `shade(colors.${color as string}, ${percent})`,
       ]
     } else {
-      return `${strategy}(colors.${color}, ${percent})`
+      return `${strategy}(colors.${color as string}, ${percent})`
     }
   })
 }
@@ -494,7 +499,7 @@ export const ChartTooltip = <
 
 interface ChartTooltipCursorProps extends Omit<
   HTMLStyledProps<"path">,
-  "height" | "points" | "width"
+  "height" | "points" | "width" | "x" | "y"
 > {
   brushBottom?: number
   height?: number
@@ -502,6 +507,8 @@ interface ChartTooltipCursorProps extends Omit<
   payloadIndex?: number
   points?: { x: number; y: number }[]
   width?: number
+  x?: number
+  y?: number
 }
 
 const ChartTooltipCursor = withContext<"path", ChartTooltipCursorProps>(

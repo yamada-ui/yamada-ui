@@ -230,6 +230,7 @@
     "touchpad",
     "tsbuildinfo",
     "tsdown",
+    "tsgo",
     "tsgolint",
     "tsrouter",
     "tsunade",

@@ -78,8 +78,9 @@ describe("<Highlight />", () => {
         Highlight
       </Highlight>,
     )
-    const styles = getComputedStyle(page.getByText("Highlight").element())
-    expect(styles.borderRadius).toBe("12px")
+    await expect.element(page.getByText("Highlight")).toHaveStyle({
+      borderRadius: "12px",
+    })
   })
 
   test("useHighlight matches correctly", async () => {

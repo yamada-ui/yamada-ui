@@ -1,5 +1,6 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import { useRef } from "react"
+
 import { a11y, page, render } from "#test/browser"
 import { Sidebar } from "."
 import { Button } from "../button"

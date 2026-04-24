@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Mark } from "./"
 
 describe("<Mark />", () => {
@@ -10,13 +10,15 @@ describe("<Mark />", () => {
     expect(Mark.displayName).toBe("Mark")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Mark>Mark</Mark>)
-    expect(screen.getByText("Mark")).toHaveClass("ui-mark")
+  test("sets `className` correctly", async () => {
+    await render(<Mark>Mark</Mark>)
+
+    await expect.element(page.getByText("Mark")).toHaveClass("ui-mark")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Mark>Mark</Mark>)
-    expect(screen.getByText("Mark").tagName).toBe("MARK")
+  test("renders HTML tag correctly", async () => {
+    await render(<Mark>Mark</Mark>)
+
+    expect(page.getByText("Mark").element().tagName).toBe("MARK")
   })
 })

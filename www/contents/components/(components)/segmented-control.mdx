@@ -203,14 +203,14 @@ return <SegmentedControl.Root items={items} value={value} onChange={setValue} />
 
 ## Accessibility
 
-When using only icons in `SegmentedControl.Item`, set `aria-label` for the `SegmentedControl.Item`.
+When using only icons in `SegmentedControl.Item`, set `aria-label` for the hidden radio input with `inputProps`.
 
 ```tsx
 <SegmentedControl.Root defaultValue="plus">
-  <SegmentedControl.Item aria-label="plus" value="plus">
+  <SegmentedControl.Item inputProps={{ "aria-label": "plus" }} value="plus">
     <PlusIcon />
   </SegmentedControl.Item>
-  <SegmentedControl.Item aria-label="minus" value="minus">
+  <SegmentedControl.Item inputProps={{ "aria-label": "minus" }} value="minus">
     <MinusIcon />
   </SegmentedControl.Item>
 </SegmentedControl.Root>
@@ -233,8 +233,9 @@ When using only icons in `SegmentedControl.Item`, set `aria-label` for the `Segm
 | `SegmentedControl.Root` | `role="radiogroup"`  | Indicates that it is a radio group.                                                              |
 |                         | `aria-disabled`      | Sets to `"true"` if `disabled` is set.                                                           |
 |                         | `aria-orientation`   | Sets `"horizontal"` or `"vertical"` based on the `orientation` value. Default is `"horizontal"`. |
-| `SegmentedControl.Item` | `aria-disabled`      | Sets to `"true"` if `disabled` is set.                                                           |
-|                         | `aria-readonly`      | Sets to `"true"` if `readOnly` is set.                                                           |
+| `SegmentedControl.Item` | `aria-disabled`      | Sets to `"true"` on the item label and hidden radio input if `disabled` is set.                  |
+|                         | `readOnly`           | Sets the native `readOnly` attribute on the hidden radio input if `readOnly` is set.             |
+|                         | `data-readonly`      | Sets on the item label and hidden radio input if `readOnly` is set.                              |
 
 ## Similar Components
 

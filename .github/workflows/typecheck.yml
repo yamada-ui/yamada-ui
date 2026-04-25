@@ -31,7 +31,7 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Run Typecheck
-        run: pnpm turbo run typecheck --affected --filter='./packages/**' --filter='./www'
+        run: pnpm turbo run typecheck --filter="{./packages/**}[$TURBO_SCM_BASE]" --filter='./www'
 
   playgrounds:
     name: Playgrounds

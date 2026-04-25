@@ -58,9 +58,7 @@ describe("<Toggle />", () => {
     )
 
     const button = page.getByRole("button")
-    const checkbox = page.getByRole("checkbox", { includeHidden: true })
     await expect.element(button).toBeDisabled()
-    checkbox.element().click()
     expect(onChange).not.toHaveBeenCalled()
   })
 
@@ -92,39 +90,45 @@ describe("<Toggle />", () => {
 
   test("should handle hidden checkbox onChange event", async () => {
     const onChange = vi.fn()
-    await render(<Toggle onChange={onChange}>Toggle</Toggle>)
+    const { user } = await render(<Toggle onChange={onChange}>Toggle</Toggle>)
 
+    const button = page.getByRole("button")
     const checkbox = page.getByRole("checkbox", { includeHidden: true })
     await expect.element(checkbox).toBeInTheDocument()
 
-    checkbox.element().click()
+    await user.click(button)
     expect(onChange).toHaveBeenLastCalledWith(true)
     await expect
       .element(page.getByRole("button"))
       .toHaveAttribute("data-checked")
+    await expect.element(checkbox).toBeChecked()
 
-    checkbox.element().click()
+    await user.click(button)
     expect(onChange).toHaveBeenLastCalledWith(false)
     await expect
       .element(page.getByRole("button"))
       .not.toHaveAttribute("data-checked")
+    await expect.element(checkbox).not.toBeChecked()
   })
 
   test("should handle hidden checkbox change event", async () => {
     const onChange = vi.fn()
-    await render(<Toggle onChange={onChange}>Toggle</Toggle>)
+    const { user } = await render(<Toggle onChange={onChange}>Toggle</Toggle>)
 
+    const button = page.getByRole("button")
     const checkbox = page.getByRole("checkbox", { includeHidden: true })
-    checkbox.element().click()
+    await user.click(button)
     expect(onChange).toHaveBeenLastCalledWith(true)
+    await expect.element(checkbox).toBeChecked()
 
-    checkbox.element().click()
+    await user.click(button)
     expect(onChange).toHaveBeenLastCalledWith(false)
+    await expect.element(checkbox).not.toBeChecked()
   })
 
   test("should handle hidden checkbox change event in toggle group", async () => {
     const onChange = vi.fn()
-    await render(
+    const { user } = await render(
       <ToggleGroup.Root defaultValue={[]} onChange={onChange}>
         <ToggleGroup.Item value="a">A</ToggleGroup.Item>
         <ToggleGroup.Item value="b">B</ToggleGroup.Item>
@@ -132,8 +136,9 @@ describe("<Toggle />", () => {
     )
 
     const checkboxes = page.getByRole("checkbox", { includeHidden: true })
-    checkboxes.nth(0).element().click()
+    await user.click(page.getByRole("button", { name: "A" }))
     expect(onChange).toHaveBeenCalledWith(["a"])
+    await expect.element(checkboxes.nth(0)).toBeChecked()
   })
 
   test("should warn when value is not provided in controlled mode", async () => {

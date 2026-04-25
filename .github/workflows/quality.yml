@@ -92,7 +92,8 @@ jobs:
               - turbo.json
               - packages/workspace/src/oxlint/**
               - packages/workspace/package.json
-              - playgrounds/**/(package.json|tsconfig.json)
+              - playgrounds/**/package.json
+              - playgrounds/**/tsconfig*.json
               - playgrounds/**/*.{ts,tsx,mts}
               - .github/workflows/quality.yml
 
@@ -100,15 +101,15 @@ jobs:
         if: steps.changed-files.outputs.changed_keys != ''
         uses: ./.github/composite-actions/install
 
-      - name: Run lint
+      - name: Run lint (packages)
         if: steps.changed-files.outputs.packages_any_changed == 'true'
         run: pnpm lint
 
-      - name: Run lint
+      - name: Run lint (www)
         if: steps.changed-files.outputs.www_any_changed == 'true'
         run: pnpm turbo run lint --filter www
 
-      - name: Run lint
+      - name: Run lint (playgrounds)
         if: steps.changed-files.outputs.playgrounds_any_changed == 'true'
         run: pnpm lint:playgrounds
 
@@ -116,7 +117,7 @@ jobs:
     name: TypeScript
     if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -144,7 +145,8 @@ jobs:
               - turbo.json
               - packages/workspace/src/typescript/**
               - packages/workspace/package.json
-              - playgrounds/**/(package.json|tsconfig.json)
+              - playgrounds/**/package.json
+              - playgrounds/**/tsconfig*.json
               - playgrounds/**/*.{ts,tsx,mts}
               - .github/workflows/quality.yml
 
@@ -152,17 +154,18 @@ jobs:
         if: steps.changed-files.outputs.changed_keys != ''
         uses: ./.github/composite-actions/install
 
-      - name: Run typecheck
+      - name: Run typecheck (packages)
         if: steps.changed-files.outputs.packages_any_changed == 'true'
         run: pnpm typecheck
 
-      - name: Run typecheck
+      - name: Run typecheck (www)
         if: steps.changed-files.outputs.www_any_changed == 'true'
         run: pnpm turbo run typecheck --filter www
 
-      - name: Run typecheck
+      - name: Run typecheck (playgrounds)
         if: steps.changed-files.outputs.playgrounds_any_changed == 'true'
-        run: pnpm typecheck:playgrounds
+        timeout-minutes: 15
+        run: pnpm typecheck:playgrounds --output-logs=full --summarize
 
   format:
     name: Format

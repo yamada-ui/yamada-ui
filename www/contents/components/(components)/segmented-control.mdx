@@ -203,7 +203,7 @@ return <SegmentedControl.Root items={items} value={value} onChange={setValue} />
 
 ## Accessibility
 
-When using only icons in `SegmentedControl.Item`, set `aria-label` for the hidden radio input with `inputProps`.
+When using only icons in `SegmentedControl.Item`, set `aria-label` in `SegmentedControl.Item`'s `inputProps`.
 
 ```tsx
 <SegmentedControl.Root defaultValue="plus">
@@ -228,14 +228,14 @@ When using only icons in `SegmentedControl.Item`, set `aria-label` for the hidde
 
 ### ARIA Roles and Attributes
 
-| Component               | Roles and Attributes | Description                                                                                      |
-| ----------------------- | -------------------- | ------------------------------------------------------------------------------------------------ |
-| `SegmentedControl.Root` | `role="radiogroup"`  | Indicates that it is a radio group.                                                              |
-|                         | `aria-disabled`      | Sets to `"true"` if `disabled` is set.                                                           |
-|                         | `aria-orientation`   | Sets `"horizontal"` or `"vertical"` based on the `orientation` value. Default is `"horizontal"`. |
-| `SegmentedControl.Item` | `aria-disabled`      | Sets to `"true"` on the item label and hidden radio input if `disabled` is set.                  |
-|                         | `readOnly`           | Sets the native `readOnly` attribute on the hidden radio input if `readOnly` is set.             |
-|                         | `data-readonly`      | Sets on the item label and hidden radio input if `readOnly` is set.                              |
+| Component                       | Roles and Attributes | Description                                                                                      |
+| ------------------------------- | -------------------- | ------------------------------------------------------------------------------------------------ |
+| `SegmentedControl.Root`         | `role="radiogroup"`  | Indicates that it is a radio group.                                                              |
+|                                 | `aria-disabled`      | Sets to `"true"` if `disabled` is set.                                                           |
+|                                 | `aria-orientation`   | Sets `"horizontal"` or `"vertical"` based on the `orientation` value. Default is `"horizontal"`. |
+| `SegmentedControl.Item > input` | `aria-disabled`      | Sets to `"true"` on the item label and hidden radio input if `disabled` is set.                  |
+|                                 | `readOnly`           | Sets the native `readOnly` attribute on the hidden radio input if `readOnly` is set.             |
+|                                 | `data-readonly`      | Sets on the item label and hidden radio input if `readOnly` is set.                              |
 
 ## Similar Components
 

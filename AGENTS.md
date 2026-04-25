@@ -35,6 +35,10 @@ When editing or reviewing files that match a pattern below, read the linked rule
 - [Changesets](.agents/rules/changesets.md):
   - `packages/{cli,react,utils}/src/**/*.{ts,tsx}`
   - `.changeset/*.md`
+- [Browser Testing](.agents/rules/browser-testing.md) (applies only when the test imports from `#test/browser`; skip the rule for `#test` jsdom files):
+  - `packages/react/src/**/*.test.{ts,tsx}`
+- [Unit Testing](.agents/rules/unit-testing.md):
+  - `packages/{cli,utils}/**/*.test.{ts,tsx}`
 
 ## Codebase structure
 

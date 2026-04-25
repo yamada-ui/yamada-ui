@@ -1,5 +1,4 @@
 import { a11y, page, render } from "#test/browser"
-import { fireEvent } from "@testing-library/react"
 import { vi } from "vitest"
 import { Tooltip } from "."
 import { Text } from "../text"
@@ -51,7 +50,9 @@ describe("<Tooltip />", () => {
       </Tooltip>,
     )
     await expect.element(page.getByText("Trigger")).toBeInTheDocument()
-    expect(page.getByRole("tooltip").query()).toBeNull()
+    await expect
+      .element(page.getByRole("tooltip").query())
+      .not.toBeInTheDocument()
   })
 
   test("does not render tooltip content when closed", async () => {
@@ -60,91 +61,103 @@ describe("<Tooltip />", () => {
         <Text as="span">Trigger</Text>
       </Tooltip>,
     )
-    expect(page.getByRole("tooltip").query()).toBeNull()
+    await expect
+      .element(page.getByRole("tooltip").query())
+      .not.toBeInTheDocument()
   })
 
   test("opens tooltip on pointer enter and closes on pointer leave", async () => {
-    await render(
+    const { user } = await render(
       <Tooltip content="Tooltip Hovered">
         <Text as="span">Trigger</Text>
       </Tooltip>,
     )
 
-    const trigger = page.getByText("Trigger").element()
+    const trigger = page.getByText("Trigger")
 
-    fireEvent.pointerEnter(trigger, { pointerType: "mouse" })
+    await user.hover(trigger)
 
     await vi.waitFor(async () => {
       await expect.element(page.getByRole("tooltip")).toBeInTheDocument()
     })
 
-    fireEvent.pointerLeave(trigger, { pointerType: "mouse" })
+    await user.unhover(trigger)
 
-    await vi.waitFor(() => {
-      expect(page.getByRole("tooltip").query()).toBeNull()
+    await vi.waitFor(async () => {
+      await expect
+        .element(page.getByRole("tooltip").query())
+        .not.toBeInTheDocument()
     })
   })
 
   test("opens tooltip on focus and closes on blur", async () => {
-    await render(
-      <Tooltip content="Tooltip Hovered">
-        <Text as="span">Trigger</Text>
-      </Tooltip>,
+    const { user } = await render(
+      <>
+        <Tooltip closeOnClick={false} content="Tooltip Hovered">
+          <button type="button">Trigger</button>
+        </Tooltip>
+        <button type="button">Outside</button>
+      </>,
     )
 
-    const trigger = page.getByText("Trigger").element()
+    const trigger = page.getByRole("button", { name: "Trigger" })
+    const outside = page.getByRole("button", { name: "Outside" })
 
-    fireEvent.focus(trigger)
+    await user.click(trigger)
 
     await vi.waitFor(async () => {
       await expect.element(page.getByRole("tooltip")).toBeInTheDocument()
     })
 
-    fireEvent.blur(trigger)
+    await user.click(outside)
 
-    await vi.waitFor(() => {
-      expect(page.getByRole("tooltip").query()).toBeNull()
+    await vi.waitFor(async () => {
+      await expect
+        .element(page.getByRole("tooltip").query())
+        .not.toBeInTheDocument()
     })
   })
 
   test("closes tooltip on Escape key", async () => {
-    await render(
+    const { user } = await render(
       <Tooltip content="Tooltip Hovered">
         <Text as="span">Trigger</Text>
       </Tooltip>,
     )
 
-    const trigger = page.getByText("Trigger").element()
+    const trigger = page.getByText("Trigger")
 
-    fireEvent.focus(trigger)
+    await user.hover(trigger)
 
     await vi.waitFor(async () => {
       await expect.element(page.getByRole("tooltip")).toBeInTheDocument()
     })
 
-    fireEvent.keyDown(document, { key: "Escape" })
+    await user.keyboard("{Escape}")
 
-    await vi.waitFor(() => {
-      expect(page.getByRole("tooltip").query()).toBeNull()
+    await vi.waitFor(async () => {
+      await expect
+        .element(page.getByRole("tooltip").query())
+        .not.toBeInTheDocument()
     })
   })
 
   test("does not close on Escape when closeOnEsc is false", async () => {
-    await render(
+    const { user } = await render(
       <Tooltip closeOnEsc={false} content="Tooltip Hovered">
         <Text as="span">Trigger</Text>
       </Tooltip>,
     )
 
-    const trigger = page.getByText("Trigger").element()
+    const trigger = page.getByText("Trigger")
 
-    fireEvent.focus(trigger)
+    await user.hover(trigger)
 
     await vi.waitFor(async () => {
       await expect.element(page.getByRole("tooltip")).toBeInTheDocument()
     })
 
-    fireEvent.keyDown(document, { key: "Escape" })
+    await user.keyboard("{Escape}")
 
     await vi.waitFor(async () => {
       await expect.element(page.getByRole("tooltip")).toBeInTheDocument()
@@ -152,63 +165,69 @@ describe("<Tooltip />", () => {
   })
 
   test("closes tooltip on scroll when closeOnScroll is true", async () => {
-    await render(
+    const { user } = await render(
       <Tooltip closeOnScroll content="Tooltip Hovered">
         <Text as="span">Trigger</Text>
       </Tooltip>,
     )
 
-    const trigger = page.getByText("Trigger").element()
+    const trigger = page.getByText("Trigger")
 
-    fireEvent.focus(trigger)
+    await user.hover(trigger)
 
     await vi.waitFor(async () => {
       await expect.element(page.getByRole("tooltip")).toBeInTheDocument()
     })
 
-    fireEvent.scroll(document)
+    document.dispatchEvent(new Event("scroll"))
 
-    await vi.waitFor(() => {
-      expect(page.getByRole("tooltip").query()).toBeNull()
+    await vi.waitFor(async () => {
+      await expect
+        .element(page.getByRole("tooltip").query())
+        .not.toBeInTheDocument()
     })
   })
 
   test("closes tooltip on click when closeOnClick is true", async () => {
-    await render(
+    const { user } = await render(
       <Tooltip content="Tooltip Hovered">
         <Text as="span">Trigger</Text>
       </Tooltip>,
     )
 
-    const trigger = page.getByText("Trigger").element()
+    const trigger = page.getByText("Trigger")
 
-    fireEvent.focus(trigger)
+    await user.hover(trigger)
 
     await vi.waitFor(async () => {
       await expect.element(page.getByRole("tooltip")).toBeInTheDocument()
     })
 
-    fireEvent.click(trigger)
+    await user.click(trigger)
 
-    await vi.waitFor(() => {
-      expect(page.getByRole("tooltip").query()).toBeNull()
+    await vi.waitFor(async () => {
+      await expect
+        .element(page.getByRole("tooltip").query())
+        .not.toBeInTheDocument()
     })
   })
 
   test("does not open tooltip when disabled", async () => {
-    await render(
+    const { user } = await render(
       <Tooltip content="Tooltip Hovered" disabled>
         <Text as="span">Trigger</Text>
       </Tooltip>,
     )
 
-    const trigger = page.getByText("Trigger").element()
+    const trigger = page.getByText("Trigger")
 
-    fireEvent.pointerEnter(trigger, { pointerType: "mouse" })
+    await user.hover(trigger)
 
     await vi.waitFor(
-      () => {
-        expect(page.getByRole("tooltip").query()).toBeNull()
+      async () => {
+        await expect
+          .element(page.getByRole("tooltip").query())
+          .not.toBeInTheDocument()
       },
       { timeout: 500 },
     )
@@ -221,106 +240,132 @@ describe("<Tooltip />", () => {
       </Tooltip>,
     )
 
-    const trigger = page.getByText("Trigger").element()
+    const trigger = page.getByText("Trigger")
 
-    fireEvent.pointerEnter(trigger, { pointerType: "touch" })
+    const pointerOverEvent = new Event("pointerover", { bubbles: true })
+
+    Object.defineProperty(pointerOverEvent, "pointerType", {
+      configurable: true,
+      value: "touch",
+    })
+
+    trigger.element().dispatchEvent(pointerOverEvent)
 
     await vi.waitFor(
-      () => {
-        expect(page.getByRole("tooltip").query()).toBeNull()
+      async () => {
+        await expect
+          .element(page.getByRole("tooltip").query())
+          .not.toBeInTheDocument()
       },
       { timeout: 500 },
     )
   })
 
   test("closes tooltip on outside click", async () => {
-    await render(
+    const { user } = await render(
       <Tooltip content="Tooltip Hovered">
         <Text as="span">Trigger</Text>
       </Tooltip>,
     )
 
-    const trigger = page.getByText("Trigger").element()
+    const trigger = page.getByText("Trigger")
 
-    fireEvent.focus(trigger)
+    await user.hover(trigger)
 
     await vi.waitFor(async () => {
       await expect.element(page.getByRole("tooltip")).toBeInTheDocument()
     })
 
-    fireEvent.mouseDown(document.body)
-    fireEvent.mouseUp(document.body)
+    document.body.dispatchEvent(new MouseEvent("mousedown", { bubbles: true }))
+    document.body.dispatchEvent(new MouseEvent("mouseup", { bubbles: true }))
 
-    await vi.waitFor(() => {
-      expect(page.getByRole("tooltip").query()).toBeNull()
+    await vi.waitFor(async () => {
+      await expect
+        .element(page.getByRole("tooltip").query())
+        .not.toBeInTheDocument()
     })
   })
 
   test("closes tooltip on pointer leave from content", async () => {
-    await render(
+    const { user } = await render(
       <Tooltip content="Tooltip Hovered">
         <Text as="span">Trigger</Text>
       </Tooltip>,
     )
 
-    const trigger = page.getByText("Trigger").element()
+    const trigger = page.getByText("Trigger")
 
-    fireEvent.pointerEnter(trigger, { pointerType: "mouse" })
+    await user.hover(trigger)
 
     await vi.waitFor(async () => {
       await expect.element(page.getByRole("tooltip")).toBeInTheDocument()
     })
 
-    const content = page.getByRole("tooltip").element()
+    const content = page.getByRole("tooltip")
 
-    fireEvent.pointerLeave(content)
+    content.element().dispatchEvent(
+      new PointerEvent("pointerout", {
+        bubbles: true,
+        pointerType: "mouse",
+      }),
+    )
 
-    await vi.waitFor(() => {
-      expect(page.getByRole("tooltip").query()).toBeNull()
+    await vi.waitFor(async () => {
+      await expect
+        .element(page.getByRole("tooltip").query())
+        .not.toBeInTheDocument()
     })
   })
 
   test("handles openDelay and closeDelay", async () => {
-    await render(
+    const { user } = await render(
       <Tooltip closeDelay={100} content="Tooltip Hovered" openDelay={100}>
         <Text as="span">Trigger</Text>
       </Tooltip>,
     )
 
-    const trigger = page.getByText("Trigger").element()
+    const trigger = page.getByText("Trigger")
 
-    fireEvent.pointerEnter(trigger, { pointerType: "mouse" })
+    await user.hover(trigger)
 
-    expect(page.getByRole("tooltip").query()).toBeNull()
+    await expect
+      .element(page.getByRole("tooltip").query())
+      .not.toBeInTheDocument()
 
     await vi.waitFor(async () => {
       await expect.element(page.getByRole("tooltip")).toBeInTheDocument()
     })
 
-    fireEvent.pointerLeave(trigger, { pointerType: "mouse" })
+    await user.unhover(trigger)
 
-    await vi.waitFor(() => {
-      expect(page.getByRole("tooltip").query()).toBeNull()
+    await vi.waitFor(async () => {
+      await expect
+        .element(page.getByRole("tooltip").query())
+        .not.toBeInTheDocument()
     })
   })
 
   test("force closes when re-opening while already open", async () => {
-    await render(
+    const { user } = await render(
       <Tooltip content="Tooltip Hovered">
-        <Text as="span">Trigger</Text>
+        <button type="button">Trigger</button>
       </Tooltip>,
     )
 
-    const trigger = page.getByText("Trigger").element()
+    const trigger = page.getByRole("button", { name: "Trigger" })
 
-    fireEvent.focus(trigger)
+    await user.hover(trigger)
 
     await vi.waitFor(async () => {
       await expect.element(page.getByRole("tooltip")).toBeInTheDocument()
     })
 
-    fireEvent.blur(trigger)
-    fireEvent.focus(trigger)
+    trigger.element().dispatchEvent(
+      new PointerEvent("pointerover", {
+        bubbles: true,
+        pointerType: "mouse",
+      }),
+    )
 
     await vi.waitFor(async () => {
       await expect.element(page.getByRole("tooltip")).toBeInTheDocument()

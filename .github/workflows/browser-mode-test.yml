@@ -14,15 +14,11 @@ env:
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
-  chromium-shard:
-    name: React / Chromium (shard ${{ matrix.shard_index }}/4)
+  chromium:
+    name: React / Chromium
     if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    strategy:
-      fail-fast: false
-      matrix:
-        shard_index: [1, 2, 3, 4]
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -46,23 +42,23 @@ jobs:
               - '!packages/react/src/**/*.stories.{ts,tsx}'
 
       - name: Install
-        if: steps.changed-files.outputs.full_any_changed == 'true' || (steps.changed-files.outputs.diff_any_changed == 'true' && matrix.shard_index == 1)
+        if: steps.changed-files.outputs.full_any_changed == 'true' || steps.changed-files.outputs.diff_any_changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Setup Browser
-        if: steps.changed-files.outputs.full_any_changed == 'true' || (steps.changed-files.outputs.diff_any_changed == 'true' && matrix.shard_index == 1)
+        if: steps.changed-files.outputs.full_any_changed == 'true' || steps.changed-files.outputs.diff_any_changed == 'true'
         run: pnpm react exec playwright install chromium --with-deps --only-shell
 
       - name: Run test (full)
         if: steps.changed-files.outputs.full_any_changed == 'true'
-        run: pnpm turbo run test:coverage --filter=./packages/react -- --shard=${{ matrix.shard_index }}/4
+        run: pnpm turbo run test:coverage --filter=./packages/react
 
       - name: Run test (diff)
-        if: steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true' && matrix.shard_index == 1
+        if: steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true'
         run: pnpm turbo run test:coverage --filter=./packages/react -- --changed origin/${{ github.base_ref }}
 
       - name: Upload coverage
-        if: steps.changed-files.outputs.full_any_changed == 'true' || (steps.changed-files.outputs.diff_any_changed == 'true' && matrix.shard_index == 1)
+        if: steps.changed-files.outputs.full_any_changed == 'true' || steps.changed-files.outputs.diff_any_changed == 'true'
         uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe # v5.5.4
         with:
           disable_search: true
@@ -73,15 +69,11 @@ jobs:
           verbose: true
           codecov_yml_path: ./codecov.yml
 
-  firefox-shard:
-    name: React / Firefox (shard ${{ matrix.shard_index }}/4)
+  firefox:
+    name: React / Firefox
     if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    strategy:
-      fail-fast: false
-      matrix:
-        shard_index: [1, 2, 3, 4]
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -105,30 +97,26 @@ jobs:
               - '!packages/react/src/**/*.stories.{ts,tsx}'
 
       - name: Install
-        if: steps.changed-files.outputs.full_any_changed == 'true' || (steps.changed-files.outputs.diff_any_changed == 'true' && matrix.shard_index == 1)
+        if: steps.changed-files.outputs.full_any_changed == 'true' || steps.changed-files.outputs.diff_any_changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Setup Browser
-        if: steps.changed-files.outputs.full_any_changed == 'true' || (steps.changed-files.outputs.diff_any_changed == 'true' && matrix.shard_index == 1)
+        if: steps.changed-files.outputs.full_any_changed == 'true' || steps.changed-files.outputs.diff_any_changed == 'true'
         run: pnpm react exec playwright install firefox --with-deps
 
       - name: Run test (full)
         if: steps.changed-files.outputs.full_any_changed == 'true'
-        run: pnpm turbo run test:firefox --filter=./packages/react -- --shard=${{ matrix.shard_index }}/4
+        run: pnpm turbo run test:firefox --filter=./packages/react
 
       - name: Run test (diff)
-        if: steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true' && matrix.shard_index == 1
+        if: steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true'
         run: pnpm turbo run test:firefox --filter=./packages/react -- --changed origin/${{ github.base_ref }}
 
-  webkit-shard:
-    name: React / Webkit (shard ${{ matrix.shard_index }}/4)
+  webkit:
+    name: React / Webkit
     if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    strategy:
-      fail-fast: false
-      matrix:
-        shard_index: [1, 2, 3, 4]
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -152,62 +140,17 @@ jobs:
               - '!packages/react/src/**/*.stories.{ts,tsx}'
 
       - name: Install
-        if: steps.changed-files.outputs.full_any_changed == 'true' || (steps.changed-files.outputs.diff_any_changed == 'true' && matrix.shard_index == 1)
+        if: steps.changed-files.outputs.full_any_changed == 'true' || steps.changed-files.outputs.diff_any_changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Setup Browser
-        if: steps.changed-files.outputs.full_any_changed == 'true' || (steps.changed-files.outputs.diff_any_changed == 'true' && matrix.shard_index == 1)
+        if: steps.changed-files.outputs.full_any_changed == 'true' || steps.changed-files.outputs.diff_any_changed == 'true'
         run: pnpm react exec playwright install webkit --with-deps
 
       - name: Run test (full)
         if: steps.changed-files.outputs.full_any_changed == 'true'
-        run: pnpm turbo run test:webkit --filter=./packages/react -- --shard=${{ matrix.shard_index }}/4
+        run: pnpm turbo run test:webkit --filter=./packages/react
 
       - name: Run test (diff)
-        if: steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true' && matrix.shard_index == 1
+        if: steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true'
         run: pnpm turbo run test:webkit --filter=./packages/react -- --changed origin/${{ github.base_ref }}
-
-  chromium:
-    name: React / Chromium
-    if: ${{ !cancelled() && !github.event.pull_request.draft }}
-    needs: chromium-shard
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Check shard results
-        env:
-          SHARD_RESULT: ${{ needs.chromium-shard.result }}
-        run: |
-          if [[ "$SHARD_RESULT" != "success" && "$SHARD_RESULT" != "skipped" ]]; then
-            echo "Chromium shard jobs failed: $SHARD_RESULT"
-            exit 1
-          fi
-
-  firefox:
-    name: React / Firefox
-    if: ${{ !cancelled() && !github.event.pull_request.draft }}
-    needs: firefox-shard
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Check shard results
-        env:
-          SHARD_RESULT: ${{ needs.firefox-shard.result }}
-        run: |
-          if [[ "$SHARD_RESULT" != "success" && "$SHARD_RESULT" != "skipped" ]]; then
-            echo "Firefox shard jobs failed: $SHARD_RESULT"
-            exit 1
-          fi
-
-  webkit:
-    name: React / Webkit
-    if: ${{ !cancelled() && !github.event.pull_request.draft }}
-    needs: webkit-shard
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Check shard results
-        env:
-          SHARD_RESULT: ${{ needs.webkit-shard.result }}
-        run: |
-          if [[ "$SHARD_RESULT" != "success" && "$SHARD_RESULT" != "skipped" ]]; then
-            echo "Webkit shard jobs failed: $SHARD_RESULT"
-            exit 1
-          fi

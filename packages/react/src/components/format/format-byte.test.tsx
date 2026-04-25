@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { FormatByte } from "./format-byte"
 
 describe("<FormatByte />", () => {
@@ -10,23 +10,25 @@ describe("<FormatByte />", () => {
     expect(FormatByte.displayName).toBe("FormatByte")
   })
 
-  test("sets `className` correctly", () => {
-    render(<FormatByte data-testid="format" value={1024} />)
-    expect(screen.getByTestId("format")).toHaveClass("ui-format-byte")
+  test("sets `className` correctly", async () => {
+    await render(<FormatByte data-testid="format" value={1024} />)
+    await expect
+      .element(page.getByTestId("format"))
+      .toHaveClass("ui-format-byte")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<FormatByte data-testid="format" value={1024} />)
-    expect(screen.getByTestId("format").tagName).toBe("SPAN")
+  test("renders HTML tag correctly", async () => {
+    await render(<FormatByte data-testid="format" value={1024} />)
+    expect(page.getByTestId("format").element().tagName).toBe("SPAN")
   })
 
-  test("FormatByte renders correctly", () => {
-    render(<FormatByte locale="en-US" value={1024} />)
-    expect(screen.getByText("1.02 kB")).toBeInTheDocument()
+  test("FormatByte renders correctly", async () => {
+    await render(<FormatByte locale="en-US" value={1024} />)
+    await expect.element(page.getByText("1.02 kB")).toBeInTheDocument()
   })
 
-  test("Sizes renders correctly", () => {
-    render(
+  test("Sizes renders correctly", async () => {
+    await render(
       <>
         <FormatByte value={50} />
         <FormatByte value={5000} />
@@ -34,27 +36,27 @@ describe("<FormatByte />", () => {
         <FormatByte value={5000000000} />
       </>,
     )
-    expect(screen.getByText("50 byte")).toBeInTheDocument()
-    expect(screen.getByText("5 kB")).toBeInTheDocument()
-    expect(screen.getByText("5 MB")).toBeInTheDocument()
-    expect(screen.getByText("5 GB")).toBeInTheDocument()
+    await expect.element(page.getByText("50 byte")).toBeInTheDocument()
+    await expect.element(page.getByText("5 kB")).toBeInTheDocument()
+    await expect.element(page.getByText("5 MB")).toBeInTheDocument()
+    await expect.element(page.getByText("5 GB")).toBeInTheDocument()
   })
 
-  test("Locale renders correctly", () => {
-    render(<FormatByte locale="de-DE" value={1450} />)
-    expect(screen.getByText("1,45 kB")).toBeInTheDocument()
+  test("Locale renders correctly", async () => {
+    await render(<FormatByte locale="de-DE" value={1450} />)
+    await expect.element(page.getByText("1,45 kB")).toBeInTheDocument()
   })
 
-  test("UnitDisplay renders correctly", () => {
-    render(
+  test("UnitDisplay renders correctly", async () => {
+    await render(
       <>
         <FormatByte locale="en-US" unitDisplay="short" value={50300} />
         <FormatByte locale="en-US" unitDisplay="long" value={50300} />
         <FormatByte locale="en-US" unitDisplay="narrow" value={50300} />
       </>,
     )
-    expect(screen.getByText("50.3 kB")).toBeInTheDocument()
-    expect(screen.getByText("50.3 kilobytes")).toBeInTheDocument()
-    expect(screen.getByText("50.3kB")).toBeInTheDocument()
+    await expect.element(page.getByText("50.3 kB")).toBeInTheDocument()
+    await expect.element(page.getByText("50.3 kilobytes")).toBeInTheDocument()
+    await expect.element(page.getByText("50.3kB")).toBeInTheDocument()
   })
 })

@@ -30,7 +30,7 @@ import {
 } from "@/components"
 import { CONSTANTS } from "@/constants"
 import { getDocMap } from "@/data"
-import { useLocale, usePathname } from "@/i18n"
+import { getPathname, useLocale, usePathname } from "@/i18n"
 import { ColorModeButton } from "./color-mode-button"
 import { LangButton } from "./lang-button"
 import { NavMenu } from "./nav-menu"
@@ -295,8 +295,8 @@ function DocsMenuItem({
   const overview = segment === "overview"
   const current = overview
     ? pathname === href
-    : pathname.length <= href.toString().length &&
-      pathname.startsWith(href.toString())
+    : pathname.length <= getPathname(href).length &&
+      pathname.startsWith(getPathname(href))
 
   return (
     <NextLinkButton

@@ -103,6 +103,24 @@ describe("<CodeBlock.Root />", () => {
     )
   })
 
+  test("keeps highlighted line numbers aligned with plain lines", async () => {
+    render(
+      <CodeBlock.Root code={"const count = 1\nreturn count"} lineNumbers>
+        <CodeBlock.Code html='<span class="line">const count = 1</span><span class="line highlighted">return count</span>' />
+      </CodeBlock.Root>,
+    )
+
+    await waitFor(() => {
+      const styles = [...document.querySelectorAll("style")]
+        .map((style) => style.textContent)
+        .join("\n")
+
+      expect(styles).toContain(
+        ".line.highlighted::before{left:var(--ui-spaces-4);",
+      )
+    })
+  })
+
   test("passes highlight metadata to the highlighter", async () => {
     render(
       <CodeBlock.Root

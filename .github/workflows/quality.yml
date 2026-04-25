@@ -75,19 +75,9 @@ jobs:
   typecheck:
     name: Typecheck
     if: ${{ !github.event.pull_request.draft }}
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    steps:
-      - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-        with:
-          fetch-depth: 0
-
-      - name: Install
-        uses: ./.github/composite-actions/install
-
-      - name: Run Typecheck
-        run: pnpm turbo run typecheck --affected
+    uses: ./.github/workflows/typecheck.yml
+    secrets:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
   format:
     name: Format

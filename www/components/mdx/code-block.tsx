@@ -1,10 +1,14 @@
-import type { BoxProps, GridProps } from "@yamada-ui/react"
-import { Box, Code, Flex, Grid, Spacer, Tabs, Text } from "@yamada-ui/react"
+import type { GridProps } from "@yamada-ui/react"
+import {
+  Box,
+  Code,
+  Spacer,
+  Tabs,
+  CodeBlock as YamadaCodeBlock,
+} from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import React from "react"
-import { CodePreview } from "@/components/code-preview"
 import { StackBlitzButton } from "@/components/stack-blitz-button"
-import { codeToHtml } from "@/libs/shiki"
 import { langConditions } from "@/utils/i18n"
 import { Callout } from "./callout"
 import { ClientOnly } from "./client-only"
@@ -35,6 +39,36 @@ export function CodeBlock({
   ...rest
 }: CodeBlockProps) {
   const t = useTranslations("component.codeBlock")
+
+  const renderCode = ({ title: titleProp }: { title?: string } = {}) => (
+    <YamadaCodeBlock.Root
+      {...rest}
+      code={children}
+      highlight={highlight}
+      language={lang}
+      my="lg"
+      showLanguageLabel={false}
+      title={titleProp}
+    >
+      {titleProp ? (
+        <YamadaCodeBlock.Header>
+          <YamadaCodeBlock.Title />
+          <YamadaCodeBlock.Control>
+            <YamadaCodeBlock.CopyTrigger />
+          </YamadaCodeBlock.Control>
+        </YamadaCodeBlock.Header>
+      ) : null}
+      <YamadaCodeBlock.Content position="relative">
+        <YamadaCodeBlock.CopyTrigger
+          position="absolute"
+          right={{ base: "3.5", sm: "2", md: "3" }}
+          top={{ base: "3.5", md: "2" }}
+          zIndex="1"
+        />
+        <YamadaCodeBlock.Code pe={{ base: "16", sm: "12", md: "14" }} />
+      </YamadaCodeBlock.Content>
+    </YamadaCodeBlock.Root>
+  )
 
   if (!children) return null
 
@@ -81,9 +115,7 @@ export function CodeBlock({
             )}
           </Tabs.Panel>
           <Tabs.Panel index={1} tabIndex={-1}>
-            <Pre lang={lang} highlight={highlight}>
-              {children}
-            </Pre>
+            {renderCode()}
           </Tabs.Panel>
         </Tabs.Root>
 
@@ -110,61 +142,8 @@ export function CodeBlock({
       </>
     )
   } else if (title) {
-    return (
-      <Grid my="lg" {...rest}>
-        <Flex
-          alignItems="center"
-          bg="bg.panel"
-          borderBottomWidth="1px"
-          borderColor="border"
-          color="fg.emphasized"
-          h="12"
-          px="4"
-          roundedTop="l2"
-        >
-          <Text fontFamily="mono" fontSize="sm">
-            {title}
-          </Text>
-        </Flex>
-
-        <Pre lang={lang} highlight={highlight} roundedTop="0">
-          {children}
-        </Pre>
-      </Grid>
-    )
+    return renderCode({ title })
   } else {
-    return (
-      <Pre lang={lang} highlight={highlight} my="lg">
-        {children}
-      </Pre>
-    )
+    return renderCode()
   }
-}
-
-export interface PreProps extends Omit<BoxProps, "children"> {
-  lang: string
-  children?: string
-  code?: string
-  highlight?: string
-}
-
-export async function Pre({
-  lang,
-  code,
-  children = code,
-  highlight,
-  ...rest
-}: PreProps) {
-  if (!children) return null
-
-  const html = await codeToHtml(children, {
-    lang,
-    meta: { __raw: highlight ?? "" },
-  })
-
-  return (
-    <CodePreview html={html} {...rest}>
-      {children}
-    </CodePreview>
-  )
 }

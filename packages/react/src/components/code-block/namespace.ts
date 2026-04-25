@@ -1,0 +1,24 @@
+export {
+  CodeBlockCode as Code,
+  CodeBlockCollapseTrigger as CollapseTrigger,
+  CodeBlockContent as Content,
+  CodeBlockControl as Control,
+  CodeBlockCopyTrigger as CopyTrigger,
+  CodeBlockHeader as Header,
+  CodeBlockLanguageLabel as LanguageLabel,
+  CodeBlockPropsContext as PropsContext,
+  CodeBlockRoot as Root,
+  CodeBlockTitle as Title,
+  useCodeBlockPropsContext as usePropsContext,
+} from "./code-block"
+export type {
+  CodeBlockCodeProps as CodeProps,
+  CodeBlockCollapseTriggerProps as CollapseTriggerProps,
+  CodeBlockContentProps as ContentProps,
+  CodeBlockControlProps as ControlProps,
+  CodeBlockCopyTriggerProps as CopyTriggerProps,
+  CodeBlockHeaderProps as HeaderProps,
+  CodeBlockLanguageLabelProps as LanguageLabelProps,
+  CodeBlockRootProps as RootProps,
+  CodeBlockTitleProps as TitleProps,
+} from "./code-block"

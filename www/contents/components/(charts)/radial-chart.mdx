@@ -516,18 +516,17 @@ return <RadialChart.Root data={data} series={series} withTooltip={false} />
 
 ### Keyboard Navigation
 
-| Key          | Description                                                                            | State                |
-| ------------ | -------------------------------------------------------------------------------------- | -------------------- |
-| `ArrowRight` | Keeps focus on the chart surface and displays the tooltip for the next data point.     | `withTooltip={true}` |
-| `ArrowLeft`  | Keeps focus on the chart surface and displays the tooltip for the previous data point. | `withTooltip={true}` |
-| `Enter`      | Toggles the tooltip display for the active data point while focus stays on the chart.  | `withTooltip={true}` |
+| Key          | Description                                                | State                |
+| ------------ | ---------------------------------------------------------- | -------------------- |
+| `ArrowRight` | Moves to the next data point and displays the tooltip.     | `withTooltip={true}` |
+| `ArrowLeft`  | Moves to the previous data point and displays the tooltip. | `withTooltip={true}` |
+| `Enter`      | Toggles the tooltip display for the active data point.     | `withTooltip={true}` |
 
 ### ARIA Roles and Attributes
 
-| Component | Role and Attribute   | Usage                                          |
-| --------- | -------------------- | ---------------------------------------------- |
-| `svg`     | `role="application"` | Indicates that this is an application.         |
-| `svg`     | `tabIndex={0}`       | Makes the chart surface focusable by keyboard. |
+| Component | Role and Attribute   | Usage                                  |
+| --------- | -------------------- | -------------------------------------- |
+| `svg`     | `role="application"` | Indicates that this is an application. |
 
 ## Props
 

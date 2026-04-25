@@ -10,6 +10,7 @@ on:
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+  TURBO_SCM_BASE: ${{ vars.TURBO_SCM_BASE }}
 
 jobs:
   packages:

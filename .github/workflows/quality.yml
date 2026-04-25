@@ -165,7 +165,7 @@ jobs:
       - name: Run typecheck (playgrounds)
         if: steps.changed-files.outputs.playgrounds_any_changed == 'true'
         timeout-minutes: 15
-        run: pnpm typecheck:playgrounds --output-logs=full --summarize
+        run: pnpm typecheck:playgrounds
 
   format:
     name: Format

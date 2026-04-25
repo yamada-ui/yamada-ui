@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { PropsTable } from "#storybook"
 import { useMemo } from "react"
+import { PropsTable } from "#storybook"
 import { Timeline } from "."
 import { COLOR_SCHEMES } from "../../utils"
 import { Avatar } from "../avatar"

@@ -128,9 +128,8 @@ describe("getConfig", () => {
 
     const config = await getConfig(tempDir, "ui.json")
     const section = config.getSection("components")
-    // NOTE: source code bug - path starting with "/" produces ".//path"
-    // getSectionPath prepends "./" to "/path" resulting in ".//path"
-    expect(section?.path).toBe(".//custom-components")
+    expect(section?.path).toBe("./custom-components")
+    expect(config.getSectionPath("components")).toBe("./custom-components")
   })
 
   test("getSection should resolve via sectionMap path lookup", async () => {

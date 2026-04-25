@@ -1,0 +1,85 @@
+name: Browser Mode Test
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    secrets:
+      TURBO_TOKEN:
+        required: false
+      CODECOV_TOKEN:
+        required: false
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+jobs:
+  test:
+    name: React / ${{ matrix.name }} ${{ matrix.shard_index }}/4
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+        shard_index: [1, 2, 3, 4]
+        include:
+          - browser: chromium
+            name: Chromium
+            command: test:coverage
+          - browser: firefox
+            name: Firefox
+            command: test:firefox
+          - browser: webkit
+            name: Webkit
+            command: test:webkit
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Check modified files
+        id: changed-files
+        uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
+        with:
+          files_yaml: |
+            full:
+              - .github/workflows/quality.yml
+              - '{turbo.json,package.json}'
+              - packages/workspace/package.json
+              - packages/workspace/src/vitest/**
+              - packages/react/{package.json,vitest.config.ts}
+              - packages/react/test/**
+            diff:
+              - packages/react/src/**/*.{ts,tsx,mts}
+              - '!packages/react/src/**/*.stories.{ts,tsx}'
+
+      - name: Install
+        if: steps.changed-files.outputs.full_any_changed == 'true' || (steps.changed-files.outputs.diff_any_changed == 'true' && matrix.shard_index == 1)
+        uses: ./.github/composite-actions/install
+
+      - name: Setup Browser
+        if: steps.changed-files.outputs.full_any_changed == 'true' || (steps.changed-files.outputs.diff_any_changed == 'true' && matrix.shard_index == 1)
+        run: pnpm react exec playwright install ${{ matrix.browser }} --with-deps ${{ matrix.browser == 'chromium' && '--only-shell' || '' }}
+
+      - name: Run test (full)
+        if: steps.changed-files.outputs.full_any_changed == 'true'
+        run: pnpm turbo run ${{ matrix.command }} --filter=./packages/react -- --shard=${{ matrix.shard_index }}/4
+
+      - name: Run test (diff)
+        if: steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true' && matrix.shard_index == 1
+        run: pnpm turbo run ${{ matrix.command }} --filter=./packages/react -- --changed origin/${{ github.base_ref }}
+
+      - name: Upload coverage
+        if: matrix.browser == 'chromium' && (steps.changed-files.outputs.full_any_changed == 'true' || (steps.changed-files.outputs.diff_any_changed == 'true' && matrix.shard_index == 1))
+        uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe # v5.5.4
+        with:
+          disable_search: true
+          fail_ci_if_error: false
+          files: ./packages/react/coverage/coverage-final.json
+          flags: unittests
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
+          codecov_yml_path: ./codecov.yml

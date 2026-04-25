@@ -2,10 +2,12 @@
 
 Follow these rules when writing Vitest browser mode tests in `packages/react` (test files that import from `#test/browser`).
 
+If a matching test file imports from `#test` instead of `#test/browser`, skip this rule. For `renderHook`-only browser tests, apply the sections that match the behavior under test; component-only guidance for `user`, `page` queries, DOM assertions, and `a11y(...)` does not apply unless the hook test renders DOM or drives user interaction.
+
 ## Core Principles
 
 - Tests must resemble how real users interact with the component.
-- Prefer locator auto-retry over manual `waitFor` / `expect.poll`.
+- Prefer locator APIs such as `expect.element` over hand-written `waitFor` / `expect.poll` around raw DOM.
 - Accessibility is required for every interactive component.
 
 ## Interactions
@@ -137,10 +139,12 @@ document.querySelector('[data-testid="content"]')
 
 ```ts
 page.getByRole("group")
-page.getByTestId("content").getByRole("button", { name: "Undo" })
+page
+  .getByRole("region", { name: "Content" })
+  .getByRole("button", { name: "Undo" })
 ```
 
-Locators poll, auto-retry, and report which query failed. Chain locators (`parent.getByRole(...)`) to scope a query without reaching into `container`. Use `.filter({ hasText })` when you need to narrow a set of sibling matches (e.g. `page.getByRole("listitem").filter({ hasText: "Undo" })`).
+Locators poll, auto-retry, and report which query failed. Chain locators (`parent.getByRole(...)`) to scope a query without reaching into `container`. Prefer role, label, and visible text for the parent locator too; use a test ID for scoping only when no user-facing query can identify the scope. Use `.filter({ hasText })` when you need to narrow a set of sibling matches (e.g. `page.getByRole("listitem").filter({ hasText: "Undo" })`).
 
 ## Assertions
 
@@ -172,7 +176,7 @@ expect(page.getByRole("alert")).toBeNull()
 expect(document.querySelector('[data-testid="content"]')).toBeNull()
 ```
 
-`getBy*` throws when missing, so the assertion never runs. `querySelector` bypasses retry — the element may appear 10 ms later and the test still reports "absent".
+`page.getBy*` returns a non-null locator, so `toBeNull()` can never prove absence. Calling `.element()` on a missing locator throws before an absence assertion can pass. `querySelector` bypasses retry — the element may appear 10 ms later and the test still reports "absent".
 
 #### DO
 
@@ -199,10 +203,12 @@ Property reads collapse to `true`/`false` and hide which element failed. Failure
 ```ts
 await expect.element(page.getByRole("button")).toBeDisabled()
 await expect.element(page.getByRole("img")).toHaveClass("ui-icon")
-await expect.element(page.getByRole("img")).toHaveRole("img")
+await expect
+  .element(page.getByLabelText("Search icon"))
+  .toHaveAttribute("viewBox", "0 0 24 24")
 ```
 
-jest-dom matchers (`toBeDisabled`, `toBeChecked`, `toHaveAttribute`, `toHaveTextContent`, `toHaveFocus`, `toHaveClass`, `toHaveRole`) print diffs like `"Received element is not disabled: <button />"` that point at the actual node.
+jest-dom matchers (`toBeDisabled`, `toBeChecked`, `toHaveAttribute`, `toHaveTextContent`, `toHaveFocus`, `toHaveClass`, `toHaveRole`) print diffs like `"Received element is not disabled: <button />"` that point at the actual node. When a structural SVG check is unavoidable, locate the element through an accessible label or surrounding role first, then assert the observable attribute that matters.
 
 ## Waiting
 
@@ -272,7 +278,7 @@ Keep side effects outside, and put exactly one assertion inside `waitFor`. Use `
 
 ## Accessibility
 
-### Every component test file calls `a11y()`
+### New or modified browser component test files call `a11y()`
 
 #### DO NOT
 
@@ -280,7 +286,7 @@ Keep side effects outside, and put exactly one assertion inside `waitFor`. Use `
 // no a11y(...) call anywhere in the file
 ```
 
-Omitting `a11y` lets ARIA contract breakage through — missing labels, invalid roles, contrast regressions — that role-based queries cannot catch on their own.
+Omitting `a11y` lets ARIA contract breakage through — missing labels, invalid roles, contrast regressions — that role-based queries cannot catch on their own. Add `a11y(...)` for new browser component test files and for modified browser component test files when the edited coverage renders a component. Existing browser component tests without `a11y(...)` do not need unrelated migration in the same change, and `renderHook`-only tests are outside this requirement unless they render component DOM.
 
 #### DO
 

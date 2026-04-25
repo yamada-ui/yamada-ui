@@ -3,7 +3,14 @@
   "futureFlags": { "affectedUsingTaskInputs": true },
   "tasks": {
     "//#transit": { "dependsOn": ["^transit"] },
-    "transit": { "dependsOn": ["^transit"] },
+    "transit": {
+      "dependsOn": ["^transit"],
+      "inputs": [
+        "package.json",
+        "src/**/*.{ts,tsx,mts}",
+        "!src/**/*.{test,stories}.{ts,tsx,mts}"
+      ]
+    },
     "transit:test": {
       "dependsOn": ["^transit:test"],
       "inputs": ["src/vitest/**", "package.json"]
@@ -66,11 +73,21 @@
     },
     "typecheck": {
       "dependsOn": ["transit"],
-      "inputs": ["**/*.{ts,tsx,mts}", "package.json", "tsconfig.json"]
+      "inputs": [
+        "package.json",
+        "tsconfig.json",
+        "src/**/*.{ts,tsx,mts}",
+        "!src/**/*.{test,stories}.{ts,tsx,mts}"
+      ]
     },
     "lint": {
       "dependsOn": ["transit"],
-      "inputs": ["**/*.{ts,tsx,mts}", "package.json", "tsconfig.json"]
+      "inputs": [
+        "package.json",
+        "tsconfig.json",
+        "src/**/*.{ts,tsx,mts}",
+        "!src/**/*.{test,stories}.{ts,tsx,mts}"
+      ]
     }
   },
   "globalDependencies": ["tsconfig.json"]

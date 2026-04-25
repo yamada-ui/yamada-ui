@@ -1,6 +1,6 @@
-# Browser Mode Testing Rules
+# Browser Testing Rules
 
-Follow these rules when writing Vitest browser mode tests in `packages/react` (test files that import from `#test/browser`).
+Follow these rules when writing Vitest browser tests in `packages/react` (test files that import from `#test/browser`).
 
 If a matching test file imports from `#test` instead of `#test/browser`, skip this rule. For `renderHook`-only browser tests, apply the sections that match the behavior under test; component-only guidance for `user`, `page` queries, DOM assertions, and `a11y(...)` does not apply unless the hook test renders DOM or drives user interaction.
 

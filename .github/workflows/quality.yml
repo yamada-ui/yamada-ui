@@ -47,10 +47,10 @@ jobs:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-  browser_mode_test:
-    name: Browser Mode Test
+  browser_test:
+    name: Browser Test
     if: ${{ !github.event.pull_request.draft }}
-    uses: ./.github/workflows/browser-mode-test.yml
+    uses: ./.github/workflows/browser-test.yml
     secrets:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -87,7 +87,7 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Run Typecheck
-        run: pnpm turbo run typecheck --affected --filter='!./playgrounds/**'
+        run: pnpm turbo run typecheck --affected
 
   format:
     name: Format

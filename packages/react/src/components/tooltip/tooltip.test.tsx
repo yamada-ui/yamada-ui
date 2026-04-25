@@ -243,8 +243,10 @@ describe("<Tooltip />", () => {
     const trigger = page.getByText("Trigger")
 
     trigger.element().dispatchEvent(
-      new PointerEvent("pointerenter", {
+      new PointerEvent("pointerover", {
         bubbles: true,
+        isPrimary: true,
+        pointerId: 1,
         pointerType: "touch",
       }),
     )

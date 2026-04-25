@@ -1,6 +1,12 @@
 import { a11y, page, render } from "#test/browser"
 import { Bleed } from "./bleed"
 
+const getPixelNumber = (value: string) => Number.parseFloat(value)
+const FULL_BLEED_PRECISION = 1
+
+const getExpectedFullBleed = (container: HTMLElement) =>
+  container.getBoundingClientRect().width / 2 - window.innerWidth / 2
+
 describe("<Bleed />", () => {
   test("renders component correctly", async () => {
     await a11y(<Bleed>Box</Bleed>)
@@ -22,42 +28,60 @@ describe("<Bleed />", () => {
     expect(page.getByText("Box").element().tagName).toBe("DIV")
   })
 
-  test("applies non-zero bleed to both inline sides when `inline='full'`", async () => {
+  test("applies full bleed to both inline sides when `inline='full'`", async () => {
     await render(
-      <div style={{ width: "200px" }}>
+      <div style={{ width: "200px" }} data-testid="container">
         <Bleed inline="full">Box</Bleed>
       </div>,
     )
 
+    const container = page.getByTestId("container").element()
     const style = getComputedStyle(page.getByText("Box").element())
+    const expectedFullBleed = getExpectedFullBleed(container)
 
-    expect(style.marginInlineEnd).not.toBe("0px")
-    expect(style.marginInlineStart).not.toBe("0px")
+    expect(getPixelNumber(style.marginInlineEnd)).toBeCloseTo(
+      expectedFullBleed,
+      FULL_BLEED_PRECISION,
+    )
+    expect(getPixelNumber(style.marginInlineStart)).toBeCloseTo(
+      expectedFullBleed,
+      FULL_BLEED_PRECISION,
+    )
   })
 
-  test("applies non-zero bleed to inline start when `inlineStart='full'`", async () => {
+  test("applies full bleed to inline start when `inlineStart='full'`", async () => {
     await render(
-      <div style={{ width: "200px" }}>
+      <div style={{ width: "200px" }} data-testid="container">
         <Bleed inlineStart="full">Box</Bleed>
       </div>,
     )
 
+    const container = page.getByTestId("container").element()
     const style = getComputedStyle(page.getByText("Box").element())
+    const expectedFullBleed = getExpectedFullBleed(container)
 
-    expect(style.marginInlineStart).not.toBe("0px")
-    expect(style.marginInlineEnd).toBe("0px")
+    expect(getPixelNumber(style.marginInlineStart)).toBeCloseTo(
+      expectedFullBleed,
+      FULL_BLEED_PRECISION,
+    )
+    expect(getPixelNumber(style.marginInlineEnd)).toBeCloseTo(0)
   })
 
-  test("applies non-zero bleed to inline end when `inlineEnd='full'`", async () => {
+  test("applies full bleed to inline end when `inlineEnd='full'`", async () => {
     await render(
-      <div style={{ width: "200px" }}>
+      <div style={{ width: "200px" }} data-testid="container">
         <Bleed inlineEnd="full">Box</Bleed>
       </div>,
     )
 
+    const container = page.getByTestId("container").element()
     const style = getComputedStyle(page.getByText("Box").element())
+    const expectedFullBleed = getExpectedFullBleed(container)
 
-    expect(style.marginInlineEnd).not.toBe("0px")
-    expect(style.marginInlineStart).toBe("0px")
+    expect(getPixelNumber(style.marginInlineEnd)).toBeCloseTo(
+      expectedFullBleed,
+      FULL_BLEED_PRECISION,
+    )
+    expect(getPixelNumber(style.marginInlineStart)).toBeCloseTo(0)
   })
 })

@@ -1,6 +1,6 @@
-import { a11y, fireEvent, render, screen } from "#test"
 import { createRef } from "react"
 import { vi } from "vitest"
+import { a11y, fireEvent, render, screen } from "#test"
 import { NativeSelect } from "."
 import { BoxIcon } from "../icon"
 import { InputPropsContext } from "../input"

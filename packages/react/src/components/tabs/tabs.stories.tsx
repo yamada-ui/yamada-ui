@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { FC } from "react"
-import { PropsTable } from "#storybook"
 import { useMemo, useState } from "react"
+import { PropsTable } from "#storybook"
 import { useInterval } from "../../hooks/use-interval"
 import { uuid } from "../../utils"
 import { Button, IconButton } from "../button"
@@ -500,7 +500,6 @@ export const Dynamic: Story = () => {
                   variant="ghost"
                   aria-label="Remove Tab"
                   icon={<XIcon />}
-                  role="button"
                   onClick={(ev) => {
                     ev.stopPropagation()
                     onRemoveTab(id!)
@@ -514,7 +513,6 @@ export const Dynamic: Story = () => {
         <Button
           size="xs"
           variant="ghost"
-          role="tab"
           startIcon={<PlusIcon />}
           onClick={onAddTab}
         >

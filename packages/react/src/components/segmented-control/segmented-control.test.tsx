@@ -26,13 +26,14 @@ describe("<SegmentedControl />", () => {
 
   test("sets `className` correctly", async () => {
     await render(<TestComponent />)
+    const firstItem = page
+      .getByRole("radio", { name: "One" })
+      .locator("xpath=..")
 
     await expect
       .element(page.getByRole("radiogroup"))
       .toHaveClass("ui-segmented-control__root")
-    expect(
-      page.getByRole("radio", { name: "One" }).element().parentElement,
-    ).toHaveClass("ui-segmented-control__item")
+    await expect.element(firstItem).toHaveClass("ui-segmented-control__item")
   })
 
   test("renders HTML tag correctly", async () => {
@@ -60,20 +61,22 @@ describe("<SegmentedControl />", () => {
 
   test("should call onChange when a different item is selected", async () => {
     const onChange = vi.fn()
-    await render(<TestComponent onChange={onChange} />)
-    ;(page.getByRole("radio", { name: "Two" }).element() as HTMLElement).click()
+    const { user } = await render(<TestComponent onChange={onChange} />)
+    const twoItem = page.getByRole("radio", { name: "Two" }).locator("xpath=..")
+
+    await user.click(twoItem)
     expect(onChange).toHaveBeenCalledWith("two")
   })
 
   test("should update selected item when clicked", async () => {
-    await render(<TestComponent />)
+    const { user } = await render(<TestComponent />)
 
     const one = page.getByRole("radio", { name: "One" })
-    const two = page.getByRole("radio", { name: "Two" })
+    const two = page.getByRole("radio", { name: "Two" }).locator("xpath=..")
 
     await expect.element(one).toBeChecked()
-    ;(two.element() as HTMLElement).click()
-    await expect.element(two).toBeChecked()
+    await user.click(two)
+    await expect.element(page.getByRole("radio", { name: "Two" })).toBeChecked()
   })
 
   test("should apply readOnly attributes", async () => {

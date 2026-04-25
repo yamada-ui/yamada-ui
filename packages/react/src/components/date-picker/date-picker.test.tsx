@@ -1,7 +1,7 @@
 import type { DatePickerProps } from "."
-import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { useState } from "react"
 import { vi } from "vitest"
+import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { DatePicker } from "."
 import { InputPropsContext } from "../input"
 

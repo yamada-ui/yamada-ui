@@ -51,7 +51,7 @@ describe("<Toggle />", () => {
 
   test("should handle disabled prop", async () => {
     const onChange = vi.fn()
-    await render(
+    const { user } = await render(
       <Toggle disabled onChange={onChange}>
         Toggle
       </Toggle>,
@@ -59,6 +59,7 @@ describe("<Toggle />", () => {
 
     const button = page.getByRole("button")
     await expect.element(button).toBeDisabled()
+    await expect(user.click(button, { timeout: 100 })).rejects.toBeDefined()
     expect(onChange).not.toHaveBeenCalled()
   })
 

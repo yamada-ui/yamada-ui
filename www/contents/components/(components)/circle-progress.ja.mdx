@@ -133,7 +133,7 @@ import { CircleProgress } from "@workspaces/ui"
 
 ## アクセシビリティ
 
-`CircleProgress.Root`は外側のコンテナをレンダリングします。スクリーンリーダーが読み上げるプログレスバーにカスタムのアクセシブル名を設定する場合は、`circleProps`を通じて`CircleProgressCircle`に`aria-label`または`aria-labelledby`を設定します。
+`CircleProgress.Root`の`circleProps`に`aria-label`または`aria-labelledby`を設定すると、スクリーンリーダーによって読み上げられます。
 
 ```tsx
 <CircleProgress.Root

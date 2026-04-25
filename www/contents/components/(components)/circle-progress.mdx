@@ -133,7 +133,7 @@ To change the thickness of the progress bar, set a string or number to `thicknes
 
 ## Accessibility
 
-`CircleProgress.Root` renders the outer container. To provide a custom accessible name for the screen-reader progressbar, set `aria-label` or `aria-labelledby` on `CircleProgressCircle` through `circleProps`.
+If `aria-label` or `aria-labelledby` is set on `CircleProgress.Root`'s `circleProps`, it will be announced by screen readers.
 
 ```tsx
 <CircleProgress.Root

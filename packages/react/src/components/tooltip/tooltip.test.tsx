@@ -242,14 +242,12 @@ describe("<Tooltip />", () => {
 
     const trigger = page.getByText("Trigger")
 
-    const pointerOverEvent = new Event("pointerover", { bubbles: true })
-
-    Object.defineProperty(pointerOverEvent, "pointerType", {
-      configurable: true,
-      value: "touch",
-    })
-
-    trigger.element().dispatchEvent(pointerOverEvent)
+    trigger.element().dispatchEvent(
+      new PointerEvent("pointerenter", {
+        bubbles: true,
+        pointerType: "touch",
+      }),
+    )
 
     await vi.waitFor(
       async () => {

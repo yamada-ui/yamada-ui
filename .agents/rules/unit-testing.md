@@ -272,7 +272,7 @@ test("detects npm", () => {
 })
 ```
 
-Direct assignment mutates the ambient environment. If the test throws before the restore, every later test sees the stubbed value. Nothing tracks which variables you touched.
+Direct assignment mutates the ambient environment and leaves restoration entirely manual. Nothing tracks which variables you touched, and simple restore code often loses the distinction between a variable that was absent and one that had an explicit value.
 
 #### DO
 
@@ -305,7 +305,7 @@ afterAll(() => {
 })
 ```
 
-Direct assignment to `global` loses type safety (note the cast) and relies on `afterAll` running. A single failing test between the two hooks leaves the polyfill in place for the next file.
+Direct assignment to `global` loses type safety (note the cast) and makes the polyfill file-scoped until a matching manual restore runs. Missing or incomplete restore code leaks the global into later tests.
 
 #### DO
 
@@ -325,7 +325,7 @@ test("handles touch events", () => {
 })
 ```
 
-`vi.stubGlobal` is tracked and automatically unwound by `vi.unstubAllGlobals`. Scope the stub to each test so failures do not cascade.
+`vi.stubGlobal` is tracked and automatically unwound by `vi.unstubAllGlobals`. Scope the stub to each test so global state does not leak across cases or files.
 
 ## Assertions
 
@@ -362,15 +362,13 @@ A substring match accepts any error — `TypeError: Cannot read properties of nu
 #### DO
 
 ```ts
-await expect(fetchRegistry("nonexistent")).rejects.toThrow(
-  RegistryNotFoundError,
-)
-await expect(fetchRegistry("nonexistent")).rejects.toThrow(
-  /component "nonexistent" not found/,
-)
+await expect(fetchRegistry("nonexistent")).rejects.toMatchObject({
+  constructor: RegistryNotFoundError,
+  message: expect.stringMatching(/component "nonexistent" not found/),
+})
 ```
 
-Assert the error constructor, then assert a regex that describes the actual message. Both constraints together make the assertion meaningful.
+Assert the error constructor and a regex that describes the actual message from the same thrown instance. Both constraints together make the assertion meaningful without invoking the failing operation twice.
 
 ### Every test needs an explicit `expect`
 
@@ -496,11 +494,13 @@ import { mkdtempSync, rmSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 
-let dir: string
+let dir: string | undefined
 beforeEach(() => {
   dir = mkdtempSync(join(tmpdir(), "yamada-ui-cli-"))
 })
 afterEach(() => {
-  rmSync(dir, { recursive: true, force: true })
+  if (dir) rmSync(dir, { recursive: true, force: true })
 })
 ```
+
+`mkdtempSync` returns a unique path, so parallel workers do not collide. Guarded `rmSync` with `recursive` and `force` removes the whole fixture tree after each test without turning a failed setup into a teardown failure, and the prefix keeps leaked paths diagnosable.

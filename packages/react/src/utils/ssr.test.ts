@@ -1,6 +1,6 @@
-import { renderHook } from "#test"
 import { createElement } from "react"
 import { renderToString } from "react-dom/server"
+import { renderHook } from "#test"
 import { useSsr } from "./ssr"
 
 describe("useSsr", () => {

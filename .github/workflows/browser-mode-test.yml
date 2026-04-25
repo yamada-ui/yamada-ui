@@ -18,7 +18,7 @@ jobs:
     name: React / Chromium
     if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -73,7 +73,7 @@ jobs:
     name: React / Firefox
     if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -116,7 +116,7 @@ jobs:
     name: React / Webkit
     if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1

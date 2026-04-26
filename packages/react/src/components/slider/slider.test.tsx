@@ -1,6 +1,6 @@
-import { a11y, render } from "#test/browser"
 import { fireEvent, screen } from "@testing-library/react"
 import { vi } from "vitest"
+import { a11y, render } from "#test/browser"
 import { Slider } from "."
 import { noop } from "../../utils"
 

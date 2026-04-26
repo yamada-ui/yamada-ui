@@ -39,7 +39,7 @@ describe("<HueSlider />", () => {
       </HueSlider.Root>,
     )
 
-    await expect.element(page.getByTestId("custom-child")).toBeInTheDocument()
+    await expect.element(page.getByTestId("custom-child")).toBeVisible()
   })
 
   test("sets aria attributes correctly", async () => {
@@ -75,7 +75,7 @@ describe("<HueSlider />", () => {
       .element(page.getByRole("slider"))
       .toHaveAttribute("aria-orientation", "vertical")
     await expect
-      .element(page.getByTestId("overlay"))
+      .element(page.getByTestId("overlay").first())
       .toHaveAttribute("data-orientation", "vertical")
   })
 

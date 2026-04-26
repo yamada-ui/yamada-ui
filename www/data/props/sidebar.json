@@ -710,7 +710,7 @@
         "required": false
       },
       "drawerProps": {
-        "type": "Omit<Drawer.RootProps, \"body\" | \"cancel\" | \"children\" | \"footer\" | \"header\" | \"middle\" | \"onCancel\" | \"onClose\" | \"onMiddle\" | \"onOpen\" | \"onSuccess\" | \"open\" | \"success\" | \"title\" | \"trigger\">",
+        "type": "Omit<\n    Drawer.RootProps,\n    | \"body\"\n    | \"cancel\"\n    | \"children\"\n    | \"footer\"\n    | \"header\"\n    | \"middle\"\n    | \"onCancel\"\n    | \"onClose\"\n    | \"onMiddle\"\n    | \"onOpen\"\n    | \"onSuccess\"\n    | \"open\"\n    | \"success\"\n    | \"title\"\n    | \"trigger\"\n  >",
         "description": "Props for the drawer component.",
         "required": false
       },
@@ -781,7 +781,7 @@
         "required": false
       },
       "itemProps": {
-        "type": "Omit<SidebarItemProps, \"children\" | \"items\" | \"label\" | \"open\" | \"value\">",
+        "type": "Omit<\n    SidebarItemProps,\n    \"children\" | \"items\" | \"label\" | \"open\" | \"value\"\n  >",
         "description": "Props for the item component.",
         "required": false
       },
@@ -1577,7 +1577,7 @@
       "required": false
     },
     "drawerProps": {
-      "type": "Omit<Drawer.RootProps, \"body\" | \"cancel\" | \"children\" | \"footer\" | \"header\" | \"middle\" | \"onCancel\" | \"onClose\" | \"onMiddle\" | \"onOpen\" | \"onSuccess\" | \"open\" | \"success\" | \"title\" | \"trigger\">",
+      "type": "Omit<\n    Drawer.RootProps,\n    | \"body\"\n    | \"cancel\"\n    | \"children\"\n    | \"footer\"\n    | \"header\"\n    | \"middle\"\n    | \"onCancel\"\n    | \"onClose\"\n    | \"onMiddle\"\n    | \"onOpen\"\n    | \"onSuccess\"\n    | \"open\"\n    | \"success\"\n    | \"title\"\n    | \"trigger\"\n  >",
       "description": "Props for the drawer component.",
       "required": false
     },
@@ -1648,7 +1648,7 @@
       "required": false
     },
     "itemProps": {
-      "type": "Omit<SidebarItemProps, \"children\" | \"items\" | \"label\" | \"open\" | \"value\">",
+      "type": "Omit<\n    SidebarItemProps,\n    \"children\" | \"items\" | \"label\" | \"open\" | \"value\"\n  >",
       "description": "Props for the item component.",
       "required": false
     },

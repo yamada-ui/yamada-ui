@@ -7,7 +7,7 @@
     "clean": "rimraf node_modules .tanstack",
     "dev": "vite dev",
     "build": "vite build",
-    "typecheck": "tsc",
+    "typecheck": "tsgo",
     "lint": "oxlint . --max-warnings=0",
     "format": "pnpm -w format playgrounds/tanstack/router",
     "yamada-cli": "pnpm -C ../../../packages/cli dev"

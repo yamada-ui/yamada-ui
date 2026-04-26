@@ -18,13 +18,12 @@ const changeFiles = (files: File[] | null) => {
 
 describe("<FileInput />", () => {
   test("renders component correctly", async () => {
-    await a11y(<FileInput placeholder="placeholder" />, {
-      axeOptions: {
-        rules: {
-          "color-contrast": { enabled: false },
-        },
-      },
-    })
+    await a11y(
+      <FileInput
+        placeholder="placeholder"
+        _placeholder={{ color: "black", opacity: 1 }}
+      />,
+    )
   })
 
   test("sets `displayName` correctly", () => {
@@ -247,37 +246,45 @@ describe("<FileInput />", () => {
   })
 
   test("click should not be called in the inner input element after click when disabled", async () => {
-    await render(<FileInput data-testid="fileInput" disabled />)
+    const { user } = await render(
+      <FileInput data-testid="fileInput" disabled />,
+    )
 
     const input = getInput()
     const fn = vi.fn()
 
     input.addEventListener("click", fn)
-    page.getByTestId("fileInput").element().click()
+    await user.click(page.getByTestId("fileInput"), {
+      force: true,
+    } as { [key: string]: unknown })
 
     expect(fn).toHaveBeenCalledTimes(0)
   })
 
   test("click should not be called in the inner input element after click when readonly", async () => {
-    await render(<FileInput data-testid="fileInput" readOnly />)
+    const { user } = await render(
+      <FileInput data-testid="fileInput" readOnly />,
+    )
 
     const input = getInput()
     const fn = vi.fn()
 
     input.addEventListener("click", fn)
-    page.getByTestId("fileInput").element().click()
+    await user.click(page.getByTestId("fileInput"), {
+      force: true,
+    } as { [key: string]: unknown })
 
     expect(fn).toHaveBeenCalledTimes(0)
   })
 
   test("click should be called in the inner input element after click", async () => {
-    await render(<FileInput data-testid="fileInput" />)
+    const { user } = await render(<FileInput data-testid="fileInput" />)
 
     const input = getInput()
     const fn = vi.fn()
 
     input.addEventListener("click", fn)
-    page.getByTestId("fileInput").element().click()
+    await user.click(page.getByTestId("fileInput"))
 
     expect(fn).toHaveBeenCalledTimes(1)
   })
@@ -286,7 +293,7 @@ describe("<FileInput />", () => {
     const onContextClick = vi.fn()
     const onUserClick = vi.fn()
 
-    await render(
+    const { user } = await render(
       <InputPropsContext
         value={{
           className: "from-context",
@@ -310,7 +317,7 @@ describe("<FileInput />", () => {
     await expect.element(el).toHaveStyle({ color: "rgb(255, 0, 0)" })
     await expect.element(el).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
 
-    el.element().click()
+    await user.click(el)
 
     expect(onContextClick).toHaveBeenCalledTimes(1)
     expect(onUserClick).toHaveBeenCalledTimes(1)

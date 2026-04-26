@@ -1,6 +1,6 @@
-import { a11y, render } from "#test/browser"
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import { useState } from "react"
+import { a11y, render } from "#test/browser"
 import { Button } from "../button"
 import { Menu } from "./"
 
@@ -1157,7 +1157,7 @@ describe("<Menu />", () => {
 
     const subMenuText = screen.getByText("Sub Menu")
     expect(subMenuText).toHaveAttribute("aria-haspopup", "menu")
-    expect(subMenuText).toHaveAttribute("aria-expanded")
+    expect(subMenuText).toHaveAttribute("aria-expanded", "false")
   })
 
   test("submenu content renders when defaultOpen", async () => {

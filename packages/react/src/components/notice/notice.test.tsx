@@ -2,11 +2,11 @@ import { page, renderHook } from "#test/browser"
 import { useNotice } from "./use-notice"
 
 async function expectNoticeVisible(text: string) {
-  await expect.poll(() => document.body.textContent.includes(text)).toBe(true)
+  await expect.element(page.getByText(text)).toBeInTheDocument()
 }
 
 async function expectNoticeHidden(text: string) {
-  await expect.poll(() => document.body.textContent.includes(text)).toBe(false)
+  await expect.poll(() => page.getByText(text).query()).toBeNull()
 }
 
 describe("useNotice", () => {
@@ -184,10 +184,11 @@ describe("useNotice", () => {
     })
 
     await expectNoticeVisible("Closeable Button Notice")
-    await expect
-      .poll(() => !!document.querySelector("[data-close-button]"))
-      .toBe(true)
-    ;(page.getByRole("button").element() as HTMLElement).click()
+
+    const closeButton = page.getByRole("button", { name: /close/i })
+
+    await expect.element(closeButton).toBeInTheDocument()
+    ;(closeButton.element() as HTMLElement).click()
 
     await expectNoticeHidden("Closeable Button Notice")
   })
@@ -235,7 +236,7 @@ describe("useNotice", () => {
 
     await expectNoticeVisible("Non-closable Notice")
     await expect
-      .poll(() => !!document.querySelector("[data-close-button]"))
-      .toBe(false)
+      .poll(() => page.getByRole("button", { name: /close/i }).query())
+      .toBeNull()
   })
 })

@@ -119,9 +119,10 @@ describe("<FileButton />", () => {
     const { user } = await render(<TestComponent />)
 
     const fileCount = page.getByTestId("file-count")
-    const fileInput = document.querySelector('input[type="file"]')
-    if (!(fileInput instanceof HTMLInputElement))
+    const fileInputElement = document.querySelector('input[type="file"]')
+    if (!(fileInputElement instanceof HTMLInputElement))
       throw new Error("file input not found")
+    const fileInput = page.elementLocator(fileInputElement)
 
     await expect.element(fileCount).toHaveTextContent("files: 0")
     expect(handleFileChangeMock).not.toHaveBeenCalled()
@@ -182,9 +183,10 @@ describe("<FileButton />", () => {
     await expect.element(fileCount).toHaveTextContent("files: 0")
 
     const file = new File(["test"], "test.txt", { type: "text/plain" })
-    const fileInput = document.querySelector('input[type="file"]')
-    if (!(fileInput instanceof HTMLInputElement))
+    const fileInputElement = document.querySelector('input[type="file"]')
+    if (!(fileInputElement instanceof HTMLInputElement))
       throw new Error("file input not found")
+    const fileInput = page.elementLocator(fileInputElement)
     await user.upload(fileInput, file)
 
     await expect.element(fileCount).toHaveTextContent("files: 1")

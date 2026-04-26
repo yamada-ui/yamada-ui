@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { PropsTable } from "#storybook"
 import { useState } from "react"
+import { PropsTable } from "#storybook"
 import { Rating } from "."
 import { COLOR_SCHEMES } from "../../utils"
 import { Field } from "../field"

@@ -1,6 +1,6 @@
 import type { FC } from "react"
-import { a11y, page, render } from "#test/browser"
 import { useMemo } from "react"
+import { a11y, page, render } from "#test/browser"
 import { Steps } from "."
 import { ButtonGroup } from "../button"
 

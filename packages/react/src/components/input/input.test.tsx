@@ -3,6 +3,9 @@ import { Input, InputGroup } from "./"
 
 describe("<Input />", () => {
   test("renders component correctly", async () => {
+    // Default Input color pair against `UIProvider` theme background fails
+    // axe-core's color-contrast check in browser mode. The component's rendered
+    // color is theme-defined, so this is a theme-level audit item.
     await a11y(
       <InputGroup.Root>
         <InputGroup.Element>Hello</InputGroup.Element>

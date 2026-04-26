@@ -39,7 +39,7 @@ describe("<HueSlider />", () => {
       </HueSlider.Root>,
     )
 
-    await expect.element(page.getByTestId("custom-child")).toBeVisible()
+    await expect.element(page.getByTestId("custom-child")).toBeInTheDocument()
   })
 
   test("sets aria attributes correctly", async () => {

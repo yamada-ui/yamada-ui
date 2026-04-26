@@ -385,7 +385,7 @@ describe("<Calendar />", () => {
 
     const day5 = screen
       .getByRole("grid")
-      .querySelector('td[data-value="2024-06-05"]')!
+      .querySelector<HTMLTableCellElement>('td[data-value="2024-06-05"]')!
     await user.click(day5)
 
     expect(onChange).toHaveBeenCalledWith({
@@ -457,7 +457,7 @@ describe("<Calendar />", () => {
       .getByRole("grid")
       .querySelector('td[data-value="2024-06-05"]')!
     expect(day5).toHaveAttribute("data-disabled")
-    day5.click()
+    if (day5 instanceof HTMLElement) day5.click()
 
     expect(onChange).not.toHaveBeenCalled()
   })
@@ -473,7 +473,7 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const day10 = screen.getByText("10").closest("td")!
+    const day10 = screen.getByText("10").closest<HTMLTableCellElement>("td")!
     expect(day10).toHaveAttribute("data-disabled")
     day10.click()
 
@@ -491,7 +491,7 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const day20 = screen.getByText("20").closest("td")!
+    const day20 = screen.getByText("20").closest<HTMLTableCellElement>("td")!
     expect(day20).toHaveAttribute("data-disabled")
     day20.click()
 

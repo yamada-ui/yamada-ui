@@ -143,7 +143,7 @@ describe("<Picture />", () => {
     expect(sources[2]?.getAttribute("media")).toContain("(max-width: 1280px)")
   })
 
-  test("should sorting sources with custom direction", async () => {
+  test("should sort sources with custom direction", async () => {
     const config = extendConfig({ breakpoint: { direction: "up" } })
     const { container } = await render(
       <Picture

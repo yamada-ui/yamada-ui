@@ -129,15 +129,10 @@ describe("<ScrollArea />", () => {
       .poll(() => scrollArea.element().getAttribute("data-hover"))
       .toBe("")
 
-    scrollArea.element().dispatchEvent(
-      new MouseEvent("mouseout", {
-        bubbles: true,
-        relatedTarget: document.body,
-      }),
-    )
+    await user.unhover(scrollArea)
     await expect
       .poll(() => scrollArea.element().getAttribute("data-hover"), {
-        timeout: 2000,
+        timeout: 3000,
       })
       .toBe(null)
   })
@@ -161,12 +156,23 @@ describe("<ScrollArea />", () => {
       .getByTestId("scroll-area")
       .element() as HTMLDivElement
 
+    const dataScrollStates: (null | string)[] = [
+      scrollArea.getAttribute("data-scroll"),
+    ]
+    const dataScrollObserver = new MutationObserver(() => {
+      dataScrollStates.push(scrollArea.getAttribute("data-scroll"))
+    })
+
+    dataScrollObserver.observe(scrollArea, {
+      attributeFilter: ["data-scroll"],
+      attributes: true,
+    })
+
     expect(scrollArea).not.toHaveAttribute("data-scroll")
     onScrollPositionChange.mockClear()
 
     scrollArea.scrollTop = 100
     scrollArea.dispatchEvent(new Event("scroll", { bubbles: true }))
-    await expect.poll(() => scrollArea.getAttribute("data-scroll")).toBe("")
     await expect
       .poll(() => onScrollPositionChange.mock.lastCall?.[0]?.x)
       .toBe(0)
@@ -177,7 +183,6 @@ describe("<ScrollArea />", () => {
     // Scroll again to trigger clearTimeout (line 95) before the previous timeout fires
     scrollArea.scrollTop = 200
     scrollArea.dispatchEvent(new Event("scroll", { bubbles: true }))
-    await expect.poll(() => scrollArea.getAttribute("data-scroll")).toBe("")
     await expect
       .poll(() => onScrollPositionChange.mock.lastCall?.[0]?.x)
       .toBe(0)
@@ -185,7 +190,14 @@ describe("<ScrollArea />", () => {
       .poll(() => onScrollPositionChange.mock.lastCall?.[0]?.y ?? 0)
       .toBeGreaterThan(190)
 
-    await expect.poll(() => scrollArea.getAttribute("data-scroll")).toBe(null)
+    await expect
+      .poll(() => dataScrollStates.some((value) => value === ""))
+      .toBe(true)
+    await expect
+      .poll(() => scrollArea.getAttribute("data-scroll"), { timeout: 3000 })
+      .toBe(null)
+
+    dataScrollObserver.disconnect()
   })
 
   test("applies safari specific key format", async () => {

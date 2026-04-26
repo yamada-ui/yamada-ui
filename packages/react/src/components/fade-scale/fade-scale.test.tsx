@@ -40,19 +40,14 @@ describe("<FadeScale />", () => {
 
     const button = page.getByRole("button", { name: /button/i })
     const fadeScale = page.getByText("FadeScale")
-    const getOpacity = () => getComputedStyle(fadeScale.element()).opacity
 
-    expect(getOpacity()).toBe("0")
-
-    await user.click(button)
-    await vi.waitFor(() => {
-      expect(getOpacity()).toBe("1")
-    })
+    await expect.element(fadeScale).toHaveStyle({ opacity: "0" })
 
     await user.click(button)
-    await vi.waitFor(() => {
-      expect(getOpacity()).toBe("0")
-    })
+    await expect.element(fadeScale).toHaveStyle({ opacity: "1" })
+
+    await user.click(button)
+    await expect.element(fadeScale).toHaveStyle({ opacity: "0" })
   })
 
   test("applies reverse={false} exit correctly", async () => {
@@ -73,19 +68,14 @@ describe("<FadeScale />", () => {
 
     const button = page.getByRole("button", { name: /button/i })
     const fadeScale = page.getByText("FadeScale")
-    const getOpacity = () => getComputedStyle(fadeScale.element()).opacity
 
-    expect(getOpacity()).toBe("0")
-
-    await user.click(button)
-    await vi.waitFor(() => {
-      expect(getOpacity()).toBe("1")
-    })
+    await expect.element(fadeScale).toHaveStyle({ opacity: "0" })
 
     await user.click(button)
-    await vi.waitFor(() => {
-      expect(getOpacity()).toBe("0")
-    })
+    await expect.element(fadeScale).toHaveStyle({ opacity: "1" })
+
+    await user.click(button)
+    await expect.element(fadeScale).toHaveStyle({ opacity: "0" })
   })
 
   test("unmountOnExit works correctly", async () => {

@@ -2,14 +2,7 @@ import { Accordion, Heading, VStack } from "@yamada-ui/react"
 
 export function QAndA() {
   return (
-    <VStack
-      as="section"
-      layerStyle="card"
-      bg="bg.panel"
-      gap="md"
-      mb="{space}"
-      p="{space}"
-    >
+    <VStack as="section" layerStyle="card" bg="bg.panel" gap="md" p="{space}">
       <Heading as="h2" size="xl">
         Q&A
       </Heading>

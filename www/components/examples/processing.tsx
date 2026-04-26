@@ -15,7 +15,6 @@ export function Processing() {
       alignItems="center"
       bg="bg.panel"
       gap="md"
-      mb="{space}"
       p="{space}"
     >
       <Center py="{space}">

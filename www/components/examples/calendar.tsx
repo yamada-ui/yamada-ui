@@ -2,14 +2,7 @@ import { Center, Calendar as OriginalCalendar } from "@yamada-ui/react"
 
 export function Calendar() {
   return (
-    <Center
-      as="section"
-      layerStyle="card"
-      bg="bg.panel"
-      gap="md"
-      mb="{space}"
-      p="{space}"
-    >
+    <Center as="section" layerStyle="card" bg="bg.panel" gap="md" p="{space}">
       <OriginalCalendar.Root
         colorScheme="primary"
         size="lg"

@@ -17,7 +17,6 @@ export function Bookmark() {
       alignItems="center"
       bg="bg.panel"
       gap="md"
-      mb="{space}"
       p="{space}"
     >
       <HStack w="full">

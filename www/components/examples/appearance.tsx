@@ -23,7 +23,6 @@ export function Appearance() {
       layerStyle="card"
       bg="bg.panel"
       gap="md"
-      mb="{space}"
       p="{space}"
       separator={<Separator />}
     >

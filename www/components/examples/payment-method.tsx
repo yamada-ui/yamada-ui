@@ -14,13 +14,7 @@ import {
 
 export function PaymentMethod() {
   return (
-    <VStack
-      as="section"
-      layerStyle="card"
-      bg="bg.panel"
-      mb="{space}"
-      p="{space}"
-    >
+    <VStack as="section" layerStyle="card" bg="bg.panel" p="{space}">
       <VStack gap="xs">
         <Heading as="h2" size="xl">
           Payment Method

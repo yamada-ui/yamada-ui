@@ -18,7 +18,6 @@ export function CreateAccount() {
       alignItems="stretch"
       bg="bg.panel"
       gap="md"
-      mb="{space}"
       p="{space}"
     >
       <VStack gap="xs">

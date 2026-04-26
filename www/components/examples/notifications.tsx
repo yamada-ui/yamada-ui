@@ -2,14 +2,7 @@ import { Heading, RadioCardGroup, Text, VStack } from "@yamada-ui/react"
 
 export function Notifications() {
   return (
-    <VStack
-      as="section"
-      layerStyle="card"
-      bg="bg.panel"
-      gap="md"
-      mb="{space}"
-      p="{space}"
-    >
+    <VStack as="section" layerStyle="card" bg="bg.panel" gap="md" p="{space}">
       <VStack gap="xs">
         <Heading as="h2" size="xl">
           Notifications

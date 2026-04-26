@@ -2,14 +2,7 @@ import { Avatar, Button, Heading, HStack, Text, VStack } from "@yamada-ui/react"
 
 export function SocialMedia() {
   return (
-    <VStack
-      as="section"
-      layerStyle="card"
-      bg="bg.panel"
-      gap="md"
-      mb="{space}"
-      p="{space}"
-    >
+    <VStack as="section" layerStyle="card" bg="bg.panel" gap="md" p="{space}">
       <HStack>
         <HStack flex="1" gap="sm">
           <Avatar src="https://avatars.githubusercontent.com/u/84060430?v=4" />

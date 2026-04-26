@@ -1,6 +1,6 @@
 import type { ResizableRootControl } from "./"
-import { a11y, page, render } from "#test/browser"
 import { useRef } from "react"
+import { a11y, page, render } from "#test/browser"
 import { GripVerticalIcon } from "../icon"
 import { Resizable } from "./"
 
@@ -36,9 +36,7 @@ describe("<Resizable />", () => {
       .element(page.getByTestId("root"))
       .toHaveClass("ui-resizable__root")
     await expect
-      .element(
-        page.getByTestId("item").element().firstElementChild as HTMLElement,
-      )
+      .element(page.getByTestId("item").getByText("One"))
       .toHaveClass("ui-resizable__item")
     await expect
       .element(page.getByTestId("trigger"))
@@ -62,8 +60,8 @@ describe("<Resizable />", () => {
     expect(page.getByTestId("trigger").element().tagName).toBe("DIV")
   })
 
-  test.todo("The default size of the left panel should be 30 and 70", () => {
-    render(
+  test.todo("The default size of the left panel should be 30 and 70", async () => {
+    await render(
       <Resizable.Root>
         <Resizable.Item
           id="left-item"

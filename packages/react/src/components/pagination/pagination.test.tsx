@@ -219,6 +219,7 @@ describe("<Pagination />", () => {
     await render(<Pagination.Root disabled total={10} />)
 
     const buttons = page.getByRole("button").elements()
+    expect(buttons.length).toBeGreaterThan(0)
     buttons.forEach((button) => {
       expect(button).toBeDisabled()
     })

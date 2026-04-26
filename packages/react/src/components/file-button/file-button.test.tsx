@@ -29,8 +29,10 @@ describe("<FileButton />", () => {
 
   test("renders HTML tag correctly", async () => {
     await render(<FileButton>Upload</FileButton>)
-    const fileButton = page.getByRole("button", { name: /Upload/i })
-    expect(fileButton.element().tagName).toBe("BUTTON")
+
+    await expect
+      .element(page.getByRole("button", { name: /Upload/i }))
+      .toHaveProperty("tagName", "BUTTON")
   })
 
   test("should render FileButton", async () => {
@@ -55,20 +57,34 @@ describe("<FileButton />", () => {
     })
   })
 
-  test("renders as non-actionable when readonly", async () => {
-    await render(<FileButton readOnly>Upload</FileButton>)
+  test("should not call onClick (when readonly)", async () => {
+    const onClickMock = vi.fn()
+
+    await render(
+      <FileButton readOnly onClick={onClickMock}>
+        Upload
+      </FileButton>,
+    )
 
     await expect
       .element(page.getByRole("button", { name: /Upload/i }))
       .toHaveAttribute("aria-disabled", "true")
+    expect(onClickMock).not.toHaveBeenCalled()
   })
 
-  test("renders as disabled when disabled", async () => {
-    await render(<FileButton disabled>Upload</FileButton>)
+  test("should not call onClick when disabled", async () => {
+    const onClickMock = vi.fn()
+
+    await render(
+      <FileButton disabled onClick={onClickMock}>
+        Upload
+      </FileButton>,
+    )
 
     await expect
       .element(page.getByRole("button", { name: /Upload/i }))
       .toBeDisabled()
+    expect(onClickMock).not.toHaveBeenCalled()
   })
 
   test("should handle file selection correctly", async () => {
@@ -95,9 +111,9 @@ describe("<FileButton />", () => {
     const { user } = await render(<TestComponent />)
 
     const fileCount = page.getByTestId("file-count")
-    const fileInput = document.querySelector(
-      'input[type="file"]',
-    ) as HTMLInputElement
+    const fileInput = document.querySelector('input[type="file"]')
+    if (!(fileInput instanceof HTMLInputElement))
+      throw new Error("file input not found")
 
     await expect.element(fileCount).toHaveTextContent("files: 0")
     expect(handleFileChangeMock).not.toHaveBeenCalled()
@@ -105,9 +121,7 @@ describe("<FileButton />", () => {
     const file1 = new File(["test1"], "test1.txt", { type: "text/plain" })
     await user.upload(fileInput, file1)
 
-    await vi.waitFor(() => {
-      expect(fileCount.element()).toHaveTextContent("files: 1")
-    })
+    await expect.element(fileCount).toHaveTextContent("files: 1")
     await vi.waitFor(() => {
       expect(handleFileChangeMock).toHaveBeenLastCalledWith([file1])
     })
@@ -115,16 +129,12 @@ describe("<FileButton />", () => {
     const file2 = new File(["test2"], "test2.txt", { type: "text/plain" })
     await user.upload(fileInput, [file1, file2])
 
-    await vi.waitFor(() => {
-      expect(fileCount.element()).toHaveTextContent("files: 2")
-    })
+    await expect.element(fileCount).toHaveTextContent("files: 2")
     expect(handleFileChangeMock).toHaveBeenLastCalledWith([file1, file2])
 
     await user.upload(fileInput, [])
 
-    await vi.waitFor(() => {
-      expect(fileCount.element()).toHaveTextContent("files: 0")
-    })
+    await expect.element(fileCount).toHaveTextContent("files: 0")
     expect(handleFileChangeMock).toHaveBeenLastCalledWith(undefined)
 
     expect(handleFileChangeMock).toHaveBeenCalledTimes(3)
@@ -159,25 +169,20 @@ describe("<FileButton />", () => {
 
     const { user } = await render(<TestComponent />)
 
-    const resetButton = page.getByRole("button", { name: /Reset/i }).element()
     const fileCount = page.getByTestId("file-count")
 
     await expect.element(fileCount).toHaveTextContent("files: 0")
 
     const file = new File(["test"], "test.txt", { type: "text/plain" })
-    const fileInput = document.querySelector(
-      'input[type="file"]',
-    ) as HTMLInputElement
+    const fileInput = document.querySelector('input[type="file"]')
+    if (!(fileInput instanceof HTMLInputElement))
+      throw new Error("file input not found")
     await user.upload(fileInput, file)
 
-    await vi.waitFor(() => {
-      expect(fileCount.element()).toHaveTextContent("files: 1")
-    })
+    await expect.element(fileCount).toHaveTextContent("files: 1")
 
-    await user.click(resetButton)
+    await user.click(page.getByRole("button", { name: /Reset/i }))
 
-    await vi.waitFor(() => {
-      expect(fileCount.element()).toHaveTextContent("files: 0")
-    })
+    await expect.element(fileCount).toHaveTextContent("files: 0")
   })
 })

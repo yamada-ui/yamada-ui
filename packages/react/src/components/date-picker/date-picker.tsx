@@ -184,7 +184,7 @@ export const DatePicker = withProvider(
             )()}
           >
             <Popover.Trigger>
-              <DatePickerField {...getFieldProps(varProps)}>
+              <DatePickerField {...getFieldProps({ ...varProps })}>
                 {fieldChildren}
               </DatePickerField>
             </Popover.Trigger>

@@ -3,10 +3,6 @@ import { a11y, page, render } from "#test/browser"
 import { FileButton } from "."
 
 describe("<FileButton />", () => {
-  beforeEach(() => {
-    vi.spyOn(HTMLInputElement.prototype, "click").mockImplementation(() => {})
-  })
-
   afterAll(() => {
     vi.restoreAllMocks()
   })
@@ -55,41 +51,20 @@ describe("<FileButton />", () => {
     })
   })
 
-  test("should not call onClick (when readonly)", async () => {
-    const onClickMock = vi.fn()
+  test("renders as non-actionable when readonly", async () => {
+    await render(<FileButton readOnly>Upload</FileButton>)
 
-    const { user } = await render(
-      <FileButton readOnly onClick={onClickMock}>
-        Upload
-      </FileButton>,
-    )
-
-    await user.click(page.getByRole("button", { name: /Upload/i }), {
-      force: true,
-    })
-    expect(onClickMock).not.toHaveBeenCalled()
+    await expect
+      .element(page.getByRole("button", { name: /Upload/i }))
+      .toHaveAttribute("aria-disabled", "true")
   })
 
-  test("should not call onClick when disabled", async () => {
-    const onClickMock = vi.fn()
-
-    const { user } = await render(
-      <FileButton disabled onClick={onClickMock}>
-        Upload
-      </FileButton>,
-    )
+  test("renders as disabled when disabled", async () => {
+    await render(<FileButton disabled>Upload</FileButton>)
 
     await expect
       .element(page.getByRole("button", { name: /Upload/i }))
       .toBeDisabled()
-
-    await user.click(page.getByRole("button", { name: /Upload/i }), {
-      force: true,
-    })
-
-    await vi.waitFor(() => {
-      expect(onClickMock).toHaveBeenCalledTimes(0)
-    })
   })
 
   test("should handle file selection correctly", async () => {

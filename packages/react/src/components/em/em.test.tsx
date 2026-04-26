@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Em } from "./em"
 
 describe("<Em />", () => {
@@ -10,13 +10,17 @@ describe("<Em />", () => {
     expect(Em.displayName).toBe("Em")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Em>Unleash the Power</Em>)
-    expect(screen.getByText("Unleash the Power")).toHaveClass("ui-em")
+  test("sets `className` correctly", async () => {
+    await render(<Em>Unleash the Power</Em>)
+
+    await expect
+      .element(page.getByText("Unleash the Power"))
+      .toHaveClass("ui-em")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Em>Unleash the Power</Em>)
-    expect(screen.getByText("Unleash the Power").tagName).toBe("EM")
+  test("renders HTML tag correctly", async () => {
+    await render(<Em>Unleash the Power</Em>)
+
+    expect(page.getByText("Unleash the Power").element().tagName).toBe("EM")
   })
 })

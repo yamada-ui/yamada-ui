@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { PropsTable } from "#storybook"
 import { useMemo } from "react"
+import { PropsTable } from "#storybook"
 import { RadarChart } from "."
 import { COLOR_SCHEMES, isString, toTitleCase } from "../../utils"
 

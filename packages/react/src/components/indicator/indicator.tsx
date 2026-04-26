@@ -5,7 +5,7 @@ import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { FloatProps } from "../float"
 import type { IndicatorStyle } from "./indicator.style"
 import { useMemo } from "react"
-import { createSlotComponent, styled } from "../../core"
+import { createSlotComponent, styled, varAttr } from "../../core"
 import { dataAttr, isNumber, isObject } from "../../utils"
 import { Float } from "../float"
 import { indicatorStyle } from "./indicator.style"
@@ -145,12 +145,10 @@ export const Indicator = withProvider(
     return {
       ...rest,
       "--animation-scale": scale,
-      "--duration": duration ? `durations.${duration}` : undefined,
+      "--duration": varAttr(duration, "durations"),
       "--iteration-count": iterationCount,
-      "--ping-color": color ? `colors.${color}` : undefined,
-      "--timing-function": timingFunction
-        ? `easings.${timingFunction}`
-        : undefined,
+      "--ping-color": varAttr(color, "colors"),
+      "--timing-function": varAttr(timingFunction, "easings"),
       ping: true,
     }
   } else {

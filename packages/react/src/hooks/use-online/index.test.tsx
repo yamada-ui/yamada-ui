@@ -1,6 +1,6 @@
 import type { FC } from "react"
-import { act, render } from "#test"
 import { renderToString } from "react-dom/server"
+import { act, render } from "#test"
 import { useOnline } from "./"
 
 const Component: FC<{ getServerSnapshot?: () => boolean }> = ({

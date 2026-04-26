@@ -129,14 +129,12 @@ describe("<ScrollArea />", () => {
       .poll(() => scrollArea.element().getAttribute("data-hover"))
       .toBe("")
 
-    scrollArea
-      .element()
-      .dispatchEvent(
-        new MouseEvent("mouseout", {
-          bubbles: true,
-          relatedTarget: document.body,
-        }),
-      )
+    scrollArea.element().dispatchEvent(
+      new MouseEvent("mouseout", {
+        bubbles: true,
+        relatedTarget: document.body,
+      }),
+    )
     await expect
       .poll(() => scrollArea.element().getAttribute("data-hover"), {
         timeout: 2000,
@@ -167,6 +165,7 @@ describe("<ScrollArea />", () => {
 
     scrollArea.scrollTop = 100
     scrollArea.dispatchEvent(new Event("scroll", { bubbles: true }))
+    await expect.poll(() => scrollArea.getAttribute("data-scroll")).toBe("")
     await expect.poll(() => onScrollPositionChange.mock.calls.length).toBe(1)
     await expect
       .poll(() => onScrollPositionChange.mock.lastCall?.[0]?.x)
@@ -178,6 +177,7 @@ describe("<ScrollArea />", () => {
     // Scroll again to trigger clearTimeout (line 95) before the previous timeout fires
     scrollArea.scrollTop = 200
     scrollArea.dispatchEvent(new Event("scroll", { bubbles: true }))
+    await expect.poll(() => scrollArea.getAttribute("data-scroll")).toBe("")
     await expect.poll(() => onScrollPositionChange.mock.calls.length).toBe(2)
     await expect
       .poll(() => onScrollPositionChange.mock.lastCall?.[0]?.x)
@@ -190,27 +190,68 @@ describe("<ScrollArea />", () => {
   })
 
   test("applies safari specific key format", async () => {
-    // Mock Safari environment
-    Object.defineProperty(window.navigator, "platform", {
-      value: "MacOS",
-      writable: true,
-    })
-    Object.defineProperty(window.navigator, "vendor", {
-      value: "Apple Computer, Inc.",
-      writable: true,
-    })
-
-    await render(
-      <ScrollArea type="never" data-testid="scroll-area">
-        <TestContent />
-      </ScrollArea>,
+    const originalPlatform = Object.getOwnPropertyDescriptor(
+      window.navigator,
+      "platform",
+    )
+    const originalVendor = Object.getOwnPropertyDescriptor(
+      window.navigator,
+      "vendor",
+    )
+    const originalUserAgentData = Object.getOwnPropertyDescriptor(
+      window.navigator,
+      "userAgentData",
     )
 
-    const scrollArea = page.getByTestId("scroll-area").element()
+    // Mock Safari environment
+    Object.defineProperty(window.navigator, "platform", {
+      configurable: true,
+      value: "MacIntel",
+    })
+    Object.defineProperty(window.navigator, "vendor", {
+      configurable: true,
+      value: "Apple Computer, Inc.",
+    })
+    Object.defineProperty(window.navigator, "userAgentData", {
+      configurable: true,
+      value: { platform: "macOS" },
+    })
 
-    expect(scrollArea).toHaveAttribute("data-key")
+    try {
+      await render(
+        <ScrollArea type="never" data-testid="scroll-area">
+          <TestContent />
+        </ScrollArea>,
+      )
 
-    // The key should end with the expected pattern
-    expect(scrollArea.getAttribute("data-key")).toMatch(/-false-false$/)
+      const scrollArea = page.getByTestId("scroll-area").element()
+
+      expect(scrollArea).toHaveAttribute("data-key")
+
+      // The key should end with the expected pattern
+      expect(scrollArea.getAttribute("data-key")).toMatch(/-false-false$/)
+    } finally {
+      if (originalPlatform) {
+        Object.defineProperty(window.navigator, "platform", originalPlatform)
+      } else {
+        Reflect.deleteProperty(window.navigator, "platform")
+      }
+
+      if (originalVendor) {
+        Object.defineProperty(window.navigator, "vendor", originalVendor)
+      } else {
+        Reflect.deleteProperty(window.navigator, "vendor")
+      }
+
+      if (originalUserAgentData) {
+        Object.defineProperty(
+          window.navigator,
+          "userAgentData",
+          originalUserAgentData,
+        )
+      } else {
+        Reflect.deleteProperty(window.navigator, "userAgentData")
+      }
+    }
   })
 })

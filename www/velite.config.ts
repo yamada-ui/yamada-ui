@@ -1,4 +1,4 @@
-import { format } from "@yamada-ui/workspace/prettier"
+import { format } from "@yamada-ui/workspace/oxfmt"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import remarkDirective from "remark-directive"
 import remarkGfm from "remark-gfm"

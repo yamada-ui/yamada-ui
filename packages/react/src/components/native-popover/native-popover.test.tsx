@@ -1,5 +1,4 @@
-import { a11y, render } from "#test/browser"
-import { fireEvent, screen } from "@testing-library/react"
+import { a11y, page, render } from "#test/browser"
 import { NativePopover } from "."
 import { Button } from "../button"
 
@@ -43,46 +42,50 @@ describe("<NativePopover />", () => {
   test("sets `className` correctly", async () => {
     await render(<Component />)
 
-    expect(screen.getByTestId("trigger")).toHaveClass(
-      "ui-native-popover__trigger",
-    )
-    expect(screen.getByTestId("content")).toHaveClass(
-      "ui-native-popover__content",
-    )
-    expect(screen.getByTestId("header")).toHaveClass(
-      "ui-native-popover__header",
-    )
-    expect(screen.getByTestId("body")).toHaveClass("ui-native-popover__body")
-    expect(screen.getByTestId("footer")).toHaveClass(
-      "ui-native-popover__footer",
-    )
+    await expect
+      .element(page.getByTestId("trigger"))
+      .toHaveClass("ui-native-popover__trigger")
+    await expect
+      .element(page.getByTestId("content"))
+      .toHaveClass("ui-native-popover__content")
+    await expect
+      .element(page.getByTestId("header"))
+      .toHaveClass("ui-native-popover__header")
+    await expect
+      .element(page.getByTestId("body"))
+      .toHaveClass("ui-native-popover__body")
+    await expect
+      .element(page.getByTestId("footer"))
+      .toHaveClass("ui-native-popover__footer")
   })
 
   test("should render popover with proper ARIA attributes", async () => {
     await render(<Component />)
 
-    const trigger = screen.getByTestId("trigger")
-    const content = screen.getByTestId("content")
+    const trigger = page.getByTestId("trigger")
+    const content = page.getByTestId("content")
 
-    expect(trigger).toHaveAttribute("aria-haspopup", "dialog")
-    expect(trigger).toHaveAttribute("aria-controls")
-    expect(trigger).toHaveAttribute("popoverTarget")
-    expect(trigger).toHaveAttribute("popoverTargetAction", "toggle")
-    expect(trigger).toHaveAttribute("role", "button")
-    expect(trigger).toHaveAttribute("type", "button")
+    await expect.element(trigger).toHaveAttribute("aria-haspopup", "dialog")
+    await expect.element(trigger).toHaveAttribute("aria-controls")
+    await expect.element(trigger).toHaveAttribute("popoverTarget")
+    await expect
+      .element(trigger)
+      .toHaveAttribute("popoverTargetAction", "toggle")
+    await expect.element(trigger).toHaveAttribute("role", "button")
+    await expect.element(trigger).toHaveAttribute("type", "button")
 
-    expect(content).toHaveAttribute("role", "dialog")
-    expect(content).toHaveAttribute("tabIndex", "-1")
-    expect(content).toHaveAttribute("data-popup", "")
-    expect(content).toHaveAttribute("popover", "auto")
+    await expect.element(content).toHaveAttribute("role", "dialog")
+    await expect.element(content).toHaveAttribute("tabIndex", "-1")
+    await expect.element(content).toHaveAttribute("data-popup", "")
+    await expect.element(content).toHaveAttribute("popover", "auto")
   })
 
   test("renders HTML tag correctly", async () => {
     await render(<Component />)
-    const header = screen.getByTestId("header")
-    const body = screen.getByTestId("body")
-    const footer = screen.getByTestId("footer")
-    const content = screen.getByTestId("content")
+    const header = page.getByTestId("header").element()
+    const body = page.getByTestId("body").element()
+    const footer = page.getByTestId("footer").element()
+    const content = page.getByTestId("content").element()
     const positioner = content.parentElement
 
     expect(header.tagName).toBe("DIV")
@@ -119,50 +122,46 @@ describe("<NativePopover />", () => {
   test("renders with anchor component", async () => {
     await render(<ComponentWithAnchor />)
 
-    const anchor = screen.getByTestId("anchor")
-    const trigger = screen.getByTestId("trigger")
-    const content = screen.getByTestId("content")
-
-    expect(anchor).toHaveClass("ui-native-popover__anchor")
-    expect(trigger).toHaveClass("ui-native-popover__trigger")
-    expect(content).toHaveClass("ui-native-popover__content")
+    await expect
+      .element(page.getByTestId("anchor"))
+      .toHaveClass("ui-native-popover__anchor")
+    await expect
+      .element(page.getByTestId("trigger"))
+      .toHaveClass("ui-native-popover__trigger")
+    await expect
+      .element(page.getByTestId("content"))
+      .toHaveClass("ui-native-popover__content")
   })
 
   test("should render with custom popover props", async () => {
     await render(<Component popover="manual" popoverTargetAction="show" />)
 
-    const trigger = screen.getByTestId("trigger")
-    const content = screen.getByTestId("content")
-
-    expect(trigger).toHaveAttribute("popoverTargetAction", "show")
-    expect(content).toHaveAttribute("popover", "manual")
+    await expect
+      .element(page.getByTestId("trigger"))
+      .toHaveAttribute("popoverTargetAction", "show")
+    await expect
+      .element(page.getByTestId("content"))
+      .toHaveAttribute("popover", "manual")
   })
 
   test("should render with different popover modes", async () => {
-    await render(<Component popover="hint" />)
+    const { rerender } = await render(<Component popover="hint" />)
 
-    expect(screen.getByTestId("content")).toHaveAttribute("popover", "hint")
+    const content = page.getByTestId("content")
+    await expect.element(content).toHaveAttribute("popover", "hint")
 
-    await render(<Component popover="" />)
-
-    const contents = screen.getAllByTestId("content")
-
-    expect(contents.at(-1)).toHaveAttribute("popover", "")
+    await rerender(<Component popover="" />)
+    await expect.element(content).toHaveAttribute("popover", "")
   })
 
   test("should render with different popover target actions", async () => {
-    await render(<Component popoverTargetAction="show" />)
+    const { rerender } = await render(<Component popoverTargetAction="show" />)
 
-    expect(screen.getByTestId("trigger")).toHaveAttribute(
-      "popoverTargetAction",
-      "show",
-    )
+    const trigger = page.getByTestId("trigger")
+    await expect.element(trigger).toHaveAttribute("popoverTargetAction", "show")
 
-    await render(<Component popoverTargetAction="hide" />)
-
-    const triggers = screen.getAllByTestId("trigger")
-
-    expect(triggers.at(-1)).toHaveAttribute("popoverTargetAction", "hide")
+    await rerender(<Component popoverTargetAction="hide" />)
+    await expect.element(trigger).toHaveAttribute("popoverTargetAction", "hide")
   })
 
   test("should render custom close button when trigger is provided", async () => {
@@ -180,19 +179,25 @@ describe("<NativePopover />", () => {
       </NativePopover.Root>,
     )
 
-    const closeTrigger = screen.getByTestId("close-trigger")
-    expect(closeTrigger).toHaveAttribute("popovertargetaction", "hide")
-    expect(closeTrigger).toHaveAttribute("popovertarget")
+    const closeTrigger = page.getByTestId("close-trigger")
+    await expect
+      .element(closeTrigger)
+      .toHaveAttribute("popovertargetaction", "hide")
+    await expect.element(closeTrigger).toHaveAttribute("popovertarget")
   })
 
   test("should prevent default and stop propagation when disabled", async () => {
     await render(<Component disabled />)
 
-    const trigger = screen.getByTestId("trigger")
+    const trigger = page.getByTestId("trigger")
 
-    expect(trigger).toHaveAttribute("aria-disabled", "true")
+    await expect.element(trigger).toHaveAttribute("aria-disabled", "true")
 
-    const defaultPrevented = !fireEvent.click(trigger)
+    const defaultPrevented = !trigger
+      .element()
+      .dispatchEvent(
+        new MouseEvent("click", { bubbles: true, cancelable: true }),
+      )
 
     expect(defaultPrevented).toBeTruthy()
   })

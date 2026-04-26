@@ -1412,7 +1412,7 @@ export interface SidebarItemContentProps
 
 export const SidebarItemContent = withContext<"ul", SidebarItemContentProps>(
   (props) => {
-    const { contentProps = {} } = useItemComponentContext()
+    const { contentProps } = useItemComponentContext()
 
     return (
       <Collapse

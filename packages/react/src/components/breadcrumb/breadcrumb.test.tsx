@@ -129,9 +129,9 @@ describe("<Breadcrumb />", () => {
       { href: "/", currentPage: true, label: "魔人ブウ編" },
     ]
 
-    const { container } = await render(<Breadcrumb.Root items={items} />)
+    await render(<Breadcrumb.Root items={items} />)
 
-    expect(container.querySelectorAll("li")).toHaveLength(7)
+    expect(page.getByRole("listitem")).toHaveLength(7)
   })
 
   test("is correctly truncated", async () => {
@@ -142,17 +142,19 @@ describe("<Breadcrumb />", () => {
       { href: "/4", currentPage: true, label: "魔人ブウ編" },
     ]
 
-    const { container } = await render(
+    await render(
       <Breadcrumb.Root endBoundaries={1} items={items} startBoundaries={1} />,
     )
 
-    const listItems = container.querySelectorAll("li")
+    const listItems = page.getByRole("listitem")
 
     expect(listItems).toHaveLength(5)
-    expect(listItems[0]?.querySelector("a")).toHaveAttribute("href", "/1")
-    expect(
-      listItems[listItems.length - 1]?.querySelector("span"),
-    ).toHaveAttribute("aria-current", "page")
+    await expect
+      .element(listItems.nth(0).getByRole("link"))
+      .toHaveAttribute("href", "/1")
+    await expect
+      .element(listItems.nth(4).getByText("魔人ブウ編"))
+      .toHaveAttribute("aria-current", "page")
   })
 
   test("if boundaries is 0 or undefined, 1 is correctly reflected.", async () => {
@@ -163,7 +165,7 @@ describe("<Breadcrumb />", () => {
       { href: "/4", currentPage: true, label: "魔人ブウ編" },
     ]
 
-    const { container: container1 } = await render(
+    await render(
       <Breadcrumb.Root
         data-testid="breadCrumb1"
         items={items}
@@ -171,7 +173,7 @@ describe("<Breadcrumb />", () => {
       />,
     )
 
-    const { container: container2 } = await render(
+    await render(
       <Breadcrumb.Root
         data-testid="breadCrumb2"
         endBoundaries={1}
@@ -179,7 +181,7 @@ describe("<Breadcrumb />", () => {
       />,
     )
 
-    const { container: container3 } = await render(
+    await render(
       <Breadcrumb.Root
         data-testid="breadCrumb3"
         endBoundaries={0}
@@ -188,21 +190,15 @@ describe("<Breadcrumb />", () => {
       />,
     )
 
-    expect(
-      container1
-        .querySelector('[data-testid="breadCrumb1"]')
-        ?.querySelectorAll("li"),
-    ).toHaveLength(3)
-    expect(
-      container2
-        .querySelector('[data-testid="breadCrumb2"]')
-        ?.querySelectorAll("li"),
-    ).toHaveLength(3)
-    expect(
-      container3
-        .querySelector('[data-testid="breadCrumb3"]')
-        ?.querySelectorAll("li"),
-    ).toHaveLength(7)
+    expect(page.getByTestId("breadCrumb1").getByRole("listitem")).toHaveLength(
+      3,
+    )
+    expect(page.getByTestId("breadCrumb2").getByRole("listitem")).toHaveLength(
+      3,
+    )
+    expect(page.getByTestId("breadCrumb3").getByRole("listitem")).toHaveLength(
+      7,
+    )
   })
 
   test("applies custom `aria-label` to the nav element", async () => {

@@ -1,5 +1,5 @@
-import { page, render, renderHook } from "#test/browser"
 import { useRef } from "react"
+import { page, render, renderHook } from "#test/browser"
 import { noop } from "../../utils"
 import { useInfiniteScroll } from "./use-infinite-scroll"
 

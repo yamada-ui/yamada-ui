@@ -1,6 +1,6 @@
 import type { InfiniteScrollAreaProps } from "."
-import { a11y, page, render } from "#test/browser"
 import { useRef, useState } from "react"
+import { a11y, page, render } from "#test/browser"
 import { InfiniteScrollArea } from "."
 import { noop } from "../../utils"
 

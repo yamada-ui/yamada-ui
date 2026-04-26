@@ -1,5 +1,5 @@
-import { a11y, page, render, renderHook } from "#test/browser"
 import { vi } from "vitest"
+import { a11y, page, render, renderHook } from "#test/browser"
 import { RadioGroup } from "."
 import { Radio } from "./radio"
 import { useRadioGroup } from "./use-radio-group"

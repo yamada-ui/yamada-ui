@@ -3,6 +3,10 @@ import { a11y, page, render } from "#test/browser"
 import { FileButton } from "."
 
 describe("<FileButton />", () => {
+  beforeEach(() => {
+    vi.spyOn(HTMLInputElement.prototype, "click").mockImplementation(() => {})
+  })
+
   afterAll(() => {
     vi.restoreAllMocks()
   })

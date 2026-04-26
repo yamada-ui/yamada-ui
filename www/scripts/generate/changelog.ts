@@ -1,7 +1,7 @@
 import type { Dict } from "@yamada-ui/utils"
 import { isUndefined } from "@yamada-ui/utils"
 import { octokit } from "@yamada-ui/workspace/octokit"
-import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
 import { Command } from "commander"
 import { createTranslator } from "next-intl"
 import { readFile } from "node:fs/promises"
@@ -166,7 +166,7 @@ function main() {
 
               const content = `${frontmatter}\n\n${lines.join("\n\n")}`
 
-              await writeFileWithFormat(filePath, content, { parser: "mdx" })
+              await writeFileWithFormat(filePath, content)
             }),
           )
         }),
@@ -213,7 +213,6 @@ function main() {
           await writeFileWithFormat(
             path.join(DOC_MAP_PATH, `doc-map.${lang}.json`),
             docMap,
-            { parser: "json" },
           )
         }),
       )
@@ -256,7 +255,7 @@ function main() {
 
           const content = `${frontmatter}\n\n${lines.join("\n\n")}`
 
-          await writeFileWithFormat(filePath, content, { parser: "mdx" })
+          await writeFileWithFormat(filePath, content)
         }),
       )
 

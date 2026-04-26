@@ -49,36 +49,38 @@ describe("<For />", () => {
   })
 
   test("For renders correctly with filter", async () => {
-    const { container } = await render(
+    await render(
       <For each={["One", "Two", "Three"]} filter={(item) => item !== "Two"}>
         {(item, index) => <p key={index}>{item}</p>}
       </For>,
     )
     await expect.element(page.getByText("One")).toBeInTheDocument()
     await expect.element(page.getByText("Three")).toBeInTheDocument()
-    expect(container.textContent).not.toContain("Two")
+    await expect.element(page.getByText("Two").query()).not.toBeInTheDocument()
   })
 
   test("For renders correctly with limit", async () => {
-    const { container } = await render(
+    await render(
       <For each={["One", "Two", "Three"]} limit={2}>
         {(item, index) => <div key={index}>{item}</div>}
       </For>,
     )
     await expect.element(page.getByText("One")).toBeInTheDocument()
     await expect.element(page.getByText("Two")).toBeInTheDocument()
-    expect(container.textContent).not.toContain("Three")
+    await expect
+      .element(page.getByText("Three").query())
+      .not.toBeInTheDocument()
   })
 
   test("For renders correctly with offset", async () => {
-    const { container } = await render(
+    await render(
       <For each={["One", "Two", "Three"]} offset={1}>
         {(item, index) => <div key={index}>{item}</div>}
       </For>,
     )
     await expect.element(page.getByText("Two")).toBeInTheDocument()
     await expect.element(page.getByText("Three")).toBeInTheDocument()
-    expect(container.textContent).not.toContain("One")
+    await expect.element(page.getByText("One").query()).not.toBeInTheDocument()
   })
 
   test("For renders correctly with reverse", async () => {
@@ -102,7 +104,7 @@ describe("<For />", () => {
     expect(indexes).toStrictEqual([0, 1, 2])
   })
 
-  test("For renders correctly with sortBy", async () => {
+  test("For renders correctly with sort", async () => {
     const { container } = await render(
       <For each={["One", "Two", "Three"]} sort={(a, b) => a.localeCompare(b)}>
         {(item, index) => (
@@ -128,12 +130,16 @@ describe("<For />", () => {
         reverse
         sort={(a, b) => a.localeCompare(b)}
       >
-        {(item, index) => <p key={index}>{item}</p>}
+        {(item, index) => (
+          <p key={index} data-testid="for-combined-item">
+            {item}
+          </p>
+        )}
       </For>,
     )
-    const items = Array.from(container.querySelectorAll("p")).map(
-      (el) => el.textContent,
-    )
+    const items = Array.from(
+      container.querySelectorAll('[data-testid="for-combined-item"]'),
+    ).map((el) => el.textContent)
     expect(items).toStrictEqual(["One", "Four"])
   })
 })

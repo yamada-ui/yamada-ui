@@ -1,6 +1,6 @@
-import { a11y, page, render } from "#test/browser"
 import { useState } from "react"
 import { vi } from "vitest"
+import { a11y, page, render } from "#test/browser"
 import { Collapse } from "./collapse"
 
 describe("<Collapse />", () => {

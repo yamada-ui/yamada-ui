@@ -1,6 +1,6 @@
-import { a11y, render, renderHook } from "#test/browser"
 import { act, fireEvent, screen } from "@testing-library/react"
 import { useState } from "react"
+import { a11y, render, renderHook } from "#test/browser"
 import { Reorder, useReorder } from "./"
 
 describe("<Reorder />", () => {

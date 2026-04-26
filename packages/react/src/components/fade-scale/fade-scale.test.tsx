@@ -1,6 +1,6 @@
-import { a11y, page, render } from "#test/browser"
 import { useState } from "react"
 import { vi } from "vitest"
+import { a11y, page, render } from "#test/browser"
 import { FadeScale } from "./fade-scale"
 
 describe("<FadeScale />", () => {
@@ -39,18 +39,18 @@ describe("<FadeScale />", () => {
     const { user } = await render(<TestComponent />)
 
     const button = page.getByRole("button", { name: /button/i })
-    const collapse = page.getByText("FadeScale")
-    const getOpacity = () => getComputedStyle(collapse.element()).opacity
-    expect(getOpacity()).toBe("0")
+    const fadeScale = page.getByText("FadeScale")
+
+    await expect.element(fadeScale).not.toBeVisible()
 
     await user.click(button)
-    await vi.waitFor(() => {
-      expect(getOpacity()).toBe("1")
+    await vi.waitFor(async () => {
+      await expect.element(fadeScale).toBeVisible()
     })
 
     await user.click(button)
-    await vi.waitFor(() => {
-      expect(getOpacity()).toBe("0")
+    await vi.waitFor(async () => {
+      await expect.element(fadeScale).not.toBeVisible()
     })
   })
 
@@ -72,17 +72,17 @@ describe("<FadeScale />", () => {
 
     const button = page.getByRole("button", { name: /button/i })
     const fadeScale = page.getByText("FadeScale")
-    const getOpacity = () => getComputedStyle(fadeScale.element()).opacity
-    expect(getOpacity()).toBe("0")
+
+    await expect.element(fadeScale).not.toBeVisible()
 
     await user.click(button)
-    await vi.waitFor(() => {
-      expect(getOpacity()).toBe("1")
+    await vi.waitFor(async () => {
+      await expect.element(fadeScale).toBeVisible()
     })
 
     await user.click(button)
-    await vi.waitFor(() => {
-      expect(getOpacity()).toBe("0")
+    await vi.waitFor(async () => {
+      await expect.element(fadeScale).not.toBeVisible()
     })
   })
 

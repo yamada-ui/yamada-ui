@@ -1,5 +1,5 @@
-import { page, render, renderHook } from "#test/browser"
 import { useRef, useState } from "react"
+import { page, render, renderHook } from "#test/browser"
 import { FocusLock } from "./focus-lock"
 
 describe("<FocusLock />", () => {

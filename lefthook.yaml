@@ -1,7 +1,7 @@
 pre-commit:
   piped: true
   jobs:
-    - name: eslint
+    - name: lint & typecheck
       group:
         parallel: true
         jobs:
@@ -9,89 +9,89 @@ pre-commit:
             root: packages/cli/
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
             run: |
-              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+              pnpm oxlint {staged_files} --type-check --max-warnings=0 --fix
             stage_fixed: true
 
           - name: react
             root: packages/react/
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
             run: |
-              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+              pnpm oxlint {staged_files} --type-check --max-warnings=0 --fix
             stage_fixed: true
 
           - name: utils
             root: packages/utils/
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
             run: |
-              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+              pnpm oxlint {staged_files} --type-check --max-warnings=0 --fix
             stage_fixed: true
 
           - name: workspace
             root: packages/workspace/
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
             run: |
-              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+              pnpm oxlint {staged_files} --type-check --max-warnings=0 --fix
             stage_fixed: true
 
           - name: forge
             root: packages/forge/
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
             run: |
-              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+              pnpm oxlint {staged_files} --type-check --max-warnings=0 --fix
             stage_fixed: true
 
           - name: www
             root: www/
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
             run: |
-              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+              pnpm oxlint {staged_files} --type-check --max-warnings=0 --fix
             stage_fixed: true
 
           - name: next-app
             root: playgrounds/next/app/
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
             run: |
-              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+              pnpm oxlint {staged_files} --type-check --max-warnings=0 --fix
             stage_fixed: true
 
           - name: next-pages
             root: playgrounds/next/pages/
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
             run: |
-              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+              pnpm oxlint {staged_files} --type-check --max-warnings=0 --fix
             stage_fixed: true
 
           - name: react-router-framework
             root: playgrounds/react-router/framework/
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
             run: |
-              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+              pnpm oxlint {staged_files} --type-check --max-warnings=0 --fix
             stage_fixed: true
 
           - name: vite
             root: playgrounds/vite/
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
             run: |
-              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+              pnpm oxlint {staged_files} --type-check --max-warnings=0 --fix
             stage_fixed: true
 
           - name: tanstack-router
             root: playgrounds/tanstack/router/
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
             run: |
-              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+              pnpm oxlint {staged_files} --type-check --max-warnings=0 --fix
             stage_fixed: true
 
           - name: tanstack-start
             root: playgrounds/tanstack/start/
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
             run: |
-              pnpm eslint {staged_files} --max-warnings=0 --fix --cache
+              pnpm oxlint {staged_files} --type-check --max-warnings=0 --fix
             stage_fixed: true
 
-    - name: prettier
+    - name: format
       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css}"
-      run: pnpm prettier {staged_files} --write
+      run: pnpm exec oxfmt {staged_files} --write
       stage_fixed: true
 
 commit-msg:

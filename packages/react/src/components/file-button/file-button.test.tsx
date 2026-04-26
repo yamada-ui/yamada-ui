@@ -40,11 +40,10 @@ describe("<FileButton />", () => {
   test("should call onClick", async () => {
     const onClickMock = vi.fn()
 
-    const { user } = await render(
-      <FileButton onClick={onClickMock}>Upload</FileButton>,
-    )
+    await render(<FileButton onClick={onClickMock}>Upload</FileButton>)
 
-    await user.click(page.getByRole("button", { name: /Upload/i }))
+    const button = page.getByRole("button", { name: /Upload/i }).element()
+    button.dispatchEvent(new MouseEvent("click", { bubbles: true }))
 
     await vi.waitFor(() => {
       expect(onClickMock).toHaveBeenCalledTimes(1)

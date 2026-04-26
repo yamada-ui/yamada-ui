@@ -191,7 +191,7 @@ describe("<Modal />", () => {
       <TestComponent open onClose={onClose} onEsc={onEsc} />,
     )
     const content = page.getByTestId("content").element()
-    const closeButton = page.getByRole("button", { name: "Close modal" })
+    const closeButton = page.getByTestId("closeButton")
     await vi.waitFor(() => {
       expect(content.contains(document.activeElement)).toBeTruthy()
     })
@@ -211,7 +211,7 @@ describe("<Modal />", () => {
       <TestComponent closeOnEsc={false} open onClose={onClose} onEsc={onEsc} />,
     )
     const content = page.getByTestId("content").element()
-    const closeButton = page.getByRole("button", { name: "Close modal" })
+    const closeButton = page.getByTestId("closeButton")
     await vi.waitFor(() => {
       expect(content.contains(document.activeElement)).toBeTruthy()
     })
@@ -228,7 +228,7 @@ describe("<Modal />", () => {
     const onEsc = vi.fn()
     const { user } = await render(<TestComponent open onEsc={onEsc} />)
     const content = page.getByTestId("content").element()
-    const closeButton = page.getByRole("button", { name: "Close modal" })
+    const closeButton = page.getByTestId("closeButton")
     await vi.waitFor(() => {
       expect(content.contains(document.activeElement)).toBeTruthy()
     })

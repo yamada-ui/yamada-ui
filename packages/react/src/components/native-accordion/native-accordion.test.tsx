@@ -123,6 +123,22 @@ describe("<NativeAccordion />", () => {
     expect(item2).toHaveAttribute("open")
   })
 
+  test("keeps only one item open by default", async () => {
+    const { user } = await render(<NativeAccordion.Root items={items} />)
+
+    const button1 = page.getByText(/Accordion Label 1/i).element()
+    const button2 = page.getByText(/Accordion Label 2/i).element()
+    const item1 = button1.closest("details")
+    const item2 = button2.closest("details")
+
+    await user.click(button1)
+    expect(item1).toHaveAttribute("open")
+
+    await user.click(button2)
+    expect(item1).not.toHaveAttribute("open")
+    expect(item2).toHaveAttribute("open")
+  })
+
   test("assigns shared `name` when `multiple` is false", async () => {
     const { container } = await render(
       <NativeAccordion.Root items={items} multiple={false} />,

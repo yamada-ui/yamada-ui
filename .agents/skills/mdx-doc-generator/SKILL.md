@@ -165,10 +165,65 @@ title: Component Name
 description: "Brief description of what the component does"
 tags: ["relevant-tag"]
 storybook: components-componentname--basic
-source: components/component-name
-style: components/component-name/component-name.style.ts
+source: components/actual-directory
+style: components/actual-directory/component-name.style.ts
 ---
-````
+```
+
+**CRITICAL - Resolving source and style paths:**
+
+The `source` and `style` fields MUST be resolved from the **actual implementation path** or **existing frontmatter**, NOT constructed from the component name or docs slug.
+
+**Resolution Process:**
+
+**Step 1: Check for existing frontmatter**
+- If the `.mdx` file already exists, READ its frontmatter first
+- Preserve existing `source` and `style` values if they exist
+- Only update if they are incorrect or missing
+
+**Step 2: Resolve from implementation path (if creating new or updating incorrect values)**
+1. Find the actual implementation file: `packages/react/src/components/*/component-name.tsx`
+   - Use Glob or Grep to search for the file
+   - Example: Search for `pie-chart.tsx` → found in `packages/react/src/components/chart/pie-chart.tsx`
+2. Extract the directory name where the component lives
+   - For `packages/react/src/components/chart/pie-chart.tsx` → directory is `chart`
+   - For `packages/react/src/components/button/icon-button.tsx` → directory is `button`
+3. Build the paths:
+   - `source`: `components/{actual-directory-name}`
+   - `style`: `components/{actual-directory-name}/{component-file-name}.style.ts`
+
+**Examples:**
+
+```
+pie-chart.mdx
+├── Docs slug: pie-chart
+├── ❌ WRONG: source: components/pie-chart (constructed from slug)
+├── ✅ CORRECT: 
+│   ├── Implementation: packages/react/src/components/chart/pie-chart.tsx
+│   ├── Actual directory: chart
+│   └── Frontmatter:
+│       source: components/chart
+│       style: components/chart/pie-chart.style.ts
+
+icon-button.mdx
+├── Docs slug: icon-button
+├── ❌ WRONG: source: components/icon-button (constructed from slug)
+├── ✅ CORRECT:
+│   ├── Implementation: packages/react/src/components/button/icon-button.tsx
+│   ├── Actual directory: button
+│   └── Frontmatter:
+│       source: components/button
+│       style: components/button/icon-button.style.ts
+
+button.mdx (Button + ButtonGroup)
+├── Docs slug: button
+├── ✅ CORRECT:
+│   ├── Implementation: packages/react/src/components/button/button.tsx
+│   ├── Actual directory: button
+│   └── Frontmatter:
+│       source: components/button
+│       style: components/button/button.style.ts
+```
 
 ## Cross-Reference Requirements
 
@@ -273,7 +328,32 @@ Use the `<Wrap>` pattern for displaying multiple variants:
 />
 ```
 
-Use `omit` to exclude internal component types that should not appear in the PropsTable.
+**For Split-Page Docs from Shared Folders:**
+
+When documenting a single component export from a shared folder (e.g., individual chart types from the chart/ folder), use `pick` to select only the props relevant to that specific page:
+
+```tsx
+<PropsTable
+  name="chart"
+  pick={[
+    "PieChart",
+    "PieChart.Root",
+    "PieChart.Pie",
+    "PieChart.Label",
+    "PieChart.LabelList",
+    "PieChart.Legend",
+    "PieChart.Tooltip",
+  ]}
+/>
+```
+
+**Choosing between `omit` and `pick`:**
+
+- **`omit`**: Use when documenting multiple components together from a single source. Removes internal or unnecessary types from a broader props export.
+  - Example: Documenting Button + ButtonGroup together, omitting internal component types
+- **`pick`**: Use when documenting a single export from shared props data, especially for split-page docs under shared folders.
+  - Example: PieChart page selecting only PieChart-related props from the shared chart props data
+  - **Default choice for split-page docs from shared folders**: prefer `pick`
 
 ### 5. Accessibility Section (CRITICAL)
 

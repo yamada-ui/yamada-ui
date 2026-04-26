@@ -14,6 +14,8 @@ Yamada UI is a React UI component library built with CSS-in-JS (Emotion).
 
 When performing one of the actions below, read the linked rule first.
 
+- Creating branches:
+  - [Branch Rules](.agents/rules/branch.md)
 - Creating commits:
   - [Commit Rules](.agents/rules/commit.md)
   - [Pre-commit Hooks](.agents/references/pre-commit-hooks.md)
@@ -33,6 +35,10 @@ When editing or reviewing files that match a pattern below, read the linked rule
 - [Changesets](.agents/rules/changesets.md):
   - `packages/{cli,react,utils}/src/**/*.{ts,tsx}`
   - `.changeset/*.md`
+- [Browser Testing](.agents/rules/browser-testing.md) (applies only when the test imports from `#test/browser`; skip the rule for `#test` jsdom files):
+  - `packages/react/src/**/*.test.{ts,tsx}`
+- [Unit Testing](.agents/rules/unit-testing.md):
+  - `packages/{cli,utils}/**/*.test.{ts,tsx}`
 
 ## Codebase structure
 

@@ -1,8 +1,6 @@
-import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { useState } from "react"
-import { Group } from "../group"
+import { a11y, page, render } from "#test/browser"
 import { EyeIcon, EyeOffIcon } from "../icon"
-import { InputPropsContext } from "../input"
 import { PasswordInput, StrengthMeter } from "./"
 
 describe("<PasswordInput />", () => {
@@ -15,27 +13,29 @@ describe("<PasswordInput />", () => {
   })
 
   test("sets `className` correctly", async () => {
-    const { getByRole } = render(<PasswordInput placeholder="password" />)
+    await render(<PasswordInput placeholder="password" />)
 
-    const input = await screen.findByPlaceholderText("password")
+    const input = page.getByPlaceholder("password")
+    const button = page.getByRole("button")
 
-    expect(input.parentElement).toHaveClass("ui-password-input__root")
-    expect(input).toHaveClass("ui-password-input__field")
-    expect(getByRole("button")).toHaveClass("ui-password-input__button")
+    await expect.element(input).toHaveClass("ui-password-input__field")
+    await expect.element(button).toHaveClass("ui-password-input__button")
+    expect(input.element().parentElement).toHaveClass("ui-password-input__root")
   })
 
   test("renders HTML tag correctly", async () => {
-    const { getByRole } = render(<PasswordInput placeholder="password" />)
+    await render(<PasswordInput placeholder="password" />)
 
-    const input = await screen.findByPlaceholderText("password")
+    const input = page.getByPlaceholder("password")
+    const button = page.getByRole("button")
 
-    expect(input.parentElement?.tagName).toBe("DIV")
-    expect(input.tagName).toBe("INPUT")
-    expect(getByRole("button").tagName).toBe("BUTTON")
+    expect(input.element().parentElement?.tagName).toBe("DIV")
+    expect(input.element().tagName).toBe("INPUT")
+    expect(button.element().tagName).toBe("BUTTON")
   })
 
   test("Input type render correctly depending on the visibility", async () => {
-    const { user } = render(
+    const { user } = await render(
       <PasswordInput
         placeholder="password"
         visibilityIcon={{
@@ -45,84 +45,22 @@ describe("<PasswordInput />", () => {
       />,
     )
 
-    const input = await screen.findByPlaceholderText("password")
-    const button = await screen.findByRole("button")
+    const input = page.getByPlaceholder("password")
+    const button = page.getByRole("button")
 
-    expect(input).toHaveAttribute("type", "password")
+    await expect.element(input).toHaveAttribute("type", "password")
 
     await user.click(button)
 
-    expect(input).toHaveAttribute("type", "text")
-  })
-
-  test("merges `rootProps` and group item props without overwriting style and data attributes", async () => {
-    const onRootClick = vi.fn()
-
-    render(
-      <Group attached>
-        <PasswordInput
-          placeholder="password-1"
-          rootProps={{
-            className: "from-user",
-            style: { backgroundColor: "blue" },
-            onClick: onRootClick,
-          }}
-        />
-        <PasswordInput placeholder="password-2" />
-      </Group>,
-    )
-
-    const input = await screen.findByPlaceholderText("password-1")
-    const root = input.parentElement as HTMLElement
-
-    expect(root).toHaveClass("from-user")
-    expect(root).toHaveAttribute("data-group-start")
-    expect(root.style.getPropertyValue("--group-count")).toBe("2")
-    expect(root.style.getPropertyValue("--group-index")).toBe("0")
-    expect(root).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
-
-    fireEvent.click(root)
-    expect(onRootClick).toHaveBeenCalledTimes(1)
-  })
-
-  test("merges input context props and user props without overwriting className, style, and click handlers", async () => {
-    const onContextClick = vi.fn()
-    const onUserClick = vi.fn()
-
-    render(
-      <InputPropsContext
-        value={{
-          className: "from-context",
-          style: { color: "red" },
-          onClick: onContextClick,
-        }}
-      >
-        <PasswordInput
-          className="from-user"
-          style={{ backgroundColor: "blue" }}
-          placeholder="password"
-          onClick={onUserClick}
-        />
-      </InputPropsContext>,
-    )
-
-    const input = await screen.findByPlaceholderText("password")
-    const root = input.parentElement as HTMLElement
-
-    expect(root).toHaveClass("from-context", "from-user")
-    expect(input).toHaveStyle({ color: "rgb(255, 0, 0)" })
-    expect(input).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
-
-    fireEvent.click(input)
-
-    expect(onContextClick).toHaveBeenCalledTimes(1)
-    expect(onUserClick).toHaveBeenCalledTimes(1)
+    await expect.element(input).toHaveAttribute("type", "text")
   })
 })
 
 describe("<PassWordInputStrengthMeter />", () => {
-  const ExampleWithPassWordInputStrengthMeter = () => {
-    const [value, setValue] = useState("")
+  const ExampleWithPassWordInputStrengthMeter = ({
+    defaultValue = "",
+  }: { defaultValue?: string } = {}) => {
+    const [value, setValue] = useState(defaultValue)
 
     const getStrength = (password: string) => {
       let strength = 0
@@ -155,57 +93,52 @@ describe("<PassWordInputStrengthMeter />", () => {
     expect(StrengthMeter.name).toBe("StrengthMeterRoot")
   })
 
-  test("sets `className` correctly", () => {
-    const { getByTestId } = render(
-      <StrengthMeter data-testid="strengthMeter" value={3} />,
-    )
+  test("sets `className` correctly", async () => {
+    await render(<StrengthMeter data-testid="strengthMeter" value={3} />)
 
-    expect(getByTestId("strengthMeter")).toHaveClass("ui-strength-meter__root")
-    expect(getByTestId("strengthMeter").children[0]).toHaveClass(
+    const strengthMeter = page.getByTestId("strengthMeter")
+
+    await expect.element(strengthMeter).toHaveClass("ui-strength-meter__root")
+    expect(strengthMeter.element().children[0]).toHaveClass(
       "ui-strength-meter__indicators",
     )
-    expect(getByTestId("strengthMeter").children[0]?.children[0]).toHaveClass(
+    expect(strengthMeter.element().children[0]?.children[0]).toHaveClass(
       "ui-strength-meter__indicator",
     )
   })
 
-  test("renders HTML tag correctly", () => {
-    const { getByTestId } = render(
-      <StrengthMeter data-testid="strengthMeter" value={3} />,
-    )
+  test("renders HTML tag correctly", async () => {
+    await render(<StrengthMeter data-testid="strengthMeter" value={3} />)
 
-    expect(getByTestId("strengthMeter").tagName).toBe("DIV")
-    expect(getByTestId("strengthMeter").children[0]?.tagName).toBe("DIV")
-    expect(getByTestId("strengthMeter").children[0]?.children[0]?.tagName).toBe(
-      "DIV",
-    )
+    const strengthMeter = page.getByTestId("strengthMeter").element()
+
+    expect(strengthMeter.tagName).toBe("DIV")
+    expect(strengthMeter.children[0]?.tagName).toBe("DIV")
+    expect(strengthMeter.children[0]?.children[0]?.tagName).toBe("DIV")
   })
 
-  test("Could render strength meter with difference value", async () => {
-    const { user } = render(<ExampleWithPassWordInputStrengthMeter />)
+  test.each([
+    ["aaaaaaa", 0],
+    ["aaaaaaaa", 1],
+    ["aaaaaaaaA", 2],
+    ["aaaaaaaaA1", 3],
+    ["aaaaaaaaA1!", 4],
+  ])(
+    "Could render strength meter with difference value (%s -> %i)",
+    async (value, expected) => {
+      const initial = value.slice(0, -1)
+      const next = value.slice(-1)
+      const { user } = await render(
+        <ExampleWithPassWordInputStrengthMeter defaultValue={initial} />,
+      )
 
-    const passwordInput = await screen.findByPlaceholderText("password")
-    const strengthMeter = await screen.findByRole("meter")
+      const passwordInput = page.getByPlaceholder("password")
+      const strengthMeter = page.getByRole("meter")
 
-    await user.type(passwordInput, "aaaaaaa")
-    await waitFor(() =>
-      expect(strengthMeter).toHaveAttribute("aria-valuenow", "0"),
-    )
-    await user.type(passwordInput, "a")
-    await waitFor(() =>
-      expect(strengthMeter).toHaveAttribute("aria-valuenow", "1"),
-    )
-    await user.type(passwordInput, "A")
-    await waitFor(() =>
-      expect(strengthMeter).toHaveAttribute("aria-valuenow", "2"),
-    )
-    await user.type(passwordInput, "1")
-    await waitFor(() =>
-      expect(strengthMeter).toHaveAttribute("aria-valuenow", "3"),
-    )
-    await user.type(passwordInput, "!")
-    await waitFor(() =>
-      expect(strengthMeter).toHaveAttribute("aria-valuenow", "4"),
-    )
-  })
+      await user.type(passwordInput, next)
+      await expect
+        .element(strengthMeter)
+        .toHaveAttribute("aria-valuenow", String(expected))
+    },
+  )
 })

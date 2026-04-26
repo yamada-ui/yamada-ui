@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { PropsTable } from "#storybook"
 import { useMemo, useState } from "react"
+import { PropsTable } from "#storybook"
 import { MinusIcon, PlusIcon } from "../icon"
 import { Accordion } from "./"
 
@@ -98,7 +98,7 @@ export const Variant: Story = () => {
       {(_, row, key) => {
         const variantItems = items.map((item) => ({
           ...item,
-          button: `${item.button} (${row})`,
+          button: `${item.button as string} (${row})`,
         }))
 
         return <Accordion.Root key={key} variant={row} items={variantItems} />

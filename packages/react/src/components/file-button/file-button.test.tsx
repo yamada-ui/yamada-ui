@@ -3,6 +3,10 @@ import { a11y, page, render } from "#test/browser"
 import { FileButton } from "."
 
 describe("<FileButton />", () => {
+  beforeEach(() => {
+    vi.spyOn(HTMLInputElement.prototype, "click").mockImplementation(() => {})
+  })
+
   afterAll(() => {
     vi.restoreAllMocks()
   })
@@ -40,10 +44,11 @@ describe("<FileButton />", () => {
   test("should call onClick", async () => {
     const onClickMock = vi.fn()
 
-    await render(<FileButton onClick={onClickMock}>Upload</FileButton>)
+    const { user } = await render(
+      <FileButton onClick={onClickMock}>Upload</FileButton>,
+    )
 
-    const button = page.getByRole("button", { name: /Upload/i }).element()
-    button.dispatchEvent(new MouseEvent("click", { bubbles: true }))
+    await user.click(page.getByRole("button", { name: /Upload/i }))
 
     await vi.waitFor(() => {
       expect(onClickMock).toHaveBeenCalledTimes(1)
@@ -53,21 +58,22 @@ describe("<FileButton />", () => {
   test("should not call onClick (when readonly)", async () => {
     const onClickMock = vi.fn()
 
-    await render(
+    const { user } = await render(
       <FileButton readOnly onClick={onClickMock}>
         Upload
       </FileButton>,
     )
 
-    const fileButton = page.getByRole("button", { name: /Upload/i }).element()
-    fileButton.dispatchEvent(new MouseEvent("click", { bubbles: true }))
+    await user.click(page.getByRole("button", { name: /Upload/i }), {
+      force: true,
+    })
     expect(onClickMock).not.toHaveBeenCalled()
   })
 
   test("should not call onClick when disabled", async () => {
     const onClickMock = vi.fn()
 
-    await render(
+    const { user } = await render(
       <FileButton disabled onClick={onClickMock}>
         Upload
       </FileButton>,
@@ -77,8 +83,9 @@ describe("<FileButton />", () => {
       .element(page.getByRole("button", { name: /Upload/i }))
       .toBeDisabled()
 
-    const fileButton = page.getByRole("button", { name: /Upload/i }).element()
-    fileButton.dispatchEvent(new MouseEvent("click", { bubbles: true }))
+    await user.click(page.getByRole("button", { name: /Upload/i }), {
+      force: true,
+    })
 
     await vi.waitFor(() => {
       expect(onClickMock).toHaveBeenCalledTimes(0)

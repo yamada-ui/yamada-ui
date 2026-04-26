@@ -61,14 +61,18 @@ describe("<EmptyState />", () => {
         </EmptyState.Description>
       </EmptyState.Root>,
     )
-    await expect.element(page.getByTestId("root")).toBeInTheDocument()
-    await expect.element(page.getByTestId("indicator")).toBeInTheDocument()
     await expect
-      .element(page.getByRole("heading", { level: 3 }))
-      .toHaveTextContent("Your cart is empty")
+      .element(page.getByTestId("root"))
+      .toHaveProperty("tagName", "DIV")
     await expect
-      .element(page.getByRole("paragraph"))
-      .toHaveTextContent("Explore our products and add items to your cart")
+      .element(page.getByTestId("indicator"))
+      .toHaveProperty("tagName", "DIV")
+    await expect
+      .element(page.getByTestId("title"))
+      .toHaveProperty("tagName", "H3")
+    await expect
+      .element(page.getByTestId("description"))
+      .toHaveProperty("tagName", "P")
   })
 
   test("EmptyState renders correctly with a given title", async () => {

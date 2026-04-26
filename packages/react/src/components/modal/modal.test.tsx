@@ -242,8 +242,8 @@ describe("<Modal />", () => {
 
   test("closes modal when overlay is clicked", async () => {
     const onClose = vi.fn()
-    await render(<TestComponent open onClose={onClose} />)
-    page.getByTestId("overlay").element().click()
+    const { user } = await render(<TestComponent open onClose={onClose} />)
+    await user.click(page.getByTestId("overlay"), { position: { x: 5, y: 5 } })
     await vi.waitFor(() => {
       expect(onClose).toHaveBeenCalledOnce()
     })
@@ -251,10 +251,10 @@ describe("<Modal />", () => {
 
   test("does not close modal when overlay is clicked and `closeOnOverlay` is false", async () => {
     const onClose = vi.fn()
-    await render(
+    const { user } = await render(
       <TestComponent closeOnOverlay={false} open onClose={onClose} />,
     )
-    page.getByTestId("overlay").element().click()
+    await user.click(page.getByTestId("overlay"), { position: { x: 5, y: 5 } })
     expect(onClose).not.toHaveBeenCalled()
   })
 

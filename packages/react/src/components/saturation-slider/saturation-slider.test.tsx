@@ -1,9 +1,12 @@
-import { a11y, page, render } from "#test/browser"
 import { vi } from "vitest"
+import { a11y, page, render } from "#test/browser"
 import { SaturationSlider } from "."
 import { noop } from "../../utils"
 
-const mockRect = (el: HTMLElement, rect: Partial<DOMRect>): (() => void) => {
+const mockRect = (
+  el: HTMLElement | SVGElement,
+  rect: Partial<DOMRect>,
+): (() => void) => {
   const original = el.getBoundingClientRect
   el.getBoundingClientRect = () =>
     ({
@@ -23,7 +26,7 @@ const mockRect = (el: HTMLElement, rect: Partial<DOMRect>): (() => void) => {
   }
 }
 
-const keyDown = (el: HTMLElement, key: string) => {
+const keyDown = (el: HTMLElement | SVGElement, key: string) => {
   el.dispatchEvent(new KeyboardEvent("keydown", { key, bubbles: true }))
 }
 

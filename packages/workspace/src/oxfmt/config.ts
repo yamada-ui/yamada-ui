@@ -14,6 +14,7 @@ export default defineConfig({
     "storybook-static",
     "routeTree.gen.ts",
     "next-env.d.ts",
+    "CHANGELOG.md",
   ],
   jsxSingleQuote: false,
   printWidth: 80,

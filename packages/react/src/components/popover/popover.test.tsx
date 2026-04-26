@@ -122,7 +122,10 @@ describe("<Popover />", () => {
     await expect.element(page.getByText("Popover Body")).toBeVisible()
     await expect.element(page.getByText("Popover Footer")).toBeVisible()
 
-    await user.tab()
+    const popoverContent = page.getByTestId("popoverContent").element()
+
+    popoverContent.focus()
+    await expect.poll(() => document.activeElement).toBe(popoverContent)
     await user.keyboard("{Escape}")
 
     await expect.poll(() => page.getByText("Popover Header").query()).toBeNull()
@@ -140,8 +143,10 @@ describe("<Popover />", () => {
     await user.click(triggerButton)
 
     const header = page.getByText("Popover Header")
+    const popoverContent = page.getByTestId("popoverContent").element()
 
-    await user.tab()
+    popoverContent.focus()
+    await expect.poll(() => document.activeElement).toBe(popoverContent)
     await user.keyboard("{Escape}")
 
     await expect.element(header).toBeVisible()
@@ -158,16 +163,15 @@ describe("<Popover />", () => {
 
     await expect.element(page.getByText("Popover Header")).toBeVisible()
 
-    page.getByTestId("popoverContent").element().focus()
+    const popoverContent = page.getByTestId("popoverContent").element()
+
+    popoverContent.focus()
+    await expect.poll(() => document.activeElement).toBe(popoverContent)
     await user.keyboard("{Escape}")
 
     await expect
-      .poll(() => {
-        const active = document.activeElement
-
-        return active === triggerButton.element() || active === document.body
-      })
-      .toBe(true)
+      .poll(() => document.activeElement)
+      .toBe(triggerButton.element())
   })
 
   test("can close on blur", async () => {

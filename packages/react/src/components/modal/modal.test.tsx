@@ -1,6 +1,5 @@
 import type { FC } from "react"
-import { a11y, render } from "#test/browser"
-import { fireEvent, screen, waitFor } from "@testing-library/react"
+import { a11y, page, render } from "#test/browser"
 import { Button } from "../button"
 import { Modal } from "./"
 
@@ -58,66 +57,77 @@ describe("<Modal />", () => {
 
   test("sets `className` correctly", async () => {
     await render(<TestComponent open />)
-    const root = screen.getByTestId("root")
-    const overlay = screen.getByTestId("overlay")
-    const content = screen.getByTestId("content")
-    const closeButton = screen.getByTestId("closeButton")
-    const header = screen.getByTestId("header")
-    const title = screen.getByTestId("title")
-    const body = screen.getByTestId("body")
-    const footer = screen.getByTestId("footer")
-    expect(root).toHaveClass("ui-modal__root")
-    expect(overlay).toHaveClass("ui-modal__overlay")
-    expect(content).toHaveClass("ui-modal__content")
-    expect(closeButton).toHaveClass("ui-modal__close-button")
-    expect(header).toHaveClass("ui-modal__header")
-    expect(title).toHaveClass("ui-modal__title")
-    expect(body).toHaveClass("ui-modal__body")
-    expect(footer).toHaveClass("ui-modal__footer")
+    await expect.element(page.getByTestId("root")).toHaveClass("ui-modal__root")
+    await expect
+      .element(page.getByTestId("overlay"))
+      .toHaveClass("ui-modal__overlay")
+    await expect
+      .element(page.getByTestId("content"))
+      .toHaveClass("ui-modal__content")
+    await expect
+      .element(page.getByTestId("closeButton"))
+      .toHaveClass("ui-modal__close-button")
+    await expect
+      .element(page.getByTestId("header"))
+      .toHaveClass("ui-modal__header")
+    await expect
+      .element(page.getByTestId("title"))
+      .toHaveClass("ui-modal__title")
+    await expect.element(page.getByTestId("body")).toHaveClass("ui-modal__body")
+    await expect
+      .element(page.getByTestId("footer"))
+      .toHaveClass("ui-modal__footer")
   })
 
   test("sets HTML tag correctly", async () => {
     await render(<TestComponent open />)
-    const root = screen.getByTestId("root")
-    const overlay = screen.getByTestId("overlay")
-    const content = screen.getByTestId("content")
-    const closeButton = screen.getByTestId("closeButton")
-    const header = screen.getByTestId("header")
-    const title = screen.getByTestId("title")
-    const body = screen.getByTestId("body")
-    const footer = screen.getByTestId("footer")
-    expect(root.tagName).toBe("DIV")
-    expect(overlay.tagName).toBe("DIV")
-    expect(content.tagName).toBe("SECTION")
-    expect(closeButton.tagName).toBe("BUTTON")
-    expect(header.tagName).toBe("HEADER")
-    expect(title.tagName).toBe("H2")
-    expect(body.tagName).toBe("DIV")
-    expect(footer.tagName).toBe("FOOTER")
+    expect(page.getByTestId("root").element().tagName).toBe("DIV")
+    expect(page.getByTestId("overlay").element().tagName).toBe("DIV")
+    expect(page.getByTestId("content").element().tagName).toBe("SECTION")
+    expect(page.getByTestId("closeButton").element().tagName).toBe("BUTTON")
+    expect(page.getByTestId("header").element().tagName).toBe("HEADER")
+    expect(page.getByTestId("title").element().tagName).toBe("H2")
+    expect(page.getByTestId("body").element().tagName).toBe("DIV")
+    expect(page.getByTestId("footer").element().tagName).toBe("FOOTER")
   })
 
   test("sets aria attributes correctly", async () => {
     await render(<TestComponent open />)
-    const openTrigger = screen.getByTestId("openTrigger")
-    const overlay = screen.getByTestId("overlay")
-    const content = screen.getByTestId("content")
-    const closeButton = screen.getByTestId("closeButton")
-    const title = screen.getByTestId("title")
-    const body = screen.getByTestId("body")
-    const closeTrigger = screen.getByTestId("closeTrigger")
-    expect(openTrigger).toHaveAttribute("aria-controls")
-    expect(openTrigger).toHaveAttribute("aria-expanded", "true")
-    expect(openTrigger).toHaveAttribute("aria-haspopup", "dialog")
-    expect(openTrigger).toHaveAttribute("aria-label", "Open modal")
-    expect(overlay).toHaveAttribute("aria-hidden", "true")
-    expect(content).toHaveAttribute("aria-describedby")
-    expect(content).toHaveAttribute("aria-labelledby")
-    expect(content).toHaveAttribute("aria-modal", "true")
-    expect(content).toHaveAttribute("role", "dialog")
-    expect(closeButton).toHaveAttribute("aria-label", "Close modal")
-    expect(closeTrigger).toHaveAttribute("aria-label", "Close modal")
-    expect(title).toHaveAttribute("id")
-    expect(body).toHaveAttribute("id")
+    await expect
+      .element(page.getByTestId("openTrigger"))
+      .toHaveAttribute("aria-controls")
+    await expect
+      .element(page.getByTestId("openTrigger"))
+      .toHaveAttribute("aria-expanded", "true")
+    await expect
+      .element(page.getByTestId("openTrigger"))
+      .toHaveAttribute("aria-haspopup", "dialog")
+    await expect
+      .element(page.getByTestId("openTrigger"))
+      .toHaveAttribute("aria-label", "Open modal")
+    await expect
+      .element(page.getByTestId("overlay"))
+      .toHaveAttribute("aria-hidden", "true")
+    await expect
+      .element(page.getByTestId("content"))
+      .toHaveAttribute("aria-describedby")
+    await expect
+      .element(page.getByTestId("content"))
+      .toHaveAttribute("aria-labelledby")
+    await expect
+      .element(page.getByTestId("content"))
+      .toHaveAttribute("aria-modal", "true")
+    await expect
+      .element(page.getByTestId("content"))
+      .toHaveAttribute("role", "dialog")
+    await expect
+      .element(page.getByTestId("closeButton"))
+      .toHaveAttribute("aria-label", "Close modal")
+    await expect
+      .element(page.getByTestId("closeTrigger"))
+      .toHaveAttribute("aria-label", "Close modal")
+    await expect.element(page.getByTestId("title")).toHaveAttribute("id")
+    await expect.element(page.getByTestId("body")).toHaveAttribute("id")
   })
 
   test("renders shorthand content with title, body, and footer buttons", async () => {
@@ -130,51 +140,58 @@ describe("<Modal />", () => {
         title={<>Modal Title</>}
       />,
     )
-    expect(screen.getByText("Modal Title")).toBeInTheDocument()
-    expect(screen.getByTestId("shorthand-body")).toBeInTheDocument()
-    expect(screen.getByText("Cancel")).toBeInTheDocument()
-    expect(screen.getByText("OK")).toBeInTheDocument()
+    await expect.element(page.getByText("Modal Title")).toBeInTheDocument()
+    await expect.element(page.getByTestId("shorthand-body")).toBeInTheDocument()
+    await expect.element(page.getByText("Cancel")).toBeInTheDocument()
+    await expect.element(page.getByText("OK")).toBeInTheDocument()
   })
 
   test("renders shorthand content with middle button", async () => {
     await render(<Modal.Root middle={<>Middle</>} open success={<>OK</>} />)
-    expect(screen.getByText("Middle")).toBeInTheDocument()
-    expect(screen.getByText("OK")).toBeInTheDocument()
+    await expect.element(page.getByText("Middle")).toBeInTheDocument()
+    await expect.element(page.getByText("OK")).toBeInTheDocument()
   })
 
   test("calls onCancel callback when cancel button is clicked", async () => {
     const onCancel = vi.fn()
-    await render(<Modal.Root cancel={<>Cancel</>} open onCancel={onCancel} />)
-    fireEvent.click(screen.getByText("Cancel"))
+    const { user } = await render(
+      <Modal.Root cancel={<>Cancel</>} open onCancel={onCancel} />,
+    )
+    await user.click(page.getByText("Cancel"))
     expect(onCancel).toHaveBeenCalledOnce()
   })
 
   test("calls onMiddle callback when middle button is clicked", async () => {
     const onMiddle = vi.fn()
-    await render(<Modal.Root middle={<>Middle</>} open onMiddle={onMiddle} />)
-    fireEvent.click(screen.getByText("Middle"))
+    const { user } = await render(
+      <Modal.Root middle={<>Middle</>} open onMiddle={onMiddle} />,
+    )
+    await user.click(page.getByText("Middle"))
     expect(onMiddle).toHaveBeenCalledOnce()
   })
 
   test("calls onSuccess callback when success button is clicked", async () => {
     const onSuccess = vi.fn()
-    await render(<Modal.Root open success={<>OK</>} onSuccess={onSuccess} />)
-    fireEvent.click(screen.getByText("OK"))
+    const { user } = await render(
+      <Modal.Root open success={<>OK</>} onSuccess={onSuccess} />,
+    )
+    await user.click(page.getByText("OK"))
     expect(onSuccess).toHaveBeenCalledOnce()
   })
 
   test("renders overlay without animation when `animationScheme` is `none`", async () => {
     await render(<TestComponent animationScheme="none" open />)
-    const overlay = screen.getByTestId("overlay")
-    expect(overlay).toBeInTheDocument()
+    await expect.element(page.getByTestId("overlay")).toBeInTheDocument()
   })
 
   test("closes modal when Escape key is pressed", async () => {
     const onEsc = vi.fn()
     const onClose = vi.fn()
-    await render(<TestComponent open onClose={onClose} onEsc={onEsc} />)
-    const content = screen.getByTestId("content")
-    fireEvent.keyDown(content, { key: "Escape" })
+    const { user } = await render(
+      <TestComponent open onClose={onClose} onEsc={onEsc} />,
+    )
+    await user.click(page.getByTestId("content"))
+    await user.keyboard("{Escape}")
     expect(onEsc).toHaveBeenCalledOnce()
     expect(onClose).toHaveBeenCalledOnce()
   })
@@ -182,38 +199,36 @@ describe("<Modal />", () => {
   test("does not close modal when Escape is pressed and `closeOnEsc` is false", async () => {
     const onEsc = vi.fn()
     const onClose = vi.fn()
-    await render(
+    const { user } = await render(
       <TestComponent closeOnEsc={false} open onClose={onClose} onEsc={onEsc} />,
     )
-    const content = screen.getByTestId("content")
-    fireEvent.keyDown(content, { key: "Escape" })
+    await user.click(page.getByTestId("content"))
+    await user.keyboard("{Escape}")
     expect(onEsc).toHaveBeenCalledOnce()
     expect(onClose).not.toHaveBeenCalled()
   })
 
   test("does not trigger onEsc when a non-Escape key is pressed", async () => {
     const onEsc = vi.fn()
-    await render(<TestComponent open onEsc={onEsc} />)
-    const content = screen.getByTestId("content")
-    fireEvent.keyDown(content, { key: "Enter" })
+    const { user } = await render(<TestComponent open onEsc={onEsc} />)
+    await user.click(page.getByTestId("content"))
+    await user.keyboard("{Enter}")
     expect(onEsc).not.toHaveBeenCalled()
   })
 
   test("closes modal when overlay is clicked", async () => {
     const onClose = vi.fn()
-    await render(<TestComponent open onClose={onClose} />)
-    const overlay = screen.getByTestId("overlay")
-    fireEvent.click(overlay)
+    const { user } = await render(<TestComponent open onClose={onClose} />)
+    await user.click(page.getByTestId("overlay"))
     expect(onClose).toHaveBeenCalledOnce()
   })
 
   test("does not close modal when overlay is clicked and `closeOnOverlay` is false", async () => {
     const onClose = vi.fn()
-    await render(
+    const { user } = await render(
       <TestComponent closeOnOverlay={false} open onClose={onClose} />,
     )
-    const overlay = screen.getByTestId("overlay")
-    fireEvent.click(overlay)
+    await user.click(page.getByTestId("overlay"))
     expect(onClose).not.toHaveBeenCalled()
   })
 
@@ -225,7 +240,9 @@ describe("<Modal />", () => {
         </Modal.Content>
       </Modal.Root>,
     )
-    expect(screen.queryByRole("presentation")).not.toBeInTheDocument()
+    await expect
+      .element(page.getByRole("presentation").query())
+      .not.toBeInTheDocument()
   })
 
   test("renders without close button when `withCloseButton` is false", async () => {
@@ -236,7 +253,9 @@ describe("<Modal />", () => {
         </Modal.Content>
       </Modal.Root>,
     )
-    expect(screen.queryByLabelText("Close modal")).not.toBeInTheDocument()
+    await expect
+      .element(page.getByLabelText("Close modal").query())
+      .not.toBeInTheDocument()
   })
 
   test("renders with custom trigger prop", async () => {
@@ -247,7 +266,7 @@ describe("<Modal />", () => {
         </Modal.Content>
       </Modal.Root>,
     )
-    expect(screen.getByTestId("custom-trigger")).toBeInTheDocument()
+    await expect.element(page.getByTestId("custom-trigger")).toBeInTheDocument()
   })
 
   test("calls onCloseComplete after modal exit animation", async () => {
@@ -256,7 +275,7 @@ describe("<Modal />", () => {
       <TestComponent open onCloseComplete={onCloseComplete} />,
     )
     rerender(<TestComponent open={false} onCloseComplete={onCloseComplete} />)
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(onCloseComplete).toHaveBeenCalledOnce()
     })
   })
@@ -270,29 +289,35 @@ describe("<Modal />", () => {
         open
       />,
     )
-    expect(screen.getByText("Header text")).toBeInTheDocument()
-    expect(screen.getByText("Body text")).toBeInTheDocument()
-    expect(screen.getByText("Footer text")).toBeInTheDocument()
+    await expect.element(page.getByText("Header text")).toBeInTheDocument()
+    await expect.element(page.getByText("Body text")).toBeInTheDocument()
+    await expect.element(page.getByText("Footer text")).toBeInTheDocument()
   })
 
   test("closes modal when cancel button is clicked without onCancel", async () => {
     const onClose = vi.fn()
-    await render(<Modal.Root cancel={<>Cancel</>} open onClose={onClose} />)
-    fireEvent.click(screen.getByText("Cancel"))
+    const { user } = await render(
+      <Modal.Root cancel={<>Cancel</>} open onClose={onClose} />,
+    )
+    await user.click(page.getByText("Cancel"))
     expect(onClose).toHaveBeenCalledOnce()
   })
 
   test("closes modal when middle button is clicked without onMiddle", async () => {
     const onClose = vi.fn()
-    await render(<Modal.Root middle={<>Middle</>} open onClose={onClose} />)
-    fireEvent.click(screen.getByText("Middle"))
+    const { user } = await render(
+      <Modal.Root middle={<>Middle</>} open onClose={onClose} />,
+    )
+    await user.click(page.getByText("Middle"))
     expect(onClose).toHaveBeenCalledOnce()
   })
 
   test("closes modal when success button is clicked without onSuccess", async () => {
     const onClose = vi.fn()
-    await render(<Modal.Root open success={<>OK</>} onClose={onClose} />)
-    fireEvent.click(screen.getByText("OK"))
+    const { user } = await render(
+      <Modal.Root open success={<>OK</>} onClose={onClose} />,
+    )
+    await user.click(page.getByText("OK"))
     expect(onClose).toHaveBeenCalledOnce()
   })
 })

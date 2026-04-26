@@ -32,13 +32,12 @@ describe("<Slot />", () => {
     const spy = vi.spyOn(console, "error").mockImplementation(() => undefined)
 
     await expect(
-      (async () =>
-        render(
-          <Slot>
-            <span>A</span>
-            <span>B</span>
-          </Slot>,
-        ))(),
+      render(
+        <Slot>
+          <span>A</span>
+          <span>B</span>
+        </Slot>,
+      ),
     ).rejects.toThrow(/React.Children.only/)
 
     spy.mockRestore()
@@ -125,13 +124,12 @@ describe("<Slot />", () => {
     }
 
     await expect(
-      (async () =>
-        render(
-          <Button asChild>
-            <span>A</span>
-            <span>B</span>
-          </Button>,
-        ))(),
+      render(
+        <Button asChild>
+          <span>A</span>
+          <span>B</span>
+        </Button>,
+      ),
     ).rejects.toThrow(/React.Children.only/)
 
     spy.mockRestore()

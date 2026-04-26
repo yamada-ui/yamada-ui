@@ -741,9 +741,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
     const icon = page.getByTestId("icon").element()
-    const iconElement = icon.querySelector("svg") as HTMLElement
-
-    await user.click(iconElement)
+    await user.click(icon)
 
     expect(input).toHaveFocus()
   })

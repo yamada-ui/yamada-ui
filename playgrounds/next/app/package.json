@@ -8,7 +8,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc",
+    "typecheck": "tsgo",
     "lint": "oxlint . --max-warnings=0",
     "format": "pnpm -w format playgrounds/next/app",
     "yamada-cli": "pnpm -C ../../../packages/cli dev"

@@ -8,15 +8,8 @@ describe("<Dropzone />", () => {
   test("renders component correctly", async () => {
     await a11y(
       <Dropzone.Root>
-        <Text>Drag file here or click to select file</Text>
+        <Text color="fg">Drag file here or click to select file</Text>
       </Dropzone.Root>,
-      {
-        axeOptions: {
-          rules: {
-            "color-contrast": { enabled: false },
-          },
-        },
-      },
     )
   })
 

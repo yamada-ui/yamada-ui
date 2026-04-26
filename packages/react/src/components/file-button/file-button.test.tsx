@@ -108,7 +108,7 @@ describe("<FileButton />", () => {
 
       return (
         <>
-          <p data-testid="file-count">files: {files ? files.length : 0}</p>
+          <p>files: {files ? files.length : 0}</p>
           <FileButton multiple onChange={handleFileChange}>
             Upload
           </FileButton>
@@ -118,19 +118,18 @@ describe("<FileButton />", () => {
 
     const { user } = await render(<TestComponent />)
 
-    const fileCount = page.getByTestId("file-count")
     const fileInputElement = document.querySelector('input[type="file"]')
     if (!(fileInputElement instanceof HTMLInputElement))
       throw new Error("file input not found")
     const fileInput = page.elementLocator(fileInputElement)
 
-    await expect.element(fileCount).toHaveTextContent("files: 0")
+    await expect.element(page.getByText("files: 0")).toBeInTheDocument()
     expect(handleFileChangeMock).not.toHaveBeenCalled()
 
     const file1 = new File(["test1"], "test1.txt", { type: "text/plain" })
     await user.upload(fileInput, file1)
 
-    await expect.element(fileCount).toHaveTextContent("files: 1")
+    await expect.element(page.getByText("files: 1")).toBeInTheDocument()
     await vi.waitFor(() => {
       expect(handleFileChangeMock).toHaveBeenLastCalledWith([file1])
     })
@@ -138,12 +137,12 @@ describe("<FileButton />", () => {
     const file2 = new File(["test2"], "test2.txt", { type: "text/plain" })
     await user.upload(fileInput, [file1, file2])
 
-    await expect.element(fileCount).toHaveTextContent("files: 2")
+    await expect.element(page.getByText("files: 2")).toBeInTheDocument()
     expect(handleFileChangeMock).toHaveBeenLastCalledWith([file1, file2])
 
     await user.upload(fileInput, [])
 
-    await expect.element(fileCount).toHaveTextContent("files: 0")
+    await expect.element(page.getByText("files: 0")).toBeInTheDocument()
     expect(handleFileChangeMock).toHaveBeenLastCalledWith(undefined)
 
     expect(handleFileChangeMock).toHaveBeenCalledTimes(3)
@@ -165,7 +164,7 @@ describe("<FileButton />", () => {
 
       return (
         <>
-          <p data-testid="file-count">files: {files ? files.length : 0}</p>
+          <p>files: {files ? files.length : 0}</p>
           <>
             <FileButton resetRef={resetRef} onChange={handleFileChange}>
               Upload
@@ -178,9 +177,7 @@ describe("<FileButton />", () => {
 
     const { user } = await render(<TestComponent />)
 
-    const fileCount = page.getByTestId("file-count")
-
-    await expect.element(fileCount).toHaveTextContent("files: 0")
+    await expect.element(page.getByText("files: 0")).toBeInTheDocument()
 
     const file = new File(["test"], "test.txt", { type: "text/plain" })
     const fileInputElement = document.querySelector('input[type="file"]')
@@ -189,10 +186,10 @@ describe("<FileButton />", () => {
     const fileInput = page.elementLocator(fileInputElement)
     await user.upload(fileInput, file)
 
-    await expect.element(fileCount).toHaveTextContent("files: 1")
+    await expect.element(page.getByText("files: 1")).toBeInTheDocument()
 
     await user.click(page.getByRole("button", { name: /Reset/i }))
 
-    await expect.element(fileCount).toHaveTextContent("files: 0")
+    await expect.element(page.getByText("files: 0")).toBeInTheDocument()
   })
 })

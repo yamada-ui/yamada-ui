@@ -1,5 +1,5 @@
-import { a11y, page, render } from "#test/browser"
 import { useRef, useState } from "react"
+import { a11y, page, render } from "#test/browser"
 import { FileButton } from "."
 
 describe("<FileButton />", () => {

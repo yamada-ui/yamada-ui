@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { vi } from "vitest"
 import { a11y, page, render } from "#test/browser"
 import { Collapse } from "./collapse"
 
@@ -41,27 +40,20 @@ describe("<Collapse />", () => {
     const button = page.getByRole("button", { name: /button/i })
     const collapse = page.getByText("Collapse")
 
-    expect(collapse.element().style.height).toBe("0px")
+    await expect.element(collapse).toHaveStyle({ height: "0px" })
 
     await user.click(button)
-    await vi.waitFor(() => {
-      expect(collapse.element().style.height).toBe("auto")
-    })
+    await expect.element(collapse).toHaveStyle({ height: "auto" })
 
     await user.click(button)
-    await vi.waitFor(() => {
-      expect(collapse.element().style.height).toBe("0px")
-    })
+    await expect.element(collapse).toHaveStyle({ height: "0px" })
   })
 
   test("animationOpacity set to true by default", async () => {
     await render(<Collapse open>Collapse</Collapse>)
 
     const collapse = page.getByText("Collapse")
-
-    await vi.waitFor(() => {
-      expect(getComputedStyle(collapse.element()).opacity).toBe("1")
-    })
+    await expect.element(collapse).toHaveStyle({ opacity: "1" })
   })
 
   test("no opacity when animationOpacity set to false", async () => {
@@ -72,7 +64,7 @@ describe("<Collapse />", () => {
     )
 
     const collapse = page.getByText("Collapse")
-    expect(collapse.element().style.opacity).toBe("")
+    await expect.element(collapse).toHaveStyle({ opacity: "" })
   })
 
   test("height changes correctly after open set to true", async () => {
@@ -93,12 +85,10 @@ describe("<Collapse />", () => {
 
     const button = page.getByRole("button", { name: /button/i })
     const collapse = page.getByText("Collapse")
-    await vi.waitFor(() => expect(collapse.element().style.height).toBe("50px"))
+    await expect.element(collapse).toHaveStyle({ height: "50px" })
 
     await user.click(button)
-    await vi.waitFor(() =>
-      expect(collapse.element().style.height).toBe("200px"),
-    )
+    await expect.element(collapse).toHaveStyle({ height: "200px" })
   })
 
   test("unmountOnExit works correctly", async () => {
@@ -115,9 +105,11 @@ describe("<Collapse />", () => {
       )
     }
 
-    const { container, user } = await render(<TestComponent />)
+    const { user } = await render(<TestComponent />)
 
-    expect(container.textContent).not.toContain("Collapse")
+    await expect
+      .element(page.getByText("Collapse").query())
+      .not.toBeInTheDocument()
 
     const button = page.getByRole("button", { name: /button/i })
 
@@ -125,8 +117,8 @@ describe("<Collapse />", () => {
     await expect.element(page.getByText("Collapse")).toBeVisible()
 
     await user.click(button)
-    await vi.waitFor(() => {
-      expect(container.textContent).not.toContain("Collapse")
-    })
+    await expect
+      .element(page.getByText("Collapse").query())
+      .not.toBeInTheDocument()
   })
 })

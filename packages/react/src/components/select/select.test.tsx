@@ -1,7 +1,7 @@
 import type { FC, MouseEvent as ReactMouseEvent, ReactNode } from "react"
-import { a11y, render, renderHook } from "#test/browser"
 import { act, fireEvent, screen, waitFor } from "@testing-library/react"
 import { createRef, useState } from "react"
+import { a11y, render, renderHook } from "#test/browser"
 import { Select, useSelect } from "."
 
 const items: Select.Item[] = [
@@ -12,6 +12,8 @@ const items: Select.Item[] = [
 
 describe("<Select />", () => {
   test("renders component correctly", async () => {
+    // Select colors come from theme tokens and can fail axe-core's
+    // color-contrast rule in browser mode; this test targets component behavior.
     await a11y(
       <Select.Root placeholder="Choose a option">
         <Select.Option value="one">Option 1</Select.Option>
@@ -121,23 +123,20 @@ describe("<Select />", () => {
       />,
     )
 
-    const option1 = screen.getByRole("option", { name: "Option 1" })
-    const option2 = screen.getByRole("option", { name: "Option 2" })
-
     // Select first option
-    await user.click(option1)
+    await user.click(screen.getByRole("option", { name: "Option 1" }))
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one"])
     })
 
     // Select second option
-    await user.click(option2)
+    await user.click(screen.getByRole("option", { name: "Option 2" }))
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
 
     // Deselect first option
-    await user.click(option1)
+    await user.click(screen.getByRole("option", { name: "Option 1" }))
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["two"])
     })
@@ -157,23 +156,29 @@ describe("<Select />", () => {
       />,
     )
 
-    const option1 = screen.getByRole("option", { name: "Option 1" })
-    const option2 = screen.getByRole("option", { name: "Option 2" })
-    const option3 = screen.getByRole("option", { name: "Option 3" })
-
     // Select two options (reaching max)
-    await user.click(option1)
-    await user.click(option2)
+    await user.click(screen.getByRole("option", { name: "Option 1" }))
+    await user.click(screen.getByRole("option", { name: "Option 2" }))
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
 
     // Attempt to select a third option - should be disabled
+    await waitFor(() => {
+      expect(screen.getByRole("option", { name: "Option 3" })).toHaveAttribute(
+        "aria-disabled",
+        "true",
+      )
+    })
+
+    const callsAfterMaxReached = onChange.mock.calls.length
+    fireEvent.click(screen.getByRole("option", { name: "Option 3" }))
 
     await waitFor(() => {
-      expect(option3).toHaveAttribute("aria-disabled", "true")
+      expect(onChange).toHaveBeenCalledTimes(callsAfterMaxReached)
     })
+    expect(onChange).toHaveBeenLastCalledWith(["one", "two"])
   })
 
   test("displays selected values in multiple mode", async () => {
@@ -1060,7 +1065,7 @@ describe("<Select />", () => {
         items={items}
         multiple
         placeholder="Choose"
-        render={({ label, value }) => (value ? `${label}` : null)}
+        render={({ label, value }) => (value ? label : null)}
       />,
     )
 

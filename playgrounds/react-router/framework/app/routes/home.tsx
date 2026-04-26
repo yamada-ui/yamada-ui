@@ -1,5 +1,5 @@
 import { VStack } from "@yamada-ui/react"
-import { ColorModeButton } from "../components/color-mode-button"
+import { ColorModeButton } from "~/components/color-mode-button"
 
 export default function Home() {
   return (

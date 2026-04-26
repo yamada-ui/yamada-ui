@@ -25,36 +25,41 @@ describe("<Slide />", () => {
   test("applies default styles correctly", async () => {
     await render(<Slide>Slide</Slide>)
 
-    const slide = page.getByText("Slide").element()
-    expect(slide.style.transform).toBe("translateX(100%)")
+    await expect
+      .poll(() => page.getByText("Slide").element().style.transform)
+      .toBe("translateX(100%)")
   })
 
   test("applies styles correctly for block-start placement", async () => {
     await render(<Slide placement="block-start">Slide</Slide>)
 
-    const slide = page.getByText("Slide").element()
-    expect(slide.style.transform).toBe("translateY(-100%)")
+    await expect
+      .poll(() => page.getByText("Slide").element().style.transform)
+      .toBe("translateY(-100%)")
   })
 
   test("applies styles correctly for inline-start placement", async () => {
     await render(<Slide placement="inline-start">Slide</Slide>)
 
-    const slide = page.getByText("Slide").element()
-    expect(slide.style.transform).toBe("translateX(-100%)")
+    await expect
+      .poll(() => page.getByText("Slide").element().style.transform)
+      .toBe("translateX(-100%)")
   })
 
   test("applies styles correctly for inline-end placement", async () => {
     await render(<Slide placement="inline-end">Slide</Slide>)
 
-    const slide = page.getByText("Slide").element()
-    expect(slide.style.transform).toBe("translateX(100%)")
+    await expect
+      .poll(() => page.getByText("Slide").element().style.transform)
+      .toBe("translateX(100%)")
   })
 
   test("applies styles correctly for block-end placement", async () => {
     await render(<Slide placement="block-end">Slide</Slide>)
 
-    const slide = page.getByText("Slide").element()
-    expect(slide.style.transform).toBe("translateY(100%)")
+    await expect
+      .poll(() => page.getByText("Slide").element().style.transform)
+      .toBe("translateY(100%)")
   })
 
   describe("slideVariants", () => {

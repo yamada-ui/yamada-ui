@@ -4,13 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "clean": "rimraf node_modules .react-router .eslintcache",
+    "clean": "rimraf node_modules .react-router",
     "build": "react-router build",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc",
-    "lint": "eslint . --max-warnings=0 --cache",
-    "format": "prettier . --ignore-path ../../../.prettierignore --check --cache",
+    "typecheck": "react-router typegen && tsgo",
+    "lint": "react-router typegen && oxlint . --max-warnings=0",
+    "format": "pnpm -w format playgrounds/react-router/framework",
     "yamada-cli": "pnpm -C ../../../packages/cli dev"
   },
   "dependencies": {
@@ -25,7 +25,6 @@
   "devDependencies": {
     "@react-router/dev": "^7.14.0",
     "@yamada-ui/workspace": "workspace:*",
-    "vite": "catalog:",
-    "vite-tsconfig-paths": "catalog:"
+    "vite": "catalog:"
   }
 }

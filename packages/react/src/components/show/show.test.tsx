@@ -40,14 +40,18 @@ describe("<Show />", () => {
   })
 
   test("renders nothing when when is false and no fallback is provided", async () => {
-    const { container } = await render(<Show when={false}>Hello</Show>)
+    await render(<Show when={false}>Hello</Show>)
 
-    expect(container.textContent).not.toContain("Hello")
+    await expect
+      .element(page.getByText("Hello").query())
+      .not.toBeInTheDocument()
   })
 
   test("renders nothing when when is null and no fallback is provided", async () => {
-    const { container } = await render(<Show when={null}>Hello</Show>)
+    await render(<Show when={null}>Hello</Show>)
 
-    expect(container.textContent).not.toContain("Hello")
+    await expect
+      .element(page.getByText("Hello").query())
+      .not.toBeInTheDocument()
   })
 })

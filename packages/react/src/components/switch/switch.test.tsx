@@ -32,11 +32,12 @@ describe("<Switch />", () => {
   })
 
   test("should be checked when clicked", async () => {
-    const { user } = await render(<Switch>Switch</Switch>)
+    const { user } = await render(<Switch data-testid="switch">Switch</Switch>)
 
     const switchElement = page.getByRole("switch", { name: /Switch/i })
+    const switchRoot = page.getByTestId("switch")
 
-    await user.click(switchElement)
+    await user.click(switchRoot)
 
     await expect.element(switchElement).toBeChecked()
   })
@@ -75,6 +76,7 @@ describe("<Switch />", () => {
   test("renders object-form icon and toggles between on and off", async () => {
     const { user } = await render(
       <Switch
+        data-testid="switch"
         icon={{
           off: <span data-testid="icon-off">OFF</span>,
           on: <span data-testid="icon-on">ON</span>,
@@ -91,9 +93,11 @@ describe("<Switch />", () => {
     await expect.element(onIcon).not.toBeInTheDocument()
 
     const switchElement = page.getByRole("switch", { name: /Switch/i })
+    const switchRoot = page.getByTestId("switch")
 
-    await user.click(switchElement)
+    await user.click(switchRoot)
 
+    await expect.element(switchElement).toBeChecked()
     await expect.element(onIcon).toBeInTheDocument()
     await expect.element(offIcon).not.toBeInTheDocument()
   })

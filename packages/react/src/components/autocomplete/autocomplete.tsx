@@ -252,7 +252,7 @@ export const AutocompleteRoot = withProvider(
                   )()}
                 >
                   <Popover.Trigger>
-                    <AutocompleteField {...getFieldProps(varProps)}>
+                    <AutocompleteField {...getFieldProps({ ...varProps })}>
                       {fieldChildren}
                     </AutocompleteField>
                   </Popover.Trigger>

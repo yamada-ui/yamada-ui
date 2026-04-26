@@ -3,23 +3,6 @@ import { vi } from "vitest"
 import { a11y, page, render } from "#test/browser"
 import { Slide, slideVariants } from "./slide"
 
-const expectTransformStyle = async (
-  locator: ReturnType<typeof page.getByText>,
-  transform: string,
-) => {
-  const { height, width } = getComputedStyle(locator.element())
-
-  const createHTMLDocument = vi
-    .spyOn(document.implementation, "createHTMLDocument")
-    .mockImplementation(() => document)
-
-  try {
-    await expect.element(locator).toHaveStyle({ height, transform, width })
-  } finally {
-    createHTMLDocument.mockRestore()
-  }
-}
-
 describe("<Slide />", () => {
   test("renders component correctly", async () => {
     await a11y(<Slide />)
@@ -42,36 +25,36 @@ describe("<Slide />", () => {
   test("applies default styles correctly", async () => {
     await render(<Slide>Slide</Slide>)
 
-    const locator = page.getByText("Slide")
-    await expectTransformStyle(locator, "translateX(100%)")
+    const slide = page.getByText("Slide").element()
+    expect(slide.style.transform).toBe("translateX(100%)")
   })
 
   test("applies styles correctly for block-start placement", async () => {
     await render(<Slide placement="block-start">Slide</Slide>)
 
-    const locator = page.getByText("Slide")
-    await expectTransformStyle(locator, "translateY(-100%)")
+    const slide = page.getByText("Slide").element()
+    expect(slide.style.transform).toBe("translateY(-100%)")
   })
 
   test("applies styles correctly for inline-start placement", async () => {
     await render(<Slide placement="inline-start">Slide</Slide>)
 
-    const locator = page.getByText("Slide")
-    await expectTransformStyle(locator, "translateX(-100%)")
+    const slide = page.getByText("Slide").element()
+    expect(slide.style.transform).toBe("translateX(-100%)")
   })
 
   test("applies styles correctly for inline-end placement", async () => {
     await render(<Slide placement="inline-end">Slide</Slide>)
 
-    const locator = page.getByText("Slide")
-    await expectTransformStyle(locator, "translateX(100%)")
+    const slide = page.getByText("Slide").element()
+    expect(slide.style.transform).toBe("translateX(100%)")
   })
 
   test("applies styles correctly for block-end placement", async () => {
     await render(<Slide placement="block-end">Slide</Slide>)
 
-    const locator = page.getByText("Slide")
-    await expectTransformStyle(locator, "translateY(100%)")
+    const slide = page.getByText("Slide").element()
+    expect(slide.style.transform).toBe("translateY(100%)")
   })
 
   describe("slideVariants", () => {

@@ -1,6 +1,6 @@
-import { a11y, page, render } from "#test/browser"
 import { useState } from "react"
 import { vi } from "vitest"
+import { a11y, page, render } from "#test/browser"
 import { SlideFade } from "./slide-fade"
 
 describe("<SlideFade />", () => {
@@ -81,26 +81,25 @@ describe("<SlideFade />", () => {
   test("default offset is set correctly", async () => {
     await render(<SlideFade>SlideFade</SlideFade>)
 
-    const slideFade = page.getByText("SlideFade").element()
-
-    expect(slideFade.getAttribute("style")).toContain("translateY(8px)")
+    await expect
+      .element(page.getByText("SlideFade"))
+      .toHaveStyle({ transform: "translateY(8px)" })
   })
 
   test("applies offsetX correctly", async () => {
     await render(<SlideFade offsetX={10}>SlideFade</SlideFade>)
 
-    const slideFade = page.getByText("SlideFade").element()
-
-    expect(slideFade.getAttribute("style")).toContain("translateX(10px)")
-    expect(slideFade.getAttribute("style")).toContain("translateY(8px)")
+    await expect
+      .element(page.getByText("SlideFade"))
+      .toHaveStyle({ transform: "translateX(10px) translateY(8px)" })
   })
 
   test("applies offsetY correctly", async () => {
     await render(<SlideFade offsetY={10}>SlideFade</SlideFade>)
 
-    const slideFade = page.getByText("SlideFade").element()
-
-    expect(slideFade.getAttribute("style")).toContain("translateY(10px)")
+    await expect
+      .element(page.getByText("SlideFade"))
+      .toHaveStyle({ transform: "translateY(10px)" })
   })
 
   test("unmountOnExit works correctly", async () => {

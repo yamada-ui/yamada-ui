@@ -13,8 +13,9 @@ describe("<Switch />", () => {
 
   test("sets `className` correctly", async () => {
     await render(<Switch data-testid="switch">Switch</Switch>)
-    const el = page.getByTestId("switch").element()
-    expect(el).toHaveClass("ui-switch__root")
+    const root = page.getByTestId("switch")
+    await expect.element(root).toHaveClass("ui-switch__root")
+    const el = root.element()
     expect(el.children[1]).toHaveClass("ui-switch__track")
     expect(el.children[1]?.children[0]).toHaveClass("ui-switch__thumb")
     expect(el.children[2]).toHaveClass("ui-switch__label")
@@ -31,11 +32,11 @@ describe("<Switch />", () => {
   })
 
   test("should be checked when clicked", async () => {
-    await render(<Switch>Switch</Switch>)
+    const { user } = await render(<Switch>Switch</Switch>)
 
     const switchElement = page.getByRole("switch", { name: /Switch/i })
 
-    ;(switchElement.element() as HTMLElement).click()
+    await user.click(switchElement)
 
     await expect.element(switchElement).toBeChecked()
   })
@@ -72,7 +73,7 @@ describe("<Switch />", () => {
   })
 
   test("renders object-form icon and toggles between on and off", async () => {
-    const { container } = await render(
+    const { user } = await render(
       <Switch
         icon={{
           off: <span data-testid="icon-off">OFF</span>,
@@ -83,19 +84,18 @@ describe("<Switch />", () => {
       </Switch>,
     )
 
-    expect(
-      container.querySelector('[data-testid="icon-off"]'),
-    ).toBeInTheDocument()
-    expect(container.querySelector('[data-testid="icon-on"]')).toBeNull()
+    const offIcon = page.getByTestId("icon-off")
+    const onIcon = page.getByTestId("icon-on")
+
+    await expect.element(offIcon).toBeInTheDocument()
+    await expect.element(onIcon).not.toBeInTheDocument()
 
     const switchElement = page.getByRole("switch", { name: /Switch/i })
 
-    ;(switchElement.element() as HTMLElement).click()
+    await user.click(switchElement)
 
-    expect(
-      container.querySelector('[data-testid="icon-on"]'),
-    ).toBeInTheDocument()
-    expect(container.querySelector('[data-testid="icon-off"]')).toBeNull()
+    await expect.element(onIcon).toBeInTheDocument()
+    await expect.element(offIcon).not.toBeInTheDocument()
   })
 
   test("passes labelProps to the label element", async () => {

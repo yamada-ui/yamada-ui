@@ -57,8 +57,10 @@ describe("<PasswordInput />", () => {
 })
 
 describe("<PassWordInputStrengthMeter />", () => {
-  const ExampleWithPassWordInputStrengthMeter = () => {
-    const [value, setValue] = useState("")
+  const ExampleWithPassWordInputStrengthMeter = ({
+    defaultValue = "",
+  }: { defaultValue?: string } = {}) => {
+    const [value, setValue] = useState(defaultValue)
 
     const getStrength = (password: string) => {
       let strength = 0
@@ -115,21 +117,28 @@ describe("<PassWordInputStrengthMeter />", () => {
     expect(strengthMeter.children[0]?.children[0]?.tagName).toBe("DIV")
   })
 
-  test("Could render strength meter with difference value", async () => {
-    const { user } = await render(<ExampleWithPassWordInputStrengthMeter />)
+  test.each([
+    ["aaaaaaa", 0],
+    ["aaaaaaaa", 1],
+    ["aaaaaaaaA", 2],
+    ["aaaaaaaaA1", 3],
+    ["aaaaaaaaA1!", 4],
+  ])(
+    "Could render strength meter with difference value (%s -> %i)",
+    async (value, expected) => {
+      const initial = value.slice(0, -1)
+      const next = value.slice(-1)
+      const { user } = await render(
+        <ExampleWithPassWordInputStrengthMeter defaultValue={initial} />,
+      )
 
-    const passwordInput = page.getByPlaceholder("password")
-    const strengthMeter = page.getByRole("meter")
+      const passwordInput = page.getByPlaceholder("password")
+      const strengthMeter = page.getByRole("meter")
 
-    await user.type(passwordInput, "aaaaaaa")
-    await expect.element(strengthMeter).toHaveAttribute("aria-valuenow", "0")
-    await user.type(passwordInput, "a")
-    await expect.element(strengthMeter).toHaveAttribute("aria-valuenow", "1")
-    await user.type(passwordInput, "A")
-    await expect.element(strengthMeter).toHaveAttribute("aria-valuenow", "2")
-    await user.type(passwordInput, "1")
-    await expect.element(strengthMeter).toHaveAttribute("aria-valuenow", "3")
-    await user.type(passwordInput, "!")
-    await expect.element(strengthMeter).toHaveAttribute("aria-valuenow", "4")
-  })
+      await user.type(passwordInput, next)
+      await expect
+        .element(strengthMeter)
+        .toHaveAttribute("aria-valuenow", String(expected))
+    },
+  )
 })

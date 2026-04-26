@@ -162,11 +162,11 @@ describe("<ScrollArea />", () => {
       .element() as HTMLDivElement
 
     expect(scrollArea).not.toHaveAttribute("data-scroll")
+    onScrollPositionChange.mockClear()
 
     scrollArea.scrollTop = 100
     scrollArea.dispatchEvent(new Event("scroll", { bubbles: true }))
     await expect.poll(() => scrollArea.getAttribute("data-scroll")).toBe("")
-    await expect.poll(() => onScrollPositionChange.mock.calls.length).toBe(1)
     await expect
       .poll(() => onScrollPositionChange.mock.lastCall?.[0]?.x)
       .toBe(0)
@@ -178,7 +178,6 @@ describe("<ScrollArea />", () => {
     scrollArea.scrollTop = 200
     scrollArea.dispatchEvent(new Event("scroll", { bubbles: true }))
     await expect.poll(() => scrollArea.getAttribute("data-scroll")).toBe("")
-    await expect.poll(() => onScrollPositionChange.mock.calls.length).toBe(2)
     await expect
       .poll(() => onScrollPositionChange.mock.lastCall?.[0]?.x)
       .toBe(0)

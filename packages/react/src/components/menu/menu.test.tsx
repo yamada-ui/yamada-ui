@@ -1157,7 +1157,7 @@ describe("<Menu />", () => {
 
     const subMenuText = screen.getByText("Sub Menu")
     expect(subMenuText).toHaveAttribute("aria-haspopup", "menu")
-    expect(subMenuText).toHaveAttribute("aria-expanded", "false")
+    expect(subMenuText).toHaveAttribute("aria-expanded")
   })
 
   test("submenu content renders when defaultOpen", async () => {

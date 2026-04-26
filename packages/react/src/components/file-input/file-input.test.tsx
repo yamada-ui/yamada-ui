@@ -5,6 +5,13 @@ import { InputPropsContext } from "../input"
 const getInput = () =>
   document.querySelector('input[type="file"]') as HTMLInputElement
 
+const clickElement = (element: HTMLElement | SVGElement) => {
+  if (!(element instanceof HTMLElement))
+    throw new TypeError("Expected an HTML element")
+
+  element.click()
+}
+
 const changeFiles = (files: File[] | null) => {
   const input = getInput()
 
@@ -246,33 +253,25 @@ describe("<FileInput />", () => {
   })
 
   test("click should not be called in the inner input element after click when disabled", async () => {
-    const { user } = await render(
-      <FileInput data-testid="fileInput" disabled />,
-    )
+    await render(<FileInput data-testid="fileInput" disabled />)
 
     const input = getInput()
     const fn = vi.fn()
 
     input.addEventListener("click", fn)
-    await user.click(page.getByTestId("fileInput"), {
-      force: true,
-    } as { [key: string]: unknown })
+    clickElement(page.getByTestId("fileInput").element())
 
     expect(fn).toHaveBeenCalledTimes(0)
   })
 
   test("click should not be called in the inner input element after click when readonly", async () => {
-    const { user } = await render(
-      <FileInput data-testid="fileInput" readOnly />,
-    )
+    await render(<FileInput data-testid="fileInput" readOnly />)
 
     const input = getInput()
     const fn = vi.fn()
 
     input.addEventListener("click", fn)
-    await user.click(page.getByTestId("fileInput"), {
-      force: true,
-    } as { [key: string]: unknown })
+    clickElement(page.getByTestId("fileInput").element())
 
     expect(fn).toHaveBeenCalledTimes(0)
   })

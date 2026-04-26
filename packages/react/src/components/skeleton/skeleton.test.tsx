@@ -32,9 +32,9 @@ describe("<Skeleton />", () => {
     await expect
       .element(page.getByTestId("skeletonCircle"))
       .toHaveClass("ui-skeleton")
-    expect(page.getByTestId("skeletonText").element().children[0]).toHaveClass(
-      "ui-skeleton",
-    )
+    await expect
+      .element(page.getByTestId("skeletonText").locator("> div").first())
+      .toHaveClass("ui-skeleton")
   })
 
   test("renders HTML tag correctly", async () => {
@@ -122,9 +122,9 @@ describe("<Skeleton />", () => {
 
   test("does not set fitContent when false and no children", async () => {
     await render(<Skeleton data-testid="skeleton" />)
-    const styles = getComputedStyle(page.getByTestId("skeleton").element())
-    expect(styles.getPropertyValue("--width").trim()).not.toBe("fit-content")
-    expect(styles.getPropertyValue("--height").trim()).not.toBe("fit-content")
+    const styles = page.getByTestId("skeleton").element().style
+    expect(styles.getPropertyValue("--width")).toBe("")
+    expect(styles.getPropertyValue("--height")).toBe("")
   })
 
   test("fitContent false overrides children default", async () => {
@@ -133,8 +133,8 @@ describe("<Skeleton />", () => {
         <span>Content</span>
       </Skeleton>,
     )
-    const styles = getComputedStyle(page.getByTestId("skeleton").element())
-    expect(styles.getPropertyValue("--width").trim()).not.toBe("fit-content")
-    expect(styles.getPropertyValue("--height").trim()).not.toBe("fit-content")
+    const styles = page.getByTestId("skeleton").element().style
+    expect(styles.getPropertyValue("--width")).toBe("")
+    expect(styles.getPropertyValue("--height")).toBe("")
   })
 })

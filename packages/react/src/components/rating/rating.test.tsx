@@ -3,7 +3,7 @@ import { Rating } from "."
 
 const dispatchMouse = (
   el: EventTarget,
-  type: "mousedown" | "mouseleave" | "mousemove",
+  type: "mousedown" | "mouseenter" | "mouseleave" | "mousemove" | "mouseout",
   init: MouseEventInit = {},
 ) => {
   el.dispatchEvent(new MouseEvent(type, { bubbles: true, ...init }))
@@ -128,12 +128,8 @@ describe("<Rating />", () => {
     await expect.poll(() => items[2]?.hasAttribute("data-filled")).toBe(true)
     await expect.poll(() => items[3]?.hasAttribute("data-filled")).toBe(false)
 
-    rating.dispatchEvent(
-      new MouseEvent("mouseout", {
-        bubbles: true,
-        relatedTarget: document.body,
-      }),
-    )
+    dispatchMouse(rating, "mouseleave")
+    dispatchMouse(rating, "mouseout", { relatedTarget: document.body })
 
     await expect.poll(() => items[1]?.hasAttribute("data-filled")).toBe(false)
     await expect.poll(() => items[2]?.hasAttribute("data-filled")).toBe(false)
@@ -270,8 +266,13 @@ describe("<Rating />", () => {
     const { container, user } = await render(<Rating onChange={onChange} />)
 
     const inputs = container.querySelectorAll("input[type='radio']")
+    const firstInput = inputs[0] as HTMLInputElement
 
-    ;(inputs[1] as HTMLInputElement).focus()
+    await user.tab()
+    firstInput.focus()
+    await user.keyboard("{ArrowRight}")
+
+    await expect.poll(() => document.activeElement === inputs[1]).toBe(true)
 
     await user.keyboard("{Space}")
 

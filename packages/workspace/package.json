@@ -6,8 +6,8 @@
   "description": "The workspace for Yamada UI projects",
   "scripts": {
     "clean": "rimraf node_modules trace",
-    "typecheck": "tsc",
-    "typetrace": "tsc --generateTrace ./trace --incremental false",
+    "typecheck": "tsgo",
+    "typetrace": "tsgo --generateTrace ./trace --incremental false",
     "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
     "lint": "oxlint . --max-warnings=0",
     "format": "pnpm -w format packages/workspace",
@@ -31,6 +31,7 @@
     "@octokit/rest": "^22.0.1",
     "@octokit/webhooks": "^14.2.0",
     "@testing-library/jest-dom": "catalog:",
+    "@typescript/native-preview": "catalog:",
     "@vitest/eslint-plugin": "^1.6.14",
     "dotenv": "catalog:",
     "eslint-plugin-perfectionist": "^5.8.0",

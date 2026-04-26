@@ -35,11 +35,11 @@ describe("<HueSlider />", () => {
   test("renders custom children correctly", async () => {
     await render(
       <HueSlider.Root defaultValue={180}>
-        <div data-testid="custom-child" />
+        <div data-testid="custom-child">custom</div>
       </HueSlider.Root>,
     )
 
-    await expect.element(page.getByTestId("custom-child")).toBeInTheDocument()
+    await expect.element(page.getByTestId("custom-child")).toBeVisible()
   })
 
   test("sets aria attributes correctly", async () => {

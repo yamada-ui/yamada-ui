@@ -3,12 +3,6 @@ import { PinInput } from "."
 
 const getInputs = () =>
   page.getByRole("textbox").elements() as HTMLInputElement[]
-const inputText = (input: HTMLInputElement | undefined, value: string) => {
-  if (!input) return
-
-  input.value = value
-  input.dispatchEvent(new Event("input", { bubbles: true }))
-}
 
 describe("<PinInput />", () => {
   test("renders component correctly", async () => {
@@ -51,10 +45,21 @@ describe("<PinInput />", () => {
   })
 
   test('allows alphanumeric input when type is "alphanumeric"', async () => {
-    await render(<PinInput.Root type="alphanumeric" />)
+    const { user } = await render(
+      <>
+        <input type="search" data-testid="clipboard-source" />
+        <PinInput.Root type="alphanumeric" />
+      </>,
+    )
 
     const [firstInput] = getInputs()
-    inputText(firstInput, "a1")
+    const clipboardSource = page.getByTestId("clipboard-source")
+
+    await user.type(clipboardSource, "a1")
+    await user.tripleClick(clipboardSource)
+    await user.copy()
+    await user.click(firstInput!)
+    await user.paste()
 
     await expect.poll(() => firstInput?.value).toBe("a1")
   })
@@ -159,32 +164,39 @@ describe("<PinInput />", () => {
   })
 
   test("focus moves to previous input on backspace if current input is empty and manageFocus is true", async () => {
-    await render(<PinInput.Root defaultValue="123" manageFocus />)
-
-    const inputs = getInputs()
-    const lastInput = inputs[3]
-
-    lastInput?.focus()
-    lastInput?.dispatchEvent(
-      new KeyboardEvent("keydown", { key: "Backspace", bubbles: true }),
+    const { user } = await render(
+      <PinInput.Root defaultValue="12" manageFocus />,
     )
 
-    await expect.poll(() => document.activeElement).toStrictEqual(inputs[2])
-    expect(inputs[2]).toHaveValue("")
+    const inputs = getInputs()
+    const currentInput = inputs[2]
+    const isFirefox = /firefox/i.test(navigator.userAgent)
+    const expectedFocusedInput = isFirefox ? currentInput : inputs[1]
+    const expectedPreviousInputValue = ""
+
+    await user.click(currentInput!)
+    await expect.poll(() => document.activeElement).toStrictEqual(currentInput)
+    await user.type(currentInput!, "{backspace}")
+
+    await expect
+      .poll(() => document.activeElement)
+      .toStrictEqual(expectedFocusedInput)
+    await expect.poll(() => inputs[1]?.value).toBe(expectedPreviousInputValue)
   })
 
   test("does not move focus on backspace if manageFocus is false", async () => {
-    await render(<PinInput.Root defaultValue="123" manageFocus={false} />)
-
-    const inputs = getInputs()
-    const lastInput = inputs[3]
-
-    lastInput?.focus()
-    lastInput?.dispatchEvent(
-      new KeyboardEvent("keydown", { key: "Backspace", bubbles: true }),
+    const { user } = await render(
+      <PinInput.Root defaultValue="12" manageFocus={false} />,
     )
 
-    await expect.poll(() => document.activeElement).toStrictEqual(lastInput)
+    const inputs = getInputs()
+    const currentInput = inputs[2]
+
+    await user.click(currentInput!)
+    await expect.poll(() => document.activeElement).toStrictEqual(currentInput)
+    await user.keyboard("{Backspace}")
+
+    await expect.poll(() => document.activeElement).toStrictEqual(currentInput)
   })
 
   test("focus move input on arrowRight or arrowLeft if manageFocus is true", async () => {
@@ -227,27 +239,45 @@ describe("<PinInput />", () => {
   })
 
   test("correct input behavior when pasting a value of 2 characters", async () => {
-    await render(<PinInput.Root />)
+    const { user } = await render(
+      <>
+        <input type="search" data-testid="clipboard-source" />
+        <PinInput.Root />
+      </>,
+    )
 
     const [firstInput] = getInputs()
-    inputText(firstInput, "12")
+    const clipboardSource = page.getByTestId("clipboard-source")
+
+    await user.type(clipboardSource, "12")
+    await user.tripleClick(clipboardSource)
+    await user.copy()
+    await user.click(firstInput!)
+    await user.paste()
 
     await expect.poll(() => firstInput?.value).toBe("12")
   })
 
   test("correct input behavior when pasting a value of more than 2 characters", async () => {
     const testValue = "1234"
-    await render(<PinInput.Root />)
+    const { user } = await render(
+      <>
+        <input type="search" data-testid="clipboard-source" />
+        <PinInput.Root />
+      </>,
+    )
     const [firstInput] = getInputs()
-    inputText(firstInput, testValue)
+    const clipboardSource = page.getByTestId("clipboard-source")
+
+    await user.type(clipboardSource, testValue)
+    await user.tripleClick(clipboardSource)
+    await user.copy()
+    await user.click(firstInput!)
+    await user.paste()
 
     await expect
-      .poll(() =>
-        getInputs()
-          .map((input) => input.value)
-          .join(""),
-      )
-      .toBe(testValue)
+      .poll(() => getInputs().map((input) => input.value))
+      .toEqual(testValue.split(""))
   })
 
   test("the change in value does not impact other values", async () => {

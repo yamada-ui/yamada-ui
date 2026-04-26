@@ -190,7 +190,7 @@ describe("<Modal />", () => {
     const { user } = await render(
       <TestComponent open onClose={onClose} onEsc={onEsc} />,
     )
-    await user.click(page.getByTestId("content"))
+    page.getByRole("button", { name: "Close modal" }).element().focus()
     await user.keyboard("{Escape}")
     expect(onEsc).toHaveBeenCalledOnce()
     expect(onClose).toHaveBeenCalledOnce()
@@ -202,7 +202,7 @@ describe("<Modal />", () => {
     const { user } = await render(
       <TestComponent closeOnEsc={false} open onClose={onClose} onEsc={onEsc} />,
     )
-    await user.click(page.getByTestId("content"))
+    page.getByRole("button", { name: "Close modal" }).element().focus()
     await user.keyboard("{Escape}")
     expect(onEsc).toHaveBeenCalledOnce()
     expect(onClose).not.toHaveBeenCalled()
@@ -211,7 +211,7 @@ describe("<Modal />", () => {
   test("does not trigger onEsc when a non-Escape key is pressed", async () => {
     const onEsc = vi.fn()
     const { user } = await render(<TestComponent open onEsc={onEsc} />)
-    await user.click(page.getByTestId("content"))
+    page.getByRole("button", { name: "Close modal" }).element().focus()
     await user.keyboard("{Enter}")
     expect(onEsc).not.toHaveBeenCalled()
   })
@@ -219,7 +219,7 @@ describe("<Modal />", () => {
   test("closes modal when overlay is clicked", async () => {
     const onClose = vi.fn()
     const { user } = await render(<TestComponent open onClose={onClose} />)
-    await user.click(page.getByTestId("overlay"))
+    await user.click(page.getByTestId("overlay"), { force: true })
     expect(onClose).toHaveBeenCalledOnce()
   })
 
@@ -228,7 +228,7 @@ describe("<Modal />", () => {
     const { user } = await render(
       <TestComponent closeOnOverlay={false} open onClose={onClose} />,
     )
-    await user.click(page.getByTestId("overlay"))
+    await user.click(page.getByTestId("overlay"), { force: true })
     expect(onClose).not.toHaveBeenCalled()
   })
 

@@ -18,6 +18,7 @@ concurrency:
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+  TURBO_SCM_BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
   NODE_OPTIONS: --max-old-space-size=8192
 
 jobs:
@@ -29,33 +30,27 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-
-      - name: Check modified files
-        id: check-modified
-        uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
         with:
-          files: |
-            turbo.json
-            packages/**/(package.json|tsconfig.json|tsdown.config.ts)
-            packages/**/src/**/*.{ts,tsx}
-            !packages/**/src/**/*.stories.{ts,tsx}
-            !packages/**/src/**/*.test.{ts,tsx}
-            !packages/workspace/src/**
-            packages/workspace/src/typescript/**
-            .github/workflows/quality.yml
+          fetch-depth: 0
 
       - name: Install
-        if: steps.check-modified.outputs.any_changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Build packages
-        if: steps.check-modified.outputs.any_changed == 'true'
-        run: pnpm build
+        run: pnpm build --affected
 
-  test:
-    name: Test
+  unit_test:
+    name: Unit Test
     if: ${{ !github.event.pull_request.draft }}
-    uses: ./.github/workflows/test.yml
+    uses: ./.github/workflows/unit-test.yml
+    secrets:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  browser_test:
+    name: Browser Test
+    if: ${{ !github.event.pull_request.draft }}
+    uses: ./.github/workflows/browser-test.yml
     secrets:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -68,79 +63,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-
-      - name: Check modified files
-        id: changed-files
-        uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
         with:
-          files_yaml: |
-            packages:
-              - turbo.json
-              - packages/**/(package.json|tsconfig.json)
-              - packages/**/*.{ts,tsx,mts}
-              - .github/workflows/quality.yml
-            www:
-              - turbo.json
-              - packages/workspace/src/oxlint/**
-              - packages/workspace/package.json
-              - www/**/*.{ts,tsx,mts,mdx}
-              - www/package.json
-              - www/tsconfig.json
-              - www/turbo.json
-              - .github/workflows/quality.yml
+          fetch-depth: 0
 
       - name: Install
-        if: steps.changed-files.outputs.changed_keys != ''
         uses: ./.github/composite-actions/install
 
       - name: Run lint
-        if: steps.changed-files.outputs.packages_any_changed == 'true'
-        run: pnpm lint
+        run: pnpm turbo run lint --affected
 
-      - name: Run lint
-        if: steps.changed-files.outputs.www_any_changed == 'true'
-        run: pnpm turbo run lint --filter www
-
-  typescript:
-    name: TypeScript
+  typecheck:
+    name: Typecheck
     if: ${{ !github.event.pull_request.draft }}
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    steps:
-      - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-
-      - name: Check modified files
-        id: changed-files
-        uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
-        with:
-          files_yaml: |
-            packages:
-              - turbo.json
-              - packages/**/(package.json|tsconfig.json)
-              - packages/**/*.{ts,tsx,mts}
-              - .github/workflows/quality.yml
-            www:
-              - turbo.json
-              - packages/workspace/src/typescript/**
-              - packages/workspace/package.json
-              - www/**/*.{ts,tsx,mts}
-              - www/package.json
-              - www/tsconfig.json
-              - www/turbo.json
-              - .github/workflows/quality.yml
-
-      - name: Install
-        if: steps.changed-files.outputs.changed_keys != ''
-        uses: ./.github/composite-actions/install
-
-      - name: Run typecheck
-        if: steps.changed-files.outputs.packages_any_changed == 'true'
-        run: pnpm typecheck
-
-      - name: Run typecheck
-        if: steps.changed-files.outputs.www_any_changed == 'true'
-        run: pnpm turbo run typecheck --filter www
+    uses: ./.github/workflows/typecheck.yml
+    secrets:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+    with:
+      TURBO_SCM_BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
 
   format:
     name: Format

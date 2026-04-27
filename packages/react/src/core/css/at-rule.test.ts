@@ -1,4 +1,4 @@
-import { system } from "#test"
+import { system } from "#test/browser"
 import { generateAtRule } from "./at-rule"
 
 describe("atRule", () => {

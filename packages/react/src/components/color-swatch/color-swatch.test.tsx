@@ -3,6 +3,10 @@ import { a11y, page, render } from "#test/browser"
 import { ColorSwatch, ColorSwatchGroup } from "."
 
 describe("<ColorSwatchGroup />", () => {
+  test("passes a11y checks", async () => {
+    await a11y(<ColorSwatchGroup items={["#ff0000", "#00ff00", "#0000ff"]} />)
+  })
+
   test("renders empty swatch when no items are provided", async () => {
     await render(<ColorSwatchGroup />)
 

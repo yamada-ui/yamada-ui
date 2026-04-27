@@ -85,7 +85,7 @@ describe("<For />", () => {
 
   test("For renders correctly with reverse", async () => {
     let indexes: number[] = []
-    const { container } = await render(
+    await render(
       <For each={["One", "Two", "Three"]} reverse>
         {(item, index) => {
           indexes.push(index)
@@ -97,15 +97,16 @@ describe("<For />", () => {
         }}
       </For>,
     )
-    const items = Array.from(
-      container.querySelectorAll('[data-testid="for"]'),
-    ).map((el) => el.textContent)
+    const items = page
+      .getByTestId("for")
+      .elements()
+      .map((el) => el.textContent)
     expect(items).toStrictEqual(["Three", "Two", "One"])
     expect(indexes).toStrictEqual([0, 1, 2])
   })
 
   test("For renders correctly with sort", async () => {
-    const { container } = await render(
+    await render(
       <For each={["One", "Two", "Three"]} sort={(a, b) => a.localeCompare(b)}>
         {(item, index) => (
           <div key={index} data-testid="for">
@@ -114,14 +115,15 @@ describe("<For />", () => {
         )}
       </For>,
     )
-    const items = Array.from(
-      container.querySelectorAll('[data-testid="for"]'),
-    ).map((el) => el.textContent)
+    const items = page
+      .getByTestId("for")
+      .elements()
+      .map((el) => el.textContent)
     expect(items).toStrictEqual(["One", "Three", "Two"])
   })
 
   test("For renders correctly with combined options", async () => {
-    const { container } = await render(
+    await render(
       <For
         each={["One", "Two", "Three", "Four"]}
         filter={(item) => item !== "Two"}
@@ -137,9 +139,10 @@ describe("<For />", () => {
         )}
       </For>,
     )
-    const items = Array.from(
-      container.querySelectorAll('[data-testid="for-combined-item"]'),
-    ).map((el) => el.textContent)
+    const items = page
+      .getByTestId("for-combined-item")
+      .elements()
+      .map((el) => el.textContent)
     expect(items).toStrictEqual(["One", "Four"])
   })
 })

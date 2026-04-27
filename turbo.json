@@ -1,10 +1,27 @@
 {
   "$schema": "https://turborepo.dev/schema.v2.json",
+  "futureFlags": { "affectedUsingTaskInputs": true },
   "tasks": {
     "//#transit": { "dependsOn": ["^transit"] },
-    "transit": { "dependsOn": ["^transit"] },
+    "transit": {
+      "dependsOn": ["^transit"],
+      "inputs": [
+        "package.json",
+        "src/**/*.{ts,tsx,mts}",
+        "!src/**/*.{test,stories}.{ts,tsx,mts}"
+      ]
+    },
+    "transit:test": {
+      "dependsOn": ["^transit:test"],
+      "inputs": ["src/vitest/**", "package.json"]
+    },
     "build": {
       "dependsOn": ["^build"],
+      "inputs": [
+        "package.json",
+        "{src,@types}/**/*.{ts,tsx,mts}",
+        "!src/**/*.{test,stories}.{ts,tsx,mts}"
+      ],
       "outputs": ["dist/**"]
     },
     "build:content": {
@@ -12,26 +29,73 @@
       "outputs": [".velite/**", "data/doc-map.*.json"]
     },
     "test": {
-      "dependsOn": ["transit"]
+      "dependsOn": ["transit:test"],
+      "inputs": [
+        "package.json",
+        "**/*.{ts,tsx,mts}",
+        "!**/*.stories.{ts,tsx,mts}",
+        "!{oxlint,tsdown}.config.ts",
+        "!{scripts,storybook,@types}/**"
+      ]
     },
     "test:coverage": {
-      "dependsOn": ["transit"],
+      "dependsOn": ["transit:test"],
+      "inputs": [
+        "package.json",
+        "**/*.{ts,tsx,mts}",
+        "!**/*.stories.{ts,tsx,mts}",
+        "!{oxlint,tsdown}.config.ts",
+        "!{scripts,storybook,@types}/**"
+      ],
       "outputs": ["coverage/**"]
     },
     "test:chromium": {
-      "dependsOn": ["transit"]
+      "dependsOn": ["transit:test"],
+      "inputs": [
+        "package.json",
+        "**/*.{ts,tsx,mts}",
+        "!**/*.stories.{ts,tsx,mts}",
+        "!{oxlint,tsdown}.config.ts",
+        "!{scripts,storybook,@types}/**"
+      ]
     },
     "test:firefox": {
-      "dependsOn": ["transit"]
+      "dependsOn": ["transit:test"],
+      "inputs": [
+        "package.json",
+        "**/*.{ts,tsx,mts}",
+        "!**/*.stories.{ts,tsx,mts}",
+        "!{oxlint,tsdown}.config.ts",
+        "!{scripts,storybook,@types}/**"
+      ]
     },
     "test:webkit": {
-      "dependsOn": ["transit"]
+      "dependsOn": ["transit:test"],
+      "inputs": [
+        "package.json",
+        "**/*.{ts,tsx,mts}",
+        "!**/*.stories.{ts,tsx,mts}",
+        "!{oxlint,tsdown}.config.ts",
+        "!{scripts,storybook,@types}/**"
+      ]
     },
     "typecheck": {
-      "dependsOn": ["transit"]
+      "dependsOn": ["transit"],
+      "inputs": [
+        "package.json",
+        "tsconfig.json",
+        "src/**/*.{ts,tsx,mts}",
+        "!src/**/*.{test,stories}.{ts,tsx,mts}"
+      ]
     },
     "lint": {
-      "dependsOn": ["transit"]
+      "dependsOn": ["transit"],
+      "inputs": [
+        "package.json",
+        "tsconfig.json",
+        "src/**/*.{ts,tsx,mts}",
+        "!src/**/*.{test,stories}.{ts,tsx,mts}"
+      ]
     }
   },
   "globalDependencies": ["tsconfig.json"]

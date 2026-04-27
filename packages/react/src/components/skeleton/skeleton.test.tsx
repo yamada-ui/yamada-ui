@@ -32,9 +32,9 @@ describe("<Skeleton />", () => {
     await expect
       .element(page.getByTestId("skeletonCircle"))
       .toHaveClass("ui-skeleton")
-    await expect
-      .element(page.getByTestId("skeletonText").locator("> div").first())
-      .toHaveClass("ui-skeleton")
+    expect(page.getByTestId("skeletonText").element().children[0]).toHaveClass(
+      "ui-skeleton",
+    )
   })
 
   test("renders HTML tag correctly", async () => {

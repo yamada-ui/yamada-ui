@@ -4,7 +4,7 @@ import { Bleed } from "./bleed"
 const getPixelNumber = (value: string) => Number.parseFloat(value)
 const FULL_BLEED_PRECISION = 1
 
-const getExpectedFullBleed = (container: HTMLElement) =>
+const getExpectedFullBleed = (container: HTMLElement | SVGElement) =>
   container.getBoundingClientRect().width / 2 - window.innerWidth / 2
 
 describe("<Bleed />", () => {

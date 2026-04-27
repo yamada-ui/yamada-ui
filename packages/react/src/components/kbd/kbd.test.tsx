@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Kbd } from "."
 
 describe("<Kbd />", () => {
@@ -10,13 +10,15 @@ describe("<Kbd />", () => {
     expect(Kbd.displayName).toBe("Kbd")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Kbd>enter</Kbd>)
-    expect(screen.getByText("enter")).toHaveClass("ui-kbd")
+  test("sets `className` correctly", async () => {
+    await render(<Kbd>enter</Kbd>)
+
+    await expect.element(page.getByText("enter")).toHaveClass("ui-kbd")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Kbd>enter</Kbd>)
-    expect(screen.getByText("enter").tagName).toBe("KBD")
+  test("renders HTML tag correctly", async () => {
+    await render(<Kbd>enter</Kbd>)
+
+    expect(page.getByText("enter").element().tagName).toBe("KBD")
   })
 })

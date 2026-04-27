@@ -27,8 +27,10 @@ describe("<SegmentedControl />", () => {
   test("sets `className` correctly", async () => {
     await render(<TestComponent />)
     const firstItem = page
-      .getByRole("radio", { name: "One" })
-      .locator("xpath=..")
+      .getByRole("radio", {
+        name: "One",
+      })
+      .element().parentElement as HTMLElement
 
     await expect
       .element(page.getByRole("radiogroup"))
@@ -62,7 +64,11 @@ describe("<SegmentedControl />", () => {
   test("should call onChange when a different item is selected", async () => {
     const onChange = vi.fn()
     const { user } = await render(<TestComponent onChange={onChange} />)
-    const twoItem = page.getByRole("radio", { name: "Two" }).locator("xpath=..")
+    const twoItem = page
+      .getByRole("radio", {
+        name: "Two",
+      })
+      .element().parentElement as HTMLElement
 
     await user.click(twoItem)
     expect(onChange).toHaveBeenCalledWith("two")
@@ -72,7 +78,11 @@ describe("<SegmentedControl />", () => {
     const { user } = await render(<TestComponent />)
 
     const one = page.getByRole("radio", { name: "One" })
-    const two = page.getByRole("radio", { name: "Two" }).locator("xpath=..")
+    const two = page
+      .getByRole("radio", {
+        name: "Two",
+      })
+      .element().parentElement as HTMLElement
 
     await expect.element(one).toBeChecked()
     await user.click(two)

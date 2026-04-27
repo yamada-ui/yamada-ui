@@ -1,6 +1,6 @@
 import type React from "react"
 
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Alert } from "./"
 
 describe("<Alert />", () => {
@@ -21,8 +21,8 @@ describe("<Alert />", () => {
     expect(Alert.Description.displayName).toBe("AlertDescription")
   })
 
-  test("sets `className` correctly", () => {
-    render(
+  test("sets `className` correctly", async () => {
+    await render(
       <Alert.Root data-testid="alert">
         <Alert.Icon data-testid="icon" />
         <Alert.Title>Alert title</Alert.Title>
@@ -30,16 +30,20 @@ describe("<Alert />", () => {
       </Alert.Root>,
     )
 
-    expect(screen.getByTestId("alert")).toHaveClass("ui-alert__root")
-    expect(screen.getByTestId("icon")).toHaveClass("ui-alert__icon")
-    expect(screen.getByText("Alert title")).toHaveClass("ui-alert__title")
-    expect(screen.getByText("Alert description")).toHaveClass(
-      "ui-alert__description",
-    )
+    await expect
+      .element(page.getByTestId("alert"))
+      .toHaveClass("ui-alert__root")
+    await expect.element(page.getByTestId("icon")).toHaveClass("ui-alert__icon")
+    await expect
+      .element(page.getByText("Alert title"))
+      .toHaveClass("ui-alert__title")
+    await expect
+      .element(page.getByText("Alert description"))
+      .toHaveClass("ui-alert__description")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(
+  test("renders HTML tag correctly", async () => {
+    await render(
       <Alert.Root data-testid="alert">
         <Alert.Icon data-testid="icon" />
         <Alert.Title>Alert title</Alert.Title>
@@ -47,14 +51,14 @@ describe("<Alert />", () => {
       </Alert.Root>,
     )
 
-    expect(screen.getByTestId("alert").tagName).toBe("DIV")
-    expect(screen.getByTestId("icon").tagName).toBe("svg")
-    expect(screen.getByText("Alert title").tagName).toBe("P")
-    expect(screen.getByText("Alert description").tagName).toBe("SPAN")
+    expect(page.getByTestId("alert").element().tagName).toBe("DIV")
+    expect(page.getByTestId("icon").element().tagName).toBe("svg")
+    expect(page.getByText("Alert title").element().tagName).toBe("P")
+    expect(page.getByText("Alert description").element().tagName).toBe("SPAN")
   })
 
-  test("should have role='alert'", () => {
-    render(
+  test("should have role='alert'", async () => {
+    await render(
       <Alert.Root>
         <Alert.Icon />
         <Alert.Title>Alert title</Alert.Title>
@@ -62,47 +66,47 @@ describe("<Alert />", () => {
       </Alert.Root>,
     )
 
-    expect(screen.getByRole("alert")).toBeInTheDocument()
+    await expect.element(page.getByRole("alert")).toBeInTheDocument()
   })
 
-  test("renders Alert.Loading with default loadingScheme", () => {
-    render(
+  test("renders Alert.Loading with default loadingScheme", async () => {
+    await render(
       <Alert.Root status="info">
         <Alert.Loading data-testid="loading" />
       </Alert.Root>,
     )
 
-    expect(screen.getByTestId("loading")).toBeInTheDocument()
+    await expect.element(page.getByTestId("loading")).toBeInTheDocument()
   })
 
-  test("renders Alert.Loading with custom loadingScheme", () => {
-    render(
+  test("renders Alert.Loading with custom loadingScheme", async () => {
+    await render(
       <Alert.Root status="info">
         <Alert.Loading data-testid="loading" loadingScheme="dots" />
       </Alert.Root>,
     )
 
-    expect(screen.getByTestId("loading")).toBeInTheDocument()
+    await expect.element(page.getByTestId("loading")).toBeInTheDocument()
   })
 
-  test("uses status as default colorScheme when colorScheme is not provided", () => {
-    render(<Alert.Root data-testid="alert" status="error" />)
+  test("uses status as default colorScheme when colorScheme is not provided", async () => {
+    await render(<Alert.Root data-testid="alert" status="error" />)
 
-    expect(screen.getByTestId("alert")).toBeInTheDocument()
-    expect(screen.getByRole("alert")).toBeInTheDocument()
+    await expect.element(page.getByTestId("alert")).toBeInTheDocument()
+    await expect.element(page.getByRole("alert")).toBeInTheDocument()
   })
 
-  test("Alert.Icon respects `as` prop (custom icon)", () => {
+  test("Alert.Icon respects `as` prop (custom icon)", async () => {
     const CustomIcon = (props: React.SVGProps<SVGSVGElement>) => (
       <svg data-testid="custom-icon" {...props} />
     )
 
-    render(
+    await render(
       <Alert.Root status="success">
         <Alert.Icon as={CustomIcon} />
       </Alert.Root>,
     )
 
-    expect(screen.getByTestId("custom-icon")).toBeInTheDocument()
+    await expect.element(page.getByTestId("custom-icon")).toBeInTheDocument()
   })
 })

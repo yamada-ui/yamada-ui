@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { PropsTable } from "#storybook"
 import { useState } from "react"
+import { PropsTable } from "#storybook"
 import { SaturationSlider } from "."
 import { Text } from "../text"
 import { Tooltip } from "../tooltip"

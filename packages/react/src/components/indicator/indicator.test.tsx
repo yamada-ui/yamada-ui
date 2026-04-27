@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Indicator } from "."
 
 describe("<Indicator />", () => {
@@ -14,29 +14,29 @@ describe("<Indicator />", () => {
     expect(Indicator.displayName).toBe("IndicatorRoot")
   })
 
-  test("sets `className` correctly", () => {
-    render(
+  test("sets `className` correctly", async () => {
+    await render(
       <Indicator data-testid="indicator" label="New">
         <div />
       </Indicator>,
     )
-    const el = screen.getByText("New")
+    const el = page.getByText("New").element()
     expect(el).toHaveClass("ui-indicator__label")
     expect(el.parentElement).toHaveClass("ui-indicator__float")
     expect(el.parentElement?.parentElement).toHaveClass("ui-indicator__root")
   })
 
-  test("should render", () => {
-    render(
+  test("should render", async () => {
+    await render(
       <Indicator label="New">
         <div />
       </Indicator>,
     )
-    expect(screen.getByText("New")).toBeInTheDocument()
+    await expect.element(page.getByText("New")).toBeInTheDocument()
   })
 
-  test("should render (with overflowCount)", () => {
-    render(
+  test("should render (with overflowCount)", async () => {
+    await render(
       <Indicator
         label={100}
         overflowCount={99}
@@ -45,11 +45,11 @@ describe("<Indicator />", () => {
         <div />
       </Indicator>,
     )
-    expect(screen.getByTestId("indicator")).toHaveTextContent("+")
+    await expect.element(page.getByTestId("indicator")).toHaveTextContent("+")
   })
 
-  test("should not render zero when showZero is false", () => {
-    render(
+  test("should not render zero when showZero is false", async () => {
+    const { container } = await render(
       <Indicator
         label={0}
         showZero={false}
@@ -58,11 +58,11 @@ describe("<Indicator />", () => {
         <div />
       </Indicator>,
     )
-    expect(screen.queryByTestId("indicator")).not.toBeInTheDocument()
+    expect(container.querySelector('[data-testid="indicator"]')).toBeNull()
   })
 
-  test("should not render", () => {
-    render(
+  test("should not render", async () => {
+    const { container } = await render(
       <Indicator
         disabled
         label="New"
@@ -71,20 +71,20 @@ describe("<Indicator />", () => {
         <div />
       </Indicator>,
     )
-    expect(screen.queryByTestId("indicator")).not.toBeInTheDocument()
+    expect(container.querySelector('[data-testid="indicator"]')).toBeNull()
   })
 
-  test("should render zero when showZero is true", () => {
-    render(
+  test("should render zero when showZero is true", async () => {
+    await render(
       <Indicator label={0} showZero labelProps={{ "data-testid": "indicator" }}>
         <div />
       </Indicator>,
     )
-    expect(screen.getByTestId("indicator")).toHaveTextContent("0")
+    await expect.element(page.getByTestId("indicator")).toHaveTextContent("0")
   })
 
-  test("should render numeric label without overflow", () => {
-    render(
+  test("should render numeric label without overflow", async () => {
+    const { container } = await render(
       <Indicator
         label={50}
         overflowCount={99}
@@ -93,30 +93,34 @@ describe("<Indicator />", () => {
         <div />
       </Indicator>,
     )
-    expect(screen.getByTestId("indicator")).toHaveTextContent("50")
-    expect(screen.queryByText("+")).not.toBeInTheDocument()
+    await expect.element(page.getByTestId("indicator")).toHaveTextContent("50")
+    expect(container.textContent).not.toContain("+")
   })
 
-  test("should set data-numeric attribute for numeric labels", () => {
-    render(
+  test("should set data-numeric attribute for numeric labels", async () => {
+    await render(
       <Indicator label={10} labelProps={{ "data-testid": "indicator" }}>
         <div />
       </Indicator>,
     )
-    expect(screen.getByTestId("indicator")).toHaveAttribute("data-numeric")
+    await expect
+      .element(page.getByTestId("indicator"))
+      .toHaveAttribute("data-numeric")
   })
 
-  test("should not set data-numeric attribute for non-numeric labels", () => {
-    render(
+  test("should not set data-numeric attribute for non-numeric labels", async () => {
+    await render(
       <Indicator label="New" labelProps={{ "data-testid": "indicator" }}>
         <div />
       </Indicator>,
     )
-    expect(screen.getByTestId("indicator")).not.toHaveAttribute("data-numeric")
+    await expect
+      .element(page.getByTestId("indicator"))
+      .not.toHaveAttribute("data-numeric")
   })
 
-  test("should apply ping prop with boolean value", () => {
-    render(
+  test("should apply ping prop with boolean value", async () => {
+    await render(
       <Indicator
         data-testid="indicator-root"
         label="New"
@@ -126,15 +130,15 @@ describe("<Indicator />", () => {
         <div />
       </Indicator>,
     )
-    const label = screen.getByTestId("indicator")
+    const label = page.getByTestId("indicator").element()
 
     expect(label).toBeInTheDocument()
     // Verify the label element exists (ping affects pseudo-element styling)
     expect(label.parentElement).toHaveClass("ui-indicator__float")
   })
 
-  test("should apply ping prop with object configuration", () => {
-    render(
+  test("should apply ping prop with object configuration", async () => {
+    await render(
       <Indicator
         data-testid="indicator-root"
         label="New"
@@ -150,7 +154,7 @@ describe("<Indicator />", () => {
         <div />
       </Indicator>,
     )
-    const root = screen.getByTestId("indicator-root")
+    const root = page.getByTestId("indicator-root").element()
     const styles = getComputedStyle(root)
 
     expect(styles.getPropertyValue("--animation-scale")).toBe("1.5")
@@ -160,8 +164,8 @@ describe("<Indicator />", () => {
     expect(styles.getPropertyValue("--timing-function")).toBeTruthy()
   })
 
-  test("should apply offset prop", () => {
-    render(
+  test("should apply offset prop", async () => {
+    await render(
       <Indicator
         label="New"
         offset={10}
@@ -171,15 +175,15 @@ describe("<Indicator />", () => {
         <div />
       </Indicator>,
     )
-    const floatElement = screen.getByTestId("float-element")
+    const floatElement = page.getByTestId("float-element").element()
     const styles = getComputedStyle(floatElement)
 
     expect(styles.getPropertyValue("--offset-block")).toBeTruthy()
     expect(styles.getPropertyValue("--offset-inline")).toBeTruthy()
   })
 
-  test("should apply placement prop", () => {
-    render(
+  test("should apply placement prop", async () => {
+    await render(
       <Indicator
         label="New"
         placement="start-start"
@@ -189,16 +193,16 @@ describe("<Indicator />", () => {
         <div />
       </Indicator>,
     )
-    const floatElement = screen.getByTestId("float-element")
-    const label = screen.getByTestId("indicator")
+    const floatElement = page.getByTestId("float-element").element()
+    const label = page.getByTestId("indicator").element()
 
     // Verify Float element renders and contains the label
     expect(floatElement).toBeInTheDocument()
     expect(floatElement).toContainElement(label)
   })
 
-  test("should apply floatProps", () => {
-    render(
+  test("should apply floatProps", async () => {
+    await render(
       <Indicator
         label="New"
         floatProps={{ "data-testid": "float-element" }}
@@ -207,11 +211,11 @@ describe("<Indicator />", () => {
         <div />
       </Indicator>,
     )
-    expect(screen.getByTestId("float-element")).toBeInTheDocument()
+    await expect.element(page.getByTestId("float-element")).toBeInTheDocument()
   })
 
-  test("should apply custom className to labelProps", () => {
-    render(
+  test("should apply custom className to labelProps", async () => {
+    await render(
       <Indicator
         label="New"
         labelProps={{ className: "custom-label", "data-testid": "indicator" }}
@@ -219,7 +223,7 @@ describe("<Indicator />", () => {
         <div />
       </Indicator>,
     )
-    const label = screen.getByTestId("indicator")
+    const label = page.getByTestId("indicator").element()
     expect(label).toHaveClass("custom-label")
   })
 })

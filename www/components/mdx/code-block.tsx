@@ -59,13 +59,17 @@ export function CodeBlock({
         </YamadaCodeBlock.Header>
       ) : null}
       <YamadaCodeBlock.Content position="relative">
-        <YamadaCodeBlock.CopyTrigger
-          position="absolute"
-          right={{ base: "3.5", sm: "2", md: "3" }}
-          top={{ base: "3.5", md: "2" }}
-          zIndex="1"
+        {!titleProp ? (
+          <YamadaCodeBlock.CopyTrigger
+            position="absolute"
+            right={{ base: "3.5", sm: "2", md: "3" }}
+            top={{ base: "3.5", md: "2" }}
+            zIndex="1"
+          />
+        ) : null}
+        <YamadaCodeBlock.Code
+          pe={!titleProp ? { base: "16", sm: "12", md: "14" } : undefined}
         />
-        <YamadaCodeBlock.Code pe={{ base: "16", sm: "12", md: "14" }} />
       </YamadaCodeBlock.Content>
     </YamadaCodeBlock.Root>
   )

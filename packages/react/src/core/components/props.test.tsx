@@ -1,4 +1,4 @@
-import { renderHook } from "#test"
+import { renderHook } from "#test/browser"
 import {
   chainProps,
   createShouldForwardProp,
@@ -194,8 +194,8 @@ describe("extractProps", () => {
 })
 
 describe("useSplitProps", () => {
-  test("splits props based on keys", () => {
-    const { result } = renderHook(() =>
+  test("splits props based on keys", async () => {
+    const { result } = await renderHook(() =>
       useSplitProps({ id: "test", color: "red", fontSize: "16px" }, [
         "color",
         "fontSize",
@@ -208,8 +208,8 @@ describe("useSplitProps", () => {
 })
 
 describe("useExtractProps", () => {
-  test("extracts props via hook", () => {
-    const { result } = renderHook(() =>
+  test("extracts props via hook", async () => {
+    const { result } = await renderHook(() =>
       useExtractProps({ color: "red", fontSize: "16px" }, ["color"]),
     )
     expect(result.current).toStrictEqual({ color: "red" })

@@ -1,5 +1,4 @@
 import type { ColumnDef } from "@tanstack/react-table"
-import { fireEvent } from "@testing-library/react"
 import { useState } from "react"
 import { vi } from "vitest"
 import { a11y, page, render } from "#test/browser"
@@ -93,6 +92,10 @@ const groupedColumns: ColumnDef<Data, any>[] = [
   },
 ]
 
+const focusElement = (element: Element | null | undefined) => {
+  ;(element as HTMLElement | undefined)?.focus()
+}
+
 describe("<Table />", () => {
   test("renders component correctly", async () => {
     await a11y(<Table columns={columns} data={data} />)
@@ -111,9 +114,9 @@ describe("<Table />", () => {
       />,
     )
 
-    expect(
-      document.querySelector('[data-testid="table"]') as HTMLElement,
-    ).toHaveClass("ui-table")
+    expect(page.getByTestId("table").element() as HTMLElement).toHaveClass(
+      "ui-table",
+    )
   })
 
   test("renders HTML tag correctly", async () => {
@@ -125,9 +128,9 @@ describe("<Table />", () => {
       />,
     )
 
-    expect(
-      (document.querySelector('[data-testid="table"]') as HTMLElement).tagName,
-    ).toBe("TABLE")
+    expect((page.getByTestId("table").element() as HTMLElement).tagName).toBe(
+      "TABLE",
+    )
   })
 
   test("renders header and footer with render functions", async () => {
@@ -149,10 +152,10 @@ describe("<Table />", () => {
     )
 
     expect(
-      document.querySelector('[data-testid="custom-header"]') as HTMLElement,
+      page.getByTestId("custom-header").element() as HTMLElement,
     ).toHaveTextContent("5 rows")
     expect(
-      document.querySelector('[data-testid="custom-footer"]') as HTMLElement,
+      page.getByTestId("custom-footer").element() as HTMLElement,
     ).toHaveTextContent("5 rows")
   })
 
@@ -167,10 +170,10 @@ describe("<Table />", () => {
     )
 
     expect(
-      document.querySelector('[data-testid="header-node"]') as HTMLElement,
+      page.getByTestId("header-node").element() as HTMLElement,
     ).toBeInTheDocument()
     expect(
-      document.querySelector('[data-testid="footer-node"]') as HTMLElement,
+      page.getByTestId("footer-node").element() as HTMLElement,
     ).toBeInTheDocument()
   })
 
@@ -184,7 +187,7 @@ describe("<Table />", () => {
       />,
     )
 
-    const table = document.querySelector('[data-testid="table"]') as HTMLElement
+    const table = page.getByTestId("table").element() as HTMLElement
     const spans = table.querySelectorAll("td span")
 
     expect(spans.length).toBeGreaterThan(0)
@@ -218,9 +221,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const tfoot = table.querySelector("tfoot")
 
       expect(tfoot).toBeInTheDocument()
@@ -239,7 +240,7 @@ describe("<Table />", () => {
       )
 
       const checkboxes = [
-        ...document.querySelectorAll('input[type="checkbox"]'),
+        ...page.getByRole("checkbox").elements(),
       ] as HTMLElement[]
 
       expect(checkboxes.length).toBeGreaterThan(0)
@@ -256,15 +257,13 @@ describe("<Table />", () => {
         />,
       )
 
-      expect(document.querySelectorAll('input[type="checkbox"]')).toHaveLength(
-        0,
-      )
+      expect(page.getByRole("checkbox").elements()).toHaveLength(0)
     })
 
     test("selects all rows when header checkbox is clicked", async () => {
       const onRowSelectionChange = vi.fn()
 
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -274,12 +273,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const checkboxes = [
-        ...document.querySelectorAll('input[type="checkbox"]'),
-      ] as HTMLElement[]
-      const headerCheckbox = checkboxes[0]!
-
-      fireEvent.click(headerCheckbox)
+      const headerCheckbox = page.getByRole("checkbox").first().element()
+      focusElement(headerCheckbox)
+      await user.keyboard(" ")
 
       expect(onRowSelectionChange).toHaveBeenCalledWith(expect.any(Object))
     })
@@ -287,7 +283,7 @@ describe("<Table />", () => {
     test("selects individual row when row checkbox is clicked", async () => {
       const onRowSelectionChange = vi.fn()
 
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -297,12 +293,9 @@ describe("<Table />", () => {
         />,
       )
 
-      const checkboxes = [
-        ...document.querySelectorAll('input[type="checkbox"]'),
-      ] as HTMLElement[]
-      const firstRowCheckbox = checkboxes[1]!
-
-      fireEvent.click(firstRowCheckbox)
+      const firstRowCheckbox = page.getByRole("checkbox").nth(1).element()
+      focusElement(firstRowCheckbox)
+      await user.keyboard(" ")
 
       expect(onRowSelectionChange).toHaveBeenCalledWith(expect.any(Object))
     })
@@ -310,7 +303,7 @@ describe("<Table />", () => {
     test("selects row on click when selectOnClickRow is true", async () => {
       const onRowSelectionChange = vi.fn()
 
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -321,12 +314,10 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = [
-        ...document.querySelectorAll('[role="row"]'),
-      ] as HTMLElement[]
+      const rows = [...page.getByRole("row").elements()] as HTMLElement[]
       const firstDataRow = rows[1]!
 
-      fireEvent.click(firstDataRow)
+      await user.click(firstDataRow)
 
       expect(onRowSelectionChange).toHaveBeenCalledWith(expect.any(Object))
     })
@@ -343,9 +334,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const tfoot = table.querySelector("tfoot")
 
       expect(tfoot).toBeInTheDocument()
@@ -368,9 +357,7 @@ describe("<Table />", () => {
       )
 
       expect(
-        document.querySelector(
-          '[data-testid="header-checkbox-custom"]',
-        ) as HTMLElement,
+        page.getByTestId("header-checkbox-custom").element() as HTMLElement,
       ).toBeInTheDocument()
     })
 
@@ -390,7 +377,7 @@ describe("<Table />", () => {
       expect(
         (
           [
-            ...document.querySelectorAll('[data-testid="row-checkbox-custom"]'),
+            ...page.getByTestId("row-checkbox-custom").elements(),
           ] as HTMLElement[]
         ).length,
       ).toBeGreaterThan(0)
@@ -407,12 +394,8 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = [
-        ...document.querySelectorAll('[role="row"]'),
-      ] as HTMLElement[]
+      const rows = [...page.getByRole("row").elements()] as HTMLElement[]
       const firstDataRow = rows[1]!
-
-      fireEvent.click(firstDataRow)
 
       expect(firstDataRow).toHaveAttribute("data-disabled")
     })
@@ -420,7 +403,7 @@ describe("<Table />", () => {
     test("invokes onRowClick callback", async () => {
       const onRowClick = vi.fn()
 
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -429,12 +412,10 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = [
-        ...document.querySelectorAll('[role="row"]'),
-      ] as HTMLElement[]
+      const rows = [...page.getByRole("row").elements()] as HTMLElement[]
       const firstDataRow = rows[1]!
 
-      fireEvent.click(firstDataRow)
+      await user.click(firstDataRow)
 
       expect(onRowClick).toHaveBeenCalledWith(
         expect.objectContaining({ id: "0" }),
@@ -444,7 +425,7 @@ describe("<Table />", () => {
     test("invokes onRowDoubleClick callback", async () => {
       const onRowDoubleClick = vi.fn()
 
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -453,12 +434,10 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = [
-        ...document.querySelectorAll('[role="row"]'),
-      ] as HTMLElement[]
+      const rows = [...page.getByRole("row").elements()] as HTMLElement[]
       const firstDataRow = rows[1]!
 
-      fireEvent.doubleClick(firstDataRow)
+      await user.dblClick(firstDataRow)
 
       expect(onRowDoubleClick).toHaveBeenCalledWith(
         expect.objectContaining({ id: "0" }),
@@ -489,7 +468,7 @@ describe("<Table />", () => {
       )
 
       const buttons = (
-        document.querySelector('[data-testid="table"]') as HTMLElement
+        page.getByTestId("table").element() as HTMLElement
       ).querySelectorAll("button[data-focusable]")
 
       expect(buttons.length).toBeGreaterThan(0)
@@ -504,7 +483,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      await render(
+      const { user } = await render(
         <Table
           columns={sortableColumns}
           data={data}
@@ -515,10 +494,10 @@ describe("<Table />", () => {
       )
 
       const sortButton = (
-        document.querySelector('[data-testid="table"]') as HTMLElement
+        page.getByTestId("table").element() as HTMLElement
       ).querySelector("button[data-focusable]")!
 
-      fireEvent.click(sortButton)
+      await user.click(sortButton)
 
       expect(onSortingChange).toHaveBeenCalledWith(expect.any(Array))
     })
@@ -547,9 +526,7 @@ describe("<Table />", () => {
       )
 
       expect(
-        document.querySelector(
-          '[data-testid="custom-sort-icon"]',
-        ) as HTMLElement,
+        page.getByTestId("custom-sort-icon").element() as HTMLElement,
       ).toBeInTheDocument()
     })
 
@@ -572,7 +549,7 @@ describe("<Table />", () => {
       )
 
       const icons = (
-        document.querySelector('[data-testid="table"]') as HTMLElement
+        page.getByTestId("table").element() as HTMLElement
       ).querySelectorAll(".custom-sorting-icon")
 
       expect(icons.length).toBeGreaterThan(0)
@@ -597,7 +574,7 @@ describe("<Table />", () => {
       )
 
       const th = (
-        document.querySelector('[data-testid="table"]') as HTMLElement
+        page.getByTestId("table").element() as HTMLElement
       ).querySelector("th")
 
       expect(th).toHaveAttribute("aria-sort", "descending")
@@ -622,7 +599,7 @@ describe("<Table />", () => {
       )
 
       const th = (
-        document.querySelector('[data-testid="table"]') as HTMLElement
+        page.getByTestId("table").element() as HTMLElement
       ).querySelector("th")
 
       expect(th).toHaveAttribute("aria-sort", "ascending")
@@ -654,11 +631,8 @@ describe("<Table />", () => {
       )
 
       expect(
-        (
-          [
-            ...document.querySelectorAll('[data-testid="resize-handle"]'),
-          ] as HTMLElement[]
-        ).length,
+        ([...page.getByTestId("resize-handle").elements()] as HTMLElement[])
+          .length,
       ).toBeGreaterThan(0)
     })
 
@@ -686,7 +660,7 @@ describe("<Table />", () => {
       )
 
       const triggers = (
-        document.querySelector('[data-testid="table"]') as HTMLElement
+        page.getByTestId("table").element() as HTMLElement
       ).querySelectorAll(".custom-resize-trigger")
 
       expect(triggers.length).toBeGreaterThan(0)
@@ -711,9 +685,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
 
       expect(table).toBeInTheDocument()
       expect(table.style.width).not.toBe("")
@@ -732,15 +704,13 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = [
-        ...document.querySelectorAll('[role="row"]'),
-      ] as HTMLElement[]
+      const rows = [...page.getByRole("row").elements()] as HTMLElement[]
       // 1 header row + 2 data rows
       expect(rows).toHaveLength(3)
     })
 
     test("handles PageDown keyboard navigation", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -751,21 +721,19 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstCell = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
 
-      fireEvent.focus(table, { target: firstCell })
-      fireEvent.keyDown(firstCell, { key: "PageDown" })
+      focusElement(firstCell)
+      await user.keyboard("{PageDown}")
 
       expect(table).toBeInTheDocument()
     })
 
     test("does not paginate when cannot go to next page", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -776,21 +744,19 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstCell = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
 
-      fireEvent.focus(table, { target: firstCell })
-      fireEvent.keyDown(firstCell, { key: "PageDown" })
+      focusElement(firstCell)
+      await user.keyboard("{PageDown}")
 
       expect(table).toBeInTheDocument()
     })
 
     test("does not go to previous page when on first page", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -801,21 +767,19 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstCell = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
 
-      fireEvent.focus(table, { target: firstCell })
-      fireEvent.keyDown(firstCell, { key: "PageUp" })
+      focusElement(firstCell)
+      await user.keyboard("{PageUp}")
 
       expect(table).toBeInTheDocument()
     })
 
     test("handles PageUp keyboard navigation", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -826,15 +790,13 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstCell = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
 
-      fireEvent.focus(table, { target: firstCell })
-      fireEvent.keyDown(firstCell, { key: "PageUp" })
+      focusElement(firstCell)
+      await user.keyboard("{PageUp}")
 
       expect(table).toBeInTheDocument()
     })
@@ -842,7 +804,7 @@ describe("<Table />", () => {
 
   describe("keyboard navigation", () => {
     test("navigates cells with arrow keys", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -851,24 +813,22 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
 
-      fireEvent.focus(table, { target: firstTh })
-      fireEvent.keyDown(firstTh, { key: "ArrowRight" })
-      fireEvent.keyDown(firstTh, { key: "ArrowDown" })
-      fireEvent.keyDown(firstTh, { key: "ArrowLeft" })
-      fireEvent.keyDown(firstTh, { key: "ArrowUp" })
+      focusElement(firstTh)
+      await user.keyboard("{ArrowRight}")
+      await user.keyboard("{ArrowDown}")
+      await user.keyboard("{ArrowLeft}")
+      await user.keyboard("{ArrowUp}")
 
       expect(table).toBeInTheDocument()
     })
 
     test("navigates to first and last cell with Home and End", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -877,21 +837,19 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
-      fireEvent.focus(table, { target: firstTh })
-      fireEvent.keyDown(firstTh, { key: "End" })
-      fireEvent.keyDown(firstTh, { key: "Home" })
+      focusElement(firstTh)
+      await user.keyboard("{End}")
+      await user.keyboard("{Home}")
 
       expect(table).toBeInTheDocument()
     })
 
     test("does not enable keyboard navigation when disabled", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -900,13 +858,11 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstTh = table.querySelector("th")!
 
-      fireEvent.focus(table, { target: firstTh })
-      fireEvent.keyDown(firstTh, { key: "ArrowRight" })
+      focusElement(firstTh)
+      await user.keyboard("{ArrowRight}")
 
       expect(table).toBeInTheDocument()
     })
@@ -922,9 +878,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const cell = table.querySelector('[data-colindex="1"][data-rowindex="1"]')
 
       expect(cell).toHaveAttribute("tabindex", "0")
@@ -940,15 +894,12 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
 
-      fireEvent.focus(table, { target: firstTh })
-
+      focusElement(firstTh)
       expect(table).toBeInTheDocument()
     })
   })
@@ -968,7 +919,7 @@ describe("<Table />", () => {
       )
 
       expect(
-        document.querySelector('[data-testid="table"]') as HTMLElement,
+        page.getByTestId("table").element() as HTMLElement,
       ).toBeInTheDocument()
     })
   })
@@ -987,7 +938,7 @@ describe("<Table />", () => {
       )
 
       expect(
-        document.querySelector('[data-testid="header-group"]') as HTMLElement,
+        page.getByTestId("header-group").element() as HTMLElement,
       ).toBeInTheDocument()
     })
 
@@ -1004,7 +955,7 @@ describe("<Table />", () => {
       )
 
       const headers = (
-        document.querySelector('[data-testid="table"]') as HTMLElement
+        page.getByTestId("table").element() as HTMLElement
       ).querySelectorAll("th.custom-header")
 
       expect(headers.length).toBeGreaterThan(0)
@@ -1023,11 +974,8 @@ describe("<Table />", () => {
       )
 
       expect(
-        (
-          [
-            ...document.querySelectorAll('[data-testid="custom-row"]'),
-          ] as HTMLElement[]
-        ).length,
+        ([...page.getByTestId("custom-row").elements()] as HTMLElement[])
+          .length,
       ).toBeGreaterThan(0)
     })
 
@@ -1044,7 +992,7 @@ describe("<Table />", () => {
       )
 
       const cells = (
-        document.querySelector('[data-testid="table"]') as HTMLElement
+        page.getByTestId("table").element() as HTMLElement
       ).querySelectorAll("td.custom-cell")
 
       expect(cells.length).toBeGreaterThan(0)
@@ -1064,11 +1012,8 @@ describe("<Table />", () => {
       )
 
       expect(
-        (
-          [
-            ...document.querySelectorAll('[data-testid="footer-group"]'),
-          ] as HTMLElement[]
-        ).length,
+        ([...page.getByTestId("footer-group").elements()] as HTMLElement[])
+          .length,
       ).toBeGreaterThan(0)
     })
 
@@ -1085,9 +1030,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const footerCells = table.querySelectorAll("tfoot .custom-footer")
 
       expect(footerCells.length).toBeGreaterThan(0)
@@ -1104,7 +1047,7 @@ describe("<Table />", () => {
       )
 
       expect(
-        document.querySelector('[data-testid="thead"]') as HTMLElement,
+        page.getByTestId("thead").element() as HTMLElement,
       ).toBeInTheDocument()
     })
 
@@ -1119,7 +1062,7 @@ describe("<Table />", () => {
       )
 
       expect(
-        document.querySelector('[data-testid="tbody"]') as HTMLElement,
+        page.getByTestId("tbody").element() as HTMLElement,
       ).toBeInTheDocument()
     })
 
@@ -1135,7 +1078,7 @@ describe("<Table />", () => {
       )
 
       expect(
-        document.querySelector('[data-testid="tfoot"]') as HTMLElement,
+        page.getByTestId("tfoot").element() as HTMLElement,
       ).toBeInTheDocument()
     })
   })
@@ -1151,9 +1094,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const tfoot = table.querySelector("tfoot")
 
       expect(tfoot).toBeInTheDocument()
@@ -1168,9 +1109,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const tfoot = table.querySelector("tfoot")
 
       expect(tfoot).not.toBeInTheDocument()
@@ -1186,9 +1125,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const tfoot = table.querySelector("tfoot")
 
       expect(tfoot).toBeInTheDocument()
@@ -1210,7 +1147,7 @@ describe("<Table />", () => {
       )
 
       expect(
-        document.querySelector('[data-testid="table"]') as HTMLElement,
+        page.getByTestId("table").element() as HTMLElement,
       ).toBeInTheDocument()
     })
 
@@ -1228,9 +1165,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = [
-        ...document.querySelectorAll('[role="row"]'),
-      ] as HTMLElement[]
+      const rows = [...page.getByRole("row").elements()] as HTMLElement[]
 
       expect(rows).toHaveLength(3)
     })
@@ -1246,9 +1181,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = [
-        ...document.querySelectorAll('[role="row"]'),
-      ] as HTMLElement[]
+      const rows = [...page.getByRole("row").elements()] as HTMLElement[]
       const firstDataRow = rows[1]!
 
       expect(firstDataRow).toHaveAttribute("aria-selected", "true")
@@ -1268,7 +1201,7 @@ describe("<Table />", () => {
       )
 
       expect(
-        document.querySelector('[data-testid="table"]') as HTMLElement,
+        page.getByTestId("table").element() as HTMLElement,
       ).toBeInTheDocument()
     })
   })
@@ -1294,10 +1227,10 @@ describe("<Table />", () => {
       )
 
       expect(
-        document.querySelector('[data-testid="table"]') as HTMLElement,
+        page.getByTestId("table").element() as HTMLElement,
       ).toBeInTheDocument()
       expect(
-        document.querySelector('[data-testid="resize-trigger"]') as HTMLElement,
+        page.getByTestId("resize-trigger").element() as HTMLElement,
       ).toBeInTheDocument()
     })
   })
@@ -1314,9 +1247,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
 
       expect(
         table.querySelectorAll("tfoot [data-colindex]").length,
@@ -1324,7 +1255,7 @@ describe("<Table />", () => {
     })
 
     test("navigates with grouped header columns", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={groupedColumns}
           data={data}
@@ -1333,14 +1264,12 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstTh = table.querySelector("[data-colindex][data-rowindex]")!
 
-      fireEvent.focus(table, { target: firstTh })
-      fireEvent.keyDown(firstTh, { key: "ArrowRight" })
-      fireEvent.keyDown(firstTh, { key: "ArrowDown" })
+      focusElement(firstTh)
+      await user.keyboard("{ArrowRight}")
+      await user.keyboard("{ArrowDown}")
 
       expect(table).toBeInTheDocument()
     })
@@ -1360,9 +1289,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
 
       expect(table).toHaveAttribute("aria-rowcount", "100")
     })
@@ -1378,9 +1305,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
 
       expect(table).toHaveAttribute("aria-colcount", "4")
     })
@@ -1395,9 +1320,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
 
       expect(table).toHaveAttribute("aria-multiselectable", "true")
     })
@@ -1411,9 +1334,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
 
       expect(table).toHaveAttribute("role", "grid")
     })
@@ -1427,9 +1348,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
 
       expect(table).toHaveAttribute("aria-rowcount", String(data.length))
     })
@@ -1443,9 +1362,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const headerRows = table.querySelectorAll("thead tr")
 
       expect(headerRows[0]).toHaveAttribute("aria-rowindex", "1")
@@ -1460,9 +1377,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const ths = table.querySelectorAll("thead th")
 
       expect(ths[0]).toHaveAttribute("aria-colindex", "1")
@@ -1478,9 +1393,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstRowCells = table.querySelectorAll("tbody tr:first-child td")
 
       expect(firstRowCells[0]).toHaveAttribute("aria-colindex", "1")
@@ -1496,9 +1409,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const ths = table.querySelectorAll("thead th")
 
       ths.forEach((th) => {
@@ -1515,9 +1426,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const tds = table.querySelectorAll("tbody td")
 
       tds.forEach((td) => {
@@ -1525,20 +1434,17 @@ describe("<Table />", () => {
       })
     })
 
-    test("does not set aria-multiselectable when row selection is disabled", () => {
-      render(
+    test("does not set aria-multiselectable when row selection is disabled", async () => {
+      await render(
         <Table
           columns={columns}
           data={data}
           tableProps={{ "data-testid": "table" }}
         />,
       )
-
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
-
-      expect(table).not.toHaveAttribute("aria-multiselectable")
+      await expect
+        .element(page.getByTestId("table"))
+        .not.toHaveAttribute("aria-multiselectable")
     })
 
     test("sets aria-sort to none when column is sortable but not sorted", async () => {
@@ -1559,7 +1465,7 @@ describe("<Table />", () => {
       )
 
       const th = (
-        document.querySelector('[data-testid="table"]') as HTMLElement
+        page.getByTestId("table").element() as HTMLElement
       ).querySelector("th")
 
       expect(th).toHaveAttribute("aria-sort", "none")
@@ -1578,9 +1484,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = [
-        ...document.querySelectorAll('[role="row"]'),
-      ] as HTMLElement[]
+      const rows = [...page.getByRole("row").elements()] as HTMLElement[]
       const firstDataRow = rows[1]!
 
       expect(firstDataRow).toHaveAttribute("data-disabled")
@@ -1590,7 +1494,7 @@ describe("<Table />", () => {
     test("enabled rows invoke onRowClick", async () => {
       const onRowClick = vi.fn()
 
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -1601,12 +1505,10 @@ describe("<Table />", () => {
       )
 
       // Click the second data row (id "2"), which is enabled
-      const rows = [
-        ...document.querySelectorAll('[role="row"]'),
-      ] as HTMLElement[]
+      const rows = [...page.getByRole("row").elements()] as HTMLElement[]
       const secondDataRow = rows[2]!
 
-      fireEvent.click(secondDataRow)
+      await user.click(secondDataRow)
 
       expect(onRowClick).toHaveBeenCalledTimes(1)
     })
@@ -1614,7 +1516,7 @@ describe("<Table />", () => {
     test("enabled rows invoke onRowDoubleClick", async () => {
       const onRowDoubleClick = vi.fn()
 
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -1624,12 +1526,10 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = [
-        ...document.querySelectorAll('[role="row"]'),
-      ] as HTMLElement[]
+      const rows = [...page.getByRole("row").elements()] as HTMLElement[]
       const secondDataRow = rows[2]!
 
-      fireEvent.doubleClick(secondDataRow)
+      await user.dblClick(secondDataRow)
 
       expect(onRowDoubleClick).toHaveBeenCalledTimes(1)
     })
@@ -1644,9 +1544,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = [
-        ...document.querySelectorAll('[role="row"]'),
-      ] as HTMLElement[]
+      const rows = [...page.getByRole("row").elements()] as HTMLElement[]
       const firstDataRow = rows[1]!
 
       expect(firstDataRow).toHaveAttribute("aria-disabled", "true")
@@ -1663,9 +1561,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const headerRows = table.querySelectorAll("thead tr")
 
       expect(headerRows).toHaveLength(2)
@@ -1680,9 +1576,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstRowHeaders = table.querySelectorAll("thead tr:first-child th")
 
       const nameHeader = Array.from(firstRowHeaders).find(
@@ -1702,9 +1596,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const footerCells = table.querySelectorAll("tfoot td[data-colindex]")
 
       expect(footerCells.length).toBeGreaterThan(0)
@@ -1720,9 +1612,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const footerCells = table.querySelectorAll("tfoot td[aria-colindex]")
 
       footerCells.forEach((cell) => {
@@ -1744,22 +1634,19 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
 
-      fireEvent.focus(table, { target: firstTh })
-
+      focusElement(firstTh)
       const focusable = firstTh.querySelector("[data-focusable]")
 
       expect(focusable).toBeInTheDocument()
     })
 
     test("moves focus to the next row when pressing ArrowDown", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -1768,15 +1655,13 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
 
-      fireEvent.focus(table, { target: firstTh })
-      fireEvent.keyDown(firstTh, { key: "ArrowDown" })
+      focusElement(firstTh)
+      await user.keyboard("{ArrowDown}")
 
       const nextCell = table.querySelector(
         '[data-colindex="0"][data-rowindex="1"]',
@@ -1795,20 +1680,17 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const secondTh = table.querySelector(
         '[data-colindex="1"][data-rowindex="0"]',
       )!
 
-      fireEvent.focus(table, { target: secondTh })
-
+      focusElement(secondTh)
       expect(table).toBeInTheDocument()
     })
 
     test("does not navigate when keyboard navigation is disabled and keydown fires", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -1817,12 +1699,11 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const td = table.querySelector("td")!
 
-      fireEvent.keyDown(td, { key: "ArrowRight" })
+      focusElement(td)
+      await user.keyboard("{ArrowRight}")
 
       expect(table).toBeInTheDocument()
     })
@@ -1837,9 +1718,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const cell = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
@@ -1865,9 +1744,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const headers = table.querySelectorAll("th.column-header-props")
 
       expect(headers.length).toBeGreaterThan(0)
@@ -1889,9 +1766,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const cells = table.querySelectorAll("td.column-cell-props")
 
       expect(cells.length).toBeGreaterThan(0)
@@ -1915,9 +1790,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const footerCells = table.querySelectorAll("tfoot td.column-footer-props")
 
       expect(footerCells.length).toBeGreaterThan(0)
@@ -1939,9 +1812,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
 
       expect(table).toBeInTheDocument()
     })
@@ -1962,9 +1833,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
 
       expect(table).toBeInTheDocument()
     })
@@ -1990,9 +1859,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const th = table.querySelector("th")
 
       expect(th?.style.width).toBeDefined()
@@ -2006,7 +1873,7 @@ describe("<Table />", () => {
         }),
       ]
 
-      await render(
+      const { user } = await render(
         <Table
           columnResizeMode="onChange"
           columns={resizableColumns}
@@ -2017,22 +1884,22 @@ describe("<Table />", () => {
         />,
       )
 
-      const resizeTrigger = document.querySelector(
-        '[data-testid="resize-trigger"]',
-      ) as HTMLElement
+      const resizeTrigger = page
+        .getByTestId("resize-trigger")
+        .element() as HTMLElement
 
-      fireEvent.doubleClick(resizeTrigger)
+      await user.dblClick(resizeTrigger)
 
       // After double-click, the table still renders and resize trigger is still present
       expect(
-        document.querySelector('[data-testid="table"]') as HTMLElement,
+        page.getByTestId("table").element() as HTMLElement,
       ).toBeInTheDocument()
       expect(
-        document.querySelector('[data-testid="resize-trigger"]') as HTMLElement,
+        page.getByTestId("resize-trigger").element() as HTMLElement,
       ).toBeInTheDocument()
 
       const th = (
-        document.querySelector('[data-testid="table"]') as HTMLElement
+        page.getByTestId("table").element() as HTMLElement
       ).querySelector("th")
 
       expect(th?.style.width).toBeDefined()
@@ -2058,7 +1925,7 @@ describe("<Table />", () => {
       )
 
       expect(
-        document.querySelector('[data-testid="resize-cursor"]') as HTMLElement,
+        page.getByTestId("resize-cursor").element() as HTMLElement,
       ).toBeInTheDocument()
     })
   })
@@ -2081,9 +1948,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const sortButton = table.querySelector("button[data-focusable]")
 
       expect(sortButton).toBeInTheDocument()
@@ -2111,9 +1976,7 @@ describe("<Table />", () => {
       )
 
       expect(
-        document.querySelector(
-          '[data-testid="sort-icon-custom"]',
-        ) as HTMLElement,
+        page.getByTestId("sort-icon-custom").element() as HTMLElement,
       ).toBeInTheDocument()
     })
 
@@ -2140,7 +2003,7 @@ describe("<Table />", () => {
       )
 
       expect(
-        document.querySelector('[data-testid="custom-icon"]') as HTMLElement,
+        page.getByTestId("custom-icon").element() as HTMLElement,
       ).toHaveTextContent("unsorted")
     })
 
@@ -2162,9 +2025,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const sortButton = table.querySelector("button[data-focusable]")
 
       expect(sortButton).toBeInTheDocument()
@@ -2188,9 +2049,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const sortButton = table.querySelector("button[data-focusable]")
 
       expect(sortButton).toBeInTheDocument()
@@ -2233,15 +2092,13 @@ describe("<Table />", () => {
 
       await render(<PaginatedTable />)
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
 
       expect(table).toBeInTheDocument()
     })
 
     test("handles PageDown keyboard event on paginated table", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -2252,22 +2109,20 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstCell = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
 
-      fireEvent.focus(table, { target: firstCell })
-      fireEvent.keyDown(firstCell, { key: "PageDown" })
+      focusElement(firstCell)
+      await user.keyboard("{PageDown}")
 
       // After PageDown, the page should have changed
       expect(table).toBeInTheDocument()
     })
 
     test("handles PageUp keyboard event on paginated table", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -2278,15 +2133,13 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstCell = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
 
-      fireEvent.focus(table, { target: firstCell })
-      fireEvent.keyDown(firstCell, { key: "PageUp" })
+      focusElement(firstCell)
+      await user.keyboard("{PageUp}")
 
       // After PageUp, the page should have changed
       expect(table).toBeInTheDocument()
@@ -2295,7 +2148,7 @@ describe("<Table />", () => {
 
   describe("keyboard navigation with row selection checkboxes", () => {
     test("keyboard navigation works with checkbox columns", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -2305,16 +2158,14 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const selectHeader = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
 
-      fireEvent.focus(table, { target: selectHeader })
-      fireEvent.keyDown(selectHeader, { key: "ArrowRight" })
-      fireEvent.keyDown(selectHeader, { key: "ArrowDown" })
+      focusElement(selectHeader)
+      await user.keyboard("{ArrowRight}")
+      await user.keyboard("{ArrowDown}")
 
       expect(table).toBeInTheDocument()
     })
@@ -2322,7 +2173,7 @@ describe("<Table />", () => {
 
   describe("keyboard navigation edge cases", () => {
     test("ArrowLeft at left boundary does not crash", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -2331,21 +2182,19 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
 
-      fireEvent.focus(table, { target: firstTh })
-      fireEvent.keyDown(firstTh, { key: "ArrowLeft" })
+      focusElement(firstTh)
+      await user.keyboard("{ArrowLeft}")
 
       expect(table).toBeInTheDocument()
     })
 
     test("ArrowUp at top boundary does not crash", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -2354,21 +2203,19 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
 
-      fireEvent.focus(table, { target: firstTh })
-      fireEvent.keyDown(firstTh, { key: "ArrowUp" })
+      focusElement(firstTh)
+      await user.keyboard("{ArrowUp}")
 
       expect(table).toBeInTheDocument()
     })
 
     test("ArrowDown at bottom boundary does not crash", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -2377,22 +2224,20 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const lastRow = data.length
       const lastCell = table.querySelector(
         `[data-colindex="0"][data-rowindex="${lastRow}"]`,
       )!
 
-      fireEvent.focus(table, { target: lastCell })
-      fireEvent.keyDown(lastCell, { key: "ArrowDown" })
+      focusElement(lastCell)
+      await user.keyboard("{ArrowDown}")
 
       expect(table).toBeInTheDocument()
     })
 
     test("ArrowRight at right boundary does not crash", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -2401,22 +2246,20 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const lastColIndex = columns.length - 1
       const lastTh = table.querySelector(
         `[data-colindex="${lastColIndex}"][data-rowindex="0"]`,
       )!
 
-      fireEvent.focus(table, { target: lastTh })
-      fireEvent.keyDown(lastTh, { key: "ArrowRight" })
+      focusElement(lastTh)
+      await user.keyboard("{ArrowRight}")
 
       expect(table).toBeInTheDocument()
     })
 
     test("End key navigates to last column", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -2425,15 +2268,13 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
 
-      fireEvent.focus(table, { target: firstTh })
-      fireEvent.keyDown(firstTh, { key: "End" })
+      focusElement(firstTh)
+      await user.keyboard("{End}")
 
       const lastColIndex = columns.length - 1
       const lastTh = table.querySelector(
@@ -2444,7 +2285,7 @@ describe("<Table />", () => {
     })
 
     test("Home key navigates to first column", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -2453,16 +2294,14 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const lastColIndex = columns.length - 1
       const lastTh = table.querySelector(
         `[data-colindex="${lastColIndex}"][data-rowindex="0"]`,
       )!
 
-      fireEvent.focus(table, { target: lastTh })
-      fireEvent.keyDown(lastTh, { key: "Home" })
+      focusElement(lastTh)
+      await user.keyboard("{Home}")
 
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
@@ -2472,7 +2311,7 @@ describe("<Table />", () => {
     })
 
     test("ignores unknown keys", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -2481,15 +2320,13 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
 
-      fireEvent.focus(table, { target: firstTh })
-      fireEvent.keyDown(firstTh, { key: "Tab" })
+      focusElement(firstTh)
+      await user.keyboard("{Tab}")
 
       expect(table).toBeInTheDocument()
     })
@@ -2497,7 +2334,7 @@ describe("<Table />", () => {
 
   describe("keyboard navigation with grouped columns", () => {
     test("cellMap correctly handles colSpan in grouped headers", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={groupedColumns}
           data={data}
@@ -2506,21 +2343,19 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const headerCell = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
 
-      fireEvent.focus(table, { target: headerCell })
-      fireEvent.keyDown(headerCell, { key: "ArrowRight" })
+      focusElement(headerCell)
+      await user.keyboard("{ArrowRight}")
 
       expect(table).toBeInTheDocument()
     })
 
     test("keyboard navigation works with grouped footer cells", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={groupedColumns}
           data={data}
@@ -2530,15 +2365,13 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const footerCells = table.querySelectorAll("tfoot td[data-colindex]")
 
       expect(footerCells.length).toBeGreaterThan(0)
 
-      fireEvent.focus(table, { target: footerCells[0]! })
-      fireEvent.keyDown(footerCells[0]!, { key: "ArrowRight" })
+      focusElement(footerCells[0])
+      await user.keyboard("{ArrowRight}")
 
       expect(table).toBeInTheDocument()
     })
@@ -2548,7 +2381,7 @@ describe("<Table />", () => {
     test("toggles row selection on click", async () => {
       const onRowSelectionChange = vi.fn()
 
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -2559,12 +2392,10 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = [
-        ...document.querySelectorAll('[role="row"]'),
-      ] as HTMLElement[]
+      const rows = [...page.getByRole("row").elements()] as HTMLElement[]
       const secondDataRow = rows[2]!
 
-      fireEvent.click(secondDataRow)
+      await user.click(secondDataRow)
 
       expect(onRowSelectionChange).toHaveBeenCalledTimes(1)
     })
@@ -2580,9 +2411,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = [
-        ...document.querySelectorAll('[role="row"]'),
-      ] as HTMLElement[]
+      const rows = [...page.getByRole("row").elements()] as HTMLElement[]
       const firstDataRow = rows[1]!
 
       expect(firstDataRow).toHaveAttribute("data-disabled")
@@ -2601,9 +2430,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const tfoot = table.querySelector("tfoot")
 
       expect(tfoot).toBeInTheDocument()
@@ -2623,7 +2450,7 @@ describe("<Table />", () => {
       )
 
       const checkboxes = [
-        ...document.querySelectorAll('input[type="checkbox"]'),
+        ...page.getByRole("checkbox").elements(),
       ] as HTMLElement[]
 
       expect(checkboxes.length).toBeGreaterThan(0)
@@ -2641,9 +2468,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
 
       expect(table).toBeInTheDocument()
     })
@@ -2660,9 +2485,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const spans = table.querySelectorAll("span")
 
       expect(spans.length).toBeGreaterThan(0)
@@ -2683,9 +2506,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
 
       expect(table).toBeInTheDocument()
     })
@@ -2702,9 +2523,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
 
       expect(table).toBeInTheDocument()
     })
@@ -2727,9 +2546,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const tfoot = table.querySelector("tfoot")
 
       expect(tfoot).toBeInTheDocument()
@@ -2755,9 +2572,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
 
       expect(table).toBeInTheDocument()
 
@@ -2784,9 +2599,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = [
-        ...document.querySelectorAll('[role="row"]'),
-      ] as HTMLElement[]
+      const rows = [...page.getByRole("row").elements()] as HTMLElement[]
 
       // Default is pageSize: 20, so all 5 data rows + 1 header row
       expect(rows).toHaveLength(6)
@@ -2802,9 +2615,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const rows = [
-        ...document.querySelectorAll('[role="row"]'),
-      ] as HTMLElement[]
+      const rows = [...page.getByRole("row").elements()] as HTMLElement[]
       const dataRows = rows.slice(1)
 
       dataRows.forEach((row) => {
@@ -2827,7 +2638,7 @@ describe("<Table />", () => {
       )
 
       expect(
-        document.querySelector('[data-testid="table"]') as HTMLElement,
+        page.getByTestId("table").element() as HTMLElement,
       ).toBeInTheDocument()
     })
   })
@@ -2864,9 +2675,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const footerCells = table.querySelectorAll("tfoot td[data-colindex]")
 
       expect(footerCells.length).toBeGreaterThan(0)
@@ -2875,7 +2684,7 @@ describe("<Table />", () => {
 
   describe("keyboard navigation through all sections", () => {
     test("navigates from header to body to footer", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -2885,18 +2694,15 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       )!
 
       // Navigate down through header -> body -> footer
-      fireEvent.focus(table, { target: firstTh })
-
+      focusElement(firstTh)
       for (let i = 0; i < data.length + 2; i++) {
-        fireEvent.keyDown(firstTh, { key: "ArrowDown" })
+        await user.keyboard("{ArrowDown}")
       }
 
       expect(table).toBeInTheDocument()
@@ -2929,9 +2735,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
 
       // Width should be set to a non-empty value based on column sizes
       expect(table.style.width).not.toBe("")
@@ -2955,9 +2759,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
 
       expect(table.style.width).toBe("")
     })
@@ -2975,15 +2777,12 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       ) as HTMLElement
 
-      firstTh.focus()
-
+      focusElement(firstTh)
       await user.keyboard("{ArrowRight}")
 
       expect(document.activeElement).toBe(
@@ -3020,15 +2819,12 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       ) as HTMLElement
 
-      firstTh.focus()
-
+      focusElement(firstTh)
       await user.keyboard("{End}")
 
       expect(document.activeElement).toBe(
@@ -3055,15 +2851,12 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       ) as HTMLElement
 
-      firstTh.focus()
-
+      focusElement(firstTh)
       await user.keyboard("{PageDown}")
 
       const rowsAfterPageDown = table.querySelectorAll("tbody tr")
@@ -3088,15 +2881,12 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       ) as HTMLElement
 
-      firstTh.focus()
-
+      focusElement(firstTh)
       await user.keyboard("{PageDown}")
 
       expect(table).toBeInTheDocument()
@@ -3115,15 +2905,12 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       ) as HTMLElement
 
-      firstTh.focus()
-
+      focusElement(firstTh)
       await user.keyboard("{PageUp}")
 
       expect(table).toBeInTheDocument()
@@ -3142,15 +2929,12 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       ) as HTMLElement
 
-      firstTh.focus()
-
+      focusElement(firstTh)
       await user.keyboard("{PageDown}")
 
       const cell = table.querySelector('[data-colindex="0"][data-rowindex="0"]')
@@ -3158,7 +2942,7 @@ describe("<Table />", () => {
     })
 
     test("handles focus event on table", async () => {
-      await render(
+      const { user } = await render(
         <Table
           columns={columns}
           data={data}
@@ -3168,14 +2952,12 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstTh = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       ) as HTMLElement
 
-      fireEvent.click(firstTh)
+      await user.click(firstTh)
 
       expect(firstTh).toHaveAttribute("tabindex", "0")
     })
@@ -3225,9 +3007,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const headerRows = table.querySelectorAll("thead tr")
 
       expect(headerRows.length).toBeGreaterThanOrEqual(2)
@@ -3244,15 +3024,12 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const firstCell = table.querySelector(
         '[data-colindex="0"][data-rowindex="0"]',
       ) as HTMLElement
 
-      firstCell.focus()
-
+      focusElement(firstCell)
       await user.keyboard("{ArrowRight}")
 
       expect(table).toBeInTheDocument()
@@ -3268,9 +3045,7 @@ describe("<Table />", () => {
         />,
       )
 
-      const table = document.querySelector(
-        '[data-testid="table"]',
-      ) as HTMLElement
+      const table = page.getByTestId("table").element() as HTMLElement
       const footerRows = table.querySelectorAll("tfoot tr")
 
       expect(footerRows.length).toBeGreaterThanOrEqual(2)

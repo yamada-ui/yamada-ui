@@ -35,7 +35,7 @@ describe("<Bleed />", () => {
       </div>,
     )
 
-    const container = page.getByTestId("container").element()
+    const container = page.getByTestId("container").element() as HTMLElement
     const style = getComputedStyle(page.getByText("Box").element())
     const expectedFullBleed = getExpectedFullBleed(container)
 
@@ -56,7 +56,7 @@ describe("<Bleed />", () => {
       </div>,
     )
 
-    const container = page.getByTestId("container").element()
+    const container = page.getByTestId("container").element() as HTMLElement
     const style = getComputedStyle(page.getByText("Box").element())
     const expectedFullBleed = getExpectedFullBleed(container)
 
@@ -74,7 +74,7 @@ describe("<Bleed />", () => {
       </div>,
     )
 
-    const container = page.getByTestId("container").element()
+    const container = page.getByTestId("container").element() as HTMLElement
     const style = getComputedStyle(page.getByText("Box").element())
     const expectedFullBleed = getExpectedFullBleed(container)
 

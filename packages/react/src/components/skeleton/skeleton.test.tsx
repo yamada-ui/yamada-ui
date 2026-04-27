@@ -33,7 +33,9 @@ describe("<Skeleton />", () => {
       .element(page.getByTestId("skeletonCircle"))
       .toHaveClass("ui-skeleton")
     await expect
-      .element(page.getByTestId("skeletonText").locator("> div").first())
+      .element(
+        page.getByTestId("skeletonText").element().children[0] as HTMLElement,
+      )
       .toHaveClass("ui-skeleton")
   })
 

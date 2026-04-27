@@ -344,13 +344,13 @@ export const CodeBlockCode = withContext<"pre", CodeBlockCodeProps>(
                   "& code": {
                     counterReset: "line",
                   },
-                  "& code .diff, & code .highlighted": {
-                    mx: "-4",
-                    ps: "14",
-                  },
                   "& code .line": {
                     counterIncrement: "line",
                     ps: "10",
+                  },
+                  "& code .line.diff, & code .line.highlighted": {
+                    mx: "-4",
+                    ps: "14",
                   },
                   "& code .line.diff::before, & code .line.highlighted::before":
                     {

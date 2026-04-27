@@ -8,7 +8,7 @@
     "build": "react-router build",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc",
+    "typecheck": "react-router typegen && tsgo",
     "lint": "react-router typegen && oxlint . --max-warnings=0",
     "format": "pnpm -w format playgrounds/react-router/framework",
     "yamada-cli": "pnpm -C ../../../packages/cli dev"

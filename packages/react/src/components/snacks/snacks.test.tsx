@@ -84,7 +84,13 @@ describe("<Snacks />", () => {
     const { user } = await render(<TestComponent options={{ limit: 2 }} />)
 
     await user.click(page.getByTestId("add"))
+    await expect.element(page.getByRole("listitem")).toBeVisible()
+
     await user.click(page.getByTestId("add"))
+    await expect
+      .poll(() => page.getByRole("listitem").elements().length)
+      .toBe(2)
+
     await user.click(page.getByTestId("add"))
 
     await expect

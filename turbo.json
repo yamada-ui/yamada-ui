@@ -15,7 +15,15 @@
       "dependsOn": ["^transit:test"],
       "inputs": ["src/vitest/**", "package.json"]
     },
-    "build": { "dependsOn": ["^build"], "outputs": ["dist/**"] },
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": [
+        "package.json",
+        "{src,@types}/**/*.{ts,tsx,mts}",
+        "!src/**/*.{test,stories}.{ts,tsx,mts}"
+      ],
+      "outputs": ["dist/**"]
+    },
     "build:content": {
       "dependsOn": ["transit"],
       "outputs": [".velite/**", "data/doc-map.*.json"]

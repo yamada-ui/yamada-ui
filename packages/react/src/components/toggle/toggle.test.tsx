@@ -1,5 +1,5 @@
-import { a11y, page, render } from "#test/browser"
 import { vi } from "vitest"
+import { a11y, page, render } from "#test/browser"
 import { Toggle, ToggleGroup } from "."
 import { noop } from "../../utils"
 

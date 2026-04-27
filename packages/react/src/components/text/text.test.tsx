@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Text } from "./text"
 
 describe("<Text />", () => {
@@ -10,15 +10,15 @@ describe("<Text />", () => {
     expect(Text.displayName).toBe("Text")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Text data-testid="text">Text</Text>)
-    const el = screen.getByTestId("text")
-    expect(el).toHaveClass("ui-text")
+  test("sets `className` correctly", async () => {
+    await render(<Text data-testid="text">Text</Text>)
+    const text = page.getByTestId("text")
+    await expect.element(text).toHaveClass("ui-text")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Text data-testid="text">Text</Text>)
-    const el = screen.getByTestId("text")
-    expect(el.tagName).toBe("P")
+  test("renders HTML tag correctly", async () => {
+    await render(<Text data-testid="text">Text</Text>)
+    const text = page.getByTestId("text")
+    expect(text.element().tagName).toBe("P")
   })
 })

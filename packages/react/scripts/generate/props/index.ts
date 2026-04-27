@@ -17,7 +17,7 @@ import {
   toCamelCase,
   toKebabCase,
 } from "@yamada-ui/utils"
-import { format, writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { format, writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
 import { Command } from "commander"
 import { mkdir, readdir, readFile } from "node:fs/promises"
 import path from "node:path"
@@ -147,6 +147,7 @@ async function formatType(type: string) {
     const prefix = "type ONLY_FOR_FORMAT = "
 
     const result = await format(prefix + type, {
+      objectWrap: "collapse",
       printWidth: Infinity,
       semi: false,
     })
@@ -159,9 +160,7 @@ async function formatType(type: string) {
 
 async function formatDescription(description: string) {
   try {
-    const result = await format(description, {
-      parser: "markdown",
-    })
+    const result = await format(description, { parser: "md" })
 
     return result.replace(/\n$/, "")
   } catch {
@@ -342,14 +341,14 @@ async function getThemeDefaultValue(statement: Statement, dirPath: string) {
       ? JSON.stringify(defaultProps.size)
           .replace(/"(\w+)":/g, " $1: ")
           .replace(/}$/, " }")
-      : `\"${defaultProps.variant}\"`
+      : `\"${defaultProps.variant as string}\"`
     : undefined
   themeProps.size = !isUndefined(defaultProps?.size)
     ? isObject(defaultProps.size) || isArray(defaultProps.size)
       ? JSON.stringify(defaultProps.size)
           .replace(/"(\w+)":/g, " $1: ")
           .replace(/}$/, " }")
-      : `\"${defaultProps.size}\"`
+      : `\"${defaultProps.size as string}\"`
     : undefined
 
   return themeProps
@@ -418,16 +417,15 @@ function main() {
 
       spinner.start("Getting tsconfig")
 
-      const { config } = readConfigFile(CONFIG_PATH, sys.readFile)
+      const { config } = readConfigFile(CONFIG_PATH, (path) =>
+        sys.readFile(path),
+      )
       const { fileNames, options } = parseJsonConfigFileContent(
         config,
         sys,
         path.dirname(CONFIG_PATH),
       )
-      const { getSourceFile, getTypeChecker } = createProgram(
-        fileNames,
-        options,
-      )
+      const program = createProgram(fileNames, options)
 
       spinner.succeed("Got tsconfig")
 
@@ -462,7 +460,7 @@ function main() {
               } else {
                 await Promise.all(
                   filePaths.map(async (filePath) => {
-                    const sourceFile = getSourceFile(filePath)
+                    const sourceFile = program.getSourceFile(filePath)
 
                     if (!sourceFile) return
 
@@ -472,7 +470,7 @@ function main() {
 
                     const props = await extractPropsOfTypeName(
                       sourceFile,
-                      getTypeChecker(),
+                      program.getTypeChecker(),
                     )(dirPath, name)
 
                     Object.entries(props).forEach(([prop, { description }]) => {
@@ -526,9 +524,6 @@ function main() {
             await writeFileWithFormat(
               path.join(DATA_PATH, `${dirent.name}.json`),
               sortedData,
-              {
-                parser: "json",
-              },
             )
           }
         }),

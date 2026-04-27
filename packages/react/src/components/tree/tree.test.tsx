@@ -1,6 +1,6 @@
 import type { TreeControl } from "./use-tree"
-import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { useRef, useState } from "react"
+import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { Tree } from "."
 import { BoxIcon, FileIcon, FolderIcon, XIcon } from "../icon"
 

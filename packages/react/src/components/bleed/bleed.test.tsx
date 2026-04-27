@@ -4,7 +4,7 @@ import { Bleed } from "./bleed"
 const getPixelNumber = (value: string) => Number.parseFloat(value)
 const FULL_BLEED_PRECISION = 1
 
-const getExpectedFullBleed = (container: HTMLElement) =>
+const getExpectedFullBleed = (container: HTMLElement | SVGElement) =>
   container.getBoundingClientRect().width / 2 - window.innerWidth / 2
 
 describe("<Bleed />", () => {
@@ -35,7 +35,7 @@ describe("<Bleed />", () => {
       </div>,
     )
 
-    const container = page.getByTestId("container").element()
+    const container = page.getByTestId("container").element() as HTMLElement
     const style = getComputedStyle(page.getByText("Box").element())
     const expectedFullBleed = getExpectedFullBleed(container)
 
@@ -56,7 +56,7 @@ describe("<Bleed />", () => {
       </div>,
     )
 
-    const container = page.getByTestId("container").element()
+    const container = page.getByTestId("container").element() as HTMLElement
     const style = getComputedStyle(page.getByText("Box").element())
     const expectedFullBleed = getExpectedFullBleed(container)
 
@@ -74,7 +74,7 @@ describe("<Bleed />", () => {
       </div>,
     )
 
-    const container = page.getByTestId("container").element()
+    const container = page.getByTestId("container").element() as HTMLElement
     const style = getComputedStyle(page.getByText("Box").element())
     const expectedFullBleed = getExpectedFullBleed(container)
 

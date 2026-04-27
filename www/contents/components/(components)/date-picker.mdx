@@ -610,22 +610,22 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Dat
 
 ### Keyboard Navigation
 
-| Key                  | Description                                                                                                                                         | State               |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
-| `Enter`              | When the input value is valid, applies it to the selection. Toggles the focused date if focus is in the calendar.                                   | -                   |
-| `Backspace`          | Clears the last selection.                                                                                                                          | -                   |
-| `Escape`             | Closes the calendar.                                                                                                                                | `closeOnEsc={true}` |
-| `ArrowUp`            | Moves focus to the date above if focus is in the calendar.                                                                                          | -                   |
-| `ArrowDown`          | Moves focus to the date below if focus is in the calendar.                                                                                          | -                   |
-| `ArrowLeft`          | Moves focus to the date to the left if focus is in the calendar. If it's the first date, moves to the last date of the previous month.              | -                   |
-| `ArrowRight`         | Moves focus to the date to the right if focus is in the calendar. If it's the last date, moves to the first date of the next month.                 | -                   |
-| `Home`               | Moves focus to the first date in the same week if focus is in the calendar.                                                                         | -                   |
-| `End`                | Moves focus to the last date in the same week if focus is in the calendar.                                                                          | -                   |
-| `PageUp`             | Moves focus to the same date in the previous month if focus is in the calendar. If that date doesn't exist, moves to an enabled date in that month. | -                   |
-| `Shift` + `PageUp`   | Moves focus to the same date in the previous year if focus is in the calendar. If that date doesn't exist, moves to an enabled date in that month.  | -                   |
-| `PageDown`           | Moves focus to the same date in the next month if focus is in the calendar. If that date doesn't exist, moves to an enabled date in that month.     | -                   |
-| `Shift` + `PageDown` | Moves focus to the same date in the next year if focus is in the calendar. If that date doesn't exist, moves to an enabled date in that month.      | -                   |
-| `Space`              | Toggles the selection state of the focused date if focus is in the calendar.                                                                        | -                   |
+| Key                  | Description                                                                                                                                                         | State               |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| `Enter`              | When the input value is valid, applies it to the selection. Toggles the focused date if focus is in the calendar. Clears the value if focus is on the clear button. | -                   |
+| `Backspace`          | Clears the last selection.                                                                                                                                          | -                   |
+| `Escape`             | Closes the calendar.                                                                                                                                                | `closeOnEsc={true}` |
+| `ArrowUp`            | Moves focus to the date above if focus is in the calendar.                                                                                                          | -                   |
+| `ArrowDown`          | Moves focus to the date below if focus is in the calendar.                                                                                                          | -                   |
+| `ArrowLeft`          | Moves focus to the date to the left if focus is in the calendar. If it's the first date, moves to the last date of the previous month.                              | -                   |
+| `ArrowRight`         | Moves focus to the date to the right if focus is in the calendar. If it's the last date, moves to the first date of the next month.                                 | -                   |
+| `Home`               | Moves focus to the first date in the same week if focus is in the calendar.                                                                                         | -                   |
+| `End`                | Moves focus to the last date in the same week if focus is in the calendar.                                                                                          | -                   |
+| `PageUp`             | Moves focus to the same date in the previous month if focus is in the calendar. If that date doesn't exist, moves to an enabled date in that month.                 | -                   |
+| `Shift` + `PageUp`   | Moves focus to the same date in the previous year if focus is in the calendar. If that date doesn't exist, moves to an enabled date in that month.                  | -                   |
+| `PageDown`           | Moves focus to the same date in the next month if focus is in the calendar. If that date doesn't exist, moves to an enabled date in that month.                     | -                   |
+| `Shift` + `PageDown` | Moves focus to the same date in the next year if focus is in the calendar. If that date doesn't exist, moves to an enabled date in that month.                      | -                   |
+| `Space`              | Toggles the selection state of the focused date if focus is in the calendar. Clears the value if focus is on the clear button.                                      | -                   |
 
 ### ARIA Roles and Attributes
 

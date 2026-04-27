@@ -1,5 +1,5 @@
-import { a11y, render, screen, waitFor } from "#test"
 import { useState } from "react"
+import { a11y, page, render } from "#test/browser"
 import { Fade } from "./fade"
 
 describe("<Fade />", () => {
@@ -11,14 +11,16 @@ describe("<Fade />", () => {
     expect(Fade.displayName).toBe("Fade")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Fade>Fade</Fade>)
-    expect(screen.getByText("Fade")).toHaveClass("ui-fade")
+  test("sets `className` correctly", async () => {
+    await render(<Fade>Fade</Fade>)
+
+    await expect.element(page.getByText("Fade")).toHaveClass("ui-fade")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Fade>Fade</Fade>)
-    expect(screen.getByText("Fade").tagName).toBe("DIV")
+  test("renders HTML tag correctly", async () => {
+    await render(<Fade>Fade</Fade>)
+
+    expect(page.getByText("Fade").element().tagName).toBe("DIV")
   })
 
   test("toggles visibility on open change", async () => {
@@ -33,17 +35,22 @@ describe("<Fade />", () => {
       )
     }
 
-    const { user } = render(<TestComponent />)
+    const { user } = await render(<TestComponent />)
 
-    const button = await screen.findByRole("button", { name: /button/i })
-    const collapse = await screen.findByText("Fade")
-    expect(collapse).not.toBeVisible()
-
-    await user.click(button)
-    await waitFor(() => expect(collapse).toBeVisible())
+    const button = page.getByRole("button", { name: /button/i })
+    const fade = page.getByText("Fade")
+    const getOpacity = () => getComputedStyle(fade.element()).opacity
+    expect(getOpacity()).toBe("0")
 
     await user.click(button)
-    await waitFor(() => expect(collapse).not.toBeVisible())
+    await vi.waitFor(() => {
+      expect(getOpacity()).toBe("1")
+    })
+
+    await user.click(button)
+    await vi.waitFor(() => {
+      expect(getOpacity()).toBe("0")
+    })
   })
 
   test("unmountOnExit works correctly", async () => {
@@ -60,15 +67,17 @@ describe("<Fade />", () => {
       )
     }
 
-    const { user } = render(<TestComponent />)
+    const { user } = await render(<TestComponent />)
 
-    const button = await screen.findByRole("button", { name: /button/i })
-    expect(screen.queryByText("Fade")).toBeNull()
-
-    await user.click(button)
-    await waitFor(() => expect(screen.getByText("Fade")).toBeVisible())
+    const button = page.getByRole("button", { name: /button/i })
+    expect(page.getByText("Fade").query()).toBeNull()
 
     await user.click(button)
-    await waitFor(() => expect(screen.queryByText("Fade")).toBeNull())
+    await expect.element(page.getByText("Fade")).toBeVisible()
+
+    await user.click(button)
+    await vi.waitFor(() => {
+      expect(page.getByText("Fade").query()).toBeNull()
+    })
   })
 })

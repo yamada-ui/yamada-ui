@@ -145,7 +145,7 @@
       "required": false
     },
     "resizableTriggerProps": {
-      "type": "TransformProps<Omit<ResizableTriggerProps, \"resizing\">, Header<Y, unknown>>",
+      "type": "TransformProps<\n    Omit<ResizableTriggerProps, \"resizing\">,\n    Header<Y, unknown>\n  >",
       "description": "The props for the resizable trigger.",
       "required": false
     },
@@ -186,7 +186,7 @@
       "required": false
     },
     "sortingIconProps": {
-      "type": "TransformProps<Omit<SortingIconProps, \"sorted\">, Header<Y, unknown>>",
+      "type": "TransformProps<\n    Omit<SortingIconProps, \"sorted\">,\n    Header<Y, unknown>\n  >",
       "description": "The props for the sorting icon.",
       "required": false
     },

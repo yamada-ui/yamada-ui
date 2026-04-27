@@ -24,3 +24,4 @@ export type {
   CodeBlockTitleProps,
 } from "./code-block"
 export * as CodeBlock from "./namespace"
+export * from "./use-code-block"

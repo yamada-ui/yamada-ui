@@ -1,18 +1,12 @@
 "use client"
 
-import type { ReactNode, SetStateAction } from "react"
+import type { ReactNode } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { IconButtonProps } from "../button"
 import type { CollapseProps } from "../collapse"
 import type { CodeBlockStyle } from "./code-block.style"
-import {
-  useEffect,
-  useId,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react"
+import type { UseCodeBlockProps, UseCodeBlockReturn } from "./use-code-block"
+import { useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { useClipboard } from "../../hooks/use-clipboard"
 import { dataAttr, handlerAll, isString } from "../../utils"
@@ -25,28 +19,9 @@ import {
   ClipboardIcon,
 } from "../icon"
 import { codeBlockStyle } from "./code-block.style"
-import { codeToHighlightedHtml } from "./code-to-html"
+import { useCodeBlock, useCodeBlockCode } from "./use-code-block"
 
-interface ComponentContext extends Pick<
-  CodeBlockRootProps,
-  | "code"
-  | "defaultCollapsed"
-  | "highlight"
-  | "language"
-  | "lineNumbers"
-  | "maxLines"
-  | "showCopyTrigger"
-  | "showLanguageLabel"
-  | "title"
-> {
-  collapsed: boolean
-  collapsedHeight: number
-  collapsible: boolean
-  contentId: string
-  lineCount: number
-  setCollapsed: (value: SetStateAction<boolean>) => void
-  setCollapsedHeight: (value: number) => void
-}
+interface ComponentContext extends UseCodeBlockReturn {}
 
 const {
   ComponentContext,
@@ -63,42 +38,7 @@ const {
 export { CodeBlockPropsContext, useCodeBlockPropsContext }
 
 export interface CodeBlockRootProps
-  extends HTMLStyledProps, ThemeProps<CodeBlockStyle> {
-  code?: string
-  defaultCollapsed?: boolean
-  highlight?: string
-  language?: string
-  lineNumbers?: boolean
-  maxLines?: number
-  showCopyTrigger?: boolean
-  showLanguageLabel?: boolean
-  title?: string
-}
-
-const getLineCount = (value?: string) => {
-  if (!value) return 0
-
-  return value.split(/\r?\n/).length
-}
-
-const getCollapsedHeight = (node: HTMLElement | null, lineCount: number) => {
-  if (!node || !lineCount) return 0
-
-  const computedStyle = window.getComputedStyle(node)
-  const lineHeight = Number.parseFloat(computedStyle.lineHeight)
-  const paddingTop = Number.parseFloat(computedStyle.paddingTop)
-  const paddingBottom = Number.parseFloat(computedStyle.paddingBottom)
-  const borderTopWidth = Number.parseFloat(computedStyle.borderTopWidth)
-  const borderBottomWidth = Number.parseFloat(computedStyle.borderBottomWidth)
-
-  return Math.ceil(
-    lineHeight * lineCount +
-      paddingTop +
-      paddingBottom +
-      borderTopWidth +
-      borderBottomWidth,
-  )
-}
+  extends UseCodeBlockProps, HTMLStyledProps, ThemeProps<CodeBlockStyle> {}
 
 export const CodeBlockRoot = withProvider<"div", CodeBlockRootProps>(
   ({
@@ -114,52 +54,18 @@ export const CodeBlockRoot = withProvider<"div", CodeBlockRootProps>(
     title,
     ...rest
   }) => {
-    const contentId = useId()
-    const lineCount = useMemo(() => getLineCount(code), [code])
-    const collapsible = !!maxLines && lineCount > maxLines
-    const [collapsed, setCollapsed] = useState(defaultCollapsed && collapsible)
-    const [collapsedHeight, setCollapsedHeight] = useState(0)
-
-    useEffect(() => {
-      setCollapsed(defaultCollapsed && collapsible)
-    }, [collapsible, defaultCollapsed])
-
-    const context = useMemo(
-      () => ({
-        code,
-        collapsed,
-        collapsedHeight,
-        collapsible,
-        contentId,
-        defaultCollapsed,
-        highlight,
-        language,
-        lineCount,
-        lineNumbers,
-        maxLines,
-        setCollapsed,
-        setCollapsedHeight,
-        showCopyTrigger,
-        showLanguageLabel,
-        title,
-      }),
-      [
-        code,
-        collapsed,
-        collapsedHeight,
-        collapsible,
-        contentId,
-        defaultCollapsed,
-        highlight,
-        language,
-        lineCount,
-        lineNumbers,
-        maxLines,
-        showCopyTrigger,
-        showLanguageLabel,
-        title,
-      ],
-    )
+    const context = useCodeBlock({
+      code,
+      defaultCollapsed,
+      highlight,
+      language,
+      lineNumbers,
+      maxLines,
+      showCopyTrigger,
+      showLanguageLabel,
+      title,
+    })
+    const { collapsible } = context
     const computedChildren = useMemo<ReactNode>(() => {
       if (children) return children
 
@@ -351,7 +257,6 @@ export const CodeBlockCode = withContext<"pre", CodeBlockCodeProps>(
     tabIndex = 0,
     ...rest
   }) => {
-    const ref = useRef<HTMLPreElement>(null)
     const {
       code: contextCode,
       highlight: contextHighlight,
@@ -362,46 +267,16 @@ export const CodeBlockCode = withContext<"pre", CodeBlockCodeProps>(
     } = useComponentContext()
     const code = children ?? codeProp ?? contextCode
     const highlight = highlightProp ?? contextHighlight
-    const language = languageProp ?? contextLanguage ?? "ts"
-    const lineNumbers = lineNumbersProp ?? contextLineNumbers ?? false
-    const [html, setHtml] = useState(htmlProp)
-    const lines = useMemo(() => code?.split(/\r?\n/) ?? [], [code])
-
-    useEffect(() => {
-      setHtml(htmlProp)
-    }, [htmlProp])
-
-    useEffect(() => {
-      let mounted = true
-
-      if (!code) {
-        setHtml(htmlProp)
-
-        return
-      }
-
-      if (htmlProp) return
-
-      setHtml(undefined)
-
-      codeToHighlightedHtml(code, { highlight, language })
-        .then((nextHtml) => {
-          if (mounted) setHtml(nextHtml)
-        })
-        .catch(() => {
-          if (mounted) setHtml(undefined)
-        })
-
-      return () => {
-        mounted = false
-      }
-    }, [code, highlight, htmlProp, language])
-
-    useLayoutEffect(() => {
-      if (!maxLines) return
-
-      setCollapsedHeight(getCollapsedHeight(ref.current, maxLines))
-    }, [html, lines.length, maxLines, setCollapsedHeight])
+    const language = languageProp ?? contextLanguage
+    const lineNumbers = lineNumbersProp ?? contextLineNumbers
+    const { ref, html, lines } = useCodeBlockCode({
+      code,
+      highlight,
+      html: htmlProp,
+      language,
+      maxLines,
+      setCollapsedHeight,
+    })
 
     if (!code) return null
 

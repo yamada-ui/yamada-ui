@@ -1,5 +1,5 @@
-import { a11y, page, render } from "#test/browser"
 import { vi } from "vitest"
+import { a11y, page, render } from "#test/browser"
 import { Tooltip } from "."
 import { Text } from "../text"
 
@@ -319,7 +319,7 @@ describe("<Tooltip />", () => {
 
   test("handles openDelay and closeDelay", async () => {
     const { user } = await render(
-      <Tooltip closeDelay={100} content="Tooltip Hovered" openDelay={100}>
+      <Tooltip closeDelay={500} content="Tooltip Hovered" openDelay={500}>
         <Text as="span">Trigger</Text>
       </Tooltip>,
     )
@@ -329,7 +329,7 @@ describe("<Tooltip />", () => {
     await user.hover(trigger)
 
     await expect
-      .element(page.getByRole("tooltip").query())
+      .element(page.getByRole("tooltip").query(), { timeout: 50 })
       .not.toBeInTheDocument()
 
     await vi.waitFor(async () => {
@@ -337,6 +337,10 @@ describe("<Tooltip />", () => {
     })
 
     await user.unhover(trigger)
+
+    await expect
+      .element(page.getByRole("tooltip"), { timeout: 50 })
+      .toBeInTheDocument()
 
     await vi.waitFor(async () => {
       await expect

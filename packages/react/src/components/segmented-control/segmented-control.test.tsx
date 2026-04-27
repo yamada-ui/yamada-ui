@@ -60,14 +60,12 @@ describe("<SegmentedControl />", () => {
   test("should call onChange when a different item is selected", async () => {
     const onChange = vi.fn()
     const { user } = await render(<TestComponent onChange={onChange} />)
-
     await user.click(page.getByText("Two"))
     expect(onChange).toHaveBeenCalledWith("two")
   })
 
   test("should update selected item when clicked", async () => {
     const { user } = await render(<TestComponent />)
-
     await expect.element(page.getByRole("radio", { name: "One" })).toBeChecked()
     await user.click(page.getByText("Two"))
     await expect.element(page.getByRole("radio", { name: "Two" })).toBeChecked()

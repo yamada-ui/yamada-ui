@@ -1,10 +1,18 @@
 import { useRef, useState } from "react"
-import { page, render, renderHook } from "#test/browser"
+import { a11y, page, render, renderHook } from "#test/browser"
 import { FocusLock } from "./focus-lock"
 
 describe("<FocusLock />", () => {
   test("sets `displayName` correctly", () => {
     expect(FocusLock.name).toBe("FocusLock")
+  })
+
+  test("passes a11y checks", async () => {
+    await a11y(
+      <FocusLock>
+        <button>Focused Button</button>
+      </FocusLock>,
+    )
   })
 
   test("correctly focuses on elements within the lock", async () => {

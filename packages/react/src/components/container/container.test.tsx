@@ -1,11 +1,11 @@
-import { render, screen } from "#test"
+import { page, render } from "#test/browser"
 import { Heading } from "../heading"
 import { Text } from "../text"
 import { Container } from "./"
 
 describe("<Container />", () => {
-  test("renders component correctly", () => {
-    render(
+  test("renders component correctly", async () => {
+    await render(
       <Container.Root>
         <Container.Header>
           <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
@@ -31,8 +31,8 @@ describe("<Container />", () => {
     expect(Container.Footer.displayName).toBe("ContainerFooter")
   })
 
-  test("sets `className` correctly", () => {
-    render(
+  test("sets `className` correctly", async () => {
+    await render(
       <Container.Root data-testid="root">
         <Container.Header data-testid="header">
           <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
@@ -50,14 +50,22 @@ describe("<Container />", () => {
       </Container.Root>,
     )
 
-    expect(screen.getByTestId("root")).toHaveClass("ui-container__root")
-    expect(screen.getByTestId("header")).toHaveClass("ui-container__header")
-    expect(screen.getByTestId("body")).toHaveClass("ui-container__body")
-    expect(screen.getByTestId("footer")).toHaveClass("ui-container__footer")
+    await expect
+      .element(page.getByTestId("root"))
+      .toHaveClass("ui-container__root")
+    await expect
+      .element(page.getByTestId("header"))
+      .toHaveClass("ui-container__header")
+    await expect
+      .element(page.getByTestId("body"))
+      .toHaveClass("ui-container__body")
+    await expect
+      .element(page.getByTestId("footer"))
+      .toHaveClass("ui-container__footer")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(
+  test("renders HTML tag correctly", async () => {
+    await render(
       <Container.Root data-testid="root">
         <Container.Header data-testid="header">
           <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
@@ -75,9 +83,17 @@ describe("<Container />", () => {
       </Container.Root>,
     )
 
-    expect(screen.getByTestId("root").tagName).toBe("SECTION")
-    expect(screen.getByTestId("header").tagName).toBe("HEADER")
-    expect(screen.getByTestId("body").tagName).toBe("DIV")
-    expect(screen.getByTestId("footer").tagName).toBe("FOOTER")
+    await expect
+      .poll(() => page.getByTestId("root").element().tagName)
+      .toBe("SECTION")
+    await expect
+      .poll(() => page.getByTestId("header").element().tagName)
+      .toBe("HEADER")
+    await expect
+      .poll(() => page.getByTestId("body").element().tagName)
+      .toBe("DIV")
+    await expect
+      .poll(() => page.getByTestId("footer").element().tagName)
+      .toBe("FOOTER")
   })
 })

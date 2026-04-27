@@ -1,23 +1,23 @@
 import type { ThemeScheme } from "./index.types"
-import { act, renderHook } from "#test"
+import { renderHook } from "#test/browser"
 import { useTheme } from "./theme-provider"
 
 describe("ThemeProvider", () => {
-  test("provides a theme to child components", () => {
-    const { result } = renderHook(() => useTheme())
+  test("provides a theme to child components", async () => {
+    const { result } = await renderHook(() => useTheme())
 
     expect(result.current.theme.colors.blue["50"]).toBe("#e2edfd")
     expect(result.current.theme.fontSizes.md).toBe("1rem")
   })
 
-  test("allows theme updates through changeThemeScheme", () => {
-    const { rerender, result } = renderHook(() => useTheme())
+  test("allows theme updates through changeThemeScheme", async () => {
+    const { act, rerender, result } = await renderHook(() => useTheme())
 
-    act(() => {
+    await act(() => {
       result.current.changeThemeScheme("updated" as ThemeScheme)
     })
 
-    rerender()
+    await rerender()
 
     expect(document.documentElement.dataset.theme).toBe("updated")
   })

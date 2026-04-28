@@ -87,7 +87,7 @@ export const NativeSelectRoot = withProvider<"select", NativeSelectRootProps>(
           rootProps,
         )()}
       >
-        <NativeSelectField {...getFieldProps(varProps)} />
+        <NativeSelectField {...getFieldProps({ ...varProps })} />
 
         <InputGroup.Element {...elementProps}>
           <NativeSelectIcon icon={icon} {...getIconProps(iconProps)} />

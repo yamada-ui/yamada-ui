@@ -38,17 +38,6 @@ cd yamada-ui
 - **`pnpm typecheck`**: すべてのパッケージに対して型チェックを実行します。
 - **`pnpm test`**: すべてのパッケージに対してテストを実行します。
 
-### Visual Studio Code
-
-拡張機能を正しく動作させるために、`.vscode/setting.json`に以下の設定を追加してください。
-
-```json
-{
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "eslint.workingDirectories": [{ "mode": "auto" }]
-}
-```
-
 ## AI利用ポリシー
 
 Yamada UIは、人工知能（AI）ツールの支援を活用した貢献を含め、すべての方からの貢献を歓迎します。AIを用いて貢献を行う場合は、以下の[AI利用ポリシー](./AI_POLICY.ja.md)に従ってください。
@@ -92,10 +81,6 @@ Yamada UIは、人工知能（AI）ツールの支援を活用した貢献を含
 
 4. `pnpm changeset`を実行して、変更の詳細な説明を作成します。これは、更新を公開する際にチェンジログを生成するために使用されます。
    [Changesetについてさらに学ぶ](https://github.com/atlassian/changesets/tree/master/packages/cli)
-
-> [!NOTE]
->
-> CIの設定やPrettierなどの小さな変更を行った場合は、`pnpm changeset add --empty`を実行して、空のchangesetファイルを生成し、変更を文書化することができます。
 
 5. 次に、[コミット規約](#コミット規約)に従ってコミットします。
 

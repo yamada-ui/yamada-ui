@@ -1,5 +1,5 @@
-import type { Doc } from "#velite"
 import type { TagProps } from "@yamada-ui/react"
+import type { Doc } from "#velite"
 import { Tag } from "@yamada-ui/react"
 
 function getColorScheme(status: Doc["status"]) {

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://turborepo.dev/schema.v2.json",
+  "extends": ["//"],
+  "tasks": {
+    "typecheck": {
+      "dependsOn": [],
+      "inputs": ["**/*.{ts,tsx,mts}", "package.json", "tsconfig.json"]
+    },
+    "lint": {
+      "dependsOn": [],
+      "inputs": ["**/*.{ts,tsx,mts}", "package.json", "tsconfig.json"]
+    }
+  }
+}

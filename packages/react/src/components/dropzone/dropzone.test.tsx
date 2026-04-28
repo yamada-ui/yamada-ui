@@ -3,6 +3,7 @@ import { ImageIcon } from "../icon"
 import { Text } from "../text"
 import { Dropzone } from "./"
 import { IMAGE_ACCEPT_TYPE } from "./accept-types"
+import { useDropzone } from "./use-dropzone"
 
 describe("<Dropzone />", () => {
   test("renders component correctly", async () => {
@@ -154,6 +155,53 @@ describe("<Dropzone />", () => {
         expect.anything(),
       )
     })
+  })
+
+  test("merges getRootProps values with rest and caller props", async () => {
+    const restOnClick = vi.fn()
+    const callerOnClick = vi.fn()
+    const restRef = vi.fn()
+    const callerRef = vi.fn()
+    const Probe = () => {
+      const { getRootProps } = useDropzone({
+        ref: restRef,
+        className: "from-rest",
+        style: { backgroundColor: "red", paddingTop: "4px" },
+        autoFocus: true,
+        onClick: restOnClick,
+      })
+
+      return (
+        <div
+          data-testid="root"
+          {...getRootProps({
+            ref: callerRef,
+            className: "from-caller",
+            style: { color: "blue", paddingTop: "8px" },
+            onClick: callerOnClick,
+          })}
+        />
+      )
+    }
+
+    const { user } = await render(<Probe />)
+
+    const root = page.getByTestId("root")
+    const rootElement = root.element()
+
+    await expect.element(root).toHaveClass("from-rest")
+    await expect.element(root).toHaveClass("from-caller")
+    await expect.element(root).toHaveStyle({ backgroundColor: "red" })
+    await expect.element(root).toHaveStyle({ color: "blue" })
+    await expect.element(root).toHaveStyle({ paddingTop: "8px" })
+    await expect.element(root).toHaveFocus()
+
+    await user.click(root)
+
+    expect(restOnClick).toHaveBeenCalledTimes(1)
+    expect(callerOnClick).toHaveBeenCalledTimes(1)
+    expect(restRef).toHaveBeenCalledWith(rootElement)
+    expect(callerRef).toHaveBeenCalledWith(rootElement)
   })
 
   test("DropzoneAccept renders correctly when dragging accepted files", async () => {

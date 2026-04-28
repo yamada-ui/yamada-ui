@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { a11y, page, render } from "#test/browser"
+import { a11y, fireEvent, page, render } from "#test/browser"
 import { ScrollArea } from "."
 
 const setScrollTop = (el: HTMLElement, value: number) => {
@@ -113,24 +113,34 @@ describe("<ScrollArea />", () => {
     })
   })
 
-  test("shows scroll indicators on hover", async () => {
+  test("shows scroll indicators on hover and hides them on leave", async () => {
     await render(
       <ScrollArea
         type="hover"
         data-testid="scroll-area"
         h="xs"
         scrollHideDelay={100}
+        w="sm"
       >
         <TestContent />
       </ScrollArea>,
     )
 
     const scrollArea = page.getByTestId("scroll-area")
+    const scrollAreaElement = scrollArea.element()
 
     await expect.element(scrollArea).toHaveAttribute("data-hidden")
 
-    await scrollArea.hover()
+    fireEvent.pointerEnter(scrollAreaElement)
     await expect.element(scrollArea).not.toHaveAttribute("data-hidden")
+    await expect
+      .poll(() => {
+        fireEvent.pointerLeave(scrollAreaElement)
+        fireEvent.mouseOut(scrollAreaElement, { relatedTarget: document.body })
+
+        return scrollAreaElement.hasAttribute("data-hidden")
+      })
+      .toBe(true)
   })
 
   test("shows scroll indicators on scroll type and hides them after delay", async () => {

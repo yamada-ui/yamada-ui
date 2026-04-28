@@ -692,6 +692,118 @@ describe("<Sidebar />", () => {
     })
   })
 
+  test("should merge root and group props including className, style, ref, and handlers", async () => {
+    const onRootKeyDown = vi.fn()
+    const onGroupClickFromSidePanel = vi.fn()
+    const onGroupClickFromGroup = vi.fn()
+    const rootRef = vi.fn()
+    const groupRef = vi.fn()
+
+    const { user } = await render(
+      <Sidebar.Root
+        ref={rootRef}
+        className="custom-root"
+        style={{ marginTop: "1px" }}
+        data-testid="root"
+        tabIndex={0}
+        onKeyDown={onRootKeyDown}
+      >
+        <Sidebar.SidePanel
+          groupProps={{
+            ref: groupRef,
+            className: "custom-group-from-side-panel",
+            style: { marginLeft: "2px" },
+            onClick: onGroupClickFromSidePanel,
+          }}
+        >
+          <Sidebar.Content>
+            <Sidebar.Group
+              className="custom-group"
+              style={{ marginBottom: "3px" }}
+              data-testid="group"
+              label="Group"
+              onClick={onGroupClickFromGroup}
+            >
+              <Sidebar.Item label="Leaf" value="#leaf" />
+            </Sidebar.Group>
+          </Sidebar.Content>
+        </Sidebar.SidePanel>
+      </Sidebar.Root>,
+    )
+
+    const root = page.getByTestId("root")
+    const group = page.getByTestId("group")
+
+    await expect.element(root).toHaveClass("ui-sidebar__root")
+    await expect.element(root).toHaveClass("custom-root")
+    await expect.element(root).toHaveStyle("margin-top: 1px")
+    await expect.element(group).toHaveClass("custom-group")
+    await expect.element(group).toHaveClass("custom-group-from-side-panel")
+    await expect.element(group).toHaveStyle("margin-left: 2px")
+    await expect.element(group).toHaveStyle("margin-bottom: 3px")
+    await expect.element(group).toHaveAttribute("aria-labelledby")
+
+    await user.click(root)
+    await user.keyboard("a")
+
+    expect(onRootKeyDown).toHaveBeenCalledWith()
+
+    await user.click(group)
+
+    expect(onGroupClickFromSidePanel).toHaveBeenCalledTimes(1)
+    expect(onGroupClickFromGroup).toHaveBeenCalledTimes(1)
+    expect(rootRef).toHaveBeenCalledWith(expect.any(HTMLDivElement))
+    expect(groupRef).toHaveBeenCalledWith(expect.any(HTMLLIElement))
+  })
+
+  test("should merge item click handlers from side panel and item with selection behavior", async () => {
+    const onItemClickFromSidePanel = vi.fn()
+    const onItemClickFromItem = vi.fn()
+    const onSelectedChange = vi.fn()
+    const itemRef = vi.fn()
+
+    const { user } = await render(
+      <Sidebar.Root onSelectedChange={onSelectedChange}>
+        <Sidebar.SidePanel
+          itemProps={{
+            ref: itemRef,
+            className: "custom-item-from-side-panel",
+            style: { marginRight: "4px" },
+            onClick: onItemClickFromSidePanel,
+          }}
+        >
+          <Sidebar.Content>
+            <Sidebar.Item
+              className="custom-item"
+              style={{ marginInlineStart: "5px" }}
+              data-testid="item"
+              label="Leaf"
+              value="#leaf"
+              onClick={onItemClickFromItem}
+            />
+          </Sidebar.Content>
+        </Sidebar.SidePanel>
+      </Sidebar.Root>,
+    )
+
+    const item = page.getByTestId("item")
+
+    await expect.element(item).toHaveClass("custom-item")
+    await expect.element(item).toHaveClass("custom-item-from-side-panel")
+    await expect.element(item).toHaveStyle("margin-right: 4px")
+    await expect.element(item).toHaveStyle("margin-inline-start: 5px")
+
+    await user.click(page.getByRole("link", { name: "Leaf" }))
+
+    expect(onItemClickFromSidePanel).toHaveBeenCalledTimes(1)
+    expect(onItemClickFromItem).toHaveBeenCalledTimes(1)
+    expect(onSelectedChange).toHaveBeenCalledWith("#leaf")
+    await expect
+      .element(page.getByRole("link", { name: "Leaf" }))
+      .toHaveAttribute("data-selected")
+    expect(itemRef).toHaveBeenCalledWith(expect.any(HTMLLIElement))
+  })
+
   test("should support default selectedValue", async () => {
     await render(
       <Sidebar.Root defaultExpandedValue={["/1"]} defaultSelectedValue="/1/1">

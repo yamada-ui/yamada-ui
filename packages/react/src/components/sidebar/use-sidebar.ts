@@ -481,7 +481,7 @@ export const useSidebarItem = ({
       return {
         ...merged,
         onClick: handlerAll(
-          props.onClick,
+          merged.onClick,
           !group ? () => onSelectedChange(value) : undefined,
         ),
       }

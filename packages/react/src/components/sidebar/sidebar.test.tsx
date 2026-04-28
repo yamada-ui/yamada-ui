@@ -746,7 +746,7 @@ describe("<Sidebar />", () => {
     await user.click(root)
     await user.keyboard("a")
 
-    expect(onRootKeyDown).toHaveBeenCalledWith()
+    expect(onRootKeyDown).toHaveBeenCalledWith(expect.any(Object))
 
     await user.click(group)
 

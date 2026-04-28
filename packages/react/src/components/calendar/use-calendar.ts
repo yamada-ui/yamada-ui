@@ -1026,7 +1026,7 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
   )
 
   const getDayProps: PropGetter<"td"> = useCallback(
-    ({ ref, "aria-label": ariaLabel, ...props } = {}) => {
+    ({ "aria-label": ariaLabel, ...props } = {}) => {
       let resolvedAriaLabel = ariaLabel
       if (!resolvedAriaLabel) {
         resolvedAriaLabel = dateTimeFormat(dayjs(value).toDate(), {
@@ -1059,7 +1059,7 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
         rest,
         props,
         {
-          ref: mergeRefs(ref, cellRef, outside ? null : register),
+          ref: mergeRefs(cellRef, outside ? null : register),
           onBlur,
           onClick,
           onFocus: (ev) => ev.preventDefault(),

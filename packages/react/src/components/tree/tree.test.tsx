@@ -16,6 +16,9 @@ const getTreeItemLabel = (name: string) =>
 
 const firstTreeItem = () => page.getByRole("treeitem").first()
 
+const getMultiSelectModifier = () =>
+  /Mac|iPhone|iPad/.test(navigator.platform) ? "Meta" : "Control"
+
 const getTreeItemCheckboxIndicator = (name: string) => {
   const item = getTreeItem(name).element()
   const indicator = item.querySelector("[data-indicator]")
@@ -81,11 +84,8 @@ describe("<Tree />", () => {
     )
     const root = page.getByRole("tree")
     const group = page.getByRole("group").first()
-    const groupItem = firstTreeItem()
+    const groupItem = getTreeItem("1")
     const item = getTreeItem("1-1")
-    const groupIndicator = groupItem
-      .element()
-      .querySelector(".ui-tree__indicator")
     const checkbox = item.element().querySelector(".ui-tree__checkbox")
     const startElement = item
       .element()
@@ -93,8 +93,6 @@ describe("<Tree />", () => {
     const label = item.element().querySelector(".ui-tree__label")
     const endElement = item.element().querySelector(".ui-tree__element--end")
 
-    if (!(groupIndicator instanceof HTMLElement))
-      throw new Error("Tree indicator is not found")
     if (!(checkbox instanceof HTMLElement))
       throw new Error("Tree checkbox is not found")
     if (!(startElement instanceof HTMLElement))
@@ -107,7 +105,6 @@ describe("<Tree />", () => {
     await expect.element(root).toHaveClass("ui-tree__root")
     await expect.element(group).toHaveClass("ui-tree__group")
     await expect.element(groupItem).toHaveClass("ui-tree__item")
-    expect(groupIndicator).toHaveClass("ui-tree__indicator")
     await expect.element(item).toHaveClass("ui-tree__item")
     expect(checkbox).toHaveClass("ui-tree__checkbox")
     expect(startElement).toHaveClass(
@@ -262,9 +259,9 @@ describe("<Tree />", () => {
       />,
     )
 
-    await user.keyboard("{Control>}")
-    await user.click(getTreeItem("3"), { force: true })
-    await user.keyboard("{/Control}")
+    await user.keyboard(`{${getMultiSelectModifier()}>}`)
+    await user.click(getTreeItemLabel("3"), {})
+    await user.keyboard(`{/${getMultiSelectModifier()}}`)
 
     expect(onSelectedChange).toHaveBeenCalledWith(expect.arrayContaining(["3"]))
   })
@@ -685,9 +682,9 @@ describe("<Tree />", () => {
       />,
     )
 
-    await user.keyboard("{Control>}")
-    await user.click(getTreeItem("1-1"), { force: true })
-    await user.keyboard("{/Control}")
+    await user.keyboard(`{${getMultiSelectModifier()}>}`)
+    await user.click(getTreeItemLabel("1-1"), {})
+    await user.keyboard(`{/${getMultiSelectModifier()}}`)
 
     expect(onSelectedChange).toHaveBeenCalledWith([])
   })

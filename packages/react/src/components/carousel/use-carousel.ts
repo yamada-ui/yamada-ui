@@ -6,15 +6,15 @@ import type {
   EmblaPluginType,
 } from "embla-carousel"
 import type { KeyboardEvent, RefObject } from "react"
-import type {
-  HTMLProps,
-  Orientation,
-  PropGetter,
-  RequiredPropGetter,
-} from "../../core"
 import useEmblaCarousel from "embla-carousel-react"
 import { useCallback, useEffect, useRef, useState } from "react"
-import { mergeProps } from "../../core"
+import {
+  type HTMLProps,
+  mergeProps,
+  type Orientation,
+  type PropGetter,
+  type RequiredPropGetter,
+} from "../../core"
 import { useBoolean } from "../../hooks/use-boolean"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"

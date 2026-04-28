@@ -1,9 +1,9 @@
-import { renderHook } from "#test"
+import { renderHook } from "#test/browser"
 import { EnvironmentProvider, useEnvironment } from "./environment-provider"
 
 describe("EnvironmentProvider", () => {
-  test("provides default environment with document access", () => {
-    const { result } = renderHook(() => useEnvironment(), {
+  test("provides default environment with document access", async () => {
+    const { result } = await renderHook(() => useEnvironment(), {
       withProvider: false,
     })
     expect(result.current.getDocument()).toBe(document)
@@ -11,9 +11,9 @@ describe("EnvironmentProvider", () => {
     expect(result.current.getRootNode()).toBeDefined()
   })
 
-  test("provides custom root node via value prop", () => {
+  test("provides custom root node via value prop", async () => {
     const customNode = document.createElement("div")
-    const { result } = renderHook(() => useEnvironment(), {
+    const { result } = await renderHook(() => useEnvironment(), {
       withProvider: false,
       wrapper: ({ children }) => (
         <EnvironmentProvider value={customNode}>{children}</EnvironmentProvider>
@@ -22,9 +22,9 @@ describe("EnvironmentProvider", () => {
     expect(result.current.getRootNode()).toBe(customNode)
   })
 
-  test("provides custom root node via function value", () => {
+  test("provides custom root node via function value", async () => {
     const customNode = document.createElement("div")
-    const { result } = renderHook(() => useEnvironment(), {
+    const { result } = await renderHook(() => useEnvironment(), {
       withProvider: false,
       wrapper: ({ children }) => (
         <EnvironmentProvider value={() => customNode}>

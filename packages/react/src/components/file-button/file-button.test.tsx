@@ -1,8 +1,23 @@
 import { useRef, useState } from "react"
+import { type Locator, locators } from "vitest/browser"
 import { a11y, page, render } from "#test/browser"
 import { FileButton } from "."
 
+declare module "vitest/browser" {
+  interface LocatorSelectors {
+    getByCSS(css: string): Locator
+  }
+}
+
 describe("<FileButton />", () => {
+  beforeAll(() => {
+    locators.extend({
+      getByCSS(css: string) {
+        return `css=${css}`
+      },
+    })
+  })
+
   beforeEach(() => {
     vi.spyOn(HTMLInputElement.prototype, "click").mockImplementation(() => {})
   })
@@ -118,10 +133,7 @@ describe("<FileButton />", () => {
 
     const { user } = await render(<TestComponent />)
 
-    const fileInputElement = document.querySelector('input[type="file"]')
-    if (!(fileInputElement instanceof HTMLInputElement))
-      throw new Error("file input not found")
-    const fileInput = page.elementLocator(fileInputElement)
+    const fileInput = page.getByCSS('input[type="file"]')
 
     await expect.element(page.getByText("files: 0")).toBeInTheDocument()
     expect(handleFileChangeMock).not.toHaveBeenCalled()
@@ -180,10 +192,7 @@ describe("<FileButton />", () => {
     await expect.element(page.getByText("files: 0")).toBeInTheDocument()
 
     const file = new File(["test"], "test.txt", { type: "text/plain" })
-    const fileInputElement = document.querySelector('input[type="file"]')
-    if (!(fileInputElement instanceof HTMLInputElement))
-      throw new Error("file input not found")
-    const fileInput = page.elementLocator(fileInputElement)
+    const fileInput = page.getByCSS('input[type="file"]')
     await user.upload(fileInput, file)
 
     await expect.element(page.getByText("files: 1")).toBeInTheDocument()

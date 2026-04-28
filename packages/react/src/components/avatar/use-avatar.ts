@@ -92,15 +92,11 @@ export const useAvatar = ({
   const getGroupProps: PropGetter = useCallback((props) => ({ ...props }), [])
 
   const getRootProps: PropGetter = useCallback(
-    (props) =>
-      mergeProps(
-        {
-          "data-fallback": dataAttr(!!fallbackMessage),
-          "data-loaded": dataAttr(loaded),
-        },
-        rest,
-        props,
-      )(),
+    (props) => ({
+      ...mergeProps(rest, props)(),
+      "data-fallback": dataAttr(!!fallbackMessage),
+      "data-loaded": dataAttr(loaded),
+    }),
     [loaded, fallbackMessage, rest],
   )
 

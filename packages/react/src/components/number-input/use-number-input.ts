@@ -309,8 +309,10 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    ({ ref, ...props } = {}) =>
-      mergeProps(
+    ({ ref, ...props } = {}) => {
+      const { ref: restRef, ...restWithoutRef } = rest
+
+      return mergeProps(
         {
           ...ariaProps,
           ...dataProps,
@@ -334,17 +336,18 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
           step,
           value: format(value),
         },
-        rest,
-        props,
+        restWithoutRef,
         eventProps,
+        props,
         {
-          ref: mergeRefs(ref, rest.ref, inputRef),
+          ref: mergeRefs(ref, restRef, inputRef),
           onBlur,
           onChange,
           onFocus,
           onKeyDown,
         },
-      )(),
+      )()
+    },
     [
       format,
       out,

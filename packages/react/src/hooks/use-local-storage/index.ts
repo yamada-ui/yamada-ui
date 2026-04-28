@@ -38,7 +38,7 @@ export const createStorage = <Y>(type: StorageType, name: string) => {
 
   return ({
     key,
-    defaultValue = undefined,
+    defaultValue,
     deserialize = deserializeJSON,
     getInitialValueInEffect = true,
     serialize = (value: Y) => serializeJSON(value, name),
@@ -48,8 +48,7 @@ export const createStorage = <Y>(type: StorageType, name: string) => {
         if (
           typeof window === "undefined" ||
           !(type in window) ||
-          // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-          window[type] == null ||
+          (window[type] as null | Storage | undefined) == null ||
           skipStorage
         ) {
           return (defaultValue ?? "") as Y

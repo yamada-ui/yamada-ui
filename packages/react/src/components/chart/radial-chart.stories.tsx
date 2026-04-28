@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { CSSProps } from "../../core"
-import { PropsTable } from "#storybook"
 import { useMemo } from "react"
+import { PropsTable } from "#storybook"
 import { RadialChart } from "."
 import { styled } from "../../core"
 import { isString, toTitleCase } from "../../utils"

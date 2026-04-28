@@ -46,7 +46,7 @@ export const generateAtRule =
               .map((style) => `style(${style})`)
               .join(" and ")
           } else {
-            const resolvedRest = filterUndefined({
+            const resolvedRest = filterUndefined<Dict>({
               height,
               maxHeight,
               maxWidth,

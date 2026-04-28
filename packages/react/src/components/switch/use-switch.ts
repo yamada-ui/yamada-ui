@@ -127,26 +127,20 @@ export const useSwitch = <Y extends number | string = string>(
   )
 
   const getTrackProps: PropGetter = useCallback(
-    (props = {}) => ({
-      "data-checked": dataAttr(checked),
-      ...dataProps,
-      ...props,
-    }),
+    (props = {}) =>
+      mergeProps(dataProps, { "data-checked": dataAttr(checked) }, props)(),
     [checked, dataProps],
   )
 
   const getThumbProps: PropGetter = useCallback(
-    (props = {}) => ({
-      "data-checked": dataAttr(checked),
-      ...dataProps,
-      ...props,
-    }),
+    (props = {}) =>
+      mergeProps(dataProps, { "data-checked": dataAttr(checked) }, props)(),
     [checked, dataProps],
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    (props = {}) =>
-      mergeProps(
+    (props = {}) => {
+      const mergedProps = mergeProps(
         ariaProps,
         dataProps,
         {
@@ -164,9 +158,14 @@ export const useSwitch = <Y extends number | string = string>(
         },
         { onBlur: eventProps.onBlur, onFocus: eventProps.onFocus },
         props,
-        { ref: mergeRefs(inputRef, ref) },
         { onChange, onKeyDown },
-      )(),
+      )({ mergeRef: false })
+
+      return {
+        ...mergedProps,
+        ref: mergeRefs(inputRef, props.ref, ref),
+      }
+    },
     [
       ariaProps,
       dataProps,
@@ -186,11 +185,8 @@ export const useSwitch = <Y extends number | string = string>(
   )
 
   const getLabelProps: PropGetter<"span"> = useCallback(
-    (props = {}) => ({
-      ...dataProps,
-      "data-checked": dataAttr(checked),
-      ...props,
-    }),
+    (props = {}) =>
+      mergeProps(dataProps, { "data-checked": dataAttr(checked) }, props)(),
     [dataProps, checked],
   )
 

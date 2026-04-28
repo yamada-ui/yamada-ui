@@ -1,4 +1,5 @@
-import { a11y, render, screen } from "#test"
+import { a11y, fireEvent, render, screen } from "#test"
+import { vi } from "vitest"
 import { BoxIcon } from "../icon"
 import { Switch } from "./"
 
@@ -90,6 +91,99 @@ describe("<Switch />", () => {
 
     expect(screen.getByTestId("icon-on")).toBeInTheDocument()
     expect(screen.queryByTestId("icon-off")).not.toBeInTheDocument()
+  })
+
+  test("merges root and input consumer className and style props", () => {
+    render(
+      <Switch
+        className="custom-root"
+        data-testid="switch"
+        inputProps={{
+          className: "custom-input",
+          style: { color: "tomato" },
+          "data-testid": "switch-input",
+        }}
+      >
+        Switch
+      </Switch>,
+    )
+
+    const root = screen.getByTestId("switch")
+    const input = screen.getByTestId("switch-input")
+
+    expect(root).toHaveClass("ui-switch__root")
+    expect(root).toHaveClass("custom-root")
+    expect(input).toHaveClass("custom-input")
+    expect(input).toHaveStyle({ color: "tomato", width: "1px" })
+  })
+
+  test("merges consumer handlers with internal input behavior", () => {
+    const order: string[] = []
+    const onChange = vi.fn(() => order.push("onChange"))
+    const onInputChange = vi.fn(() => order.push("input:onChange"))
+    const onInputKeyDown = vi.fn(() => order.push("input:onKeyDown"))
+    const onFocus = vi.fn()
+    const onInputFocus = vi.fn()
+    const onBlur = vi.fn()
+    const onInputBlur = vi.fn()
+
+    render(
+      <Switch
+        inputProps={{
+          onBlur: onInputBlur,
+          onChange: onInputChange,
+          onFocus: onInputFocus,
+          onKeyDown: onInputKeyDown,
+        }}
+        onBlur={onBlur}
+        onChange={onChange}
+        onFocus={onFocus}
+      >
+        Switch
+      </Switch>,
+    )
+
+    const switchElement = screen.getByRole("switch", { name: /Switch/i })
+
+    fireEvent.focus(switchElement)
+    fireEvent.keyDown(switchElement, { key: "Enter" })
+    fireEvent.blur(switchElement)
+
+    expect(onInputKeyDown).toHaveBeenCalledTimes(1)
+    expect(onInputChange).toHaveBeenCalledTimes(1)
+    expect(onChange).toHaveBeenCalledTimes(1)
+    expect(onFocus).toHaveBeenCalledTimes(1)
+    expect(onInputFocus).toHaveBeenCalledTimes(1)
+    expect(onBlur).toHaveBeenCalledTimes(1)
+    expect(onInputBlur).toHaveBeenCalledTimes(1)
+    expect(order).toStrictEqual([
+      "input:onKeyDown",
+      "input:onChange",
+      "onChange",
+    ])
+    expect(switchElement).toBeChecked()
+  })
+
+  test("composes forwarded ref and inputProps ref on the input element", () => {
+    const order: string[] = []
+    const forwardedRef = vi.fn((node: HTMLInputElement | null) => {
+      if (node) order.push("forwarded")
+    })
+    const inputPropsRef = vi.fn((node: HTMLInputElement | null) => {
+      if (node) order.push("inputProps")
+    })
+
+    render(
+      <Switch ref={forwardedRef} inputProps={{ ref: inputPropsRef }}>
+        Switch
+      </Switch>,
+    )
+
+    const switchElement = screen.getByRole("switch", { name: /Switch/i })
+
+    expect(inputPropsRef).toHaveBeenCalledWith(switchElement)
+    expect(forwardedRef).toHaveBeenCalledWith(switchElement)
+    expect(order).toStrictEqual(["inputProps", "forwarded"])
   })
 
   test("passes labelProps to the label element", () => {

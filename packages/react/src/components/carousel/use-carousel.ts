@@ -419,12 +419,12 @@ export const useCarousel = ({
           "data-orientation": orientation,
         },
         rest,
-        props,
         {
-          ref: mergeRefs(ref, rest.ref),
+          ref,
           onMouseEnter,
           onMouseLeave,
         },
+        props,
       )(),
     [id, onMouseEnter, onMouseLeave, rest, orientation],
   )

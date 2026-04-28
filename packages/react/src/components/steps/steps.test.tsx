@@ -1,8 +1,9 @@
 import type { FC } from "react"
-import { a11y, render, screen } from "#test"
+import { a11y, fireEvent, render, screen } from "#test"
 import { useMemo } from "react"
 import { Steps } from "."
 import { ButtonGroup } from "../button"
+import { useSteps, useStepsItem } from "./use-steps"
 
 interface TestComponentProps extends Steps.RootProps {
   itemProps?: Required<Steps.RootProps>["items"][number]
@@ -111,5 +112,98 @@ describe("<Stepper />", () => {
     expect(screen.getByTestId("completedContent").tagName).toBe("DIV")
     expect(screen.getByRole("button", { name: /Prev/i }).tagName).toBe("BUTTON")
     expect(screen.getByRole("button", { name: /Next/i }).tagName).toBe("BUTTON")
+  })
+
+  test("merges root props correctly in `useSteps.getRootProps`", () => {
+    const hookRef = vi.fn()
+    const getterRef = vi.fn()
+    const hookClick = vi.fn()
+    const getterClick = vi.fn()
+
+    const UseStepsRootProbe = () => {
+      const { getRootProps } = useSteps({
+        ref: hookRef,
+        className: "hook-root",
+        style: { padding: "1px" },
+        onClick: hookClick,
+      })
+
+      return (
+        <div
+          data-testid="use-steps-root"
+          {...getRootProps({
+            ref: getterRef,
+            className: "getter-root",
+            style: { margin: "2px" },
+            onClick: getterClick,
+          })}
+        />
+      )
+    }
+
+    render(<UseStepsRootProbe />)
+
+    const root = screen.getByTestId("use-steps-root")
+
+    expect(root).toHaveClass("hook-root")
+    expect(root).toHaveClass("getter-root")
+    expect(root).toHaveStyle({ padding: "1px" })
+    expect(root).toHaveStyle({ margin: "2px" })
+
+    fireEvent.click(root)
+
+    expect(hookRef).toHaveBeenCalledWith(root)
+    expect(getterRef).toHaveBeenCalledWith(root)
+    expect(hookClick).toHaveBeenCalledTimes(1)
+    expect(getterClick).toHaveBeenCalledTimes(1)
+  })
+
+  test("merges item props correctly in `useStepsItem.getRootProps`", () => {
+    const hookRef = vi.fn()
+    const getterRef = vi.fn()
+    const hookClick = vi.fn()
+    const getterClick = vi.fn()
+
+    const UseStepsItemProbe = () => {
+      const { getRootProps } = useStepsItem({
+        ref: hookRef,
+        className: "hook-item",
+        style: { padding: "1px" },
+        index: 0,
+        onClick: hookClick,
+      })
+
+      return (
+        <li
+          data-testid="use-steps-item"
+          {...getRootProps({
+            ref: getterRef,
+            className: "getter-item",
+            style: { margin: "2px" },
+            onClick: getterClick,
+          })}
+        />
+      )
+    }
+
+    render(
+      <Steps.Root>
+        <UseStepsItemProbe />
+      </Steps.Root>,
+    )
+
+    const item = screen.getByTestId("use-steps-item")
+
+    expect(item).toHaveClass("hook-item")
+    expect(item).toHaveClass("getter-item")
+    expect(item).toHaveStyle({ padding: "1px" })
+    expect(item).toHaveStyle({ margin: "2px" })
+
+    fireEvent.click(item)
+
+    expect(hookRef).toHaveBeenCalledWith(item)
+    expect(getterRef).toHaveBeenCalledWith(item)
+    expect(hookClick).toHaveBeenCalledTimes(1)
+    expect(getterClick).toHaveBeenCalledTimes(1)
   })
 })

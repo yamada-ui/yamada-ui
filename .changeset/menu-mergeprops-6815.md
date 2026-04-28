@@ -2,4 +2,4 @@
 "@yamada-ui/react": patch
 ---
 
-Merge `getGroupProps` in `useMenuGroup` and `getItemProps` in `useMenuItem` with `mergeProps`.
+Fix `Menu.Group` and `Menu.Item` so user-provided `className`, `style`, `css`, `ref`, and `on*` handlers are merged with hook props instead of being silently overwritten.

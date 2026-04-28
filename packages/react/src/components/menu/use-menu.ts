@@ -657,8 +657,23 @@ export const useMenuItem = ({
   )
 
   const getItemProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) =>
-      mergeProps(
+    ({ ref, ...props } = {}) => {
+      const {
+        onClick: restOnClick,
+        onFocus: restOnFocus,
+        onKeyDown: restOnKeyDown,
+        onMouseMove: restOnMouseMove,
+        ...restProps
+      } = rest
+      const {
+        onClick: propsOnClick,
+        onFocus: propsOnFocus,
+        onKeyDown: propsOnKeyDown,
+        onMouseMove: propsOnMouseMove,
+        ...itemProps
+      } = props
+
+      return mergeProps(
         {
           id,
           "aria-disabled": ariaDisabled ?? ariaAttr(disabled),
@@ -666,19 +681,22 @@ export const useMenuItem = ({
           role: "menuitem",
           tabIndex: -1,
         },
-        rest,
-        props,
+        restProps,
+        itemProps,
         {
-          ref: mergeRefs(ref, rest.ref, itemRef, register),
-          onClick: () => onSelect(value, closeOnSelect),
-          onFocus: onActive,
-          onKeyDown,
-          onMouseMove: () => {
+          ref: mergeRefs(ref, itemRef, register),
+          onClick: handlerAll(propsOnClick, restOnClick, () =>
+            onSelect(value, closeOnSelect),
+          ),
+          onFocus: handlerAll(propsOnFocus, restOnFocus, onActive),
+          onKeyDown: handlerAll(propsOnKeyDown, restOnKeyDown, onKeyDown),
+          onMouseMove: handlerAll(propsOnMouseMove, restOnMouseMove, () => {
             onCloseSubMenu()
             onActive()
-          },
+          }),
         },
-      )(),
+      )()
+    },
     [
       id,
       ariaDisabled,

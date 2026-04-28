@@ -122,7 +122,10 @@ export const useScrollArea = ({
   const getRootProps: PropGetter = useCallback(
     ({ style, ...props } = {}) => {
       const merged = mergeProps(
-        { ref, style: { overflow: "auto", ...style } },
+        {
+          ref: isSafari ? undefined : ref,
+          style: { overflow: "auto", ...style },
+        },
         rest,
         isSafari ? safariProps : {},
         props,

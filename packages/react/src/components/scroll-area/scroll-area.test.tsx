@@ -1,6 +1,15 @@
 import type { FC } from "react"
-import { a11y, act, fireEvent, render, screen, waitFor } from "#test"
+import {
+  a11y,
+  act,
+  fireEvent,
+  render,
+  renderHook,
+  screen,
+  waitFor,
+} from "#test"
 import { ScrollArea } from "."
+import { useScrollArea } from "./use-scroll-area"
 
 const TestContent: FC = () => {
   return (
@@ -192,5 +201,102 @@ describe("<ScrollArea />", () => {
 
     // The key should end with the expected pattern
     expect(scrollArea.getAttribute("data-key")).toMatch(/-false-false$/)
+  })
+
+  test("merges consumer root props and preserves event handler order", () => {
+    const order: string[] = []
+    const restOnMouseEnter = vi.fn(() => order.push("rest-enter"))
+    const restOnMouseLeave = vi.fn(() => order.push("rest-leave"))
+    const restOnScroll = vi.fn(() => order.push("rest-scroll"))
+    const propsOnMouseEnter = vi.fn(() => order.push("props-enter"))
+    const propsOnMouseLeave = vi.fn(() => order.push("props-leave"))
+    const propsOnScroll = vi.fn(() => order.push("props-scroll"))
+    const onScrollPositionChange = vi.fn(() => order.push("internal-scroll"))
+
+    const { result } = renderHook(() =>
+      useScrollArea({
+        className: "rest-class",
+        style: { color: "tomato" },
+        onMouseEnter: restOnMouseEnter,
+        onMouseLeave: restOnMouseLeave,
+        onScroll: restOnScroll,
+        onScrollPositionChange,
+      }),
+    )
+
+    const rootProps = result.current.getRootProps({
+      className: "props-class",
+      style: { background: "black" },
+      onMouseEnter: propsOnMouseEnter,
+      onMouseLeave: propsOnMouseLeave,
+      onScroll: propsOnScroll,
+    })
+
+    expect(rootProps.className).toContain("rest-class")
+    expect(rootProps.className).toContain("props-class")
+    expect(rootProps.style).toMatchObject({
+      background: "black",
+      color: "tomato",
+      overflow: "auto",
+    })
+
+    act(() => {
+      rootProps.onMouseEnter?.({} as any)
+      rootProps.onMouseLeave?.({} as any)
+      rootProps.onScroll?.({
+        target: { scrollLeft: 16, scrollTop: 24 },
+      } as any)
+    })
+
+    expect(order).toStrictEqual([
+      "props-enter",
+      "rest-enter",
+      "props-leave",
+      "rest-leave",
+      "props-scroll",
+      "rest-scroll",
+      "internal-scroll",
+    ])
+  })
+
+  test("composes refs once in safari root props", () => {
+    Object.defineProperty(window.navigator, "platform", {
+      value: "MacOS",
+      writable: true,
+    })
+    Object.defineProperty(window.navigator, "vendor", {
+      value: "Apple Computer, Inc.",
+      writable: true,
+    })
+
+    const externalRef = vi.fn()
+    const consumerRef = vi.fn()
+
+    const Component = () => {
+      const { getRootProps } = useScrollArea({
+        ref: externalRef,
+      })
+
+      return (
+        <div
+          data-testid="scroll-area-ref"
+          {...getRootProps({ ref: consumerRef })}
+        />
+      )
+    }
+
+    render(<Component />)
+
+    const scrollArea = screen.getByTestId("scroll-area-ref")
+
+    expect(scrollArea).toHaveAttribute("data-key")
+    expect(externalRef).toHaveBeenCalledWith(scrollArea)
+    expect(consumerRef).toHaveBeenCalledWith(scrollArea)
+    expect(
+      externalRef.mock.calls.filter(([value]) => value === scrollArea),
+    ).toHaveLength(1)
+    expect(
+      consumerRef.mock.calls.filter(([value]) => value === scrollArea),
+    ).toHaveLength(1)
   })
 })

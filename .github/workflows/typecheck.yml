@@ -1,0 +1,66 @@
+name: Typecheck
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      TURBO_SCM_BASE:
+        required: true
+        type: string
+    secrets:
+      TURBO_TOKEN:
+        required: false
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+  TURBO_SCM_BASE: ${{ inputs.TURBO_SCM_BASE }}
+
+jobs:
+  packages:
+    name: Packages
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Install
+        uses: ./.github/composite-actions/install
+
+      - name: Run Typecheck
+        run: pnpm turbo run typecheck --filter="{./packages/**}[$TURBO_SCM_BASE]"
+
+  www:
+    name: Documentation
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Install
+        uses: ./.github/composite-actions/install
+
+      - name: Run Typecheck
+        run: pnpm turbo run typecheck --filter="{./www}[$TURBO_SCM_BASE]"
+
+  playgrounds:
+    name: Playgrounds
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Install
+        uses: ./.github/composite-actions/install
+
+      - name: Run Typecheck
+        run: pnpm -r --filter="{playgrounds}[$TURBO_SCM_BASE]" --workspace-concurrency=1 --stream run typecheck

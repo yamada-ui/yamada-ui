@@ -5,9 +5,9 @@ import type {
   RowSelectionState,
   SortingState,
 } from "./table"
-import { PropsTable } from "#storybook"
 import { faker } from "@faker-js/faker"
 import { useMemo, useState } from "react"
+import { PropsTable } from "#storybook"
 import { createColumnHelper, Table } from "."
 import { useI18n } from "../../providers/i18n-provider"
 import { COLOR_SCHEMES, isNumber, isString } from "../../utils"

@@ -195,7 +195,7 @@ const items = useMemo<Autocomplete.Item[]>(
           <HeartIcon fontSize="lg" />
         </>
       ),
-      query: "アグモン",
+      query: "agumon アグモン",
       value: "アグモン",
     },
     { label: "ガブモン", value: "ガブモン" },
@@ -1199,7 +1199,7 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Aut
 |                        | `aria-labelledby`         | If `AutocompleteField` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id`. |
 | `Autocomplete.Content` | `role="listbox"`          | Indicates that this is a listbox.                                                                               |
 | `Autocomplete.Option`  | `role="option"`           | Indicates that this is an option.                                                                               |
-|                        | `aria-selected`           | Sets to `"true"` when the option is selected.                                                                   |
+|                        | `aria-selected`           | Sets to `"true"` when the option is selected, `"false"` when not selected.                                      |
 |                        | `aria-disabled`           | Sets to `"true"` when `disabled` is set.                                                                        |
 | `Autocomplete.Group`   | `role="group"`            | Indicates that this is a group.                                                                                 |
 |                        | `aria-labelledby`         | Sets the `id` of the associated `Autocomplete.Label`.                                                           |

@@ -140,6 +140,16 @@ export const useScrollArea = ({
         rest.onMouseLeave,
         onMouseLeave,
       ),
+      onPointerEnter: handlerAll(
+        props.onPointerEnter,
+        rest.onPointerEnter,
+        onMouseEnter,
+      ),
+      onPointerLeave: handlerAll(
+        props.onPointerLeave,
+        rest.onPointerLeave,
+        onMouseLeave,
+      ),
       onScroll: handlerAll(props.onScroll, rest.onScroll, onScroll),
     }),
     [

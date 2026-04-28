@@ -1,6 +1,6 @@
 import type { FC } from "react"
-import { a11y, page, render } from "#test/browser"
 import { useEffect, useState } from "react"
+import { a11y, page, render } from "#test/browser"
 import { Box } from "../box"
 import { Flex } from "../flex"
 import { Separator } from "../separator"

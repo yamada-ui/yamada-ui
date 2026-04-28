@@ -4,6 +4,7 @@ import type { ChangeEvent, ChangeEventHandler, FocusEventHandler } from "react"
 import type { HTMLProps, HTMLRefAttributes, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { useCallback, useId } from "react"
+import { mergeProps } from "../../core"
 import { useControllableEventState } from "../../hooks/use-controllable-state"
 import {
   ariaAttr,
@@ -136,15 +137,17 @@ export const useCheckbox = <Y extends string = string>({
 
   const getRootProps: PropGetter<"label"> = useCallback(
     (props = {}) => {
-      const sharedProps = {
-        ...dataProps,
-        "data-checked": dataAttr(checked),
-        "data-indeterminate": dataAttr(indeterminate),
-        ...rest,
-        ...props,
-      }
+      const merged = mergeProps(
+        dataProps,
+        {
+          "data-checked": dataAttr(checked),
+          "data-indeterminate": dataAttr(indeterminate),
+        },
+        rest,
+        props,
+      )()
 
-      return getLabelProps?.(sharedProps) ?? sharedProps
+      return getLabelProps?.(merged) ?? merged
     },
     [dataProps, checked, indeterminate, rest, getLabelProps],
   )

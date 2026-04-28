@@ -4,6 +4,7 @@ import { vi } from "vitest"
 import { a11y, page, render } from "#test/browser"
 import { Tree } from "."
 import { BoxIcon, FileIcon, FolderIcon, XIcon } from "../icon"
+import { useTree } from "./use-tree"
 
 const exactName = (name: string) =>
   new RegExp(`^${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`)
@@ -509,6 +510,56 @@ describe("<Tree />", () => {
     await expect
       .element(page.getByRole("tree"))
       .toHaveAttribute("aria-multiselectable", "true")
+  })
+
+  test("should merge root props from useTree options and getRootProps", async () => {
+    const onClickFromOptions = vi.fn()
+    const onClickFromGetter = vi.fn()
+    const refFromOptions = vi.fn()
+    const refFromGetter = vi.fn()
+
+    const TestComponent = () => {
+      const { getRootProps } = useTree({
+        ref: refFromOptions,
+        className: "option-root",
+        style: { color: "red" },
+        onClick: onClickFromOptions,
+      })
+
+      return (
+        <ul
+          data-testid="hook-root"
+          {...getRootProps({
+            ref: refFromGetter,
+            className: "getter-root",
+            style: { fontSize: "16px" },
+            onClick: onClickFromGetter,
+          })}
+        />
+      )
+    }
+
+    const { user } = await render(<TestComponent />)
+
+    const root = page.getByTestId("hook-root").element() as HTMLElement
+
+    await expect
+      .element(page.getByTestId("hook-root"))
+      .toHaveClass("option-root")
+    await expect
+      .element(page.getByTestId("hook-root"))
+      .toHaveClass("getter-root")
+    await expect.element(page.getByTestId("hook-root")).toHaveStyle({
+      color: "red",
+      fontSize: "16px",
+    })
+
+    await user.click(page.getByTestId("hook-root"))
+
+    expect(onClickFromOptions).toHaveBeenCalledTimes(1)
+    expect(onClickFromGetter).toHaveBeenCalledTimes(1)
+    expect(refFromOptions).toHaveBeenCalledWith(root)
+    expect(refFromGetter).toHaveBeenCalledWith(root)
   })
 
   test("should search items by typing characters", async () => {

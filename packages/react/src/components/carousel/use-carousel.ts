@@ -411,7 +411,7 @@ export const useCarousel = ({
   ])
 
   const getRootProps: PropGetter<"section"> = useCallback(
-    (props) =>
+    ({ ref, ...props } = {}) =>
       mergeProps(
         {
           id,
@@ -419,8 +419,12 @@ export const useCarousel = ({
           "data-orientation": orientation,
         },
         rest,
+        {
+          ref,
+          onMouseEnter,
+          onMouseLeave,
+        },
         props,
-        { onMouseEnter, onMouseLeave },
       )(),
     [id, onMouseEnter, onMouseLeave, rest, orientation],
   )

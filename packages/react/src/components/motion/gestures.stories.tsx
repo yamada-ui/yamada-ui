@@ -1,6 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { Variants } from "motion/react"
-import {} from "#storybook"
 import { useMemo } from "react"
 import { Motion } from "./motion"
 

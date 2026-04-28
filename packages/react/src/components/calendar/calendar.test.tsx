@@ -1,6 +1,17 @@
-import { a11y, fireEvent, render, screen, waitFor } from "#test/browser"
+import type { FC, PropsWithChildren } from "react"
+import {
+  a11y,
+  act,
+  fireEvent,
+  render,
+  renderHook,
+  screen,
+  waitFor,
+} from "#test/browser"
 import { Calendar } from "./"
 import {
+  CalendarContext,
+  CalendarDescendantsContext,
   getAdjustedMonth,
   isIncludeDates,
   isSameAfterDate,
@@ -10,7 +21,46 @@ import {
   isSameYear,
   sortDates,
   updateMaybeDateValue,
+  useCalendar,
+  useCalendarDay,
 } from "./use-calendar"
+
+const createCalendarDayHookWrapper = (
+  onChange?: (value: Date | undefined) => void,
+): FC<PropsWithChildren> => {
+  const CalendarDayHookWrapper: FC<PropsWithChildren> = ({ children }) => {
+    const {
+      descendants,
+      monthDays: _monthDays,
+      monthItems: _monthItems,
+      weekdays: _weekdays,
+      yearItems: _yearItems,
+      getMonthProps: _getMonthProps,
+      getMonthSelectProps: _getMonthSelectProps,
+      getNavigationProps: _getNavigationProps,
+      getNextButtonProps: _getNextButtonProps,
+      getPrevButtonProps: _getPrevButtonProps,
+      getRootProps: _getRootProps,
+      getStatusProps: _getStatusProps,
+      getWeekdayProps: _getWeekdayProps,
+      getYearSelectProps: _getYearSelectProps,
+      ...context
+    } = useCalendar<false, false>({
+      defaultMonth: new Date(2024, 5, 1),
+      onChange,
+    })
+
+    return (
+      <CalendarContext value={context}>
+        <CalendarDescendantsContext value={descendants}>
+          {children}
+        </CalendarDescendantsContext>
+      </CalendarContext>
+    )
+  }
+
+  return CalendarDayHookWrapper
+}
 
 describe("<Calendar />", () => {
   test("renders component correctly", async () => {
@@ -67,6 +117,121 @@ describe("<Calendar />", () => {
 
     const grid = screen.getByRole("grid")
     expect(grid).toHaveAttribute("tabindex", "-1")
+  })
+
+  test("getRootProps merges caller props and composes refs/events", async () => {
+    const restOnClick = vi.fn()
+    const callerOnClick = vi.fn()
+    const restRef = vi.fn()
+    const callerRef = vi.fn()
+    const rootElement = document.createElement("div")
+    const { result } = await renderHook(() =>
+      useCalendar({
+        ref: restRef,
+        className: "from-rest",
+        style: { backgroundColor: "red", paddingTop: "4px" },
+        defaultMonth: new Date(2024, 5, 1),
+        onClick: restOnClick,
+      }),
+    )
+
+    const rootProps = result.current.getRootProps({
+      ref: callerRef,
+      className: "from-caller",
+      style: { color: "blue", paddingTop: "8px" },
+      onClick: callerOnClick,
+    })
+
+    expect(rootProps.className).toContain("from-rest")
+    expect(rootProps.className).toContain("from-caller")
+    expect(rootProps.style).toMatchObject({
+      backgroundColor: "red",
+      color: "blue",
+      paddingTop: "8px",
+    })
+
+    act(() => {
+      rootProps.onClick?.({} as any)
+
+      if (typeof rootProps.ref === "function") rootProps.ref(rootElement)
+    })
+
+    expect(restOnClick).toHaveBeenCalledTimes(1)
+    expect(callerOnClick).toHaveBeenCalledTimes(1)
+    expect(restRef).toHaveBeenCalledTimes(1)
+    expect(callerRef).toHaveBeenCalledTimes(1)
+    expect(restRef).toHaveBeenCalledWith(rootElement)
+    expect(callerRef).toHaveBeenCalledWith(rootElement)
+  })
+
+  test("getDayProps merges caller props and composes refs/events once", async () => {
+    const onChange = vi.fn()
+    const restOnBlur = vi.fn()
+    const callerOnBlur = vi.fn()
+    const restOnClick = vi.fn()
+    const callerOnClick = vi.fn()
+    const restOnFocus = vi.fn()
+    const callerOnFocus = vi.fn()
+    const restOnKeyDown = vi.fn()
+    const callerOnKeyDown = vi.fn()
+    const restRef = vi.fn()
+    const callerRef = vi.fn()
+    const dayElement = document.createElement("td")
+    const wrapper = createCalendarDayHookWrapper(onChange)
+    const { result } = await renderHook(
+      () =>
+        useCalendarDay({
+          ref: restRef,
+          className: "from-rest",
+          style: { backgroundColor: "red", paddingTop: "4px" },
+          value: new Date(2024, 5, 15),
+          onBlur: restOnBlur,
+          onClick: restOnClick,
+          onFocus: restOnFocus,
+          onKeyDown: restOnKeyDown,
+        }),
+      { wrapper },
+    )
+
+    const dayProps = result.current.getDayProps({
+      ref: callerRef,
+      className: "from-caller",
+      style: { color: "blue", paddingTop: "8px" },
+      onBlur: callerOnBlur,
+      onClick: callerOnClick,
+      onFocus: callerOnFocus,
+      onKeyDown: callerOnKeyDown,
+    })
+
+    expect(dayProps.className).toContain("from-rest")
+    expect(dayProps.className).toContain("from-caller")
+    expect(dayProps.style).toMatchObject({
+      backgroundColor: "red",
+      color: "blue",
+      paddingTop: "8px",
+    })
+
+    act(() => {
+      if (typeof dayProps.ref === "function") dayProps.ref(dayElement)
+      dayProps.onClick?.({} as any)
+      dayProps.onBlur?.({} as any)
+      dayProps.onFocus?.({ preventDefault: vi.fn() } as any)
+      dayProps.onKeyDown?.({ key: "A" } as any)
+    })
+
+    expect(restRef).toHaveBeenCalledTimes(1)
+    expect(callerRef).toHaveBeenCalledTimes(1)
+    expect(restRef).toHaveBeenCalledWith(dayElement)
+    expect(callerRef).toHaveBeenCalledWith(dayElement)
+    expect(restOnClick).toHaveBeenCalledTimes(1)
+    expect(callerOnClick).toHaveBeenCalledTimes(1)
+    expect(onChange).toHaveBeenCalledWith(new Date(2024, 5, 15))
+    expect(restOnBlur).toHaveBeenCalledTimes(1)
+    expect(callerOnBlur).toHaveBeenCalledTimes(1)
+    expect(restOnFocus).toHaveBeenCalledTimes(1)
+    expect(callerOnFocus).toHaveBeenCalledTimes(1)
+    expect(restOnKeyDown).toHaveBeenCalledTimes(1)
+    expect(callerOnKeyDown).toHaveBeenCalledTimes(1)
   })
 
   test("clicking a day selects it", async () => {

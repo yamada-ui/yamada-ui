@@ -96,4 +96,97 @@ describe("use-chart mergeProps getters", () => {
     expect(String(merged.className)).toContain("user")
     expect(merged["data-testid"]).toBe("chart-label")
   })
+
+  test("mergeProps getter paths compose handlers and merge style objects", () => {
+    const hookStyle = { color: "tomato", padding: 4 }
+    const userStyle = { marginTop: 8, padding: 12 }
+
+    const cases = [
+      {
+        getMergedProps: (hookHandler: () => void, userHandler: () => void) => {
+          const { result } = renderHook(
+            () =>
+              useChartLegend({ style: hookStyle, onPointerEnter: hookHandler }),
+            { wrapper: ChartTestWrapper },
+          )
+          return result.current.getRootProps({
+            style: userStyle,
+            onPointerEnter: userHandler,
+          })
+        },
+      },
+      {
+        getMergedProps: (hookHandler: () => void, userHandler: () => void) => {
+          const { result } = renderHook(() =>
+            useChartTooltip({ style: hookStyle, onPointerEnter: hookHandler }),
+          )
+          return result.current.getContentProps({
+            style: userStyle,
+            onPointerEnter: userHandler,
+          })
+        },
+      },
+      {
+        getMergedProps: (hookHandler: () => void, userHandler: () => void) => {
+          const { result } = renderHook(() =>
+            useChartLabelList({
+              style: hookStyle,
+              onPointerEnter: hookHandler,
+            }),
+          )
+          return result.current.getRootProps({
+            style: userStyle,
+            onPointerEnter: userHandler,
+          })
+        },
+      },
+      {
+        getMergedProps: (hookHandler: () => void, userHandler: () => void) => {
+          const { result } = renderHook(() =>
+            useChartLabel({ style: hookStyle, onPointerEnter: hookHandler }),
+          )
+          return result.current.getRootProps({
+            style: userStyle,
+            onPointerEnter: userHandler,
+          })
+        },
+      },
+    ]
+
+    for (const { getMergedProps } of cases) {
+      const hookHandler = vi.fn()
+      const userHandler = vi.fn()
+      const merged = getMergedProps(hookHandler, userHandler)
+
+      ;(merged.onPointerEnter as ((event: unknown) => void) | undefined)?.({})
+
+      expect(hookHandler).toHaveBeenCalledTimes(1)
+      expect(userHandler).toHaveBeenCalledTimes(1)
+      expect(merged.style).toMatchObject({
+        color: "tomato",
+        marginTop: 8,
+        padding: 12,
+      })
+    }
+  })
+
+  test("useChartTooltip getContentProps composes duplicate onClick handlers", () => {
+    const hookOnClick = vi.fn()
+    const userOnClick = vi.fn()
+
+    const { result } = renderHook(() =>
+      useChartTooltip({
+        onClick: hookOnClick,
+      }),
+    )
+
+    const merged = result.current.getContentProps({
+      onClick: userOnClick,
+    })
+
+    ;(merged.onClick as ((event: unknown) => void) | undefined)?.({})
+
+    expect(hookOnClick).toHaveBeenCalledTimes(1)
+    expect(userOnClick).toHaveBeenCalledTimes(1)
+  })
 })

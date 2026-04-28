@@ -206,18 +206,18 @@ export function rgbaTo(
   [r, g, b, a]: [number, number, number, number],
   fallback: string,
 ): {
-  (format: ColorFormat): string
+  (format?: ColorFormat): string
 }
 export function rgbaTo(
   [r, g, b, a]: [number, number, number, number],
   fallback?: string,
 ): {
-  (format: ColorFormat): string | undefined
+  (format?: ColorFormat): string | undefined
 }
 export function rgbaTo(
   [r, g, b, a]: [number, number, number, number],
   fallback?: string,
-): (format: ColorFormat) => string | undefined {
+): (format?: ColorFormat) => string | undefined {
   return function (format: ColorFormat = "hex") {
     return convertColor(c.rgba(r, g, b, a), fallback)(format)
   }
@@ -227,18 +227,18 @@ export function hslaTo(
   [r, g, b, a]: [number, number, number, number],
   fallback: string,
 ): {
-  (format: ColorFormat): string
+  (format?: ColorFormat): string
 }
 export function hslaTo(
   [r, g, b, a]: [number, number, number, number],
   fallback?: string,
 ): {
-  (format: ColorFormat): string | undefined
+  (format?: ColorFormat): string | undefined
 }
 export function hslaTo(
   [h, s, l, a]: [number, number, number, number],
   fallback?: string,
-): (format: ColorFormat) => string | undefined {
+): (format?: ColorFormat) => string | undefined {
   return function (format: ColorFormat = "hex") {
     return convertColor(c.hsla(h, s, l, a), fallback)(format)
   }
@@ -248,18 +248,18 @@ export function hsvTo(
   [h, s, v, a]: [number, number, number, number?],
   fallback: string,
 ): {
-  (format: ColorFormat): string
+  (format?: ColorFormat): string
 }
 export function hsvTo(
   [h, s, v, a]: [number, number, number, number?],
   fallback?: string,
 ): {
-  (format: ColorFormat): string | undefined
+  (format?: ColorFormat): string | undefined
 }
 export function hsvTo(
   [h, s, v, a]: [number, number, number, number?],
   fallback?: string,
-): (format: ColorFormat) => string | undefined {
+): (format?: ColorFormat) => string | undefined {
   return function (format: ColorFormat = "hex") {
     h = h / 60
 

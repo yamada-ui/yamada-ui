@@ -79,8 +79,11 @@ export type StyleValueWithCondition<
       | Y
   : ColorModeArray<Y> | ResponsiveWithConditionObject<Y> | Y
 
+export type ExtractStyleValueWithCondition<Y> =
+  Y extends StyleValueWithCondition<infer M> ? M : never
+
 export type CSSVariable = `--${string}`
-interface CSSVariableProps {
+export interface CSSVariableProps {
   [key: CSSVariable]: StyleValueWithCondition<number | ThemePath> | undefined
 }
 

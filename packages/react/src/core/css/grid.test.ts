@@ -1,4 +1,4 @@
-import { system } from "#test"
+import { system } from "#test/browser"
 import { grid } from "./grid"
 
 describe("grid", () => {

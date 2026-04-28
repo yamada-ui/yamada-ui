@@ -19,9 +19,9 @@ The following branch protection rules are enabled on the `main` and `v*` branche
 ### Status Checks
 
 - **Require status checks to pass**: All of the following required status checks must be green.
-  - Prettier
+  - Format
   - TypeScript
-  - ESLint
+  - Lint
   - Changeset
   - Test / Chromium 1/4
   - Test / Chromium 2/4

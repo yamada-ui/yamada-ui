@@ -7,7 +7,14 @@ import { fromEvent } from "file-selector"
 import { useCallback, useId } from "react"
 import { useDropzone as useOriginalDropzone } from "react-dropzone"
 import { type HTMLProps, mergeProps, type PropGetter } from "../../core"
-import { ariaAttr, assignRef, cx, dataAttr, isArray } from "../../utils"
+import {
+  ariaAttr,
+  assignRef,
+  cx,
+  dataAttr,
+  isArray,
+  mergeRefs,
+} from "../../utils"
 import { useFieldProps } from "../field"
 
 export interface UseDropzoneProps
@@ -231,8 +238,9 @@ export const useDropzone = (props: UseDropzoneProps = {}) => {
   assignRef(openRef, open)
 
   const getRootProps: PropGetter = useCallback(
-    (props) =>
-      getOriginalRootProps(
+    ({ ref, ...props } = {}) => {
+      const { ref: restRef, ...restProps } = rest
+      const { ref: rootRef, ...rootProps } = getOriginalRootProps(
         mergeProps(
           {
             id: labelledbyId,
@@ -244,10 +252,16 @@ export const useDropzone = (props: UseDropzoneProps = {}) => {
             "data-loading": dataAttr(loading),
             "data-reject": dataAttr(dragReject),
           },
-          rest,
+          restProps,
           props,
         )(),
-      ),
+      ) as HTMLProps
+
+      return {
+        ...rootProps,
+        ref: mergeRefs(restRef, ref, rootRef),
+      }
+    },
 
     [
       getOriginalRootProps,

@@ -1,6 +1,7 @@
-import { fireEvent, render, screen } from "#test"
+import { fireEvent, render, renderHook, screen } from "#test"
 import { Toggle, ToggleGroup } from "."
 import { noop } from "../../utils"
+import { useToggle } from "./use-toggle"
 
 describe("<Toggle />", () => {
   test("should render correctly", () => {
@@ -115,6 +116,38 @@ describe("<Toggle />", () => {
     const checkboxes = screen.getAllByRole("checkbox", { hidden: true })
     await user.click(checkboxes[0]!)
     expect(onChange).toHaveBeenCalledWith(["a"])
+  })
+
+  test("should merge consumer props in getButtonProps", () => {
+    const rootOnClick = vi.fn()
+    const getButtonOnClick = vi.fn()
+    const { result } = renderHook(() =>
+      useToggle({
+        className: "root-class",
+        style: { color: "red" },
+        readOnly: true,
+        value: "toggle-value",
+        onClick: rootOnClick,
+      }),
+    )
+
+    const buttonProps = result.current.getButtonProps({
+      className: "button-class",
+      style: { backgroundColor: "blue" },
+      onClick: getButtonOnClick,
+    })
+
+    buttonProps.onClick?.({} as any)
+
+    expect(rootOnClick).toHaveBeenCalledTimes(1)
+    expect(getButtonOnClick).toHaveBeenCalledTimes(1)
+    expect(buttonProps.className).toContain("root-class")
+    expect(buttonProps.className).toContain("button-class")
+    expect(buttonProps.style).toMatchObject({
+      backgroundColor: "blue",
+      color: "red",
+    })
+    expect(buttonProps["aria-label"]).toBe("toggle-value")
   })
 
   test("should warn when value is not provided in controlled mode", () => {

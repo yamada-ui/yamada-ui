@@ -165,13 +165,14 @@ export const useToggle = <Y extends string = string>(
     undefined,
     Merge<HTMLProps<"button">, { "aria-label": string }>
   > = useCallback(
-    (props = {}) =>
-      mergeProps(
+    (props = {}): Merge<HTMLProps<"button">, { "aria-label": string }> => {
+      const ariaLabel = value?.toString() ?? t("Toggle button")
+      const mergedProps = mergeProps(
         dataProps,
         {
           type: "button",
           "aria-disabled": ariaAttr(!interactive),
-          "aria-label": value?.toString() ?? t("Toggle button"),
+          "aria-label": ariaLabel,
           "aria-pressed": trulyChecked,
           "data-active": dataAttr(active),
           "data-checked": dataAttr(trulyChecked),
@@ -181,7 +182,13 @@ export const useToggle = <Y extends string = string>(
         rest,
         props,
         { onClick },
-      )(),
+      )()
+
+      return {
+        ...mergedProps,
+        "aria-label": mergedProps["aria-label"] ?? ariaLabel,
+      }
+    },
     [
       dataProps,
       value,

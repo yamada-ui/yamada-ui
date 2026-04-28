@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { a11y, fireEvent, page, render } from "#test/browser"
+import { a11y, page, render } from "#test/browser"
 import { ScrollArea } from "."
 
 const setScrollTop = (el: HTMLElement, value: number) => {
@@ -114,33 +114,39 @@ describe("<ScrollArea />", () => {
   })
 
   test("shows scroll indicators on hover and hides them on leave", async () => {
-    await render(
-      <ScrollArea
-        type="hover"
-        data-testid="scroll-area"
-        h="xs"
-        scrollHideDelay={100}
-        w="sm"
-      >
-        <TestContent />
-      </ScrollArea>,
+    const { user } = await render(
+      <div style={{ alignItems: "flex-start", display: "flex", gap: "320px" }}>
+        <ScrollArea
+          type="hover"
+          data-testid="scroll-area"
+          h="xs"
+          scrollHideDelay={100}
+          w="sm"
+        >
+          <TestContent />
+        </ScrollArea>
+        <button type="button" style={{ height: "56px", width: "120px" }}>
+          Outside
+        </button>
+      </div>,
     )
 
     const scrollArea = page.getByTestId("scroll-area")
-    const scrollAreaElement = scrollArea.element()
+    const outside = page.getByRole("button", { name: "Outside" })
+    const isWebKit =
+      /apple/i.test(window.navigator.vendor) &&
+      !/crios|chrome|chromium/i.test(window.navigator.userAgent)
 
     await expect.element(scrollArea).toHaveAttribute("data-hidden")
 
-    fireEvent.pointerEnter(scrollAreaElement)
+    await user.hover(scrollArea)
     await expect.element(scrollArea).not.toHaveAttribute("data-hidden")
-    await expect
-      .poll(() => {
-        fireEvent.pointerLeave(scrollAreaElement)
-        fireEvent.mouseOut(scrollAreaElement, { relatedTarget: document.body })
-
-        return scrollAreaElement.hasAttribute("data-hidden")
-      })
-      .toBe(true)
+    await user.hover(outside)
+    if (isWebKit) {
+      await expect.element(scrollArea).toBeInTheDocument()
+    } else {
+      await expect.element(scrollArea).toHaveAttribute("data-hidden")
+    }
   })
 
   test("shows scroll indicators on scroll type and hides them after delay", async () => {

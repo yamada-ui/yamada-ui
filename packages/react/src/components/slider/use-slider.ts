@@ -297,13 +297,13 @@ export const useSlider = <Y extends [number, number] | number = number>(
 
   const getRootProps: PropGetter = useCallback(
     (props = {}) => {
-      const computedProps = mergeProps(
+      const computedProps: HTMLProps = mergeProps(
         dataProps,
         { "data-orientation": orientation },
         rest,
         props,
         { onBlur: eventProps.onBlur, onFocus: eventProps.onFocus },
-      )() as HTMLProps
+      )()
 
       computedProps.style ??= {}
 

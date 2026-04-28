@@ -1,5 +1,6 @@
-import { a11y, page, render } from "#test/browser"
+import { a11y, page, render, renderHook } from "#test/browser"
 import { PinInput } from "."
+import { usePinInput } from "./use-pin-input"
 
 const getInputs = () =>
   page.getByRole("textbox").elements() as HTMLInputElement[]
@@ -27,6 +28,47 @@ describe("<PinInput />", () => {
     await expect
       .element(page.getByTestId("field"))
       .toHaveClass("ui-pin-input__field")
+  })
+
+  test("merges root className with caller className", async () => {
+    await render(<PinInput.Root className="from-caller" data-testid="root" />)
+
+    await expect
+      .element(page.getByTestId("root"))
+      .toHaveClass("ui-pin-input__root")
+    await expect.element(page.getByTestId("root")).toHaveClass("from-caller")
+  })
+
+  test("merges getRootProps values with caller props", async () => {
+    const restOnClick = vi.fn()
+    const callerOnClick = vi.fn()
+    const { result } = await renderHook(() =>
+      usePinInput({
+        className: "from-rest",
+        style: { backgroundColor: "red", paddingTop: "4px" },
+        onClick: restOnClick,
+      }),
+    )
+
+    const rootProps = result.current.getRootProps({
+      className: "from-caller",
+      style: { color: "blue", paddingTop: "8px" },
+      onClick: callerOnClick,
+    })
+
+    expect(rootProps.className).toContain("from-rest")
+    expect(rootProps.className).toContain("from-caller")
+    expect(rootProps.style).toMatchObject({
+      backgroundColor: "red",
+      color: "blue",
+      paddingTop: "8px",
+    })
+    expect(rootProps.role).toBe("group")
+
+    rootProps.onClick?.({} as any)
+
+    expect(restOnClick).toHaveBeenCalledTimes(1)
+    expect(callerOnClick).toHaveBeenCalledTimes(1)
   })
 
   test("renders the correct number of input elements", async () => {

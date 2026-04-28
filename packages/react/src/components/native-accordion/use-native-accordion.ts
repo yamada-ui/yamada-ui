@@ -42,10 +42,11 @@ export const useNativeAccordion = ({
   ...rest
 }: UseNativeAccordionProps = {}) => {
   const generatedName = useId()
+  const { ref: restRef, ...restProps } = rest
 
   const getRootProps: PropGetter = ({ ref, ...props } = {}) =>
-    mergeProps(rest, props, {
-      ref: mergeRefs(ref, rest.ref),
+    mergeProps(props, restProps, {
+      ref: mergeRefs(ref, restRef),
     })()
 
   return {
@@ -70,13 +71,20 @@ export const useNativeAccordionItem = ({
   ...rest
 }: UseNativeAccordionItemProps) => {
   const { name } = useNativeAccordionContext()
+  const { ref: restRef, ...restProps } = rest
 
   const getItemProps: PropGetter<"details"> = ({ ref, ...props } = {}) =>
-    mergeProps(rest, props, {
-      ref: mergeRefs(ref, rest.ref),
-      name: props.name ?? rest.name ?? name,
-      "data-group": "",
-    })()
+    mergeProps(
+      {
+        name: props.name ?? restProps.name ?? name,
+        "data-group": "",
+      },
+      restProps,
+      props,
+      {
+        ref: mergeRefs(ref, restRef),
+      },
+    )()
 
   const getButtonProps: PropGetter<"summary"> = useCallback(
     (props = {}) => ({

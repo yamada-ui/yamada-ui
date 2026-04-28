@@ -61,8 +61,8 @@ export const usePasswordInput = (props: UsePasswordInputProps = {}) => {
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    ({ ref, ...props } = {}) =>
-      mergeProps(
+    ({ ref, ...props } = {}) => {
+      const mergedProps = mergeProps(
         {
           type: visible ? "text" : "password",
           disabled,
@@ -71,11 +71,18 @@ export const usePasswordInput = (props: UsePasswordInputProps = {}) => {
         },
         rest,
         props,
-        eventProps,
-        {
-          ref: mergeRefs(ref, rest.ref),
-        },
-      )(),
+      )({
+        mergeEvent: false,
+        mergeRef: false,
+      })
+
+      return {
+        ...mergedProps,
+        ref: mergeRefs(ref, rest.ref),
+        onBlur: handlerAll(eventProps.onBlur, props.onBlur),
+        onFocus: handlerAll(eventProps.onFocus, props.onFocus),
+      }
+    },
     [visible, rest, disabled, dataProps, eventProps, ariaProps],
   )
 

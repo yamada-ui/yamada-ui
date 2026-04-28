@@ -12,7 +12,9 @@ describe("<FadeScale />", () => {
 
   const expectFadeScaleToBeHidden = async () => {
     await vi.waitFor(async () => {
-      await expect.element(page.getByText("FadeScale")).not.toBeVisible()
+      await expect.element(page.getByText("FadeScale")).toHaveStyle({
+        opacity: "0",
+      })
     })
   }
 
@@ -51,9 +53,7 @@ describe("<FadeScale />", () => {
       return (
         <>
           <button onClick={() => setOpen((prev) => !prev)}>button</button>
-          <FadeScale display={open ? "block" : "none"} open={open}>
-            FadeScale
-          </FadeScale>
+          <FadeScale open={open}>FadeScale</FadeScale>
         </>
       )
     }
@@ -77,11 +77,7 @@ describe("<FadeScale />", () => {
       return (
         <>
           <button onClick={() => setOpen((prev) => !prev)}>button</button>
-          <FadeScale
-            display={open ? "block" : "none"}
-            open={open}
-            reverse={false}
-          >
+          <FadeScale open={open} reverse={false}>
             FadeScale
           </FadeScale>
         </>

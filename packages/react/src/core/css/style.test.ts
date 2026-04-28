@@ -1,5 +1,5 @@
 import type { UsageTheme } from "../system"
-import { system } from "#test"
+import { system } from "#test/browser"
 import { generateStyle } from "./style"
 
 describe("generateStyle", () => {

@@ -156,21 +156,26 @@ export const useResizableTrigger = ({
   )
 
   const getTriggerProps: PropGetter<SeparatorProps> = useCallback(
-    (props = {}) => ({
-      "aria-disabled": ariaAttr(trulyDisabled),
-      "aria-orientation": orientation,
-      "data-disabled": dataAttr(trulyDisabled),
-      disabled: trulyDisabled,
-      tabIndex: trulyDisabled ? -1 : 0,
-      ...rest,
-      ...props,
-      elementRef: mergeRefs(props.elementRef, rest.ref),
-      onDoubleClick: handlerAll(
-        props.onDoubleClick,
-        rest.onDoubleClick,
-        onDoubleClick,
-      ),
-    }),
+    (props = {}) => {
+      const ariaOrientation =
+        orientation === "horizontal" ? "vertical" : "horizontal"
+
+      return {
+        "aria-disabled": ariaAttr(trulyDisabled),
+        "aria-orientation": ariaOrientation,
+        "data-disabled": dataAttr(trulyDisabled),
+        disabled: trulyDisabled,
+        tabIndex: trulyDisabled ? -1 : 0,
+        ...rest,
+        ...props,
+        elementRef: mergeRefs(props.elementRef, rest.ref),
+        onDoubleClick: handlerAll(
+          props.onDoubleClick,
+          rest.onDoubleClick,
+          onDoubleClick,
+        ),
+      }
+    },
     [orientation, trulyDisabled, rest, onDoubleClick],
   )
 

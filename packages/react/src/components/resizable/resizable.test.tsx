@@ -92,6 +92,38 @@ describe("<Resizable />", () => {
 })
 
 describe("<ResizableTrigger />", () => {
+  test("sets `aria-orientation` to `vertical` when root orientation is horizontal", async () => {
+    await render(
+      <Resizable.Root orientation="horizontal">
+        <Resizable.Item>One</Resizable.Item>
+
+        <Resizable.Trigger id="trigger" />
+
+        <Resizable.Item>Two</Resizable.Item>
+      </Resizable.Root>,
+    )
+
+    await expect
+      .element(page.getByTestId("trigger"))
+      .toHaveAttribute("aria-orientation", "vertical")
+  })
+
+  test("sets `aria-orientation` to `horizontal` when root orientation is vertical", async () => {
+    await render(
+      <Resizable.Root orientation="vertical">
+        <Resizable.Item>One</Resizable.Item>
+
+        <Resizable.Trigger id="trigger" />
+
+        <Resizable.Item>Two</Resizable.Item>
+      </Resizable.Root>,
+    )
+
+    await expect
+      .element(page.getByTestId("trigger"))
+      .toHaveAttribute("aria-orientation", "horizontal")
+  })
+
   test("handles double-click to equalize panel sizes", async () => {
     const setLayoutMock = vi.fn()
 

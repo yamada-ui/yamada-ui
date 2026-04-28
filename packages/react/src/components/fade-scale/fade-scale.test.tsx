@@ -4,6 +4,28 @@ import { a11y, page, render } from "#test/browser"
 import { FadeScale } from "./fade-scale"
 
 describe("<FadeScale />", () => {
+  const expectFadeScaleToBeVisible = async () => {
+    await vi.waitFor(async () => {
+      await expect.element(page.getByText("FadeScale")).toBeVisible()
+    })
+  }
+
+  const expectFadeScaleToBeHidden = async () => {
+    await vi.waitFor(async () => {
+      await expect.element(page.getByText("FadeScale")).toHaveStyle({
+        opacity: "0",
+      })
+    })
+  }
+
+  const expectFadeScaleNotToBeInTheDocument = async () => {
+    await vi.waitFor(async () => {
+      await expect
+        .element(page.getByText("FadeScale").query())
+        .not.toBeInTheDocument()
+    })
+  }
+
   test("renders component correctly", async () => {
     await a11y(<FadeScale />)
   })
@@ -39,15 +61,13 @@ describe("<FadeScale />", () => {
     const { user } = await render(<TestComponent />)
 
     const button = page.getByRole("button", { name: /button/i })
-    const fadeScale = page.getByText("FadeScale")
-
-    await expect.element(fadeScale).toHaveStyle({ opacity: "0" })
+    await expectFadeScaleToBeHidden()
 
     await user.click(button)
-    await expect.element(fadeScale).toHaveStyle({ opacity: "1" })
+    await expectFadeScaleToBeVisible()
 
     await user.click(button)
-    await expect.element(fadeScale).toHaveStyle({ opacity: "0" })
+    await expectFadeScaleToBeHidden()
   })
 
   test("applies reverse={false} exit correctly", async () => {
@@ -67,15 +87,13 @@ describe("<FadeScale />", () => {
     const { user } = await render(<TestComponent />)
 
     const button = page.getByRole("button", { name: /button/i })
-    const fadeScale = page.getByText("FadeScale")
-
-    await expect.element(fadeScale).toHaveStyle({ opacity: "0" })
+    await expectFadeScaleToBeHidden()
 
     await user.click(button)
-    await expect.element(fadeScale).toHaveStyle({ opacity: "1" })
+    await expectFadeScaleToBeVisible()
 
     await user.click(button)
-    await expect.element(fadeScale).toHaveStyle({ opacity: "0" })
+    await expectFadeScaleToBeHidden()
   })
 
   test("unmountOnExit works correctly", async () => {
@@ -92,18 +110,16 @@ describe("<FadeScale />", () => {
       )
     }
 
-    const { container, user } = await render(<TestComponent />)
-
-    expect(container.textContent).not.toContain("FadeScale")
+    const { user } = await render(<TestComponent />)
 
     const button = page.getByRole("button", { name: /button/i })
 
-    await user.click(button)
-    await expect.element(page.getByText("FadeScale")).toBeVisible()
+    await expectFadeScaleNotToBeInTheDocument()
 
     await user.click(button)
-    await vi.waitFor(() => {
-      expect(container.textContent).not.toContain("FadeScale")
-    })
+    await expectFadeScaleToBeVisible()
+
+    await user.click(button)
+    await expectFadeScaleNotToBeInTheDocument()
   })
 })

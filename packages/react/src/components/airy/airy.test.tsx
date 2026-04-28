@@ -1,6 +1,6 @@
 import type { KeyframeIdent } from "../../core"
-import { a11y, page, render } from "#test/browser"
 import { useState } from "react"
+import { a11y, page, render } from "#test/browser"
 import { Airy } from "."
 
 describe("<Airy />", () => {

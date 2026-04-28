@@ -2,6 +2,7 @@
 
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useMemo } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"
 import { createContext, handlerAll, isNumber, mergeRefs } from "../../utils"
@@ -70,6 +71,7 @@ export const usePagination = ({
   onChange: onChangeProp,
   ...rest
 }: UsePaginationProps) => {
+  const { ref: restRef, ...restProps } = rest
   const [currentPage, setCurrentPage] = useControllableState({
     defaultValue: defaultPage,
     value: page,
@@ -138,14 +140,19 @@ export const usePagination = ({
   )
 
   const getRootProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
-      "aria-label": t("Pagination"),
-      role: "navigation",
-      ...rest,
-      ...props,
-      ref: mergeRefs(ref, rest.ref),
-    }),
-    [rest, t],
+    ({ ref, ...props } = {}) =>
+      mergeProps(
+        {
+          "aria-label": t("Pagination"),
+          role: "navigation",
+        },
+        restProps,
+        props,
+        {
+          ref: mergeRefs(ref, restRef),
+        },
+      )(),
+    [restProps, restRef, t],
   )
 
   const getItemProps: PropGetter<"button", { page?: Page }> = useCallback(

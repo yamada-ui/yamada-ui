@@ -106,7 +106,7 @@
       "required": false
     },
     "elements": {
-      "type": "{ floating?: HTMLElement | null | undefined; reference?: HTMLButtonElement | null | undefined }",
+      "type": "{ floating?: HTMLElement | null | undefined; reference?: HTMLButtonElement | null | undefined; }",
       "description": "Object containing the reference and floating elements.",
       "required": false
     },

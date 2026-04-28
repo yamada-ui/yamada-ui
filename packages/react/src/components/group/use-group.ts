@@ -27,7 +27,7 @@ export const useGroup = (children?: ReactNode) => {
           style: {
             "--group-count": count,
             "--group-index": index,
-            ...(child.props?.style ?? {}),
+            ...child.props?.style,
           },
           "data-group-between": dataAttr(index > 0 && index < count - 1),
           "data-group-end": dataAttr(index === count - 1),

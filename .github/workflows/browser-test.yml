@@ -57,11 +57,11 @@ jobs:
               - '!packages/react/src/**/*.stories.{ts,tsx}'
 
       - name: Install
-        if: steps.changed-files.outputs.full_any_changed == 'true' || (steps.changed-files.outputs.diff_any_changed == 'true' && matrix.shard_index == 1)
+        if: steps.changed-files.outputs.changed_keys != ''
         uses: ./.github/composite-actions/install
 
       - name: Setup Browser
-        if: steps.changed-files.outputs.full_any_changed == 'true' || (steps.changed-files.outputs.diff_any_changed == 'true' && matrix.shard_index == 1)
+        if: steps.changed-files.outputs.changed_keys != ''
         run: pnpm react exec playwright install ${{ matrix.browser }} --with-deps ${{ matrix.browser == 'chromium' && '--only-shell' || '' }}
 
       - name: Run test (full)
@@ -69,11 +69,11 @@ jobs:
         run: pnpm turbo run ${{ matrix.command }} --filter=./packages/react -- --shard=${{ matrix.shard_index }}/4
 
       - name: Run test (diff)
-        if: steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true' && matrix.shard_index == 1
-        run: pnpm turbo run ${{ matrix.command }} --filter=./packages/react -- --changed origin/${{ github.base_ref }}
+        if: steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true'
+        run: pnpm turbo run ${{ matrix.command }} --filter=./packages/react -- --changed origin/${{ github.base_ref }}　--shard=${{ matrix.shard_index }}/4
 
       - name: Upload coverage
-        if: matrix.browser == 'chromium' && (steps.changed-files.outputs.full_any_changed == 'true' || (steps.changed-files.outputs.diff_any_changed == 'true' && matrix.shard_index == 1))
+        if: matrix.browser == 'chromium' && steps.changed-files.outputs.changed_keys != ''
         uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe # v5.5.4
         with:
           disable_search: true

@@ -1,7 +1,9 @@
+import type { PropsWithChildren } from "react"
 import { createRef } from "react"
 import { vi } from "vitest"
-import { a11y, page, render } from "#test/browser"
-import { NativeSelect } from "."
+import { a11y, act, page, render, renderHook } from "#test/browser"
+import { NativeSelect, useNativeSelect } from "."
+import { FieldContext } from "../field/field"
 import { BoxIcon } from "../icon"
 import { InputPropsContext } from "../input"
 
@@ -103,6 +105,77 @@ describe("<NativeSelect />", () => {
 
     expect(contextRef.current).toBe(field)
     expect(userRef.current).toBe(field)
+  })
+
+  test("merges callback refs from input props context and user props once", async () => {
+    const contextRef = vi.fn()
+    const userRef = vi.fn()
+
+    await render(
+      <InputPropsContext value={{ ref: contextRef as any }}>
+        <NativeSelect.Root ref={userRef} data-testid="native-select-field" />
+      </InputPropsContext>,
+    )
+
+    const field = page.getByTestId("native-select-field").element()
+
+    expect(contextRef).toHaveBeenCalledTimes(1)
+    expect(userRef).toHaveBeenCalledTimes(1)
+    expect(contextRef).toHaveBeenCalledWith(field)
+    expect(userRef).toHaveBeenCalledWith(field)
+  })
+
+  test("merges focus handlers in field, root, and getter order", async () => {
+    const calls: string[] = []
+    const fieldOnBlur = vi.fn(() => calls.push("field-onBlur"))
+    const fieldOnFocus = vi.fn(() => calls.push("field-onFocus"))
+    const rootOnBlur = vi.fn(() => calls.push("root-onBlur"))
+    const rootOnFocus = vi.fn(() => calls.push("root-onFocus"))
+    const getterOnBlur = vi.fn(() => calls.push("getter-onBlur"))
+    const getterOnFocus = vi.fn(() => calls.push("getter-onFocus"))
+    const wrapper = ({ children }: PropsWithChildren) => (
+      <FieldContext
+        value={{
+          id: "field-id",
+          disabled: false,
+          errorMessageId: "field-error-message",
+          focused: false,
+          helperMessageId: "field-helper-message",
+          invalid: false,
+          labelId: "field-label",
+          readOnly: false,
+          replace: true,
+          required: false,
+          onBlur: fieldOnBlur,
+          onFocus: fieldOnFocus,
+        }}
+      >
+        {children}
+      </FieldContext>
+    )
+    const { result } = await renderHook(
+      () => useNativeSelect({ onBlur: rootOnBlur, onFocus: rootOnFocus }),
+      { withProvider: false, wrapper },
+    )
+
+    const fieldProps = result.current.getFieldProps({
+      onBlur: getterOnBlur,
+      onFocus: getterOnFocus,
+    })
+
+    act(() => {
+      fieldProps.onFocus?.({} as any)
+      fieldProps.onBlur?.({} as any)
+    })
+
+    expect(calls).toStrictEqual([
+      "field-onFocus",
+      "root-onFocus",
+      "getter-onFocus",
+      "field-onBlur",
+      "root-onBlur",
+      "getter-onBlur",
+    ])
   })
 
   test("merges input props context with user props", async () => {

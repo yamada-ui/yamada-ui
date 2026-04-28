@@ -16,20 +16,17 @@ export {
   useFormatNumberPropsContext as useNumberPropsContext,
 } from "./format-number"
 export type { FormatNumberProps as NumberProps } from "./format-number"
-export {
-  useFormatByte as useByte,
-  useByteFormat as useByteFormat,
-} from "./use-format-byte"
+export { useFormatByte as useByte, useByteFormat } from "./use-format-byte"
 export type { FormatBytesOptions as BytesOptions } from "./use-format-byte"
 export {
   getFormatDateTime as getDateTime,
   useFormatDateTime as useDateTime,
-  useDateTimeFormat as useDateTimeFormat,
+  useDateTimeFormat,
 } from "./use-format-date-time"
 export type { FormatDateTimeOptions as DateTimeOptions } from "./use-format-date-time"
 export {
   getFormatNumber as getNumber,
   useFormatNumber as useNumber,
-  useNumberFormat as useNumberFormat,
+  useNumberFormat,
 } from "./use-format-number"
 export type { FormatNumberOptions as NumberOptions } from "./use-format-number"

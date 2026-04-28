@@ -93,7 +93,7 @@ export const passwordInputStyle = defineComponentSlotStyle({
         fontSize: inputStyle.sizes?.["2xl"].fontSize,
       },
       field: inputStyle.sizes?.["2xl"],
-      root: getInputHeightStyle(inputStyle.sizes?.["2xl"]?.minH, "& > input"),
+      root: getInputHeightStyle(inputStyle.sizes?.["2xl"].minH, "& > input"),
     },
   },
 

@@ -1,6 +1,8 @@
+# worktree
+.worktrees
+
 # pnpm
 .pnpm-store
-node-jiti
 
 # dependencies
 node_modules
@@ -35,7 +37,6 @@ yarn-error.log*
 next-env.d.ts
 
 # cache
-.eslintcache
 .turbo
 .next
 .vitest-attachments

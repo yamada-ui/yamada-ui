@@ -5,7 +5,7 @@ import type { HTMLProps, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { cloneElement, useCallback, useMemo } from "react"
 import { mergeProps } from "../../core"
-import { ariaAttr, mergeRefs } from "../../utils"
+import { ariaAttr } from "../../utils"
 import { useFieldProps } from "../field"
 
 interface NativeSelectSharedItem extends Omit<
@@ -127,13 +127,15 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
           "aria-disabled": ariaAttr(!interactive),
           "aria-label": placeholder,
         },
+        {
+          onBlur: eventProps.onBlur,
+          onFocus: eventProps.onFocus,
+        },
         rest,
         props,
         {
-          ref: mergeRefs(ref, rest.ref),
+          ref,
           children: props.children ?? computedChildren,
-          onBlur: eventProps.onBlur,
-          onFocus: eventProps.onFocus,
         },
       )(),
     [

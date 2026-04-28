@@ -3,6 +3,7 @@ import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { useRef, useState } from "react"
 import { Tree } from "."
 import { BoxIcon, FileIcon, FolderIcon, XIcon } from "../icon"
+import { useTree } from "./use-tree"
 
 const items: Tree.ItemType[] = [
   {
@@ -521,6 +522,52 @@ describe("<Tree />", () => {
     const tree = screen.getByRole("tree")
 
     expect(tree).toHaveAttribute("aria-multiselectable", "true")
+  })
+
+  test("should merge root props from useTree options and getRootProps", () => {
+    const onClickFromOptions = vi.fn()
+    const onClickFromGetter = vi.fn()
+    const refFromOptions = vi.fn()
+    const refFromGetter = vi.fn()
+
+    const TestComponent = () => {
+      const { getRootProps } = useTree({
+        ref: refFromOptions,
+        className: "option-root",
+        style: { color: "red" },
+        onClick: onClickFromOptions,
+      })
+
+      return (
+        <ul
+          data-testid="hook-root"
+          {...getRootProps({
+            ref: refFromGetter,
+            className: "getter-root",
+            style: { fontSize: "16px" },
+            onClick: onClickFromGetter,
+          })}
+        />
+      )
+    }
+
+    render(<TestComponent />)
+
+    const root = screen.getByTestId("hook-root")
+
+    expect(root).toHaveClass("option-root")
+    expect(root).toHaveClass("getter-root")
+    expect(root).toHaveStyle({
+      color: "red",
+      fontSize: "16px",
+    })
+
+    fireEvent.click(root)
+
+    expect(onClickFromOptions).toHaveBeenCalledTimes(1)
+    expect(onClickFromGetter).toHaveBeenCalledTimes(1)
+    expect(refFromOptions).toHaveBeenCalledWith(root)
+    expect(refFromGetter).toHaveBeenCalledWith(root)
   })
 
   test("should search items by typing characters", async () => {

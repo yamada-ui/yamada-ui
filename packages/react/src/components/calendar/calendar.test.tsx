@@ -1,4 +1,4 @@
-import { a11y, fireEvent, render, screen, waitFor } from "#test"
+import { a11y, fireEvent, render, screen, waitFor } from "#test/browser"
 import { Calendar } from "./"
 import {
   getAdjustedMonth,
@@ -17,22 +17,22 @@ describe("<Calendar />", () => {
     await a11y(<Calendar.Root />)
   })
 
-  test("renders with a specific defaultMonth", () => {
-    render(<Calendar.Root defaultMonth={new Date(2024, 5, 1)} />)
+  test("renders with a specific defaultMonth", async () => {
+    await render(<Calendar.Root defaultMonth={new Date(2024, 5, 1)} />)
 
     const grid = screen.getByRole("grid")
     expect(grid).toHaveAttribute("aria-label", expect.stringContaining("2024"))
   })
 
-  test("renders with defaultValue as a single date", () => {
-    render(<Calendar.Root defaultValue={new Date(2024, 5, 15)} />)
+  test("renders with defaultValue as a single date", async () => {
+    await render(<Calendar.Root defaultValue={new Date(2024, 5, 15)} />)
 
     const selectedDay = screen.getByText("15").closest("td")
     expect(selectedDay).toHaveAttribute("data-selected")
   })
 
-  test("renders with multiple selection", () => {
-    render(
+  test("renders with multiple selection", async () => {
+    await render(
       <Calendar.Root
         defaultValue={[new Date(2024, 5, 10), new Date(2024, 5, 20)]}
         multiple
@@ -45,8 +45,8 @@ describe("<Calendar />", () => {
     expect(day20).toHaveAttribute("data-selected")
   })
 
-  test("renders with range selection", () => {
-    render(
+  test("renders with range selection", async () => {
+    await render(
       <Calendar.Root
         defaultValue={{
           end: new Date(2024, 5, 20),
@@ -62,8 +62,8 @@ describe("<Calendar />", () => {
     expect(day20).toHaveAttribute("data-end")
   })
 
-  test("renders with disabled prop", () => {
-    render(<Calendar.Root defaultMonth={new Date(2024, 5, 1)} disabled />)
+  test("renders with disabled prop", async () => {
+    await render(<Calendar.Root defaultMonth={new Date(2024, 5, 1)} disabled />)
 
     const grid = screen.getByRole("grid")
     expect(grid).toHaveAttribute("tabindex", "-1")
@@ -72,7 +72,7 @@ describe("<Calendar />", () => {
   test("clicking a day selects it", async () => {
     const onChange = vi.fn()
 
-    const { user } = render(
+    const { user } = await render(
       <Calendar.Root defaultMonth={new Date(2024, 5, 1)} onChange={onChange} />,
     )
 
@@ -85,7 +85,7 @@ describe("<Calendar />", () => {
   test("clicking a selected day deselects it", async () => {
     const onChange = vi.fn()
 
-    const { user } = render(
+    const { user } = await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         defaultValue={new Date(2024, 5, 15)}
@@ -100,7 +100,7 @@ describe("<Calendar />", () => {
   })
 
   test("navigates to previous month", async () => {
-    const { user } = render(
+    const { user } = await render(
       <Calendar.Root defaultMonth={new Date(2024, 5, 1)} />,
     )
 
@@ -114,7 +114,7 @@ describe("<Calendar />", () => {
   })
 
   test("navigates to next month", async () => {
-    const { user } = render(
+    const { user } = await render(
       <Calendar.Root defaultMonth={new Date(2024, 5, 1)} />,
     )
 
@@ -125,8 +125,8 @@ describe("<Calendar />", () => {
     expect(grid).toHaveAttribute("aria-label", expect.stringContaining("July"))
   })
 
-  test("prev button is disabled at minDate month", () => {
-    render(
+  test("prev button is disabled at minDate month", async () => {
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 0, 1)}
         minDate={new Date(2024, 0, 1)}
@@ -139,8 +139,8 @@ describe("<Calendar />", () => {
     expect(prevButton).toBeDisabled()
   })
 
-  test("next button is disabled at maxDate month", () => {
-    render(
+  test("next button is disabled at maxDate month", async () => {
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 11, 1)}
         maxDate={new Date(2024, 11, 31)}
@@ -152,7 +152,7 @@ describe("<Calendar />", () => {
   })
 
   test("does not navigate past minDate on prev month", async () => {
-    const { user } = render(
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 0, 1)}
         minDate={new Date(2024, 0, 1)}
@@ -162,7 +162,7 @@ describe("<Calendar />", () => {
     const prevButton = screen.getByRole("button", {
       name: /previous month/i,
     })
-    await user.click(prevButton)
+    prevButton.click()
 
     const grid = screen.getByRole("grid")
     expect(grid).toHaveAttribute(
@@ -172,7 +172,7 @@ describe("<Calendar />", () => {
   })
 
   test("does not navigate past maxDate on next month", async () => {
-    const { user } = render(
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 11, 1)}
         maxDate={new Date(2024, 11, 31)}
@@ -180,7 +180,7 @@ describe("<Calendar />", () => {
     )
 
     const nextButton = screen.getByRole("button", { name: /next month/i })
-    await user.click(nextButton)
+    nextButton.click()
 
     const grid = screen.getByRole("grid")
     expect(grid).toHaveAttribute(
@@ -189,8 +189,8 @@ describe("<Calendar />", () => {
     )
   })
 
-  test("days before minDate are disabled", () => {
-    render(
+  test("days before minDate are disabled", async () => {
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         minDate={new Date(2024, 5, 10)}
@@ -203,8 +203,8 @@ describe("<Calendar />", () => {
     expect(day3).toHaveAttribute("data-disabled")
   })
 
-  test("days after maxDate are disabled", () => {
-    render(
+  test("days after maxDate are disabled", async () => {
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         maxDate={new Date(2024, 5, 20)}
@@ -215,8 +215,8 @@ describe("<Calendar />", () => {
     expect(day25).toHaveAttribute("data-disabled")
   })
 
-  test("excludeDate disables specific dates", () => {
-    render(
+  test("excludeDate disables specific dates", async () => {
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         excludeDate={(date) => date.getDay() === 0}
@@ -234,9 +234,9 @@ describe("<Calendar />", () => {
     })
   })
 
-  test("holidays are marked with data-holiday", () => {
+  test("holidays are marked with data-holiday", async () => {
     const holidays = [new Date(2024, 5, 15)]
-    render(
+    await render(
       <Calendar.Root defaultMonth={new Date(2024, 5, 1)} holidays={holidays} />,
     )
 
@@ -244,8 +244,8 @@ describe("<Calendar />", () => {
     expect(day15).toHaveAttribute("data-holiday")
   })
 
-  test("weekend days are marked with data-weekend", () => {
-    render(
+  test("weekend days are marked with data-weekend", async () => {
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         weekendDays={[0, 6]}
@@ -263,9 +263,9 @@ describe("<Calendar />", () => {
     expect(td).toHaveAttribute("data-weekend")
   })
 
-  test("today is marked with data-today", () => {
+  test("today is marked with data-today", async () => {
     const today = new Date()
-    render(<Calendar.Root defaultMonth={today} />)
+    await render(<Calendar.Root defaultMonth={today} />)
 
     const todayCell = screen
       .getAllByText(today.getDate().toString())
@@ -277,9 +277,9 @@ describe("<Calendar />", () => {
     expect(todayCell).toHaveAttribute("data-today")
   })
 
-  test("today is not highlighted when today=false", () => {
+  test("today is not highlighted when today=false", async () => {
     const today = new Date()
-    render(<Calendar.Root defaultMonth={today} today={false} />)
+    await render(<Calendar.Root defaultMonth={today} today={false} />)
 
     const todayCells = screen
       .getAllByText(today.getDate().toString())
@@ -294,8 +294,8 @@ describe("<Calendar />", () => {
     })
   })
 
-  test("multiple selection respects max limit", () => {
-    render(
+  test("multiple selection respects max limit", async () => {
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         defaultValue={[new Date(2024, 5, 10), new Date(2024, 5, 20)]}
@@ -312,7 +312,7 @@ describe("<Calendar />", () => {
   test("multiple selection allows removing when at max", async () => {
     const onChange = vi.fn()
 
-    const { user } = render(
+    const { user } = await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         defaultValue={[new Date(2024, 5, 10), new Date(2024, 5, 20)]}
@@ -329,8 +329,8 @@ describe("<Calendar />", () => {
     expect(onChange).toHaveBeenCalledWith([new Date(2024, 5, 20)])
   })
 
-  test("range selection marks between days", () => {
-    render(
+  test("range selection marks between days", async () => {
+    await render(
       <Calendar.Root
         defaultValue={{
           end: new Date(2024, 5, 20),
@@ -347,7 +347,7 @@ describe("<Calendar />", () => {
   test("range selection: clicking start clears range", async () => {
     const onChange = vi.fn()
 
-    const { user } = render(
+    const { user } = await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         defaultValue={{
@@ -371,7 +371,7 @@ describe("<Calendar />", () => {
   test("range selection: clicking before start swaps", async () => {
     const onChange = vi.fn()
 
-    const { user } = render(
+    const { user } = await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         defaultValue={{
@@ -385,7 +385,7 @@ describe("<Calendar />", () => {
 
     const day5 = screen
       .getByRole("grid")
-      .querySelector('td[data-value="2024-06-05"]')!
+      .querySelector<HTMLTableCellElement>('td[data-value="2024-06-05"]')!
     await user.click(day5)
 
     expect(onChange).toHaveBeenCalledWith({
@@ -397,7 +397,7 @@ describe("<Calendar />", () => {
   test("range selection: clicking after start sets end", async () => {
     const onChange = vi.fn()
 
-    const { user } = render(
+    const { user } = await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         defaultValue={{
@@ -421,7 +421,7 @@ describe("<Calendar />", () => {
   test("range selection: clicking when both start and end are set resets", async () => {
     const onChange = vi.fn()
 
-    const { user } = render(
+    const { user } = await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         defaultValue={{
@@ -445,7 +445,7 @@ describe("<Calendar />", () => {
   test("clicking a disabled day does not trigger onChange", async () => {
     const onChange = vi.fn()
 
-    const { user } = render(
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         minDate={new Date(2024, 5, 10)}
@@ -456,7 +456,8 @@ describe("<Calendar />", () => {
     const day5 = screen
       .getByRole("grid")
       .querySelector('td[data-value="2024-06-05"]')!
-    await user.click(day5)
+    expect(day5).toHaveAttribute("data-disabled")
+    if (day5 instanceof HTMLElement) day5.click()
 
     expect(onChange).not.toHaveBeenCalled()
   })
@@ -464,7 +465,7 @@ describe("<Calendar />", () => {
   test("onChange does not trigger for dates before minDate", async () => {
     const onChange = vi.fn()
 
-    const { user } = render(
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         minDate={new Date(2024, 5, 15)}
@@ -472,8 +473,9 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const day10 = screen.getByText("10").closest("td")!
-    await user.click(day10)
+    const day10 = screen.getByText("10").closest<HTMLTableCellElement>("td")!
+    expect(day10).toHaveAttribute("data-disabled")
+    day10.click()
 
     expect(onChange).not.toHaveBeenCalled()
   })
@@ -481,7 +483,7 @@ describe("<Calendar />", () => {
   test("onChange does not trigger for dates after maxDate", async () => {
     const onChange = vi.fn()
 
-    const { user } = render(
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         maxDate={new Date(2024, 5, 15)}
@@ -489,14 +491,15 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const day20 = screen.getByText("20").closest("td")!
-    await user.click(day20)
+    const day20 = screen.getByText("20").closest<HTMLTableCellElement>("td")!
+    expect(day20).toHaveAttribute("data-disabled")
+    day20.click()
 
     expect(onChange).not.toHaveBeenCalled()
   })
 
-  test("adjusts month when minDate is after defaultMonth", () => {
-    render(
+  test("adjusts month when minDate is after defaultMonth", async () => {
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 0, 1)}
         minDate={new Date(2024, 5, 1)}
@@ -507,8 +510,8 @@ describe("<Calendar />", () => {
     expect(grid).toHaveAttribute("aria-label", expect.stringContaining("June"))
   })
 
-  test("adjusts maxDate when minDate is after maxDate", () => {
-    render(
+  test("adjusts maxDate when minDate is after maxDate", async () => {
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         maxDate={new Date(2024, 0, 1)}
@@ -524,7 +527,7 @@ describe("<Calendar />", () => {
   test("onMonthChange clamps to maxDate month", async () => {
     const onChangeMonth = vi.fn()
 
-    render(
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 10, 1)}
         maxDate={new Date(2024, 11, 31)}
@@ -543,7 +546,7 @@ describe("<Calendar />", () => {
   test("onMonthChange clamps to minDate month", async () => {
     const onChangeMonth = vi.fn()
 
-    render(
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 1, 1)}
         minDate={new Date(2024, 0, 1)}
@@ -562,7 +565,7 @@ describe("<Calendar />", () => {
   })
 
   test("keyboard ArrowRight navigates to next day", async () => {
-    render(<Calendar.Root defaultMonth={new Date(2024, 5, 1)} />)
+    await render(<Calendar.Root defaultMonth={new Date(2024, 5, 1)} />)
 
     const grid = screen.getByRole("grid")
     fireEvent.focus(grid)
@@ -581,7 +584,7 @@ describe("<Calendar />", () => {
   })
 
   test("keyboard ArrowLeft navigates to previous day", async () => {
-    render(<Calendar.Root defaultMonth={new Date(2024, 5, 1)} />)
+    await render(<Calendar.Root defaultMonth={new Date(2024, 5, 1)} />)
 
     const grid = screen.getByRole("grid")
     fireEvent.focus(grid)
@@ -601,7 +604,7 @@ describe("<Calendar />", () => {
 
   test("keyboard Enter selects a day", async () => {
     const onChange = vi.fn()
-    render(
+    await render(
       <Calendar.Root defaultMonth={new Date(2024, 5, 1)} onChange={onChange} />,
     )
 
@@ -619,7 +622,7 @@ describe("<Calendar />", () => {
 
   test("keyboard Space selects a day", async () => {
     const onChange = vi.fn()
-    render(
+    await render(
       <Calendar.Root defaultMonth={new Date(2024, 5, 1)} onChange={onChange} />,
     )
 
@@ -636,7 +639,7 @@ describe("<Calendar />", () => {
   })
 
   test("keyboard ArrowDown navigates to next week", async () => {
-    render(<Calendar.Root defaultMonth={new Date(2024, 5, 1)} />)
+    await render(<Calendar.Root defaultMonth={new Date(2024, 5, 1)} />)
 
     const grid = screen.getByRole("grid")
     fireEvent.focus(grid)
@@ -653,7 +656,7 @@ describe("<Calendar />", () => {
   })
 
   test("keyboard ArrowUp navigates to previous week", async () => {
-    render(
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         defaultValue={new Date(2024, 5, 15)}
@@ -675,7 +678,7 @@ describe("<Calendar />", () => {
   })
 
   test("keyboard Home navigates to start of week", async () => {
-    render(
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         defaultValue={new Date(2024, 5, 12)}
@@ -697,7 +700,7 @@ describe("<Calendar />", () => {
   })
 
   test("keyboard End navigates to end of week", async () => {
-    render(
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         defaultValue={new Date(2024, 5, 12)}
@@ -719,7 +722,7 @@ describe("<Calendar />", () => {
   })
 
   test("keyboard PageDown navigates to next month", async () => {
-    render(
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         defaultValue={new Date(2024, 5, 15)}
@@ -745,7 +748,7 @@ describe("<Calendar />", () => {
   })
 
   test("keyboard PageUp navigates to previous month", async () => {
-    render(
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         defaultValue={new Date(2024, 5, 15)}
@@ -771,7 +774,7 @@ describe("<Calendar />", () => {
   })
 
   test("keyboard Shift+PageDown navigates to next year", async () => {
-    render(
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         defaultValue={new Date(2024, 5, 15)}
@@ -800,7 +803,7 @@ describe("<Calendar />", () => {
   })
 
   test("keyboard Shift+PageUp navigates to previous year", async () => {
-    render(
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         defaultValue={new Date(2024, 5, 15)}
@@ -828,8 +831,8 @@ describe("<Calendar />", () => {
     })
   })
 
-  test("uses format.year=null to render plain year number", () => {
-    render(
+  test("uses format.year=null to render plain year number", async () => {
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         format={{ year: null }}
@@ -839,8 +842,8 @@ describe("<Calendar />", () => {
     expect(screen.getByRole("grid")).toBeInTheDocument()
   })
 
-  test("uses format.month=null to render plain month number", () => {
-    render(
+  test("uses format.month=null to render plain month number", async () => {
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         format={{ month: null }}
@@ -850,8 +853,8 @@ describe("<Calendar />", () => {
     expect(screen.getByRole("grid")).toBeInTheDocument()
   })
 
-  test("uses format.day to render formatted day", () => {
-    render(
+  test("uses format.day to render formatted day", async () => {
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         format={{ day: "2-digit" }}
@@ -861,8 +864,8 @@ describe("<Calendar />", () => {
     expect(screen.getByRole("grid")).toBeInTheDocument()
   })
 
-  test("startDayOfWeek='sunday' renders Sunday as first day", () => {
-    render(
+  test("startDayOfWeek='sunday' renders Sunday as first day", async () => {
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         startDayOfWeek="sunday"
@@ -875,8 +878,8 @@ describe("<Calendar />", () => {
     expect(firstWeekday).toHaveAttribute("data-value", "0")
   })
 
-  test("startDayOfWeek='monday' renders Monday as first day", () => {
-    render(
+  test("startDayOfWeek='monday' renders Monday as first day", async () => {
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         startDayOfWeek="monday"
@@ -890,7 +893,7 @@ describe("<Calendar />", () => {
   })
 
   test("onFocus focuses on value date for array value", async () => {
-    render(
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         defaultValue={[new Date(2024, 5, 10)]}
@@ -907,7 +910,7 @@ describe("<Calendar />", () => {
   })
 
   test("onFocus focuses on start date for range value", async () => {
-    render(
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         defaultValue={{
@@ -927,7 +930,7 @@ describe("<Calendar />", () => {
   })
 
   test("onFocus focuses on end date for range value with only end", async () => {
-    render(
+    await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         defaultValue={{
@@ -946,8 +949,8 @@ describe("<Calendar />", () => {
     })
   })
 
-  test("outside days are not registered as descendants", () => {
-    render(<Calendar.Root defaultMonth={new Date(2024, 5, 1)} />)
+  test("outside days are not registered as descendants", async () => {
+    await render(<Calendar.Root defaultMonth={new Date(2024, 5, 1)} />)
 
     const outsideDays = screen
       .getByRole("grid")
@@ -956,9 +959,11 @@ describe("<Calendar />", () => {
   })
 
   test("value update adjusts displayed month", async () => {
-    const { rerender } = render(<Calendar.Root value={new Date(2024, 5, 15)} />)
+    const { rerender } = await render(
+      <Calendar.Root value={new Date(2024, 5, 15)} />,
+    )
 
-    rerender(<Calendar.Root value={new Date(2024, 8, 15)} />)
+    await rerender(<Calendar.Root value={new Date(2024, 8, 15)} />)
 
     await waitFor(() => {
       const grid = screen.getByRole("grid")
@@ -970,11 +975,11 @@ describe("<Calendar />", () => {
   })
 
   test("month adjusts for array value update", async () => {
-    const { rerender } = render(
+    const { rerender } = await render(
       <Calendar.Root multiple value={[new Date(2024, 5, 15)]} />,
     )
 
-    rerender(
+    await rerender(
       <Calendar.Root
         multiple
         value={[new Date(2024, 5, 15), new Date(2024, 8, 15)]}
@@ -991,14 +996,14 @@ describe("<Calendar />", () => {
   })
 
   test("month adjusts for range value update", async () => {
-    const { rerender } = render(
+    const { rerender } = await render(
       <Calendar.Root
         range
         value={{ end: undefined, start: new Date(2024, 5, 10) }}
       />,
     )
 
-    rerender(
+    await rerender(
       <Calendar.Root
         range
         value={{
@@ -1017,8 +1022,8 @@ describe("<Calendar />", () => {
     })
   })
 
-  test("controlled month prop is respected", () => {
-    render(
+  test("controlled month prop is respected", async () => {
+    await render(
       <Calendar.Root month={new Date(2024, 8, 1)} onChangeMonth={vi.fn()} />,
     )
 
@@ -1029,8 +1034,8 @@ describe("<Calendar />", () => {
     )
   })
 
-  test("defaultValue adjusts initial month when valueProp provided", () => {
-    render(<Calendar.Root value={new Date(2024, 8, 15)} />)
+  test("defaultValue adjusts initial month when valueProp provided", async () => {
+    await render(<Calendar.Root value={new Date(2024, 8, 15)} />)
 
     const grid = screen.getByRole("grid")
     expect(grid).toHaveAttribute(

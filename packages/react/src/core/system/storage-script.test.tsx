@@ -1,14 +1,23 @@
-import { render } from "#test"
-import * as utils from "../../utils"
+import type * as Utils from "../../utils"
+import { render } from "#test/browser"
 import {
   ColorModeScript,
   getStorageScript,
   ThemeSchemeScript,
 } from "./storage-script"
 
-function mockSsr() {
-  return vi.spyOn(utils, "createdDom").mockReturnValue(false)
-}
+const { mockCreatedDom } = vi.hoisted(() => ({
+  mockCreatedDom: vi.fn(() => true),
+}))
+
+vi.mock("../../utils", async (importOriginal) => {
+  const original = await importOriginal<typeof Utils>()
+
+  return {
+    ...original,
+    createdDom: mockCreatedDom,
+  }
+})
 
 describe("getStorageScript", () => {
   describe("colorMode", () => {
@@ -83,27 +92,32 @@ describe("getStorageScript", () => {
 
 describe("ColorModeScript", () => {
   afterEach(() => {
-    vi.restoreAllMocks()
+    mockCreatedDom.mockReset()
+    mockCreatedDom.mockReturnValue(true)
   })
 
-  test("renders a script tag during SSR", () => {
-    mockSsr()
-    const { container } = render(<ColorModeScript />, { withProvider: false })
+  test("renders a script tag during SSR", async () => {
+    mockCreatedDom.mockReturnValue(false)
+    const { container } = await render(<ColorModeScript />, {
+      withProvider: false,
+    })
     const script = container.querySelector("script")
     expect(script).toBeTruthy()
   })
 
-  test("renders with nonce during SSR", () => {
-    mockSsr()
-    const { container } = render(<ColorModeScript nonce="test-nonce" />, {
+  test("renders with nonce during SSR", async () => {
+    mockCreatedDom.mockReturnValue(false)
+    const { container } = await render(<ColorModeScript nonce="test-nonce" />, {
       withProvider: false,
     })
     const script = container.querySelector("script")
     expect(script?.getAttribute("nonce")).toBe("test-nonce")
   })
 
-  test("returns null when DOM is available", () => {
-    const { container } = render(<ColorModeScript />, { withProvider: false })
+  test("returns null when DOM is available", async () => {
+    const { container } = await render(<ColorModeScript />, {
+      withProvider: false,
+    })
     const script = container.querySelector("script")
     expect(script).toBeNull()
   })
@@ -111,27 +125,35 @@ describe("ColorModeScript", () => {
 
 describe("ThemeSchemeScript", () => {
   afterEach(() => {
-    vi.restoreAllMocks()
+    mockCreatedDom.mockReset()
+    mockCreatedDom.mockReturnValue(true)
   })
 
-  test("renders a script tag during SSR", () => {
-    mockSsr()
-    const { container } = render(<ThemeSchemeScript />, { withProvider: false })
+  test("renders a script tag during SSR", async () => {
+    mockCreatedDom.mockReturnValue(false)
+    const { container } = await render(<ThemeSchemeScript />, {
+      withProvider: false,
+    })
     const script = container.querySelector("script")
     expect(script).toBeTruthy()
   })
 
-  test("renders with nonce during SSR", () => {
-    mockSsr()
-    const { container } = render(<ThemeSchemeScript nonce="test-nonce" />, {
-      withProvider: false,
-    })
+  test("renders with nonce during SSR", async () => {
+    mockCreatedDom.mockReturnValue(false)
+    const { container } = await render(
+      <ThemeSchemeScript nonce="test-nonce" />,
+      {
+        withProvider: false,
+      },
+    )
     const script = container.querySelector("script")
     expect(script?.getAttribute("nonce")).toBe("test-nonce")
   })
 
-  test("returns null when DOM is available", () => {
-    const { container } = render(<ThemeSchemeScript />, { withProvider: false })
+  test("returns null when DOM is available", async () => {
+    const { container } = await render(<ThemeSchemeScript />, {
+      withProvider: false,
+    })
     const script = container.querySelector("script")
     expect(script).toBeNull()
   })

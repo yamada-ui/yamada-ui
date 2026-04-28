@@ -229,11 +229,14 @@ export const useTab = ({ id, disabled, index, ...rest }: UseTabProps) => {
           role: "tab",
           tabIndex: selected ? 0 : -1,
         },
-        props,
         rest,
+        props,
         { ref: mergeRefs(ref, register) },
-        { onClick, onFocus },
-      )(),
+        {
+          onClick: handlerAll(props.onClick, rest.onClick, onClick),
+          onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
+        },
+      )({ mergeEvent: false }),
     [
       disabled,
       id,

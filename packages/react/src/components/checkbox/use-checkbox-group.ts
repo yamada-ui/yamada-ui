@@ -16,7 +16,6 @@ import {
   isObject,
   isString,
   isUndefined,
-  mergeRefs,
   visuallyHiddenAttributes,
 } from "../../utils"
 import { useFieldProps } from "../field"
@@ -118,7 +117,7 @@ export const useCheckboxGroup = <Y extends string = string>(
         rest,
         props,
         {
-          ref: mergeRefs(ref, rest.ref),
+          ref,
         },
       )(),
     [ariaDescribedbyProp, dataProps, labelId, rest],

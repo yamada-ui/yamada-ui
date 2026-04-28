@@ -61,7 +61,7 @@ export const useModal = ({
   )
 
   const getRootProps: PropGetter = useCallback(
-    (props) => mergeProps(rest, props)(),
+    (props) => mergeProps(rest, props ?? {})(),
     [rest],
   )
 

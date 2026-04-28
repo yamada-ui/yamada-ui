@@ -170,12 +170,8 @@ describe("<Popover />", () => {
     await user.keyboard("{Escape}")
 
     await expect
-      .poll(() => {
-        const active = document.activeElement
-
-        return active === triggerButton.element() || active === document.body
-      })
-      .toBe(true)
+      .poll(() => document.activeElement)
+      .toBe(triggerButton.element())
   })
 
   test("can close on blur", async () => {

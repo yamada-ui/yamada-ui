@@ -187,8 +187,8 @@ export const useRating = (props: UseRatingProps = {}) => {
   }, [])
 
   const getRootProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) =>
-      mergeProps(
+    ({ ref, ...props } = {}) => {
+      const merged = mergeProps(
         dataProps,
         eventProps,
         ariaProps,
@@ -198,18 +198,36 @@ export const useRating = (props: UseRatingProps = {}) => {
           "aria-readonly": ariaAttr(readOnly),
           role: "radiogroup",
         },
-        props,
         rest,
+        props,
         { ref },
         { ref: rootRef },
-        {
+      )()
+      return {
+        ...merged,
+        onMouseEnter: handlerAll(
+          props.onMouseEnter,
+          rest.onMouseEnter,
           onMouseEnter,
+        ),
+        onMouseLeave: handlerAll(
+          props.onMouseLeave,
+          rest.onMouseLeave,
           onMouseLeave,
+        ),
+        onMouseMove: handlerAll(
+          props.onMouseMove,
+          rest.onMouseMove,
           onMouseMove,
-          onTouchEnd,
+        ),
+        onTouchEnd: handlerAll(props.onTouchEnd, rest.onTouchEnd, onTouchEnd),
+        onTouchStart: handlerAll(
+          props.onTouchStart,
+          rest.onTouchStart,
           onTouchStart,
-        },
-      )(),
+        ),
+      }
+    },
     [
       ariaProps,
       dataProps,
@@ -335,8 +353,8 @@ export const useRatingItem = ({
   )
 
   const getLabelProps: PropGetter<"label"> = useCallback(
-    ({ style, ...props } = {}) => {
-      const merged = mergeProps(
+    ({ style, ...props } = {}) =>
+      mergeProps(
         dataProps,
         ariaProps,
         {
@@ -352,14 +370,8 @@ export const useRatingItem = ({
             zIndex: fractionValue !== 1 ? (active ? 1 : -1) : undefined,
           },
         },
-      )()
-
-      return {
-        ...merged,
-        onMouseDown: handlerAll(props.onMouseDown, onMouseDown),
-        onTouchStart: handlerAll(props.onTouchStart, onTouchStart),
-      }
-    },
+        { onMouseDown, onTouchStart },
+      )(),
     [
       active,
       ariaProps,

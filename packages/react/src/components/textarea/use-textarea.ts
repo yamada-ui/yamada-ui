@@ -5,7 +5,7 @@ import type { HTMLProps, PropGetter } from "../../core"
 import type { UseAutosizeProps } from "./use-autosize"
 import { useCallback } from "react"
 import { mergeProps } from "../../core"
-import { assignRef, handlerAll, mergeRefs, noop } from "../../utils"
+import { assignRef, mergeRefs } from "../../utils"
 import { useAutosize } from "./use-autosize"
 
 export interface UseTextareaProps
@@ -36,16 +36,19 @@ export const useTextarea = ({
   assignRef(resizeRef, onResizeTextarea)
 
   const getTextareaProps: PropGetter<"textarea"> = useCallback(
-    ({ style, ...props } = {}) =>
-      mergeProps(rest, props, {
+    (props = {}) => {
+      const textareaProps = mergeProps(rest, props, {
         ref: mergeRefs(ref),
-        style: { resize: autosize ? "none" : undefined, ...style },
-        onChange: handlerAll(
-          props.onChange,
-          rest.onChange,
-          autosize ? onResizeTextarea : noop,
-        ),
-      })(),
+        ...(autosize
+          ? {
+              style: { resize: "none" as const },
+              onChange: onResizeTextarea,
+            }
+          : {}),
+      })()
+
+      return textareaProps
+    },
     [autosize, onResizeTextarea, rest, ref],
   )
 

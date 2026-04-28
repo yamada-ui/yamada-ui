@@ -512,7 +512,7 @@ describe("<Tree />", () => {
       .toHaveAttribute("aria-multiselectable", "true")
   })
 
-  test("should merge root props from useTree options and getRootProps", () => {
+  test("should merge root props from useTree options and getRootProps", async () => {
     const onClickFromOptions = vi.fn()
     const onClickFromGetter = vi.fn()
     const refFromOptions = vi.fn()
@@ -539,18 +539,22 @@ describe("<Tree />", () => {
       )
     }
 
-    render(<TestComponent />)
+    const { user } = await render(<TestComponent />)
 
-    const root = screen.getByTestId("hook-root")
+    const root = page.getByTestId("hook-root").element() as HTMLElement
 
-    expect(root).toHaveClass("option-root")
-    expect(root).toHaveClass("getter-root")
-    expect(root).toHaveStyle({
+    await expect
+      .element(page.getByTestId("hook-root"))
+      .toHaveClass("option-root")
+    await expect
+      .element(page.getByTestId("hook-root"))
+      .toHaveClass("getter-root")
+    await expect.element(page.getByTestId("hook-root")).toHaveStyle({
       color: "red",
       fontSize: "16px",
     })
 
-    fireEvent.click(root)
+    await user.click(page.getByTestId("hook-root"))
 
     expect(onClickFromOptions).toHaveBeenCalledTimes(1)
     expect(onClickFromGetter).toHaveBeenCalledTimes(1)

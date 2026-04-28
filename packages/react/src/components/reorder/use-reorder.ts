@@ -199,9 +199,8 @@ export const useReorder = <Y = string>({
     (props = {}) =>
       mergeProps(
         { axis, values },
-        props,
         rest,
-        { ref: props.ref },
+        props,
         { ref },
         {
           onMouseUp: onCompleteReorder,
@@ -279,7 +278,6 @@ export const useReorderItem = <Y = string>({
         },
         props,
         rest,
-        { ref: props.ref },
         { ref },
       )()
 

@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Field } from "../field"
 import { Input } from "../input"
 import { Form } from "./"
@@ -41,8 +41,8 @@ describe("<Form />", () => {
     expect(Form.SubmitButton.displayName).toBe("FormSubmitButton")
   })
 
-  test("sets `className` correctly", () => {
-    render(
+  test("sets `className` correctly", async () => {
+    await render(
       <Form.Root data-testid="root">
         <Form.Header data-testid="header">
           <Form.Title data-testid="title">Create an account</Form.Title>
@@ -63,36 +63,46 @@ describe("<Form />", () => {
       </Form.Root>,
     )
 
-    expect(screen.getByTestId("root")).toHaveClass("ui-form__root")
-    expect(screen.getByTestId("header")).toHaveClass("ui-form__header")
-    expect(screen.getByTestId("title")).toHaveClass("ui-form__title")
-    expect(screen.getByTestId("description")).toHaveClass(
-      "ui-form__description",
+    await expect.element(page.getByTestId("root")).toHaveClass("ui-form__root")
+    await expect
+      .element(page.getByTestId("header"))
+      .toHaveClass("ui-form__header")
+    await expect
+      .element(page.getByTestId("title"))
+      .toHaveClass("ui-form__title")
+    await expect
+      .element(page.getByTestId("description"))
+      .toHaveClass("ui-form__description")
+    await expect.element(page.getByTestId("body")).toHaveClass("ui-form__body")
+    await expect
+      .element(page.getByTestId("group"))
+      .toHaveClass("ui-form__group")
+    await expect
+      .element(page.getByTestId("footer"))
+      .toHaveClass("ui-form__footer")
+    await expect
+      .element(page.getByTestId("submit-button"))
+      .toHaveClass("ui-form__submit-button")
+  })
+
+  test("renders header with title prop", async () => {
+    await render(<Form.Root data-testid="root" title="My Form" />)
+
+    await expect.element(page.getByText("My Form")).toBeInTheDocument()
+    expect(page.getByText("My Form").element().tagName).toBe("H3")
+  })
+
+  test("renders header with description prop", async () => {
+    await render(
+      <Form.Root data-testid="root" description="Form description" />,
     )
-    expect(screen.getByTestId("body")).toHaveClass("ui-form__body")
-    expect(screen.getByTestId("group")).toHaveClass("ui-form__group")
-    expect(screen.getByTestId("footer")).toHaveClass("ui-form__footer")
-    expect(screen.getByTestId("submit-button")).toHaveClass(
-      "ui-form__submit-button",
-    )
+
+    await expect.element(page.getByText("Form description")).toBeInTheDocument()
+    expect(page.getByText("Form description").element().tagName).toBe("P")
   })
 
-  test("renders header with title prop", () => {
-    render(<Form.Root data-testid="root" title="My Form" />)
-
-    expect(screen.getByText("My Form")).toBeInTheDocument()
-    expect(screen.getByText("My Form").tagName).toBe("H3")
-  })
-
-  test("renders header with description prop", () => {
-    render(<Form.Root data-testid="root" description="Form description" />)
-
-    expect(screen.getByText("Form description")).toBeInTheDocument()
-    expect(screen.getByText("Form description").tagName).toBe("P")
-  })
-
-  test("renders header with both title and description props", () => {
-    render(
+  test("renders header with both title and description props", async () => {
+    await render(
       <Form.Root
         data-testid="root"
         description="Form description"
@@ -100,19 +110,19 @@ describe("<Form />", () => {
       />,
     )
 
-    expect(screen.getByText("My Form")).toBeInTheDocument()
-    expect(screen.getByText("Form description")).toBeInTheDocument()
+    await expect.element(page.getByText("My Form")).toBeInTheDocument()
+    await expect.element(page.getByText("Form description")).toBeInTheDocument()
   })
 
-  test("renders footer with submitButton prop", () => {
-    render(<Form.Root data-testid="root" submitButton="Submit" />)
+  test("renders footer with submitButton prop", async () => {
+    await render(<Form.Root data-testid="root" submitButton="Submit" />)
 
-    expect(screen.getByText("Submit")).toBeInTheDocument()
-    expect(screen.getByText("Submit").tagName).toBe("BUTTON")
+    await expect.element(page.getByText("Submit")).toBeInTheDocument()
+    expect(page.getByText("Submit").element().tagName).toBe("BUTTON")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(
+  test("renders HTML tag correctly", async () => {
+    await render(
       <Form.Root data-testid="root">
         <Form.Header data-testid="header">
           <Form.Title data-testid="title">Create an account</Form.Title>
@@ -133,13 +143,13 @@ describe("<Form />", () => {
       </Form.Root>,
     )
 
-    expect(screen.getByTestId("root").tagName).toBe("FORM")
-    expect(screen.getByTestId("header").tagName).toBe("DIV")
-    expect(screen.getByTestId("title").tagName).toBe("H3")
-    expect(screen.getByTestId("description").tagName).toBe("P")
-    expect(screen.getByTestId("body").tagName).toBe("DIV")
-    expect(screen.getByTestId("group").tagName).toBe("DIV")
-    expect(screen.getByTestId("footer").tagName).toBe("DIV")
-    expect(screen.getByTestId("submit-button").tagName).toBe("BUTTON")
+    expect(page.getByTestId("root").element().tagName).toBe("FORM")
+    expect(page.getByTestId("header").element().tagName).toBe("DIV")
+    expect(page.getByTestId("title").element().tagName).toBe("H3")
+    expect(page.getByTestId("description").element().tagName).toBe("P")
+    expect(page.getByTestId("body").element().tagName).toBe("DIV")
+    expect(page.getByTestId("group").element().tagName).toBe("DIV")
+    expect(page.getByTestId("footer").element().tagName).toBe("DIV")
+    expect(page.getByTestId("submit-button").element().tagName).toBe("BUTTON")
   })
 })

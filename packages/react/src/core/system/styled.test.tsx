@@ -1,12 +1,12 @@
-import { render, renderHook, screen } from "#test"
+import { page, render, renderHook } from "#test/browser"
 import { createStyled, useColorSchemeContext } from "./styled"
 
 describe("createStyled", () => {
-  test("creates a styled component with a simple HTML element", () => {
+  test("creates a styled component with a simple HTML element", async () => {
     const StyledDiv = createStyled("div", { displayName: "StyledDiv" })
-    render(<StyledDiv data-testid="el">Hello</StyledDiv>)
-    expect(screen.getByTestId("el")).toBeInTheDocument()
-    expect(screen.getByTestId("el").textContent).toBe("Hello")
+    await render(<StyledDiv data-testid="el">Hello</StyledDiv>)
+    await expect.element(page.getByTestId("el")).toBeInTheDocument()
+    expect(page.getByTestId("el").element().textContent).toBe("Hello")
   })
 
   test("creates a styled component with a name", () => {
@@ -28,23 +28,22 @@ describe("createStyled", () => {
     expect(StyledDiv.displayName).toBe("StyledComponent")
   })
 
-  test("applies className from css", () => {
+  test("applies className from css", async () => {
     const StyledDiv = createStyled("div", {
       displayName: "Styled",
     })
-    render(
+    await render(
       <StyledDiv css={{ color: "red" }} data-testid="el">
         test
       </StyledDiv>,
     )
-    const el = screen.getByTestId("el")
-    expect(el).toBeInTheDocument()
+    await expect.element(page.getByTestId("el")).toBeInTheDocument()
   })
 })
 
 describe("useColorSchemeContext", () => {
-  test("returns undefined when used without provider", () => {
-    const { result } = renderHook(() => useColorSchemeContext())
+  test("returns undefined when used without provider", async () => {
+    const { result } = await renderHook(() => useColorSchemeContext())
     expect(result.current).toBeUndefined()
   })
 })

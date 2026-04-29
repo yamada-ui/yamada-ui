@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Fieldset } from "./"
 
 describe("<Fieldset />", () => {
@@ -20,8 +20,8 @@ describe("<Fieldset />", () => {
     expect(Fieldset.HelperMessage.displayName).toBe("FieldsetHelperMessage")
   })
 
-  test("sets `className` correctly", () => {
-    const { rerender } = render(
+  test("sets `className` correctly", async () => {
+    const { rerender } = await render(
       <Fieldset.Root data-testid="root">
         <Fieldset.Header data-testid="header">
           <Fieldset.Legend>Legend</Fieldset.Legend>
@@ -32,15 +32,23 @@ describe("<Fieldset />", () => {
       </Fieldset.Root>,
     )
 
-    expect(screen.getByTestId("root")).toHaveClass("ui-fieldset__root")
-    expect(screen.getByText("Legend")).toHaveClass("ui-fieldset__legend")
-    expect(screen.getByText("Content")).toHaveClass("ui-fieldset__content")
-    expect(screen.getByTestId("header")).toHaveClass("ui-fieldset__header")
-    expect(screen.getByText("Helper")).toHaveClass(
-      "ui-fieldset__helper-message",
-    )
+    await expect
+      .element(page.getByTestId("root"))
+      .toHaveClass("ui-fieldset__root")
+    await expect
+      .element(page.getByText("Legend"))
+      .toHaveClass("ui-fieldset__legend")
+    await expect
+      .element(page.getByText("Content"))
+      .toHaveClass("ui-fieldset__content")
+    await expect
+      .element(page.getByTestId("header"))
+      .toHaveClass("ui-fieldset__header")
+    await expect
+      .element(page.getByText("Helper"))
+      .toHaveClass("ui-fieldset__helper-message")
 
-    rerender(
+    await rerender(
       <Fieldset.Root data-testid="root" invalid>
         <Fieldset.Content>Content</Fieldset.Content>
         <Fieldset.Header data-testid="header">
@@ -51,11 +59,13 @@ describe("<Fieldset />", () => {
       </Fieldset.Root>,
     )
 
-    expect(screen.getByText("Error")).toHaveClass("ui-fieldset__error-message")
+    await expect
+      .element(page.getByText("Error"))
+      .toHaveClass("ui-fieldset__error-message")
   })
 
-  test("renders HTML tag correctly", () => {
-    const { rerender } = render(
+  test("renders HTML tag correctly", async () => {
+    const { rerender } = await render(
       <Fieldset.Root data-testid="root">
         <Fieldset.Content>Content</Fieldset.Content>
         <Fieldset.Header data-testid="header">
@@ -66,13 +76,13 @@ describe("<Fieldset />", () => {
       </Fieldset.Root>,
     )
 
-    expect(screen.getByTestId("root").tagName).toBe("FIELDSET")
-    expect(screen.getByText("Legend").tagName).toBe("LEGEND")
-    expect(screen.getByText("Content").tagName).toBe("DIV")
-    expect(screen.getByTestId("header").tagName).toBe("DIV")
-    expect(screen.getByText("Helper").tagName).toBe("SPAN")
+    expect(page.getByTestId("root").element().tagName).toBe("FIELDSET")
+    expect(page.getByText("Legend").element().tagName).toBe("LEGEND")
+    expect(page.getByText("Content").element().tagName).toBe("DIV")
+    expect(page.getByTestId("header").element().tagName).toBe("DIV")
+    expect(page.getByText("Helper").element().tagName).toBe("SPAN")
 
-    rerender(
+    await rerender(
       <Fieldset.Root data-testid="root" invalid>
         <Fieldset.Content>Content</Fieldset.Content>
         <Fieldset.Header data-testid="header">
@@ -82,49 +92,51 @@ describe("<Fieldset />", () => {
         <Fieldset.ErrorMessage>Error</Fieldset.ErrorMessage>
       </Fieldset.Root>,
     )
-    expect(screen.getByText("Error").tagName).toBe("SPAN")
+    expect(page.getByText("Error").element().tagName).toBe("SPAN")
   })
 
-  test("renders legend via `legend` prop", () => {
-    render(<Fieldset.Root legend="My Legend">Content</Fieldset.Root>)
+  test("renders legend via `legend` prop", async () => {
+    await render(<Fieldset.Root legend="My Legend">Content</Fieldset.Root>)
 
-    expect(screen.getByText("My Legend")).toHaveClass("ui-fieldset__legend")
-    expect(screen.getByText("My Legend").tagName).toBe("LEGEND")
+    await expect
+      .element(page.getByText("My Legend"))
+      .toHaveClass("ui-fieldset__legend")
+    expect(page.getByText("My Legend").element().tagName).toBe("LEGEND")
   })
 
-  test("renders helperMessage via `helperMessage` prop", () => {
-    render(
+  test("renders helperMessage via `helperMessage` prop", async () => {
+    await render(
       <Fieldset.Root helperMessage="Help text" legend="Legend">
         Content
       </Fieldset.Root>,
     )
 
-    expect(screen.getByText("Help text")).toHaveClass(
-      "ui-fieldset__helper-message",
-    )
-    expect(screen.getByText("Help text").tagName).toBe("SPAN")
+    await expect
+      .element(page.getByText("Help text"))
+      .toHaveClass("ui-fieldset__helper-message")
+    expect(page.getByText("Help text").element().tagName).toBe("SPAN")
   })
 
-  test("renders errorMessage via `errorMessage` prop", () => {
-    render(
+  test("renders errorMessage via `errorMessage` prop", async () => {
+    await render(
       <Fieldset.Root errorMessage="Error text" invalid legend="Legend">
         Content
       </Fieldset.Root>,
     )
 
-    expect(screen.getByText("Error text")).toHaveClass(
-      "ui-fieldset__error-message",
-    )
-    expect(screen.getByText("Error text").tagName).toBe("SPAN")
+    await expect
+      .element(page.getByText("Error text"))
+      .toHaveClass("ui-fieldset__error-message")
+    expect(page.getByText("Error text").element().tagName).toBe("SPAN")
   })
 
-  test("does not render errorMessage when `errorMessage` prop is not provided", () => {
-    render(
+  test("does not render errorMessage when `errorMessage` prop is not provided", async () => {
+    const { container } = await render(
       <Fieldset.Root invalid legend="Legend">
         Content
       </Fieldset.Root>,
     )
 
-    expect(screen.queryByText("Error text")).not.toBeInTheDocument()
+    expect(container.querySelector(".ui-fieldset__error-message")).toBeNull()
   })
 })

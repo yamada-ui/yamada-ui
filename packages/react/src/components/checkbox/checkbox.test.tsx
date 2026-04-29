@@ -1,6 +1,7 @@
 import { a11y, fireEvent, page, render, renderHook } from "#test/browser"
 import { CheckboxGroup } from "."
 import { Checkbox } from "./checkbox"
+import { useCheckbox } from "./use-checkbox"
 import { useCheckboxGroup } from "./use-checkbox-group"
 
 const items = [
@@ -73,6 +74,66 @@ describe("<Checkbox />", () => {
     expect(checkbox?.tagName).toBe("INPUT")
     expect(checkbox?.parentElement?.children[1]?.tagName).toBe("DIV")
     expect(checkbox?.parentElement?.children[2]?.tagName).toBe("SPAN")
+  })
+
+  test("merges root props on Checkbox without overwriting className, style, or ref", async () => {
+    const userRef = vi.fn()
+    await render(
+      <Checkbox
+        className="from-root"
+        rootProps={{
+          ref: userRef,
+          className: "from-user",
+          style: { backgroundColor: "blue", color: "red" },
+          "data-testid": "checkbox-root",
+        }}
+      >
+        checkbox
+      </Checkbox>,
+    )
+
+    const root = page.getByTestId("checkbox-root")
+
+    await expect.element(root).toHaveClass("ui-checkbox__root")
+    await expect.element(root).toHaveClass("from-root")
+    await expect.element(root).toHaveClass("from-user")
+    await expect.element(root).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    await expect
+      .element(root)
+      .toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+    expect(userRef).toHaveBeenCalledTimes(1)
+    expect(userRef).toHaveBeenCalledWith(root.element())
+  })
+
+  test("merges root props values in useCheckbox with caller props", async () => {
+    const restOnClick = vi.fn()
+    const callerOnClick = vi.fn()
+    const { result } = await renderHook(() =>
+      useCheckbox({
+        className: "from-rest",
+        style: { backgroundColor: "red", paddingTop: "4px" },
+        onClick: restOnClick,
+      }),
+    )
+
+    const rootProps = result.current.getRootProps({
+      className: "from-caller",
+      style: { color: "blue", paddingTop: "8px" },
+      onClick: callerOnClick,
+    })
+
+    expect(rootProps.className).toContain("from-rest")
+    expect(rootProps.className).toContain("from-caller")
+    expect(rootProps.style).toMatchObject({
+      backgroundColor: "red",
+      color: "blue",
+      paddingTop: "8px",
+    })
+
+    rootProps.onClick?.({} as any)
+
+    expect(restOnClick).toHaveBeenCalledTimes(1)
+    expect(callerOnClick).toHaveBeenCalledTimes(1)
   })
 })
 
@@ -246,5 +307,47 @@ describe("<CheckboxGroup />", () => {
       result.current.onChange("2")
     })
     expect(result.current.value).toStrictEqual(["1"])
+  })
+
+  test("merges getRootProps values in useCheckboxGroup and calls each ref once", async () => {
+    const restOnClick = vi.fn()
+    const callerOnClick = vi.fn()
+    const restRef = vi.fn()
+    const callerRef = vi.fn()
+    const rootElement = document.createElement("div")
+    const { result } = await renderHook(() =>
+      useCheckboxGroup({
+        ref: restRef,
+        className: "from-rest",
+        style: { backgroundColor: "red", paddingTop: "4px" },
+        onClick: restOnClick,
+      }),
+    )
+
+    const rootProps = result.current.getRootProps({
+      ref: callerRef,
+      className: "from-caller",
+      style: { color: "blue", paddingTop: "8px" },
+      onClick: callerOnClick,
+    })
+
+    expect(rootProps.className).toContain("from-rest")
+    expect(rootProps.className).toContain("from-caller")
+    expect(rootProps.style).toMatchObject({
+      backgroundColor: "red",
+      color: "blue",
+      paddingTop: "8px",
+    })
+    expect(rootProps.role).toBe("group")
+
+    rootProps.onClick?.({} as any)
+    if (typeof rootProps.ref === "function") rootProps.ref(rootElement)
+
+    expect(restOnClick).toHaveBeenCalledTimes(1)
+    expect(callerOnClick).toHaveBeenCalledTimes(1)
+    expect(restRef).toHaveBeenCalledTimes(1)
+    expect(callerRef).toHaveBeenCalledTimes(1)
+    expect(restRef).toHaveBeenCalledWith(rootElement)
+    expect(callerRef).toHaveBeenCalledWith(rootElement)
   })
 })

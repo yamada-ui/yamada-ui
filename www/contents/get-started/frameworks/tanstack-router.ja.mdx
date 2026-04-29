@@ -144,7 +144,6 @@ function App() {
 import viteReact from "@vitejs/plugin-react"
 import type { Plugin } from "vite"
 import { defineConfig } from "vite"
-import tsconfigPaths from "vite-tsconfig-paths"
 import { devtools } from "@tanstack/devtools-vite"
 import { tanstackRouter } from "@tanstack/router-plugin/vite"
 import { COLOR_MODE_STORAGE_KEY, getStorageScript } from "@workspaces/ui"
@@ -166,11 +165,11 @@ function injectColorModeScript(): Plugin {
 const config = defineConfig({
   plugins: [
     devtools(),
-    tsconfigPaths({ projects: ["./tsconfig.json"] }),
     tanstackRouter({ target: "react", autoCodeSplitting: true }),
     viteReact(),
     injectColorModeScript(),
   ],
+  resolve: { tsconfigPaths: true },
 })
 
 export default config
@@ -182,7 +181,6 @@ export default config
 import viteReact from "@vitejs/plugin-react"
 import type { Plugin } from "vite"
 import { defineConfig } from "vite"
-import tsconfigPaths from "vite-tsconfig-paths"
 import { devtools } from "@tanstack/devtools-vite"
 import { tanstackRouter } from "@tanstack/router-plugin/vite"
 import { COLOR_MODE_STORAGE_KEY, getStorageScript } from "@workspaces/ui"
@@ -210,6 +208,7 @@ const config = defineConfig({
     viteReact(),
     injectColorModeScript(),
   ],
+  resolve: { tsconfigPaths: true },
 })
 
 export default config
@@ -225,7 +224,6 @@ export default config
 import viteReact from "@vitejs/plugin-react"
 import type { Plugin } from "vite"
 import { defineConfig } from "vite"
-import tsconfigPaths from "vite-tsconfig-paths"
 import { devtools } from "@tanstack/devtools-vite"
 import { tanstackRouter } from "@tanstack/router-plugin/vite"
 import { THEME_SCHEME_STORAGE_KEY, getStorageScript } from "@workspaces/ui"
@@ -247,11 +245,11 @@ function injectThemeSchemeScript(): Plugin {
 const config = defineConfig({
   plugins: [
     devtools(),
-    tsconfigPaths({ projects: ["./tsconfig.json"] }),
     tanstackRouter({ target: "react", autoCodeSplitting: true }),
     viteReact(),
     injectThemeSchemeScript(),
   ],
+  resolve: { tsconfigPaths: true },
 })
 
 export default config
@@ -263,7 +261,6 @@ export default config
 import viteReact from "@vitejs/plugin-react"
 import type { Plugin } from "vite"
 import { defineConfig } from "vite"
-import tsconfigPaths from "vite-tsconfig-paths"
 import { devtools } from "@tanstack/devtools-vite"
 import { tanstackRouter } from "@tanstack/router-plugin/vite"
 import { THEME_SCHEME_STORAGE_KEY, getStorageScript } from "@workspaces/ui"
@@ -286,11 +283,11 @@ function injectThemeSchemeScript(): Plugin {
 const config = defineConfig({
   plugins: [
     devtools(),
-    tsconfigPaths({ projects: ["./tsconfig.json"] }),
     tanstackRouter({ target: "react", autoCodeSplitting: true }),
     viteReact(),
     injectThemeSchemeScript(),
   ],
+  resolve: { tsconfigPaths: true },
 })
 
 export default config

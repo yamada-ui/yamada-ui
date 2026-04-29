@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { SubmitHandler } from "react-hook-form"
-import { PropsTable } from "#storybook"
 import { useForm } from "react-hook-form"
+import { PropsTable } from "#storybook"
 import { Form } from "."
 import { extractObject, toTitleCase } from "../../utils"
 import { Field } from "../field"

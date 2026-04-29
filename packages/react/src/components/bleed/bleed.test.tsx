@@ -1,5 +1,11 @@
-import { a11y, render, screen } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { Bleed } from "./bleed"
+
+const getPixelNumber = (value: string) => Number.parseFloat(value)
+const FULL_BLEED_PRECISION = 1
+
+const getExpectedFullBleed = (container: HTMLElement | SVGElement) =>
+  container.getBoundingClientRect().width / 2 - window.innerWidth / 2
 
 describe("<Bleed />", () => {
   test("renders component correctly", async () => {
@@ -10,34 +16,72 @@ describe("<Bleed />", () => {
     expect(Bleed.displayName).toBe("Bleed")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Bleed>Box</Bleed>)
-    expect(screen.getByText("Box")).toHaveClass("ui-bleed")
+  test("sets `className` correctly", async () => {
+    await render(<Bleed>Box</Bleed>)
+
+    await expect.element(page.getByText("Box")).toHaveClass("ui-bleed")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Bleed>Box</Bleed>)
-    expect(screen.getByText("Box").tagName).toBe("DIV")
+  test("renders HTML tag correctly", async () => {
+    await render(<Bleed>Box</Bleed>)
+
+    expect(page.getByText("Box").element().tagName).toBe("DIV")
   })
 
-  test("applies `calc(50% - 50vw)` to both inline sides when `inline='full'`", () => {
-    render(<Bleed inline="full">Box</Bleed>)
-    const el = screen.getByText("Box")
-    expect(el).toHaveStyle({
-      marginInlineEnd: "calc(50% - 50vw)",
-      marginInlineStart: "calc(50% - 50vw)",
-    })
+  test("applies full bleed to both inline sides when `inline='full'`", async () => {
+    await render(
+      <div style={{ width: "200px" }} data-testid="container">
+        <Bleed inline="full">Box</Bleed>
+      </div>,
+    )
+
+    const container = page.getByTestId("container").element() as HTMLElement
+    const style = getComputedStyle(page.getByText("Box").element())
+    const expectedFullBleed = getExpectedFullBleed(container)
+
+    expect(getPixelNumber(style.marginInlineEnd)).toBeCloseTo(
+      expectedFullBleed,
+      FULL_BLEED_PRECISION,
+    )
+    expect(getPixelNumber(style.marginInlineStart)).toBeCloseTo(
+      expectedFullBleed,
+      FULL_BLEED_PRECISION,
+    )
   })
 
-  test("applies `calc(50% - 50vw)` to inline start when `inlineStart='full'`", () => {
-    render(<Bleed inlineStart="full">Box</Bleed>)
-    const el = screen.getByText("Box")
-    expect(el).toHaveStyle({ marginInlineStart: "calc(50% - 50vw)" })
+  test("applies full bleed to inline start when `inlineStart='full'`", async () => {
+    await render(
+      <div style={{ width: "200px" }} data-testid="container">
+        <Bleed inlineStart="full">Box</Bleed>
+      </div>,
+    )
+
+    const container = page.getByTestId("container").element() as HTMLElement
+    const style = getComputedStyle(page.getByText("Box").element())
+    const expectedFullBleed = getExpectedFullBleed(container)
+
+    expect(getPixelNumber(style.marginInlineStart)).toBeCloseTo(
+      expectedFullBleed,
+      FULL_BLEED_PRECISION,
+    )
+    expect(getPixelNumber(style.marginInlineEnd)).toBeCloseTo(0)
   })
 
-  test("applies `calc(50% - 50vw)` to inline end when `inlineEnd='full'`", () => {
-    render(<Bleed inlineEnd="full">Box</Bleed>)
-    const el = screen.getByText("Box")
-    expect(el).toHaveStyle({ marginInlineEnd: "calc(50% - 50vw)" })
+  test("applies full bleed to inline end when `inlineEnd='full'`", async () => {
+    await render(
+      <div style={{ width: "200px" }} data-testid="container">
+        <Bleed inlineEnd="full">Box</Bleed>
+      </div>,
+    )
+
+    const container = page.getByTestId("container").element() as HTMLElement
+    const style = getComputedStyle(page.getByText("Box").element())
+    const expectedFullBleed = getExpectedFullBleed(container)
+
+    expect(getPixelNumber(style.marginInlineEnd)).toBeCloseTo(
+      expectedFullBleed,
+      FULL_BLEED_PRECISION,
+    )
+    expect(getPixelNumber(style.marginInlineStart)).toBeCloseTo(0)
   })
 })

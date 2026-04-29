@@ -1,8 +1,8 @@
 "use client"
 
 import type { ReactElement, ReactNode } from "react"
-import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useEffect, useRef, useState } from "react"
+import { type HTMLProps, mergeProps, type PropGetter } from "../../core"
 import { useI18n } from "../../providers/i18n-provider"
 import { dataAttr, handlerAll, mergeRefs } from "../../utils"
 
@@ -93,8 +93,7 @@ export const useAvatar = ({
 
   const getRootProps: PropGetter = useCallback(
     (props) => ({
-      ...rest,
-      ...props,
+      ...mergeProps(rest, props)(),
       "data-fallback": dataAttr(!!fallbackMessage),
       "data-loaded": dataAttr(loaded),
     }),

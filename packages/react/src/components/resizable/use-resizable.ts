@@ -16,12 +16,12 @@ import {
   usePanelRef,
   useDefaultLayout as useResizableLayout,
 } from "react-resizable-panels"
+import { mergeProps } from "../../core"
 import {
   ariaAttr,
   createContext,
   dataAttr,
   fnAll,
-  handlerAll,
   mergeRefs,
 } from "../../utils"
 
@@ -58,22 +58,23 @@ export const useResizable = ({
   const groupRef = useGroupRef()
 
   const getRootProps: PropGetter<GroupProps> = useCallback(
-    (props = {}) => ({
-      disabled,
-      orientation,
-      ...rest,
-      ...props,
-      style: {
-        height: undefined,
-        width: undefined,
-        ...rest.style,
-        ...props.style,
-      },
-      elementRef: mergeRefs(props.elementRef, rest.ref),
-      groupRef: mergeRefs(props.groupRef, groupRef, controlRef),
-      onLayoutChange: fnAll(props.onLayoutChange, rest.onLayoutChange),
-      onLayoutChanged: fnAll(props.onLayoutChanged, rest.onLayoutChanged),
-    }),
+    (props = {}) => {
+      const merged = mergeProps({ disabled, orientation }, rest, props)()
+
+      return {
+        ...merged,
+        style: {
+          height: undefined,
+          width: undefined,
+          ...rest.style,
+          ...props.style,
+        },
+        elementRef: mergeRefs(props.elementRef, rest.ref),
+        groupRef: mergeRefs(props.groupRef, groupRef, controlRef),
+        onLayoutChange: fnAll(props.onLayoutChange, rest.onLayoutChange),
+        onLayoutChanged: fnAll(props.onLayoutChanged, rest.onLayoutChanged),
+      }
+    },
     [disabled, orientation, groupRef, controlRef, rest],
   )
 
@@ -104,13 +105,16 @@ export const useResizableItem = ({
   const panelRef = usePanelRef()
 
   const getItemProps: PropGetter<PanelProps> = useCallback(
-    (props = {}) => ({
-      ...rest,
-      ...props,
-      elementRef: mergeRefs(props.elementRef, rest.ref),
-      panelRef: mergeRefs(props.panelRef, panelRef, controlRef),
-      onResize: fnAll(props.onResize, rest.onResize),
-    }),
+    (props = {}) => {
+      const merged = mergeProps(rest, props)()
+
+      return {
+        ...merged,
+        elementRef: mergeRefs(props.elementRef, rest.ref),
+        panelRef: mergeRefs(props.panelRef, panelRef, controlRef),
+        onResize: fnAll(props.onResize, rest.onResize),
+      }
+    },
     [panelRef, controlRef, rest],
   )
 
@@ -156,21 +160,25 @@ export const useResizableTrigger = ({
   )
 
   const getTriggerProps: PropGetter<SeparatorProps> = useCallback(
-    (props = {}) => ({
-      "aria-disabled": ariaAttr(trulyDisabled),
-      "aria-orientation": orientation,
-      "data-disabled": dataAttr(trulyDisabled),
-      disabled: trulyDisabled,
-      tabIndex: trulyDisabled ? -1 : 0,
-      ...rest,
-      ...props,
-      elementRef: mergeRefs(props.elementRef, rest.ref),
-      onDoubleClick: handlerAll(
-        props.onDoubleClick,
-        rest.onDoubleClick,
-        onDoubleClick,
-      ),
-    }),
+    (props = {}) => {
+      const merged = mergeProps(
+        {
+          "aria-disabled": ariaAttr(trulyDisabled),
+          "aria-orientation": orientation,
+          "data-disabled": dataAttr(trulyDisabled),
+          disabled: trulyDisabled,
+          tabIndex: trulyDisabled ? -1 : 0,
+        },
+        props,
+        rest,
+        { onDoubleClick },
+      )()
+
+      return {
+        ...merged,
+        elementRef: mergeRefs(props.elementRef, rest.ref),
+      }
+    },
     [orientation, trulyDisabled, rest, onDoubleClick],
   )
 

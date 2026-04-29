@@ -2,16 +2,8 @@ import { a11y, fireEvent, page, render } from "#test/browser"
 import { Autocomplete } from "."
 
 describe("<Autocomplete />", () => {
-  type User = Awaited<ReturnType<typeof render>>["user"]
-
-  const setInputValue = async (
-    user: User,
-    input: HTMLInputElement,
-    value: string,
-  ) => {
-    await user.clear(input)
-
-    if (value) await user.type(input, value)
+  const setInputValue = (input: HTMLInputElement, value: string) => {
+    fireEvent.change(input, { target: { value } })
   }
 
   const blurWithRelatedTarget = (
@@ -176,7 +168,7 @@ describe("<Autocomplete />", () => {
   })
 
   test("renders empty message when no items match filter", async () => {
-    const { user } = await render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         items={[
@@ -190,13 +182,13 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "xyz")
+    setInputValue(input, "xyz")
 
     await expect.element(page.getByText("No results found")).toBeInTheDocument()
   })
 
   test("renders custom empty message", async () => {
-    const { user } = await render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         emptyMessage="Nothing here"
@@ -208,13 +200,13 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "xyz")
+    setInputValue(input, "xyz")
 
     await expect.element(page.getByText("Nothing here")).toBeInTheDocument()
   })
 
   test("filters items using `query` property", async () => {
-    const { user } = await render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         items={[
@@ -232,7 +224,7 @@ describe("<Autocomplete />", () => {
       .element(page.getByRole("option", { name: "Option 1" }))
       .toBeVisible()
 
-    await setInputValue(user, input, "search-one")
+    setInputValue(input, "search-one")
 
     await expect
       .element(page.getByRole("option", { name: "Option 1" }))
@@ -243,7 +235,7 @@ describe("<Autocomplete />", () => {
   })
 
   test("filters grouped items using `query` property", async () => {
-    const { user } = await render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         items={[
@@ -266,7 +258,7 @@ describe("<Autocomplete />", () => {
       .element(page.getByRole("option", { name: "Apple" }))
       .toBeVisible()
 
-    await setInputValue(user, input, "fruit-apple")
+    setInputValue(input, "fruit-apple")
 
     await expect
       .element(page.getByRole("option", { name: "Apple" }))
@@ -327,7 +319,7 @@ describe("<Autocomplete />", () => {
   })
 
   test("does not allow input change when `max` is reached in multiple mode", async () => {
-    const { user } = await render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         defaultValue={["one"]}
@@ -344,7 +336,7 @@ describe("<Autocomplete />", () => {
     const input = field.querySelector("input")!
 
     input.focus()
-    await setInputValue(user, input, "test")
+    setInputValue(input, "test")
 
     expect(input).toHaveValue("")
   })
@@ -485,7 +477,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "test")
+    setInputValue(input, "test")
     onChange.mockClear()
     input.focus()
     await user.keyboard("{Backspace}")
@@ -510,7 +502,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "Option 1")
+    setInputValue(input, "Option 1")
     input.focus()
     await user.keyboard("{Enter}")
 
@@ -539,7 +531,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "Apple")
+    setInputValue(input, "Apple")
     input.focus()
     await user.keyboard("{Enter}")
 
@@ -565,7 +557,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "custom")
+    setInputValue(input, "custom")
     input.focus()
     await user.keyboard("{Enter}")
 
@@ -573,7 +565,7 @@ describe("<Autocomplete />", () => {
   })
 
   test("closes dropdown when `closeOnChange` is true", async () => {
-    const { user } = await render(
+    await render(
       <Autocomplete.Root
         closeOnChange
         defaultOpen
@@ -591,7 +583,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "Option")
+    setInputValue(input, "Option")
 
     await expect
       .poll(() => page.getByRole("option", { name: "Option 1" }).query())
@@ -599,7 +591,7 @@ describe("<Autocomplete />", () => {
   })
 
   test("opens dropdown on input change when `openOnChange` is true", async () => {
-    const { user } = await render(
+    await render(
       <Autocomplete.Root
         items={[
           { label: "Option 1", value: "one" },
@@ -613,7 +605,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "Option")
+    setInputValue(input, "Option")
 
     await expect
       .element(page.getByRole("option", { name: "Option 1" }))
@@ -623,7 +615,7 @@ describe("<Autocomplete />", () => {
   test("clears value when input is emptied in single mode", async () => {
     const onChange = vi.fn()
 
-    const { user } = await render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         defaultValue="one"
@@ -638,7 +630,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "")
+    setInputValue(input, "")
 
     expect(onChange).toHaveBeenCalledWith("")
   })
@@ -646,7 +638,7 @@ describe("<Autocomplete />", () => {
   test("sets input value on blur with `allowCustomValue` in single mode", async () => {
     const onChange = vi.fn()
 
-    const { user } = await render(
+    await render(
       <>
         <button data-testid="outside">outside</button>
         <Autocomplete.Root
@@ -666,7 +658,7 @@ describe("<Autocomplete />", () => {
     const outside = page.getByTestId("outside").element()
 
     input.focus()
-    await setInputValue(user, input, "custom value")
+    setInputValue(input, "custom value")
     blurWithRelatedTarget(input, outside)
 
     expect(onChange).toHaveBeenCalledWith("custom value")
@@ -699,7 +691,7 @@ describe("<Autocomplete />", () => {
   })
 
   test("clears input value on blur in multiple mode", async () => {
-    const { user } = await render(
+    await render(
       <>
         <button data-testid="outside">outside</button>
         <Autocomplete.Root
@@ -719,7 +711,7 @@ describe("<Autocomplete />", () => {
     const outside = page.getByTestId("outside").element()
 
     input.focus()
-    await setInputValue(user, input, "search")
+    setInputValue(input, "search")
     blurWithRelatedTarget(input, outside)
 
     expect(input).toHaveValue("")
@@ -919,7 +911,7 @@ describe("<Autocomplete />", () => {
   })
 
   test("does not open on change when `openOnChange` is false", async () => {
-    const { user } = await render(
+    await render(
       <Autocomplete.Root
         items={[
           { label: "Option 1", value: "one" },
@@ -933,7 +925,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "Option")
+    setInputValue(input, "Option")
 
     await expect
       .poll(() => page.getByRole("option", { name: "Option 1" }).query())
@@ -941,7 +933,7 @@ describe("<Autocomplete />", () => {
   })
 
   test("uses items with `query` property matching in grouped filter", async () => {
-    const { user } = await render(
+    await render(
       <Autocomplete.Root
         defaultOpen
         items={[
@@ -964,7 +956,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "color-red")
+    setInputValue(input, "color-red")
 
     await expect
       .element(page.getByRole("option", { name: "Red" }))
@@ -989,7 +981,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "nonexistent")
+    setInputValue(input, "nonexistent")
     onChange.mockClear()
     input.focus()
     await user.keyboard("{Enter}")
@@ -1025,7 +1017,7 @@ describe("<Autocomplete />", () => {
   test("sets `allowCustomValue` input value on blur when input is empty", async () => {
     const onChange = vi.fn()
 
-    const { user } = await render(
+    await render(
       <>
         <button data-testid="outside">outside</button>
         <Autocomplete.Root
@@ -1046,7 +1038,7 @@ describe("<Autocomplete />", () => {
     const outside = page.getByTestId("outside").element()
 
     input.focus()
-    await setInputValue(user, input, "")
+    setInputValue(input, "")
     blurWithRelatedTarget(input, outside)
 
     // When allowCustomValue is true and inputValue is empty string (falsy),
@@ -1055,7 +1047,7 @@ describe("<Autocomplete />", () => {
   })
 
   test("handles `closeOnChange` as function", async () => {
-    const { user } = await render(
+    await render(
       <Autocomplete.Root
         closeOnChange={() => true}
         defaultOpen
@@ -1073,7 +1065,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "Option")
+    setInputValue(input, "Option")
 
     await expect
       .poll(() => page.getByRole("option", { name: "Option 1" }).query())
@@ -1081,7 +1073,7 @@ describe("<Autocomplete />", () => {
   })
 
   test("handles `openOnChange` as function", async () => {
-    const { user } = await render(
+    await render(
       <Autocomplete.Root
         items={[
           { label: "Option 1", value: "one" },
@@ -1095,7 +1087,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "Option")
+    setInputValue(input, "Option")
 
     await expect
       .element(page.getByRole("option", { name: "Option 1" }))

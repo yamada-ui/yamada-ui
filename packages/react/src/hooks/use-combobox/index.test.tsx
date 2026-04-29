@@ -130,20 +130,16 @@ describe("useCombobox", () => {
     expect(trigger).toHaveAttribute("tabindex", "0")
   })
 
-  test("opens on click and shows content", async () => {
+  test("opens on click and shows content", () => {
     render(
       <ComboboxTestComponent items={[{ value: "one" }, { value: "two" }]} />,
     )
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.click(trigger)
-    })
+    fireEvent.click(trigger)
 
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute("aria-expanded", "true")
-    })
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
 
     expect(screen.getByTestId("content")).toBeInTheDocument()
   })
@@ -158,9 +154,7 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.click(trigger)
-    })
+    fireEvent.click(trigger)
 
     expect(trigger).toHaveAttribute("aria-expanded", "false")
   })
@@ -175,83 +169,61 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.click(trigger)
-    })
+    fireEvent.click(trigger)
 
     expect(trigger).toHaveAttribute("aria-expanded", "false")
   })
 
-  test("closes on second click", async () => {
+  test("closes on second click", () => {
     render(
       <ComboboxTestComponent items={[{ value: "one" }, { value: "two" }]} />,
     )
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.click(trigger)
-    })
+    fireEvent.click(trigger)
 
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute("aria-expanded", "true")
-    })
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
 
-    act(() => {
-      fireEvent.click(trigger)
-    })
+    fireEvent.click(trigger)
 
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute("aria-expanded", "false")
-    })
+    expect(trigger).toHaveAttribute("aria-expanded", "false")
   })
 
-  test("opens on ArrowDown key and sets active descendant", async () => {
+  test("opens on ArrowDown key and sets active descendant", () => {
     render(
       <ComboboxTestComponent items={[{ value: "one" }, { value: "two" }]} />,
     )
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowDown" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowDown" })
 
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute("aria-expanded", "true")
-    })
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
   })
 
-  test("opens on ArrowUp key", async () => {
+  test("opens on ArrowUp key", () => {
     render(
       <ComboboxTestComponent items={[{ value: "one" }, { value: "two" }]} />,
     )
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowUp" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowUp" })
 
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute("aria-expanded", "true")
-    })
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
   })
 
-  test("opens on Enter key when openOnEnter is true", async () => {
+  test("opens on Enter key when openOnEnter is true", () => {
     render(
       <ComboboxTestComponent items={[{ value: "one" }, { value: "two" }]} />,
     )
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "Enter" })
-    })
+    fireEvent.keyDown(trigger, { key: "Enter" })
 
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute("aria-expanded", "true")
-    })
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
   })
 
   test("does not open on Enter key when openOnEnter is false", () => {
@@ -264,27 +236,21 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "Enter" })
-    })
+    fireEvent.keyDown(trigger, { key: "Enter" })
 
     expect(trigger).toHaveAttribute("aria-expanded", "false")
   })
 
-  test("opens on Space key when openOnSpace is true", async () => {
+  test("opens on Space key when openOnSpace is true", () => {
     render(
       <ComboboxTestComponent items={[{ value: "one" }, { value: "two" }]} />,
     )
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: " ", code: "Space" })
-    })
+    fireEvent.keyDown(trigger, { key: " ", code: "Space" })
 
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute("aria-expanded", "true")
-    })
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
   })
 
   test("does not open on Space key when openOnSpace is false", () => {
@@ -297,9 +263,7 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: " ", code: "Space" })
-    })
+    fireEvent.keyDown(trigger, { key: " ", code: "Space" })
 
     expect(trigger).toHaveAttribute("aria-expanded", "false")
   })
@@ -314,9 +278,7 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowDown" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowDown" })
 
     expect(trigger).toHaveAttribute("aria-expanded", "false")
   })
@@ -345,21 +307,15 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowDown" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowDown" })
 
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute("aria-expanded", "true")
-    })
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
 
     await waitFor(() => {
       expect(trigger).toHaveAttribute("aria-activedescendant")
     })
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowDown" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowDown" })
 
     await waitFor(() => {
       const activeId = trigger.getAttribute("aria-activedescendant")
@@ -375,21 +331,15 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowUp" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowUp" })
 
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute("aria-expanded", "true")
-    })
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
 
     await waitFor(() => {
       expect(trigger).toHaveAttribute("aria-activedescendant")
     })
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowUp" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowUp" })
 
     await waitFor(() => {
       const activeId = trigger.getAttribute("aria-activedescendant")
@@ -407,21 +357,15 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowDown" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowDown" })
 
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute("aria-expanded", "true")
-    })
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
 
     await waitFor(() => {
       expect(trigger).toHaveAttribute("aria-activedescendant")
     })
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "Home" })
-    })
+    fireEvent.keyDown(trigger, { key: "Home" })
 
     await waitFor(() => {
       const activeId = trigger.getAttribute("aria-activedescendant")
@@ -439,21 +383,15 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowDown" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowDown" })
 
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute("aria-expanded", "true")
-    })
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
 
     await waitFor(() => {
       expect(trigger).toHaveAttribute("aria-activedescendant")
     })
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "End" })
-    })
+    fireEvent.keyDown(trigger, { key: "End" })
 
     await waitFor(() => {
       const activeId = trigger.getAttribute("aria-activedescendant")
@@ -469,9 +407,7 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "Home" })
-    })
+    fireEvent.keyDown(trigger, { key: "Home" })
 
     expect(trigger).toHaveAttribute("aria-expanded", "false")
   })
@@ -483,9 +419,7 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "End" })
-    })
+    fireEvent.keyDown(trigger, { key: "End" })
 
     expect(trigger).toHaveAttribute("aria-expanded", "false")
   })
@@ -502,21 +436,15 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowDown" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowDown" })
 
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute("aria-expanded", "true")
-    })
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
 
     await waitFor(() => {
       expect(trigger).toHaveAttribute("aria-activedescendant")
     })
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "Enter" })
-    })
+    fireEvent.keyDown(trigger, { key: "Enter" })
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith("one")
@@ -538,9 +466,7 @@ describe("useCombobox", () => {
 
     expect(trigger).toHaveAttribute("aria-expanded", "true")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "Enter" })
-    })
+    fireEvent.keyDown(trigger, { key: "Enter" })
 
     expect(onChange).not.toHaveBeenCalled()
   })
@@ -557,21 +483,15 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowDown" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowDown" })
 
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute("aria-expanded", "true")
-    })
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
 
     await waitFor(() => {
       expect(trigger).toHaveAttribute("aria-activedescendant")
     })
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: " ", code: "Space" })
-    })
+    fireEvent.keyDown(trigger, { key: " ", code: "Space" })
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith("one")
@@ -591,21 +511,15 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowDown" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowDown" })
 
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute("aria-expanded", "true")
-    })
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
 
     await waitFor(() => {
       expect(trigger).toHaveAttribute("aria-activedescendant")
     })
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: " ", code: "Space" })
-    })
+    fireEvent.keyDown(trigger, { key: " ", code: "Space" })
 
     expect(onChange).not.toHaveBeenCalled()
   })
@@ -622,29 +536,21 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowDown" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowDown" })
 
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute("aria-expanded", "true")
-    })
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
 
     await waitFor(() => {
       expect(trigger).toHaveAttribute("aria-activedescendant")
     })
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "Enter" })
-    })
+    fireEvent.keyDown(trigger, { key: "Enter" })
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith("one")
     })
 
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute("aria-expanded", "false")
-    })
+    expect(trigger).toHaveAttribute("aria-expanded", "false")
   })
 
   test("selecting with closeOnSelect=false keeps the combobox open", async () => {
@@ -660,21 +566,15 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowDown" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowDown" })
 
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute("aria-expanded", "true")
-    })
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
 
     await waitFor(() => {
       expect(trigger).toHaveAttribute("aria-activedescendant")
     })
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "Enter" })
-    })
+    fireEvent.keyDown(trigger, { key: "Enter" })
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith("one")
@@ -698,9 +598,7 @@ describe("useCombobox", () => {
       expect(screen.getByTestId("item-one")).toBeInTheDocument()
     })
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("item-one"))
-    })
+    fireEvent.click(screen.getByTestId("item-one"))
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith("one")
@@ -721,9 +619,7 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.mouseMove(screen.getByTestId("item-two"))
-    })
+    fireEvent.mouseMove(screen.getByTestId("item-two"))
 
     await waitFor(() => {
       const activeId = trigger.getAttribute("aria-activedescendant")
@@ -769,9 +665,7 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.mouseMove(screen.getByTestId("item-disabled-item"))
-    })
+    fireEvent.mouseMove(screen.getByTestId("item-disabled-item"))
 
     expect(trigger).not.toHaveAttribute("aria-activedescendant")
   })
@@ -811,9 +705,7 @@ describe("useCombobox", () => {
       expect(screen.getByTestId("item-disabled-item")).toBeInTheDocument()
     })
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("item-disabled-item"))
-    })
+    fireEvent.click(screen.getByTestId("item-disabled-item"))
 
     expect(onChange).not.toHaveBeenCalled()
   })
@@ -865,9 +757,7 @@ describe("useCombobox", () => {
 
     render(<SelectFocusRefComponent />)
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("select-btn"))
-    })
+    fireEvent.click(screen.getByTestId("select-btn"))
   })
 
   test("onSelect with undefined value does not call onChange", () => {
@@ -900,9 +790,7 @@ describe("useCombobox", () => {
 
     render(<UndefinedSelectComponent />)
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("select-btn"))
-    })
+    fireEvent.click(screen.getByTestId("select-btn"))
 
     expect(onChange).not.toHaveBeenCalled()
   })
@@ -917,13 +805,9 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowDown" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowDown" })
 
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute("aria-expanded", "true")
-    })
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
 
     await waitFor(() => {
       expect(trigger).toHaveAttribute("aria-activedescendant")
@@ -942,21 +826,15 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowDown" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowDown" })
 
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute("aria-expanded", "true")
-    })
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
 
     await waitFor(() => {
       expect(trigger).toHaveAttribute("aria-activedescendant")
     })
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("item-one"))
-    })
+    fireEvent.click(screen.getByTestId("item-one"))
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith("one")
@@ -1005,9 +883,7 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("activate-btn"))
-    })
+    fireEvent.click(screen.getByTestId("activate-btn"))
 
     expect(trigger).not.toHaveAttribute("aria-activedescendant")
   })
@@ -1026,9 +902,7 @@ describe("useCombobox", () => {
       expect(screen.getByTestId("item-one")).toBeInTheDocument()
     })
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowDown" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowDown" })
 
     await waitFor(() => {
       expect(trigger).toHaveAttribute("aria-activedescendant")
@@ -1049,9 +923,7 @@ describe("useCombobox", () => {
       expect(screen.getByTestId("item-two")).toBeInTheDocument()
     })
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowUp" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowUp" })
 
     await waitFor(() => {
       expect(trigger).toHaveAttribute("aria-activedescendant")
@@ -1071,9 +943,7 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: " ", code: "Space" })
-    })
+    fireEvent.keyDown(trigger, { key: " ", code: "Space" })
 
     expect(onChange).not.toHaveBeenCalled()
   })
@@ -1088,13 +958,9 @@ describe("useCombobox", () => {
 
     const trigger = screen.getByTestId("trigger")
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowDown" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowDown" })
 
-    await waitFor(() => {
-      expect(trigger).toHaveAttribute("aria-expanded", "true")
-    })
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
 
     await waitFor(() => {
       expect(trigger).toHaveAttribute("aria-activedescendant")
@@ -1131,9 +997,7 @@ describe("useCombobox", () => {
 
     render(<SelectComponent />)
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("select-btn"))
-    })
+    fireEvent.click(screen.getByTestId("select-btn"))
 
     expect(onChange).toHaveBeenCalledWith("test-value")
   })
@@ -1168,9 +1032,7 @@ describe("useCombobox", () => {
 
     render(<ReadOnlyComponent />)
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("select-btn"))
-    })
+    fireEvent.click(screen.getByTestId("select-btn"))
 
     expect(onChange).not.toHaveBeenCalled()
   })
@@ -1207,9 +1069,7 @@ describe("useCombobox", () => {
 
     render(<NoCloseComponent />)
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("select-btn"))
-    })
+    fireEvent.click(screen.getByTestId("select-btn"))
 
     expect(onChange).toHaveBeenCalledWith("test-value")
   })
@@ -1228,9 +1088,7 @@ describe("useCombobox", () => {
       expect(screen.getByTestId("item-three")).toBeInTheDocument()
     })
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "End" })
-    })
+    fireEvent.keyDown(trigger, { key: "End" })
 
     await waitFor(() => {
       expect(trigger).toHaveAttribute("aria-activedescendant")
@@ -1251,9 +1109,7 @@ describe("useCombobox", () => {
       expect(screen.getByTestId("item-one")).toBeInTheDocument()
     })
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "Home" })
-    })
+    fireEvent.keyDown(trigger, { key: "Home" })
 
     await waitFor(() => {
       expect(trigger).toHaveAttribute("aria-activedescendant")
@@ -1277,17 +1133,13 @@ describe("useCombobox", () => {
       expect(screen.getByTestId("item-one")).toBeInTheDocument()
     })
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowDown" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowDown" })
 
     await waitFor(() => {
       expect(trigger).toHaveAttribute("aria-activedescendant")
     })
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "Enter" })
-    })
+    fireEvent.keyDown(trigger, { key: "Enter" })
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith("one")
@@ -1311,17 +1163,13 @@ describe("useCombobox", () => {
       expect(screen.getByTestId("item-one")).toBeInTheDocument()
     })
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: "ArrowDown" })
-    })
+    fireEvent.keyDown(trigger, { key: "ArrowDown" })
 
     await waitFor(() => {
       expect(trigger).toHaveAttribute("aria-activedescendant")
     })
 
-    act(() => {
-      fireEvent.keyDown(trigger, { key: " ", code: "Space" })
-    })
+    fireEvent.keyDown(trigger, { key: " ", code: "Space" })
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith("one")

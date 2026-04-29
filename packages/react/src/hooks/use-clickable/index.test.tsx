@@ -1,7 +1,7 @@
 import type { FC } from "react"
 import type { UseClickableProps } from "./"
 import { vi } from "vitest"
-import { act, fireEvent, render } from "#test"
+import { fireEvent, render } from "#test"
 import { useClickable } from "./"
 
 const setup = (props: UseClickableProps = {}) => {
@@ -25,10 +25,8 @@ describe("useClickable", () => {
   test("calls onKeyDown when key is pressed", () => {
     const onKeyDown = vi.fn()
     const { button } = setup({ onKeyDown })
-    act(() => {
-      fireEvent.focus(button)
-      fireEvent.keyDown(button, { key: "ArrowDown" })
-    })
+    fireEvent.focus(button)
+    fireEvent.keyDown(button, { key: "ArrowDown" })
     expect(onKeyDown.mock.calls[0]?.[0]).toMatchObject({
       key: "ArrowDown",
       type: "keydown",
@@ -38,10 +36,8 @@ describe("useClickable", () => {
   test("calls onKeyUp when key is released", () => {
     const onKeyUp = vi.fn()
     const { button } = setup({ onKeyUp })
-    act(() => {
-      fireEvent.focus(button)
-      fireEvent.keyUp(button, { key: "ArrowUp" })
-    })
+    fireEvent.focus(button)
+    fireEvent.keyUp(button, { key: "ArrowUp" })
     expect(onKeyUp.mock.calls[0]?.[0]).toMatchObject({
       key: "ArrowUp",
       type: "keyup",
@@ -51,9 +47,7 @@ describe("useClickable", () => {
   test("calls onClick when element is clicked", () => {
     const onClick = vi.fn()
     const { button } = setup({ onClick })
-    act(() => {
-      fireEvent.click(button)
-    })
+    fireEvent.click(button)
     expect(onClick.mock.calls[0]?.[0]).toBeDefined()
   })
 
@@ -61,10 +55,8 @@ describe("useClickable", () => {
     const onMouseDown = vi.fn()
     const onMouseUp = vi.fn()
     const { button } = setup({ onMouseDown, onMouseUp })
-    act(() => {
-      fireEvent.mouseDown(button)
-      fireEvent.mouseUp(button)
-    })
+    fireEvent.mouseDown(button)
+    fireEvent.mouseUp(button)
     expect(onMouseDown.mock.calls[0]?.[0]).toBeDefined()
     expect(onMouseUp.mock.calls[0]?.[0]).toBeDefined()
   })
@@ -72,9 +64,7 @@ describe("useClickable", () => {
   test("does not call onMouseDown when disabled", () => {
     const onMouseDown = vi.fn()
     const { button } = setup({ disabled: true, onMouseDown })
-    act(() => {
-      fireEvent.mouseDown(button)
-    })
+    fireEvent.mouseDown(button)
     expect(onMouseDown).not.toHaveBeenCalled()
   })
 
@@ -82,10 +72,8 @@ describe("useClickable", () => {
     const onKeyDown = vi.fn()
     const onKeyUp = vi.fn()
     const { button } = setup({ onKeyDown, onKeyUp })
-    act(() => {
-      fireEvent.keyDown(button, { key: "Enter" })
-      fireEvent.keyUp(button)
-    })
+    fireEvent.keyDown(button, { key: "Enter" })
+    fireEvent.keyUp(button)
     expect(onKeyDown.mock.calls[0]?.[0]).toBeDefined()
     expect(onKeyUp.mock.calls[0]?.[0]).toBeDefined()
   })
@@ -94,10 +82,8 @@ describe("useClickable", () => {
     const onKeyDown = vi.fn()
     const onKeyUp = vi.fn()
     const { button } = setup({ onKeyDown, onKeyUp })
-    act(() => {
-      fireEvent.keyDown(button, { key: " " })
-      fireEvent.keyUp(button, { key: " " })
-    })
+    fireEvent.keyDown(button, { key: " " })
+    fireEvent.keyUp(button, { key: " " })
     expect(onKeyDown.mock.calls[0]?.[0]).toBeDefined()
     expect(onKeyUp.mock.calls[0]?.[0]).toBeDefined()
   })
@@ -106,10 +92,8 @@ describe("useClickable", () => {
     const onKeyDown = vi.fn()
     const onMouseLeave = vi.fn()
     const { button } = setup({ onKeyDown, onMouseLeave })
-    act(() => {
-      fireEvent.keyDown(button, { key: " " })
-      fireEvent.mouseLeave(button)
-    })
+    fireEvent.keyDown(button, { key: " " })
+    fireEvent.mouseLeave(button)
     expect(onKeyDown.mock.calls[0]?.[0]).toBeDefined()
     expect(onMouseLeave.mock.calls[0]?.[0]).toBeDefined()
   })
@@ -118,10 +102,8 @@ describe("useClickable", () => {
     const onMouseOver = vi.fn()
     const onMouseLeave = vi.fn()
     const { button } = setup({ onMouseLeave, onMouseOver })
-    act(() => {
-      fireEvent.mouseOver(button)
-      fireEvent.mouseLeave(button)
-    })
+    fireEvent.mouseOver(button)
+    fireEvent.mouseLeave(button)
     expect(onMouseOver.mock.calls[0]?.[0]).toBeDefined()
     expect(onMouseLeave.mock.calls[0]?.[0]).toBeDefined()
   })
@@ -129,27 +111,21 @@ describe("useClickable", () => {
   test("does not call onMouseOver when disabled", () => {
     const onMouseOver = vi.fn()
     const { button } = setup({ disabled: true, onMouseOver })
-    act(() => {
-      fireEvent.mouseOver(button)
-    })
+    fireEvent.mouseOver(button)
     expect(onMouseOver).not.toHaveBeenCalled()
   })
 
   test("does not call onClick when disabled", () => {
     const onClick = vi.fn()
     const { button } = setup({ disabled: true, onClick })
-    act(() => {
-      fireEvent.click(button)
-    })
+    fireEvent.click(button)
     expect(onClick).not.toHaveBeenCalled()
   })
 
   test("does not call onClick when disabled but isFocusable", () => {
     const onClick = vi.fn()
     const { button } = setup({ disabled: true, focusable: true, onClick })
-    act(() => {
-      fireEvent.click(button)
-    })
+    fireEvent.click(button)
     expect(onClick).not.toHaveBeenCalled()
     expect(button).toHaveAttribute("aria-disabled", "true")
   })
@@ -159,9 +135,7 @@ describe("useClickable", () => {
     const onKeyUp = vi.fn()
     const { user } = setup({ onKeyDown, onKeyUp })
 
-    act(() => {
-      user.keyboard("{space>}{/space}")
-    })
+    user.keyboard("{space>}{/space}")
 
     expect(onKeyDown).toBeDefined()
     expect(onKeyUp).toBeDefined()
@@ -170,13 +144,9 @@ describe("useClickable", () => {
   test("handleMouseLeave triggers preventDefault and setIsPressed", () => {
     const onMouseLeave = vi.fn()
     const { button } = setup({ clickOnSpace: true, onMouseLeave })
-    act(() => {
-      fireEvent.mouseDown(button)
-    })
+    fireEvent.mouseDown(button)
 
-    act(() => {
-      fireEvent.mouseLeave(button)
-    })
+    fireEvent.mouseLeave(button)
 
     expect(onMouseLeave.mock.calls[0]?.[0]).toBeDefined()
   })

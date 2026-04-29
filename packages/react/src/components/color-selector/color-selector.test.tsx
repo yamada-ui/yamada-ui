@@ -494,9 +494,7 @@ describe("<ColorSelector />", () => {
 
     eyeDropper.click()
 
-    await vi.waitFor(() => {
-      expect(openEyeDropper).not.toHaveBeenCalled()
-    })
+    expect(openEyeDropper).not.toHaveBeenCalled()
   })
 
   test("eye dropper does not trigger when readOnly", async () => {
@@ -514,9 +512,7 @@ describe("<ColorSelector />", () => {
 
     eyeDropper.click()
 
-    await vi.waitFor(() => {
-      expect(openEyeDropper).not.toHaveBeenCalled()
-    })
+    expect(openEyeDropper).not.toHaveBeenCalled()
   })
 
   test("eye dropper handles null result gracefully", async () => {
@@ -980,8 +976,6 @@ describe("<ColorSelector />", () => {
 
     keyDown(getTestElement("eye-dropper"), { key: "Enter" })
 
-    await vi.waitFor(() => {
-      expect(openEyeDropper).not.toHaveBeenCalled()
-    })
+    expect(openEyeDropper).not.toHaveBeenCalled()
   })
 })

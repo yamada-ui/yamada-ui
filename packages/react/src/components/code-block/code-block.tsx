@@ -9,7 +9,7 @@ import type { UseCodeBlockProps, UseCodeBlockReturn } from "./use-code-block"
 import { useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { useClipboard } from "../../hooks/use-clipboard"
-import { dataAttr, handlerAll, isString } from "../../utils"
+import { dataAttr, handlerAll } from "../../utils"
 import { Button, IconButton } from "../button"
 import { Collapse } from "../collapse"
 import {
@@ -314,91 +314,7 @@ export const CodeBlockCode = withContext<"pre", CodeBlockCodeProps>(
         focusVisibleRing="inside"
         tabIndex={tabIndex}
         {...rest}
-        css={[
-          {
-            "& code": {
-              bg: "transparent",
-              border: "none",
-              color: "inherit",
-              display: "block",
-              fontSize: "inherit",
-              lineHeight: "inherit",
-              minH: "inherit",
-              p: "0",
-              rounded: "inherit",
-            },
-            "& code .diff, & code .highlighted": {
-              display: "block",
-              mx: "-4",
-              position: "relative",
-              px: "4",
-            },
-            "& code .diff.add": {
-              bg: ["green.400/15", "green.500/15"],
-            },
-            "& code .diff.remove": {
-              bg: ["red.400/15", "red.500/15"],
-            },
-            "& code .highlighted": {
-              bg: ["black.400/15", "white.500/15"],
-            },
-            "& code .highlighted-word": {
-              bg: ["black.muted", "white.subtle"],
-              borderColor: ["black.emphasized", "white.muted"],
-              borderWidth: "1px",
-              m: "-1px -2px",
-              p: "1px 2px",
-              rounded: "l1",
-            },
-            "& code .line": {
-              display: "block",
-              minH: "1lh",
-              position: "relative",
-            },
-            "& code .line:empty::before": {
-              content: '" "',
-            },
-            "& span": {
-              _dark: {
-                color: "{shiki-dark}!",
-              },
-            },
-          },
-          ...(lineNumbers
-            ? [
-                {
-                  "& code": {
-                    counterReset: "line",
-                  },
-                  "& code .line": {
-                    counterIncrement: "line",
-                    ps: "10",
-                  },
-                  "& code .line.diff, & code .line.highlighted": {
-                    mx: "-4",
-                    ps: "14",
-                  },
-                  "& code .line.diff::before, & code .line.highlighted::before":
-                    {
-                      left: "4",
-                    },
-                  "& code .line::before": {
-                    color: "fg.subtle",
-                    content: "counter(line)",
-                    left: "0",
-                    position: "absolute",
-                    textAlign: "end",
-                    userSelect: "none",
-                    w: "7",
-                  },
-                  "& code .line:empty::before": {
-                    content: "counter(line)",
-                  },
-                },
-              ]
-            : []),
-          ...(isString(css) || !css ? [] : Array.isArray(css) ? css : [css]),
-        ]}
+        css={css}
       >
         {html ? (
           <styled.code dangerouslySetInnerHTML={{ __html: html }} />

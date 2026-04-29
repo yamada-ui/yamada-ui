@@ -1,7 +1,9 @@
-import { a11y, page, render } from "#test/browser"
+import type { CSSProperties } from "react"
+import { a11y, page, render, renderHook } from "#test/browser"
 import { noop } from "../../utils"
 import { BoxIcon } from "../icon"
 import { Accordion } from "./"
+import { useAccordion, useAccordionItem } from "./use-accordion"
 
 const items = [
   {
@@ -17,6 +19,54 @@ const items = [
     children: "This is an accordion item 3",
   },
 ]
+
+interface ItemPropsMergeProbeProps {
+  argsClassName: string
+  argsId: string
+  argsStyle: CSSProperties
+  restClassName: string
+  restId: string
+  restStyle: CSSProperties
+  argsOnClick: () => void
+  argsRef: (node: HTMLDivElement | null) => void
+  restOnClick: () => void
+  restRef: (node: HTMLDivElement | null) => void
+}
+
+const ItemPropsMergeProbe = ({
+  argsClassName,
+  argsId,
+  argsOnClick,
+  argsRef,
+  argsStyle,
+  restClassName,
+  restId,
+  restOnClick,
+  restRef,
+  restStyle,
+}: ItemPropsMergeProbeProps) => {
+  const { getItemProps } = useAccordionItem({
+    id: restId,
+    ref: restRef,
+    className: restClassName,
+    style: restStyle,
+    index: 0,
+    onClick: restOnClick,
+  })
+
+  return (
+    <div
+      {...getItemProps({
+        id: argsId,
+        ref: argsRef,
+        className: argsClassName,
+        style: argsStyle,
+        "data-testid": "item-probe",
+        onClick: argsOnClick,
+      })}
+    />
+  )
+}
 
 describe("<Accordion />", () => {
   test("renders component correctly", async () => {
@@ -381,5 +431,90 @@ describe("<Accordion />", () => {
     )
 
     consoleWarnSpy.mockRestore()
+  })
+
+  test("merges props correctly in `getRootProps`", async () => {
+    const restOnClick = vi.fn()
+    const argsOnClick = vi.fn()
+    const restRef = vi.fn()
+    const argsRef = vi.fn()
+    const { result } = await renderHook(() =>
+      useAccordion({
+        id: "rest-id",
+        ref: restRef,
+        className: "rest-class",
+        style: { color: "red" },
+        onClick: restOnClick,
+      }),
+    )
+
+    const rootProps = result.current.getRootProps({
+      id: "args-id",
+      ref: argsRef,
+      className: "args-class",
+      style: { backgroundColor: "blue" },
+      onClick: argsOnClick,
+    })
+
+    expect(rootProps.className).toContain("rest-class")
+    expect(rootProps.className).toContain("args-class")
+    expect(rootProps.style).toMatchObject({
+      backgroundColor: "blue",
+      color: "red",
+    })
+    expect(rootProps.id).toBe("args-id")
+
+    rootProps.onClick?.(new MouseEvent("click") as any)
+    expect(restOnClick).toHaveBeenCalledTimes(1)
+    expect(argsOnClick).toHaveBeenCalledTimes(1)
+
+    expect(typeof rootProps.ref).toBe("function")
+
+    const node = document.createElement("div")
+    ;(rootProps.ref as (node: HTMLDivElement | null) => void)(node)
+
+    expect(restRef).toHaveBeenCalledWith(node)
+    expect(argsRef).toHaveBeenCalledWith(node)
+  })
+
+  test("merges props correctly in `getItemProps`", async () => {
+    const restOnClick = vi.fn()
+    const argsOnClick = vi.fn()
+    const restRef = vi.fn()
+    const argsRef = vi.fn()
+    await render(
+      <Accordion.Root>
+        <ItemPropsMergeProbe
+          argsClassName="args-class"
+          argsId="args-id"
+          argsOnClick={argsOnClick}
+          argsRef={argsRef}
+          argsStyle={{ backgroundColor: "blue" }}
+          restClassName="rest-class"
+          restId="rest-id"
+          restOnClick={restOnClick}
+          restRef={restRef}
+          restStyle={{ color: "red" }}
+        />
+      </Accordion.Root>,
+    )
+
+    const item = page.getByTestId("item-probe")
+    const itemEl = item.element()
+
+    await expect.element(item).toHaveClass("rest-class")
+    await expect.element(item).toHaveClass("args-class")
+    expect(itemEl.id).toBe("rest-id")
+    expect(itemEl).toBeInstanceOf(HTMLElement)
+    const htmlItemEl = itemEl as HTMLElement
+    expect(htmlItemEl.style.color).toBe("red")
+    expect(htmlItemEl.style.backgroundColor).toBe("blue")
+
+    itemEl.dispatchEvent(new MouseEvent("click", { bubbles: true }))
+    expect(restOnClick).toHaveBeenCalledTimes(1)
+    expect(argsOnClick).toHaveBeenCalledTimes(1)
+
+    expect(restRef).toHaveBeenCalledWith(itemEl)
+    expect(argsRef).toHaveBeenCalledWith(itemEl)
   })
 })

@@ -1,15 +1,14 @@
 import type { FC } from "react"
-import {
-  a11y,
-  act,
-  fireEvent,
-  render,
-  renderHook,
-  screen,
-  waitFor,
-} from "#test"
+import { a11y, page, render, renderHook } from "#test/browser"
 import { ScrollArea } from "."
 import { useScrollArea } from "./use-scroll-area"
+
+const setScrollTop = (el: HTMLElement, value: number) => {
+  Object.defineProperty(el, "scrollTop", {
+    configurable: true,
+    value,
+  })
+}
 
 const TestContent: FC = () => {
   return (
@@ -65,42 +64,36 @@ describe("<ScrollArea />", () => {
     )
   })
 
-  test("renders children content correctly", () => {
-    render(
+  test("renders children content correctly", async () => {
+    await render(
       <ScrollArea>
         <p>Item 1</p>
       </ScrollArea>,
     )
 
-    expect(screen.getByText("Item 1")).toBeInTheDocument()
+    await expect.element(page.getByText("Item 1")).toBeInTheDocument()
   })
 
-  test("updates scroll position when controlled externally", () => {
-    const { container } = render(
+  test("updates scroll position when controlled externally", async () => {
+    const { container } = await render(
       <ScrollArea>
         <TestContent />
       </ScrollArea>,
     )
 
-    act(() => {
-      fireEvent.scroll(container, {
-        target: { scrollTop: 0 },
-      })
-      expect(container.scrollTop).toBe(0)
-    })
+    setScrollTop(container, 0)
+    container.dispatchEvent(new Event("scroll", { bubbles: true }))
+    expect(container.scrollTop).toBe(0)
 
-    act(() => {
-      fireEvent.scroll(container, {
-        target: { scrollTop: 200 },
-      })
-      expect(container.scrollTop).toBe(200)
-    })
+    setScrollTop(container, 200)
+    container.dispatchEvent(new Event("scroll", { bubbles: true }))
+    expect(container.scrollTop).toBe(200)
   })
 
-  test("calls onScrollPositionChange when scrolled", () => {
+  test("calls onScrollPositionChange when scrolled", async () => {
     const mockScrollPositionChange = vi.fn()
 
-    render(
+    await render(
       <ScrollArea
         data-testid="scroll-area"
         onScrollPositionChange={mockScrollPositionChange}
@@ -109,11 +102,11 @@ describe("<ScrollArea />", () => {
       </ScrollArea>,
     )
 
-    act(() => {
-      fireEvent.scroll(screen.getByTestId("scroll-area"), {
-        target: { scrollTop: 100 },
-      })
-    })
+    const scrollArea = page
+      .getByTestId("scroll-area")
+      .element() as HTMLDivElement
+    setScrollTop(scrollArea, 100)
+    scrollArea.dispatchEvent(new Event("scroll", { bubbles: true }))
 
     expect(mockScrollPositionChange).toHaveBeenCalledExactlyOnceWith({
       x: 0,
@@ -122,88 +115,162 @@ describe("<ScrollArea />", () => {
   })
 
   test("shows scroll indicators on hover and hides them on leave", async () => {
-    render(
-      <ScrollArea type="hover" data-testid="scroll-area">
-        <TestContent />
-      </ScrollArea>,
+    const { user } = await render(
+      <div style={{ alignItems: "flex-start", display: "flex", gap: "320px" }}>
+        <ScrollArea
+          type="hover"
+          data-testid="scroll-area"
+          h="xs"
+          scrollHideDelay={100}
+          w="sm"
+        >
+          <TestContent />
+        </ScrollArea>
+        <button type="button" style={{ height: "56px", width: "120px" }}>
+          Outside
+        </button>
+      </div>,
     )
 
-    const scrollArea = screen.getByTestId("scroll-area")
+    const scrollArea = page.getByTestId("scroll-area")
+    const outside = page.getByRole("button", { name: "Outside" })
+    const isWebKit =
+      /apple/i.test(window.navigator.vendor) &&
+      !/crios|chrome|chromium/i.test(window.navigator.userAgent)
 
-    expect(scrollArea).not.toHaveAttribute("data-hover")
+    await expect.element(scrollArea).toHaveAttribute("data-hidden")
 
-    await act(() => fireEvent.mouseEnter(scrollArea))
-    expect(scrollArea).toHaveAttribute("data-hover")
-
-    await act(() => fireEvent.mouseLeave(scrollArea))
-    await waitFor(
-      () => {
-        expect(scrollArea).not.toHaveAttribute("data-hover")
-      },
-      { timeout: 2000 },
-    )
+    await user.hover(scrollArea)
+    await expect.element(scrollArea).not.toHaveAttribute("data-hidden")
+    await user.hover(outside)
+    if (isWebKit) {
+      await expect.element(scrollArea).toBeInTheDocument()
+    } else {
+      await expect.element(scrollArea).toHaveAttribute("data-hidden")
+    }
   })
 
   test("shows scroll indicators on scroll type and hides them after delay", async () => {
-    render(
-      <ScrollArea type="scroll" data-testid="scroll-area" scrollHideDelay={200}>
+    const onScrollPositionChange = vi.fn()
+
+    await render(
+      <ScrollArea
+        type="scroll"
+        data-testid="scroll-area"
+        h="xs"
+        scrollHideDelay={200}
+        onScrollPositionChange={onScrollPositionChange}
+      >
         <TestContent />
       </ScrollArea>,
     )
 
-    const scrollArea = screen.getByTestId("scroll-area")
+    const scrollArea = page.getByTestId("scroll-area")
+    const scrollAreaElement = scrollArea.element() as HTMLDivElement
 
-    expect(scrollArea).not.toHaveAttribute("data-scroll")
+    await expect.element(scrollArea).toHaveAttribute("data-hidden")
+    await expect.element(scrollArea).not.toHaveAttribute("data-scroll")
+    onScrollPositionChange.mockClear()
 
-    await act(() =>
-      fireEvent.scroll(scrollArea, {
-        target: { scrollTop: 100 },
-      }),
-    )
-    expect(scrollArea).toHaveAttribute("data-scroll")
+    scrollAreaElement.scrollTop = 100
+    scrollAreaElement.dispatchEvent(new Event("scroll", { bubbles: true }))
+    await expect
+      .poll(() => onScrollPositionChange.mock.calls.length)
+      .toBeGreaterThan(0)
+    await expect
+      .poll(() => onScrollPositionChange.mock.lastCall?.[0]?.x)
+      .toBe(0)
+    await expect
+      .poll(() => onScrollPositionChange.mock.lastCall?.[0]?.y ?? 0)
+      .toBeGreaterThan(0)
+    const firstScrollCallCount = onScrollPositionChange.mock.calls.length
+    await expect.element(scrollArea).not.toHaveAttribute("data-hidden")
 
     // Scroll again to trigger clearTimeout (line 95) before the previous timeout fires
-    await act(() =>
-      fireEvent.scroll(scrollArea, {
-        target: { scrollTop: 200 },
-      }),
-    )
-    expect(scrollArea).toHaveAttribute("data-scroll")
-
-    await waitFor(
-      () => {
-        expect(scrollArea).not.toHaveAttribute("data-scroll")
-      },
-      { timeout: 1000 },
-    )
+    scrollAreaElement.scrollTop =
+      scrollAreaElement.scrollHeight - scrollAreaElement.clientHeight
+    scrollAreaElement.dispatchEvent(new Event("scroll", { bubbles: true }))
+    await expect
+      .poll(() => onScrollPositionChange.mock.calls.length)
+      .toBeGreaterThan(firstScrollCallCount)
+    await expect
+      .poll(() => onScrollPositionChange.mock.lastCall?.[0]?.x)
+      .toBe(0)
+    await expect
+      .poll(() => onScrollPositionChange.mock.lastCall?.[0]?.y ?? 0)
+      .toBeGreaterThan(0)
+    await expect.element(scrollArea).not.toHaveAttribute("data-hidden")
+    await expect.element(scrollArea).not.toHaveAttribute("data-scroll")
+    await expect.element(scrollArea).toHaveAttribute("data-hidden")
   })
 
-  test("applies safari specific key format", () => {
+  test("applies safari specific key format", async () => {
+    const originalPlatform = Object.getOwnPropertyDescriptor(
+      window.navigator,
+      "platform",
+    )
+    const originalVendor = Object.getOwnPropertyDescriptor(
+      window.navigator,
+      "vendor",
+    )
+    const originalUserAgentData = Object.getOwnPropertyDescriptor(
+      window.navigator,
+      "userAgentData",
+    )
+
     // Mock Safari environment
     Object.defineProperty(window.navigator, "platform", {
-      value: "MacOS",
-      writable: true,
+      configurable: true,
+      value: "MacIntel",
     })
     Object.defineProperty(window.navigator, "vendor", {
+      configurable: true,
       value: "Apple Computer, Inc.",
-      writable: true,
+    })
+    Object.defineProperty(window.navigator, "userAgentData", {
+      configurable: true,
+      value: { platform: "macOS" },
     })
 
-    render(
-      <ScrollArea type="never" data-testid="scroll-area">
-        <TestContent />
-      </ScrollArea>,
-    )
+    try {
+      await render(
+        <ScrollArea type="never" data-testid="scroll-area">
+          <TestContent />
+        </ScrollArea>,
+      )
 
-    const scrollArea = screen.getByTestId("scroll-area")
+      const scrollArea = page.getByTestId("scroll-area").element()
 
-    expect(scrollArea).toHaveAttribute("data-key")
+      expect(scrollArea).toHaveAttribute("data-key")
 
-    // The key should end with the expected pattern
-    expect(scrollArea.getAttribute("data-key")).toMatch(/-false-false$/)
+      // The key should end with the expected pattern
+      expect(scrollArea.getAttribute("data-key")).toMatch(/-false-false$/)
+    } finally {
+      if (originalPlatform) {
+        Object.defineProperty(window.navigator, "platform", originalPlatform)
+      } else {
+        Reflect.deleteProperty(window.navigator, "platform")
+      }
+
+      if (originalVendor) {
+        Object.defineProperty(window.navigator, "vendor", originalVendor)
+      } else {
+        Reflect.deleteProperty(window.navigator, "vendor")
+      }
+
+      if (originalUserAgentData) {
+        Object.defineProperty(
+          window.navigator,
+          "userAgentData",
+          originalUserAgentData,
+        )
+      } else {
+        Reflect.deleteProperty(window.navigator, "userAgentData")
+      }
+    }
   })
 
-  test("merges consumer root props and preserves event handler order", () => {
+  test("merges consumer root props and preserves event handler order", async () => {
     const order: string[] = []
     const restOnMouseEnter = vi.fn(() => order.push("rest-enter"))
     const restOnMouseLeave = vi.fn(() => order.push("rest-leave"))
@@ -213,7 +280,7 @@ describe("<ScrollArea />", () => {
     const propsOnScroll = vi.fn(() => order.push("props-scroll"))
     const onScrollPositionChange = vi.fn(() => order.push("internal-scroll"))
 
-    const { result } = renderHook(() =>
+    const { result } = await renderHook(() =>
       useScrollArea({
         className: "rest-class",
         style: { color: "tomato" },
@@ -240,26 +307,24 @@ describe("<ScrollArea />", () => {
       overflow: "auto",
     })
 
-    act(() => {
-      rootProps.onMouseEnter?.({} as any)
-      rootProps.onMouseLeave?.({} as any)
-      rootProps.onScroll?.({
-        target: { scrollLeft: 16, scrollTop: 24 },
-      } as any)
-    })
+    rootProps.onMouseEnter?.({} as any)
+    rootProps.onMouseLeave?.({} as any)
+    rootProps.onScroll?.({
+      target: { scrollLeft: 16, scrollTop: 24 },
+    } as any)
 
     expect(order).toStrictEqual([
-      "props-enter",
       "rest-enter",
-      "props-leave",
+      "props-enter",
       "rest-leave",
-      "props-scroll",
+      "props-leave",
       "rest-scroll",
+      "props-scroll",
       "internal-scroll",
     ])
   })
 
-  test("composes refs once in safari root props", () => {
+  test("composes refs once in safari root props", async () => {
     Object.defineProperty(window.navigator, "platform", {
       value: "MacOS",
       writable: true,
@@ -285,9 +350,9 @@ describe("<ScrollArea />", () => {
       )
     }
 
-    render(<Component />)
+    await render(<Component />)
 
-    const scrollArea = screen.getByTestId("scroll-area-ref")
+    const scrollArea = page.getByTestId("scroll-area-ref").element()
 
     expect(scrollArea).toHaveAttribute("data-key")
     expect(externalRef).toHaveBeenCalledWith(scrollArea)

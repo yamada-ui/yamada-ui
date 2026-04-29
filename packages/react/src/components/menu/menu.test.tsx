@@ -1,8 +1,11 @@
+import type { ReactNode } from "react"
+import type { UseMenuGroupProps, UseMenuItemProps } from "./use-menu"
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import { useState } from "react"
 import { a11y, render } from "#test/browser"
 import { Button } from "../button"
 import { Menu } from "./"
+import { useMenuGroup, useMenuItem } from "./use-menu"
 
 const items: Menu.Item[] = [
   { label: "Menu 1", value: "menu-1" },
@@ -41,6 +44,38 @@ const itemsWithCheckboxGroup: Menu.Item[] = [
     ],
   },
 ]
+
+interface TestMenuGroupProps extends UseMenuGroupProps {
+  children?: ReactNode
+  getGroupProps?: Parameters<
+    ReturnType<typeof useMenuGroup>["getGroupProps"]
+  >[0]
+}
+
+const TestMenuGroup = ({
+  children,
+  getGroupProps,
+  ...props
+}: TestMenuGroupProps) => {
+  const { getGroupProps: getProps } = useMenuGroup(props)
+
+  return <div {...getProps(getGroupProps)}>{children}</div>
+}
+
+interface TestMenuItemProps extends UseMenuItemProps {
+  children?: ReactNode
+  getItemProps?: Parameters<ReturnType<typeof useMenuItem>["getItemProps"]>[0]
+}
+
+const TestMenuItem = ({
+  children,
+  getItemProps,
+  ...props
+}: TestMenuItemProps) => {
+  const { getItemProps: getProps } = useMenuItem(props)
+
+  return <div {...getProps(getItemProps)}>{children}</div>
+}
 
 describe("<Menu />", () => {
   test("renders component correctly", async () => {
@@ -118,6 +153,193 @@ describe("<Menu />", () => {
     expect(
       screen.getByRole("menuitemcheckbox", { name: /Option 1/i }),
     ).toHaveClass("ui-menu__item--option")
+  })
+
+  test("merges consumer props in Menu.Item", async () => {
+    const onMouseDown = vi.fn()
+    const ref = vi.fn()
+
+    await render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.Item
+            ref={ref}
+            className="consumer-item"
+            style={{ color: "red" }}
+            value="item-1"
+            onMouseDown={onMouseDown}
+          >
+            Item 1
+          </Menu.Item>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    const item = screen.getByRole("menuitem", { name: /Item 1/i })
+    fireEvent.mouseDown(item)
+
+    expect(item).toHaveClass("ui-menu__item")
+    expect(item).toHaveClass("consumer-item")
+    expect(item).toHaveStyle({ color: "red" })
+    expect(onMouseDown).toHaveBeenCalledTimes(1)
+    expect(ref).toHaveBeenCalledWith(item)
+  })
+
+  test("merges consumer props in Menu.Group", async () => {
+    const onMouseDown = vi.fn()
+    const ref = vi.fn()
+
+    await render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.Group
+            ref={ref}
+            className="consumer-group"
+            style={{ color: "red" }}
+            label="Group Label"
+            onMouseDown={onMouseDown}
+          >
+            <Menu.Item value="item-1">Item 1</Menu.Item>
+          </Menu.Group>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    const group = screen.getByRole("group")
+    fireEvent.mouseDown(group)
+
+    expect(group).toHaveClass("ui-menu__group")
+    expect(group).toHaveClass("consumer-group")
+    expect(group).toHaveStyle({ color: "red" })
+    expect(onMouseDown).toHaveBeenCalledTimes(1)
+    expect(ref).toHaveBeenCalledWith(group)
+  })
+
+  test("merges getter and consumer props in useMenuGroup", async () => {
+    const consumerRef = vi.fn()
+    const getterRef = vi.fn()
+    const calls: string[] = []
+    const consumerMouseDown = vi.fn(() => calls.push("consumer"))
+    const getterMouseDown = vi.fn(() => calls.push("getter"))
+
+    await render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <TestMenuGroup
+            ref={consumerRef}
+            className="consumer-group"
+            style={{ color: "red" }}
+            getGroupProps={{
+              ref: getterRef,
+              className: "getter-group",
+              style: { backgroundColor: "blue" },
+              onMouseDown: getterMouseDown,
+            }}
+            onMouseDown={consumerMouseDown}
+          >
+            <Menu.Item value="item-1">Item 1</Menu.Item>
+          </TestMenuGroup>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    const group = screen.getByRole("group")
+    fireEvent.mouseDown(group)
+
+    expect(group).toHaveClass("consumer-group")
+    expect(group).toHaveClass("getter-group")
+    expect(group).toHaveStyle({ backgroundColor: "blue", color: "red" })
+    expect(calls).toStrictEqual(["consumer", "getter"])
+    expect(consumerRef).toHaveBeenCalledTimes(1)
+    expect(getterRef).toHaveBeenCalledTimes(1)
+    expect(consumerRef).toHaveBeenCalledWith(group)
+    expect(getterRef).toHaveBeenCalledWith(group)
+  })
+
+  test("merges getter and consumer props in useMenuItem", async () => {
+    const consumerRef = vi.fn()
+    const getterRef = vi.fn()
+    const calls: string[] = []
+    const consumerMouseDown = vi.fn(() => calls.push("consumer"))
+    const getterMouseDown = vi.fn(() => calls.push("getter"))
+
+    await render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <TestMenuItem
+            ref={consumerRef}
+            className="consumer-item"
+            style={{ color: "red" }}
+            value="item-1"
+            getItemProps={{
+              ref: getterRef,
+              className: "getter-item",
+              style: { backgroundColor: "blue" },
+              onMouseDown: getterMouseDown,
+            }}
+            onMouseDown={consumerMouseDown}
+          >
+            Item 1
+          </TestMenuItem>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    const item = screen.getByRole("menuitem", { name: /Item 1/i })
+    fireEvent.mouseDown(item)
+
+    expect(item).toHaveClass("consumer-item")
+    expect(item).toHaveClass("getter-item")
+    expect(item).toHaveStyle({ backgroundColor: "blue", color: "red" })
+    expect(calls).toStrictEqual(["consumer", "getter"])
+    expect(consumerRef).toHaveBeenCalledTimes(1)
+    expect(getterRef).toHaveBeenCalledTimes(1)
+    expect(consumerRef).toHaveBeenCalledWith(item)
+    expect(getterRef).toHaveBeenCalledWith(item)
+  })
+
+  test("keeps useMenuItem click handler order as getter then consumer then internal", async () => {
+    const calls: string[] = []
+    const onChange = vi.fn(() => calls.push("getter"))
+    const onClick = vi.fn(() => calls.push("consumer"))
+    const onSelect = vi.fn(() => calls.push("internal"))
+    const { user } = await render(
+      <Menu.Root defaultOpen onSelect={onSelect}>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.OptionGroup type="checkbox" onChange={onChange}>
+            <Menu.OptionItem value="opt-1" onClick={onClick}>
+              Opt 1
+            </Menu.OptionItem>
+          </Menu.OptionGroup>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    await user.click(screen.getByRole("menuitemcheckbox", { name: /Opt 1/i }))
+
+    expect(calls).toStrictEqual(["getter", "consumer", "internal"])
+    expect(onChange).toHaveBeenCalledWith(["opt-1"])
+    expect(onSelect).toHaveBeenCalledWith("opt-1")
   })
 
   test("renders HTML tag correctly", async () => {

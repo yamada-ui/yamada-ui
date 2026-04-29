@@ -1,8 +1,7 @@
 import type { DatePickerProps } from "."
-import { a11y, page, render } from "#test/browser"
-import { fireEvent } from "@testing-library/react"
 import { useState } from "react"
 import { vi } from "vitest"
+import { a11y, page, render } from "#test/browser"
 import { DatePicker } from "."
 import { InputPropsContext } from "../input"
 
@@ -22,7 +21,7 @@ describe("<DatePicker />", () => {
   })
 
   test("sets `className` correctly", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultOpen
         placeholder="Choose a option"
@@ -31,22 +30,22 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    expect(page.getByTestId("root").element()).toHaveClass(
-      "ui-date-picker__root",
-    )
-    expect(page.getByTestId("icon").element()).toHaveClass(
-      "ui-date-picker__icon",
-    )
-    expect(page.getByRole("combobox").elements()[0] as HTMLElement).toHaveClass(
-      "ui-date-picker__field",
-    )
+    await expect
+      .element(page.getByTestId("root"))
+      .toHaveClass("ui-date-picker__root")
+    await expect
+      .element(page.getByTestId("icon"))
+      .toHaveClass("ui-date-picker__icon")
+    await expect
+      .element(page.getByRole("combobox").first())
+      .toHaveClass("ui-date-picker__field")
   })
 
   test("merges root props without overwriting user props", async () => {
     const onRootClick = vi.fn()
     const onUserClick = vi.fn()
 
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         className="from-root"
         defaultOpen
@@ -63,12 +62,12 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const el = page.getByTestId("root").element()
-    fireEvent.click(page.getByRole("combobox").elements()[0] as HTMLElement)
+    const el = page.getByTestId("root")
+    await _user.click(page.getByRole("combobox").first())
 
-    expect(el).toHaveClass("from-root", "from-user")
-    expect(el).toHaveStyle({ color: "rgb(255, 0, 0)" })
-    expect(el).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+    await expect.element(el).toHaveClass("from-root", "from-user")
+    await expect.element(el).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    await expect.element(el).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
     expect(onRootClick).toHaveBeenCalledTimes(1)
     expect(onUserClick).toHaveBeenCalledTimes(1)
   })
@@ -77,7 +76,7 @@ describe("<DatePicker />", () => {
     const onRootClick = vi.fn()
     const onUserClick = vi.fn()
 
-    await render(
+    const { user: _user } = await render(
       <InputPropsContext
         value={{
           className: "from-root",
@@ -95,20 +94,20 @@ describe("<DatePicker />", () => {
       </InputPropsContext>,
     )
 
-    const root = page.getByTestId("root").element()
-    const el = page.getByRole("combobox").elements()[0] as HTMLElement
+    const root = page.getByTestId("root")
+    const el = page.getByRole("combobox").first()
 
-    fireEvent.click(el)
+    await _user.click(el)
 
-    expect(root).toHaveClass("from-root", "from-user")
-    expect(el).toHaveStyle({ color: "rgb(255, 0, 0)" })
-    expect(el).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+    await expect.element(root).toHaveClass("from-root", "from-user")
+    await expect.element(el).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    await expect.element(el).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
     expect(onRootClick).toHaveBeenCalledTimes(1)
     expect(onUserClick).toHaveBeenCalledTimes(1)
   })
 
   test("renders HTML tag correctly", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultOpen
         placeholder="Choose a option"
@@ -117,74 +116,88 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    expect(page.getByTestId("root").element().tagName).toBe("DIV")
-    expect(page.getByTestId("icon").element().tagName).toBe("DIV")
-    expect(
-      (page.getByRole("combobox").elements()[0] as HTMLElement).tagName,
-    ).toBe("DIV")
+    await expect
+      .element(page.getByTestId("root"))
+      .toHaveProperty("tagName", "DIV")
+    await expect
+      .element(page.getByTestId("icon"))
+      .toHaveProperty("tagName", "DIV")
+    await expect
+      .element(page.getByRole("combobox").first())
+      .toHaveProperty("tagName", "DIV")
   })
 
   test("renders with defaultValue", async () => {
-    await render(<DatePicker defaultValue={new Date(2024, 0, 15)} />)
+    const { user: _user } = await render(
+      <DatePicker defaultValue={new Date(2024, 0, 15)} />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    expect(input).toHaveValue("January 15, 2024")
+    const input = page.getByRole("textbox").first()
+    await expect.element(input).toHaveValue("January 15, 2024")
   })
 
   test("renders with range mode", async () => {
-    await render(<DatePicker range rootProps={{ "data-testid": "root" }} />)
+    const { user: _user } = await render(
+      <DatePicker range rootProps={{ "data-testid": "root" }} />,
+    )
 
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
-    expect(inputs).toHaveLength(2)
+    const inputs = page.getByRole("textbox")
+    await expect.element(inputs.first()).toBeInTheDocument()
+    await expect.element(inputs.nth(1)).toBeInTheDocument()
+    await expect.element(inputs.nth(2).query()).not.toBeInTheDocument()
   })
 
   test("renders with multiple mode", async () => {
-    await render(<DatePicker multiple placeholder="Select dates" />)
+    const { user: _user } = await render(
+      <DatePicker multiple placeholder="Select dates" />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    expect(input).toBeInTheDocument()
+    const input = page.getByRole("textbox").first()
+    await expect.element(input).toBeInTheDocument()
   })
 
   test("shows clear icon when value exists", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={new Date(2024, 0, 15)}
         iconProps={{ "data-testid": "icon" }}
       />,
     )
 
-    const icon = page.getByTestId("icon").element()
-    expect(icon).toHaveAttribute("role", "button")
+    const icon = page.getByTestId("icon")
+    await expect.element(icon).toHaveAttribute("role", "button")
   })
 
   test("shows calendar icon when no value exists", async () => {
-    await render(<DatePicker clearable iconProps={{ "data-testid": "icon" }} />)
+    const { user: _user } = await render(
+      <DatePicker clearable iconProps={{ "data-testid": "icon" }} />,
+    )
 
-    const icon = page.getByTestId("icon").element()
-    expect(icon).not.toHaveAttribute("role", "button")
+    const icon = page.getByTestId("icon")
+    await expect.element(icon).not.toHaveAttribute("role", "button")
   })
 
   test("clears value when clear icon is clicked", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={new Date(2024, 0, 15)}
         iconProps={{ "data-testid": "icon" }}
       />,
     )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    expect(input).toHaveValue("January 15, 2024")
+    const input = page.getByRole("textbox").first()
+    await expect.element(input).toHaveValue("January 15, 2024")
 
-    const icon = page.getByTestId("icon").element()
-    fireEvent.click(icon)
+    const icon = page.getByTestId("icon")
+    await _user.click(icon)
 
-    await vi.waitFor(() => {
-      expect(input).toHaveValue("")
+    await vi.waitFor(async () => {
+      await expect.element(input).toHaveValue("")
     })
   })
 
   test("clears range value when clear icon is clicked", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={{
           end: new Date(2024, 0, 20),
@@ -195,21 +208,21 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
-    expect(inputs[0]).toHaveValue("January 15, 2024")
-    expect(inputs[1]).toHaveValue("January 20, 2024")
+    const inputs = page.getByRole("textbox")
+    await expect.element(inputs.first()).toHaveValue("January 15, 2024")
+    await expect.element(inputs.nth(1)).toHaveValue("January 20, 2024")
 
-    const icon = page.getByTestId("icon").element()
-    fireEvent.click(icon)
+    const icon = page.getByTestId("icon")
+    await _user.click(icon)
 
-    await vi.waitFor(() => {
-      expect(inputs[0]).toHaveValue("")
-      expect(inputs[1]).toHaveValue("")
+    await vi.waitFor(async () => {
+      await expect.element(inputs.first()).toHaveValue("")
+      await expect.element(inputs.nth(1)).toHaveValue("")
     })
   })
 
   test("shows clear icon for range value with start only", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={{
           end: undefined,
@@ -220,12 +233,12 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const icon = page.getByTestId("icon").element()
-    expect(icon).toHaveAttribute("role", "button")
+    const icon = page.getByTestId("icon")
+    await expect.element(icon).toHaveAttribute("role", "button")
   })
 
   test("shows clear icon for range value with end only", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={{
           end: new Date(2024, 0, 20),
@@ -236,12 +249,12 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const icon = page.getByTestId("icon").element()
-    expect(icon).toHaveAttribute("role", "button")
+    const icon = page.getByTestId("icon")
+    await expect.element(icon).toHaveAttribute("role", "button")
   })
 
   test("renders with clearable=false", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         clearable={false}
         defaultValue={new Date(2024, 0, 15)}
@@ -249,93 +262,111 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const icon = page.getByTestId("icon").element()
-    expect(icon).not.toHaveAttribute("role", "button")
+    const icon = page.getByTestId("icon")
+    await expect.element(icon).not.toHaveAttribute("role", "button")
   })
 
   test("opens on click", async () => {
-    await render(<DatePicker placeholder="Select date" />)
+    const { user: _user } = await render(
+      <DatePicker placeholder="Select date" />,
+    )
 
-    const field = page.getByRole("combobox").elements()[0] as HTMLElement
-    fireEvent.click(field)
+    const field = page.getByRole("combobox").first()
+    await _user.click(field)
 
-    await vi.waitFor(() => {
-      expect(
-        document.querySelector('[role="dialog"]') as HTMLElement,
-      ).toBeInTheDocument()
+    await vi.waitFor(async () => {
+      await expect.element(page.getByRole("dialog")).toBeInTheDocument()
     })
   })
 
   test("opens on input focus when openOnFocus is true", async () => {
-    await render(<DatePicker placeholder="Select date" />)
+    const { user: _user } = await render(
+      <DatePicker placeholder="Select date" />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
 
-    await vi.waitFor(() => {
-      expect(
-        document.querySelector('[role="dialog"]') as HTMLElement,
-      ).toBeInTheDocument()
+    await vi.waitFor(async () => {
+      await expect.element(page.getByRole("dialog")).toBeInTheDocument()
     })
   })
 
   test("does not open on input focus when openOnFocus is false", async () => {
-    await render(<DatePicker openOnFocus={false} placeholder="Select date" />)
+    const { user: _user } = await render(
+      <DatePicker openOnFocus={false} placeholder="Select date" />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
 
-    expect(document.querySelector('[role="dialog"]')).not.toBeInTheDocument()
+    await expect
+      .element(page.getByRole("dialog").query())
+      .not.toBeInTheDocument()
   })
 
   test("handles input change for single date", async () => {
-    await render(<DatePicker placeholder="Select date" />)
+    const { user: _user } = await render(
+      <DatePicker placeholder="Select date" />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
-    fireEvent.change(input, { target: { value: "2024-01-15" } })
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
+    await _user.clear(input)
+    await _user.type(input, "2024-01-15")
 
-    expect(input).toHaveValue("2024-01-15")
+    await expect.element(input).toHaveValue("2024-01-15")
   })
 
   test("handles input change for range date", async () => {
-    await render(<DatePicker placeholder="Select date" range />)
+    const { user: _user } = await render(
+      <DatePicker placeholder="Select date" range />,
+    )
 
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
-    fireEvent.focus(inputs[0]!)
-    fireEvent.change(inputs[0]!, { target: { value: "2024-01-15" } })
+    const inputs = page.getByRole("textbox")
+    await _user.click(inputs.first())
+    await _user.clear(inputs.first())
+    await _user.type(inputs.first(), "2024-01-15")
 
-    expect(inputs[0]).toHaveValue("2024-01-15")
+    await expect.element(inputs.first()).toHaveValue("2024-01-15")
   })
 
   test("handles Enter key on single date input", async () => {
-    await render(<DatePicker defaultOpen placeholder="Select date" />)
+    const { user: _user } = await render(
+      <DatePicker defaultOpen placeholder="Select date" />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
-    fireEvent.change(input, { target: { value: "2024-01-15" } })
-    fireEvent.keyDown(input, { key: "Enter" })
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
+    await _user.clear(input)
+    await _user.type(input, "2024-01-15")
+    await _user.click(input)
+    await _user.keyboard("{Enter}")
 
-    await vi.waitFor(() => {
-      expect(input).toHaveValue("January 15, 2024")
+    await vi.waitFor(async () => {
+      await expect.element(input).toHaveValue("January 15, 2024")
     })
   })
 
   test("handles Enter key on range date start input", async () => {
-    await render(<DatePicker defaultOpen placeholder="Select date" range />)
+    const { user: _user } = await render(
+      <DatePicker defaultOpen placeholder="Select date" range />,
+    )
 
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
-    fireEvent.focus(inputs[0]!)
-    fireEvent.change(inputs[0]!, { target: { value: "2024-01-15" } })
-    fireEvent.keyDown(inputs[0]!, { key: "Enter" })
+    const inputs = page.getByRole("textbox")
+    await _user.click(inputs.first())
+    await _user.clear(inputs.first())
+    await _user.type(inputs.first(), "2024-01-15")
+    await _user.click(inputs.first())
+    await _user.keyboard("{Enter}")
 
-    await vi.waitFor(() => {
-      expect(inputs[0]).toHaveValue("January 15, 2024")
+    await vi.waitFor(async () => {
+      await expect.element(inputs.first()).toHaveValue("January 15, 2024")
     })
   })
 
   test("handles Enter key on range date end input", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultOpen
         defaultValue={{
@@ -347,18 +378,20 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
-    fireEvent.focus(inputs[1]!)
-    fireEvent.change(inputs[1]!, { target: { value: "2024-01-20" } })
-    fireEvent.keyDown(inputs[1]!, { key: "Enter" })
+    const inputs = page.getByRole("textbox")
+    await _user.click(inputs.nth(1))
+    await _user.clear(inputs.nth(1))
+    await _user.type(inputs.nth(1), "2024-01-20")
+    await _user.click(inputs.nth(1))
+    await _user.keyboard("{Enter}")
 
-    await vi.waitFor(() => {
-      expect(inputs[1]).toHaveValue("January 20, 2024")
+    await vi.waitFor(async () => {
+      await expect.element(inputs.nth(1)).toHaveValue("January 20, 2024")
     })
   })
 
   test("handles Backspace key on multiple date input", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultOpen
         defaultValue={[new Date(2024, 0, 15), new Date(2024, 0, 16)]}
@@ -367,18 +400,23 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
-    fireEvent.keyDown(input, { key: "Backspace" })
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
+    await _user.click(input)
+    await _user.keyboard("{Backspace}")
 
-    await vi.waitFor(() => {
-      const tags = page.getByText(/January 1[56], 2024/).elements()
-      expect(tags).toHaveLength(1)
+    await vi.waitFor(async () => {
+      await expect
+        .element(page.getByText("January 15, 2024"))
+        .toBeInTheDocument()
+      await expect
+        .element(page.getByText("January 16, 2024").query())
+        .not.toBeInTheDocument()
     })
   })
 
   test("handles Backspace key on range date end input", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultOpen
         defaultValue={{
@@ -390,36 +428,41 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
-    fireEvent.focus(inputs[1]!)
+    const inputs = page.getByRole("textbox")
+    await _user.click(inputs.nth(1))
 
     // Clear the end input value first
-    fireEvent.change(inputs[1]!, { target: { value: "" } })
-    fireEvent.keyDown(inputs[1]!, { key: "Backspace" })
+    await _user.clear(inputs.nth(1))
+    await _user.type(inputs.nth(1), "")
+    await _user.click(inputs.nth(1))
+    await _user.keyboard("{Backspace}")
 
     // After backspace on empty end input, should clear both and focus start
-    await vi.waitFor(() => {
-      expect(inputs[0]).toHaveValue("")
-      expect(inputs[1]).toHaveValue("")
+    await vi.waitFor(async () => {
+      await expect.element(inputs.first()).toHaveValue("")
+      await expect.element(inputs.nth(1)).toHaveValue("")
     })
   })
 
   test("handles blur on single date", async () => {
-    await render(<DatePicker placeholder="Select date" />)
+    const { user: _user } = await render(
+      <DatePicker placeholder="Select date" />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
-    fireEvent.change(input, { target: { value: "invalid" } })
-    fireEvent.blur(input, { relatedTarget: null })
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
+    await _user.clear(input)
+    await _user.type(input, "invalid")
+    await _user.tab()
 
     // On blur with invalid value, input should be cleared
-    await vi.waitFor(() => {
-      expect(input).toHaveValue("")
+    await vi.waitFor(async () => {
+      await expect.element(input).toHaveValue("")
     })
   })
 
   test("handles blur on range date resets input value", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={{
           end: new Date(2024, 0, 20),
@@ -430,23 +473,24 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
-    fireEvent.focus(inputs[0]!)
+    const inputs = page.getByRole("textbox")
+    await _user.click(inputs.first())
 
     // Type a valid date string within range as input
-    fireEvent.change(inputs[0]!, { target: { value: "2024-01-18" } })
+    await _user.clear(inputs.first())
+    await _user.type(inputs.first(), "2024-01-18")
 
     // Blur with null relatedTarget (outside both field and content)
-    fireEvent.blur(inputs[0]!, { relatedTarget: null })
+    await _user.tab()
 
     // On blur, range input should show the formatted date value (clamped within range)
-    await vi.waitFor(() => {
-      expect(inputs[0]).toHaveValue("January 18, 2024")
+    await vi.waitFor(async () => {
+      await expect.element(inputs.first()).toHaveValue("January 18, 2024")
     })
   })
 
   test("handles blur on multiple date input", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={[new Date(2024, 0, 15)]}
         multiple
@@ -454,61 +498,74 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
-    fireEvent.change(input, { target: { value: "something" } })
-    fireEvent.blur(input, { relatedTarget: null })
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
+    await _user.clear(input)
+    await _user.type(input, "something")
+    await _user.tab()
 
     // On blur with multiple, input value should be cleared
-    await vi.waitFor(() => {
-      expect(input).toHaveValue("")
+    await vi.waitFor(async () => {
+      await expect.element(input).toHaveValue("")
     })
   })
 
   test("handles input with pattern", async () => {
-    await render(<DatePicker pattern={/[^0-9-]/g} placeholder="Select date" />)
+    const { user: _user } = await render(
+      <DatePicker pattern={/[^0-9-]/g} placeholder="Select date" />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
-    fireEvent.change(input, { target: { value: "abc2024-01-15xyz" } })
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
+    await _user.clear(input)
+    await _user.type(input, "abc2024-01-15xyz")
 
-    expect(input).toHaveValue("2024-01-15")
+    await expect.element(input).toHaveValue("2024-01-15")
   })
 
   test("does not allow input when allowInput is false", async () => {
-    await render(<DatePicker allowInput={false} placeholder="Select date" />)
+    const { user: _user } = await render(
+      <DatePicker allowInput={false} placeholder="Select date" />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.change(input, { target: { value: "2024-01-15" } })
+    const input = page.getByRole("textbox").first()
+    await _user.clear(input)
+    await _user.type(input, "2024-01-15")
 
-    expect(input).toHaveValue("")
+    await expect.element(input).toHaveValue("")
   })
 
   test("handles disabled state", async () => {
-    await render(<DatePicker disabled placeholder="Select date" />)
+    const { user: _user } = await render(
+      <DatePicker disabled placeholder="Select date" />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    expect(input).toBeDisabled()
+    const input = page.getByRole("textbox").first()
+    await expect.element(input).toBeDisabled()
   })
 
   test("handles readOnly state", async () => {
-    await render(<DatePicker placeholder="Select date" readOnly />)
+    const { user: _user } = await render(
+      <DatePicker placeholder="Select date" readOnly />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    expect(input).toHaveAttribute("readOnly")
+    const input = page.getByRole("textbox").first()
+    await expect.element(input).toHaveAttribute("readOnly")
   })
 
   test("handles onChange callback", async () => {
     const onChange = vi.fn()
 
-    await render(
+    const { user: _user } = await render(
       <DatePicker defaultOpen placeholder="Select" onChange={onChange} />,
     )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
-    fireEvent.change(input, { target: { value: "2024-01-15" } })
-    fireEvent.keyDown(input, { key: "Enter" })
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
+    await _user.clear(input)
+    await _user.type(input, "2024-01-15")
+    await _user.click(input)
+    await _user.keyboard("{Enter}")
 
     await vi.waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(expect.any(Date))
@@ -518,13 +575,14 @@ describe("<DatePicker />", () => {
   test("handles onInputChange callback", async () => {
     const onInputChange = vi.fn()
 
-    await render(
+    const { user: _user } = await render(
       <DatePicker placeholder="Select" onInputChange={onInputChange} />,
     )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
-    fireEvent.change(input, { target: { value: "2024-01-15" } })
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
+    await _user.clear(input)
+    await _user.type(input, "2024-01-15")
 
     await vi.waitFor(() => {
       expect(onInputChange).toHaveBeenCalledWith("2024-01-15")
@@ -532,20 +590,24 @@ describe("<DatePicker />", () => {
   })
 
   test("handles closeOnChange", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker closeOnChange defaultOpen placeholder="Select date" />,
     )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
-    fireEvent.change(input, { target: { value: "2024-01-15" } })
-    fireEvent.keyDown(input, { key: "Enter" })
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
+    await _user.clear(input)
+    await _user.type(input, "2024-01-15")
+    await _user.click(input)
+    await _user.keyboard("{Enter}")
 
-    await expect.element(page.getByRole("dialog")).not.toBeInTheDocument()
+    await expect
+      .element(page.getByRole("dialog").query())
+      .not.toBeInTheDocument()
   })
 
   test("handles closeOnChange as function", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         closeOnChange={(ev) => ev.target.value.length > 5}
         defaultOpen
@@ -554,16 +616,20 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
-    fireEvent.change(input, { target: { value: "2024-01-15" } })
-    fireEvent.keyDown(input, { key: "Enter" })
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
+    await _user.clear(input)
+    await _user.type(input, "2024-01-15")
+    await _user.click(input)
+    await _user.keyboard("{Enter}")
 
-    await expect.element(page.getByRole("dialog")).not.toBeInTheDocument()
+    await expect
+      .element(page.getByRole("dialog").query())
+      .not.toBeInTheDocument()
   })
 
   test("handles openOnChange as function", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         openOnChange={(ev) => ev.target.value.length > 1}
         openOnFocus={false}
@@ -571,65 +637,70 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.change(input, { target: { value: "20" } })
+    const input = page.getByRole("textbox").first()
+    await _user.clear(input)
+    await _user.type(input, "20")
 
-    await vi.waitFor(() => {
-      expect(
-        document.querySelector('[role="dialog"]') as HTMLElement,
-      ).toBeInTheDocument()
+    await vi.waitFor(async () => {
+      await expect.element(page.getByRole("dialog")).toBeInTheDocument()
     })
   })
 
   test("handles defaultInputValue", async () => {
-    await render(<DatePicker defaultInputValue="2024-01-15" />)
+    const { user: _user } = await render(
+      <DatePicker defaultInputValue="2024-01-15" />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    expect(input).toHaveValue("January 15, 2024")
+    const input = page.getByRole("textbox").first()
+    await expect.element(input).toHaveValue("January 15, 2024")
   })
 
   test("handles defaultInputValue for range", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultInputValue={{ end: "2024-01-20", start: "2024-01-15" }}
         range
       />,
     )
 
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
-    expect(inputs[0]).toHaveValue("January 15, 2024")
-    expect(inputs[1]).toHaveValue("January 20, 2024")
+    const inputs = page.getByRole("textbox")
+    await expect.element(inputs.first()).toHaveValue("January 15, 2024")
+    await expect.element(inputs.nth(1)).toHaveValue("January 20, 2024")
   })
 
   test("handles defaultInputValue with invalid date string for range", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultInputValue={{ end: "invalid", start: "invalid" }}
         range
       />,
     )
 
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
-    expect(inputs[0]).toHaveValue("invalid")
-    expect(inputs[1]).toHaveValue("invalid")
+    const inputs = page.getByRole("textbox")
+    await expect.element(inputs.first()).toHaveValue("invalid")
+    await expect.element(inputs.nth(1)).toHaveValue("invalid")
   })
 
   test("handles defaultInputValue with invalid date string for single", async () => {
-    await render(<DatePicker defaultInputValue="invalid-date" />)
+    const { user: _user } = await render(
+      <DatePicker defaultInputValue="invalid-date" />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    expect(input).toHaveValue("invalid-date")
+    const input = page.getByRole("textbox").first()
+    await expect.element(input).toHaveValue("invalid-date")
   })
 
   test("handles format with null input", async () => {
-    await render(<DatePicker format={{ input: null }} />)
+    const { user: _user } = await render(
+      <DatePicker format={{ input: null }} />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    expect(input).toBeInTheDocument()
+    const input = page.getByRole("textbox").first()
+    await expect.element(input).toBeInTheDocument()
   })
 
   test("handles custom separator", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={[new Date(2024, 0, 15), new Date(2024, 0, 16)]}
         multiple
@@ -637,13 +708,13 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    expect(
-      (page.getByRole("combobox").elements()[0] as HTMLElement).textContent,
-    ).toContain(";")
+    await expect
+      .element(page.getByRole("combobox").first())
+      .toHaveTextContent(";")
   })
 
   test("handles max for multiple mode", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={[new Date(2024, 0, 15), new Date(2024, 0, 16)]}
         max={2}
@@ -652,15 +723,16 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.change(input, { target: { value: "2024-01-17" } })
+    const input = page.getByRole("textbox").first()
+    await _user.clear(input)
+    await _user.type(input, "2024-01-17")
 
     // Should not add more when max is reached
-    expect(input).toHaveValue("")
+    await expect.element(input).toHaveValue("")
   })
 
   test("handles excludeDate", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultOpen
         excludeDate={(date) => date.getDay() === 0}
@@ -668,21 +740,23 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
 
     // Try to type a Sunday
-    fireEvent.change(input, { target: { value: "2024-01-07" } })
-    fireEvent.keyDown(input, { key: "Enter" })
+    await _user.clear(input)
+    await _user.type(input, "2024-01-07")
+    await _user.click(input)
+    await _user.keyboard("{Enter}")
 
     // The excluded date should not be set
-    expect(input).toHaveValue("2024-01-07")
+    await expect.element(input).toHaveValue("2024-01-07")
   })
 
   test("handles allowInputBeyond=false with minDate", async () => {
     const minDate = new Date(2024, 0, 10)
 
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         allowInputBeyond={false}
         defaultOpen
@@ -691,21 +765,23 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
-    fireEvent.change(input, { target: { value: "2024-01-05" } })
-    fireEvent.keyDown(input, { key: "Enter" })
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
+    await _user.clear(input)
+    await _user.type(input, "2024-01-05")
+    await _user.click(input)
+    await _user.keyboard("{Enter}")
 
     // Should clamp to minDate
-    await vi.waitFor(() => {
-      expect(input).toHaveValue("January 10, 2024")
+    await vi.waitFor(async () => {
+      await expect.element(input).toHaveValue("January 10, 2024")
     })
   })
 
   test("handles allowInputBeyond=false with maxDate", async () => {
     const maxDate = new Date(2024, 0, 20)
 
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         allowInputBeyond={false}
         defaultOpen
@@ -714,19 +790,21 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
-    fireEvent.change(input, { target: { value: "2024-01-25" } })
-    fireEvent.keyDown(input, { key: "Enter" })
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
+    await _user.clear(input)
+    await _user.type(input, "2024-01-25")
+    await _user.click(input)
+    await _user.keyboard("{Enter}")
 
     // Should clamp to maxDate
-    await vi.waitFor(() => {
-      expect(input).toHaveValue("January 20, 2024")
+    await vi.waitFor(async () => {
+      await expect.element(input).toHaveValue("January 20, 2024")
     })
   })
 
   test("handles allowInputBeyond=true", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         allowInputBeyond
         defaultOpen
@@ -736,19 +814,21 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
-    fireEvent.change(input, { target: { value: "2024-01-05" } })
-    fireEvent.keyDown(input, { key: "Enter" })
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
+    await _user.clear(input)
+    await _user.type(input, "2024-01-05")
+    await _user.click(input)
+    await _user.keyboard("{Enter}")
 
     // Should allow dates beyond bounds
-    await vi.waitFor(() => {
-      expect(input).toHaveValue("January 5, 2024")
+    await vi.waitFor(async () => {
+      await expect.element(input).toHaveValue("January 5, 2024")
     })
   })
 
   test("handles Enter key on multiple date input", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultOpen
         defaultValue={[new Date(2024, 0, 15)]}
@@ -757,19 +837,21 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
-    fireEvent.change(input, { target: { value: "2024-01-16" } })
-    fireEvent.keyDown(input, { key: "Enter" })
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
+    await _user.clear(input)
+    await _user.type(input, "2024-01-16")
+    await _user.click(input)
+    await _user.keyboard("{Enter}")
 
     // Input should be cleared after adding
-    await vi.waitFor(() => {
-      expect(input).toHaveValue("")
+    await vi.waitFor(async () => {
+      await expect.element(input).toHaveValue("")
     })
   })
 
   test("handles onClear with multiple value", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={[new Date(2024, 0, 15)]}
         multiple
@@ -777,17 +859,19 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const icon = page.getByTestId("icon").element()
-    fireEvent.click(icon)
+    const icon = page.getByTestId("icon")
+    await _user.click(icon)
 
     // After clear, no tags should remain
-    await vi.waitFor(() => {
-      expect(page.getByText(/January 15, 2024/).elements()).toHaveLength(0)
+    await vi.waitFor(async () => {
+      await expect
+        .element(page.getByText(/January 15, 2024/).query())
+        .not.toBeInTheDocument()
     })
   })
 
   test("handles focusOnClear=false", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={new Date(2024, 0, 15)}
         focusOnClear={false}
@@ -795,17 +879,17 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const icon = page.getByTestId("icon").element()
-    fireEvent.click(icon)
+    const icon = page.getByTestId("icon")
+    await _user.click(icon)
 
-    await vi.waitFor(() => {
-      const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-      expect(input).toHaveValue("")
+    await vi.waitFor(async () => {
+      const input = page.getByRole("textbox").first()
+      await expect.element(input).toHaveValue("")
     })
   })
 
   test("handles focusOnClear with allowInput=false", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         allowInput={false}
         defaultValue={new Date(2024, 0, 15)}
@@ -814,36 +898,34 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const icon = page.getByTestId("icon").element()
-    fireEvent.click(icon)
+    const icon = page.getByTestId("icon")
+    await _user.click(icon)
 
-    await vi.waitFor(() => {
-      const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-      expect(input).toHaveValue("")
+    await vi.waitFor(async () => {
+      const input = page.getByRole("textbox").first()
+      await expect.element(input).toHaveValue("")
     })
   })
 
   test("handles closeOnSelect for single date via calendar click", async () => {
-    await render(<DatePicker defaultOpen placeholder="Select date" />)
+    const { user: _user } = await render(
+      <DatePicker defaultOpen placeholder="Select date" />,
+    )
 
-    // Find a day cell in the calendar and click it
-    const dialog = document.querySelector('[role="dialog"]') as HTMLElement
-    const dayCells = dialog.querySelectorAll("td")
-    const validDay = Array.from(dayCells).find(
-      (td) =>
-        !td.hasAttribute("data-outside") && !td.hasAttribute("data-disabled"),
-    )!
+    const validDay = page.getByRole("gridcell").first()
 
-    fireEvent.click(validDay)
+    await _user.click(validDay)
 
     // closeOnSelect defaults to true for single, so dialog should close
-    await vi.waitFor(() => {
-      expect(document.querySelector('[role="dialog"]')).not.toBeInTheDocument()
+    await vi.waitFor(async () => {
+      await expect
+        .element(page.getByRole("dialog").query())
+        .not.toBeInTheDocument()
     })
   })
 
   test("handles closeOnSelect=false keeps dialog open after calendar click", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         closeOnSelect={false}
         defaultOpen
@@ -851,24 +933,16 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    // Find a day cell in the calendar and click it
-    const dialog = document.querySelector('[role="dialog"]') as HTMLElement
-    const dayCells = dialog.querySelectorAll("td")
-    const validDay = Array.from(dayCells).find(
-      (td) =>
-        !td.hasAttribute("data-outside") && !td.hasAttribute("data-disabled"),
-    )!
+    const validDay = page.getByRole("gridcell").first()
 
-    fireEvent.click(validDay)
+    await _user.click(validDay)
 
     // closeOnSelect is false, so dialog should remain open
-    expect(
-      document.querySelector('[role="dialog"]') as HTMLElement,
-    ).toBeInTheDocument()
+    await expect.element(page.getByRole("dialog")).toBeInTheDocument()
   })
 
   test("handles openOnClick=false", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         openOnClick={false}
         openOnFocus={false}
@@ -876,24 +950,24 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const field = page.getByRole("combobox").elements()[0] as HTMLElement
-    fireEvent.click(field)
+    const field = page.getByRole("combobox").first()
+    await _user.click(field)
 
-    expect(document.querySelector('[role="dialog"]')).not.toBeInTheDocument()
+    await expect
+      .element(page.getByRole("dialog").query())
+      .not.toBeInTheDocument()
   })
 
   test("handles onFieldFocus when allowInput is false and openOnFocus is true", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker allowInput={false} openOnFocus placeholder="Select date" />,
     )
 
-    const field = page.getByRole("combobox").elements()[0] as HTMLElement
-    fireEvent.focus(field)
+    const field = page.getByRole("combobox").first()
+    await _user.click(field)
 
-    await vi.waitFor(() => {
-      expect(
-        document.querySelector('[role="dialog"]') as HTMLElement,
-      ).toBeInTheDocument()
+    await vi.waitFor(async () => {
+      await expect.element(page.getByRole("dialog")).toBeInTheDocument()
     })
   })
 
@@ -903,10 +977,17 @@ describe("<DatePicker />", () => {
     document.addEventListener("mousedown", onMouseDown)
 
     try {
-      await render(<DatePicker placeholder="Select date" />)
+      const { user: _user } = await render(
+        <DatePicker placeholder="Select date" />,
+      )
 
-      const field = page.getByRole("combobox").elements()[0] as HTMLElement
-      expect(fireEvent.mouseDown(field)).toBeFalsy()
+      const field = page.getByRole("combobox").first()
+      const fieldEl = await field.findElement()
+      expect(
+        fieldEl.dispatchEvent(
+          new MouseEvent("mousedown", { bubbles: true, cancelable: true }),
+        ),
+      ).toBeFalsy()
 
       // mouseDown should be prevented and stopped
       expect(onMouseDown).not.toHaveBeenCalled()
@@ -916,26 +997,27 @@ describe("<DatePicker />", () => {
   })
 
   test("handles clear icon keyboard events", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={new Date(2024, 0, 15)}
         iconProps={{ "data-testid": "icon" }}
       />,
     )
 
-    const icon = page.getByTestId("icon").element()
-    fireEvent.keyDown(icon, { key: "Enter" })
+    const icon = page.getByTestId("icon")
+    await _user.click(icon)
+    await _user.keyboard("{Enter}")
 
-    await vi.waitFor(() => {
-      const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-      expect(input).toHaveValue("")
+    await vi.waitFor(async () => {
+      const input = page.getByRole("textbox").first()
+      await expect.element(input).toHaveValue("")
     })
   })
 
   test("handles clear icon Space key", async () => {
     const onChange = vi.fn()
 
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={new Date(2024, 0, 15)}
         iconProps={{ "data-testid": "icon" }}
@@ -943,8 +1025,9 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const icon = page.getByTestId("icon").element()
-    fireEvent.keyDown(icon, { key: " ", code: "Space" })
+    const icon = page.getByTestId("icon")
+    await _user.click(icon)
+    await _user.keyboard(" ")
 
     // The onClear should have been triggered via Space key
     await vi.waitFor(() => {
@@ -953,10 +1036,12 @@ describe("<DatePicker />", () => {
   })
 
   test("handles controlled value update", async () => {
-    await render(<ControlledDatePicker placeholder="Select date" />)
+    const { user: _user } = await render(
+      <ControlledDatePicker placeholder="Select date" />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    expect(input).toHaveValue("")
+    const input = page.getByRole("textbox").first()
+    await expect.element(input).toHaveValue("")
   })
 
   test("handles valueProp update for range", async () => {
@@ -984,16 +1069,16 @@ describe("<DatePicker />", () => {
       )
     }
 
-    await render(<RangeControlled />)
+    const { user: _user } = await render(<RangeControlled />)
 
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
-    expect(inputs[0]).toHaveValue("")
+    const inputs = page.getByRole("textbox")
+    await expect.element(inputs.first()).toHaveValue("")
 
-    fireEvent.click(page.getByTestId("set-value").element())
+    await _user.click(page.getByTestId("set-value"))
 
-    await vi.waitFor(() => {
-      expect(inputs[0]).toHaveValue("January 15, 2024")
-      expect(inputs[1]).toHaveValue("January 20, 2024")
+    await vi.waitFor(async () => {
+      await expect.element(inputs.first()).toHaveValue("January 15, 2024")
+      await expect.element(inputs.nth(1)).toHaveValue("January 20, 2024")
     })
   })
 
@@ -1014,20 +1099,20 @@ describe("<DatePicker />", () => {
       )
     }
 
-    await render(<SingleControlled />)
+    const { user: _user } = await render(<SingleControlled />)
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    expect(input).toHaveValue("")
+    const input = page.getByRole("textbox").first()
+    await expect.element(input).toHaveValue("")
 
-    fireEvent.click(page.getByTestId("set-value").element())
+    await _user.click(page.getByTestId("set-value"))
 
-    await vi.waitFor(() => {
-      expect(input).toHaveValue("January 15, 2024")
+    await vi.waitFor(async () => {
+      await expect.element(input).toHaveValue("January 15, 2024")
     })
   })
 
   test("handles input change for range with existing start value", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={{
           end: undefined,
@@ -1038,15 +1123,16 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
-    fireEvent.focus(inputs[1]!)
-    fireEvent.change(inputs[1]!, { target: { value: "2024-01-20" } })
+    const inputs = page.getByRole("textbox")
+    await _user.click(inputs.nth(1))
+    await _user.clear(inputs.nth(1))
+    await _user.type(inputs.nth(1), "2024-01-20")
 
-    expect(inputs[1]).toHaveValue("2024-01-20")
+    await expect.element(inputs.nth(1)).toHaveValue("2024-01-20")
   })
 
   test("handles input change for range with existing end value", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={{
           end: new Date(2024, 0, 20),
@@ -1057,26 +1143,29 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
-    fireEvent.focus(inputs[0]!)
-    fireEvent.change(inputs[0]!, { target: { value: "2024-01-15" } })
+    const inputs = page.getByRole("textbox")
+    await _user.click(inputs.first())
+    await _user.clear(inputs.first())
+    await _user.type(inputs.first(), "2024-01-15")
 
-    expect(inputs[0]).toHaveValue("2024-01-15")
+    await expect.element(inputs.first()).toHaveValue("2024-01-15")
   })
 
   test("handles click on range field focuses start input when both empty", async () => {
-    await render(<DatePicker placeholder="Select date" range />)
+    const { user: _user } = await render(
+      <DatePicker placeholder="Select date" range />,
+    )
 
-    const field = page.getByRole("combobox").elements()[0] as HTMLElement
-    fireEvent.click(field)
+    const field = page.getByRole("combobox").first()
+    await _user.click(field)
 
     // Start input should be focused
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
-    expect(inputs[0]).toHaveFocus()
+    const inputs = page.getByRole("textbox")
+    await expect.element(inputs.first()).toHaveFocus()
   })
 
   test("handles click on range field focuses end input when only start is set", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={{
           end: undefined,
@@ -1087,16 +1176,16 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const field = page.getByRole("combobox").elements()[0] as HTMLElement
-    fireEvent.click(field)
+    const field = page.getByRole("combobox").first()
+    await _user.click(field)
 
     // End input should be focused since start has value
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
-    expect(inputs[1]).toHaveFocus()
+    const inputs = page.getByRole("textbox")
+    await expect.element(inputs.nth(1)).toHaveFocus()
   })
 
   test("handles click on range field focuses start input when end is set", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={{
           end: new Date(2024, 0, 20),
@@ -1107,16 +1196,16 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const field = page.getByRole("combobox").elements()[0] as HTMLElement
-    fireEvent.click(field)
+    const field = page.getByRole("combobox").first()
+    await _user.click(field)
 
     // Start input should be focused when end is already set
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
-    expect(inputs[0]).toHaveFocus()
+    const inputs = page.getByRole("textbox")
+    await expect.element(inputs.first()).toHaveFocus()
   })
 
   test("handles custom render for multiple mode", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={[new Date(2024, 0, 15)]}
         multiple
@@ -1128,14 +1217,14 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    expect(page.getByTestId("custom-tag").element()).toBeInTheDocument()
-    expect(page.getByTestId("custom-tag").element()).toHaveTextContent(
-      "January 15, 2024",
-    )
+    await expect.element(page.getByTestId("custom-tag")).toBeInTheDocument()
+    await expect
+      .element(page.getByTestId("custom-tag"))
+      .toHaveTextContent("January 15, 2024")
   })
 
   test("handles custom render onClear removes item", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={[new Date(2024, 0, 15), new Date(2024, 0, 16)]}
         multiple
@@ -1147,16 +1236,16 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const tag = page.getByTestId("tag-January 15, 2024").element()
-    fireEvent.click(tag)
+    const tag = page.getByTestId("tag-January 15, 2024")
+    await _user.click(tag)
 
-    await vi.waitFor(() => {
-      expect(page.getByTestId("tag-January 15, 2024").elements()).toHaveLength(
-        0,
-      )
-      expect(
-        page.getByTestId("tag-January 16, 2024").element(),
-      ).toBeInTheDocument()
+    await vi.waitFor(async () => {
+      await expect
+        .element(page.getByTestId("tag-January 15, 2024").query())
+        .not.toBeInTheDocument()
+      await expect
+        .element(page.getByTestId("tag-January 16, 2024"))
+        .toBeInTheDocument()
     })
   })
 
@@ -1173,7 +1262,7 @@ describe("<DatePicker />", () => {
       return undefined
     })
 
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultOpen
         parseDate={parseDate}
@@ -1181,10 +1270,12 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
-    fireEvent.change(input, { target: { value: "2024/1/15" } })
-    fireEvent.keyDown(input, { key: "Enter" })
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
+    await _user.clear(input)
+    await _user.type(input, "2024/1/15")
+    await _user.click(input)
+    await _user.keyboard("{Enter}")
 
     await vi.waitFor(() => {
       expect(parseDate).toHaveBeenCalledWith("2024/1/15")
@@ -1193,7 +1284,7 @@ describe("<DatePicker />", () => {
 
   test("handles minDate after maxDate correction", async () => {
     // When minDate > maxDate, maxDate should be set to minDate
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         maxDate={new Date(2024, 0, 1)}
         minDate={new Date(2024, 5, 1)}
@@ -1201,12 +1292,12 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    expect(input).toBeInTheDocument()
+    const input = page.getByRole("textbox").first()
+    await expect.element(input).toBeInTheDocument()
   })
 
   test("handles defaultValue for range with inputValue", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={{
           end: new Date(2024, 0, 20),
@@ -1216,22 +1307,24 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
-    expect(inputs[0]).toHaveValue("January 15, 2024")
-    expect(inputs[1]).toHaveValue("January 20, 2024")
+    const inputs = page.getByRole("textbox")
+    await expect.element(inputs.first()).toHaveValue("January 15, 2024")
+    await expect.element(inputs.nth(1)).toHaveValue("January 20, 2024")
   })
 
   test("handles input id and name for range mode", async () => {
-    await render(<DatePicker id="test-id" name="test-name" range />)
+    const { user: _user } = await render(
+      <DatePicker id="test-id" name="test-name" range />,
+    )
 
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
+    const inputs = page.getByRole("textbox")
     // When start is empty, start input gets id/name
-    expect(inputs[0]).toHaveAttribute("id", "test-id")
-    expect(inputs[0]).toHaveAttribute("name", "test-name")
+    await expect.element(inputs.first()).toHaveAttribute("id", "test-id")
+    await expect.element(inputs.first()).toHaveAttribute("name", "test-name")
   })
 
   test("handles input id and name for range mode with start value", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         id="test-id"
         name="test-name"
@@ -1243,65 +1336,84 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
+    const inputs = page.getByRole("textbox")
     // When start has value, end input gets id/name
-    expect(inputs[1]).toHaveAttribute("id", "test-id")
-    expect(inputs[1]).toHaveAttribute("name", "test-name")
+    await expect.element(inputs.nth(1)).toHaveAttribute("id", "test-id")
+    await expect.element(inputs.nth(1)).toHaveAttribute("name", "test-name")
   })
 
   test("handles Enter key on range start input moves focus to end input", async () => {
-    await render(<DatePicker defaultOpen placeholder="Select date" range />)
+    const { user: _user } = await render(
+      <DatePicker defaultOpen placeholder="Select date" range />,
+    )
 
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
-    fireEvent.focus(inputs[0]!)
-    fireEvent.change(inputs[0]!, { target: { value: "2024-01-15" } })
-    fireEvent.keyDown(inputs[0]!, { key: "Enter" })
+    const inputs = page.getByRole("textbox")
+    await _user.click(inputs.first())
+    await _user.clear(inputs.first())
+    await _user.type(inputs.first(), "2024-01-15")
+    await _user.click(inputs.first())
+    await _user.keyboard("{Enter}")
 
     // After entering start date, focus should move to end input
-    await vi.waitFor(() => {
-      expect(inputs[1]).toHaveFocus()
+    await vi.waitFor(async () => {
+      await expect.element(inputs.nth(1)).toHaveFocus()
     })
   })
 
   test("handles Enter key with invalid date does nothing", async () => {
-    await render(<DatePicker defaultOpen placeholder="Select date" />)
+    const { user: _user } = await render(
+      <DatePicker defaultOpen placeholder="Select date" />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
-    fireEvent.change(input, { target: { value: "invalid" } })
-    fireEvent.keyDown(input, { key: "Enter" })
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
+    await _user.clear(input)
+    await _user.type(input, "invalid")
+    await _user.click(input)
+    await _user.keyboard("{Enter}")
 
     // Should not update the value for invalid date
-    expect(input).toHaveValue("invalid")
+    await expect.element(input).toHaveValue("invalid")
   })
 
   test("handles Enter key with empty value does nothing", async () => {
-    await render(<DatePicker defaultOpen placeholder="Select date" />)
+    const { user: _user } = await render(
+      <DatePicker defaultOpen placeholder="Select date" />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
-    fireEvent.keyDown(input, { key: "Enter" })
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
+    await _user.click(input)
+    await _user.keyboard("{Enter}")
 
-    expect(input).toHaveValue("")
+    await expect.element(input).toHaveValue("")
   })
 
   test("handles custom placeholder", async () => {
-    await render(<DatePicker placeholder="Custom placeholder" />)
+    const { user: _user } = await render(
+      <DatePicker placeholder="Custom placeholder" />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    expect(input).toHaveAttribute("placeholder", "Custom placeholder")
+    const input = page.getByRole("textbox").first()
+    await expect
+      .element(input)
+      .toHaveAttribute("placeholder", "Custom placeholder")
   })
 
   test("handles custom placeholder for range", async () => {
-    await render(<DatePicker placeholder="Custom" range />)
+    const { user: _user } = await render(
+      <DatePicker placeholder="Custom" range />,
+    )
 
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
-    expect(inputs[0]).toHaveAttribute("placeholder", "Custom")
-    expect(inputs[1]).toHaveAttribute("placeholder", "Custom")
+    const inputs = page.getByRole("textbox")
+    await expect
+      .element(inputs.first())
+      .toHaveAttribute("placeholder", "Custom")
+    await expect.element(inputs.nth(1)).toHaveAttribute("placeholder", "Custom")
   })
 
   test("handles Backspace on single date input does nothing", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultOpen
         defaultValue={new Date(2024, 0, 15)}
@@ -1309,62 +1421,66 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
-    fireEvent.keyDown(input, { key: "Backspace" })
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
+    await _user.click(input)
+    await _user.keyboard("{Backspace}")
 
     // Should not affect single date value
-    expect(input).toHaveValue("January 15, 2024")
+    await expect.element(input).toHaveValue("January 15, 2024")
   })
 
   test("handles defaultMonth with minDate", async () => {
     const minDate = new Date(2025, 5, 1)
 
-    await render(
+    const { user: _user } = await render(
       <DatePicker defaultMonth={new Date(2024, 0, 1)} minDate={minDate} />,
     )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    expect(input).toBeInTheDocument()
+    const input = page.getByRole("textbox").first()
+    await expect.element(input).toBeInTheDocument()
   })
 
   test("handles defaultMonth with valueProp", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultMonth={new Date(2024, 0, 1)}
         value={new Date(2024, 5, 15)}
       />,
     )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    expect(input).toHaveValue("June 15, 2024")
+    const input = page.getByRole("textbox").first()
+    await expect.element(input).toHaveValue("June 15, 2024")
   })
 
   test("handles defaultMonth with defaultValue", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultMonth={new Date(2024, 0, 1)}
         defaultValue={new Date(2024, 5, 15)}
       />,
     )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    expect(input).toHaveValue("June 15, 2024")
+    const input = page.getByRole("textbox").first()
+    await expect.element(input).toHaveValue("June 15, 2024")
   })
 
   test("handles input change for multiple with valid date updates month", async () => {
-    await render(<DatePicker defaultOpen multiple placeholder="Select dates" />)
+    const { user: _user } = await render(
+      <DatePicker defaultOpen multiple placeholder="Select dates" />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
-    fireEvent.change(input, { target: { value: "2024-06-15" } })
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
+    await _user.clear(input)
+    await _user.type(input, "2024-06-15")
 
     // The month should be updated
-    expect(input).toHaveValue("2024-06-15")
+    await expect.element(input).toHaveValue("2024-06-15")
   })
 
   test("handles range separator", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultValue={{
           end: new Date(2024, 0, 20),
@@ -1376,13 +1492,13 @@ describe("<DatePicker />", () => {
     )
 
     // Range uses separator between inputs
-    expect(
-      (page.getByRole("combobox").elements()[0] as HTMLElement).textContent,
-    ).toContain("~")
+    await expect
+      .element(page.getByRole("combobox").first())
+      .toHaveTextContent("~")
   })
 
   test("handles Enter key on range end input with existing start value", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultOpen
         defaultValue={{
@@ -1394,99 +1510,110 @@ describe("<DatePicker />", () => {
       />,
     )
 
-    const inputs = page.getByRole("textbox").elements() as HTMLInputElement[]
+    const inputs = page.getByRole("textbox")
 
     // Focus on start and update with minDate constraint from end value
-    fireEvent.focus(inputs[0]!)
-    fireEvent.change(inputs[0]!, { target: { value: "2024-01-10" } })
-    fireEvent.keyDown(inputs[0]!, { key: "Enter" })
+    await _user.click(inputs.first())
+    await _user.clear(inputs.first())
+    await _user.type(inputs.first(), "2024-01-10")
+    await _user.click(inputs.first())
+    await _user.keyboard("{Enter}")
 
-    await vi.waitFor(() => {
-      expect(inputs[0]).toHaveValue("January 10, 2024")
+    await vi.waitFor(async () => {
+      await expect.element(inputs.first()).toHaveValue("January 10, 2024")
     })
   })
 
   test("handles input with composing state (IME)", async () => {
-    await render(<DatePicker defaultOpen placeholder="Select date" />)
+    const { user: _user } = await render(
+      <DatePicker defaultOpen placeholder="Select date" />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.focus(input)
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
 
     // Simulate composition
-    fireEvent.compositionStart(input)
-    fireEvent.keyDown(input, { key: "Enter", isComposing: true })
+    const inputEl = await input.findElement()
+    inputEl.dispatchEvent(new Event("compositionstart", { bubbles: true }))
+    await _user.click(input)
+    await _user.keyboard("{Enter}")
 
     // Should not process during IME composition
-    expect(input).toHaveValue("")
+    await expect.element(input).toHaveValue("")
   })
 
   test("handles disabled state prevents keyboard actions", async () => {
-    await render(<DatePicker defaultOpen disabled placeholder="Select date" />)
+    const { user: _user } = await render(
+      <DatePicker defaultOpen disabled placeholder="Select date" />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    fireEvent.keyDown(input, { key: "Enter" })
+    const input = page.getByRole("textbox").first()
+    await _user.click(input)
+    await _user.keyboard("{Enter}")
 
-    expect(input).toHaveValue("")
+    await expect.element(input).toHaveValue("")
   })
 
   test("handles contentProps", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultOpen
         contentProps={{ "data-testid": "content" } as any}
       />,
     )
 
-    expect(page.getByTestId("content").element()).toBeInTheDocument()
+    await expect.element(page.getByTestId("content")).toBeInTheDocument()
   })
 
   test("handles custom icon", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker icon={<span data-testid="custom-icon">icon</span>} />,
     )
 
-    expect(page.getByTestId("custom-icon").element()).toBeInTheDocument()
+    await expect.element(page.getByTestId("custom-icon")).toBeInTheDocument()
   })
 
   test("handles animationScheme prop", async () => {
-    await render(<DatePicker animationScheme="inline-start" defaultOpen />)
+    const { user: _user } = await render(
+      <DatePicker animationScheme="inline-start" defaultOpen />,
+    )
 
-    expect(
-      document.querySelector('[role="dialog"]') as HTMLElement,
-    ).toBeInTheDocument()
+    await expect.element(page.getByRole("dialog")).toBeInTheDocument()
   })
 
   test("handles calendarProps", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker
         defaultOpen
         calendarProps={{ "data-testid": "calendar" } as any}
       />,
     )
 
-    expect(page.getByTestId("calendar").element()).toBeInTheDocument()
+    await expect.element(page.getByTestId("calendar")).toBeInTheDocument()
   })
 
   test("handles duration prop", async () => {
-    await render(<DatePicker defaultOpen duration={0} />)
+    const { user: _user } = await render(
+      <DatePicker defaultOpen duration={0} />,
+    )
 
-    expect(
-      document.querySelector('[role="dialog"]') as HTMLElement,
-    ).toBeInTheDocument()
+    await expect.element(page.getByRole("dialog")).toBeInTheDocument()
   })
 
   test("handles elementProps", async () => {
-    await render(
+    const { user: _user } = await render(
       <DatePicker elementProps={{ "data-testid": "element" } as any} />,
     )
 
-    expect(page.getByTestId("element").element()).toBeInTheDocument()
+    await expect.element(page.getByTestId("element")).toBeInTheDocument()
   })
 
   test("handles required prop", async () => {
-    await render(<DatePicker placeholder="Select date" required />)
+    const { user: _user } = await render(
+      <DatePicker placeholder="Select date" required />,
+    )
 
-    const input = page.getByRole("textbox").elements()[0] as HTMLInputElement
-    expect(input).toBeRequired()
+    const input = page.getByRole("textbox").first()
+    await expect.element(input).toBeRequired()
   })
 })

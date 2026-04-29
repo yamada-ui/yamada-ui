@@ -62,12 +62,8 @@ export const useCodeBlock = ({
   const contentId = useId()
   const lineCount = useMemo(() => getLineCount(code), [code])
   const collapsible = !!maxLines && lineCount > maxLines
-  const [collapsed, setCollapsed] = useState(defaultCollapsed && collapsible)
+  const [collapsed, setCollapsed] = useState(defaultCollapsed)
   const [collapsedHeight, setCollapsedHeight] = useState(0)
-
-  useEffect(() => {
-    setCollapsed(defaultCollapsed && collapsible)
-  }, [collapsible, defaultCollapsed])
 
   return useMemo(
     () => ({
@@ -127,38 +123,36 @@ export const useCodeBlockCode = ({
   setCollapsedHeight,
 }: UseCodeBlockCodeProps) => {
   const ref = useRef<HTMLPreElement>(null)
-  const [html, setHtml] = useState(htmlProp)
+  const [internalHtml, setInternalHtml] = useState<string | undefined>()
   const lines = useMemo(() => code?.split(/\r?\n/) ?? [], [code])
 
   useEffect(() => {
-    setHtml(htmlProp)
-  }, [htmlProp])
-
-  useEffect(() => {
-    let mounted = true
+    if (htmlProp !== undefined) return
 
     if (!code) {
-      setHtml(htmlProp)
+      setInternalHtml(undefined)
 
       return
     }
 
-    if (htmlProp) return
+    let mounted = true
 
-    setHtml(undefined)
+    setInternalHtml(undefined)
 
     codeToHighlightedHtml(code, { highlight, language })
       .then((nextHtml) => {
-        if (mounted) setHtml(nextHtml)
+        if (mounted) setInternalHtml(nextHtml)
       })
       .catch(() => {
-        if (mounted) setHtml(undefined)
+        if (mounted) setInternalHtml(undefined)
       })
 
     return () => {
       mounted = false
     }
   }, [code, highlight, htmlProp, language])
+
+  const html = htmlProp ?? internalHtml
 
   useLayoutEffect(() => {
     if (!maxLines) return

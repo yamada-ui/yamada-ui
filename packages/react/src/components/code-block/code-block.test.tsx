@@ -188,4 +188,49 @@ describe("<CodeBlock.Root />", () => {
     )
     expect(content).not.toHaveAttribute("data-collapsed")
   })
+
+  test("preserves user collapse state across collapsible transitions", async () => {
+    const { rerender, user } = render(
+      <CodeBlock.Root
+        code={"1\n2\n3\n4"}
+        defaultCollapsed
+        language="ts"
+        maxLines={2}
+      />,
+    )
+
+    const button = screen.getByRole("button", { name: "Expand code" })
+
+    expect(button).toHaveAttribute("aria-expanded", "false")
+
+    await user.click(button)
+
+    await waitFor(() =>
+      expect(
+        screen.getByRole("button", { name: "Collapse code" }),
+      ).toHaveAttribute("aria-expanded", "true"),
+    )
+
+    rerender(
+      <CodeBlock.Root
+        code={"1\n2"}
+        defaultCollapsed
+        language="ts"
+        maxLines={2}
+      />,
+    )
+
+    rerender(
+      <CodeBlock.Root
+        code={"1\n2\n3\n4"}
+        defaultCollapsed
+        language="ts"
+        maxLines={2}
+      />,
+    )
+
+    expect(
+      screen.getByRole("button", { name: "Collapse code" }),
+    ).toHaveAttribute("aria-expanded", "true")
+  })
 })

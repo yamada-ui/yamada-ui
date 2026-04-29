@@ -1,3 +1,4 @@
+import { vi } from "vitest"
 import { a11y, page, render } from "#test/browser"
 import { HueSlider } from "."
 
@@ -30,6 +31,48 @@ describe("<HueSlider />", () => {
     await expect.element(track).toHaveClass("ui-hue-slider__track")
     await expect.element(thumb).toHaveClass("ui-hue-slider__thumb")
     await expect.element(overlay).toHaveClass("ui-hue-slider__overlay")
+  })
+
+  test("merges `overlayProps` and `layers` props on overlay", async () => {
+    const onOverlayClick = vi.fn()
+    const onLayerClick = vi.fn()
+    await render(
+      <HueSlider.Root
+        defaultValue={0}
+        overlayProps={{
+          className: "from-overlay",
+          style: { color: "red", pointerEvents: "auto" },
+          "data-testid": "overlay",
+          layers: [
+            {
+              className: "from-layer",
+              style: { backgroundColor: "blue", pointerEvents: "auto" },
+              onClick: onLayerClick,
+            },
+          ],
+          onClick: onOverlayClick,
+        }}
+      />,
+    )
+
+    const overlay = page.getByTestId("overlay")
+
+    await expect
+      .element(overlay)
+      .toHaveClass("ui-hue-slider__overlay", "from-overlay", "from-layer")
+    await expect.element(overlay).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    await expect
+      .element(overlay)
+      .toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    overlay
+      .element()
+      .dispatchEvent(
+        new MouseEvent("click", { bubbles: true, cancelable: true }),
+      )
+
+    expect(onOverlayClick).toHaveBeenCalledTimes(1)
+    expect(onLayerClick).toHaveBeenCalledTimes(1)
   })
 
   test("renders custom children correctly", async () => {

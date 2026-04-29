@@ -2,11 +2,12 @@
 
 import type { RefObject } from "react"
 import type { Accept, DropzoneOptions } from "react-dropzone"
+import type { HTMLProps, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { fromEvent } from "file-selector"
 import { useCallback, useId } from "react"
 import { useDropzone as useOriginalDropzone } from "react-dropzone"
-import { type HTMLProps, mergeProps, type PropGetter } from "../../core"
+import { mergeProps } from "../../core"
 import {
   ariaAttr,
   assignRef,
@@ -262,7 +263,6 @@ export const useDropzone = (props: UseDropzoneProps = {}) => {
         ref: mergeRefs(restRef, ref, rootRef),
       }
     },
-
     [
       getOriginalRootProps,
       labelledbyId,

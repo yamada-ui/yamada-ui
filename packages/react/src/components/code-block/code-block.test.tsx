@@ -170,8 +170,14 @@ describe("<CodeBlock.Root />", () => {
     )
 
     const button = screen.getByRole("button", { name: "Expand code" })
+    const content = document.getElementById(
+      button.getAttribute("aria-controls") ?? "",
+    )
 
     expect(button).toHaveAttribute("aria-expanded", "false")
+    expect(button).toHaveTextContent("Expand code")
+    expect(button.closest(".ui-code-block__footer")).toBeInTheDocument()
+    expect(content).toHaveAttribute("data-collapsed", "")
 
     await user.click(button)
 
@@ -180,5 +186,6 @@ describe("<CodeBlock.Root />", () => {
         screen.getByRole("button", { name: "Collapse code" }),
       ).toHaveAttribute("aria-expanded", "true"),
     )
+    expect(content).not.toHaveAttribute("data-collapsed")
   })
 })

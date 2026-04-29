@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
-import type { IconButtonProps } from "../button"
+import type { ButtonProps, IconButtonProps } from "../button"
 import type { CollapseProps } from "../collapse"
 import type { CodeBlockStyle } from "./code-block.style"
 import type { UseCodeBlockProps, UseCodeBlockReturn } from "./use-code-block"
@@ -10,7 +10,7 @@ import { useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { useClipboard } from "../../hooks/use-clipboard"
 import { dataAttr, handlerAll, isString } from "../../utils"
-import { IconButton } from "../button"
+import { Button, IconButton } from "../button"
 import { Collapse } from "../collapse"
 import {
   CheckIcon,
@@ -65,18 +65,16 @@ export const CodeBlockRoot = withProvider<"div", CodeBlockRootProps>(
       showLanguageLabel,
       title,
     })
-    const { collapsible } = context
     const computedChildren = useMemo<ReactNode>(() => {
       if (children) return children
 
       return (
         <>
-          {title || showLanguageLabel || showCopyTrigger || collapsible ? (
+          {title || showLanguageLabel || showCopyTrigger ? (
             <CodeBlockHeader>
               <CodeBlockTitle />
               <CodeBlockControl>
                 <CodeBlockLanguageLabel />
-                <CodeBlockCollapseTrigger />
                 <CodeBlockCopyTrigger />
               </CodeBlockControl>
             </CodeBlockHeader>
@@ -86,7 +84,7 @@ export const CodeBlockRoot = withProvider<"div", CodeBlockRootProps>(
           </CodeBlockContent>
         </>
       )
-    }, [children, collapsible, showCopyTrigger, showLanguageLabel, title])
+    }, [children, showCopyTrigger, showLanguageLabel, title])
 
     return (
       <ComponentContext value={context}>
@@ -173,61 +171,89 @@ export const CodeBlockCopyTrigger = withContext<
 }, "copyTrigger")()
 
 export interface CodeBlockCollapseTriggerProps extends Omit<
-  IconButtonProps,
-  "aria-controls" | "aria-expanded" | "icon"
+  ButtonProps,
+  "aria-controls" | "aria-expanded" | "endIcon"
 > {
   collapseLabel?: string
   expandLabel?: string
+  icon?: ReactNode
 }
 
 export const CodeBlockCollapseTrigger = withContext<
   "button",
   CodeBlockCollapseTriggerProps
->(({ collapseLabel, expandLabel, onClick, ...rest }) => {
+>(({ children, collapseLabel, expandLabel, icon, onClick, ...rest }) => {
   const { collapsed, collapsible, contentId, setCollapsed } =
     useComponentContext()
-  const ariaLabel = collapsed
+  const label = collapsed
     ? (expandLabel ?? "Expand code")
     : (collapseLabel ?? "Collapse code")
+  const computedChildren = children ?? label
+  const computedIcon =
+    icon ?? (collapsed ? <ChevronDownIcon /> : <ChevronUpIcon />)
 
   if (!collapsible) return null
 
   return (
-    <IconButton
+    <Button
       size="sm"
       variant="ghost"
       aria-controls={contentId}
       aria-expanded={!collapsed}
-      aria-label={ariaLabel}
       disableRipple
-      icon={collapsed ? <ChevronDownIcon /> : <ChevronUpIcon />}
+      endIcon={computedIcon}
       {...rest}
       onClick={handlerAll(onClick, () => setCollapsed((prev) => !prev))}
-    />
+    >
+      {computedChildren}
+    </Button>
   )
 }, "collapseTrigger")()
+
+export interface CodeBlockFooterProps extends HTMLStyledProps<"div"> {}
+
+export const CodeBlockFooter = withContext<"div", CodeBlockFooterProps>(
+  "div",
+  "footer",
+)()
 
 export interface CodeBlockContentProps extends Omit<
   CollapseProps,
   "children" | "open" | "startingHeight"
 > {
   children?: ReactNode
+  showCollapseTrigger?: boolean
 }
 
 export const CodeBlockContent = withContext<"div", CodeBlockContentProps>(
-  ({ children, ...rest }) => {
+  ({ className, css, children, showCollapseTrigger = true, ...rest }) => {
     const { collapsed, collapsedHeight, collapsible, contentId } =
       useComponentContext()
 
     return (
-      <Collapse
+      <styled.div
         id={contentId}
-        open={!collapsible || !collapsed}
-        startingHeight={collapsible ? collapsedHeight : 0}
-        {...rest}
+        className={className}
+        css={css}
+        data-collapsed={dataAttr(
+          collapsible && collapsed && showCollapseTrigger,
+        )}
+        data-collapsible={dataAttr(collapsible)}
       >
-        {children ?? <CodeBlockCode />}
-      </Collapse>
+        <Collapse
+          open={!collapsible || !collapsed}
+          startingHeight={collapsible ? collapsedHeight : 0}
+          {...rest}
+        >
+          {children ?? <CodeBlockCode />}
+        </Collapse>
+
+        {collapsible && showCollapseTrigger ? (
+          <CodeBlockFooter>
+            <CodeBlockCollapseTrigger />
+          </CodeBlockFooter>
+        ) : null}
+      </styled.div>
     )
   },
   "content",

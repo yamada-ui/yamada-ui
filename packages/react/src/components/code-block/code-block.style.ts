@@ -15,8 +15,24 @@ export const codeBlockStyle = defineComponentSlotStyle({
     },
     collapseTrigger: {},
     content: {
+      "&[data-collapsed]": {
+        _after: { opacity: "1" },
+      },
       bg: "bg.panel",
       position: "relative",
+      _after: {
+        bgImage: "linear-gradient(to bottom, transparent, {colors.bg.panel})",
+        bottom: "10",
+        content: '""',
+        h: "12",
+        insetInline: "0",
+        opacity: "0",
+        pointerEvents: "none",
+        position: "absolute",
+        transitionDuration: "moderate",
+        transitionProperty: "opacity",
+        zIndex: "yamcha",
+      },
     },
     control: {
       alignItems: "center",
@@ -25,6 +41,18 @@ export const codeBlockStyle = defineComponentSlotStyle({
       ms: "auto",
     },
     copyTrigger: {},
+    footer: {
+      alignItems: "center",
+      bg: "bg.panel",
+      borderColor: "border.muted",
+      borderTopWidth: "1px",
+      display: "flex",
+      justifyContent: "center",
+      minH: "10",
+      position: "relative",
+      px: "3",
+      zIndex: "kurillin",
+    },
     header: {
       alignItems: "center",
       bg: "bg.panel",

@@ -27,6 +27,7 @@ updates:
           - "oxlint-*"
           - "eslint"
           - "*eslint-plugin*"
+          - "@typescript-eslint/*"
           - "react"
           - "react-dom"
           - "@types/react"
@@ -46,6 +47,7 @@ updates:
           - "oxlint-*"
           - "eslint"
           - "*eslint-plugin*"
+          - "@typescript-eslint/*"
       react:
         patterns:
           - "react"

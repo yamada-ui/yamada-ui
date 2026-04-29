@@ -293,12 +293,11 @@ describe("<DatePicker />", () => {
   })
 
   test("does not open on input focus when openOnFocus is false", async () => {
-    const { user: _user } = await render(
-      <DatePicker openOnFocus={false} placeholder="Select date" />,
-    )
+    await render(<DatePicker openOnFocus={false} placeholder="Select date" />)
 
     const input = page.getByRole("textbox").first()
-    await _user.click(input)
+    const inputEl = await input.findElement()
+    inputEl.focus()
 
     await expect
       .element(page.getByRole("dialog").query())
@@ -401,8 +400,8 @@ describe("<DatePicker />", () => {
     )
 
     const input = page.getByRole("textbox").first()
-    await _user.click(input)
-    await _user.click(input)
+    const inputEl = await input.findElement()
+    inputEl.focus()
     await _user.keyboard("{Backspace}")
 
     await vi.waitFor(async () => {
@@ -433,7 +432,6 @@ describe("<DatePicker />", () => {
 
     // Clear the end input value first
     await _user.clear(inputs.nth(1))
-    await _user.type(inputs.nth(1), "")
     await _user.click(inputs.nth(1))
     await _user.keyboard("{Backspace}")
 
@@ -1543,13 +1541,13 @@ describe("<DatePicker />", () => {
   })
 
   test("handles disabled state prevents keyboard actions", async () => {
-    const { user: _user } = await render(
-      <DatePicker defaultOpen disabled placeholder="Select date" />,
-    )
+    await render(<DatePicker defaultOpen disabled placeholder="Select date" />)
 
     const input = page.getByRole("textbox").first()
-    await _user.click(input)
-    await _user.keyboard("{Enter}")
+    const inputEl = await input.findElement()
+    inputEl.dispatchEvent(
+      new KeyboardEvent("keydown", { key: "Enter", bubbles: true }),
+    )
 
     await expect.element(input).toHaveValue("")
   })

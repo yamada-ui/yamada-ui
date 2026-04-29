@@ -2,7 +2,7 @@
 
 ## 1: Fetch the list
 
-1. Extract all entries from the [anti-patterns](.agents/references/review-anti-patterns/index.md) index into a list.
+1. Extract all entries from the [anti-patterns](/.agents/references/review-anti-patterns/index.md) index into a list.
 2. Present the list to the user with a number next to each item, and have them select the items (multiple allowed) to delete.
 
 ## 2: Delete the entries

@@ -1,6 +1,6 @@
 # {{title}}
 
-**Related PRs**: {{pr_links}}
+**Example**: {{pr_links}}
 
 **Diff**:
 

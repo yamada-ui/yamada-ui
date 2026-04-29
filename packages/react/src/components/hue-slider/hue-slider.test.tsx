@@ -1,4 +1,5 @@
-import { a11y, render, screen } from "#test"
+import { vi } from "vitest"
+import { a11y, page, render } from "#test/browser"
 import { HueSlider } from "."
 
 describe("<HueSlider />", () => {
@@ -13,8 +14,8 @@ describe("<HueSlider />", () => {
     expect(HueSlider.Overlay.displayName).toBe("HueSliderOverlay")
   })
 
-  test("sets `className` correctly", () => {
-    render(
+  test("sets `className` correctly", async () => {
+    await render(
       <HueSlider.Root
         data-testid="slider"
         defaultValue={180}
@@ -22,44 +23,90 @@ describe("<HueSlider />", () => {
         trackProps={{ "data-testid": "track" }}
       />,
     )
-    const root = screen.getByTestId("slider")
-    const track = screen.getByTestId("track")
-    const thumb = screen.getByRole("slider")
-    const overlay = screen.getAllByTestId("overlay")
-    expect(root).toHaveClass("ui-hue-slider__root")
-    expect(track).toHaveClass("ui-hue-slider__track")
-    expect(thumb).toHaveClass("ui-hue-slider__thumb")
-    expect(overlay[0]).toHaveClass("ui-hue-slider__overlay")
+    const root = page.getByTestId("slider")
+    const track = page.getByTestId("track")
+    const thumb = page.getByRole("slider")
+    const overlay = page.getByTestId("overlay").first()
+    await expect.element(root).toHaveClass("ui-hue-slider__root")
+    await expect.element(track).toHaveClass("ui-hue-slider__track")
+    await expect.element(thumb).toHaveClass("ui-hue-slider__thumb")
+    await expect.element(overlay).toHaveClass("ui-hue-slider__overlay")
   })
 
-  test("renders custom children correctly", () => {
-    render(
+  test("merges `overlayProps` and `layers` props on overlay", async () => {
+    const onOverlayClick = vi.fn()
+    const onLayerClick = vi.fn()
+    await render(
+      <HueSlider.Root
+        defaultValue={0}
+        overlayProps={{
+          className: "from-overlay",
+          style: { color: "red", pointerEvents: "auto" },
+          "data-testid": "overlay",
+          layers: [
+            {
+              className: "from-layer",
+              style: { backgroundColor: "blue", pointerEvents: "auto" },
+              onClick: onLayerClick,
+            },
+          ],
+          onClick: onOverlayClick,
+        }}
+      />,
+    )
+
+    const overlay = page.getByTestId("overlay")
+
+    await expect
+      .element(overlay)
+      .toHaveClass("ui-hue-slider__overlay", "from-overlay", "from-layer")
+    await expect.element(overlay).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    await expect
+      .element(overlay)
+      .toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    overlay
+      .element()
+      .dispatchEvent(
+        new MouseEvent("click", { bubbles: true, cancelable: true }),
+      )
+
+    expect(onOverlayClick).toHaveBeenCalledTimes(1)
+    expect(onLayerClick).toHaveBeenCalledTimes(1)
+  })
+
+  test("renders custom children correctly", async () => {
+    await render(
       <HueSlider.Root defaultValue={180}>
-        <div data-testid="custom-child" />
+        <div data-testid="custom-child">custom</div>
       </HueSlider.Root>,
     )
 
-    expect(screen.getByTestId("custom-child")).toBeVisible()
+    await expect.element(page.getByTestId("custom-child")).toBeVisible()
   })
 
-  test("sets aria attributes correctly", () => {
-    render(<HueSlider.Root defaultValue={180} />)
+  test("sets aria attributes correctly", async () => {
+    await render(<HueSlider.Root defaultValue={180} />)
 
-    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuenow", "180")
-    expect(screen.getByRole("slider")).toHaveAttribute(
-      "aria-valuetext",
-      "180°, Cyan",
-    )
-    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuemin", "0")
-    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuemax", "360")
-    expect(screen.getByRole("slider")).toHaveAttribute(
-      "aria-orientation",
-      "horizontal",
-    )
+    await expect
+      .element(page.getByRole("slider"))
+      .toHaveAttribute("aria-valuenow", "180")
+    await expect
+      .element(page.getByRole("slider"))
+      .toHaveAttribute("aria-valuetext", "180°, Cyan")
+    await expect
+      .element(page.getByRole("slider"))
+      .toHaveAttribute("aria-valuemin", "0")
+    await expect
+      .element(page.getByRole("slider"))
+      .toHaveAttribute("aria-valuemax", "360")
+    await expect
+      .element(page.getByRole("slider"))
+      .toHaveAttribute("aria-orientation", "horizontal")
   })
 
-  test("sets vertical orientation correctly", () => {
-    render(
+  test("sets vertical orientation correctly", async () => {
+    await render(
       <HueSlider.Root
         defaultValue={180}
         orientation="vertical"
@@ -67,14 +114,12 @@ describe("<HueSlider />", () => {
       />,
     )
 
-    expect(screen.getByRole("slider")).toHaveAttribute(
-      "aria-orientation",
-      "vertical",
-    )
-    expect(screen.getByTestId("overlay")).toHaveAttribute(
-      "data-orientation",
-      "vertical",
-    )
+    await expect
+      .element(page.getByRole("slider"))
+      .toHaveAttribute("aria-orientation", "vertical")
+    await expect
+      .element(page.getByTestId("overlay").first())
+      .toHaveAttribute("data-orientation", "vertical")
   })
 
   test.each([
@@ -90,42 +135,47 @@ describe("<HueSlider />", () => {
     [270, "Magenta"],
     [329, "Magenta"],
     [330, "Red"],
-  ])("sets aria-valuetext for each hue correctly", (hue, color) => {
-    render(<HueSlider.Root defaultValue={hue} />)
+  ])("sets aria-valuetext for each hue correctly", async (hue, color) => {
+    await render(<HueSlider.Root defaultValue={hue} />)
 
-    expect(screen.getByRole("slider")).toHaveAttribute(
-      "aria-valuetext",
-      `${hue}°, ${color}`,
-    )
+    await expect
+      .element(page.getByRole("slider"))
+      .toHaveAttribute("aria-valuetext", `${hue}°, ${color}`)
   })
 
-  test("controlled slider value updates correctly", () => {
-    const { rerender } = render(<HueSlider.Root value={60} />)
+  test("controlled slider value updates correctly", async () => {
+    const { rerender } = await render(<HueSlider.Root value={60} />)
 
-    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuenow", "60")
-    expect(screen.getByRole("slider")).toHaveAttribute(
-      "aria-valuetext",
-      "60°, Yellow",
-    )
+    await expect
+      .element(page.getByRole("slider"))
+      .toHaveAttribute("aria-valuenow", "60")
+    await expect
+      .element(page.getByRole("slider"))
+      .toHaveAttribute("aria-valuetext", "60°, Yellow")
 
-    rerender(<HueSlider.Root value={180} />)
+    await rerender(<HueSlider.Root value={180} />)
 
-    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuenow", "180")
-    expect(screen.getByRole("slider")).toHaveAttribute(
-      "aria-valuetext",
-      "180°, Cyan",
-    )
+    await expect
+      .element(page.getByRole("slider"))
+      .toHaveAttribute("aria-valuenow", "180")
+    await expect
+      .element(page.getByRole("slider"))
+      .toHaveAttribute("aria-valuetext", "180°, Cyan")
   })
 
-  test("disabled HueSlider renders correctly", () => {
-    render(<HueSlider.Root disabled />)
+  test("disabled HueSlider renders correctly", async () => {
+    await render(<HueSlider.Root disabled />)
 
-    expect(screen.getByRole("slider")).toHaveAttribute("aria-disabled")
+    await expect
+      .element(page.getByRole("slider"))
+      .toHaveAttribute("aria-disabled")
   })
 
-  test("readonly HueSlider renders correctly", () => {
-    render(<HueSlider.Root readOnly />)
+  test("readonly HueSlider renders correctly", async () => {
+    await render(<HueSlider.Root readOnly />)
 
-    expect(screen.getByRole("slider")).toHaveAttribute("aria-readonly")
+    await expect
+      .element(page.getByRole("slider"))
+      .toHaveAttribute("aria-readonly")
   })
 })

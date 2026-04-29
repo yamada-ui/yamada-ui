@@ -133,12 +133,12 @@ import { CircleProgress } from "@workspaces/ui"
 
 ## アクセシビリティ
 
-`CircleProgress.Root`に`aria-label`または`aria-labelledby`を設定すると、スクリーンリーダーによって読み上げられます。
+`CircleProgress.Root`の`circleProps`に`aria-label`または`aria-labelledby`を設定すると、スクリーンリーダーによって読み上げられます。
 
 ```tsx
 <CircleProgress.Root
   value={88}
-  aria-label="Central Processing Unit (CPU) Usage"
+  circleProps={{ "aria-label": "Central Processing Unit (CPU) Usage" }}
 />
 ```
 
@@ -148,7 +148,10 @@ import { CircleProgress } from "@workspaces/ui"
     Central Processing Unit (CPU) Usage
   </Text>
 
-  <CircleProgress.Root value={88} aria-labelledby="label" />
+  <CircleProgress.Root
+    value={88}
+    circleProps={{ "aria-labelledby": "label" }}
+  />
 </VStack>
 ```
 

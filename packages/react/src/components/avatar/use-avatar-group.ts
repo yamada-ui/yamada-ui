@@ -24,7 +24,7 @@ export const useAvatarGroup = ({
   const excess = !isUndefined(max) ? validChildren.length - max : 0
 
   const getRootProps: PropGetter = useCallback(
-    (props) => mergeProps({ role: "group" }, rest, props)(),
+    (props) => mergeProps(rest, props, { role: "group" })(),
     [rest],
   )
 

@@ -93,7 +93,7 @@ export const calendarStyle = defineComponentSlotStyle({
     prev: {},
     root: {
       "--cell-gap": "spaces.1",
-      "--holiday-color": ["colors.red.500", "colors.red.400"],
+      "--holiday-color": ["colors.red.600", "colors.red.300"],
       "--select-content-size": "auto",
       "--select-font-size": "{font-size}",
       "--select-root-size": "fit-content",

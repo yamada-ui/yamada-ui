@@ -1,8 +1,27 @@
-import { a11y, render, screen, waitFor } from "#test"
 import { useRef, useState } from "react"
+import { type Locator, locators } from "vitest/browser"
+import { a11y, page, render } from "#test/browser"
 import { FileButton } from "."
 
+declare module "vitest/browser" {
+  interface LocatorSelectors {
+    getByCSS(css: string): Locator
+  }
+}
+
 describe("<FileButton />", () => {
+  beforeAll(() => {
+    locators.extend({
+      getByCSS(css: string) {
+        return `css=${css}`
+      },
+    })
+  })
+
+  beforeEach(() => {
+    vi.spyOn(HTMLInputElement.prototype, "click").mockImplementation(() => {})
+  })
+
   afterAll(() => {
     vi.restoreAllMocks()
   })
@@ -15,36 +34,40 @@ describe("<FileButton />", () => {
     expect(FileButton.displayName).toBe("FileButton")
   })
 
-  test("sets `className` correctly", () => {
-    render(<FileButton>Upload</FileButton>)
+  test("sets `className` correctly", async () => {
+    await render(<FileButton>Upload</FileButton>)
 
-    const fileButton = screen.getByRole("button", { name: /Upload/i })
-    expect(fileButton).toHaveClass("ui-file-button")
+    await expect
+      .element(page.getByRole("button", { name: /Upload/i }))
+      .toHaveClass("ui-file-button")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<FileButton>Upload</FileButton>)
-    const fileButton = screen.getByRole("button", { name: /Upload/i })
-    expect(fileButton.tagName).toBe("BUTTON")
+  test("renders HTML tag correctly", async () => {
+    await render(<FileButton>Upload</FileButton>)
+
+    await expect
+      .element(page.getByRole("button", { name: /Upload/i }))
+      .toHaveProperty("tagName", "BUTTON")
   })
 
   test("should render FileButton", async () => {
-    render(<FileButton>Upload</FileButton>)
+    await render(<FileButton>Upload</FileButton>)
 
-    const fileButton = await screen.findByRole("button", { name: /Upload/i })
-    expect(fileButton).toBeInTheDocument()
+    await expect
+      .element(page.getByRole("button", { name: /Upload/i }))
+      .toBeInTheDocument()
   })
 
   test("should call onClick", async () => {
     const onClickMock = vi.fn()
 
-    const { user } = render(
+    const { user } = await render(
       <FileButton onClick={onClickMock}>Upload</FileButton>,
     )
 
-    const button = await screen.findByRole("button")
-    await user.click(button)
-    waitFor(() => {
+    await user.click(page.getByRole("button", { name: /Upload/i }))
+
+    await vi.waitFor(() => {
       expect(onClickMock).toHaveBeenCalledTimes(1)
     })
   })
@@ -52,33 +75,39 @@ describe("<FileButton />", () => {
   test("should not call onClick (when readonly)", async () => {
     const onClickMock = vi.fn()
 
-    const { user } = render(
+    const { user } = await render(
       <FileButton readOnly onClick={onClickMock}>
         Upload
       </FileButton>,
     )
 
-    const fileButton = await screen.findByRole("button", { name: /Upload/i })
-    await user.click(fileButton)
+    await expect
+      .element(page.getByRole("button", { name: /Upload/i }))
+      .toHaveAttribute("aria-disabled", "true")
+
+    await user.click(page.getByRole("button", { name: /Upload/i }), {
+      force: true,
+    })
     expect(onClickMock).not.toHaveBeenCalled()
   })
 
   test("should not call onClick when disabled", async () => {
     const onClickMock = vi.fn()
 
-    const { user } = render(
+    const { user } = await render(
       <FileButton disabled onClick={onClickMock}>
         Upload
       </FileButton>,
     )
 
-    const fileButton = await screen.findByRole("button", { name: /Upload/i })
-    expect(fileButton).toBeDisabled()
+    await expect
+      .element(page.getByRole("button", { name: /Upload/i }))
+      .toBeDisabled()
 
-    await user.click(fileButton)
-    waitFor(() => {
-      expect(onClickMock).toHaveBeenCalledTimes(0)
+    await user.click(page.getByRole("button", { name: /Upload/i }), {
+      force: true,
     })
+    expect(onClickMock).not.toHaveBeenCalled()
   })
 
   test("should handle file selection correctly", async () => {
@@ -94,7 +123,7 @@ describe("<FileButton />", () => {
 
       return (
         <>
-          <p data-testid="file-count">files: {files ? files.length : 0}</p>
+          <p>files: {files ? files.length : 0}</p>
           <FileButton multiple onChange={handleFileChange}>
             Upload
           </FileButton>
@@ -102,39 +131,30 @@ describe("<FileButton />", () => {
       )
     }
 
-    const { user } = render(<TestComponent />)
+    const { user } = await render(<TestComponent />)
 
-    const fileCount = screen.getByTestId("file-count")
-    const fileInput = document.querySelector(
-      'input[type="file"]',
-    ) as HTMLInputElement
+    const fileInput = page.getByCSS('input[type="file"]')
 
-    expect(fileCount).toHaveTextContent("files: 0")
+    await expect.element(page.getByText("files: 0")).toBeInTheDocument()
     expect(handleFileChangeMock).not.toHaveBeenCalled()
 
     const file1 = new File(["test1"], "test1.txt", { type: "text/plain" })
     await user.upload(fileInput, file1)
 
-    waitFor(() => {
-      expect(fileCount).toHaveTextContent("files: 1")
-    })
-    waitFor(() => {
+    await expect.element(page.getByText("files: 1")).toBeInTheDocument()
+    await vi.waitFor(() => {
       expect(handleFileChangeMock).toHaveBeenLastCalledWith([file1])
     })
 
     const file2 = new File(["test2"], "test2.txt", { type: "text/plain" })
     await user.upload(fileInput, [file1, file2])
 
-    await waitFor(() => {
-      expect(fileCount).toHaveTextContent("files: 2")
-    })
+    await expect.element(page.getByText("files: 2")).toBeInTheDocument()
     expect(handleFileChangeMock).toHaveBeenLastCalledWith([file1, file2])
 
     await user.upload(fileInput, [])
 
-    await waitFor(() => {
-      expect(fileCount).toHaveTextContent("files: 0")
-    })
+    await expect.element(page.getByText("files: 0")).toBeInTheDocument()
     expect(handleFileChangeMock).toHaveBeenLastCalledWith(undefined)
 
     expect(handleFileChangeMock).toHaveBeenCalledTimes(3)
@@ -156,7 +176,7 @@ describe("<FileButton />", () => {
 
       return (
         <>
-          <p data-testid="file-count">files: {files ? files.length : 0}</p>
+          <p>files: {files ? files.length : 0}</p>
           <>
             <FileButton resetRef={resetRef} onChange={handleFileChange}>
               Upload
@@ -167,27 +187,18 @@ describe("<FileButton />", () => {
       )
     }
 
-    const { user } = render(<TestComponent />)
+    const { user } = await render(<TestComponent />)
 
-    const resetButton = await screen.findByRole("button", { name: /Reset/i })
-    const fileCount = screen.getByTestId("file-count")
-
-    expect(fileCount).toHaveTextContent("files: 0")
+    await expect.element(page.getByText("files: 0")).toBeInTheDocument()
 
     const file = new File(["test"], "test.txt", { type: "text/plain" })
-    const fileInput = document.querySelector(
-      'input[type="file"]',
-    ) as HTMLInputElement
+    const fileInput = page.getByCSS('input[type="file"]')
     await user.upload(fileInput, file)
 
-    await waitFor(() => {
-      expect(fileCount).toHaveTextContent("files: 1")
-    })
+    await expect.element(page.getByText("files: 1")).toBeInTheDocument()
 
-    await user.click(resetButton)
+    await user.click(page.getByRole("button", { name: /Reset/i }))
 
-    await waitFor(() => {
-      expect(fileCount).toHaveTextContent("files: 0")
-    })
+    await expect.element(page.getByText("files: 0")).toBeInTheDocument()
   })
 })

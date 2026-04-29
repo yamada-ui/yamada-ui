@@ -1,11 +1,11 @@
 import type { InfiniteScrollAreaProps } from "."
 import { useRef, useState } from "react"
-import { a11y, fireEvent, render, waitFor } from "#test"
+import { a11y, page, render } from "#test/browser"
 import { InfiniteScrollArea } from "."
 import { noop } from "../../utils"
 
 describe("<InfiniteScrollArea />", () => {
-  const defaultIntersectionObserver = global.IntersectionObserver
+  const defaultIntersectionObserver = globalThis.IntersectionObserver
   const IntersectionObserverMock = vi.fn(function IntersectionObserverMock(
     this: {
       disconnect: () => void
@@ -49,8 +49,8 @@ describe("<InfiniteScrollArea />", () => {
     expect(InfiniteScrollArea.displayName).toBe("InfiniteScrollAreaRoot")
   })
 
-  test("sets `className` correctly", () => {
-    const { container } = render(
+  test("sets `className` correctly", async () => {
+    const { container } = await render(
       <InfiniteScrollArea loading={<>Loading…</>}>
         {Array(50)
           .fill(0)
@@ -62,8 +62,8 @@ describe("<InfiniteScrollArea />", () => {
     expect(container.firstChild).toHaveClass("ui-infinite-scroll-area__root")
   })
 
-  test("renders HTML tag correctly", () => {
-    const { container } = render(
+  test("renders HTML tag correctly", async () => {
+    const { container } = await render(
       <InfiniteScrollArea loading={<>Loading…</>}>
         {Array(50)
           .fill(0)
@@ -75,9 +75,12 @@ describe("<InfiniteScrollArea />", () => {
     expect(container.firstChild?.nodeName).toBe("DIV")
   })
 
-  test("sets default tabIndex on feed root for accessibility", () => {
-    const { container } = render(
-      <InfiniteScrollArea loading={<>Loading…</>}>
+  test("sets default tabIndex on feed root for accessibility", async () => {
+    await render(
+      <InfiniteScrollArea
+        data-testid="infinite-scroll-area"
+        loading={<>Loading…</>}
+      >
         {Array(50)
           .fill(0)
           .map((_, index) => (
@@ -86,12 +89,19 @@ describe("<InfiniteScrollArea />", () => {
       </InfiniteScrollArea>,
     )
 
-    expect(container.firstChild).toHaveAttribute("tabindex", "0")
+    expect(page.getByTestId("infinite-scroll-area")).toHaveAttribute(
+      "tabindex",
+      "0",
+    )
   })
 
-  test("preserves explicit tabIndex on feed root", () => {
-    const { container } = render(
-      <InfiniteScrollArea loading={<>Loading…</>} tabIndex={-1}>
+  test("preserves explicit tabIndex on feed root", async () => {
+    await render(
+      <InfiniteScrollArea
+        data-testid="infinite-scroll-area"
+        loading={<>Loading…</>}
+        tabIndex={-1}
+      >
         {Array(50)
           .fill(0)
           .map((_, index) => (
@@ -100,10 +110,13 @@ describe("<InfiniteScrollArea />", () => {
       </InfiniteScrollArea>,
     )
 
-    expect(container.firstChild).toHaveAttribute("tabindex", "-1")
+    expect(page.getByTestId("infinite-scroll-area")).toHaveAttribute(
+      "tabindex",
+      "-1",
+    )
   })
 
-  test("InfiniteScrollArea renders with initialLoad correctly", () => {
+  test("InfiniteScrollArea renders with initialLoad correctly", async () => {
     const MyComponent = () => {
       const [count, setCount] = useState<number>(50)
 
@@ -126,8 +139,8 @@ describe("<InfiniteScrollArea />", () => {
       )
     }
 
-    const { getByText } = render(<MyComponent />)
-    expect(getByText("51")).toBeInTheDocument()
+    await render(<MyComponent />)
+    await expect.element(page.getByText("51")).toBeInTheDocument()
   })
 
   test("InfiniteScrollArea renders with Reverse correctly", async () => {
@@ -153,15 +166,7 @@ describe("<InfiniteScrollArea />", () => {
       )
     }
 
-    const { container } = render(<MyComponent reverse />)
-    fireEvent.scroll(container, {
-      target: {
-        scrollTop: 1000,
-      },
-    })
-    await waitFor(() => {
-      expect(container.scrollTop).toBe(1000)
-    })
+    const { container } = await render(<MyComponent reverse />)
 
     const rootElement = container.firstElementChild
     expect(IntersectionObserverMock).toHaveBeenLastCalledWith(

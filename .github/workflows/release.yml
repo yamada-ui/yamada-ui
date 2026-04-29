@@ -25,6 +25,7 @@ on:
       - "packages/utils/README.md"
       - "packages/utils/src/**/*.ts"
       - "packages/utils/src/**/*.tsx"
+      - "packages/workspace/src/typescript/**/*"
       - "!packages/**/*.stories.ts"
       - "!packages/**/*.stories.tsx"
       - "!packages/**/*.test.ts"

@@ -18,6 +18,7 @@
     "useCalculatedVersion": true
   },
   "ignore": [
+    "@yamada-ui/forge",
     "@yamada-ui/workspace",
     "@playgrounds/next-app",
     "@playgrounds/next-pages",

@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { PropsTable } from "#storybook"
 import { useMemo, useRef, useState } from "react"
+import { PropsTable } from "#storybook"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { Box } from "../box"
 import { Button } from "../button"

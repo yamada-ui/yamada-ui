@@ -1,10 +1,10 @@
-import { renderHook } from "#test"
+import { renderHook } from "#test/browser"
 import { ColorModeProvider } from "./color-mode-provider"
 import { useColorModeValue } from "./use-color-mode-value"
 
 describe("ColorModeProvider", () => {
-  test("returns light value in light mode", () => {
-    const { result } = renderHook(
+  test("returns light value in light mode", async () => {
+    const { result } = await renderHook(
       () => useColorModeValue("lightValue", "darkValue"),
       {
         wrapper: ({ children }) => (
@@ -16,8 +16,8 @@ describe("ColorModeProvider", () => {
     expect(result.current).toBe("lightValue")
   })
 
-  test("returns dark value in dark mode", () => {
-    const { result } = renderHook(
+  test("returns dark value in dark mode", async () => {
+    const { result } = await renderHook(
       () => useColorModeValue("lightValue", "darkValue"),
       {
         wrapper: ({ children }) => (

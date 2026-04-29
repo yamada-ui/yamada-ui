@@ -95,6 +95,7 @@ export const InfiniteScrollArea = withProvider<
         ref={mergeRefs(rootRef, ref)}
         aria-busy="false"
         role="feed"
+        tabIndex={0}
         {...rest}
       >
         {reverse && showTrigger ? (

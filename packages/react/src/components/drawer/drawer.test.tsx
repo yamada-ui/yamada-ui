@@ -1,8 +1,15 @@
 import type { FC } from "react"
 import { a11y, page, render, renderHook } from "#test/browser"
+import { type Locator, locators } from "vitest/browser"
 import { Button } from "../button"
 import { Drawer } from "./"
 import { useDrawer } from "./use-drawer"
+
+declare module "vitest/browser" {
+  interface LocatorSelectors {
+    getByClassName(className: string): Locator
+  }
+}
 
 const TestComponent: FC<Drawer.RootProps> = (props) => {
   return (
@@ -41,6 +48,14 @@ const TestComponent: FC<Drawer.RootProps> = (props) => {
 }
 
 describe("<Drawer />", () => {
+  beforeAll(() => {
+    locators.extend({
+      getByClassName(className) {
+        return `.${className}`
+      },
+    })
+  })
+
   test("renders component correctly", async () => {
     await a11y(<TestComponent />)
   })
@@ -205,9 +220,10 @@ describe("<Drawer />", () => {
     )
 
     const contentLocator = page.getByTestId("content")
+    const dragBarLocator = contentLocator.getByClassName("ui-drawer__drag-bar")
+
     await expect.element(contentLocator).toBeInTheDocument()
-    const content = contentLocator.element()
-    expect(content.querySelector(".ui-drawer__drag-bar")).toBeInTheDocument()
+    await expect.element(dragBarLocator).toBeInTheDocument()
   })
 
   test("does not render drag bar when closeOnDrag is false", async () => {
@@ -220,11 +236,10 @@ describe("<Drawer />", () => {
     )
 
     const contentLocator = page.getByTestId("content")
+    const dragBarLocator = contentLocator.getByClassName("ui-drawer__drag-bar")
+
     await expect.element(contentLocator).toBeInTheDocument()
-    const content = contentLocator.element()
-    expect(
-      content.querySelector(".ui-drawer__drag-bar"),
-    ).not.toBeInTheDocument()
+    await expect.element(dragBarLocator.query()).not.toBeInTheDocument()
   })
 
   test("renders without overlay when withOverlay is false", async () => {
@@ -236,9 +251,10 @@ describe("<Drawer />", () => {
       </Drawer.Root>,
     )
 
-    expect(
-      document.querySelector(".ui-drawer__overlay"),
-    ).not.toBeInTheDocument()
+    await expect.element(page.getByText("Content")).toBeInTheDocument()
+    await expect
+      .element(page.getByClassName("ui-drawer__overlay").query())
+      .not.toBeInTheDocument()
   })
 
   test("renders with trigger prop", async () => {

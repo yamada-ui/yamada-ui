@@ -14,6 +14,7 @@ import type {
 } from "../../core"
 import type { Merge } from "../../utils"
 import { useCallback, useState } from "react"
+import { mergeProps } from "../../core"
 import { createContext, dataAttr, handlerAll, isUndefined } from "../../utils"
 
 const PLACEMENT_MAP: {
@@ -105,7 +106,7 @@ export const useChartLegend = ({
   const { highlightedDataKey, onHighlight } = useChartContext()
 
   const getRootProps: PropGetter = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -277,10 +278,7 @@ export const useChartTooltip = <
   )
 
   const getContentProps: PropGetter = useCallback(
-    (props) => ({
-      ...rest,
-      ...props,
-    }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -323,7 +321,7 @@ export const useChartLabelList = ({
   ...rest
 }: UseChartLabelListProps = {}) => {
   const getRootProps: PropGetter<"text"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -394,7 +392,7 @@ export const useChartLabel = ({
   ...rest
 }: UseChartLabelProps = {}) => {
   const getRootProps: PropGetter<"text"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 

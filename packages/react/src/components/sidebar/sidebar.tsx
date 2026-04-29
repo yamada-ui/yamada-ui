@@ -1024,8 +1024,7 @@ export const SidebarItem = withContext<"li", SidebarItemProps>(
       onGroupToggle,
       onSelectedChange,
     } = useSidebarItem({
-      ...componentContext.itemProps,
-      ...rest,
+      ...mergeProps(componentContext.itemProps, rest)(),
       asyncChildren: asyncChildrenProp ? asyncChildren : undefined,
       children: computedChildren,
     })

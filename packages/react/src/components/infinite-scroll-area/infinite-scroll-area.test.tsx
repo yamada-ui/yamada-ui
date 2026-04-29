@@ -75,6 +75,47 @@ describe("<InfiniteScrollArea />", () => {
     expect(container.firstChild?.nodeName).toBe("DIV")
   })
 
+  test("sets default tabIndex on feed root for accessibility", async () => {
+    await render(
+      <InfiniteScrollArea
+        data-testid="infinite-scroll-area"
+        loading={<>Loading…</>}
+      >
+        {Array(50)
+          .fill(0)
+          .map((_, index) => (
+            <div key={index}>{index}</div>
+          ))}
+      </InfiniteScrollArea>,
+    )
+
+    expect(page.getByTestId("infinite-scroll-area")).toHaveAttribute(
+      "tabindex",
+      "0",
+    )
+  })
+
+  test("preserves explicit tabIndex on feed root", async () => {
+    await render(
+      <InfiniteScrollArea
+        data-testid="infinite-scroll-area"
+        loading={<>Loading…</>}
+        tabIndex={-1}
+      >
+        {Array(50)
+          .fill(0)
+          .map((_, index) => (
+            <div key={index}>{index}</div>
+          ))}
+      </InfiniteScrollArea>,
+    )
+
+    expect(page.getByTestId("infinite-scroll-area")).toHaveAttribute(
+      "tabindex",
+      "-1",
+    )
+  })
+
   test("InfiniteScrollArea renders with initialLoad correctly", async () => {
     const MyComponent = () => {
       const [count, setCount] = useState<number>(50)

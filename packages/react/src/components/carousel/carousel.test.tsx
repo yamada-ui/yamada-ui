@@ -60,6 +60,41 @@ describe("<Carousel />", () => {
       .toHaveClass("ui-carousel__trigger--next")
   })
 
+  test("should merge root consumer props with internal props", async () => {
+    const ref = vi.fn()
+    const onMouseEnter = vi.fn()
+    const onMouseLeave = vi.fn()
+
+    const { user } = await render(
+      <TestComponent
+        ref={ref}
+        className="custom-root"
+        style={{ marginTop: "1px" }}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      />,
+    )
+
+    const root = page.getByTestId("carousel")
+
+    await expect.element(root).toHaveClass("ui-carousel__root")
+    await expect.element(root).toHaveClass("custom-root")
+    await expect.element(root).toHaveStyle("margin-top: 1px")
+
+    await user.hover(root)
+    await user.unhover(root)
+
+    expect(onMouseEnter).toHaveBeenCalledTimes(1)
+    expect(onMouseLeave).toHaveBeenCalledTimes(1)
+
+    const rootElement = root.element()
+    const refElement = ref.mock.calls.find(
+      ([value]) => value instanceof HTMLElement,
+    )?.[0]
+
+    expect(refElement).toBe(rootElement)
+  })
+
   test("renders HTML tag correctly", async () => {
     await render(<TestComponent />)
 

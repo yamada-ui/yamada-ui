@@ -18,7 +18,7 @@
     "build:next": "next build",
     "build": "run-s build:*",
     "start": "next start",
-    "typecheck": "next typegen && tsc",
+    "typecheck": "next typegen && tsgo",
     "lint": "next typegen && oxlint . --max-warnings=0",
     "format": "pnpm -w format www",
     "quality": "pnpm format && pnpm lint && pnpm typecheck",

@@ -23,33 +23,45 @@ updates:
           - "*"
         exclude-patterns:
           - "@changesets/*"
-          - "*oxlint*"
-          - "*eslint*"
+          - "oxlint"
+          - "oxlint-*"
+          - "eslint"
+          - "*eslint-plugin*"
           - "react"
           - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
           - "storybook"
           - "@storybook/*"
           - "vitest"
+          - "vitest-*"
           - "@vitest/*"
+          - "@testing-library/*"
       changesets:
         patterns:
           - "@changesets/*"
       lint:
         patterns:
-          - "*oxlint*"
-          - "*eslint*"
+          - "oxlint"
+          - "oxlint-*"
+          - "eslint"
+          - "*eslint-plugin*"
       react:
         patterns:
           - "react"
           - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
       storybook:
         patterns:
           - "storybook"
           - "@storybook/*"
-      vitest:
+      test:
         patterns:
           - "vitest"
+          - "vitest-*"
           - "@vitest/*"
+          - "@testing-library/*"
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
@@ -71,7 +83,6 @@ updates:
         - "*"
     assignees:
       - "hirotomoyamada"
-      - "koralle"
     labels:
       - "github-actions"
     groups:

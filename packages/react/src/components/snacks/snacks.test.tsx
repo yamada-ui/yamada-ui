@@ -1,5 +1,4 @@
 import type { FC } from "react"
-import "@testing-library/jest-dom/vitest"
 import { page, render, renderHook } from "#test/browser"
 import { Snacks } from "./snacks"
 import { useSnacks } from "./use-snacks"

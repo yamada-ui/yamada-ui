@@ -124,7 +124,7 @@
     "@babel/traverse": "^7.29.0",
     "@faker-js/faker": "catalog:",
     "@lucide/lab": "catalog:",
-    "@mdn/browser-compat-data": "7.3.11",
+    "@mdn/browser-compat-data": "7.3.12",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
     "@types/babel__traverse": "^7.28.0",
@@ -143,7 +143,7 @@
     "use-mask-input": "^3.9.0",
     "vitest-axe": "catalog:",
     "vitest-browser-react": "2.2.0",
-    "web-features": "3.23.1",
+    "web-features": "3.24.0",
     "yamljs": "catalog:"
   },
   "peerDependencies": {

@@ -535,7 +535,9 @@ describe("<Tree />", () => {
             style: { fontSize: "16px" },
             onClick: onClickFromGetter,
           })}
-        />
+        >
+          <li role="treeitem">Item</li>
+        </ul>
       )
     }
 
@@ -554,7 +556,7 @@ describe("<Tree />", () => {
       fontSize: "16px",
     })
 
-    await user.click(page.getByTestId("hook-root"))
+    await user.click(page.getByRole("treeitem", { name: "Item" }))
 
     expect(onClickFromOptions).toHaveBeenCalledTimes(1)
     expect(onClickFromGetter).toHaveBeenCalledTimes(1)

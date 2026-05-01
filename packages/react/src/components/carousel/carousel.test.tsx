@@ -84,8 +84,12 @@ describe("<Carousel />", () => {
     await user.hover(root)
     await user.unhover(root)
 
-    expect(onMouseEnter).toHaveBeenCalledWith(expect.any(Object))
-    expect(onMouseLeave).toHaveBeenCalledWith(expect.any(Object))
+    expect(onMouseEnter).toHaveBeenCalledWith(
+      expect.objectContaining({ type: "mouseenter" }),
+    )
+    expect(onMouseLeave).toHaveBeenCalledWith(
+      expect.objectContaining({ type: "mouseleave" }),
+    )
 
     const rootElement = root.element()
     const refElement = ref.mock.calls.find(

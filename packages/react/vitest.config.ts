@@ -2,34 +2,18 @@ import react from "@vitejs/plugin-react"
 import { playwright } from "@vitest/browser-playwright"
 import { defineProject, mergeConfig } from "@yamada-ui/workspace/vitest"
 import sharedConfig from "@yamada-ui/workspace/vitest/config"
-import { glob, readFile } from "node:fs/promises"
 import { resolve } from "node:path"
 
-async function getBrowserTestFiles() {
-  const paths = await Array.fromAsync(
-    glob(resolve(__dirname, "src", "**", "*.test.{ts,tsx}")),
-  )
-  const targetPaths: string[] = []
+const browserPatterns = [
+  "src/**/*.test.browser.{ts,tsx}",
+  "src/**/*.test.chromium.{ts,tsx}",
+  "src/**/*.test.firefox.{ts,tsx}",
+  "src/**/*.test.webkit.{ts,tsx}",
+]
 
-  await Promise.all(
-    paths.map(async (path) => {
-      try {
-        const content = await readFile(path, "utf-8")
-        const browser = /^import\s+\{[^}]*\}\s+from\s+"#test\/browser"/m.test(
-          content,
-        )
-
-        if (browser) {
-          targetPaths.push(path.replace(resolve(__dirname) + "/", ""))
-        }
-      } catch {}
-    }),
-  )
-
-  return targetPaths
+const alias = {
+  "@": resolve(__dirname, "./src"),
 }
-
-const browserTestFiles = await getBrowserTestFiles()
 
 export default mergeConfig(sharedConfig, {
   plugins: [react()],
@@ -43,15 +27,11 @@ export default mergeConfig(sharedConfig, {
     },
     projects: [
       defineProject({
-        resolve: {
-          alias: {
-            "@": resolve(__dirname, "./src"),
-          },
-        },
+        resolve: { alias },
         test: {
           name: "jsdom",
           environment: "jsdom",
-          exclude: browserTestFiles,
+          exclude: browserPatterns,
           globals: true,
           include: ["src/**/*.test.{ts,tsx}"],
           setupFiles: ["@yamada-ui/workspace/vitest/setup"],
@@ -60,31 +40,21 @@ export default mergeConfig(sharedConfig, {
       }),
       defineProject({
         optimizeDeps: { include: ["axe-core"] },
-        resolve: {
-          alias: {
-            "@": resolve(__dirname, "./src"),
-          },
-        },
+        resolve: { alias },
         test: {
           name: "browser",
           browser: {
             enabled: true,
             headless: true,
             instances: [
-              {
-                browser: "chromium",
-              },
-              {
-                browser: "webkit",
-              },
-              {
-                browser: "firefox",
-              },
+              { browser: "chromium" },
+              { browser: "webkit" },
+              { browser: "firefox" },
             ],
             provider: playwright() as any,
           },
           globals: true,
-          include: browserTestFiles,
+          include: browserPatterns,
           testTimeout: 10000,
         },
       }),

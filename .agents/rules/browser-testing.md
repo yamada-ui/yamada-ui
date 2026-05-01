@@ -1,8 +1,15 @@
 # Browser Testing Rules
 
-Follow these rules when writing Vitest browser tests in `packages/react` (test files that import from `#test/browser`).
+Follow these rules when writing Vitest browser tests in `packages/react`. Browser tests live in files whose name matches one of:
 
-If a matching test file imports from `#test` instead of `#test/browser`, skip this rule. For `renderHook`-only browser tests, apply the sections that match the behavior under test; component-only guidance for `user`, `page` queries, DOM assertions, and `a11y(...)` does not apply unless the hook test renders DOM or drives user interaction.
+- `*.test.browser.{ts,tsx}` — runs against every browser (chromium, firefox, webkit).
+- `*.test.chromium.{ts,tsx}` — runs only against Chromium.
+- `*.test.firefox.{ts,tsx}` — runs only against Firefox.
+- `*.test.webkit.{ts,tsx}` — runs only against WebKit. Use this for Safari-specific behavior (e.g. components that branch on `isSafari()`).
+
+These files import from `#test/browser`. Plain `*.test.{ts,tsx}` files run under jsdom and import from `#test`; skip this rule for those.
+
+For `renderHook`-only browser tests, apply the sections that match the behavior under test; component-only guidance for `user`, `page` queries, DOM assertions, and `a11y(...)` does not apply unless the hook test renders DOM or drives user interaction.
 
 ## Core Principles
 

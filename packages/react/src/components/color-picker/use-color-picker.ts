@@ -156,6 +156,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     onOpen,
   } = useCombobox({
     disabled,
+    matchWidth: false,
     openOnClick: false,
     openOnEnter: !allowInput,
     openOnSpace: !allowInput,

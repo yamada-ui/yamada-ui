@@ -504,7 +504,7 @@ describe("<Accordion />", () => {
 
     await expect.element(item).toHaveClass("rest-class")
     await expect.element(item).toHaveClass("args-class")
-    expect(itemEl.id).toBe("rest-id")
+    expect(itemEl.id).toBe("args-id")
     expect(itemEl).toBeInstanceOf(HTMLElement)
     const htmlItemEl = itemEl as HTMLElement
     expect(htmlItemEl.style.color).toBe("red")

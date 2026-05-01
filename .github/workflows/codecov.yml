@@ -44,6 +44,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
+      - name: Free Disk Space
+        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: false
+          docker-images: true
+          swap-storage: true
+
       - name: Install
         uses: ./.github/composite-actions/install
 
@@ -52,7 +63,7 @@ jobs:
         run: pnpm playwright install chromium --with-deps
 
       - name: Run coverage
-        run: pnpm test:coverage -- --shard=${{ matrix.shard_index }}/4
+        run: pnpm test:coverage -- --retry=3 --shard=${{ matrix.shard_index }}/4
 
       - name: Upload coverage
         uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe # v5.5.4

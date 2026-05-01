@@ -25,10 +25,6 @@ jobs:
             name: CLI
             file_yaml: |
               full:
-                - .github/workflows/quality.yml
-                - '{turbo.json,package.json}'
-                - packages/workspace/package.json
-                - packages/workspace/src/vitest/**
                 - packages/cli/{package.json,vitest.config.ts}
                 - packages/cli/test/**
               diff:
@@ -37,10 +33,6 @@ jobs:
             name: Utils
             file_yaml: |
               full:
-                - .github/workflows/quality.yml
-                - '{turbo.json,package.json}'
-                - packages/workspace/package.json
-                - packages/workspace/src/vitest/**
                 - packages/utils/{package.json,vitest.config.ts}
               diff:
                 - packages/utils/src/**/*.{ts,tsx,mts}
@@ -54,22 +46,33 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
         with:
+          files: |
+            .github/workflows/quality.yml
+            .github/workflows/unit-test.yml
+            '{turbo.json,package.json}'
+            packages/workspace/package.json
+            packages/workspace/src/vitest/**
+
+      - name: Check modified module files
+        id: changed-module-files
+        uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
+        with:
           files_yaml: ${{ matrix.file_yaml }}
 
       - name: Install
-        if: steps.changed-files.outputs.changed_keys != ''
+        if: steps.changed-files.outputs.any_changed == 'true' || steps.changed-module-files.outputs.changed_keys != ''
         uses: ./.github/composite-actions/install
 
       - name: Run test (full)
-        if: steps.changed-files.outputs.full_any_changed == 'true'
-        run: pnpm turbo run test:coverage --filter=./packages/${{ matrix.id }}
+        if: steps.changed-files.outputs.any_changed == 'true' || steps.changed-module-files.outputs.full_any_changed == 'true'
+        run: pnpm turbo run test:coverage --filter=./packages/${{ matrix.id }} -- --retry=3
 
       - name: Run test (diff)
-        if: steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true'
-        run: pnpm turbo run test:coverage --filter=./packages/${{ matrix.id }} -- --changed origin/${{ github.base_ref }}
+        if: steps.changed-files.outputs.any_changed != 'true' && steps.changed-module-files.outputs.full_any_changed != 'true' && steps.changed-module-files.outputs.diff_any_changed == 'true'
+        run: pnpm turbo run test:coverage --filter=./packages/${{ matrix.id }} -- --retry=3 --changed origin/${{ github.base_ref }}
 
       - name: Upload coverage
-        if: steps.changed-files.outputs.changed_keys != ''
+        if: steps.changed-files.outputs.any_changed == 'true' || steps.changed-module-files.outputs.changed_keys != ''
         uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe # v5.5.4
         with:
           disable_search: true

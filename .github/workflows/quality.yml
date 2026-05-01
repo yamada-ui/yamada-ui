@@ -95,8 +95,8 @@ jobs:
         uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
         with:
           files: |
-            oxfmt.config.ts
             .github/workflows/quality.yml
+            oxfmt.config.ts
             **/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css}
 
       - name: Install

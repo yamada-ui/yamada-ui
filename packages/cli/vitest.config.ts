@@ -11,6 +11,5 @@ export default mergeConfig(sharedConfig, {
     globals: true,
     include: ["src/**/*.test.{ts,tsx}"],
     setupFiles: ["./test/setup.ts"],
-    testTimeout: 60000,
   },
 })

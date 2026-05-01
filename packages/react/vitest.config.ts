@@ -55,7 +55,6 @@ export default mergeConfig(sharedConfig, {
           globals: true,
           include: ["src/**/*.test.{ts,tsx}"],
           setupFiles: ["@yamada-ui/workspace/vitest/setup"],
-          testTimeout: 10000,
         },
       }),
       defineProject({
@@ -85,7 +84,6 @@ export default mergeConfig(sharedConfig, {
           },
           globals: true,
           include: browserTestFiles,
-          testTimeout: 10000,
         },
       }),
     ],

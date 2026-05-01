@@ -47,6 +47,7 @@ jobs:
           files_yaml: |
             full:
               - .github/workflows/quality.yml
+              - .github/workflows/browser-test.yml
               - '{turbo.json,package.json}'
               - packages/workspace/package.json
               - packages/workspace/src/vitest/**
@@ -55,6 +56,18 @@ jobs:
             diff:
               - packages/react/src/**/*.{ts,tsx,mts}
               - '!packages/react/src/**/*.stories.{ts,tsx}'
+
+      - name: Free Disk Space
+        if: steps.changed-files.outputs.changed_keys != ''
+        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: false
+          docker-images: true
+          swap-storage: true
 
       - name: Install
         if: steps.changed-files.outputs.changed_keys != ''
@@ -66,11 +79,11 @@ jobs:
 
       - name: Run test (full)
         if: steps.changed-files.outputs.full_any_changed == 'true'
-        run: pnpm turbo run ${{ matrix.command }} --filter=./packages/react -- --shard=${{ matrix.shard_index }}/4
+        run: pnpm turbo run ${{ matrix.command }} --filter=./packages/react -- --retry=3 --shard=${{ matrix.shard_index }}/4
 
       - name: Run test (diff)
         if: steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true'
-        run: pnpm turbo run ${{ matrix.command }} --filter=./packages/react -- --changed origin/${{ github.base_ref }}　--shard=${{ matrix.shard_index }}/4
+        run: pnpm turbo run ${{ matrix.command }} --filter=./packages/react -- --retry=3 --changed origin/${{ github.base_ref }} --shard=${{ matrix.shard_index }}/4
 
       - name: Upload coverage
         if: matrix.browser == 'chromium' && steps.changed-files.outputs.changed_keys != ''

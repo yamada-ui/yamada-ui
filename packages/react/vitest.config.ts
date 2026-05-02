@@ -22,10 +22,6 @@ const alias = {
   "@": resolve(__dirname, "./src"),
 }
 
-const reportsDirectory = process.env.VITEST_ENV
-  ? `coverage/${process.env.VITEST_ENV}`
-  : "coverage"
-
 const browserProjects = browsers.map((browser) =>
   defineProject({
     optimizeDeps: { include: ["axe-core"] },
@@ -54,7 +50,6 @@ export default mergeConfig(sharedConfig, {
         "src/providers/i18n-provider/intl/**/*.{ts,tsx}",
         "src/theme/**/*.{ts,tsx}",
       ],
-      reportsDirectory,
     },
     projects: [
       defineProject({

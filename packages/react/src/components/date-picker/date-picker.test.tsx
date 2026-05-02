@@ -339,7 +339,6 @@ describe("<DatePicker />", () => {
     await _user.click(input)
     await _user.clear(input)
     await _user.type(input, "2024-01-15")
-    await _user.click(input)
     await _user.keyboard("{Enter}")
 
     await vi.waitFor(async () => {
@@ -356,7 +355,6 @@ describe("<DatePicker />", () => {
     await _user.click(inputs.first())
     await _user.clear(inputs.first())
     await _user.type(inputs.first(), "2024-01-15")
-    await _user.click(inputs.first())
     await _user.keyboard("{Enter}")
 
     await vi.waitFor(async () => {
@@ -381,7 +379,6 @@ describe("<DatePicker />", () => {
     await _user.click(inputs.nth(1))
     await _user.clear(inputs.nth(1))
     await _user.type(inputs.nth(1), "2024-01-20")
-    await _user.click(inputs.nth(1))
     await _user.keyboard("{Enter}")
 
     await vi.waitFor(async () => {
@@ -444,7 +441,12 @@ describe("<DatePicker />", () => {
 
   test("handles blur on single date", async () => {
     const { user: _user } = await render(
-      <DatePicker placeholder="Select date" />,
+      <DatePicker
+        openOnChange={false}
+        openOnClick={false}
+        openOnFocus={false}
+        placeholder="Select date"
+      />,
     )
 
     const input = page.getByRole("textbox").first()
@@ -466,6 +468,9 @@ describe("<DatePicker />", () => {
           end: new Date(2024, 0, 20),
           start: new Date(2024, 0, 15),
         }}
+        openOnChange={false}
+        openOnClick={false}
+        openOnFocus={false}
         placeholder="Select date"
         range
       />,
@@ -478,7 +483,8 @@ describe("<DatePicker />", () => {
     await _user.clear(inputs.first())
     await _user.type(inputs.first(), "2024-01-18")
 
-    // Blur with null relatedTarget (outside both field and content)
+    // Tab twice: start → end → outside field
+    await _user.tab()
     await _user.tab()
 
     // On blur, range input should show the formatted date value (clamped within range)
@@ -492,13 +498,16 @@ describe("<DatePicker />", () => {
       <DatePicker
         defaultValue={[new Date(2024, 0, 15)]}
         multiple
+        openOnChange={false}
+        openOnClick={false}
+        openOnFocus={false}
         placeholder="Select dates"
       />,
     )
 
     const input = page.getByRole("textbox").first()
-    await _user.click(input)
-    await _user.clear(input)
+    const inputEl = await input.findElement()
+    inputEl.focus()
     await _user.type(input, "something")
     await _user.tab()
 
@@ -562,7 +571,6 @@ describe("<DatePicker />", () => {
     await _user.click(input)
     await _user.clear(input)
     await _user.type(input, "2024-01-15")
-    await _user.click(input)
     await _user.keyboard("{Enter}")
 
     await vi.waitFor(() => {
@@ -596,8 +604,6 @@ describe("<DatePicker />", () => {
     await _user.click(input)
     await _user.clear(input)
     await _user.type(input, "2024-01-15")
-    await _user.click(input)
-    await _user.keyboard("{Enter}")
 
     await expect
       .element(page.getByRole("dialog").query())
@@ -618,8 +624,6 @@ describe("<DatePicker />", () => {
     await _user.click(input)
     await _user.clear(input)
     await _user.type(input, "2024-01-15")
-    await _user.click(input)
-    await _user.keyboard("{Enter}")
 
     await expect
       .element(page.getByRole("dialog").query())
@@ -767,7 +771,6 @@ describe("<DatePicker />", () => {
     await _user.click(input)
     await _user.clear(input)
     await _user.type(input, "2024-01-05")
-    await _user.click(input)
     await _user.keyboard("{Enter}")
 
     // Should clamp to minDate
@@ -792,7 +795,6 @@ describe("<DatePicker />", () => {
     await _user.click(input)
     await _user.clear(input)
     await _user.type(input, "2024-01-25")
-    await _user.click(input)
     await _user.keyboard("{Enter}")
 
     // Should clamp to maxDate
@@ -816,7 +818,6 @@ describe("<DatePicker />", () => {
     await _user.click(input)
     await _user.clear(input)
     await _user.type(input, "2024-01-05")
-    await _user.click(input)
     await _user.keyboard("{Enter}")
 
     // Should allow dates beyond bounds
@@ -836,10 +837,9 @@ describe("<DatePicker />", () => {
     )
 
     const input = page.getByRole("textbox").first()
-    await _user.click(input)
-    await _user.clear(input)
+    const inputEl = await input.findElement()
+    inputEl.focus()
     await _user.type(input, "2024-01-16")
-    await _user.click(input)
     await _user.keyboard("{Enter}")
 
     // Input should be cleared after adding
@@ -1175,11 +1175,14 @@ describe("<DatePicker />", () => {
     )
 
     const field = page.getByRole("combobox").first()
-    await _user.click(field)
+    const fieldEl = await field.findElement()
+    if (fieldEl instanceof HTMLElement) fieldEl.click()
 
     // End input should be focused since start has value
     const inputs = page.getByRole("textbox")
-    await expect.element(inputs.nth(1)).toHaveFocus()
+    await vi.waitFor(async () => {
+      await expect.element(inputs.nth(1)).toHaveFocus()
+    })
   })
 
   test("handles click on range field focuses start input when end is set", async () => {
@@ -1195,11 +1198,14 @@ describe("<DatePicker />", () => {
     )
 
     const field = page.getByRole("combobox").first()
-    await _user.click(field)
+    const fieldEl = await field.findElement()
+    if (fieldEl instanceof HTMLElement) fieldEl.click()
 
     // Start input should be focused when end is already set
     const inputs = page.getByRole("textbox")
-    await expect.element(inputs.first()).toHaveFocus()
+    await vi.waitFor(async () => {
+      await expect.element(inputs.first()).toHaveFocus()
+    })
   })
 
   test("handles custom render for multiple mode", async () => {
@@ -1349,7 +1355,6 @@ describe("<DatePicker />", () => {
     await _user.click(inputs.first())
     await _user.clear(inputs.first())
     await _user.type(inputs.first(), "2024-01-15")
-    await _user.click(inputs.first())
     await _user.keyboard("{Enter}")
 
     // After entering start date, focus should move to end input
@@ -1410,7 +1415,7 @@ describe("<DatePicker />", () => {
     await expect.element(inputs.nth(1)).toHaveAttribute("placeholder", "Custom")
   })
 
-  test("handles Backspace on single date input does nothing", async () => {
+  test("handles Backspace on single date input edits text normally", async () => {
     const { user: _user } = await render(
       <DatePicker
         defaultOpen
@@ -1421,11 +1426,12 @@ describe("<DatePicker />", () => {
 
     const input = page.getByRole("textbox").first()
     await _user.click(input)
-    await _user.click(input)
     await _user.keyboard("{Backspace}")
 
-    // Should not affect single date value
-    await expect.element(input).toHaveValue("January 15, 2024")
+    // Single date allows normal text editing on Backspace
+    await vi.waitFor(async () => {
+      await expect.element(input).toHaveValue("January 15, 202")
+    })
   })
 
   test("handles defaultMonth with minDate", async () => {
@@ -1514,7 +1520,6 @@ describe("<DatePicker />", () => {
     await _user.click(inputs.first())
     await _user.clear(inputs.first())
     await _user.type(inputs.first(), "2024-01-10")
-    await _user.click(inputs.first())
     await _user.keyboard("{Enter}")
 
     await vi.waitFor(async () => {

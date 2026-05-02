@@ -307,7 +307,8 @@ export const useDatePicker = <
     (value: string, start: Date = minDate, end: Date = maxDate) => {
       let date = parseDate?.(value)
 
-      if (!date && dayjs(value).isValid()) date = dayjs(value, locale).toDate()
+      if (!date && dayjs(value).isValid())
+        date = dayjs(value).locale(locale).toDate()
 
       if (date == null) return undefined
       if (excludeDate?.(date)) return undefined
@@ -548,10 +549,9 @@ export const useDatePicker = <
         ev,
         {
           Backspace: (ev) => {
-            if (!value || isDate(value)) return
-            if (inputValue.length) return
-
             if (isArray(value)) {
+              if (inputValue.length) return
+
               ev.preventDefault()
 
               setValue((prev) =>
@@ -559,7 +559,10 @@ export const useDatePicker = <
                   ? (prev.slice(0, -1) as MaybeDateValue<Multiple, Range>)
                   : prev,
               )
-            } else if (contains(endInputRef.current, ev.target)) {
+            } else if (isObject(value) && !isDate(value)) {
+              if (inputValue.length) return
+              if (!contains(endInputRef.current, ev.target)) return
+
               ev.preventDefault()
 
               setInputValue({ end: "", start: "" } as MaybeInputValue<Range>)
@@ -574,18 +577,14 @@ export const useDatePicker = <
           Enter: (ev) => {
             if (!open || !inputValue.length) return
 
-            if (isDate(value) || isArray(value)) {
+            if (isArray(value)) {
               const date = stringToDate(inputValue)
 
               if (!date) return
 
               ev.preventDefault()
 
-              if (isArray(value)) {
-                setInputValue("" as MaybeInputValue<Range>)
-              } else {
-                setInputValue(dateToString(date) as MaybeInputValue<Range>)
-              }
+              setInputValue("" as MaybeInputValue<Range>)
 
               setValue(
                 (prev) =>
@@ -594,7 +593,7 @@ export const useDatePicker = <
                     Range
                   >,
               )
-            } else if (isObject(value)) {
+            } else if (isObject(value) && !isDate(value)) {
               const align = contains(endInputRef.current, ev.target)
                 ? "end"
                 : "start"
@@ -624,6 +623,15 @@ export const useDatePicker = <
               )
 
               if (align === "start") endInputRef.current?.focus()
+            } else {
+              const date = stringToDate(inputValue)
+
+              if (!date) return
+
+              ev.preventDefault()
+
+              setInputValue(dateToString(date) as MaybeInputValue<Range>)
+              setValue(date as MaybeDateValue<Multiple, Range>)
             }
           },
         },

@@ -33,6 +33,37 @@ env:
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
+  unit:
+    name: Coverage / ${{ matrix.name }}
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        include:
+          - id: cli
+            name: CLI
+          - id: utils
+            name: Utils
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      - name: Install
+        uses: ./.github/composite-actions/install
+
+      - name: Run coverage
+        run: pnpm ${{ matrix.id }} test:coverage
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe # v5.5.4
+        with:
+          disable_search: true
+          fail_ci_if_error: false
+          files: ./packages/${{ matrix.id }}/coverage/coverage-final.json
+          flags: unittests
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
+          codecov_yml_path: ./codecov.yml
+
   jsdom:
     name: Coverage / jsdom ${{ matrix.shard_index }}/4
     runs-on: ubuntu-24.04
@@ -55,7 +86,7 @@ jobs:
         with:
           disable_search: true
           fail_ci_if_error: false
-          files: ./packages/react/coverage/jsdom/coverage-final.json,./packages/utils/coverage/coverage-final.json,./packages/cli/coverage/coverage-final.json
+          files: ./packages/react/coverage/jsdom/coverage-final.json
           flags: unittests
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true

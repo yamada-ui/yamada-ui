@@ -177,9 +177,10 @@ If you want to control the number of avatars displayed, specify a number with `m
 
 | Component and Element     | Roles and Attributes | Usage                                                                                                                                                                            |
 | ------------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `div.ui-avatar__group`    | `role="group"`       | Indicates that it is a group.                                                                                                                                                    |
 | `img.ui-avatar__image`    | `alt`                | Alternative text for the avatar image. The component uses the `name` prop as the value for the `alt` attribute; if `name` is not provided, it uses the `alt` prop value instead. |
-| `div.ui-avatar__fallback` | `role="img"`         | When `fallbackMessage` is not set, indicates that this is an image.                                                                                                              |
-|                           | `aria-label`         | When `fallbackMessage` is not set, sets the value of `name` or `alt` if provided. Otherwise, sets `"Avatar Icon"`.                                                               |
+| `div.ui-avatar__fallback` | `role="img"`         | When `fallback` is not set, indicates that this is an image.                                                                                                                     |
+|                           | `aria-label`         | When `fallback` is not set, sets the value of `name` or `alt` if provided. Otherwise, sets `"Avatar Icon"`.                                                                      |
 
 ## Similar Components
 

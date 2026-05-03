@@ -6,6 +6,11 @@
     "hooks": [],
     "providers": ["i18n-provider"]
   },
+  "dependents": {
+    "components": ["picture"],
+    "hooks": ["use-breakpoint"],
+    "providers": []
+  },
   "section": "providers",
   "sources": [
     { "name": "index.ts", "content": "export * from \"./ui-provider\"\n" },

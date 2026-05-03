@@ -29,7 +29,9 @@ on:
       - "!packages/**/*.stories.ts"
       - "!packages/**/*.stories.tsx"
       - "!packages/**/*.test.ts"
+      - "!packages/**/*.test.*.ts"
       - "!packages/**/*.test.tsx"
+      - "!packages/**/*.test.*.tsx"
     branches:
       - main
       - v*

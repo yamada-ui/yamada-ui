@@ -309,20 +309,20 @@ return <Calendar.Root value={value} onChange={setValue} />
 
 ### ARIAロールと属性
 
-| コンポーネント         | ロールと属性           | 使い方                                                                                                   |
-| ---------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------- |
-| `Calendar.YearSelect`  | `aria-label`           | `"年を選択する"`を設定します。                                                                           |
-| `Calendar.MonthSelect` | `aria-label`           | `"月を選択する"`を設定します。                                                                           |
-| `Calendar.Control`     | `role="status"`        | ステータスであることを示します。                                                                         |
-|                        | `aria-live="polite"`   | フォーカスの外側で更新される可能性があることを示します。                                                 |
-| `Calendar.Month`       | `role="grid"`          | グリッドであることを示します。                                                                           |
-|                        | `aria-label`           | `"2026年2月"`のように、表示されている年月を設定します。                                                  |
-|                        | `aria-multiselectable` | 複数選択または期間選択が可能な場合は`"true"`を設定します。                                               |
-| `Calendar.PrevButton`  | `aria-label`           | `"前の月に移動する"`を設定します。                                                                       |
-| `Calendar.NextButton`  | `aria-label`           | `"次の月に移動する"`を設定します。                                                                       |
-| `CalendarDay`          | `aria-label`           | `"2026年2月5日木曜日"`のように、日付を設定します。今日の場合は`"今日, 2026年2月5日木曜日"`を設定します。 |
-|                        | `aria-disabled`        | 日付が無効な場合は`"true"`を設定します。                                                                 |
-|                        | `aria-selected`        | 日付が選択されている場合は`"true"`を設定します。                                                         |
+| コンポーネントと要素                                | ロールと属性           | 使い方                                                                                                   |
+| --------------------------------------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------- |
+| `div.ui-calendar__select--years [role="combobox"]`  | `aria-label`           | `"年を選択する"`を設定します。                                                                           |
+| `div.ui-calendar__select--months [role="combobox"]` | `aria-label`           | `"月を選択する"`を設定します。                                                                           |
+| `div.ui-calendar__control [role="status"]`          | `role="status"`        | ステータスであることを示します。                                                                         |
+|                                                     | `aria-live="polite"`   | フォーカスの外側で更新される可能性があることを示します。                                                 |
+| `table.ui-calendar__month`                          | `role="grid"`          | グリッドであることを示します。                                                                           |
+|                                                     | `aria-label`           | `"2026年2月"`のように、表示されている年月を設定します。                                                  |
+|                                                     | `aria-multiselectable` | 複数選択または期間選択が可能な場合は`"true"`を設定します。                                               |
+| `button.ui-calendar__button--prev`                  | `aria-label`           | `"前の月に移動する"`を設定します。                                                                       |
+| `button.ui-calendar__button--next`                  | `aria-label`           | `"次の月に移動する"`を設定します。                                                                       |
+| `td.ui-calendar__cell--day`                         | `aria-label`           | `"2026年2月5日木曜日"`のように、日付を設定します。今日の場合は`"今日, 2026年2月5日木曜日"`を設定します。 |
+|                                                     | `aria-disabled`        | 日付が無効な場合は`"true"`を設定します。                                                                 |
+|                                                     | `aria-selected`        | 日付が選択されている場合は`"true"`を設定します。                                                         |
 
 ## 類似のコンポーネント
 

@@ -1,0 +1,1 @@
+import{n as e,o as t}from"./chunk-jRWAZmH_.js";import{t as n}from"./react-mE7dFmCG.js";import{G as r,Z as i,rt as a,t as o}from"./core-3C2oxizh.js";var s,c,l=e((()=>{s=t(n(),1),o(),i(),c=(e,t,n)=>{let{getWindow:i}=r(),o=a(t);(0,s.useEffect)(()=>(i()?.addEventListener(e,o,n),()=>{i()?.removeEventListener(e,o,n)}),[e,o,n,i])}}));export{c as n,l as t};

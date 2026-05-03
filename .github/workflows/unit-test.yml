@@ -64,8 +64,9 @@ jobs:
         with:
           files: |
             .github/workflows/quality.yml
-            .github/workflows/node-and-jsdom-test.yml
-            '{turbo.json,package.json}'
+            .github/workflows/unit-test.yml
+            turbo.json
+            package.json
             packages/workspace/package.json
             packages/workspace/src/vitest/**
 

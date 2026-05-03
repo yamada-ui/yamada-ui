@@ -1180,26 +1180,28 @@ return (
 
 ### ARIAロールと属性
 
-| コンポーネント         | ロールと属性              | 使い方                                                                                                                            |
-| ---------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `Autocomplete.Root`    | `role="group"`            | グループであることを示します。                                                                                                    |
-| `AutocompleteField`    | `role="combobox"`         | コンボボックスであることを示します。                                                                                              |
-|                        | `aria-expanded`           | リストボックスが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。                                         |
-|                        | `aria-haspopup="listbox"` | リストボックスが存在することを示します。                                                                                          |
-|                        | `aria-controls`           | リストボックスが開いている場合はリストボックスの`id`を設定し、閉じている場合は設定しません。                                      |
-|                        | `aria-activedescendant`   | フォーカスされた項目の`id`を設定します。                                                                                          |
-|                        | `aria-disabled`           | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                            |
-|                        | `aria-labelledby`         | `AutocompleteField`が`Field.Root`内にあり、`Field.Root`に`label`または`Field.Label`が設定されている場合は、その`id`を設定します。 |
-| `Autocomplete.Content` | `role="listbox"`          | リストボックスであることを示します。                                                                                              |
-| `Autocomplete.Option`  | `role="option"`           | オプションであることを示します。                                                                                                  |
-|                        | `aria-selected`           | オプションが選択されている場合は`"true"`を設定し、選択されていない場合は`"false"`を設定します。                                   |
-|                        | `aria-disabled`           | `disabled`が設定されている場合は`"true"`を設定します。                                                                            |
-| `Autocomplete.Group`   | `role="group"`            | グループであることを示します。                                                                                                    |
-|                        | `aria-labelledby`         | 関連した`Autocomplete.Label`の`id`を設定します。                                                                                  |
-| `Autocomplete.Label`   | `role="presentation"`     | プレゼンテーションであることを示します。                                                                                          |
-| `Autocomplete.Icon`    | `role="button"`           | `clearable`かつ値がある場合、ボタンであることを示します。                                                                         |
-|                        | `aria-label`              | `"値を消去する"`を設定します。                                                                                                    |
-|                        | `aria-disabled`           | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                            |
+| コンポーネントと要素           | ロールと属性              | 使い方                                                                                                                            |
+| ------------------------------ | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `div.ui-autocomplete__root`    | `role="group"`            | オートコンプリートのフィールドと関連要素をまとめる入力コントロールコンテナであることを示します。                                  |
+| `div.ui-autocomplete__field`   | `role="combobox"`         | コンボボックスであることを示します。                                                                                              |
+|                                | `aria-expanded`           | リストボックスが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。                                         |
+|                                | `aria-haspopup="listbox"` | リストボックスが存在することを示します。                                                                                          |
+|                                | `aria-controls`           | リストボックスが開いている場合はリストボックスの`id`を設定し、閉じている場合は設定しません。                                      |
+|                                | `aria-activedescendant`   | フォーカスされたオプションの`id`を設定します。                                                                                    |
+|                                | `aria-disabled`           | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                            |
+|                                | `aria-labelledby`         | `Autocomplete.Root`が`Field.Root`内にあり、`Field.Root`に`label`または`Field.Label`が設定されている場合は、その`id`を設定します。 |
+| `div.ui-autocomplete__content` | `role="listbox"`          | リストボックスであることを示します。                                                                                              |
+|                                | `id`                      | `div.ui-autocomplete__field`の`aria-controls`に関連付けるために使用する`id`。                                                     |
+| `div.ui-autocomplete__option`  | `role="option"`           | オプションであることを示します。                                                                                                  |
+|                                | `aria-selected`           | オプションが選択されている場合は`"true"`を設定し、選択されていない場合は`"false"`を設定します。                                   |
+|                                | `aria-disabled`           | `disabled`が設定されている場合は`"true"`を設定します。                                                                            |
+| `div.ui-autocomplete__group`   | `role="group"`            | グループであることを示します。                                                                                                    |
+|                                | `aria-labelledby`         | 関連した`span.ui-autocomplete__label`の`id`を設定します。                                                                         |
+| `span.ui-autocomplete__label`  | `role="presentation"`     | プレゼンテーションであることを示します。                                                                                          |
+|                                | `id`                      | `div.ui-autocomplete__group`の`aria-labelledby`に関連付けるために使用する`id`。                                                   |
+| `div.ui-autocomplete__icon`    | `role="button"`           | `clearable`かつ値が選択されている場合、ボタンであることを示します。                                                               |
+|                                | `aria-label`              | `clearable`かつ値が選択されている場合、`"値を消去する"`を設定します。                                                             |
+|                                | `aria-disabled`           | `clearable`かつ値が選択されている場合、`disabled`または`readOnly`が設定されているときは`"true"`を設定します。                     |
 
 ## 類似のコンポーネント
 

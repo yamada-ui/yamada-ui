@@ -415,16 +415,16 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Dro
 
 ### ARIA Roles and Attributes
 
-| Component and Element           | Roles and Attributes  | Usage                                                                                                                                                                 |
-| ------------------------------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `div.ui-dropzone__root`         | `role="presentation"` | Indicates that this is a presentation.                                                                                                                                |
-|                                 | `aria-disabled`       | Sets to `"true"` when `disabled`, `readOnly`, or `loading` is set.                                                                                                    |
-| `div.ui-dropzone__root > input` | `aria-labelledby`     | Sets the `id` of the associated `div.ui-dropzone__root`.                                                                                                              |
-|                                 | `aria-disabled`       | Sets to `"true"` when `disabled` is set.                                                                                                                              |
-|                                 | `aria-invalid`        | Sets to `"true"` when `invalid` is set.                                                                                                                               |
-|                                 | `aria-readonly`       | Sets to `"true"` when `readOnly` is set.                                                                                                                              |
-|                                 | `aria-required`       | Sets to `"true"` when `required` is set.                                                                                                                              |
-|                                 | `aria-describedby`    | If `Dropzone.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+| Component and Element   | Roles and Attributes  | Usage                                                                                                                                                                 |
+| ----------------------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `div.ui-dropzone__root` | `role="presentation"` | Indicates that this is a presentation.                                                                                                                                |
+|                         | `aria-disabled`       | Sets to `"true"` when `disabled`, `readOnly`, or `loading` is set.                                                                                                    |
+| `input`                 | `aria-labelledby`     | References the `id` of the associated `div.ui-dropzone__root`; this input is rendered outside the root subtree via `Portal`.                                          |
+|                         | `aria-disabled`       | Sets to `"true"` when `disabled` is set.                                                                                                                              |
+|                         | `aria-invalid`        | Sets to `"true"` when `invalid` is set.                                                                                                                               |
+|                         | `aria-readonly`       | Sets to `"true"` when `readOnly` is set.                                                                                                                              |
+|                         | `aria-required`       | Sets to `"true"` when `required` is set.                                                                                                                              |
+|                         | `aria-describedby`    | If `Dropzone.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
 
 ## Similar Components
 

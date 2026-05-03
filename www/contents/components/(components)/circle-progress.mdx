@@ -157,13 +157,13 @@ If `aria-label` or `aria-labelledby` is set on `CircleProgress.Root`'s `circlePr
 
 ### ARIA Roles and Attributes
 
-| Component              | Role and Attribute   | Usage                                                                      |
-| ---------------------- | -------------------- | -------------------------------------------------------------------------- |
-| `CircleProgressCircle` | `role="progressbar"` | Indicates that it is a progress bar.                                       |
-|                        | `aria-label`         | Set the label that describes the current progress, such as `"18 percent"`. |
-|                        | `aria-valuemin`      | Sets the minimum value. Default is `0`.                                    |
-|                        | `aria-valuemax`      | Sets the maximum value. Default is `100`.                                  |
-|                        | `aria-valuenow`      | Sets the current value.                                                    |
+| Component and Element            | Roles and Attributes | Usage                                                                                                                                 |
+| -------------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `svg.ui-circle-progress__circle` | `role="progressbar"` | Indicates that it is a progress bar.                                                                                                  |
+|                                  | `aria-label`         | Sets `"Loading..."` when `value` is `null` (indeterminate); otherwise sets the current progress percentage like `"18 percent"`.       |
+|                                  | `aria-valuemin`      | Sets the minimum value. Default is `0`.                                                                                               |
+|                                  | `aria-valuemax`      | Sets the maximum value. Default is `100`.                                                                                             |
+|                                  | `aria-valuenow`      | Sets the current value only when the progress is determinate (`value` is not `null`); omitted when `value` is `null` (indeterminate). |
 
 ## Similar Components
 

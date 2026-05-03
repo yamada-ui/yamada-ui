@@ -39,10 +39,10 @@ jobs:
       - name: Build packages
         run: pnpm build --affected
 
-  node_and_jsdom_test:
-    name: Node and JSDOM Test
+  unit_test:
+    name: Unit Test
     if: ${{ !github.event.pull_request.draft }}
-    uses: ./.github/workflows/node-and-jsdom-test.yml
+    uses: ./.github/workflows/unit-test.yml
     secrets:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

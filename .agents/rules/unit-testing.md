@@ -1,4 +1,4 @@
-# Node and JSDOM Testing Rules
+# Unit Testing Rules
 
 Follow these rules when writing Vitest tests that run in `node` (`packages/cli`) or `jsdom` (`packages/utils`, `packages/react` non-browser tests) environments. Browser tests in `packages/react` are out of scope — see [Browser Testing](./browser-testing.md).
 

@@ -37,7 +37,7 @@ When editing or reviewing files that match a pattern below, read the linked rule
   - `.changeset/*.md`
 - [Browser Testing](.agents/rules/browser-testing.md):
   - `packages/react/src/**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx}`
-- [Node and JSDOM Testing](.agents/rules/node-and-jsdom-testing.md):
+- [Unit Testing](.agents/rules/unit-testing.md):
   - `packages/{cli,react,utils}/**/*.test.{ts,tsx}`
 
 ## Codebase structure

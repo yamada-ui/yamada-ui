@@ -1,4 +1,4 @@
-name: Node and JSDOM Test
+name: Unit Test
 
 on:
   workflow_dispatch:

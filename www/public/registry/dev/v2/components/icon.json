@@ -2,7 +2,11 @@
   "$schema": "https://yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
     "components": [],
-    "externals": ["lucide-react@1.8.0"],
+    "externals": [
+      "react-icons@^5.6.0",
+      "@lucide/lab@^0.1.2",
+      "lucide-react@1.8.0"
+    ],
     "hooks": [],
     "providers": []
   },
@@ -14,6 +18,7 @@
       "avatar",
       "blockquote",
       "breadcrumb",
+      "button",
       "calendar",
       "carousel",
       "checkbox",
@@ -22,6 +27,10 @@
       "color-picker",
       "color-selector",
       "date-picker",
+      "dropzone",
+      "empty-state",
+      "flip",
+      "list",
       "loading",
       "menu",
       "native-accordion",
@@ -31,10 +40,13 @@
       "password-input",
       "rating",
       "reorder",
+      "resizable",
+      "rotate",
       "select",
       "sidebar",
       "stat",
       "steps",
+      "switch",
       "table",
       "tag",
       "tip",
@@ -48,6 +60,10 @@
     {
       "name": "icon.style.ts",
       "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const iconStyle = defineComponentStyle({\n  base: {\n    color: \"currentColor\",\n    display: \"inline-block\",\n    flexShrink: 0,\n    fontSize: \"1em\",\n    lineHeight: \"1em\",\n  },\n})\n\nexport type IconStyle = typeof iconStyle\n"
+    },
+    {
+      "name": "icon.test.browser.tsx",
+      "content": "import { FaMarkdown } from \"react-icons/fa\"\nimport { a11y, render } from \"#test/browser\"\nimport { Icon } from \"./icon\"\n\ndescribe(\"<Icon />\", () => {\n  test(\"renders component correctly\", async () => {\n    await a11y(<Icon />)\n  })\n\n  test(\"renders component correctly given a third-party icon\", async () => {\n    await a11y(<Icon as={FaMarkdown} />)\n  })\n\n  test(\"sets `displayName` correctly\", () => {\n    expect(Icon.displayName).toBe(\"Icon\")\n  })\n\n  test(\"sets `className` correctly\", async () => {\n    const { container } = await render(<Icon />)\n\n    expect(container.firstChild).toHaveClass(\"ui-icon\")\n  })\n\n  test(\"renders HTML tag correctly\", async () => {\n    const { container } = await render(<Icon />)\n\n    expect(container.firstChild?.nodeName).toBe(\"svg\")\n  })\n})\n"
     },
     {
       "name": "icon.tsx",
@@ -2428,6 +2444,10 @@
     {
       "name": "index.ts",
       "content": "export * from \"./icon.style\"\nexport { Icon, IconPropsContext, useIconPropsContext } from \"./icon\"\nexport type { IconProps } from \"./icon\"\nexport * from \"./icons\"\nexport * as icons from \"./icons\"\nexport { LucideIcon } from \"./lucide-icon\"\nexport type { LucideIconProps } from \"./lucide-icon\"\n"
+    },
+    {
+      "name": "lucide-icon.test.browser.tsx",
+      "content": "import type { FC } from \"react\"\nimport type { IconProps } from \"./icon\"\nimport type { IconNames } from \"./icons\"\nimport { burger } from \"@lucide/lab\"\nimport { a11y, render } from \"#test/browser\"\nimport { icons } from \"./\"\nimport { GhostIcon } from \"./icons\"\nimport { LucideIcon } from \"./lucide-icon\"\n\ndescribe(\"Lucide icon\", () => {\n  test(\"renders component correctly\", async () => {\n    await a11y(<GhostIcon />)\n  })\n\n  test(\"sets `displayName` correctly\", () => {\n    expect(GhostIcon.displayName).toBe(\"Icon\")\n  })\n\n  test(\"sets `className` correctly\", async () => {\n    const { container } = await render(<GhostIcon />)\n\n    expect(container.firstChild).toHaveClass(\"ui-icon\")\n  })\n\n  test(\"renders HTML tag correctly\", async () => {\n    const { container } = await render(<GhostIcon />)\n\n    expect(container.firstChild?.nodeName).toBe(\"svg\")\n  })\n\n  test(\"renders icon correctly\", async () => {\n    await render(<GhostIcon />)\n  })\n\n  test(\"renders icons correctly\", async () => {\n    const Icon: FC<IconProps & { name: IconNames }> = ({ name, ...rest }) => {\n      const Icon = icons[name]\n\n      return <Icon {...rest} />\n    }\n\n    await render(<Icon name=\"GhostIcon\" />)\n  })\n})\n\ndescribe(\"<LucideIcon />\", () => {\n  test(\"renders Icon correctly\", async () => {\n    await render(<LucideIcon iconNode={burger} />)\n  })\n})\n"
     },
     {
       "name": "lucide-icon.tsx",

@@ -304,6 +304,34 @@ describe("<DatePicker />", () => {
       .not.toBeInTheDocument()
   })
 
+  test("opens on start input click in range mode", async () => {
+    const { user: _user } = await render(
+      <DatePicker placeholder="Select date" range />,
+    )
+
+    const inputs = page.getByRole("textbox")
+    await _user.click(inputs.first())
+
+    await vi.waitFor(async () => {
+      await expect.element(page.getByRole("dialog")).toBeInTheDocument()
+    })
+    await expect.element(inputs.first()).toHaveFocus()
+  })
+
+  test("opens on end input click in range mode", async () => {
+    const { user: _user } = await render(
+      <DatePicker placeholder="Select date" range />,
+    )
+
+    const inputs = page.getByRole("textbox")
+    await _user.click(inputs.nth(1))
+
+    await vi.waitFor(async () => {
+      await expect.element(page.getByRole("dialog")).toBeInTheDocument()
+    })
+    await expect.element(inputs.nth(1)).toHaveFocus()
+  })
+
   test("handles input change for single date", async () => {
     const { user: _user } = await render(
       <DatePicker placeholder="Select date" />,
@@ -1224,7 +1252,7 @@ describe("<DatePicker />", () => {
     await expect.element(inputs.first()).toHaveFocus()
   })
 
-  test("handles click on range field focuses end input when only start is set", async () => {
+  test("handles click on range field focuses start input when only start is set", async () => {
     const { user: _user } = await render(
       <DatePicker
         defaultValue={{
@@ -1240,10 +1268,9 @@ describe("<DatePicker />", () => {
     const fieldEl = await field.findElement()
     if (fieldEl instanceof HTMLElement) fieldEl.click()
 
-    // End input should be focused since start has value
     const inputs = page.getByRole("textbox")
     await vi.waitFor(async () => {
-      await expect.element(inputs.nth(1)).toHaveFocus()
+      await expect.element(inputs.first()).toHaveFocus()
     })
   })
 
@@ -1263,7 +1290,6 @@ describe("<DatePicker />", () => {
     const fieldEl = await field.findElement()
     if (fieldEl instanceof HTMLElement) fieldEl.click()
 
-    // Start input should be focused when end is already set
     const inputs = page.getByRole("textbox")
     await vi.waitFor(async () => {
       await expect.element(inputs.first()).toHaveFocus()

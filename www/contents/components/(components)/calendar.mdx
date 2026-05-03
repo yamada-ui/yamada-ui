@@ -309,20 +309,20 @@ return <Calendar.Root value={value} onChange={setValue} />
 
 ### ARIA Roles and Attributes
 
-| Component              | Roles and Attributes   | Usage                                                                                                     |
-| ---------------------- | ---------------------- | --------------------------------------------------------------------------------------------------------- |
-| `Calendar.YearSelect`  | `aria-label`           | Sets `"Choose the year"`.                                                                                 |
-| `Calendar.MonthSelect` | `aria-label`           | Sets `"Choose the month"`.                                                                                |
-| `Calendar.Control`     | `role="status"`        | Indicates that it is a status.                                                                            |
-|                        | `aria-live="polite"`   | Indicates that it may be updated outside of focus.                                                        |
-| `Calendar.Month`       | `role="grid"`          | Indicates that it is a grid.                                                                              |
-|                        | `aria-label`           | Sets the displayed month and year, like `"February 2026"`.                                                |
-|                        | `aria-multiselectable` | Sets `"true"` if multiple selection or range selection is enabled.                                        |
-| `Calendar.PrevButton`  | `aria-label`           | Sets `"Go to the previous month"`.                                                                        |
-| `Calendar.NextButton`  | `aria-label`           | Sets `"Go to the next month"`.                                                                            |
-| `CalendarDay`          | `aria-label`           | Sets the date, like `"Thursday, February 5, 2026"`. If today, sets `"Today, Thursday, February 5, 2026"`. |
-|                        | `aria-disabled`        | Sets `"true"` if the date is disabled.                                                                    |
-|                        | `aria-selected`        | Sets `"true"` if the date is selected.                                                                    |
+| Component and Element                               | Roles and Attributes   | Usage                                                                                                     |
+| --------------------------------------------------- | ---------------------- | --------------------------------------------------------------------------------------------------------- |
+| `div.ui-calendar__select--years [role="combobox"]`  | `aria-label`           | Sets `"Choose the year"`.                                                                                 |
+| `div.ui-calendar__select--months [role="combobox"]` | `aria-label`           | Sets `"Choose the month"`.                                                                                |
+| `div.ui-calendar__control [role="status"]`          | `role="status"`        | Indicates that it is a status.                                                                            |
+|                                                     | `aria-live="polite"`   | Indicates that it may be updated outside of focus.                                                        |
+| `table.ui-calendar__month`                          | `role="grid"`          | Indicates that it is a grid.                                                                              |
+|                                                     | `aria-label`           | Sets the displayed month and year, like `"February 2026"`.                                                |
+|                                                     | `aria-multiselectable` | Sets `"true"` if multiple selection or range selection is enabled.                                        |
+| `button.ui-calendar__button--prev`                  | `aria-label`           | Sets `"Go to the previous month"`.                                                                        |
+| `button.ui-calendar__button--next`                  | `aria-label`           | Sets `"Go to the next month"`.                                                                            |
+| `td.ui-calendar__cell--day`                         | `aria-label`           | Sets the date, like `"Thursday, February 5, 2026"`. If today, sets `"Today, Thursday, February 5, 2026"`. |
+|                                                     | `aria-disabled`        | Sets `"true"` if the date is disabled.                                                                    |
+|                                                     | `aria-selected`        | Sets `"true"` if the date is selected.                                                                    |
 
 ## Similar Components
 

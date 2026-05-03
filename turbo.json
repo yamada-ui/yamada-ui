@@ -49,6 +49,50 @@
       ],
       "outputs": ["coverage/**"]
     },
+    "test:coverage:jsdom": {
+      "dependsOn": ["transit:test"],
+      "inputs": [
+        "package.json",
+        "**/*.{ts,tsx,mts}",
+        "!**/*.stories.{ts,tsx,mts}",
+        "!{oxlint,tsdown}.config.ts",
+        "!{scripts,storybook,@types}/**"
+      ],
+      "outputs": ["coverage/jsdom/**"]
+    },
+    "test:coverage:chromium": {
+      "dependsOn": ["transit:test"],
+      "inputs": [
+        "package.json",
+        "**/*.{ts,tsx,mts}",
+        "!**/*.stories.{ts,tsx,mts}",
+        "!{oxlint,tsdown}.config.ts",
+        "!{scripts,storybook,@types}/**"
+      ],
+      "outputs": ["coverage/chromium/**"]
+    },
+    "test:coverage:firefox": {
+      "dependsOn": ["transit:test"],
+      "inputs": [
+        "package.json",
+        "**/*.{ts,tsx,mts}",
+        "!**/*.stories.{ts,tsx,mts}",
+        "!{oxlint,tsdown}.config.ts",
+        "!{scripts,storybook,@types}/**"
+      ],
+      "outputs": ["coverage/firefox/**"]
+    },
+    "test:coverage:webkit": {
+      "dependsOn": ["transit:test"],
+      "inputs": [
+        "package.json",
+        "**/*.{ts,tsx,mts}",
+        "!**/*.stories.{ts,tsx,mts}",
+        "!{oxlint,tsdown}.config.ts",
+        "!{scripts,storybook,@types}/**"
+      ],
+      "outputs": ["coverage/webkit/**"]
+    },
     "test:chromium": {
       "dependsOn": ["transit:test"],
       "inputs": [

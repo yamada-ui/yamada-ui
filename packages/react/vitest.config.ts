@@ -4,6 +4,8 @@ import { defineProject, mergeConfig } from "@yamada-ui/workspace/vitest"
 import sharedConfig from "@yamada-ui/workspace/vitest/config"
 import { resolve } from "node:path"
 
+const browsers = ["chromium", "firefox", "webkit"] as const
+
 const browserPatterns = [
   "src/**/*.test.browser.{ts,tsx}",
   "src/**/*.test.chromium.{ts,tsx}",
@@ -11,9 +13,33 @@ const browserPatterns = [
   "src/**/*.test.webkit.{ts,tsx}",
 ]
 
+const browserIncludePatterns = (browser: (typeof browsers)[number]) => [
+  "src/**/*.test.browser.{ts,tsx}",
+  `src/**/*.test.${browser}.{ts,tsx}`,
+]
+
 const alias = {
   "@": resolve(__dirname, "./src"),
 }
+
+const browserProjects = browsers.map((browser) =>
+  defineProject({
+    optimizeDeps: { include: ["axe-core"] },
+    resolve: { alias },
+    test: {
+      name: `browser:${browser}`,
+      browser: {
+        enabled: true,
+        headless: true,
+        instances: [{ browser }],
+        provider: playwright() as any,
+      },
+      globals: true,
+      include: browserIncludePatterns(browser),
+      testTimeout: 10000,
+    },
+  }),
+)
 
 export default mergeConfig(sharedConfig, {
   plugins: [react()],
@@ -38,26 +64,7 @@ export default mergeConfig(sharedConfig, {
           testTimeout: 10000,
         },
       }),
-      defineProject({
-        optimizeDeps: { include: ["axe-core"] },
-        resolve: { alias },
-        test: {
-          name: "browser",
-          browser: {
-            enabled: true,
-            headless: true,
-            instances: [
-              { browser: "chromium" },
-              { browser: "webkit" },
-              { browser: "firefox" },
-            ],
-            provider: playwright() as any,
-          },
-          globals: true,
-          include: browserPatterns,
-          testTimeout: 10000,
-        },
-      }),
+      ...browserProjects,
     ],
   },
 })

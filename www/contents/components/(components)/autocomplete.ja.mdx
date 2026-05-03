@@ -1182,11 +1182,12 @@ return (
 
 | コンポーネントと要素           | ロールと属性              | 使い方                                                                                                                            |
 | ------------------------------ | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `div.ui-autocomplete__root`    | `role="group"`            | オートコンプリートのフィールドと関連要素をまとめる入力コントロールコンテナであることを示します。                                  |
 | `div.ui-autocomplete__field`   | `role="combobox"`         | コンボボックスであることを示します。                                                                                              |
 |                                | `aria-expanded`           | リストボックスが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。                                         |
 |                                | `aria-haspopup="listbox"` | リストボックスが存在することを示します。                                                                                          |
 |                                | `aria-controls`           | リストボックスが開いている場合はリストボックスの`id`を設定し、閉じている場合は設定しません。                                      |
-|                                | `aria-activedescendant`   | フォーカスされた項目の`id`を設定します。                                                                                          |
+|                                | `aria-activedescendant`   | フォーカスされたオプションの`id`を設定します。                                                                                    |
 |                                | `aria-disabled`           | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                            |
 |                                | `aria-labelledby`         | `Autocomplete.Root`が`Field.Root`内にあり、`Field.Root`に`label`または`Field.Label`が設定されている場合は、その`id`を設定します。 |
 | `div.ui-autocomplete__content` | `role="listbox"`          | リストボックスであることを示します。                                                                                              |

@@ -848,6 +848,68 @@ describe("<DatePicker />", () => {
     })
   })
 
+  test("handles Enter key on multiple date input keeps already-selected date", async () => {
+    const onChange = vi.fn()
+    const { user: _user } = await render(
+      <DatePicker
+        defaultOpen
+        defaultValue={[new Date(2024, 0, 15)]}
+        multiple
+        placeholder="Select dates"
+        onChange={onChange}
+      />,
+    )
+
+    const input = page.getByRole("textbox").first()
+    const inputEl = await input.findElement()
+    inputEl.focus()
+    await _user.type(input, "2024-01-15")
+    await _user.keyboard("{Enter}")
+
+    // Input cleared, but the existing date stays in the array (no toggle-off)
+    await vi.waitFor(async () => {
+      await expect.element(input).toHaveValue("")
+    })
+    expect(onChange).not.toHaveBeenCalled()
+    await expect
+      .element(page.getByRole("combobox").first())
+      .toHaveTextContent("January 15, 2024")
+  })
+
+  test("handles Enter key on multiple date input does not remove when max is reached", async () => {
+    const onChange = vi.fn()
+    const { user: _user } = await render(
+      <DatePicker
+        defaultOpen
+        defaultValue={[new Date(2024, 0, 15), new Date(2024, 0, 16)]}
+        max={2}
+        multiple
+        placeholder="Select dates"
+        onChange={onChange}
+      />,
+    )
+
+    const input = page.getByRole("textbox").first()
+    const inputEl = await input.findElement()
+    inputEl.focus()
+    await _user.type(input, "2024-01-17")
+    await _user.keyboard("{Enter}")
+
+    await vi.waitFor(async () => {
+      await expect.element(input).toHaveValue("")
+    })
+    expect(onChange).not.toHaveBeenCalled()
+    await expect
+      .element(page.getByRole("combobox").first())
+      .toHaveTextContent("January 15, 2024")
+    await expect
+      .element(page.getByRole("combobox").first())
+      .toHaveTextContent("January 16, 2024")
+    await expect
+      .element(page.getByText("January 17, 2024").query())
+      .not.toBeInTheDocument()
+  })
+
   test("handles onClear with multiple value", async () => {
     const { user: _user } = await render(
       <DatePicker

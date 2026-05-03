@@ -26,6 +26,7 @@ import {
   useRef,
   useState,
 } from "react"
+import { useEnvironment } from "../../core"
 import { useCombobox } from "../../hooks/use-combobox"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"
@@ -36,6 +37,7 @@ import {
   dataAttr,
   focusTransfer,
   handlerAll,
+  isActiveElement,
   isArray,
   isComposing,
   isDate,
@@ -211,6 +213,7 @@ export const useDatePicker = <
 }: UseDatePickerProps<Multiple, Range> = {}) => {
   if (dayjs(minDate).isAfter(dayjs(maxDate))) maxDate = minDate
 
+  const { getDocument } = useEnvironment()
   const { locale: defaultLocale, t } = useI18n("datePicker")
   const {
     props: {
@@ -655,15 +658,24 @@ export const useDatePicker = <
 
       if (allowInput) {
         if (isObject(value) && !isArray(value) && !isDate(value)) {
-          if (contains(startInputRef.current, ev.target)) return
-          if (contains(endInputRef.current, ev.target)) return
+          if (
+            startInputRef.current &&
+            contains(startInputRef.current, ev.target)
+          ) {
+            if (!isActiveElement(startInputRef.current, getDocument()!))
+              ev.defaultPrevented = true
 
-          const { end, start } = value
+            startInputRef.current.focus()
+          } else if (
+            endInputRef.current &&
+            contains(endInputRef.current, ev.target)
+          ) {
+            if (!isActiveElement(endInputRef.current, getDocument()!))
+              ev.defaultPrevented = true
 
-          if ((!start && !end) || !!end) {
-            startInputRef.current?.focus()
+            endInputRef.current.focus()
           } else {
-            endInputRef.current?.focus()
+            startInputRef.current?.focus()
           }
         } else {
           startInputRef.current?.focus()
@@ -672,7 +684,7 @@ export const useDatePicker = <
 
       if (openOnClick) onOpen()
     },
-    [allowInput, interactive, onOpen, openOnClick, value],
+    [allowInput, interactive, onOpen, openOnClick, value, getDocument],
   )
 
   const onMouseDown = useCallback(

@@ -9,6 +9,10 @@
   "section": "components",
   "sources": [
     {
+      "name": "client-only.test.browser.tsx",
+      "content": "import { page, render } from \"#test/browser\"\nimport { ClientOnly } from \".\"\n\ndescribe(\"<ClientOnly />\", () => {\n  test(\"renders children after mount\", async () => {\n    await render(<ClientOnly>Hello</ClientOnly>)\n\n    await expect.element(page.getByText(\"Hello\")).toBeInTheDocument()\n  })\n\n  test(\"renders fallback when provided\", async () => {\n    await render(\n      <ClientOnly fallback={<span>Loading...</span>}>Hello</ClientOnly>,\n    )\n\n    await expect.element(page.getByText(\"Hello\")).toBeInTheDocument()\n  })\n\n  test(\"supports function children\", async () => {\n    await render(<ClientOnly>{() => \"Hello from function\"}</ClientOnly>)\n\n    await expect\n      .element(page.getByText(\"Hello from function\"))\n      .toBeInTheDocument()\n  })\n})\n"
+    },
+    {
       "name": "client-only.tsx",
       "content": "\"use client\"\n\nimport type { FC, ReactNode } from \"react\"\nimport type { ReactNodeOrFunction } from \"@yamada-ui/react\"\nimport { useMounted } from \"../../hooks/use-mounted\"\nimport { Show } from \"../show\"\n\nexport interface ClientOnlyProps {\n  /**\n   * The content to render on the client side.\n   *\n   * **Note:** Use the function pattern when accessing browser-only APIs.\n   */\n  children: ReactNodeOrFunction\n  /**\n   * The fallback content to render while the component is mounting on the client\n   * side.\n   */\n  fallback?: ReactNode\n}\n\n/**\n * `ClientOnly` is a component that renders its children only on the client side.\n *\n * @see https://yamada-ui.com/docs/components/client-only\n */\nexport const ClientOnly: FC<ClientOnlyProps> = ({ children, fallback }) => {\n  const mounted = useMounted({ state: true })\n\n  return (\n    <Show fallback={fallback} when={mounted}>\n      {children}\n    </Show>\n  )\n}\n"
     },

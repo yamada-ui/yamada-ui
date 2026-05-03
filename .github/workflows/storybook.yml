@@ -14,7 +14,9 @@ on:
       - "packages/utils/src/**/*.ts"
       - "packages/utils/src/**/*.tsx"
       - "!packages/**/*.test.ts"
+      - "!packages/**/*.test.*.ts"
       - "!packages/**/*.test.tsx"
+      - "!packages/**/*.test.*.tsx"
     branches:
       - main
 

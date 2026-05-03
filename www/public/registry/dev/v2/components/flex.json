@@ -7,7 +7,7 @@
     "providers": []
   },
   "dependents": {
-    "components": ["group", "wrap"],
+    "components": ["group", "stack", "wrap"],
     "hooks": [],
     "providers": []
   },
@@ -16,6 +16,10 @@
     {
       "name": "flex.style.ts",
       "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const flexStyle = defineComponentStyle({\n  base: {\n    display: \"flex\",\n  },\n})\n\nexport type FlexStyle = typeof flexStyle\n"
+    },
+    {
+      "name": "flex.test.browser.tsx",
+      "content": "import { page, render } from \"#test/browser\"\nimport { Flex } from \"./flex\"\n\ndescribe(\"<Flex />\", () => {\n  test(\"sets `displayName` correctly\", () => {\n    expect(Flex.displayName).toBe(\"Flex\")\n  })\n\n  test(\"sets `className` correctly\", async () => {\n    await render(<Flex>Flex</Flex>)\n\n    const flex = page.getByText(\"Flex\")\n    await expect.element(flex).toHaveClass(\"ui-flex\")\n  })\n\n  test(\"renders HTML tag correctly\", async () => {\n    await render(<Flex>Flex</Flex>)\n\n    const flex = page.getByText(\"Flex\")\n    expect(flex.element().tagName).toBe(\"DIV\")\n  })\n\n  test(\"renders all the allowed shorthand style props\", async () => {\n    await render(\n      <Flex\n        align=\"stretch\"\n        basis=\"auto\"\n        direction=\"row\"\n        grow={1}\n        justify=\"start\"\n        shrink={0}\n        wrap=\"nowrap\"\n      >\n        Flex\n      </Flex>,\n    )\n\n    const flex = page.getByText(\"Flex\")\n    await expect.element(flex).toHaveStyle({\n      alignItems: \"stretch\",\n      flexBasis: \"auto\",\n      flexDirection: \"row\",\n      flexGrow: \"1\",\n      flexShrink: \"0\",\n      flexWrap: \"nowrap\",\n      justifyContent: \"start\",\n    })\n  })\n})\n"
     },
     {
       "name": "flex.tsx",

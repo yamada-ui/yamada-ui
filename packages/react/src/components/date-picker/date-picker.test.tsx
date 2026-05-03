@@ -892,7 +892,7 @@ describe("<DatePicker />", () => {
     const input = page.getByRole("textbox").first()
     const inputEl = await input.findElement()
     inputEl.focus()
-    await _user.type(input, "2024-01-15")
+    await _user.type(input, "2024-01-17")
     await _user.keyboard("{Enter}")
 
     await vi.waitFor(async () => {
@@ -905,6 +905,9 @@ describe("<DatePicker />", () => {
     await expect
       .element(page.getByRole("combobox").first())
       .toHaveTextContent("January 16, 2024")
+    await expect
+      .element(page.getByText("January 17, 2024").query())
+      .not.toBeInTheDocument()
   })
 
   test("handles onClear with multiple value", async () => {

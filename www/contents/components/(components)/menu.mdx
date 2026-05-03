@@ -881,29 +881,29 @@ The `Menu` follows the [WAI-ARIA - Menu and Menubar Pattern](https://www.w3.org/
 
 ### ARIA Roles and Attributes
 
-| Component and Element              | Roles and Attributes    | Usage                                                                                                                      |
-| ---------------------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `button.ui-menu__trigger`          | `role="button"`         | Indicates that it is a button.                                                                                             |
-|                                    | `aria-controls`         | Set to the related `div.ui-menu__content` `id` when the menu is open, `undefined` when closed.                             |
-|                                    | `aria-disabled`         | Set to `"true"` when `disabled` is set.                                                                                    |
-|                                    | `aria-expanded`         | Set to `"true"` when the menu is open, `"false"` when closed.                                                              |
-|                                    | `aria-haspopup="menu"`  | Indicates that a menu exists.                                                                                              |
-| `div.ui-menu__context-trigger`     | `role="application"`    | Indicates that it is an application.                                                                                       |
-|                                    | `aria-controls`         | Set to the related `div.ui-menu__content` `id` when the menu is open, `undefined` when closed.                             |
-|                                    | `aria-disabled`         | Set to `"true"` when `disabled` is set.                                                                                    |
-|                                    | `aria-expanded`         | Set to `"true"` when the menu is open, `"false"` when closed.                                                              |
-|                                    | `aria-haspopup="menu"`  | Indicates that a menu exists.                                                                                              |
-| `div.ui-menu__content`             | `role="menu"`           | Indicates that it is a menu.                                                                                               |
-|                                    | `aria-activedescendant` | Set to the `id` of the focused item.                                                                                       |
-|                                    | `aria-hidden`           | Set to `"false"` when the menu is open, `"true"` when closed.                                                              |
-|                                    | `aria-labelledby`       | Set to the `id` of the related `button.ui-menu__trigger` or `div.ui-menu__context-trigger`.                                |
-| `span.ui-menu__label`              | `role="presentation"`   | Indicates that it is for presentation.                                                                                     |
-| `div.ui-menu__group`               | `role="group"`          | Indicates that it is a group.                                                                                              |
-|                                    | `aria-labelledby`       | Set to the `id` of the related `span.ui-menu__label`.                                                                      |
-| `div.ui-menu__item`                | `role="menuitem"`       | Indicates that it is a menu item.                                                                                          |
-|                                    | `aria-disabled`         | Set to `"true"` when `disabled` is set.                                                                                    |
-| `div.ui-menu__item--option`        | `role`                  | Set to `"menuitemradio"` when `Menu.OptionGroup` type is `"radio"`, set to `"menuitemcheckbox"` when type is `"checkbox"`. |
-| `hr.ui-menu__separator`            | `role="separator"`      | Indicates that it is a separator.                                                                                          |
+| Component and Element          | Roles and Attributes    | Usage                                                                                                                      |
+| ------------------------------ | ----------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `button.ui-menu__trigger`      | `role="button"`         | Indicates that it is a button.                                                                                             |
+|                                | `aria-controls`         | Set to the related `div.ui-menu__content` `id` when the menu is open, `undefined` when closed.                             |
+|                                | `aria-disabled`         | Set to `"true"` when `disabled` is set.                                                                                    |
+|                                | `aria-expanded`         | Set to `"true"` when the menu is open, `"false"` when closed.                                                              |
+|                                | `aria-haspopup="menu"`  | Indicates that a menu exists.                                                                                              |
+| `div.ui-menu__context-trigger` | `role="application"`    | Indicates that it is an application.                                                                                       |
+|                                | `aria-controls`         | Set to the related `div.ui-menu__content` `id` when the menu is open, `undefined` when closed.                             |
+|                                | `aria-disabled`         | Set to `"true"` when `disabled` is set.                                                                                    |
+|                                | `aria-expanded`         | Set to `"true"` when the menu is open, `"false"` when closed.                                                              |
+|                                | `aria-haspopup="menu"`  | Indicates that a menu exists.                                                                                              |
+| `div.ui-menu__content`         | `role="menu"`           | Indicates that it is a menu.                                                                                               |
+|                                | `aria-activedescendant` | Set to the `id` of the focused item.                                                                                       |
+|                                | `aria-hidden`           | Set to `"false"` when the menu is open, `"true"` when closed.                                                              |
+|                                | `aria-labelledby`       | Set to the `id` of the related `button.ui-menu__trigger` or `div.ui-menu__context-trigger`.                                |
+| `span.ui-menu__label`          | `role="presentation"`   | Indicates that it is for presentation.                                                                                     |
+| `div.ui-menu__group`           | `role="group"`          | Indicates that it is a group.                                                                                              |
+|                                | `aria-labelledby`       | Set to the `id` of the related `span.ui-menu__label`.                                                                      |
+| `div.ui-menu__item`            | `role="menuitem"`       | Indicates that it is a menu item.                                                                                          |
+|                                | `aria-disabled`         | Set to `"true"` when `disabled` is set.                                                                                    |
+| `div.ui-menu__item--option`    | `role`                  | Set to `"menuitemradio"` when `Menu.OptionGroup` type is `"radio"`, set to `"menuitemcheckbox"` when type is `"checkbox"`. |
+| `hr.ui-menu__separator`        | `role="separator"`      | Indicates that it is a separator.                                                                                          |
 
 ## Similar Components
 

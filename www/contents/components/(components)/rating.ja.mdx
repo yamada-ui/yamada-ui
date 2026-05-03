@@ -266,14 +266,14 @@ return <Rating value={value} onChange={onChange} />
 
 ### ARIAロールと属性
 
-| コンポーネントと要素    | ロールと属性        | 使い方                                                 |
-| ----------------------- | ------------------- | ------------------------------------------------------ |
-| `div.ui-rating__root`   | `role="radiogroup"` | ラジオグループであることを示します。                   |
-|                         | `aria-label`        | 選択されたアイテムの数を示します。                     |
-|                         | `aria-readonly`     | `readOnly`が設定されている場合は`"true"`を設定します。 |
-|                         | `aria-disabled`     | `disabled`が設定されている場合は`"true"`を設定します。 |
-| `label.ui-rating__item` | `aria-label`        | `value`を設定します。                                  |
-| `div.ui-rating__icon`   | `aria-hidden`       | `RatingIcon`をアクセシビリティツリーから除外します。   |
+| コンポーネントと要素                   | ロールと属性        | 使い方                                                       |
+| -------------------------------------- | ------------------- | ------------------------------------------------------------ |
+| `div.ui-rating__root`                  | `role="radiogroup"` | ラジオグループであることを示します。                         |
+|                                        | `aria-label`        | 選択されたアイテムの数を示します。                           |
+|                                        | `aria-readonly`     | `readOnly`が設定されている場合は`"true"`を設定します。       |
+|                                        | `aria-disabled`     | `disabled`が設定されている場合は`"true"`を設定します。       |
+| `.ui-rating__item input[type="radio"]` | `aria-label`        | 各評価項目の`value`を設定します。                            |
+| `.ui-rating__icon svg`                 | `aria-hidden`       | 装飾用の評価アイコンをアクセシビリティツリーから除外します。 |
 
 ## 類似のコンポーネント
 

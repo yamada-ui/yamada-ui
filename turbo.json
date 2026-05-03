@@ -98,7 +98,7 @@
       "inputs": [
         "package.json",
         "**/*.{ts,tsx,mts}",
-        "!**/*.{test,stories}.{ts,tsx,mts}",
+        "!**/*.stories.{ts,tsx,mts}",
         "!**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx,mts}",
         "!{oxlint,tsdown}.config.ts",
         "!{scripts,storybook,@types}/**"

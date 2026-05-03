@@ -53,6 +53,7 @@ import {
   getAdjustedMonth,
   isAfterDate,
   isBeforeDate,
+  isIncludeDates,
   updateMaybeDateValue,
   useCalendarProps,
 } from "../calendar"
@@ -577,23 +578,7 @@ export const useDatePicker = <
           Enter: (ev) => {
             if (!open || !inputValue.length) return
 
-            if (isArray(value)) {
-              const date = stringToDate(inputValue)
-
-              if (!date) return
-
-              ev.preventDefault()
-
-              setInputValue("" as MaybeInputValue<Range>)
-
-              setValue(
-                (prev) =>
-                  updateMaybeDateValue(date, max)(prev) as MaybeDateValue<
-                    Multiple,
-                    Range
-                  >,
-              )
-            } else if (isObject(value) && !isDate(value)) {
+            if (isObject(value) && !isArray(value) && !isDate(value)) {
               const align = contains(endInputRef.current, ev.target)
                 ? "end"
                 : "start"
@@ -630,8 +615,20 @@ export const useDatePicker = <
 
               ev.preventDefault()
 
-              setInputValue(dateToString(date) as MaybeInputValue<Range>)
-              setValue(date as MaybeDateValue<Multiple, Range>)
+              if (isArray(value)) {
+                setInputValue("" as MaybeInputValue<Range>)
+
+                setValue((prev) =>
+                  isArray(prev) &&
+                  !isIncludeDates(date, prev) &&
+                  (!isNumber(max) || prev.length < max)
+                    ? ([...prev, date] as MaybeDateValue<Multiple, Range>)
+                    : prev,
+                )
+              } else {
+                setInputValue(dateToString(date) as MaybeInputValue<Range>)
+                setValue(date as MaybeDateValue<Multiple, Range>)
+              }
             }
           },
         },

@@ -120,8 +120,8 @@ jobs:
           files_yaml: |
             src:
               - packages/{cli,react,utils}/src/**/*.{ts,tsx}
-              - '!packages/{cli,react,utils}/src/**/*.test.{ts,tsx}'
-              - '!packages/{cli,react,utils}/src/**/*.stories.{ts,tsx}'
+              - '!packages/{cli,react,utils}/src/**/*.{test,stories}.{ts,tsx}'
+              - '!packages/{cli,react,utils}/src/**/*.test.*.{ts,tsx}'
             changeset:
               - .changeset/*.md
               - '!.changeset/README.md'

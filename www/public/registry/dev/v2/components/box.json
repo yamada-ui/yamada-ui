@@ -6,8 +6,17 @@
     "hooks": [],
     "providers": []
   },
+  "dependents": {
+    "components": ["float", "stack"],
+    "hooks": [],
+    "providers": []
+  },
   "section": "components",
   "sources": [
+    {
+      "name": "box.test.browser.tsx",
+      "content": "import { a11y, page, render } from \"#test/browser\"\nimport { Box } from \"./box\"\n\ndescribe(\"<Box />\", () => {\n  test(\"renders component correctly\", async () => {\n    await a11y(<Box>Box</Box>)\n  })\n\n  test(\"renders HTML tag correctly\", async () => {\n    await render(<Box>Box</Box>)\n\n    expect(page.getByText(\"Box\").element().tagName).toBe(\"DIV\")\n  })\n})\n"
+    },
     {
       "name": "box.tsx",
       "content": "\"use client\"\n\nimport type { HTMLStyledProps } from \"@yamada-ui/react\"\nimport { styled } from \"@yamada-ui/react\"\n\nexport interface BoxProps extends HTMLStyledProps {}\n\n/**\n * `Box` is the most abstract component on which all other components are built. By default, it renders a `div` element.\n *\n * @see https://yamada-ui.com/docs/components/box\n */\nexport const Box = styled(\"div\")\n"

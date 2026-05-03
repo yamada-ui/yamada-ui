@@ -594,19 +594,19 @@ The `Modal` follows the [WAI-ARIA - Dialog (Modal) Pattern](https://www.w3.org/W
 
 ### ARIA Roles and Attributes
 
-| Component and Element             | Roles and Attributes     | Usage                                                                 |
-| --------------------------------- | ------------------------ | --------------------------------------------------------------------- |
-| `section.ui-modal__content`       | `role="dialog"`          | Indicates that this is a dialog.                                      |
-|                                   | `aria-modal="true"`      | Indicates that the displayed widget is modal.                         |
-|                                   | `aria-labelledby`        | Sets to the `id` of `Modal.Title`.                                    |
-|                                   | `aria-describedby`       | Sets to the `id` of `Modal.Body`.                                     |
-| `button.ui-modal__trigger--open`  | `aria-haspopup="dialog"` | Indicates that a dialog exists.                                       |
-|                                   | `aria-expanded`          | Sets to `"true"` if the modal is open, and `"false"` if it is closed. |
+| Component and Element             | Roles and Attributes     | Usage                                                                  |
+| --------------------------------- | ------------------------ | ---------------------------------------------------------------------- |
+| `section.ui-modal__content`       | `role="dialog"`          | Indicates that this is a dialog.                                       |
+|                                   | `aria-modal="true"`      | Indicates that the displayed widget is modal.                          |
+|                                   | `aria-labelledby`        | Sets to the `id` of `Modal.Title`.                                     |
+|                                   | `aria-describedby`       | Sets to the `id` of `Modal.Body`.                                      |
+| `button.ui-modal__trigger--open`  | `aria-haspopup="dialog"` | Indicates that a dialog exists.                                        |
+|                                   | `aria-expanded`          | Sets to `"true"` if the modal is open, and `"false"` if it is closed.  |
 |                                   | `aria-controls`          | If the modal is open, sets to the `id` of `section.ui-modal__content`. |
-|                                   | `aria-label`             | Sets to `"Open modal"`.                                               |
-| `button.ui-modal__close-button`   | `aria-label`             | Sets to `"Close modal"`.                                              |
-| `button.ui-modal__trigger--close` | `aria-label`             | Sets to `"Close modal"`.                                              |
-| `div.ui-modal__overlay`           | `aria-hidden`            | Excludes the element from the accessibility tree.                     |
+|                                   | `aria-label`             | Sets to `"Open modal"`.                                                |
+| `button.ui-modal__close-button`   | `aria-label`             | Sets to `"Close modal"`.                                               |
+| `button.ui-modal__trigger--close` | `aria-label`             | Sets to `"Close modal"`.                                               |
+| `div.ui-modal__overlay`           | `aria-hidden`            | Excludes the element from the accessibility tree.                      |
 
 ## Similar Components
 

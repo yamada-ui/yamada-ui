@@ -55,7 +55,7 @@ jobs:
             diff:
               - packages/react/src/**/*.{ts,tsx,mts}
               - '!packages/react/src/**/*.{test,stories}.{ts,tsx}'
-              - ${{ matrix.diff }}
+              - '${{ matrix.diff }}'
 
       - name: Install
         if: steps.changed-files.outputs.changed_keys != ''

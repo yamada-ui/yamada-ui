@@ -27,13 +27,13 @@ jobs:
         include:
           - browser: chromium
             name: Chromium
-            command: test:coverage
+            diff: "!packages/react/src/**/*.{firefox,webkit}.{ts,tsx,mts}"
           - browser: firefox
             name: Firefox
-            command: test:firefox
+            diff: "!packages/react/src/**/*.{chromium,webkit}.{ts,tsx,mts}"
           - browser: webkit
             name: Webkit
-            command: test:webkit
+            diff: "!packages/react/src/**/*.{chromium,firefox}.{ts,tsx,mts}"
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -54,7 +54,8 @@ jobs:
               - packages/react/test/**
             diff:
               - packages/react/src/**/*.{ts,tsx,mts}
-              - '!packages/react/src/**/*.stories.{ts,tsx}'
+              - '!packages/react/src/**/*.{test,stories}.{ts,tsx}'
+              - '${{ matrix.diff }}'
 
       - name: Install
         if: steps.changed-files.outputs.changed_keys != ''
@@ -66,19 +67,19 @@ jobs:
 
       - name: Run test (full)
         if: steps.changed-files.outputs.full_any_changed == 'true'
-        run: pnpm turbo run ${{ matrix.command }} --filter=./packages/react -- --shard=${{ matrix.shard_index }}/4
+        run: pnpm turbo run test:coverage:${{ matrix.browser }} --filter=./packages/react -- --retry=3 --shard=${{ matrix.shard_index }}/4
 
       - name: Run test (diff)
         if: steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true'
-        run: pnpm turbo run ${{ matrix.command }} --filter=./packages/react -- --changed origin/${{ github.base_ref }}　--shard=${{ matrix.shard_index }}/4
+        run: pnpm turbo run test:coverage:${{ matrix.browser }} --filter=./packages/react -- --retry=3 --changed origin/${{ github.base_ref }} --shard=${{ matrix.shard_index }}/4
 
       - name: Upload coverage
-        if: matrix.browser == 'chromium' && steps.changed-files.outputs.changed_keys != ''
+        if: steps.changed-files.outputs.changed_keys != ''
         uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe # v5.5.4
         with:
           disable_search: true
           fail_ci_if_error: false
-          files: ./packages/react/coverage/coverage-final.json
+          files: ./packages/react/coverage/${{ matrix.browser }}/coverage-final.json
           flags: unittests
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true

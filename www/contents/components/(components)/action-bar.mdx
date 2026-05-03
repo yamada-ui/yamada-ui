@@ -201,14 +201,15 @@ The `ActionBar` follows the [WAI-ARIA - Dialog (Modal) Pattern](https://www.w3.o
 
 ### ARIA Roles and Attributes
 
-| Component                | Roles and Attributes     | Usage                                                                      |
-| ------------------------ | ------------------------ | -------------------------------------------------------------------------- |
-| `ActionBar.Content`      | `role="dialog"`          | Indicates that this is a dialog.                                           |
-| `ActionBar.OpenTrigger`  | `aria-haspopup="dialog"` | Indicates that a dialog exists.                                            |
-|                          | `aria-expanded`          | Sets to `"true"` if the action bar is open, and `"false"` if it is closed. |
-|                          | `aria-controls`          | If the action bar is open, sets to the `id` of `ActionBar.Content`.        |
-|                          | `aria-label`             | Sets to `"Open action bar"`.                                               |
-| `ActionBar.CloseTrigger` | `aria-label`             | Sets to `"Close action bar"`.                                              |
+| Component and Element                  | Roles and Attributes     | Usage                                                                            |
+| -------------------------------------- | ------------------------ | -------------------------------------------------------------------------------- |
+| `section.ui-action-bar__content`       | `role="dialog"`          | Indicates that this is a dialog.                                                 |
+|                                        | `id`                     | Used to associate with `button.ui-action-bar__trigger--open`.                    |
+| `button.ui-action-bar__trigger--open`  | `aria-haspopup="dialog"` | Indicates that a dialog exists.                                                  |
+|                                        | `aria-expanded`          | Sets to `"true"` if the action bar is open, and `"false"` if it is closed.       |
+|                                        | `aria-controls`          | If the action bar is open, sets to the `id` of `section.ui-action-bar__content`. |
+|                                        | `aria-label`             | Sets to `"Open action bar"`.                                                     |
+| `button.ui-action-bar__trigger--close` | `aria-label`             | Sets to `"Close action bar"`.                                                    |
 
 ## Similar Components
 

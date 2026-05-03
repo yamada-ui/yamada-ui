@@ -606,23 +606,23 @@ When `aria-label` is set, it will be read aloud by screen readers.
 
 ### ARIA Roles and Attributes
 
-| Component and Element     | Roles and Attributes   | Usage                                                                                           |
-| ------------------------- | ---------------------- | ----------------------------------------------------------------------------------------------- |
-| `ul.ui-tree__root`        | `role="tree"`          | Indicates that the element is a tree.                                                           |
-|                           | `aria-multiselectable` | Set to `"true"` when `multiple={true}` or `checkable={true}`.                                   |
-| `div.ui-tree__item`       | `role="treeitem"`      | Indicates that the element is a tree item.                                                      |
-|                           | `aria-expanded`        | Set to `"true"` when the item is expanded, `"false"` when collapsed.                            |
-|                           | `aria-selected`        | Set to `"true"` when the item is selected.                                                      |
-|                           | `aria-disabled`        | Set to `"true"` when the item is disabled.                                                      |
-|                           | `aria-level`           | Sets the hierarchy level of the item.                                                           |
-|                           | `aria-labelledby`      | Sets the `id` of the related `span.ui-tree__label`.                                             |
-| `ul.ui-tree__group`       | `role="group"`         | Indicates that the element is a group.                                                          |
-|                           | `aria-labelledby`      | Sets the `id` of the related `span.ui-tree__label`.                                             |
-|                           | `aria-busy`            | Set to `"true"` when the item's children are loading.                                           |
-| `input.ui-tree__checkbox` | `id`                   | Used to associate with the parent `input.ui-tree__checkbox`.                                    |
-|                           | `aria-controls`        | Sets the `id` of related child `input.ui-tree__checkbox` elements.                              |
-|                           | `aria-labelledby`      | Sets the `id` of the related `span.ui-tree__label`.                                             |
-| `span.ui-tree__label`     | `id`                   | Used to associate with `div.ui-tree__item`, `ul.ui-tree__group`, and `input.ui-tree__checkbox`. |
+| Component and Element     | Roles and Attributes   | Usage                                                                                          |
+| ------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------- |
+| `ul.ui-tree__root`        | `role="tree"`          | Indicates that the element is a tree.                                                          |
+|                           | `aria-multiselectable` | Set to `"true"` when `multiple={true}` or `checkable={true}`.                                  |
+| `li.ui-tree__item`        | `role="treeitem"`      | Indicates that the element is a tree item.                                                     |
+|                           | `aria-expanded`        | Set to `"true"` when the item is expanded, `"false"` when collapsed.                           |
+|                           | `aria-selected`        | Set to `"true"` when the item is selected.                                                     |
+|                           | `aria-disabled`        | Set to `"true"` when the item is disabled.                                                     |
+|                           | `aria-level`           | Sets the hierarchy level of the item.                                                          |
+|                           | `aria-labelledby`      | Sets the `id` of the related `span.ui-tree__label`.                                            |
+| `ul.ui-tree__group`       | `role="group"`         | Indicates that the element is a group.                                                         |
+|                           | `aria-labelledby`      | Sets the `id` of the related `span.ui-tree__label`.                                            |
+|                           | `aria-busy`            | Set to `"true"` when the item's children are loading.                                          |
+| `input.ui-tree__checkbox` | `id`                   | Used to associate with the parent `input.ui-tree__checkbox`.                                   |
+|                           | `aria-controls`        | Sets the `id` of related child `input.ui-tree__checkbox` elements.                             |
+|                           | `aria-labelledby`      | Sets the `id` of the related `span.ui-tree__label`.                                            |
+| `span.ui-tree__label`     | `id`                   | Used to associate with `li.ui-tree__item`, `ul.ui-tree__group`, and `input.ui-tree__checkbox`. |
 
 ## Similar Components
 

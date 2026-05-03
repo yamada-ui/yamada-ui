@@ -593,15 +593,15 @@ return (
 
 ### ARIA Roles and Attributes
 
-| Component    | Roles and Attributes | Usage                                                                                         |
-| ------------ | -------------------- | --------------------------------------------------------------------------------------------- |
-| `Tabs.List`  | `role="tablist"`     | Indicates that this is a tab list.                                                            |
-|              | `aria-orientation`   | Sets to `"horizontal"` or `"vertical"` based on `orientation`. The default is `"horizontal"`. |
-| `Tabs.Tab`   | `role="tab"`         | Indicates that this is a tab.                                                                 |
-|              | `aria-selected`      | Sets to `"true"` when the tab is selected, `"false"` when not selected.                       |
-|              | `aria-controls`      | Sets the `id` of the associated `Tabs.Panel`.                                                 |
-| `Tabs.Panel` | `role="tabpanel"`    | Indicates that this is a tab panel.                                                           |
-|              | `aria-labelledby`    | Sets the `id` of the associated `Tabs.Tab`.                                                   |
+| Component and Element | Roles and Attributes | Usage                                                                                         |
+| --------------------- | -------------------- | --------------------------------------------------------------------------------------------- |
+| `div.ui-tabs__list`   | `role="tablist"`     | Indicates that this is a tab list.                                                            |
+|                       | `aria-orientation`   | Sets to `"horizontal"` or `"vertical"` based on `orientation`. The default is `"horizontal"`. |
+| `button.ui-tabs__tab` | `role="tab"`         | Indicates that this is a tab.                                                                 |
+|                       | `aria-selected`      | Sets to `"true"` when the tab is selected, `"false"` when not selected.                       |
+|                       | `aria-controls`      | Sets the `id` of the associated `div.ui-tabs__panel`.                                         |
+| `div.ui-tabs__panel`  | `role="tabpanel"`    | Indicates that this is a tab panel.                                                           |
+|                       | `aria-labelledby`    | Sets the `id` of the associated `button.ui-tabs__tab`.                                        |
 
 ## Similar Components
 

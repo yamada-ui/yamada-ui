@@ -38,6 +38,50 @@
         "!{scripts,storybook,@types}/**"
       ]
     },
+    "test:jsdom": {
+      "dependsOn": ["transit:test"],
+      "inputs": [
+        "package.json",
+        "**/*.{ts,tsx,mts}",
+        "!**/*.stories.{ts,tsx,mts}",
+        "!**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx,mts}",
+        "!{oxlint,tsdown}.config.ts",
+        "!{scripts,storybook,@types}/**"
+      ]
+    },
+    "test:chromium": {
+      "dependsOn": ["transit:test"],
+      "inputs": [
+        "package.json",
+        "**/*.{ts,tsx,mts}",
+        "!**/*.{test,stories}.{ts,tsx,mts}",
+        "!**/*.test.{firefox,webkit}.{ts,tsx,mts}",
+        "!{oxlint,tsdown}.config.ts",
+        "!{scripts,storybook,@types}/**"
+      ]
+    },
+    "test:firefox": {
+      "dependsOn": ["transit:test"],
+      "inputs": [
+        "package.json",
+        "**/*.{ts,tsx,mts}",
+        "!**/*.{test,stories}.{ts,tsx,mts}",
+        "!**/*.test.{chromium,webkit}.{ts,tsx,mts}",
+        "!{oxlint,tsdown}.config.ts",
+        "!{scripts,storybook,@types}/**"
+      ]
+    },
+    "test:webkit": {
+      "dependsOn": ["transit:test"],
+      "inputs": [
+        "package.json",
+        "**/*.{ts,tsx,mts}",
+        "!**/*.{test,stories}.{ts,tsx,mts}",
+        "!**/*.test.{chromium,firefox}.{ts,tsx,mts}",
+        "!{oxlint,tsdown}.config.ts",
+        "!{scripts,storybook,@types}/**"
+      ]
+    },
     "test:coverage": {
       "dependsOn": ["transit:test"],
       "inputs": [
@@ -54,7 +98,8 @@
       "inputs": [
         "package.json",
         "**/*.{ts,tsx,mts}",
-        "!**/*.stories.{ts,tsx,mts}",
+        "!**/*.{test,stories}.{ts,tsx,mts}",
+        "!**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx,mts}",
         "!{oxlint,tsdown}.config.ts",
         "!{scripts,storybook,@types}/**"
       ],
@@ -65,7 +110,8 @@
       "inputs": [
         "package.json",
         "**/*.{ts,tsx,mts}",
-        "!**/*.stories.{ts,tsx,mts}",
+        "!**/*.{test,stories}.{ts,tsx,mts}",
+        "!**/*.test.{firefox,webkit}.{ts,tsx,mts}",
         "!{oxlint,tsdown}.config.ts",
         "!{scripts,storybook,@types}/**"
       ],
@@ -76,7 +122,8 @@
       "inputs": [
         "package.json",
         "**/*.{ts,tsx,mts}",
-        "!**/*.stories.{ts,tsx,mts}",
+        "!**/*.{test,stories}.{ts,tsx,mts}",
+        "!**/*.test.{chromium,webkit}.{ts,tsx,mts}",
         "!{oxlint,tsdown}.config.ts",
         "!{scripts,storybook,@types}/**"
       ],
@@ -87,41 +134,12 @@
       "inputs": [
         "package.json",
         "**/*.{ts,tsx,mts}",
-        "!**/*.stories.{ts,tsx,mts}",
+        "!**/*.{test,stories}.{ts,tsx,mts}",
+        "!**/*.test.{chromium,firefox}.{ts,tsx,mts}",
         "!{oxlint,tsdown}.config.ts",
         "!{scripts,storybook,@types}/**"
       ],
       "outputs": ["coverage/webkit/**"]
-    },
-    "test:chromium": {
-      "dependsOn": ["transit:test"],
-      "inputs": [
-        "package.json",
-        "**/*.{ts,tsx,mts}",
-        "!**/*.stories.{ts,tsx,mts}",
-        "!{oxlint,tsdown}.config.ts",
-        "!{scripts,storybook,@types}/**"
-      ]
-    },
-    "test:firefox": {
-      "dependsOn": ["transit:test"],
-      "inputs": [
-        "package.json",
-        "**/*.{ts,tsx,mts}",
-        "!**/*.stories.{ts,tsx,mts}",
-        "!{oxlint,tsdown}.config.ts",
-        "!{scripts,storybook,@types}/**"
-      ]
-    },
-    "test:webkit": {
-      "dependsOn": ["transit:test"],
-      "inputs": [
-        "package.json",
-        "**/*.{ts,tsx,mts}",
-        "!**/*.stories.{ts,tsx,mts}",
-        "!{oxlint,tsdown}.config.ts",
-        "!{scripts,storybook,@types}/**"
-      ]
     },
     "typecheck": {
       "dependsOn": ["transit"],

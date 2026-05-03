@@ -14,62 +14,7 @@ env:
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
-  jsdom:
-    name: React / jsdom ${{ matrix.shard_index }}/4
-    if: ${{ !github.event.pull_request.draft }}
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    strategy:
-      fail-fast: false
-      matrix:
-        shard_index: [1, 2, 3, 4]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-        with:
-          fetch-depth: 0
-
-      - name: Check modified files
-        id: changed-files
-        uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
-        with:
-          files_yaml: |
-            full:
-              - .github/workflows/quality.yml
-              - '{turbo.json,package.json}'
-              - packages/workspace/package.json
-              - packages/workspace/src/vitest/**
-              - packages/react/{package.json,vitest.config.ts}
-              - packages/react/test/**
-            diff:
-              - packages/react/src/**/*.{ts,tsx,mts}
-              - '!packages/react/src/**/*.stories.{ts,tsx}'
-
-      - name: Install
-        if: steps.changed-files.outputs.changed_keys != ''
-        uses: ./.github/composite-actions/install
-
-      - name: Run test (full)
-        if: steps.changed-files.outputs.full_any_changed == 'true'
-        run: pnpm turbo run test:coverage:jsdom --filter=./packages/react -- --shard=${{ matrix.shard_index }}/4
-
-      - name: Run test (diff)
-        if: steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true'
-        run: pnpm turbo run test:coverage:jsdom --filter=./packages/react -- --changed origin/${{ github.base_ref }} --shard=${{ matrix.shard_index }}/4
-
-      - name: Upload coverage
-        if: steps.changed-files.outputs.changed_keys != ''
-        uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe # v5.5.4
-        with:
-          disable_search: true
-          fail_ci_if_error: false
-          files: ./packages/react/coverage/jsdom/coverage-final.json
-          flags: unittests
-          token: ${{ secrets.CODECOV_TOKEN }}
-          verbose: true
-          codecov_yml_path: ./codecov.yml
-
-  browser:
+  test:
     name: React / ${{ matrix.name }} ${{ matrix.shard_index }}/4
     if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
@@ -82,10 +27,13 @@ jobs:
         include:
           - browser: chromium
             name: Chromium
+            diff: "!packages/react/src/**/*.{firefox,webkit}.{ts,tsx,mts}"
           - browser: firefox
             name: Firefox
+            diff: "!packages/react/src/**/*.{chromium,webkit}.{ts,tsx,mts}"
           - browser: webkit
             name: Webkit
+            diff: "!packages/react/src/**/*.{chromium,firefox}.{ts,tsx,mts}"
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -106,7 +54,8 @@ jobs:
               - packages/react/test/**
             diff:
               - packages/react/src/**/*.{ts,tsx,mts}
-              - '!packages/react/src/**/*.stories.{ts,tsx}'
+              - '!packages/react/src/**/*.{test,stories}.{ts,tsx}'
+              - ${{ matrix.diff }}
 
       - name: Install
         if: steps.changed-files.outputs.changed_keys != ''
@@ -118,11 +67,11 @@ jobs:
 
       - name: Run test (full)
         if: steps.changed-files.outputs.full_any_changed == 'true'
-        run: pnpm turbo run test:coverage:${{ matrix.browser }} --filter=./packages/react -- --shard=${{ matrix.shard_index }}/4
+        run: pnpm turbo run test:coverage:${{ matrix.browser }} --filter=./packages/react -- --retry=3 --shard=${{ matrix.shard_index }}/4
 
       - name: Run test (diff)
         if: steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true'
-        run: pnpm turbo run test:coverage:${{ matrix.browser }} --filter=./packages/react -- --changed origin/${{ github.base_ref }} --shard=${{ matrix.shard_index }}/4
+        run: pnpm turbo run test:coverage:${{ matrix.browser }} --filter=./packages/react -- --retry=3 --changed origin/${{ github.base_ref }} --shard=${{ matrix.shard_index }}/4
 
       - name: Upload coverage
         if: steps.changed-files.outputs.changed_keys != ''

@@ -5,41 +5,7 @@ import sharedConfig from "@yamada-ui/workspace/vitest/config"
 import { resolve } from "node:path"
 
 const browsers = ["chromium", "firefox", "webkit"] as const
-
-const browserPatterns = [
-  "src/**/*.test.browser.{ts,tsx}",
-  "src/**/*.test.chromium.{ts,tsx}",
-  "src/**/*.test.firefox.{ts,tsx}",
-  "src/**/*.test.webkit.{ts,tsx}",
-]
-
-const browserIncludePatterns = (browser: (typeof browsers)[number]) => [
-  "src/**/*.test.browser.{ts,tsx}",
-  `src/**/*.test.${browser}.{ts,tsx}`,
-]
-
-const alias = {
-  "@": resolve(__dirname, "./src"),
-}
-
-const browserProjects = browsers.map((browser) =>
-  defineProject({
-    optimizeDeps: { include: ["axe-core"] },
-    resolve: { alias },
-    test: {
-      name: `browser:${browser}`,
-      browser: {
-        enabled: true,
-        headless: true,
-        instances: [{ browser }],
-        provider: playwright() as any,
-      },
-      globals: true,
-      include: browserIncludePatterns(browser),
-      testTimeout: 10000,
-    },
-  }),
-)
+const alias = { "@": resolve(__dirname, "./src") }
 
 export default mergeConfig(sharedConfig, {
   plugins: [react()],
@@ -57,14 +23,32 @@ export default mergeConfig(sharedConfig, {
         test: {
           name: "jsdom",
           environment: "jsdom",
-          exclude: browserPatterns,
+          exclude: ["src/**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx}"],
           globals: true,
           include: ["src/**/*.test.{ts,tsx}"],
           setupFiles: ["@yamada-ui/workspace/vitest/setup"],
-          testTimeout: 10000,
         },
       }),
-      ...browserProjects,
+      ...browsers.map((browser) =>
+        defineProject({
+          optimizeDeps: { include: ["axe-core"] },
+          resolve: { alias },
+          test: {
+            name: `browser:${browser}`,
+            browser: {
+              enabled: true,
+              headless: true,
+              instances: [{ browser }],
+              provider: playwright() as any,
+            },
+            globals: true,
+            include: [
+              "src/**/*.test.browser.{ts,tsx}",
+              `src/**/*.test.${browser}.{ts,tsx}`,
+            ],
+          },
+        }),
+      ),
     ],
   },
 })

@@ -1,6 +1,6 @@
 # Unit Testing Rules
 
-Follow these rules when writing Vitest unit tests in `packages/cli` and `packages/utils`. `packages/react` is out of scope.
+Follow these rules when writing Vitest tests that run in `node` (`packages/cli`) or `jsdom` (`packages/utils`, `packages/react` non-browser tests) environments. Browser tests in `packages/react` are out of scope — see [Browser Testing](./browser-testing.md).
 
 ## Core Principles
 
@@ -294,18 +294,16 @@ test("detects npm", () => {
 #### DO NOT
 
 ```ts
-const defaultTouch = global.Touch
+const defaultFetch = global.fetch
 beforeAll(() => {
-  global.Touch = class Touch {
-    ...
-  } as typeof global.Touch
+  global.fetch = vi.fn() as typeof global.fetch
 })
 afterAll(() => {
-  global.Touch = defaultTouch
+  global.fetch = defaultFetch
 })
 ```
 
-Direct assignment to `global` loses type safety (note the cast) and makes the polyfill file-scoped until a matching manual restore runs. Missing or incomplete restore code leaks the global into later tests.
+Direct assignment to `global` loses type safety (note the cast) and makes the override file-scoped until a matching manual restore runs. Missing or incomplete restore code leaks the global into later tests.
 
 #### DO
 
@@ -314,13 +312,8 @@ afterEach(() => {
   vi.unstubAllGlobals()
 })
 
-test("handles touch events", () => {
-  vi.stubGlobal(
-    "Touch",
-    class Touch {
-      ...
-    },
-  )
+test("calls the registry endpoint", () => {
+  vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response("{}")))
   ...
 })
 ```

@@ -1010,28 +1010,28 @@ return (
 
 ### ARIAロールと属性
 
-| コンポーネント      | ロールと属性           | 使い方                                                                                                                                   |
-| ------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `NativeTable.Root`  | `role="grid"`          | グリッドであることを示します。                                                                                                           |
-|                     | `aria-rowcount`        | テーブルの行数を示します。                                                                                                               |
-|                     | `aria-colcount`        | テーブルの列数を示します。                                                                                                               |
-|                     | `aria-multiselectable` | `enableRowSelection`が設定されている場合は`"true"`を設定します。                                                                         |
-| `NativeTable.Thead` | `role="rowgroup"`      | 行グループであることを示します。                                                                                                         |
-| `NativeTable.Tr`    | `role="row"`           | 行であることを示します。                                                                                                                 |
-|                     | `aria-rowindex`        | 行がテーブルの何行目であるかを示します。                                                                                                 |
-|                     | `aria-disabled`        | `enableRowSelection`を関数で設定し、`false`の行には`"true"`を設定します。                                                                |
-|                     | `aria-selected`        | 行が選択されている場合は`"true"`を設定し、未選択の場合は`"false"`を設定します。                                                          |
-| `NativeTable.Th`    | `role="columnheader"`  | カラムヘッダーであることを示します。                                                                                                     |
-|                     | `aria-rowindex`        | 行がテーブルの何行目であるかを示します。                                                                                                 |
-|                     | `aria-colindex`        | 列がテーブルの何列目であるかを示します。                                                                                                 |
-|                     | `aria-sort`            | 列が昇順の場合は`"ascending"`を設定し、降順の場合は`"descending"`を設定、指定がない場合は`"none"`を設定します。                          |
-| `NativeTable.Tbody` | `role="rowgroup"`      | 行グループであることを示します。                                                                                                         |
-| `NativeTable.Td`    | `role="gridcell"`      | グリッドセルであることを示します。                                                                                                       |
-|                     | `aria-colindex`        | 列がテーブルの何列目であるかを示します。                                                                                                 |
-|                     | `aria-rowindex`        | 行がテーブルの何行目であるかを示します。                                                                                                 |
-| `NativeTable.Tfoot` | `role="rowgroup"`      | 行グループであることを示します。                                                                                                         |
-| `Checkbox`          | `aria-label`           | ヘッダーの場合は`"すべての行を選択する"`、それ以外の行の場合は`"行を選択する"`を設定します。                                             |
-| `SortingIcon`       | `aria-label`           | 列が昇順の場合は`"昇順でソートする"`を設定し、降順の場合は`"降順でソートする"`を設定、指定がない場合は`"ソートを解除する"`を設定します。 |
+| コンポーネントと要素              | ロールと属性           | 使い方                                                                                                                                   |
+| --------------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `table.ui-native-table__root`     | `role="grid"`          | グリッドであることを示します。                                                                                                           |
+|                                   | `aria-rowcount`        | テーブルの行数を示します。                                                                                                               |
+|                                   | `aria-colcount`        | テーブルの列数を示します。                                                                                                               |
+|                                   | `aria-multiselectable` | `enableRowSelection`が設定されている場合は`"true"`を設定します。                                                                         |
+| `thead.ui-native-table__thead`    | `role="rowgroup"`      | 行グループであることを示します。                                                                                                         |
+| `tr.ui-native-table__tr`          | `role="row"`           | 行であることを示します。                                                                                                                 |
+|                                   | `aria-rowindex`        | 行がテーブルの何行目であるかを示します。                                                                                                 |
+|                                   | `aria-disabled`        | `enableRowSelection`を関数で設定し、`false`の行には`"true"`を設定します。                                                                |
+|                                   | `aria-selected`        | 行が選択されている場合は`"true"`を設定し、未選択の場合は`"false"`を設定します。                                                          |
+| `th.ui-native-table__th`          | `role="columnheader"`  | カラムヘッダーであることを示します。                                                                                                     |
+|                                   | `aria-rowindex`        | 行がテーブルの何行目であるかを示します。                                                                                                 |
+|                                   | `aria-colindex`        | 列がテーブルの何列目であるかを示します。                                                                                                 |
+|                                   | `aria-sort`            | 列が昇順の場合は`"ascending"`を設定し、降順の場合は`"descending"`を設定、指定がない場合は`"none"`を設定します。                          |
+| `tbody.ui-native-table__tbody`    | `role="rowgroup"`      | 行グループであることを示します。                                                                                                         |
+| `td.ui-native-table__td`          | `role="gridcell"`      | グリッドセルであることを示します。                                                                                                       |
+|                                   | `aria-colindex`        | 列がテーブルの何列目であるかを示します。                                                                                                 |
+|                                   | `aria-rowindex`        | 行がテーブルの何行目であるかを示します。                                                                                                 |
+| `tfoot.ui-native-table__tfoot`    | `role="rowgroup"`      | 行グループであることを示します。                                                                                                         |
+| `label.ui-checkbox__root > input` | `aria-label`           | ヘッダーの場合は`"すべての行を選択する"`、それ以外の行の場合は`"行を選択する"`を設定します。                                             |
+| `th.ui-native-table__th > button` | `aria-label`           | 列が昇順の場合は`"昇順でソートする"`を設定し、降順の場合は`"降順でソートする"`を設定、指定がない場合は`"ソートを解除する"`を設定します。 |
 
 ## 類似のコンポーネント
 

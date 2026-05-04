@@ -456,16 +456,16 @@ return (
 
 ### ARIAロールと属性
 
-| コンポーネント      | ロールと属性       | 使い方                                                                                                                                |
-| ------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `Resizable.Item`    | `id`               | `Resizable.Trigger`と関連付けるために使用する`id`。                                                                                   |
-| `Resizable.Trigger` | `role="separator"` | セパレーターであることを示します。                                                                                                    |
-|                     | `aria-controls`    | 関連した`Resizable.Item`の`id`を設定します。                                                                                          |
-|                     | `aria-orientation` | セパレーターの方向を設定します。`orientation`が`"horizontal"`の場合は`"vertical"`、`"vertical"`の場合は`"horizontal"`が設定されます。 |
-|                     | `aria-valuemin`    | `minSize`の値に応じた`0`から`100`の値を設定します。デフォルトは`0`です。                                                              |
-|                     | `aria-valuemax`    | `maxSize`の値を計算した`0`から`100`の値を設定します。デフォルトは`100`です。                                                          |
-|                     | `aria-valuenow`    | 現在の値を設定します。                                                                                                                |
-|                     | `aria-disabled`    | 無効の場合は`"true"`を設定します。                                                                                                    |
+| コンポーネントと要素        | ロールと属性       | 使い方                                                                                              |
+| --------------------------- | ------------------ | --------------------------------------------------------------------------------------------------- |
+| `div.ui-resizable__item`    | `id`               | `div.ui-resizable__trigger`と関連付けるために使用する`id`。                                         |
+| `div.ui-resizable__trigger` | `role="separator"` | セパレーターであることを示します。                                                                  |
+|                             | `aria-controls`    | 関連した`div.ui-resizable__item`の`id`を設定します。                                                |
+|                             | `aria-orientation` | `orientation`と同じ値を設定します。                                                                 |
+|                             | `aria-valuemin`    | `minSize`の値に応じた`0`から`100`の値を設定します。デフォルトは`0`です。                            |
+|                             | `aria-valuemax`    | `maxSize`の値を計算した`0`から`100`の値を設定します。デフォルトは`100`です。                        |
+|                             | `aria-valuenow`    | 現在の値を設定します。                                                                              |
+|                             | `aria-disabled`    | `Resizable.Root`または`Resizable.Trigger`で`disabled`が有効になっている場合は`"true"`を設定します。 |
 
 ## 類似のコンポーネント
 

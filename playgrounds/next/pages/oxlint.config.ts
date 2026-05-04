@@ -4,12 +4,15 @@ import {
   nextConfig,
   reactConfig,
   sharedConfig,
+  sharedFiles,
 } from "@yamada-ui/workspace/oxlint"
 
 export default defineConfig({
   extends: [
     sharedConfig,
-    createNoRestrictedImportConfig(["pages"]),
+    createNoRestrictedImportConfig([
+      sharedFiles.map((file) => `pages/${file}`),
+    ]),
     nextConfig,
     reactConfig,
   ],

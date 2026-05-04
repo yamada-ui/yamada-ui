@@ -203,14 +203,14 @@ return <SegmentedControl.Root items={items} value={value} onChange={setValue} />
 
 ## アクセシビリティ
 
-`SegmentedControl.Item`にアイコンのみを使用する場合は、`SegmentedControl.Item`に`aria-label`を設定します。
+`SegmentedControl.Item`にアイコンのみを使用する場合は、`SegmentedControl.Item`の`inputProps`に`aria-label`を設定します。
 
 ```tsx
 <SegmentedControl.Root defaultValue="plus">
-  <SegmentedControl.Item aria-label="plus" value="plus">
+  <SegmentedControl.Item inputProps={{ "aria-label": "plus" }} value="plus">
     <PlusIcon />
   </SegmentedControl.Item>
-  <SegmentedControl.Item aria-label="minus" value="minus">
+  <SegmentedControl.Item inputProps={{ "aria-label": "minus" }} value="minus">
     <MinusIcon />
   </SegmentedControl.Item>
 </SegmentedControl.Root>
@@ -228,13 +228,12 @@ return <SegmentedControl.Root items={items} value={value} onChange={setValue} />
 
 ### ARIAロールと属性
 
-| コンポーネント          | ロールと属性        | 使い方                                                                                                    |
-| ----------------------- | ------------------- | --------------------------------------------------------------------------------------------------------- |
-| `SegmentedControl.Root` | `role="radiogroup"` | ラジオグループであることを示します。                                                                      |
-|                         | `aria-disabled`     | `disabled`が設定されている場合は`"true"`を設定します。                                                    |
-|                         | `aria-orientation`  | `orientation`の値に基づいて`"horizontal"`または`"vertical"`を設定します。デフォルトは`"horizontal"`です。 |
-| `SegmentedControl.Item` | `aria-disabled`     | `disabled`が設定されている場合は、`"true"`を設定します。                                                  |
-|                         | `aria-readonly`     | `readOnly`が設定されている場合は、`"true"`を設定します。                                                  |
+| コンポーネントと要素                       | ロールと属性        | 使い方                                                                                                    |
+| ------------------------------------------ | ------------------- | --------------------------------------------------------------------------------------------------------- |
+| `div.ui-segmented-control__root`           | `role="radiogroup"` | ラジオグループであることを示します。                                                                      |
+|                                            | `aria-disabled`     | `disabled`が設定されている場合は`"true"`を設定します。                                                    |
+|                                            | `aria-orientation`  | `orientation`の値に基づいて`"horizontal"`または`"vertical"`を設定します。デフォルトは`"horizontal"`です。 |
+| `label.ui-segmented-control__item > input` | `aria-disabled`     | `disabled`が設定されている場合は、`"true"`を設定します。                                                  |
 
 ## 類似のコンポーネント
 

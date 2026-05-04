@@ -342,10 +342,11 @@ To customize the content, use `Fieldset.Content`.
 
 ### ARIA Roles and Attributes
 
-| Component                | Roles and Attributes | Usage                                                                  |
-| ------------------------ | -------------------- | ---------------------------------------------------------------------- |
-| `Fieldset.HelperMessage` | `aria-describedby`   | Sets the `id` of the associated `Fieldset.Legend`.                     |
-| `Fieldset.ErrorMessage`  | `aria-live="polite"` | Indicates that it may be updated outside of focus if `invalid` is set. |
+| Component and Element              | Roles and Attributes | Usage                                                                                                                        |
+| ---------------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `fieldset.ui-fieldset__root`       | `aria-labelledby`    | Labels the `fieldset` group by referencing the `id` shared with `Fieldset.Legend`, combined with the `aria-labelledby` prop. |
+| `span.ui-fieldset__helper-message` | `aria-describedby`   | Sets the `id` of the associated `Fieldset.Legend`.                                                                           |
+| `span.ui-fieldset__error-message`  | `aria-live="polite"` | Indicates that it may be updated outside of focus if `invalid` is set.                                                       |
 
 ## Similar Components
 

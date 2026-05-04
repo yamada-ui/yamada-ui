@@ -206,17 +206,17 @@ return <Pagination.Root page={page} total={10} onChange={onChange} />
 
 ### ARIA Roles and Attributes
 
-| Component                 | Roles and Attributes  | Usage                                                          |
-| ------------------------- | --------------------- | -------------------------------------------------------------- |
-| `Pagination.Root`         | `role="navigation"`   | Indicates that this is a navigation region between pages.      |
-|                           | `aria-label`          | Sets to `"Pagination"`.                                        |
-| `Pagination.Item`         | `aria-label`          | Sets to `"Go to page {value}"` for page number buttons.        |
-|                           | `aria-current="page"` | Sets to the current page number button.                        |
-|                           | `role="presentation"` | Indicates that this is a presentation for page number buttons. |
-| `Pagination.PrevTrigger`  | `aria-label`          | Sets to `"Go to previous page"`.                               |
-| `Pagination.NextTrigger`  | `aria-label`          | Sets to `"Go to next page"`.                                   |
-| `Pagination.StartTrigger` | `aria-label`          | Sets to `"Go to first page"`.                                  |
-| `Pagination.EndTrigger`   | `aria-label`          | Sets to `"Go to last page"`.                                   |
+| Component and Element                  | Roles and Attributes  | Usage                                                     |
+| -------------------------------------- | --------------------- | --------------------------------------------------------- |
+| `nav.ui-pagination__root`              | `role="navigation"`   | Indicates that this is a navigation region between pages. |
+|                                        | `aria-label`          | Sets to `"Pagination"`.                                   |
+| `button.ui-pagination__item`           | `aria-label`          | Sets to `"Go to page {value}"` for page number buttons.   |
+|                                        | `aria-current="page"` | Sets to the current page number button.                   |
+| `button.ui-pagination__item > span`    | `role="presentation"` | Indicates that it is presentational.                      |
+| `button.ui-pagination__trigger--prev`  | `aria-label`          | Sets to `"Go to previous page"`.                          |
+| `button.ui-pagination__trigger--next`  | `aria-label`          | Sets to `"Go to next page"`.                              |
+| `button.ui-pagination__trigger--start` | `aria-label`          | Sets to `"Go to first page"`.                             |
+| `button.ui-pagination__trigger--end`   | `aria-label`          | Sets to `"Go to last page"`.                              |
 
 ## Similar Components
 

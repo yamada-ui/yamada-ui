@@ -1187,26 +1187,28 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Aut
 
 ### ARIA Roles and Attributes
 
-| Component              | Roles and Attributes      | Usage                                                                                                           |
-| ---------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `Autocomplete.Root`    | `role="group"`            | Indicates that this is a group.                                                                                 |
-| `AutocompleteField`    | `role="combobox"`         | Indicates that this is a combobox.                                                                              |
-|                        | `aria-expanded`           | Sets to `"true"` when the listbox is open, and `"false"` when it is closed.                                     |
-|                        | `aria-haspopup="listbox"` | Indicates that a listbox exists.                                                                                |
-|                        | `aria-controls`           | Sets the `id` of the listbox when open, and is not set when closed.                                             |
-|                        | `aria-activedescendant`   | Sets the `id` of the focused item.                                                                              |
-|                        | `aria-disabled`           | Sets to `"true"` when `disabled` or `readOnly` is set.                                                          |
-|                        | `aria-labelledby`         | If `AutocompleteField` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id`. |
-| `Autocomplete.Content` | `role="listbox"`          | Indicates that this is a listbox.                                                                               |
-| `Autocomplete.Option`  | `role="option"`           | Indicates that this is an option.                                                                               |
-|                        | `aria-selected`           | Sets to `"true"` when the option is selected.                                                                   |
-|                        | `aria-disabled`           | Sets to `"true"` when `disabled` is set.                                                                        |
-| `Autocomplete.Group`   | `role="group"`            | Indicates that this is a group.                                                                                 |
-|                        | `aria-labelledby`         | Sets the `id` of the associated `Autocomplete.Label`.                                                           |
-| `Autocomplete.Label`   | `role="presentation"`     | Indicates that this is presentational.                                                                          |
-| `Autocomplete.Icon`    | `role="button"`           | When `clearable` and has a value, indicates that this is a button.                                              |
-|                        | `aria-label`              | Sets to `"Clear value"`.                                                                                        |
-|                        | `aria-disabled`           | Sets to `"true"` when `disabled` or `readOnly` is set.                                                          |
+| Component and Element          | Roles and Attributes      | Usage                                                                                                           |
+| ------------------------------ | ------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `div.ui-autocomplete__root`    | `role="group"`            | Indicates that this is a grouped input control container for the autocomplete field and related elements.       |
+| `div.ui-autocomplete__field`   | `role="combobox"`         | Indicates that this is a combobox.                                                                              |
+|                                | `aria-expanded`           | Sets to `"true"` when the listbox is open, and `"false"` when it is closed.                                     |
+|                                | `aria-haspopup="listbox"` | Indicates that a listbox exists.                                                                                |
+|                                | `aria-controls`           | Sets the `id` of the listbox when open, and is not set when closed.                                             |
+|                                | `aria-activedescendant`   | Sets the `id` of the focused option.                                                                            |
+|                                | `aria-disabled`           | Sets to `"true"` when `disabled` or `readOnly` is set.                                                          |
+|                                | `aria-labelledby`         | If `Autocomplete.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id`. |
+| `div.ui-autocomplete__content` | `role="listbox"`          | Indicates that this is a listbox.                                                                               |
+|                                | `id`                      | Used to associate with `aria-controls` of `div.ui-autocomplete__field`.                                         |
+| `div.ui-autocomplete__option`  | `role="option"`           | Indicates that this is an option.                                                                               |
+|                                | `aria-selected`           | Sets to `"true"` when the option is selected, `"false"` when not selected.                                      |
+|                                | `aria-disabled`           | Sets to `"true"` when `disabled` is set.                                                                        |
+| `div.ui-autocomplete__group`   | `role="group"`            | Indicates that this is a group.                                                                                 |
+|                                | `aria-labelledby`         | Sets the `id` of the associated `span.ui-autocomplete__label`.                                                  |
+| `span.ui-autocomplete__label`  | `role="presentation"`     | Indicates that this is presentational.                                                                          |
+|                                | `id`                      | Used to associate with `aria-labelledby` of `div.ui-autocomplete__group`.                                       |
+| `div.ui-autocomplete__icon`    | `role="button"`           | When `clearable` is set and a value is selected, indicates that this is a button.                               |
+|                                | `aria-label`              | When `clearable` is set and a value is selected, sets to `"Clear value"`.                                       |
+|                                | `aria-disabled`           | When `clearable` is set and a value is selected, sets to `"true"` if `disabled` or `readOnly` is set.           |
 
 ## Similar Components
 

@@ -699,22 +699,22 @@ return (
 
 ### Keyboard Navigation
 
-| Key     | Description                                | State |
-| ------- | ------------------------------------------ | ----- |
-| `Space` | Toggles the checked state of the checkbox. | -     |
+| Key     | Description                                        | State |
+| ------- | -------------------------------------------------- | ----- |
+| `Space` | Toggles the checked state of the focused checkbox. | -     |
 
 ### ARIA Roles and Attributes
 
-| Component                | Roles and Attributes | Usage                                                                                                                                                                          |
-| ------------------------ | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `CheckboxCardGroup.Root` | `role="group"`       | Indicates that it's a group.                                                                                                                                                   |
-|                          | `aria-labelledby`    | If `CheckboxCardGroup.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id`.                                                           |
-|                          | `aria-describedby`   | If `CheckboxCardGroup.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
-| `input`                  | `aria-checked`       | Sets to `"mixed"` if `indeterminate` is set, `"true"` if checked, and `"false"` if unchecked.                                                                                  |
-|                          | `aria-disabled`      | Sets to `"true"` if `readOnly` is set, or if `max` is reached in a group.                                                                                                      |
-|                          | `aria-invalid`       | Sets to `"true"` if `invalid` is set.                                                                                                                                          |
-|                          | `aria-required`      | Sets to `"true"` if `required` is set.                                                                                                                                         |
-| `CheckboxCardIndicator`  | `aria-hidden`        | Excludes the element from the accessibility tree.                                                                                                                              |
+| Component and Element                  | Roles and Attributes | Usage                                                                                                                                                                          |
+| -------------------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `div.ui-checkbox-card__group`          | `role="group"`       | Indicates that it's a group.                                                                                                                                                   |
+|                                        | `aria-labelledby`    | If `CheckboxCardGroup.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id`.                                                           |
+|                                        | `aria-describedby`   | If `CheckboxCardGroup.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+| `label.ui-checkbox-card__root > input` | `aria-checked`       | Sets to `"mixed"` if `indeterminate` is set, `"true"` if checked, and `"false"` if unchecked.                                                                                  |
+|                                        | `aria-disabled`      | Sets to `"true"` if `readOnly` is set, or if the checkbox is not checked and `max` is reached in a group.                                                                      |
+|                                        | `aria-invalid`       | Sets to `"true"` if `invalid` is set.                                                                                                                                          |
+|                                        | `aria-required`      | Sets to `"true"` if `required` is set.                                                                                                                                         |
+| `div.ui-checkbox-card__indicator`      | `aria-hidden`        | Excludes the element from the accessibility tree.                                                                                                                              |
 
 ## Similar Components
 

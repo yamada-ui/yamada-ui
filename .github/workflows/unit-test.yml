@@ -1,8 +1,11 @@
 name: Unit Test
 
 on:
-  workflow_dispatch:
   workflow_call:
+    inputs:
+      TURBO_SCM_BASE:
+        required: true
+        type: string
     secrets:
       TURBO_TOKEN:
         required: false
@@ -12,6 +15,7 @@ on:
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+  TURBO_SCM_BASE: ${{ inputs.TURBO_SCM_BASE }}
 
 jobs:
   test:
@@ -86,7 +90,7 @@ jobs:
 
       - name: Run test (diff)
         if: steps.changed-files.outputs.any_changed != 'true' && steps.changed-module-files.outputs.full_any_changed != 'true' && steps.changed-module-files.outputs.diff_any_changed == 'true'
-        run: pnpm turbo run ${{ matrix.script }} --filter=./packages/${{ matrix.id }} -- --retry=3 --changed origin/${{ github.base_ref }}
+        run: pnpm turbo run ${{ matrix.script }} --filter=./packages/${{ matrix.id }} -- --retry=3 --changed ${{ inputs.TURBO_SCM_BASE }}
 
       - name: Upload coverage
         if: steps.changed-files.outputs.any_changed == 'true' || steps.changed-module-files.outputs.changed_keys != ''

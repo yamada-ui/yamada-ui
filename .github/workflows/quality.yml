@@ -47,6 +47,8 @@ jobs:
     secrets:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    with:
+      TURBO_SCM_BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event_name == 'merge_group' && github.event.merge_group.base_sha || github.event.before }}
 
   browser_test:
     name: Browser Test
@@ -55,6 +57,8 @@ jobs:
     secrets:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    with:
+      TURBO_SCM_BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event_name == 'merge_group' && github.event.merge_group.base_sha || github.event.before }}
 
   lint:
     name: Lint

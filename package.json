@@ -64,6 +64,7 @@
     "@types/react-dom": "^19.2.3",
     "@typescript/analyze-trace": "^0.10.1",
     "@typescript/native-preview": "catalog:",
+    "@vitest/coverage-istanbul": "^4.1.2",
     "@vitest/coverage-v8": "^4.1.2",
     "@vitest/ui": "catalog:",
     "clean-package": "^2.2.0",

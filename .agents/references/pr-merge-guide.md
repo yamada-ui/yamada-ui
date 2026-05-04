@@ -22,24 +22,25 @@ The following branch protection rules are enabled on the `main` and `v*` branche
   - Changeset
   - Lint
   - Format
+  - Build
   - Typecheck / Packages
   - Typecheck / Documentation
   - Typecheck / Playgrounds
   - Unit Test / CLI
   - Unit Test / React
   - Unit Test / Utils
-  - Browser Test / Chromium 1/4
-  - Browser Test / Chromium 2/4
-  - Browser Test / Chromium 3/4
-  - Browser Test / Chromium 4/4
-  - Browser Test / Firefox 1/4
-  - Browser Test / Firefox 2/4
-  - Browser Test / Firefox 3/4
-  - Browser Test / Firefox 4/4
-  - Browser Test / Webkit 1/4
-  - Browser Test / Webkit 2/4
-  - Browser Test / Webkit 3/4
-  - Browser Test / Webkit 4/4
+  - Browser Test / React / Chromium 1/4
+  - Browser Test / React / Chromium 2/4
+  - Browser Test / React / Chromium 3/4
+  - Browser Test / React / Chromium 4/4
+  - Browser Test / React / Firefox 1/4
+  - Browser Test / React / Firefox 2/4
+  - Browser Test / React / Firefox 3/4
+  - Browser Test / React / Firefox 4/4
+  - Browser Test / React / Webkit 1/4
+  - Browser Test / React / Webkit 2/4
+  - Browser Test / React / Webkit 3/4
+  - Browser Test / React / Webkit 4/4
 
 ### Merge Queue
 

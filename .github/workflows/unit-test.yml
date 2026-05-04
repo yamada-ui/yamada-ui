@@ -1,7 +1,6 @@
 name: Unit Test
 
 on:
-  workflow_dispatch:
   workflow_call:
     inputs:
       TURBO_SCM_BASE:

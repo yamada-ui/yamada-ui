@@ -1,8 +1,6 @@
 export const sharedFiles = ["**/*.ts", "**/*.cts", "**/*.mts", "**/*.tsx"]
-
-export const sharedTestFiles = [
-  "**/*.test.ts",
-  "**/*.test.tsx",
+export const sharedUnitTestFiles = ["**/*.test.ts", "**/*.test.tsx"]
+export const sharedBrowserTestFiles = [
   "**/*.test.browser.ts",
   "**/*.test.browser.tsx",
   "**/*.test.chromium.ts",
@@ -11,4 +9,8 @@ export const sharedTestFiles = [
   "**/*.test.firefox.tsx",
   "**/*.test.webkit.ts",
   "**/*.test.webkit.tsx",
+]
+export const sharedTestFiles = [
+  ...sharedUnitTestFiles,
+  ...sharedBrowserTestFiles,
 ]

@@ -5,7 +5,12 @@ import { createNoRestrictedImportConfig, importConfig } from "./import.ts"
 import { nextConfig } from "./next.ts"
 import { perfectionistConfig } from "./perfectionist.ts"
 import { reactConfig } from "./react.ts"
-import { sharedFiles } from "./shared.ts"
+import {
+  sharedBrowserTestFiles,
+  sharedFiles,
+  sharedTestFiles,
+  sharedUnitTestFiles,
+} from "./shared.ts"
 import { testingLibraryConfig } from "./testing-library.ts"
 import { typescriptConfig } from "./typescript.ts"
 import { vitestConfig } from "./vitest.ts"
@@ -21,7 +26,10 @@ export {
   noConsoleConfig,
   perfectionistConfig,
   reactConfig,
+  sharedBrowserTestFiles,
   sharedFiles,
+  sharedTestFiles,
+  sharedUnitTestFiles,
   testingLibraryConfig,
   typescriptConfig,
   vitestConfig,

@@ -2,10 +2,10 @@
 
 Follow these rules when writing Vitest browser tests in `packages/react`. Browser tests live in files whose name matches one of:
 
-- `*.test.browser.{ts,tsx}` — runs against every browser (chromium, firefox, webkit).
-- `*.test.chromium.{ts,tsx}` — runs only against Chromium.
-- `*.test.firefox.{ts,tsx}` — runs only against Firefox.
-- `*.test.webkit.{ts,tsx}` — runs only against WebKit.
+- `*.test.browser.{ts,tsx}`: runs against every browser (chromium, firefox, webkit). Use this when the behavior must hold across every supported engine.
+- `*.test.chromium.{ts,tsx}`: runs only against Chromium. Use this when the file or component branches on `isChrome` / Chrome-specific behavior.
+- `*.test.firefox.{ts,tsx}`: runs only against Firefox. Use this when the file or component branches on `isFirefox` / Firefox-specific behavior.
+- `*.test.webkit.{ts,tsx}`: runs only against WebKit. Use this when the file or component branches on `isWebKit` / `isSafari` / Safari-specific behavior.
 
 These files import from `#test/browser`. Plain `*.test.{ts,tsx}` files run under jsdom and import from `#test`; skip this rule for those.
 

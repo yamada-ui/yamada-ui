@@ -41,20 +41,21 @@ export const importConfig = defineConfig({
 })
 
 export const createNoRestrictedImportConfig = (
-  ...args: [string, ...string[]][]
+  ...args: [string[], ...string[]][]
 ) =>
   defineConfig({
-    overrides: (args.length ? args : [["src"]]).map(
-      ([directory, ...patterns]) => ({
-        files: sharedFiles.map((file) => `${directory}/${file}`),
-        rules: {
-          "no-restricted-imports": [
-            "error",
-            {
-              patterns: patterns.length ? patterns : ["@yamada-ui/workspace/*"],
-            },
-          ],
-        },
-      }),
-    ),
+    overrides: (args.length
+      ? args
+      : [[sharedFiles.map((file) => `src/${file}`)]]
+    ).map(([files, ...patterns]) => ({
+      files,
+      rules: {
+        "no-restricted-imports": [
+          "error",
+          {
+            patterns: patterns.length ? patterns : ["@yamada-ui/workspace/*"],
+          },
+        ],
+      },
+    })),
   })

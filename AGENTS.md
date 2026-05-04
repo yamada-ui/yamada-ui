@@ -35,6 +35,9 @@ When editing or reviewing files that match a pattern below, read the linked rule
 - [Changesets](.agents/rules/changesets.md):
   - `packages/{cli,react,utils}/src/**/*.{ts,tsx}`
   - `.changeset/*.md`
+- [Test Categorization](.agents/rules/test-categorization.md):
+  - `packages/react/src/**/*.test.{ts,tsx}`
+  - `packages/react/src/**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx}`
 - [Browser Testing](.agents/rules/browser-testing.md):
   - `packages/react/src/**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx}`
 - [Unit Testing](.agents/rules/unit-testing.md):

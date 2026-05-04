@@ -1,8 +1,11 @@
 name: Browser Test
 
 on:
-  workflow_dispatch:
   workflow_call:
+    inputs:
+      TURBO_SCM_BASE:
+        required: true
+        type: string
     secrets:
       TURBO_TOKEN:
         required: false
@@ -12,11 +15,11 @@ on:
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+  TURBO_SCM_BASE: ${{ inputs.TURBO_SCM_BASE }}
 
 jobs:
   test:
     name: React / ${{ matrix.name }} ${{ matrix.shard_index }}/4
-    if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     strategy:
@@ -71,7 +74,7 @@ jobs:
 
       - name: Run test (diff)
         if: steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true'
-        run: pnpm turbo run test:coverage:${{ matrix.browser }} --filter=./packages/react -- --retry=3 --changed origin/${{ github.base_ref }} --shard=${{ matrix.shard_index }}/4
+        run: pnpm turbo run test:coverage:${{ matrix.browser }} --filter=./packages/react -- --retry=3 --changed ${{ inputs.TURBO_SCM_BASE }} --shard=${{ matrix.shard_index }}/4
 
       - name: Upload coverage
         if: steps.changed-files.outputs.changed_keys != ''

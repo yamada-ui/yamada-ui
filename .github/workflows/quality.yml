@@ -10,6 +10,7 @@ on:
     branches:
       - main
       - v*
+  merge_group:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -18,13 +19,24 @@ concurrency:
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
-  TURBO_SCM_BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+  TURBO_SCM_BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event_name == 'merge_group' && github.event.merge_group.base_sha || github.event.before }}
   NODE_OPTIONS: --max-old-space-size=8192
 
 jobs:
+  scm_base:
+    name: SCM Base
+    if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    outputs:
+      sha: ${{ steps.compute.outputs.sha }}
+    steps:
+      - id: compute
+        run: echo "sha=$TURBO_SCM_BASE" >> "$GITHUB_OUTPUT"
+
   build:
     name: Build
-    if: ${{ !github.event.pull_request.draft }}
+    if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -41,23 +53,29 @@ jobs:
 
   unit_test:
     name: Unit Test
-    if: ${{ !github.event.pull_request.draft }}
+    if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
+    needs: scm_base
     uses: ./.github/workflows/unit-test.yml
     secrets:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    with:
+      TURBO_SCM_BASE: ${{ needs.scm_base.outputs.sha }}
 
   browser_test:
     name: Browser Test
-    if: ${{ !github.event.pull_request.draft }}
+    if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
+    needs: scm_base
     uses: ./.github/workflows/browser-test.yml
     secrets:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    with:
+      TURBO_SCM_BASE: ${{ needs.scm_base.outputs.sha }}
 
   lint:
     name: Lint
-    if: ${{ !github.event.pull_request.draft }}
+    if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -74,16 +92,17 @@ jobs:
 
   typecheck:
     name: Typecheck
-    if: ${{ !github.event.pull_request.draft }}
+    if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
+    needs: scm_base
     uses: ./.github/workflows/typecheck.yml
     secrets:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
     with:
-      TURBO_SCM_BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+      TURBO_SCM_BASE: ${{ needs.scm_base.outputs.sha }}
 
   format:
     name: Format
-    if: ${{ !github.event.pull_request.draft }}
+    if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -109,7 +128,7 @@ jobs:
 
   changeset:
     name: Changeset
-    if: ${{ !github.event.pull_request.draft }}
+    if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:

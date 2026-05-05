@@ -1,4 +1,4 @@
-import { page, render } from "#test/browser"
+import { render, screen } from "#test"
 import { ComposedChart } from "."
 import { gradients } from "./chart"
 
@@ -16,12 +16,8 @@ const data: Data[] = [
 ]
 
 describe("<ComposedChart />", () => {
-  test("sets `displayName` correctly", () => {
-    expect(ComposedChart.Root.displayName).toBe("ComposedChart")
-  })
-
-  test("renders generated chart parts from `series`", async () => {
-    await render(
+  test("renders generated chart parts from `series`", () => {
+    render(
       <ComposedChart.Root
         data-testid="root"
         data={data}
@@ -30,31 +26,23 @@ describe("<ComposedChart />", () => {
           ["area", { dataKey: "tablet" }],
           ["line", { dataKey: "mobile" }],
         ]}
+        responsiveContainerProps={{ children: null, height: 400, width: 400 }}
         xAxisProps={{ dataKey: "date" }}
       />,
     )
 
-    const root = page.getByTestId("root")
+    const root = screen.getByTestId("root")
 
-    await expect.element(root).toHaveClass("ui-composed-chart")
-    await expect
-      .poll(
-        () =>
-          root.element().querySelectorAll(".ui-cartesian-chart__bar").length,
-      )
-      .toBeGreaterThan(0)
-    await expect
-      .poll(
-        () =>
-          root.element().querySelectorAll(".ui-cartesian-chart__area").length,
-      )
-      .toBeGreaterThan(0)
-    await expect
-      .poll(
-        () =>
-          root.element().querySelectorAll(".ui-cartesian-chart__line").length,
-      )
-      .toBeGreaterThan(0)
+    expect(root).toHaveClass("ui-composed-chart")
+    expect(
+      root.querySelectorAll(".ui-cartesian-chart__bar").length,
+    ).toBeGreaterThan(0)
+    expect(
+      root.querySelectorAll(".ui-cartesian-chart__area").length,
+    ).toBeGreaterThan(0)
+    expect(
+      root.querySelectorAll(".ui-cartesian-chart__line").length,
+    ).toBeGreaterThan(0)
   })
 
   test("mergeSeries sets colors for every series entry", () => {

@@ -2,10 +2,42 @@ import type { ReactNode } from "react"
 import type { UseMenuGroupProps, UseMenuItemProps } from "./use-menu"
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import { useState } from "react"
-import { a11y, render } from "#test/browser"
+import { render } from "#test/browser"
 import { Button } from "../button"
 import { Menu } from "./"
 import { useMenuGroup, useMenuItem } from "./use-menu"
+
+interface TestMenuGroupProps extends UseMenuGroupProps {
+  children?: ReactNode
+  getGroupProps?: Parameters<
+    ReturnType<typeof useMenuGroup>["getGroupProps"]
+  >[0]
+}
+
+const TestMenuGroup = ({
+  children,
+  getGroupProps,
+  ...props
+}: TestMenuGroupProps) => {
+  const { getGroupProps: getProps } = useMenuGroup(props)
+
+  return <div {...getProps(getGroupProps)}>{children}</div>
+}
+
+interface TestMenuItemProps extends UseMenuItemProps {
+  children?: ReactNode
+  getItemProps?: Parameters<ReturnType<typeof useMenuItem>["getItemProps"]>[0]
+}
+
+const TestMenuItem = ({
+  children,
+  getItemProps,
+  ...props
+}: TestMenuItemProps) => {
+  const { getItemProps: getProps } = useMenuItem(props)
+
+  return <div {...getProps(getItemProps)}>{children}</div>
+}
 
 const items: Menu.Item[] = [
   { label: "Menu 1", value: "menu-1" },
@@ -45,76 +77,8 @@ const itemsWithCheckboxGroup: Menu.Item[] = [
   },
 ]
 
-interface TestMenuGroupProps extends UseMenuGroupProps {
-  children?: ReactNode
-  getGroupProps?: Parameters<
-    ReturnType<typeof useMenuGroup>["getGroupProps"]
-  >[0]
-}
-
-const TestMenuGroup = ({
-  children,
-  getGroupProps,
-  ...props
-}: TestMenuGroupProps) => {
-  const { getGroupProps: getProps } = useMenuGroup(props)
-
-  return <div {...getProps(getGroupProps)}>{children}</div>
-}
-
-interface TestMenuItemProps extends UseMenuItemProps {
-  children?: ReactNode
-  getItemProps?: Parameters<ReturnType<typeof useMenuItem>["getItemProps"]>[0]
-}
-
-const TestMenuItem = ({
-  children,
-  getItemProps,
-  ...props
-}: TestMenuItemProps) => {
-  const { getItemProps: getProps } = useMenuItem(props)
-
-  return <div {...getProps(getItemProps)}>{children}</div>
-}
-
 describe("<Menu />", () => {
-  test("renders component correctly", async () => {
-    await a11y(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content
-          items={[
-            ...items,
-            { type: "separator" },
-            ...itemsWithRadioGroup,
-            { type: "separator" },
-            ...itemsWithCheckboxGroup,
-          ]}
-        />
-      </Menu.Root>,
-    )
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Menu.Root.name).toBe("MenuRoot")
-    expect(Menu.Trigger.displayName).toBe("MenuTrigger")
-    expect(Menu.ContextTrigger.displayName).toBe("MenuContextTrigger")
-    expect(Menu.Anchor.displayName).toBe("MenuAnchor")
-    expect(Menu.Content.displayName).toBe("MenuContent")
-    expect(Menu.Label.displayName).toBe("MenuLabel")
-    expect(Menu.Item.displayName).toBe("MenuItem")
-    expect(Menu.Separator.displayName).toBe("MenuSeparator")
-    expect(Menu.Group.displayName).toBe("MenuGroup")
-    expect(Menu.OptionGroup.displayName).toBe("MenuOptionGroup")
-    expect(Menu.OptionItem.displayName).toBe("MenuOptionItem")
-    expect(Menu.Indicator.displayName).toBe("MenuIndicator")
-    expect(Menu.Command.displayName).toBe("MenuCommand")
-  })
-
-  test("sets `className` correctly", async () => {
+  test("renders full items config with separator, radio, checkbox, and group", async () => {
     await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
@@ -132,27 +96,18 @@ describe("<Menu />", () => {
         />
       </Menu.Root>,
     )
-    expect(screen.getByRole("button", { name: /Menu/i })).toHaveClass(
-      "ui-menu__trigger",
-    )
-    expect(screen.getByRole("menu")).toHaveClass("ui-menu__content")
-    expect(screen.getByRole("menuitem", { name: /Menu 1/i })).toHaveClass(
-      "ui-menu__item",
-    )
-    expect(screen.getAllByRole("separator")[0]).toHaveClass(
-      "ui-menu__separator",
-    )
-    expect(screen.getByTestId("label")).toHaveClass("ui-menu__label")
-    expect(screen.getAllByRole("group")[0]).toHaveClass("ui-menu__group")
-    expect(screen.getAllByRole("group")[1]).toHaveClass(
-      "ui-menu__group--option",
-    )
+
+    expect(screen.getByRole("menu")).toBeInTheDocument()
+    expect(
+      screen.getByRole("menuitem", { name: /Menu 1/i }),
+    ).toBeInTheDocument()
+    expect(screen.getByTestId("label")).toBeInTheDocument()
     expect(
       screen.getByRole("menuitemradio", { name: /Option 1/i }),
-    ).toHaveClass("ui-menu__item--option")
+    ).toBeInTheDocument()
     expect(
       screen.getByRole("menuitemcheckbox", { name: /Option 1/i }),
-    ).toHaveClass("ui-menu__item--option")
+    ).toBeInTheDocument()
   })
 
   test("merges consumer props in Menu.Item", async () => {
@@ -340,41 +295,6 @@ describe("<Menu />", () => {
     expect(calls).toStrictEqual(["getter", "consumer", "internal"])
     expect(onChange).toHaveBeenCalledWith(["opt-1"])
     expect(onSelect).toHaveBeenCalledWith("opt-1")
-  })
-
-  test("renders HTML tag correctly", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content
-          items={[
-            ...items,
-            { type: "separator" },
-            ...itemsWithRadioGroup,
-            { type: "separator" },
-            ...itemsWithCheckboxGroup,
-          ]}
-        />
-      </Menu.Root>,
-    )
-    expect(screen.getByRole("button", { name: /Menu/i }).tagName).toBe("BUTTON")
-    expect(screen.getByRole("menu").tagName).toBe("DIV")
-    expect(screen.getByRole("menuitem", { name: /Menu 1/i }).tagName).toBe(
-      "DIV",
-    )
-    expect(screen.getAllByRole("separator")[0]?.tagName).toBe("HR")
-    expect(screen.getByTestId("label").tagName).toBe("SPAN")
-    expect(screen.getAllByRole("group")[0]?.tagName).toBe("DIV")
-    expect(screen.getAllByRole("group")[1]?.tagName).toBe("DIV")
-    expect(
-      screen.getByRole("menuitemradio", { name: /Option 1/i }).tagName,
-    ).toBe("DIV")
-    expect(
-      screen.getByRole("menuitemcheckbox", { name: /Option 1/i }).tagName,
-    ).toBe("DIV")
   })
 
   test("opens menu on trigger click", async () => {

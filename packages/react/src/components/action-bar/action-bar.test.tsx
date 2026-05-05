@@ -1,5 +1,5 @@
 import type { FC, Ref } from "react"
-import { a11y, fireEvent, render, renderHook, screen } from "#test"
+import { a11y, render, renderHook, screen } from "#test"
 import { ActionBar } from "."
 import { Button } from "../button"
 import { CloseButton } from "../close-button"
@@ -38,6 +38,38 @@ describe("<ActionBar />", () => {
     await a11y(<TestComponent />)
   })
 
+  test("sets `displayName` correctly", () => {
+    expect(ActionBar.Root.displayName).toBe("ActionBarRoot")
+    expect(ActionBar.OpenTrigger.displayName).toBe("ActionBarOpenTrigger")
+    expect(ActionBar.Content.displayName).toBe("ActionBarContent")
+    expect(ActionBar.Separator.displayName).toBe("ActionBarSeparator")
+    expect(ActionBar.CloseTrigger.displayName).toBe("ActionBarCloseTrigger")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<TestComponent open />)
+
+    expect(screen.getByTestId("root")).toHaveClass("ui-action-bar__root")
+    expect(screen.getByTestId("content")).toHaveClass("ui-action-bar__content")
+    expect(screen.getByTestId("openTrigger")).toHaveClass(
+      "ui-action-bar__trigger--open",
+    )
+    expect(screen.getByTestId("closeTrigger")).toHaveClass(
+      "ui-action-bar__trigger--close",
+    )
+    expect(screen.getByTestId("separator")).toHaveClass(
+      "ui-action-bar__separator",
+    )
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<TestComponent open />)
+
+    expect(screen.getByTestId("root").tagName).toBe("DIV")
+    expect(screen.getByTestId("content").tagName).toBe("SECTION")
+    expect(screen.getByTestId("separator").tagName).toBe("DIV")
+  })
+
   test("sets aria attributes correctly", () => {
     render(<TestComponent open />)
 
@@ -62,34 +94,16 @@ describe("<ActionBar />", () => {
     expect(screen.getByTestId("content")).toHaveAttribute("id")
   })
 
-  test("closes action bar when Escape key is pressed", () => {
-    const onClose = vi.fn()
+  test("sets `aria-expanded` to false and no `aria-controls` when closed", () => {
+    render(<TestComponent />)
 
-    render(<TestComponent open onClose={onClose} />)
-
-    fireEvent.keyDown(document, { key: "Escape" })
-
-    expect(onClose).toHaveBeenCalledOnce()
-  })
-
-  test("does not close action bar when Escape is pressed and `closeOnEsc` is false", () => {
-    const onClose = vi.fn()
-
-    render(<TestComponent closeOnEsc={false} open onClose={onClose} />)
-
-    fireEvent.keyDown(document, { key: "Escape" })
-
-    expect(onClose).not.toHaveBeenCalled()
-  })
-
-  test("does not close action bar when a non-Escape key is pressed", () => {
-    const onClose = vi.fn()
-
-    render(<TestComponent open onClose={onClose} />)
-
-    fireEvent.keyDown(document, { key: "Enter" })
-
-    expect(onClose).not.toHaveBeenCalled()
+    expect(screen.getByTestId("openTrigger")).toHaveAttribute(
+      "aria-expanded",
+      "false",
+    )
+    expect(screen.getByTestId("openTrigger")).not.toHaveAttribute(
+      "aria-controls",
+    )
   })
 
   test("renders with shorthand `content` and `trigger` props", () => {
@@ -121,56 +135,58 @@ describe("<ActionBar />", () => {
     expect(screen.getByTestId("fallback")).toBeInTheDocument()
   })
 
-  test("merges hook rest with user props via mergeProps in getRootProps", () => {
-    const hookRef = vi.fn()
-    const userRef = vi.fn()
-    const callOrder: string[] = []
-    const hookOnClick = vi.fn(() => {
-      callOrder.push("hook")
+  describe("useActionBar", () => {
+    test("merges hook rest with user props via mergeProps in getRootProps", () => {
+      const hookRef = vi.fn()
+      const userRef = vi.fn()
+      const callOrder: string[] = []
+      const hookOnClick = vi.fn(() => {
+        callOrder.push("hook")
+      })
+      const userOnClick = vi.fn(() => {
+        callOrder.push("user")
+      })
+      const { result } = renderHook(() =>
+        useActionBar({
+          id: "hook-id",
+          ref: hookRef,
+          className: "hook",
+          style: { color: "red" },
+          "data-testid": "bar-root",
+          onClick: hookOnClick,
+        }),
+      )
+
+      const merged = result.current.getRootProps({
+        id: "user-id",
+        ref: userRef,
+        className: "user",
+        style: { backgroundColor: "blue" },
+        onClick: userOnClick,
+      })
+
+      expect(merged.id).toBe("user-id")
+      expect(String(merged.className)).toContain("hook")
+      expect(String(merged.className)).toContain("user")
+      expect(merged["data-testid"]).toBe("bar-root")
+      expect(merged.style).toMatchObject({
+        backgroundColor: "blue",
+        color: "red",
+      })
+
+      const element = document.createElement("div")
+      expect(typeof merged.ref).toBe("function")
+      invokeCallbackRef(merged.ref, element)
+
+      expect(hookRef).toHaveBeenCalledWith(element)
+      expect(userRef).toHaveBeenCalledWith(element)
+
+      const event = new MouseEvent("click")
+      invokeHandler(merged.onClick, event as never)
+
+      expect(hookOnClick).toHaveBeenCalledWith(event)
+      expect(userOnClick).toHaveBeenCalledWith(event)
+      expect(callOrder).toStrictEqual(["hook", "user"])
     })
-    const userOnClick = vi.fn(() => {
-      callOrder.push("user")
-    })
-    const { result } = renderHook(() =>
-      useActionBar({
-        id: "hook-id",
-        ref: hookRef,
-        className: "hook",
-        style: { color: "red" },
-        "data-testid": "bar-root",
-        onClick: hookOnClick,
-      }),
-    )
-
-    const merged = result.current.getRootProps({
-      id: "user-id",
-      ref: userRef,
-      className: "user",
-      style: { backgroundColor: "blue" },
-      onClick: userOnClick,
-    })
-
-    expect(merged.id).toBe("user-id")
-    expect(String(merged.className)).toContain("hook")
-    expect(String(merged.className)).toContain("user")
-    expect(merged["data-testid"]).toBe("bar-root")
-    expect(merged.style).toMatchObject({
-      backgroundColor: "blue",
-      color: "red",
-    })
-
-    const element = document.createElement("div")
-    expect(typeof merged.ref).toBe("function")
-    invokeCallbackRef(merged.ref, element)
-
-    expect(hookRef).toHaveBeenCalledWith(element)
-    expect(userRef).toHaveBeenCalledWith(element)
-
-    const event = new MouseEvent("click")
-    invokeHandler(merged.onClick, event as never)
-
-    expect(hookOnClick).toHaveBeenCalledWith(event)
-    expect(userOnClick).toHaveBeenCalledWith(event)
-    expect(callOrder).toStrictEqual(["hook", "user"])
   })
 })

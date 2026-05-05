@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { page, render } from "#test/browser"
+import { a11y, page, render } from "#test/browser"
 import { ActionBar } from "."
 import { Button } from "../button"
 import { CloseButton } from "../close-button"
@@ -25,6 +25,10 @@ const TestComponent: FC<ActionBar.RootProps> = (props) => {
 }
 
 describe("<ActionBar />", () => {
+  test("renders component correctly", async () => {
+    await a11y(<TestComponent />)
+  })
+
   test("opens action bar when open trigger is clicked", async () => {
     const { user } = await render(<TestComponent />)
 
@@ -46,6 +50,35 @@ describe("<ActionBar />", () => {
     await expect
       .element(page.getByTestId("content").query())
       .not.toBeInTheDocument()
+  })
+
+  test("closes action bar when Escape key is pressed", async () => {
+    const onClose = vi.fn()
+    const { user } = await render(<TestComponent open onClose={onClose} />)
+
+    await user.keyboard("{Escape}")
+
+    expect(onClose).toHaveBeenCalledOnce()
+  })
+
+  test("does not close action bar when Escape is pressed and `closeOnEsc` is false", async () => {
+    const onClose = vi.fn()
+    const { user } = await render(
+      <TestComponent closeOnEsc={false} open onClose={onClose} />,
+    )
+
+    await user.keyboard("{Escape}")
+
+    expect(onClose).not.toHaveBeenCalled()
+  })
+
+  test("does not close action bar when a non-Escape key is pressed", async () => {
+    const onClose = vi.fn()
+    const { user } = await render(<TestComponent open onClose={onClose} />)
+
+    await user.keyboard("{Enter}")
+
+    expect(onClose).not.toHaveBeenCalled()
   })
 
   test("calls onCloseComplete after exit animation", async () => {

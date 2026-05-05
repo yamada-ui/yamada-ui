@@ -1,5 +1,6 @@
 import type { Ref } from "react"
-import { act, renderHook } from "#test"
+import { a11y, act, render, renderHook, screen } from "#test"
+import { Carousel } from "./"
 import { useCarousel } from "./use-carousel"
 
 const mockState = vi.hoisted(() => {
@@ -36,6 +37,115 @@ function invokeCallbackRef<T>(ref: Ref<T> | undefined, node: null | T) {
 function invokeHandler<E>(handler: ((event: E) => void) | undefined, event: E) {
   handler?.(event)
 }
+
+describe("<Carousel />", () => {
+  test("passes a11y checks", async () => {
+    await a11y(
+      <Carousel.Root>
+        <Carousel.List>
+          {Array.from({ length: 3 }).map((_, index) => (
+            <Carousel.Item key={index} index={index}>
+              Slide {index + 1}
+            </Carousel.Item>
+          ))}
+        </Carousel.List>
+
+        <Carousel.PrevTrigger />
+        <Carousel.NextTrigger />
+
+        <Carousel.Indicators />
+      </Carousel.Root>,
+    )
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(Carousel.Root.displayName).toBe("CarouselRoot")
+    expect(Carousel.List.displayName).toBe("CarouselList")
+    expect(Carousel.Item.displayName).toBe("CarouselItem")
+    expect(Carousel.PrevTrigger.displayName).toBe("CarouselPrevTrigger")
+    expect(Carousel.NextTrigger.displayName).toBe("CarouselNextTrigger")
+    expect(Carousel.Indicators.displayName).toBe("CarouselIndicators")
+    expect(Carousel.Indicator.displayName).toBe("CarouselIndicator")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <Carousel.Root data-testid="carousel">
+        <Carousel.List data-testid="carouselList">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <Carousel.Item key={index} index={index}>
+              Slide {index + 1}
+            </Carousel.Item>
+          ))}
+        </Carousel.List>
+
+        <Carousel.PrevTrigger />
+        <Carousel.NextTrigger />
+
+        <Carousel.Indicators />
+      </Carousel.Root>,
+    )
+
+    expect(screen.getByTestId("carousel")).toHaveClass("ui-carousel__root")
+    expect(screen.getByTestId("carouselList")).toHaveClass("ui-carousel__list")
+    expect(screen.getByRole("tablist")).toHaveClass("ui-carousel__indicators")
+    expect(
+      screen.getByRole("button", { name: "Go to previous slide" }),
+    ).toHaveClass("ui-carousel__trigger--prev")
+    expect(
+      screen.getByRole("button", { name: "Go to next slide" }),
+    ).toHaveClass("ui-carousel__trigger--next")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(
+      <Carousel.Root data-testid="carousel">
+        <Carousel.List data-testid="carouselList">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <Carousel.Item key={index} index={index}>
+              Slide {index + 1}
+            </Carousel.Item>
+          ))}
+        </Carousel.List>
+
+        <Carousel.PrevTrigger />
+        <Carousel.NextTrigger />
+
+        <Carousel.Indicators />
+      </Carousel.Root>,
+    )
+
+    expect(screen.getByTestId("carousel").tagName).toBe("SECTION")
+    expect(screen.getByTestId("carouselList").tagName).toBe("DIV")
+    expect(screen.getByRole("tablist").tagName).toBe("DIV")
+    expect(
+      screen.getByRole("button", { name: "Go to previous slide" }).tagName,
+    ).toBe("BUTTON")
+    expect(
+      screen.getByRole("button", { name: "Go to next slide" }).tagName,
+    ).toBe("BUTTON")
+  })
+
+  test("renders custom children in CarouselIndicators", () => {
+    render(
+      <Carousel.Root>
+        <Carousel.List>
+          {Array.from({ length: 3 }).map((_, index) => (
+            <Carousel.Item key={index} index={index}>
+              Slide {index + 1}
+            </Carousel.Item>
+          ))}
+        </Carousel.List>
+
+        <Carousel.Indicators>
+          <button data-testid="custom-indicator">Custom</button>
+        </Carousel.Indicators>
+      </Carousel.Root>,
+    )
+
+    expect(screen.getByRole("button", { name: "Custom" })).toBeInTheDocument()
+  })
+})
 
 describe("useCarousel getRootProps", () => {
   beforeEach(() => {

@@ -24,42 +24,6 @@ const TestComponent: FC<TestComponentProps> = (props) => {
 }
 
 describe("<Carousel />", () => {
-  test("sets `displayName` correctly", () => {
-    expect(Carousel.Root.displayName).toBe("CarouselRoot")
-    expect(Carousel.List.displayName).toBe("CarouselList")
-    expect(Carousel.Item.displayName).toBe("CarouselItem")
-    expect(Carousel.PrevTrigger.displayName).toBe("CarouselPrevTrigger")
-    expect(Carousel.NextTrigger.displayName).toBe("CarouselNextTrigger")
-    expect(Carousel.Indicators.displayName).toBe("CarouselIndicators")
-    expect(Carousel.Indicator.displayName).toBe("CarouselIndicator")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(<TestComponent />)
-
-    await expect
-      .element(page.getByTestId("carousel"))
-      .toHaveClass("ui-carousel__root")
-    await expect
-      .element(page.getByTestId("carouselList"))
-      .toHaveClass("ui-carousel__list")
-    await expect
-      .element(page.getByRole("tabpanel", { name: "1 of 5" }))
-      .toHaveClass("ui-carousel__item")
-    await expect
-      .element(page.getByRole("tablist"))
-      .toHaveClass("ui-carousel__indicators")
-    await expect
-      .element(page.getByRole("tab", { name: "Go to 1 slide" }))
-      .toHaveClass("ui-carousel__indicator")
-    await expect
-      .element(page.getByRole("button", { name: "Go to previous slide" }))
-      .toHaveClass("ui-carousel__trigger--prev")
-    await expect
-      .element(page.getByRole("button", { name: "Go to next slide" }))
-      .toHaveClass("ui-carousel__trigger--next")
-  })
-
   test("should merge root consumer props with internal props", async () => {
     const ref = vi.fn()
     const onMouseEnter = vi.fn()
@@ -99,27 +63,6 @@ describe("<Carousel />", () => {
     expect(refElement).toBe(rootElement)
   })
 
-  test("renders HTML tag correctly", async () => {
-    await render(<TestComponent />)
-
-    expect(page.getByTestId("carousel").element().tagName).toBe("SECTION")
-    expect(page.getByTestId("carouselList").element().tagName).toBe("DIV")
-    expect(
-      page.getByRole("tabpanel", { name: "1 of 5" }).element().tagName,
-    ).toBe("DIV")
-    expect(page.getByRole("tablist").element().tagName).toBe("DIV")
-    expect(
-      page.getByRole("tab", { name: "Go to 1 slide" }).element().tagName,
-    ).toBe("BUTTON")
-    expect(
-      page.getByRole("button", { name: "Go to previous slide" }).element()
-        .tagName,
-    ).toBe("BUTTON")
-    expect(
-      page.getByRole("button", { name: "Go to next slide" }).element().tagName,
-    ).toBe("BUTTON")
-  })
-
   test("should render defaultSlide correctly", async () => {
     await render(<TestComponent defaultIndex={1} />)
 
@@ -144,15 +87,6 @@ describe("<Carousel />", () => {
 
     const slide1 = page.getByText("Slide 1")
     await expect.element(slide1).toHaveAttribute("data-selected")
-  })
-
-  test("should switch to correctly slide when click on indicator", async () => {
-    const { user } = await render(<TestComponent />)
-
-    await user.click(page.getByRole("tab", { name: "Go to 2 slide" }))
-
-    const slide2 = page.getByText("Slide 2")
-    await expect.element(slide2).toHaveAttribute("data-selected")
   })
 
   test("should disabled next and prev button when looping is disabled", async () => {

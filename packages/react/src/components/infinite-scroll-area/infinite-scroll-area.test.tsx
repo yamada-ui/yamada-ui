@@ -1,7 +1,155 @@
-import { useRef } from "react"
-import { page, render, renderHook } from "#test/browser"
+import type { InfiniteScrollAreaProps } from "."
+import { useRef, useState } from "react"
+import { a11y, render, renderHook, screen } from "#test"
+import { InfiniteScrollArea } from "."
 import { noop } from "../../utils"
 import { useInfiniteScroll } from "./use-infinite-scroll"
+
+describe("<InfiniteScrollArea />", () => {
+  const defaultIntersectionObserver = globalThis.IntersectionObserver
+  const IntersectionObserverMock = vi.fn(function IntersectionObserverMock(
+    this: {
+      disconnect: () => void
+      observe: (el: Element) => void
+      takeRecords: () => void
+      unobserve: (el: Element) => void
+    },
+    cb: (entries: IntersectionObserverEntry[]) => void,
+  ) {
+    this.disconnect = noop
+    this.observe = (el: Element) => {
+      cb([{ target: el, isIntersecting: true } as IntersectionObserverEntry])
+    }
+    this.takeRecords = noop
+    this.unobserve = noop
+  })
+
+  beforeAll(() => {
+    vi.stubGlobal("IntersectionObserver", IntersectionObserverMock)
+  })
+
+  afterAll(() => {
+    vi.stubGlobal("IntersectionObserver", defaultIntersectionObserver)
+  })
+
+  test("passes a11y checks", async () => {
+    await a11y(
+      <InfiniteScrollArea loading={<>Loading…</>}>
+        {Array(50)
+          .fill(0)
+          .map((_, index) => (
+            <div key={index} role="article">
+              {index}
+            </div>
+          ))}
+      </InfiniteScrollArea>,
+    )
+  })
+
+  test("sets default tabIndex on feed root for accessibility", () => {
+    render(
+      <InfiniteScrollArea
+        data-testid="infinite-scroll-area"
+        loading={<>Loading…</>}
+      >
+        {Array(50)
+          .fill(0)
+          .map((_, index) => (
+            <div key={index}>{index}</div>
+          ))}
+      </InfiniteScrollArea>,
+    )
+
+    expect(screen.getByTestId("infinite-scroll-area")).toHaveAttribute(
+      "tabindex",
+      "0",
+    )
+  })
+
+  test("preserves explicit tabIndex on feed root", () => {
+    render(
+      <InfiniteScrollArea
+        data-testid="infinite-scroll-area"
+        loading={<>Loading…</>}
+        tabIndex={-1}
+      >
+        {Array(50)
+          .fill(0)
+          .map((_, index) => (
+            <div key={index}>{index}</div>
+          ))}
+      </InfiniteScrollArea>,
+    )
+
+    expect(screen.getByTestId("infinite-scroll-area")).toHaveAttribute(
+      "tabindex",
+      "-1",
+    )
+  })
+
+  test("renders with `initialLoad` correctly", async () => {
+    const MyComponent = () => {
+      const [count, setCount] = useState<number>(50)
+
+      return (
+        <InfiniteScrollArea
+          initialLoad
+          loading={<>Loading…</>}
+          onLoad={({ finish, index }) => {
+            setCount((prev) => prev + 50)
+
+            if (index >= 5) finish()
+          }}
+        >
+          {Array(count)
+            .fill(0)
+            .map((_, index) => (
+              <div key={index}>{index}</div>
+            ))}
+        </InfiniteScrollArea>
+      )
+    }
+
+    render(<MyComponent />)
+    await expect(screen.findByText("51")).resolves.toBeInTheDocument()
+  })
+
+  test("passes the rootRef to the IntersectionObserver when `reverse`", () => {
+    const MyComponent = ({
+      reverse,
+    }: Pick<InfiniteScrollAreaProps, "reverse">) => {
+      const rootRef = useRef<HTMLDivElement>(null)
+
+      return (
+        <div ref={rootRef}>
+          <InfiniteScrollArea
+            loading={<>Loading…</>}
+            reverse={reverse}
+            rootRef={rootRef}
+          >
+            {Array(50)
+              .fill(0)
+              .map((_, index) => (
+                <div key={index}>{index}</div>
+              ))}
+          </InfiniteScrollArea>
+        </div>
+      )
+    }
+
+    const { container } = render(<MyComponent reverse />)
+
+    const rootElement = container.firstElementChild
+    expect(IntersectionObserverMock).toHaveBeenLastCalledWith(
+      expect.any(Function),
+      {
+        root: rootElement,
+        rootMargin: undefined,
+        threshold: undefined,
+      },
+    )
+  })
+})
 
 describe("useInfiniteScroll", () => {
   const defaultIntersectionObserver = globalThis.IntersectionObserver
@@ -30,9 +178,17 @@ describe("useInfiniteScroll", () => {
     vi.stubGlobal("IntersectionObserver", defaultIntersectionObserver)
   })
 
-  test("should not be finish and not called onLoad", async () => {
+  const getRootDiv = (container: HTMLElement) => {
+    const root = container.firstChild
+    if (!(root instanceof HTMLDivElement)) {
+      throw new Error("Expected the rendered root to be an HTMLDivElement.")
+    }
+    return root
+  }
+
+  test("does not call onLoad and is not finished by default", () => {
     const mockOnLoad = vi.fn()
-    const { result } = await renderHook(() =>
+    const { result } = renderHook(() =>
       useInfiniteScroll({
         onLoad: mockOnLoad,
       }),
@@ -42,11 +198,11 @@ describe("useInfiniteScroll", () => {
     expect(result.current.finish).toBeFalsy()
   })
 
-  test("should be called onLoad when initial loaded", async () => {
+  test("calls onLoad once when `initialLoad` is true", () => {
     const mockOnLoad = vi.fn().mockImplementation(({ finish }) => {
       finish()
     })
-    const { result } = await renderHook(() =>
+    const { result } = renderHook(() =>
       useInfiniteScroll({
         initialLoad: true,
         onLoad: mockOnLoad,
@@ -60,7 +216,7 @@ describe("useInfiniteScroll", () => {
     expect(result.current.finish).toBeTruthy()
   })
 
-  test("should be called onReset scroll to root", async () => {
+  test("scrolls the scrollable root to the top on reset", async () => {
     const MyComponent = () => {
       const mockOnLoad = vi.fn().mockImplementation(({ finish }) => {
         finish()
@@ -85,15 +241,15 @@ describe("useInfiniteScroll", () => {
       )
     }
 
-    const { container, user } = await render(<MyComponent />)
-    const root = container.firstChild as HTMLDivElement
+    const { container, user } = render(<MyComponent />)
+    const root = getRootDiv(container)
     const scrollTo = vi.spyOn(root, "scrollTo")
 
-    await user.click(page.getByTestId("reset"))
+    await user.click(screen.getByTestId("reset"))
     expect(scrollTo).toHaveBeenCalledWith({ behavior: undefined, top: 0 })
   })
 
-  test("should be called onReset scroll to body", async () => {
+  test("scrolls the body to the top on reset when no scrollable root exists", async () => {
     const MyComponent = () => {
       const mockOnLoad = vi.fn().mockImplementation(({ finish }) => {
         finish()
@@ -116,14 +272,14 @@ describe("useInfiniteScroll", () => {
       )
     }
 
-    const { user } = await render(<MyComponent />)
+    const { user } = render(<MyComponent />)
     const scrollTo = vi.spyOn(window, "scrollTo")
 
-    await user.click(page.getByTestId("reset"))
+    await user.click(screen.getByTestId("reset"))
     expect(scrollTo).toHaveBeenCalledWith({ behavior: undefined, top: 0 })
   })
 
-  test("should be called onReset reverse scroll to root", async () => {
+  test("scrolls the scrollable root to the bottom on reset when `reverse`", async () => {
     const MyComponent = () => {
       const mockOnLoad = vi.fn().mockImplementation(({ finish }) => {
         finish()
@@ -155,18 +311,18 @@ describe("useInfiniteScroll", () => {
       )
     }
 
-    const { container, user } = await render(<MyComponent />)
-    const root = container.firstChild as HTMLDivElement
+    const { container, user } = render(<MyComponent />)
+    const root = getRootDiv(container)
     const scrollTo = vi.spyOn(root, "scrollTo")
 
-    await user.click(page.getByTestId("reset"))
+    await user.click(screen.getByTestId("reset"))
     expect(scrollTo).toHaveBeenCalledWith({
       behavior: undefined,
       top: root.scrollHeight,
     })
   })
 
-  test("should be called onReset horizontal reverse scroll to root", async () => {
+  test("scrolls the scrollable root horizontally on reset when `reverse`", async () => {
     const MyComponent = () => {
       const mockOnLoad = vi.fn().mockImplementation(({ finish }) => {
         finish()
@@ -195,18 +351,18 @@ describe("useInfiniteScroll", () => {
       )
     }
 
-    const { container, user } = await render(<MyComponent />)
-    const root = container.firstChild as HTMLDivElement
+    const { container, user } = render(<MyComponent />)
+    const root = getRootDiv(container)
     const scrollTo = vi.spyOn(root, "scrollTo")
 
-    await user.click(page.getByTestId("reset"))
+    await user.click(screen.getByTestId("reset"))
     expect(scrollTo).toHaveBeenCalledWith({
       behavior: undefined,
       left: root.scrollWidth,
     })
   })
 
-  test("should be called onReset horizontal scroll to body", async () => {
+  test("scrolls the body horizontally on reset when no scrollable root exists", async () => {
     const MyComponent = () => {
       const mockOnLoad = vi.fn().mockImplementation(({ finish }) => {
         finish()
@@ -230,14 +386,14 @@ describe("useInfiniteScroll", () => {
       )
     }
 
-    const { user } = await render(<MyComponent />)
+    const { user } = render(<MyComponent />)
     const scrollTo = vi.spyOn(window, "scrollTo")
 
-    await user.click(page.getByTestId("reset"))
+    await user.click(screen.getByTestId("reset"))
     expect(scrollTo).toHaveBeenCalledWith({ behavior: undefined, left: 0 })
   })
 
-  test("should be cannot infinite-scroll is disabled", async () => {
+  test("does not observe when `disabled` is true", async () => {
     const mockObserve = vi.fn()
     const IntersectionObserverMock = vi.fn((cb) => ({
       disconnect: vi.fn(),
@@ -274,12 +430,12 @@ describe("useInfiniteScroll", () => {
       )
     }
 
-    const { user } = await render(<MyComponent />)
-    await user.click(page.getByTestId("reset"))
+    const { user } = render(<MyComponent />)
+    await user.click(screen.getByTestId("reset"))
     expect(mockObserve).not.toHaveBeenCalled()
   })
 
-  test("should add tabIndex=0 to scrollable root when missing", async () => {
+  test("adds tabIndex=0 to a scrollable root that has none", async () => {
     const MyComponent = () => {
       const mockOnLoad = vi.fn().mockImplementation(({ finish }) => {
         finish()
@@ -297,13 +453,13 @@ describe("useInfiniteScroll", () => {
       )
     }
 
-    const { container } = await render(<MyComponent />)
-    const root = container.firstChild as HTMLDivElement
+    const { container } = render(<MyComponent />)
+    const root = getRootDiv(container)
 
-    await expect.poll(() => root.tabIndex).toBe(0)
+    await vi.waitFor(() => expect(root.tabIndex).toBe(0))
   })
 
-  test("should not override existing tabindex on root", async () => {
+  test("does not override an existing tabindex on the root", () => {
     const MyComponent = () => {
       const mockOnLoad = vi.fn().mockImplementation(({ finish }) => {
         finish()
@@ -321,9 +477,9 @@ describe("useInfiniteScroll", () => {
       )
     }
 
-    const { container } = await render(<MyComponent />)
-    const root = container.firstChild as HTMLDivElement
+    const { container } = render(<MyComponent />)
+    const root = getRootDiv(container)
 
-    await expect.poll(() => root.tabIndex).toBe(-1)
+    expect(root.tabIndex).toBe(-1)
   })
 })

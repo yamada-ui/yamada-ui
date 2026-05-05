@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { a11y, page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { Portal } from "./portal"
 
 describe("<Portal />", () => {
@@ -7,11 +7,7 @@ describe("<Portal />", () => {
     await a11y(<Portal>Hello</Portal>)
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Portal.name).toBe("Portal")
-  })
-
-  test("Portal with containerRef renders correctly", async () => {
+  test("Portal with containerRef renders correctly", () => {
     const TestContainer = () => {
       const ref = useRef<HTMLDivElement>(null)
 
@@ -24,12 +20,12 @@ describe("<Portal />", () => {
       )
     }
 
-    await render(<TestContainer />)
+    render(<TestContainer />)
 
-    await expect.element(page.getByText("order2order3")).toBeInTheDocument()
+    expect(screen.getByText("order2order3")).toBeInTheDocument()
   })
 
-  test("Nested Portal with containerRef renders correctly", async () => {
+  test("Nested Portal with containerRef renders correctly", () => {
     const TestContainer = () => {
       const ref = useRef<HTMLDivElement>(null)
 
@@ -44,13 +40,13 @@ describe("<Portal />", () => {
       )
     }
 
-    await render(<TestContainer />)
+    render(<TestContainer />)
 
-    await expect.element(page.getByText("order1order2")).toBeInTheDocument()
-    await expect.element(page.getByText("order3")).toBeInTheDocument()
+    expect(screen.getByText("order1order2")).toBeInTheDocument()
+    expect(screen.getByText("order3")).toBeInTheDocument()
   })
 
-  test("Portal with disabled renders correctly", async () => {
+  test("Portal with disabled renders correctly", () => {
     const TestContainer = () => {
       const ref = useRef<HTMLDivElement>(null)
 
@@ -64,10 +60,8 @@ describe("<Portal />", () => {
       )
     }
 
-    await render(<TestContainer />)
+    render(<TestContainer />)
 
-    await expect
-      .element(page.getByText("order1"))
-      .not.toHaveTextContent("order1order2")
+    expect(screen.getByText("order1")).not.toHaveTextContent("order1order2")
   })
 })

@@ -1,5 +1,7 @@
 # a11y in browser mode
 
+**Example**: [PR #7287](https://github.com/yamada-ui/yamada-ui/pull/7287) — "test(button): recategorize and clean up browser tests"
+
 **Diff**:
 
 ```diff
@@ -28,4 +30,4 @@
 2. Does it dispatch real events, observers, focus transitions, or browser APIs (clipboard, drag, canvas, FileReader, ...)? `a11y(...)` does none of these.
 3. Does the engine actually matter (`isWebKit` / `isFirefox` / `isChrome` branches, or assertions that differ per engine)? If not, multiplying the test across three engines is pure cost.
 
-`a11y(...)` belongs in jsdom by default; only move it to browser mode when the audited tree depends on engine-specific layout that jsdom cannot evaluate.
+`a11y(...)` belongs in jsdom by default; only move it to browser mode when the audited tree depends on browser-mode criteria from `test-categorization.md` (real layout measurement, real events, observers, focus operations, browser-only APIs, or engine-specific behavior) that jsdom cannot evaluate.

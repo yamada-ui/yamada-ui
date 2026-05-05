@@ -1,4 +1,4 @@
-import { a11y, page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { AspectRatio } from "./aspect-ratio"
 
 describe("<AspectRatio />", () => {
@@ -14,25 +14,23 @@ describe("<AspectRatio />", () => {
     expect(AspectRatio.displayName).toBe("AspectRatio")
   })
 
-  test("sets `className` correctly", async () => {
-    await render(
+  test("sets `className` correctly", () => {
+    render(
       <AspectRatio data-testid="aspect-ratio">
         <img src="https://image.xyz/source" alt="placeholder" />
       </AspectRatio>,
     )
 
-    await expect
-      .element(page.getByTestId("aspect-ratio"))
-      .toHaveClass("ui-aspect-ratio")
+    expect(screen.getByTestId("aspect-ratio")).toHaveClass("ui-aspect-ratio")
   })
 
-  test("renders HTML tag correctly", async () => {
-    await render(
+  test("renders HTML tag correctly", () => {
+    render(
       <AspectRatio data-testid="aspect-ratio">
         <img src="https://image.xyz/source" alt="placeholder" />
       </AspectRatio>,
     )
 
-    expect(page.getByTestId("aspect-ratio").element().tagName).toBe("DIV")
+    expect(screen.getByTestId("aspect-ratio").tagName).toBe("DIV")
   })
 })

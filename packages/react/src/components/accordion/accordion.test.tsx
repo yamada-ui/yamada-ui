@@ -24,6 +24,7 @@ interface RootPropsMergeProbeProps {
   argsId: string
   argsStyle: CSSProperties
   restClassName: string
+  restDataTestId: string
   restId: string
   restStyle: CSSProperties
   argsOnClick: () => void
@@ -39,6 +40,7 @@ const RootPropsMergeProbe = ({
   argsRef,
   argsStyle,
   restClassName,
+  restDataTestId,
   restId,
   restOnClick,
   restRef,
@@ -49,6 +51,7 @@ const RootPropsMergeProbe = ({
     ref: restRef,
     className: restClassName,
     style: restStyle,
+    "data-testid": restDataTestId,
     onClick: restOnClick,
   })
 
@@ -59,7 +62,6 @@ const RootPropsMergeProbe = ({
         ref: argsRef,
         className: argsClassName,
         style: argsStyle,
-        "data-testid": "root-probe",
         onClick: argsOnClick,
       })}
     />
@@ -125,12 +127,102 @@ describe("<Accordion />", () => {
     )
   })
 
+  test("sets `displayName` correctly", () => {
+    expect(Accordion.Root.displayName).toBe("AccordionRoot")
+    expect(Accordion.Item.displayName).toBe("AccordionItem")
+    expect(Accordion.Button.displayName).toBe("AccordionButton")
+    expect(Accordion.Panel.displayName).toBe("AccordionPanel")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <Accordion.Root data-testid="root">
+        <Accordion.Item data-testid="item" button="Accordion Label" index={0}>
+          <Accordion.Panel data-testid="panel">
+            This is an accordion item
+          </Accordion.Panel>
+        </Accordion.Item>
+      </Accordion.Root>,
+    )
+
+    expect(screen.getByTestId("root")).toHaveClass("ui-accordion__root")
+    expect(screen.getByTestId("item")).toHaveClass("ui-accordion__item")
+    expect(screen.getByTestId("panel")).toHaveClass("ui-accordion__panel")
+    expect(
+      screen.getByRole("button", { name: /Accordion Label/i }),
+    ).toHaveClass("ui-accordion__button")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(
+      <Accordion.Root data-testid="root">
+        <Accordion.Item data-testid="item" button="Accordion Label" index={0}>
+          <Accordion.Panel data-testid="panel">
+            This is an accordion item
+          </Accordion.Panel>
+        </Accordion.Item>
+      </Accordion.Root>,
+    )
+
+    const root = screen.getByTestId("root")
+    const item = screen.getByTestId("item")
+    const panel = screen.getByTestId("panel")
+    const button = screen.getByRole("button", { name: /Accordion Label/i })
+
+    expect(root.tagName).toBe("DIV")
+    expect(item.tagName).toBe("DIV")
+    expect(item.firstElementChild?.tagName).toBe("H3")
+    expect(panel.tagName).toBe("DIV")
+    expect(button.tagName).toBe("BUTTON")
+  })
+
   test("should render correctly with defaultIndex item expanded", () => {
     render(<Accordion.Root defaultIndex={0} items={items} />)
 
     const button = screen.getByRole("button", { name: /Accordion Label 1/i })
     expect(button).toHaveAttribute("aria-expanded", "true")
     expect(screen.getByText("This is an accordion item 1")).toBeInTheDocument()
+  })
+
+  test("should render a disabled item", () => {
+    render(
+      <Accordion.Root>
+        <Accordion.Item button="Accordion Label" disabled index={0}>
+          This is an accordion item
+        </Accordion.Item>
+      </Accordion.Root>,
+    )
+
+    expect(
+      screen.getByRole("button", { name: /Accordion Label/i }),
+    ).toBeDisabled()
+  })
+
+  test("should render item with panel", () => {
+    render(
+      <Accordion.Root defaultIndex={0}>
+        <Accordion.Item button="Accordion Label" index={0}>
+          <Accordion.Panel>This is an accordion item</Accordion.Panel>
+        </Accordion.Item>
+      </Accordion.Root>,
+    )
+
+    expect(screen.getByText("This is an accordion item")).toBeInTheDocument()
+  })
+
+  test("should render item with custom label", () => {
+    render(
+      <Accordion.Root>
+        <Accordion.Item index={0}>
+          <Accordion.Button>Accordion Label</Accordion.Button>
+          <Accordion.Panel>This is an accordion item</Accordion.Panel>
+        </Accordion.Item>
+      </Accordion.Root>,
+    )
+
+    expect(
+      screen.getByRole("button", { name: /Accordion Label/i }),
+    ).toBeInTheDocument()
   })
 
   test("correct warnings should be issued when multiple and toggle", () => {
@@ -182,6 +274,7 @@ describe("<Accordion />", () => {
         argsRef={argsRef}
         argsStyle={{ backgroundColor: "blue" }}
         restClassName="rest-class"
+        restDataTestId="root-probe"
         restId="rest-id"
         restOnClick={restOnClick}
         restRef={restRef}
@@ -196,6 +289,7 @@ describe("<Accordion />", () => {
     expect(root.id).toBe("args-id")
     expect(root.style.color).toBe("red")
     expect(root.style.backgroundColor).toBe("blue")
+    expect(root).toHaveAttribute("data-testid", "root-probe")
 
     fireEvent.click(root)
     expect(restOnClick).toHaveBeenCalledTimes(1)

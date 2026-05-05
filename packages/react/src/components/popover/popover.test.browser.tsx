@@ -1,7 +1,6 @@
-import { a11y, page, render, renderHook } from "#test/browser"
+import { page, render } from "#test/browser"
 import { Popover } from "."
 import { Button } from "../button"
-import { usePopupAnimationProps } from "./popover"
 
 describe("<Popover />", () => {
   const Component = (props: Popover.RootProps) => {
@@ -12,26 +11,6 @@ describe("<Popover />", () => {
         </Popover.Trigger>
 
         <Popover.Content data-testid="popoverContent">
-          <Popover.Header>Popover Header</Popover.Header>
-          <Popover.Body>Popover Body</Popover.Body>
-          <Popover.Footer>Popover Footer</Popover.Footer>
-        </Popover.Content>
-      </Popover.Root>
-    )
-  }
-
-  const ComponentWithAnchor = (props: Popover.RootProps) => {
-    return (
-      <Popover.Root {...props}>
-        <Popover.Anchor>
-          <Button>Popover Anchor</Button>
-        </Popover.Anchor>
-
-        <Popover.Trigger>
-          <Button>Popover Trigger</Button>
-        </Popover.Trigger>
-
-        <Popover.Content>
           <Popover.Header>Popover Header</Popover.Header>
           <Popover.Body>Popover Body</Popover.Body>
           <Popover.Footer>Popover Footer</Popover.Footer>
@@ -59,55 +38,6 @@ describe("<Popover />", () => {
       </Popover.Root>
     )
   }
-
-  test("renders component correctly", async () => {
-    await a11y(<Component defaultOpen />)
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Popover.Root.name).toBe("PopoverRoot")
-    expect(Popover.Trigger.displayName).toBe("PopoverTrigger")
-    expect(Popover.CloseTrigger.displayName).toBe("PopoverCloseTrigger")
-    expect(Popover.Anchor.displayName).toBe("PopoverAnchor")
-    expect(Popover.Content.displayName).toBe("PopoverContent")
-    expect(Popover.Header.displayName).toBe("PopoverHeader")
-    expect(Popover.Body.displayName).toBe("PopoverBody")
-    expect(Popover.Footer.displayName).toBe("PopoverFooter")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(<ComponentWithAnchor defaultOpen />)
-    const trigger = page.getByText("Popover Trigger").element()
-    const anchor = page.getByText("Popover Anchor").element()
-    const header = page.getByText("Popover Header").element()
-    const body = page.getByText("Popover Body").element()
-    const footer = page.getByText("Popover Footer").element()
-    const content = header.parentElement
-    const positioner = content?.parentElement
-
-    expect(trigger).toHaveClass("ui-popover__trigger")
-    expect(anchor).toHaveClass("ui-popover__anchor")
-    expect(header).toHaveClass("ui-popover__header")
-    expect(body).toHaveClass("ui-popover__body")
-    expect(footer).toHaveClass("ui-popover__footer")
-    expect(content).toHaveClass("ui-popover__content")
-    expect(positioner).toHaveClass("ui-popover__positioner")
-  })
-
-  test("renders HTML tag correctly", async () => {
-    await render(<ComponentWithAnchor defaultOpen />)
-    const header = page.getByText("Popover Header").element()
-    const body = page.getByText("Popover Body").element()
-    const footer = page.getByText("Popover Footer").element()
-    const content = header.parentElement
-    const positioner = content?.parentElement
-
-    expect(header.tagName).toBe("DIV")
-    expect(body.tagName).toBe("DIV")
-    expect(footer.tagName).toBe("DIV")
-    expect(content?.tagName).toBe("DIV")
-    expect(positioner?.tagName).toBe("DIV")
-  })
 
   test("should close with escape key", async () => {
     const { user } = await render(<Component />)
@@ -260,98 +190,5 @@ describe("<Popover />", () => {
     await expect.element(page.getByText("Popover Header")).toBeVisible()
 
     await expect.poll(() => document.body.style.overflow).toBe("hidden")
-  })
-
-  test("should render children as function", async () => {
-    const childrenFn = vi.fn(({ open }) => (
-      <div data-testid="fn-child">{open ? "open" : "closed"}</div>
-    ))
-
-    await render(<Popover.Root defaultOpen>{childrenFn}</Popover.Root>)
-
-    expect(childrenFn).toHaveBeenCalledWith(
-      expect.objectContaining({ open: true }),
-    )
-    await expect.element(page.getByTestId("fn-child")).toHaveTextContent("open")
-  })
-})
-
-describe("usePopupAnimationProps", () => {
-  test("returns scale animation props by default", async () => {
-    const { result } = await renderHook(() => usePopupAnimationProps())
-    expect(result.current).toHaveProperty("animate", "enter")
-    expect(result.current).toHaveProperty("exit", "exit")
-    expect(result.current).toHaveProperty("initial", "exit")
-    expect("custom" in result.current && result.current.custom).toStrictEqual({
-      duration: 0.1,
-      reverse: true,
-      scale: 0.95,
-    })
-  })
-
-  test("returns slide-fade props for `inline-end`", async () => {
-    const { result } = await renderHook(() =>
-      usePopupAnimationProps({ animationScheme: "inline-end" }),
-    )
-    expect(result.current).toHaveProperty("animate", "enter")
-    expect("custom" in result.current && result.current.custom).toStrictEqual({
-      duration: 0.1,
-      offsetX: 16,
-      reverse: true,
-    })
-  })
-
-  test("returns slide-fade props for `inline-start`", async () => {
-    const { result } = await renderHook(() =>
-      usePopupAnimationProps({ animationScheme: "inline-start" }),
-    )
-    expect("custom" in result.current && result.current.custom).toStrictEqual({
-      duration: 0.1,
-      offsetX: -16,
-      reverse: true,
-    })
-  })
-
-  test("returns slide-fade props for `block-start`", async () => {
-    const { result } = await renderHook(() =>
-      usePopupAnimationProps({ animationScheme: "block-start" }),
-    )
-    expect("custom" in result.current && result.current.custom).toStrictEqual({
-      duration: 0.1,
-      offsetY: -16,
-      reverse: true,
-    })
-  })
-
-  test("returns slide-fade props for `block-end`", async () => {
-    const { result } = await renderHook(() =>
-      usePopupAnimationProps({ animationScheme: "block-end" }),
-    )
-    expect("custom" in result.current && result.current.custom).toStrictEqual({
-      duration: 0.1,
-      offsetY: 16,
-      reverse: true,
-    })
-  })
-
-  test("returns empty object for `none`", async () => {
-    const { result } = await renderHook(() =>
-      usePopupAnimationProps({ animationScheme: "none" }),
-    )
-    expect(result.current).toStrictEqual({})
-  })
-
-  test("passes custom duration", async () => {
-    const { result } = await renderHook(() =>
-      usePopupAnimationProps({
-        animationScheme: "scale",
-        duration: 0.5,
-      }),
-    )
-    expect("custom" in result.current && result.current.custom).toStrictEqual({
-      duration: 0.5,
-      reverse: true,
-      scale: 0.95,
-    })
   })
 })

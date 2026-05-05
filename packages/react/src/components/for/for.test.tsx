@@ -1,8 +1,8 @@
-import { a11y, page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { For } from "."
 
 describe("<For />", () => {
-  test("renders component correctly", async () => {
+  test("passes a11y checks", async () => {
     await a11y(
       <For each={["One", "Two", "Three"]}>
         {(item, index) => <div key={index}>{item}</div>}
@@ -10,35 +10,27 @@ describe("<For />", () => {
     )
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(For.name).toBe("For")
-  })
-
-  test("For renders fallback when array is empty", async () => {
-    await render(
+  test("renders fallback when array is empty", () => {
+    render(
       <For each={[]} fallback={<p>There are no items to show</p>}>
         {(item, index) => <p key={index}>{item}</p>}
       </For>,
     )
-    await expect
-      .element(page.getByText("There are no items to show"))
-      .toBeInTheDocument()
+    expect(screen.getByText("There are no items to show")).toBeInTheDocument()
   })
 
-  test("For renders fallback when array is undefined", async () => {
-    await render(
+  test("renders fallback when array is undefined", () => {
+    render(
       <For each={undefined} fallback={<p>There are no items to show</p>}>
         {(_, index) => <p key={index}>Item</p>}
       </For>,
     )
-    await expect
-      .element(page.getByText("There are no items to show"))
-      .toBeInTheDocument()
+    expect(screen.getByText("There are no items to show")).toBeInTheDocument()
   })
 
-  test("For correctly passes index to children", async () => {
+  test("passes index to children", () => {
     const each = [0, 1, 2, 3, 4]
-    await render(
+    render(
       <For each={each}>
         {(item, index) => {
           expect(item).toBe(index)
@@ -48,44 +40,42 @@ describe("<For />", () => {
     )
   })
 
-  test("For renders correctly with filter", async () => {
-    await render(
+  test("renders correctly with filter", () => {
+    render(
       <For each={["One", "Two", "Three"]} filter={(item) => item !== "Two"}>
         {(item, index) => <p key={index}>{item}</p>}
       </For>,
     )
-    await expect.element(page.getByText("One")).toBeInTheDocument()
-    await expect.element(page.getByText("Three")).toBeInTheDocument()
-    await expect.element(page.getByText("Two").query()).not.toBeInTheDocument()
+    expect(screen.getByText("One")).toBeInTheDocument()
+    expect(screen.getByText("Three")).toBeInTheDocument()
+    expect(screen.queryByText("Two")).not.toBeInTheDocument()
   })
 
-  test("For renders correctly with limit", async () => {
-    await render(
+  test("renders correctly with limit", () => {
+    render(
       <For each={["One", "Two", "Three"]} limit={2}>
         {(item, index) => <div key={index}>{item}</div>}
       </For>,
     )
-    await expect.element(page.getByText("One")).toBeInTheDocument()
-    await expect.element(page.getByText("Two")).toBeInTheDocument()
-    await expect
-      .element(page.getByText("Three").query())
-      .not.toBeInTheDocument()
+    expect(screen.getByText("One")).toBeInTheDocument()
+    expect(screen.getByText("Two")).toBeInTheDocument()
+    expect(screen.queryByText("Three")).not.toBeInTheDocument()
   })
 
-  test("For renders correctly with offset", async () => {
-    await render(
+  test("renders correctly with offset", () => {
+    render(
       <For each={["One", "Two", "Three"]} offset={1}>
         {(item, index) => <div key={index}>{item}</div>}
       </For>,
     )
-    await expect.element(page.getByText("Two")).toBeInTheDocument()
-    await expect.element(page.getByText("Three")).toBeInTheDocument()
-    await expect.element(page.getByText("One").query()).not.toBeInTheDocument()
+    expect(screen.getByText("Two")).toBeInTheDocument()
+    expect(screen.getByText("Three")).toBeInTheDocument()
+    expect(screen.queryByText("One")).not.toBeInTheDocument()
   })
 
-  test("For renders correctly with reverse", async () => {
-    let indexes: number[] = []
-    await render(
+  test("renders correctly with reverse", () => {
+    const indexes: number[] = []
+    render(
       <For each={["One", "Two", "Three"]} reverse>
         {(item, index) => {
           indexes.push(index)
@@ -97,16 +87,13 @@ describe("<For />", () => {
         }}
       </For>,
     )
-    const items = page
-      .getByTestId("for")
-      .elements()
-      .map((el) => el.textContent)
+    const items = screen.getAllByTestId("for").map((el) => el.textContent)
     expect(items).toStrictEqual(["Three", "Two", "One"])
     expect(indexes).toStrictEqual([0, 1, 2])
   })
 
-  test("For renders correctly with sort", async () => {
-    await render(
+  test("renders correctly with sort", () => {
+    render(
       <For each={["One", "Two", "Three"]} sort={(a, b) => a.localeCompare(b)}>
         {(item, index) => (
           <div key={index} data-testid="for">
@@ -115,15 +102,12 @@ describe("<For />", () => {
         )}
       </For>,
     )
-    const items = page
-      .getByTestId("for")
-      .elements()
-      .map((el) => el.textContent)
+    const items = screen.getAllByTestId("for").map((el) => el.textContent)
     expect(items).toStrictEqual(["One", "Three", "Two"])
   })
 
-  test("For renders correctly with combined options", async () => {
-    await render(
+  test("renders correctly with combined options", () => {
+    render(
       <For
         each={["One", "Two", "Three", "Four"]}
         filter={(item) => item !== "Two"}
@@ -139,9 +123,8 @@ describe("<For />", () => {
         )}
       </For>,
     )
-    const items = page
-      .getByTestId("for-combined-item")
-      .elements()
+    const items = screen
+      .getAllByTestId("for-combined-item")
       .map((el) => el.textContent)
     expect(items).toStrictEqual(["One", "Four"])
   })

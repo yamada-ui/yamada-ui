@@ -8,4 +8,4 @@ Case library of past PRs where both bots approved something the maintainer rejec
 
 ## Adding a new entry
 
-When a merged PR surfaces a review miss, add a bullet above and a detail file containing: PR link, minimal diff, what was missed, rule of thumb.
+When a merged PR surfaces a review miss, add a bullet above and a detail file containing: minimal diff, what was missed, rule of thumb, and a PR link when a relevant public PR exists.

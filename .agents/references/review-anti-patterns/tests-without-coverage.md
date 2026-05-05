@@ -1,5 +1,7 @@
 # Tests that do not increase coverage
 
+**Example**: Internal review miss case in yamada-ui (no public PR link available).
+
 **Diff**:
 
 ```diff

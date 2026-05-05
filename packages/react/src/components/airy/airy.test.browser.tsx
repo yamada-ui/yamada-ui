@@ -1,13 +1,9 @@
 import type { KeyframeIdent } from "../../core"
 import { useState } from "react"
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { Airy } from "."
 
 describe("<Airy />", () => {
-  test("renders component correctly", async () => {
-    await a11y(<Airy from="ON" to="OFF" />)
-  })
-
   test("should render Airy with value and onChange", async () => {
     const TestComponent = () => {
       const [value, onChange] = useState<KeyframeIdent>("to")

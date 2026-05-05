@@ -24,6 +24,12 @@ describe("<Avatar />", () => {
     expect(screen.getByText("H")).toBeInTheDocument()
   })
 
+  test("renders initials from first and last name when three or more words are passed", () => {
+    render(<Avatar name="Hirotomo React Yamada" />)
+
+    expect(screen.getByText("HY")).toBeInTheDocument()
+  })
+
   test("merges getRootProps values while keeping hook-owned data attributes", () => {
     const restRef = vi.fn()
     const callerRef = vi.fn()
@@ -91,6 +97,10 @@ describe("<AvatarGroup />", () => {
     )
   })
 
+  test("sets a stable display name for root", () => {
+    expect(AvatarGroup.Root.displayName).toBe("AvatarGroup")
+  })
+
   test("renders a number avatar showing count of truncated avatars", () => {
     render(
       <AvatarGroup.Root max={2}>
@@ -108,6 +118,19 @@ describe("<AvatarGroup />", () => {
   test("does not render a number avatar when max equals the number of avatars", () => {
     render(
       <AvatarGroup.Root max={4}>
+        <AvatarGroup.Item />
+        <AvatarGroup.Item />
+        <AvatarGroup.Item />
+        <AvatarGroup.Item />
+      </AvatarGroup.Root>,
+    )
+
+    expect(screen.queryByText(/^\+/)).not.toBeInTheDocument()
+  })
+
+  test("does not render a number avatar when max is greater than the number of avatars", () => {
+    render(
+      <AvatarGroup.Root max={6}>
         <AvatarGroup.Item />
         <AvatarGroup.Item />
         <AvatarGroup.Item />

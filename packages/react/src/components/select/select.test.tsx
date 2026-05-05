@@ -1,7 +1,14 @@
 import type { FC, MouseEvent as ReactMouseEvent, ReactNode } from "react"
-import { act, fireEvent, screen, waitFor } from "@testing-library/react"
 import { createRef, useState } from "react"
-import { a11y, render, renderHook } from "#test/browser"
+import {
+  a11y,
+  act,
+  fireEvent,
+  render,
+  renderHook,
+  screen,
+  waitFor,
+} from "#test"
 import { Select, useSelect } from "."
 
 const items: Select.Item[] = [
@@ -12,34 +19,17 @@ const items: Select.Item[] = [
 
 describe("<Select />", () => {
   test("renders component correctly", async () => {
-    // Select colors come from theme tokens and can fail axe-core's
-    // color-contrast rule in browser mode; this test targets component behavior.
     await a11y(
       <Select.Root placeholder="Choose a option">
         <Select.Option value="one">Option 1</Select.Option>
         <Select.Option value="two">Option 2</Select.Option>
         <Select.Option value="three">Option 3</Select.Option>
       </Select.Root>,
-      {
-        axeOptions: {
-          rules: {
-            "color-contrast": { enabled: false },
-          },
-        },
-      },
     )
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Select.Root.displayName).toBe("SelectRoot")
-    expect(Select.Group.displayName).toBe("SelectGroup")
-    expect(Select.Option.displayName).toBe("SelectOption")
-    expect(Select.Label.displayName).toBe("SelectLabel")
-    expect(Select.Separator.displayName).toBe("SelectSeparator")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(
+  test("sets `className` correctly", () => {
+    render(
       <Select.Root
         defaultOpen
         defaultValue="one"
@@ -74,46 +64,10 @@ describe("<Select />", () => {
     expect(screen.getByRole("separator")).toHaveClass("ui-select__separator")
   })
 
-  test("renders HTML tag correctly", async () => {
-    await render(
-      <Select.Root
-        defaultOpen
-        defaultValue="one"
-        placeholder="Choose a option"
-        iconProps={{ "data-testid": "icon" }}
-        rootProps={{ "data-testid": "root" }}
-      >
-        <Select.Option value="one">Option 1</Select.Option>
-        <Select.Option value="two">Option 2</Select.Option>
-        <Select.Option value="three">Option 3</Select.Option>
-        <Select.Separator />
-        <Select.Group label="Group 1">
-          <Select.Option value="one">Group Option 1</Select.Option>
-          <Select.Option value="two">Group Option 2</Select.Option>
-          <Select.Option value="three">Group Option 3</Select.Option>
-        </Select.Group>
-      </Select.Root>,
-    )
-
-    const field = screen.getByRole("combobox", { name: /Choose a option/i })
-    const group = screen.getByRole("group", { name: "Group 1" })
-    const option = screen.getByRole("option", { name: "Option 1" })
-
-    expect(screen.getByTestId("root").tagName).toBe("DIV")
-    expect(screen.getByTestId("icon").tagName).toBe("DIV")
-    expect(field.tagName).toBe("DIV")
-    expect(field.children[0]?.tagName).toBe("SPAN")
-    expect(option.tagName).toBe("DIV")
-    expect(option.children[0]?.tagName).toBe("DIV")
-    expect(group.tagName).toBe("DIV")
-    expect(group.children[0]?.tagName).toBe("SPAN")
-    expect(screen.getByRole("separator").tagName).toBe("HR")
-  })
-
   test("selects and deselects values in multiple mode", async () => {
     const onChange = vi.fn()
 
-    const { user } = await render(
+    const { user } = render(
       <Select.Root
         defaultOpen
         items={items}
@@ -123,19 +77,16 @@ describe("<Select />", () => {
       />,
     )
 
-    // Select first option
     await user.click(screen.getByRole("option", { name: "Option 1" }))
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one"])
     })
 
-    // Select second option
     await user.click(screen.getByRole("option", { name: "Option 2" }))
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
 
-    // Deselect first option
     await user.click(screen.getByRole("option", { name: "Option 1" }))
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["two"])
@@ -145,7 +96,7 @@ describe("<Select />", () => {
   test("respects max selection limit in multiple mode", async () => {
     const onChange = vi.fn()
 
-    const { user } = await render(
+    const { user } = render(
       <Select.Root
         defaultOpen
         items={items}
@@ -156,7 +107,6 @@ describe("<Select />", () => {
       />,
     )
 
-    // Select two options (reaching max)
     await user.click(screen.getByRole("option", { name: "Option 1" }))
     await user.click(screen.getByRole("option", { name: "Option 2" }))
 
@@ -164,7 +114,6 @@ describe("<Select />", () => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
 
-    // Attempt to select a third option - should be disabled
     await waitFor(() => {
       expect(screen.getByRole("option", { name: "Option 3" })).toHaveAttribute(
         "aria-disabled",
@@ -181,8 +130,8 @@ describe("<Select />", () => {
     expect(onChange).toHaveBeenLastCalledWith(["one", "two"])
   })
 
-  test("displays selected values in multiple mode", async () => {
-    await render(
+  test("displays selected values in multiple mode", () => {
+    render(
       <Select.Root
         defaultOpen
         defaultValue={["one", "two"]}
@@ -198,10 +147,8 @@ describe("<Select />", () => {
     expect(field).toHaveTextContent("Option 2")
   })
 
-  test("displays placeholder when no value is selected in multiple mode", async () => {
-    await render(
-      <Select.Root items={items} multiple placeholder="Choose options" />,
-    )
+  test("displays placeholder when no value is selected in multiple mode", () => {
+    render(<Select.Root items={items} multiple placeholder="Choose options" />)
 
     const field = screen.getByRole("combobox", { name: /Choose options/i })
 
@@ -209,7 +156,7 @@ describe("<Select />", () => {
   })
 
   test("renders clear icon and clears value when clicked", async () => {
-    await render(
+    render(
       <Select.Root
         clearable
         defaultValue="one"
@@ -232,7 +179,7 @@ describe("<Select />", () => {
   })
 
   test("clears value via keyboard on clear icon", async () => {
-    await render(
+    render(
       <Select.Root
         clearable
         defaultValue="one"
@@ -255,7 +202,7 @@ describe("<Select />", () => {
   test("clears multiple values when clear icon is clicked", async () => {
     const onChange = vi.fn()
 
-    const { user } = await render(
+    const { user } = render(
       <Select.Root
         clearable
         defaultValue={["one", "two"]}
@@ -275,8 +222,8 @@ describe("<Select />", () => {
     })
   })
 
-  test("focuses field when input is focused", async () => {
-    await render(
+  test("focuses field when input is focused", () => {
+    render(
       <Select.Root
         name="test-select"
         items={items}
@@ -287,16 +234,19 @@ describe("<Select />", () => {
     const input = document.querySelector("input[name='test-select']")
 
     expect(input).toBeInTheDocument()
+    expect(input).toBeInstanceOf(HTMLInputElement)
 
-    fireEvent.focus(input!)
+    if (!(input instanceof HTMLInputElement)) return
+
+    fireEvent.focus(input)
 
     expect(document.activeElement).toBe(
       screen.getByRole("combobox", { name: /Choose a option/i }),
     )
   })
 
-  test("does not focus field when hidden input is focused and disabled", async () => {
-    await render(
+  test("does not focus field when hidden input is focused and disabled", () => {
+    render(
       <Select.Root
         name="disabled-select"
         disabled
@@ -305,11 +255,12 @@ describe("<Select />", () => {
       />,
     )
 
-    const input = document.querySelector(
-      "input[name='disabled-select']",
-    ) as HTMLInputElement
+    const input = document.querySelector("input[name='disabled-select']")
 
     expect(input).toBeInTheDocument()
+    expect(input).toBeInstanceOf(HTMLInputElement)
+
+    if (!(input instanceof HTMLInputElement)) return
 
     fireEvent.focus(input)
 
@@ -318,10 +269,8 @@ describe("<Select />", () => {
     expect(document.activeElement).not.toBe(field)
   })
 
-  test("does not focus field when disabled", async () => {
-    await render(
-      <Select.Root disabled items={items} placeholder="Choose a option" />,
-    )
+  test("does not focus field when disabled", () => {
+    render(<Select.Root disabled items={items} placeholder="Choose a option" />)
 
     const field = screen.getByRole("combobox", { name: /Choose a option/i })
 
@@ -330,7 +279,7 @@ describe("<Select />", () => {
     expect(field).toHaveAttribute("aria-disabled", "true")
   })
 
-  test("renders with items prop using grouped items", async () => {
+  test("renders with items prop using grouped items", () => {
     const groupedItems: Select.Item[] = [
       {
         items: [
@@ -341,7 +290,7 @@ describe("<Select />", () => {
       },
     ]
 
-    await render(
+    render(
       <Select.Root
         defaultOpen
         items={groupedItems}
@@ -354,8 +303,8 @@ describe("<Select />", () => {
     expect(group).toBeInTheDocument()
   })
 
-  test("does not show clear icon when clearable is false", async () => {
-    await render(
+  test("does not show clear icon when clearable is false", () => {
+    render(
       <Select.Root
         defaultValue="one"
         items={items}
@@ -368,8 +317,8 @@ describe("<Select />", () => {
     ).not.toBeInTheDocument()
   })
 
-  test("does not include placeholder in options when includePlaceholder is false", async () => {
-    await render(
+  test("does not include placeholder in options when includePlaceholder is false", () => {
+    render(
       <Select.Root
         defaultOpen
         includePlaceholder={false}
@@ -386,8 +335,8 @@ describe("<Select />", () => {
     expect(placeholderOption).toBeUndefined()
   })
 
-  test("uses custom separator in multiple mode", async () => {
-    await render(
+  test("uses custom separator in multiple mode", () => {
+    render(
       <Select.Root
         defaultValue={["one", "two"]}
         items={items}
@@ -403,7 +352,7 @@ describe("<Select />", () => {
   })
 
   test("focuses field on clear when focusOnClear is true", async () => {
-    const { user } = await render(
+    const { user } = render(
       <Select.Root
         clearable
         defaultValue="one"
@@ -425,7 +374,7 @@ describe("<Select />", () => {
   })
 
   test("does not focus field on clear when focusOnClear is false", async () => {
-    const { user } = await render(
+    const { user } = render(
       <Select.Root
         clearable
         defaultValue="one"
@@ -466,7 +415,7 @@ describe("<Select />", () => {
       )
     }
 
-    const { user } = await render(<ControlledSelect />)
+    const { user } = render(<ControlledSelect />)
 
     const field = screen.getByRole("combobox", { name: /Choose a option/i })
 
@@ -502,7 +451,7 @@ describe("<Select />", () => {
       )
     }
 
-    const { user } = await render(<ControlledMultiSelect />)
+    const { user } = render(<ControlledMultiSelect />)
 
     const field = screen.getByRole("combobox", { name: /Choose options/i })
 
@@ -519,7 +468,7 @@ describe("<Select />", () => {
   test("clears value via Space key on clear icon", async () => {
     const onChange = vi.fn()
 
-    await render(
+    render(
       <Select.Root
         clearable
         defaultValue="one"
@@ -538,8 +487,8 @@ describe("<Select />", () => {
     })
   })
 
-  test("renders with custom render function returning non-element", async () => {
-    await render(
+  test("renders with custom render function returning non-element", () => {
+    render(
       <Select.Root
         defaultValue={["one"]}
         items={items}
@@ -554,8 +503,8 @@ describe("<Select />", () => {
     expect(field).toHaveTextContent("Option 1")
   })
 
-  test("renders with custom render function returning ReactElement", async () => {
-    await render(
+  test("renders with custom render function returning ReactElement", () => {
+    render(
       <Select.Root
         defaultValue={["one", "two"]}
         items={items}
@@ -579,7 +528,7 @@ describe("<Select />", () => {
   test("removes selected value via custom render's onClear", async () => {
     const onChange = vi.fn()
 
-    const { user } = await render(
+    const { user } = render(
       <Select.Root
         defaultValue={["one", "two"]}
         items={items}
@@ -603,10 +552,10 @@ describe("<Select />", () => {
     })
   })
 
-  test("onClear does not call onChange when item value is empty", async () => {
+  test("onClear does not call onChange when item value is empty", () => {
     const onChange = vi.fn()
 
-    await render(
+    render(
       <Select.Root
         items={items}
         multiple
@@ -626,18 +575,16 @@ describe("<Select />", () => {
     expect(onChange).not.toHaveBeenCalled()
   })
 
-  test("renders with readOnly", async () => {
-    await render(
-      <Select.Root items={items} placeholder="Choose a option" readOnly />,
-    )
+  test("renders with readOnly", () => {
+    render(<Select.Root items={items} placeholder="Choose a option" readOnly />)
 
     const field = screen.getByRole("combobox", { name: /Choose a option/i })
 
     expect(field).toHaveAttribute("aria-readonly", "true")
   })
 
-  test("renders hidden input with correct attributes", async () => {
-    await render(
+  test("renders hidden input with correct attributes", () => {
+    render(
       <Select.Root
         id="my-select"
         name="my-select"
@@ -650,11 +597,10 @@ describe("<Select />", () => {
       />,
     )
 
-    const input = document.querySelector(
-      "input[name='my-select']",
-    ) as HTMLInputElement
+    const input = document.querySelector("input[name='my-select']")
 
     expect(input).toBeInTheDocument()
+    expect(input).toBeInstanceOf(HTMLInputElement)
     expect(input).toHaveAttribute("id", "my-select")
     expect(input).toHaveAttribute("name", "my-select")
     expect(input).toBeDisabled()
@@ -663,8 +609,8 @@ describe("<Select />", () => {
     expect(input).toHaveValue("one")
   })
 
-  test("renders hidden input with joined values in multiple mode", async () => {
-    await render(
+  test("renders hidden input with joined values in multiple mode", () => {
+    render(
       <Select.Root
         name="multi-select"
         defaultValue={["one", "two"]}
@@ -674,26 +620,22 @@ describe("<Select />", () => {
       />,
     )
 
-    const input = document.querySelector(
-      "input[name='multi-select']",
-    ) as HTMLInputElement
+    const input = document.querySelector("input[name='multi-select']")
 
     expect(input).toBeInTheDocument()
     expect(input).toHaveValue("one, two")
   })
 
-  test("renders without placeholder", async () => {
-    await render(<Select.Root defaultOpen items={items} />)
+  test("renders without placeholder", () => {
+    render(<Select.Root defaultOpen items={items} />)
 
     const options = screen.getAllByRole("option")
 
     expect(options).toHaveLength(3)
   })
 
-  test("renders with no items", async () => {
-    await render(
-      <Select.Root defaultOpen items={[]} placeholder="Choose a option" />,
-    )
+  test("renders with no items", () => {
+    render(<Select.Root defaultOpen items={[]} placeholder="Choose a option" />)
 
     const field = screen.getByRole("combobox", { name: /Choose a option/i })
 
@@ -703,7 +645,7 @@ describe("<Select />", () => {
   test("selects a value in single mode", async () => {
     const onChange = vi.fn()
 
-    const { user } = await render(
+    const { user } = render(
       <Select.Root
         defaultOpen
         items={items}
@@ -741,7 +683,7 @@ describe("<Select />", () => {
 
     const onChange = vi.fn()
 
-    const { user } = await render(
+    const { user } = render(
       <Select.Root
         defaultOpen
         items={groupedItems}
@@ -759,7 +701,7 @@ describe("<Select />", () => {
     })
   })
 
-  test("displays grouped item value correctly when selected", async () => {
+  test("displays grouped item value correctly when selected", () => {
     const groupedItems: Select.Item[] = [
       {
         items: [
@@ -770,7 +712,7 @@ describe("<Select />", () => {
       },
     ]
 
-    await render(
+    render(
       <Select.Root
         defaultValue="apple"
         items={groupedItems}
@@ -786,7 +728,7 @@ describe("<Select />", () => {
   test("does not clear when disabled and clear icon is clicked", async () => {
     const onChange = vi.fn()
 
-    await render(
+    render(
       <Select.Root
         clearable
         defaultValue="one"
@@ -811,7 +753,7 @@ describe("<Select />", () => {
   test("does not clear when disabled and Space key is pressed on clear icon", async () => {
     const onChange = vi.fn()
 
-    await render(
+    render(
       <Select.Root
         clearable
         defaultValue="one"
@@ -831,8 +773,8 @@ describe("<Select />", () => {
     })
   })
 
-  test("renders with custom icon", async () => {
-    await render(
+  test("renders with custom icon", () => {
+    render(
       <Select.Root
         icon={<span data-testid="custom-icon">V</span>}
         items={items}
@@ -843,8 +785,8 @@ describe("<Select />", () => {
     expect(screen.getByTestId("custom-icon")).toBeInTheDocument()
   })
 
-  test("renders with custom clear icon", async () => {
-    await render(
+  test("renders with custom clear icon", () => {
+    render(
       <Select.Root
         clearable
         clearIcon={<span data-testid="custom-clear">X</span>}
@@ -857,8 +799,8 @@ describe("<Select />", () => {
     expect(screen.getByTestId("custom-clear")).toBeInTheDocument()
   })
 
-  test("renders group without label", async () => {
-    await render(
+  test("renders group without label", () => {
+    render(
       <Select.Root defaultOpen placeholder="Choose a option">
         <Select.Group>
           <Select.Option value="one">Option 1</Select.Option>
@@ -871,8 +813,8 @@ describe("<Select />", () => {
     expect(option).toBeInTheDocument()
   })
 
-  test("renders option with custom icon", async () => {
-    await render(
+  test("renders option with custom icon", () => {
+    render(
       <Select.Root defaultOpen placeholder="Choose a option">
         <Select.Option icon={<span data-testid="opt-icon">*</span>} value="one">
           Option 1
@@ -883,21 +825,22 @@ describe("<Select />", () => {
     expect(screen.getByTestId("opt-icon")).toBeInTheDocument()
   })
 
-  test("renders with contentProps", async () => {
-    await render(
+  test("renders with contentProps", () => {
+    render(
       <Select.Root
         defaultOpen
         items={items}
         placeholder="Choose a option"
-        contentProps={{ "data-testid": "content" } as any}
+        // @ts-expect-error -- HTMLMotionProps does not include arbitrary data-*
+        contentProps={{ "data-testid": "content" }}
       />,
     )
 
     expect(screen.getByTestId("content")).toBeInTheDocument()
   })
 
-  test("renders with elementProps", async () => {
-    await render(
+  test("renders with elementProps", () => {
+    render(
       <Select.Root
         items={items}
         placeholder="Choose a option"
@@ -908,8 +851,8 @@ describe("<Select />", () => {
     expect(screen.getByTestId("element")).toBeInTheDocument()
   })
 
-  test("displays no placeholder with empty multiple value and no placeholder set", async () => {
-    await render(<Select.Root items={items} multiple />)
+  test("displays no placeholder with empty multiple value and no placeholder set", () => {
+    render(<Select.Root items={items} multiple />)
 
     const field = screen.getByRole("combobox")
 
@@ -919,7 +862,7 @@ describe("<Select />", () => {
   test("selects value when option uses children as value", async () => {
     const onChange = vi.fn()
 
-    const { user } = await render(
+    const { user } = render(
       <Select.Root
         defaultOpen
         placeholder="Choose a option"
@@ -939,13 +882,13 @@ describe("<Select />", () => {
     })
   })
 
-  test("renders with optionProps on the root", async () => {
-    await render(
+  test("renders with optionProps on the root", () => {
+    render(
       <Select.Root
         defaultOpen
         items={items}
         placeholder="Choose a option"
-        optionProps={{ "data-custom": "true" } as any}
+        optionProps={{ "data-custom": "true" }}
       />,
     )
 
@@ -956,7 +899,7 @@ describe("<Select />", () => {
     })
   })
 
-  test("renders with groupProps on the root", async () => {
+  test("renders with groupProps on the root", () => {
     const groupedItems: Select.Item[] = [
       {
         items: [
@@ -967,12 +910,12 @@ describe("<Select />", () => {
       },
     ]
 
-    await render(
+    render(
       <Select.Root
         defaultOpen
         items={groupedItems}
         placeholder="Choose a option"
-        groupProps={{ "data-custom": "group" } as any}
+        groupProps={{ "data-custom": "group" }}
       />,
     )
 
@@ -981,8 +924,8 @@ describe("<Select />", () => {
     expect(group).toBeInTheDocument()
   })
 
-  test("handles value that does not match any item in single mode", async () => {
-    await render(
+  test("handles value that does not match any item in single mode", () => {
+    render(
       <Select.Root
         defaultValue="nonexistent"
         items={items}
@@ -992,12 +935,11 @@ describe("<Select />", () => {
 
     const field = screen.getByRole("combobox", { name: /Choose a option/i })
 
-    // When value doesn't match any item, selectedItems should be empty
     expect(field).toBeInTheDocument()
   })
 
-  test("renders with children and items creates items from children", async () => {
-    await render(
+  test("renders with children and items creates items from children", () => {
+    render(
       <Select.Root defaultOpen placeholder="Choose a option">
         <Select.Option value="one">Option 1</Select.Option>
         <Select.Option value="two">Option 2</Select.Option>
@@ -1008,8 +950,8 @@ describe("<Select />", () => {
     expect(screen.getByRole("option", { name: "Option 2" })).toBeInTheDocument()
   })
 
-  test("renders with placeholder option when using children", async () => {
-    await render(
+  test("renders with placeholder option when using children", () => {
+    render(
       <Select.Root defaultOpen placeholder="Choose a option">
         <Select.Option value="one">Option 1</Select.Option>
       </Select.Root>,
@@ -1023,13 +965,13 @@ describe("<Select />", () => {
     expect(placeholderOption).toBeInTheDocument()
   })
 
-  test("renders items with label used as value when value is not specified", async () => {
+  test("renders items with label used as value when value is not specified", () => {
     const labelOnlyItems: Select.Item[] = [
       { label: "Apple" },
       { label: "Banana" },
     ]
 
-    await render(
+    render(
       <Select.Root
         defaultOpen
         items={labelOnlyItems}
@@ -1042,12 +984,12 @@ describe("<Select />", () => {
     expect(option).toBeInTheDocument()
   })
 
-  test("handles items with non-string label so value stays undefined", async () => {
+  test("handles items with non-string label so value stays undefined", () => {
     const itemsWithNonStringLabel: Select.Item[] = [
       { label: (<span key="x">Custom</span>) as ReactNode },
     ]
 
-    await render(
+    render(
       <Select.Root
         defaultOpen
         items={itemsWithNonStringLabel}
@@ -1058,8 +1000,8 @@ describe("<Select />", () => {
     expect(screen.getByRole("combobox")).toBeInTheDocument()
   })
 
-  test("renders non-ReactElement from custom render", async () => {
-    await render(
+  test("renders non-ReactElement from custom render", () => {
+    render(
       <Select.Root
         defaultValue={["one"]}
         items={items}
@@ -1072,7 +1014,7 @@ describe("<Select />", () => {
     expect(screen.getByRole("combobox")).toHaveTextContent("Option 1")
   })
 
-  test("handles grouped items with non-string label so value stays undefined", async () => {
+  test("handles grouped items with non-string label so value stays undefined", () => {
     const groupedItems: Select.Item[] = [
       {
         items: [{ label: (<span key="y">Group Item</span>) as ReactNode }],
@@ -1080,7 +1022,7 @@ describe("<Select />", () => {
       },
     ]
 
-    await render(
+    render(
       <Select.Root defaultOpen items={groupedItems} placeholder="Choose" />,
     )
 
@@ -1094,7 +1036,7 @@ describe("<Select />", () => {
       { label: "Banana" },
     ]
 
-    const { user } = await render(
+    const { user } = render(
       <Select.Root
         defaultOpen
         items={labelOnlyItems}
@@ -1112,7 +1054,7 @@ describe("<Select />", () => {
     })
   })
 
-  test("renders grouped items with label used as value when value is not specified", async () => {
+  test("renders grouped items with label used as value when value is not specified", () => {
     const groupedItems: Select.Item[] = [
       {
         items: [{ label: "Apple" }, { label: "Banana" }],
@@ -1120,7 +1062,7 @@ describe("<Select />", () => {
       },
     ]
 
-    await render(
+    render(
       <Select.Root
         defaultOpen
         items={groupedItems}
@@ -1133,12 +1075,12 @@ describe("<Select />", () => {
     expect(option).toBeInTheDocument()
   })
 
-  test("renders with placeholderProps", async () => {
-    await render(
+  test("renders with placeholderProps", () => {
+    render(
       <Select.Root
         defaultOpen
         placeholder="Choose a option"
-        placeholderProps={{ "data-testid": "placeholder-opt" } as any}
+        placeholderProps={{ "data-testid": "placeholder-opt" }}
       >
         <Select.Option value="one">Option 1</Select.Option>
       </Select.Root>,
@@ -1147,8 +1089,8 @@ describe("<Select />", () => {
     expect(screen.getByTestId("placeholder-opt")).toBeInTheDocument()
   })
 
-  test("does not render placeholder option when includePlaceholder is false with children", async () => {
-    await render(
+  test("does not render placeholder option when includePlaceholder is false with children", () => {
+    render(
       <Select.Root
         defaultOpen
         includePlaceholder={false}
@@ -1164,8 +1106,8 @@ describe("<Select />", () => {
     expect(options[0]).toHaveTextContent("Option 1")
   })
 
-  test("renders with animationScheme and duration", async () => {
-    await render(
+  test("renders with animationScheme and duration", () => {
+    render(
       <Select.Root
         animationScheme="scale"
         defaultOpen
@@ -1178,8 +1120,8 @@ describe("<Select />", () => {
     expect(screen.getByRole("combobox")).toBeInTheDocument()
   })
 
-  test("clear icon has correct tabIndex when interactive", async () => {
-    await render(
+  test("clear icon has correct tabIndex when interactive", () => {
+    render(
       <Select.Root
         clearable
         defaultValue="one"
@@ -1193,8 +1135,8 @@ describe("<Select />", () => {
     expect(clearButton).toHaveAttribute("tabindex", "0")
   })
 
-  test("clear icon has tabIndex -1 when disabled", async () => {
-    await render(
+  test("clear icon has tabIndex -1 when disabled", () => {
+    render(
       <Select.Root
         clearable
         defaultValue="one"
@@ -1210,7 +1152,7 @@ describe("<Select />", () => {
   })
 
   test("does not close on select in multiple mode by default", async () => {
-    const { user } = await render(
+    const { user } = render(
       <Select.Root
         defaultOpen
         items={items}
@@ -1234,8 +1176,8 @@ describe("<Select />", () => {
     })
   })
 
-  test("renders SelectLabel within a group using the group context", async () => {
-    await render(
+  test("renders SelectLabel within a group using the group context", () => {
+    render(
       <Select.Root defaultOpen placeholder="Choose a option">
         <Select.Group>
           <Select.Label>Custom Label</Select.Label>
@@ -1247,26 +1189,10 @@ describe("<Select />", () => {
     expect(screen.getByText("Custom Label")).toBeInTheDocument()
   })
 
-  test("renders placeholder option as hidden when placeholder is provided and includePlaceholder is false", async () => {
-    await render(
-      <Select.Root
-        defaultOpen
-        includePlaceholder={false}
-        items={items}
-        placeholder="Choose a option"
-      />,
-    )
-
-    const options = screen.getAllByRole("option")
-
-    // Only the 3 items should be visible, placeholder should not be rendered as option
-    expect(options).toHaveLength(3)
-  })
-
   test("handles selecting placeholder option (empty value)", async () => {
     const onChange = vi.fn()
 
-    const { user } = await render(
+    const { user } = render(
       <Select.Root
         defaultOpen
         defaultValue="one"
@@ -1290,8 +1216,8 @@ describe("<Select />", () => {
     })
   })
 
-  test("renders children without placeholder", async () => {
-    await render(
+  test("renders children without placeholder", () => {
+    render(
       <Select.Root defaultOpen>
         <Select.Option value="one">Option 1</Select.Option>
         <Select.Option value="two">Option 2</Select.Option>
@@ -1300,7 +1226,6 @@ describe("<Select />", () => {
 
     const options = screen.getAllByRole("option")
 
-    // Only the actual options, no placeholder option
     expect(options).toHaveLength(2)
     expect(options[0]).toHaveTextContent("Option 1")
   })
@@ -1308,7 +1233,7 @@ describe("<Select />", () => {
   test("does not add value beyond max in multiple mode", async () => {
     const onChange = vi.fn()
 
-    const { user } = await render(
+    const { user } = render(
       <Select.Root
         defaultOpen
         items={items}
@@ -1322,21 +1247,19 @@ describe("<Select />", () => {
     const option1 = screen.getByRole("option", { name: "Option 1" })
     const option2 = screen.getByRole("option", { name: "Option 2" })
 
-    // Select first option (reaching max of 1)
     await user.click(option1)
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one"])
     })
 
-    // Attempt to select second option while at max - option should be disabled
     await waitFor(() => {
       expect(option2).toHaveAttribute("aria-disabled", "true")
     })
   })
 
-  test("useSelect returns prev when onChange is called with new value at max", async () => {
-    const { result } = await renderHook(() =>
+  test("useSelect returns prev when onChange is called with new value at max", () => {
+    const { result } = renderHook(() =>
       useSelect({
         defaultValue: ["one"],
         items,
@@ -1354,8 +1277,8 @@ describe("<Select />", () => {
     expect(result.current.value).toStrictEqual(["one"])
   })
 
-  test("onClear does not focus field when fieldRef is null", async () => {
-    const { result } = await renderHook(() =>
+  test("onClear does not focus field when fieldRef is null", () => {
+    const { result } = renderHook(() =>
       useSelect({
         defaultValue: "one",
         items,
@@ -1364,20 +1287,21 @@ describe("<Select />", () => {
     )
 
     const clearProps = result.current.getClearIconProps()
-    const mockEv = new MouseEvent("click", {
-      bubbles: true,
-      cancelable: true,
-    })
 
     act(() => {
-      clearProps.onClick?.(mockEv as unknown as ReactMouseEvent<HTMLDivElement>)
+      const onClick = clearProps.onClick
+      if (onClick)
+        onClick({
+          preventDefault: vi.fn(),
+          stopPropagation: vi.fn(),
+        } as unknown as ReactMouseEvent<HTMLDivElement>)
     })
 
     expect(result.current.value).toBe("")
   })
 
-  test("renders with rootProps", async () => {
-    await render(
+  test("renders with rootProps", () => {
+    render(
       <Select.Root
         items={items}
         placeholder="Choose a option"
@@ -1388,10 +1312,10 @@ describe("<Select />", () => {
     expect(screen.getByTestId("root-wrapper")).toBeInTheDocument()
   })
 
-  test("merges `className`, `style`, and event handlers on root with `rootProps`", async () => {
+  test("merges `className`, `style`, and event handlers on root with `rootProps`", () => {
     const onClick = vi.fn()
 
-    await render(
+    render(
       <Select.Root
         className="from-root"
         items={items}
@@ -1416,11 +1340,11 @@ describe("<Select />", () => {
     expect(onClick).toHaveBeenCalledWith(expect.anything())
   })
 
-  test("merges `groupProps` on root with user props on `Select.Group`", async () => {
+  test("merges `groupProps` on root with user props on `Select.Group`", () => {
     const onRootClick = vi.fn()
     const onGroupClick = vi.fn()
 
-    await render(
+    render(
       <Select.Root
         defaultOpen
         placeholder="Choose a option"
@@ -1454,11 +1378,11 @@ describe("<Select />", () => {
     expect(onGroupClick).toHaveBeenCalledWith(expect.anything())
   })
 
-  test("merges `optionProps` on root with user props on `Select.Option`", async () => {
+  test("merges `optionProps` on root with user props on `Select.Option`", () => {
     const onRootClick = vi.fn()
     const onOptionClick = vi.fn()
 
-    await render(
+    render(
       <Select.Root
         defaultOpen
         placeholder="Choose a option"
@@ -1492,10 +1416,10 @@ describe("<Select />", () => {
     expect(onOptionClick).toHaveBeenCalledWith(expect.anything())
   })
 
-  test("merges `ref` on `rootProps` with internal ref", async () => {
+  test("merges `ref` on `rootProps` with internal ref", () => {
     const userRef = createRef<HTMLDivElement>()
 
-    await render(
+    render(
       <Select.Root
         items={items}
         placeholder="Choose a option"

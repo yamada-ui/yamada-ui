@@ -1,6 +1,6 @@
 # Tests that do not increase coverage
 
-**Example**: Internal review miss case in yamada-ui (no public PR link available).
+**Example**: [PR #7287](https://github.com/yamada-ui/yamada-ui/pull/7287) - "test(button): recategorize and clean up browser tests"
 
 **Diff**:
 

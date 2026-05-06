@@ -6,6 +6,10 @@ describe("<Highlight />", () => {
     await a11y(<Highlight query="highlight">Highlight</Highlight>)
   })
 
+  test("sets name correctly", () => {
+    expect(Highlight.name).toBe("Highlight")
+  })
+
   test("renders HTML tag correctly", () => {
     render(
       <Highlight data-testid="highlight" query="highlight">

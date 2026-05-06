@@ -1,5 +1,4 @@
-import type { ResponsiveContainerProps } from "recharts"
-import { a11y, page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { BarChart } from "."
 
 interface Data {
@@ -15,17 +14,16 @@ const data: Data[] = [
   { date: "2026-03-01", desktop: 1600, mobile: 2600, tablet: 2200 },
 ]
 
-const responsiveContainerProps = {
-  height: 400,
-  width: 400,
-} as ResponsiveContainerProps
+const responsiveContainerProps = { height: 400, width: 400 } as NonNullable<
+  Parameters<typeof BarChart.Root>[0]["responsiveContainerProps"]
+>
 
 describe("<BarChart />", () => {
   test("sets `displayName` correctly", () => {
     expect(BarChart.Root.displayName).toBe("BarChart")
   })
 
-  test("renders component correctly", async () => {
+  test("passes a11y checks", async () => {
     await a11y(
       <BarChart.Root
         data={data}
@@ -36,8 +34,8 @@ describe("<BarChart />", () => {
     )
   })
 
-  test("renders generated bars from `series`", async () => {
-    await render(
+  test("renders generated bars from `series`", () => {
+    render(
       <BarChart.Root
         data-testid="root"
         data={data}
@@ -47,22 +45,18 @@ describe("<BarChart />", () => {
       />,
     )
 
-    const root = page.getByTestId("root")
+    const root = screen.getByTestId("root")
 
-    await expect.element(root).toHaveClass("ui-bar-chart")
-    expect(root.element().tagName).toBe("DIV")
-    await expect
-      .poll(() => root.element().querySelectorAll(".recharts-bar").length)
-      .toBe(2)
-    await expect
-      .poll(
-        () => root.element().querySelectorAll(".recharts-bar-rectangle").length,
-      )
-      .toBe(data.length * 2)
+    expect(root).toHaveClass("ui-bar-chart")
+    expect(root.tagName).toBe("DIV")
+    expect(root.querySelectorAll(".recharts-bar")).toHaveLength(2)
+    expect(root.querySelectorAll(".recharts-bar-rectangle")).toHaveLength(
+      data.length * 2,
+    )
   })
 
-  test("renders composition components instead of fallback `series`", async () => {
-    await render(
+  test("renders composition components instead of fallback `series`", () => {
+    render(
       <BarChart.Root
         data-testid="root"
         data={data}
@@ -74,15 +68,11 @@ describe("<BarChart />", () => {
       </BarChart.Root>,
     )
 
-    const root = page.getByTestId("root")
+    const root = screen.getByTestId("root")
 
-    await expect
-      .poll(() => root.element().querySelectorAll(".recharts-bar").length)
-      .toBe(1)
-    await expect
-      .poll(
-        () => root.element().querySelectorAll(".recharts-bar-rectangle").length,
-      )
-      .toBe(data.length)
+    expect(root.querySelectorAll(".recharts-bar")).toHaveLength(1)
+    expect(root.querySelectorAll(".recharts-bar-rectangle")).toHaveLength(
+      data.length,
+    )
   })
 })

@@ -15,7 +15,15 @@ const data: Data[] = [
   { date: "2026-03-01", desktop: 1600, mobile: 2600, tablet: 2200 },
 ]
 
+const responsiveContainerProps = { height: 400, width: 400 } as NonNullable<
+  Parameters<typeof ComposedChart.Root>[0]["responsiveContainerProps"]
+>
+
 describe("<ComposedChart />", () => {
+  test("sets `displayName` correctly", () => {
+    expect(ComposedChart.Root.displayName).toBe("ComposedChart")
+  })
+
   test("renders generated chart parts from `series`", () => {
     render(
       <ComposedChart.Root
@@ -26,7 +34,7 @@ describe("<ComposedChart />", () => {
           ["area", { dataKey: "tablet" }],
           ["line", { dataKey: "mobile" }],
         ]}
-        responsiveContainerProps={{ children: null, height: 400, width: 400 }}
+        responsiveContainerProps={responsiveContainerProps}
         xAxisProps={{ dataKey: "date" }}
       />,
     )

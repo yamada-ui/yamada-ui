@@ -14,8 +14,15 @@ const data: Data[] = [
 ]
 
 const RADAR_DOM_NODES_PER_SERIES = 2
+const responsiveContainerProps = { height: 400, width: 400 } as NonNullable<
+  Parameters<typeof RadarChart.Root>[0]["responsiveContainerProps"]
+>
 
 describe("<RadarChart />", () => {
+  test("sets `displayName` correctly", () => {
+    expect(RadarChart.Root.displayName).toBe("RadarChart")
+  })
+
   test("renders generated radars and default grid/angle axis", () => {
     const series: Array<{ dataKey: "downloads" | "visits" }> = [
       { dataKey: "visits" },
@@ -28,7 +35,7 @@ describe("<RadarChart />", () => {
         data={data}
         nameKey="browser"
         series={series}
-        responsiveContainerProps={{ children: null, height: 400, width: 400 }}
+        responsiveContainerProps={responsiveContainerProps}
       />,
     )
 
@@ -59,7 +66,7 @@ describe("<RadarChart />", () => {
         data={data}
         nameKey="browser"
         series={fallbackSeries}
-        responsiveContainerProps={{ children: null, height: 400, width: 400 }}
+        responsiveContainerProps={responsiveContainerProps}
       >
         {composedSeries.map((series) => (
           <RadarChart.Radar key={series.dataKey} dataKey={series.dataKey} />

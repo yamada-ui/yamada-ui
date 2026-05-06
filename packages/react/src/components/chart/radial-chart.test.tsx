@@ -12,7 +12,15 @@ const rootData: Data[] = [
   { browser: "edge", downloads: 900, visits: 1800 },
 ]
 
+const responsiveContainerProps = { height: 400, width: 400 } as NonNullable<
+  Parameters<typeof RadialChart.Root>[0]["responsiveContainerProps"]
+>
+
 describe("<RadialChart />", () => {
+  test("sets `displayName` correctly", () => {
+    expect(RadialChart.Root.displayName).toBe("RadialChart")
+  })
+
   test("renders generated radials from multiple `series` entries", () => {
     render(
       <RadialChart.Root
@@ -22,7 +30,7 @@ describe("<RadialChart />", () => {
           { dataKey: "visits", nameKey: "browser" },
           { dataKey: "downloads", nameKey: "browser" },
         ]}
-        responsiveContainerProps={{ children: null, height: 400, width: 400 }}
+        responsiveContainerProps={responsiveContainerProps}
       >
         <RadialChart.Tooltip active defaultIndex={0} />
       </RadialChart.Root>,
@@ -49,7 +57,7 @@ describe("<RadialChart />", () => {
           { dataKey: "visits", nameKey: "browser" },
           { dataKey: "downloads", nameKey: "browser" },
         ]}
-        responsiveContainerProps={{ children: null, height: 400, width: 400 }}
+        responsiveContainerProps={responsiveContainerProps}
       >
         <RadialChart.Radial dataKey="downloads" nameKey="browser" />
       </RadialChart.Root>,

@@ -14,7 +14,15 @@ const data: Data[] = [
   { date: "2026-03-01", desktop: 1600, mobile: 2600, tablet: 2200 },
 ]
 
+const responsiveContainerProps = { height: 400, width: 400 } as NonNullable<
+  Parameters<typeof AreaChart.Root>[0]["responsiveContainerProps"]
+>
+
 describe("<AreaChart />", () => {
+  test("sets `displayName` correctly", () => {
+    expect(AreaChart.Root.displayName).toBe("AreaChart")
+  })
+
   test("passes a11y checks", async () => {
     await a11y(
       <AreaChart.Root
@@ -31,7 +39,7 @@ describe("<AreaChart />", () => {
         data-testid="root"
         data={data}
         series={[{ dataKey: "desktop" }, { dataKey: "mobile" }]}
-        responsiveContainerProps={{ children: null, height: 400, width: 400 }}
+        responsiveContainerProps={responsiveContainerProps}
         xAxisProps={{ dataKey: "date" }}
       />,
     )
@@ -50,7 +58,7 @@ describe("<AreaChart />", () => {
           data-testid="root"
           data={data}
           series={[{ dataKey: "desktop" }, { dataKey: "mobile" }]}
-          responsiveContainerProps={{ children: null, height: 400, width: 400 }}
+          responsiveContainerProps={responsiveContainerProps}
           xAxisProps={{ dataKey: "date" }}
         >
           <AreaChart.Area dataKey="tablet" />
@@ -60,7 +68,7 @@ describe("<AreaChart />", () => {
           data-testid="tablet-only"
           data={data}
           series={[{ dataKey: "tablet" }]}
-          responsiveContainerProps={{ children: null, height: 400, width: 400 }}
+          responsiveContainerProps={responsiveContainerProps}
           xAxisProps={{ dataKey: "date" }}
         />
 
@@ -68,7 +76,7 @@ describe("<AreaChart />", () => {
           data-testid="desktop-only"
           data={data}
           series={[{ dataKey: "desktop" }]}
-          responsiveContainerProps={{ children: null, height: 400, width: 400 }}
+          responsiveContainerProps={responsiveContainerProps}
           xAxisProps={{ dataKey: "date" }}
         />
       </>,

@@ -14,13 +14,21 @@ const data: Data[] = [
   { date: "2026-03-01", desktop: 1600, mobile: 2600, tablet: 2200 },
 ]
 
+const responsiveContainerProps = { height: 400, width: 400 } as NonNullable<
+  Parameters<typeof BarChart.Root>[0]["responsiveContainerProps"]
+>
+
 describe("<BarChart />", () => {
+  test("sets `displayName` correctly", () => {
+    expect(BarChart.Root.displayName).toBe("BarChart")
+  })
+
   test("passes a11y checks", async () => {
     await a11y(
       <BarChart.Root
         data={data}
         series={[{ dataKey: "desktop" }, { dataKey: "mobile" }]}
-        responsiveContainerProps={{ children: null, height: 400, width: 400 }}
+        responsiveContainerProps={responsiveContainerProps}
         xAxisProps={{ dataKey: "date" }}
       />,
     )
@@ -32,7 +40,7 @@ describe("<BarChart />", () => {
         data-testid="root"
         data={data}
         series={[{ dataKey: "desktop" }, { dataKey: "mobile" }]}
-        responsiveContainerProps={{ children: null, height: 400, width: 400 }}
+        responsiveContainerProps={responsiveContainerProps}
         xAxisProps={{ dataKey: "date" }}
       />,
     )
@@ -53,7 +61,7 @@ describe("<BarChart />", () => {
         data-testid="root"
         data={data}
         series={[{ dataKey: "desktop" }, { dataKey: "mobile" }]}
-        responsiveContainerProps={{ children: null, height: 400, width: 400 }}
+        responsiveContainerProps={responsiveContainerProps}
         xAxisProps={{ dataKey: "date" }}
       >
         <BarChart.Bar dataKey="tablet" />

@@ -17,6 +17,10 @@ const childData: Data[] = [
   { browser: "opera", downloads: 700, visits: 1300 },
 ]
 
+const responsiveContainerProps = { height: 400, width: 400 } as NonNullable<
+  Parameters<typeof DonutChart.Root>[0]["responsiveContainerProps"]
+>
+
 describe("<DonutChart />", () => {
   test("passes a11y checks", async () => {
     await a11y(
@@ -24,7 +28,7 @@ describe("<DonutChart />", () => {
         data={rootData}
         series={[{ dataKey: "visits", nameKey: "browser" }]}
         withLegend
-        responsiveContainerProps={{ children: null, height: 400, width: 400 }}
+        responsiveContainerProps={responsiveContainerProps}
       />,
     )
   })
@@ -36,7 +40,7 @@ describe("<DonutChart />", () => {
         data={rootData}
         series={[{ dataKey: "visits", nameKey: "browser" }]}
         withLegend
-        responsiveContainerProps={{ children: null, height: 400, width: 400 }}
+        responsiveContainerProps={responsiveContainerProps}
       />,
     )
 
@@ -56,7 +60,7 @@ describe("<DonutChart />", () => {
         data={rootData}
         series={[{ dataKey: "visits", nameKey: "browser" }]}
         withLegend
-        responsiveContainerProps={{ children: null, height: 400, width: 400 }}
+        responsiveContainerProps={responsiveContainerProps}
       >
         <DonutChart.Donut
           data={childData}

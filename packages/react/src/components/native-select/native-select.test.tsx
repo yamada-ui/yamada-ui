@@ -17,6 +17,12 @@ describe("<NativeSelect />", () => {
     )
   })
 
+  test("sets `displayName` correctly", () => {
+    expect(NativeSelect.Root.displayName).toBe("NativeSelectRoot")
+    expect(NativeSelect.Option.displayName).toBe("NativeSelectOption")
+    expect(NativeSelect.Group.displayName).toBe("NativeSelectGroup")
+  })
+
   test("sets `className` correctly", () => {
     const { container } = render(
       <NativeSelect.Root

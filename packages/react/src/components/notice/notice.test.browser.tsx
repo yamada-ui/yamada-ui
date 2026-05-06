@@ -7,7 +7,7 @@ async function expectNoticeVisible(text: string) {
 }
 
 async function expectNoticeHidden(text: string) {
-  await expect.poll(() => page.getByText(text).query()).toBeNull()
+  await expect.element(page.getByText(text).query()).not.toBeInTheDocument()
 }
 
 describe("useNotice", () => {

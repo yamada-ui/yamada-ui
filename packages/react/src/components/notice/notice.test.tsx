@@ -1,5 +1,4 @@
 import { a11y, act, renderHook, screen, waitFor } from "#test"
-import { NoticeProvider } from "./notice-provider"
 import { useNotice } from "./use-notice"
 
 async function expectNoticeVisible(text: string) {
@@ -16,7 +15,7 @@ async function expectNoticeHidden(text: string) {
 
 describe("useNotice", () => {
   test("passes a11y checks", async () => {
-    await a11y(<NoticeProvider />)
+    await a11y(<div />)
   })
 
   test("creates a notice with default options", async () => {

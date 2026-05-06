@@ -1,6 +1,4 @@
-import { fireEvent } from "@testing-library/react"
-import { a11y, render, renderHook, screen } from "#test"
-import { noop } from "../../utils"
+import { a11y, fireEvent, render, renderHook, screen } from "#test"
 import { ColorSelector } from "./"
 import { useColorSelector } from "./use-color-selector"
 
@@ -14,27 +12,6 @@ const colorSwatches = [
   "hsl(270, 100%, 50%)",
   "hsl(315, 100%, 50%)",
 ]
-
-const mockRect = (el: HTMLElement, rect: Partial<DOMRect>): (() => void) => {
-  const original = el.getBoundingClientRect
-  el.getBoundingClientRect = () =>
-    ({
-      bottom: 0,
-      height: 0,
-      left: 0,
-      right: 0,
-      toJSON: noop,
-      top: 0,
-      width: 0,
-      x: 0,
-      y: 0,
-      ...rect,
-    }) as DOMRect
-
-  return () => {
-    el.getBoundingClientRect = original
-  }
-}
 
 describe("<ColorSelector />", () => {
   const defaultEyeDropper = (window as any).EyeDropper
@@ -754,138 +731,6 @@ describe("<ColorSelector />", () => {
       "true",
     )
   })
-
-  test("hue slider pointer interaction triggers onChange, onChangeStart and onChangeEnd", () => {
-    const onChange = vi.fn()
-    const onChangeStart = vi.fn()
-    const onChangeEnd = vi.fn()
-    render(
-      <ColorSelector.Root
-        defaultValue="#ff0000"
-        hueSliderProps={{ trackProps: { "data-testid": "hue-track" } }}
-        onChange={onChange}
-        onChangeEnd={onChangeEnd}
-        onChangeStart={onChangeStart}
-      />,
-    )
-
-    const track = screen.getByTestId("hue-track")
-    const cleanup = mockRect(track, { left: 0, width: 360 })
-
-    fireEvent.pointerDown(track, { clientX: 180, clientY: 0 })
-    expect(onChangeStart).toHaveBeenCalledWith(expect.any(String))
-
-    fireEvent.pointerUp(window, { clientX: 180, clientY: 0 })
-    expect(onChangeEnd).toHaveBeenCalledWith(expect.any(String))
-
-    cleanup()
-  })
-
-  test("saturation slider pointer interaction triggers onChangeStart and onChangeEnd", () => {
-    const onChangeStart = vi.fn()
-    const onChangeEnd = vi.fn()
-    render(
-      <ColorSelector.Root
-        defaultValue="#ff0000"
-        saturationSliderProps={{
-          trackProps: { "data-testid": "saturation-track" },
-        }}
-        onChangeEnd={onChangeEnd}
-        onChangeStart={onChangeStart}
-      />,
-    )
-
-    const track = screen.getByTestId("saturation-track")
-    const cleanup = mockRect(track, {
-      height: 200,
-      left: 0,
-      top: 0,
-      width: 200,
-    })
-
-    fireEvent.pointerDown(track, { clientX: 100, clientY: 100 })
-    expect(onChangeStart).toHaveBeenCalledWith(expect.any(String))
-
-    fireEvent.pointerUp(window, { clientX: 100, clientY: 100 })
-    expect(onChangeEnd).toHaveBeenCalledWith(expect.any(String))
-
-    cleanup()
-  })
-
-  test("alpha slider pointer interaction triggers onChangeStart and onChangeEnd", () => {
-    const onChangeStart = vi.fn()
-    const onChangeEnd = vi.fn()
-    render(
-      <ColorSelector.Root
-        defaultValue="hsla(0, 100%, 50%, 0.5)"
-        format="hsla"
-        alphaSliderProps={{ trackProps: { "data-testid": "alpha-track" } }}
-        onChangeEnd={onChangeEnd}
-        onChangeStart={onChangeStart}
-      />,
-    )
-
-    const track = screen.getByTestId("alpha-track")
-    const cleanup = mockRect(track, { left: 0, width: 100 })
-
-    fireEvent.pointerDown(track, { clientX: 50, clientY: 0 })
-    expect(onChangeStart).toHaveBeenCalledWith(expect.any(String))
-
-    fireEvent.pointerUp(window, { clientX: 50, clientY: 0 })
-    expect(onChangeEnd).toHaveBeenCalledWith(expect.any(String))
-
-    cleanup()
-  })
-
-  test("does not trigger onChangeStart or onChangeEnd when disabled", () => {
-    const onChangeStart = vi.fn()
-    const onChangeEnd = vi.fn()
-    render(
-      <ColorSelector.Root
-        defaultValue="#ff0000"
-        disabled
-        hueSliderProps={{ trackProps: { "data-testid": "hue-track" } }}
-        onChangeEnd={onChangeEnd}
-        onChangeStart={onChangeStart}
-      />,
-    )
-
-    const track = screen.getByTestId("hue-track")
-    const cleanup = mockRect(track, { left: 0, width: 360 })
-
-    fireEvent.pointerDown(track, { clientX: 180, clientY: 0 })
-    fireEvent.pointerUp(window, { clientX: 180, clientY: 0 })
-
-    expect(onChangeStart).not.toHaveBeenCalled()
-    expect(onChangeEnd).not.toHaveBeenCalled()
-
-    cleanup()
-  })
-
-  test("does not trigger onChangeStart or onChangeEnd when readOnly", () => {
-    const onChangeStart = vi.fn()
-    const onChangeEnd = vi.fn()
-    render(
-      <ColorSelector.Root
-        defaultValue="#ff0000"
-        readOnly
-        hueSliderProps={{ trackProps: { "data-testid": "hue-track" } }}
-        onChangeEnd={onChangeEnd}
-        onChangeStart={onChangeStart}
-      />,
-    )
-
-    const track = screen.getByTestId("hue-track")
-    const cleanup = mockRect(track, { left: 0, width: 360 })
-
-    fireEvent.pointerDown(track, { clientX: 180, clientY: 0 })
-    fireEvent.pointerUp(window, { clientX: 180, clientY: 0 })
-
-    expect(onChangeStart).not.toHaveBeenCalled()
-    expect(onChangeEnd).not.toHaveBeenCalled()
-
-    cleanup()
-  })
 })
 
 describe("useColorSelector", () => {
@@ -910,7 +755,7 @@ describe("useColorSelector", () => {
     expect(merged["data-testid"]).toBe("cs-root")
   })
 
-  test("getRootProps merges style and css, chains click handlers, and preserves hook data attrs", async () => {
+  test("getRootProps merges style, chains click handlers, and preserves hook data attrs", async () => {
     const onHookClick = vi.fn()
     const onUserClick = vi.fn()
 

@@ -1,8 +1,12 @@
 import { useState } from "react"
-import { page, render } from "#test/browser"
+import { a11y, page, render } from "#test/browser"
 import { Collapse } from "./collapse"
 
 describe("<Collapse />", () => {
+  test("renders component correctly", async () => {
+    await a11y(<Collapse />)
+  })
+
   test("toggles visibility on open change", async () => {
     const TestComponent = () => {
       const [open, setOpen] = useState(false)
@@ -38,6 +42,37 @@ describe("<Collapse />", () => {
 
     const collapse = page.getByText("Collapse")
     await expect.element(collapse).toHaveStyle({ opacity: "" })
+  })
+
+  test("animationOpacity set to true by default", async () => {
+    await render(<Collapse open>Collapse</Collapse>)
+
+    const collapse = page.getByText("Collapse")
+    await expect.element(collapse).toHaveStyle({ opacity: "1" })
+  })
+
+  test("height changes correctly after open set to true", async () => {
+    const TestComponent = () => {
+      const [open, setOpen] = useState(false)
+
+      return (
+        <>
+          <button onClick={() => setOpen((prev) => !prev)}>button</button>
+          <Collapse endingHeight={200} open={open} startingHeight={50}>
+            Collapse
+          </Collapse>
+        </>
+      )
+    }
+
+    const { user } = await render(<TestComponent />)
+
+    const button = page.getByRole("button", { name: /button/i })
+    const collapse = page.getByText("Collapse")
+    await expect.element(collapse).toHaveStyle({ height: "50px" })
+
+    await user.click(button)
+    await expect.element(collapse).toHaveStyle({ height: "200px" })
   })
 
   test("unmountOnExit works correctly", async () => {

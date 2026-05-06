@@ -1,10 +1,10 @@
-import { renderHook } from "#test/browser"
+import { renderHook } from "#test"
 import { useInjectVarsIntoCss, useInjectVarsIntoProps } from "./use-inject-vars"
 
 describe("useInjectVarsIntoCss", () => {
-  test("injects values into css", async () => {
+  test("injects values into css", () => {
     const css = { opacity: "1" }
-    const { result } = await renderHook(() =>
+    const { result } = renderHook(() =>
       useInjectVarsIntoCss(css, { opacity: "opacity" }),
     )
     expect(result.current).toStrictEqual({ "--opacity": "1" })
@@ -12,9 +12,9 @@ describe("useInjectVarsIntoCss", () => {
 })
 
 describe("useInjectVarsIntoProps", () => {
-  test("injects values into props", async () => {
+  test("injects values into props", () => {
     const props = { opacity: "1" }
-    const { result } = await renderHook(() =>
+    const { result } = renderHook(() =>
       useInjectVarsIntoProps(props, { opacity: "opacity" }),
     )
     expect(result.current).toStrictEqual({ "--opacity": "1" })

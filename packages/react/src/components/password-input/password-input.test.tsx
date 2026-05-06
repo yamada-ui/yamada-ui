@@ -28,6 +28,22 @@ describe("<PasswordInput />", () => {
     await a11y(<PasswordInput placeholder="password" />)
   })
 
+  test("sets `displayName` correctly", () => {
+    expect(PasswordInput.displayName).toBe("PasswordInputRoot")
+    expect(PasswordInput.name).toBe("PasswordInputRoot")
+  })
+
+  test("renders expected html elements", () => {
+    render(<PasswordInput placeholder="password" />)
+
+    const input = screen.getByPlaceholderText("password")
+    const button = screen.getByRole("button")
+
+    expect(input.tagName).toBe("INPUT")
+    expect(button.tagName).toBe("BUTTON")
+    expect(input.parentElement?.tagName).toBe("DIV")
+  })
+
   test("sets `className` correctly", () => {
     render(<PasswordInput placeholder="password" />)
 
@@ -43,6 +59,22 @@ describe("<PasswordInput />", () => {
 describe("<StrengthMeter />", () => {
   test("renders component correctly", async () => {
     await a11y(<StrengthMeter value={3} />)
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(StrengthMeter.displayName).toBe("StrengthMeterRoot")
+    expect(StrengthMeter.name).toBe("StrengthMeterRoot")
+  })
+
+  test("renders expected html elements", () => {
+    render(<StrengthMeter value={3} />)
+
+    const strengthMeter = screen.getByRole("meter")
+
+    expect(strengthMeter.tagName).toBe("DIV")
+    expect(strengthMeter.children[0]?.tagName).toBe("DIV")
+    expect(strengthMeter.children[0]?.children[0]?.tagName).toBe("DIV")
+    expect(screen.getByText("High").tagName).toBe("SPAN")
   })
 
   test("sets `className` correctly", () => {

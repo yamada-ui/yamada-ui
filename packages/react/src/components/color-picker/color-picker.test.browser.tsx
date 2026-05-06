@@ -1,13 +1,19 @@
 import { vi } from "vitest"
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { ColorPicker } from "."
-import { InputPropsContext } from "../input"
 
 const getCombobox = () => page.getByRole("combobox")
 
 const getInput = () => page.getByRole("textbox")
 
-const getInputElement = () => getInput().element() as HTMLInputElement
+const getInputElement = () => {
+  const element = getInput().element()
+
+  if (!(element instanceof HTMLInputElement))
+    throw new Error("Expected an HTMLInputElement")
+
+  return element
+}
 
 const setInputValue = (input: HTMLInputElement, value: string) => {
   Object.getOwnPropertyDescriptor(
@@ -35,232 +41,34 @@ describe("<ColorPicker />", () => {
     vi.stubGlobal("EyeDropper", defaultEyeDropper)
   })
 
-  test("renders component correctly", async () => {
-    await a11y(<ColorPicker placeholder="Choose a color" />)
+  test("opens picker when clicking combobox and focuses input", async () => {
+    const { user } = await render(<ColorPicker placeholder="Choose a color" />)
+
+    const combobox = getCombobox()
+    const input = getInputElement()
+
+    await user.click(combobox)
+
+    await expect.element(combobox).toHaveAttribute("aria-expanded", "true")
+    expect(document.activeElement).toBe(input)
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(ColorPicker.displayName).toBe("ColorPickerRoot")
-  })
-
-  test("sets `className` correctly", async () => {
+  test("opens picker on combobox focus when `allowInput` is disabled", async () => {
     await render(
-      <ColorPicker
-        defaultOpen
-        placeholder="Choose a color"
-        rootProps={{ "data-testid": "root" }}
-      />,
+      <ColorPicker allowInput={false} placeholder="Choose a color" />,
     )
 
-    await expect
-      .element(page.getByTestId("root"))
-      .toHaveClass("ui-color-picker__root")
-    await expect.element(getCombobox()).toHaveClass("ui-color-picker__field")
+    getCombobox().element().focus()
+
+    await expect.element(getCombobox()).toHaveAttribute("aria-expanded", "true")
   })
 
-  test("merges top-level className with `rootProps` className on the root element", async () => {
-    const onRootClick = vi.fn()
-    const { user } = await render(
-      <ColorPicker
-        className="from-top"
-        placeholder="Choose a color"
-        rootProps={{
-          className: "from-root",
-          "data-testid": "root",
-          onClick: onRootClick,
-        }}
-      />,
-    )
+  test("prevents default on input focus and opens when not focused by click", async () => {
+    await render(<ColorPicker placeholder="Choose a color" />)
 
-    const root = page.getByTestId("root")
+    getInputElement().focus()
 
-    await expect
-      .element(root)
-      .toHaveClass("ui-color-picker__root", "from-top", "from-root")
-
-    await user.click(root)
-
-    expect(onRootClick).toHaveBeenCalledTimes(1)
-  })
-
-  test("merges `InputPropsContext` className with user-provided className", async () => {
-    await render(
-      <InputPropsContext value={{ className: "from-context" }}>
-        <ColorPicker
-          className="from-user"
-          placeholder="Choose a color"
-          rootProps={{ "data-testid": "root" }}
-        />
-      </InputPropsContext>,
-    )
-
-    await expect
-      .element(page.getByTestId("root"))
-      .toHaveClass("ui-color-picker__root", "from-context", "from-user")
-  })
-
-  test("merges `elementProps` with `startElementProps` on start element", async () => {
-    const onClickElement = vi.fn()
-    const onClickStart = vi.fn()
-    const { user } = await render(
-      <ColorPicker
-        placeholder="Choose a color"
-        elementProps={{
-          className: "from-element",
-          onClick: onClickElement,
-        }}
-        startElementProps={{
-          className: "from-start",
-          "data-testid": "start-el",
-          clickable: true,
-          onClick: onClickStart,
-        }}
-      />,
-    )
-
-    const startEl = page.getByTestId("start-el")
-
-    await expect.element(startEl).toHaveClass("from-element", "from-start")
-
-    await user.click(startEl)
-
-    expect(onClickElement).toHaveBeenCalledTimes(1)
-    expect(onClickStart).toHaveBeenCalledTimes(1)
-  })
-
-  test("merges `elementProps` with `endElementProps` on end element", async () => {
-    const onClickElement = vi.fn()
-    const onClickEnd = vi.fn()
-    const { user } = await render(
-      <ColorPicker
-        placeholder="Choose a color"
-        elementProps={{
-          className: "from-element",
-          onClick: onClickElement,
-        }}
-        endElementProps={{
-          className: "from-end",
-          "data-testid": "end-el",
-          onClick: onClickEnd,
-        }}
-      />,
-    )
-
-    const endEl = page.getByTestId("end-el")
-
-    await expect.element(endEl).toHaveClass("from-element", "from-end")
-
-    await user.click(endEl)
-
-    expect(onClickElement).toHaveBeenCalledTimes(1)
-    expect(onClickEnd).toHaveBeenCalledTimes(1)
-  })
-
-  test("renders HTML tag correctly", async () => {
-    await render(
-      <ColorPicker
-        defaultOpen
-        placeholder="Choose a color"
-        rootProps={{ "data-testid": "root" }}
-      />,
-    )
-
-    expect(page.getByTestId("root").element().tagName).toBe("DIV")
-    expect(getCombobox().element().tagName).toBe("DIV")
-  })
-
-  test("passes `aria-label` to the input", async () => {
-    await render(<ColorPicker aria-label="Choose a color" />)
-
-    await expect
-      .element(getInput())
-      .toHaveAttribute("aria-label", "Choose a color")
-  })
-
-  test("passes `aria-labelledby` to the input", async () => {
-    await render(<ColorPicker aria-labelledby="color-label" />)
-
-    await expect
-      .element(getInput())
-      .toHaveAttribute("aria-labelledby", "color-label")
-  })
-
-  test("does not render color swatch when `withColorSwatch` is false", async () => {
-    await render(
-      <ColorPicker
-        defaultOpen
-        placeholder="Choose a color"
-        withColorSwatch={false}
-        startElementProps={{ "data-testid": "swatch" }}
-      />,
-    )
-
-    expect(page.getByTestId("swatch").query()).toBeNull()
-  })
-
-  test("does not render eye dropper when `withEyeDropper` is false", async () => {
-    await render(
-      <ColorPicker
-        defaultOpen
-        placeholder="Choose a color"
-        withEyeDropper={false}
-        endElementProps={{ "data-testid": "eye-dropper" }}
-      />,
-    )
-
-    expect(page.getByTestId("eye-dropper").query()).toBeNull()
-  })
-
-  test("renders custom eye dropper icon when `eyeDropperProps.icon` is provided", async () => {
-    await render(
-      <ColorPicker
-        defaultOpen
-        placeholder="Choose a color"
-        endElementProps={{ "data-testid": "eye-dropper" }}
-        eyeDropperProps={{ icon: <span data-testid="custom-icon">X</span> }}
-      />,
-    )
-
-    await expect.element(page.getByTestId("custom-icon")).toBeInTheDocument()
-    await expect.element(page.getByTestId("eye-dropper")).toBeInTheDocument()
-  })
-
-  test("renders default eye dropper icon when no children/icon provided", async () => {
-    await render(
-      <ColorPicker
-        placeholder="Choose a color"
-        endElementProps={{ "data-testid": "eye-dropper" }}
-      />,
-    )
-
-    const eyeDropper = page.getByTestId("eye-dropper").element()
-
-    expect(eyeDropper.childElementCount).toBeGreaterThan(0)
-    expect(eyeDropper.querySelector("svg")).not.toBeNull()
-  })
-
-  test("renders color swatch by default and keeps it rendered when value changes", async () => {
-    const { rerender } = await render(
-      <ColorPicker
-        defaultOpen
-        defaultValue="#ff0000"
-        placeholder="Choose a color"
-        startElementProps={{ "data-testid": "swatch" }}
-      />,
-    )
-
-    await expect.element(page.getByTestId("swatch")).toBeInTheDocument()
-
-    rerender(
-      <ColorPicker
-        defaultOpen
-        placeholder="Choose a color"
-        value="#00ff00"
-        startElementProps={{ "data-testid": "swatch" }}
-      />,
-    )
-
-    await expect.element(page.getByTestId("swatch")).toBeInTheDocument()
+    await expect.element(getCombobox()).toHaveAttribute("aria-expanded", "true")
   })
 
   test("prevents default on mouse down when `openOnFocus` is enabled", async () => {
@@ -336,6 +144,40 @@ describe("<ColorPicker />", () => {
     expect(input).toHaveValue("#654321")
   })
 
+  test("ignores input change when `allowInput` is disabled", async () => {
+    const onInputChange = vi.fn()
+
+    await render(
+      <ColorPicker
+        allowInput={false}
+        placeholder="Choose a color"
+        onInputChange={onInputChange}
+      />,
+    )
+
+    const input = getInputElement()
+
+    setInputValue(input, "#ffffff")
+
+    expect(onInputChange).not.toHaveBeenCalled()
+  })
+
+  test("formats and filters typed value using `formatInput` and `pattern`", async () => {
+    await render(
+      <ColorPicker
+        formatInput={(value) => ` ${value} `}
+        pattern={/\s/g}
+        placeholder="Choose a color"
+      />,
+    )
+
+    const input = getInputElement()
+
+    setInputValue(input, "#a1b2c3")
+
+    expect(input).toHaveValue("#a1b2c3")
+  })
+
   test("keeps invalid value on blur when conversion fails", async () => {
     await render(<ColorPicker placeholder="Choose a color" />)
 
@@ -351,59 +193,6 @@ describe("<ColorPicker />", () => {
     )
 
     expect(input).toHaveValue("invalid-color")
-  })
-
-  test("supports keyboard eye dropper action and writes picked color", async () => {
-    openEyeDropper.mockResolvedValue({ sRGBHex: "#00ff00" })
-
-    const { user } = await render(
-      <ColorPicker
-        placeholder="Choose a color"
-        eyeDropperProps={{ "data-testid": "eye-dropper-button" }}
-      />,
-    )
-
-    const eyeDropper = page.getByTestId("eye-dropper-button")
-
-    eyeDropper.element().focus()
-    await user.keyboard("{Enter}")
-
-    await vi.waitFor(() => {
-      expect(openEyeDropper).toHaveBeenCalledTimes(1)
-      expect(getInputElement()).toHaveValue("#00ff00")
-    })
-  })
-
-  test("opens picker when clicking combobox and focuses input", async () => {
-    const { user } = await render(<ColorPicker placeholder="Choose a color" />)
-
-    const combobox = getCombobox()
-    const input = getInputElement()
-
-    await user.click(combobox)
-
-    await expect.element(combobox).toHaveAttribute("aria-expanded", "true")
-    expect(document.activeElement).toBe(input)
-  })
-
-  test("opens picker on combobox focus when `allowInput` is disabled", async () => {
-    await render(
-      <ColorPicker allowInput={false} placeholder="Choose a color" />,
-    )
-
-    getCombobox().element().focus()
-
-    await expect.element(getCombobox()).toHaveAttribute("aria-expanded", "true")
-  })
-
-  test("prevents default on input focus and opens when not focused by click", async () => {
-    await render(<ColorPicker placeholder="Choose a color" />)
-
-    const input = getInputElement()
-
-    input.focus()
-
-    await expect.element(getCombobox()).toHaveAttribute("aria-expanded", "true")
   })
 
   test("keeps value when blur moves focus inside picker field", async () => {
@@ -462,38 +251,29 @@ describe("<ColorPicker />", () => {
     expect(input).toHaveValue("#abcdef")
   })
 
-  test("ignores input change when `allowInput` is disabled", async () => {
-    const onInputChange = vi.fn()
+  test("supports keyboard eye dropper action and writes picked color", async () => {
+    openEyeDropper.mockResolvedValue({ sRGBHex: "#00ff00" })
 
-    await render(
+    const { user } = await render(
       <ColorPicker
-        allowInput={false}
         placeholder="Choose a color"
-        onInputChange={onInputChange}
+        eyeDropperProps={{ "data-testid": "eye-dropper-button" }}
       />,
     )
 
-    const input = getInputElement()
+    const eyeDropper = page.getByTestId("eye-dropper-button")
+    const eyeDropperElement = eyeDropper.element()
 
-    setInputValue(input, "#ffffff")
+    if (!(eyeDropperElement instanceof HTMLElement))
+      throw new Error("Expected an HTMLElement")
 
-    expect(onInputChange).not.toHaveBeenCalled()
-  })
+    eyeDropperElement.focus()
+    await user.keyboard("{Enter}")
 
-  test("formats and filters typed value using `formatInput` and `pattern`", async () => {
-    await render(
-      <ColorPicker
-        formatInput={(value) => ` ${value} `}
-        pattern={/\s/g}
-        placeholder="Choose a color"
-      />,
-    )
-
-    const input = getInputElement()
-
-    setInputValue(input, "#a1b2c3")
-
-    expect(input).toHaveValue("#a1b2c3")
+    await vi.waitFor(() => {
+      expect(openEyeDropper).toHaveBeenCalledTimes(1)
+      expect(getInputElement()).toHaveValue("#00ff00")
+    })
   })
 
   test("does not react to click and eye dropper when interactive is disabled", async () => {

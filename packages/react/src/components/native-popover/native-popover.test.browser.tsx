@@ -16,18 +16,18 @@ describe("<NativePopover />", () => {
     )
   }
 
-  test("should prevent default and stop propagation when disabled", async () => {
-    await render(<Component disabled />)
+  test("should not open popover when disabled", async () => {
+    const { user } = await render(<Component disabled />)
 
     const trigger = page.getByTestId("trigger")
+    const content = page.getByTestId("content")
+
     await expect.element(trigger).toHaveAttribute("aria-disabled", "true")
+    await expect.element(content).not.toBeVisible()
 
-    const defaultPrevented = !trigger
-      .element()
-      .dispatchEvent(
-        new MouseEvent("click", { bubbles: true, cancelable: true }),
-      )
-
-    expect(defaultPrevented).toBeTruthy()
+    await expect(user.click(trigger, { timeout: 200 })).rejects.toThrow(
+      /Timeout/,
+    )
+    await expect.element(content).not.toBeVisible()
   })
 })

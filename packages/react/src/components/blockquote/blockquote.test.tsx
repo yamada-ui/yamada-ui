@@ -1,4 +1,4 @@
-import { a11y, page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { QuoteIcon } from "../icon"
 import { Blockquote } from "./"
 
@@ -19,6 +19,24 @@ describe("<Blockquote />", () => {
     )
   })
 
+  test("renders cite prop as caption when no custom BlockquoteCaption is provided", () => {
+    render(
+      <Blockquote.Root
+        data-testid="blockquote"
+        cite="Wikipedia"
+        citeUrl="https://example.com"
+        captionProps={{ "data-testid": "caption" }}
+        citeProps={{ "data-testid": "cite" }}
+      >
+        Blockquote content
+      </Blockquote.Root>,
+    )
+
+    expect(screen.getByTestId("caption")).toHaveClass("ui-blockquote__caption")
+    expect(screen.getByTestId("cite")).toHaveClass("ui-blockquote__cite")
+    expect(screen.getByText("Wikipedia")).toBeInTheDocument()
+  })
+
   test("sets `displayName` correctly", () => {
     expect(Blockquote.Root.displayName).toBe("BlockquoteRoot")
     expect(Blockquote.Cite.displayName).toBe("BlockquoteCite")
@@ -27,8 +45,8 @@ describe("<Blockquote />", () => {
     expect(Blockquote.Content.displayName).toBe("BlockquoteContent")
   })
 
-  test("sets `className` correctly", async () => {
-    await render(
+  test("sets `className` correctly", () => {
+    render(
       <Blockquote.Root
         data-testid="blockquote"
         icon={<Blockquote.Icon data-testid="icon" />}
@@ -40,47 +58,19 @@ describe("<Blockquote />", () => {
       </Blockquote.Root>,
     )
 
-    await expect
-      .element(page.getByTestId("blockquote"))
-      .toHaveClass("ui-blockquote__root")
-    await expect
-      .element(page.getByTestId("icon"))
-      .toHaveClass("ui-blockquote__icon")
-    await expect
-      .element(page.getByText("Blockquote content"))
-      .toHaveClass("ui-blockquote__content")
-    await expect
-      .element(page.getByTestId("caption"))
-      .toHaveClass("ui-blockquote__caption")
-    await expect
-      .element(page.getByText("Blockquote cite"))
-      .toHaveClass("ui-blockquote__cite")
-  })
-
-  test("renders cite prop as caption when no custom BlockquoteCaption is provided", async () => {
-    await render(
-      <Blockquote.Root
-        data-testid="blockquote"
-        cite="Wikipedia"
-        citeUrl="https://example.com"
-        captionProps={{ "data-testid": "caption" } as any}
-        citeProps={{ "data-testid": "cite" } as any}
-      >
-        Blockquote content
-      </Blockquote.Root>,
+    expect(screen.getByTestId("blockquote")).toHaveClass("ui-blockquote__root")
+    expect(screen.getByTestId("icon")).toHaveClass("ui-blockquote__icon")
+    expect(screen.getByText("Blockquote content")).toHaveClass(
+      "ui-blockquote__content",
     )
-
-    await expect
-      .element(page.getByTestId("caption"))
-      .toHaveClass("ui-blockquote__caption")
-    await expect
-      .element(page.getByTestId("cite"))
-      .toHaveClass("ui-blockquote__cite")
-    await expect.element(page.getByText("Wikipedia")).toBeInTheDocument()
+    expect(screen.getByTestId("caption")).toHaveClass("ui-blockquote__caption")
+    expect(screen.getByText("Blockquote cite")).toHaveClass(
+      "ui-blockquote__cite",
+    )
   })
 
-  test("renders HTML tag correctly", async () => {
-    await render(
+  test("renders HTML tag correctly", () => {
+    render(
       <Blockquote.Root
         data-testid="root"
         icon={<Blockquote.Icon data-testid="icon" />}
@@ -92,12 +82,10 @@ describe("<Blockquote />", () => {
       </Blockquote.Root>,
     )
 
-    expect(page.getByTestId("root").element().tagName).toBe("FIGURE")
-    expect(page.getByTestId("icon").element().tagName).toBe("svg")
-    expect(page.getByTestId("caption").element().tagName).toBe("FIGCAPTION")
-    expect(page.getByText("Blockquote content").element().tagName).toBe(
-      "BLOCKQUOTE",
-    )
-    expect(page.getByText("Blockquote cite").element().tagName).toBe("CITE")
+    expect(screen.getByTestId("root").tagName).toBe("FIGURE")
+    expect(screen.getByTestId("icon").tagName).toBe("svg")
+    expect(screen.getByTestId("caption").tagName).toBe("FIGCAPTION")
+    expect(screen.getByText("Blockquote content").tagName).toBe("BLOCKQUOTE")
+    expect(screen.getByText("Blockquote cite").tagName).toBe("CITE")
   })
 })

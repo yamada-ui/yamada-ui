@@ -13,7 +13,7 @@ describe("<NumberInput />", () => {
     await a11y(<NumberInput aria-label="Input number" />)
   })
 
-  test("should merge groupItemProps and rootProps without overwriting style", () => {
+  test("merges groupItemProps and rootProps without overwriting style", () => {
     render(
       <Group>
         <NumberInput

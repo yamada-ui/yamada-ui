@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { page, render } from "#test/browser"
+import { a11y, page, render } from "#test/browser"
 import { Button } from "../button"
 import { Modal } from "./"
 
@@ -35,6 +35,10 @@ const TestComponent: FC<Modal.RootProps> = (props) => {
 }
 
 describe("<Modal />", () => {
+  test("renders component correctly", async () => {
+    await a11y(<TestComponent open />)
+  })
+
   test("calls onCancel callback when cancel button is clicked", async () => {
     const onCancel = vi.fn()
     const { user } = await render(

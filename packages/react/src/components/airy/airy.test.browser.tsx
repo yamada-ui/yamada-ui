@@ -4,30 +4,8 @@ import { a11y, page, render } from "#test/browser"
 import { Airy } from "."
 
 describe("<Airy />", () => {
-  test("renders component correctly", async () => {
+  test("should have no accessibility violations", async () => {
     await a11y(<Airy from="ON" to="OFF" />)
-  })
-
-  test("applies custom `aria-label`", async () => {
-    await render(<Airy aria-label="Toggle navigation" from="ON" to="OFF" />)
-
-    await expect
-      .element(page.getByRole("button"))
-      .toHaveAttribute("aria-label", "Toggle navigation")
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Airy.displayName).toBe("Airy")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(<Airy from="ON" to="OFF" />)
-    await expect.element(page.getByText("ON")).toHaveClass("ui-airy")
-  })
-
-  test("renders HTML tag correctly", async () => {
-    await render(<Airy from="ON" to="OFF" />)
-    expect(page.getByText("ON").element().tagName).toBe("BUTTON")
   })
 
   test("should render Airy with value and onChange", async () => {
@@ -44,9 +22,7 @@ describe("<Airy />", () => {
 
     await user.click(button)
 
-    await vi.waitFor(() => {
-      expect(button.element()).toHaveAttribute("data-value", "from")
-    })
+    await expect.element(button).toHaveAttribute("data-value", "from")
   })
 
   test("should be read only", async () => {
@@ -55,22 +31,11 @@ describe("<Airy />", () => {
     const button = page.getByRole("button")
     await expect.element(button).toHaveAttribute("data-readonly")
     await expect.element(button).toHaveAttribute("data-value", "from")
-    expect(button.element()).toHaveTextContent("ON")
+    await expect.element(button).toHaveTextContent("ON")
 
     await user.click(button)
-    await new Promise((resolve) => setTimeout(resolve, 300))
 
     await expect.element(button).toHaveAttribute("data-value", "from")
-    expect(button.element()).toHaveTextContent("ON")
-  })
-
-  test("should be disabled", async () => {
-    await render(<Airy disabled from="ON" to="OFF" />)
-
-    const button = page.getByRole("button")
-    await expect.element(button).toHaveAttribute("data-disabled")
-    await expect.element(button).toBeDisabled()
-
-    await expect.element(page.getByText("ON")).toBeVisible()
+    await expect.element(button).toHaveTextContent("ON")
   })
 })

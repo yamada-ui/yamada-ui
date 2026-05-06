@@ -1,5 +1,5 @@
 import type { DataListItemProps } from "./"
-import { a11y, render, screen } from "#test"
+import { a11y, fireEvent, render, screen } from "#test"
 import { DataList } from "./"
 
 describe("<DataList />", () => {
@@ -35,6 +35,13 @@ describe("<DataList />", () => {
       "ui-data-list__description",
     )
     expect(screen.getByTestId("description").tagName).toBe("DD")
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(DataList.Root.displayName).toBe("DataListRoot")
+    expect(DataList.Item.displayName).toBe("DataListItem")
+    expect(DataList.Term.displayName).toBe("DataListTerm")
+    expect(DataList.Description.displayName).toBe("DataListDescription")
   })
 
   test("renders items with array terms and array descriptions", () => {
@@ -239,6 +246,82 @@ describe("<DataList />", () => {
       "context-desc",
       "item-desc",
     )
+  })
+
+  test("DataListItem merges context-level and item-level termProps for array term", () => {
+    const onContextTermClick = vi.fn()
+    const onItemTermClick = vi.fn()
+
+    render(
+      <DataList.Root
+        termProps={{
+          className: "context-term",
+          onClick: onContextTermClick,
+        }}
+      >
+        <DataList.Item
+          description="入れ替わりの魔女"
+          term={["白石うらら", "山田竜"]}
+          termProps={{
+            className: "item-term",
+            onClick: onItemTermClick,
+          }}
+        />
+      </DataList.Root>,
+    )
+
+    const firstTerm = screen.getByText("白石うらら")
+    const secondTerm = screen.getByText("山田竜")
+
+    expect(firstTerm).toHaveClass("context-term", "item-term")
+    expect(secondTerm).toHaveClass("context-term", "item-term")
+
+    fireEvent.click(firstTerm)
+    fireEvent.click(secondTerm)
+
+    expect(onContextTermClick).toHaveBeenCalledTimes(2)
+    expect(onItemTermClick).toHaveBeenCalledTimes(2)
+  })
+
+  test("DataListItem merges context-level and item-level descriptionProps for array description", () => {
+    const onContextDescriptionClick = vi.fn()
+    const onItemDescriptionClick = vi.fn()
+
+    render(
+      <DataList.Root
+        descriptionProps={{
+          className: "context-description",
+          onClick: onContextDescriptionClick,
+        }}
+      >
+        <DataList.Item
+          description={["入れ替わりの魔女", "テレポーテーション"]}
+          term="白石うらら"
+          descriptionProps={{
+            className: "item-description",
+            onClick: onItemDescriptionClick,
+          }}
+        />
+      </DataList.Root>,
+    )
+
+    const firstDescription = screen.getByText("入れ替わりの魔女")
+    const secondDescription = screen.getByText("テレポーテーション")
+
+    expect(firstDescription).toHaveClass(
+      "context-description",
+      "item-description",
+    )
+    expect(secondDescription).toHaveClass(
+      "context-description",
+      "item-description",
+    )
+
+    fireEvent.click(firstDescription)
+    fireEvent.click(secondDescription)
+
+    expect(onContextDescriptionClick).toHaveBeenCalledTimes(2)
+    expect(onItemDescriptionClick).toHaveBeenCalledTimes(2)
   })
 
   test("context termProps and descriptionProps apply to items generated from items prop", () => {

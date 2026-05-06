@@ -1,4 +1,4 @@
-import { renderHook } from "#test/browser"
+import { renderHook } from "#test"
 import {
   chainProps,
   createShouldForwardProp,
@@ -108,7 +108,7 @@ describe("mergeProps", () => {
 describe("chainProps", () => {
   test("returns identity function when no props", () => {
     const chain = chainProps()()
-    expect(chain({ a: 1 } as any)).toStrictEqual({ a: 1 })
+    expect(chain({ a: 1 })).toStrictEqual({ a: 1 })
   })
 
   test("merges single props object", () => {
@@ -194,8 +194,8 @@ describe("extractProps", () => {
 })
 
 describe("useSplitProps", () => {
-  test("splits props based on keys", async () => {
-    const { result } = await renderHook(() =>
+  test("splits props based on keys", () => {
+    const { result } = renderHook(() =>
       useSplitProps({ id: "test", color: "red", fontSize: "16px" }, [
         "color",
         "fontSize",
@@ -208,8 +208,8 @@ describe("useSplitProps", () => {
 })
 
 describe("useExtractProps", () => {
-  test("extracts props via hook", async () => {
-    const { result } = await renderHook(() =>
+  test("extracts props via hook", () => {
+    const { result } = renderHook(() =>
       useExtractProps({ color: "red", fontSize: "16px" }, ["color"]),
     )
     expect(result.current).toStrictEqual({ color: "red" })

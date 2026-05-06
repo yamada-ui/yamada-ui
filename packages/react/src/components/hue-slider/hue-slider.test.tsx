@@ -7,6 +7,13 @@ describe("<HueSlider />", () => {
     await a11y(<HueSlider.Root defaultValue={180} />)
   })
 
+  test("sets `displayName` correctly", () => {
+    expect(HueSlider.Root.displayName).toBe("HueSliderRoot")
+    expect(HueSlider.Track.displayName).toBe("HueSliderTrack")
+    expect(HueSlider.Thumb.displayName).toBe("HueSliderThumb")
+    expect(HueSlider.Overlay.displayName).toBe("HueSliderOverlay")
+  })
+
   test("sets `className` correctly", () => {
     render(
       <HueSlider.Root

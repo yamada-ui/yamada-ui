@@ -11,6 +11,34 @@ describe("<List />", () => {
     )
   })
 
+  test("sets `displayName` correctly", () => {
+    expect(List.Root.displayName).toBe("ListRoot")
+    expect(List.Item.displayName).toBe("ListItem")
+    expect(List.Icon.displayName).toBe("ListIcon")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <List.Root data-testid="list-root">
+        <List.Item>Item one</List.Item>
+      </List.Root>,
+    )
+
+    expect(screen.getByTestId("list-root")).toHaveClass("ui-list__root")
+    expect(screen.getByText("Item one")).toHaveClass("ui-list__item")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(
+      <List.Root data-testid="list-root">
+        <List.Item>Item one</List.Item>
+      </List.Root>,
+    )
+
+    expect(screen.getByTestId("list-root").tagName).toBe("UL")
+    expect(screen.getByText("Item one").tagName).toBe("LI")
+  })
+
   test("renders list with an icon", () => {
     render(
       <List.Root>

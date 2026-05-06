@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { page, render } from "#test/browser"
+import { a11y, page, render } from "#test/browser"
 import { Carousel } from "./"
 
 interface TestComponentProps extends Carousel.RootProps {}
@@ -24,6 +24,10 @@ const TestComponent: FC<TestComponentProps> = (props) => {
 }
 
 describe("<Carousel />", () => {
+  test("should pass a11y test", async () => {
+    await a11y(<TestComponent />)
+  })
+
   test("should merge root consumer props with internal props", async () => {
     const ref = vi.fn()
     const onMouseEnter = vi.fn()
@@ -87,6 +91,16 @@ describe("<Carousel />", () => {
 
     const slide1 = page.getByText("Slide 1")
     await expect.element(slide1).toHaveAttribute("data-selected")
+  })
+
+  test("should switch to correctly slide when click on indicator", async () => {
+    const { user } = await render(<TestComponent />)
+
+    await user.click(page.getByRole("tab", { name: "Go to 2 slide" }))
+
+    await expect
+      .element(page.getByText("Slide 2"))
+      .toHaveAttribute("data-selected")
   })
 
   test("should disabled next and prev button when looping is disabled", async () => {
@@ -191,27 +205,6 @@ describe("<Carousel />", () => {
     await expect
       .element(page.getByText("Slide 1"))
       .toHaveAttribute("data-selected")
-  })
-
-  test("renders custom children in CarouselIndicators", async () => {
-    await render(
-      <Carousel.Root>
-        <Carousel.List>
-          {Array.from({ length: 3 }).map((_, index) => (
-            <Carousel.Item key={index} index={index}>
-              Slide {index + 1}
-            </Carousel.Item>
-          ))}
-        </Carousel.List>
-
-        <Carousel.Indicators>
-          <button data-testid="custom-indicator">Custom</button>
-        </Carousel.Indicators>
-      </Carousel.Root>,
-    )
-
-    const customIndicator = page.getByRole("button", { name: "Custom" })
-    await expect.element(customIndicator).toBeVisible()
   })
 
   test("renders CarouselIndicators with render prop returning a valid element", async () => {

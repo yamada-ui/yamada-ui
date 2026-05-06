@@ -82,13 +82,23 @@ describe("<Carousel />", () => {
         <Carousel.PrevTrigger />
         <Carousel.NextTrigger />
 
-        <Carousel.Indicators />
+        <Carousel.Indicators>
+          {Array.from({ length: 5 }).map((_, index) => (
+            <Carousel.Indicator key={index} index={index} />
+          ))}
+        </Carousel.Indicators>
       </Carousel.Root>,
     )
 
     expect(screen.getByTestId("carousel")).toHaveClass("ui-carousel__root")
     expect(screen.getByTestId("carouselList")).toHaveClass("ui-carousel__list")
+    expect(screen.getByRole("tabpanel", { name: /^1 of / })).toHaveClass(
+      "ui-carousel__item",
+    )
     expect(screen.getByRole("tablist")).toHaveClass("ui-carousel__indicators")
+    expect(screen.getByRole("tab", { name: "Go to 1 slide" })).toHaveClass(
+      "ui-carousel__indicator",
+    )
     expect(
       screen.getByRole("button", { name: "Go to previous slide" }),
     ).toHaveClass("ui-carousel__trigger--prev")
@@ -111,13 +121,21 @@ describe("<Carousel />", () => {
         <Carousel.PrevTrigger />
         <Carousel.NextTrigger />
 
-        <Carousel.Indicators />
+        <Carousel.Indicators>
+          {Array.from({ length: 5 }).map((_, index) => (
+            <Carousel.Indicator key={index} index={index} />
+          ))}
+        </Carousel.Indicators>
       </Carousel.Root>,
     )
 
     expect(screen.getByTestId("carousel").tagName).toBe("SECTION")
     expect(screen.getByTestId("carouselList").tagName).toBe("DIV")
+    expect(screen.getByRole("tabpanel", { name: /^1 of / }).tagName).toBe("DIV")
     expect(screen.getByRole("tablist").tagName).toBe("DIV")
+    expect(screen.getByRole("tab", { name: "Go to 1 slide" }).tagName).toBe(
+      "BUTTON",
+    )
     expect(
       screen.getByRole("button", { name: "Go to previous slide" }).tagName,
     ).toBe("BUTTON")

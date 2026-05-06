@@ -1,7 +1,11 @@
-import { page, render } from "#test/browser"
+import { a11y, page, render } from "#test/browser"
 import { Pagination } from "./"
 
 describe("<Pagination />", () => {
+  test("renders component correctly", async () => {
+    await a11y(<Pagination.Root total={10} />)
+  }, 10000)
+
   test("merges `controlProps` with `controlPrevProps` without overwriting props", async () => {
     const onControlClick = vi.fn()
     const onControlPrevClick = vi.fn()

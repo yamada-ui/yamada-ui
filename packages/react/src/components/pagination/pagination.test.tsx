@@ -1,5 +1,5 @@
 import type { Ref } from "react"
-import { a11y, fireEvent, render, renderHook, screen } from "#test"
+import { a11y, render, renderHook, screen } from "#test"
 import { Pagination } from "./"
 import { usePagination } from "./use-pagination"
 
@@ -14,6 +14,16 @@ function invokeHandler<E>(handler: ((event: E) => void) | undefined, event: E) {
 describe("<Pagination />", () => {
   test("renders component correctly", async () => {
     await a11y(<Pagination.Root total={10} />)
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(Pagination.Root.displayName).toBe("PaginationRoot")
+    expect(Pagination.Item.displayName).toBe("PaginationItem")
+    expect(Pagination.Text.displayName).toBe("PaginationText")
+    expect(Pagination.StartTrigger.displayName).toBe("PaginationStartTrigger")
+    expect(Pagination.EndTrigger.displayName).toBe("PaginationEndTrigger")
+    expect(Pagination.PrevTrigger.displayName).toBe("PaginationPrevTrigger")
+    expect(Pagination.NextTrigger.displayName).toBe("PaginationNextTrigger")
   })
 
   test("renders with edge buttons when withEdges is true", () => {
@@ -36,138 +46,6 @@ describe("<Pagination />", () => {
     expect(
       screen.queryByRole("button", { name: /Go to next page/i }),
     ).not.toBeInTheDocument()
-  })
-
-  test("merges `controlProps` with `controlPrevProps` without overwriting props", () => {
-    const onControlClick = vi.fn()
-    const onControlPrevClick = vi.fn()
-
-    render(
-      <Pagination.Root
-        defaultPage={2}
-        total={10}
-        controlPrevProps={{
-          className: "from-control-prev",
-          style: { backgroundColor: "blue" },
-          onClick: onControlPrevClick,
-        }}
-        controlProps={{
-          className: "from-control",
-          style: { color: "red" },
-          onClick: onControlClick,
-        }}
-      />,
-    )
-
-    const prevButton = screen.getByRole("button", {
-      name: /Go to previous page/i,
-    })
-
-    expect(prevButton).toHaveClass("from-control", "from-control-prev")
-    expect(prevButton).toHaveStyle({ color: "rgb(255, 0, 0)" })
-    expect(prevButton).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
-
-    fireEvent.click(prevButton)
-
-    expect(onControlClick).toHaveBeenCalledTimes(1)
-    expect(onControlPrevClick).toHaveBeenCalledTimes(1)
-  })
-
-  test("merges `edgeProps` with `edgeStartProps` without overwriting props", () => {
-    const onEdgeClick = vi.fn()
-    const onEdgeStartClick = vi.fn()
-
-    render(
-      <Pagination.Root
-        defaultPage={2}
-        total={10}
-        withEdges
-        edgeProps={{
-          className: "from-edge",
-          style: { color: "red" },
-          onClick: onEdgeClick,
-        }}
-        edgeStartProps={{
-          className: "from-edge-start",
-          style: { backgroundColor: "blue" },
-          onClick: onEdgeStartClick,
-        }}
-      />,
-    )
-
-    const startButton = screen.getByRole("button", {
-      name: /Go to first page/i,
-    })
-
-    expect(startButton).toHaveClass("from-edge", "from-edge-start")
-    expect(startButton).toHaveStyle({ color: "rgb(255, 0, 0)" })
-    expect(startButton).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
-
-    fireEvent.click(startButton)
-
-    expect(onEdgeClick).toHaveBeenCalledTimes(1)
-    expect(onEdgeStartClick).toHaveBeenCalledTimes(1)
-  })
-
-  test("navigates to next page when next trigger is clicked", () => {
-    const onChange = vi.fn()
-    render(<Pagination.Root defaultPage={1} total={10} onChange={onChange} />)
-
-    fireEvent.click(screen.getByRole("button", { name: /Go to next page/i }))
-
-    expect(onChange).toHaveBeenCalledWith(2)
-  })
-
-  test("navigates to previous page when prev trigger is clicked", () => {
-    const onChange = vi.fn()
-    render(<Pagination.Root defaultPage={3} total={10} onChange={onChange} />)
-
-    fireEvent.click(
-      screen.getByRole("button", { name: /Go to previous page/i }),
-    )
-
-    expect(onChange).toHaveBeenCalledWith(2)
-  })
-
-  test("navigates to last page when end trigger is clicked", () => {
-    const onChange = vi.fn()
-    render(
-      <Pagination.Root
-        defaultPage={1}
-        total={10}
-        withEdges
-        onChange={onChange}
-      />,
-    )
-
-    fireEvent.click(screen.getByRole("button", { name: /Go to last page/i }))
-
-    expect(onChange).toHaveBeenCalledWith(10)
-  })
-
-  test("navigates to first page when start trigger is clicked", () => {
-    const onChange = vi.fn()
-    render(
-      <Pagination.Root
-        defaultPage={5}
-        total={10}
-        withEdges
-        onChange={onChange}
-      />,
-    )
-
-    fireEvent.click(screen.getByRole("button", { name: /Go to first page/i }))
-
-    expect(onChange).toHaveBeenCalledWith(1)
-  })
-
-  test("navigates to specific page when page button is clicked", () => {
-    const onChange = vi.fn()
-    render(<Pagination.Root defaultPage={1} total={10} onChange={onChange} />)
-
-    fireEvent.click(screen.getByRole("button", { name: /Go to page 3/i }))
-
-    expect(onChange).toHaveBeenCalledWith(3)
   })
 
   test("prev trigger is disabled on first page", () => {

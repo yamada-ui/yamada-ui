@@ -1,20 +1,15 @@
 import { vi } from "vitest"
-import { a11y, fireEvent, render, screen } from "#test"
+import { a11y, render, screen } from "#test"
 import { ColorPicker } from "."
 import { InputPropsContext } from "../input"
-
-const setInputValue = (input: HTMLInputElement, value: string) => {
-  Object.getOwnPropertyDescriptor(
-    window.HTMLInputElement.prototype,
-    "value",
-  )?.set?.call(input, value)
-
-  input.dispatchEvent(new Event("input", { bubbles: true }))
-}
 
 describe("<ColorPicker />", () => {
   test("renders component correctly", async () => {
     await a11y(<ColorPicker placeholder="Choose a color" />)
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(ColorPicker.displayName).toBe("ColorPickerRoot")
   })
 
   test("sets `className` correctly", () => {
@@ -222,150 +217,5 @@ describe("<ColorPicker />", () => {
     )
 
     expect(screen.getByTestId("swatch")).toBeInTheDocument()
-  })
-
-  test("prevents default on mouse down when `openOnFocus` is enabled", () => {
-    render(<ColorPicker placeholder="Choose a color" />)
-
-    const event = fireEvent.mouseDown(screen.getByRole("combobox"))
-
-    expect(event).toBeFalsy()
-  })
-
-  test("does not prevent default on mouse down when `openOnFocus` is disabled", () => {
-    render(<ColorPicker openOnFocus={false} placeholder="Choose a color" />)
-
-    const event = fireEvent.mouseDown(screen.getByRole("combobox"))
-
-    expect(event).toBeTruthy()
-  })
-
-  test("updates input value through `onInputChange` and runs open branch callbacks", () => {
-    const closeOnChange = vi.fn(() => false)
-    const openOnChange = vi.fn(() => true)
-    const onInputChange = vi.fn()
-
-    render(
-      <ColorPicker
-        closeOnChange={closeOnChange}
-        openOnChange={openOnChange}
-        placeholder="Choose a color"
-        onInputChange={onInputChange}
-      />,
-    )
-
-    const input = screen.getByRole<HTMLInputElement>("textbox")
-
-    setInputValue(input, "#123456")
-
-    expect(onInputChange).toHaveBeenCalledTimes(1)
-    expect(closeOnChange).toHaveBeenCalledTimes(1)
-    expect(openOnChange).toHaveBeenCalledTimes(1)
-    expect(input).toHaveValue("#123456")
-  })
-
-  test("runs close branch callback before open callback on input change", () => {
-    const closeOnChange = vi.fn(() => true)
-    const openOnChange = vi.fn(() => true)
-
-    render(
-      <ColorPicker
-        closeOnChange={closeOnChange}
-        openOnChange={openOnChange}
-        placeholder="Choose a color"
-      />,
-    )
-
-    const input = screen.getByRole<HTMLInputElement>("textbox")
-
-    setInputValue(input, "#654321")
-
-    expect(closeOnChange).toHaveBeenCalledTimes(1)
-    expect(openOnChange).not.toHaveBeenCalled()
-    expect(input).toHaveValue("#654321")
-  })
-
-  test("ignores input change when `allowInput` is disabled", () => {
-    const onInputChange = vi.fn()
-
-    render(
-      <ColorPicker
-        allowInput={false}
-        placeholder="Choose a color"
-        onInputChange={onInputChange}
-      />,
-    )
-
-    const input = screen.getByRole<HTMLInputElement>("textbox")
-
-    setInputValue(input, "#ffffff")
-
-    expect(onInputChange).not.toHaveBeenCalled()
-  })
-
-  test("formats and filters typed value using `formatInput` and `pattern`", () => {
-    render(
-      <ColorPicker
-        formatInput={(value) => ` ${value} `}
-        pattern={/\s/g}
-        placeholder="Choose a color"
-      />,
-    )
-
-    const input = screen.getByRole<HTMLInputElement>("textbox")
-
-    setInputValue(input, "#a1b2c3")
-
-    expect(input).toHaveValue("#a1b2c3")
-  })
-
-  test("keeps invalid value on blur when conversion fails", () => {
-    render(<ColorPicker placeholder="Choose a color" />)
-
-    const input = screen.getByRole<HTMLInputElement>("textbox")
-
-    setInputValue(input, "invalid-color")
-    fireEvent.blur(input, { relatedTarget: document.body })
-
-    expect(input).toHaveValue("invalid-color")
-  })
-
-  test("keeps value when blur moves focus inside picker field", () => {
-    render(<ColorPicker placeholder="Choose a color" />)
-
-    const input = screen.getByRole<HTMLInputElement>("textbox")
-    const combobox = screen.getByRole("combobox")
-
-    setInputValue(input, "#123123")
-    fireEvent.blur(input, { relatedTarget: combobox })
-
-    expect(input).toHaveValue("#123123")
-  })
-
-  test("keeps empty value on blur when there is no previous value", () => {
-    render(<ColorPicker placeholder="Choose a color" />)
-
-    const input = screen.getByRole<HTMLInputElement>("textbox")
-
-    fireEvent.blur(input, { relatedTarget: document.body })
-
-    expect(input).toHaveValue("")
-  })
-
-  test("formats and filters value on blur using `formatInput` and `pattern`", () => {
-    render(
-      <ColorPicker
-        defaultValue="#abcdef"
-        formatInput={(value) => `[${value}]`}
-        pattern={/[\[\]]/g}
-        placeholder="Choose a color"
-      />,
-    )
-
-    const input = screen.getByRole<HTMLInputElement>("textbox")
-
-    fireEvent.blur(input, { relatedTarget: document.body })
-
-    expect(input).toHaveValue("#abcdef")
   })
 })

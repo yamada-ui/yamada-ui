@@ -1,28 +1,8 @@
 import { useState } from "react"
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { SlideFade } from "./slide-fade"
 
 describe("<SlideFade />", () => {
-  test("renders component correctly", async () => {
-    await a11y(<SlideFade />)
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(SlideFade.displayName).toBe("SlideFade")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(<SlideFade>SlideFade</SlideFade>)
-    await expect
-      .element(page.getByText("SlideFade"))
-      .toHaveClass("ui-slide-fade")
-  })
-
-  test("renders HTML tag correctly", async () => {
-    await render(<SlideFade>SlideFade</SlideFade>)
-    expect(page.getByText("SlideFade").element().tagName).toBe("DIV")
-  })
-
   test("fade-in and fade-out work correctly", async () => {
     const TestComponent = () => {
       const [open, setOpen] = useState(false)

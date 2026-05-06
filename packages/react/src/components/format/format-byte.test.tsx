@@ -3,6 +3,20 @@ import { FormatByte } from "./format-byte"
 import { useFormatByte } from "./use-format-byte"
 
 describe("<FormatByte />", () => {
+  test("should have displayName", () => {
+    expect(FormatByte.displayName).toBe("FormatByte")
+  })
+
+  test("should have className", () => {
+    render(<FormatByte data-testid="format-byte" value={1024} />)
+    expect(screen.getByTestId("format-byte")).toHaveClass("ui-format-byte")
+  })
+
+  test("should render span tag", () => {
+    render(<FormatByte data-testid="format-byte" value={1024} />)
+    expect(screen.getByTestId("format-byte").tagName).toBe("SPAN")
+  })
+
   test("renders component correctly", async () => {
     await a11y(<FormatByte value={1024} />)
   })

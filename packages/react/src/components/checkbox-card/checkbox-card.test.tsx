@@ -1,4 +1,4 @@
-import { a11y, page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { CheckboxCard, CheckboxCardGroup } from "."
 
 const items = [
@@ -37,13 +37,12 @@ describe("<CheckboxCard />", () => {
     expect(CheckboxCardGroup.Root.displayName).toBe("CheckboxCardGroup")
   })
 
-  test("sets `className` correctly", async () => {
-    await render(<CheckboxCardGroup.Root items={items} />)
-    const checkbox = page.getByRole("checkbox", { name: "Item 1" }).element()
-    const root = checkbox.parentElement as HTMLElement
-    await expect
-      .element(page.getByRole("group"))
-      .toHaveClass("ui-checkbox-card__group")
+  test("sets `className` correctly", () => {
+    render(<CheckboxCardGroup.Root items={items} />)
+    const checkbox = screen.getByRole("checkbox", { name: /Item 1/ })
+    const root = checkbox.parentElement
+    if (!(root instanceof HTMLElement)) throw new Error("root is missing")
+    expect(screen.getByRole("group")).toHaveClass("ui-checkbox-card__group")
     expect(root).toHaveClass("ui-checkbox-card__root")
     expect(root.children[1]).toHaveClass("ui-checkbox-card__indicator")
     expect(root.children[2]).toHaveClass("ui-checkbox-card__label")
@@ -51,11 +50,12 @@ describe("<CheckboxCard />", () => {
     expect(root.children[4]).toHaveClass("ui-checkbox-card__addon")
   })
 
-  test("renders HTML tag correctly", async () => {
-    await render(<CheckboxCardGroup.Root items={items} />)
-    const checkbox = page.getByRole("checkbox", { name: "Item 1" }).element()
-    const root = checkbox.parentElement as HTMLElement
-    expect(page.getByRole("group").element().tagName).toBe("DIV")
+  test("renders HTML tag correctly", () => {
+    render(<CheckboxCardGroup.Root items={items} />)
+    const checkbox = screen.getByRole("checkbox", { name: /Item 1/ })
+    const root = checkbox.parentElement
+    if (!(root instanceof HTMLElement)) throw new Error("root is missing")
+    expect(screen.getByRole("group").tagName).toBe("DIV")
     expect(root.tagName).toBe("LABEL")
     expect(checkbox.tagName).toBe("INPUT")
     expect(root.children[1]?.tagName).toBe("DIV")
@@ -64,8 +64,8 @@ describe("<CheckboxCard />", () => {
     expect(root.children[4]?.tagName).toBe("SPAN")
   })
 
-  test("renders label, description, and addon via props", async () => {
-    await render(
+  test("renders label, description, and addon via props", () => {
+    render(
       <CheckboxCard.Root
         addon="Test Addon"
         description="Test Description"
@@ -74,13 +74,13 @@ describe("<CheckboxCard />", () => {
       />,
     )
 
-    await expect.element(page.getByText("Test Label")).toBeInTheDocument()
-    await expect.element(page.getByText("Test Description")).toBeInTheDocument()
-    await expect.element(page.getByText("Test Addon")).toBeInTheDocument()
+    expect(screen.getByText("Test Label")).toBeInTheDocument()
+    expect(screen.getByText("Test Description")).toBeInTheDocument()
+    expect(screen.getByText("Test Addon")).toBeInTheDocument()
   })
 
-  test("renders without indicator when withIndicator is false", async () => {
-    await render(
+  test("renders without indicator when withIndicator is false", () => {
+    render(
       <CheckboxCard.Root
         label="No Indicator"
         value="test"
@@ -88,9 +88,10 @@ describe("<CheckboxCard />", () => {
       />,
     )
 
-    await expect.element(page.getByText("No Indicator")).toBeInTheDocument()
-    const checkbox = page.getByRole("checkbox").element()
-    const indicator = checkbox.parentElement?.querySelector("[data-indicator]")
+    expect(screen.getByText("No Indicator")).toBeInTheDocument()
+    const checkbox = screen.getByRole("checkbox")
+    const indicator =
+      checkbox.parentElement?.querySelector("[data-indicator]") ?? null
     expect(indicator).toBeNull()
   })
 })

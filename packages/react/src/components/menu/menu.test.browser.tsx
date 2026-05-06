@@ -2,9 +2,10 @@ import type { ReactNode } from "react"
 import type { UseMenuGroupProps, UseMenuItemProps } from "./use-menu"
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import { useState } from "react"
-import { render } from "#test/browser"
+import { a11y, render } from "#test/browser"
 import { Button } from "../button"
 import { Menu } from "./"
+import { fullItems } from "./menu.test.fixtures"
 import { useMenuGroup, useMenuItem } from "./use-menu"
 
 interface TestMenuGroupProps extends UseMenuGroupProps {
@@ -39,45 +40,19 @@ const TestMenuItem = ({
   return <div {...getProps(getItemProps)}>{children}</div>
 }
 
-const items: Menu.Item[] = [
-  { label: "Menu 1", value: "menu-1" },
-  { label: "Menu 2", value: "menu-2" },
-  { label: "Menu 3", value: "menu-3" },
-  { type: "separator" },
-  {
-    items: [
-      { label: "Menu 4", value: "menu-4" },
-      { label: "Menu 5", value: "menu-5" },
-      { label: "Menu 6", value: "menu-6" },
-    ],
-    label: "Group",
-    labelProps: { "data-testid": "label" },
-  },
-]
-
-const itemsWithRadioGroup: Menu.Item[] = [
-  {
-    type: "radio",
-    items: [
-      { label: "Option 1", value: "option-1" },
-      { label: "Option 2", value: "option-2" },
-      { label: "Option 3", value: "option-3" },
-    ],
-  },
-]
-
-const itemsWithCheckboxGroup: Menu.Item[] = [
-  {
-    type: "checkbox",
-    items: [
-      { label: "Option 1", value: "option-1" },
-      { label: "Option 2", value: "option-2" },
-      { label: "Option 3", value: "option-3" },
-    ],
-  },
-]
-
 describe("<Menu />", () => {
+  test("passes a11y checks when open", async () => {
+    await a11y(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content items={fullItems} />
+      </Menu.Root>,
+    )
+  })
+
   test("renders full items config with separator, radio, checkbox, and group", async () => {
     await render(
       <Menu.Root defaultOpen>
@@ -85,15 +60,7 @@ describe("<Menu />", () => {
           <Button>Menu</Button>
         </Menu.Trigger>
 
-        <Menu.Content
-          items={[
-            ...items,
-            { type: "separator" },
-            ...itemsWithRadioGroup,
-            { type: "separator" },
-            ...itemsWithCheckboxGroup,
-          ]}
-        />
+        <Menu.Content items={fullItems} />
       </Menu.Root>,
     )
 

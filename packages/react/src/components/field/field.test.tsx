@@ -8,6 +8,13 @@ describe("<Field />", () => {
     await a11y(<Field.Root />)
   })
 
+  test("Field sets `displayName` correctly", () => {
+    expect(Field.Root.displayName).toBe("FieldRoot")
+    expect(Field.Label.displayName).toBe("FieldLabel")
+    expect(Field.HelperMessage.displayName).toBe("FieldHelperMessage")
+    expect(Field.ErrorMessage.displayName).toBe("FieldErrorMessage")
+  })
+
   test("Field sets `className` correctly", () => {
     const { rerender } = render(
       <Field.Root data-testid="root">
@@ -30,6 +37,30 @@ describe("<Field />", () => {
     )
 
     expect(screen.getByTestId("error")).toHaveClass("ui-field__error-message")
+  })
+
+  test("Field renders HTML tag correctly", () => {
+    const { rerender } = render(
+      <Field.Root data-testid="root">
+        <Field.Label>Label</Field.Label>
+        <Field.HelperMessage>Helper</Field.HelperMessage>
+        <Field.ErrorMessage>Error</Field.ErrorMessage>
+      </Field.Root>,
+    )
+
+    expect(screen.getByTestId("root").tagName).toBe("DIV")
+    expect(screen.getByText("Label").tagName).toBe("LABEL")
+    expect(screen.getByText("Helper").tagName).toBe("SPAN")
+
+    rerender(
+      <Field.Root data-testid="root" invalid>
+        <Field.Label>Label</Field.Label>
+        <Field.HelperMessage>Helper</Field.HelperMessage>
+        <Field.ErrorMessage>Error</Field.ErrorMessage>
+      </Field.Root>,
+    )
+
+    expect(screen.getByText("Error").tagName).toBe("SPAN")
   })
 
   test("should render form control", () => {

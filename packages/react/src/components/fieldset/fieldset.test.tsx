@@ -70,4 +70,38 @@ describe("<Fieldset />", () => {
     expect(error).toHaveClass("ui-fieldset__error-message")
     expect(error.tagName).toBe("SPAN")
   })
+
+  test("renders legend and helperMessage via props", () => {
+    render(
+      <Fieldset.Root
+        data-testid="root"
+        helperMessage="Helper text"
+        legend="Legend text"
+      >
+        Content
+      </Fieldset.Root>,
+    )
+
+    const root = screen.getByTestId("root")
+    expect(root).toHaveClass("ui-fieldset__root")
+    expect(root.tagName).toBe("FIELDSET")
+
+    const legend = screen.getByText("Legend text")
+    expect(legend).toHaveClass("ui-fieldset__legend")
+    expect(legend.tagName).toBe("LEGEND")
+
+    const helper = screen.getByText("Helper text")
+    expect(helper).toHaveClass("ui-fieldset__helper-message")
+    expect(helper.tagName).toBe("SPAN")
+  })
+
+  test("does not render error message when invalid and `errorMessage` prop is not provided", () => {
+    const { container } = render(
+      <Fieldset.Root invalid legend="Legend">
+        Content
+      </Fieldset.Root>,
+    )
+
+    expect(container.querySelector(".ui-fieldset__error-message")).toBeNull()
+  })
 })

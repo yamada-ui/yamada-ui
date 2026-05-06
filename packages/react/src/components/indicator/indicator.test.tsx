@@ -10,6 +10,10 @@ describe("<Indicator />", () => {
     )
   })
 
+  test("sets displayName", () => {
+    expect(Indicator.displayName).toBe("IndicatorRoot")
+  })
+
   test("renders label and applies slot classNames", () => {
     render(
       <Indicator label="New">

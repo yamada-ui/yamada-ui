@@ -117,7 +117,7 @@ describe("<Breadcrumb />", () => {
     )
   })
 
-  test("if boundaries is 0 or undefined, all items are rendered", () => {
+  test("is truncated when only one boundary is 1 and renders all items when both boundaries are 0", () => {
     const items: Breadcrumb.Item[] = [
       { href: "/1", label: "サイヤ人編" },
       { href: "/2", label: "ナメック星編" },
@@ -264,11 +264,12 @@ describe("useBreadcrumb getRootProps", () => {
     const merged = result.current.getRootProps({
       onClick: onClickFromUser,
     })
+    const event = Object.create(null)
 
-    merged.onClick?.(Object.create(null))
+    merged.onClick?.(event)
 
-    expect(onClickFromHook).toHaveBeenCalledTimes(1)
-    expect(onClickFromUser).toHaveBeenCalledTimes(1)
+    expect(onClickFromHook).toHaveBeenCalledWith(event)
+    expect(onClickFromUser).toHaveBeenCalledWith(event)
   })
 
   test("merges refs from hook props and user props", () => {

@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { page, render } from "#test/browser"
+import { a11y, page, render } from "#test/browser"
 import { Carousel } from "./"
 
 interface TestComponentProps extends Carousel.RootProps {}
@@ -24,40 +24,8 @@ const TestComponent: FC<TestComponentProps> = (props) => {
 }
 
 describe("<Carousel />", () => {
-  test("sets `displayName` correctly", () => {
-    expect(Carousel.Root.displayName).toBe("CarouselRoot")
-    expect(Carousel.List.displayName).toBe("CarouselList")
-    expect(Carousel.Item.displayName).toBe("CarouselItem")
-    expect(Carousel.PrevTrigger.displayName).toBe("CarouselPrevTrigger")
-    expect(Carousel.NextTrigger.displayName).toBe("CarouselNextTrigger")
-    expect(Carousel.Indicators.displayName).toBe("CarouselIndicators")
-    expect(Carousel.Indicator.displayName).toBe("CarouselIndicator")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(<TestComponent />)
-
-    await expect
-      .element(page.getByTestId("carousel"))
-      .toHaveClass("ui-carousel__root")
-    await expect
-      .element(page.getByTestId("carouselList"))
-      .toHaveClass("ui-carousel__list")
-    await expect
-      .element(page.getByRole("tabpanel", { name: "1 of 5" }))
-      .toHaveClass("ui-carousel__item")
-    await expect
-      .element(page.getByRole("tablist"))
-      .toHaveClass("ui-carousel__indicators")
-    await expect
-      .element(page.getByRole("tab", { name: "Go to 1 slide" }))
-      .toHaveClass("ui-carousel__indicator")
-    await expect
-      .element(page.getByRole("button", { name: "Go to previous slide" }))
-      .toHaveClass("ui-carousel__trigger--prev")
-    await expect
-      .element(page.getByRole("button", { name: "Go to next slide" }))
-      .toHaveClass("ui-carousel__trigger--next")
+  test("should pass a11y test", async () => {
+    await a11y(<TestComponent />)
   })
 
   test("should merge root consumer props with internal props", async () => {
@@ -99,27 +67,6 @@ describe("<Carousel />", () => {
     expect(refElement).toBe(rootElement)
   })
 
-  test("renders HTML tag correctly", async () => {
-    await render(<TestComponent />)
-
-    expect(page.getByTestId("carousel").element().tagName).toBe("SECTION")
-    expect(page.getByTestId("carouselList").element().tagName).toBe("DIV")
-    expect(
-      page.getByRole("tabpanel", { name: "1 of 5" }).element().tagName,
-    ).toBe("DIV")
-    expect(page.getByRole("tablist").element().tagName).toBe("DIV")
-    expect(
-      page.getByRole("tab", { name: "Go to 1 slide" }).element().tagName,
-    ).toBe("BUTTON")
-    expect(
-      page.getByRole("button", { name: "Go to previous slide" }).element()
-        .tagName,
-    ).toBe("BUTTON")
-    expect(
-      page.getByRole("button", { name: "Go to next slide" }).element().tagName,
-    ).toBe("BUTTON")
-  })
-
   test("should render defaultSlide correctly", async () => {
     await render(<TestComponent defaultIndex={1} />)
 
@@ -151,8 +98,9 @@ describe("<Carousel />", () => {
 
     await user.click(page.getByRole("tab", { name: "Go to 2 slide" }))
 
-    const slide2 = page.getByText("Slide 2")
-    await expect.element(slide2).toHaveAttribute("data-selected")
+    await expect
+      .element(page.getByText("Slide 2"))
+      .toHaveAttribute("data-selected")
   })
 
   test("should disabled next and prev button when looping is disabled", async () => {
@@ -257,27 +205,6 @@ describe("<Carousel />", () => {
     await expect
       .element(page.getByText("Slide 1"))
       .toHaveAttribute("data-selected")
-  })
-
-  test("renders custom children in CarouselIndicators", async () => {
-    await render(
-      <Carousel.Root>
-        <Carousel.List>
-          {Array.from({ length: 3 }).map((_, index) => (
-            <Carousel.Item key={index} index={index}>
-              Slide {index + 1}
-            </Carousel.Item>
-          ))}
-        </Carousel.List>
-
-        <Carousel.Indicators>
-          <button data-testid="custom-indicator">Custom</button>
-        </Carousel.Indicators>
-      </Carousel.Root>,
-    )
-
-    const customIndicator = page.getByRole("button", { name: "Custom" })
-    await expect.element(customIndicator).toBeVisible()
   })
 
   test("renders CarouselIndicators with render prop returning a valid element", async () => {

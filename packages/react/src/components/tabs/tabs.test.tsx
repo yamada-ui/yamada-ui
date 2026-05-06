@@ -1,6 +1,7 @@
 import type { FC, PropsWithChildren } from "react"
 import type { UseTabsProps } from "./use-tabs"
-import { act, renderHook } from "#test"
+import { a11y, act, renderHook } from "#test"
+import { Tabs } from "./"
 import {
   TabDescendantsContext,
   TabPanelDescendantsContext,
@@ -9,6 +10,23 @@ import {
   useTabPanel,
   useTabs,
 } from "./use-tabs"
+
+const items: Tabs.Item[] = [
+  { panel: "This is home tab", tab: "Home" },
+  { panel: "This is about tab", tab: "About" },
+  { panel: "This is contact tab", tab: "Contact" },
+]
+
+interface TestComponentProps extends Tabs.RootProps {}
+
+const TestComponent: FC<TestComponentProps> = (props) => {
+  return (
+    <Tabs.Root data-testid="tabs" items={items} {...props}>
+      <Tabs.List />
+      <Tabs.Panels />
+    </Tabs.Root>
+  )
+}
 
 const createTabsWrapper = (props: UseTabsProps = {}): FC<PropsWithChildren> => {
   const Wrapper: FC<PropsWithChildren> = ({ children }) => {
@@ -49,6 +67,12 @@ const createTabsWrapper = (props: UseTabsProps = {}): FC<PropsWithChildren> => {
 
   return Wrapper
 }
+
+describe("<Tabs />", () => {
+  test("passes a11y checks", async () => {
+    await a11y(<TestComponent />)
+  })
+})
 
 describe("useTabs / useTab / useTabPanel", () => {
   test("merges className and style while keeping getter precedence in useTabs.getRootProps", () => {

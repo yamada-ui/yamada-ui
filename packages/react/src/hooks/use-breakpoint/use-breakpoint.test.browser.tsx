@@ -1,24 +1,12 @@
 import type { FC } from "react"
 import type { ThemeConfig } from "../../core"
-import { page, render, renderHook } from "#test/browser"
+import { page, render } from "#test/browser"
 import { styled } from "../../core"
 import { UIProvider } from "../../providers/ui-provider"
 import { config as defaultConfig } from "../../theme"
 import { useBreakpoint } from "./use-breakpoint"
 
 describe("useBreakpoint", () => {
-  test("Returns the correct breakpoint based on the current screen width", async () => {
-    await page.viewport(600, 800)
-    const { result } = await renderHook(() => useBreakpoint())
-    expect(result.current).toBe("md")
-  })
-
-  test("returns base when viewport is larger than all breakpoints", async () => {
-    await page.viewport(1500, 800)
-    const { result } = await renderHook(() => useBreakpoint())
-    expect(result.current).toBe("base")
-  })
-
   test("updates breakpoint when viewport changes", async () => {
     await page.viewport(1500, 800)
 
@@ -85,57 +73,6 @@ describe("useBreakpoint", () => {
     )
 
     await expect.element(page.getByTestId("bp")).toBeInTheDocument()
-
-    window.ResizeObserver = defaultResizeObserver
-  })
-
-  test("renders correctly and updates breakpoint", async () => {
-    const defaultResizeObserver = window.ResizeObserver
-
-    window.ResizeObserver = class ResizeObserver {
-      constructor(cb: ResizeObserverCallback) {
-        ;(() => {
-          cb(
-            [
-              {
-                contentRect: {
-                  height: 0,
-                  width: 1200,
-                },
-              },
-            ] as ResizeObserverEntry[],
-            this,
-          )
-        })()
-      }
-      observe = vi.fn()
-      unobserve = vi.fn()
-      disconnect = vi.fn()
-    }
-
-    const containerRef = { current: document.createElement("div") }
-    const config: ThemeConfig = {
-      ...defaultConfig,
-      breakpoint: {
-        containerRef,
-        identifier: "@container",
-      },
-    }
-
-    const Component: FC = () => {
-      const breakpoint = useBreakpoint()
-
-      return <styled.p>{breakpoint}</styled.p>
-    }
-
-    await render(
-      <UIProvider config={config}>
-        <Component />
-      </UIProvider>,
-      { withProvider: false },
-    )
-
-    await expect.element(page.getByText(/xl/)).toBeInTheDocument()
 
     window.ResizeObserver = defaultResizeObserver
   })

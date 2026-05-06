@@ -1,4 +1,4 @@
-import { renderHook } from "#test/browser"
+import { act, renderHook } from "#test"
 import { useClipboard } from "./"
 
 describe("useClipboard", () => {
@@ -55,72 +55,54 @@ describe("useClipboard", () => {
     })
   })
 
-  test("copied is false initially", async () => {
-    const { result } = await renderHook(() => useClipboard())
+  test("copied is false initially", () => {
+    const { result } = renderHook(() => useClipboard())
     expect(result.current.copied).toBeFalsy()
   })
 
-  test("copied becomes true when text is copied", async () => {
-    const { act, result } = await renderHook(() => useClipboard())
-    await act(() => {
+  test("copied becomes true when text is copied", () => {
+    const { result } = renderHook(() => useClipboard())
+    act(() => {
       result.current.onCopy("Test Text")
     })
     expect(result.current.copied).toBeTruthy()
   })
 
-  test("copied returns to false after the default timeout", async () => {
-    const { act, result } = await renderHook(() =>
-      useClipboard("", { timeout: 100 }),
-    )
-    await act(() => {
+  test("copied returns to false after the specified timeout", () => {
+    const { result } = renderHook(() => useClipboard("", { timeout: 100 }))
+    act(() => {
       result.current.onCopy("Test Text")
     })
     expect(result.current.copied).toBeTruthy()
 
-    await act(() => vi.advanceTimersByTime(100))
+    act(() => vi.advanceTimersByTime(100))
 
     expect(result.current.copied).toBeFalsy()
   })
 
-  test("copied returns to false after the specified timeout", async () => {
-    const { act, result } = await renderHook(() =>
-      useClipboard("", { timeout: 100 }),
-    )
-    await act(() => {
+  test("copied returns to false after the specified timeout with number", () => {
+    const { result } = renderHook(() => useClipboard("", 100))
+    act(() => {
       result.current.onCopy("Test Text")
     })
     expect(result.current.copied).toBeTruthy()
 
-    await act(() => vi.advanceTimersByTime(100))
+    act(() => vi.advanceTimersByTime(100))
 
     expect(result.current.copied).toBeFalsy()
   })
 
-  test("copied returns to false after the specified timeout with number", async () => {
-    const { act, result } = await renderHook(() => useClipboard("", 100))
-    await act(() => {
-      result.current.onCopy("Test Text")
-    })
-    expect(result.current.copied).toBeTruthy()
-
-    await act(() => vi.advanceTimersByTime(100))
-
-    expect(result.current.copied).toBeFalsy()
-  })
-
-  test("value is updated when new value is copied", async () => {
-    const { act, result } = await renderHook(() => useClipboard())
-    await act(() => {
+  test("value is updated when new value is copied", () => {
+    const { result } = renderHook(() => useClipboard())
+    act(() => {
       result.current.onCopy("New Text")
     })
     expect(result.current.value).toBe("New Text")
   })
 
-  test("If a non-string value is attempted to be copied, the current value is copied", async () => {
-    const { act, result } = await renderHook(() =>
-      useClipboard("Initial Value"),
-    )
-    await act(() => {
+  test("If a non-string value is attempted to be copied, the current value is copied", () => {
+    const { result } = renderHook(() => useClipboard("Initial Value"))
+    act(() => {
       result.current.onCopy({ obj: "object" })
     })
     expect(result.current.value).toBe("Initial Value")

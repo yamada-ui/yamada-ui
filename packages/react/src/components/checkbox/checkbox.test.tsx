@@ -50,6 +50,11 @@ describe("<Checkbox />", () => {
     expect(screen.getByRole("checkbox")).toHaveAttribute("tabindex", "-1")
   })
 
+  test("sets `displayName` correctly", () => {
+    expect(Checkbox.displayName).toBe("CheckboxRoot")
+    expect(CheckboxGroup.Root.displayName).toBe("CheckboxGroup")
+  })
+
   test("sets `className` correctly", () => {
     render(<CheckboxGroup.Root items={items} />)
 
@@ -63,6 +68,18 @@ describe("<Checkbox />", () => {
     expect(checkbox?.parentElement?.children[2]).toHaveClass(
       "ui-checkbox__label",
     )
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<CheckboxGroup.Root items={items} />)
+
+    const checkbox = screen.getAllByRole("checkbox")[0]
+
+    expect(screen.getByRole("group").tagName).toBe("DIV")
+    expect(checkbox?.parentElement?.tagName).toBe("LABEL")
+    expect(checkbox?.tagName).toBe("INPUT")
+    expect(checkbox?.parentElement?.children[1]?.tagName).toBe("DIV")
+    expect(checkbox?.parentElement?.children[2]?.tagName).toBe("SPAN")
   })
 
   test("merges root props on Checkbox without overwriting className, style, or ref", () => {
@@ -193,6 +210,7 @@ describe("<CheckboxGroup />", () => {
     expect(checkboxes[0]).toBeChecked()
     expect(checkboxes[1]).toBeChecked()
     expect(checkboxes[2]).not.toBeChecked()
+    expect(checkboxes[2]).toBeDisabled()
     expect(checkboxes[2]).toHaveAttribute("aria-disabled", "true")
   })
 
@@ -223,6 +241,7 @@ describe("<CheckboxGroup />", () => {
 
     const checkboxes = screen.getAllByRole("checkbox")
 
+    expect(checkboxes[2]).toBeDisabled()
     expect(checkboxes[2]).toHaveAttribute("aria-disabled", "true")
     fireEvent.click(checkboxes[2]!)
     expect(onChange).not.toHaveBeenCalled()

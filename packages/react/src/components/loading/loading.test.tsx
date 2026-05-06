@@ -321,8 +321,8 @@ describe("<Loading.Suspense />", () => {
     await screen.findByTestId("child")
   })
 
-  test("renders with custom loadingScheme", () => {
-    const { SuspendingChild } = createSuspendingChild()
+  test("renders with custom loadingScheme", async () => {
+    const { resolve, SuspendingChild } = createSuspendingChild()
 
     render(
       <Suspense loadingScheme="dots">
@@ -331,5 +331,8 @@ describe("<Loading.Suspense />", () => {
     )
 
     expect(document.querySelector("svg[data-loading]")).toBeInTheDocument()
+
+    resolve("loaded")
+    await screen.findByTestId("child")
   })
 })

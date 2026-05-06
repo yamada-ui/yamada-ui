@@ -1,5 +1,5 @@
 import type * as Utils from "../../utils"
-import { render } from "#test/browser"
+import { render } from "#test"
 import {
   ColorModeScript,
   getStorageScript,
@@ -96,26 +96,26 @@ describe("ColorModeScript", () => {
     mockCreatedDom.mockReturnValue(true)
   })
 
-  test("renders a script tag during SSR", async () => {
+  test("renders a script tag during SSR", () => {
     mockCreatedDom.mockReturnValue(false)
-    const { container } = await render(<ColorModeScript />, {
+    const { container } = render(<ColorModeScript />, {
       withProvider: false,
     })
     const script = container.querySelector("script")
     expect(script).toBeTruthy()
   })
 
-  test("renders with nonce during SSR", async () => {
+  test("renders with nonce during SSR", () => {
     mockCreatedDom.mockReturnValue(false)
-    const { container } = await render(<ColorModeScript nonce="test-nonce" />, {
+    const { container } = render(<ColorModeScript nonce="test-nonce" />, {
       withProvider: false,
     })
     const script = container.querySelector("script")
     expect(script?.getAttribute("nonce")).toBe("test-nonce")
   })
 
-  test("returns null when DOM is available", async () => {
-    const { container } = await render(<ColorModeScript />, {
+  test("returns null when DOM is available", () => {
+    const { container } = render(<ColorModeScript />, {
       withProvider: false,
     })
     const script = container.querySelector("script")
@@ -129,29 +129,26 @@ describe("ThemeSchemeScript", () => {
     mockCreatedDom.mockReturnValue(true)
   })
 
-  test("renders a script tag during SSR", async () => {
+  test("renders a script tag during SSR", () => {
     mockCreatedDom.mockReturnValue(false)
-    const { container } = await render(<ThemeSchemeScript />, {
+    const { container } = render(<ThemeSchemeScript />, {
       withProvider: false,
     })
     const script = container.querySelector("script")
     expect(script).toBeTruthy()
   })
 
-  test("renders with nonce during SSR", async () => {
+  test("renders with nonce during SSR", () => {
     mockCreatedDom.mockReturnValue(false)
-    const { container } = await render(
-      <ThemeSchemeScript nonce="test-nonce" />,
-      {
-        withProvider: false,
-      },
-    )
+    const { container } = render(<ThemeSchemeScript nonce="test-nonce" />, {
+      withProvider: false,
+    })
     const script = container.querySelector("script")
     expect(script?.getAttribute("nonce")).toBe("test-nonce")
   })
 
-  test("returns null when DOM is available", async () => {
-    const { container } = await render(<ThemeSchemeScript />, {
+  test("returns null when DOM is available", () => {
+    const { container } = render(<ThemeSchemeScript />, {
       withProvider: false,
     })
     const script = container.querySelector("script")

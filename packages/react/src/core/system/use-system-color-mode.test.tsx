@@ -1,4 +1,4 @@
-import { renderHook } from "#test/browser"
+import { renderHook } from "#test"
 import { useSystemColorMode } from "./use-system-color-mode"
 
 const mockMatchMedia = (matches = false) => {
@@ -22,33 +22,33 @@ describe("useSystemColorMode", () => {
     mockMatchMedia(false)
   })
 
-  test("returns system color mode", async () => {
-    const { result } = await renderHook(() =>
+  test("returns system color mode", () => {
+    const { result } = renderHook(() =>
       useSystemColorMode({ defaultColorMode: "light" }),
     )
     expect(result.current.systemColorMode).toBeDefined()
     expect(["light", "dark"]).toContain(result.current.systemColorMode)
   })
 
-  test("getSystemColorMode returns light when prefers light", async () => {
+  test("getSystemColorMode returns light when prefers light", () => {
     mockMatchMedia(false)
-    const { result } = await renderHook(() =>
+    const { result } = renderHook(() =>
       useSystemColorMode({ defaultColorMode: "light" }),
     )
     expect(result.current.getSystemColorMode()).toBe("light")
   })
 
-  test("getSystemColorMode returns dark when prefers dark", async () => {
+  test("getSystemColorMode returns dark when prefers dark", () => {
     mockMatchMedia(true)
-    const { result } = await renderHook(() =>
+    const { result } = renderHook(() =>
       useSystemColorMode({ defaultColorMode: "light" }),
     )
     expect(result.current.getSystemColorMode()).toBe("dark")
   })
 
-  test("invokes callback when provided without error", async () => {
+  test("invokes callback when provided without error", () => {
     const callback = vi.fn()
-    await renderHook(() =>
+    renderHook(() =>
       useSystemColorMode({ callback, defaultColorMode: "light" }),
     )
   })

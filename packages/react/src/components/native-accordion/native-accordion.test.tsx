@@ -158,4 +158,26 @@ describe("<NativeAccordion />", () => {
     const item = container.querySelectorAll("details")[0]
     expect(item).toHaveAttribute("name", "native-accordion")
   })
+
+  test("applies shared generated `name` to all items when multiple is false", () => {
+    const { container } = render(<NativeAccordion.Root items={items} />)
+    const renderedItems = Array.from(container.querySelectorAll("details"))
+
+    const generatedName = renderedItems[0]?.getAttribute("name")
+
+    expect(generatedName).toBeTruthy()
+
+    for (const item of renderedItems) {
+      expect(item).toHaveAttribute("name", generatedName)
+    }
+  })
+
+  test("preserves empty string `name` on all items", () => {
+    const { container } = render(<NativeAccordion.Root name="" items={items} />)
+    const renderedItems = Array.from(container.querySelectorAll("details"))
+
+    for (const item of renderedItems) {
+      expect(item).toHaveAttribute("name", "")
+    }
+  })
 })

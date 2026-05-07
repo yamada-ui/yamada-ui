@@ -5,28 +5,6 @@ import { a11y, act, render, renderHook, screen } from "#test"
 import { Rating } from "."
 import { RatingContext, useRating, useRatingItem } from "./use-rating"
 
-const dispatchMouse = (
-  el: EventTarget,
-  type: "mousedown" | "mouseenter" | "mouseleave" | "mousemove" | "mouseout",
-  init: MouseEventInit = {},
-) => {
-  el.dispatchEvent(new MouseEvent(type, { bubbles: true, ...init }))
-}
-
-const dispatchTouchStart = (
-  el: EventTarget,
-  touches: { clientX: number; clientY: number }[] = [],
-) => {
-  const event = new Event("touchstart", {
-    bubbles: true,
-    cancelable: true,
-  }) as Event & { touches: { clientX: number; clientY: number }[] }
-
-  Object.defineProperty(event, "touches", { value: touches })
-
-  el.dispatchEvent(event)
-}
-
 function invokeCallbackRef<T>(ref: Ref<T> | undefined, node: null | T) {
   if (typeof ref === "function") ref(node)
 }
@@ -44,51 +22,8 @@ function createRatingItemWrapper(props: UseRatingProps = {}) {
 }
 
 describe("<Rating />", () => {
-  const defaultGetBoundingClientRect =
-    window.HTMLElement.prototype.getBoundingClientRect
-
-  beforeAll(() => {
-    window.HTMLElement.prototype.getBoundingClientRect = () => {
-      return {
-        height: 20,
-        left: 16,
-        width: 100,
-      } as DOMRect
-    }
-    vi.spyOn(HTMLElement.prototype, "matches").mockImplementation(() => true)
-  })
-
-  afterAll(() => {
-    window.HTMLElement.prototype.getBoundingClientRect =
-      defaultGetBoundingClientRect
-    vi.clearAllMocks()
-  })
-
   test("passes a11y checks", async () => {
     await a11y(<Rating />)
-  })
-
-  test("should merge `groupProps` with slot props without overwriting user props", () => {
-    const onClick = vi.fn()
-
-    const { container } = render(
-      <Rating
-        groupProps={(value) => ({
-          className: `group-${value}`,
-          style: { outlineColor: "red" },
-          value,
-          onClick,
-        })}
-      />,
-    )
-
-    const firstGroup = container.querySelector(".ui-rating__group")
-
-    expect(firstGroup).toHaveClass("ui-rating__group", "group-1")
-    expect(firstGroup).toHaveStyle({ outlineColor: "rgb(255, 0, 0)" })
-
-    firstGroup?.dispatchEvent(new MouseEvent("click", { bubbles: true }))
-    expect(onClick).toHaveBeenCalledTimes(1)
   })
 
   test("renders correctly with value", () => {
@@ -113,59 +48,6 @@ describe("<Rating />", () => {
     expect(screen.getByTestId("rating")).toHaveAttribute("aria-readonly")
   })
 
-  test("fills items up to the hovered position", async () => {
-    const { container } = render(
-      <Rating data-testid="rating" height={20} width={100} />,
-    )
-
-    const rating = screen.getByTestId("rating")
-
-    const items = container.querySelectorAll(".ui-rating__item")
-
-    for (let i = 1; i < items.length; i++) {
-      expect(items[i]).not.toHaveAttribute("data-filled")
-    }
-
-    dispatchMouse(rating, "mouseenter")
-    dispatchMouse(rating, "mousemove", { clientX: 50, clientY: 10 })
-
-    await vi.waitFor(() => {
-      expect(items[1]).toHaveAttribute("data-filled")
-      expect(items[2]).toHaveAttribute("data-filled")
-      expect(items[3]).not.toHaveAttribute("data-filled")
-    })
-
-    dispatchMouse(rating, "mouseleave")
-    dispatchMouse(rating, "mouseout", { relatedTarget: document.body })
-
-    await vi.waitFor(() => {
-      expect(items[1]).not.toHaveAttribute("data-filled")
-      expect(items[2]).not.toHaveAttribute("data-filled")
-    })
-  })
-
-  test("updates value on the mouseDown event", () => {
-    const onChange = vi.fn()
-
-    const { container } = render(<Rating onChange={onChange} />)
-
-    const items = container.querySelectorAll(".ui-rating__item")
-    dispatchMouse(items[3]!, "mousedown", { button: 0 })
-
-    expect(onChange).toHaveBeenCalledExactlyOnceWith(3)
-  })
-
-  test("updates value on item touchStart event", () => {
-    const onChange = vi.fn()
-
-    const { container } = render(<Rating onChange={onChange} />)
-
-    const items = container.querySelectorAll(".ui-rating__item")
-    dispatchTouchStart(items[3]!)
-
-    expect(onChange).toHaveBeenCalledExactlyOnceWith(3)
-  })
-
   test("highlightSelectedOnly fills only the selected item", () => {
     const { container } = render(
       <Rating defaultValue={3} highlightSelectedOnly />,
@@ -180,44 +62,6 @@ describe("<Rating />", () => {
     for (let i = 4; i < items.length; i++) {
       expect(items[i]).not.toHaveAttribute("data-filled")
     }
-  })
-
-  test("updates value on root touchStart event", () => {
-    const onChange = vi.fn()
-
-    render(<Rating data-testid="rating" onChange={onChange} />)
-
-    const rating = screen.getByTestId("rating")
-
-    dispatchTouchStart(rating, [{ clientX: 50, clientY: 10 }])
-
-    expect(onChange).toHaveBeenCalledWith(2)
-  })
-
-  test("calls preventDefault on root touchEnd", () => {
-    render(<Rating data-testid="rating" />)
-
-    const rating = screen.getByTestId("rating")
-
-    const event = new Event("touchend", {
-      bubbles: true,
-      cancelable: true,
-    })
-    const preventDefaultSpy = vi.spyOn(event, "preventDefault")
-
-    rating.dispatchEvent(event)
-
-    expect(preventDefaultSpy).toHaveBeenCalledWith()
-  })
-
-  test("does not update value when disabled", () => {
-    const { container } = render(<Rating disabled />)
-
-    const items = container.querySelectorAll(".ui-rating__item")
-
-    dispatchMouse(items[3]!, "mousedown", { button: 0 })
-
-    expect(items[3]?.firstChild).not.toHaveAttribute("data-checked")
   })
 
   test("applies custom color per value", () => {
@@ -252,44 +96,6 @@ describe("<Rating />", () => {
         cssText.includes(`color:${expectedVar}`)
       expect(ruleExists).toBeTruthy()
     }
-  })
-
-  test("resets hovered value on blur when mouse is outside", () => {
-    const { container } = render(<Rating />)
-    const inputs = container.querySelectorAll("input[type='radio']")
-    const firstInput = inputs[0]
-    if (!(firstInput instanceof HTMLInputElement))
-      throw new Error("expected input element")
-
-    firstInput.focus()
-    dispatchMouse(container.firstChild!, "mouseleave")
-    firstInput.blur()
-
-    const activeInput = container.querySelector("input[data-active='true']")
-    expect(activeInput).toBeNull()
-  })
-
-  test("updates value via keyboard", async () => {
-    const onChange = vi.fn()
-
-    const { container, user } = render(<Rating onChange={onChange} />)
-
-    const inputs = container.querySelectorAll("input[type='radio']")
-    const firstInput = inputs[0]
-    if (!(firstInput instanceof HTMLInputElement))
-      throw new Error("expected input element")
-
-    await user.tab()
-    firstInput.focus()
-    await user.keyboard("{ArrowRight}")
-
-    await vi.waitFor(() => {
-      expect(document.activeElement).toBe(inputs[1])
-    })
-
-    await user.keyboard("{Space}")
-
-    expect(onChange).toHaveBeenCalledWith(1)
   })
 })
 

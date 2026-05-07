@@ -39,8 +39,33 @@ const SegmentedControlItemHookWrapper: FC<PropsWithChildren> = ({
 }
 
 describe("<SegmentedControl />", () => {
+  test("sets `displayName` correctly", () => {
+    expect(SegmentedControl.Root.displayName).toBe("SegmentedControlRoot")
+    expect(SegmentedControl.Item.displayName).toBe("SegmentedControlItem")
+  })
+
   test("renders component correctly", async () => {
     await a11y(<TestComponent />)
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <SegmentedControl.Root data-testid="root" defaultValue="one">
+        <SegmentedControl.Item data-testid="item" value="one">
+          One
+        </SegmentedControl.Item>
+      </SegmentedControl.Root>,
+    )
+
+    expect(screen.getByTestId("root")).toHaveClass("ui-segmented-control__root")
+    expect(screen.getByTestId("item")).toHaveClass("ui-segmented-control__item")
+  })
+
+  test("sets `tag` correctly", () => {
+    render(<TestComponent />)
+
+    expect(screen.getByRole("radiogroup").tagName).toBe("DIV")
+    expect(screen.getByText("One").closest("label")?.tagName).toBe("LABEL")
   })
 
   test("should disable segmented control", () => {

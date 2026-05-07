@@ -7,6 +7,30 @@ describe("<SaturationSlider />", () => {
     await a11y(<SaturationSlider.Root />)
   })
 
+  test("sets `displayName` correctly", () => {
+    expect(SaturationSlider.Root.displayName).toBe("SaturationSliderRoot")
+    expect(SaturationSlider.Track.displayName).toBe("SaturationSliderTrack")
+    expect(SaturationSlider.Thumb.displayName).toBe("SaturationSliderThumb")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <SaturationSlider.Root
+        data-testid="slider"
+        defaultValue={[120, 0.5, 0.8]}
+        trackProps={{ "data-testid": "track" }}
+      />,
+    )
+
+    const root = screen.getByTestId("slider")
+    const track = screen.getByTestId("track")
+    const thumb = screen.getByRole("slider")
+
+    expect(root).toHaveClass("ui-saturation-slider__root")
+    expect(track).toHaveClass("ui-saturation-slider__track")
+    expect(thumb).toHaveClass("ui-saturation-slider__thumb")
+  })
+
   test("sets aria attributes correctly", () => {
     render(<SaturationSlider.Root defaultValue={[120, 0.5, 0.8]} />)
 

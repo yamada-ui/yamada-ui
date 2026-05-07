@@ -1,19 +1,7 @@
-import type {
-  MouseEvent as ReactMouseEvent,
-  ReactNode,
-  TouchEvent as ReactTouchEvent,
-} from "react"
+import type { ReactNode } from "react"
 import { useState } from "react"
-import { a11y, act, fireEvent, render, renderHook, screen } from "#test"
+import { a11y, act, render, renderHook, screen } from "#test"
 import { Reorder, ReorderContext, useReorder, useReorderItem } from "./"
-
-const mouseUpEvent = {
-  type: "mouseup",
-} as unknown as ReactMouseEvent<HTMLUListElement>
-
-const touchEndEvent = {
-  type: "touchend",
-} as unknown as ReactTouchEvent<HTMLUListElement>
 
 describe("<Reorder />", () => {
   test("renders component correctly", async () => {
@@ -113,7 +101,36 @@ describe("<Reorder />", () => {
     expect(screen.getByText("Item 2")).toBeInTheDocument()
   })
 
-  test("trigger fires pointerDown event and item has data-has-trigger attribute", () => {
+  test("does not update items when props remain the same", async () => {
+    const items: Reorder.Item[] = [
+      { label: "Item 1", value: "Item 1" },
+      { label: "Item 2", value: "Item 2" },
+    ]
+
+    const Component = () => {
+      const [, setCount] = useState(0)
+
+      return (
+        <>
+          <button onClick={() => setCount((c) => c + 1)}>Rerender</button>
+
+          <Reorder.Root items={items} />
+        </>
+      )
+    }
+
+    const { user } = render(<Component />)
+
+    expect(screen.getByText("Item 1")).toBeInTheDocument()
+    expect(screen.getByText("Item 2")).toBeInTheDocument()
+
+    await user.click(screen.getByText("Rerender"))
+
+    expect(screen.getByText("Item 1")).toBeInTheDocument()
+    expect(screen.getByText("Item 2")).toBeInTheDocument()
+  })
+
+  test("item has data-has-trigger attribute when trigger is present", () => {
     render(
       <Reorder.Root>
         <Reorder.Item data-testid="item" value="Item 1">
@@ -122,44 +139,13 @@ describe("<Reorder />", () => {
       </Reorder.Root>,
     )
 
-    fireEvent.pointerDown(screen.getByTestId("trigger"))
-
     expect(screen.getByTestId("item")).toHaveAttribute("data-has-trigger", "")
-  })
-
-  test("does not call onCompleteChange again on consecutive mouseUp without reorder", () => {
-    const onCompleteChange = vi.fn()
-
-    const { result } = renderHook(() =>
-      useReorder({
-        items: [
-          { label: "Item 1", value: "Item 1" },
-          { label: "Item 2", value: "Item 2" },
-        ],
-        onCompleteChange,
-      }),
-    )
-
-    const rootProps = result.current.getRootProps()
-
-    act(() => rootProps.onReorder(["Item 2", "Item 1"]))
-
-    act(() => result.current.getRootProps().onMouseUp?.(mouseUpEvent))
-    expect(onCompleteChange).toHaveBeenCalledTimes(1)
-
-    act(() => result.current.getRootProps().onMouseUp?.(mouseUpEvent))
-    expect(onCompleteChange).toHaveBeenCalledTimes(1)
   })
 
   test("getRootProps keeps caller precedence and merges refs and events once", () => {
     const hookRef = vi.fn()
     const callerRef = vi.fn()
     const onChange = vi.fn<(values: string[]) => void>()
-    const onCompleteChange = vi.fn<(values: string[]) => void>()
-    const hookMouseUp = vi.fn(() => "hookMouseUp")
-    const callerMouseUp = vi.fn(() => "callerMouseUp")
-    const hookTouchEnd = vi.fn(() => "hookTouchEnd")
-    const callerTouchEnd = vi.fn(() => "callerTouchEnd")
     const hookReorder = vi.fn<(values: string[]) => void>()
     const callerReorder = vi.fn<(values: string[]) => void>()
 
@@ -175,14 +161,7 @@ describe("<Reorder />", () => {
           { label: "Item 2", value: "Item 2" },
         ],
         onChange,
-        onCompleteChange,
-        onMouseUp: () => {
-          hookMouseUp()
-        },
         onReorder: hookReorder,
-        onTouchEnd: () => {
-          hookTouchEnd()
-        },
       }),
     )
 
@@ -192,13 +171,7 @@ describe("<Reorder />", () => {
         callerRef(...args)
       },
       className: "b",
-      onMouseUp: () => {
-        callerMouseUp()
-      },
       onReorder: callerReorder,
-      onTouchEnd: () => {
-        callerTouchEnd()
-      },
     })
 
     expect(rootProps.className).toBe("a b")
@@ -224,52 +197,6 @@ describe("<Reorder />", () => {
     expect(onChangeOrder).toBeDefined()
     expect(hookReorderOrder!).toBeLessThan(callerReorderOrder!)
     expect(callerReorderOrder!).toBeLessThan(onChangeOrder!)
-
-    act(() =>
-      result.current
-        .getRootProps({
-          onMouseUp: () => {
-            callerMouseUp()
-          },
-        })
-        .onMouseUp?.(mouseUpEvent),
-    )
-
-    expect(hookMouseUp).toHaveBeenCalledTimes(1)
-    expect(callerMouseUp).toHaveBeenCalledTimes(1)
-    expect(onCompleteChange).toHaveBeenCalledTimes(1)
-    const hookMouseUpOrder = hookMouseUp.mock.invocationCallOrder[0]
-    const callerMouseUpOrder = callerMouseUp.mock.invocationCallOrder[0]
-    const onCompleteMouseUpOrder = onCompleteChange.mock.invocationCallOrder[0]
-    expect(hookMouseUpOrder).toBeDefined()
-    expect(callerMouseUpOrder).toBeDefined()
-    expect(onCompleteMouseUpOrder).toBeDefined()
-    expect(hookMouseUpOrder!).toBeLessThan(callerMouseUpOrder!)
-    expect(callerMouseUpOrder!).toBeLessThan(onCompleteMouseUpOrder!)
-
-    act(() => rootProps.onReorder(["Item 1", "Item 2"]))
-
-    act(() =>
-      result.current
-        .getRootProps({
-          onTouchEnd: () => {
-            callerTouchEnd()
-          },
-        })
-        .onTouchEnd?.(touchEndEvent),
-    )
-
-    expect(hookTouchEnd).toHaveBeenCalledTimes(1)
-    expect(callerTouchEnd).toHaveBeenCalledTimes(1)
-    expect(onCompleteChange).toHaveBeenCalledTimes(2)
-    const hookTouchEndOrder = hookTouchEnd.mock.invocationCallOrder[0]
-    const callerTouchEndOrder = callerTouchEnd.mock.invocationCallOrder[0]
-    const onCompleteTouchEndOrder = onCompleteChange.mock.invocationCallOrder[1]
-    expect(hookTouchEndOrder).toBeDefined()
-    expect(callerTouchEndOrder).toBeDefined()
-    expect(onCompleteTouchEndOrder).toBeDefined()
-    expect(hookTouchEndOrder!).toBeLessThan(callerTouchEndOrder!)
-    expect(callerTouchEndOrder!).toBeLessThan(onCompleteTouchEndOrder!)
   })
 
   test("getItemProps merges refs once and keeps hook precedence", () => {

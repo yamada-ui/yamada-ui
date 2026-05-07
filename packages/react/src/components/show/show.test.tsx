@@ -23,6 +23,18 @@ describe("<Show />", () => {
     expect(screen.getByText("World")).toBeInTheDocument()
   })
 
+  test("does not render children when when is false and fallback is not provided", () => {
+    render(<Show when={false}>Hello</Show>)
+
+    expect(screen.queryByText("Hello")).not.toBeInTheDocument()
+  })
+
+  test("does not render children when when is null and fallback is not provided", () => {
+    render(<Show when={null}>Hello</Show>)
+
+    expect(screen.queryByText("Hello")).not.toBeInTheDocument()
+  })
+
   test("renders children with function pattern", () => {
     render(<Show when={{ name: "John" }}>{(when) => when.name}</Show>)
 

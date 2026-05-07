@@ -1,4 +1,4 @@
-import { page, render } from "#test/browser"
+import { a11y, page, render } from "#test/browser"
 import { Popover } from "."
 import { Button } from "../button"
 
@@ -38,6 +38,10 @@ describe("<Popover />", () => {
       </Popover.Root>
     )
   }
+
+  test("renders component correctly", async () => {
+    await a11y(<Component defaultOpen />)
+  })
 
   test("should close with escape key", async () => {
     const { user } = await render(<Component />)

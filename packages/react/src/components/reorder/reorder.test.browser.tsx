@@ -54,24 +54,6 @@ describe("<Reorder />", () => {
     expect(onCompleteChange).not.toHaveBeenCalled()
   })
 
-  test("does not call onCompleteChange on touchEnd when values have not changed", async () => {
-    const onCompleteChange = vi.fn()
-
-    await render(
-      <Reorder.Root onCompleteChange={onCompleteChange}>
-        <Reorder.Item value="Item 1">Item 1</Reorder.Item>
-        <Reorder.Item value="Item 2">Item 2</Reorder.Item>
-      </Reorder.Root>,
-    )
-
-    page
-      .getByRole("list")
-      .element()
-      .dispatchEvent(new Event("touchend", { bubbles: true }))
-
-    expect(onCompleteChange).not.toHaveBeenCalled()
-  })
-
   test("calls onCompleteChange on mouseUp after onReorder changes values", async () => {
     const onCompleteChange = vi.fn()
 

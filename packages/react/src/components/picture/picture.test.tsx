@@ -6,6 +6,11 @@ import { Picture, Source } from "./picture"
 const src = "https://image.xyz/source"
 
 describe("<Picture />", () => {
+  test("should have display names", () => {
+    expect(Picture.name).toBe("Picture")
+    expect(Source.name).toBe("Source")
+  })
+
   test("renders component correctly", async () => {
     await a11y(
       <Picture
@@ -34,6 +39,22 @@ describe("<Picture />", () => {
     expect(sources[0]?.getAttribute("media")).toContain("(max-width: 768px)")
     expect(sources[1]?.getAttribute("media")).toContain("(max-width: 976px)")
     expect(sources[2]?.getAttribute("media")).toContain("(max-width: 1280px)")
+  })
+
+  test("should forward pictureProps to the picture element", () => {
+    const { container, getByTestId } = render(
+      <Picture
+        src={src}
+        alt="img"
+        sources={[{ srcSet: src, media: "md" }]}
+        pictureProps={{ "data-testid": "picture" }}
+      />,
+    )
+    const picture = getByTestId("picture")
+    const source = container.querySelector("source")
+
+    expect(picture.tagName).toBe("PICTURE")
+    expect(source?.tagName).toBe("SOURCE")
   })
 
   test("should apply correct media queries from maxW or minW", () => {

@@ -134,6 +134,14 @@ describe("<PinInput />", () => {
     await expect.poll(() => document.activeElement).toStrictEqual(firstInput)
   })
 
+  test("does not focus the first input on mount if `autoFocus` is false", async () => {
+    await render(<PinInput.Root autoFocus={false} />)
+
+    const [firstInput] = getInputs()
+
+    await expect.poll(() => document.activeElement !== firstInput).toBe(true)
+  })
+
   test("correct input behavior when pasting a value of 2 characters", async () => {
     const { user } = await render(
       <>

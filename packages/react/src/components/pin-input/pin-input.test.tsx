@@ -55,6 +55,11 @@ describe("<PinInput />", () => {
       paddingTop: "8px",
     })
     expect(rootProps.role).toBe("group")
+
+    rootProps.onClick?.({} as any)
+
+    expect(restOnClick).toHaveBeenCalledTimes(1)
+    expect(callerOnClick).toHaveBeenCalledTimes(1)
   })
 
   test("renders the correct number of input elements", () => {

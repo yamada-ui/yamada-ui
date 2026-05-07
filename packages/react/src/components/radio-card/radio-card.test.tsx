@@ -27,11 +27,17 @@ describe("<RadioCard />", () => {
     await a11y(<RadioCard.Root defaultChecked>radio card</RadioCard.Root>)
   })
 
+  test("sets `displayName` correctly", () => {
+    expect(RadioCard.Root.displayName).toBe("RadioCardRoot")
+    expect(RadioCard.Label.displayName).toBe("RadioCardLabel")
+    expect(RadioCard.Description.displayName).toBe("RadioCardDescription")
+    expect(RadioCard.Addon.displayName).toBe("RadioCardAddon")
+    expect(RadioCardGroup.Root.displayName).toBe("RadioCardGroup")
+  })
+
   test("sets `className` correctly", () => {
     render(<RadioCardGroup.Root items={items} />)
-    const radio = screen.getByRole("radio", {
-      name: "Item 1Description 1Addon 1",
-    })
+    const radio = screen.getByRole("radio", { name: /Item 1/ })
     const root = radio.parentElement
     if (!(root instanceof HTMLElement)) {
       throw new Error("expected radio card root to be an HTMLElement")
@@ -42,6 +48,22 @@ describe("<RadioCard />", () => {
     expect(root.children[2]).toHaveClass("ui-radio-card__label")
     expect(root.children[3]).toHaveClass("ui-radio-card__description")
     expect(root.children[4]).toHaveClass("ui-radio-card__addon")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<RadioCardGroup.Root items={items} />)
+    const radio = screen.getByRole("radio", { name: /Item 1/ })
+    const root = radio.parentElement
+    if (!(root instanceof HTMLElement)) {
+      throw new Error("expected radio card root to be an HTMLElement")
+    }
+    expect(screen.getByRole("radiogroup").tagName).toBe("DIV")
+    expect(root.tagName).toBe("LABEL")
+    expect(radio.tagName).toBe("INPUT")
+    expect(root.children[1]?.tagName).toBe("DIV")
+    expect(root.children[2]?.tagName).toBe("SPAN")
+    expect(root.children[3]?.tagName).toBe("SPAN")
+    expect(root.children[4]?.tagName).toBe("SPAN")
   })
 
   test("renders label, description, and addon via props", () => {

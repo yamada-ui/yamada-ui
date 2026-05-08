@@ -1,7 +1,7 @@
 {
   "$schema": "https://yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
-    "components": ["text"],
+    "components": [],
     "externals": [],
     "hooks": [],
     "providers": []
@@ -12,10 +12,6 @@
     {
       "name": "index.ts",
       "content": "export { Show } from \"./show\"\nexport type { ShowProps } from \"./show\"\n"
-    },
-    {
-      "name": "show.test.browser.tsx",
-      "content": "import { page, render } from \"#test/browser\"\nimport { Text } from \"../text\"\nimport { Show } from \"./show\"\n\ndescribe(\"<Show />\", () => {\n  test(\"renders component correctly\", async () => {\n    await render(\n      <Show fallback=\"World\" when>\n        Hello\n      </Show>,\n    )\n\n    await expect.element(page.getByText(\"Hello\")).toBeInTheDocument()\n  })\n\n  test(\"renders fallback when when is false\", async () => {\n    await render(\n      <Show fallback=\"World\" when={false}>\n        Hello\n      </Show>,\n    )\n\n    await expect.element(page.getByText(\"World\")).toBeInTheDocument()\n  })\n\n  test(\"renders children with function pattern\", async () => {\n    await render(<Show when={{ name: \"John\" }}>{(when) => when.name}</Show>)\n\n    await expect.element(page.getByText(\"John\")).toBeInTheDocument()\n  })\n\n  test(\"renders children with Element\", async () => {\n    await render(\n      <Show fallback=\"World\" when>\n        <Text>Hello</Text>\n      </Show>,\n    )\n\n    await expect.element(page.getByText(\"Hello\")).toBeInTheDocument()\n  })\n\n  test(\"renders nothing when when is false and no fallback is provided\", async () => {\n    await render(<Show when={false}>Hello</Show>)\n\n    await expect\n      .element(page.getByText(\"Hello\").query())\n      .not.toBeInTheDocument()\n  })\n\n  test(\"renders nothing when when is null and no fallback is provided\", async () => {\n    await render(<Show when={null}>Hello</Show>)\n\n    await expect\n      .element(page.getByText(\"Hello\").query())\n      .not.toBeInTheDocument()\n  })\n})\n"
     },
     {
       "name": "show.tsx",

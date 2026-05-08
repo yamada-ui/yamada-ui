@@ -1,7 +1,7 @@
 {
   "$schema": "https://yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
-    "components": ["heading", "text"],
+    "components": [],
     "externals": [],
     "hooks": [],
     "providers": []
@@ -15,10 +15,6 @@
     {
       "name": "link-box.style.ts",
       "content": "import { defineComponentSlotStyle, focusRingStyle } from \"@yamada-ui/react\"\n\nexport const linkBoxStyle = defineComponentSlotStyle({\n  base: {\n    overlay: {\n      focusVisibleRing: \"none\",\n      position: \"static\",\n      _before: {\n        boxSize: \"full\",\n        cursor: \"inherit\",\n        display: \"block\",\n        inset: \"0\",\n        position: \"absolute\",\n        zIndex: \"0\",\n      },\n      _focusVisible: { _before: focusRingStyle.outline },\n    },\n    root: {\n      \"a[href]:not([data-link-box-overlay]), abbr[title]\": {\n        position: \"relative\",\n        zIndex: \"yamcha\",\n      },\n      position: \"relative\",\n    },\n  },\n})\n\nexport type LinkBoxStyle = typeof linkBoxStyle\n"
-    },
-    {
-      "name": "link-box.test.browser.tsx",
-      "content": "import type { FC } from \"react\"\nimport { a11y, page, render } from \"#test/browser\"\nimport { LinkBox } from \".\"\nimport { Heading } from \"../heading\"\nimport { Text } from \"../text\"\n\nconst Component: FC = () => {\n  return (\n    <LinkBox.Root data-testid=\"linkBox\">\n      <Heading>\n        <LinkBox.Overlay\n          href=\"https://yamada-ui.com\"\n          data-testid=\"linkBoxOverlay\"\n          external\n        >\n          Link Box\n        </LinkBox.Overlay>\n      </Heading>\n\n      <Text>Description</Text>\n    </LinkBox.Root>\n  )\n}\n\ndescribe(\"<LinkBox />\", () => {\n  test(\"renders component correctly\", async () => {\n    await a11y(<Component />)\n  })\n\n  test(\"sets `displayName` correctly\", () => {\n    expect(LinkBox.Root.displayName).toBe(\"LinkBoxRoot\")\n    expect(LinkBox.Overlay.displayName).toBe(\"LinkBoxOverlay\")\n  })\n\n  test(\"sets `className` correctly\", async () => {\n    await render(<Component />)\n\n    await expect\n      .element(page.getByTestId(\"linkBox\"))\n      .toHaveClass(\"ui-link-box__root\")\n    await expect\n      .element(page.getByTestId(\"linkBoxOverlay\"))\n      .toHaveClass(\"ui-link-box__overlay\")\n  })\n\n  test(\"renders HTML tag correctly\", async () => {\n    await render(<Component />)\n\n    expect(page.getByTestId(\"linkBox\").element().tagName).toBe(\"DIV\")\n    expect(page.getByTestId(\"linkBoxOverlay\").element().tagName).toBe(\"A\")\n  })\n\n  test(\"opens link in a new tab when external is true\", async () => {\n    await render(<Component />)\n\n    const link = page.getByRole(\"link\")\n\n    await expect.element(link).toHaveAttribute(\"target\", \"_blank\")\n    await expect.element(link).toHaveAttribute(\"rel\", \"noopener\")\n  })\n})\n"
     },
     {
       "name": "link-box.tsx",

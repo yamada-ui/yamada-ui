@@ -1,6 +1,10 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
+  actionBar: {
+    "Close action bar": "액션 바 닫기",
+    "Open action bar": "액션 바 열기",
+  },
   autocomplete: {
     "Clear value": "값 지우기",
     "No results found": "결과를 찾을 수 없습니다",
@@ -82,6 +86,10 @@ const data: IntlData = {
   },
   select: {
     "Clear value": "값 지우기",
+  },
+  sidebar: {
+    "Close sidebar": "사이드바 닫기",
+    "Open sidebar": "사이드바 열기",
   },
   slider: {
     "Slider thumb": "슬라이더 핸들",

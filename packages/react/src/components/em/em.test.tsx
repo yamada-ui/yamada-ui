@@ -12,11 +12,13 @@ describe("<Em />", () => {
 
   test("sets `className` correctly", () => {
     render(<Em>Unleash the Power</Em>)
+
     expect(screen.getByText("Unleash the Power")).toHaveClass("ui-em")
   })
 
   test("renders HTML tag correctly", () => {
     render(<Em>Unleash the Power</Em>)
+
     expect(screen.getByText("Unleash the Power").tagName).toBe("EM")
   })
 })

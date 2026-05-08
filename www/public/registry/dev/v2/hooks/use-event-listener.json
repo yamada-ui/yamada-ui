@@ -7,7 +7,7 @@
     "providers": []
   },
   "dependents": {
-    "components": ["number-input", "popover", "tooltip"],
+    "components": ["action-bar", "number-input", "popover", "tooltip"],
     "hooks": ["use-clickable", "use-focus"],
     "providers": []
   },

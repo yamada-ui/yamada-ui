@@ -76,12 +76,12 @@
         "required": false
       },
       "stylePosition": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"inside\" | \"outside\" | \"revert-layer\" | \"revert\" | \"unset\" ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"inside\" | \"outside\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString ...",
         "description": "The CSS `list-style-position` property.",
         "required": false
       },
       "styleType": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"none\" | \"revert-layer\" | \"revert\" | \"unset\" ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"none\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString ...",
         "description": "The CSS `list-style-position` property.",
         "required": false
       }
@@ -163,12 +163,12 @@
       "required": false
     },
     "stylePosition": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"inside\" | \"outside\" | \"revert-layer\" | \"revert\" | \"unset\" ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"inside\" | \"outside\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString ...",
       "description": "The CSS `list-style-position` property.",
       "required": false
     },
     "styleType": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"none\" | \"revert-layer\" | \"revert\" | \"unset\" ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"none\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString ...",
       "description": "The CSS `list-style-position` property.",
       "required": false
     }

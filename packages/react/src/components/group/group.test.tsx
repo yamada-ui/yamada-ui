@@ -10,13 +10,12 @@ describe("<Group />", () => {
     expect(Group.displayName).toBe("Group")
   })
 
-  test("sets `className` correctly", () => {
-    render(<Group data-testid="group">Group</Group>)
-    expect(screen.getByTestId("group")).toHaveClass("ui-group")
-  })
+  test("sets root class and default tag correctly", () => {
+    render(<Group>Group</Group>)
 
-  test("renders HTML tag correctly", () => {
-    render(<Group data-testid="group">Group</Group>)
-    expect(screen.getByTestId("group").tagName).toBe("DIV")
+    const group = screen.getByRole("group")
+
+    expect(group).toHaveClass("ui-group")
+    expect(group.tagName).toBe("DIV")
   })
 })

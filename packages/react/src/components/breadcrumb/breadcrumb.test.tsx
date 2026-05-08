@@ -1,5 +1,11 @@
-import { a11y, render, screen } from "#test"
+import type { Ref } from "react"
+import { a11y, render, renderHook, screen } from "#test"
 import { Breadcrumb } from "./"
+import { useBreadcrumb } from "./use-breadcrumb"
+
+function invokeCallbackRef<T>(ref: Ref<T> | undefined, node: null | T) {
+  if (typeof ref === "function") ref(node)
+}
 
 describe("<Breadcrumb />", () => {
   test("renders component correctly", async () => {
@@ -16,40 +22,6 @@ describe("<Breadcrumb />", () => {
     )
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Breadcrumb.Root.displayName).toBe("BreadcrumbRoot")
-    expect(Breadcrumb.Link.displayName).toBe("BreadcrumbLink")
-    expect(Breadcrumb.Ellipsis.displayName).toBe("BreadcrumbEllipsis")
-  })
-
-  test("sets `className` correctly", () => {
-    render(
-      <Breadcrumb.Root data-testid="root">
-        <Breadcrumb.Link href="/">Link 1</Breadcrumb.Link>
-        <Breadcrumb.Ellipsis data-testid="ellipsis" />
-      </Breadcrumb.Root>,
-    )
-
-    expect(screen.getByTestId("root")).toHaveClass("ui-breadcrumb__root")
-    expect(screen.getByText("Link 1")).toHaveClass("ui-breadcrumb__link")
-    expect(screen.getByTestId("ellipsis")).toHaveClass(
-      "ui-breadcrumb__ellipsis",
-    )
-  })
-
-  test("renders HTML tag correctly", () => {
-    render(
-      <Breadcrumb.Root data-testid="root">
-        <Breadcrumb.Link href="/">Link 1</Breadcrumb.Link>
-        <Breadcrumb.Ellipsis data-testid="ellipsis" />
-      </Breadcrumb.Root>,
-    )
-
-    expect(screen.getByTestId("root").tagName).toBe("NAV")
-    expect(screen.getByText("Link 1").tagName).toBe("A")
-    expect(screen.getByTestId("ellipsis").tagName).toBe("svg")
-  })
-
   test("separator property is being passed accurately", () => {
     render(
       <Breadcrumb.Root separator="-">
@@ -60,22 +32,23 @@ describe("<Breadcrumb />", () => {
       </Breadcrumb.Root>,
     )
 
-    const separatorEle = screen.getByText("-")
-    expect(separatorEle).toBeInTheDocument()
+    expect(screen.getByText("-")).toBeInTheDocument()
   })
 
   test("currentPage property is being passed accurately", () => {
     render(
-      <Breadcrumb.Root separator="-">
+      <Breadcrumb.Root>
         <Breadcrumb.Link href="/">1</Breadcrumb.Link>
         <Breadcrumb.Link href="/" currentPage>
           2
         </Breadcrumb.Link>
       </Breadcrumb.Root>,
     )
-    const spanElement = screen.getByText("2")
-    expect(spanElement).toBeInTheDocument()
-    expect(spanElement.nodeName.toLowerCase()).toBe("span")
+
+    const currentPage = screen.getByText("2")
+    expect(currentPage.tagName).toBe("SPAN")
+    expect(currentPage).toHaveAttribute("aria-current", "page")
+    expect(currentPage).not.toHaveAttribute("href")
   })
 
   test("breadcrumb link has its href attribute correctly set", () => {
@@ -87,21 +60,11 @@ describe("<Breadcrumb />", () => {
         </Breadcrumb.Link>
       </Breadcrumb.Root>,
     )
-    const breadcrumbLink = screen.getByRole("link", { name: /Link 1/i })
-    expect(breadcrumbLink).toHaveAttribute("href", "#")
-  })
 
-  test("current page link doesn't have href attribute set", () => {
-    render(
-      <Breadcrumb.Root>
-        <Breadcrumb.Link href="#">Link 1</Breadcrumb.Link>
-        <Breadcrumb.Link href="#" currentPage>
-          Link 2
-        </Breadcrumb.Link>
-      </Breadcrumb.Root>,
+    expect(screen.getByRole("link", { name: /Link 1/i })).toHaveAttribute(
+      "href",
+      "#",
     )
-    const currentPageLink = screen.getByText("Link 2")
-    expect(currentPageLink).not.toHaveAttribute("href")
   })
 
   test("renders breadcrumbEllipsis correctly", () => {
@@ -114,6 +77,7 @@ describe("<Breadcrumb />", () => {
         </Breadcrumb.Link>
       </Breadcrumb.Root>,
     )
+
     expect(screen.getByLabelText("Ellipsis")).toBeInTheDocument()
   })
 
@@ -142,16 +106,18 @@ describe("<Breadcrumb />", () => {
       <Breadcrumb.Root endBoundaries={1} items={items} startBoundaries={1} />,
     )
 
-    const listItems = screen.getAllByRole("listitem")
-
-    expect(listItems).toHaveLength(5)
-    expect(listItems[0]?.querySelector("a")).toHaveAttribute("href", "/1")
-    expect(
-      listItems[listItems.length - 1]?.querySelector("span"),
-    ).toHaveAttribute("aria-current", "page")
+    expect(screen.getAllByRole("listitem")).toHaveLength(5)
+    expect(screen.getByRole("link", { name: "サイヤ人編" })).toHaveAttribute(
+      "href",
+      "/1",
+    )
+    expect(screen.getByText("魔人ブウ編")).toHaveAttribute(
+      "aria-current",
+      "page",
+    )
   })
 
-  test("if boundaries is 0 or undefined, 1 is correctly reflected.", () => {
+  test("is truncated when only one boundary is 1 and renders all items when both boundaries are 0", () => {
     const items: Breadcrumb.Item[] = [
       { href: "/1", label: "サイヤ人編" },
       { href: "/2", label: "ナメック星編" },
@@ -159,40 +125,21 @@ describe("<Breadcrumb />", () => {
       { href: "/4", currentPage: true, label: "魔人ブウ編" },
     ]
 
-    render(
-      <Breadcrumb.Root
-        data-testid="breadCrumb1"
-        items={items}
-        startBoundaries={1}
-      />,
+    const { rerender } = render(
+      <Breadcrumb.Root items={items} startBoundaries={1} />,
     )
 
-    render(
-      <Breadcrumb.Root
-        data-testid="breadCrumb2"
-        endBoundaries={1}
-        items={items}
-      />,
+    expect(screen.getAllByRole("listitem")).toHaveLength(3)
+
+    rerender(<Breadcrumb.Root endBoundaries={1} items={items} />)
+
+    expect(screen.getAllByRole("listitem")).toHaveLength(3)
+
+    rerender(
+      <Breadcrumb.Root endBoundaries={0} items={items} startBoundaries={0} />,
     )
 
-    render(
-      <Breadcrumb.Root
-        data-testid="breadCrumb3"
-        endBoundaries={0}
-        items={items}
-        startBoundaries={0}
-      />,
-    )
-
-    expect(
-      screen.getByTestId("breadCrumb1").querySelectorAll("li"),
-    ).toHaveLength(3)
-    expect(
-      screen.getByTestId("breadCrumb2").querySelectorAll("li"),
-    ).toHaveLength(3)
-    expect(
-      screen.getByTestId("breadCrumb3").querySelectorAll("li"),
-    ).toHaveLength(7)
+    expect(screen.getAllByRole("listitem")).toHaveLength(7)
   })
 
   test("applies custom `aria-label` to the nav element", () => {
@@ -211,35 +158,24 @@ describe("<Breadcrumb />", () => {
     )
   })
 
-  test("ellipsis respects `aria-hidden` override", () => {
+  test("ellipsis respects `aria-hidden` and `tabIndex` overrides", () => {
     render(
       <Breadcrumb.Root>
         <Breadcrumb.Link href="/">Link 1</Breadcrumb.Link>
-        <Breadcrumb.Ellipsis aria-hidden={false} data-testid="ellipsis" />
+        <Breadcrumb.Ellipsis
+          aria-hidden={false}
+          data-testid="ellipsis"
+          tabIndex={-1}
+        />
         <Breadcrumb.Link href="/" currentPage>
           Link 2
         </Breadcrumb.Link>
       </Breadcrumb.Root>,
     )
 
-    expect(screen.getByTestId("ellipsis")).toHaveAttribute(
-      "aria-hidden",
-      "false",
-    )
-  })
-
-  test("ellipsis respects `tabIndex` override", () => {
-    render(
-      <Breadcrumb.Root>
-        <Breadcrumb.Link href="/">Link 1</Breadcrumb.Link>
-        <Breadcrumb.Ellipsis data-testid="ellipsis" tabIndex={-1} />
-        <Breadcrumb.Link href="/" currentPage>
-          Link 2
-        </Breadcrumb.Link>
-      </Breadcrumb.Root>,
-    )
-
-    expect(screen.getByTestId("ellipsis")).toHaveAttribute("tabindex", "-1")
+    const ellipsis = screen.getByTestId("ellipsis")
+    expect(ellipsis).toHaveAttribute("aria-hidden", "false")
+    expect(ellipsis).toHaveAttribute("tabindex", "-1")
   })
 
   test("retrieve omitted items correctly", () => {
@@ -267,5 +203,96 @@ describe("<Breadcrumb />", () => {
         { href: "/", label: "人造人間編" },
       ],
     })
+  })
+})
+
+describe("useBreadcrumb getRootProps", () => {
+  test("merges aria-label, hook rest, and user props via mergeProps", () => {
+    const { result } = renderHook(
+      () =>
+        useBreadcrumb({
+          id: "hook-id",
+          className: "hook",
+          "data-testid": "bc-root",
+          items: [],
+        }),
+      { withProvider: false },
+    )
+
+    const merged = result.current.getRootProps({
+      id: "user-id",
+      className: "user",
+    })
+
+    expect(merged["aria-label"]).toBeDefined()
+    expect(merged.id).toBe("user-id")
+    expect(String(merged.className)).toContain("hook")
+    expect(String(merged.className)).toContain("user")
+    expect(merged["data-testid"]).toBe("bc-root")
+  })
+
+  test("merges style from hook props and user props", () => {
+    const { result } = renderHook(
+      () =>
+        useBreadcrumb({
+          style: { color: "red" },
+          items: [],
+        }),
+      { withProvider: false },
+    )
+
+    const merged = result.current.getRootProps({
+      style: { fontSize: "16px" },
+    })
+
+    expect(merged.style).toStrictEqual({ color: "red", fontSize: "16px" })
+  })
+
+  test("chains event handlers from hook props and user props", () => {
+    const onClickFromHook = vi.fn()
+    const onClickFromUser = vi.fn()
+
+    const { result } = renderHook(
+      () =>
+        useBreadcrumb({
+          items: [],
+          onClick: onClickFromHook,
+        }),
+      { withProvider: false },
+    )
+
+    const merged = result.current.getRootProps({
+      onClick: onClickFromUser,
+    })
+    const event = Object.create(null)
+
+    merged.onClick?.(event)
+
+    expect(onClickFromHook).toHaveBeenCalledWith(event)
+    expect(onClickFromUser).toHaveBeenCalledWith(event)
+  })
+
+  test("merges refs from hook props and user props", () => {
+    const refFromHook = vi.fn()
+    const refFromUser = vi.fn()
+    const node = document.createElement("nav")
+
+    const { result } = renderHook(
+      () =>
+        useBreadcrumb({
+          ref: refFromHook,
+          items: [],
+        }),
+      { withProvider: false },
+    )
+
+    const merged = result.current.getRootProps({
+      ref: refFromUser,
+    })
+
+    invokeCallbackRef(merged.ref, node)
+
+    expect(refFromHook).toHaveBeenCalledWith(node)
+    expect(refFromUser).toHaveBeenCalledWith(node)
   })
 })

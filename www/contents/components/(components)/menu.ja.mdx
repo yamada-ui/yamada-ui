@@ -625,7 +625,7 @@ const items = useMemo<Menu.Item[]>(
 )
 
 return (
-  <HStack>
+  <Wrap gap="md">
     <For
       each={[
         "start",
@@ -634,6 +634,12 @@ return (
         "end",
         "end-start",
         "end-end",
+        "center-start",
+        "center-start-start",
+        "center-start-end",
+        "center-end",
+        "center-end-start",
+        "center-end-end",
       ]}
     >
       {(placement) => (
@@ -646,7 +652,7 @@ return (
         </Menu.Root>
       )}
     </For>
-  </HStack>
+  </Wrap>
 )
 ```
 
@@ -665,7 +671,7 @@ const items = useMemo<Menu.Item[]>(
 )
 
 return (
-  <HStack>
+  <Wrap gap="md">
     <For
       each={["scale", "block-end", "block-start", "inline-start", "inline-end"]}
     >
@@ -679,7 +685,7 @@ return (
         </Menu.Root>
       )}
     </For>
-  </HStack>
+  </Wrap>
 )
 ```
 
@@ -875,29 +881,29 @@ return (
 
 ### ARIAロールと属性
 
-| コンポーネント        | ロールと属性            | 使い方                                                                                                                                                     |
-| --------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Menu.Trigger`        | `role="button"`         | ボタンであることを示します。                                                                                                                               |
-|                       | `aria-controls`         | メニューが開いている場合は関連した`Menu.Content`の`id`を設定し、閉じている場合は`undefined`を設定します。                                                  |
-|                       | `aria-disabled`         | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                     |
-|                       | `aria-expanded`         | メニューが開いている場合は`"true"`を設定し、閉じている場合は、`"false"`を設定します。                                                                      |
-|                       | `aria-haspopup="menu"`  | メニューが存在することを示します。                                                                                                                         |
-| `Menu.ContextTrigger` | `role="application"`    | アプリケーションであることを示します。                                                                                                                     |
-|                       | `aria-controls`         | メニューが開いている場合は関連した`Menu.Content`の`id`を設定し、閉じている場合は`undefined`を設定します。                                                  |
-|                       | `aria-disabled`         | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                     |
-|                       | `aria-expanded`         | メニューが開いている場合は`"true"`を設定し、閉じている場合は、`"false"`を設定します。                                                                      |
-|                       | `aria-haspopup="menu"`  | メニューが存在することを示します。                                                                                                                         |
-| `Menu.Content`        | `role="menu"`           | メニューであることを示します。                                                                                                                             |
-|                       | `aria-activedescendant` | フォーカスされた項目の`id`を設定します。                                                                                                                   |
-|                       | `aria-hidden`           | メニューが開いている場合は`"false"`を設定し、閉じている場合は`"true"`を設定します。                                                                        |
-|                       | `aria-labelledby`       | 関連した`Menu.Trigger`または`Menu.ContextTrigger`の`id`を設定します。                                                                                      |
-| `Menu.Label`          | `role="presentation"`   | プレゼンテーションであることを示します。                                                                                                                   |
-| `Menu.Group`          | `role="group"`          | グループであることを示します。                                                                                                                             |
-|                       | `aria-labelledby`       | 関連した`Menu.Label`の`id`を設定します。                                                                                                                   |
-| `Menu.Item`           | `role="menuitem"`       | メニュー項目であることを示します。                                                                                                                         |
-|                       | `aria-disabled`         | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                     |
-| `Menu.OptionItem`     | `role`                  | `Menu.OptionGroup`の`type`が`"radio"`に設定されている場合は`"menuitemradio"`を設定し、`"checkbox"`に設定されている場合は`"menuitemcheckbox"`を設定します。 |
-| `Menu.Separator`      | `role="separator"`      | セパレーターであることを示します。                                                                                                                         |
+| コンポーネントと要素           | ロールと属性            | 使い方                                                                                                                                                     |
+| ------------------------------ | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `button.ui-menu__trigger`      | `role="button"`         | ボタンであることを示します。                                                                                                                               |
+|                                | `aria-controls`         | メニューが開いている場合は関連した`div.ui-menu__content`の`id`を設定し、閉じている場合は`undefined`を設定します。                                          |
+|                                | `aria-disabled`         | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                     |
+|                                | `aria-expanded`         | メニューが開いている場合は`"true"`を設定し、閉じている場合は、`"false"`を設定します。                                                                      |
+|                                | `aria-haspopup="menu"`  | メニューが存在することを示します。                                                                                                                         |
+| `div.ui-menu__context-trigger` | `role="application"`    | アプリケーションであることを示します。                                                                                                                     |
+|                                | `aria-controls`         | メニューが開いている場合は関連した`div.ui-menu__content`の`id`を設定し、閉じている場合は`undefined`を設定します。                                          |
+|                                | `aria-disabled`         | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                     |
+|                                | `aria-expanded`         | メニューが開いている場合は`"true"`を設定し、閉じている場合は、`"false"`を設定します。                                                                      |
+|                                | `aria-haspopup="menu"`  | メニューが存在することを示します。                                                                                                                         |
+| `div.ui-menu__content`         | `role="menu"`           | メニューであることを示します。                                                                                                                             |
+|                                | `aria-activedescendant` | フォーカスされた項目の`id`を設定します。                                                                                                                   |
+|                                | `aria-hidden`           | メニューが開いている場合は`"false"`を設定し、閉じている場合は`"true"`を設定します。                                                                        |
+|                                | `aria-labelledby`       | 関連した`button.ui-menu__trigger`または`div.ui-menu__context-trigger`の`id`を設定します。                                                                  |
+| `span.ui-menu__label`          | `role="presentation"`   | プレゼンテーションであることを示します。                                                                                                                   |
+| `div.ui-menu__group`           | `role="group"`          | グループであることを示します。                                                                                                                             |
+|                                | `aria-labelledby`       | 関連した`span.ui-menu__label`の`id`を設定します。                                                                                                          |
+| `div.ui-menu__item`            | `role="menuitem"`       | メニュー項目であることを示します。                                                                                                                         |
+|                                | `aria-disabled`         | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                     |
+| `div.ui-menu__item--option`    | `role`                  | `Menu.OptionGroup`の`type`が`"radio"`に設定されている場合は`"menuitemradio"`を設定し、`"checkbox"`に設定されている場合は`"menuitemcheckbox"`を設定します。 |
+| `hr.ui-menu__separator`        | `role="separator"`      | セパレーターであることを示します。                                                                                                                         |
 
 ## 類似のコンポーネント
 

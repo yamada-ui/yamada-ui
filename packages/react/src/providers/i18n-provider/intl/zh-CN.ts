@@ -1,6 +1,10 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
+  actionBar: {
+    "Close action bar": "关闭操作栏",
+    "Open action bar": "打开操作栏",
+  },
   autocomplete: {
     "Clear value": "清除值",
     "No results found": "未找到结果",
@@ -82,6 +86,10 @@ const data: IntlData = {
   },
   select: {
     "Clear value": "清除值",
+  },
+  sidebar: {
+    "Close sidebar": "关闭侧边栏",
+    "Open sidebar": "打开侧边栏",
   },
   slider: {
     "Slider thumb": "滑块拇指",

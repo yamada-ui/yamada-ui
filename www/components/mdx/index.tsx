@@ -5,6 +5,7 @@ import {
   Code,
   List,
   NativeTable,
+  Sidebar,
   Text,
 } from "@yamada-ui/react"
 import { Suspense, useMemo } from "react"
@@ -147,13 +148,15 @@ export function MDXContent({ code, components }: MDXContentProps) {
   const Content = useMemo(() => getContent(code), [code])
 
   return Content ? (
-    <Box
-      lineHeight="1.8"
-      position="relative"
-      zIndex="0"
-      _lastChild={{ mb: "0" }}
-    >
-      <Content components={{ ...mdxComponents, ...components }} />
-    </Box>
+    <Sidebar.PropsContext value={{ breakpoint: false }}>
+      <Box
+        lineHeight="1.8"
+        position="relative"
+        zIndex="0"
+        _lastChild={{ mb: "0" }}
+      >
+        <Content components={{ ...mdxComponents, ...components }} />
+      </Box>
+    </Sidebar.PropsContext>
   ) : null
 }

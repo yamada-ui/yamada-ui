@@ -118,7 +118,7 @@
               "title": "ActionBar",
               "segment": "action-bar",
               "pathname": "/docs/components/action-bar",
-              "status": "planned"
+              "status": "new"
             },
             {
               "title": "Alert",
@@ -320,8 +320,7 @@
             {
               "title": "Form",
               "segment": "form",
-              "pathname": "/docs/components/form",
-              "status": "new"
+              "pathname": "/docs/components/form"
             },
             {
               "title": "Grid",
@@ -421,14 +420,12 @@
             {
               "title": "NativeAccordion",
               "segment": "native-accordion",
-              "pathname": "/docs/components/native-accordion",
-              "status": "new"
+              "pathname": "/docs/components/native-accordion"
             },
             {
               "title": "NativePopover",
               "segment": "native-popover",
-              "pathname": "/docs/components/native-popover",
-              "status": "new"
+              "pathname": "/docs/components/native-popover"
             },
             {
               "title": "NativeSelect",
@@ -484,8 +481,7 @@
             {
               "title": "QrCode",
               "segment": "qr-code",
-              "pathname": "/docs/components/qr-code",
-              "status": "new"
+              "pathname": "/docs/components/qr-code"
             },
             {
               "title": "Radio",
@@ -536,6 +532,12 @@
               "title": "Separator",
               "segment": "separator",
               "pathname": "/docs/components/separator"
+            },
+            {
+              "title": "Sidebar",
+              "segment": "sidebar",
+              "pathname": "/docs/components/sidebar",
+              "status": "new"
             },
             {
               "title": "SimpleGrid",
@@ -627,8 +629,7 @@
             {
               "title": "Tip",
               "segment": "tip",
-              "pathname": "/docs/components/tip",
-              "status": "new"
+              "pathname": "/docs/components/tip"
             },
             {
               "title": "Toggle",
@@ -650,7 +651,7 @@
               "title": "Tree",
               "segment": "tree",
               "pathname": "/docs/components/tree",
-              "status": "planned"
+              "status": "new"
             },
             {
               "title": "VStack",
@@ -686,8 +687,7 @@
             {
               "title": "ComposedChart",
               "segment": "composed-chart",
-              "pathname": "/docs/components/composed-chart",
-              "status": "new"
+              "pathname": "/docs/components/composed-chart"
             },
             {
               "title": "DonutChart",
@@ -1341,6 +1341,11 @@
           "title": "@yamada-ui/react",
           "segment": "react",
           "items": [
+            {
+              "title": "v2.2.0",
+              "segment": "2-2-0",
+              "pathname": "/docs/changelog/react/2-2-0"
+            },
             {
               "title": "v2.1.7",
               "segment": "2-1-7",

@@ -77,7 +77,7 @@ export default async function Layout({ children, params }: LayoutProps) {
   const lang = getLang(locale)
 
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html lang={lang} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body suppressHydrationWarning>
         <ColorModeScript />
         <ThemeSchemeScript />

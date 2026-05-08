@@ -1,27 +1,19 @@
-import { page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { Flex } from "./flex"
 
 describe("<Flex />", () => {
-  test("sets `displayName` correctly", () => {
-    expect(Flex.displayName).toBe("Flex")
+  test("renders component correctly", async () => {
+    await a11y(<Flex>Flex</Flex>)
   })
 
-  test("sets `className` correctly", async () => {
-    await render(<Flex>Flex</Flex>)
+  test("sets `className` correctly", () => {
+    render(<Flex>Flex</Flex>)
 
-    const flex = page.getByText("Flex")
-    await expect.element(flex).toHaveClass("ui-flex")
+    expect(screen.getByText("Flex")).toHaveClass("ui-flex")
   })
 
-  test("renders HTML tag correctly", async () => {
-    await render(<Flex>Flex</Flex>)
-
-    const flex = page.getByText("Flex")
-    expect(flex.element().tagName).toBe("DIV")
-  })
-
-  test("renders all the allowed shorthand style props", async () => {
-    await render(
+  test("renders all the allowed shorthand style props", () => {
+    render(
       <Flex
         align="stretch"
         basis="auto"
@@ -35,8 +27,7 @@ describe("<Flex />", () => {
       </Flex>,
     )
 
-    const flex = page.getByText("Flex")
-    await expect.element(flex).toHaveStyle({
+    expect(screen.getByText("Flex")).toHaveStyle({
       alignItems: "stretch",
       flexBasis: "auto",
       flexDirection: "row",

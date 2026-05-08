@@ -10,7 +10,7 @@ import type {
   UseColorSelectorReturn,
 } from "./use-color-selector"
 import { useMemo } from "react"
-import { createSlotComponent, styled, varAttr } from "../../core"
+import { createSlotComponent, mergeProps, styled, varAttr } from "../../core"
 import { AlphaSlider } from "../alpha-slider"
 import { ColorSwatch } from "../color-swatch"
 import { HueSlider } from "../hue-slider"
@@ -236,7 +236,7 @@ export const ColorSelectorSaturationSlider = withContext<
     <SaturationSlider.Root
       size={size}
       shape={shape}
-      {...getSaturationSliderProps({ ...saturationSliderProps, ...props })}
+      {...getSaturationSliderProps(mergeProps(saturationSliderProps, props)())}
     />
   )
 }, "saturationSlider")()
@@ -254,7 +254,7 @@ export const ColorSelectorHueSlider = withContext<
     <HueSlider.Root
       size={size}
       shape={shape}
-      {...getHueSliderProps({ ...hueSliderProps, ...props })}
+      {...getHueSliderProps(mergeProps(hueSliderProps, props)())}
     />
   )
 }, "hueSlider")()
@@ -274,7 +274,7 @@ export const ColorSelectorAlphaSlider = withContext<
     <AlphaSlider.Root
       size={size}
       shape={shape}
-      {...getAlphaSliderProps({ ...alphaSliderProps, ...props })}
+      {...getAlphaSliderProps(mergeProps(alphaSliderProps, props)())}
     />
   )
 }, "alphaSlider")()
@@ -307,10 +307,9 @@ export const ColorSelectorColorSwatchGroupLabel = withContext<
   const { colorSwatchGroupLabelProps, getColorSwatchGroupLabelProps } =
     useComponentContext()
 
-  return getColorSwatchGroupLabelProps({
-    ...colorSwatchGroupLabelProps,
-    ...props,
-  })
+  return getColorSwatchGroupLabelProps(
+    mergeProps(colorSwatchGroupLabelProps, props)(),
+  )
 })
 
 export interface ColorSelectorColorSwatchGroupProps extends HTMLStyledProps {}
@@ -321,17 +320,16 @@ export const ColorSelectorColorSwatchGroup = withContext<
 >("div", "colorSwatchGroup")(undefined, ({ children, ...rest }) => {
   const { colorSwatches, colorSwatchGroupProps, getColorSwatchGroupProps } =
     useComponentContext()
+  const computedChildren =
+    children ??
+    colorSwatchGroupProps?.children ??
+    colorSwatches?.map((value, index) => (
+      <ColorSelectorColorSwatchItem key={index} value={value} />
+    ))
 
-  return getColorSwatchGroupProps({
-    children:
-      children ??
-      colorSwatchGroupProps?.children ??
-      colorSwatches?.map((value, index) => (
-        <ColorSelectorColorSwatchItem key={index} value={value} />
-      )),
-    ...colorSwatchGroupProps,
-    ...rest,
-  })
+  return getColorSwatchGroupProps(
+    mergeProps(colorSwatchGroupProps, rest, { children: computedChildren })(),
+  )
 })
 
 export interface ColorSelectorColorSwatchItemProps extends Omit<
@@ -351,5 +349,5 @@ export const ColorSelectorColorSwatchItem = withContext<
   const { colorSwatchItemProps, getColorSwatchItemProps } =
     useComponentContext()
 
-  return getColorSwatchItemProps({ ...colorSwatchItemProps, ...props })
+  return getColorSwatchItemProps(mergeProps(colorSwatchItemProps, props)())
 })

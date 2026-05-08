@@ -1,5 +1,81 @@
 # @yamada-ui/react
 
+## 2.2.0
+
+### Minor Changes
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `ExtractStyleValue` type.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - New icons have been added. Brand icons have been removed. If you were using brand icons, you need to replace them with alternative icons.
+  - ChromiumIcon
+  - CodepenIcon
+  - CodesandboxIcon
+  - DribbbleIcon
+  - FacebookIcon
+  - FigmaIcon
+  - FramerIcon
+  - GithubIcon
+  - GitlabIcon
+  - InstagramIcon
+  - LinkedInIcon
+  - PocketIcon
+  - RailSymbolIcon
+  - SlackIcon
+  - TwitterIcon
+  - TwitchIcon
+  - TrelloIcon
+  - YouTubeIcon
+
+  We recommend to use the official SVG icons provided by the respective brands, most of them can be found on their websites or in their brand guidelines.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `"number"` variant to `Timeline` component.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Properties such as `placement` and `gutter` for components like `Popover` and `Select` now support responsive design and color mode.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Tree` component.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - `usePopper` now supports the `"center-start-start"`, `"center-start-end"`, `"center-end-start"`, and `"center-end-end"` placements. Accordingly, `Popover` and `Tooltip` now also support these placements.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `ActionBar` component.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed from `getPopupAnimationProps` to `usePopupAnimationProps` to enable responsive design and color mode support for the `animationScheme` and `duration` properties of `Popover`.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `_peer` to condition props.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `rootNode` to `UIProvider` component.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - The `animationScheme` and `duration` properties for components such as `Popover`, `Tooltip`, and `Modal` now support responsive design and color mode.
+
+### Patch Changes
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `DefineComponentStyleProps`, `DefineComponentStyleModifiers`, `DefineComponentStyleSlotProps` and `DefineComponentStyleSlotModifiers` types.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the border style and thickness were being overwritten for `solid`, `subtle`, and `surface` in `layerStyle`.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Sidebar` component.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `_collapsed` and `_content` to condition props.
+
+- [#6394](https://github.com/yamada-ui/yamada-ui/pull/6394) [`11b2933`](https://github.com/yamada-ui/yamada-ui/commit/11b2933f1a3f667d885de0f133c21352e0f57632) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Allowed `undefined` as an argument for `mergeProps`.
+
+- [#6407](https://github.com/yamada-ui/yamada-ui/pull/6407) [`18cdb67`](https://github.com/yamada-ui/yamada-ui/commit/18cdb675ce76b95ebea588abd27bc42ce823ce96) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - `InfiniteScrollArea` now sets the `overflow` style by default.
+
+- [#6405](https://github.com/yamada-ui/yamada-ui/pull/6405) [`0b551af`](https://github.com/yamada-ui/yamada-ui/commit/0b551af4f184cd2d4a0dfd842e4cf0a3c200ae29) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where React warnings appeared during rendering of `ColorModeScript` and `ThemeSchemeScript`.
+
+- [#6377](https://github.com/yamada-ui/yamada-ui/pull/6377) [`9de8d1d`](https://github.com/yamada-ui/yamada-ui/commit/9de8d1d18a3cffc0d82f12fe8149e1e5baf54823) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enabled setting arbitrary string values for each property in Style Props.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Adjusted the color of `colors.black.bg`.
+
+- [#6386](https://github.com/yamada-ui/yamada-ui/pull/6386) [`df19405`](https://github.com/yamada-ui/yamada-ui/commit/df19405c30bd5de7d2bf3cc8a9594915fd87ce9a) Thanks [@taroj1205](https://github.com/taroj1205)! - Fixed `Input` and `Select` so padding is applied correctly.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed the `register` function in `useDescendant` generated by `createDescendants` to update the store on element re-render.
+
+- [#6395](https://github.com/yamada-ui/yamada-ui/pull/6395) [`a766407`](https://github.com/yamada-ui/yamada-ui/commit/a7664077f1f8c40f8facfe7f8623515a630332f4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where setting `duration` to `0` in components like `Drawer` was not handled correctly.
+
+- [#6265](https://github.com/yamada-ui/yamada-ui/pull/6265) [`864639f`](https://github.com/yamada-ui/yamada-ui/commit/864639f6456c9e6d875a317d26c5a09092adb453) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed incorrect descriptions in the `_peer*` props.
+
+- [#6396](https://github.com/yamada-ui/yamada-ui/pull/6396) [`69746af`](https://github.com/yamada-ui/yamada-ui/commit/69746afd70d62d03d2f6e90dedde797c86a51223) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `_groupAnimated` and `_peerAnimated` to condition props.
+
 ## 2.1.7
 
 ### Patch Changes

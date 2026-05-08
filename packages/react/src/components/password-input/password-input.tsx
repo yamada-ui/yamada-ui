@@ -5,7 +5,7 @@ import type { HTMLStyledProps, ThemeProps, WithoutThemeProps } from "../../core"
 import type { InputProps } from "../input"
 import type { PasswordInputStyle } from "./password-input.style"
 import type { UsePasswordInputProps } from "./use-password-input"
-import { createSlotComponent } from "../../core"
+import { createSlotComponent, mergeProps } from "../../core"
 import { useGroupItemProps } from "../group"
 import { EyeIcon, EyeOffIcon } from "../icon"
 import { Input, InputGroup, useInputPropsContext } from "../input"
@@ -71,8 +71,7 @@ export const PasswordInput = withProvider<"input", PasswordInputProps>(
         className={className}
         css={css}
         colorScheme={colorScheme}
-        {...groupItemProps}
-        {...rootProps}
+        {...mergeProps(groupItemProps, rootProps)()}
       >
         <PasswordInputField {...getInputProps()} />
 
@@ -88,7 +87,7 @@ export const PasswordInput = withProvider<"input", PasswordInputProps>(
 )((props) => {
   const context = useInputPropsContext()
 
-  return { ...context, ...props }
+  return mergeProps(context, props)()
 })
 
 interface PasswordInputFieldProps extends InputProps {}

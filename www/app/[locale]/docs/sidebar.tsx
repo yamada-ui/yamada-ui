@@ -1,13 +1,13 @@
 "use client"
 
 import type { NextLinkButtonProps } from "@/components"
-import { Box, handlerAll, Text, useSafeLayoutEffect } from "@yamada-ui/react"
+import { Box, Text, useSafeLayoutEffect } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import { useMemo, useRef } from "react"
 import scrollIntoView from "scroll-into-view-if-needed"
 import { NextLinkButton, Status } from "@/components"
 import { getDocMap } from "@/data"
-import { useLocale, usePathname } from "@/i18n"
+import { getPathname, useLocale, usePathname } from "@/i18n"
 
 export function Sidebar() {
   const ref = useRef<HTMLDivElement>(null)
@@ -116,13 +116,13 @@ interface SidebarItemProps extends NextLinkButtonProps {
   segment: string
 }
 
-function SidebarItem({ href, segment, onClick, ...rest }: SidebarItemProps) {
+function SidebarItem({ href, segment, ...rest }: SidebarItemProps) {
   const pathname = usePathname()
   const overview = segment === "overview"
   const current = overview
     ? pathname === href
-    : pathname.length <= href.toString().length &&
-      pathname.startsWith(href.toString())
+    : pathname.length <= getPathname(href).length &&
+      pathname.startsWith(getPathname(href))
 
   return (
     <NextLinkButton
@@ -134,9 +134,6 @@ function SidebarItem({ href, segment, onClick, ...rest }: SidebarItemProps) {
       fontWeight="normal"
       justifyContent="flex-start"
       mb="xs"
-      onClick={handlerAll(onClick, () =>
-        window.scrollTo({ behavior: "instant", top: 0 }),
-      )}
       {...rest}
     />
   )

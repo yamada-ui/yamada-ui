@@ -20,7 +20,11 @@ export function CopyButton({ value, onClick, ...rest }: CopyButtonProps) {
   const { copied, onCopy } = useClipboard(value, 4000)
 
   return (
-    <Tooltip content={copied ? t("copied") : t("copy")} placement="start">
+    <Tooltip
+      closeOnClick={false}
+      content={copied ? t("copied") : t("copy")}
+      placement="start"
+    >
       <IconButton
         size={{ base: "sm", md: "xs" }}
         variant="ghost"

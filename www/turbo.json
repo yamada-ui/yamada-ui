@@ -2,14 +2,23 @@
   "$schema": "https://turborepo.dev/schema.v2.json",
   "extends": ["//"],
   "tasks": {
-    "format": {
-      "dependsOn": ["build:content"]
+    "build:content": {
+      "inputs": [
+        "{velite.config.ts,package.json}",
+        "{contents,constants,utils,data,messages,scripts/generate/docs}/**",
+        "!data/doc-map.*.json",
+        "../{pnpm-lock,pnpm-workspace}.yaml",
+        "../packages/workspace/src/oxfmt/**",
+        "../packages/workspace/package.json"
+      ]
     },
     "lint": {
-      "dependsOn": ["build:content"]
+      "dependsOn": ["build:content"],
+      "inputs": ["**/*.{ts,tsx,mts,mdx}", "package.json", "tsconfig.json"]
     },
     "typecheck": {
-      "dependsOn": ["build:content"]
+      "dependsOn": ["build:content"],
+      "inputs": ["**/*.{ts,tsx,mts}", "package.json", "tsconfig.json"]
     }
   }
 }

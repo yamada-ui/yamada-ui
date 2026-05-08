@@ -1,9 +1,9 @@
-import { render, screen } from "#test"
+import { a11y, render, screen } from "#test"
 import { Grid } from "./grid"
 
 describe("<Grid />", () => {
-  test("renders grid correctly", () => {
-    render(<Grid>Grid</Grid>)
+  test("renders component correctly", async () => {
+    await a11y(<Grid>Grid</Grid>)
   })
 
   test("sets `displayName` correctly", () => {
@@ -12,11 +12,13 @@ describe("<Grid />", () => {
 
   test("sets `className` correctly", () => {
     render(<Grid>Grid</Grid>)
+
     expect(screen.getByText("Grid")).toHaveClass("ui-grid")
   })
 
   test("renders HTML tag correctly", () => {
     render(<Grid>Grid</Grid>)
+
     expect(screen.getByText("Grid").tagName).toBe("DIV")
   })
 

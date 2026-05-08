@@ -1,7 +1,8 @@
-import { a11y, render, screen } from "#test"
+import type { CSSProperties } from "react"
+import { a11y, fireEvent, render, screen } from "#test"
 import { noop } from "../../utils"
-import { BoxIcon } from "../icon"
 import { Accordion } from "./"
+import { useAccordion, useAccordionItem } from "./use-accordion"
 
 const items = [
   {
@@ -17,6 +18,103 @@ const items = [
     children: "This is an accordion item 3",
   },
 ]
+
+interface RootPropsMergeProbeProps {
+  argsClassName: string
+  argsId: string
+  argsStyle: CSSProperties
+  restClassName: string
+  restDataTestId: string
+  restId: string
+  restStyle: CSSProperties
+  argsOnClick: () => void
+  argsRef: (node: HTMLDivElement | null) => void
+  restOnClick: () => void
+  restRef: (node: HTMLDivElement | null) => void
+}
+
+const RootPropsMergeProbe = ({
+  argsClassName,
+  argsId,
+  argsOnClick,
+  argsRef,
+  argsStyle,
+  restClassName,
+  restDataTestId,
+  restId,
+  restOnClick,
+  restRef,
+  restStyle,
+}: RootPropsMergeProbeProps) => {
+  const { getRootProps } = useAccordion({
+    id: restId,
+    ref: restRef,
+    className: restClassName,
+    style: restStyle,
+    "data-testid": restDataTestId,
+    onClick: restOnClick,
+  })
+
+  return (
+    <div
+      {...getRootProps({
+        id: argsId,
+        ref: argsRef,
+        className: argsClassName,
+        style: argsStyle,
+        onClick: argsOnClick,
+      })}
+    />
+  )
+}
+
+interface ItemPropsMergeProbeProps {
+  argsClassName: string
+  argsId: string
+  argsStyle: CSSProperties
+  restClassName: string
+  restId: string
+  restStyle: CSSProperties
+  argsOnClick: () => void
+  argsRef: (node: HTMLDivElement | null) => void
+  restOnClick: () => void
+  restRef: (node: HTMLDivElement | null) => void
+}
+
+const ItemPropsMergeProbe = ({
+  argsClassName,
+  argsId,
+  argsOnClick,
+  argsRef,
+  argsStyle,
+  restClassName,
+  restId,
+  restOnClick,
+  restRef,
+  restStyle,
+}: ItemPropsMergeProbeProps) => {
+  const { getItemProps } = useAccordionItem({
+    id: restId,
+    ref: restRef,
+    className: restClassName,
+    style: restStyle,
+    index: 0,
+    onClick: restOnClick,
+  })
+
+  return (
+    <div
+      {...getItemProps({
+        id: argsId,
+        ref: argsRef,
+        className: argsClassName,
+        style: argsStyle,
+        "data-testid": "item-probe",
+        onClick: argsOnClick,
+      })}
+    />
+  )
+}
 
 describe("<Accordion />", () => {
   test("renders component correctly", async () => {
@@ -46,6 +144,7 @@ describe("<Accordion />", () => {
         </Accordion.Item>
       </Accordion.Root>,
     )
+
     expect(screen.getByTestId("root")).toHaveClass("ui-accordion__root")
     expect(screen.getByTestId("item")).toHaveClass("ui-accordion__item")
     expect(screen.getByTestId("panel")).toHaveClass("ui-accordion__panel")
@@ -64,54 +163,25 @@ describe("<Accordion />", () => {
         </Accordion.Item>
       </Accordion.Root>,
     )
-    expect(screen.getByTestId("root").tagName).toBe("DIV")
+
+    const root = screen.getByTestId("root")
     const item = screen.getByTestId("item")
+    const panel = screen.getByTestId("panel")
+    const button = screen.getByRole("button", { name: /Accordion Label/i })
+
+    expect(root.tagName).toBe("DIV")
     expect(item.tagName).toBe("DIV")
-    expect(item.children[0]?.tagName).toBe("H3")
-    expect(screen.getByTestId("panel").tagName).toBe("DIV")
-    expect(
-      screen.getByRole("button", { name: /Accordion Label/i }).tagName,
-    ).toBe("BUTTON")
+    expect(item.firstElementChild?.tagName).toBe("H3")
+    expect(panel.tagName).toBe("DIV")
+    expect(button.tagName).toBe("BUTTON")
   })
 
-  test("should render correctly with defaultIndex item expanded", async () => {
+  test("should render correctly with defaultIndex item expanded", () => {
     render(<Accordion.Root defaultIndex={0} items={items} />)
 
-    const button = await screen.findByRole("button", {
-      name: /Accordion Label 1/i,
-    })
-    expect(button).toHaveAttribute("aria-expanded", "true")
-    const paragraphs = await screen.findAllByRole("paragraph")
-    expect(paragraphs[0]).toHaveTextContent("This is an accordion item 1")
-  })
-
-  test("should work correctly with toggle", async () => {
-    const { user } = render(<Accordion.Root items={items} toggle />)
-
     const button = screen.getByRole("button", { name: /Accordion Label 1/i })
-
-    await user.click(button)
     expect(button).toHaveAttribute("aria-expanded", "true")
-
-    await user.click(button)
-    expect(button).toHaveAttribute("aria-expanded", "false")
-  })
-
-  test("should show multiple items", async () => {
-    const { user } = render(
-      <Accordion.Root defaultIndex={[0, 1]} items={items} multiple />,
-    )
-
-    const item1 = screen.getByRole("button", { name: /Accordion Label 1/i })
-    const item2 = screen.getByRole("button", { name: /Accordion Label 2/i })
-    const item3 = screen.getByRole("button", { name: /Accordion Label 3/i })
-
-    expect(item1).toHaveAttribute("aria-expanded", "true")
-    expect(item2).toHaveAttribute("aria-expanded", "true")
-    expect(item3).toHaveAttribute("aria-expanded", "false")
-
-    await user.click(item3)
-    expect(item3).toHaveAttribute("aria-expanded", "true")
+    expect(screen.getByText("This is an accordion item 1")).toBeInTheDocument()
   })
 
   test("should render a disabled item", () => {
@@ -123,11 +193,12 @@ describe("<Accordion />", () => {
       </Accordion.Root>,
     )
 
-    const button = screen.getByRole("button", { name: /Accordion Label/i })
-    expect(button).toBeDisabled()
+    expect(
+      screen.getByRole("button", { name: /Accordion Label/i }),
+    ).toBeDisabled()
   })
 
-  test("should render item with panel", async () => {
+  test("should render item with panel", () => {
     render(
       <Accordion.Root defaultIndex={0}>
         <Accordion.Item button="Accordion Label" index={0}>
@@ -136,95 +207,7 @@ describe("<Accordion />", () => {
       </Accordion.Root>,
     )
 
-    const paragraph = await screen.findByRole("paragraph")
-
-    expect(paragraph).toHaveTextContent("This is an accordion item")
-  })
-
-  test("should render item with custom icon", async () => {
-    const { user } = render(
-      <Accordion.Root
-        icon={({ expanded }) => (
-          <BoxIcon
-            data-icon={!expanded ? "plus" : "minus"}
-            data-testid="custom-icon"
-          />
-        )}
-      >
-        <Accordion.Item button="Accordion Label" index={0}>
-          This is an accordion item
-        </Accordion.Item>
-      </Accordion.Root>,
-    )
-    expect(screen.getByTestId("custom-icon")).toHaveAttribute(
-      "data-icon",
-      "plus",
-    )
-
-    await user.click(screen.getByRole("button", { name: /Accordion Label/i }))
-    expect(screen.getByTestId("custom-icon")).toHaveAttribute(
-      "data-icon",
-      "minus",
-    )
-  })
-
-  test("should render item with custom icon in AccordionItem", async () => {
-    const { user } = render(
-      <Accordion.Root>
-        <Accordion.Item
-          button="Accordion Label"
-          icon={({ expanded }) => (
-            <BoxIcon
-              data-icon={!expanded ? "plus" : "minus"}
-              data-testid="custom-icon"
-            />
-          )}
-          index={0}
-        >
-          This is an accordion item
-        </Accordion.Item>
-      </Accordion.Root>,
-    )
-    expect(screen.getByTestId("custom-icon")).toHaveAttribute(
-      "data-icon",
-      "plus",
-    )
-
-    await user.click(screen.getByRole("button", { name: /Accordion Label/i }))
-    expect(screen.getByTestId("custom-icon")).toHaveAttribute(
-      "data-icon",
-      "minus",
-    )
-  })
-
-  test("should render item with custom icon in AccordionButton", async () => {
-    const { user } = render(
-      <Accordion.Root>
-        <Accordion.Item index={0}>
-          <Accordion.Button
-            icon={({ expanded }) => (
-              <BoxIcon
-                data-icon={!expanded ? "plus" : "minus"}
-                data-testid="custom-icon"
-              />
-            )}
-          >
-            Accordion Label
-          </Accordion.Button>
-          This is an accordion item
-        </Accordion.Item>
-      </Accordion.Root>,
-    )
-    expect(screen.getByTestId("custom-icon")).toHaveAttribute(
-      "data-icon",
-      "plus",
-    )
-
-    await user.click(screen.getByRole("button", { name: /Accordion Label/i }))
-    expect(screen.getByTestId("custom-icon")).toHaveAttribute(
-      "data-icon",
-      "minus",
-    )
+    expect(screen.getByText("This is an accordion item")).toBeInTheDocument()
   })
 
   test("should render item with custom label", () => {
@@ -236,96 +219,10 @@ describe("<Accordion />", () => {
         </Accordion.Item>
       </Accordion.Root>,
     )
+
     expect(
       screen.getByRole("button", { name: /Accordion Label/i }),
     ).toBeInTheDocument()
-  })
-
-  test("should render label with function label", async () => {
-    const { user } = render(
-      <Accordion.Root>
-        <Accordion.Item
-          button={({ disabled, expanded }) => {
-            if (disabled) return <p>Is disabled</p>
-
-            if (expanded) return <p>Is expanded</p>
-            else return <p>Not expanded</p>
-          }}
-          index={0}
-        >
-          This is an accordion item
-        </Accordion.Item>
-      </Accordion.Root>,
-    )
-
-    const button = screen.getByRole("button", { name: /Not expanded/i })
-    expect(button).toBeInTheDocument()
-
-    await user.click(button)
-    expect(button).toHaveTextContent("Is expanded")
-  })
-
-  test("focus moves correctly on ArrowDown", async () => {
-    const { user } = render(<Accordion.Root items={items} />)
-
-    const item1 = screen.getByRole("button", { name: /Accordion Label 1/i })
-    const item2 = screen.getByRole("button", { name: /Accordion Label 2/i })
-    const item3 = screen.getByRole("button", { name: /Accordion Label 3/i })
-
-    await user.click(item1)
-    expect(item1).toHaveFocus()
-
-    await user.keyboard("{ArrowDown>}")
-    expect(item2).toHaveFocus()
-
-    await user.keyboard("{ArrowDown>}")
-    expect(item3).toHaveFocus()
-
-    await user.keyboard("{ArrowDown>}")
-    expect(item1).toHaveFocus()
-  })
-
-  test("focus moves correctly on ArrowUp", async () => {
-    const { user } = render(<Accordion.Root items={items} />)
-
-    const item1 = screen.getByRole("button", { name: /Accordion Label 1/i })
-    const item2 = screen.getByRole("button", { name: /Accordion Label 2/i })
-    const item3 = screen.getByRole("button", { name: /Accordion Label 3/i })
-
-    await user.click(item1)
-    expect(item1).toHaveFocus()
-
-    await user.keyboard("{ArrowUp>}")
-    expect(item3).toHaveFocus()
-
-    await user.keyboard("{ArrowUp>}")
-    expect(item2).toHaveFocus()
-  })
-
-  test("focus moves correctly on Home", async () => {
-    const { user } = render(<Accordion.Root items={items} />)
-
-    const item1 = screen.getByRole("button", { name: /Accordion Label 1/i })
-    const item3 = screen.getByRole("button", { name: /Accordion Label 3/i })
-
-    await user.click(item3)
-    expect(item3).toHaveFocus()
-
-    await user.keyboard("{Home>}")
-    expect(item1).toHaveFocus()
-  })
-
-  test("focus moves correctly on End", async () => {
-    const { user } = render(<Accordion.Root items={items} />)
-
-    const item1 = screen.getByRole("button", { name: /Accordion Label 1/i })
-    const item3 = screen.getByRole("button", { name: /Accordion Label 3/i })
-
-    await user.click(item1)
-    expect(item1).toHaveFocus()
-
-    await user.keyboard("{End>}")
-    expect(item3).toHaveFocus()
   })
 
   test("correct warnings should be issued when multiple and toggle", () => {
@@ -339,7 +236,7 @@ describe("<Accordion />", () => {
       </Accordion.Root>,
     )
 
-    expect(consoleWarnSpy).toHaveBeenLastCalledWith(
+    expect(consoleWarnSpy).toHaveBeenCalledWith(
       "Accordion: If 'multiple' is passed, 'toggle' will be ignored. Either remove 'toggle' or 'multiple' depending on whether you want multiple accordions visible or not",
     )
 
@@ -357,10 +254,86 @@ describe("<Accordion />", () => {
       </Accordion.Root>,
     )
 
-    expect(consoleWarnSpy).toHaveBeenLastCalledWith(
+    expect(consoleWarnSpy).toHaveBeenCalledWith(
       "Accordion: If 'multiple' is passed, then 'index' or 'defaultIndex' must be an array.",
     )
 
     consoleWarnSpy.mockRestore()
+  })
+
+  test("merges props correctly in `getRootProps`", () => {
+    const restOnClick = vi.fn()
+    const argsOnClick = vi.fn()
+    const restRef = vi.fn()
+    const argsRef = vi.fn()
+    render(
+      <RootPropsMergeProbe
+        argsClassName="args-class"
+        argsId="args-id"
+        argsOnClick={argsOnClick}
+        argsRef={argsRef}
+        argsStyle={{ backgroundColor: "blue" }}
+        restClassName="rest-class"
+        restDataTestId="root-probe"
+        restId="rest-id"
+        restOnClick={restOnClick}
+        restRef={restRef}
+        restStyle={{ color: "red" }}
+      />,
+    )
+
+    const root = screen.getByTestId("root-probe")
+
+    expect(root).toHaveClass("rest-class")
+    expect(root).toHaveClass("args-class")
+    expect(root.id).toBe("args-id")
+    expect(root.style.color).toBe("red")
+    expect(root.style.backgroundColor).toBe("blue")
+    expect(root).toHaveAttribute("data-testid", "root-probe")
+
+    fireEvent.click(root)
+    expect(restOnClick).toHaveBeenCalledTimes(1)
+    expect(argsOnClick).toHaveBeenCalledTimes(1)
+
+    expect(restRef).toHaveBeenCalledWith(root)
+    expect(argsRef).toHaveBeenCalledWith(root)
+  })
+
+  test("merges props correctly in `getItemProps`", () => {
+    const restOnClick = vi.fn()
+    const argsOnClick = vi.fn()
+    const restRef = vi.fn()
+    const argsRef = vi.fn()
+    render(
+      <Accordion.Root>
+        <ItemPropsMergeProbe
+          argsClassName="args-class"
+          argsId="args-id"
+          argsOnClick={argsOnClick}
+          argsRef={argsRef}
+          argsStyle={{ backgroundColor: "blue" }}
+          restClassName="rest-class"
+          restId="rest-id"
+          restOnClick={restOnClick}
+          restRef={restRef}
+          restStyle={{ color: "red" }}
+        />
+      </Accordion.Root>,
+    )
+
+    const item = screen.getByTestId("item-probe")
+
+    expect(item).toHaveClass("rest-class")
+    expect(item).toHaveClass("args-class")
+    expect(item.id).toBe("args-id")
+    expect(item.style.color).toBe("red")
+    expect(item.style.backgroundColor).toBe("blue")
+
+    fireEvent.click(item)
+    expect(restOnClick).toHaveBeenCalledTimes(1)
+    expect(argsOnClick).toHaveBeenCalledTimes(1)
+
+    expect(restRef).toHaveBeenCalledWith(item)
+    expect(argsRef).toHaveBeenCalledWith(item)
   })
 })

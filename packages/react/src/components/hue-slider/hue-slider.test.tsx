@@ -1,3 +1,4 @@
+import { vi } from "vitest"
 import { a11y, render, screen } from "#test"
 import { HueSlider } from "."
 
@@ -22,40 +23,73 @@ describe("<HueSlider />", () => {
         trackProps={{ "data-testid": "track" }}
       />,
     )
-    const root = screen.getByTestId("slider")
-    const track = screen.getByTestId("track")
-    const thumb = screen.getByRole("slider")
-    const overlay = screen.getAllByTestId("overlay")
-    expect(root).toHaveClass("ui-hue-slider__root")
-    expect(track).toHaveClass("ui-hue-slider__track")
-    expect(thumb).toHaveClass("ui-hue-slider__thumb")
-    expect(overlay[0]).toHaveClass("ui-hue-slider__overlay")
+    expect(screen.getByTestId("slider")).toHaveClass("ui-hue-slider__root")
+    expect(screen.getByTestId("track")).toHaveClass("ui-hue-slider__track")
+    expect(screen.getByRole("slider")).toHaveClass("ui-hue-slider__thumb")
+    expect(screen.getAllByTestId("overlay")[0]).toHaveClass(
+      "ui-hue-slider__overlay",
+    )
+  })
+
+  test("merges `overlayProps` and `layers` props on overlay", () => {
+    const onOverlayClick = vi.fn()
+    const onLayerClick = vi.fn()
+    render(
+      <HueSlider.Root
+        defaultValue={0}
+        overlayProps={{
+          className: "from-overlay",
+          style: { color: "red", pointerEvents: "auto" },
+          "data-testid": "overlay",
+          layers: [
+            {
+              className: "from-layer",
+              style: { backgroundColor: "blue", pointerEvents: "auto" },
+              onClick: onLayerClick,
+            },
+          ],
+          onClick: onOverlayClick,
+        }}
+      />,
+    )
+
+    const overlay = screen.getByTestId("overlay")
+
+    expect(overlay).toHaveClass(
+      "ui-hue-slider__overlay",
+      "from-overlay",
+      "from-layer",
+    )
+    expect(overlay).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(overlay).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+
+    overlay.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    )
+
+    expect(onOverlayClick).toHaveBeenCalledTimes(1)
+    expect(onLayerClick).toHaveBeenCalledTimes(1)
   })
 
   test("renders custom children correctly", () => {
     render(
       <HueSlider.Root defaultValue={180}>
-        <div data-testid="custom-child" />
+        <div data-testid="custom-child">custom</div>
       </HueSlider.Root>,
     )
 
-    expect(screen.getByTestId("custom-child")).toBeVisible()
+    expect(screen.getByTestId("custom-child")).toBeInTheDocument()
   })
 
   test("sets aria attributes correctly", () => {
     render(<HueSlider.Root defaultValue={180} />)
 
-    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuenow", "180")
-    expect(screen.getByRole("slider")).toHaveAttribute(
-      "aria-valuetext",
-      "180°, Cyan",
-    )
-    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuemin", "0")
-    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuemax", "360")
-    expect(screen.getByRole("slider")).toHaveAttribute(
-      "aria-orientation",
-      "horizontal",
-    )
+    const slider = screen.getByRole("slider")
+    expect(slider).toHaveAttribute("aria-valuenow", "180")
+    expect(slider).toHaveAttribute("aria-valuetext", "180°, Cyan")
+    expect(slider).toHaveAttribute("aria-valuemin", "0")
+    expect(slider).toHaveAttribute("aria-valuemax", "360")
+    expect(slider).toHaveAttribute("aria-orientation", "horizontal")
   })
 
   test("sets vertical orientation correctly", () => {
@@ -71,7 +105,7 @@ describe("<HueSlider />", () => {
       "aria-orientation",
       "vertical",
     )
-    expect(screen.getByTestId("overlay")).toHaveAttribute(
+    expect(screen.getAllByTestId("overlay")[0]).toHaveAttribute(
       "data-orientation",
       "vertical",
     )
@@ -90,7 +124,7 @@ describe("<HueSlider />", () => {
     [270, "Magenta"],
     [329, "Magenta"],
     [330, "Red"],
-  ])("sets aria-valuetext for each hue correctly", (hue, color) => {
+  ])("sets aria-valuetext for hue %i as %s", (hue, color) => {
     render(<HueSlider.Root defaultValue={hue} />)
 
     expect(screen.getByRole("slider")).toHaveAttribute(

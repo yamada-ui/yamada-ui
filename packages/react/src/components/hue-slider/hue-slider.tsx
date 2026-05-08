@@ -3,7 +3,7 @@
 import type { HTMLStyledProps, ThemeProps, WithoutThemeProps } from "../../core"
 import type { HueSliderStyle } from "./hue-slider.style"
 import { useCallback, useMemo } from "react"
-import { createSlotComponent, styled } from "../../core"
+import { createSlotComponent, mergeProps, styled } from "../../core"
 import { useValue } from "../../hooks/use-value"
 import { useI18n } from "../../providers/i18n-provider"
 import { Slider } from "../slider"
@@ -173,8 +173,7 @@ export const HueSliderOverlay = withContext<"fragment", HueSliderOverlayProps>(
           <styled.div
             key={index}
             data-orientation={orientation}
-            {...rest}
-            {...props}
+            {...mergeProps(rest, props)()}
           />
         ))}
       </>

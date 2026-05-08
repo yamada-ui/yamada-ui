@@ -1,14 +1,14 @@
 import type { FC } from "react"
 import type { IconProps } from "./icon"
 import type { IconNames } from "./icons"
-import { a11y, render } from "#test"
 import { burger } from "@lucide/lab"
+import { a11y, render } from "#test"
 import { icons } from "./"
 import { GhostIcon } from "./icons"
 import { LucideIcon } from "./lucide-icon"
 
 describe("Lucide icon", () => {
-  test("renders component correctly", async () => {
+  test("passes a11y checks", async () => {
     await a11y(<GhostIcon />)
   })
 
@@ -18,16 +18,20 @@ describe("Lucide icon", () => {
 
   test("sets `className` correctly", () => {
     const { container } = render(<GhostIcon />)
+
     expect(container.firstChild).toHaveClass("ui-icon")
   })
 
   test("renders HTML tag correctly", () => {
     const { container } = render(<GhostIcon />)
+
     expect(container.firstChild?.nodeName).toBe("svg")
   })
 
   test("renders icon correctly", () => {
-    render(<GhostIcon />)
+    const { container } = render(<GhostIcon />)
+
+    expect(container.firstChild).toBeInTheDocument()
   })
 
   test("renders icons correctly", () => {
@@ -37,12 +41,17 @@ describe("Lucide icon", () => {
       return <Icon {...rest} />
     }
 
-    render(<Icon name="GhostIcon" />)
+    const { container } = render(<Icon name="GhostIcon" />)
+
+    expect(container.firstChild).toHaveClass("ui-icon")
   })
 })
 
 describe("<LucideIcon />", () => {
   test("renders Icon correctly", () => {
-    render(<LucideIcon iconNode={burger} />)
+    const { container } = render(<LucideIcon iconNode={burger} />)
+
+    expect(container.firstChild).toHaveClass("ui-icon")
+    expect(container.firstChild?.nodeName).toBe("svg")
   })
 })

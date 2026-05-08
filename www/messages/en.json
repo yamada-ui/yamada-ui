@@ -28,6 +28,11 @@
       "utils": "@yamada-ui/utils"
     }
   },
+  "notFoundPage": {
+    "title": "Page Not Found",
+    "description": "You just hit a route that doesn't exist... the sadness.😢",
+    "action": "Back to home"
+  },
   "home": {
     "title": "Unleash the Power of Components",
     "description": "Provides a design system that delivers beautiful, consistent, accessible components and advanced styling. Bring your ideas to life.",

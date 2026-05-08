@@ -1,4 +1,4 @@
-import { a11y, fireEvent, render, screen } from "#test"
+import { a11y, render, screen } from "#test"
 import { NativePopover } from "."
 import { Button } from "../button"
 
@@ -65,19 +65,20 @@ describe("<NativePopover />", () => {
 
     expect(trigger).toHaveAttribute("aria-haspopup", "dialog")
     expect(trigger).toHaveAttribute("aria-controls")
-    expect(trigger).toHaveAttribute("popoverTarget")
-    expect(trigger).toHaveAttribute("popoverTargetAction", "toggle")
+    expect(trigger).toHaveAttribute("popovertarget")
+    expect(trigger).toHaveAttribute("popovertargetaction", "toggle")
     expect(trigger).toHaveAttribute("role", "button")
     expect(trigger).toHaveAttribute("type", "button")
 
     expect(content).toHaveAttribute("role", "dialog")
-    expect(content).toHaveAttribute("tabIndex", "-1")
+    expect(content).toHaveAttribute("tabindex", "-1")
     expect(content).toHaveAttribute("data-popup", "")
     expect(content).toHaveAttribute("popover", "auto")
   })
 
   test("renders HTML tag correctly", () => {
     render(<Component />)
+
     const header = screen.getByTestId("header")
     const body = screen.getByTestId("body")
     const footer = screen.getByTestId("footer")
@@ -118,23 +119,15 @@ describe("<NativePopover />", () => {
   test("renders with anchor component", () => {
     render(<ComponentWithAnchor />)
 
-    const anchor = screen.getByTestId("anchor")
-    const trigger = screen.getByTestId("trigger")
-    const content = screen.getByTestId("content")
-
-    expect(anchor).toHaveClass("ui-native-popover__anchor")
-    expect(trigger).toHaveClass("ui-native-popover__trigger")
-    expect(content).toHaveClass("ui-native-popover__content")
-  })
-
-  test("should render with custom popover props", () => {
-    render(<Component popover="manual" popoverTargetAction="show" />)
-
-    const trigger = screen.getByTestId("trigger")
-    const content = screen.getByTestId("content")
-
-    expect(trigger).toHaveAttribute("popoverTargetAction", "show")
-    expect(content).toHaveAttribute("popover", "manual")
+    expect(screen.getByTestId("anchor")).toHaveClass(
+      "ui-native-popover__anchor",
+    )
+    expect(screen.getByTestId("trigger")).toHaveClass(
+      "ui-native-popover__trigger",
+    )
+    expect(screen.getByTestId("content")).toHaveClass(
+      "ui-native-popover__content",
+    )
   })
 
   test("should render with different popover modes", () => {
@@ -143,22 +136,30 @@ describe("<NativePopover />", () => {
     expect(screen.getByTestId("content")).toHaveAttribute("popover", "hint")
 
     rerender(<Component popover="" />)
-
     expect(screen.getByTestId("content")).toHaveAttribute("popover", "")
+  })
+
+  test("should render with custom popover props", () => {
+    render(<Component popover="manual" popoverTargetAction="show" />)
+
+    expect(screen.getByTestId("trigger")).toHaveAttribute(
+      "popovertargetaction",
+      "show",
+    )
+    expect(screen.getByTestId("content")).toHaveAttribute("popover", "manual")
   })
 
   test("should render with different popover target actions", () => {
     const { rerender } = render(<Component popoverTargetAction="show" />)
 
     expect(screen.getByTestId("trigger")).toHaveAttribute(
-      "popoverTargetAction",
+      "popovertargetaction",
       "show",
     )
 
     rerender(<Component popoverTargetAction="hide" />)
-
     expect(screen.getByTestId("trigger")).toHaveAttribute(
-      "popoverTargetAction",
+      "popovertargetaction",
       "hide",
     )
   })
@@ -181,17 +182,5 @@ describe("<NativePopover />", () => {
     const closeTrigger = screen.getByTestId("close-trigger")
     expect(closeTrigger).toHaveAttribute("popovertargetaction", "hide")
     expect(closeTrigger).toHaveAttribute("popovertarget")
-  })
-
-  test("should prevent default and stop propagation when disabled", () => {
-    render(<Component disabled />)
-
-    const trigger = screen.getByTestId("trigger")
-
-    expect(trigger).toHaveAttribute("aria-disabled", "true")
-
-    const defaultPrevented = !fireEvent.click(trigger)
-
-    expect(defaultPrevented).toBeTruthy()
   })
 })

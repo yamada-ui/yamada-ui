@@ -1,13 +1,12 @@
-import {
-  ButtonGroup,
-  GithubIcon,
-  HStack,
-  Separator,
-  Spacer,
-} from "@yamada-ui/react"
+import { ButtonGroup, HStack, Separator, Spacer } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import { useMemo } from "react"
-import { DiscordIcon, LogoIcon, NextLinkIconButton } from "@/components"
+import {
+  DiscordIcon,
+  GithubIcon,
+  LogoIcon,
+  NextLinkIconButton,
+} from "@/components"
 import { CONSTANTS } from "@/constants"
 import { ColorModeButton } from "./color-mode-button"
 import { LangButton } from "./lang-button"

@@ -8,6 +8,7 @@ describe("<Box />", () => {
 
   test("renders HTML tag correctly", () => {
     render(<Box>Box</Box>)
+
     expect(screen.getByText("Box").tagName).toBe("DIV")
   })
 })

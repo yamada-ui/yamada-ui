@@ -2,6 +2,7 @@
 
 import type { HTMLProps, PropGetter, RequiredPropGetter } from "../../core"
 import { useCallback } from "react"
+import { mergeProps } from "../../core"
 import { useI18n } from "../../providers/i18n-provider"
 import { dataAttr } from "../../utils"
 
@@ -26,15 +27,18 @@ export const useStrengthMeter = ({
   const { t } = useI18n("passwordInput")
 
   const getRootProps: PropGetter = useCallback(
-    (props) => ({
-      "aria-label": t("Password strength meter"),
-      "aria-valuemax": max,
-      "aria-valuemin": 0,
-      "aria-valuenow": value,
-      role: "meter",
-      ...rest,
-      ...props,
-    }),
+    (props) =>
+      mergeProps(
+        {
+          "aria-label": t("Password strength meter"),
+          "aria-valuemax": max,
+          "aria-valuemin": 0,
+          "aria-valuenow": value,
+          role: "meter",
+        },
+        rest,
+        props,
+      )(),
     [max, rest, value, t],
   )
 

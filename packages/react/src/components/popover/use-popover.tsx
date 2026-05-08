@@ -5,7 +5,7 @@ import type { Direction, PropGetter } from "../../core"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import type { UsePopperProps } from "../../hooks/use-popper"
 import type { Dict } from "../../utils"
-import type { PopupAnimationProps } from "./popover"
+import type { UsePopupAnimationProps } from "./popover"
 import { useCallback, useEffect, useId, useRef } from "react"
 import { useEnvironment, useSplitProps } from "../../core"
 import { useDisclosure } from "../../hooks/use-disclosure"
@@ -354,8 +354,8 @@ export const usePopover = ({
 export type UsePopoverReturn = ReturnType<typeof usePopover>
 
 export const popoverProps: (
-  | keyof PopupAnimationProps
   | keyof UsePopoverProps
+  | keyof UsePopupAnimationProps
 )[] = [
   ...popperProps,
   "autoFocus",
@@ -378,9 +378,9 @@ export const popoverProps: (
 
 export const usePopoverProps = <
   Y extends Dict = Dict,
-  M extends keyof PopupAnimationProps | keyof UsePopoverProps =
-    | keyof PopupAnimationProps
-    | keyof UsePopoverProps,
+  M extends keyof UsePopoverProps | keyof UsePopupAnimationProps =
+    | keyof UsePopoverProps
+    | keyof UsePopupAnimationProps,
 >(
   props: Y,
   omitKeys?: M[],
@@ -389,14 +389,14 @@ export const usePopoverProps = <
     props,
     popoverProps.filter((key) => !omitKeys?.includes(key as M)),
   ) as unknown as [
-    keyof PopupAnimationProps | keyof UsePopoverProps extends M
-      ? PopupAnimationProps & UsePopoverProps
-      : Omit<PopupAnimationProps & UsePopoverProps, M>,
+    keyof UsePopoverProps | keyof UsePopupAnimationProps extends M
+      ? UsePopoverProps & UsePopupAnimationProps
+      : Omit<UsePopoverProps & UsePopupAnimationProps, M>,
     Omit<
       Y,
-      keyof PopupAnimationProps | keyof UsePopoverProps extends M
-        ? keyof PopupAnimationProps | keyof UsePopoverProps
-        : Exclude<keyof PopupAnimationProps | keyof UsePopoverProps, M>
+      keyof UsePopoverProps | keyof UsePopupAnimationProps extends M
+        ? keyof UsePopoverProps | keyof UsePopupAnimationProps
+        : Exclude<keyof UsePopoverProps | keyof UsePopupAnimationProps, M>
     >,
   ]
 }

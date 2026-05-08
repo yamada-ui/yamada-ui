@@ -1,22 +1,24 @@
-import { page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { Badge } from "./"
 
 describe("<Badge />", () => {
-  test("sets `displayName` correctly", () => {
+  test("sets displayName correctly", () => {
     expect(Badge.displayName).toBe("Badge")
   })
 
-  test("sets `className` correctly", async () => {
+  test("sets className correctly", () => {
     render(<Badge>Badge</Badge>)
 
-    const badge = page.getByText("Badge")
-    await expect.element(badge).toHaveClass("ui-badge")
+    expect(screen.getByText("Badge")).toHaveClass("ui-badge")
   })
 
-  test("renders HTML tag correctly", async () => {
-    await render(<Badge>Badge</Badge>)
+  test("renders HTML tag correctly", () => {
+    render(<Badge>Badge</Badge>)
 
-    const badge = page.getByText("Badge")
-    expect(badge.element().tagName).toBe("SPAN")
+    expect(screen.getByText("Badge").tagName).toBe("SPAN")
+  })
+
+  test("renders component correctly", async () => {
+    await a11y(<Badge>Badge</Badge>)
   })
 })

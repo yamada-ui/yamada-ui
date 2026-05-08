@@ -1,5 +1,6 @@
+import { icons } from "@yamada-ui/react"
 import { toKebabCase, toPascalCase } from "@yamada-ui/utils"
-import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
 import { execFile } from "node:child_process"
 import { readdir, readFile } from "node:fs/promises"
 import path from "node:path"
@@ -101,8 +102,9 @@ async function main() {
       if (!fileName.endsWith(".json")) return
 
       const iconName = fileName.replace(".json", "")
+      const componentName = `${toPascalCase(iconName)}Icon`
 
-      data[`${toPascalCase(iconName)}Icon`] = await getData(fileName)
+      if (componentName in icons) data[componentName] = await getData(fileName)
     }),
   )
 
@@ -118,7 +120,7 @@ async function main() {
 
   spinner.start(`Writing data`)
 
-  await writeFileWithFormat(DIST_PATH, data, { parser: "json" })
+  await writeFileWithFormat(DIST_PATH, data)
 
   spinner.succeed(`Wrote data`)
 

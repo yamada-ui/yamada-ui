@@ -7,6 +7,22 @@ describe("<Motion />", () => {
     await a11y(<Motion />)
   })
 
+  test("sets `displayName` correctly", () => {
+    expect(Motion.name).toBe("Motion")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<Motion data-testid="motion" />)
+
+    expect(screen.getByTestId("motion")).toHaveClass("ui-motion")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<Motion data-testid="motion" />)
+
+    expect(screen.getByTestId("motion").tagName).toBe("DIV")
+  })
+
   test("applies custom `aria-label`", () => {
     render(
       <Motion as="button" aria-label="Toggle layout" data-testid="motion" />,
@@ -16,20 +32,6 @@ describe("<Motion />", () => {
       "aria-label",
       "Toggle layout",
     )
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Motion.name).toBe("Motion")
-  })
-
-  test("sets `className` correctly", () => {
-    render(<Motion data-testid="motion" />)
-    expect(screen.getByTestId("motion")).toHaveClass("ui-motion")
-  })
-
-  test("renders HTML tag correctly", () => {
-    render(<Motion data-testid="motion" />)
-    expect(screen.getByTestId("motion").tagName).toBe("DIV")
   })
 
   test("renders motion component created via factory function call", () => {

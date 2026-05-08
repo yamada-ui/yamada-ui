@@ -44,7 +44,7 @@ export const colors = defineSemanticTokens.colors({
 
   black: {
     base: "#0a0b0b",
-    bg: "#f8f8f8",
+    bg: "#fbfbfb",
     contrast: "white",
     emphasized: "black.200",
     fg: "black.800",

@@ -3,7 +3,13 @@ import { Card } from "./"
 
 describe("<Card />", () => {
   test("renders component correctly", async () => {
-    await a11y(<Card.Root>Card</Card.Root>)
+    await a11y(
+      <Card.Root>
+        <Card.Header>Card Header</Card.Header>
+        <Card.Body>Card Body</Card.Body>
+        <Card.Footer>Card Footer</Card.Footer>
+      </Card.Root>,
+    )
   })
 
   test("sets `displayName` correctly", () => {
@@ -14,32 +20,32 @@ describe("<Card />", () => {
   })
 
   test("sets `className` correctly", () => {
-    render(
-      <Card.Root data-testid="root">
+    const { container } = render(
+      <Card.Root>
         <Card.Header>Card Header</Card.Header>
         <Card.Body>Card Body</Card.Body>
         <Card.Footer>Card Footer</Card.Footer>
       </Card.Root>,
     )
 
-    expect(screen.getByTestId("root")).toHaveClass("ui-card__root")
+    expect(container.firstElementChild).toHaveClass("ui-card__root")
     expect(screen.getByText("Card Header")).toHaveClass("ui-card__header")
     expect(screen.getByText("Card Body")).toHaveClass("ui-card__body")
     expect(screen.getByText("Card Footer")).toHaveClass("ui-card__footer")
   })
 
   test("renders HTML tag correctly", () => {
-    render(
-      <Card.Root data-testid="root">
+    const { container } = render(
+      <Card.Root>
         <Card.Header>Card Header</Card.Header>
         <Card.Body>Card Body</Card.Body>
         <Card.Footer>Card Footer</Card.Footer>
       </Card.Root>,
     )
 
-    expect(screen.getByTestId("root").tagName).toBe("ARTICLE")
-    expect(screen.getByRole("banner").tagName).toBe("HEADER")
+    expect(container.firstElementChild?.tagName).toBe("ARTICLE")
+    expect(screen.getByText("Card Header").tagName).toBe("HEADER")
     expect(screen.getByText("Card Body").tagName).toBe("DIV")
-    expect(screen.getByRole("contentinfo").tagName).toBe("FOOTER")
+    expect(screen.getByText("Card Footer").tagName).toBe("FOOTER")
   })
 })

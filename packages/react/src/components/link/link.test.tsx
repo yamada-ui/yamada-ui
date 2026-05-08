@@ -2,22 +2,21 @@ import { a11y, render, screen } from "#test"
 import { Link } from "."
 
 describe("<Link />", () => {
+  test("should set display name", () => {
+    expect(Link.displayName).toBe("Link")
+  })
+
   test("renders component correctly", async () => {
     await a11y(<Link href="https://yamada-ui.com">Link</Link>)
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Link.displayName).toBe("Link")
-  })
-
-  test("sets `className` correctly", () => {
+  test("should render anchor element with default class", () => {
     render(<Link href="https://yamada-ui.com">Link</Link>)
-    expect(screen.getByRole("link")).toHaveClass("ui-link")
-  })
 
-  test("renders HTML tag correctly", () => {
-    render(<Link href="https://yamada-ui.com">Link</Link>)
-    expect(screen.getByRole("link").tagName).toBe("A")
+    const link = screen.getByRole("link")
+
+    expect(link).toBeInstanceOf(HTMLAnchorElement)
+    expect(link).toHaveClass("ui-link")
   })
 
   test("should open link in a new tab", () => {
@@ -26,7 +25,9 @@ describe("<Link />", () => {
         Link
       </Link>,
     )
+
     const link = screen.getByRole("link")
+
     expect(link).toHaveAttribute("target", "_blank")
     expect(link).toHaveAttribute("rel", "noopener")
   })

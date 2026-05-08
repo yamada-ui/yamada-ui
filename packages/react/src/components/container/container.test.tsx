@@ -1,11 +1,11 @@
-import { render, screen } from "#test"
+import { a11y, render, screen } from "#test"
 import { Heading } from "../heading"
 import { Text } from "../text"
 import { Container } from "./"
 
 describe("<Container />", () => {
-  test("renders component correctly", () => {
-    render(
+  test("renders component correctly", async () => {
+    await a11y(
       <Container.Root>
         <Container.Header>
           <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>

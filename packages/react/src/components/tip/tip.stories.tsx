@@ -162,7 +162,11 @@ export const Placement: Story = () => {
           "end-end",
           "end-center",
           "center-start",
+          "center-start-start",
+          "center-start-end",
           "center-end",
+          "center-end-start",
+          "center-end-end",
         ] as const
       }
     >

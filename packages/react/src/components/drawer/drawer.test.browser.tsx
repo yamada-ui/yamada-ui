@@ -442,7 +442,7 @@ describe("useDrawer", () => {
       velocity: { x: 0, y: -10 },
     })
 
-    expect(onClose).not.toHaveBeenCalledWith(undefined)
+    expect(onClose).not.toHaveBeenCalled()
   })
 
   test("calls onClose when dragged down with sufficient velocity for block-end", async () => {

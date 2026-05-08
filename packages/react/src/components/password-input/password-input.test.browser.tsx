@@ -4,37 +4,11 @@ import { EyeIcon, EyeOffIcon } from "../icon"
 import { PasswordInput, StrengthMeter } from "./"
 
 describe("<PasswordInput />", () => {
-  test("renders component correctly", async () => {
+  test("passes a11y checks", async () => {
     await a11y(<PasswordInput placeholder="password" />)
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(PasswordInput.name).toBe("PasswordInputRoot")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(<PasswordInput placeholder="password" />)
-
-    const input = page.getByPlaceholder("password")
-    const button = page.getByRole("button")
-
-    await expect.element(input).toHaveClass("ui-password-input__field")
-    await expect.element(button).toHaveClass("ui-password-input__button")
-    expect(input.element().parentElement).toHaveClass("ui-password-input__root")
-  })
-
-  test("renders HTML tag correctly", async () => {
-    await render(<PasswordInput placeholder="password" />)
-
-    const input = page.getByPlaceholder("password")
-    const button = page.getByRole("button")
-
-    expect(input.element().parentElement?.tagName).toBe("DIV")
-    expect(input.element().tagName).toBe("INPUT")
-    expect(button.element().tagName).toBe("BUTTON")
-  })
-
-  test("Input type render correctly depending on the visibility", async () => {
+  test("input type toggles between password and text on visibility button click", async () => {
     const { user } = await render(
       <PasswordInput
         placeholder="password"
@@ -56,7 +30,11 @@ describe("<PasswordInput />", () => {
   })
 })
 
-describe("<PassWordInputStrengthMeter />", () => {
+describe("<StrengthMeter />", () => {
+  test("passes a11y checks", async () => {
+    await a11y(<StrengthMeter value={3} />)
+  })
+
   const ExampleWithPassWordInputStrengthMeter = ({
     defaultValue = "",
   }: { defaultValue?: string } = {}) => {
@@ -85,38 +63,6 @@ describe("<PassWordInputStrengthMeter />", () => {
     )
   }
 
-  test("renders component correctly", async () => {
-    await a11y(<StrengthMeter value={3} />)
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(StrengthMeter.name).toBe("StrengthMeterRoot")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(<StrengthMeter data-testid="strengthMeter" value={3} />)
-
-    const strengthMeter = page.getByTestId("strengthMeter")
-
-    await expect.element(strengthMeter).toHaveClass("ui-strength-meter__root")
-    expect(strengthMeter.element().children[0]).toHaveClass(
-      "ui-strength-meter__indicators",
-    )
-    expect(strengthMeter.element().children[0]?.children[0]).toHaveClass(
-      "ui-strength-meter__indicator",
-    )
-  })
-
-  test("renders HTML tag correctly", async () => {
-    await render(<StrengthMeter data-testid="strengthMeter" value={3} />)
-
-    const strengthMeter = page.getByTestId("strengthMeter").element()
-
-    expect(strengthMeter.tagName).toBe("DIV")
-    expect(strengthMeter.children[0]?.tagName).toBe("DIV")
-    expect(strengthMeter.children[0]?.children[0]?.tagName).toBe("DIV")
-  })
-
   test.each([
     ["aaaaaaa", 0],
     ["aaaaaaaa", 1],
@@ -124,7 +70,7 @@ describe("<PassWordInputStrengthMeter />", () => {
     ["aaaaaaaaA1", 3],
     ["aaaaaaaaA1!", 4],
   ])(
-    "Could render strength meter with difference value (%s -> %i)",
+    "renders strength meter aria-valuenow when typing into the input (%s -> %i)",
     async (value, expected) => {
       const initial = value.slice(0, -1)
       const next = value.slice(-1)

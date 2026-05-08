@@ -12,6 +12,7 @@
     "lint": "oxlint . --max-warnings=0",
     "format": "pnpm -w format packages/forge",
     "quality": "pnpm format && pnpm lint && pnpm typecheck",
+    "pr:dependabot": "tsx src/pr/dependabot",
     "issue:create": "tsx src/issue/create",
     "issue:codecov": "tsx src/issue/codecov",
     "issue:a11y": "tsx src/issue/a11y",

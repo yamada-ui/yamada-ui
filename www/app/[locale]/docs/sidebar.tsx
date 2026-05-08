@@ -7,7 +7,7 @@ import { useMemo, useRef } from "react"
 import scrollIntoView from "scroll-into-view-if-needed"
 import { NextLinkButton, Status } from "@/components"
 import { getDocMap } from "@/data"
-import { getPathname, useLocale, usePathname } from "@/i18n"
+import { useLocale, usePathname } from "@/i18n"
 
 export function Sidebar() {
   const ref = useRef<HTMLDivElement>(null)
@@ -112,7 +112,8 @@ export function Sidebar() {
   )
 }
 
-interface SidebarItemProps extends NextLinkButtonProps {
+interface SidebarItemProps extends Omit<NextLinkButtonProps, "href"> {
+  href: string
   segment: string
 }
 
@@ -121,8 +122,7 @@ function SidebarItem({ href, segment, ...rest }: SidebarItemProps) {
   const overview = segment === "overview"
   const current = overview
     ? pathname === href
-    : pathname.length <= getPathname(href).length &&
-      pathname.startsWith(getPathname(href))
+    : pathname.length <= href.length && pathname.startsWith(href)
 
   return (
     <NextLinkButton

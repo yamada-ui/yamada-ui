@@ -171,11 +171,11 @@
     border-radius: 10px;
     background: rgb(247, 247, 247);
     color: rgb(46, 52, 56);
+  }
 
-    & * {
-      background: rgb(247, 247, 247);
-      color: rgb(46, 52, 56);
-    }
+  .sb-nopreview_main * {
+    background: rgb(247, 247, 247);
+    color: rgb(46, 52, 56);
   }
 
   .sb-nopreview_heading {
@@ -206,84 +206,89 @@
     border: 1px solid #ff0000;
     box-shadow: 0 0 64px rgba(0, 0, 0, 0.1);
     gap: 24px;
+  }
 
-    & ol {
-      padding-left: 18px;
-      margin: 0;
-    }
+  .sb-errordisplay_main ol {
+    padding-left: 18px;
+    margin: 0;
+  }
 
-    /* Redefine colors to ensure readability regardless of user-provided * selectors. */
-    * {
-      background: white;
-      color: black;
-    }
+  /* Redefine colors to ensure readability regardless of user-provided * selectors. */
+  .sb-errordisplay_main * {
+    background: white;
+    color: black;
+  }
 
-    & h1 {
-      font-family: Nunito Sans;
-      font-size: 22px;
-      font-weight: 400;
-      line-height: 30px;
-      font-weight: normal;
-      margin: 0;
+  /* Exclude error code block from the universal reset to preserve ANSI colors and dark theme */
+  .sb-errordisplay_main .sb-errordisplay_code,
+  .sb-errordisplay_main .sb-errordisplay_code * {
+    background: #242424;
+    color: #c6c6c6;
+  }
 
-      &::before {
-        content: '';
-        display: inline-block;
-        width: 12px;
-        height: 12px;
-        background: #ff4400;
-        border-radius: 50%;
-        margin-right: 8px;
-      }
-    }
+  .sb-errordisplay_main h1 {
+    font-family: inherit;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 30px;
+    margin: 0;
+  }
 
-    & p,
-    & ol {
-      font-family: Nunito Sans;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 19px;
-      margin: 0;
-    }
+  .sb-errordisplay_main h1::before {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #ff4400;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
 
-    & li + li {
-      margin: 0;
-      padding: 0;
-      padding-top: 12px;
-    }
+  .sb-errordisplay_main p,
+  .sb-errordisplay_main ol {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    margin: 0;
+  }
 
-    & a {
-      color: currentColor;
-    }
+  .sb-errordisplay_main li + li {
+    margin: 0;
+    padding: 0;
+    padding-top: 12px;
+  }
 
-    & .sb-errordisplay_code {
-      padding: 10px;
-      flex: 1;
-      background: #242424;
-      color: #c6c6c6;
-      box-sizing: border-box;
+  .sb-errordisplay_main a {
+    color: currentColor;
+  }
 
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 19px;
-      border-radius: 4px;
+  .sb-errordisplay_main .sb-errordisplay_code {
+    padding: 10px;
+    flex: 1;
+    background: #242424;
+    color: #c6c6c6;
+    box-sizing: border-box;
 
-      font-family:
-        'Operator Mono', 'Fira Code Retina', 'Fira Code', 'FiraCode-Retina', 'Andale Mono',
-        'Lucida Console', Consolas, Monaco, monospace;
-      margin: 0;
-      overflow: auto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    border-radius: 4px;
 
-      & code {
-        background-color: inherit;
-        color: inherit;
-      }
-    }
+    font-family:
+      'Operator Mono', 'Fira Code Retina', 'Fira Code', 'FiraCode-Retina', 'Andale Mono',
+      'Lucida Console', Consolas, Monaco, monospace;
+    margin: 0;
+    overflow: auto;
+  }
 
-    & .sb-errordisplay pre {
-      white-space: pre-wrap;
-      white-space: revert;
-    }
+  .sb-errordisplay_main .sb-errordisplay_code code {
+    background-color: inherit;
+    color: inherit;
+  }
+
+  .sb-errordisplay_main .sb-errordisplay_code {
+    white-space: pre-wrap;
   }
 
   @-webkit-keyframes sb-rotate360 {
@@ -553,84 +558,84 @@
   rel="stylesheet"
 />
 
-    <script type="module" crossorigin src="./assets/iframe-0-o75UJy.js"></script>
+    <script type="module" crossorigin src="./assets/iframe-0y96wZ5W.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/chunk-jRWAZmH_.js">
     <link rel="modulepreload" crossorigin href="./assets/preload-helper-Dowy-9fu.js">
     <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-D_578c1K.js">
-    <link rel="modulepreload" crossorigin href="./assets/react-mE7dFmCG.js">
-    <link rel="modulepreload" crossorigin href="./assets/core-3C2oxizh.js">
-    <link rel="modulepreload" crossorigin href="./assets/motion-Ce4waklA.js">
-    <link rel="modulepreload" crossorigin href="./assets/icon-Dcmtp7_V.js">
-    <link rel="modulepreload" crossorigin href="./assets/center-IWMOJb2D.js">
-    <link rel="modulepreload" crossorigin href="./assets/center-DMmj_9XJ.js">
-    <link rel="modulepreload" crossorigin href="./assets/motion-DVHHPGOz.js">
-    <link rel="modulepreload" crossorigin href="./assets/react-dom-Ce6FcQM5.js">
-    <link rel="modulepreload" crossorigin href="./assets/portal-Hsx-x5rG.js">
-    <link rel="modulepreload" crossorigin href="./assets/text-CdQ6A3ld.js">
-    <link rel="modulepreload" crossorigin href="./assets/text-SrSsDo5C.js">
-    <link rel="modulepreload" crossorigin href="./assets/use-timeout-KV_fZKoo.js">
-    <link rel="modulepreload" crossorigin href="./assets/loading-B34Ne6CY.js">
-    <link rel="modulepreload" crossorigin href="./assets/focus-lock-9NnYTZ7k.js">
-    <link rel="modulepreload" crossorigin href="./assets/fade-scale-CNAnjaxK.js">
-    <link rel="modulepreload" crossorigin href="./assets/slide-fade-BbnEXy1H.js">
-    <link rel="modulepreload" crossorigin href="./assets/use-breakpoint-DOU44rsw.js">
-    <link rel="modulepreload" crossorigin href="./assets/use-breakpoint-effect-Dak_bjf_.js">
-    <link rel="modulepreload" crossorigin href="./assets/use-breakpoint-value-CvQuJtKo.js">
-    <link rel="modulepreload" crossorigin href="./assets/use-breakpoint-state-aWaq2PLT.js">
-    <link rel="modulepreload" crossorigin href="./assets/use-update-breakpoint-effect-7L7-wGDK.js">
-    <link rel="modulepreload" crossorigin href="./assets/use-value-D0UaqXqW.js">
-    <link rel="modulepreload" crossorigin href="./assets/use-disclosure-VgCs83Z7.js">
-    <link rel="modulepreload" crossorigin href="./assets/use-event-listener-DVfTBYCd.js">
-    <link rel="modulepreload" crossorigin href="./assets/use-focus-cHnhJghc.js">
-    <link rel="modulepreload" crossorigin href="./assets/use-outside-click-DimXKwB7.js">
-    <link rel="modulepreload" crossorigin href="./assets/popover-lZqYhMBS.js">
-    <link rel="modulepreload" crossorigin href="./assets/i18n-provider-hrfgupKi.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-CMXXrKHu.js">
+    <link rel="modulepreload" crossorigin href="./assets/core-BioRdg0-.js">
+    <link rel="modulepreload" crossorigin href="./assets/motion-0C_MZ0vC.js">
+    <link rel="modulepreload" crossorigin href="./assets/icon-wPsykhuQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/center-CKUwDuFo.js">
+    <link rel="modulepreload" crossorigin href="./assets/center-lA60EJFT.js">
+    <link rel="modulepreload" crossorigin href="./assets/motion-BhaK5ATr.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-Kk53cOhK.js">
+    <link rel="modulepreload" crossorigin href="./assets/portal-CFX2AR8l.js">
+    <link rel="modulepreload" crossorigin href="./assets/text-GlyVhNHQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/text-DcGeDOqy.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-timeout-D6xQDns2.js">
+    <link rel="modulepreload" crossorigin href="./assets/loading-DbEdPIPF.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-lock-BGFscW9C.js">
+    <link rel="modulepreload" crossorigin href="./assets/fade-scale-C5KFbMhj.js">
+    <link rel="modulepreload" crossorigin href="./assets/slide-fade-DMMPPaPT.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-breakpoint-CSabHnWP.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-breakpoint-effect-uOPvmI9K.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-breakpoint-value-CsCJREpm.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-breakpoint-state-jfwkzf5X.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-update-breakpoint-effect--dPa4CVi.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-value-B_JIAbOu.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-disclosure-CHo7k9vF.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-event-listener-C-z64_v1.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-focus-C4WLwsD4.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-outside-click-Cn2092J2.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-DEcANzKJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/i18n-provider-CRm47lcH.js">
     <link rel="modulepreload" crossorigin href="./assets/chunk-3LY4VQVK-D3bLKWIv.js">
-    <link rel="modulepreload" crossorigin href="./assets/theming-C5OuVjSe.js">
+    <link rel="modulepreload" crossorigin href="./assets/theming-D4Cp_U7S.js">
     <link rel="modulepreload" crossorigin href="./assets/chunk-IYCKG66Y-CmbZ2R0r.js">
-    <link rel="modulepreload" crossorigin href="./assets/alert-CK4GTNVH.js">
-    <link rel="modulepreload" crossorigin href="./assets/box-m1dHHlqx.js">
-    <link rel="modulepreload" crossorigin href="./assets/flex-CZJKxTel.js">
-    <link rel="modulepreload" crossorigin href="./assets/ripple-MQL_Dlcp.js">
-    <link rel="modulepreload" crossorigin href="./assets/button-D9zm6wFQ.js">
-    <link rel="modulepreload" crossorigin href="./assets/close-button-BUc_auT7.js">
-    <link rel="modulepreload" crossorigin href="./assets/collapse-BirhK_Jh.js">
-    <link rel="modulepreload" crossorigin href="./assets/collapse-BJGg2lwR.js">
-    <link rel="modulepreload" crossorigin href="./assets/fade-BnBdj0JP.js">
-    <link rel="modulepreload" crossorigin href="./assets/modal-hsKwPbqu.js">
-    <link rel="modulepreload" crossorigin href="./assets/input-pXmSFnXW.js">
-    <link rel="modulepreload" crossorigin href="./assets/use-format-number-DXLWPXIy.js">
-    <link rel="modulepreload" crossorigin href="./assets/grid-item-CPcoZIy8.js">
-    <link rel="modulepreload" crossorigin href="./assets/grid-DJcblQMs.js">
-    <link rel="modulepreload" crossorigin href="./assets/heading-COQEuNTY.js">
-    <link rel="modulepreload" crossorigin href="./assets/image-CefBmR8Q.js">
-    <link rel="modulepreload" crossorigin href="./assets/image-BJxNJOXY.js">
-    <link rel="modulepreload" crossorigin href="./assets/use-notice-CPIcXKsm.js">
-    <link rel="modulepreload" crossorigin href="./assets/radii-CytS4GNP.js">
-    <link rel="modulepreload" crossorigin href="./assets/spaces-Xw1B4I8X.js">
-    <link rel="modulepreload" crossorigin href="./assets/sizes-CyrO1I_Q.js">
-    <link rel="modulepreload" crossorigin href="./assets/spaces-CgYtSB4G.js">
-    <link rel="modulepreload" crossorigin href="./assets/aspect-ratios-BPLNVWGc.js">
-    <link rel="modulepreload" crossorigin href="./assets/blurs-B-QD7cqJ.js">
-    <link rel="modulepreload" crossorigin href="./assets/borders-S-q1EQ9v.js">
-    <link rel="modulepreload" crossorigin href="./assets/durations-DH4uTe1l.js">
-    <link rel="modulepreload" crossorigin href="./assets/easings-BXvQJgkk.js">
-    <link rel="modulepreload" crossorigin href="./assets/font-sizes-rdRB72Vx.js">
-    <link rel="modulepreload" crossorigin href="./assets/font-weights-DpIKbIqy.js">
-    <link rel="modulepreload" crossorigin href="./assets/fonts-DZqQiG7s.js">
-    <link rel="modulepreload" crossorigin href="./assets/keyframes-D9uSNFm4.js">
-    <link rel="modulepreload" crossorigin href="./assets/letter-spacings-BO6ZGs0q.js">
-    <link rel="modulepreload" crossorigin href="./assets/line-heights-aP5tsfjv.js">
-    <link rel="modulepreload" crossorigin href="./assets/shadows-DHxklwuv.js">
-    <link rel="modulepreload" crossorigin href="./assets/ui-provider-C_c9Zaqw.js">
-    <link rel="modulepreload" crossorigin href="./assets/show-CpKpb3oU.js">
-    <link rel="modulepreload" crossorigin href="./assets/z-stack-DkWkuVbN.js">
-    <link rel="modulepreload" crossorigin href="./assets/wrap-Bz_mb6Yf.js">
-    <link rel="modulepreload" crossorigin href="./assets/use-boolean-DYW0OEzi.js">
-    <link rel="modulepreload" crossorigin href="./assets/use-controllable-state-D2wiXJyk.js">
-    <link rel="modulepreload" crossorigin href="./assets/use-mounted-CfEg43eO.js">
-    <link rel="modulepreload" crossorigin href="./assets/use-processing-D9A8h1z6.js">
-    <link rel="modulepreload" crossorigin href="./assets/use-window-event-coa1ePnV.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-7dE1I68l.js">
+    <link rel="modulepreload" crossorigin href="./assets/box-D3LLos2_.js">
+    <link rel="modulepreload" crossorigin href="./assets/flex-B6it7x8O.js">
+    <link rel="modulepreload" crossorigin href="./assets/ripple-C52wAhpT.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-DVpvdSsT.js">
+    <link rel="modulepreload" crossorigin href="./assets/close-button-DrjZq81j.js">
+    <link rel="modulepreload" crossorigin href="./assets/collapse-CYjXbcOG.js">
+    <link rel="modulepreload" crossorigin href="./assets/collapse-C5uMEhgM.js">
+    <link rel="modulepreload" crossorigin href="./assets/fade-0xEJc5vH.js">
+    <link rel="modulepreload" crossorigin href="./assets/modal-il0TuslE.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-DMZ0UAAt.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-format-number-cLu4kxAb.js">
+    <link rel="modulepreload" crossorigin href="./assets/grid-item-j07_NRrD.js">
+    <link rel="modulepreload" crossorigin href="./assets/grid-UxO2BcKS.js">
+    <link rel="modulepreload" crossorigin href="./assets/heading-DlcZo9Dg.js">
+    <link rel="modulepreload" crossorigin href="./assets/image-COyU_cCv.js">
+    <link rel="modulepreload" crossorigin href="./assets/image-p729YLnL.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-notice-BHX61quX.js">
+    <link rel="modulepreload" crossorigin href="./assets/radii-BKmirqq2.js">
+    <link rel="modulepreload" crossorigin href="./assets/spaces-DIwuxZUx.js">
+    <link rel="modulepreload" crossorigin href="./assets/sizes-BNYIN0NI.js">
+    <link rel="modulepreload" crossorigin href="./assets/spaces-BEb33kU-.js">
+    <link rel="modulepreload" crossorigin href="./assets/aspect-ratios-B7qq1iQO.js">
+    <link rel="modulepreload" crossorigin href="./assets/blurs-YkOOnHUf.js">
+    <link rel="modulepreload" crossorigin href="./assets/borders-C0qjyNeX.js">
+    <link rel="modulepreload" crossorigin href="./assets/durations-D9XlPcnp.js">
+    <link rel="modulepreload" crossorigin href="./assets/easings-DVo4m_0J.js">
+    <link rel="modulepreload" crossorigin href="./assets/font-sizes-BYEwOnW1.js">
+    <link rel="modulepreload" crossorigin href="./assets/font-weights-DH6F__-W.js">
+    <link rel="modulepreload" crossorigin href="./assets/fonts-hue3f_YG.js">
+    <link rel="modulepreload" crossorigin href="./assets/keyframes-65CWeAax.js">
+    <link rel="modulepreload" crossorigin href="./assets/letter-spacings-CXDVwfye.js">
+    <link rel="modulepreload" crossorigin href="./assets/line-heights-BCY72NdR.js">
+    <link rel="modulepreload" crossorigin href="./assets/shadows-DUFA3sWs.js">
+    <link rel="modulepreload" crossorigin href="./assets/ui-provider-Bvg9g8X0.js">
+    <link rel="modulepreload" crossorigin href="./assets/show-zzTpurHz.js">
+    <link rel="modulepreload" crossorigin href="./assets/z-stack-DbXms5Iu.js">
+    <link rel="modulepreload" crossorigin href="./assets/wrap-2ZkFvEB7.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-boolean-Qtox2XRK.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-controllable-state-GQEhHyva.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-mounted-D7rEkBHi.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-processing-BkW-yQpu.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-window-event-D2XjwXWh.js">
   </head>
 
   <body>

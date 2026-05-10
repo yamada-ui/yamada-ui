@@ -1,5 +1,5 @@
-import { system } from "#test"
-import { getValue } from "./"
+import { renderHook, system } from "#test"
+import { getValue, useValue } from "./"
 
 describe("getValue", () => {
   test("Returns the base value when passed a responsive object", () => {
@@ -34,5 +34,24 @@ describe("getValue", () => {
       "base",
     )
     expect(value).toStrictEqual({ light: "light" })
+  })
+})
+
+describe("useValue", () => {
+  test("Returns the correct value based on the current light mode", () => {
+    const { result } = renderHook(() => useValue(["lightValue", "darkValue"]))
+    expect(result.current).toBe("lightValue")
+  })
+
+  test("Returns the correct value based on the current dark mode", () => {
+    const { result } = renderHook(() => useValue(["lightValue", "darkValue"]), {
+      providerProps: { colorMode: "dark" },
+    })
+    expect(result.current).toBe("darkValue")
+  })
+
+  test("Returns the same value when passed a normal value", () => {
+    const { result } = renderHook(() => useValue("normalValue"))
+    expect(result.current).toBe("normalValue")
   })
 })

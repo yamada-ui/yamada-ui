@@ -33,81 +33,16 @@ env:
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
-  jsdom:
-    name: Unit Test / ${{ matrix.name }}
-    runs-on: ubuntu-24.04
-    strategy:
-      matrix:
-        include:
-          - id: cli
-            name: CLI
-            command: pnpm cli test:coverage
-            files: ./packages/cli/coverage/coverage-final.json
-          - id: utils
-            name: Utils
-            command: pnpm utils test:coverage
-            files: ./packages/utils/coverage/coverage-final.json
-          - id: react
-            name: React
-            command: pnpm react test:coverage:jsdom
-            files: ./packages/react/coverage/jsdom/coverage-final.json
-    steps:
-      - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+  unit_test:
+    name: Unit Test
+    uses: ./.github/workflows/unit-test.yml
+    secrets:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-      - name: Install
-        uses: ./.github/composite-actions/install
-
-      - name: Run coverage
-        run: ${{ matrix.command }}
-
-      - name: Upload coverage
-        uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe # v5.5.4
-        with:
-          disable_search: true
-          fail_ci_if_error: false
-          files: ${{ matrix.files }}
-          flags: unittests
-          token: ${{ secrets.CODECOV_TOKEN }}
-          verbose: true
-          codecov_yml_path: ./codecov.yml
-
-  browser:
-    name: Browser Test / React / ${{ matrix.name }} ${{ matrix.shard_index }}/4
-    runs-on: ubuntu-24.04
-    strategy:
-      fail-fast: false
-      matrix:
-        browser: [chromium, firefox, webkit]
-        shard_index: [1, 2, 3, 4]
-        include:
-          - browser: chromium
-            name: Chromium
-          - browser: firefox
-            name: Firefox
-          - browser: webkit
-            name: Webkit
-    steps:
-      - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-
-      - name: Install
-        uses: ./.github/composite-actions/install
-
-      - name: Setup Browser
-        working-directory: packages/react
-        run: pnpm playwright install ${{ matrix.browser }} --with-deps ${{ matrix.browser == 'chromium' && '--only-shell' || '' }}
-
-      - name: Run coverage
-        run: pnpm react test:coverage:${{ matrix.browser }} -- --retry=3 --shard=${{ matrix.shard_index }}/4
-
-      - name: Upload coverage
-        uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe # v5.5.4
-        with:
-          disable_search: true
-          fail_ci_if_error: false
-          files: ./packages/react/coverage/${{ matrix.browser }}/coverage-final.json
-          flags: unittests
-          token: ${{ secrets.CODECOV_TOKEN }}
-          verbose: true
-          codecov_yml_path: ./codecov.yml
+  browser_test:
+    name: Browser Test
+    uses: ./.github/workflows/browser-test.yml
+    secrets:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

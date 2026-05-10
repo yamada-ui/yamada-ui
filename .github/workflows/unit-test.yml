@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       TURBO_SCM_BASE:
-        required: true
+        required: false
         type: string
     secrets:
       TURBO_TOKEN:
@@ -81,19 +81,19 @@ jobs:
           files_yaml: ${{ matrix.file_yaml }}
 
       - name: Install
-        if: steps.changed-files.outputs.any_changed == 'true' || steps.changed-module-files.outputs.changed_keys != ''
+        if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.any_changed == 'true' || steps.changed-module-files.outputs.changed_keys != ''
         uses: ./.github/composite-actions/install
 
       - name: Run test (full)
-        if: steps.changed-files.outputs.any_changed == 'true' || steps.changed-module-files.outputs.full_any_changed == 'true'
+        if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.any_changed == 'true' || steps.changed-module-files.outputs.full_any_changed == 'true'
         run: pnpm turbo run ${{ matrix.script }} --filter=./packages/${{ matrix.id }} -- --retry=3
 
       - name: Run test (diff)
-        if: steps.changed-files.outputs.any_changed != 'true' && steps.changed-module-files.outputs.full_any_changed != 'true' && steps.changed-module-files.outputs.diff_any_changed == 'true'
+        if: inputs.TURBO_SCM_BASE != '' && steps.changed-files.outputs.any_changed != 'true' && steps.changed-module-files.outputs.full_any_changed != 'true' && steps.changed-module-files.outputs.diff_any_changed == 'true'
         run: pnpm turbo run ${{ matrix.script }} --filter=./packages/${{ matrix.id }} -- --retry=3 --changed ${{ inputs.TURBO_SCM_BASE }}
 
       - name: Upload coverage
-        if: steps.changed-files.outputs.any_changed == 'true' || steps.changed-module-files.outputs.changed_keys != ''
+        if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.any_changed == 'true' || steps.changed-module-files.outputs.changed_keys != ''
         uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe # v5.5.4
         with:
           disable_search: true

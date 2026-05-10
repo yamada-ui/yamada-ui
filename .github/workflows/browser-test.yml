@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       TURBO_SCM_BASE:
-        required: true
+        required: false
         type: string
     secrets:
       TURBO_TOKEN:
@@ -61,23 +61,23 @@ jobs:
               - '${{ matrix.diff }}'
 
       - name: Install
-        if: steps.changed-files.outputs.changed_keys != ''
+        if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.changed_keys != ''
         uses: ./.github/composite-actions/install
 
       - name: Setup Browser
-        if: steps.changed-files.outputs.changed_keys != ''
+        if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.changed_keys != ''
         run: pnpm react exec playwright install ${{ matrix.browser }} --with-deps ${{ matrix.browser == 'chromium' && '--only-shell' || '' }}
 
       - name: Run test (full)
-        if: steps.changed-files.outputs.full_any_changed == 'true'
+        if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.full_any_changed == 'true'
         run: pnpm turbo run test:coverage:${{ matrix.browser }} --filter=./packages/react -- --retry=3 --shard=${{ matrix.shard_index }}/4
 
       - name: Run test (diff)
-        if: steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true'
+        if: inputs.TURBO_SCM_BASE != '' && steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true'
         run: pnpm turbo run test:coverage:${{ matrix.browser }} --filter=./packages/react -- --retry=3 --changed ${{ inputs.TURBO_SCM_BASE }} --shard=${{ matrix.shard_index }}/4
 
       - name: Upload coverage
-        if: steps.changed-files.outputs.changed_keys != ''
+        if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.changed_keys != ''
         uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe # v5.5.4
         with:
           disable_search: true

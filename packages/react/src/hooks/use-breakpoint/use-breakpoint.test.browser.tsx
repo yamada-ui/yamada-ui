@@ -77,6 +77,57 @@ describe("useBreakpoint", () => {
     window.ResizeObserver = defaultResizeObserver
   })
 
+  test("renders the expected breakpoint for container width with default direction", async () => {
+    const defaultResizeObserver = window.ResizeObserver
+
+    window.ResizeObserver = class ResizeObserver {
+      constructor(cb: ResizeObserverCallback) {
+        ;(() => {
+          cb(
+            [
+              {
+                contentRect: {
+                  height: 0,
+                  width: 1200,
+                },
+              },
+            ] as ResizeObserverEntry[],
+            this,
+          )
+        })()
+      }
+      observe = vi.fn()
+      unobserve = vi.fn()
+      disconnect = vi.fn()
+    }
+
+    const containerRef = { current: document.createElement("div") }
+    const config: ThemeConfig = {
+      ...defaultConfig,
+      breakpoint: {
+        containerRef,
+        identifier: "@container",
+      },
+    }
+
+    const Component: FC = () => {
+      const breakpoint = useBreakpoint()
+
+      return <styled.p data-testid="bp">{breakpoint}</styled.p>
+    }
+
+    await render(
+      <UIProvider config={config}>
+        <Component />
+      </UIProvider>,
+      { withProvider: false },
+    )
+
+    await expect.element(page.getByTestId("bp")).toHaveTextContent("xl")
+
+    window.ResizeObserver = defaultResizeObserver
+  })
+
   test("observes container and calls disconnect on cleanup", async () => {
     const defaultResizeObserver = window.ResizeObserver
     const disconnectMock = vi.fn()

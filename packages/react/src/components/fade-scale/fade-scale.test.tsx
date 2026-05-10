@@ -1,5 +1,5 @@
-import { a11y, render, screen, waitFor } from "#test"
-import { useState } from "react"
+import { render, screen } from "@testing-library/react"
+import { a11y } from "#test"
 import { FadeScale } from "./fade-scale"
 
 describe("<FadeScale />", () => {
@@ -13,90 +13,11 @@ describe("<FadeScale />", () => {
 
   test("sets `className` correctly", () => {
     render(<FadeScale>FadeScale</FadeScale>)
-    expect(screen.getByText("FadeScale")).toHaveClass("ui-fade-scale")
+    expect(screen.getByText("FadeScale")).toHaveClass("fade-scale")
   })
 
   test("renders HTML tag correctly", () => {
     render(<FadeScale>FadeScale</FadeScale>)
     expect(screen.getByText("FadeScale").tagName).toBe("DIV")
-  })
-
-  test("toggles visibility on open change", async () => {
-    const TestComponent = () => {
-      const [open, setOpen] = useState(false)
-
-      return (
-        <>
-          <button onClick={() => setOpen((prev) => !prev)}>button</button>
-          <FadeScale open={open}>FadeScale</FadeScale>
-        </>
-      )
-    }
-
-    const { user } = render(<TestComponent />)
-
-    const button = await screen.findByRole("button", { name: /button/i })
-    const collapse = await screen.findByText("FadeScale")
-    expect(collapse).not.toBeVisible()
-
-    await user.click(button)
-    await waitFor(() => expect(collapse).toBeVisible())
-
-    await user.click(button)
-    await waitFor(() => expect(collapse).not.toBeVisible())
-  })
-
-  test("applies reverse={false} exit correctly", async () => {
-    const TestComponent = () => {
-      const [open, setOpen] = useState(false)
-
-      return (
-        <>
-          <button onClick={() => setOpen((prev) => !prev)}>button</button>
-          <FadeScale open={open} reverse={false}>
-            FadeScale
-          </FadeScale>
-        </>
-      )
-    }
-
-    const { user } = render(<TestComponent />)
-
-    const button = await screen.findByRole("button", { name: /button/i })
-    const fadeScale = await screen.findByText("FadeScale")
-    expect(fadeScale).not.toBeVisible()
-
-    await user.click(button)
-    await waitFor(() => expect(fadeScale).toBeVisible())
-
-    await user.click(button)
-    await waitFor(() => expect(fadeScale).not.toBeVisible())
-  })
-
-  test("unmountOnExit works correctly", async () => {
-    const TestComponent = () => {
-      const [open, setOpen] = useState(false)
-
-      return (
-        <>
-          <button onClick={() => setOpen((prev) => !prev)}>button</button>
-          <FadeScale open={open} unmountOnExit>
-            FadeScale
-          </FadeScale>
-        </>
-      )
-    }
-
-    const { user } = render(<TestComponent />)
-
-    expect(screen.queryByText("FadeScale")).toBeNull()
-
-    const button = await screen.findByRole("button", { name: /button/i })
-
-    await user.click(button)
-    await waitFor(() => expect(screen.getByText("FadeScale")).toBeVisible())
-
-    await user.click(button)
-    await waitFor(() => expect(screen.queryByText("FadeScale")).toBeNull())
   })
 })

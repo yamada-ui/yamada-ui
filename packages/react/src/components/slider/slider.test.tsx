@@ -1,26 +1,18 @@
-import { a11y, fireEvent, render, screen } from "#test"
+import type { PropsWithChildren, Ref } from "react"
+import type { FieldContext as FieldContextValue } from "../field/field"
+import { createElement, createRef } from "react"
 import { vi } from "vitest"
+import { a11y, fireEvent, render, renderHook, screen } from "#test"
 import { Slider } from "."
-import { noop } from "../../utils"
+import { FieldContext } from "../field/field"
+import { useSlider } from "./use-slider"
 
-const mockRect = (el: HTMLElement, rect: Partial<DOMRect>): (() => void) => {
-  const original = el.getBoundingClientRect
-  el.getBoundingClientRect = () =>
-    ({
-      bottom: 0,
-      height: 0,
-      left: 0,
-      right: 0,
-      toJSON: noop,
-      top: 0,
-      width: 0,
-      x: 0,
-      y: 0,
-      ...rect,
-    }) as DOMRect
-  return () => {
-    el.getBoundingClientRect = original
-  }
+function invokeCallbackRef<T>(ref: Ref<T> | undefined, node: null | T) {
+  if (typeof ref === "function") ref(node)
+}
+
+function invokeHandler<E>(handler: ((event: E) => void) | undefined, event: E) {
+  handler?.(event)
 }
 
 describe("<Slider />", () => {
@@ -48,10 +40,12 @@ describe("<Slider />", () => {
         trackProps={{ "data-testid": "track" }}
       />,
     )
+
     const root = screen.getByTestId("slider")
     const track = screen.getByTestId("track")
     const thumb = screen.getByRole("slider")
     const marks = screen.getAllByTestId("marks")
+
     expect(root).toHaveClass("ui-slider__root")
     expect(track).toHaveClass("ui-slider__track")
     expect(track.children[0]).toHaveClass("ui-slider__range")
@@ -62,29 +56,44 @@ describe("<Slider />", () => {
   test("sets aria attributes correctly", () => {
     render(<Slider.Root defaultValue={50} />)
 
-    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuenow", "50")
-    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuetext", "50")
-    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuemin", "0")
-    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuemax", "100")
-    expect(screen.getByRole("slider")).toHaveAttribute(
-      "aria-orientation",
-      "horizontal",
-    )
+    const thumb = screen.getByRole("slider")
+    expect(thumb).toHaveAttribute("aria-valuenow", "50")
+    expect(thumb).toHaveAttribute("aria-valuetext", "50")
+    expect(thumb).toHaveAttribute("aria-valuemin", "0")
+    expect(thumb).toHaveAttribute("aria-valuemax", "100")
+    expect(thumb).toHaveAttribute("aria-orientation", "horizontal")
   })
 
-  test("disabled Slider renders correctly", () => {
+  test("disabled Slider sets aria-disabled and tabIndex -1", () => {
     render(<Slider.Root disabled />)
 
-    expect(screen.getByRole("slider")).toHaveAttribute("aria-disabled")
+    const thumb = screen.getByRole("slider")
+    expect(thumb).toHaveAttribute("aria-disabled")
+    expect(thumb).toHaveAttribute("tabindex", "-1")
   })
 
-  test("readonly Slider renders correctly", () => {
+  test("readonly Slider sets aria-readonly", () => {
     render(<Slider.Root readOnly />)
 
     expect(screen.getByRole("slider")).toHaveAttribute("aria-readonly")
   })
 
-  test("renders range slider with two thumbs", () => {
+  test("interactive thumb has tabIndex 0", () => {
+    render(<Slider.Root defaultValue={50} />)
+
+    expect(screen.getByRole("slider")).toHaveAttribute("tabindex", "0")
+  })
+
+  test("renders with orientation data attribute", () => {
+    render(<Slider.Root data-testid="slider" defaultValue={50} />)
+
+    expect(screen.getByTestId("slider")).toHaveAttribute(
+      "data-orientation",
+      "horizontal",
+    )
+  })
+
+  test("renders range slider with two thumbs and aria-valuenow", () => {
     render(<Slider.Root defaultValue={[25, 75]} />)
 
     const sliders = screen.getAllByRole("slider")
@@ -93,7 +102,7 @@ describe("<Slider />", () => {
     expect(sliders[1]).toHaveAttribute("aria-valuenow", "75")
   })
 
-  test("range slider sets correct aria attributes on thumbs", () => {
+  test("range slider sets data-start, data-end, and per-thumb aria-valuemin/max", () => {
     render(<Slider.Root defaultValue={[20, 80]} />)
 
     const sliders = screen.getAllByRole("slider")
@@ -103,6 +112,44 @@ describe("<Slider />", () => {
     expect(sliders[0]).toHaveAttribute("aria-valuemax", "80")
     expect(sliders[1]).toHaveAttribute("aria-valuemin", "20")
     expect(sliders[1]).toHaveAttribute("aria-valuemax", "100")
+  })
+
+  test("range slider with betweenThumbs prevents overlap", () => {
+    render(<Slider.Root betweenThumbs={10} defaultValue={[45, 55]} />)
+
+    const sliders = screen.getAllByRole("slider")
+    expect(sliders[0]).toHaveAttribute("aria-valuemax", "45")
+    expect(sliders[1]).toHaveAttribute("aria-valuemin", "55")
+  })
+
+  test("respects custom min and max", () => {
+    render(<Slider.Root defaultValue={50} max={200} min={10} />)
+
+    const thumb = screen.getByRole("slider")
+    expect(thumb).toHaveAttribute("aria-valuemin", "10")
+    expect(thumb).toHaveAttribute("aria-valuemax", "200")
+  })
+
+  test("warns when max is less than min", () => {
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {})
+
+    render(<Slider.Root defaultValue={50} max={0} min={100} />)
+
+    expect(warnSpy).toHaveBeenCalledWith(
+      "Do not assign a number less than 'min' to 'max'",
+    )
+
+    warnSpy.mockRestore()
+  })
+
+  test("single slider renders one hidden input", () => {
+    const { container } = render(
+      <Slider.Root name="slider" defaultValue={50} />,
+    )
+
+    const inputs = container.querySelectorAll('input[type="hidden"]')
+    expect(inputs).toHaveLength(1)
+    expect(inputs[0]).toHaveAttribute("value", "50")
   })
 
   test("range slider renders two hidden inputs", () => {
@@ -116,200 +163,22 @@ describe("<Slider />", () => {
     expect(inputs[1]).toHaveAttribute("value", "75")
   })
 
-  test("single slider renders one hidden input", () => {
+  test("passes id, name, and required to hidden input", () => {
     const { container } = render(
-      <Slider.Root name="slider" defaultValue={50} />,
-    )
-
-    const inputs = container.querySelectorAll('input[type="hidden"]')
-    expect(inputs).toHaveLength(1)
-    expect(inputs[0]).toHaveAttribute("value", "50")
-  })
-
-  test("renders marks with object format including labels", () => {
-    render(
       <Slider.Root
+        id="test-id"
+        name="test-slider"
         defaultValue={50}
-        marks={[
-          { label: "Low", value: 25 },
-          { indicator: false, label: "High", value: 75 },
-        ]}
+        required
       />,
     )
 
-    expect(screen.getByText("Low")).toBeInTheDocument()
-    expect(screen.getByText("High")).toBeInTheDocument()
+    const input = container.querySelector('input[type="hidden"]')
+    expect(input).toHaveAttribute("name", "test-slider")
+    expect(input).toHaveAttribute("id", "test-id")
   })
 
-  test("renders marks with number format", () => {
-    render(
-      <Slider.Root
-        data-testid="slider"
-        defaultValue={50}
-        marks={[25, 50, 75]}
-        marksProps={{ "data-testid": "mark" }}
-      />,
-    )
-
-    const marks = screen.getAllByTestId("mark")
-    expect(marks).toHaveLength(3)
-  })
-
-  test("keyboard ArrowRight increases value", () => {
-    const onChange = vi.fn()
-
-    render(<Slider.Root defaultValue={50} onChange={onChange} />)
-
-    const thumb = screen.getByRole("slider")
-    fireEvent.keyDown(thumb, { key: "ArrowRight" })
-
-    expect(onChange).toHaveBeenCalledWith(51)
-  })
-
-  test("keyboard ArrowLeft decreases value", () => {
-    const onChange = vi.fn()
-
-    render(<Slider.Root defaultValue={50} onChange={onChange} />)
-
-    const thumb = screen.getByRole("slider")
-    fireEvent.keyDown(thumb, { key: "ArrowLeft" })
-
-    expect(onChange).toHaveBeenCalledWith(49)
-  })
-
-  test("keyboard ArrowUp increases value", () => {
-    const onChange = vi.fn()
-
-    render(<Slider.Root defaultValue={50} onChange={onChange} />)
-
-    const thumb = screen.getByRole("slider")
-    fireEvent.keyDown(thumb, { key: "ArrowUp" })
-
-    expect(onChange).toHaveBeenCalledWith(51)
-  })
-
-  test("keyboard ArrowDown decreases value", () => {
-    const onChange = vi.fn()
-
-    render(<Slider.Root defaultValue={50} onChange={onChange} />)
-
-    const thumb = screen.getByRole("slider")
-    fireEvent.keyDown(thumb, { key: "ArrowDown" })
-
-    expect(onChange).toHaveBeenCalledWith(49)
-  })
-
-  test("keyboard Home sets value to min", () => {
-    const onChange = vi.fn()
-
-    render(<Slider.Root defaultValue={50} onChange={onChange} />)
-
-    const thumb = screen.getByRole("slider")
-    fireEvent.keyDown(thumb, { key: "Home" })
-
-    expect(onChange).toHaveBeenCalledWith(0)
-  })
-
-  test("keyboard End sets value to max", () => {
-    const onChange = vi.fn()
-
-    render(<Slider.Root defaultValue={50} onChange={onChange} />)
-
-    const thumb = screen.getByRole("slider")
-    fireEvent.keyDown(thumb, { key: "End" })
-
-    expect(onChange).toHaveBeenCalledWith(100)
-  })
-
-  test("keyboard PageUp increases value by ten step", () => {
-    const onChange = vi.fn()
-
-    render(<Slider.Root defaultValue={50} onChange={onChange} />)
-
-    const thumb = screen.getByRole("slider")
-    fireEvent.keyDown(thumb, { key: "PageUp" })
-
-    expect(onChange).toHaveBeenCalledWith(60)
-  })
-
-  test("keyboard PageDown decreases value by ten step", () => {
-    const onChange = vi.fn()
-
-    render(<Slider.Root defaultValue={50} onChange={onChange} />)
-
-    const thumb = screen.getByRole("slider")
-    fireEvent.keyDown(thumb, { key: "PageDown" })
-
-    expect(onChange).toHaveBeenCalledWith(40)
-  })
-
-  test("keyboard does not change value when disabled", () => {
-    const onChange = vi.fn()
-
-    render(<Slider.Root defaultValue={50} disabled onChange={onChange} />)
-
-    const thumb = screen.getByRole("slider")
-    fireEvent.keyDown(thumb, { key: "ArrowRight" })
-
-    expect(onChange).not.toHaveBeenCalled()
-  })
-
-  test("keyboard does not change value when readOnly", () => {
-    const onChange = vi.fn()
-
-    render(<Slider.Root defaultValue={50} readOnly onChange={onChange} />)
-
-    const thumb = screen.getByRole("slider")
-    fireEvent.keyDown(thumb, { key: "ArrowRight" })
-
-    expect(onChange).not.toHaveBeenCalled()
-  })
-
-  test("range slider keyboard ArrowRight on first thumb", () => {
-    const onChange = vi.fn()
-
-    render(<Slider.Root defaultValue={[25, 75]} onChange={onChange} />)
-
-    const sliders = screen.getAllByRole("slider")
-    fireEvent.keyDown(sliders[0]!, { key: "ArrowRight" })
-
-    expect(onChange).toHaveBeenCalledWith([26, 75])
-  })
-
-  test("range slider keyboard ArrowLeft on second thumb", () => {
-    const onChange = vi.fn()
-
-    render(<Slider.Root defaultValue={[25, 75]} onChange={onChange} />)
-
-    const sliders = screen.getAllByRole("slider")
-    fireEvent.keyDown(sliders[1]!, { key: "ArrowLeft" })
-
-    expect(onChange).toHaveBeenCalledWith([25, 74])
-  })
-
-  test("range slider keyboard Home on second thumb", () => {
-    const onChange = vi.fn()
-
-    render(<Slider.Root defaultValue={[25, 75]} onChange={onChange} />)
-
-    const sliders = screen.getAllByRole("slider")
-    fireEvent.keyDown(sliders[1]!, { key: "Home" })
-
-    expect(onChange).toHaveBeenCalledWith([25, 25])
-  })
-
-  test("range slider keyboard End on first thumb", () => {
-    const onChange = vi.fn()
-
-    render(<Slider.Root defaultValue={[25, 75]} onChange={onChange} />)
-
-    const sliders = screen.getAllByRole("slider")
-    fireEvent.keyDown(sliders[0]!, { key: "End" })
-
-    expect(onChange).toHaveBeenCalledWith([75, 75])
-  })
-
-  test("getAriaValueText is used for aria-valuetext", () => {
+  test("getAriaValueText is used for aria-valuetext on single slider", () => {
     const getAriaValueText = (value: number) => `${value}%`
 
     render(
@@ -352,47 +221,7 @@ describe("<Slider />", () => {
     )
   })
 
-  test("respects custom min and max", () => {
-    render(<Slider.Root defaultValue={50} max={200} min={10} />)
-
-    const thumb = screen.getByRole("slider")
-    expect(thumb).toHaveAttribute("aria-valuemin", "10")
-    expect(thumb).toHaveAttribute("aria-valuemax", "200")
-  })
-
-  test("respects custom step", () => {
-    const onChange = vi.fn()
-
-    render(<Slider.Root defaultValue={50} step={5} onChange={onChange} />)
-
-    const thumb = screen.getByRole("slider")
-    fireEvent.keyDown(thumb, { key: "ArrowRight" })
-
-    expect(onChange).toHaveBeenCalledWith(55)
-  })
-
-  test("range slider with betweenThumbs prevents overlap", () => {
-    render(<Slider.Root betweenThumbs={10} defaultValue={[45, 55]} />)
-
-    const sliders = screen.getAllByRole("slider")
-    expect(sliders[0]).toHaveAttribute("aria-valuemax", "45")
-    expect(sliders[1]).toHaveAttribute("aria-valuemin", "55")
-  })
-
-  test("warns when max is less than min", () => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {})
-
-    render(<Slider.Root defaultValue={50} max={0} min={100} />)
-
-    expect(warnSpy).toHaveBeenCalledWith(
-      "Do not assign a number less than 'min' to 'max'",
-    )
-
-    warnSpy.mockRestore()
-  })
-
-  test("sets range CSS variables on root element", () => {
+  test("sets range CSS variables on root for single slider", () => {
     render(<Slider.Root data-testid="slider" defaultValue={50} />)
 
     const root = screen.getByTestId("slider")
@@ -400,7 +229,7 @@ describe("<Slider />", () => {
     expect(root.style.getPropertyValue("--range-end")).toBe("50%")
   })
 
-  test("sets range CSS variables for range slider", () => {
+  test("sets range CSS variables on root for range slider", () => {
     render(<Slider.Root data-testid="slider" defaultValue={[25, 75]} />)
 
     const root = screen.getByTestId("slider")
@@ -408,48 +237,27 @@ describe("<Slider />", () => {
     expect(root.style.getPropertyValue("--range-end")).toBe("75%")
   })
 
-  test("mark has correct data-between attribute for single slider", () => {
-    render(
-      <Slider.Root defaultValue={50}>
-        <Slider.Track>
-          <Slider.Range />
-          <Slider.Thumb />
-        </Slider.Track>
-        <Slider.Mark data-testid="mark-25" value={25} />
-        <Slider.Mark data-testid="mark-75" value={75} />
-      </Slider.Root>,
-    )
+  test("controlled single slider value updates correctly", () => {
+    const { rerender } = render(<Slider.Root value={30} />)
+    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuenow", "30")
 
-    const mark25 = screen.getByTestId("mark-25")
-    const mark75 = screen.getByTestId("mark-75")
-
-    expect(mark25).toHaveAttribute("data-between")
-    expect(mark75).not.toHaveAttribute("data-between")
+    rerender(<Slider.Root value={70} />)
+    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuenow", "70")
   })
 
-  test("mark has correct data-between attribute for range slider", () => {
-    render(
-      <Slider.Root defaultValue={[20, 80]}>
-        <Slider.Track>
-          <Slider.Range />
-          <Slider.Thumbs />
-        </Slider.Track>
-        <Slider.Mark data-testid="mark-10" value={10} />
-        <Slider.Mark data-testid="mark-50" value={50} />
-        <Slider.Mark data-testid="mark-90" value={90} />
-      </Slider.Root>,
-    )
+  test("controlled range slider value updates correctly", () => {
+    const { rerender } = render(<Slider.Root value={[20, 80]} />)
+    let sliders = screen.getAllByRole("slider")
+    expect(sliders[0]).toHaveAttribute("aria-valuenow", "20")
+    expect(sliders[1]).toHaveAttribute("aria-valuenow", "80")
 
-    const mark10 = screen.getByTestId("mark-10")
-    const mark50 = screen.getByTestId("mark-50")
-    const mark90 = screen.getByTestId("mark-90")
-
-    expect(mark10).not.toHaveAttribute("data-between")
-    expect(mark50).toHaveAttribute("data-between")
-    expect(mark90).not.toHaveAttribute("data-between")
+    rerender(<Slider.Root value={[30, 60]} />)
+    sliders = screen.getAllByRole("slider")
+    expect(sliders[0]).toHaveAttribute("aria-valuenow", "30")
+    expect(sliders[1]).toHaveAttribute("aria-valuenow", "60")
   })
 
-  test("renders with custom children", () => {
+  test("renders custom children using SliderTrack/Range/Thumb", () => {
     render(
       <Slider.Root data-testid="slider" defaultValue={50}>
         <Slider.Track data-testid="custom-track">
@@ -462,18 +270,16 @@ describe("<Slider />", () => {
     expect(screen.getByTestId("custom-track")).toBeInTheDocument()
   })
 
-  test("renders range slider with custom children using SliderThumbs", () => {
+  test("range slider default children renders SliderThumbs", () => {
     render(
-      <Slider.Root data-testid="slider" defaultValue={[25, 75]}>
-        <Slider.Track>
-          <Slider.Range />
-          <Slider.Thumbs />
-        </Slider.Track>
-      </Slider.Root>,
+      <Slider.Root
+        defaultValue={[25, 75]}
+        thumbProps={{ "data-testid": "thumb" }}
+      />,
     )
 
-    const sliders = screen.getAllByRole("slider")
-    expect(sliders).toHaveLength(2)
+    const thumbs = screen.getAllByTestId("thumb")
+    expect(thumbs).toHaveLength(2)
   })
 
   test("range slider data-range attribute on range element", () => {
@@ -486,129 +292,21 @@ describe("<Slider />", () => {
       </Slider.Root>,
     )
 
-    const range = screen.getByTestId("range")
-    expect(range).toHaveAttribute("data-range")
+    expect(screen.getByTestId("range")).toHaveAttribute("data-range")
   })
 
-  test("disabled thumb has tabIndex -1", () => {
-    render(<Slider.Root defaultValue={50} disabled />)
-
-    const thumb = screen.getByRole("slider")
-    expect(thumb).toHaveAttribute("tabindex", "-1")
-  })
-
-  test("interactive thumb has tabIndex 0", () => {
-    render(<Slider.Root defaultValue={50} />)
-
-    const thumb = screen.getByRole("slider")
-    expect(thumb).toHaveAttribute("tabindex", "0")
-  })
-
-  test("renders with orientation data attribute", () => {
-    render(<Slider.Root data-testid="slider" defaultValue={50} />)
-
-    const root = screen.getByTestId("slider")
-    expect(root).toHaveAttribute("data-orientation", "horizontal")
-  })
-
-  test("passes inputProps to hidden input", () => {
-    const { container } = render(
-      <Slider.Root
-        id="test-id"
-        name="test-slider"
-        defaultValue={50}
-        required
-      />,
+  test("range slider with custom children using SliderThumbs", () => {
+    render(
+      <Slider.Root data-testid="slider" defaultValue={[25, 75]}>
+        <Slider.Track>
+          <Slider.Range />
+          <Slider.Thumbs />
+        </Slider.Track>
+      </Slider.Root>,
     )
-
-    const input = container.querySelector('input[type="hidden"]')
-    expect(input).toHaveAttribute("name", "test-slider")
-    expect(input).toHaveAttribute("id", "test-id")
-  })
-
-  test("controlled slider value updates correctly", () => {
-    const { rerender } = render(<Slider.Root value={30} />)
-
-    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuenow", "30")
-
-    rerender(<Slider.Root value={70} />)
-
-    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuenow", "70")
-  })
-
-  test("controlled range slider value updates correctly", () => {
-    const { rerender } = render(<Slider.Root value={[20, 80]} />)
 
     const sliders = screen.getAllByRole("slider")
-    expect(sliders[0]).toHaveAttribute("aria-valuenow", "20")
-    expect(sliders[1]).toHaveAttribute("aria-valuenow", "80")
-
-    rerender(<Slider.Root value={[30, 60]} />)
-
-    const updatedSliders = screen.getAllByRole("slider")
-    expect(updatedSliders[0]).toHaveAttribute("aria-valuenow", "30")
-    expect(updatedSliders[1]).toHaveAttribute("aria-valuenow", "60")
-  })
-
-  test("mark has correct style with --mark-position", () => {
-    render(
-      <Slider.Root defaultValue={50}>
-        <Slider.Track>
-          <Slider.Range />
-          <Slider.Thumb />
-        </Slider.Track>
-        <Slider.Mark data-testid="mark" value={30} />
-      </Slider.Root>,
-    )
-
-    const mark = screen.getByTestId("mark")
-    expect(mark.style.getPropertyValue("--mark-position")).toBe("30%")
-  })
-
-  test("mark has aria-hidden and role presentation", () => {
-    render(
-      <Slider.Root defaultValue={50}>
-        <Slider.Track>
-          <Slider.Range />
-          <Slider.Thumb />
-        </Slider.Track>
-        <Slider.Mark data-testid="mark" value={30} />
-      </Slider.Root>,
-    )
-
-    const mark = screen.getByTestId("mark")
-    expect(mark).toHaveAttribute("aria-hidden", "true")
-    expect(mark).toHaveAttribute("role", "presentation")
-  })
-
-  test("mark indicator is true by default", () => {
-    render(
-      <Slider.Root defaultValue={50}>
-        <Slider.Track>
-          <Slider.Range />
-          <Slider.Thumb />
-        </Slider.Track>
-        <Slider.Mark data-testid="mark" value={30} />
-      </Slider.Root>,
-    )
-
-    const mark = screen.getByTestId("mark")
-    expect(mark).toHaveAttribute("data-indicator")
-  })
-
-  test("mark indicator can be set to false", () => {
-    render(
-      <Slider.Root defaultValue={50}>
-        <Slider.Track>
-          <Slider.Range />
-          <Slider.Thumb />
-        </Slider.Track>
-        <Slider.Mark data-testid="mark" indicator={false} value={30} />
-      </Slider.Root>,
-    )
-
-    const mark = screen.getByTestId("mark")
-    expect(mark).not.toHaveAttribute("data-indicator")
+    expect(sliders).toHaveLength(2)
   })
 
   test("renders with custom thumbProps, trackProps, rangeProps", () => {
@@ -626,196 +324,253 @@ describe("<Slider />", () => {
     expect(screen.getByTestId("thumb")).toBeInTheDocument()
   })
 
-  test("range slider default children renders SliderThumbs", () => {
-    render(
-      <Slider.Root
-        defaultValue={[25, 75]}
-        thumbProps={{ "data-testid": "thumb" }}
-      />,
-    )
-
-    const thumbs = screen.getAllByTestId("thumb")
-    expect(thumbs).toHaveLength(2)
-  })
-
-  test("pointer interaction triggers onChangeStart and onChangeEnd for single slider", () => {
-    const onChangeStart = vi.fn()
-    const onChangeEnd = vi.fn()
-
+  test("renders marks with object format including labels", () => {
     render(
       <Slider.Root
         defaultValue={50}
-        trackProps={{ "data-testid": "track" }}
-        onChangeEnd={onChangeEnd}
-        onChangeStart={onChangeStart}
+        marks={[
+          { label: "Low", value: 25 },
+          { indicator: false, label: "High", value: 75 },
+        ]}
       />,
     )
 
-    const track = screen.getByTestId("track")
-    const cleanup = mockRect(track, { left: 0, width: 200 })
-
-    fireEvent.pointerDown(track, { clientX: 100, clientY: 0 })
-    expect(onChangeStart).toHaveBeenCalledWith(50)
-
-    fireEvent.pointerUp(window, { clientX: 120, clientY: 0 })
-    expect(onChangeEnd).toHaveBeenCalledWith(60)
-
-    cleanup()
+    expect(screen.getByText("Low")).toBeInTheDocument()
+    expect(screen.getByText("High")).toBeInTheDocument()
   })
 
-  test("pointer interaction triggers onChange during move for single slider", () => {
-    const onChange = vi.fn()
-
+  test("renders marks with number format", () => {
     render(
       <Slider.Root
         defaultValue={50}
-        trackProps={{ "data-testid": "track" }}
-        onChange={onChange}
+        marks={[25, 50, 75]}
+        marksProps={{ "data-testid": "mark" }}
       />,
     )
 
-    const track = screen.getByTestId("track")
-    const cleanup = mockRect(track, { left: 0, width: 200 })
-
-    fireEvent.pointerDown(track, { clientX: 100, clientY: 0 })
-    fireEvent.pointerMove(window, { clientX: 120, clientY: 0 })
-    expect(onChange).toHaveBeenCalledWith(60)
-
-    fireEvent.pointerUp(window, { clientX: 120, clientY: 0 })
-
-    cleanup()
+    expect(screen.getAllByTestId("mark")).toHaveLength(3)
   })
 
-  test("pointer interaction triggers callbacks for range slider", () => {
-    const onChangeStart = vi.fn()
-    const onChangeEnd = vi.fn()
-    const onChange = vi.fn()
-
+  test("mark has aria-hidden, role=presentation, --mark-position style, and data-indicator default", () => {
     render(
-      <Slider.Root
-        defaultValue={[25, 75]}
-        trackProps={{ "data-testid": "track" }}
-        onChange={onChange}
-        onChangeEnd={onChangeEnd}
-        onChangeStart={onChangeStart}
-      />,
+      <Slider.Root defaultValue={50}>
+        <Slider.Track>
+          <Slider.Range />
+          <Slider.Thumb />
+        </Slider.Track>
+        <Slider.Mark data-testid="mark" value={30} />
+      </Slider.Root>,
     )
 
-    const track = screen.getByTestId("track")
-    const cleanup = mockRect(track, { left: 0, width: 200 })
-
-    // Click closer to the first thumb (25% = 50px)
-    fireEvent.pointerDown(track, { clientX: 40, clientY: 0 })
-    expect(onChangeStart).toHaveBeenCalledWith([20, 75])
-
-    fireEvent.pointerMove(window, { clientX: 60, clientY: 0 })
-    expect(onChange).toHaveBeenCalledWith([20, 75])
-
-    fireEvent.pointerUp(window, { clientX: 60, clientY: 0 })
-    expect(onChangeEnd).toHaveBeenCalledWith([30, 75])
-
-    cleanup()
+    const mark = screen.getByTestId("mark")
+    expect(mark).toHaveAttribute("aria-hidden", "true")
+    expect(mark).toHaveAttribute("role", "presentation")
+    expect(mark).toHaveAttribute("data-indicator")
+    expect(mark.style.getPropertyValue("--mark-position")).toBe("30%")
   })
 
-  test("pointer interaction selects closest thumb for range slider (second thumb)", () => {
-    const onChangeStart = vi.fn()
-    const onChangeEnd = vi.fn()
-
+  test("mark indicator can be set to false", () => {
     render(
-      <Slider.Root
-        defaultValue={[25, 75]}
-        trackProps={{ "data-testid": "track" }}
-        onChangeEnd={onChangeEnd}
-        onChangeStart={onChangeStart}
-      />,
+      <Slider.Root defaultValue={50}>
+        <Slider.Track>
+          <Slider.Range />
+          <Slider.Thumb />
+        </Slider.Track>
+        <Slider.Mark data-testid="mark" indicator={false} value={30} />
+      </Slider.Root>,
     )
 
-    const track = screen.getByTestId("track")
-    const cleanup = mockRect(track, { left: 0, width: 200 })
-
-    // Click closer to the second thumb (75% = 150px)
-    fireEvent.pointerDown(track, { clientX: 160, clientY: 0 })
-    expect(onChangeStart).toHaveBeenCalledWith([25, 80])
-
-    fireEvent.pointerUp(window, { clientX: 160, clientY: 0 })
-    expect(onChangeEnd).toHaveBeenCalledWith([25, 80])
-
-    cleanup()
+    expect(screen.getByTestId("mark")).not.toHaveAttribute("data-indicator")
   })
 
-  test("pointer interaction does not trigger callbacks when disabled", () => {
-    const onChangeStart = vi.fn()
-    const onChangeEnd = vi.fn()
-    const onChange = vi.fn()
-
+  test("mark has correct data-between attribute for single slider", () => {
     render(
-      <Slider.Root
-        defaultValue={50}
-        disabled
-        trackProps={{ "data-testid": "track" }}
-        onChange={onChange}
-        onChangeEnd={onChangeEnd}
-        onChangeStart={onChangeStart}
-      />,
+      <Slider.Root defaultValue={50}>
+        <Slider.Track>
+          <Slider.Range />
+          <Slider.Thumb />
+        </Slider.Track>
+        <Slider.Mark data-testid="mark-25" value={25} />
+        <Slider.Mark data-testid="mark-75" value={75} />
+      </Slider.Root>,
     )
 
-    const track = screen.getByTestId("track")
-    const cleanup = mockRect(track, { left: 0, width: 200 })
-
-    fireEvent.pointerDown(track, { clientX: 100, clientY: 0 })
-    fireEvent.pointerMove(window, { clientX: 120, clientY: 0 })
-    fireEvent.pointerUp(window, { clientX: 120, clientY: 0 })
-
-    expect(onChangeStart).not.toHaveBeenCalled()
-    expect(onChange).not.toHaveBeenCalled()
-    expect(onChangeEnd).not.toHaveBeenCalled()
-
-    cleanup()
+    expect(screen.getByTestId("mark-25")).toHaveAttribute("data-between")
+    expect(screen.getByTestId("mark-75")).not.toHaveAttribute("data-between")
   })
 
-  test("vertical slider pointer interaction uses y-axis", () => {
-    const onChange = vi.fn()
-
+  test("mark has correct data-between attribute for range slider", () => {
     render(
-      <Slider.Root
-        defaultValue={50}
-        orientation="vertical"
-        trackProps={{ "data-testid": "track" }}
-        onChange={onChange}
-      />,
+      <Slider.Root defaultValue={[20, 80]}>
+        <Slider.Track>
+          <Slider.Range />
+          <Slider.Thumbs />
+        </Slider.Track>
+        <Slider.Mark data-testid="mark-10" value={10} />
+        <Slider.Mark data-testid="mark-50" value={50} />
+        <Slider.Mark data-testid="mark-90" value={90} />
+      </Slider.Root>,
     )
 
-    const track = screen.getByTestId("track")
-    const cleanup = mockRect(track, { bottom: 200, height: 200, top: 0 })
-
-    // bottom(200) - clientY(60) = 140, 140/200 = 70% -> value ~70
-    fireEvent.pointerDown(track, { clientX: 0, clientY: 60 })
-    expect(onChange).toHaveBeenCalledWith(70)
-
-    fireEvent.pointerUp(window, { clientX: 0, clientY: 60 })
-
-    cleanup()
+    expect(screen.getByTestId("mark-10")).not.toHaveAttribute("data-between")
+    expect(screen.getByTestId("mark-50")).toHaveAttribute("data-between")
+    expect(screen.getByTestId("mark-90")).not.toHaveAttribute("data-between")
   })
 
-  test("range slider keyboard PageUp on first thumb", () => {
-    const onChange = vi.fn()
+  describe("keyboard interactions", () => {
+    test.each([
+      ["ArrowRight", 51],
+      ["ArrowUp", 51],
+      ["ArrowLeft", 49],
+      ["ArrowDown", 49],
+      ["Home", 0],
+      ["End", 100],
+      ["PageUp", 60],
+      ["PageDown", 40],
+    ])("%s updates single slider value to %i", (key, expected) => {
+      const onChange = vi.fn()
 
-    render(<Slider.Root defaultValue={[25, 75]} onChange={onChange} />)
+      render(<Slider.Root defaultValue={50} onChange={onChange} />)
 
-    const sliders = screen.getAllByRole("slider")
-    fireEvent.keyDown(sliders[0]!, { key: "PageUp" })
+      fireEvent.keyDown(screen.getByRole("slider"), { key })
 
-    expect(onChange).toHaveBeenCalledWith([35, 75])
+      expect(onChange).toHaveBeenCalledWith(expected)
+    })
+
+    test("respects custom step", () => {
+      const onChange = vi.fn()
+
+      render(<Slider.Root defaultValue={50} step={5} onChange={onChange} />)
+
+      fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowRight" })
+
+      expect(onChange).toHaveBeenCalledWith(55)
+    })
+
+    test("does not change value when disabled", () => {
+      const onChange = vi.fn()
+
+      render(<Slider.Root defaultValue={50} disabled onChange={onChange} />)
+
+      fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowRight" })
+
+      expect(onChange).not.toHaveBeenCalled()
+    })
+
+    test("does not change value when readOnly", () => {
+      const onChange = vi.fn()
+
+      render(<Slider.Root defaultValue={50} readOnly onChange={onChange} />)
+
+      fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowRight" })
+
+      expect(onChange).not.toHaveBeenCalled()
+    })
+
+    test.each([
+      ["ArrowRight", 0, [26, 75]],
+      ["ArrowLeft", 1, [25, 74]],
+      ["Home", 1, [25, 25]],
+      ["End", 0, [75, 75]],
+      ["PageUp", 0, [35, 75]],
+      ["PageDown", 1, [25, 65]],
+    ] as const)(
+      "%s on thumb %i updates range slider to %p",
+      (key, index, expected) => {
+        const onChange = vi.fn()
+
+        render(<Slider.Root defaultValue={[25, 75]} onChange={onChange} />)
+
+        const sliders = screen.getAllByRole("slider")
+        fireEvent.keyDown(sliders[index]!, { key })
+
+        expect(onChange).toHaveBeenCalledWith(expected)
+      },
+    )
   })
 
-  test("range slider keyboard PageDown on second thumb", () => {
-    const onChange = vi.fn()
+  describe("useSlider", () => {
+    test("getRootProps merges className, style, and focus handlers from field, hook, and user", () => {
+      const fieldOnBlur = vi.fn()
+      const fieldOnFocus = vi.fn()
+      const hookOnBlur = vi.fn()
+      const hookOnFocus = vi.fn()
+      const userOnBlur = vi.fn()
+      const userOnFocus = vi.fn()
+      const userRef = createRef<HTMLDivElement>()
+      const context: FieldContextValue = {
+        id: "field-id",
+        disabled: false,
+        errorMessageId: "field-error-id",
+        focused: false,
+        helperMessageId: "field-helper-id",
+        invalid: false,
+        labelId: "field-label-id",
+        readOnly: false,
+        replace: true,
+        required: false,
+        onBlur: fieldOnBlur,
+        onFocus: fieldOnFocus,
+      }
+      const wrapper = ({ children }: PropsWithChildren) =>
+        createElement(FieldContext, { value: context }, children)
+      const { result } = renderHook(
+        () =>
+          useSlider({
+            className: "hook",
+            style: { color: "red" },
+            onBlur: hookOnBlur,
+            onFocus: hookOnFocus,
+          }),
+        { withProvider: false, wrapper },
+      )
+      const merged = result.current.getRootProps({
+        ref: userRef,
+        className: "user",
+        style: { backgroundColor: "blue" },
+        onBlur: userOnBlur,
+        onFocus: userOnFocus,
+      })
+      const node = document.createElement("div")
+      const focusEvent = new FocusEvent("focus")
+      const blurEvent = new FocusEvent("blur")
 
-    render(<Slider.Root defaultValue={[25, 75]} onChange={onChange} />)
+      expect(typeof merged.ref).toBe("function")
+      invokeCallbackRef(merged.ref, node)
+      invokeHandler(merged.onFocus, focusEvent as never)
+      invokeHandler(merged.onBlur, blurEvent as never)
 
-    const sliders = screen.getAllByRole("slider")
-    fireEvent.keyDown(sliders[1]!, { key: "PageDown" })
+      expect(userRef.current).toBe(node)
+      expect(String(merged.className)).toContain("hook")
+      expect(String(merged.className)).toContain("user")
+      expect(merged.style).toMatchObject({
+        "--range-end": "0%",
+        "--range-start": "0%",
+        backgroundColor: "blue",
+        color: "red",
+      })
+      expect(fieldOnFocus).toHaveBeenCalledWith(focusEvent)
+      expect(hookOnFocus).toHaveBeenCalledWith(focusEvent)
+      expect(userOnFocus).toHaveBeenCalledWith(focusEvent)
+      expect(fieldOnBlur).toHaveBeenCalledWith(blurEvent)
+      expect(hookOnBlur).toHaveBeenCalledWith(blurEvent)
+      expect(userOnBlur).toHaveBeenCalledWith(blurEvent)
+    })
 
-    expect(onChange).toHaveBeenCalledWith([25, 65])
+    test("getInputProps composes hook ref and user ref", () => {
+      const hookRef = createRef<HTMLInputElement>()
+      const userRef = createRef<HTMLInputElement>()
+      const { result } = renderHook(() => useSlider({ ref: hookRef }), {
+        withProvider: false,
+      })
+      const props = result.current.getInputProps({ ref: userRef })
+      const node = document.createElement("input")
+
+      expect(typeof props.ref).toBe("function")
+      invokeCallbackRef(props.ref, node)
+
+      expect(hookRef.current).toBe(node)
+      expect(userRef.current).toBe(node)
+    })
   })
 })

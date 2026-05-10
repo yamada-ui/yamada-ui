@@ -20,6 +20,7 @@ describe("<AspectRatio />", () => {
         <img src="https://image.xyz/source" alt="placeholder" />
       </AspectRatio>,
     )
+
     expect(screen.getByTestId("aspect-ratio")).toHaveClass("ui-aspect-ratio")
   })
 
@@ -29,6 +30,7 @@ describe("<AspectRatio />", () => {
         <img src="https://image.xyz/source" alt="placeholder" />
       </AspectRatio>,
     )
+
     expect(screen.getByTestId("aspect-ratio").tagName).toBe("DIV")
   })
 })

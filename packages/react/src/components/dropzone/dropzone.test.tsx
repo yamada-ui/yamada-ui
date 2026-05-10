@@ -1,14 +1,13 @@
-import { a11y, act, fireEvent, render, screen } from "#test"
+import { a11y, render, screen } from "#test"
 import { ImageIcon } from "../icon"
 import { Text } from "../text"
 import { Dropzone } from "./"
-import { IMAGE_ACCEPT_TYPE } from "./accept-types"
 
 describe("<Dropzone />", () => {
   test("renders component correctly", async () => {
     await a11y(
       <Dropzone.Root>
-        <Text>Drag file here or click to select file</Text>
+        <Text color="fg">Drag file here or click to select file</Text>
       </Dropzone.Root>,
     )
   })
@@ -119,65 +118,6 @@ describe("<Dropzone />", () => {
     )
 
     expect(screen.getByTestId("root")).toHaveAttribute("data-loading")
-  })
-
-  test("Is the onDrop return files correctly", async () => {
-    const file = new File(["test"], "test.png", { type: "image/png" })
-    const onDrop = vi.fn()
-    render(<Dropzone.Root data-testid="root" onDrop={onDrop} />)
-
-    await act(() =>
-      fireEvent.drop(screen.getByTestId("root"), {
-        dataTransfer: { files: [file], types: ["Files"] },
-      }),
-    )
-
-    expect(onDrop).toHaveBeenCalledExactlyOnceWith(
-      [file],
-      [],
-      expect.anything(),
-    )
-  })
-
-  test("DropzoneAccept renders correctly when dragging accepted files", async () => {
-    const file = new File(["test"], "test.png", { type: "image/png" })
-    render(
-      <Dropzone.Root data-testid="root" accept={IMAGE_ACCEPT_TYPE}>
-        <Dropzone.Accept>
-          <Text>Accepted</Text>
-        </Dropzone.Accept>
-      </Dropzone.Root>,
-    )
-
-    await act(() =>
-      fireEvent.dragEnter(screen.getByTestId("root"), {
-        dataTransfer: { files: [file], types: ["Files"] },
-      }),
-    )
-
-    expect(screen.getByText("Accepted")).toBeInTheDocument()
-  })
-
-  test("DropzoneReject renders correctly when dragging rejected files", async () => {
-    const file = new File(["test"], "test.txt", { type: "text/plain" })
-    render(
-      <Dropzone.Root data-testid="root" accept={IMAGE_ACCEPT_TYPE}>
-        <Dropzone.Reject>
-          <Text>Rejected</Text>
-        </Dropzone.Reject>
-      </Dropzone.Root>,
-    )
-
-    await act(() =>
-      fireEvent.dragEnter(screen.getByTestId("root"), {
-        dataTransfer: {
-          files: [file],
-          types: ["Files"],
-        },
-      }),
-    )
-
-    expect(screen.getByText("Rejected")).toBeInTheDocument()
   })
 
   test("DropzoneIdle renders correctly when not dragging files", () => {

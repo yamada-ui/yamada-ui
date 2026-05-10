@@ -1,7 +1,7 @@
 import type { FC } from "react"
 import type { UseLazyMountProps } from "./"
-import { render } from "#test"
 import { useState } from "react"
+import { render } from "#test"
 import { useLazyMount } from "./"
 
 const Component: FC<UseLazyMountProps> = (props) => {

@@ -1,8 +1,8 @@
-import { a11y, page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { CircleProgress } from "./"
 
 describe("<CircleProgress />", () => {
-  test("renders component correctly", async () => {
+  test("passes a11y checks", async () => {
     await a11y(<CircleProgress.Root value={50} />)
   })
 
@@ -11,10 +11,10 @@ describe("<CircleProgress />", () => {
     expect(CircleProgress.Label.displayName).toBe("CircleProgressLabel")
   })
 
-  test("sets `className` correctly", async () => {
-    await render(<CircleProgress.Root value={50} />)
+  test("sets `className` correctly", () => {
+    render(<CircleProgress.Root value={50} />)
 
-    const el = page.getByRole("progressbar").element()
+    const el = screen.getByRole("progressbar")
 
     expect(el.parentElement).toHaveClass("ui-circle-progress__root")
     expect(el).toHaveClass("ui-circle-progress__circle")
@@ -22,10 +22,10 @@ describe("<CircleProgress />", () => {
     expect(el.children[1]).toHaveClass("ui-circle-progress__range")
   })
 
-  test("renders HTML tag correctly", async () => {
-    await render(<CircleProgress.Root value={50} />)
+  test("renders HTML tag correctly", () => {
+    render(<CircleProgress.Root value={50} />)
 
-    const el = page.getByRole("progressbar").element()
+    const el = screen.getByRole("progressbar")
 
     expect(el.parentElement?.tagName).toBe("DIV")
     expect(el.tagName).toBe("svg")

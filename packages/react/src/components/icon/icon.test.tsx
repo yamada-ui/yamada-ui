@@ -1,13 +1,13 @@
-import { a11y, render } from "#test/browser"
 import { FaMarkdown } from "react-icons/fa"
+import { a11y, render } from "#test"
 import { Icon } from "./icon"
 
 describe("<Icon />", () => {
-  test("renders component correctly", async () => {
+  test("passes a11y checks", async () => {
     await a11y(<Icon />)
   })
 
-  test("renders component correctly given a third-party icon", async () => {
+  test("passes a11y checks given a third-party icon", async () => {
     await a11y(<Icon as={FaMarkdown} />)
   })
 
@@ -15,14 +15,14 @@ describe("<Icon />", () => {
     expect(Icon.displayName).toBe("Icon")
   })
 
-  test("sets `className` correctly", async () => {
-    const { container } = await render(<Icon />)
+  test("sets `className` correctly", () => {
+    const { container } = render(<Icon />)
 
     expect(container.firstChild).toHaveClass("ui-icon")
   })
 
-  test("renders HTML tag correctly", async () => {
-    const { container } = await render(<Icon />)
+  test("renders HTML tag correctly", () => {
+    const { container } = render(<Icon />)
 
     expect(container.firstChild?.nodeName).toBe("svg")
   })

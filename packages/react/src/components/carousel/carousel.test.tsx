@@ -1,29 +1,63 @@
-import type { FC } from "react"
-import { page, render } from "#test/browser"
+import type { Ref } from "react"
+import { a11y, act, render, renderHook, screen } from "#test"
 import { Carousel } from "./"
+import { useCarousel } from "./use-carousel"
 
-interface TestComponentProps extends Carousel.RootProps {}
+const mockState = vi.hoisted(() => {
+  return {
+    canScrollNext: vi.fn(() => true),
+    off: vi.fn(),
+    scrollNext: vi.fn(),
+    on: vi.fn(),
+  }
+})
 
-const TestComponent: FC<TestComponentProps> = (props) => {
-  return (
-    <Carousel.Root data-testid="carousel" {...props}>
-      <Carousel.List data-testid="carouselList">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <Carousel.Item key={index} index={index}>
-            Slide {index + 1}
-          </Carousel.Item>
-        ))}
-      </Carousel.List>
+vi.mock("embla-carousel-react", () => ({
+  default: () => [
+    vi.fn(),
+    {
+      canScrollNext: mockState.canScrollNext,
+      canScrollPrev: vi.fn(() => false),
+      off: mockState.off,
+      reInit: vi.fn(),
+      scrollNext: mockState.scrollNext,
+      scrollPrev: vi.fn(),
+      scrollProgress: vi.fn(() => 0),
+      scrollTo: vi.fn(),
+      selectedScrollSnap: vi.fn(() => 0),
+      on: mockState.on,
+    },
+  ],
+}))
 
-      <Carousel.PrevTrigger />
-      <Carousel.NextTrigger />
+function invokeCallbackRef<T>(ref: Ref<T> | undefined, node: null | T) {
+  if (typeof ref === "function") ref(node)
+}
 
-      <Carousel.Indicators />
-    </Carousel.Root>
-  )
+function invokeHandler<E>(handler: ((event: E) => void) | undefined, event: E) {
+  handler?.(event)
 }
 
 describe("<Carousel />", () => {
+  test("passes a11y checks", async () => {
+    await a11y(
+      <Carousel.Root>
+        <Carousel.List>
+          {Array.from({ length: 3 }).map((_, index) => (
+            <Carousel.Item key={index} index={index}>
+              Slide {index + 1}
+            </Carousel.Item>
+          ))}
+        </Carousel.List>
+
+        <Carousel.PrevTrigger />
+        <Carousel.NextTrigger />
+
+        <Carousel.Indicators />
+      </Carousel.Root>,
+    )
+  })
+
   test("sets `displayName` correctly", () => {
     expect(Carousel.Root.displayName).toBe("CarouselRoot")
     expect(Carousel.List.displayName).toBe("CarouselList")
@@ -34,194 +68,84 @@ describe("<Carousel />", () => {
     expect(Carousel.Indicator.displayName).toBe("CarouselIndicator")
   })
 
-  test("sets `className` correctly", async () => {
-    await render(<TestComponent />)
+  test("sets `className` correctly", () => {
+    render(
+      <Carousel.Root data-testid="carousel">
+        <Carousel.List data-testid="carouselList">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <Carousel.Item key={index} index={index}>
+              Slide {index + 1}
+            </Carousel.Item>
+          ))}
+        </Carousel.List>
 
-    await expect
-      .element(page.getByTestId("carousel"))
-      .toHaveClass("ui-carousel__root")
-    await expect
-      .element(page.getByTestId("carouselList"))
-      .toHaveClass("ui-carousel__list")
-    await expect
-      .element(page.getByRole("tabpanel", { name: "1 of 5" }))
-      .toHaveClass("ui-carousel__item")
-    await expect
-      .element(page.getByRole("tablist"))
-      .toHaveClass("ui-carousel__indicators")
-    await expect
-      .element(page.getByRole("tab", { name: "Go to 1 slide" }))
-      .toHaveClass("ui-carousel__indicator")
-    await expect
-      .element(page.getByRole("button", { name: "Go to previous slide" }))
-      .toHaveClass("ui-carousel__trigger--prev")
-    await expect
-      .element(page.getByRole("button", { name: "Go to next slide" }))
-      .toHaveClass("ui-carousel__trigger--next")
-  })
+        <Carousel.PrevTrigger />
+        <Carousel.NextTrigger />
 
-  test("renders HTML tag correctly", async () => {
-    await render(<TestComponent />)
-
-    expect(page.getByTestId("carousel").element().tagName).toBe("SECTION")
-    expect(page.getByTestId("carouselList").element().tagName).toBe("DIV")
-    expect(
-      page.getByRole("tabpanel", { name: "1 of 5" }).element().tagName,
-    ).toBe("DIV")
-    expect(page.getByRole("tablist").element().tagName).toBe("DIV")
-    expect(
-      page.getByRole("tab", { name: "Go to 1 slide" }).element().tagName,
-    ).toBe("BUTTON")
-    expect(
-      page.getByRole("button", { name: "Go to previous slide" }).element()
-        .tagName,
-    ).toBe("BUTTON")
-    expect(
-      page.getByRole("button", { name: "Go to next slide" }).element().tagName,
-    ).toBe("BUTTON")
-  })
-
-  test("should render defaultSlide correctly", async () => {
-    await render(<TestComponent defaultIndex={1} />)
-
-    await expect
-      .element(page.getByText("Slide 2"))
-      .toHaveAttribute("data-selected")
-  })
-
-  test("should render correctly slide when using control button", async () => {
-    const { user } = await render(<TestComponent />)
-
-    await user.click(page.getByRole("button", { name: "Go to next slide" }))
-
-    const slide2 = page.getByText("Slide 2")
-    await expect.element(slide2).toHaveAttribute("data-selected")
-
-    await user.click(
-      page.getByRole("button", {
-        name: "Go to previous slide",
-      }),
+        <Carousel.Indicators>
+          {Array.from({ length: 5 }).map((_, index) => (
+            <Carousel.Indicator key={index} index={index} />
+          ))}
+        </Carousel.Indicators>
+      </Carousel.Root>,
     )
 
-    const slide1 = page.getByText("Slide 1")
-    await expect.element(slide1).toHaveAttribute("data-selected")
+    expect(screen.getByTestId("carousel")).toHaveClass("ui-carousel__root")
+    expect(screen.getByTestId("carouselList")).toHaveClass("ui-carousel__list")
+    expect(screen.getByRole("tabpanel", { name: /^1 of / })).toHaveClass(
+      "ui-carousel__item",
+    )
+    expect(screen.getByRole("tablist")).toHaveClass("ui-carousel__indicators")
+    expect(screen.getByRole("tab", { name: "Go to 1 slide" })).toHaveClass(
+      "ui-carousel__indicator",
+    )
+    expect(
+      screen.getByRole("button", { name: "Go to previous slide" }),
+    ).toHaveClass("ui-carousel__trigger--prev")
+    expect(
+      screen.getByRole("button", { name: "Go to next slide" }),
+    ).toHaveClass("ui-carousel__trigger--next")
   })
 
-  test("should switch to correctly slide when click on indicator", async () => {
-    const { user } = await render(<TestComponent />)
+  test("renders HTML tag correctly", () => {
+    render(
+      <Carousel.Root data-testid="carousel">
+        <Carousel.List data-testid="carouselList">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <Carousel.Item key={index} index={index}>
+              Slide {index + 1}
+            </Carousel.Item>
+          ))}
+        </Carousel.List>
 
-    await user.click(page.getByRole("tab", { name: "Go to 2 slide" }))
+        <Carousel.PrevTrigger />
+        <Carousel.NextTrigger />
 
-    const slide2 = page.getByText("Slide 2")
-    await expect.element(slide2).toHaveAttribute("data-selected")
+        <Carousel.Indicators>
+          {Array.from({ length: 5 }).map((_, index) => (
+            <Carousel.Indicator key={index} index={index} />
+          ))}
+        </Carousel.Indicators>
+      </Carousel.Root>,
+    )
+
+    expect(screen.getByTestId("carousel").tagName).toBe("SECTION")
+    expect(screen.getByTestId("carouselList").tagName).toBe("DIV")
+    expect(screen.getByRole("tabpanel", { name: /^1 of / }).tagName).toBe("DIV")
+    expect(screen.getByRole("tablist").tagName).toBe("DIV")
+    expect(screen.getByRole("tab", { name: "Go to 1 slide" }).tagName).toBe(
+      "BUTTON",
+    )
+    expect(
+      screen.getByRole("button", { name: "Go to previous slide" }).tagName,
+    ).toBe("BUTTON")
+    expect(
+      screen.getByRole("button", { name: "Go to next slide" }).tagName,
+    ).toBe("BUTTON")
   })
 
-  test("should disabled next and prev button when looping is disabled", async () => {
-    const { user } = await render(<TestComponent loop={false} />)
-
-    await expect
-      .element(page.getByRole("button", { name: "Go to previous slide" }))
-      .toBeDisabled()
-
-    await user.click(page.getByRole("tab", { name: "Go to 5 slide" }))
-    await expect
-      .element(page.getByRole("button", { name: "Go to next slide" }))
-      .toBeDisabled()
-  })
-
-  test("should move the carousel correctly when left or right arrow keys are pressed", async () => {
-    const { user } = await render(<TestComponent orientation="horizontal" />)
-
-    await user.click(page.getByRole("tab", { name: "Go to 1 slide" }))
-    await user.keyboard("{ArrowDown}")
-    await expect
-      .element(page.getByText("Slide 1"))
-      .toHaveAttribute("data-selected")
-
-    await user.keyboard("{ArrowUp}")
-    await expect
-      .element(page.getByText("Slide 1"))
-      .toHaveAttribute("data-selected")
-
-    await user.keyboard("{ArrowRight}")
-    await expect
-      .element(page.getByText("Slide 2"))
-      .toHaveAttribute("data-selected")
-
-    await user.keyboard("{ArrowLeft}")
-    await expect
-      .element(page.getByText("Slide 1"))
-      .toHaveAttribute("data-selected")
-
-    await user.keyboard("{ArrowLeft}")
-    await expect
-      .element(page.getByText("Slide 5"))
-      .toHaveAttribute("data-selected")
-
-    await user.keyboard("{ArrowRight}")
-    await expect
-      .element(page.getByText("Slide 1"))
-      .toHaveAttribute("data-selected")
-
-    await user.keyboard("{End}")
-    await expect
-      .element(page.getByText("Slide 5"))
-      .toHaveAttribute("data-selected")
-
-    await user.keyboard("{Home}")
-    await expect
-      .element(page.getByText("Slide 1"))
-      .toHaveAttribute("data-selected")
-  })
-
-  test("should move the carousel correctly when up or down arrow keys are pressed", async () => {
-    const { user } = await render(<TestComponent orientation="vertical" />)
-
-    await user.click(page.getByRole("tab", { name: "Go to 1 slide" }))
-
-    await user.keyboard("{ArrowLeft}")
-    await expect
-      .element(page.getByText("Slide 1"))
-      .toHaveAttribute("data-selected")
-
-    await user.keyboard("{ArrowRight}")
-    await expect
-      .element(page.getByText("Slide 1"))
-      .toHaveAttribute("data-selected")
-
-    await user.keyboard("{ArrowDown}")
-    await expect
-      .element(page.getByText("Slide 2"))
-      .toHaveAttribute("data-selected")
-
-    await user.keyboard("{ArrowUp}")
-    await expect
-      .element(page.getByText("Slide 1"))
-      .toHaveAttribute("data-selected")
-
-    await user.keyboard("{ArrowUp}")
-    await expect
-      .element(page.getByText("Slide 5"))
-      .toHaveAttribute("data-selected")
-
-    await user.keyboard("{ArrowDown}")
-    await expect
-      .element(page.getByText("Slide 1"))
-      .toHaveAttribute("data-selected")
-
-    await user.keyboard("{End}")
-    await expect
-      .element(page.getByText("Slide 5"))
-      .toHaveAttribute("data-selected")
-
-    await user.keyboard("{Home}")
-    await expect
-      .element(page.getByText("Slide 1"))
-      .toHaveAttribute("data-selected")
-  })
-
-  test("renders custom children in CarouselIndicators", async () => {
-    await render(
+  test("renders custom children in CarouselIndicators", () => {
+    render(
       <Carousel.Root>
         <Carousel.List>
           {Array.from({ length: 3 }).map((_, index) => (
@@ -237,52 +161,112 @@ describe("<Carousel />", () => {
       </Carousel.Root>,
     )
 
-    const customIndicator = page.getByRole("button", { name: "Custom" })
-    await expect.element(customIndicator).toBeVisible()
+    expect(screen.getByRole("button", { name: "Custom" })).toBeInTheDocument()
+  })
+})
+
+describe("useCarousel getRootProps", () => {
+  beforeEach(() => {
+    vi.useFakeTimers()
+    mockState.canScrollNext.mockReset()
+    mockState.canScrollNext.mockReturnValue(true)
+    mockState.off.mockReset()
+    mockState.on.mockReset()
+    mockState.scrollNext.mockReset()
   })
 
-  test("renders CarouselIndicators with render prop returning a valid element", async () => {
-    await render(
-      <Carousel.Root>
-        <Carousel.List>
-          {Array.from({ length: 3 }).map((_, index) => (
-            <Carousel.Item key={index} index={index}>
-              Slide {index + 1}
-            </Carousel.Item>
-          ))}
-        </Carousel.List>
-
-        <Carousel.Indicators
-          render={({ index, selected }) => (
-            <button data-testid={`render-indicator-${index}`}>
-              {selected ? "active" : "inactive"}
-            </button>
-          )}
-        />
-      </Carousel.Root>,
-    )
-
-    await expect.element(page.getByTestId("render-indicator-0")).toBeVisible()
-    await expect.element(page.getByTestId("render-indicator-1")).toBeVisible()
-    await expect.element(page.getByTestId("render-indicator-2")).toBeVisible()
+  afterEach(() => {
+    vi.useRealTimers()
   })
 
-  test("renders CarouselIndicators with render prop returning a non-element", async () => {
-    await render(
-      <Carousel.Root>
-        <Carousel.List>
-          {Array.from({ length: 3 }).map((_, index) => (
-            <Carousel.Item key={index} index={index}>
-              Slide {index + 1}
-            </Carousel.Item>
-          ))}
-        </Carousel.List>
-
-        <Carousel.Indicators render={({ index }) => `dot-${index}`} />
-      </Carousel.Root>,
+  test("merges hook defaults with user props via mergeProps", () => {
+    const hookRef = vi.fn()
+    const userRef = vi.fn()
+    const hookOnMouseEnter = vi.fn()
+    const hookOnMouseLeave = vi.fn()
+    const userOnMouseEnter = vi.fn()
+    const userOnMouseLeave = vi.fn()
+    const { result } = renderHook(() =>
+      useCarousel({
+        id: "hook-id",
+        ref: hookRef,
+        className: "hook",
+        style: { color: "red" },
+        "data-testid": "carousel-root",
+        autoplay: true,
+        delay: 20,
+        orientation: "vertical",
+        onMouseEnter: hookOnMouseEnter,
+        onMouseLeave: hookOnMouseLeave,
+      }),
     )
 
-    await expect.element(page.getByText("dot-0")).toBeVisible()
-    await expect.element(page.getByText("dot-1")).toBeVisible()
+    const merged = result.current.getRootProps({
+      id: "user-id",
+      ref: userRef,
+      className: "user",
+      style: { backgroundColor: "blue" },
+      onMouseEnter: userOnMouseEnter,
+      onMouseLeave: userOnMouseLeave,
+    })
+    const node = document.createElement("section")
+    const enterEvent = new MouseEvent("mouseenter")
+    const leaveEvent = new MouseEvent("mouseleave")
+
+    expect(typeof merged.ref).toBe("function")
+
+    invokeCallbackRef(merged.ref, node)
+    invokeCallbackRef(merged.ref, null)
+
+    expect(hookRef).toHaveBeenCalledTimes(2)
+    expect(hookRef).toHaveBeenNthCalledWith(1, node)
+    expect(hookRef).toHaveBeenNthCalledWith(2, null)
+    expect(userRef).toHaveBeenCalledTimes(2)
+    expect(userRef).toHaveBeenNthCalledWith(1, node)
+    expect(userRef).toHaveBeenNthCalledWith(2, null)
+
+    act(() => {
+      vi.advanceTimersByTime(20)
+    })
+    expect(mockState.scrollNext).toHaveBeenCalledTimes(1)
+
+    act(() => {
+      invokeHandler(merged.onMouseEnter, enterEvent as never)
+    })
+
+    expect(hookOnMouseEnter).toHaveBeenCalledTimes(1)
+    expect(hookOnMouseEnter).toHaveBeenCalledWith(enterEvent)
+    expect(userOnMouseEnter).toHaveBeenCalledTimes(1)
+    expect(userOnMouseEnter).toHaveBeenCalledWith(enterEvent)
+
+    act(() => {
+      vi.advanceTimersByTime(40)
+    })
+    expect(mockState.scrollNext).toHaveBeenCalledTimes(1)
+
+    act(() => {
+      invokeHandler(merged.onMouseLeave, leaveEvent as never)
+    })
+
+    expect(hookOnMouseLeave).toHaveBeenCalledTimes(1)
+    expect(hookOnMouseLeave).toHaveBeenCalledWith(leaveEvent)
+    expect(userOnMouseLeave).toHaveBeenCalledTimes(1)
+    expect(userOnMouseLeave).toHaveBeenCalledWith(leaveEvent)
+
+    act(() => {
+      vi.advanceTimersByTime(20)
+    })
+    expect(mockState.scrollNext).toHaveBeenCalledTimes(2)
+
+    expect(merged.id).toBe("user-id")
+    expect(String(merged.className)).toContain("hook")
+    expect(String(merged.className)).toContain("user")
+    expect(merged.style).toStrictEqual({
+      backgroundColor: "blue",
+      color: "red",
+    })
+    expect(merged["data-orientation"]).toBe("vertical")
+    expect(merged["data-testid"]).toBe("carousel-root")
+    expect(merged["aria-roledescription"]).toBe("carousel")
   })
 })

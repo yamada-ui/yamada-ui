@@ -2,7 +2,7 @@ import { a11y, render, screen } from "#test"
 import { For } from "."
 
 describe("<For />", () => {
-  test("renders component correctly", async () => {
+  test("passes a11y checks", async () => {
     await a11y(
       <For each={["One", "Two", "Three"]}>
         {(item, index) => <div key={index}>{item}</div>}
@@ -10,11 +10,7 @@ describe("<For />", () => {
     )
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(For.name).toBe("For")
-  })
-
-  test("For renders fallback when array is empty", () => {
+  test("renders fallback when array is empty", () => {
     render(
       <For each={[]} fallback={<p>There are no items to show</p>}>
         {(item, index) => <p key={index}>{item}</p>}
@@ -23,7 +19,7 @@ describe("<For />", () => {
     expect(screen.getByText("There are no items to show")).toBeInTheDocument()
   })
 
-  test("For renders fallback when array is undefined", () => {
+  test("renders fallback when array is undefined", () => {
     render(
       <For each={undefined} fallback={<p>There are no items to show</p>}>
         {(_, index) => <p key={index}>Item</p>}
@@ -32,7 +28,7 @@ describe("<For />", () => {
     expect(screen.getByText("There are no items to show")).toBeInTheDocument()
   })
 
-  test("For correctly passes index to children", () => {
+  test("passes index to children", () => {
     const each = [0, 1, 2, 3, 4]
     render(
       <For each={each}>
@@ -44,7 +40,7 @@ describe("<For />", () => {
     )
   })
 
-  test("For renders correctly with filter", () => {
+  test("renders correctly with filter", () => {
     render(
       <For each={["One", "Two", "Three"]} filter={(item) => item !== "Two"}>
         {(item, index) => <p key={index}>{item}</p>}
@@ -55,7 +51,7 @@ describe("<For />", () => {
     expect(screen.queryByText("Two")).not.toBeInTheDocument()
   })
 
-  test("For renders correctly with limit", () => {
+  test("renders correctly with limit", () => {
     render(
       <For each={["One", "Two", "Three"]} limit={2}>
         {(item, index) => <div key={index}>{item}</div>}
@@ -66,7 +62,7 @@ describe("<For />", () => {
     expect(screen.queryByText("Three")).not.toBeInTheDocument()
   })
 
-  test("For renders correctly with offset", () => {
+  test("renders correctly with offset", () => {
     render(
       <For each={["One", "Two", "Three"]} offset={1}>
         {(item, index) => <div key={index}>{item}</div>}
@@ -77,8 +73,8 @@ describe("<For />", () => {
     expect(screen.queryByText("One")).not.toBeInTheDocument()
   })
 
-  test("For renders correctly with reverse", () => {
-    let indexes: number[] = []
+  test("renders correctly with reverse", () => {
+    const indexes: number[] = []
     render(
       <For each={["One", "Two", "Three"]} reverse>
         {(item, index) => {
@@ -96,7 +92,7 @@ describe("<For />", () => {
     expect(indexes).toStrictEqual([0, 1, 2])
   })
 
-  test("For renders correctly with sortBy", () => {
+  test("renders correctly with sort", () => {
     render(
       <For each={["One", "Two", "Three"]} sort={(a, b) => a.localeCompare(b)}>
         {(item, index) => (
@@ -110,7 +106,7 @@ describe("<For />", () => {
     expect(items).toStrictEqual(["One", "Three", "Two"])
   })
 
-  test("For renders correctly with combined options", () => {
+  test("renders correctly with combined options", () => {
     render(
       <For
         each={["One", "Two", "Three", "Four"]}
@@ -120,10 +116,16 @@ describe("<For />", () => {
         reverse
         sort={(a, b) => a.localeCompare(b)}
       >
-        {(item, index) => <p key={index}>{item}</p>}
+        {(item, index) => (
+          <p key={index} data-testid="for-combined-item">
+            {item}
+          </p>
+        )}
       </For>,
     )
-    const items = screen.getAllByRole("paragraph").map((el) => el.textContent)
+    const items = screen
+      .getAllByTestId("for-combined-item")
+      .map((el) => el.textContent)
     expect(items).toStrictEqual(["One", "Four"])
   })
 })

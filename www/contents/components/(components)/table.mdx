@@ -1010,28 +1010,28 @@ return (
 
 ### ARIA Roles and Attributes
 
-| Component           | Role and Attributes    | Usage                                                                                                                                      |
-| ------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `NativeTable.Root`  | `role="grid"`          | Indicates that the element is a grid.                                                                                                      |
-|                     | `aria-rowcount`        | Indicates the total number of rows in the table.                                                                                           |
-|                     | `aria-colcount`        | Indicates the total number of columns in the table.                                                                                        |
-|                     | `aria-multiselectable` | Set to `"true"` if `enableRowSelection` is set.                                                                                            |
-| `NativeTable.Thead` | `role="rowgroup"`      | Indicates that the element is a rowgroup.                                                                                                  |
-| `NativeTable.Tr`    | `role="row"`           | Indicates that the element is a row.                                                                                                       |
-|                     | `aria-rowindex`        | Indicates which row the element is in the table.                                                                                           |
-|                     | `aria-disabled`        | When `enableRowSelection` is provided as a function, set `"true"` for rows that return `false`.                                            |
-|                     | `aria-selected`        | Set to `"true"` if the row is selected, `"false"` if not selected.                                                                         |
-| `NativeTable.Th`    | `role="columnheader"`  | Indicates that the element is a columnheader.                                                                                              |
-|                     | `aria-rowindex`        | Indicates which row the element is in the table.                                                                                           |
-|                     | `aria-colindex`        | Indicates which column the element is in the table.                                                                                        |
-|                     | `aria-sort`            | Set to `"ascending"` for ascending order, `"descending"` for descending order, and `"none"` if no order is specified.                      |
-| `NativeTable.Tbody` | `role="rowgroup"`      | Indicates that the element is a rowgroup.                                                                                                  |
-| `NativeTable.Td`    | `role="gridcell"`      | Indicates that the element is a gridcell.                                                                                                  |
-|                     | `aria-colindex`        | Indicates which column the element is in the table.                                                                                        |
-|                     | `aria-rowindex`        | Indicates which row the element is in the table.                                                                                           |
-| `NativeTable.Tfoot` | `role="rowgroup"`      | Indicates that the element is a rowgroup.                                                                                                  |
-| `Checkbox`          | `aria-label`           | Set to `"Select all rows"` for the header, and `"Select row"` for body rows.                                                               |
-| `SortingIcon`       | `aria-label`           | Set to `"Sort ascending"` for ascending order, `"Sort descending"` for descending order, and `"Clear sorting"` when no order is specified. |
+| Element                           | Roles and Attributes   | Usage                                                                                                                                      |
+| --------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `table.ui-native-table__root`     | `role="grid"`          | Indicates that the element is a grid.                                                                                                      |
+|                                   | `aria-rowcount`        | Indicates the total number of rows in the table.                                                                                           |
+|                                   | `aria-colcount`        | Indicates the total number of columns in the table.                                                                                        |
+|                                   | `aria-multiselectable` | Set to `"true"` if `enableRowSelection` is set.                                                                                            |
+| `thead.ui-native-table__thead`    | `role="rowgroup"`      | Indicates that the element is a rowgroup.                                                                                                  |
+| `tr.ui-native-table__tr`          | `role="row"`           | Indicates that the element is a row.                                                                                                       |
+|                                   | `aria-rowindex`        | Indicates which row the element is in the table.                                                                                           |
+|                                   | `aria-disabled`        | When `enableRowSelection` is provided as a function, set `"true"` for rows that return `false`.                                            |
+|                                   | `aria-selected`        | Set to `"true"` if the row is selected, `"false"` if not selected.                                                                         |
+| `th.ui-native-table__th`          | `role="columnheader"`  | Indicates that the element is a columnheader.                                                                                              |
+|                                   | `aria-rowindex`        | Indicates which row the element is in the table.                                                                                           |
+|                                   | `aria-colindex`        | Indicates which column the element is in the table.                                                                                        |
+|                                   | `aria-sort`            | Set to `"ascending"` for ascending order, `"descending"` for descending order, and `"none"` if no order is specified.                      |
+| `tbody.ui-native-table__tbody`    | `role="rowgroup"`      | Indicates that the element is a rowgroup.                                                                                                  |
+| `td.ui-native-table__td`          | `role="gridcell"`      | Indicates that the element is a gridcell.                                                                                                  |
+|                                   | `aria-colindex`        | Indicates which column the element is in the table.                                                                                        |
+|                                   | `aria-rowindex`        | Indicates which row the element is in the table.                                                                                           |
+| `tfoot.ui-native-table__tfoot`    | `role="rowgroup"`      | Indicates that the element is a rowgroup.                                                                                                  |
+| `label.ui-checkbox__root > input` | `aria-label`           | Set to `"Select all rows"` for the header, and `"Select row"` for body rows.                                                               |
+| `th.ui-native-table__th > button` | `aria-label`           | Set to `"Sort ascending"` for ascending order, `"Sort descending"` for descending order, and `"Clear sorting"` when no order is specified. |
 
 ## Similar Components
 

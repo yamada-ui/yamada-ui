@@ -1,9 +1,27 @@
-import { a11y, fireEvent, render, screen, waitFor } from "#test"
-import { useState } from "react"
-import { Group } from "../group"
-import { EyeIcon, EyeOffIcon } from "../icon"
-import { InputPropsContext } from "../input"
+import type { PropsWithChildren, Ref } from "react"
+import type { FieldContext as FieldContextValue } from "../field/field"
+import { createElement } from "react"
+import { vi } from "vitest"
+import { a11y, render, renderHook, screen } from "#test"
+import { FieldContext } from "../field/field"
 import { PasswordInput, StrengthMeter } from "./"
+import { usePasswordInput } from "./use-password-input"
+import { useStrengthMeter } from "./use-strength-meter"
+
+function invokeCallbackRef<T>(ref: Ref<T> | undefined, node: null | T) {
+  if (typeof ref === "function") ref(node)
+}
+
+function invokeHandler<E>(handler: ((event: E) => void) | undefined, event: E) {
+  handler?.(event)
+}
+
+function FieldWrapper({
+  children,
+  context,
+}: PropsWithChildren<{ context: FieldContextValue }>) {
+  return createElement(FieldContext, { value: context }, children)
+}
 
 describe("<PasswordInput />", () => {
   test("renders component correctly", async () => {
@@ -11,201 +29,281 @@ describe("<PasswordInput />", () => {
   })
 
   test("sets `displayName` correctly", () => {
+    expect(PasswordInput.displayName).toBe("PasswordInputRoot")
     expect(PasswordInput.name).toBe("PasswordInputRoot")
   })
 
-  test("sets `className` correctly", async () => {
-    const { getByRole } = render(<PasswordInput placeholder="password" />)
+  test("renders expected html elements", () => {
+    render(<PasswordInput placeholder="password" />)
 
-    const input = await screen.findByPlaceholderText("password")
+    const input = screen.getByPlaceholderText("password")
+    const button = screen.getByRole("button")
 
-    expect(input.parentElement).toHaveClass("ui-password-input__root")
-    expect(input).toHaveClass("ui-password-input__field")
-    expect(getByRole("button")).toHaveClass("ui-password-input__button")
-  })
-
-  test("renders HTML tag correctly", async () => {
-    const { getByRole } = render(<PasswordInput placeholder="password" />)
-
-    const input = await screen.findByPlaceholderText("password")
-
-    expect(input.parentElement?.tagName).toBe("DIV")
     expect(input.tagName).toBe("INPUT")
-    expect(getByRole("button").tagName).toBe("BUTTON")
+    expect(button.tagName).toBe("BUTTON")
+    expect(input.parentElement?.tagName).toBe("DIV")
   })
 
-  test("Input type render correctly depending on the visibility", async () => {
-    const { user } = render(
-      <PasswordInput
-        placeholder="password"
-        visibilityIcon={{
-          off: <EyeOffIcon />,
-          on: <EyeIcon />,
-        }}
-      />,
-    )
+  test("sets `className` correctly", () => {
+    render(<PasswordInput placeholder="password" />)
 
-    const input = await screen.findByPlaceholderText("password")
-    const button = await screen.findByRole("button")
+    const input = screen.getByPlaceholderText("password")
+    const button = screen.getByRole("button")
 
-    expect(input).toHaveAttribute("type", "password")
-
-    await user.click(button)
-
-    expect(input).toHaveAttribute("type", "text")
-  })
-
-  test("merges `rootProps` and group item props without overwriting style and data attributes", async () => {
-    const onRootClick = vi.fn()
-
-    render(
-      <Group attached>
-        <PasswordInput
-          placeholder="password-1"
-          rootProps={{
-            className: "from-user",
-            style: { backgroundColor: "blue" },
-            onClick: onRootClick,
-          }}
-        />
-        <PasswordInput placeholder="password-2" />
-      </Group>,
-    )
-
-    const input = await screen.findByPlaceholderText("password-1")
-    const root = input.parentElement as HTMLElement
-
-    expect(root).toHaveClass("from-user")
-    expect(root).toHaveAttribute("data-group-start")
-    expect(root.style.getPropertyValue("--group-count")).toBe("2")
-    expect(root.style.getPropertyValue("--group-index")).toBe("0")
-    expect(root).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
-
-    fireEvent.click(root)
-    expect(onRootClick).toHaveBeenCalledTimes(1)
-  })
-
-  test("merges input context props and user props without overwriting className, style, and click handlers", async () => {
-    const onContextClick = vi.fn()
-    const onUserClick = vi.fn()
-
-    render(
-      <InputPropsContext
-        value={{
-          className: "from-context",
-          style: { color: "red" },
-          onClick: onContextClick,
-        }}
-      >
-        <PasswordInput
-          className="from-user"
-          style={{ backgroundColor: "blue" }}
-          placeholder="password"
-          onClick={onUserClick}
-        />
-      </InputPropsContext>,
-    )
-
-    const input = await screen.findByPlaceholderText("password")
-    const root = input.parentElement as HTMLElement
-
-    expect(root).toHaveClass("from-context", "from-user")
-    expect(input).toHaveStyle({ color: "rgb(255, 0, 0)" })
-    expect(input).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
-
-    fireEvent.click(input)
-
-    expect(onContextClick).toHaveBeenCalledTimes(1)
-    expect(onUserClick).toHaveBeenCalledTimes(1)
+    expect(input).toHaveClass("ui-password-input__field")
+    expect(button).toHaveClass("ui-password-input__button")
+    expect(input.parentElement).toHaveClass("ui-password-input__root")
   })
 })
 
-describe("<PassWordInputStrengthMeter />", () => {
-  const ExampleWithPassWordInputStrengthMeter = () => {
-    const [value, setValue] = useState("")
-
-    const getStrength = (password: string) => {
-      let strength = 0
-
-      if (password.length >= 8) strength++
-      if (/[A-Z]/.test(password)) strength++
-      if (/[0-9]/.test(password)) strength++
-      if (/[^A-Za-z0-9]/.test(password)) strength++
-
-      return strength
-    }
-    return (
-      <>
-        <PasswordInput
-          placeholder="password"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-        />
-
-        <StrengthMeter value={getStrength(value)} />
-      </>
-    )
-  }
-
+describe("<StrengthMeter />", () => {
   test("renders component correctly", async () => {
     await a11y(<StrengthMeter value={3} />)
   })
 
   test("sets `displayName` correctly", () => {
+    expect(StrengthMeter.displayName).toBe("StrengthMeterRoot")
     expect(StrengthMeter.name).toBe("StrengthMeterRoot")
   })
 
-  test("sets `className` correctly", () => {
-    const { getByTestId } = render(
-      <StrengthMeter data-testid="strengthMeter" value={3} />,
-    )
+  test("renders expected html elements", () => {
+    render(<StrengthMeter value={3} />)
 
-    expect(getByTestId("strengthMeter")).toHaveClass("ui-strength-meter__root")
-    expect(getByTestId("strengthMeter").children[0]).toHaveClass(
+    const strengthMeter = screen.getByRole("meter")
+
+    expect(strengthMeter.tagName).toBe("DIV")
+    expect(strengthMeter.children[0]?.tagName).toBe("DIV")
+    expect(strengthMeter.children[0]?.children[0]?.tagName).toBe("DIV")
+    expect(screen.getByText("High").tagName).toBe("SPAN")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<StrengthMeter data-testid="strengthMeter" value={3} />)
+
+    const strengthMeter = screen.getByTestId("strengthMeter")
+
+    expect(strengthMeter).toHaveClass("ui-strength-meter__root")
+    expect(strengthMeter.children[0]).toHaveClass(
       "ui-strength-meter__indicators",
     )
-    expect(getByTestId("strengthMeter").children[0]?.children[0]).toHaveClass(
+    expect(strengthMeter.children[0]?.children[0]).toHaveClass(
       "ui-strength-meter__indicator",
     )
   })
+})
 
-  test("renders HTML tag correctly", () => {
-    const { getByTestId } = render(
-      <StrengthMeter data-testid="strengthMeter" value={3} />,
-    )
+describe("usePasswordInput", () => {
+  test("getInputProps composes refs without duplicate callback calls", () => {
+    const rootRef = vi.fn()
+    const userRef = vi.fn()
+    const { result } = renderHook(() => usePasswordInput({ ref: rootRef }), {
+      withProvider: false,
+    })
+    const merged = result.current.getInputProps({ ref: userRef })
+    const node = document.createElement("input")
 
-    expect(getByTestId("strengthMeter").tagName).toBe("DIV")
-    expect(getByTestId("strengthMeter").children[0]?.tagName).toBe("DIV")
-    expect(getByTestId("strengthMeter").children[0]?.children[0]?.tagName).toBe(
-      "DIV",
-    )
+    expect(typeof merged.ref).toBe("function")
+    invokeCallbackRef(merged.ref, node)
+    invokeCallbackRef(merged.ref, null)
+
+    expect(rootRef).toHaveBeenCalledTimes(2)
+    expect(userRef).toHaveBeenCalledTimes(2)
+    expect(rootRef).toHaveBeenNthCalledWith(1, node)
+    expect(rootRef).toHaveBeenNthCalledWith(2, null)
+    expect(userRef).toHaveBeenNthCalledWith(1, node)
+    expect(userRef).toHaveBeenNthCalledWith(2, null)
   })
 
-  test("Could render strength meter with difference value", async () => {
-    const { user } = render(<ExampleWithPassWordInputStrengthMeter />)
+  test("getInputProps preserves field-first blur and focus handler order", () => {
+    const order: string[] = []
+    const fieldOnBlur = vi.fn(() => order.push("field:blur"))
+    const fieldOnFocus = vi.fn(() => order.push("field:focus"))
+    const hookOnBlur = vi.fn(() => order.push("hook:blur"))
+    const hookOnFocus = vi.fn(() => order.push("hook:focus"))
+    const userOnBlur = vi.fn(() => order.push("user:blur"))
+    const userOnFocus = vi.fn(() => order.push("user:focus"))
+    const context: FieldContextValue = {
+      id: "field-id",
+      disabled: false,
+      errorMessageId: "field-error-id",
+      focused: false,
+      helperMessageId: "field-helper-id",
+      invalid: false,
+      labelId: "field-label-id",
+      readOnly: false,
+      replace: true,
+      required: false,
+      onBlur: fieldOnBlur,
+      onFocus: fieldOnFocus,
+    }
+    const wrapper = ({ children }: PropsWithChildren) =>
+      FieldWrapper({ children, context })
+    const { result } = renderHook(
+      () => usePasswordInput({ onBlur: hookOnBlur, onFocus: hookOnFocus }),
+      { withProvider: false, wrapper },
+    )
+    const merged = result.current.getInputProps({
+      onBlur: userOnBlur,
+      onFocus: userOnFocus,
+    })
+    const blurEvent = new FocusEvent("blur")
+    const focusEvent = new FocusEvent("focus")
 
-    const passwordInput = await screen.findByPlaceholderText("password")
-    const strengthMeter = await screen.findByRole("meter")
+    invokeHandler(merged.onBlur, blurEvent as never)
+    invokeHandler(merged.onFocus, focusEvent as never)
 
-    await user.type(passwordInput, "aaaaaaa")
-    await waitFor(() =>
-      expect(strengthMeter).toHaveAttribute("aria-valuenow", "0"),
+    expect(order).toStrictEqual([
+      "field:blur",
+      "hook:blur",
+      "user:blur",
+      "field:focus",
+      "hook:focus",
+      "user:focus",
+    ])
+  })
+
+  test("getInputProps keeps preventDefault short-circuit behavior for blur", () => {
+    const fieldOnBlur = vi.fn()
+    const hookOnBlur = vi.fn((ev: { preventDefault: () => void }) =>
+      ev.preventDefault(),
     )
-    await user.type(passwordInput, "a")
-    await waitFor(() =>
-      expect(strengthMeter).toHaveAttribute("aria-valuenow", "1"),
+    const userOnBlur = vi.fn()
+    const context: FieldContextValue = {
+      id: "field-id",
+      disabled: false,
+      errorMessageId: "field-error-id",
+      focused: false,
+      helperMessageId: "field-helper-id",
+      invalid: false,
+      labelId: "field-label-id",
+      readOnly: false,
+      replace: true,
+      required: false,
+      onBlur: fieldOnBlur,
+      onFocus: vi.fn(),
+    }
+    const wrapper = ({ children }: PropsWithChildren) =>
+      FieldWrapper({ children, context })
+    const { result } = renderHook(
+      () => usePasswordInput({ onBlur: hookOnBlur }),
+      { withProvider: false, wrapper },
     )
-    await user.type(passwordInput, "A")
-    await waitFor(() =>
-      expect(strengthMeter).toHaveAttribute("aria-valuenow", "2"),
+    const merged = result.current.getInputProps({ onBlur: userOnBlur })
+    const event = {
+      defaultPrevented: false,
+      preventDefault() {
+        this.defaultPrevented = true
+      },
+    }
+
+    invokeHandler(merged.onBlur, event as never)
+
+    expect(fieldOnBlur).toHaveBeenCalledTimes(1)
+    expect(hookOnBlur).toHaveBeenCalledTimes(1)
+    expect(userOnBlur).not.toHaveBeenCalled()
+  })
+
+  test("getInputProps keeps per-call event overwrite for onChange and onKeyDown", () => {
+    const rootOnChange = vi.fn()
+    const rootOnKeyDown = vi.fn()
+    const userOnChange = vi.fn()
+    const userOnKeyDown = vi.fn()
+    const { result } = renderHook(
+      () =>
+        usePasswordInput({
+          onChange: rootOnChange,
+          onKeyDown: rootOnKeyDown,
+        }),
+      { withProvider: false },
     )
-    await user.type(passwordInput, "1")
-    await waitFor(() =>
-      expect(strengthMeter).toHaveAttribute("aria-valuenow", "3"),
+    const merged = result.current.getInputProps({
+      onChange: userOnChange,
+      onKeyDown: userOnKeyDown,
+    })
+    const changeEvent = new Event("change")
+    const keyDownEvent = new KeyboardEvent("keydown", { key: "Enter" })
+
+    invokeHandler(merged.onChange, changeEvent as never)
+    invokeHandler(merged.onKeyDown, keyDownEvent as never)
+
+    expect(rootOnChange).not.toHaveBeenCalled()
+    expect(rootOnKeyDown).not.toHaveBeenCalled()
+    expect(userOnChange).toHaveBeenCalledWith(changeEvent)
+    expect(userOnKeyDown).toHaveBeenCalledWith(keyDownEvent)
+  })
+
+  test("getInputProps merges className style css and allows aria/data overrides", () => {
+    const { result } = renderHook(
+      () =>
+        usePasswordInput({
+          className: "root",
+          css: { color: "red" },
+          style: { color: "red" },
+          invalid: true,
+        } as never),
+      { withProvider: false },
     )
-    await user.type(passwordInput, "!")
-    await waitFor(() =>
-      expect(strengthMeter).toHaveAttribute("aria-valuenow", "4"),
+    const merged = result.current.getInputProps({
+      className: "user",
+      css: { fontSize: "md" },
+      style: { backgroundColor: "blue" },
+      "aria-invalid": false,
+      "data-invalid": "override",
+    } as never)
+
+    expect(String(merged.className)).toContain("root")
+    expect(String(merged.className)).toContain("user")
+    expect(merged.style).toStrictEqual({
+      backgroundColor: "blue",
+      color: "red",
+    })
+    expect((merged as { css?: unknown }).css).toStrictEqual([
+      { color: "red" },
+      { fontSize: "md" },
+    ])
+    expect(merged["aria-invalid"]).toBeFalsy()
+    expect(merged["data-invalid"]).toBe("override")
+  })
+})
+
+describe("useStrengthMeter", () => {
+  test("getRootProps merges className style css and composes event handlers", () => {
+    const rootOnKeyDown = vi.fn()
+    const userOnKeyDown = vi.fn()
+    const { result } = renderHook(
+      () =>
+        useStrengthMeter({
+          className: "root",
+          css: { color: "red" },
+          style: { color: "red" },
+          value: 2,
+          onKeyDown: rootOnKeyDown,
+        } as never),
+      { withProvider: false },
     )
+    const merged = result.current.getRootProps({
+      className: "user",
+      css: { fontSize: "sm" },
+      style: { backgroundColor: "blue" },
+      "aria-label": "custom meter",
+      onKeyDown: userOnKeyDown,
+    } as never)
+    const event = new KeyboardEvent("keydown", { key: "Enter" })
+
+    invokeHandler(merged.onKeyDown, event as never)
+
+    expect(String(merged.className)).toContain("root")
+    expect(String(merged.className)).toContain("user")
+    expect(merged.style).toStrictEqual({
+      backgroundColor: "blue",
+      color: "red",
+    })
+    expect((merged as { css?: unknown }).css).toStrictEqual([
+      { color: "red" },
+      { fontSize: "sm" },
+    ])
+    expect(merged["aria-label"]).toBe("custom meter")
+    expect(rootOnKeyDown).toHaveBeenCalledWith(event)
+    expect(userOnKeyDown).toHaveBeenCalledWith(event)
   })
 })

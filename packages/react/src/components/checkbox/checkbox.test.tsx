@@ -1,6 +1,7 @@
 import { a11y, act, fireEvent, render, renderHook, screen } from "#test"
 import { CheckboxGroup } from "."
 import { Checkbox } from "./checkbox"
+import { useCheckbox } from "./use-checkbox"
 import { useCheckboxGroup } from "./use-checkbox-group"
 
 const items = [
@@ -17,34 +18,35 @@ describe("<Checkbox />", () => {
   test("sets `aria-checked` to mixed and native `indeterminate` when indeterminate", () => {
     render(<Checkbox indeterminate>checkbox</Checkbox>)
 
-    const input = screen.getByRole("checkbox")
+    const input = screen.getByRole("checkbox") as HTMLInputElement
 
     expect(input).toHaveAttribute("aria-checked", "mixed")
-    expect((input as HTMLInputElement).indeterminate).toBeTruthy()
+    expect(input).toBeInstanceOf(HTMLInputElement)
+    expect(input.indeterminate).toBeTruthy()
   })
 
   test("forwards `aria-controls` to the input element", () => {
     render(<Checkbox aria-controls="panel1">checkbox</Checkbox>)
 
-    const input = screen.getByRole("checkbox")
-
-    expect(input).toHaveAttribute("aria-controls", "panel1")
+    expect(screen.getByRole("checkbox")).toHaveAttribute(
+      "aria-controls",
+      "panel1",
+    )
   })
 
   test("forwards `aria-labelledby` to the input element", () => {
     render(<Checkbox aria-labelledby="label1">checkbox</Checkbox>)
 
-    const input = screen.getByRole("checkbox")
-
-    expect(input).toHaveAttribute("aria-labelledby", "label1")
+    expect(screen.getByRole("checkbox")).toHaveAttribute(
+      "aria-labelledby",
+      "label1",
+    )
   })
 
   test("forwards `tabIndex` to the input element", () => {
     render(<Checkbox tabIndex={-1}>checkbox</Checkbox>)
 
-    const input = screen.getByRole("checkbox")
-
-    expect(input).toHaveAttribute("tabindex", "-1")
+    expect(screen.getByRole("checkbox")).toHaveAttribute("tabindex", "-1")
   })
 
   test("sets `displayName` correctly", () => {
@@ -54,7 +56,9 @@ describe("<Checkbox />", () => {
 
   test("sets `className` correctly", () => {
     render(<CheckboxGroup.Root items={items} />)
+
     const checkbox = screen.getAllByRole("checkbox")[0]
+
     expect(screen.getByRole("group")).toHaveClass("ui-checkbox__group")
     expect(checkbox?.parentElement).toHaveClass("ui-checkbox__root")
     expect(checkbox?.parentElement?.children[1]).toHaveClass(
@@ -67,12 +71,74 @@ describe("<Checkbox />", () => {
 
   test("renders HTML tag correctly", () => {
     render(<CheckboxGroup.Root items={items} />)
+
     const checkbox = screen.getAllByRole("checkbox")[0]
+
     expect(screen.getByRole("group").tagName).toBe("DIV")
     expect(checkbox?.parentElement?.tagName).toBe("LABEL")
     expect(checkbox?.tagName).toBe("INPUT")
     expect(checkbox?.parentElement?.children[1]?.tagName).toBe("DIV")
     expect(checkbox?.parentElement?.children[2]?.tagName).toBe("SPAN")
+  })
+
+  test("merges root props on Checkbox without overwriting className, style, or ref", () => {
+    const userRef = vi.fn()
+    render(
+      <Checkbox
+        className="from-root"
+        rootProps={{
+          ref: userRef,
+          className: "from-user",
+          style: { backgroundColor: "blue", color: "red" },
+          "data-testid": "checkbox-root",
+        }}
+      >
+        checkbox
+      </Checkbox>,
+    )
+
+    const root = screen.getByTestId("checkbox-root")
+
+    expect(root).toHaveClass("ui-checkbox__root")
+    expect(root).toHaveClass("from-root")
+    expect(root).toHaveClass("from-user")
+    expect(root).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(root).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+    expect(userRef).toHaveBeenCalledTimes(1)
+    expect(userRef).toHaveBeenCalledWith(root)
+  })
+
+  test("merges root props values in useCheckbox with caller props", () => {
+    const restOnClick = vi.fn()
+    const callerOnClick = vi.fn()
+    const { result } = renderHook(() =>
+      useCheckbox({
+        className: "from-rest",
+        style: { backgroundColor: "red", paddingTop: "4px" },
+        onClick: restOnClick,
+      }),
+    )
+
+    const rootProps = result.current.getRootProps({
+      className: "from-caller",
+      style: { color: "blue", paddingTop: "8px" },
+      onClick: callerOnClick,
+    })
+
+    expect(rootProps.className).toContain("from-rest")
+    expect(rootProps.className).toContain("from-caller")
+    expect(rootProps.style).toMatchObject({
+      backgroundColor: "red",
+      color: "blue",
+      paddingTop: "8px",
+    })
+
+    const { container } = render(<label htmlFor="checkbox-id" {...rootProps} />)
+    const root = container.firstElementChild
+    if (root) fireEvent.click(root)
+
+    expect(restOnClick).toHaveBeenCalledTimes(1)
+    expect(callerOnClick).toHaveBeenCalledTimes(1)
   })
 })
 
@@ -143,6 +209,7 @@ describe("<CheckboxGroup />", () => {
     expect(checkboxes[0]).toBeChecked()
     expect(checkboxes[1]).toBeChecked()
     expect(checkboxes[2]).not.toBeChecked()
+    expect(checkboxes[2]).toBeDisabled()
     expect(checkboxes[2]).toHaveAttribute("aria-disabled", "true")
   })
 
@@ -173,6 +240,8 @@ describe("<CheckboxGroup />", () => {
 
     const checkboxes = screen.getAllByRole("checkbox")
 
+    expect(checkboxes[2]).toBeDisabled()
+    expect(checkboxes[2]).toHaveAttribute("aria-disabled", "true")
     fireEvent.click(checkboxes[2]!)
     expect(onChange).not.toHaveBeenCalled()
   })
@@ -214,16 +283,11 @@ describe("<CheckboxGroup />", () => {
   })
 
   test("should accept required prop", () => {
-    // Note: Currently, the required prop on CheckboxGroup doesn't propagate
-    // as observable attributes (required/aria-required/data-required) on checkbox inputs.
-    // This test verifies the component accepts the prop without error.
-    // Ideally, we would assert: checkboxes have required/aria-required attributes.
-    const { container } = render(<CheckboxGroup.Root items={items} required />)
+    render(<CheckboxGroup.Root items={items} required />)
 
-    const group = container.querySelector('[role="group"]')
     const checkboxes = screen.getAllByRole("checkbox")
 
-    expect(group).toBeInTheDocument()
+    expect(screen.getByRole("group")).toBeInTheDocument()
     expect(checkboxes).toHaveLength(items.length)
   })
 
@@ -239,5 +303,47 @@ describe("<CheckboxGroup />", () => {
       result.current.onChange("2")
     })
     expect(result.current.value).toStrictEqual(["1"])
+  })
+
+  test("merges getRootProps values in useCheckboxGroup and calls each ref once", () => {
+    const restOnClick = vi.fn()
+    const callerOnClick = vi.fn()
+    const restRef = vi.fn()
+    const callerRef = vi.fn()
+    const { result } = renderHook(() =>
+      useCheckboxGroup({
+        ref: restRef,
+        className: "from-rest",
+        style: { backgroundColor: "red", paddingTop: "4px" },
+        onClick: restOnClick,
+      }),
+    )
+
+    const rootProps = result.current.getRootProps({
+      ref: callerRef,
+      className: "from-caller",
+      style: { color: "blue", paddingTop: "8px" },
+      onClick: callerOnClick,
+    })
+
+    expect(rootProps.className).toContain("from-rest")
+    expect(rootProps.className).toContain("from-caller")
+    expect(rootProps.style).toMatchObject({
+      backgroundColor: "red",
+      color: "blue",
+      paddingTop: "8px",
+    })
+    expect(rootProps.role).toBe("group")
+
+    const { container } = render(<div {...rootProps} />)
+    const root = container.firstElementChild
+    if (root) fireEvent.click(root)
+
+    expect(restOnClick).toHaveBeenCalledTimes(1)
+    expect(callerOnClick).toHaveBeenCalledTimes(1)
+    expect(restRef).toHaveBeenCalledTimes(1)
+    expect(callerRef).toHaveBeenCalledTimes(1)
+    expect(restRef).toHaveBeenCalledWith(root)
+    expect(callerRef).toHaveBeenCalledWith(root)
   })
 })

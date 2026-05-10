@@ -4,9 +4,25 @@ on:
   push:
     paths:
       - ".github/workflows/codecov.yml"
+      - "package.json"
+      - "pnpm-workspace.yaml"
       - "codecov.yml"
-      - "packages/**"
-      - "!packages/**/storybook/**"
+      - "packages/cli/package.json"
+      - "packages/cli/vitest.config.ts"
+      - "packages/cli/src/**/*.ts"
+      - "packages/cli/src/**/*.tsx"
+      - "packages/cli/test/**/*"
+      - "packages/react/package.json"
+      - "packages/react/vitest.config.ts"
+      - "packages/react/src/**/*.ts"
+      - "packages/react/src/**/*.tsx"
+      - "packages/react/test/**/*"
+      - "packages/utils/package.json"
+      - "packages/utils/vitest.config.ts"
+      - "packages/utils/src/**/*.ts"
+      - "packages/utils/src/**/*.tsx"
+      - "packages/workspace/package.json"
+      - "packages/workspace/src/vitest/**/*"
       - "!packages/**/*.stories.ts"
       - "!packages/**/*.stories.tsx"
     branches:
@@ -17,13 +33,73 @@ env:
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
-  coverage:
-    name: Coverage ${{ matrix.shard_index }}/4
+  jsdom:
+    name: Coverage / ${{ matrix.name }}
+    runs-on: ubuntu-24.04
+    strategy:
+      max-parallel: 6
+      matrix:
+        include:
+          - id: cli
+            name: CLI
+            command: pnpm cli test:coverage
+            files: ./packages/cli/coverage/coverage-final.json
+          - id: utils
+            name: Utils
+            command: pnpm utils test:coverage
+            files: ./packages/utils/coverage/coverage-final.json
+          - id: react-1
+            name: React 1/4
+            command: pnpm react test:coverage:jsdom -- --shard=1/4
+            files: ./packages/react/coverage/jsdom/coverage-final.json
+          - id: react-2
+            name: React 2/4
+            command: pnpm react test:coverage:jsdom -- --shard=2/4
+            files: ./packages/react/coverage/jsdom/coverage-final.json
+          - id: react-3
+            name: React 3/4
+            command: pnpm react test:coverage:jsdom -- --shard=3/4
+            files: ./packages/react/coverage/jsdom/coverage-final.json
+          - id: react-4
+            name: React 4/4
+            command: pnpm react test:coverage:jsdom -- --shard=4/4
+            files: ./packages/react/coverage/jsdom/coverage-final.json
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      - name: Install
+        uses: ./.github/composite-actions/install
+
+      - name: Run coverage
+        run: ${{ matrix.command }}
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe # v5.5.4
+        with:
+          disable_search: true
+          fail_ci_if_error: false
+          files: ${{ matrix.files }}
+          flags: unittests
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
+          codecov_yml_path: ./codecov.yml
+
+  browser:
+    name: Coverage / ${{ matrix.name }} ${{ matrix.shard_index }}/4
     runs-on: ubuntu-24.04
     strategy:
       max-parallel: 4
       matrix:
+        browser: [chromium, firefox, webkit]
         shard_index: [1, 2, 3, 4]
+        include:
+          - browser: chromium
+            name: Chromium
+          - browser: firefox
+            name: Firefox
+          - browser: webkit
+            name: Webkit
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -33,17 +109,17 @@ jobs:
 
       - name: Setup Browser
         working-directory: packages/react
-        run: pnpm playwright install chromium --with-deps
+        run: pnpm playwright install ${{ matrix.browser }} --with-deps ${{ matrix.browser == 'chromium' && '--only-shell' || '' }}
 
       - name: Run coverage
-        run: pnpm test:coverage -- --shard=${{ matrix.shard_index }}/4
+        run: pnpm react test:coverage:${{ matrix.browser }} -- --shard=${{ matrix.shard_index }}/4
 
       - name: Upload coverage
         uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe # v5.5.4
         with:
           disable_search: true
           fail_ci_if_error: false
-          files: ./packages/react/coverage/coverage-final.json,./packages/utils/coverage/coverage-final.json,./packages/cli/coverage/coverage-final.json
+          files: ./packages/react/coverage/${{ matrix.browser }}/coverage-final.json
           flags: unittests
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true

@@ -1,5 +1,6 @@
-import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { useRef } from "react"
+
+import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { Sidebar } from "."
 import { Button } from "../button"
 
@@ -173,23 +174,34 @@ describe("<Sidebar />", () => {
     )
   })
 
-  test("should select leaf item on click", async () => {
+  test("should select leaf item on click", () => {
     const onSelectedChange = vi.fn()
+    const navigationSafeNavItems: Sidebar.ItemType[] = navItems.map(
+      (item, index) =>
+        index === 0 && item.children
+          ? {
+              ...item,
+              children: item.children.map((child, childIndex) =>
+                childIndex === 0 ? { ...child, value: "#/1/1" } : child,
+              ),
+            }
+          : item,
+    )
 
-    const { user } = render(
+    render(
       <Sidebar.Root
         defaultExpandedValue={["/1"]}
         onSelectedChange={onSelectedChange}
       >
-        <Sidebar.SidePanel items={navItems} />
+        <Sidebar.SidePanel items={navigationSafeNavItems} />
       </Sidebar.Root>,
     )
 
     const link = screen.getByRole("link", { name: "1-1" })
 
-    await user.click(link)
+    fireEvent.click(link)
 
-    expect(onSelectedChange).toHaveBeenCalledWith("/1/1")
+    expect(onSelectedChange).toHaveBeenCalledWith("#/1/1")
   })
 
   test("should expand and collapse group on trigger click", async () => {
@@ -203,7 +215,7 @@ describe("<Sidebar />", () => {
 
     const trigger = screen.getByRole("button", { name: /1/ })
 
-    await user.click(trigger)
+    fireEvent.click(trigger)
 
     expect(onExpandedChange).toHaveBeenCalledWith(["/1"])
     expect(trigger).toHaveAttribute("data-expanded")
@@ -213,10 +225,10 @@ describe("<Sidebar />", () => {
     expect(onExpandedChange).toHaveBeenLastCalledWith([])
   })
 
-  test("should not expand disabled group on click", async () => {
+  test("should not expand disabled group on click", () => {
     const onExpandedChange = vi.fn()
 
-    const { user } = render(
+    render(
       <Sidebar.Root onExpandedChange={onExpandedChange}>
         <Sidebar.SidePanel items={navItems} />
       </Sidebar.Root>,
@@ -224,15 +236,15 @@ describe("<Sidebar />", () => {
 
     const trigger = screen.getByRole("button", { name: /2/ })
 
-    await user.click(trigger)
+    fireEvent.click(trigger)
 
     expect(onExpandedChange).not.toHaveBeenCalled()
   })
 
-  test("should not select disabled leaf item", async () => {
+  test("should not select disabled leaf item", () => {
     const onSelectedChange = vi.fn()
 
-    const { user } = render(
+    render(
       <Sidebar.Root onSelectedChange={onSelectedChange}>
         <Sidebar.SidePanel items={navItems} />
       </Sidebar.Root>,
@@ -240,7 +252,7 @@ describe("<Sidebar />", () => {
 
     const link = screen.getByRole("link", { name: "4" })
 
-    await user.click(link)
+    fireEvent.click(link)
 
     expect(onSelectedChange).not.toHaveBeenCalled()
   })
@@ -498,8 +510,8 @@ describe("<Sidebar />", () => {
     })
   })
 
-  test("should prevent navigation when clicking disabled link", async () => {
-    const { user } = render(
+  test("should prevent navigation when clicking disabled link", () => {
+    render(
       <Sidebar.Root>
         <Sidebar.SidePanel items={navItems} />
       </Sidebar.Root>,
@@ -512,7 +524,7 @@ describe("<Sidebar />", () => {
     })
     const preventDefaultSpy = vi.spyOn(clickEvent, "preventDefault")
 
-    await user.click(link)
+    fireEvent.click(link)
     link.dispatchEvent(clickEvent)
 
     expect(preventDefaultSpy).toHaveBeenCalledTimes(1)
@@ -673,6 +685,118 @@ describe("<Sidebar />", () => {
     await waitFor(() => {
       expect(screen.getByRole("link", { name: "lazy-1" })).toBeInTheDocument()
     })
+  })
+
+  test("should merge root and group props including className, style, ref, and handlers", async () => {
+    const onRootKeyDown = vi.fn()
+    const onGroupClickFromSidePanel = vi.fn()
+    const onGroupClickFromGroup = vi.fn()
+    const rootRef = vi.fn()
+    const groupRef = vi.fn()
+
+    const { user } = render(
+      <Sidebar.Root
+        ref={rootRef}
+        className="custom-root"
+        style={{ marginTop: "1px" }}
+        data-testid="root"
+        tabIndex={0}
+        onKeyDown={onRootKeyDown}
+      >
+        <Sidebar.SidePanel
+          groupProps={{
+            ref: groupRef,
+            className: "custom-group-from-side-panel",
+            style: { marginLeft: "2px" },
+            onClick: onGroupClickFromSidePanel,
+          }}
+        >
+          <Sidebar.Content>
+            <Sidebar.Group
+              className="custom-group"
+              style={{ marginBottom: "3px" }}
+              data-testid="group"
+              label="Group"
+              onClick={onGroupClickFromGroup}
+            >
+              <Sidebar.Item label="Leaf" value="#leaf" />
+            </Sidebar.Group>
+          </Sidebar.Content>
+        </Sidebar.SidePanel>
+      </Sidebar.Root>,
+    )
+
+    const root = screen.getByTestId("root")
+    const group = screen.getByTestId("group")
+
+    expect(root).toHaveClass("ui-sidebar__root")
+    expect(root).toHaveClass("custom-root")
+    expect(root).toHaveStyle("margin-top: 1px")
+    expect(group).toHaveClass("custom-group")
+    expect(group).toHaveClass("custom-group-from-side-panel")
+    expect(group).toHaveStyle("margin-left: 2px")
+    expect(group).toHaveStyle("margin-bottom: 3px")
+    expect(group).toHaveAttribute("aria-labelledby")
+
+    await user.click(root)
+    await user.keyboard("a")
+
+    expect(onRootKeyDown).toHaveBeenCalledWith(expect.any(Object))
+
+    await user.click(group)
+
+    expect(onGroupClickFromSidePanel).toHaveBeenCalledTimes(1)
+    expect(onGroupClickFromGroup).toHaveBeenCalledTimes(1)
+    expect(rootRef).toHaveBeenCalledWith(expect.any(HTMLDivElement))
+    expect(groupRef).toHaveBeenCalledWith(expect.any(HTMLLIElement))
+  })
+
+  test("should merge item click handlers from side panel and item with selection behavior", async () => {
+    const onItemClickFromSidePanel = vi.fn()
+    const onItemClickFromItem = vi.fn()
+    const onSelectedChange = vi.fn()
+    const itemRef = vi.fn()
+
+    const { user } = render(
+      <Sidebar.Root onSelectedChange={onSelectedChange}>
+        <Sidebar.SidePanel
+          itemProps={{
+            ref: itemRef,
+            className: "custom-item-from-side-panel",
+            style: { marginRight: "4px" },
+            onClick: onItemClickFromSidePanel,
+          }}
+        >
+          <Sidebar.Content>
+            <Sidebar.Item
+              className="custom-item"
+              style={{ marginInlineStart: "5px" }}
+              data-testid="item"
+              label="Leaf"
+              value="#leaf"
+              onClick={onItemClickFromItem}
+            />
+          </Sidebar.Content>
+        </Sidebar.SidePanel>
+      </Sidebar.Root>,
+    )
+
+    const item = screen.getByTestId("item")
+
+    expect(item).toHaveClass("custom-item")
+    expect(item).toHaveClass("custom-item-from-side-panel")
+    expect(item).toHaveStyle("margin-right: 4px")
+    expect(item).toHaveStyle("margin-inline-start: 5px")
+
+    await user.click(screen.getByRole("link", { name: "Leaf" }))
+
+    expect(onItemClickFromSidePanel).toHaveBeenCalledTimes(1)
+    expect(onItemClickFromItem).toHaveBeenCalledTimes(1)
+    expect(onSelectedChange).toHaveBeenCalledWith("#leaf")
+    expect(screen.getByRole("link", { name: "Leaf" })).toHaveAttribute(
+      "data-selected",
+    )
+    expect(itemRef).toHaveBeenCalledWith(expect.any(HTMLLIElement))
   })
 
   test("should support default selectedValue", () => {

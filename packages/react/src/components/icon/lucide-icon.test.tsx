@@ -1,14 +1,14 @@
 import type { FC } from "react"
 import type { IconProps } from "./icon"
 import type { IconNames } from "./icons"
-import { a11y, render } from "#test/browser"
 import { burger } from "@lucide/lab"
+import { a11y, render } from "#test"
 import { icons } from "./"
 import { GhostIcon } from "./icons"
 import { LucideIcon } from "./lucide-icon"
 
 describe("Lucide icon", () => {
-  test("renders component correctly", async () => {
+  test("passes a11y checks", async () => {
     await a11y(<GhostIcon />)
   })
 
@@ -16,35 +16,42 @@ describe("Lucide icon", () => {
     expect(GhostIcon.displayName).toBe("Icon")
   })
 
-  test("sets `className` correctly", async () => {
-    const { container } = await render(<GhostIcon />)
+  test("sets `className` correctly", () => {
+    const { container } = render(<GhostIcon />)
 
     expect(container.firstChild).toHaveClass("ui-icon")
   })
 
-  test("renders HTML tag correctly", async () => {
-    const { container } = await render(<GhostIcon />)
+  test("renders HTML tag correctly", () => {
+    const { container } = render(<GhostIcon />)
 
     expect(container.firstChild?.nodeName).toBe("svg")
   })
 
-  test("renders icon correctly", async () => {
-    await render(<GhostIcon />)
+  test("renders icon correctly", () => {
+    const { container } = render(<GhostIcon />)
+
+    expect(container.firstChild).toBeInTheDocument()
   })
 
-  test("renders icons correctly", async () => {
+  test("renders icons correctly", () => {
     const Icon: FC<IconProps & { name: IconNames }> = ({ name, ...rest }) => {
       const Icon = icons[name]
 
       return <Icon {...rest} />
     }
 
-    await render(<Icon name="GhostIcon" />)
+    const { container } = render(<Icon name="GhostIcon" />)
+
+    expect(container.firstChild).toHaveClass("ui-icon")
   })
 })
 
 describe("<LucideIcon />", () => {
-  test("renders Icon correctly", async () => {
-    await render(<LucideIcon iconNode={burger} />)
+  test("renders Icon correctly", () => {
+    const { container } = render(<LucideIcon iconNode={burger} />)
+
+    expect(container.firstChild).toHaveClass("ui-icon")
+    expect(container.firstChild?.nodeName).toBe("svg")
   })
 })

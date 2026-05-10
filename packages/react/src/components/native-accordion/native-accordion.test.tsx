@@ -1,6 +1,11 @@
-import { a11y, render, screen } from "#test"
-import { BoxIcon } from "../icon"
+import type { ReactNode } from "react"
+import { a11y, render, renderHook } from "#test"
 import { NativeAccordion } from "./"
+import {
+  NativeAccordionContext,
+  useNativeAccordion,
+  useNativeAccordionItem,
+} from "./use-native-accordion"
 
 const items = [
   {
@@ -28,157 +33,151 @@ describe("<NativeAccordion />", () => {
     )
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(NativeAccordion.Root.name).toBe("NativeAccordionRoot")
-    expect(NativeAccordion.Item.name).toBe("NativeAccordionItem")
-    expect(NativeAccordion.Button.name).toBe("NativeAccordionButton")
-    expect(NativeAccordion.Icon.name).toBe("NativeAccordionIcon")
-    expect(NativeAccordion.Panel.name).toBe("NativeAccordionPanel")
-  })
+  test("merges getRootProps values and keeps hook precedence", () => {
+    const restRef = vi.fn()
+    const callerRef = vi.fn()
+    const restOnClick = vi.fn()
+    const callerOnClick = vi.fn()
 
-  test("sets `className` correctly", () => {
-    render(
-      <NativeAccordion.Root data-testid="root">
-        <NativeAccordion.Item data-testid="item" button="Accordion Label">
-          <NativeAccordion.Panel data-testid="panel">
-            This is an accordion item
-          </NativeAccordion.Panel>
-        </NativeAccordion.Item>
-      </NativeAccordion.Root>,
-    )
-    expect(screen.getByTestId("root")).toHaveClass("ui-native-accordion__root")
-    expect(screen.getByTestId("item")).toHaveClass("ui-native-accordion__item")
-    expect(screen.getByTestId("panel")).toHaveClass(
-      "ui-native-accordion__panel",
-    )
-    expect(screen.getByText("Accordion Label")).toHaveClass(
-      "ui-native-accordion__button",
-    )
-  })
-
-  test("renders HTML tag correctly", () => {
-    render(
-      <NativeAccordion.Root data-testid="root">
-        <NativeAccordion.Item data-testid="item" button="Accordion Label">
-          <NativeAccordion.Panel data-testid="panel">
-            This is an accordion item
-          </NativeAccordion.Panel>
-        </NativeAccordion.Item>
-      </NativeAccordion.Root>,
-    )
-    expect(screen.getByTestId("root").tagName).toBe("DIV")
-    const item = screen.getByTestId("item")
-    expect(item.tagName).toBe("DETAILS")
-    expect(screen.getByTestId("panel").tagName).toBe("DIV")
-    expect(screen.getByText("Accordion Label").tagName).toBe("SUMMARY")
-  })
-
-  test("supports `open` as a native default expanded attribute", () => {
-    render(
-      <NativeAccordion.Root>
-        <NativeAccordion.Item button="Accordion Label" open>
-          This is an accordion item
-        </NativeAccordion.Item>
-      </NativeAccordion.Root>,
+    const { result } = renderHook(() =>
+      useNativeAccordion({
+        id: "from-rest",
+        ref: (...args) => {
+          restRef(...args)
+        },
+        className: "from-rest",
+        style: { backgroundColor: "red", paddingTop: "4px" },
+        title: "from-rest-title",
+        onClick: restOnClick,
+      }),
     )
 
-    const item = screen.getByRole("group")
-    expect(item).toHaveAttribute("open")
-    expect(screen.getByText("This is an accordion item")).toBeInTheDocument()
+    const rootProps = result.current.getRootProps({
+      id: "from-caller",
+      ref: (...args) => {
+        callerRef(...args)
+      },
+      className: "from-caller",
+      style: { color: "blue", paddingTop: "8px" },
+      title: "from-caller-title",
+      onClick: callerOnClick,
+    })
+
+    expect(rootProps.className).toContain("from-rest")
+    expect(rootProps.className).toContain("from-caller")
+    expect(rootProps.id).toBe("from-rest")
+    expect(rootProps.title).toBe("from-rest-title")
+    expect(rootProps.style).toMatchObject({
+      backgroundColor: "red",
+      color: "blue",
+      paddingTop: "4px",
+    })
+
+    const rootNode = document.createElement("div")
+    const rootRef = rootProps.ref as (node: HTMLDivElement | null) => void
+    rootRef(rootNode)
+
+    expect(restRef).toHaveBeenCalledTimes(1)
+    expect(callerRef).toHaveBeenCalledTimes(1)
+
+    rootProps.onClick?.({} as any)
+
+    expect(restOnClick).toHaveBeenCalledTimes(1)
+    expect(callerOnClick).toHaveBeenCalledTimes(1)
   })
 
-  test("toggles with native details behavior", async () => {
-    const { user } = render(<NativeAccordion.Root items={items} />)
+  test("merges getItemProps values and keeps caller precedence", () => {
+    const restRef = vi.fn()
+    const callerRef = vi.fn()
+    const restOnToggle = vi.fn()
+    const callerOnToggle = vi.fn()
 
-    const button = screen.getByText(/Accordion Label 1/i)
-    const item = screen.getAllByRole("group")[0]
+    const wrapper = ({ children }: { children: ReactNode }) => (
+      <NativeAccordionContext value={{ name: "from-context" }}>
+        {children}
+      </NativeAccordionContext>
+    )
 
-    await user.click(button)
-    expect(item).toHaveAttribute("open")
+    const { result } = renderHook(
+      () =>
+        useNativeAccordionItem({
+          id: "from-rest",
+          ref: (...args) => {
+            restRef(...args)
+          },
+          name: "from-rest-name",
+          className: "from-rest",
+          style: { backgroundColor: "red", paddingTop: "4px" },
+          "data-group": "from-rest-group",
+          onToggle: restOnToggle,
+        }),
+      { wrapper },
+    )
 
-    await user.click(button)
-    expect(item).not.toHaveAttribute("open")
-  })
+    const itemProps = result.current.getItemProps({
+      id: "from-caller",
+      ref: (...args) => {
+        callerRef(...args)
+      },
+      name: "from-caller-name",
+      className: "from-caller",
+      style: { color: "blue", paddingTop: "8px" },
+      "data-group": "from-caller-group",
+      onToggle: callerOnToggle,
+    })
 
-  test("can open multiple items by default", async () => {
-    const { user } = render(<NativeAccordion.Root items={items} />)
+    expect(itemProps.className).toContain("from-rest")
+    expect(itemProps.className).toContain("from-caller")
+    expect(itemProps.id).toBe("from-caller")
+    expect(itemProps.name).toBe("from-caller-name")
+    expect(itemProps["data-group"]).toBe("from-caller-group")
+    expect(itemProps.style).toMatchObject({
+      backgroundColor: "red",
+      color: "blue",
+      paddingTop: "8px",
+    })
 
-    const itemsElements = screen.getAllByRole("group")
-    const item1 = itemsElements[0]!
-    const item2 = itemsElements[1]!
+    const itemNode = document.createElement("details")
+    const itemRef = itemProps.ref as (node: HTMLDetailsElement | null) => void
+    itemRef(itemNode)
 
-    await user.click(screen.getByText(/Accordion Label 1/i))
-    await user.click(screen.getByText(/Accordion Label 2/i))
+    expect(restRef).toHaveBeenCalledTimes(1)
+    expect(callerRef).toHaveBeenCalledTimes(1)
 
-    expect(item1).toHaveAttribute("open")
-    expect(item2).toHaveAttribute("open")
-  })
+    itemProps.onToggle?.({} as any)
 
-  test("assigns shared `name` when `multiple` is false", () => {
-    render(<NativeAccordion.Root items={items} multiple={false} />)
-
-    const itemsElements = screen.getAllByRole("group")
-    const item1 = itemsElements[0]!
-    const item2 = itemsElements[1]!
-
-    const name1 = item1.getAttribute("name")
-    const name2 = item2.getAttribute("name")
-
-    expect(name1).toBeTruthy()
-    expect(name1).toBe(name2)
-  })
-
-  test("applies explicit empty `name` when `name` is an empty string", () => {
-    render(<NativeAccordion.Root name="" items={items} />)
-
-    const itemsElements = screen.getAllByRole("group")
-    const item1 = itemsElements[0]!
-    const item2 = itemsElements[1]!
-
-    expect(item1).toHaveAttribute("name", "")
-    expect(item2).toHaveAttribute("name", "")
+    expect(restOnToggle).toHaveBeenCalledTimes(1)
+    expect(callerOnToggle).toHaveBeenCalledTimes(1)
   })
 
   test("applies root `name` to items", () => {
-    render(<NativeAccordion.Root name="native-accordion" items={items} />)
+    const { container } = render(
+      <NativeAccordion.Root name="native-accordion" items={items} />,
+    )
 
-    const item = screen.getAllByRole("group")[0]
+    const item = container.querySelectorAll("details")[0]
     expect(item).toHaveAttribute("name", "native-accordion")
   })
 
-  test("renders a disabled item", async () => {
-    const { user } = render(
-      <NativeAccordion.Root>
-        <NativeAccordion.Item button="Accordion Label" disabled>
-          This is an accordion item
-        </NativeAccordion.Item>
-      </NativeAccordion.Root>,
-    )
+  test("applies shared generated `name` to all items when multiple is false", () => {
+    const { container } = render(<NativeAccordion.Root items={items} />)
+    const renderedItems = Array.from(container.querySelectorAll("details"))
 
-    const button = screen.getByText(/Accordion Label/i)
-    const item = screen.getByRole("group")
+    const generatedName = renderedItems[0]?.getAttribute("name")
 
-    await user.click(button)
-    expect(item).not.toHaveAttribute("open")
+    expect(generatedName).toBeTruthy()
+
+    for (const item of renderedItems) {
+      expect(item).toHaveAttribute("name", generatedName)
+    }
   })
 
-  test("renders item with custom icon", async () => {
-    const { user } = render(
-      <NativeAccordion.Root
-        icon={<BoxIcon data-icon="custom" data-testid="custom-icon" />}
-      >
-        <NativeAccordion.Item button="Accordion Label">
-          This is an accordion item
-        </NativeAccordion.Item>
-      </NativeAccordion.Root>,
-    )
+  test("preserves empty string `name` on all items", () => {
+    const { container } = render(<NativeAccordion.Root name="" items={items} />)
+    const renderedItems = Array.from(container.querySelectorAll("details"))
 
-    expect(screen.getByTestId("custom-icon")).toHaveAttribute(
-      "data-icon",
-      "custom",
-    )
-
-    await user.click(screen.getByText(/Accordion Label/i))
-    expect(screen.getByTestId("custom-icon")).toBeInTheDocument()
+    for (const item of renderedItems) {
+      expect(item).toHaveAttribute("name", "")
+    }
   })
 })

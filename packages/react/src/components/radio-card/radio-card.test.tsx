@@ -37,33 +37,33 @@ describe("<RadioCard />", () => {
 
   test("sets `className` correctly", () => {
     render(<RadioCardGroup.Root items={items} />)
-    const radio = screen.getAllByRole("radio")[0]
+    const radio = screen.getByRole("radio", { name: /Item 1/ })
+    const root = radio.parentElement
+    if (!(root instanceof HTMLElement)) {
+      throw new Error("expected radio card root to be an HTMLElement")
+    }
     expect(screen.getByRole("radiogroup")).toHaveClass("ui-radio-card__group")
-    expect(radio?.parentElement).toHaveClass("ui-radio-card__root")
-    expect(radio?.parentElement?.children[1]).toHaveClass(
-      "ui-radio-card__indicator",
-    )
-    expect(radio?.parentElement?.children[2]).toHaveClass(
-      "ui-radio-card__label",
-    )
-    expect(radio?.parentElement?.children[3]).toHaveClass(
-      "ui-radio-card__description",
-    )
-    expect(radio?.parentElement?.children[4]).toHaveClass(
-      "ui-radio-card__addon",
-    )
+    expect(root).toHaveClass("ui-radio-card__root")
+    expect(root.children[1]).toHaveClass("ui-radio-card__indicator")
+    expect(root.children[2]).toHaveClass("ui-radio-card__label")
+    expect(root.children[3]).toHaveClass("ui-radio-card__description")
+    expect(root.children[4]).toHaveClass("ui-radio-card__addon")
   })
 
   test("renders HTML tag correctly", () => {
     render(<RadioCardGroup.Root items={items} />)
-    const radio = screen.getAllByRole("radio")[0]
+    const radio = screen.getByRole("radio", { name: /Item 1/ })
+    const root = radio.parentElement
+    if (!(root instanceof HTMLElement)) {
+      throw new Error("expected radio card root to be an HTMLElement")
+    }
     expect(screen.getByRole("radiogroup").tagName).toBe("DIV")
-    expect(radio?.parentElement?.tagName).toBe("LABEL")
-    expect(radio?.tagName).toBe("INPUT")
-    expect(radio?.parentElement?.children[1]?.tagName).toBe("DIV")
-    expect(radio?.parentElement?.children[2]?.tagName).toBe("SPAN")
-    expect(radio?.parentElement?.children[3]?.tagName).toBe("SPAN")
-    expect(radio?.parentElement?.children[4]?.tagName).toBe("SPAN")
+    expect(root.tagName).toBe("LABEL")
+    expect(radio.tagName).toBe("INPUT")
+    expect(root.children[1]?.tagName).toBe("DIV")
+    expect(root.children[2]?.tagName).toBe("SPAN")
+    expect(root.children[3]?.tagName).toBe("SPAN")
+    expect(root.children[4]?.tagName).toBe("SPAN")
   })
 
   test("renders label, description, and addon via props", () => {

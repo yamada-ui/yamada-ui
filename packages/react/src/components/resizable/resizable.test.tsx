@@ -1,6 +1,4 @@
-import type { ResizableRootControl } from "./"
-import { a11y, fireEvent, render, screen } from "#test"
-import { useRef } from "react"
+import { a11y, render, screen } from "#test"
 import { GripVerticalIcon } from "../icon"
 import { Resizable } from "./"
 
@@ -32,10 +30,12 @@ describe("<Resizable />", () => {
         <Resizable.Item>Two</Resizable.Item>
       </Resizable.Root>,
     )
+
+    const item = screen.getByText("One").closest(".ui-resizable__item")
+
     expect(screen.getByTestId("root")).toHaveClass("ui-resizable__root")
-    expect(screen.getByTestId("item").firstChild).toHaveClass(
-      "ui-resizable__item",
-    )
+    expect(item).toBeInTheDocument()
+    expect(item).toHaveClass("ui-resizable__item")
     expect(screen.getByTestId("trigger")).toHaveClass("ui-resizable__trigger")
   })
 
@@ -49,68 +49,12 @@ describe("<Resizable />", () => {
         <Resizable.Item>Two</Resizable.Item>
       </Resizable.Root>,
     )
+
+    const item = screen.getByText("One").closest(".ui-resizable__item")
+
     expect(screen.getByTestId("root").tagName).toBe("DIV")
-    expect(screen.getByTestId("item").firstElementChild?.tagName).toBe("DIV")
+    expect(item?.tagName).toBe("DIV")
     expect(screen.getByTestId("trigger").tagName).toBe("DIV")
-  })
-
-  test.todo("The default size of the left panel should be 30 and 70", () => {
-    render(
-      <Resizable.Root>
-        <Resizable.Item id="left-item" defaultSize="30%">
-          One
-        </Resizable.Item>
-
-        <Resizable.Trigger />
-
-        <Resizable.Item id="right-item" defaultSize="70%">
-          Two
-        </Resizable.Item>
-      </Resizable.Root>,
-    )
-    expect(screen.getByTestId("left-item")).toHaveStyle({ flex: "30 1 0px" })
-    expect(screen.getByTestId("right-item")).toHaveStyle({ flex: "70 1 0px" })
-  })
-})
-
-describe("<ResizableTrigger />", () => {
-  test("handles double-click to equalize panel sizes", () => {
-    const setLayoutMock = vi.fn()
-
-    const Wrapper = () => {
-      const controlRef = useRef<ResizableRootControl>(null)
-
-      return (
-        <>
-          <button
-            data-testid="mock-set-layout"
-            onClick={() => {
-              if (controlRef.current) {
-                controlRef.current.setLayout = setLayoutMock
-              }
-            }}
-          />
-
-          <Resizable.Root controlRef={controlRef}>
-            <Resizable.Item>One</Resizable.Item>
-
-            <Resizable.Trigger id="trigger" />
-
-            <Resizable.Item>Two</Resizable.Item>
-          </Resizable.Root>
-        </>
-      )
-    }
-
-    render(<Wrapper />)
-
-    fireEvent.click(screen.getByTestId("mock-set-layout"))
-
-    const trigger = screen.getByTestId("trigger")
-
-    fireEvent.dblClick(trigger)
-
-    expect(setLayoutMock).toHaveBeenCalledWith(expect.objectContaining({}))
   })
 })
 

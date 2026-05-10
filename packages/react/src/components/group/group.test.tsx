@@ -1,4 +1,4 @@
-import { a11y, page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { Group } from "./group"
 
 describe("<Group />", () => {
@@ -10,15 +10,12 @@ describe("<Group />", () => {
     expect(Group.displayName).toBe("Group")
   })
 
-  test("sets `className` correctly", async () => {
-    await render(<Group data-testid="group">Group</Group>)
+  test("sets root class and default tag correctly", () => {
+    render(<Group>Group</Group>)
 
-    await expect.element(page.getByTestId("group")).toHaveClass("ui-group")
-  })
+    const group = screen.getByRole("group")
 
-  test("renders HTML tag correctly", async () => {
-    await render(<Group data-testid="group">Group</Group>)
-
-    expect(page.getByTestId("group").element().tagName).toBe("DIV")
+    expect(group).toHaveClass("ui-group")
+    expect(group.tagName).toBe("DIV")
   })
 })

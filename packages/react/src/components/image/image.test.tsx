@@ -1,34 +1,32 @@
-import { a11y, page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { Image } from "./image"
 
 const src = "https://image.xyz/source"
 
 describe("<Image />", () => {
-  test("renders component correctly", async () => {
-    await a11y(<Image src={src} alt="image" />)
-  })
-
   test("sets `displayName` correctly", () => {
     expect(Image.displayName).toBe("Image")
   })
 
-  test("sets `className` correctly", async () => {
-    await render(<Image src={src} />)
+  test("sets `className` correctly", () => {
+    render(<Image src={src} alt="image" />)
 
-    await expect.element(page.getByRole("img")).toHaveClass("ui-image")
+    expect(screen.getByRole("img")).toHaveClass("ui-image")
   })
 
-  test("renders HTML tag correctly", async () => {
-    await render(<Image src={src} />)
+  test("renders html tag correctly", () => {
+    render(<Image src={src} alt="image" />)
 
-    const img = page.getByRole("img").element()
-
-    expect(img).toBeInstanceOf(HTMLImageElement)
+    expect(screen.getByRole("img")).toBeInstanceOf(HTMLImageElement)
   })
 
-  test("renders image if there is no fallback behavior defined", async () => {
-    await render(<Image src={src} />)
+  test("renders component correctly", async () => {
+    await a11y(<Image src={src} alt="image" />)
+  })
 
-    await expect.element(page.getByRole("img")).toHaveAttribute("src", src)
+  test("renders image if there is no fallback behavior defined", () => {
+    render(<Image src={src} />)
+
+    expect(screen.getByRole("img")).toHaveAttribute("src", src)
   })
 })

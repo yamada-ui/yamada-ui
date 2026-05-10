@@ -1,24 +1,24 @@
-import { a11y, page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { Text } from "./text"
 
 describe("<Text />", () => {
-  test("renders component correctly", async () => {
-    await a11y(<Text>Text</Text>)
-  })
-
-  test("sets `displayName` correctly", () => {
+  test("sets displayName correctly", () => {
     expect(Text.displayName).toBe("Text")
   })
 
-  test("sets `className` correctly", async () => {
-    await render(<Text data-testid="text">Text</Text>)
-    const text = page.getByTestId("text")
-    await expect.element(text).toHaveClass("ui-text")
+  test("sets className correctly", () => {
+    render(<Text>Text</Text>)
+
+    expect(screen.getByText("Text")).toHaveClass("ui-text")
   })
 
-  test("renders HTML tag correctly", async () => {
-    await render(<Text data-testid="text">Text</Text>)
-    const text = page.getByTestId("text")
-    expect(text.element().tagName).toBe("P")
+  test("renders HTML tag correctly", () => {
+    render(<Text>Text</Text>)
+
+    expect(screen.getByText("Text").tagName).toBe("P")
+  })
+
+  test("renders component correctly", async () => {
+    await a11y(<Text>Text</Text>)
   })
 })

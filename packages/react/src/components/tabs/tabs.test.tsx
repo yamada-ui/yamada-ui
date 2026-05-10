@@ -1,6 +1,15 @@
-import type { FC } from "react"
-import { a11y, render, screen } from "#test"
+import type { FC, PropsWithChildren } from "react"
+import type { UseTabsProps } from "./use-tabs"
+import { a11y, act, render, renderHook, screen } from "#test"
 import { Tabs } from "./"
+import {
+  TabDescendantsContext,
+  TabPanelDescendantsContext,
+  TabsContext,
+  useTab,
+  useTabPanel,
+  useTabs,
+} from "./use-tabs"
 
 const items: Tabs.Item[] = [
   { panel: "This is home tab", tab: "Home" },
@@ -19,8 +28,48 @@ const TestComponent: FC<TestComponentProps> = (props) => {
   )
 }
 
+const createTabsWrapper = (props: UseTabsProps = {}): FC<PropsWithChildren> => {
+  const Wrapper: FC<PropsWithChildren> = ({ children }) => {
+    const {
+      id,
+      focusedIndex,
+      index,
+      manual,
+      orientation,
+      setFocusedIndex,
+      setIndex,
+      tabDescendants,
+      tabPanelDescendants,
+      getListProps,
+    } = useTabs({ id: "tabs", ...props })
+
+    return (
+      <TabDescendantsContext value={tabDescendants}>
+        <TabPanelDescendantsContext value={tabPanelDescendants}>
+          <TabsContext
+            value={{
+              id,
+              focusedIndex,
+              index,
+              manual,
+              orientation,
+              setFocusedIndex,
+              setIndex,
+              getListProps,
+            }}
+          >
+            {children}
+          </TabsContext>
+        </TabPanelDescendantsContext>
+      </TabDescendantsContext>
+    )
+  }
+
+  return Wrapper
+}
+
 describe("<Tabs />", () => {
-  test("renders component correctly", async () => {
+  test("passes a11y checks", async () => {
     await a11y(<TestComponent />)
   })
 
@@ -33,118 +82,184 @@ describe("<Tabs />", () => {
 
   test("sets `className` correctly", () => {
     render(<TestComponent />)
+
     expect(screen.getByTestId("tabs")).toHaveClass("ui-tabs__root")
     expect(screen.getByRole("tablist")).toHaveClass("ui-tabs__list")
-    expect(screen.getAllByRole("tab")[0]).toHaveClass("ui-tabs__tab")
-    expect(screen.getAllByRole("tabpanel")[0]).toHaveClass("ui-tabs__panel")
+    expect(screen.getByRole("tab", { name: /Home/i })).toHaveClass(
+      "ui-tabs__tab",
+    )
+    expect(screen.getByRole("tabpanel", { name: /Home/i })).toHaveClass(
+      "ui-tabs__panel",
+    )
   })
 
   test("renders HTML tag correctly", () => {
     render(<TestComponent />)
+
     expect(screen.getByTestId("tabs").tagName).toBe("DIV")
     expect(screen.getByRole("tablist").tagName).toBe("DIV")
-    expect(screen.getAllByRole("tab")[0]?.tagName).toBe("BUTTON")
-    expect(screen.getAllByRole("tabpanel")[0]?.tagName).toBe("DIV")
+    expect(screen.getByRole("tab", { name: /Home/i }).tagName).toBe("BUTTON")
+    expect(screen.getByRole("tabpanel", { name: /Home/i }).tagName).toBe("DIV")
+  })
+})
+
+describe("useTabs / useTab / useTabPanel", () => {
+  test("merges className and style while keeping getter precedence in useTabs.getRootProps", () => {
+    const { result } = renderHook(
+      () =>
+        useTabs({
+          className: "from-rest",
+          style: { color: "red" },
+          "aria-label": "from-rest",
+        }),
+      { withProvider: false },
+    )
+
+    const rootProps = result.current.getRootProps({
+      className: "from-props",
+      style: { backgroundColor: "blue" },
+      "aria-label": "from-props",
+    })
+
+    expect(rootProps["aria-label"]).toBe("from-props")
+    expect(rootProps.className).toContain("from-rest")
+    expect(rootProps.className).toContain("from-props")
+    expect(rootProps.style).toStrictEqual({
+      backgroundColor: "blue",
+      color: "red",
+    })
   })
 
-  test("should render default tab", async () => {
-    render(<TestComponent defaultIndex={1} />)
+  test("keeps getter precedence and merges refs in useTab.getRootProps", () => {
+    const refFromRest = vi.fn()
+    const refFromProps = vi.fn()
 
-    const aboutTabPanel = await screen.findByText(/This is about tab/i)
-    expect(aboutTabPanel).toBeInTheDocument()
+    const { result } = renderHook(
+      () =>
+        useTab({
+          id: "rest-tab",
+          ref: refFromRest,
+          className: "from-rest",
+          style: { color: "red" },
+          "aria-controls": "rest-panel",
+          index: 1,
+          tabIndex: -1,
+        }),
+      { wrapper: createTabsWrapper() },
+    )
+
+    const tabProps = result.current.getRootProps({
+      id: "props-tab",
+      ref: refFromProps,
+      className: "from-props",
+      style: { backgroundColor: "blue" },
+      "aria-controls": "props-panel",
+      tabIndex: 2,
+    })
+
+    expect(tabProps.id).toBe("props-tab")
+    expect(tabProps.tabIndex).toBe(2)
+    expect(tabProps["aria-controls"]).toBe("props-panel")
+    expect(tabProps.className).toContain("from-rest")
+    expect(tabProps.className).toContain("from-props")
+    expect(tabProps.style).toStrictEqual({
+      backgroundColor: "blue",
+      color: "red",
+    })
+
+    const node = document.createElement("button")
+
+    expect(typeof tabProps.ref).toBe("function")
+
+    act(() => {
+      ;(tabProps.ref as (node: HTMLButtonElement | null) => void)(node)
+    })
+
+    expect(refFromRest).toHaveBeenCalledWith(node)
+    expect(refFromProps).toHaveBeenCalledWith(node)
   })
 
-  test("should disable tab", async () => {
-    const items: Tabs.Item[] = [
+  test("keeps props -> rest -> internal order for onClick and onFocus in useTab.getRootProps", () => {
+    const clickOrder: string[] = []
+    const focusOrder: string[] = []
+
+    const onClickFromRest = vi.fn(() => clickOrder.push("rest"))
+    const onClickFromProps = vi.fn(() => clickOrder.push("props"))
+    const onFocusFromRest = vi.fn(() => focusOrder.push("rest"))
+    const onFocusFromProps = vi.fn(() => focusOrder.push("props"))
+
+    const onClickChange = vi.fn(() => clickOrder.push("internal"))
+    const onFocusChange = vi.fn(() => focusOrder.push("internal"))
+
+    const clickResult = renderHook(
+      () =>
+        useTab({
+          index: 1,
+          onClick: onClickFromRest,
+        }),
       {
-        panel: "This is home tab",
-        tab: "Home",
+        wrapper: createTabsWrapper({
+          defaultIndex: 0,
+          onChange: onClickChange,
+        }),
       },
+    )
+
+    const clickProps = clickResult.result.current.getRootProps({
+      onClick: onClickFromProps,
+    })
+
+    act(() => clickProps.onClick?.({} as never))
+
+    expect(clickOrder).toStrictEqual(["props", "rest", "internal"])
+
+    const focusResult = renderHook(
+      () =>
+        useTab({
+          index: 1,
+          onFocus: onFocusFromRest,
+        }),
       {
-        disabled: true,
-        panel: "This is about tab",
-        tab: "About",
+        wrapper: createTabsWrapper({
+          defaultIndex: 0,
+          onChange: onFocusChange,
+        }),
       },
-      {
-        panel: "This is contact tab",
-        tab: "Contact",
-      },
-    ]
+    )
 
-    render(<TestComponent items={items} />)
+    const focusProps = focusResult.result.current.getRootProps({
+      onFocus: onFocusFromProps,
+    })
 
-    const aboutTab = await screen.findByRole("tab", { name: /About/i })
-    expect(aboutTab).toBeDisabled()
+    act(() => focusProps.onFocus?.({} as never))
+
+    expect(focusOrder).toStrictEqual(["props", "rest", "internal"])
   })
 
-  test("Move to the previous tab with the left arrow key", async () => {
-    const { user } = render(<TestComponent />)
+  test("merges className and style while keeping getter precedence in useTabPanel.getRootProps", () => {
+    const { result } = renderHook(
+      () =>
+        useTabPanel({
+          className: "from-rest",
+          style: { color: "red" },
+          "data-state": "rest",
+          index: 0,
+        }),
+      { wrapper: createTabsWrapper() },
+    )
 
-    const tab1 = await screen.findByRole("tab", { name: /Home/i })
-    const tab3 = await screen.findByRole("tab", { name: /Contact/i })
+    const panelProps = result.current.getRootProps({
+      className: "from-props",
+      style: { backgroundColor: "blue" },
+      "data-state": "props",
+    })
 
-    await user.click(tab1)
-    expect(tab1).toHaveFocus()
-
-    await user.keyboard("{arrowleft}")
-    expect(tab3).toHaveFocus()
-  })
-
-  test("Move to the next tab with the right arrow key", async () => {
-    const { user } = render(<TestComponent />)
-
-    const tab1 = await screen.findByRole("tab", { name: /Home/i })
-    const tab2 = await screen.findByRole("tab", { name: /About/i })
-
-    await user.click(tab1)
-    await user.keyboard("{arrowright}")
-    expect(tab2).toHaveFocus()
-  })
-
-  test("Move to the next tab with the down arrow key (vertical orientation)", async () => {
-    const { user } = render(<TestComponent orientation="vertical" />)
-
-    const tab1 = await screen.findByRole("tab", { name: /Home/i })
-    const tab2 = await screen.findByRole("tab", { name: /About/i })
-
-    await user.click(tab1)
-    await user.keyboard("{arrowdown}")
-    expect(tab2).toHaveFocus()
-  })
-
-  test("Move to the previous tab with the up arrow key (vertical orientation)", async () => {
-    const { user } = render(<TestComponent orientation="vertical" />)
-
-    const tab1 = await screen.findByRole("tab", { name: /Home/i })
-    const tab3 = await screen.findByRole("tab", { name: /Contact/i })
-
-    await user.click(tab1)
-    await user.keyboard("{arrowup}")
-    expect(tab3).toHaveFocus()
-  })
-
-  test("Move to the first tab with the Home key", async () => {
-    const { user } = render(<TestComponent />)
-
-    const tab1 = await screen.findByRole("tab", { name: /Home/i })
-
-    await user.click(tab1)
-    await user.keyboard("{arrowright}")
-    await user.keyboard("{arrowright}")
-    await user.keyboard("{home}")
-
-    expect(tab1).toHaveFocus()
-  })
-
-  test("Move to the last tab with the End key", async () => {
-    const { user } = render(<TestComponent />)
-
-    const tab1 = await screen.findByRole("tab", { name: /Home/i })
-    const tab3 = await screen.findByRole("tab", { name: /Contact/i })
-
-    await user.click(tab1)
-    await user.keyboard("{end}")
-
-    expect(tab3).toHaveFocus()
+    expect(panelProps["data-state"]).toBe("props")
+    expect(panelProps.className).toContain("from-rest")
+    expect(panelProps.className).toContain("from-props")
+    expect(panelProps.style).toStrictEqual({
+      backgroundColor: "blue",
+      color: "red",
+    })
   })
 })

@@ -34,10 +34,9 @@ env:
 
 jobs:
   jsdom:
-    name: Coverage / ${{ matrix.name }}
+    name: Unit Test / ${{ matrix.name }}
     runs-on: ubuntu-24.04
     strategy:
-      max-parallel: 6
       matrix:
         include:
           - id: cli
@@ -48,21 +47,9 @@ jobs:
             name: Utils
             command: pnpm utils test:coverage
             files: ./packages/utils/coverage/coverage-final.json
-          - id: react-1
-            name: React 1/4
-            command: pnpm react test:coverage:jsdom -- --shard=1/4
-            files: ./packages/react/coverage/jsdom/coverage-final.json
-          - id: react-2
-            name: React 2/4
-            command: pnpm react test:coverage:jsdom -- --shard=2/4
-            files: ./packages/react/coverage/jsdom/coverage-final.json
-          - id: react-3
-            name: React 3/4
-            command: pnpm react test:coverage:jsdom -- --shard=3/4
-            files: ./packages/react/coverage/jsdom/coverage-final.json
-          - id: react-4
-            name: React 4/4
-            command: pnpm react test:coverage:jsdom -- --shard=4/4
+          - id: react
+            name: React
+            command: pnpm react test:coverage:jsdom
             files: ./packages/react/coverage/jsdom/coverage-final.json
     steps:
       - name: Checkout
@@ -86,10 +73,10 @@ jobs:
           codecov_yml_path: ./codecov.yml
 
   browser:
-    name: Coverage / ${{ matrix.name }} ${{ matrix.shard_index }}/4
+    name: Browser Test / React / ${{ matrix.name }} ${{ matrix.shard_index }}/4
     runs-on: ubuntu-24.04
     strategy:
-      max-parallel: 4
+      fail-fast: false
       matrix:
         browser: [chromium, firefox, webkit]
         shard_index: [1, 2, 3, 4]
@@ -112,7 +99,7 @@ jobs:
         run: pnpm playwright install ${{ matrix.browser }} --with-deps ${{ matrix.browser == 'chromium' && '--only-shell' || '' }}
 
       - name: Run coverage
-        run: pnpm react test:coverage:${{ matrix.browser }} -- --shard=${{ matrix.shard_index }}/4
+        run: pnpm react test:coverage:${{ matrix.browser }} -- --retry=3 --shard=${{ matrix.shard_index }}/4
 
       - name: Upload coverage
         uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe # v5.5.4

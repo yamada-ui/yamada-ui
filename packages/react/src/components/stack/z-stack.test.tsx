@@ -11,6 +11,30 @@ describe("<ZStack />", () => {
     )
   })
 
+  test("sets `displayName` correctly", () => {
+    expect(ZStack.displayName).toBe("StackDepth")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <ZStack data-testid="z-stack">
+        <Box>ZStack Item</Box>
+      </ZStack>,
+    )
+
+    expect(screen.getByTestId("z-stack")).toHaveClass("ui-stack--depth")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(
+      <ZStack data-testid="z-stack">
+        <Box>ZStack Item</Box>
+      </ZStack>,
+    )
+
+    expect(screen.getByTestId("z-stack").tagName).toBe("DIV")
+  })
+
   test("startIndex sets initial zIndex", () => {
     render(
       <ZStack startIndex={10}>
@@ -94,8 +118,15 @@ describe("<ZStack />", () => {
       </ZStack>,
     )
 
-    expect(screen.getByText("Item 1")).toHaveStyle({ zIndex: "0" })
-    expect(screen.getByText("Item 2")).toHaveStyle({ zIndex: "1" })
+    const item1 = screen.getByText("Item 1")
+    const item2 = screen.getByText("Item 2")
+
+    expect(item1).toHaveStyle({
+      right: "0",
+      top: "calc(var(--space) * 0)",
+      zIndex: "0",
+    })
+    expect(item2).toHaveStyle({ right: "0", zIndex: "1" })
   })
 
   test("reverse with center-start direction swaps offset axis", () => {
@@ -106,7 +137,17 @@ describe("<ZStack />", () => {
       </ZStack>,
     )
 
-    expect(screen.getByText("Item 1")).toHaveStyle({ zIndex: "0" })
-    expect(screen.getByText("Item 2")).toHaveStyle({ zIndex: "1" })
+    const item1 = screen.getByText("Item 1")
+    const item2 = screen.getByText("Item 2")
+
+    expect(item1).toHaveStyle({
+      bottom: "0",
+      left: "calc(var(--space) * 0)",
+      zIndex: "0",
+    })
+    expect(item2).toHaveStyle({
+      left: "calc(var(--space) * 1)",
+      zIndex: "1",
+    })
   })
 })

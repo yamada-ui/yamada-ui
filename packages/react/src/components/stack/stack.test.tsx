@@ -1,4 +1,5 @@
-import { a11y, render, screen } from "#test"
+import { useEffect, useState } from "react"
+import { a11y, fireEvent, render, screen } from "#test"
 import { Box } from "../box"
 import { Separator } from "../separator"
 import { Stack } from "./stack"
@@ -10,6 +11,30 @@ describe("<Stack />", () => {
         <Box>Stack Item</Box>
       </Stack>,
     )
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(Stack.displayName).toBe("Stack")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <Stack data-testid="stack">
+        <Box>Stack Item</Box>
+      </Stack>,
+    )
+
+    expect(screen.getByTestId("stack")).toHaveClass("ui-stack")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(
+      <Stack data-testid="stack">
+        <Box>Stack Item</Box>
+      </Stack>,
+    )
+
+    expect(screen.getByTestId("stack").tagName).toBe("DIV")
   })
 
   test("renders all the allowed shorthand style props", () => {
@@ -58,5 +83,59 @@ describe("<Stack />", () => {
     )
 
     expect(screen.getAllByTestId("sep")).toHaveLength(1)
+  })
+
+  test("renders list of items with provided keys when cloning children", () => {
+    const unmountMock = vi.fn()
+    const data = [{ name: "Alice" }, { name: "Bob" }, { name: "Carol" }]
+
+    const Character = ({
+      name,
+      onUnmount,
+    }: {
+      name: string
+      onUnmount: (name: string) => void
+    }) => {
+      useEffect(() => {
+        return () => {
+          onUnmount(name)
+        }
+      }, [name, onUnmount])
+
+      return <Box data-testid="character">{name}</Box>
+    }
+
+    const Wrapper = ({ items }: { items: { name: string }[] }) => {
+      const [characters, setCharacters] = useState(items)
+
+      return (
+        <>
+          <Box
+            as="button"
+            type="button"
+            data-testid="delete-button"
+            onClick={() => setCharacters((prev) => prev.slice(1))}
+          >
+            delete character
+          </Box>
+          <Stack separator={<Separator />}>
+            {characters.map(({ name }) => (
+              <Character key={name} name={name} onUnmount={unmountMock} />
+            ))}
+          </Stack>
+        </>
+      )
+    }
+
+    render(<Wrapper items={data} />)
+
+    expect(screen.getAllByTestId("character")).toHaveLength(3)
+    expect(unmountMock).not.toHaveBeenCalled()
+
+    fireEvent.click(screen.getByTestId("delete-button"))
+
+    expect(screen.getAllByTestId("character")).toHaveLength(2)
+    expect(unmountMock).toHaveBeenCalledTimes(1)
+    expect(unmountMock).toHaveBeenCalledWith("Alice")
   })
 })

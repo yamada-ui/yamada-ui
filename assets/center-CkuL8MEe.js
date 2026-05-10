@@ -1,0 +1,1 @@
+import{n as e}from"./chunk-jRWAZmH_.js";import{k as t,n,t as r}from"./core-BHmHG40b.js";var i,a=e((()=>{r(),i=t({base:{display:`flex`,placeContent:`center`,placeItems:`center`}})})),o,s,c,l,u=e((()=>{r(),a(),{PropsContext:o,usePropsContext:s,withContext:c}=n(`center`,i),l=c(`div`,{base:{display:`flex`,placeContent:`center`,placeItems:`center`}})()}));export{u as n,a as r,l as t};

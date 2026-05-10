@@ -1,0 +1,1 @@
+import{n as e}from"./chunk-jRWAZmH_.js";import{P as t,t as n}from"./core-BHmHG40b.js";var r,i=e((()=>{n(),r=t.borders({xs:`0.5px solid`,sm:`1px solid`,md:`2px solid`,lg:`4px solid`,xl:`8px solid`})}));export{i as n,r as t};

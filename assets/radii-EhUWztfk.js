@@ -1,0 +1,1 @@
+import{n as e}from"./chunk-jRWAZmH_.js";import{P as t,j as n,t as r}from"./core-BHmHG40b.js";var i,a=e((()=>{r(),i=n.radii({l1:`sm`,l2:`md`,l3:`lg`,l4:`xl`,l5:`2xl`})})),o,s=e((()=>{r(),o=t.radii({"2xs":`0.0625rem`,xs:`0.125rem`,sm:`0.25rem`,md:`0.375rem`,lg:`0.5rem`,xl:`0.75rem`,"2xl":`1rem`,"3xl":`1.5rem`,"4xl":`2rem`,full:`9999px`})}));export{i,o as n,a as r,s as t};

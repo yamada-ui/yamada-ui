@@ -17,10 +17,6 @@
       "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const wrapStyle = defineComponentStyle({\n  base: {\n    flexWrap: \"wrap\",\n  },\n})\n\nexport type WrapStyle = typeof wrapStyle\n"
     },
     {
-      "name": "wrap.test.browser.tsx",
-      "content": "import { a11y, page, render } from \"#test/browser\"\nimport { Wrap } from \"./wrap\"\n\ndescribe(\"<Wrap />\", () => {\n  test(\"renders component correctly\", async () => {\n    await a11y(<Wrap>Wrap</Wrap>)\n  })\n\n  test(\"sets `displayName` correctly\", () => {\n    expect(Wrap.displayName).toBe(\"Wrap\")\n  })\n\n  test(\"sets `className` correctly\", async () => {\n    await render(<Wrap>Wrap</Wrap>)\n    await expect.element(page.getByText(\"Wrap\")).toHaveClass(\"ui-wrap\")\n  })\n\n  test(\"renders HTML tag correctly\", async () => {\n    await render(<Wrap>Wrap</Wrap>)\n    expect(page.getByText(\"Wrap\").element().tagName).toBe(\"DIV\")\n  })\n})\n"
-    },
-    {
       "name": "wrap.tsx",
       "content": "\"use client\"\n\nimport type { ThemeProps, WithoutThemeProps } from \"@yamada-ui/react\"\nimport type { FlexProps } from \"../flex\"\nimport type { WrapStyle } from \"./wrap.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { Flex } from \"../flex\"\nimport { wrapStyle } from \"./wrap.style\"\n\nexport interface WrapProps\n  extends WithoutThemeProps<FlexProps, WrapStyle>, ThemeProps<WrapStyle> {}\n\nconst {\n  PropsContext: WrapPropsContext,\n  usePropsContext: useWrapPropsContext,\n  withContext,\n} = createComponent<WrapProps, WrapStyle>(\"wrap\", wrapStyle)\n\nexport { useWrapPropsContext, WrapPropsContext }\n\n/**\n * `Wrap` is a component that has `wrap` set on `Flex`. It inherits convenient style shorthand from `Flex`.\n *\n * @see https://yamada-ui.com/docs/components/wrap\n */\nexport const Wrap = withContext<\"div\", WrapProps>(Flex)()\n"
     }

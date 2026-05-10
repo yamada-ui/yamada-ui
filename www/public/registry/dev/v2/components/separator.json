@@ -6,7 +6,6 @@
     "hooks": [],
     "providers": []
   },
-  "dependents": { "components": ["stack"], "hooks": [], "providers": [] },
   "section": "components",
   "sources": [
     {

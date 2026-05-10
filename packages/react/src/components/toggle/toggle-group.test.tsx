@@ -3,6 +3,20 @@ import { ToggleGroup } from "."
 import { useToggleGroup } from "./use-toggle-group"
 
 describe("<ToggleGroup />", () => {
+  test("sets `displayName` correctly", () => {
+    expect(ToggleGroup.Root.displayName).toBe("ToggleGroup")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <ToggleGroup.Root>
+        <ToggleGroup.Item value="opt1">Option 1</ToggleGroup.Item>
+      </ToggleGroup.Root>,
+    )
+
+    expect(screen.getByRole("group")).toHaveClass("ui-toggle__group")
+  })
+
   test("renders component correctly", async () => {
     await a11y(
       <ToggleGroup.Root>
@@ -14,21 +28,6 @@ describe("<ToggleGroup />", () => {
     expect(screen.getByRole("group")).toBeInTheDocument()
     expect(screen.getByText("Option 1")).toBeInTheDocument()
     expect(screen.getByText("Option 2")).toBeInTheDocument()
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(ToggleGroup.Root.displayName).toBe("ToggleGroup")
-  })
-
-  test("sets `className` correctly", () => {
-    render(
-      <ToggleGroup.Root>
-        <ToggleGroup.Item value="opt1">Option 1</ToggleGroup.Item>
-        <ToggleGroup.Item value="opt2">Option 2</ToggleGroup.Item>
-      </ToggleGroup.Root>,
-    )
-
-    expect(screen.getByRole("group")).toHaveClass("ui-toggle__group")
   })
 
   test("should update checked toggle when controlled value prop changes", () => {
@@ -204,7 +203,8 @@ describe("<ToggleGroup />", () => {
       onClick: getGroupOnClick,
     })
 
-    groupProps.onClick?.({} as any)
+    render(<div {...groupProps} />)
+    fireEvent.click(screen.getByRole("group"))
 
     expect(rootOnClick).toHaveBeenCalledTimes(1)
     expect(getGroupOnClick).toHaveBeenCalledTimes(1)

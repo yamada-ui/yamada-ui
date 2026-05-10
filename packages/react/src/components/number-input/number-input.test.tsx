@@ -1,10 +1,11 @@
 import type { PropsWithChildren } from "react"
 import { createElement } from "react"
-import { a11y, render, renderHook, screen } from "#test"
+import { a11y, fireEvent, render, renderHook, screen } from "#test"
 import { NumberInput } from "."
 import { noop } from "../../utils"
 import { FieldContext } from "../field/field"
 import { Group } from "../group"
+import { InputPropsContext } from "../input"
 import { useNumberCounter } from "./use-number-counter"
 import { useNumberInput } from "./use-number-input"
 
@@ -159,6 +160,49 @@ describe("<NumberInput />", () => {
     expect(screen.getByTestId("control")).toBeInTheDocument()
     expect(screen.getByTestId("increment")).toBeInTheDocument()
     expect(screen.getByTestId("decrement")).toBeInTheDocument()
+  })
+
+  test("merges input props context with user props in NumberInput", () => {
+    const onClickFromContext = vi.fn()
+    const onClickFromUser = vi.fn()
+    const refFromContext = vi.fn()
+    const refFromUser = vi.fn()
+
+    render(
+      <InputPropsContext
+        value={{
+          ref: refFromContext,
+          className: "from-context",
+          style: { color: "rgb(255, 0, 0)" },
+          onClick: onClickFromContext,
+        }}
+      >
+        <NumberInput
+          ref={refFromUser}
+          className="from-user"
+          style={{ backgroundColor: "rgb(0, 0, 255)" }}
+          aria-label="Input number"
+          rootProps={{ "data-testid": "number-input-root" }}
+          onClick={onClickFromUser}
+        />
+      </InputPropsContext>,
+    )
+
+    const root = screen.getByTestId("number-input-root")
+    const field = screen.getByRole("spinbutton", { name: "Input number" })
+
+    expect(root).toHaveClass("from-context", "from-user")
+    expect(field).toHaveStyle({ color: "rgb(255, 0, 0)" })
+    expect(field).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
+    expect(refFromContext).toHaveBeenCalledTimes(1)
+    expect(refFromUser).toHaveBeenCalledTimes(1)
+    expect(refFromContext).toHaveBeenCalledWith(field)
+    expect(refFromUser).toHaveBeenCalledWith(field)
+
+    fireEvent.click(field)
+
+    expect(onClickFromContext).toHaveBeenCalledTimes(1)
+    expect(onClickFromUser).toHaveBeenCalledTimes(1)
   })
 })
 

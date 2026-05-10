@@ -79,6 +79,101 @@ describe("<Sidebar />", () => {
     )
   })
 
+  test("sets `displayName` correctly", () => {
+    expect(Sidebar.Root.displayName).toBe("SidebarRoot")
+    expect(Sidebar.Trigger.displayName).toBe("SidebarTrigger")
+    expect(Sidebar.SidePanel.displayName).toBe("SidebarSidePanel")
+    expect(Sidebar.MainPanel.displayName).toBe("SidebarMainPanel")
+    expect(Sidebar.Header.displayName).toBe("SidebarHeader")
+    expect(Sidebar.Content.displayName).toBe("SidebarContent")
+    expect(Sidebar.Footer.displayName).toBe("SidebarFooter")
+    expect(Sidebar.Group.displayName).toBe("SidebarGroup")
+    expect(Sidebar.GroupLabel.displayName).toBe("SidebarGroupLabel")
+    expect(Sidebar.GroupContent.displayName).toBe("SidebarGroupContent")
+    expect(Sidebar.Item.displayName).toBe("SidebarItem")
+    expect(Sidebar.ItemTrigger.displayName).toBe("SidebarItemTrigger")
+    expect(Sidebar.ItemLink.displayName).toBe("SidebarItemLink")
+    expect(Sidebar.ItemContent.displayName).toBe("SidebarItemContent")
+    expect(Sidebar.ItemLabel.displayName).toBe("SidebarItemLabel")
+    expect(Sidebar.ItemStartElement.displayName).toBe("SidebarItemStartElement")
+    expect(Sidebar.ItemEndElement.displayName).toBe("SidebarItemEndElement")
+    expect(Sidebar.ItemIndicator.displayName).toBe("SidebarItemIndicator")
+    expect(Sidebar.Menu.displayName).toBe("SidebarMenu")
+    expect(Sidebar.MenuButton.displayName).toBe("SidebarMenuButton")
+    expect(Sidebar.Handle.displayName).toBe("SidebarHandle")
+  })
+
+  test("sets `className` correctly", () => {
+    const { container } = render(
+      <Sidebar.Root defaultExpandedValue={["/1"]}>
+        <Sidebar.SidePanel
+          footer={<Sidebar.MenuButton>Footer</Sidebar.MenuButton>}
+          header={<Sidebar.MenuButton>Header</Sidebar.MenuButton>}
+          items={navItems}
+        />
+      </Sidebar.Root>,
+    )
+
+    expect(container.querySelector(".ui-sidebar__root")).toBeInTheDocument()
+    expect(
+      container.querySelector(".ui-sidebar__side-panel"),
+    ).toBeInTheDocument()
+    expect(container.querySelector(".ui-sidebar__header")).toBeInTheDocument()
+    expect(container.querySelector(".ui-sidebar__footer")).toBeInTheDocument()
+    expect(container.querySelector(".ui-sidebar__content")).toBeInTheDocument()
+    expect(container.querySelector(".ui-sidebar__item")).toBeInTheDocument()
+    expect(
+      container.querySelector(".ui-sidebar__item-link"),
+    ).toBeInTheDocument()
+    expect(
+      container.querySelector(".ui-sidebar__item-trigger"),
+    ).toBeInTheDocument()
+    expect(
+      container.querySelector(".ui-sidebar__item-content"),
+    ).toBeInTheDocument()
+    expect(container.querySelector(".ui-sidebar__handle")).toBeInTheDocument()
+  })
+
+  test("renders HTML tag correctly", () => {
+    const { container } = render(
+      <Sidebar.Root defaultExpandedValue={["/1"]}>
+        <Sidebar.SidePanel
+          footer={<Sidebar.MenuButton>Footer</Sidebar.MenuButton>}
+          header={<Sidebar.MenuButton>Header</Sidebar.MenuButton>}
+          items={navItems}
+        />
+        <Sidebar.MainPanel>
+          <Sidebar.Trigger>
+            <Button data-testid="trigger">Toggle</Button>
+          </Sidebar.Trigger>
+        </Sidebar.MainPanel>
+      </Sidebar.Root>,
+    )
+
+    expect(container.querySelector(".ui-sidebar__root")?.tagName).toBe("DIV")
+    expect(container.querySelector(".ui-sidebar__side-panel")?.tagName).toBe(
+      "ASIDE",
+    )
+    expect(container.querySelector(".ui-sidebar__header")?.tagName).toBe(
+      "HEADER",
+    )
+    expect(container.querySelector(".ui-sidebar__footer")?.tagName).toBe(
+      "FOOTER",
+    )
+    expect(container.querySelector(".ui-sidebar__content")?.tagName).toBe("UL")
+    expect(container.querySelector(".ui-sidebar__item")?.tagName).toBe("LI")
+    expect(container.querySelector(".ui-sidebar__item-link")?.tagName).toBe("A")
+    expect(container.querySelector(".ui-sidebar__item-trigger")?.tagName).toBe(
+      "BUTTON",
+    )
+    expect(container.querySelector(".ui-sidebar__item-content")?.tagName).toBe(
+      "UL",
+    )
+    expect(container.querySelector(".ui-sidebar__main-panel")?.tagName).toBe(
+      "DIV",
+    )
+  })
+
   test("should select leaf item on click", () => {
     const onSelectedChange = vi.fn()
     const navigationSafeNavItems: Sidebar.ItemType[] = navItems.map(

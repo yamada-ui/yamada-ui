@@ -3,6 +3,20 @@ import { ToggleGroup } from "."
 import { useToggleGroup } from "./use-toggle-group"
 
 describe("<ToggleGroup />", () => {
+  test("sets `displayName` correctly", () => {
+    expect(ToggleGroup.Root.displayName).toBe("ToggleGroup")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <ToggleGroup.Root>
+        <ToggleGroup.Item value="opt1">Option 1</ToggleGroup.Item>
+      </ToggleGroup.Root>,
+    )
+
+    expect(screen.getByRole("group")).toHaveClass("ui-toggle__group")
+  })
+
   test("renders component correctly", async () => {
     await a11y(
       <ToggleGroup.Root>

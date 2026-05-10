@@ -1,0 +1,151 @@
+import { vi } from "vitest"
+import { a11y, page, render, renderHook } from "#test/browser"
+import { Toggle, ToggleGroup } from "."
+import { noop } from "../../utils"
+import { useToggle } from "./use-toggle"
+
+describe("<Toggle />", () => {
+  test("renders component correctly", async () => {
+    await a11y(<Toggle>Toggle</Toggle>)
+  })
+
+  test("renders toggle group correctly", async () => {
+    await a11y(
+      <ToggleGroup.Root defaultValue={[]}>
+        <ToggleGroup.Item value="a">A</ToggleGroup.Item>
+        <ToggleGroup.Item value="b">B</ToggleGroup.Item>
+      </ToggleGroup.Root>,
+    )
+  })
+
+  test("should handle disabled prop", async () => {
+    const onChange = vi.fn()
+    const { user } = await render(
+      <Toggle disabled onChange={onChange}>
+        Toggle
+      </Toggle>,
+    )
+
+    const button = page.getByRole("button")
+    await expect.element(button).toBeDisabled()
+    await expect(user.click(button, { timeout: 100 })).rejects.toBeDefined()
+    expect(onChange).not.toHaveBeenCalled()
+  })
+
+  test("should handle onChange callback", async () => {
+    const onChange = vi.fn()
+    const { user } = await render(<Toggle onChange={onChange}>Toggle</Toggle>)
+
+    await user.click(page.getByRole("button"))
+    expect(onChange).toHaveBeenCalledTimes(1)
+    expect(onChange).toHaveBeenLastCalledWith(true)
+
+    await user.click(page.getByRole("button"))
+    expect(onChange).toHaveBeenCalledTimes(2)
+    expect(onChange).toHaveBeenLastCalledWith(false)
+  })
+
+  test("should handle hidden checkbox onChange event", async () => {
+    const onChange = vi.fn()
+    const { user } = await render(<Toggle onChange={onChange}>Toggle</Toggle>)
+
+    const button = page.getByRole("button")
+    const checkbox = page.getByRole("checkbox", { includeHidden: true })
+    await expect.element(checkbox).toBeInTheDocument()
+
+    await user.click(button)
+    expect(onChange).toHaveBeenLastCalledWith(true)
+    await expect
+      .element(page.getByRole("button"))
+      .toHaveAttribute("data-checked")
+    await expect.element(checkbox).toBeChecked()
+
+    await user.click(button)
+    expect(onChange).toHaveBeenLastCalledWith(false)
+    await expect
+      .element(page.getByRole("button"))
+      .not.toHaveAttribute("data-checked")
+    await expect.element(checkbox).not.toBeChecked()
+  })
+
+  test("should handle hidden checkbox change event", async () => {
+    const onChange = vi.fn()
+    const { user } = await render(<Toggle onChange={onChange}>Toggle</Toggle>)
+
+    const button = page.getByRole("button")
+    const checkbox = page.getByRole("checkbox", { includeHidden: true })
+    await user.click(button)
+    expect(onChange).toHaveBeenLastCalledWith(true)
+    await expect.element(checkbox).toBeChecked()
+
+    await user.click(button)
+    expect(onChange).toHaveBeenLastCalledWith(false)
+    await expect.element(checkbox).not.toBeChecked()
+  })
+
+  test("should handle hidden checkbox change event in toggle group", async () => {
+    const onChange = vi.fn()
+    const { user } = await render(
+      <ToggleGroup.Root defaultValue={[]} onChange={onChange}>
+        <ToggleGroup.Item value="a">A</ToggleGroup.Item>
+        <ToggleGroup.Item value="b">B</ToggleGroup.Item>
+      </ToggleGroup.Root>,
+    )
+
+    const checkboxes = page.getByRole("checkbox", { includeHidden: true })
+    await user.click(page.getByRole("button", { name: "A" }))
+    expect(onChange).toHaveBeenCalledWith(["a"])
+    await expect.element(checkboxes.nth(0)).toBeChecked()
+  })
+
+  test("should merge consumer props in getButtonProps", async () => {
+    const rootOnClick = vi.fn()
+    const getButtonOnClick = vi.fn()
+    const { result } = await renderHook(() =>
+      useToggle({
+        className: "root-class",
+        style: { color: "red" },
+        readOnly: true,
+        value: "toggle-value",
+        onClick: rootOnClick,
+      }),
+    )
+
+    const buttonProps = result.current.getButtonProps({
+      className: "button-class",
+      style: { backgroundColor: "blue" },
+      onClick: getButtonOnClick,
+    })
+
+    buttonProps.onClick?.({} as any)
+
+    expect(rootOnClick).toHaveBeenCalledTimes(1)
+    expect(getButtonOnClick).toHaveBeenCalledTimes(1)
+    expect(buttonProps.className).toContain("root-class")
+    expect(buttonProps.className).toContain("button-class")
+    expect(buttonProps.style).toMatchObject({
+      backgroundColor: "blue",
+      color: "red",
+    })
+    expect(buttonProps["aria-label"]).toBe("toggle-value")
+  })
+
+  test("should warn when value is not provided in controlled mode", async () => {
+    vi.spyOn(console, "warn").mockImplementation(noop)
+
+    const { user } = await render(
+      <ToggleGroup.Root value={["toggle1"]}>
+        <ToggleGroup.Item value="toggle1">Toggle1</ToggleGroup.Item>
+        <ToggleGroup.Item value={undefined}>undefined</ToggleGroup.Item>
+      </ToggleGroup.Root>,
+    )
+
+    await user.click(page.getByRole("button", { name: /toggle1/i }))
+    await user.click(page.getByRole("button", { name: /toggle1/i }))
+
+    expect(console.warn).toHaveBeenLastCalledWith(
+      "Toggle: value is required. Please set the value.",
+    )
+    vi.restoreAllMocks()
+  })
+})

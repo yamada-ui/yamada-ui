@@ -161,7 +161,7 @@ export function List({ ...rest }: ListProps) {
         </InputGroup.Root>
 
         {pending ? (
-          <Center flex="1">
+          <Center flex="1" role="status">
             <Loading.Oval fontSize={{ base: "6xl", sm: "2xl" }} />
           </Center>
         ) : (

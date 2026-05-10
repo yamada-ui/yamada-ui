@@ -148,4 +148,47 @@ describe("<Snacks />", () => {
 
     await expect.element(page.getByText(/^No icon$/)).toBeInTheDocument()
   })
+
+  test("pauses duration on mouse enter and resumes on mouse leave", async () => {
+    const TestHover: FC = () => {
+      const { snack, snacks } = useSnacks()
+
+      return (
+        <>
+          <button
+            data-testid="add"
+            onClick={() =>
+              snack({
+                description: "Hover me",
+                duration: 200,
+                title: "Hover test",
+              })
+            }
+          >
+            Add
+          </button>
+          <Snacks snacks={snacks} />
+        </>
+      )
+    }
+
+    const { user } = await render(<TestHover />)
+
+    await user.click(page.getByTestId("add"))
+
+    const snackItem = page.getByRole("listitem")
+    const snackTitle = page.getByText(/^Hover test$/)
+
+    await expect.element(snackTitle).toBeInTheDocument()
+
+    await user.hover(snackItem)
+
+    await new Promise<void>((resolve) => setTimeout(resolve, 350))
+
+    await expect.element(snackTitle).toBeInTheDocument()
+
+    await user.unhover(snackItem)
+
+    await expect.element(snackTitle.query()).not.toBeInTheDocument()
+  })
 })

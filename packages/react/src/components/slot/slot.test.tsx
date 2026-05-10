@@ -38,6 +38,13 @@ describe("<Slot />", () => {
     spy.mockRestore()
   })
 
+  test("renders null when Slot has no children", () => {
+    const { container } = render(<Slot />)
+
+    const visibleContent = container.querySelector(":not([hidden])")
+    expect(visibleContent).toBeNull()
+  })
+
   test("renders with Slottable - merges child element props", () => {
     const Button: FC<
       HTMLAttributes<HTMLButtonElement> & {

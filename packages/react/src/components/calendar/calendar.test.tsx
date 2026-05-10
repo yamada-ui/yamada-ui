@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren } from "react"
-import { a11y, fireEvent, render, renderHook, screen, waitFor } from "#test"
+import { a11y, render, renderHook, screen, waitFor } from "#test"
 import { Calendar } from "./"
 import {
   CalendarContext,
@@ -52,6 +52,15 @@ const createCalendarDayHookWrapper = (
   }
 
   return CalendarDayHookWrapper
+}
+
+const assertRangeResult = (
+  result: Date | Date[] | undefined | { end?: Date; start?: Date },
+) => {
+  if (result instanceof Date || Array.isArray(result) || result === undefined)
+    throw new Error("Expected range result")
+
+  return result
 }
 
 describe("<Calendar />", () => {
@@ -111,7 +120,9 @@ describe("<Calendar />", () => {
     expect(grid).toHaveAttribute("tabindex", "-1")
   })
 
-  test("getRootProps merges caller props and composes refs", () => {
+  test("getRootProps merges caller props and composes refs/events", () => {
+    const restOnClick = vi.fn()
+    const callerOnClick = vi.fn()
     const restRef = vi.fn()
     const callerRef = vi.fn()
     const rootElement = document.createElement("div")
@@ -121,6 +132,7 @@ describe("<Calendar />", () => {
         className: "from-rest",
         style: { backgroundColor: "red", paddingTop: "4px" },
         defaultMonth: new Date(2024, 5, 1),
+        onClick: restOnClick,
       }),
     )
 
@@ -128,6 +140,7 @@ describe("<Calendar />", () => {
       ref: callerRef,
       className: "from-caller",
       style: { color: "blue", paddingTop: "8px" },
+      onClick: callerOnClick,
     })
 
     expect(rootProps.className).toContain("from-rest")
@@ -139,18 +152,30 @@ describe("<Calendar />", () => {
     })
 
     if (typeof rootProps.ref === "function") rootProps.ref(rootElement)
+    rootProps.onClick?.({} as any)
 
+    expect(restOnClick).toHaveBeenCalledTimes(1)
+    expect(callerOnClick).toHaveBeenCalledTimes(1)
     expect(restRef).toHaveBeenCalledTimes(1)
     expect(callerRef).toHaveBeenCalledTimes(1)
     expect(restRef).toHaveBeenCalledWith(rootElement)
     expect(callerRef).toHaveBeenCalledWith(rootElement)
   })
 
-  test("getDayProps merges caller props and composes refs", () => {
+  test("getDayProps merges caller props and composes refs/events once", () => {
+    const onChange = vi.fn()
+    const restOnBlur = vi.fn()
+    const callerOnBlur = vi.fn()
+    const restOnClick = vi.fn()
+    const callerOnClick = vi.fn()
+    const restOnFocus = vi.fn()
+    const callerOnFocus = vi.fn()
+    const restOnKeyDown = vi.fn()
+    const callerOnKeyDown = vi.fn()
     const restRef = vi.fn()
     const callerRef = vi.fn()
     const dayElement = document.createElement("td")
-    const wrapper = createCalendarDayHookWrapper()
+    const wrapper = createCalendarDayHookWrapper(onChange)
     const { result } = renderHook(
       () =>
         useCalendarDay({
@@ -158,6 +183,10 @@ describe("<Calendar />", () => {
           className: "from-rest",
           style: { backgroundColor: "red", paddingTop: "4px" },
           value: new Date(2024, 5, 15),
+          onBlur: restOnBlur,
+          onClick: restOnClick,
+          onFocus: restOnFocus,
+          onKeyDown: restOnKeyDown,
         }),
       { wrapper },
     )
@@ -166,6 +195,10 @@ describe("<Calendar />", () => {
       ref: callerRef,
       className: "from-caller",
       style: { color: "blue", paddingTop: "8px" },
+      onBlur: callerOnBlur,
+      onClick: callerOnClick,
+      onFocus: callerOnFocus,
+      onKeyDown: callerOnKeyDown,
     })
 
     expect(dayProps.className).toContain("from-rest")
@@ -177,11 +210,24 @@ describe("<Calendar />", () => {
     })
 
     if (typeof dayProps.ref === "function") dayProps.ref(dayElement)
+    dayProps.onClick?.({} as any)
+    dayProps.onBlur?.({} as any)
+    dayProps.onFocus?.({ preventDefault: vi.fn() } as any)
+    dayProps.onKeyDown?.({ key: "A" } as any)
 
     expect(restRef).toHaveBeenCalledTimes(1)
     expect(callerRef).toHaveBeenCalledTimes(1)
     expect(restRef).toHaveBeenCalledWith(dayElement)
     expect(callerRef).toHaveBeenCalledWith(dayElement)
+    expect(restOnClick).toHaveBeenCalledTimes(1)
+    expect(callerOnClick).toHaveBeenCalledTimes(1)
+    expect(onChange).toHaveBeenCalledWith(new Date(2024, 5, 15))
+    expect(restOnBlur).toHaveBeenCalledTimes(1)
+    expect(callerOnBlur).toHaveBeenCalledTimes(1)
+    expect(restOnFocus).toHaveBeenCalledTimes(1)
+    expect(callerOnFocus).toHaveBeenCalledTimes(1)
+    expect(restOnKeyDown).toHaveBeenCalledTimes(1)
+    expect(callerOnKeyDown).toHaveBeenCalledTimes(1)
   })
 
   test("prev button is disabled at minDate month", () => {
@@ -208,44 +254,6 @@ describe("<Calendar />", () => {
 
     const nextButton = screen.getByRole("button", { name: /next month/i })
     expect(nextButton).toBeDisabled()
-  })
-
-  test("does not navigate past minDate on prev month", () => {
-    render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 0, 1)}
-        minDate={new Date(2024, 0, 1)}
-      />,
-    )
-
-    const prevButton = screen.getByRole("button", {
-      name: /previous month/i,
-    })
-    prevButton.click()
-
-    const grid = screen.getByRole("grid")
-    expect(grid).toHaveAttribute(
-      "aria-label",
-      expect.stringContaining("January"),
-    )
-  })
-
-  test("does not navigate past maxDate on next month", () => {
-    render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 11, 1)}
-        maxDate={new Date(2024, 11, 31)}
-      />,
-    )
-
-    const nextButton = screen.getByRole("button", { name: /next month/i })
-    nextButton.click()
-
-    const grid = screen.getByRole("grid")
-    expect(grid).toHaveAttribute(
-      "aria-label",
-      expect.stringContaining("December"),
-    )
   })
 
   test("days before minDate are disabled", () => {
@@ -379,62 +387,6 @@ describe("<Calendar />", () => {
     expect(day15).toHaveAttribute("data-between")
   })
 
-  test("clicking a disabled day does not trigger onChange", () => {
-    const onChange = vi.fn()
-
-    render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        minDate={new Date(2024, 5, 10)}
-        onChange={onChange}
-      />,
-    )
-
-    const day5 = screen
-      .getByRole("grid")
-      .querySelector('td[data-value="2024-06-05"]')
-    expect(day5).toHaveAttribute("data-disabled")
-    if (day5 instanceof HTMLElement) day5.click()
-
-    expect(onChange).not.toHaveBeenCalled()
-  })
-
-  test("onChange does not trigger for dates before minDate", () => {
-    const onChange = vi.fn()
-
-    render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        minDate={new Date(2024, 5, 15)}
-        onChange={onChange}
-      />,
-    )
-
-    const day10 = screen.getByText("10").closest("td")
-    expect(day10).toHaveAttribute("data-disabled")
-    if (day10 instanceof HTMLElement) day10.click()
-
-    expect(onChange).not.toHaveBeenCalled()
-  })
-
-  test("onChange does not trigger for dates after maxDate", () => {
-    const onChange = vi.fn()
-
-    render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        maxDate={new Date(2024, 5, 15)}
-        onChange={onChange}
-      />,
-    )
-
-    const day20 = screen.getByText("20").closest("td")
-    expect(day20).toHaveAttribute("data-disabled")
-    if (day20 instanceof HTMLElement) day20.click()
-
-    expect(onChange).not.toHaveBeenCalled()
-  })
-
   test("adjusts month when minDate is after defaultMonth", () => {
     render(
       <Calendar.Root
@@ -458,46 +410,6 @@ describe("<Calendar />", () => {
 
     const grid = screen.getByRole("grid")
     expect(grid).toBeInTheDocument()
-  })
-
-  test("onMonthChange clamps to maxDate month", async () => {
-    const onChangeMonth = vi.fn()
-
-    render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 10, 1)}
-        maxDate={new Date(2024, 11, 31)}
-        onChangeMonth={onChangeMonth}
-      />,
-    )
-
-    const nextButton = screen.getByRole("button", { name: /next month/i })
-    fireEvent.click(nextButton)
-
-    await waitFor(() => {
-      expect(onChangeMonth).toHaveBeenCalledWith(expect.any(Date))
-    })
-  })
-
-  test("onMonthChange clamps to minDate month", async () => {
-    const onChangeMonth = vi.fn()
-
-    render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 1, 1)}
-        minDate={new Date(2024, 0, 1)}
-        onChangeMonth={onChangeMonth}
-      />,
-    )
-
-    const prevButton = screen.getByRole("button", {
-      name: /previous month/i,
-    })
-    fireEvent.click(prevButton)
-
-    await waitFor(() => {
-      expect(onChangeMonth).toHaveBeenCalledWith(expect.any(Date))
-    })
   })
 
   test("uses format.year=null to render plain year number", () => {
@@ -826,45 +738,45 @@ describe("updateMaybeDateValue", () => {
 
   test("resets range when both start and end exist", () => {
     const prev = { end: new Date(2024, 5, 20), start: new Date(2024, 5, 10) }
-    const result = updateMaybeDateValue(new Date(2024, 5, 25))(prev)
-    if (result instanceof Date || Array.isArray(result) || result === undefined)
-      throw new Error("Expected range result")
+    const result = assertRangeResult(
+      updateMaybeDateValue(new Date(2024, 5, 25))(prev),
+    )
     expect(result.start).toStrictEqual(new Date(2024, 5, 25))
     expect(result.end).toBeUndefined()
   })
 
   test("sets start when no start exists", () => {
     const prev = { end: undefined, start: undefined }
-    const result = updateMaybeDateValue(new Date(2024, 5, 15))(prev)
-    if (result instanceof Date || Array.isArray(result) || result === undefined)
-      throw new Error("Expected range result")
+    const result = assertRangeResult(
+      updateMaybeDateValue(new Date(2024, 5, 15))(prev),
+    )
     expect(result.start).toStrictEqual(new Date(2024, 5, 15))
     expect(result.end).toBeUndefined()
   })
 
   test("clears range when clicking same as start", () => {
     const prev = { end: undefined, start: new Date(2024, 5, 15) }
-    const result = updateMaybeDateValue(new Date(2024, 5, 15))(prev)
-    if (result instanceof Date || Array.isArray(result) || result === undefined)
-      throw new Error("Expected range result")
+    const result = assertRangeResult(
+      updateMaybeDateValue(new Date(2024, 5, 15))(prev),
+    )
     expect(result.start).toBeUndefined()
     expect(result.end).toBeUndefined()
   })
 
   test("swaps start and end when value is before start", () => {
     const prev = { end: undefined, start: new Date(2024, 5, 15) }
-    const result = updateMaybeDateValue(new Date(2024, 5, 5))(prev)
-    if (result instanceof Date || Array.isArray(result) || result === undefined)
-      throw new Error("Expected range result")
+    const result = assertRangeResult(
+      updateMaybeDateValue(new Date(2024, 5, 5))(prev),
+    )
     expect(result.start).toStrictEqual(new Date(2024, 5, 5))
     expect(result.end).toStrictEqual(new Date(2024, 5, 15))
   })
 
   test("sets end when value is after start", () => {
     const prev = { end: undefined, start: new Date(2024, 5, 10) }
-    const result = updateMaybeDateValue(new Date(2024, 5, 20))(prev)
-    if (result instanceof Date || Array.isArray(result) || result === undefined)
-      throw new Error("Expected range result")
+    const result = assertRangeResult(
+      updateMaybeDateValue(new Date(2024, 5, 20))(prev),
+    )
     expect(result.start).toStrictEqual(new Date(2024, 5, 10))
     expect(result.end).toStrictEqual(new Date(2024, 5, 20))
   })

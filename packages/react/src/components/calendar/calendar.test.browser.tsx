@@ -1,7 +1,11 @@
-import { fireEvent, render, screen, waitFor } from "#test/browser"
+import { a11y, fireEvent, render, screen, waitFor } from "#test/browser"
 import { Calendar } from "./"
 
 describe("<Calendar />", () => {
+  test("passes a11y checks", async () => {
+    await a11y(<Calendar.Root today={false} />)
+  })
+
   test("clicking a day selects it", async () => {
     const onChange = vi.fn()
 
@@ -56,6 +60,144 @@ describe("<Calendar />", () => {
 
     const grid = screen.getByRole("grid")
     expect(grid).toHaveAttribute("aria-label", expect.stringContaining("July"))
+  })
+
+  test("does not navigate past minDate on prev month", async () => {
+    const { user } = await render(
+      <Calendar.Root
+        defaultMonth={new Date(2024, 0, 1)}
+        minDate={new Date(2024, 0, 1)}
+      />,
+    )
+
+    const prevButton = screen.getByRole("button", {
+      name: /previous month/i,
+    })
+    await expect(user.click(prevButton, { timeout: 200 })).rejects.toThrow(
+      /Timeout/,
+    )
+
+    const grid = screen.getByRole("grid")
+    expect(grid).toHaveAttribute(
+      "aria-label",
+      expect.stringContaining("January"),
+    )
+  })
+
+  test("does not navigate past maxDate on next month", async () => {
+    const { user } = await render(
+      <Calendar.Root
+        defaultMonth={new Date(2024, 11, 1)}
+        maxDate={new Date(2024, 11, 31)}
+      />,
+    )
+
+    const nextButton = screen.getByRole("button", { name: /next month/i })
+    await expect(user.click(nextButton, { timeout: 200 })).rejects.toThrow(
+      /Timeout/,
+    )
+
+    const grid = screen.getByRole("grid")
+    expect(grid).toHaveAttribute(
+      "aria-label",
+      expect.stringContaining("December"),
+    )
+  })
+
+  test("clicking a disabled day does not trigger onChange", async () => {
+    const onChange = vi.fn()
+
+    const { user } = await render(
+      <Calendar.Root
+        defaultMonth={new Date(2024, 5, 1)}
+        minDate={new Date(2024, 5, 10)}
+        onChange={onChange}
+      />,
+    )
+
+    const day5 = screen
+      .getByRole("grid")
+      .querySelector<HTMLTableCellElement>('td[data-value="2024-06-05"]')!
+    expect(day5).toHaveAttribute("data-disabled")
+    await expect(user.click(day5, { timeout: 200 })).rejects.toThrow(/Timeout/)
+
+    expect(onChange).not.toHaveBeenCalled()
+  })
+
+  test("onChange does not trigger for dates before minDate", async () => {
+    const onChange = vi.fn()
+
+    const { user } = await render(
+      <Calendar.Root
+        defaultMonth={new Date(2024, 5, 1)}
+        minDate={new Date(2024, 5, 15)}
+        onChange={onChange}
+      />,
+    )
+
+    const day10 = screen.getByText("10").closest<HTMLTableCellElement>("td")!
+    expect(day10).toHaveAttribute("data-disabled")
+    await expect(user.click(day10, { timeout: 200 })).rejects.toThrow(/Timeout/)
+
+    expect(onChange).not.toHaveBeenCalled()
+  })
+
+  test("onChange does not trigger for dates after maxDate", async () => {
+    const onChange = vi.fn()
+
+    const { user } = await render(
+      <Calendar.Root
+        defaultMonth={new Date(2024, 5, 1)}
+        maxDate={new Date(2024, 5, 15)}
+        onChange={onChange}
+      />,
+    )
+
+    const day20 = screen.getByText("20").closest<HTMLTableCellElement>("td")!
+    expect(day20).toHaveAttribute("data-disabled")
+    await expect(user.click(day20, { timeout: 200 })).rejects.toThrow(/Timeout/)
+
+    expect(onChange).not.toHaveBeenCalled()
+  })
+
+  test("onMonthChange clamps to maxDate month", async () => {
+    const onChangeMonth = vi.fn()
+
+    const { user } = await render(
+      <Calendar.Root
+        defaultMonth={new Date(2024, 10, 1)}
+        maxDate={new Date(2024, 11, 31)}
+        onChangeMonth={onChangeMonth}
+      />,
+    )
+
+    const nextButton = screen.getByRole("button", { name: /next month/i })
+    await user.click(nextButton)
+
+    await waitFor(() => {
+      expect(onChangeMonth).toHaveBeenCalledWith(expect.any(Date))
+    })
+  })
+
+  test("onMonthChange clamps to minDate month", async () => {
+    const onChangeMonth = vi.fn()
+
+    const { user } = await render(
+      <Calendar.Root
+        defaultMonth={new Date(2024, 1, 1)}
+        minDate={new Date(2024, 0, 1)}
+        onChangeMonth={onChangeMonth}
+      />,
+    )
+
+    const prevButton = screen.getByRole("button", {
+      name: /previous month/i,
+    })
+    await user.click(prevButton)
+
+    await waitFor(() => {
+      expect(onChangeMonth).toHaveBeenCalledWith(expect.any(Date))
+    })
   })
 
   test("multiple selection allows removing when at max", async () => {

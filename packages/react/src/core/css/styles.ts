@@ -8559,9 +8559,7 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2025-03-12
-   * @newly_available_date 2022-09-12
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior
    */
@@ -8573,9 +8571,7 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2025-03-12
-   * @newly_available_date 2022-09-12
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior
    */
@@ -8587,9 +8583,7 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2025-03-12
-   * @newly_available_date 2022-09-12
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-block
    */
@@ -8601,9 +8595,7 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2025-03-12
-   * @newly_available_date 2022-09-12
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-inline
    */
@@ -8615,9 +8607,7 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2025-03-12
-   * @newly_available_date 2022-09-12
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-x
    */
@@ -8629,9 +8619,7 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2025-03-12
-   * @newly_available_date 2022-09-12
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-y
    */
@@ -8643,9 +8631,7 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2025-03-12
-   * @newly_available_date 2022-09-12
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-x
    */
@@ -8657,9 +8643,7 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2025-03-12
-   * @newly_available_date 2022-09-12
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-y
    */

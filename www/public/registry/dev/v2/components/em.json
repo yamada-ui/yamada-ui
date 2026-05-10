@@ -13,10 +13,6 @@
       "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const emStyle = defineComponentStyle({\n  base: {\n    fontSize: \"italic\",\n  },\n})\n\nexport type EmStyle = typeof emStyle\n"
     },
     {
-      "name": "em.test.browser.tsx",
-      "content": "import { a11y, page, render } from \"#test/browser\"\nimport { Em } from \"./em\"\n\ndescribe(\"<Em />\", () => {\n  test(\"renders component correctly\", async () => {\n    await a11y(<Em>Unleash the Power</Em>)\n  })\n\n  test(\"sets `displayName` correctly\", () => {\n    expect(Em.displayName).toBe(\"Em\")\n  })\n\n  test(\"sets `className` correctly\", async () => {\n    await render(<Em>Unleash the Power</Em>)\n\n    await expect\n      .element(page.getByText(\"Unleash the Power\"))\n      .toHaveClass(\"ui-em\")\n  })\n\n  test(\"renders HTML tag correctly\", async () => {\n    await render(<Em>Unleash the Power</Em>)\n\n    expect(page.getByText(\"Unleash the Power\").element().tagName).toBe(\"EM\")\n  })\n})\n"
-    },
-    {
       "name": "em.tsx",
       "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { EmStyle } from \"./em.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { emStyle } from \"./em.style\"\n\nexport interface EmProps extends HTMLStyledProps<\"em\">, ThemeProps<EmStyle> {}\n\nconst {\n  PropsContext: EmPropsContext,\n  usePropsContext: useEmPropsContext,\n  withContext,\n} = createComponent<EmProps, EmStyle>(\"em\", emStyle)\n\nexport { EmPropsContext, useEmPropsContext }\n\n/**\n * `Em` is a component that represents emphasized text. By default, it renders a `em` element.\n *\n * @see https://yamada-ui.com/docs/components/em\n */\nexport const Em = withContext(\"em\")()\n"
     },

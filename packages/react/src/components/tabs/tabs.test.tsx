@@ -1,6 +1,7 @@
 import type { FC, PropsWithChildren } from "react"
 import type { UseTabsProps } from "./use-tabs"
-import { act, renderHook } from "#test"
+import { a11y, act, render, renderHook, screen } from "#test"
+import { Tabs } from "./"
 import {
   TabDescendantsContext,
   TabPanelDescendantsContext,
@@ -9,6 +10,23 @@ import {
   useTabPanel,
   useTabs,
 } from "./use-tabs"
+
+const items: Tabs.Item[] = [
+  { panel: "This is home tab", tab: "Home" },
+  { panel: "This is about tab", tab: "About" },
+  { panel: "This is contact tab", tab: "Contact" },
+]
+
+interface TestComponentProps extends Tabs.RootProps {}
+
+const TestComponent: FC<TestComponentProps> = (props) => {
+  return (
+    <Tabs.Root data-testid="tabs" items={items} {...props}>
+      <Tabs.List />
+      <Tabs.Panels />
+    </Tabs.Root>
+  )
+}
 
 const createTabsWrapper = (props: UseTabsProps = {}): FC<PropsWithChildren> => {
   const Wrapper: FC<PropsWithChildren> = ({ children }) => {
@@ -49,6 +67,41 @@ const createTabsWrapper = (props: UseTabsProps = {}): FC<PropsWithChildren> => {
 
   return Wrapper
 }
+
+describe("<Tabs />", () => {
+  test("passes a11y checks", async () => {
+    await a11y(<TestComponent />)
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(Tabs.Root.displayName).toBe("TabsRoot")
+    expect(Tabs.List.displayName).toBe("TabsList")
+    expect(Tabs.Tab.displayName).toBe("TabsTab")
+    expect(Tabs.Panel.displayName).toBe("TabsPanel")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<TestComponent />)
+
+    expect(screen.getByTestId("tabs")).toHaveClass("ui-tabs__root")
+    expect(screen.getByRole("tablist")).toHaveClass("ui-tabs__list")
+    expect(screen.getByRole("tab", { name: /Home/i })).toHaveClass(
+      "ui-tabs__tab",
+    )
+    expect(screen.getByRole("tabpanel", { name: /Home/i })).toHaveClass(
+      "ui-tabs__panel",
+    )
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<TestComponent />)
+
+    expect(screen.getByTestId("tabs").tagName).toBe("DIV")
+    expect(screen.getByRole("tablist").tagName).toBe("DIV")
+    expect(screen.getByRole("tab", { name: /Home/i }).tagName).toBe("BUTTON")
+    expect(screen.getByRole("tabpanel", { name: /Home/i }).tagName).toBe("DIV")
+  })
+})
 
 describe("useTabs / useTab / useTabPanel", () => {
   test("merges className and style while keeping getter precedence in useTabs.getRootProps", () => {

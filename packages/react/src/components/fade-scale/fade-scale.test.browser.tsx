@@ -26,6 +26,30 @@ describe("<FadeScale />", () => {
     })
   }
 
+  test("toggles visibility on open change", async () => {
+    const TestComponent = () => {
+      const [open, setOpen] = useState(false)
+
+      return (
+        <>
+          <button onClick={() => setOpen((prev) => !prev)}>button</button>
+          <FadeScale open={open}>FadeScale</FadeScale>
+        </>
+      )
+    }
+
+    const { user } = await render(<TestComponent />)
+
+    const button = page.getByRole("button", { name: /button/i })
+    await expectFadeScaleToBeHidden()
+
+    await user.click(button)
+    await expectFadeScaleToBeVisible()
+
+    await user.click(button)
+    await expectFadeScaleToBeHidden()
+  })
+
   test("applies reverse={false} exit correctly", async () => {
     const TestComponent = () => {
       const [open, setOpen] = useState(false)

@@ -966,15 +966,16 @@ describe("<DatePicker />", () => {
   })
 
   test("handles click on range field focuses start input when both empty", async () => {
-    const { user } = await render(
-      <DatePicker placeholder="Select date" range />,
-    )
+    await render(<DatePicker placeholder="Select date" range />)
 
     const field = page.getByRole("combobox").first()
-    await user.click(field)
+    const fieldEl = await field.findElement()
+    if (fieldEl instanceof HTMLElement) fieldEl.click()
 
     const inputs = page.getByRole("textbox")
-    await expect.element(inputs.first()).toHaveFocus()
+    await vi.waitFor(async () => {
+      await expect.element(inputs.first()).toHaveFocus()
+    })
   })
 
   test("handles click on range field focuses start input when only start is set", async () => {

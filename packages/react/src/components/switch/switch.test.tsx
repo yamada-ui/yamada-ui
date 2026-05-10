@@ -7,6 +7,33 @@ describe("<Switch />", () => {
     await a11y(<Switch>Switch</Switch>)
   })
 
+  test("sets `displayName` correctly", () => {
+    expect(Switch.displayName).toBe("SwitchRoot")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<Switch data-testid="switch">Switch</Switch>)
+
+    const root = screen.getByTestId("switch")
+
+    expect(root).toHaveClass("ui-switch__root")
+    expect(root.children[1]).toHaveClass("ui-switch__track")
+    expect(root.children[1]?.children[0]).toHaveClass("ui-switch__thumb")
+    expect(root.children[2]).toHaveClass("ui-switch__label")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<Switch data-testid="switch">Switch</Switch>)
+
+    const root = screen.getByTestId("switch")
+
+    expect(root.tagName).toBe("LABEL")
+    expect(root.children[0]?.tagName).toBe("INPUT")
+    expect(root.children[1]?.tagName).toBe("DIV")
+    expect(root.children[1]?.children[0]?.tagName).toBe("DIV")
+    expect(root.children[2]?.tagName).toBe("SPAN")
+  })
+
   test("is checked when defaultChecked is set", () => {
     render(<Switch defaultChecked>Switch</Switch>)
 
@@ -81,6 +108,8 @@ describe("<Switch />", () => {
   test("does not render the label element when children is not provided", () => {
     render(<Switch data-testid="switch" />)
 
-    expect(screen.queryByText(/Switch/i)).not.toBeInTheDocument()
+    expect(
+      screen.getByTestId("switch").querySelector(".ui-switch__label"),
+    ).toBeNull()
   })
 })

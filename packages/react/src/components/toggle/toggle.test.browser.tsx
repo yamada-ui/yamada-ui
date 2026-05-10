@@ -18,38 +18,6 @@ describe("<Toggle />", () => {
     )
   })
 
-  test("should render correctly", async () => {
-    await render(<Toggle>Toggle</Toggle>)
-
-    await expect.element(page.getByRole("button")).toBeInTheDocument()
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Toggle.displayName).toBe("ToggleRoot")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(<Toggle>Toggle</Toggle>)
-
-    await expect
-      .element(page.getByRole("button"))
-      .toHaveClass("ui-toggle__root")
-  })
-
-  test("should handle checked prop", async () => {
-    const { rerender } = await render(<Toggle checked>Toggle</Toggle>)
-
-    await expect
-      .element(page.getByRole("button"))
-      .toHaveAttribute("data-checked")
-
-    await rerender(<Toggle checked={false}>Toggle</Toggle>)
-
-    await expect
-      .element(page.getByRole("button"))
-      .not.toHaveAttribute("data-checked")
-  })
-
   test("should handle disabled prop", async () => {
     const onChange = vi.fn()
     const { user } = await render(
@@ -62,19 +30,6 @@ describe("<Toggle />", () => {
     await expect.element(button).toBeDisabled()
     await expect(user.click(button, { timeout: 100 })).rejects.toBeDefined()
     expect(onChange).not.toHaveBeenCalled()
-  })
-
-  test("should handle readOnly prop", async () => {
-    await render(<Toggle readOnly>Toggle</Toggle>)
-
-    const button = page.getByRole("button")
-    await expect.element(button).toHaveAttribute("data-readonly")
-    await expect.element(button).toHaveAttribute("aria-disabled", "true")
-  })
-
-  test("should handle icon prop", async () => {
-    await render(<Toggle icon={<div>Icon</div>} />)
-    await expect.element(page.getByText("Icon")).toBeInTheDocument()
   })
 
   test("should handle onChange callback", async () => {

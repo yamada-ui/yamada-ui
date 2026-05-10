@@ -7,7 +7,7 @@
     "providers": ["i18n-provider"]
   },
   "dependents": {
-    "components": ["picture"],
+    "components": [],
     "hooks": ["use-breakpoint"],
     "providers": []
   },

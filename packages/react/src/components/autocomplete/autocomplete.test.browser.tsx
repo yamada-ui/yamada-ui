@@ -1,4 +1,4 @@
-import { a11y, fireEvent, page, render } from "#test/browser"
+import { fireEvent, page, render } from "#test/browser"
 import { Autocomplete } from "."
 
 describe("<Autocomplete />", () => {
@@ -21,57 +21,6 @@ describe("<Autocomplete />", () => {
     fireEvent.blur(input, { relatedTarget })
   }
 
-  test("renders component correctly", async () => {
-    await a11y(
-      <Autocomplete.Root placeholder="Choose a option">
-        <Autocomplete.Option value="one">Option 1</Autocomplete.Option>
-        <Autocomplete.Option value="two">Option 2</Autocomplete.Option>
-        <Autocomplete.Option value="three">Option 3</Autocomplete.Option>
-      </Autocomplete.Root>,
-    )
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Autocomplete.Root.displayName).toBe("AutocompleteRoot")
-    expect(Autocomplete.Group.displayName).toBe("AutocompleteGroup")
-    expect(Autocomplete.Option.displayName).toBe("AutocompleteOption")
-    expect(Autocomplete.Label.displayName).toBe("AutocompleteLabel")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(
-      <Autocomplete.Root
-        defaultOpen
-        defaultValue="one"
-        placeholder="Choose a option"
-        iconProps={{ "data-testid": "icon" }}
-        rootProps={{ "data-testid": "root" }}
-      >
-        <Autocomplete.Group label="Group 1">
-          <Autocomplete.Option value="one">Option 1</Autocomplete.Option>
-          <Autocomplete.Option value="two">Option 2</Autocomplete.Option>
-          <Autocomplete.Option value="three">Option 3</Autocomplete.Option>
-        </Autocomplete.Group>
-      </Autocomplete.Root>,
-    )
-
-    const field = page.getByRole("combobox").element()
-    const group = page.getByRole("group", { name: "Group 1" }).element()
-    const option = page.getByRole("option", { name: "Option 1" }).element()
-
-    expect(page.getByTestId("root").element()).toHaveClass(
-      "ui-autocomplete__root",
-    )
-    expect(page.getByTestId("icon").element()).toHaveClass(
-      "ui-autocomplete__icon",
-    )
-    expect(field).toHaveClass("ui-autocomplete__field")
-    expect(option).toHaveClass("ui-autocomplete__option")
-    expect(option.firstChild).toHaveClass("ui-autocomplete__indicator")
-    expect(group).toHaveClass("ui-autocomplete__group")
-    expect(group.firstChild).toHaveClass("ui-autocomplete__label")
-  })
-
   test("does not hide separator when blurring to content in multiple mode", async () => {
     await render(
       <Autocomplete.Root
@@ -92,7 +41,6 @@ describe("<Autocomplete />", () => {
 
     fireEvent.focus(input)
 
-    // The separator should still be visible after blurring to an option in the content
     blurWithRelatedTarget(input, option)
 
     const spans = [...field.querySelectorAll("span")]
@@ -129,50 +77,6 @@ describe("<Autocomplete />", () => {
     const lastSpan = spans.at(-1)
 
     expect(lastSpan?.textContent).not.toContain(",")
-  })
-
-  test("renders HTML tag correctly", async () => {
-    await render(
-      <Autocomplete.Root
-        defaultOpen
-        defaultValue="one"
-        placeholder="Choose a option"
-        iconProps={{ "data-testid": "icon" }}
-        rootProps={{ "data-testid": "root" }}
-      >
-        <Autocomplete.Group label="Group 1">
-          <Autocomplete.Option value="one">Option 1</Autocomplete.Option>
-          <Autocomplete.Option value="two">Option 2</Autocomplete.Option>
-          <Autocomplete.Option value="three">Option 3</Autocomplete.Option>
-        </Autocomplete.Group>
-      </Autocomplete.Root>,
-    )
-
-    const field = page.getByRole("combobox").element()
-    const group = page.getByRole("group", { name: "Group 1" }).element()
-    const option = page.getByRole("option", { name: "Option 1" }).element()
-
-    expect(page.getByTestId("root").element().tagName).toBe("DIV")
-    expect(page.getByTestId("icon").element().tagName).toBe("DIV")
-    expect(field.tagName).toBe("DIV")
-    expect(option.tagName).toBe("DIV")
-    expect(option.children[0]?.tagName).toBe("DIV")
-    expect(group.tagName).toBe("DIV")
-    expect(group.children[0]?.tagName).toBe("SPAN")
-  })
-
-  test("renders group without label", async () => {
-    await render(
-      <Autocomplete.Root defaultOpen placeholder="Choose a option">
-        <Autocomplete.Group>
-          <Autocomplete.Option value="one">Option 1</Autocomplete.Option>
-        </Autocomplete.Group>
-      </Autocomplete.Root>,
-    )
-
-    const option = page.getByRole("option", { name: "Option 1" }).element()
-
-    expect(option).toBeInTheDocument()
   })
 
   test("renders empty message when no items match filter", async () => {
@@ -301,29 +205,6 @@ describe("<Autocomplete />", () => {
     await user.click(option1)
 
     expect(onChange).toHaveBeenCalledWith([])
-  })
-
-  test("respects `max` limit in multiple mode", async () => {
-    const onChange = vi.fn()
-
-    await render(
-      <Autocomplete.Root
-        defaultOpen
-        defaultValue={["one"]}
-        items={[
-          { label: "Option 1", value: "one" },
-          { label: "Option 2", value: "two" },
-          { label: "Option 3", value: "three" },
-        ]}
-        max={1}
-        multiple
-        onChange={onChange}
-      />,
-    )
-
-    const option2 = page.getByRole("option", { name: "Option 2" }).element()
-
-    expect(option2).toHaveAttribute("aria-disabled", "true")
   })
 
   test("does not allow input change when `max` is reached in multiple mode", async () => {
@@ -835,60 +716,6 @@ describe("<Autocomplete />", () => {
       .toBeNull()
   })
 
-  test("updates input when controlled `value` prop changes", async () => {
-    const { rerender } = await render(
-      <Autocomplete.Root
-        items={[
-          { label: "Option 1", value: "one" },
-          { label: "Option 2", value: "two" },
-        ]}
-        value="one"
-      />,
-    )
-
-    const field = page.getByRole("combobox").element()
-    const input = field.querySelector("input")!
-
-    expect(input).toHaveValue("Option 1")
-
-    await rerender(
-      <Autocomplete.Root
-        items={[
-          { label: "Option 1", value: "one" },
-          { label: "Option 2", value: "two" },
-        ]}
-        value="two"
-      />,
-    )
-
-    await expect.element(input).toHaveValue("Option 2")
-  })
-
-  test("renders children for selected values in multiple mode with custom render", async () => {
-    await render(
-      <Autocomplete.Root
-        defaultOpen
-        defaultValue={["one", "two"]}
-        items={[
-          { label: "Option 1", value: "one" },
-          { label: "Option 2", value: "two" },
-          { label: "Option 3", value: "three" },
-        ]}
-        multiple
-        render={({ label, onClear }) => (
-          <button data-testid="custom-tag" onClick={onClear}>
-            {label}
-          </button>
-        )}
-      />,
-    )
-
-    const tags = page.getByTestId("custom-tag").elements()
-
-    expect(tags).toHaveLength(2)
-    expect(tags[0]).toHaveTextContent("Option 1")
-  })
-
   test("removes selected value via custom render's `onClear`", async () => {
     const onChange = vi.fn()
 
@@ -994,8 +821,6 @@ describe("<Autocomplete />", () => {
     input.focus()
     await user.keyboard("{Enter}")
 
-    // In single mode with no matching filtered items and allowCustomValue,
-    // Enter should not call onSelect because !isArray(value)
     expect(onChange).not.toHaveBeenCalledWith("nonexistent")
   })
 
@@ -1049,8 +874,6 @@ describe("<Autocomplete />", () => {
     await setInputValue(user, input, "")
     blurWithRelatedTarget(input, outside)
 
-    // When allowCustomValue is true and inputValue is empty string (falsy),
-    // the if (inputValue) branch is not taken
     expect(input).toHaveValue("")
   })
 

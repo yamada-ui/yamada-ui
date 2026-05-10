@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "clean": "rimraf node_modules",
+    "clean": "rimraf node_modules .turbo",
     "dev": "vite",
     "build": "tsgo && vite build",
     "preview": "vite preview",

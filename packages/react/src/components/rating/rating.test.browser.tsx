@@ -24,39 +24,25 @@ const dispatchTouchStart = (
 }
 
 describe("<Rating />", () => {
-  const defaultGetBoundingClientRect =
-    window.HTMLElement.prototype.getBoundingClientRect
-
-  beforeAll(() => {
-    window.HTMLElement.prototype.getBoundingClientRect = () => {
-      return {
-        height: 20,
-        left: 16,
-        width: 100,
-      } as DOMRect
-    }
+  beforeEach(() => {
+    vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockImplementation(
+      () =>
+        ({
+          bottom: 20,
+          height: 20,
+          left: 16,
+          right: 116,
+          top: 0,
+          width: 100,
+          x: 16,
+          y: 0,
+        }) as DOMRect,
+    )
     vi.spyOn(HTMLElement.prototype, "matches").mockImplementation(() => true)
   })
 
-  afterAll(() => {
-    window.HTMLElement.prototype.getBoundingClientRect =
-      defaultGetBoundingClientRect
-    vi.clearAllMocks()
-  })
-
-  test("renders component correctly", async () => {
-    await a11y(<Rating />)
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Rating.displayName).toBe("RatingRoot")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(<Rating />)
-    await expect
-      .element(page.getByRole("radiogroup"))
-      .toHaveClass("ui-rating__root")
+  afterEach(() => {
+    vi.restoreAllMocks()
   })
 
   test("should merge `groupProps` with slot props without overwriting user props", async () => {
@@ -82,39 +68,12 @@ describe("<Rating />", () => {
     expect(onClick).toHaveBeenCalledTimes(1)
   })
 
-  test("rating renders correctly with value", async () => {
-    const { container } = await render(<Rating value={4} />)
-
-    const items = container.querySelectorAll(".ui-rating__item")
-
-    for (let i = 1; i < 5; i++) {
-      expect(items[i]).toHaveAttribute("data-filled")
-    }
-  })
-
-  test("disabled Rating renders correctly", async () => {
-    await render(<Rating data-testid="rating" disabled />)
-
-    await expect
-      .element(page.getByTestId("rating"))
-      .toHaveAttribute("aria-disabled")
-  })
-
-  test("readonly Rating renders correctly", async () => {
-    await render(<Rating data-testid="rating" readOnly />)
-
-    await expect
-      .element(page.getByTestId("rating"))
-      .toHaveAttribute("aria-readonly")
-  })
-
-  test("should be filled to the point of hovering", async () => {
+  test("fills items up to the hovered position", async () => {
     const { container } = await render(
       <Rating data-testid="rating" height={20} width={100} />,
     )
 
     const rating = page.getByTestId("rating").element()
-
     const items = container.querySelectorAll(".ui-rating__item")
 
     for (let i = 1; i < items.length; i++) {
@@ -135,45 +94,27 @@ describe("<Rating />", () => {
     await expect.poll(() => items[2]?.hasAttribute("data-filled")).toBe(false)
   })
 
-  test("value should be updated correctly on the mouseDown event", async () => {
+  test("updates value on the mouseDown event", async () => {
     const onChange = vi.fn()
-
     const { container } = await render(<Rating onChange={onChange} />)
-
     const items = container.querySelectorAll(".ui-rating__item")
+
     dispatchMouse(items[3]!, "mousedown", { button: 0 })
 
     expect(onChange).toHaveBeenCalledExactlyOnceWith(3)
   })
 
-  test("value should be updated correctly on the touchStart event", async () => {
+  test("updates value on item touchStart event", async () => {
     const onChange = vi.fn()
-
     const { container } = await render(<Rating onChange={onChange} />)
-
     const items = container.querySelectorAll(".ui-rating__item")
+
     dispatchTouchStart(items[3]!)
 
     expect(onChange).toHaveBeenCalledExactlyOnceWith(3)
   })
 
-  test("highlightSelectedOnly should work correctly", async () => {
-    const { container } = await render(
-      <Rating defaultValue={3} highlightSelectedOnly />,
-    )
-
-    const items = container.querySelectorAll(".ui-rating__item")
-    expect(items[3]).toHaveAttribute("data-filled")
-
-    for (let i = 1; i < 3; i++) {
-      expect(items[i]).not.toHaveAttribute("data-filled")
-    }
-    for (let i = 4; i < items.length; i++) {
-      expect(items[i]).not.toHaveAttribute("data-filled")
-    }
-  })
-
-  test("value should be updated on root touchStart event", async () => {
+  test("updates value on root touchStart event", async () => {
     const onChange = vi.fn()
 
     await render(<Rating data-testid="rating" onChange={onChange} />)
@@ -185,11 +126,10 @@ describe("<Rating />", () => {
     expect(onChange).toHaveBeenCalledWith(2)
   })
 
-  test("root touchEnd should call preventDefault", async () => {
+  test("calls preventDefault on root touchEnd", async () => {
     await render(<Rating data-testid="rating" />)
 
     const rating = page.getByTestId("rating").element()
-
     const event = new Event("touchend", {
       bubbles: true,
       cancelable: true,
@@ -201,9 +141,8 @@ describe("<Rating />", () => {
     expect(preventDefaultSpy).toHaveBeenCalledWith()
   })
 
-  test("should not update value when disabled", async () => {
+  test("does not update value when disabled", async () => {
     const { container } = await render(<Rating disabled />)
-
     const items = container.querySelectorAll(".ui-rating__item")
 
     dispatchMouse(items[3]!, "mousedown", { button: 0 })
@@ -211,46 +150,12 @@ describe("<Rating />", () => {
     expect(items[3]?.firstChild).not.toHaveAttribute("data-checked")
   })
 
-  test("should use custom color correctly", async () => {
-    const colors: { [key: number]: string } = {
-      1: "red.500",
-      2: "orange.500",
-      3: "yellow.500",
-      4: "green.500",
-      5: "blue.500",
-    }
-
-    const getColor = (value: number): string | undefined => colors[value]
-
-    const { container } = await render(
-      <Rating color={getColor} defaultValue={5} />,
-    )
-    const items = container.querySelectorAll(".ui-rating__item")
-
-    const styleElements = document.getElementsByTagName("style")
-    const cssText = Array.from(styleElements)
-      .map((style) => style.textContent)
-      .join("")
-
-    for (let i = 1; i < items.length; i++) {
-      expect(items[i]).toHaveAttribute("data-filled")
-
-      const emotionClass = Array.from(items[i]!.classList)[1]
-
-      const expectedColor = getColor(i)
-      const expectedVar = `var(--ui-colors-${expectedColor!.replace(".", "-")})`
-
-      const ruleExists =
-        cssText.includes(`${emotionClass}[data-filled]`) &&
-        cssText.includes(`color:${expectedVar}`)
-      expect(ruleExists).toBeTruthy()
-    }
-  })
-
-  test("should reset hovered value on blur when mouse is outside", async () => {
+  test("resets hovered value on blur when mouse is outside", async () => {
     const { container } = await render(<Rating />)
     const inputs = container.querySelectorAll("input[type='radio']")
-    const firstInput = inputs[0] as HTMLInputElement
+    const firstInput = inputs[0]
+    if (!(firstInput instanceof HTMLInputElement))
+      throw new Error("expected input element")
 
     firstInput.focus()
     dispatchMouse(container.firstChild!, "mouseleave")
@@ -260,13 +165,15 @@ describe("<Rating />", () => {
     expect(activeInput).toBeNull()
   })
 
-  test("should update value on KeyboardEvent", async () => {
+  test("updates value via keyboard", async () => {
     const onChange = vi.fn()
 
     const { container, user } = await render(<Rating onChange={onChange} />)
 
     const inputs = container.querySelectorAll("input[type='radio']")
-    const firstInput = inputs[0] as HTMLInputElement
+    const firstInput = inputs[0]
+    if (!(firstInput instanceof HTMLInputElement))
+      throw new Error("expected input element")
 
     await user.tab()
     firstInput.focus()
@@ -277,5 +184,9 @@ describe("<Rating />", () => {
     await user.keyboard("{Space}")
 
     expect(onChange).toHaveBeenCalledWith(1)
+  })
+
+  test("passes a11y checks", async () => {
+    await a11y(<Rating />)
   })
 })

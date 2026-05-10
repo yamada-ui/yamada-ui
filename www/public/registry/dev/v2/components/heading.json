@@ -6,20 +6,11 @@
     "hooks": [],
     "providers": []
   },
-  "dependents": {
-    "components": ["container", "link-box"],
-    "hooks": [],
-    "providers": []
-  },
   "section": "components",
   "sources": [
     {
       "name": "heading.style.ts",
       "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const headingStyle = defineComponentStyle({\n  base: {\n    fontFamily: \"heading\",\n    fontWeight: \"semibold\",\n  },\n\n  sizes: {\n    xs: { fontSize: { base: \"xs\", sm: \"2xs\" } },\n    sm: { fontSize: { base: \"sm\", sm: \"xs\" } },\n    md: { fontSize: { base: \"md\", sm: \"sm\" } },\n    lg: { fontSize: { base: \"lg\", sm: \"md\" } },\n    xl: { fontSize: { base: \"xl\", sm: \"lg\" } },\n    \"2xl\": { fontSize: { base: \"2xl\", sm: \"xl\" } },\n    \"3xl\": { fontSize: { base: \"3xl\", sm: \"2xl\" } },\n    \"4xl\": { fontSize: { base: \"4xl\", sm: \"3xl\" } },\n    \"5xl\": { fontSize: { base: \"5xl\", sm: \"4xl\" } },\n    \"6xl\": { fontSize: { base: \"6xl\", sm: \"5xl\" } },\n    \"7xl\": { fontSize: { base: \"7xl\", sm: \"6xl\" } },\n    \"8xl\": { fontSize: { base: \"8xl\", sm: \"7xl\" } },\n    \"9xl\": { fontSize: { base: \"9xl\", sm: \"8xl\" } },\n  },\n\n  defaultProps: { size: \"4xl\" },\n})\n\nexport type HeadingStyle = typeof headingStyle\n"
-    },
-    {
-      "name": "heading.test.browser.tsx",
-      "content": "import { a11y, page, render } from \"#test/browser\"\nimport { Heading } from \"./heading\"\n\ndescribe(\"<Heading />\", () => {\n  test(\"renders component correctly\", async () => {\n    await a11y(<Heading>Heading</Heading>)\n  })\n\n  test(\"sets `displayName` correctly\", () => {\n    expect(Heading.displayName).toBe(\"Heading\")\n  })\n\n  test(\"sets `className` correctly\", async () => {\n    await render(<Heading>Heading</Heading>)\n\n    await expect.element(page.getByText(\"Heading\")).toHaveClass(\"ui-heading\")\n  })\n\n  test(\"renders HTML tag correctly\", async () => {\n    await render(<Heading>Heading</Heading>)\n\n    expect(page.getByText(\"Heading\").element().tagName).toBe(\"H1\")\n  })\n})\n"
     },
     {
       "name": "heading.tsx",

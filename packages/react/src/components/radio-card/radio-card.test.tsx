@@ -1,0 +1,98 @@
+import { a11y, render, screen } from "#test"
+import { RadioCard, RadioCardGroup } from "."
+
+const items = [
+  {
+    addon: "Addon 1",
+    description: "Description 1",
+    label: "Item 1",
+    value: "1",
+  },
+  {
+    addon: "Addon 2",
+    description: "Description 2",
+    label: "Item 2",
+    value: "2",
+  },
+  {
+    addon: "Addon 3",
+    description: "Description 3",
+    label: "Item 3",
+    value: "3",
+  },
+]
+
+describe("<RadioCard />", () => {
+  test("renders component correctly", async () => {
+    await a11y(<RadioCard.Root defaultChecked>radio card</RadioCard.Root>)
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(RadioCard.Root.displayName).toBe("RadioCardRoot")
+    expect(RadioCard.Label.displayName).toBe("RadioCardLabel")
+    expect(RadioCard.Description.displayName).toBe("RadioCardDescription")
+    expect(RadioCard.Addon.displayName).toBe("RadioCardAddon")
+    expect(RadioCardGroup.Root.displayName).toBe("RadioCardGroup")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<RadioCardGroup.Root items={items} />)
+    const radio = screen.getByRole("radio", { name: /Item 1/ })
+    const root = radio.parentElement
+    if (!(root instanceof HTMLElement)) {
+      throw new Error("expected radio card root to be an HTMLElement")
+    }
+    expect(screen.getByRole("radiogroup")).toHaveClass("ui-radio-card__group")
+    expect(root).toHaveClass("ui-radio-card__root")
+    expect(root.children[1]).toHaveClass("ui-radio-card__indicator")
+    expect(root.children[2]).toHaveClass("ui-radio-card__label")
+    expect(root.children[3]).toHaveClass("ui-radio-card__description")
+    expect(root.children[4]).toHaveClass("ui-radio-card__addon")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<RadioCardGroup.Root items={items} />)
+    const radio = screen.getByRole("radio", { name: /Item 1/ })
+    const root = radio.parentElement
+    if (!(root instanceof HTMLElement)) {
+      throw new Error("expected radio card root to be an HTMLElement")
+    }
+    expect(screen.getByRole("radiogroup").tagName).toBe("DIV")
+    expect(root.tagName).toBe("LABEL")
+    expect(radio.tagName).toBe("INPUT")
+    expect(root.children[1]?.tagName).toBe("DIV")
+    expect(root.children[2]?.tagName).toBe("SPAN")
+    expect(root.children[3]?.tagName).toBe("SPAN")
+    expect(root.children[4]?.tagName).toBe("SPAN")
+  })
+
+  test("renders label, description, and addon via props", () => {
+    render(
+      <RadioCard.Root
+        addon="Test Addon"
+        description="Test Description"
+        label="Test Label"
+        value="test"
+      />,
+    )
+
+    expect(screen.getByText("Test Label")).toBeInTheDocument()
+    expect(screen.getByText("Test Description")).toBeInTheDocument()
+    expect(screen.getByText("Test Addon")).toBeInTheDocument()
+  })
+
+  test("renders without indicator when withIndicator is false", () => {
+    render(
+      <RadioCard.Root
+        label="No Indicator"
+        value="test"
+        withIndicator={false}
+      />,
+    )
+
+    expect(screen.getByText("No Indicator")).toBeInTheDocument()
+    const radio = screen.getByRole("radio")
+    const indicator = radio.parentElement?.querySelector("[data-indicator]")
+    expect(indicator).toBeNull()
+  })
+})

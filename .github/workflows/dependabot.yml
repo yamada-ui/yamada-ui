@@ -11,7 +11,7 @@ on:
 
 permissions:
   contents: write
-  pull-requests: read
+  pull-requests: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -20,73 +20,42 @@ concurrency:
 jobs:
   changeset:
     name: Changeset
-    if: github.actor == 'dependabot[bot]'
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
-      PR: ${{ github.event.pull_request.number }}
-      BASE: ${{ github.event.pull_request.base.ref }}
       HEAD_REF: ${{ github.head_ref }}
     steps:
+      - name: Fetch metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 #3.1.0
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
       - name: Checkout
+        if: ${{ steps.metadata.outputs.package-ecosystem == 'npm_and_yarn' }}
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           fetch-depth: 0
-          token: ${{ secrets.PAT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           ref: ${{ github.head_ref }}
 
       - name: Install
+        if: ${{ steps.metadata.outputs.package-ecosystem == 'npm_and_yarn' }}
         uses: ./.github/composite-actions/install
 
-      - name: Fetch
-        run: git fetch origin "$BASE" --depth=1
-
-      - name: Generate icons changeset
-        run: |
-          set -euo pipefail
-
-          react_diff=$(git diff "origin/$BASE"...HEAD -- packages/react/package.json || true)
-
-          if ! echo "$react_diff" | grep -qE '^\+[^+].*"lucide-react"'; then
-            echo "lucide-react not bumped, skipping."
-            exit 0
-          fi
-
-          pnpm react gen:icons
-          cat > ".changeset/dependabot-icons-$PR.md" <<'EOF'
-          ---
-          "@yamada-ui/react": patch
-          ---
-
-          Updated icons.
-          EOF
-
-      - name: Generate styles changeset
-        run: |
-          set -euo pipefail
-
-          react_diff=$(git diff "origin/$BASE"...HEAD -- packages/react/package.json || true)
-
-          if ! echo "$react_diff" | grep -qE '^\+[^+].*"(web-features|@mdn/browser-compat-data)"'; then
-            echo "web-features / @mdn/browser-compat-data not bumped, skipping."
-            exit 0
-          fi
-
-          pnpm react gen:styles
-          cat > ".changeset/dependabot-styles-$PR.md" <<'EOF'
-          ---
-          "@yamada-ui/react": patch
-          ---
-
-          Updated style props.
-          EOF
-
-      - name: Generate dependencies changeset
-        run: node .github/scripts/dependabot/generate-dependency-changesets.mjs
+      - name: Generate changeset
+        if: ${{ steps.metadata.outputs.package-ecosystem == 'npm_and_yarn' }}
+        run: pnpm forge pr:dependabot
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          UPDATED_DEPENDENCIES_JSON: ${{ steps.metadata.outputs.updated-dependencies-json }}
 
       - name: Update branch
+        if: ${{ steps.metadata.outputs.package-ecosystem == 'npm_and_yarn' }}
         run: |
-          set -euo pipefail
           git add .changeset packages/react/src/components/icon/icons packages/react/src/core/css/styles.ts
-          git diff --staged --exit-code || git commit -m "ci(dependabot): update dependabot changeset"
+          git diff --staged --exit-code || git commit -m "ci(dependabot): update dependencies"
+          git fetch origin "$HEAD_REF"
+          git rebase "origin/$HEAD_REF"
           git push origin "HEAD:$HEAD_REF"

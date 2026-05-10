@@ -119,6 +119,9 @@ export function CodePreview({
               rounded: "l1",
             },
             "& code > .line": {
+              "&:last-of-type:empty": {
+                display: "none",
+              },
               display: "block",
               minH: "1lh",
               minW: "full",

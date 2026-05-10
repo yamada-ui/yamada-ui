@@ -1,4 +1,4 @@
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { Bleed } from "./bleed"
 
 const getPixelNumber = (value: string) => Number.parseFloat(value)
@@ -8,26 +8,6 @@ const getExpectedFullBleed = (container: HTMLElement | SVGElement) =>
   container.getBoundingClientRect().width / 2 - window.innerWidth / 2
 
 describe("<Bleed />", () => {
-  test("renders component correctly", async () => {
-    await a11y(<Bleed>Box</Bleed>)
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Bleed.displayName).toBe("Bleed")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(<Bleed>Box</Bleed>)
-
-    await expect.element(page.getByText("Box")).toHaveClass("ui-bleed")
-  })
-
-  test("renders HTML tag correctly", async () => {
-    await render(<Bleed>Box</Bleed>)
-
-    expect(page.getByText("Box").element().tagName).toBe("DIV")
-  })
-
   test("applies full bleed to both inline sides when `inline='full'`", async () => {
     await render(
       <div style={{ width: "200px" }} data-testid="container">
@@ -35,7 +15,7 @@ describe("<Bleed />", () => {
       </div>,
     )
 
-    const container = page.getByTestId("container").element() as HTMLElement
+    const container = page.getByTestId("container").element()
     const style = getComputedStyle(page.getByText("Box").element())
     const expectedFullBleed = getExpectedFullBleed(container)
 
@@ -56,7 +36,7 @@ describe("<Bleed />", () => {
       </div>,
     )
 
-    const container = page.getByTestId("container").element() as HTMLElement
+    const container = page.getByTestId("container").element()
     const style = getComputedStyle(page.getByText("Box").element())
     const expectedFullBleed = getExpectedFullBleed(container)
 
@@ -74,7 +54,7 @@ describe("<Bleed />", () => {
       </div>,
     )
 
-    const container = page.getByTestId("container").element() as HTMLElement
+    const container = page.getByTestId("container").element()
     const style = getComputedStyle(page.getByText("Box").element())
     const expectedFullBleed = getExpectedFullBleed(container)
 

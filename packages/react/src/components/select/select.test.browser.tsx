@@ -12,8 +12,6 @@ const items: Select.Item[] = [
 
 describe("<Select />", () => {
   test("renders component correctly", async () => {
-    // Select colors come from theme tokens and can fail axe-core's
-    // color-contrast rule in browser mode; this test targets component behavior.
     await a11y(
       <Select.Root placeholder="Choose a option">
         <Select.Option value="one">Option 1</Select.Option>
@@ -123,19 +121,16 @@ describe("<Select />", () => {
       />,
     )
 
-    // Select first option
     await user.click(screen.getByRole("option", { name: "Option 1" }))
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one"])
     })
 
-    // Select second option
     await user.click(screen.getByRole("option", { name: "Option 2" }))
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
 
-    // Deselect first option
     await user.click(screen.getByRole("option", { name: "Option 1" }))
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["two"])
@@ -156,7 +151,6 @@ describe("<Select />", () => {
       />,
     )
 
-    // Select two options (reaching max)
     await user.click(screen.getByRole("option", { name: "Option 1" }))
     await user.click(screen.getByRole("option", { name: "Option 2" }))
 
@@ -164,7 +158,6 @@ describe("<Select />", () => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
 
-    // Attempt to select a third option - should be disabled
     await waitFor(() => {
       expect(screen.getByRole("option", { name: "Option 3" })).toHaveAttribute(
         "aria-disabled",
@@ -992,7 +985,6 @@ describe("<Select />", () => {
 
     const field = screen.getByRole("combobox", { name: /Choose a option/i })
 
-    // When value doesn't match any item, selectedItems should be empty
     expect(field).toBeInTheDocument()
   })
 
@@ -1259,7 +1251,6 @@ describe("<Select />", () => {
 
     const options = screen.getAllByRole("option")
 
-    // Only the 3 items should be visible, placeholder should not be rendered as option
     expect(options).toHaveLength(3)
   })
 
@@ -1300,7 +1291,6 @@ describe("<Select />", () => {
 
     const options = screen.getAllByRole("option")
 
-    // Only the actual options, no placeholder option
     expect(options).toHaveLength(2)
     expect(options[0]).toHaveTextContent("Option 1")
   })
@@ -1322,14 +1312,12 @@ describe("<Select />", () => {
     const option1 = screen.getByRole("option", { name: "Option 1" })
     const option2 = screen.getByRole("option", { name: "Option 2" })
 
-    // Select first option (reaching max of 1)
     await user.click(option1)
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one"])
     })
 
-    // Attempt to select second option while at max - option should be disabled
     await waitFor(() => {
       expect(option2).toHaveAttribute("aria-disabled", "true")
     })

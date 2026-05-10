@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "clean": "rimraf node_modules .react-router",
+    "clean": "rimraf node_modules .react-router .turbo",
     "build": "react-router build",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
@@ -14,16 +14,16 @@
     "yamada-cli": "pnpm -C ../../../packages/cli dev"
   },
   "dependencies": {
-    "@react-router/node": "^7.14.0",
-    "@react-router/serve": "^7.14.0",
+    "@react-router/node": "^7.14.2",
+    "@react-router/serve": "^7.14.2",
     "@yamada-ui/react": "workspace:*",
     "isbot": "^5.1.37",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "react-router": "^7.14.0"
+    "react-router": "^7.14.2"
   },
   "devDependencies": {
-    "@react-router/dev": "^7.14.0",
+    "@react-router/dev": "^7.14.2",
     "@yamada-ui/workspace": "workspace:*",
     "vite": "catalog:"
   }

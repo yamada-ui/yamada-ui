@@ -3,7 +3,7 @@ import { useRef, useState } from "react"
 import { vi } from "vitest"
 import { a11y, page, render } from "#test/browser"
 import { Tree } from "."
-import { BoxIcon, FileIcon, FolderIcon, XIcon } from "../icon"
+import { BoxIcon, FileIcon, FolderIcon } from "../icon"
 import { useTree } from "./use-tree"
 
 const exactName = (name: string) =>
@@ -75,7 +75,7 @@ describe("<Tree />", () => {
     await render(
       <Tree.Root
         checkable
-        endElement={<XIcon />}
+        endElement={<BoxIcon />}
         items={items}
         startElement={{
           group: <FolderIcon />,
@@ -119,7 +119,7 @@ describe("<Tree />", () => {
   test("renders HTML tag correctly", async () => {
     await render(
       <Tree.Root
-        endElement={<XIcon />}
+        endElement={<BoxIcon />}
         items={items}
         startElement={{
           group: <FolderIcon />,
@@ -576,7 +576,7 @@ describe("<Tree />", () => {
     const { user } = await render(
       <Tree.Root checkable onSelectedChange={onSelectedChange}>
         <Tree.Item
-          endElement={<XIcon />}
+          endElement={<BoxIcon />}
           label="parent"
           startElement={<FolderIcon />}
           checkboxProps={{

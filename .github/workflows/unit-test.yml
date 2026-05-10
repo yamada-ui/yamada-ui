@@ -36,8 +36,48 @@ jobs:
                 - packages/cli/src/**/*.{ts,tsx,mts}
             coverage_final_json: coverage-final.json
           - id: react
-            name: React
+            name: React 1/4
             script: test:coverage:jsdom
+            shard_arg: --shard=1/4
+            file_yaml: |
+              full:
+                - packages/react/{package.json,vitest.config.ts}
+                - packages/react/test/**
+              diff:
+                - packages/react/src/**/*.{ts,tsx,mts}
+                - '!packages/react/src/**/*.stories.{ts,tsx}'
+                - '!packages/react/src/**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx}'
+            coverage_final_json: jsdom/coverage-final.json
+          - id: react
+            name: React 2/4
+            script: test:coverage:jsdom
+            shard_arg: --shard=2/4
+            file_yaml: |
+              full:
+                - packages/react/{package.json,vitest.config.ts}
+                - packages/react/test/**
+              diff:
+                - packages/react/src/**/*.{ts,tsx,mts}
+                - '!packages/react/src/**/*.stories.{ts,tsx}'
+                - '!packages/react/src/**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx}'
+            coverage_final_json: jsdom/coverage-final.json
+          - id: react
+            name: React 3/4
+            script: test:coverage:jsdom
+            shard_arg: --shard=3/4
+            file_yaml: |
+              full:
+                - packages/react/{package.json,vitest.config.ts}
+                - packages/react/test/**
+              diff:
+                - packages/react/src/**/*.{ts,tsx,mts}
+                - '!packages/react/src/**/*.stories.{ts,tsx}'
+                - '!packages/react/src/**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx}'
+            coverage_final_json: jsdom/coverage-final.json
+          - id: react
+            name: React 4/4
+            script: test:coverage:jsdom
+            shard_arg: --shard=4/4
             file_yaml: |
               full:
                 - packages/react/{package.json,vitest.config.ts}
@@ -86,11 +126,11 @@ jobs:
 
       - name: Run test (full)
         if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.any_changed == 'true' || steps.changed-module-files.outputs.full_any_changed == 'true'
-        run: pnpm turbo run ${{ matrix.script }} --filter=./packages/${{ matrix.id }} -- --retry=3
+        run: pnpm turbo run ${{ matrix.script }} --filter=./packages/${{ matrix.id }} -- --retry=3 ${{ matrix.shard_arg }}
 
       - name: Run test (diff)
         if: inputs.TURBO_SCM_BASE != '' && steps.changed-files.outputs.any_changed != 'true' && steps.changed-module-files.outputs.full_any_changed != 'true' && steps.changed-module-files.outputs.diff_any_changed == 'true'
-        run: pnpm turbo run ${{ matrix.script }} --filter=./packages/${{ matrix.id }} -- --retry=3 --changed ${{ inputs.TURBO_SCM_BASE }}
+        run: pnpm turbo run ${{ matrix.script }} --filter=./packages/${{ matrix.id }} -- --retry=3 --changed ${{ inputs.TURBO_SCM_BASE }} ${{ matrix.shard_arg }}
 
       - name: Upload coverage
         if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.any_changed == 'true' || steps.changed-module-files.outputs.changed_keys != ''

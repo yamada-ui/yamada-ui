@@ -643,6 +643,46 @@ describe("<Sidebar />", () => {
     expect(screen.getByRole("link", { name: "3" })).toBeInTheDocument()
   })
 
+  test("should merge tooltip props from side panel and item in collapsed non-offcanvas mode", async () => {
+    const onOpenFromSidePanel = vi.fn()
+    const onOpenFromItem = vi.fn()
+
+    render(
+      <Sidebar.Root
+        disclosure={{ desktop: { defaultOpen: false } }}
+        mode="icon"
+      >
+        <Sidebar.SidePanel
+          tooltipProps={{
+            disabled: true,
+            onOpen: onOpenFromSidePanel,
+          }}
+        >
+          <Sidebar.Content>
+            <Sidebar.Item
+              label="Leaf"
+              value="#leaf"
+              tooltipProps={{
+                disabled: false,
+                onOpen: onOpenFromItem,
+              }}
+            />
+          </Sidebar.Content>
+        </Sidebar.SidePanel>
+      </Sidebar.Root>,
+    )
+
+    const link = screen.getByRole("link", { name: "Leaf" })
+
+    fireEvent.pointerEnter(link, { pointerType: "mouse" })
+
+    await waitFor(() => {
+      expect(onOpenFromSidePanel).toHaveBeenCalledTimes(1)
+      expect(onOpenFromItem).toHaveBeenCalledTimes(1)
+      expect(screen.getByRole("tooltip")).toHaveTextContent("Leaf")
+    })
+  })
+
   test("should load async children when defaultExpandedValue triggers later", async () => {
     const asyncChildren = vi.fn(() =>
       Promise.resolve([{ label: "lazy-1", value: "/lazy/1" }]),

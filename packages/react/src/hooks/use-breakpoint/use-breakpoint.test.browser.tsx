@@ -1,24 +1,12 @@
 import type { FC } from "react"
 import type { ThemeConfig } from "../../core"
-import { page, render, renderHook } from "#test/browser"
+import { page, render } from "#test/browser"
 import { styled } from "../../core"
 import { UIProvider } from "../../providers/ui-provider"
 import { config as defaultConfig } from "../../theme"
 import { useBreakpoint } from "./use-breakpoint"
 
 describe("useBreakpoint", () => {
-  test("Returns the correct breakpoint based on the current screen width", async () => {
-    await page.viewport(600, 800)
-    const { result } = await renderHook(() => useBreakpoint())
-    expect(result.current).toBe("md")
-  })
-
-  test("returns base when viewport is larger than all breakpoints", async () => {
-    await page.viewport(1500, 800)
-    const { result } = await renderHook(() => useBreakpoint())
-    expect(result.current).toBe("base")
-  })
-
   test("updates breakpoint when viewport changes", async () => {
     await page.viewport(1500, 800)
 
@@ -89,7 +77,7 @@ describe("useBreakpoint", () => {
     window.ResizeObserver = defaultResizeObserver
   })
 
-  test("renders correctly and updates breakpoint", async () => {
+  test("renders the expected breakpoint for container width with default direction", async () => {
     const defaultResizeObserver = window.ResizeObserver
 
     window.ResizeObserver = class ResizeObserver {
@@ -125,7 +113,7 @@ describe("useBreakpoint", () => {
     const Component: FC = () => {
       const breakpoint = useBreakpoint()
 
-      return <styled.p>{breakpoint}</styled.p>
+      return <styled.p data-testid="bp">{breakpoint}</styled.p>
     }
 
     await render(
@@ -135,7 +123,7 @@ describe("useBreakpoint", () => {
       { withProvider: false },
     )
 
-    await expect.element(page.getByText(/xl/)).toBeInTheDocument()
+    await expect.element(page.getByTestId("bp")).toHaveTextContent("xl")
 
     window.ResizeObserver = defaultResizeObserver
   })

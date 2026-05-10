@@ -12,6 +12,43 @@ describe("<Skeleton />", () => {
     )
   })
 
+  test("sets displayName correctly", () => {
+    expect(Skeleton.displayName).toBe("Skeleton")
+    expect(SkeletonCircle.name).toBe("SkeletonCircle")
+    expect(SkeletonText.name).toBe("SkeletonText")
+  })
+
+  test("renders static class contracts correctly", () => {
+    render(
+      <>
+        <Skeleton data-testid="skeleton" />
+        <SkeletonCircle data-testid="skeletonCircle" />
+        <SkeletonText rootProps={{ "data-testid": "skeletonText" }} />
+      </>,
+    )
+    expect(screen.getByTestId("skeleton")).toHaveClass("ui-skeleton")
+    expect(screen.getByTestId("skeletonCircle")).toHaveClass("ui-skeleton")
+    expect(screen.getByTestId("skeletonText").firstElementChild).toHaveClass(
+      "ui-skeleton",
+    )
+  })
+
+  test("renders HTML tag contracts correctly", () => {
+    render(
+      <>
+        <Skeleton data-testid="skeleton" />
+        <SkeletonCircle data-testid="skeletonCircle" />
+        <SkeletonText rootProps={{ "data-testid": "skeletonText" }} />
+      </>,
+    )
+    expect(screen.getByTestId("skeleton").tagName).toBe("DIV")
+    expect(screen.getByTestId("skeletonCircle").tagName).toBe("DIV")
+    expect(screen.getByTestId("skeletonText").tagName).toBe("DIV")
+    expect(screen.getByTestId("skeletonText").firstElementChild?.tagName).toBe(
+      "DIV",
+    )
+  })
+
   test("sets loading state attributes correctly", () => {
     const { rerender } = render(<Skeleton data-testid="skeleton" loading />)
     const el = screen.getByTestId("skeleton")

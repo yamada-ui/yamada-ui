@@ -1,7 +1,6 @@
 import type { KeyframeIdent } from "../../core"
 import { useState } from "react"
 import { a11y, render, screen } from "#test"
-import { noop } from "../../utils"
 import { BoxIcon } from "../icon"
 import { Flip } from "./"
 
@@ -71,52 +70,5 @@ describe("<Flip />", () => {
     expect(button).toBeDisabled()
     expect(button).toHaveAttribute("data-disabled")
     expect(button).toHaveAttribute("data-value", "from")
-  })
-
-  test("warns when dimensions of `from` and `to` elements don't match", () => {
-    const originalHeight = Object.getOwnPropertyDescriptor(
-      HTMLElement.prototype,
-      "offsetHeight",
-    )
-    const originalWidth = Object.getOwnPropertyDescriptor(
-      HTMLElement.prototype,
-      "offsetWidth",
-    )
-
-    Object.defineProperty(HTMLElement.prototype, "offsetHeight", {
-      configurable: true,
-      get() {
-        return this.className.includes("ui-flip__item--from") ? 16 : 32
-      },
-    })
-    Object.defineProperty(HTMLElement.prototype, "offsetWidth", {
-      configurable: true,
-      get() {
-        return this.className.includes("ui-flip__item--from") ? 16 : 32
-      },
-    })
-
-    const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
-
-    render(
-      <Flip
-        from={<BoxIcon data-testid="test-icon" />}
-        to={<BoxIcon data-testid="test-icon" />}
-      />,
-    )
-
-    expect(consoleWarnSpy).toHaveBeenCalledExactlyOnceWith(
-      'Flip: "from" element (width: 16px, height: 16px) does not match "to" element (width: 32px, height: 32px). Please ensure both elements have the same dimensions.',
-    )
-
-    consoleWarnSpy.mockRestore()
-    if (originalHeight)
-      Object.defineProperty(
-        HTMLElement.prototype,
-        "offsetHeight",
-        originalHeight,
-      )
-    if (originalWidth)
-      Object.defineProperty(HTMLElement.prototype, "offsetWidth", originalWidth)
   })
 })

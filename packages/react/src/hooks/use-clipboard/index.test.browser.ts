@@ -68,20 +68,6 @@ describe("useClipboard", () => {
     expect(result.current.copied).toBeTruthy()
   })
 
-  test("copied returns to false after the default timeout", async () => {
-    const { act, result } = await renderHook(() =>
-      useClipboard("", { timeout: 100 }),
-    )
-    await act(() => {
-      result.current.onCopy("Test Text")
-    })
-    expect(result.current.copied).toBeTruthy()
-
-    await act(() => vi.advanceTimersByTime(100))
-
-    expect(result.current.copied).toBeFalsy()
-  })
-
   test("copied returns to false after the specified timeout", async () => {
     const { act, result } = await renderHook(() =>
       useClipboard("", { timeout: 100 }),

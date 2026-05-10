@@ -7,6 +7,7 @@ describe("EnvironmentProvider", () => {
       <EnvironmentProvider>
         <div>content</div>
       </EnvironmentProvider>,
+      { withProvider: false },
     )
   })
 

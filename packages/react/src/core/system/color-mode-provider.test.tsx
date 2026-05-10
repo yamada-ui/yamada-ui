@@ -8,6 +8,7 @@ describe("ColorModeProvider", () => {
       <ColorModeProvider>
         <div>content</div>
       </ColorModeProvider>,
+      { withProvider: false },
     )
   })
 

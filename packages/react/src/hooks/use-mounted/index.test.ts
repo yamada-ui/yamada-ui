@@ -1,0 +1,37 @@
+import { act, renderHook } from "#test"
+import { useMounted } from "."
+
+describe("useMounted", () => {
+  beforeEach(() => {
+    vi.useFakeTimers()
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
+  test("should return true after component is mounted and false after unmount", () => {
+    const { result, unmount } = renderHook(() => useMounted())
+    expect(result.current()).toBeTruthy()
+    unmount()
+    expect(result.current()).toBeFalsy()
+  })
+
+  test("should return mounted state when state is true", () => {
+    const { result } = renderHook(() => useMounted({ state: true }))
+
+    expect(result.current).toBeTruthy()
+  })
+
+  test("should return mounted state with delay when state is true and delay is set", () => {
+    const { result } = renderHook(() => useMounted({ delay: 50, state: true }))
+
+    expect(result.current).toBeFalsy()
+
+    act(() => {
+      vi.advanceTimersByTime(50)
+    })
+
+    expect(result.current).toBeTruthy()
+  })
+})

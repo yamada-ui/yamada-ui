@@ -8,6 +8,10 @@ describe("<Tag />", () => {
     await a11y(<Tag>Tag</Tag>)
   })
 
+  test("sets `displayName` correctly", () => {
+    expect(Tag.displayName).toBe("TagRoot")
+  })
+
   test("sets `className` correctly", () => {
     const { rerender } = render(
       <Tag data-testid="tag" endIcon={<CheckIcon />} startIcon={<CheckIcon />}>
@@ -32,6 +36,28 @@ describe("<Tag />", () => {
     expect(tagWithCloseButton.lastElementChild).toHaveClass(
       "ui-tag__icon--close-button",
     )
+  })
+
+  test("renders HTML tag correctly", () => {
+    const { rerender } = render(
+      <Tag data-testid="tag" endIcon={<CheckIcon />} startIcon={<CheckIcon />}>
+        Tag
+      </Tag>,
+    )
+    const tag = screen.getByTestId("tag")
+    expect(tag.tagName).toBe("SPAN")
+    expect(tag.children[0]?.tagName).toBe("SPAN")
+    expect(tag.children[1]?.tagName).toBe("SPAN")
+    expect(tag.children[2]?.tagName).toBe("SPAN")
+
+    rerender(
+      <Tag data-testid="tag" onClose={noop}>
+        Tag
+      </Tag>,
+    )
+    const tagWithCloseButton = screen.getByTestId("tag")
+    expect(tagWithCloseButton.tagName).toBe("SPAN")
+    expect(tagWithCloseButton.lastElementChild?.tagName).toBe("SPAN")
   })
 
   test("renders icons correctly", () => {

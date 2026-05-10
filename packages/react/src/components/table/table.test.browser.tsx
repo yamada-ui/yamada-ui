@@ -1,4 +1,5 @@
-import { page, render } from "#test/browser"
+import { useState } from "react"
+import { a11y, page, render } from "#test/browser"
 import { createColumnHelper, Table } from "./"
 
 interface Data {
@@ -52,85 +53,204 @@ const columns = [
   columnHelper.accessor("email", {}),
 ]
 
-const focusElement = (element: Element | null | undefined) => {
-  if (element instanceof HTMLElement) element.focus()
-}
-
-const getTable = () => {
-  const el = page.getByTestId("table").element()
-  if (!(el instanceof HTMLTableElement))
-    throw new Error("table is not an HTMLTableElement")
-  return el
-}
-
 describe("<Table />", () => {
-  test("arrow keys move browser focus across cells", async () => {
-    const { user } = await render(
+  test("passes a11y checks with keyboard navigation", async () => {
+    await a11y(
       <Table
         columns={columns}
         data={data}
         enableKeyboardNavigation
         enableSorting={false}
-        tableProps={{ "data-testid": "table" }}
       />,
-    )
-
-    const firstTh = getTable().querySelector(
-      '[data-colindex="0"][data-rowindex="0"]',
-    )
-
-    focusElement(firstTh)
-    await user.keyboard("{ArrowRight}")
-
-    expect(document.activeElement).toBe(
-      getTable().querySelector('[data-colindex="1"][data-rowindex="0"]'),
-    )
-
-    await user.keyboard("{ArrowDown}")
-
-    expect(document.activeElement).toBe(
-      getTable().querySelector('[data-colindex="1"][data-rowindex="1"]'),
-    )
-
-    await user.keyboard("{ArrowLeft}")
-
-    expect(document.activeElement).toBe(
-      getTable().querySelector('[data-colindex="0"][data-rowindex="1"]'),
-    )
-
-    await user.keyboard("{ArrowUp}")
-
-    expect(document.activeElement).toBe(
-      getTable().querySelector('[data-colindex="0"][data-rowindex="0"]'),
     )
   })
 
-  test("End and Home keys move browser focus to row boundaries", async () => {
-    const { user } = await render(
-      <Table
-        columns={columns}
-        data={data}
-        enableKeyboardNavigation
-        enableSorting={false}
-        tableProps={{ "data-testid": "table" }}
-      />,
-    )
+  describe("pagination keyboard navigation", () => {
+    test("changes page through PageDown / PageUp keyboard navigation", async () => {
+      const PaginatedTable = () => {
+        const [pagination, setPagination] = useState({
+          pageIndex: 0,
+          pageSize: 2,
+        })
 
-    const firstTh = getTable().querySelector(
-      '[data-colindex="0"][data-rowindex="0"]',
-    )
+        return (
+          <Table
+            columns={columns}
+            data={data}
+            enableKeyboardNavigation
+            enablePagination
+            enableSorting={false}
+            pagination={pagination}
+            onPaginationChange={setPagination}
+          />
+        )
+      }
 
-    focusElement(firstTh)
-    await user.keyboard("{End}")
+      const { user } = await render(<PaginatedTable />)
 
-    expect(document.activeElement).toBe(
-      getTable().querySelector('[data-colindex="3"][data-rowindex="0"]'),
-    )
+      await user.tab()
+      await user.keyboard("{PageDown}")
 
-    await user.keyboard("{Home}")
+      await expect
+        .element(page.getByRole("gridcell").first())
+        .toHaveTextContent("3")
 
-    expect(document.activeElement).toBe(
-      getTable().querySelector('[data-colindex="0"][data-rowindex="0"]'),
-    )
+      await user.keyboard("{PageUp}")
+
+      await expect
+        .element(page.getByRole("gridcell").first())
+        .toHaveTextContent("1")
+    })
+
+    test("does not paginate past last page", async () => {
+      const { user } = await render(
+        <Table
+          columns={columns}
+          data={data}
+          defaultPagination={{ pageIndex: 2, pageSize: 2 }}
+          enableKeyboardNavigation
+          enablePagination
+          enableSorting={false}
+        />,
+      )
+
+      await user.tab()
+      await user.keyboard("{PageDown}")
+
+      await expect
+        .element(page.getByRole("gridcell").first())
+        .toHaveTextContent("5")
+    })
+
+    test("does not paginate before first page", async () => {
+      const { user } = await render(
+        <Table
+          columns={columns}
+          data={data}
+          defaultPagination={{ pageIndex: 0, pageSize: 2 }}
+          enableKeyboardNavigation
+          enablePagination
+          enableSorting={false}
+        />,
+      )
+
+      await user.tab()
+      await user.keyboard("{PageUp}")
+
+      await expect
+        .element(page.getByRole("gridcell").first())
+        .toHaveTextContent("1")
+    })
+
+    test("updates `tabIndex` on the focused cell after page change", async () => {
+      const { user } = await render(
+        <Table
+          columns={columns}
+          data={data}
+          defaultPagination={{ pageIndex: 0, pageSize: 2 }}
+          enableKeyboardNavigation
+          enablePagination
+          enableSorting={false}
+        />,
+      )
+
+      await user.tab()
+      await user.keyboard("{PageDown}")
+
+      await expect
+        .element(page.getByRole("gridcell").first())
+        .toHaveTextContent("3")
+
+      await expect
+        .element(page.getByRole("columnheader").first())
+        .toHaveAttribute("tabindex", "0")
+    })
+  })
+
+  describe("keyboard navigation", () => {
+    test("renders cells with `tabindex` only when `enableKeyboardNavigation` is true", async () => {
+      const { rerender } = await render(
+        <Table
+          columns={columns}
+          data={data}
+          enableKeyboardNavigation={false}
+          enableSorting={false}
+        />,
+      )
+
+      await expect
+        .element(page.getByRole("columnheader").first())
+        .not.toHaveAttribute("tabindex")
+
+      await rerender(
+        <Table
+          columns={columns}
+          data={data}
+          enableKeyboardNavigation
+          enableSorting={false}
+          initialFocusableCell={{ colIndex: 1, rowIndex: 1 }}
+        />,
+      )
+
+      await expect
+        .element(page.getByRole("gridcell").nth(1))
+        .toHaveAttribute("tabindex", "0")
+    })
+
+    test("Arrow keys move across cells", async () => {
+      const { user } = await render(
+        <Table
+          columns={columns}
+          data={data}
+          enableKeyboardNavigation
+          enableSorting={false}
+        />,
+      )
+
+      await user.click(page.getByRole("columnheader").first())
+
+      await user.keyboard("{ArrowRight}")
+      await expect
+        .element(page.getByRole("columnheader").nth(1))
+        .toHaveAttribute("tabindex", "0")
+
+      await user.keyboard("{ArrowDown}")
+      await expect
+        .element(page.getByRole("gridcell").nth(1))
+        .toHaveAttribute("tabindex", "0")
+
+      await user.keyboard("{ArrowLeft}")
+      await expect
+        .element(page.getByRole("gridcell").first())
+        .toHaveAttribute("tabindex", "0")
+
+      await user.keyboard("{ArrowUp}")
+      await expect
+        .element(page.getByRole("columnheader").first())
+        .toHaveAttribute("tabindex", "0")
+    })
+
+    test("Home and End navigate within the row", async () => {
+      const { user } = await render(
+        <Table
+          columns={columns}
+          data={data}
+          enableKeyboardNavigation
+          enableSorting={false}
+        />,
+      )
+
+      await user.click(page.getByRole("columnheader").first())
+
+      await user.keyboard("{End}")
+      await expect
+        .element(page.getByRole("columnheader").nth(columns.length - 1))
+        .toHaveAttribute("tabindex", "0")
+
+      await user.keyboard("{Home}")
+      await expect
+        .element(page.getByRole("columnheader").first())
+        .toHaveAttribute("tabindex", "0")
+    })
   })
 })

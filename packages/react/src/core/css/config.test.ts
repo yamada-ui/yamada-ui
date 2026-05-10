@@ -1,5 +1,5 @@
 import type { Dict } from "../../utils"
-import { system } from "#test/browser"
+import { system } from "#test"
 import { transforms } from "./config"
 
 describe("bgClip", () => {

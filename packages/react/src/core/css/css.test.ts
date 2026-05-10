@@ -1,4 +1,4 @@
-import { styledTheme, system } from "#test/browser"
+import { styledTheme, system } from "#test"
 import { getCondition } from "./conditions"
 import { css } from "./css"
 

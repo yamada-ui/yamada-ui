@@ -1,4 +1,4 @@
-import { system } from "#test/browser"
+import { system } from "#test"
 import { generateCalc } from "./calc"
 
 describe("generateCalc", () => {

@@ -1,4 +1,4 @@
-import { system } from "#test/browser"
+import { system } from "#test"
 import { generateFilter } from "./filter"
 
 describe("generateFilter", () => {

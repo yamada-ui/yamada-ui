@@ -28,4 +28,4 @@
 
 If neither, the prop has no effect on this element. "The root might want to suppress everything" is not a reason — the prop is per-element by design, not a cascading flag.
 
-When a PR "propagates" a prop to many internal elements, verify per-element — same site-specific necessity check as [utility over-application](utility-over-application.md).
+When a PR "propagates" a prop to many internal elements, verify per-element — same site-specific necessity check as [merge-props over-application](merge-props-over-application.md).

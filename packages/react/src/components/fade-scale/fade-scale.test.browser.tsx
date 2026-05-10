@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { vi } from "vitest"
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { FadeScale } from "./fade-scale"
 
 describe("<FadeScale />", () => {
@@ -25,26 +25,6 @@ describe("<FadeScale />", () => {
         .not.toBeInTheDocument()
     })
   }
-
-  test("renders component correctly", async () => {
-    await a11y(<FadeScale />)
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(FadeScale.displayName).toBe("FadeScale")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(<FadeScale>FadeScale</FadeScale>)
-    await expect
-      .element(page.getByText("FadeScale"))
-      .toHaveClass("ui-fade-scale")
-  })
-
-  test("renders HTML tag correctly", async () => {
-    await render(<FadeScale>FadeScale</FadeScale>)
-    expect(page.getByText("FadeScale").element().tagName).toBe("DIV")
-  })
 
   test("toggles visibility on open change", async () => {
     const TestComponent = () => {

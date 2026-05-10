@@ -18,12 +18,11 @@ describe("<Checkbox />", () => {
   test("sets `aria-checked` to mixed and native `indeterminate` when indeterminate", () => {
     render(<Checkbox indeterminate>checkbox</Checkbox>)
 
-    const input = screen.getByRole("checkbox")
+    const input = screen.getByRole("checkbox") as HTMLInputElement
 
     expect(input).toHaveAttribute("aria-checked", "mixed")
     expect(input).toBeInstanceOf(HTMLInputElement)
-    if (input instanceof HTMLInputElement)
-      expect(input.indeterminate).toBeTruthy()
+    expect(input.indeterminate).toBeTruthy()
   })
 
   test("forwards `aria-controls` to the input element", () => {

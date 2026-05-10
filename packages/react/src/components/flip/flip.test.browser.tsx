@@ -1,46 +1,12 @@
 import type { KeyframeIdent } from "../../core"
 import { useState } from "react"
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { noop } from "../../utils"
 import { BoxIcon } from "../icon"
 import { Flip } from "./"
 
 describe("<Flip />", () => {
-  test("renders component correctly", async () => {
-    await a11y(<Flip from="ON" to="OFF" />)
-  })
-
-  test("applies custom `aria-label`", async () => {
-    await render(<Flip aria-label="Toggle icon" from="ON" to="OFF" />)
-
-    await expect
-      .element(page.getByRole("button"))
-      .toHaveAttribute("aria-label", "Toggle icon")
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Flip.displayName).toBe("FlipRoot")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(<Flip from="ON" to="OFF" />)
-    await expect
-      .element(page.getByText("ON").element().parentElement)
-      .toHaveClass("ui-flip__root")
-    await expect
-      .element(page.getByText("ON"))
-      .toHaveClass("ui-flip__item", "ui-flip__item--from")
-    await expect
-      .element(page.getByText("OFF"))
-      .toHaveClass("ui-flip__item", "ui-flip__item--to")
-  })
-
-  test("renders HTML tag correctly", async () => {
-    await render(<Flip from="ON" to="OFF" />)
-    expect(page.getByText("ON").element().parentElement?.tagName).toBe("BUTTON")
-  })
-
-  test("should render Flip with value and onChange", async () => {
+  test("toggles `data-value` on user click", async () => {
     const TestComponent = () => {
       const [value, onChange] = useState<KeyframeIdent>("to")
 
@@ -56,93 +22,89 @@ describe("<Flip />", () => {
 
     const { user } = await render(<TestComponent />)
 
-    const button = page.getByRole("button").element() as HTMLButtonElement
-    expect(button).toHaveAttribute("data-value", "to")
+    const button = page.getByRole("button")
+    await expect.element(button).toHaveAttribute("data-value", "to")
 
     await user.click(button)
 
-    await vi.waitFor(() => {
-      expect(button).toHaveAttribute("data-value", "from")
-    })
+    await expect.element(button).toHaveAttribute("data-value", "from")
   })
 
-  test("should be read only", async () => {
+  test("does not toggle when `readOnly`", async () => {
     const { user } = await render(
       <Flip from={<BoxIcon />} readOnly to={<BoxIcon />} />,
     )
 
-    const button = page.getByRole("button").element() as HTMLButtonElement
-    expect(button).toHaveAttribute("data-value", "from")
+    const button = page.getByRole("button")
+    await expect.element(button).toHaveAttribute("data-value", "from")
 
     await user.click(button)
-    expect(button).toHaveAttribute("data-value", "from")
+    await expect.element(button).toHaveAttribute("data-value", "from")
   })
 
-  test("should be disabled", async () => {
-    await render(<Flip disabled from={<BoxIcon />} to={<BoxIcon />} />)
-
-    const button = page.getByRole("button").element() as HTMLButtonElement
-    expect(button).toHaveAttribute("data-disabled")
-    expect(button).toHaveAttribute("data-value", "from")
-
-    button.dispatchEvent(new MouseEvent("click", { bubbles: true }))
-
-    expect(button).toHaveAttribute("data-value", "from")
-  })
-
-  test("should be render Flip with orientation", async () => {
-    await render(
-      <Flip
-        disabled
-        from={<BoxIcon />}
-        orientation="vertical"
-        to={<BoxIcon />}
-      />,
+  test("does not toggle when `disabled`", async () => {
+    const { user } = await render(
+      <Flip disabled from={<BoxIcon />} to={<BoxIcon />} />,
     )
 
-    const button = page.getByRole("button").element() as HTMLButtonElement
-    expect(button).toHaveAttribute("data-orientation", "vertical")
+    const button = page.getByRole("button")
+    await expect.element(button).toHaveAttribute("data-value", "from")
+
+    await expect(user.click(button, { timeout: 200 })).rejects.toThrow(
+      /Timeout/,
+    )
+    await expect.element(button).toHaveAttribute("data-value", "from")
   })
 
-  test("should warn when dimensions of from element and to element don't match", async () => {
-    const mockElementDimensions = (
-      height: { from: number; to: number },
-      width: { from: number; to: number },
-    ) => {
+  test("warns when dimensions of `from` and `to` elements don't match", async () => {
+    const originalHeight = Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      "offsetHeight",
+    )
+    const originalWidth = Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      "offsetWidth",
+    )
+    const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
+
+    try {
       Object.defineProperty(HTMLElement.prototype, "offsetHeight", {
         configurable: true,
         get() {
-          return this.className.includes("ui-flip__item--from")
-            ? height.from
-            : height.to
+          return this.className.includes("ui-flip__item--from") ? 16 : 32
         },
       })
-
       Object.defineProperty(HTMLElement.prototype, "offsetWidth", {
         configurable: true,
         get() {
-          return this.className.includes("ui-flip__item--from")
-            ? width.from
-            : width.to
+          return this.className.includes("ui-flip__item--from") ? 16 : 32
         },
       })
+
+      await render(
+        <Flip
+          from={<BoxIcon data-testid="test-icon" />}
+          to={<BoxIcon data-testid="test-icon" />}
+        />,
+      )
+
+      expect(consoleWarnSpy).toHaveBeenCalledExactlyOnceWith(
+        'Flip: "from" element (width: 16px, height: 16px) does not match "to" element (width: 32px, height: 32px). Please ensure both elements have the same dimensions.',
+      )
+    } finally {
+      consoleWarnSpy.mockRestore()
+      if (originalHeight)
+        Object.defineProperty(
+          HTMLElement.prototype,
+          "offsetHeight",
+          originalHeight,
+        )
+      if (originalWidth)
+        Object.defineProperty(
+          HTMLElement.prototype,
+          "offsetWidth",
+          originalWidth,
+        )
     }
-
-    const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
-
-    mockElementDimensions({ from: 16, to: 32 }, { from: 16, to: 32 })
-
-    await render(
-      <Flip
-        from={<BoxIcon data-testid="test-icon" />}
-        to={<BoxIcon data-testid="test-icon" />}
-      />,
-    )
-
-    expect(consoleWarnSpy).toHaveBeenCalledExactlyOnceWith(
-      'Flip: "from" element (width: 16px, height: 16px) does not match "to" element (width: 32px, height: 32px). Please ensure both elements have the same dimensions.',
-    )
-
-    consoleWarnSpy.mockRestore()
   })
 })

@@ -6,11 +6,6 @@
     "hooks": [],
     "providers": []
   },
-  "dependents": {
-    "components": ["float", "stack"],
-    "hooks": [],
-    "providers": []
-  },
   "section": "components",
   "sources": [
     {

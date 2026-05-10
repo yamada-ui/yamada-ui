@@ -7,7 +7,7 @@
     "providers": []
   },
   "dependents": {
-    "components": ["group", "stack", "wrap"],
+    "components": ["group", "wrap"],
     "hooks": [],
     "providers": []
   },

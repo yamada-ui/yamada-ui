@@ -1,32 +1,7 @@
-import { a11y, page, render } from "#test/browser"
-import { Box } from "../box"
+import { page, render } from "#test/browser"
 import { Float } from "./"
 
 describe("<Float />", () => {
-  test("renders component correctly", async () => {
-    await a11y(
-      <Box position="relative">
-        <Float>New</Float>
-      </Box>,
-    )
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Float.displayName).toBe("Float")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(<Float>Float</Float>)
-
-    await expect.element(page.getByText("Float")).toHaveClass("ui-float")
-  })
-
-  test("renders HTML tag correctly", async () => {
-    await render(<Float>Float</Float>)
-
-    expect(page.getByText("Float").element().tagName).toBe("DIV")
-  })
-
   test("applies to both block and inline given a single offset", async () => {
     await render(<Float offset="2">Float</Float>)
 

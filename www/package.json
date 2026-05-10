@@ -10,7 +10,7 @@
     "#velite": "./.velite"
   },
   "scripts": {
-    "clean": "rimraf node_modules .next .velite tsconfig.tsbuildinfo",
+    "clean": "rimraf node_modules .next .velite .turbo tsconfig.tsbuildinfo",
     "dev:content": "velite --watch",
     "dev:next": "next dev",
     "dev": "turbo run www#dev:next",

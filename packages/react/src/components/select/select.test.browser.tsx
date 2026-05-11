@@ -77,15 +77,17 @@ describe("<Select />", () => {
 
     await expect.element(option1).toBeVisible()
     await user.click(option1)
+    await waitFor(() => {
+      expect(onChange).toHaveBeenCalledWith(["one"])
+    })
     await expect.element(option1).toHaveAttribute("aria-selected", "true")
 
     await expect.element(option2).toBeVisible()
     await user.click(option2)
-    await expect.element(option2).toHaveAttribute("aria-selected", "true")
-
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
+    await expect.element(option2).toHaveAttribute("aria-selected", "true")
 
     await expect.element(option3).toBeVisible()
     await expect.element(option3).toHaveAttribute("aria-disabled", "true")

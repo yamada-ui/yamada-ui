@@ -19,14 +19,14 @@ env:
 
 jobs:
   test:
-    name: React / ${{ matrix.name }} ${{ matrix.shard_index }}/6
+    name: React / ${{ matrix.name }} ${{ matrix.shard_index }}/4
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     strategy:
       fail-fast: false
       matrix:
         browser: [chromium, firefox, webkit]
-        shard_index: [1, 2, 3, 4, 5, 6]
+        shard_index: [1, 2, 3, 4]
         include:
           - browser: chromium
             name: Chromium
@@ -70,14 +70,14 @@ jobs:
 
       - name: Run test (full)
         if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.full_any_changed == 'true'
-        run: pnpm turbo run test:coverage:${{ matrix.browser }} --filter=./packages/react -- --retry=3 --shard=${{ matrix.shard_index }}/6
+        run: pnpm turbo run ${{ matrix.browser == 'firefox' && 'test:firefox' || format('test:coverage:{0}', matrix.browser) }} --filter=./packages/react -- ${{ matrix.browser == 'firefox' && '--run' || '' }} --retry=3 --shard=${{ matrix.shard_index }}/4
 
       - name: Run test (diff)
         if: inputs.TURBO_SCM_BASE != '' && steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true'
-        run: pnpm turbo run test:coverage:${{ matrix.browser }} --filter=./packages/react -- --retry=3 --changed ${{ inputs.TURBO_SCM_BASE }} --shard=${{ matrix.shard_index }}/6
+        run: pnpm turbo run ${{ matrix.browser == 'firefox' && 'test:firefox' || format('test:coverage:{0}', matrix.browser) }} --filter=./packages/react -- ${{ matrix.browser == 'firefox' && '--run' || '' }} --retry=3 --changed ${{ inputs.TURBO_SCM_BASE }} --shard=${{ matrix.shard_index }}/4
 
       - name: Upload coverage
-        if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.changed_keys != ''
+        if: matrix.browser != 'firefox' && (inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.changed_keys != '')
         uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe # v5.5.4
         with:
           disable_search: true

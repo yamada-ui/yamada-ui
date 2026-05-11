@@ -14,7 +14,7 @@ import type { UseDisclosureProps } from "../use-disclosure"
 import { useCallback, useId, useMemo, useRef } from "react"
 import scrollIntoView from "scroll-into-view-if-needed"
 import { usePopoverProps } from "../../components/popover"
-import { useEnvironment } from "../../core"
+import { mergeProps, useEnvironment } from "../../core"
 import {
   ariaAttr,
   createContext,
@@ -542,27 +542,28 @@ export const useCombobox = (props: UseComboboxProps = {}) => {
 
   const getTriggerProps: PropGetter = useCallback(
     ({
-      ref,
       "aria-label": ariaLabel,
       "aria-labelledby": ariaLabelledby,
       ...props
-    } = {}) => ({
-      "aria-controls": open ? contentId : undefined,
-      "aria-disabled": ariaAttr(!interactive),
-      "aria-expanded": open,
-      "aria-haspopup": "listbox",
-      "aria-label": ariaLabel || ariaLabelProp,
-      "aria-labelledby": cx(ariaLabelledby, ariaLabelledbyProp),
-      "data-disabled": dataAttr(disabled),
-      "data-readonly": dataAttr(readOnly),
-      role: "combobox",
-      tabIndex: interactive ? 0 : -1,
-      ...rest,
-      ...props,
-      ref: mergeRefs(ref, rest.ref, triggerRef),
-      onClick: handlerAll(props.onClick, rest.onClick, onClick),
-      onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
-    }),
+    } = {}) =>
+      mergeProps(
+        {
+          ref: triggerRef,
+          "aria-controls": open ? contentId : undefined,
+          "aria-disabled": ariaAttr(!interactive),
+          "aria-expanded": open,
+          "aria-haspopup": "listbox",
+          "aria-label": ariaLabel || ariaLabelProp,
+          "aria-labelledby": cx(ariaLabelledby, ariaLabelledbyProp),
+          "data-disabled": dataAttr(disabled),
+          "data-readonly": dataAttr(readOnly),
+          role: "combobox",
+          tabIndex: interactive ? 0 : -1,
+        },
+        rest,
+        props,
+        { onClick, onKeyDown },
+      )(),
     [
       open,
       contentId,
@@ -622,12 +623,15 @@ export const useComboboxGroup = ({
   const labelId = useId()
 
   const getGroupProps: PropGetter = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      "aria-labelledby": cx(ariaLabelledbyProp, ariaLabelledby, labelId),
-      role: "group",
-      ...rest,
-      ...props,
-    }),
+    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) =>
+      mergeProps(
+        {
+          "aria-labelledby": cx(ariaLabelledbyProp, ariaLabelledby, labelId),
+          role: "group",
+        },
+        rest,
+        props,
+      )(),
     [ariaLabelledbyProp, labelId, rest],
   )
 
@@ -705,21 +709,23 @@ export const useComboboxItem = ({
   )
 
   const getItemProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
-      id,
-      "aria-disabled": ariaDisabled ?? ariaAttr(disabled),
-      "aria-selected": selected,
-      "data-disabled": dataDisabled ?? dataAttr(disabled),
-      "data-selected": dataAttr(selected),
-      "data-value": value,
-      role: "option",
-      tabIndex: -1,
-      ...rest,
-      ...props,
-      ref: mergeRefs(ref, rest.ref, itemRef, register),
-      onClick: handlerAll(props.onClick, rest.onClick, onClick),
-      onMouseMove: handlerAll(props.onMouseMove, rest.onMouseMove, onActive),
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          id,
+          ref: itemRef,
+          "aria-disabled": ariaDisabled ?? ariaAttr(disabled),
+          "aria-selected": selected,
+          "data-disabled": dataDisabled ?? dataAttr(disabled),
+          "data-selected": dataAttr(selected),
+          "data-value": value,
+          role: "option",
+          tabIndex: -1,
+        },
+        rest,
+        props,
+        { ref: register, onClick, onMouseMove: onActive },
+      )(),
     [
       id,
       ariaDisabled,
@@ -735,10 +741,8 @@ export const useComboboxItem = ({
   )
 
   const getIndicatorProps: PropGetter = useCallback(
-    ({ style, ...props } = {}) => ({
-      style: { opacity: selected ? 1 : 0, ...style },
-      ...props,
-    }),
+    (props = {}) =>
+      mergeProps({ style: { opacity: selected ? 1 : 0 } }, props)(),
     [selected],
   )
 

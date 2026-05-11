@@ -26,32 +26,35 @@ describe("<Select />", () => {
     await expect
       .element(page.getByRole("option", { name: "Option 1" }))
       .toBeVisible()
-    await user.click(page.getByRole("option", { name: "Option 1" }), {
-      force: true,
-    })
+    await user.click(page.getByRole("option", { name: "Option 1" }))
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one"])
     })
+    await expect
+      .element(page.getByRole("option", { name: "Option 1" }))
+      .toHaveAttribute("aria-selected", "true")
 
     await expect
       .element(page.getByRole("option", { name: "Option 2" }))
       .toBeVisible()
-    await user.click(page.getByRole("option", { name: "Option 2" }), {
-      force: true,
-    })
+    await user.click(page.getByRole("option", { name: "Option 2" }))
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
+    await expect
+      .element(page.getByRole("option", { name: "Option 2" }))
+      .toHaveAttribute("aria-selected", "true")
 
     await expect
       .element(page.getByRole("option", { name: "Option 1" }))
       .toBeVisible()
-    await user.click(page.getByRole("option", { name: "Option 1" }), {
-      force: true,
-    })
+    await user.click(page.getByRole("option", { name: "Option 1" }))
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["two"])
     })
+    await expect
+      .element(page.getByRole("option", { name: "Option 1" }))
+      .toHaveAttribute("aria-selected", "false")
   })
 
   test("respects max selection limit in multiple mode", async () => {

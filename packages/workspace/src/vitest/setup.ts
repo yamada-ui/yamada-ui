@@ -22,3 +22,17 @@ if (typeof window.matchMedia !== "function") {
     writable: true,
   })
 }
+
+if (typeof globalThis.ResizeObserver !== "function") {
+  class ResizeObserverMock {
+    observe = vi.fn()
+    unobserve = vi.fn()
+    disconnect = vi.fn()
+  }
+
+  Object.defineProperty(globalThis, "ResizeObserver", {
+    configurable: true,
+    value: ResizeObserverMock,
+    writable: true,
+  })
+}

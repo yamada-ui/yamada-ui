@@ -18,8 +18,8 @@ env:
   TURBO_SCM_BASE: ${{ inputs.TURBO_SCM_BASE }}
 
 jobs:
-  test:
-    name: CLI / Node
+  test_cli:
+    name: CLI - Node
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:

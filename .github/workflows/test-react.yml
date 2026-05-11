@@ -18,8 +18,8 @@ env:
   TURBO_SCM_BASE: ${{ inputs.TURBO_SCM_BASE }}
 
 jobs:
-  test:
-    name: React / ${{ matrix.name }} ${{ matrix.shard_index }}/4
+  test_react:
+    name: React - ${{ matrix.name }} ${{ matrix.shard_index }}/4
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     strategy:
@@ -30,23 +30,16 @@ jobs:
         include:
           - env: jsdom
             name: JSDOM
-            diff: |
-              - '!packages/react/src/**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx}'
+            diff: "!packages/react/src/**/*.@(test.browser|test.chromium|test.firefox|test.webkit).{ts,tsx,mts}"
           - env: chromium
             name: Chromium
-            diff: |
-              - '!packages/react/src/**/*.test.{ts,tsx,mts}'
-              - '!packages/react/src/**/*.test.{firefox,webkit}.{ts,tsx,mts}'
+            diff: "!packages/react/src/**/*.@(test|test.firefox|test.webkit).{ts,tsx,mts}"
           - env: firefox
             name: Firefox
-            diff: |
-              - '!packages/react/src/**/*.test.{ts,tsx,mts}'
-              - '!packages/react/src/**/*.test.{chromium,webkit}.{ts,tsx,mts}'
+            diff: "!packages/react/src/**/*.@(test|test.chromium|test.webkit).{ts,tsx,mts}"
           - env: webkit
             name: Webkit
-            diff: |
-              - '!packages/react/src/**/*.test.{ts,tsx,mts}'
-              - '!packages/react/src/**/*.test.{chromium,firefox}.{ts,tsx,mts}'
+            diff: "!packages/react/src/**/*.@(test|test.chromium|test.firefox).{ts,tsx,mts}"
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -68,7 +61,7 @@ jobs:
             diff:
               - packages/react/src/**/*.{ts,tsx,mts}
               - '!packages/react/src/**/*.stories.{ts,tsx}'
-                ${{ matrix.diff }}
+              - '${{ matrix.diff }}'
 
       - name: Install
         if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.changed_keys != ''

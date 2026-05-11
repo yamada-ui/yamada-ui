@@ -9,9 +9,7 @@ describe("<Autocomplete />", () => {
     input: HTMLInputElement,
     value: string,
   ) => {
-    await user.clear(input)
-
-    if (value) await user.type(input, value)
+    await user.fill(input, value)
   }
 
   test("does not hide separator when blurring to content in multiple mode", async () => {

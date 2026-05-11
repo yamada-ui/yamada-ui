@@ -100,6 +100,9 @@ describe("<Popover />", () => {
     await user.keyboard("{Escape}")
 
     await expect
+      .element(page.getByTestId("popoverContent").query())
+      .not.toBeInTheDocument()
+    await expect
       .poll(() => document.activeElement)
       .toBe(triggerButton.element())
   })
@@ -126,7 +129,7 @@ describe("<Popover />", () => {
     await expect.poll(() => page.getByText("Popover Footer").query()).toBeNull()
   })
 
-  test("should close when close trigger is clicked", async () => {
+  test("should close when close trigger is activated", async () => {
     const { user } = await render(<ComponentWithCloseTrigger />)
 
     const triggerButton = page.getByRole("button", {
@@ -139,12 +142,13 @@ describe("<Popover />", () => {
       name: "Close",
     })
 
-    await user.click(closeButton)
+    closeButton.element().focus()
+    await user.keyboard("{Enter}")
 
     await expect.poll(() => page.getByText("Popover Header").query()).toBeNull()
   })
 
-  test("should return focus to trigger after close trigger is clicked", async () => {
+  test("should return focus to trigger after close trigger is activated", async () => {
     const { user } = await render(<ComponentWithCloseTrigger />)
 
     const triggerButton = page.getByRole("button", {
@@ -157,7 +161,9 @@ describe("<Popover />", () => {
       name: "Close",
     })
 
-    await user.click(closeButton)
+    closeButton.element().focus()
+    await user.keyboard("{Enter}")
+    await expect.poll(() => page.getByText("Popover Header").query()).toBeNull()
 
     await expect
       .poll(() => document.activeElement)

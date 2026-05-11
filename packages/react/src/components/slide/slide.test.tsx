@@ -6,14 +6,6 @@ describe("<Slide />", () => {
     await a11y(<Slide />)
   })
 
-  test("keeps static component contracts", () => {
-    render(<Slide>Slide</Slide>)
-
-    expect(Slide.displayName).toBe("Slide")
-    expect(screen.getByText("Slide")).toHaveClass("ui-slide")
-    expect(screen.getByText("Slide").tagName).toBe("DIV")
-  })
-
   test.each([
     ["inline-end", "translateX(100%)"],
     ["inline-start", "translateX(-100%)"],

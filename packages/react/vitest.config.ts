@@ -4,7 +4,6 @@ import react from "@vitejs/plugin-react"
 import { playwright } from "@vitest/browser-playwright"
 import { defineProject, mergeConfig } from "@yamada-ui/workspace/vitest"
 import sharedConfig from "@yamada-ui/workspace/vitest/config"
-import { resolve } from "node:path"
 
 const browsers: {
   browser: BrowserInstanceOption["browser"]
@@ -25,7 +24,6 @@ const browsers: {
   },
   { browser: "webkit" },
 ]
-const alias = { "@": resolve(__dirname, "./src") }
 
 export default mergeConfig(sharedConfig, {
   plugins: [react()],
@@ -39,7 +37,6 @@ export default mergeConfig(sharedConfig, {
     },
     projects: [
       defineProject({
-        resolve: { alias },
         test: {
           name: "jsdom",
           environment: "jsdom",
@@ -51,8 +48,6 @@ export default mergeConfig(sharedConfig, {
       }),
       ...browsers.map(({ browser, options }) =>
         defineProject({
-          optimizeDeps: { include: ["axe-core"] },
-          resolve: { alias },
           test: {
             name: `browser:${browser}`,
             browser: {

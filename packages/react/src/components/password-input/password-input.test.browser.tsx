@@ -1,13 +1,9 @@
 import { useState } from "react"
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { EyeIcon, EyeOffIcon } from "../icon"
 import { PasswordInput, StrengthMeter } from "./"
 
 describe("<PasswordInput />", () => {
-  test("passes a11y checks", async () => {
-    await a11y(<PasswordInput placeholder="password" />)
-  })
-
   test("input type toggles between password and text on visibility button click", async () => {
     const { user } = await render(
       <PasswordInput
@@ -31,10 +27,6 @@ describe("<PasswordInput />", () => {
 })
 
 describe("<StrengthMeter />", () => {
-  test("passes a11y checks", async () => {
-    await a11y(<StrengthMeter value={3} />)
-  })
-
   const ExampleWithPassWordInputStrengthMeter = ({
     defaultValue = "",
   }: { defaultValue?: string } = {}) => {

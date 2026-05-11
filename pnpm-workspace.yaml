@@ -10,8 +10,10 @@ catalog:
   "@tanstack/react-router": ^1.168.25
   "@types/yamljs": ^0.2.34
   "@typescript/native-preview": 7.0.0-dev.20260507.1
-  "@vitejs/plugin-react": ^6.0.1
+  "@vitest/browser": ^4.1.5
+  "@vitest/browser-playwright": ^4.1.5
   "@vitest/ui": ^4.1.5
+  "@vitejs/plugin-react": ^6.0.1
   commander: ^14.0.3
   dayjs: ^1.11.20
   dotenv: ^17.4.0
@@ -23,6 +25,7 @@ catalog:
   oxlint-tsgolint: ^0.22.1
   ora: ^9.4.0
   oxfmt: ^0.48.0
+  playwright: ^1.59.1
   picocolors: ^1.1.1
   prettier: ^3.8.1
   react: ^19.2.4

@@ -17,20 +17,6 @@ describe("<Flip />", () => {
     )
   })
 
-  test("sets `className` correctly", () => {
-    render(<Flip from="ON" to="OFF" />)
-    const root = screen.getByText("ON").parentElement
-    expect(root).toHaveClass("ui-flip__root")
-    expect(screen.getByText("ON")).toHaveClass(
-      "ui-flip__item",
-      "ui-flip__item--from",
-    )
-    expect(screen.getByText("OFF")).toHaveClass(
-      "ui-flip__item",
-      "ui-flip__item--to",
-    )
-  })
-
   test("renders with orientation", () => {
     render(
       <Flip

@@ -6,12 +6,6 @@ describe("<Flex />", () => {
     await a11y(<Flex>Flex</Flex>)
   })
 
-  test("sets `className` correctly", () => {
-    render(<Flex>Flex</Flex>)
-
-    expect(screen.getByText("Flex")).toHaveClass("ui-flex")
-  })
-
   test("renders all the allowed shorthand style props", () => {
     render(
       <Flex

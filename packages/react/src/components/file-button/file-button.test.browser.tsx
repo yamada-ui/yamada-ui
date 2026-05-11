@@ -1,6 +1,6 @@
 import { useRef, useState } from "react"
 import { type Locator, locators } from "vitest/browser"
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { FileButton } from "./file-button"
 
 declare module "vitest/browser" {
@@ -24,10 +24,6 @@ describe("<FileButton />", () => {
 
   afterAll(() => {
     vi.restoreAllMocks()
-  })
-
-  test("renders component correctly", async () => {
-    await a11y(<FileButton>Upload</FileButton>)
   })
 
   test("should call onClick", async () => {

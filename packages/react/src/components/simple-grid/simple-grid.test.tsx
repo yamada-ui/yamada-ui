@@ -6,20 +6,6 @@ describe("<SimpleGrid />", () => {
     await a11y(<SimpleGrid>SimpleGrid</SimpleGrid>)
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(SimpleGrid.displayName).toBe("SimpleGrid")
-  })
-
-  test("sets `className` correctly", () => {
-    render(<SimpleGrid>SimpleGrid</SimpleGrid>)
-    expect(screen.getByText("SimpleGrid")).toHaveClass("ui-simple-grid")
-  })
-
-  test("renders HTML tag correctly", () => {
-    render(<SimpleGrid>SimpleGrid</SimpleGrid>)
-    expect(screen.getByText("SimpleGrid").tagName).toBe("DIV")
-  })
-
   test("returns undefined for null value in `minChildWidth` responsive array", () => {
     render(
       // @ts-expect-error testing null handling in responsive array

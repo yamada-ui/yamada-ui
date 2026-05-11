@@ -99,9 +99,7 @@ describe("<Popover />", () => {
     await expect.poll(() => document.activeElement).toBe(popoverContent)
     await user.keyboard("{Escape}")
 
-    await expect
-      .poll(() => document.activeElement)
-      .toBe(triggerButton.element())
+    await expect.element(triggerButton).toHaveFocus()
   })
 
   test("can close on blur", async () => {
@@ -159,9 +157,7 @@ describe("<Popover />", () => {
 
     await user.click(closeButton)
 
-    await expect
-      .poll(() => document.activeElement)
-      .toBe(triggerButton.element())
+    await expect.element(triggerButton).toHaveFocus()
   })
 
   test("should apply modal behavior when `modal` is true", async () => {

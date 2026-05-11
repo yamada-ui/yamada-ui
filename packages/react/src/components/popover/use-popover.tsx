@@ -169,6 +169,13 @@ export const usePopover = ({
 
   assignRef(updateRef, update)
 
+  const onRestoreFocus = useCallback(() => {
+    clearTimeout(closeTimeout.current)
+    closeTimeout.current = setTimeout(() => {
+      triggerRef.current?.focus()
+    })
+  }, [])
+
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLElement>) => {
       runKeyAction(ev, {
@@ -176,12 +183,11 @@ export const usePopover = ({
           if (!closeOnEsc) return
 
           onClose()
-
-          triggerRef.current?.focus()
+          onRestoreFocus()
         },
       })
     },
-    [closeOnEsc, onClose],
+    [closeOnEsc, onClose, onRestoreFocus],
   )
 
   const onBlur = useCallback(
@@ -329,11 +335,10 @@ export const usePopover = ({
       ...props,
       onClick: handlerAll(props.onClick, () => {
         onClose()
-
-        triggerRef.current?.focus()
+        onRestoreFocus()
       }),
     }),
-    [onClose],
+    [onClose, onRestoreFocus],
   )
 
   return {

@@ -5,12 +5,6 @@ import "@testing-library/jest-dom/vitest"
 
 expect.extend(matchers)
 
-const getComputedStyle = window.getComputedStyle.bind(window)
-
-window.getComputedStyle = (el) => getComputedStyle(el)
-window.Element.prototype.scrollTo = () => void 0
-window.scrollTo = () => void 0
-
 if (typeof window.matchMedia !== "function") {
   Object.defineProperty(window, "matchMedia", {
     configurable: true,
@@ -28,15 +22,3 @@ if (typeof window.matchMedia !== "function") {
     writable: true,
   })
 }
-
-global.TextEncoder = (await import("node:util")).TextEncoder
-
-global.ResizeObserver = class ResizeObserverMock {
-  disconnect = vi.fn()
-  observe = vi.fn()
-  unobserve = vi.fn()
-}
-
-vi.spyOn(window.HTMLCanvasElement.prototype, "getContext").mockImplementation(
-  () => null,
-)

@@ -18,14 +18,6 @@ class IntersectionObserverWrapper extends realIntersectionObserver {
   }
 }
 
-const getRootDiv = (container: Element) => {
-  const root = container.firstChild
-  if (!(root instanceof HTMLDivElement)) {
-    throw new Error("Expected the rendered root to be an HTMLDivElement.")
-  }
-  return root
-}
-
 describe("<InfiniteScrollArea />", () => {
   beforeEach(() => {
     intersectionObserverSpy.mockClear()
@@ -414,10 +406,11 @@ describe("useInfiniteScroll", () => {
       )
     }
 
-    const { container } = await render(<MyComponent />)
-    const root = getRootDiv(container)
+    await render(<MyComponent />)
 
-    await vi.waitFor(() => expect(root.tabIndex).toBe(0))
+    await expect
+      .element(page.getByTestId("root"))
+      .toHaveAttribute("tabindex", "0")
   })
 
   test("does not override an existing tabindex on the root", async () => {
@@ -432,15 +425,21 @@ describe("useInfiniteScroll", () => {
       })
 
       return (
-        <div ref={rootRef} style={{ overflowY: "auto" }} tabIndex={-1}>
+        <div
+          ref={rootRef}
+          style={{ overflowY: "auto" }}
+          data-testid="root"
+          tabIndex={-1}
+        >
           {!finish ? <div ref={ref} data-testid="trigger" /> : null}
         </div>
       )
     }
 
-    const { container } = await render(<MyComponent />)
-    const root = getRootDiv(container)
+    await render(<MyComponent />)
 
-    expect(root.tabIndex).toBe(-1)
+    await expect
+      .element(page.getByTestId("root"))
+      .toHaveAttribute("tabindex", "-1")
   })
 })

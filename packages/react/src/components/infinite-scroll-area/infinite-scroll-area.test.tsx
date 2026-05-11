@@ -3,8 +3,6 @@ import { InfiniteScrollArea } from "."
 import { noop } from "../../utils"
 
 describe("<InfiniteScrollArea />", () => {
-  // jsdom does not implement IntersectionObserver; supply a no-op stub so the
-  // component can mount during the axe pass.
   const defaultIntersectionObserver = globalThis.IntersectionObserver
   const IntersectionObserverMock = vi.fn(
     function IntersectionObserverMock(this: {

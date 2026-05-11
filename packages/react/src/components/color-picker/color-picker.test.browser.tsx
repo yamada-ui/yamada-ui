@@ -10,7 +10,6 @@ describe("<ColorPicker />", () => {
   const defaultEyeDropper = (window as any).EyeDropper
   const openEyeDropper = vi.fn()
 
-  // EyeDropper opens a native OS color picker; cannot be automated by Playwright.
   class EyeDropperMock {
     open = openEyeDropper
   }

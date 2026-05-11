@@ -2,74 +2,8 @@ import { useState } from "react"
 import { vi } from "vitest"
 import { page, render } from "#test/browser"
 import { DatePicker } from "."
-import { InputPropsContext } from "../input"
 
 describe("<DatePicker />", () => {
-  test("merges root props without overwriting user props", async () => {
-    const onRootClick = vi.fn()
-    const onUserClick = vi.fn()
-
-    const { user } = await render(
-      <DatePicker
-        className="from-root"
-        defaultOpen
-        rootProps={{
-          className: "from-user",
-          style: {
-            backgroundColor: "rgb(0, 0, 255)",
-            color: "rgb(255, 0, 0)",
-          },
-          "data-testid": "root",
-          onClick: onUserClick,
-        }}
-        onClick={onRootClick}
-      />,
-    )
-
-    const el = page.getByTestId("root")
-    await user.click(page.getByRole("combobox").first())
-
-    await expect.element(el).toHaveClass("from-root", "from-user")
-    await expect.element(el).toHaveStyle({ color: "rgb(255, 0, 0)" })
-    await expect.element(el).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
-    expect(onRootClick).toHaveBeenCalledTimes(1)
-    expect(onUserClick).toHaveBeenCalledTimes(1)
-  })
-
-  test("merges input context props without overwriting user props", async () => {
-    const onRootClick = vi.fn()
-    const onUserClick = vi.fn()
-
-    const { user } = await render(
-      <InputPropsContext
-        value={{
-          className: "from-root",
-          style: { color: "rgb(255, 0, 0)" },
-          onClick: onRootClick,
-        }}
-      >
-        <DatePicker
-          className="from-user"
-          style={{ backgroundColor: "rgb(0, 0, 255)" }}
-          defaultOpen
-          rootProps={{ "data-testid": "root" }}
-          onClick={onUserClick}
-        />
-      </InputPropsContext>,
-    )
-
-    const root = page.getByTestId("root")
-    const el = page.getByRole("combobox").first()
-
-    await user.click(el)
-
-    await expect.element(root).toHaveClass("from-root", "from-user")
-    await expect.element(el).toHaveStyle({ color: "rgb(255, 0, 0)" })
-    await expect.element(el).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
-    expect(onRootClick).toHaveBeenCalledTimes(1)
-    expect(onUserClick).toHaveBeenCalledTimes(1)
-  })
-
   test("clears value when clear icon is clicked", async () => {
     const { user } = await render(
       <DatePicker

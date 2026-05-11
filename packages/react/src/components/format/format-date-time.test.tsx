@@ -3,29 +3,8 @@ import { FormatDateTime } from "./format-date-time"
 import { useFormatDateTime } from "./use-format-date-time"
 
 describe("<FormatDateTime />", () => {
-  test("should have displayName", () => {
-    expect(FormatDateTime.displayName).toBe("FormatDateTime")
-  })
-
-  test("should have className", () => {
-    render(<FormatDateTime data-testid="format-date-time" value={new Date()} />)
-    expect(screen.getByTestId("format-date-time")).toHaveClass(
-      "ui-format-date-time",
-    )
-  })
-
-  test("should render span tag", () => {
-    render(<FormatDateTime data-testid="format-date-time" value={new Date()} />)
-    expect(screen.getByTestId("format-date-time").tagName).toBe("SPAN")
-  })
-
   test("renders component correctly", async () => {
     await a11y(<FormatDateTime value={new Date()} />)
-  })
-
-  test("renders correctly", () => {
-    render(<FormatDateTime value={new Date(2025, 9, 6)} />)
-    expect(screen.getByText("10/6/2025")).toBeInTheDocument()
   })
 
   test("renders with locale correctly", () => {

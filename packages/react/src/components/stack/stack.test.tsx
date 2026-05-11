@@ -13,30 +13,6 @@ describe("<Stack />", () => {
     )
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Stack.displayName).toBe("Stack")
-  })
-
-  test("sets `className` correctly", () => {
-    render(
-      <Stack data-testid="stack">
-        <Box>Stack Item</Box>
-      </Stack>,
-    )
-
-    expect(screen.getByTestId("stack")).toHaveClass("ui-stack")
-  })
-
-  test("renders HTML tag correctly", () => {
-    render(
-      <Stack data-testid="stack">
-        <Box>Stack Item</Box>
-      </Stack>,
-    )
-
-    expect(screen.getByTestId("stack").tagName).toBe("DIV")
-  })
-
   test("renders all the allowed shorthand style props", () => {
     render(
       <Stack

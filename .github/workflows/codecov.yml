@@ -33,16 +33,23 @@ env:
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
-  unit_test:
-    name: Unit Test
-    uses: ./.github/workflows/unit-test.yml
+  test_cli:
+    name: Test
+    uses: ./.github/workflows/test-cli.yml
     secrets:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-  browser_test:
-    name: Browser Test
-    uses: ./.github/workflows/browser-test.yml
+  test_react:
+    name: Test
+    uses: ./.github/workflows/test-react.yml
+    secrets:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  test_utils:
+    name: Test
+    uses: ./.github/workflows/test-utils.yml
     secrets:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

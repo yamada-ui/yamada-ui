@@ -1,10 +1,15 @@
 # Test Categorization Rules
 
-When writing a test in `packages/react`, choose the runtime environment by file name. [`packages/react/vitest.config.ts`](/packages/react/vitest.config.ts) routes each test according to its file name.
+When writing a test in `packages/react` or `packages/utils`, choose the runtime environment by file name. The vitest config in each package routes each test according to its file name.
+
+- [`packages/react/vitest.config.ts`](/packages/react/vitest.config.ts)
+- [`packages/utils/vitest.config.ts`](/packages/utils/vitest.config.ts)
 
 For how to write tests in each environment, see [Browser Testing](./browser-testing.md) and [Unit Testing](./unit-testing.md).
 
 ## File Names and Environments
+
+### packages/react
 
 | File name                  | Environment                 | Import          |
 | -------------------------- | --------------------------- | --------------- |
@@ -13,6 +18,18 @@ For how to write tests in each environment, see [Browser Testing](./browser-test
 | `*.test.chromium.{ts,tsx}` | chromium                    | `#test/browser` |
 | `*.test.firefox.{ts,tsx}`  | firefox                     | `#test/browser` |
 | `*.test.webkit.{ts,tsx}`   | webkit                      | `#test/browser` |
+
+### packages/utils
+
+| File name                  | Environment                 | Import                 |
+| -------------------------- | --------------------------- | ---------------------- |
+| `*.test.{ts,tsx}`          | jsdom                       | (direct source import) |
+| `*.test.browser.{ts,tsx}`  | chromium / firefox / webkit | (direct source import) |
+| `*.test.chromium.{ts,tsx}` | chromium                    | (direct source import) |
+| `*.test.firefox.{ts,tsx}`  | firefox                     | (direct source import) |
+| `*.test.webkit.{ts,tsx}`   | webkit                      | (direct source import) |
+
+Unlike `packages/react`, utils tests do not use `#test` or `#test/browser` aliases — they import directly from the source file under test.
 
 ## How to Choose
 

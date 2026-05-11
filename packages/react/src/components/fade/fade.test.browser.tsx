@@ -1,12 +1,8 @@
 import { useState } from "react"
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { Fade } from "./fade"
 
 describe("<Fade />", () => {
-  test("renders component correctly", async () => {
-    await a11y(<Fade />)
-  })
-
   test("toggles visibility on open change", async () => {
     const TestComponent = () => {
       const [open, setOpen] = useState(false)

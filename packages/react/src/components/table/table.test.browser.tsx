@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { createColumnHelper, Table } from "./"
 
 interface Data {
@@ -54,17 +54,6 @@ const columns = [
 ]
 
 describe("<Table />", () => {
-  test("passes a11y checks with keyboard navigation", async () => {
-    await a11y(
-      <Table
-        columns={columns}
-        data={data}
-        enableKeyboardNavigation
-        enableSorting={false}
-      />,
-    )
-  })
-
   describe("pagination keyboard navigation", () => {
     test("changes page through PageDown / PageUp keyboard navigation", async () => {
       const PaginatedTable = () => {

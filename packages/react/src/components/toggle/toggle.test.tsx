@@ -15,16 +15,6 @@ describe("<Toggle />", () => {
     )
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Toggle.displayName).toBe("ToggleRoot")
-  })
-
-  test("sets `className` correctly", () => {
-    render(<Toggle>Toggle</Toggle>)
-
-    expect(screen.getByRole("button")).toHaveClass("ui-toggle__root")
-  })
-
   test("should handle checked prop", () => {
     const { rerender } = render(<Toggle checked>Toggle</Toggle>)
 

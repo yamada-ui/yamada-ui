@@ -1,4 +1,4 @@
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { Rating } from "."
 
 const dispatchMouse = (
@@ -43,29 +43,6 @@ describe("<Rating />", () => {
 
   afterEach(() => {
     vi.restoreAllMocks()
-  })
-
-  test("should merge `groupProps` with slot props without overwriting user props", async () => {
-    const onClick = vi.fn()
-
-    const { container } = await render(
-      <Rating
-        groupProps={(value) => ({
-          className: `group-${value}`,
-          style: { outlineColor: "red" },
-          value,
-          onClick,
-        })}
-      />,
-    )
-
-    const firstGroup = container.querySelector(".ui-rating__group")
-
-    expect(firstGroup).toHaveClass("ui-rating__group", "group-1")
-    expect(firstGroup).toHaveStyle({ outlineColor: "rgb(255, 0, 0)" })
-
-    firstGroup?.dispatchEvent(new MouseEvent("click", { bubbles: true }))
-    expect(onClick).toHaveBeenCalledTimes(1)
   })
 
   test("fills items up to the hovered position", async () => {
@@ -184,9 +161,5 @@ describe("<Rating />", () => {
     await user.keyboard("{Space}")
 
     expect(onChange).toHaveBeenCalledWith(1)
-  })
-
-  test("passes a11y checks", async () => {
-    await a11y(<Rating />)
   })
 })

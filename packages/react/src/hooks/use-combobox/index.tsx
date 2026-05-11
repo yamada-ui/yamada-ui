@@ -545,8 +545,8 @@ export const useCombobox = (props: UseComboboxProps = {}) => {
       "aria-label": ariaLabel,
       "aria-labelledby": ariaLabelledby,
       ...props
-    } = {}) =>
-      mergeProps(
+    } = {}) => ({
+      ...mergeProps(
         {
           ref: triggerRef,
           "aria-controls": open ? contentId : undefined,
@@ -562,8 +562,10 @@ export const useCombobox = (props: UseComboboxProps = {}) => {
         },
         rest,
         props,
-        { onClick, onKeyDown },
-      )(),
+      )({ mergeEvent: false }),
+      onClick: handlerAll(props.onClick, rest.onClick, onClick),
+      onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
+    }),
     [
       open,
       contentId,
@@ -709,8 +711,8 @@ export const useComboboxItem = ({
   )
 
   const getItemProps: PropGetter = useCallback(
-    (props = {}) =>
-      mergeProps(
+    (props = {}) => ({
+      ...mergeProps(
         {
           id,
           ref: itemRef,
@@ -724,8 +726,11 @@ export const useComboboxItem = ({
         },
         rest,
         props,
-        { ref: register, onClick, onMouseMove: onActive },
-      )(),
+        { ref: register },
+      )({ mergeEvent: false }),
+      onClick: handlerAll(props.onClick, rest.onClick, onClick),
+      onMouseMove: handlerAll(props.onMouseMove, rest.onMouseMove, onActive),
+    }),
     [
       id,
       ariaDisabled,

@@ -270,9 +270,9 @@ describe("<Tooltip />", () => {
       .element(page.getByRole("tooltip").query(), { timeout: 50 })
       .not.toBeInTheDocument()
 
-    await vi.waitFor(async () => {
-      await expect.element(page.getByRole("tooltip")).toBeInTheDocument()
-    })
+    await expect
+      .element(page.getByRole("tooltip"), { timeout: 5000 })
+      .toBeInTheDocument()
 
     await user.unhover(trigger)
 
@@ -280,11 +280,9 @@ describe("<Tooltip />", () => {
       .element(page.getByRole("tooltip"), { timeout: 50 })
       .toBeInTheDocument()
 
-    await vi.waitFor(async () => {
-      await expect
-        .element(page.getByRole("tooltip").query())
-        .not.toBeInTheDocument()
-    })
+    await expect
+      .element(page.getByRole("tooltip").query(), { timeout: 5000 })
+      .not.toBeInTheDocument()
   })
 
   test("force closes when re-opening while already open", async () => {

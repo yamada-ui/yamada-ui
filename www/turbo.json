@@ -12,6 +12,28 @@
         "../packages/workspace/package.json"
       ]
     },
+    "build:next": {
+      "dependsOn": ["^build", "build:content"],
+      "inputs": [
+        "**/*.{ts,tsx,mts,mdx,json}",
+        ".velite/**",
+        "public/**",
+        "!.next/**",
+        "!.turbo/**",
+        "!node_modules/**",
+        "!tsconfig.tsbuildinfo"
+      ],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "dev:content": {
+      "cache": false,
+      "persistent": true
+    },
+    "dev:next": {
+      "cache": false,
+      "persistent": true,
+      "with": ["www#dev:content"]
+    },
     "lint": {
       "dependsOn": ["build:content"],
       "inputs": ["**/*.{ts,tsx,mts,mdx}", "package.json", "tsconfig.json"]

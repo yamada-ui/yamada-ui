@@ -35,8 +35,7 @@ if (!prNumber) {
 }
 
 const updatedDependencies = JSON.parse(
-  process.env.UPDATED_DEPENDENCIES_JSON ||
-    '[{"dependencyName": "lucide-react"}]',
+  process.env.UPDATED_DEPENDENCIES_JSON || "[]",
 ) as UpdatedDependency[]
 
 if (updatedDependencies.length === 0) {

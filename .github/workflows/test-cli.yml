@@ -1,4 +1,4 @@
-name: Test / CLI
+name: Test
 
 on:
   workflow_call:
@@ -19,7 +19,7 @@ env:
 
 jobs:
   test:
-    name: Node
+    name: CLI / Node
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:

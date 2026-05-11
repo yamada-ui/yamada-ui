@@ -52,7 +52,7 @@ jobs:
         run: pnpm build --affected
 
   test_cli:
-    name: Test / CLI
+    name: Test
     if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
     needs: scm_base
     uses: ./.github/workflows/test-cli.yml
@@ -63,7 +63,7 @@ jobs:
       TURBO_SCM_BASE: ${{ needs.scm_base.outputs.sha }}
 
   test_react:
-    name: Test / React
+    name: Test
     if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
     needs: scm_base
     uses: ./.github/workflows/test-react.yml
@@ -74,7 +74,7 @@ jobs:
       TURBO_SCM_BASE: ${{ needs.scm_base.outputs.sha }}
 
   test_utils:
-    name: Test / Utils
+    name: Test
     if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
     needs: scm_base
     uses: ./.github/workflows/test-utils.yml

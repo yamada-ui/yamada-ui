@@ -1,4 +1,4 @@
-name: Test / React
+name: Test
 
 on:
   workflow_call:
@@ -19,7 +19,7 @@ env:
 
 jobs:
   test:
-    name: ${{ matrix.name }} ${{ matrix.shard_index }}/4
+    name: React / ${{ matrix.name }} ${{ matrix.shard_index }}/4
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     strategy:
@@ -68,7 +68,7 @@ jobs:
             diff:
               - packages/react/src/**/*.{ts,tsx,mts}
               - '!packages/react/src/**/*.stories.{ts,tsx}'
-              ${{ matrix.diff }}
+                ${{ matrix.diff }}
 
       - name: Install
         if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.changed_keys != ''

@@ -12,7 +12,7 @@ import type {
   UseColorPickerReturn,
 } from "./use-color-picker"
 import { useMemo } from "react"
-import { createSlotComponent } from "../../core"
+import { createSlotComponent, mergeProps } from "../../core"
 import { cast } from "../../utils"
 import { ColorSelector } from "../color-selector"
 import { ColorSwatch } from "../color-swatch"
@@ -195,13 +195,16 @@ export const ColorPicker = withProvider<"input", ColorPickerProps, "size">(
       <ComponentContext value={componentContext}>
         <Popover.Root {...mergedPopoverProps}>
           <InputGroup.Root
-            className={className}
-            css={css}
-            colorScheme={colorScheme}
-            {...getRootProps({ ...groupItemProps, ...rootProps })}
+            {...mergeProps(
+              { className, css, colorScheme },
+              getRootProps(groupItemProps),
+              rootProps,
+            )()}
           >
             {withColorSwatch ? (
-              <InputGroup.Element {...elementProps} {...startElementProps}>
+              <InputGroup.Element
+                {...mergeProps(elementProps, startElementProps)()}
+              >
                 <ColorPickerColorSwatch {...colorSwatchProps} />
               </InputGroup.Element>
             ) : null}
@@ -214,9 +217,11 @@ export const ColorPicker = withProvider<"input", ColorPickerProps, "size">(
 
             {withEyeDropper ? (
               <InputGroup.Element
-                clickable
-                {...elementProps}
-                {...endElementProps}
+                {...mergeProps(
+                  { clickable: true },
+                  elementProps,
+                  endElementProps,
+                )()}
               >
                 <ColorPickerEyeDropper
                   {...getEyeDropperProps(eyeDropperProps)}
@@ -255,7 +260,7 @@ export const ColorPicker = withProvider<"input", ColorPickerProps, "size">(
 )((props) => {
   const context = useInputPropsContext()
 
-  return { ...context, ...props }
+  return mergeProps(context, props)()
 })
 
 interface ColorPickerFieldProps extends HTMLStyledProps {}

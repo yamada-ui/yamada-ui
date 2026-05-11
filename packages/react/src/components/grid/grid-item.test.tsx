@@ -6,18 +6,13 @@ describe("<GridItem />", () => {
     await a11y(<GridItem>GridItem</GridItem>)
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(GridItem.displayName).toBe("GridItem")
-  })
-
-  test("sets `className` correctly", () => {
+  test("renders default class and tag", () => {
     render(<GridItem>GridItem</GridItem>)
-    expect(screen.getByText("GridItem")).toHaveClass("ui-grid-item")
-  })
 
-  test("renders HTML tag correctly", () => {
-    render(<GridItem>GridItem</GridItem>)
-    expect(screen.getByText("GridItem").tagName).toBe("DIV")
+    const gridItem = screen.getByText("GridItem")
+
+    expect(gridItem).toHaveClass("ui-grid-item")
+    expect(gridItem).toHaveProperty("tagName", "DIV")
   })
 
   test("renders all the allowed shorthand style props", () => {
@@ -26,6 +21,7 @@ describe("<GridItem />", () => {
         GridItem
       </GridItem>,
     )
+
     expect(screen.getByText("GridItem")).toHaveStyle({
       gridColumn: "span 2/span 2",
       gridRow: "span 2/span 2",

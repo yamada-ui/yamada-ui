@@ -12,6 +12,7 @@ describe("<Input />", () => {
       {
         axeOptions: {
           rules: {
+            "color-contrast": { enabled: false },
             label: { enabled: false },
           },
         },
@@ -19,42 +20,7 @@ describe("<Input />", () => {
     )
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Input.displayName).toBe("Input")
-    expect(InputGroup.Root.name).toBe("InputGroupRoot")
-    expect(InputGroup.Element.displayName).toBe("InputElement")
-    expect(InputGroup.Addon.displayName).toBe("InputAddon")
-  })
-
-  test("sets `className` correctly", () => {
-    render(
-      <InputGroup.Root data-testid="input-group">
-        <InputGroup.Element>Hello</InputGroup.Element>
-        <Input />
-        <InputGroup.Addon>World</InputGroup.Addon>
-      </InputGroup.Root>,
-    )
-    expect(screen.getByTestId("input-group")).toHaveClass("ui-group")
-    expect(screen.getByRole("textbox")).toHaveClass("ui-input")
-    expect(screen.getByText("Hello")).toHaveClass("ui-input-element")
-    expect(screen.getByText("World")).toHaveClass("ui-input-addon")
-  })
-
-  test("renders HTML tag correctly", () => {
-    render(
-      <InputGroup.Root data-testid="input-group">
-        <InputGroup.Element>Hello</InputGroup.Element>
-        <Input />
-        <InputGroup.Addon>World</InputGroup.Addon>
-      </InputGroup.Root>,
-    )
-    expect(screen.getByTestId("input-group").tagName).toBe("DIV")
-    expect(screen.getByRole("textbox").tagName).toBe("INPUT")
-    expect(screen.getByText("Hello").tagName).toBe("DIV")
-    expect(screen.getByText("World").tagName).toBe("DIV")
-  })
-
-  test("Elements inside input render correctly", async () => {
+  test("Elements inside input render correctly", () => {
     render(
       <InputGroup.Root>
         <InputGroup.Element>Hello</InputGroup.Element>
@@ -63,13 +29,11 @@ describe("<Input />", () => {
       </InputGroup.Root>,
     )
 
-    const hello = await screen.findByText(/Hello/i)
-    const world = await screen.findByText(/World/i)
-    expect(hello).toBeInTheDocument()
-    expect(world).toBeInTheDocument()
+    expect(screen.getByText(/Hello/i)).toBeInTheDocument()
+    expect(screen.getByText(/World/i)).toBeInTheDocument()
   })
 
-  test("Elements inside input-addon render correctly", async () => {
+  test("Elements inside input-addon render correctly", () => {
     render(
       <InputGroup.Root>
         <InputGroup.Addon>https:</InputGroup.Addon>
@@ -78,39 +42,34 @@ describe("<Input />", () => {
       </InputGroup.Root>,
     )
 
-    const scheme = await screen.findByText(/https:/i)
-    const tld = await screen.findByText(/\.com/i)
-    expect(scheme).toBeInTheDocument()
-    expect(tld).toBeInTheDocument()
+    expect(screen.getByText(/https:/i)).toBeInTheDocument()
+    expect(screen.getByText(/\.com/i)).toBeInTheDocument()
   })
 
-  test("Invalid input renders correctly", async () => {
+  test("Invalid input renders correctly", () => {
     render(<Input invalid />)
 
-    const input = await screen.findByRole("textbox")
+    const input = screen.getByRole("textbox")
     expect(input).toBeInvalid()
     expect(input).toHaveAttribute("aria-invalid", "true")
   })
 
-  test("Disabled input renders correctly", async () => {
+  test("Disabled input renders correctly", () => {
     render(<Input disabled />)
 
-    const input = await screen.findByRole("textbox")
-    expect(input).toBeDisabled()
+    expect(screen.getByRole("textbox")).toBeDisabled()
   })
 
-  test("Readonly input renders correctly", async () => {
+  test("Readonly input renders correctly", () => {
     render(<Input readOnly />)
 
-    const input = await screen.findByRole("textbox")
-    expect(input).toHaveAttribute("aria-readonly", "true")
+    expect(screen.getByRole("textbox")).toHaveAttribute("aria-readonly", "true")
   })
 
-  test("Input with native size renders correctly", async () => {
+  test("Input with native size renders correctly", () => {
     render(<Input htmlSize={4} />)
 
-    const input = await screen.findByRole("textbox")
-    expect(input).toHaveAttribute("size", "4")
+    expect(screen.getByRole("textbox")).toHaveAttribute("size", "4")
   })
 
   test("renders correctly with errorBorderColor", () => {

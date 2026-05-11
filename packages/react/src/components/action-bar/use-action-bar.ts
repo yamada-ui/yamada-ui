@@ -2,7 +2,7 @@
 
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback } from "react"
-import { useEnvironment } from "../../core"
+import { mergeProps, useEnvironment } from "../../core"
 import {
   useDisclosure,
   type UseDisclosureProps,
@@ -54,7 +54,7 @@ export const useActionBar = ({
   useEventListener(getDocument(), "keydown", onKeyDown)
 
   const getRootProps: PropGetter = useCallback(
-    (props = {}) => ({ ...rest, ...props }),
+    (props = {}) => mergeProps(rest, props)(),
     [rest],
   )
 

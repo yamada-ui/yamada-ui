@@ -293,12 +293,12 @@ Setting an `aria-label` on `ToggleGroup.Root` allows screen readers to announce 
 
 ### ARIA Roles and Attributes
 
-| Component                    | Role and Attributes | Usage                                                                     |
-| ---------------------------- | ------------------- | ------------------------------------------------------------------------- |
-| `ToggleGroup.Root`           | `role="group"`      | Indicates that it's a group.                                              |
-| `Toggle`, `ToggleGroup.Item` | `aria-pressed`      | Set to `true` if the element is pressed, or `false` if it is not pressed. |
-|                              | `aria-disabled`     | Set to `"true"` if `disabled` or `readOnly` is set.                       |
-|                              | `aria-label`        | Set `value` if provided, otherwise default to `"Toggle button"`.          |
+| Element                  | Roles and Attributes | Usage                                                                     |
+| ------------------------ | -------------------- | ------------------------------------------------------------------------- |
+| `div.ui-toggle__group`   | `role="group"`       | Indicates that it's a group.                                              |
+| `button.ui-toggle__root` | `aria-pressed`       | Set to `true` if the element is pressed, or `false` if it is not pressed. |
+|                          | `aria-disabled`      | Set to `"true"` if `disabled` or `readOnly` is set.                       |
+|                          | `aria-label`         | Set `value` if provided, otherwise default to `"Toggle button"`.          |
 
 ## Similar Components
 

@@ -17,7 +17,7 @@ export interface CopyButtonProps extends ButtonProps {
 
 export function CopyButton({ value, onClick, ...rest }: CopyButtonProps) {
   const t = useTranslations("component.copyButton")
-  const { copied, onCopy } = useClipboard(value, 4000)
+  const { copied, onCopy } = useClipboard(value)
 
   return (
     <Tooltip

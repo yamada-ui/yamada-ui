@@ -10,6 +10,7 @@ on:
     branches:
       - main
       - v*
+  merge_group:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -18,186 +19,146 @@ concurrency:
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+  TURBO_SCM_BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event_name == 'merge_group' && github.event.merge_group.base_sha || github.event.before }}
   NODE_OPTIONS: --max-old-space-size=8192
 
 jobs:
+  scm_base:
+    name: SCM Base
+    if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    outputs:
+      sha: ${{ steps.compute.outputs.sha }}
+    steps:
+      - id: compute
+        run: echo "sha=$TURBO_SCM_BASE" >> "$GITHUB_OUTPUT"
+
   build:
     name: Build
-    if: ${{ !github.event.pull_request.draft }}
+    if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-
-      - name: Check modified files
-        id: check-modified
-        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
-          files: |
-            turbo.json
-            packages/**/(package.json|tsconfig.json|tsdown.config.ts)
-            packages/**/src/**/*.{ts,tsx}
-            !packages/**/src/**/*.stories.{ts,tsx}
-            !packages/**/src/**/*.test.{ts,tsx}
-            !packages/workspace/src/**
-            packages/workspace/src/typescript/**
-            .github/workflows/quality.yml
+          fetch-depth: 0
 
       - name: Install
-        if: steps.check-modified.outputs.any_changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Build packages
-        if: steps.check-modified.outputs.any_changed == 'true'
-        run: pnpm build
+        run: pnpm build --affected
 
-  test:
+  test_cli:
     name: Test
-    if: ${{ !github.event.pull_request.draft }}
-    uses: ./.github/workflows/test.yml
+    if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
+    needs: scm_base
+    uses: ./.github/workflows/test-cli.yml
     secrets:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    with:
+      TURBO_SCM_BASE: ${{ needs.scm_base.outputs.sha }}
 
-  eslint:
-    name: ESLint
-    if: ${{ !github.event.pull_request.draft }}
+  test_react:
+    name: Test
+    if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
+    needs: scm_base
+    uses: ./.github/workflows/test-react.yml
+    secrets:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    with:
+      TURBO_SCM_BASE: ${{ needs.scm_base.outputs.sha }}
+
+  test_utils:
+    name: Test
+    if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
+    needs: scm_base
+    uses: ./.github/workflows/test-utils.yml
+    secrets:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    with:
+      TURBO_SCM_BASE: ${{ needs.scm_base.outputs.sha }}
+
+  lint:
+    name: Lint
+    if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-
-      - name: Check modified files
-        id: changed-files
-        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
-          files_yaml: |
-            packages:
-              - turbo.json
-              - packages/**/(package.json|tsconfig.json)
-              - packages/**/*.{ts,tsx,mts}
-              - .github/workflows/quality.yml
-            www:
-              - turbo.json
-              - packages/workspace/src/eslint/**
-              - packages/workspace/package.json
-              - www/**/*.{ts,tsx,mts,mdx}
-              - www/package.json
-              - www/tsconfig.json
-              - www/turbo.json
-              - www/eslint.config.ts
+          fetch-depth: 0
 
       - name: Install
-        if: steps.changed-files.outputs.changed_keys != ''
         uses: ./.github/composite-actions/install
 
       - name: Run lint
-        if: steps.changed-files.outputs.packages_any_changed == 'true'
-        run: pnpm lint
+        run: pnpm turbo run lint --affected
 
-      - name: Run lint
-        if: steps.changed-files.outputs.www_any_changed == 'true'
-        run: pnpm turbo run lint --filter www
+  typecheck:
+    name: Typecheck
+    if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
+    needs: scm_base
+    uses: ./.github/workflows/typecheck.yml
+    secrets:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+    with:
+      TURBO_SCM_BASE: ${{ needs.scm_base.outputs.sha }}
 
-  typescript:
-    name: TypeScript
-    if: ${{ !github.event.pull_request.draft }}
+  format:
+    name: Format
+    if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          fetch-depth: 0
 
       - name: Check modified files
         id: changed-files
-        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
+        uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
         with:
-          files_yaml: |
-            packages:
-              - turbo.json
-              - packages/**/(package.json|tsconfig.json)
-              - packages/**/*.{ts,tsx,mts}
-              - .github/workflows/quality.yml
-            www:
-              - turbo.json
-              - packages/workspace/src/typescript/**
-              - packages/workspace/package.json
-              - www/**/*.{ts,tsx,mts}
-              - www/package.json
-              - www/tsconfig.json
-              - www/turbo.json
-              - .github/workflows/quality.yml
+          files: |
+            oxfmt.config.ts
+            .github/workflows/quality.yml
+            **/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css}
 
       - name: Install
-        if: steps.changed-files.outputs.changed_keys != ''
-        uses: ./.github/composite-actions/install
-
-      - name: Run typecheck
-        if: steps.changed-files.outputs.packages_any_changed == 'true'
-        run: pnpm typecheck
-
-      - name: Run typecheck
-        if: steps.changed-files.outputs.www_any_changed == 'true'
-        run: pnpm turbo run typecheck --filter www
-
-  prettier:
-    name: Prettier
-    if: ${{ !github.event.pull_request.draft }}
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    steps:
-      - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-
-      - name: Check modified files
-        id: changed-files
-        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
-        with:
-          files_yaml: |
-            packages:
-              - turbo.json
-              - packages/**
-              - .prettierignore
-              - .prettierrc.js
-              - .github/workflows/quality.yml
-            www:
-              - turbo.json
-              - packages/workspace/src/prettier/**
-              - packages/workspace/package.json
-              - www/**
-              - .prettierignore
-              - .prettierrc.js
-              - .github/workflows/quality.yml
-
-      - name: Install
-        if: steps.changed-files.outputs.changed_keys != ''
+        if: steps.changed-files.outputs.any_changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Run format
-        if: steps.changed-files.outputs.packages_any_changed == 'true'
+        if: steps.changed-files.outputs.any_changed == 'true'
         run: pnpm format
-
-      - name: Run format
-        if: steps.changed-files.outputs.www_any_changed == 'true'
-        run: pnpm turbo run format --filter www
 
   changeset:
     name: Changeset
-    if: ${{ !github.event.pull_request.draft }}
+    if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          fetch-depth: 0
+
       - name: Check modified files
         id: changed-files
-        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
+        uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
         with:
           files_yaml: |
             src:
               - packages/{cli,react,utils}/src/**/*.{ts,tsx}
-              - '!packages/{cli,react,utils}/src/**/*.test.{ts,tsx}'
-              - '!packages/{cli,react,utils}/src/**/*.stories.{ts,tsx}'
+              - '!packages/{cli,react,utils}/src/**/*.{test,stories}.{ts,tsx}'
+              - '!packages/{cli,react,utils}/src/**/*.test.*.{ts,tsx}'
             changeset:
               - .changeset/*.md
               - '!.changeset/README.md'

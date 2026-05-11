@@ -1,56 +1,47 @@
-import { page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { BoxIcon } from "../icon"
 import { List } from "./"
 
 describe("<List />", () => {
-  test("sets `displayName` correctly", () => {
-    expect(List.Root.displayName).toBe("ListRoot")
-    expect(List.Item.displayName).toBe("ListItem")
-    expect(List.Icon.displayName).toBe("ListIcon")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(
-      <List.Root data-testid="list-root">
+  test("renders component correctly", async () => {
+    await a11y(
+      <List.Root>
         <List.Item>Item one</List.Item>
       </List.Root>,
     )
-
-    const listRoot = page.getByTestId("list-root")
-    const listItem = page.getByText("Item one")
-
-    await expect.element(listRoot).toHaveClass("ui-list__root")
-    await expect.element(listItem).toHaveClass("ui-list__item")
   })
 
-  test("renders HTML tag correctly", async () => {
-    await render(
-      <List.Root data-testid="list-root">
-        <List.Item>Item one</List.Item>
-      </List.Root>,
-    )
-
-    const listRoot = page.getByTestId("list-root")
-    const listItem = page.getByText("Item one")
-
-    expect(listRoot.element().tagName).toBe("UL")
-    expect(listItem.element().tagName).toBe("LI")
-  })
-
-  test("should render list with an icon", async () => {
-    await render(
+  test("renders list with an icon", () => {
+    render(
       <List.Root>
         <List.Item icon={<BoxIcon data-testid="box-icon" />} />
       </List.Root>,
     )
 
-    const icon = page.getByTestId("box-icon")
-
-    await expect.element(icon).toBeInTheDocument()
+    expect(screen.getByTestId("box-icon")).toBeInTheDocument()
   })
 
-  test("should render list with different style types", async () => {
-    await render(
+  test("renders list from items prop", () => {
+    render(
+      <List.Root items={[{ children: "First" }, { children: "Second" }]} />,
+    )
+
+    expect(screen.getByText("First")).toBeInTheDocument()
+    expect(screen.getByText("Second")).toBeInTheDocument()
+  })
+
+  test("renders ol element when styleType is decimal", () => {
+    render(
+      <List.Root data-testid="list-root" styleType="decimal">
+        <List.Item>Item one</List.Item>
+      </List.Root>,
+    )
+
+    expect(screen.getByTestId("list-root").tagName).toBe("OL")
+  })
+
+  test("applies styleType to the rendered list", () => {
+    render(
       <>
         <List.Root data-testid="disc" styleType="disc">
           <List.Item>List item</List.Item>
@@ -67,21 +58,14 @@ describe("<List />", () => {
       </>,
     )
 
-    const listDisc = page.getByTestId("disc")
-    const listDecimal = page.getByTestId("decimal")
-    const listSquare = page.getByTestId("square")
-    const listCircle = page.getByTestId("circle")
-
-    await expect.element(listDisc).toHaveStyle({
-      listStyleType: "disc",
-    })
-    await expect.element(listDecimal).toHaveStyle({
+    expect(screen.getByTestId("disc")).toHaveStyle({ listStyleType: "disc" })
+    expect(screen.getByTestId("decimal")).toHaveStyle({
       listStyleType: "decimal",
     })
-    await expect.element(listSquare).toHaveStyle({
+    expect(screen.getByTestId("square")).toHaveStyle({
       listStyleType: "square",
     })
-    await expect.element(listCircle).toHaveStyle({
+    expect(screen.getByTestId("circle")).toHaveStyle({
       listStyleType: "circle",
     })
   })

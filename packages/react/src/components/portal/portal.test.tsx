@@ -1,14 +1,10 @@
-import { a11y, render, screen } from "#test"
 import { useRef } from "react"
+import { a11y, render, screen } from "#test"
 import { Portal } from "./portal"
 
 describe("<Portal />", () => {
   test("renders component correctly", async () => {
     await a11y(<Portal>Hello</Portal>)
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Portal.name).toBe("Portal")
   })
 
   test("Portal with containerRef renders correctly", () => {

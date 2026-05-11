@@ -1,35 +1,29 @@
-import react from "@vitejs/plugin-react-swc"
+import type { PlaywrightProviderOptions } from "@vitest/browser-playwright"
+import type { BrowserInstanceOption } from "vitest/node"
+import react from "@vitejs/plugin-react"
 import { playwright } from "@vitest/browser-playwright"
 import { defineProject, mergeConfig } from "@yamada-ui/workspace/vitest"
 import sharedConfig from "@yamada-ui/workspace/vitest/config"
-import { glob, readFile } from "node:fs/promises"
-import { resolve } from "node:path"
 
-async function getBrowserTestFiles() {
-  const paths = await Array.fromAsync(
-    glob(resolve(__dirname, "src", "**", "*.test.{ts,tsx}")),
-  )
-  const targetPaths: string[] = []
-
-  await Promise.all(
-    paths.map(async (path) => {
-      try {
-        const content = await readFile(path, "utf-8")
-        const browser = /^import\s+\{[^}]*\}\s+from\s+"#test\/browser"/m.test(
-          content,
-        )
-
-        if (browser) {
-          targetPaths.push(path.replace(resolve(__dirname) + "/", ""))
-        }
-      } catch {}
-    }),
-  )
-
-  return targetPaths
-}
-
-const browserTestFiles = await getBrowserTestFiles()
+const browsers: {
+  browser: BrowserInstanceOption["browser"]
+  options?: PlaywrightProviderOptions
+}[] = [
+  { browser: "chromium" },
+  {
+    browser: "firefox",
+    options: {
+      launchOptions: {
+        firefoxUserPrefs: {
+          "signon.autofillForms": false,
+          "signon.generation.enabled": false,
+          "signon.rememberSignons": false,
+        },
+      },
+    },
+  },
+  { browser: "webkit" },
+]
 
 export default mergeConfig(sharedConfig, {
   plugins: [react()],
@@ -43,51 +37,33 @@ export default mergeConfig(sharedConfig, {
     },
     projects: [
       defineProject({
-        resolve: {
-          alias: {
-            "@": resolve(__dirname, "./src"),
-          },
-        },
         test: {
           name: "jsdom",
           environment: "jsdom",
-          exclude: browserTestFiles,
+          exclude: ["src/**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx}"],
           globals: true,
           include: ["src/**/*.test.{ts,tsx}"],
           setupFiles: ["@yamada-ui/workspace/vitest/setup"],
-          testTimeout: 10000,
         },
       }),
-      defineProject({
-        optimizeDeps: { include: ["axe-core"] },
-        resolve: {
-          alias: {
-            "@": resolve(__dirname, "./src"),
-          },
-        },
-        test: {
-          name: "browser",
-          browser: {
-            enabled: true,
-            headless: true,
-            instances: [
-              {
-                browser: "chromium",
-              },
-              {
-                browser: "webkit",
-              },
-              {
-                browser: "firefox",
-              },
+      ...browsers.map(({ browser, options }) =>
+        defineProject({
+          test: {
+            name: `browser:${browser}`,
+            browser: {
+              enabled: true,
+              headless: true,
+              instances: [{ browser }],
+              provider: playwright(options),
+            },
+            globals: true,
+            include: [
+              "src/**/*.test.browser.{ts,tsx}",
+              `src/**/*.test.${browser}.{ts,tsx}`,
             ],
-            provider: playwright() as any,
           },
-          globals: true,
-          include: browserTestFiles,
-          testTimeout: 10000,
-        },
-      }),
+        }),
+      ),
     ],
   },
 })

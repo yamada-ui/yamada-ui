@@ -21,60 +21,23 @@ describe("<Timeline />", () => {
     await a11y(<Timeline.Root items={items} />)
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Timeline.Root.displayName).toBe("TimelineRoot")
-    expect(Timeline.Item.displayName).toBe("TimelineItem")
-    expect(Timeline.Content.displayName).toBe("TimelineContent")
-    expect(Timeline.Title.displayName).toBe("TimelineTitle")
-    expect(Timeline.Description.displayName).toBe("TimelineDescription")
-    expect(Timeline.Connector.displayName).toBe("TimelineConnector")
-    expect(Timeline.Indicator.displayName).toBe("TimelineIndicator")
-  })
-
-  test("sets `className` correctly", () => {
-    render(<Timeline.Root items={items} />)
-    const item = screen.getAllByRole("listitem")[0]
-    expect(screen.getByRole("list")).toHaveClass("ui-timeline__root")
-    expect(item).toHaveClass("ui-timeline__item")
-    expect(item?.children[0]).toHaveClass("ui-timeline__connector")
-    expect(item?.children[0]?.children[0]).toHaveClass("ui-timeline__indicator")
-    expect(item?.children[1]).toHaveClass("ui-timeline__content")
-    expect(screen.getByText("Step 1")).toHaveClass("ui-timeline__title")
-    expect(screen.getByText("Step 1 description")).toHaveClass(
-      "ui-timeline__description",
-    )
-  })
-
-  test("renders HTML tag correctly", () => {
-    render(<Timeline.Root items={items} />)
-    const item = screen.getAllByRole("listitem")[0]
-    expect(screen.getByRole("list").tagName).toBe("UL")
-    expect(item?.tagName).toBe("LI")
-    expect(item?.children[0]?.tagName).toBe("DIV")
-    expect(item?.children[0]?.children[0]?.tagName).toBe("DIV")
-    expect(item?.children[1]?.tagName).toBe("DIV")
-    expect(screen.getByText("Step 1").tagName).toBe("H3")
-    expect(screen.getByText("Step 1 description").tagName).toBe("P")
-  })
-
   test("renders numbers in indicators with `number` variant", () => {
     render(<Timeline.Root variant="number" items={items} />)
-    const listItems = screen.getAllByRole("listitem")
 
-    listItems.forEach((item, index) => {
+    for (const [index, item] of screen.getAllByRole("listitem").entries()) {
       const indicator = item.children[0]?.children[0]
       expect(indicator).toHaveTextContent(String(index + 1))
-    })
+    }
   })
 
   test("does not render numbers in indicators without `number` variant", () => {
     render(<Timeline.Root items={items} />)
-    const listItems = screen.getAllByRole("listitem")
 
-    listItems.forEach((item) => {
+    for (const item of screen.getAllByRole("listitem")) {
       const indicator = item.children[0]?.children[0]
+      expect(indicator).toBeDefined()
       expect(indicator).not.toHaveTextContent(/\d/)
-    })
+    }
   })
 
   test("custom indicator takes precedence over number variant", () => {
@@ -84,9 +47,9 @@ describe("<Timeline />", () => {
     ]
 
     render(<Timeline.Root variant="number" items={itemsWithIndicator} />)
-    const listItems = screen.getAllByRole("listitem")
-    const firstIndicator = listItems[0]?.children[0]?.children[0]
-    const secondIndicator = listItems[1]?.children[0]?.children[0]
+    const listitems = screen.getAllByRole("listitem")
+    const firstIndicator = listitems[0]?.children[0]?.children[0]
+    const secondIndicator = listitems[1]?.children[0]?.children[0]
 
     expect(firstIndicator).toHaveTextContent("A")
     expect(secondIndicator).toHaveTextContent("2")

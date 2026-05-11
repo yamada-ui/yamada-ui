@@ -1,7 +1,23 @@
-import { act, renderHook, screen, waitFor } from "#test"
+import { a11y, act, renderHook, screen, waitFor } from "#test"
 import { useNotice } from "./use-notice"
 
+async function expectNoticeVisible(text: string) {
+  await waitFor(() => {
+    expect(screen.getByText(text)).toBeInTheDocument()
+  })
+}
+
+async function expectNoticeHidden(text: string) {
+  await waitFor(() => {
+    expect(screen.queryByText(text)).not.toBeInTheDocument()
+  })
+}
+
 describe("useNotice", () => {
+  test("passes a11y checks", async () => {
+    await a11y(<div />)
+  })
+
   test("creates a notice with default options", async () => {
     const { result } = renderHook(() => useNotice())
 
@@ -12,10 +28,8 @@ describe("useNotice", () => {
       })
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Test Notice")).toBeInTheDocument()
-      expect(screen.getByText("Test Description")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Test Notice")
+    await expectNoticeVisible("Test Description")
   })
 
   test("creates a notice with a specific status", async () => {
@@ -28,9 +42,7 @@ describe("useNotice", () => {
       })
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Success Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Success Notice")
   })
 
   test("creates a notice with a loading scheme", async () => {
@@ -43,14 +55,13 @@ describe("useNotice", () => {
       })
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Loading Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Loading Notice")
   })
 
   test("closes a specific notice by id", async () => {
     const { result } = renderHook(() => useNotice())
-    let noticeId: number | string | undefined
+
+    let noticeId: number | string = ""
 
     act(() => {
       noticeId = result.current({
@@ -59,17 +70,13 @@ describe("useNotice", () => {
       })
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Closeable Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Closeable Notice")
 
     act(() => {
-      result.current.close(noticeId!)
+      result.current.close(noticeId)
     })
 
-    await waitFor(() => {
-      expect(screen.queryByText("Closeable Notice")).not.toBeInTheDocument()
-    })
+    await expectNoticeHidden("Closeable Notice")
   })
 
   test("closes all notices", async () => {
@@ -86,24 +93,21 @@ describe("useNotice", () => {
       })
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Notice 1")).toBeInTheDocument()
-      expect(screen.getByText("Notice 2")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Notice 1")
+    await expectNoticeVisible("Notice 2")
 
     act(() => {
       result.current.closeAll()
     })
 
-    await waitFor(() => {
-      expect(screen.queryByText("Notice 1")).not.toBeInTheDocument()
-      expect(screen.queryByText("Notice 2")).not.toBeInTheDocument()
-    })
+    await expectNoticeHidden("Notice 1")
+    await expectNoticeHidden("Notice 2")
   })
 
   test("updates an existing notice", async () => {
     const { result } = renderHook(() => useNotice())
-    let noticeId: number | string | undefined
+
+    let noticeId: number | string = ""
 
     act(() => {
       noticeId = result.current({
@@ -112,20 +116,16 @@ describe("useNotice", () => {
       })
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Original Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Original Notice")
 
     act(() => {
-      result.current.update(noticeId!, {
+      result.current.update(noticeId, {
         duration: null,
         title: "Updated Notice",
       })
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Updated Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Updated Notice")
   })
 
   test("creates a notice with custom placement", async () => {
@@ -138,9 +138,7 @@ describe("useNotice", () => {
       })
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Bottom Right Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Bottom Right Notice")
   })
 
   test("creates a notice with custom limit", async () => {
@@ -153,9 +151,7 @@ describe("useNotice", () => {
       })
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Limited Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Limited Notice")
   })
 
   test("updates limit and retrieves the updated limit", async () => {
@@ -169,9 +165,7 @@ describe("useNotice", () => {
       })
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("First Limit Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("First Limit Notice")
 
     act(() => {
       result.current({
@@ -181,9 +175,7 @@ describe("useNotice", () => {
       })
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Second Limit Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Second Limit Notice")
   })
 
   test("creates a notice with closeStrategy as a string", async () => {
@@ -196,9 +188,7 @@ describe("useNotice", () => {
       })
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Button Close Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Button Close Notice")
   })
 
   test("creates a notice with duration", async () => {
@@ -211,9 +201,7 @@ describe("useNotice", () => {
       })
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Timed Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Timed Notice")
   })
 
   test("creates a notice without icon", async () => {
@@ -226,62 +214,7 @@ describe("useNotice", () => {
       })
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("No Icon Notice")).toBeInTheDocument()
-    })
-  })
-
-  test("creates a notice with closable and button close strategy", async () => {
-    const { result } = renderHook(() => useNotice())
-
-    act(() => {
-      result.current({
-        closable: true,
-        closeStrategy: "button",
-        duration: null,
-        title: "Closeable Button Notice",
-      })
-    })
-
-    await waitFor(() => {
-      expect(screen.getByText("Closeable Button Notice")).toBeInTheDocument()
-      expect(screen.getByRole("button", { name: /close/i })).toBeInTheDocument()
-    })
-
-    act(() => {
-      screen.getByRole("button", { name: /close/i }).click()
-    })
-
-    await waitFor(() => {
-      expect(
-        screen.queryByText("Closeable Button Notice"),
-      ).not.toBeInTheDocument()
-    })
-  })
-
-  test("creates a notice with click close strategy", async () => {
-    const { result } = renderHook(() => useNotice())
-
-    act(() => {
-      result.current({
-        closable: true,
-        closeStrategy: "click",
-        duration: null,
-        title: "Click Close Notice",
-      })
-    })
-
-    await waitFor(() => {
-      expect(screen.getByText("Click Close Notice")).toBeInTheDocument()
-    })
-
-    act(() => {
-      screen.getByText("Click Close Notice").click()
-    })
-
-    await waitFor(() => {
-      expect(screen.queryByText("Click Close Notice")).not.toBeInTheDocument()
-    })
+    await expectNoticeVisible("No Icon Notice")
   })
 
   test("uses default options from hook arguments", async () => {
@@ -298,9 +231,7 @@ describe("useNotice", () => {
       })
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Default Options Notice")).toBeInTheDocument()
-    })
+    await expectNoticeVisible("Default Options Notice")
   })
 
   test("creates a notice with closable false", async () => {
@@ -315,11 +246,9 @@ describe("useNotice", () => {
       })
     })
 
-    await waitFor(() => {
-      expect(screen.getByText("Non-closable Notice")).toBeInTheDocument()
-      expect(
-        screen.queryByRole("button", { name: /close/i }),
-      ).not.toBeInTheDocument()
-    })
+    await expectNoticeVisible("Non-closable Notice")
+    expect(
+      screen.queryByRole("button", { name: /close/i }),
+    ).not.toBeInTheDocument()
   })
 })

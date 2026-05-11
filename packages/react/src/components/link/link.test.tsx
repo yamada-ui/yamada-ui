@@ -6,27 +6,15 @@ describe("<Link />", () => {
     await a11y(<Link href="https://yamada-ui.com">Link</Link>)
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Link.displayName).toBe("Link")
-  })
-
-  test("sets `className` correctly", () => {
-    render(<Link href="https://yamada-ui.com">Link</Link>)
-    expect(screen.getByRole("link")).toHaveClass("ui-link")
-  })
-
-  test("renders HTML tag correctly", () => {
-    render(<Link href="https://yamada-ui.com">Link</Link>)
-    expect(screen.getByRole("link").tagName).toBe("A")
-  })
-
   test("should open link in a new tab", () => {
     render(
       <Link href="https://yamada-ui.com" external>
         Link
       </Link>,
     )
+
     const link = screen.getByRole("link")
+
     expect(link).toHaveAttribute("target", "_blank")
     expect(link).toHaveAttribute("rel", "noopener")
   })

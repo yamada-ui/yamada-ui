@@ -1358,7 +1358,7 @@ interface SidebarItemTooltipProps extends TooltipProps {}
 
 const SidebarItemTooltip: FC<SidebarItemTooltipProps> = (props) => {
   const { tooltipProps } = useItemComponentContext()
-  const { children, disabled, ...rest } = { ...tooltipProps, ...props }
+  const { children, disabled, ...rest } = mergeProps(tooltipProps, props)()
   const { mode, placement } = useComponentContext()
   const offcanvas = mode === "offcanvas"
 

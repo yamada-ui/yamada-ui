@@ -19,14 +19,14 @@ env:
 
 jobs:
   test:
-    name: React / ${{ matrix.name }} ${{ matrix.shard_index }}/4
+    name: React / ${{ matrix.name }} ${{ matrix.shard_index }}/6
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     strategy:
       fail-fast: false
       matrix:
         browser: [chromium, firefox, webkit]
-        shard_index: [1, 2, 3, 4]
+        shard_index: [1, 2, 3, 4, 5, 6]
         include:
           - browser: chromium
             name: Chromium
@@ -64,21 +64,17 @@ jobs:
         if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.changed_keys != ''
         uses: ./.github/composite-actions/install
 
-      - name: Resize /dev/shm
-        if: matrix.browser == 'firefox' && (inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.changed_keys != '')
-        run: sudo mount -o remount,size=2G /dev/shm
-
       - name: Setup Browser
         if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.changed_keys != ''
         run: pnpm react exec playwright install ${{ matrix.browser }} --with-deps ${{ matrix.browser == 'chromium' && '--only-shell' || '' }}
 
       - name: Run test (full)
         if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.full_any_changed == 'true'
-        run: pnpm turbo run test:coverage:${{ matrix.browser }} --filter=./packages/react -- --retry=3 --shard=${{ matrix.shard_index }}/4
+        run: pnpm turbo run test:coverage:${{ matrix.browser }} --filter=./packages/react -- --retry=3 --shard=${{ matrix.shard_index }}/6
 
       - name: Run test (diff)
         if: inputs.TURBO_SCM_BASE != '' && steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true'
-        run: pnpm turbo run test:coverage:${{ matrix.browser }} --filter=./packages/react -- --retry=3 --changed ${{ inputs.TURBO_SCM_BASE }} --shard=${{ matrix.shard_index }}/4
+        run: pnpm turbo run test:coverage:${{ matrix.browser }} --filter=./packages/react -- --retry=3 --changed ${{ inputs.TURBO_SCM_BASE }} --shard=${{ matrix.shard_index }}/6
 
       - name: Upload coverage
         if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.changed_keys != ''

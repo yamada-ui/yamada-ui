@@ -1,7 +1,6 @@
 import type { FC, MouseEvent as ReactMouseEvent, ReactNode } from "react"
-import { act, fireEvent, screen, waitFor } from "@testing-library/react"
 import { useState } from "react"
-import { render, renderHook } from "#test/browser"
+import { act, page, render, renderHook, waitFor } from "#test/browser"
 import { Select, useSelect } from "."
 
 const items: Select.Item[] = [
@@ -24,21 +23,21 @@ describe("<Select />", () => {
       />,
     )
 
-    await user.click(screen.getByRole("option", { name: "Option 1" }), {
+    await user.click(page.getByRole("option", { name: "Option 1" }), {
       force: true,
     })
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one"])
     })
 
-    await user.click(screen.getByRole("option", { name: "Option 2" }), {
+    await user.click(page.getByRole("option", { name: "Option 2" }), {
       force: true,
     })
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
 
-    await user.click(screen.getByRole("option", { name: "Option 1" }), {
+    await user.click(page.getByRole("option", { name: "Option 1" }), {
       force: true,
     })
     await waitFor(() => {
@@ -60,10 +59,10 @@ describe("<Select />", () => {
       />,
     )
 
-    await user.click(screen.getByRole("option", { name: "Option 1" }), {
+    await user.click(page.getByRole("option", { name: "Option 1" }), {
       force: true,
     })
-    await user.click(screen.getByRole("option", { name: "Option 2" }), {
+    await user.click(page.getByRole("option", { name: "Option 2" }), {
       force: true,
     })
 
@@ -71,15 +70,14 @@ describe("<Select />", () => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
 
-    await waitFor(() => {
-      expect(screen.getByRole("option", { name: "Option 3" })).toHaveAttribute(
-        "aria-disabled",
-        "true",
-      )
-    })
+    await expect
+      .element(page.getByRole("option", { name: "Option 3" }))
+      .toHaveAttribute("aria-disabled", "true")
 
     const callsAfterMaxReached = onChange.mock.calls.length
-    fireEvent.click(screen.getByRole("option", { name: "Option 3" }))
+    await user.click(page.getByRole("option", { name: "Option 3" }), {
+      force: true,
+    })
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledTimes(callsAfterMaxReached)
@@ -98,10 +96,10 @@ describe("<Select />", () => {
       />,
     )
 
-    const field = screen.getByRole("combobox", { name: /Choose options/i })
+    const field = page.getByRole("combobox", { name: /Choose options/i })
 
-    expect(field).toHaveTextContent("Option 1")
-    expect(field).toHaveTextContent("Option 2")
+    await expect.element(field).toHaveTextContent("Option 1")
+    await expect.element(field).toHaveTextContent("Option 2")
   })
 
   test("displays placeholder when no value is selected in multiple mode", async () => {
@@ -109,13 +107,13 @@ describe("<Select />", () => {
       <Select.Root items={items} multiple placeholder="Choose options" />,
     )
 
-    const field = screen.getByRole("combobox", { name: /Choose options/i })
+    const field = page.getByRole("combobox", { name: /Choose options/i })
 
-    expect(field).toHaveTextContent("Choose options")
+    await expect.element(field).toHaveTextContent("Choose options")
   })
 
   test("renders clear icon and clears value when clicked", async () => {
-    await render(
+    const { user } = await render(
       <Select.Root
         clearable
         defaultValue="one"
@@ -124,23 +122,21 @@ describe("<Select />", () => {
       />,
     )
 
-    const clearButton = screen.getByRole("button", { name: /Clear value/i })
+    const clearButton = page.getByRole("button", { name: /Clear value/i })
 
-    expect(clearButton).toBeInTheDocument()
+    await expect.element(clearButton).toBeInTheDocument()
 
-    fireEvent.click(clearButton)
+    await user.click(clearButton)
 
-    await waitFor(() => {
-      const field = screen.getByRole("combobox", { name: /Choose a option/i })
+    const field = page.getByRole("combobox", { name: /Choose a option/i })
 
-      expect(field).toHaveTextContent("Choose a option")
-    })
+    await expect.element(field).toHaveTextContent("Choose a option")
   })
 
   test("clears value via keyboard on clear icon", async () => {
     const onChange = vi.fn()
 
-    await render(
+    const { user } = await render(
       <Select.Root
         clearable
         defaultValue="one"
@@ -149,16 +145,18 @@ describe("<Select />", () => {
         onChange={onChange}
       />,
     )
-    fireEvent.keyDown(screen.getByRole("button", { name: /Clear value/i }), {
-      key: "Enter",
-    })
+    page
+      .getByRole("button", { name: /Clear value/i })
+      .element()
+      .focus()
+    await user.keyboard("{Enter}")
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith("")
     })
 
     onChange.mockClear()
 
-    await render(
+    const { user: user2 } = await render(
       <Select.Root
         clearable
         defaultValue="one"
@@ -167,10 +165,11 @@ describe("<Select />", () => {
         onChange={onChange}
       />,
     )
-    fireEvent.keyDown(screen.getByRole("button", { name: /Clear value/i }), {
-      key: " ",
-      code: "Space",
-    })
+    page
+      .getByRole("button", { name: /Clear value/i })
+      .element()
+      .focus()
+    await user2.keyboard(" ")
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith("")
     })
@@ -190,7 +189,7 @@ describe("<Select />", () => {
       />,
     )
 
-    await user.click(screen.getByRole("button", { name: /Clear value/i }), {
+    await user.click(page.getByRole("button", { name: /Clear value/i }), {
       force: true,
     })
 
@@ -212,10 +211,10 @@ describe("<Select />", () => {
 
     expect(input).toBeInTheDocument()
 
-    fireEvent.focus(input!)
+    input!.dispatchEvent(new FocusEvent("focus", { bubbles: true }))
 
     expect(document.activeElement).toBe(
-      screen.getByRole("combobox", { name: /Choose a option/i }),
+      page.getByRole("combobox", { name: /Choose a option/i }).element(),
     )
   })
 
@@ -235,11 +234,11 @@ describe("<Select />", () => {
 
     expect(input).toBeInTheDocument()
 
-    fireEvent.focus(input)
+    input.dispatchEvent(new FocusEvent("focus", { bubbles: true }))
 
-    const field = screen.getByRole("combobox", { name: /Choose a option/i })
+    const field = page.getByRole("combobox", { name: /Choose a option/i })
 
-    expect(document.activeElement).not.toBe(field)
+    expect(document.activeElement).not.toBe(field.element())
   })
 
   test("does not focus field when disabled", async () => {
@@ -247,11 +246,11 @@ describe("<Select />", () => {
       <Select.Root disabled items={items} placeholder="Choose a option" />,
     )
 
-    const field = screen.getByRole("combobox", { name: /Choose a option/i })
+    const field = page.getByRole("combobox", { name: /Choose a option/i })
 
-    fireEvent.focus(field)
+    field.element().focus()
 
-    expect(field).toHaveAttribute("aria-disabled", "true")
+    await expect.element(field).toHaveAttribute("aria-disabled", "true")
   })
 
   test("renders with items prop using grouped items", async () => {
@@ -273,9 +272,9 @@ describe("<Select />", () => {
       />,
     )
 
-    const group = screen.getByRole("group", { name: "Group 1" })
+    const group = page.getByRole("group", { name: "Group 1" })
 
-    expect(group).toBeInTheDocument()
+    await expect.element(group).toBeInTheDocument()
   })
 
   test("does not show clear icon when clearable is false", async () => {
@@ -287,9 +286,9 @@ describe("<Select />", () => {
       />,
     )
 
-    expect(
-      screen.queryByRole("button", { name: /Clear value/i }),
-    ).not.toBeInTheDocument()
+    await expect
+      .element(page.getByRole("button", { name: /Clear value/i }).query())
+      .not.toBeInTheDocument()
   })
 
   test("does not include placeholder in options when includePlaceholder is false", async () => {
@@ -302,7 +301,7 @@ describe("<Select />", () => {
       />,
     )
 
-    const options = screen.getAllByRole("option")
+    const options = page.getByRole("option").elements()
     const placeholderOption = options.find(
       (opt) => opt.textContent === "Choose a option",
     )
@@ -321,9 +320,9 @@ describe("<Select />", () => {
       />,
     )
 
-    const field = screen.getByRole("combobox", { name: /Choose options/i })
+    const field = page.getByRole("combobox", { name: /Choose options/i })
 
-    expect(field).toHaveTextContent("Option 1 |")
+    await expect.element(field).toHaveTextContent("Option 1 |")
   })
 
   test("focuses field on clear when focusOnClear is true", async () => {
@@ -337,13 +336,13 @@ describe("<Select />", () => {
       />,
     )
 
-    const clearButton = screen.getByRole("button", { name: /Clear value/i })
+    const clearButton = page.getByRole("button", { name: /Clear value/i })
 
     await user.click(clearButton)
 
     await waitFor(() => {
       expect(document.activeElement).toBe(
-        screen.getByRole("combobox", { name: /Choose a option/i }),
+        page.getByRole("combobox", { name: /Choose a option/i }).element(),
       )
     })
   })
@@ -359,16 +358,14 @@ describe("<Select />", () => {
       />,
     )
 
-    const clearButton = screen.getByRole("button", { name: /Clear value/i })
+    const clearButton = page.getByRole("button", { name: /Clear value/i })
 
     await user.click(clearButton)
 
-    await waitFor(() => {
-      const field = screen.getByRole("combobox", { name: /Choose a option/i })
+    const field = page.getByRole("combobox", { name: /Choose a option/i })
 
-      expect(field).toHaveTextContent("Choose a option")
-      expect(document.activeElement).not.toBe(field)
-    })
+    await expect.element(field).toHaveTextContent("Choose a option")
+    expect(document.activeElement).not.toBe(field.element())
   })
 
   test("works with controlled value", async () => {
@@ -392,15 +389,13 @@ describe("<Select />", () => {
 
     const { user } = await render(<ControlledSelect />)
 
-    const field = screen.getByRole("combobox", { name: /Choose a option/i })
+    const field = page.getByRole("combobox", { name: /Choose a option/i })
 
-    expect(field).toHaveTextContent("Option 1")
+    await expect.element(field).toHaveTextContent("Option 1")
 
-    await user.click(screen.getByTestId("change-value"), { force: true })
+    await user.click(page.getByTestId("change-value"), { force: true })
 
-    await waitFor(() => {
-      expect(field).toHaveTextContent("Option 2")
-    })
+    await expect.element(field).toHaveTextContent("Option 2")
   })
 
   test("works with controlled value in multiple mode", async () => {
@@ -428,16 +423,14 @@ describe("<Select />", () => {
 
     const { user } = await render(<ControlledMultiSelect />)
 
-    const field = screen.getByRole("combobox", { name: /Choose options/i })
+    const field = page.getByRole("combobox", { name: /Choose options/i })
 
-    expect(field).toHaveTextContent("Option 1")
+    await expect.element(field).toHaveTextContent("Option 1")
 
-    await user.click(screen.getByTestId("change-value"), { force: true })
+    await user.click(page.getByTestId("change-value"), { force: true })
 
-    await waitFor(() => {
-      expect(field).toHaveTextContent("Option 2")
-    })
-    expect(field).toHaveTextContent("Option 3")
+    await expect.element(field).toHaveTextContent("Option 2")
+    await expect.element(field).toHaveTextContent("Option 3")
   })
 
   test("renders with custom render function returning non-element", async () => {
@@ -451,9 +444,9 @@ describe("<Select />", () => {
       />,
     )
 
-    const field = screen.getByRole("combobox", { name: /Choose options/i })
+    const field = page.getByRole("combobox", { name: /Choose options/i })
 
-    expect(field).toHaveTextContent("Option 1")
+    await expect.element(field).toHaveTextContent("Option 1")
   })
 
   test("renders with custom render function returning ReactElement", async () => {
@@ -471,11 +464,15 @@ describe("<Select />", () => {
       />,
     )
 
-    const tags = screen.getAllByTestId("custom-tag")
+    const tags = page.getByTestId("custom-tag").elements()
 
     expect(tags).toHaveLength(2)
-    expect(tags[0]).toHaveTextContent("Option 1")
-    expect(tags[1]).toHaveTextContent("Option 2")
+    await expect
+      .element(page.getByTestId("custom-tag").first())
+      .toHaveTextContent("Option 1")
+    await expect
+      .element(page.getByTestId("custom-tag").nth(1))
+      .toHaveTextContent("Option 2")
   })
 
   test("removes selected value via custom render's onClear", async () => {
@@ -496,7 +493,7 @@ describe("<Select />", () => {
       />,
     )
 
-    const tags = screen.getAllByTestId("custom-tag")
+    const tags = page.getByTestId("custom-tag").elements()
 
     await user.click(tags[0]!, { force: true })
 
@@ -508,7 +505,7 @@ describe("<Select />", () => {
   test("onClear does not call onChange when item value is empty", async () => {
     const onChange = vi.fn()
 
-    await render(
+    const { user } = await render(
       <Select.Root
         items={items}
         multiple
@@ -522,9 +519,7 @@ describe("<Select />", () => {
       />,
     )
 
-    const placeholderTag = screen.getByTestId("tag-")
-
-    fireEvent.click(placeholderTag)
+    await user.click(page.getByTestId("tag-"))
     expect(onChange).not.toHaveBeenCalled()
   })
 
@@ -533,9 +528,9 @@ describe("<Select />", () => {
       <Select.Root items={items} placeholder="Choose a option" readOnly />,
     )
 
-    const field = screen.getByRole("combobox", { name: /Choose a option/i })
+    const field = page.getByRole("combobox", { name: /Choose a option/i })
 
-    expect(field).toHaveAttribute("aria-readonly", "true")
+    await expect.element(field).toHaveAttribute("aria-readonly", "true")
   })
 
   test("renders hidden input with correct attributes", async () => {
@@ -587,7 +582,7 @@ describe("<Select />", () => {
   test("renders without placeholder", async () => {
     await render(<Select.Root defaultOpen items={items} />)
 
-    const options = screen.getAllByRole("option")
+    const options = page.getByRole("option").elements()
 
     expect(options).toHaveLength(3)
   })
@@ -597,9 +592,9 @@ describe("<Select />", () => {
       <Select.Root defaultOpen items={[]} placeholder="Choose a option" />,
     )
 
-    const field = screen.getByRole("combobox", { name: /Choose a option/i })
+    const field = page.getByRole("combobox", { name: /Choose a option/i })
 
-    expect(field).toBeInTheDocument()
+    await expect.element(field).toBeInTheDocument()
   })
 
   test("selects a value in single mode", async () => {
@@ -614,7 +609,7 @@ describe("<Select />", () => {
       />,
     )
 
-    await user.click(screen.getByRole("option", { name: "Option 1" }), {
+    await user.click(page.getByRole("option", { name: "Option 1" }), {
       force: true,
     })
 
@@ -652,7 +647,7 @@ describe("<Select />", () => {
       />,
     )
 
-    await user.click(screen.getByRole("option", { name: "Apple" }), {
+    await user.click(page.getByRole("option", { name: "Apple" }), {
       force: true,
     })
 
@@ -680,15 +675,15 @@ describe("<Select />", () => {
       />,
     )
 
-    const field = screen.getByRole("combobox", { name: /Choose a item/i })
+    const field = page.getByRole("combobox", { name: /Choose a item/i })
 
-    expect(field).toHaveTextContent("Apple")
+    await expect.element(field).toHaveTextContent("Apple")
   })
 
   test("does not clear when disabled and clear icon is clicked", async () => {
     const onChange = vi.fn()
 
-    await render(
+    const { user } = await render(
       <Select.Root
         clearable
         defaultValue="one"
@@ -699,11 +694,11 @@ describe("<Select />", () => {
       />,
     )
 
-    const clearButton = screen.getByRole("button", { name: /Clear value/i })
+    const clearButton = page.getByRole("button", { name: /Clear value/i })
 
-    expect(clearButton).toHaveAttribute("aria-disabled", "true")
+    await expect.element(clearButton).toHaveAttribute("aria-disabled", "true")
 
-    fireEvent.click(clearButton)
+    await user.click(clearButton, { force: true })
 
     await waitFor(() => {
       expect(onChange).not.toHaveBeenCalled()
@@ -713,7 +708,7 @@ describe("<Select />", () => {
   test("does not clear when disabled and Space key is pressed on clear icon", async () => {
     const onChange = vi.fn()
 
-    await render(
+    const { user } = await render(
       <Select.Root
         clearable
         defaultValue="one"
@@ -724,9 +719,11 @@ describe("<Select />", () => {
       />,
     )
 
-    const clearButton = screen.getByRole("button", { name: /Clear value/i })
-
-    fireEvent.keyDown(clearButton, { key: " " })
+    page
+      .getByRole("button", { name: /Clear value/i })
+      .element()
+      .focus()
+    await user.keyboard(" ")
 
     await waitFor(() => {
       expect(onChange).not.toHaveBeenCalled()
@@ -742,7 +739,7 @@ describe("<Select />", () => {
       />,
     )
 
-    expect(screen.getByTestId("custom-icon")).toBeInTheDocument()
+    await expect.element(page.getByTestId("custom-icon")).toBeInTheDocument()
   })
 
   test("renders with custom clear icon", async () => {
@@ -756,7 +753,7 @@ describe("<Select />", () => {
       />,
     )
 
-    expect(screen.getByTestId("custom-clear")).toBeInTheDocument()
+    await expect.element(page.getByTestId("custom-clear")).toBeInTheDocument()
   })
 
   test("renders group without label", async () => {
@@ -768,9 +765,9 @@ describe("<Select />", () => {
       </Select.Root>,
     )
 
-    const option = screen.getByRole("option", { name: "Option 1" })
+    const option = page.getByRole("option", { name: "Option 1" })
 
-    expect(option).toBeInTheDocument()
+    await expect.element(option).toBeInTheDocument()
   })
 
   test("renders option with custom icon", async () => {
@@ -782,7 +779,7 @@ describe("<Select />", () => {
       </Select.Root>,
     )
 
-    expect(screen.getByTestId("opt-icon")).toBeInTheDocument()
+    await expect.element(page.getByTestId("opt-icon")).toBeInTheDocument()
   })
 
   test("renders with contentProps", async () => {
@@ -795,7 +792,7 @@ describe("<Select />", () => {
       />,
     )
 
-    expect(screen.getByTestId("content")).toBeInTheDocument()
+    await expect.element(page.getByTestId("content")).toBeInTheDocument()
   })
 
   test("renders with elementProps", async () => {
@@ -807,15 +804,15 @@ describe("<Select />", () => {
       />,
     )
 
-    expect(screen.getByTestId("element")).toBeInTheDocument()
+    await expect.element(page.getByTestId("element")).toBeInTheDocument()
   })
 
   test("displays no placeholder with empty multiple value and no placeholder set", async () => {
     await render(<Select.Root items={items} multiple />)
 
-    const field = screen.getByRole("combobox")
+    const field = page.getByRole("combobox")
 
-    expect(field).toBeInTheDocument()
+    await expect.element(field).toBeInTheDocument()
   })
 
   test("selects value when option uses children as value", async () => {
@@ -832,7 +829,7 @@ describe("<Select />", () => {
       </Select.Root>,
     )
 
-    const option = screen.getByRole("option", { name: "Option 1" })
+    const option = page.getByRole("option", { name: "Option 1" })
 
     await user.click(option, { force: true })
 
@@ -851,11 +848,11 @@ describe("<Select />", () => {
       />,
     )
 
-    const options = screen.getAllByRole("option")
+    const options = page.getByRole("option").elements()
 
-    options.forEach((option) => {
+    for (const option of options) {
       expect(option).toHaveAttribute("data-custom", "true")
-    })
+    }
   })
 
   test("renders with groupProps on the root", async () => {
@@ -878,9 +875,9 @@ describe("<Select />", () => {
       />,
     )
 
-    const group = screen.getByRole("group", { name: "Group 1" })
+    const group = page.getByRole("group", { name: "Group 1" })
 
-    expect(group).toBeInTheDocument()
+    await expect.element(group).toBeInTheDocument()
   })
 
   test("handles value that does not match any item in single mode", async () => {
@@ -892,9 +889,9 @@ describe("<Select />", () => {
       />,
     )
 
-    const field = screen.getByRole("combobox", { name: /Choose a option/i })
+    const field = page.getByRole("combobox", { name: /Choose a option/i })
 
-    expect(field).toBeInTheDocument()
+    await expect.element(field).toBeInTheDocument()
   })
 
   test("renders with children and items creates items from children", async () => {
@@ -905,8 +902,12 @@ describe("<Select />", () => {
       </Select.Root>,
     )
 
-    expect(screen.getByRole("option", { name: "Option 1" })).toBeInTheDocument()
-    expect(screen.getByRole("option", { name: "Option 2" })).toBeInTheDocument()
+    await expect
+      .element(page.getByRole("option", { name: "Option 1" }))
+      .toBeInTheDocument()
+    await expect
+      .element(page.getByRole("option", { name: "Option 2" }))
+      .toBeInTheDocument()
   })
 
   test("renders with placeholder option when using children", async () => {
@@ -916,7 +917,7 @@ describe("<Select />", () => {
       </Select.Root>,
     )
 
-    const options = screen.getAllByRole("option")
+    const options = page.getByRole("option").elements()
     const placeholderOption = options.find(
       (opt) => opt.textContent === "Choose a option",
     )
@@ -938,9 +939,9 @@ describe("<Select />", () => {
       />,
     )
 
-    const option = screen.getByRole("option", { name: "Apple" })
+    const option = page.getByRole("option", { name: "Apple" })
 
-    expect(option).toBeInTheDocument()
+    await expect.element(option).toBeInTheDocument()
   })
 
   test("handles items with non-string label so value stays undefined", async () => {
@@ -956,7 +957,7 @@ describe("<Select />", () => {
       />,
     )
 
-    expect(screen.getByRole("combobox")).toBeInTheDocument()
+    await expect.element(page.getByRole("combobox")).toBeInTheDocument()
   })
 
   test("renders non-ReactElement from custom render", async () => {
@@ -970,7 +971,9 @@ describe("<Select />", () => {
       />,
     )
 
-    expect(screen.getByRole("combobox")).toHaveTextContent("Option 1")
+    await expect
+      .element(page.getByRole("combobox"))
+      .toHaveTextContent("Option 1")
   })
 
   test("handles grouped items with non-string label so value stays undefined", async () => {
@@ -985,7 +988,9 @@ describe("<Select />", () => {
       <Select.Root defaultOpen items={groupedItems} placeholder="Choose" />,
     )
 
-    expect(screen.getByRole("group", { name: "Group" })).toBeInTheDocument()
+    await expect
+      .element(page.getByRole("group", { name: "Group" }))
+      .toBeInTheDocument()
   })
 
   test("selects item where label is used as value", async () => {
@@ -1004,7 +1009,7 @@ describe("<Select />", () => {
       />,
     )
 
-    const option = screen.getByRole("option", { name: "Apple" })
+    const option = page.getByRole("option", { name: "Apple" })
 
     await user.click(option, { force: true })
 
@@ -1029,9 +1034,9 @@ describe("<Select />", () => {
       />,
     )
 
-    const option = screen.getByRole("option", { name: "Apple" })
+    const option = page.getByRole("option", { name: "Apple" })
 
-    expect(option).toBeInTheDocument()
+    await expect.element(option).toBeInTheDocument()
   })
 
   test("renders with placeholderProps", async () => {
@@ -1045,7 +1050,9 @@ describe("<Select />", () => {
       </Select.Root>,
     )
 
-    expect(screen.getByTestId("placeholder-opt")).toBeInTheDocument()
+    await expect
+      .element(page.getByTestId("placeholder-opt"))
+      .toBeInTheDocument()
   })
 
   test("does not render placeholder option when includePlaceholder is false with children", async () => {
@@ -1059,7 +1066,7 @@ describe("<Select />", () => {
       </Select.Root>,
     )
 
-    const options = screen.getAllByRole("option")
+    const options = page.getByRole("option").elements()
 
     expect(options).toHaveLength(1)
     expect(options[0]).toHaveTextContent("Option 1")
@@ -1076,7 +1083,7 @@ describe("<Select />", () => {
       />,
     )
 
-    expect(screen.getByRole("combobox")).toBeInTheDocument()
+    await expect.element(page.getByRole("combobox")).toBeInTheDocument()
   })
 
   test("clear icon has correct tabIndex when interactive", async () => {
@@ -1089,9 +1096,9 @@ describe("<Select />", () => {
       />,
     )
 
-    const clearButton = screen.getByRole("button", { name: /Clear value/i })
+    const clearButton = page.getByRole("button", { name: /Clear value/i })
 
-    expect(clearButton).toHaveAttribute("tabindex", "0")
+    await expect.element(clearButton).toHaveAttribute("tabindex", "0")
   })
 
   test("clear icon has tabIndex -1 when disabled", async () => {
@@ -1105,9 +1112,9 @@ describe("<Select />", () => {
       />,
     )
 
-    const clearButton = screen.getByRole("button", { name: /Clear value/i })
+    const clearButton = page.getByRole("button", { name: /Clear value/i })
 
-    expect(clearButton).toHaveAttribute("tabindex", "-1")
+    await expect.element(clearButton).toHaveAttribute("tabindex", "-1")
   })
 
   test("does not close on select in multiple mode by default", async () => {
@@ -1120,21 +1127,17 @@ describe("<Select />", () => {
       />,
     )
 
-    await waitFor(() => {
-      expect(
-        screen.getByRole("option", { name: "Option 1" }),
-      ).toBeInTheDocument()
-    })
+    await expect
+      .element(page.getByRole("option", { name: "Option 1" }))
+      .toBeInTheDocument()
 
-    await user.click(screen.getByRole("option", { name: "Option 1" }), {
+    await user.click(page.getByRole("option", { name: "Option 1" }), {
       force: true,
     })
 
-    await waitFor(() => {
-      expect(
-        screen.getByRole("option", { name: "Option 2" }),
-      ).toBeInTheDocument()
-    })
+    await expect
+      .element(page.getByRole("option", { name: "Option 2" }))
+      .toBeInTheDocument()
   })
 
   test("renders SelectLabel within a group using the group context", async () => {
@@ -1147,7 +1150,7 @@ describe("<Select />", () => {
       </Select.Root>,
     )
 
-    expect(screen.getByText("Custom Label")).toBeInTheDocument()
+    await expect.element(page.getByText("Custom Label")).toBeInTheDocument()
   })
 
   test("renders placeholder option as hidden when placeholder is provided and includePlaceholder is false", async () => {
@@ -1160,7 +1163,7 @@ describe("<Select />", () => {
       />,
     )
 
-    const options = screen.getAllByRole("option")
+    const options = page.getByRole("option").elements()
 
     expect(options).toHaveLength(3)
   })
@@ -1178,7 +1181,7 @@ describe("<Select />", () => {
       />,
     )
 
-    const options = screen.getAllByRole("option")
+    const options = page.getByRole("option").elements()
     const placeholderOption = options.find(
       (opt) => opt.textContent === "Choose a option",
     )
@@ -1200,7 +1203,7 @@ describe("<Select />", () => {
       </Select.Root>,
     )
 
-    const options = screen.getAllByRole("option")
+    const options = page.getByRole("option").elements()
 
     expect(options).toHaveLength(2)
     expect(options[0]).toHaveTextContent("Option 1")
@@ -1220,8 +1223,8 @@ describe("<Select />", () => {
       />,
     )
 
-    const option1 = screen.getByRole("option", { name: "Option 1" })
-    const option2 = screen.getByRole("option", { name: "Option 2" })
+    const option1 = page.getByRole("option", { name: "Option 1" })
+    const option2 = page.getByRole("option", { name: "Option 2" })
 
     await user.click(option1, { force: true })
 
@@ -1229,9 +1232,7 @@ describe("<Select />", () => {
       expect(onChange).toHaveBeenCalledWith(["one"])
     })
 
-    await waitFor(() => {
-      expect(option2).toHaveAttribute("aria-disabled", "true")
-    })
+    await expect.element(option2).toHaveAttribute("aria-disabled", "true")
   })
 
   test("useSelect returns prev when onChange is called with new value at max", async () => {
@@ -1284,6 +1285,6 @@ describe("<Select />", () => {
       />,
     )
 
-    expect(screen.getByTestId("root-wrapper")).toBeInTheDocument()
+    await expect.element(page.getByTestId("root-wrapper")).toBeInTheDocument()
   })
 })

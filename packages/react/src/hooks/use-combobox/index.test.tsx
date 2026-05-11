@@ -1,4 +1,8 @@
-import type { FC } from "react"
+import type {
+  FC,
+  KeyboardEvent as ReactKeyboardEvent,
+  MouseEvent as ReactMouseEvent,
+} from "react"
 import type { ComboboxItem, UseComboboxProps } from "./"
 import { vi } from "vitest"
 import { act, fireEvent, render, screen, waitFor } from "#test"
@@ -146,6 +150,236 @@ describe("useCombobox", () => {
     })
 
     expect(screen.getByTestId("content")).toBeInTheDocument()
+  })
+
+  test("trigger click keeps prop getter handler before rest handler", () => {
+    const sequence: string[] = []
+    const propsOnClick = vi.fn(() => {
+      sequence.push("props")
+    })
+    const restOnClick = vi.fn((ev: ReactMouseEvent<HTMLDivElement>) => {
+      sequence.push("rest")
+      ev.preventDefault()
+    })
+    const Component: FC = () => {
+      const {
+        descendants,
+        getTriggerProps,
+        onActiveDescendant,
+        onClose,
+        onSelect,
+      } = useCombobox({
+        onClick: restOnClick,
+      })
+
+      return (
+        <ComboboxDescendantsContext value={descendants}>
+          <ComboboxContext value={{ onActiveDescendant, onClose, onSelect }}>
+            <div
+              {...getTriggerProps({
+                "data-testid": "trigger",
+                onClick: propsOnClick,
+              })}
+            >
+              Trigger
+            </div>
+          </ComboboxContext>
+        </ComboboxDescendantsContext>
+      )
+    }
+
+    render(<Component />)
+
+    const trigger = screen.getByTestId("trigger")
+
+    act(() => {
+      fireEvent.click(trigger)
+    })
+
+    expect(propsOnClick).toHaveBeenCalledTimes(1)
+    expect(restOnClick).toHaveBeenCalledTimes(1)
+    expect(sequence).toStrictEqual(["props", "rest"])
+    expect(trigger).toHaveAttribute("aria-expanded", "false")
+  })
+
+  test("trigger keydown keeps prop getter handler before rest handler", () => {
+    const sequence: string[] = []
+    const propsOnKeyDown = vi.fn(() => {
+      sequence.push("props")
+    })
+    const restOnKeyDown = vi.fn((ev: ReactKeyboardEvent<HTMLDivElement>) => {
+      if (ev.key === "Enter") {
+        sequence.push("rest")
+        ev.preventDefault()
+      }
+    })
+    const Component: FC = () => {
+      const {
+        descendants,
+        getTriggerProps,
+        onActiveDescendant,
+        onClose,
+        onSelect,
+      } = useCombobox({
+        onKeyDown: restOnKeyDown,
+      })
+
+      return (
+        <ComboboxDescendantsContext value={descendants}>
+          <ComboboxContext value={{ onActiveDescendant, onClose, onSelect }}>
+            <div
+              {...getTriggerProps({
+                "data-testid": "trigger",
+                onKeyDown: propsOnKeyDown,
+              })}
+            >
+              Trigger
+            </div>
+          </ComboboxContext>
+        </ComboboxDescendantsContext>
+      )
+    }
+
+    render(<Component />)
+
+    const trigger = screen.getByTestId("trigger")
+
+    act(() => {
+      fireEvent.keyDown(trigger, { key: "Enter" })
+    })
+
+    expect(propsOnKeyDown).toHaveBeenCalledTimes(1)
+    expect(restOnKeyDown).toHaveBeenCalledTimes(1)
+    expect(sequence).toStrictEqual(["props", "rest"])
+    expect(trigger).toHaveAttribute("aria-expanded", "false")
+  })
+
+  test("item click keeps prop getter handler before rest handler", async () => {
+    const sequence: string[] = []
+    const onSelect = vi.fn()
+    const onActiveDescendant = vi.fn()
+    const propsOnClick = vi.fn(() => {
+      sequence.push("props")
+    })
+    const restOnClick = vi.fn((ev: ReactMouseEvent<HTMLDivElement>) => {
+      sequence.push("rest")
+      ev.preventDefault()
+    })
+    const Item: FC = () => {
+      const { getItemProps } = useComboboxItem({
+        value: "one",
+        onClick: restOnClick,
+      })
+
+      return (
+        <div
+          {...getItemProps({
+            "data-testid": "item-one",
+            onClick: propsOnClick,
+          })}
+        >
+          one
+        </div>
+      )
+    }
+    const Component: FC = () => {
+      const { descendants, getContentProps, getTriggerProps, onClose } =
+        useCombobox({
+          defaultOpen: true,
+        })
+
+      return (
+        <ComboboxDescendantsContext value={descendants}>
+          <ComboboxContext value={{ onActiveDescendant, onClose, onSelect }}>
+            <div {...getTriggerProps({ "data-testid": "trigger" })}>
+              Trigger
+            </div>
+            <div {...getContentProps({ "data-testid": "content" })}>
+              <Item />
+            </div>
+          </ComboboxContext>
+        </ComboboxDescendantsContext>
+      )
+    }
+
+    render(<Component />)
+
+    await waitFor(() => {
+      expect(screen.getByTestId("item-one")).toBeInTheDocument()
+    })
+
+    act(() => {
+      fireEvent.click(screen.getByTestId("item-one"))
+    })
+
+    expect(propsOnClick).toHaveBeenCalledTimes(1)
+    expect(restOnClick).toHaveBeenCalledTimes(1)
+    expect(sequence).toStrictEqual(["props", "rest"])
+    expect(onSelect).not.toHaveBeenCalled()
+  })
+
+  test("item mouse move keeps prop getter handler before rest handler", async () => {
+    const sequence: string[] = []
+    const onSelect = vi.fn()
+    const onActiveDescendant = vi.fn()
+    const propsOnMouseMove = vi.fn(() => {
+      sequence.push("props")
+    })
+    const restOnMouseMove = vi.fn((ev: ReactMouseEvent<HTMLDivElement>) => {
+      sequence.push("rest")
+      ev.preventDefault()
+    })
+    const Item: FC = () => {
+      const { getItemProps } = useComboboxItem({
+        value: "one",
+        onMouseMove: restOnMouseMove,
+      })
+
+      return (
+        <div
+          {...getItemProps({
+            "data-testid": "item-one",
+            onMouseMove: propsOnMouseMove,
+          })}
+        >
+          one
+        </div>
+      )
+    }
+    const Component: FC = () => {
+      const { descendants, getContentProps, getTriggerProps, onClose } =
+        useCombobox({
+          defaultOpen: true,
+        })
+
+      return (
+        <ComboboxDescendantsContext value={descendants}>
+          <ComboboxContext value={{ onActiveDescendant, onClose, onSelect }}>
+            <div {...getTriggerProps({ "data-testid": "trigger" })}>
+              Trigger
+            </div>
+            <div {...getContentProps({ "data-testid": "content" })}>
+              <Item />
+            </div>
+          </ComboboxContext>
+        </ComboboxDescendantsContext>
+      )
+    }
+
+    render(<Component />)
+
+    await waitFor(() => {
+      expect(screen.getByTestId("item-one")).toBeInTheDocument()
+    })
+
+    act(() => {
+      fireEvent.mouseMove(screen.getByTestId("item-one"))
+    })
+
+    expect(propsOnMouseMove).toHaveBeenCalledTimes(1)
+    expect(restOnMouseMove).toHaveBeenCalledTimes(1)
+    expect(sequence).toStrictEqual(["props", "rest"])
+    expect(onActiveDescendant).not.toHaveBeenCalled()
   })
 
   test("does not open on click when disabled", () => {

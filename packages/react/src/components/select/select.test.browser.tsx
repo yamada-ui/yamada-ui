@@ -30,6 +30,9 @@ describe("<Select />", () => {
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one"])
     })
+    await expect
+      .element(page.getByRole("option", { name: "Option 1" }))
+      .toHaveAttribute("aria-selected", "true")
 
     await expect
       .element(page.getByRole("option", { name: "Option 2" }))
@@ -38,6 +41,9 @@ describe("<Select />", () => {
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
+    await expect
+      .element(page.getByRole("option", { name: "Option 2" }))
+      .toHaveAttribute("aria-selected", "true")
 
     await expect
       .element(page.getByRole("option", { name: "Option 1" }))
@@ -46,6 +52,9 @@ describe("<Select />", () => {
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["two"])
     })
+    await expect
+      .element(page.getByRole("option", { name: "Option 1" }))
+      .toHaveAttribute("aria-selected", "false")
   })
 
   test("respects max selection limit in multiple mode", async () => {
@@ -62,29 +71,31 @@ describe("<Select />", () => {
       />,
     )
 
-    await user.click(page.getByRole("option", { name: "Option 1" }), {
-      force: true,
-    })
-    await user.click(page.getByRole("option", { name: "Option 2" }), {
-      force: true,
-    })
+    const option1 = page.getByRole("option", { name: "Option 1" })
+    const option2 = page.getByRole("option", { name: "Option 2" })
+    const option3 = page.getByRole("option", { name: "Option 3" })
+
+    await expect.element(option1).toBeVisible()
+    await user.click(option1)
+    await expect.element(option1).toHaveAttribute("aria-selected", "true")
+
+    await expect.element(option2).toBeVisible()
+    await user.click(option2)
+    await expect.element(option2).toHaveAttribute("aria-selected", "true")
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
 
-    await expect
-      .element(page.getByRole("option", { name: "Option 3" }))
-      .toHaveAttribute("aria-disabled", "true")
+    await expect.element(option3).toBeVisible()
+    await expect.element(option3).toHaveAttribute("aria-disabled", "true")
+    await expect.element(option3).toHaveAttribute("aria-selected", "false")
 
     const callsAfterMaxReached = onChange.mock.calls.length
-    await user.click(page.getByRole("option", { name: "Option 3" }), {
-      force: true,
-    })
-
-    await waitFor(() => {
-      expect(onChange).toHaveBeenCalledTimes(callsAfterMaxReached)
-    })
+    await expect(user.click(option3, { timeout: 200 })).rejects.toThrow(
+      /Timeout/,
+    )
+    expect(onChange).toHaveBeenCalledTimes(callsAfterMaxReached)
     expect(onChange).toHaveBeenLastCalledWith(["one", "two"])
   })
 

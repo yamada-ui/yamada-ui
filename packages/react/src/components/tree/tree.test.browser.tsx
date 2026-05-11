@@ -214,7 +214,7 @@ describe("<Tree />", () => {
     expect(onSelectedChange).toHaveBeenCalledWith(expect.arrayContaining(["1"]))
   })
 
-  test("should expand and collapse all with Ctrl+Shift shortcuts", async () => {
+  test("should expand all with Ctrl+Shift+ArrowDown", async () => {
     const onExpandedChange = vi.fn()
 
     const { user } = await render(
@@ -225,10 +225,20 @@ describe("<Tree />", () => {
     await user.keyboard("{Control>}{Shift>}{ArrowDown}{/Shift}{/Control}")
 
     expect(onExpandedChange).toHaveBeenCalledWith(expect.arrayContaining(["1"]))
+  })
 
-    onExpandedChange.mockClear()
+  test("should collapse all with Ctrl+Shift+ArrowUp", async () => {
+    const onExpandedChange = vi.fn()
 
-    await user.keyboard("{ArrowDown}")
+    const { user } = await render(
+      <Tree.Root
+        defaultExpandedValue={["1"]}
+        items={items}
+        onExpandedChange={onExpandedChange}
+      />,
+    )
+
+    await user.click(getTreeItemLabel("1-1"))
     await user.keyboard("{Control>}{Shift>}{ArrowUp}{/Shift}{/Control}")
 
     expect(onExpandedChange).toHaveBeenCalledWith([])
@@ -368,7 +378,7 @@ describe("<Tree />", () => {
     await expect.element(getTreeItem("1-1")).toHaveAttribute("tabindex", "0")
   })
 
-  test("should select item with Enter or Space key on leaf", async () => {
+  test("should select item with Enter key on leaf", async () => {
     const onSelectedChange = vi.fn()
 
     const { user } = await render(
@@ -383,9 +393,20 @@ describe("<Tree />", () => {
     await user.keyboard("{Enter}")
 
     expect(onSelectedChange).toHaveBeenCalledWith("1/1-1")
+  })
 
-    onSelectedChange.mockClear()
+  test("should select item with Space key on leaf", async () => {
+    const onSelectedChange = vi.fn()
 
+    const { user } = await render(
+      <Tree.Root
+        defaultExpandedValue={["1"]}
+        items={items}
+        onSelectedChange={onSelectedChange}
+      />,
+    )
+
+    await user.click(getTreeItemLabel("1-1"))
     await user.keyboard("{Space}")
 
     expect(onSelectedChange).toHaveBeenCalledWith("1/1-1")

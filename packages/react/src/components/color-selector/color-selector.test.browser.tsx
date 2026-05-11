@@ -1,40 +1,23 @@
 import { page, render } from "#test/browser"
-import { noop } from "../../utils"
 import { ColorSelector } from "./"
 
-const mockRect = (
-  el: HTMLElement | SVGElement,
-  rect: Partial<DOMRect>,
-): (() => void) => {
-  const original = el.getBoundingClientRect
-  el.getBoundingClientRect = () =>
-    ({
-      bottom: 0,
-      height: 0,
-      left: 0,
-      right: 0,
-      toJSON: noop,
-      top: 0,
-      width: 0,
-      x: 0,
-      y: 0,
-      ...rect,
-    }) as DOMRect
+const getTrackRect = (testId: string) => {
+  const track = page.getByTestId(testId).element()
 
-  return () => {
-    el.getBoundingClientRect = original
-  }
+  if (!(track instanceof HTMLElement))
+    throw new Error("Expected an HTMLElement")
+
+  return { rect: track.getBoundingClientRect(), track }
 }
 
-const pointerDown = (element: Element, init: PointerEventInit) => {
-  element.dispatchEvent(
-    new PointerEvent("pointerdown", { bubbles: true, ...init }),
-  )
-}
-
-const pointerUp = (target: Element | Window, init: PointerEventInit) => {
+const pointer = (
+  target: EventTarget,
+  type: "pointerdown" | "pointerup",
+  x: number,
+  y: number,
+) => {
   target.dispatchEvent(
-    new PointerEvent("pointerup", { bubbles: true, ...init }),
+    new PointerEvent(type, { bubbles: true, clientX: x, clientY: y }),
   )
 }
 
@@ -72,23 +55,22 @@ describe("<ColorSelector />", () => {
     await render(
       <ColorSelector.Root
         defaultValue="#ff0000"
-        hueSliderProps={{ trackProps: { "data-testid": "hue-track" } }}
+        hueSliderProps={{
+          trackProps: { style: { width: 360 }, "data-testid": "hue-track" },
+        }}
         onChange={onChange}
         onChangeEnd={onChangeEnd}
         onChangeStart={onChangeStart}
       />,
     )
 
-    const track = page.getByTestId("hue-track").element()
-    const cleanup = mockRect(track, { left: 0, width: 360 })
+    const { rect, track } = getTrackRect("hue-track")
 
-    pointerDown(track, { clientX: 180, clientY: 0 })
+    pointer(track, "pointerdown", rect.left + rect.width / 2, rect.top)
     expect(onChangeStart).toHaveBeenCalledWith(expect.any(String))
 
-    pointerUp(window, { clientX: 180, clientY: 0 })
+    pointer(window, "pointerup", rect.left + rect.width / 2, rect.top)
     expect(onChangeEnd).toHaveBeenCalledWith(expect.any(String))
-
-    cleanup()
   })
 
   test("saturation slider pointer interaction triggers onChangeStart and onChangeEnd", async () => {
@@ -98,28 +80,33 @@ describe("<ColorSelector />", () => {
       <ColorSelector.Root
         defaultValue="#ff0000"
         saturationSliderProps={{
-          trackProps: { "data-testid": "saturation-track" },
+          trackProps: {
+            style: { height: 200, width: 200 },
+            "data-testid": "saturation-track",
+          },
         }}
         onChangeEnd={onChangeEnd}
         onChangeStart={onChangeStart}
       />,
     )
 
-    const track = page.getByTestId("saturation-track").element()
-    const cleanup = mockRect(track, {
-      height: 200,
-      left: 0,
-      top: 0,
-      width: 200,
-    })
+    const { rect, track } = getTrackRect("saturation-track")
 
-    pointerDown(track, { clientX: 100, clientY: 100 })
+    pointer(
+      track,
+      "pointerdown",
+      rect.left + rect.width / 2,
+      rect.top + rect.height / 2,
+    )
     expect(onChangeStart).toHaveBeenCalledWith(expect.any(String))
 
-    pointerUp(window, { clientX: 100, clientY: 100 })
+    pointer(
+      window,
+      "pointerup",
+      rect.left + rect.width / 2,
+      rect.top + rect.height / 2,
+    )
     expect(onChangeEnd).toHaveBeenCalledWith(expect.any(String))
-
-    cleanup()
   })
 
   test("alpha slider pointer interaction triggers onChangeStart and onChangeEnd", async () => {
@@ -129,22 +116,21 @@ describe("<ColorSelector />", () => {
       <ColorSelector.Root
         defaultValue="hsla(0, 100%, 50%, 0.5)"
         format="hsla"
-        alphaSliderProps={{ trackProps: { "data-testid": "alpha-track" } }}
+        alphaSliderProps={{
+          trackProps: { style: { width: 100 }, "data-testid": "alpha-track" },
+        }}
         onChangeEnd={onChangeEnd}
         onChangeStart={onChangeStart}
       />,
     )
 
-    const track = page.getByTestId("alpha-track").element()
-    const cleanup = mockRect(track, { left: 0, width: 100 })
+    const { rect, track } = getTrackRect("alpha-track")
 
-    pointerDown(track, { clientX: 50, clientY: 0 })
+    pointer(track, "pointerdown", rect.left + rect.width / 2, rect.top)
     expect(onChangeStart).toHaveBeenCalledWith(expect.any(String))
 
-    pointerUp(window, { clientX: 50, clientY: 0 })
+    pointer(window, "pointerup", rect.left + rect.width / 2, rect.top)
     expect(onChangeEnd).toHaveBeenCalledWith(expect.any(String))
-
-    cleanup()
   })
 
   test("does not trigger onChangeStart or onChangeEnd when disabled", async () => {
@@ -154,22 +140,21 @@ describe("<ColorSelector />", () => {
       <ColorSelector.Root
         defaultValue="#ff0000"
         disabled
-        hueSliderProps={{ trackProps: { "data-testid": "hue-track" } }}
+        hueSliderProps={{
+          trackProps: { style: { width: 360 }, "data-testid": "hue-track" },
+        }}
         onChangeEnd={onChangeEnd}
         onChangeStart={onChangeStart}
       />,
     )
 
-    const track = page.getByTestId("hue-track").element()
-    const cleanup = mockRect(track, { left: 0, width: 360 })
+    const { rect, track } = getTrackRect("hue-track")
 
-    pointerDown(track, { clientX: 180, clientY: 0 })
-    pointerUp(window, { clientX: 180, clientY: 0 })
+    pointer(track, "pointerdown", rect.left + rect.width / 2, rect.top)
+    pointer(window, "pointerup", rect.left + rect.width / 2, rect.top)
 
     expect(onChangeStart).not.toHaveBeenCalled()
     expect(onChangeEnd).not.toHaveBeenCalled()
-
-    cleanup()
   })
 
   test("does not trigger onChangeStart or onChangeEnd when readOnly", async () => {
@@ -179,22 +164,21 @@ describe("<ColorSelector />", () => {
       <ColorSelector.Root
         defaultValue="#ff0000"
         readOnly
-        hueSliderProps={{ trackProps: { "data-testid": "hue-track" } }}
+        hueSliderProps={{
+          trackProps: { style: { width: 360 }, "data-testid": "hue-track" },
+        }}
         onChangeEnd={onChangeEnd}
         onChangeStart={onChangeStart}
       />,
     )
 
-    const track = page.getByTestId("hue-track").element()
-    const cleanup = mockRect(track, { left: 0, width: 360 })
+    const { rect, track } = getTrackRect("hue-track")
 
-    pointerDown(track, { clientX: 180, clientY: 0 })
-    pointerUp(window, { clientX: 180, clientY: 0 })
+    pointer(track, "pointerdown", rect.left + rect.width / 2, rect.top)
+    pointer(window, "pointerup", rect.left + rect.width / 2, rect.top)
 
     expect(onChangeStart).not.toHaveBeenCalled()
     expect(onChangeEnd).not.toHaveBeenCalled()
-
-    cleanup()
   })
 
   test("eye dropper triggers color pick on click", async () => {

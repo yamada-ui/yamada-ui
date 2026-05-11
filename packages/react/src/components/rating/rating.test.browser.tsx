@@ -23,42 +23,35 @@ const dispatchTouchStart = (
   el.dispatchEvent(event)
 }
 
+const getRatingRect = (testId: string) => {
+  const rating = page.getByTestId(testId).element()
+
+  if (!(rating instanceof HTMLElement))
+    throw new Error("Expected an HTMLElement")
+
+  return { rating, rect: rating.getBoundingClientRect() }
+}
+
 describe("<Rating />", () => {
-  beforeEach(() => {
-    vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockImplementation(
-      () =>
-        ({
-          bottom: 20,
-          height: 20,
-          left: 16,
-          right: 116,
-          top: 0,
-          width: 100,
-          x: 16,
-          y: 0,
-        }) as DOMRect,
-    )
-    vi.spyOn(HTMLElement.prototype, "matches").mockImplementation(() => true)
-  })
-
-  afterEach(() => {
-    vi.restoreAllMocks()
-  })
-
   test("fills items up to the hovered position", async () => {
     const { container } = await render(
       <Rating data-testid="rating" height={20} width={100} />,
     )
 
-    const rating = page.getByTestId("rating").element()
+    const { rating, rect } = getRatingRect("rating")
     const items = container.querySelectorAll(".ui-rating__item")
 
     for (let i = 1; i < items.length; i++) {
       expect(items[i]).not.toHaveAttribute("data-filled")
     }
 
+    const itemWidth = rect.width / 5
+
     dispatchMouse(rating, "mouseenter")
-    dispatchMouse(rating, "mousemove", { clientX: 50, clientY: 10 })
+    dispatchMouse(rating, "mousemove", {
+      clientX: rect.left + itemWidth * 1.5,
+      clientY: rect.top + rect.height / 2,
+    })
 
     await expect.poll(() => items[1]?.hasAttribute("data-filled")).toBe(true)
     await expect.poll(() => items[2]?.hasAttribute("data-filled")).toBe(true)
@@ -94,11 +87,24 @@ describe("<Rating />", () => {
   test("updates value on root touchStart event", async () => {
     const onChange = vi.fn()
 
-    await render(<Rating data-testid="rating" onChange={onChange} />)
+    await render(
+      <Rating
+        data-testid="rating"
+        height={20}
+        width={100}
+        onChange={onChange}
+      />,
+    )
 
-    const rating = page.getByTestId("rating").element()
+    const { rating, rect } = getRatingRect("rating")
+    const itemWidth = rect.width / 5
 
-    dispatchTouchStart(rating, [{ clientX: 50, clientY: 10 }])
+    dispatchTouchStart(rating, [
+      {
+        clientX: rect.left + itemWidth * 1.5,
+        clientY: rect.top + rect.height / 2,
+      },
+    ])
 
     expect(onChange).toHaveBeenCalledWith(2)
   })
@@ -106,7 +112,7 @@ describe("<Rating />", () => {
   test("calls preventDefault on root touchEnd", async () => {
     await render(<Rating data-testid="rating" />)
 
-    const rating = page.getByTestId("rating").element()
+    const { rating } = getRatingRect("rating")
     const event = new Event("touchend", {
       bubbles: true,
       cancelable: true,

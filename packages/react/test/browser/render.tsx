@@ -1,3 +1,4 @@
+import type { RunOptions } from "axe-core"
 import type { PropsWithChildren, ReactNode } from "react"
 import type {
   ComponentRenderOptions as OriginalComponentRenderOptions,
@@ -5,6 +6,7 @@ import type {
   RenderHookResult as OriginalRenderHookResult,
 } from "vitest-browser-react"
 import type { UIProviderProps } from "../../src"
+import axe from "axe-core"
 import {
   render as originalRender,
   renderHook as originalRenderHook,
@@ -22,6 +24,20 @@ export interface BrowserRenderHookOptions<
 > extends OriginalRenderHookOptions<Y> {
   withProvider?: boolean
   providerProps?: Omit<UIProviderProps, "children">
+}
+
+export interface A11yOptions extends ComponentRenderOptions {
+  axeOptions?: RunOptions
+}
+
+export async function a11y(
+  ui: ReactNode,
+  { axeOptions = {}, ...options }: A11yOptions = {},
+): Promise<void> {
+  const { container } = await render(ui, options)
+  const results = await axe.run(container, axeOptions)
+
+  expect(results.violations).toStrictEqual([])
 }
 
 export async function render(

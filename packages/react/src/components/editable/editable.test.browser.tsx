@@ -1,11 +1,20 @@
-import { page, render } from "#test/browser"
+import { a11y, page, render } from "#test/browser"
 import { Editable } from "./"
 
 describe("<Editable />", () => {
+  test("passes a11y checks", async () => {
+    await a11y(
+      <Editable.Root defaultValue="Some text">
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>,
+    )
+  })
+
   test("syncs preview text with the input value after submitting", async () => {
     const { user } = await render(
       <Editable.Root defaultValue="Some text" startWithEditView>
-        <Editable.Preview data-testid="preview" />
+        <Editable.Preview />
         <Editable.Input />
       </Editable.Root>,
     )
@@ -15,9 +24,7 @@ describe("<Editable />", () => {
     await user.fill(input, "Updated text")
     await user.keyboard("{Enter}")
 
-    await expect
-      .element(page.getByTestId("preview"))
-      .toHaveTextContent("Updated text")
+    await expect.element(page.getByText("Updated text")).toBeVisible()
   })
 
   test("calls onCancel when Escape is pressed", async () => {
@@ -93,6 +100,25 @@ describe("<Editable />", () => {
     expect(onChange).toHaveBeenLastCalledWith("New text")
   })
 
+  test("enters edit mode and calls onEdit when the preview is focused", async () => {
+    const onEdit = vi.fn()
+    const { user } = await render(
+      <Editable.Root
+        defaultValue="Some text"
+        startWithEditView={false}
+        onEdit={onEdit}
+      >
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>,
+    )
+
+    await user.tab()
+
+    expect(onEdit).toHaveBeenCalledExactlyOnceWith()
+    await expect.element(page.getByRole("textbox")).toHaveFocus()
+  })
+
   test("releases focus from the input after submitting", async () => {
     const { user } = await render(
       <Editable.Root defaultValue="Some text" startWithEditView>
@@ -101,13 +127,16 @@ describe("<Editable />", () => {
       </Editable.Root>,
     )
 
-    const input = page.getByRole("textbox").element()
+    const input = page.getByRole("textbox")
 
-    await expect.poll(() => document.activeElement).toBe(input)
+    await expect.element(input).toHaveFocus()
 
     await user.keyboard("{Enter}")
 
-    await expect.poll(() => document.activeElement).not.toBe(input)
+    await expect
+      .element(page.getByRole("textbox").query())
+      .not.toBeInTheDocument()
+    await expect.element(page.getByText("Some text")).toBeVisible()
   })
 
   test("calls onSubmit when the input is blurred with submitOnBlur enabled", async () => {

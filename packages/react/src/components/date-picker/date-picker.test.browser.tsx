@@ -143,11 +143,11 @@ describe("<DatePicker />", () => {
     await user.click(input)
     await user.clear(input)
     await user.type(input, "2024-01-15")
+    await expect.element(input).toHaveValue("2024-01-15")
+    await expect.element(input).toHaveFocus()
     await user.keyboard("{Enter}")
 
-    await vi.waitFor(async () => {
-      await expect.element(input).toHaveValue("January 15, 2024")
-    })
+    await expect.element(input).toHaveValue("January 15, 2024")
   })
 
   test("handles Enter key on range date start input", async () => {

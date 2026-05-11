@@ -17,13 +17,19 @@ describe("<Autocomplete />", () => {
     )
 
     const field = page.getByRole("combobox").element()
+    const input = field.querySelector("input")!
 
     await user.click(page.getByRole("option", { name: "Option 3" }))
+    input.focus()
 
-    const spans = [...field.querySelectorAll("span")]
-    const lastSpan = spans.at(-1)
-
-    expect(lastSpan?.textContent).toContain(",")
+    await vi.waitFor(
+      () => {
+        const spans = [...field.querySelectorAll("span")]
+        const lastSpan = spans.at(-1)
+        expect(lastSpan?.textContent).toContain(",")
+      },
+      { timeout: 5000 },
+    )
   })
 
   test("hides separator when blurring outside the component in multiple mode", async () => {

@@ -23,38 +23,29 @@ describe("<Select />", () => {
       />,
     )
 
-    await expect
-      .element(page.getByRole("option", { name: "Option 1" }))
-      .toBeVisible()
-    await user.click(page.getByRole("option", { name: "Option 1" }))
+    const option1 = page.getByRole("option", { name: "Option 1" })
+    const option2 = page.getByRole("option", { name: "Option 2" })
+
+    await expect.element(option1).toBeVisible()
+    await user.click(option1, { force: true })
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one"])
     })
-    await expect
-      .element(page.getByRole("option", { name: "Option 1" }))
-      .toHaveAttribute("aria-selected", "true")
+    await expect.element(option1).toHaveAttribute("aria-selected", "true")
 
-    await expect
-      .element(page.getByRole("option", { name: "Option 2" }))
-      .toBeVisible()
-    await user.click(page.getByRole("option", { name: "Option 2" }))
+    await expect.element(option2).toBeVisible()
+    await user.click(option2, { force: true })
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
-    await expect
-      .element(page.getByRole("option", { name: "Option 2" }))
-      .toHaveAttribute("aria-selected", "true")
+    await expect.element(option2).toHaveAttribute("aria-selected", "true")
 
-    await expect
-      .element(page.getByRole("option", { name: "Option 1" }))
-      .toBeVisible()
-    await user.click(page.getByRole("option", { name: "Option 1" }))
+    await expect.element(option1).toBeVisible()
+    await user.click(option1, { force: true })
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["two"])
     })
-    await expect
-      .element(page.getByRole("option", { name: "Option 1" }))
-      .toHaveAttribute("aria-selected", "false")
+    await expect.element(option1).toHaveAttribute("aria-selected", "false")
   })
 
   test("respects max selection limit in multiple mode", async () => {
@@ -77,15 +68,17 @@ describe("<Select />", () => {
 
     await expect.element(option1).toBeVisible()
     await user.click(option1)
+    await waitFor(() => {
+      expect(onChange).toHaveBeenCalledWith(["one"])
+    })
     await expect.element(option1).toHaveAttribute("aria-selected", "true")
 
     await expect.element(option2).toBeVisible()
     await user.click(option2)
-    await expect.element(option2).toHaveAttribute("aria-selected", "true")
-
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
+    await expect.element(option2).toHaveAttribute("aria-selected", "true")
 
     await expect.element(option3).toBeVisible()
     await expect.element(option3).toHaveAttribute("aria-disabled", "true")

@@ -207,12 +207,11 @@ describe("<Select />", () => {
       />,
     )
 
-    const input = document.querySelector("input[name='test-select']")
-
+    const input = document.querySelector(
+      "input[name='test-select']",
+    ) as HTMLInputElement
     expect(input).toBeInTheDocument()
-
-    input!.dispatchEvent(new FocusEvent("focus", { bubbles: true }))
-
+    input.focus()
     expect(document.activeElement).toBe(
       page.getByRole("combobox", { name: /Choose a option/i }).element(),
     )
@@ -504,8 +503,7 @@ describe("<Select />", () => {
 
   test("onClear does not call onChange when item value is empty", async () => {
     const onChange = vi.fn()
-
-    const { user } = await render(
+    await render(
       <Select.Root
         items={items}
         multiple
@@ -518,8 +516,8 @@ describe("<Select />", () => {
         onChange={onChange}
       />,
     )
-
-    await user.click(page.getByTestId("tag-"))
+    const el = page.getByTestId("tag-").element() as HTMLButtonElement
+    el.click()
     expect(onChange).not.toHaveBeenCalled()
   })
 

@@ -9,8 +9,6 @@ updates:
       timezone: "Asia/Tokyo"
     cooldown:
       default-days: 7
-      semver-minor-days: 7
-      semver-patch-days: 7
       include:
         - "*"
     assignees:
@@ -23,39 +21,50 @@ updates:
           - "*"
         exclude-patterns:
           - "@changesets/*"
-          - "*oxlint*"
-          - "*eslint*"
+          - "oxlint"
+          - "oxlint-*"
+          - "eslint"
+          - "*eslint-plugin*"
+          - "@typescript-eslint/*"
           - "react"
           - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
           - "storybook"
           - "@storybook/*"
           - "vitest"
+          - "vitest-*"
           - "@vitest/*"
+          - "@testing-library/*"
       changesets:
         patterns:
           - "@changesets/*"
       lint:
         patterns:
-          - "*oxlint*"
-          - "*eslint*"
+          - "oxlint"
+          - "oxlint-*"
+          - "eslint"
+          - "*eslint-plugin*"
+          - "@typescript-eslint/*"
       react:
         patterns:
           - "react"
           - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
       storybook:
         patterns:
           - "storybook"
           - "@storybook/*"
-      vitest:
+      test:
         patterns:
           - "vitest"
+          - "vitest-*"
           - "@vitest/*"
+          - "@testing-library/*"
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
-      - dependency-name: "tsdown"
-        update-types:
-          ["version-update:semver-major", "version-update:semver-minor"]
     open-pull-requests-limit: 10
 
   - package-ecosystem: "github-actions"
@@ -71,7 +80,6 @@ updates:
         - "*"
     assignees:
       - "hirotomoyamada"
-      - "koralle"
     labels:
       - "github-actions"
     groups:

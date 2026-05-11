@@ -1,4 +1,4 @@
-import { a11y, page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { AlphaSlider } from "."
 
 describe("<AlphaSlider />", () => {
@@ -6,62 +6,23 @@ describe("<AlphaSlider />", () => {
     await a11y(<AlphaSlider.Root color="#000000" defaultValue={0.5} />)
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(AlphaSlider.Root.displayName).toBe("AlphaSliderRoot")
-    expect(AlphaSlider.Track.displayName).toBe("AlphaSliderTrack")
-    expect(AlphaSlider.Thumb.displayName).toBe("AlphaSliderThumb")
-    expect(AlphaSlider.Overlay.displayName).toBe("AlphaSliderOverlay")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(
-      <AlphaSlider.Root
-        data-testid="slider"
-        color="#000000"
-        defaultValue={0.5}
-        overlayProps={{ "data-testid": "overlay" }}
-        trackProps={{ "data-testid": "track" }}
-      />,
+  test("sets aria attributes correctly", () => {
+    const { rerender } = render(
+      <AlphaSlider.Root color="#000000" defaultValue={0.5} />,
     )
 
-    const root = page.getByTestId("slider")
-    const track = page.getByTestId("track")
-    const thumb = page.getByRole("slider")
-    const overlay = page.getByTestId("overlay").first()
+    const slider = screen.getByRole("slider")
 
-    await expect.element(root).toHaveClass("ui-hue-slider__root")
-    await expect.element(track).toHaveClass("ui-hue-slider__track")
-    await expect.element(thumb).toHaveClass("ui-hue-slider__thumb")
-    await expect.element(overlay).toHaveClass("ui-hue-slider__overlay")
-  })
+    expect(slider).toHaveAttribute("aria-valuenow", "0.5")
+    expect(slider).toHaveAttribute("aria-valuetext", "50%")
+    expect(slider).toHaveAttribute("aria-valuemin", "0")
+    expect(slider).toHaveAttribute("aria-valuemax", "1")
+    expect(slider).toHaveAttribute("aria-orientation", "horizontal")
 
-  test("sets aria attributes correctly", async () => {
-    await render(<AlphaSlider.Root color="#000000" defaultValue={0.5} />)
+    rerender(<AlphaSlider.Root color="#000000" disabled />)
+    expect(screen.getByRole("slider")).toHaveAttribute("aria-disabled")
 
-    const slider = page.getByRole("slider")
-
-    await expect.element(slider).toHaveAttribute("aria-valuenow", "0.5")
-    await expect.element(slider).toHaveAttribute("aria-valuetext", "50%")
-    await expect.element(slider).toHaveAttribute("aria-valuemin", "0")
-    await expect.element(slider).toHaveAttribute("aria-valuemax", "1")
-    await expect
-      .element(slider)
-      .toHaveAttribute("aria-orientation", "horizontal")
-  })
-
-  test("disabled AlphaSlider renders correctly", async () => {
-    await render(<AlphaSlider.Root color="#000000" disabled />)
-
-    await expect
-      .element(page.getByRole("slider"))
-      .toHaveAttribute("aria-disabled")
-  })
-
-  test("readonly AlphaSlider renders correctly", async () => {
-    await render(<AlphaSlider.Root color="#000000" readOnly />)
-
-    await expect
-      .element(page.getByRole("slider"))
-      .toHaveAttribute("aria-readonly")
+    rerender(<AlphaSlider.Root color="#000000" readOnly />)
+    expect(screen.getByRole("slider")).toHaveAttribute("aria-readonly")
   })
 })

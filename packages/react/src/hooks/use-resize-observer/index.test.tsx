@@ -1,41 +1,29 @@
-import type { FC } from "react"
-import { page, render } from "#test/browser"
+import { renderHook } from "#test"
 import { useElementSize, useResizeObserver } from "./"
 
 describe("useResizeObserver", () => {
-  const ButtonWithSize: FC = () => {
-    const [ref, rect] = useResizeObserver()
+  test("returns default rect on initial render", () => {
+    const { result } = renderHook(() => useResizeObserver())
+    const [, rect] = result.current
 
-    return (
-      <button ref={ref} style={{ blockSize: 320, inlineSize: 400 }}>
-        {rect.width} x {rect.height}
-      </button>
-    )
-  }
-
-  test("return contentRect value correctly", async () => {
-    await render(<ButtonWithSize />)
-
-    const button = page.getByRole("button")
-    await expect.element(button).toHaveTextContent("400 x 320")
+    expect(rect).toStrictEqual({
+      bottom: 0,
+      height: 0,
+      left: 0,
+      right: 0,
+      top: 0,
+      width: 0,
+      x: 0,
+      y: 0,
+    })
   })
 })
 
 describe("useElementSize", () => {
-  const ButtonWithSize: FC = () => {
-    const { ref, height, width } = useElementSize()
+  test("returns zero width and height on initial render", () => {
+    const { result } = renderHook(() => useElementSize())
 
-    return (
-      <button ref={ref} style={{ blockSize: 200, inlineSize: 150 }}>
-        {width} x {height}
-      </button>
-    )
-  }
-
-  test("returns width and height correctly", async () => {
-    await render(<ButtonWithSize />)
-
-    const button = page.getByRole("button")
-    await expect.element(button).toHaveTextContent("150 x 200")
+    expect(result.current.width).toBe(0)
+    expect(result.current.height).toBe(0)
   })
 })

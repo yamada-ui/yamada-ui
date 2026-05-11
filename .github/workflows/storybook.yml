@@ -4,16 +4,19 @@ on:
   push:
     paths:
       - ".github/workflows/storybook.yml"
-      - "packages/**/*.html"
-      - "packages/**/*.ts"
-      - "packages/**/*.tsx"
-      - "packages/**/package.json"
-      - "!packages/cli/**"
-      - "!packages/workspace/**"
-      - "!packages/**/test/**"
-      - "!packages/**/*.test.ts"
-      - "!packages/**/*.test.tsx"
       - "package.json"
+      - "pnpm-workspace.yaml"
+      - "packages/react/package.json"
+      - "packages/react/src/**/*.ts"
+      - "packages/react/src/**/*.tsx"
+      - "packages/react/storybook/**/*"
+      - "packages/utils/package.json"
+      - "packages/utils/src/**/*.ts"
+      - "packages/utils/src/**/*.tsx"
+      - "!packages/**/*.test.ts"
+      - "!packages/**/*.test.*.ts"
+      - "!packages/**/*.test.tsx"
+      - "!packages/**/*.test.*.tsx"
     branches:
       - main
 

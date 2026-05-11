@@ -401,19 +401,19 @@ When the `Drawer` opens, focus is trapped within it. That is, you cannot focus o
 
 ### ARIA Roles and Attributes
 
-| Component             | Roles and Attributes     | Usage                                                                        |
-| --------------------- | ------------------------ | ---------------------------------------------------------------------------- |
-| `Drawer.Content`      | `role="dialog"`          | Indicates that it is a dialog.                                               |
-|                       | `aria-modal="true"`      | Indicates that the displayed widget is modal.                                |
-|                       | `aria-labelledby`        | Sets the `id` of the associated `Drawer.Title`.                              |
-|                       | `aria-describedby`       | Sets the `id` of the associated `Drawer.Body`.                               |
-| `Drawer.OpenTrigger`  | `aria-expanded`          | Sets to `"true"` when modal is opened, and `"false"` when it is closed.      |
-|                       | `aria-controls`          | Sets the `id` of the `Drawer.Content` when open, and is not set when closed. |
-|                       | `aria-haspopup="dialog"` | Indicates that a dialog exists.                                              |
-|                       | `aria-label`             | Sets to `"Open modal"`.                                                      |
-| `Drawer.CloseButton`  | `aria-label`             | Sets to `"Close modal"`.                                                     |
-| `Drawer.CloseTrigger` | `aria-label`             | Sets to `"Close modal"`.                                                     |
-| `Drawer.Overlay`      | `aria-hidden="true"`     | Excludes the element from the accessibility tree.                            |
+| Element                          | Roles and Attributes     | Usage                                                                                |
+| -------------------------------- | ------------------------ | ------------------------------------------------------------------------------------ |
+| `section.ui-drawer__content`     | `role="dialog"`          | Indicates that it is a dialog.                                                       |
+|                                  | `aria-modal="true"`      | Indicates that the displayed widget is modal.                                        |
+|                                  | `aria-labelledby`        | Sets the `id` of the associated `Drawer.Title`.                                      |
+|                                  | `aria-describedby`       | Sets the `id` of the associated `Drawer.Body`.                                       |
+| `.ui-drawer__trigger--open`      | `aria-expanded`          | Sets to `"true"` when modal is opened, and `"false"` when it is closed.              |
+|                                  | `aria-controls`          | Sets the `id` of `section.ui-drawer__content` when open, and is not set when closed. |
+|                                  | `aria-haspopup="dialog"` | Indicates that a dialog exists.                                                      |
+|                                  | `aria-label`             | Sets to `"Open modal"`.                                                              |
+| `button.ui-drawer__close-button` | `aria-label`             | Sets to `"Close modal"`.                                                             |
+| `.ui-drawer__trigger--close`     | `aria-label`             | Sets to `"Close modal"`.                                                             |
+| `div.ui-drawer__overlay`         | `aria-hidden`            | Excludes the element from the accessibility tree.                                    |
 
 ## Similar Components
 

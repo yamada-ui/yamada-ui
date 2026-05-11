@@ -10,6 +10,7 @@ export default defineConfig({
     "dist",
     "trace",
     "node_modules",
+    "pnpm-lock.yaml",
     "coverage",
     "storybook-static",
     "routeTree.gen.ts",

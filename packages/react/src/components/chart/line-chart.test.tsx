@@ -1,4 +1,4 @@
-import { page, render } from "#test/browser"
+import { render, screen } from "#test"
 import { LineChart } from "."
 
 interface Data {
@@ -14,52 +14,44 @@ const data: Data[] = [
   { date: "2026-03-01", desktop: 1600, mobile: 2600, tablet: 2200 },
 ]
 
-describe("<LineChart />", () => {
-  test("sets `displayName` correctly", () => {
-    expect(LineChart.Root.displayName).toBe("LineChart")
-  })
+const responsiveContainerProps = { height: 400, width: 400 } as NonNullable<
+  Parameters<typeof LineChart.Root>[0]["responsiveContainerProps"]
+>
 
-  test("renders generated lines from `series`", async () => {
-    await render(
+describe("<LineChart />", () => {
+  test("renders generated lines from `series`", () => {
+    render(
       <LineChart.Root
         data-testid="root"
         data={data}
         series={[{ dataKey: "desktop" }, { dataKey: "mobile" }]}
+        responsiveContainerProps={responsiveContainerProps}
         xAxisProps={{ dataKey: "date" }}
       />,
     )
 
-    const root = page.getByTestId("root")
+    const root = screen.getByTestId("root")
 
-    await expect.element(root).toHaveClass("ui-line-chart")
-    expect(root.element().tagName).toBe("DIV")
-    await expect
-      .poll(
-        () =>
-          root.element().querySelectorAll(".ui-cartesian-chart__line").length,
-      )
-      .toBe(2)
+    expect(root).toHaveClass("ui-line-chart")
+    expect(root.tagName).toBe("DIV")
+    expect(root.querySelectorAll(".ui-cartesian-chart__line")).toHaveLength(2)
   })
 
-  test("renders composition components instead of fallback `series`", async () => {
-    await render(
+  test("renders composition components instead of fallback `series`", () => {
+    render(
       <LineChart.Root
         data-testid="root"
         data={data}
         series={[{ dataKey: "desktop" }, { dataKey: "mobile" }]}
+        responsiveContainerProps={responsiveContainerProps}
         xAxisProps={{ dataKey: "date" }}
       >
         <LineChart.Line dataKey="tablet" />
       </LineChart.Root>,
     )
 
-    const root = page.getByTestId("root")
+    const root = screen.getByTestId("root")
 
-    await expect
-      .poll(
-        () =>
-          root.element().querySelectorAll(".ui-cartesian-chart__line").length,
-      )
-      .toBe(1)
+    expect(root.querySelectorAll(".ui-cartesian-chart__line")).toHaveLength(1)
   })
 })

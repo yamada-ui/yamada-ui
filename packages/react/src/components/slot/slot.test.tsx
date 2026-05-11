@@ -1,5 +1,5 @@
 import type { FC, HTMLAttributes, ReactNode } from "react"
-import { a11y, page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { Slot, Slottable } from "./slot"
 
 describe("<Slot />", () => {
@@ -11,46 +11,41 @@ describe("<Slot />", () => {
     )
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Slot.name).toBe("Slot")
-    expect(Slottable.name).toBe("Slottable")
-  })
-
-  test("merges props onto child element", async () => {
-    await render(
+  test("merges props onto child element", () => {
+    render(
       <Slot className="from-slot" data-testid="slot">
         <button className="from-child">Click me</button>
       </Slot>,
     )
 
-    const button = page.getByRole("button", { name: "Click me" })
-    await expect.element(button).toBeInTheDocument()
-    await expect.element(button).toHaveAttribute("data-testid", "slot")
+    const button = screen.getByRole("button", { name: "Click me" })
+    expect(button).toBeInTheDocument()
+    expect(button).toHaveAttribute("data-testid", "slot")
   })
 
-  test("renders null when Slot has multiple children without Slottable", async () => {
+  test("renders null when Slot has multiple children without Slottable", () => {
     const spy = vi.spyOn(console, "error").mockImplementation(() => undefined)
 
-    await expect(
+    expect(() =>
       render(
         <Slot>
           <span>A</span>
           <span>B</span>
         </Slot>,
       ),
-    ).rejects.toThrow(/React.Children.only/)
+    ).toThrow(/React.Children.only/)
 
     spy.mockRestore()
   })
 
-  test("renders null when Slot has no children", async () => {
-    const { container } = await render(<Slot />)
-    const visibleContent = container.querySelector(":not([hidden])")
+  test("renders null when Slot has no children", () => {
+    const { container } = render(<Slot />)
 
+    const visibleContent = container.querySelector(":not([hidden])")
     expect(visibleContent).toBeNull()
   })
 
-  test("renders with Slottable - merges child element props", async () => {
+  test("renders with Slottable - merges child element props", () => {
     const Button: FC<
       HTMLAttributes<HTMLButtonElement> & {
         asChild?: boolean
@@ -69,7 +64,7 @@ describe("<Slot />", () => {
       )
     }
 
-    await render(
+    render(
       <Button asChild endIcon={<span>End</span>} startIcon={<span>Start</span>}>
         <a href="/about" data-testid="link">
           About
@@ -77,15 +72,15 @@ describe("<Slot />", () => {
       </Button>,
     )
 
-    const link = page.getByTestId("link")
-    expect(link.element().tagName).toBe("A")
-    await expect.element(link).toHaveAttribute("href", "/about")
-    await expect.element(link).toHaveTextContent("Start")
-    await expect.element(link).toHaveTextContent("About")
-    await expect.element(link).toHaveTextContent("End")
+    const link = screen.getByTestId("link")
+    expect(link.tagName).toBe("A")
+    expect(link).toHaveAttribute("href", "/about")
+    expect(link).toHaveTextContent("Start")
+    expect(link).toHaveTextContent("About")
+    expect(link).toHaveTextContent("End")
   })
 
-  test("renders null when Slottable child is not a valid element", async () => {
+  test("renders null when Slottable child is not a valid element", () => {
     const Button: FC<
       HTMLAttributes<HTMLButtonElement> & {
         asChild?: boolean
@@ -100,13 +95,13 @@ describe("<Slot />", () => {
       )
     }
 
-    const { container } = await render(<Button asChild>plain text</Button>)
+    const { container } = render(<Button asChild>plain text</Button>)
 
     const visibleContent = container.querySelector(":not([hidden])")
     expect(visibleContent).toBeNull()
   })
 
-  test("throws when Slottable has multiple children elements", async () => {
+  test("throws when Slottable has multiple children elements", () => {
     const spy = vi.spyOn(console, "error").mockImplementation(() => undefined)
 
     const Button: FC<
@@ -123,27 +118,27 @@ describe("<Slot />", () => {
       )
     }
 
-    await expect(
+    expect(() =>
       render(
         <Button asChild>
           <span>A</span>
           <span>B</span>
         </Button>,
       ),
-    ).rejects.toThrow(/React.Children.only/)
+    ).toThrow(/React.Children.only/)
 
     spy.mockRestore()
   })
 })
 
 describe("<Slottable />", () => {
-  test("renders its children", async () => {
-    await render(
+  test("renders its children", () => {
+    render(
       <Slottable>
         <span data-testid="child">Hello</span>
       </Slottable>,
     )
 
-    await expect.element(page.getByTestId("child")).toHaveTextContent("Hello")
+    expect(screen.getByTestId("child")).toHaveTextContent("Hello")
   })
 })

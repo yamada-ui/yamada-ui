@@ -1,4 +1,4 @@
-import { a11y, page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { BoxIcon } from "../icon"
 import { IconButton } from "./icon-button"
 
@@ -13,29 +13,13 @@ describe("<IconButton />", () => {
     )
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(IconButton.displayName).toBe("IconButton")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(<IconButton colorScheme="primary" aria-label="Open menu" />)
-
-    await expect.element(page.getByRole("button")).toHaveClass("ui-icon-button")
-  })
-
-  test("renders HTML tag correctly", async () => {
-    await render(<IconButton colorScheme="primary" aria-label="Open menu" />)
-
-    expect(page.getByRole("button").element().tagName).toBe("BUTTON")
-  })
-
-  test("renders children correctly", async () => {
-    await render(
+  test("renders children correctly", () => {
+    render(
       <IconButton colorScheme="primary" aria-label="Open menu">
         <BoxIcon data-testid="icon" />
       </IconButton>,
     )
 
-    await expect.element(page.getByTestId("icon")).toBeInTheDocument()
+    expect(screen.getByTestId("icon")).toBeInTheDocument()
   })
 })

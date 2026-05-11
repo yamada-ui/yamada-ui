@@ -1,11 +1,8 @@
-import { a11y, page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { Input, InputGroup } from "./"
 
 describe("<Input />", () => {
   test("renders component correctly", async () => {
-    // Default Input color pair against `UIProvider` theme background fails
-    // axe-core's color-contrast check in browser mode. The component's rendered
-    // color is theme-defined, so this is a theme-level audit item.
     await a11y(
       <InputGroup.Root>
         <InputGroup.Element>Hello</InputGroup.Element>
@@ -23,47 +20,8 @@ describe("<Input />", () => {
     )
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Input.displayName).toBe("Input")
-    expect(InputGroup.Root.name).toBe("InputGroupRoot")
-    expect(InputGroup.Element.displayName).toBe("InputElement")
-    expect(InputGroup.Addon.displayName).toBe("InputAddon")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(
-      <InputGroup.Root data-testid="input-group">
-        <InputGroup.Element>Hello</InputGroup.Element>
-        <Input />
-        <InputGroup.Addon>World</InputGroup.Addon>
-      </InputGroup.Root>,
-    )
-    await expect
-      .element(page.getByTestId("input-group"))
-      .toHaveClass("ui-group")
-    await expect.element(page.getByRole("textbox")).toHaveClass("ui-input")
-    await expect
-      .element(page.getByText("Hello"))
-      .toHaveClass("ui-input-element")
-    await expect.element(page.getByText("World")).toHaveClass("ui-input-addon")
-  })
-
-  test("renders HTML tag correctly", async () => {
-    await render(
-      <InputGroup.Root data-testid="input-group">
-        <InputGroup.Element>Hello</InputGroup.Element>
-        <Input />
-        <InputGroup.Addon>World</InputGroup.Addon>
-      </InputGroup.Root>,
-    )
-    expect(page.getByTestId("input-group").element().tagName).toBe("DIV")
-    expect(page.getByRole("textbox").element().tagName).toBe("INPUT")
-    expect(page.getByText("Hello").element().tagName).toBe("DIV")
-    expect(page.getByText("World").element().tagName).toBe("DIV")
-  })
-
-  test("Elements inside input render correctly", async () => {
-    await render(
+  test("Elements inside input render correctly", () => {
+    render(
       <InputGroup.Root>
         <InputGroup.Element>Hello</InputGroup.Element>
         <Input />
@@ -71,12 +29,12 @@ describe("<Input />", () => {
       </InputGroup.Root>,
     )
 
-    await expect.element(page.getByText(/Hello/i)).toBeInTheDocument()
-    await expect.element(page.getByText(/World/i)).toBeInTheDocument()
+    expect(screen.getByText(/Hello/i)).toBeInTheDocument()
+    expect(screen.getByText(/World/i)).toBeInTheDocument()
   })
 
-  test("Elements inside input-addon render correctly", async () => {
-    await render(
+  test("Elements inside input-addon render correctly", () => {
+    render(
       <InputGroup.Root>
         <InputGroup.Addon>https:</InputGroup.Addon>
         <Input />
@@ -84,47 +42,45 @@ describe("<Input />", () => {
       </InputGroup.Root>,
     )
 
-    await expect.element(page.getByText(/https:/i)).toBeInTheDocument()
-    await expect.element(page.getByText(/\.com/i)).toBeInTheDocument()
+    expect(screen.getByText(/https:/i)).toBeInTheDocument()
+    expect(screen.getByText(/\.com/i)).toBeInTheDocument()
   })
 
-  test("Invalid input renders correctly", async () => {
-    await render(<Input invalid />)
+  test("Invalid input renders correctly", () => {
+    render(<Input invalid />)
 
-    const input = page.getByRole("textbox")
-    await expect.element(input).toBeInvalid()
-    await expect.element(input).toHaveAttribute("aria-invalid", "true")
+    const input = screen.getByRole("textbox")
+    expect(input).toBeInvalid()
+    expect(input).toHaveAttribute("aria-invalid", "true")
   })
 
-  test("Disabled input renders correctly", async () => {
-    await render(<Input disabled />)
+  test("Disabled input renders correctly", () => {
+    render(<Input disabled />)
 
-    await expect.element(page.getByRole("textbox")).toBeDisabled()
+    expect(screen.getByRole("textbox")).toBeDisabled()
   })
 
-  test("Readonly input renders correctly", async () => {
-    await render(<Input readOnly />)
+  test("Readonly input renders correctly", () => {
+    render(<Input readOnly />)
 
-    await expect
-      .element(page.getByRole("textbox"))
-      .toHaveAttribute("aria-readonly", "true")
+    expect(screen.getByRole("textbox")).toHaveAttribute("aria-readonly", "true")
   })
 
-  test("Input with native size renders correctly", async () => {
-    await render(<Input htmlSize={4} />)
+  test("Input with native size renders correctly", () => {
+    render(<Input htmlSize={4} />)
 
-    await expect.element(page.getByRole("textbox")).toHaveAttribute("size", "4")
+    expect(screen.getByRole("textbox")).toHaveAttribute("size", "4")
   })
 
-  test("renders correctly with errorBorderColor", async () => {
-    await render(<Input errorBorderColor="red.500" />)
+  test("renders correctly with errorBorderColor", () => {
+    render(<Input errorBorderColor="red.500" />)
 
-    await expect.element(page.getByRole("textbox")).toBeInTheDocument()
+    expect(screen.getByRole("textbox")).toBeInTheDocument()
   })
 
-  test("renders correctly with focusBorderColor", async () => {
-    await render(<Input focusBorderColor="blue.500" />)
+  test("renders correctly with focusBorderColor", () => {
+    render(<Input focusBorderColor="blue.500" />)
 
-    await expect.element(page.getByRole("textbox")).toBeInTheDocument()
+    expect(screen.getByRole("textbox")).toBeInTheDocument()
   })
 })

@@ -1,4 +1,4 @@
-import { page, render } from "#test/browser"
+import { render, screen } from "#test"
 import { PieChart } from "."
 
 interface Data {
@@ -17,41 +17,43 @@ const childData: Data[] = [
   { browser: "opera", downloads: 700, visits: 1300 },
 ]
 
-describe("<PieChart />", () => {
-  test("sets `displayName` correctly", () => {
-    expect(PieChart.Root.displayName).toBe("PieChart")
-  })
+const responsiveContainerProps = { height: 400, width: 400 } as NonNullable<
+  Parameters<typeof PieChart.Root>[0]["responsiveContainerProps"]
+>
 
-  test("renders generated pies from `series`", async () => {
-    await render(
+describe("<PieChart />", () => {
+  test("renders generated pies from `series`", () => {
+    render(
       <PieChart.Root
         data-testid="root"
         data={rootData}
         series={[{ dataKey: "visits", nameKey: "browser" }]}
         withLegend
+        responsiveContainerProps={responsiveContainerProps}
       />,
     )
 
-    const root = page.getByTestId("root")
+    const root = screen.getByTestId("root")
 
-    await expect.element(root).toHaveClass("ui-pie-chart")
-    await expect.element(page.getByText("chrome")).toBeInTheDocument()
-    await expect.element(page.getByText("edge")).toBeInTheDocument()
+    expect(root).toHaveClass("ui-pie-chart")
+    expect(screen.getByText("chrome")).toBeInTheDocument()
+    expect(screen.getByText("edge")).toBeInTheDocument()
   })
 
-  test("renders composition components instead of fallback `series`", async () => {
-    await render(
-      <PieChart.Root data-testid="root">
+  test("renders composition components instead of fallback `series`", () => {
+    render(
+      <PieChart.Root
+        data-testid="root"
+        responsiveContainerProps={responsiveContainerProps}
+      >
         <PieChart.Pie data={childData} dataKey="downloads" nameKey="browser" />
         <PieChart.Legend />
       </PieChart.Root>,
     )
 
-    await expect.element(page.getByText("safari")).toBeInTheDocument()
-    await expect.element(page.getByText("opera")).toBeInTheDocument()
-    await expect
-      .element(page.getByText("chrome").query())
-      .not.toBeInTheDocument()
-    await expect.element(page.getByText("edge").query()).not.toBeInTheDocument()
+    expect(screen.getByText("safari")).toBeInTheDocument()
+    expect(screen.getByText("opera")).toBeInTheDocument()
+    expect(screen.queryByText("chrome")).not.toBeInTheDocument()
+    expect(screen.queryByText("edge")).not.toBeInTheDocument()
   })
 })

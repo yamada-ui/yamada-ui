@@ -1,4 +1,4 @@
-import { page, render } from "#test/browser"
+import { render, screen } from "#test"
 import { ComposedChart } from "."
 import { gradients } from "./chart"
 
@@ -15,13 +15,13 @@ const data: Data[] = [
   { date: "2026-03-01", desktop: 1600, mobile: 2600, tablet: 2200 },
 ]
 
-describe("<ComposedChart />", () => {
-  test("sets `displayName` correctly", () => {
-    expect(ComposedChart.Root.displayName).toBe("ComposedChart")
-  })
+const responsiveContainerProps = { height: 400, width: 400 } as NonNullable<
+  Parameters<typeof ComposedChart.Root>[0]["responsiveContainerProps"]
+>
 
-  test("renders generated chart parts from `series`", async () => {
-    await render(
+describe("<ComposedChart />", () => {
+  test("renders generated chart parts from `series`", () => {
+    render(
       <ComposedChart.Root
         data-testid="root"
         data={data}
@@ -30,31 +30,23 @@ describe("<ComposedChart />", () => {
           ["area", { dataKey: "tablet" }],
           ["line", { dataKey: "mobile" }],
         ]}
+        responsiveContainerProps={responsiveContainerProps}
         xAxisProps={{ dataKey: "date" }}
       />,
     )
 
-    const root = page.getByTestId("root")
+    const root = screen.getByTestId("root")
 
-    await expect.element(root).toHaveClass("ui-composed-chart")
-    await expect
-      .poll(
-        () =>
-          root.element().querySelectorAll(".ui-cartesian-chart__bar").length,
-      )
-      .toBeGreaterThan(0)
-    await expect
-      .poll(
-        () =>
-          root.element().querySelectorAll(".ui-cartesian-chart__area").length,
-      )
-      .toBeGreaterThan(0)
-    await expect
-      .poll(
-        () =>
-          root.element().querySelectorAll(".ui-cartesian-chart__line").length,
-      )
-      .toBeGreaterThan(0)
+    expect(root).toHaveClass("ui-composed-chart")
+    expect(
+      root.querySelectorAll(".ui-cartesian-chart__bar").length,
+    ).toBeGreaterThan(0)
+    expect(
+      root.querySelectorAll(".ui-cartesian-chart__area").length,
+    ).toBeGreaterThan(0)
+    expect(
+      root.querySelectorAll(".ui-cartesian-chart__line").length,
+    ).toBeGreaterThan(0)
   })
 
   test("mergeSeries sets colors for every series entry", () => {

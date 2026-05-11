@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "clean": "rimraf node_modules .tanstack",
+    "clean": "rimraf node_modules .tanstack .turbo",
     "dev": "vite dev",
     "build": "vite build",
     "start": "node dist/server/server.js",
@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@tanstack/react-router": "catalog:",
-    "@tanstack/react-start": "^1.167.16",
+    "@tanstack/react-start": "^1.167.50",
     "@yamada-ui/react": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:"

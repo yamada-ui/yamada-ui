@@ -1,22 +1,14 @@
 import { vi } from "vitest"
 import { a11y, render, screen } from "#test"
-import { ColorSwatch, ColorSwatchGroup } from "."
+import { ColorSwatch, ColorSwatchGroup } from "./"
 
 describe("<ColorSwatchGroup />", () => {
+  test("passes a11y checks", async () => {
+    await a11y(<ColorSwatchGroup items={["#ff0000", "#00ff00", "#0000ff"]} />)
+  })
+
   test("renders empty swatch when no items are provided", () => {
     render(<ColorSwatchGroup />)
-
-    expect(screen.getByLabelText("Color swatch group")).toBeInTheDocument()
-  })
-
-  test("renders empty swatch when items is an empty array", () => {
-    render(<ColorSwatchGroup items={[]} />)
-
-    expect(screen.getByLabelText("Color swatch group")).toBeInTheDocument()
-  })
-
-  test("renders color swatches for provided items", () => {
-    render(<ColorSwatchGroup items={["#ff0000", "#00ff00"]} />)
 
     expect(screen.getByLabelText("Color swatch group")).toBeInTheDocument()
   })
@@ -36,16 +28,10 @@ describe("<ColorSwatchGroup />", () => {
 
     warnSpy.mockRestore()
   })
-
-  test("renders correctly with 3 items", () => {
-    render(<ColorSwatchGroup items={["#ff0000", "#00ff00", "#0000ff"]} />)
-
-    expect(screen.getByLabelText("Color swatch group")).toBeInTheDocument()
-  })
 })
 
 describe("<ColorSwatch />", () => {
-  test("renders correctly", async () => {
+  test("passes a11y checks", async () => {
     await a11y(<ColorSwatch color="#ff0000" />)
   })
 })

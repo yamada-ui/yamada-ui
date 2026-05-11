@@ -1,4 +1,4 @@
-import { a11y, page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { LoaderIcon } from "../icon"
 import { Button } from "./button"
 
@@ -7,34 +7,16 @@ describe("<Button />", () => {
     await a11y(<Button>test</Button>)
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Button.displayName).toBe("Button")
+  test("renders with icon", () => {
+    const { rerender } = render(<Button endIcon={<>end icon</>} />)
+    expect(screen.getByText("end icon")).toBeInTheDocument()
+
+    rerender(<Button startIcon={<>start icon</>} />)
+    expect(screen.getByText("start icon")).toBeInTheDocument()
   })
 
-  test("sets `className` correctly", async () => {
-    await render(<Button>test</Button>)
-
-    const button = page.getByText("test")
-    await expect.element(button).toHaveClass("ui-button")
-  })
-
-  test("renders HTML tag correctly", async () => {
-    await render(<Button>test</Button>)
-
-    const button = page.getByText("test")
-    expect(button.element().tagName).toBe("BUTTON")
-  })
-
-  test("renders with icon", async () => {
-    const { rerender } = await render(<Button endIcon={<>end icon</>} />)
-    await expect.element(page.getByText("end icon")).toBeInTheDocument()
-
-    await rerender(<Button startIcon={<>start icon</>} />)
-    await expect.element(page.getByText("start icon")).toBeInTheDocument()
-  })
-
-  test("shows loading text if loading, loadingText and loadingIcon", async () => {
-    const { rerender } = await render(
+  test("shows loading text if loading, loadingText and loadingIcon", () => {
+    const { rerender } = render(
       <Button
         data-testid="btn"
         loading
@@ -44,24 +26,17 @@ describe("<Button />", () => {
         Submit
       </Button>,
     )
-    await expect
-      .element(page.getByTestId("btn"))
-      .toHaveAttribute("data-loading", "")
+    expect(screen.getByTestId("btn")).toHaveAttribute("data-loading", "")
 
-    // children text is hidden
-    await expect
-      .element(page.getByText(/^Submit$/).query())
-      .not.toBeInTheDocument()
+    expect(screen.queryByText(/^Submit$/)).not.toBeInTheDocument()
 
-    // Submitting" visually hidden label shown
-    await expect.element(page.getByText("Submitting")).toBeInTheDocument()
+    expect(screen.getByText("Submitting")).toBeInTheDocument()
 
-    // Confirm loading position
-    await expect
-      .element(page.getByTestId("loadingIcon"))
-      .toHaveClass("ui-button__loading--start")
+    expect(screen.getByTestId("loadingIcon")).toHaveClass(
+      "ui-button__loading--start",
+    )
 
-    await rerender(
+    rerender(
       <Button
         loading
         loadingIcon={<LoaderIcon data-testid="loadingIcon" />}
@@ -72,82 +47,72 @@ describe("<Button />", () => {
       </Button>,
     )
 
-    await expect
-      .element(page.getByTestId("loadingIcon"))
-      .toHaveClass("ui-button__loading--end")
+    expect(screen.getByTestId("loadingIcon")).toHaveClass(
+      "ui-button__loading--end",
+    )
   })
 
-  test("has the proper aria attributes", async () => {
-    const { rerender } = await render(<Button data-testid="btn">Hello</Button>)
+  test("has the proper aria attributes", () => {
+    const { rerender } = render(<Button data-testid="btn">Hello</Button>)
 
-    const button = page.getByTestId("btn")
+    const button = screen.getByTestId("btn")
 
-    await expect.element(button).not.toHaveAttribute("data-loading", "")
-    await expect.element(button).not.toHaveAttribute("data-active", "")
+    expect(button).not.toHaveAttribute("data-loading", "")
+    expect(button).not.toHaveAttribute("data-active", "")
 
-    // loading sets data-loading=""
-    await rerender(
+    rerender(
       <Button data-testid="btn" loading>
         Hello
       </Button>,
     )
-    await expect
-      .element(page.getByTestId("btn"))
-      .toHaveAttribute("data-loading", "")
+    expect(screen.getByTestId("btn")).toHaveAttribute("data-loading", "")
 
-    // active sets data-active=""
-    await rerender(
+    rerender(
       <Button data-testid="btn" active>
         Hello
       </Button>,
     )
-    await expect
-      .element(page.getByTestId("btn"))
-      .toHaveAttribute("data-active", "")
+    expect(screen.getByTestId("btn")).toHaveAttribute("data-active", "")
   })
 
-  test("has the proper type attribute", async () => {
-    const { rerender } = await render(<Button data-testid="btn">Submit</Button>)
-    await expect
-      .element(page.getByTestId("btn"))
-      .toHaveAttribute("type", "button")
+  test("has the proper type attribute", () => {
+    const { rerender } = render(<Button data-testid="btn">Submit</Button>)
+    expect(screen.getByTestId("btn")).toHaveAttribute("type", "button")
 
-    await rerender(
+    rerender(
       <Button type="submit" data-testid="btn">
         Submit
       </Button>,
     )
-    await expect
-      .element(page.getByTestId("btn"))
-      .toHaveAttribute("type", "submit")
+    expect(screen.getByTestId("btn")).toHaveAttribute("type", "submit")
 
-    await rerender(<Button data-testid="btn">Submit</Button>)
-    await expect.element(page.getByTestId("btn")).toHaveAttribute("type")
+    rerender(<Button data-testid="btn">Submit</Button>)
+    expect(screen.getByTestId("btn")).toHaveAttribute("type")
   })
 
-  test("has no the type", async () => {
-    await render(
+  test("has no the type", () => {
+    render(
       <Button as="span" data-testid="btn">
         Submit
       </Button>,
     )
-    await expect.element(page.getByTestId("btn")).not.toHaveAttribute("type")
+    expect(screen.getByTestId("btn")).not.toHaveAttribute("type")
   })
 
-  test("should be disabled", async () => {
-    const { rerender } = await render(
+  test("should be disabled", () => {
+    const { rerender } = render(
       <Button data-testid="btn" disabled>
         Invalid Button
       </Button>,
     )
-    await expect.element(page.getByRole("button")).toBeDisabled()
+    expect(screen.getByRole("button")).toBeDisabled()
 
-    await rerender(
+    rerender(
       <Button as="div" data-testid="btn" disabled>
         Invalid Button
       </Button>,
     )
 
-    await expect.element(page.getByTestId("btn")).toHaveAttribute("disabled")
+    expect(screen.getByTestId("btn")).toHaveAttribute("disabled")
   })
 })

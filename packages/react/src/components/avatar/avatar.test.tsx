@@ -1,38 +1,38 @@
-import { a11y, page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { Avatar, AvatarGroup } from "./"
 
 describe("<Avatar />", () => {
-  test("renders an image", async () => {
-    await render(
-      <Avatar name="Hirotomo Yamada" src="https://bit.ly/dan-abramov" />,
-    )
-
-    await expect
-      .element(page.getByAltText("Hirotomo Yamada"))
-      .toBeInTheDocument()
+  test("passes a11y checks", async () => {
+    await a11y(<Avatar name="Hirotomo Yamada" />)
   })
 
-  test("renders a name avatar if no src", async () => {
-    await render(<Avatar name="Hirotomo Yamada" />)
+  test("renders an image", () => {
+    render(<Avatar name="Hirotomo Yamada" src="https://bit.ly/dan-abramov" />)
 
-    await expect.element(page.getByText("HY")).toBeInTheDocument()
+    expect(screen.getByAltText("Hirotomo Yamada")).toBeInTheDocument()
   })
 
-  test("renders a single character if only one name is passed", async () => {
-    await render(<Avatar name="Hirotomo" />)
+  test("renders a name avatar if no src", () => {
+    render(<Avatar name="Hirotomo Yamada" />)
 
-    await expect.element(page.getByText("H")).toBeInTheDocument()
+    expect(screen.getByText("HY")).toBeInTheDocument()
   })
 
-  test("renders the first characters of the first and last name when more than two names are passed", async () => {
-    await render(<Avatar name="Hirotomo React Yamada" />)
+  test("renders a single character if only one name is passed", () => {
+    render(<Avatar name="Hirotomo" />)
 
-    await expect.element(page.getByText("HY")).toBeInTheDocument()
+    expect(screen.getByText("H")).toBeInTheDocument()
+  })
+
+  test("renders initials from first and last name when three or more words are passed", () => {
+    render(<Avatar name="Hirotomo React Yamada" />)
+
+    expect(screen.getByText("HY")).toBeInTheDocument()
   })
 })
 
 describe("<AvatarGroup />", () => {
-  test("renders component correctly", async () => {
+  test("passes a11y checks", async () => {
     await a11y(
       <AvatarGroup.Root>
         <AvatarGroup.Item name="Hirotomo Yamada" />
@@ -40,8 +40,8 @@ describe("<AvatarGroup />", () => {
     )
   })
 
-  test("renders a number avatar showing count of truncated avatars", async () => {
-    await render(
+  test("renders a number avatar showing count of truncated avatars", () => {
+    render(
       <AvatarGroup.Root max={2}>
         <AvatarGroup.Item />
         <AvatarGroup.Item />
@@ -51,11 +51,11 @@ describe("<AvatarGroup />", () => {
       </AvatarGroup.Root>,
     )
 
-    await expect.element(page.getByText("+3")).toBeInTheDocument()
+    expect(screen.getByText("+3")).toBeInTheDocument()
   })
 
-  test("does not render a number avatar showing count of truncated avatars if max is equal to avatars given", async () => {
-    const { container } = await render(
+  test("does not render a number avatar when max equals the number of avatars", () => {
+    render(
       <AvatarGroup.Root max={4}>
         <AvatarGroup.Item />
         <AvatarGroup.Item />
@@ -64,12 +64,11 @@ describe("<AvatarGroup />", () => {
       </AvatarGroup.Root>,
     )
 
-    const moreLabel = container.querySelector(".ui-avatar__excess")
-    expect(moreLabel).not.toBeInTheDocument()
+    expect(screen.queryByText(/^\+/)).not.toBeInTheDocument()
   })
 
-  test("does not render a number avatar showing count of truncated avatars if max is more than avatars given", async () => {
-    const { container } = await render(
+  test("does not render a number avatar when max is greater than the number of avatars", () => {
+    render(
       <AvatarGroup.Root max={6}>
         <AvatarGroup.Item />
         <AvatarGroup.Item />
@@ -78,11 +77,6 @@ describe("<AvatarGroup />", () => {
       </AvatarGroup.Root>,
     )
 
-    const moreLabel = container.querySelector(".ui-avatar__excess")
-    expect(moreLabel).not.toBeInTheDocument()
-  })
-
-  test("should have the correct displayName", () => {
-    expect(AvatarGroup.Root.displayName).toBe("AvatarGroup")
+    expect(screen.queryByText(/^\+/)).not.toBeInTheDocument()
   })
 })

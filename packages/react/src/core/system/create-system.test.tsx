@@ -1,4 +1,4 @@
-import { renderHook } from "#test/browser"
+import { renderHook } from "#test"
 import { createSystem, defaultSystem } from "./create-system"
 import { useSystem } from "./system-provider"
 
@@ -122,8 +122,8 @@ describe("createSystem", () => {
 })
 
 describe("useSystem", () => {
-  test("returns system from provider", async () => {
-    const { result } = await renderHook(() => useSystem())
+  test("returns system from provider", () => {
+    const { result } = renderHook(() => useSystem())
     expect(result.current.breakpoints).toBeDefined()
     expect(result.current.cssMap).toBeDefined()
     expect(result.current.layers).toBeDefined()

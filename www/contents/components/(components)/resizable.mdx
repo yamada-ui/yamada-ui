@@ -456,16 +456,16 @@ The `Resizable` follows the [WAI-ARIA - Window Splitter Pattern](https://www.w3.
 
 ### ARIA Roles and Attributes
 
-| Component           | Roles and Attributes | Usage                                                                                                        |
-| ------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `Resizable.Item`    | `id`                 | Used to associate with `Resizable.Trigger`.                                                                  |
-| `Resizable.Trigger` | `role="separator"`   | Indicates that this is a separator.                                                                          |
-|                     | `aria-controls`      | Sets the `id` of the associated `Resizable.Item`.                                                            |
-|                     | `aria-orientation`   | Sets the separator direction. If `orientation` is `"horizontal"`, it is set to `"vertical"`, and vice versa. |
-|                     | `aria-valuemin`      | Calculated from `0` to `100` based on the `minSize` value. Default is `0`.                                   |
-|                     | `aria-valuemax`      | Calculated from `0` to `100` based on the `maxSize` value. Default is `100`.                                 |
-|                     | `aria-valuenow`      | Sets the current value.                                                                                      |
-|                     | `aria-disabled`      | Sets to `true` when disabled.                                                                                |
+| Element                     | Roles and Attributes | Usage                                                                                          |
+| --------------------------- | -------------------- | ---------------------------------------------------------------------------------------------- |
+| `div.ui-resizable__item`    | `id`                 | Used to associate with `div.ui-resizable__trigger`.                                            |
+| `div.ui-resizable__trigger` | `role="separator"`   | Indicates that this is a separator.                                                            |
+|                             | `aria-controls`      | Sets the `id` of the associated `div.ui-resizable__item`.                                      |
+|                             | `aria-orientation`   | Sets the same value as `orientation`.                                                          |
+|                             | `aria-valuemin`      | Calculated from `0` to `100` based on the `minSize` value. Default is `0`.                     |
+|                             | `aria-valuemax`      | Calculated from `0` to `100` based on the `maxSize` value. Default is `100`.                   |
+|                             | `aria-valuenow`      | Sets the current value.                                                                        |
+|                             | `aria-disabled`      | Sets to `"true"` when `disabled` is enabled on either `Resizable.Root` or `Resizable.Trigger`. |
 
 ## Similar Components
 

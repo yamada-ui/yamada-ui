@@ -1,4 +1,4 @@
-import { system } from "#test/browser"
+import { system } from "#test"
 import { focusRingStyle, generateFocusRing } from "./focus-ring"
 
 describe("generateFocusRing", () => {

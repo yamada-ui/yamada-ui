@@ -70,7 +70,7 @@ export function List({ ...rest }: ListProps) {
   const t = useTranslations("icons")
   const searchParams = useSearchParams()
   const query = searchParams.get("query") ?? ""
-  const [value, setValue] = useState(query)
+  const inputRef = useRef<HTMLInputElement>(null)
   const total = CONTENTS.length
   const hitsRef = useRef(CONTENTS)
   const [list, setList] = useState(() => {
@@ -84,10 +84,13 @@ export function List({ ...rest }: ListProps) {
   const openRef = useRef<(data: Data) => void>(noop)
   const router = useRouter()
   const totalIndex = Math.ceil(total / PER_PAGE) - 1
-  const [, startTransition] = useTransition()
+  const [pending, startTransition] = useTransition()
 
   const replaceQuery = useCallback(
-    ({ name, query = value }: { name?: string; query?: string } = {}) => {
+    ({
+      name,
+      query = inputRef.current?.value ?? "",
+    }: { name?: string; query?: string } = {}) => {
       router.replace(
         {
           pathname: "/icons",
@@ -99,16 +102,14 @@ export function List({ ...rest }: ListProps) {
         { scroll: false },
       )
     },
-    [router, value],
+    [router],
   )
 
   const onSearch = useCallback(
     (value: string) => {
-      setValue(value)
-
-      replaceQuery({ query: value })
-
       startTransition(() => {
+        replaceQuery({ query: value })
+
         resetRef.current()
 
         const { list, total } = getContents(value)
@@ -122,7 +123,7 @@ export function List({ ...rest }: ListProps) {
   )
 
   const onReset = useCallback(() => {
-    setValue("")
+    if (inputRef.current) inputRef.current.value = ""
     replaceQuery({ query: "" })
     setList(CONTENTS.slice(0, PER_PAGE))
     resetRef.current()
@@ -151,39 +152,46 @@ export function List({ ...rest }: ListProps) {
             <SearchIcon fontSize="xl" />
           </InputGroup.Element>
           <Input
+            ref={inputRef}
             name="search"
+            defaultValue={query}
             placeholder={t("placeholder", { total })}
-            value={value}
             onChange={(ev) => onSearch(ev.target.value)}
           />
         </InputGroup.Root>
 
-        <InfiniteScrollArea
-          disabled={list.length === hitsRef.current.length}
-          flex="1"
-          loading={<Loading.Oval fontSize="2xl" />}
-          resetRef={resetRef}
-          rootMargin="0px 0px 600px 0px"
-          rootRef={null}
-          onLoad={({ finish, index }) => {
-            setList(hitsRef.current.slice(0, PER_PAGE * (index + 1)))
+        {pending ? (
+          <Center flex="1" role="status">
+            <Loading.Oval fontSize={{ base: "6xl", sm: "2xl" }} />
+          </Center>
+        ) : (
+          <InfiniteScrollArea
+            disabled={list.length === hitsRef.current.length}
+            flex="1"
+            loading={<Loading.Oval fontSize="2xl" />}
+            resetRef={resetRef}
+            rootMargin="0px 0px 600px 0px"
+            rootRef={null}
+            onLoad={({ finish, index }) => {
+              setList(hitsRef.current.slice(0, PER_PAGE * (index + 1)))
 
-            if (index >= totalIndex) finish()
-          }}
-        >
-          {list.length ? (
-            <Grid
-              gap="md"
-              templateColumns="repeat(auto-fill, minmax(3.5rem, 1fr))"
-            >
-              {list.map((data) => (
-                <IconButton key={data.name} data={data} onOpen={onOpen} />
-              ))}
-            </Grid>
-          ) : (
-            <NotFound onReset={onReset} />
-          )}
-        </InfiniteScrollArea>
+              if (index >= totalIndex) finish()
+            }}
+          >
+            {list.length ? (
+              <Grid
+                gap="md"
+                templateColumns="repeat(auto-fill, minmax(3.5rem, 1fr))"
+              >
+                {list.map((data) => (
+                  <IconButton key={data.name} data={data} onOpen={onOpen} />
+                ))}
+              </Grid>
+            ) : (
+              <NotFound onReset={onReset} />
+            )}
+          </InfiniteScrollArea>
+        )}
       </VStack>
 
       <PreviewDrawer replaceQuery={replaceQuery} onOpenRef={openRef} />

@@ -3,14 +3,35 @@ name: Release
 on:
   push:
     paths:
+      - ".github/workflows/release.yml"
+      - "package.json"
+      - "pnpm-workspace.yaml"
       - ".changeset/**"
-      - "packages/**"
-      - "!packages/**/storybook/**"
-      - "!packages/**/test/**"
+      - "packages/cli/package.json"
+      - "packages/cli/tsconfig.json"
+      - "packages/cli/tsdown.config.ts"
+      - "packages/cli/README.md"
+      - "packages/cli/src/**/*.ts"
+      - "packages/cli/src/**/*.tsx"
+      - "packages/react/package.json"
+      - "packages/react/tsconfig.json"
+      - "packages/react/tsdown.config.ts"
+      - "packages/react/README.md"
+      - "packages/react/src/**/*.ts"
+      - "packages/react/src/**/*.tsx"
+      - "packages/utils/package.json"
+      - "packages/utils/tsconfig.json"
+      - "packages/utils/tsdown.config.ts"
+      - "packages/utils/README.md"
+      - "packages/utils/src/**/*.ts"
+      - "packages/utils/src/**/*.tsx"
+      - "packages/workspace/src/typescript/**/*"
       - "!packages/**/*.stories.ts"
       - "!packages/**/*.stories.tsx"
       - "!packages/**/*.test.ts"
+      - "!packages/**/*.test.*.ts"
       - "!packages/**/*.test.tsx"
+      - "!packages/**/*.test.*.tsx"
     branches:
       - main
       - v*

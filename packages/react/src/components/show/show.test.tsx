@@ -1,57 +1,53 @@
-import { page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { Text } from "../text"
 import { Show } from "./show"
 
 describe("<Show />", () => {
   test("renders component correctly", async () => {
-    await render(
+    await a11y(
       <Show fallback="World" when>
         Hello
       </Show>,
     )
 
-    await expect.element(page.getByText("Hello")).toBeInTheDocument()
+    expect(screen.getByText("Hello")).toBeInTheDocument()
   })
 
-  test("renders fallback when when is false", async () => {
-    await render(
+  test("renders fallback when when is false", () => {
+    render(
       <Show fallback="World" when={false}>
         Hello
       </Show>,
     )
 
-    await expect.element(page.getByText("World")).toBeInTheDocument()
+    expect(screen.getByText("World")).toBeInTheDocument()
   })
 
-  test("renders children with function pattern", async () => {
-    await render(<Show when={{ name: "John" }}>{(when) => when.name}</Show>)
+  test("does not render children when when is false and fallback is not provided", () => {
+    render(<Show when={false}>Hello</Show>)
 
-    await expect.element(page.getByText("John")).toBeInTheDocument()
+    expect(screen.queryByText("Hello")).not.toBeInTheDocument()
   })
 
-  test("renders children with Element", async () => {
-    await render(
+  test("does not render children when when is null and fallback is not provided", () => {
+    render(<Show when={null}>Hello</Show>)
+
+    expect(screen.queryByText("Hello")).not.toBeInTheDocument()
+  })
+
+  test("renders children with function pattern", () => {
+    render(<Show when={{ name: "John" }}>{(when) => when.name}</Show>)
+
+    expect(screen.getByText("John")).toBeInTheDocument()
+  })
+
+  test("renders children with Element", () => {
+    render(
       <Show fallback="World" when>
         <Text>Hello</Text>
       </Show>,
     )
 
-    await expect.element(page.getByText("Hello")).toBeInTheDocument()
-  })
-
-  test("renders nothing when when is false and no fallback is provided", async () => {
-    await render(<Show when={false}>Hello</Show>)
-
-    await expect
-      .element(page.getByText("Hello").query())
-      .not.toBeInTheDocument()
-  })
-
-  test("renders nothing when when is null and no fallback is provided", async () => {
-    await render(<Show when={null}>Hello</Show>)
-
-    await expect
-      .element(page.getByText("Hello").query())
-      .not.toBeInTheDocument()
+    expect(screen.getByText("Hello")).toBeInTheDocument()
   })
 })

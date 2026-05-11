@@ -369,7 +369,9 @@ export function injectVars<Y extends Dict | Dict[] | undefined>(
           } else {
             result.push([
               `--${target}`,
-              token ? `{${token}.${value}, ${value}}` : value,
+              replaceObject(value, (value) =>
+                token ? `{${token}.${value}, ${value}}` : value,
+              ),
             ])
           }
         } else if (isObject(value)) {

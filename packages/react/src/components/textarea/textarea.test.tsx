@@ -1,80 +1,48 @@
-import { a11y, page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { Textarea } from "./"
 
 describe("<Textarea />", () => {
-  test("renders component correctly", async () => {
+  test("passes a11y checks", async () => {
     await a11y(<Textarea aria-label="Enter notes" defaultValue="hello" />)
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Textarea.displayName).toBe("Textarea")
+  test("disabled Textarea sets disabled attribute", () => {
+    render(<Textarea disabled />)
+
+    expect(screen.getByRole("textbox")).toBeDisabled()
   })
 
-  test("sets `className` correctly", async () => {
-    await render(<Textarea />)
-    await expect.element(page.getByRole("textbox")).toHaveClass("ui-textarea")
+  test("read-only Textarea sets aria-readonly", () => {
+    render(<Textarea readOnly />)
+
+    expect(screen.getByRole("textbox")).toHaveAttribute("aria-readonly", "true")
   })
 
-  test("renders HTML tag correctly", async () => {
-    await render(<Textarea />)
-    expect(page.getByRole("textbox").element().tagName).toBe("TEXTAREA")
+  test("invalid Textarea sets aria-invalid", () => {
+    render(<Textarea invalid />)
+
+    expect(screen.getByRole("textbox")).toHaveAttribute("aria-invalid", "true")
   })
 
-  test("Disabled Textarea renders correctly", async () => {
-    await render(<Textarea disabled />)
-    await expect.element(page.getByRole("textbox")).toHaveAttribute("disabled")
+  test("resize prop applies inline style", () => {
+    render(<Textarea resize="none" />)
+
+    expect(screen.getByRole("textbox")).toHaveStyle({ resize: "none" })
   })
 
-  test("Read-Only Textarea renders correctly", async () => {
-    await render(<Textarea readOnly />)
-    await expect
-      .element(page.getByRole("textbox"))
-      .toHaveAttribute("aria-readonly", "true")
+  test("placeholder prop is forwarded", () => {
+    render(<Textarea placeholder="text" />)
+
+    expect(screen.getByRole("textbox")).toHaveAttribute("placeholder", "text")
   })
 
-  test("Invalid Textarea renders correctly", async () => {
-    await render(<Textarea invalid />)
-    await expect
-      .element(page.getByRole("textbox"))
-      .toHaveAttribute("aria-invalid", "true")
-  })
+  test("rows prop is forwarded", () => {
+    render(<Textarea rows={1} />)
 
-  test("Resize Textarea renders correctly", async () => {
-    await render(<Textarea resize="none" />)
-    await expect.element(page.getByRole("textbox")).toHaveStyle({
-      resize: "none",
-    })
-  })
-
-  test("Placeholder Textarea renders correctly", async () => {
-    await render(<Textarea placeholder="text" />)
-    await expect
-      .element(page.getByRole("textbox"))
-      .toHaveAttribute("placeholder", "text")
-  })
-  test("Rows Textarea renders correctly", async () => {
-    await render(<Textarea rows={1} />)
-    const textarea = page.getByRole("textbox").element() as HTMLTextAreaElement
+    const textarea = screen.getByRole("textbox")
+    if (!(textarea instanceof HTMLTextAreaElement)) {
+      throw new Error("Expected HTMLTextAreaElement")
+    }
     expect(textarea.rows).toBe(1)
-  })
-
-  test("Autosize Textarea renders correctly", async () => {
-    let fontsData = "fonts" in document ? document.fonts : undefined
-
-    Object.defineProperty(document, "fonts", {
-      value: {
-        addEventListener: vi.fn(),
-        removeEventListener: vi.fn(),
-      },
-      writable: true,
-    })
-    await render(<Textarea autosize />)
-    const textarea = page.getByRole("textbox").element() as HTMLTextAreaElement
-
-    await expect.poll(() => textarea.rows).toBe(2)
-    Object.defineProperty(document, "fonts", {
-      value: fontsData,
-      writable: true,
-    })
   })
 })

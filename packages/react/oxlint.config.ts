@@ -3,7 +3,10 @@ import {
   createNoRestrictedImportConfig,
   defineConfig,
   reactConfig,
+  sharedBrowserTestFiles,
   sharedConfig,
+  sharedFiles,
+  sharedUnitTestFiles,
 } from "@yamada-ui/workspace/oxlint"
 
 export default defineConfig({
@@ -11,8 +14,14 @@ export default defineConfig({
     sharedConfig,
     reactConfig,
     createNoRestrictedImportConfig(
-      ["src"],
-      ["src/!(utils)", "@yamada-ui/utils", "@yamada-ui/workspace/*"],
+      [sharedFiles.map((file) => `src/${file}`)],
+      [
+        sharedFiles.map((file) => `src/!(utils)/${file}`),
+        "@yamada-ui/utils",
+        "@yamada-ui/workspace/*",
+      ],
+      [sharedBrowserTestFiles, "#test"],
+      [sharedUnitTestFiles, "#test/browser"],
     ),
     createIgnoreCspellConfig(
       "src/components/icon/icons",

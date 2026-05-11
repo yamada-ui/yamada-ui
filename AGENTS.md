@@ -4,7 +4,7 @@ Yamada UI is a React UI component library built with CSS-in-JS (Emotion).
 
 ## Critical Rules
 
-- **Tests are required**: Always write tests when fixing bugs or adding new features.
+- **Tests are required**: Add or update tests when a change introduces a new branch, contract, or regression path that is not already covered by existing tests (in the same package or in dependency units). Coverage delta — not the presence of a test in the diff — is the criterion.
 - **Accessibility is required**: All components must support ARIA attributes, keyboard navigation, and screen readers. Report any concerns.
 - **Do not bundle multiple fixes**: If you encounter a separate issue while working on a fix, do not fix it in the same PR. Create a separate issue and submit a separate PR.
 - **Do not run format, lint, or typecheck unless explicitly asked**: Format, lint and typecheck are handled by lefthook on commit. However, run tests for the changed files locally to verify that the implementation works correctly.
@@ -35,10 +35,13 @@ When editing or reviewing files that match a pattern below, read the linked rule
 - [Changesets](.agents/rules/changesets.md):
   - `packages/{cli,react,utils}/src/**/*.{ts,tsx}`
   - `.changeset/*.md`
-- [Browser Testing](.agents/rules/browser-testing.md) (applies only when the test imports from `#test/browser`; skip the rule for `#test` jsdom files):
+- [Test Categorization](.agents/rules/test-categorization.md):
   - `packages/react/src/**/*.test.{ts,tsx}`
+  - `packages/react/src/**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx}`
+- [Browser Testing](.agents/rules/browser-testing.md):
+  - `packages/react/src/**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx}`
 - [Unit Testing](.agents/rules/unit-testing.md):
-  - `packages/{cli,utils}/**/*.test.{ts,tsx}`
+  - `packages/{cli,react,utils}/**/*.test.{ts,tsx}`
 
 ## Codebase structure
 

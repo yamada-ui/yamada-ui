@@ -1,4 +1,4 @@
-import { page, render } from "#test/browser"
+import { render, screen } from "#test"
 import { RadialChart } from "."
 
 interface Data {
@@ -12,13 +12,13 @@ const rootData: Data[] = [
   { browser: "edge", downloads: 900, visits: 1800 },
 ]
 
-describe("<RadialChart />", () => {
-  test("sets `displayName` correctly", () => {
-    expect(RadialChart.Root.displayName).toBe("RadialChart")
-  })
+const responsiveContainerProps = { height: 400, width: 400 } as NonNullable<
+  Parameters<typeof RadialChart.Root>[0]["responsiveContainerProps"]
+>
 
-  test("renders generated radials from multiple `series` entries", async () => {
-    await render(
+describe("<RadialChart />", () => {
+  test("renders generated radials from multiple `series` entries", () => {
+    render(
       <RadialChart.Root
         data-testid="root"
         data={rootData}
@@ -26,39 +26,26 @@ describe("<RadialChart />", () => {
           { dataKey: "visits", nameKey: "browser" },
           { dataKey: "downloads", nameKey: "browser" },
         ]}
+        responsiveContainerProps={responsiveContainerProps}
       >
         <RadialChart.Tooltip active defaultIndex={0} />
       </RadialChart.Root>,
     )
 
-    const root = page.getByTestId("root")
+    const root = screen.getByTestId("root")
 
-    await expect.element(root).toHaveClass("ui-radial-chart")
-    await expect
-      .poll(
-        () => root.element().querySelectorAll(".ui-polar-chart__radial").length,
-      )
-      .toBe(2)
-    await expect
-      .poll(
-        () =>
-          root
-            .element()
-            .ownerDocument.querySelectorAll(".ui-chart__tooltip-item").length,
-      )
-      .toBe(2)
-    await expect
-      .poll(
-        () =>
-          root
-            .element()
-            .ownerDocument.querySelectorAll(".ui-chart__tooltip-label").length,
-      )
-      .toBe(0)
+    expect(root).toHaveClass("ui-radial-chart")
+    expect(root.querySelectorAll(".ui-polar-chart__radial")).toHaveLength(2)
+    expect(
+      root.ownerDocument.querySelectorAll(".ui-chart__tooltip-item"),
+    ).toHaveLength(2)
+    expect(
+      root.ownerDocument.querySelectorAll(".ui-chart__tooltip-label"),
+    ).toHaveLength(0)
   })
 
-  test("renders composition components instead of fallback `series`", async () => {
-    await render(
+  test("renders composition components instead of fallback `series`", () => {
+    render(
       <RadialChart.Root
         data-testid="root"
         data={rootData}
@@ -66,17 +53,14 @@ describe("<RadialChart />", () => {
           { dataKey: "visits", nameKey: "browser" },
           { dataKey: "downloads", nameKey: "browser" },
         ]}
+        responsiveContainerProps={responsiveContainerProps}
       >
         <RadialChart.Radial dataKey="downloads" nameKey="browser" />
       </RadialChart.Root>,
     )
 
-    const root = page.getByTestId("root")
+    const root = screen.getByTestId("root")
 
-    await expect
-      .poll(
-        () => root.element().querySelectorAll(".ui-polar-chart__radial").length,
-      )
-      .toBe(1)
+    expect(root.querySelectorAll(".ui-polar-chart__radial")).toHaveLength(1)
   })
 })

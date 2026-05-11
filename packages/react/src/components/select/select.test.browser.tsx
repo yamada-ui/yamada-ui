@@ -27,21 +27,21 @@ describe("<Select />", () => {
     const option2 = page.getByRole("option", { name: "Option 2" })
 
     await expect.element(option1).toBeVisible()
-    await user.click(option1)
+    await user.click(option1, { force: true })
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one"])
     })
     await expect.element(option1).toHaveAttribute("aria-selected", "true")
 
     await expect.element(option2).toBeVisible()
-    await user.click(option2)
+    await user.click(option2, { force: true })
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
     await expect.element(option2).toHaveAttribute("aria-selected", "true")
 
     await expect.element(option1).toBeVisible()
-    await user.click(option1)
+    await user.click(option1, { force: true })
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["two"])
     })

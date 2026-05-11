@@ -18,6 +18,8 @@ const browsers: {
           "signon.autofillForms": false,
           "signon.generation.enabled": false,
           "signon.rememberSignons": false,
+          "browser.sessionhistory.max_total_viewers": 0,
+          "javascript.options.mem.max": 2048,
         },
       },
     },

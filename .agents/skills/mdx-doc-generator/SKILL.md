@@ -83,7 +83,7 @@ button/
 ├── button.tsx           → Button
 ├── button-group.tsx     → ButtonGroup
 ├── icon-button.tsx      → IconButton
-└── Documentation: 
+└── Documentation:
     ├── button.mdx (includes Button + ButtonGroup)
     └── icon-button.mdx (IconButton only - separate)
 
@@ -156,7 +156,7 @@ import { Component1, Component2, Component3 } from "@workspaces/ui"
 <Component3 prop="value" />
 ```
 
-````
+`````
 
 ### Frontmatter Format
 ```yaml
@@ -198,7 +198,7 @@ The `source` and `style` fields MUST be resolved from the **actual implementatio
 pie-chart.mdx
 ├── Docs slug: pie-chart
 ├── ❌ WRONG: source: components/pie-chart (constructed from slug)
-├── ✅ CORRECT: 
+├── ✅ CORRECT:
 │   ├── Implementation: packages/react/src/components/chart/pie-chart.tsx
 │   ├── Actual directory: chart
 │   └── Frontmatter:
@@ -276,7 +276,7 @@ Include all three import methods:
 
 ```tsx [package]
 import { Component } from "@yamada-ui/react"
-````
+`````
 
 ```tsx [alias]
 import { Component } from "@/components/ui"
@@ -359,7 +359,7 @@ When documenting a single component export from a shared folder (e.g., individua
 
 Every component must include a comprehensive accessibility section based on the actual implementation:
 
-```tsx
+````tsx
 ## Accessibility
 
 The `ComponentName` follows the [WAI-ARIA - Pattern Name](https://www.w3.org/WAI/ARIA/apg/patterns/) for accessibility.
@@ -371,7 +371,7 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Com
   <Component.Option value="value1">Option 1</Component.Option>
   <Component.Option value="value2">Option 2</Component.Option>
 </Component.Root>
-```
+````
 
 ```tsx
 <VStack gap="sm">
@@ -400,32 +400,33 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Com
 
 ### ARIA Roles and Attributes
 
-| Component           | Roles and Attributes      | Usage                                                                                                                                                               |
-| ------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Component.Root`    | `role="group"`            | Indicates that this is a group.                                                                                                                                     |
-| `ComponentField`    | `role="combobox"`         | Indicates that this is a combobox.                                                                                                                                  |
-|                     | `aria-activedescendant`   | Sets the `id` of the focused item.                                                                                                                                  |
-|                     | `aria-controls`           | If the listbox is open, sets the `id` of the related `ComponentContent`; when closed, sets `undefined`.                                                              |
-|                     | `aria-describedby`        | If `Component.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
-|                     | `aria-disabled`           | Sets to `"true"` if `disabled` or `readOnly` is set.                                                                                                                |
-|                     | `aria-expanded`           | Sets to `"true"` when the listbox is open, `"false"` when closed.                                                                                                   |
-|                     | `aria-haspopup="listbox"` | Indicates that a listbox exists.                                                                                                                                    |
-|                     | `aria-invalid`            | Sets to `"true"` if `invalid` is set.                                                                                                                               |
-|                     | `aria-label`              | Sets the value of `placeholder`.                                                                                                                                    |
-|                     | `aria-labelledby`         | If `Component.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id`.                                                         |
-|                     | `aria-readonly`           | Sets to `"true"` if `readOnly` is set.                                                                                                                              |
-|                     | `aria-required`           | Sets to `"true"` if `required` is set.                                                                                                                              |
-| `ComponentIcon`     | `role="button"`           | Indicates that this is a button when `clearable` is set and a value is present.                                                                                     |
-|                     | `aria-disabled`           | Sets to `"true"` when `clearable` is set, a value is present, and `disabled` or `readOnly` is set.                                                                  |
-|                     | `aria-label`              | Sets to `"Clear value"` when `clearable` is set and a value is present.                                                                                             |
-| `ComponentContent`  | `role="listbox"`          | Indicates that this is a listbox.                                                                                                                                   |
-| `Component.Label`   | `role="presentation"`     | Indicates that this is a presentation.                                                                                                                              |
-| `Component.Group`   | `role="group"`            | Indicates that this is a group.                                                                                                                                     |
-|                     | `aria-labelledby`         | Sets the `id` of the associated `Component.Label`.                                                                                                                  |
-| `Component.Option`  | `role="option"`           | Indicates that this is an option.                                                                                                                                   |
-|                     | `aria-disabled`           | Sets to `"true"` if the option is disabled.                                                                                                                         |
-|                     | `aria-selected`           | Sets to `"true"` when the option is selected, `"false"` when not selected.                                                                                          |
-```
+| Component          | Roles and Attributes      | Usage                                                                                                                                                                  |
+| ------------------ | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Component.Root`   | `role="group"`            | Indicates that this is a group.                                                                                                                                        |
+| `ComponentField`   | `role="combobox"`         | Indicates that this is a combobox.                                                                                                                                     |
+|                    | `aria-activedescendant`   | Sets the `id` of the focused item.                                                                                                                                     |
+|                    | `aria-controls`           | If the listbox is open, sets the `id` of the related `ComponentContent`; when closed, sets `undefined`.                                                                |
+|                    | `aria-describedby`        | If `Component.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|                    | `aria-disabled`           | Sets to `"true"` if `disabled` or `readOnly` is set.                                                                                                                   |
+|                    | `aria-expanded`           | Sets to `"true"` when the listbox is open, `"false"` when closed.                                                                                                      |
+|                    | `aria-haspopup="listbox"` | Indicates that a listbox exists.                                                                                                                                       |
+|                    | `aria-invalid`            | Sets to `"true"` if `invalid` is set.                                                                                                                                  |
+|                    | `aria-label`              | Sets the value of `placeholder`.                                                                                                                                       |
+|                    | `aria-labelledby`         | If `Component.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id`.                                                           |
+|                    | `aria-readonly`           | Sets to `"true"` if `readOnly` is set.                                                                                                                                 |
+|                    | `aria-required`           | Sets to `"true"` if `required` is set.                                                                                                                                 |
+| `ComponentIcon`    | `role="button"`           | Indicates that this is a button when `clearable` is set and a value is present.                                                                                        |
+|                    | `aria-disabled`           | Sets to `"true"` when `clearable` is set, a value is present, and `disabled` or `readOnly` is set.                                                                     |
+|                    | `aria-label`              | Sets to `"Clear value"` when `clearable` is set and a value is present.                                                                                                |
+| `ComponentContent` | `role="listbox"`          | Indicates that this is a listbox.                                                                                                                                      |
+| `Component.Label`  | `role="presentation"`     | Indicates that this is a presentation.                                                                                                                                 |
+| `Component.Group`  | `role="group"`            | Indicates that this is a group.                                                                                                                                        |
+|                    | `aria-labelledby`         | Sets the `id` of the associated `Component.Label`.                                                                                                                     |
+| `Component.Option` | `role="option"`           | Indicates that this is an option.                                                                                                                                      |
+|                    | `aria-disabled`           | Sets to `"true"` if the option is disabled.                                                                                                                            |
+|                    | `aria-selected`           | Sets to `"true"` when the option is selected, `"false"` when not selected.                                                                                             |
+
+````
 
 **Accessibility Guidelines:**
 
@@ -443,7 +444,7 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Com
 
 ```tsx
 <Similar name="component-name" />
-```
+````
 
 ### 7. Component Relationships
 
@@ -480,7 +481,7 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Com
 
 **Japanese Accessibility Section Example:**
 
-```tsx
+````tsx
 ## アクセシビリティ
 
 `ComponentName`は、アクセシビリティに関して[WAI-ARIA - Pattern Name](https://www.w3.org/WAI/ARIA/apg/patterns/)に従っています。
@@ -492,7 +493,7 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Com
   <Component.Option value="value1">オプション1</Component.Option>
   <Component.Option value="value2">オプション2</Component.Option>
 </Component.Root>
-```
+````
 
 ```tsx
 <VStack gap="sm">
@@ -500,7 +501,10 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Com
     コンポーネントラベル
   </Text>
 
-  <Component.Root aria-labelledby="label" placeholder="コンポーネントプレースホルダー">
+  <Component.Root
+    aria-labelledby="label"
+    placeholder="コンポーネントプレースホルダー"
+  >
     <Component.Option value="value1">オプション1</Component.Option>
     <Component.Option value="value2">オプション2</Component.Option>
   </Component.Root>
@@ -521,32 +525,33 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Com
 
 ### ARIAロールと属性
 
-| コンポーネント         | ロールと属性              | 使い方                                                                                                                                                                                                                                      |
-| ---------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Component.Root`       | `role="group"`            | グループであることを示します。                                                                                                                                                                                                              |
-| `ComponentField`       | `role="combobox"`         | コンボボックスであることを示します。                                                                                                                                                                                                        |
-|                        | `aria-activedescendant`   | フォーカスされた項目の`id`を設定します。                                                                                                                                                                                                    |
-|                        | `aria-controls`           | リストボックスが開いている場合は関連する`ComponentContent`の`id`を設定し、閉じている場合は`undefined`を設定します。                                                                                                                          |
-|                        | `aria-describedby`        | `Component.Root`が`Field.Root`内にあり、`Field.Root`に`errorMessage`、`helperMessage`、`Field.ErrorMessage`、`Field.HelperMessage`のいずれかがある場合、その`id`を設定します。                                                |
-|                        | `aria-disabled`           | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                                                                        |
-|                        | `aria-expanded`           | リストボックスが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。                                                                                                                                                     |
-|                        | `aria-haspopup="listbox"` | リストボックスが存在することを示します。                                                                                                                                                                                                    |
-|                        | `aria-invalid`            | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                                                                        |
-|                        | `aria-label`              | `placeholder`の値を設定します。                                                                                                                                                                                                             |
-|                        | `aria-labelledby`         | `Component.Root`が`Field.Root`内にあり、`Field.Root`に`label`または`Field.Label`が設定されている場合は、その`id`を設定します。                                                                                                                 |
-|                        | `aria-readonly`           | `readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                                                                                      |
-|                        | `aria-required`           | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                                                                      |
-| `ComponentIcon`        | `role="button"`           | `clearable`が設定されており、かつ値がある場合はボタンであることを示します。                                                                                                                                                                 |
-|                        | `aria-disabled`           | `clearable`が設定されており、かつ値があり、`disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                            |
-|                        | `aria-label`              | `clearable`が設定されており、かつ値がある場合は`"値を消去する"`を設定します。                                                                                                                                                               |
-| `ComponentContent`     | `role="listbox"`          | リストボックスであることを示します。                                                                                                                                                                                                        |
-| `Component.Label`      | `role="presentation"`     | プレゼンテーションであることを示します。                                                                                                                                                                                                    |
-| `Component.Group`      | `role="group"`            | グループであることを示します。                                                                                                                                                                                                              |
-|                        | `aria-labelledby`         | 関連した`Component.Label`の`id`を設定します。                                                                                                                                                                                               |
-| `Component.Option`     | `role="option"`           | オプションであることを示します。                                                                                                                                                                                                            |
-|                        | `aria-disabled`           | オプションが無効な場合は`"true"`を設定します。                                                                                                                                                                                              |
-|                        | `aria-selected`           | オプションが選択されている場合は`"true"`を設定し、選択されていない場合は`"false"`を設定します。                                                                                                                                               |
-```
+| コンポーネント     | ロールと属性              | 使い方                                                                                                                                                                         |
+| ------------------ | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Component.Root`   | `role="group"`            | グループであることを示します。                                                                                                                                                 |
+| `ComponentField`   | `role="combobox"`         | コンボボックスであることを示します。                                                                                                                                           |
+|                    | `aria-activedescendant`   | フォーカスされた項目の`id`を設定します。                                                                                                                                       |
+|                    | `aria-controls`           | リストボックスが開いている場合は関連する`ComponentContent`の`id`を設定し、閉じている場合は`undefined`を設定します。                                                            |
+|                    | `aria-describedby`        | `Component.Root`が`Field.Root`内にあり、`Field.Root`に`errorMessage`、`helperMessage`、`Field.ErrorMessage`、`Field.HelperMessage`のいずれかがある場合、その`id`を設定します。 |
+|                    | `aria-disabled`           | `disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                                                                         |
+|                    | `aria-expanded`           | リストボックスが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。                                                                                      |
+|                    | `aria-haspopup="listbox"` | リストボックスが存在することを示します。                                                                                                                                       |
+|                    | `aria-invalid`            | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                          |
+|                    | `aria-label`              | `placeholder`の値を設定します。                                                                                                                                                |
+|                    | `aria-labelledby`         | `Component.Root`が`Field.Root`内にあり、`Field.Root`に`label`または`Field.Label`が設定されている場合は、その`id`を設定します。                                                 |
+|                    | `aria-readonly`           | `readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                         |
+|                    | `aria-required`           | `required`が設定されている場合は`"true"`を設定します。                                                                                                                         |
+| `ComponentIcon`    | `role="button"`           | `clearable`が設定されており、かつ値がある場合はボタンであることを示します。                                                                                                    |
+|                    | `aria-disabled`           | `clearable`が設定されており、かつ値があり、`disabled`または`readOnly`が設定されている場合は`"true"`を設定します。                                                              |
+|                    | `aria-label`              | `clearable`が設定されており、かつ値がある場合は`"値を消去する"`を設定します。                                                                                                  |
+| `ComponentContent` | `role="listbox"`          | リストボックスであることを示します。                                                                                                                                           |
+| `Component.Label`  | `role="presentation"`     | プレゼンテーションであることを示します。                                                                                                                                       |
+| `Component.Group`  | `role="group"`            | グループであることを示します。                                                                                                                                                 |
+|                    | `aria-labelledby`         | 関連した`Component.Label`の`id`を設定します。                                                                                                                                  |
+| `Component.Option` | `role="option"`           | オプションであることを示します。                                                                                                                                               |
+|                    | `aria-disabled`           | オプションが無効な場合は`"true"`を設定します。                                                                                                                                 |
+|                    | `aria-selected`           | オプションが選択されている場合は`"true"`を設定し、選択されていない場合は`"false"`を設定します。                                                                                |
+
+````
 
 ### Translation Guidelines - Hybrid Approach (CRITICAL)
 
@@ -587,7 +592,7 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Com
 
 // ❌ INCORRECT: All English
 <Button>Submit</Button>
-```
+````
 
 ### Additional Translation Rules
 

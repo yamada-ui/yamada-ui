@@ -64,6 +64,10 @@ jobs:
         if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.changed_keys != ''
         uses: ./.github/composite-actions/install
 
+      - name: Resize /dev/shm
+        if: matrix.browser == 'firefox' && (inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.changed_keys != '')
+        run: sudo mount -o remount,size=2G /dev/shm
+
       - name: Setup Browser
         if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.changed_keys != ''
         run: pnpm react exec playwright install ${{ matrix.browser }} --with-deps ${{ matrix.browser == 'chromium' && '--only-shell' || '' }}

@@ -2,16 +2,6 @@ import { page, render } from "#test/browser"
 import { Autocomplete } from "."
 
 describe("<Autocomplete />", () => {
-  type User = Awaited<ReturnType<typeof render>>["user"]
-
-  const setInputValue = async (
-    user: User,
-    input: HTMLInputElement,
-    value: string,
-  ) => {
-    await user.fill(input, value)
-  }
-
   test("does not hide separator when blurring to content in multiple mode", async () => {
     const { user } = await render(
       <Autocomplete.Root
@@ -79,7 +69,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "xyz")
+    await user.fill(input, "xyz")
 
     await expect.element(page.getByText("No results found")).toBeInTheDocument()
   })
@@ -97,7 +87,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "xyz")
+    await user.fill(input, "xyz")
 
     await expect.element(page.getByText("Nothing here")).toBeInTheDocument()
   })
@@ -121,7 +111,7 @@ describe("<Autocomplete />", () => {
       .element(page.getByRole("option", { name: "Option 1" }))
       .toBeVisible()
 
-    await setInputValue(user, input, "search-one")
+    await user.fill(input, "search-one")
 
     await expect
       .element(page.getByRole("option", { name: "Option 1" }))
@@ -155,7 +145,7 @@ describe("<Autocomplete />", () => {
       .element(page.getByRole("option", { name: "Apple" }))
       .toBeVisible()
 
-    await setInputValue(user, input, "fruit-apple")
+    await user.fill(input, "fruit-apple")
 
     await expect
       .element(page.getByRole("option", { name: "Apple" }))
@@ -209,7 +199,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "test")
+    await user.fill(input, "test")
 
     expect(input).toHaveValue("")
   })
@@ -341,7 +331,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "test")
+    await user.fill(input, "test")
     onChange.mockClear()
     await user.click(input)
     await user.keyboard("{Backspace}")
@@ -366,7 +356,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "Option 1")
+    await user.fill(input, "Option 1")
     await user.keyboard("{Enter}")
 
     expect(onChange).toHaveBeenCalledWith("one")
@@ -394,7 +384,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "Apple")
+    await user.fill(input, "Apple")
     await user.keyboard("{Enter}")
 
     expect(onChange).toHaveBeenCalledWith("apple")
@@ -419,7 +409,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "custom")
+    await user.fill(input, "custom")
     await user.keyboard("{Enter}")
 
     expect(onChange).toHaveBeenCalledWith(["custom"])
@@ -445,7 +435,7 @@ describe("<Autocomplete />", () => {
       const field = page.getByRole("combobox").element()
       const input = field.querySelector("input")!
 
-      await setInputValue(user, input, "Option")
+      await user.fill(input, "Option")
 
       await expect
         .poll(() => page.getByRole("option", { name: "Option 1" }).query())
@@ -471,7 +461,7 @@ describe("<Autocomplete />", () => {
       const field = page.getByRole("combobox").element()
       const input = field.querySelector("input")!
 
-      await setInputValue(user, input, "Option")
+      await user.fill(input, "Option")
 
       await expect
         .element(page.getByRole("option", { name: "Option 1" }))
@@ -499,7 +489,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "")
+    await user.fill(input, "")
 
     expect(onChange).toHaveBeenCalledWith("")
   })
@@ -525,7 +515,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "custom value")
+    await user.fill(input, "custom value")
     await user.click(page.getByTestId("outside"))
 
     expect(onChange).toHaveBeenCalledWith("custom value")
@@ -575,7 +565,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "search")
+    await user.fill(input, "search")
     await user.click(page.getByTestId("outside"))
 
     expect(input).toHaveValue("")
@@ -735,7 +725,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "Option")
+    await user.fill(input, "Option")
 
     await expect
       .poll(() => page.getByRole("option", { name: "Option 1" }).query())
@@ -766,7 +756,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "color-red")
+    await user.fill(input, "color-red")
 
     await expect
       .element(page.getByRole("option", { name: "Red" }))
@@ -791,7 +781,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "nonexistent")
+    await user.fill(input, "nonexistent")
     onChange.mockClear()
     await user.keyboard("{Enter}")
 
@@ -839,7 +829,7 @@ describe("<Autocomplete />", () => {
     const field = page.getByRole("combobox").element()
     const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "")
+    await user.fill(input, "")
     await user.click(page.getByTestId("outside"))
 
     expect(input).toHaveValue("")

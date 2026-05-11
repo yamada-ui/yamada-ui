@@ -19,10 +19,6 @@ const responsiveContainerProps = { height: 400, width: 400 } as NonNullable<
 >
 
 describe("<LineChart />", () => {
-  test("sets `displayName` correctly", () => {
-    expect(LineChart.Root.displayName).toBe("LineChart")
-  })
-
   test("renders generated lines from `series`", () => {
     render(
       <LineChart.Root

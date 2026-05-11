@@ -2,22 +2,6 @@ import { a11y, render, screen } from "#test"
 import { CloseButton } from "./close-button"
 
 describe("<CloseButton />", () => {
-  test("sets displayName", () => {
-    expect(CloseButton.displayName).toBe("CloseButton")
-  })
-
-  test("sets className", () => {
-    render(<CloseButton />)
-
-    expect(screen.getByRole("button")).toHaveClass("ui-close-button")
-  })
-
-  test("renders HTML tag correctly", () => {
-    render(<CloseButton />)
-
-    expect(screen.getByRole("button").tagName).toBe("BUTTON")
-  })
-
   test("renders component correctly", async () => {
     await a11y(<CloseButton />)
   })

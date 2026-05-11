@@ -1,5 +1,5 @@
 /* eslint-disable perfectionist/sort-objects */
-import type { UserConfig } from "./index.type"
+import type { RequiredDependencies, UserConfig } from "./index.type"
 
 export const PACKAGE_NAME = "@yamada-ui/react"
 export const CONFIG_FILE_NAME = "ui.json"
@@ -30,11 +30,11 @@ export const DEFAULT_CONFIG: UserConfig = {
   hooks: { overwrite: true },
   providers: { overwrite: true },
 }
-export const REQUIRED_DEPENDENCIES = {
+export const REQUIRED_DEPENDENCIES: RequiredDependencies = {
   ui: ["react@^19", "react-dom@^19", `${PACKAGE_NAME}@^2`],
   theme: [`${PACKAGE_NAME}@^2`],
 }
-export const REQUIRED_DEV_DEPENDENCIES = {
+export const REQUIRED_DEV_DEPENDENCIES: RequiredDependencies = {
   ui: ["@types/react@^19", "@types/react-dom@^19"],
   theme: [],
 }

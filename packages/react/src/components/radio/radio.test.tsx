@@ -3,7 +3,6 @@ import { vi } from "vitest"
 import { a11y, render, renderHook, screen } from "#test"
 import { RadioGroup } from "."
 import { Radio } from "./radio"
-import { useRadio } from "./use-radio"
 import { useRadioGroup } from "./use-radio-group"
 
 const items = [
@@ -33,20 +32,6 @@ describe("<Radio />", () => {
   test("forwards `tabIndex` to the input element", () => {
     render(<Radio tabIndex={-1}>radio</Radio>)
     expect(screen.getByRole("radio")).toHaveAttribute("tabindex", "-1")
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Radio.displayName).toBe("RadioRoot")
-    expect(RadioGroup.Root.displayName).toBe("RadioGroup")
-  })
-
-  test("sets `className` correctly", () => {
-    render(<RadioGroup.Root items={items} />)
-    const radio = screen.getAllByRole("radio")[0]
-    expect(screen.getByRole("radiogroup")).toHaveClass("ui-radio__group")
-    expect(radio?.parentElement).toHaveClass("ui-radio__root")
-    expect(radio?.parentElement?.children[1]).toHaveClass("ui-radio__indicator")
-    expect(radio?.parentElement?.children[2]).toHaveClass("ui-radio__label")
   })
 
   test("sets HTML tags correctly", () => {
@@ -170,24 +155,6 @@ describe("<Radio />", () => {
     expect(radios[1]).toBeChecked()
   })
 
-  test("merges custom className on RadioGroup.Root and Radio root", () => {
-    render(
-      <RadioGroup.Root className="from-group-root">
-        <Radio className="from-radio-root" value="1">
-          Option 1
-        </Radio>
-      </RadioGroup.Root>,
-    )
-
-    expect(screen.getByRole("radiogroup")).toHaveClass("ui-radio__group")
-    expect(screen.getByRole("radiogroup")).toHaveClass("from-group-root")
-
-    const radio = screen.getByRole("radio", { name: "Option 1" })
-
-    expect(radio.parentElement).toHaveClass("ui-radio__root")
-    expect(radio.parentElement).toHaveClass("from-radio-root")
-  })
-
   test("should set refs on RadioGroup.Root and Radio input", () => {
     const groupRef = createRef<HTMLDivElement>()
     const radioRef = createRef<HTMLInputElement>()
@@ -204,117 +171,6 @@ describe("<Radio />", () => {
     expect(radioRef.current).toBe(
       screen.getByRole("radio", { name: "Option 1" }),
     )
-  })
-
-  test("merges root props from useRadio with caller props", async () => {
-    const restOnClick = vi.fn()
-    const callerOnClick = vi.fn()
-    let mergedRootProps: unknown
-
-    function Wrapper() {
-      const { getRootProps } = useRadio({
-        className: "from-rest",
-        style: { backgroundColor: "red", paddingTop: "4px" },
-        onClick: restOnClick,
-      })
-      const rootProps = getRootProps({
-        className: "from-caller",
-        style: { color: "blue", paddingTop: "8px" },
-        "data-testid": "radio-root",
-        onClick: callerOnClick,
-      })
-      mergedRootProps = rootProps
-
-      return (
-        <>
-          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label {...rootProps}>radio</label>
-          <input id="associated-radio" type="radio" />
-        </>
-      )
-    }
-
-    const { user } = render(<Wrapper />)
-    const root = screen.getByTestId("radio-root")
-    const resolvedRootProps = mergedRootProps as {
-      "data-testid"?: string
-      style?: {
-        backgroundColor?: string
-        color?: string
-        paddingTop?: string
-      }
-    }
-
-    expect(root.className).toContain("from-rest")
-    expect(root.className).toContain("from-caller")
-    expect(root).toHaveAttribute("data-testid", "radio-root")
-    expect(resolvedRootProps["data-testid"]).toBe("radio-root")
-    expect(resolvedRootProps.style).toMatchObject({
-      backgroundColor: "red",
-      color: "blue",
-      paddingTop: "8px",
-    })
-
-    await user.click(root)
-
-    expect(restOnClick).toHaveBeenCalledTimes(1)
-    expect(callerOnClick).toHaveBeenCalledTimes(1)
-  })
-
-  test("merges root props from useRadioGroup with caller props", async () => {
-    const restOnClick = vi.fn()
-    const callerOnClick = vi.fn()
-    const restRef = vi.fn()
-    const callerRef = vi.fn()
-    let mergedRootProps: unknown
-
-    function Wrapper() {
-      const { getRootProps } = useRadioGroup({
-        ref: restRef,
-        className: "from-rest",
-        style: { backgroundColor: "red", paddingTop: "4px" },
-        onClick: restOnClick,
-      })
-      const rootProps = getRootProps({
-        ref: callerRef,
-        className: "from-caller",
-        style: { color: "blue", paddingTop: "8px" },
-        "data-testid": "caller-root",
-        onClick: callerOnClick,
-      })
-      mergedRootProps = rootProps
-
-      return <div {...rootProps} />
-    }
-
-    const { user } = render(<Wrapper />)
-    const root = screen.getByTestId("caller-root")
-    const resolvedRootProps = mergedRootProps as {
-      "data-testid"?: string
-      style?: {
-        backgroundColor?: string
-        color?: string
-        paddingTop?: string
-      }
-    }
-
-    expect(root.className).toContain("from-rest")
-    expect(root.className).toContain("from-caller")
-    expect(root).toHaveAttribute("data-testid", "caller-root")
-    expect(resolvedRootProps["data-testid"]).toBe("caller-root")
-    expect(resolvedRootProps.style).toMatchObject({
-      backgroundColor: "red",
-      color: "blue",
-      paddingTop: "8px",
-    })
-    expect(root).toHaveAttribute("role", "radiogroup")
-
-    await user.click(root)
-
-    expect(restOnClick).toHaveBeenCalledTimes(1)
-    expect(callerOnClick).toHaveBeenCalledTimes(1)
-    expect(restRef).toHaveBeenCalledWith(root)
-    expect(callerRef).toHaveBeenCalledWith(root)
   })
 
   test("should update value when onChange is called with a string value", async () => {

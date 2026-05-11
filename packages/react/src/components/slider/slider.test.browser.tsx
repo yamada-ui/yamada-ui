@@ -1,6 +1,5 @@
-import { fireEvent, screen } from "@testing-library/react"
 import { vi } from "vitest"
-import { render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { Slider } from "."
 import { noop } from "../../utils"
 
@@ -38,13 +37,27 @@ describe("<Slider />", () => {
       />,
     )
 
-    const track = screen.getByTestId("track")
+    const track = page.getByTestId("track").element() as HTMLElement
     const cleanup = mockRect(track, { left: 0, width: 200 })
 
-    fireEvent.pointerDown(track, { clientX: 100, clientY: 0 })
+    track.dispatchEvent(
+      new PointerEvent("pointerdown", {
+        bubbles: true,
+        clientX: 100,
+        clientY: 0,
+        isPrimary: true,
+      }),
+    )
     expect(onChangeStart).toHaveBeenCalledWith(50)
 
-    fireEvent.pointerUp(window, { clientX: 120, clientY: 0 })
+    window.dispatchEvent(
+      new PointerEvent("pointerup", {
+        bubbles: true,
+        clientX: 120,
+        clientY: 0,
+        isPrimary: true,
+      }),
+    )
     expect(onChangeEnd).toHaveBeenCalledWith(60)
 
     cleanup()
@@ -61,14 +74,35 @@ describe("<Slider />", () => {
       />,
     )
 
-    const track = screen.getByTestId("track")
+    const track = page.getByTestId("track").element() as HTMLElement
     const cleanup = mockRect(track, { left: 0, width: 200 })
 
-    fireEvent.pointerDown(track, { clientX: 100, clientY: 0 })
-    fireEvent.pointerMove(window, { clientX: 120, clientY: 0 })
+    track.dispatchEvent(
+      new PointerEvent("pointerdown", {
+        bubbles: true,
+        clientX: 100,
+        clientY: 0,
+        isPrimary: true,
+      }),
+    )
+    window.dispatchEvent(
+      new PointerEvent("pointermove", {
+        bubbles: true,
+        clientX: 120,
+        clientY: 0,
+        isPrimary: true,
+      }),
+    )
     expect(onChange).toHaveBeenCalledWith(60)
 
-    fireEvent.pointerUp(window, { clientX: 120, clientY: 0 })
+    window.dispatchEvent(
+      new PointerEvent("pointerup", {
+        bubbles: true,
+        clientX: 120,
+        clientY: 0,
+        isPrimary: true,
+      }),
+    )
 
     cleanup()
   })
@@ -88,16 +122,37 @@ describe("<Slider />", () => {
       />,
     )
 
-    const track = screen.getByTestId("track")
+    const track = page.getByTestId("track").element() as HTMLElement
     const cleanup = mockRect(track, { left: 0, width: 200 })
 
-    fireEvent.pointerDown(track, { clientX: 40, clientY: 0 })
+    track.dispatchEvent(
+      new PointerEvent("pointerdown", {
+        bubbles: true,
+        clientX: 40,
+        clientY: 0,
+        isPrimary: true,
+      }),
+    )
     expect(onChangeStart).toHaveBeenCalledWith([20, 75])
 
-    fireEvent.pointerMove(window, { clientX: 60, clientY: 0 })
+    window.dispatchEvent(
+      new PointerEvent("pointermove", {
+        bubbles: true,
+        clientX: 60,
+        clientY: 0,
+        isPrimary: true,
+      }),
+    )
     expect(onChange).toHaveBeenCalledWith([20, 75])
 
-    fireEvent.pointerUp(window, { clientX: 60, clientY: 0 })
+    window.dispatchEvent(
+      new PointerEvent("pointerup", {
+        bubbles: true,
+        clientX: 60,
+        clientY: 0,
+        isPrimary: true,
+      }),
+    )
     expect(onChangeEnd).toHaveBeenCalledWith([30, 75])
 
     cleanup()
@@ -116,13 +171,27 @@ describe("<Slider />", () => {
       />,
     )
 
-    const track = screen.getByTestId("track")
+    const track = page.getByTestId("track").element() as HTMLElement
     const cleanup = mockRect(track, { left: 0, width: 200 })
 
-    fireEvent.pointerDown(track, { clientX: 160, clientY: 0 })
+    track.dispatchEvent(
+      new PointerEvent("pointerdown", {
+        bubbles: true,
+        clientX: 160,
+        clientY: 0,
+        isPrimary: true,
+      }),
+    )
     expect(onChangeStart).toHaveBeenCalledWith([25, 80])
 
-    fireEvent.pointerUp(window, { clientX: 160, clientY: 0 })
+    window.dispatchEvent(
+      new PointerEvent("pointerup", {
+        bubbles: true,
+        clientX: 160,
+        clientY: 0,
+        isPrimary: true,
+      }),
+    )
     expect(onChangeEnd).toHaveBeenCalledWith([25, 80])
 
     cleanup()
@@ -144,12 +213,33 @@ describe("<Slider />", () => {
       />,
     )
 
-    const track = screen.getByTestId("track")
+    const track = page.getByTestId("track").element() as HTMLElement
     const cleanup = mockRect(track, { left: 0, width: 200 })
 
-    fireEvent.pointerDown(track, { clientX: 100, clientY: 0 })
-    fireEvent.pointerMove(window, { clientX: 120, clientY: 0 })
-    fireEvent.pointerUp(window, { clientX: 120, clientY: 0 })
+    track.dispatchEvent(
+      new PointerEvent("pointerdown", {
+        bubbles: true,
+        clientX: 100,
+        clientY: 0,
+        isPrimary: true,
+      }),
+    )
+    window.dispatchEvent(
+      new PointerEvent("pointermove", {
+        bubbles: true,
+        clientX: 120,
+        clientY: 0,
+        isPrimary: true,
+      }),
+    )
+    window.dispatchEvent(
+      new PointerEvent("pointerup", {
+        bubbles: true,
+        clientX: 120,
+        clientY: 0,
+        isPrimary: true,
+      }),
+    )
 
     expect(onChangeStart).not.toHaveBeenCalled()
     expect(onChange).not.toHaveBeenCalled()
@@ -170,13 +260,27 @@ describe("<Slider />", () => {
       />,
     )
 
-    const track = screen.getByTestId("track")
+    const track = page.getByTestId("track").element() as HTMLElement
     const cleanup = mockRect(track, { bottom: 200, height: 200, top: 0 })
 
-    fireEvent.pointerDown(track, { clientX: 0, clientY: 60 })
+    track.dispatchEvent(
+      new PointerEvent("pointerdown", {
+        bubbles: true,
+        clientX: 0,
+        clientY: 60,
+        isPrimary: true,
+      }),
+    )
     expect(onChange).toHaveBeenCalledWith(70)
 
-    fireEvent.pointerUp(window, { clientX: 0, clientY: 60 })
+    window.dispatchEvent(
+      new PointerEvent("pointerup", {
+        bubbles: true,
+        clientX: 0,
+        clientY: 60,
+        isPrimary: true,
+      }),
+    )
 
     cleanup()
   })

@@ -201,7 +201,8 @@ export const useAccordionItem = ({
   const onClick = useCallback(() => {
     onChange(!open)
     setFocusedIndex(index)
-  }, [index, setFocusedIndex, open, onChange])
+    descendants.value(index)?.node.focus()
+  }, [index, setFocusedIndex, open, onChange, descendants])
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLButtonElement>) => {
@@ -244,6 +245,7 @@ export const useAccordionItem = ({
       "aria-controls": panelId,
       "aria-disabled": ariaAttr((!multiple && !toggle && open) || disabled),
       "aria-expanded": open,
+      tabIndex: 0,
       ...props,
       ref: mergeRefs(register, ref),
       disabled,

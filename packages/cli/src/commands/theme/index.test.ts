@@ -282,9 +282,7 @@ describe("theme", () => {
 
     const constant = await import("../../constant")
     const original = constant.REQUIRED_DEV_DEPENDENCIES.theme
-    // Temporarily add a dev dependency so the .map callback body executes
-    ;(constant.REQUIRED_DEV_DEPENDENCIES as any).theme = ["typescript@^5"]
-
+    constant.REQUIRED_DEV_DEPENDENCIES.theme = ["typescript@^5"]
     await theme.parseAsync(
       [
         "./workspaces/theme",
@@ -297,15 +295,12 @@ describe("theme", () => {
       ],
       { from: "user" },
     )
-
     const themeDir = path.join(tempDir, "workspaces", "theme")
     const pkgJson = JSON.parse(
       readFileSync(path.join(themeDir, "package.json"), "utf-8"),
     )
     expect(pkgJson.devDependencies).toHaveProperty("typescript")
-
-    // Restore
-    ;(constant.REQUIRED_DEV_DEPENDENCIES as any).theme = original
+    constant.REQUIRED_DEV_DEPENDENCIES.theme = original
   })
 
   test("should overwrite existing directory when prompted (without --yes)", async () => {

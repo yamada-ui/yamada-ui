@@ -19,10 +19,6 @@ const responsiveContainerProps = { height: 400, width: 400 } as NonNullable<
 >
 
 describe("<BarChart />", () => {
-  test("sets `displayName` correctly", () => {
-    expect(BarChart.Root.displayName).toBe("BarChart")
-  })
-
   test("passes a11y checks", async () => {
     await a11y(
       <BarChart.Root

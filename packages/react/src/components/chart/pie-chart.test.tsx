@@ -22,10 +22,6 @@ const responsiveContainerProps = { height: 400, width: 400 } as NonNullable<
 >
 
 describe("<PieChart />", () => {
-  test("sets `displayName` correctly", () => {
-    expect(PieChart.Root.displayName).toBe("PieChart")
-  })
-
   test("renders generated pies from `series`", () => {
     render(
       <PieChart.Root

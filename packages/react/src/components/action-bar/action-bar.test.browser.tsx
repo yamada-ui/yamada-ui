@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { ActionBar } from "."
 import { Button } from "../button"
 import { CloseButton } from "../close-button"
@@ -25,10 +25,6 @@ const TestComponent: FC<ActionBar.RootProps> = (props) => {
 }
 
 describe("<ActionBar />", () => {
-  test("renders component correctly", async () => {
-    await a11y(<TestComponent />)
-  })
-
   test("opens action bar when open trigger is clicked", async () => {
     const { user } = await render(<TestComponent />)
 

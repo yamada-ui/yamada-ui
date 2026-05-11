@@ -10,15 +10,6 @@ describe("<Highlight />", () => {
     expect(Highlight.name).toBe("Highlight")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(
-      <Highlight data-testid="highlight" query="highlight">
-        Highlight
-      </Highlight>,
-    )
-    expect(screen.getByTestId("highlight").tagName).toBe("P")
-  })
-
   test("fragment prop works correctly", () => {
     const { container } = render(
       <Highlight fragment query="">

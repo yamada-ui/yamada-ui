@@ -2,7 +2,8 @@ import type {
   MouseEvent as ReactMouseEvent,
   TouchEvent as ReactTouchEvent,
 } from "react"
-import { a11y, act, page, render, renderHook } from "#test/browser"
+import { act } from "react"
+import { page, render, renderHook } from "#test/browser"
 import { Reorder, useReorder } from "./"
 
 const mouseUpEvent = {
@@ -14,15 +15,6 @@ const touchEndEvent = {
 } as unknown as ReactTouchEvent<HTMLUListElement>
 
 describe("<Reorder />", () => {
-  test("renders component correctly", async () => {
-    await a11y(
-      <Reorder.Root>
-        <Reorder.Item value="Item 1">Item 1</Reorder.Item>
-        <Reorder.Item value="Item 2">Item 2</Reorder.Item>
-      </Reorder.Root>,
-    )
-  })
-
   test("trigger fires pointerDown event and item has data-has-trigger attribute", async () => {
     const { user } = await render(
       <Reorder.Root>

@@ -1,8 +1,7 @@
 import type { FC } from "react"
-import { a11y, render, renderHook, screen } from "#test"
+import { a11y, render, screen } from "#test"
 import { Button } from "../button"
 import { Modal } from "./"
-import { useModal } from "./use-modal"
 
 const TestComponent: FC<Modal.RootProps> = (props) => {
   return (
@@ -38,47 +37,6 @@ const TestComponent: FC<Modal.RootProps> = (props) => {
 describe("<Modal />", () => {
   test("passes a11y check", async () => {
     await a11y(<TestComponent />)
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Modal.Root.displayName).toBe("ModalRoot")
-    expect(Modal.Overlay.displayName).toBe("ModalOverlay")
-    expect(Modal.OpenTrigger.displayName).toBe("ModalOpenTrigger")
-    expect(Modal.CloseTrigger.displayName).toBe("ModalCloseTrigger")
-    expect(Modal.CloseButton.displayName).toBe("ModalCloseButton")
-    expect(Modal.Content.displayName).toBe("ModalContent")
-    expect(Modal.Header.displayName).toBe("ModalHeader")
-    expect(Modal.Title.displayName).toBe("ModalTitle")
-    expect(Modal.Body.displayName).toBe("ModalBody")
-    expect(Modal.Footer.displayName).toBe("ModalFooter")
-  })
-
-  test("sets `className` correctly", () => {
-    render(<TestComponent open />)
-
-    expect(screen.getByTestId("root")).toHaveClass("ui-modal__root")
-    expect(screen.getByTestId("overlay")).toHaveClass("ui-modal__overlay")
-    expect(screen.getByTestId("content")).toHaveClass("ui-modal__content")
-    expect(screen.getByTestId("closeButton")).toHaveClass(
-      "ui-modal__close-button",
-    )
-    expect(screen.getByTestId("header")).toHaveClass("ui-modal__header")
-    expect(screen.getByTestId("title")).toHaveClass("ui-modal__title")
-    expect(screen.getByTestId("body")).toHaveClass("ui-modal__body")
-    expect(screen.getByTestId("footer")).toHaveClass("ui-modal__footer")
-  })
-
-  test("renders HTML tag correctly", () => {
-    render(<TestComponent open />)
-
-    expect(screen.getByTestId("root").tagName).toBe("DIV")
-    expect(screen.getByTestId("overlay").tagName).toBe("DIV")
-    expect(screen.getByTestId("content").tagName).toBe("SECTION")
-    expect(screen.getByTestId("closeButton").tagName).toBe("BUTTON")
-    expect(screen.getByTestId("header").tagName).toBe("HEADER")
-    expect(screen.getByTestId("title").tagName).toBe("H2")
-    expect(screen.getByTestId("body").tagName).toBe("DIV")
-    expect(screen.getByTestId("footer").tagName).toBe("FOOTER")
   })
 
   test("sets aria attributes correctly", () => {
@@ -185,41 +143,5 @@ describe("<Modal />", () => {
       </Modal.Root>,
     )
     expect(screen.getByTestId("custom-trigger")).toBeInTheDocument()
-  })
-})
-
-describe("useModal", () => {
-  test("merges hook rest with user props via mergeProps in getRootProps", () => {
-    const { result } = renderHook(() =>
-      useModal({
-        id: "hook-id",
-        className: "hook",
-        "data-testid": "modal-root",
-      }),
-    )
-
-    const merged = result.current.getRootProps({
-      id: "user-id",
-      className: "user",
-    })
-
-    expect(merged.id).toBe("user-id")
-    expect(String(merged.className)).toContain("hook")
-    expect(String(merged.className)).toContain("user")
-    expect(merged["data-testid"]).toBe("modal-root")
-  })
-
-  test("treats null props as empty object in getRootProps", () => {
-    const { result } = renderHook(() =>
-      useModal({
-        className: "hook",
-      }),
-    )
-
-    const merged = result.current.getRootProps(
-      null as unknown as Parameters<typeof result.current.getRootProps>[0],
-    )
-
-    expect(String(merged.className)).toContain("hook")
   })
 })

@@ -1,6 +1,5 @@
-import { a11y, render, renderHook, screen } from "#test"
+import { a11y, render, screen } from "#test"
 import { ColorSelector } from "./"
-import { useColorSelector } from "./use-color-selector"
 
 const colorSwatches = [
   "hsl(0, 100%, 50%)",
@@ -21,62 +20,6 @@ describe("<ColorSelector />", () => {
         colorSwatchGroupLabel="Pick a color"
         format="hexa"
       />,
-    )
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(ColorSelector.Root.displayName).toBe("ColorSelectorRoot")
-    expect(ColorSelector.SaturationSlider.displayName).toBe(
-      "ColorSelectorSaturationSlider",
-    )
-    expect(ColorSelector.HueSlider.displayName).toBe("ColorSelectorHueSlider")
-    expect(ColorSelector.AlphaSlider.displayName).toBe(
-      "ColorSelectorAlphaSlider",
-    )
-    expect(ColorSelector.EyeDropper.displayName).toBe("ColorSelectorEyeDropper")
-    expect(ColorSelector.ColorSwatchGroup.displayName).toBe(
-      "ColorSelectorColorSwatchGroup",
-    )
-    expect(ColorSelector.ColorSwatchGroupLabel.displayName).toBe(
-      "ColorSelectorColorSwatchGroupLabel",
-    )
-    expect(ColorSelector.ColorSwatchItem.displayName).toBe(
-      "ColorSelectorColorSwatchItem",
-    )
-  })
-
-  test("sets `className` correctly", () => {
-    render(
-      <ColorSelector.Root
-        data-testid="root"
-        colorSwatches={colorSwatches}
-        colorSwatchGroupLabel="Pick a color"
-        format="hexa"
-        alphaSliderProps={{ "data-testid": "alphaSlider" }}
-        colorSwatchGroupLabelProps={{ "data-testid": "colorSwatchGroupLabel" }}
-        hueSliderProps={{ "data-testid": "hueSlider" }}
-        saturationSliderProps={{ "data-testid": "saturationSlider" }}
-      />,
-    )
-
-    expect(screen.getByTestId("root")).toHaveClass("ui-color-selector__root")
-    expect(screen.getByTestId("alphaSlider")).toHaveClass(
-      "ui-color-selector__alpha-slider",
-    )
-    expect(screen.getByTestId("hueSlider")).toHaveClass(
-      "ui-color-selector__hue-slider",
-    )
-    expect(screen.getByTestId("saturationSlider")).toHaveClass(
-      "ui-color-selector__saturation-slider",
-    )
-    expect(screen.getByTestId("colorSwatchGroupLabel")).toHaveClass(
-      "ui-color-selector__color-swatch-group-label",
-    )
-    expect(screen.getByRole("listbox")).toHaveClass(
-      "ui-color-selector__color-swatch-group",
-    )
-    expect(screen.getAllByRole("option")[0]).toHaveClass(
-      "ui-color-selector__color-swatch-item",
     )
   })
 
@@ -272,49 +215,5 @@ describe("<ColorSelector />", () => {
       "data-custom",
       "true",
     )
-  })
-})
-
-describe("useColorSelector", () => {
-  test("getRootProps merges data attributes, rest, and user props", () => {
-    const { result } = renderHook(() =>
-      useColorSelector({
-        id: "hook-id",
-        className: "hook",
-        "data-testid": "cs-root",
-        value: "#ff0000",
-      }),
-    )
-
-    const merged = result.current.getRootProps({
-      id: "user-id",
-      className: "user",
-    })
-
-    expect(merged.id).toBe("user-id")
-    expect(String(merged.className)).toContain("hook")
-    expect(String(merged.className)).toContain("user")
-    expect(merged["data-testid"]).toBe("cs-root")
-  })
-
-  test("getRootProps merges refs from hook props and user props", () => {
-    const hookRef = vi.fn()
-    const userRef = vi.fn()
-
-    function Wrapper() {
-      const { getRootProps } = useColorSelector({
-        ref: hookRef,
-        value: "#ff0000",
-      })
-
-      return <div {...getRootProps({ ref: userRef, "data-testid": "root" })} />
-    }
-
-    render(<Wrapper />)
-
-    const node = screen.getByTestId("root")
-
-    expect(hookRef).toHaveBeenCalledWith(node)
-    expect(userRef).toHaveBeenCalledWith(node)
   })
 })

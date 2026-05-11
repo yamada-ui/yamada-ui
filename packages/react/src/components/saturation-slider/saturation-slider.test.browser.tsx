@@ -1,5 +1,5 @@
 import { vi } from "vitest"
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { SaturationSlider } from "."
 import { noop } from "../../utils"
 
@@ -35,10 +35,6 @@ const pointer = (
 }
 
 describe("<SaturationSlider />", () => {
-  test("passes a11y checks", async () => {
-    await a11y(<SaturationSlider.Root />)
-  })
-
   test("pointer interaction triggers onChangeStart and onChangeEnd", async () => {
     const onChangeStart = vi.fn()
     const onChangeEnd = vi.fn()

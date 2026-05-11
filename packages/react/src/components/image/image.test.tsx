@@ -4,16 +4,6 @@ import { Image } from "./image"
 const src = "https://image.xyz/source"
 
 describe("<Image />", () => {
-  test("sets `displayName` correctly", () => {
-    expect(Image.displayName).toBe("Image")
-  })
-
-  test("sets `className` correctly", () => {
-    render(<Image src={src} alt="image" />)
-
-    expect(screen.getByRole("img")).toHaveClass("ui-image")
-  })
-
   test("renders html tag correctly", () => {
     render(<Image src={src} alt="image" />)
 

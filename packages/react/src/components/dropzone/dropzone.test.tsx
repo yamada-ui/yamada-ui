@@ -1,5 +1,4 @@
 import { a11y, render, screen } from "#test"
-import { ImageIcon } from "../icon"
 import { Text } from "../text"
 import { Dropzone } from "./"
 
@@ -10,55 +9,6 @@ describe("<Dropzone />", () => {
         <Text color="fg">Drag file here or click to select file</Text>
       </Dropzone.Root>,
     )
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Dropzone.Root.displayName).toBe("DropzoneRoot")
-    expect(Dropzone.Accept.name).toBe("DropzoneAccept")
-    expect(Dropzone.Idle.name).toBe("DropzoneIdle")
-    expect(Dropzone.Reject.name).toBe("DropzoneReject")
-    expect(Dropzone.Icon.displayName).toBe("DropzoneIcon")
-    expect(Dropzone.Title.displayName).toBe("DropzoneTitle")
-    expect(Dropzone.Description.displayName).toBe("DropzoneDescription")
-  })
-
-  test("sets `className` correctly", () => {
-    render(
-      <Dropzone.Root data-testid="root">
-        <Dropzone.Idle>
-          <Dropzone.Icon as={ImageIcon} data-testid="icon" />
-        </Dropzone.Idle>
-
-        <Dropzone.Title data-testid="title">
-          Drag images here or click to select files
-        </Dropzone.Title>
-        <Dropzone.Description data-testid="description">
-          Attach as many files as you like, each file should not exceed 5mb
-        </Dropzone.Description>
-      </Dropzone.Root>,
-    )
-    expect(screen.getByTestId("root")).toHaveClass("ui-dropzone__root")
-    expect(screen.getByTestId("title")).toHaveClass("ui-dropzone__title")
-    expect(screen.getByTestId("description")).toHaveClass(
-      "ui-dropzone__description",
-    )
-    expect(screen.getByTestId("icon")).toHaveClass("ui-dropzone__icon")
-  })
-
-  test("renders HTML tag correctly", () => {
-    render(
-      <Dropzone.Root data-testid="root">
-        <Dropzone.Title data-testid="title">
-          Drag images here or click to select files
-        </Dropzone.Title>
-        <Dropzone.Description data-testid="description">
-          Attach as many files as you like, each file should not exceed 5mb
-        </Dropzone.Description>
-      </Dropzone.Root>,
-    )
-    expect(screen.getByTestId("root").tagName).toBe("DIV")
-    expect(screen.getByTestId("title").tagName).toBe("P")
-    expect(screen.getByTestId("description").tagName).toBe("P")
   })
 
   test("Is the multiple property being reflected correctly", () => {

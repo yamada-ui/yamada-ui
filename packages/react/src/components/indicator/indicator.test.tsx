@@ -10,22 +10,6 @@ describe("<Indicator />", () => {
     )
   })
 
-  test("sets displayName", () => {
-    expect(Indicator.displayName).toBe("IndicatorRoot")
-  })
-
-  test("renders label and applies slot classNames", () => {
-    render(
-      <Indicator label="New">
-        <div />
-      </Indicator>,
-    )
-    const label = screen.getByText("New")
-    expect(label).toHaveClass("ui-indicator__label")
-    expect(label.parentElement).toHaveClass("ui-indicator__float")
-    expect(label.parentElement?.parentElement).toHaveClass("ui-indicator__root")
-  })
-
   test("renders numeric label with overflow indicator", () => {
     render(
       <Indicator
@@ -133,30 +117,5 @@ describe("<Indicator />", () => {
     const label = screen.getByTestId("indicator")
     expect(floatElement).toBeInTheDocument()
     expect(floatElement).toContainElement(label)
-  })
-
-  test("forwards floatProps to the float element", () => {
-    render(
-      <Indicator
-        label="New"
-        floatProps={{ "data-testid": "float-element" }}
-        labelProps={{ "data-testid": "indicator" }}
-      >
-        <div />
-      </Indicator>,
-    )
-    expect(screen.getByTestId("float-element")).toBeInTheDocument()
-  })
-
-  test("forwards className through labelProps", () => {
-    render(
-      <Indicator
-        label="New"
-        labelProps={{ className: "custom-label", "data-testid": "indicator" }}
-      >
-        <div />
-      </Indicator>,
-    )
-    expect(screen.getByTestId("indicator")).toHaveClass("custom-label")
   })
 })

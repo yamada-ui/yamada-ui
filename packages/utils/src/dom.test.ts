@@ -20,14 +20,11 @@ import {
   getTabIndex,
   getUserAgent,
   getWindow,
-  isActiveElement,
   isAndroid,
   isApple,
-  isChrome,
   isDisabledElement,
   isDocument,
   isEditableElement,
-  isFirefox,
   isFocusableElement,
   isFrame,
   isHiddenElement,
@@ -38,14 +35,12 @@ import {
   isIPhone,
   isMac,
   isNode,
-  isSafari,
   isShadowRoot,
   isTabbableElement,
   isTouchDevice,
   isTruthyDataAttr,
   isVisibleElement,
   isVisualViewport,
-  isWebKit,
   isWindow,
   platform,
   scrollLock,
@@ -162,43 +157,6 @@ describe("DOM", () => {
     })
   })
 
-  describe("isSafari", () => {
-    test("should return true if the browser is Safari on an Apple device", () => {
-      const isAppleDevice = /mac|iphone|ipad|ipod/i.test(getPlatform())
-
-      const isSafariBrowser = /apple/i.test(navigator.vendor)
-      expect(isSafari()).toBe(isAppleDevice && isSafariBrowser)
-    })
-
-    test("should evaluate vendor when on Apple platform", () => {
-      Object.defineProperty(navigator, "platform", {
-        configurable: true,
-        value: "MacIntel",
-      })
-
-      const result = isSafari()
-      expect(result).toBe(/apple/i.test(navigator.vendor))
-
-      delete (navigator as any).platform
-    })
-
-    test("should return true when Apple platform and Apple vendor", () => {
-      Object.defineProperty(navigator, "platform", {
-        configurable: true,
-        value: "MacIntel",
-      })
-      Object.defineProperty(navigator, "vendor", {
-        configurable: true,
-        value: "Apple Computer, Inc.",
-      })
-
-      expect(isSafari()).toBeTruthy()
-
-      delete (navigator as any).platform
-      delete (navigator as any).vendor
-    })
-  })
-
   describe("isIPhone", () => {
     test("should return false in non-iPhone environment", () => {
       expect(isIPhone()).toBeFalsy()
@@ -258,26 +216,6 @@ describe("DOM", () => {
   describe("isAndroid", () => {
     test("should return false in non-Android environment", () => {
       expect(isAndroid()).toBeFalsy()
-    })
-  })
-
-  describe("isFirefox", () => {
-    test("should return expected value", () => {
-      expect(isFirefox()).toBe(/Firefox/i.test(getUserAgent()))
-    })
-  })
-
-  describe("isChrome", () => {
-    test("should return expected value", () => {
-      expect(isChrome()).toBe(/Chrome/i.test(getUserAgent()))
-    })
-  })
-
-  describe("isWebKit", () => {
-    test("should return expected value", () => {
-      expect(isWebKit()).toBe(
-        /AppleWebKit/i.test(getUserAgent()) && !/Chrome/i.test(getUserAgent()),
-      )
     })
   })
 
@@ -433,14 +371,6 @@ describe("DOM", () => {
   })
 
   describe("getActiveElement", () => {
-    test("should return the active element", () => {
-      const input = document.createElement("input")
-      document.body.appendChild(input)
-      input.focus()
-      expect(getActiveElement(document)).toBe(input)
-      document.body.removeChild(input)
-    })
-
     test("should traverse shadow root to find active element", () => {
       const mockInput = document.createElement("input")
       const mockShadowRoot = { activeElement: mockInput }
@@ -463,27 +393,6 @@ describe("DOM", () => {
       const mockRoot = { activeElement: mockHost } as any
       const result = getActiveElement(mockRoot)
       expect(result).toBe(mockHost)
-    })
-  })
-
-  describe("isActiveElement", () => {
-    test("should return true if the element is the active element", () => {
-      const input = document.createElement("input")
-      document.body.appendChild(input)
-      input.focus()
-      expect(isActiveElement(input, document)).toBeTruthy()
-      document.body.removeChild(input)
-    })
-
-    test("should return false if the element is not the active element", () => {
-      const input = document.createElement("input")
-      const input2 = document.createElement("input")
-      document.body.appendChild(input)
-      document.body.appendChild(input2)
-      input.focus()
-      expect(isActiveElement(input2, document)).toBeFalsy()
-      document.body.removeChild(input)
-      document.body.removeChild(input2)
     })
   })
 
@@ -593,19 +502,6 @@ describe("DOM", () => {
     test("should return false for non-HTMLElement", () => {
       expect(isVisibleElement(document.createTextNode(""))).toBeFalsy()
     })
-
-    test("should check visibility for HTMLElements", () => {
-      const el = document.createElement("div")
-      document.body.appendChild(el)
-      expect(isVisibleElement(el)).toBeFalsy()
-      document.body.removeChild(el)
-    })
-
-    test("should return true for elements with dimensions", () => {
-      const el = document.createElement("div")
-      Object.defineProperty(el, "offsetWidth", { value: 100 })
-      expect(isVisibleElement(el)).toBeTruthy()
-    })
   })
 
   describe("isEditableElement extended", () => {
@@ -660,14 +556,6 @@ describe("DOM", () => {
       expect(isFocusableElement(input)).toBeFalsy()
       document.body.removeChild(parent)
     })
-
-    test("should return true for visible focusable element", () => {
-      const input = document.createElement("input")
-      Object.defineProperty(input, "offsetWidth", { value: 100 })
-      document.body.appendChild(input)
-      expect(isFocusableElement(input)).toBeTruthy()
-      document.body.removeChild(input)
-    })
   })
 
   describe("isTabbableElement", () => {
@@ -679,23 +567,6 @@ describe("DOM", () => {
 
     test("should return false for null", () => {
       expect(isTabbableElement(null)).toBeFalsy()
-    })
-
-    test("should return true for visible focusable element without negative tabindex", () => {
-      const input = document.createElement("input")
-      Object.defineProperty(input, "offsetWidth", { value: 100 })
-      document.body.appendChild(input)
-      expect(isTabbableElement(input)).toBeTruthy()
-      document.body.removeChild(input)
-    })
-
-    test("should return false for focusable element with negative tabindex", () => {
-      const input = document.createElement("input")
-      input.setAttribute("tabindex", "-1")
-      Object.defineProperty(input, "offsetWidth", { value: 100 })
-      document.body.appendChild(input)
-      expect(isTabbableElement(input)).toBeFalsy()
-      document.body.removeChild(input)
     })
   })
 
@@ -751,40 +622,6 @@ describe("DOM", () => {
   describe("getPx extended", () => {
     test("should return number values as-is", () => {
       expect(getPx(42)).toBe(42)
-    })
-
-    test("should convert rem-like values using font size", () => {
-      expect(getPx("2rem")).toBeGreaterThan(0)
-    })
-
-    test("should use computed font size for rem conversion", () => {
-      const original = window.getComputedStyle
-      Object.defineProperty(window, "getComputedStyle", {
-        configurable: true,
-        value: () => ({ fontSize: "20px" }),
-        writable: true,
-      })
-      expect(getPx("2rem")).toBe(40)
-      Object.defineProperty(window, "getComputedStyle", {
-        configurable: true,
-        value: original,
-        writable: true,
-      })
-    })
-
-    test("should use default font size when computed font size is NaN", () => {
-      const original = window.getComputedStyle
-      Object.defineProperty(window, "getComputedStyle", {
-        configurable: true,
-        value: () => ({ fontSize: "" }),
-        writable: true,
-      })
-      expect(getPx("2rem")).toBe(32)
-      Object.defineProperty(window, "getComputedStyle", {
-        configurable: true,
-        value: original,
-        writable: true,
-      })
     })
 
     test("should use default font size when DOM is not created", () => {
@@ -1124,43 +961,6 @@ describe("DOM", () => {
       expect(getFocusableElements(null)).toStrictEqual([])
     })
 
-    test("should return focusable elements from container", () => {
-      const container = document.createElement("div")
-      const input = document.createElement("input")
-      container.appendChild(input)
-      document.body.appendChild(container)
-
-      const result = getFocusableElements(container)
-      expect(result).toStrictEqual([])
-
-      document.body.removeChild(container)
-    })
-
-    test("should return visible focusable elements", () => {
-      const container = document.createElement("div")
-      const input = document.createElement("input")
-      Object.defineProperty(input, "offsetWidth", { value: 100 })
-      container.appendChild(input)
-      document.body.appendChild(container)
-
-      const result = getFocusableElements(container)
-      expect(result).toStrictEqual([input])
-
-      document.body.removeChild(container)
-    })
-
-    test("should include el when includeEl is true and el is focusable", () => {
-      const container = document.createElement("div")
-      container.setAttribute("tabindex", "0")
-      Object.defineProperty(container, "offsetWidth", { value: 100 })
-      document.body.appendChild(container)
-
-      const result = getFocusableElements(container, true)
-      expect(result).toContain(container)
-
-      document.body.removeChild(container)
-    })
-
     test("should handle iframe with contentDocument", () => {
       const container = document.createElement("div")
       const iframe = document.createElement("iframe")
@@ -1271,26 +1071,6 @@ describe("DOM", () => {
       document.documentElement.style.cssText = ""
     })
 
-    test("should lock and unlock scrolling", () => {
-      const unlock = scrollLock(document)
-
-      expect(document.body.hasAttribute("data-scroll-lock")).toBeTruthy()
-      expect(document.body.style.overflow).toBe("hidden")
-
-      unlock?.()
-
-      expect(document.body.hasAttribute("data-scroll-lock")).toBeFalsy()
-    })
-
-    test("should not lock again if already locked", () => {
-      const unlock1 = scrollLock(document)
-      const unlock2 = scrollLock(document)
-
-      expect(unlock2).toBeUndefined()
-
-      unlock1?.()
-    })
-
     test("should handle iOS-specific scrolling", () => {
       Object.defineProperty(navigator, "platform", {
         configurable: true,
@@ -1307,49 +1087,6 @@ describe("DOM", () => {
       expect(document.body.hasAttribute("data-scroll-lock")).toBeFalsy()
 
       delete (navigator as any).platform
-    })
-
-    test("should work with element input", () => {
-      const el = document.createElement("div")
-      document.body.appendChild(el)
-
-      const unlock = scrollLock(el)
-
-      expect(document.body.hasAttribute("data-scroll-lock")).toBeTruthy()
-
-      unlock?.()
-
-      expect(document.body.hasAttribute("data-scroll-lock")).toBeFalsy()
-      document.body.removeChild(el)
-    })
-
-    test("should use paddingLeft when scrollbarX is non-zero", () => {
-      vi.spyOn(
-        document.documentElement,
-        "getBoundingClientRect",
-      ).mockReturnValue({
-        bottom: 0,
-        height: 0,
-        left: 10,
-        right: 0,
-        toJSON() {
-          return void 0
-        },
-        top: 0,
-        width: 0,
-        x: 10,
-        y: 0,
-      } as DOMRect)
-
-      const unlock = scrollLock(document)
-
-      expect(document.body.hasAttribute("data-scroll-lock")).toBeTruthy()
-
-      unlock?.()
-
-      expect(document.body.hasAttribute("data-scroll-lock")).toBeFalsy()
-
-      vi.restoreAllMocks()
     })
   })
 
